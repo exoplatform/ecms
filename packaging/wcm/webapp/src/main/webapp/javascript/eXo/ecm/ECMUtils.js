@@ -1084,6 +1084,44 @@ function ECMUtils() {
 	ECMUtils.prototype.loadEffectedItemsInSideBar = function() {
 	  window.setTimeout("eXo.ecm.ECMUtils.adjustItemsInSideBar();",100);
 	}
+
+        ECMUtils.prototype.activateWCMDeleteNotice = function(nodePathDelete, deleteNotice) {
+          var noticeElem = document.getElementById("wcm-notice");
+          if(nodePathDelete == null || nodePathDelete == '') {
+ 	    noticeElem.style.display = "none";
+            noticeElem.innerHTML = "";
+	  } else {
+            var addressBar = gj("#UIAddressBar");
+            if(addressBar) {
+	      var pos = gj("#UIAddressBar").position();            
+              noticeElem.style.display = "block";
+              noticeElem.style.top = (pos.top + 5) + "px";
+            }   
+            noticeElem.style.display = "block";
+            nodePathDelete = " <a href=\""+nodePathDelete+"\">Undo</a>";
+            deleteNotice = deleteNotice + nodePathDelete;
+            noticeElem.innerHTML = deleteNotice;
+	    noticeElem.style.marginLeft = "-" + noticeElem.offsetWidth/2 + "px";
+          }
+	}
+
+	ECMUtils.prototype.activateWCMRestoreNotice = function(restoreNotice) {
+          var noticeElem = document.getElementById("wcm-notice");
+          if(restoreNotice == null || restoreNotice == '') {
+ 	    noticeElem.style.display = "none";
+            noticeElem.innerHTML = "";
+	  } else {
+            var addressBar = gj("#UIAddressBar");
+            if(addressBar) {
+	      var pos = gj("#UIAddressBar").position();            
+              noticeElem.style.display = "block";
+              noticeElem.style.top = (pos.top + 5) + "px";
+            }     
+            noticeElem.style.display = "block";            
+            noticeElem.innerHTML = restoreNotice;
+	    noticeElem.style.marginLeft = "-" + noticeElem.offsetWidth/2 + "px";
+          }
+	}
 	
 	ECMUtils.prototype.adjustItemsInSideBar = function() {
 	  //if LeftContainer doesn't exist, do nothing

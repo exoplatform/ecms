@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 
 import javax.jcr.Node;
 
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.services.cms.impl.Utils;
@@ -22,22 +21,22 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 public class FCKFileHandler {
-  
+
   public static Element createFileElement(Document document,
       String fileType,
       Node sourceNode,
       Node displayNode,
       String currentPortal) throws Exception {
-    return createFileElement(document, fileType, sourceNode, displayNode, currentPortal, null);    
+    return createFileElement(document, fileType, sourceNode, displayNode, currentPortal, null);
   }
-  
+
   public static Element createFileElement(Document document,
                                           String fileType,
                                           Node sourceNode,
                                           Node displayNode,
                                           String currentPortal,
                                           LinkManager linkManager) throws Exception {
-    Element file = document.createElement("File");        
+    Element file = document.createElement("File");
     file.setAttribute("name", Utils.getTitle(displayNode));
     SimpleDateFormat formatter = (SimpleDateFormat) SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT,
                                                                                          SimpleDateFormat.SHORT);
@@ -120,8 +119,7 @@ public class FCKFileHandler {
       return builder.append(baseURI).append("/private/jcr/").append(repository).append("/")
       .append(workspace).append(nodePath).toString();
     }
-    WCMConfigurationService configurationService = (WCMConfigurationService) ExoContainerContext
-    .getCurrentContainer().getComponentInstanceOfType(WCMConfigurationService.class);
+    WCMConfigurationService configurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
     String parameterizedPageViewerURI = configurationService.
         getRuntimeContextParam(WCMConfigurationService.PARAMETERIZED_PAGE_URI);
     return baseURI.replace("/rest", "") + "/" + currentPortal

@@ -21,14 +21,13 @@ import java.util.Map;
 
 import javax.jcr.Node;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.ecm.publication.NotInPublicationLifecycleException;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
 import org.exoplatform.services.ecm.publication.PublicationPresentationService;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.form.UIForm;
 
@@ -54,8 +53,7 @@ public class PublicationPresentationServiceImpl implements PublicationPresentati
    * @see org.exoplatform.services.cms.publication.PublicationService#getStateUI(javax.jcr.Node)
    */
   public UIForm getStateUI(Node node, UIComponent component) throws NotInPublicationLifecycleException, Exception {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    PublicationService publicationService = (PublicationService) container.getComponentInstanceOfType(PublicationService.class);
+    PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);
 
     if (!publicationService.isNodeEnrolledInLifecycle(node)) {
       throw new NotInPublicationLifecycleException();

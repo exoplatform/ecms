@@ -23,6 +23,7 @@ import javax.jcr.Node;
 import org.exoplatform.commons.utils.ISO8601;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -43,7 +44,7 @@ public class FCKFileHandler {
    * @param container the container
    */
   public FCKFileHandler(ExoContainer container) {
-    templateService = (TemplateService)container.getComponentInstanceOfType(TemplateService.class);
+    templateService = WCMCoreUtils.getService(TemplateService.class);
   }
 
   /**

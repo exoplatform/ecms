@@ -31,8 +31,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
 import org.exoplatform.ecm.utils.MessageDigester;
@@ -43,7 +41,6 @@ import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
-import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.WorkspaceEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -350,10 +347,7 @@ public class SEOServiceImpl implements SEOService {
   public void removePageMetadata(PageMetadataModel metaModel,
       String portalName, boolean onContent) throws Exception {
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    RepositoryService repositoryService = (RepositoryService) container
-        .getComponentInstanceOfType(RepositoryService.class);
-    ManageableRepository currentRepo = repositoryService.getCurrentRepository();
+    ManageableRepository currentRepo = WCMCoreUtils.getRepository();
     Session session = sessionProvider.getSession(currentRepo.getConfiguration()
         .getDefaultWorkspaceName(), currentRepo);
     String hash = "";

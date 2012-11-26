@@ -30,7 +30,6 @@ import javax.jcr.RepositoryException;
 import javax.portlet.PortletPreferences;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.mop.SiteType;
@@ -43,6 +42,7 @@ import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.publication.WCMComposer;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.reader.ContentReader;
 import org.exoplatform.web.url.navigation.NavigationResource;
@@ -438,8 +438,7 @@ public class UIPresentationContainer extends UIContainer{
      */
     public void execute(Event<UIPresentationContainer> event) throws Exception {
       UIPresentationContainer uiContainer = event.getSource();
-      PublicationService publicationService = (PublicationService) PortalContainer.getInstance()
-        .getComponentInstanceOfType(PublicationService.class);
+      PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);
       Node node = uiContainer.getNodeView();
       if (node.isLocked()) {
         node.getSession().addLockToken(LockUtil.getLockToken(node));

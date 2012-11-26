@@ -311,15 +311,15 @@ public class WCMCoreUtils {
       if (LOG.isErrorEnabled()) {
         LOG.error("Unexpected problem happen when active stylesheet", e);
       }
-    } 
+    }
     return buffer.toString();
   }
-  
+
   /**
    * gets the global css of given site node. For example, if the site is acme<br/>
-   * we then return all css code only inside acme/css 
+   * we then return all css code only inside acme/css
    * @param siteNode the root node of the site
-   * @return global css code inside this site 
+   * @return global css code inside this site
    * @throws Exception
    */
   public static String getSiteGlobalActiveStylesheet(Node siteNode) throws Exception {
@@ -356,20 +356,20 @@ public class WCMCoreUtils {
           }
           continue;
         }
-      }      
+      }
     } catch(Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("Unexpected problem happen when active stylesheet", e);
       }
-    } 
+    }
     return buffer.toString();
   }
-  
+
   /**
    * gets the global javascript of given site node. For example, if the site is acme<br/>
-   * we then return all javascript code only inside acme/js 
+   * we then return all javascript code only inside acme/js
    * @param siteNode the root node of the site
-   * @return global javascript code inside this site 
+   * @return global javascript code inside this site
    * @throws Exception
    */
   public static String getSiteGlobalActiveJs(Node siteNode) throws Exception {
@@ -509,10 +509,10 @@ public class WCMCoreUtils {
       throw ex;
     }
   }
-  
+
   /**
-   * compares two JsFile node by exo:priority value, tending to sort in DESC order 
-   * because Js file with higher priority is loaded first 
+   * compares two JsFile node by exo:priority value, tending to sort in DESC order
+   * because Js file with higher priority is loaded first
    * @author vu_nguyen
    *
    */
@@ -525,7 +525,7 @@ public class WCMCoreUtils {
         } else if (!o2.hasProperty(NodetypeConstant.EXO_PRIORITY)) {
           return -1;
         } else {
-          return (int)(o2.getProperty(NodetypeConstant.EXO_PRIORITY).getLong() -  
+          return (int)(o2.getProperty(NodetypeConstant.EXO_PRIORITY).getLong() -
                        o1.getProperty(NodetypeConstant.EXO_PRIORITY).getLong());
         }
       } catch (Exception e) {
@@ -534,8 +534,8 @@ public class WCMCoreUtils {
     }
   }
   /**
-   * compares two CSSFile node by exo:priority value, tending to sort in ASC order 
-   * because CSSFile file with higher priority is loaded last 
+   * compares two CSSFile node by exo:priority value, tending to sort in ASC order
+   * because CSSFile file with higher priority is loaded last
    * @author vinh_nguyen
    */
   private static class FileCSSComparatorByPriority implements Comparator<Node>{
@@ -547,7 +547,7 @@ public class WCMCoreUtils {
         } else if (!o2.hasProperty(NodetypeConstant.EXO_PRIORITY)) {
           return 1;
         } else {
-          return (int)(o1.getProperty(NodetypeConstant.EXO_PRIORITY).getLong() -  
+          return (int)(o1.getProperty(NodetypeConstant.EXO_PRIORITY).getLong() -
                        o2.getProperty(NodetypeConstant.EXO_PRIORITY).getLong());
         }
       } catch (Exception e) {

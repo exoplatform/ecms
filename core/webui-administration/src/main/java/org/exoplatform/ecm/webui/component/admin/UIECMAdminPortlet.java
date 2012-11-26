@@ -20,8 +20,6 @@ import javax.jcr.RepositoryException;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.webui.component.admin.unlock.UIUnLockManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
@@ -30,6 +28,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.application.WebuiApplication;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -151,9 +150,7 @@ public class UIECMAdminPortlet extends UIPortletApplication {
   }
 
   public String getDMSSystemWorkspace(String repository) throws Exception {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    DMSConfiguration dmsConfiguration = (DMSConfiguration)
-        container.getComponentInstanceOfType(DMSConfiguration.class);
+    DMSConfiguration dmsConfiguration = WCMCoreUtils.getService(DMSConfiguration.class);
 
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig();
     return dmsRepoConfig.getSystemWorkspace();

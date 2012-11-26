@@ -1,19 +1,19 @@
 <%
   import javax.jcr.NodeIterator;
   import javax.jcr.Node;
+  import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+  import org.exoplatform.services.wcm.javascript.XJavascriptService;
+  import org.exoplatform.services.wcm.skin.XSkinService;
 
   def currentNode = uicomponent.getNode() ; 
   def contentNode = currentNode.getNode("jcr:content") ;
   
-  def javaScriptClass="org.exoplatform.services.wcm.javascript.XJavascriptService";
-  def skinClass="org.exoplatform.services.wcm.skin.XSkinService";
-    
-  def exSkinService = uicomponent.getComponentInstanceOfType(skinClass) ;
-  def exJSService = uicomponent.getComponentInstanceOfType(javaScriptClass) ;
+  def exSkinService = WCMCoreUtils.getService(XSkinService.class) ;
+  def exJSService = WCMCoreUtils.getService(XJavascriptService.class) ;
        
   def css= exSkinService.getActiveStylesheet(currentNode.getParent());
   def js=  exJSService.getActiveJavaScript(currentNode.getParent()) ;
-  def rcontext = _ctx.getRequestContext() ;    
+  def rcontext = _ctx.getRequestContext() ;
 %>  
 <style><%=css%></style>
 <%=contentNode.getProperty("jcr:data").getString() ;%>

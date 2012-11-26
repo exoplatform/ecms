@@ -21,6 +21,7 @@ package org.exoplatform.services.portletcache;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -98,7 +99,10 @@ public class PortletCacheFilter implements PortletFilter, ActionFilter, RenderFi
     if (!NO_CACHE.equals(exoCacheUsageRequestParam) && sharedCache &&
         (req.getRemoteUser() == null || (!quickEdit && !isPortalEditMode())) &&
         !PortletMode.EDIT.equals(portletMode)) {
-      Map<String, String[]> query = (Map<String, String[]>)ctx.getRequest().getParameterMap();
+      Map<String, String[]> query = new HashMap<String, String[]>();
+      query.putAll((Map<String, String[]>)ctx.getRequest().getParameterMap());
+      
+      query.put("VISIBILITY", new String[] {(req.getRemoteUser()!=null)?"PRIVATE":"PUBLIC"} );
       //
       Locale locale = ctx.getLocale();
       //

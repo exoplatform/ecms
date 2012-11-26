@@ -15,12 +15,17 @@
   import org.exoplatform.webui.core.UIRightClickPopupMenu ;
   import org.exoplatform.ecm.jcr.model.Preference;
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+  import org.exoplatform.ecm.webui.component.admin.manager.UIAbstractManagerComponent;
+  import org.apache.commons.lang.StringUtils;
+
   
   def rcontext = _ctx.getRequestContext() ;
   def uiTreeExplorer = uicomponent.getTreeExplorer();
   def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
   def pref = uiExplorer.getPreference();
-  def enableDragAndDrop = pref.isEnableDragAndDrop();
+  def enableDragAndDrop = pref.isEnableDragAndDrop();  
+  
+  
   if(uiTreeExplorer != null && uicomponent.isShowSideBar()) {
     def focusNode = uiTreeExplorer.getEncodeCurrentPath();
     def expandNode = uiTreeExplorer.getEncodeExpandPath();
@@ -32,6 +37,25 @@
   addScripts("explorer.UIListView.initDragDropForTreeEvent('$componentId', '$enableDragAndDrop');").
   addScripts("ecmutil.ECMUtils.loadEffectedItemsInSideBar();");
   
+//WCM Notice
+ def nodePathDelete = uicomponent.getNodePathDelete();
+ def deleteNotice = uicomponent.getDeleteNotice();
+ def wcmNotice = uicomponent.getWCMNotice();
+ uicomponent.setNodePathDelete("");
+ uicomponent.setDeleteNotice("");
+ uicomponent.setWCMNotice("");
+ if(StringUtils.isNotEmpty(nodePathDelete)) {
+ 	List<UIAbstractManagerComponent> managers = uicomponent.getManagers();
+ 	for (UIAbstractManagerComponent manager : managers) {
+		if(manager.getName().equals("RestoreFromTrashManageComponent"))
+				nodePathDelete = manager.event("RestoreFromTrash", nodePathDelete);			
+		}
+ 	jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.activateWCMRestoreNotice(\"$wcmNotice\");");
+ 	jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.activateWCMDeleteNotice(\"$nodePathDelete\", \""+deleteNotice+"\");");
+ } else {	 
+	 jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.activateWCMDeleteNotice(\"$nodePathDelete\", \""+deleteNotice+"\");");
+	 jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.activateWCMRestoreNotice(\"$wcmNotice\");");
+ }  
   
   if(!isExpand && focusNode != null)
     jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.loadEffectedSideBar('$focusNode');");
@@ -40,7 +64,7 @@
   }    
 
 %>
-
+<div id="wcm-notice" style="display: none;" class="wcm-alert wcm-notice"></div>
 <div class="UIWorkingArea ClearFix" id="UIWorkingArea">
   <%
 	  uicomponent.renderChild(UIRightClickPopupMenu.class) ;

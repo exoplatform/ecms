@@ -23,8 +23,6 @@ import javax.jcr.PropertyIterator;
 import javax.jcr.Session;
 import javax.jcr.Value;
 
-import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
@@ -50,13 +48,11 @@ public class NodetypeUtils {
    */
   public static void displayAllNode(String workspaceName) throws Exception {
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    RepositoryService repositoryService = (RepositoryService) ExoContainerContext.getCurrentContainer().
-        getComponentInstanceOfType(RepositoryService.class);
-    ManageableRepository repository = repositoryService.getCurrentRepository();
+    ManageableRepository repository = WCMCoreUtils.getRepository();
     Session session = sessionProvider.getSession(workspaceName, repository);
     Node root = session.getRootNode();
     displayAllChildNode(root);
-  }  
+  }
 
   /**
    * Display the child node and its properties.

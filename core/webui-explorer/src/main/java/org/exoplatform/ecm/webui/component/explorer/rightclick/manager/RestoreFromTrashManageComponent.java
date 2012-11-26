@@ -19,6 +19,7 @@ package org.exoplatform.ecm.webui.component.explorer.rightclick.manager;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 
 import javax.jcr.AccessDeniedException;
@@ -30,8 +31,6 @@ import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.version.VersionException;
 import javax.portlet.PortletPreferences;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.HasRemovePermissionFilter;
@@ -52,6 +51,7 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -86,6 +86,9 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
                                                    new IsNotTrashHomeNodeFilter() });
 
   private final static Log                     LOG     = ExoLogger.getLogger(RestoreFromTrashManageComponent.class.getName());
+  
+  private static int numberItemsRestored = 0;
+  private static String itemName = "";
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
@@ -115,7 +118,7 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
     } catch(PathNotFoundException path) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
           null,ApplicationMessage.WARNING));
-      
+
       return;
     }
     confirmToRestore(node, srcPath, event);
@@ -124,7 +127,7 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
   private static void confirmToRestore(Node node, String srcPath, Event<RestoreFromTrashManageComponent> event) throws Exception {
     UIWorkingArea uiWorkingArea = event.getSource().getParent();
     UIJCRExplorer uiExplorer = uiWorkingArea.getAncestorOfType(UIJCRExplorer.class);
-
+    itemName = node.getName();
     String restorePath = node.getProperty(Utils.EXO_RESTOREPATH).getString();
     String restoreWs = node.getProperty(Utils.EXO_RESTORE_WORKSPACE).getString();
     Session session = uiExplorer.getSessionByWorkspace(restoreWs);
@@ -133,16 +136,18 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
       nodeFinder.getItem(session, restorePath);
     } catch (PathNotFoundException e) {
       doRestore(srcPath, node, event);
+      numberItemsRestored++;
       return;
     }
     doRestore(srcPath, node, event);
+    
+    numberItemsRestored++;
   }
 
   public static void doRestore(String srcPath, Node node, Event<? extends UIComponent> event) throws Exception {
     UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
     UIWorkingArea uiWorkingArea = event.getSource().getParent();
-    ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-    TrashService trashService = (TrashService)myContainer.getComponentInstanceOfType(TrashService.class);
+    TrashService trashService = WCMCoreUtils.getService(TrashService.class);
     UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class);
 
     String restorePath = node.getProperty(Utils.EXO_RESTOREPATH).getString();
@@ -207,53 +212,70 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
         LOG.error("Path not found! Maybe, it was removed or path changed, can't restore node :" + node.getPath());
       }
       JCRExceptionManager.process(uiApp, e);
-      
+
       uiExplorer.updateAjax(event);
     } catch (LockException e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("node is locked, can't restore node :" + node.getPath());
       }
       JCRExceptionManager.process(uiApp, e);
-      
+
       uiExplorer.updateAjax(event);
     } catch (VersionException e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("node is checked in, can't restore node:" + node.getPath());
       }
       JCRExceptionManager.process(uiApp, e);
-      
+
       uiExplorer.updateAjax(event);
     } catch (AccessDeniedException e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("access denied, can't restore of node:" + node.getPath());
       }
       JCRExceptionManager.process(uiApp, e);
-      
+
       uiExplorer.updateAjax(event);
     } catch (ConstraintViolationException e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("access denied, can't restore of node:" + node.getPath());
       }
       JCRExceptionManager.process(uiApp, e);
-      
+
       uiExplorer.updateAjax(event);
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("an unexpected error occurs", e);
       }
       JCRExceptionManager.process(uiApp, e);
-      
+
       uiExplorer.updateAjax(event);
     }
   }
 
   public static class RestoreFromTrashActionListener extends UIWorkingAreaActionListener<RestoreFromTrashManageComponent> {
-    public void restoreFromTrashManage(Event<RestoreFromTrashManageComponent> event) throws Exception {
+    public void restoreFromTrashManage(Event<RestoreFromTrashManageComponent> event) throws Exception {   
+    	numberItemsRestored = 0;
       String srcPath = event.getRequestContext().getRequestParameter(OBJECTID);
       if (srcPath.indexOf(';') > -1) {
         multiRestoreFromTrash(srcPath.split(";"), event);
       } else {
         restoreFromTrash(srcPath, event);
+      }
+      RequestContext context = RequestContext.getCurrentInstance();
+      ResourceBundle res = context.getApplicationResourceBundle();
+      String restoreNotice = "";
+      if(srcPath.indexOf(";") < 0 && numberItemsRestored == 1) {
+      	restoreNotice = "UIWorkingArea.msg.feedback-restore";
+      	restoreNotice = res.getString(restoreNotice);
+      	restoreNotice = restoreNotice.replaceAll("\\{" + 0 + "\\}", itemName);
+      } else if(srcPath.indexOf(';') > -1 && numberItemsRestored >= 1) {
+      	restoreNotice = "UIWorkingArea.msg.feedback-restore-multi";
+      	restoreNotice = res.getString(restoreNotice);
+      	restoreNotice = restoreNotice.replaceAll("\\{" + 0 + "\\}", String.valueOf(numberItemsRestored));
+      }      
+      if(restoreNotice.length() > 0) {
+      	UIWorkingArea uiWorkingArea = event.getSource().getParent();
+      	uiWorkingArea.setWCMNotice(restoreNotice);
       }
     }
 

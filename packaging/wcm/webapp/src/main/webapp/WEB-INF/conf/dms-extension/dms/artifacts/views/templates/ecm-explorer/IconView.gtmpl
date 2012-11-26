@@ -180,7 +180,8 @@
 	      														 mediaType="$isMediaType"  
 		      													 <%=rightClickMenu%> 
 		      													 style="padding: 4px 0px 4px 0px; height: auto;"
-		       													 objectId="<%=URLEncoder.encode(Utils.formatNodeName(data.getPath()), "utf-8")%>" workspaceName="$preferenceWS" ondblclick="$actionLink">
+																		 isFile="<%=data.isNodeType("nt:file")%>"
+		       													 objectId="<%=org.exoplatform.services.cms.impl.Utils.getObjectId(data.getPath())%>" workspaceName="$preferenceWS" ondblclick="$actionLink">
 		        <div style="height: auto; width: auto; border: none; -moz-user-select: none;" unselectable="on">
 							<div class="NodeLabel">
 								<div class="ActionIcon">
@@ -195,7 +196,7 @@
 								</div>
 							</div>			        
 			        <div class="ActionIconLabel" style="width: auto; overflow: hidden;">
-			          <a class="ActionLabel" style="$hiddenStyle" title="<%=title%> $lockedLabel"><%=title%></a>
+			          <a class="ActionLabel" style="$hiddenStyle" title="<%=title%> $lockedLabel"><span class="NodeName"><%=title%></span></a>
 			        </div>
 			      </div>
 			      $strActs

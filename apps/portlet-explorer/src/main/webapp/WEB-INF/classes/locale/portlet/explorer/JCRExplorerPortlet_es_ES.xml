@@ -283,6 +283,9 @@
       <UIPreferencesForm>Preferencias</UIPreferencesForm>
       <UIPublicationManager>Administrar la Publicación</UIPublicationManager>
       <UIConfirmMessage>Confirmar eliminación</UIConfirmMessage>
+      <UIDeleteFileConfirmMessage>Delete File ?</UIDeleteFileConfirmMessage>
+      <UIDeleteFolderConfirmMessage>Delete Folder ?</UIDeleteFolderConfirmMessage>
+      <UIDeleteItemsConfirmMessage>Delete Items ?</UIDeleteItemsConfirmMessage>
       <UIRestoreConfirmMessage>Confirmar restauración</UIRestoreConfirmMessage>
       <UIActivePublication>Inscribirse a la publicación del ciclo de vida</UIActivePublication>
       <UITaggingForm>Etiquetar este documento</UITaggingForm>
@@ -519,14 +522,64 @@
       <Icon>Icono</Icon>
     </title>
     <msg>
-      <confirm-delete>¿Estás seguro de eliminar el nodo '{0}' y todo su contenido?</confirm-delete>
+      // Delte one node is not in trash and have no relation
+      <confirm-delete>Are you sure you want to delete the item '{0}'?</confirm-delete>
+      <confirm-delete-file>Are you sure you want to delete the file '{0}'?</confirm-delete-file>
+      <confirm-delete-folder>Are you sure you want to delete the folder '{0}' and all subfolders?</confirm-delete-folder>
+      
+      // Delte one node is in trash and have no relation
+      <confirm-delete-permanently>Are you sure you want to remove permanently the item '{0}'?</confirm-delete-permanently>
+      <confirm-delete-file-permanently>Are you sure you want to remove permanently the file '{0}'?</confirm-delete-file-permanently>
+      <confirm-delete-folder-permanently>Are you sure you want to remove permanently the folder '{0}' and all subfolders?</confirm-delete-folder-permanently>
+      
+      // Delte one node is not in trash and have relations
+      <confirm-delete-has-relations>Are you sure you want to delete the item '{0}' and its references?</confirm-delete-has-relations>
+      <confirm-delete-file-has-relations>Are you sure you want to delete the file '{0}' and its references?</confirm-delete-file-has-relations>
+      
+      // Delte multiple nodes, not in Trash, have no relations
+      <confirm-delete-multi-nodes-generic>Are you sure you want to delete the {0} selected items?</confirm-delete-multi-nodes-generic>  
+      <confirm-delete-multi-nodes-file>Are you sure you want to delete the {0} selected files?</confirm-delete-multi-nodes-file>
+      <confirm-delete-multi-nodes-folder>Are you sure you want to delete the {0} selected folders and all subfolders?</confirm-delete-multi-nodes-folder>
+      <confirm-delete-multi-nodes-generic-and-file>Are you sure you want to delete the {0} selected items and files?</confirm-delete-multi-nodes-generic-and-file>
+      <confirm-delete-multi-nodes-generic-and-folder>Are you sure you want to delete the {0} selected items, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder>
+      <confirm-delete-multi-nodes-file-and-folder>Are you sure you want to delete the {0} selected files, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder>Are you sure you want to delete the {0} selected items, files, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder>
+      
+      // Delte multiple nodes, in Trash
+      <confirm-delete-multi-nodes-generic-permanently>Are you sure you want to remove permanently the {0} selected items?</confirm-delete-multi-nodes-generic-permanently>  
+      <confirm-delete-multi-nodes-file-permanently>Are you sure you want to remove permanently the {0} selected files?</confirm-delete-multi-nodes-file-permanently>
+      <confirm-delete-multi-nodes-folder-permanently>Are you sure you want to remove permanently the {0} selected folders and all subfolders?</confirm-delete-multi-nodes-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-permanently>Are you sure you want to remove permanently the {0} selected items and files?</confirm-delete-multi-nodes-generic-and-file-permanently>
+      <confirm-delete-multi-nodes-generic-and-folder-permanently>Are you sure you want to remove permanently the {0} selected items, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder-permanently>
+      <confirm-delete-multi-nodes-file-and-folder-permanently>Are you sure you want to remove permanently the {0} selected files, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Are you sure you want to remove permanently the {0} selected items, files, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
+      
+      // Delte multiple nodes, have relations
+      <confirm-delete-multi-nodes-generic-have-relations>Are you sure you want to delete the {0} selected items and their references?</confirm-delete-multi-nodes-generic-have-relations>  
+      <confirm-delete-multi-nodes-file-have-relations>Are you sure you want to delete the {0} selected files and their references?</confirm-delete-multi-nodes-file-have-relations>
+      <confirm-delete-multi-nodes-folder-have-relations>Are you sure you want to delete the {0} selected folders, all subfolders and their references?</confirm-delete-multi-nodes-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-have-relations>Are you sure you want to delete the {0} selected items, files and their references?</confirm-delete-multi-nodes-generic-and-file-have-relations>
+      <confirm-delete-multi-nodes-generic-and-folder-have-relations>Are you sure you want to delete the {0} selected items, their references, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
+      <confirm-delete-multi-nodes-file-and-folder-have-relations>Are you sure you want to delete the {0} selected files, their references, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Are you sure you want to delete the {0} selected items, files, their references, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
+      
+      <feedback-delete>'{0}' was deleted succesfully.</feedback-delete>
+      <feedback-delete-multi>{0} items were deleted succesfully.</feedback-delete-multi>
+      <feedback-delete-permanently>'{0}' was removed permanently.</feedback-delete-permanently>
+      <feedback-delete-permanently-multi>{0} items were removed permanently.</feedback-delete-permanently-multi>
+      <undo-delete>Undo</undo-delete>
+      <feedback-restore>'{0}' was successfully restored.</feedback-restore>
+      <feedback-restore-multi>{0} items were succesfully restored.</feedback-restore-multi>
+      
+      
+      <!--<confirm-delete>¿Estás seguro de eliminar el nodo '{0}' y todo su contenido?</confirm-delete>
       <confirm-delete-permanently>¿Estás seguro de eliminar el nodo '{0}' y todo su contenido de forma permanente?</confirm-delete-permanently>
       <confirm-restore>Un nodo con el mismo nombre ya existe en la ubicación anterior de este nodo '{0}'. ¿Estás seguro de restaurar este nodo?</confirm-restore>
       <confirm-delete-multi>¿Está seguro de mover estos elementos:{0}?</confirm-delete-multi>
       <confirm-delete-has-relations>El nodo '{0}' tiene relaciones que se refieren al mismo. ¿Está seguro de eliminarlo y todas sus relaciones?</confirm-delete-has-relations>
       <confirm-delete-multi-one-node-has-relations>¿Está seguro de mover estos elementos: {0}? (El nodo {1} tiene relaciones que se refieren a ellos, este proceso eliminará todos sus relaciones).</confirm-delete-multi-one-node-has-relations>
       <confirm-delete-multi-many-nodes-have-relations>¿Está seguro de mover estos elementos: {0}? (El nodo {1} tiene relaciones que se refieren a ellos, este proceso eliminará todos sus relaciones).</confirm-delete-multi-many-nodes-have-relations>
-      <confirm-delete-permanently-multi>¿Está seguro de mover estos elementos: {0} permanentemente?</confirm-delete-permanently-multi>
+      <confirm-delete-permanently-multi>¿Está seguro de mover estos elementos: {0} permanentemente?</confirm-delete-permanently-multi>-->
       <confirm-move>¿Está seguro de mover?</confirm-move>
       <node-cut>El nodo '{0}' ha sido cortado.</node-cut>
       <execute-successfully>La acción personalizada '{0}' ha sido ejecutada.</execute-successfully>
@@ -2590,7 +2643,7 @@
   </UISimpleCategoryManager>
   <UIConfirmMessage>
     <label>
-      <Close>#{word.close}</Close>
+      <Close>#{word.cancel}</Close>
       <OK>OK</OK>
       <ReplaceData>Reemplazar la data</ReplaceData>
       <Back>Regresar al cambio de nombre</Back>

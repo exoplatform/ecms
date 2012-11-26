@@ -18,14 +18,13 @@ package org.exoplatform.ecm.webui.component.explorer.popup.admin;
 
 import javax.jcr.Node;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIContainer;
@@ -60,9 +59,7 @@ public class UIActionViewTemplate extends UIContainer {
   }
 
   public String getPortalName() {
-    ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-    PortalContainerInfo containerInfo =
-      (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class) ;
+    PortalContainerInfo containerInfo = WCMCoreUtils.getService(PortalContainerInfo.class) ;
     return containerInfo.getContainerName() ;
   }
 
@@ -72,7 +69,6 @@ public class UIActionViewTemplate extends UIContainer {
 
   public String getTemplate() { return getViewTemplatePath() ;}
 
-  @SuppressWarnings("unused")
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     return getAncestorOfType(UIJCRExplorer.class).getJCRTemplateResourceResolver() ;
   }

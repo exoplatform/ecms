@@ -22,7 +22,6 @@ import java.util.List;
 
 import javax.jcr.Node;
 
-import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanAddNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsCheckedOutFilter;
@@ -30,6 +29,7 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFi
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.services.ecm.publication.PublicationService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
@@ -64,8 +64,7 @@ public class PublicationPublishAction extends UIComponent {
     @Override
     protected void processEvent(Event<PublicationPublishAction> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
-      PublicationService publicationService = (PublicationService)PortalContainer.getInstance().
-          getComponentInstanceOfType(PublicationService.class);
+      PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);
       Node node = uiExplorer.getCurrentNode();
       if(node.isLocked()) {
         node.getSession().addLockToken(LockUtil.getLockToken(node));

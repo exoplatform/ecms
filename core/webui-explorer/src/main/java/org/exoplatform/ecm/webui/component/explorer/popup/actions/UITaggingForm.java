@@ -58,7 +58,7 @@ import org.exoplatform.webui.form.UIFormTextAreaInput;
  * Created by The eXo Platform SARL Author : Dang Van Minh
  * minh.dang@exoplatform.com Jan 12, 2007 11:56:51 AM
  */
-@ComponentConfig(lifecycle = UIFormLifecycle.class, template = "system:/groovy/webui/form/UIForm.gtmpl", 
+@ComponentConfig(lifecycle = UIFormLifecycle.class, template = "system:/groovy/webui/form/UIForm.gtmpl",
                  events = {
     @EventConfig(listeners = UITaggingForm.AddTagActionListener.class),
     @EventConfig(listeners = UITaggingForm.EditActionListener.class, phase = Phase.DECODE),
@@ -130,11 +130,8 @@ public class UITaggingForm extends UIForm {
 
   public void activate() throws Exception {
 
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    RepositoryService repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
-    ManageableRepository manageableRepo = repositoryService.getCurrentRepository();
-    String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
-    NewFolksonomyService folksonomyService = getApplicationComponent(NewFolksonomyService.class);
+    String workspace = WCMCoreUtils.getRepository().getConfiguration().getDefaultWorkspaceName();
+    NewFolksonomyService folksonomyService = WCMCoreUtils.getService(NewFolksonomyService.class);
 
     StringBuilder linkedTags = new StringBuilder();
     Set<String> linkedTagSet = new HashSet<String>();
@@ -176,10 +173,7 @@ public class UITaggingForm extends UIForm {
   }
 
   public List<String> getAllTagNames() throws Exception {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    RepositoryService repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
-    ManageableRepository manageableRepo = repositoryService.getCurrentRepository();
-    String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
+    String workspace = WCMCoreUtils.getRepository().getConfiguration().getDefaultWorkspaceName();
     NewFolksonomyService folksonomyService = getApplicationComponent(NewFolksonomyService.class);
 
     String tagScope = this.getUIFormSelectBox(TAG_SCOPES).getValue();
@@ -194,7 +188,7 @@ public class UITaggingForm extends UIForm {
   public void processRender(WebuiRequestContext context) throws Exception {
 //    context.getJavascriptManager().importJavascript("eXo.ecm.ECMUtils",
 //                                                    "/ecm-wcm-extension/javascript/");
-    
+
     context.getJavascriptManager().require("SHARED/ecm-utils", "ecmutil").
     addScripts("ecmutil.ECMUtils.disableAutocomplete('UITaggingForm');");
     super.processRender(context);
@@ -232,7 +226,7 @@ public class UITaggingForm extends UIForm {
         uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tag-name-empty",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        
+
         return;
       }
       String[] tagNames = null;
@@ -251,7 +245,7 @@ public class UITaggingForm extends UIForm {
             uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tag-name-duplicate",
                                                     null,
                                                     ApplicationMessage.WARNING));
-            
+
             return;
           }
           listTagNamesClone.add(tag);
@@ -267,14 +261,14 @@ public class UITaggingForm extends UIForm {
           uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tag-name-empty",
                                                   null,
                                                   ApplicationMessage.WARNING));
-          
+
           return;
         }
         if (t.trim().length() > 30) {
           uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tagName-too-long",
                                                   null,
                                                   ApplicationMessage.WARNING));
-          
+
           return;
         }
         String[] arrFilterChar = { "&", "'", "$", "@", ":", "]", "[", "*", "%", "!", "/", "\\" };
@@ -283,7 +277,7 @@ public class UITaggingForm extends UIForm {
             uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tagName-invalid",
                                                     null,
                                                     ApplicationMessage.WARNING));
-            
+
             return;
           }
         }
@@ -301,7 +295,7 @@ public class UITaggingForm extends UIForm {
             uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.name-exist",
                                                     args,
                                                     ApplicationMessage.WARNING));
-            
+
             return;
           }
         }
@@ -323,10 +317,8 @@ public class UITaggingForm extends UIForm {
                               String[] tagNames,
                               UITaggingForm uiForm) throws Exception {
 
-      ExoContainer container = ExoContainerContext.getCurrentContainer();
       NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class);
-      RepositoryService repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
-      ManageableRepository manageableRepo = repositoryService.getCurrentRepository();
+      ManageableRepository manageableRepo = WCMCoreUtils.getRepository();
       NodeHierarchyCreator nodeHierarchyCreator = uiForm.getApplicationComponent(NodeHierarchyCreator.class);
       String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
       String[] roles = Utils.getGroups().toArray(new String[] {});
@@ -368,7 +360,7 @@ public class UITaggingForm extends UIForm {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.editTagAccessDenied",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        
+
         return;
       }
 
@@ -380,7 +372,7 @@ public class UITaggingForm extends UIForm {
         uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tagName-invalid",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        
+
         return;
       }
       removeTagFromNode(tagScope, currentNode, tagName, uiForm);
@@ -399,15 +391,10 @@ public class UITaggingForm extends UIForm {
                                   String tagName,
                                   UITaggingForm uiForm) throws Exception {
 
-      ExoContainer container = ExoContainerContext.getCurrentContainer();
       NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class);
       NodeHierarchyCreator nodeHierarchyCreator = uiForm.getApplicationComponent(NodeHierarchyCreator.class);
-
       String userName = currentNode.getSession().getUserID();
-
-      RepositoryService repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
-      ManageableRepository manageableRepo = repositoryService.getCurrentRepository();
-      String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
+      String workspace = WCMCoreUtils.getRepository().getConfiguration().getDefaultWorkspaceName();
 
       String tagPath = "";
       if (Utils.PUBLIC.equals(scope)) {
@@ -429,11 +416,8 @@ public class UITaggingForm extends UIForm {
     }
 
     private Node getNode(String workspace, String path) throws Exception {
-      ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-      RepositoryService repositoryService = (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
-      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
-      return (Node) sessionProvider.getSession(workspace, manageableRepository).getItem(path);
+      return (Node) sessionProvider.getSession(workspace, WCMCoreUtils.getRepository()).getItem(path);
     }
 
     private Node getUserFolksonomyFolder(String userName, UITaggingForm uiForm) throws Exception {
@@ -462,7 +446,7 @@ public class UITaggingForm extends UIForm {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.editTagAccessDenied",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        
+
         return;
       }
       ((UITaggingFormContainer) uiForm.getParent()).edit(event);

@@ -22,14 +22,13 @@ import java.util.Enumeration;
 
 import javax.jcr.Node;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.mop.SiteKey;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.seo.PageMetadataModel;
 import org.exoplatform.services.seo.SEOService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -68,8 +67,7 @@ public class UISEOToolbarForm extends UIForm {
       UISEOToolbarForm uiSEOToolbar = event.getSource();
       UISEOForm uiSEOForm = uiSEOToolbar.createUIComponent(UISEOForm.class, null, null);
       String params = event.getRequestContext().getRequestParameter(OBJECTID);
-      ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-      SEOService seoService = (SEOService)container.getComponentInstanceOfType(SEOService.class);
+      SEOService seoService = WCMCoreUtils.getService(SEOService.class);
       if(paramsArray != null) {
         for(int i = 0;i < paramsArray.size();i++) {
           Node contentNode = seoService.getContentNode(paramsArray.get(i).toString());
@@ -122,8 +120,7 @@ public class UISEOToolbarForm extends UIForm {
           }
         }
     }
-    ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-    SEOService seoService = (SEOService)container.getComponentInstanceOfType(SEOService.class);
+    SEOService seoService = WCMCoreUtils.getService(SEOService.class);
     pageReference = Util.getUIPortal().getSelectedUserNode().getPageRef();
 
     if(pageReference != null) {

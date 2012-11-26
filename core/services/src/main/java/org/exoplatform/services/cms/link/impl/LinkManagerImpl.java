@@ -34,12 +34,9 @@ import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeLinkAware;
-import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
@@ -325,9 +322,7 @@ public class LinkManagerImpl implements LinkManager {
   public List<Node> getAllLinks(Node targetNode, String linkType, SessionProvider sessionProvider) {
     List<Node> result = new ArrayList<Node>();
     try {
-      ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-      RepositoryService repositoryService =(RepositoryService)myContainer.getComponentInstanceOfType(RepositoryService.class);
-      ManageableRepository repository  = repositoryService.getCurrentRepository();
+      ManageableRepository repository  = WCMCoreUtils.getRepository();
       String[] workspaces = repository.getWorkspaceNames();
       String queryString = new StringBuilder().append("SELECT * FROM ").
                                                append(linkType).
@@ -336,7 +331,7 @@ public class LinkManagerImpl implements LinkManager {
                                                append(" AND exo:workspace='").
                                                append(targetNode.getSession().getWorkspace().getName()).
                                                append("'").toString();
-  
+
       for (String workspace : workspaces) {
         Session session = sessionProvider.getSession(workspace, repository);
         QueryManager queryManager = session.getWorkspace().getQueryManager();
@@ -359,5 +354,5 @@ public class LinkManagerImpl implements LinkManager {
   public List<Node> getAllLinks(Node targetNode, String linkType) {
     return getAllLinks(targetNode, linkType, WCMCoreUtils.getUserSessionProvider());
   }
-  
+
 }

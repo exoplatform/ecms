@@ -27,11 +27,11 @@ import javax.jcr.Node;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.extensions.publication.PublicationManager;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -49,15 +49,15 @@ import org.exoplatform.webui.event.EventListener;
  *          exo@exoplatform.com
  * Feb 2, 2010
  */
-@ComponentConfig(lifecycle = Lifecycle.class, 
-                 template = "app:/groovy/authoring/UIDashboardForm.gtmpl", 
+@ComponentConfig(lifecycle = Lifecycle.class,
+                 template = "app:/groovy/authoring/UIDashboardForm.gtmpl",
                  events = {
     @EventConfig(listeners = UIDashboardForm.ShowDocumentActionListener.class),
     @EventConfig(listeners = UIDashboardForm.RefreshActionListener.class) })
 public class UIDashboardForm extends UIContainer {
-  
+
   private int pageSize_ = 10;
-  
+
   public UIDashboardForm() throws Exception {
     addChild(UIDashBoardColumn.class, null, "UIDashboardDraft").setLabel("UIDashboardForm.label.mydraft");
     addChild(UIDashBoardColumn.class, null, "UIDashboardWaiting").setLabel("UIDashboardForm.label.waitingapproval");
@@ -74,21 +74,20 @@ public class UIDashboardForm extends UIContainer {
   }
 
   public List<Node> getContents(String fromstate, String tostate, String date) {
-    PublicationManager manager = (PublicationManager) ExoContainerContext.getCurrentContainer()
-                                                                         .getComponentInstanceOfType(PublicationManager.class);
+    PublicationManager manager = WCMCoreUtils.getService(PublicationManager.class);
     String user = PortalRequestContext.getCurrentInstance().getRemoteUser();
     String lang = Util.getPortalRequestContext().getLocale().getLanguage();
     List<Node> nodes = new ArrayList<Node>();
     List<Node> temp = new ArrayList<Node>();
-    try {     
+    try {
       nodes = manager.getContents(fromstate, tostate, date, user, lang, "collaboration");
       Set<String> uuidList = new HashSet<String>();
       for(Node node : nodes) {
         String currentState = null;
         if(node.hasProperty("publication:currentState"))
-          currentState = node.getProperty("publication:currentState").getString();      
+          currentState = node.getProperty("publication:currentState").getString();
         if(currentState == null || !currentState.equals("published")) {
-          if(!org.exoplatform.services.cms.impl.Utils.isInTrash(node) && 
+          if(!org.exoplatform.services.cms.impl.Utils.isInTrash(node) &&
             !uuidList.contains(node.getSession().getWorkspace().getName() + node.getUUID())) {
             uuidList.add(node.getSession().getWorkspace().getName() + node.getUUID());
             temp.add(node);
@@ -100,7 +99,7 @@ public class UIDashboardForm extends UIContainer {
     }
     return temp;
   }
-  
+
   private void refreshData() {
     List<UIDashBoardColumn> children = new ArrayList<UIDashBoardColumn>();
     for (UIComponent component : getChildren()) {
@@ -112,19 +111,19 @@ public class UIDashboardForm extends UIContainer {
         NodeLocation.getLocationsByNodeList(getContents("draft")));
     children.get(0).getUIPageIterator().setPageList(
     new LazyPageList<NodeLocation>(draftNodes,  pageSize_));
-    
+
     ListAccess<NodeLocation> waitingNodes = new ListAccessImpl<NodeLocation>(NodeLocation.class,
     NodeLocation.getLocationsByNodeList(getContents("pending", "approved")));
     children.get(1).getUIPageIterator().setPageList(
     new LazyPageList<NodeLocation>(waitingNodes, pageSize_));
-    
+
     ListAccess<NodeLocation> publishedNodes = new ListAccessImpl<NodeLocation>(NodeLocation.class,
     NodeLocation.getLocationsByNodeList(getContents("staged", null, "2")));
     children.get(2).getUIPageIterator().setPageList(
     new LazyPageList<NodeLocation>(publishedNodes, pageSize_));
 
   }
-  
+
   public void processRender(WebuiRequestContext context) throws Exception
   {
     refreshData();

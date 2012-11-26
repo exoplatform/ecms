@@ -21,8 +21,6 @@ import javax.ws.rs.core.Response;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.dom.DOMSource;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -200,9 +198,7 @@ public class InlineEditingService implements ResourceContainer{
     cacheControl.setNoStore(true);
     try {
       SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
-      ExoContainer container = ExoContainerContext.getCurrentContainer();
-      RepositoryService repositoryService =
-        (RepositoryService)container.getComponentInstanceOfType(RepositoryService.class);
+      RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(workspaceName, manageableRepository);
       try {
@@ -213,8 +209,7 @@ public class InlineEditingService implements ResourceContainer{
           if (!sameValue(newValue, node, propertyName)) {
             if (newValue.length() > 0) {
               newValue = Text.unescapeIllegalJcrChars(newValue.trim());
-              PortalContainerInfo containerInfo =
-                (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class);
+              PortalContainerInfo containerInfo = WCMCoreUtils.getService(PortalContainerInfo.class);
               String containerName = containerInfo.getContainerName();
               ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class, containerName);
               if (propertyName.equals(EXO_TITLE)) {

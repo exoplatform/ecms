@@ -154,7 +154,7 @@ public class UICLVPresentation extends UIContainer {
   public List<CategoryBean> getCategories(String fullPath, String primaryType, int depth) throws Exception {
     return getCategories(fullPath,  primaryType,  depth, true);
   }
-  
+
   public List<CategoryBean> getCategories(String fullPath, String primaryType, int depth, boolean withChildren) throws Exception {
     if (fullPath == null || fullPath.length() == 0) {
       return null;
@@ -270,9 +270,9 @@ public class UICLVPresentation extends UIContainer {
     String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
     if (clvBy == null || clvBy.length() == 0)
       clvBy = UICLVPortlet.DEFAULT_SHOW_CLV_BY;
-        
+
     String params =  nodeLocation.getRepository() + ":" + nodeLocation.getWorkspace() +":"+ node.getPath();
-    
+
     NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
     NavigationResource resource = new NavigationResource(SiteType.PORTAL,
                                                          Util.getPortalRequestContext()
@@ -387,9 +387,9 @@ public class UICLVPresentation extends UIContainer {
     }
     return desc;
   }
-  public static String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, String inputType, 
+  public static String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, String inputType,
       String idGenerator, String cssClass, boolean isGenericProperty, String... arguments) throws Exception {
-    return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName, 
+    return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName,
                                           defaultValue, inputType, idGenerator, cssClass, isGenericProperty, arguments);
   }
   public String getSummaryField(Node node) throws Exception {
@@ -423,7 +423,7 @@ public class UICLVPresentation extends UIContainer {
     String scvWith = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_SCV_WITH);
     if (scvWith == null || scvWith.length() == 0)
       scvWith = UICLVPortlet.DEFAULT_SHOW_SCV_WITH;
-    
+
     StringBuffer sb = new StringBuffer();
     sb.append("/")
       .append(nodeLocation.getRepository())
@@ -548,7 +548,7 @@ public class UICLVPresentation extends UIContainer {
         Node originalNode = node.getSession().getNodeByUUID(uuid);
         return "Icon16x16 default16x16Icon "
             + org.exoplatform.ecm.webui.utils.Utils.getNodeTypeIcon(originalNode, "16x16Icon");
-      } 
+      }
       return "Icon16x16 default16x16Icon " + org.exoplatform.ecm.webui.utils.Utils.getNodeTypeIcon(node, "16x16Icon");
     } catch (RepositoryException e) {
       Utils.createPopupMessage(this,
@@ -559,7 +559,7 @@ public class UICLVPresentation extends UIContainer {
     return null;
   }
 
-  public String getHeader() {    
+  public String getHeader() {
     String header = this.getAncestorOfType(UICLVPortlet.class).getHeader();
     if(header == null)
       header = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_HEADER);
@@ -592,7 +592,7 @@ public class UICLVPresentation extends UIContainer {
         return false;
       }
       return true;
-    } 
+    }
     return false;
   }
 
@@ -626,10 +626,10 @@ public class UICLVPresentation extends UIContainer {
       return false;
     }
     PortletPreferences portletPreferences = Utils.getAllPortletPreferences();
-    String currentApplicationMode = portletPreferences.getValue(UICLVPortlet.PREFERENCE_APPLICATION_TYPE, null);    
-    if (currentApplicationMode.equals(UICLVPortlet.APPLICATION_CLV_BY_QUERY)) 
+    String currentApplicationMode = portletPreferences.getValue(UICLVPortlet.PREFERENCE_APPLICATION_TYPE, null);
+    if (currentApplicationMode.equals(UICLVPortlet.APPLICATION_CLV_BY_QUERY))
       return false;
-    
+
     return isShowField(UICLVPortlet.PREFERENCE_SHOW_RSSLINK)
         && (this.getAncestorOfType(UICLVPortlet.class).getFolderPathParamValue() != null
             || UICLVPortlet.DISPLAY_MODE_AUTOMATIC.equals(Utils.getPortletPreference(UICLVPortlet.PREFERENCE_DISPLAY_MODE)));
@@ -741,7 +741,7 @@ public class UICLVPresentation extends UIContainer {
               + strFastPublishBundle + "\"class=\"FastPublishIcon\" >");
           sb.append("              &nbsp;");
           sb.append("            </a>");
-          sb.append("          </div>");          
+          sb.append("          </div>");
         }
       } else {
         sb.append("          <div style=\"float: right\">");
@@ -772,27 +772,27 @@ public class UICLVPresentation extends UIContainer {
 
     return sb.toString();
   }
-  
+
   public String getBackLink (String currentPath) {
-    String preferencePath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);    
+    String preferencePath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);
     String targetPage = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_TARGET_PAGE);
     NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
     NavigationResource resource = new NavigationResource(SiteType.PORTAL,
                                                          Util.getPortalRequestContext()
                                                              .getPortalOwner(), targetPage);
     nodeURL.setResource(resource);
-    
+
     if (currentPath.contains(preferencePath)) {
       String treePath = currentPath.substring(preferencePath.length() + 1);
       String[] treeNodes = treePath.split("/");
-      
+
       if (treeNodes.length > 1) {
         String paramPath = currentPath.substring(0, currentPath.lastIndexOf("/"));
         String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
         nodeURL.setQueryParameterValue(clvBy, paramPath);
-      }      
+      }
     }
-    
+
     return nodeURL.toString();
   }
 
@@ -841,7 +841,7 @@ public class UICLVPresentation extends UIContainer {
                                ApplicationMessage.INFO);
     }
   }
-  
+
   public static class FastPublishActionListener extends EventListener<UICLVPresentation> {
 
     /*
@@ -854,8 +854,7 @@ public class UICLVPresentation extends UIContainer {
       UICLVPresentation contentListPresentation = event.getSource();
       String nodePath = event.getRequestContext().getRequestParameter(OBJECTID);
       Node node = NodeLocation.getNodeByExpression(Text.escapeIllegalJcrChars(nodePath));
-      PublicationService publicationService = (PublicationService) PortalContainer.getInstance()
-          .getComponentInstanceOfType(PublicationService.class);
+      PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);
       if (node.isLocked()) {
         node.getSession().addLockToken(LockUtil.getLockToken(node));
       }

@@ -21,11 +21,9 @@ import java.util.Map;
 import javax.jcr.Node;
 import javax.jcr.nodetype.NoSuchNodeTypeException;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
 
@@ -41,9 +39,7 @@ public class IsNotIgnoreVersionNodeFilter implements UIExtensionFilter {
    boolean ignore_version = true;
    Node currentNode = (Node) context.get(Node.class.getName());
    Node parrentNode = currentNode.getParent();
-   ExoContainer exoContainer = ExoContainerContext.getCurrentContainer() ;
-   RepositoryService repositoryService = (RepositoryService) exoContainer.getComponentInstanceOfType(RepositoryService.class);
-   ExtendedNodeTypeManager ntmanager = repositoryService.getCurrentRepository().getNodeTypeManager();
+   ExtendedNodeTypeManager ntmanager = WCMCoreUtils.getRepository().getNodeTypeManager();
    String nodetypes = System.getProperty("wcm.nodetypes.ignoreversion");
    if(nodetypes == null || nodetypes.length() == 0)
      nodetypes = "exo:webContent";

@@ -18,8 +18,6 @@ package org.exoplatform.services.wcm.publication.lifecycle.stageversion;
 
 import javax.jcr.Node;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -28,6 +26,7 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.BaseWebSchemaHandler;
 import org.exoplatform.services.wcm.core.WebSchemaConfigService;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 
 /**
@@ -40,7 +39,7 @@ public class StageAndVersionPublicationHandler extends BaseWebSchemaHandler {
 
   /** The Logger **/
   private static final Log LOG = ExoLogger.getLogger(StageAndVersionPublicationHandler.class.getName());
-  
+
   /** The template service. */
   private TemplateService templateService;
 
@@ -81,9 +80,7 @@ public class StageAndVersionPublicationHandler extends BaseWebSchemaHandler {
    * .jcr.Node, org.exoplatform.services.jcr.ext.common.SessionProvider)
    */
   public boolean matchHandler(Node node, SessionProvider sessionProvider) throws Exception {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    WebSchemaConfigService schemaConfigService = (WebSchemaConfigService) container.
-        getComponentInstanceOfType(WebSchemaConfigService.class);
+    WebSchemaConfigService schemaConfigService = WCMCoreUtils.getService(WebSchemaConfigService.class);
     WebContentSchemaHandler webContentSchemaHandler = schemaConfigService.
         getWebSchemaHandlerByType(WebContentSchemaHandler.class);
     if(webContentSchemaHandler.isWebcontentChildNode(node))

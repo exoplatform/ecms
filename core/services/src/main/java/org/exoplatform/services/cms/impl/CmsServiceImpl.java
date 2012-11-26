@@ -47,8 +47,6 @@ import javax.jcr.nodetype.PropertyDefinition;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 import org.exoplatform.commons.utils.ISO8601;
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.JcrInputProperty;
@@ -61,6 +59,7 @@ import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 
 /**
@@ -283,8 +282,7 @@ public class CmsServiceImpl implements CmsService {
     //check if currentNode has been moved
     if (currentNode instanceof NodeImpl && !((NodeImpl)currentNode).isValid()) {
       currentNode = (Node)session.getItem(currentNodePath);
-      ExoContainer container = ExoContainerContext.getCurrentContainer();
-      LinkManager linkManager = (LinkManager)container.getComponentInstanceOfType(LinkManager.class);
+      LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
       if (linkManager.isLink(currentNode)) {
         try {
           currentNode = linkManager.getTarget(currentNode, false);

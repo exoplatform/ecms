@@ -459,8 +459,7 @@ public class Utils {
    * @return a collection of MembershipEntry
    */
   private static Collection<MembershipEntry> getUserMembershipsFromIdentityRegistry(String authenticatedUser) {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    IdentityRegistry identityRegistry = (IdentityRegistry) container.getComponentInstanceOfType(IdentityRegistry.class);
+    IdentityRegistry identityRegistry = WCMCoreUtils.getService(IdentityRegistry.class);
     Identity currentUserIdentity = identityRegistry.getIdentity(authenticatedUser);
     return currentUserIdentity.getMemberships();
   }
@@ -608,10 +607,8 @@ public class Utils {
    * @return
    */
   public static String getResourceBundle(String name, String key, ClassLoader cl) {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
     Locale locale = WebuiRequestContext.getCurrentInstance().getLocale();
-    ResourceBundleService resourceBundleService = (ResourceBundleService) container
-        .getComponentInstanceOfType(ResourceBundleService.class);
+    ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
     ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(
         name, locale, cl);
     try {

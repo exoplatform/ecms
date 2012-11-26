@@ -22,13 +22,12 @@ import javax.jcr.Node;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -109,9 +108,7 @@ public class FCKUtils {
   }
 
   public static String getPortalName() {
-    ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-    PortalContainerInfo containerInfo =
-      (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class) ;
+    PortalContainerInfo containerInfo = WCMCoreUtils.getService(PortalContainerInfo.class) ;
     return containerInfo.getContainerName() ;
   }
 

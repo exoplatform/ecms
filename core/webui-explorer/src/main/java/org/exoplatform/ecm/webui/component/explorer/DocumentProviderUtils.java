@@ -29,17 +29,13 @@ import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
-import javax.portlet.PortletPreferences;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.documents.FavoriteService;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.application.portlet.PortletRequestContext;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SARL
@@ -55,19 +51,6 @@ public class DocumentProviderUtils {
   public static final int TRASH_ITEMS = 2;
   public static final int OWNED_BY_USER_ITEMS = 3;
   public static final int HIDDEN_ITEMS = 4;
-
-  private static FavoriteService favoriteService_ = null;
-  private static TrashService trashService_ = null;
-
-  static {
-    ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-    favoriteService_ =
-      (FavoriteService) myContainer
-      .getComponentInstanceOfType(FavoriteService.class);
-    trashService_ =
-      (TrashService) myContainer
-      .getComponentInstanceOfType(TrashService.class);
-  }
 
   public List<Node> getItemsBySourceType(int source, UIJCRExplorer uiExplorer) throws Exception {
     List<Node> ret = new ArrayList<Node>();
@@ -103,16 +86,12 @@ public class DocumentProviderUtils {
   private List<Node> getTrashNodeList(UIJCRExplorer uiExplorer) throws Exception {
     List<Node> ret = new ArrayList<Node>();
 
-    PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
-    PortletPreferences portletPref = pcontext.getRequest().getPreferences();
-    //String trashHomeNodePath = portletPref.getValue(Utils.TRASH_HOME_NODE_PATH, "");
-    String trashWorkspace = portletPref.getValue(Utils.TRASH_WORKSPACE, "");
     SessionProvider sessionProvider = uiExplorer.getSessionProvider();
     boolean byUser = uiExplorer.getPreference().isShowItemsByUser();
     if (!byUser) {
-      ret = trashService_.getAllNodeInTrash(sessionProvider);
+      ret = WCMCoreUtils.getService(TrashService.class).getAllNodeInTrash(sessionProvider);
     } else {
-      ret = trashService_.getAllNodeInTrashByUser(sessionProvider, uiExplorer.getSession().getUserID());
+      ret = WCMCoreUtils.getService(TrashService.class).getAllNodeInTrashByUser(sessionProvider, uiExplorer.getSession().getUserID());
     }
     return ret;
   }
@@ -149,7 +128,7 @@ public class DocumentProviderUtils {
     List<Node> ret = new ArrayList<Node>();
     List<Node> favoriteList = null;
 
-    favoriteList = favoriteService_.getAllFavoriteNodesByUser(uiExplorer.getCurrentWorkspace(),
+    favoriteList = WCMCoreUtils.getService(FavoriteService.class).getAllFavoriteNodesByUser(uiExplorer.getCurrentWorkspace(),
           uiExplorer.getRepositoryName(), uiExplorer.getSession().getUserID());
 
     for (Node node : favoriteList) {

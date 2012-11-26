@@ -5,4 +5,13 @@
       <no-file-selected>Aucun contenu. Veuillez en sélectionner un.</no-file-selected>
     </msg>
   </ContentSelector>
+  <RenameConnector>
+    <label>
+      <rename>Renommer</rename>
+      <cancel>Annuler</cancel>
+    </label>
+    <msg>
+      <renaming>Renommer en cours...</renaming>
+    </msg>
+  </RenameConnector>
 </bundle>

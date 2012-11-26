@@ -16,12 +16,11 @@
  */
 package org.exoplatform.services.wcm.link;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.scheduler.BaseJob;
 import org.exoplatform.services.scheduler.JobContext;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS
@@ -34,9 +33,7 @@ public class LinkValidatorJob extends BaseJob {
   private static final Log LOG = ExoLogger.getLogger(LinkValidatorJob.class.getName());
 
   public void execute(JobContext arg0) throws Exception {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    LiveLinkManagerService linkManagerService =
-      (LiveLinkManagerService)container.getComponentInstanceOfType(LiveLinkManagerService.class);
+    LiveLinkManagerService linkManagerService = WCMCoreUtils.getService(LiveLinkManagerService.class);
     if(linkManagerService == null) return;
     try {
       linkManagerService.updateLinks();

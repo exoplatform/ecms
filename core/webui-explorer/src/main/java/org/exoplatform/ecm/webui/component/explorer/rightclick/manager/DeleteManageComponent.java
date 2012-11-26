@@ -24,10 +24,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.PropertyIterator;
 import javax.jcr.ReferentialIntegrityException;
@@ -35,12 +37,14 @@ import javax.jcr.Session;
 import javax.jcr.lock.LockException;
 import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.nodetype.NodeType;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import javax.jcr.query.QueryResult;
 import javax.jcr.version.VersionException;
 import javax.portlet.PortletPreferences;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.webui.component.explorer.UIConfirmMessage;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
@@ -64,16 +68,18 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
-import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
@@ -96,6 +102,23 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 public class DeleteManageComponent extends UIAbstractManagerComponent {
 
   private static final Log LOG = ExoLogger.getLogger(DeleteManageComponent.class.getName());
+  
+  private static final String DELETE_FILE_CONFIRM_TITLE = "UIDeleteFileConfirmMessage";
+  private static final String DELETE_FOLDER_CONFIRM_TITLE = "UIDeleteFolderConfirmMessage";
+  private static final String DELETE_ITEMS_CONFIRM_TITLE = "UIDeleteItemsConfirmMessage";
+  
+  private static final int GENERIC_TYPE = 1;
+  private static final int FILE_TYPE = 2;
+  private static final int FOLDER_TYPE = 3;
+  
+  
+  private static final int FOLDERS = 1; //"001";
+  private static final int FILES = 2; //"010";
+  private static final int FILES_AND_FOLDERS = 3; //"011";
+  private static final int GENERIC = 4; //"100";
+  private static final int GENERICS_AND_FOLDERS = 5; //"101";
+  private static final int GENERICS_AND_FILES = 6; //"110";  
+  private static final int GENERICS_AND_FILES_AND_FOLDERS = 7; //"111";
 
   private static final List<UIExtensionFilter> FILTERS
       = Arrays.asList(new UIExtensionFilter[]{new IsNotLockedFilter(),
@@ -115,7 +138,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     for (int i = 0; i < nodePaths.length; i++) {
       try {
         Node node = this.getNodeByPath(nodePaths[i]);
-        
+
         // Prepare to remove
         Validate.isTrue(node != null, "The ObjectId is invalid '" + nodePaths[i] + "'");
         mapNode.put(node.getPath(), node);
@@ -196,8 +219,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
   }
 
   private boolean moveToTrash(String srcPath, Node node, Event<?> event, boolean isMultiSelect) throws Exception {
-    ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-    TrashService trashService = (TrashService)myContainer.getComponentInstanceOfType(TrashService.class);
+    TrashService trashService = WCMCoreUtils.getService(TrashService.class);
     boolean ret = true;
     final String virtualNodePath = srcPath;
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
@@ -243,8 +265,8 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       if (LOG.isErrorEnabled()) {
         LOG.error("node is locked, can't move to trash node :" + node.getPath());
       }
-      ApplicationMessage appMessage = 
-        new ApplicationMessage("UIPopupMenu.msg.can-not-remove-locked-node", 
+      ApplicationMessage appMessage =
+        new ApplicationMessage("UIPopupMenu.msg.can-not-remove-locked-node",
                                new String[] {node.getPath()}, ApplicationMessage.ERROR);
       appMessage.setArgsLocalized(false);
       uiApp.addMessage(appMessage);
@@ -255,8 +277,8 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         LOG.error("node is checked in, can't move to trash node:" + node.getPath());
       }
       removeMixinEXO_RESTORE_LOCATION(node);
-      ApplicationMessage appMessage = 
-        new ApplicationMessage("UIPopupMenu.msg.can-not-remove-checked-in-node", 
+      ApplicationMessage appMessage =
+        new ApplicationMessage("UIPopupMenu.msg.can-not-remove-checked-in-node",
                                new String[] {node.getPath()}, ApplicationMessage.ERROR);
       appMessage.setArgsLocalized(false);
       uiApp.addMessage(appMessage);
@@ -266,8 +288,8 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       if (LOG.isErrorEnabled()) {
         LOG.error("access denied, can't move to trash node:" + node.getPath());
       }
-      ApplicationMessage appMessage = 
-        new ApplicationMessage("UIPopupMenu.msg.access-denied-to-delete", 
+      ApplicationMessage appMessage =
+        new ApplicationMessage("UIPopupMenu.msg.access-denied-to-delete",
                                new String[] {node.getPath()}, ApplicationMessage.ERROR);
       appMessage.setArgsLocalized(false);
       uiApp.addMessage(appMessage);
@@ -277,7 +299,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       if (LOG.isErrorEnabled()) {
         LOG.error("an unexpected error occurs", e);
       }
-      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.unexpected-error", 
+      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.unexpected-error",
                                               new String[] {node.getPath()}, ApplicationMessage.ERROR));
       uiExplorer.updateAjax(event);
       ret = false;
@@ -346,7 +368,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     } catch (VersionException ve) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.remove-verion-exception", null,
           ApplicationMessage.WARNING));
-      
+
       uiExplorer.updateAjax(event);
       return;
     } catch (ReferentialIntegrityException ref) {
@@ -356,7 +378,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
           .addMessage(new ApplicationMessage(
               "UIPopupMenu.msg.remove-referentialIntegrityException", null,
               ApplicationMessage.WARNING));
-      
+
       uiExplorer.updateAjax(event);
       return;
     } catch (ConstraintViolationException cons) {
@@ -364,13 +386,13 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       uiExplorer.refreshExplorer();
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.constraintviolation-exception",
           null, ApplicationMessage.WARNING));
-      
+
       uiExplorer.updateAjax(event);
       return;
     } catch (LockException lockException) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked-other-person", null,
           ApplicationMessage.WARNING));
-      
+
       uiExplorer.updateAjax(event);
       return;
     } catch (Exception e) {
@@ -378,7 +400,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         LOG.error("an unexpected error occurs while removing the node", e);
       }
       JCRExceptionManager.process(uiApp, e);
-      
+
       return;
     }
     if (!isMultiSelect) {
@@ -415,7 +437,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       processRemoveMultiple(nodePath.split(";"), wsName.split(";"), event);
     } else {
       processRemove(nodePath, wsName, event, false);
-    }
+    }    
     uiExplorer.updateAjax(event);
     uiExplorer.getSession().save();
   }
@@ -429,18 +451,28 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
   }
 
   public void doDelete(String nodePath, Event<?> event, boolean checkToMoveToTrash) throws Exception {
+  	RequestContext context = RequestContext.getCurrentInstance();
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
+    UIWorkingArea uiWorkingArea = getAncestorOfType(UIWorkingArea.class);
+    ResourceBundle res = context.getApplicationResourceBundle();
+    String deleteNotice = "";
+    String deleteNoticeParam = "";
     if (nodePath.indexOf(";") > -1) {
       processRemoveMultiple(nodePath.split(";"), event);
+      if(checkToMoveToTrash) deleteNotice = "UIWorkingArea.msg.feedback-delete-multi";
+      else deleteNotice = "UIWorkingArea.msg.feedback-delete-permanently-multi";
+      deleteNoticeParam = String.valueOf(nodePath.split(";").length);
     } else {
-      UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
-      
+      UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);      
       // Prepare to remove
       try {
         Node node = this.getNodeByPath(nodePath);
+        if(checkToMoveToTrash) deleteNotice = "UIWorkingArea.msg.feedback-delete";
+        else deleteNotice = "UIWorkingArea.msg.feedback-delete-permanently";
+        deleteNoticeParam = node.getName();
         if (node != null) {
           processRemoveOrMoveToTrash(node.getPath(), node, event, false, checkToMoveToTrash);
-        }
+        }        
       } catch (PathNotFoundException path) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", null,
               ApplicationMessage.WARNING));
@@ -451,8 +483,65 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         return;
       }
     }
+    deleteNotice = res.getString(deleteNotice);
+    deleteNotice = deleteNotice.replaceAll("\\{" + 0 + "\\}", deleteNoticeParam);
+    if(checkToMoveToTrash) {
+      String undoLink = getUndoLink(nodePath);      
+      uiWorkingArea.setDeleteNotice(deleteNotice);
+      uiWorkingArea.setNodePathDelete(undoLink);
+    } else {
+    	uiWorkingArea.setWCMNotice(deleteNotice);
+    }
     uiExplorer.updateAjax(event);
     uiExplorer.getSession().save();
+  }
+  /**
+   * Get undo link to restore nodes that deleted
+   *
+   * @param nodePath node path of nodes want to restore
+   * @throws Exception
+   */
+  private String getUndoLink(String nodePath) throws Exception {
+  	String undoLink = "";  	
+  	UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
+  	PortletPreferences portletPrefs = uiExplorer.getPortletPreferences();
+  	
+  	String trashWorkspace = portletPrefs.getValue(Utils.TRASH_WORKSPACE, "");
+  	Session session = uiExplorer.getSessionByWorkspace(trashWorkspace);
+  	QueryManager queryManager = session.getWorkspace().getQueryManager();
+  	QueryResult queryResult = null;
+  	NodeIterator iter = null;
+  	if (nodePath.indexOf(";") > -1) {
+  		String[] nodePaths = nodePath.split(";");
+  		for(int i=0; i<nodePaths.length; i++) {  
+  			nodePath = nodePaths[i].substring(nodePaths[i].indexOf(":") + 1, nodePaths[i].length());
+  			String queryStatement = "SELECT * from exo:restoreLocation WHERE exo:restorePath = '$0'";
+  			queryStatement = StringUtils.replace(queryStatement, "$0", nodePath);
+  			Query query = queryManager.createQuery(queryStatement, Query.SQL);
+  			queryResult = query.execute();
+  			iter = queryResult.getNodes();
+    		while (iter.hasNext()) {
+    			undoLink += trashWorkspace + ":" + iter.nextNode().getPath() + ";";
+        }    		
+  		}
+  		if(undoLink.length() > 0) undoLink = undoLink.substring(0,undoLink.length()-1);  			
+  	} else {
+  		nodePath = nodePath.substring(nodePath.indexOf(":") + 1, nodePath.length());
+  		String queryStatement = "SELECT * from exo:restoreLocation WHERE exo:restorePath = '$0'";
+  		queryStatement = StringUtils.replace(queryStatement, "$0", nodePath);
+  		Query query = queryManager.createQuery(queryStatement, Query.SQL);
+  		queryResult = query.execute();
+  		iter = queryResult.getNodes();
+  		while (iter.hasNext()) {
+  			Node tmpNode = iter.nextNode();
+  			undoLink += tmpNode.getPath() + ";";
+      }
+  		if(undoLink.length() > 0) {
+  			undoLink = undoLink.substring(0,undoLink.length()-1);
+  			undoLink =  trashWorkspace + ":" +undoLink;
+  		}
+  	}  	
+  	return undoLink;
   }
   
   private boolean isInTrashFolder(String nodePath) throws Exception {
@@ -460,11 +549,11 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     String wsName = null;
     Session session = null;
     String[] nodePaths = nodePath.split(";");
-    for(int i=0; i<nodePaths.length; i++) {    	
-      Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(nodePaths[i]);	
+    for(int i=0; i<nodePaths.length; i++) {
+      Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(nodePaths[i]);
       if (matcher.find()) {
         wsName = matcher.group(1);
-        nodePath = matcher.group(2);	
+        nodePath = matcher.group(2);
         session = uiExplorer.getSessionByWorkspace(wsName);
         Node node = uiExplorer.getNodeByPath(nodePath, session, false);
         return Utils.isInTrash(node);
@@ -472,12 +561,59 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     }
     return false;
   }
+  /**
+   * Get the content type of one node
+   *
+   * @param nodePath node path of one node
+   * @throws Exception
+   */
+  private int getContentType(String nodePath) throws Exception {
+  	int content_type = 1;  	
+    Node node = getNodeByPath(nodePath);
+    String primaryType = node.getPrimaryNodeType().getName();
+    if(primaryType.equals(NodetypeConstant.NT_FILE)) content_type = 2;
+    else if (primaryType.equals(NodetypeConstant.NT_FOLDER) || primaryType.equals(NodetypeConstant.NT_UNSTRUCTURED)) 
+    	content_type = 3;
+    else content_type = 1;   
+  	return content_type;
+  }
+  /**
+   * Get the content type of multiple nodes
+   *
+   * @param nodePath node path of multiple nodes
+   * @throws Exception
+   */
+  private int getMultiContentType(String nodePath) throws Exception {
+  	StringBuffer sBuffer = new StringBuffer();
+  	String[] nodePaths = nodePath.split(";");
+  	boolean isGeneric = false;
+  	boolean isFile = false;
+    boolean isFolder = false;
+  	
+  	for(int i=0; i<nodePaths.length; i++) { 
+  		Node node = getNodeByPath(nodePaths[i]);
+  		String primaryType = node.getPrimaryNodeType().getName();
+  		if(primaryType.equals(NodetypeConstant.NT_FILE)) isFile = true;
+      else if (primaryType.equals(NodetypeConstant.NT_FOLDER) || primaryType.equals(NodetypeConstant.NT_UNSTRUCTURED))
+      	isFolder = true;
+      else isGeneric = true;
+  	}
+  	if(isGeneric) sBuffer.append("1");
+  	else sBuffer.append("0");
+  	
+  	if(isFile) sBuffer.append("1");
+  	else sBuffer.append("0");
+  	
+  	if(isFolder) sBuffer.append("1");
+  	else sBuffer.append("0");
+  	
+  	return Integer.parseInt(sBuffer.toString(),2);
+  }
 
   public static void deleteManage(Event<? extends UIComponent> event) throws Exception {
     UIWorkingArea uiWorkingArea = event.getSource().getParent();
     UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
     String nodePath = event.getRequestContext().getRequestParameter(OBJECTID);
-    UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
     UIConfirmMessage uiConfirmMessage = uiWorkingArea.createUIComponent(UIConfirmMessage.class, null, null);
     UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
     DeleteManageComponent deleteManageComponent = uiWorkingArea.getChild(DeleteManageComponent.class);
@@ -488,15 +624,33 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       listNodesHaveRelations = checkRelations(nodePath, uiExplorer);
     } catch (PathNotFoundException pathEx) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", null, ApplicationMessage.WARNING));
-        
+
         return;
     }
-    
+
     boolean isInTrashFolder = deleteManageComponent.isInTrashFolder(nodePath);
+    uiConfirmMessage.setNodeInTrash(isInTrashFolder);
+    String nodeName = nodePath; 
+    int contentType = 1;
+    int multiContentType = 1;
+    String message_key = "";
+    // Check and set the title for Delete Confirmation Dialog
+    if(nodePath.indexOf(";") > 0) {
+    	uiConfirmMessage.setId(DELETE_ITEMS_CONFIRM_TITLE);
+    	multiContentType = deleteManageComponent.getMultiContentType(nodePath);
+    } else {    	
+    	Node node = deleteManageComponent.getNodeByPath(nodePath);
+      if(node != null)
+      	nodeName = node.getName();
+      contentType = deleteManageComponent.getContentType(nodePath);
+    	if(contentType == FILE_TYPE)
+    		uiConfirmMessage.setId(DELETE_FILE_CONFIRM_TITLE);
+    	else if (contentType == FOLDER_TYPE)
+    		uiConfirmMessage.setId(DELETE_FOLDER_CONFIRM_TITLE);
+    }    	
 
     //show confirm message
-    if (listNodesHaveRelations != null && listNodesHaveRelations.size() > 0) { // there are some nodes which have relations referring to them
-      
+    if (listNodesHaveRelations != null && listNodesHaveRelations.size() > 0) { // there are some nodes which have relations referring to them      
       // in the deleting node list
       // build node list to string to add into the confirm message
       StringBuffer sb = new StringBuffer();
@@ -504,57 +658,99 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         sb.append("'").append(listNodesHaveRelations.get(i)).append("', ");
       }
       //remove "," character at the end of string
-      String strNodesHaveRelations = sb.substring(0, sb.length() - 2);
 
-      //show message
-      if (isInTrashFolder) {
-        if (nodePath.indexOf(";") < 0) { // in case: delete one node that has relations
-          uiConfirmMessage.setMessageKey("UIWorkingArea.msg.confirm-delete-permanently-has-relations");
-          uiConfirmMessage.setArguments(new String[] { nodePath });
-
-        } else if (listNodesHaveRelations.size() > 1) { // in case: delete multiple node, there are many nodes have relations
-          uiConfirmMessage.setMessageKey("UIWorkingArea.msg.confirm-delete-permanently-multi-many-nodes-have-relations");
-          uiConfirmMessage.setArguments(new String[] { Integer.toString(nodePath.split(";").length), strNodesHaveRelations });
-
-        } else { // in case: delete multiple node, there is only one node has relations
-          uiConfirmMessage.setMessageKey("UIWorkingArea.msg.confirm-delete-permanently-multi-one-node-has-relations");
-          uiConfirmMessage.setArguments(new String[] { Integer.toString(nodePath.split(";").length), strNodesHaveRelations });
-        }
-      } else {
-        if (nodePath.indexOf(";") < 0) { // in case: delete one node that has relations
-          uiConfirmMessage.setMessageKey("UIWorkingArea.msg.confirm-delete-has-relations");
-          uiConfirmMessage.setArguments(new String[] { nodePath });
-        } else if (listNodesHaveRelations.size() > 1) { // in case: delete multiple node, there are many nodes have relations
-          uiConfirmMessage.setMessageKey("UIWorkingArea.msg.confirm-delete-multi-many-nodes-have-relations");
-          uiConfirmMessage.setArguments(new String[] { Integer.toString(nodePath.split(";").length), strNodesHaveRelations });
-        } else { // in case: delete multiple node, there is only one node has relations
-          uiConfirmMessage.setMessageKey("UIWorkingArea.msg.confirm-delete-multi-one-node-has-relations");
-          uiConfirmMessage.setArguments(new String[] { Integer.toString(nodePath.split(";").length), strNodesHaveRelations });
-        }
+      // Node has relations means it is not in Trash folder and is not Folder
+      if (nodePath.indexOf(";") < 0) { // in case: delete one node that has relations
+      	if(contentType == GENERIC_TYPE)
+      		message_key = "UIWorkingArea.msg.confirm-delete-has-relations";
+      	else if(contentType == FILE_TYPE)
+      		message_key = "UIWorkingArea.msg.confirm-delete-file-has-relations";      	
+        uiConfirmMessage.setMessageKey(message_key);
+        uiConfirmMessage.setArguments(new String[] { nodeName });      
+      } else { // in case: delete multiple node have relations
+      	
+      	switch(multiContentType) {
+      	  case FOLDERS: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-folder-have-relations"; break;
+      	  case FILES: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-file-have-relations"; break;
+      	  case FILES_AND_FOLDERS: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-file-and-folder-have-relations"; 
+      	    break;
+      	  case GENERIC: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-have-relations"; break;
+      	  case GENERICS_AND_FOLDERS: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-and" +
+      	    "-folder-have-relations"; break;
+      	  case GENERICS_AND_FILES: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-" +
+      	  	"and-file-have-relations"; break;
+      	  case GENERICS_AND_FILES_AND_FOLDERS: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-" +
+      	  	"and-file-and-folder-have-relations"; break;
+    	  	default: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-have-relations"; break;
+      	}      		
+      	
+        uiConfirmMessage.setMessageKey(message_key);
+        uiConfirmMessage.setArguments(new String[] { Integer.toString(nodePath.split(";").length) });
       }
+      
     } else {  //there isn't any node which has relations referring to it in the deleting node list
       if (isInTrashFolder) {
         if (nodePath.indexOf(";") > -1) { // delete multi
-          uiConfirmMessage.setMessageKey("UIWorkingArea.msg.confirm-delete-permanently-multi");
+        	
+        	switch(multiContentType) {
+	      	  case FOLDERS: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-folder-permanently"; break;
+	      	  case FILES: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-file-permanently"; break;
+	      	  case FILES_AND_FOLDERS: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-file-and-folder-permanently"; break;
+	      	  case GENERIC: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-permanently"; break;
+	      	  case GENERICS_AND_FOLDERS: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-and-folder-permanently"; break;
+	      	  case GENERICS_AND_FILES: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-and-file-permanently"; break;
+	      	  case GENERICS_AND_FILES_AND_FOLDERS: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-and-file-and-folder-permanently"; break;
+	    	  	default: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-permanently"; break;
+	      	}   
+        	
+          uiConfirmMessage.setMessageKey(message_key);
           uiConfirmMessage.setArguments(new String[] { Integer.toString(nodePath.split(";").length) });
         } else { // delete one
-          uiConfirmMessage.setMessageKey("UIWorkingArea.msg.confirm-delete-permanently");
-          uiConfirmMessage.setArguments(new String[] { nodePath });
+        	if(contentType == GENERIC_TYPE)
+        		message_key = "UIWorkingArea.msg.confirm-delete-permanently";
+        	else if(contentType == FILE_TYPE)
+        		message_key = "UIWorkingArea.msg.confirm-delete-file-permanently";
+        	else if(contentType == FOLDER_TYPE)
+        		message_key = "UIWorkingArea.msg.confirm-delete-folder-permanently";
+          uiConfirmMessage.setMessageKey(message_key);
+          uiConfirmMessage.setArguments(new String[] { nodeName });
         }
       } else {
         if (nodePath.indexOf(";") > -1) { // delete multi
-          uiConfirmMessage.setMessageKey("UIWorkingArea.msg.confirm-delete-multi");
+        	
+        	switch(multiContentType) {
+	      	  case FOLDERS: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-folder"; break;
+	      	  case FILES: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-file"; break;
+	      	  case FILES_AND_FOLDERS: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-file-and-folder"; break;
+	      	  case GENERIC: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic"; break;
+	      	  case GENERICS_AND_FOLDERS: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-and-folder"; break;
+	      	  case GENERICS_AND_FILES: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-and-file"; break;
+	      	  case GENERICS_AND_FILES_AND_FOLDERS: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-and-file-" +
+	      	    "and-folder"; break;
+	    	  	default: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic"; break;
+	      	}        	
+          uiConfirmMessage.setMessageKey(message_key);
           uiConfirmMessage.setArguments(new String[] { Integer.toString(nodePath.split(";").length) });
         } else { // delete one
-          uiConfirmMessage.setMessageKey("UIWorkingArea.msg.confirm-delete");
-          uiConfirmMessage.setArguments(new String[] { nodePath });
+        	if(contentType == GENERIC_TYPE)
+        		message_key = "UIWorkingArea.msg.confirm-delete";
+        	else if(contentType == FILE_TYPE)
+        		message_key = "UIWorkingArea.msg.confirm-delete-file";
+        	else if(contentType == FOLDER_TYPE)
+        		message_key = "UIWorkingArea.msg.confirm-delete-folder";
+          uiConfirmMessage.setMessageKey(message_key);
+          uiConfirmMessage.setArguments(new String[] { nodeName });
         }
       }
     }
 
-    uiConfirmMessage.setNodePath(nodePath);
-    UIPopupContainer.activate(uiConfirmMessage, 500, 180);
-    event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
+    uiConfirmMessage.setNodePath(nodePath);    
+    UIPopupWindow popUp = uiExplorer.getChild(UIPopupWindow.class);
+    popUp.setUIComponent(uiConfirmMessage);
+    popUp.setShowMask(true);
+    popUp.setShow(true);
+    event.getRequestContext().addUIComponentToUpdateByAjax(popUp);
+
   }
 
   /**
@@ -594,7 +790,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
 
   /**
    * Get node by node path.
-   * 
+   *
    * @param nodePath node path of specific node with syntax [workspace:node path]
    * @return Node of specific node nath
    * @throws Exception
@@ -608,7 +804,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     Session session = uiExplorer.getSessionByWorkspace(wsName);
     return uiExplorer.getNodeByPath(nodePath, session, false);
   }
-  
+
   private String getGroups() throws Exception {
     StringBuilder ret = new StringBuilder();
     for (String group : Utils.getGroups())
@@ -624,11 +820,10 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
 
   public static class DeleteActionListener extends UIWorkingAreaActionListener<DeleteManageComponent> {
     public void processEvent(Event<DeleteManageComponent> event) throws Exception {
-//      UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       deleteManage(event);
     }
   }
-  
+
   private void removeMixinEXO_RESTORE_LOCATION(Node node) throws Exception {
     if (node.isNodeType(Utils.EXO_RESTORELOCATION)) {
       node.removeMixin(Utils.EXO_RESTORELOCATION);

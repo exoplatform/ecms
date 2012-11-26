@@ -33,6 +33,38 @@
   background: url('DefaultSkin/background/LineDecorator2x1.gif') repeat-y center center;
 }
 
+.UIJCRExplorerPortlet .UIJCRExplorer .wcm-notice {
+  display: block; 
+  border-radius: 4px 4px 4px 4px; 
+  background: none repeat scroll 0% 0% rgb(249, 237, 190); 
+  border: 1px solid rgb(240, 195, 109); 
+  line-height: 15px; 
+  text-align: center; 
+  padding: 7px; 
+  box-shadow: 2px 2px 2px rgb(183, 183, 183); 
+  position: absolute; 
+  top: 128px;
+  left: 50%;
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .wcm-notice a {
+  color: #0070FF;
+  font-weight: bold;
+}
+
+.UIConfirmMessage .HorizontalLayout {
+  border: none;
+}
+.UIDeleteFileConfirmMessage .HorizontalLayout {
+  border: none;
+}
+.UIDeleteFolderConfirmMessage .HorizontalLayout {
+  border: none;
+}
+.UIDeleteItemsConfirmMessage .HorizontalLayout {
+  border: none;
+}
+
 .UIJCRExplorerPortlet .UIJCRExplorer .UIWorkingArea {
 	width: 100%;
 }
@@ -1048,15 +1080,6 @@
   background: #f3f3f3;
 }
 
-/*=================================UICategoryManager==============================*/
-.UIJCRExplorer .UIRenameForm {
-	padding: 10px;
-}
-
-.UIJCRExplorer .UIRenameForm .FormContainer {
-	width: 500px;
-	margin: auto;
-}
 /*====================================UIActivateVersion==================================*/
 
 .UIJCRExplorer .UIActivateVersion {
@@ -1136,12 +1159,9 @@
   float: right; /* orientation=rt */
 }
 
-.UIJCRExplorer .UIConfirmMessage .Text {
-	float: left; /* orientation=lt */
-	float: right; /* orientation=rt */
+.UIJCRExplorer .UIConfirmMessage .Text {	
 	padding-left: 10px; /* orientation=lt */
 	padding-right: 10px; /* orientation=rt */
-	width: 90%;
   overflow: hidden;
 }
 

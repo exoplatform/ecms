@@ -460,25 +460,29 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
       // We will improve ManageDrive service to allow getAllDriveByUser
       for (DriveData drive : getAllDrives()) {
         String[] allPermission = drive.getAllPermissions();
+        boolean flag = false;
         for (String permission : allPermission) {
           if (permission.equalsIgnoreCase("${userId}")) {
-            driveList.add(drive);
+          	if(!driveList.contains(drive)) driveList.add(drive);
+          	flag = true;
             break;
           }
           if (permission.equalsIgnoreCase("*")) {
-            driveList.add(drive);
+          	if(!driveList.contains(drive)) driveList.add(drive);
+          	flag = true;
             break;
           }
+          if (flag) continue;
           for (String rolse : userRoles) {
             if (drive.hasPermission(allPermission, rolse)) {
-              driveList.add(drive);
+            	if(!driveList.contains(drive)) driveList.add(drive);
               break;
             }
           }
         }
       }
       for (DriveData drive : getGroupDrives(userId, userRoles)) {
-        driveList.add(drive);
+      	if(!driveList.contains(drive)) driveList.add(drive); 
       }
     } else {
       for (DriveData drive : getAllDrives()) {

@@ -22,8 +22,6 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.Session;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.component.BaseComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
@@ -35,6 +33,7 @@ import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 public class TagStylePlugin extends BaseComponentPlugin{
 
@@ -118,9 +117,7 @@ public class TagStylePlugin extends BaseComponentPlugin{
   */
  private Session getSession() throws Exception{
    ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
-   ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-   DMSConfiguration dmsConfiguration = (DMSConfiguration)
-   myContainer.getComponentInstanceOfType(DMSConfiguration.class);
+   DMSConfiguration dmsConfiguration = WCMCoreUtils.getService(DMSConfiguration.class);
    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig();
    return manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace());
  }

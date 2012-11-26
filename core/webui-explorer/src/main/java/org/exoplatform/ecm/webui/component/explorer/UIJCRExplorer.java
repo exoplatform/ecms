@@ -26,6 +26,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.jcr.Item;
 import javax.jcr.ItemNotFoundException;
@@ -165,7 +166,7 @@ public class UIJCRExplorer extends UIContainer {
   public boolean isAddingDocument() {
     UIPopupContainer uiPopupContainer = this.getChild(UIPopupContainer.class);
     UIPopupWindow uiPopup = uiPopupContainer.getChild(UIPopupWindow.class);
-
+    
     UIWorkingArea uiWorkingArea = this.getChild(UIWorkingArea.class);
     UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
     //check if edit with popup
@@ -218,6 +219,8 @@ public class UIJCRExplorer extends UIContainer {
     addChild(UIControl.class, null, null);
     addChild(UIWorkingArea.class, null, null);
     addChild(UIPopupContainer.class, null, null);
+    UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, null);
+    uiPopup.setId(uiPopup.getId() + "-" + UUID.randomUUID().toString().replaceAll("-", ""));
     PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance() ;
     pref_ = pcontext.getRequest().getPreferences();
     getChild(UIWorkingArea.class).initialize();
@@ -740,6 +743,11 @@ public class UIJCRExplorer extends UIContainer {
       if(popupAction.isRendered()) {
         popupAction.deActivate();
         event.getRequestContext().addUIComponentToUpdateByAjax(popupAction) ;
+      }
+      UIPopupWindow popupWindow = getChild(UIPopupWindow.class) ;
+      if(popupWindow != null && popupWindow.isShow()) {
+      	popupWindow.setShow(false);
+      	event.getRequestContext().addUIComponentToUpdateByAjax(popupWindow);
       }
     }
     isHidePopup_ = false ;

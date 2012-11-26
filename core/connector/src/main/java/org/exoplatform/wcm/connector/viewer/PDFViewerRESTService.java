@@ -41,8 +41,6 @@ import javax.ws.rs.core.Response;
 
 import org.apache.commons.lang.StringUtils;
 import org.artofsolving.jodconverter.office.OfficeException;
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.jodconverter.JodConverterService;
@@ -54,6 +52,7 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.icepdf.core.exceptions.PDFException;
 import org.icepdf.core.exceptions.PDFSecurityException;
 import org.icepdf.core.pobjects.Document;
@@ -63,7 +62,7 @@ import org.icepdf.core.util.GraphicsRenderingHints;
 
 /**
  * Return a PDF content to be displayed on the webpage.
- * 
+ *
  * {{{{repoName}}}}: The name of repository.
  * {{{{workspaceName}}}}: The name of workspace.
  * {{{{nodePath}}}}: The node path.
@@ -71,11 +70,11 @@ import org.icepdf.core.util.GraphicsRenderingHints;
  * {{{{rotation}}}}: The Page rotation. The valid values are: 0.0f, 90.0f, 180.0f, 270.0f.
  * {{{{scale}}}}: The Zoom factor which is applied to the rendered page.
  *
- *     
+ *
  * @author Dang Van Minh <minh.dang@exoplatform.com>
  * @since Sep 3, 2009 7:33:30 AM
  * @copyright  eXo Platform SEA
- * 
+ *
  * @anchor CONTref.Devref.PublicRestAPIs.PDFViewerRESTService
  */
 @Path("/pdfviewer/{repoName}/{workspaceName}/{pageNumber}/{rotation}/{scale}/{uuid}/")
@@ -97,7 +96,7 @@ public class PDFViewerRESTService implements ResourceContainer {
 
   /**
    * Return a thumbnail image for a PDF document.
-   * 
+   *
    * @param repoName The name of repository.
    * @param wsName The name of workspace.
    * @param uuid The identifier of the document.
@@ -106,7 +105,7 @@ public class PDFViewerRESTService implements ResourceContainer {
    * @param scale The Zoom factor which is applied to the rendered page.
    * @return Response inputstream.
    * @throws Exception
-   * 
+   *
    * @anchor CONTref.Devref.PublicRestAPIs.PDFViewerRESTService.getCoverImage
    */
   @GET
@@ -154,9 +153,7 @@ public class PDFViewerRESTService implements ResourceContainer {
   }
 
   private SessionProvider getSystemProvider() {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    SessionProviderService service =
-      (SessionProviderService) container.getComponentInstanceOfType(SessionProviderService.class);
+    SessionProviderService service = WCMCoreUtils.getService(SessionProviderService.class);
     return service.getSystemSessionProvider(null) ;
   }
 
@@ -344,14 +341,14 @@ public class PDFViewerRESTService implements ResourceContainer {
     }
     return content;
   }
-  
+
   private String getJcrLastModified(Node node) throws Exception {
     Node checkedNode = node;
     if (node.isNodeType("nt:frozenNode")) {
       checkedNode = node.getSession().getNodeByUUID(node.getProperty("jcr:frozenUuid").getString());
     }
     return checkedNode.getProperty("jcr:content/jcr:lastModified").getString();
-  }  
+  }
 
   private void read(InputStream is, OutputStream os) throws Exception {
     int bufferLength = 1024;
@@ -374,6 +371,7 @@ public class PDFViewerRESTService implements ResourceContainer {
    * @throws IOException
    */
   private class ObjectKey implements Serializable {
+    private static final long serialVersionUID = 1L;
     String key;
     private ObjectKey(String key) {
       this.key = key;

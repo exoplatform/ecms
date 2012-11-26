@@ -20,8 +20,6 @@ import javax.jcr.Node;
 import javax.jcr.Property;
 
 import org.apache.commons.chain.Context;
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.link.LinkManager;
@@ -48,8 +46,7 @@ public class CreateLinkAction implements Action{
     if (!linkNode.isNodeType(EXO_SORTABLE) && !linkNode.canAddMixin(EXO_SORTABLE))
       return false;
 
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    PortalContainerInfo containerInfo = (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class);
+    PortalContainerInfo containerInfo = WCMCoreUtils.getService(PortalContainerInfo.class);
     String containerName = containerInfo.getContainerName();
     LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class, containerName);
     Node targetNode = linkManager.getTarget(linkNode);

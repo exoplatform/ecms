@@ -410,6 +410,27 @@
 
 /*############################## -- End UISearch   -- ##############################*/
 
+/*############################## -- RenameForm       -- ##############################*/
+
+.UIJCRExplorer .UIRenameForm input{
+	margin: 3px;
+	height: 20px;
+	width: 160px;
+}
+
+.UIJCRExplorer .UIRenameForm td {
+	vertical-align: middle;
+}
+
+.UIJCRExplorer .UIRenameForm .UIAction {
+	padding-right: 3px;
+}
+
+.UIJCRExplorerPortlet .UIRenameForm .UIWindowContent {
+	margin: 0px; 
+}
+/*############################## -- End RenameForm   -- ##############################*/
+
 /*############################## -- Others   -- ##############################*/
 
 .UIJCRExplorerPortlet .UIPopupAction .MultiRadioInput {

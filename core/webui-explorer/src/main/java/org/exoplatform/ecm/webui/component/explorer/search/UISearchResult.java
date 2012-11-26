@@ -38,7 +38,6 @@ import javax.jcr.query.QueryResult;
 import javax.jcr.query.Row;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
@@ -169,8 +168,7 @@ public class UISearchResult extends UIContainer {
   public UIPageIterator getUIPageIterator() { return uiPageIterator_; }
 
   public void updateGrid() throws Exception {
-    TemplateService templateService = (TemplateService) ExoContainerContext.getCurrentContainer()
-    .getComponentInstanceOfType(TemplateService.class);
+    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
     List<String> documentList = templateService.getDocumentTemplates();
      pageList =
       PageListFactory.createPageList(queryData_.getQueryStatement(),

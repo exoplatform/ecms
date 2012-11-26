@@ -21,14 +21,13 @@ import java.util.List;
 
 import javax.jcr.Node;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.seo.PageMetadataModel;
 import org.exoplatform.services.seo.SEOService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.validator.FloatNumberValidator;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -148,8 +147,7 @@ public class UISEOForm extends UIForm{
       sitemap = pageModel.getSitemap();
     }
 
-    ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-    SEOService seoService = (SEOService)container.getComponentInstanceOfType(SEOService.class);
+    SEOService seoService = WCMCoreUtils.getService(SEOService.class);
 
     UIFormTextAreaInput uiDescription = new UIFormTextAreaInput(DESCRIPTION, DESCRIPTION, null);
     uiDescription.setValue(description);
@@ -248,16 +246,16 @@ public class UISEOForm extends UIForm{
         boolean isVisibleSitemap = uiForm.getUIFormCheckBoxInput(SITEMAP).isChecked();
         float priority = -1;
         if(uiForm.getUIStringInput(PRIORITY).getValue() != null && uiForm.getUIStringInput(PRIORITY).getValue().length() > 0) {
-        	WebuiRequestContext rc = WebuiRequestContext.getCurrentInstance();
-        	if(!uiForm.getUIStringInput(PRIORITY).getValue().equalsIgnoreCase(rc.getApplicationResourceBundle().
-        			getString("UISEOForm.tip.priority"))) {  		
+          WebuiRequestContext rc = WebuiRequestContext.getCurrentInstance();
+          if(!uiForm.getUIStringInput(PRIORITY).getValue().equalsIgnoreCase(rc.getApplicationResourceBundle().
+              getString("UISEOForm.tip.priority"))) {
             priority = Float.parseFloat(uiForm.getUIStringInput(PRIORITY).getValue()) ;
             if(priority < 0.0 || priority > 1.0) {
               uiApp.addMessage(new ApplicationMessage("FloatNumberValidator.msg.Invalid-number", null,
               ApplicationMessage.WARNING));
               return;
             }
-        	}
+          }
         }
         String frequency = uiForm.getUIFormSelectBox(FREQUENCY).getValue() ;
         try {

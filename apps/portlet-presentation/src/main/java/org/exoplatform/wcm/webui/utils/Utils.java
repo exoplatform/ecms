@@ -20,19 +20,19 @@ import java.util.List;
 
 import javax.jcr.Node;
 
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.wcm.extensions.publication.PublicationManager;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.Lifecycle;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS
  * Author : Dang Viet Ha
  *          hadv@exoplatform.com
- * 22-06-2011  
+ * 22-06-2011
  */
 public class Utils {
-  
+
   /**
    * This method check whether to show the publish button for the current node or not
    * @param currentNode the input current node
@@ -56,9 +56,8 @@ public class Utils {
 
         String nodeLifecycle = currentNode.getProperty("publication:lifecycle").getString();
 
-        PublicationManager publicationManager = (PublicationManager)ExoContainerContext.
-            getCurrentContainer().getComponentInstanceOfType(PublicationManager.class);
-        List<Lifecycle> lifecycles = 
+        PublicationManager publicationManager = WCMCoreUtils.getService(PublicationManager.class);
+        List<Lifecycle> lifecycles =
           publicationManager.getLifecyclesFromUser(userId, "published");
 
         for (Lifecycle lifecycle : lifecycles) {

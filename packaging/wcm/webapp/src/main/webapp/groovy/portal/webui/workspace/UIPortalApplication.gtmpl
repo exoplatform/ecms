@@ -8,8 +8,6 @@
   import org.exoplatform.portal.config.model.PortalProperties ;
   import org.exoplatform.services.seo.SEOService;
   import org.exoplatform.services.seo.PageMetadataModel;
-  import org.exoplatform.container.ExoContainer;
-  import org.exoplatform.container.ExoContainerContext;
   import java.util.Enumeration;
   import java.util.Map;
   import java.util.ArrayList;  
@@ -18,7 +16,8 @@
   import org.exoplatform.portal.webui.util.Util;
   import org.exoplatform.portal.webui.workspace.UIPortalApplication;
   import org.exoplatform.portal.webui.workspace.UIWorkingWorkspace;
-  import org.json.JSONArray;  
+  import org.json.JSONArray;
+  import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 		
   def rcontext = _ctx.getRequestContext() ;
   String docBase =  rcontext.getRequestContextPath() ;  
@@ -45,7 +44,6 @@
   
   UserNode currentNode = Util.getUIPortal().getSelectedUserNode();
   String pageReference = currentNode.getPageRef();
-  ExoContainer container = ExoContainerContext.getCurrentContainer() ;
   
   def contentParam = "";
   def contentPath = "";
@@ -67,7 +65,7 @@
   def robots = "";
   PageMetadataModel metaModel = null;
   try {
-	  SEOService seoService = (SEOService)container.getComponentInstanceOfType(SEOService.class);
+	  SEOService seoService = WCMCoreUtils.getService(SEOService.class);
 	  if(seoService != null) {	  
 		  metaModel = seoService.getMetadata(paramArray, pageReference);
 		  if(metaModel != null) {

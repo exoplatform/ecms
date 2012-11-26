@@ -47,7 +47,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.dom.DOMSource;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -76,7 +75,7 @@ import org.w3c.dom.Element;
  * @author Lai Trung Hieu <hieu.lai@exoplatform.com>
  * @since      6 Apr 2011
  * @copyright  eXo Platform SEA
- * 
+ *
  * @anchor CONTref.Devref.PublicRestAPIs.ManageDocumentService
  */
 @Path("/managedocument/")
@@ -146,15 +145,15 @@ public class ManageDocumentService implements ResourceContainer {
   }
 
   /**
-   * Get all drives by type (General, Group or Personal). 
-   * 
+   * Get all drives by type (General, Group or Personal).
+   *
    * @param driveType The types of drive (General, Group, or Personal).
    * @param showPrivate Show the Private drive or not. The default value is false.
    * @param showPersonal Show the Personal drive or not. The default value is false.
    * @return {@link Document} Contain the drives.
-   * 
+   *
    * @throws Exception The exception
-   * 
+   *
    * @anchor CONTref.Devref.PublicRestAPIs.ManageDocumentService.getDrives
    */
   @GET
@@ -214,7 +213,7 @@ public class ManageDocumentService implements ResourceContainer {
    * @return {@link Document} Contain the folders and files.
    *
    * @throws Exception The exception
-   * 
+   *
    * @anchor CONTref.Devref.PublicRestAPIs.ManageDocumentService.getFoldersAndFiles
    */
   @GET
@@ -254,7 +253,7 @@ public class ManageDocumentService implements ResourceContainer {
 
   /**
    * Delete a folder/file.
-   * 
+   *
    * @param driveName The name of drive.
    * @param workspaceName The name of workspace.
    * @param itemPath The path to the folder/file.
@@ -262,7 +261,7 @@ public class ManageDocumentService implements ResourceContainer {
    * @return {@link Response} Return the status of an item which has been deleted.
    *
    * @throws Exception The exception
-   * 
+   *
    * @anchor CONTref.Devref.PublicRestAPIs.ManageDocumentService.deleteFolderOrFile
    */
   @GET
@@ -304,7 +303,7 @@ public class ManageDocumentService implements ResourceContainer {
 
   /**
    * Create a new folder and return its information.
-   *  
+   *
    * @param driveName The name of drive.
    * @param workspaceName The name of workspace.
    * @param currentFolder The path to the folder where a child folder is added.
@@ -313,7 +312,7 @@ public class ManageDocumentService implements ResourceContainer {
    * @return {@link Document} Contain the created folder.
    *
    * @throws Exception The exception
-   * 
+   *
    * @anchor CONTref.Devref.PublicRestAPIs.ManageDocumentService.createFolder
    */
   @GET
@@ -370,7 +369,7 @@ public class ManageDocumentService implements ResourceContainer {
    * @return The response.
    *
    * @throws Exception The exception
-   * 
+   *
    * @anchor CONTref.Devref.PublicRestAPIs.ManageDocumentService.uploadFile
    */
   @POST
@@ -398,7 +397,7 @@ public class ManageDocumentService implements ResourceContainer {
    * @return The response.
    *
    * @throws Exception The exception
-   * 
+   *
    * @anchor CONTref.Devref.PublicRestAPIs.ManageDocumentService.processUpload
    */
   @GET
@@ -681,8 +680,7 @@ public class ManageDocumentService implements ResourceContainer {
       return "";
     String nodeType = node.getPrimaryNodeType().getName();
     if (node.isNodeType(EXO_SYMLINK)) {
-      LinkManager linkManager = (LinkManager) ExoContainerContext.getCurrentContainer()
-                                                                 .getComponentInstanceOfType(LinkManager.class);
+      LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
       try {
         nodeType = node.getProperty(EXO_PRIMARYTYPE).getString();
         node = linkManager.getTarget(node);

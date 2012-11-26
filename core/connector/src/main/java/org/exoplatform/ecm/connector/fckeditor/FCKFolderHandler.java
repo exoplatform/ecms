@@ -28,6 +28,7 @@ import javax.ws.rs.core.Response;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -42,7 +43,7 @@ public class FCKFolderHandler {
   private FCKMessage      fckMessage;
 
   public FCKFolderHandler(ExoContainer container) {
-    templateService = (TemplateService) container.getComponentInstanceOfType(TemplateService.class);
+    templateService = WCMCoreUtils.getService(TemplateService.class);
     fckMessage = new FCKMessage();
   }
 

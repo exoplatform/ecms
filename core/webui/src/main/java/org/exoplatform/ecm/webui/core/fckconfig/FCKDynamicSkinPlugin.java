@@ -18,10 +18,9 @@ package org.exoplatform.ecm.webui.core.fckconfig;
 
 import java.util.Collection;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.resource.SkinConfig;
 import org.exoplatform.portal.resource.SkinService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.form.wysiwyg.FCKEditorConfig;
 
 /**
@@ -41,8 +40,7 @@ public class FCKDynamicSkinPlugin extends FCKConfigPlugin {
    */
   public void addParameters(FCKEditorConfig editorConfig, FCKEditorContext editorContext) throws Exception {
     StringBuffer cssMergedBuffer = new StringBuffer();
-    ExoContainer exoContainer = ExoContainerContext.getCurrentContainer();
-    SkinService skinService = (SkinService) exoContainer.getComponentInstanceOfType(SkinService.class);
+    SkinService skinService = WCMCoreUtils.getService(SkinService.class);
     Collection<SkinConfig> collecionSkin = skinService.getPortalSkins(editorContext.getSkinName());
     for (SkinConfig skinConfig : collecionSkin) {
       cssMergedBuffer = cssMergedBuffer.append(skinConfig.getCSSPath()).append(",");

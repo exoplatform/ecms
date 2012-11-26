@@ -1,6 +1,12 @@
 package org.exoplatform.ecms.xcmis.sp;
 
-import org.exoplatform.container.ExoContainerContext;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.jcr.RepositoryException;
+
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.container.xml.ValuesParam;
@@ -12,6 +18,7 @@ import org.exoplatform.services.jcr.core.WorkspaceContainerFacade;
 import org.exoplatform.services.jcr.dataflow.PersistentDataManager;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.impl.Constants;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
 import org.xcmis.search.SearchService;
 import org.xcmis.search.SearchServiceException;
@@ -21,13 +28,6 @@ import org.xcmis.spi.CmisRegistryFactory;
 import org.xcmis.spi.CmisRuntimeException;
 import org.xcmis.spi.RenditionManager;
 import org.xcmis.spi.StorageProvider;
-
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import javax.jcr.RepositoryException;
 
 public class JcrCmisRegistry extends CmisRegistry implements Startable, CmisRegistryFactory
 {
@@ -129,7 +129,7 @@ public class JcrCmisRegistry extends CmisRegistry implements Startable, CmisRegi
       {
          try
          {
-            IndexConfiguration indexConfiguration = 
+            IndexConfiguration indexConfiguration =
               new IndexConfiguration(rootIndexDir, Constants.ROOT_PARENT_UUID, Constants.ROOT_UUID);
             String[] wsNames = getAffectedWorkspaceNames();
             String currentRepositoryName = repositoryService.getCurrentRepository().getConfiguration().getName();
@@ -202,6 +202,6 @@ public class JcrCmisRegistry extends CmisRegistry implements Startable, CmisRegi
 
    public CmisRegistry getRegistry()
    {
-      return (CmisRegistry)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(CmisRegistry.class);
+      return WCMCoreUtils.getService(CmisRegistry.class);
    }
 }

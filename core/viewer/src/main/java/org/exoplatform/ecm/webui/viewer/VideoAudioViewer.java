@@ -24,11 +24,10 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
 
@@ -72,12 +71,10 @@ public class VideoAudioViewer extends UIComponent {
   }
 
   public String getPortalName() {
-    ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-    PortalContainerInfo containerInfo =
-      (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class) ;
+    PortalContainerInfo containerInfo = WCMCoreUtils.getService(PortalContainerInfo.class) ;
     return containerInfo.getContainerName() ;
   }
-  
+
   public Node getFileLangNode(Node currentNode) throws Exception {
     if(currentNode.isNodeType("nt:unstructured")) {
       if(currentNode.getNodes().getSize() > 0) {
@@ -93,7 +90,7 @@ public class VideoAudioViewer extends UIComponent {
     }
     return currentNode ;
   }
-  
+
   public Node getChildNode(Node parent, String childType) throws Exception {
     return Utils.getChildOfType(parent, childType);
   }

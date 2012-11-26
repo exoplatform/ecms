@@ -21,12 +21,12 @@ import java.util.Map;
 
 import javax.jcr.Node;
 
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.extensions.publication.PublicationManager;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.Lifecycle;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
 
@@ -58,8 +58,7 @@ public class CanApproveFilter implements UIExtensionFilter {
 
           String nodeLifecycle = currentNode.getProperty("publication:lifecycle").getString();
 
-        PublicationManager publicationManager = (PublicationManager) ExoContainerContext.
-            getCurrentContainer().getComponentInstanceOfType(PublicationManager.class);
+        PublicationManager publicationManager = WCMCoreUtils.getService(PublicationManager.class);
         List<Lifecycle> lifecycles = publicationManager.getLifecyclesFromUser(userId, "approved");
 
           for (Lifecycle lifecycle:lifecycles) {

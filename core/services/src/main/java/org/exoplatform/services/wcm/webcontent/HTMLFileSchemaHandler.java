@@ -25,6 +25,7 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.core.BaseWebSchemaHandler;
 import org.exoplatform.services.wcm.core.WebSchemaConfigService;
 import org.exoplatform.services.wcm.link.LiveLinkManagerService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS.
@@ -147,7 +148,7 @@ public class HTMLFileSchemaHandler extends BaseWebSchemaHandler {
     addMixin(webContent,"exo:privilegeable");
     addMixin(webContent,"exo:owneable");
     // need check why WebContentSchemaHandler doesn't run for this case
-    WebSchemaConfigService schemaConfigService = getService(WebSchemaConfigService.class);
+    WebSchemaConfigService schemaConfigService = WCMCoreUtils.getService(WebSchemaConfigService.class);
     WebContentSchemaHandler contentSchemaHandler = schemaConfigService.getWebSchemaHandlerByType(WebContentSchemaHandler.class);
     contentSchemaHandler.createSchema(webContent);
     session.save();
@@ -172,7 +173,7 @@ public class HTMLFileSchemaHandler extends BaseWebSchemaHandler {
     if (!parent.isCheckedOut() || parent.isLocked() || !node.isCheckedOut()) {
       return;
     }
-    LiveLinkManagerService liveLinkManagerService = getService(LiveLinkManagerService.class);
+    LiveLinkManagerService liveLinkManagerService = WCMCoreUtils.getService(LiveLinkManagerService.class);
     List<String> newLinks = liveLinkManagerService.extractLinks(node);
     liveLinkManagerService.updateLinkDataForNode(parent,newLinks);
   }

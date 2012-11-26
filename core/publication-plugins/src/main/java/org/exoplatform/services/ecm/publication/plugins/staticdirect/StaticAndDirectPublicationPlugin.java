@@ -38,8 +38,6 @@ import javax.jcr.Session;
 import javax.jcr.Value;
 import javax.jcr.version.Version;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.jcr.model.VersionNode;
 import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleException;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
@@ -128,9 +126,7 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
         if (LOG.isInfoEnabled()) {
           LOG.info("Add log");
         }
-        ExoContainer container = ExoContainerContext.getCurrentContainer();
-        PublicationService publicationService = (PublicationService) container.
-            getComponentInstanceOfType(PublicationService.class);
+        PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);
         String date =  new SimpleDateFormat("yyyyMMdd.HHmmss.SSS").format(new Date());
         //@SuppressWarnings("hiding")
         String versionName = session.getNodeByUUID(version.getUUID()).getName();
@@ -201,12 +197,9 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
             if (LOG.isInfoEnabled()) {
               LOG.info("Add log");
             }
-            ExoContainer container = ExoContainerContext.getCurrentContainer();
-            PublicationService publicationService = (PublicationService) container.
-                getComponentInstanceOfType(PublicationService.class);
+            PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);
             String date =  new SimpleDateFormat("yyyyMMdd.HHmmss.SSS").format(new Date());
             String version = session.getNodeByUUID(nodeVersionUUID).getName();
-            @SuppressWarnings("hiding")
             String[] log = { date, newState, userid,
                 "PublicationService.StaticAndDirectPublicationPlugin.nodePublished", version,
                 visibility };
@@ -308,12 +301,9 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
             if (LOG.isInfoEnabled()) {
               LOG.info("Add log");
             }
-            ExoContainer container = ExoContainerContext.getCurrentContainer();
-            PublicationService publicationService = (PublicationService) container.
-                getComponentInstanceOfType(PublicationService.class);
+            PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);
             String date =  new SimpleDateFormat("yyyyMMdd.HHmmss.SSS").format(new Date());
             String version = session.getNodeByUUID(nodeVersionUUID).getName();
-            @SuppressWarnings("hiding")
             String[] log = { date, newState, userid,
                 "PublicationService.StaticAndDirectPublicationPlugin.nodePublished", version,
                 visibility };
@@ -338,7 +328,6 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
           //but visibility can change
           String oldVisibility=node.getProperty(VISIBILITY).getString();
           String newVisibility=context.get("visibility");
-          String nodeVersionUUID = context.get("nodeVersionUUID");
 
           if (!oldVisibility.equals(newVisibility)) {
             //cahnge visibility
@@ -350,12 +339,8 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
             setVisibility(node, newVisibility);
 
             //Add log
-            ExoContainer container = ExoContainerContext.getCurrentContainer();
-            PublicationService publicationService = (PublicationService) container.
-                getComponentInstanceOfType(PublicationService.class);
+            PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);
             String date =  new SimpleDateFormat("yyyyMMdd.HHmmss.SSS").format(new Date());
-            String version = session.getNodeByUUID(nodeVersionUUID).getName();
-            @SuppressWarnings("hiding")
             String[] log = { date, newState, userid,
                 "PublicationService.StaticAndDirectPublicationPlugin.changeVisibility",
                 newVisibility };
@@ -397,11 +382,8 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
             if (LOG.isInfoEnabled()) {
               LOG.info("Add log");
             }
-            ExoContainer container = ExoContainerContext.getCurrentContainer();
-            PublicationService publicationService = (PublicationService) container.
-                getComponentInstanceOfType(PublicationService.class);
+            PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);
             String date =  new SimpleDateFormat("yyyyMMdd.HHmmss.SSS").format(new Date());
-            @SuppressWarnings("hiding")
             String[] log = { date, newState, userid,
                 "PublicationService.StaticAndDirectPublicationPlugin.nodeUnpublished",
                 newVisibility };
@@ -531,7 +513,6 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
 
       //get name and label of this version
       Node versionNode = session.getNodeByUUID(uuid);
-      @SuppressWarnings("hiding")
       String name = versionNode.getName();
       Node labelNode = (versionNode.getParent()).getNode("jcr:versionLabels");
       //if this instruction do not find the jcr:versionLabels node
@@ -609,17 +590,12 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
   }
 
   public String getLocalizedAndSubstituteMessage(Locale locale, String key, String[] values) throws Exception{
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-//    ResourceBundleService resourceBundleService = (ResourceBundleService) container.
-//        getComponentInstanceOfType(ResourceBundleService.class);
     ClassLoader cl = this.getClass().getClassLoader();
-//    ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(localeFile, locale, cl);
     ResourceBundle resourceBundle = ResourceBundle.getBundle(localeFile, locale, cl);
     String result = resourceBundle.getString(key);
     return String.format(result, values);
   }
 
-  @SuppressWarnings("unused")
   public Node getNodeView(Node currentNode, Map<String, Object> context) throws Exception {
     String visibility = currentNode.getProperty(VISIBILITY).getString();
     if (visibility.equals(PRIVATE) && !canRead(currentNode)) return null;
