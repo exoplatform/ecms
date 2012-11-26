@@ -57,6 +57,7 @@
       <authoring-view>Vue auteur</authoring-view>
       <slide-show>Vue diaporama</slide-show>
       <wcm-category-view>Vue catégorie du WCM</wcm-category-view>
+      <file-view>File Management View</file-view>
     </label>
   </Views>
 
