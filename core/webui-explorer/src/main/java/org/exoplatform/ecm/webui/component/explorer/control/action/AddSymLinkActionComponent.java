@@ -32,6 +32,7 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanAddNodeFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.CanAddSymlinkFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsCheckedOutFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
@@ -70,6 +71,7 @@ public class AddSymLinkActionComponent extends UIAbstractManagerComponent {
 
   private static final List<UIExtensionFilter> FILTERS =
     Arrays.asList(new UIExtensionFilter[]{new CanAddNodeFilter(),
+                                          new CanAddSymlinkFilter(),
                                           new IsNotLockedFilter(),
                                           new IsCheckedOutFilter(),
                                           new IsNotSymlinkFilter(),
