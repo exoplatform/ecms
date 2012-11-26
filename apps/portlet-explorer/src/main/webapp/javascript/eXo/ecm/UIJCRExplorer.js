@@ -115,14 +115,13 @@ UIJCRExplorer.prototype.dropDownIconList = function(uniqueId) {
  * if tabId are provided, can get the tab content by Ajax
  */
 UIJCRExplorer.prototype.displayTabContent = function(clickedEle) {
-  var uiSelectTab = gj(clickedEle).parents(".UITab:first")[0];
-
-  var uiHorizontalTabs = gj(clickedEle).parents(".UIHorizontalTabs:first")[0];
-  var uiTabs = gj(uiHorizontalTabs).find("li.UITab");
+  var uiSelectTab = gj(clickedEle);
+  var uiHorizontalTabs = clickedEle.parentNode;
+  var uiTabs = gj(uiHorizontalTabs).find("li");
   var parentdHorizontalTab = uiHorizontalTabs.parentNode ;
-  var contentTabContainer = gj(parentdHorizontalTab).find("div.UITabContentContainer:first")[0];
-  var uiTabContents = gj(contentTabContainer).children("div.UITabContent");
-//    var form = DOMUtil.getChildrenByTagName(contentTabContainer, "form") ;
+  var contentTabContainer = gj(uiHorizontalTabs).parents("div#UINodeTypeInfoPopup:first")[0];
+  var uiTabContents = gj(contentTabContainer).find(".UITabContent");
+	//    var form = DOMUtil.getChildrenByTagName(contentTabContainer, "form") ;
   var form = gj(contentTabContainer).children("form") ;
     if(form.length > 0) {
         var tmp = gj(form[0]).children("div.UITabContent");
@@ -131,23 +130,23 @@ UIJCRExplorer.prototype.displayTabContent = function(clickedEle) {
     }
     }
   var index = 0 ;
+	uiSelectTab.attr("class","active");
   uiTabs.each(function(i, elem) {
-//	var styleTabDiv = DOMUtil.getChildrenByTagName(uiTabs[i], "div")[0] ;	  
-    var styleTabDiv = gj(uiTabs[i]).children("div")[0] ;
-    if (!(styleTabDiv.className == "DisabledTab")) {
-	    var changeClassName = true;
-	    if(uiSelectTab == uiTabs[i]) {
-	      styleTabDiv.className = "SelectedTab" ;
-	      index = i ;
-	      changeClassName = false;
-	    }
-	    if (changeClassName) {
-		    styleTabDiv.className = "NormalTab" ;
-		    uiTabContents[i].style.display = "none" ;
-	    }
-    }
-  });
-  uiTabContents[index].style.display = "block" ;
+		if (!(gj(elem).attr("class")=="dropdown")) {
+			if(clickedEle == elem) {
+				gj(elem).attr("class", "active");
+				index = i ;
+				changeClassName = false;
+			} else {
+				gj(elem).attr("class","");
+				if (uiTabContents.get(i)) 
+					uiTabContents.get(i).style.display = "none" ;
+			}
+		} else {
+			gj(uiTabs.get(i-1)).attr("class", gj(uiTabs.get(i-1)).attr("class") + " last");
+		}
+  });	
+  uiTabContents.get(index).style.display = "block" ;
     if (eXo.ecm.UIJCRExplorer) {
         try {
                 eXo.ecm.UIJCRExplorer.initViewNodeScroll();

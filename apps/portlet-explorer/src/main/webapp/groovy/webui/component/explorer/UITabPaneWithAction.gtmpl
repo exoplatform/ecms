@@ -23,14 +23,13 @@
 							}
 					%>
 						<li class="$style" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this)">             
-								<a data-toggle="tab" href="#tab1"><%=_ctx.appRes(uicomponent.getId() + ".tab.label." + uiChild.getId())%></a>
+								<a data-toggle="tab"><%=_ctx.appRes(uicomponent.getId() + ".tab.label." + uiChild.getId())%></a>
 						
 						</li>              
 					<%}%>
 	
 	      </ul>
 	      <div class="tab-content" id="myTabContent">
-					<div id="tab1" class="tab-pane fade in active">
 						<%
 							for(uiChild in uicomponent.getChildren()) { 
 								String display = "none" ;
@@ -40,7 +39,6 @@
 								println "</div>" ;
 							}
 						%>
-					</div>  
 	      </div>  
 	    </div>  
 	    <div class="UIAction"> 

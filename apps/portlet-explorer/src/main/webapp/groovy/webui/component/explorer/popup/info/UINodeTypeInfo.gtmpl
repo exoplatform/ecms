@@ -27,48 +27,45 @@
  %>
  <%
   def rcontext = _ctx.getRequestContext() ;
-  rcontext.getJavascriptManager().require("SHARED/explorer-module", "explorer").
-  addScripts('explorer.UIJCRExplorer.loadNodeTypeScroll();');
+//  rcontext.getJavascriptManager().require("SHARED/explorer-module", "explorer").
+//  addScripts('explorer.UIJCRExplorer.loadNodeTypeScroll();');
 
 %>
 
 
-<div class="UINodeTypeInfo" id="UINodeTypeInfoPopup">
-  <div class="UIHorizontalTabs">
-  	<div class="LeftHorizontalTabs">
-  		<div class="RightHorizontalTabs">
-  			<div class="CenterHorizontalTabs">
-				  <div class="TabsContainer">
+<div class="UINodeTypeInfo uiTabNormal" id="UINodeTypeInfoPopup">
+  <ul class="nav nav-tabs">
 				  <%
-				  String style="SelectedTab" ;
+				  String style="active";
+					int count = 0;
 				  for(nodeType in collect) {
+						if (count++ == collect.size()-1) 
+							style += " last";
 				  %>
-			      <li class="UITab NormalTabStyle">
-			        <div class="$style">
-			          <div class="LeftTab">
-			            <div class="RightTab">
-	                  <div class="MiddleTab" onClick="eXo.ecm.UIJCRExplorer.displayTabContent(this)">$nodeType.name</div>
-	                </div>
-			          </div>
-			        </div>
+			      <li class="$style" onClick="eXo.ecm.UIJCRExplorer.displayTabContent(this)">
+	                  <a>$nodeType.name</a>
 			      </li>
 				  <%
-				    style = "NormalTab" ;
+				    style = "" ;
 				  }
 				  %>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="#dropdown1_1" data-toggle="tab">@fat</a></li>
+							<li><a href="#dropdown2_1" data-toggle="tab">@mdo</a></li>
+						</ul>
+					</li>
+					<!---
 					  <div class="NavigationButtonContainer">
 		          <div title="Previous Tabs" class="NavigationIcon ScrollBackArrow16x16Icon">
 		            <div title="More Tabs" class="NavigationIcon ScrollNextArrow16x16Icon"><span></span></div>
 		          </div>
 		        </div>
-				  </div>
-				</div>
-			</div>
-		</div>
-	</div>
+					-->
+	</ul>
 
-	<div class="HorizontalLayout">
-	  <div class="UITabContentContainer">
+	<div class="tab-content" id="myTabContent">
 	  <%
 	  style="display: block;" ;
 	    for(nodeType in collect) {%>
@@ -202,7 +199,6 @@
 	  <%
 	    style = "display: none";
 	  }%>
-	  </div>
 	</div>
   <div class="UIAction">
 		<%for(action in uicomponent.getActions()) {
