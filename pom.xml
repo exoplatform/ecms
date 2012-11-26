@@ -44,6 +44,7 @@
     <org.exoplatform.jcr.version>1.14.9-GA-SNAPSHOT</org.exoplatform.jcr.version>
     <org.exoplatform.jcr-services.version>1.14.9-GA-SNAPSHOT</org.exoplatform.jcr-services.version>
     <org.exoplatform.portal.version>3.4.0.Final</org.exoplatform.portal.version>
+    <org.exoplatform.doc.doc-style.version>1.0.8-SNAPSHOT</org.exoplatform.doc.doc-style.version>
     <exo.tool.framework.junit.version>1.2.0</exo.tool.framework.junit.version>
     <org.exoplatform.commons.version>4.0.0.Alpha1-kill-exobuild-SNAPSHOT</org.exoplatform.commons.version>
     <chromattic.version>1.1.4</chromattic.version>
