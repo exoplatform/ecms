@@ -43,6 +43,7 @@ import org.exoplatform.webui.form.UIFormInput;
 import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 
 /**
  * Created by The eXo Platform SARL
@@ -124,6 +125,10 @@ public class UIAddMetadataForm extends UIDialogForm {
               UIFormInput uiInput = uiForm.getUIInput(inputName) ;
               String value = "false";
               if(uiInput instanceof UIFormSelectBox) value =  ((UIFormSelectBox)uiInput).getValue() ;
+              else if (uiInput instanceof UICheckBoxInput) {
+              value = new Boolean(((UICheckBoxInput) uiInput).isChecked()).toString();
+				
+			}
               node.setProperty(name, Boolean.parseBoolean(value));
             } else if (requiredType == 5) { // date
               UIFormDateTimeInput cal = (UIFormDateTimeInput) uiForm.getUIInput(inputName);
