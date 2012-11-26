@@ -10,9 +10,6 @@
   <packaging>war</packaging>
   <name>eXo WCM WAI Template WAR</name>
   <description>eXo WCM WAI Template WAR</description>
-  <build>
-    <finalName>wai-template</finalName>
-  </build>
   <dependencies>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
@@ -23,11 +20,14 @@
       <groupId>org.exoplatform.portal</groupId>
       <artifactId>exo.portal.component.portal</artifactId>
       <scope>runtime</scope>
-    </dependency>  
+    </dependency>
     <dependency>
       <groupId>org.exoplatform.portal</groupId>
       <artifactId>exo.portal.component.resources</artifactId>
       <scope>runtime</scope>
     </dependency>
   </dependencies>
+  <build>
+    <finalName>wai-template</finalName>
+  </build>
 </project>

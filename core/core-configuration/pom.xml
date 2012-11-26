@@ -10,9 +10,6 @@
   <packaging>war</packaging>
   <name>eXo WCM Core Services Configuration WAR</name>
   <description>eXo WCM Core Services Configuration WAR</description>
-  <build>
-    <finalName>wcm-core</finalName>
-  </build>
   <dependencies>
     <dependency>
       <groupId>org.exoplatform.portal</groupId>
@@ -65,4 +62,7 @@
       <scope>runtime</scope>
     </dependency>
   </dependencies>
+  <build>
+    <finalName>wcm-core</finalName>
+  </build>
 </project>

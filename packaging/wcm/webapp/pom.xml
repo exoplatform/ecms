@@ -10,9 +10,6 @@
   <packaging>war</packaging>
   <name>eXo WCM Extension WAR</name>
   <description>eXo WCM Extension WAR's configuration</description>
-  <build>
-    <finalName>gatein-exo-wcm-${project.version}</finalName>
-  </build>
   <dependencies>
     <dependency>
       <groupId>commons-lang</groupId>
@@ -21,11 +18,11 @@
     <dependency>
       <groupId>org.exoplatform.portal</groupId>
       <artifactId>exo.portal.webui.portal</artifactId>
-    </dependency>		
-		<dependency>
-		  <groupId>org.exoplatform.portal</groupId>
-		  <artifactId>exo.portal.component.web.controller</artifactId>
-		</dependency>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.portal</groupId>
+      <artifactId>exo.portal.component.web.controller</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.exoplatform.portal</groupId>
       <artifactId>exo.portal.component.portal</artifactId>
@@ -39,7 +36,7 @@
       <groupId>org.exoplatform.jcr</groupId>
       <artifactId>exo.jcr.component.ext</artifactId>
       <scope>runtime</scope>
-    </dependency>    
+    </dependency>
     <dependency>
       <groupId>org.exoplatform.core</groupId>
       <artifactId>exo.core.component.organization.api</artifactId>
@@ -81,4 +78,7 @@
       <scope>runtime</scope>
     </dependency>
   </dependencies>
+  <build>
+    <finalName>gatein-exo-wcm-${project.version}</finalName>
+  </build>
 </project>
