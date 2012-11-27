@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
     <artifactId>exo-ecms-delivery-wcm</artifactId>
-    <version>2.3.9-CR02-SNAPSHOT</version>
+    <version>2.3.9</version>
   </parent>
   <artifactId>exo-ecms-delivery-wcm-server-tomcat</artifactId>
   <name>eXo Tomcat Server</name>
