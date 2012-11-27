@@ -11,6 +11,10 @@
   <description>eXo CMS Service</description>
   <dependencies>
     <dependency>
+      <groupId>com.ibm.icu</groupId>
+      <artifactId>icu4j</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.totsp.feedpod</groupId>
       <artifactId>itunes-com-podcast</artifactId>
     </dependency>
@@ -161,6 +165,10 @@
     <dependency>
       <groupId>org.imgscalr</groupId>
       <artifactId>imgscalr-lib</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.javaee</groupId>
+      <artifactId>jboss-transaction-api</artifactId>
     </dependency>
     <dependency>
       <groupId>picocontainer</groupId>

@@ -91,6 +91,8 @@
     <joda-time.version>1.6</joda-time.version>
     <org.slf4j.slf4j-log4j12.version>1.5.8</org.slf4j.slf4j-log4j12.version>
     <org.apache.tika.tika-core.version>0.7</org.apache.tika.tika-core.version>
+    <org.jboss.javaee.jboss-transaction-api.version>1.0.1.GA</org.jboss.javaee.jboss-transaction-api.version>
+    <org.apache.geronimo.specs.geronimo-stax-api_1.0_spec.version>1.0.1</org.apache.geronimo.specs.geronimo-stax-api_1.0_spec.version>
     <!-- ************** -->
     <!-- Build settings -->
     <!-- ************** -->
@@ -193,6 +195,11 @@
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>${junit.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.geronimo.specs</groupId>
+        <artifactId>geronimo-stax-api_1.0_spec</artifactId>
+        <version>${org.apache.geronimo.specs.geronimo-stax-api_1.0_spec.version}</version>
       </dependency>
       <dependency>
         <groupId>org.apache.lucene</groupId>
@@ -616,6 +623,11 @@
         <groupId>org.imgscalr</groupId>
         <artifactId>imgscalr-lib</artifactId>
         <version>${org.imgscalr.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.javaee</groupId>
+        <artifactId>jboss-transaction-api</artifactId>
+        <version>${org.jboss.javaee.jboss-transaction-api.version}</version>
       </dependency>
       <dependency>
         <groupId>org.jibx</groupId>
