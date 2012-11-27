@@ -241,12 +241,19 @@
   </dependencies>
   <build>
     <resources>
+      <!-- We need to filter only properties files -->
       <resource>
         <filtering>true</filtering>
         <directory>src/main/resources</directory>
         <includes>
           <include>**/*.properties</include>
         </includes>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+        <excludes>
+          <exclude>**/*.properties</exclude>
+        </excludes>
       </resource>
     </resources>
   </build>
