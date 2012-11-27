@@ -26,12 +26,12 @@
       <UICLVConfigItemPathFormInputSet>Percorso Cartella</UICLVConfigItemPathFormInputSet>
       <UICLVConfigOrderByFormSelectBox>Ordina per</UICLVConfigOrderByFormSelectBox>
       <option>
-        <title>Titolo</title>
-        <dateCreated>Data di Creazione</dateCreated>
-        <dateModified>Data di Modifica</dateModified>
-        <liveDate>Data di Pubblicazione</liveDate>
-        <startEvent>Data Evento</startEvent>
-        <index>Indice</index>
+        <exo:title>Titolo</exo:title>
+        <exo:dateCreated>Data di Creazione</exo:dateCreated>
+        <exo:dateModified>Data di Modifica</exo:dateModified>
+        <exo:liveDate>Data di Pubblicazione</exo:liveDate>
+        <exo:startEvent>Data Evento</exo:startEvent>
+        <exo:index>Indice</exo:index>
       </option>
       <DisplaySettingBlock>Impostazioni visualizzazione</DisplaySettingBlock>
       <UICLVConfigHeaderFormStringInput>Header</UICLVConfigHeaderFormStringInput>
