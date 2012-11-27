@@ -37,7 +37,6 @@
     <!-- **************************************** -->
     <!-- Project Dependencies                     -->
     <!-- **************************************** -->
-    <!-- Dependencies versions -->
     <org.exoplatform.kernel.version>2.3.10-GA-SNAPSHOT</org.exoplatform.kernel.version>
     <org.exoplatform.core.version>2.4.10-GA-SNAPSHOT</org.exoplatform.core.version>
     <org.exoplatform.ws.version>2.2.10-GA-SNAPSHOT</org.exoplatform.ws.version>
