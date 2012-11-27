@@ -20,22 +20,6 @@
       <artifactId>jcr</artifactId>
     </dependency>
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <!-- "Unused declared" by analyze but still need for testing -->
-    <dependency>
-      <groupId>org.chromattic</groupId>
-      <artifactId>chromattic.core</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.core</groupId>
-      <artifactId>exo.core.component.organization.api</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
       <groupId>org.exoplatform.core</groupId>
       <artifactId>exo.core.component.security.core</artifactId>
     </dependency>
@@ -50,11 +34,6 @@
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>ecms-core-webui</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>ecms-testsuite-test</artifactId>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.jcr</groupId>
@@ -90,11 +69,6 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.portal</groupId>
-      <artifactId>exo.portal.component.test.core</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.portal</groupId>
       <artifactId>exo.portal.component.web.controller</artifactId>
     </dependency>
     <dependency>
@@ -121,6 +95,38 @@
       <groupId>org.exoplatform.portal</groupId>
       <artifactId>exo.portal.webui.portlet</artifactId>
     </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.core</groupId>
+      <artifactId>exo.core.component.organization.api</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.portal</groupId>
+      <artifactId>exo.portal.component.test.core</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <classifier>jdk15</classifier>
+      <scope>runtime</scope>
+    </dependency>
+    <!-- "Unused declared" by analyze but still need for testing -->
+    <dependency>
+      <groupId>org.chromattic</groupId>
+      <artifactId>chromattic.core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-testsuite-test</artifactId>
+      <scope>test</scope>
+    </dependency>
     <!-- "Unused declared" by analyze but still need for testing -->
     <dependency>
       <groupId>org.hsqldb</groupId>
@@ -132,12 +138,6 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.testng</groupId>
-      <artifactId>testng</artifactId>
-      <classifier>jdk15</classifier>
-      <scope>runtime</scope>
     </dependency>
   </dependencies>
 </project>

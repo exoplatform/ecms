@@ -19,11 +19,6 @@
       <artifactId>portlet-api</artifactId>
     </dependency>
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>ecms-core-publication</artifactId>
     </dependency>
@@ -74,6 +69,11 @@
     <dependency>
       <groupId>org.exoplatform.portal</groupId>
       <artifactId>exo.portal.webui.portlet</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 </project>

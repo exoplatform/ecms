@@ -95,7 +95,6 @@
     <commons-logging.version>1.1.1</commons-logging.version>
     <joda-time.version>1.6</joda-time.version>
     <stax-api.version>1.0.1</stax-api.version>
-    <org.apache.geronimo.specs.geronimo-stax-api.version>1.0.1</org.apache.geronimo.specs.geronimo-stax-api.version>
     <org.slf4j.slf4j-log4j12.version>1.5.8</org.slf4j.slf4j-log4j12.version>
     <org.apache.tika.tika-core.version>0.7</org.apache.tika.tika-core.version>
     <!-- ************** -->
@@ -212,11 +211,6 @@
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>${junit.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.geronimo.specs</groupId>
-        <artifactId>geronimo-stax-api_1.0_spec</artifactId>
-        <version>${org.apache.geronimo.specs.geronimo-stax-api.version}</version>
       </dependency>
       <dependency>
         <groupId>org.apache.lucene</groupId>

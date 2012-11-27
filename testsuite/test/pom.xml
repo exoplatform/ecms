@@ -14,19 +14,8 @@
       <artifactId>jcr</artifactId>
     </dependency>
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
       <groupId>javax.ws.rs</groupId>
       <artifactId>jsr311-api</artifactId>
-    </dependency>
-    <!-- need for test -->
-    <dependency>
-      <groupId>org.chromattic</groupId>
-      <artifactId>chromattic.core</artifactId>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.commons</groupId>
@@ -64,6 +53,22 @@
       <groupId>org.exoplatform.ws</groupId>
       <artifactId>exo.ws.testframework</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <classifier>jdk15</classifier>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <!-- need for test -->
+    <dependency>
+      <groupId>org.chromattic</groupId>
+      <artifactId>chromattic.core</artifactId>
+      <scope>test</scope>
+    </dependency>
     <!-- need for test -->
     <dependency>
       <groupId>org.hsqldb</groupId>
@@ -75,11 +80,6 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.testng</groupId>
-      <artifactId>testng</artifactId>
-      <classifier>jdk15</classifier>
     </dependency>
   </dependencies>
   <build>

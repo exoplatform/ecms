@@ -35,16 +35,6 @@
       <artifactId>portlet-api</artifactId>
     </dependency>
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>javax.transaction</groupId>
-      <artifactId>jta</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
       <groupId>javax.ws.rs</groupId>
       <artifactId>jsr311-api</artifactId>
     </dependency>
@@ -53,23 +43,12 @@
       <artifactId>jdom</artifactId>
     </dependency>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>org.apache.lucene</groupId>
       <artifactId>lucene-core</artifactId>
     </dependency>
     <dependency>
       <groupId>org.artofsolving.jodconverter</groupId>
       <artifactId>jodconverter-core</artifactId>
-    </dependency>
-    <!-- "Unused declared" by analyze but still need for testing -->
-    <dependency>
-      <groupId>org.chromattic</groupId>
-      <artifactId>chromattic.core</artifactId>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.codehaus.groovy</groupId>
@@ -94,11 +73,6 @@
     <dependency>
       <groupId>org.exoplatform.core</groupId>
       <artifactId>exo.core.component.security.core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>ecms-testsuite-test</artifactId>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.jcr</groupId>
@@ -150,11 +124,6 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.portal</groupId>
-      <artifactId>exo.portal.component.test.core</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.portal</groupId>
       <artifactId>exo.portal.component.web.controller</artifactId>
     </dependency>
     <dependency>
@@ -174,11 +143,6 @@
       <artifactId>exo.portal.webui.portlet</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.tool</groupId>
-      <artifactId>exo.tool.framework.junit</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
       <groupId>org.exoplatform.ws</groupId>
       <artifactId>exo.ws.commons</artifactId>
     </dependency>
@@ -190,12 +154,6 @@
       <groupId>org.gatein.pc</groupId>
       <artifactId>pc-api</artifactId>
     </dependency>
-    <!-- "unused declared" by analyze but still use for test -->
-    <dependency>
-      <groupId>org.hsqldb</groupId>
-      <artifactId>hsqldb</artifactId>
-      <scope>test</scope>
-    </dependency>
     <dependency>
       <groupId>org.icepdf</groupId>
       <artifactId>icepdf-core</artifactId>
@@ -203,6 +161,65 @@
     <dependency>
       <groupId>org.imgscalr</groupId>
       <artifactId>imgscalr-lib</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>picocontainer</groupId>
+      <artifactId>picocontainer</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>quartz</groupId>
+      <artifactId>quartz</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>rome</groupId>
+      <artifactId>rome</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.transaction</groupId>
+      <artifactId>jta</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.tool</groupId>
+      <artifactId>exo.tool.framework.junit</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>xml-apis</groupId>
+      <artifactId>xml-apis</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <!-- "Unused declared" by analyze but still need for testing -->
+    <dependency>
+      <groupId>org.chromattic</groupId>
+      <artifactId>chromattic.core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-testsuite-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.portal</groupId>
+      <artifactId>exo.portal.component.test.core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <!-- "unused declared" by analyze but still use for test -->
+    <dependency>
+      <groupId>org.hsqldb</groupId>
+      <artifactId>hsqldb</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
@@ -220,23 +237,6 @@
       <artifactId>testng</artifactId>
       <classifier>jdk15</classifier>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>picocontainer</groupId>
-      <artifactId>picocontainer</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>quartz</groupId>
-      <artifactId>quartz</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>rome</groupId>
-      <artifactId>rome</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>xml-apis</groupId>
-      <artifactId>xml-apis</artifactId>
-      <scope>runtime</scope>
     </dependency>
   </dependencies>
   <build>

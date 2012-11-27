@@ -21,12 +21,6 @@
       <groupId>javax.portlet</groupId>
       <artifactId>portlet-api</artifactId>
     </dependency>
-    <!-- "Unused declared" by analyze but still need for testing -->
-    <dependency>
-      <groupId>org.chromattic</groupId>
-      <artifactId>chromattic.core</artifactId>
-      <scope>test</scope>
-    </dependency>
     <dependency>
       <groupId>org.exoplatform.core</groupId>
       <artifactId>exo.core.component.security.core</artifactId>
@@ -38,11 +32,6 @@
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>ecms-core-services</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>ecms-testsuite-test</artifactId>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.jcr</groupId>
@@ -66,11 +55,6 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.portal</groupId>
-      <artifactId>exo.portal.component.test.core</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.portal</groupId>
       <artifactId>exo.portal.webui.core</artifactId>
     </dependency>
     <dependency>
@@ -84,6 +68,22 @@
     <dependency>
       <groupId>org.exoplatform.portal</groupId>
       <artifactId>exo.portal.webui.portlet</artifactId>
+    </dependency>
+    <!-- "Unused declared" by analyze but still need for testing -->
+    <dependency>
+      <groupId>org.chromattic</groupId>
+      <artifactId>chromattic.core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-testsuite-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.portal</groupId>
+      <artifactId>exo.portal.component.test.core</artifactId>
+      <scope>test</scope>
     </dependency>
     <!-- "Unused declared" by analyze but still need for testing -->
     <dependency>
