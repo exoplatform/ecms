@@ -48,18 +48,6 @@
       <artifactId>exo.core.component.security.core</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.doc</groupId>
-      <artifactId>doc-style</artifactId>
-      <version>${org.exoplatform.doc.doc-style.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.doc</groupId>
-      <artifactId>doc-style</artifactId>
-      <version>${org.exoplatform.doc.doc-style.version}</version>
-      <classifier>templates</classifier>
-    </dependency>
-    <dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>ecms-core-publication</artifactId>
     </dependency>
@@ -143,6 +131,13 @@
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <!-- This artifact is used only for wikbook compilation -->
+    <dependency>
+      <groupId>org.exoplatform.doc</groupId>
+      <artifactId>doc-style</artifactId>
+      <classifier>templates</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
