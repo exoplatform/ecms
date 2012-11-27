@@ -51,15 +51,4 @@
       <artifactId>icepdf-core</artifactId>
     </dependency>
   </dependencies>
-  <build>
-    <resources>
-      <resource>
-        <directory>src/main/resources</directory>
-        <includes>
-          <include>**/*.gtmpl</include>
-          <include>**/*.properties</include>
-        </includes>
-      </resource>
-    </resources>
-  </build>
 </project>

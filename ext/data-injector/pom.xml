@@ -64,23 +64,4 @@
       <artifactId>exo.ws.rest.core</artifactId>
     </dependency>
   </dependencies>
-  <build>
-    <resources>
-      <resource>
-        <directory>src/main/resources</directory>
-        <includes>
-          <include>**/*.xml</include>
-          <include>**/*.doc</include>
-          <include>**/*.xls</include>
-          <include>**/*.ppt</include>
-          <include>**/*.txt</include>
-          <include>**/*.pdf</include>
-          <include>**/*.jpg</include>
-          <include>**/*.jpeg</include>
-          <include>**/*.png</include>
-          <include>**/*.gif</include>
-        </includes>
-      </resource>
-    </resources>
-  </build>
 </project>

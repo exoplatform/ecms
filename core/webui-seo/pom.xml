@@ -65,14 +65,4 @@
       <artifactId>exo.portal.webui.portlet</artifactId>
     </dependency>
   </dependencies>
-  <build>
-    <resources>
-      <resource>
-        <directory>src/main/resources</directory>
-        <includes>
-          <include>**/*.gtmpl</include>
-        </includes>
-      </resource>
-    </resources>
-  </build>
 </project>
