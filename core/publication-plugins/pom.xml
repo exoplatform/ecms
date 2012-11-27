@@ -113,8 +113,7 @@
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
-      <classifier>jdk15</classifier>
-      <scope>runtime</scope>
+      <scope>test</scope>
     </dependency>
     <!-- "Unused declared" by analyze but still need for testing -->
     <dependency>
