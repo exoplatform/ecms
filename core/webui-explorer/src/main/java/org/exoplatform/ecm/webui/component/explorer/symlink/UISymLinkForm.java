@@ -316,7 +316,7 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
         UIOneNodePathSelector uiNodePathSelector = uiSymLinkManager.createUIComponent(UIOneNodePathSelector.class, null, null);
         uiPopupWindow.setUIComponent(uiNodePathSelector);
         uiNodePathSelector.setIsDisable(workspaceName, false);
-        uiNodePathSelector.setExceptedNodeTypesInPathPanel(new String[] {Utils.EXO_SYMLINK});
+        uiNodePathSelector.setExceptedNodeTypesInPathPanel(new String[] {Utils.EXO_SYMLINK, Utils.MIX_LOCKABLE});
         uiNodePathSelector.setRootNodeLocation(uiExplorer.getRepositoryName(), workspaceName, "/");
         uiNodePathSelector.setIsShowSystem(false);
         uiNodePathSelector.init(WCMCoreUtils.getUserSessionProvider());
