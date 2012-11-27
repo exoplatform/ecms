@@ -467,21 +467,21 @@
       <Icon>Icône</Icon>
     </title>
     <msg>
-      // Delte one node is not in trash and have no relation
+      <!-- Delte one node is not in trash and have no relation -->
       <confirm-delete>Êtes-vous sûr de vouloir supprimer l'objet '{0}'?</confirm-delete>
       <confirm-delete-file>Êtes-vous sûr de vouloir supprimer le fichier '{0}'?</confirm-delete-file>
       <confirm-delete-folder>Êtes-vous sûr de vouloir supprimer le dossier '{0}' et ses sous-dossiers?</confirm-delete-folder>
       
-      // Delte one node is in trash and have no relation
+      <!-- Delte one node is in trash and have no relation -->
       <confirm-delete-permanently>Êtes-vous sûr de vouloir supprimer définitivement l'objet '{0}'?</confirm-delete-permanently>
       <confirm-delete-file-permanently>Êtes-vous sûr de vouloir supprimer définitivement le fichier '{0}'?</confirm-delete-file-permanently>
       <confirm-delete-folder-permanently>Êtes-vous sûr de vouloir supprimer définitivement le dossier '{0}' et ses sous-dossiers?</confirm-delete-folder-permanently>
       
-      // Delte one node is not in trash and have relations
+      <!-- Delte one node is not in trash and have relations -->
       <confirm-delete-has-relations>Êtes-vous sûr de vouloir supprimer l'objet '{0}' et ses références?</confirm-delete-has-relations>
       <confirm-delete-file-has-relations>Êtes-vous sûr de vouloir supprimer le fichier '{0}' et ses références?</confirm-delete-file-has-relations>
       
-      // Delte multiple nodes, not in Trash, have no relations
+      <!-- Delte multiple nodes, not in Trash, have no relations -->
       <confirm-delete-multi-nodes-generic>Êtes-vous sûr de vouloir supprimer les {0} objets sélectionnés?</confirm-delete-multi-nodes-generic>  
       <confirm-delete-multi-nodes-file>Êtes-vous sûr de vouloir supprimer les {0} fichiers sélectionnés?</confirm-delete-multi-nodes-file>
       <confirm-delete-multi-nodes-folder>Êtes-vous sûr de vouloir supprimer les {0} dossiers sélectionnés et leurs sous-dossiers?</confirm-delete-multi-nodes-folder>
@@ -490,7 +490,7 @@
       <confirm-delete-multi-nodes-file-and-folder>Êtes-vous sûr de vouloir supprimer les {0} fichiers, dossiers sélectionnés et leurs sous-dossiers?</confirm-delete-multi-nodes-file-and-folder>
       <confirm-delete-multi-nodes-generic-and-file-and-folder>Êtes-vous sûr de vouloir supprimer les {0} objets, fichiers, dossiers sélectionnés et leurs sous-dossiers?</confirm-delete-multi-nodes-generic-and-file-and-folder>
       
-      // Delte multiple nodes, in Trash
+      <!-- Delte multiple nodes, in Trash -->
       <confirm-delete-multi-nodes-generic-permanently>Êtes-vous sûr de vouloir supprimer définitivement les {0} objets sélectionnés?</confirm-delete-multi-nodes-generic-permanently>  
       <confirm-delete-multi-nodes-file-permanently>Êtes-vous sûr de vouloir supprimer définitivement les {0} fichiers sélectionnés?</confirm-delete-multi-nodes-file-permanently>
       <confirm-delete-multi-nodes-folder-permanently>Êtes-vous sûr de vouloir supprimer définitivement les {0} dossiers sélectionnés et leurs sous-dossiers?</confirm-delete-multi-nodes-folder-permanently>
@@ -499,7 +499,7 @@
       <confirm-delete-multi-nodes-file-and-folder-permanently>Êtes-vous sûr de vouloir supprimer définitivement les {0} fichiers, dossiers sélectionnés et leurs sous-dossiers?</confirm-delete-multi-nodes-file-and-folder-permanently>
       <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Êtes-vous sûr de vouloir supprimer définitivement les {0} objets, fichiers, dossiers sélectionnés et leurs sous-dossiers?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
       
-      // Delte multiple nodes, have relations
+      <!-- Delte multiple nodes, have relations -->
       <confirm-delete-multi-nodes-generic-have-relations>Êtes-vous sûr de vouloir supprimer les {0} objets sélectionnés et leurs références?</confirm-delete-multi-nodes-generic-have-relations>  
       <confirm-delete-multi-nodes-file-have-relations>Êtes-vous sûr de vouloir supprimer les {0} fichiers sélectionnés et leurs références?</confirm-delete-multi-nodes-file-have-relations>
       <confirm-delete-multi-nodes-folder-have-relations>Êtes-vous sûr de vouloir supprimer les {0} dossiers sélectionnés, leurs sous-dossiers et leurs références?</confirm-delete-multi-nodes-folder-have-relations>
