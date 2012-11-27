@@ -102,7 +102,6 @@
     <!-- ************** -->
     <!-- maven-release-plugin -->
     <preparationGoals>clean install</preparationGoals>
-    <arguments>-Dgatein.working.dir=target</arguments>
   </properties>
   <dependencyManagement>
     <!-- TODO : import dependencyManagement of platform, instead of redefining those properties -->
