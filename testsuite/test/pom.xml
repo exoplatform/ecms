@@ -71,6 +71,12 @@
     </dependency>
     <!-- need for test -->
     <dependency>
+      <groupId>org.exoplatform</groupId>
+      <artifactId>exo-jcr-services</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <!-- need for test -->
+    <dependency>
       <groupId>org.hsqldb</groupId>
       <artifactId>hsqldb</artifactId>
       <scope>test</scope>
