@@ -446,7 +446,7 @@
       <confirm-delete-file>Are you sure you want to delete the file '{0}'?</confirm-delete-file>
       <confirm-delete-folder>Are you sure you want to delete the folder '{0}' and all subfolders?</confirm-delete-folder>
       
-      <!-- Delte one node is in trash and have no relation --->
+      <!-- Delte one node is in trash and have no relation -->
       <confirm-delete-permanently>Are you sure you want to remove permanently the item '{0}'?</confirm-delete-permanently>
       <confirm-delete-file-permanently>Are you sure you want to remove permanently the file '{0}'?</confirm-delete-file-permanently>
       <confirm-delete-folder-permanently>Are you sure you want to remove permanently the folder '{0}' and all subfolders?</confirm-delete-folder-permanently>
