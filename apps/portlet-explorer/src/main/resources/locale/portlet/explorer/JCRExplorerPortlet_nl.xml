@@ -578,7 +578,7 @@
       <confirm-delete-multi-nodes-generic-and-file-have-relations>Are you sure you want to delete the {0} selected items, files and their references?</confirm-delete-multi-nodes-generic-and-file-have-relations>
       <confirm-delete-multi-nodes-generic-and-folder-have-relations>Are you sure you want to delete the {0} selected items, folders, all subfolders and their references?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
       <confirm-delete-multi-nodes-file-and-folder-have-relations>Are you sure you want to delete the {0} selected files, folders, all subfolders and their references?</confirm-delete-multi-nodes-file-and-folder-have-relations>
-      <confirm-del
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Are you sure you want to delete the {0} selected items, files, their references, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
       
       <feedback-delete>'{0}' was deleted succesfully.</feedback-delete>
       <feedback-delete-multi>{0} items were deleted succesfully.</feedback-delete-multi>
