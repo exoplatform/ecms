@@ -88,7 +88,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
   private List<Permission>        permissions                = new ArrayList<Permission>(4);
 
   /** The auto create in new repository_. */
-  private boolean                 autoCreateInNewRepository_ = true;
+  private boolean                 autoCreateWithNewSite_ = false;
 
   /** The repository service_. */
   private RepositoryService       repositoryService;
@@ -161,12 +161,13 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
    */
   public void deployToPortal(SessionProvider sessionProvider, String portalName) throws Exception {
     this.portalName = portalName;
-    ValueParam autoCreated = params.getValueParam("autoCreateInNewRepository");
+    ValueParam autoCreated = params.getValueParam("autoCreateWithNewSite");
     ValueParam workspaceParam = params.getValueParam("workspace");
     ValueParam pathParam = params.getValueParam("path");
     ValueParam nameParam = params.getValueParam("treeName");
     if (autoCreated != null)
-      autoCreateInNewRepository_ = Boolean.parseBoolean(autoCreated.getValue());
+      autoCreateWithNewSite_ = Boolean.parseBoolean(autoCreated.getValue());
+    if(!autoCreateWithNewSite_) return;
     if (pathParam == null || workspaceParam == null || workspaceParam.getValue().trim().length() == 0) {
       path = baseTaxonomiesStorage;
     } else {
@@ -378,7 +379,6 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
    *
    * @throws Exception the exception
    */
-  @SuppressWarnings("unchecked")
   private void addAction(ActionConfig.TaxonomyAction action, Node srcNode)
       throws Exception {
     Map<String, JcrInputProperty> sortedInputs = new HashMap<String, JcrInputProperty>();

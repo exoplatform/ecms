@@ -34,7 +34,6 @@
         <th><%=_ctx.appRes("UITaxonomyTreeList.header.name")%></th>
         <th><%=_ctx.appRes("UITaxonomyTreeList.header.workspace")%></th>
         <th><%=_ctx.appRes("UITaxonomyTreeList.header.homePath")%></th>
-        <th><%=_ctx.appRes("UITaxonomyTreeList.header.permissions")%></th>
         <th><%=_ctx.appRes("UITaxonomyTreeList.header.action")%></th>
       </tr>
     </thead>
@@ -56,14 +55,6 @@
               <td><div class="Text" rel="tooltip" data-placement="bottom" title="$taxonomyTree.taxoTreeWorkspace">$taxonomyTree.taxoTreeWorkspace</div></td>
               <td><div class="Text" rel="tooltip" data-placement="bottom" title="<%=taxonomyTree.getTaxoTreeHomePath().replace("/", " /")%>"><%=taxonomyTree.getTaxoTreeHomePath().replace("/", " /")%></div></td>
               <td>
-                <div class="Text">
-                  <div class="ShowHideComponent ClearFix" rel="tooltip" data-placement="bottom" title="$taxonomyTree.taxoTreePermissions" onclick="eXo.ecm.ECMUtils.showHideContentOnRow(this)">
-                    <div class="ShortContentPermission"><a><%=pathTitle(taxonomyTree.taxoTreePermissions, 20)%></a></div>
-                    <div class="FullContentPermission" style="display: none"><a>$taxonomyTree.taxoTreePermissions</a></div>
-                  </div>                  
-                </div>                
-              </td>             
-              <td>
                 <div class="ActionContainer">
                   <% if (taxonomyTree.isEdit()) { %>
                     <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("EditTaxonomyTree", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.EditTaxonomyTree")%>" alt="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.EditTaxonomyTree")%>" class="Edit16x16Icon" />
@@ -78,7 +69,7 @@
           }
         } else {%>
           <tr class="$rowClass"> 
-            <td colspan="5" style="text-align:center;font-style:italic; color: #EF5604;"><%=_ctx.appRes("UITaxonomyTreeList.msg.no-list")%></td>
+            <td colspan="4" style="text-align:center;font-style:italic; color: #EF5604;"><%=_ctx.appRes("UITaxonomyTreeList.msg.no-list")%></td>
           </tr>
         <%}%>
     </tbody>

@@ -1449,10 +1449,9 @@
   -->
   <UITaxonomyTreeList>
     <header>
-      <name>Name</name>
+      <name>Category Tree</name>
       <workspace>Workspace</workspace>
-      <homePath>Home Path</homePath>
-      <permissions>Permissions</permissions>
+      <homePath>Path</homePath>
       <action>Action</action>
     </header>
     <action>
@@ -1479,11 +1478,11 @@
     <label>
       <name>Name</name>
       <workspace>Workspace</workspace>
-      <homePath>Home Path</homePath>
+      <homePath>Path</homePath>
       <permissions>Permissions</permissions>
     </label>
     <msg>
-      <homapath-emty>Input Home Path</homapath-emty>
+      <homapath-emty>Input Path</homapath-emty>
     </msg>
   </UITaxonomyTreeForm>
   

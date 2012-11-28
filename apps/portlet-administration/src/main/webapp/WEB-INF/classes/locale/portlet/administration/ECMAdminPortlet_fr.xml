@@ -1454,10 +1454,9 @@
   -->
   <UITaxonomyTreeList>
     <header>
-      <name>Nom</name>
+      <name>Arbre des catégories</name>
       <workspace>Espace de travail</workspace>
-      <homePath>Chemin racine</homePath>
-      <permissions>Permissions</permissions>
+      <homePath>Chemin</homePath>
       <action>Action</action>
     </header>
     <action>
@@ -1484,7 +1483,7 @@
     <label>
       <name>Nom</name>
       <workspace>Espace de travail</workspace>
-      <homePath>Chemin racine</homePath>
+      <homePath>Chemin</homePath>
       <permissions>Permissions</permissions>
     </label>
     <msg>

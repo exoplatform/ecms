@@ -1451,10 +1451,9 @@
   -->
   <UITaxonomyTreeList>
     <header>
-      <name>Tên cây danh mục</name>
+      <name>Cây danh mục</name>
       <workspace>Vùng làm việc</workspace>
-      <homePath>Thư mục</homePath>
-      <permissions>Quyền</permissions>
+      <homePath>Đường dẫn</homePath>
       <action>Hành động</action>
     </header>
     <action>

@@ -37,7 +37,6 @@ public class CreatePortalArtifactsServiceImpl implements CreatePortalArtifactsSe
   private ArrayList<String> initialPortals = new ArrayList<String>();
   private ListenerService listenerService;
 
-  @SuppressWarnings("unchecked")
   public CreatePortalArtifactsServiceImpl(ListenerService listenerService) {
     this.listenerService = listenerService;
   }
