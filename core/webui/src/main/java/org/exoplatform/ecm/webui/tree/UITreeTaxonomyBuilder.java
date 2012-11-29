@@ -18,6 +18,7 @@ package org.exoplatform.ecm.webui.tree;
 
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.jcr.Node;
@@ -26,6 +27,7 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.nodetype.NodeType;
 
+import org.exoplatform.ecm.webui.comparator.NodeTitleComparator;
 import org.exoplatform.ecm.webui.tree.selectone.UIOneTaxonomySelector;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.container.UIContainer;
@@ -250,6 +252,7 @@ public class UITreeTaxonomyBuilder extends UIContainer {
           }
         }
       }
+      Collections.sort(list, new NodeTitleComparator(NodeTitleComparator.ASCENDING_ORDER));
       List<Node> listNodeCheck = new ArrayList<Node>();
       for (Node node : list) {
         addNodePublish(listNodeCheck, node, publicationService_);
@@ -261,6 +264,7 @@ public class UITreeTaxonomyBuilder extends UIContainer {
       if(sibbling.isNodeType("exo:hiddenable")  || isExceptedNodeType(sibbling)) continue;
       list.add(sibbling);
     }
+    Collections.sort(list, new NodeTitleComparator(NodeTitleComparator.ASCENDING_ORDER));
     List<Node> listNodeCheck = new ArrayList<Node>();
     for (Node node : list) addNodePublish(listNodeCheck, node, publicationService_);
     return listNodeCheck;
