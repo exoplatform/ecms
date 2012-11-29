@@ -46,6 +46,7 @@
     <org.exoplatform.commons.version>4.0.0.Alpha1-kill-exobuild-SNAPSHOT</org.exoplatform.commons.version>
     <org.gatein.pc.version>2.3.2-GA</org.gatein.pc.version>
     <org.gatein.portal.version>3.4.0.Final</org.gatein.portal.version>
+    <org.gatein.wci.version>2.2.0-Beta02</org.gatein.wci.version>
     <!-- ************** -->
     <!-- Build settings -->
     <!-- ************** -->
@@ -75,6 +76,16 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <dependency>
+        <groupId>org.exoplatform.commons</groupId>
+        <artifactId>commons-component-common</artifactId>
+        <version>${org.exoplatform.commons.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.exoplatform.core</groupId>
+        <artifactId>exo.core.component.database</artifactId>
+        <version>${org.exoplatform.core.version}</version>
+      </dependency>
       <!-- To be replaced by an import of core parent POM -->
       <dependency>
         <groupId>org.exoplatform.core</groupId>
@@ -84,6 +95,11 @@
       <dependency>
         <groupId>org.exoplatform.core</groupId>
         <artifactId>exo.core.component.organization.api</artifactId>
+        <version>${org.exoplatform.core.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.exoplatform.core</groupId>
+        <artifactId>exo.core.component.organization.jdbc</artifactId>
         <version>${org.exoplatform.core.version}</version>
       </dependency>
       <dependency>
@@ -239,6 +255,11 @@
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-core-webui</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.exoplatform.ecms</groupId>
+        <artifactId>ecms-core-webui-administration</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -429,6 +450,11 @@
         <groupId>org.gatein.pc</groupId>
         <artifactId>pc-api</artifactId>
         <version>${org.gatein.pc.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.gatein.wci</groupId>
+        <artifactId>wci-wci</artifactId>
+        <version>${org.gatein.wci.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

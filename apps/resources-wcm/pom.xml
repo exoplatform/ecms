@@ -9,6 +9,13 @@
   <artifactId>ecms-apps-resources-wcm</artifactId>
   <packaging>war</packaging>
   <name>eXo WCM Resources</name>
+  <dependencies>
+    <dependency>
+      <groupId>org.exoplatform.portal</groupId>
+      <artifactId>exo.portal.component.web.resources</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
   <build>
     <finalName>eXoWCMResources</finalName>
   </build>

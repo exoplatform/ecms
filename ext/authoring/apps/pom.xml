@@ -67,5 +67,15 @@
       <artifactId>exo.portal.component.application-registry</artifactId>
       <scope>runtime</scope>
     </dependency>
+    <dependency>
+      <groupId>org.exoplatform.portal</groupId>
+      <artifactId>exo.portal.component.web.resources</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.gatein.wci</groupId>
+      <artifactId>wci-wci</artifactId>
+      <scope>runtime</scope>
+    </dependency>
   </dependencies>
 </project>
