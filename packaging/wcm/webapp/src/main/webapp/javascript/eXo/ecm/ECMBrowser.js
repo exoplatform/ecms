@@ -220,4 +220,3 @@
 		DMSBrowser : eXo.ecm.DMSBrowser
 	};
 })(ecm_bootstrap);
-

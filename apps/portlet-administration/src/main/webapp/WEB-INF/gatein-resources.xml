@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="iso-8859-1"?>
 <!--
 
     Copyright (C) 2009 eXo Platform SAS.
@@ -44,7 +44,7 @@
       </depends>
       <depends>
         <module>ui-vertical-slide-tab</module>
-      </depends>       
+      </depends>
       <depends>
         <module>ecm-utils</module>
       </depends>
@@ -52,5 +52,6 @@
         <module>wcm-utils</module>
       </depends>
     </module>
-  </portlet>  
+  </portlet>
 </gatein-resources>
+

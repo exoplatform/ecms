@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="iso-8859-1"?>
 <!--
 
     Copyright (C) 2009 eXo Platform SAS.
@@ -35,54 +35,146 @@
   <portlet>
     <name>FileExplorerPortlet</name>
     <module>
+      <depends>
+        <module>mouseEventManager</module>
+      </depends>
+      <depends>
+        <module>autoComplete</module>
+      </depends>
+      <depends>
+        <module>flowplayer</module>
+      </depends>
+      <depends>
+        <module>uiCoverFlow</module>
+      </depends>
+      <depends>
+        <module>uiDocumentForm</module>
+      </depends>
+      <depends>
+        <module>uiJCRExplorer</module>
+      </depends>
+      <depends>
+        <module>uiListView</module>
+      </depends>
+      <depends>
+        <module>uiSimpleView</module>
+      </depends>
+      <depends>
+        <module>uiTimelineView</module>
+      </depends>
+      <depends>
+        <module>zeroClipboard</module>
+      </depends>
+      <depends>
+        <module>rename</module>
+      </depends>
 	    <depends>
-	    	<module>explorer-module</module>
+	     <module>wcm-utils</module>
+	    </depends>
+	    <depends>
+	      <module>ecm-utils</module>
 	    </depends>
     </module>
   </portlet>
-  
+
   <module>
-  	<name>explorer-module</name>
-  	<as>explorer_module</as>
-    <script>
-      <path>/javascript/eXo/ecm/MouseEventManager.js</path>
-    </script>
-    <script>
-      <path>/javascript/eXo/ecm/AutoComplete.js</path>
-    </script>
-    <script>
-      <path>/javascript/eXo/ecm/CoverFlowLib.js</path>
-    </script>
-    <script>
-      <path>/javascript/eXo/ecm/flowplayer-3.2.6.min.js</path>
-    </script>
-    <script>
-      <path>/javascript/eXo/ecm/Mootools.js</path>
-    </script>
-    <script>
-      <path>/javascript/eXo/ecm/Slideshow.js</path>
-    </script>
-    <script>
-      <path>/javascript/eXo/ecm/UICoverFlow.js</path>
-    </script>
-    <script>
-      <path>/javascript/eXo/ecm/UIDocumentForm.js</path>
-    </script>
-    <script>
-      <path>/javascript/eXo/ecm/UIJCRExplorer.js</path>
-    </script>
-    <script>
-      <path>/javascript/eXo/ecm/UIListView.js</path>
-    </script>
-    <script>
-      <path>/javascript/eXo/ecm/UISimpleView.js</path>
-    </script>
+    <name>uiTimelineView</name>
     <script>
       <path>/javascript/eXo/ecm/UITimelineView.js</path>
     </script>
+    <depends>
+      <module>jquery</module>
+      <as>gj</as>
+    </depends>
+    <depends>
+      <module>base</module>
+    </depends>
+    <depends>
+     <module>wcm-utils</module>
+    </depends>
+    <depends>
+      <module>ecm-utils</module>
+    </depends>
+  </module>
+  
+  <module>
+    <name>uiSimpleView</name>
     <script>
-      <path>/javascript/eXo/ecm/ZeroClipboard.js</path>
+      <path>/javascript/eXo/ecm/UISimpleView.js</path>
     </script>
+    <depends>
+      <module>jquery</module>
+      <as>gj</as>
+    </depends>
+    <depends>
+      <module>base</module>
+    </depends>
+    <depends>
+     <module>wcm-utils</module>
+    </depends>
+  </module>
+  
+  <module>
+    <name>uiCoverFlow</name>
+    <script>
+      <path>/javascript/eXo/ecm/UICoverFlow.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+      <as>gj</as>
+    </depends>
+    <depends>
+      <module>base</module>
+    </depends>
+  </module>
+
+  <module>
+    <name>uiJCRExplorer</name>
+    <script>
+      <path>/javascript/eXo/ecm/UIJCRExplorer.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+      <as>gj</as>
+    </depends>
+  </module>
+  
+  <module>
+    <name>uiDocumentForm</name>
+    <script>
+      <path>/javascript/eXo/ecm/UIDocumentForm.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+      <as>gj</as>
+    </depends>
+    <depends>
+      <module>ecm-utils</module>
+    </depends>
+  </module>
+  
+  <module>
+    <name>uiListView</name>
+    <script>
+      <path>/javascript/eXo/ecm/UIListView.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+      <as>gj</as>
+    </depends>
+    <depends>
+      <module>ecm-utils</module>
+    </depends>
+    <depends>
+      <module>wcm-utils</module>
+    </depends>
+    <depends>
+      <module>webui-ext</module>
+    </depends>
+  </module>
+  
+  <module>
+    <name>rename</name>
     <script>
       <path>/javascript/eXo/ecm/Rename.js</path>
     </script>
@@ -90,20 +182,49 @@
       <module>jquery</module>
       <as>gj</as>
     </depends>
-     <depends>
-       <module>quick-edit</module>
-     </depends>
-     <depends>
-       <module>webui</module>
-     </depends>
-     <depends>
-       <module>webui-ext</module>
-     </depends>
-     <depends>
-       <module>ecm-utils</module>
-     </depends>
-     <depends>
-       <module>wcm-utils</module>
-     </depends>
+    <depends>
+      <module>wcm-utils</module>
+    </depends>
+  </module>
+   
+  <module>
+    <name>zeroClipboard</name>
+    <as>zeroClipboard</as>
+    <script>
+      <path>/javascript/eXo/ecm/ZeroClipboard.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+      <as>gj</as>
+    </depends>
+    <depends>
+      <module>ecm-utils</module>
+    </depends>
+  </module>
+  
+  <module>
+    <name>autoComplete</name>
+    <as>autoComplete</as>
+    <script>
+      <path>/javascript/eXo/ecm/AutoComplete.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+      <as>gj</as>
+    </depends>
+    <depends>
+      <module>base</module>
+    </depends>
+  </module>
+  
+  <module>
+    <name>mouseEventManager</name>
+    <as>mouseEventManager</as>
+    <script>
+      <path>/javascript/eXo/ecm/MouseEventManager.js</path>
+    </script>
+    <depends>
+      <module>base</module>
+    </depends>
   </module>
 </gatein-resources>

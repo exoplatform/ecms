@@ -68,10 +68,10 @@
   def size = uicomponent.getChildrenList().size();
   def jsManager = rcontext.getJavascriptManager();
   jsManager.require("SHARED/ecm-utils", "ecmutil").
-            require("SHARED/explorer-module", "explorer").
-  addScripts("explorer.UIListView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');").
+            require("SHARED/uiListView", "uiListView").
+  addScripts("uiListView.UIListView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');").
   addScripts("ecmutil.ECMUtils.initClipboard('clip_button','1','$size');").  
-  addScripts('explorer.UIListView.loadEffectedWidthColumn();');
+  addScripts('uiListView.UIListView.loadEffectedWidthColumn();');
   
   //Config to display columns with format: ["${column};${width}"]
   //Default 

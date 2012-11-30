@@ -48,6 +48,7 @@
     <org.gatein.portal.version>3.5.0.Final</org.gatein.portal.version>
     <org.gatein.wci.version>2.3.0.Final</org.gatein.wci.version>
     <org.gatein.common.version>2.1.0.Final</org.gatein.common.version>
+    
     <!-- ************** -->
     <!-- Build settings -->
     <!-- ************** -->

@@ -44,9 +44,9 @@
   def managersMultiItemContext =  uiWorkingArea.getMultiActionsExtensionList();
   def managersGroundContext = uiWorkingArea.getGroundActionsExtensionList();
   def jsManager = rcontext.getJavascriptManager();
-  jsManager.require("SHARED/explorer-module", "explorer").
+  jsManager.require("SHARED/uiTimelineView", "uiTimelineView").
             require("SHARED/ecm-utils", "ecmutil").
-  addScripts("explorer.UITimelineView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');").
+  addScripts("uiTimelineView.UITimelineView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');").
   addScripts("ecmutil.ECMUtils.initClipboard('clip_button','1','$size');").
   addScripts('ecmutil.ECMUtils.loadEffectedItemsInSideBar();');
 

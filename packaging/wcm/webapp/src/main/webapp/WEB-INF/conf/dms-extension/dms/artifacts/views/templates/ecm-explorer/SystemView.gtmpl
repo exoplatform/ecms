@@ -30,8 +30,8 @@
   
   def viewComponentId  = new Date().getTime();
   def rcontext = _ctx.getRequestContext();
-  rcontext.getJavascriptManager().require("SHARED/explorer-module", "ecmexplorer").
-  addScripts("ecmexplorer.UIListView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');");
+  rcontext.getJavascriptManager().require("SHARED/uiListView", "uiListView").
+  addScripts("uiListView.UIListView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');");
 %>
 <div id="$componentId">
   <div id="${componentId}-$viewComponentId" class="UIListView" style="">  

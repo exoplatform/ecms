@@ -36,8 +36,8 @@
   def rcontext = _ctx.getRequestContext() ;
   def jsManager = rcontext.getJavascriptManager();
   jsManager.require("SHARED/ecm-utils", "ecmutil").
-            require("SHARED/explorer-module", "explorer").
-  addScripts("explorer.UISimpleView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');").
+            require("SHARED/uiSimpleView", "uiSimpleView").
+  addScripts("uiSimpleView.UISimpleView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');").
 	addScripts("ecmutil.ECMUtils.initClipboard('clip_button','1','$size');");
 %>
 <div id="$componentId">

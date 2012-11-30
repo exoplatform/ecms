@@ -91,6 +91,9 @@
       <depends>
       	<module>content-selector</module>
       </depends>
+      <depends>
+        <module>uiCalendar</module>
+      </depends>
     </module>
   </portlet>
 
@@ -125,8 +128,7 @@
         <module>clv</module>
       </depends>
     </module>
-  </portlet>  
-  
+  </portlet>
   
 </gatein-resources>
 

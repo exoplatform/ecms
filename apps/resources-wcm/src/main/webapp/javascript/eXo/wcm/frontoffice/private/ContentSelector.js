@@ -9,8 +9,8 @@
 		this.hostName = parentLocation.href.substring(0, parentLocation.href.indexOf(parentLocation.pathname));
 		this.repositoryName = "repository";
 		this.workspaceName	= "collaboration";
-	  this.cmdEcmBundle = "/bundle/";
-	  this.cmdGetBundle = "getBundle?";
+		this.cmdEcmBundle = "/bundle/";
+		this.cmdGetBundle = "getBundle?";
 		this.cmdEcmDriver = "/wcmDriver/"
 		this.cmdGetDriver = "getDrivers?";
 		this.cmdGetFolderAndFile = "getFoldersAndFiles?";
@@ -1212,5 +1212,7 @@
 	
 	eXo.ecm.ECS = new EcmContentSelector();
 	window.onresize = eXo.ecm.ECS.fixHeightTrees;
-	return eXo.ecm.ECS;
+	return {
+		ECS : eXo.ecm.ECS
+	};
 })(gj, wcm_utils);

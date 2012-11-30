@@ -180,5 +180,7 @@
 	  };
 	
 	eXo.ecm.CLV = new ContentListViewer();
-	return eXo.ecm.CLV;
+	return {
+		CLV : eXo.ecm.CLV
+	}
 })(gj);
