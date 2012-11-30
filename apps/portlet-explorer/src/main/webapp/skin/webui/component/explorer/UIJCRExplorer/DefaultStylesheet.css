@@ -516,6 +516,8 @@
 .UIJCRExplorerPortlet .UIListGrid .RowView {
 	line-height: 19px;
 	margin-top: 6px;
+	height: 19px;
+	overflow: hidden;
 }
 
 .UIJCRExplorerPortlet .UIListGrid .FileDrag {
@@ -949,6 +951,26 @@
   height: 18px;
   border: solid 1px #bdbdbd;
   border-bottom: none;
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIDocumentWorkspace .FolderExpanded {
+  background: url('/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/BlackDownArrow.gif') no-repeat scroll 0% 0%;
+  height: 16px;
+  width: 16px;
+  float: left;
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIDocumentWorkspace .FolderCollapsed {
+  background: url('/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/BlackNextArrow.gif') no-repeat scroll 0% 0%;
+  height: 16px;
+  width: 16px;
+  float: left;
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIDocumentWorkspace .NoArrow {
+  height: 16px;
+  width: 16px;
+  float: left;
 }
 
 /*############################## -- END UIDocumentInfo -- ##############################*/

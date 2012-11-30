@@ -200,8 +200,15 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
   public void update(Preference pref) {
     getUIFormCheckBoxInput(FIELD_ENABLESTRUCTURE).setChecked(pref.isJcrEnable());
     UIFormCheckBoxInput<Boolean> showSideBar = getUIFormCheckBoxInput(FIELD_SHOWSIDEBAR);
-    showSideBar.setChecked(pref.isShowSideBar());
-    showSideBar.setEnable(this.getAncestorOfType(UIJCRExplorerPortlet.class).isShowSideBar());
+    showSideBar.setChecked(pref.isShowSideBar() && getAncestorOfType(UIJCRExplorer.class).canShowSideBar());
+    showSideBar.setReadOnly(!this.getAncestorOfType(UIJCRExplorerPortlet.class).isShowSideBar() ||
+                          !this.getAncestorOfType(UIJCRExplorer.class).canShowSideBar());
+
+    showSideBar.setEditable(this.getAncestorOfType(UIJCRExplorerPortlet.class).isShowSideBar() &&
+                            this.getAncestorOfType(UIJCRExplorer.class).canShowSideBar());
+    
+    showSideBar.setEnable(this.getAncestorOfType(UIJCRExplorerPortlet.class).isShowSideBar() &&
+                            this.getAncestorOfType(UIJCRExplorer.class).canShowSideBar());
 
     getUIFormCheckBoxInput(FIELD_SHOWNONDOCUMENT).setChecked(pref.isShowNonDocumentType());
     getUIFormCheckBoxInput(FIELD_SHOWREFDOCUMENTS).setChecked(pref.isShowPreferenceDocuments());
@@ -226,10 +233,12 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
       response.addCookie(createNewCookie(Preference.PREFERENCE_ENABLESTRUCTURE, "true"));
     else
       response.addCookie(createNewCookie(Preference.PREFERENCE_ENABLESTRUCTURE, "false"));
-    if (getUIFormCheckBoxInput(FIELD_SHOWSIDEBAR).isChecked())
-      response.addCookie(createNewCookie(Preference.PREFERENCE_SHOWSIDEBAR, "true"));
-    else
-      response.addCookie(createNewCookie(Preference.PREFERENCE_SHOWSIDEBAR, "false"));
+    if (getAncestorOfType(UIJCRExplorer.class).canShowSideBar()) {
+      if (getUIFormCheckBoxInput(FIELD_SHOWSIDEBAR).isChecked())
+        response.addCookie(createNewCookie(Preference.PREFERENCE_SHOWSIDEBAR, "true"));
+      else
+        response.addCookie(createNewCookie(Preference.PREFERENCE_SHOWSIDEBAR, "false"));
+    }
     if (getUIFormCheckBoxInput(FIELD_SHOWNONDOCUMENT).isChecked())
       response.addCookie(createNewCookie(Preference.SHOW_NON_DOCUMENTTYPE, "true"));
     else
@@ -266,7 +275,9 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
       UIJCRExplorer uiExplorer = explorerPorltet.findFirstComponentOfType(UIJCRExplorer.class);
       Preference pref = uiExplorer.getPreference();
       pref.setJcrEnable(uiForm.getUIFormCheckBoxInput(FIELD_ENABLESTRUCTURE).isChecked());
-      pref.setShowSideBar(uiForm.getUIFormCheckBoxInput(FIELD_SHOWSIDEBAR).isChecked());
+      if (uiExplorer.canShowSideBar()) {
+        pref.setShowSideBar(uiForm.getUIFormCheckBoxInput(FIELD_SHOWSIDEBAR).isChecked());
+      }
       pref.setShowNonDocumentType(uiForm.getUIFormCheckBoxInput(FIELD_SHOWNONDOCUMENT).isChecked());
       pref.setShowPreferenceDocuments(uiForm.getUIFormCheckBoxInput(FIELD_SHOWREFDOCUMENTS).isChecked());
       pref.setShowHiddenNode(uiForm.getUIFormCheckBoxInput(FIELD_SHOW_HIDDEN_NODE).isChecked());

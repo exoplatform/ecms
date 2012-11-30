@@ -141,6 +141,14 @@ public class UIJCRExplorer extends UIContainer {
   private boolean isFilterSave_ ;
   private boolean  isShowDocumentViewForFile_ = true;
   private boolean preferencesSaved_ = false;
+  private boolean canShowSideBar = true;
+
+  public boolean canShowSideBar() {
+    return canShowSideBar;
+  }
+  public void setCanShowSideBar(boolean canShowSideBar) {
+    this.canShowSideBar = canShowSideBar;
+  }
 
   private int tagScope;
 

@@ -1040,6 +1040,12 @@ var ListView = function() {
 	ListView.prototype.loadEffectedWidthColumn = function() {
 		var objResizeClazz = eXo.ecm.UIListView.objRowClazz;
 		var root = document.getElementById("UIDocumentWorkspace");
+		var workingArea = document.getElementById("UIWorkingArea");
+		var leftContainer = document.getElementById("LeftContainer");
+		var dynamicWidth = 0;
+		if (leftContainer) {
+			dynamicWidth = workingArea.offsetWidth - leftContainer.offsetWidth - 6 ;
+		}
 		var listGrid = gj(root).find("div.UIListGrid:first")[0];
 		root.style.overflow = "auto";
 		var rightContainer = gj(listGrid).parents(".RightContainer:first")[0];

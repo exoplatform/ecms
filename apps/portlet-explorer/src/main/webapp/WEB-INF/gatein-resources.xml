@@ -85,6 +85,10 @@
       <path>/javascript/eXo/ecm/UIListView.js</path>
     </script>
     <script>
+      <name>eXo.ecm.UIFileView</name>
+      <path>/javascript/eXo/ecm/UIFileView.js</path>
+    </script>
+    <script>
       <name>eXo.ecm.UISimpleView</name>
       <path>/javascript/eXo/ecm/UISimpleView.js</path>
     </script>

@@ -199,6 +199,8 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   private NodeLocation          currentNode_;
 
   private UIPageIterator        pageIterator_;
+  
+  private UIDocumentNodeList    documentNodeList_;
 
   private UIPageIterator        todayPageIterator_;
 
@@ -229,6 +231,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
   public UIDocumentInfo() throws Exception {
     pageIterator_ = addChild(UIPageIterator.class, null, CONTENT_PAGE_ITERATOR_ID);
+    documentNodeList_ = addChild(UIDocumentNodeList.class, null, null);
     todayPageIterator_ = addChild(UIPageIterator.class, null, CONTENT_TODAY_PAGE_ITERATOR_ID);
     yesterdayPageIterator_ = addChild(UIPageIterator.class, null, CONTENT_YESTERDAY_PAGE_ITERATOR_ID);
     earlierThisWeekPageIterator_ = addChild(UIPageIterator.class, null, CONTENT_WEEK_PAGE_ITERATOR_ID);
@@ -876,38 +879,47 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     if(uiExplorer.getAllClipBoard().size() > 0) return true;
     return false;
   }
-
+  
   @SuppressWarnings("unchecked")
   public void updatePageListData() throws Exception {
+    UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
+    String currentPath = uiExplorer.getCurrentPath();
+
+    LazyPageList<Object> pageList = getPageList(currentPath);
+    pageIterator_.setPageList(pageList);
+    documentNodeList_.setPageList(pageList);
+    
+    updateTimeLineData_ = true;
+  }  
+
+  @SuppressWarnings("unchecked")
+  public LazyPageList<Object> getPageList(String path) throws Exception {
     UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
 
     Preference pref = uiExplorer.getPreference();
     int nodesPerPage = pref.getNodesPerPage();
     List<Node> nodeList = new ArrayList<Node>();
 
-    String currentPath = uiExplorer.getCurrentPath();
     if(!uiExplorer.isViewTag()) {
       Set<String> allItemByTypeFilterMap = uiExplorer.getAllItemByTypeFilterMap();
       if (allItemByTypeFilterMap.size() > 0)
-        nodeList = filterNodeList(uiExplorer.getChildrenList(currentPath, !pref.isShowPreferenceDocuments()));
+        nodeList = filterNodeList(uiExplorer.getChildrenList(path, !pref.isShowPreferenceDocuments()));
       else
-        nodeList = filterNodeList(uiExplorer.getChildrenList(currentPath, pref.isShowPreferenceDocuments()));
+        nodeList = filterNodeList(uiExplorer.getChildrenList(path, pref.isShowPreferenceDocuments()));
     } else { // if (uiExplorer.isViewTag())
       nodeList = uiExplorer.getDocumentByTag();
     }
 
     ListAccess<Object> nodeAccList = new ListAccessImpl<Object>(Object.class,
                                                                 NodeLocation.getLocationsByNodeList(nodeList));
-    pageIterator_.setPageList(new LazyPageList<Object>(nodeAccList, nodesPerPage));
-
-    updateTimeLineData_ = true;
+    return new LazyPageList<Object>(nodeAccList, nodesPerPage);
   }
 
   @SuppressWarnings("unchecked")
   public List<Node> getChildrenList() throws Exception {
     return NodeLocation.getNodeListByLocationList(pageIterator_.getCurrentPageData());
   }
-
+  
   public String getTypeSort() { return typeSort_; }
 
   public void setTypeSort(String typeSort) {
@@ -1542,7 +1554,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
       }
     }
   }
-
+  
   private class SearchComparator implements Comparator<NodeLocation> {
     public int compare(NodeLocation nodeA, NodeLocation nodeB) {
       try {
@@ -1728,6 +1740,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   @Override
   public void processRender(WebuiRequestContext context) throws Exception {
     //check if current user can add node to current node
+    //for MuiltUpload drag&drop feature
     if (canAddNode()) {
       context.getJavascriptManager().require("SHARED/explorer-module", "explorer").
               addScripts("explorer.MultiUpload.registerEvents('" + this.getId() +"');");
@@ -1735,8 +1748,21 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
       context.getJavascriptManager().require("SHARED/explorer-module", "explorer").
               addScripts("explorer.MultiUpload.unregisterEvents();");
     }
+    //for FileView feature
+    getAncestorOfType(UIJCRExplorer.class).setCanShowSideBar(true);
+    context.getJavascriptManager().
+    require("SHARED/explorer-module", "explorer").
+    addScripts("explorer.UIFileView.showSideBar();");
+    
     super.processRender(context);
   }
   
+  public boolean hasChildren(Node node) {
+    return false;
+  }
+  
+  public List<Node> getChildrenFromNode(Node node) {
+    return null;
+  }
 
 }
