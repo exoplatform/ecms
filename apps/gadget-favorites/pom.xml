@@ -11,7 +11,7 @@
   <name>eXo Favorite Gadget</name>
   <dependencies>
     <dependency>
-      <groupId>org.exoplatform.portal</groupId>
+      <groupId>org.gatein.portal</groupId>
       <artifactId>exo.portal.component.web.resources</artifactId>
       <scope>runtime</scope>
     </dependency>

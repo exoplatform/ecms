@@ -23,8 +23,8 @@ import javax.jcr.Node;
 import javax.jcr.Value;
 
 import org.exoplatform.portal.config.UserPortalConfigService;
-import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.mop.SiteKey;
+import org.exoplatform.portal.mop.page.PageContext;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserPortal;
@@ -34,8 +34,8 @@ import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPort
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationHistory;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationPages;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationPagesContainer;
-import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublishedPages;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationTree.TreeNode;
+import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublishedPages;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -195,14 +195,13 @@ public class UIPublicationAction extends UIForm {
       UserPortal userPortal = Util.getUIPortalApplication().getUserPortalConfig().getUserPortal();
       UserNavigation navigation = userPortal.getNavigation(SiteKey.portal(portalName));
       
-      Page page = null;
+      PageContext pageContext = null;
       Node contentNode = null;
       if (navigation != null) {
         contentNode = publicationPages.getNode();
         if (contentNode.hasProperty("publication:applicationIDs")) {
           UserNode userNode = getUserNodeByUri(navigation, pageNodeUri);
-          page = userPortalConfigService.getPage(userNode.getPageRef(),
-                                                 event.getRequestContext().getRemoteUser());
+          pageContext = userPortalConfigService.getPage(userNode.getPageRef());
         }
       }
       publicationAction.updateUI();

@@ -39,10 +39,11 @@ import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.portal.application.PortalRequestContext;
-import org.exoplatform.portal.config.DataStorage;
 import org.exoplatform.portal.config.UserACL;
-import org.exoplatform.portal.config.model.Page;
+import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.mop.SiteType;
+import org.exoplatform.portal.mop.page.PageContext;
+import org.exoplatform.portal.mop.page.PageKey;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserPortal;
@@ -141,7 +142,7 @@ public class Utils {
   /**
    * Check if the portlet current mode is view mode or not
    * @param pContext The request context of a portlet
-   * 
+   *
    * @return return true if current portlet mode is view mode; otherwise return false
    */
   public static boolean isPortletViewMode(PortletRequestContext pContext) {
@@ -396,8 +397,8 @@ public class Utils {
    * Check if the user can delete the current node
    *
    * @return true, if current mode is edit mode
-   * @throws RepositoryException 
-   * @throws AccessControlException 
+   * @throws RepositoryException
+   * @throws AccessControlException
    */
   public static boolean isShowDelete(Node content) throws AccessControlException, RepositoryException {
     boolean isEditMode = false;
@@ -814,12 +815,12 @@ public class Utils {
     UIPortal currentUIPortal = portalApp.<UIWorkingWorkspace> findComponentById(UIPortalApplication.UI_WORKING_WS_ID)
     .findFirstComponentOfType(UIPortal.class);
     UserNode currentNode = currentUIPortal.getSelectedUserNode();
-    String pageReference = currentNode.getPageRef();
+    PageKey pageReference = currentNode.getPageRef();
     if (pageReference == null) {
       return false;
     }
-    DataStorage dataStorage = portalApp.getApplicationComponent(DataStorage.class);
-    Page page = dataStorage.getPage(pageReference);
+    UserPortalConfigService portalConfigService = portalApp.getApplicationComponent(UserPortalConfigService.class);
+    PageContext page = portalConfigService.getPage(pageReference);
     if (page == null) {
       return false;
     }
@@ -868,7 +869,7 @@ public class Utils {
       return value;
     }
   }
-  
+
   public static boolean isEmptyContent(String inputValue) {
     boolean isEmpty = true;
     inputValue = inputValue.trim().replaceAll("<p>", "").replaceAll("</p>", "");
@@ -877,7 +878,7 @@ public class Utils {
     if(inputValue != null && inputValue.length() > 0) return false;
     return isEmpty;
   }
-  
+
   /**
    * @purpose     Check if a query is valid
    * @param workspace

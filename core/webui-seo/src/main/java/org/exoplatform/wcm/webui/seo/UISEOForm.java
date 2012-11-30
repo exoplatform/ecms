@@ -237,7 +237,7 @@ public class UISEOForm extends UIForm{
       String portalName = portalRequestContext.getPortalOwner();
       String uri = portalRequestContext.getRequestURI();
       String fullStatus = null;
-      String pageReference = Util.getUIPortal().getSelectedUserNode().getPageRef();
+      String pageReference = Util.getUIPortal().getSelectedUserNode().getPageRef().toString();
 
       if(!uiForm.onContent) {
         String robots_index = uiForm.getUIFormSelectBox(ROBOTS_INDEX).getValue() ;

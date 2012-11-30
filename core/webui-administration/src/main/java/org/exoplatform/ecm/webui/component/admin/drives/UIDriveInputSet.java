@@ -34,7 +34,12 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.ExtendedSession;
+import org.exoplatform.services.jcr.datamodel.InternalQName;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.impl.Constants;
+import org.exoplatform.services.jcr.impl.core.LocationFactory;
+import org.exoplatform.services.jcr.impl.core.RepositoryImpl;
 import org.exoplatform.services.jcr.impl.core.nodetype.NodeTypeImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -77,6 +82,7 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
   public String unstructuredFolderLabel_;
   protected Set<String> setFoldertypes;
   protected TemplateService templateService;
+
   public UIDriveInputSet(String name) throws Exception {
     super(name);
     setComponentConfig(getClass(), null);
@@ -214,7 +220,7 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
       allNodeTypes.add(mixin);
     }
     for (NodeType nodetype:allNodeTypes) {
-      if (((NodeTypeImpl)nodetype).isChildNodePrimaryTypeAllowed(childNodeTypeName)) {
+      if (((NodeTypeImpl)nodetype).isChildNodePrimaryTypeAllowed(Constants.JCR_ANY_NAME, ((NodeTypeImpl)childNodeType).getQName())) {
         return true;
       }
     }

@@ -28,10 +28,14 @@ import org.exoplatform.component.test.ConfigurationUnit;
 import org.exoplatform.component.test.ConfiguredBy;
 import org.exoplatform.component.test.ContainerScope;
 import org.exoplatform.ecms.test.BaseECMSTestCase;
+import org.exoplatform.portal.config.DataStorage;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.Page;
+import org.exoplatform.portal.mop.SiteKey;
+import org.exoplatform.portal.mop.page.PageContext;
 import org.exoplatform.portal.pom.config.POMSession;
 import org.exoplatform.portal.pom.config.POMSessionManager;
+import org.exoplatform.portal.mop.page.PageKey;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
@@ -50,7 +54,7 @@ import org.testng.annotations.Test;
  */
 @ConfiguredBy({
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-test-configuration.xml"),
-  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/wcm/test-search-configuration.xml") 
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/wcm/test-search-configuration.xml")
   })
 public class TestSearchService extends BaseECMSTestCase {
   QueryCriteria queryCriteria = new QueryCriteria();
@@ -72,7 +76,7 @@ public class TestSearchService extends BaseECMSTestCase {
   private POMSession  pomSession;
 
   private int seachItemsPerPage = 100;
-  
+
   @Override
   protected void afterContainerStart() {
     super.afterContainerStart();
@@ -104,14 +108,18 @@ public class TestSearchService extends BaseECMSTestCase {
 
   private void addChildNodes(Node parentNode)throws Exception{
     if (pomManager.getSession() == null) pomSession = pomManager.openSession();
-    Page page = userPortalConfigService.getPage("portal::classic::testpage");
-    if(page == null){
+    //PageContext pageContext = userPortalConfigService.getPage(new PageKey("portal", "classic", "testpage"));
+    PageContext pageContext = userPortalConfigService.getPage(new PageKey(new SiteKey("portal", "classic"), "testpage"));
+
+
+    Page page;
+    if(pageContext == null){
       page = new Page();
       page.setPageId("portal::classic::testpage");
       page.setName("testpage");
       page.setOwnerType("portal");
       page.setOwnerId("classic");
-      userPortalConfigService.create(page);
+      WCMCoreUtils.getService(DataStorage.class).save(page);
     }
 
     Node webContentNode = null;
@@ -122,20 +130,20 @@ public class TestSearchService extends BaseECMSTestCase {
       context = new HashMap<String, String>();
 //      context.put(DumpPublicationPlugin.CURRENT_REVISION_NAME, webContentNode.getName());
       publicationPlugin.changeState(webContentNode, PublicationDefaultStates.PUBLISHED, context);
-        
+
       webContentNode = createWebcontentNode(parentNode, "webcontent1", null, null, null);
       if(!webContentNode.isNodeType("metadata:siteMetadata"))webContentNode.addMixin("metadata:siteMetadata");
       wcmPublicationService.enrollNodeInLifecycle(webContentNode, DumpPublicationPlugin.LIFECYCLE_NAME);
       context = new HashMap<String, String>();
 //      context.put(DumpPublicationPlugin.CURRENT_REVISION_NAME, webContentNode.getName());
       publicationPlugin.changeState(webContentNode, PublicationDefaultStates.DRAFT, context);
-    
+
     session.save();
     pomSession.close();
   }
 
   private AbstractPageList<ResultNode> getSearchResult() throws Exception{
-    return siteSearchService.searchSiteContents(WCMCoreUtils.getSystemSessionProvider(), 
+    return siteSearchService.searchSiteContents(WCMCoreUtils.getSystemSessionProvider(),
                                                 queryCriteria, seachItemsPerPage, false);
   }
 
@@ -197,7 +205,7 @@ public class TestSearchService extends BaseECMSTestCase {
    * @throws Exception the exception
    */
   @Test
-  public void testSearchAllPortalNotLiveMode() throws Exception {    
+  public void testSearchAllPortalNotLiveMode() throws Exception {
     queryCriteria = new QueryCriteria();
     queryCriteria.setSiteName(null);
     queryCriteria.setKeyword(searchKeyword);
@@ -244,7 +252,7 @@ public class TestSearchService extends BaseECMSTestCase {
    * searchIsLiveMode = true<br>
    */
   @Test
-  public void testSearchDocumentLiveMode() throws Exception {    
+  public void testSearchDocumentLiveMode() throws Exception {
     queryCriteria = new QueryCriteria();
     queryCriteria.setSiteName(null);
     queryCriteria.setKeyword(searchKeyword);
@@ -314,7 +322,7 @@ public class TestSearchService extends BaseECMSTestCase {
     queryCriteria.setSearchDocument(true);
     queryCriteria.setSearchWebContent(true);
     queryCriteria.setLiveMode(true);
-    queryCriteria.setSearchWebpage(false); 
+    queryCriteria.setSearchWebpage(false);
     AbstractPageList<ResultNode> pageList = getSearchResult();
     assertEquals(1, pageList.getPage(1).size());
     assertEquals(2, pageList.getTotalNodes());
@@ -589,8 +597,8 @@ public class TestSearchService extends BaseECMSTestCase {
     queryCriteria.setSearchWebContent(true);
     queryCriteria.setLiveMode(true);
     queryCriteria.setSearchWebpage(false);
-    queryCriteria.setFulltextSearch(true);    
-    String documentType = "exo:webContent";    
+    queryCriteria.setFulltextSearch(true);
+    String documentType = "exo:webContent";
     queryCriteria.setFulltextSearchProperty(null);
     queryCriteria.setContentTypes(documentType.split(","));
     assertEquals(2, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
@@ -605,8 +613,8 @@ public class TestSearchService extends BaseECMSTestCase {
     queryCriteria.setSearchWebContent(true);
     queryCriteria.setLiveMode(true);
     queryCriteria.setSearchWebpage(false);
-    queryCriteria.setFulltextSearch(true);    
-    queryCriteria.setFulltextSearchProperty(null);    
+    queryCriteria.setFulltextSearch(true);
+    queryCriteria.setFulltextSearchProperty(null);
     String author = "root";
     queryCriteria.setAuthors(new String[]{author});
     assertEquals(4, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
@@ -621,8 +629,8 @@ public class TestSearchService extends BaseECMSTestCase {
     queryCriteria.setSearchWebContent(true);
     queryCriteria.setLiveMode(true);
     queryCriteria.setSearchWebpage(false);
-    queryCriteria.setFulltextSearch(true);    
-    queryCriteria.setFulltextSearchProperty(null);    
+    queryCriteria.setFulltextSearch(true);
+    queryCriteria.setFulltextSearchProperty(null);
     queryCriteria.setMimeTypes(new String[]{"exo:webContent", " exo:siteBreadcrumb"});
     assertEquals(4, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
   }
@@ -636,12 +644,12 @@ public class TestSearchService extends BaseECMSTestCase {
     queryCriteria.setSearchWebContent(true);
     queryCriteria.setLiveMode(true);
     queryCriteria.setSearchWebpage(false);
-    queryCriteria.setFulltextSearch(true);    
-    queryCriteria.setFulltextSearchProperty(null);    
-    queryCriteria.setMimeTypes(new String[]{"exo:webContent", " exo:siteBreadcrumb"});    
+    queryCriteria.setFulltextSearch(true);
+    queryCriteria.setFulltextSearchProperty(null);
+    queryCriteria.setMimeTypes(new String[]{"exo:webContent", " exo:siteBreadcrumb"});
     Node node = (Node)session.getItem("/sites content/live/classic/web contents/webcontent0");
     String uuid = node.getUUID();
-    queryCriteria.setTagUUIDs(new String[]{uuid});   
+    queryCriteria.setTagUUIDs(new String[]{uuid});
     assertEquals(4, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
   }
 
@@ -663,7 +671,7 @@ public class TestSearchService extends BaseECMSTestCase {
 
     session.save();
   }
-  
+
   protected Node createWebcontentNode(Node parentNode,
                                       String nodeName,
                                       String htmlData,
