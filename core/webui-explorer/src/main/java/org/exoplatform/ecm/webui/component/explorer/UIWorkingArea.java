@@ -370,4 +370,12 @@ public class UIWorkingArea extends UIContainer {
   public String getTitle(Node node) throws Exception {
     return Utils.getTitle(node);
   }
+  
+  public void processRender(WebuiRequestContext context) throws Exception {
+    UIJCRExplorerPortlet uiPortlet = getAncestorOfType(UIJCRExplorerPortlet.class);
+    UIActionBar uiActionBar = findFirstComponentOfType(UIActionBar.class);
+    uiActionBar.setRendered(uiPortlet.isShowActionBar());
+    super.processRender(context);
+  }
+
 }
