@@ -100,6 +100,10 @@ UIForm.prototype.submitForm = function(formId, action, useAjax, callback) {
   } else {
     form.submit();
   }
+  if (action.toLowerCase() == "save" && navigator.appName == 'Microsoft Internet Explorer')
+  {
+	window.location.reload();
+  }
 } ;
 eXo.webui.UIForm = new UIForm();
 /**
