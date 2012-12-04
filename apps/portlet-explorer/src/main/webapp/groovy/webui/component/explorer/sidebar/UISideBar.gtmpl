@@ -2,13 +2,13 @@
 
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
   import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
+  import org.exoplatform.ecm.webui.utils.Utils;
   def managers = uicomponent.getManagers();
   
   def jsManager = _ctx.getRequestContext().getJavascriptManager();
   jsManager.require("SHARED/ecm-utils", "ecmutil").
   addScripts("ecmutil.ECMUtils.resizeVisibleComponent();").
   addScripts("ecmutil.ECMUtils.loadEffectedItemsInSideBar();");
-  
   public String getCSSClassName(String item) {
     if (uicomponent.getSelectedComp().equals(item)) return "SelectedItem";
     return "NormalItem";
@@ -33,11 +33,11 @@
 			
 			<% if (uicomponent.getLstHiddenComp().size() > 0) { %>
 				<!--More button -->
-				<div class="MoreItem">
-					<div class="ItemIcon ActionItem" onclick="eXo.ecm.ECMUtils.toggleVisibility(event);"><span></span></div>
+				<div class="MoreItem" onclick="eXo.ecm.ECMUtils.hiddenExtendedListTrigger(event, this);">
+					<div class="ItemIcon ActionItem" ><span></span></div>
 					
 					<!-- Hidden drop down-->
-					<div style="display: none;" id="ListExtendedComponent" class="ListExtendedItem">
+					<div style="display: none;" id="ListExtendedComponent" class="ListExtendedItem UIDropDownMenu">
 						<%
          					for(itemContext in uicomponent.getLstHiddenComp()) {
          						def action = itemContext.getUIExtensionName();
@@ -48,11 +48,11 @@
 				</div>
 			<% } else { %>
 				<!--More button -->
-				<div class="MoreItem" style="display:none">
-					<div class="ItemIcon ActionItem" onclick="eXo.ecm.ECMUtils.toggleVisibility(event);"><span></span></div>
+				<div class="MoreItem" style="display:none" onclick="eXo.ecm.ECMUtils.hiddenExtendedListTrigger(event, this);">
+					<div class="ItemIcon ActionItem" ><span></span></div>
 					
 					<!-- Hidden drop down-->
-					<div style="display: none;" id="ListExtendedComponent" class="ListExtendedItem"></div>						
+					<div style="display: none;" id="ListExtendedComponent" class="ListExtendedItem UIDropDownMenu"></div>						
 				</div>			
 			<% } %>
 		</div>
