@@ -57,6 +57,7 @@ public class TagExplorerActionComponent extends UIAbstractManagerComponent {
       uiExplorer.setCurrentState();
       uiSideBar.setCurrentComp(uiSideBar.getChild(UITagExplorer.class).getId());
       uiSideBar.setSelectedComp(event.getSource().getUIExtensionName());
+      uiSideBar.getChild(UITagExplorer.class).updateTagList();
       event.getRequestContext().addUIComponentToUpdateByAjax(uiSideBar.getParent());
 
     }
