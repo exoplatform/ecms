@@ -40,6 +40,8 @@ import javax.jcr.RepositoryException;
 import javax.jcr.nodetype.NodeDefinition;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeManager;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.ExoContainer;
@@ -47,6 +49,7 @@ import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.definition.PortalContainerConfig;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
+import org.exoplatform.portal.config.UserPortalConfig;
 import org.exoplatform.portal.resource.SkinConfig;
 import org.exoplatform.portal.resource.SkinService;
 import org.exoplatform.portal.webui.util.Util;
@@ -826,13 +829,11 @@ public class Utils {
     StringBuffer contentsCss = new StringBuffer();
     contentsCss.append("[");
     SkinService skinService = WCMCoreUtils.getService(SkinService.class);
-    String skin = Util.getUIPortalApplication().getUserPortalConfig().getPortalConfig().getSkin();
+    UserPortalConfig upc = Util.getPortalRequestContext().getUserPortalConfig();
+    String skin = upc.getPortalConfig().getSkin();
     String portal = Util.getUIPortal().getName();
     Collection<SkinConfig> portalSkins = skinService.getPortalSkins(skin);
-    SkinConfig customSkin = skinService.getSkin(portal, Util.getUIPortalApplication()
-        .getUserPortalConfig()
-        .getPortalConfig()
-        .getSkin());
+    SkinConfig customSkin = skinService.getSkin(portal, upc.getPortalConfig().getSkin());
     if (customSkin != null) portalSkins.add(customSkin);
     for (SkinConfig portalSkin : portalSkins) {
       contentsCss.append("'").append(portalSkin.createURL()).append("',");
@@ -1049,4 +1050,24 @@ public class Utils {
     return languages ;
   }  
 
+  /**
+   * @param       cookieName
+   * @param       cookies cookies
+   * @return      a cookies value
+   * @Objective : Get a cookie value with given name
+   * @Author    : Nguyen The Vinh from ECM of eXoPlatform
+   *              vinh.nguyen@exoplatform.com
+   */
+  public static String getCookieByCookieName(String cookieName) {
+    HttpServletRequest request = Util.getPortalRequestContext().getRequest();
+    Cookie[] cookies = request.getCookies();
+    if (cookies == null) {
+      return null;
+    }
+    for(int loopIndex = 0; loopIndex < cookies.length; loopIndex++) {
+      Cookie cookie1 = cookies[loopIndex];
+      if (cookie1.getName().equals(cookieName)) return cookie1.getValue();
+    }
+    return null;
+  }
 }
