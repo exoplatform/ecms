@@ -92,6 +92,16 @@
       <scope>runtime</scope>
     </dependency>
     <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-ext-webui</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-ext-authoring-webui</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
       <groupId>org.exoplatform.jcr</groupId>
       <artifactId>exo.jcr.component.core</artifactId>
       <scope>runtime</scope>

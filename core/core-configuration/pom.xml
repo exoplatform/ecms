@@ -48,12 +48,12 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>ecms-ext-authoring-services</artifactId>
+      <artifactId>ecms-core-webui-explorer</artifactId>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>ecms-core-webui-explorer</artifactId>
+      <artifactId>ecms-ext-authoring-services</artifactId>
       <scope>runtime</scope>
     </dependency>
     <dependency>
@@ -103,12 +103,12 @@
     </dependency>
     <dependency>
       <groupId>org.xcmis</groupId>
-      <artifactId>xcmis-restatom</artifactId>
+      <artifactId>xcmis-renditions</artifactId>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.xcmis</groupId>
-      <artifactId>xcmis-renditions</artifactId>
+      <artifactId>xcmis-restatom</artifactId>
       <scope>runtime</scope>
     </dependency>
     <dependency>

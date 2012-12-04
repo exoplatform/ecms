@@ -110,11 +110,6 @@
       <artifactId>exo.portal.component.test.core</artifactId>
       <scope>runtime</scope>
     </dependency>
-    <dependency>
-      <groupId>org.testng</groupId>
-      <artifactId>testng</artifactId>
-      <scope>test</scope>
-    </dependency>
     <!-- "Unused declared" by analyze but still need for testing -->
     <dependency>
       <groupId>org.chromattic</groupId>
@@ -136,6 +131,11 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
