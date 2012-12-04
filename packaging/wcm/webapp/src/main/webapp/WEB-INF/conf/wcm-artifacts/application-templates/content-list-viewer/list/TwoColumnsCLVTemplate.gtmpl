@@ -21,25 +21,26 @@
 			def isShowRssLink = uicomponent.isShowRssLink();
 		  def isShowHeader = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_HEADER) && header != null && header.trim().length() != 0;
 			%>
-		  <div class="TopBoxHeader ClearFix">
+		
 				<%
 				if (isShowHeader) {
 					%>
+					<div class="TopBoxHeader ClearFix">
 						<div class="TitleBarL">
 							<div class="TitleBarR">
-                <div class="TitleBarM">
-                  <%if (isShowRssLink) {
-                    %><a class="RssIcon" onclick="javascript:window.open('$rssLink');" style="cursor:pointer" title="<%= _ctx.appRes("UICLVPresentation.label.rssFeed") %>">&nbsp;</a><%
-                  }%>
-                  $header                  
-                </div>
+								<div class="TitleBarM">
+								  <%if (isShowRssLink) {
+									%><a class="RssIcon" onclick="javascript:window.open('$rssLink');" style="cursor:pointer" title="<%= _ctx.appRes("UICLVPresentation.label.rssFeed") %>">&nbsp;</a><%
+								  }%>
+								  $header                  
+								</div>
 							</div>
-						</div>
+						</div>					
+					</div>	
 					<%
 				}
 				%>
 			
-			</div>
 			<%
 	
 			if (uicomponent.getUIPageIterator().getAvailable() == 0) {
@@ -50,7 +51,7 @@
 				<%
 			} else {
 			%>
-		    	<div class="Contents">			
+		    	<div class="Contents ClearFix">			
 			<%
 			  def currentPageData = uicomponent.getCurrentPageData();
 				for (def i = 0; i < currentPageData.size(); i++) {
@@ -125,25 +126,27 @@
 	    <%
 				}
 			%>
-			<div class="CaptionFunc ClearFix">
-				<% String labelRefreshAction = _ctx.appRes("UICLVPresentation.action.refresh");
-				  def isShowRefresh = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_REFRESH_BUTTON);
-					if (isShowRefresh) { 
-						String link = uicomponent.event("Refresh");
-				%>
-							<div class="CaptionRefresh">
-								<a href="$link">$labelRefreshAction</a>
-							</div>
-				<% 
-					}
-					if (uicomponent.showPaginator()) { 
-						uicomponent.renderChild(UICustomizeablePaginator.class)
-					} 
-				%>
-				
-			</div>				
+			
 			</div> <%
 			}
 		%>
+		<div class="CaptionFunc ClearFix">
+			<% 				
+				if (uicomponent.showPaginator()) { 
+					uicomponent.renderChild(UICustomizeablePaginator.class)
+				} 
+			%>
+			<% String labelRefreshAction = _ctx.appRes("UICLVPresentation.action.refresh");
+			  def isShowRefresh = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_REFRESH_BUTTON);
+				if (isShowRefresh) { 
+					String link = uicomponent.event("Refresh");
+			%>
+				<div class="CaptionRefresh">
+					<a href="$link">$labelRefreshAction</a>
+				</div>	
+			<%
+			}
+			%>
+		</div>				
 	</div>
 </div>
