@@ -76,7 +76,10 @@ import org.exoplatform.webui.form.UIForm;
       @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.ResetActionListener.class),
       @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.SelectUserActionListener.class),
       @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.SelectMemberActionListener.class),
-      @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.AddAnyActionListener.class)
+      @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.AddAnyActionListener.class),
+      @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.ChangeAddNodePermissionActionListener.class),
+      @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.ChangeRemovePermissionActionListener.class),
+      @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.ChangeSetPropertyPermissionActionListener.class)
     }
 )
 public class UIPermissionTreeForm extends UIForm implements UISelectable {
@@ -168,6 +171,41 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
 
   private String getExoOwner(Node node) throws Exception {
     return Utils.getNodeOwner(node);
+  }
+
+  static public class ChangeAddNodePermissionActionListener extends EventListener<UIPermissionTreeForm> {
+    public void execute(Event<UIPermissionTreeForm> event) throws Exception {
+      UIPermissionTreeForm source = event.getSource();
+      boolean value = source.getUIFormCheckBoxInput(PermissionType.ADD_NODE).isChecked();
+      source.getUIFormCheckBoxInput(PermissionType.SET_PROPERTY).setChecked(value);
+      if (value) {
+        source.getUIFormCheckBoxInput(PermissionType.READ).setChecked(value);
+      }
+      event.getRequestContext().addUIComponentToUpdateByAjax(source.getParent());
+    }
+  }
+  
+  static public class ChangeRemovePermissionActionListener extends EventListener<UIPermissionTreeForm> {
+    public void execute(Event<UIPermissionTreeForm> event) throws Exception {
+      UIPermissionTreeForm source = event.getSource();
+      boolean value = source.getUIFormCheckBoxInput(PermissionType.REMOVE).isChecked();
+      if (value) {
+        source.getUIFormCheckBoxInput(PermissionType.READ).setChecked(value);
+      }
+      event.getRequestContext().addUIComponentToUpdateByAjax(source.getParent());
+    }
+  }
+  
+  static public class ChangeSetPropertyPermissionActionListener extends EventListener<UIPermissionTreeForm> {
+    public void execute(Event<UIPermissionTreeForm> event) throws Exception {
+      UIPermissionTreeForm source = event.getSource();
+      boolean value = source.getUIFormCheckBoxInput(PermissionType.SET_PROPERTY).isChecked();
+      source.getUIFormCheckBoxInput(PermissionType.ADD_NODE).setChecked(value);
+      if (value) {
+        source.getUIFormCheckBoxInput(PermissionType.READ).setChecked(value);
+      }
+      event.getRequestContext().addUIComponentToUpdateByAjax(source.getParent());
+    }
   }
 
   public Node getCurrentNode() {
