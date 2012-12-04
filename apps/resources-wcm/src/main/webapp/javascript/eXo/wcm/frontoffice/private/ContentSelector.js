@@ -517,37 +517,44 @@ EcmContentSelector.prototype.listFiles = function(list) {
 			var container = eXo.core.DOMUtil.findFirstDescendantByClass(rightWS,'div','ActionIconsContainer');
 			if(container) container.innerHTML = "";
       else eXo.ecm.ECS.updateHTML(viewType);
-		}			
+		}
+		var container = eXo.core.DOMUtil.findFirstDescendantByClass(rightWS,'div','ActionIconsContainer');
+		if(container) {
+			container.style.display = "none";
+		}
 		var listItem = '';
+		var strViewContent = "";
 		for(var i = 0; i < list.length; i++) {      
 			var url 			= list[i].getAttribute("url");
 			url = encodeURIComponent(url);
 			var path 			= list[i].getAttribute("path");
 			var nodeType	= list[i].getAttribute("nodeType");
-      var nodeTypeIcon = nodeType.replace(":", "_") + "48x48Icon default16x16Icon";
+			var nodeTypeIcon = nodeType.replace(":", "_") + "48x48Icon default16x16Icon";
 			var node = list[i].getAttribute("name");
 			node = encodeURIComponent(node);
 			var size = 	list[i].getAttribute("size");
 			if(size == 0) size = "";
 			else size += '&nbsp;kb';
       
-      if(viewType=="list") {	        
+			if(viewType=="list") {	        
 				var clazz = 'OddItem';
-        var tblRWS  = eXo.core.DOMUtil.findDescendantsByTagName(rightWS, "table")[0];
+				var tblRWS  = eXo.core.DOMUtil.findDescendantsByTagName(rightWS, "table")[0];
 				var clazzItem = eXo.ecm.ECS.getClazzIcon(list[i].getAttribute("nodeType"));
 				var newRow = tblRWS.insertRow(i+1);
 				newRow.className = clazz;					
 				newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.insertContent(this);">'+decodeURIComponent(node)+'</a>';
 				newRow.insertCell(1).innerHTML = '<div class="Item">'+ list[i].getAttribute("dateCreated") +'</div>';
 				newRow.insertCell(2).innerHTML = '<div class="Item">'+ size +'</div>';
-			} else {				  
-        var container = eXo.core.DOMUtil.findFirstDescendantByClass(rightWS,'div','ActionIconsContainer');			
-				var strViewContent = "";
-				var command = ECS.connector + "/thumbnailImage/medium/" + ECS.repositoryName + "/" + ECS.workspaceName + path + "/?reloadnum=" + Math.random();        
-				strViewContent += '<div class="ActionIconBox" onclick="eXo.ecm.ECS.insertContent(this);" url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" title="'+decodeURIComponent(node)+'"><div class="NodeLabel"><div class="ThumbnailImage"><div style="display: block;" class="LoadingProgressIcon"><img alt="Loading Process" src="'+command+'" onerror="var img = eXo.core.DOMUtil.findNextElementByTagName(this.parentNode,\'div\'); img.style.display = \'block\'; this.parentNode.style.display = \'none\';" onload="this.parentNode.style.backgroundImage=\'none\'" /></div><div style="display: none;" class="Icon48x48 default48x48Icon '+nodeTypeIcon+'"></div></div><div class="ActionIconLabel" style="width: auto;"><a class="ActionLabel" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" title="'+decodeURIComponent(node)+'">'+decodeURIComponent(node)+'</a></div></div>';	        
-				container.innerHTML += strViewContent;
+			} else {				  	
+				var randomId = Math.random();
+				var command = ECS.connector + "/thumbnailImage/medium/" + ECS.repositoryName + "/" + ECS.workspaceName + path + "/?reloadnum=" + randomId;        
+				strViewContent += '<div id="'+randomId+'" class="ActionIconBox" onclick="eXo.ecm.ECS.insertContent(this);" url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" title="'+decodeURIComponent(node)+'"><div class="NodeLabel"><div class="ThumbnailImage"><div style="display: block;" class="LoadingProgressIcon"><img alt="Loading Process" id="thumbnail'+randomId+'" longDesc="'+command+'" onerror="var img = eXo.core.DOMUtil.findNextElementByTagName(this.parentNode,\'div\'); img.style.display = \'block\'; this.parentNode.style.display = \'none\';" onload="this.parentNode.style.backgroundImage=\'none\'" /></div><div style="display: none;" class="Icon48x48 default48x48Icon '+nodeTypeIcon+'"></div></div><div class="ActionIconLabel" style="width: auto;"><a class="ActionLabel" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" title="'+decodeURIComponent(node)+'">'+decodeURIComponent(node)+'</a></div></div></div>';
 			}
-		}			
+		}
+		if(container) {
+			container.innerHTML = strViewContent;
+			container.style.display = "";
+		}
 	}	
 	if(i > 12) {		
 		var numberRecords = 12;		
@@ -747,6 +754,10 @@ Pager.prototype.showRecords = function(from, to) {
 				  icons[i].style.display = 'none';
 			} else {
 				  icons[i].style.display = '';
+				  var thumnailImg = document.getElementById("thumbnail"+icons[i].id);
+				  if(thumnailImg.src || thumnailImg.src == '') {
+					thumnailImg.src = thumnailImg.longDesc;
+				  }
 			}
 		}    
 	}
