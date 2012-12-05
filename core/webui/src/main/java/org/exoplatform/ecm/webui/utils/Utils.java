@@ -1025,31 +1025,6 @@ public class Utils {
     return isMakeVersionable;
   }
 
-  
-  public static List<SelectItemOption<String>> languages() throws Exception {
-    
-    // Get default locale
-    Locale defaultLocale = Locale.getDefault();
-    
-    // set default locale to current user selected language
-    Locale.setDefault(Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale());
-    
-    LocaleConfigService localService = WCMCoreUtils.getService(LocaleConfigService.class) ;
-    List<SelectItemOption<String>> languages = new ArrayList<SelectItemOption<String>>() ;
-    Iterator<LocaleConfig> iter = localService.getLocalConfigs().iterator() ;    
-    while (iter.hasNext()) {
-      LocaleConfig localConfig = iter.next() ;
-      Locale locale = localConfig.getLocale();      
-      String lang = locale.getLanguage();
-      String country = locale.getCountry(); 
-      if(StringUtils.isNotEmpty(country)) lang += "_" + country;
-      languages.add(new SelectItemOption<String>(localConfig.getLocale().getDisplayLanguage(), lang)) ;
-    }    
-    // Set back to the default locale
-    Locale.setDefault(defaultLocale);    
-    return languages ;
-  }  
-
   /**
    * @param       cookieName
    * @param       cookies cookies

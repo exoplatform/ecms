@@ -54,26 +54,5 @@
       <Invalid-number>The value of the Priority field must be in the numerical format. The valid values range is from 0.0 to 1.0.</Invalid-number>
     </msg>
   </FloatNumberValidator>  
-  <Locale>
-    <label>
-      <uk>Ukrainian</uk>
-      <it>Italian</it>
-      <vi>Vietnamese</vi>
-      <pt_BR>Portuguese - Brazil</pt_BR>
-      <ko>Korean</ko>
-      <ar>Arabic</ar>
-      <zh_CN>Simplified Chinese</zh_CN>
-      <de>German</de>
-      <ma>Ma</ma>
-      <ne>Nepali</ne>
-      <zh_TW>Traditional Chinese</zh_TW>
-      <fr>French</fr>
-      <en>English</en>
-      <ru>Russian</ru>
-      <es>Spanish</es>
-      <nl>Dutch</nl>
-      <ja>Japanese</ja>
-      <cs>Czech</cs>
-    </label>
-  </Locale>
+  
 </bundle>

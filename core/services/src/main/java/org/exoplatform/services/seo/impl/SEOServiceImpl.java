@@ -20,8 +20,10 @@ import java.io.InputStream;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -380,8 +382,8 @@ public class SEOServiceImpl implements SEOService {
     return metaModel;
   }
   
-  public ArrayList<String> getSeoLanguages(String portalName, String seoPath, boolean onContent) throws Exception {  	
-  	ArrayList<String> languages = new ArrayList<String>();
+  public List<Locale> getSEOLanguages(String portalName, String seoPath, boolean onContent) throws Exception {  	
+  	List<Locale> languages = new ArrayList<Locale>();
   	Node languagesNode = null;
   	if(onContent) {
   		Node contentNode = null;
@@ -397,13 +399,24 @@ public class SEOServiceImpl implements SEOService {
   	}
   	if(languagesNode != null) {
   		NodeIterator iter = languagesNode.getNodes();
-    	while(iter.hasNext()) {      		    		
-    		languages.add(iter.nextNode().getName());
-    	}
-    	Collections.sort(languages);
+    	while(iter.hasNext()) {   
+    		String lang = iter.nextNode().getName();
+    		String[] arr = lang.split("_");
+    		if(arr.length > 1) {
+    			languages.add(new Locale(arr[0],arr[1]));    			
+    		} else languages.add(new Locale(lang));
+    	}    	
+    	Collections.sort(languages, new SEOItemComparator());
     	return languages;
   	} 
-  	return null;
+  	return languages;
+  }
+  
+  class SEOItemComparator implements Comparator<Locale> {
+    @Override
+    public int compare(Locale locale1, Locale locale2) {
+			return locale1.getDisplayName().compareTo(locale2.getDisplayName());
+    }
   }
 
   /**

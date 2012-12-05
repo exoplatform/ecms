@@ -2,6 +2,7 @@ package org.exoplatform.services.seo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.jcr.Node;
  
@@ -103,5 +104,5 @@ public interface SEOService {
   
   public String getState(String path, String language, boolean onContent) throws Exception;
   
-  public ArrayList<String> getSeoLanguages(String portalName, String seoPath, boolean onContent) throws Exception;
+  public List<Locale> getSEOLanguages(String portalName, String seoPath, boolean onContent) throws Exception;
 }
