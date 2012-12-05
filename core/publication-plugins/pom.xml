@@ -121,6 +121,12 @@
       <artifactId>ecms-testsuite-test</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.exoplatform.portal</groupId>
+      <artifactId>exo.portal.component.portal</artifactId>
+      <classifier>tests</classifier>
+      <scope>test</scope>
+    </dependency>
     <!-- "Unused declared" by analyze but still need for testing -->
     <dependency>
       <groupId>org.hsqldb</groupId>
