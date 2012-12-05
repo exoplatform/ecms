@@ -4,7 +4,7 @@
 @import url("UIPopupAction/DefaultStylesheet.css");
 @import url("UIJCRExplorer/DefaultStylesheet.css");
 
-@import url('/ecmexplorer/skin/ecms-explorer.css');
+@import url('../../../css/ecms-explorer.css');
 
 
 .UIPageDesktop .UIJCRExplorerPortlet {

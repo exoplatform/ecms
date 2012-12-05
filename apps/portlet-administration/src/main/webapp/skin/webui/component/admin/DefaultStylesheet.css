@@ -10,7 +10,7 @@
 @import url("UIMetadataManager/DefaultStylesheet.css");
 @import url("UINodeTypeManager/DefaultStylesheet.css");
 
-@import url('/ecmadmin/skin/ecms-administratio.css');
+@import url('../../../css/ecms-administration.css');
 
 .UIGrid .TrashRow {
     text-decoration: line-through;

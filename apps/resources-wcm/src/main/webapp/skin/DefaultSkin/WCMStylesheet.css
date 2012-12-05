@@ -47,7 +47,7 @@
 @import url('seo/Stylesheet.css');
 
 
-@import url('/eXoWCMResources/skin/ecms-resources-wcmskin.css');
+@import url('../css/ecms-resources-wcmskin.css');
 
 .UIPageIterator .selectbox {
   display:block; 

@@ -1,4 +1,4 @@
-@import url('/presentation/skin/ecms-presentation-categorynavigationportlet.css');
+@import url('../css/ecms-presentation-categorynavigationportlet.css');
 
 .UICategoryNavigationTargetPathFormInputSet .SelectTargetPathIcon {
   background: url('DefaultSkin/SearchPath.gif') no-repeat;
