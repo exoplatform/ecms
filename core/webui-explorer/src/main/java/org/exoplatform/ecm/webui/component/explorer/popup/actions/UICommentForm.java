@@ -125,12 +125,18 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
     }
   }
 
-  public void activate() throws Exception {
-    document_ = NodeLocation.getNodeLocationByNode(getAncestorOfType(UIJCRExplorer.class).getCurrentNode());
-    prepareFields();
+  public void activate() {
+    try {
+      document_ = NodeLocation.getNodeLocationByNode(getAncestorOfType(UIJCRExplorer.class).getCurrentNode());
+      prepareFields();
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error!", e.getMessage());
+      }
+    }
   }
 
-  public void deActivate() throws Exception {
+  public void deActivate() {
     document_ = null ;
   }
 

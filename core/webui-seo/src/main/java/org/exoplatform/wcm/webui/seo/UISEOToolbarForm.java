@@ -121,7 +121,7 @@ public class UISEOToolbarForm extends UIForm {
         }
     }
     SEOService seoService = WCMCoreUtils.getService(SEOService.class);
-    pageReference = Util.getUIPortal().getSelectedUserNode().getPageRef();
+    pageReference = Util.getUIPortal().getSelectedUserNode().getPageRef().format();
 
     if(pageReference != null) {
       SiteKey siteKey = Util.getUIPortal().getSelectedUserNode().getNavigation().getKey();

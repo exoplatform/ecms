@@ -35,6 +35,8 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.form.validator.IllegalDMSCharValidator;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -62,6 +64,8 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
 )
 
 public class UIFolderForm extends UIForm implements UIPopupComponent {
+  private static final Log LOG = ExoLogger.getLogger(UIEditingTagsForm.class.getName());
+
   final static public String FIELD_NAME = "name" ;
   final static public String FIELD_TITLE = "title" ;
   final static public String FIELD_TYPE = "type" ;
@@ -70,44 +74,50 @@ public class UIFolderForm extends UIForm implements UIPopupComponent {
   public UIFolderForm() throws Exception {
   }
 
-  public void activate() throws Exception {
-    RequestContext context = RequestContext.getCurrentInstance() ;
-    ResourceBundle res = context.getApplicationResourceBundle() ;
-    UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
-    Node currentNode = uiExplorer.getCurrentNode();
-    List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
-    String foldertypes = uiExplorer.getDriveData().getAllowCreateFolders();
-    if (foldertypes.contains(",")) {
-      addUIFormInput(new UIFormSelectBox(FIELD_TYPE, FIELD_TYPE, null));
-      String[] arrFoldertypes = foldertypes.split(",");
-      String label = "";
-      NodeTypeManager ntManager = currentNode.getSession().getWorkspace().getNodeTypeManager();
-      for (String foldertype : arrFoldertypes) {
-        if (currentNode.isNodeType(Utils.NT_FOLDER)
-            && !ntManager.getNodeType(foldertype).isNodeType(Utils.NT_FOLDER)) {
-          continue;
+  public void activate() {
+    try {
+      RequestContext context = RequestContext.getCurrentInstance() ;
+      ResourceBundle res = context.getApplicationResourceBundle() ;
+      UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
+      Node currentNode = uiExplorer.getCurrentNode();
+      List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
+      String foldertypes = uiExplorer.getDriveData().getAllowCreateFolders();
+      if (foldertypes.contains(",")) {
+        addUIFormInput(new UIFormSelectBox(FIELD_TYPE, FIELD_TYPE, null));
+        String[] arrFoldertypes = foldertypes.split(",");
+        String label = "";
+        NodeTypeManager ntManager = currentNode.getSession().getWorkspace().getNodeTypeManager();
+        for (String foldertype : arrFoldertypes) {
+          if (currentNode.isNodeType(Utils.NT_FOLDER)
+              && !ntManager.getNodeType(foldertype).isNodeType(Utils.NT_FOLDER)) {
+            continue;
+          }
+          try {
+            label = res.getString(getId() + ".label." + foldertype.replace(":", "_"));
+          } catch (MissingResourceException e) {
+            label = foldertype;
+          }
+          options.add(new SelectItemOption<String>(label, foldertype));
         }
-        try {
-          label = res.getString(getId() + ".label." + foldertype.replace(":", "_"));
-        } catch (MissingResourceException e) {
-          label = foldertype;
-        }
-        options.add(new SelectItemOption<String>(label, foldertype));
+        Collections.sort(options, new ItemOptionNameComparator());
+        getUIFormSelectBox(FIELD_TYPE).setOptions(options);
+      } else {
+        allowCreateFolder_ = foldertypes;
       }
-      Collections.sort(options, new ItemOptionNameComparator());
-      getUIFormSelectBox(FIELD_TYPE).setOptions(options);
-    } else {
-      allowCreateFolder_ = foldertypes;
-    }
-    addUIFormInput(new UIFormStringInput(FIELD_TITLE, FIELD_TITLE, null).addValidator(MandatoryValidator.class)
+      addUIFormInput(new UIFormStringInput(FIELD_TITLE, FIELD_TITLE, null).addValidator(MandatoryValidator.class)
+                                                                          .addValidator(IllegalDMSCharValidator.class));
+      addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class)
                                                                         .addValidator(IllegalDMSCharValidator.class));
-    addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class)
-                                                                      .addValidator(IllegalDMSCharValidator.class));
-    setActions(new String[]{"Save", "Cancel"}) ;
-    getUIStringInput(FIELD_NAME).setValue(null) ;
-    getUIStringInput(FIELD_TITLE).setValue(null) ;
+      setActions(new String[]{"Save", "Cancel"}) ;
+      getUIStringInput(FIELD_NAME).setValue(null) ;
+      getUIStringInput(FIELD_TITLE).setValue(null) ;
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error!", e.getMessage());
+      }
+    }
   }
-  public void deActivate() throws Exception {}
+  public void deActivate() {}
 
   static  public class SaveActionListener extends EventListener<UIFolderForm> {
     public void execute(Event<UIFolderForm> event) throws Exception {

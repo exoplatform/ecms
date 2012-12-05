@@ -21,7 +21,6 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPopupComponent;
-import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
@@ -104,11 +103,11 @@ public class UIConfirmMessage extends UIComponent implements UIPopupComponent {
     }
   }
 
-  public void activate() throws Exception {
+  public void activate() {
 
   }
 
-  public void deActivate() throws Exception {
+  public void deActivate() {
 
   }
 }

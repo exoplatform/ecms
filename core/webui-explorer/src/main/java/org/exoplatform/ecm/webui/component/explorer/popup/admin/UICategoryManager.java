@@ -18,6 +18,8 @@ package org.exoplatform.ecm.webui.component.explorer.popup.admin;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.tree.selectone.UIOneTaxonomySelector;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIContainer;
@@ -38,6 +40,8 @@ import org.exoplatform.webui.event.EventListener;
 )
 public class UICategoryManager extends UIContainer implements UIPopupComponent {
 
+  private static final Log LOG = ExoLogger.getLogger(UICategoryManager.class.getName());
+
   final static public String[] ACTIONS = {"Close"} ;
 
   public UICategoryManager() throws Exception {
@@ -55,9 +59,15 @@ public class UICategoryManager extends UIContainer implements UIPopupComponent {
     }
   }
 
-  public void activate() throws Exception {
-    getChild(UICategoriesAddedList.class).updateGrid(1);
+  public void activate() {
+    try {
+      getChild(UICategoriesAddedList.class).updateGrid(1);
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error!", e.getMessage());
+      }
+    }
   }
 
-  public void deActivate() throws Exception { }
+  public void deActivate() { }
 }

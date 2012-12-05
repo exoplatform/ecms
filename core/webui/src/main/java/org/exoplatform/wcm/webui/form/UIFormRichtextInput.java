@@ -142,7 +142,7 @@ public class UIFormRichtextInput extends UIFormInputBase<String> {
     context.getWriter().write(buffer.toString());
   }
 
-  public void decode(Object input, WebuiRequestContext context) throws Exception {
+  public void decode(Object input, WebuiRequestContext context) {
     value_ = (String)input;
     if (value_ != null && value_.length() == 0)
        value_ = null;

@@ -25,6 +25,8 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -52,16 +54,23 @@ import org.exoplatform.webui.event.EventListener;
     }
 )
 public class UIEditingTagsForm extends UIContainer implements UIPopupComponent {
+  private static final Log LOG = ExoLogger.getLogger(UIEditingTagsForm.class.getName());
 
   private static final String PUBLIC_TAG_NODE_PATH = "exoPublicTagNode";
   private static final String USER_FOLKSONOMY_ALIAS = "userPrivateFolksonomy";
 
-  public void activate() throws Exception {
-    addChild(UIEditingTagList.class, null, null);
-    getChild(UIEditingTagList.class).updateGrid();
+  public void activate() {
+    try {
+      addChild(UIEditingTagList.class, null, null);
+      getChild(UIEditingTagList.class).updateGrid();
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error!", e.getMessage());
+      }
+    }
   }
 
-  public void deActivate() throws Exception {
+  public void deActivate() {
   }
 
   @Override

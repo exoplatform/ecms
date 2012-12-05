@@ -85,12 +85,12 @@ public class UIPublicationContainer extends UIForm implements UIPopupComponent {
   /* (non-Javadoc)
    * @see org.exoplatform.webui.core.UIPopupComponent#activate()
    */
-  public void activate() throws Exception {}
+  public void activate() {}
 
   /* (non-Javadoc)
    * @see org.exoplatform.webui.core.UIPopupComponent#deActivate()
    */
-  public void deActivate() throws Exception {}
+  public void deActivate() {}
 
   /**
    * Gets the selected tab id.

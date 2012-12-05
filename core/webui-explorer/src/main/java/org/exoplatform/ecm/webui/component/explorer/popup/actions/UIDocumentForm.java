@@ -297,8 +297,8 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     return getAncestorOfType(UIJCRExplorer.class).getJCRTemplateResourceResolver();
   }
 
-  public void activate() throws Exception {}
-  public void deActivate() throws Exception {}
+  public void activate() {}
+  public void deActivate() {}
 
   public Node getCurrentNode() throws Exception {
     return getAncestorOfType(UIJCRExplorer.class).getCurrentNode();

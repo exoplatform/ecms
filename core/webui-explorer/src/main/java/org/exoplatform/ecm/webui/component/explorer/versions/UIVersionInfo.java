@@ -62,11 +62,12 @@ import org.exoplatform.webui.event.EventListener;
 )
 
 public class UIVersionInfo extends UIContainer implements UIPopupComponent {
+  private static final Log LOG  = ExoLogger.getLogger(UIVersionInfo.class.getName());
+
 
   protected VersionNode rootVersion_ ;
   protected VersionNode curentVersion_;
   protected NodeLocation node_ ;
-  private static final Log LOG  = ExoLogger.getLogger(UIVersionInfo.class.getName());
   public UIVersionInfo() throws Exception {
     addChild(UILabelForm.class, null, null).setRendered(false);
     addChild(UIRemoveLabelForm.class, null, null).setRendered(false);
@@ -87,17 +88,23 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
 
   public VersionNode getRootVersionNode() throws Exception {  return rootVersion_ ; }
 
-  public void activate() throws Exception {
-    UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
-    node_ = NodeLocation.getNodeLocationByNode(uiExplorer.getCurrentNode());
-    rootVersion_ = new VersionNode(NodeLocation.getNodeByLocation(node_)
+  public void activate() {
+    try {
+      UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
+      node_ = NodeLocation.getNodeLocationByNode(uiExplorer.getCurrentNode());
+      rootVersion_ = new VersionNode(NodeLocation.getNodeByLocation(node_)
                                                .getVersionHistory()
                                                .getRootVersion(), uiExplorer.getSession());
-    curentVersion_ = rootVersion_;
-    getChild(UIViewVersion.class).update();
+      curentVersion_ = rootVersion_;
+      getChild(UIViewVersion.class).update();
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error!", e.getMessage());
+      }
+    }
   }
 
-  public void deActivate() throws Exception {}
+  public void deActivate() {}
 
   public VersionNode getCurrentVersionNode() { return curentVersion_ ;}
   public Node getCurrentNode() {

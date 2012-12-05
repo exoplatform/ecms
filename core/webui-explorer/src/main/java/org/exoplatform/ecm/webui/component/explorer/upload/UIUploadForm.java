@@ -266,8 +266,8 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
 
   private String getLanguageSelected() { return language_ ; }
 
-  public void activate() throws Exception {}
-  public void deActivate() throws Exception {}
+  public void activate() {}
+  public void deActivate() {}
 
   public void doSelect(String selectField, Object value) throws Exception {
     String valueTaxonomy = String.valueOf(value).trim();

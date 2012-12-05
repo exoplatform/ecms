@@ -147,9 +147,9 @@ public class UISavedQuery extends UIContainer implements UIPopupComponent {
 
   //public List<Node> getSharedQueries() { return sharedQueries_; }
 
-  public void activate() throws Exception { }
+  public void activate() { }
 
-  public void deActivate() throws Exception { }
+  public void deActivate() { }
 
   public void setIsQuickSearch(boolean isQuickSearch) { isQuickSearch_ = isQuickSearch; }
 

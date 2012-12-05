@@ -61,7 +61,7 @@ public class PortalResourceLifecycle implements ApplicationLifecycle<PortalReque
   @Override
   public void onFailRequest(Application app,
                             PortalRequestContext context,
-                            RequestFailure failureType) throws Exception {
+                            RequestFailure failureType) {
     
   }
 

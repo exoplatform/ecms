@@ -830,7 +830,7 @@ public class Utils {
         .getSkin());
     if (customSkin != null) portalSkins.add(customSkin);
     for (SkinConfig portalSkin : portalSkins) {
-      contentsCss.append("'").append(portalSkin.createURL()).append("',");
+      contentsCss.append("'").append(portalSkin.createURL(Util.getPortalRequestContext().getControllerContext())).append("',");
     }
     contentsCss.delete(contentsCss.length() - 1, contentsCss.length());
     contentsCss.append("]");

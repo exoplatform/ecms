@@ -103,8 +103,8 @@ public class UILanguageDialogForm extends UIDialogForm implements UIPopupCompone
     uiContainer.removeChildById("PopupComponent");
   }
 
-  public void activate() throws Exception {}
-  public void deActivate() throws Exception {}
+  public void activate() {}
+  public void deActivate() {}
 
   public void setTemplateNode(String type) { documentType_ = type;}
 

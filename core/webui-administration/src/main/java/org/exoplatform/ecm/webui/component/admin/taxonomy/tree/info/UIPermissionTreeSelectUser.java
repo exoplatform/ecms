@@ -55,11 +55,11 @@ public class UIPermissionTreeSelectUser extends UIContainer implements UIPopupCo
     uiUserSelector.setShowSearch(true);
   }
 
-  public void activate() throws Exception {
+  public void activate() {
 
   }
 
-  public void deActivate() throws Exception {
+  public void deActivate() {
   }
 
   public static class AddUserActionListener extends EventListener<UIPermissionTreeSelectUser> {

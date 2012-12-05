@@ -18,6 +18,8 @@ package org.exoplatform.ecm.webui.component.explorer.rightclick.viewinfor;
 
 import javax.jcr.Node;
 
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIContainer;
@@ -32,6 +34,7 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
    lifecycle = UIContainerLifecycle.class
 )
 public class UIViewInfoManager extends UIContainer implements UIPopupComponent {
+  private static final Log LOG = ExoLogger.getLogger(UIViewInfoManager.class.getName());
 
   /**
    * the node that is selected by right clicking
@@ -62,10 +65,16 @@ public class UIViewInfoManager extends UIContainer implements UIPopupComponent {
     this.selectedNode = NodeLocation.getNodeLocationByNode(selectedNode);
   }
 
-  public void activate() throws Exception {
-    getChild(UIViewInfoContainer.class).readNodeInformation();
+  public void activate() {
+    try {
+      getChild(UIViewInfoContainer.class).readNodeInformation();
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error!", e.getMessage());
+      }
+    }
   }
 
-  public void deActivate() throws Exception { }
+  public void deActivate() { }
 
 }

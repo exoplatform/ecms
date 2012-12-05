@@ -40,11 +40,11 @@ public class UIUserContainer extends UIContainer implements UIPopupComponent  {
     uiUserSelector.setShowSearch(true);
   }
 
-  public void activate() throws Exception {
+  public void activate() {
 
   }
 
-  public void deActivate() throws Exception {
+  public void deActivate() {
 
   }
 
