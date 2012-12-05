@@ -104,7 +104,8 @@ public class UISEOForm extends UIForm{
   private boolean onContent = false;
   private boolean isInherited = false;
   private ArrayList<String> paramsArray = null;
-  public static ArrayList<String> seoLanguages = null;
+  public static List<Locale> seoLocales = null;
+  public static List<String> seoLanguages = new ArrayList<String>();
   private String selectedLanguage = null;
   private String defaultLanguage = null;
   private boolean isAddNew = true;
@@ -146,12 +147,12 @@ public class UISEOForm extends UIForm{
     return this.paramsArray;
   }
 
-  public void setSEOLanguages(ArrayList<String> seoLanguages) {
-    this.seoLanguages = seoLanguages;
+  public void setSEOLanguages(ArrayList<Locale> seoLocales) {
+    this.seoLocales = seoLocales;
   }
   
-  public ArrayList<String> getSEOLanguages() {
-    return this.seoLanguages;
+  public List<Locale> getSEOLanguages() {
+    return this.seoLocales;
   }
 
   public void setParamsArray(ArrayList<String> params) {
@@ -195,10 +196,20 @@ public class UISEOForm extends UIForm{
     
     UIFormTextAreaInput uiKeywords = new UIFormTextAreaInput(KEYWORDS, KEYWORDS, null);
     uiKeywords.setValue(keywords);
-    addUIFormInput(uiKeywords);    
-    seoLanguages = seoService.getSeoLanguages(portalRequestContext.getPortalOwner(), contentPath, onContent);
+    addUIFormInput(uiKeywords); 
+    seoLocales = seoService.getSEOLanguages(portalRequestContext.getPortalOwner(), contentPath, onContent);
+    seoLanguages = new ArrayList<String>();
+    if(seoLocales != null && seoLocales.size() > 0) {
+	    for (Locale locale : seoLocales) {
+	    	String lang = locale.getLanguage();
+	      String country = locale.getCountry(); 
+	      if(StringUtils.isNotEmpty(country)) lang += "_" + country;
+	      seoLanguages.add(lang);
+			}
+    }
+    
     if(seoLanguages != null) Collections.sort(seoLanguages);
-    UIFormSelectBox uiSelectForm = new UIFormSelectBox(LANGUAGE_TYPE, LANGUAGE_TYPE, languages()) ;    
+    UIFormSelectBox uiSelectForm = new UIFormSelectBox(LANGUAGE_TYPE, LANGUAGE_TYPE, getLanguages()) ;    
     uiSelectForm.setOnChange("Refresh");
 	  defaultLanguage = portalRequestContext.getLocale().getLanguage();
 	  if(StringUtils.isNotEmpty(portalRequestContext.getLocale().getCountry()))
@@ -311,9 +322,18 @@ public class UISEOForm extends UIForm{
     UIFormSelectBox uiSelectForm = this.getUIFormSelectBox(LANGUAGE_TYPE);
     uiSelectForm.setSelectedValues(new String[] {"language"});
     if(uiSelectForm != null) {
-    	seoLanguages = seoService.getSeoLanguages(portalRequestContext.getPortalOwner(), contentPath, onContent);
-    	if(seoLanguages == null || seoLanguages.size() <= 0) setSelectedLanguage(null);
-    	List<SelectItemOption<String>> languages = languages();
+    	seoLocales = seoService.getSEOLanguages(portalRequestContext.getPortalOwner(), contentPath, onContent);
+    	seoLanguages = new ArrayList<String>();
+    	if(seoLocales != null && seoLocales.size() > 0) {
+	    	for (Locale locale : seoLocales) {
+	      	String lang = locale.getLanguage();
+	        String country = locale.getCountry(); 
+	        if(StringUtils.isNotEmpty(country)) lang += "_" + country;
+	        seoLanguages.add(lang);
+	  		}
+    	}
+    	if(seoLanguages.size() <= 0) setSelectedLanguage(null);
+    	List<SelectItemOption<String>> languages = getLanguages();
     	if(languages.size() == 1) this.setIsAddNew(false);
     	else this.setIsAddNew(true);
     	uiSelectForm.setOptions(languages);	    
@@ -414,7 +434,6 @@ public class UISEOForm extends UIForm{
         boolean isVisibleSitemap = uiForm.getUIFormCheckBoxInput(SITEMAP).isChecked();
         float priority = -1;
         if(uiForm.getUIStringInput(PRIORITY).getValue() != null && uiForm.getUIStringInput(PRIORITY).getValue().length() > 0) {
-        	WebuiRequestContext rc = WebuiRequestContext.getCurrentInstance();        		
           priority = Float.parseFloat(uiForm.getUIStringInput(PRIORITY).getValue()) ;
           if(priority < 0.0 || priority > 1.0) {
             uiApp.addMessage(new ApplicationMessage("FloatNumberValidator.msg.Invalid-number", null, ApplicationMessage.WARNING));
@@ -506,7 +525,6 @@ public class UISEOForm extends UIForm{
   }
   
   public static class RefreshActionListener extends EventListener<UISEOForm> {
-  	@SuppressWarnings("deprecation")
 		public void execute(Event<UISEOForm> event) throws Exception {
   		PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
   		UISEOForm uiForm = event.getSource();
@@ -537,7 +555,6 @@ public class UISEOForm extends UIForm{
   }  
   
   public static class UpdateActionListener extends EventListener<UISEOForm> {
-  	@SuppressWarnings("deprecation")
 		public void execute(Event<UISEOForm> event) throws Exception {
   		UISEOForm uiForm = event.getSource();
   		String lang = event.getRequestContext().getRequestParameter(OBJECTID) ;
@@ -575,7 +592,14 @@ public class UISEOForm extends UIForm{
   		}
   		String portalName = portalRequestContext.getPortalOwner();
   		seoService.removePageMetadata(metaModel, portalName, uiForm.onContent, lang);
-  		seoLanguages = seoService.getSeoLanguages(portalRequestContext.getPortalOwner(), contentPath, uiForm.onContent);
+  		seoLocales = seoService.getSEOLanguages(portalRequestContext.getPortalOwner(), contentPath, uiForm.onContent);
+  		seoLanguages = new ArrayList<String>();
+  		for (Locale locale : seoLocales) {
+      	String tmp = locale.getLanguage();
+        String country = locale.getCountry(); 
+        if(StringUtils.isNotEmpty(country)) tmp += "_" + country;
+        seoLanguages.add(tmp);
+  		}
   		String laguageFocus = uiForm.defaultLanguage;
   		if(seoLanguages.size()> 0 && !seoLanguages.contains(uiForm.defaultLanguage))
   			laguageFocus = seoLanguages.get(0);
@@ -592,8 +616,9 @@ public class UISEOForm extends UIForm{
   		}
   	}
   }
-  public List<SelectItemOption<String>> languages() throws Exception {
-  	WebuiRequestContext rc = WebuiRequestContext.getCurrentInstance();  
+  public List<SelectItemOption<String>> getLanguages() throws Exception {
+  	WebuiRequestContext rc = WebuiRequestContext.getCurrentInstance();
+  	Locale inLocale = WebuiRequestContext.getCurrentInstance().getLocale();
     // Get default locale
     Locale defaultLocale = Locale.getDefault();    
     // set default locale to current user selected language
@@ -605,13 +630,13 @@ public class UISEOForm extends UIForm{
     ResourceBundle resourceBundle = rc.getApplicationResourceBundle();    
     while (iter.hasNext()) {
       LocaleConfig localConfig = iter.next() ;
-      Locale locale = localConfig.getLocale();      
+      Locale locale = localConfig.getLocale();
       String lang = locale.getLanguage();
       String country = locale.getCountry(); 
-      if(StringUtils.isNotEmpty(country)) lang += "_" + country;      
+      if(StringUtils.isNotEmpty(country)) lang += "_" + country;
       if(seoLanguages == null || !seoLanguages.contains(lang)) {
 	      try {
-	        languages.add(new SelectItemOption<String>(locale.getDisplayName(), lang)) ;
+	        languages.add(new SelectItemOption<String>(CapitalFirstLetters(locale.getDisplayName(inLocale)), lang)) ;
 	      } catch(MissingResourceException mre) {
 	        languages.add(new SelectItemOption<String>(lang, lang)) ;
 	      }
@@ -623,12 +648,23 @@ public class UISEOForm extends UIForm{
     Collections.sort(languages, new ItemOptionComparator());
     languages.add(0,new SelectItemOption<String>(getLabel(resourceBundle, "select-language"), "language")) ;
     return languages ;
-  }  
+  }
+  
+  public String CapitalFirstLetters(String str) {
+  	str = Character.toString(str.charAt(0)).toUpperCase()+str.substring(1);
+  	return str;
+  }
   
   class ItemOptionComparator implements Comparator<SelectItemOption<String>> {
     @Override
     public int compare(SelectItemOption<String> o1, SelectItemOption<String> o2) {
 			return o1.getLabel().compareTo(o2.getLabel());
+    }
+  }
+  class SEOItemComparator implements Comparator<Locale> {
+    @Override
+    public int compare(Locale locale1, Locale locale2) {
+			return locale1.getDisplayLanguage().compareTo(locale2.getDisplayLanguage());
     }
   }
 }

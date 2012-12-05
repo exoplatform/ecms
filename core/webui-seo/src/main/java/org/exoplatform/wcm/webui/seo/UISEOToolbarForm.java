@@ -19,6 +19,9 @@ package org.exoplatform.wcm.webui.seo;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
+import java.util.Locale;
+
 import javax.jcr.Node;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.ExoContainer;
@@ -70,8 +73,7 @@ public class UISEOToolbarForm extends UIForm {
       PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
       UISEOForm uiSEOForm = uiSEOToolbar.createUIComponent(UISEOForm.class, null, null);
       String params = event.getRequestContext().getRequestParameter(OBJECTID);      
-      ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-      SEOService seoService = (SEOService)container.getComponentInstanceOfType(SEOService.class);
+      SEOService seoService = WCMCoreUtils.getService(SEOService.class);
       if(paramsArray != null) {
         for(int i = 0;i < paramsArray.size();i++) {
           Node contentNode = seoService.getContentNode(paramsArray.get(i).toString());
@@ -92,12 +94,16 @@ public class UISEOToolbarForm extends UIForm {
       uiSEOForm.setParamsArray(paramsArray);   
       if(metaModel == null) {
       	//If have node seo data for default language, displaying seo data for the first language in the list
-      	ArrayList<String> seoLanguages = null;
-      	seoLanguages = seoService.getSeoLanguages(portalRequestContext.getPortalOwner(), uiSEOForm.getContentPath(), 
+      	List<Locale> seoLocales = new ArrayList<Locale>();
+      	seoLocales = seoService.getSEOLanguages(portalRequestContext.getPortalOwner(), uiSEOForm.getContentPath(), 
       			uiSEOForm.getOnContent());
-      	if(seoLanguages != null && seoLanguages.size()> 0) {
-      		metaModel = seoService.getMetadata(uiSEOForm.getParamsArray(), pageReference, seoLanguages.get(0));
-      		uiSEOForm.setSelectedLanguage(seoLanguages.get(0));
+      	if(seoLocales.size()> 0) {
+      		Locale locale = seoLocales.get(0);
+      		String lang = locale.getLanguage();
+          String country = locale.getCountry(); 
+          if(StringUtils.isNotEmpty(country)) lang += "_" + country;
+      		metaModel = seoService.getMetadata(uiSEOForm.getParamsArray(), pageReference, lang);
+      		uiSEOForm.setSelectedLanguage(lang);
       	}
       } 
       uiSEOForm.initSEOForm(metaModel);

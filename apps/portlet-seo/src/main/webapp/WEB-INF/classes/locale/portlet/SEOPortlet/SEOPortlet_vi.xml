@@ -56,27 +56,5 @@
     <msg>
       <Invalid-number>Trường {0} chỉ nhận giá trị số kiểu float.</Invalid-number>
     </msg>
-  </FloatNumberValidator> 
-  <Locale>
-    <label>
-      <uk>Tiếng U-crai-na</uk>
-      <it>Tiếng Ý</it>
-      <vi>Tiếng Việt</vi>
-      <pt_BR>Tiếng Bồ Đào Nha - Bra-xin</pt_BR>
-      <ko>Tiếng Hàn Quốc</ko>
-      <ar>Tiếng A-rập</ar>
-      <zh_CN>Simplified Chinese</zh_CN>
-      <de>German</de>
-      <ma>Ma</ma>
-      <ne>Tiếng Nê-pan</ne>
-      <zh_TW>Traditional Chinese</zh_TW>
-      <fr>Tiếng Pháp</fr>
-      <en>Tiếng Anh</en>
-      <ru>Tiếng Nga</ru>
-      <es>Tiếng Tây Ban Nha</es>
-      <nl>Tiếng Hà Lan</nl>
-      <ja>Tiếng Nhật</ja>
-      <cs>Tiếng Séc</cs>
-    </label>
-  </Locale>
+  </FloatNumberValidator>  
 </bundle>

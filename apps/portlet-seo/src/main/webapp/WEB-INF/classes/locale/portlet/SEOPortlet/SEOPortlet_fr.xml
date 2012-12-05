@@ -57,26 +57,5 @@
       <Invalid-number>Le champ '{0}' est un nombre invalide (float).</Invalid-number>
     </msg>
   </FloatNumberValidator> 
-  <Locale>
-    <label>
-      <uk>Ukrainien</uk>
-      <it>Italien</it>
-      <vi>Vietnamien</vi>
-      <pt_BR>Portugais - Brésil</pt_BR>
-      <ko>Coréen</ko>
-      <ar>Arabe</ar>
-      <zh_CN>Chinois simplifié</zh_CN>
-      <de>Allemand</de>
-      <ma>Ma</ma>
-      <ne>Népalais</ne>
-      <zh_TW>Chinois traditionnel</zh_TW>
-      <fr>Français</fr>
-      <en>Anglais</en>
-      <ru>Russe</ru>
-      <es>Espagnol</es>
-      <nl>Néerlandais</nl>
-      <ja>Japonais</ja>
-      <cs>Czech</cs>
-    </label>
-  </Locale>
+  
 </bundle>
