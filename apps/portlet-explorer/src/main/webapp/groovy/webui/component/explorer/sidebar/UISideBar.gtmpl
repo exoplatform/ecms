@@ -14,7 +14,7 @@
     return "NormalItem";
   }
 %>
-<div class="UISideBar" id="UISideBar">
+<div class="uiSideBar" id="UISideBar">
   <div class="UISideBarContainer ClearFix">
     <div class="UIResizableBlock">
       <% 
