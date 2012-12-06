@@ -21,7 +21,7 @@
 %>
 <div class="UIECMAdminControlPanel">
 	<div class="UIVerticalSlideTabs">
-	<div class="accordion" id="accordion2">
+	<!--div class="accordion" id="accordion2">
 		<div class="accordion-group">
 			<div class="accordion-heading">
 				<div class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
@@ -96,49 +96,48 @@
 				</a>
 			</div>
 		</div>
-	</div>
-		
-    <%
-     int i = 0;
-     for(type in typeManage) {
-       def currentBlockStyleClass = null;
-       def currentBlockContentStyleClass = null;
-       if (!uicomponent.isSameCategoryWithCurrentRenderedManager(type, typeManage, managersGroup)) {
-         currentBlockStyleClass = "class=\"NormalTab\"";
-         currentBlockContentStyleClass = "style=\"display:none; height: 0px;\"";
-       } else {
-         currentBlockStyleClass = "class=\"SelectedTab\"";
-       }
-    %>
-	    <div class="UIVTab VTabStyle3 ClearFix">
-			<div <%=currentBlockStyleClass%>>
-				<div class="TabRepeat ClearFix" onclick="eXo.webui.UIVerticalSlideTabs.switchVTab(this, 'VTabStyle3', 'SelectedVTabStyle3');">
-					  <div class="TabLabel" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getName() + ".tab.label." + type)%>">
-						<%=_ctx.appRes(uicomponent.getName() + ".tab.label." + type)%>
-					  </div>
-					  <div class="SwitchButton"><span></span></div>
-				</div>
-			</div>
-			<div class="UIVTabContent" <%=currentBlockContentStyleClass%>><div>
-			<%
-				def groups = managersGroup.get(i) ;
-				for(group in groups) {
-			%>
-				<div class="FunctionItem">
-				  <a href="<%=group.event(group.getUIExtensionName())%>">
-				  <div class="ItemIcon DefaultItemIcon <%=group.getUIExtensionName()%>Icon"><span></span></div>
-				  </a>
-				  <a class="ItemLabel" href="<%=group.event(group.getUIExtensionName())%>">
-					<%=_ctx.appRes(uicomponent.getName()+".label." + group.getUIExtensionName())%>
-				  </a>
-				</div>
-			<%} %>
-			</div>
-		  </div>
-		</div>
+	</div-->
+		<div class="accordion" id="accordion">
 		<%
-				i++ ;
-			}
+		 int i = 0;
+		 for(type in typeManage) {
+		   def target = i;
+		   def currentBlockStyleClass = null;
+		   def currentBlockContentStyleClass = null;
+		   if (!uicomponent.isSameCategoryWithCurrentRenderedManager(type, typeManage, managersGroup)) {
+			 currentBlockStyleClass = "expaned collapsed";
+			 currentBlockContentStyleClass = "style=\"display:none; height: 0px;\"";
+		   } else {
+			 currentBlockStyleClass = "collapsed expaned";
+		   }
 		%>
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<div class="accordion-toggle <%=currentBlockStyleClass%>" data-toggle="collapse" data-parent="#accordion" href="#$target">
+						<a href="#modals" class=""><i class="uiIconSelected pull-right"></i><%=_ctx.appRes(uicomponent.getName() + ".tab.label." + type)%></a>
+					</div>
+				</div>
+				<div id="$target" class="accordion-body collapse">
+				<%
+					def groups = managersGroup.get(i) ;
+					for(group in groups) {
+				%>
+					<div class="FunctionItem">
+					  <a href="<%=group.event(group.getUIExtensionName())%>">
+					  <div class="ItemIcon DefaultItemIcon <%=group.getUIExtensionName()%>Icon"><span></span></div>
+					  </a>
+					  <a class="ItemLabel" href="<%=group.event(group.getUIExtensionName())%>">
+						<%=_ctx.appRes(uicomponent.getName()+".label." + group.getUIExtensionName())%>
+					  </a>
+					</div>
+				<%} %>
+				
+			  </div>
+			</div>
+			<%
+					i++ ;
+				}
+			%>
+		</div>
 	</div>
 </div>
