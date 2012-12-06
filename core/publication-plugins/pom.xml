@@ -105,11 +105,6 @@
       <artifactId>exo.core.component.organization.api</artifactId>
       <scope>runtime</scope>
     </dependency>
-    <dependency>
-      <groupId>org.exoplatform.portal</groupId>
-      <artifactId>exo.portal.component.test.core</artifactId>
-      <scope>runtime</scope>
-    </dependency>
     <!-- "Unused declared" by analyze but still need for testing -->
     <dependency>
       <groupId>org.chromattic</groupId>
@@ -125,6 +120,11 @@
       <groupId>org.exoplatform.portal</groupId>
       <artifactId>exo.portal.component.portal</artifactId>
       <classifier>tests</classifier>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.portal</groupId>
+      <artifactId>exo.portal.component.test.core</artifactId>
       <scope>test</scope>
     </dependency>
     <!-- "Unused declared" by analyze but still need for testing -->
