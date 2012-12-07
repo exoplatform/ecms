@@ -111,7 +111,6 @@
                    </ul>
                  </div>
 		 <%}%>
-		</div>
   		<div class="UIViewBarContainer ClearFix" id="UIViewBarContainer">
   		  <%
   		  if (uicomponent.hasBackButton()) {%>
@@ -124,6 +123,7 @@
   	   <%}%>
   			
   		</div>
+		</div>
 	</div>
 </div>
 <% uiform.end() %>
