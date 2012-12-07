@@ -71,7 +71,7 @@ if(subscriptionTitle != null && subscriptionTitle.length() > 100)
 							<div class="Line" style="background: none;" onclick="showPopupCategory(this, event);">
 								<a href="#" class="NewsAdmin ActionButton LightBlueStyle" onclick="javaScript:void(0);"><%=_ctx.appRes("NewsletterPortlet.action.Moderation")%></a>
 								<div style="position:absolute;">
-									<div class="UIPopupCategory" style="display:none; top:-2px; ">
+									<div class="UIPopupCategory" style="display:none;text-align:left;top:-2px; ">
 										<div class="UIRightClickPopupMenu UINewLetterPopup" style="display:block;">
 											<div class="UIContextMenuContainer BorderOutline">											
 												<div class="TopLeftRightClickPopupMenu">
