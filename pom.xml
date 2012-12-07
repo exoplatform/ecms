@@ -269,6 +269,11 @@
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
+        <artifactId>ecms-core-webui-seo</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-ext-authoring-apps</artifactId>
         <version>${project.version}</version>
         <type>war</type>
