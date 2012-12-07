@@ -55,10 +55,7 @@
       <name>ecm-browser</name>
       <as>ecm_browser</as>
       <script>
-         <path>/javascript/eXo/ecm/DMSBrowser.js</path>
-      </script>
-      <script>
-         <path>/javascript/eXo/ecm/UIBrowseContent.js</path>
+         <path>/javascript/eXo/ecm/ECMBrowser.js</path>
       </script>
       <depends>
       	<module>ecm-bootstrap</module>
