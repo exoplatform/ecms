@@ -524,6 +524,12 @@ EcmContentSelector.prototype.listFiles = function(list) {
 		}
 		var listItem = '';
 		var strViewContent = "";
+		// Depends on Paginators will be used or not. 'longDesc' if paginator, 'src' else.
+		var imageAttribute = "src";
+		if(list.length > 12) {
+			// Paginator will be used
+			imageAttribute = "longDesc";
+		}
 		for(var i = 0; i < list.length; i++) {      
 			var url 			= list[i].getAttribute("url");
 			url = encodeURIComponent(url);
@@ -548,7 +554,7 @@ EcmContentSelector.prototype.listFiles = function(list) {
 			} else {				  	
 				var randomId = Math.random();
 				var command = ECS.connector + "/thumbnailImage/medium/" + ECS.repositoryName + "/" + ECS.workspaceName + path + "/?reloadnum=" + randomId;        
-				strViewContent += '<div id="'+randomId+'" class="ActionIconBox" onclick="eXo.ecm.ECS.insertContent(this);" url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" title="'+decodeURIComponent(node)+'"><div class="NodeLabel"><div class="ThumbnailImage"><div style="display: block;" class="LoadingProgressIcon"><img alt="Loading Process" id="thumbnail'+randomId+'" longDesc="'+command+'" onerror="var img = eXo.core.DOMUtil.findNextElementByTagName(this.parentNode,\'div\'); img.style.display = \'block\'; this.parentNode.style.display = \'none\';" onload="this.parentNode.style.backgroundImage=\'none\'" /></div><div style="display: none;" class="Icon48x48 default48x48Icon '+nodeTypeIcon+'"></div></div><div class="ActionIconLabel" style="width: auto;"><a class="ActionLabel" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" title="'+decodeURIComponent(node)+'">'+decodeURIComponent(node)+'</a></div></div></div>';
+				strViewContent += '<div id="'+randomId+'" class="ActionIconBox" onclick="eXo.ecm.ECS.insertContent(this);" url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" title="'+decodeURIComponent(node)+'"><div class="NodeLabel"><div class="ThumbnailImage"><div style="display: block;" class="LoadingProgressIcon"><img alt="Loading Process" id="thumbnail'+randomId+'" '+imageAttribute+'="'+command+'" onerror="var img = eXo.core.DOMUtil.findNextElementByTagName(this.parentNode,\'div\'); img.style.display = \'block\'; this.parentNode.style.display = \'none\';" onload="this.parentNode.style.backgroundImage=\'none\'" /></div><div style="display: none;" class="Icon48x48 default48x48Icon '+nodeTypeIcon+'"></div></div><div class="ActionIconLabel" style="width: auto;"><a class="ActionLabel" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" title="'+decodeURIComponent(node)+'">'+decodeURIComponent(node)+'</a></div></div></div>';
 			}
 		}
 		if(container) {
@@ -747,7 +753,7 @@ Pager.prototype.showRecords = function(from, to) {
 	} else {
 		var icons = null;   
     var icon_container = document.getElementById(eXo.ecm.Pager.tableName);    
-    icons =  eXo.core.DOMUtil.findChildrenByClass(icon_container ,"div", "ActionIconBox");    
+    icons =  eXo.core.DOMUtil.findChildrenByClass(icon_container ,"div", "ActionIconBox"); 
     len = icons.length;		
 		for (var i = 0; i < len; i++) {
 			if (i < from-1 || i > to-1)  {
