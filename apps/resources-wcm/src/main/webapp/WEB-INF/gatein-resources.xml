@@ -113,9 +113,6 @@
       <script>
          <path>/javascript/eXo/wcm/frontoffice/private/InlineEditing.js</path>
       </script>
-      <script>
-         <path>/javascript/eXo/wcm/frontoffice/private/QuickEdit.js</path>
-      </script>
       <depends>
         <module>jquery</module>
         <as>gj</as>
