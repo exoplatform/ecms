@@ -37,12 +37,6 @@
       <name>ecm-utils</name>
       <as>ecm_utils</as>
       <script>
-         <path>/javascript/eXo/ecm/DMSBrowser.js</path>
-      </script>
-      <script>
-         <path>/javascript/eXo/ecm/ExoEditor.js</path>
-      </script>
-      <script>
          <path>/javascript/eXo/ecm/ECMUtils.js</path>
       </script>      
       <depends>
@@ -52,9 +46,6 @@
       	<module>jquery</module>
       	<as>gj</as>
       </depends>      
-      <depends>
-        <module>webui</module>
-      </depends>
       <depends>
         <module>webui-ext</module>
       </depends>
