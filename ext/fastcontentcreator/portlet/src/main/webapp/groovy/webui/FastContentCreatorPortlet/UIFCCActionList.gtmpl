@@ -11,13 +11,13 @@
 	UIPageIterator uiIterator = uicomponent.getChild(UIGrid.class).getUIPageIterator() ;
 %>
 <div class="$uicomponent.id" id="$uicomponent.id">
-	<table class="UIGrid">
+	<table class="uiGrid table table-hover table-striped">
 		<thead>
 	    	<tr>
 	      		<th><%=_ctx.appRes("UIFCCActionList.header.name")%></th>
 			    <th><%=_ctx.appRes("UIFCCActionList.header.description")%></th>
 	 		    <th><%=_ctx.appRes("UIFCCActionList.header.instanceOf")%></th>
-	 		    <th>
+	 		    <th class="center"> 
 	 		    	<%=_ctx.appRes("UIFCCActionList.header.action")%>
 	<% if (!"basic".equals(uicomponent.getMode())) { %>
  		    		<img class="Add16x16Icon" src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UIFCCActionList.action.Add")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIFCCActionList.action.Add")%>" onclick="<%=uicomponent.event("Add")%>"/>
@@ -66,8 +66,7 @@
 		        				<td>
 		          					<div class="Text">[<%=action.getPrimaryNodeType().getName()%>]</div>
 		        				</td>
-		        				<td>
-		        					<div class="ActionContainer">
+		        				<td class="center">
 			        					<%
 			          						for(act in uicomponent.getActions()) { 
 			        							%>
@@ -75,7 +74,6 @@
 	            								<%
 	            							} 
 	            						%>
-	            					</div>
 	            				</td>
 	            			</tr>
 	            		<%

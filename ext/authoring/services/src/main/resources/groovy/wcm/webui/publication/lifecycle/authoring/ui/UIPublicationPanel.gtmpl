@@ -105,13 +105,16 @@
   	</table>
   </fieldset>
   <table class="RevisionsTable" border="1">
+  <thead>
     <tr>
-      <td class="Version"><%=_ctx.appRes("UIPublicationPanel.revisions.version")%></td>
-      <td class="Date"><%=_ctx.appRes("UIPublicationPanel.revisions.date")%></td>
-      <td class="Author"><%=_ctx.appRes("UIPublicationPanel.revisions.author")%></td>
-      <td class="Status"><%=_ctx.appRes("UIPublicationPanel.revisions.status")%></td>
-      <td class="Action"><%=_ctx.appRes("UIPublicationPanel.revisions.action")%></td>
+      <th class="Version"><%=_ctx.appRes("UIPublicationPanel.revisions.version")%></th>
+      <th class="Date"><%=_ctx.appRes("UIPublicationPanel.revisions.date")%></th>
+      <th class="Author"><%=_ctx.appRes("UIPublicationPanel.revisions.author")%></th>
+      <th class="Status"><%=_ctx.appRes("UIPublicationPanel.revisions.status")%></th>
+      <th class="Action"><%=_ctx.appRes("UIPublicationPanel.revisions.action")%></th>
     </tr>
+	</thead>
+	<tbody>
     <%
       List<Node> revisions = uicomponent.getRevisions();
       if (revisions.isEmpty()) {
@@ -169,14 +172,14 @@
         <%
       }
     %>  
+	</tbody>
   </table>
   <%
     List<Node> allRevisions = uicomponent.getAllRevisions(cNode);
     if (allRevisions.size() > 3) {
       %>
-        <tr>
-          <div class="SeeAllVersion" onclick="<%= uicomponent.event("SeeAllVersion") %>"><%=_ctx.appRes("UIPublicationPanel.revisions.seeall")%></div>
-        </tr>
+        <div class="SeeAllVersion" onclick="<%= uicomponent.event("SeeAllVersion") %>"><%=_ctx.appRes("UIPublicationPanel.revisions.seeall")%></div>
+       
       <%
     }
   %>

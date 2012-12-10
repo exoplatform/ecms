@@ -228,7 +228,7 @@
 	      <%/*Start UITabContentContainer*/%>
 	      <div class="UITabContentContainer">
 	        <div class="UITabContent" style="display: block;"> 
-	        	<table class="UIGrid" style="padding:0px; width: 95%; margin: auto;">
+	        	<table class="uiGrid table table-hover table-striped" style="padding:0px; width: 95%; margin: auto;">
 							<tr>		
 								<th width="30px;"><span></span></th>	
 								<th><%=_ctx.appRes("FilePlan.view.label.record-id")%></th>
@@ -270,7 +270,7 @@
 						</table>
 	        </div>
 	        <div class="UITabContent" style="display: none;"> 
-	        	<table class="UIGrid" style="padding:0px; width: 95%; margin: auto;">
+	        	<table class="uiGrid table table-hover table-striped" style="padding:0px; width: 95%; margin: auto;">
 							<tr>		
 								<th width="30px;"><span></span></th>			
 								<th><%=_ctx.appRes("FilePlan.view.label.record-id")%></th>
@@ -313,7 +313,7 @@
 	        </div>
 	        
 	        <div class="UITabContent" style="display: none;"> 
-	        	<table class="UIGrid" style="padding:0px; width: 95%; margin: auto;">
+	        	<table class="uiGrid table table-hover table-striped" style="padding:0px; width: 95%; margin: auto;">
 							<tr>	
 								<th width="30px;"><span></span></th>				
 								<th><%=_ctx.appRes("FilePlan.view.label.record-id")%></th>
@@ -356,7 +356,7 @@
 	        </div>
 	        
 	       	<div class="UITabContent" style="display: none;"> 
-	        	<table class="UIGrid" style="padding:0px; width: 95%; margin: auto;">
+	        	<table class="uiGrid table table-hover table-striped" style="padding:0px; width: 95%; margin: auto;">
 							<tr>
 								<th width="30px;"><span></span></th>	
 								<th><%=_ctx.appRes("FilePlan.view.label.record-id")%></th>
@@ -395,7 +395,7 @@
 	        </div>
 	        
 	        <div class="UITabContent" style="display: none;"> 
-	        	<table class="UIGrid" style="padding:0px; width: 95%; margin: auto;">
+	        	<table class="uiGrid table table-hover table-striped" style="padding:0px; width: 95%; margin: auto;">
 							<tr>
 								<th width="30px;"><span></span></th>	
 								<th><%=_ctx.appRes("FilePlan.view.label.record-id")%></th>
@@ -426,7 +426,7 @@
 	        </div>
 	        
 	        <div class="UITabContent" style="display: none;"> 
-	        	<table class="UIGrid" style="padding:0px; width: 95%; margin: auto;">
+	        	<table class="uiGrid table table-hover table-striped" style="padding:0px; width: 95%; margin: auto;">
 							<tr>
 								<th width="30px;"><span></span></th>	
 								<th><%=_ctx.appRes("FilePlan.view.label.record-id")%></th>
@@ -457,7 +457,7 @@
 	        </div>
 	        
 	        <div class="UITabContent" style="display: none;"> 
-	        	<table class="UIGrid" style="padding:0px; width: 95%; margin: auto;">
+	        	<table class="uiGrid table table-hover table-striped" style="padding:0px; width: 95%; margin: auto;">
 							<tr>
 								<th width="30px;"><span></span></th>	
 								<th><%=_ctx.appRes("FilePlan.view.label.record-id")%></th>
@@ -494,7 +494,7 @@
 	        </div>
 	        
 	        <div class="UITabContent" style="display: none;"> 
-	        	<table class="UIGrid" style="padding:0px; width: 95%; margin: auto;">
+	        	<table class="uiGrid table table-hover table-striped" style="padding:0px; width: 95%; margin: auto;">
 							<tr>
 								<th width="30px;"><span></span></th>	
 								<th><%=_ctx.appRes("FilePlan.view.label.record-id")%></th>
@@ -531,7 +531,7 @@
 	        </div>
 	        
 	        <div class="UITabContent" style="display: none;"> 
-	        	<table class="UIGrid" style="padding:0px; width: 95%; margin: auto;">
+	        	<table class="uiGrid table table-hover table-striped" style="padding:0px; width: 95%; margin: auto;">
 							<tr>
 								<th width="30px;"><span></span></th>	
 								<th><%=_ctx.appRes("FilePlan.view.label.record-id")%></th>

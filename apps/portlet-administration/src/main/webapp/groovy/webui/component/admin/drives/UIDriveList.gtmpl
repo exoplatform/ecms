@@ -25,7 +25,7 @@
   </div>
   <% } %>
 <div class = "FixTableSize">
-  <table class="UIGrid">
+  <table class="uiGrid table table-hover table-striped">
     <thead>
       <tr>
   	    <th><%=_ctx.appRes("UIDriveList.header.icon")%></th>
@@ -34,7 +34,7 @@
   	    <th><%=_ctx.appRes("UIDriveList.header.homePath")%></th>
   	    <th><%=_ctx.appRes("UIDriveList.header.permissions")%></th>
   	    <th><%=_ctx.appRes("UIDriveList.header.views")%></th>
-  	    <th><%=_ctx.appRes("UIDriveList.header.action")%></th>
+  	    <th class="center" width="100"><%=_ctx.appRes("UIDriveList.header.action")%></th>
       </tr>
     </thead>
     <tbody>
@@ -62,11 +62,10 @@
             <td><div class="Text" rel="tooltip" data-placement="bottom" title="<%=drive.getHomePath().replace("/", " /")%>"><%=drive.getHomePath().replace("/", " /")%></div></td>
             <td><div class="Text" rel="tooltip" data-placement="bottom" title="$drive.permissions">$drive.permissions</div></td>
             <td><div class="Text" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getDriveViews(drive)%>"><%=uicomponent.getDriveViews(drive)%></div></td>
-	          <td>
-	          	<div class="ActionContainer">
-	              <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("EditInfo", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDriveList.tooltip.EditInfo")%>" alt="<%=_ctx.appRes("UIDriveList.tooltip.EditInfo")%>" class="Edit16x16Icon" />
-	              <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDriveList.tooltip.Delete")%>" alt="<%=_ctx.appRes("UIDriveList.tooltip.Delete")%>" class="Delete16x16Icon" />
-			        </div>
+	          <td class="center">
+	              	<a class="actionIcon" onclick="<%=uicomponent.event("EditInfo", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDriveList.tooltip.EditInfo")%>" ><i class="uiIconEditInfo"></i></a>
+					<a class="actionIcon" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDriveList.tooltip.Delete")%>" ><i class="uiIconDelete"></i></a>
+		       
 	          </td>	                    
           </tr>
       <%}%>  

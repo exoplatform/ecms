@@ -20,7 +20,7 @@
   String repositoryName = rService.getCurrentRepository().getConfiguration().getName();  
 %>
 <div id="$uicomponent.id">
-  <table class="UIGrid" cellspacing="0">
+  <table class="uiGrid table table-hover table-striped" cellspacing="0">
     <thead>
       <tr class="UIWCMSearchContent">
         <%
@@ -31,7 +31,7 @@
         <%		}
         		if(beanActions != null) { 
         %>
-        			<th class="action"><%=_ctx.appRes("UIContentSearchResult.header.action")%></th>
+        			<th class="action center"><%=_ctx.appRes("UIContentSearchResult.header.action")%></th>
         <%		
         		}
         		

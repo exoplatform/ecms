@@ -24,14 +24,14 @@
     %>
   </div>
   <%}%>
-  <table class="UIGrid">
+  <table class="uiGrid table table-hover table-striped">
     <thead>
       <tr>
   	    <th><%=_ctx.appRes("UIQueriesList.header.name")%></th>
   	    <th><%=_ctx.appRes("UIQueriesList.header.type")%></th>
   	    <th><%=_ctx.appRes("UIQueriesList.header.statement")%></th>
   	    <th><%=_ctx.appRes("UIQueriesList.header.permission")%></th>
-  	    <th><%=_ctx.appRes("UIQueriesList.header.action")%></th>
+  	    <th class="center" width="100"><%=_ctx.appRes("UIQueriesList.header.action")%></th>
       </tr>
     </thead>
     <tbody>
@@ -58,20 +58,18 @@
             %>
             	<div class="Text"><%=permissions%></div>
             </td>
-	          <td>
-	          	<div class="ActionContainer">
+	          <td class="center">
 	          	  <%
 	          	  if (uicomponent.canEditNode(node)) {
 	          	  %>
-			          <img onclick="<%=uicomponent.event("Edit", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIQueriesList.tooltip.Edit")%>" alt="<%=_ctx.appRes("UIQueriesList.tooltip.Edit")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Edit16x16Icon" />
+			        <a class="actionIcon" onclick="<%=uicomponent.event("Edit", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIQueriesList.tooltip.Edit")%>" ><i class="uiIconEditInfo"></i></a>
 			      <%
 	          	  }
 	          	  if (uicomponent.canRemoveNode(node)) {
 	          	  %>	          	
-	                <img onclick="<%=uicomponent.event("Delete", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIQueriesList.tooltip.Delete")%>" alt="<%=_ctx.appRes("UIQueriesList.tooltip.Delete")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Delete16x16Icon" />
+	                 <a class="actionIcon" onclick="<%=uicomponent.event("Delete", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIQueriesList.tooltip.Delete")%>" ><i class="uiIconDelete"></i></a>
 	              <%  
 	          	  }%>
-		          </div>
 	          </td>	                    
           </tr>
       <%}%>  

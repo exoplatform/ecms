@@ -11,13 +11,18 @@ import org.exoplatform.wcm.webui.reader.ContentReader;
  
 %>
 <div class="UIPropertyTab">
-  <table class="UIGrid" style="width: 97%">
+  <table class="uiGrid table table-hover table-striped" >
 	  <thead>
 			<tr>
 			  <%
 			    String[] beanFields =  uicomponent.getBeanFields() ;  
-			    for(int i = 0; i < beanFields.size(); i++) {%>
-			    <th class="Field<%=(i+1)%>"><%=_ctx.appRes("UIPropertyTab.header." + beanFields[i])%></th>
+				def style = "";
+			    for(int i = 0; i < beanFields.size(); i++) {
+				if ("action".equals(beanFields[i])) {
+					style="text-align:center;width:100px";
+				}
+				%>
+			    <th class="Field<%=(i+1)%>" style="$style"><%=_ctx.appRes("UIPropertyTab.header." + beanFields[i])%></th>
 			  <%}%>  
 			</tr>
 	  </thead>
@@ -65,16 +70,14 @@ import org.exoplatform.wcm.webui.reader.ContentReader;
 				   	</div>
 				    <%}%>  
 			    </td>
-			    <td>
-			    	<div class="ActionContainer">
+			    <td class="center">
 					    <%
 					    if(uicomponent.isCanbeEdit(bean)) {%> 			    
-					      <img onclick="<%=uicomponent.event("Edit", bean.getName())%>" alt="<%=_ctx.appRes("UIPropertyTab.title.edit")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPropertyTab.title.edit")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="EditIcon" />
+					      <a class="actionIcon" onclick="<%=uicomponent.event("Edit", bean.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPropertyTab.title.edit")%>" ><i class="uiIconEditInfo"></i></a>
 					    <%}%>
 					    <%if(uicomponent.isCanbeRemoved(bean.getName())) {%>
-					      <img onclick="<%=uicomponent.event("Delete", bean.getName())%>" alt="<%=_ctx.appRes("UIPropertyTab.title.delete")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPropertyTab.title.delete")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="DeleteIcon" />
+					      <a class="actionIcon" onclick="<%=uicomponent.event("Delete", bean.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPropertyTab.title.delete")%>" ><i class="uiIconDelete"></i></a>
 					    <%}%>  
-				    </div>
 			    </td>
 			  </tr>    
 	    <%}%>

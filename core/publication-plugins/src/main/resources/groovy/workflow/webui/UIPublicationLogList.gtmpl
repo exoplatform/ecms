@@ -9,7 +9,7 @@
 %>
 
 <div class="$uicomponent.id" id="$uicomponent.id">
-  <table class="UIGrid">
+  <table class="uiGrid table table-hover table-striped">
     <thead>
       <tr>
   	    <th><%=_ctx.appRes("UIPublicationLogList.header.date")%></th>

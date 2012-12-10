@@ -10,7 +10,7 @@
   String[] arrLabel = ["fileName", "nodeName", "fileSize", "mimeType", "manageMetadata"];
 %>
 <div class="$uicomponent.id">
-	<table class="UIGrid" cellspacing="0" borderspacing="0" style="width: 99%;">
+	<table class="uiGrid table table-hover table-striped" cellspacing="0" borderspacing="0" style="width: 99%;">
 	  <col width="40px;"><col><col><col><col>
 	  <thead>
 	    <tr>
@@ -37,10 +37,10 @@
 	        <%} else {%>
 	                  <td style="text-align: center;overflow:hidden">
 		            <%if (index == 6) {%>
-								<% String valuePath = Utils.formatNodeName(value); %>
-		              <a href="<%=uicomponent.event("ManageMetadata", valuePath)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIUploadContent.tooltip.ManageMetadata")%>">
-		              <div class="Icon16x16 Edit16x16Icon" style="margin-left: 30px;" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIUploadContent.tooltip.ManageMetadata")%>"><span></span></div>
-	                </a>
+						<% String valuePath = Utils.formatNodeName(value); %>
+							<a class="actionIcon" href="<%=uicomponent.event("ManageMetadata", valuePath)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIUploadContent.tooltip.ManageMetadata")%>">
+								<i class="uiIconEditInfo"></i>
+							</a>
 		            <%} else {%>
 		              <span rel="tooltip" data-placement="bottom" title="$value"><%=ContentReader.getEscapeHtmlContent(subValue)%></span>
 		            <% } %>

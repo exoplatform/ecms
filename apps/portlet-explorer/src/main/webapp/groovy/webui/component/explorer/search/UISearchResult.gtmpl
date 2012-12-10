@@ -25,10 +25,10 @@
   java.text.DateFormat dateFormat = uicomponent.getSimpleDateFormat();
 %>
 <div class="UISearchResult" id="$uicomponent.id">
-  <table class="UIGrid" style="width: 97%">
+  <table class="uiGrid table table-hover table-striped" >
     <thead>
       <tr>
-        <th width="45px">
+        <th width="45">
           <%
             if (uicomponent.iconType.equals("BlueUpArrow")) {
           %>
@@ -52,7 +52,7 @@
           <% } %>
         </th>
         <th><%=_ctx.appRes("UISearchResult.header.name")%></th>
-        <th style="width:80px;">
+        <th width="80">
           <%
             if (uicomponent.iconScore.equals("BlueUpArrow")) {
           %>
@@ -74,7 +74,8 @@
               <%=_ctx.appRes("UISearchResult.header.score")%>
             </a>
           <% } %>
-        <th style="width:80px;"><%=_ctx.appRes("UISearchResult.header.action")%></th>
+		 </th>
+        <th width="80"class="center"><%=_ctx.appRes("UISearchResult.header.action")%></th>
       </tr>
     </thead>
     <tbody>

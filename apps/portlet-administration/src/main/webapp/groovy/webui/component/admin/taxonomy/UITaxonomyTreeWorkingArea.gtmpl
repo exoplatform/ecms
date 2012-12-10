@@ -7,13 +7,13 @@
  */
 %>
 <div class="$uicomponent.id UITreeList" id="$uicomponent.id">
-  <table class="UIGrid">
+  <table class="uiGrid table table-hover table-striped">
 	  <col></col>
 	  <col style="width:200px;"></col>
 	  <thead>
 	    <tr>
 	      <th><%=_ctx.appRes("UITreeList.header.name")%></th>
-		    <th><%=_ctx.appRes("UITreeList.header.action")%></th>
+		  <th class="center"><%=_ctx.appRes("UITreeList.header.action")%></th>
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -35,8 +35,7 @@
 			           %>
 			          <div class="Text" rel="tooltip" data-placement="bottom" title="$nodeName">$nodeName</div>
 			        </td>
-			        <td>
-			        	<div class="ActionContainer">
+			        <td class="center">
 		              <%
 		                if(uicomponent.isRootNode()) {
 		              %>
@@ -50,7 +49,7 @@
 		                <img onclick="<%=uicomponent.event("ViewPermission", node.getPath())%>" alt="<%=_ctx.appRes("UITaxonomyManager.title.permission")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Permission16x16Icon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.permission")%>" />
 		                <img onclick="<%=uicomponent.event("Remove", node.getPath())%>" alt="<%=_ctx.appRes("UITaxonomyManager.title.remove")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Remove16x16Icon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.remove")%>" />
 		              <%}%>
-		            </div>
+		           
 			        </td>
 			      </tr>
 			<%

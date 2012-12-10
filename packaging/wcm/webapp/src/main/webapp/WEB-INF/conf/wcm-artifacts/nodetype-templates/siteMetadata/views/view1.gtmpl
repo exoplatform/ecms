@@ -1,7 +1,7 @@
 <%def node = uicomponent.getViewNode("metadata:siteMetadata") ;%>
-<table class="UIGrid">
+<table class="uiGrid table table-hover table-striped">
 	<tr>
-	    <td style="width:25%"><%=_ctx.appRes("SiteMetadata.view.label.siteTitle")%></td>
+	    <td ><%=_ctx.appRes("SiteMetadata.view.label.siteTitle")%></td>
 	    <td>
 	      <%if(node.hasProperty("siteTitle")) {%>
 			    <%=node.getProperty("siteTitle").getString()%>
@@ -9,7 +9,7 @@
 	    </td>
 	</tr>
 	<tr>
-	    <td style="width:25%"><%=_ctx.appRes("SiteMetadata.view.label.description")%></td>
+	    <td ><%=_ctx.appRes("SiteMetadata.view.label.description")%></td>
 	    <td>
 			  <%if(node.hasProperty("description")) {%>
 			    <%=node.getProperty("description").getString()%>
@@ -17,7 +17,7 @@
 		</td>
 	</tr>	
 	<tr>
-		<td style="width:25%"><%=_ctx.appRes("SiteMetadata.view.label.keywords")%></td>
+		<td ><%=_ctx.appRes("SiteMetadata.view.label.keywords")%></td>
 		<td>
 	      <%if(node.hasProperty("keywords")) {%>
 			    <%=node.getProperty("keywords").getString()%>
@@ -25,7 +25,7 @@
 	    </td>
    </tr>
    <tr>
-	    <td style="width:25%"><%=_ctx.appRes("SiteMetadata.view.label.robots")%></td>
+	    <td ><%=_ctx.appRes("SiteMetadata.view.label.robots")%></td>
 	    <td>
 	      <%if(node.hasProperty("robots")) {%>
 			    <%=node.getProperty("robots").getString()%>

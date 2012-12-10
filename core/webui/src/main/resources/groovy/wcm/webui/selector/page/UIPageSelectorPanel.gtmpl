@@ -10,7 +10,7 @@
 %>
 <div class=" ClearFix">
 <div id="UIPageSelectorPanel" class="UIPageSelectorPanel">
-	<table class="UIGrid">
+	<table class="uiGrid table table-hover table-striped">
 		<thead>
 			<tr>
 	      		<th><%=_ctx.appRes("UIPageSelectorPanel.header.path")%></th>

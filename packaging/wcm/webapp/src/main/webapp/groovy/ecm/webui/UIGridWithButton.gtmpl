@@ -15,7 +15,7 @@
       _ctx.renderUIComponent(uicomponent.getUIPageIterator());
     }
   %>
-	<table class="UIGrid">
+	<table class="uiGrid table table-hover table-striped">
 	  <thead>
 	    <tr>
 	      <%if(name != null) { %>
@@ -31,7 +31,7 @@
 	          <th><%=_ctx.appRes(uiParent.getName()+".header."+field)%></th>
 	        <%}%>
 	        <%if(beanActions != null && beanActions.length > 0) { %>
-	          <th><%=_ctx.appRes(uiParent.getName()+".header.action")%></th>
+	          <th class="center"><%=_ctx.appRes(uiParent.getName()+".header.action")%></th>
 	        <%}%>
 	      <%}%>
 	    </tr>
@@ -72,8 +72,7 @@
 	          
 	      <%}%>
 	      <%if(beanActions != null && beanActions.length > 0) { %>
-	        <td>         
-	          <div class="ActionContainer">
+	        <td class="center">         
 	            <%def beanIdField = uicomponent.getBeanIdField() ; %>          
 	            <%for(action in beanActions) { %>
 	            <%  def beanId = uicomponent.getFieldValue(bean,beanIdField)  ; %>               
@@ -86,8 +85,7 @@
 	                    <img onclick="<%=uicomponent.url(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "<%=_ctx.appRes(uiParent.getId()+".title."+ action)%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="${action}Icon" alt="<%=_ctx.appRes(uiParent.getId()+".title."+ action)%>" />
 	              <%  } %> 
 	              <%} %> 
-	            <%}%>                 
-	          </div>
+	            <%}%>      
 	        </td>
 	      <% } %>  
 	    </tr>

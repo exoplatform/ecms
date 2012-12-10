@@ -2,14 +2,14 @@
   import org.exoplatform.ecm.webui.utils.Utils ;
 %>
 <div id="$uicomponent.id">
-	<table class="UIGrid" id="$uicomponent.id">  
-		<tbody>
+	<table class="uiGrid table table-hover table-striped" id="$uicomponent.id">
+		<thead>
 	    <tr>
 	      <th><%=_ctx.appRes("UICategoriesAddedList.label.category")%></th>
-	      <th><%=_ctx.appRes("UICategoriesAddedList.label.actions") %></th>    
+	      <th class="center"><%=_ctx.appRes("UICategoriesAddedList.label.actions") %></th>    
 	    </tr>
-	    
-	    <div class="HomeNode">
+	    </thead>
+	    <tbody class="HomeNode">
 	    <%
 	      def listCategory = uicomponent.getListCategories();
 	      def lstTaxonomyTrees = uicomponent.getAllTaxonomyTrees();
@@ -37,10 +37,9 @@
 	     %>
 	          <tr class="$rowClass">
 							<td><%=value%></td>	          	
-							<td width="10%">
-								<div class="ActionContainer">
-									<img class="Icon16x16 Remove16x16Icon" src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UICategoriesAddedList.label.delete")%>" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(node.getPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UICategoriesAddedList.label.delete")%>" />
-								</div>
+							<td class="center">
+									<a class="actionIcon" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(node.getPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UICategoriesAddedList.label.delete")%>" ><i class="uiIconDelete"></i></a>									
+								
 							</td>
 	          </tr>
 	     <% }
@@ -52,7 +51,6 @@
 	           </td>
 	         </tr>
 	    <%}%>
-	  	</div>
 	  </tbody>
 	</table>
 	

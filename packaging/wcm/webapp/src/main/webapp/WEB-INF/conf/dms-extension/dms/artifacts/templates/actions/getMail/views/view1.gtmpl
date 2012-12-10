@@ -2,9 +2,9 @@
   def node = uicomponent.getNode();
   StringBuilder sB;
 %>
-<table class="UIGrid">      	 			
+<table class="uiGrid table table-hover table-striped">      	 			
   <tr>
-    <td style="width:25%"><%=_ctx.appRes("Getmail.view.label.name")%></td>
+    <td ><%=_ctx.appRes("Getmail.view.label.name")%></td>
     <td>
   		<%if(node.hasProperty("exo:name")){%>
   			<%=node.getProperty("exo:name").getString()%>
@@ -12,7 +12,7 @@
  		</td>
   </tr>
   <tr>
-    <td style="width:25%"><%=_ctx.appRes("Getmail.view.label.isDeep")%></td>
+    <td ><%=_ctx.appRes("Getmail.view.label.isDeep")%></td>
     <td>
     <%if(node.hasProperty("exo:isDeep")){%>
       <%=node.getProperty("exo:isDeep").getString()%>
@@ -20,7 +20,7 @@
     </td>
   </tr>
   <tr>
-    <td style="width:25%"><%=_ctx.appRes("Getmail.view.label.nodeTypeName")%></td>
+    <td ><%=_ctx.appRes("Getmail.view.label.nodeTypeName")%></td>
     <td>
     <%if(node.hasProperty("exo:nodeTypeName")){
       sB = new StringBuilder();
@@ -37,7 +37,7 @@
     </td> 
   </tr>
   <tr>
-    <td style="width:25%"><%=_ctx.appRes("Getmail.view.label.lifecycle")%></td>
+    <td ><%=_ctx.appRes("Getmail.view.label.lifecycle")%></td>
     <td>
     	<%if(node.hasProperty("exo:lifecyclePhase")){
     	  sB = new StringBuilder();
@@ -54,7 +54,7 @@
     </td>					
   </tr>
   <tr>
-    <td style="width:25%"><%=_ctx.appRes("Getmail.view.label.affectedNodeTypeNames")%></td>
+    <td ><%=_ctx.appRes("Getmail.view.label.affectedNodeTypeNames")%></td>
     <td>
     <%if(node.hasProperty("exo:affectedNodeTypeNames")){
       sB = new StringBuilder();
@@ -71,7 +71,7 @@
     </td> 
   </tr>
   <tr>
-		<td style="width:25%"><%=_ctx.appRes("Getmail.view.label.protocol")%></td>
+		<td ><%=_ctx.appRes("Getmail.view.label.protocol")%></td>
 		<td>
 			<%if(node.hasProperty("exo:protocol")){%>
 				<%=node.getProperty("exo:protocol").getString()%>	
@@ -79,7 +79,7 @@
 		</td>
   </tr>
   <tr>
-		<td style="width:25%"><%=_ctx.appRes("Getmail.view.label.host")%></td>
+		<td ><%=_ctx.appRes("Getmail.view.label.host")%></td>
 		<td>
 			<%if(node.hasProperty("exo:host")){%>	
 				<%=node.getProperty("exo:host").getString()%>
@@ -87,7 +87,7 @@
 		</td>
   </tr>
   <tr>
-		<td style="width:25%"><%=_ctx.appRes("Getmail.view.label.port")%></td>
+		<td ><%=_ctx.appRes("Getmail.view.label.port")%></td>
 		<td>
 			<%if(node.hasProperty("exo:port")){%>		
 				<%=node.getProperty("exo:port").getString()%>
@@ -95,7 +95,7 @@
 		</td>
   </tr>
   <tr>
-		<td style="width:25%"><%=_ctx.appRes("Getmail.view.label.folder")%></td>
+		<td ><%=_ctx.appRes("Getmail.view.label.folder")%></td>
 		<td>
 			<%if(node.hasProperty("exo:folder")){%>		
 				<%=node.getProperty("exo:folder").getString()%>	
@@ -103,7 +103,7 @@
 		</td>
   </tr>
   <tr>
-		<td style="width:25%"><%=_ctx.appRes("Getmail.view.label.username")%></td>
+		<td ><%=_ctx.appRes("Getmail.view.label.username")%></td>
 		<td>
 			<%if(node.hasProperty("exo:userName")){%>		
 				<%=node.getProperty("exo:userName").getString()%>			
@@ -111,7 +111,7 @@
 		</td>
   </tr>  
   <tr>
-		<td style="width:25%"><%=_ctx.appRes("Getmail.view.label.description")%></td>
+		<td ><%=_ctx.appRes("Getmail.view.label.description")%></td>
 		<td>
 			<%if(node.hasProperty("exo:description")){%>
 				<%=node.getProperty("exo:description").getString()%>			
@@ -119,7 +119,7 @@
 		</td>
   </tr>  
   <tr>
-		<td style="width:25%"><%=_ctx.appRes("Getmail.view.label.store-path")%></td>
+		<td ><%=_ctx.appRes("Getmail.view.label.store-path")%></td>
 		<td>
 			<%if(node.hasProperty("exo:storePath")){%>
 				<%=node.getProperty("exo:storePath").getString()%>

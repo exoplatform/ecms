@@ -1,7 +1,7 @@
 <%import org.exoplatform.ecm.webui.utils.Utils ;%>
 <div class="$uicomponent.id">
 	<% if(uicomponent.getIsExternalMetadata()) {%>	
-		<table class="UIGrid" cellspacing="0" borderspacing="0" style="width: 99%;">
+		<table class="uiGrid table table-hover table-striped" cellspacing="0" borderspacing="0" >
 		  <col width="50px;"><col><col width="50px;">
 		  <thead>
 		    <tr>
@@ -18,10 +18,10 @@
 			        <div class="default16x16Icon ${iconNodeType}16x16Icon" style="margin:auto"><span></span></div>
 			      </td>
 			      <td><%=nodeType%></td>
-		 	      <td>
-		          <a href="<%=uicomponent.event("Edit", nodeType)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIUploadContent.tooltip.Edit")%>">
-		            <div class="Icon16x16 Edit16x16Icon" style="margin-left:7px;" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIUploadContent.tooltip.Edit")%>"><span></span></div>
-		          </a>
+		 	      <td class="center">
+				   <a  class="actionIcon"  href="<%=uicomponent.event("Edit", nodeType)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIUploadContent.tooltip.Edit")%>">
+						<i class="uiIconEditInfo"></i>
+				  </a>
 		 	      </td>
 			    </tr>
 	      <%}%>

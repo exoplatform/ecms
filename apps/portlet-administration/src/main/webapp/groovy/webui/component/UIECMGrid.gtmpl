@@ -9,7 +9,7 @@
   UIForm uiForm = uicomponent.getAncestorOfType(UIForm.class); 
 %>
 <div id="$uicomponent.id">
-	<table class="UIGrid" cellspacing="0" borderspacing="0">
+	<table class="uiGrid table table-hover table-striped" cellspacing="0" borderspacing="0">
 	  <thead>
 	  	<tr>
 	      <%if(name != null) {%>
@@ -65,8 +65,7 @@
 		      }  
 	        if(beanActions != null && beanActions.length > 0) { 
 	  %>
-				  <td>         
-		        <div class="ActionContainer">
+				  <td class="center">         
 		          <%	          
 		            def beanIdField = uicomponent.getBeanIdField() ;           
 		            for(action in beanActions) { 
@@ -81,8 +80,7 @@
 		              }
 			        %>	           
 			            <img onclick="$actionLink" rel="tooltip" data-placement="bottom" title="$title" alt="$title" src="/eXoResources/skin/sharedImages/Blank.gif" class="${action}Icon" />
-		          <%}%>                 
-		        </div>
+		          <%}%>    
 		      </td>
 	  <%
 	        }

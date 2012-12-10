@@ -15,9 +15,9 @@
   <% _ctx.include(uicomponent.getTemplateSkin("kfx:document", "Stylesheet")); %>    
 </style>
 <div class="WorkKofax">
-	<table class="UIGrid">      	 			
+	<table class="uiGrid table table-hover table-striped">      	 			
 	  <tr>
-	    <td style="width:25%"><%=_ctx.appRes("Kofax.view.label.document-name")%></td>
+	    <td ><%=_ctx.appRes("Kofax.view.label.document-name")%></td>
 	    <td><%=Text.unescapeIllegalJcrChars(originalNode.getName())%></td>
 	  </tr>
 	
@@ -26,7 +26,7 @@
 		    def propertyName = property.getName() ;
 		    if(propertyName.startsWith(namespace)) { %>
 				  <tr>
-				    <td style="width:25%"><%=propertyName.substring(namespace.length(), propertyName.length())%></td>
+				    <td ><%=propertyName.substring(namespace.length(), propertyName.length())%></td>
 				    <td><%=node.getProperty(propertyName).getString()%></td>
 				  </tr>
 		<%
@@ -37,7 +37,7 @@
 		    if(child.hasNode("jcr:content")) {
 		%>
 			  <tr>
-			    <td style="width:25%"><%=_ctx.appRes("Kofax.view.label.downloadable")%> #<%=i%></td>
+			    <td ><%=_ctx.appRes("Kofax.view.label.downloadable")%> #<%=i%></td>
 					<%						  
 						  String actionLink = uicomponent.event("ChangeNode", child.getPath(), params);
 					%>
@@ -56,7 +56,7 @@
 			  </tr>
 		<%  } else {%>
 		      <tr>
-				    <td style="width:25%"><%=_ctx.appRes("Kofax.view.label.downloadable")%> #<%=i%></td>
+				    <td ><%=_ctx.appRes("Kofax.view.label.downloadable")%> #<%=i%></td>
 				    <td>
 				      <a href="<%=uicomponent.event("ChangeNode", Utils.formatNodeName(child.getPath()), params)%>">
 				        <%=child.getName()%>

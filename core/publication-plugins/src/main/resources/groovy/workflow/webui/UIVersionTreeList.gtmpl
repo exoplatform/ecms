@@ -37,22 +37,22 @@
 %>
 <div class="UIVersionTreeList">
 	<div class="UITrees">
-    <table class="UIGrid">
-		  <thead>
-			  <tr>
-					<th width="40"></th>
-					<th><%=_ctx.appRes("UIVersionTreeList.header.version")%></th>
-					<th width="40"><%=_ctx.appRes("UIVersionTreeList.header.state")%></th>
-				</tr>
-			 </thead>
-			 <tbody>
-			 
-			 <%
-					writeNodes(rootNode.getChildren(), 0 );
-				  uicomponent.renderChildren(); 
-			 %>
-			</tbody>
-		</table>
+    <table class="uiGrid table table-hover table-striped">
+	  <thead>
+		  <tr>
+				<th width="40"></th>
+				<th><%=_ctx.appRes("UIVersionTreeList.header.version")%></th>
+				<th width="40"><%=_ctx.appRes("UIVersionTreeList.header.state")%></th>
+			</tr>
+		 </thead>
+		 <tbody>
+		 
+		 <%
+				writeNodes(rootNode.getChildren(), 0 );
+			  uicomponent.renderChildren(); 
+		 %>
+		</tbody>
+	</table>
 	</div>
 </div>
 <%}%>

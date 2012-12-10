@@ -23,13 +23,13 @@
     %>
   </div>
   <%}%>
-  <table class="UIGrid">
+  <table class="uiGrid table table-hover table-striped">
     <thead>
       <tr>
   	    <th style="width:36px;"></th>
   	    <th><%=_ctx.appRes("UILockNodeList.header.name")%></th>
   	    <th><%=_ctx.appRes("UILockNodeList.header.hoderLock")%></th>  	    
-  	    <th style="width:75px;"><%=_ctx.appRes("UILockNodeList.header.action")%></th>
+  	    <th class="center" width="75"><%=_ctx.appRes("UILockNodeList.header.action")%></th>
       </tr>
     </thead>
     <tbody>
@@ -49,10 +49,8 @@
 					  					</td>
             <td><div class="Text"><%= node.getPath(); %></div></td>
             <td><div class="Text"><%= node.getLock().getLockOwner(); %></div></td>
-	          	<td>
-		          	<div class="ActionContainer">
-				          <img onclick="<%=uicomponent.event("UnLock", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UILockNodeList.tooltip.UnLock")%>" alt="<%=_ctx.appRes("UILockNodeList.tooltip.UnLock")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Unlock16x16Icon" />
-			          </div>
+	          	<td class="center">	          	
+				    <img onclick="<%=uicomponent.event("UnLock", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UILockNodeList.tooltip.UnLock")%>" alt="<%=_ctx.appRes("UILockNodeList.tooltip.UnLock")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Unlock16x16Icon" />
 	          	</td>	                    
           </tr>
       <%}

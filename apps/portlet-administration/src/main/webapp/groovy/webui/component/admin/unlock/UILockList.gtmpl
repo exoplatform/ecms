@@ -23,11 +23,11 @@
     %>
   </div>
   <%}%>
-  <table class="UIGrid">
+  <table class="uiGrid table table-hover table-striped">
     <thead>
       <tr>
   	    <th><%=_ctx.appRes("UILockList.header.name")%></th>  	    
-  	    <th width="35px"><%=_ctx.appRes("UILockList.header.action")%></th>
+  	    <th class="center" width="55"><%=_ctx.appRes("UILockList.header.action")%></th>
       </tr>
     </thead>
     <tbody>
@@ -42,10 +42,9 @@
       %>
           <tr class="$rowClass">            
             <td><div class="Text">$settingLock</div></td>
-	          	<td width="35px">
-		          	<div class="ActionContainer">
-				          <img onclick="<%=uicomponent.event("DeleteLock", settingLock)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UILockList.tooltip.DeleteLock")%>" alt="<%=_ctx.appRes("UILockList.tooltip.DeleteLock")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Delete16x16Icon" />
-			          </div>
+	          	<td class="center">
+						<a class="actionIcon" onclick="<%=uicomponent.event("DeleteLock", settingLock)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UILockList.tooltip.DeleteLock")%>" ><i class="uiIconDelete"></i></a>				       
+			        
 	          	</td>	                    
           </tr>
       <%}

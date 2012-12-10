@@ -16,14 +16,14 @@
   int totalPages = uicomponent.getUIPageIterator().getAvailablePage() ;
 %>
 <div class="UISavedQuery" id="UISavedQuery">
-  <table class="UIGrid">
+  <table class="uiGrid table table-hover table-striped">
     <thead>
       <tr>
   	    <th><%=_ctx.appRes("UISavedQuery.header.name")%></th>
   	    <th><%=_ctx.appRes("UISavedQuery.header.type")%></th>
   	    <th><%=_ctx.appRes("UISavedQuery.header.statement")%></th>
   	    <th><%=_ctx.appRes("UISavedQuery.header.permission")%></th>
-  	    <th><%=_ctx.appRes("UISavedQuery.header.action")%></th>
+  	    <th class="center" width="100"><%=_ctx.appRes("UISavedQuery.header.action")%></th>
       </tr>
     </thead>
     <%
@@ -58,11 +58,11 @@
 		            	<div class="Text" rel="tooltip" data-placement="bottom" title="<%=object.getStatement()%>"><%=statement%></div>
 		            </td>
 		            <td><%=uicomponent.getCurrentUserId()%></td>
-			          <td style="width:100px;">
+			          <td >
 			          	<div class="ActionContainer">
 				            <img onclick="<%=uicomponent.event("Execute", Utils.formatNodeName(object.getStoredQueryPath()))%>" alt="<%=_ctx.appRes("UISavedQuery.tooltip.Execute")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Execute")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Execute16x16Icon" />
-				            <img onclick="<%=uicomponent.event("Edit", Utils.formatNodeName(object.getStoredQueryPath()))%>" alt="<%=_ctx.appRes("UISavedQuery.tooltip.Edit")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Edit")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Edit16x16Icon" />
-				            <img onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(object.getStoredQueryPath()))%>" alt="<%=_ctx.appRes("UISavedQuery.tooltip.Delete")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Delete")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Delete16x16Icon" />
+				            <a class="ActionIcon" onclick="<%=uicomponent.event("Edit", Utils.formatNodeName(object.getStoredQueryPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Edit")%>" ><i class="uiIconEditInfo"></i></a>
+				            <a class="ActionIcon" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(object.getStoredQueryPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Delete")%>" ><i class="uiIconDelete"></i></a>	
 			            </div>
 			          </td>	                    
 		          </tr>
@@ -93,7 +93,7 @@
 		            %>
 		            	<div class="Text"><%=sharedPermissions%></div>
 		            </td>
-			          <td style="width:80px;">
+			          <td width="80">
 			          	<div class="ActionContainer">
 				            <img onclick="<%=uicomponent.event("Execute", Utils.formatNodeName(object.getPath()))%>" alt="<%=_ctx.appRes("UISavedQuery.tooltip.Execute")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Execute")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Execute16x16Icon" />
 			            </div>

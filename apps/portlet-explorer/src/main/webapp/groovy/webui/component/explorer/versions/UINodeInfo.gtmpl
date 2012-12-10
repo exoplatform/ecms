@@ -8,7 +8,7 @@
 	 */
 %>
 
-<table class="UIGrid" id="$uicomponent.id">  
+<table class="uiGrid table table-hover table-striped" id="$uicomponent.id">  
   <tbody>
 		<tr>
 			<td><%=_ctx.appRes("UIViewVersion.label.nodeType")%></td>

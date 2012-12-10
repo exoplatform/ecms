@@ -14,13 +14,13 @@
 %>
 
 <div class="$uicomponent.id" id="$uicomponent.id">
-  <table class="UIGrid">
+  <table class="uiGrid table table-hover table-striped">
     <thead>
       <tr>
-  	    <th style="width: 130px"><%=_ctx.appRes("UIPublicationHistory.header.date")%></th>
-  	    <th style="width: 80px"><%=_ctx.appRes("UIPublicationHistory.header.versionName")%></th>
-  	    <th style="width: 80px"><%=_ctx.appRes("UIPublicationHistory.header.currentState")%></th>
-  	    <th style="width: 80px"><%=_ctx.appRes("UIPublicationHistory.header.user")%></th>
+  	    <th><%=_ctx.appRes("UIPublicationHistory.header.date")%></th>
+  	    <th><%=_ctx.appRes("UIPublicationHistory.header.versionName")%></th>
+  	    <th><%=_ctx.appRes("UIPublicationHistory.header.currentState")%></th>
+  	    <th><%=_ctx.appRes("UIPublicationHistory.header.user")%></th>
   	    <th><%=_ctx.appRes("UIPublicationHistory.header.description")%></th>
   	   </tr>
     </thead>

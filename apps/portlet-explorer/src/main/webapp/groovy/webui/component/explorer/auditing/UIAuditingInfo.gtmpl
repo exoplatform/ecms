@@ -6,16 +6,16 @@
 %>
 
 <div class="UIVersionInfo" id="$uicomponent.id">
-  <table class="UIGrid" id="$uicomponent.id">  
-		<tbody>
+  <table class="uiGrid table table-hover table-striped" id="$uicomponent.id">  
+		<thead>
 	    <tr>
 	      <th><%=_ctx.appRes("UIAuditingInfo.label.operation")%></th>
 	      <th><%=_ctx.appRes("UIAuditingInfo.label.userName") %></th>    
 	      <th><%=_ctx.appRes("UIAuditingInfo.label.date")     %></th> 
 	      <th><%=_ctx.appRes("UIAuditingInfo.label.version")  %></th>   
 	    </tr>
-		    
-	  <div class="HomeNode">
+		</thead>    
+	  <tbody class="HomeNode">
 	    <%
 	      def listRec = uicomponent.getListRecords();
 	      if (listRec != null && listRec.size() > 0) {
@@ -49,7 +49,6 @@
 	           </td>
 	         </tr>
 	    <%}%>
-	  </div>
 	  </tbody>
 	</table> 
   

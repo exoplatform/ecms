@@ -2,14 +2,14 @@
   import org.exoplatform.ecm.webui.utils.Utils ;
 %>
 <div id="$uicomponent.id">
-	<table class="UIGrid" id="$uicomponent.id">  
-		<tbody>
+	<table class="uiGrid table table-hover table-striped" id="$uicomponent.id">  
+		<thead>
 	    <tr>
 	      <th><%=_ctx.appRes("UIDriveSelector.label.driveName")%></th>
-	      <th><%=_ctx.appRes("UIDriveSelector.label.action") %></th>    
+	      <th class="center"><%=_ctx.appRes("UIDriveSelector.label.action") %></th>    
 	    </tr>
-	    
-	    <div class="HomeNode">
+	    </thead>
+		<tbody class="HomeNode">
 	    <%
 	      def listDrive = uicomponent.getListDrive();
 	      if (listDrive != null && listDrive.size() > 0) {
@@ -37,7 +37,6 @@
 	           </td>
 	         </tr>
 	    <%}%>
-	  	</div>
 	  </tbody>
 	</table>
 	

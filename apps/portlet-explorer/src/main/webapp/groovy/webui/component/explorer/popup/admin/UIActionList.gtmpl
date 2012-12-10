@@ -14,13 +14,13 @@
    StringBuilder sB;
 %>
 <div class="UIActionList" id="$uicomponent.id">
-  <table class="UIGrid">
+  <table class="uiGrid table table-hover table-striped">
 	  <thead>
 	    <tr>
 	      <th><%=_ctx.appRes("UIActionList.header.name")%></th>
 		    <th><%=_ctx.appRes("UIActionList.header.triggeredaction")%></th>
  		    <th><%=_ctx.appRes("UIActionList.header.lifecycle")%></th>
- 		    <th><%=_ctx.appRes("UIActionList.header.action")%></th>
+ 		    <th class="center"><%=_ctx.appRes("UIActionList.header.action")%></th>
 	    </tr>
 	  </thead>
 	  <tbody>

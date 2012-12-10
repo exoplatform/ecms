@@ -28,13 +28,14 @@
     %>
   </div>
   <%}%>
-  <table class="UIGrid">
+  <table class="uiGrid table table-hover table-striped">
     <thead>
       <tr>
         <th><%=_ctx.appRes("UITaxonomyTreeList.header.name")%></th>
         <th><%=_ctx.appRes("UITaxonomyTreeList.header.workspace")%></th>
         <th><%=_ctx.appRes("UITaxonomyTreeList.header.homePath")%></th>
-        <th><%=_ctx.appRes("UITaxonomyTreeList.header.action")%></th>
+        <th><%=_ctx.appRes("UITaxonomyTreeList.header.permissions")%></th>
+        <th class="center"><%=_ctx.appRes("UITaxonomyTreeList.header.action")%></th>
       </tr>
     </thead>
     <tbody>
@@ -62,16 +63,14 @@
                   </div>                  
                 </div>                
               </td>             
-              <td>
-                <div class="ActionContainer">
+              <td class="center">
                   <% if (taxonomyTree.isEdit()) { %>
-                    <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("EditTaxonomyTree", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.EditTaxonomyTree")%>" alt="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.EditTaxonomyTree")%>" class="Edit16x16Icon" />
+					<a class="actionIcon" onclick="<%=uicomponent.event("EditTaxonomyTree", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.EditTaxonomyTree")%>" ><i class="uiIconEditInfo"></i></a>
                   <% } else { %>
                     <img src="/eXoResources/skin/sharedImages/Blank.gif" alt="None Edit" />
                   <% } %>
-                  <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.Delete")%>" alt="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.Delete")%>" class="Delete16x16Icon" />
-                </div>
-              </td>                     
+					<a class="actionIcon" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.Delete")%>" ><i class="uiIconDelete"></i></a>
+                </td>                     
             </tr>
         <%
           }

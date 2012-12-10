@@ -2,9 +2,9 @@
   def node = uicomponent.getNode();
   StringBuilder sB;
 %>
-<table class="UIGrid">      	 			
+<table class="uiGrid table table-hover table-striped">      	 			
   <tr>
-    <td style="width:25%"><%=_ctx.appRes("Rss.view.label.action-name")%></td>
+    <td ><%=_ctx.appRes("Rss.view.label.action-name")%></td>
     <td>
       <%if(node.hasProperty("exo:name")) {%>
         <%=node.getProperty("exo:name").getString()%>
@@ -12,7 +12,7 @@
     </td>
   </tr>
   <tr>
-    <td style="width:25%"><%=_ctx.appRes("Rss.view.label.isDeep")%></td>
+    <td ><%=_ctx.appRes("Rss.view.label.isDeep")%></td>
     <td>
     <%if(node.hasProperty("exo:isDeep")){%>
       <%=node.getProperty("exo:isDeep").getString()%>
@@ -20,7 +20,7 @@
     </td>
   </tr>
   <tr>
-    <td style="width:25%"><%=_ctx.appRes("Rss.view.label.nodeTypeName")%></td>
+    <td ><%=_ctx.appRes("Rss.view.label.nodeTypeName")%></td>
     <td>
     <%if(node.hasProperty("exo:nodeTypeName")){
       sB = new StringBuilder();
@@ -37,7 +37,7 @@
     </td> 
   </tr>
   <tr>
-    <td style="width:25%"><%=_ctx.appRes("Rss.view.label.lifecycle")%></td>
+    <td ><%=_ctx.appRes("Rss.view.label.lifecycle")%></td>
     <td>
       <%if(node.hasProperty("exo:lifecyclePhase")){
         sB = new StringBuilder();
@@ -54,7 +54,7 @@
     </td>         
   </tr>
   <tr>
-    <td style="width:25%"><%=_ctx.appRes("Rss.view.label.affectedNodeTypeNames")%></td>
+    <td ><%=_ctx.appRes("Rss.view.label.affectedNodeTypeNames")%></td>
     <td>
     <%if(node.hasProperty("exo:affectedNodeTypeNames")){
       sB = new StringBuilder();
@@ -71,7 +71,7 @@
     </td> 
   </tr>
   <tr>
-		<td style="width:25%"><%=_ctx.appRes("Rss.view.label.feed-title")%></td>
+		<td ><%=_ctx.appRes("Rss.view.label.feed-title")%></td>
 		<td>
 		  <%if(node.hasProperty("exo:feedTitle")) {%>
 				<%=node.getProperty("exo:feedTitle").getString()%>
@@ -79,7 +79,7 @@
 		</td>
   </tr>
   <tr>
-		<td style="width:25%"><%=_ctx.appRes("Rss.view.label.feed-type")%></td>
+		<td ><%=_ctx.appRes("Rss.view.label.feed-type")%></td>
 		<td>
 			<%if(node.hasProperty("exo:feedType")) {%>
 				<%=node.getProperty("exo:feedType").getString()%>
@@ -87,7 +87,7 @@
 		</td>
   </tr>
   <tr>
-		<td style="width:25%"><%=_ctx.appRes("Rss.view.label.Url")%></td>
+		<td ><%=_ctx.appRes("Rss.view.label.Url")%></td>
 		<td>
 			<%
 			  if (node.hasProperty("exo:url")) {
@@ -117,7 +117,7 @@
 		</td>
   </tr>
   <tr>
-		<td style="width:25%"><%=_ctx.appRes("Rss.view.label.link")%></td>
+		<td ><%=_ctx.appRes("Rss.view.label.link")%></td>
 		<td>
 			<%
 			  if(node.hasProperty("exo:link")) {
@@ -128,7 +128,7 @@
 		</td>
   </tr>
   <tr>
-		<td style="width:25%"><%=_ctx.appRes("Rss.view.label.description")%></td>
+		<td ><%=_ctx.appRes("Rss.view.label.description")%></td>
 		<td>
 			<%if(node.hasProperty("exo:description")) {%>
         <%=node.getProperty("exo:description").getString()%>
@@ -136,7 +136,7 @@
 		</td>
   </tr>
   <tr>
-		<td style="width:25%"><%=_ctx.appRes("Rss.view.label.language")%></td>
+		<td ><%=_ctx.appRes("Rss.view.label.language")%></td>
 		<td>
 			<%if(node.hasProperty("exo:language")) {%>
 				<%=node.getProperty("exo:language").getString()%>
@@ -144,7 +144,7 @@
 		</td>
   </tr>
   <tr>
-		<td style="width:25%"><%=_ctx.appRes("Rss.view.label.copyright")%></td>
+		<td ><%=_ctx.appRes("Rss.view.label.copyright")%></td>
 		<td>
 			<%if(node.hasProperty("exo:language")) {%>
 				<%=node.getProperty("exo:copyright").getString()%>
@@ -152,7 +152,7 @@
 		</td>
   </tr>
   <tr>
-		<td style="width:25%"><%=_ctx.appRes("Rss.view.label.publish-date")%></td>
+		<td ><%=_ctx.appRes("Rss.view.label.publish-date")%></td>
 		<td>
 		  <%if(node.hasProperty("exo:pubDate")) {%>
 				<%=node.getProperty("exo:pubDate").getString()%>
@@ -160,7 +160,7 @@
 		</td>
   </tr>
   <tr>
-		<td style="width:25%"><%=_ctx.appRes("Rss.view.label.owner-name")%></td>
+		<td ><%=_ctx.appRes("Rss.view.label.owner-name")%></td>
 		<td>
 		  <%if(node.hasProperty("exo:ownerName")) {%>
 				<%=node.getProperty("exo:ownerName").getString()%>
@@ -168,7 +168,7 @@
 		</td>
   </tr>
   <tr>
-		<td style="width:25%"><%=_ctx.appRes("Rss.view.label.owner-email")%></td>
+		<td ><%=_ctx.appRes("Rss.view.label.owner-email")%></td>
 		<td>
 		  <%if(node.hasProperty("exo:ownerEmail")) {%>
 				<%=node.getProperty("exo:ownerEmail").getString()%>
@@ -176,7 +176,7 @@
 		</td>
   </tr>
   <tr>
-		<td style="width:25%"><%=_ctx.appRes("Rss.view.label.image-url")%></td>
+		<td ><%=_ctx.appRes("Rss.view.label.image-url")%></td>
 		<td>
 			<%if(node.hasProperty("exo:imageURL")) {%>
 				<%=node.getProperty("exo:imageURL").getString()%>
@@ -184,7 +184,7 @@
 		</td>
   </tr>
   <tr>
-		<td style="width:25%"><%=_ctx.appRes("Rss.view.label.category")%></td>
+		<td ><%=_ctx.appRes("Rss.view.label.category")%></td>
 		<td>
 		  <%if(node.hasProperty("exo:category")) {%>
 				<%=node.getProperty("exo:category").getString()%>
@@ -192,7 +192,7 @@
 		</td>
   </tr>
   <tr>
-		<td style="width:25%"><%=_ctx.appRes("Rss.view.label.keywords")%></td>
+		<td ><%=_ctx.appRes("Rss.view.label.keywords")%></td>
 		<td>
 		  <%if(node.hasProperty("exo:keywords")) {%>
 				<%=node.getProperty("exo:keywords").getString()%>
@@ -200,7 +200,7 @@
 		</td>
   </tr>
   <tr>
-		<td style="width:25%"><%=_ctx.appRes("Rss.view.label.feed-store-path")%></td>
+		<td ><%=_ctx.appRes("Rss.view.label.feed-store-path")%></td>
 		<td>
 		  <%if(node.hasProperty("exo:storePath")) {%>
 				<%=node.getProperty("exo:storePath").getString()%>
@@ -208,7 +208,7 @@
 		</td>
   </tr>
   <tr>
-    <td style="width:25%"><%=_ctx.appRes("Rss.view.label.feed-name")%></td>
+    <td ><%=_ctx.appRes("Rss.view.label.feed-name")%></td>
     <td>
       <%if(node.hasProperty("exo:feedName")) {%>
 				<%=node.getProperty("exo:feedName").getString()%>
@@ -216,7 +216,7 @@
 		</td>
   </tr>
   <tr>
-		<td style="width:25%"><%=_ctx.appRes("Rss.view.label.rss-version")%></td>
+		<td ><%=_ctx.appRes("Rss.view.label.rss-version")%></td>
 		<td>
 		  <%if(node.hasProperty("exo:rssVersion")) {%>
 				<%=node.getProperty("exo:rssVersion").getString()%>
@@ -224,7 +224,7 @@
 		</td>
   </tr>
   <tr>
-		<td style="width:25%"><%=_ctx.appRes("Rss.view.label.query-path")%></td>
+		<td ><%=_ctx.appRes("Rss.view.label.query-path")%></td>
 		<td>
 		  <%if(node.hasProperty("exo:queryPath")) {%>
 				<%=node.getProperty("exo:queryPath").getString()%>

@@ -24,7 +24,7 @@
     %>
   </div>
   <%}%>
-  <table class="UIGrid">
+  <table class="uiGrid table table-hover table-striped">
     <thead>
       <tr>
         <th><%=_ctx.appRes("UINodeTypeList.header.icon")%></th>
@@ -32,7 +32,7 @@
   	    <th><%=_ctx.appRes("UINodeTypeList.header.mixinType")%></th>
   	    <th><%=_ctx.appRes("UINodeTypeList.header.orderable")%></th>
   	    <th><%=_ctx.appRes("UINodeTypeList.header.description")%></th>
-  	    <th><%=_ctx.appRes("UINodeTypeList.header.action")%></th>
+  	    <th class="center"><%=_ctx.appRes("UINodeTypeList.header.action")%></th>
       </tr>
     </thead>
     <tbody>

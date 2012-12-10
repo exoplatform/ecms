@@ -30,13 +30,13 @@
 	  </div>
 	</div>
  <div>
-    <table class="UIGrid">
+    <table class="uiGrid table table-hover table-striped">
       <thead>
         <tr>
           <th><%=uicomponent.getResource("UINodeTypeList.header.icon")%></th>
           <th><%=uicomponent.getResource("UINodeTypeList.header.nodeType")%></th>
           <th><%=uicomponent.getResource("UINodeTypeList.header.mixinType")%></th>
-          <th><%=uicomponent.getResource("UINodeTypeList.header.select")%></th>
+          <th class="center"><%=uicomponent.getResource("UINodeTypeList.header.select")%></th>
         </tr>
       </thead>
       <tbody>

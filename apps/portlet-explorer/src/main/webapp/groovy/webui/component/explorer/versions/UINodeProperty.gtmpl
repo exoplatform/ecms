@@ -8,7 +8,7 @@
 	 */
 %>
 
-<table class="UIGrid">
+<table class="uiGrid table table-hover table-striped">
   <thead>
     <tr>
       <th><%=_ctx.appRes("UIViewVersion.label.PropertyName")%></th>
@@ -21,10 +21,10 @@
 		  	<td>$bean.name</td>
 		  	<%if(uicomponent.isMultiValue(bean)) { %>			  
 			  	<td style="padding: 0px;">
-					  <table class="UIGrid" >
+					  <table class="uiGrid table table-hover table-striped" >
 						  <%for(value in uicomponent.getPropertyMultiValues(bean)) {%> 
 			  			  <tr>
-								  <td style="border-top:none; border-left:none; border-right:none">$value</td>
+								  <td>$value</td>
 		  					</tr>
 	            <%}%>
 				  	</table>								

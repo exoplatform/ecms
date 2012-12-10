@@ -1,6 +1,7 @@
 <%
 	import org.exoplatform.services.document.diff.Delta ;
-	
+	def rcontext = _ctx.getRequestContext() ;
+	def jm = rcontext.getJavascriptManager(
 %>
 <div class="UIDiff">
 	<div class="FileContent">
@@ -26,7 +27,7 @@
 					<%
 						} else {
 					%>
-						<table class="UIGrid">
+						<table class="uiGrid table table-hover table-striped">
 							<thead>
 						    <tr>
 						      <th>
@@ -41,6 +42,7 @@
 						      </th>
 						    </tr>
 						  </thead>
+						  <tbody>
 						  <%  
 						    def i=1;
 						  	for(Delta delta in uicomponent.getDeltas()){		    		
@@ -89,9 +91,10 @@
 		    				<% } %>	    				
 		    			</tr>
 		    			<% 
-                  i++;		    			
+						i++;		    			
 		    			  } 
-		    			%>					  					  
+		    			%>
+						</tbody>						
 						</table>
 					<% } } %>			    	
 			</div>
