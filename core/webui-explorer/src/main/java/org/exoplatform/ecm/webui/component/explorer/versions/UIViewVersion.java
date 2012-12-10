@@ -257,16 +257,7 @@ public class UIViewVersion extends UIBaseNodePresentation {
   }
 
   public String getDownloadLink(Node node) throws Exception {
-    DownloadService dservice = getApplicationComponent(DownloadService.class) ;
-    InputStreamDownloadResource dresource ;
-    if(!node.getPrimaryNodeType().getName().equals(Utils.NT_FILE)) {
-      node = NodeLocation.getNodeByLocation(originalNode_);
-    }
-    Node jcrContentNode = node.getNode(Utils.JCR_CONTENT) ;
-    InputStream input = jcrContentNode.getProperty(Utils.JCR_DATA).getStream() ;
-    dresource = new InputStreamDownloadResource(input, "image") ;
-    dresource.setDownloadName(node.getName()) ;
-    return dservice.getDownloadLink(dservice.addDownloadResource(dresource)) ;
+    return Utils.getDownloadRestServiceLink(node);
   }
 
   public String getImage(Node node) throws Exception {

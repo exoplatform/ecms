@@ -17,6 +17,7 @@
 package org.exoplatform.ecm.webui.utils;
 
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -43,17 +44,16 @@ import javax.jcr.nodetype.NodeTypeManager;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.definition.PortalContainerConfig;
+import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.portal.config.UserPortalConfig;
 import org.exoplatform.portal.resource.SkinConfig;
 import org.exoplatform.portal.resource.SkinService;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -79,10 +79,6 @@ import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
-import java.util.Iterator;
-import org.exoplatform.services.resources.LocaleConfig;
-import org.exoplatform.services.resources.LocaleConfigService;
-import org.exoplatform.webui.core.model.SelectItemOption;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh
@@ -1044,5 +1040,37 @@ public class Utils {
       if (cookie1.getName().equals(cookieName)) return cookie1.getValue();
     }
     return null;
+  }
+  
+  /**
+   * 
+   * @param     :  node: nt:file node with have the data stream
+   * @return    :  Link to download the jcr:data of the given node
+   * @throws       Exception
+   * @Author    :  Nguyen The Vinh from ECM of eXoPlatform
+   *               vinh.nguyen@exoplatform.com
+   */
+  public static String getDownloadRestServiceLink(Node node) throws Exception{
+    ExoContainer container = ExoContainerContext.getCurrentContainer() ;
+    PortalContainerInfo containerInfo = (PortalContainerInfo)container.
+                                        getComponentInstanceOfType(PortalContainerInfo.class) ;
+    String portalName = containerInfo.getContainerName() ;
+    PortalContainerConfig portalContainerConfig = (PortalContainerConfig) container.
+                                        getComponentInstance(PortalContainerConfig.class);
+    String restContextName = portalContainerConfig.getRestContextName(portalName);
+    StringBuilder sb = new StringBuilder();
+    Node currentNode = org.exoplatform.wcm.webui.Utils.getRealNode(node);
+    String ndPath = currentNode.getPath();
+    if (ndPath.startsWith("/")) {
+      ndPath = ndPath.substring(1);
+    }
+    String encodedPath = URLEncoder.encode(ndPath, "utf-8");
+    encodedPath = encodedPath.replaceAll ("%2F", "/"); //we won't encode the slash characters in the path
+    sb.append("/").append(restContextName).append("/contents/download/");
+    sb.append(currentNode.getSession().getWorkspace().getName()).append("/").append(encodedPath);
+    if (node.isNodeType("nt:frozenNode")) {
+      sb.append("?version=" + node.getParent().getName());
+    }
+    return sb.toString();
   }
 }

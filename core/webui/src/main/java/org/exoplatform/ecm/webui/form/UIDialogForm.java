@@ -76,7 +76,6 @@ import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
-import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
@@ -1678,6 +1677,9 @@ public class UIDialogForm extends UIForm {
   }
 
   public String getImage(Node node, String nodeTypeName) throws Exception {
+    if (nodeTypeName.equals(Utils.JCR_CONTENT)) {
+      return Utils.getDownloadRestServiceLink(node);
+    }
     DownloadService dservice = getApplicationComponent(DownloadService.class);
     Node imageNode = node.getNode(nodeTypeName);
     InputStream input = imageNode.getProperty(Utils.JCR_DATA).getStream();
