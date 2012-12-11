@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
   <UISEOForm>
-    <label>
-	  <title>Title: </title>
+    <label>	  
+      <title>Title: </title>
       <description>Description: </description>
       <keywords>Keywords: </keywords>
       <language>Language: </language>
       <robots>Robots: </robots>
       <sitemap>Sitemap: </sitemap>
-      <sitemapvisible>Visible in sitemap</sitemapvisible>
+      <sitemapvisible>Visible in Sitemap</sitemapvisible>
+	    <isInherited>Inherited from parent page</isInherited>
       <priority>Priority: </priority>
-      <frequency>Frequency: </frequency>
+      <frequency>Frequency: </frequency> 
       <select-language>Select a language</select-language>
       <option>
         <Always>Always</Always>
@@ -20,42 +21,38 @@
         <Monthly>Monthly</Monthly>
         <Yearly>Yearly</Yearly>
         <Never>Never</Never>
-      </option>
+      </option> 
     </label>
-	<tip>
+    <tip>
 		<priority>Valid values range from 0.0 to 1.0</priority>
-	</tip>  
+	</tip>	 	  
     <action>
       <Save>Save</Save>
       <Cancel>Cancel</Cancel>
     </action>
     <msg>
-      <repository-exception>An unexpected error occurred! Cannot save page meta data.</repository-exception>
-      <confirm-delete>Are you sure you want to delete these SEO data?</confirm-delete>	
+      <repository-exception>An unexpected error occurred while saving the page metadata.</repository-exception> 	
     </msg>
-    <title>
-    	<seo-delete>Delete</seo-delete>
-    </title>
 	  <help> 
 		  <priority>Valid values range from 0.0 to 1.0.</priority>
 		  <description>Help searchers to let them know what the following page has a link with what they are looking for.</description>
 		  <keywords>Most important terms in the page separated by a comma.</keywords>		  
-	  </help>	
+	  </help>		  
   </UISEOForm>
   <UISEOPopupWindow>
   	<title>
       <UISEOForm>SEO Management</UISEOForm>
   	</title>
-  </UISEOPopupWindow>
+  </UISEOPopupWindow>    
   <UISEOToolbarForm>
   	<title>
       <seo>SEO Management</seo>
   	</title>
-  </UISEOToolbarForm>	
+  </UISEOToolbarForm>  
   <FloatNumberValidator>
     <msg>
-      <Invalid-number>The field '{0}' is invalid float number.</Invalid-number>
+      <Invalid-number>The value of the Priority field must be in the numerical format. The valid values range is from 0.0 to 1.0.</Invalid-number>
     </msg>
-  </FloatNumberValidator>
+  </FloatNumberValidator>  
   
 </bundle>

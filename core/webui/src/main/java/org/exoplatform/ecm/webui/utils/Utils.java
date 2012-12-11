@@ -17,6 +17,7 @@
 package org.exoplatform.ecm.webui.utils;
 
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,12 +41,16 @@ import javax.jcr.RepositoryException;
 import javax.jcr.nodetype.NodeDefinition;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeManager;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.definition.PortalContainerConfig;
+import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
+import org.exoplatform.portal.config.UserPortalConfig;
 import org.exoplatform.portal.resource.SkinConfig;
 import org.exoplatform.portal.resource.SkinService;
 import org.exoplatform.portal.webui.util.Util;
@@ -820,13 +825,11 @@ public class Utils {
     StringBuffer contentsCss = new StringBuffer();
     contentsCss.append("[");
     SkinService skinService = WCMCoreUtils.getService(SkinService.class);
-    String skin = Util.getUIPortalApplication().getUserPortalConfig().getPortalConfig().getSkin();
+    UserPortalConfig upc = Util.getPortalRequestContext().getUserPortalConfig();
+    String skin = upc.getPortalConfig().getSkin();
     String portal = Util.getUIPortal().getName();
     Collection<SkinConfig> portalSkins = skinService.getPortalSkins(skin);
-    SkinConfig customSkin = skinService.getSkin(portal, Util.getUIPortalApplication()
-        .getUserPortalConfig()
-        .getPortalConfig()
-        .getSkin());
+    SkinConfig customSkin = skinService.getSkin(portal, upc.getPortalConfig().getSkin());
     if (customSkin != null) portalSkins.add(customSkin);
     for (SkinConfig portalSkin : portalSkins) {
       contentsCss.append("'").append(portalSkin.createURL()).append("',");
@@ -1018,5 +1021,56 @@ public class Utils {
     return isMakeVersionable;
   }
 
-
+  /**
+   * @param       cookieName
+   * @param       cookies cookies
+   * @return      a cookies value
+   * @Objective : Get a cookie value with given name
+   * @Author    : Nguyen The Vinh from ECM of eXoPlatform
+   *              vinh.nguyen@exoplatform.com
+   */
+  public static String getCookieByCookieName(String cookieName) {
+    HttpServletRequest request = Util.getPortalRequestContext().getRequest();
+    Cookie[] cookies = request.getCookies();
+    if (cookies == null) {
+      return null;
+    }
+    for(int loopIndex = 0; loopIndex < cookies.length; loopIndex++) {
+      Cookie cookie1 = cookies[loopIndex];
+      if (cookie1.getName().equals(cookieName)) return cookie1.getValue();
+    }
+    return null;
+  }
+  
+  /**
+   * 
+   * @param     :  node: nt:file node with have the data stream
+   * @return    :  Link to download the jcr:data of the given node
+   * @throws       Exception
+   * @Author    :  Nguyen The Vinh from ECM of eXoPlatform
+   *               vinh.nguyen@exoplatform.com
+   */
+  public static String getDownloadRestServiceLink(Node node) throws Exception{
+    ExoContainer container = ExoContainerContext.getCurrentContainer() ;
+    PortalContainerInfo containerInfo = (PortalContainerInfo)container.
+                                        getComponentInstanceOfType(PortalContainerInfo.class) ;
+    String portalName = containerInfo.getContainerName() ;
+    PortalContainerConfig portalContainerConfig = (PortalContainerConfig) container.
+                                        getComponentInstance(PortalContainerConfig.class);
+    String restContextName = portalContainerConfig.getRestContextName(portalName);
+    StringBuilder sb = new StringBuilder();
+    Node currentNode = org.exoplatform.wcm.webui.Utils.getRealNode(node);
+    String ndPath = currentNode.getPath();
+    if (ndPath.startsWith("/")) {
+      ndPath = ndPath.substring(1);
+    }
+    String encodedPath = URLEncoder.encode(ndPath, "utf-8");
+    encodedPath = encodedPath.replaceAll ("%2F", "/"); //we won't encode the slash characters in the path
+    sb.append("/").append(restContextName).append("/contents/download/");
+    sb.append(currentNode.getSession().getWorkspace().getName()).append("/").append(encodedPath);
+    if (node.isNodeType("nt:frozenNode")) {
+      sb.append("?version=" + node.getParent().getName());
+    }
+    return sb.toString();
+  }
 }

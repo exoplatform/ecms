@@ -8,9 +8,10 @@
       <robots>Robots: </robots>
       <sitemap>Mappa Sito: </sitemap>
       <sitemapvisible>Visibile nella Mappa Sito</sitemapvisible>
-	  <isInherited>Ereditato dalla pagina superiore</isInherited>
+	    <isInherited>Ereditato dalla pagina superiore</isInherited>
       <priority>Priorità: </priority>
-      <frequency>Frequenza: </frequency>  
+      <frequency>Frequenza: </frequency>
+      <select-language>Select a language</select-language>
       <option>
         <Always>Sempre</Always>
         <Hourly>Ogni ora</Hourly>
@@ -29,11 +30,17 @@
       <Cancel>Annulla</Cancel>
     </action>
     <msg>
-      <repository-exception>Errore salvando i metadati della pagina.</repository-exception> 	
+      <repository-exception>Errore salvando i metadati della pagina.</repository-exception>
+      <confirm-delete>Are you sure you want to delete these SEO data?</confirm-delete> 	
     </msg>
-	<help> 
-		<priority>La priorità del tuo URL relativa agli altri URL del tuo sito. Valori validi da 0.0 a 1.0. Questo valore non influisce sul modo in cui le tue pagine sono confrontate con le pagine su altri siti - permette di indicare ai motori di ricerca le pagine che ritengono più importanti per i crawler. La priorità predefinita di una pagina è 0,5.</priority>
-	</help>	  
+    <title>
+    	<seo-delete>Delete</seo-delete>
+    </title>
+	  <help> 
+		  <priority>Valid values range from 0.0 to 1.0.</priority>
+		  <description>Help searchers to let them know what the following page has a link with what they are looking for.</description>
+		  <keywords>Most important terms in the page separated by a comma.</keywords>		  
+	  </help>		  
   </UISEOForm>
   <UISEOPopupWindow>
   	<title>
@@ -50,4 +57,5 @@
       <Invalid-number>Il valore del campo Priorità deve essere in formato numerico. Valori validi da 0.0 a 1.0.</Invalid-number>
     </msg>
   </FloatNumberValidator>  
+  
 </bundle>

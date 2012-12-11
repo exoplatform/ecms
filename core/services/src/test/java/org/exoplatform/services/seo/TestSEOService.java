@@ -19,12 +19,23 @@ package org.exoplatform.services.seo;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertNotNull;
 import static org.testng.AssertJUnit.assertNull;
-
 import java.util.ArrayList;
-
 import javax.jcr.Node;
 
+import org.exoplatform.container.ExoContainer;
+import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.webui.core.UIApplication;
+import org.exoplatform.portal.mop.user.UserNode;
+import org.exoplatform.portal.webui.portal.UIPortal;
+import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.portal.webui.workspace.UIPortalApplication;
+import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
+import org.exoplatform.services.wcm.portal.LivePortalManagerService;
+import org.exoplatform.webui.application.WebuiRequestContext;
+import org.gatein.pc.api.PortletInvoker;
+import org.mockito.Mockito;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -43,7 +54,11 @@ public class TestSEOService extends BaseWCMTestCase{
   @Override
   protected void afterContainerStart() {
     super.afterContainerStart(); 
-    seoService = getService(SEOService.class);
+    ExoContainer manager = ExoContainerContext.getCurrentContainer();    
+    PortletInvoker portletInvoker = Mockito.mock(PortletInvoker.class);
+    manager.addComponentToCtx(portletInvoker.hashCode(), portletInvoker);
+    sessionProvider = sessionProviderService_.getSystemSessionProvider(null);
+    seoService = (SEOService) container.getComponentInstanceOfType(SEOService.class);
   }
   
   @BeforeMethod
@@ -70,8 +85,30 @@ public class TestSEOService extends BaseWCMTestCase{
     metaModel.setSiteMap(true);
     metaModel.setDescription("test description");
     metaModel.setPriority(0);
-    seoService.storePageMetadata(metaModel,"classic",false);
-    PageMetadataModel retrieveModel = seoService.getPageMetadata("home");
+    String portalName = "classic";
+    WebuiRequestContext context = Mockito.mock(WebuiRequestContext.class); 
+    WebuiRequestContext.setCurrentInstance(context);
+    PortalRequestContext ctx = Mockito.mock(PortalRequestContext.class);
+    Mockito.when(Util.getPortalRequestContext()).thenReturn(ctx);
+    
+    UIPortal uiPortal = Mockito.mock(UIPortal.class);
+    UIPortalApplication uiPortalApp = Mockito.mock(UIPortalApplication.class);
+    
+    uiPortalApp.setCurrentSite(uiPortal);
+    Mockito.when(ctx.getUIApplication()).thenReturn(uiPortalApp);
+    Mockito.when(uiPortalApp.getCurrentSite()).thenReturn(uiPortal);
+    
+    UserNode userNode = Mockito.mock(UserNode.class);    
+    Mockito.when(uiPortal.getSelectedUserNode()).thenReturn(userNode);
+    session = sessionProvider.getSession("portal-system", repository);
+    Node rootNode = session.getRootNode(); 
+    Node seoNode = rootNode.addNode("SEO");
+    seoNode.addMixin("mix:referenceable");
+    session.save();
+    Mockito.when(userNode.getId()).thenReturn(seoNode.getUUID());
+    
+    seoService.storeMetadata(metaModel,portalName,false, "en");
+    PageMetadataModel retrieveModel = seoService.getPageMetadata("home", "en");
     assertEquals(retrieveModel.getKeywords(), "test");
   }
   
@@ -92,10 +129,10 @@ public class TestSEOService extends BaseWCMTestCase{
     metaModel.setSiteMap(true);
     metaModel.setDescription("test description");
     metaModel.setPriority(0);
-    seoService.storePageMetadata(metaModel,"classic",true);
+    seoService.storeMetadata(metaModel,"classic",true, "en");
     ArrayList<String> params = new ArrayList<String>();
     params.add("/repository/collaboration/parentNode/childNode");
-    PageMetadataModel retrieveModel = seoService.getContentMetadata(params);
+    PageMetadataModel retrieveModel = seoService.getContentMetadata(params, "en");
     assertEquals(retrieveModel.getKeywords(), "test");
   }
   
@@ -109,10 +146,10 @@ public class TestSEOService extends BaseWCMTestCase{
     metaModel.setPageReference("home");
     metaModel.setKeywords("test");    
     metaModel.setRobotsContent("index,follow");    
-    seoService.storePageMetadata(metaModel,"classic",false);
-    assertEquals("test", seoService.getPageMetadata("home").getKeywords());
-    seoService.removePageMetadata(metaModel, "classic",false);
-    assertNull(seoService.getPageMetadata("home"));     
+    seoService.storeMetadata(metaModel,"classic",false, "en");
+    assertEquals("test", seoService.getPageMetadata("home", "en").getKeywords());
+    seoService.removePageMetadata(metaModel, "classic",false, "en");
+    assertNull(seoService.getPageMetadata("home", "en"));     
   }
   
   /**
@@ -124,12 +161,12 @@ public class TestSEOService extends BaseWCMTestCase{
     metaModel.setUri("home");
     metaModel.setKeywords("test");    
     metaModel.setRobotsContent("index,follow");    
-    seoService.storePageMetadata(metaModel,"classic",true);
+    seoService.storeMetadata(metaModel,"classic",true, "en");
     ArrayList<String> params = new ArrayList<String>();
     params.add("home");
-    assertEquals("test", seoService.getContentMetadata(params).getKeywords());
-    seoService.removePageMetadata(metaModel, "classic",true);
-    assertNull(seoService.getPageMetadata("home"));     
+    assertEquals("test", seoService.getContentMetadata(params, "en").getKeywords());
+    seoService.removePageMetadata(metaModel, "classic",true, "en");
+    assertNull(seoService.getPageMetadata("home", "en"));     
   }
   
 }

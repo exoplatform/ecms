@@ -40,7 +40,15 @@ public class UISEOToolbarPortlet extends UIPortletApplication  {
     addChild(UISEOToolbarForm.class, null, null);  
   }
   
-  public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
-    super.processRender(app, context);
-  }
+  //public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
+  //  super.processRender(app, context);
+  //}
+
+	@Override
+	public void processRender(WebuiRequestContext context) throws Exception {
+		// TODO Auto-generated method stub
+		super.processRender(context);
+	}
+  
+  
 }

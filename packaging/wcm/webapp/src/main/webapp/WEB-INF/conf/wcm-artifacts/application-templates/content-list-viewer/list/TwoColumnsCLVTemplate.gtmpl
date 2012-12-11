@@ -55,8 +55,7 @@
 			  def currentPageData = uicomponent.getCurrentPageData();
 				for (def i = 0; i < currentPageData.size(); i++) {
 				  	def viewNode = currentPageData.get(i);
-				 	if(!Utils.isViewable(viewNode)) continue;
-					
+				 	if(!Utils.isViewable(viewNode)) continue;					
 					def isShowTitle = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_TITLE);
 					def isShowDate = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_DATE_CREATED);
 					def isShowLink = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_LINK);

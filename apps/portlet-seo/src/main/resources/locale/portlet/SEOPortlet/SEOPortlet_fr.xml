@@ -10,7 +10,8 @@
       <sitemap>Sitemap: </sitemap>
       <sitemapvisible>Visible dans le sitemap</sitemapvisible>
       <priority>Priorité: </priority>
-      <frequency>Fréquence: </frequency>  
+      <frequency>Fréquence: </frequency>
+      <select-language>Select a language</select-language>
       <option>
         <Always>Toujours</Always>
         <Hourly>Toutes les heures</Hourly>
@@ -19,17 +20,7 @@
         <Monthly>Mensuel</Monthly>
         <Yearly>Annuel</Yearly>
         <Never>Jamais</Never>
-      </option>    
-      <option>
-        <en>English</en>
-        <fr>French</fr>
-        <ru>Russian</ru>
-        <vi>Vietnamese</vi>
-        <nl>Dutch</nl>
-        <de>German</de>
-        <uk>Ukrainian</uk>
-        <ar>Arabic</ar>
-      </option>
+      </option>      
     </label>
     <tip>
         <priority>Valeurs valides de 0.0 à 1.0.</priority>
@@ -39,8 +30,17 @@
       <Cancel>Annuler</Cancel>
     </action>
     <msg>
-      <repository-exception>Une erreure inattendue est apparue! Sauvegarde impossible des métadonnées.</repository-exception>   
+      <repository-exception>Une erreure inattendue est apparue! Sauvegarde impossible des métadonnées.</repository-exception>
+      <confirm-delete>Êtes-vous sûr de vouloir supprimer les données SEO?</confirm-delete>   
     </msg>
+    <title>
+    	<seo-delete>Supprimer</seo-delete>
+    </title>
+    <help> 
+		  <priority>Valid values range from 0.0 to 1.0.</priority>
+		  <description>Help searchers to let them know what the following page has a link with what they are looking for.</description>
+		  <keywords>Most important terms in the page separated by a comma.</keywords>		  
+	  </help>	
   </UISEOForm>
   <UISEOPopupWindow>
     <title>
@@ -57,4 +57,5 @@
       <Invalid-number>Le champ '{0}' est un nombre invalide (float).</Invalid-number>
     </msg>
   </FloatNumberValidator> 
+  
 </bundle>

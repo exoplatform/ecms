@@ -41,10 +41,10 @@
       <name>eXo.webui.WCMUIPopupWindow</name>
       <path>/javascript/eXo/webui/WCMUIPopupWindow.js</path>
     </script>
-  	<depends>
-  		<module>jquery</module>
-  		<as>gj</as>
-  	</depends>
+    <depends>
+      <module>jquery</module>
+      <as>gj</as>
+    </depends>
     <depends>
       <module>wcm-utils</module>
     </depends>

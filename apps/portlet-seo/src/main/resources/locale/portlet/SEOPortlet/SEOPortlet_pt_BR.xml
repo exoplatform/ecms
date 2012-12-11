@@ -10,7 +10,8 @@
       <sitemapvisible>Vísivel no mapa do site</sitemapvisible>
       <isInherited>Herdado da página pai</isInherited>
       <priority>Prioridade: </priority>
-      <frequency>Frequência: </frequency>  
+      <frequency>Frequência: </frequency>
+      <select-language>Select a language</select-language> 
       <option>
         <Always>Sempre</Always>
         <Hourly>Hora</Hourly>
@@ -29,11 +30,17 @@
       <Cancel>Cancelar</Cancel>
     </action>
     <msg>
-      <repository-exception>Ocorreu um erro inesperado enquanto salvava a página metadata.</repository-exception>   
+      <repository-exception>Ocorreu um erro inesperado enquanto salvava a página metadata.</repository-exception>
+      <confirm-delete>Are you sure you want to delete these SEO data?</confirm-delete>   
     </msg>
-    <help> 
-        <priority>A prioridade desta URL relacionada a outras URLs do seu site. Os valores válidos são de 0.0 a 1.0. Este valor não afeta como suas páginas são comparadas com as páginas de outros sites, este valor apenas informa aos mecanismos de buscas como suas páginas são priorizadas pelos buscadores. A prioridade padrão é 0.5.</priority>
-    </help>   
+    <title>
+    	<seo-delete>Delete</seo-delete>
+    </title>
+	  <help> 
+		  <priority>Valid values range from 0.0 to 1.0.</priority>
+		  <description>Help searchers to let them know what the following page has a link with what they are looking for.</description>
+		  <keywords>Most important terms in the page separated by a comma.</keywords>		  
+	  </help>	   
   </UISEOForm>
   <UISEOPopupWindow>
     <title>
@@ -50,4 +57,5 @@
       <Invalid-number>O valor do campo prioridade deve ser no formato numérico. Os valores válidos são de 0.0 a 1.0.</Invalid-number>
     </msg>
   </FloatNumberValidator>  
+  
 </bundle>

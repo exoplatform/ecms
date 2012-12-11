@@ -19,9 +19,13 @@ package org.exoplatform.wcm.webui.seo;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
+import java.util.Locale;
 
 import javax.jcr.Node;
-
+import org.apache.commons.lang.StringUtils;
+import org.exoplatform.container.ExoContainer;
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.mop.SiteKey;
 import org.exoplatform.portal.webui.util.Util;
@@ -54,9 +58,10 @@ public class UISEOToolbarForm extends UIForm {
   public static final String SEO_POPUP_WINDOW = "UISEOPopupWindow";
   private static ArrayList<String> paramsArray = null;
   //private static String pageParent = null;
-  private String pageReference = null;
-  PageMetadataModel metaModel = null;
+  private static String pageReference = null;
+  private static PageMetadataModel metaModel = null;
   private String fullStatus = "Empty";
+  private String lang = null;
 
   public UISEOToolbarForm() throws Exception
   {
@@ -65,21 +70,43 @@ public class UISEOToolbarForm extends UIForm {
   public static class AddSEOActionListener extends EventListener<UISEOToolbarForm> {
     public void execute(Event<UISEOToolbarForm> event) throws Exception {
       UISEOToolbarForm uiSEOToolbar = event.getSource();
+      PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
       UISEOForm uiSEOForm = uiSEOToolbar.createUIComponent(UISEOForm.class, null, null);
-      String params = event.getRequestContext().getRequestParameter(OBJECTID);
+      String params = event.getRequestContext().getRequestParameter(OBJECTID);      
       SEOService seoService = WCMCoreUtils.getService(SEOService.class);
       if(paramsArray != null) {
         for(int i = 0;i < paramsArray.size();i++) {
           Node contentNode = seoService.getContentNode(paramsArray.get(i).toString());
           if(contentNode != null) {
             uiSEOForm.setOnContent(true);
+            uiSEOForm.setContentPath(paramsArray.get(i).toString());
+            uiSEOForm.setContentURI(contentNode.getUUID());
             break;
           }
         }
-      } else uiSEOForm.setOnContent(false);
-      uiSEOForm.setParamsArray(paramsArray);
-      //uiSEOForm.setPageParent(uiSEOToolbar.pageParent);
-      uiSEOForm.initSEOForm(uiSEOToolbar.metaModel);
+        metaModel = seoService.getContentMetadata(paramsArray, uiSEOToolbar.lang);
+      } else {
+      	uiSEOForm.setContentPath(pageReference);
+      	uiSEOForm.setOnContent(false);
+      	metaModel = seoService.getPageMetadata(pageReference, uiSEOToolbar.lang);
+      }     
+      
+      uiSEOForm.setParamsArray(paramsArray);   
+      if(metaModel == null) {
+      	//If have node seo data for default language, displaying seo data for the first language in the list
+      	List<Locale> seoLocales = new ArrayList<Locale>();
+      	seoLocales = seoService.getSEOLanguages(portalRequestContext.getPortalOwner(), uiSEOForm.getContentPath(), 
+      			uiSEOForm.getOnContent());
+      	if(seoLocales.size()> 0) {
+      		Locale locale = seoLocales.get(0);
+      		String lang = locale.getLanguage();
+          String country = locale.getCountry(); 
+          if(StringUtils.isNotEmpty(country)) lang += "_" + country;
+      		metaModel = seoService.getMetadata(uiSEOForm.getParamsArray(), pageReference, lang);
+      		uiSEOForm.setSelectedLanguage(lang);
+      	}
+      } 
+      uiSEOForm.initSEOForm(metaModel);
       int top = -1;
       int left = -1;
       if(params != null && params.length() > 0) {
@@ -90,18 +117,21 @@ public class UISEOToolbarForm extends UIForm {
         }
       }
       if(top > -1 && left > -1)
-        Utils.createPopupWindow(uiSEOToolbar, uiSEOForm, SEO_POPUP_WINDOW, 335, top, left);
+        Utils.createPopupWindow(uiSEOToolbar, uiSEOForm, SEO_POPUP_WINDOW, 640, top, left);
       else
-        Utils.createPopupWindow(uiSEOToolbar, uiSEOForm, SEO_POPUP_WINDOW, 335);
+        Utils.createPopupWindow(uiSEOToolbar, uiSEOForm, SEO_POPUP_WINDOW, 640);
     }
   }
 
   public void processRender(WebuiRequestContext context) throws Exception {
     PortalRequestContext pcontext = Util.getPortalRequestContext();
+    lang = pcontext.getLocale().getLanguage();
+    if(StringUtils.isNotEmpty(pcontext.getLocale().getCountry()))
+    	lang += "_" + pcontext.getLocale().getCountry();    
     String portalName = pcontext.getPortalOwner();
     metaModel = null;
-    if (!pcontext.useAjax()) {
-      fullStatus = "Empty";
+    fullStatus = "Empty";
+    if (!pcontext.useAjax()) {      
       paramsArray = null;
       String contentParam = null;
         Enumeration params = pcontext.getRequest().getParameterNames();
@@ -127,10 +157,10 @@ public class UISEOToolbarForm extends UIForm {
       SiteKey siteKey = Util.getUIPortal().getSelectedUserNode().getNavigation().getKey();
       SiteKey portalKey = SiteKey.portal(portalName);
       if(siteKey != null && siteKey.equals(portalKey)) {
-        metaModel = seoService.getPageMetadata(pageReference);
+        metaModel = seoService.getPageMetadata(pageReference, lang);
         //pageParent = Util.getUIPortal().getSelectedUserNode().getParent().getPageRef();
         if(paramsArray != null) {
-          PageMetadataModel tmpModel = seoService.getContentMetadata(paramsArray);
+          PageMetadataModel tmpModel = seoService.getContentMetadata(paramsArray,lang);
           if(tmpModel != null) {
             metaModel = tmpModel;
           } else {
@@ -143,22 +173,8 @@ public class UISEOToolbarForm extends UIForm {
           }
         }
       }
-      else fullStatus = "Disabled";
-    }
-
-    /*if(paramsArray != null) {
-      onContent = true;
-      metaModel = seoService.getContentMetadata(paramsArray);
-    }
-    else {
-      onContent = false;
-      pageReference = Util.getUIPortal().getSelectedUserNode().getPageRef();
-      SiteKey siteKey = Util.getUIPortal().getSelectedUserNode().getNavigation().getKey();
-      SiteKey portalKey = SiteKey.portal(portalName);
-      if(siteKey != null && siteKey.equals(portalKey)) metaModel = seoService.getPageMetadata(pageReference);
-      else fullStatus = "Disabled";
-    }*/
-
+      else fullStatus = "Disabled";      	
+    }  
     if(metaModel != null)
         fullStatus = metaModel.getFullStatus();
     super.processRender(context);
