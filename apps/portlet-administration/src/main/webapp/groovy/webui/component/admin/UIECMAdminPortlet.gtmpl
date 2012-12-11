@@ -16,8 +16,7 @@
 	    if(uicomponent.isShowSideBar()) {
 	      sideBar = "ShowSideBar";
 	  %>
-      <div class="ECMAdminPanel">
-        <div class="ECMAdminTitleBar"><%=_ctx.appRes("UIRepositoryList.titlebar.label")%></div>
+      <div class="ecmAdminPanel pull-left">
         <% 
           if(uicomponent.getChild(UIECMAdminControlPanel.class) != null) {
             uicomponent.renderChild(UIECMAdminControlPanel.class);

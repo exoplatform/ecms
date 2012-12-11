@@ -19,85 +19,8 @@
 	lGroups.add(manager);
   }
 %>
-<div class="UIECMAdminControlPanel">
-	<div class="UIVerticalSlideTabs">
-	<!--div class="accordion" id="accordion2">
-		<div class="accordion-group">
-			<div class="accordion-heading">
-				<div class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-					<a href="#modals" class="bgSelected"><i class="icon-chevron-right iconSelected"></i>Templates</a>
-				</div>
-			</div>
-			<div id="collapseOne" class="accordion-body collapse in">
-				
-				<a class="accordion-inner ViewIcon" href="#">
-					Views
-				</a>
-				<a class="accordion-inner DriverIcon Selected" href="#">
-					Drivers
-				</a>
-				<a class="accordion-inner TagIcon" href="#">
-					Tags
-				</a>
-				
-			</div>
-		</div>
-		<div class="accordion-group">
-			<div class="accordion-heading">
-				<div class="accordion-toggle Expaned " data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
-					<a href="#modals" class="bgSelected"><i class="icon-chevron-right iconSelected"></i>Explorer</a>
-				</div>
-			</div>
-			<div id="collapseThree" class="accordion-body collapse">
-				<a class="accordion-inner ViewIcon" href="#">
-					Views
-				</a>
-				<a class="accordion-inner DriverIcon Selected" href="#">
-					Drivers
-				</a>
-				<a class="accordion-inner TagIcon" href="#">
-					Tags
-				</a>
-			</div>
-		</div>
-		<div class="accordion-group">
-			<div class="accordion-heading">
-				<div class="accordion-toggle Expaned " data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
-					<a href="#modals" class="bgSelected"><i class="icon-chevron-right iconSelected"></i>Repository</a>
-				</div>
-			</div>
-			<div id="collapseFour" class="accordion-body collapse">
-				<a class="accordion-inner ViewIcon" href="#">
-					Views
-				</a>
-				<a class="accordion-inner DriverIcon Selected" href="#">
-					Drivers
-				</a>
-				<a class="accordion-inner TagIcon" href="#">
-					Tags
-				</a>
-			</div>
-		</div>
-		<div class="accordion-group">
-			<div class="accordion-heading">
-				<div class="accordion-toggle Expaned " data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-					<a href="#modals" class="bgSelected"><i class="icon-chevron-right iconSelected"></i>Advance</a>
-				</div>
-			</div>
-			<div id="collapseTwo" class="accordion-body collapse">
-				<a class="accordion-inner ViewIcon" href="#">
-					Views
-				</a>
-				<a class="accordion-inner DriverIcon Selected" href="#">
-					Drivers
-				</a>
-				<a class="accordion-inner TagIcon" href="#">
-					Tags
-				</a>
-			</div>
-		</div>
-	</div-->
 		<div class="accordion" id="accordion">
+			<h6 class="menuHeader"><%=_ctx.appRes("UIRepositoryList.titlebar.label")%></h6>
 		<%
 		 int i = 0;
 		 for(type in typeManage) {
@@ -139,5 +62,3 @@
 				}
 			%>
 		</div>
-	</div>
-</div>

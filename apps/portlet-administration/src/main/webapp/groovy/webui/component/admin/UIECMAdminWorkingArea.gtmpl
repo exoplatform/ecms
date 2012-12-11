@@ -1,8 +1,6 @@
 <div id="$uicomponent.id" class="UIECMAdminWorkingArea" exo:minwidth="300px" style="min-width: 300px;">
-	<div class="UIECMAdminFunctionTitle ClearFix">
-	  <div class="RightFunctionTitle">
-		  <div class="FunctionTitle"><%=_ctx.appRes("UIECMAdminControlPanel.label." + uicomponent.getRenderedCompId())%></div>
-	  </div>
-	</div>
+	<h6 class="uiECMAdminFunctionTitle">
+		<%=_ctx.appRes("UIECMAdminControlPanel.label." + uicomponent.getRenderedCompId())%>
+	</h6>
 	<% uicomponent.renderChildren(); %>
 </div>
