@@ -24,6 +24,19 @@
    xmlns:mix="http://www.jcp.org/jcr/mix/1.0" 
    xmlns:jcr="http://www.jcp.org/jcr/1.0" 
    xmlns:exo="http://www.exoplatform.com/jcr/exo/1.0">
+   
+ 	<nodeType name="exo:seoMetadata" isMixin="true" hasOrderableChildNodes="false">
+    <propertyDefinitions/>
+    <childNodeDefinitions>
+      <childNodeDefinition name="seo-languages" defaultPrimaryType="nt:unstructured" autoCreated="false" mandatory="false" onParentVersion="VERSION" protected="false" sameNameSiblings="false">
+        <requiredPrimaryTypes>
+          <requiredPrimaryType>nt:unstructured</requiredPrimaryType>
+        </requiredPrimaryTypes>
+      </childNodeDefinition>
+    </childNodeDefinitions>
+  </nodeType>
+  
+        	  
 
   <!-- nodeType name="exo:twoColumnsWebcontent" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
   	<supertypes>

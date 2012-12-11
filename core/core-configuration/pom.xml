@@ -48,12 +48,12 @@
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>ecms-ext-authoring-services</artifactId>
+      <artifactId>ecms-core-webui-explorer</artifactId>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>ecms-core-webui-explorer</artifactId>
+      <artifactId>ecms-ext-authoring-services</artifactId>
       <scope>runtime</scope>
     </dependency>
     <dependency>
@@ -99,11 +99,6 @@
     <dependency>
       <groupId>org.gatein.portal</groupId>
       <artifactId>exo.portal.component.web.server</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.xcmis</groupId>
-      <artifactId>xcmis-restatom</artifactId>
       <scope>runtime</scope>
     </dependency>
     <dependency>

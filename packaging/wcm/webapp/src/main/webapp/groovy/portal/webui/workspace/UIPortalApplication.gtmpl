@@ -16,8 +16,9 @@
   import org.exoplatform.portal.webui.util.Util;
   import org.exoplatform.portal.webui.workspace.UIPortalApplication;
   import org.exoplatform.portal.webui.workspace.UIWorkingWorkspace;
-  import org.json.JSONArray;
   import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+  import org.json.JSONArray;  
+  import org.apache.commons.lang.StringUtils;
 		
   def rcontext = _ctx.getRequestContext() ;
   String docBase =  rcontext.getRequestContextPath() ;  
@@ -38,6 +39,8 @@
     }
   }
   def lang = uicomponent.getLocale().getLanguage();
+  if(StringUtils.isNotEmpty(uicomponent.getLocale().getCountry()))
+    lang += "_" + uicomponent.getLocale().getCountry();
   def title = rcontext.getTitle();
   def metaInformation = rcontext.getMetaInformation();
   def pcontext = (PortalRequestContext)rcontext;  
@@ -67,9 +70,11 @@
   try {
 	  SEOService seoService = WCMCoreUtils.getService(SEOService.class);
 	  if(seoService != null) {	  
-		  metaModel = seoService.getMetadata(paramArray, pageReference);
+		  metaModel = seoService.getMetadata(paramArray, pageReference, lang);
 		  if(metaModel != null) {
 		  	hasMetadata = true;
+		  	if(StringUtils.isNotEmpty(metaModel.getTitle()))
+		  	  title = metaModel.getTitle(); 
 		  	keywords = metaModel.getKeywords();
 		    description = metaModel.getDescription();	
 		    robots = metaModel.getRobotsContent();    

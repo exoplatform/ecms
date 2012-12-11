@@ -22,8 +22,6 @@
   def uiFormId = uicomponent.id;
   
   def jsManager = rcontext.getJavascriptManager();
-  jsManager.require("SHARED/ecm-utils", "ecmutil").
-  addScripts('ecmutil.ECMUtils.checkAvailableSpace();');
   
   def tabs = uicomponent.getTabList() ;
   def actionBarStyle = "";
@@ -36,7 +34,7 @@
 	}
 	if(tabAvailableList.size() < 2) {
     actionBarStyle = "UIActionBarAlone";
-    displayTabContainer = "display: none;";
+    displayTabContainer = "style =\"display: none;\"";
   }
   
   public String getCSSClassOfDrivesButton() {
@@ -55,7 +53,7 @@
 <div class="UIActionBar $actionBarStyle" id="$uicomponent.id">
 	<div class="UIHorizontalTabs">
 		<div class="TabsContainer">
-		  <div style="overflow: hidden; $displayTabContainer" class="ClearFix">
+		  <div $displayTabContainer class="MainTabsContainer ClearFix">
 				<%
 			    def isSelected = false;
 					def selectedTab = uicomponent.getSelectedTab();
@@ -71,49 +69,33 @@
 				    }
 				    String fullTabName = (String)_ctx.appRes(uicomponent.getId() + ".obtion." + tab);
 				    String displayTabName = fullTabName;
-				    if (fullTabName.length() > 13)
-				    {
+				    if (fullTabName.length() > 13) {
 				      displayTabName = fullTabName.substring(0, 10) + "..."
-				    } 
-				%>
-					    <div class="UITab" style="display: block;" onclick="<%=uicomponent.event('ChangeTab', tab);%>">
-						    <div class="$tabStyle">
-								  <div class="TabL">
-								    <div class="TabR">
-										  <div class="TabM" style="width: 125px;">
-										    <div title="$fullTabName" class="TabLabel">$displayTabName</div>
-										  </div>
-								    </div>
-								  </div>  
-						    </div>
-						  </div>
-				<%
-				  }
-				%>
-				
+				    }                                                                                                 %>
+					    <div class="UITab" style="display: block;" onclick="<%=uicomponent.event('ChangeTab', tab);%>; eXo.ecm.ECMUtils.tabsContainer_OnResize();">
+						    <div class="$tabStyle" title="$fullTabName">$displayTabName</div>
+						  </div>                                                                                          <%
+				  }                                                                                                   %>
+				  <div class="ShowMoreTabsContainer" id= "ShowMoreTabsContainer" style="display:none" onclick="eXo.ecm.ECMUtils.hiddenTabsContainerTrigger(event);">
+  				  <div class="ShowMoreTabsIcon">
+  				    <div class="MoreLabel"><%=_ctx.appRes("UIViewBar.label.more")%></div>
+  				    <div class="WhiteBG"><span></span></div>
+  				    <div class="ListHideTabsContainer UIDropDownMenu" id="ListHideTabsContainer">
+  				    </div>
+  				  </div>
+	        </div>
 		  </div>
 		 <%if(isSelected) {%>
-		   <div id="DMSMenuItemContainer" class="DMSMenuItemContainer MenuItemContainer">
-		   <%
+		   <div id="DMSMenuItemContainer" class="DMSMenuItemContainer MenuItemContainer"> <%
 		     for(button in uicomponent.getActionInTab(uicomponent.getSelectedTab())) {
 		       def action = uicomponent.getUIAction(button);
 				   if (action != null) {
-				     def title = _ctx.appRes(uicomponent.getId() + ".tooltip." + button);
-			 %>
+				     def title = _ctx.appRes(uicomponent.getId() + ".tooltip." + button);     %>
 						 <div class="NormalSubItem SubTabItem" style="width: auto;" onclick="<%=action.event(button);%>">
-							 <div class="NormalSubTabItemL">
-								 <div class="NormalSubTabItemR">
-									 <div class="NormalSubTabItemM">
-									 	<div class="Split">
-									 	  <div title="$title" class="SubTabIcon DefaultActionIcon ${button}Icon">$title</div>
-										 </div>
-									 </div>
-								 </div>
-							 </div>
-						 </div>
-				<%
-					 }
-				 }
+               <div title="$title" class="SubTabIcon DefaultActionIcon ${button}Icon">$title</div>
+						 </div>                                                                    <%
+					 } //if condition
+				 } //for loop
 				%>
 				</div>
 		 <%}%>
@@ -128,13 +110,12 @@
 			 <%if (!uicomponent.isDirectlyDrive()) {%>
   	     <a class="<%=getCSSClassOfDrivesButton()%>" href="<%=uicomponent.event("ShowDrives")%>" title="<%=_ctx.appRes("UIDrivesArea.DrivesArea.ShowDrives")%>"></a>
   	   <%}%>
-  	    
   			
   		</div>
-  		<div id="IconListHideElement" style="float:right; padding-top: 2px; visibility: hidden;" onclick="eXo.ecm.ECMUtils.showListHideElements(this,event); eXo.ecm.ECMUtils.showListTrigger();">
+  		<div id="ShowMoreActionContainer" class="ShowMoreActionContainer" onclick="eXo.ecm.ECMUtils.hiddenActionContainerTrigger(event)">
   			<div class="MoreLabel"><%=_ctx.appRes("UIViewBar.label.more")%></div>
         <div class="WhiteBG"><span></span></div>
-  			<div class="ListHideContainer UIRightClickPopupMenu" id="ListHideContainer" style="display:none"></div>
+  			<div class="ListHiddenActionContainer UIDropDownMenu" id="ListHiddenActionContainer" style="display:none"></div>
   		</div>
 	</div>
 </div>
@@ -147,4 +128,7 @@
       </div>
     </div>
   <% uiform.end() %>
-<%}%>
+<%}
+  jsManager.require("SHARED/ecm-utils", "ecmutil").addScripts('ecmutil.ECMUtils.tabsContainer_OnResize();');
+  jsManager.require("SHARED/ecm-utils", "ecmutil").addScripts('ecmutil.ECMUtils.actionbarContainer_OnResize();');
+%>

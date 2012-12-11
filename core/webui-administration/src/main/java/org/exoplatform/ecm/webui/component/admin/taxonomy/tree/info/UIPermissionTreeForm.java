@@ -107,8 +107,8 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
 
   private void checkAll(boolean check) {
     UIPermissionInputSet uiInputSet = getChildById(PERMISSION) ;
-    for (String perm : PERMISSIONS) {
-    	uiInputSet.getUICheckBoxInput(perm).setChecked(check);
+    for (String perm : PermissionType.ALL) {
+    	if(uiInputSet.getUICheckBoxInput(perm) != null) uiInputSet.getUICheckBoxInput(perm).setChecked(check);
     }
   }
 
@@ -351,18 +351,6 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
           IdentityConstants.ANY);
       uiForm.checkAll(false);
       uiInputSet.getUICheckBoxInput(PermissionType.READ).setChecked(true);
-      String userOrGroup = uiForm.getChild(UIPermissionInputSet.class).getUIStringInput(
-          UIPermissionInputSet.FIELD_USERORGROUP).getValue();
-      List<PermissionBean> permBeans = new ArrayList<PermissionBean>();
-      PermissionBean permBean = new PermissionBean();
-      permBean.setUsersOrGroups(userOrGroup);
-      permBean.setRead(true);
-      permBean.setAddNode(false);
-      permBean.setRemove(false);
-      permBean.setSetProperty(false);
-      permBeans.add(permBean);
-      UIPermissionTreeInfo uiPermInfo = ((UIContainer)uiForm.getParent()).getChild(UIPermissionTreeInfo.class);
-      uiPermInfo.setPermBeans(permBeans);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
     }
   }

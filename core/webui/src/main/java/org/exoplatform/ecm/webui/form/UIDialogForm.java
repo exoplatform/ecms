@@ -1677,6 +1677,9 @@ public class UIDialogForm extends UIForm {
   }
 
   public String getImage(Node node, String nodeTypeName) throws Exception {
+    if (nodeTypeName.equals(Utils.JCR_CONTENT)) {
+      return Utils.getDownloadRestServiceLink(node);
+    }
     DownloadService dservice = getApplicationComponent(DownloadService.class);
     Node imageNode = node.getNode(nodeTypeName);
     InputStream input = imageNode.getProperty(Utils.JCR_DATA).getStream();

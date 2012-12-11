@@ -3,6 +3,7 @@ var ListView = function() {
 	// eXo.ecm.UIListView
 	
 	var Self = this;
+	Self.columnData = {};
 	var BROW = eXo.core.Browser;
 	
 	ListView.prototype.temporaryItem = null;
@@ -653,101 +654,105 @@ var ListView = function() {
 		if (rightClick) Self.showGroundContextMenu(event, element);
 	};
 	
-	// working with item context menu
-	ListView.prototype.showItemContextMenu = function(event, element) {
-		var event = event || window.event;
-		event.cancelBubble = true;
-		if (document.getElementById(Self.contextMenuId)) {
-			var contextMenu = document.getElementById(Self.contextMenuId);
-			contextMenu.parentNode.removeChild(contextMenu);
-		}
-		//create context menu
-		var actionArea = document.getElementById(Self.actionAreaId);
-		var context = gj(actionArea).find("div.ItemContextMenu:first")[0];
-		var contextMenu = newElement({
-			innerHTML: context.innerHTML,
-			id: Self.contextMenuId,
-			style: {
-				position: "absolute",
-				height: "0px",
-				width: "0px",
-				top: "-1000px",
-				display: "block"
-			}
-		});
-		document.body.appendChild(contextMenu);
-		
-		//check lock, unlock action
-		var checkUnlock = false;
-		var checkRemoveFavourite = false;
-		var checkInTrash = false;
-		var checkMediaType = false;
-		var checkEmptyTrash = false;
-		for (var i in Self.itemsSelected) {
-			if (Array.prototype[i]) continue;
-			if (Self.itemsSelected[i].getAttribute('locked') == "true") checkUnlock = true;
-			if (Self.itemsSelected[i].getAttribute('removeFavourite') == "true") checkRemoveFavourite = true;
-			if (Self.itemsSelected[i].getAttribute('inTrash') == "true") checkInTrash = true;
-			if (Self.itemsSelected[i].getAttribute('mediaType') == "true") checkMediaType = true;
-			if (Self.itemsSelected[i].getAttribute('trashHome') == "true") checkEmptyTrash = true;
-		}
-		var lockAction = gj(contextMenu).find("div.Lock16x16Icon:first")[0];
-		var unlockAction = gj(contextMenu).find("div.Unlock16x16Icon:first")[0];
-		
-		if (checkUnlock) {
-			unlockAction.parentNode.style.display = "block";
-			lockAction.parentNode.style.display = "none";
-		} else {
-			unlockAction.parentNode.style.display = "none";
-			lockAction.parentNode.style.display = "block";
-		}
+  // working with item context menu
+  ListView.prototype.showItemContextMenu = function (event, element) {
+    var event = event || window.event;
+    event.cancelBubble = true;
+    if (document.getElementById(Self.contextMenuId)) {
+      var contextMenu = document.getElementById(Self.contextMenuId);
+      contextMenu.parentNode.removeChild(contextMenu);
+    }
+    //create context menu
+    var actionArea = document.getElementById(Self.actionAreaId);
+    var context = gj(actionArea).find("div.ItemContextMenu:first")[0];
+    var contextMenu = newElement({
+      innerHTML: context.innerHTML,
+      id: Self.contextMenuId,
+      style: {
+        position: "absolute",
+        height: "0px",
+        width: "0px",
+        top: "-1000px",
+        display: "block"
+      }
+    });
+    document.body.appendChild(contextMenu);
 
-	    var addFavouriteAction = gj(contextMenu).find("div.AddToFavourite16x16Icon:first")[0];
-	    var removeFavouriteAction = gj(contextMenu).find("div.RemoveFromFavourite16x16Icon:first")[0];
-	    if (checkRemoveFavourite) {
-	      removeFavouriteAction.parentNode.style.display = "block";    
-	      addFavouriteAction.parentNode.style.display = "none";
-	    } else {
-	      addFavouriteAction.parentNode.style.display = "block";
-	      removeFavouriteAction.parentNode.style.display = "none";
-	    }
-	    var restoreFromTrashAction = gj(contextMenu).find("div.RestoreFromTrash16x16Icon:first")[0];
-	    var emptyTrashAction = gj(contextMenu).find("div.EmptyTrash16x16Icon:first")[0];
-	    var playMediaAction = gj(contextMenu).find("div.PlayMedia16x16Icon:first")[0];
-	    
-	    if (!checkInTrash) {
-	      restoreFromTrashAction.parentNode.style.display = "none";
-	    } else {
-	      restoreFromTrashAction.parentNode.style.display = "block";
-	    }
-	    if (!checkMediaType) {
-	    	playMediaAction.parentNode.style.display = "none";
-	    } else {
-	    	playMediaAction.parentNode.style.display = "block";
-	    }
-					if (emptyTrashAction) {
-						if (!checkEmptyTrash) {
-		      emptyTrashAction.parentNode.style.display = "none";
-		    } else {
-		      emptyTrashAction.parentNode.style.display = "block";
-		    }						
-					}
-	    
-	  //check position popup
-		var X = event.pageX;
-		var Y = event.pageY;
-		var portWidth = gj(window).width();
-		var portHeight = gj(window).height();
-		var contentMenu = gj(contextMenu).children("div.UIRightClickPopupMenu:first")[0];
-		if (event.clientX + contentMenu.offsetWidth > portWidth) X -= contentMenu.offsetWidth;
-		if (event.clientY + contentMenu.offsetHeight > portHeight) Y -= contentMenu.offsetHeight + 5;
-		contextMenu.style.top = Y + 5 + "px";
-		contextMenu.style.left = X + 5 + "px";
-		
-		contextMenu.onmouseup = Self.hideContextMenu;
-		document.body.onmousedown = Self.hideContextMenu;
-		document.body.onkeydown = Self.hideContextMenu;
-	};
+    //check lock, unlock action
+    var checkUnlock = false;
+    var checkRemoveFavourite = false;
+    var checkInTrash = false;
+    var checkMediaType = false;
+    var checkEmptyTrash = false;
+    for (var i in Self.itemsSelected) {
+      if (Array.prototype[i]) continue;
+      if (Self.itemsSelected[i].getAttribute('locked') == "true") checkUnlock = true;
+      if (Self.itemsSelected[i].getAttribute('removeFavourite') == "true") checkRemoveFavourite = true;
+      if (Self.itemsSelected[i].getAttribute('inTrash') == "true") checkInTrash = true;
+      if (Self.itemsSelected[i].getAttribute('mediaType') == "true") checkMediaType = true;
+      if (Self.itemsSelected[i].getAttribute('trashHome') == "true") checkEmptyTrash = true;
+    }
+    var lockAction = gj(contextMenu).find("div.Lock16x16Icon:first")[0];
+    var unlockAction = gj(contextMenu).find("div.Unlock16x16Icon:first")[0];
+
+    if (checkUnlock) {
+      unlockAction.parentNode.style.display = "block";
+      lockAction.parentNode.style.display = "none";
+    } else {
+      unlockAction.parentNode.style.display = "none";
+      lockAction.parentNode.style.display = "block";
+    }
+
+    var addFavouriteAction = gj(contextMenu).find("div.AddToFavourite16x16Icon:first")[0];
+    var removeFavouriteAction = gj(contextMenu).find("div.RemoveFromFavourite16x16Icon:first")[0];
+    if (checkRemoveFavourite) {
+      removeFavouriteAction.parentNode.style.display = "block";
+      addFavouriteAction.parentNode.style.display = "none";
+    } else {
+      addFavouriteAction.parentNode.style.display = "block";
+      removeFavouriteAction.parentNode.style.display = "none";
+    }
+    var restoreFromTrashAction = gj(contextMenu).find("div.RestoreFromTrash16x16Icon:first")[0];
+    var emptyTrashAction = gj(contextMenu).find("div.EmptyTrash16x16Icon:first")[0];
+    var playMediaAction = gj(contextMenu).find("div.PlayMedia16x16Icon:first")[0];
+
+    if (!checkInTrash) {
+      restoreFromTrashAction.parentNode.style.display = "none";
+    } else {
+      restoreFromTrashAction.parentNode.style.display = "block";
+    }
+    if (!checkMediaType) {
+      playMediaAction.parentNode.style.display = "none";
+    } else {
+      playMediaAction.parentNode.style.display = "block";
+    }
+    if (emptyTrashAction) {
+      if (!checkEmptyTrash) {
+        emptyTrashAction.parentNode.style.display = "none";
+      } else {
+        emptyTrashAction.parentNode.style.display = "block";
+      }
+    }
+    var pasteAction = gj(contextMenu).find("div.Paste16x16Icon:first")[0];
+
+    if (Self.itemsSelected.length > 1) {
+      pasteAction.parentNode.style.display = "none";
+    }
+    //check position popup
+    var X = event.pageX;
+    var Y = event.pageY;
+    var portWidth = gj(window).width();
+    var portHeight = gj(window).height();
+    var contentMenu = gj(contextMenu).children("div.UIRightClickPopupMenu:first")[0];
+    if (event.clientX + contentMenu.offsetWidth > portWidth) X -= contentMenu.offsetWidth;
+    if (event.clientY + contentMenu.offsetHeight > portHeight) Y -= contentMenu.offsetHeight + 5;
+    contextMenu.style.top = Y + 5 + "px";
+    contextMenu.style.left = X + 5 + "px";
+
+    contextMenu.onmouseup = Self.hideContextMenu;
+    document.body.onmousedown = Self.hideContextMenu;
+    document.body.onkeydown = Self.hideContextMenu;
+  };
 	
 	// working with ground context menu
 	ListView.prototype.showGroundContextMenu = function(event, element) {
@@ -946,9 +951,9 @@ var ListView = function() {
 		
 		var listGrid = gj(obj).parents(".UIListGrid:first")[0];
 		var rowClazz = gj(listGrid).find("div.RowView,div.Normal");						
-		if(!eXo.ecm.UIListView.mapColumn) {
-			eXo.ecm.UIListView.mapColumn = new eXo.core.HashMap();
-		}		
+    if(!gj.data(Self.columnData)) {
+      gj.data(Self.columnData, {}, {});
+    }		
 		var objResize = obj;									
 		objResize.style.display = "none";
 		
@@ -968,27 +973,18 @@ var ListView = function() {
 		document.onselectstart = function(){return false};
 		var event = event || window.event;
 		event.cancelBubble = true;
-		var previousClass = gj(obj).prevAll("div:first")[0];					
-		var listGrid = gj(previousClass).parents(".UIListGrid:first")[0];
-		var rowClazz = gj(listGrid).find("div.RowView,div.Normal");				
-		if(!eXo.ecm.UIListView.mapColumn) {
-			eXo.ecm.UIListView.mapColumn = new eXo.core.HashMap();
-		}
-		eXo.ecm.UIListView.currentMouseX = event.clientX;			
-		eXo.ecm.UIListView.listGrid = listGrid;
-		eXo.ecm.UIListView.objResize = previousClass;		
-		eXo.ecm.UIListView.objRowClazz = rowClazz;
-		eXo.ecm.UIListView.objResizeValue = previousClass.offsetWidth;				
+		Self.objResizingHeader = gj(obj).prevAll("div:first")[0];
+    Self.objResizeValue = Self.objResizingHeader.offsetWidth;
+    Self.currentMouseX = event.clientX;
+    Self.listGrid = gj(Self.objResizingHeader).parents(".UIListGrid:first")[0];				
 		document.onmousemove = eXo.ecm.UIListView.resizeMouseMoveListView;		
 		document.onmouseup = eXo.ecm.UIListView.resizeMouseUpListView;
 	}
 		
 	ListView.prototype.resizeMouseMoveListView = function(event) {
 		var event = event || window.event;
-		var objResize = eXo.ecm.UIListView.objResize;
 		var objResizeClazz = eXo.ecm.UIListView.objRowClazz;
 		var resizeValue = event.clientX - eXo.ecm.UIListView.currentMouseX;		
-		var listGrid = gj(objResize).parents(".UIListGrid:first")[0];	
 				
 		// Case of resize width lower than allowable minimum.		
 		if (eXo.ecm.UIListView.objResizeValue + resizeValue < 8 ) return;				
@@ -998,13 +994,13 @@ var ListView = function() {
 			resizeDiv = document.createElement("div");
 			resizeDiv.className = "ResizeHandle";
 			resizeDiv.id = "ResizeDiv";			
-			var workspace = gj(objResize).parents(".UIDocumentWorkspace:first")[0];
+			var workspace = gj(Self.objResizingHeader).parents(".UIDocumentWorkspace:first")[0];
 			resizeDiv.style.height = workspace.offsetHeight + "px";
 			var documentInfo = document.getElementById('UIDocumentInfo');
 			gj(documentInfo).find("div.UIListGrid:first")[0].appendChild(resizeDiv);	
 		}
-		var X_Resize = eXo.core.Browser.findMouseRelativeX(listGrid,event);				
-		eXo.core.Browser.setPositionInContainer(listGrid, resizeDiv, X_Resize, 0);
+		var X_Resize = eXo.core.Browser.findMouseRelativeX(Self.listGrid,event);				
+		eXo.core.Browser.setPositionInContainer(Self.listGrid, resizeDiv, X_Resize, 0);
 	}
 			
 	ListView.prototype.resizeMouseUpListView = function(event) {
@@ -1013,35 +1009,24 @@ var ListView = function() {
     document.onselectstart = function(){return true};
     
 		var event = event || window.event;
-		event.cancelBubble = true;		
-		var objResizeClazz = eXo.ecm.UIListView.objRowClazz;		
-		var resizeValue = event.clientX - eXo.ecm.UIListView.currentMouseX;	
-		if (eXo.ecm.UIListView.objResize) {
-			var objResize = eXo.ecm.UIListView.objResize;		
-			objResize.style.width = eXo.ecm.UIListView.objResizeValue + resizeValue + "px";		
-		
-			if(eXo.ecm.UIListView.mapColumn.get(objResize.className)) {
-				eXo.ecm.UIListView.mapColumn.remove(objResize.className);
-				eXo.ecm.UIListView.mapColumn.put(objResize.className, eXo.ecm.UIListView.objResizeValue + resizeValue + "px");
-			} else {
-				eXo.ecm.UIListView.mapColumn.put(objResize.className, eXo.ecm.UIListView.objResizeValue + resizeValue + "px");
-			}
-		}	
-		
-		// Resize the whole column
-		for (var i in objResizeClazz) {
-			try {
-				var objColumn = gj(objResizeClazz[i]).find("div." + objResize.className + ":first")[0];
-				objColumn.style.width = eXo.ecm.UIListView.objResizeValue + resizeValue + "px";
-			} catch(err) {
-			}
-		}
+		event.cancelBubble = true;
+		var columnClass = Self.objResizingHeader.className;
+    columnClass = columnClass.replace(" Column", "").trim();
+    var resizeValue = event.clientX - eXo.ecm.UIListView.currentMouseX;
+    var newWidth    = Self.objResizeValue + resizeValue + "px";
+    var div2Resize  = gj(Self.listGrid).find("div." + columnClass);
+    for (var i=0; i< div2Resize.length; i++) {
+      div2Resize[i].style.width = newWidth;
+    }
+    if (gj(Self.columnData).data(columnClass)) {
+      gj(Self.columnData).removeData(columnClass);
+    }
+    gj(Self.columnData).data(columnClass, newWidth);
 			
 		// Remove the resize div on mouseUp event
-		var listGrid = gj(objResize).parents(".UIListGrid:first")[0];		
-		var resizeDiv = document.getElementById("ResizeDiv");		
-		if (listGrid) 
-			listGrid.removeChild(resizeDiv);
+		var resizeDiv = document.getElementById("ResizeDiv");   
+    if (Self.listGrid && resizeDiv) 
+      Self.listGrid.removeChild(resizeDiv);
 			
 		//update width of UIListGrid
 		eXo.ecm.ECMUtils.updateListGridWidth();	
@@ -1052,31 +1037,27 @@ var ListView = function() {
 		delete eXo.ecm.UIListView.objClumnResize;
 		delete eXo.ecm.UIListView.widthRightContainer;						
 	}	
-	
 	ListView.prototype.loadEffectedWidthColumn = function() {
 		var objResizeClazz = eXo.ecm.UIListView.objRowClazz;
 		var root = document.getElementById("UIDocumentWorkspace");
-		var workingArea = document.getElementById("UIWorkingArea");
-		var leftContainer = document.getElementById("LeftContainer");
-		var dynamicWidth = workingArea.offsetWidth - leftContainer.offsetWidth - 6 ;		
 		var listGrid = gj(root).find("div.UIListGrid:first")[0];
 		root.style.overflow = "auto";
 		var rightContainer = gj(listGrid).parents(".RightContainer:first")[0];
 		
-		if(!eXo.ecm.UIListView.mapColumn) return;
-		for(var name in eXo.ecm.UIListView.mapColumn.properties) {
-			var objColumn = gj(listGrid).find("div." + name + ":first")[0];
-			objColumn.style.width = eXo.ecm.UIListView.mapColumn.properties[name];
-			var rowClazz = gj(listGrid).find("div.RowView,Normal");
-			for (var i in rowClazz) {
-				try {
-					var objColumnInRow = gj(rowClazz[i]).find("div." + name + ":first")[0];
-					objColumnInRow.style.width = eXo.ecm.UIListView.mapColumn.properties[name];
-				} catch(err) {
-				}
-			}
-		}	
+		if(!gj.data(Self.columnData)) { 
+		  return;
+		}
+//		var _columnData = gj(Self.columnData).data();
 		
+		gj.each( gj(Self.columnData).data(),function(key, value) {
+     var div2Resize  = gj(listGrid).find("div." + key);
+      for (var i=0; i< div2Resize.length; i++) {
+        div2Resize[i].style.width = value;
+      }
+    });
+    eXo.ecm.ECMUtils.documentContainer_OnResize = function(){
+    	eXo.ecm.ECMUtils.updateListGridWidth();
+    }
 		//update width of UIListGrid
 		eXo.ecm.ECMUtils.updateListGridWidth();	
 	}

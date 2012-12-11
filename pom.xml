@@ -4,7 +4,7 @@
   <parent>
     <artifactId>maven-parent-pom</artifactId>
     <groupId>org.exoplatform</groupId>
-    <version>9-SNAPSHOT</version>
+    <version>9-alpha-3</version>
     <relativePath></relativePath>
   </parent>
   <groupId>org.exoplatform.ecms</groupId>
@@ -47,9 +47,6 @@
     <org.gatein.pc.version>2.4.0.Final</org.gatein.pc.version>
     <org.gatein.portal.version>3.5.0.Final</org.gatein.portal.version>
     <org.gatein.wci.version>2.3.0.Final</org.gatein.wci.version>
-    
-    <org.chromattic.version>1.2.0-beta2</org.chromattic.version>
-    <org.slf4j.version>1.6.1</org.slf4j.version>
     <!-- ************** -->
     <!-- Build settings -->
     <!-- ************** -->
@@ -67,7 +64,7 @@
       <dependency>
         <groupId>org.exoplatform</groupId>
         <artifactId>maven-depmgt-pom</artifactId>
-        <version>1-SNAPSHOT</version>
+        <version>1</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -86,17 +83,17 @@
       </dependency>
       <dependency>
         <groupId>org.exoplatform.commons</groupId>
+        <artifactId>commons-component-upgrade</artifactId>
+        <version>${org.exoplatform.commons.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.exoplatform.commons</groupId>
         <artifactId>commons-testing</artifactId>
         <version>${org.exoplatform.commons.version}</version>
       </dependency>
       <dependency>
         <groupId>org.exoplatform.commons</groupId>
         <artifactId>commons-webui-ext</artifactId>
-        <version>${org.exoplatform.commons.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.commons</groupId>
-        <artifactId>commons-component-upgrade</artifactId>
         <version>${org.exoplatform.commons.version}</version>
       </dependency>
       <dependency>
@@ -287,6 +284,11 @@
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
+        <artifactId>ecms-core-webui-seo</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-ext-authoring-apps</artifactId>
         <version>${project.version}</version>
         <type>war</type>
@@ -300,6 +302,16 @@
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-ext-authoring-services</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.exoplatform.ecms</groupId>
+        <artifactId>ecms-ext-authoring-webui</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.exoplatform.ecms</groupId>
+        <artifactId>ecms-ext-webui</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -366,6 +378,33 @@
         <artifactId>exo.kernel.container</artifactId>
         <version>${org.exoplatform.kernel.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.exoplatform.ws</groupId>
+        <artifactId>exo.ws.commons</artifactId>
+        <version>${org.exoplatform.ws.version}</version>
+      </dependency>
+      <!-- To be replaced by an import of WS parent POM -->
+      <dependency>
+        <groupId>org.exoplatform.ws</groupId>
+        <artifactId>exo.ws.rest.core</artifactId>
+        <version>${org.exoplatform.ws.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.exoplatform.ws</groupId>
+        <artifactId>exo.ws.rest.ext</artifactId>
+        <version>${org.exoplatform.ws.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.exoplatform.ws</groupId>
+        <artifactId>exo.ws.testframework</artifactId>
+        <version>${org.exoplatform.ws.version}</version>
+      </dependency>
+      <!-- To be replaced by an import of GateIn PC parent POM -->
+      <dependency>
+        <groupId>org.gatein.pc</groupId>
+        <artifactId>pc-api</artifactId>
+        <version>${org.gatein.pc.version}</version>
+      </dependency>
       <!-- To be replaced by an import of GateIn Portal parent POM -->
       <dependency>
         <groupId>org.gatein.portal</groupId>
@@ -381,6 +420,12 @@
         <groupId>org.gatein.portal</groupId>
         <artifactId>exo.portal.component.portal</artifactId>
         <version>${org.gatein.portal.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.gatein.portal</groupId>
+        <artifactId>exo.portal.component.portal</artifactId>
+        <version>${org.gatein.portal.version}</version>
+        <classifier>tests</classifier>
       </dependency>
       <dependency>
         <groupId>org.gatein.portal</groupId>
@@ -441,33 +486,6 @@
         <groupId>org.gatein.portal</groupId>
         <artifactId>exo.portal.webui.portlet</artifactId>
         <version>${org.gatein.portal.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ws</groupId>
-        <artifactId>exo.ws.commons</artifactId>
-        <version>${org.exoplatform.ws.version}</version>
-      </dependency>
-      <!-- To be replaced by an import of WS parent POM -->
-      <dependency>
-        <groupId>org.exoplatform.ws</groupId>
-        <artifactId>exo.ws.rest.core</artifactId>
-        <version>${org.exoplatform.ws.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ws</groupId>
-        <artifactId>exo.ws.rest.ext</artifactId>
-        <version>${org.exoplatform.ws.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.exoplatform.ws</groupId>
-        <artifactId>exo.ws.testframework</artifactId>
-        <version>${org.exoplatform.ws.version}</version>
-      </dependency>
-      <!-- To be replaced by an import of GateIn PC parent POM -->
-      <dependency>
-        <groupId>org.gatein.pc</groupId>
-        <artifactId>pc-api</artifactId>
-        <version>${org.gatein.pc.version}</version>
       </dependency>
       <dependency>
         <groupId>org.gatein.wci</groupId>

@@ -11,6 +11,15 @@
 .UIJCRExplorerPortlet .UIJCRExplorer {
 }
 
+.UIJCRExplorerPortlet .UIJCRExplorerNoSelect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 #fileexplorer .UIApplication {
 	overflow:hidden;
 }
@@ -72,27 +81,55 @@
 .UIJCRExplorerPortlet .UIJCRExplorer .UIWorkingArea .ResizeSideBar{
 	float: left; /* orientation=lt */
 	float: right; /* orientation=rt */
-	width: 24px;
-	/*cursor:col-resize;*/
+	width: 15px;
+	cursor:col-resize;
 	height: 475px;
 	position: relative;
+  border-right: solid 1px #fff;
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIWorkingArea .ResizeSideBar:hover {
+  border-right: solid 1px #E1E1E1;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIWorkingArea .ResizeButton{
-	background: url('DefaultSkin/background/ResizeButton.gif') no-repeat center center;
-	width: 24px;
-	height: 14px;
-	position : absolute;
+	background: url('DefaultSkin/background/ResizeButton.gif') no-repeat center center ;
+	width: 14px;
+	height: 26px;
+	float:right;
 	margin : auto;
 	cursor : pointer;
+	border: 1px solid #E1E1E1;
+	border-right: none;
+	display: none;
 }
 
-.UIJCRExplorerPortlet .UIJCRExplorer .UIWorkingArea .ShowLeftContent{
-	background: url('DefaultSkin/background/ShowLeftContent.gif') no-repeat center center;
-	width: 5px;
-	height: 10px;
-	margin : auto;
-	cursor : pointer;
+.UIJCRExplorerPortlet .UIJCRExplorer .UIWorkingArea .ResizeSideBar:hover .ResizeButton {
+  display: block;
+}
+.UIJCRExplorerPortlet .UIJCRExplorer .UIWorkingArea .ResizeSideBarDisplay {
+  border-right: solid 1px #E1E1E1;
+}
+.UIJCRExplorerPortlet .UIJCRExplorer .UIWorkingArea .ResizeSideBarDisplay .ResizeButton {
+  display: block;
+}
+.UIJCRExplorerPortlet .UIJCRExplorer .UIWorkingArea .ResizeButton:hover{
+  background-color: #f3f3f3;
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIWorkingArea .ResizeSideBar .ShowLeftContent {
+  background: url('DefaultSkin/background/ShowLeftContent.gif') no-repeat center center;
+  display: block;
+  border: 1px solid #E1E1E1;
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIWorkingArea .ResizeNoneBorder:hover {
+  border-right: 1px solid #fff;
+  cursor: default;
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIWorkingArea .ShowLeftContent:hover {
+  background-color: #f3f3f3;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIDocumentWorkspace .UIResizableBlock {
@@ -111,6 +148,105 @@
 .UIJCRExplorerPortlet .UIRelationManager .UIBreadcumbs .LeftBreadcumbsBar {
 	height: 25px;
 }
+
+/*############################## -- TabsContainer -- ##############################*/
+
+.UIJCRExplorerPortlet .TabsContainer .MainTabsContainer {
+  height:31px;
+  position: relative;
+}
+
+.UIJCRExplorerPortlet .TabsContainer .ShowMoreTabsContainer {
+  position: absolute;
+  right: -1px;
+  top: -1px;
+  background: #fff;
+  height: 30px;
+  border: 1px solid #e1e1e1;
+  cursor: pointer;
+}
+
+.UIJCRExplorerPortlet .TabsContainer .ShowMoreTabsContainer:hover {
+  border: 1px solid #bbb;
+}
+
+.UIJCRExplorerPortlet .TabsContainer .ShowMoreTabsContainerActivated {
+  box-shadow: 1px 2px 2px #e1e1e1;
+  border: 1px solid #e1e1e1;
+}
+
+.UIJCRExplorerPortlet .TabsContainer .ShowMoreTabsContainerActivated:hover {
+  border: 1px solid #e1e1e1;
+}
+
+.UIJCRExplorerPortlet .TabsContainer .ShowMoreTabsIcon {
+    background: url("/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/icons/DownArowIcon.gif") no-repeat 96% center;
+    position: relative !important;
+    display: block;
+    line-height: 23px;
+    margin: 4px 0px 0;
+    padding: 0 20px 0 10px;
+    z-index: 3;
+}
+
+
+.UIJCRExplorerPortlet .TabsContainer .ShowMoreTabsIcon .MoreLabel, .ShowElementAlways .MoreLabel{
+    color: #4F4F4F; 
+    font-size: 12px; 
+    line-height: 20px;
+    font-weight: bold;
+}
+
+.UIJCRExplorerPortlet .TabsContainer .ShowMoreTabsIcon .DMSMenuItemContainer {
+  display: block;
+  left: 0px;  /* orientation=lt */
+  right: 0px;  /* orientation=rt */
+}
+
+.UIJCRExplorerPortlet .TabsContainer .ShowMoreTabsIcon .ListHideTabsContainer {
+  right: -1px;
+  top : 25px; 
+  position: absolute;
+  background: #fff;
+  border: 1px solid #e1e1e1;
+  border-radius: 2px 0px 2px 2px;
+  box-shadow: 1px 2px 2px #e1e1e1;
+  display:none;
+  min-width: 120px;
+}
+
+.UIJCRExplorerPortlet .TabsContainer .ShowMoreTabsIcon .WhiteBG {
+  background: white;
+  height: 1px;
+  right: 0px;
+  top: 25px;
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+}
+
+.UIJCRExplorerPortlet .ShowMoreTabsIcon .ListHideTabsContainer .UITab {
+  font-weight: normal;
+  border-bottom: 1px solid #e1e1e1;
+  color: #828282;
+  padding: 0px;
+  float: none;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.UIJCRExplorerPortlet .ShowMoreTabsIcon .ListHideTabsContainer .UITab:hover {
+  background: #f7f7f7;
+  color: #4d4d4d;
+}
+
+.UIJCRExplorerPortlet .ShowMoreTabsIcon .ListHideTabsContainer .UITab .NormalActionBarTab {
+  line-height: 30px;
+  font-size: 12px;
+  padding: 0px 12px;
+}
+
+/*############################## -- TabContainer -- ##############################*/
 
 /*############################## -- End UIJCRExplorer -- ##############################*/
 
@@ -252,11 +388,12 @@
 /*############################## -- Begin UIDocumentWorkspace -- ##############################*/
 
 .UIJCRExplorerPortlet .RightContainer {
-  margin-left: 0px;
+ float:left;
 }
 
 .UIJCRExplorerPortlet .UIDocumentWorkspace {
   overflow: auto;
+  margin-left: 10px;
 }
 
 .UIJCRExplorerPortlet .UIListView {

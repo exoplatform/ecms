@@ -150,12 +150,12 @@
 /*############################## -- Begin UIViewBar -- ##############################*/
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar {
-	background:#F8F8F8;
-    border: 1px solid #E1E1E1;
-    height: 23px;
-    line-height: 23px;
-    padding: 8px;
-	margin-bottom: 9px;
+  background:#F8F8F8;
+  border: 1px solid #E1E1E1;
+  height: 23px;
+  line-height: 23px;
+  padding: 8px;
+  margin-bottom: 9px;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIAddressBar .AddressBarSeparator {
@@ -331,7 +331,7 @@
   border: solid 1px #e1e1e1;
   height:63px;
   background:url('DefaultSkin/background/HeaderBg.gif') repeat-x;
-  margin-bottom: 10px;
+  margin: 0px 0px 10px 10px;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIActionBarAlone {
@@ -341,6 +341,7 @@
 .UIJCRExplorerPortlet .UIActionBarAlone .TabsContainer {
   float: left; /* orientation=lt */
   float: right; /* orientation=rt */
+  overflow:visible;
 }
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIActionBar .ActionLabel {
@@ -818,16 +819,23 @@
  	line-height: 29px;	
 }
 
-.UIJCRExplorerPortlet  .UIActionBar  .UIHorizontalTabs .SelectedActionBarTab{
+.UIJCRExplorerPortlet .UIActionBar .UIHorizontalTabs .SelectedActionBarTab {
 	border: 1px solid #e1e1e1;
 	border-top: none;
 	border-bottom: none;
 	background: url(DefaultSkin/background/SelectedActionBarTab.gif) repeat-x;
 	height: 31px;
+	padding: 0px 20px;
 }
 
-.UIJCRExplorerPortlet  .UIActionBar  .UITab {
+.UIJCRExplorerPortlet .UIActionBar .UIHorizontalTabs .NormalActionBarTab {
+  padding: 0px 20px;
+}
+
+.UIJCRExplorerPortlet .UIActionBar .UITab {
 	padding: 0px 5px;
+	height: 31px;
+	cursor: pointer;
 }
 
 .UIJCRExplorerPortlet .UIActionBar .SubTabItem {
@@ -847,6 +855,7 @@
 
 .UIJCRExplorerPortlet .UIActionBar .SubTabIcon{
 	line-height: 20px;
+	height: 23px;
 	padding: 0px 15px 0px 27px; /* orientation=lt */
 	padding: 0px 27px 0px 15px; /* orientation=rt */
 	display: block;
@@ -889,7 +898,8 @@
 }
 
 .UIJCRExplorerPortlet .UIActionBar .NormalSubItem{
-	padding-top: 5px;
+	margin-top: 5px;
+	border-right: 1px solid #e1e1e1;
 }
 
 .UIJCRExplorerPortlet .UIActionBar .SelectedSubItem{
@@ -900,90 +910,93 @@
 	font-weight:normal;
 }
 
-.UIJCRExplorerPortlet .ShowElementIcon {
-	background: url(DefaultSkin/icons/DownArowIcon.gif) no-repeat right center;
-	float: right; /* orientation=lt */
-	float: left; /* orientation=rt */
-	line-height:23px;
-	display:block;
-	margin: 4px 1px 0px 1px;
-	padding: 0px 18px 0px 8px;
-	position: relative !important;
-	z-index: 2;
+.UIJCRExplorerPortlet .UIActionBar .UIViewBarContainer {
+  float: right; /* orientation=lt */
+  float: left; /* orientation=rt */
+  width: 80px;
 }
 
-.UIJCRExplorerPortlet .ShowElementIcon:hover {
-	 background: white url(DefaultSkin/icons/DownArowIcon.gif) no-repeat right center;
-	 border: 1px solid #e1e1e1;
-	 -moz-border-radius: 4px 4px 0 0;
-	 border-bottom: none;
-	 margin: 3px 0 0 0;
-	 -moz-box-shadow: 2px 3px 2px #E1E1E1;
-	 -webkit-box-shadow: 2px 3px 2px #E1E1E1;
-	 box-shadow: 2px 3px 2px #E1E1E1;
-
+.UIJCRExplorerPortlet .UIActionBar .ShowMoreActionContainer {
+  float:right;
+  padding: 0px 5px 0px 7px;
+  display: none;
+  border: 1px solid #fff;
+  margin-top: 3px;
+  position: relative;
+  cursor: pointer;
 }
 
-.UIJCRExplorerPortlet .ShowElementSelect {
-	border: 1px solid #e1e1e1;
-	-moz-border-radius: 4px 4px 0 0;
-	border-bottom: none;
-	margin: 3px 0 0 0;
-	-moz-box-shadow: 2px 3px 2px #E1E1E1;
-	-webkit-box-shadow: 2px 3px 2px #E1E1E1;
-	box-shadow: 2px 3px 2px #E1E1E1;
-}
-
-.UIJCRExplorerPortlet .ShowElementAlways {
-  background: url(DefaultSkin/icons/DownArowIcon.gif) no-repeat right center;
-  line-height:23px;
-  padding: 0px 18px 0px 8px;
+.UIJCRExplorerPortlet .UIActionBar .ShowMoreActionContainer:hover {
   border: 1px solid #e1e1e1;
-  -moz-border-radius: 4px 4px 0 0;
-  border-bottom: none;
-  margin: 3px 0 0 0;
-  -moz-box-shadow: 2px 3px 2px #E1E1E1;
-  -webkit-box-shadow: 2px 3px 2px #E1E1E1;
-  box-shadow: 2px 3px 2px #E1E1E1;
-  position: relative !important;
+}
+
+.UIJCRExplorerPortlet .UIActionBar .ShowMoreActionContainer .WhiteBG {
+  background: white;
+  height: 2px;
+  position: absolute;
+  width: 100%;
   z-index: 2;
+  right: 0px;
+  top: 23px;
+  display: none;
 }
 
-.UIViewBarContainer {
-	float: right; /* orientation=lt */
-	float: left; /* orientation=rt */
-	width: 110px;
+.UIJCRExplorerPortlet .UIActionBar .MoreContainerActivated {
+  border: 1px solid #e1e1e1;
 }
 
-.ListHideContainer {
+.UIJCRExplorerPortlet .UIActionBar .MoreContainerActivated .WhiteBG {
+  display: block;
+}
+
+.UIJCRExplorerPortlet .UIActionBar .DMSMenuItemContainer {
+  display: block;
+  left: 0px;  /* orientation=lt */
+  right: 0px;  /* orientation=rt */
+  padding: 0 10px;
+}
+
+.UIJCRExplorerPortlet .UIActionBarAlone .DMSMenuItemContainer {
+  display: block;
+  left: 0px;  /* orientation=lt */
+  right: 0px;  /* orientation=rt */
+  padding: 0 0 0 10px;
+}
+.UIJCRExplorerPortlet .UIActionBar .ShowMoreActionContainer .MoreLabel {
+  color: #4F4F4F; 
+  font-size: 12px; 
+  line-height: 24px;
+  background:  url("DefaultSkin/icons/DownArowIcon.gif") no-repeat right 11px;
+  padding-right: 16px;
+}
+
+.UIJCRExplorerPortlet .UIActionBar .MoreContainerActivated .MoreLabel {
+  font-weight: bold;
+}
+
+.UIJCRExplorerPortlet .UIActionBar .ShowMoreActionContainer .ListHiddenActionContainer {
 	background: white;
-	padding: 4px;
-	border:solid 1px #e1e1e1;
-	position:absolute;
-	margin: -1px 0px 0px 0px;
+	padding: 0px;
+	border: solid 1px #e1e1e1;
+	position: absolute;
+	margin: 0px;
 	z-index: 1;
+	right: -1px;
 }
 
-.UIJCRExplorerPortlet .ShowElementIcon:hover .WhiteBG, .UIJCRExplorerPortlet .ShowElementAlways .WhiteBG{
-    background: white;
-    height: 4px;
-    margin-left: -8px;
-    margin-top: -2px;
-    position: absolute;
-    width: 100%;
-    z-index: 2;
+.UIJCRExplorerPortlet .UIActionBar .ListHiddenActionContainer .NormalSubItem {
+	padding: 5px 0px;
+	float: none;
+	margin: 0px;
+	border: none;
 }
 
-.IconListHideElement .MoreLabel, .ShowElementAlways .MoreLabel{
-    color: #4F4F4F; 
-    font-size: 12px; 
-    line-height: 20px;
+.UIJCRExplorerPortlet .UIActionBar .ListHiddenActionContainer .NormalSubItem:hover {
+	background-color: #f7f7f7;
 }
 
-.DMSMenuItemContainer {
-	display: block;
-	left: 0px;  /* orientation=lt */
-	right: 0px;  /* orientation=rt */
+.UIJCRExplorerPortlet .UIActionBar .ListHiddenActionContainer .SubTabIcon {
+	margin: 0px 5px;
 }
 
 

@@ -20,15 +20,24 @@
   padding: 9px;
 }
 
-.UIJCRExplorerPortlet .LeftCotainer {
+.UIJCRExplorerPortlet .LeftContainer {
 	float: left; /* orientation=lt */
 	float: right; /* orientation=rt */
 	width: 240px;
 }
 
+.UIJCRExplorerPortlet .UISideBar {
+  float: left; /* orientation=lt */
+  float: right; /* orientation=rt */
+}
+
 .UIJCRExplorerPortlet .RightCotainer {
 	margin-left: 224px; /* orientation=lt */
 	margin-right: 224px; /* orientation=rt */
+}
+
+.UIJCRExplorerPortlet .UIListView .UIListGrid {
+  min-width: 655px;
 }
 
 .UIJCRExplorerPortlet .UIFormGrid {
@@ -137,13 +146,14 @@
 }
 
 .UIDialogTitle {
-	float: left; 
-	margin: 5px 10px;
+  float: left;
+  margin: 5px 0px -21px 10px;
 }
 
 /*******************************UIDocumentFormController****************************************/
 
 .UIDocumentFormController {
+  min-width: 500px;
 }
 
 .ChangeTypeLink {

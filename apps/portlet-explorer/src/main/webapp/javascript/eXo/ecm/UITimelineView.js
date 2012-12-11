@@ -656,7 +656,7 @@ var TimelineView = function() {
   };
   
   // working with item context menu
-  TimelineView.prototype.showItemContextMenu = function(event, element) {
+  TimelineView.prototype.showItemContextMenu = function (event, element) {
     var event = event || window.event;
     event.cancelBubble = true;
     if (document.getElementById(Self.contextMenuId)) {
@@ -678,7 +678,7 @@ var TimelineView = function() {
       }
     });
     document.body.appendChild(contextMenu);
-    
+
     //check lock, unlock action
     var checkUnlock = false;
     var checkRemoveFavourite = false;
@@ -695,7 +695,7 @@ var TimelineView = function() {
     }
     var lockAction = gj(contextMenu).find("div.Lock16x16Icon:first")[0];
     var unlockAction = gj(contextMenu).find("div.Unlock16x16Icon:first")[0];
-    
+
     if (checkUnlock) {
       unlockAction.parentNode.style.display = "block";
       lockAction.parentNode.style.display = "none";
@@ -704,37 +704,41 @@ var TimelineView = function() {
       lockAction.parentNode.style.display = "block";
     }
 
-      var addFavouriteAction = gj(contextMenu).find("div.AddToFavourite16x16Icon:first")[0];
-      var removeFavouriteAction = gj(contextMenu).find("div.RemoveFromFavourite16x16Icon:first")[0];
-      if (checkRemoveFavourite) {
-        removeFavouriteAction.parentNode.style.display = "block";    
-        addFavouriteAction.parentNode.style.display = "none";
+    var addFavouriteAction = gj(contextMenu).find("div.AddToFavourite16x16Icon:first")[0];
+    var removeFavouriteAction = gj(contextMenu).find("div.RemoveFromFavourite16x16Icon:first")[0];
+    if (checkRemoveFavourite) {
+      removeFavouriteAction.parentNode.style.display = "block";
+      addFavouriteAction.parentNode.style.display = "none";
+    } else {
+      addFavouriteAction.parentNode.style.display = "block";
+      removeFavouriteAction.parentNode.style.display = "none";
+    }
+    var restoreFromTrashAction = gj(contextMenu).find("div.RestoreFromTrash16x16Icon:first")[0];
+    var emptyTrashAction = gj(contextMenu).find("div.EmptyTrash16x16Icon:first")[0];
+    var playMediaAction = gj(contextMenu).find("div.PlayMedia16x16Icon:first")[0];
+
+    if (!checkInTrash) {
+      restoreFromTrashAction.parentNode.style.display = "none";
+    } else {
+      restoreFromTrashAction.parentNode.style.display = "block";
+    }
+    if (!checkMediaType) {
+      playMediaAction.parentNode.style.display = "none";
+    } else {
+      playMediaAction.parentNode.style.display = "block";
+    }
+    if (emptyTrashAction) {
+      if (!checkEmptyTrash) {
+        emptyTrashAction.parentNode.style.display = "none";
       } else {
-        addFavouriteAction.parentNode.style.display = "block";
-        removeFavouriteAction.parentNode.style.display = "none";
+        emptyTrashAction.parentNode.style.display = "block";
       }
-      var restoreFromTrashAction = gj(contextMenu).find("div.RestoreFromTrash16x16Icon:first")[0];
-      var emptyTrashAction = gj(contextMenu).find("div.EmptyTrash16x16Icon:first")[0];
-      var playMediaAction = gj(contextMenu).find("div.PlayMedia16x16Icon:first")[0];
-      
-      if (!checkInTrash) {
-        restoreFromTrashAction.parentNode.style.display = "none";
-      } else {
-        restoreFromTrashAction.parentNode.style.display = "block";
-      }
-      if (!checkMediaType) {
-        playMediaAction.parentNode.style.display = "none";
-      } else {
-        playMediaAction.parentNode.style.display = "block";
-      }
-          if (emptyTrashAction) {
-            if (!checkEmptyTrash) {
-          emptyTrashAction.parentNode.style.display = "none";
-        } else {
-          emptyTrashAction.parentNode.style.display = "block";
-        }           
-          }
-      
+    }
+    var pasteAction = gj(contextMenu).find("div.Paste16x16Icon:first")[0];
+
+    if (Self.itemsSelected.length > 1) {
+      pasteAction.parentNode.style.display = "none";
+    }
     //check position popup
     var X = event.pageX;
     var Y = event.pageY;
@@ -745,7 +749,7 @@ var TimelineView = function() {
     if (event.clientY + contentMenu.offsetHeight > portHeight) Y -= contentMenu.offsetHeight + 5;
     contextMenu.style.top = Y + 5 + "px";
     contextMenu.style.left = X + 5 + "px";
-    
+
     contextMenu.onmouseup = Self.hideContextMenu;
     document.body.onmousedown = Self.hideContextMenu;
     document.body.onkeydown = Self.hideContextMenu;

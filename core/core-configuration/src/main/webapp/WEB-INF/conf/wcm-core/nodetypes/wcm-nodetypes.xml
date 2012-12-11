@@ -260,10 +260,10 @@
   </nodeType>
   
   <nodeType name="exo:pageMetadata" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
-  	<supertypes>
-      <supertype>nt:base</supertype>
-    </supertypes>
-    <propertyDefinitions>     
+    <propertyDefinitions>   
+      <propertyDefinition name="exo:metaTitle" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints />
+      </propertyDefinition>  
       <propertyDefinition name="exo:metaKeywords" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints />
       </propertyDefinition>
@@ -289,6 +289,17 @@
         <valueConstraints />
       </propertyDefinition>
     </propertyDefinitions>
+  </nodeType>
+  
+  <nodeType name="exo:seoMetadata" isMixin="true" hasOrderableChildNodes="false">
+    <propertyDefinitions/>
+    <childNodeDefinitions>
+      <childNodeDefinition name="seo-languages" defaultPrimaryType="nt:unstructured" autoCreated="false" mandatory="false" onParentVersion="VERSION" protected="false" sameNameSiblings="false">
+        <requiredPrimaryTypes>
+          <requiredPrimaryType>nt:unstructured</requiredPrimaryType>
+        </requiredPrimaryTypes>
+      </childNodeDefinition>
+    </childNodeDefinitions>
   </nodeType>
  
 </nodeTypes>

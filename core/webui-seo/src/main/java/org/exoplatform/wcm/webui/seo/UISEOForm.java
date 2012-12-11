@@ -17,14 +17,25 @@
 package org.exoplatform.wcm.webui.seo;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 import javax.jcr.Node;
-
+import org.apache.commons.lang.StringUtils;
+import org.exoplatform.container.ExoContainer;
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.resources.LocaleConfig;
+import org.exoplatform.services.resources.LocaleConfigService;
 import org.exoplatform.services.seo.PageMetadataModel;
 import org.exoplatform.services.seo.SEOService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -57,22 +68,28 @@ import org.exoplatform.webui.form.UIFormTextAreaInput;
                  template = "classpath:groovy/webui/seo/UISEOForm.gtmpl",
                  events = {
                     @EventConfig(listeners = UISEOForm.SaveActionListener.class),
+                    @EventConfig(phase=Phase.DECODE, listeners = UISEOForm.RefreshActionListener.class),
+                    @EventConfig(phase=Phase.DECODE, listeners = UISEOForm.UpdateActionListener.class),
+                    @EventConfig(listeners = UISEOForm.RemoveActionListener.class, confirm = "UISEOForm.msg.confirm-delete"),
                     @EventConfig(phase=Phase.DECODE, listeners = UISEOForm.CancelActionListener.class) })
 
 public class UISEOForm extends UIForm{
 
+	public static final String TITLE                   = "title";
   public static final String DESCRIPTION             = "description";
   public static final String KEYWORDS                = "keywords";
+  final static public String LANGUAGE_TYPE           = "language" ;
   public static final String ROBOTS                  = "robots";
   public static final String SITEMAP                 = "sitemap";
   public static final String ISINHERITED             = "isInherited";
   public static final String SITEMAP_VISIBLE         = "sitemapvisible";
   public static final String PRIORITY                = "priority";
   public static final String FREQUENCY               = "frequency";
-  public static final String ROBOTS_INDEX            = "index";
-  public static final String ROBOTS_FOLLOW           = "follow";
+  public static final String ROBOTS_INDEX            = "INDEX";
+  public static final String ROBOTS_FOLLOW           = "FOLLOW";
   public static final String FREQUENCY_DEFAULT_VALUE = "Always";
 
+  String title = "";
   String description = "";
   String keywords = "";
   String priority = "";
@@ -83,9 +100,15 @@ public class UISEOForm extends UIForm{
   boolean inherited = false;
 
   private static String contentPath = null;
+  private static String contentURI = null;
   private boolean onContent = false;
   private boolean isInherited = false;
   private ArrayList<String> paramsArray = null;
+  public static List<Locale> seoLocales = null;
+  public static List<String> seoLanguages = new ArrayList<String>();
+  private String selectedLanguage = null;
+  private String defaultLanguage = null;
+  private boolean isAddNew = true;
 
   private static final Log LOG  = ExoLogger.getLogger(UISEOForm.class.getName());
 
@@ -95,6 +118,13 @@ public class UISEOForm extends UIForm{
 
   public void setContentPath(String contentPath) {
     this.contentPath = contentPath;
+  }
+  
+  public String getContentURI() {
+  	return this.contentURI;
+  }
+  public void setContentURI(String contentURI) {
+  	this.contentURI = contentURI;
   }
 
   public boolean getOnContent() {
@@ -117,8 +147,32 @@ public class UISEOForm extends UIForm{
     return this.paramsArray;
   }
 
+  public void setSEOLanguages(ArrayList<Locale> seoLocales) {
+    this.seoLocales = seoLocales;
+  }
+  
+  public List<Locale> getSEOLanguages() {
+    return this.seoLocales;
+  }
+
   public void setParamsArray(ArrayList<String> params) {
     this.paramsArray = params;
+  }
+  
+  public String getSelectedLanguage() {
+  	return selectedLanguage;
+  }
+  
+  public void setSelectedLanguage(String selectedLanguage) {
+  	this.selectedLanguage = selectedLanguage;
+  }
+  
+  public void setIsAddNew(boolean isAddNew) {
+  	this.isAddNew = isAddNew;
+  }
+  
+  public boolean getIsAddNew() {
+  	return this.isAddNew;
   }
 
   /*public String getPageParent() {
@@ -129,43 +183,44 @@ public class UISEOForm extends UIForm{
   public void setPageParent(String pageParent) { this.pageParent = pageParent; }*/
 
   public UISEOForm() throws Exception {
-    setActions(new String[]{"Save", "Cancel"});
-  }
-
-  public void initSEOForm(PageMetadataModel pageModel) throws Exception{
-
-    if(pageModel != null) {
-      description = pageModel.getDescription();
-      keywords = pageModel.getKeywords();
-      frequency = pageModel.getFrequency();
-      if(pageModel.getPriority() >= 0)
-        priority = String.valueOf(pageModel.getPriority());
-      if(pageModel.getRobotsContent() != null && pageModel.getRobotsContent().length() > 0) {
-        index = pageModel.getRobotsContent().split(",")[0].trim();
-        follow = pageModel.getRobotsContent().split(",")[1].trim();
-      }
-      sitemap = pageModel.getSitemap();
-    }
-
-    SEOService seoService = WCMCoreUtils.getService(SEOService.class);
-
+  	PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
+  	ExoContainer container = ExoContainerContext.getCurrentContainer() ;
+    SEOService seoService = (SEOService)container.getComponentInstanceOfType(SEOService.class);
+    
+  	UIFormTextAreaInput uiTitle = new UIFormTextAreaInput(TITLE, TITLE, null);
+    uiTitle.setValue(title);
+    addUIFormInput(uiTitle);    
     UIFormTextAreaInput uiDescription = new UIFormTextAreaInput(DESCRIPTION, DESCRIPTION, null);
     uiDescription.setValue(description);
     addUIFormInput(uiDescription);
-
+    
     UIFormTextAreaInput uiKeywords = new UIFormTextAreaInput(KEYWORDS, KEYWORDS, null);
     uiKeywords.setValue(keywords);
-    addUIFormInput(uiKeywords);
-
-    if(!onContent) {
-      /*if(pageParent != null) {
-        if(seoService.getPageMetadata(pageParent) != null && pageModel == null) {
-          setIsInherited(true);
-          UIFormCheckBoxInput<Boolean> isInherited = new UIFormCheckBoxInput<Boolean>(ISINHERITED, ISINHERITED, null);
-          isInherited.setChecked(inherited);
-          addUIFormInput(isInherited);
-        }
-      }*/
+    addUIFormInput(uiKeywords); 
+    seoLocales = seoService.getSEOLanguages(portalRequestContext.getPortalOwner(), contentPath, onContent);
+    seoLanguages = new ArrayList<String>();
+    if(seoLocales != null && seoLocales.size() > 0) {
+	    for (Locale locale : seoLocales) {
+	    	String lang = locale.getLanguage();
+	      String country = locale.getCountry(); 
+	      if(StringUtils.isNotEmpty(country)) lang += "_" + country;
+	      seoLanguages.add(lang);
+			}
+    }
+    
+    if(seoLanguages != null) Collections.sort(seoLanguages);
+    UIFormSelectBox uiSelectForm = new UIFormSelectBox(LANGUAGE_TYPE, LANGUAGE_TYPE, getLanguages()) ;    
+    uiSelectForm.setOnChange("Refresh");
+	  defaultLanguage = portalRequestContext.getLocale().getLanguage();
+	  if(StringUtils.isNotEmpty(portalRequestContext.getLocale().getCountry()))
+	    defaultLanguage += "_" + portalRequestContext.getLocale().getCountry();
+	  selectedLanguage = defaultLanguage;
+    if(seoLanguages == null || !seoLanguages.contains(defaultLanguage))
+      uiSelectForm.setValue(defaultLanguage);
+    
+    addUIFormInput(uiSelectForm) ;  
+    
+    if(!onContent) {      
       List<SelectItemOption<String>> robotIndexItemOptions = new ArrayList<SelectItemOption<String>>();
       List<String> robotsindexOptions = seoService.getRobotsIndexOptions();
       List<String> robotsfollowOptions = seoService.getRobotsFollowOptions();
@@ -202,11 +257,7 @@ public class UISEOForm extends UIForm{
       addUIFormInput(visibleSitemapCheckbox);
 
       UIFormStringInput uiPrority = new UIFormStringInput(PRIORITY, null);
-      if(priority == null || priority.length() == 0) {
-        WebuiRequestContext rc = WebuiRequestContext.getCurrentInstance();
-        priority = rc.getApplicationResourceBundle().getString("UISEOForm.tip.priority");
-      }
-      uiPrority.setValue(priority);
+      if(!StringUtils.isEmpty(priority)) uiPrority.setValue(priority);
       addUIFormInput(uiPrority.addValidator(FloatNumberValidator.class));
 
       List<SelectItemOption<String>> frequencyItemOptions = new ArrayList<SelectItemOption<String>>();
@@ -223,6 +274,131 @@ public class UISEOForm extends UIForm{
         frequencySelectbox.setValue(FREQUENCY_DEFAULT_VALUE);
       addUIFormInput(frequencySelectbox);
     }
+    
+    
+    setActions(new String[]{"Save", "Cancel"});
+  }
+
+  public void initSEOForm(PageMetadataModel pageModel) throws Exception{
+  	PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
+    if(pageModel != null) {
+    	title = pageModel.getTitle();
+      description = pageModel.getDescription();
+      keywords = pageModel.getKeywords();
+      frequency = pageModel.getFrequency();
+      if(pageModel.getPriority() >= 0)
+        priority = String.valueOf(pageModel.getPriority());
+      else priority = null;
+      if(pageModel.getRobotsContent() != null && pageModel.getRobotsContent().length() > 0) {
+        index = pageModel.getRobotsContent().split(",")[0].trim();
+        follow = pageModel.getRobotsContent().split(",")[1].trim();
+      }
+      sitemap = pageModel.getSitemap();
+    } else { 
+    	if(!onContent)
+    	  title = portalRequestContext.getTitle(); 
+    	else title = "";
+      description = "";
+      keywords = "";
+      priority = "";
+      frequency = "";
+      index = "";
+      follow = "";
+      sitemap = true;      
+    }
+
+    ExoContainer container = ExoContainerContext.getCurrentContainer() ;
+    SEOService seoService = (SEOService)container.getComponentInstanceOfType(SEOService.class);
+    
+    UIFormTextAreaInput uiTitle = this.getUIFormTextAreaInput(TITLE);
+    if(uiTitle != null) uiTitle.setValue(title);    
+
+    UIFormTextAreaInput uiDescription = this.getUIFormTextAreaInput(DESCRIPTION);
+    if(uiDescription != null) uiDescription.setValue(description);   
+
+    UIFormTextAreaInput uiKeywords = this.getUIFormTextAreaInput(KEYWORDS);
+    if(uiKeywords != null) uiKeywords.setValue(keywords);      
+    
+    UIFormSelectBox uiSelectForm = this.getUIFormSelectBox(LANGUAGE_TYPE);
+    uiSelectForm.setSelectedValues(new String[] {"language"});
+    if(uiSelectForm != null) {
+    	seoLocales = seoService.getSEOLanguages(portalRequestContext.getPortalOwner(), contentPath, onContent);
+    	seoLanguages = new ArrayList<String>();
+    	if(seoLocales != null && seoLocales.size() > 0) {
+	    	for (Locale locale : seoLocales) {
+	      	String lang = locale.getLanguage();
+	        String country = locale.getCountry(); 
+	        if(StringUtils.isNotEmpty(country)) lang += "_" + country;
+	        seoLanguages.add(lang);
+	  		}
+    	}
+    	if(seoLanguages.size() <= 0) setSelectedLanguage(null);
+    	List<SelectItemOption<String>> languages = getLanguages();
+    	if(languages.size() == 1) this.setIsAddNew(false);
+    	else this.setIsAddNew(true);
+    	uiSelectForm.setOptions(languages);	    
+	    uiSelectForm.setValue(selectedLanguage);   
+    }    
+    
+    if(!onContent) {     
+      List<SelectItemOption<String>> robotIndexItemOptions = new ArrayList<SelectItemOption<String>>();
+      List<String> robotsindexOptions = seoService.getRobotsIndexOptions();
+      List<String> robotsfollowOptions = seoService.getRobotsFollowOptions();
+      List<String> frequencyOptions = seoService.getFrequencyOptions();
+
+      if(robotsindexOptions != null && robotsindexOptions.size() > 0) {
+        for(int i = 0; i < robotsindexOptions.size(); i++) {
+          robotIndexItemOptions.add(new SelectItemOption<String>((robotsindexOptions.get(i).toString())));
+        }
+      }
+      UIFormSelectBox robots_index = this.getUIFormSelectBox(ROBOTS_INDEX);
+      if(robots_index != null) {
+	      if(index != null && index.length() > 0)
+	        robots_index.setValue(index);
+	      else
+	        robots_index.setValue(ROBOTS_INDEX);
+      }
+
+      List<SelectItemOption<String>> robotFollowItemOptions = new ArrayList<SelectItemOption<String>>();
+      if(robotsfollowOptions != null && robotsfollowOptions.size() > 0) {
+        for(int i = 0; i < robotsfollowOptions.size(); i++) {
+          robotFollowItemOptions.add(new SelectItemOption<String>((robotsfollowOptions.get(i).toString())));
+        }
+      }
+      UIFormSelectBox robots_follow = this.getUIFormSelectBox(ROBOTS_FOLLOW);
+      if(robots_follow != null) {
+	      if(follow != null && follow.length() > 0)
+	        robots_follow.setValue(follow);
+	      else
+	        robots_follow.setValue(ROBOTS_FOLLOW);
+      }      
+
+      UIFormCheckBoxInput<Boolean> visibleSitemapCheckbox = this.getUIFormCheckBoxInput(SITEMAP);
+      if(visibleSitemapCheckbox != null) visibleSitemapCheckbox.setChecked(sitemap);
+      
+
+      UIFormStringInput uiPrority = this.getUIStringInput(PRIORITY);
+      if(uiPrority != null) {      	
+	      if(!StringUtils.isEmpty(priority)) uiPrority.setValue(priority);
+	      else uiPrority.setValue("");
+      }
+      
+
+      List<SelectItemOption<String>> frequencyItemOptions = new ArrayList<SelectItemOption<String>>();
+      if (frequencyOptions != null && frequencyOptions.size() > 0) {
+        for (int i = 0; i < frequencyOptions.size(); i++) {
+          frequencyItemOptions.add(new SelectItemOption<String>(frequencyOptions.get(i).toString(),
+                                                                (frequencyOptions.get(i).toString())));
+        }
+      }
+      UIFormSelectBox frequencySelectbox = this.getUIFormSelectBox(FREQUENCY);
+      if(frequencySelectbox != null) {
+	      if(frequency != null && frequency.length() > 0)
+	        frequencySelectbox.setValue(frequency);
+	      else
+	        frequencySelectbox.setValue(FREQUENCY_DEFAULT_VALUE);     
+      }
+    }    
   }
 
 
@@ -230,36 +406,44 @@ public class UISEOForm extends UIForm{
 
     public void execute(Event<UISEOForm> event) throws Exception {
       UISEOForm uiForm = event.getSource();
-      UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
+      UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;      
       String description = uiForm.getUIFormTextAreaInput(DESCRIPTION).getValue();
       String keywords = uiForm.getUIFormTextAreaInput(KEYWORDS).getValue() ;
       PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
+      String lang = null;
+      if(uiForm.getSelectedLanguage() != null) lang = uiForm.getSelectedLanguage();
+      else {
+	      lang = uiForm.getUIFormSelectBox(LANGUAGE_TYPE).getValue() ;
+	      if(lang == null || lang.equals(LANGUAGE_TYPE)) {
+	        lang = portalRequestContext.getLocale().getLanguage();
+	        if(StringUtils.isNotEmpty(portalRequestContext.getLocale().getCountry()))
+	      	  lang += "_" + portalRequestContext.getLocale().getCountry();
+	      }
+      }
+      uiForm.setSelectedLanguage(lang);
       String portalName = portalRequestContext.getPortalOwner();
       String uri = portalRequestContext.getRequestURI();
       String fullStatus = null;
       String pageReference = Util.getUIPortal().getSelectedUserNode().getPageRef().toString();
 
       if(!uiForm.onContent) {
+      	String title = uiForm.getUIFormTextAreaInput(TITLE).getValue();
         String robots_index = uiForm.getUIFormSelectBox(ROBOTS_INDEX).getValue() ;
         String robots_follow = uiForm.getUIFormSelectBox(ROBOTS_FOLLOW).getValue() ;
         String rebots_content = robots_index + ", " + robots_follow;
         boolean isVisibleSitemap = uiForm.getUIFormCheckBoxInput(SITEMAP).isChecked();
         float priority = -1;
         if(uiForm.getUIStringInput(PRIORITY).getValue() != null && uiForm.getUIStringInput(PRIORITY).getValue().length() > 0) {
-          WebuiRequestContext rc = WebuiRequestContext.getCurrentInstance();
-          if(!uiForm.getUIStringInput(PRIORITY).getValue().equalsIgnoreCase(rc.getApplicationResourceBundle().
-              getString("UISEOForm.tip.priority"))) {
-            priority = Float.parseFloat(uiForm.getUIStringInput(PRIORITY).getValue()) ;
-            if(priority < 0.0 || priority > 1.0) {
-              uiApp.addMessage(new ApplicationMessage("FloatNumberValidator.msg.Invalid-number", null,
-              ApplicationMessage.WARNING));
-              return;
-            }
-          }
+          priority = Float.parseFloat(uiForm.getUIStringInput(PRIORITY).getValue()) ;
+          if(priority < 0.0 || priority > 1.0) {
+            uiApp.addMessage(new ApplicationMessage("FloatNumberValidator.msg.Invalid-number", null, ApplicationMessage.WARNING));
+            return;
+          }        
         }
         String frequency = uiForm.getUIFormSelectBox(FREQUENCY).getValue() ;
         try {
           PageMetadataModel metaModel = new PageMetadataModel();
+          metaModel.setTitle(title);
           metaModel.setDescription(description);
           metaModel.setFrequency(frequency);
           metaModel.setKeywords(keywords);
@@ -271,17 +455,17 @@ public class UISEOForm extends UIForm{
           if(description!= null && keywords != null && priority != -1)
             fullStatus = "Full";
           else fullStatus = "Partial";
-          metaModel.setFullStatus(fullStatus);
-          /*if(uiForm.isInherited) {
-            if(uiForm.getUIFormCheckBoxInput(ISINHERITED).isChecked())
-              metaModel.setPageParent(uiForm.pageParent);
-          }*/
+          metaModel.setFullStatus(fullStatus);          
 
           SEOService seoService = uiForm.getApplicationComponent(SEOService.class);
-          seoService.storePageMetadata(metaModel, portalName, uiForm.onContent);
-          UIPopupContainer uiSEOToolbar = uiForm.getAncestorOfType(UIPopupContainer.class);
-          if(uiSEOToolbar != null)
-            uiSEOToolbar.removeChildById(UISEOToolbarForm.SEO_POPUP_WINDOW);
+          seoService.storeMetadata(metaModel, portalName, uiForm.onContent, uiForm.getSelectedLanguage());
+          uiForm.initSEOForm(metaModel);
+          if(uiForm.getAncestorOfType(UISEOToolbarPortlet.class) != null)
+            event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getAncestorOfType(UISEOToolbarPortlet.class)) ;
+          else {
+          	event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
+          	event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getAncestorOfType(UIPopupContainer.class).getParent());
+          }
         } catch (Exception ex) {
           if (LOG.isErrorEnabled()) {
             LOG.error("Unexpected error ", ex);
@@ -310,10 +494,14 @@ public class UISEOForm extends UIForm{
             if(contentNode != null) break;
           }
           metaModel.setUri(contentNode.getUUID());
-          seoService.storePageMetadata(metaModel, portalName, uiForm.onContent);
-          UIPopupContainer uiSEOToolbar = uiForm.getAncestorOfType(UIPopupContainer.class);
-          if(uiSEOToolbar != null)
-            uiSEOToolbar.removeChildById(UISEOToolbarForm.SEO_POPUP_WINDOW);
+          seoService.storeMetadata(metaModel, portalName, uiForm.onContent, uiForm.getSelectedLanguage());           
+          uiForm.initSEOForm(metaModel);
+          if(uiForm.getAncestorOfType(UISEOToolbarPortlet.class) != null)
+            event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getAncestorOfType(UISEOToolbarPortlet.class)) ;
+          else {
+          	event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
+          	event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getAncestorOfType(UIPopupContainer.class).getParent());
+          }
         } catch (Exception ex) {
           if (LOG.isErrorEnabled()) {
             LOG.error("Unexpected error ", ex);
@@ -323,8 +511,7 @@ public class UISEOForm extends UIForm{
                                                   ApplicationMessage.ERROR));
           return;
         }
-      }
-
+      }      
     }
   }
 
@@ -334,6 +521,150 @@ public class UISEOForm extends UIForm{
       UIPopupContainer uiSEOToolbar = uiSEO.getAncestorOfType(UIPopupContainer.class);
       if(uiSEOToolbar != null)
         uiSEOToolbar.removeChildById(UISEOToolbarForm.SEO_POPUP_WINDOW);
+    }
+  }
+  
+  public static class RefreshActionListener extends EventListener<UISEOForm> {
+		public void execute(Event<UISEOForm> event) throws Exception {
+  		PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
+  		UISEOForm uiForm = event.getSource();
+  		String portalName = portalRequestContext.getPortalOwner();
+  		String lang = uiForm.getUIFormSelectBox(LANGUAGE_TYPE).getValue();
+  		if(lang.equals("language")) return;
+  		uiForm.setSelectedLanguage(lang);
+  		String pageReference = Util.getUIPortal().getSelectedUserNode().getPageRef();
+  		SEOService seoService = uiForm.getApplicationComponent(SEOService.class);
+  		PageMetadataModel seoData = new PageMetadataModel();
+  		PageMetadataModel metaModel = seoService.getMetadata(uiForm.paramsArray, pageReference, uiForm.defaultLanguage);
+  		if(metaModel == null) metaModel = new PageMetadataModel();		
+  		
+			if(uiForm.onContent) {
+				seoData.setUri(uiForm.getContentURI());  				
+			  metaModel.setUri(uiForm.getContentURI());
+			} else {
+				seoData.setPageReference(pageReference);
+				seoData.setTitle(portalRequestContext.getTitle());
+				metaModel.setTitle(portalRequestContext.getTitle());
+			}  			  			
+  		
+  		seoData.setFullStatus("Empty");
+			seoService.storeMetadata(seoData, portalName, uiForm.onContent, lang);
+  		uiForm.initSEOForm(metaModel);
+  		event.getRequestContext().addUIComponentToUpdateByAjax(uiForm) ;
+  	}
+  }  
+  
+  public static class UpdateActionListener extends EventListener<UISEOForm> {
+		public void execute(Event<UISEOForm> event) throws Exception {
+  		UISEOForm uiForm = event.getSource();
+  		String lang = event.getRequestContext().getRequestParameter(OBJECTID) ;
+  		uiForm.setSelectedLanguage(lang);
+  		SEOService seoService = uiForm.getApplicationComponent(SEOService.class);
+  		PageMetadataModel metaModel = new PageMetadataModel();
+  		String pageReference = Util.getUIPortal().getSelectedUserNode().getPageRef();
+  		metaModel = seoService.getMetadata(uiForm.paramsArray, pageReference, lang);  		
+  		if(metaModel == null || (metaModel != null && metaModel.getFullStatus().equals("Empty"))) {	
+	  		metaModel = seoService.getMetadata(uiForm.paramsArray, pageReference, uiForm.defaultLanguage);
+  		}
+  		uiForm.initSEOForm(metaModel);
+  		event.getRequestContext().addUIComponentToUpdateByAjax(uiForm) ;
+  	}
+  }  
+  
+  
+  public static class RemoveActionListener extends EventListener<UISEOForm> {
+  	public void execute(Event<UISEOForm> event) throws Exception {
+  		UISEOForm uiForm = event.getSource();
+  		PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
+  		String lang = event.getRequestContext().getRequestParameter(OBJECTID) ;
+  		SEOService seoService = uiForm.getApplicationComponent(SEOService.class);
+  		PageMetadataModel metaModel = new PageMetadataModel();
+  		String pageReference = Util.getUIPortal().getSelectedUserNode().getPageRef();
+  		metaModel.setPageReference(pageReference);
+  		if(uiForm.onContent) {
+  			Node contentNode = null;
+        for(int i=0;i<uiForm.paramsArray.size(); i++) {
+          String contentPath = uiForm.paramsArray.get(i).toString();
+          contentNode = seoService.getContentNode(contentPath);
+          if(contentNode != null) break;
+        }
+        if(contentNode != null) metaModel.setUri(contentNode.getUUID());
+  		}
+  		String portalName = portalRequestContext.getPortalOwner();
+  		seoService.removePageMetadata(metaModel, portalName, uiForm.onContent, lang);
+  		seoLocales = seoService.getSEOLanguages(portalRequestContext.getPortalOwner(), contentPath, uiForm.onContent);
+  		seoLanguages = new ArrayList<String>();
+  		for (Locale locale : seoLocales) {
+      	String tmp = locale.getLanguage();
+        String country = locale.getCountry(); 
+        if(StringUtils.isNotEmpty(country)) tmp += "_" + country;
+        seoLanguages.add(tmp);
+  		}
+  		String laguageFocus = uiForm.defaultLanguage;
+  		if(seoLanguages.size()> 0 && !seoLanguages.contains(uiForm.defaultLanguage))
+  			laguageFocus = seoLanguages.get(0);
+  		metaModel = seoService.getMetadata(uiForm.paramsArray, pageReference, laguageFocus);
+  		if(metaModel != null) uiForm.setSelectedLanguage(laguageFocus);  		
+  		else uiForm.getUIFormSelectBox(LANGUAGE_TYPE).setValue(uiForm.defaultLanguage);
+  		uiForm.initSEOForm(metaModel);
+  		
+  		if(uiForm.getAncestorOfType(UISEOToolbarPortlet.class) != null)
+  		  event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getAncestorOfType(UISEOToolbarPortlet.class)) ; 
+  		else {
+  			event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
+  			event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getAncestorOfType(UIPopupContainer.class).getParent());
+  		}
+  	}
+  }
+  public List<SelectItemOption<String>> getLanguages() throws Exception {
+  	WebuiRequestContext rc = WebuiRequestContext.getCurrentInstance();
+  	Locale inLocale = WebuiRequestContext.getCurrentInstance().getLocale();
+    // Get default locale
+    Locale defaultLocale = Locale.getDefault();    
+    // set default locale to current user selected language
+    Locale.setDefault(Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale());
+    
+    LocaleConfigService localService = WCMCoreUtils.getService(LocaleConfigService.class) ;
+    List<SelectItemOption<String>> languages = new ArrayList<SelectItemOption<String>>() ;
+    Iterator<LocaleConfig> iter = localService.getLocalConfigs().iterator() ; 
+    ResourceBundle resourceBundle = rc.getApplicationResourceBundle();    
+    while (iter.hasNext()) {
+      LocaleConfig localConfig = iter.next() ;
+      Locale locale = localConfig.getLocale();
+      String lang = locale.getLanguage();
+      String country = locale.getCountry(); 
+      if(StringUtils.isNotEmpty(country)) lang += "_" + country;
+      if(seoLanguages == null || !seoLanguages.contains(lang)) {
+	      try {
+	        languages.add(new SelectItemOption<String>(CapitalFirstLetters(locale.getDisplayName(inLocale)), lang)) ;
+	      } catch(MissingResourceException mre) {
+	        languages.add(new SelectItemOption<String>(lang, lang)) ;
+	      }
+      }
+    } 
+    
+    // Set back to the default locale
+    Locale.setDefault(defaultLocale); 
+    Collections.sort(languages, new ItemOptionComparator());
+    languages.add(0,new SelectItemOption<String>(getLabel(resourceBundle, "select-language"), "language")) ;
+    return languages ;
+  }
+  
+  public String CapitalFirstLetters(String str) {
+  	str = Character.toString(str.charAt(0)).toUpperCase()+str.substring(1);
+  	return str;
+  }
+  
+  class ItemOptionComparator implements Comparator<SelectItemOption<String>> {
+    @Override
+    public int compare(SelectItemOption<String> o1, SelectItemOption<String> o2) {
+			return o1.getLabel().compareTo(o2.getLabel());
+    }
+  }
+  class SEOItemComparator implements Comparator<Locale> {
+    @Override
+    public int compare(Locale locale1, Locale locale2) {
+			return locale1.getDisplayLanguage().compareTo(locale2.getDisplayLanguage());
     }
   }
 }
