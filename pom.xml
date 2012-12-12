@@ -336,6 +336,13 @@
         <groupId>org.exoplatform.jcr</groupId>
         <artifactId>exo.jcr.component.webdav</artifactId>
         <version>${org.exoplatform.jcr.version}</version>
+          <exclusions>
+            <exclusion>
+            <!-- To remove from org.exoplatform.jcr:exo.jcr.component.webdav:jar (Issue to open) -->
+            <artifactId>servlet-api</artifactId>
+            <groupId>javax.servlet</groupId>
+          </exclusion>
+        </exclusions>
       </dependency>
       <!-- To be replaced by an import of jcr kernel POM -->
       <dependency>
