@@ -125,6 +125,13 @@
     <dependency>
       <groupId>org.quartz-scheduler</groupId>
       <artifactId>quartz</artifactId>
+      <exclusions>
+        <exclusion>
+          <!-- commons-logging is forbidden and must be replaced by org.slf4j:jcl-over-slf4j -->
+          <artifactId>commons-logging</artifactId>
+          <groupId>commons-logging</groupId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
