@@ -94,15 +94,17 @@ UIForm.prototype.submitForm = function(formId, action, useAjax, callback) {
   }
  } catch(e) {}
   form.elements['formOp'].value = action ;
+
+  if (action.toLowerCase() == "save" && navigator.appName == 'Microsoft Internet Explorer')
+  {
+	useAjax=false;
+  }
+
   if(useAjax) {
     b_changed = false;
     this.ajaxPost(form, callback) ;
   } else {
     form.submit();
-  }
-  if (action.toLowerCase() == "save" && navigator.appName == 'Microsoft Internet Explorer')
-  {
-	window.location.reload();
   }
 } ;
 eXo.webui.UIForm = new UIForm();
