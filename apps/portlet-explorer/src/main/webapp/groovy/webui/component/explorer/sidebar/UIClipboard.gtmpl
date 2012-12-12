@@ -14,19 +14,9 @@
   String[] beanActions =  uicomponent.getBeanActions() ;
   String name = uicomponent.getName() ;
   def rcontext = _ctx.getRequestContext();
-%>
-<div class="SideBarContent">
-  <div class="BarContent">
-  	<div class="BarContentL">
-  		<div class="BarContentR">
-  			<div class="BarContentM ClearFix">
-			    <div class="Title">Clipboard</div>
-			  	
-			  </div>
-			</div>
-		</div>
-	</div>
-  <div class="SideContent">
+%> 
+	<h5 class="title">Clipboard</h5>
+  <div class="uiContentBox">
 		<div class="UIClipboard" id="$uicomponent.id">
 			<table class="uiGrid table table-hover table-striped">
 			  <thead>
@@ -90,4 +80,4 @@
 			</table> <!--End UIGrid-->  
 		</div>
   </div>
-</div>
+

@@ -205,20 +205,14 @@
 		 request="<%=uiWorkingArea.getJCRMoveAction().event(UIWorkingArea.MOVE_NODE)%>" 
 		 symlink="<%=uiWorkingArea.getCreateLinkAction().event(UIWorkingArea.CREATE_LINK)%>">
 </div>
-<div class="SideBarContent">
-  <div class="BarContent">
-  	<div class="BarContentL">
-  		<div class="BarContentR">
-  			<div class="BarContentM ClearFix">
-			    <div class="Title" style="cursor: pointer;" rel="tooltip" data-placement="bottom" title="$label" onclick="<%=uicomponent.event("Expand",treeNodeRoot.getPath())%>" $contextMenuEvent>
-			      ${label}
-			    </div>			  	
+
+ 
+	<h5 class="title" style="cursor: pointer;" rel="tooltip" data-placement="bottom" title="$label" onclick="<%=uicomponent.event("Expand",treeNodeRoot.getPath())%>" $contextMenuEvent>
+		${label}
+	</h5>			  	
 			  	
-			  </div>
-			</div>
-		</div>
-  </div>
-  <div class="SideContent">
+
+  <div class="uiContentBox">
 	  <div class="UITreeExplorer" id="UITreeExplorer">
 		  <div style="white-space: nowrap; -moz-user-select: none;">
 		    <div class="NodeGroup">
@@ -236,4 +230,4 @@
 		  </div>   	    
 		</div>
   </div>
-</div>
+

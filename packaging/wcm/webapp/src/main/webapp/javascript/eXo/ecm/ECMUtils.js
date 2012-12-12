@@ -126,7 +126,7 @@ function ECMUtils() {
     var event = event || window.event;
     event.cancelBubble = true;
     popupSelector = gj(clickedElement).parents(".UIPopupSelector:first")[0];
-    showBlock = gj(popupSelector).find("div.UISelectContent:first")[0];
+    showBlock = gj(popupSelector).find("div.uiSelectContent:first")[0];
     if (option == 1) {
       showBlock.style.width = (popupSelector.offsetWidth - 2) + "px";
     }
@@ -652,8 +652,7 @@ function ECMUtils() {
     if (Self.uiResizeSideBar) gj(Self.uiResizeSideBar).addClass("resizeBarDisplay");
     eXo.ecm.ECMUtils.resizableBlockWidth = resizableBlock.offsetWidth;
     eXo.ecm.ECMUtils.currentWidth = Self.uiLeftContainer.offsetWidth;
-    var sideBarContent = gj(Self.uiLeftContainer).find("div.SideBarContent:first")[0];
-    var title = gj(sideBarContent).find("div.Title:first")[0];
+    var title = gj(Self.uiLeftContainer).find("h5.title:first")[0];
     eXo.ecm.ECMUtils.currentTitleWidth = title.offsetWidth;
     if (Self.UIBrokenCheckingHandler) {
       clearInterval(Self.UIBrokenCheckingHandler);
@@ -696,7 +695,7 @@ function ECMUtils() {
     var container = document.getElementById("LeftContainer");
     var rightContainer = gj(Self.uiWorkingArea).find("div.rightContainer:first")[0];
     var resizableBlock = gj(container).find("div.UIResizableBlock:first")[0];
-    var selectContent = gj(resizableBlock).find("div.UISelectContent:first")[0];
+    var selectContent = gj(resizableBlock).find("div.uiSelectContent:first")[0];
 
     var selectedItem = gj(selectContent).find("div.SelectedItem:first")[0];
     var lstNormalItem = gj(selectContent).find("div.NormalItem");
@@ -782,7 +781,7 @@ function ECMUtils() {
 
     var container = document.getElementById("LeftContainer");
     var resizableBlock = gj(container).find("div.UIResizableBlock:first")[0];
-    var selectContent = gj(resizableBlock).find("div.UISelectContent:first")[0];
+    var selectContent = gj(resizableBlock).find("div.uiSelectContent:first")[0];
     var moreButton = gj(selectContent).find("div.MoreItem:first")[0];
 
     var normalItem = document.createElement('div');
@@ -1203,7 +1202,7 @@ function ECMUtils() {
 
     var resizableBlock = gj(leftContainer).find("div.UIResizableBlock:first")[0];
     var sideBarContent = gj(resizableBlock).find("div.SideBarContent:first")[0];
-    var selectContent = gj(resizableBlock).find("div.UISelectContent:first")[0];
+    var selectContent = gj(resizableBlock).find("div.uiSelectContent:first")[0];
     var resizeTreeExplorer = gj(resizableBlock).find("div.ResizeTreeExplorer:first")[0];
     var barContent = gj(sideBarContent).find("div.BarContent:first")[0];
 
@@ -1244,7 +1243,7 @@ function ECMUtils() {
 
     var resizableBlock = gj(workingArea).find("div.UIResizableBlock:first")[0];
     var sideBarContent = gj(resizableBlock).find("div.SideBarContent:first")[0];
-    var selectContent = gj(resizableBlock).find("div.UISelectContent:first")[0];
+    var selectContent = gj(resizableBlock).find("div.uiSelectContent:first")[0];
     var resizeTreeExplorer = gj(resizableBlock).find("div.ResizeTreeExplorer:first")[0];
 
     var itemArea = document.getElementById("SelectItemArea");
@@ -1435,7 +1434,7 @@ function ECMUtils() {
 
     var resizableBlock = gj(leftContainer).find("div.UIResizableBlock:first")[0];
     var sideBarContent = gj(resizableBlock).find("div.SideBarContent:first")[0];
-    var selectContent = gj(resizableBlock).find("div.UISelectContent:first")[0];
+    var selectContent = gj(resizableBlock).find("div.uiSelectContent:first")[0];
     var resizeTreeExplorer = gj(resizableBlock).find("div.ResizeTreeExplorer:first")[0];
     var resizeTreeButton = gj(resizeTreeExplorer).find("div.ResizeTreeButton:first")[0];
     var barContent = gj(sideBarContent).find("div.BarContent:first")[0];
@@ -1510,7 +1509,7 @@ function ECMUtils() {
 
     var resizableBlock = gj(workingArea).find("div.UIResizableBlock:first")[0];
     var sideBarContent = gj(resizableBlock).find("div.SideBarContent:first")[0];
-    var selectContent = gj(resizableBlock).find("div.UISelectContent:first")[0];
+    var selectContent = gj(resizableBlock).find("div.uiSelectContent:first")[0];
     var resizeTreeExplorer = gj(resizableBlock).find("div.ResizeTreeExplorer:first")[0];
     var resizeTreeButton = gj(resizeTreeExplorer).find("div.ResizeTreeButton:first")[0];
 

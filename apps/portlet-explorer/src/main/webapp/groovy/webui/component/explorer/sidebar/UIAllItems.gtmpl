@@ -12,58 +12,38 @@
 	String trash = uicomponent.getTRASH();
 	
 %>
-<div id="$uicomponent.id">
-	<div class="SideBarContent">
-		<div class="BarContent">
-	  	<div class="BarContentL">
-	  		<div class="BarContentR">
-	  			<div class="BarContentM ClearFix">
-						<div class="Title"><%=_ctx.appRes("UIAllItems.title.allItems")%></div>
-						<div class="SideGeneratal" onclick="<%=uicomponent.event("Preferences")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAllItems.label.Configuration")%>">
-							<span></span>
-						</div>
-						
-				  </div>
-				</div>
-			</div>
-		</div>
-		<div class="SideContent">
-			<div class="ItemContent">
-				<% if (pref.isShowOwnedByUserDoc()) { 
-						String classValue = (allItemFilterMap.contains(ownedByMe) ?
-								"TrueSelectIcon" : "ArrowSidContent") + " TextSiderContent";
-					%>
-						<div class="$classValue">
-							<a href="<%=uicomponent.event("ClickFilter", ownedByMe)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.ShowAllOwnedByUser")%>" class="ShowAllOwnedByUserBtn">
-								<span><%=_ctx.appRes("UIAllItems.label.OwnedByMe")%></span>
-							</a>
-						</div>
-				<% } %>
-				
-			  <% if (pref.isShowFavouriteDoc()) { 
-						String classValue = (allItemFilterMap.contains(favorite) ?
-								"TrueSelectIcon" : "ArrowSidContent") + " TextSiderContent";
-			  	%>
-						<div class="$classValue">
-							<a href="<%=uicomponent.event("ClickFilter", favorite)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.ShowAllFavourite")%>" class="ShowAllFavouriteBtn">
-								<span><%=_ctx.appRes("UIAllItems.label.Favourites")%></span>
-							</a>
-						</div>
-						<% } %>
-						
-				<% if (pref.isShowHiddenDoc()) {
-					String classValue = (allItemFilterMap.contains(hidden) ?
-							"TrueSelectIcon" : "ArrowSidContent") + " TextSiderContent";
-					%>
-						<div class="$classValue">
-							<a href="<%=uicomponent.event("ClickFilter", hidden)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.ShowAllHidden")%>" class="ShowAllHiddenBtn">
-								<span><%=_ctx.appRes("UIAllItems.label.Hidden")%></span>
-							</a>
-						</div>
-				<% } %>
-						
+<div class="uiBox" id="$uicomponent.id">
+	<h5 class="title clearfix">
+		<a class="sideGeneratal" onclick="<%=uicomponent.event("Preferences")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAllItems.label.Configuration")%>"><i class="uiIconSetting"></i></a>
+		<%=_ctx.appRes("UIAllItems.title.allItems")%> 
+	</h5>
 
-			</div>
-		</div>
+	<div class="uiContentBox">
+		<% if (pref.isShowOwnedByUserDoc()) { 
+				String classValue = (allItemFilterMap.contains(ownedByMe) ?
+						"trueSelectIcon" : "arrowSidContent") + " textSiderContent";
+			%>
+		<a class="$classValue" href="<%=uicomponent.event("ClickFilter", ownedByMe)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.ShowAllOwnedByUser")%>">
+			<%=_ctx.appRes("UIAllItems.label.OwnedByMe")%>
+		</a>
+		<% } %>
+		
+		<% if (pref.isShowFavouriteDoc()) { 
+				String classValue = (allItemFilterMap.contains(favorite) ?
+						"trueSelectIcon" : "arrowSidContent") + " textSiderContent";
+			%>
+		<a class="$classValue" href="<%=uicomponent.event("ClickFilter", favorite)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.ShowAllFavourite")%>">
+			<%=_ctx.appRes("UIAllItems.label.Favourites")%>
+		</a>
+		<% } %>
+				
+		<% if (pref.isShowHiddenDoc()) {
+			String classValue = (allItemFilterMap.contains(hidden) ?
+					"trueSelectIcon" : "arrowSidContent") + " textSiderContent";
+			%>
+		<a class="$classValue" href="<%=uicomponent.event("ClickFilter", hidden)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.ShowAllHidden")%>">
+			<%=_ctx.appRes("UIAllItems.label.Hidden")%>
+		</a>
+		<% } %>					
 	</div>
 </div>
