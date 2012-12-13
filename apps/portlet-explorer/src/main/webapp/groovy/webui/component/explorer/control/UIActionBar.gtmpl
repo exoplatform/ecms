@@ -34,7 +34,7 @@
 	  }
 	}
 	if(tabAvailableList.size() < 2) {
-    actionBarStyle = "UIActionBarAlone";
+    actionBarStyle = "uiActionBarAlone";
     displayTabContainer = "style =\"display: none;\"";
   }
   
@@ -102,7 +102,7 @@
                  } //if condition
                } //for loop
              %>
-                     <li class="dropdown pull-right listHiddenActionsContainer">
+                     <li class="dropdown pull-right listHiddenActionsContainer" style="display: none;">
                        <a data-toggle="dropdown" class="dropdown-toggle" href="#"><%=_ctx.appRes("UIViewBar.label.more")%> <b class="caret"></b></a>
                        <ul class="dropdown-menu" id="ListHideContainer">
                          <li><a href="#">Item demo1</a></li>

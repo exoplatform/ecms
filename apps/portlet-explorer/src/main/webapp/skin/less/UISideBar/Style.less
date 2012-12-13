@@ -43,140 +43,128 @@
 	}
 	
 	.uiSelectContent {
-		background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/background/SelectContentBG.gif') repeat-x; 
+		background: @grayWhiteSmoke;
+		border-top: 1px solid #c1c1c1;
 		height: 30px;
 		.border-bottom-radius(3px);
 		
-		.NormalItem {
+		.normalItem {
 			line-height: 26px;
 			cursor: pointer;
-			padding: 7px 11px;
+			padding: 8px;
 			float: left;
 			width: 14px;
+			margin-top: -1px;
 		}
+
+		.selectedItem {
+			line-height: 26px;
+			cursor: pointer;
+			padding: 8px;
+			background: @white;
+			float: left;
+			border-left: 1px solid #c1c1c1;
+			border-right: 1px solid #c1c1c1;
+			margin: 0 2px;
+			width: 14px;
+			margin-top: -1px;
+		}
+
 
 		.MoreItem {
 			line-height: 26px;
 			cursor: pointer;
-			padding: 7px 11px;
+			padding: 8px;
 			float: left;
 			width: 14px;
-		}
-
-		.SelectedItem {
-			line-height: 26px;
-			cursor: pointer;
-			padding: 7px 11px;
-			background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/background/SelectedItem.gif') repeat-x top;
-			float: left;
-			border-left: 1px solid #E1E1E1;
-			border-right: 1px solid #E1E1E1;
-			margin: 0 2px;
-			width: 14px;
-		}
-
-		.ItemIcon {
-			margin: auto;
+			margin-top: -1px;
 		}
 		
-		.DefaultIcon {
+		.itemIcon {
+			margin: auto;
+			.size(15px, 16px);
+		}
+		
+		.defaultIcon {
 			background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/Generatal.png') no-repeat center;
-			width: 14px; height: 15px;
 		}
 
 		.ExplorerIcon {
 			background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/FileExplorer.png') no-repeat center;
-			width: 14px; height: 15px;
 		}
 
 		.RelationIcon {
 			background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/Relations.gif') no-repeat center;
-			width: 14px; height: 14px;
 		}
 
 		.ClipboardIcon {
 			background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/Clipboard.png') no-repeat center;
-			width: 16px; height: 16px;
 		}
 
 		.TagExplorerIcon {
 			background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/Tags.png') no-repeat center;
-			width: 15px; height: 15px;
 		}
 
 		.SavedSearchesIcon {
 			background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/SearchIcon.png') no-repeat center;
-			width: 17px; height: 17px;
 		}
 
-		.ActionItem {
+		.actionItem {
 			background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/ActionItem.gif') no-repeat center;
-			width: 17px; height: 17px;
 		}
 	}
 	
-	.SelectItem {
+	.selectItem {
     overflow: auto;
 	}
 }
+
 .uiSideBar  {
 	
-	.ResizeTreeExplorer{
+	.resizeTreeExplorer {
 		height: 18px;
 		/*cursor: row-resize;*/
-	}
 
-	.ResizeTreeButton{
-		background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/ResizeTreeButton.gif') no-repeat center;
-		height: 18px;
-		width: 12px;
-		margin: auto;
-		cursor : pointer;
-	}
+		.resizeTreeButton {
+			background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/ResizeTreeButton.gif') no-repeat center;
+			height: 18px;
+			width: 12px;
+			margin: auto;
+			cursor : pointer;
+		}
 
-	.ShowContentButton{
-		background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/ShowContentButton.gif') no-repeat center;
-		height: 7px;
-		width: 10px;	
-		margin: auto;		
+		.ShowContentButton {
+			background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/ShowContentButton.gif') no-repeat center;
+		}
 	}
 	
-	.BarContent { 
-		.Title {
-			float: left;
-			line-height: 24px;
-			color: #5d5d5d;
-			padding-left: 4px;
-			overflow: hidden;
-			white-space: nowrap;
-			font-size: 14px;
-		}
-
-		.DriversButton{
-			background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/DriversButton.png') no-repeat left center;
-			cursor: pointer;
-			float: right;
-			height:20px;
-			margin-top:2px;
-			width:33px;
-		}
-
-		.SideGeneratal{
-			cursor: pointer;
-			float: right;
-			height:17px;
-			margin-top:4px;
-			width:17px;
-		}
-
-		.TagExplorer {
-			background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/Tags.png') no-repeat center;
-			width: 15px; height: 15px;
-			cursor: pointer;
-			float: right;
-			margin-top:4px;
-		}
+	.DriversButton {
+		background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/DriversButton.png') no-repeat left center;
+		cursor: pointer;
+		float: right;
+		height:20px;
+		margin-top:2px;
+		width:33px;
 	}
+
+	.SideGeneratal {
+		cursor: pointer;
+		float: right;
+		height:17px;
+		margin-top:4px;
+		width:17px;
+	}
+
+	.tagExplorer {
+		background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/Tags.png') no-repeat center;
+		.size(15px, 15px);
+		cursor: pointer;
+		margin-top:4px;
+	}
+}
+
+
+.uiSideBar  {
 
 	.ListExtendedItem{
 			background: none repeat scroll 0 0 #F7F7F7;
@@ -189,14 +177,6 @@
 			display: block;
 			margin: 4px 0;
 			padding: 2px 6px;
-	}
-
-	.uiSideBarContainer {
-		width: 100%;
-			
-		/*
-		* minh.js.exo
-		*/
 	}
 
 	.SideGeneratal {
@@ -216,12 +196,8 @@
 		float: right;
 		margin-top:4px;
 	}
-	
-	.UIViewRelationList .FrameContent {
-		padding: 5px 3px 5px 15px;
-	}
 
-	.UIViewRelationList .TitleLabel {
+	.uiViewRelationList .TitleLabel {
 		padding: 5px 0px 5px 8px;
 		font: normal bold 11px Verdana;
 	}
@@ -259,7 +235,10 @@
 
 /*############################## -- UITagExplorer   -- ##############################*/
 
-.uiSideBar .UITagExplorer .TagmapHolder {
+.uiSideBar .UITagExplorer {
+	padding: 5px;
+	text-align: left;
+	line-height: 22px;
 	
 	.TagmapTitle {
 		height: 19px; line-height: 19px;
@@ -275,18 +254,12 @@
 		font-weight: bold;
 	}
 	
-	.TagmapContent {
-		 padding: 5px;
-		 text-align: left;
-		 line-height: 22px;
-	}
-	
-	.TagmapContent a{
+	a{
 		 color: red;
 		 padding: 3px 7px 3px 0px;
 	}
 	
-	.TagmapContent a:hover {
+	a:hover {
 		 color: yellow;
 		 padding: 3px 7px 3px 0px;
 	}

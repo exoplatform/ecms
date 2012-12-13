@@ -2,191 +2,156 @@
 .uiAddressBar {
   padding: 8px;
   margin-bottom: 15px;
-}
-
-.uiAddressBar .TblAddressBar{
-	table-layout: fixed;
-	width: 100%;
-	_width: auto;
-}
-
-.uiAddressBar .right {
-	width: 180px;
 	
-	.Advance {
-		width: 165px;
-		margin-left: 8px;
-		position: relative;
+	.tblAddressBar {
+		table-layout: fixed;
+		width: 100%;
+		_width: auto;
+	}
+	
+	.right {
+		width: 180px;
 		
-		input {
-			width: 150px;
+		.advance {
+			width: 170px;
+			position: relative;
+			
+			input {
+				width: 154px;
+				margin: 0px;
+			}
+		}
+
+		.advance .searchBtn {
+			background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/SearchBtn.jpg) no-repeat center;
+			.size(18px, 16px);
+			position: absolute;
+			right: 5px;
+			top: 5px;
+		}
+	}
+	
+	.uiAddressBarAction {
+
+		.dropDownButtonBox {
+			width: 18px;  
+			height: 18px;
+			position: absolute;
+			right: 12px;
+			top: 5px;
+		}
+		
+		.dropDownButton {
+			cursor: pointer;
+			margin: auto;
+			margin-top: 6px;
+		}
+
+		.inputContainer {
+			margin: 0 4px 0 0;
+		}
+
+		.inputContainer input {
+			width: 98%;
 			margin: 0px;
 		}
 	}
-
-	.Advance .SearchBtn {
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/SearchBtn.jpg) no-repeat center;
-		width: 18px;
-		height: 16px;
-		position: absolute;
-		right: 5px;
-		top: 5px;
-	}
-}
-
-.uiAddressBar .uiAddressBarAction {
-
-	.DropDownButtonBox {
-		width: 18px;  
-		height: 18px;
-		position: absolute;
-		right: 10px;
-		top: 5px;
+	
+	.block {
+		margin: 4px;
+		
+		.iconFileExplorer {
+			width: 28px;
+		}
 	}
 	
-	.DropDownButton {
-		cursor: pointer;
-		margin: auto;
-		margin-top: 6px;
-	}
-
-	.InputContainer {
-		margin: 0 4px 0 0;
-	}
-
-	.InputContainer input {
-		width: 98%;
-		margin: 0px;
+	.uiSelectContent {
+		border: solid 1px #c1c1c1;
+		border-top: none;
+		position: absolute;
+		height: 150px;
+		width: 100%;
+		overflow: auto;
+		background: white;
+		left: -1px;
+		display: none;
+		
+		.addressItem {
+			line-height: 18px;
+			margin: 2px;
+			cursor: pointer;
+			padding: 0px 5px;
+		}
+		
+		.selectedAddressItem {
+			line-height: 18px;
+			margin: 2px;
+			cursor: pointer;
+			color: white;
+			background-color: #316ac5;
+			padding: 0px 5px;
+		}
 	}
 }
 
-.uiAddressBar .BlockMiddle,
-.uiAddressBar .BlockMiddle1,
-.uiAddressBar .BlockMiddle2,
-.uiAddressBar .BlockMiddle3,
-.uiAddressBar .BlockMiddle4 {
+.uiAddressBar .blockMiddle,
+.uiAddressBar .blockMiddle1,
+.uiAddressBar .blockMiddle2,
+.uiAddressBar .blockMiddle3,
+.uiAddressBar .blockMiddle4 {
 	position: relative;
-}
-
-/*---------------------*/
-
-.uiAddressBar .AddressBarSeparator {
-  float: left;
-  height: 26px;
-  padding: 2px 4px 0px 4px;
-}
-
-.uiAddressBar .BlockLeft {
-  float: left;
-}
-
-.uiAddressBar .AddressLabel {
-  float: left;
-  line-height: 28px;
-  padding-left: 2px;
-}
-
-.uiAddressBar .BlockRight {
-  float: right;
-}
-
-.uiAddressBar .BackButton {
-  float: left;
-  margin: 3px 3px 0px 3px;
-  cursor: pointer;
-}
-
-.uiAddressBar .GoButton {
-  float: left;
-  margin: 8px 3px 0px 3px;
-  cursor: pointer;
-}
-
-.uiAddressBar .GoText {
-  float: left;
-  height: 16px;
-}
-
-.uiAddressBar .UISelectContent {
-  border: solid 1px #716f64;
-  border-top: none;
-  position: absolute;
-  height: 150px;
-  width: 100%;
-  overflow: auto;
-  background: white;
-  left: -1px;
-  display: none;
-}
-
-.UITaggingForm .UIFormTextAreaInput {
-  border: solid 1px #716f64;
-  border-top: none;
-  position: absolute;
-  height: 50px;
-  width: 50%;
-  overflow: auto;
-  background: white;
-  left: -1px;
-  display: none;
-}
-
-.uiAddressBar .UISelectContent .AddressItem {
-  line-height: 18px;
-  margin: 2px;
-  cursor: pointer;
-}
-
-.uiAddressBar .UISelectContent .SelectedAddressItem {
-  line-height: 18px;
-  margin: 2px;
-  cursor: pointer;
-  color: white;
-  background-color: #316ac5;
-}
-
-
-/*********** Icon ***********/
-
-/*New Search Bar*/
-
-
-.uiAddressBar .Block .IconFileExplorer{
-	width: 28px;
-}
-
-.uiAddressBar .Block {
-	margin: 4px;
-}
-
-.uiAddressBar .Center {
-	height: 22px;
-	margin-left: 116px;
-	margin-right: 236px;
-	line-height:22px;
-}
-
-.uiAddressBar .View {
-	height: 22px;
-}
-
-.uiAddressBar .ViewIcon {
-	height: 25px;
-	width: 28px;
-	margin: 0px 1px 0px 0px;
 }
 
 .uiAddressBar {
 
- .MoreViewIcon {
+	.viewIcon {
+		height: 25px;
+		width: 28px;
+		margin: 0px 1px 0px 0px;
+	}
+
+	.backBtn {
+		background: url('/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/BackBtn.png') no-repeat center center;
+		height: 24px;
+		width: 28px;
+		display: block;
+	}
+	
+	.refreshSessionButton  {
+		width: 24px;
+		height: 24px;
+		background: url('/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/RefreshSessionButton.png') no-repeat center;
+	}
+
+	.backAndRefreshBlock {
+		margin-left: 3px;
+		width: 55px;
+	}
+}
+
+/*---------------------*/
+
+
+
+/*********** Icon ***********/
+
+.uiAddressBar {
+	.detailMoreViewIcon {
+		width: 17px;
+	}
+	
+ .moreViewIcon {
 		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/MoreViewIcon.gif) no-repeat center;
 		width: 13px;
 		height: 24px;
 		margin-left: 4px;
 	}
 
-	.DetailMoreViewIcon {
-		width: 17px;
+	.listExtendedView {
+		position: absolute;
+		background: #f7f7f7;
+		border: 1px solid #b7b7b7;
+		padding: 5px;
 	}
 
 	.MoreViewIconSelected {
@@ -196,19 +161,11 @@
 	}
 
 	.ExtendedView {
-		float: left; /* orientation=lt */
-		float: right; /* orientation=rt */
+		float: left;
 		position: relative;
 	}
 
-	.ListExtendedView {
-		position: absolute;
-		background: #f7f7f7;
-		border: 1px solid #b7b7b7;
-		padding: 5px;
-	}
-
-	.DefaultView {
+	.defaultView {
 		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/DefaultView.png) no-repeat center;
 		display: block;
 	}
@@ -219,12 +176,7 @@
 		color: #515151;
 	}
 
-	.Block .BackAndRefreshBlock {
-		margin-left: 3px; /* orientation=lt */
-		margin-right: 3px; /* orientation=rt */
-	}
-
-	.DefaultViewSelected {
+	.defaultViewSelected {
 		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/DefaultViewSelected.gif) no-repeat center;
 		display: block;
 	}
@@ -358,25 +310,9 @@
 		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/TimeLineSelected.png) no-repeat center;
 		display: block;
 	}
-
-	.BackBtn {
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/BackBtn.png) no-repeat center center;
-		height: 24px;
-		width: 28px;
-		display: block;
-	}
 }
-.uiAddressBar .Center .SearchTxtField {
-	height: 20px;
-	border: 1px solid #ccc;
-	background: #fff;
-	width: 100%;
-}
-
-
 
 /*********icon2**********/
-
 
 .uiAddressBar {
 	.a_timeline-view {

@@ -3,15 +3,13 @@
 %>
 
 	<h5 class="title clearfix">
-		<div class="TagExplorer pull-right" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITagExplorer.title.EditPrivateTags")%>"
+		<div class="tagExplorer pull-right" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITagExplorer.title.EditPrivateTags")%>"
 			 onclick="<%=uicomponent.event("EditTags", "Private")%>"><span></span></div>
 		<%=_ctx.appRes("UITagExplorer.title.PrivateTags")%>
 	</h5>
 
   <div class="uiContentBox">
-		<div class="$uicomponent.id"> 
-		  <div class="TagmapHolder">
-		    <div class ="TagmapContent"> 
+		<div class="$uicomponent.id">
 		      <%
 				    def tagStyle = uicomponent.getTagStyle() ;  
 		        for(tag in uicomponent.getPrivateTagLink()){
@@ -25,21 +23,17 @@
 		          println "<a href=\"$tagLink\" $style>$tag.name</a>" ;
 		        }
 		      %>
-		    </div>  
-		  </div>  
 		</div>
   </div>
 
 	<h5 class="title clearfix">
-		<div class="TagExplorer pull-right" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITagExplorer.title.EditPublicTags")%>"
+		<div class="tagExplorer pull-right" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITagExplorer.title.EditPublicTags")%>"
 			 onclick="<%=uicomponent.event("EditTags", "Public")%>" ><span></span></div>
 		<%=_ctx.appRes("UITagExplorer.title.PublicTags")%>
 	</h5>
 
 	<div class="uiContentBox">
 		<div class="$uicomponent.id"> 
-			<div class="TagmapHolder">
-				<div class ="TagmapContent"> 
 					<%
 	//			    def tagStyle = uicomponent.getTagStyle() ;  
 						for(tag in uicomponent.getPublicTagLink()){
@@ -53,8 +47,6 @@
 							println "<a href=\"$tagLink\" $style>$tag.name</a>" ;
 						}
 					%>
-				</div>  
-			</div>  
 		</div>
 	</div>
 

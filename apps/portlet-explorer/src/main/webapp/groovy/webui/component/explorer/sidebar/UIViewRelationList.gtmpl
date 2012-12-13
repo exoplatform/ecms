@@ -7,8 +7,8 @@
 	<h5 class="title"><%=_ctx.appRes("UIViewRelationList.label.languages-list")%></h5>
 
   <div class="uiContentBox">
-    <div class="UIViewRelationList">
-      <div class="FrameContent">
+    <div class="uiViewRelationList">
+      <div class="frameContent">
       <%def languages = uicomponent.getLanguages()
         if(languages.isEmpty()) { %>                        
           <%=_ctx.appRes("UIViewRelationList.label.no-related-document")%>
@@ -40,8 +40,8 @@
   
 	<h5 class="title"><%=_ctx.appRes("UIViewRelationList.label.relation-list")%></h5>
   <div class="uiContentBox">
-		<div class="UIViewRelationList">
-			<div class="FrameContent">
+		<div class="uiViewRelationList">
+			<div class="frameContent">
 			<%def relations = uicomponent.getRelations()
 				if(relations.isEmpty()) { %>  			    			    	
 				  <%=_ctx.appRes("UIViewRelationList.label.no-related-document")%>
@@ -72,8 +72,8 @@
   <h5 class="title"><%=_ctx.appRes("UIViewRelationList.label.references-list")%></h5>
 			  	
   <div class="uiContentBox">
-		<div class="UIViewRelationList">
-			<div class="FrameContent">
+		<div class="uiViewRelationList">
+			<div class="frameContent">
 			<%def references = uicomponent.getReferences()
 				if(references.isEmpty()) { %>  			    			    	
 				  <%=_ctx.appRes("UIViewRelationList.label.no-related-document")%>

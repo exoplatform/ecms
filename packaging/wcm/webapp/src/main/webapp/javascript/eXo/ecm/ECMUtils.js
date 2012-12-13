@@ -37,7 +37,7 @@ function ECMUtils() {
       var uiJCRExplorers = gj(uiPageDeskTop).find('div.UIJCRExplorer');
       if (uiJCRExplorers.length) {
         for (var i = 0; i < uiJCRExplorers.length; i++) {
-          var uiResizeBlock = gj(uiJCRExplorers[i]).parents(".UIResizableBlock:first")[0];
+          var uiResizeBlock = gj(uiJCRExplorers[i]).parents(".uiResizableBlock:first")[0];
           if (uiResizeBlock) uiResizeBlock.style.overflow = "hidden";
         }
       }
@@ -96,7 +96,7 @@ function ECMUtils() {
     var uiSideBarControl = gj(uiSideBar).find('div.UISideBarControl:first')[0];
     if (!uiSideBarControl) return;
     var deltaH = refElement.offsetHeight - uiControl.offsetHeight - uiSideBarControl.offsetHeight;
-    var resizeObj = gj(portlet).find('div.UIResizableBlock');
+    var resizeObj = gj(portlet).find('div.uiResizableBlock');
     if (resizeObj.length) {
       for (var i = 0; i < resizeObj.length; i++) {
         resizeObj[i].style.display = 'block';
@@ -110,7 +110,7 @@ function ECMUtils() {
     if (!Self.uiWorkingArea) return;
     var delta = document.body.scrollHeight - gj(window).height();
     if (delta < 0) {
-      var resizeObj = gj(portlet).find('div.UIResizableBlock');
+      var resizeObj = gj(portlet).find('div.uiResizableBlock');
       if (resizeObj.length) {
         for (var i = 0; i < resizeObj.length; i++) {
           resizeObj[i].style.height = resizeObj[i].offsetHeight - delta + "px";
@@ -125,10 +125,12 @@ function ECMUtils() {
   ECMUtils.prototype.clickLeftMouse = function (event, clickedElement, position, option) {
     var event = event || window.event;
     event.cancelBubble = true;
-    popupSelector = gj(clickedElement).parents(".UIPopupSelector:first")[0];
-    showBlock = gj(popupSelector).find("div.uiSelectContent:first")[0];
+    var popupSelector = gj(clickedElement).parents(".uiPopupSelector:first")[0];
+    var showBlock = gj(popupSelector).find("div.uiSelectContent")[0];
+	var inputAddress = gj(popupSelector).find("input#address")[0];
     if (option == 1) {
-      showBlock.style.width = (popupSelector.offsetWidth - 2) + "px";
+	  gj(showBlock).css("width", inputAddress.offsetWidth + "px");
+      //showBlock.style.width = (popupSelector.offsetWidth - 2) + "px";
     }
     if (showBlock.style.display == "block") {
       eXo.webui.UIPopup.hide(showBlock);
@@ -646,7 +648,7 @@ function ECMUtils() {
     var event = event || window.event;
     if (Self.initWithoutLeftContainer()) return;
     Self.loadContainerReference();
-    var resizableBlock = gj(Self.uiLeftContainer).find("div.UIResizableBlock:first")[0];
+    var resizableBlock = gj(Self.uiLeftContainer).find("div.uiResizableBlock:first")[0];
     if (Self.uiLeftContainer.style.display=="none") return;
     eXo.ecm.ECMUtils.currentMouseX = event.clientX;
     if (Self.uiResizeSideBar) gj(Self.uiResizeSideBar).addClass("resizeBarDisplay");
@@ -670,10 +672,9 @@ function ECMUtils() {
   ECMUtils.prototype.resizeMouseMoveSideBar = function (event) {
     var event = event || window.event;
     if (Self.initWithoutLeftContainer()) return;
-    var resizableBlock = gj(Self.uiLeftContainer).find("div.UIResizableBlock:first")[0];
+    var resizableBlock = gj(Self.uiLeftContainer).find("div.uiResizableBlock:first")[0];
     var deltaX = event.clientX - eXo.ecm.ECMUtils.currentMouseX;
     eXo.ecm.ECMUtils.savedResizeDistance = deltaX;
-    var sideBarContent = gj(Self.uiLeftContainer).find("div.SideBarContent:first")[0];
     eXo.ecm.ECMUtils.savedResizableMouseX = eXo.ecm.ECMUtils.resizableBlockWidth + deltaX + "px";
     eXo.ecm.ECMUtils.savedLeftContainer = eXo.ecm.ECMUtils.currentWidth + deltaX + "px";
     eXo.ecm.ECMUtils.isResizedLeft = false;
@@ -694,12 +695,12 @@ function ECMUtils() {
     if (Self.initWithoutLeftContainer()) return;
     var container = document.getElementById("LeftContainer");
     var rightContainer = gj(Self.uiWorkingArea).find("div.rightContainer:first")[0];
-    var resizableBlock = gj(container).find("div.UIResizableBlock:first")[0];
+    var resizableBlock = gj(container).find("div.uiResizableBlock:first")[0];
     var selectContent = gj(resizableBlock).find("div.uiSelectContent:first")[0];
 
-    var selectedItem = gj(selectContent).find("div.SelectedItem:first")[0];
-    var lstNormalItem = gj(selectContent).find("div.NormalItem");
-    var moreButton = gj(selectContent).find("div.MoreItem:first")[0];
+    var selectedItem = gj(selectContent).find("div.selectedItem:first")[0];
+    var lstNormalItem = gj(selectContent).find("div.normalItem");
+    var moreButton = gj(selectContent).find("div.moreItem:first")[0];
 
     //count the visible items
     var visibleItemsCount = 0;
@@ -780,18 +781,18 @@ function ECMUtils() {
   ECMUtils.prototype.moveItemToVisible = function (movedItem) {
 
     var container = document.getElementById("LeftContainer");
-    var resizableBlock = gj(container).find("div.UIResizableBlock:first")[0];
+    var resizableBlock = gj(container).find("div.uiResizableBlock:first")[0];
     var selectContent = gj(resizableBlock).find("div.uiSelectContent:first")[0];
-    var moreButton = gj(selectContent).find("div.MoreItem:first")[0];
+    var moreButton = gj(selectContent).find("div.moreItem:first")[0];
 
     var normalItem = document.createElement('div');
-    normalItem.className = 'NormalItem';
+    normalItem.className = 'normalItem';
     normalItem.setAttribute('title', movedItem.getAttribute('title'));
     normalItem.setAttribute('onclick', movedItem.getAttribute('onclick'));
 
     var iconItem = document.createElement('div');
     var lstClassOfMovedItem = movedItem.className.split(' ');
-    iconItem.className = 'ItemIcon DefaultIcon ' + lstClassOfMovedItem[lstClassOfMovedItem.length - 1];
+    iconItem.className = 'itemIcon defaultIcon ' + lstClassOfMovedItem[lstClassOfMovedItem.length - 1];
 
     var emptySpan = document.createElement('span');
 
@@ -1049,7 +1050,7 @@ function ECMUtils() {
 
   ECMUtils.prototype.loadEffectedSideBar = function (id) {
     var leftContainer = document.getElementById("LeftContainer");
-    var resizableBlock = gj(leftContainer).find("div.UIResizableBlock:first")[0];
+    var resizableBlock = gj(leftContainer).find("div.uiResizableBlock:first")[0];
     if (eXo.ecm.ECMUtils.savedLeftContainer && eXo.ecm.ECMUtils.savedResizableMouseX) {
       if (eXo.ecm.ECMUtils.isResizedLeft == true) leftContainer.style.width = eXo.ecm.ECMUtils.savedLeftContainer;
       var documentInfo = document.getElementById("UIDocumentInfo");
@@ -1063,7 +1064,7 @@ function ECMUtils() {
     var event = event || window.event;
     eXo.ecm.ECMUtils.currentMouseY = event.clientY;
     var workingArea = document.getElementById('UIWorkingArea');
-    var uiResizableBlock = gj(workingArea).find("div.UIResizableBlock:first")[0];
+    var uiResizableBlock = gj(workingArea).find("div.uiResizableBlock:first")[0];
     var container = document.getElementById("UITreeExplorer");
     //var isOtherTabs=false;
     var listContainers;
@@ -1099,7 +1100,7 @@ function ECMUtils() {
       resizeDiv.className = "VResizeHandle";
       resizeDiv.id = "ResizeVerticalSideBarDiv";
       var workingArea = gj(container).parents(".UIWorkingArea:first")[0];
-      var uiResizableBlock = gj(workingArea).find("div.UIResizableBlock:first")[0];
+      var uiResizableBlock = gj(workingArea).find("div.uiResizableBlock:first")[0];
       resizeDiv.style.width = container.offsetWidth + "px";
       uiResizableBlock.appendChild(resizeDiv);
     }
@@ -1113,10 +1114,10 @@ function ECMUtils() {
     document.onmousemove = null;
     // The block are updated
     var workingArea = document.getElementById('UIWorkingArea');
-    var sizeBarContainer = gj(workingArea).find("div.UISideBarContainer:first")[0];
+    var sizeBarContainer = gj(workingArea).find("div.uiSideBarContainer:first")[0];
 
     // Remove new added div
-    var uiResizableBlock = gj(workingArea).find("div.UIResizableBlock:first")[0];
+    var uiResizableBlock = gj(workingArea).find("div.uiResizableBlock:first")[0];
     if (uiResizableBlock) {
       var resizeDiv = document.getElementById("ResizeVerticalSideBarDiv");
       if (resizeDiv) uiResizableBlock.removeChild(resizeDiv);
@@ -1157,8 +1158,8 @@ function ECMUtils() {
     var itemArea = document.getElementById("SelectItemArea");
 
     var workingArea = document.getElementById('UIWorkingArea');
-    var resizableBlock = gj(workingArea).find("div.UIResizableBlock:first")[0];
-    var resizeTreeButton = gj(resizableBlock).find("div.ResizeTreeButton:first")[0];
+    var resizableBlock = gj(workingArea).find("div.uiResizableBlock:first")[0];
+    var resizeTreeButton = gj(resizableBlock).find("div.resizeTreeButton:first")[0];
 
     if (treeExplorer) {
       Self.collapseTreeExplorer()
@@ -1168,7 +1169,7 @@ function ECMUtils() {
 
     itemArea.style.display = "block";
     eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea = "block";
-    resizeTreeButton.className = "ResizeTreeButton";
+    resizeTreeButton.className = "resizeTreeButton";
   }
 
   ECMUtils.prototype.hideSelectItemArea = function () {
@@ -1176,8 +1177,8 @@ function ECMUtils() {
     var itemArea = document.getElementById("SelectItemArea");
 
     var workingArea = document.getElementById('UIWorkingArea');
-    var resizableBlock = gj(workingArea).find("div.UIResizableBlock:first")[0];
-    var resizeTreeButton = gj(resizableBlock).find("div.ResizeTreeButton:first")[0];
+    var resizableBlock = gj(workingArea).find("div.uiResizableBlock:first")[0];
+    var resizeTreeButton = gj(resizableBlock).find("div.resizeTreeButton:first")[0];
 
     if (treeExplorer) {
       Self.expandTreeExplorer();
@@ -1187,7 +1188,7 @@ function ECMUtils() {
 
     itemArea.style.display = "none";
     eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea = "none";
-    resizeTreeButton.className = "ResizeTreeButton ShowContentButton";
+    resizeTreeButton.className = "resizeTreeButton ShowContentButton";
   }
 
   ECMUtils.prototype.collapseTreeExplorer = function () {
@@ -1200,11 +1201,9 @@ function ECMUtils() {
     var leftContainer = gj(workingArea).find("div.leftContainer:first")[0];
     var rightContainer = gj(workingArea).find("div.rightContainer:first")[0];
 
-    var resizableBlock = gj(leftContainer).find("div.UIResizableBlock:first")[0];
-    var sideBarContent = gj(resizableBlock).find("div.SideBarContent:first")[0];
+    var resizableBlock = gj(leftContainer).find("div.uiResizableBlock:first")[0];
     var selectContent = gj(resizableBlock).find("div.uiSelectContent:first")[0];
-    var resizeTreeExplorer = gj(resizableBlock).find("div.ResizeTreeExplorer:first")[0];
-    var barContent = gj(sideBarContent).find("div.BarContent:first")[0];
+    var resizeTreeExplorer = gj(resizableBlock).find("div.resizeTreeExplorer:first")[0];
 
     var treeExplorer = document.getElementById("UITreeExplorer");
     var itemArea = document.getElementById("SelectItemArea");
@@ -1218,15 +1217,9 @@ function ECMUtils() {
       if (selectContent) {
         treeExplorerHeight -= selectContent.offsetHeight;
       }
-
       if (resizeTreeExplorer) {
         treeExplorerHeight -= resizeTreeExplorer.offsetHeight;
       }
-
-      if (barContent) {
-        treeExplorerHeight -= barContent.offsetHeight;
-      }
-
       treeExplorer.style.height = treeExplorerHeight - 28 + 'px';
     }
   }
@@ -1241,10 +1234,9 @@ function ECMUtils() {
     var leftContainer = gj(workingArea).find("div.leftContainer:first")[0];
     var rightContainer = gj(workingArea).find("div.rightContainer:first")[0];
 
-    var resizableBlock = gj(workingArea).find("div.UIResizableBlock:first")[0];
-    var sideBarContent = gj(resizableBlock).find("div.SideBarContent:first")[0];
+    var resizableBlock = gj(workingArea).find("div.uiResizableBlock:first")[0];
     var selectContent = gj(resizableBlock).find("div.uiSelectContent:first")[0];
-    var resizeTreeExplorer = gj(resizableBlock).find("div.ResizeTreeExplorer:first")[0];
+    var resizeTreeExplorer = gj(resizableBlock).find("div.resizeTreeExplorer:first")[0];
 
     var itemArea = document.getElementById("SelectItemArea");
 
@@ -1281,11 +1273,9 @@ function ECMUtils() {
     }
 
     var workingArea = document.getElementById('UIWorkingArea');
-    var resizableBlock = gj(workingArea).find("div.UIResizableBlock:first")[0];
-
-    listContainers = gj(resizableBlock).find("div.SideBarContent");
+    var listContainers = gj(workingArea).find("div.uiResizableBlock:first")[0];
     for (var k = 0; k < listContainers.length; k++) {
-      if (listContainers[k].parentNode.className != "UIResizableBlock") {
+      if (listContainers[k].parentNode.className != "uiResizableBlock") {
         return listContainers[k - 1];
       }
     }
@@ -1432,12 +1422,10 @@ function ECMUtils() {
     var leftContainer = gj(workingArea).find("div.leftContainer:first")[0];
     var rightContainer = gj(workingArea).find("div.rightContainer:first")[0];
 
-    var resizableBlock = gj(leftContainer).find("div.UIResizableBlock:first")[0];
-    var sideBarContent = gj(resizableBlock).find("div.SideBarContent:first")[0];
+    var resizableBlock = gj(leftContainer).find("div.uiResizableBlock:first")[0];
     var selectContent = gj(resizableBlock).find("div.uiSelectContent:first")[0];
-    var resizeTreeExplorer = gj(resizableBlock).find("div.ResizeTreeExplorer:first")[0];
-    var resizeTreeButton = gj(resizeTreeExplorer).find("div.ResizeTreeButton:first")[0];
-    var barContent = gj(sideBarContent).find("div.BarContent:first")[0];
+    var resizeTreeExplorer = gj(resizableBlock).find("div.resizeTreeExplorer:first")[0];
+    var resizeTreeButton = gj(resizeTreeExplorer).find("div.resizeTreeButton:first")[0];
 
     var treeExplorer = document.getElementById("UITreeExplorer");
     var itemArea = document.getElementById("SelectItemArea");
@@ -1459,9 +1447,9 @@ function ECMUtils() {
     if (itemArea) {
       itemArea.style.display = eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea;
       if (eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea == "none") {
-        resizeTreeButton.className = "ResizeTreeButton ShowContentButton";
+        resizeTreeButton.className = "resizeTreeButton ShowContentButton";
       } else {
-        resizeTreeButton.className = "ResizeTreeButton";
+        resizeTreeButton.className = "resizeTreeButton";
       }
     }
 
@@ -1482,11 +1470,6 @@ function ECMUtils() {
       if (resizeTreeExplorer) {
         treeExplorerHeight -= resizeTreeExplorer.offsetHeight;
       }
-
-      if (barContent) {
-        treeExplorerHeight -= barContent.offsetHeight;
-      }
-
       var treeExplorerFull = gj(treeExplorer).children("div")[0];
       if (treeExplorerFull.offsetHeight > eXo.ecm.ECMUtils.initialHeightOfTreeExplorer && treeExplorerHeight > treeExplorerFull.offsetHeight) {
         treeExplorerHeight = treeExplorerFull.offsetHeight
@@ -1507,14 +1490,13 @@ function ECMUtils() {
     var leftContainer = document.getElementById("LeftContainer");
     var rightContainer = gj(workingArea).find("div.rightContainer:first")[0];
 
-    var resizableBlock = gj(workingArea).find("div.UIResizableBlock:first")[0];
-    var sideBarContent = gj(resizableBlock).find("div.SideBarContent:first")[0];
+    var resizableBlock = gj(workingArea).find("div.uiResizableBlock:first")[0];
     var selectContent = gj(resizableBlock).find("div.uiSelectContent:first")[0];
-    var resizeTreeExplorer = gj(resizableBlock).find("div.ResizeTreeExplorer:first")[0];
-    var resizeTreeButton = gj(resizeTreeExplorer).find("div.ResizeTreeButton:first")[0];
+    var resizeTreeExplorer = gj(resizableBlock).find("div.resizeTreeExplorer:first")[0];
+    var resizeTreeButton = gj(resizeTreeExplorer).find("div.resizeTreeButton:first")[0];
 
     var itemArea = document.getElementById("SelectItemArea");
-    var container = Self.getContainerToResize();
+    var container = eXo.ecm.ECMUtils.getContainerToResize();
 
     //keep some parameters
     eXo.ecm.ECMUtils.initialHeightOfOtherTab = container.offsetHeight;
@@ -1527,9 +1509,9 @@ function ECMUtils() {
     //show or hide the SelectItemArea
     itemArea.style.display = eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea;
     if (eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea == "none") {
-      resizeTreeButton.className = "ResizeTreeButton ShowContentButton";
+      resizeTreeButton.className = "resizeTreeButton ShowContentButton";
     } else {
-      resizeTreeButton.className = "ResizeTreeButton";
+      resizeTreeButton.className = "resizeTreeButton";
     }
 
     //adjust the height of container
