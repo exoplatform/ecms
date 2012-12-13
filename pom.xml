@@ -9,7 +9,7 @@
   </parent>
   <groupId>org.exoplatform.ecms</groupId>
   <artifactId>ecms</artifactId>
-  <version>4.0.0.Alpha1-kill-exobuild-SNAPSHOT</version>
+  <version>4.0.0.Alpha1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>eXo ECM Suite</name>
   <description>eXo Entreprise Content Management Suite</description>
@@ -43,7 +43,7 @@
     <org.exoplatform.jcr.version>1.14.10-GA-SNAPSHOT</org.exoplatform.jcr.version>
     <org.exoplatform.jcr-services.version>1.14.10-GA-SNAPSHOT</org.exoplatform.jcr-services.version>
     <org.exoplatform.doc.doc-style.version>1.0.9-SNAPSHOT</org.exoplatform.doc.doc-style.version>
-    <org.exoplatform.commons.version>4.0.0.Alpha1-kill-exobuild-SNAPSHOT</org.exoplatform.commons.version>
+    <org.exoplatform.commons.version>4.0.0.Alpha1-SNAPSHOT</org.exoplatform.commons.version>
     <org.gatein.common.version>2.1.0.Final</org.gatein.common.version>
     <org.gatein.pc.version>2.3.2-GA</org.gatein.pc.version>
     <org.gatein.portal.version>3.4.0.Final</org.gatein.portal.version>
