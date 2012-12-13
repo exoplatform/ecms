@@ -153,12 +153,11 @@ public class ChangeStateCronJobImpl implements Job {
     
     ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
     if (manageableRepository == null) {
-      if (LOG.isDebugEnabled()) LOG.debug("Repository not found. Ignoring");
+      if (LOG.isDebugEnabled()) LOG.debug("ManageableRepository not found. Ignoring");
       return 0;
     }
 
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
-    
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     
@@ -166,38 +165,44 @@ public class ChangeStateCronJobImpl implements Job {
     QueryResult queryResult = query.execute();
     
     for (NodeIterator iter = queryResult.getNodes(); iter.hasNext();) {
+      String path = "path not found";
+      String nodeDateStr = "date not found";
       Node node_ = iter.nextNode();
-      
-      String path = node_.getPath();
-      if (!path.startsWith("/jcr:system")) {
-        if (NORMAL_NODE == nodeType) {
-          Date nodeDate = node_.getProperty(property).getDate().getTime();
-          if (LOG.isInfoEnabled()) LOG.info("'" + toState + "' " + node_.getPath() + " (" + property + "="
-              + format.format(nodeDate) + ")");
+      try{
+        path = node_.getPath();
+        if (!path.startsWith("/jcr:system")) {
+          if (NORMAL_NODE == nodeType) {
+            Date nodeDate = node_.getProperty(property).getDate().getTime();
+            nodeDateStr = format.format(nodeDate);
+            if (LOG.isInfoEnabled()) LOG.info("'" + toState + "' " + node_.getPath() + " (" + property + "="
+                + nodeDateStr + ")");
   
-          if (PublicationDefaultStates.UNPUBLISHED.equals(toState)) {
-            if (node_.hasProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)) {
-              String liveRevisionProperty = node_.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)
-              .getString();
-              if (!"".equals(liveRevisionProperty)) {
-                Node liveRevision = session.getNodeByUUID(liveRevisionProperty);
-                if (liveRevision != null) {
-                  context_.put(AuthoringPublicationConstant.CURRENT_REVISION_NAME,
-                      liveRevision.getName());
+            if (PublicationDefaultStates.UNPUBLISHED.equals(toState)) {
+              if (node_.hasProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)) {
+                String liveRevisionProperty = node_.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)
+                .getString();
+                if (!"".equals(liveRevisionProperty)) {
+                  Node liveRevision = session.getNodeByUUID(liveRevisionProperty);
+                  if (liveRevision != null) {
+                    context_.put(AuthoringPublicationConstant.CURRENT_REVISION_NAME,
+                        liveRevision.getName());
+                  }
                 }
               }
-            }
   
+            }
+            publicationPlugin.changeState(node_, toState, context_);
+            ret ++;
+          } else {
+            if (LOG.isInfoEnabled()) LOG.info("'" + toState + "' " + node_.getPath());
+            publicationPlugin.changeState(node_, toState, context_);
           }
-          publicationPlugin.changeState(node_, toState, context_);
-          ret ++;
-        } else {
-          if (LOG.isInfoEnabled()) LOG.info("'" + toState + "' " + node_.getPath());
-          publicationPlugin.changeState(node_, toState, context_);
         }
-      }
+      }catch( Exception e ) {
+        if (LOG.isErrorEnabled()) LOG.error("Exception while changing '" + toState + "' " + path + " (" + property + "="
+          + nodeDateStr + ")", e);
+       }
     }
-    
-    return ret;
+     return ret;
   }
 }
