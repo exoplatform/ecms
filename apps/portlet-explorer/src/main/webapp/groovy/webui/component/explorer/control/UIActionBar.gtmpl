@@ -89,18 +89,6 @@
 				
 		  </div>
 		 <%if(isSelected) {%>
-		 <script type="text/javascript">
-			function ReloadIfIE(button)
-			{
-				if(navigator.appName == 'Microsoft Internet Explorer')
-				{
-					if(button == "EditDocument") 
-						{
-						window.location.reload();
-						}
-				}
-			}
-		</script>
 		   <div id="DMSMenuItemContainer" class="DMSMenuItemContainer MenuItemContainer">
 		   <%
 		     for(button in uicomponent.getActionInTab(uicomponent.getSelectedTab())) {
@@ -113,7 +101,7 @@
 								 <div class="NormalSubTabItemR">
 									 <div class="NormalSubTabItemM">
 									 	<div class="Split">
-										 	<a href="<%=action.event(button)%>" title="$title" class="SubTabIcon DefaultActionIcon ${button}Icon" onclick="ReloadIfIE('${button}')">$title</a>
+										 	<a href="<%=action.event(button)%>" title="$title" class="SubTabIcon DefaultActionIcon ${button}Icon">$title</a>
 										 </div>
 									 </div>
 								 </div>

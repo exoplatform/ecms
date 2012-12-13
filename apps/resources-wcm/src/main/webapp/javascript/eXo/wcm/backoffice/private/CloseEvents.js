@@ -95,9 +95,12 @@ UIForm.prototype.submitForm = function(formId, action, useAjax, callback) {
  } catch(e) {}
   form.elements['formOp'].value = action ;
 
-  if (action.toLowerCase() == "save" && navigator.appName == 'Microsoft Internet Explorer')
+  if (navigator.appName == 'Microsoft Internet Explorer')
   {
-	useAjax=false;
+	if (action.toLowerCase() == "save" || action.toLowerCase() == "saveandclose" || action.toLowerCase() == "close") {
+		window.onbeforeunload = null;
+		useAjax=false;
+	}
   }
 
   if(useAjax) {
