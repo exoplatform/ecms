@@ -20,7 +20,6 @@ package org.exoplatform.services.ecm.dms.i18n;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertNotNull;
-import static org.testng.AssertJUnit.assertNull;
 import static org.testng.AssertJUnit.assertTrue;
 import static org.testng.AssertJUnit.fail;
 
@@ -56,8 +55,6 @@ public class TestMultiLanguageService extends BaseWCMTestCase {
 
   private static final String ARTICLE = "exo:article";
 
-  private static final String PODCAST = "exo:podcast";
-
   private static final String FILE = "nt:file";
 
   private static final String RESOURCE = "nt:resource";
@@ -80,12 +77,8 @@ public class TestMultiLanguageService extends BaseWCMTestCase {
   
   private static final String TEMPLATE = "exo:template";
   
-  private static final String  NTFOLDER     = "nt:folder";
-
-
 
   private MultiLanguageService multiLanguageService;
-
   
   @Override
   protected void afterContainerStart() {
@@ -199,47 +192,6 @@ public class TestMultiLanguageService extends BaseWCMTestCase {
     inputProperty.setJcrPath(mimeType);
     inputProperty.setValue("text/xml");
     map.put(mimeType, inputProperty);
-    return map;
-  }
-
-  /**
-   * Create podcast node
-   * @return
-   * @throws IOException
-   */
-  private Map<String, JcrInputProperty> createPodcastMapInput() throws IOException {
-    Map<String, JcrInputProperty> map = new HashMap<String, JcrInputProperty>();
-    String titlePath = CmsService.NODE + "/" + TITLE;
-    String linkPath = CmsService.NODE + "/" + LINK;
-    String data = CmsService.NODE + "/" + CONTENT + "/" + DATA;
-    String mimeType = CmsService.NODE + "/" + CONTENT + "/" + MIMETYPE;
-    String lastModified = CmsService.NODE + "/" + CONTENT + "/" + LASTMODIFIED;
-
-    JcrInputProperty inputProperty = new JcrInputProperty();
-    inputProperty.setJcrPath(titlePath);
-    inputProperty.setValue("this is podcast");
-    map.put(titlePath, inputProperty);
-
-    inputProperty = new JcrInputProperty();
-    inputProperty.setJcrPath(linkPath);
-    inputProperty.setValue("connect");
-    map.put(linkPath, inputProperty);
-
-    inputProperty = new JcrInputProperty();
-    inputProperty.setJcrPath(data);
-    inputProperty.setValue("test");
-    map.put(data, inputProperty);
-
-    inputProperty = new JcrInputProperty();
-    inputProperty.setJcrPath(mimeType);
-    inputProperty.setValue("text/xml");
-    map.put(mimeType, inputProperty);
-
-    inputProperty = new JcrInputProperty();
-    inputProperty.setJcrPath(lastModified);
-    inputProperty.setValue(new GregorianCalendar());
-    map.put(lastModified, inputProperty);
-
     return map;
   }
 
@@ -534,41 +486,6 @@ public class TestMultiLanguageService extends BaseWCMTestCase {
     assertEquals("vi", defaultLanguage);
   }
 
-  /**
-   * Test method MultiLanguagetService.addFileLanguage(Node node, String language, Map mappings, boolean isDefault)
-   * Input:  add child node nt:file ("/conf/standalone/system-configuration.xml") to node
-   *        language fr for node with child node nt:file ("/conf/standalone/system-configuration.xml")
-   *        language vi for node with child node nt:file ("/conf/standalone/system-configuration.xml") as default language
-   * Expect: data of child node nt:file of test node is  ("/conf/standalone/system-configuration.xml"), default language is vi
-   * @throws Exception
-   */
-  @Test
-  public void testAddFileLanguage2() throws Exception {
-    Node test = session.getRootNode().addNode("test", PODCAST);
-    Node testFile = test.addNode(CONTENT, RESOURCE);
-    testFile.setProperty(MIMETYPE, "text/xml");
-    testFile.setProperty(LASTMODIFIED, new GregorianCalendar());
-    testFile.setProperty(DATA, "test");
-    test.addMixin(I18NMixin);
-    session.save();
-
-    multiLanguageService.addFileLanguage(test, "fr" , createPodcastMapInput(), false);
-    String defaultLanguage = test.getProperty(MultiLanguageService.EXO_LANGUAGE).getString();
-    assertEquals("en", defaultLanguage);
-    assertTrue(test.hasNode("languages/fr"));
-    Node testlanguage = test.getNode("languages/fr");
-    assertEquals("test", testlanguage.getNode(CONTENT).getProperty(DATA).getString());
-    assertEquals("this is podcast", testlanguage.getProperty(TITLE).getString());
-    assertEquals("connect", testlanguage.getProperty(LINK).getString());
-
-    multiLanguageService.addFileLanguage(test, "vi" , createPodcastMapInput(), true);
-    defaultLanguage = test.getProperty(MultiLanguageService.EXO_LANGUAGE).getString();
-    assertEquals("vi", defaultLanguage);
-    assertEquals("test", test.getNode(CONTENT).getProperty(DATA).getString());
-    assertEquals("this is podcast", test.getProperty(TITLE).getString());
-    assertEquals("connect", test.getProperty(LINK).getString());
-  }
-
 
   /**
    * Get language node by language MultiLanguageService.getLanguage()
@@ -578,24 +495,24 @@ public class TestMultiLanguageService extends BaseWCMTestCase {
    */
   @Test
   public void testGetLanguage() throws Exception {
-    Node test = session.getRootNode().addNode("test", PODCAST);
+    Node test = session.getRootNode().addNode("test", FILE);
     Node testFile = test.addNode(CONTENT, RESOURCE);
     testFile.setProperty(MIMETYPE, "text/xml");
     testFile.setProperty(LASTMODIFIED, new GregorianCalendar());
     testFile.setProperty(DATA, "test");
     test.addMixin(I18NMixin);
     session.save();
-    multiLanguageService.addFileLanguage(test, "fr" , createPodcastMapInput(), false);
+    multiLanguageService.addFileLanguage(test, "fr" , createFileInput(), false);
     assertTrue(test.hasNode("languages/fr"));
     Node node = multiLanguageService.getLanguage(test, "fr");
-    assertEquals("this is podcast", node.getProperty(TITLE).getString());
-    assertEquals("connect", node.getProperty(LINK).getString());
+    assertTrue(node.hasNode(CONTENT));
+    assertEquals("test", node.getNode(CONTENT).getProperty(DATA).getString());
     
-    multiLanguageService.addFileLanguage(test, "pt" , createPodcastMapInput(), false);
+    multiLanguageService.addFileLanguage(test, "pt" , createFileInput(), false);
     assertTrue(test.hasNode("languages/pt"));
     node = multiLanguageService.getLanguage(test, "pt_br");
-    assertEquals("this is podcast", node.getProperty(TITLE).getString());
-    assertEquals("connect", node.getProperty(LINK).getString());
+    assertTrue(node.hasNode(CONTENT));
+    assertEquals("test", node.getNode(CONTENT).getProperty(DATA).getString());
   }
   /** Add synchronized linked language node to another node MultiLanguageService.addSynchronizedLinkedLanguage()
    * Input create a node then link a French translation node to it, then try to link a English(default language) translation node to it

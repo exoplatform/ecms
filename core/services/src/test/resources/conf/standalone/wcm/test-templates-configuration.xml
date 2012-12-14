@@ -164,47 +164,7 @@
                     </field>
                   </object>
                 </value>
-                <value>
-                  <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
-                    <field name="nodetypeName">
-                      <string>exo:sample</string>
-                    </field>
-                    <field name="documentTemplate">
-                      <boolean>true</boolean>
-                    </field>
-                    <field name="label">
-                      <string>Sample node</string>
-                    </field>
-                    <field name="referencedView">
-                      <collection type="java.util.ArrayList">
-                        <value>
-                          <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
-                            <field name="templateFile">
-                              <string>/sample/views/view1.gtmpl</string>
-                            </field>
-                            <field name="roles">
-                              <string>*</string>
-                            </field>
-                          </object>
-                        </value>
-                      </collection>
-                    </field>
-                    <field name="referencedDialog">
-                      <collection type="java.util.ArrayList">
-                        <value>
-                          <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
-                            <field name="templateFile">
-                              <string>/sample/dialogs/dialog1.gtmpl</string>
-                            </field>
-                            <field name="roles">
-                              <string>*</string>
-                            </field>
-                          </object>
-                        </value>
-                      </collection>
-                    </field>
-                  </object>
-                </value>
+                
                 <value>
                   <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
                     <field name="nodetypeName">

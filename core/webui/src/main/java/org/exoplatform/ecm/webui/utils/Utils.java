@@ -155,7 +155,6 @@ public class Utils {
   final static public String EXO_RELATION = "exo:relation";
   final static public String EXO_TAXONOMY = "exo:taxonomy";
   final static public String EXO_IMAGE = "exo:image";
-  final static public String EXO_ARTICLE = "exo:article";
   final static public String EXO_LANGUAGE = "exo:language";
   final static public String LANGUAGES = "languages";
   final static public String EXO_METADATA = "exo:metadata";

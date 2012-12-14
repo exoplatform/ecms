@@ -45,12 +45,7 @@
 		                  <field  name="name"><string>ecm-explorer/interceptor/PreNodeSaveInterceptor.groovy</string></field>
 		                </object>  
 		              </value>	              
-		              <!-- content-browser -->
-		              <value>
-		                <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-		                  <field  name="name"><string>content-browser/GetDocuments.groovy</string></field>
-		                </object>  
-		              </value> 
+
 		            </collection>   
 		          </field>
 		        </object>

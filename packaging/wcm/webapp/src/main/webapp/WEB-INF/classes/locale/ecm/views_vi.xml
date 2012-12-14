@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
-  <!--
-  ################resoucebundle FOR EXO:ARTICLE VIEW TEMPLATE############
-  -->
-  <Article>
-    <view>
-      <label>
-        <languages>Ngôn ngữ</languages>
-        <summary>Tóm tắt</summary>
-        <none-summary>Tóm tắt rỗng</none-summary>
-        <content>Nội dung</content>
-        <none-content>Nội dung rỗng</none-content>
-        <link>Liên kết</link>
-        <attachment>Đính kèm</attachment>
-      </label>
-    </view>
-  </Article>
+ 
   <View>
     <label>
       <languages>
@@ -262,24 +247,7 @@
       </label>
     </view>
   </Backup>
-  <!--
-  ################resoucebundle FOR exo:getMailAction VIEW TEMPLATE##############
-  -->
-  <Getmail>
-    <view>
-      <label>
-        <name>Tên hành động</name>
-        <lifecycle>Vòng đời</lifecycle>
-        <protocol>Giao thức</protocol>
-        <host>Máy chủ</host>
-        <port>Cổng</port>
-        <folder>Thư mục</folder>
-        <username>Tên đăng nhập</username>
-        <description>Miêu tả</description>
-        <stote-path>Lưu đường dẫn</stote-path>
-      </label>
-    </view>
-  </Getmail>
+ 
   <!--
   ###################### resoucebundle for exo:iCalendarGenerateAction view template ####
   -->
@@ -295,42 +263,7 @@
       </label>
     </view>
   </Icalendar>
-  <!--
-  ###################### resoucebundle for exo:createRSSFeedAction view template ####
-  -->
-  <Rss>
-    <view>
-      <label>
-        <action-name>Tên hành động</action-name>
-        <feed-name>Tên Feed</feed-name>
-        <lifecycle>Vòng đời</lifecycle>
-        <schedule-type>Lập biểu</schedule-type>
-        <start-time>Thời gian bắt đầu</start-time>
-        <end-time>Thời gian kết thúc</end-time>
-        <repeat-count>Số lần lặp</repeat-count>
-        <time-inteval>Khoảng thời gian</time-inteval>
-        <cron-expression>Cron expression</cron-expression>
-        <feed-node-name>Tên nút Feed</feed-node-name>
-        <feed-store-path>Đường dẫn Feed</feed-store-path>
-        <query-items>Phần tử truy vấn</query-items>
-        <rss-url>Đường dẫn Rss</rss-url>
-        <feed-title>Tiêu đề Feed</feed-title>
-        <feed-type>Loại Feed</feed-type>
-        <rss-version>Phiên bản Rss</rss-version>
-        <link>Liên kết</link>
-        <description>Miêu tả</description>
-        <language>Ngôn ngữ</language>
-        <copyright>Bản quyền của</copyright>
-        <publish-date>Ngày công bố</publish-date>
-        <owner-name>Tên người sở hữu</owner-name>
-        <owner-email>Thư điện tử người sở hữu</owner-email>
-        <image-url>Đường dẫn ảnh</image-url>
-        <category>Hạng mục</category>
-        <keywords>Từ khóa</keywords>
-        <query-path>Đường dẫn truy vấn</query-path>
-      </label>
-    </view>
-  </Rss>
+ 
   <!--
   ###################### resoucebundle for exo:addMetadataAction view template ####
   -->
@@ -344,43 +277,7 @@
       </label>
     </view>
   </AddMetadata>
-  <!--
-  ###################### resoucebundle for exo:ReloadBPAction view template ####
-  -->
-  <ReloadAction>
-    <view>
-      <label>
-        <action-name>Tên hành động</action-name>
-        <lifecycle>Vòng đời</lifecycle>
-        <description>Miêu tả</description>
-      </label>
-    </view>
-  </ReloadAction>
-  <!--
-  ###################### resoucebundle for exo:sendMailAction view template ####
-  -->
-  <SendMail>
-    <view>
-      <label>
-        <action-name>Tên hành động</action-name>
-        <lifecycle>Vòng đời</lifecycle>
-        <description>Miêu tả</description>
-        <mail-to>Gửi thư tới</mail-to>
-      </label>
-    </view>
-  </SendMail>
-  <!--
-  ###################### resoucebundle for exo:transformBinaryToTextAction view template ####
-  -->
-  <Transform>
-    <view>
-      <label>
-        <action-name>Tên</action-name>
-        <lifecycle>Vòng đời</lifecycle>
-        <description>Miêu tả</description>
-      </label>
-    </view>
-  </Transform>
+ 
   <!--
   ###################### resoucebundle for exo:autoVersioning view template ####
   -->

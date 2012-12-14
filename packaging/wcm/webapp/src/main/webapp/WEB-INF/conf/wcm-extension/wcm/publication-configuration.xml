@@ -110,8 +110,8 @@
   </external-component-plugins>
 
   <!-- 
-	WE USE CMS CONTENT EVENT LISTENER TO ENROLL CONTENTS (DMS like exo:article OR WCM like exo:webContent) 
-	THIS EVENT ISN'T BROADCASTED FOR UPLOADED DOCUMENTS (UNTIL DMS 2.5.1)
+	WE USE CMS CONTENT EVENT LISTENER TO ENROLL CONTENTS (DMS like nt:file OR WCM like exo:webContent) 
+	THIS EVENT ISN'T BROADCASTED FOR UPLOADED DOCUMENTS
 	-->
   <external-component-plugins>
     <target-component>org.exoplatform.services.listener.ListenerService</target-component>

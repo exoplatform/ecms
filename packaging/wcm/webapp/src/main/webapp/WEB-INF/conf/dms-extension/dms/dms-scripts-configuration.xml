@@ -35,16 +35,6 @@
                   <!-- ecm-explorer/action -->
                   <value>
                     <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-                      <field  name="name"><string>ecm-explorer/action/RSSScript.groovy</string></field>
-                    </object>
-                  </value>
-                  <value>
-                    <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-                      <field  name="name"><string>ecm-explorer/action/SendMailScript.groovy</string></field>
-                    </object>
-                  </value>
-                  <value>
-                    <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
                       <field  name="name"><string>ecm-explorer/action/TrashFolderScript.groovy</string></field>
                     </object>
                   </value>
@@ -61,21 +51,6 @@
                   <value>
                     <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
                       <field  name="name"><string>ecm-explorer/action/AddMetadataScript.groovy</string></field>
-                    </object>
-                  </value>
-                  <value>
-                    <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-                      <field  name="name"><string>ecm-explorer/action/TransformBinaryChildrenToTextScript.groovy</string></field>
-                    </object>
-                  </value>
-                  <value>
-                    <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-                      <field  name="name"><string>ecm-explorer/action/GetMailScript.groovy</string></field>
-                    </object>
-                  </value>
-                  <value>
-                    <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-                      <field  name="name"><string>ecm-explorer/action/ProcessRecordsScript.groovy</string></field>
                     </object>
                   </value>
                   <value>
@@ -128,17 +103,6 @@
                   <value>
                     <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
                       <field  name="name"><string>ecm-explorer/interceptor/PostNodeSaveInterceptor.groovy</string></field>
-                    </object>
-                  </value>
-                  <value>
-                    <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-                      <field  name="name"><string>ecm-explorer/interceptor/PostFilePlanInterceptor.groovy</string></field>
-                    </object>
-                  </value>
-                  <!-- content-browser -->
-                  <value>
-                    <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-                      <field  name="name"><string>content-browser/GetDocuments.groovy</string></field>
                     </object>
                   </value>
                 </collection>

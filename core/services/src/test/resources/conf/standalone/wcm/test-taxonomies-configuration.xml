@@ -128,7 +128,7 @@
                     						<object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Mixin">
                     							<field  name="name"><string>mix:affectedNodeTypes</string></field>
                     							<field  name="properties">
-                    								<string>exo:affectedNodeTypeNames=exo:article,exo:podcast,exo:sample,kfx:document,nt:file,rma:filePlan</string>
+                    								<string>exo:affectedNodeTypeNames=nt:file</string>
 																												</field>
 																										</object>
                     					</value>		

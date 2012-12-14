@@ -19,16 +19,14 @@ package org.exoplatform.ecm.webui.component.explorer.versions;
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 
-import org.exoplatform.webui.core.UIPopupComponent;
-import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.webui.core.UIPopupContainer;
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.web.application.ApplicationMessage;
-import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIContainer;
+import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
@@ -62,18 +60,6 @@ public class UIActivateVersion extends UIContainer implements UIPopupComponent {
       UIJCRExplorer uiExplorer = uiActivateVersion.getAncestorOfType(UIJCRExplorer.class) ;
       Node currentNode = uiExplorer.getCurrentNode() ;
       uiExplorer.addLockToken(currentNode);
-      if(currentNode.isNodeType("rma:filePlan")){
-        WebuiRequestContext contx = event.getRequestContext();
-        UIPopupContainer popupAction = uiExplorer.getChild(UIPopupContainer.class) ;
-        if(popupAction.isRendered()) {
-          popupAction.deActivate() ;
-          contx.addUIComponentToUpdateByAjax(popupAction) ;
-        }
-        UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
-        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.does-not-support-versioning",null,ApplicationMessage.WARNING)) ;
-        
-        return ;
-      }
       try {
         currentNode.addMixin(Utils.MIX_VERSIONABLE);
         currentNode.save() ;

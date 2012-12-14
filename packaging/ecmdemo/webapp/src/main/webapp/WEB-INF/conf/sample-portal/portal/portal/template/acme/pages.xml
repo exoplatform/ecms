@@ -1140,11 +1140,6 @@
             <value>exo:contact_us</value>
             <read-only>false</read-only>
           </preference>
-          <preference>
-            <name>action</name>
-            <value>exo:sendMailAction</value>
-            <read-only>false</read-only>
-          </preference>
         </preferences>
       </portlet>
       <title>Contact Us</title>

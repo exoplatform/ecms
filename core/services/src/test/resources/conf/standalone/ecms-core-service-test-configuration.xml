@@ -23,11 +23,6 @@
 	  <key>org.exoplatform.services.cms.actions.ActionServiceContainer</key>  
 	  <type>org.exoplatform.services.cms.actions.impl.ActionServiceContainerImpl</type>
   </component>  
-    
-  <component>
-    <key>org.exoplatform.services.cms.records.RecordsService</key>
-    <type>org.exoplatform.services.cms.records.impl.RecordsServiceImpl</type>
-  </component>   
    
   <component>
     <key>org.exoplatform.services.cms.i18n.MultiLanguageService</key>
@@ -58,11 +53,6 @@
 	  <key>org.exoplatform.services.cms.relations.RelationsService</key>  
 	  <type>org.exoplatform.services.cms.relations.impl.RelationsServiceImpl</type>
 	</component>	
-  
-  <component>
-	  <key>org.exoplatform.services.cms.rss.RSSService</key>  
-	  <type>org.exoplatform.services.cms.rss.impl.RSSServiceImpl</type>      
-	</component>
 	
 	<component>
 	  <key>org.exoplatform.services.cms.voting.VotingService</key>  

@@ -73,8 +73,8 @@ public class UIQueriesForm extends UIForm implements UISelectable {
   final static public String PERMISSIONS = "permissions" ;
   final static public String CACHE_RESULT = "cache" ;
   final static public String[] ACTIONS = {"Save", "Cancel"} ;
-  final static public String SQL_QUERY = "select * from exo:article where jcr:path like '/Documents/Live/%'" ;
-  final static public String XPATH_QUERY = "/jcr:root/Documents/Live//element(*, exo:article)" ;
+  final static public String SQL_QUERY = "select * from nt:file where jcr:path like '/Documents/Live/%'" ;
+  final static public String XPATH_QUERY = "/jcr:root/Documents/Live//element(*, nt:file)" ;
   final static public String[] REG_EXPRESSION = {"[", "]", ":", "&"} ;
 
   private boolean isAddNew_ = false ;

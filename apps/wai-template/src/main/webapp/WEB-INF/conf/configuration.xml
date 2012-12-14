@@ -27,8 +27,6 @@
   <import>war:/conf/sample-portal/waiportal/waiportal-template-configuration.xml</import>
   <import>war:/conf/sample-portal/waiportal/resource-bundle-configuration.xml</import>
   
-  <import>war:/conf/sample-portal/wcm/content-configuration.xml</import>
-  
   <import>war:/conf/sample-portal/wcm/deployment/templates-deployment-configuration.xml</import>
   <import>war:/conf/sample-portal/wcm/deployment/WAIPortal-template-deployment-configuration.xml</import>
 </configuration>

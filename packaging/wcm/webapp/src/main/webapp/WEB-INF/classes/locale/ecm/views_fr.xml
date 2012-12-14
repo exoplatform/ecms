@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
-  <!--
-  ################resoucebundle FOR EXO:ARTICLE VIEW TEMPLATE############
-  -->
-  <Article>
-    <view>
-      <label>
-        <languages>Langues</languages>
-        <summary>Résumé</summary>
-        <none-summary>Le résumé est vide</none-summary>
-        <content>Contenu</content>
-        <none-content>Le contenu est vide</none-content>
-        <link>Liens</link>
-        <attachment>Pièces jointes</attachment>
-      </label>
-    </view>
-  </Article>
+ 
   <View>
     <label>
       <languages>
@@ -262,24 +247,7 @@
       </label>
     </view>
   </Backup>
-  <!--
-  ################resoucebundle FOR exo:getMailAction VIEW TEMPLATE##############
-  -->
-  <Getmail>
-    <view>
-      <label>
-        <name>Nom de l'action</name>
-        <lifecycle>Cycle de vie</lifecycle>
-        <protocol>Protocole</protocol>
-        <host>Nom de l'hôte</host>
-        <port>Port</port>
-        <folder>Répertoire</folder>
-        <username>Nom d'utilisateur</username>
-        <description>Description</description>
-        <stote-path>Emplacement de sauvegarde</stote-path>
-      </label>
-    </view>
-  </Getmail>
+ 
   <!--
   ###################### resoucebundle for exo:iCalendarGenerateAction view template ####
   -->
@@ -295,42 +263,7 @@
       </label>
     </view>
   </Icalendar>
-  <!--
-  ###################### resoucebundle for exo:createRSSFeedAction view template ####
-  -->
-  <Rss>
-    <view>
-      <label>
-        <action-name>Nom de l'action</action-name>
-        <feed-name>Nom du flux</feed-name>
-        <lifecycle>Cycle de vie</lifecycle>
-        <schedule-type>Type de planification</schedule-type>
-        <start-time>Heure de début</start-time>
-        <end-time>Heure de fin</end-time>
-        <repeat-count>Nombre d'essais</repeat-count>
-        <time-inteval>Intervalle entre 2 essais</time-inteval>
-        <cron-expression>Commande Cron</cron-expression>
-        <feed-node-name>Nom du noeud</feed-node-name>
-        <feed-store-path>Emplacement de stockage</feed-store-path>
-        <query-items>Eléments de la requête</query-items>
-        <rss-url>URL du flux</rss-url>
-        <feed-title>Titre du flux</feed-title>
-        <feed-type>Type de flux</feed-type>
-        <rss-version>Version Rss</rss-version>
-        <link>Lien</link>
-        <description>Description</description>
-        <language>Langue</language>
-        <copyright>Droit d'auteur</copyright>
-        <publish-date>Date de publication</publish-date>
-        <owner-name>Nom du propriétaire</owner-name>
-        <owner-email>Email du propriétaire</owner-email>
-        <image-url>URL de l'image</image-url>
-        <category>Catégorie</category>
-        <keywords>Mots clés</keywords>
-        <query-path>Emplacement de la requête</query-path>
-      </label>
-    </view>
-  </Rss>
+ 
   <!--
   ###################### resoucebundle for exo:addMetadataAction view template ####
   -->
@@ -344,43 +277,7 @@
       </label>
     </view>
   </AddMetadata>
-  <!--
-  ###################### resoucebundle for exo:ReloadBPAction view template ####
-  -->
-  <ReloadAction>
-    <view>
-      <label>
-        <action-name>Nom de l'action</action-name>
-        <lifecycle>Cycle de vie</lifecycle>
-        <description>Description</description>
-      </label>
-    </view>
-  </ReloadAction>
-  <!--
-  ###################### resoucebundle for exo:sendMailAction view template ####
-  -->
-  <SendMail>
-    <view>
-      <label>
-        <action-name>Nom de l'action</action-name>
-        <lifecycle>Cycle de vie</lifecycle>
-        <description>Description</description>
-        <mail-to>Envoyer l'email à</mail-to>
-      </label>
-    </view>
-  </SendMail>
-  <!--
-  ###################### resoucebundle for exo:transformBinaryToTextAction view template ####
-  -->
-  <Transform>
-    <view>
-      <label>
-        <action-name>Nom</action-name>
-        <lifecycle>Cycle de vie</lifecycle>
-        <description>Description</description>
-      </label>
-    </view>
-  </Transform>
+ 
   <!--
   ###################### resoucebundle for exo:autoVersioning view template ####
   -->

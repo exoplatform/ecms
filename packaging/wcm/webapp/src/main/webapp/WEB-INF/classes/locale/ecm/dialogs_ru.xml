@@ -17,22 +17,7 @@
       </label>
     </dialog>
   </Ecm>
-  <!--
-  ###################### resoucebundle for exo:article dialogs template ####
-  -->
-  <Article>
-    <dialog>
-      <label>
-        <name>#{word.name}</name>
-        <title>#{word.title}</title>
-        <summary>#{word.summary}</summary>
-        <content>#{word.content}</content>
-      </label>
-    </dialog>
-    <msg>
-      <no-view>This node or this template was deleted or changed. Please click refresh button.</no-view>
-    </msg>
-  </Article>
+ 
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
@@ -43,28 +28,7 @@
       <name>Name</name>
     </label>
   </UIDocumentForm>
-  <!--
-  ###################### resoucebundle for exo:podcast dialogs template ####
-  -->
-  <Podcast>
-    <dialog>
-      <label>
-        <name>Name</name>
-        <categories>Categories</categories>
-        <title>Title</title>
-        <link>Link</link>
-        <author>Author</author>
-        <explicit>Explicit</explicit>
-        <category>Category</category>
-        <keywords>Keyword</keywords>
-        <publish-date>Publish Date</publish-date>
-        <description>Description</description>
-        <upload-file>Upload File</upload-file>
-        <mime-type>Mime Type</mime-type>
-        <lenght>length</lenght>
-      </label>
-    </dialog>
-  </Podcast>
+ 
   <!--
   ###################### resoucebundle for HTMLFile dialogs template ####
   -->
@@ -87,25 +51,7 @@
       </label>
     </dialog>
   </Calendar>
-  <!--
-  ###################### resoucebundle for exo:event dialogs template ####
-  -->
-  <Event>
-    <dialog>
-      <label>
-        <name>#{word.name}</name>
-        <subject>#{word.subject}</subject>
-        <description>#{word.description}</description>
-        <location>Положение</location>
-        <start-date-time>Дата/время начала</start-date-time>
-        <end-date-time>Дата/время окончания</end-date-time>
-        <comment>#{word.comment}</comment>
-        <category>#{word.category}</category>
-        <availability>Доступность</availability>
-        <share-type>Тип совместного использования</share-type>
-      </label>
-    </dialog>
-  </Event>
+ 
   <!--
   ###################### resoucebundle for nt:file dialogs template ####
   -->
@@ -120,91 +66,7 @@
       </label>
     </dialog>
   </File>
-  <!--
-  ###################### resoucebundle for rma:filePlan dialogs template ####
-  -->
-  <FilePlan>
-    <dialog>
-      <label>
-        <name>#{word.name}</name>
-        <categories>Categories</categories>
-        <record-properties>Сохранить свойства</record-properties>
-        <process-properties>Обработать свойства</process-properties>
-        <note>File plan note</note>
-        <record-category-identifier>Идентификатор категории записи</record-category-identifier>
-        <disposition-author>Disposition authority</disposition-author>
-        <disposition-instruction>Размещение инструкций</disposition-instruction>
-        <permanent-record-indicator>Постоянный индикатор записи</permanent-record-indicator>
-        <contain-record-folder>Содержит папку с записями</contain-record-folder>
-        <default-media-type>Медиа тип по умолчанию</default-media-type>
-        <default-marking-list>Default marking list</default-marking-list>
-        <default-originating-organization>Default originating organization</default-originating-organization>
-        <vital-record-indicator>Vital record indicator</vital-record-indicator>
-        <vital-record-review-period>Vital record review period</vital-record-review-period>
-        <process-cutoff>Process cutoffs</process-cutoff>
-        <event-trigger>Event trigger</event-trigger>
-        <cutoff-period>Cutoff period</cutoff-period>
-        <cutoff-on-obsolete>Cutoff on obsolete</cutoff-on-obsolete>
-        <cutoff-on-superseded>Cutoff on superseded</cutoff-on-superseded>
-        <process-hold>Process hold</process-hold>
-        <hold-period>Hold period</hold-period>
-        <discretionary-hold>Discretionary Hold</discretionary-hold>
-        <process-transfer>Process transfer</process-transfer>
-        <default-transfer-location>Default transfer location</default-transfer-location>
-        <transfer-block-size>Transfer block size</transfer-block-size>
-        <process-accession>Process accession</process-accession>
-        <accession-location>Accession location</accession-location>
-        <accession-block-size>Accession block size</accession-block-size>
-        <process-destruction>Process destruction</process-destruction>
-      </label>
-    </dialog>
-  </FilePlan>
-  <!--
-  ###################### resoucebundle for kfx:document dialogs template ####
-  -->
-  <Kofax>
-    <dialog>
-      <label>
-        <name>#{word.name}</name>
-        <categories>Categories</categories>
-      </label>
-    </dialog>
-  </Kofax>
-  <!--
-  ###################### resoucebundle for exo:sample dialogs template ####
-  -->
-  <Sample>
-    <dialog>
-      <label>
-        <name>#{word.name}</name>
-        <categories>Categories</categories>
-        <title>#{word.title}</title>
-        <description>#{word.description}</description>
-        <date>#{word.date}</date>
-        <date-time>Дата/время</date-time>
-        <upload-image>Загрузить изображение</upload-image>
-        <mime-type>#{Ecm.dialog.label.mimeType}</mime-type>
-        <summary>#{word.summary}</summary>
-        <content>#{word.content}</content>
-      </label>
-    </dialog>
-  </Sample>
-  <!--
-  ###################### resoucebundle for exo:workflow dialogs template ####
-  -->
-  <Workflow>
-    <dialog>
-      <label>
-        <id>Идентификатор</id>
-        <name>#{word.name}</name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <description>#{word.description}</description>
-        <validator>Валидатор</validator>
-        <to-workspace>В рабочую область</to-workspace>
-        <with-path>С путем</with-path>
-      </label>
-    </dialog>
-  </Workflow>
+ 
   <UIActionForm>
     <label>
       <description>#{word.description}</description>
@@ -277,43 +139,7 @@
       </label>
     </dialog>
   </Icalendar>
-  <!--
-  ###################### resoucebundle for exo:createRSSFeedAction dialogs template ####
-  -->
-  <Rss>
-    <dialog>
-      <label>
-        <id>Идентификатор</id>
-        <feed-action-name>Create feed action name</feed-action-name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
-        <start-time>#{Ecm.dialog.label.start-time}</start-time>
-        <end-time>#{Ecm.dialog.label.end-time}</end-time>
-        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
-        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron expression</cron-expression>
-        <feed-node-name>Feed node name</feed-node-name>
-        <feed-store-path>Feed store path</feed-store-path>
-        <query-items>#{Ecm.dialog.label.query-items}</query-items>
-        <rss-url>Rss URL</rss-url>
-        <feed-title>Feed title</feed-title>
-        <feed-type>Feed type</feed-type>
-        <summary>Summary</summary>
-        <title>Title</title>
-        <rss-version>Rss version</rss-version>
-        <link>Link</link>
-        <description>#{word.description}</description>
-        <language>Language</language>
-        <copyright>Copyright</copyright>
-        <publish-date>Publish date</publish-date>
-        <owner-name>Owner name</owner-name>
-        <owner-email>Owner email</owner-email>
-        <image-url>Image URL</image-url>
-        <category>#{word.category}</category>
-        <keywords>Keywords</keywords>
-      </label>
-    </dialog>
-  </Rss>
+
   <!--
   ###################### resoucebundle for exo:addMetadataAction dialogs template ####
   -->
@@ -328,58 +154,7 @@
       </label>
     </dialog>
   </AddMetadata>
-  <!--
-  ###################### resoucebundle for exo:ReloadBPAction dialogs template ####
-  -->
-  <ReloadAction>
-    <dialog>
-      <label>
-        <id>Id</id>
-        <name>#{word.name}</name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <description>#{word.description}</description>
-      </label>
-    </dialog>
-  </ReloadAction>
-  <!--
-  ###################### resoucebundle for exo:sendMailAction dialogs template ####
-  -->
-  <SendMail>
-    <dialog>
-      <label>
-        <id>Id</id>
-        <name>#{word.name}</name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
-        <start-time>#{Ecm.dialog.label.start-time}</start-time>
-        <end-time>#{Ecm.dialog.label.end-time}</end-time>
-        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
-        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron expression</cron-expression>
-        <description>#{word.description}</description>
-        <mail-to>Отправить почту на</mail-to>
-      </label>
-    </dialog>
-  </SendMail>
-  <!--
-  ###################### resoucebundle for exo:transformBinaryToTextAction dialogs template ####
-  -->
-  <Transform>
-    <dialog>
-      <label>
-        <id>Id</id>
-        <name>#{word.name}</name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
-        <start-time>#{Ecm.dialog.label.start-time}</start-time>
-        <end-time>#{Ecm.dialog.label.end-time}</end-time>
-        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
-        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron expression</cron-expression>
-        <description>#{word.description}</description>
-      </label>
-    </dialog>
-  </Transform>
+
   <!--
   ###################### resoucebundle for exo:autoVersioning dialogs template ####
   -->

@@ -89,7 +89,7 @@
   		  <td class="FieldLabel"><label for="affectedNodetypes"><%=_ctx.appRes("ScriptAction.dialog.label.affectedNodeTypeNames")%></td>
   		  <td class="FieldComponent">
   		  <% 
-    		  String[] fieldAffectedNodetypes = ["jcrPath=/node/exo:affectedNodeTypeNames", "selectorAction=selectAffectedNodeTypes", "multiValues=true", "selectorClass=org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSelector", "selectorIcon=SelectPath24x24Icon", "validate=empty", "editable=false", "defaultValues=nt:file,exo:article,exo:podcast,exo:sample,rma:filePlan,kfx:document"];
+    		  String[] fieldAffectedNodetypes = ["jcrPath=/node/exo:affectedNodeTypeNames", "selectorAction=selectAffectedNodeTypes", "multiValues=true", "selectorClass=org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSelector", "selectorIcon=SelectPath24x24Icon", "validate=empty", "editable=false", "defaultValues=nt:file"];
   		  		uicomponent.addActionField("affectedNodetypes", fieldAffectedNodetypes);
   		  %>
   		  </td>

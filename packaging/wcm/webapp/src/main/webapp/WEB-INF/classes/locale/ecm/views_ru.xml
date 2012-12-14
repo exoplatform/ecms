@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
-  <!--
-  ################resoucebundle FOR EXO:ARTICLE VIEW TEMPLATE############
-  -->
-  <Article>
-    <view>
-      <label>
-        <languages>Языки</languages>
-        <summary>Резюме</summary>
-        <none-summary>Резюме не заполнено</none-summary>
-        <content>Содержимое</content>
-        <none-content>Содержимое не заполнено</none-content>
-        <link>Линки</link>
-        <attachment>Прикрепленные документы</attachment>
-      </label>
-    </view>
-  </Article>
+ 
   <View>
     <label>
       <languages>
@@ -261,24 +246,7 @@
       </label>
     </view>
   </Backup>
-  <!--
-  ################resoucebundle FOR exo:getMailAction VIEW TEMPLATE##############
-  -->
-  <Getmail>
-    <view>
-      <label>
-        <name>Имя действия</name>
-        <lifecycle>Жизненный цикл</lifecycle>
-        <protocol>Протокол</protocol>
-        <host>Хост</host>
-        <port>Порт</port>
-        <folder>Папка</folder>
-        <username>Имя пользователя</username>
-        <description>Описание</description>
-        <stote-path>Путь</stote-path>
-      </label>
-    </view>
-  </Getmail>
+ 
   <!--
   ###################### resoucebundle for exo:iCalendarGenerateAction view template ####
   -->
@@ -294,42 +262,7 @@
       </label>
     </view>
   </Icalendar>
-  <!--
-  ###################### resoucebundle for exo:createRSSFeedAction view template ####
-  -->
-  <Rss>
-    <view>
-      <label>
-        <action-name>Action name</action-name>
-        <feed-name>Feed name</feed-name>
-        <lifecycle>Lifecycle</lifecycle>
-        <schedule-type>Schedule type</schedule-type>
-        <start-time>Start time</start-time>
-        <end-time>End time</end-time>
-        <repeat-count>Repeat count</repeat-count>
-        <time-inteval>Time inteval</time-inteval>
-        <cron-expression>Cron expression</cron-expression>
-        <feed-node-name>Feed node name</feed-node-name>
-        <feed-store-path>Feed store path</feed-store-path>
-        <query-items>Query items</query-items>
-        <rss-url>Rss URL</rss-url>
-        <feed-title>Feed title</feed-title>
-        <feed-type>Feed type</feed-type>
-        <rss-version>Rss version</rss-version>
-        <link>Link</link>
-        <description>Description</description>
-        <language>Language</language>
-        <copyright>Copyright</copyright>
-        <publish-date>Publish date</publish-date>
-        <owner-name>Owner name</owner-name>
-        <owner-email>Owner email</owner-email>
-        <image-url>Image URL</image-url>
-        <category>Category</category>
-        <keywords>Keywords</keywords>
-        <query-path>Query path</query-path>
-      </label>
-    </view>
-  </Rss>
+ 
   <!--
   ###################### resoucebundle for exo:addMetadataAction view template ####
   -->
@@ -343,43 +276,7 @@
       </label>
     </view>
   </AddMetadata>
-  <!--
-  ###################### resoucebundle for exo:ReloadBPAction view template ####
-  -->
-  <ReloadAction>
-    <view>
-      <label>
-        <action-name>Action name</action-name>
-        <lifecycle>Lifecycle</lifecycle>
-        <description>Description</description>
-      </label>
-    </view>
-  </ReloadAction>
-  <!--
-  ###################### resoucebundle for exo:sendMailAction view template ####
-  -->
-  <SendMail>
-    <view>
-      <label>
-        <action-name>Action name</action-name>
-        <lifecycle>Lifecycle</lifecycle>
-        <description>Description</description>
-        <mail-to>Send mail to</mail-to>
-      </label>
-    </view>
-  </SendMail>
-  <!--
-  ###################### resoucebundle for exo:transformBinaryToTextAction view template ####
-  -->
-  <Transform>
-    <view>
-      <label>
-        <action-name>Name</action-name>
-        <lifecycle>Lifecycle</lifecycle>
-        <description>Description</description>
-      </label>
-    </view>
-  </Transform>
+ 
   <!--
   ###################### resoucebundle for exo:autoVersioning view template ####
   -->

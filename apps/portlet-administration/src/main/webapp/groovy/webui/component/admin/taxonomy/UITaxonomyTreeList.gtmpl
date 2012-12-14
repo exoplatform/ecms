@@ -34,7 +34,6 @@
         <th><%=_ctx.appRes("UITaxonomyTreeList.header.name")%></th>
         <th><%=_ctx.appRes("UITaxonomyTreeList.header.workspace")%></th>
         <th><%=_ctx.appRes("UITaxonomyTreeList.header.homePath")%></th>
-        <th><%=_ctx.appRes("UITaxonomyTreeList.header.permissions")%></th>
         <th class="center"><%=_ctx.appRes("UITaxonomyTreeList.header.action")%></th>
       </tr>
     </thead>
@@ -55,14 +54,6 @@
               <td><div class="Text" rel="tooltip" data-placement="bottom" title="<%=taxonomyTree.getTaxoTreeName().replace("|", " | ")%>"><% if (!taxonomyTree.isEdit()) { %><sup>*** </sup><%}%><%=taxonomyTree.getTaxoTreeName().replace("|", " | ")%></div></td>
               <td><div class="Text" rel="tooltip" data-placement="bottom" title="$taxonomyTree.taxoTreeWorkspace">$taxonomyTree.taxoTreeWorkspace</div></td>
               <td><div class="Text" rel="tooltip" data-placement="bottom" title="<%=taxonomyTree.getTaxoTreeHomePath().replace("/", " /")%>"><%=taxonomyTree.getTaxoTreeHomePath().replace("/", " /")%></div></td>
-              <td>
-                <div class="Text">
-                  <div class="ShowHideComponent ClearFix" rel="tooltip" data-placement="bottom" title="$taxonomyTree.taxoTreePermissions" onclick="eXo.ecm.ECMUtils.showHideContentOnRow(this)">
-                    <div class="ShortContentPermission"><a><%=pathTitle(taxonomyTree.taxoTreePermissions, 20)%></a></div>
-                    <div class="FullContentPermission" style="display: none"><a>$taxonomyTree.taxoTreePermissions</a></div>
-                  </div>                  
-                </div>                
-              </td>             
               <td class="center">
                   <% if (taxonomyTree.isEdit()) { %>
 					<a class="actionIcon" onclick="<%=uicomponent.event("EditTaxonomyTree", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.EditTaxonomyTree")%>" ><i class="uiIconEditInfo"></i></a>

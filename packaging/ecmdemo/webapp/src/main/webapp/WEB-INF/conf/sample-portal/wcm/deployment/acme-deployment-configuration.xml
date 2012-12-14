@@ -252,25 +252,7 @@
             </field>
           </object>
         </object-param>
-        <object-param>
-          <name>ACME NewEvents data</name>
-          <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
-            <field name="target">
-              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
-                <field name="workspace">
-                  <string>collaboration</string>
-                </field>
-                <field name="nodePath">
-                  <string>/sites content/live/acme/web contents</string>
-                </field>
-              </object>
-            </field>
-            <field name="sourcePath">
-              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/acme/NewEvents.xml</string>
-            </field>
-          </object>
-        </object-param>
+        
         <object-param>
           <name>ACME Doc Word</name>
           <description>Deployment Descriptor</description>
@@ -422,78 +404,6 @@
             </field>
           </object>
         </object-param>
-        <object-param>
-          <name>link21</name>
-          <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
-            <field name="sourcePath">
-              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/web contents/NewEvents/a-revolution-in-the-multi-touch-displays</string>
-            </field>
-            <field name="targetPath">
-              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/events/All/Products</string>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
-          <name>link22</name>
-          <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
-            <field name="sourcePath">
-              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/web contents/NewEvents/architecture-and-design-the-future-of-our-products</string>
-            </field>
-            <field name="targetPath">
-              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/events/All/Products</string>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
-          <name>link23</name>
-          <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
-            <field name="sourcePath">
-              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/web contents/NewEvents/mondial-expo-are-you-ready-for-the-future</string>
-            </field>
-            <field name="targetPath">
-              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/events/All/Releases</string>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
-          <name>link24</name>
-          <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
-            <field name="sourcePath">
-              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/web contents/NewEvents/a-revolution-in-the-multi-touch-displays</string>
-            </field>
-            <field name="targetPath">
-              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/events/All/Use Cases</string>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
-          <name>link25</name>
-          <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
-            <field name="sourcePath">
-              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/web contents/NewEvents/a-revolution-in-the-multi-touch-displays</string>
-            </field>
-            <field name="targetPath">
-              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/events/All</string>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
-          <name>link26</name>
-          <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
-            <field name="sourcePath">
-              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/web contents/NewEvents/architecture-and-design-the-future-of-our-products</string>
-            </field>
-            <field name="targetPath">
-              <string>${gatein.jcr.repository.default:repository}:collaboration:/sites content/live/acme/events</string>
-            </field>
-          </object>
-        </object-param>
       </init-params>
     </component-plugin>
   </external-component-plugins>
@@ -521,9 +431,6 @@
                 <value><string>collaboration:/sites content/live/acme/web contents/Events/Event2</string></value>
                 <value><string>collaboration:/sites content/live/acme/web contents/Events/Event3</string></value>
                 <value><string>collaboration:/sites content/live/acme/web contents/Events/Event4</string></value>
-                <value><string>collaboration:/sites content/live/acme/web contents/NewEvents/a-revolution-in-the-multi-touch-displays</string></value>
-                <value><string>collaboration:/sites content/live/acme/web contents/NewEvents/architecture-and-design-the-future-of-our-products</string></value>
-                <value><string>collaboration:/sites content/live/acme/web contents/NewEvents/mondial-expo-are-you-ready-for-the-future</string></value>
                 <value><string>collaboration:/sites content/live/acme/documents/conditions.doc</string></value>
                 <value><string>collaboration:/sites content/live/acme/documents/metro.pdf</string></value>
                 <value><string>collaboration:/sites content/live/acme/documents/offices.jpg</string></value>

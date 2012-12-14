@@ -563,13 +563,12 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
         }
 
       if (FILE_TYPE_ALL.equals(filterBy)
-          && (checkNode.isNodeType(NodetypeConstant.EXO_WEBCONTENT)
-              || checkNode.isNodeType(NodetypeConstant.EXO_ARTICLE) || !isFolder(checkNode))) {
+          && (checkNode.isNodeType(NodetypeConstant.EXO_WEBCONTENT) || !isFolder(checkNode))) {
         fileType = FILE_TYPE_ALL;
       }
 
         if (FILE_TYPE_WEBCONTENT.equals(filterBy)) {
-          if(checkNode.isNodeType(NodetypeConstant.EXO_WEBCONTENT) || checkNode.isNodeType(NodetypeConstant.EXO_ARTICLE)) {
+          if(checkNode.isNodeType(NodetypeConstant.EXO_WEBCONTENT)) {
             fileType = FILE_TYPE_WEBCONTENT;
           }
         }
@@ -634,7 +633,6 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     List<String> dmsDocumentList = new ArrayList<String>();
     dmsDocumentList.addAll(dmsDocumentListTmp);
     dmsDocumentList.remove(NodetypeConstant.EXO_WEBCONTENT);
-    dmsDocumentList.remove(NodetypeConstant.EXO_ARTICLE);
     for (String documentType : dmsDocumentList) {
       if (node.getPrimaryNodeType().isNodeType(documentType)
           && !isMediaType(node)

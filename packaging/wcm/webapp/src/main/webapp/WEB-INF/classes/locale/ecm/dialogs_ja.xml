@@ -17,22 +17,7 @@
       </label>
     </dialog>
   </Ecm>
-  <!--
-  ###################### resoucebundle for exo:article dialogs template ####
-  -->
-  <Article>
-    <dialog>
-      <label>
-        <name>#{word.name}</name>
-        <title>#{word.title}</title>
-        <summary>#{word.summary}</summary>
-        <content>#{word.content}</content>
-      </label>
-    </dialog>
-    <msg>
-      <no-view>このノードもしくはテンプレートは削除または変更されました。再読み込みしてください。</no-view>
-    </msg>
-  </Article>
+  
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
@@ -43,28 +28,7 @@
       <name>名前</name>
     </label>
   </UIDocumentForm>
-  <!--
-  ###################### resoucebundle for exo:podcast dialogs template ####
-  -->
-  <Podcast>
-    <dialog>
-      <label>
-        <name>名前</name>
-        <categories>カテゴリ</categories>
-        <title>タイトル</title>
-        <link>リンク</link>
-        <author>作者</author>
-        <explicit>Explicit</explicit>
-        <category>カテゴリ</category>
-        <keywords>キーワード</keywords>
-        <publish-date>公開日</publish-date>
-        <description>説明</description>
-        <upload-file>ファイルアップロード</upload-file>
-        <mime-type>Mime タイプ</mime-type>
-        <lenght>Length</lenght>
-      </label>
-    </dialog>
-  </Podcast>
+ 
   <!--
   ###################### resoucebundle for HTMLFile dialogs template ####
   -->
@@ -87,25 +51,7 @@
       </label>
     </dialog>
   </Calendar>
-  <!--
-  ###################### resoucebundle for exo:event dialogs template ####
-  -->
-  <Event>
-    <dialog>
-      <label>
-        <name>#{word.name}</name>
-        <subject>#{word.subject}</subject>
-        <description>#{word.description}</description>
-        <location>場所</location>
-        <start-date-time>開始日時</start-date-time>
-        <end-date-time>終了日時</end-date-time>
-        <comment>#{word.comment}</comment>
-        <category>#{word.category}</category>
-        <availability>有効</availability>
-        <share-type>共有タイプ</share-type>
-      </label>
-    </dialog>
-  </Event>
+  
   <!--
   ###################### resoucebundle for nt:file dialogs template ####
   -->
@@ -120,91 +66,7 @@
       </label>
     </dialog>
   </File>
-  <!--
-  ###################### resoucebundle for rma:filePlan dialogs template ####
-  -->
-  <FilePlan>
-    <dialog>
-      <label>
-        <name>#{word.name}</name>
-        <categories>カテゴリ</categories>
-        <record-properties>レコードプロパティ</record-properties>
-        <process-properties>プロセスプロパティ</process-properties>
-        <note>ファイルプラン注記</note>
-        <record-category-identifier>レコードカテゴリ識別子</record-category-identifier>
-        <disposition-author>Disposition authority</disposition-author>
-        <disposition-instruction>Disposition instructions</disposition-instruction>
-        <permanent-record-indicator>Permanent record indicator</permanent-record-indicator>
-        <contain-record-folder>レコードフォルダを含む</contain-record-folder>
-        <default-media-type>デフォルトメディアタイプ</default-media-type>
-        <default-marking-list>デフォルトマーキングリスト</default-marking-list>
-        <default-originating-organization>Default originating organization</default-originating-organization>
-        <vital-record-indicator>Vital record indicator</vital-record-indicator>
-        <vital-record-review-period>Vital record review period</vital-record-review-period>
-        <process-cutoff>Process cutoffs</process-cutoff>
-        <event-trigger>イベントトリガ</event-trigger>
-        <cutoff-period>Cutoff period</cutoff-period>
-        <cutoff-on-obsolete>Cutoff on obsolete</cutoff-on-obsolete>
-        <cutoff-on-superseded>Cutoff on superseded</cutoff-on-superseded>
-        <process-hold>Process hold</process-hold>
-        <hold-period>Hold period</hold-period>
-        <discretionary-hold>Discretionary Hold</discretionary-hold>
-        <process-transfer>Process transfer</process-transfer>
-        <default-transfer-location>Default transfer location</default-transfer-location>
-        <transfer-block-size>Transfer block size</transfer-block-size>
-        <process-accession>Process accession</process-accession>
-        <accession-location>Accession location</accession-location>
-        <accession-block-size>Accession block size</accession-block-size>
-        <process-destruction>Process destruction</process-destruction>
-      </label>
-    </dialog>
-  </FilePlan>
-  <!--
-  ###################### resoucebundle for kfx:document dialogs template ####
-  -->
-  <Kofax>
-    <dialog>
-      <label>
-        <name>#{word.name}</name>
-        <categories>カテゴリ</categories>
-      </label>
-    </dialog>
-  </Kofax>
-  <!--
-  ###################### resoucebundle for exo:sample dialogs template ####
-  -->
-  <Sample>
-    <dialog>
-      <label>
-        <name>#{word.name}</name>
-        <categories>カテゴリ</categories>
-        <title>#{word.title}</title>
-        <description>#{word.description}</description>
-        <date>#{word.date}</date>
-        <date-time>日時</date-time>
-        <upload-image>画像アップロード</upload-image>
-        <mime-type>#{Ecm.dialog.label.mimeType}</mime-type>
-        <summary>#{word.summary}</summary>
-        <content>#{word.content}</content>
-      </label>
-    </dialog>
-  </Sample>
-  <!--
-  ###################### resoucebundle for exo:workflow dialogs template ####
-  -->
-  <Workflow>
-    <dialog>
-      <label>
-        <id>Id</id>
-        <name>#{word.name}</name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <description>#{word.description}</description>
-        <validator>バリデータ</validator>
-        <to-workspace>ワークスペースへ</to-workspace>
-        <with-path>パス</with-path>
-      </label>
-    </dialog>
-  </Workflow>
+ 
   <UIActionForm>
     <label>
       <description>#{word.description}</description>
@@ -277,43 +139,7 @@
       </label>
     </dialog>
   </Icalendar>
-  <!--
-  ###################### resoucebundle for exo:createRSSFeedAction dialogs template ####
-  -->
-  <Rss>
-    <dialog>
-      <label>
-        <id>Id</id>
-        <feed-action-name>フィードアクション名の作成</feed-action-name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
-        <start-time>#{Ecm.dialog.label.start-time}</start-time>
-        <end-time>#{Ecm.dialog.label.end-time}</end-time>
-        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
-        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>表現のクローン</cron-expression>
-        <feed-node-name>フィードノード名</feed-node-name>
-        <feed-store-path>フィード保存パス</feed-store-path>
-        <query-items>#{Ecm.dialog.label.query-items}</query-items>
-        <rss-url>Rss URL</rss-url>
-        <feed-title>フィードタイトル</feed-title>
-        <feed-type>フィードタイプ</feed-type>
-        <summary>サマリー</summary>
-        <title>タイトル</title>
-        <rss-version>Rss バージョン</rss-version>
-        <link>リンク</link>
-        <description>#{word.description}</description>
-        <language>言語</language>
-        <copyright>著作権</copyright>
-        <publish-date>公開日</publish-date>
-        <owner-name>オーナー名</owner-name>
-        <owner-email>オーナーemail</owner-email>
-        <image-url>画像URL</image-url>
-        <category>#{word.category}</category>
-        <keywords>キーワード</keywords>
-      </label>
-    </dialog>
-  </Rss>
+
   <!--
   ###################### resoucebundle for exo:addMetadataAction dialogs template ####
   -->
@@ -328,58 +154,7 @@
       </label>
     </dialog>
   </AddMetadata>
-  <!--
-  ###################### resoucebundle for exo:ReloadBPAction dialogs template ####
-  -->
-  <ReloadAction>
-    <dialog>
-      <label>
-        <id>Id</id>
-        <name>#{word.name}</name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <description>#{word.description}</description>
-      </label>
-    </dialog>
-  </ReloadAction>
-  <!--
-  ###################### resoucebundle for exo:sendMailAction dialogs template ####
-  -->
-  <SendMail>
-    <dialog>
-      <label>
-        <id>Id</id>
-        <name>#{word.name}</name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
-        <start-time>#{Ecm.dialog.label.start-time}</start-time>
-        <end-time>#{Ecm.dialog.label.end-time}</end-time>
-        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
-        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>表現のクローン</cron-expression>
-        <description>#{word.description}</description>
-        <mail-to>メール送信</mail-to>
-      </label>
-    </dialog>
-  </SendMail>
-  <!--
-  ###################### resoucebundle for exo:transformBinaryToTextAction dialogs template ####
-  -->
-  <Transform>
-    <dialog>
-      <label>
-        <id>Id</id>
-        <name>#{word.name}</name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
-        <start-time>#{Ecm.dialog.label.start-time}</start-time>
-        <end-time>#{Ecm.dialog.label.end-time}</end-time>
-        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
-        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>表現のクローン</cron-expression>
-        <description>#{word.description}</description>
-      </label>
-    </dialog>
-  </Transform>
+
   <!--
   ###################### resoucebundle for exo:autoVersioning dialogs template ####
   -->

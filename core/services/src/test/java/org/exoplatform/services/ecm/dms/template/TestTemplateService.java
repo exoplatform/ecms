@@ -53,7 +53,6 @@ public class TestTemplateService extends BaseWCMTestCase {
   private String cmsTemplatesBasePath;
   private Session sessionDMS;
 
-  static private final String DMSSYSTEM_WS = "dms-system";
   static private final String EXO_ARTICLE  = "exo:article";
   
   static private final String DEMO_ID      = "demo";
@@ -255,6 +254,7 @@ public class TestTemplateService extends BaseWCMTestCase {
     assertNotNull(templateService.addTemplate(TemplateService.DIALOGS, EXO_ARTICLE, label, isDocumentTemplate,
         templateName, roles, new ByteArrayInputStream(templateFile.getBytes())));
     assertNotNull(templateService.getTemplate(TemplateService.DIALOGS, EXO_ARTICLE, templateName));
+    templateService.removeTemplate(TemplateService.DIALOGS, EXO_ARTICLE, templateName);
   }
 
   /**
@@ -316,9 +316,9 @@ public class TestTemplateService extends BaseWCMTestCase {
    */
   @Test
   public void testGetAllTemplatesOfNodeType() throws Exception {
-    assertEquals(1, templateService.getAllTemplatesOfNodeType(true, "exo:sample",
+    assertEquals(1, templateService.getAllTemplatesOfNodeType(true, EXO_ARTICLE,
         sessionProviderService_.getSystemSessionProvider(null)).getSize());
-    assertEquals(1, templateService.getAllTemplatesOfNodeType(false, "exo:sample",
+    assertEquals(1, templateService.getAllTemplatesOfNodeType(false, EXO_ARTICLE,
         sessionProviderService_.getSystemSessionProvider(null)).getSize());
     assertEquals(null, templateService.getAllTemplatesOfNodeType(false, "exo:cssFile",
         sessionProviderService_.getSystemSessionProvider(null)));
@@ -335,9 +335,9 @@ public class TestTemplateService extends BaseWCMTestCase {
    */
   @Test
   public void testManagedNodeType() throws Exception {
-    assertTrue(templateService.isManagedNodeType("exo:article"));
-    templateService.removeManagedNodeType("exo:article");
-    assertFalse(templateService.isManagedNodeType("exo:article"));
+    assertTrue(templateService.isManagedNodeType(EXO_ARTICLE));
+    templateService.removeManagedNodeType(EXO_ARTICLE);
+    assertFalse(templateService.isManagedNodeType(EXO_ARTICLE));
   }
 
   /**

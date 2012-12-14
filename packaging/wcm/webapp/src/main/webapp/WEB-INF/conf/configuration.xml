@@ -40,7 +40,6 @@
   <import>war:/conf/dms-extension/dms/dms-drives-configuration.xml</import>
   <import>war:/conf/dms-extension/dms/dms-metadata-configuration.xml</import>
   <import>war:/conf/dms-extension/dms/dms-folksonomy-configuration.xml</import>
-  <import>war:/conf/dms-extension/dms/dms-records-configuration.xml</import>
   <import>war:/conf/dms-extension/dms/dms-queries-configuration.xml</import>
   <import>war:/conf/dms-extension/dms/organization-component-plugins-configuration.xml</import>
   <import>war:/conf/dms-extension/dms/publication-configuration.xml</import>  

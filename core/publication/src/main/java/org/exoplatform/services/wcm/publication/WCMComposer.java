@@ -38,7 +38,7 @@ public interface WCMComposer {
   /** Filter parameter to filter results by state. ex : draft, staged, published */
   public final static String FILTER_STATE = "filter-state";
 
-  /** Filter parameter to filter results by primary type. ex: exo:article, exo:webContent */
+  /** Filter parameter to filter results by primary type. ex: exo:webContent */
   public final static String FILTER_PRIMARY_TYPE = "filter-primary-type";
 
   /** Filter parameter to order results. ex: exo:title, dc:title */

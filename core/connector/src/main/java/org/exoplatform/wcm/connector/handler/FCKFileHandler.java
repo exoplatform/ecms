@@ -69,8 +69,7 @@ public class FCKFileHandler {
     } else {
       file.setAttribute("nodeType", sourceNode.getPrimaryNodeType().getName());
     }
-    if (sourceNode.isNodeType(NodetypeConstant.EXO_WEBCONTENT)
-        || sourceNode.isNodeType(NodetypeConstant.EXO_ARTICLE)){
+    if (sourceNode.isNodeType(NodetypeConstant.EXO_WEBCONTENT)) {
       file.setAttribute("url",getDocURL(displayNode, currentPortal));
     } else {
       file.setAttribute("url",getFileURL(displayNode));

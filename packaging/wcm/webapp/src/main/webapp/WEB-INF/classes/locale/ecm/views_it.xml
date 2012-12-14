@@ -1,21 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <bundle>
-<!--
-  ################resoucebundle FOR EXO:ARTICLE VIEW TEMPLATE############
--->
-    <Article>
-        <view>
-            <label>
-                <languages>Lingue</languages>
-                <summary>Sommario</summary>
-                <none-summary>Sommario è vuoto</none-summary>
-                <content>Contenuto</content>
-                <none-content>Contenuto è vuoto</none-content>
-                <link>I link</link>
-                <attachment>Gli allegati</attachment>
-            </label>
-        </view>
-    </Article>
     
     <View>
         <label>
@@ -267,24 +251,7 @@
             </label>
         </view>
     </Backup>
-    <!--
-  ################resoucebundle FOR exo:getMailAction VIEW TEMPLATE##############
-  -->
-    <Getmail>
-        <view>
-            <label>
-                <name>Nome Azione</name>
-                <lifecycle>Ciclo di Vita</lifecycle>
-                <protocol>Protocollo</protocol>
-                <host>Host</host>
-                <port>Porta</port>
-                <folder>Cartella</folder>
-                <username>Nome Utente</username>
-                <description>Descrizione</description>
-                <stote-path>Path Salvataggi</stote-path>
-            </label>
-        </view>
-    </Getmail>
+ 
     <!--
   ###################### resoucebundle for exo:iCalendarGenerateAction view template ####
   -->
@@ -300,42 +267,7 @@
             </label>
         </view>
     </Icalendar>
-    <!--
-  ###################### resoucebundle for exo:createRSSFeedAction view template ####
-  -->
-    <Rss>
-        <view>
-            <label>
-                <action-name>Nome Azione</action-name>
-                <feed-name>Nome Feed</feed-name>
-                <lifecycle>Ciclo di Vita</lifecycle>
-                <schedule-type>Tipo Schedulazione</schedule-type>
-                <start-time>Tempo Inizio</start-time>
-                <end-time>Tempo Fine</end-time>
-                <repeat-count>Ripeti (volte)</repeat-count>
-                <time-inteval>Intervallo Tempo</time-inteval>
-                <cron-expression>Espressione Cron</cron-expression>
-                <feed-node-name>Nome Nodo Feed</feed-node-name>
-                <feed-store-path>Path Salvataggi Feed</feed-store-path>
-                <query-items>Oggetti Query</query-items>
-                <rss-url>URL RSS</rss-url>
-                <feed-title>Titolo Feed</feed-title>
-                <feed-type>Tipo Feed</feed-type>
-                <rss-version>Versione RSS</rss-version>
-                <link>Link</link>
-                <description>Descrizione</description>
-                <language>Lingua</language>
-                <copyright>Copyright</copyright>
-                <publish-date>Data Pubblicazione</publish-date>
-                <owner-name>Nome Proprietario</owner-name>
-                <owner-email>Email Proprietario</owner-email>
-                <image-url>URL Immagine</image-url>
-                <category>Categoria</category>
-                <keywords>Parole Chiave</keywords>
-                <query-path>Path Query</query-path>
-            </label>
-        </view>
-    </Rss>
+ 
     <!--
   ###################### resoucebundle for exo:addMetadataAction view template ####
   -->
@@ -349,43 +281,7 @@
             </label>
         </view>
     </AddMetadata>
-    <!--
-  ###################### resoucebundle for exo:ReloadBPAction view template ####
-  -->
-    <ReloadAction>
-        <view>
-            <label>
-                <action-name>Nome Azione</action-name>
-                <lifecycle>Ciclo di Vita</lifecycle>
-                <description>Descrizione</description>
-            </label>
-        </view>
-    </ReloadAction>
-    <!--
-  ###################### resoucebundle for exo:sendMailAction view template ####
-  -->
-    <SendMail>
-        <view>
-            <label>
-                <action-name>Nome Azione</action-name>
-                <lifecycle>Ciclo di Vita</lifecycle>
-                <description>Descrizione</description>
-                <mail-to>Manda Mail A</mail-to>
-            </label>
-        </view>
-    </SendMail>
-    <!--
-  ###################### resoucebundle for exo:transformBinaryToTextAction view template ####
-  -->
-    <Transform>
-        <view>
-            <label>
-                <action-name>Nome Azione</action-name>
-                <lifecycle>Ciclo di Vita</lifecycle>
-                <description>Descrizione</description>
-            </label>
-        </view>
-    </Transform>
+
     <!--
   ###################### resoucebundle for exo:autoVersioning view template ####
   -->

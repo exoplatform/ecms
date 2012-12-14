@@ -42,7 +42,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd http:
       <!-- Specify the node type of document which will be show on the dialog form -->
       <preference>
         <name>type</name>
-        <value>exo:article</value>
+        <value>nt:file</value>
         <read-only>false</read-only>
       </preference>
       <!-- The custom button Save -->
@@ -117,7 +117,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd http:
       <!-- Specify the node type of document which will be show on the dialog form -->
       <preference>
         <name>type</name>
-        <value>exo:article</value>
+        <value>nt:file</value>
         <read-only>false</read-only>
       </preference>
       <!-- The custom button Save -->
@@ -199,7 +199,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd http:
       <!-- Specify the node type of document which will be show on the dialog form -->
       <preference>
         <name>type</name>
-        <value>exo:article</value>
+        <value>nt:file</value>
         <read-only>false</read-only>
       </preference>
       <!-- The custom button Save -->

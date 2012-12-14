@@ -21,7 +21,6 @@ import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +29,6 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
-import org.exoplatform.commons.utils.ISO8601;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
@@ -48,8 +46,6 @@ public class TestCmsService extends BaseWCMTestCase {
   private CmsService cmsService;
 
   private static final String ARTICLE = "exo:article";
-
-  private static final String SAMPLE = "exo:sample";
 
   private static final String NTRESOURCE = "nt:resource";
 
@@ -121,148 +117,7 @@ public class TestCmsService extends BaseWCMTestCase {
     return map;
   }
 
-  /**
-   * Create data for Node with String and date time property
-   */
-  private Map<String, JcrInputProperty> createSampleMapInput() {
-    Map<String, JcrInputProperty> map = new HashMap<String, JcrInputProperty>();
-    String titlePath = CmsService.NODE + "/" + "exo:title";
-    String descriptPath = CmsService.NODE + "/" + "exo:description";
-    String datePath = CmsService.NODE + "/" + "exo:date";
-    String datetimePath = CmsService.NODE + "/" + "exo:datetime";
-    String summaryPath = CmsService.NODE + "/" + "exo:summary";
-    String contentPath = CmsService.NODE + "/" + "exo:content";
-    String totalScorePath = CmsService.NODE + "/" + "exo:totalScore";
-    String averageScorePath = CmsService.NODE + "/" + "exo:averageScore";
-    String moveablePath = CmsService.NODE + "/" + "exo:moveable";
 
-    JcrInputProperty inputProperty = new JcrInputProperty();
-    inputProperty.setValue("document_2");
-    inputProperty.setJcrPath(CmsService.NODE);
-    //inputProperty.setMixintype("mix:cms");
-    map.put(CmsService.NODE, inputProperty);
-
-    inputProperty = new JcrInputProperty();
-    inputProperty.setJcrPath(titlePath);
-    inputProperty.setValue("this is title");
-    map.put(titlePath, inputProperty);
-
-    inputProperty = new JcrInputProperty();
-    inputProperty.setJcrPath(descriptPath);
-    inputProperty.setValue("this is description");
-    map.put(descriptPath, inputProperty);
-
-    inputProperty = new JcrInputProperty();
-    inputProperty.setJcrPath(datePath);
-    inputProperty.setValue(ISO8601.parse("06/12/2009"));
-    map.put(datePath, inputProperty);
-
-    inputProperty = new JcrInputProperty();
-    inputProperty.setJcrPath(datetimePath);
-    inputProperty.setValue(ISO8601.parse("06/12/2009 14:58:49"));
-    map.put(datetimePath, inputProperty);
-
-    inputProperty = new JcrInputProperty();
-    inputProperty.setJcrPath(summaryPath);
-    inputProperty.setValue("this is summary");
-    map.put(summaryPath, inputProperty);
-
-    inputProperty = new JcrInputProperty();
-    inputProperty.setJcrPath(contentPath);
-    inputProperty.setValue("this is sample's content");
-    map.put(contentPath, inputProperty);
-
-    inputProperty = new JcrInputProperty();
-    inputProperty.setJcrPath(totalScorePath);
-    inputProperty.setValue(new Long(15));
-    map.put(totalScorePath, inputProperty);
-
-    inputProperty = new JcrInputProperty();
-    inputProperty.setJcrPath(averageScorePath);
-    inputProperty.setValue(new Double(1.23));
-    map.put(averageScorePath, inputProperty);
-
-    inputProperty = new JcrInputProperty();
-    inputProperty.setJcrPath(moveablePath);
-    inputProperty.setValue("true");
-    map.put(moveablePath, inputProperty);
-    return map;
-  }
-
-  /**
-   * Create data for Node with String and date time property
-   */
-  private Map<String, JcrInputProperty> createSampleMapInputEdit() {
-    Map<String, JcrInputProperty> map = new HashMap<String, JcrInputProperty>();
-    String titlePath = CmsService.NODE + "/" + "exo:title";
-    String descriptPath = CmsService.NODE + "/" + "exo:description";
-    String datePath = CmsService.NODE + "/" + "exo:date";
-    String datetimePath = CmsService.NODE + "/" + "exo:datetime";
-    String summaryPath = CmsService.NODE + "/" + "exo:summary";
-    String contentPath = CmsService.NODE + "/" + "exo:content";
-    String totalScorePath = CmsService.NODE + "/" + "exo:totalScore";
-    String averageScorePath = CmsService.NODE + "/" + "exo:averageScore";
-    String moveablePath = CmsService.NODE + "/" + "exo:moveable";
-
-    String linkPath = CmsService.NODE + "/" + "exo:linkdata";
-
-    JcrInputProperty inputProperty = new JcrInputProperty();
-    inputProperty.setValue("document_2");
-    inputProperty.setJcrPath(CmsService.NODE);
-    //inputProperty.setMixintype("mix:cms");
-    map.put(CmsService.NODE, inputProperty);
-
-    inputProperty = new JcrInputProperty();
-    inputProperty.setJcrPath(titlePath);
-    inputProperty.setValue("this is title edit");
-    map.put(titlePath, inputProperty);
-
-    inputProperty = new JcrInputProperty();
-    inputProperty.setJcrPath(descriptPath);
-    inputProperty.setValue("this is description");
-    map.put(descriptPath, inputProperty);
-
-    inputProperty = new JcrInputProperty();
-    inputProperty.setJcrPath(datePath);
-    inputProperty.setValue(ISO8601.parse("06/12/2009"));
-    map.put(datePath, inputProperty);
-
-    inputProperty = new JcrInputProperty();
-    inputProperty.setJcrPath(datetimePath);
-    inputProperty.setValue(ISO8601.parse("06/12/2009 14:58:49"));
-    map.put(datetimePath, inputProperty);
-
-    inputProperty = new JcrInputProperty();
-    inputProperty.setJcrPath(summaryPath);
-    inputProperty.setValue("this is summary");
-    map.put(summaryPath, inputProperty);
-
-    inputProperty = new JcrInputProperty();
-    inputProperty.setJcrPath(contentPath);
-    inputProperty.setValue("this is sample's content");
-    map.put(contentPath, inputProperty);
-
-    inputProperty = new JcrInputProperty();
-    inputProperty.setJcrPath(totalScorePath);
-    inputProperty.setValue(new Long(16));
-    map.put(totalScorePath, inputProperty);
-
-    inputProperty = new JcrInputProperty();
-    inputProperty.setJcrPath(averageScorePath);
-    inputProperty.setValue(new Double(2.34));
-    map.put(averageScorePath, inputProperty);
-
-    inputProperty = new JcrInputProperty();
-    inputProperty.setJcrPath(moveablePath);
-    inputProperty.setValue("false");
-    map.put(moveablePath, inputProperty);
-
-    inputProperty = new JcrInputProperty();
-    inputProperty.setJcrPath(linkPath);
-    inputProperty.setValue(COLLABORATION_WS + ":/referencedNode");
-    map.put(linkPath, inputProperty);
-    return map;
-  }
 
   /**
    * Create data for Node with String and date time property
@@ -345,22 +200,22 @@ public class TestCmsService extends BaseWCMTestCase {
    * Expect: node: name = "document_1";property for node: exo:title = "this is title";
    *  exo:summary="this is summary";exo:text="this is article content"
    */
-//  public void testStoreNodeArticleByPath1() throws RepositoryException, Exception {
-//    Node storeNode = session.getRootNode().addNode("storeNode");
-//    session.save();
-//    Map<String, JcrInputProperty> map = createArticleMapInput();
-//    String path = cmsService.storeNode(COLLABORATION_WS, ARTICLE, storeNode.getPath(), map, REPO_NAME);
-//    assertTrue(session.itemExists(path));
-//    Node articleNode = (Node)session.getItem(path);
-//    assertEquals("document_1", articleNode.getName());
-//    assertEquals("this is title", articleNode.getProperty("exo:title").getString());
-//    assertEquals("this is summary", articleNode.getProperty("exo:summary").getString());
-//    assertEquals("this is article content", articleNode.getProperty("exo:text").getString());
-//
-//    articleNode.remove();
-//    storeNode.remove();
-//    session.save();
-//  }
+  public void testStoreNodeArticleByPath1() throws RepositoryException, Exception {
+    Node storeNode = session.getRootNode().addNode("storeNode");
+    session.save();
+    Map<String, JcrInputProperty> map = createArticleMapInput();
+    String path = cmsService.storeNode(COLLABORATION_WS, ARTICLE, storeNode.getPath(), map);
+    assertTrue(session.itemExists(path));
+    Node articleNode = (Node)session.getItem(path);
+    assertEquals("document_1", articleNode.getName());
+    assertEquals("this is title", articleNode.getProperty("exo:title").getString());
+    assertEquals("this is summary", articleNode.getProperty("exo:summary").getString());
+    assertEquals("this is article content", articleNode.getProperty("exo:text").getString());
+
+    articleNode.remove();
+    storeNode.remove();
+    session.save();
+  }
 
   /**
    *  Create binary data
@@ -406,7 +261,6 @@ public class TestCmsService extends BaseWCMTestCase {
         assertTrue(session.itemExists(path1));
         Node binaryNode = (Node)session.getItem(path1);
         assertEquals("BinaryData", binaryNode.getName());
-        InputStream is = getClass().getResource("/conf/standalone/system-configuration.xml").openStream();
         assertEquals("test", binaryNode.getProperty("jcr:data").getString());
         binaryNode.remove();
         session.save();
@@ -436,76 +290,6 @@ public class TestCmsService extends BaseWCMTestCase {
   }
 
   /**
-   * Test property value is String, Date time, Long, Double, Boolean
-   * Input: property of sample node: exo:title = "this is title";exo:description="this is description";
-   *  exo:summary = "this is summary";exo:content = "this is sample's content"; exo:averageScore = 1.23;
-   *  exo:totalScore = 15; exo:moveable = true
-   *  exo:date = Calendar of "06/12/2009"; exo:datetime = Calendar of "06/12/2009 14:58:49"
-   *        name = "document_2";
-   *  Expect: return sample node with the same properties listed above
-   * @throws RepositoryException
-   * @throws Exception
-   */
-  @Test
-  public void testStoreNodeSample() throws RepositoryException, Exception {
-    Node storeNode = session.getRootNode();
-    Map<String, JcrInputProperty> map = createSampleMapInput();
-    String path1 = cmsService.storeNode(SAMPLE, storeNode, map, true);
-    assertTrue(session.itemExists(path1));
-    Node sampleNode = (Node)session.getItem(path1);
-    assertEquals("document_2", sampleNode.getName());
-    assertEquals("this is title", sampleNode.getProperty("exo:title").getString());
-    assertEquals("this is description", sampleNode.getProperty("exo:description").getString());
-    assertEquals(ISO8601.parse("06/12/2009"), sampleNode.getProperty("exo:date").getDate());
-    assertEquals(ISO8601.parse("06/12/2009 14:58:49"), sampleNode.getProperty("exo:datetime").getDate());
-    assertEquals("this is summary", sampleNode.getProperty("exo:summary").getString());
-    assertEquals("this is sample's content", sampleNode.getProperty("exo:content").getString());
-
-    sampleNode.remove();
-    session.save();
-  }
-
-  /**
-   * Test edit property of added mixin type
-   * Input: property of sample node: exo:title = "this is title";exo:description="this is description";
-   *  exo:summary = "this is summary";exo:content = "this is sample's content"; exo:averageScore = 2.34;
-   *  exo:totalScore = 16; exo:moveable = true
-   *  exo:date = Calendar of "06/12/2009"; exo:datetime = Calendar of "06/12/2009 14:58:49"
-   *        name = "document_2";
-   *  Expect: return sample node with the same properties listed above
-
-   */
-  @Test
-  public void testStoreNodeSampleByEdit() throws RepositoryException, Exception {
-    Node storeNode = session.getRootNode();
-    Map<String, JcrInputProperty> map;
-    String path2 = null;
-    if (!session.itemExists("/document_2")) {
-      map = createSampleMapInput();
-      path2 = cmsService.storeNode(SAMPLE, storeNode, map, true);
-      session.save();
-    }
-    map = createSampleMapInputEdit();
-    String path1 = cmsService.storeNode(SAMPLE, storeNode, map, false);
-    assertTrue(session.itemExists(path1));
-    Node sampleNode = (Node)session.getItem(path1);
-    assertEquals("document_2", sampleNode.getName());
-    assertEquals("this is title edit", sampleNode.getProperty("exo:title").getString());
-    assertEquals("this is description", sampleNode.getProperty("exo:description").getString());
-    assertEquals(ISO8601.parse("06/12/2009"), sampleNode.getProperty("exo:date").getDate());
-    assertEquals(ISO8601.parse("06/12/2009 14:58:49"), sampleNode.getProperty("exo:datetime").getDate());
-    assertEquals("this is summary", sampleNode.getProperty("exo:summary").getString());
-    assertEquals("this is sample's content", sampleNode.getProperty("exo:content").getString());
-    session.save();
-    session.getItem(path1).remove();
-    try {
-      if (path2 != null)
-        session.getItem(path2).remove();
-    } catch (Exception ex) {}
-    session.save();
-  }
-
-  /**
    * Test create property with reference type
    * Input: property for node: exo:category = uuid of one reference node; name = "document_3";
    * Expect: node: name = "document_3";property for node:  exo:category = uuid of one reference node above;
@@ -523,7 +307,7 @@ public class TestCmsService extends BaseWCMTestCase {
     session.save();
     String uuid = referencedNode.getUUID();
     Map<String, JcrInputProperty> map = createReferenceMapInput();
-    String path1 = cmsService.storeNode(SAMPLE, storeNode, map, true);
+    String path1 = cmsService.storeNode(ARTICLE, storeNode, map, true);
     assertTrue(session.itemExists(path1));
     Node sampleNode = (Node)session.getItem(path1);
     assertEquals("document_3", sampleNode.getName());
@@ -534,33 +318,6 @@ public class TestCmsService extends BaseWCMTestCase {
     session.save();
   }
 
-  /**
-   * Test method CmsService.storeNodeByUUID()
-   * Input: property of sample node: exo:title = "this is title";exo:description="this is description";
-   *  exo:summary = "this is summary";exo:content = "this is sample's content"; exo:averageScore = 2.34;
-   *  exo:totalScore = 16; exo:moveable = true
-   *  exo:date = Calendar of "06/12/2009"; exo:datetime = Calendar of "06/12/2009 14:58:49"
-   *        name = "document_2";
-   *  Expect: return sample node given by uuid with the same properties listed above
-   * @throws Exception
-   */
-  @Test
-  public void testStoreNodeByUUID() throws Exception {
-    Node storeNode = session.getRootNode();
-    Map<String, JcrInputProperty> map = createSampleMapInput();
-    String uuid = cmsService.storeNodeByUUID(SAMPLE, storeNode, map, true);
-    Node sampleNode = session.getNodeByUUID(uuid);
-    assertEquals("document_2", sampleNode.getName());
-    assertEquals("this is title", sampleNode.getProperty("exo:title").getString());
-    assertEquals("this is description", sampleNode.getProperty("exo:description").getString());
-    assertEquals(ISO8601.parse("06/12/2009"), sampleNode.getProperty("exo:date").getDate());
-    assertEquals(ISO8601.parse("06/12/2009 14:58:49"), sampleNode.getProperty("exo:datetime").getDate());
-    assertEquals("this is summary", sampleNode.getProperty("exo:summary").getString());
-    assertEquals("this is sample's content", sampleNode.getProperty("exo:content").getString());
-
-    sampleNode.remove();
-    session.save();
-  }
 
  /**
   * Test method CmsService.moveNode()
@@ -585,20 +342,4 @@ public class TestCmsService extends BaseWCMTestCase {
     session2.save();
   }
 
-  /**
-   *  Compare two input stream, return true if bytes of is1 equal bytes of is2
-   * @param is1
-   * @param is2
-   * @return
-   * @throws IOException
-   */
-  private boolean compareInputStream(InputStream is1, InputStream is2) throws IOException {
-    int b1, b2;
-    do {
-      b1 = is1.read();
-      b2 = is2.read();
-      if (b1 != b2) return false;
-    } while ((b1 !=-1) && (b2!=-1));
-    return true;
-  }
 }

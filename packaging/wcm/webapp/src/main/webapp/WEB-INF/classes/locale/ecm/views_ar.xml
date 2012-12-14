@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
-  <!--
-  ################resoucebundle FOR EXO:ARTICLE VIEW TEMPLATE############
-  -->
-  <Article>
-    <view>
-      <label>
-        <languages>اللغات</languages>
-        <summary>الملخص</summary>
-        <none-summary>الخلاصة فارغة</none-summary>
-        <content>المحتوى</content>
-        <none-content>المحتوى فارغ</none-content>
-        <link>الروابط</link>
-        <attachment>الملفات المرافقة</attachment>
-      </label>
-    </view>
-  </Article>
+  
   <View>
     <label>
       <languages>
@@ -261,24 +246,7 @@
       </label>
     </view>
   </Backup>
-  <!--
-  ################resoucebundle FOR exo:getMailAction VIEW TEMPLATE##############
-  -->
-  <Getmail>
-    <view>
-      <label>
-        <name>اسم الحركة</name>
-        <lifecycle>دورة الحياة</lifecycle>
-        <protocol>بروتوكول</protocol>
-        <host>المضيف</host>
-        <port>المنفذ</port>
-        <folder>المجلد</folder>
-        <username>اسم المستخدم</username>
-        <description>الوصف</description>
-        <stote-path>مسار التخزين</stote-path>
-      </label>
-    </view>
-  </Getmail>
+ 
   <!--
   ###################### resoucebundle for exo:iCalendarGenerateAction view template ####
   -->
@@ -294,42 +262,7 @@
       </label>
     </view>
   </Icalendar>
-  <!--
-  ###################### resoucebundle for exo:createRSSFeedAction view template ####
-  -->
-  <Rss>
-    <view>
-      <label>
-        <action-name>اسم العمل</action-name>
-        <feed-name>اسم التدفق</feed-name>
-        <lifecycle>دورة الحياة</lifecycle>
-        <schedule-type>نوع التخطيط</schedule-type>
-        <start-time>بداية التوقيت</start-time>
-        <end-time>نهاية التوقيت</end-time>
-        <repeat-count>تكرار العد</repeat-count>
-        <time-interval>الفترة الزمنية</time-interval>
-        <cron-expression>عبارة كرون</cron-expression>
-		<feed-node-name>اسم العقدة</feed-node-name>
-        <feed-store-path>مسارالتخزين</feed-store-path>
-        <query-items>عناصر الاستبيان</query-items>
-        <rss-url> عنوان الموارد الموحد لــرسس</rss-url>
-        <feed-title>عنوان التدفق</feed-title>
-        <feed-type>نوع التدفق</feed-type>
-        <rss-version>اصدار رسس</rss-version>
-        <link>الوصلة</link>
-        <description>الوصف</description>
-        <language>اللغة</language>
-        <copyright>حقّ النشر</copyright>
-        <publish-date>تاريخ الاصدار</publish-date>
-        <owner-name>اسم المالك</owner-name>
-        <owner-email>عنوان البريد الإلكتروني للمالك</owner-email>
-        <image-url>عنوان الموارد الموحد لــلصورة</image-url>
-        <category>الفئة</category>
-        <keywords>الكلمات المفاتيح</keywords>
-        <query-path>مسار الاستبيان</query-path>
-      </label>
-    </view>
-  </Rss>
+ 
   <!--
   ###################### resoucebundle for exo:addMetadataAction view template ####
   -->
@@ -343,43 +276,7 @@
       </label>
     </view>
   </AddMetadata>
-  <!--
-  ###################### resoucebundle for exo:ReloadBPAction view template ####
-  -->
-  <ReloadAction>
-    <view>
-      <label>
-        <action-name>اسم العمل</action-name>
-        <lifecycle>دورة الحياة</lifecycle>
-        <description>الوصف</description>
-      </label>
-    </view>
-  </ReloadAction>
-  <!--
-  ###################### resoucebundle for exo:sendMailAction view template ####
-  -->
-  <SendMail>
-    <view>
-      <label>
-        <action-name>اسم العمل</action-name>
-        <lifecycle>دورة الحياة</lifecycle>
-        <description>الوصف</description>
-        <mail-to>بعث الرسالة الالكترونية إلى</mail-to>
-      </label>
-    </view>
-  </SendMail>
-  <!--
-  ###################### resoucebundle for exo:transformBinaryToTextAction view template ####
-  -->
-  <Transform>
-    <view>
-      <label>
-        <action-name>الاسم</action-name>
-        <lifecycle>دورة الحياة</lifecycle>
-        <description>الوصف</description>
-      </label>
-    </view>
-  </Transform>
+ 
   <!--
   ###################### resoucebundle for exo:autoVersioning view template ####
   -->

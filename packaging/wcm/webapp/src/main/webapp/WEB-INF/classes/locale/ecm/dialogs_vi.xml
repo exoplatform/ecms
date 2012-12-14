@@ -17,23 +17,7 @@
       </label>
     </dialog>
   </Ecm>
-  <!--
-  ###################### resoucebundle for exo:article dialogs template ####
-  -->
-  <Article>
-    <dialog>
-      <label>
-        <name>Tên</name>
-        <title>Tiêu đề</title>
-        <summary>Tóm tắt</summary>
-        <content>Nội dung</content>
-        <lastModifiedDate>Ngày sửa đổi mới nhất</lastModifiedDate>
-      </label>
-    </dialog>
-    <msg>
-      <no-view>This node or this template was deleted or changed. Please click refresh button.</no-view>
-    </msg>
-  </Article>
+ 
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
@@ -63,28 +47,7 @@
 	    <LinkURL>URL</LinkURL>
     </label>
   </UIDocumentForm>
-  <!--
-  ###################### resoucebundle for exo:podcast dialogs template ####
-  -->
-  <Podcast>
-    <dialog>
-      <label>
-        <name>Name</name>
-        <categories>Categories</categories>
-        <title>Title</title>
-        <link>Link</link>
-        <author>Author</author>
-        <explicit>Explicit</explicit>
-        <category>Category</category>
-        <keywords>Keyword</keywords>
-        <publish-date>Publish Date</publish-date>
-        <description>Description</description>
-        <upload-file>Upload File</upload-file>
-        <mime-type>Mime Type</mime-type>
-        <lenght>Length</lenght>
-      </label>
-    </dialog>
-  </Podcast>
+ 
   <!--
   ###################### resoucebundle for HTMLFile dialogs template ####
   -->
@@ -107,25 +70,7 @@
       </label>
     </dialog>
   </Calendar>
-  <!--
-  ###################### resoucebundle for exo:event dialogs template ####
-  -->
-  <Event>
-    <dialog>
-      <label>
-        <name>Tên</name>
-        <subject>Chủ đề</subject>
-        <description>Mô tả</description>
-        <location>Vị trí</location>
-        <start-date-time>Thời gian bắt đầu</start-date-time>
-        <end-date-time>Thời gian kết thúc</end-date-time>
-        <comment>Nhận xét</comment>
-        <category>Hạng mục</category>
-        <availability>Tính sẵn dùng</availability>
-        <share-type>Loại chia sẻ</share-type>
-      </label>
-    </dialog>
-  </Event>
+ 
   <!--
   ###################### resoucebundle for nt:file dialogs template ####
   -->
@@ -140,91 +85,7 @@
       </label>
     </dialog>
   </File>
-  <!--
-  ###################### resoucebundle for rma:filePlan dialogs template ####
-  -->
-  <FilePlan>
-    <dialog>
-      <label>
-        <name>Tên</name>
-        <categories>Categories</categories>
-        <record-properties>Thuộc tính bản ghi</record-properties>
-        <process-properties>Thuộc tính xử lý</process-properties>
-        <note>Ghi chú</note>
-        <record-category-identifier>Định dạng hạng mục bản ghi</record-category-identifier>
-        <disposition-author>Tác giả sắp xếp</disposition-author>
-        <disposition-instruction>Giới thiệu cách sắp xếp</disposition-instruction>
-        <permanent-record-indicator>Chỉ ra bản ghi cố định</permanent-record-indicator>
-        <contain-record-folder>Chứa đựng thu mục bản ghi</contain-record-folder>
-        <default-media-type>Loại phương tiện mặc định</default-media-type>
-        <default-marking-list>Danh sách đánh giấu mặc định</default-marking-list>
-        <default-originating-organization>Nguồn gốc tổ chức mặc định</default-originating-organization>
-        <vital-record-indicator>Chỉ ra bản ghi quan trọng</vital-record-indicator>
-        <vital-record-review-period>Xem lại bản ghi quan trọng</vital-record-review-period>
-        <process-cutoff>Xử lý cắt</process-cutoff>
-        <event-trigger>Sự kiện gây ra</event-trigger>
-        <cutoff-period>Giai đoạn cắt</cutoff-period>
-        <cutoff-on-obsolete>Quá trình cắt đã hết hạn</cutoff-on-obsolete>
-        <cutoff-on-superseded>Quá trình cắt đã được thay thế</cutoff-on-superseded>
-        <process-hold>Quá trình nắm giữ</process-hold>
-        <hold-period>Thời kì nắm giữ</hold-period>
-        <discretionary-hold>Nắm giữ tùy ý</discretionary-hold>
-        <process-transfer>Quá trình chuyển tải</process-transfer>
-        <default-transfer-location>Vị trí truyền tải mặc định</default-transfer-location>
-        <transfer-block-size>Kích thước khối truyền tải</transfer-block-size>
-        <process-accession>Quá trình bổ sung</process-accession>
-        <accession-location>Vị trí bổ sung</accession-location>
-        <accession-block-size>Kích thước khối bổ sung</accession-block-size>
-        <process-destruction>Quá trình phá hủy</process-destruction>
-      </label>
-    </dialog>
-  </FilePlan>
-  <!--
-  ###################### resoucebundle for kfx:document dialogs template ####
-  -->
-  <Kofax>
-    <dialog>
-      <label>
-        <name>Tên</name>
-        <categories>Categories</categories>
-      </label>
-    </dialog>
-  </Kofax>
-  <!--
-  ###################### resoucebundle for exo:sample dialogs template ####
-  -->
-  <Sample>
-    <dialog>
-      <label>
-        <name>Tên</name>
-        <categories>Categories</categories>
-        <title>Tiêu đề</title>
-        <description>Mô tả</description>
-        <date>Ngày</date>
-        <date-time>Thời gian</date-time>
-        <upload-image>Tải ảnh lên</upload-image>
-        <mime-type>MimeType</mime-type>
-        <summary>Tóm tắt</summary>
-        <content>Nội dung</content>
-      </label>
-    </dialog>
-  </Sample>
-  <!--
-  ###################### resoucebundle for exo:workflow dialogs template ####
-  -->
-  <Workflow>
-    <dialog>
-      <label>
-        <id>Id</id>
-        <name>Tên</name>
-        <lifecycle>Vòng đời</lifecycle>
-        <description>Mô tả</description>
-        <validator>Người xác thực</validator>
-        <to-workspace>Vùng làm việc</to-workspace>
-        <with-path>Đường dẫn</with-path>
-      </label>
-    </dialog>
-  </Workflow>
+
   <UIActionForm>
     <label>
       <description>#{word.description}</description>
@@ -297,43 +158,7 @@
       </label>
     </dialog>
   </Icalendar>
-  <!--
-  ###################### resoucebundle for exo:createRSSFeedAction dialogs template ####
-  -->
-  <Rss>
-    <dialog>
-      <label>
-        <id>Id</id>
-        <feed-action-name>Tạo tên hành động</feed-action-name>
-        <lifecycle>Vòng đời</lifecycle>
-        <schedule-type>Lập biểu</schedule-type>
-        <start-time>Thời gian bắt đầu</start-time>
-        <end-time>Thời gian kết thúc</end-time>
-        <repeat-count>Số lần lặp</repeat-count>
-        <time-inteval>Khoảng thời gian</time-inteval>
-        <cron-expression>Cron expression</cron-expression>
-        <feed-node-name>Tên Feed</feed-node-name>
-        <feed-store-path>Đường dẫn lưu Feed</feed-store-path>
-        <query-items>Phần tử truy vấn</query-items>
-        <rss-url>Đường dẫn Rss</rss-url>
-        <feed-title>Tiêu đề Feed</feed-title>
-        <feed-type>Loại Feed</feed-type>
-        <summary>Summary</summary>
-        <title>Title</title>
-        <rss-version>Phiên bản Rss</rss-version>
-        <link>Liên kết</link>
-        <description>Mô tả</description>
-        <language>Ngôn ngữ</language>
-        <copyright>Bản quyền của</copyright>
-        <publish-date>Ngày công bố</publish-date>
-        <owner-name>Tên người sở hữu</owner-name>
-        <owner-email>Thư điện tử người sở hữu</owner-email>
-        <image-url>Đường dẫn ảnh</image-url>
-        <category>Hạng mục</category>
-        <keywords>Từ khóa</keywords>
-      </label>
-    </dialog>
-  </Rss>
+ 
   <!--
   ###################### resoucebundle for exo:addMetadataAction dialogs template ####
   -->
@@ -348,58 +173,7 @@
       </label>
     </dialog>
   </AddMetadata>
-  <!--
-  ###################### resoucebundle for exo:ReloadBPAction dialogs template ####
-  -->
-  <ReloadAction>
-    <dialog>
-      <label>
-        <id>Id</id>
-        <name>Tên</name>
-        <lifecycle>Vòng đời</lifecycle>
-        <description>Mô tả</description>
-      </label>
-    </dialog>
-  </ReloadAction>
-  <!--
-  ###################### resoucebundle for exo:sendMailAction dialogs template ####
-  -->
-  <SendMail>
-    <dialog>
-      <label>
-        <id>Id</id>
-        <name>Tên</name>
-        <lifecycle>Vòng đời</lifecycle>
-        <schedule-type>Lập biểu</schedule-type>
-        <start-time>Thời gian bắt đầu</start-time>
-        <end-time>Thời gian kết thúc</end-time>
-        <repeat-count>Số lần lặp</repeat-count>
-        <time-inteval>Khoảng thời gian</time-inteval>
-        <cron-expression>Cron expression</cron-expression>
-        <description>Mô tả</description>
-        <mail-to>Gửi thư tới</mail-to>
-      </label>
-    </dialog>
-  </SendMail>
-  <!--
-  ###################### resoucebundle for exo:transformBinaryToTextAction dialogs template ####
-  -->
-  <Transform>
-    <dialog>
-      <label>
-        <id>Id</id>
-        <name>Tên</name>
-        <lifecycle>Vòng đời</lifecycle>
-        <schedule-type>Lập biểu</schedule-type>
-        <start-time>Thời gian bắt đầu</start-time>
-        <end-time>Thời gian kết thúc</end-time>
-        <repeat-count>Số lần lặp</repeat-count>
-        <time-inteval>Khoảng thời gian</time-inteval>
-        <cron-expression>Cron expression</cron-expression>
-        <description>Mô tả</description>
-      </label>
-    </dialog>
-  </Transform>
+
   <!--
   ###################### resoucebundle for exo:autoVersioning dialogs template ####
   -->

@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
-  <!--
-  ################resoucebundle FOR EXO:ARTICLE VIEW TEMPLATE############
-  -->
-  <Article>
-    <view>
-      <label>
-        <languages>言語</languages>
-        <summary>サマリー</summary>
-        <none-summary>サマリーが空です</none-summary>
-        <content>コンテンツ</content>
-        <none-content>コンテンツが空です</none-content>
-        <link>リンク</link>
-        <attachment>添付</attachment>
-      </label>
-    </view>
-  </Article>
+
   <View>
     <label>
       <languages>
@@ -262,24 +247,7 @@
       </label>
     </view>
   </Backup>
-  <!--
-  ################resoucebundle FOR exo:getMailAction VIEW TEMPLATE##############
-  -->
-  <Getmail>
-    <view>
-      <label>
-        <name>アクション名</name>
-        <lifecycle>ライフサイクル</lifecycle>
-        <protocol>プロトコル</protocol>
-        <host>ホスト</host>
-        <port>ポート</port>
-        <folder>フォルダ</folder>
-        <username>ユーザ名</username>
-        <description>説明</description>
-        <stote-path>保存パス</stote-path>
-      </label>
-    </view>
-  </Getmail>
+ 
   <!--
   ###################### resoucebundle for exo:iCalendarGenerateAction view template ####
   -->
@@ -295,42 +263,7 @@
       </label>
     </view>
   </Icalendar>
-  <!--
-  ###################### resoucebundle for exo:createRSSFeedAction view template ####
-  -->
-  <Rss>
-    <view>
-      <label>
-        <action-name>アクション名</action-name>
-        <feed-name>フィード名</feed-name>
-        <lifecycle>ライフサイクル</lifecycle>
-        <schedule-type>スケジュールタイプ</schedule-type>
-        <start-time>開始時刻</start-time>
-        <end-time>終了時刻</end-time>
-        <repeat-count>繰り返し回数</repeat-count>
-        <time-inteval>インターバル</time-inteval>
-        <cron-expression>表現のクローン</cron-expression>
-        <feed-node-name>フィードノード名</feed-node-name>
-        <feed-store-path>フィード保存パス</feed-store-path>
-        <query-items>アイテム検索</query-items>
-        <rss-url>Rss URL</rss-url>
-        <feed-title>フィードタイトル</feed-title>
-        <feed-type>フィードタイプ</feed-type>
-        <rss-version>Rss バージョン</rss-version>
-        <link>リンク</link>
-        <description>説明</description>
-        <language>言語</language>
-        <copyright>著作権</copyright>
-        <publish-date>公開日</publish-date>
-        <owner-name>オーナ名</owner-name>
-        <owner-email>オーナメール</owner-email>
-        <image-url>画像URL</image-url>
-        <category>カテゴリ</category>
-        <keywords>キーワード</keywords>
-        <query-path>検索パス</query-path>
-      </label>
-    </view>
-  </Rss>
+
   <!--
   ###################### resoucebundle for exo:addMetadataAction view template ####
   -->
@@ -344,43 +277,7 @@
       </label>
     </view>
   </AddMetadata>
-  <!--
-  ###################### resoucebundle for exo:ReloadBPAction view template ####
-  -->
-  <ReloadAction>
-    <view>
-      <label>
-        <action-name>アクション名</action-name>
-        <lifecycle>ライフサイクル</lifecycle>
-        <description>説明</description>
-      </label>
-    </view>
-  </ReloadAction>
-  <!--
-  ###################### resoucebundle for exo:sendMailAction view template ####
-  -->
-  <SendMail>
-    <view>
-      <label>
-        <action-name>アクション名</action-name>
-        <lifecycle>ライフサイクル</lifecycle>
-        <description>説明</description>
-        <mail-to>メール送信</mail-to>
-      </label>
-    </view>
-  </SendMail>
-  <!--
-  ###################### resoucebundle for exo:transformBinaryToTextAction view template ####
-  -->
-  <Transform>
-    <view>
-      <label>
-        <action-name>名前</action-name>
-        <lifecycle>ライフサイクル</lifecycle>
-        <description>説明</description>
-      </label>
-    </view>
-  </Transform>
+ 
   <!--
   ###################### resoucebundle for exo:autoVersioning view template ####
   -->

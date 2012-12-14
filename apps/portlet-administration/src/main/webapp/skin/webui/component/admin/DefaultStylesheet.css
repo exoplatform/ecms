@@ -318,23 +318,6 @@
   height: 350px;
 }
 
-/*############################## -- CBTemplate -- ########################*/
-
-.UIECMAdminPortlet .CBTemplate .CBTempForm  {
-	padding: 10px;
-}
-
-.UIECMAdminPortlet .CBTemplate .CBTempForm .HorizontalLayout {
-  background: #f7f7f7;
-  padding-top: 10px;
-  border: 1px solid #b7b7b7;
-}
-
-.CBTempForm .HorizontalLayout .textarea {
-  width: 380px;
-  height: 350px;
-}
-
 /*############################## -- UIActionManager -- ########################*/
 
 .UIECMAdminPortlet .UIActionManager {
@@ -356,8 +339,6 @@
 }
 
 /*############################## -- UIScriptManager  -- ########################*/
-
-/*------------------------------UICBScripts------------------------*/
 
 .UIECMAdminPortlet .UIECMScripts  {
 	padding: 10px;
@@ -396,30 +377,6 @@
   width: 90%;
   float: left; /* orientation=lt */
   float: right; /* orientation=rt */
-}
-
-/*------------------------------UICBScripts------------------------*/
-
-.UIECMAdminPortlet .UICBScripts  {
-  padding: 2px 0px 0px 0px;
-}
-
-.UIECMAdminPortlet .UICBScripts .CBScriptForm {
-  width: 95%;
-  margin: 10px auto;
-}
-
-.UICBScripts .CBScriptForm .HorizontalLayout {
-  padding-top: 10px;
-  background: #f7f7f7;
-  border: 1px solid #b7b7b7;
-}
-
-.UICBScripts .HorizontalLayout .FormContainer .FieldComponent .textarea {
-  width: 90%;
-  height: 350px;
-	float: left; /* orientation=lt */
-	float: right; /* orientation=rt */
 }
 
 /*############################## -- UIQueriesManager  -- ########################*/

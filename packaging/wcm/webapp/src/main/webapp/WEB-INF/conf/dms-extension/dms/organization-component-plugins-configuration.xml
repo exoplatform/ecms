@@ -314,9 +314,9 @@
 	                    <collection type="java.util.ArrayList">
 	                      <value>
 	                        <object type="org.exoplatform.services.cms.queries.impl.NewUserConfig$Query">
-	                          <field name="queryName"><string>allArticles</string></field>
+	                          <field name="queryName"><string>All Documents</string></field>
 	                          <field name="language"><string>xpath</string></field>
-	                          <field name="query"><string>//element(*, exo:article)[not(@jcr:mixinTypes = 'exo:restoreLocation')]</string></field>
+	                          <field name="query"><string>//element(*, nt:file)[not(@jcr:mixinTypes = 'exo:restoreLocation')]</string></field>
 	                        </object>
 	                      </value>
 	                    </collection>

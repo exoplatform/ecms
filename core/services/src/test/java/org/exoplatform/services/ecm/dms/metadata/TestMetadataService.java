@@ -85,13 +85,6 @@ public class TestMetadataService extends BaseWCMTestCase {
   public void testGetMetadataList() throws Exception {
     List<String> metadataTypes = metadataService.getMetadataList();
     assertTrue(metadataTypes.contains("dc:elementSet"));
-    assertTrue(metadataTypes.contains("rma:record"));
-    assertTrue(metadataTypes.contains("rma:vitalRecord"));
-    assertTrue(metadataTypes.contains("rma:cutoffable"));
-    assertTrue(metadataTypes.contains("rma:holdable"));
-    assertTrue(metadataTypes.contains("rma:transferable"));
-    assertTrue(metadataTypes.contains("rma:accessionable"));
-    assertTrue(metadataTypes.contains("rma:destroyable"));
   }
 
   /**

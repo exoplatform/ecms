@@ -92,8 +92,6 @@ public class NodetypeConstant {
 
   public static final String EXO_WEBCONTENT                   = "exo:webContent";
 
-  public static final String EXO_ARTICLE                      = "exo:article";
-
   public static final String EXO_CSS_FOLDER                   = "exo:cssFolder";
 
   public static final String EXO_JS_FOLDER                    = "exo:jsFolder";

@@ -48,7 +48,7 @@ import org.exoplatform.services.log.Log;
  * Syntax :<br/>
  * unchanged-nodetype-templates=<node name list>
  * For examples :<br/>
- * unchanged-nodetype-templates=nt:file, exo:article
+ * unchanged-nodetype-templates=nt:file, exo:webContent
  *
  */
 public class NodeTypeTemplateUpgradePlugin extends UpgradeProductPlugin {
