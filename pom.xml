@@ -42,45 +42,12 @@
     <org.exoplatform.ws.version>2.2.10-GA-SNAPSHOT</org.exoplatform.ws.version>
     <org.exoplatform.jcr.version>1.14.10-GA-SNAPSHOT</org.exoplatform.jcr.version>
     <org.exoplatform.jcr-services.version>1.14.10-GA-SNAPSHOT</org.exoplatform.jcr-services.version>
-<<<<<<< HEAD
-    <org.exoplatform.portal.version>3.4.0.Final</org.exoplatform.portal.version>
-    <exo.tool.framework.junit.version>1.2.0</exo.tool.framework.junit.version>
-    <org.exoplatform.commons.version>4.0.0.Alpha1-relooking-SNAPSHOT</org.exoplatform.commons.version>
-    <org.exoplatform.platform-ui.version>1.0.0-SNAPSHOT</org.exoplatform.platform-ui.version>
-    <org.exoplatform.doc.doc-style.version>1.0.9-SNAPSHOT</org.exoplatform.doc.doc-style.version>
-    <org.exoplatform.tool.version>1.0.0</org.exoplatform.tool.version>
-    <chromattic.version>1.1.4</chromattic.version>
-    <org.xcmis.version>1.2.2</org.xcmis.version>
-    <abdera.version>0.4.0-incubating</abdera.version>
-    <lucene-regex.version>2.4.1</lucene-regex.version>
-    <axiom.version>1.2.5</axiom.version>
-    <jaxen.version>1.1.1</jaxen.version>
-    <xml.parser.version>3.1</xml.parser.version>
-    <!-- 3rd parties -->
-    <c3p0.version>0.9.1.2</c3p0.version>
-    <org.gatein.wci.version>2.2.0-Beta02</org.gatein.wci.version>
-    <org.javassist.version>3.14.0-GA</org.javassist.version>
-    <commons-collections.version>3.2.1</commons-collections.version>
-    <commons-pool.version>1.5.5</commons-pool.version>
-    <html-parser.version>1.6</html-parser.version>
-    <stax.version>1.0</stax.version>
-    <org.jvnet.jaxb2.maven2.version>0.1</org.jvnet.jaxb2.maven2.version>
-    <cglib.version>2.2</cglib.version>
-    <antlr.version>2.7.6rc1</antlr.version>
-    <org.antlr.version>3.1.3</org.antlr.version>
-    <commons-dbcp.version>1.4</commons-dbcp.version>
-    <jcr.version>1.0</jcr.version>
-    <org.jsecurity.version>0.9.0</org.jsecurity.version>
-    <javax.transaction.version>1.0.1B</javax.transaction.version>
-    <net.oauth.version>20080621</net.oauth.version>
-=======
     <org.exoplatform.doc.doc-style.version>1.0.9-SNAPSHOT</org.exoplatform.doc.doc-style.version>
     <org.exoplatform.commons.version>4.0.0.Alpha1-SNAPSHOT</org.exoplatform.commons.version>
-    <org.gatein.common.version>2.1.0.Final</org.gatein.common.version>
->>>>>>> master
     <org.gatein.pc.version>2.3.2-GA</org.gatein.pc.version>
     <org.gatein.portal.version>3.4.0.Final</org.gatein.portal.version>
     <org.gatein.wci.version>2.2.0-Beta02</org.gatein.wci.version>
+    <org.gatein.common.version>2.1.0.Final</org.gatein.common.version>
     <!-- ************** -->
     <!-- Build settings -->
     <!-- ************** -->
@@ -90,21 +57,26 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-<<<<<<< HEAD
         <groupId>org.exoplatform.platform-ui</groupId>
         <artifactId>platform-ui-web-eXoResources</artifactId>
         <version>${org.exoplatform.platform-ui.version}</version>
+      </dependency>          
+       <dependency>
+        <groupId>org.exoplatform.commons</groupId>
+        <artifactId>commons-component-upgrade</artifactId>
+        <version>${org.exoplatform.commons.version}</version>
       </dependency>
-      <dependency>
-        <groupId>org.exoplatform.kernel</groupId>
-        <artifactId>exo.kernel.container</artifactId>
-        <version>${org.exoplatform.kernel.version}</version>
+       <dependency>
+        <groupId>org.exoplatform.commons</groupId>
+        <artifactId>commons-testing</artifactId>
+        <version>${org.exoplatform.commons.version}</version>
       </dependency>
-      <dependency>
-        <groupId>org.exoplatform.kernel</groupId>
-        <artifactId>exo.kernel.commons</artifactId>
-        <version>${org.exoplatform.kernel.version}</version>
-=======
+       <dependency>
+        <groupId>org.exoplatform.commons</groupId>
+        <artifactId>commons-webui-ext</artifactId>
+        <version>${org.exoplatform.commons.version}</version>
+      </dependency>
+       <dependency>
         <groupId>org.exoplatform</groupId>
         <artifactId>exo-jcr-services</artifactId>
         <version>${org.exoplatform.jcr-services.version}</version>
@@ -115,7 +87,6 @@
             <groupId>javax.servlet</groupId>
           </exclusion>
         </exclusions>
->>>>>>> master
       </dependency>
       <!-- Import versions of external dependencies to use -->
       <dependency>

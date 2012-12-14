@@ -5,7 +5,6 @@
     <artifactId>ecms-core</artifactId>
     <version>4.0.0.Alpha1-relooking-SNAPSHOT</version>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
   <artifactId>ecms-core-viewer</artifactId>
   <name>eXo DMS Document Viewer</name>
