@@ -4,97 +4,100 @@ import org.exoplatform.wcm.webui.reader.ContentReader;
 def escapeChar = '%' as char
 %>
 <style>
-.UIAuthoringDashboard {
-  padding: 9px;
+.uiAuthoringDashboard {
+  padding: 25px;
 }
 
-.UIAuthoringDashboard a {
+.uiAuthoringDashboard a {
   color: #333;
   text-decoration:none;
 }
 
-.UIAuthoringDashboard .Refresh{
+.uiAuthoringDashboard a:hover {
+  color: blue;
+}
+
+.uiAuthoringDashboard .refresh{
   background-color: #ee0000;
   color: #fff;
   min-width: 25px;
   float: left;
   text-align:center;
   font-weight: bold;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  margin-top: 4px;
+  border-radius: 3px;
+  margin-top: 5px;
   line-height: 16px;
-  margin-right: 4px;
+	padding: 0px 5px;
 }
 
-.UIAuthoringDashboard .Refresh a {
+.uiAuthoringDashboard .refresh a {
   color: white;
   text-decoration:none;
 }
 
 
-.UIAuthoringDashboard .AlignLeft {
+.uiAuthoringDashboard .AlignLeft {
 	float: left;
-	width: 260px;
+	width: 240px;
+	margin-right: 20px;
 }
 
-.UIAuthoringDashboard .Elements {
+.uiAuthoringDashboard .elements {
+	background: #fff;
 	text-align: left;
-	width: 228px;
-	border: 1px solid #E1E1E1;
-	padding: 2px 5px;
-	margin-right: 5px;
+	padding: 5px 10px;
 	overflow: hidden;
 	font-size:12px;
-
+	box-shadow: 0 1px 2px rgba(13, 13, 13, 0.08);
+	border: 1px solid #CFCFCF;
+	border-top: none;
+	border-radius: 0px 0px 4px 4px;
 }
 
-.UIAuthoringDashboard .Element {
+.uiAuthoringDashboard .element {
   background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/ArrowSideBar.gif') no-repeat left center;
   padding-left: 10px;
-  margin-left: 6px;
 }
 
-.UIAuthoringDashboard .Header {
-	margin-right: 20px;
-	background-color: #F8F8F8;
-	border-left: 1px solid #E1E1E1;
-	border-top: 1px solid #E1E1E1;
-	border-right: 1px solid #E1E1E1;
-
+.uiAuthoringDashboard .header {
+	background-color: #F0F0F0;
+	border: 1px solid #CFCFCF;
+	border-radius: 4px 4px 0px 0px;
+	box-shadow: 0 1px 2px rgba(13, 13, 13, 0.08);
+	line-height: 20px;
+	padding: 5px 10px;
+	word-wrap: break-word;
 }
 
-.UIAuthoringDashboard .Header .Title {
-	color: #5D5D5D;
-	font-size:14px;
+.uiAuthoringDashboard .header .title {
+	color: #000;
+	font-weight: bold;
+	font-size: 13px;
 	float: left;
 	line-height: 24px;
-	padding-left: 8px;
 }
 
 
-.UIAuthoringDashboard .Header .Total {
+.uiAuthoringDashboard .header .total {
 	background-color: #ee0000;
 	color: #fff;
 	min-width: 25px;
 	float: right;
 	text-align:center;
 	font-weight: bold;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
+	border-radius: 3px;
 	margin-top: 4px;
 	line-height: 16px;
-	margin-right: 4px;
 }
 
-.UIAuthoringDashboard .NoContent {
-color: #888;
+.uiAuthoringDashboard .noContent {
+	color: #bbb;
 }
 
 </style>
-<div class="UIAuthoringDashboard" id="$uicomponent.id">
-  <div class="ClearFix">
+<div class="uiAuthoringDashboard" id="$uicomponent.id">
+  <div class="clearfix">
    <% uicomponent.renderChildren(); %>
   </div>
-  <div class="Refresh"><a href="<%= uicomponent.event("Refresh") %>" rel="tooltip" data-placement="bottom" title="refresh">refresh</a></div><br/>
+  <div class="refresh"><a href="<%= uicomponent.event("Refresh") %>" rel="tooltip" data-placement="bottom" title="refresh">refresh</a></div><br/>
 </div>
