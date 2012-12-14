@@ -1046,8 +1046,7 @@ public class Utils {
     }
     return null;
   }
-<<<<<<< HEAD
-=======
+
   
   /**
    * 
@@ -1080,5 +1079,4 @@ public class Utils {
     }
     return sb.toString();
   }
->>>>>>> master
 }
