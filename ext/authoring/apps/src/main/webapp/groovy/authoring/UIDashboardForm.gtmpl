@@ -5,7 +5,7 @@ def escapeChar = '%' as char
 %>
 <style>
 .uiAuthoringDashboard {
-  padding: 25px;
+  padding: 0px 25px 25px 25px;
 }
 
 .uiAuthoringDashboard a {
@@ -79,19 +79,26 @@ def escapeChar = '%' as char
 
 
 .uiAuthoringDashboard .header .total {
-	background-color: #ee0000;
-	color: #fff;
-	min-width: 25px;
+	background-color: #D0D0D0;
+	border-radius: 10px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.37) inset;
+	color: #316399;
 	float: right;
-	text-align:center;
 	font-weight: bold;
-	border-radius: 3px;
-	margin-top: 4px;
-	line-height: 16px;
+	line-height: 18px;
+	margin-top: 3px;
+	min-width: 30px;
+	text-align: center;
 }
 
 .uiAuthoringDashboard .noContent {
 	color: #bbb;
+}
+
+.uiAuthoringDashboard .uiPageIterator {
+	margin: 10px -10px 0px -10px;
+	padding: 10px 10px 0px 10px;
+	border-top: 1px solid #c1c1c1;
 }
 
 </style>
