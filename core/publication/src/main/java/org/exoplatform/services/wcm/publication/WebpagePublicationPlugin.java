@@ -21,7 +21,6 @@ import java.util.List;
 import javax.jcr.Node;
 
 import org.exoplatform.portal.config.model.Page;
-import org.exoplatform.portal.mop.navigation.NavigationContext;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
 import org.exoplatform.services.wcm.publication.listener.post.PostCreateContentEventListener;
 import org.exoplatform.services.wcm.publication.listener.post.PostEditContentEventListener;

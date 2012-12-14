@@ -685,103 +685,107 @@ var SimpleView = function() {
 		if (rightClick) Self.showGroundContextMenu(event, element);
 	};
 	
-	// working with item context menu
-	SimpleView.prototype.showItemContextMenu = function(event, element) {
-		var event = event || window.event;
-		event.cancelBubble = true;
-		if (document.getElementById(Self.contextMenuId)) {
-			var contextMenu = document.getElementById(Self.contextMenuId);
-			contextMenu.parentNode.removeChild(contextMenu);
-		}
-		//create context menu
-		var actionArea = document.getElementById(Self.actionAreaId);
-		var context = gj(actionArea).find("div.ItemContextMenu:first")[0];
-		var contextMenu = newElement({
-			innerHTML: context.innerHTML,
-			id: Self.contextMenuId,
-			style: {
-				position: "absolute",
-				height: "0px",
-				width: "0px",
-				top: "-1000px",
-				display: "block"
-			}
-		});
-		document.body.appendChild(contextMenu);
-	
-		//check lock, unlock action
-		var checkUnlock = false;
-	    var checkRemoveFavourite = false;
-	    var checkInTrash = false;
-	    var checkEmptyTrash = false;
-		var checkMediaType = false;
-		
-		for (var i in Self.itemsSelected) {
-			if (Array.prototype[i]) continue;
-			if (Self.itemsSelected[i].getAttribute('locked') == "true") checkUnlock = true;
-		    if (Self.itemsSelected[i].getAttribute('removeFavourite') == "true") checkRemoveFavourite = true;
-		    if (Self.itemsSelected[i].getAttribute('inTrash') == "true") checkInTrash = true;
-		    if (Self.itemsSelected[i].getAttribute('trashHome') == "true") checkEmptyTrash = true;
-			if (Self.itemsSelected[i].getAttribute('mediaType') == "true") checkMediaType = true;      
-		}
-		var lockAction = gj(contextMenu).find("div.Lock16x16Icon:first")[0];
-		var unlockAction = gj(contextMenu).find("div.Unlock16x16Icon:first")[0];
+  // working with item context menu
+  SimpleView.prototype.showItemContextMenu = function (event, element) {
+    var event = event || window.event;
+    event.cancelBubble = true;
+    if (document.getElementById(Self.contextMenuId)) {
+      var contextMenu = document.getElementById(Self.contextMenuId);
+      contextMenu.parentNode.removeChild(contextMenu);
+    }
+    //create context menu
+    var actionArea = document.getElementById(Self.actionAreaId);
+    var context = gj(actionArea).find("div.ItemContextMenu:first")[0];
+    var contextMenu = newElement({
+      innerHTML: context.innerHTML,
+      id: Self.contextMenuId,
+      style: {
+        position: "absolute",
+        height: "0px",
+        width: "0px",
+        top: "-1000px",
+        display: "block"
+      }
+    });
+    document.body.appendChild(contextMenu);
 
-		if (checkUnlock) {
-			unlockAction.parentNode.style.display = "block";
-			lockAction.parentNode.style.display = "none";
-		} else {
-			unlockAction.parentNode.style.display = "none";
-			lockAction.parentNode.style.display = "block";
-		}
+    //check lock, unlock action
+    var checkUnlock = false;
+    var checkRemoveFavourite = false;
+    var checkInTrash = false;
+    var checkEmptyTrash = false;
+    var checkMediaType = false;
 
-	    var addFavouriteAction = gj(contextMenu).find("div.AddToFavourite16x16Icon:first")[0];
-	    var emptyTrashAction = gj(contextMenu).find("div.EmptyTrash16x16Icon:first")[0];    
-	    var removeFavouriteAction = gj(contextMenu).find("div.RemoveFromFavourite16x16Icon:first")[0];
-	    var playMediaAction = gj(contextMenu).find("div.PlayMedia16x16Icon:first")[0];    
-	    if (checkRemoveFavourite) {
-	      removeFavouriteAction.parentNode.style.display = "block";    
-	      addFavouriteAction.parentNode.style.display = "none";
-	    } else {
-	      addFavouriteAction.parentNode.style.display = "block";
-	      removeFavouriteAction.parentNode.style.display = "none";
-	    }
-	    
-	    var restoreFromTrashAction = gj(contextMenu).find("div.RestoreFromTrash16x16Icon:first")[0];
-	    if (!checkInTrash) {
-	      restoreFromTrashAction.parentNode.style.display = "none";
-	    }   
-	    if (checkInTrash) {
-	      restoreFromTrashAction.parentNode.style.display = "block";
-	    }
-	    if (!checkMediaType) {
-	    	playMediaAction.parentNode.style.display = "none";
-	    } else {
-	    	playMediaAction.parentNode.style.display = "block";
-	    }
-					if (emptyTrashAction) {
-				 	if (!checkEmptyTrash) {
-				 		emptyTrashAction.parentNode.style.display = "none";
-				 	}
-				 	else {
-				 		emptyTrashAction.parentNode.style.display = "block";
-				 	}
-			  }
-	  //check position popup
-		var X = event.pageX;
-		var Y = event.pageY;
-		var portWidth = gj(window).width();
-		var portHeight = gj(window).height();
-		var contentMenu = gj(contextMenu).children("div.UIRightClickPopupMenu:first")[0];
-		if (event.clientX + contentMenu.offsetWidth > portWidth) X -= contentMenu.offsetWidth;
-		if (event.clientY + contentMenu.offsetHeight > portHeight) Y -= contentMenu.offsetHeight + 5;
-		contextMenu.style.top = Y + 5 + "px";
-		contextMenu.style.left = X + 5 + "px";
-			
-		contextMenu.onmouseup = Self.hideContextMenu;
-		document.body.onmousedown = Self.hideContextMenu;
-		document.body.onkeydown = Self.hideContextMenu;
-	};
+    for (var i in Self.itemsSelected) {
+      if (Array.prototype[i]) continue;
+      if (Self.itemsSelected[i].getAttribute('locked') == "true") checkUnlock = true;
+      if (Self.itemsSelected[i].getAttribute('removeFavourite') == "true") checkRemoveFavourite = true;
+      if (Self.itemsSelected[i].getAttribute('inTrash') == "true") checkInTrash = true;
+      if (Self.itemsSelected[i].getAttribute('trashHome') == "true") checkEmptyTrash = true;
+      if (Self.itemsSelected[i].getAttribute('mediaType') == "true") checkMediaType = true;
+    }
+    var lockAction = gj(contextMenu).find("div.Lock16x16Icon:first")[0];
+    var unlockAction = gj(contextMenu).find("div.Unlock16x16Icon:first")[0];
+
+    if (checkUnlock) {
+      unlockAction.parentNode.style.display = "block";
+      lockAction.parentNode.style.display = "none";
+    } else {
+      unlockAction.parentNode.style.display = "none";
+      lockAction.parentNode.style.display = "block";
+    }
+
+    var addFavouriteAction = gj(contextMenu).find("div.AddToFavourite16x16Icon:first")[0];
+    var emptyTrashAction = gj(contextMenu).find("div.EmptyTrash16x16Icon:first")[0];
+    var removeFavouriteAction = gj(contextMenu).find("div.RemoveFromFavourite16x16Icon:first")[0];
+    var playMediaAction = gj(contextMenu).find("div.PlayMedia16x16Icon:first")[0];
+    if (checkRemoveFavourite) {
+      removeFavouriteAction.parentNode.style.display = "block";
+      addFavouriteAction.parentNode.style.display = "none";
+    } else {
+      addFavouriteAction.parentNode.style.display = "block";
+      removeFavouriteAction.parentNode.style.display = "none";
+    }
+
+    var restoreFromTrashAction = gj(contextMenu).find("div.RestoreFromTrash16x16Icon:first")[0];
+    if (!checkInTrash) {
+      restoreFromTrashAction.parentNode.style.display = "none";
+    }
+    if (checkInTrash) {
+      restoreFromTrashAction.parentNode.style.display = "block";
+    }
+    if (!checkMediaType) {
+      playMediaAction.parentNode.style.display = "none";
+    } else {
+      playMediaAction.parentNode.style.display = "block";
+    }
+    if (emptyTrashAction) {
+      if (!checkEmptyTrash) {
+        emptyTrashAction.parentNode.style.display = "none";
+      } else {
+        emptyTrashAction.parentNode.style.display = "block";
+      }
+    }
+    var pasteAction = gj(contextMenu).find("div.Paste16x16Icon:first")[0];
+
+    if (Self.itemsSelected.length > 1) {
+      pasteAction.parentNode.style.display = "none";
+    }
+    //check position popup
+    var X = event.pageX;
+    var Y = event.pageY;
+    var portWidth = gj(window).width();
+    var portHeight = gj(window).height();
+    var contentMenu = gj(contextMenu).children("div.UIRightClickPopupMenu:first")[0];
+    if (event.clientX + contentMenu.offsetWidth > portWidth) X -= contentMenu.offsetWidth;
+    if (event.clientY + contentMenu.offsetHeight > portHeight) Y -= contentMenu.offsetHeight + 5;
+    contextMenu.style.top = Y + 5 + "px";
+    contextMenu.style.left = X + 5 + "px";
+
+    contextMenu.onmouseup = Self.hideContextMenu;
+    document.body.onmousedown = Self.hideContextMenu;
+    document.body.onkeydown = Self.hideContextMenu;
+  };
 	
 	// working with ground context menu
 	SimpleView.prototype.showGroundContextMenu = function(event, element) {

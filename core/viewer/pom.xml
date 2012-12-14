@@ -2,85 +2,54 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.exoplatform.ecms</groupId>
     <artifactId>ecms-core</artifactId>
     <version>4.0.0.Alpha1-relooking-SNAPSHOT</version>
+    <groupId>org.exoplatform.ecms</groupId>
+    <version>4.0.0.Alpha1-SNAPSHOT</version>
   </parent>
   <artifactId>ecms-core-viewer</artifactId>
   <name>eXo DMS Document Viewer</name>
   <description>eXo PDF Viewer</description>
   <dependencies>
     <dependency>
+      <groupId>javax.jcr</groupId>
+      <artifactId>jcr</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-	 <artifactId>ecms-core-services</artifactId>
-      <version>${project.version}</version>
-      <scope>compile</scope>
+      <artifactId>ecms-core-services</artifactId>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.kernel</groupId>
       <artifactId>exo.kernel.container</artifactId>
-      <version>${org.exoplatform.kernel.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.core</groupId>
-      <artifactId>exo.core.component.security.core</artifactId>
-      <version>${org.exoplatform.core.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.jcr</groupId>
-      <artifactId>exo.jcr.component.core</artifactId>
-      <version>${org.exoplatform.jcr.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.jcr</groupId>
-      <artifactId>exo.jcr.component.webdav</artifactId>
-      <version>${org.exoplatform.jcr.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.jcr</groupId>
-      <artifactId>exo.jcr.component.ext</artifactId>
-      <version>${org.exoplatform.jcr.version}</version>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.portal</groupId>
-      <artifactId>exo.portal.webui.portal</artifactId>
-      <version>${org.exoplatform.portal.version}</version>
-      <scope>compile</scope>
+      <artifactId>exo.portal.component.resources</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.portal</groupId>
+      <artifactId>exo.portal.component.web.resources</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.portal</groupId>
+      <artifactId>exo.portal.component.web.server</artifactId>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.portal</groupId>
       <artifactId>exo.portal.webui.core</artifactId>
-      <version>${org.exoplatform.portal.version}</version>
-      <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>org.icepdf</groupId>
-      <artifactId>icepdf-viewer</artifactId>
-      <version>${icepdf.version}</version>
-      <scope>compile</scope>
+      <groupId>org.exoplatform.portal</groupId>
+      <artifactId>exo.portal.webui.framework</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.portal</groupId>
+      <artifactId>exo.portal.webui.portal</artifactId>
     </dependency>
     <dependency>
       <groupId>org.icepdf</groupId>
       <artifactId>icepdf-core</artifactId>
-      <version>${icepdf.version}</version>
-      <scope>compile</scope>
     </dependency>
   </dependencies>
-  <build>
-    <resources>
-      <resource>
-        <directory>src/main/java</directory>
-        <includes>
-          <include>**/*.xml</include>
-          <include>**/*.gtmpl</include>
-          <include>**/*.properties</include>
-        </includes>
-      </resource>
-    </resources>
-  </build>
 </project>

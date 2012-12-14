@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%
 	/**
 	 * Created by The eXo Platform SARL
@@ -139,3 +140,139 @@
   jsManager.require("SHARED/ecm-utils", "ecmutil").addScripts('ecmutil.ECMUtils.tabsContainer_OnResize();');
   jsManager.require("SHARED/ecm-utils", "ecmutil").addScripts('ecmutil.ECMUtils.actionbarContainer_OnResize();');
 %>
+=======
+<%
+	/**
+	 * Created by The eXo Platform SARL
+	 * Author : Tran The Trong
+	 *          trongtt@gmail.com
+	 * August 02, 2006
+	 * version: $Id$
+	 */
+%>
+<%
+  import java.util.List;
+  import java.util.ArrayList;
+  import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
+  import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+  import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
+  import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
+  
+  def uiPortlet = uicomponent.getAncestorOfType(UIJCRExplorerPortlet.class);
+  def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
+  def uniqueId  = new Date().getTime();
+  def rcontext = _ctx.getRequestContext() ;
+  def uiFormId = uicomponent.id;
+  
+  def jsManager = rcontext.getJavascriptManager();
+  
+  def tabs = uicomponent.getTabList() ;
+  def actionBarStyle = "";
+  def displayTabContainer = "";
+	List<String> tabAvailableList = new ArrayList<String>();
+	for(tab in tabs) {
+	  if(uicomponent.isActionAvailable(tab)) {
+	    tabAvailableList.add(tab);       
+	  }
+	}
+	if(tabAvailableList.size() < 2) {
+    actionBarStyle = "UIActionBarAlone";
+    displayTabContainer = "style =\"display: none;\"";
+  }
+  
+  public String getCSSClassOfDrivesButton() {
+    def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
+    def uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
+    def uiDriveArea = uiWorkingArea.getChild(UIDrivesArea.class);
+    if (uiDriveArea.isRendered()) {
+      return "ShowDrivesButton";  
+    } 
+    return "NoneDrivesButton";
+  }
+%>
+
+<%if (uiPortlet.isShowActionBar() && !uiExplorer.isAddingDocument()) {%>
+<% uiform.begin() %>
+<div class="UIActionBar $actionBarStyle" id="$uicomponent.id">
+	<div class="UIHorizontalTabs">
+		<div class="TabsContainer">
+		  <div $displayTabContainer class="MainTabsContainer ClearFix">
+				<%
+			    def isSelected = false;
+					def selectedTab = uicomponent.getSelectedTab();
+				  if(!tabAvailableList.contains(selectedTab) && tabAvailableList.size() > 0) {
+						selectedTab = tabAvailableList.get(0);
+						uicomponent.setSelectedTab(selectedTab);
+					}
+					for(tab in tabAvailableList) {
+				    def tabStyle = "NormalActionBarTab";
+				    if(selectedTab.equals(tab)) {
+				      isSelected = true;
+				      tabStyle = "SelectedActionBarTab";
+				    }
+				    String fullTabName = (String)_ctx.appRes(uicomponent.getId() + ".obtion." + tab);
+				    String displayTabName = fullTabName;
+				    if (fullTabName.length() > 13) {
+				      displayTabName = fullTabName.substring(0, 10) + "..."
+				    }                                                                                                 %>
+					    <div class="UITab" style="display: block;" onclick="<%=uicomponent.event('ChangeTab', tab);%>; eXo.ecm.ECMUtils.tabsContainer_OnResize();">
+						    <div class="$tabStyle" title="$fullTabName">$displayTabName</div>
+						  </div>                                                                                          <%
+				  }                                                                                                   %>
+				  <div class="ShowMoreTabsContainer" id= "ShowMoreTabsContainer" style="display:none" onclick="eXo.ecm.ECMUtils.hiddenTabsContainerTrigger(event);">
+  				  <div class="ShowMoreTabsIcon">
+  				    <div class="MoreLabel"><%=_ctx.appRes("UIViewBar.label.more")%></div>
+  				    <div class="WhiteBG"><span></span></div>
+  				    <div class="ListHideTabsContainer UIDropDownMenu" id="ListHideTabsContainer">
+  				    </div>
+  				  </div>
+	        </div>
+		  </div>
+		 <%if(isSelected) {%>
+		   <div id="DMSMenuItemContainer" class="DMSMenuItemContainer MenuItemContainer"> <%
+		     for(button in uicomponent.getActionInTab(uicomponent.getSelectedTab())) {
+		       def action = uicomponent.getUIAction(button);
+				   if (action != null) {
+				     def title = _ctx.appRes(uicomponent.getId() + ".tooltip." + button);     %>
+						 <div class="NormalSubItem SubTabItem" style="width: auto;" onclick="<%=action.event(button);%>">
+               <div title="$title" class="SubTabIcon DefaultActionIcon ${button}Icon">$title</div>
+						 </div>                                                                    <%
+					 } //if condition
+				 } //for loop
+				%>
+				</div>
+		 <%}%>
+		</div>
+  		<div class="UIViewBarContainer ClearFix" id="UIViewBarContainer">
+  		  <%
+  		  if (uicomponent.hasBackButton()) {%>
+  		  <a class ="URLBackToButton" href="<%=uicomponent.event("BackTo")%>"></a>
+  		  <%}%>  	      
+  	    <a class="SetupPreferencesButton" href="<%=uicomponent.event("Preferences")%>" title="<%=_ctx.appRes("UIViewBar.label.setUpBrowser")%>"></a>
+
+			 <%if (!uicomponent.isDirectlyDrive()) {%>
+  	     <a class="<%=getCSSClassOfDrivesButton()%>" href="<%=uicomponent.event("ShowDrives")%>" title="<%=_ctx.appRes("UIDrivesArea.DrivesArea.ShowDrives")%>"></a>
+  	   <%}%>
+  			
+  		</div>
+  		<div id="ShowMoreActionContainer" class="ShowMoreActionContainer" onclick="eXo.ecm.ECMUtils.hiddenActionContainerTrigger(event)">
+  			<div class="MoreLabel"><%=_ctx.appRes("UIViewBar.label.more")%></div>
+        <div class="WhiteBG"><span></span></div>
+  			<div class="ListHiddenActionContainer UIDropDownMenu" id="ListHiddenActionContainer" style="display:none"></div>
+  		</div>
+	</div>
+</div>
+<% uiform.end() %>
+<% } else if (uicomponent.hasBackButton()) {%>
+  <% uiform.begin() %>
+    <div class="UIActionBar $actionBarStyle" id="$uicomponent.id">
+      <div class="UIViewBarContainer" id="UIViewBarContainer">
+        <a class ="URLBackToButton" href="<%=uicomponent.event("BackTo")%>" title="<%=_ctx.appRes("UIViewBar.title.backTo")%>"></a>
+      </div>
+    </div>
+  <% uiform.end() %>
+<%}
+  jsManager.require("SHARED/ecm-utils", "ecmutil").addScripts('ecmutil.ECMUtils.tabsContainer_OnResize();');
+  jsManager.require("SHARED/ecm-utils", "ecmutil").addScripts('ecmutil.ECMUtils.actionbarContainer_OnResize();');
+%>
+>>>>>>> master

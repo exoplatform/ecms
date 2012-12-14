@@ -28,8 +28,6 @@ import javax.jcr.Session;
 import javax.jcr.ValueFormatException;
 import javax.jcr.lock.Lock;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
@@ -139,7 +137,7 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
       uiDocumentForm.setContentType(nodeType);
       uiDocumentForm.clearRemovedNode();
       if(uiDocumentForm.getTemplate() == null) {
-        uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.template-null", null));        
+        uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.template-null", null));
         return;
       }
       refresh(selectedNode);
@@ -180,7 +178,7 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
       if (LockUtil.getLockTokenOfUser(selectedNode) == null) {
         Object[] arg = { selectedNode.getPath() };
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked-editing", arg,
-            ApplicationMessage.WARNING));        
+            ApplicationMessage.WARNING));
         return;
       }
       uiDocumentForm.setNodePath(selectedNode.getPath());
@@ -241,12 +239,12 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
         } catch (PathNotFoundException path) {
           uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", null,
               ApplicationMessage.WARNING));
-          
+
           return;
         } catch (AccessDeniedException ace) {
           uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.null-exception", null,
               ApplicationMessage.WARNING));
-          
+
           return;
         } catch (Exception e) {
           JCRExceptionManager.process(uiApp, e);

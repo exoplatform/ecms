@@ -66,27 +66,44 @@
   }
 %>
 <div id="wcm-notice" style="display: none;" class="wcm-alert wcm-notice"></div>
+<<<<<<< HEAD
 <div class="uiWorkingArea ClearFix" id="UIWorkingArea" initWithoutLeftContainer="$initWithoutLeftContainer">
+=======
+<div class="UIWorkingArea ClearFix" id="UIWorkingArea" initWithoutLeftContainer="$initWithoutLeftContainer">
+>>>>>>> master
   <%
 	  uicomponent.renderChild(UIRightClickPopupMenu.class) ;
 
 	  if( uicomponent.isShowSideBar() ) {
+<<<<<<< HEAD
 	    println "<div class=\"leftContainer\" id=\"LeftContainer\" $savedLeftContainerWidthStyle >" ;
+=======
+	    println "<div class=\"LeftContainer\" id=\"LeftContainer\" $savedLeftContainerWidthStyle >" ;
+>>>>>>> master
 	  	uicomponent.renderChild(UISideBar.class) ;
 	  	println "</div>" ;
 	  }
 
 	if( uicomponent.isShowSideBar() ) {                                     
     %>
+<<<<<<< HEAD
       <div class="resizeBar" onmousedown="eXo.ecm.ECMUtils.resizeSideBar(event)">
 				<div class="resizeBarContent">
 					<div class="resizeButton" onmousedown="eXo.ecm.ECMUtils.showHideSideBar(event);"><i class="uiIconArrowLeft"></i></div>
 				</div>
+=======
+      <div class="ResizeSideBar" onmousedown="eXo.ecm.ECMUtils.resizeSideBar(event)">
+        <div class="ResizeButton" onmousedown="eXo.ecm.ECMUtils.showHideSideBar(event);"><span></span></div>
+>>>>>>> master
       </div>
     <%
     }
 	%>
+<<<<<<< HEAD
   <div class="rightContainer">
+=======
+  <div class="RightContainer">
+>>>>>>> master
 		<% 
 		  uicomponent.renderChild(UIActionBar.class) ;
 		  uicomponent.renderChild(UIDocumentWorkspace.class) ;

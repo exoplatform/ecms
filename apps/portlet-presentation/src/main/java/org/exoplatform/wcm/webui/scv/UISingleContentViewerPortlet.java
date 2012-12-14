@@ -27,8 +27,6 @@ import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceURL;
 
-import org.gatein.portal.controller.resource.ResourceScope;
-import org.gatein.portal.controller.resource.script.FetchMode;
 import org.exoplatform.portal.mop.Visibility;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserNodeFilterConfig;
@@ -46,6 +44,7 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
+import org.gatein.portal.controller.resource.ResourceScope;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.w3c.dom.Element;
@@ -175,7 +174,7 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
       activateMode(newMode) ;
       mode = newMode ;
     }
-    
+
     Node nodeView = null;
     if (uiPresentation!=null) {
       nodeView = uiPresentation.getNodeView();
@@ -195,8 +194,8 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
     if (context.getRemoteUser() != null && WCMComposer.MODE_EDIT.equals(Utils.getCurrentMode())) {
       pContext.getJavascriptManager().loadScriptResource(ResourceScope.SHARED, "content-selector");
       pContext.getJavascriptManager().loadScriptResource(ResourceScope.SHARED, "quick-edit");
-    }    
-    
+    }
+
     setId(UISingleContentViewerPortlet.class.getSimpleName() + pContext.getWindowId());
     super.processRender(app, context) ;
   }

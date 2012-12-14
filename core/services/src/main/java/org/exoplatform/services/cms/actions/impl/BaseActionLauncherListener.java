@@ -27,8 +27,6 @@ import javax.jcr.Value;
 import javax.jcr.observation.Event;
 import javax.jcr.observation.EventIterator;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
@@ -142,7 +140,7 @@ public abstract class BaseActionLauncherListener implements ECMEventListener {
     Identity identity;
     if (IdentityConstants.ANONIM.equalsIgnoreCase(userId)) {
       return true;
-    } 
+    }
     identity = identityRegistry.getIdentity(userId);
     if(identity == null) {
       return false ;

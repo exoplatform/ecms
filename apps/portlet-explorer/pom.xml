@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.exoplatform.ecms</groupId>
     <artifactId>ecms-apps</artifactId>
     <version>4.0.0.Alpha1-relooking-SNAPSHOT</version>
+    <groupId>org.exoplatform.ecms</groupId>
   </parent>
   <artifactId>ecms-apps-portlet-explorer</artifactId>
   <packaging>war</packaging>
@@ -12,40 +12,14 @@
   <description>eXo DMS Portlet Java Content: File Explorer, Browser Content, ECM Admin</description>
   <dependencies>
     <dependency>
-      <groupId>org.exoplatform.portal</groupId>
-      <artifactId>exo.portal.webui.portal</artifactId>
-      <version>${org.exoplatform.portal.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform.jcr</groupId>
-      <artifactId>exo.jcr.component.core</artifactId>
-      <version>${org.exoplatform.jcr.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.exoplatform</groupId>
-      <artifactId>exo-jcr-services</artifactId>
-      <version>${org.exoplatform.jcr-services.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>ecms-core-webui</artifactId>
-      <version>${project.version}</version>
-      <scope>provided</scope>
+      <scope>runtime</scope>
     </dependency>
-		<dependency>
-		  <groupId>org.exoplatform.commons</groupId>
-		  <artifactId>commons-webui-ext</artifactId>
-		  <version>${org.exoplatform.commons.version}</version>
-			<scope>provided</scope>
-		</dependency>
     <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>ecms-core-viewer</artifactId>
-      <version>${project.version}</version>
-      <scope>provided</scope>
+      <groupId>org.exoplatform.portal</groupId>
+      <artifactId>exo.portal.component.web.resources</artifactId>
+      <scope>runtime</scope>
     </dependency>
   </dependencies>
   

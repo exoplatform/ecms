@@ -27,9 +27,6 @@ import javax.jcr.Session;
 import javax.jcr.lock.LockException;
 import javax.jcr.version.VersionException;
 
-import org.exoplatform.portal.config.UserACL;
-import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanSetPropertyFilter;
@@ -37,13 +34,15 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsCheckedOutF
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsHoldsLockFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotSameNameSiblingFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.portal.config.UserACL;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -73,7 +72,7 @@ public class UnlockManageComponent extends UIAbstractManagerComponent {
       = Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
                                               new IsHoldsLockFilter(),
                                               new IsNotLockedFilter(true, true),
-                                              new CanSetPropertyFilter(),                                              
+                                              new CanSetPropertyFilter(),
                                               new IsCheckedOutFilter(),
                                               new IsNotTrashHomeNodeFilter() });
 
@@ -111,7 +110,7 @@ public class UnlockManageComponent extends UIAbstractManagerComponent {
     } catch(PathNotFoundException path) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
           null,ApplicationMessage.WARNING));
-      
+
       return;
     } catch (Exception e) {
       JCRExceptionManager.process(uiApp, e);
@@ -146,7 +145,7 @@ public class UnlockManageComponent extends UIAbstractManagerComponent {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-unlock-node-is-checked-in",
                                               args,
                                               ApplicationMessage.WARNING));
-      
+
       uiExplorer.updateAjax(event);
       return;
     } catch (Exception e) {
@@ -154,7 +153,7 @@ public class UnlockManageComponent extends UIAbstractManagerComponent {
         LOG.error("an unexpected error occurs while unloking the node", e);
       }
       JCRExceptionManager.process(uiApp, e);
-      
+
       uiExplorer.updateAjax(event);
     }
   }
