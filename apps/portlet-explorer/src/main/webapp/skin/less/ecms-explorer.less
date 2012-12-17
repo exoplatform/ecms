@@ -32,15 +32,23 @@
 	}
 }
 
-.uiTabGrayInPage .tab-content .nav-pills > li.dropdown  {
-	margin-right: 200px;
+.uiTabGrayInPage .tab-content .nav-pills {
+	> li.dropdown  {
+		margin-right: 200px;
+	}
+	
+	> li > a > i {
+		display: inline-block;
+		width: 24px;
+		height: 24px;
+		vertical-align: top;
+	}
 }
 
-.uiTabGrayInPage .tab-content .nav-pills > li > a > i {
-	display: inline-block;
-	width: 24px;
-	height: 24px;
-	vertical-align: top;
+.UIJCRExplorerPortlet .ShowDrivesButton {
+	height: 30px;
+	border: 1px solid #cfcfcf;
+	border-bottom: none;
 }
 
 /********Resize Content********/
@@ -61,15 +69,124 @@
     margin-left: 0px;
     overflow: auto;
 		background: @white;
+		border: 1px solid #cfcfcf;
+		border-top: none;
+		.border-bottom-radius(4px);
+		padding: 4px;
 	}
 	
 	.UIListView {
-		padding: 20px;
-		border: 1px solid #cfcfcf;
+		padding: 15px;
 		border-top: 0px;
-		.border-bottom-radius(4px);
 	}
 }
+/*===============================UIDrivesArea===================================*/
+
+.uiDrivesArea {
+	background: @white;
+	border: 1px solid #cfcfcf;
+	border-top: none;
+	.border-bottom-radius(4px);
+	padding: 4px;
+	
+	.uiDriversAreaContainer {
+		padding: 15px;
+		color: #666666;
+		overflow: hidden;
+	}
+
+	.rowDrives{
+		border-bottom: dotted 1px #cccccc;
+		padding-bottom: 15px;
+		margin-bottom: 15px;
+	}
+	
+	.rowNormal{
+		padding-bottom: 15px;
+	}
+
+	.iconArrowDrives{
+		background: url('/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/ArrowDrivers.gif') no-repeat left center;
+		height: 15px;
+	}
+
+	.textTitleDriver{
+		font-weight: bold;
+		text-transform: uppercase;
+		padding-left: 15px;
+		line-height: 15px;
+		margin-bottom:10px;
+	}
+
+	.drive {
+		margin: 5px;
+		float: left;
+		width:150px;
+		line-height: 19px;
+		height: 50px;
+	}
+
+	.driveLabel {
+		margin: 3px auto 0;
+		color: #000;
+		padding-left: 33px;
+		word-wrap: break-word;
+		display: block;
+		
+		&:hover {
+			color: blue;
+		}
+	}
+
+	.rowDrivesGroups .drive {
+		height: 70px;
+	}
+
+	.driveIcon {
+		margin: 0px 5px 3px 0px;
+		float: left;
+		.size(24px, 25px);
+		cursor: pointer;
+		display: block;
+	}
+
+	.iconDrivesDefault{
+		background: url('/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/DefaultDriveIcon.gif') no-repeat;
+	}
+
+	.iconDrivessystem{
+		background: url('/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/IconDrivesArea.gif') no-repeat left top;
+	}
+
+	.iconDrivesdms-system{
+		background: url('/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/IconDrivesArea.gif') no-repeat center -23px;
+	}
+
+	.iconDrivescollaboration{
+		background: url('/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/IconDrivesArea.gif') no-repeat center -46px;
+	}
+
+	.iconDrivesbackup{
+		background: url('/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/IconDrivesArea.gif') no-repeat center -69px;
+	}
+
+	.iconDrivesUse{
+		background: url('/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/IconDrivesArea.gif') no-repeat center -92px;
+	}
+
+	.iconDrivesPrivate{
+		background: url('/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/IconDrivesArea.gif') no-repeat center -115px;
+	}
+
+	.iconDrivesPublic{
+		background: url('/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/IconDrivesArea.gif') no-repeat center -138px;
+	}
+
+	.iconDrivesPersonal{
+		background: url('/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/IconDrivesArea.gif') no-repeat center bottom;
+	}
+}
+
 
 /***** ResizeBar *****/
 .uiWorkingArea .resizeBar {

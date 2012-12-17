@@ -906,7 +906,7 @@ function ECMUtils() {
     Self.uiLeftContainer = gj(Self.uiWorkingArea).find('div.leftContainer:first')[0];
     Self.uiRightContainer = gj(Self.uiWorkingArea).find("div.rightContainer:first")[0];
     Self.uiDocumentWorkspace = gj(Self.uiRightContainer).find("div.UIDocumentWorkspace:first")[0];
-    Self.uiDrivesArea = gj(Self.uiRightContainer).find("div.UIDrivesArea:first")[0];    
+    Self.uiDrivesArea = gj(Self.uiRightContainer).find("div.uiDrivesArea:first")[0];    
     Self.uiResizeSideBar = gj(Self.uiWorkingArea).find("div.resizeBar:first")[0];
   }
   /**
@@ -1337,7 +1337,7 @@ function ECMUtils() {
     }
 
     Self.uiDocumentWorkspace = gj(Self.uiWorkingArea).find("div.UIDocumentWorkspace:first")[0];
-    Self.uiDrivesArea = gj(Self.uiWorkingArea).find("div.UIDrivesArea:first")[0];
+    Self.uiDrivesArea = gj(Self.uiWorkingArea).find("div.uiDrivesArea:first")[0];
     if (!(Self.uiDocumentWorkspace || Self.uiDrivesArea)) {
       window.setTimeout("eXo.ecm.ECMUtils.waitForContainer();", Self.waitInterval);
       return;
