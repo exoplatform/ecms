@@ -14,7 +14,6 @@
     return "normalItem";
   }
 %>
-<<<<<<< HEAD
 <div class="uiSideBar" id="UISideBar">
     <div class="uiResizableBlock">
 			<div class="uiBox">
