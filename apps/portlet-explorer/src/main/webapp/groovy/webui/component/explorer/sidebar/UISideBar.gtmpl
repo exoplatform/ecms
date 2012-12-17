@@ -57,49 +57,6 @@
 					</div>			
 				<% } %>
 			</div>
-=======
-<div class="UISideBar" id="UISideBar">
-  <div class="UISideBarContainer ClearFix">
-    <div class="UIResizableBlock">
-      <% 
-        String[] arrComp = [uicomponent.getCurrentComp()];
-        uicomponent.renderSideBarChild(arrComp); 
-       %>    
-		<div class="UISelectContent ClearFix">
-			<%
-			for(itemContext in uicomponent.getLstVisibleComp()) {
-	        	def action = itemContext.getUIExtensionName();
-			%>
-				<div class="<%=getCSSClassName(action)%>" onclick="<%=itemContext.event(action)%>" title="<%=_ctx.appRes(uicomponent.getId() + ".label." + action)%>">
-					<div class="ItemIcon DefaultIcon ${action}Icon"><span></span></div>
-				</div>
-			<% } %>
-			
-			<% if (uicomponent.getLstHiddenComp().size() > 0) { %>
-				<!--More button -->
-				<div class="MoreItem" onclick="eXo.ecm.ECMUtils.hiddenExtendedListTrigger(event, this);">
-					<div class="ItemIcon ActionItem" ><span></span></div>
-					
-					<!-- Hidden drop down-->
-					<div style="display: none;" id="ListExtendedComponent" class="ListExtendedItem UIDropDownMenu">
-						<%
-         					for(itemContext in uicomponent.getLstHiddenComp()) {
-         						def action = itemContext.getUIExtensionName();
-       					%>
-								<a title="<%=_ctx.appRes(uicomponent.getId() + ".label." + action)%>" class="IconPopup ${action}Icon" href="<%=itemContext.event(action)%>">&nbsp;</a>
-					<% } %>
-					</div>
-				</div>
-			<% } else { %>
-				<!--More button -->
-				<div class="MoreItem" style="display:none" onclick="eXo.ecm.ECMUtils.hiddenExtendedListTrigger(event, this);">
-					<div class="ItemIcon ActionItem" ><span></span></div>
-					
-					<!-- Hidden drop down-->
-					<div style="display: none;" id="ListExtendedComponent" class="ListExtendedItem UIDropDownMenu"></div>						
-				</div>			
-			<% } %>
->>>>>>> master
 		</div>
     <% if (uicomponent.getAncestorOfType(UIJCRExplorerPortlet.class).isShowFilterBar()) { %>   
 	    <div class="resizeTreeExplorer">
