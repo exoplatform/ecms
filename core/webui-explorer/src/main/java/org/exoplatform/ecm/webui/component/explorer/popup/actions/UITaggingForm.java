@@ -16,14 +16,6 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Set;
-
-import javax.jcr.Node;
-
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.jcr.model.Preference;
@@ -48,11 +40,10 @@ import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormInputInfo;
-import org.exoplatform.webui.form.UIFormSelectBox;
-import org.exoplatform.webui.form.UIFormStringInput;
-import org.exoplatform.webui.form.UIFormTextAreaInput;
+import org.exoplatform.webui.form.*;
+
+import javax.jcr.Node;
+import java.util.*;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh
@@ -149,7 +140,10 @@ public class UITaggingForm extends UIForm {
                                                                      workspace)) {
       linkedTagSet.add(tag.getName());
     }
-    for (String tagName : linkedTagSet) {
+      List<String> linkedTagList = new ArrayList<String>(linkedTagSet);
+      Collections.sort(linkedTagList);
+
+      for (String tagName : linkedTagList) {
       if (linkedTags.length() > 0)
         linkedTags = linkedTags.append(",");
       linkedTags.append(tagName);
