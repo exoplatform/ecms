@@ -162,19 +162,19 @@ function ECMUtils() {
   ECMUtils.prototype.initVote = function (voteId, rate) {
     var vote = document.getElementById(voteId);
     voteRate = vote.rate = rate = parseInt(rate);
-    var optsContainer = gj(vote).find("div.OptionsContainer:first")[0];
+    var optsContainer = gj(vote).find("div.optionsContainer:first")[0];
     var options = gj(optsContainer).children("div");
     for (var i = 0; i < options.length; i++) {
       options[i].onmouseover = Self.overVote;
-      if (i < rate) options[i].className = "RatedVote";
+      if (i < rate) options[i].className = "uiIconRatedVote";
     }
 
     vote.onmouseover = function () {
-      var optsCon = gj(this).find("div.OptionsContainer:first")[0];
+      var optsCon = gj(this).find("div.optionsContainer:first")[0];
       var opts = gj(optsCon).children("div");
       for (var j = 0; j < opts.length; j++) {
-        if (j < this.rate) opts[j].className = "RatedVote";
-        else opts[j].className = "NormalVote";
+        if (j < this.rate) opts[j].className = "uiIconRatedVote";
+        else opts[j].className = "uiIconNormalVote";
       }
     }
     optsContainer.onmouseover = function (event) {
@@ -184,17 +184,17 @@ function ECMUtils() {
   };
 
   ECMUtils.prototype.overVote = function (event) {
-    var optionsContainer = gj(this).parents(".OptionsContainer:first")[0];
+    var optionsContainer = gj(this).parents(".optionsContainer:first")[0];
     var opts = gj(optionsContainer).children("div");
     var i = opts.length;
     for (--i; i >= 0; i--) {
       if (opts[i] == this) break;
-      if (i < voteRate) opts[i].className = "RatedVote";
-      else opts[i].className = "NormalVote";
+      if (i < voteRate) opts[i].className = "uiIconRatedVote";
+      else opts[i].className = "uiIconNormalVote";
     }
-    if (opts[i].className == "OverVote") return;
+    if (opts[i].className == "uiIconOverVote") return;
     for (; i >= 0; i--) {
-      opts[i].className = "OverVote";
+      opts[i].className = "uiIconOverVote";
     }
   };
 

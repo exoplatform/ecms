@@ -13,19 +13,18 @@
   rcontext.getJavascriptManager().require("SHARED/ecm-utils", "ecmutil").
   addScripts("ecmutil.ECMUtils.initVote('$uicomponent.id', $rating);");
 %>
-<div class="UIVoteForm" id="$uicomponent.id">
-	<div class="VoteFormContainer">
-		<div class="UIRatingInfoContainer">
-		  <div class="OptionsContainer">
-		      <div class="NormalVote" onclick="<%=uicomponent.event("Vote", "1");%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIVoteForm.title.normal")%>"><span></span></div>
-		      <div class="NormalVote" onclick="<%=uicomponent.event("Vote", "2");%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIVoteForm.title.good")%>"><span></span></div>
-		      <div class="NormalVote" onclick="<%=uicomponent.event("Vote", "3");%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIVoteForm.title.verygood")%>"><span></span></div>
-		      <div class="NormalVote" onclick="<%=uicomponent.event("Vote", "4");%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIVoteForm.title.excellent")%>"><span></span></div>
-		      <div class="NormalVote" onclick="<%=uicomponent.event("Vote", "5");%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIVoteForm.title.best")%>"><span></span></div>
-		    </div>
+<div class="uiVoteForm" id="$uicomponent.id">
+	<div class="voteFormContainer">
+		<h6>My Rating: no value yet</h6>
+		<div class="uiRatingInfoContainer optionsContainer">
+		      <div class="uiIconNormalVote pull_left" onclick="<%=uicomponent.event("Vote", "1");%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIVoteForm.title.normal")%>"><span></span></div>
+		      <div class="uiIconNormalVote pull_left" onclick="<%=uicomponent.event("Vote", "2");%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIVoteForm.title.good")%>"><span></span></div>
+		      <div class="uiIconNormalVote pull_left" onclick="<%=uicomponent.event("Vote", "3");%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIVoteForm.title.verygood")%>"><span></span></div>
+		      <div class="uiIconNormalVote pull_left" onclick="<%=uicomponent.event("Vote", "4");%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIVoteForm.title.excellent")%>"><span></span></div>
+		      <div class="uiIconNormalVote pull_left" onclick="<%=uicomponent.event("Vote", "5");%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIVoteForm.title.best")%>"><span></span></div>
 		</div>
-	  <div class="UIAction"> 
-			<a onclick="<%=uicomponent.event("Cancel")%>" class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=_ctx.appRes("UIVoteForm.button.label.cancel")%></a>
+		<div class="uiAction uiActionBorder"> 
+			<button onclick="<%=uicomponent.event("Cancel")%>" class="btn btn-primary" href="javascript:void(0);"><%=_ctx.appRes("UIVoteForm.button.label.cancel")%></button>
 		</div>
 	</div>
 </div>
