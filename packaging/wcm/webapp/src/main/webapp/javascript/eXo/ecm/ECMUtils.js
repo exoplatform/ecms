@@ -1159,7 +1159,7 @@ function ECMUtils() {
 
     var workingArea = document.getElementById('UIWorkingArea');
     var resizableBlock = gj(workingArea).find("div.uiResizableBlock:first")[0];
-    var resizeTreeButton = gj(resizableBlock).find("div.resizeTreeButton:first")[0];
+    var resizeTreeButton = gj(resizableBlock).find("i.uiIconArrowDown:first")[0];
 
     if (treeExplorer) {
       Self.collapseTreeExplorer()
@@ -1169,7 +1169,7 @@ function ECMUtils() {
 
     itemArea.style.display = "block";
     eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea = "block";
-    resizeTreeButton.className = "resizeTreeButton";
+    resizeTreeButton.className = "uiIconArrowDown";
   }
 
   ECMUtils.prototype.hideSelectItemArea = function () {
@@ -1178,7 +1178,7 @@ function ECMUtils() {
 
     var workingArea = document.getElementById('UIWorkingArea');
     var resizableBlock = gj(workingArea).find("div.uiResizableBlock:first")[0];
-    var resizeTreeButton = gj(resizableBlock).find("div.resizeTreeButton:first")[0];
+    var resizeTreeButton = gj(resizableBlock).find("i.uiIconArrowDown:first")[0];
 
     if (treeExplorer) {
       Self.expandTreeExplorer();
@@ -1188,7 +1188,7 @@ function ECMUtils() {
 
     itemArea.style.display = "none";
     eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea = "none";
-    resizeTreeButton.className = "resizeTreeButton ShowContentButton";
+    resizeTreeButton.className = "uiIconArrowDown uiIconArrowUp";
   }
 
   ECMUtils.prototype.collapseTreeExplorer = function () {

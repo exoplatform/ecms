@@ -3,8 +3,8 @@
 %>
 
 	<h5 class="title clearfix">
-		<div class="tagExplorer pull-right" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITagExplorer.title.EditPrivateTags")%>"
-			 onclick="<%=uicomponent.event("EditTags", "Private")%>"><span></span></div>
+		<i class="tagExplorer pull-right" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITagExplorer.title.EditPrivateTags")%>"
+			 onclick="<%=uicomponent.event("EditTags", "Private")%>"></i>
 		<%=_ctx.appRes("UITagExplorer.title.PrivateTags")%>
 	</h5>
 
@@ -27,8 +27,8 @@
   </div>
 
 	<h5 class="title clearfix">
-		<div class="tagExplorer pull-right" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITagExplorer.title.EditPublicTags")%>"
-			 onclick="<%=uicomponent.event("EditTags", "Public")%>" ><span></span></div>
+		<i class="tagExplorer pull-right" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITagExplorer.title.EditPublicTags")%>"
+			 onclick="<%=uicomponent.event("EditTags", "Public")%>" ></i>
 		<%=_ctx.appRes("UITagExplorer.title.PublicTags")%>
 	</h5>
 
