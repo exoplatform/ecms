@@ -151,10 +151,7 @@ Register new action with UIExtensionManager
 {docbook}
 
 Edit the _configuration.xml_ file as below:
-{code:xml}<?xml version="1.0" encoding="UTF-8"?><configuration xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
-
+{code:xml}<?xml version="1.0" encoding="UTF-8"?><configuration xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
  <external-component-plugins>
    <target-component>org.exoplatform.webui.ext.UIExtensionManager</target-component>
    <component-plugin>
@@ -179,7 +176,6 @@ Edit the _configuration.xml_ file as below:
      </init-params>
    </component-plugin>
  </external-component-plugins>
-
 </configuration>{code}
 
 h1. Deploy new action extension {anchor:id=CONTref.ExtendUIExtension.DeployNewActionExtension}

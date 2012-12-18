@@ -3,6 +3,7 @@ This plugin is used in the [SiteSearchService|#CONTref.Configuration.Components.
 The configuration is applied mainly in _core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-search-configuration.xml_.
 
 *Sample configuration*:
+
 {code:language=xml|indent=2}<component-plugins>
     <component-plugin>
         <name>ExcludeMimeTypes</name>

@@ -369,13 +369,13 @@ h3. Perform tasks when a content's state is updated {anchor:id=CONTref.Extension
 To perform some tasks when a content's state is updated, you need to create a listener that handles the task and configure it. Following is the general configuration:
 
 {code:xml}<external-component-plugins>
-<target-component>org.exoplatform.services.listener.ListenerService</target-component>
-<component-plugin>
-<name>PublicationService.event.postUpdateState</name>
-<set-method>addListener</set-method>
-<type>my.package.MyListener</type>
-<description>Your listener description</description>
-</component-plugin>
+	<target-component>org.exoplatform.services.listener.ListenerService</target-component>
+	<component-plugin>
+		<name>PublicationService.event.postUpdateState</name>
+		<set-method>addListener</set-method>
+		<type>my.package.MyListener</type>
+		<description>Your listener description</description>
+	</component-plugin>
 </external-component-plugins>{code}
 
 With this configuration, your listener _my.package.MyListener_ will be executed each time a content's state is changed.
@@ -383,13 +383,13 @@ With this configuration, your listener _my.package.MyListener_ will be executed 
 For example, eXo provides a listener which automatically sends email notifications about the new state to all users of defined groups: _org.exoplatform.wcm.authoring.listener.PostUpdateStateEventListener_. So, the configuration will be:
 
 {code:xml}<external-component-plugins>
-<target-component>org.exoplatform.services.listener.ListenerService</target-component>
-<component-plugin>
-<name>PublicationService.event.postUpdateState</name>
-<set-method>addListener</set-method>
-<type>org.exoplatform.wcm.authoring.listener.PostUpdateStateEventListener</type>
-<description>This listener will send a mail when there are changes in a content's state</description>
-</component-plugin>
+	<target-component>org.exoplatform.services.listener.ListenerService</target-component>
+	<component-plugin>
+		<name>PublicationService.event.postUpdateState</name>
+		<set-method>addListener</set-method>
+		<type>org.exoplatform.wcm.authoring.listener.PostUpdateStateEventListener</type>
+		<description>This listener will send a mail when there are changes in a content's state</description>
+	</component-plugin>
 </external-component-plugins>{code}
 
 h2. Context {anchor:id=CONTref.Extensions.AuthoringExtension.PublicationManager.Context}
