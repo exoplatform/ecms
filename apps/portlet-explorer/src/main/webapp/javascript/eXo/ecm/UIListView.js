@@ -141,7 +141,7 @@ var ListView = function() {
 				  element.onmouseout = Self.mouseOutTree;
 		          element.onfocus = Self.mouseOverTree;
 		          element.onblur = Self.mouseOutTree;							
-			});			
+			});
 	};
 	
 	//event in tree list
@@ -664,6 +664,7 @@ var ListView = function() {
     }
     //create context menu
     var actionArea = document.getElementById(Self.actionAreaId);
+    alert(Self.actionAreaId);
     var context = gj(actionArea).find("div.ItemContextMenu:first")[0];
     var contextMenu = newElement({
       innerHTML: context.innerHTML,

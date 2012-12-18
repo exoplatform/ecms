@@ -1045,8 +1045,8 @@ function ECMUtils() {
     var rightContainer = gj(Self.uiWorkingArea).find("div.RightContainer:first")[0];
     var resizeButton = gj(Self.uiWorkingArea).find("div.ResizeButton:first")[0];
     // The bellow block are updated
-    if (leftContainer.style.display == 'none') {
-      leftContainer.style.display = 'block';
+    if (leftContainer.className == "LeftContainer NoShow") {
+      leftContainer.className = "LeftContainer";
       gj(resizeButton).removeClass("ShowLeftContent");
       gj(Self.uiResizeSideBar).removeClass("ResizeNoneBorder");
       Self.uiResizeSideBar.style.height = leftContainer.offsetHeight + "px";
@@ -1061,7 +1061,7 @@ function ECMUtils() {
         }
      }
     } else {
-      leftContainer.style.display = 'none';
+      leftContainer.className = 'LeftContainer NoShow';
       gj(resizeButton).addClass("ShowLeftContent");
       gj(Self.uiResizeSideBar).addClass("ResizeNoneBorder");
       showSideBar = false;

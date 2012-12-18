@@ -25,24 +25,20 @@ UIFileView.prototype.clearOpenDivs =  function () {
 
 UIFileView.prototype.clearSideBar =  function () {
 	var sidebar = document.getElementById("LeftContainer");
-	if (sidebar) {
-		sidebar.style.display="block";
-	}
+	sidebar.className = "LeftContainer NoShow";
 	eXo.ecm.ECMUtils.showHideSideBar();
 	var workingArea = gj(sidebar).parents(".UIWorkingArea:first")[0];
 	var resizeButton = gj(workingArea).find("div.ResizeSideBar:first")[0];
-	resizeButton.style.display="none";
+	resizeButton.className = "ResizeSideBar NoShow";
 }
 
 UIFileView.prototype.showSideBar =  function () {
 	var sidebar = document.getElementById("LeftContainer");
-	if (sidebar) {
-		sidebar.style.display="none";
-	}
+	sidebar.className = "LeftContainer";
 	eXo.ecm.ECMUtils.showHideSideBar();
 	var workingArea = gj(sidebar).parents(".UIWorkingArea:first")[0];
 	var resizeButton = gj(workingArea).find("div.ResizeSideBar:first")[0];
-	resizeButton.style.display="block";
+	resizeButton.className = "ResizeSideBar";
 }
 
 

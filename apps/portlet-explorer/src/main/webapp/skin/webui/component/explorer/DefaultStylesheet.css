@@ -19,6 +19,10 @@
   padding: 9px;
 }
 
+.UIJCRExplorerPortlet .NoShow {	
+	display: none;
+}
+
 .UIJCRExplorerPortlet .LeftContainer {
 	float: left; /* orientation=lt */
 	float: right; /* orientation=rt */

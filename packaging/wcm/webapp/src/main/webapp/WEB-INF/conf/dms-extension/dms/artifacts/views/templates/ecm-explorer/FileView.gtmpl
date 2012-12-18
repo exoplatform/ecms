@@ -49,7 +49,7 @@
   def jsManager = rcontext.getJavascriptManager();
   jsManager.require("SHARED/ecm-utils", "ecmutil").
             require("SHARED/explorer-module", "explorer").
-  addScripts("explorer.UIListView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');").
+//  addScripts("explorer.UIListView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');").
   addScripts("ecmutil.ECMUtils.initClipboard('clip_button','1','$size');").
 	addScripts('explorer.UIListView.loadEffectedWidthColumn();').
   addScripts('explorer.UIFileView.clearOpenDivs();').

@@ -34,17 +34,18 @@
   UIRightClickPopupMenu contextMenu = uiDocumentInfo.getContextMenu();
   String componentId = uicomponent.getId();
   java.text.DateFormat dateFormat = uiDocumentInfo.getSimpleDateFormat();
+  def viewComponentId  = new Date().getTime();
   def rcontext = _ctx.getRequestContext() ;
   def size = uicomponent.getNodeChildrenList().size();
   def jsManager = rcontext.getJavascriptManager();
 
-  jsManager.require("SHARED/explorer-module", "explorer");
-  
+  jsManager.require("SHARED/explorer-module", "explorer").
+  addScripts("explorer.UIListView.initAllEvent('UIDocumentInfo', '$enableDragAndDrop');");
   //Config to display columns with format: ["${column};${width}"]
   //Default 
   String[] arrColumns = ["exo:owner;95px","exo:dateModified;123px","exo:dateCreated;121px"];
 %>
-<div id="${componentId}" class="UIListView" style="padding-left:20px"> 
+  <div id="$componentId" class="UIListView" style="padding-left:20px"> 
     <div class="UIListGrid">
       <%        
         String portalName = uiDocumentInfo.getPortalName() ;

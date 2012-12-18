@@ -27,7 +27,7 @@
   def userName = rcontext.getRemoteUser();
   def leftContainerWidth = Utils.getCookieByCookieName(userName + "_leftContainerWidth");
   def savedLeftContainerWidthStyle  = leftContainerWidth!=null?"style=\"width:" + leftContainerWidth + "px\"":"";
-  def initWithoutLeftContainer = uicomponent.isShowSideBar();
+  def initWithoutLeftContainer = uicomponent.isShowSideBar() && uiExplorer.canShowSideBar();;
 
   if(uiTreeExplorer != null && uicomponent.isShowSideBar()) {
     def focusNode = uiTreeExplorer.getEncodeCurrentPath();
