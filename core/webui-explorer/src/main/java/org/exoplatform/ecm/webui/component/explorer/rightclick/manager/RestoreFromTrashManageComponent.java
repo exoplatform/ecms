@@ -34,6 +34,7 @@ import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.CanRestoreNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.HasRemovePermissionFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsCheckedOutFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsInTrashFilter;
@@ -44,6 +45,7 @@ import org.exoplatform.ecm.webui.component.explorer.popup.actions.UISelectRestor
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.documents.TrashService;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -83,6 +85,7 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
                                                    new IsNotLockedFilter(),
                                                    new IsCheckedOutFilter(),
                                                    new HasRemovePermissionFilter(),
+                                                   new CanRestoreNodeFilter(),
                                                    new IsNotTrashHomeNodeFilter() });
 
   private final static Log                     LOG     = ExoLogger.getLogger(RestoreFromTrashManageComponent.class.getName());
@@ -165,6 +168,11 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
       SessionProvider sessionProvider = uiExplorer.getSessionProvider();
       try {
         trashService.restoreFromTrash(srcPath, sessionProvider);
+        LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
+        List<Node> symlinks = linkManager.getAllLinks(node, org.exoplatform.services.cms.impl.Utils.EXO_SYMLINK);
+        for (Node symlink : symlinks) {
+          trashService.restoreFromTrash(symlink.getPath(), sessionProvider);
+        }
         uiExplorer.updateAjax(event);
       } catch(PathNotFoundException e) {
         UIPopupContainer uiPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
