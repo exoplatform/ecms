@@ -161,7 +161,7 @@
 
 .uiSideBar  {
 
-	.ListExtendedItem{
+	.ListExtendedItem {
 			background: none repeat scroll 0 0 #F7F7F7;
 			border: 1px solid #B7B7B7;
 			padding: 5px;
@@ -176,20 +176,19 @@
 
 	.SideGeneratal {
 		background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/Generatal.png') no-repeat center;
-		width: 17px; height: 17px;
+		.size(17px, 17px);
 	}
 
 	.Search {
 		background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/Search.png') no-repeat center;
-		width: 17px; height: 17px;
+		.size(17px, 17px);
 	}
 
-	.AdvancedSearch {
+	.advancedSearch {
 		background: url("/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/SearchIcon.png") no-repeat scroll center center transparent;
-		width: 17px; height: 17px;
+		.size(17px, 17px);
 		cursor: pointer;
-		float: right;
-		margin-top:4px;
+		display: block;
 	}
 
 	.uiViewRelationList .TitleLabel {
@@ -197,8 +196,7 @@
 		font: normal bold 11px Verdana;
 	}
 
-	.SelectedNode {    	
-		display: block;
+	.selectedNode {
 		font-weight: bold;
 	}
 }

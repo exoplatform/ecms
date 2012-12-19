@@ -7,10 +7,10 @@
 	def queryListData = uicomponent.queryList();
 %>
 
-			    <h5 class="title clearfix">
-						<div class="AdvancedSearch pull-right" onclick="<%=uicomponent.event("AdvanceSearch")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.AdvanceSearch")%>"><span></span></div>
-						<%=_ctx.appRes("UISavedSearches.title.savedSearches")%>
-					</h5>
+	<h5 class="title clearfix">
+		<i class="advancedSearch pull-right" onclick="<%=uicomponent.event("AdvanceSearch")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.AdvanceSearch")%>"></i>
+		<%=_ctx.appRes("UISavedSearches.title.savedSearches")%>
+	</h5>
 
   <div class="uiContentBox">
     <%if(queryListData.size() == 0) { %>
@@ -21,15 +21,12 @@
           if(object instanceof QueryData) {
             def storedQueryPath = object.getStoredQueryPath() ;
 	          def queryName =  storedQueryPath.substring(storedQueryPath.lastIndexOf("/") + 1) ;
-	          selectedCss = (storedQueryPath.equals(uicomponent.getQueryPath()) ? "SelectedNode" : "");
-			  		println("<a class=\"$selectedCss\" href=\"" + uicomponent.event("Execute", Utils.formatNodeName(storedQueryPath)) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UISavedQuery.tooltip.Execute") + "\">");			  			  
-	          println("  <div class=\"arrowSidContent textSiderContent\">" + queryName +"</div>");			  			  
-	          println("</a>");
+	          selectedCss = (storedQueryPath.equals(uicomponent.getQueryPath()) ? "selectedNode" : "");
+			  		println("<a class=\"$selectedCss arrowSidContent textSiderContent\" href=\"" + uicomponent.event("Execute", Utils.formatNodeName(storedQueryPath)) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UISavedQuery.tooltip.Execute") + "\">" + queryName +"</a>");			  			  
+	          
           } else if(object instanceof NodeData) {			
-					selectedCss = object.getPath().equals(uicomponent.getQueryPath()) ? "SelectedNode" : "";	          
-            		println("<a class=\"$selectedCss\" href=\"" + uicomponent.event("Execute", object.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UISavedQuery.tooltip.Execute") + "\">");						
-			  		println("<div class=\"arrowSidContent textSiderContent\">" +object.getName()+ "</div>");			  
-	          		println("</a>"); 
+					selectedCss = object.getPath().equals(uicomponent.getQueryPath()) ? "selectedNode" : "";	          
+						println("<a class=\"$selectedCss arrowSidContent textSiderContent\" href=\"" + uicomponent.event("Execute", object.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UISavedQuery.tooltip.Execute") + "\">" + object.getName() +"</a>");
           }
         }
       }
