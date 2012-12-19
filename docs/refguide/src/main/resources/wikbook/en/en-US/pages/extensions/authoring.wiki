@@ -104,8 +104,8 @@ This extended publication has new states and new profiles that are enabled in Co
 
 In most cases, you do not want to publish a content directly, but at a defined date and you can also want  the content to be unpublished automatically after that.
 New properties are added to the new publication plugin, that allows you to manage this:
-* _publication:startPublishedDate_
-* _publication:endPublishedDate_
+* _publication\:startPublishedDate_
+* _publication\:endPublishedDate_
 
 The Content rendering engine does not know anything about publication dates, so another service needs to manage that.
 When the publisher sets start/end publication dates, he can "stage" the content. The content will go automatically to the "published" state when the start date arrives and to the "unpublished" state after end date.
