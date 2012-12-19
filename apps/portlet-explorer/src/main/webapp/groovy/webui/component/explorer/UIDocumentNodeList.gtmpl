@@ -91,8 +91,13 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
   def preferenceWS = data.getSession().getWorkspace().getName() ;
   String nodePath = data.getPath() ;
   String name = nodePath.substring(nodePath.lastIndexOf("/") + 1, nodePath.length()) ;   
-  String title = uiWorkingArea.getTitle(data);          
-  String subName ;
+  String title = uiWorkingArea.getTitle(data);
+  String fileName = uicomponent.getFileName(data, title);
+  String fileExtension = uicomponent.getFileExtension(data, title);
+  String fileDate = uicomponent.getFileDate(data);
+  def versionNum  = uicomponent.getVersionNumber(data);
+  def author = uicomponent.getAuthorName(data);
+  
   String actionLink = uiDocumentInfo.event("ChangeNode",Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS)) ;
   //Begin permlink
   permLinkComponent =  uiWorkingArea.getPermlink(data);
@@ -171,7 +176,7 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
   if (Utils.isTrashHomeNode(data)) isTrashHome = "true"
   if (!uiDocumentInfo.isSystemWorkspace()) rightClickMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(nodePath), uiWorkingArea.getActionsExtensionList(data)) ;            
 %>
-  <div <%=rightClickMenu%> class="RowView Normal ClearFix" trashHome="$isTrashHome" locked="$isLocked" mediaType="$isMediaType" removeFavourite="$isFavourite" inTrash="$isInTrash" workspacename="$preferenceWS" objectId="<%=URLEncoder.encode(Utils.formatNodeName(nodePath), "utf-8")%>">
+  <div <%=rightClickMenu%> class="RowView fileViewRowView Normal ClearFix" trashHome="$isTrashHome" locked="$isLocked" mediaType="$isMediaType" removeFavourite="$isFavourite" inTrash="$isInTrash" workspacename="$preferenceWS" objectId="<%=URLEncoder.encode(Utils.formatNodeName(nodePath), "utf-8")%>">
     $strActs
     <% def folderIcon = data.isNodeType(NodetypeConstant.NT_FOLDER) || data.isNodeType(NodetypeConstant.NT_UNSTRUCTURED) ? "FolderCollapsed" : "NoArrow"
        String expandLink = uicomponent.event("ExpandNode",Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS)) ;
@@ -192,41 +197,22 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
         <%}%>
       </div>
     </div>
-    <div class="ColumnName" style="width: 125px;" ondblclick="$actionLink">
-      <div class="NodeLabel">
-        <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;$hiddenStyle;" title="<%=title%> $lockedLabel"><%=title%></div>
+    <div class="ColumnName" style="width: 300px;" title="<%=title%> $lockedLabel">
+      <div>
+        <a style="cursor: pointer; -moz-outline: none; -moz-user-select: none;$hiddenStyle;color: black;float: left"
+             onclick="$actionLink" class="NodeLabel" >
+            <strong><%=fileName%></strong>
+        </a>
+        <span class="NodeLabel" style="display:inline-block;padding-left:20px;">
+          <%=fileExtension%>
+        </span>
       </div>
+      <p class="fileInfoBottom">
+        <span class="fileInfoVersion"><%=versionNum%></span>
+        <%=fileDate%>
+        <%=author%>
+      </p>
     </div>
-    <!--
-    <div class="ColumnAuditing" style="border: none; width: 108px;">
-       <%= Utils.isAuditable(data)%>
-       <% if (Utils.isAuditable(data)&& uiDocumentInfo.hasAuditHistory(data)) 
-            println "("+ uiDocumentInfo.getNumAuditHistory(data)+")";
-          else
-            println ""; 
-        %>
-    </div>
-    -->
-    <div class="ColumnVersion" style="width: 98px;">
-        <%=Utils.isVersionable(data)%>
-        <%
-          if(Utils.isVersionable(data) && !uiDocumentInfo.getVersionName(data).equals("jcr:rootVersion")) {
-            println "(" + uiDocumentInfo.getVersionName(data) + ")" ;
-          }
-        %>
-    </div>
-    <%
-      for(column in arrColumns) {
-        def arrColumn = column.split(";");
-        def arrColumnValue = uiDocumentInfo.getPropertyValue(data, arrColumn[0]);
-        if ("exo:owner".equals(arrColumn[0]) && "__system".equals(arrColumnValue) ) arrColumnValue = ""; 
-    %>
-      <div class="Column<%=uiDocumentInfo.getPropertyNameWithoutNamespace(arrColumn[0])%>" style="width: ${arrColumn[1]}">
-        <%=arrColumnValue%>
-      </div>
-    <%}%>
-    
-    
   </div>
 <%
     

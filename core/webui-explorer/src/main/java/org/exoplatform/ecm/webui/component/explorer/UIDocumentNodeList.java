@@ -18,6 +18,8 @@ package org.exoplatform.ecm.webui.component.explorer;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 import javax.jcr.AccessDeniedException;
@@ -27,6 +29,7 @@ import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -34,9 +37,12 @@ import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -123,6 +129,98 @@ public class UIDocumentNodeList extends UIContainer {
     child.getContentPageIterator().setId(child.getId() + "PageIterator");
     return child;
   }
+
+  /**
+   * gets the name of file
+   * @param file the file
+   * @param title the title
+   * @return name of file
+   * @throws Exception
+   */
+  public String getFileName(Node file, String title) throws Exception {
+    if (!file.isNodeType(NodetypeConstant.NT_FILE) || title == null) {
+      return title;
+    } else {
+      int index = title.lastIndexOf('.');
+      if (index != -1) {
+        return title.substring(0, index);
+      } else {
+        return title;
+      }
+    }
+  }
+  
+  /**
+   * gets the extension of file
+   * @param file the file
+   * @param title the title
+   * @return extension of file
+   * @throws Exception
+   */
+  public String getFileExtension(Node file, String title) throws Exception {
+    if (!file.isNodeType(NodetypeConstant.NT_FILE) || title == null) {
+      return "";
+    } else {
+      int index = title.lastIndexOf('.');
+      if (index != -1) {
+        return title.substring(index);
+      } else {
+        return "";
+      }
+    }
+  }
+  
+  /**
+   * gets date presentation of file
+   * @param file the file
+   * @return file date presentation
+   * @throws Exception
+   */
+  public String getFileDate(Node file) throws Exception {
+    UIDocumentInfo uiDocInfo = getAncestorOfType(UIDocumentInfo.class);
+    String createdDate = uiDocInfo.getPropertyValue(file, NodetypeConstant.EXO_DATE_CREATED);
+    String modifiedDate = uiDocInfo.getPropertyValue(file, NodetypeConstant.EXO_DATE_MODIFIED);
+    return createdDate.equals(modifiedDate) || StringUtils.isEmpty(modifiedDate)? 
+            getLabel("CreatedOn") + " " + createdDate : getLabel("Updated") + " " +  modifiedDate;
+  }
+  
+  /**
+   * gets label
+   * @param id the id
+   * @return label
+   */
+  public String getLabel(String id)  {
+    RequestContext context = RequestContext.getCurrentInstance();
+    ResourceBundle res = context.getApplicationResourceBundle();
+    try {
+      return res.getString("UIDocumentNodeList.label." + id);
+    } catch (MissingResourceException ex) {
+      return id;
+    }
+  }
+  
+  /**
+   * gets number of version of the node
+   * @param file the node
+   * @return version number
+   */
+  public String getVersionNumber(Node file) throws Exception {
+    if (file.isNodeType(NodetypeConstant.MIX_VERSIONABLE)) {
+      return "V" + file.getVersionHistory().getAllVersions().getSize();
+    } else {
+      return "";
+    }
+  }
+  
+  public String getAuthorName(Node file) throws Exception {
+    String userName = getAncestorOfType(UIDocumentInfo.class).getPropertyValue(file, NodetypeConstant.EXO_OWNER);
+    if (IdentityConstants.SYSTEM.equals(userName)) {
+      return "";
+    }
+    return getLabel("by") + " " +
+    (userName.equals(ConversationState.getCurrent().getIdentity().getUserId()) ? getLabel("you") : userName);
+  }
+
   
   static public class ExpandNodeActionListener extends EventListener<UIDocumentNodeList> {
     public void execute(Event<UIDocumentNodeList> event) throws Exception {

@@ -452,7 +452,6 @@
 .UIJCRExplorerPortlet .UIListGrid .ColumnName {
 	float: left; /* orientation=lt */
 	float: right; /* orientation=rt */
-	height: 19px;
 	overflow: hidden;
   white-space: nowrap;
   padding-left: 3px;
@@ -514,14 +513,21 @@
 }
 
 .UIJCRExplorerPortlet .UIListGrid .RowView {
-	line-height: 19px;
 	margin-top: 6px;
 	height: 19px;
+	line-height: 19px;
 	overflow: hidden;
 }
 
+<<<<<<< HEAD
 .UIJCRExplorerPortlet .UIListGrid .FileDrag {
 	background: grey;
+=======
+.UIJCRExplorerPortlet .UIListGrid .fileViewRowView {
+	height: 40px;
+	border-bottom: 1px solid grey;
+	padding-bottom: 10px;
+>>>>>>> ECMS-4195 add new UI layout for file info in FileView
 }
 
 .MoveItem .UIListGrid .RowView {
@@ -646,6 +652,17 @@
 .UIJCRExplorerPortlet .UIListGrid .RowView .ResizeColumn .NodeLabel {
 	width: 95%;
 	overflow: hidden;
+}
+
+.UIJCRExplorerPortlet .fileInfoBottom {
+	margin: 0px;
+}
+
+.UIJCRExplorerPortlet .fileInfoVersion {
+	color: white;
+	background-color: grey;
+	width: 20px;
+	display: inline-block;
 }
 
 /*############################## -- Begin TimelineView -- ##############################*/

@@ -3472,4 +3472,12 @@
 	    <Close>Close</Close>
   	</label>
   </UIMultiUpload>
+  <UIDocumentNodeList>
+  	<label>
+  		<CreatedOn>Created on</CreatedOn>
+  		<Updated>Updated </Updated>
+  		<by>by</by>
+  		<you>you</you>
+  	</label>
+  </UIDocumentNodeList>
 </bundle>
