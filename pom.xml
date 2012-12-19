@@ -47,7 +47,6 @@
     <org.gatein.pc.version>2.4.0.Final</org.gatein.pc.version>
     <org.gatein.portal.version>3.5.0.Final</org.gatein.portal.version>
     <org.gatein.wci.version>2.3.0.Final</org.gatein.wci.version>
-    <org.gatein.common.version>2.1.0.Final</org.gatein.common.version>
     
     <!-- ************** -->
     <!-- Build settings -->
@@ -613,12 +612,6 @@
         <groupId>org.exoplatform.ws</groupId>
         <artifactId>exo.ws.testframework</artifactId>
         <version>${org.exoplatform.ws.version}</version>
-      </dependency>
-      <!-- Enforce upgrade to fix slf4j incompatibility -->
-      <dependency>
-        <groupId>org.gatein.common</groupId>
-        <artifactId>common-logging</artifactId>
-        <version>${org.gatein.common.version}</version>
       </dependency>
       <!-- To be replaced by an import of GateIn PC parent POM -->
       <dependency>
