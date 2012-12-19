@@ -441,7 +441,7 @@
         </value-param>
         <value-param>
           <name>workspace-name</name>
-          <value>portal-test</value>
+          <value>collaboration</value>
         </value-param>
         <values-param>
           <name>entities</name>

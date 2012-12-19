@@ -4,7 +4,7 @@
   <parent>
     <artifactId>maven-parent-pom</artifactId>
     <groupId>org.exoplatform</groupId>
-    <version>9-alpha-3</version>
+    <version>9-SNAPSHOT</version>
     <relativePath></relativePath>
   </parent>
   <groupId>org.exoplatform.ecms</groupId>
@@ -47,7 +47,6 @@
     <org.gatein.pc.version>2.4.0.Final</org.gatein.pc.version>
     <org.gatein.portal.version>3.5.0.Final</org.gatein.portal.version>
     <org.gatein.wci.version>2.3.0.Final</org.gatein.wci.version>
-    
     <!-- ************** -->
     <!-- Build settings -->
     <!-- ************** -->
@@ -198,7 +197,7 @@
         <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-apps-gadget-publication</artifactId>
         <version>${project.version}</version>
-        <classifier>classes</classifier>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
@@ -210,7 +209,7 @@
         <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-apps-portlet-administration</artifactId>
         <version>${project.version}</version>
-        <classifier>classes</classifier>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
@@ -222,7 +221,7 @@
         <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-apps-portlet-explorer</artifactId>
         <version>${project.version}</version>
-        <classifier>classes</classifier>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
@@ -234,7 +233,7 @@
         <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-apps-portlet-presentation</artifactId>
         <version>${project.version}</version>
-        <classifier>classes</classifier>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
@@ -246,7 +245,7 @@
         <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-apps-portlet-search</artifactId>
         <version>${project.version}</version>
-        <classifier>classes</classifier>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
@@ -258,7 +257,7 @@
         <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-apps-portlet-seo</artifactId>
         <version>${project.version}</version>
-        <classifier>classes</classifier>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
@@ -270,7 +269,7 @@
         <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-apps-resources-wcm</artifactId>
         <version>${project.version}</version>
-        <classifier>classes</classifier>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
@@ -282,7 +281,7 @@
         <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-apps-wai-template</artifactId>
         <version>${project.version}</version>
-        <classifier>classes</classifier>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
@@ -324,7 +323,7 @@
         <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-core-webapp</artifactId>
         <version>${project.version}</version>
-        <classifier>classes</classifier>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
@@ -356,7 +355,7 @@
         <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-ext-authoring-apps</artifactId>
         <version>${project.version}</version>
-        <classifier>classes</classifier>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
@@ -388,7 +387,7 @@
         <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-packaging-wcm-webapp</artifactId>
         <version>${project.version}</version>
-        <classifier>classes</classifier>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
