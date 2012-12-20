@@ -253,11 +253,8 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
     ResourceBundle res = context.getApplicationResourceBundle();
     Writer writer = context.getWriter();
-    writer.append("<div class=\"UIAction UIDialogAction\" >");
-    writer.append("<span class='UIDialogTitle'>" + getTemplateLabel() + " " + getChangeTypeActionLink () + "</span>");
-    writer.append("<table style=\"margin-right:5px; width:auto; float:right\">");
-    writer.append("<tr>");
-    writer.append("<td>");
+    writer.append("<h5 class=\"title uiDialogAction clearfix\" >");
+    writer.append("<div class=\"dialogAction pull-right\">");
     String[] listAction = getActions();
     String contextID = "UIDocumentForm_" + System.currentTimeMillis();
     String actionLabel;
@@ -269,25 +266,23 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         actionLabel = action;
       }
       link = event(action);
-      writer.append("<a href=\"javascript:void(0);\"")
+      writer.append("<button type=\"button\" ")
             .append("onclick=\"")
             .append(link)
-            .append("\" class=\"ActionButton LightBlueStyle\">")
+            .append("\" class=\"btn\">")
             .append(actionLabel)
-            .append("</a>");
+            .append("</button>");
     }
     String fullscreen = res.getString(getName() + ".tooltip.FullScreen");
-    writer.append("</td>");
-    writer.append("<td style=\"border-left:1px solid #AEAEAE; padding-left:5px; text-align: left;\">");
     writer.append("<a href=\"javascript:void(0);\"")
           .append(fullscreen)
           .append("\" id=\"")
           .append(contextID)
           .append("\" class=\"MaximizeScreen20x20Icon\" onclick='eXo.webui.UIDocForm.FullScreenToggle(this); return false;'></a>");
-    writer.append("</td>");
-    writer.append("</tr>");
-    writer.append("</table>");
+					
     writer.append("</div>");
+    writer.append("<span class='uiDialogTitle'>" + getTemplateLabel() + " " + getChangeTypeActionLink () + "</span>");
+    writer.append("</h5>");
     context.getJavascriptManager().loadScriptResource("explorer-module");
     context.getJavascriptManager().addCustomizedOnLoadScript("eXo.webui.UIDocForm.initFullScreenStatus(\"" + contextID + "\");");
   }

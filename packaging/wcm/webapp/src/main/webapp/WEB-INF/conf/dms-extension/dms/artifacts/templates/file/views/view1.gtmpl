@@ -59,12 +59,9 @@
   <style>
     <% _ctx.include(uicomponent.getTemplateSkin("nt:file", "Stylesheet")); %>
   </style>
-  <div class="FileContent">
-    <div class="NavigationContainer"> 
-      <div class="TopNavContent ClearFix">
-        <div class="TopTitle" rel="tooltip" data-placement="bottom" title="<%=title %>">
-          <%=title %>
-        </div>
+  <div class="fileContent">
+    <div class="navigationContainer uiBox"> 
+      <h5 class="title clearfix">
         <%
           StringBuilder sb = new StringBuilder();
           String ndPath = currentNode.getPath();
@@ -82,11 +79,12 @@
           }
           def downloadLink = sb.toString();
         %>
-        <div style="text-align:right;margin-top:1px" class="ActionButton LightBlueStyle">
-          <a href="$downloadLink"><%=_ctx.appRes("File.view.label.download")%></a>
-        </div>        
-      </div>
-      <div class="Content">
+        
+				<a class="pull-right" href="$downloadLink"><i class="uiIconDownload"></i> <%=_ctx.appRes("File.view.label.download")%></a>
+				
+        <div class="topTitle" rel="tooltip" data-placement="bottom" title="<%=title %>"><%=title %></div>      
+      </h5>
+      <div class="content uiContentBox">
         <%
           def fileComponent = uicomponent.getUIComponent(mimeType);
           if(fileComponent != null) {

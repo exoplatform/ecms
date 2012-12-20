@@ -3,11 +3,11 @@
   def messageChangeType = uicomponent.getClosingConfirmMsg("UIDocumentForm.msg.confirm-changeType") ;
   def messageNavigate = uicomponent.getClosingConfirmMsg("UIDocumentForm.msg.confirm-navigate") ;
 %>
-<div class="UIDocumentFormController" id="$uicomponent.id" >	
+<div class="uiDocumentFormController" id="$uicomponent.id" >	
 	<%
 	  if(uicomponent.isDisplayOptionBlockPanel()) {
 	%>	
-	<div class="ClearFix">
+	<div class="clearfix">
 		<%
 	   	for(uiChild in uicomponent.getChildren()) { 
 	   		String width = "70%";	  
