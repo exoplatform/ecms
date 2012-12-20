@@ -16,9 +16,6 @@
  */
 package org.exoplatform.services.wcm.publication;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertNull;
-
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Locale;
@@ -49,9 +46,6 @@ import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationConstant;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationPlugin;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SAS
@@ -61,6 +55,8 @@ import org.testng.annotations.Test;
  */
 
 @ConfiguredBy({
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.portal-configuration.xml"),
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.identity-configuration.xml"),
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-test-configuration.xml"),
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/wcm/test-publication-configuration.xml")
   })
@@ -92,14 +88,9 @@ public class TestStageAndVersionPublicationPlugin extends BaseECMSTestCase {
   /** . */
   private OrganizationService org;
   
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
-    publicationService_ = WCMCoreUtils.getService(PublicationService.class);
-  }
-
-  @BeforeMethod
   public void setUp() throws Exception {
+    super.setUp();
+    publicationService_ = WCMCoreUtils.getService(PublicationService.class);
     RequestLifeCycle.begin(PortalContainer.getInstance());
     applySystemSession();
     node_ = session.getRootNode().addNode(TEST);
@@ -143,17 +134,17 @@ public class TestStageAndVersionPublicationPlugin extends BaseECMSTestCase {
 
   }
   
-  @AfterMethod
   public void tearDown() throws Exception {
     publicationService_.getPublicationPlugins().clear();
     node_.remove();
     session.save();
+    RequestLifeCycle.end();
+    super.tearDown();
   }
 
   /**
    * tests changing state for a node 
    */
-  @Test
   public void testChangeState() throws Exception {
     HashMap<String, String> context = new HashMap<String, String>();
     publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
@@ -172,7 +163,6 @@ public class TestStageAndVersionPublicationPlugin extends BaseECMSTestCase {
   /**
   * tests getting user info
   */
-  @Test
   public void testGetUserInfo() throws Exception {
     publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
     assertNull(plugin_.getUserInfo(node_, new Locale("en")));
@@ -181,7 +171,6 @@ public class TestStageAndVersionPublicationPlugin extends BaseECMSTestCase {
   /**
    * tests getLocalizedAndSubstituteLog
    */
-  @Test
   public void testGetLocalizedAndSubstituteLog() throws Exception {
     assertEquals("The content is published", plugin_.getLocalizedAndSubstituteMessage(
          new Locale("en"), "PublicationService.StageAndVersionPublicationPlugin.changeState.published", new String[]{}));
@@ -190,7 +179,6 @@ public class TestStageAndVersionPublicationPlugin extends BaseECMSTestCase {
   /**
    * tests update lifecycle on change content 
    */
-  @Test
   public void testUpdateLifeCycleOnChangeContent() throws Exception {
     publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
     plugin_.updateLifecyleOnChangeContent(node_, node_.getSession().getUserID());
@@ -199,5 +187,4 @@ public class TestStageAndVersionPublicationPlugin extends BaseECMSTestCase {
     assertEquals(PublicationDefaultStates.PUBLISHED, node_.getProperty(StageAndVersionPublicationConstant.CURRENT_STATE).
                  getString());
   }
-  
 }
