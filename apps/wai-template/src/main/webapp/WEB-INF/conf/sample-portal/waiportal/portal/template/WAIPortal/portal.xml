@@ -55,7 +55,7 @@
                 </preference>
                 <preference>
                   <name>formViewTemplatePath</name>
-                  <value>/exo:ecm/views/templates/content-list-viewer/list/WAIPortalToolBar.gtmpl</value>
+                  <value>/exo:ecm/views/templates/content-list-viewer/list/AccessibleToolbar.gtmpl</value>
                   <read-only>false</read-only>
                 </preference>
                 <preference>
@@ -128,7 +128,7 @@
                 </preference>
                 <preference>
                   <name>formViewTemplatePath</name>
-                  <value>/exo:ecm/views/templates/content-list-viewer/list/WAIPortalBanner.gtmpl</value>
+                  <value>/exo:ecm/views/templates/content-list-viewer/list/AccessibleBanner.gtmpl</value>
                   <read-only>false</read-only>
                 </preference>
                 <preference>

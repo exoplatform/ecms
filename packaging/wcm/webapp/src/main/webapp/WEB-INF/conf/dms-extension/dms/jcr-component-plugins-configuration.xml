@@ -10,7 +10,7 @@
 	
   <external-component-plugins>
   	<target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
-		<component-plugin>
+		 <component-plugin>
 	    <name>add.namespaces</name>
 	    <set-method>addPlugin</set-method>
 	    <type>org.exoplatform.services.jcr.impl.AddNamespacesPlugin</type>
@@ -18,12 +18,8 @@
 	      <properties-param>
 	        <name>namespaces</name>
 	        <property name="dc" value="http://purl.org/dc/elements/1.1/"/>
-	        <property name="rma" value="http://www.rma.com/jcr/"/>
-					<property name="metadata" value="http://www.exoplatform.com/jcr/metadata/1.1/"/>
-	        <property name="Fwd" value="http://www.exoplatform.com/jcr/Fwd/1.1/"/>
-	        <property name="Re" value="http://www.exoplatform.com/jcr/Re/1.1/"/>
-	        <property name="kfx" value="http://www.exoplatform.com/jcr/kfx/1.1/"/>	        
-					<property name="jos" value="http://www.exoplatform.com/jcr-services/organization-service/1.0/"/>
+					    <property name="metadata" value="http://www.exoplatform.com/jcr/metadata/1.1/"/>
+					    <property name="jos" value="http://www.exoplatform.com/jcr-services/organization-service/1.0/"/>
 	      </properties-param>
 	    </init-params>
 	  </component-plugin>

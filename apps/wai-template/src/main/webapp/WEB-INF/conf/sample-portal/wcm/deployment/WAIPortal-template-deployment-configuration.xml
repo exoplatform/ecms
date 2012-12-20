@@ -60,7 +60,7 @@
           <description>WAI Portal ToolBar Template</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
             <field name="templateName">
-              <string>WAIPortalToolBar.gtmpl</string>
+              <string>AccessibleToolbar.gtmpl</string>
             </field>
             <field name="category">
               <string>list</string>
@@ -72,7 +72,7 @@
           <description>Category navigation template</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
             <field name="templateName">
-              <string>CategoryNavigationTemplate.gtmpl</string>
+              <string>AccessibleNavigation.gtmpl</string>
             </field>
             <field name="category">
               <string>list</string>
@@ -84,7 +84,7 @@
           <description>Breadcrumb template</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
             <field name="templateName">
-              <string>Breadcrumb.gtmpl</string>
+              <string>AccessibleBreadcrumb.gtmpl</string>
             </field>
             <field name="category">
               <string>list</string>
@@ -96,7 +96,7 @@
           <description>Site map template</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
             <field name="templateName">
-              <string>Sitemap.gtmpl</string>
+              <string>AccessibleSitemap.gtmpl</string>
             </field>
             <field name="category">
               <string>list</string>
@@ -108,7 +108,7 @@
           <description>WAI Portal Banner Template</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
             <field name="templateName">
-              <string>WAIPortalBanner.gtmpl</string>
+              <string>AccessibleBanner.gtmpl</string>
             </field>
             <field name="category">
               <string>list</string>

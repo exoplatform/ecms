@@ -44,54 +44,6 @@
           <value>war:/conf/wcm-artifacts/application-templates/content-list-viewer</value>
         </value-param>
         <object-param>
-          <name>default.folder.list.viewer</name>
-          <description>Default folder list viewer groovy template</description>
-          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
-            <field name="templateName">
-              <string>UIContentListPresentationDefault.gtmpl</string>
-            </field>
-            <field name="category">
-              <string>list</string>
-            </field>
-            <!--
-						<field  name="accessPermissions">
-						<collection type="java.util.ArrayList">
-						<value><string>*</string></value>	          		               
-						</collection>
-						</field>                            
-						<field  name="editPermissions">
-						<collection type="java.util.ArrayList">
-						<value><string>*</string></value>	          		               
-						</collection>
-						</field>               
-						-->
-          </object>
-        </object-param>
-        <object-param>
-          <name>big.folder.list.viewer</name>
-          <description>Default folder list viewer groovy template with Big Image</description>
-          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
-            <field name="templateName">
-              <string>UIContentListPresentationBigImage.gtmpl</string>
-            </field>
-            <field name="category">
-              <string>list</string>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
-          <name>small.folder.list.viewer</name>
-          <description>Default folder list viewer groovy template with Small Image</description>
-          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
-            <field name="templateName">
-              <string>UIContentListPresentationSmall.gtmpl</string>
-            </field>
-            <field name="category">
-              <string>list</string>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
           <name>Two columns CLV template</name>
           <description>Two columns CLV template</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
@@ -164,42 +116,6 @@
           </object>
         </object-param>
         <object-param>
-          <name>folder.list.viewer</name>
-          <description>Default folder list viewer groovy template</description>
-          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
-            <field name="templateName">
-              <string>ContentListViewerDefault.gtmpl</string>
-            </field>
-            <field name="category">
-              <string>list</string>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
-          <name>Big hot news template</name>
-          <description>Big hot news template</description>
-          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
-            <field name="templateName">
-              <string>BigHotNewsTemplateCLV.gtmpl</string>
-            </field>
-            <field name="category">
-              <string>list</string>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
-          <name>Events template</name>
-          <description>Events template</description>
-          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
-            <field name="templateName">
-              <string>EventsTemplateCLV.gtmpl</string>
-            </field>
-            <field name="category">
-              <string>list</string>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
           <name>default.paginator</name>
           <description>Default paginator groovy template</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
@@ -226,77 +142,6 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
-
-  <!-- Deploy template for Parameterized Content List Viewer Portlet -->
-  <!--
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.cms.views.ApplicationTemplateManagerService</target-component>
-    <component-plugin>
-      <name>pclv.templates.plugin</name>
-      <set-method>addPlugin</set-method>
-      <type>org.exoplatform.services.cms.views.PortletTemplatePlugin</type>
-      <description>This plugin is used to import parameterized content list views templates for Parameterized Content List Viewer</description>
-      <init-params>
-        <value-param>
-          <name>portletName</name>
-          <value>Parameterized Content List Viewer</value>
-        </value-param>
-        <value-param>
-          <name>portlet.template.path</name>
-          <value>war:/conf/wcm-artifacts/application-templates/content-list-viewer</value>
-        </value-param>
-        <object-param>
-          <name>default.folder.list.viewer</name>
-          <description>Default folder list viewer groovy template</description>
-          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
-            <field name="templateName">
-              <string>UIParameterizedContentListViewerDefault.gtmpl</string>
-            </field>
-            <field name="category">
-              <string>list</string>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
-          <name>Big hot news template</name>
-          <description>Big hot news template</description>
-          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
-            <field name="templateName">
-              <string>BigHotNewsTemplate.gtmpl</string>
-            </field>
-            <field name="category">
-              <string>list</string>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
-          <name>Events template</name>
-          <description>Events template</description>
-          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
-            <field name="templateName">
-              <string>EventsTemplate.gtmpl</string>
-            </field>
-            <field name="category">
-              <string>list</string>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
-          <name>default.paginator</name>
-          <description>Default paginator groovy template</description>
-          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
-            <field name="templateName">
-              <string>UIPaginatorDefault.gtmpl</string>
-            </field>
-            <field name="category">
-              <string>paginators</string>
-            </field>
-          </object>
-        </object-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
-  -->
 
   <!-- Deploy template for Search Portlet -->
   <external-component-plugins>
@@ -366,62 +211,5 @@
       </init-params>
     </component-plugin>
   </external-component-plugins>
-
-  <!-- Deploy template for Category Navigation Portlet -->
-  <!--
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.cms.views.ApplicationTemplateManagerService</target-component>
-    <component-plugin>
-      <name>search.templates.plugin</name>
-      <set-method>addPlugin</set-method>
-      <type>org.exoplatform.services.cms.views.PortletTemplatePlugin</type>
-      <description>This plugin is used to import views templates for Category Navigation Portlet</description>
-      <init-params>
-        <value-param>
-          <name>portletName</name>
-          <value>Category Navigation Portlet</value>
-        </value-param>
-        <value-param>
-          <name>portlet.template.path</name>
-          <value>war:/conf/wcm-artifacts/application-templates/category-navigation</value>
-        </value-param>
-        -->
-        <!-- object-param>
-            <name>DefaultVerticalHierachy</name>
-            <description>Default vertical hierachy with two levels</description>
-            <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
-              <field  name="templateName"><string>DefaultVerticalHierachy.gtmpl</string></field>  
-              <field  name="category"><string>vertical-hierachy</string></field>
-            </object>
-          </object-param -->
-        <!--
-        <object-param>
-          <name>SimpleVerticalHierachy</name>
-          <description>Simple vertical hierachy with all levels</description>
-          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
-            <field name="templateName">
-              <string>SimpleVerticalHierachy.gtmpl</string>
-            </field>
-            <field name="category">
-              <string>vertical-hierachy</string>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
-          <name>SimpleHorizontal</name>
-          <description>Simple horizontal hierachy with one level</description>
-          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
-            <field name="templateName">
-              <string>SimpleHorizontal.gtmpl</string>
-            </field>
-            <field name="category">
-              <string>vertical-hierachy</string>
-            </field>
-          </object>
-        </object-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
-  -->
 
 </configuration>
