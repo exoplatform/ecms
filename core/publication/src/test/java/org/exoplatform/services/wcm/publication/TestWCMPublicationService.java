@@ -16,11 +16,6 @@
  */
 package org.exoplatform.services.wcm.publication;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertFalse;
-import static org.testng.AssertJUnit.assertNotNull;
-import static org.testng.AssertJUnit.assertTrue;
-
 import java.util.LinkedList;
 
 import javax.jcr.Node;
@@ -46,9 +41,6 @@ import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SAS
@@ -57,6 +49,8 @@ import org.testng.annotations.Test;
  * Jul 26, 2012  
  */
 @ConfiguredBy({
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.portal-configuration.xml"),
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.identity-configuration.xml"),
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-test-configuration.xml"),
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/wcm/test-publication-configuration.xml")
   })
@@ -99,14 +93,9 @@ public class TestWCMPublicationService extends BaseECMSTestCase {
   private OrganizationService org;
 
   
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
-    publicationService_ = WCMCoreUtils.getService(WCMPublicationService.class);
-  }
-
-  @BeforeMethod
   public void setUp() throws Exception {
+    super.setUp();
+    publicationService_ = WCMCoreUtils.getService(WCMPublicationService.class);
     RequestLifeCycle.begin(PortalContainer.getInstance());
     applySystemSession();
     node_ = session.getRootNode().addNode(TEST);
@@ -149,19 +138,18 @@ public class TestWCMPublicationService extends BaseECMSTestCase {
     listenerService.addListener(DataStorage.PORTAL_CONFIG_REMOVED, listener);
   }
   
-  @AfterMethod
   public void tearDown() throws Exception {
     publicationService_.getWebpagePublicationPlugins().clear();
     node_.remove();
     session.save();
     RequestLifeCycle.end();
+    super.tearDown();
   }
 
   /**
    * tests add publication plugin: 
    * add 1 publication plugins and check if the total plugins number is 1
    */
-  @Test
   public void testAddPublicationPlugin() throws Exception {
     assertEquals(1, publicationService_.getWebpagePublicationPlugins().size());
   }
@@ -170,7 +158,6 @@ public class TestWCMPublicationService extends BaseECMSTestCase {
    * tests get publication plugin: 
    * add 3 publication plugins, get the total plugins and check if the number is 3 
    */
-  @Test
   public void testGetWebpagePublicationPlugins() throws Exception {
     assertEquals(1, publicationService_.getWebpagePublicationPlugins().size());
   }
@@ -178,7 +165,6 @@ public class TestWCMPublicationService extends BaseECMSTestCase {
   /**
    * tests enrolling node in life cycle 1
    */
-  @Test
   public void testEnrollNodeInLifecycle1() throws Exception {
     publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
     assertEquals(ENROLLED, node_.getProperty(CURRENT_STATE).getString());
@@ -187,7 +173,6 @@ public class TestWCMPublicationService extends BaseECMSTestCase {
   /**
    * tests enrolling node in life cycle 2
    */
-  @Test
   public void testEnrollNodeInLifecycle2() throws Exception {
     Exception e = null;
     try {
@@ -205,7 +190,6 @@ public class TestWCMPublicationService extends BaseECMSTestCase {
   /**
    * tests if node is enrolled in lifecycle
    */
-  @Test
   public void testIsEnrolledWCMInLifecycle() throws Exception {
     assertFalse(publicationService_.isEnrolledInWCMLifecycle(node_));
     publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
@@ -215,7 +199,6 @@ public class TestWCMPublicationService extends BaseECMSTestCase {
   /**
    * tests getting content state 
    */
-  @Test
   public void testGetContentState() throws Exception {
     publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
     assertEquals(ENROLLED, publicationService_.getContentState(node_));
@@ -224,7 +207,6 @@ public class TestWCMPublicationService extends BaseECMSTestCase {
   /**
    * tests unsubscribing node
    */
-  @Test
   public void testUnsubscribeLifecycle() throws Exception {
     publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
     publicationService_.unsubcribeLifecycle(node_);
@@ -235,7 +217,6 @@ public class TestWCMPublicationService extends BaseECMSTestCase {
   /**
    * tests update life cycle on change content 1
    */
-  @Test
   public void testUpdateLifecyleOnChangeContent1() throws Exception {
     publicationService_.updateLifecyleOnChangeContent(
               node_, "test", node_.getSession().getUserID(), PUBLISHED);
@@ -249,7 +230,6 @@ public class TestWCMPublicationService extends BaseECMSTestCase {
   /**
    * tests update life cycle on change content 2
    */
-  @Test
   public void testUpdateLifecyleOnChangeContent2() throws Exception {
     publicationService_.updateLifecyleOnChangeContent(
               node_, "test", node_.getSession().getUserID());

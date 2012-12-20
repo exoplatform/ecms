@@ -16,12 +16,6 @@
  */
 package org.exoplatform.services.wcm.publication;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertFalse;
-import static org.testng.AssertJUnit.assertNotNull;
-import static org.testng.AssertJUnit.assertTrue;
-import static org.testng.AssertJUnit.assertNull;
-
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -38,9 +32,6 @@ import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SAS
@@ -50,6 +41,8 @@ import org.testng.annotations.Test;
  */
 
 @ConfiguredBy({
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.portal-configuration.xml"),
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.identity-configuration.xml"),
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-test-configuration.xml"),
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/wcm/test-publication-configuration.xml")
   })
@@ -64,14 +57,9 @@ public class TestPublicationService extends BaseECMSTestCase {
   private PublicationPlugin plugin_;
   private Node node_;
   
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
-    publicationService_ = WCMCoreUtils.getService(PublicationService.class);
-  }
-
-  @BeforeMethod
   public void setUp() throws Exception {
+    super.setUp();
+    publicationService_ = WCMCoreUtils.getService(PublicationService.class);
     applySystemSession();
     node_ = session.getRootNode().addNode(TEST);
     session.save();
@@ -83,18 +71,17 @@ public class TestPublicationService extends BaseECMSTestCase {
     publicationService_.addPublicationPlugin(plugin_);
   }
   
-  @AfterMethod
   public void tearDown() throws Exception {
     publicationService_.getPublicationPlugins().clear();
     node_.remove();
     session.save();
+    super.tearDown();
   }
 
   /**
    * tests add publication plugin: 
    * add 1 publication plugins and check if the total plugins number is 1
    */
-  @Test
   public void testAddPublicationPlugin() throws Exception {
     assertEquals(1, publicationService_.getPublicationPlugins().size());
   }
@@ -103,7 +90,6 @@ public class TestPublicationService extends BaseECMSTestCase {
    * tests get publication plugin: 
    * add 3 publication plugins, get the total plugins and check if the number is 3 
    */
-  @Test
   public void testGetPublicationPlugins() throws Exception {
     assertEquals(1, publicationService_.getPublicationPlugins().size());
   }
@@ -112,7 +98,6 @@ public class TestPublicationService extends BaseECMSTestCase {
    * tests enrolle node in lifecycle:
    * enrolle node in lifecycle and then check if it is enrolled   
    */
-  @Test
   public void testEnrollNodeInLifecycle() throws Exception {
     publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
     assertEquals(ENROLLED, node_.getProperty(CURRENT_STATE).getString());
@@ -122,7 +107,6 @@ public class TestPublicationService extends BaseECMSTestCase {
    * tests if node is enrolled in lifecycle:
    * enrolle node in lifecycle and then check if it is enrolled   
    */
-  @Test
   public void testIsNodeEnrolledInLifecycle() throws Exception {
     Node node1 = node_.addNode("test1");
     session.save();
@@ -157,7 +141,6 @@ public class TestPublicationService extends BaseECMSTestCase {
   /**
    * tests changing state for a node 
    */
-  @Test
   public void testChangeState() throws Exception {
     HashMap<String, String> context = new HashMap<String, String>();
     context.put("visibility", "true");
@@ -180,7 +163,6 @@ public class TestPublicationService extends BaseECMSTestCase {
   /**
    * tests getting state image 
    */
-  @Test
   public void testGetStateImage() throws Exception {
     Exception e = null;
     try {
@@ -197,7 +179,6 @@ public class TestPublicationService extends BaseECMSTestCase {
   /**
    * tests getting current state
    */
-  @Test
   public void testGetCurrentState() throws Exception {
     Exception e = null;
     try {
@@ -214,7 +195,6 @@ public class TestPublicationService extends BaseECMSTestCase {
   /**
    * tests getting user info
    */
-  @Test
   public void testGetUserInfo() throws Exception {
     Exception e = null;
     try {
@@ -231,7 +211,6 @@ public class TestPublicationService extends BaseECMSTestCase {
   /**
    * tests adding log
    */
-  @Test
   public void testAddLog() throws Exception {
     Exception e = null;
     try {
@@ -250,7 +229,6 @@ public class TestPublicationService extends BaseECMSTestCase {
   /**
    * tests getting logs
    */
-  @Test
   public void testGetLog() throws Exception {
     Exception e = null;
     try {
@@ -269,7 +247,6 @@ public class TestPublicationService extends BaseECMSTestCase {
   /**
    * tests getting node life cycle name 
    */
-  @Test
   public void testGetNodeLifecycleName() throws Exception {
     Exception e = null;
     try {
@@ -286,7 +263,6 @@ public class TestPublicationService extends BaseECMSTestCase {
   /**
    * tests getting node life cycle Description 
    */
-  @Test
   public void testGetNodeLifecycleDescription() throws Exception {
     Exception e = null;
     try {
@@ -303,7 +279,6 @@ public class TestPublicationService extends BaseECMSTestCase {
   /**
    * tests unsubscribing life cycle 
    */
-  @Test
   public void testUnsubscribeLifecycle() throws Exception {
     Exception e = null;
     try {
@@ -323,7 +298,6 @@ public class TestPublicationService extends BaseECMSTestCase {
   /**
    * tests isunsubscribe life cycle 
    */
-  @Test
   public void testIsUnsubscribeLifecycle() throws Exception {
     Exception e = null;
     assertTrue(publicationService_.isUnsubcribeLifecycle(node_));
@@ -336,7 +310,6 @@ public class TestPublicationService extends BaseECMSTestCase {
    * tests get node publish
    * @throws Exception
    */
-  @Test
   public void testGetNodePublish() throws Exception {
     assertNull(publicationService_.getNodePublish(node_, null));
     
@@ -348,7 +321,6 @@ public class TestPublicationService extends BaseECMSTestCase {
   /**
    * tests getLocalizedAndSubstituteLog
    */
-  @Test
   public void testGetLocalizedAndSubstituteLog() throws Exception {
     assertEquals("Test EN", publicationService_.getLocalizedAndSubstituteLog(
          new Locale("en"), "PublicationService.test.test", new String[]{}));
@@ -357,7 +329,6 @@ public class TestPublicationService extends BaseECMSTestCase {
   /**
    * tests getLocalizedAndSubstituteLog
    */
-  @Test
   public void testGetLocalizedAndSubstituteLog2() throws Exception {
     publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
     assertEquals("PublicationService.test.test", publicationService_.getLocalizedAndSubstituteLog(

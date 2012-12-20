@@ -16,9 +16,6 @@
  */
 package org.exoplatform.services.wcm.publication;
 
-import static org.testng.AssertJUnit.assertNotNull;
-import static org.testng.AssertJUnit.assertNull;
-
 import javax.jcr.Node;
 
 import org.exoplatform.component.test.ConfigurationUnit;
@@ -32,9 +29,6 @@ import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SAS
@@ -43,6 +37,8 @@ import org.testng.annotations.Test;
  * Jul 26, 2012  
  */
 @ConfiguredBy({
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.portal-configuration.xml"),
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.identity-configuration.xml"),
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-test-configuration.xml"),
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/wcm/test-publication-configuration.xml")
   })
@@ -55,15 +51,10 @@ public class TestPublicationPresentationService extends BaseECMSTestCase {
   private PublicationPlugin plugin_;
   private Node node_;
   
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
+  public void setUp() throws Exception {
+    super.setUp();
     publicationPresentationService_ = WCMCoreUtils.getService(PublicationPresentationService.class);
     publicationService_ = WCMCoreUtils.getService(PublicationService.class);
-  }
-
-  @BeforeMethod
-  public void setUp() throws Exception {
     applySystemSession();
     node_ = session.getRootNode().addNode(TEST);
     session.save();
@@ -75,18 +66,17 @@ public class TestPublicationPresentationService extends BaseECMSTestCase {
     publicationService_.addPublicationPlugin(plugin_);
   }
   
-  @AfterMethod
   public void tearDown() throws Exception {
     publicationService_.getPublicationPlugins().clear();
     node_.remove();
     session.save();
+    super.tearDown();
   }
 
   /**
    * tests get State UI 
    * add 1 publication plugins and check if the total plugins number is 1
    */
-  @Test
   public void testGetStateUI() throws Exception {
     Exception e = null;
     try {
@@ -99,5 +89,4 @@ public class TestPublicationPresentationService extends BaseECMSTestCase {
     publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
     assertNull(publicationPresentationService_.getStateUI(node_, null));
   }
-
 }
