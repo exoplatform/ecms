@@ -425,7 +425,7 @@ public class UISEOForm extends UIForm{
       String portalName = portalRequestContext.getPortalOwner();
       String uri = portalRequestContext.getRequestURI();
       String fullStatus = null;
-      String pageReference = Util.getUIPortal().getSelectedUserNode().getPageRef().toString();
+      String pageReference = Util.getUIPortal().getSelectedUserNode().getPageRef().format();
 
       if(!uiForm.onContent) {
       	String title = uiForm.getUIFormTextAreaInput(TITLE).getValue();

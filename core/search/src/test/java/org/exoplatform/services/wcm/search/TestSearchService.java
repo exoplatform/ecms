@@ -16,8 +16,6 @@
  */
 package org.exoplatform.services.wcm.search;
 
-import static org.testng.AssertJUnit.assertEquals;
-
 import java.util.Date;
 import java.util.HashMap;
 
@@ -28,23 +26,20 @@ import org.exoplatform.component.test.ConfigurationUnit;
 import org.exoplatform.component.test.ConfiguredBy;
 import org.exoplatform.component.test.ContainerScope;
 import org.exoplatform.ecms.test.BaseECMSTestCase;
-import org.exoplatform.portal.config.DataStorage;
 import org.exoplatform.portal.config.UserPortalConfigService;
-import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.mop.SiteKey;
 import org.exoplatform.portal.mop.page.PageContext;
+import org.exoplatform.portal.mop.page.PageKey;
+import org.exoplatform.portal.mop.page.PageService;
+import org.exoplatform.portal.mop.page.PageState;
 import org.exoplatform.portal.pom.config.POMSession;
 import org.exoplatform.portal.pom.config.POMSessionManager;
-import org.exoplatform.portal.mop.page.PageKey;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.publication.WebpagePublicationPlugin;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SAS
@@ -53,9 +48,11 @@ import org.testng.annotations.Test;
  * Jul 14, 2009
  */
 @ConfiguredBy({
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.portal-configuration.xml"),
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.identity-configuration.xml"),
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-test-configuration.xml"),
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/wcm/test-search-configuration.xml")
-  })
+})
 public class TestSearchService extends BaseECMSTestCase {
   QueryCriteria queryCriteria = new QueryCriteria();
 
@@ -77,9 +74,8 @@ public class TestSearchService extends BaseECMSTestCase {
 
   private int seachItemsPerPage = 100;
 
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
+  public void setUp() throws Exception {
+    super.setUp();
     siteSearchService = WCMCoreUtils.getService(SiteSearchService.class);
     userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
     pomManager = WCMCoreUtils.getService(POMSessionManager.class);
@@ -89,11 +85,6 @@ public class TestSearchService extends BaseECMSTestCase {
     publicationPlugin = new DumpPublicationPlugin();
     publicationPlugin.setName(DumpPublicationPlugin.LIFECYCLE_NAME);
     wcmPublicationService.addPublicationPlugin(publicationPlugin);
-
-  }
-
-  @BeforeMethod
-  public void setUp() throws Exception {
     applySystemSession();
     addDocuments();
   }
@@ -107,19 +98,15 @@ public class TestSearchService extends BaseECMSTestCase {
   }
 
   private void addChildNodes(Node parentNode)throws Exception{
+    PageService pageService = getService(PageService.class);
+    pomSession = pomManager.getSession();
     if (pomManager.getSession() == null) pomSession = pomManager.openSession();
-    //PageContext pageContext = userPortalConfigService.getPage(new PageKey("portal", "classic", "testpage"));
-    PageContext pageContext = userPortalConfigService.getPage(new PageKey(new SiteKey("portal", "classic"), "testpage"));
-
-
-    Page page;
-    if(pageContext == null){
-      page = new Page();
-      page.setPageId("portal::classic::testpage");
-      page.setName("testpage");
-      page.setOwnerType("portal");
-      page.setOwnerId("classic");
-      WCMCoreUtils.getService(DataStorage.class).save(page);
+    PageContext page = pageService.loadPage(new PageKey(new SiteKey("portal", "classic"), "testpage"));
+    if(page == null){
+      PageState pageState = new PageState("testpage", "test page", true,
+                                          "testpage", null, null);
+      page = new  PageContext(new PageKey(new SiteKey("portal", "classic"), "testpage"), pageState);
+      pageService.savePage(page);
     }
 
     Node webContentNode = null;
@@ -157,7 +144,6 @@ public class TestSearchService extends BaseECMSTestCase {
    *
    * @throws Exception the exception
    */
-  @Test
   public void testSearchSharedPortalNotLiveMode() throws Exception {
     queryCriteria = new QueryCriteria();
     queryCriteria.setSiteName("shared");
@@ -180,7 +166,6 @@ public class TestSearchService extends BaseECMSTestCase {
    *
    * @throws Exception the exception
    */
-  @Test
   public void testSearchSharedPortalLiveMode() throws Exception {
     queryCriteria = new QueryCriteria();
     queryCriteria.setSiteName("shared");
@@ -204,7 +189,6 @@ public class TestSearchService extends BaseECMSTestCase {
    *
    * @throws Exception the exception
    */
-  @Test
   public void testSearchAllPortalNotLiveMode() throws Exception {
     queryCriteria = new QueryCriteria();
     queryCriteria.setSiteName(null);
@@ -228,7 +212,6 @@ public class TestSearchService extends BaseECMSTestCase {
    *
    * @throws Exception the exception
    */
-  @Test
   public void testSearchAllPortalLiveMode() throws Exception {
     queryCriteria = new QueryCriteria();
     queryCriteria.setSiteName(null);
@@ -251,7 +234,6 @@ public class TestSearchService extends BaseECMSTestCase {
    * searchSelectedPortal = null<br>
    * searchIsLiveMode = true<br>
    */
-  @Test
   public void testSearchDocumentLiveMode() throws Exception {
     queryCriteria = new QueryCriteria();
     queryCriteria.setSiteName(null);
@@ -272,7 +254,6 @@ public class TestSearchService extends BaseECMSTestCase {
    * searchSelectedPortal = null<br>
    * searchIsLiveMode = false<br>
    */
-  @Test
   public void testSearchDocumentNotLiveMode() throws Exception {
     queryCriteria = new QueryCriteria();
     queryCriteria.setSiteName(null);
@@ -293,7 +274,6 @@ public class TestSearchService extends BaseECMSTestCase {
    * searchSelectedPortal = shared<br>
    * searchIsLiveMode = false<br>
    */
-  @Test
   public void testSearchDocumentOfSharedPortal() throws Exception {
     queryCriteria = new QueryCriteria();
     queryCriteria.setSiteName("shared");
@@ -314,7 +294,6 @@ public class TestSearchService extends BaseECMSTestCase {
    * searchSelectedPortal = shared<br>
    * searchIsLiveMode = true<br>
    */
-  @Test
   public void testSearchDocumentOfSharedPortalLiveMode() throws Exception {
     queryCriteria = new QueryCriteria();
     queryCriteria.setSiteName("shared");
@@ -574,7 +553,6 @@ public class TestSearchService extends BaseECMSTestCase {
 //    assertEquals(0, pageList.getAvailable());
 //  }
 
-  @Test
   public void testSearchByProperty()throws Exception{
     queryCriteria = new QueryCriteria();
     queryCriteria.setSiteName("shared");
@@ -588,7 +566,6 @@ public class TestSearchService extends BaseECMSTestCase {
     assertEquals(0, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
   }
 
-  @Test
   public void testSearchByDocumentType()throws Exception{
     queryCriteria = new QueryCriteria();
     queryCriteria.setSiteName("shared");
@@ -604,7 +581,6 @@ public class TestSearchService extends BaseECMSTestCase {
     assertEquals(2, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
   }
 
-  @Test
   public void testSearchByDocumentAuthor()throws Exception{
     queryCriteria = new QueryCriteria();
     queryCriteria.setSiteName("shared");
@@ -620,7 +596,6 @@ public class TestSearchService extends BaseECMSTestCase {
     assertEquals(4, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
   }
 
-  @Test
   public void testSearchByMimeTypes()throws Exception{
     queryCriteria = new QueryCriteria();
     queryCriteria.setSiteName("shared");
@@ -635,7 +610,6 @@ public class TestSearchService extends BaseECMSTestCase {
     assertEquals(4, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
   }
 
-  @Test
   public void testSearchByTagUUID() throws Exception{
     queryCriteria = new QueryCriteria();
     queryCriteria.setSiteName("shared");
@@ -653,8 +627,7 @@ public class TestSearchService extends BaseECMSTestCase {
     assertEquals(4, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
   }
 
-  @AfterMethod
-  protected void tearDown() throws Exception {
+  public void tearDown() throws Exception {
 
     NodeIterator iterator = null;
     Node classicPortal = (Node)session.getItem("/sites content/live/classic/web contents");

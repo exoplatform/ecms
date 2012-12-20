@@ -152,6 +152,13 @@
         <groupId>org.exoplatform.core</groupId>
         <artifactId>exo.core.component.organization.jdbc</artifactId>
         <version>${org.exoplatform.core.version}</version>
+        <exclusions>
+          <!-- These old versions of xstream are in conflict with new ones under com.thoughtworks.xstream:xstream -->
+          <exclusion>
+            <artifactId>xstream</artifactId>
+            <groupId>xstream</groupId>
+          </exclusion>
+        </exclusions>
       </dependency>
       <dependency>
         <groupId>org.exoplatform.core</groupId>
@@ -395,7 +402,7 @@
         <version>${project.version}</version>
       </dependency>
       <!-- To be replaced by an import of jcr parent POM -->
-      <dependency>
+     <dependency>
         <groupId>org.exoplatform.jcr</groupId>
         <artifactId>exo.jcr.component.core</artifactId>
         <version>${org.exoplatform.jcr.version}</version>
@@ -425,27 +432,57 @@
             <artifactId>exo.tool.framework.junit</artifactId>
             <groupId>org.exoplatform.tool</groupId>
           </exclusion>
+          <exclusion>
+            <artifactId>xstream</artifactId>
+            <groupId>xstream</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>jmock</artifactId>
+            <groupId>jmock</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>junit</artifactId>
+            <groupId>junit</groupId>
+          </exclusion>
         </exclusions>
       </dependency>
-      <dependency>
+       <dependency>
         <groupId>org.exoplatform.jcr</groupId>
         <artifactId>exo.jcr.component.ext</artifactId>
         <version>${org.exoplatform.jcr.version}</version>
         <exclusions>
           <exclusion>
-            <!-- To be fixed in the original project -->
+            <artifactId>slf4j-log4j12</artifactId>
+            <groupId>org.slf4j</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>log4j</artifactId>
+            <groupId>log4j</groupId>
+          </exclusion>
+          <exclusion>
             <artifactId>commons-logging</artifactId>
             <groupId>commons-logging</groupId>
           </exclusion>
           <exclusion>
-            <!-- To be fixed in the original project -->
+            <artifactId>xstream</artifactId>
+            <groupId>xstream</groupId>
+          </exclusion>
+          <exclusion>
             <artifactId>servlet-api</artifactId>
             <groupId>javax.servlet</groupId>
           </exclusion>
           <exclusion>
             <!-- To be fixed in the original project -->
-            <artifactId>log4j</artifactId>
-            <groupId>log4j</groupId>
+            <artifactId>exo.tool.framework.junit</artifactId>
+            <groupId>org.exoplatform.tool</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>xstream</artifactId>
+            <groupId>xstream</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>jmock</artifactId>
+            <groupId>jmock</groupId>
           </exclusion>
         </exclusions>
       </dependency>
@@ -468,7 +505,14 @@
         <version>${org.exoplatform.kernel.version}</version>
         <exclusions>
           <exclusion>
-            <!-- commons-logging is forbidden and must be replaced by org.slf4j:jcl-over-slf4j -->
+            <artifactId>slf4j-log4j12</artifactId>
+            <groupId>org.slf4j</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>log4j</artifactId>
+            <groupId>log4j</groupId>
+          </exclusion>
+          <exclusion>
             <artifactId>commons-logging</artifactId>
             <groupId>commons-logging</groupId>
           </exclusion>
@@ -498,7 +542,7 @@
           </exclusion>
         </exclusions>
       </dependency>
-      <dependency>
+     <dependency>
         <groupId>org.exoplatform.kernel</groupId>
         <artifactId>exo.kernel.component.common</artifactId>
         <version>${org.exoplatform.kernel.version}</version>
@@ -516,6 +560,11 @@
           </exclusion>
           <exclusion>
             <!-- To be fixed in the original project -->
+            <artifactId>commons-logging-api</artifactId>
+            <groupId>commons-logging</groupId>
+          </exclusion>
+          <exclusion>
+            <!-- To be fixed in the original project -->
             <artifactId>xstream</artifactId>
             <groupId>xstream</groupId>
           </exclusion>
@@ -523,6 +572,14 @@
             <!-- To be fixed in the original project -->
             <artifactId>exo.tool.framework.junit</artifactId>
             <groupId>org.exoplatform.tool</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>jmock</artifactId>
+            <groupId>jmock</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>junit</artifactId>
+            <groupId>junit</groupId>
           </exclusion>
         </exclusions>
       </dependency>
@@ -636,6 +693,23 @@
       </dependency>
       <dependency>
         <groupId>org.gatein.portal</groupId>
+        <artifactId>exo.portal.component.identity</artifactId>
+        <version>${org.gatein.portal.version}</version>
+        <exclusions>
+          <exclusion>
+            <artifactId>log4j</artifactId>
+            <groupId>log4j</groupId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>org.gatein.portal</groupId>
+        <artifactId>exo.portal.component.identity</artifactId>
+        <version>${org.gatein.portal.version}</version>
+        <classifier>tests</classifier>
+      </dependency>
+      <dependency>
+        <groupId>org.gatein.portal</groupId>
         <artifactId>exo.portal.component.portal</artifactId>
         <version>${org.gatein.portal.version}</version>
         <exclusions>
@@ -691,6 +765,18 @@
         <groupId>org.gatein.portal</groupId>
         <artifactId>exo.portal.component.test.core</artifactId>
         <version>${org.gatein.portal.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.gatein.portal</groupId>
+        <artifactId>exo.portal.component.test.jcr</artifactId>
+        <version>${org.gatein.portal.version}</version>
+        <exclusions>
+          <!-- These old versions of xstream are in conflict with new ones under com.thoughtworks.xstream:xstream -->
+          <exclusion>
+            <artifactId>xstream</artifactId>
+            <groupId>xstream</groupId>
+          </exclusion>
+        </exclusions>
       </dependency>
       <dependency>
         <groupId>org.gatein.portal</groupId>
@@ -787,14 +873,37 @@
         <version>${org.gatein.portal.version}</version>
         <exclusions>
           <exclusion>
-            <!-- To be fixed in the original project -->
             <artifactId>commons-logging</artifactId>
             <groupId>commons-logging</groupId>
           </exclusion>
           <exclusion>
-            <!-- To be fixed in the original project -->
             <artifactId>servlet-api</artifactId>
             <groupId>javax.servlet</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>javax.servlet-api</artifactId>
+            <groupId>javax.servlet</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>jsp-api</artifactId>
+            <groupId>javax.servlet.jsp</groupId>
+          </exclusion>
+          <exclusion>
+            <!-- To be fixed in the original project -->
+            <artifactId>exo.tool.framework.junit</artifactId>
+            <groupId>org.exoplatform.tool</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>xstream</artifactId>
+            <groupId>xstream</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>jmock</artifactId>
+            <groupId>jmock</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>junit</artifactId>
+            <groupId>junit</groupId>
           </exclusion>
         </exclusions>
       </dependency>
@@ -824,8 +933,16 @@
               <org.apache.commons.logging.simplelog.log.org.exoplatform>debug</org.apache.commons.logging.simplelog.log.org.exoplatform>
               <org.apache.commons.logging.simplelog.log.net.hibernate>warn</org.apache.commons.logging.simplelog.log.net.hibernate>
               <java.naming.factory.initial>org.exoplatform.services.naming.SimpleContextFactory</java.naming.factory.initial>
+              <gatein.test.tmp.dir>${project.build.directory}</gatein.test.tmp.dir>
               <com.arjuna.ats.arjuna.objectstore.objectStoreDir>${project.build.directory}</com.arjuna.ats.arjuna.objectstore.objectStoreDir>
+              <exo.profiles>hsqldb</exo.profiles>
             </systemPropertyVariables>
+            <systemProperties>
+              <property>
+                <name>gatein.test.output.path</name>
+                <value>${project.build.directory}</value>
+              </property>
+            </systemProperties>
           </configuration>
         </plugin>
         <plugin>

@@ -23,7 +23,6 @@
 	xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
 	xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
-
   <component>
     <key>org.exoplatform.services.resources.LocaleConfigService</key>
     <type>org.exoplatform.services.resources.impl.LocaleConfigServiceImpl</type>
@@ -33,11 +32,6 @@
         <value>classpath:/conf/standalone/portal/ecms-test-locales-configuration.xml</value>
       </value-param>
     </init-params>
-  </component>
-
-  <component>
-    <key>org.exoplatform.portal.mop.description.DescriptionService</key>
-    <type>org.exoplatform.portal.mop.description.DescriptionServiceImpl</type>
   </component>
 
   <component>
@@ -111,11 +105,6 @@
   </component>
 
   <component>
-    <key>org.exoplatform.portal.config.DataStorage</key>
-    <type>org.exoplatform.portal.config.DataStorageImpl</type>
-  </component>
-
-  <component>
     <key>org.exoplatform.portal.config.UserACL</key>
     <type>org.exoplatform.portal.config.UserACL</type>   
     <init-params>	     
@@ -168,72 +157,12 @@
 	  </init-params>   
   </component>
 
-  <component>
-     <key>org.jboss.cache.transaction.TransactionManagerLookup</key>
-     <type>org.jboss.cache.transaction.JBossStandaloneJTAManagerLookup</type>
-  </component>
-  
-  <component>
-    <key>org.exoplatform.services.transaction.TransactionService</key>
-    <type>org.exoplatform.services.transaction.jbosscache.JBossTransactionsService</type>
-    <init-params>
-      <value-param>
-        <name>timeout</name>
-        <value>300</value>
-      </value-param>
-    </init-params>
-  </component>
-
+<!-- need -->
 	<component>
-	  <key>org.gatein.common.transaction.JTAUserTransactionLifecycleService</key>
-	  <type>org.gatein.common.transaction.JTAUserTransactionLifecycleServiceImpl</type>
+     <key>org.exoplatform.portal.resource.compressor.ResourceCompressor</key>
+     <type>org.exoplatform.portal.resource.compressor.impl.ResourceCompressorService</type>
 	</component>
 
-  <component>
-    <key>org.exoplatform.portal.pom.data.ModelDataStorage</key>
-    <type>org.exoplatform.portal.pom.config.POMDataStorage</type>
-  </component>
-
-  <component>
-    <key>org.exoplatform.portal.pom.config.POMSessionManager</key>
-    <type>org.exoplatform.portal.pom.config.POMSessionManager</type>
-  </component>
-
-  <component>
-    <key>org.exoplatform.commons.chromattic.ChromatticManager</key>
-    <type>org.exoplatform.commons.chromattic.ChromatticManager</type>
-  </component>
-		
-		<component>
-      <key>org.exoplatform.portal.resource.compressor.ResourceCompressor</key>
-      <type>org.exoplatform.portal.resource.compressor.impl.ResourceCompressorService</type>
-		</component>
-
-  <component>
-    <key>org.exoplatform.services.organization.idm.PicketLinkIDMService</key>
-    <type>org.exoplatform.services.organization.idm.PicketLinkIDMServiceImpl</type>
-    <init-params>
-      <value-param>
-        <name>config</name>
-        <value>classpath:/conf/standalone/portal/ecms-test-picketlink-configuration.xml</value>
-      </value-param>
-      <value-param>
-        <name>portalRealm</name>
-        <value>realm_portal</value>
-      </value-param>
-    </init-params>
-  </component>
-
-  <component>
-    <key>org.exoplatform.services.organization.idm.PicketLinkIDMCacheService</key>
-    <type>org.exoplatform.services.organization.idm.PicketLinkIDMCacheService</type>
-  </component>
-	
-  <component>
-    <key>org.exoplatform.portal.mop.navigation.NavigationService</key>
-    <type>org.exoplatform.portal.mop.navigation.NavigationServiceImpl</type>
-  </component>
-  
   <component>
     <key>org.exoplatform.services.log.LogConfigurationInitializer</key>
     <type>org.exoplatform.services.log.LogConfigurationInitializer</type>
@@ -272,14 +201,11 @@
     </init-params>
   </component>
   
+  <!-- need -->
   <component>
     <type>org.exoplatform.portal.resource.SkinService</type>
   </component>
-
-  <component>
-    <type>org.exoplatform.container.xml.PortalContainerInfo</type>
-  </component> 
-
+  
   <external-component-plugins>
     <target-component>org.exoplatform.commons.chromattic.ChromatticManager</target-component>
     <component-plugin>
