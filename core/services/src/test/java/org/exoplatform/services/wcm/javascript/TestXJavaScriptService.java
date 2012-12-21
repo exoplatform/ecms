@@ -115,6 +115,7 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
       webContent.setProperty("exo:title", WEB_CONTENT_NODE_NAME);
       Node jsFolder = webContent.addNode("jsFolder", "exo:jsFolder");
       Node jsNode = jsFolder.addNode("default.js", "nt:file");
+      jsNode.setProperty("exo:active", false);
 
       Node jsContent = jsNode.addNode("jcr:content", "nt:resource");
       jsContent.setProperty("jcr:encoding", "UTF-8");

@@ -17,10 +17,10 @@
 
 package org.exoplatform.services.portletcache;
 
+import org.exoplatform.services.wcm.BaseWCMTestCase;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.test.BasicTestCase;
 
-public class TestFragmentCacheService extends BasicTestCase
+public class TestFragmentCacheService extends BaseWCMTestCase
 {
 
   /*

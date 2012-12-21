@@ -302,7 +302,7 @@
     <resources>
       <!-- We need to filter only properties files -->
       <resource>
-        <filtering>true</filtering>
+        <filtering>false</filtering>
         <directory>src/main/resources</directory>
         <includes>
           <include>**/*.properties</include>

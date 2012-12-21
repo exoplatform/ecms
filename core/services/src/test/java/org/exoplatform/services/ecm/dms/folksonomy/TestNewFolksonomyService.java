@@ -27,6 +27,7 @@ import javax.jcr.Session;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
@@ -46,6 +47,7 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
 
   private NewFolksonomyService newFolksonomyService_;
   private LinkManager linkManager;
+  private NodeHierarchyCreator      nodeHierarchyCreator;
   private Node test, test2;
   private Node folksonomyNode;
   private Node groupAFolksonomyNode;
@@ -56,8 +58,9 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
   public void setUp() throws Exception {
     super.setUp();
     newFolksonomyService_ = (NewFolksonomyService) container.getComponentInstanceOfType(NewFolksonomyService.class);
+    this.nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
     linkManager = (LinkManager) container.getComponentInstanceOfType(LinkManager.class);
-    applySystemSession();
+    applyUserSession("john", "gtn", COLLABORATION_WS);
 //    String userName = session.getUserID();
     String userName = session.getUserID();
     Node root = session.getRootNode();
@@ -68,8 +71,9 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
                     applicationData.getNode("Tags") :
                     applicationData.addNode("Tags");
     Node rootNode = root.hasNode("Users") ? root.getNode("Users") : root.addNode("Users");
-    Node userNode = rootNode.hasNode(userName) ? rootNode.getNode(userName) :
-                                                  rootNode.addNode(userName);
+//    Node userNode = rootNode.hasNode(userName) ? rootNode.getNode(userName) :
+//                                                  rootNode.addNode(userName);
+    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, "john");
     Node groupsNode = root.hasNode("Groups") ? root.getNode("Groups") :
                                                     root.addNode("Groups");
     Node platformNode = groupsNode.hasNode("platform") ? groupsNode.getNode("platform") :
@@ -102,6 +106,14 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
 
     publicFolksonomyNode = tagsNode;
     session.save();
+    
+    String site = "portal1";
+    Node siteTags = root.hasNode("SiteTags") ?
+                    root.getNode("SiteTags") :
+                    root.addNode("SiteTags");
+    siteFolksonomyNode = siteTags.addNode(site);
+    session.save();
+    
   }
 
   /**
@@ -287,23 +299,25 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
     Node siteTags = root.hasNode("SiteTags") ?
                     root.getNode("SiteTags") :
                     root.addNode("SiteTags");
-
+    Node test = nodeHierarchyCreator.getUserNode(sessionProvider, "john").getNode("Private").addNode("a");
+    session.save();
     siteFolksonomyNode = siteTags.addNode(site);
     session.save();
     newFolksonomyService_.addSiteTag(site,
                                      tags,
                                      test,
                                      COLLABORATION_WS);
+    siteFolksonomyNode = siteTags.getNode(site);
     assertTrue("testAddSiteTag failed! ", siteFolksonomyNode.hasNode("sport"));
     assertTrue("testAddSiteTag failed! ", siteFolksonomyNode.hasNode("weather"));
 
     Node sportTagNode = siteFolksonomyNode.getNode("sport");
-    Node link = sportTagNode.getNodes().nextNode();
+    Node link = sportTagNode.getNode("a");
     Node targetNode = linkManager.getTarget(link);
     assertTrue("testAddSiteTag failed! ", test.isSame(targetNode));
 
     Node weatherTagNode = siteFolksonomyNode.getNode("weather");
-    link = weatherTagNode.getNodes().nextNode();
+    link = weatherTagNode.getNode("a");
     targetNode = linkManager.getTarget(link);
     assertTrue("testAddSiteTag failed! ", test.isSame(targetNode));
 
@@ -475,6 +489,14 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
     String[] tags = { "sport", "weather" };
     String[] tags2 = { "boy", "girl", "sport" };
     String site = "portal1";
+    Node root = session.getRootNode();
+    Node siteTags = root.hasNode("SiteTags") ?
+                    root.getNode("SiteTags") :
+                    root.addNode("SiteTags");
+
+    siteFolksonomyNode = siteTags.addNode(site);
+    session.save();
+    
     newFolksonomyService_.addSiteTag(site,
                                        tags,
                                        test,
@@ -866,14 +888,16 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
   }
 
   public void tearDown() throws Exception {
+    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, "john");
     String[] nodes = {"/Application Data/Tags",
-                      "/Users/" + session.getUserID() + "/Private/Folksonomy",
-                      "Groups/platform/users/ApplicationData/Tags",
-                      "Groups/platform/guests/ApplicationData/Tags",
-                      TEST, TEST2,
+                      "/Groups/platform/users/ApplicationData/Tags",
+                      "/Groups/platform/guests/ApplicationData/Tags", "/SiteTags",
+                      "/test","/test2", userNode.getNode("Private/" + TEST).getPath(), userNode.getNode("Private/" + TEST2).getPath(),
+                      userNode.getNode("Private/Folksonomy").getPath(),
                       session.getUserID()};
     for (String node : nodes)
       if (session.itemExists(node)) {
+        //System.out.println("Delete: -----------------------------" + node);
         Node n = (Node)session.getItem(node);
         n.remove();
         session.save();

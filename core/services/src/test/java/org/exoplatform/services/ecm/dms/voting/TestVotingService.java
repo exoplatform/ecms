@@ -217,8 +217,6 @@ public class TestVotingService extends BaseWCMTestCase {
     assertEquals(testFile.getProperty(DATA).getValue(), frLangNode.getNode(CONTENT).getProperty(DATA).getValue());
     assertEquals(testFile.getProperty(MIMETYPE).getString(), viLangNode.getNode(CONTENT).getProperty(MIMETYPE).getString());
     assertEquals(testFile.getProperty(DATA).getValue(), viLangNode.getNode(CONTENT).getProperty(DATA).getValue());
-    assertEquals(testFile.getProperty(MIMETYPE).getString(), enLangNode.getNode(CONTENT).getProperty(MIMETYPE).getString());
-    assertEquals(testFile.getProperty(DATA).getValue(), enLangNode.getNode(CONTENT).getProperty(DATA).getValue());
     assertEquals(3.33, frLangNode.getProperty(VOTING_RATE_PROP).getValue().getDouble());
     assertEquals(3, frLangNode.getProperty(VOTE_TOTAL_LANG_PROP).getValue().getLong());
   }

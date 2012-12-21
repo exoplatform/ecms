@@ -339,6 +339,7 @@ public class TestTimelineService extends BaseWCMTestCase {
         dayNode.addMixin("exo:datetime");
       }
       dayNode.setProperty(EXO_MODIFIED_DATE, time);
+      session.save();
       time.add(Calendar.DATE, -1);
     }
 
@@ -381,6 +382,7 @@ public class TestTimelineService extends BaseWCMTestCase {
         dayNode.addMixin("exo:datetime");
       }
       dayNode.setProperty(EXO_MODIFIED_DATE, time);
+      session.save();
       time.add(Calendar.DATE, -1);
     }
 
@@ -424,6 +426,7 @@ public class TestTimelineService extends BaseWCMTestCase {
         dayNode.addMixin("exo:datetime");
       }
       dayNode.setProperty(EXO_MODIFIED_DATE, time);
+      session.save();
       time.add(Calendar.DATE, -1);
     }
 
@@ -466,6 +469,7 @@ public class TestTimelineService extends BaseWCMTestCase {
         dayNode.addMixin("exo:datetime");
       }
       dayNode.setProperty(EXO_MODIFIED_DATE, time);
+      session.save();
       time.add(Calendar.DATE, -1);
     }
 
@@ -509,6 +513,7 @@ public class TestTimelineService extends BaseWCMTestCase {
         dayNode.addMixin("exo:datetime");
       }
       dayNode.setProperty(EXO_MODIFIED_DATE, time);
+      session.save();
       time.add(Calendar.DATE, -1);
     }
 
@@ -551,6 +556,7 @@ public class TestTimelineService extends BaseWCMTestCase {
         dayNode.addMixin("exo:datetime");
       }
       dayNode.setProperty(EXO_MODIFIED_DATE, time);
+      session.save();
       time.add(Calendar.DATE, -1);
     }
 
