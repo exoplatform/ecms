@@ -1,9 +1,5 @@
 package org.exoplatform.services.cms.lock.impl;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertTrue;
-import static org.testng.AssertJUnit.fail;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,26 +10,17 @@ import org.exoplatform.services.cms.lock.LockService;
 import org.exoplatform.services.jcr.impl.AddNodeTypePlugin;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 import org.picocontainer.Startable;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 public class TestLockService  extends BaseWCMTestCase {
 
   private LockService lockService_;
 
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
-    lockService_ = (LockService)container.getComponentInstanceOfType(LockService.class);
-  }
-
-  @BeforeMethod
   public void setUp() throws Exception {
+    super.setUp();
+    lockService_ = (LockService)container.getComponentInstanceOfType(LockService.class);
     applySystemSession();
   }
 
-  @Test
   public void testStartNormal() throws Exception {
     try {
       LockGroupsOrUsersConfig config1 = new LockGroupsOrUsersConfig();
@@ -60,8 +47,7 @@ public class TestLockService  extends BaseWCMTestCase {
       ((Startable)lockService_).stop();
     }
   }
-
-  @Test
+  
   public void testAddGroupsOrUsersForLock() throws Exception {
     try {
       lockService_.addGroupsOrUsersForLock("*:/platform/powers");
@@ -76,7 +62,6 @@ public class TestLockService  extends BaseWCMTestCase {
     }
   }
 
-  @Test
   public void testRemoveGroupsOrUsersForLock() throws Exception {
     try {
       lockService_.addGroupsOrUsersForLock("*:/platform/powers");
@@ -92,7 +77,9 @@ public class TestLockService  extends BaseWCMTestCase {
     }
   }
 
-  @AfterMethod
   public void tearDown() throws Exception {
+    ((Startable)lockService_).stop();
+    ((Startable)lockService_).start();
+    super.tearDown();
   }
 }

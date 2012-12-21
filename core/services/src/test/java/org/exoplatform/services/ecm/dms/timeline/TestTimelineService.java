@@ -16,8 +16,6 @@
  */
 package org.exoplatform.services.ecm.dms.timeline;
 
-import static org.testng.AssertJUnit.assertEquals;
-
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -28,9 +26,6 @@ import org.exoplatform.services.cms.timeline.TimelineService;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SARL
@@ -44,14 +39,9 @@ public class TestTimelineService extends BaseWCMTestCase {
   private TimelineService timelineService;
   final private static String EXO_MODIFIED_DATE = "exo:dateModified";
 
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
-    timelineService = (TimelineService)container.getComponentInstanceOfType(TimelineService.class);
-  }
-  
-  @BeforeMethod
   public void setUp() throws Exception {
+    super.setUp();
+    timelineService = (TimelineService)container.getComponentInstanceOfType(TimelineService.class);
     applyUserSession("root", "gtn",COLLABORATION_WS);
   }
 
@@ -65,7 +55,6 @@ public class TestTimelineService extends BaseWCMTestCase {
    * expectedValue:  2(today1 and today2);
    * @throws Exception
    */
-  @Test
   public void testGetDocumentsOfToday() throws Exception {    
     Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
@@ -112,7 +101,6 @@ public class TestTimelineService extends BaseWCMTestCase {
    * expectedValue:  6(today1, today2, today3, today4, today5 and today6);
    * @throws Exception
    */
-  @Test
   public void testGetDocumentsOfTodayUnLimited() throws Exception {
     Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
@@ -176,7 +164,6 @@ public class TestTimelineService extends BaseWCMTestCase {
    * expectedValue:  1(yesterday1)
    * @throws Exception
    */
-  @Test
   public void testGetDocumentsOfYesterday() throws Exception {
     Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
@@ -231,7 +218,6 @@ public class TestTimelineService extends BaseWCMTestCase {
    * expectedValue:  7(yesterday1, yesterday2, yesterday3, yesterday4, yesterday5, yesterday6, yesterday6));
    * @throws Exception
    */
-  @Test
   public void testGetDocumentsOfYesterdayUnLimited() throws Exception {
     Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
@@ -334,7 +320,6 @@ public class TestTimelineService extends BaseWCMTestCase {
    * expectedValue:  (depends on current date time, must calculate yourself);
    * @throws Exception
    */
-  @Test
   public void testGetDocumentsOfEarlierThisWeek() throws Exception {
     Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
@@ -377,7 +362,6 @@ public class TestTimelineService extends BaseWCMTestCase {
    * expectedValue:  (depends on current date time, must calculate yourself);
    * @throws Exception
    */
-  @Test
   public void testGetDocumentsOfEarlierThisWeek2() throws Exception {
     Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
@@ -421,7 +405,6 @@ public class TestTimelineService extends BaseWCMTestCase {
    * expectedValue:  (depends on current date time, must calculate yourself);
    * @throws Exception
    */
-  @Test
   public void testGetDocumentsOfEarlierThisMonth() throws Exception {
      Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
@@ -464,7 +447,6 @@ public class TestTimelineService extends BaseWCMTestCase {
    * expectedValue:  (depends on current date time, must calculate yourself);
    * @throws Exception
    */
-  @Test
   public void testGetDocumentsOfEarlierThisMonth2() throws Exception {
     Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
@@ -508,7 +490,6 @@ public class TestTimelineService extends BaseWCMTestCase {
    * expectedValue:  (depends on current date time, must calculate yourself);
    * @throws Exception
    */
-  @Test
   public void testGetDocumentsOfEarlierThisYear() throws Exception {
     Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
@@ -551,7 +532,6 @@ public class TestTimelineService extends BaseWCMTestCase {
    * expectedValue:  (depends on current date time, must calculate yourself);
    * @throws Exception
    */
-  @Test
   public void testGetDocumentsOfEarlierThisYear2() throws Exception {
     Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
@@ -588,19 +568,18 @@ public class TestTimelineService extends BaseWCMTestCase {
    * private method create sessionProvider instance.
    * @return SessionProvider
    */
-  @Test
   private SessionProvider createSessionProvider() {
     SessionProviderService sessionProviderService = (SessionProviderService) container
         .getComponentInstanceOfType(SessionProviderService.class);
     return sessionProviderService.getSystemSessionProvider(null);
   }
 
-  @AfterMethod
   public void tearDown() throws Exception {
-  Node rootNode = session.getRootNode();
-  Node testNode = rootNode.getNode("testNode");
-  if (testNode != null)
-    testNode.remove();
+    Node rootNode = session.getRootNode();
+    Node testNode = rootNode.getNode("testNode");
+    if (testNode != null)
+      testNode.remove();
     session.save();
+    super.tearDown();
   }
 }

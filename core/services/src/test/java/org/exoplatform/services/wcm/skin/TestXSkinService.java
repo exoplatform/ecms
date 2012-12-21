@@ -17,24 +17,7 @@
 
 package org.exoplatform.services.wcm.skin;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertNotNull;
-import static org.testng.AssertJUnit.fail;
-
-import java.util.Date;
-
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-
-import org.exoplatform.portal.resource.SkinService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
-import org.exoplatform.services.wcm.core.WCMConfigurationService;
-import org.exoplatform.services.wcm.portal.LivePortalManagerService;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * The Class TestXJavaScriptService.

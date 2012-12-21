@@ -643,6 +643,7 @@ public class TestSearchService extends BaseECMSTestCase {
     }
 
     session.save();
+    super.tearDown();
   }
 
   protected Node createWebcontentNode(Node parentNode,

@@ -17,13 +17,6 @@
  **************************************************************************/
 package org.exoplatform.services.ecm.dms.i18n;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertFalse;
-import static org.testng.AssertJUnit.assertNotNull;
-import static org.testng.AssertJUnit.assertNull;
-import static org.testng.AssertJUnit.assertTrue;
-import static org.testng.AssertJUnit.fail;
-
 import java.io.IOException;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -38,9 +31,6 @@ import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.exceptions.SameAsDefaultLangException;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SARL
@@ -82,19 +72,11 @@ public class TestMultiLanguageService extends BaseWCMTestCase {
   
   private static final String  NTFOLDER     = "nt:folder";
 
-
-
   private MultiLanguageService multiLanguageService;
 
-  
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
-    multiLanguageService = (MultiLanguageService) container.getComponentInstanceOfType(MultiLanguageService.class);
-  }
-  
-  @BeforeMethod
   public void setUp() throws Exception {
+    super.setUp();
+    multiLanguageService = (MultiLanguageService) container.getComponentInstanceOfType(MultiLanguageService.class);
     applySystemSession();
   }
 
@@ -104,7 +86,6 @@ public class TestMultiLanguageService extends BaseWCMTestCase {
    * Expect: Node has two language: vi and English
    * @throws Exception
    */
-  @Test
   public void testGetSupportedLanguages() throws Exception {
     Node test = session.getRootNode().addNode("test", ARTICLE);
     test.addMixin(I18NMixin);
@@ -251,7 +232,6 @@ public class TestMultiLanguageService extends BaseWCMTestCase {
    *         exo:title = this is title; exo:summary = this is summary; exo:text: this is article content;
    * @throws Exception
    */
-  @Test
   public void testAddLanguage1() throws Exception {
     Node test = session.getRootNode().addNode("test", ARTICLE);
     test.addMixin(I18NMixin);
@@ -281,7 +261,6 @@ public class TestMultiLanguageService extends BaseWCMTestCase {
    *         if add language = fr with default = true then node test has language = fr, with properties created in method  createMapInput2
    * @throws Exception
    */
-  @Test
   public void testAddLanguage2() throws Exception {
     Node test = session.getRootNode().addNode("test", ARTICLE);
     test.addMixin(I18NMixin);
@@ -315,7 +294,6 @@ public class TestMultiLanguageService extends BaseWCMTestCase {
    *         if language fr is added as default language then content of test node contains data defined in method createFileInput()
    * @throws Exception
    */
-  @Test
   public void testAddLanguage3() throws Exception {
     Node test = session.getRootNode().addNode("test", FILE);
     Node testFile = test.addNode(CONTENT, RESOURCE);
@@ -373,7 +351,6 @@ public class TestMultiLanguageService extends BaseWCMTestCase {
    * Expect: if language fr is added as not default language then language node is add following relative path = languages/fr
    * @throws Exception
    */  
-  @Test
   public void testAddLanguage4() throws Exception {
     Node test = session.getRootNode().addNode("test", TEMPLATE);
     test.setProperty("exo:templateFile", "test");
@@ -409,7 +386,6 @@ public class TestMultiLanguageService extends BaseWCMTestCase {
    * Expect: language default of node test is language. Properties of test node are properties defined in creatMapInput1() method
    * @throws Exception
    */
-  @Test
   public void testSetDefault() throws Exception {
     Node test = session.getRootNode().addNode("test", ARTICLE);
     test.addMixin(I18NMixin);
@@ -429,7 +405,6 @@ public class TestMultiLanguageService extends BaseWCMTestCase {
     assertFalse(test.hasNode("languages/fr"));
   }
   
-  @Test
   public void testSetDefault2() throws Exception {
     Node test = session.getRootNode().addNode("test", FILE);
     Node testFile = test.addNode(CONTENT, RESOURCE);
@@ -448,7 +423,6 @@ public class TestMultiLanguageService extends BaseWCMTestCase {
     assertFalse(test.hasNode("languages/fr"));
   }
   
-  @Test
   public void testSetDefault3() throws Exception {
     Node test = session.getRootNode().addNode("test", FILE);
     Node testFile = test.addNode(CONTENT, RESOURCE);
@@ -487,7 +461,6 @@ public class TestMultiLanguageService extends BaseWCMTestCase {
    * Expect: language default of node is  fr
    * @throws Exception
    */
-  @Test
   public void testGetDefault() throws Exception {
     Node test = session.getRootNode().addNode("test", ARTICLE);
     test.setProperty(TITLE, "Document");
@@ -511,7 +484,6 @@ public class TestMultiLanguageService extends BaseWCMTestCase {
    *
    * @throws Exception
    */
-  @Test
   public void testAddFileLanguage1() throws Exception {
     Node test = session.getRootNode().addNode("test", FILE);
     Node testFile = test.addNode(CONTENT, RESOURCE);
@@ -542,7 +514,6 @@ public class TestMultiLanguageService extends BaseWCMTestCase {
    * Expect: data of child node nt:file of test node is  ("/conf/standalone/system-configuration.xml"), default language is vi
    * @throws Exception
    */
-  @Test
   public void testAddFileLanguage2() throws Exception {
     Node test = session.getRootNode().addNode("test", PODCAST);
     Node testFile = test.addNode(CONTENT, RESOURCE);
@@ -576,7 +547,6 @@ public class TestMultiLanguageService extends BaseWCMTestCase {
    * Expect: if fr is not default language then method return fr node, else return null
    * @throws Exception
    */
-  @Test
   public void testGetLanguage() throws Exception {
     Node test = session.getRootNode().addNode("test", PODCAST);
     Node testFile = test.addNode(CONTENT, RESOURCE);
@@ -602,7 +572,6 @@ public class TestMultiLanguageService extends BaseWCMTestCase {
    * Expect: linking successfully if the source node has different language from the default one of target node and vice versa    
    * @throws Exception
    */
-  @Test
   public void testAddSynchronizedLinkedLanguage() throws Exception{
     Node test = session.getRootNode().addNode("article1", ARTICLE);
     test.addMixin(I18NMixin);
@@ -639,13 +608,13 @@ public class TestMultiLanguageService extends BaseWCMTestCase {
   /**
    * Clean data test
    */
-  @AfterMethod
   public void tearDown() throws Exception {
     if (session.itemExists("/test")) {
       Node test = session.getRootNode().getNode("test");
       test.remove();
       session.save();
     }
+    super.tearDown();
   }
 
 }

@@ -16,12 +16,6 @@
  */
 package org.exoplatform.services.ecm.dms.template;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertFalse;
-import static org.testng.AssertJUnit.assertNotNull;
-import static org.testng.AssertJUnit.assertTrue;
-import static org.testng.AssertJUnit.fail;
-
 import java.io.ByteArrayInputStream;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -34,9 +28,6 @@ import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SARL
@@ -57,16 +48,12 @@ public class TestTemplateService extends BaseWCMTestCase {
   static private final String EXO_ARTICLE  = "exo:article";
   
   static private final String DEMO_ID      = "demo";
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
+  
+  public void setUp() throws Exception {
+    super.setUp();
     templateService = (TemplateService)container.getComponentInstanceOfType(TemplateService.class);
     nodeHierarchyCreator = (NodeHierarchyCreator)container.getComponentInstanceOfType(NodeHierarchyCreator.class);
     cmsTemplatesBasePath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_TEMPLATES_PATH);
-  }
-  
-  @BeforeMethod
-  public void setUp() throws Exception {
     applySystemSession();   
     sessionDMS = sessionProviderService_.getSystemSessionProvider(null).getSession(DMSSYSTEM_WS, repository);
   }
@@ -76,7 +63,6 @@ public class TestTemplateService extends BaseWCMTestCase {
    * Check all data initiated from repository in test-templates-configuration.xml file
    * @throws Exception
    */
-  @Test
   public void testInit() throws Exception {
     templateService.init();
     assertTrue(sessionDMS.itemExists(cmsTemplatesBasePath));
@@ -93,7 +79,6 @@ public class TestTemplateService extends BaseWCMTestCase {
    * Expect: Return path of default template
    * @throws Exception
    */
-  @Test
   public void testGetDefaultTemplatePath() throws Exception {
     assertEquals(expectedArticleDialogPath, templateService.getDefaultTemplatePath(true, EXO_ARTICLE));
     assertEquals(expectedArticleViewPath, templateService.getDefaultTemplatePath(false, EXO_ARTICLE));
@@ -108,7 +93,6 @@ public class TestTemplateService extends BaseWCMTestCase {
    * Expect: Return node of default template
    * @throws Exception
    */
-  @Test
   public void testGetTemplatesHome() throws Exception {
     assertEquals("/exo:ecm/templates", templateService.getTemplatesHome(sessionProviderService_.getSystemSessionProvider(null)).getPath());
   }
@@ -122,7 +106,6 @@ public class TestTemplateService extends BaseWCMTestCase {
    * Expect: Return path template of the specified node
    * @throws Exception
    */
-  @Test
   public void testGetTemplatePath() throws Exception {
     Node root = sessionDMS.getRootNode();
     Node aaa = root.addNode("AAA");
@@ -160,7 +143,6 @@ public class TestTemplateService extends BaseWCMTestCase {
    * Expect: Return "/exo:ecm/templates/exo:article/dialogs/dialog1" is the path public template
    * @throws Exception
    */
-  @Test
   public void testGetTemplatePathByAnonymous() throws Exception {
     assertEquals(expectedArticleDialogPath, templateService.getTemplatePathByAnonymous(true, EXO_ARTICLE));
     assertEquals(expectedArticleViewPath, templateService.getTemplatePathByAnonymous(false, EXO_ARTICLE));
@@ -172,7 +154,6 @@ public class TestTemplateService extends BaseWCMTestCase {
    * Expect: Return set with 2 element nt:folder,nt:unstructured;
    * @throws Exception
    */
-  @Test
   public void testGetAllowanceFolderType() throws Exception {
     assertTrue(templateService.getAllowanceFolderType().contains("nt:unstructured"));
     assertTrue(templateService.getAllowanceFolderType().contains("nt:folder"));
@@ -191,7 +172,6 @@ public class TestTemplateService extends BaseWCMTestCase {
    * Expect: Return "/exo:ecm/templates/exo:article/dialogs/dialog1" is the template by user
    * @throws Exception
    */
-  @Test
   public void testGetTemplatePathByUser() throws Exception {
 //    assertEquals(expectedArticleDialogPath, templateService.getTemplatePathByUser(true, EXO_ARTICLE, ROOT_ID));    
     assertEquals(expectedArticleDialogPath, templateService.getTemplatePathByUser(true, EXO_ARTICLE, IdentityConstants.ANONIM));
@@ -217,7 +197,6 @@ public class TestTemplateService extends BaseWCMTestCase {
    * Expect: Return template file of the specified template
    * @throws Exception
    */
-  @Test
   public void testGetTemplate() throws Exception {
     assertEquals(expectedArticleDialogPath, templateService.getTemplatePathByUser(true, EXO_ARTICLE, IdentityConstants.ANONIM));
     assertEquals(expectedArticleViewPath, templateService.getTemplatePathByUser(false, EXO_ARTICLE, IdentityConstants.ANONIM));
@@ -245,7 +224,6 @@ public class TestTemplateService extends BaseWCMTestCase {
    * Expect: Insert a new template
    * @throws Exception
    */
-  @Test
   public void testAddTemplate() throws Exception {
     String label = "AALabel";
     boolean isDocumentTemplate = true;
@@ -270,7 +248,6 @@ public class TestTemplateService extends BaseWCMTestCase {
    * Expect: Remove a template
    * @throws Exception
    */
-  @Test
   public void testRemoveTemplate() throws Exception {
     String label = "test template";
     boolean isDocumentTemplate = true;
@@ -294,7 +271,6 @@ public class TestTemplateService extends BaseWCMTestCase {
    * Expect: all templates is document type of the specified repository
    * @throws Exception
    */
-  @Test
   public void testGetDocumentTemplates() throws Exception {
     List<String> listTemplates = templateService.getDocumentTemplates();
     assertTrue(listTemplates.contains("nt:file"));
@@ -314,7 +290,6 @@ public class TestTemplateService extends BaseWCMTestCase {
    * Expect: Return all teamplate of the specified NodeType
    * @throws Exception
    */
-  @Test
   public void testGetAllTemplatesOfNodeType() throws Exception {
     assertEquals(1, templateService.getAllTemplatesOfNodeType(true, "exo:sample",
         sessionProviderService_.getSystemSessionProvider(null)).getSize());
@@ -333,7 +308,6 @@ public class TestTemplateService extends BaseWCMTestCase {
    * Expect: Remove teamplate of the specified NodeType
    * @throws Exception
    */
-  @Test
   public void testManagedNodeType() throws Exception {
     assertTrue(templateService.isManagedNodeType("exo:article"));
     templateService.removeManagedNodeType("exo:article");
@@ -349,7 +323,6 @@ public class TestTemplateService extends BaseWCMTestCase {
    * Expect: Return "Article" the label of the specified template
    * @throws Exception
    */
-  @Test
   public void testGetTemplateLabel() throws Exception {
     assertEquals(expectedTemplateLabel, templateService.getTemplateLabel(EXO_ARTICLE));
   }
@@ -367,7 +340,6 @@ public class TestTemplateService extends BaseWCMTestCase {
    * Expect: Return "*" is roles of the specified template
    * @throws Exception
    */
-  @Test
   public void testGetTemplateRoles() throws Exception {
     Node templateNode = templateService.getTemplateNode(TemplateService.DIALOGS, EXO_ARTICLE, "dialog1", sessionProviderService_.getSystemSessionProvider(null));
     assertEquals("*", templateService.getTemplateRoles(templateNode));
@@ -389,7 +361,6 @@ public class TestTemplateService extends BaseWCMTestCase {
    * Expect: Return "/exo:ecm/templates/exo:article/dialogs/dialog1" is path template Node
    * @throws Exception
    */
-  @Test
   public void testGetTemplateNode() throws Exception {
     assertEquals(expectedArticleDialogPath, templateService.getTemplateNode(TemplateService.DIALOGS, EXO_ARTICLE, "dialog1",
         sessionProviderService_.getSystemSessionProvider(null)).getPath());
@@ -401,7 +372,6 @@ public class TestTemplateService extends BaseWCMTestCase {
    * Expect: CreationableContent Types
    * @throws Exception
    */
-  @Test
   public void testGetCreationableContentTypes() throws Exception {
     Node root = sessionDMS.getRootNode();
     Node ddd = root.addNode("DDD", "exo:article");
@@ -418,7 +388,6 @@ public class TestTemplateService extends BaseWCMTestCase {
    * Expect     : an array of configured node types 
    * @throws      Exception
    */
-  @Test
   public void testGetAllConfiguredNodeTypes() throws Exception {
     assertTrue(templateService.getAllConfiguredNodeTypes().size()>0);
   }
@@ -428,7 +397,6 @@ public class TestTemplateService extends BaseWCMTestCase {
    * Expect     : a String as the form dialog built 
    * @throws      Exception
    */
-  @Test
   public void testBuildDialogForm() throws Exception {
     assertTrue(templateService.buildDialogForm(EXO_ARTICLE).length() >0);
   }
@@ -438,7 +406,6 @@ public class TestTemplateService extends BaseWCMTestCase {
    * Expect     : a String as the form viewer built 
    * @throws      Exception
    */
-  @Test
   public void testBuildViewForm() throws Exception {
     assertTrue(templateService.buildViewForm(EXO_ARTICLE).length() >0);
   }
@@ -448,7 +415,6 @@ public class TestTemplateService extends BaseWCMTestCase {
    * Expect     : a String as the stylesheet of nodetype 
    * @throws      Exception
    */
-  @Test
   public void testBuildStyleSheet() throws Exception {
     assertTrue(templateService.buildStyleSheet(EXO_ARTICLE).length() >0);
   }
@@ -458,7 +424,6 @@ public class TestTemplateService extends BaseWCMTestCase {
    * Expect     : a String as the stylesheet of nodetype 
    * @throws      Exception
    */
-  @Test
   public void testGetSkinPath() throws Exception{
       assertNotNull(templateService.getSkinPath(EXO_ARTICLE, "Stylesheet", "en"));
       assertNotNull(templateService.getSkinPath(EXO_ARTICLE, "Stylesheet", "ar"));
@@ -466,7 +431,6 @@ public class TestTemplateService extends BaseWCMTestCase {
   /**
    * Clean all templateTest node
    */
-  @AfterMethod
   public void tearDown() throws Exception {
     String[] paths = new String[] {"AAA", "BBB", "DDD", "EEE"};
     for (String path : paths) {
@@ -475,5 +439,6 @@ public class TestTemplateService extends BaseWCMTestCase {
       }
     }
     sessionDMS.save();
+    super.tearDown();
   }
 }

@@ -17,10 +17,6 @@
 
 package org.exoplatform.services.wcm.javascript;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertNotNull;
-import static org.testng.AssertJUnit.fail;
-
 import java.util.Date;
 
 import javax.jcr.Node;
@@ -29,9 +25,6 @@ import javax.jcr.NodeIterator;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * The Class TestXJavaScriptService.
@@ -52,14 +45,9 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
   private Node documentNode;
   private Node sharedJsNode;
   
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
-    javascriptService = getService(XJavascriptService.class);
-  }
-  
-  @BeforeMethod
   public void setUp() throws Exception {
+    super.setUp();
+    javascriptService = getService(XJavascriptService.class);
     applySystemSession();
     documentNode = (Node) session.getItem("/sites content/live/classic/documents");
     sharedJsNode = (Node) session.getItem("/sites content/live/classic/js");
@@ -70,7 +58,6 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
    *
    * When parameter input is null
    */
-  @Test
   public void testGetActiveJavaScript_01() {
     try {
       javascriptService.getActiveJavaScript(null);
@@ -84,7 +71,6 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
    *
    * When node input node type is not exo:webcontent.
    */
-  @Test
   public void testGetActiveJavaScript_02() {
     try {
       Node nodeInput = documentNode.addNode(WEB_CONTENT_NODE_NAME);
@@ -101,7 +87,6 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
    *
    * When node input is exo:webcontent and have some child node but does not content mixin type.
    */
-  @Test
   public void testGetActiveJavaScript_03() {
     try {
       Node webContent = documentNode.addNode(WEB_CONTENT_NODE_NAME, "exo:webContent");
@@ -123,7 +108,7 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
    *
    * When node input is exo:webcontent and have some child node but have mixin type does not exo:jsFile.
    */
-  @Test
+  
   public void testGetActiveJavaScript_04() {
     try {
       Node webContent = documentNode.addNode(WEB_CONTENT_NODE_NAME, "exo:webContent");
@@ -151,7 +136,7 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
    * Child node have properties normal and value of exo:active is:
    * - "exo:active": false
    */
-  @Test
+  
   public void testGetActiveJavaScript_05() {
     try {
       Node webContent = createWebcontentNode(documentNode, WEB_CONTENT_NODE_NAME, null, null, null);
@@ -172,7 +157,7 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
    * Child node have properties normal and value of jcr:mimeType is:
    * - "jcr:mimeType": text/html
    */
-  @Test
+  
   public void testGetActiveJavaScript_06() {
     try {
       Node webContent = createWebcontentNode(documentNode, WEB_CONTENT_NODE_NAME, null, null, null);
@@ -194,7 +179,7 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
    * Child node have properties normal and value of jcr:mimeType is:
    * - "jcr:mimeType": text/javascript
    */
-  @Test
+  
   public void testGetActiveJavaScript_07() {
     try {
       Node webContent = createWebcontentNode(documentNode, WEB_CONTENT_NODE_NAME, null, null, null);
@@ -216,7 +201,7 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
    * Child node have properties normal and value of jcr:mimeType is:
    * - "jcr:mimeType": application/x-javascript
    */
-  @Test
+  
   public void testGetActiveJavaScript_08() {
     try {
       Node webContent = createWebcontentNode(documentNode, WEB_CONTENT_NODE_NAME, null, null, null);
@@ -238,7 +223,7 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
    * Child node have properties normal and value of jcr:mimeType is:
    * - "jcr:mimeType": text/ecmascript
    */
-  @Test
+  
   public void testGetActiveJavaScript_09() {
     try {
       Node webContent = createWebcontentNode(documentNode, WEB_CONTENT_NODE_NAME, null, null, null);
@@ -259,7 +244,7 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
    *
    * Child node have properties normal and value of jcr:data is ""
    */
-  @Test
+  
   public void testGetActiveJavaScript_10() {
     try {
       Node webContent = createWebcontentNode(documentNode, WEB_CONTENT_NODE_NAME, null, null, null);
@@ -281,7 +266,7 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
    * Child node have properties normal and value of jcr:data is:
    * - "jcr:data": This is the default.js file.
    */
-  @Test
+  
   public void testGetActiveJavaScript_11() {
     try {
       Node webContent = createWebcontentNode(documentNode, WEB_CONTENT_NODE_NAME, null, null, null);
@@ -303,7 +288,7 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
    * Child node have properties normal and value of jcr:mimeType is:
    * - "jcr:data": alert('Test method getActiveJavaScript()');.
    */
-  @Test
+  
   public void testGetActiveJavaScript_12() {
     try {
       Node webContent = createWebcontentNode(documentNode, WEB_CONTENT_NODE_NAME, null, null, "alert('Test method getActiveJavaScript()');");
@@ -320,7 +305,7 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
    *
    * In case normal
    */
-  @Test
+  
   public void testGetActiveJavaScript_13() {
     try {
       Node webContent = createWebcontentNode(documentNode, WEB_CONTENT_NODE_NAME, null, null, null);
@@ -335,7 +320,7 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
    * Test update portal js on modify_01.
    * When node input is null.
    */
-  @Test
+  
   public void testUpdatePortalJSOnModify_01() {
     try {
       Node portalNode = findPortalNode(sessionProvider, documentNode);
@@ -350,7 +335,7 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
    * Test update portal js on modify_02.
    * When Node input does not jsFile.
    */
-  @Test
+  
   public void testUpdatePortalJSOnModify_02() {
     try {
       Node portalNode = findPortalNode(sessionProvider, documentNode);
@@ -367,7 +352,7 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
    * Test update portal js on modify_03.
    * When node input have jcr:data is "".
    */
-  @Test
+  
   public void testUpdatePortalJSOnModify_03() {
     try {
       Node portalNode = findPortalNode(sessionProvider, documentNode);
@@ -456,7 +441,7 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
    * Test update portal js on remove_01.
    * When node input is null.
    */
-  @Test
+  
   public void testUpdatePortalJSOnRemove_01() {
     try {
       Node portalNode = findPortalNode(sessionProvider, documentNode);
@@ -471,7 +456,7 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
    * Test update portal js on remove_03.
    * When Node input does not jsFile.
    */
-  @Test
+  
   public void testUpdatePortalJSOnRemove_03() {
     try {
       Node portalNode = findPortalNode(sessionProvider, documentNode);
@@ -597,7 +582,6 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
   /* (non-Javadoc)
    * @see junit.framework.TestCase#tearDown()
    */
-  @AfterMethod
   public void tearDown() throws Exception {
     Node sharedPortalNode = (Node) session.getItem("/sites content/live/shared/js");
     NodeIterator nodeIterator = documentNode.getNodes();
@@ -613,5 +597,6 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
       sharedIterator.nextNode().remove();
     }
     session.save();
+    super.tearDown();
   }
 }

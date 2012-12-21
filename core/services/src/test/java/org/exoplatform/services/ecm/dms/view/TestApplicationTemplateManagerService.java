@@ -16,9 +16,6 @@
  */
 package org.exoplatform.services.ecm.dms.view;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertNotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,9 +28,6 @@ import org.exoplatform.services.cms.views.ApplicationTemplateManagerService;
 import org.exoplatform.services.cms.views.PortletTemplatePlugin.PortletTemplateConfig;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SARL
@@ -46,17 +40,12 @@ public class TestApplicationTemplateManagerService extends BaseWCMTestCase {
   private String basedApplicationTemplatesPath;
   private Session sessionDMS;
   
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
+  public void setUp() throws Exception {
+    super.setUp();
     appTemplateManagerService = (ApplicationTemplateManagerService) container.getComponentInstanceOfType(ApplicationTemplateManagerService.class);
     nodeHierarchyCreator = (NodeHierarchyCreator) container.getComponentInstanceOfType(NodeHierarchyCreator.class);
     basedApplicationTemplatesPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_VIEWTEMPLATES_PATH);
     System.out.println("basedApplicationTemplatesPath :" + basedApplicationTemplatesPath);
-  }
-
-  @BeforeMethod
-  public void setUp() throws Exception {
     applySystemSession();
     sessionDMS = sessionProviderService_.getSystemSessionProvider(null).getSession(DMSSYSTEM_WS, repository);
   }
@@ -68,7 +57,6 @@ public class TestApplicationTemplateManagerService extends BaseWCMTestCase {
    * Expect: Return The templates by category
    * @throws Exception
    */
-  @Test
   public void testGetAllManagedPortletName() throws Exception {
     List<String> listTemplateManager = appTemplateManagerService.getAllManagedPortletName(REPO_NAME);
     assertEquals(0, listTemplateManager.size());
@@ -175,7 +163,6 @@ public class TestApplicationTemplateManagerService extends BaseWCMTestCase {
         "detail-document", sessionProvider).size());
   }
 
-  @AfterMethod
   public void tearDown() throws Exception {
     Node nodeAppTemplate = (Node) sessionDMS.getItem(basedApplicationTemplatesPath);
     if (nodeAppTemplate.hasNode("categoryA")) {
@@ -187,5 +174,7 @@ public class TestApplicationTemplateManagerService extends BaseWCMTestCase {
     Node n = (Node)sessionDMS.getItem("/exo:ecm/views/templates/ecm-explorer");
     for(NodeIterator iter = n.getNodes(); iter.hasNext();)
       System.out.println(iter.nextNode().getPath());
+    
+    super.tearDown();
   }
 }

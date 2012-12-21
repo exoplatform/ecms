@@ -17,10 +17,6 @@
  **************************************************************************/
 package org.exoplatform.services.ecm.dms.voting;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertFalse;
-import static org.testng.AssertJUnit.assertTrue;
-
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.GregorianCalendar;
@@ -37,9 +33,6 @@ import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.cms.voting.VotingService;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * Created by eXo Platform
@@ -94,15 +87,10 @@ public class TestVotingService extends BaseWCMTestCase {
 
   private MultiLanguageService multiLanguageService = null;
   
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
+  public void setUp() throws Exception {
+    super.setUp();
     votingService = (VotingService) container.getComponentInstanceOfType(VotingService.class);
     multiLanguageService = (MultiLanguageService) container.getComponentInstanceOfType(MultiLanguageService.class);
-  }
-
-  @BeforeMethod
-  public void setUp() throws Exception {
     applySystemSession();
   } 
 
@@ -118,7 +106,6 @@ public class TestVotingService extends BaseWCMTestCase {
    *        votingRate = (1 + 4 + 5)/3 = 3.33
    */
   @SuppressWarnings("unchecked")
-  @Test
   public void testVote() throws Exception {
     Node test = session.getRootNode().addNode("Test");
     if (test.canAddMixin(I18NMixin)) {
@@ -149,7 +136,6 @@ public class TestVotingService extends BaseWCMTestCase {
    *        votingRate = (3 + 1 + 4)/3 = 2.67
    *        total of vote: 3.
    */
-  @Test
   public void testVote1() throws Exception {
     Node test = initNode();
     votingService.vote(test, 3, null, "fr");
@@ -176,7 +162,6 @@ public class TestVotingService extends BaseWCMTestCase {
    *        votingRate = (2 + 3 + 4)/3
    */
   @SuppressWarnings("unchecked")
-  @Test
   public void testVote2() throws Exception {
     Node test = initNode();
     votingService.vote(test, 2, "root", "fr");
@@ -245,7 +230,6 @@ public class TestVotingService extends BaseWCMTestCase {
    * Expected:
    *        Total of test's vote = value of VOTE_TOTAL_LANG_PROP property.
    */
-  @Test
   public void testGetVoteTotal() throws Exception{
     Node test = session.getRootNode().addNode("Test");
     if (test.canAddMixin(I18NMixin)) {
@@ -268,7 +252,6 @@ public class TestVotingService extends BaseWCMTestCase {
    *       In this case:
    *       total = total of voters with default language + total of voter with other languages.
    */
-  @Test
   public void testGetVoteTotal1() throws Exception{
     Node test = initNode();
     String DefaultLang = multiLanguageService.getDefault(test);
@@ -288,7 +271,6 @@ public class TestVotingService extends BaseWCMTestCase {
    * Expected: root voted  test node and mary didn't
    * @throws Exception
    */
-  @Test
   public void testIsVoted() throws Exception{
     Node test = session.getRootNode().addNode("Test");
     if (test.canAddMixin(I18NMixin)) {
@@ -311,7 +293,6 @@ public class TestVotingService extends BaseWCMTestCase {
    *       In this case:
    *       total = total of voters with default language + total of voter with other languages.
    */
-  @Test
   public void testGetVoteValueOfUser() throws Exception{
     Node test = initNode();
     String DefaultLang = multiLanguageService.getDefault(test);
@@ -331,13 +312,13 @@ public class TestVotingService extends BaseWCMTestCase {
   /**
    * Clean data test
    */
-  @AfterMethod
   public void tearDown() throws Exception {
     if (session.itemExists("/Test")) {
       Node test = session.getRootNode().getNode("Test");
       test.remove();
       session.save();
     }
+    super.tearDown();
   }
 
   /**
