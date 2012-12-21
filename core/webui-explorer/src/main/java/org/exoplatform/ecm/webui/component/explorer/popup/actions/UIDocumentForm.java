@@ -354,7 +354,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       for (int i = 0; i < inputs.size(); i++) {
         UIFormInput input = (UIFormInput) inputs.get(i);
         if ((input.getName() != null) && input.getName().equals("name")) {
-          String[] arrFilterChar = {"]", "["};
+          String[] arrFilterChar = {"]", ":", "["};
           String valueName = input.getValue().toString();
           if (!Utils.isNameValid(valueName, arrFilterChar)) {
             uiApp.addMessage(new ApplicationMessage("UIFolderForm.msg.name-not-allowed", null,
@@ -687,8 +687,8 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       Node newNode = UIDocumentForm.saveDocument(event);
       if (newNode != null) {
         event.getRequestContext().setAttribute("nodePath",newNode.getPath());
+        UIDocumentForm.closeForm(event);
       }
-      UIDocumentForm.closeForm(event);
     }
   }
 
