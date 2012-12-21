@@ -557,7 +557,7 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
       return null;
 
     // if current mode is edit mode
-    if (context==null || context.get(WCMComposer.FILTER_MODE).equals(WCMComposer.MODE_EDIT) ||
+    if (context==null || WCMComposer.MODE_EDIT.equals(context.get(WCMComposer.FILTER_MODE)) ||
         PortletMode.EDIT.toString().equals(context.get(WCMComposer.PORTLET_MODE)))
       return node;
 
