@@ -181,6 +181,11 @@ public class UIActionTypeForm extends UIForm {
                                                  ApplicationMessage.WARNING)) ;
         return ;
       }
+      if(arrActionNames.length != 2){
+        uiApp.addMessage(new ApplicationMessage("UIActionTypeForm.msg.action-name-invalid", args,
+                                                ApplicationMessage.WARNING)) ;
+       return ;
+      }
       List<String> variables = new ArrayList<String>();
       List values = uiForm.uiFormMultiValue.getValue();
       if(values != null && values.size() > 0) {

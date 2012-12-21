@@ -970,7 +970,7 @@
     <msg>
       <action-type-added>The '{0}' action type was added successfully.</action-type-added>
       <action-type-create-error>An error occurred while creating the action type.</action-type-create-error>
-      <action-name-invalid>'{0}' is invalid. The name must begin with 'exo:'.</action-name-invalid>
+      <action-name-invalid>'{0}' is invalid. The name must begin with 'exo:' and not empty.</action-name-invalid>
       <action-exist>This action already exists in the ECM system.</action-exist>
       <fileName-invalid>The action name contains some invalid characters.</fileName-invalid>
     </msg>

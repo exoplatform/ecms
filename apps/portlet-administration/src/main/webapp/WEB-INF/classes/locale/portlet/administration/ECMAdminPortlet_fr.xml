@@ -1024,7 +1024,7 @@
     <msg>
       <action-type-added>'{0}' a été ajouté.</action-type-added>
       <action-type-create-error>Création du type d'action impossible!</action-type-create-error>
-      <action-name-invalid>'{0}' invalide! Le nom doit débuter par 'exo:'</action-name-invalid>
+      <action-name-invalid>'{0}' invalide! Le nom doit débuter par 'exo:' et non null</action-name-invalid>
       <action-exist>Ce type d'action existe déjà</action-exist>
       <fileName-invalid>Le nom de l'action comporte des caractères invalides</fileName-invalid>
     </msg>
