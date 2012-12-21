@@ -316,7 +316,6 @@ public class PDFViewerRESTService implements ResourceContainer {
       if ("pdf".equals(extension)) {
         read(input, new BufferedOutputStream(new FileOutputStream(content)));
       } else {
-        OutputStream out = new BufferedOutputStream((new FileOutputStream(content)));
         // create temp file to store original data of nt:file node
         File in = File.createTempFile(name + "_tmp", null);
         read(input, new BufferedOutputStream(new FileOutputStream(in)));
@@ -333,8 +332,6 @@ public class PDFViewerRESTService implements ResourceContainer {
           }
         } finally {
           in.delete();
-          out.flush();
-          out.close();
         }
       }
       if (content.exists()) {
