@@ -1425,7 +1425,7 @@ function ECMUtils() {
     var resizableBlock = gj(leftContainer).find("div.uiResizableBlock:first")[0];
     var selectContent = gj(resizableBlock).find("div.uiSelectContent:first")[0];
     var resizeTreeExplorer = gj(resizableBlock).find("div.resizeTreeExplorer:first")[0];
-    var resizeTreeButton = gj(resizeTreeExplorer).find("div.resizeTreeButton:first")[0];
+    var resizeTreeButton = gj(resizeTreeExplorer).find("div.uiIconArrowDown:first")[0];
 
     var treeExplorer = document.getElementById("UITreeExplorer");
     var itemArea = document.getElementById("SelectItemArea");
@@ -1447,9 +1447,9 @@ function ECMUtils() {
     if (itemArea) {
       itemArea.style.display = eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea;
       if (eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea == "none") {
-        resizeTreeButton.className = "resizeTreeButton ShowContentButton";
+		gj(resizeTreeButton).addClass("uiIconArrowUp");
       } else {
-        resizeTreeButton.className = "resizeTreeButton";
+        gj(resizeTreeButton).removeClass("uiIconArrowUp");
       }
     }
 
@@ -1493,7 +1493,7 @@ function ECMUtils() {
     var resizableBlock = gj(workingArea).find("div.uiResizableBlock:first")[0];
     var selectContent = gj(resizableBlock).find("div.uiSelectContent:first")[0];
     var resizeTreeExplorer = gj(resizableBlock).find("div.resizeTreeExplorer:first")[0];
-    var resizeTreeButton = gj(resizeTreeExplorer).find("div.resizeTreeButton:first")[0];
+    var resizeTreeButton = gj(resizeTreeExplorer).find("div.uiIconArrowDown:first")[0];
 
     var itemArea = document.getElementById("SelectItemArea");
     var container = eXo.ecm.ECMUtils.getContainerToResize();
@@ -1509,9 +1509,9 @@ function ECMUtils() {
     //show or hide the SelectItemArea
     itemArea.style.display = eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea;
     if (eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea == "none") {
-      resizeTreeButton.className = "resizeTreeButton ShowContentButton";
+      gj(resizeTreeButton).addClass("uiIconArrowUp");
     } else {
-      resizeTreeButton.className = "resizeTreeButton";
+      gj(resizeTreeButton).removeClass("uiIconArrowUp");
     }
 
     //adjust the height of container

@@ -11,7 +11,7 @@ UIDocumentForm.prototype.AdjustHeight = function() {
 	var uiDocumentForm = document.getElementById("UIDocumentForm");
 	var uiAction = gj(uiDocumentForm).find("div.UIAction:first")[0];
 	var uiHorizontalTabs = gj(uiDocumentForm).find("div.UIHorizontalTabs:first")[0];
-	var horizontalLayout = gj(uiDocumentForm).find("div.HorizontalLayout:first")[0];
+	var horizontalForm = gj(uiDocumentForm).find("div.form-horizontal:first")[0];
 
 	if (uiWorkingWorkspace.clientWidth != uiDocumentWorkspace.clientWidth) {
 		
@@ -21,7 +21,7 @@ UIDocumentForm.prototype.AdjustHeight = function() {
 
 		var uiActionHeight = 0;
 		var uiHorizontalTabsHeight = 0;
-		horizontalLayout.style.height = 'auto';
+		horizontalForm.style.height = 'auto';
 		if (uiAction) {
 			uiActionHeight = uiAction.offsetHeight;
 		}
@@ -29,8 +29,7 @@ UIDocumentForm.prototype.AdjustHeight = function() {
 		if (uiHorizontalTabs) {
 			uiHorizontalTabsHeight = uiHorizontalTabs.offsetHeight;
 		}
-	
-		horizontalLayout.style.height = workingAreaHeight - uiActionHeight - uiHorizontalTabsHeight - 10 + 'px';
+		horizontalForm.style.height = workingAreaHeight - uiActionHeight - uiHorizontalTabsHeight - 10 + 'px';
 	}
 }
 
@@ -70,8 +69,8 @@ UIDocumentForm.prototype.FullScreenToggle = function(element) {
 	var uiAction = gj(uiDocumentForm).find("div.UIAction:first")[0];
 	var changeTypeLink = gj(uiAction).find("a.ChangeTypeLink:first")[0];	
 	
-	if (!eXo.webui.UIDocForm.horizontalLayout) {	
-		eXo.webui.UIDocForm.horizontalLayout = gj(uiDocumentForm).find("div.HorizontalLayout:first")[0];
+	if (!eXo.webui.UIDocForm.horizontalForm) {	
+		eXo.webui.UIDocForm.horizontalForm = gj(uiDocumentForm).find("div.form-horizontal:first")[0];
 	}
 
 	if (element.className == "MaximizeScreen20x20Icon") {
@@ -89,7 +88,7 @@ UIDocumentForm.prototype.FullScreenToggle = function(element) {
 		
 		//save style		
 		eXo.webui.UIDocForm.SaveStyles("UIDocumentWorkspace", uiDocumentWorkspace);
-		eXo.webui.UIDocForm.SaveStyles("HorizontalLayout", eXo.webui.UIDocForm.horizontalLayout);
+		eXo.webui.UIDocForm.SaveStyles("form-horizontal", eXo.webui.UIDocForm.horizontalForm);
 
 		// Resize.
 		var oViewPaneSize = UIDocumentForm.GetViewPaneSize(uiWorkingWorkspace) ;
@@ -103,8 +102,9 @@ UIDocumentForm.prototype.FullScreenToggle = function(element) {
 		uiDocumentWorkspace.style.height	= oViewPaneSize.Height + "px";
 		uiDocumentWorkspace.style.background = '#FFFFFF';
 
-		eXo.webui.UIDocForm.horizontalLayout.style.height = 'auto';
-		
+		eXo.webui.UIDocForm.horizontalForm.style.height = 'auto';
+		eXo.webui.UIDocForm.horizontalForm.addClass("form-horizontal");
+		eXo.webui.UIDocForm.horizontalForm.addClass("uiContentBox");
 		window.scrollTo(0, 0)
 	} else {
 		if (changeTypeLink) {
@@ -112,10 +112,12 @@ UIDocumentForm.prototype.FullScreenToggle = function(element) {
 		}
 		// Restore original size
 		eXo.webui.UIDocForm.RestoreStyles("UIDocumentWorkspace", uiDocumentWorkspace) ;
-		eXo.webui.UIDocForm.RestoreStyles("HorizontalLayout", eXo.webui.UIDocForm.horizontalLayout);
-
-		delete eXo.webui.UIDocForm.horizontalLayout;
+		eXo.webui.UIDocForm.RestoreStyles("form-horizontal", eXo.webui.UIDocForm.horizontalForm);
+        eXo.webui.UIDocForm.horizontalForm.addClass("form-horizontal");
+		eXo.webui.UIDocForm.horizontalForm.addClass("uiContentBox");
+		delete eXo.webui.UIDocForm.horizontalForm;
 	}
+	
 	eXo.webui.UIDocForm.AutoFocus();
 }
 
