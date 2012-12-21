@@ -432,10 +432,7 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener {
         } finally {
           session.logout();
         }
-        rootStorage = new StorageClosableImpl(sessionProvider,
-                                              workspaceName,
-                                              repository,
-                                              rootStorageConfiguration,
+        rootStorage = new StorageClosableImpl(rootStorageConfiguration,
                                               new PermissionService(),
                                               StorageProviderImpl.DEFAULT_NODETYPE_MAPPING);
 

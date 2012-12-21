@@ -525,7 +525,7 @@ public class StorageTest extends BaseTest
       DocumentData document =
          createDocument(rootFolder, "checkinTestRename", "cmis:document", new BaseContentStream("checkin test"
             .getBytes(), null, new MimeType("text", "plain")), null);
-      DocumentData pwc = (DocumentData)document.checkout();
+      DocumentData pwc = document.checkout();
       String pwcId = pwc.getObjectId();
 
       // update
