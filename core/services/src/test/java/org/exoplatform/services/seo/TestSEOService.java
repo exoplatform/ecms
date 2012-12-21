@@ -103,6 +103,11 @@ public class TestSEOService extends BaseWCMTestCase{
    * @throws Exception
    */
   public void testStoreContentMetadata() throws Exception {
+    applyUserSession("john", "gtn", "collaboration");
+    WebuiRequestContext context = Mockito.mock(WebuiRequestContext.class); 
+    WebuiRequestContext.setCurrentInstance(context);
+    PortalRequestContext ctx = Mockito.mock(PortalRequestContext.class);
+    Mockito.when(Util.getPortalRequestContext()).thenReturn(ctx);
     PageMetadataModel metaModel = new PageMetadataModel();
     Node seoNode = session.getRootNode().addNode("parentNode").addNode("childNode");
     if(!seoNode.isNodeType("mix:referenceable")) {

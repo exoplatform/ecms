@@ -28,11 +28,13 @@ import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
-
+import org.junit.FixMethodOrder;
+import org.junit.runners.MethodSorters;
 /**
  * Created by The eXo Platform SARL
  * June 09, 2009
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestTemplateService extends BaseWCMTestCase {
 
   private TemplateService templateService;

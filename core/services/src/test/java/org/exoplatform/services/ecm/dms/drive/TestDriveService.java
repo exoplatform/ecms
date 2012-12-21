@@ -86,6 +86,9 @@ public class TestDriveService extends BaseWCMTestCase {
     nodeHierarchyCreator = (NodeHierarchyCreator)container.getComponentInstanceOfType(NodeHierarchyCreator.class);
     drivePath = nodeHierarchyCreator.getJcrPath(BasePath.EXO_DRIVES_PATH);
     applySystemSession();
+    
+    // clean and setup data
+    removeAllDrives();
     createTree();
   }
 
@@ -578,7 +581,8 @@ public class TestDriveService extends BaseWCMTestCase {
         "timeline-view", "", true, false, true, false, "nt:folder,nt:unstructured", "*");
     driveService.addDrive("MyDrive1", COLLABORATION_WS, "*:/platform/administrators", "/TestTreeNode/A1",
         "admin-view", "", true, true, true, true, "nt:folder", "*");
-    driveService.addDrive("Public2", COLLABORATION_WS, "*:/platform/users", "/Users/john/Public2",
+    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, "john");
+    driveService.addDrive("Public2", COLLABORATION_WS, "*:/platform/users", userNode.getPath() + "/Public2",
         "simple-view, admin-view", "", false, false, true, false, "nt:folder,nt:unstructured", "*");
 
     List<DriveData> drives = driveService.getPersonalDrives("john");
@@ -606,7 +610,7 @@ public class TestDriveService extends BaseWCMTestCase {
     assertEquals(drives.get(1).getShowHiddenNode(), false);
     assertEquals(drives.get(2).getWorkspace(), COLLABORATION_WS) ;
     assertEquals(drives.get(2).getPermissions(), "*:/platform/users");
-    assertEquals(drives.get(2).getHomePath(), "/Users/john/Public2");
+    assertEquals(drives.get(2).getHomePath(), userNode.getPath() + "/Public2");
     assertEquals(drives.get(2).getViews(), "simple-view, admin-view");
     assertEquals(drives.get(2).getIcon(), "");
     assertEquals(drives.get(2).getViewPreferences(), false);
@@ -632,7 +636,8 @@ public class TestDriveService extends BaseWCMTestCase {
         "timeline-view", "", true, false, true, false, "nt:folder,nt:unstructured", "*");
     driveService.addDrive("MyDrive1", COLLABORATION_WS, "*:/platform/administrators", "/TestTreeNode/A1",
         "admin-view", "", true, true, true, true, "nt:folder", "*");
-    driveService.addDrive("Public2", COLLABORATION_WS, "*:/platform/users", "/Users/john/Public2",
+    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, "john");
+    driveService.addDrive("Public2", COLLABORATION_WS, "*:/platform/users", userNode.getPath() + "/Public2",
         "simple-view, admin-view", "", false, false, true, false, "nt:folder,nt:unstructured", "*");
 
     driveService.getPersonalDrives("john");
@@ -703,7 +708,8 @@ public class TestDriveService extends BaseWCMTestCase {
         "timeline-view", "", true, false, true, false, "nt:folder,nt:unstructured", "*");
     driveService.addDrive("MyDrive1", COLLABORATION_WS, "*:/platform/administrators", "/TestTreeNode/A1",
         "admin-view", "", true, true, true, true, "nt:folder", "*");
-    driveService.addDrive("Public2", COLLABORATION_WS, "*:/platform/users", "/Users/john/Public2",
+    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, "john");
+    driveService.addDrive("Public2", COLLABORATION_WS, "*:/platform/users", userNode.getPath() + "/Public2",
         "simple-view, admin-view", "", false, false, true, false, "nt:folder,nt:unstructured", "*");
     activateGroupDriveTemplate("john");
     List<String> userRoles = new ArrayList<String>();
@@ -744,7 +750,8 @@ public class TestDriveService extends BaseWCMTestCase {
         "admin-view", "", true, true, true, true, "nt:folder", "*");
     driveService.addDrive("MyDrive2", COLLABORATION_WS, "*:/platform/administrators", "/TestTreeNode/A1",
         "admin-view", "", true, true, true, true, "nt:folder", "*");
-    driveService.addDrive("Public2", COLLABORATION_WS, "*:/platform/users", "/Users/john/Public2",
+    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, "john");
+    driveService.addDrive("Public2", COLLABORATION_WS, "*:/platform/users", userNode.getPath() + "/Public2",
         "simple-view, admin-view", "", false, false, true, false, "nt:folder,nt:unstructured", "*");
     activateGroupDriveTemplate("john");
     List<String> userRoles = new ArrayList<String>();
@@ -913,6 +920,15 @@ public class TestDriveService extends BaseWCMTestCase {
   }
 
   public void tearDown() throws Exception {
+    removeAllDrives();
+
+    session.getRootNode().getNode("TestTreeNode").remove();
+    session.save();
+    
+    super.tearDown();
+  }
+  
+  private void removeAllDrives() throws Exception {
     Session mySession = sessionProviderService_.getSystemSessionProvider(null).getSession(DMSSYSTEM_WS, repository);
     Node rootDrive = (Node)mySession.getItem(drivePath);
     NodeIterator iter = rootDrive.getNodes();
@@ -921,8 +937,6 @@ public class TestDriveService extends BaseWCMTestCase {
     }
     rootDrive.getSession().save();
 
-    session.getRootNode().getNode("TestTreeNode").remove();
     session.save();
-    super.tearDown();
   }
 }
