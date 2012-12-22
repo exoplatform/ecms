@@ -37,7 +37,7 @@
     </title>
     <button>
       <label>
-        <cancel>Cancel</cancel>
+        <cancel>#{word.cancel}</cancel>
       </label>
     </button>
     <msg>
@@ -497,7 +497,7 @@
       <Rename>Rename</Rename>
       <Cut>Cut</Cut>
       <Copy>Copy</Copy>
-      <Save>Save</Save>
+      <Save>#{word.save}</Save>
       <RemoveNode>Delete</RemoveNode>
       <Checkin>Checkin</Checkin>
       <Checkout>Checkout</Checkout>
@@ -547,7 +547,7 @@
       <Copy>Copy</Copy>
       <Rename>Rename</Rename>
       <Delete>Delete</Delete>
-      <Save>Save</Save>
+      <Save>#{word.save}</Save>
       <Cut>Cut</Cut>
       <Paste>Paste</Paste>
       <CheckOut>CheckOut</CheckOut>
@@ -618,7 +618,7 @@
       <path>Path</path>
     </header>
     <action>
-      <Close>Close</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UIReferencesList>
   <!--
@@ -712,7 +712,7 @@
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Cancel>Cancel</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
       <Reset>Reset</Reset>
     </action>
     <msg>
@@ -923,8 +923,8 @@
   </UIExternalMetadataForm>
   <UIAddMetadataForm>
     <action>
-      <Cancel>Cancel</Cancel>
-      <Save>Save</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
     </action>
   </UIAddMetadataForm>
   <!--
@@ -958,7 +958,7 @@
       <node-def-dnt>DNT</node-def-dnt>
     </label>
     <action>
-      <Close>Close</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UINodeTypeInfo>
   <!--
@@ -973,7 +973,7 @@
       </label>
     </tab>
     <action>
-      <Close>Close</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UICategoryManagerSearch>
   <UIContentNameSearch>
@@ -1202,7 +1202,7 @@
     </msg>
     <button>
       <label-Add>Add</label-Add>
-      <label-Cancel>Cancel</label-Cancel>
+      <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
   </UIConstraintsForm>
   <UIConstraintForm>
@@ -1249,8 +1249,8 @@
   </SaveQueryPopup>
   <UINodeTypeSelectForm>
     <action>
-      <Cancel>Cancel</Cancel>
-      <Save>Save</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
     </action>
   </UINodeTypeSelectForm>
   <UICompareExactlyForm>
@@ -1263,7 +1263,7 @@
     </title>
     <button>
       <label-Select>Select</label-Select>
-      <label-Cancel>Cancel</label-Cancel>
+      <label-Cancel>#{word.cancel}</label-Cancel>
     </button>
     <msg>
       <not-result-found>No results found.</not-result-found>
@@ -1337,7 +1337,7 @@
     <pLabel>Properties:</pLabel>
     <action>
       <Add>Add</Add>
-      <Cancel>Cancel</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UISelectPropertyForm>
   <ExactlyFormPopup>
@@ -1461,7 +1461,7 @@
       <invalid-item-state>You cannot restore this version. Maybe, one or more items were deleted or moved by another session.</invalid-item-state>
     </msg>
     <action>
-      <close>Close</close>
+      <close>#{word.close}</close>
       <close-view>Close View</close-view>
     </action>
   </UIVersionInfo>
@@ -1480,7 +1480,7 @@
       <e_4>Property added</e_4>
       <e_16>Property changed</e_16>
       <e_8>Property removed</e_8>
-      <e_32>Save</e_32>
+      <e_32>#{word.save}</e_32>
       <e_64>Move</e_64>
       <e_128>Copy</e_128>
       <e_256>Add mixin</e_256>
@@ -1519,7 +1519,7 @@
       <note>Versioning has not been activated for this node.</note>
       <question>Are you sure to activate it?</question>
       <button-active>Activate</button-active>
-      <button-cancel>Cancel</button-cancel>
+      <button-cancel>#{word.cancel}</button-cancel>
     </label>
     <msg>
       <access-denied>You have not permission to activate versioning on this node</access-denied>
@@ -1537,7 +1537,7 @@
       <action>Action</action>
     </header>
     <action>
-      <Cancel>Close</Cancel>
+      <Cancel>#{word.close}</Cancel>
     </action>
     <grid>
       <msg>
@@ -1561,7 +1561,7 @@
     </label>
     <action>
       <activate>Activate</activate>
-      <cancel>Cancel</cancel>
+      <cancel>#{word.cancel}</cancel>
     </action>
   </UIActivateAuditing>
   <!--
@@ -1616,7 +1616,7 @@
     </label>
     <action>
       <Save>#{word.save}</Save>
-      <Cancel>Cancel</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <title>Add Label</title>
     <msg>
@@ -1671,7 +1671,7 @@
   -->
   <UICategoryManager>
     <action>
-      <Close>Close</Close>
+      <Close>#{word.close}</Close>
     </action>
     <tab>
       <label>
@@ -1716,7 +1716,7 @@
   -->
   <UIRelationManager>
     <action>
-      <Close>Close</Close>
+      <Close>#{word.close}</Close>
     </action>
     <tab>
       <label>
@@ -1792,7 +1792,7 @@
   <UIDocumentForm>
     <title>Add New Document</title>
     <action>
-      <Save>Save</Save>
+      <Save>#{word.save}</Save>
       <SaveAndClose>Save &amp; Close</SaveAndClose>
       <ChangeType>Change Content Type</ChangeType>
       <Fullscreen>Fullscreen</Fullscreen>
@@ -2146,9 +2146,9 @@
       <stateName>State Name</stateName>
     </label>
     <action>
-      <Save>Save</Save>
+      <Save>#{word.save}</Save>
       <UnsubcriberLifeCycle>Unsubscriber</UnsubcriberLifeCycle>
-      <Cancel>Cancel</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIPublicationForm>
   <!--
@@ -2242,7 +2242,7 @@
       <visibility>Visibility</visibility>
     </header>
     <action>
-      <Close>Close</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UIPublicationLogList>
   <!--
@@ -2302,7 +2302,7 @@
   -->
   <UICategoriesSelector>
     <action>
-      <close>Close</close>
+      <close>#{word.close}</close>
     </action>
   </UICategoriesSelector>
   <!--
@@ -2358,8 +2358,8 @@
     <title>Edit File Explorer</title>
     <action>
       <Edit>Edit</Edit>
-      <Save>Save</Save>
-      <Cancel>Cancel</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <repository>Repository</repository>
@@ -2540,7 +2540,7 @@
 
   <UISimpleCategoryManager>
     <action>
-      <Close>Close</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UISimpleCategoryManager>
   <UIPopupWindow>
@@ -2736,7 +2736,7 @@
   <UIExternalMetadataForm>
     <action>
       <Add>Add</Add>
-      <Cancel>Cancel</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIExternalMetadataForm>
     <!--
@@ -2868,7 +2868,7 @@
   <UISingleExternalMetadataForm>
     <action>
       <Add>Add</Add>
-      <Cancel>Cancel</Cancel>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UISingleExternalMetadataForm>
   <UISingleUploadContainer>
@@ -2890,8 +2890,8 @@
   </UISingleExternalMetadataForm>
   <UISingleAddMetadataForm>
     <action>
-      <Cancel>Cancel</Cancel>
-      <Save>Save</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
     </action>
   </UISingleAddMetadataForm>
 
@@ -3034,8 +3034,8 @@
       <name>Category Name</name>
     </label>
     <action>
-      <Save>Save</Save>
-      <Cancel>Cancel</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UICategoryForm>
   <UIPopupWindow>
@@ -3192,8 +3192,8 @@
 
   <UISelectRestorePath>
     <action>
-      <Save>Save</Save>
-      <Cancel>Cancel</Cancel>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <formInput>The previous path was lost. Please select a new one.</formInput>
@@ -3232,9 +3232,14 @@
       </msg>
     </UIActionBar>
 
-	<UIPublicationPanel>
+    <UIPublicationPanel>
+      <action>
+        <Save>#{word.save}</Save>
+        <Reset>Reset</Reset>
+        <Close>#{word.close}</Close>
+      </action>
     <button>
-      <Close>Close</Close>
+      <Close>#{word.close}</Close>
     </button>
     <revisions>
       <version>Revisions</version>
@@ -3293,9 +3298,6 @@
       <start>Start Publication</start>
       <end>End Publication</end>
     </label>
-    <action>
-      <Save>Save</Save>
-    </action>
     <msg>
       <invalid-format>The datetime format is invalid. Please check again.</invalid-format>
       <fromDate-after-toDate>The From date has to be smaller than the To date.</fromDate-after-toDate>
@@ -3332,7 +3334,7 @@
       </label>
     </tab>
     <action>
-    	 <Close>Close</Close>
+    	 <Close>#{word.close}</Close>
     </action>
   </UICategoryManagerSearch>
 
