@@ -212,6 +212,11 @@
     </dependency>
     <dependency>
       <groupId>org.gatein.portal</groupId>
+      <artifactId>exo.portal.component.test.web</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.gatein.portal</groupId>
       <artifactId>exo.portal.component.web.controller</artifactId>
     </dependency>
     <dependency>
@@ -302,7 +307,7 @@
     <resources>
       <!-- We need to filter only properties files -->
       <resource>
-        <filtering>false</filtering>
+        <filtering>true</filtering>
         <directory>src/main/resources</directory>
         <includes>
           <include>**/*.properties</include>
