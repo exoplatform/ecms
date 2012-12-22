@@ -56,6 +56,7 @@ import org.exoplatform.services.wcm.core.link.TestLiveLinkManagerService;
 import org.exoplatform.services.wcm.friendly.TestFriendlyService;
 import org.exoplatform.services.wcm.javascript.TestXJavaScriptService;
 import org.exoplatform.services.wcm.portal.artifacts.TestCreatePortalArtifactsService;
+import org.exoplatform.services.wcm.skin.TestXSkinService;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -77,7 +78,7 @@ import org.junit.runners.Suite.SuiteClasses;
   TestWCMConfigurationService.class,
   TestFriendlyService.class,
   TestCreatePortalArtifactsService.class,
-  // TODO TestXSkinService.class,
+  TestXSkinService.class,
   TestFragmentCacheService.class,
   TestPortletFutureCache.class,
   TestDocumentTypeService.class,
