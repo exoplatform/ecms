@@ -19,11 +19,8 @@ package org.exoplatform.ecm.permission.info;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
-import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.form.UIForm;
+import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormStringInput;
-import org.exoplatform.webui.form.input.UICheckBoxInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
 
 /**
@@ -39,30 +36,14 @@ public class UIPermissionInputSet extends UIFormInputSetWithAction {
 
   public UIPermissionInputSet(String name) throws Exception {
     super(name);
-    setComponentConfig(getClass(), null);
-    UIFormStringInput userGroup = new UIFormStringInput(FIELD_USERORGROUP, FIELD_USERORGROUP, null);
-    userGroup.addValidator(MandatoryValidator.class);
-    userGroup.setReadOnly(true);
-    addUIFormInput(userGroup);
+    setComponentConfig(getClass(), null) ;
+    UIFormStringInput userGroup = new UIFormStringInput(FIELD_USERORGROUP, FIELD_USERORGROUP, null) ;
+    userGroup.addValidator(MandatoryValidator.class) ;
+    userGroup.setEditable(false) ;
+    addUIFormInput(userGroup) ;
     for (String perm : PermissionType.ALL) {
-      UICheckBoxInput checkBoxInput = new UICheckBoxInput(perm, perm, false);
-      addUIFormInput(checkBoxInput);
-      checkBoxInput.setOnChange("OnChange");
+      addUIFormInput(new UIFormCheckBoxInput<String>(perm, perm, null)) ;
     }
     setActionInfo(FIELD_USERORGROUP, new String[] {"SelectUser", "SelectMember", "AddAny"}) ;
-  }
-  
-  static public class OnChangeActionListener extends EventListener<UIForm> {
-    public void execute(Event<UIForm> event) throws Exception {
-      UIForm permissionForm = event.getSource();
-      UICheckBoxInput readCheckBox = permissionForm.getUICheckBoxInput(PermissionType.READ);
-      boolean isAddNodeCheckBoxChecked = permissionForm.getUICheckBoxInput(PermissionType.ADD_NODE).isChecked();
-      boolean isSetPropertyCheckBoxChecked = permissionForm.getUICheckBoxInput(PermissionType.SET_PROPERTY).isChecked();
-      boolean isRemoveCheckBoxChecked = permissionForm.getUICheckBoxInput(PermissionType.REMOVE).isChecked();
-      if (isAddNodeCheckBoxChecked || isSetPropertyCheckBoxChecked || isRemoveCheckBoxChecked) {
-        readCheckBox.setChecked(true);
-      }
-      event.getRequestContext().addUIComponentToUpdateByAjax(permissionForm);
-    }
   }
 }
