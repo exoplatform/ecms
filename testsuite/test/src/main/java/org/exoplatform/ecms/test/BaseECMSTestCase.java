@@ -19,7 +19,7 @@ package org.exoplatform.ecms.test;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
-import org.exoplatform.component.test.AbstractKernelTest;
+import org.exoplatform.commons.testing.BaseExoTestCase;
 import org.exoplatform.component.test.ConfigurationUnit;
 import org.exoplatform.component.test.ConfiguredBy;
 import org.exoplatform.component.test.ContainerScope;
@@ -52,7 +52,7 @@ import org.exoplatform.services.security.ConversationState;
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-test-configuration.xml"),
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/portal/mock-rest-configuration.xml")
 })
-public abstract class BaseECMSTestCase extends AbstractKernelTest {
+public abstract class BaseECMSTestCase extends BaseExoTestCase {
 
   protected static Log                  log                    = ExoLogger.getLogger("org.exoplatform.ecms.test");
   

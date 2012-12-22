@@ -20,12 +20,8 @@ import java.util.LinkedList;
 
 import javax.jcr.Node;
 
-import org.exoplatform.component.test.ConfigurationUnit;
-import org.exoplatform.component.test.ConfiguredBy;
-import org.exoplatform.component.test.ContainerScope;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.RequestLifeCycle;
-import org.exoplatform.ecms.test.BaseECMSTestCase;
 import org.exoplatform.portal.config.DataStorage;
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.config.model.PortalConfig;
@@ -48,13 +44,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  *          exo@exoplatform.com
  * Jul 26, 2012  
  */
-@ConfiguredBy({
-  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.portal-configuration.xml"),
-  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.identity-configuration.xml"),
-  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-test-configuration.xml"),
-  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/wcm/test-publication-configuration.xml")
-  })
-public class TestWCMPublicationService extends BaseECMSTestCase {
+public class TestWCMPublicationService extends BasePublicationTestCase {
   
   private static final String CURRENT_STATE = "publication:currentState";
   private static final String TEST = "test";

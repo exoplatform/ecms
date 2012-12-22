@@ -3,21 +3,9 @@ package org.exoplatform.services.wcm.publication;
 import java.util.HashMap;
 
 import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-
-import org.exoplatform.component.test.ConfigurationUnit;
-import org.exoplatform.component.test.ConfiguredBy;
-import org.exoplatform.component.test.ContainerScope;
-import org.exoplatform.ecms.test.BaseECMSTestCase;
 
 
-@ConfiguredBy({
-  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.portal-configuration.xml"),
-  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.identity-configuration.xml"),
-  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-test-configuration.xml"),
-  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/wcm/test-publication-configuration.xml")
-  })
-public class TestWCMComposer extends BaseECMSTestCase {
+public class TestWCMComposer extends BasePublicationTestCase {
 
   WCMComposer               wcmComposer             = null;
   

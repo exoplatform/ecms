@@ -129,4 +129,8 @@ public class DummyECMSTestCase extends BaseECMSResourceTestCase {
     assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
     assertEquals("Removed guest", response.getEntity().toString());    
   }
+  
+  public void tearDown() throws Exception {
+    super.tearDown();
+  }
 }
