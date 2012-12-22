@@ -49,7 +49,6 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.input.UICheckBoxInput;
 
 /**
  * Created by The eXo Platform SARL Author : nqhungvn
@@ -65,8 +64,7 @@ import org.exoplatform.webui.form.input.UICheckBoxInput;
       @EventConfig(phase = Phase.DECODE, listeners = UIPermissionForm.CloseActionListener.class),
       @EventConfig(phase = Phase.DECODE, listeners = UIPermissionForm.SelectUserActionListener.class),
       @EventConfig(phase = Phase.DECODE, listeners = UIPermissionForm.SelectMemberActionListener.class),
-      @EventConfig(phase = Phase.DECODE, listeners = UIPermissionForm.AddAnyActionListener.class),
-      @EventConfig(phase = Phase.DECODE, listeners = UIPermissionInputSet.OnChangeActionListener.class)
+      @EventConfig(phase = Phase.DECODE, listeners = UIPermissionForm.AddAnyActionListener.class)
     }
 )
 
@@ -92,7 +90,7 @@ public class UIPermissionForm extends UIForm implements UISelectable {
   private void checkAll(boolean check) {
     UIPermissionInputSet uiInputSet = getChildById(PERMISSION);
     for (String perm : PermissionType.ALL) {
-      uiInputSet.getUICheckBoxInput(perm).setChecked(check);
+      uiInputSet.getUIFormCheckBoxInput(perm).setChecked(check);
     }
   }
 
@@ -105,7 +103,7 @@ public class UIPermissionForm extends UIForm implements UISelectable {
     uiInputSet.getUIStringInput(UIPermissionInputSet.FIELD_USERORGROUP).setValue(user);
     if(user.equals(Utils.getNodeOwner(node))) {
       for (String perm : PermissionType.ALL) {
-        uiInputSet.getUICheckBoxInput(perm).setChecked(true);
+        uiInputSet.getUIFormCheckBoxInput(perm).setChecked(true);
       }
     } else {
       List<AccessControlEntry> permsList = node.getACL().getPermissionEntries();
@@ -119,7 +117,7 @@ public class UIPermissionForm extends UIForm implements UISelectable {
       }
       for (String perm : PermissionType.ALL) {
         boolean isCheck = userPermission.toString().contains(perm);
-        uiInputSet.getUICheckBoxInput(perm).setChecked(isCheck);
+        uiInputSet.getUIFormCheckBoxInput(perm).setChecked(isCheck);
       }
     }
 
@@ -134,7 +132,7 @@ public class UIPermissionForm extends UIForm implements UISelectable {
       uiInputSet.setActionInfo(UIPermissionInputSet.FIELD_USERORGROUP, new String[] {"SelectUser", "SelectMember", "AddAny"});
     }
     for (String perm : PermissionType.ALL) {
-      uiInputSet.getUICheckBoxInput(perm).setDisabled(isLock);
+      uiInputSet.getUIFormCheckBoxInput(perm).setEnable(!isLock);
     }
   }
 
@@ -184,14 +182,14 @@ public class UIPermissionForm extends UIForm implements UISelectable {
         return;
       }
       for (String perm : PermissionType.ALL) {
-        if (uiForm.getUICheckBoxInput(perm).isChecked()) permsList.add(perm);
+        if (uiForm.getUIFormCheckBoxInput(perm).isChecked()) permsList.add(perm);
         else {
           permsRemoveList.add(perm);
         }
       }
-      if (uiForm.getUICheckBoxInput(PermissionType.ADD_NODE).isChecked() ||
-          uiForm.getUICheckBoxInput(PermissionType.REMOVE).isChecked() ||
-          uiForm.getUICheckBoxInput(PermissionType.SET_PROPERTY).isChecked())
+      if (uiForm.getUIFormCheckBoxInput(PermissionType.ADD_NODE).isChecked() ||
+          uiForm.getUIFormCheckBoxInput(PermissionType.REMOVE).isChecked() ||
+          uiForm.getUIFormCheckBoxInput(PermissionType.SET_PROPERTY).isChecked())
       {
         if(!permsList.contains(PermissionType.READ))
           permsList.add(PermissionType.READ);
@@ -294,7 +292,7 @@ public class UIPermissionForm extends UIForm implements UISelectable {
       UIPermissionInputSet uiInputSet = uiForm.getChildById(UIPermissionForm.PERMISSION);
       uiInputSet.getUIStringInput(UIPermissionInputSet.FIELD_USERORGROUP).setValue(IdentityConstants.ANY);
       uiForm.checkAll(false);
-      uiInputSet.getUICheckBoxInput(PermissionType.READ).setChecked(true);
+      uiInputSet.getUIFormCheckBoxInput(PermissionType.READ).setChecked(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
     }
   }
