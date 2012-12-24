@@ -298,6 +298,36 @@
 .uiDocumentFormController {
 	min-width: 500px;
 	padding: 15px;
+	
+	.form-horizontal {
+
+		.control-label {
+			margin-bottom: 0px;
+			width: 120px;
+		}
+		.controls {
+			margin-left: 135px;
+			
+			.textInfo {
+				line-height: 18px;
+				color: gray;
+			}
+			
+			.nameInfo {
+				line-height: 18px;
+				color: #333333;
+				font-weight: bold;
+			}
+			
+			a [class^="uiIcon"], 
+			a [class^="uiIcon"] {
+				background-image: url("/eXoResources/skin/images/Icons/uiIconsLightGrey.png");
+				&:hover {
+					background-image: url("/eXoResources/skin/images/Icons/uiIconsBlue.png");
+				}
+			}
+		}
+	}
 }
 
 /******** View1 **************/
@@ -324,33 +354,11 @@
 	}
 }
 
-.form-horizontal {
-
-	.control-label {
-		margin-bottom: 0px;
-		width: 120px;
-	}
-	.controls {
-		margin-left: 135px;
-		
-		.textInfo {
-			line-height: 18px;
-			color: gray;
-		}
-		
-		.nameInfo {
-			line-height: 18px;
-			color: #333333;
-			font-weight: bold;
-		}
-		
-		a [class^="uiIcon"], 
-		a [class^="uiIcon"] {
-			background-image: url("/eXoResources/skin/images/Icons/uiIconsLightGrey.png");
-			&:hover {
-				background-image: url("/eXoResources/skin/images/Icons/uiIconsBlue.png");
-			}
-		}
+/******** UITaggingForm **************/
+.UITaggingForm {
+	.form-horizontal .controls {
+		margin: 0px;
 	}
 }
+
 

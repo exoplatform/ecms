@@ -4,18 +4,18 @@
   def escapeChar = '%' as char
 %>
 
-<div class="$uicomponent.id AlignLeft" id="$uicomponent.id">
+<div class="$uicomponent.id alignLeft uiBox" id="$uicomponent.id">
    <%
       def nodes = uicomponent.getNodes();
     %>
-  <div class="header clearfix">
-    <div class="title"><%=uicomponent.getLabel()%></div>
+  <h5 class="title clearfix">
+		<%=uicomponent.getLabel()%>
     <% if (nodes.size()>0) { %>
       <div class="total"><%=uicomponent.getUIPageIterator().getAvailable()%></div>
     <% } %>
-  </div>
+  </h5>
 
-  <div class="elements">
+  <div class="elements uiContentBox">
   <%
     for (Node node:nodes) {
       def path = Text.escape(node.getPath(),escapeChar, true);

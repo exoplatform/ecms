@@ -4,54 +4,34 @@ import org.exoplatform.wcm.webui.reader.ContentReader;
 def escapeChar = '%' as char
 %>
 <style>
-.uiAuthoringDashboard {
+.UIWCMDashboardPortlet {
   padding: 0px 25px 25px 25px;
 }
 
-.uiAuthoringDashboard a {
+.uiAuthoringDashboard {
+  padding: 20px 0px;
+}
+
+.uiAuthoringDashboard .element a {
   color: #333;
   text-decoration:none;
 }
 
-.uiAuthoringDashboard a:hover {
+.uiAuthoringDashboard .element a:hover {
   color: blue;
 }
 
-.uiAuthoringDashboard .refresh{
-  background-color: #ee0000;
-  color: #fff;
-  min-width: 25px;
-  float: left;
-  text-align:center;
-  font-weight: bold;
-  border-radius: 3px;
-  margin-top: 5px;
-  line-height: 20px;
-	padding: 0px 5px;
-}
-
-.uiAuthoringDashboard .refresh a {
-  color: white;
-  text-decoration:none;
-}
-
-
-.uiAuthoringDashboard .AlignLeft {
+.uiAuthoringDashboard .alignLeft {
 	float: left;
-	width: 235px;
-	margin-right: 20px;
+	width: 31%;
+	margin-left: 20px;
 }
 
 .uiAuthoringDashboard .elements {
-	background: #fff;
 	text-align: left;
 	padding: 10px;
 	overflow: hidden;
 	font-size:12px;
-	box-shadow: 0 1px 2px rgba(13, 13, 13, 0.08);
-	border: 1px solid #CFCFCF;
-	border-top: none;
-	border-radius: 0px 0px 4px 4px;
 }
 
 .uiAuthoringDashboard .element {
@@ -59,36 +39,17 @@ def escapeChar = '%' as char
   padding-left: 15px;
 }
 
-.uiAuthoringDashboard .header {
-	background-color: #F0F0F0;
-	border: 1px solid #CFCFCF;
-	border-radius: 4px 4px 0px 0px;
-	box-shadow: 0 1px 2px rgba(13, 13, 13, 0.08);
-	line-height: 20px;
-	padding: 5px 10px;
-	word-wrap: break-word;
-}
-
-.uiAuthoringDashboard .header .title {
-	color: #000;
-	font-weight: bold;
-	font-size: 13px;
-	float: left;
-	line-height: 24px;
-}
-
-
-.uiAuthoringDashboard .header .total {
+.uiAuthoringDashboard .total {
 	background-color: #D0D0D0;
 	border-radius: 10px;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.37) inset;
 	color: #316399;
-	float: right;
 	font-weight: bold;
 	line-height: 18px;
-	margin-top: 3px;
+	margin: 3px 0px 0px 5px;
 	min-width: 30px;
 	text-align: center;
+	display: inline-block;
 }
 
 .uiAuthoringDashboard .noContent {
@@ -101,10 +62,14 @@ def escapeChar = '%' as char
 	border-top: 1px solid #c1c1c1;
 }
 
+.uiAuthoringDashboard .refresh {
+	margin-left: 20px;
+}
+
 </style>
-<div class="uiAuthoringDashboard" id="$uicomponent.id">
+<div class="uiAuthoringDashboard uiBox" id="$uicomponent.id">
   <div class="clearfix">
    <% uicomponent.renderChildren(); %>
   </div>
-  <div class="refresh"><a href="<%= uicomponent.event("Refresh") %>" rel="tooltip" data-placement="bottom" title="refresh">refresh</a></div><br/>
+  <a class="refresh btn" href="<%= uicomponent.event("Refresh") %>" rel="tooltip" data-placement="bottom" title="refresh">refresh</a>
 </div>
