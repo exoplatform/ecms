@@ -852,14 +852,17 @@ public class UIJCRExplorer extends UIContainer {
     // Store previous node path to history for backing
     if(previousPath != null && !currentPath_.equals(previousPath) && !back) {
       // If previous node path has paginator, store last page index to history
-      if (this.hasPaginator(previousPath, lastWorkspaceName_)) {
-        UIPageIterator pageIterator = this.findComponentById(UIDocumentInfo.CONTENT_PAGE_ITERATOR_ID);
-        if (pageIterator != null) {
-          record(previousPath, lastWorkspaceName_, pageIterator.getCurrentPage());
+      try{
+        if(this.hasPaginator(previousPath, lastWorkspaceName_)){
+          UIPageIterator pageIterator = this.findComponentById(UIDocumentInfo.CONTENT_PAGE_ITERATOR_ID);
+          if (pageIterator != null) {
+            record(previousPath, lastWorkspaceName_, pageIterator.getCurrentPage());
+          }
+        }else{
+          record(previousPath, lastWorkspaceName_);
         }
-      }
-      else {
-        record(previousPath, lastWorkspaceName_);
+      }catch(PathNotFoundException e){
+        LOG.info("This node " + previousPath +" is no longer accessible ");
       }
     }
   }
@@ -1004,17 +1007,10 @@ public class UIJCRExplorer extends UIContainer {
         }
       }
       if (firstTime) {
-        UIApplication uiApp = getAncestorOfType(UIApplication.class) ;
-        JCRExceptionManager.process(uiApp, e);
-        String workspace = null;
-        try {
-          workspace = session.getWorkspace().getName();
-        } catch (Exception e2) {
-          // do nothing
-        }
+        String workspace = session.getWorkspace().getName();
         if (LOG.isWarnEnabled()) {
           LOG.warn("The node cannot be found at " + nodePath
-            + (workspace == null ? "" : " into the workspace " + workspace));
+            + " into the workspace " + workspace);
         }
       }
       throw e;
