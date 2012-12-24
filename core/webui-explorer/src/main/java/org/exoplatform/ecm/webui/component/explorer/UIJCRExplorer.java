@@ -359,7 +359,7 @@ public class UIJCRExplorer extends UIContainer {
    */
   public boolean hasPaginator(String nodePath, String workspaceName) throws Exception {
     int nodePerPages = this.getPreference().getNodesPerPage();
-    return getNodeByPath(nodePath, this.getSessionByWorkspace(workspaceName)).getNodes().getSize() > nodePerPages;
+    return getNodeByPath(nodePath, this.getSessionByWorkspace(workspaceName), true, false).getNodes().getSize() > nodePerPages;
   }
 
   public void setDriveData(DriveData driveData) { driveData_ = driveData ; }
@@ -884,14 +884,17 @@ public class UIJCRExplorer extends UIContainer {
     // Store previous node path to history for backing
     if(previousPath != null && !currentPath_.equals(previousPath) && !back) {
       // If previous node path has paginator, store last page index to history
-      if (this.hasPaginator(previousPath, lastWorkspaceName_)) {
-        UIPageIterator pageIterator = this.findComponentById(UIDocumentInfo.CONTENT_PAGE_ITERATOR_ID);
-        if (pageIterator != null) {
-          record(previousPath, lastWorkspaceName_, pageIterator.getCurrentPage());
+      try{
+        if(this.hasPaginator(previousPath, lastWorkspaceName_)){
+          UIPageIterator pageIterator = this.findComponentById(UIDocumentInfo.CONTENT_PAGE_ITERATOR_ID);
+          if (pageIterator != null) {
+            record(previousPath, lastWorkspaceName_, pageIterator.getCurrentPage());
+          }
+        }else{
+          record(previousPath, lastWorkspaceName_);
         }
-      }
-      else {
-        record(previousPath, lastWorkspaceName_);
+      }catch(PathNotFoundException e){
+        LOG.info("This node " + previousPath +" is no longer accessible ");
       }
     }
   }
