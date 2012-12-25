@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanAddNodeFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.HasAllowedFolderTypeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsCheckedOutFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotCategoryFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
@@ -61,7 +62,8 @@ public class AddFolderActionComponent extends UIAbstractManagerComponent {
                                             new IsCheckedOutFilter(),
                                             new IsNotTrashHomeNodeFilter(),
                                             new IsNotInTrashFilter(),
-                                            new IsNotEditingDocumentFilter()});
+                                            new IsNotEditingDocumentFilter(),
+                                            new HasAllowedFolderTypeFilter()});
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
@@ -70,7 +72,8 @@ public class AddFolderActionComponent extends UIAbstractManagerComponent {
 
   public static void addFolder(Event<? extends UIComponent> event, UIJCRExplorer uiExplorer) throws Exception {
     UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
-    UIPopupContainer.activate(UIFolderForm.class, 600);
+    UIFolderForm folderForm = uiExplorer.createUIComponent(UIFolderForm.class, null, null);
+    UIPopupContainer.activate(folderForm, 420, 220, false);
     event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
   }
 

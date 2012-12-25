@@ -19,24 +19,20 @@ package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.nodetype.NodeDefinition;
-import javax.jcr.nodetype.NodeTypeManager;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.comparator.ItemOptionNameComparator;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.ecm.webui.form.validator.IllegalDMSCharValidator;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.web.application.ApplicationMessage;
-import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -50,132 +46,226 @@ import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
-import org.exoplatform.webui.form.validator.MandatoryValidator;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
     template =  "app:/groovy/webui/component/explorer/popup/action/UIAddFolder.gtmpl",
     events = {
       @EventConfig(listeners = UIFolderForm.SaveActionListener.class),
+      @EventConfig(listeners = UIFolderForm.OnChangeActionListener.class),
       @EventConfig(listeners = UIFolderForm.CancelActionListener.class, phase=Phase.DECODE)
     }
 )
 
 public class UIFolderForm extends UIForm implements UIPopupComponent {
-  final static public String FIELD_NAME = "name" ;
-  final static public String FIELD_TITLE = "title" ;
-  final static public String FIELD_TYPE = "type" ;
-  private String allowCreateFolder_ ;
+  public static final String FIELD_TITLE_TEXT_BOX = "titleTextBox";
+  public static final String FIELD_CUSTOM_TYPE_CHECK_BOX = "customTypeCheckBox";
+  public static final String FIELD_CUSTOM_TYPE_SELECT_BOX = "customTypeSelectBox";
+  
+  private static final String MANAGED_SITES = "Managed Sites";
+  
+  private String selectedType;
 
+  /**
+   * Constructor.
+   * 
+   * @throws Exception
+   */
   public UIFolderForm() throws Exception {
+    // Title checkbox
+    UIFormStringInput titleTextBox = new UIFormStringInput(FIELD_TITLE_TEXT_BOX, FIELD_TITLE_TEXT_BOX, null);
+    this.addUIFormInput(titleTextBox);
+    
+    // Custom type checkbox
+    UICheckBoxInput customTypeCheckBox = new UICheckBoxInput(FIELD_CUSTOM_TYPE_CHECK_BOX, FIELD_CUSTOM_TYPE_CHECK_BOX, false);
+    customTypeCheckBox.setRendered(false);
+    customTypeCheckBox.setOnChange("OnChange");
+    this.addUIFormInput(customTypeCheckBox);
+    
+    // Custom type selectbox
+    UIFormSelectBox customTypeSelectBox = new UIFormSelectBox(FIELD_CUSTOM_TYPE_SELECT_BOX, FIELD_CUSTOM_TYPE_SELECT_BOX, null);
+    customTypeSelectBox.setRendered(false);
+    this.addUIFormInput(customTypeSelectBox);
+
+    // Set action
+    this.setActions(new String[]{"Save", "Cancel"});
   }
 
+  /**
+   * Activate form.
+   */
   public void activate() throws Exception {
-    RequestContext context = RequestContext.getCurrentInstance() ;
-    ResourceBundle res = context.getApplicationResourceBundle() ;
-    UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
-    Node currentNode = uiExplorer.getCurrentNode();
-    List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
-    String foldertypes = uiExplorer.getDriveData().getAllowCreateFolders();
-    if (foldertypes.contains(",")) {
-      addUIFormInput(new UIFormSelectBox(FIELD_TYPE, FIELD_TYPE, null));
-      String[] arrFoldertypes = foldertypes.split(",");
-      String label = "";
-      NodeTypeManager ntManager = currentNode.getSession().getWorkspace().getNodeTypeManager();
-      for (String foldertype : arrFoldertypes) {
-        if (currentNode.isNodeType(Utils.NT_FOLDER)
-            && !ntManager.getNodeType(foldertype).isNodeType(Utils.NT_FOLDER)) {
-          continue;
-        }
-        try {
-          label = res.getString(getId() + ".label." + foldertype.replace(":", "_"));
-        } catch (MissingResourceException e) {
-          label = foldertype;
-        }
-        options.add(new SelectItemOption<String>(label, foldertype));
+    UICheckBoxInput customTypeCheckBox = this.getUICheckBoxInput(FIELD_CUSTOM_TYPE_CHECK_BOX);
+    UIFormSelectBox customTypeSelectBox = this.getUIFormSelectBox(FIELD_CUSTOM_TYPE_SELECT_BOX);
+      
+    // Get allowed folder types in current path
+    UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
+    List<String> folderTypes = Utils.getAllowedFolderTypesInCurrentPath(uiExplorer.getCurrentNode(),
+                                                                        uiExplorer.getDriveData());
+    
+    // Only render custom type checkbox if at least 2 folder types allowed
+    if (folderTypes.size() > 1) {
+      customTypeCheckBox.setRendered(true);
+      if (MANAGED_SITES.equals(this.getAncestorOfType(UIJCRExplorer.class).getDriveData().getName())) {
+        customTypeCheckBox.setChecked(true);
+        customTypeSelectBox.setRendered(true);
+        this.fillCustomTypeSelectBox(folderTypes);
+      } else {
+        customTypeCheckBox.setChecked(false);
+        customTypeSelectBox.setRendered(false);
       }
-      Collections.sort(options, new ItemOptionNameComparator());
-      getUIFormSelectBox(FIELD_TYPE).setOptions(options);
     } else {
-      allowCreateFolder_ = foldertypes;
+      customTypeCheckBox.setRendered(false);
+      customTypeSelectBox.setRendered(false);
+      this.setSelectedType(folderTypes.get(0));
     }
-    addUIFormInput(new UIFormStringInput(FIELD_TITLE, FIELD_TITLE, null).addValidator(MandatoryValidator.class)
-                                                                        .addValidator(IllegalDMSCharValidator.class));
-    addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class)
-                                                                      .addValidator(IllegalDMSCharValidator.class));
-    setActions(new String[]{"Save", "Cancel"}) ;
-    getUIStringInput(FIELD_NAME).setValue(null) ;
-    getUIStringInput(FIELD_TITLE).setValue(null) ;
   }
+  
   public void deActivate() throws Exception {}
+  
+  /**
+   * Fill data to custom type select box.
+   * 
+   * @param folderTypes
+   * @throws Exception
+   */
+  private void fillCustomTypeSelectBox(List<String> folderTypes) throws Exception {
+    UIFormSelectBox customTypeSelectBox = this.getUIFormSelectBox(FIELD_CUSTOM_TYPE_SELECT_BOX);
+    List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
+    for (String folderType : folderTypes) {
+      String label = this.getLabel(folderType.replace(":", "_"));
+      options.add(new SelectItemOption<String>(label, folderType));
+    }
+    Collections.sort(options, new ItemOptionNameComparator());
+    customTypeSelectBox.setOptions(options);
+  }
+  
+  /**
+   * Get selected Folder Type.
+   * 
+   * @return the selectedType
+   */
+  public String getSelectedType() {
+    return selectedType;
+  }
+   
+  /**
+   * Set selected folder type.
+   * 
+   * @param selectedType the selectedType to set
+   */
+  private void setSelectedType(String selectedType) {
+    this.selectedType = selectedType;
+  }
+
+  public static class OnChangeActionListener extends EventListener<UIFolderForm> {
+    public void execute(Event<UIFolderForm> event) throws Exception {
+      UIFolderForm uiFolderForm = event.getSource();
+      UICheckBoxInput customTypeCheckBox = uiFolderForm.getUICheckBoxInput(FIELD_CUSTOM_TYPE_CHECK_BOX);
+      UIFormSelectBox customTypeSelectBox = uiFolderForm.getUIFormSelectBox(FIELD_CUSTOM_TYPE_SELECT_BOX);
+      
+      // Allowed folder types
+      UIJCRExplorer uiExplorer = uiFolderForm.getAncestorOfType(UIJCRExplorer.class);
+      List<String> folderTypes = 
+          Utils.getAllowedFolderTypesInCurrentPath(uiExplorer.getCurrentNode(),
+                                                   uiExplorer.getDriveData());
+
+      // Fill custom type select box
+      if (customTypeCheckBox.isChecked()) {
+        uiFolderForm.fillCustomTypeSelectBox(folderTypes);
+        customTypeSelectBox.setRendered(true);
+      } else {
+        customTypeSelectBox.setRendered(false);
+      }
+      
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiFolderForm);
+    }
+  }
 
   static  public class SaveActionListener extends EventListener<UIFolderForm> {
     public void execute(Event<UIFolderForm> event) throws Exception {
-      UIFolderForm uiFolderForm = event.getSource() ;
-      UIJCRExplorer uiExplorer = uiFolderForm.getAncestorOfType(UIJCRExplorer.class) ;
+      UIFolderForm uiFolderForm = event.getSource();
+      UIJCRExplorer uiExplorer = uiFolderForm.getAncestorOfType(UIJCRExplorer.class);
       UIApplication uiApp = uiFolderForm.getAncestorOfType(UIApplication.class);
-      String name = uiFolderForm.getUIStringInput(FIELD_NAME).getValue() ;
-      String title = uiFolderForm.getUIStringInput(FIELD_TITLE).getValue() ;
-      Node node = uiExplorer.getCurrentNode() ;
-      if (uiExplorer.nodeIsLocked(node)) {
-        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", null)) ;
-        
-        return ;
+      List<String> folderTypes = 
+          Utils.getAllowedFolderTypesInCurrentPath(uiExplorer.getCurrentNode(), uiExplorer.getDriveData());
+      UICheckBoxInput customTypeCheckBox = uiFolderForm.getUICheckBoxInput(FIELD_CUSTOM_TYPE_CHECK_BOX);
+      UIFormSelectBox customTypeSelectBox = uiFolderForm.getUIFormSelectBox(FIELD_CUSTOM_TYPE_SELECT_BOX);
+      
+      // Get title and name
+      String title = uiFolderForm.getUIStringInput(FIELD_TITLE_TEXT_BOX).getValue();
+      
+      // Validate input
+      Node currentNode = uiExplorer.getCurrentNode();
+      if (uiExplorer.nodeIsLocked(currentNode)) {
+        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", null, ApplicationMessage.WARNING));
+        return;
       }
-      if(name == null || name.length() ==0) {
-        uiApp.addMessage(new ApplicationMessage("UIFolderForm.msg.name-invalid", null)) ;
-        
-        return ;
+      if(StringUtils.isBlank(title)) {
+        uiApp.addMessage(new ApplicationMessage("UIFolderForm.msg.name-invalid", null, ApplicationMessage.WARNING));
+        return;
       }
-      if (title == null || title.length() == 0) {
-        uiApp.addMessage(new ApplicationMessage("UIFolderForm.msg.title-invalid", null)) ;
-        
-        return ;        
+      
+      // The name automatically determined from the title according to the current algorithm.
+      String name = Text.escapeIllegalJcrChars(org.exoplatform.services.cms.impl.Utils.cleanString(title));
+      
+      // Get selected folder type
+      if (customTypeCheckBox.isRendered()) {
+        if (customTypeCheckBox.isChecked()) {
+          String selectedValue = customTypeSelectBox.getValue();
+          uiFolderForm.setSelectedType(selectedValue);
+        } else {
+          if (folderTypes.contains(Utils.NT_FOLDER)) {
+            uiFolderForm.setSelectedType(Utils.NT_FOLDER);
+          } else {
+            // Message showing type nt:folder is not enabled, choose other type
+            uiApp.addMessage(
+                             new ApplicationMessage("UIFolderForm.msg.ntFolder-not-avaiable",
+                                                    null,
+                                                    ApplicationMessage.WARNING));
+            return;
+          }
+        }
       }
-
-      String type = null ;
-      if(uiFolderForm.getUIFormSelectBox(FIELD_TYPE) != null) {
-        type = uiFolderForm.getUIFormSelectBox(FIELD_TYPE).getValue() ;
-      } else {
-        type = uiFolderForm.allowCreateFolder_ ;
-      }
-      name = name.trim();
-      title = title.trim();
+      
       try {
-        Node addedNode = node.addNode(Text.escapeIllegalJcrChars(name), type);
+        // Add node
+        Node addedNode = currentNode.addNode(name, uiFolderForm.getSelectedType());
+  
+        // Set title
         if (!addedNode.hasProperty(Utils.EXO_TITLE)) {
           addedNode.addMixin(Utils.EXO_RSS_ENABLE);
         }
         addedNode.setProperty(Utils.EXO_TITLE, title);
-        node.getSession().save();
-        uiExplorer.updateAjax(event) ;
-      } catch(ConstraintViolationException cve) {
-        Object[] arg = { type } ;
-        throw new MessageException(new ApplicationMessage("UIFolderForm.msg.constraint-violation",
-            arg, ApplicationMessage.WARNING)) ;
-      } catch(AccessDeniedException accessDeniedException) {
-        uiApp.addMessage(new ApplicationMessage("UIFolderForm.msg.repository-exception-permission", null,
-            ApplicationMessage.WARNING)) ;
         
-        return ;
+        currentNode.getSession().save();
+        uiExplorer.updateAjax(event);
+      } catch(ConstraintViolationException cve) {
+        Object[] arg = { uiFolderForm.getSelectedType() };
+        throw new MessageException(
+            new ApplicationMessage("UIFolderForm.msg.constraint-violation", arg, ApplicationMessage.WARNING));
+      } catch(AccessDeniedException accessDeniedException) {
+        uiApp.addMessage(
+            new ApplicationMessage("UIFolderForm.msg.repository-exception-permission", null, ApplicationMessage.WARNING));
       } catch(RepositoryException re) {
-        String key = "";
-        NodeDefinition[] definitions = node.getPrimaryNodeType().getChildNodeDefinitions();
+        String key = "UIFolderForm.msg.repository-exception";
+        NodeDefinition[] definitions = currentNode.getPrimaryNodeType().getChildNodeDefinitions();
+        boolean isSameNameSiblingsAllowed = false;
         for (NodeDefinition def : definitions) {
-          if (node.hasNode(name) || !def.allowsSameNameSiblings()) {
-            key = "UIFolderForm.msg.not-allow-sameNameSibling";
-          } else {
-            key = "UIFolderForm.msg.repository-exception";
+          if (def.allowsSameNameSiblings()) {
+            isSameNameSiblingsAllowed = true;
+            break;
           }
         }
-        uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING));
-        
-        return ;
+        if (currentNode.hasNode(name) && !isSameNameSiblingsAllowed) {
+          key = "UIFolderForm.msg.not-allow-sameNameSibling";
+        }
+        uiApp.addMessage(
+            new ApplicationMessage(key, null, ApplicationMessage.WARNING));
       } catch(NumberFormatException nume) {
-        String key = "UIFolderForm.msg.numberformat-exception";
-        uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING));
-        
-        return ;
+        uiApp.addMessage(
+            new ApplicationMessage("UIFolderForm.msg.numberformat-exception", null, ApplicationMessage.WARNING));
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
       }

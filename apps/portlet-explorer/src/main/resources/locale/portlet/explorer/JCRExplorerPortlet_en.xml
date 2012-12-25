@@ -436,12 +436,11 @@
   <UIFolderForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>#{word.save}</Save>
+      <Save>Create Folder</Save>
     </action>
     <label>
-      <type>Type</type>
-      <name>Name</name>
-      <title>Title</title>
+      <titleTextBox>Folder Name:</titleTextBox>
+      <customTypeCheckBox>Use a custom type of folder</customTypeCheckBox>
     </label>
     <title>Add/Edit Folder</title>
     <msg>
@@ -456,7 +455,11 @@
       <numberformat-exception>Cannot save this folder. The name provided must be in the nummeric format.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>Cannot save the folder. This node does not accept 2 nodes with the same name.</not-allow-sameNameSibling>
+      <ntFolder-not-avaiable>You must select a custom type of folder</ntFolder-not-avaiable>
     </msg>
+    <help>
+      <customTypeCheckBoxHelp>Check if you intend to store web contents or custom document types in this folder</customTypeCheckBoxHelp>
+    </help>
   </UIFolderForm>
   <!--
   ###################################################################################
@@ -2805,7 +2808,11 @@
     <label>
       <nt_folder>Document Folder</nt_folder>
       <nt_unstructured>Content Folder</nt_unstructured>
-    </label>
+      <exo_cssFolder>CSS Folder</exo_cssFolder>
+      <exo_jsFolder>Javascript Folder</exo_jsFolder>
+      <exo_linkFolder>Link Folder</exo_linkFolder>
+      <exo_webFolder>Web Content Folder</exo_webFolder>
+   </label>
   </UIFolderForm>
 
   <Comments>

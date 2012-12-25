@@ -435,12 +435,11 @@
   <UIFolderForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>#{word.save}</Save>
+      <Save>Créer dossier</Save>
     </action>
     <label>
-      <type>Type</type>
-      <name>Nom</name>
-      <title>Titre</title>
+      <titleTextBox>Nom du dossier:</titleTextBox>
+      <customTypeCheckBox>Utiliser un type de dossier personalisé</customTypeCheckBox>
     </label>
     <title>Ajouter/Editer un répertoire</title>
     <msg>
@@ -455,7 +454,11 @@
       <numberformat-exception>Ce répertoire ne peut être sauvegardé. Vous devez saisir un format numérique</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>Impossible de sauvegarder car un autre noeud du même nom existe déjà</not-allow-sameNameSibling>
+      <ntFolder-not-avaiable>Vous devez sélectionner un type de dossier personnalisé</ntFolder-not-avaiable>
     </msg>
+    <help>
+      <customTypeCheckBoxHelp>Vérifier si vous avez l'intention de garder des contenus web ou des types de document personalisés dans ce dossier</customTypeCheckBoxHelp>
+    </help>
   </UIFolderForm>
   <!--
   ###################################################################################
@@ -2799,6 +2802,10 @@
     <label>
       <nt_folder>Répertoire de documents</nt_folder>
       <nt_unstructured>Répertoire de contenu</nt_unstructured>
+      <exo_cssFolder>Répertoire CSS</exo_cssFolder>
+      <exo_jsFolder>Répertoire Javascript</exo_jsFolder>
+      <exo_linkFolder>Répertoire de Liens</exo_linkFolder>
+      <exo_webFolder>Répertoire de contenu Web</exo_webFolder>
     </label>
   </UIFolderForm>
 
