@@ -782,20 +782,24 @@ function ECMUtils() {
    */
   ECMUtils.prototype.tabsContainer_OnResize = function () {
     var uiMainTabsContainer   = gj(Self.uiRightContainer).find("ul.uiTabsContainer:first")[0];
-	if (!uiMainTabsContainer) return; 
-	var listHideTabsContainer = gj(uiMainTabsContainer).find("li.listHiddenTabsContainer:first")[0];
+    if (!uiMainTabsContainer) return; 
+    var listHideTabsContainer = gj(uiMainTabsContainer).find("li.listHiddenTabsContainer:first")[0];
     var uiDropdownContainer   = gj(listHideTabsContainer).find("ul.dropdown-menu:first")[0];
-	Self.containerWithDropDownItem_OnResize(uiMainTabsContainer, listHideTabsContainer, uiDropdownContainer, "active");
+    var paddingLeft = gj(uiMainTabsContainer).css("padding-left").replace("px","");
+    var paddingRight = gj(uiMainTabsContainer).css("padding-right").replace("px","");
+    var allowedSpace  = uiMainTabsContainer.offsetWidth - paddingLeft - paddingRight;
+    gj(uiMainTabsContainer).find("li").removeClass("last");
+    Self.containerWithDropDownItem_OnResize(uiMainTabsContainer, allowedSpace, listHideTabsContainer, uiDropdownContainer, "active");
+    var visibleTabsChildren  = gj(uiMainTabsContainer).children("li").not(".dropdown");
+    gj(visibleTabsChildren[visibleTabsChildren.length-1]).addClass("last");
   }
   /**
    * @function       containerWithDropDownItem_OnResize
    * @purpose        re-arrange the a Container that contains visible items and dropdown list for the invisible items
    * @author         vinh_nguyen@exoplatform.com
    */
-  ECMUtils.prototype.containerWithDropDownItem_OnResize = function (mainContainer, listHiddenContainer, dropdownContainer, activeClass) {
-    var paddingLeft = gj(mainContainer).css("padding-left").replace("px","");
-    var paddingRight = gj(mainContainer).css("padding-right").replace("px","");
-    var allowedSpace  = mainContainer.offsetWidth - paddingLeft - paddingRight;
+  ECMUtils.prototype.containerWithDropDownItem_OnResize = function (mainContainer, allowedSpace, listHiddenContainer, dropdownContainer, activeClass) {
+    
     var visibleTabsChildren  = gj(mainContainer).children("li").not(".dropdown");
     var hiddenTabsChildren  = gj(dropdownContainer).children("li");
     var sumWidth = 0, i=0;
@@ -865,8 +869,7 @@ function ECMUtils() {
           hiddenFlag = false;
         }
       }
-  }
-  console.log(visibleTabsChildren.length + " : " + allowedSpace);
+    }
   }
   /**
    * @function        loadContainerReference
