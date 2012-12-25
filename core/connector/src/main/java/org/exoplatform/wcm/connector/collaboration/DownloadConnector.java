@@ -53,6 +53,7 @@ public class DownloadConnector implements ResourceContainer{
                            @PathParam("path") String path,
                            @QueryParam("version") String version) throws Exception {
     InputStream is = null;
+    String mimeType = MediaType.TEXT_XML;
     Node node = null;
     String fileName = null;
     SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
@@ -81,8 +82,10 @@ public class DownloadConnector implements ResourceContainer{
     } catch (AccessDeniedException ade) {
       return Response.status(HTTPStatus.UNAUTHORIZED).build();
     }
-
-    return Response.ok(is, MediaType.TEXT_XML)
+    if (node.getPrimaryNodeType().getName().equals("nt:file")) {
+      mimeType = node.getNode("jcr:content").getProperty("jcr:mimeType").getString();
+    }
+    return Response.ok(is, mimeType)
           .header("Content-Disposition","attachment; filename=" + fileName)
             .build();
   }
