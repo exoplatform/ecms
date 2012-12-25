@@ -29,7 +29,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
 
 @ComponentConfig(template = "system:/groovy/webui/core/UITabPane.gtmpl")
 public class UIViewManager extends UIAbstractManager {
-  public UIViewManager() throws Exception{
+  public UIViewManager() throws Exception{	
     addChild(UIViewContainer.class, null, null) ;
     UITemplateContainer uiECMTemp = addChild(UITemplateContainer.class, null, "ECMTemplate") ;
     uiECMTemp.addChild(UIECMTemplateList.class, null, null) ;

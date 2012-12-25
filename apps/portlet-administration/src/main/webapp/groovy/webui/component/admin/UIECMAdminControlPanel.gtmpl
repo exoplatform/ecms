@@ -9,45 +9,50 @@
 	return;
   }
   for (manager in managers) {
-	if (catego == null || !catego.equals(manager.getUIExtensionCategory())) {
-		// new category
-		catego = manager.getUIExtensionCategory();
-		typeManage.add(catego);
-		lGroups = new ArrayList();
-		managersGroup.add(lGroups);
-	}
-	lGroups.add(manager);
-  }
+		if (catego == null || !catego.equals(manager.getUIExtensionCategory())) {
+			// new category
+			catego = manager.getUIExtensionCategory();
+			typeManage.add(catego);
+			lGroups = new ArrayList();
+			managersGroup.add(lGroups);
+		}
+		lGroups.add(manager);
+  }  
+  def rcontext = _ctx.getRequestContext() ;
+  rcontext.getJavascriptManager().require("SHARED/ecm-utils", "ecmutil").addScripts("ecmutil.ECMUtils.loadTab() ;");
 %>
 		<div class="accordion" id="accordion">
 			<h6 class="menuHeader"><%=_ctx.appRes("UIRepositoryList.titlebar.label")%></h6>
 		<%
-		 int i = 0;
+		 int i = 0;		 
 		 for(type in typeManage) {
-		   def target = i;
-		   def currentBlockStyleClass = null;
-		   def currentBlockContentStyleClass = null;
+			 def currentBlockStyleClass = null;
+		   def styleCSS = null;
+		   def target = i;		   
 		   if (!uicomponent.isSameCategoryWithCurrentRenderedManager(type, typeManage, managersGroup)) {
-			 currentBlockStyleClass = "expaned collapsed";
-			 currentBlockContentStyleClass = "style=\"display:none; height: 0px;\"";
+			   currentBlockStyleClass = "collapsed";
 		   } else {
-			 currentBlockStyleClass = "collapsed expaned";
+			   currentBlockStyleClass = "expaned";
+			   styleCSS = " in";
 		   }
 		%>
 			<div class="accordion-group">
 				<div class="accordion-heading">
-					<div class="accordion-toggle <%=currentBlockStyleClass%>" data-toggle="collapse" data-parent="#accordion" href="#$target">
-						<a href="#modals" class=""><i class="uiIconSelected pull-right"></i><%=_ctx.appRes(uicomponent.getName() + ".tab.label." + type)%></a>
+					<div class="accordion-toggle <%=currentBlockStyleClass%>" style="padding: 0px;" data-toggle="collapse" data-parent="#accordion" href="#$target">
+						<a href="#modals" data-toggle="tab" style="display: block; padding: 8px 15px;"><i class="uiIconSelected pull-right"></i><%=_ctx.appRes(uicomponent.getName() + ".tab.label." + type)%></a>
 					</div>
 				</div>
-				<div id="$target" class="accordion-body collapse">
+				<div id="$target" class="accordion-body collapse <%=styleCSS%>">
 				<%
 					def groups = managersGroup.get(i) ;
 					for(group in groups) {
+						String cssName = group.getUIExtensionName();
+						if(cssName.startsWith("UI")) cssName = cssName.substring(2);
+						cssName = "uiIcon" + cssName;
 				%>
-					<div class="FunctionItem">
+					<div class="functionItem">
 					  <a href="<%=group.event(group.getUIExtensionName())%>">
-					  <div class="ItemIcon DefaultItemIcon <%=group.getUIExtensionName()%>Icon"><span></span></div>
+					  <i class="<%=cssName%>"></i>
 					  </a>
 					  <a class="ItemLabel" href="<%=group.event(group.getUIExtensionName())%>">
 						<%=_ctx.appRes(uicomponent.getName()+".label." + group.getUIExtensionName())%>

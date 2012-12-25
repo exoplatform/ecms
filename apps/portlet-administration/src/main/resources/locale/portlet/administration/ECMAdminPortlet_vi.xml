@@ -8,25 +8,26 @@
   <UIECMAdminControlPanel>
     <tab>
       <label>
-        <Ontologies>Quản lý phân loại</Ontologies>
-        <TypesOfContent>Quản lý nội dung</TypesOfContent>
-        <ContentPresentation>Trình bày nội dung</ContentPresentation>
-        <AdvanceConfiguaration>Cấu hình nâng cao</AdvanceConfiguaration>
+        <Templates>Templates</Templates>
+        <Explorer>Explorer</Explorer>
+        <Repository>Repository</Repository>
+        <Advanced>Advanced</Advanced>
       </label>
     </tab>
-    <label>
-      <UIFolksonomyManager>Quản lý nhãn</UIFolksonomyManager>
-      <UITaxonomyManager>Quản lý danh mục</UITaxonomyManager>
-      <UITaxonomyManagerTrees>Quản lý cây danh mục</UITaxonomyManagerTrees>
-      <UIMetadataManager>Quản lý dữ liệu Metadata</UIMetadataManager>
-      <UINamespaceManager>Quản lý namespace</UINamespaceManager>
-      <UINodeTypeManager>Quản lý nodetype</UINodeTypeManager>
-      <UITemplatesManager>Quản lý mẫu</UITemplatesManager>
-      <UIViewManager>Quản lý khung nhìn</UIViewManager>
-      <UIDriveManager>Quản lý ổ đĩa</UIDriveManager>
-      <UIQueriesManager>Quản lý các truy vấn</UIQueriesManager>
-      <UIActionManager>Quản lý hành động</UIActionManager>
-      <UIScriptManager>Quản lý kịch bản</UIScriptManager>
+    <label>     
+      <UITaxonomyManager>Manage Simple Category</UITaxonomyManager>
+      <UITaxonomyManagerTrees>Categories</UITaxonomyManagerTrees>
+      <UIMetadataManager>Metadata</UIMetadataManager>
+      <UINamespaceManager>Namespaces</UINamespaceManager>
+      <UINodeTypeManager>Node Types</UINodeTypeManager>
+      <UITemplatesManager>Documents</UITemplatesManager>
+      <UIViewManager>Views</UIViewManager>
+      <UIDriveManager>Drives</UIDriveManager>
+      <UIQueriesManager>Queries</UIQueriesManager>
+      <UIActionManager>Actions</UIActionManager>
+      <UIScriptManager>Scripts</UIScriptManager>
+      <UIUnLockManager>Locks</UIUnLockManager>
+      <UIFolksonomyManager>Tags</UIFolksonomyManager>      
     </label>
     <msg>
       <access-denied>Bạn không có quyền truy cập vào chức năng này.</access-denied>

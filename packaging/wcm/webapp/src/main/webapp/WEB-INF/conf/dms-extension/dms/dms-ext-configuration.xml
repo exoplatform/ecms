@@ -331,34 +331,14 @@
 			<name>Add Managers</name>
 			<set-method>registerUIExtensionPlugin</set-method>
 			<type>org.exoplatform.webui.ext.UIExtensionPlugin</type>
-			<init-params>
-				<object-param>
-					<name>UITaxonomyManagerTrees</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-						<field name="rank"><int>110</int></field>
-						<field name="name"><string>UITaxonomyManagerTrees</string></field>
-						<field name="category"><string>Ontologies</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UITaxonomyManagerTreesComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>UIFolksonomyManager</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-						<field name="rank"><int>130</int></field>
-						<field name="name"><string>UIFolksonomyManager</string></field>
-						<field name="category"><string>Ontologies</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UIFolksonomyManagerComponent</string></field>
-					</object>
-				</object-param>
+			<init-params>							
 				<object-param>
 					<name>UITemplatesManager</name>
 					<object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-						<field name="rank"><int>210</int></field>
+						<field name="rank"><int>110</int></field>
 						<field name="name"><string>UITemplatesManager</string></field>
-						<field name="category"><string>ContentPresentation</string></field>
+						<field name="category"><string>Templates</string></field>
 						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UITemplatesManagerComponent</string></field>
 					</object>
 				</object-param>
@@ -366,39 +346,55 @@
 					<name>UIMetadataManager</name>
 					<object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-						<field name="rank"><int>220</int></field>
+						<field name="rank"><int>120</int></field>
 						<field name="name"><string>UIMetadataManager</string></field>
-						<field name="category"><string>ContentPresentation</string></field>
+						<field name="category"><string>Templates</string></field>
 						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UIMetadataManagerComponent</string></field>
 					</object>
 				</object-param>
-				<object-param>
-					<name>UIViewManager</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-						<field name="rank"><int>230</int></field>
-						<field name="name"><string>UIViewManager</string></field>
-						<field name="category"><string>ContentPresentation</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UIViewManagerComponent</string></field>
-					</object>
-				</object-param>
+				
+				
+				
 				<object-param>
 					<name>UIDriveManager</name>
 					<object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-						<field name="rank"><int>240</int></field>
+						<field name="rank"><int>150</int></field>
 						<field name="name"><string>UIDriveManager</string></field>
-						<field name="category"><string>ContentPresentation</string></field>
+						<field name="category"><string>Explorer</string></field>
 						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UIDriveManagerComponent</string></field>
 					</object>
+				</object-param>				
+				<object-param>
+					<name>UIViewManager</name>
+					<object type="org.exoplatform.webui.ext.UIExtension">
+						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
+						<field name="rank"><int>140</int></field>
+						<field name="name"><string>UIViewManager</string></field>
+						<field name="category"><string>Explorer</string></field>
+						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UIViewManagerComponent</string></field>
+					</object>
 				</object-param>
+				<object-param>
+					<name>UIFolksonomyManager</name>
+					<object type="org.exoplatform.webui.ext.UIExtension">
+						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
+						<field name="rank"><int>160</int></field>
+						<field name="name"><string>UIFolksonomyManager</string></field>
+						<field name="category"><string>Explorer</string></field>
+						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UIFolksonomyManagerComponent</string></field>
+					</object>
+				</object-param>
+				
+				
+					
 				<object-param>
 					<name>UINamespaceManager</name>
 					<object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-						<field name="rank"><int>310</int></field>
+						<field name="rank"><int>170</int></field>
 						<field name="name"><string>UINamespaceManager</string></field>
-						<field name="category"><string>TypesOfContent</string></field>
+						<field name="category"><string>Repository</string></field>
 						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UINamespaceManagerComponent</string></field>
 					</object>
 				</object-param>
@@ -406,19 +402,55 @@
 					<name>UINodeTypeManager</name>
 					<object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-						<field name="rank"><int>320</int></field>
+						<field name="rank"><int>180</int></field>
 						<field name="name"><string>UINodeTypeManager</string></field>
-						<field name="category"><string>TypesOfContent</string></field>
+						<field name="category"><string>Repository</string></field>
 						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UINodeTypeManagerComponent</string></field>
 					</object>
 				</object-param>
 				<object-param>
+					<name>UIUnLockManager</name>
+					<object type="org.exoplatform.webui.ext.UIExtension">
+						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
+						<field name="rank"><int>190</int></field>
+						<field name="name"><string>UIUnLockManager</string></field>
+						<field name="category"><string>Repository</string></field>
+						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UIUnLockManagerComponent</string></field>
+						<!-- field name="extendedFilters">
+							<collection type="java.util.ArrayList">
+								<value>
+									<object type="org.exoplatform.webui.ext.filter.impl.UserACLFilter">
+										<field name="permissions">
+											<collection type="java.util.ArrayList">
+												<value>
+													<string>manager:/platform/administrators</string>
+												</value>
+											</collection>
+										</field>
+									</object>
+								</value>
+							</collection>
+						</field-->
+					</object>
+				</object-param>
+				
+				<object-param>
+					<name>UITaxonomyManagerTrees</name>
+					<object type="org.exoplatform.webui.ext.UIExtension">
+						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
+						<field name="rank"><int>200</int></field>
+						<field name="name"><string>UITaxonomyManagerTrees</string></field>
+						<field name="category"><string>Advanced</string></field>
+						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UITaxonomyManagerTreesComponent</string></field>
+					</object>
+				</object-param>	
+				<object-param>
 					<name>UIQueriesManager</name>
 					<object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-						<field name="rank"><int>410</int></field>
+						<field name="rank"><int>210</int></field>
 						<field name="name"><string>UIQueriesManager</string></field>
-						<field name="category"><string>AdvanceConfiguaration</string></field>
+						<field name="category"><string>Advanced</string></field>
 						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UIQueriesManagerComponent</string></field>
 						<!-- field name="extendedFilters">
 							<collection type="java.util.ArrayList">
@@ -441,9 +473,9 @@
 					<name>UIScriptManager</name>
 					<object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-						<field name="rank"><int>420</int></field>
+						<field name="rank"><int>220</int></field>
 						<field name="name"><string>UIScriptManager</string></field>
-						<field name="category"><string>AdvanceConfiguaration</string></field>
+						<field name="category"><string>Advanced</string></field>
 						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UIScriptManagerComponent</string></field>
 						<!-- field name="extendedFilters">
 							<collection type="java.util.ArrayList">
@@ -466,9 +498,9 @@
 					<name>UIActionManager</name>
 					<object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-						<field name="rank"><int>430</int></field>
+						<field name="rank"><int>230</int></field>
 						<field name="name"><string>UIActionManager</string></field>
-						<field name="category"><string>AdvanceConfiguaration</string></field>
+						<field name="category"><string>Advanced</string></field>
 						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UIActionManagerComponent</string></field>
 						<!-- field name="extendedFilters">
 							<collection type="java.util.ArrayList">
@@ -486,32 +518,7 @@
 							</collection>
 						</field-->
 					</object>
-				</object-param>
-				<object-param>
-					<name>UIUnLockManager</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
-						<field name="rank"><int>510</int></field>
-						<field name="name"><string>UIUnLockManager</string></field>
-						<field name="category"><string>AdvanceConfiguaration</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UIUnLockManagerComponent</string></field>
-						<!-- field name="extendedFilters">
-							<collection type="java.util.ArrayList">
-								<value>
-									<object type="org.exoplatform.webui.ext.filter.impl.UserACLFilter">
-										<field name="permissions">
-											<collection type="java.util.ArrayList">
-												<value>
-													<string>manager:/platform/administrators</string>
-												</value>
-											</collection>
-										</field>
-									</object>
-								</value>
-							</collection>
-						</field-->
-					</object>
-				</object-param>
+				</object-param>				
 			</init-params>
 		</component-plugin>
 		<component-plugin>

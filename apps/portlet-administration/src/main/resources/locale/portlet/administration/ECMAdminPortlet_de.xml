@@ -8,25 +8,26 @@
   <UIECMAdminControlPanel>
     <tab>
       <label>
-        <Ontologies>Ontologien</Ontologies>
-        <TypesOfContent>Inhaltstypen</TypesOfContent>
-        <ContentPresentation><![CDATA[Inhaltspr&auml;sentation]]></ContentPresentation>
-        <AdvanceConfiguaration>Vorausgeschrittene Konfiguration</AdvanceConfiguaration>
+        <Templates>Templates</Templates>
+        <Explorer>Explorer</Explorer>
+        <Repository>Repository</Repository>
+        <Advanced>Advanced</Advanced>
       </label>
     </tab>
-    <label>
-      <UIFolksonomyManager>Folksonomie verwalten</UIFolksonomyManager>
-      <UITaxonomyManager>Taxonomy verwalten</UITaxonomyManager>
-      <UITaxonomyManagerTrees>Verwalten Taxonomie Bäume</UITaxonomyManagerTrees>
-      <UIMetadataManager>Metadata verwalten</UIMetadataManager>
-      <UINamespaceManager>Namenspalte Eintragung</UINamespaceManager>
-      <UINodeTypeManager>Knotentypen verwalten</UINodeTypeManager>
-      <UITemplatesManager>Vorlagen verwalten</UITemplatesManager>
-      <UIViewManager>Ansicht verwalten</UIViewManager>
-      <UIDriveManager>Laufwerke verwalten</UIDriveManager>
-      <UIQueriesManager>Abfragen verwalten</UIQueriesManager>
-      <UIActionManager>Aktionstypen estellen</UIActionManager>
-      <UIScriptManager>Skripte verwalten</UIScriptManager>
+    <label>     
+      <UITaxonomyManager>Manage Simple Category</UITaxonomyManager>
+      <UITaxonomyManagerTrees>Categories</UITaxonomyManagerTrees>
+      <UIMetadataManager>Metadata</UIMetadataManager>
+      <UINamespaceManager>Namespaces</UINamespaceManager>
+      <UINodeTypeManager>Node Types</UINodeTypeManager>
+      <UITemplatesManager>Documents</UITemplatesManager>
+      <UIViewManager>Views</UIViewManager>
+      <UIDriveManager>Drives</UIDriveManager>
+      <UIQueriesManager>Queries</UIQueriesManager>
+      <UIActionManager>Actions</UIActionManager>
+      <UIScriptManager>Scripts</UIScriptManager>
+      <UIUnLockManager>Locks</UIUnLockManager>
+      <UIFolksonomyManager>Tags</UIFolksonomyManager>      
     </label>
     <msg>
       <access-denied>Kein Zugang! Sie haben in dieser Funktion keine Genehmigung.</access-denied>

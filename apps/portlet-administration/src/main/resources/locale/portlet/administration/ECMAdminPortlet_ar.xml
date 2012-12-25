@@ -8,25 +8,26 @@
   <UIECMAdminControlPanel>
     <tab>
       <label>
-        <Ontologies>التصنيف</Ontologies>
-        <TypesOfContent>أنواع المحتوى</TypesOfContent>
-        <ContentPresentation>عرض المحتوى</ContentPresentation>
-        <AdvanceConfiguaration>التهيئة المتطورة</AdvanceConfiguaration>
+        <Templates>Templates</Templates>
+        <Explorer>Explorer</Explorer>
+        <Repository>Repository</Repository>
+        <Advanced>Advanced</Advanced>
       </label>
     </tab>
-    <label>
-      <UIFolksonomyManager>التبويبات</UIFolksonomyManager>
-      <UITaxonomyManager>إدارة التصنيف</UITaxonomyManager>
-      <UITaxonomyManagerTrees>تصنيف إدارة الأشجار</UITaxonomyManagerTrees>
-      <UIMetadataManager>إدارة قالب المعلومات القياسية</UIMetadataManager>
-      <UINamespaceManager>سجل إسم الفضاء</UINamespaceManager>
-      <UINodeTypeManager>إدارة نوع العقدة</UINodeTypeManager>
-      <UITemplatesManager>إدارة القوالب</UITemplatesManager>
-      <UIViewManager>إدارة المشهد</UIViewManager>
-      <UIDriveManager>إدارة الأقراص</UIDriveManager>
-      <UIQueriesManager>إدارة الاستبيانات</UIQueriesManager>
-      <UIActionManager>إنشاء أنواع أعمال</UIActionManager>
-      <UIScriptManager>إدارة السكريبت</UIScriptManager>
+    <label>     
+      <UITaxonomyManager>Manage Simple Category</UITaxonomyManager>
+      <UITaxonomyManagerTrees>Categories</UITaxonomyManagerTrees>
+      <UIMetadataManager>Metadata</UIMetadataManager>
+      <UINamespaceManager>Namespaces</UINamespaceManager>
+      <UINodeTypeManager>Node Types</UINodeTypeManager>
+      <UITemplatesManager>Documents</UITemplatesManager>
+      <UIViewManager>Views</UIViewManager>
+      <UIDriveManager>Drives</UIDriveManager>
+      <UIQueriesManager>Queries</UIQueriesManager>
+      <UIActionManager>Actions</UIActionManager>
+      <UIScriptManager>Scripts</UIScriptManager>
+      <UIUnLockManager>Locks</UIUnLockManager>
+      <UIFolksonomyManager>Tags</UIFolksonomyManager>      
     </label>
     <msg>
       <access-denied> غير مسموح بالدخول!  لم تتحصل على الصلاحية في هذه المهمة!</access-denied>

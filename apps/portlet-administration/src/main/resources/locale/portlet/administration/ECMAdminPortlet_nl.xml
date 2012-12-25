@@ -8,25 +8,26 @@
   <UIECMAdminControlPanel>
     <tab>
       <label>
-        <Ontologies>Categorieën &amp; labels</Ontologies>
-        <TypesOfContent>Types van inhoud</TypesOfContent>
-        <ContentPresentation>Inhouds Presentatie</ContentPresentation>
-        <AdvanceConfiguaration>geavanceerd Configuratie</AdvanceConfiguaration>
+        <Templates>Templates</Templates>
+        <Explorer>Explorer</Explorer>
+        <Repository>Repository</Repository>
+        <Advanced>Advanced</Advanced>
       </label>
     </tab>
-    <label>
-      <UIFolksonomyManager>Tags beheer</UIFolksonomyManager>
-      <UITaxonomyManager>Eenvoudig te beheren Categorie</UITaxonomyManager>
-      <UITaxonomyManagerTrees>Categorieën beheer</UITaxonomyManagerTrees>
-      <UIMetadataManager>Metadata beheer</UIMetadataManager>
-      <UINamespaceManager>Namespace Register</UINamespaceManager>
-      <UINodeTypeManager>Node Type beheer</UINodeTypeManager>
-      <UITemplatesManager>Templates beheer</UITemplatesManager>
-      <UIViewManager>Zicht beheer</UIViewManager>
-      <UIDriveManager>Schijven beheer</UIDriveManager>
-      <UIQueriesManager>Queries beheer</UIQueriesManager>
-      <UIActionManager>Action Type aanmaken</UIActionManager>
-      <UIScriptManager>Scripts beheer</UIScriptManager>
+    <label>     
+      <UITaxonomyManager>Manage Simple Category</UITaxonomyManager>
+      <UITaxonomyManagerTrees>Categories</UITaxonomyManagerTrees>
+      <UIMetadataManager>Metadata</UIMetadataManager>
+      <UINamespaceManager>Namespaces</UINamespaceManager>
+      <UINodeTypeManager>Node Types</UINodeTypeManager>
+      <UITemplatesManager>Documents</UITemplatesManager>
+      <UIViewManager>Views</UIViewManager>
+      <UIDriveManager>Drives</UIDriveManager>
+      <UIQueriesManager>Queries</UIQueriesManager>
+      <UIActionManager>Actions</UIActionManager>
+      <UIScriptManager>Scripts</UIScriptManager>
+      <UIUnLockManager>Locks</UIUnLockManager>
+      <UIFolksonomyManager>Tags</UIFolksonomyManager>      
     </label>
     <msg>
       <access-denied>Toegang geweigerd! U hebt geen toegang tot deze functie.</access-denied>

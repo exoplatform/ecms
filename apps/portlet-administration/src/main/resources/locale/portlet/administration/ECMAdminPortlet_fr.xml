@@ -8,25 +8,26 @@
   <UIECMAdminControlPanel>
     <tab>
       <label>
-        <Ontologies>Catégories &amp; Tags</Ontologies>
-        <TypesOfContent>Types de contenu</TypesOfContent>
-        <ContentPresentation>Présentation des Contenus</ContentPresentation>
-        <AdvanceConfiguaration>Configuration Avancée</AdvanceConfiguaration>
+        <Templates>Templates</Templates>
+        <Explorer>Explorer</Explorer>
+        <Repository>Repository</Repository>
+        <Advanced>Advanced</Advanced>
       </label>
     </tab>
-    <label>
-      <UIFolksonomyManager>Gérer les étiquettes</UIFolksonomyManager>
-      <UITaxonomyManager>Gérer les Catégorie simple</UITaxonomyManager>
-      <UITaxonomyManagerTrees>Gérer les Catégories</UITaxonomyManagerTrees>
-      <UIMetadataManager>Gestion des Metadonnées</UIMetadataManager>
-      <UINamespaceManager>Espaces de Nommage</UINamespaceManager>
-      <UINodeTypeManager>Types de Contenu</UINodeTypeManager>
-      <UITemplatesManager>Formulaires</UITemplatesManager>
-      <UIViewManager>Vues</UIViewManager>
-      <UIDriveManager>Lecteurs</UIDriveManager>
-      <UIQueriesManager>Requêtes</UIQueriesManager>
-      <UIActionManager>Types d'Actions</UIActionManager>
+    <label>     
+      <UITaxonomyManager>Manage Simple Category</UITaxonomyManager>
+      <UITaxonomyManagerTrees>Categories</UITaxonomyManagerTrees>
+      <UIMetadataManager>Metadata</UIMetadataManager>
+      <UINamespaceManager>Namespaces</UINamespaceManager>
+      <UINodeTypeManager>Node Types</UINodeTypeManager>
+      <UITemplatesManager>Documents</UITemplatesManager>
+      <UIViewManager>Views</UIViewManager>
+      <UIDriveManager>Drives</UIDriveManager>
+      <UIQueriesManager>Queries</UIQueriesManager>
+      <UIActionManager>Actions</UIActionManager>
       <UIScriptManager>Scripts</UIScriptManager>
+      <UIUnLockManager>Locks</UIUnLockManager>
+      <UIFolksonomyManager>Tags</UIFolksonomyManager>      
     </label>
     <msg>
       <access-denied>Accès interdit. Vous n'avez pas les droits suffisants.</access-denied>

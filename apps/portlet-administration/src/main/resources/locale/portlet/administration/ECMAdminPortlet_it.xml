@@ -8,25 +8,26 @@
   <UIECMAdminControlPanel>
     <tab>
       <label>
-        <Ontologies>Categorie &amp; Tags</Ontologies>
-        <TypesOfContent>Tipi contenuto</TypesOfContent>
-        <ContentPresentation>Presentazione contenuto</ContentPresentation>
-        <AdvanceConfiguaration>Configurazione avanzata</AdvanceConfiguaration>
+        <Templates>Templates</Templates>
+        <Explorer>Explorer</Explorer>
+        <Repository>Repository</Repository>
+        <Advanced>Advanced</Advanced>
       </label>
     </tab>
-    <label>
-      <UIFolksonomyManager>Gestisci Tags</UIFolksonomyManager>
-      <UITaxonomyManager>Gestisci Categoria Semplice</UITaxonomyManager>
-      <UITaxonomyManagerTrees>Gestisci Categorie</UITaxonomyManagerTrees>
-      <UIMetadataManager>Gestisci Metadata</UIMetadataManager>
-      <UINamespaceManager>Registro namespace</UINamespaceManager>
-      <UINodeTypeManager>Gestisci Tipi di Nodo</UINodeTypeManager>
-      <UITemplatesManager>Gestisci Template</UITemplatesManager>
-      <UIViewManager>Gestisci Viste</UIViewManager>
-      <UIDriveManager>Gestisci Drive</UIDriveManager>
-      <UIQueriesManager>Gestisci Query</UIQueriesManager>
-      <UIActionManager>Crea Tipo di azione</UIActionManager>
-      <UIScriptManager>Gestisci Script</UIScriptManager>
+    <label>     
+      <UITaxonomyManager>Manage Simple Category</UITaxonomyManager>
+      <UITaxonomyManagerTrees>Categories</UITaxonomyManagerTrees>
+      <UIMetadataManager>Metadata</UIMetadataManager>
+      <UINamespaceManager>Namespaces</UINamespaceManager>
+      <UINodeTypeManager>Node Types</UINodeTypeManager>
+      <UITemplatesManager>Documents</UITemplatesManager>
+      <UIViewManager>Views</UIViewManager>
+      <UIDriveManager>Drives</UIDriveManager>
+      <UIQueriesManager>Queries</UIQueriesManager>
+      <UIActionManager>Actions</UIActionManager>
+      <UIScriptManager>Scripts</UIScriptManager>
+      <UIUnLockManager>Locks</UIUnLockManager>
+      <UIFolksonomyManager>Tags</UIFolksonomyManager>      
     </label>
     <msg>
       <access-denied>Accesso negato. Non hai il permesso di eseguire questa funzione.</access-denied>

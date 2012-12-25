@@ -8,25 +8,26 @@
   <UIECMAdminControlPanel>
     <tab>
       <label>
-        <Ontologies>カテゴリ &amp; タグ</Ontologies>
-        <TypesOfContent>コンテンツ タイプ</TypesOfContent>
-        <ContentPresentation>コンテンツプレゼンテーション</ContentPresentation>
-	<AdvanceConfiguaration>Advancedコンフィグレーション</AdvanceConfiguaration>
+        <Templates>Templates</Templates>
+        <Explorer>Explorer</Explorer>
+        <Repository>Repository</Repository>
+        <Advanced>Advanced</Advanced>
       </label>
     </tab>
-    <label>
-      <UIFolksonomyManager>管理タグ</UIFolksonomyManager>
-      <UITaxonomyManager>管理シンプルカテゴリ</UITaxonomyManager>
-      <UITaxonomyManagerTrees>管理 カテゴリ</UITaxonomyManagerTrees>
-      <UIMetadataManager>管理メタデータ</UIMetadataManager>
-      <UINamespaceManager>ネームスペースレジストリ</UINamespaceManager>
-      <UINodeTypeManager>管理ノードタイプ</UINodeTypeManager>
-      <UITemplatesManager>管理テンプレート</UITemplatesManager>
-      <UIViewManager>管理ビュー</UIViewManager>
-      <UIDriveManager>管理ドライブ</UIDriveManager>
-      <UIQueriesManager>管理クエリ</UIQueriesManager>
-      <UIActionManager>アクションタイプの作成</UIActionManager>
-      <UIScriptManager>管理スクリプト</UIScriptManager>
+    <label>     
+      <UITaxonomyManager>Manage Simple Category</UITaxonomyManager>
+      <UITaxonomyManagerTrees>Categories</UITaxonomyManagerTrees>
+      <UIMetadataManager>Metadata</UIMetadataManager>
+      <UINamespaceManager>Namespaces</UINamespaceManager>
+      <UINodeTypeManager>Node Types</UINodeTypeManager>
+      <UITemplatesManager>Documents</UITemplatesManager>
+      <UIViewManager>Views</UIViewManager>
+      <UIDriveManager>Drives</UIDriveManager>
+      <UIQueriesManager>Queries</UIQueriesManager>
+      <UIActionManager>Actions</UIActionManager>
+      <UIScriptManager>Scripts</UIScriptManager>
+      <UIUnLockManager>Locks</UIUnLockManager>
+      <UIFolksonomyManager>Tags</UIFolksonomyManager>      
     </label>
     <msg>
       <access-denied>アクセスできません！権限がありません</access-denied>

@@ -1650,6 +1650,18 @@ ECMUtils.prototype.collapseAlternativeText = function (displayDiv) {
   }
 };
 
+ECMUtils.prototype.loadTab = function() {
+  gj('.UIECMAdminPortlet a[data-toggle="tab"]').on('show', function (e) {
+    var target = e.target;
+    var parent = gj(target).parent();
+
+    gj('.UIECMAdminPortlet div[data-toggle="collapse"]').each(function(i,el) {
+      gj(el).attr('class','accordion-toggle collapsed');      
+    });
+    gj(parent).attr('class', 'accordion-toggle expaned');
+  })  
+};
+
 ECMUtils.prototype.ajaxRedirect = function(url) {
   url =	url.replace(/&amp;/g, "&") ;
   window.location.href = url ;
