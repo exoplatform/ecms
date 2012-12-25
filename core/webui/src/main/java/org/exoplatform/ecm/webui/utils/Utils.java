@@ -55,6 +55,7 @@ import org.exoplatform.portal.resource.SkinConfig;
 import org.exoplatform.portal.resource.SkinService;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.documents.TrashService;
+import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
@@ -62,6 +63,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.impl.core.nodetype.NodeTypeImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.resources.ResourceBundleService;
@@ -1072,5 +1074,27 @@ public class Utils {
       sb.append("?version=" + node.getParent().getName());
     }
     return sb.toString();
+  }
+  
+  /**
+   * Get allowed folder types in current path.
+   * 
+   * @param currentNode
+   * @param currentDrive
+   * @return List<String> of node types
+   * @throws Exception
+   */
+  public static List<String> getAllowedFolderTypesInCurrentPath(Node currentNode, DriveData currentDrive) throws Exception {
+    List<String> allowedTypes = new ArrayList<String>();
+    NodeTypeImpl currentNodeType = (NodeTypeImpl)currentNode.getPrimaryNodeType(); 
+    String[] arrFoldertypes = currentDrive.getAllowCreateFolders().split(",");
+
+    for(String strFolderType : arrFoldertypes) {
+      if ((currentNodeType).isChildNodePrimaryTypeAllowed(strFolderType)) {
+        allowedTypes.add(strFolderType);
+      }
+    }
+      
+    return allowedTypes;
   }
 }
