@@ -449,12 +449,11 @@
   <UIFolderForm>
     <action>
       <Cancel>Hủy bỏ</Cancel>
-      <Save>Lưu</Save>
+      <Save>Tạo thư mục</Save>
     </action>
     <label>
-      <type>Loại</type>
-      <name>Tên</name>
-      <title>Tiêu đề</title>
+      <titleTextBox>Tên thư mục:</titleTextBox>
+      <customTypeCheckBox>Sử dụng thư mục tuỳ chỉnh</customTypeCheckBox>
     </label>
     <title>Thêm/Sửa đổi thư mục</title>
     <msg>
@@ -469,7 +468,11 @@
       <numberformat-exception>Không thể lưu lại thư mục này. Tên đưa vào phải là kiểu số</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
       <not-allow-sameNameSibling>Không thể lưu lại thư mục này. Loại node này không hỗ trợ trùng tên</not-allow-sameNameSibling>
+      <ntFolder-not-avaiable>Bạn phải chọn kiểu thư mục tuỳ chỉnh</ntFolder-not-avaiable>
     </msg>
+    <help>
+      <customTypeCheckBoxHelp>Chọn nếu bạn định lưu nội dung web hay thư mục tuỳ chỉnh trong thư mục hiện tại</customTypeCheckBoxHelp>
+    </help>
   </UIFolderForm>
   <!--
   ###################################################################################
@@ -2778,6 +2781,10 @@
     <label>
       <nt_folder>Thư mục tài liệu</nt_folder>
       <nt_unstructured>Thư  mục nội dung</nt_unstructured>
+      <exo_cssFolder>CSS Folder</exo_cssFolder>
+      <exo_jsFolder>Javascript Folder</exo_jsFolder>
+      <exo_linkFolder>Link Folder</exo_linkFolder>
+      <exo_webFolder>Web Content Folder</exo_webFolder>
     </label>
   </UIFolderForm>
   	<Comments>

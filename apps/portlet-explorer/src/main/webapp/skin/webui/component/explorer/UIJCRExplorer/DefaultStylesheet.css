@@ -959,6 +959,19 @@
 	padding: 10px;
 }
 
+.UIJCRExplorerPortlet .UIJCRExplorer .UIFolderForm input[type="text"]{
+	width: 350px;
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIFolderForm select{
+	width: 130px;
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIFolderForm .FieldLabel {
+	width: 128px;
+	text-align: left;
+}
+
 /*================================UIUploadForm===================================*/
 
 .UIJCRExplorerPortlet .UIUploadManager {

@@ -2124,6 +2124,10 @@
     <label>
       <nt_folder>フォルダ</nt_folder>
       <nt_unstructured>体系化されていないフォルダ</nt_unstructured>
+      <exo_cssFolder>CSS Folder</exo_cssFolder>
+      <exo_jsFolder>Javascript Folder</exo_jsFolder>
+      <exo_linkFolder>Link Folder</exo_linkFolder>
+      <exo_webFolder>Web Content Folder</exo_webFolder>
     </label>
   </DriveInputSet>
 		<UIDriveForm>
