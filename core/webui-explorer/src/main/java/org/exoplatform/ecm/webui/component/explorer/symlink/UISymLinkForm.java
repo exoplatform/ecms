@@ -214,7 +214,8 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
       try {
         Node targetNode = (Node) nodeFinder.getItem(workspaceName, pathNode);
         if(targetNode.isLocked()) {
-          targetNode.getSession().addLockToken(LockUtil.getLockToken(targetNode));  
+          uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", new String[] {targetNode.getPath()})) ;
+          return;
         }
         if (uiSymLinkForm.localizationMode) {
           MultiLanguageService langService = uiSymLinkForm.getApplicationComponent(MultiLanguageService.class);

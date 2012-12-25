@@ -27,23 +27,23 @@ import javax.jcr.Node;
 import javax.jcr.Session;
 import javax.jcr.nodetype.ConstraintViolationException;
 
-import org.exoplatform.services.jcr.util.Text;
-import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanAddNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanAddSymlinkFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsCheckedOutFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsLockForSymlink;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotSymlinkFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
 import org.exoplatform.ecm.webui.component.explorer.symlink.UISymLinkManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -72,7 +72,7 @@ public class AddSymLinkActionComponent extends UIAbstractManagerComponent {
   private static final List<UIExtensionFilter> FILTERS =
     Arrays.asList(new UIExtensionFilter[]{new CanAddNodeFilter(),
                                           new CanAddSymlinkFilter(),
-                                          new IsNotLockedFilter(),
+                                          new IsLockForSymlink(),
                                           new IsCheckedOutFilter(),
                                           new IsNotSymlinkFilter(),
                                           new IsNotTrashHomeNodeFilter(),
