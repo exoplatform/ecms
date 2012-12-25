@@ -79,7 +79,7 @@
                               <li $tabStyle onclick="<%=uicomponent.event('ChangeTab', tab); %>; eXo.ecm.ECMUtils.tabsContainer_OnResize();">
                                 <a rel="tooltip" data-placement="bottom" title="$fullTabName" data-toggle="tab" href="#tab1_4">$displayTabName</a>
                               </li>                                                                                           <%
-				  }                                                                                                   %>
+          }/*for tabs loops*/                                                                                   %>
                               <li class="dropdown pull-right listHiddenTabsContainer">
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">More <b class="caret"></b></a>
                                   <ul class="dropdown-menu">

@@ -580,36 +580,6 @@ function ECMUtils() {
        }
     }
   };
-  
-  /**
-   * @function        hiddenActionContainerTrigger
-   * @purpose         display/hidden more button of ActionContainer
-   * @author          vinh_nguyen@exoplatform.com
-   */
-  ECMUtils.prototype.hiddenActionContainerTrigger = function (event) {
-  	event = event || window.event;
-    event.cancelBubble = true;
-    if (!Self.actionBarContainer) Self.actionBarContainer = document.getElementById('DMSMenuItemContainer');
-    if (!Self.listHiddenActionContainer) Self.listHiddenActionContainer = gj(Self.actionBarContainer).find("div.ListHiddenActionContainer:first")[0];
-    if (!Self.showMoreActionContainer) Self.showMoreActionContainer = document.getElementById("ShowMoreActionContainer");
-    var hiddenActionChildren = gj(Self.listHiddenActionContainer).children(".NormalSubItem");
-    
-    if (hiddenActionChildren.length > 0) {
-      if (Self.listHiddenActionContainer.style.display == "block") {
-        Self.listHiddenActionContainer.style.display = "none";
-        gj(Self.showMoreActionContainer).removeClass("MoreContainerActivated");
-        Self.closeAllPopup(Self.listHiddenActionContainer);
-      } else {
-      	Self.closeAllPopup(Self.listHiddenActionContainer);
-        Self.listHiddenActionContainer.style.display = "block";
-        gj(Self.showMoreActionContainer).addClass("MoreContainerActivated");
-        Self.pushMoreBlock(Self.showMoreActionContainer);
-      }
-    } else {
-      Self.showMoreActionContainer.style.display = "none";
-    }
-    Self.loadContainerWidth();
-  }
 
   ECMUtils.prototype.showDocumentInformation = function (obj, event) {
     if (!obj) return;
@@ -823,78 +793,80 @@ function ECMUtils() {
    * @author         vinh_nguyen@exoplatform.com
    */
   ECMUtils.prototype.containerWithDropDownItem_OnResize = function (mainContainer, listHiddenContainer, dropdownContainer, activeClass) {
-    var allowedSpace  = mainContainer.offsetWidth;
-    var visibleTabsChildren  = gj(mainContainer).children("li");
-	var hiddenTabsChildren  = gj(dropdownContainer).children("li");
+    var paddingLeft = gj(mainContainer).css("padding-left").replace("px","");
+    var paddingRight = gj(mainContainer).css("padding-right").replace("px","");
+    var allowedSpace  = mainContainer.offsetWidth - paddingLeft - paddingRight;
+    var visibleTabsChildren  = gj(mainContainer).children("li").not(".dropdown");
+    var hiddenTabsChildren  = gj(dropdownContainer).children("li");
     var sumWidth = 0, i=0;
-	var hiddenFlag = true;
-	var showListContainerFlag;
-	var visitedItemIndex;
-	var removedItem;
-	var moveFlag;
-	//First, calculate the consumer space
-	if (visibleTabsChildren.length > 1) { // 1 item counted for the hiddenContainer LI
-	  for (i=0; i < visibleTabsChildren.length - 1; i++ ) {
-	    sumWidth += visibleTabsChildren[i].offsetWidth;
-	  }
-	  if (hiddenTabsChildren.length > 0) {
-	    gj(listHiddenContainer).css("display", "block");
-	    sumWidth += listHiddenContainer.offsetWidth;
-	  } else {
-	    gj(listHiddenContainer).css("display", "none");
-	  }
-	  moveFlag = typeof activeClass === 'undefined'?false:true;
+    var hiddenFlag = true;
+    var showListContainerFlag;
+    var visitedItemIndex;
+    var removedItem;
+    var moveFlag;
+    //First, calculate the consumer space
+    if (visibleTabsChildren.length > 0) {
+      for (i=0; i < visibleTabsChildren.length; i++ ) {
+      sumWidth += visibleTabsChildren[i].offsetWidth;
+    }
+    if (hiddenTabsChildren.length > 0) {
+      gj(listHiddenContainer).css("display", "block");
+      sumWidth += listHiddenContainer.offsetWidth;
+    } else {
+      gj(listHiddenContainer).css("display", "none");
+    }
+    moveFlag = typeof activeClass === 'undefined'?false:true;
 
-	  //Move from visible container to hidden
-	  visitedItemIndex = visibleTabsChildren.length - 2; //1 item counted for the hiddenContainer LI
-	  showListContainerFlag = gj(listHiddenContainer).css("display") == "none";
-	  while (sumWidth > allowedSpace && visitedItemIndex >= 0) {
-        if (moveFlag || (moveFlag && !gj(visibleTabsChildren[visitedItemIndex]).hasClass(activeClass))  ) {
+    //Move from visible container to hidden
+    visitedItemIndex = visibleTabsChildren.length - 1;
+    showListContainerFlag = gj(listHiddenContainer).css("display") == "none";
+    while (sumWidth > allowedSpace && visitedItemIndex >= 0) {
+        if (!moveFlag || (moveFlag && !gj(visibleTabsChildren[visitedItemIndex]).hasClass(activeClass))) {
           if (showListContainerFlag) {
-		    sumWidth += listHiddenContainer.offsetWidth;
-		    gj(listHiddenContainer).css("display", "block");
-		    showListContainerFlag = false;
-		  }
+            sumWidth += listHiddenContainer.offsetWidth;
+            gj(listHiddenContainer).css("display", "block");
+            showListContainerFlag = false;
+          }
           sumWidth -= visibleTabsChildren[visitedItemIndex].offsetWidth;
           removedItem = mainContainer.removeChild(visibleTabsChildren[visitedItemIndex]);
           gj(dropdownContainer).prepend(removedItem);
           hiddenFlag = false;
-		}
+        }
         visitedItemIndex--;
-	  }
-	} //Process with visbile
-	while (hiddenFlag) {
-	  visibleTabsChildren  = gj(mainContainer).children("li");
-	  hiddenTabsChildren  = gj(dropdownContainer).children("li");
-	  var remainItem = hiddenTabsChildren.length;
-	  sumWidth = 0;
-	  for (i=0; i < visibleTabsChildren.length - 1; i++ ) {
-	    sumWidth += visibleTabsChildren[i].offsetWidth;
-	  }
-	  if (remainItem > 0) {
-	    gj(listHiddenContainer).css("display", "block");
-	    sumWidth += listHiddenContainer.offsetWidth;
-	  } else {
-	    gj(listHiddenContainer).css("display", "none");
-		return;
-	  }
-	  removedItem = dropdownContainer.removeChild(hiddenTabsChildren[0]);
-      gj(mainContainer).append(removedItem);
-      sumWidth += removedItem.offsetWidth;
-      if (sumWidth >= (mainContainer.offsetWidth - (remainItem>1?listHiddenContainer.offsetWidth:0)) ) {
-        hiddenFlag = false;
-        mainContainer.removeChild(removedItem);
-        gj(dropdownContainer).prepend(removedItem);
-      } else {
-        hiddenTabsChildren = gj(dropdownContainer).children("li");
-        remainItem = hiddenTabsChildren.length;
-        if (remainItem <= 0) {
-        	gj(listHiddenContainer).css("display", "none");
-        	hiddenFlag = false;
+    }
+  } //Process with visbile
+  while (hiddenFlag) {
+    visibleTabsChildren  = gj(mainContainer).children("li").not(".dropdown");
+    hiddenTabsChildren  = gj(dropdownContainer).children("li");
+    var remainItem = hiddenTabsChildren.length;
+    sumWidth = 0;
+    for (i=0; i < visibleTabsChildren.length; i++ ) {
+      sumWidth += visibleTabsChildren[i].offsetWidth;
+    }
+    if (remainItem > 0) {
+      gj(listHiddenContainer).css("display", "block");
+      sumWidth += listHiddenContainer.offsetWidth;
+    } else {
+      gj(listHiddenContainer).css("display", "none");
+    return;
+    }
+    removedItem = dropdownContainer.removeChild(hiddenTabsChildren[0]);
+    gj(mainContainer).append(removedItem);
+    sumWidth += removedItem.offsetWidth;
+    if (sumWidth >= (allowedSpace + (remainItem>1?0:listHiddenContainer.offsetWidth)) ) {
+      hiddenFlag = false;
+      mainContainer.removeChild(removedItem);
+      gj(dropdownContainer).prepend(removedItem);
+    } else {
+      hiddenTabsChildren = gj(dropdownContainer).children("li");
+      remainItem = hiddenTabsChildren.length;
+      if (remainItem <= 0) {
+        gj(listHiddenContainer).css("display", "none");
+          hiddenFlag = false;
         }
       }
-	}
-	console.log(visibleTabsChildren.length + " : " + allowedSpace);
+  }
+  console.log(visibleTabsChildren.length + " : " + allowedSpace);
   }
   /**
    * @function        loadContainerReference
