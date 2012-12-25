@@ -1,6 +1,8 @@
-<div id="$uicomponent.id" class="uiECMAdminWorkingArea" exo:minwidth="300px" style="min-width: 300px;">
-	<h6 class="uiECMAdminFunctionTitle">
+<div id="$uicomponent.id" class="uiECMAdminWorkingArea uiBox" exo:minwidth="300px" style="min-width: 300px;">
+	<h5 class="title">
 		<%=_ctx.appRes("UIECMAdminControlPanel.label." + uicomponent.getRenderedCompId())%>
-	</h6>
-	<% uicomponent.renderChildren(); %>
+	</h5>
+	<div class="uiContentBox">
+		<% uicomponent.renderChildren(); %>
+	</div>
 </div>

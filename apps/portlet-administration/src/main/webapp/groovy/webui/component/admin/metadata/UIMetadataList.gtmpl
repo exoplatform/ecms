@@ -13,7 +13,7 @@
   int totalItems = uicomponent.getAllMetadatas().size();
   if(metaDatas == null) return ;
 %>
-<div class="UIMetadataList" id="UIMetadataList">
+<div class="uiMetadataList" id="UIMetadataList">
   <% if (totalItems > 5) { %>
   <div style="margin:3px 0px 5px 0px;">
     <%

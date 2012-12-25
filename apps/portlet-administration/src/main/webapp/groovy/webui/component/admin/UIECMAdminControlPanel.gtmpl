@@ -38,8 +38,8 @@
 		%>
 			<div class="accordion-group">
 				<div class="accordion-heading">
-					<div class="accordion-toggle <%=currentBlockStyleClass%>" style="padding: 0px;" data-toggle="collapse" data-parent="#accordion" href="#$target">
-						<a href="#modals" data-toggle="tab" style="display: block; padding: 8px 15px;"><i class="uiIconSelected pull-right"></i><%=_ctx.appRes(uicomponent.getName() + ".tab.label." + type)%></a>
+					<div class="accordion-toggle <%=currentBlockStyleClass%>" data-toggle="collapse" data-parent="#accordion" href="#$target">
+						<a href="#modals" data-toggle="tab" ><i class="uiIconSelected pull-right"></i><%=_ctx.appRes(uicomponent.getName() + ".tab.label." + type)%></a>
 					</div>
 				</div>
 				<div id="$target" class="accordion-body collapse <%=styleCSS%>">
@@ -50,14 +50,9 @@
 						if(cssName.startsWith("UI")) cssName = cssName.substring(2);
 						cssName = "uiIcon" + cssName;
 				%>
-					<div class="functionItem">
-					  <a href="<%=group.event(group.getUIExtensionName())%>">
-					  <i class="<%=cssName%>"></i>
+					  <a class="functionItem" href="<%=group.event(group.getUIExtensionName())%>">
+						<i class="<%=cssName%>"></i><%=_ctx.appRes(uicomponent.getName()+".label." + group.getUIExtensionName())%>
 					  </a>
-					  <a class="ItemLabel" href="<%=group.event(group.getUIExtensionName())%>">
-						<%=_ctx.appRes(uicomponent.getName()+".label." + group.getUIExtensionName())%>
-					  </a>
-					</div>
 				<%} %>
 				
 			  </div>
