@@ -526,7 +526,6 @@ public class UITreeExplorer extends UIContainer {
    * @throws Exception
    */
   public boolean hasChildNode(Node node) throws Exception {
-    List<Node> childrenList = new ArrayList<Node>();
     if(!node.hasNodes()) return false;
     UIJCRExplorer uiExplorer =  getAncestorOfType(UIJCRExplorer.class);
     Preference preferences = uiExplorer.getPreference();
@@ -537,28 +536,22 @@ public class UITreeExplorer extends UIContainer {
       Node tmpNode = iterator.nextNode();
       // Not allow to show hidden and non-document nodes
       if (!preferences.isShowHiddenNode() && !preferences.isShowNonDocumentType()) {
-        if(!tmpNode.isNodeType(org.exoplatform.ecm.webui.utils.Utils.EXO_HIDDENABLE) && isDocumentOrFolderType(tmpNode))
-          childrenList.add(tmpNode);
+        if(!tmpNode.isNodeType(org.exoplatform.ecm.webui.utils.Utils.EXO_HIDDENABLE) && isDocumentOrFolderType(tmpNode)) 
+        	return true;                 
       }
       // Not allow to show non-document nodes
       else if (preferences.isShowHiddenNode() && !preferences.isShowNonDocumentType()) {
-        if(isDocumentOrFolderType(tmpNode))
-          childrenList.add(tmpNode);
+        if(isDocumentOrFolderType(tmpNode)) return true; 
       }
       // Not allow to show hidden nodes
       else if (!preferences.isShowHiddenNode() && preferences.isShowNonDocumentType()) {
         if(!tmpNode.isNodeType(org.exoplatform.ecm.webui.utils.Utils.EXO_HIDDENABLE))
-          childrenList.add(tmpNode);
+        	return true;
       }
       // Allow to show hidden and non-document nodes
-      else {
-        childrenList.add(tmpNode);
-      }
+      else return true;
     }
-    if (childrenList.size() > 0)
-      return true;
-    else
-      return false;
+    return false;
   }
   /**
    * Check the node is passed is a document/folder or not.
