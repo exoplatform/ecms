@@ -494,6 +494,10 @@
       <title>Título</title>
       <nt_folder>Archivo del documento</nt_folder>
       <nt_unstructured>Carpeta de contenido</nt_unstructured>
+      <exo_cssFolder>CSS Folder</exo_cssFolder>
+      <exo_jsFolder>Javascript Folder</exo_jsFolder>
+      <exo_linkFolder>Link Folder</exo_linkFolder>
+      <exo_webFolder>Web Content Folder</exo_webFolder>
     </label>
     <title>Añadir/editar carpetas</title>
     <msg>
