@@ -96,7 +96,7 @@
     <openoffice.version>3.0.1</openoffice.version>
     <itunes.podcast.version>0.2</itunes.podcast.version>
     <org.hsqldb.version>2.0.0</org.hsqldb.version>
-    <org.apache.pdfbox.version>1.6.0</org.apache.pdfbox.version>
+    <org.apache.pdfbox.version>1.7.1</org.apache.pdfbox.version>
     <caja.version>r1</caja.version>
     <javax.resource.version>1.5</javax.resource.version>
     <org.jbossxb.version>2.0.1.GA</org.jbossxb.version>
@@ -114,6 +114,10 @@
 		<org.apache.batik.version>1.7</org.apache.batik.version>
     <org.apache.batik-util.version>1.6</org.apache.batik-util.version>
     <org.w3c.sac.version>1.3</org.w3c.sac.version>
+    <itext.version>2.1.7</itext.version>
+    <flying-saucer-core.version>9.0.1</flying-saucer-core.version>
+    <flying-saucer-pdf.version>9.0.1</flying-saucer-pdf.version>
+    <com.itextpdf.version>5.3.1</com.itextpdf.version>
     <!-- exopackage -->
     <org.exoplatform.exopackage.version>1.1.4</org.exoplatform.exopackage.version>
     <!-- We enforce Java 6 to build to use Chromattic and APT -->
