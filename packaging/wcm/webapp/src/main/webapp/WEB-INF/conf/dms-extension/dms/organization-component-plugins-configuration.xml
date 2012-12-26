@@ -24,33 +24,6 @@
             <field  name="jcrPaths">
              	<collection type="java.util.ArrayList">
                 <value>
-                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
-                    <field name="alias"><string>groupSharedData</string></field>
-                    <field name="path"><string>SharedData</string></field>
-                    <field name="nodeType"><string>nt:unstructured</string></field>
-                    <field name="permissions">
-                      <collection type="java.util.ArrayList">
-                        <value>
-                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
-                            <field name="identity"><string>*:/platform/administrators</string></field>
-                            <field name="read"><string>true</string></field>
-                            <field name="addNode"><string>true</string></field>
-                            <field name="setProperty"><string>true</string></field>
-                            <field name="remove"><string>true</string></field>
-                          </object>
-                        </value>
-                        <value>
-                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
-                            <field name="identity"><string>any</string></field>
-                            <field name="read"><string>true</string></field>
-                          </object>
-                        </value>
-                      </collection>
-                    </field>
-                  </object>
-                </value>
-
-                <value>
 		             	<object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
 		             		<field name="alias"><string>groupApplicationData</string></field>
 		                <field name="path"><string>ApplicationData</string></field>

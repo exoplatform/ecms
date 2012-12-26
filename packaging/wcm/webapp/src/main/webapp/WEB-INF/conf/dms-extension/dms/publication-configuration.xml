@@ -15,13 +15,4 @@
     <type>org.exoplatform.services.ecm.publication.impl.PublicationPresentationServiceImpl</type>
   </component>
  
-	<!-- <external-component-plugins>
-	  <target-component>org.exoplatform.services.ecm.publication.PublicationService</target-component>      
-	  <component-plugin>
-	    <name>StaticAndDirect</name>
-	    <set-method>addPublicationPlugin</set-method>
-	    <type>org.exoplatform.services.ecm.publication.plugins.staticdirect.StaticAndDirectPublicationPlugin</type>
-	    <description>This publication lifecycle keeps the content at their original place. Any version of the Node can be published.</description>	    	    	   
-	  </component-plugin>
-	</external-component-plugins> -->	
 </configuration>

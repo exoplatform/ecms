@@ -47,7 +47,6 @@
   <import>war:/conf/dms-extension/dms/dms-session-providers-configuration.xml</import>
   
   <import>war:/conf/wcm-extension/kernel/schedule-configuration.xml</import>
-  <import>war:/conf/wcm-extension/jcr/jcr-configuration.xml</import>
   <import>war:/conf/wcm-extension/portal/resource-bundle-configuration.xml</import>
   <import>war:/conf/wcm-extension/dms/explorer-views-configuration.xml</import>
   <import>war:/conf/wcm-extension/dms/nodetype-templates-configuration.xml</import>
@@ -59,7 +58,6 @@
   <import>war:/conf/content-extended/authoring/configuration.xml</import>
   <import>war:/conf/wcm-extension/wcm/taxonomies-configuration.xml</import>
   <import>war:/conf/wcm-extension/wcm/metadata-configuration.xml</import>
-  <import>war:/conf/wcm-extension/wcm/wcm-configuration.xml</import>
   <import>war:/conf/wcm-extension/wcm/wcm-organization-configuration.xml</import>
   <import>war:/conf/wcm-extension/wcm/content-configuration.xml</import>
   <import>war:/conf/wcm-extension/wcm/seo-configuration.xml</import>  

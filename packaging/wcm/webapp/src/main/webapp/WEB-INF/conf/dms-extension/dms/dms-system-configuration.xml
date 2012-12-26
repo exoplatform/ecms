@@ -191,7 +191,7 @@
 				                      <field name="remove"><string>true</string></field>                
 				                    </object>  
 				                  </value>
-													<value>                            
+												         	<value>                            
 				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
 				                      <field name="identity"><string>any</string></field>
 				                      <field name="read"><string>true</string></field>                
@@ -219,7 +219,7 @@
 				                      <field name="remove"><string>true</string></field>                
 				                    </object>  
 				                  </value>
-													<value>                            
+													         <value>                            
 				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
 				                      <field name="identity"><string>any</string></field>
 				                      <field name="read"><string>true</string></field>                
@@ -232,34 +232,7 @@
 				              </field>   			               
 		              	</object>
 	              	</value>	              		              		              		              	
-	              	<value>              	
-		              	<object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">              	 	
-		              		<field  name="alias"><string>contentBrowserScripts</string></field>
-	                  <field  name="path"><string>/exo:ecm/scripts/content-browser</string></field>    
-		                  <field name="permissions">
-				                <collection type="java.util.ArrayList">               
-				                  <value>                            
-				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
-				                      <field name="identity"><string>*:/platform/administrators</string></field>
-				                      <field name="read"><string>true</string></field>                
-				                      <field name="addNode"><string>true</string></field>                
-				                      <field name="setProperty"><string>true</string></field>                
-				                      <field name="remove"><string>true</string></field>                
-				                    </object>  
-				                  </value>
-													<value>                            
-				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
-				                      <field name="identity"><string>any</string></field>
-				                      <field name="read"><string>true</string></field>                
-				                      <field name="addNode"><string>false</string></field>                
-				                      <field name="setProperty"><string>false</string></field>                
-				                      <field name="remove"><string>false</string></field>                
-				                    </object>  
-				                  </value>				                  
-				                </collection>
-				              </field>   			               
-		              	</object>
-	              	</value>	              		              		              		              	
+	              	          		              		              		              	
 	              	<value>              	
 		              	<object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">              	 	
 		              		<field  name="alias"><string>ecmExplorerScripts</string></field>
@@ -275,7 +248,7 @@
 				                      <field name="remove"><string>true</string></field>                
 				                    </object>  
 				                  </value>
-													<value>                            
+													         <value>                            
 				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
 				                      <field name="identity"><string>any</string></field>
 				                      <field name="read"><string>true</string></field>                
@@ -303,7 +276,7 @@
 				                      <field name="remove"><string>true</string></field>                
 				                    </object>  
 				                  </value>
-													<value>                            
+													         <value>                            
 				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
 				                      <field name="identity"><string>any</string></field>
 				                      <field name="read"><string>true</string></field>                
@@ -331,7 +304,7 @@
 				                      <field name="remove"><string>true</string></field>                
 				                    </object>  
 				                  </value>
-													<value>                            
+													         <value>                            
 				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
 				                      <field name="identity"><string>any</string></field>
 				                      <field name="read"><string>true</string></field>                
@@ -359,7 +332,7 @@
 				                      <field name="remove"><string>true</string></field>                
 				                    </object>  
 				                  </value>	
-													<value>                            
+													         <value>                            
 				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
 				                      <field name="identity"><string>any</string></field>
 				                      <field name="read"><string>true</string></field>                
@@ -387,7 +360,7 @@
 				                      <field name="remove"><string>true</string></field>                
 				                    </object>  
 				                  </value>
-													<value>                            
+													         <value>                            
 				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
 				                      <field name="identity"><string>any</string></field>
 				                      <field name="read"><string>true</string></field>                
@@ -415,7 +388,7 @@
 				                      <field name="remove"><string>true</string></field>                
 				                    </object>  
 				                  </value>
-													<value>                            
+													         <value>                            
 				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
 				                      <field name="identity"><string>any</string></field>
 				                      <field name="read"><string>true</string></field>                
@@ -443,7 +416,7 @@
 				                      <field name="remove"><string>true</string></field>                
 				                    </object>  
 				                  </value>	
-													<value>                            
+													         <value>                            
 				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
 				                      <field name="identity"><string>any</string></field>
 				                      <field name="read"><string>true</string></field>                
@@ -471,7 +444,7 @@
 				                      <field name="remove"><string>true</string></field>                
 				                    </object>  
 				                  </value>
-													<value>                            
+																						<value>                            
 				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
 				                      <field name="identity"><string>any</string></field>
 				                      <field name="read"><string>true</string></field>                
@@ -499,7 +472,7 @@
 				                      <field name="remove"><string>true</string></field>                
 				                    </object>  
 				                  </value>
-													<value>                            
+													         <value>                            
 				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
 				                      <field name="identity"><string>any</string></field>
 				                      <field name="read"><string>true</string></field>                
@@ -527,7 +500,7 @@
 				                      <field name="remove"><string>true</string></field>                
 				                    </object>  
 				                  </value>
-													<value>                            
+													         <value>                            
 				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
 				                      <field name="identity"><string>any</string></field>
 				                      <field name="read"><string>true</string></field>                
@@ -536,195 +509,12 @@
 				                      <field name="remove"><string>false</string></field>                
 				                    </object>  
 				                  </value>			                  
-				                </collection>
-				              </field>   			               
-		              	</object>
-	              	</value>	              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              	
-	              	<value>              	
-		              	<object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">              	 	
-		              		<field  name="alias"><string>contentBrowserTemplates</string></field>
-	                  <field  name="path"><string>/exo:ecm/views/templates/content-browser</string></field>   
-		                  <field name="permissions">
-				                <collection type="java.util.ArrayList">               
-				                  <value>                            
-				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
-				                      <field name="identity"><string>*:/platform/administrators</string></field>
-				                      <field name="read"><string>true</string></field>                
-				                      <field name="addNode"><string>true</string></field>                
-				                      <field name="setProperty"><string>true</string></field>                
-				                      <field name="remove"><string>true</string></field>                
-				                    </object>  
-				                  </value>
-													<value>                            
-				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
-				                      <field name="identity"><string>any</string></field>
-				                      <field name="read"><string>true</string></field>                
-				                      <field name="addNode"><string>false</string></field>                
-				                      <field name="setProperty"><string>false</string></field>                
-				                      <field name="remove"><string>false</string></field>                
-				                    </object>  
-				                  </value>		                  
-				                </collection>
-				              </field>   			               
-		              	</object>
-	              	</value>	              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              	
-	              	<value>              	
-		              	<object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">              	 	
-		              		<field  name="alias"><string>cbPathTemplates</string></field>
-	                  <field  name="path"><string>/exo:ecm/views/templates/content-browser/path</string></field>   
-		                  <field name="permissions">
-				                <collection type="java.util.ArrayList">               
-				                  <value>                            
-				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
-				                      <field name="identity"><string>*:/platform/administrators</string></field>
-				                      <field name="read"><string>true</string></field>                
-				                      <field name="addNode"><string>true</string></field>                
-				                      <field name="setProperty"><string>true</string></field>                
-				                      <field name="remove"><string>true</string></field>                
-				                    </object>  
-				                  </value>
-													<value>                            
-				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
-				                      <field name="identity"><string>any</string></field>
-				                      <field name="read"><string>true</string></field>                
-				                      <field name="addNode"><string>false</string></field>                
-				                      <field name="setProperty"><string>false</string></field>                
-				                      <field name="remove"><string>false</string></field>                
-				                    </object>  
-				                  </value>		                  
-				                </collection>
-				              </field>   			               
-		              	</object>
-	              	</value>	              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              	
-	              	
-	              	<value>              	
-		              	<object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">              	 	
-		              		<field  name="alias"><string>cbQueryTemplates</string></field>
-	                  <field  name="path"><string>/exo:ecm/views/templates/content-browser/query</string></field>   
-		                  <field name="permissions">
-				                <collection type="java.util.ArrayList">               
-				                  <value>                            
-				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
-				                      <field name="identity"><string>*:/platform/administrators</string></field>
-				                      <field name="read"><string>true</string></field>                
-				                      <field name="addNode"><string>true</string></field>                
-				                      <field name="setProperty"><string>true</string></field>                
-				                      <field name="remove"><string>true</string></field>                
-				                    </object>  
-				                  </value>	
-													<value>                            
-				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
-				                      <field name="identity"><string>any</string></field>
-				                      <field name="read"><string>true</string></field>                
-				                      <field name="addNode"><string>false</string></field>                
-				                      <field name="setProperty"><string>false</string></field>                
-				                      <field name="remove"><string>false</string></field>                
-				                    </object>  
-				                  </value>			                  
-				                </collection>
-				              </field>   			               
-		              	</object>
-	              	</value>	              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              	
-	              	<value>              	
-		              	<object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">              	 	
-		              		<field  name="alias"><string>cbScriptTemplates</string></field>
-	                  <field  name="path"><string>/exo:ecm/views/templates/content-browser/script</string></field>   
-		                  <field name="permissions">
-				                <collection type="java.util.ArrayList">               
-				                  <value>                            
-				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
-				                      <field name="identity"><string>*:/platform/administrators</string></field>
-				                      <field name="read"><string>true</string></field>                
-				                      <field name="addNode"><string>true</string></field>                
-				                      <field name="setProperty"><string>true</string></field>                
-				                      <field name="remove"><string>true</string></field>                
-				                    </object>  
-				                  </value>
-													<value>                            
-				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
-				                      <field name="identity"><string>any</string></field>
-				                      <field name="read"><string>true</string></field>                
-				                      <field name="addNode"><string>false</string></field>                
-				                      <field name="setProperty"><string>false</string></field>                
-				                      <field name="remove"><string>false</string></field>                
-				                    </object>  
-				                  </value>			                  
-				                </collection>
-				              </field>   			               
-		              	</object>
-	              	</value>	              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              	
-	              	<value>              	
-		              	<object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">              	 	
-		              		<field  name="alias"><string>cbDetaiViewTemplates</string></field>
-	                  <field  name="path"><string>/exo:ecm/views/templates/content-browser/detail-document</string></field>   
-		                  <field name="permissions">
-				                <collection type="java.util.ArrayList">               
-				                  <value>                            
-				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
-				                      <field name="identity"><string>*:/platform/administrators</string></field>
-				                      <field name="read"><string>true</string></field>                
-				                      <field name="addNode"><string>true</string></field>                
-				                      <field name="setProperty"><string>true</string></field>                
-				                      <field name="remove"><string>true</string></field>                
-				                    </object>  
-				                  </value>
-													<value>                            
-				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
-				                      <field name="identity"><string>any</string></field>
-				                      <field name="read"><string>true</string></field>                
-				                      <field name="addNode"><string>false</string></field>                
-				                      <field name="setProperty"><string>false</string></field>                
-				                      <field name="remove"><string>false</string></field>                
-				                    </object>  
-				                  </value>	                  
 				                </collection>
 				              </field>   			               
 		              	</object>
 	              	</value>	              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              		              		              		              		              	        		              		              		              	
 	          	</collection>              	              	
 	          </field>
-	        </object>
-	      </object-param>
-	    </init-params>            
-	  </component-plugin>
-	  <component-plugin>
-	    <name>addPaths</name>
-	    <set-method>addPlugin</set-method>
-	    <type>org.exoplatform.services.jcr.ext.hierarchy.impl.AddPathPlugin</type>            
-	    <init-params>
-	      <object-param>
-	        <name>system.configuration</name>
-	        <description>configuration for the folksonomy path</description>
-	      	<object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
-	        	<field name="workspaces">
-	          	<collection type="java.util.ArrayList">
-	          		<value><string>system</string></value>              		
-	          	</collection>              	
-	          </field>
-	          <field  name="jcrPaths">
-	          	<collection type="java.util.ArrayList">
-                  
-                  <value>              	
-		              	<object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">              	 	
-		              		<field  name="alias"><string>businessProcessesPath</string></field>
-	                  <field  name="path"><string>/jcr:system/exo:ecm/business processes</string></field>   
-		                  <field name="permissions">
-				                <collection type="java.util.ArrayList">               
-				                  <value>                            
-				                    <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">             
-				                      <field name="identity"><string>*:/platform/administrators</string></field>
-				                      <field name="read"><string>true</string></field>                
-				                      <field name="addNode"><string>true</string></field>                
-				                      <field name="setProperty"><string>true</string></field>                
-				                      <field name="remove"><string>true</string></field>                
-				                    </object>  
-				                  </value>				                  
-				                </collection>
-				              </field>   			               
-		              	</object>
-	              	</value>
-	          	</collection>   
-	      		</field>
 	        </object>
 	      </object-param>
 	    </init-params>            

@@ -136,8 +136,6 @@ public class EmptyTrashManageComponent extends UIAbstractManagerComponent {
     uiExplorer.addLockToken(node);
     Node parentNode = node.getParent();
     uiExplorer.addLockToken(parentNode);
-    if (node.isNodeType(Utils.RMA_RECORD))
-      removeMixins(node);
     ActionServiceContainer actionService = uiExplorer.getApplicationComponent(ActionServiceContainer.class);
     actionService.removeAction(node, uiExplorer.getRepositoryName());
     ThumbnailService thumbnailService = uiExplorer.getApplicationComponent(ThumbnailService.class);

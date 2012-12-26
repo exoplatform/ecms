@@ -345,8 +345,6 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         }
       }
 
-      if (node.isNodeType(Utils.RMA_RECORD))
-        removeMixins(node);
       ActionServiceContainer actionService = getApplicationComponent(ActionServiceContainer.class);
       actionService.removeAction(node, uiExplorer.getRepositoryName());
       ThumbnailService thumbnailService = getApplicationComponent(ThumbnailService.class);
