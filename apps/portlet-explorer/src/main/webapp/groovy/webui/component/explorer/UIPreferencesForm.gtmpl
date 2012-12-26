@@ -57,9 +57,9 @@
 		<%// start render action%>
 		<div class="uiAction uiActionBorder"> 
 			<%String saveLink = uicomponent.event("Save");%>
-			<a onclick="$saveLink" class="btn btn-primary" href="javascript:window.scroll(0,0);"><%=_ctx.appRes(uicomponent.getName() + ".action.Save")%></a>
+			<button type="button" onclick="$saveLink" class="btn btn-primary" href="javascript:window.scroll(0,0);"><%=_ctx.appRes(uicomponent.getName() + ".action.Save")%></button>
 			<%String backLink = uicomponent.event("Back");%>
-			<a onclick="$backLink" class="btn" href="javascript:window.scroll(0,0);"><%=_ctx.appRes(uicomponent.getName() + ".action.Back")%></a>
+			<button type="button" onclick="$backLink" class="btn" href="javascript:window.scroll(0,0);"><%=_ctx.appRes(uicomponent.getName() + ".action.Back")%></button>
 		</div>
 		<%// end render action%>
 		

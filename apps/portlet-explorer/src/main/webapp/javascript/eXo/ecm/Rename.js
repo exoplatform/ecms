@@ -65,24 +65,12 @@ Create rename form markup.
 */
 Rename.prototype.createFormMarkup = function() {
   var formMarkup = '';
-  formMarkup += '<div class="UIPopupWindow UIRenameForm" id="UIRenameWindowPopup" style="width: auto; visibility: visible; z-index: 15;">';
-  formMarkup += '  <div class="UIWindowContent">';
-  formMarkup += '    <div class="PopupContent">';
-  formMarkup += '      <table>';
-  formMarkup += '        <tbody>';
-  formMarkup += '          <tr>';
-  formMarkup += '            <td><input name="renameField" type="text" id="renameField" value =""></td>';
-  formMarkup += '            <td class="UIAction">';
-  formMarkup += '              <a id = "renameLink" class="ActionButton LightBlueStyle" onclick="eXo.ecm.Rename.clickSave();">' + this.renameLabel + '</a>';
-  formMarkup += '            </td>';
-  formMarkup += '            <td class="UIAction">';
-  formMarkup += '              <a class="ActionButton LightBlueStyle" onclick="eXo.ecm.Rename.closePopup();">' + this.cancelLabel + '</a>';
-  formMarkup += '            </td>';
-  formMarkup += '          </tr>';
-  formMarkup += '        </tbody>';
-  formMarkup += '      </table>';
+  formMarkup += '<div class="UIPopupWindow uiPopup uiRenameForm" id="UIRenameWindowPopup" style="width: auto; visibility: visible; z-index: 15;">';
+  formMarkup += '    <div class="popupContent">';
+  formMarkup += '       <input name="renameField" type="text" id="renameField" value ="">';
+  formMarkup += '         <button type="button" id = "renameLink" class="btn btn-primary" onclick="eXo.ecm.Rename.clickSave();">' + this.renameLabel + '</button>';
+  formMarkup += '         <button type="button" class="btn" onclick="eXo.ecm.Rename.closePopup();">' + this.cancelLabel + '</button>';
   formMarkup += '    </div>';
-  formMarkup += '  </div>';
   formMarkup += '</div>';
 
   return formMarkup;
