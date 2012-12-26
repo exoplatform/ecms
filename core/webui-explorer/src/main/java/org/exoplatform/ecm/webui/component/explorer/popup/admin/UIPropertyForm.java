@@ -284,9 +284,10 @@ public class UIPropertyForm extends UIForm {
               break;
             }
             case 5:  {
-              SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-              listValue.add(dateFormat.format(value.getDate().getTime()));
-              break;
+               WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
+               Locale locale = requestContext.getLocale();
+               DateFormat dateFormat_ = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM, locale);
+               listValue.add(dateFormat_.format(value.getDate().getTime()));              break;
             }
             case 6: {
               listValue.add(Boolean.toString(value.getBoolean()));
@@ -316,9 +317,10 @@ public class UIPropertyForm extends UIForm {
             break;
           }
           case 5:  {
-            UIFormDateTimeInput uiFormDateTimeInput = getUIFormDateTimeInput(FIELD_VALUE);
-            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-            uiFormDateTimeInput.setValue(dateFormat.format(value.getDate().getTime()));
+             WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
+             Locale locale = requestContext.getLocale();
+             DateFormat dateFormat_ = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM, locale);
+             uiFormDateTimeInput.setValue(dateFormat_.format(value.getDate().getTime()));
             break;
           }
           case 6: {
@@ -371,8 +373,10 @@ public class UIPropertyForm extends UIForm {
               break;
             }
             case 5:  {
-              SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-              listValue.add(dateFormat.format(value.getDate().getTime()));
+               WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
+               Locale locale = requestContext.getLocale();
+               DateFormat dateFormat_ = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM, locale);
+               listValue.add(dateFormat_.format(value.getDate().getTime()));
               break;
             }
             case 6: {
@@ -403,9 +407,11 @@ public class UIPropertyForm extends UIForm {
             break;
           }
           case 5:  {
-            UIFormDateTimeInput uiFormDateTimeInput = getUIFormDateTimeInput(FIELD_VALUE);
-            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-            uiFormDateTimeInput.setValue(dateFormat.format(value.getDate().getTime()));
+             UIFormDateTimeInput uiFormDateTimeInput = getUIFormDateTimeInput(FIELD_VALUE);
+             WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
+             Locale locale = requestContext.getLocale();
+             DateFormat dateFormat_ = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM, locale);
+             uiFormDateTimeInput.setValue(dateFormat_.format(value.getDate().getTime()));
             break;
           }
           case 6: {
