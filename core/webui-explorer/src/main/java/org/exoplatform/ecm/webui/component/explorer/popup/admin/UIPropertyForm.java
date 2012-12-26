@@ -286,7 +286,7 @@ public class UIPropertyForm extends UIForm {
                Locale locale = requestContext.getLocale();
                DateFormat dateFormat_ = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM, locale);
                listValue.add(dateFormat_.format(value.getDate().getTime()));
-              break;
+                break;
             }
             case 6: {
               listValue.add(Boolean.toString(value.getBoolean()));
