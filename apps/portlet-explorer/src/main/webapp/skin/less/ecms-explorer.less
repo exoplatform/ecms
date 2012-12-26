@@ -361,4 +361,107 @@
 	}
 }
 
+/******** Vote of View1 **************/
+
+.uiVote {
+	
+	.voteRatingInfo {
+		font: normal normal 11px verdana;
+		float: left;
+		line-height: 16px;
+		
+		span {
+			color: #058ee6;
+		}
+	}
+
+	.avgRatingImages {
+		margin-left: 15px;
+		float: left;
+		
+		.voted {
+			float: left;
+			width: 16px;
+			height: 16px;
+			background: url('/eXoWCMResources/skin/images/vote/ImageVote.gif') no-repeat left top;
+			margin: 0px 1px;
+		}
+		
+		.unvoted {
+			float: left;
+			width: 16px;
+			height: 16px;
+			background: url('/eXoWCMResources/skin/images/vote/ImageVote.gif') no-repeat left -16px;
+			margin: 0px 1px;
+		}
+	}
+}
+
+/******** uiPreferencesForm **************/
+
+
+.uiPreferencesForm {
+	padding: 10px 10px 0px 10px;
+	width: auto !important;
+	
+	.UIPreferencesForm {
+		width: auto !important;
+	}
+	
+	.control-group {
+		margin-bottom: 15px;
+	}
+	
+	.sortByContent .selectbox {
+		width: 160px;
+		margin-left: 15px;
+	}
+	
+	.checkBoxContent {
+		width: 160px;
+		
+		.uiCheckbox {
+			margin: 5px 0px 0px 10px;
+		}
+	}
+	
+	.control-label {
+		display: inline-block;
+		margin: 0px;
+		font-size: 13px;
+	}
+	
+	.nodesContent {
+		margin-left: 10px;
+		
+		.selectbox {
+			width: 60px;
+			margin-left: 10px;
+		}
+	}
+	
+	.advancePreferences {
+		font-weight: bold;
+		color: @textColor;
+	}
+	
+	.advanceContent .row-fluid {
+		margin-bottom: 10px;
+		
+		.span6 .control-label {
+			width: 200px;
+		}
+		
+		.span12 .selectbox {
+			width: 80px;
+			margin-left: 10px;
+		}
+	}
+	
+	.uiAction {
+		margin: 15px -20px 0px -20px;
+		border-top: 1px solid @tableBorder;
+	}
+}
+
 

@@ -19,33 +19,22 @@
 <style>
 	<% _ctx.include(uicomponent.getTemplateSkin("mix:votable", "Stylesheet")); %>
 </style>
-<div class="UIVote">
-  <div class="VoteResultContainer">
-	  <div class="LeftVoteBar">
-	    <div class="RightVoteBar">
-	      <div class="CenterVoteBar ClearFix">
-					<div class="RatingInfoContainer">
-					  <div class="AvgRatingImages">
-					    <%
-					      int iVote = 0;
-					      while(++iVote <= voteRating) {
-					    %>
-					          <div class="Voted"><span></span></div>
-					      <%
-					        }
-					        while(iVote++ <= 5) {
-					      %>
-					        <div class="Unvoted"><span></span></div>
-					      <%}%>
-						</div>
-					</div>
-					<div class="VoteRatingInfo">
-					    <div class="VoteRatingLabel"><%=_ctx.appRes("Vote.view.label.avg-rating")%>: </div><div class="VotedInfo">$voteRating</div>
-					    <div class="VoteRatingLabel"><%=_ctx.appRes("Vote.view.label.subscription")%>: </div><div class="VotedInfo">$voteTotal</div>
-					</div>
-				
-				</div>
-		 	</div>
-		</div>
+<div class="uiVote clearfix">
+	<div class="voteRatingInfo">
+			<%=_ctx.appRes("Vote.view.label.avg-rating")%>: <span>$voteRating</span>
+			<%=_ctx.appRes("Vote.view.label.subscription")%>: <span>$voteTotal</span>
+	</div>
+	<div class="avgRatingImages clearfix">
+		<%
+			int iVote = 0;
+			while(++iVote <= voteRating) {
+		%>
+					<div class="voted"><span></span></div>
+			<%
+				}
+				while(iVote++ <= 5) {
+			%>
+				<div class="unvoted"><span></span></div>
+			<%}%>
 	</div>
 </div>
