@@ -25,11 +25,9 @@
   <table class="uiGrid table table-hover table-striped">
 	  <thead>
 	    <tr>
-	      <th><%=_ctx.appRes("UIMetadataList.header.icon")%></th>
-		    <th><%=_ctx.appRes("UIMetadataList.header.name")%></th>
-		    <th><%=_ctx.appRes("UIMetadataList.header.internalUse")%></th>
+	      <th><%=_ctx.appRes("UIMetadataList.header.name")%></th>
 		    <th><%=_ctx.appRes("UIMetadataList.header.type")%></th>
-		    <th><%=_ctx.appRes("UIMetadataList.header.action")%></th>
+		    <th class="center"><%=_ctx.appRes("UIMetadataList.header.action")%></th>
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -49,37 +47,20 @@
               nodeType = nodeType.replace(":", "_") ;
             %>
             <td>
-              <div style="margin: auto" class="default16x16Icon  ${nodeType}16x16Icon"><span></span></div>
+              <div><%=meta.getName()%></div>
             </td>
             <td>$meta.name</td>
-            <td>
-            	<div class="ActionContainer">
-	              <%
-	                String internalText = _ctx.appRes("UIMetadataList.label." + meta.getInternalUse()) ;
-	                String internalIconType = meta.getInternalUse() ;                
-	              %>
-				          <img class="Icon16x16 ${internalIconType}16x16Icon" alt="$internalText" src="/eXoResources/skin/sharedImages/Blank.gif"/>
-		              <span>$internalText</span>
-		           </div>
-            </td>
-            <td>
-            	<div class="ActionContainer">
-			          <img class="Icon16x16 True16x16Icon" alt="<%=_ctx.appRes("UIMetadataList.label.True")%>" src="/eXoResources/skin/sharedImages/Blank.gif"/>
-	              <span><%=_ctx.appRes("UIMetadataList.label.True")%></span>
-	            </div>
-            </td>
-            <td>
-            	<div class="ActionContainer">
-	                <img onclick="<%=uicomponent.event("View", meta.getName())%>" rel="tooltip" data-placement="bottom" alt="<%=_ctx.appRes("UIMetadataList.title.view")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="MetaView16x16Icon" title="<%=_ctx.appRes("UIMetadataList.title.view")%>"/>
-	                <img onclick="<%=uicomponent.event("Edit", meta.getName())%>" alt="<%=_ctx.appRes("UIMetadataList.title.edit")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Edit16x16Icon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIMetadataList.title.edit")%>"/>
+            
+            <td class="center">
+	                <i onclick="<%=uicomponent.event("View", meta.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIMetadataList.title.view")%>" class="uiIconView"></i>
+	                <i onclick="<%=uicomponent.event("Edit", meta.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIMetadataList.title.edit")%>" class="uiIconEdit"></i>
 	              <%
 	              	if(meta.hasTemplate()) {
 	              	%>
-			              <img onclick="<%=uicomponent.event("Delete", meta.getName())%>" alt="<%=_ctx.appRes("UIMetadataList.title.delete")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Delete16x16Icon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIMetadataList.title.delete")%>"/>
+	              	<i onclick="<%=uicomponent.event("Delete", meta.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIMetadataList.title.edit")%>" class="uiIconDelete"></i>
 	              	<%
 	              	}
 	              %>
-	            </div>
             </td>
           </tr>
       <%}%>  

@@ -256,10 +256,11 @@
     </title>
     <header>
       <icon>icoon</icon>
-      <name>Metadata naam</name>
-      <type>Mixin Type</type>
-      <internalUse>Intern gebruik</internalUse>
-      <action>Templates acties</action>
+      <internalUse>Intern gebruik</internalUse>      
+      <name>Metadata</name>
+      <type>Type</type>
+      <internalUse>Internal Use</internalUse>
+      <action>Action</action>
     </header>
     <msg>
       <confirm-delete>Wilt u Verwijderen ?</confirm-delete>

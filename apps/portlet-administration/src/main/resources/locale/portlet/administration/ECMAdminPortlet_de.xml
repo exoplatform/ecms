@@ -253,10 +253,10 @@
     </title>
     <header>
       <icon>Piktogramm</icon>
-      <name>Metadaten Name</name>
-      <type>Mixin Typ</type>
-      <internalUse>Interner Gebrauch</internalUse>
-      <action>Aktionen der Vorlagen</action>
+      <internalUse>Interner Gebrauch</internalUse>      
+      <name>Metadata</name>
+      <type>Type</type>
+      <action>Action</action>
     </header>
     <msg>
       <confirm-delete><![CDATA[Sind Sie sicher, dass Sie l&ouml;schen wollen ?]]></confirm-delete>

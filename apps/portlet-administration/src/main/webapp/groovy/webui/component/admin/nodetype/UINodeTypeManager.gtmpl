@@ -1,0 +1,15 @@
+<%
+import org.exoplatform.webui.core.UIContainer;
+import org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSearch;
+import org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeList
+%>
+<div class="<%=uicomponent.getId()%>" id="<%=uicomponent.getId()%>">
+		<%
+			uicomponent.renderChild(UINodeTypeSearchForm.class);
+		%>
+		
+		<%
+		  uicomponent.renderChild(UINodeTypeList.class);
+	  %>
+	
+</div>

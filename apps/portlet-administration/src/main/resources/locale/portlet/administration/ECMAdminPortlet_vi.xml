@@ -255,10 +255,10 @@
     </title>
     <header>
       <icon>Biểu tượng</icon>
-      <name>Tên Metadata</name>
-      <type>Loại Mixin</type>
-      <internalUse>Sử dụng nội bộ</internalUse>
-      <action>Các hành động của mẫu</action>
+      <internalUse>Sử dụng nội bộ</internalUse>      
+      <name>Metadata</name>
+      <type>Type</type>
+      <action>Action</action>
     </header>
     <msg>
       <confirm-delete>Bạn có thực sự muốn xóa không ?</confirm-delete>

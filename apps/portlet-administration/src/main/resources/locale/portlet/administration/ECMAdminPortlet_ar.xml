@@ -253,10 +253,10 @@
     </title>
     <header>
       <icon>أيقونة</icon>
-      <name>إسم قالب المعلومات القياسية</name>
-      <type>نوع 'Mixin'</type>
+      <name>Metadata</name>
+      <type>Type</type>
       <internalUse>استعمال داخلي</internalUse>
-      <action>قالب الأعمال</action>
+      <action>Action</action>
     </header>
     <msg>
       <confirm-delete>هل تريد حقا أن تحذف؟</confirm-delete>

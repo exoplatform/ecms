@@ -250,10 +250,10 @@
     </title>
     <header>
       <icon>アイコン</icon>
-      <name>メタデータ名</name>
-      <type>Mixinタイプ</type>
-      <internalUse>内部利用</internalUse>
-      <action>テンプレートのアクション</action>
+      <internalUse>内部利用</internalUse>      
+      <name>Metadata</name>
+      <type>Type</type>
+      <action>Action</action>
     </header>
     <msg>
       <confirm-delete>本当に削除したいですか?</confirm-delete>

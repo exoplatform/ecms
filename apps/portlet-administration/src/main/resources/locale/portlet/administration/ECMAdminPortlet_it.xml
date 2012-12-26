@@ -250,10 +250,10 @@
     </title>
     <header>
       <icon>Icona</icon>
-      <name>Nome Metadato</name>
-      <type>Mixin Type</type>
-      <internalUse>Uso interno</internalUse>
-      <action>Azioni del Template</action>
+      <internalUse>Uso interno</internalUse>      
+      <name>Metadata</name>
+      <type>Type</type>
+      <action>Action</action>
     </header>
     <msg>
       <confirm-delete>Sei sicuro di voler eliminare questo metadato?</confirm-delete>

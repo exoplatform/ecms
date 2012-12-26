@@ -27,7 +27,6 @@
   <table class="uiGrid table table-hover table-striped">
     <thead>
       <tr>
-        <th><%=_ctx.appRes("UINodeTypeList.header.icon")%></th>
   	    <th><%=_ctx.appRes("UINodeTypeList.header.nodeType")%></th>
   	    <th><%=_ctx.appRes("UINodeTypeList.header.mixinType")%></th>
   	    <th><%=_ctx.appRes("UINodeTypeList.header.orderable")%></th>
@@ -51,10 +50,7 @@
             <%
               String nodeType = node.getName() ;
               nodeType = nodeType.replace(":", "_") ;
-            %>
-            <td width="40px" align="center">
-              <div class="default16x16Icon ${nodeType}16x16Icon" style="margin:auto"><span></span></div>
-            </td>
+            %>            
             <td><div class="Text"><%=node.getName()%></div></td>
             <% if (!(node instanceof Node)) { %>
               <td>
@@ -70,7 +66,6 @@
                   }
                 %>
                 <div class="TrueFalseContainer">
-	                <div class="Icon16x16 ${iconType}16x16Icon IconNodeType"><span></span></div>
 	                <div class="Text">$booleanText</div>
 	              </div>
               </td>
@@ -85,15 +80,12 @@
                   }
                 %>
                 <div class="TrueFalseContainer">
-	                <div class="Icon16x16 ${iconType}16x16Icon IconNodeType" ><span></span></div>
 	                <div class="Text">$booleanText</div>
 	              </div>
               </td>
               <td align="center"><div class="Text"><%=_ctx.appRes("UINodeTypeList.info.description")%></div></td>
-              <td>
-                <a href="<%=uicomponent.event("View", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UINodeTypeList.tooltip.View")%>">
-                  <div class="View16x16Icon" style="margin:auto"><span></span></div>
-                </a>
+              <td class="center">                
+                <i onclick="<%=uicomponent.event("View", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UINodeTypeList.tooltip.View")%>" class="uiIconPreview"></i>
               </td>
             <% } else {%>
               <td>
@@ -129,13 +121,9 @@
                 </div>
               </td>
               <td align="center"><div class="Text"><%=_ctx.appRes("UINodeTypeList.info.description")%></div></td>
-              <td style="width:80px;">
-                <a href="<%=uicomponent.event("Edit", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UINodeTypeList.tooltip.Edit")%>">
-                  <div class="Edit16x16Icon" style="margin-left:10px; float: left;"><span></span></div>
-                </a>
-                <a href="<%=uicomponent.event("Delete", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UINodeTypeList.tooltip.Delete")%>">
-                  <div class="Delete16x16Icon" style="margin-left:10px; float: left;"><span></span></div>
-                </a>
+              <td class="center">                                
+                <i onclick="<%=uicomponent.event("Edit", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UINodeTypeList.tooltip.Edit")%>" class="uiIconEdit"></i>
+                <i onclick="<%=uicomponent.event("Delete", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UINodeTypeList.tooltip.Delete")%>" class="uiIconDelete"></i>
               </td>	                    
             <% } %>
           </tr>
@@ -155,9 +143,9 @@
     %>
   </div>
   <%}%>
-	<div class="UIAction">
+	<div class="uiAction uiActionBorder">
 	  <% for(action in uicomponent.getActions()) { %>
-		  <a onclick="<%=uicomponent.event(action)%>" class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=_ctx.appRes("UINodeTypeList.action." + action)%></a>
+		  <button onclick="<%=uicomponent.event(action)%>" class="btn"><%=_ctx.appRes("UINodeTypeList.action." + action)%></button>		  
 		<% } %>
 	</div>
 </div>

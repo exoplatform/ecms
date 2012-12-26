@@ -14,7 +14,7 @@
 	          <th><%=_ctx.appRes(name+".header."+field)%></th>
 	        <%}%>
 	        <%if(beanActions != null) { %>
-	          <th><%=_ctx.appRes(name+".header.action")%></th>
+	          <th style="text-align: center;"><%=_ctx.appRes(name+".header.action")%></th>
 	        <%}%>
 	      <%}%>
 	      <%if(name == null) {%>
@@ -22,7 +22,7 @@
 	          <th><%=_ctx.appRes(uiParent.getName()+".header."+field)%></th>
 	        <%}%>
 	        <%if(beanActions != null && beanActions.length > 0) { %>
-	          <th><%=_ctx.appRes(uiParent.getName()+".header.action")%></th>
+	          <th style="text-align: center;"><%=_ctx.appRes(uiParent.getName()+".header.action")%></th>
 	        <%}%>
 	      <%}%>
 	    </tr>
@@ -54,8 +54,8 @@
 	          
 	      <%}%>
 	      <%if(beanActions != null && beanActions.length > 0) { %>
-	        <td>         
-	          <div class="ActionContainer">
+	        <td align="center">         
+	          <div style="text-align: center;">
 	            <%def beanIdField = uicomponent.getBeanIdField() ; %>          
 	            <%for(action in beanActions) { %>
 	            <%  def beanId = uicomponent.getFieldValue(bean,beanIdField)  ; %>               
@@ -63,10 +63,11 @@
 	                if(action != null) { 
 	                  if(uicomponent.isUseAjax()){
 	              %>             
-	                    <img onclick="<%=uicomponent.event(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "$action" src="/eXoResources/skin/sharedImages/Blank.gif" alt="$action" class="${action}Icon" />
+	                    <i onclick="<%=uicomponent.event(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "$action" class="uiIcon${action}"></i>
+	                    
 	              <%  }else{ %>
-	                    <img onclick="<%=uicomponent.url(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "$action" src="/eXoResources/skin/sharedImages/Blank.gif" alt="$action" class="${action}Icon" />
-	              <%  } %> 
+	                    <i onclick="<%=uicomponent.url(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "$action" class="uiIcon${action}"></i>
+	              <%  } %>
 	              <%} %> 
 	            <%}%>                 
 	            </div>
@@ -84,11 +85,11 @@
 </div>
 <% if (uicomponent.getActions() != null) { %>
   <div class="$uicomponent.id">
-    <div class="UIAction"> 
+    <div class="uiAction uiActionBorder"> 
       <% for(action in uicomponent.getActions()) { %>
-            <a onclick="<%=uicomponent.event(action)%>" class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=_ctx.appRes(uicomponent.getId() + ".action." + action)%></a>
+            <button onclick="<%=uicomponent.event(action)%>" class="btn"><%=_ctx.appRes(uicomponent.getId() + ".action." + action)%></button>
       <% } %>
-			</div>
+		</div>
   </div>
 <% }%>
 

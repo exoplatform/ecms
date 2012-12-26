@@ -23,7 +23,7 @@
 	          <th><%=_ctx.appRes(name+".header."+field)%></th>
 	        <%}%>
 	        <%if(beanActions != null) { %>
-	          <th><%=_ctx.appRes(name+".header.action")%></th>
+	          <th class="center"><%=_ctx.appRes(name+".header.action")%></th>
 	        <%}%>
 	      <%}%>
 	      <%if(name == null) {%>
@@ -80,9 +80,9 @@
 	                if(action != null) { 
 	                  if(uicomponent.isUseAjax()){
 	             %>             
-	                    <img onclick="<%=uicomponent.event(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "<%=_ctx.appRes(uiParent.getId()+".title."+ action)%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="${action}Icon" alt="<%=_ctx.appRes(uiParent.getId()+".title."+ action)%>" />
+	                <i onclick="<%=uicomponent.event(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "$action" class="uiIcon${action}"></i>
 	              <%  }else{ %>
-	                    <img onclick="<%=uicomponent.url(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "<%=_ctx.appRes(uiParent.getId()+".title."+ action)%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="${action}Icon" alt="<%=_ctx.appRes(uiParent.getId()+".title."+ action)%>" />
+	                <i onclick="<%=uicomponent.url(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "$action" class="uiIcon${action}"></i>
 	              <%  } %> 
 	              <%} %> 
 	            <%}%>      
@@ -104,9 +104,11 @@
 </div>
 
 <% if(uicomponent.getActions() != null) { %>
-    <div class="UIAction"> 
-	    <% for(action in uicomponent.getActions()) { %>
-      	  <a href="javascript:void(0);" onclick="<%=uicomponent.event(action)%>" class="ActionButton LightBlueStyle"><%=_ctx.appRes(uicomponent.getId() + ".action." + action)%></a>
-	    <% } %>
-    </div>    
+	<div class="$uicomponent.id">
+		<div class="uiAction uiActionBorder"> 
+		  <% for(action in uicomponent.getActions()) { %>
+		        <button onclick="<%=uicomponent.event(action)%>" class="btn"><%=_ctx.appRes(uicomponent.getId() + ".action." + action)%></button>
+		  <% } %>
+		</div>
+	</div>    
 <% }%>

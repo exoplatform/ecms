@@ -255,10 +255,10 @@
     </title>
     <header>
       <icon>Icône</icon>
-      <name>Nom de la métadonnée</name>
-      <type>Type de mixin</type>
       <internalUse>Usage interne</internalUse>
-      <action>Actions possibles sur le formulaire</action>
+      <name>Metadata</name>
+      <type>Type</type>
+      <action>Action</action>
     </header>
     <msg>
       <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
