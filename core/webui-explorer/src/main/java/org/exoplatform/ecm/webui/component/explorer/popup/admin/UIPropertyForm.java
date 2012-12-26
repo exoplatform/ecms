@@ -17,12 +17,9 @@
 package org.exoplatform.ecm.webui.component.explorer.popup.admin;
 
 import java.io.InputStream;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
@@ -42,6 +39,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -287,7 +285,8 @@ public class UIPropertyForm extends UIForm {
                WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
                Locale locale = requestContext.getLocale();
                DateFormat dateFormat_ = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM, locale);
-               listValue.add(dateFormat_.format(value.getDate().getTime()));              break;
+               listValue.add(dateFormat_.format(value.getDate().getTime()));
+              break;
             }
             case 6: {
               listValue.add(Boolean.toString(value.getBoolean()));
@@ -317,6 +316,7 @@ public class UIPropertyForm extends UIForm {
             break;
           }
           case 5:  {
+             UIFormDateTimeInput uiFormDateTimeInput = getUIFormDateTimeInput(FIELD_VALUE);
              WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
              Locale locale = requestContext.getLocale();
              DateFormat dateFormat_ = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM, locale);
