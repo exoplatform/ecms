@@ -1656,6 +1656,7 @@ ECMUtils.prototype.collapseAlternativeText = function (displayDiv) {
 ECMUtils.prototype.loadTab = function() {
   gj('.UIECMAdminPortlet a[data-toggle="tab"]').on('show', function (e) {
     var target = e.target;
+    console.log(target);
     var parent = gj(target).parent();
 
     gj('.UIECMAdminPortlet div[data-toggle="collapse"]').each(function(i,el) {
@@ -1664,6 +1665,13 @@ ECMUtils.prototype.loadTab = function() {
     gj(parent).attr('class', 'accordion-toggle expaned');
   })  
 };
+
+ECMUtils.prototype.setSelecteddItem = function(el) {
+  gj('.accordion a[class="functionItem selected"]').each(function(i,e) {
+      gj(e).removeClass('selected');      
+  });
+  gj(el).addClass('selected');
+}
 
 ECMUtils.prototype.ajaxRedirect = function(url) {
   url =	url.replace(/&amp;/g, "&") ;

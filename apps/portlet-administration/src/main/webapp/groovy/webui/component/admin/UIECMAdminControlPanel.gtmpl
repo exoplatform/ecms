@@ -1,12 +1,15 @@
 <%
   import java.util.ArrayList;
+  import org.exoplatform.ecm.webui.component.admin.UIECMAdminWorkingArea;
+  import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
+
   def managers = uicomponent.getManagers();
   def typeManage = new ArrayList();
   String catego = null;
   def managersGroup = new ArrayList();
   def lGroups = null;
   if (managers == null) {
-	return;
+	  return;
   }
   for (manager in managers) {
 		if (catego == null || !catego.equals(manager.getUIExtensionCategory())) {
@@ -17,7 +20,10 @@
 			managersGroup.add(lGroups);
 		}
 		lGroups.add(manager);
-  }  
+  }
+  UIECMAdminPortlet portlet = uicomponent.getAncestorOfType(UIECMAdminPortlet.class);
+  UIECMAdminWorkingArea uiWorkingArea = portlet.getChild(UIECMAdminWorkingArea.class); 
+  
   def rcontext = _ctx.getRequestContext() ;
   rcontext.getJavascriptManager().require("SHARED/ecm-utils", "ecmutil").addScripts("ecmutil.ECMUtils.loadTab() ;");
 %>
@@ -49,8 +55,11 @@
 						String cssName = group.getUIExtensionName();
 						if(cssName.startsWith("UI")) cssName = cssName.substring(2);
 						cssName = "uiIcon" + cssName;
+						String itemCss = "";
+						if(group.getUIExtensionName().equals(uiWorkingArea.getRenderedCompId()))
+							itemCss = " selected";
 				%>
-					  <a class="functionItem" href="<%=group.event(group.getUIExtensionName())%>">
+					  <a class="functionItem$itemCss" onClick="javascript: eXo.ecm.ECMUtils.setSelecteddItem(this);" href="<%=group.event(group.getUIExtensionName())%>">
 						<i class="<%=cssName%>"></i><%=_ctx.appRes(uicomponent.getName()+".label." + group.getUIExtensionName())%>
 					  </a>
 				<%} %>
