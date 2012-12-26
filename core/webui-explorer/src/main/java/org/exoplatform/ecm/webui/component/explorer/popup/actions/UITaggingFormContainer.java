@@ -25,6 +25,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
@@ -86,7 +87,7 @@ public class UITaggingFormContainer extends UIContainer implements UIPopupCompon
     UITaggingForm uiTaggingForm = getChild(UITaggingForm.class);
 
     String workspace = uiExplorer.getRepository().getConfiguration().getDefaultWorkspaceName();
-    String userName = uiExplorer.getSession().getUserID();
+    String userName = ConversationState.getCurrent().getIdentity().getUserId();
     String tagScope = uiTaggingForm.getUIFormSelectBox(UITaggingForm.TAG_SCOPES).getValue();
     int scope = uiTaggingForm.getIntValue(tagScope);
     uiExplorer.setTagScope(scope);

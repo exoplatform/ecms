@@ -42,6 +42,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.Parameter;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -396,7 +397,7 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
   private String getStrValue(String scope, Node node) throws Exception {
     StringBuilder ret = new StringBuilder();
     if (Utils.PRIVATE.equals(scope))
-      ret.append(node.getSession().getUserID());
+      ret.append(ConversationState.getCurrent().getIdentity().getUserId());
     else if (Utils.GROUP.equals(scope)) {
       for (String group : Utils.getGroups())
         ret.append(group).append(';');

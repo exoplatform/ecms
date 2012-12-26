@@ -36,6 +36,7 @@ import javax.xml.transform.dom.DOMSource;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.services.cms.comments.CommentsService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.portal.PortalFolderSchemaHandler;
 import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 import org.exoplatform.wcm.connector.BaseConnector;
@@ -77,9 +78,9 @@ public class CommentConnector extends BaseConnector implements ResourceContainer
     String workspaceName = path[2];
     jcrPath = jcrPath.substring(repositoryName.length()+workspaceName.length()+2);
     if (jcrPath.charAt(1)=='/') jcrPath.substring(1);
-    Node content = getContent(repositoryName, workspaceName, jcrPath, null, false);
+    Node content = getContent(workspaceName, jcrPath, null, false);
 
-    commentsService.addComment(content, content.getSession().getUserID(), null, null, comment,null);
+    commentsService.addComment(content, ConversationState.getCurrent().getIdentity().getUserId(), null, null, comment,null);
 
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();

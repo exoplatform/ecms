@@ -31,6 +31,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
@@ -319,7 +320,7 @@ public class UISimpleSearch extends UIForm {
       try {
         uiSearchResult.setQuery(statement, currentNode.getSession().getWorkspace().getName(), 
                                 queryType.equals(Preference.XPATH_QUERY) ? Query.XPATH : Query.SQL, 
-                                IdentityConstants.SYSTEM.equals(currentNode.getSession().getUserID()), text);
+                                IdentityConstants.SYSTEM.equals(ConversationState.getCurrent().getIdentity().getUserId()), text);
         uiSearchResult.updateGrid();
       } catch (RepositoryException reEx) {
         uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.inputSearch-invalid", null, ApplicationMessage.WARNING));

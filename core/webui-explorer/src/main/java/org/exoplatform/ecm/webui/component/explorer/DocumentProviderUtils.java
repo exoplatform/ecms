@@ -38,6 +38,7 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.documents.FavoriteService;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 
@@ -117,7 +118,7 @@ public class DocumentProviderUtils {
       ret = trashService_.getAllNodeInTrashByUser(
           trashWorkspace,
           sessionProvider,
-          uiExplorer.getSession().getUserID());
+          ConversationState.getCurrent().getIdentity().getUserId());
     }
     return ret;
   }
@@ -132,7 +133,7 @@ public class DocumentProviderUtils {
       queryString.append(" WHERE CONTAINS(").
                   append(Utils.EXO_OWNER).
                   append(",'").
-                  append(uiExplorer.getSession().getUserID()).
+                  append(ConversationState.getCurrent().getIdentity().getUserId()).
                   append("')");
     }
     Session session = uiExplorer.getSession();
@@ -155,7 +156,7 @@ public class DocumentProviderUtils {
     List<Node> favoriteList = null;
 
     favoriteList = favoriteService_.getAllFavoriteNodesByUser(uiExplorer.getCurrentWorkspace(),
-          uiExplorer.getRepositoryName(), uiExplorer.getSession().getUserID());
+          uiExplorer.getRepositoryName(), ConversationState.getCurrent().getIdentity().getUserId());
 
     for (Node node : favoriteList) {
       if (!Utils.isInTrash(node))
@@ -174,7 +175,7 @@ public class DocumentProviderUtils {
     queryString.append(" WHERE CONTAINS(")
                .append(Utils.EXO_OWNER)
                .append(",'")
-               .append(uiExplorer.getSession().getUserID())
+               .append(ConversationState.getCurrent().getIdentity().getUserId())
                .append("')");
 
     QueryManager queryManager = session.getWorkspace().getQueryManager();

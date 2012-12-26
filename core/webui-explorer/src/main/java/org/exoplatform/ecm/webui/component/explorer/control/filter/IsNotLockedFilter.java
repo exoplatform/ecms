@@ -22,6 +22,7 @@ import javax.jcr.Node;
 
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.portal.config.UserACL;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.ext.filter.UIExtensionAbstractFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
@@ -59,7 +60,7 @@ public class IsNotLockedFilter extends UIExtensionAbstractFilter {
   public boolean accept(Map<String, Object> context) throws Exception {
     if (context == null) return true;
     Node currentNode = (Node) context.get(Node.class.getName());
-    String remoteUser = currentNode.getSession().getUserID();
+    String remoteUser = ConversationState.getCurrent().getIdentity().getUserId();
     String superUser = WCMCoreUtils.getService(UserACL.class).getSuperUser();
     if (remoteUser.equalsIgnoreCase(superUser)) {
       return true;

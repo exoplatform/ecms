@@ -30,6 +30,7 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.queries.QueryService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -166,7 +167,7 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
         }
         UISearchResult uiSearchResult = uiSearch.getChild(UISearchResult.class) ;
         uiSearchResult.setQuery(queryS.toString(), uiExplorer.getTargetSession().getWorkspace().getName(), searchType, 
-                                IdentityConstants.SYSTEM.equals(uiExplorer.getTargetSession().getUserID()), null);
+                                IdentityConstants.SYSTEM.equals(ConversationState.getCurrent().getIdentity().getUserId()), null);
         uiSearchResult.updateGrid() ;
         long time = System.currentTimeMillis() - startTime;
         uiSearchResult.setSearchTime(time);

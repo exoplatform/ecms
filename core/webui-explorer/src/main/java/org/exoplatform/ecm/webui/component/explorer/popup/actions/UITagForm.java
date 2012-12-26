@@ -25,6 +25,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -90,7 +91,7 @@ public class UITagForm extends UIForm {
                                .getRepository()
                                .getConfiguration()
                                .getDefaultWorkspaceName();
-      String userName = uiExplorer.getSession().getUserID();
+      String userName = ConversationState.getCurrent().getIdentity().getUserId();
       int scope = uiExplorer.getTagScope();
 
       NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class) ;

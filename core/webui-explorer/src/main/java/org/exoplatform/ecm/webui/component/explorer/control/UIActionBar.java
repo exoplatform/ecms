@@ -49,6 +49,7 @@ import org.exoplatform.services.cms.queries.QueryService;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -269,7 +270,7 @@ public class UIActionBar extends UIForm {
       
       long startTime = System.currentTimeMillis();
       uiSearchResult.setQuery(queryStatement, currentNode.getSession().getWorkspace().getName(), Query.SQL, 
-                              IdentityConstants.SYSTEM.equals(currentNode.getSession().getUserID()), null);
+                              IdentityConstants.SYSTEM.equals(ConversationState.getCurrent().getIdentity().getUserId()), null);
       uiSearchResult.updateGrid();
       long time = System.currentTimeMillis() - startTime;
       

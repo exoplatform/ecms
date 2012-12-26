@@ -36,8 +36,8 @@ import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodeLocation;
-import org.exoplatform.wcm.webui.paginator.UICustomizeablePaginator;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
@@ -167,7 +167,7 @@ public class UITagExplorer extends UIContainer {
   public String getWorkspace() { return getAncestorOfType(UIJCRExplorer.class).getCurrentWorkspace();}
   public String getUserName() {
     try {
-      return getAncestorOfType(UIJCRExplorer.class).getSession().getUserID();
+      return ConversationState.getCurrent().getIdentity().getUserId();
     } catch (Exception ex) {
       return "";
     }

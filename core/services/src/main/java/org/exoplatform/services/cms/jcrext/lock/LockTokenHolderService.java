@@ -21,6 +21,8 @@ import java.util.HashMap;
 
 import javax.jcr.Node;
 
+import org.exoplatform.services.security.ConversationState;
+
 /**
  * Created by The eXo Platform SARL
  * Author : Pham Xuan Hoa
@@ -46,7 +48,7 @@ public class LockTokenHolderService {
   private String createKey(Node node) throws Exception {
     StringBuffer buffer = new StringBuffer();
     buffer.append(node.getSession().getRepository().hashCode())
-    .append(node.getSession().getUserID())
+    .append(ConversationState.getCurrent().getIdentity().getUserId())
     .append(node.getSession().getWorkspace().getName())
     .append("/").append(node.getPath());
     return buffer.toString();

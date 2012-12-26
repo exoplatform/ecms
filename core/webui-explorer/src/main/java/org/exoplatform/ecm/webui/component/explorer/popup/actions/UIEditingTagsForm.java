@@ -29,6 +29,7 @@ import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -93,7 +94,7 @@ public class UIEditingTagsForm extends UIContainer implements UIPopupComponent {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
 
     String workspace = uiExplorer.getRepository().getConfiguration().getDefaultWorkspaceName();
-    String userName = uiExplorer.getSession().getUserID();
+    String userName = ConversationState.getCurrent().getIdentity().getUserId();
     int scope = uiExplorer.getTagScope();
 
     String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
@@ -129,7 +130,7 @@ public class UIEditingTagsForm extends UIContainer implements UIPopupComponent {
       UIEditingTagsForm uiEdit = event.getSource();
       UIJCRExplorer uiExplorer = uiEdit.getAncestorOfType(UIJCRExplorer.class);
       String selectedName = event.getRequestContext().getRequestParameter(OBJECTID);
-      removeTagFromNode(uiExplorer.getSession().getUserID(), uiExplorer.getTagScope(), selectedName, uiEdit);
+      removeTagFromNode(ConversationState.getCurrent().getIdentity().getUserId(), uiExplorer.getTagScope(), selectedName, uiEdit);
       uiEdit.getChild(UIEditingTagList.class).updateGrid();
       uiExplorer.setTagPath(uiExplorer.getCurrentPath());
       Preference preferences = uiExplorer.getPreference();

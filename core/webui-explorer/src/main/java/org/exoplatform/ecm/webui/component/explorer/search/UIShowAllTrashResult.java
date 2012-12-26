@@ -55,6 +55,7 @@ import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -155,7 +156,7 @@ public class UIShowAllTrashResult extends UIComponentDecorator {
       ret = trashService.getAllNodeInTrashByUser(
           trashWorkspace,
           sessionProvider,
-          uiExplorer.getSession().getUserID());
+          ConversationState.getCurrent().getIdentity().getUserId());
     }
     return ret;
   }

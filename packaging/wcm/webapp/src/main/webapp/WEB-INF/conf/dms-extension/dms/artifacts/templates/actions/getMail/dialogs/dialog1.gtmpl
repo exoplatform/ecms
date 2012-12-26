@@ -1,6 +1,7 @@
 <%
   import org.exoplatform.services.wcm.utils.WCMCoreUtils;
   import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+  import org.exoplatform.services.security.ConversationState;
 %>
 
 <div class="UIFormWithTitle">
@@ -125,7 +126,7 @@
   		      def sessionProvider = WCMCoreUtils.getUserSessionProvider();
   		      def nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
   		      def userNode = nodeHierarchyCreator.getUserNode(sessionProvider, 
-  		                                                      uicomponent.getSession().getUserID());
+  		                                                      ConversationState.getCurrent().getIdentity().getUserId());
 		        def storePath = userNode.getPath() + "/Private/Mail";
 		        String[] fieldStorePath = ["jcrPath=/node/exo:storePath", storePath] ;
 		        uicomponent.addTextField("storePath", fieldStorePath)  ;

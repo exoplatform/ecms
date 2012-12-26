@@ -12,6 +12,7 @@
   import org.exoplatform.services.jcr.impl.core.JCRPath;
   import org.exoplatform.services.jcr.impl.core.SessionImpl;
   import org.exoplatform.web.application.Parameter ;  
+  import org.exoplatform.services.security.ConversationState;
   import javax.jcr.Node;
   import javax.jcr.Session;
 %>
@@ -116,7 +117,7 @@
                   //uiStarObj.setNode(node);
                   def mapIndexNode = uicomponent.getMapIndexNode();
                   mapIndexNode.put(count, node);
-                  if (uicomponent.getFavouriteService().isFavouriter(node.getSession().getUserID(), node)) { 
+                  if (uicomponent.getFavouriteService().isFavouriter(ConversationState.getCurrent().getIdentity().getUserId();, node)) { 
                 %>
                   <div class="StarLight UICursorPointer" onclick="<%=uicomponent.event("StarClick", count+"")%>">
                     <span>

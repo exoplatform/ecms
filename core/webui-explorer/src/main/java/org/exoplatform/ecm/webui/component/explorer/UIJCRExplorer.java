@@ -17,6 +17,7 @@
 package org.exoplatform.ecm.webui.component.explorer ;
 
 import java.security.AccessControlException;
+import java.security.acl.Acl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -63,6 +64,7 @@ import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
@@ -80,6 +82,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -382,7 +385,15 @@ public class UIJCRExplorer extends UIContainer {
   @Deprecated
   public void setAddressPath(Set<String> s) {} ;
 
-  public SessionProvider getSessionProvider() { return WCMCoreUtils.getUserSessionProvider(); }
+  public SessionProvider getSessionProvider() {
+    String userID = ConversationState.getCurrent().getIdentity().getUserId();
+    String superUser = WCMCoreUtils.getService(UserACL.class).getSuperUser();
+    if (userID.equals(superUser)) {
+      return WCMCoreUtils.getSystemSessionProvider();
+    }else {
+      return WCMCoreUtils.getUserSessionProvider();
+    }
+  }
 
   public SessionProvider getSystemProvider() { return WCMCoreUtils.getSystemSessionProvider(); }
 

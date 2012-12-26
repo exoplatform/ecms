@@ -26,6 +26,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.security.IdentityRegistry;
@@ -131,7 +132,7 @@ public abstract class WorkflowActionLauncherListener implements ECMEventListener
 
         node.setProperty(CURRENT_STATE, VALIDATION_REQUEST);
         String date =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS").format(new Date());
-        String[] logs = { date, VALIDATION_REQUEST, node.getSession().getUserID(),
+        String[] logs = { date, VALIDATION_REQUEST, ConversationState.getCurrent().getIdentity().getUserId(),
             "PublicationService.WorkflowPublicationPlugin.nodeValidationRequest" };
         publicationService.addLog(node, logs);
 

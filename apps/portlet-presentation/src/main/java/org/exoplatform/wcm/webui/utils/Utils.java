@@ -22,6 +22,7 @@ import javax.jcr.Node;
 
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.extensions.publication.PublicationManager;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.Lifecycle;
 
@@ -47,13 +48,7 @@ public class Utils {
 
       if (!"published".equals(currentState)) {
 
-        String userId;
-        try {
-          userId = Util.getPortalRequestContext().getRemoteUser();
-        } catch (Exception e) {
-          userId = currentNode.getSession().getUserID();
-        }
-
+        String userId = ConversationState.getCurrent().getIdentity().getUserId();
         String nodeLifecycle = currentNode.getProperty("publication:lifecycle").getString();
 
         PublicationManager publicationManager = (PublicationManager)ExoContainerContext.

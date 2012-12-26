@@ -64,6 +64,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -335,7 +336,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
                                                        uiExplorer.getRepository()
                                                                  .getConfiguration()
                                                                  .getDefaultWorkspaceName(),
-                                                       node.getSession().getUserID(),
+                                                                 ConversationState.getCurrent().getIdentity().getUserId(),
                                                        getGroups());
       //trashService.removeRelations(node, uiExplorer.getSystemProvider(), uiExplorer.getRepositoryName());
       if (PermissionUtil.canRemoveNode(node) && node.isNodeType(Utils.EXO_AUDITABLE)) {

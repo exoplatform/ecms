@@ -48,6 +48,7 @@ import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -137,7 +138,7 @@ public class UIShowAllFavouriteResult extends UIComponentDecorator {
     ret = favoriteService_.getAllFavoriteNodesByUser(
           uiExplorer.getCurrentWorkspace(),
           uiExplorer.getRepositoryName(),
-          uiExplorer.getSession().getUserID());
+          ConversationState.getCurrent().getIdentity().getUserId());
 
     return ret;
   }
@@ -311,9 +312,9 @@ public class UIShowAllFavouriteResult extends UIComponentDecorator {
         }
 
         try {
-          if (favoriteService_.isFavoriter(node.getSession().getUserID(), node)) {
+          if (favoriteService_.isFavoriter(ConversationState.getCurrent().getIdentity().getUserId(), node)) {
             if (PermissionUtil.canRemoveNode(node)) {
-              favoriteService_.removeFavorite(node, node.getSession().getUserID());
+              favoriteService_.removeFavorite(node, ConversationState.getCurrent().getIdentity().getUserId());
               uiShow.favouriteChange = true;
             }
             else {
@@ -321,7 +322,7 @@ public class UIShowAllFavouriteResult extends UIComponentDecorator {
             }
           } else {
             if (PermissionUtil.canSetProperty(node)) {
-              favoriteService_.addFavorite(node, node.getSession().getUserID());
+              favoriteService_.addFavorite(node, ConversationState.getCurrent().getIdentity().getUserId());
               uiShow.favouriteChange = true;
             }
             else {

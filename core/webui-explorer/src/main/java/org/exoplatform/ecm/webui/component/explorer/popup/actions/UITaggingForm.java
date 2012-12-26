@@ -36,6 +36,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
@@ -202,7 +203,7 @@ public class UITaggingForm extends UIForm {
   private String getStrValue(String scope, Node node) throws Exception {
     StringBuilder ret = new StringBuilder();
     if (Utils.PRIVATE.equals(scope))
-      ret.append(node.getSession().getUserID());
+      ret.append(ConversationState.getCurrent().getIdentity().getUserId());
     else if (Utils.GROUP.equals(scope)) {
       for (String group : Utils.getGroups())
         ret.append(group).append(';');
@@ -342,7 +343,7 @@ public class UITaggingForm extends UIForm {
       else if (Utils.GROUP.equals(scope))
         newFolksonomyService.addGroupsTag(tagNames, currentNode, workspace, roles);
       else if (Utils.PRIVATE.equals(scope)) {
-        String userName = currentNode.getSession().getUserID();
+        String userName = ConversationState.getCurrent().getIdentity().getUserId();
         newFolksonomyService.addPrivateTag(tagNames, currentNode, workspace, userName);
       }
     }
@@ -402,7 +403,7 @@ public class UITaggingForm extends UIForm {
       NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class);
       NodeHierarchyCreator nodeHierarchyCreator = uiForm.getApplicationComponent(NodeHierarchyCreator.class);
 
-      String userName = currentNode.getSession().getUserID();
+      String userName = ConversationState.getCurrent().getIdentity().getUserId();
 
       RepositoryService repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
       ManageableRepository manageableRepo = repositoryService.getCurrentRepository();

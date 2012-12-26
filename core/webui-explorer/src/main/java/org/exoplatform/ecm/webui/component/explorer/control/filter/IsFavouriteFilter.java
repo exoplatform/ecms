@@ -24,6 +24,7 @@ import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.services.cms.documents.FavoriteService;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.webui.ext.filter.UIExtensionAbstractFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
 
@@ -49,7 +50,7 @@ public class IsFavouriteFilter extends UIExtensionAbstractFilter {
     FavoriteService favoriteService
         = (FavoriteService)myContainer.getComponentInstanceOfType(FavoriteService.class);
 
-    return favoriteService.isFavoriter(uiExplorer.getSession().getUserID(), node);
+    return favoriteService.isFavoriter(ConversationState.getCurrent().getIdentity().getUserId(), node);
   }
   public boolean accept(Map<String, Object> context) throws Exception {
       if (context == null) return true;

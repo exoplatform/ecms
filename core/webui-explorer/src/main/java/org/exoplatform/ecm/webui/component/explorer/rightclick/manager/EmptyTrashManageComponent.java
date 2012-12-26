@@ -40,6 +40,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -84,7 +85,7 @@ public class EmptyTrashManageComponent extends UIAbstractManagerComponent {
       return;
     }
 
-    String currentUser = uiExplorer.getSession().getUserID();
+    String currentUser = ConversationState.getCurrent().getIdentity().getUserId();
     boolean error = false;
     while (nodeIter.hasNext()) {
       try {

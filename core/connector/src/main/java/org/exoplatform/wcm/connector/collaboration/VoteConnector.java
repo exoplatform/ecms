@@ -34,6 +34,7 @@ import javax.xml.transform.dom.DOMSource;
 
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.portal.PortalFolderSchemaHandler;
 import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 import org.exoplatform.wcm.connector.BaseConnector;
@@ -146,7 +147,7 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
       }
       Node content = getContent(repositoryName, workspaceName, jcrPath, null, false);
       if (content.isNodeType("mix:votable")) {
-        String userName = content.getSession().getUserID();
+        String userName = ConversationState.getCurrent().getIdentity().getUserId();
         votingService.vote(content, Double.parseDouble(vote), userName, lang);
       }
     } catch (Exception e) {

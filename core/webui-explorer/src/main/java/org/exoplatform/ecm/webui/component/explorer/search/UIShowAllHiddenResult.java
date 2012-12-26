@@ -50,6 +50,7 @@ import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -121,7 +122,7 @@ public class UIShowAllHiddenResult extends UIComponentDecorator {
       queryString.append(" WHERE CONTAINS(")
                  .append(Utils.EXO_OWNER)
                  .append(",'")
-                 .append(uiExplorer.getSession().getUserID())
+                 .append(ConversationState.getCurrent().getIdentity().getUserId())
                  .append("')");
     }
     Session session = uiExplorer.getSession();

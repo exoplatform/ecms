@@ -103,6 +103,7 @@ import org.exoplatform.services.jcr.ext.audit.AuditService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
@@ -991,7 +992,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   }
 
   public boolean isFavouriter(Node data) throws Exception {
-    return isFavouriteNode(this.getAncestorOfType(UIJCRExplorer.class).getSession().getUserID(), data);
+    return isFavouriteNode(ConversationState.getCurrent().getIdentity().getUserId(), data);
   }
 
   public boolean isFavouriteNode(String userName, Node node) throws Exception {
@@ -1081,7 +1082,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     Set<String> allItemsFilterSet = uiExplorer.getAllItemFilterMap();
     Set<String> allItemsByTypeFilterSet = uiExplorer.getAllItemByTypeFilterMap();
 
-    String userId = uiExplorer.getSession().getUserID();
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
 
     //Owned by me
     if (allItemsFilterSet.contains(UIAllItems.OWNED_BY_ME) &&
@@ -1377,16 +1378,16 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         return;
       }
       try {
-        if (favoriteService.isFavoriter(node.getSession().getUserID(), node)) {
+        if (favoriteService.isFavoriter(ConversationState.getCurrent().getIdentity().getUserId(), node)) {
           if (PermissionUtil.canRemoveNode(node)) {
-            favoriteService.removeFavorite(node, node.getSession().getUserID());
+            favoriteService.removeFavorite(node, ConversationState.getCurrent().getIdentity().getUserId());
           }
           else {
             throw new AccessDeniedException();
           }
         } else {
           if (PermissionUtil.canSetProperty(node)) {
-            favoriteService.addFavorite(node, node.getSession().getUserID());
+            favoriteService.addFavorite(node, ConversationState.getCurrent().getIdentity().getUserId());
           }
           else {
             throw new AccessDeniedException();

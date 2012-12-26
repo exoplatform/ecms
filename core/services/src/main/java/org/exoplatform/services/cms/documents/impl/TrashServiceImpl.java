@@ -17,7 +17,10 @@
 package org.exoplatform.services.cms.documents.impl;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.jcr.Node;
@@ -39,6 +42,10 @@ import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.access.AccessControlEntry;
+import org.exoplatform.services.jcr.access.AccessControlList;
+import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
@@ -48,6 +55,8 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.gatein.pc.api.PortletInvoker;
 import org.gatein.pc.api.info.PortletInfo;
 import org.gatein.pc.api.info.PreferencesInfo;
+
+import com.sun.corba.se.spi.servicecontext.UEInfoServiceContext;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh
@@ -199,10 +208,11 @@ public class TrashServiceImpl implements TrashService {
       Session trashSession = WCMCoreUtils.getSystemSessionProvider().getSession(this.trashWorkspace_, manageableRepository);
       String actualTrashPath = this.trashHome_ + (this.trashHome_.endsWith("/") ? "" : "/")
           + fixRestorePath(nodeName);
-      if (trashSession.getWorkspace().getName().equals(
-          nodeSession.getWorkspace().getName())) {
-        trashSession.getWorkspace().move(node.getPath(),
-            actualTrashPath);
+      ExtendedNode extNode = (ExtendedNode)node;
+      AccessControlList acl =  extNode.getACL();
+      extNode = null;
+      if (this.trashWorkspace_.equals(nodeWorkspaceName)) {
+        trashSession.getWorkspace().move(node.getPath(),actualTrashPath);
       } else {
         //clone node in trash folder
         trashSession.getWorkspace().clone(nodeWorkspaceName,
@@ -225,12 +235,45 @@ public class TrashServiceImpl implements TrashService {
                   tag.getSession().save();
             }
         }
-        node.remove();
       }
-
+   // Convert permission entries to map
+      Map<String, List<String>> permissionMap = new HashMap<String, List<String>>();
+      List<AccessControlEntry> accessControlEntries = acl.getPermissionEntries();
+      for (AccessControlEntry accessControlEntry : accessControlEntries) {
+        String identity = accessControlEntry.getIdentity();
+        String permission = accessControlEntry.getPermission();
+        List<String> currentPermissions = permissionMap.get(identity);
+        if (!permissionMap.containsKey(identity)) {
+          permissionMap.put(identity, null);
+        }
+        if (currentPermissions == null)
+          currentPermissions = new ArrayList<String>();
+        if (!currentPermissions.contains(permission)) {
+          currentPermissions.add(permission);
+        }
+        permissionMap.put(identity, currentPermissions);
+      }
+      ExtendedNode trashNode = (ExtendedNode) trashSession.getItem(actualTrashPath);
+      //Copy the permission to the deleted node
+      Map<String, String[]> permissionTrash = new HashMap<String, String[]>();
+      Set<String> keys = permissionMap.keySet();
+      for (String key:keys) {
+        Object[] value = permissionMap.get(key).toArray();
+        String[] permission = new String[value.length];
+        for (int i=0; i<value.length; i++) {
+          permission[i] =value[i].toString();
+        }
+        permissionTrash.put(key, permission);
+      }
+      if (trashNode.canAddMixin("exo:privilegeable")) {
+        trashNode.addMixin("exo:privilegeable");
+      }
+      if (trashNode.isNodeType("exo:privilegeable")) {
+        trashNode.clearACL();
+        trashNode.setPermissions(permissionTrash);
+      }
       nodeSession.save();
       trashSession.save();
-
       //check and delete target node when there is no its symlink
       if (deep == 0 && taxonomyLinkUUID != null && taxonomyLinkWS != null) {
         Session targetNodeSession = sessionProvider.getSession(taxonomyLinkWS, manageableRepository);

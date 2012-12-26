@@ -44,6 +44,7 @@ import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -118,7 +119,7 @@ public class UnlockManageComponent extends UIAbstractManagerComponent {
       return;
     }
     String superUser = WCMCoreUtils.getService(UserACL.class).getSuperUser();
-    String remoteUser = node.getSession().getUserID();
+    String remoteUser = ConversationState.getCurrent().getIdentity().getUserId();
     if (remoteUser.equalsIgnoreCase(superUser)) {
       session = WCMCoreUtils.getSystemSessionProvider()
                             .getSession(node.getSession().getWorkspace().getName(),

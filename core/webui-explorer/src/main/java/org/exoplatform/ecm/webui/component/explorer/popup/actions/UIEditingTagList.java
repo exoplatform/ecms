@@ -27,6 +27,7 @@ import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIGrid;
 
@@ -63,7 +64,7 @@ public class UIEditingTagList extends UIGrid {
     String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
 
     List<Node> tags = (scope == NewFolksonomyService.PRIVATE) ?
-                      newFolksonomyService.getAllPrivateTags(uiExplorer.getSession().getUserID()) :
+                      newFolksonomyService.getAllPrivateTags(ConversationState.getCurrent().getIdentity().getUserId()) :
                       newFolksonomyService.getAllPublicTags(publicTagNodePath, workspace);
     List<TagData> tagDataList = new ArrayList<TagData>();
     for (Node tag : tags) {
