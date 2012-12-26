@@ -59,6 +59,8 @@ import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
+import org.exoplatform.ecm.webui.utils.LockUtil;
+
 
 /**
  * Created by The eXo Platform SARL
@@ -211,6 +213,10 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
       }
       try {
         Node targetNode = (Node) nodeFinder.getItem(workspaceName, pathNode);
+        if(targetNode.isLocked()) {
+          uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", new String[] {targetNode.getPath()})) ;
+          return;
+        }
         if (uiSymLinkForm.localizationMode) {
           MultiLanguageService langService = uiSymLinkForm.getApplicationComponent(MultiLanguageService.class);
           langService.addSynchronizedLinkedLanguage(node, targetNode);
@@ -310,7 +316,7 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
         UIOneNodePathSelector uiNodePathSelector = uiSymLinkManager.createUIComponent(UIOneNodePathSelector.class, null, null);
         uiPopupWindow.setUIComponent(uiNodePathSelector);
         uiNodePathSelector.setIsDisable(workspaceName, false);
-        uiNodePathSelector.setExceptedNodeTypesInPathPanel(new String[] {Utils.EXO_SYMLINK});
+        uiNodePathSelector.setExceptedNodeTypesInPathPanel(new String[] {Utils.EXO_SYMLINK, Utils.MIX_LOCKABLE});
         uiNodePathSelector.setRootNodeLocation(uiExplorer.getRepositoryName(), workspaceName, "/");
         uiNodePathSelector.setIsShowSystem(false);
         uiNodePathSelector.init(WCMCoreUtils.getUserSessionProvider());

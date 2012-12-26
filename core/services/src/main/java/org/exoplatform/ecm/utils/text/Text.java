@@ -99,8 +99,7 @@ public class Text {
       if (ch == '&' || ch == '#'
         || ch == '*' || ch == '@' || ch == '\'' || ch == '"' || ch == '|'
           || (ch == '.' && name.length() < 3) || (ch == ' ' && (i == 0 || i == name.length() - 1))
-          || ch == '\t' || ch == '\r' || ch == '\n' || ch == '$' || ch == '&' || ch == '\\'
-          || ch == '>' || ch == '<') {
+          || ch == '\t' || ch == '\r' || ch == '\n' || ch == '\\' || ch == '>' || ch == '<') {
         buffer.append('%');
         buffer.append(Character.toUpperCase(Character.forDigit(ch / 16, 16)));
         buffer.append(Character.toUpperCase(Character.forDigit(ch % 16, 16)));

@@ -37,6 +37,7 @@ import org.exoplatform.portal.config.model.ModelObject;
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.mop.Visibility;
 import org.exoplatform.portal.mop.navigation.NodeContext;
+import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserNodeFilterConfig;
 import org.exoplatform.portal.mop.user.UserPortal;
@@ -45,6 +46,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.navigation.NavigationUtils;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -371,8 +373,10 @@ public class PublicationUtil {
     // get user node
     String nodeURI = navNodeURI.replace("/" + Util.getPortalRequestContext().getPortalOwner() + "/", "");
     UserNode userNode;
-    if (Util.getUIPortal().getUserNavigation() != null) {
-      userNode = userPortal.resolvePath(Util.getUIPortal().getUserNavigation(), filterConfig, nodeURI);
+    UserNavigation userNavigation = NavigationUtils.getUserNavigationOfPortal(
+                                        userPortal, Util.getUIPortal().getSiteKey().getName());
+    if (userNavigation != null) {
+      userNode = userPortal.resolvePath(userNavigation, filterConfig, nodeURI);
     } else {
       userNode = userPortal.resolvePath(filterConfig, nodeURI);
     }

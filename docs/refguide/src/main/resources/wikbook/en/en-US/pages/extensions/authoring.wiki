@@ -104,8 +104,8 @@ This extended publication has new states and new profiles that are enabled in Co
 
 In most cases, you do not want to publish a content directly, but at a defined date and you can also want  the content to be unpublished automatically after that.
 New properties are added to the new publication plugin, that allows you to manage this:
-* _publication:startPublishedDate_
-* _publication:endPublishedDate_
+* _publication\:startPublishedDate_
+* _publication\:endPublishedDate_
 
 The Content rendering engine does not know anything about publication dates, so another service needs to manage that.
 When the publisher sets start/end publication dates, he can "stage" the content. The content will go automatically to the "published" state when the start date arrives and to the "unpublished" state after end date.
@@ -188,151 +188,151 @@ A lifecycle is defined by a simple vertical workflow with steps (states) and pro
 For example: _Two lifecycles with/without states_
 
 {code:xml}<external-component-plugins>
-    <target-component>org.exoplatform.services.wcm.publication.PublicationManager</target-component>
-    <component-plugin>
-        <name>AddLifecycle</name>
-        <set-method>addLifecycle</set-method>
-        <type>org.exoplatform.services.wcm.publication.lifecycles.StatesLifecyclePlugin</type>
-        <init-params>
-            <object-param>
-                <name>lifecyles</name>
-                <object type="org.exoplatform.services.wcm.publication.lifecycles.impl.LifecyclesConfig">
-                    <field name="lifecycles">
-                        <collection type="java.util.ArrayList">
-                            <value>
-                                <object type="org.exoplatform.services.wcm.publication.lifecycles.impl.LifecyclesConfig$Lifecycle">
-                                    <field name="name">
-                                        <string>lifecycle1</string>
-                                    </field>
-                                    <field name="publicationPlugin">
-                                        <string>States and versions based publication</string>
-                                    </field>
-                                </object>
-                            </value>
-                            <value>
-                                <object type="org.exoplatform.services.wcm.publication.lifecycles.impl.LifecyclesConfig$Lifecycle">
-                                    <field name="name">
-                                        <string>lifecycle2</string>
-                                    </field>
-                                    <field name="publicationPlugin">
-                                        <string>Authoring publication</string>
-                                    </field>
-                                    <field name="states">
-                                        <collection type="java.util.ArrayList">
-                                            <value>
-                                                <object type="org.exoplatform.services.wcm.publication.lifecycles.impl.LifecyclesConfig$State">
-                                                    <field name="state">
-                                                        <string>draft</string>
-                                                    </field>
-                                                    <field name="memberships">
-                                                        <collection type="java.util.ArrayList">
-                                                            <value>
-                                                                <string>author:/communication</string>
-                                                            </value>
-                                                            <value>
-                                                                <string>author:/sanitaryAlert</string>
-                                                            </value>
-                                                            <value>
-                                                                <string>author:/informations</string>
-                                                            </value>
-                                                        </collection>
-                                                    </field>
-                                                </object>
-                                            </value>
-                                            <value>
-                                                <object type="org.exoplatform.services.wcm.publication.lifecycles.impl.LifecyclesConfig$State">
-                                                    <field name="state">
-                                                        <string>pending</string>
-                                                    </field>
-                                                    <field name="membership">
-                                                        <string>author:/platform/web-contributors</string>
-                                                    </field>
-                                                </object>
-                                            </value>
-                                            <value>
-                                                <object type="org.exoplatform.services.wcm.publication.lifecycles.impl.LifecyclesConfig$State">
-                                                    <field name="state">
-                                                        <string>approved</string>
-                                                    </field>
-                                                    <field name="membership">
-                                                        <string>manager:/platform/web-contributors</string>
-                                                    </field>
-                                                </object>
-                                            </value>
-                                            <value>
-                                                <object type="org.exoplatform.services.wcm.publication.lifecycles.impl.LifecyclesConfig$State">
-                                                    <field name="state">
-                                                        <string>staged</string>
-                                                    </field>
-                                                    <field name="membership">
-                                                        <string>publisher:/platform/web-contributors</string>
-                                                    </field>
-                                                </object>
-                                            </value>
-                                            <value>
-                                                <object type="org.exoplatform.services.wcm.publication.lifecycles.impl.LifecyclesConfig$State">
-                                                    <field name="state">
-                                                        <string>published</string>
-                                                    </field>
-                                                    <field name="membership">
-                                                        <string>automatic</string>
-                                                    </field>
-                                                </object>
-                                            </value>
-                                        </collection>
-                                    </field>
-                                </object>
-                            </value>
-                            <value>
-                                <object type="org.exoplatform.services.wcm.publication.lifecycles.impl.LifecyclesConfig$Lifecycle">
-                                    <field name="name">
-                                        <string>lifecycle3</string>
-                                    </field>
-                                    <field name="publicationPlugin">
-                                        <string>Authoring publication</string>
-                                    </field>
-                                    <field name="states">
-                                        <collection type="java.util.ArrayList">
-                                            <value>
-                                                <object type="org.exoplatform.services.wcm.publication.lifecycles.impl.LifecyclesConfig$State">
-                                                    <field name="state">
-                                                        <string>draft</string>
-                                                    </field>
-                                                    <field name="membership">
-                                                        <string>author:/platform/web-contributors</string>
-                                                    </field>
-                                                </object>
-                                            </value>
-                                            <value>
-                                                <object type="org.exoplatform.services.wcm.publication.lifecycles.impl.LifecyclesConfig$State">
-                                                    <field name="state">
-                                                        <string>published</string>
-                                                    </field>
-                                                    <field name="memberships">
-                                                        <collection type="java.util.ArrayList">
-                                                            <value>
-                                                                <string>publisher:/communication</string>
-                                                            </value>
-                                                            <value>
-                                                                <string>publisher:/sanitaryAlert</string>
-                                                            </value>
-                                                            <value>
-                                                                <string>publisher:/informations</string>
-                                                            </value>
-                                                        </collection>
-                                                    </field>
-                                                </object>
-                                            </value>
-                                        </collection>
-                                    </field>
-                                </object>
-                            </value>
-                        </collection>
-                    </field>
-                </object>
-            </object-param>
-        </init-params>
-    </component-plugin>
+	<target-component>org.exoplatform.services.wcm.extensions.publication.PublicationManager</target-component>
+	<component-plugin>
+		<name>AddLifecycle</name>
+		<set-method>addLifecycle</set-method>
+		<type>org.exoplatform.services.wcm.extensions.publication.lifecycle.StatesLifecyclePlugin</type>
+		<init-params>
+			<object-param>
+				<name>lifecyles</name>
+				<object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig">
+					<field name="lifecycles">
+						<collection type="java.util.ArrayList">
+							<value>
+								<object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$Lifecycle">
+									<field name="name">
+										<string>lifecycle1</string>
+									</field>
+									<field name="publicationPlugin">
+										<string>States and versions based publication</string>
+									</field>
+								</object>
+							</value>
+							<value>
+								<object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$Lifecycle">
+									<field name="name">
+										<string>lifecycle2</string>
+									</field>
+									<field name="publicationPlugin">
+										<string>Authoring publication</string>
+									</field>
+									<field name="states">
+										<collection type="java.util.ArrayList">
+											<value>
+												<object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
+													<field name="state">
+														<string>draft</string>
+													</field>
+													<field name="memberships">
+														<collection type="java.util.ArrayList">
+															<value>
+																<string>author:/communication</string>
+															</value>
+															<value>
+																<string>author:/sanitaryAlert</string>
+															</value>
+															<value>
+																<string>author:/informations</string>
+															</value>
+														</collection>
+													</field>
+												</object>
+											</value>
+											<value>
+												<object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
+													<field name="state">
+														<string>pending</string>
+													</field>
+													<field name="membership">
+														<string>author:/platform/web-contributors</string>
+													</field>
+												</object>
+											</value>
+											<value>
+												<object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
+													<field name="state">
+														<string>approved</string>
+													</field>
+													<field name="membership">
+														<string>manager:/platform/web-contributors</string>
+													</field>
+												</object>
+											</value>
+											<value>
+												<object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
+													<field name="state">
+														<string>staged</string>
+													</field>
+													<field name="membership">
+														<string>publisher:/platform/web-contributors</string>
+													</field>
+												</object>
+											</value>
+											<value>
+												<object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
+													<field name="state">
+														<string>published</string>
+													</field>
+													<field name="membership">
+														<string>automatic</string>
+													</field>
+												</object>
+											</value>
+										</collection>
+									</field>
+								</object>
+							</value>
+							<value>
+								<object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$Lifecycle">
+									<field name="name">
+										<string>lifecycle3</string>
+									</field>
+									<field name="publicationPlugin">
+										<string>Authoring publication</string>
+									</field>
+									<field name="states">
+										<collection type="java.util.ArrayList">
+											<value>
+												<object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
+													<field name="state">
+														<string>draft</string>
+													</field>
+													<field name="membership">
+														<string>author:/platform/web-contributors</string>
+													</field>
+												</object>
+											</value>
+											<value>
+												<object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
+													<field name="state">
+														<string>published</string>
+													</field>
+													<field name="memberships">
+														<collection type="java.util.ArrayList">
+															<value>
+																<string>publisher:/communication</string>
+															</value>
+															<value>
+																<string>publisher:/sanitaryAlert</string>
+															</value>
+															<value>
+																<string>publisher:/informations</string>
+															</value>
+														</collection>
+													</field>
+												</object>
+											</value>
+										</collection>
+									</field>
+								</object>
+							</value>
+						</collection>
+					</field>
+				</object>
+			</object-param>
+		</init-params>
+	</component-plugin>
 </external-component-plugins>{code}
 
 In the last example, there are three lifecycles:
@@ -352,6 +352,7 @@ When a state is changed, you can broadcast an event to add features.
 The event could look like this:
 
 {code:java}listenerService.broadcast(AuthoringPlugin.POST_UPDATE_STATE_EVENT, null, node);{code}
+
 Listener declaration could look like this:
 
 {code:xml}<external-component-plugins>
@@ -359,7 +360,7 @@ Listener declaration could look like this:
   <component-plugin>
     <name>PublicationService.event.postUpdateState</name>
     <set-method>addListener</set-method>
-    <type>org.exoplatform.services.wcm.publication.listener.post.PostUpdateStateEventListener</type>
+    <type>org.exoplatform.services.wcm.extensions.publication.listener.post.PostUpdateStateEventListener</type>
     <description>this listener will be called every time a content changes its current state</description>
   </component-plugin>
 </external-component-plugins>{code}
@@ -412,117 +413,117 @@ To avoid conflicts on contexts, you can set a priority (the less is the best).
 For example, *Different Contexts*:
 
 {code:xml}<external-component-plugins>
-    <target-component>org.exoplatform.services.wcm.publication.PublicationManager</target-component>
-    <component-plugin>
-        <name>AddContext</name>
-        <set-method>addContext</set-method>
-        <type>org.exoplatform.services.wcm.publication.context.ContextPlugin</type>
-        <init-params>
-            <object-param>
-                <name>contexts</name>
-                <object type="org.exoplatform.services.wcm.publication.context.impl.ContextConfig">
-                    <field name="contexts">
-                        <collection type="java.util.ArrayList">
-                            <value>
-                                <object type="org.exoplatform.services.wcm.publication.context.impl.ContextConfig$Context">
-                                    <field name="name">
-                                        <string>contextdefault</string>
-                                    </field>
-                                    <field name="priority">
-                                        <string>200</string>
-                                    </field>
-                                    <field name="lifecycle">
-                                        <string>lifecycle1</string>
-                                    </field>
-                                </object>
-                                <object type="org.exoplatform.services.wcm.publication.context.impl.ContextConfig$Context">
-                                    <field name="name">
-                                        <string>context1</string>
-                                    </field>
-                                    <field name="priority">
-                                        <string>100</string>
-                                    </field>
-                                    <field name="lifecycle">
-                                        <string>lifecycle1</string>
-                                    </field>
-                                    <field name="membership">
-                                        <string>*:/platform/web-contributors</string>
-                                    </field>
-                                    <field name="site">
-                                        <string>acme</string>
-                                    </field>
-                                    <field name="path">
-                                        <string>repository:collaboration:/sites content/live/acme/categories</string>
-                                    </field>
-                                </object>
-                                <object type="org.exoplatform.services.wcm.publication.context.impl.ContextConfig$Context">
-                                    <field name="name">
-                                        <string>context2</string>
-                                    </field>
-                                    <field name="priority">
-                                        <string>100</string>
-                                    </field>
-                                    <field name="lifecycle">
-                                        <string>lifecycle1</string>
-                                    </field>
-                                    <field name="site">
-                                        <string>classic</string>
-                                    </field>
-                                </object>
-                                <object type="org.exoplatform.services.wcm.publication.context.impl.ContextConfig$Context">
-                                    <field name="name">
-                                        <string>context3</string>
-                                    </field>
-                                    <field name="priority">
-                                        <string>80</string>
-                                    </field>
-                                    <field name="lifecycle">
-                                        <string>lifecycle3</string>
-                                    </field>
-                                    <field name="membership">
-                                        <string>manager:/company/finances</string>
-                                    </field>
-                                    <field name="path">
-                                        <string>repository:collaboration:/documents/company/finances</string>
-                                    </field>
-                                </object>
-                                <object type="org.exoplatform.services.wcm.publication.context.impl.ContextConfig$Context">
-                                    <field name="name">
-                                        <string>context4</string>
-                                    </field>
-                                    <field name="priority">
-                                        <string>50</string>
-                                    </field>
-                                    <field name="lifecycle">
-                                        <string>lifecycle4</string>
-                                    </field>
-                                    <field name="memberships">
-                                      <collection type="java.util.ArrayList">
-                                        <value>
-                                            <string>manager:/communication</string>
-                                        </value>
-                                        <value>
-                                            <string>manager:/sanitaryAlert</string>
-                                        </value>
-                                        <value>
-                                            <string>manager:/informations</string>
-                                        </value>
-                                      </collection>
-                                    </field>
-                                    <field name="path">
-                                        <string>repository:collaboration:/documents/company/finances</string>
-                                    </field>
-                                    <field name="nodetype">
-                                        <string>exo:article</string>
-                                    </field>
-                                </object>
-                            </value>
-                        </collection>
-                    </field>
-                </object>
-            </object-param>
-        </init-params>
-    </component-plugin>
+	<target-component>org.exoplatform.services.wcm.extensions.publication.PublicationManager</target-component>
+	<component-plugin>
+		<name>AddContext</name>
+		<set-method>addContext</set-method>
+		<type>org.exoplatform.services.wcm.extensions.publication.context.ContextPlugin</type>
+		<init-params>
+			<object-param>
+				<name>contexts</name>
+				<object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig">
+					<field name="contexts">
+						<collection type="java.util.ArrayList">
+							<value>
+								<object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig$Context">
+									<field name="name">
+										<string>contextdefault</string>
+									</field>
+									<field name="priority">
+										<string>200</string>
+									</field>
+									<field name="lifecycle">
+										<string>lifecycle1</string>
+									</field>
+								</object>
+								<object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig$Context">
+									<field name="name">
+										<string>context1</string>
+									</field>
+									<field name="priority">
+										<string>100</string>
+									</field>
+									<field name="lifecycle">
+										<string>lifecycle1</string>
+									</field>
+									<field name="membership">
+										<string>*:/platform/web-contributors</string>
+									</field>
+									<field name="site">
+										<string>acme</string>
+									</field>
+									<field name="path">
+										<string>repository:collaboration:/sites content/live/acme/categories</string>
+									</field>
+								</object>
+								<object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig$Context">
+									<field name="name">
+										<string>context2</string>
+									</field>
+									<field name="priority">
+										<string>100</string>
+									</field>
+									<field name="lifecycle">
+										<string>lifecycle1</string>
+									</field>
+									<field name="site">
+										<string>classic</string>
+									</field>
+								</object>
+								<object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig$Context">
+									<field name="name">
+										<string>context3</string>
+									</field>
+									<field name="priority">
+										<string>80</string>
+									</field>
+									<field name="lifecycle">
+										<string>lifecycle3</string>
+									</field>
+									<field name="membership">
+										<string>manager:/company/finances</string>
+									</field>
+									<field name="path">
+										<string>repository:collaboration:/documents/company/finances</string>
+									</field>
+								</object>
+								<object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig$Context">
+									<field name="name">
+										<string>context4</string>
+									</field>
+									<field name="priority">
+										<string>50</string>
+									</field>
+									<field name="lifecycle">
+										<string>lifecycle4</string>
+									</field>
+									<field name="memberships">
+									  <collection type="java.util.ArrayList">
+										<value>
+											<string>manager:/communication</string>
+										</value>
+										<value>
+											<string>manager:/sanitaryAlert</string>
+										</value>
+										<value>
+											<string>manager:/informations</string>
+										</value>
+									  </collection>
+									</field>
+									<field name="path">
+										<string>repository:collaboration:/documents/company/finances</string>
+									</field>
+									<field name="nodetype">
+										<string>exo:article</string>
+									</field>
+								</object>
+							</value>
+						</collection>
+					</field>
+				</object>
+			</object-param>
+		</init-params>
+	</component-plugin>
 </external-component-plugins>{code}
 
 The logic is very simple. When creating a content, it should be attached a lifecycle with the lifecyle priority:
@@ -530,13 +531,6 @@ The logic is very simple. When creating a content, it should be attached a lifec
 ** The content creator has the _manager\:/company/finances_ membership.
 ** The content is stored in _repository\:collaboration\:/documents/company/finances_ or any subfolders.
 ** The content is a '{{exo\:article}}'.
-* If not, you will continue with _context3_.
-
-The logic is very simple. When you create a content, go lifecycle by lifecycle starting with the better priority:
-* _context4_ is the most important (priority=50): you will enroll the content in the lifecycle "lifecycle4" if:
-** The content creator has the _manager\:/company/finances_ membership.
-** The content is stored in '_repository\:collaboration\:/documents/company/finances_ or any subfolders.
-** The content is a _exo\:article_.
 * If not, you will continue with _context3_.
 
 {note}

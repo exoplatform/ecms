@@ -18,7 +18,10 @@ package org.exoplatform.services.wcm.navigation;
 
 import java.io.StringWriter;
 import java.io.Writer;
+import java.lang.reflect.Constructor;
+import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Map;
 
 import javax.portlet.MimeResponse;
 import javax.portlet.ResourceURL;
@@ -27,12 +30,17 @@ import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.config.UserPortalConfig;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.mop.SiteKey;
+import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.mop.Visibility;
+import org.exoplatform.portal.mop.navigation.NavigationContext;
 import org.exoplatform.portal.mop.navigation.Scope;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserNodeFilterConfig;
 import org.exoplatform.portal.mop.user.UserPortal;
+import org.exoplatform.portal.mop.user.UserPortalImpl;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.application.WebuiRequestContext;
 
@@ -46,19 +54,54 @@ public class NavigationUtils {
 
   public static final Scope ECMS_NAVIGATION_SCOPE = Scope.CHILDREN;
   
-  private static ThreadLocal<Boolean> gotNavigationKeeper = new ThreadLocal<Boolean>();
+  private static ThreadLocal<Map<String, String>> gotNavigationKeeper = 
+    new ThreadLocal<Map<String, String>>();
   
-  public static boolean gotNavigation() { 
-    Boolean gotNavigation = gotNavigationKeeper.get();
-    return gotNavigation == null ? false : gotNavigation.booleanValue();
+  private static Constructor<UserNavigation> userNavigationCtor = null;
+
+  private static final Log LOG = ExoLogger.getLogger(NavigationUtils.class.getName());
+  
+  static {
+    try {
+      //reflection here to get UserNavigation to avoid for using such as: 
+      //spaceNav = userPortal.getNavigation(SiteKey.group(groupId));
+      userNavigationCtor = UserNavigation.class.getDeclaredConstructor(
+                               new Class[] {UserPortalImpl.class, NavigationContext.class, boolean.class});
+      userNavigationCtor.setAccessible(true);
+    } catch (Exception e) {
+      LOG.error(e);
+    }
+  }  
+
+  public static boolean gotNavigation(String portal, String user) { 
+    Map<String, String> navigations = gotNavigationKeeper.get();
+    if (navigations == null) return false;
+    String navigation = navigations.get(portal + " " + user);
+    return (navigation != null);
   }
   
-  public static void setGotNavigation(boolean value) {
-    gotNavigationKeeper.set(value);
+  public static UserNavigation getUserNavigationOfPortal(UserPortal userPortal, String portalName) throws Exception {
+    UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
+    NavigationContext portalNav = userPortalConfigService.getNavigationService().
+                                                          loadNavigation(new SiteKey(SiteType.PORTAL, portalName));
+    if (portalNav == null) {
+      return null;
+    } else {
+      return userNavigationCtor.newInstance(userPortal, portalNav, false);
+    }
   }
   
   public static String getNavigationAsJSON(String portalName, String username) throws Exception {
-
+    String key = portalName + " " + username;
+    Map<String, String> navigations = gotNavigationKeeper.get();
+    if (navigations == null) {
+      navigations = new Hashtable<String, String>();
+    } else {
+      String navigationData = navigations.get(key);
+      if (navigationData != null) {
+        return navigationData;
+      }
+    }
     UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
     UserPortalConfig userPortalCfg = userPortalConfigService.getUserPortalConfig(portalName,
                                                                                  username,
@@ -72,12 +115,13 @@ public class NavigationUtils {
     UserNodeFilterConfig filterConfig = filterConfigBuilder.build();
     
     //get nodes
-    UserNavigation navigation = userPortal.getNavigation(SiteKey.portal(portalName));
+    UserNavigation navigation = getUserNavigationOfPortal(userPortal, portalName);
     UserNode root = userPortal.getNode(navigation, ECMS_NAVIGATION_SCOPE, filterConfig, null);
 
-    //set gotNavigation=true
-    setGotNavigation(true);
-    return createJsonTree(navigation, root);
+    String ret = createJsonTree(navigation, root);
+    navigations.put(key, ret);
+    gotNavigationKeeper.set(navigations);
+    return ret;
   }
   
   private static String createJsonTree(UserNavigation navigation, UserNode rootNode) throws Exception {

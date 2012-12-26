@@ -282,7 +282,7 @@ public class UICLVPortlet extends UIPortletApplication {
 
     if (context.getRemoteUser() == null
         || (Utils.isLiveMode() && sharedCache && !Utils.isPortalEditMode())
-        && Utils.isPortletViewMode()) {
+        && PortletMode.VIEW.equals(pContext.getApplicationMode())) {
       WCMService wcmService = getApplicationComponent(WCMService.class);
       pContext.getResponse().setProperty(MimeResponse.EXPIRATION_CACHE,
                                          "" + wcmService.getPortletExpirationCache());
