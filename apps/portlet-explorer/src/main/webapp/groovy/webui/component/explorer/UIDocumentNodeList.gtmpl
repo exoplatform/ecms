@@ -19,7 +19,6 @@
   import java.net.URLEncoder;
   import org.exoplatform.services.wcm.core.NodeLocation;
 
-  
   def linkManager = WCMCoreUtils.getService(LinkManager.class);
   def uiDocumentInfo = uicomponent.getAncestorOfType(UIDocumentInfo.class);
   def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
@@ -182,6 +181,7 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
        String expandLink = uicomponent.event("ExpandNode",Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS)) ;
        expandLink = URLEncoder.encode(org.apache.commons.lang.StringEscapeUtils.unescapeHtml(expandLink), "utf-8");
        def docListId = uicomponent.getID(data);
+       def manageVersionAction = uicomponent.event("ManageVersions", Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS));
     %>
     <div class="$folderIcon" style="padding: 2px 0px;  border-right: none;" onclick="eXo.ecm.UIFileView.clickFolder(this,'$expandLink', '$docListId');">
       <span>
@@ -208,7 +208,9 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
         </span>
       </div>
       <p class="fileInfoBottom">
-        <span class="fileInfoVersion"><%=versionNum%></span>
+        <a href="<%=manageVersionAction%>" class="fileInfoVersion">
+          <%=versionNum%>
+        </a>
         <%=fileDate%>
         <%=author%>
       </p>

@@ -31,6 +31,9 @@ import javax.jcr.RepositoryException;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.PageList;
+import org.exoplatform.ecm.webui.component.explorer.control.action.ManageVersionsActionComponent;
+import org.exoplatform.ecm.webui.component.explorer.versions.UIActivateVersion;
+import org.exoplatform.ecm.webui.component.explorer.versions.UIVersionInfo;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.link.LinkUtils;
@@ -49,6 +52,7 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPageIterator;
+import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
@@ -61,7 +65,8 @@ import org.exoplatform.webui.event.EventListener;
 @ComponentConfig (
     template =  "app:/groovy/webui/component/explorer/UIDocumentNodeList.gtmpl",
     events = {
-        @EventConfig(listeners = UIDocumentNodeList.ExpandNodeActionListener.class)
+        @EventConfig(listeners = UIDocumentNodeList.ExpandNodeActionListener.class),
+        @EventConfig(listeners = UIDocumentNodeList.ManageVersionsActionListener.class)
     }
 )
 public class UIDocumentNodeList extends UIContainer {
@@ -73,6 +78,7 @@ public class UIDocumentNodeList extends UIContainer {
   private int padding_;
   
   public UIDocumentNodeList() throws Exception {
+    addChild(ManageVersionsActionComponent.class, null, null);
     pageIterator_ = addChild(UIPageIterator.class, null, null);
     padding_ = 0;
   }
@@ -270,5 +276,30 @@ public class UIDocumentNodeList extends UIContainer {
       }
     }
   }
+  
+  public static class ManageVersionsActionListener extends EventListener<UIDocumentNodeList> {
+    public void execute(Event<UIDocumentNodeList> event) throws Exception {
+      NodeFinder nodeFinder = event.getSource().getApplicationComponent(NodeFinder.class);
+      UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
+      UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
+      String uri = event.getRequestContext().getRequestParameter(OBJECTID);
+      String workspaceName = event.getRequestContext().getRequestParameter("workspaceName");
+      // Manage ../ and ./
+      uri = LinkUtils.evaluatePath(uri);
+      // Just in order to check if the node exists
+      Node currentNode = (Node)nodeFinder.getItem(workspaceName, uri);currentNode.getProperty("a").getString().length();
+      uiExplorer.setIsHidePopup(false);
+      if (currentNode.canAddMixin(Utils.MIX_VERSIONABLE)) {
+        UIPopupContainer.activate(UIActivateVersion.class, 400);
+        event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
+      } else if (currentNode.isNodeType(Utils.MIX_VERSIONABLE)) {
+        UIVersionInfo uiVersion = event.getSource().createUIComponent(UIVersionInfo.class, null, null);
+        uiVersion.setCurrentNode(currentNode);
+        UIPopupContainer.activate(uiVersion, 700, 500);
+        event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
+      }
+    }
+  }
+
   
 }
