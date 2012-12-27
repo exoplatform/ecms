@@ -41,7 +41,7 @@ public class UINodeTypeSearch extends UIFormInputContainer<String> {
     if (getChild(UIFormStringInput.class) != null) {
       removeChild(UIFormStringInput.class);
     }
-    addChild(new UIFormStringInput("NodeTypeText", "NodeTypeText", "*"));
+    addChild(new UIFormStringInput("NodeTypeText", "NodeTypeText", null));
     addValidator(NodeTypeNameValidator.class);
   }
 

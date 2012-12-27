@@ -1,43 +1,15 @@
 <%
-/**
- * Created by The eXo Platform SARL
- * Author : Hoang Van Hung
- *          hunghvit@gmail.com
- * Dec 22, 2009
- * 11:00:48 AM 
- */  
+  def rcontext = _ctx.getRequestContext() ;
+  String searchLabel = uicomponent.getResource('UINodeTypeSearh.msg.title')
+  def requireJs = rcontext.getJavascriptManager().getRequireJS();
+  requireJs.require("SHARED/wcm-utils", "wcmutil");
+  requireJs.addScripts("wcmutil.WCMUtils.searchNodeTypeOnKeyPress();");
+  requireJs.addScripts("wcmutil.WCMUtils.initSearch('" + uicomponent.id +"','NodeTypeText','"+searchLabel+"');");
 %>
-<div class="UINodeTypeSearh $uicomponent.id  ClearFix">
-  <div class="UIBarStyle">
-    <div class="NormalBarStyle">
-      <div class="LeftBar">
-        <div class="RightBar">
-          <div class="MiddleBar">
-            <table style="margin: auto; width: auto;">
-              <tr>
-                <td class="FieldLabel">
-                    <%=uicomponent.getResource('UINodeTypeSearh.msg.NodeType')%>
-                </td>
-                <td class="GroupInput">
-                    <%
-                      uicomponent.renderChildren();
-                      def rcontext = _ctx.getRequestContext() ;
-                      rcontext.getJavascriptManager().require("SHARED/wcm-utils", "wcmutil").
-                      addScripts("wcmutil.WCMUtils.searchNodeTypeOnKeyPress();");
-                    %>
-                </td>  
-                <td class="ButtonCell">
-                    <a href="<%=uicomponent.event('SearchNodeType')%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResource('UINodeTypeSearh.msg.title')%>"><div class="SearchIcon"></div></a>
-                </td>
-               </tr>
-            </table>
-          </div>
-        </div>        
-      </div>        
-    </div>
-  </div>
- 
+<div id="$uicomponent.id" class="uiSearchInput" style="position: absolute;">       
+
+  <a class="AdvancedSearch"  rel="tooltip" data-placement="bottom" title="<%=searchLabel%>" href="<%=uicomponent.event("SearchNodeType");%>"></a>
+  <% 
+    uicomponent.renderChildren();      
+  %>  
 </div>
-
-
-
