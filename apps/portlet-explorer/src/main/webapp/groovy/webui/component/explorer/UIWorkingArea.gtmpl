@@ -65,7 +65,7 @@
     jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.loadEffectedSideBar('$expandNode');");
   }
 %>
-<div id="wcm-notice" style="display: none;" class="wcm-alert wcm-notice"></div>
+<div id="wcm-notice" style="display: none;" class="alert alert-success wcmAlertSuccess"></div>
 <div class="uiWorkingArea ClearFix" id="UIWorkingArea" initWithoutLeftContainer="$initWithoutLeftContainer">
   <%
 	  uicomponent.renderChild(UIRightClickPopupMenu.class) ;

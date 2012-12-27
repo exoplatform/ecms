@@ -1253,7 +1253,7 @@ function ECMUtils() {
         ECMUtils.prototype.activateWCMDeleteNotice = function(nodePathDelete, deleteNotice) {
           var noticeElem = document.getElementById("wcm-notice");
           if(nodePathDelete == null || nodePathDelete == '') {
- 	    noticeElem.style.display = "none";
+ 	          noticeElem.style.display = "none";
             noticeElem.innerHTML = "";
 	  } else {
             var addressBar = gj("#UIAddressBar");
@@ -1265,7 +1265,7 @@ function ECMUtils() {
             noticeElem.style.display = "block";
             nodePathDelete = " <a href=\""+nodePathDelete+"\">Undo</a>";
             deleteNotice = deleteNotice + nodePathDelete;
-            noticeElem.innerHTML = deleteNotice;
+            noticeElem.innerHTML = '<i class="uiIconSuccess"></i>' + deleteNotice;
 	    noticeElem.style.marginLeft = "-" + noticeElem.offsetWidth/2 + "px";
           }
 	}
