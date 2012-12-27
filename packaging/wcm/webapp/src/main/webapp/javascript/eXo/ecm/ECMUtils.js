@@ -489,98 +489,6 @@ function ECMUtils() {
     }
   };
   
-  /**
-   * @function        actionbarContainer_OnResize
-   * @purpose         Handle for the resize event of Content Explorer
-   *                  Calculate to determine which actionButton will be visible, which will be put
-   *                  in HiddenActionList
-   * @author          vinh_nguyen@exoplatform.com
-   */
-  ECMUtils.prototype.actionbarContainer_OnResize = function () {
-    Self.actionBarContainer = gj(Self.uiRightContainer).find('div.UIActionBar:first')[0];
-    var dmsMenuContainer    = gj(Self.uiRightContainer).find('div.DMSMenuItemContainer:first')[0];
-    if (!Self.actionBarContainer) return;//No action bar, no resize
-    Self.showMoreActionContainer = document.getElementById("ShowMoreActionContainer");
-    Self.listHiddenActionContainer = gj(Self.showMoreActionContainer).find("div.ListHiddenActionContainer:first")[0];
-    Self.viewBarContainer = gj(Self.uiRightContainer).find("div.UIViewBarContainer:first")[0];
-    var allowedSpace = Self.actionBarContainer.offsetWidth - Self.viewBarContainer.offsetWidth -13;
-    var sumWidth = 0;
-    var flagMore = true;
-    var visibleActionChildren = gj(dmsMenuContainer).children(".NormalSubItem");
-    var hiddenActionChildren = gj(Self.listHiddenActionContainer).children(".NormalSubItem");
-    if (hiddenActionChildren.length > 0) {
-      Self.showMoreActionContainer.style.display = "block";
-      sumWidth = Self.showMoreActionContainer.offsetWidth;
-      flagMore = false;
-    } else {
-      Self.showMoreActionContainer.style.display = "none";
-    }
-    for (var i = 0; i < visibleActionChildren.length; i++) {
-      sumWidth += visibleActionChildren[i].offsetWidth;
-    }
-    
-    var index = visibleActionChildren.length - 1;
-    var flag = true;
-    var removedItem;
-    while (sumWidth > allowedSpace && index >= 0) {
-      if (flagMore) {
-        Self.showMoreActionContainer.style.display = "block";
-        flagMore = false;
-        sumWidth += Self.showMoreActionContainer.offsetWidth;
-      }
-      sumWidth -= visibleActionChildren[index].offsetWidth;
-      removedItem = dmsMenuContainer.removeChild(visibleActionChildren[index]);
-      gj(Self.listHiddenActionContainer).prepend(removedItem);
-      flag = false;
-      index--;
-    }
-    
-   if (flag) {
-   	  var flagBorderRight = true;
-      hiddenActionChildren = gj(Self.listHiddenActionContainer).children(".NormalSubItem");
-      if (hiddenActionChildren.length <=0) {
-      	Self.showMoreActionContainer.style.display = "none";
-      	flag=false;;
-      }
-      visibleActionChildren = gj(dmsMenuContainer).children(".NormalSubItem");
-      sumWidth = 0;
-      for (var i = 0; i < visibleActionChildren.length; i++) {
-        sumWidth += visibleActionChildren[i].offsetWidth;
-      }
-      remainItem = hiddenActionChildren.length;
-      while (flag) {
-	      removedItem = Self.listHiddenActionContainer.removeChild(hiddenActionChildren[0]);
-	      gj(dmsMenuContainer).append(removedItem);
-	      remainItem--;
-	      sumWidth += removedItem.offsetWidth;
-	      if (flagBorderRight) {
-	      	sumWidth++;
-	      	flagBorderRight = false;
-	      }
-	      if (sumWidth > (allowedSpace - (remainItem>0?Self.showMoreActionContainer.offsetWidth:0)) ) {
-	        flag = false;
-	        dmsMenuContainer.removeChild(removedItem);
-	        gj(Self.listHiddenActionContainer).prepend(removedItem);
-	      } else {
-	        hiddenActionChildren = gj(Self.listHiddenActionContainer).children(".NormalSubItem");
-	        remainItem = hiddenActionChildren.length;
-	        if (remainItem <= 0) {
-	          Self.showMoreActionContainer.style.display = "none"; 
-	          flag = false;
-	        }
-	      }
-	    }
-    }
-    visibleActionChildren = gj(dmsMenuContainer).children(".NormalSubItem");
-    for (var i = 0; i < visibleActionChildren.length; i++) {
-       if (i==visibleActionChildren.length-1) {
-        gj(visibleActionChildren[i]).css("border", "none"); 
-       }else {
-       	gj(visibleActionChildren[i]).css("border-right", "1px solid #e1e1e1");       	
-       }
-    }
-  };
-
   ECMUtils.prototype.showDocumentInformation = function (obj, event) {
     if (!obj) return;
     event = event || window.event;
@@ -775,6 +683,26 @@ function ECMUtils() {
     var parentOfMovedNode = movedItem.parentNode;
     parentOfMovedNode.removeChild(movedItem);
   }
+  
+  /**
+   * @function        actionbarContainer_OnResize
+   * @purpose         Handle for the resize event of Content Explorer
+   *                  Calculate to determine which actionButton will be visible, which will be put
+   *                  in HiddenActionList
+   * @author          vinh_nguyen@exoplatform.com
+   */
+  ECMUtils.prototype.actionbarContainer_OnResize = function () {
+    var divAction = document.getElementById("uiActionsBarContainer");
+    var uiMainActionContainer   = gj(divAction).find("ul.nav-pills")[0];
+    if (!uiMainActionContainer) return; 
+    var listHiddenActionContainer = gj(uiMainActionContainer).find("li.listHiddenActionsContainer:first")[0];
+    var uiDropdownContainer   = gj(listHiddenActionContainer).find("ul.dropdown-menu:first")[0];
+    var allowedSpace  = uiMainActionContainer.offsetWidth - 225;
+    gj(uiMainActionContainer).find("li").removeClass("last");
+    Self.containerWithDropDownItem_OnResize(uiMainActionContainer, allowedSpace, listHiddenActionContainer, uiDropdownContainer, "active");
+    var visibleTabsChildren  = gj(uiMainActionContainer).children("li").not(".dropdown");
+    gj(visibleTabsChildren[visibleTabsChildren.length-1]).addClass("last");
+  };
   /**
    * @function       tabsContainer_OnResize
    * @purpose        re-arrange the TabsContainer inside Right Container
@@ -783,13 +711,13 @@ function ECMUtils() {
   ECMUtils.prototype.tabsContainer_OnResize = function () {
     var uiMainTabsContainer   = gj(Self.uiRightContainer).find("ul.uiTabsContainer:first")[0];
     if (!uiMainTabsContainer) return; 
-    var listHideTabsContainer = gj(uiMainTabsContainer).find("li.listHiddenTabsContainer:first")[0];
-    var uiDropdownContainer   = gj(listHideTabsContainer).find("ul.dropdown-menu:first")[0];
+    var listHiddenTabsContainer = gj(uiMainTabsContainer).find("li.listHiddenTabsContainer:first")[0];
+    var uiDropdownContainer   = gj(listHiddenTabsContainer).find("ul.dropdown-menu:first")[0];
     var paddingLeft = gj(uiMainTabsContainer).css("padding-left").replace("px","");
     var paddingRight = gj(uiMainTabsContainer).css("padding-right").replace("px","");
     var allowedSpace  = uiMainTabsContainer.offsetWidth - paddingLeft - paddingRight;
     gj(uiMainTabsContainer).find("li").removeClass("last");
-    Self.containerWithDropDownItem_OnResize(uiMainTabsContainer, allowedSpace, listHideTabsContainer, uiDropdownContainer, "active");
+    Self.containerWithDropDownItem_OnResize(uiMainTabsContainer, allowedSpace, listHiddenTabsContainer, uiDropdownContainer, "active");
     var visibleTabsChildren  = gj(uiMainTabsContainer).children("li").not(".dropdown");
     gj(visibleTabsChildren[visibleTabsChildren.length-1]).addClass("last");
   }
@@ -827,8 +755,8 @@ function ECMUtils() {
     while (sumWidth > allowedSpace && visitedItemIndex >= 0) {
         if (!moveFlag || (moveFlag && !gj(visibleTabsChildren[visitedItemIndex]).hasClass(activeClass))) {
           if (showListContainerFlag) {
+          	gj(listHiddenContainer).css("display", "block");
             sumWidth += listHiddenContainer.offsetWidth;
-            gj(listHiddenContainer).css("display", "block");
             showListContainerFlag = false;
           }
           sumWidth -= visibleTabsChildren[visitedItemIndex].offsetWidth;
