@@ -10,7 +10,6 @@
       <PublicationRequestApproval>Request Approval</PublicationRequestApproval>
       <PublicationApproveContent>Approve Content</PublicationApproveContent>
       <PublicationPublish>Publish</PublicationPublish>
-      <ShowDrives>Show/Hide Drives</ShowDrives>
     </tooltip>
   </UIActionBar>
 </bundle>

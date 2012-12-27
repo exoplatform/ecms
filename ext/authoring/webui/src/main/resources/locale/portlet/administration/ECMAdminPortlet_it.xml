@@ -5,7 +5,6 @@
           <publicationRequestApproval>Pubblicazione > Richiedi Approvazione</publicationRequestApproval>
           <publicationApproveContent>Pubblicazione > Approva Contenuto</publicationApproveContent>
           <publicationPublish>Pubblicazione > Publica</publicationPublish>
-          <showDrives>Mostra Drive</showDrives>
   		</label>
   </UIViewFormTabPane>
 </bundle>

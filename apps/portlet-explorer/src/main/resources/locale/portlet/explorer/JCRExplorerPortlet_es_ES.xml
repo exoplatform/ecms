@@ -3021,7 +3021,6 @@
   <UIDrivesArea>
     <DrivesArea>
       <allDrives>Haga clic en el botón para mostrar unidades en la barra de acción para mostrar/ ocultar una lista de unidades.</allDrives>
-      <ShowDrives>Mostrar unidades</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>
   <UploadFileMimeTypesValidator>

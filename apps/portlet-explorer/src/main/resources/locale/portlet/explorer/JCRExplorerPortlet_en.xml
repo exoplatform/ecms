@@ -3398,7 +3398,6 @@
   <UIDrivesArea>
     <DrivesArea>
       <allDrives>Click the Show Drives button on the action bar to show/hide a list of drives.</allDrives>
-      <ShowDrives>Show Drives</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>

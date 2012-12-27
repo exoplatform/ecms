@@ -3429,7 +3429,6 @@
   <UIDrivesArea>
     <DrivesArea>
       <allDrives>Cliquez sur le bouton "Afficher les lecteurs" sur la barre d'action pour afficher / cacher la liste des lecteurs.</allDrives>
-      <ShowDrives>Afficher les lecteurs</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>

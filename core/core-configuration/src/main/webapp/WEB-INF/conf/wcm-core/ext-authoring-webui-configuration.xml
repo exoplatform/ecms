@@ -94,33 +94,6 @@
 						</field>
 					</object>
 				</object-param>
-				<object-param>
-					<name>ShowDrives</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<!-- The type of extension, here it is the type related to the Action Bar in the File Explorer -->
-						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
-						<!-- The name of your action -->
-						<field name="name"><string>ShowDrives</string></field>
-						<!-- The full qualified name of your webui component -->
-						<field name="component"><string>org.exoplatform.wcm.extensions.ui.ShowDrivesAction</string></field>
-						<!-- The external filters -->
-						<field name="extendedFilters">
-							<collection type="java.util.ArrayList">
-								<value>									
-									<object type="org.exoplatform.webui.ext.filter.impl.UserACLFilter">
-										<field name="permissions">
-											<collection type="java.util.ArrayList">
-												<value>
-													<string>*:/platform/web-contributors</string>
-												</value>
-											</collection>
-										</field>
-									</object>
-								</value>
-							</collection>
-						</field>
-					</object>
-				</object-param>
 			</init-params>
 		</component-plugin>
 	</external-component-plugins>

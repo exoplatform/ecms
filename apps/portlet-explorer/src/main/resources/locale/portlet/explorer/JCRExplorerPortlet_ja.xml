@@ -3323,7 +3323,6 @@
       <allDrives>
 	      Click the Show Drives button on the action bar to show/hide a list of drives.
       </allDrives>
-      <ShowDrives>ドライブの表示</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>

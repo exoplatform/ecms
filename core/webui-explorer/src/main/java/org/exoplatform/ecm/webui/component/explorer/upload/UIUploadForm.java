@@ -35,15 +35,12 @@ import javax.jcr.NamespaceRegistry;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
-import javax.jcr.Value;
 import javax.jcr.lock.LockException;
 import javax.jcr.nodetype.ConstraintViolationException;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIMultiLanguageForm;
-import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIMultiLanguageManager;
 import org.exoplatform.ecm.webui.form.validator.IllegalDMSCharValidator;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.tree.selectone.UIOneTaxonomySelector;
@@ -64,7 +61,6 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
-import org.exoplatform.services.jcr.impl.core.value.ValueFactoryImpl;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -103,27 +99,27 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  */
 
 @ComponentConfigs(
-    {
-      @ComponentConfig(
-          lifecycle = UIFormLifecycle.class,
-          template = "app:/groovy/webui/component/explorer/upload/UIUploadForm.gtmpl",
-          events = {
-            @EventConfig(listeners = UIUploadForm.SaveActionListener.class),
-            @EventConfig(listeners = UIUploadForm.CancelActionListener.class, phase = Phase.DECODE),
-            @EventConfig(listeners = UIUploadForm.AddUploadActionListener.class, phase = Phase.DECODE),
-            @EventConfig(listeners = UIUploadForm.RemoveUploadActionListener.class, phase = Phase.DECODE)
-          }
-      ),
-      @ComponentConfig(
-          type = UIFormMultiValueInputSet.class,
-          id="UploadMultipleInputset",
-          events = {
-            @EventConfig(listeners = UIUploadForm.RemoveActionListener.class, phase = Phase.DECODE),
-            @EventConfig(listeners = UIUploadForm.AddActionListener.class, phase = Phase.DECODE)
-          }
-      )
-    }
-)
+        {
+          @ComponentConfig(
+                  lifecycle = UIFormLifecycle.class,
+                  template = "app:/groovy/webui/component/explorer/upload/UIUploadForm.gtmpl",
+                  events = {
+                    @EventConfig(listeners = UIUploadForm.SaveActionListener.class),
+                    @EventConfig(listeners = UIUploadForm.CancelActionListener.class, phase = Phase.DECODE),
+                    @EventConfig(listeners = UIUploadForm.AddUploadActionListener.class, phase = Phase.DECODE),
+                    @EventConfig(listeners = UIUploadForm.RemoveUploadActionListener.class, phase = Phase.DECODE)
+                  }
+                  ),
+                  @ComponentConfig(
+                          type = UIFormMultiValueInputSet.class,
+                          id="UploadMultipleInputset",
+                          events = {
+                            @EventConfig(listeners = UIUploadForm.RemoveActionListener.class, phase = Phase.DECODE),
+                            @EventConfig(listeners = UIUploadForm.AddActionListener.class, phase = Phase.DECODE)
+                          }
+                          )
+        }
+        )
 
 public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectable {
 
@@ -150,13 +146,13 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
   private HashMap<String, List<String>> mapTaxonomies = new HashMap<String, List<String>>();
   private List<NodeLocation> listUploadedNodes = new ArrayList<NodeLocation>();
   private boolean taxonomyMandatory = false;
-  
+
   private DocumentTypeService docService;
 
   public UIUploadForm() throws Exception {
     setMultiPart(true) ;
     addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).
-                              addValidator(IllegalDMSCharValidator.class));
+            addValidator(IllegalDMSCharValidator.class));
     PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
     PortletPreferences portletPref = pcontext.getRequest().getPreferences();
     String limitPref = portletPref.getValue(Utils.UPLOAD_SIZE_LIMIT_MB, "");
@@ -230,8 +226,8 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
     PortletPreferences portletPref = pcontext.getRequest().getPreferences();
     String categoryMandatoryWhenFileUpload =  portletPref.getValue(Utils.CATEGORY_MANDATORY, "").trim();
     UIFormMultiValueInputSet uiFormMultiValue = createUIComponent(UIFormMultiValueInputSet.class,
-                                                                  "UploadMultipleInputset",
-                                                                  null);
+            "UploadMultipleInputset",
+            null);
     uiFormMultiValue.setId(FIELD_LISTTAXONOMY);
     uiFormMultiValue.setName(FIELD_LISTTAXONOMY);
     uiFormMultiValue.setType(UIFormStringInput.class);
@@ -348,9 +344,9 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
     DMSMimeTypeResolver mimeTypeSolver = DMSMimeTypeResolver.getInstance();
     Node selectedNode = uiExplorer.getCurrentNode();
     if (categoryMandatoryWhenFileUpload.equalsIgnoreCase("true") &&
-        (getMapTaxonomies().size() == 0) && !uiExplorer.getCurrentNode().hasNode(JCRCONTENT)) {
+            (getMapTaxonomies().size() == 0) && !uiExplorer.getCurrentNode().hasNode(JCRCONTENT)) {
       uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.taxonomyPath-error", null,
-          ApplicationMessage.WARNING)) ;
+              ApplicationMessage.WARNING)) ;
 
       return ;
     }
@@ -371,14 +367,14 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
           }
           if(uiFormUploadInput.getUploadResource() == null) {
             uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.fileName-error", null,
-                                                    ApplicationMessage.WARNING)) ;
+                    ApplicationMessage.WARNING)) ;
 
             return ;
           }
           String fileName = uiFormUploadInput.getUploadResource().getFileName();
           if(fileName == null || fileName.length() == 0) {
             uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.fileName-error", null,
-                                                    ApplicationMessage.WARNING)) ;
+                    ApplicationMessage.WARNING)) ;
 
             return;
           }
@@ -403,7 +399,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
               listUploadedNodes.clear();
             }
             uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.fileName-error", null,
-                                                    ApplicationMessage.WARNING)) ;
+                    ApplicationMessage.WARNING)) ;
 
             return ;
           }
@@ -419,7 +415,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
               listUploadedNodes.clear();
             }
             uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.fileName-error", null,
-                                                    ApplicationMessage.WARNING)) ;
+                    ApplicationMessage.WARNING)) ;
 
             return;
           }
@@ -439,7 +435,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
 
           if (!passNameValidation(name)) {
             uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.fileName-invalid-with-name",
-                new Object[] {name}, ApplicationMessage.WARNING));
+                    new Object[] {name}, ApplicationMessage.WARNING));
 
             return;
           }
@@ -477,12 +473,12 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
                 }
               } catch (ItemNotFoundException e) {
                 uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null,
-                    ApplicationMessage.WARNING)) ;
+                        ApplicationMessage.WARNING)) ;
 
                 return;
               } catch (RepositoryException re) {
                 uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null,
-                    ApplicationMessage.WARNING)) ;
+                        ApplicationMessage.WARNING)) ;
 
                 return;
               } catch(Exception e) {
@@ -490,7 +486,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
                   LOG.error("An unexpected error occurs", e);
                 }
                 uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null,
-                    ApplicationMessage.WARNING)) ;
+                        ApplicationMessage.WARNING)) ;
 
                 return;
               }
@@ -499,105 +495,33 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
           boolean isExist = selectedNode.hasNode(name) ;
           String newNodeUUID = null;
 
-          if(isMultiLanguage()) {
-            ValueFactoryImpl valueFactory = (ValueFactoryImpl) uiExplorer.getSession().getValueFactory() ;
-            Value contentValue = valueFactory.createValue(inputStream) ;
-            multiLangService.addFileLanguage(selectedNode, name, contentValue, mimeType,
-                getLanguageSelected(), uiExplorer.getRepositoryName(), isDefault_) ;
-            uiExplorer.setIsHidePopup(true) ;
-            UIMultiLanguageManager uiLanguageManager = getAncestorOfType(UIMultiLanguageManager.class) ;
-            UIMultiLanguageForm uiMultiForm = uiLanguageManager.getChild(UIMultiLanguageForm.class) ;
-            uiMultiForm.doSelect(uiExplorer.getCurrentNode()) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiLanguageManager);
-          } else {
-            if(selectedNode.getPrimaryNodeType().isNodeType(Utils.NT_FILE)) {
-              if(!selectedNode.isCheckedOut()) selectedNode.checkout() ;
-              Node contentNode = selectedNode.getNode(Utils.JCR_CONTENT);
-              if(contentNode.getProperty(Utils.JCR_MIMETYPE).getString().equals(mimeType)) {
-                contentNode.setProperty(Utils.JCR_DATA, inputStream);
-                contentNode.setProperty(Utils.JCR_LASTMODIFIED, new GregorianCalendar());
-                selectedNode.save() ;
-                uiManager.setRendered(false);
-                uiExplorer.updateAjax(event);
-                return;
-              }
-            }
-            if(!isExist || isKeepFile) {
-              String nodeType = contains(docService.getMimeTypes(ACCESSIBLE_MEDIA), mimeType) ? 
-                                NodetypeConstant.EXO_ACCESSIBLE_MEDIA : Utils.NT_FILE; 
-              newNodeUUID = cmsService.storeNodeByUUID(nodeType, selectedNode,
-                  getInputProperties(name, inputStream, mimeType), true) ;
-              selectedNode.save();
-              selectedNode.getSession().save();
-              if ((listTaxonomyNameNew != null) && (listTaxonomyNameNew.size() > 0)) {
-                Node newNode = null;
-                try {
-                  newNode = selectedNode.getSession().getNodeByUUID(newNodeUUID);
-                } catch(ItemNotFoundException e) {
-                  newNode = Utils.findNodeByUUID(newNodeUUID);
-                }
-                if (newNode != null) {
-                  for (String categoryPath : listTaxonomyNameNew) {
-                    try {
-                      if (categoryPath.startsWith("/")) categoryPath = categoryPath.substring(1);
-                      if(categoryPath.indexOf("/")>0)
-                      {
-                        taxonomyTree = categoryPath.substring(0, categoryPath.indexOf("/"));
-                        taxonomyPath = categoryPath.substring(categoryPath.indexOf("/") + 1);
-                      }
-                      else
-                      {
-                        taxonomyTree = categoryPath;
-                        taxonomyPath = "";
-                      }
-                      taxonomyService.addCategory(newNode, taxonomyTree, taxonomyPath);
-                    } catch (ItemExistsException e) {
-                      uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.ItemExistsException",
-                          null, ApplicationMessage.WARNING));
-                      return;
-                    } catch (RepositoryException e) {
-                      if (LOG.isErrorEnabled()) {
-                        LOG.error("Unexpected error", e);
-                      }
-                      JCRExceptionManager.process(uiApp, e);
-                      return;
-                    }
-                  }
-                }
-              }
-            } else {
-              Node node = selectedNode.getNode(name) ;
-              if (isTaxonomyChildNode(node)) {
-                LinkManager linkManager = getApplicationComponent(LinkManager.class);
-                node = linkManager.getTarget(node);
-              }
-              if(!node.getPrimaryNodeType().isNodeType(Utils.NT_FILE)) {
-                Object[] args = { name } ;
-                uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.name-is-exist", args,
-                                                        ApplicationMessage.WARNING)) ;
-
-                return ;
-              }
-              String nodetypes = System.getProperty("wcm.nodetypes.ignoreversion");
-              if(nodetypes == null || nodetypes.length() == 0)
-             	  nodetypes = "exo:webContent";
-              if(Utils.isMakeVersionable(node, nodetypes.split(","))) {
-              	if(!node.isNodeType(Utils.MIX_VERSIONABLE) && node.canAddMixin(Utils.MIX_VERSIONABLE)) {
-                  node.addMixin(Utils.MIX_VERSIONABLE);
-                }
-              }
-              Node contentNode = node.getNode(Utils.JCR_CONTENT);
-              if(!node.isCheckedOut()) node.checkout() ;
+          if(selectedNode.getPrimaryNodeType().isNodeType(Utils.NT_FILE)) {
+            if(!selectedNode.isCheckedOut()) selectedNode.checkout() ;
+            Node contentNode = selectedNode.getNode(Utils.JCR_CONTENT);
+            if(contentNode.getProperty(Utils.JCR_MIMETYPE).getString().equals(mimeType)) {
               contentNode.setProperty(Utils.JCR_DATA, inputStream);
-              contentNode.setProperty(Utils.JCR_MIMETYPE, mimeType);
               contentNode.setProperty(Utils.JCR_LASTMODIFIED, new GregorianCalendar());
-              if (node.isNodeType("exo:datetime")) {
-                node.setProperty("exo:dateModified",new GregorianCalendar()) ;
+              selectedNode.save() ;
+              uiManager.setRendered(false);
+              uiExplorer.updateAjax(event);
+              return;
+            }
+          }
+          if(!isExist || isKeepFile) {
+            String nodeType = contains(docService.getMimeTypes(ACCESSIBLE_MEDIA), mimeType) ? 
+                    NodetypeConstant.EXO_ACCESSIBLE_MEDIA : Utils.NT_FILE; 
+            newNodeUUID = cmsService.storeNodeByUUID(nodeType, selectedNode,
+                    getInputProperties(name, inputStream, mimeType), true) ;
+            selectedNode.save();
+            selectedNode.getSession().save();
+            if ((listTaxonomyNameNew != null) && (listTaxonomyNameNew.size() > 0)) {
+              Node newNode = null;
+              try {
+                newNode = selectedNode.getSession().getNodeByUUID(newNodeUUID);
+              } catch(ItemNotFoundException e) {
+                newNode = Utils.findNodeByUUID(newNodeUUID);
               }
-              node.save();
-              ListenerService listenerService = getApplicationComponent(ListenerService.class);
-              listenerService.broadcast(CmsService.POST_EDIT_CONTENT_EVENT, this, node);
-              if (listTaxonomyNameNew != null) {
+              if (newNode != null) {
                 for (String categoryPath : listTaxonomyNameNew) {
                   try {
                     if (categoryPath.startsWith("/")) categoryPath = categoryPath.substring(1);
@@ -611,10 +535,10 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
                       taxonomyTree = categoryPath;
                       taxonomyPath = "";
                     }
-                    taxonomyService.addCategory(node, taxonomyTree, taxonomyPath);
+                    taxonomyService.addCategory(newNode, taxonomyTree, taxonomyPath);
                   } catch (ItemExistsException e) {
                     uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.ItemExistsException",
-                        null, ApplicationMessage.WARNING));
+                            null, ApplicationMessage.WARNING));
                     return;
                   } catch (RepositoryException e) {
                     if (LOG.isErrorEnabled()) {
@@ -623,6 +547,66 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
                     JCRExceptionManager.process(uiApp, e);
                     return;
                   }
+                }
+              }
+            }
+          } else {
+            Node node = selectedNode.getNode(name) ;
+            if (isTaxonomyChildNode(node)) {
+              LinkManager linkManager = getApplicationComponent(LinkManager.class);
+              node = linkManager.getTarget(node);
+            }
+            if(!node.getPrimaryNodeType().isNodeType(Utils.NT_FILE)) {
+              Object[] args = { name } ;
+              uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.name-is-exist", args,
+                      ApplicationMessage.WARNING)) ;
+
+              return ;
+            }
+            String nodetypes = System.getProperty("wcm.nodetypes.ignoreversion");
+            if(nodetypes == null || nodetypes.length() == 0)
+              nodetypes = "exo:webContent";
+            if(Utils.isMakeVersionable(node, nodetypes.split(","))) {
+              if(!node.isNodeType(Utils.MIX_VERSIONABLE) && node.canAddMixin(Utils.MIX_VERSIONABLE)) {
+                node.addMixin(Utils.MIX_VERSIONABLE);
+              }
+            }
+            Node contentNode = node.getNode(Utils.JCR_CONTENT);
+            if(!node.isCheckedOut()) node.checkout() ;
+            contentNode.setProperty(Utils.JCR_DATA, inputStream);
+            contentNode.setProperty(Utils.JCR_MIMETYPE, mimeType);
+            contentNode.setProperty(Utils.JCR_LASTMODIFIED, new GregorianCalendar());
+            if (node.isNodeType("exo:datetime")) {
+              node.setProperty("exo:dateModified",new GregorianCalendar()) ;
+            }
+            node.save();
+            ListenerService listenerService = getApplicationComponent(ListenerService.class);
+            listenerService.broadcast(CmsService.POST_EDIT_CONTENT_EVENT, this, node);
+            if (listTaxonomyNameNew != null) {
+              for (String categoryPath : listTaxonomyNameNew) {
+                try {
+                  if (categoryPath.startsWith("/")) categoryPath = categoryPath.substring(1);
+                  if(categoryPath.indexOf("/")>0)
+                  {
+                    taxonomyTree = categoryPath.substring(0, categoryPath.indexOf("/"));
+                    taxonomyPath = categoryPath.substring(categoryPath.indexOf("/") + 1);
+                  }
+                  else
+                  {
+                    taxonomyTree = categoryPath;
+                    taxonomyPath = "";
+                  }
+                  taxonomyService.addCategory(node, taxonomyTree, taxonomyPath);
+                } catch (ItemExistsException e) {
+                  uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.ItemExistsException",
+                          null, ApplicationMessage.WARNING));
+                  return;
+                } catch (RepositoryException e) {
+                  if (LOG.isErrorEnabled()) {
+                    LOG.error("Unexpected error", e);
+                  }
+                  JCRExceptionManager.process(uiApp, e);
+                  return;
                 }
               }
             }
@@ -663,7 +647,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
           String fileSize = Utils.calculateFileSize(size);
           String iconUpload = Utils.getNodeTypeIcon(uploadedNode, "16x16Icon").replaceAll("nt_file16x16Icon ", "");
           String[] arrValues = {iconUpload, Text.unescapeIllegalJcrChars(fileName),
-              Text.unescapeIllegalJcrChars(name), fileSize, mimeType, uploadedNode.getPath()};
+                  Text.unescapeIllegalJcrChars(name), fileSize, mimeType, uploadedNode.getPath()};
           listUploadedNodes.add(NodeLocation.getNodeLocationByNode(uploadedNode));
           listArrValues.add(arrValues);
           inputStream.close();
@@ -677,16 +661,16 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
     } catch(ConstraintViolationException con) {
       Object[] args = {name, } ;
       throw new MessageException(new ApplicationMessage("UIUploadForm.msg.contraint-violation",
-                                                         args, ApplicationMessage.WARNING)) ;
+              args, ApplicationMessage.WARNING)) ;
     } catch(LockException lock) {
       throw new MessageException(new ApplicationMessage("UIUploadForm.msg.lock-exception",
-          null, ApplicationMessage.WARNING)) ;
+              null, ApplicationMessage.WARNING)) ;
     } catch(AccessDeniedException ade) {
       throw new MessageException(new ApplicationMessage("UIActionBar.msg.access-add-denied",
-          null, ApplicationMessage.WARNING));
+              null, ApplicationMessage.WARNING));
     } catch(AccessControlException ace) {
       throw new MessageException(new ApplicationMessage("UIActionBar.msg.access-add-denied",
-          null, ApplicationMessage.WARNING));
+              null, ApplicationMessage.WARNING));
     } catch (ItemExistsException iee) {
       uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.item-existed", null, ApplicationMessage.WARNING));
     } catch(Exception e) {
@@ -796,7 +780,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
 
   private boolean passNameValidation(String name) throws Exception {
     if (name == null || name.contains("[") || name.contains("]") ||
-        name.contains("\"") || name.contains("/"))
+            name.contains("\"") || name.contains("/"))
       return false;
 
     int count = 0;
@@ -809,7 +793,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
       if (name.split(":").length < 2) return false;
       String namespace = name.split(":")[0];
       NamespaceRegistry namespaceRegistry = getApplicationComponent(RepositoryService.class)
-      .getRepository(getAncestorOfType(UIJCRExplorer.class).getRepositoryName()).getNamespaceRegistry() ;
+              .getRepository(getAncestorOfType(UIJCRExplorer.class).getRepositoryName()).getNamespaceRegistry() ;
       String[] prefixs = namespaceRegistry.getPrefixes();
       for (String prefix : prefixs)
         if (namespace.equals(prefix))
@@ -819,7 +803,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
     }
     return true;
   }
-  
+
   private boolean contains(String[] arr, String item) {
     if (arr != null) {
       for (String arrItem : arr) {
@@ -839,10 +823,10 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
       if(uiForm.getListSameNames(event).size() > 0) {
         UIPopupWindow uiPopupWindow = uiManager.initPopupWhenHaveSameName();
         UIUploadBehaviorWithSameName uiUploadBehavior =
-          uiManager.createUIComponent(UIUploadBehaviorWithSameName.class, null, null);
+                uiManager.createUIComponent(UIUploadBehaviorWithSameName.class, null, null);
         uiUploadBehavior.setMessageKey("UIUploadForm.msg.confirm-behavior");
         uiUploadBehavior.setArguments(
-            uiForm.getListSameNames(event).toArray(new String[uiForm.getListSameNames(event).size()]));
+                uiForm.getListSameNames(event).toArray(new String[uiForm.getListSameNames(event).size()]));
         uiPopupWindow.setUIComponent(uiUploadBehavior);
         uiPopupWindow.setShow(true);
         uiPopupWindow.setRendered(true);
@@ -908,7 +892,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
         UploadResource uploadResource = uiFormUploadInput.getUploadResource();
         if (uploadResource == null) {
           uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.upload-not-null", null,
-              ApplicationMessage.WARNING));
+                  ApplicationMessage.WARNING));
 
           return;
         }
@@ -919,7 +903,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
 
         UIPopupWindow uiPopupWindow = uiUploadManager.initPopupTaxonomy(POPUP_TAXONOMY);
         UIOneTaxonomySelector uiOneTaxonomySelector =
-          uiUploadManager.createUIComponent(UIOneTaxonomySelector.class, null, null);
+                uiUploadManager.createUIComponent(UIOneTaxonomySelector.class, null, null);
         uiPopupWindow.setUIComponent(uiOneTaxonomySelector);
         TaxonomyService taxonomyService = uiUploadForm.getApplicationComponent(TaxonomyService.class);
         List<Node> lstTaxonomyTree = taxonomyService.getAllTaxonomyTrees();
@@ -936,7 +920,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
         event.getRequestContext().addUIComponentToUpdateByAjax(uiUploadManager);
       } catch (AccessDeniedException accessDeniedException) {
         uiApp.addMessage(new ApplicationMessage("Taxonomy.msg.AccessDeniedException", null,
-            ApplicationMessage.WARNING));
+                ApplicationMessage.WARNING));
 
         return;
       } catch (Exception e) {
@@ -973,8 +957,8 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
       if (limitPref != null) {
         try {
           uiInput = new UIFormUploadInput(index + FIELD_UPLOAD,
-                                          index + FIELD_UPLOAD,
-                                          Integer.parseInt(limitPref.trim()));
+                  index + FIELD_UPLOAD,
+                  Integer.parseInt(limitPref.trim()));
         } catch (NumberFormatException e) {
           uiInput = new UIFormUploadInput(index + FIELD_UPLOAD, index + FIELD_UPLOAD);
         }
@@ -984,8 +968,8 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
       uiInput.setAutoUpload(true);
       uiUploadForm.addUIFormInput(uiInput);
       UIFormMultiValueInputSet uiFormMultiValue = uiUploadForm.createUIComponent(UIFormMultiValueInputSet.class,
-                                                                                 "UploadMultipleInputset",
-                                                                                 null);
+              "UploadMultipleInputset",
+              null);
       uiFormMultiValue.setId(index + FIELD_LISTTAXONOMY);
       uiFormMultiValue.setName(index + FIELD_LISTTAXONOMY);
       uiFormMultiValue.setType(UIFormStringInput.class);
