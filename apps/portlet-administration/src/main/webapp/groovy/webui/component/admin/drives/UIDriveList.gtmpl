@@ -15,7 +15,7 @@
   String repository = rService.getCurrentRepository().getConfiguration().getName() ;    
   int totalItems = uicomponent.getDrives().size();
 %>
-<div class="UIDriveList" id="$uicomponent.id">
+<div class="uiDriveList" id="$uicomponent.id">
   <% if (totalItems > 5) { %>
   <div style="margin:1px 0px 5px 0px;">
     <%
@@ -24,11 +24,10 @@
     %>
   </div>
   <% } %>
-<div class = "FixTableSize">
+<div class = "fixTableSize">
   <table class="uiGrid table table-hover table-striped">
     <thead>
       <tr>
-  	    <th><%=_ctx.appRes("UIDriveList.header.icon")%></th>
   	    <th><%=_ctx.appRes("UIDriveList.header.name")%></th>
   	    <th><%=_ctx.appRes("UIDriveList.header.workspace")%></th>
   	    <th><%=_ctx.appRes("UIDriveList.header.homePath")%></th>
@@ -39,24 +38,10 @@
     </thead>
     <tbody>
       <%
-        def rowClass = null ;
-  	    boolean even = true ;
+
   	    for (drive in uicomponent.getDriveList()) {
-  	      if(even) rowClass = "EvenRow" ;  
-  	      else rowClass =  "OddRow" ; 
-  	      even = !even ;
       %>
-          <tr class="$rowClass">
-            <td>
-            <%
-              if(drive.getIcon() != null && drive.getIcon().length() > 0) {
-                String[] iconPath = drive.getIcon().split(":/") ;
-            %>
-                <img src="/${uicomponent.getRequestContextName()}/jcr/${repository}/${iconPath[0]}/${iconPath[1]}" alt="${iconPath[1]}" width="20px" height="20px" />
-            <%} else {%>
-              <span></span>
-            <%}%>
-            </td>
+          <tr>
             <td><div class="Text" rel="tooltip" data-placement="bottom" title="<%=drive.getName().replace("|", " | ")%>"><%=drive.getName().replace("|", " | ")%></div></td>
             <td><div class="Text" rel="tooltip" data-placement="bottom" title="$drive.workspace">$drive.workspace</div></td>
             <td><div class="Text" rel="tooltip" data-placement="bottom" title="<%=drive.getHomePath().replace("/", " /")%>"><%=drive.getHomePath().replace("/", " /")%></div></td>
@@ -80,9 +65,9 @@
     %>
   </div>
   <% } %>
-  <div class="UIAction">
+  <div class="uiAction uiActionBorder">
 	  <% for(action in uicomponent.getActions()) { %>
-			<a onclick="<%=uicomponent.event(action)%>" class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=_ctx.appRes("UIDriveList.action." + action)%></a>
+			<button onclick="<%=uicomponent.event(action)%>" class="btn"><%=_ctx.appRes("UIDriveList.action." + action)%></button>
 	  <% } %>
     </div>
 </div>

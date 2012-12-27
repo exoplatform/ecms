@@ -32,16 +32,11 @@
 	  </thead>
 	  <tbody>
       <%
-        def rowClass = null ;
-		    boolean even = true ;
 		    boolean found = false ;
 		    for (meta in metaDatas) {
 		      found = true  ;
-		      if(even) rowClass = "EvenRow" ;  
-		      else rowClass =  "OddRow" ; 
-		      even = !even ;
       %>
-          <tr class="$rowClass">
+          <tr>
             <%
               String nodeType = meta.getName() ;
               nodeType = nodeType.replace(":", "_") ;
@@ -52,12 +47,12 @@
             <td>$meta.name</td>
             
             <td class="center">
-	                <i onclick="<%=uicomponent.event("View", meta.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIMetadataList.title.view")%>" class="uiIconView"></i>
-	                <i onclick="<%=uicomponent.event("Edit", meta.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIMetadataList.title.edit")%>" class="uiIconEdit"></i>
+	                <a class="actionIcon" onclick="<%=uicomponent.event("View", meta.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIMetadataList.title.view")%>" ><i class="uiIconView"></i><a>
+	                <a class="actionIcon" onclick="<%=uicomponent.event("Edit", meta.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIMetadataList.title.edit")%>"><i  class="uiIconEdit"></i></a>
 	              <%
 	              	if(meta.hasTemplate()) {
 	              	%>
-	              	<i onclick="<%=uicomponent.event("Delete", meta.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIMetadataList.title.edit")%>" class="uiIconDelete"></i>
+	              	<a class="actionIcon" onclick="<%=uicomponent.event("Delete", meta.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIMetadataList.title.edit")%>"><i  class="uiIconDelete"></i></a>
 	              	<%
 	              	}
 	              %>

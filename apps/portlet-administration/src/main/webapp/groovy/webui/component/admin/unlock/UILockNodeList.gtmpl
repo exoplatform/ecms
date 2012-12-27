@@ -26,7 +26,6 @@
   <table class="uiGrid table table-hover table-striped">
     <thead>
       <tr>
-  	    <th style="width:36px;"></th>
   	    <th><%=_ctx.appRes("UILockNodeList.header.name")%></th>
   	    <th><%=_ctx.appRes("UILockNodeList.header.hoderLock")%></th>  	    
   	    <th class="center" width="75"><%=_ctx.appRes("UILockNodeList.header.action")%></th>
@@ -35,23 +34,14 @@
     <tbody>
       <%
         if (lockedNodeList.size() > 0) {
-        def rowClass = null ;
-  	    boolean even = true ;
   	    for (node in lockedNodeList) {
-  	      if(even) rowClass = "EvenRow" ;  
-  	      else rowClass =  "OddRow" ; 
-  	      even = !even ;
       %>
-          <tr class="$rowClass">
-            <td>
-            		<div rel="tooltip" data-placement="bottom" title="$node.name" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(node, "16x16Icon")%>">
-					  							</div>
-					  					</td>
-            <td><div class="Text"><%= node.getPath(); %></div></td>
-            <td><div class="Text"><%= node.getLock().getLockOwner(); %></div></td>
-	          	<td class="center">	          	
-				    <img onclick="<%=uicomponent.event("UnLock", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UILockNodeList.tooltip.UnLock")%>" alt="<%=_ctx.appRes("UILockNodeList.tooltip.UnLock")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Unlock16x16Icon" />
-	          	</td>	                    
+          <tr>
+            <td><div class="text"><%= node.getPath(); %></div></td>
+            <td><div class="text"><%= node.getLock().getLockOwner(); %></div></td>
+			<td class="center">	          	
+				<a onclick="<%=uicomponent.event("UnLock", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UILockNodeList.tooltip.UnLock")%>" class="actionIcon"><i class="uiIconUnLockMini"></i></a>
+			</td>	                    
           </tr>
       <%}
       } %>  
@@ -65,9 +55,9 @@
     %>
   </div>
   <%}%>
-	<div class="UIAction">
+	<div class="uiAction">
 		<% for(action in uicomponent.getActions()) { %>
-		  <a onclick="<%=uicomponent.event(action)%>" class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=_ctx.appRes("UILockNodeList.action." + action)%></a>
+		  <button onclick="<%=uicomponent.event(action)%>" class="btn"><%=_ctx.appRes("UILockNodeList.action." + action)%></button>
 		 <% } %>
 	</div>
 </div>

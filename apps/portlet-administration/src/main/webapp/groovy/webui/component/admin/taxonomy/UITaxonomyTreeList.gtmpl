@@ -39,16 +39,13 @@
     </thead>
     <tbody>
       <%
-        def rowClass = "EvenRow";
-        boolean even = true;
+        def rowClass = "";
         if (uicomponent.getTaxonomyTreeList().size() > 0) {
           for (taxonomyTree in uicomponent.getTaxonomyTreeList()) {
-            if(even) rowClass = "EvenRow";  
-            else rowClass =  "OddRow"; 
+            rowClass = "";  
             if (!taxonomyTree.isEdit()) {
               rowClass += " TrashRow";
             }
-            even = !even;
         %>
             <tr class="$rowClass">
               <td><div class="Text" rel="tooltip" data-placement="bottom" title="<%=taxonomyTree.getTaxoTreeName().replace("|", " | ")%>"><% if (!taxonomyTree.isEdit()) { %><sup>*** </sup><%}%><%=taxonomyTree.getTaxoTreeName().replace("|", " | ")%></div></td>
@@ -73,8 +70,8 @@
     </tbody>
   </table>
   <% if (uicomponent.isTargetInTrash()) { %>
-  <div class="ClearFix">
-    <div style="float: left; display:block; font-style: italic;" class="Text"><sup>*** </sup><%=_ctx.appRes("UITaxonomyTreeList.msg.is-in-trash")%></div>
+  <div class="clearfix">
+    <div style=" display:block; font-style: italic;" class="text pull-left"><sup>*** </sup><%=_ctx.appRes("UITaxonomyTreeList.msg.is-in-trash")%></div>
   </div>
   <% } %>
   <% if (allTaxonomyList.size() > 5) {%>

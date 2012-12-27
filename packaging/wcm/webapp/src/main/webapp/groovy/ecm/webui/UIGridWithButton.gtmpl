@@ -40,20 +40,15 @@
 	  <%if(uicomponent.getUIPageIterator().getAvailable() < 1) {%>
 	    <tr>
 	      <td style="font-style:italic; color: #FF5604" colspan="<%=beanFields.length+1%>">
-	      	<div class="ActionContainer">
+	      	<div class="actionContainer">
 		        <%=_ctx.appRes(uicomponent.id + ".grid.msg.empty")%>
 		      </div>
 	      </td>
 	    </tr>  
 	  <%} else { 
-	    def rowClass = null ;
-	    boolean even = true ;
 	    for (bean in uicomponent.getBeans())  {
-	      if(even) rowClass = "EvenRow" ;  
-	      else rowClass =  "OddRow" ; 
-	      even = !even ;
 	  %>
-	    <tr class="$rowClass">
+	    <tr>
 	      <%
 	        for(field in beanFields) { 
 	          def fieldValue = uicomponent.getFieldValue(bean, field) ;
@@ -80,9 +75,9 @@
 	                if(action != null) { 
 	                  if(uicomponent.isUseAjax()){
 	             %>             
-	                <i onclick="<%=uicomponent.event(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "$action" class="uiIcon${action}"></i>
+	                <a class="actionIcon" onclick="<%=uicomponent.event(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "$action" ><i class="uiIcon${action}"></i></a>
 	              <%  }else{ %>
-	                <i onclick="<%=uicomponent.url(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "$action" class="uiIcon${action}"></i>
+	                <a class="actionIcon" onclick="<%=uicomponent.url(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "$action" ><i class="uiIcon${action}"></i></a>
 	              <%  } %> 
 	              <%} %> 
 	            <%}%>      
