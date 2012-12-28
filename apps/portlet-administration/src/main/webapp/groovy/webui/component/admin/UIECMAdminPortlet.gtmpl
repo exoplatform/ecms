@@ -9,7 +9,7 @@
 %>
 <div class="UIECMAdminPortlet" id="UIECMAdminPortlet">
   <%uicomponent.renderChild(UIPopupContainer.class);%>
-	<div class="UIResizableBlock ClearFix" style="height: 600px">
+	<div class="UIResizableBlock ClearFix" style="height: auto;">
 	  <%
 	    int style = 6;
 	    def sideBar = "NotShowSideBar";
