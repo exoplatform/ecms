@@ -36,7 +36,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
 public class UIActionManager extends UIAbstractManager {
 
   public UIActionManager() throws Exception {
-    addChild(UIActionTypeList.class, null, null) ;
+    addChild(UIActionTypeList.class, null, "uiActionTypeList") ;
   }
 
   public void refresh() throws Exception {

@@ -27,24 +27,18 @@
     <thead>
       <tr>
   	    <th><%=_ctx.appRes("UILockList.header.name")%></th>  	    
-  	    <th class="center" width="55"><%=_ctx.appRes("UILockList.header.action")%></th>
+  	    <th class="center span1"><%=_ctx.appRes("UILockList.header.action")%></th>
       </tr>
     </thead>
     <tbody>
       <%
         if (settingLockList.size() > 0) {
-        def rowClass = null ;
-  	    boolean even = true ;
   	    for (settingLock in settingLockList) {
-  	      if(even) rowClass = "EvenRow" ;  
-  	      else rowClass =  "OddRow" ; 
-  	      even = !even ;
       %>
-          <tr class="$rowClass">            
-            <td><div class="Text">$settingLock</div></td>
+          <tr>            
+            <td><div class="text">$settingLock</div></td>
 	          	<td class="center">
-						<a class="actionIcon" onclick="<%=uicomponent.event("DeleteLock", settingLock)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UILockList.tooltip.DeleteLock")%>" ><i class="uiIconDelete"></i></a>				       
-			        
+						    <a class="actionIcon" onclick="<%=uicomponent.event("DeleteLock", settingLock)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UILockList.tooltip.DeleteLock")%>" ><i class="uiIconDelete"></i></a>	
 	          	</td>	                    
           </tr>
       <%}
@@ -60,9 +54,9 @@
     %>
   </div>
   <%}%>
-	<div class="UIAction">
+	<div class="uiAction uiActionBorder">
 	  <% for(action in uicomponent.getActions()) { %>
-		<a onclick="<%=uicomponent.event(action)%>" class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=_ctx.appRes("UILockList.action." + action)%></a>
+		<button onclick="<%=uicomponent.event(action)%>" class="btn"><%=_ctx.appRes("UILockList.action." + action)%></button>
 		<% } %>
 	</div>
 </div>

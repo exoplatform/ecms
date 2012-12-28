@@ -31,7 +31,7 @@
   	    <th><%=_ctx.appRes("UINodeTypeList.header.mixinType")%></th>
   	    <th><%=_ctx.appRes("UINodeTypeList.header.orderable")%></th>
   	    <th><%=_ctx.appRes("UINodeTypeList.header.description")%></th>
-  	    <th class="center"><%=_ctx.appRes("UINodeTypeList.header.action")%></th>
+  	    <th class="center span1"><%=_ctx.appRes("UINodeTypeList.header.action")%></th>
       </tr>
     </thead>
     <tbody>

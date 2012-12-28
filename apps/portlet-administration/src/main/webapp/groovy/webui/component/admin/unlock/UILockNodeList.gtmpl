@@ -28,7 +28,7 @@
       <tr>
   	    <th><%=_ctx.appRes("UILockNodeList.header.name")%></th>
   	    <th><%=_ctx.appRes("UILockNodeList.header.hoderLock")%></th>  	    
-  	    <th class="center" width="75"><%=_ctx.appRes("UILockNodeList.header.action")%></th>
+  	    <th class="center span1"><%=_ctx.appRes("UILockNodeList.header.action")%></th>
       </tr>
     </thead>
     <tbody>

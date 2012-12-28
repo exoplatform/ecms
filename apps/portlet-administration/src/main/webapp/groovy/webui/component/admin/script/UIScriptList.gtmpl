@@ -16,29 +16,24 @@
 	  return sortName ;
 	}
 %>
-<div class="UIScriptList" id="$uicomponent.id">
+<div class="uiScriptList" id="$uicomponent.id">
   <table class="uiGrid table table-hover table-striped">
     <thead>
       <tr>
   	    <th><%=_ctx.appRes("UIScriptList.header.scriptName")%></th>
   	    <th><%=_ctx.appRes("UIScriptList.header.path")%></th>
   	    <th><%=_ctx.appRes("UIScriptList.header.baseVersion")%></th>
-  	    <th class="center"><%=_ctx.appRes("UIScriptList.header.action")%></th>
+  	    <th class="center span2"><%=_ctx.appRes("UIScriptList.header.action")%></th>
       </tr>
     </thead>
     <tbody>
       <%
-        def rowClass = null ;
-  	    boolean even = true ;
   	    for (node in uicomponent.getScriptList()) {
-  	      if(even) rowClass = "EvenRow" ;  
-  	      else rowClass =  "OddRow" ; 
-  	      even = !even ;
       %>
-          <tr class="$rowClass">
-            <td><div class="Text"><%=node.getName()%></div></td>
-            <td><div class="Text" rel="tooltip" data-placement="bottom" title="<%=node.getPath()%>"><%=pathTitle(node.getPath(), 30)%></div></td>
-            <td><div class="Text"><%=node.getBaseVersion()%></div></td>
+          <tr>
+            <td><div class="text"><%=node.getName()%></div></td>
+            <td><div class="text" rel="tooltip" data-placement="bottom" title="<%=node.getPath()%>"><%=pathTitle(node.getPath(), 30)%></div></td>
+            <td><div class="text"><%=node.getBaseVersion()%></div></td>
 			<td class="center">
 				<a class="actionIcon" onclick="<%=uicomponent.event("Edit", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIScriptList.tooltip.Edit")%>" ><i class="uiIconEditInfo"></i></a>
 				<a class="actionIcon" onclick="<%=uicomponent.event("Delete", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIScriptList.tooltip.Delete")%>" ><i class="uiIconDelete"></i></a>
@@ -52,9 +47,9 @@
     <%_ctx.renderUIComponent(uicomponent.getUIPageIterator())%>
   </div>
   <% } %>
-	<div class="uiAction">
+	<div class="uiAction uiActionBorder">
 	  <% for(action in uicomponent.getActions()) { %>
-		  <button onclick="<%=uicomponent.event(action)%>" class="btn btn-primary"><%=_ctx.appRes("UIScriptList.action." + action)%></button>
+		  <button onclick="<%=uicomponent.event(action)%>" class="btn"><%=_ctx.appRes("UIScriptList.action." + action)%></button>
 	  <% } %>
 	</div>
 </div>

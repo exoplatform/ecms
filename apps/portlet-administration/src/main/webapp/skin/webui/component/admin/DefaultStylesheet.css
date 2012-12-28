@@ -320,10 +320,6 @@
 
 /*############################## -- UIActionManager -- ########################*/
 
-.UIECMAdminPortlet .UIActionManager {
-  width: 97%;
-}
-
 .UIActionManager .UIActionTypeForm  {
 	padding: 10px; 
 }

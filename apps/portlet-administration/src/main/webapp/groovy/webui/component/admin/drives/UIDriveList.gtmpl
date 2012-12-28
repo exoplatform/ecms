@@ -33,7 +33,7 @@
   	    <th><%=_ctx.appRes("UIDriveList.header.homePath")%></th>
   	    <th><%=_ctx.appRes("UIDriveList.header.permissions")%></th>
   	    <th><%=_ctx.appRes("UIDriveList.header.views")%></th>
-  	    <th class="center" width="100"><%=_ctx.appRes("UIDriveList.header.action")%></th>
+  	    <th class="center span2"><%=_ctx.appRes("UIDriveList.header.action")%></th>
       </tr>
     </thead>
     <tbody>
@@ -48,10 +48,9 @@
             <td><div class="Text" rel="tooltip" data-placement="bottom" title="$drive.permissions">$drive.permissions</div></td>
             <td><div class="Text" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getDriveViews(drive)%>"><%=uicomponent.getDriveViews(drive)%></div></td>
 	          <td class="center">
-	              	<a class="actionIcon" onclick="<%=uicomponent.event("EditInfo", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDriveList.tooltip.EditInfo")%>" ><i class="uiIconEditInfo"></i></a>
-					<a class="actionIcon" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDriveList.tooltip.Delete")%>" ><i class="uiIconDelete"></i></a>
-		       
-	          </td>	                    
+	            <a class="actionIcon" onclick="<%=uicomponent.event("EditInfo", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDriveList.tooltip.EditInfo")%>" ><i class="uiIconEditInfo"></i></a>
+					    <a class="actionIcon" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDriveList.tooltip.Delete")%>" ><i class="uiIconDelete"></i></a>
+		        </td>	                    
           </tr>
       <%}%>  
     </tbody>

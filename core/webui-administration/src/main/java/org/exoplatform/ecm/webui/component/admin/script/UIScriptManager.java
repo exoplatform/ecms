@@ -32,7 +32,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
 public class UIScriptManager extends UIAbstractManager {
 
   public UIScriptManager() throws Exception {
-    addChild(UIECMScripts.class, null , null) ;
+    addChild(UIECMScripts.class, null , "uiECMScripts") ;
   }
 
   public void refresh()throws Exception {

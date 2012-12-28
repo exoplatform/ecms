@@ -35,8 +35,8 @@ import org.exoplatform.webui.core.UIPopupWindow;
 public class UIActionManager extends UIContainer implements UIPopupComponent {
 
   public UIActionManager() throws Exception {
-    addChild(UIActionListContainer.class, null, null);
-    addChild(UIActionContainer.class, null, null).setRendered(false);
+    addChild(UIActionListContainer.class, null, "uiActionListContainer");
+    addChild(UIActionContainer.class, null, "uiActionListContainer").setRendered(false);
   }
 
   public void activate() throws Exception {

@@ -14,7 +14,7 @@
 	          <th><%=_ctx.appRes(name+".header."+field)%></th>
 	        <%}%>
 	        <%if(beanActions != null) { %>
-	          <th style="text-align: center;"><%=_ctx.appRes(name+".header.action")%></th>
+	          <th class="span2 center"><%=_ctx.appRes(name+".header.action")%></th>
 	        <%}%>
 	      <%}%>
 	      <%if(name == null) {%>
@@ -22,21 +22,16 @@
 	          <th><%=_ctx.appRes(uiParent.getName()+".header."+field)%></th>
 	        <%}%>
 	        <%if(beanActions != null && beanActions.length > 0) { %>
-	          <th style="text-align: center;"><%=_ctx.appRes(uiParent.getName()+".header.action")%></th>
+	          <th class="span2 center"><%=_ctx.appRes(uiParent.getName()+".header.action")%></th>
 	        <%}%>
 	      <%}%>
 	    </tr>
 	  </thead>
 	  <tbody>
 	  <%
-	    def rowClass = null ;
-	    boolean even = true ;
 	    for (bean in uicomponent.getBeans())  {
-	      if(even) rowClass = "EvenRow" ;  
-	      else rowClass =  "OddRow" ; 
-	      even = !even ;
 	  %>
-	    <tr class="$rowClass">
+	    <tr>
 	      <%
 	        for(field in beanFields) { 
 	          def fieldValue = uicomponent.getFieldValue(bean, field) ;
@@ -55,7 +50,7 @@
 	      <%}%>
 	      <%if(beanActions != null && beanActions.length > 0) { %>
 	        <td align="center">         
-	          <div style="text-align: center;">
+	          <div class="center">
 	            <%def beanIdField = uicomponent.getBeanIdField() ; %>          
 	            <%for(action in beanActions) { %>
 	            <%  def beanId = uicomponent.getFieldValue(bean,beanIdField)  ; %>               

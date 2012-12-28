@@ -27,7 +27,7 @@
 	    <tr>
 	      <th><%=_ctx.appRes("UIMetadataList.header.name")%></th>
 		    <th><%=_ctx.appRes("UIMetadataList.header.type")%></th>
-		    <th class="center"><%=_ctx.appRes("UIMetadataList.header.action")%></th>
+		    <th class="center span2"><%=_ctx.appRes("UIMetadataList.header.action")%></th>
 	    </tr>
 	  </thead>
 	  <tbody>

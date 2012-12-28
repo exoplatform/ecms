@@ -31,23 +31,17 @@
   	    <th><%=_ctx.appRes("UIQueriesList.header.type")%></th>
   	    <th><%=_ctx.appRes("UIQueriesList.header.statement")%></th>
   	    <th><%=_ctx.appRes("UIQueriesList.header.permission")%></th>
-  	    <th class="center" width="100"><%=_ctx.appRes("UIQueriesList.header.action")%></th>
+  	    <th class="center span2"><%=_ctx.appRes("UIQueriesList.header.action")%></th>
       </tr>
     </thead>
     <tbody>
       <%
-        def rowClass = null ;
-  	    boolean even = true ;
   	    for (node in sharedQueries) {
-  	      def right=true;
-  	      if(even) rowClass = "EvenRow" ;  
-  	      else rowClass =  "OddRow" ; 
-  	      even = !even ;
       %>
-          <tr class="$rowClass">
-            <td><div class="Text">$node.name</div></td>
-            <td><div class="Text"><%=node.getProperty("jcr:language").getString()%></div></td>
-            <td><div class="Text"><%=ContentReader.getXSSCompatibilityContent(node.getProperty("jcr:statement").getString())%></div></td>
+          <tr>
+            <td><div class="text">$node.name</div></td>
+            <td><div class="text"><%=node.getProperty("jcr:language").getString()%></div></td>
+            <td><div class="text"><%=ContentReader.getXSSCompatibilityContent(node.getProperty("jcr:statement").getString())%></div></td>
             <td>
             <%
             	String permissions = null ;
@@ -56,7 +50,7 @@
             		else permissions = permissions + "," + per.getString() ;
             	}
             %>
-            	<div class="Text"><%=permissions%></div>
+            	<div class="text"><%=permissions%></div>
             </td>
 	          <td class="center">
 	          	  <%
@@ -83,9 +77,9 @@
     %>
   </div>
   <%}%>
-	<div class="UIAction">
+	<div class="uiAction uiActionBorder">
 	  <% for(action in uicomponent.getActions()) { %>
-		  <a onclick="<%=uicomponent.event(action)%>" class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=_ctx.appRes("UIQueriesList.action." + action)%></a>				
+		  <button onclick="<%=uicomponent.event(action)%>" class="btn"><%=_ctx.appRes("UIQueriesList.action." + action)%></button>				
 	  <% } %>
 	</div>
 </div>

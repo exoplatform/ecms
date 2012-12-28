@@ -23,7 +23,7 @@
 	          <th><%=_ctx.appRes(name+".header."+field)%></th>
 	        <%}%>
 	        <%if(beanActions != null) { %>
-	          <th class="center"><%=_ctx.appRes(name+".header.action")%></th>
+	          <th class="span2 center"><%=_ctx.appRes(name+".header.action")%></th>
 	        <%}%>
 	      <%}%>
 	      <%if(name == null) {%>
@@ -31,7 +31,7 @@
 	          <th><%=_ctx.appRes(uiParent.getName()+".header."+field)%></th>
 	        <%}%>
 	        <%if(beanActions != null && beanActions.length > 0) { %>
-	          <th class="center"><%=_ctx.appRes(uiParent.getName()+".header.action")%></th>
+	          <th class="span2 center"><%=_ctx.appRes(uiParent.getName()+".header.action")%></th>
 	        <%}%>
 	      <%}%>
 	    </tr>
