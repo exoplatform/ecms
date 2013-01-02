@@ -19,7 +19,7 @@
   <% if (allNodeTypes.size() > 5) {%>
   <div style="margin:1px 0px 20px 0px;">
     <%
-      uicomponent.getUIPageIterator().setUseMaxSizeSetting(false);
+      uicomponent.getUIPageIterator().setUseMaxSizeSetting(true);
       _ctx.renderUIComponent(uicomponent.getUIPageIterator());
     %>
   </div>
@@ -136,7 +136,7 @@
   <% if (allNodeTypes.size() > 5) {%>
   <div style="margin:1px 0px 20px 0px;">
     <%
-      uicomponent.getUIPageIterator().setUseMaxSizeSetting(false);
+      uicomponent.getUIPageIterator().setUseMaxSizeSetting(true);
       _ctx.renderUIComponent(uicomponent.getUIPageIterator());
     %>
   </div>

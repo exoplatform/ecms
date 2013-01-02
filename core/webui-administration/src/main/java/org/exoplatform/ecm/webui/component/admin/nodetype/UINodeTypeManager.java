@@ -30,7 +30,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
  * 2:20:55 PM
  */
 @ComponentConfig (
-		template =  "app:/groovy/webui/component/admin/nodetype/UINodeTypeManager.gtmpl"
+    lifecycle = UIContainerLifecycle.class
 )
 
 public class UINodeTypeManager extends UIAbstractManager {
