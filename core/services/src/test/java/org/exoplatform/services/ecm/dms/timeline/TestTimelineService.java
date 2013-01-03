@@ -341,13 +341,9 @@ public class TestTimelineService extends BaseWCMTestCase {
 
     Calendar currentTime = new GregorianCalendar();
     Calendar time = (Calendar)currentTime.clone();
-    int count = 0;
     int index = 0;
     while (currentTime.get(Calendar.WEEK_OF_YEAR) == time.get(Calendar.WEEK_OF_YEAR)) {
-      if (currentTime.get(Calendar.WEEK_OF_YEAR) == time.get(Calendar.WEEK_OF_YEAR)) {
-        if (time.get(Calendar.DAY_OF_YEAR) < currentTime.get(Calendar.DAY_OF_YEAR)-1)
-          count++;
-      }
+
       Node dayNode = testNode.addNode("dayNode" + index++, "exo:article");
       dayNode.setProperty("exo:title", "sample");
       if(dayNode.canAddMixin("exo:datetime")) {
@@ -356,14 +352,14 @@ public class TestTimelineService extends BaseWCMTestCase {
       dayNode.setProperty(EXO_MODIFIED_DATE, time);
       time.add(Calendar.DATE, -1);
     }
-
+    
     session.save();
     List<Node> res = timelineService.getDocumentsOfEarlierThisWeek(rootNode.getPath(),
                                                                    COLLABORATION_WS,
                                                                    createSessionProvider(),
                                                                    "root",
                                                                    true);
-    assertEquals("testGetDocumentsOfEarlierThisWeek failed! ", Math.min(5, count), res.size());
+    assertEquals("testGetDocumentsOfEarlierThisWeek failed! ", Math.min(5, currentTime.get(Calendar.DAY_OF_WEEK)-2), res.size());
   }
   
   /**
@@ -384,13 +380,9 @@ public class TestTimelineService extends BaseWCMTestCase {
 
     Calendar currentTime = new GregorianCalendar();
     Calendar time = (Calendar)currentTime.clone();
-    int count = 0;
     int index = 0;
     while (currentTime.get(Calendar.WEEK_OF_YEAR) == time.get(Calendar.WEEK_OF_YEAR)) {
-      if (currentTime.get(Calendar.WEEK_OF_YEAR) == time.get(Calendar.WEEK_OF_YEAR)) {
-        if (time.get(Calendar.DAY_OF_YEAR) < currentTime.get(Calendar.DAY_OF_YEAR)-1)
-          count++;
-      }
+
       Node dayNode = testNode.addNode("dayNode" + index++, "exo:article");
       dayNode.setProperty("exo:title", "sample");
       if(dayNode.canAddMixin("exo:datetime")) {
@@ -407,7 +399,7 @@ public class TestTimelineService extends BaseWCMTestCase {
                                                                    "root",
                                                                    true,
                                                                    false);
-    assertEquals("testGetDocumentsOfEarlierThisWeek failed! ", count, res.size());
+    assertEquals("testGetDocumentsOfEarlierThisWeek failed! ", currentTime.get(Calendar.DAY_OF_WEEK) - 2, res.size());
   }  
 
   /**
