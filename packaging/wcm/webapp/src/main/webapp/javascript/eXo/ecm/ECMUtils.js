@@ -1256,7 +1256,7 @@
 		}
 
 		ECMUtils.prototype.collapseSideBarContent = function () {
-			var container = Self.getContainerToResize();
+			var container = eXo.ecm.ECMUtils.getContainerToResize();
 			container.style.height = eXo.ecm.ECMUtils.initialHeightOfOtherTab - 4 + "px";
 		}
 
@@ -1272,7 +1272,7 @@
 
 			var itemArea = document.getElementById("SelectItemArea");
 
-			var container = Self.getContainerToResize();
+			var container = eXo.ecm.ECMUtils.getContainerToResize();
 			eXo.ecm.ECMUtils.initialHeightOfOtherTab = container.offsetHeight;
 
 			if (leftContainer.offsetHeight > rightContainer.offsetHeight) {
@@ -1545,7 +1545,7 @@
 			var resizeTreeButton = gj(resizeTreeExplorer).find("div.ResizeTreeButton:first")[0];
 
 			var itemArea = document.getElementById("SelectItemArea");
-			var container = Self.getContainerToResize();
+			var container = eXo.ecm.ECMUtils.getContainerToResize();
 
 			//keep some parameters
 			eXo.ecm.ECMUtils.initialHeightOfOtherTab = container.offsetHeight;
