@@ -48,7 +48,7 @@ public class UIDriveManager extends UIAbstractManager {
 
   public UIDriveManager() throws Exception {
     PortletRequestContext pContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
-    addChild(UIDriveList.class, null, "ugb_" + UIDriveList.class.getSimpleName() + pContext.getWindowId()) ;
+    addChild(UIDriveList.class, null, null) ;
   }
 
   public void refresh() throws Exception  {

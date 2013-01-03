@@ -373,6 +373,9 @@
     <action>
       <AddDrive>schijf toevoegen</AddDrive>
     </action>
+    <label>
+      <permission>{0} in {1}</permission>
+    </label>
   </UIDriveList>
   <PopupDrivePermission>
     <title>

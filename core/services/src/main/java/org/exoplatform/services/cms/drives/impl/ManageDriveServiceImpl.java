@@ -237,7 +237,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     Node drive = null;
     while(itr.hasNext()) {
       data = new DriveData() ;
-      drive = itr.nextNode() ;
+      drive = itr.nextNode() ;      
       data.setName(drive.getName()) ;
       data.setWorkspace(drive.getProperty(WORKSPACE).getString()) ;
       data.setHomePath(drive.getProperty(PATH).getString()) ;

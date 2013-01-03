@@ -14,6 +14,7 @@
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class) ;
   String repository = rService.getCurrentRepository().getConfiguration().getName() ;    
   int totalItems = uicomponent.getDrives().size();
+  def rcontext = _ctx.getRequestContext();  
 %>
 <div class="uiDriveList" id="$uicomponent.id">
   <% if (totalItems > 5) { %>
@@ -37,16 +38,34 @@
       </tr>
     </thead>
     <tbody>
-      <%
-
+      <%        
   	    for (drive in uicomponent.getDriveList()) {
+  	      StringBuffer bufPermission = new StringBuffer();
+  	    	String[] permissions = drive.permissions.split(",");
+  	    	int i = 0;
+  	    	for (String permission : permissions) {
+  	    		i++;
+  	    		def permissionLabel = (String)_ctx.appRes(uicomponent.getId() + ".label.permission");
+  	  			String[] arr = permission.split(":");
+  	  		  if(arr[0].equals("*")) permissionLabel = permissionLabel.replace("{0}", "Any");
+  	  			else permissionLabel = permissionLabel.replace("{0}", arr[0]);
+  	  			if(arr.length > 1) {
+  	  				String groupName = arr[1];
+  	  				groupName = groupName.substring(groupName.lastIndexOf("/")+1);  	  				
+  	  				permissionLabel = permissionLabel.replace("{1}", uicomponent.standardizeGroupName(groupName));
+  	  			} else permissionLabel = permissionLabel.replace("{1}", "");
+  	  			bufPermission.append(permissionLabel);
+  	  			if(i < permissions.length) bufPermission.append("<br/>");
+  	  		}
+  	    	String views = uicomponent.getDriveViews(drive);
+  	    	views = views.replaceAll(",","<br/>");
       %>
           <tr>
             <td><div class="Text" rel="tooltip" data-placement="bottom" title="<%=drive.getName().replace("|", " | ")%>"><%=drive.getName().replace("|", " | ")%></div></td>
             <td><div class="Text" rel="tooltip" data-placement="bottom" title="$drive.workspace">$drive.workspace</div></td>
             <td><div class="Text" rel="tooltip" data-placement="bottom" title="<%=drive.getHomePath().replace("/", " /")%>"><%=drive.getHomePath().replace("/", " /")%></div></td>
-            <td><div class="Text" rel="tooltip" data-placement="bottom" title="$drive.permissions">$drive.permissions</div></td>
-            <td><div class="Text" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getDriveViews(drive)%>"><%=uicomponent.getDriveViews(drive)%></div></td>
+            <td><div class="Text" rel="tooltip" data-placement="bottom" title="$drive.permissions"><%=bufPermission.toString()%></div></td>
+            <td><div class="Text" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getDriveViews(drive)%>"><%=views%></div></td>
 	          <td class="center">
 	            <a class="actionIcon" onclick="<%=uicomponent.event("EditInfo", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDriveList.tooltip.EditInfo")%>" ><i class="uiIconEditInfo"></i></a>
 					    <a class="actionIcon" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDriveList.tooltip.Delete")%>" ><i class="uiIconDelete"></i></a>

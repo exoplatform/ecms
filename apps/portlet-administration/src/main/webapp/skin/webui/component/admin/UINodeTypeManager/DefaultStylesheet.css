@@ -7,10 +7,10 @@
  */
 /*############################## -- UINodeTypeManager-- ########################*/
 
-.UIECMAdminPortlet .UINodeTypeManager {
+/*.UIECMAdminPortlet .UINodeTypeManager {
   padding: 2px 0px 0px 0px;
   width: 97%;
-}
+}*/
 
 .UIECMAdminPortlet .UINodeTypeManager .nodeTypeDefinition .FormContainer {
   width: 500px ;

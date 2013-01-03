@@ -94,7 +94,7 @@ public class UIDriveList extends UIPagingGridDecorator {
     Session session = null ;
     List<DriveData> drives = driveService.getAllDrives(true) ;
     if(drives != null && drives.size() > 0) {
-      for(DriveData drive : drives) {
+      for(DriveData drive : drives) {      	
         if(drive.getIcon() != null && drive.getIcon().length() > 0) {
           try {
             String[] iconPath = drive.getIcon().split(":/") ;
@@ -105,7 +105,7 @@ public class UIDriveList extends UIPagingGridDecorator {
             drive.setIcon("") ;
           }
         }
-        if(isExistWorspace(repository, drive)) driveList.add(drive) ;
+        if(isExistWorkspace(repository, drive)) driveList.add(drive) ;
       }
     }
     Collections.sort(driveList) ;
@@ -150,7 +150,7 @@ public class UIDriveList extends UIPagingGridDecorator {
     return getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
   }
 
-  private boolean isExistWorspace(ManageableRepository repository, DriveData drive) {
+  private boolean isExistWorkspace(ManageableRepository repository, DriveData drive) {
     for(String ws:  repository.getWorkspaceNames()) {
       if(ws.equals(drive.getWorkspace())) return true ;
     }
@@ -195,5 +195,13 @@ public class UIDriveList extends UIPagingGridDecorator {
       uiDriveManager.findFirstComponentOfType(UIDriveForm.class).refresh(driveName) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiDriveManager) ;
     }
+  }
+  
+  public String standardizeGroupName(String groupName) throws Exception {
+  	groupName = groupName.replaceAll("-", " ");
+  	char[] stringArray = groupName.toCharArray();
+  	stringArray[0] = Character.toUpperCase(stringArray[0]);
+  	groupName = new String(stringArray);
+  	return groupName;
   }
 }

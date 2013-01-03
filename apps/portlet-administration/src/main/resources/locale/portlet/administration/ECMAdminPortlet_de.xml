@@ -369,6 +369,9 @@
     <action>
       <AddDrive><![CDATA[Laufwerk hinzuf&uuml;gen]]></AddDrive>
     </action>
+    <label>
+      <permission>{0} in {1}</permission>
+    </label>
   </UIDriveList>
   <PopupDrivePermission>
     <title>

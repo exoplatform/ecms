@@ -240,10 +240,10 @@
 
 /*############################## -- UINamespaceManager -- ########################*/
 
-.UIECMAdminPortlet .UINamespaceManager {
+/*.UIECMAdminPortlet .UINamespaceManager {
 	padding: 2px 0px 0px 0px;
 	width: 97%;
-}
+}*/
 
 .UIECMAdminPortlet .UINamespaceForm {
   padding: 10px;
