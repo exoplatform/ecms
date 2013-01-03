@@ -53,7 +53,7 @@ import org.exoplatform.webui.application.WebuiRequestContext;
 public class NavigationUtils {
 
   public static final Scope ECMS_NAVIGATION_SCOPE = Scope.CHILDREN;
-  
+ 
   private static ThreadLocal<Map<String, String>> gotNavigationKeeper = 
     new ThreadLocal<Map<String, String>>();
   
@@ -88,6 +88,17 @@ public class NavigationUtils {
       return null;
     } else {
       return userNavigationCtor.newInstance(userPortal, portalNav, false);
+    }
+  }
+  
+  public static void removeNavigationAsJson (String portalName, String username) throws Exception
+  {
+    String key = portalName + " " + username;
+    Map<String, String> navigations = gotNavigationKeeper.get();
+    if (navigations != null)
+    {
+       navigations.remove(key);
+       gotNavigationKeeper.set(navigations);
     }
   }
   
