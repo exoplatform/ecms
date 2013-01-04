@@ -14,82 +14,87 @@
     for(node in nodes) {
 		  if(clazz == "Even") clazz = "";
       else clazz = "Even" ;
-	    println """
-			  <div class="Node$clazz ClearFix">
-			    <div class="NodeActionsContainer">
-			""";
-			if(!uicomponent.isBaseVersion(node)&&uicomponent.getCurrentNode().isNodeType("nt:file")) {						
-  			println "<div class=\"Icon16x16 CompareVersion16x16Icon\" onclick=\"" + 
-	  		         uicomponent.event("CompareVersion",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.compareVersion") + "\"><span></span></div>" ;			
-			}
-      println "<div class=\"Icon16x16 BlueRoundedPlusPage16x16Icon\" onclick=\"" + 
-               uicomponent.event("AddLabel",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.addLabel") + "\"><span></span></div>" ;
-			if(uicomponent.getVersionLabels(node).size() > 0){
-				println "<div class=\"Icon16x16 RedRoundedPlusPage16x16Icon\" onclick=\"" + 
-				         uicomponent.event("RemoveLabel",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.removeLable") + "\"><span></span></div>" ;      
-			}         
-			if(!uicomponent.isBaseVersion(node)){
-				println "<div class=\"Icon16x16 RestoreVersion16x16Icon\" onclick=\"" + 
-				         uicomponent.event("RestoreVersion",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.restoreVersion") + "\"><span></span></div>" ;
-			}         
-			println "<div class=\"Icon16x16 View16x16Icon\" onclick=\"" +  
-			         uicomponent.event("ViewVersion",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.viewVersion") + "\"><span></span></div>" ;
-			if(!uicomponent.isBaseVersion(node)){
-				println "<div class=\"Icon16x16 Remove16x16Icon\" onclick=\"" + 
-				         uicomponent.event("DeleteVersion",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.deleteVersion") + "\"><span></span></div>" ;
-			}         
-			println "</div>" ;
-			println "<div class=\"NoneIcon\"><span></span></div>" ;
-			println "<div class=\"Icon16x16  nt_versionHistory16x16Icon\"><span></span></div>" ;			
-			
-			String baseVersion = "" ;
+		  
+		  String baseVersion = "" ;
 			if(uicomponent.isBaseVersion(node)) {			
 			  baseVersion = " (Base Version)" ;
 			}
-			
-			String[] labels = uicomponent.getVersionLabels(node);
-   StringBuffer label = new StringBuffer() ;
-   label.append("<label>") ;
-   StringBuffer displayLabel = new StringBuffer();
+		  
+		  String[] labels = uicomponent.getVersionLabels(node);
+		  StringBuffer label = new StringBuffer() ;
+		  label.append("<label>") ;
+		  StringBuffer displayLabel = new StringBuffer();
 			for(temp in labels) {
-       displayLabel.append("[").append(temp).append("] ") ;
- 		}
+		    displayLabel.append("[").append(temp).append("] ") ;
+		 	}
 
-   if (displayLabel.length() > 50) {
-    	label.append(displayLabel.substring(0, 50)).append("...");
-   } else {
-    label.append(displayLabel);
-   }
-   label.append("</label>") ;
-      
-			String show = "Version: " + node.getName() + " " + label.toString() + baseVersion;
+		  if (displayLabel.length() > 50) {
+		    label.append(displayLabel.substring(0, 50)).append("...");
+		  } else {
+		    label.append(displayLabel);
+		  }
+		  label.append("</label>") ;
+		  
+		  String show = "Version: " + node.getName() + " " + label.toString() + baseVersion;
 			String dateCreated = node.getCreatedTime().getTime().toString();
 			String titleLable = displayLabel.toString();
 			println """
-				    <div class="NodeLabel" title="$dateCreated : $titleLable">$show</div>
-				    
-			  </div>
+				    <tr><td>$show</td>				    
 	    """;
+		  		  
+	    println """
+			    <td class="right">
+			""";
+			if(!uicomponent.isBaseVersion(node)&&uicomponent.getCurrentNode().isNodeType("nt:file")) {						
+  			println "<a class=\"actionIcon\" onclick=\"" + 
+	  		         uicomponent.event("CompareVersion",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.compareVersion") + "\"><i class=\"Icon16x16 CompareVersion16x16Icon\"></i></a>" ;			
+			}
+      println "<a class=\"actionIcon\" onclick=\"" + 
+               uicomponent.event("AddLabel",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.addLabel") + "\"><i class=\"Icon16x16 BlueRoundedPlusPage16x16Icon\"></i></a>" ;
+			if(uicomponent.getVersionLabels(node).size() > 0){
+				println "<a class=\"actionIcon\" onclick=\"" + 
+				         uicomponent.event("RemoveLabel",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.removeLable") + "\"><i class=\"Icon16x16 RedRoundedPlusPage16x16Icon\"></i></a>" ;      
+			}         
+			if(!uicomponent.isBaseVersion(node)){
+				println "<a class=\"actionIcon\" onclick=\"" + 
+				         uicomponent.event("RestoreVersion",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.restoreVersion") + "\"><i class=\"Icon16x16 RestoreVersion16x16Icon\"></i></a>" ;
+			}         
+			println "<a class=\"actionIcon\" onclick=\"" +  
+			         uicomponent.event("ViewVersion",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.viewVersion") + "\"><i class=\"Icon16x16 View16x16Icon\"></i></a>" ;
+			if(!uicomponent.isBaseVersion(node)){
+				println "<a class=\"actionIcon\" onclick=\"" + 
+				         uicomponent.event("DeleteVersion",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.deleteVersion") + "\"><i class=\"Icon16x16 Remove16x16Icon\"></i></a>" ;
+			}         
+			println "</td></tr>" ;      
+			
 	    if(node.getChildrenSize() > 0 && node.isExpanded()) writeNodes(node.getChildren(), clazz, level + 1) ;
     }
   }
 %>
-<div class="UIVersionInfo" id="$uicomponent.id">
-  <div class="HomeNode">
-    <div class="Icon24x24 HomeIcon"><span></span></div>
-    <div class="NodeLabel" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getCurrentNode().getName()%>" style="overflow:hidden;"><%=uicomponent.getCurrentNode().getName()%></div>
-  </div>
-  <%
-		String clazz = "" ;
-    writeNodes(rootNode.getChildren(), clazz, 0 );
-    uicomponent.renderChildren(); 
-  %>
-  <div class="UIAction">
-	  <a onclick="<%=uicomponent.event("Close")%>" class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=_ctx.appRes("UIVersionInfo.action.close")%></a>
-		<%
-		if(uicomponent.isViewVersion()) {
-		%>
-	  	<a onclick="<%=uicomponent.event("CloseView")%>" class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=_ctx.appRes("UIVersionInfo.action.close-view")%></a>
-		<%}%>
+
+<div class="uiVersionInfo resizable" id="$uicomponent.id">
+	<div class="uiBox noRounded">
+		<h5 class="title" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getCurrentNode().getName()%>">
+			<i class="Icon24x24 HomeIcon"></i><%=uicomponent.getCurrentNode().getName()%>
+		</h5>
+		<table class="uiGrid table no-border-cell table-hover table-striped">
+			<%
+				String clazz = "" ;
+				writeNodes(rootNode.getChildren(), clazz, 0 );
+			%>
+		</table>
 	</div>
+
+	<%
+		uicomponent.renderChildren(); 
+	%>
+	
+</div>
+<div class="uiAction uiActionBorder">
+	<button type="button" onclick="<%=uicomponent.event("Close")%>" class="btn" href="javascript:void(0);"><%=_ctx.appRes("UIVersionInfo.action.close")%></button>
+	<%
+	if(uicomponent.isViewVersion()) {
+	%>
+	<button type="button" onclick="<%=uicomponent.event("CloseView")%>" class="btn" href="javascript:void(0);"><%=_ctx.appRes("UIVersionInfo.action.close-view")%></button>
+	<%}%>
 </div>
