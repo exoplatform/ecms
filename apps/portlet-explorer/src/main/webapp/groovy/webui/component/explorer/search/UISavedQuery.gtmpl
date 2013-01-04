@@ -15,7 +15,7 @@
   import org.exoplatform.ecm.webui.component.explorer.search.UISavedQuery.QueryData;
   int totalPages = uicomponent.getUIPageIterator().getAvailablePage() ;
 %>
-<div class="UISavedQuery" id="UISavedQuery">
+<div class="uiSavedQuery" id="UISavedQuery">
   <table class="uiGrid table table-hover table-striped">
     <thead>
       <tr>
@@ -23,7 +23,7 @@
   	    <th><%=_ctx.appRes("UISavedQuery.header.type")%></th>
   	    <th><%=_ctx.appRes("UISavedQuery.header.statement")%></th>
   	    <th><%=_ctx.appRes("UISavedQuery.header.permission")%></th>
-  	    <th class="center" width="100"><%=_ctx.appRes("UISavedQuery.header.action")%></th>
+  	    <th><%=_ctx.appRes("UISavedQuery.header.action")%></th>
       </tr>
     </thead>
     <%
@@ -31,7 +31,7 @@
     %>
     <tbody>
       <%if(queryListData.size() == 0) { %>
-	        <tr class="EvenRow">
+	        <tr>
 		        <td colspan="5"><%=_ctx.appRes("UISavedQuery.label.no-children")%></td>
 		      </tr>
       <%} else {   
@@ -43,27 +43,27 @@
 	  	      even = !even ;
       %>
 	          <%if(object instanceof QueryData) { %>
-		          <tr class="$rowClass">
+		          <tr>
 		            <%
 		              String storedQueryPath = object.getStoredQueryPath() ;
 		              storedQueryPath =  storedQueryPath.substring(storedQueryPath.lastIndexOf("/") + 1, storedQueryPath.length()) ;
 		            %>
-		            <td><div class="Text" rel="tooltip" data-placement="bottom" title="<%=object.getStoredQueryPath()%>"><%=storedQueryPath%></div></td>
-		            <td><div class="Text"><%=object.getLanguage()%></div></td>
+		            <td><div class="text" rel="tooltip" data-placement="bottom" title="<%=object.getStoredQueryPath()%>"><%=storedQueryPath%></div></td>
+		            <td><%=object.getLanguage()%></td>
 		            <td>
 		            	<%
 		            		String statement = object.getStatement() ;
 		            		if(statement.length() > 30) statement = "..." + statement.substring(10) ;
 		            	%>
-		            	<div class="Text" rel="tooltip" data-placement="bottom" title="<%=object.getStatement()%>"><%=statement%></div>
+		            	<div class="text" rel="tooltip" data-placement="bottom" title="<%=object.getStatement()%>"><%=statement%></div>
 		            </td>
 		            <td><%=uicomponent.getCurrentUserId()%></td>
-			          <td >
-			          	<div class="ActionContainer">
-				            <img onclick="<%=uicomponent.event("Execute", Utils.formatNodeName(object.getStoredQueryPath()))%>" alt="<%=_ctx.appRes("UISavedQuery.tooltip.Execute")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Execute")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Execute16x16Icon" />
-				            <a class="ActionIcon" onclick="<%=uicomponent.event("Edit", Utils.formatNodeName(object.getStoredQueryPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Edit")%>" ><i class="uiIconEditInfo"></i></a>
-				            <a class="ActionIcon" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(object.getStoredQueryPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Delete")%>" ><i class="uiIconDelete"></i></a>	
-			            </div>
+			          <td class="center">
+									<div class="actionContainer">
+				            <a class="actionIcon" onclick="<%=uicomponent.event("Execute", Utils.formatNodeName(object.getStoredQueryPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Execute")%>" ><i class="uiIconExecute"></i></a>
+				            <a class="actionIcon" onclick="<%=uicomponent.event("Edit", Utils.formatNodeName(object.getStoredQueryPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Edit")%>" ><i class="uiIconEdit"></i></a>
+				            <a class="actionIcon" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(object.getStoredQueryPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Delete")%>" ><i class="uiIconDelete"></i></a>
+									</div>	                    
 			          </td>	                    
 		          </tr>
 		        <%}%>
@@ -71,11 +71,11 @@
 		        	if(object instanceof Node) { 
 		        		if(object.hasProperty("jcr:language")) {
 		        %>
-				  	   <tr class="$rowClass">
-		            <td><div class="Text"><%=object.getName()%></div></td>
-		            <td><div class="Text"><%=object.getProperty("jcr:language").getString()%></div></td>
+				  	   <tr>
+		            <td><%=object.getName()%></td>
+		            <td><%=object.getProperty("jcr:language").getString()%></td>
 		            <td>
-		            	<div class="Text" rel="tooltip" data-placement="bottom" title="<%=object.getProperty("jcr:statement").getString()%>">
+		            	<div class="text" rel="tooltip" data-placement="bottom" title="<%=object.getProperty("jcr:statement").getString()%>">
 			            	<%
 				            		String sharedStatement = object.getProperty("jcr:statement").getString() ;
 				            		if(sharedStatement.length() > 40) sharedStatement = "..." + sharedStatement.substring(20) ;
@@ -91,12 +91,12 @@
 		            		else sharedPermissions = sharedPermissions + "," + per.getString() ;
 		            	}
 		            %>
-		            	<div class="Text"><%=sharedPermissions%></div>
+		            	<%=sharedPermissions%>
 		            </td>
-			          <td width="80">
-			          	<div class="ActionContainer">
-				            <img onclick="<%=uicomponent.event("Execute", Utils.formatNodeName(object.getPath()))%>" alt="<%=_ctx.appRes("UISavedQuery.tooltip.Execute")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Execute")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Execute16x16Icon" />
-			            </div>
+			          <td class="center">
+									<div class="actionContainer">
+										<a class="actionIcon" onclick="<%=uicomponent.event("Execute", Utils.formatNodeName(object.getPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Execute")%>"><i class="uiIconExecute"></i></a>
+									</div>	                    
 			          </td>	                    
 		          </tr>
 	      	 <%
@@ -108,7 +108,7 @@
     </tbody>
   </table>
   <% if(totalPages>1){ %>
-  <div style="margin:1px 0px 5px 0px;">
+  <div>
     <%_ctx.renderUIComponent(uicomponent.getUIPageIterator())%>
   </div>
   <% } %>
