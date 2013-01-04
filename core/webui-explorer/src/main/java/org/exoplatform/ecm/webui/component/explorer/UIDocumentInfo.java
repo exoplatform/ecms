@@ -186,6 +186,8 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
   final protected static String CONTENT_YEAR_PAGE_ITERATOR_ID      = "ContentYearPageIterator";
 
+  protected UIDocumentNodeList    documentNodeList_;
+  
   private static final Log      LOG                                = ExoLogger.getLogger(UIDocumentInfo.class.getName());
 
   private String                typeSort_                          = Preference.SORT_BY_NODETYPE;
@@ -200,8 +202,6 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
   private UIPageIterator        pageIterator_;
   
-  private UIDocumentNodeList    documentNodeList_;
-
   private UIPageIterator        todayPageIterator_;
 
   private UIPageIterator        yesterdayPageIterator_;
@@ -887,8 +887,10 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
     LazyPageList<Object> pageList = getPageList(currentPath);
     pageIterator_.setPageList(pageList);
-    documentNodeList_.setPageList(pageList);
-    
+    if (documentNodeList_ != null) {
+      documentNodeList_.removeChild(UIDocumentNodeList.class);
+      documentNodeList_.setPageList(pageList);
+    }
     updateTimeLineData_ = true;
   }  
 

@@ -18,6 +18,7 @@
   import org.exoplatform.services.wcm.core.NodetypeConstant;
   import java.net.URLEncoder;
   import org.exoplatform.services.wcm.core.NodeLocation;
+  import org.exoplatform.services.cms.link.NodeLinkAware;
 
   def linkManager = WCMCoreUtils.getService(LinkManager.class);
   def uiDocumentInfo = uicomponent.getAncestorOfType(UIDocumentInfo.class);
@@ -56,6 +57,9 @@
         for (data in uicomponent.getNodeChildrenList()) {
           writeNodes(0, i, data, uiWorkingArea, linkManager, restContextName, repository, permlink, contextMenu, arrColumns, uiDocumentInfo, portalName);
           if (data.isNodeType(NodetypeConstant.NT_FOLDER) || data.isNodeType(NodetypeConstant.NT_UNSTRUCTURED)) {
+            if (data instanceof NodeLinkAware) {
+              data = ((NodeLinkAware)data).getRealNode();
+            }
             def idChild = uicomponent.getID(data);
             def childComponent = uicomponent.getChildById(idChild);
             if (childComponent == null) {

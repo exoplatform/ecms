@@ -36,14 +36,17 @@ import org.exoplatform.ecm.webui.component.explorer.versions.UIActivateVersion;
 import org.exoplatform.ecm.webui.component.explorer.versions.UIVersionInfo;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.link.NodeFinder;
+import org.exoplatform.services.cms.link.NodeLinkAware;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -75,9 +78,12 @@ public class UIDocumentNodeList extends UIContainer {
   
   private UIPageIterator        pageIterator_;
   
+  private LinkManager linkManager_;
+  
   private int padding_;
   
   public UIDocumentNodeList() throws Exception {
+    linkManager_ = WCMCoreUtils.getService(LinkManager.class);
     addChild(ManageVersionsActionComponent.class, null, null);
     pageIterator_ = addChild(UIPageIterator.class, null, null);
     padding_ = 0;
@@ -115,7 +121,11 @@ public class UIDocumentNodeList extends UIContainer {
     }
     //add new UIDocumentNodeList children
     for (Node node : getNodeChildrenList()) {
-      if (node.isNodeType(NodetypeConstant.NT_FOLDER) || node.isNodeType(NodetypeConstant.NT_UNSTRUCTURED)) {
+      if (node instanceof NodeLinkAware) {
+        node = ((NodeLinkAware)node).getRealNode();
+      }
+      Node targetNode = linkManager_.isLink(node) ? linkManager_.getTarget(node) : node;
+      if (targetNode.isNodeType(NodetypeConstant.NT_FOLDER) || targetNode.isNodeType(NodetypeConstant.NT_UNSTRUCTURED)) {
         addUIDocList(getID(node));
       }
     }

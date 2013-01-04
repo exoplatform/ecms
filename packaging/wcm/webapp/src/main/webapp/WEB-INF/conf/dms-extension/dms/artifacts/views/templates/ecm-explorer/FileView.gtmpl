@@ -64,89 +64,12 @@
 		<div class="UIListGrid">
 				<div class="TitleTable">
 					<div class="ClearFix">
-			    <%
-			      String selectedSortType = uicomponent.getTypeSort();
-			      String sortOrder = uicomponent.getSortOrder();
-			      String typeActionLink = "";
-			      if (sortOrder.equals("BlueDownArrow")) {
-			        typeActionLink = "Descending;";
-		        } else {
-		          typeActionLink = "Ascending;";
-		        }
-			    %>
-			    
-				    <div class="ColumnIcon" style="width: 20px;" onclick="<%= uicomponent.event("Sort", typeActionLink + "Type")%>" style="cursor:pointer;" >
-			        <%
-			          if (selectedSortType.equals("Type")) {
-			        %>
-				        <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-right: 20px; cursor:pointer;">
-				          <span></span>
-				        </div>
-				      <%}%>
-				    </div>
-				    <div class="LineLeft"><span></span></div>
-				    <div class="ColumnName" style="width: 125px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "Alphabetic")%>">
-			        <%
-			          if (selectedSortType.equals("Alphabetic")) {
-			        %>
-				        <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;">
-				        	<%=_ctx.appRes("ListView.view.label.name")%>
-				        </div>
-				      <%} else { %>
-				        <%=_ctx.appRes("ListView.view.label.name")%>
-				      <%} %>
-				    </div>
-					<!--
-					<div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);" 
-					                      onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
-				    <div class="ColumnAuditing" style="border: none; width: 105px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "Auditing")%>">
-			        <%
-			          if (selectedSortType.equals("Auditing")) {
-			        %>
-				        <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;">
-				        	<%=_ctx.appRes("ListView.view.label.auditing")%>
-				        </div>
-				      <%} else { %>
-				        <%=_ctx.appRes("ListView.view.label.auditing")%>
-				      <%} %>
-				    </div>
-					-->
-					<div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);" 
-					                      onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
-				    <div class="ColumnVersion" style="width: 95px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "Versionable")%>">
-			        <%
-			          if (selectedSortType.equals("Versionable")) {
-			        %>
-				        <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;">
-				        	<%=_ctx.appRes("ListView.view.label.versionable")%>
-				        </div>
-				      <%} else { %>
-				        <%=_ctx.appRes("ListView.view.label.versionable")%>
-				      <%} %>
-				    </div>
-			    <%
-			      for(String sortType : arrColumns) {
-							def arrColumn = sortType.split(";");
-			    %>
-						<div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
-						                      onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
-              <div class="Column<%=uicomponent.getPropertyNameWithoutNamespace(arrColumn[0])%>" style="width: ${arrColumn[1]}" onclick="<%= uicomponent.event("Sort", typeActionLink + arrColumn[0])%>">
-			       <%  
-			       if (arrColumn[0].equals(selectedSortType)) {
-             %>
-				        <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;">
-				        	<%=_ctx.appRes("ListView.view.label." + arrColumn[0].replace(":","_"))%>
-				        </div>
-			       <%} else { %>
-			         <%=_ctx.appRes("ListView.view.label." + arrColumn[0].replace(":","_"))%>
-			       <%} %>
-				    </div>
-			    <%
-		  	    }
-			    %>
-						<div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
-						                      onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
-		      </a>
+					  <div class="Breadcrumb FL"><span></span></div>
+		        <a style="cursor: pointer; -moz-outline: none; -moz-user-select: none;color: black;float: left"
+	             onclick="$rootNodeActionLink" class="NodeLabel">
+	            <strong><%=driveName%></strong>
+            </a>
+            
 			    </div>
 			    <div style="position: relative; top: 0px; left: 0px; width: 0px; height: 0px">
 						<div class="Mask" style="position: absolute; top: 0px; left: 0px; width: 0px; height: 0px"></div>

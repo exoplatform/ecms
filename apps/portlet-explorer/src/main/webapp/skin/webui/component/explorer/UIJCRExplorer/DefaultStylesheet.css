@@ -1741,4 +1741,9 @@
 
 .NoShow {
 	display:none;
+
+.UIJCRExplorerPortlet .Breadcrumb {
+	width: 16px; 
+	height: 16px; 
+	background: url('/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/TreeNodeIcon.gif');
 }
