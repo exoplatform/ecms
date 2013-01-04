@@ -823,6 +823,10 @@
   background: url('DefaultSkin/RestoreFromTrash.gif') no-repeat left center; /* orientation=lt */
   background: url('DefaultSkin/RestoreFromTrash.gif') no-repeat right center; /* orientation=rt */
 }
+.UIRightClickPopupMenu .RemoveFromTrash16x16Icon {
+  background: url('DefaultSkin/DustBin.gif') no-repeat left center; /* orientation=lt */
+  background: url('DefaultSkin/DustBin.gif') no-repeat right center; /* orientation=rt */
+}
 
 .UIRightClickPopupMenu .MoveToTrash16x16Icon {
   background: url('DefaultSkin/MoveToTrash.gif') no-repeat left center; /* orientation=lt */

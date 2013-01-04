@@ -563,6 +563,16 @@
           </object>
         </object-param>
         <object-param>
+          <name>RemoveFromTrash</name>
+          <object type="org.exoplatform.webui.ext.UIExtension">
+            <field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>
+            <field name="rank"><int>109</int></field>
+            <field name="name"><string>RemoveFromTrash</string></field>
+            <field name="category"><string>ItemContextMenu</string></field>
+            <field name="component"><string>org.exoplatform.ecm.webui.component.explorer.rightclick.manager.RemoveFromTrashManageComponent</string></field>
+          </object>
+        </object-param>
+        <object-param>
           <name>PlayMedia</name>
           <object type="org.exoplatform.webui.ext.UIExtension">
             <field name="type"><string>org.exoplatform.ecm.dms.UIWorkingArea</string></field>

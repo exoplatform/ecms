@@ -44,8 +44,10 @@ import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.webui.component.explorer.UIConfirmMessage;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.CanCutNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanDeleteNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
@@ -98,7 +100,8 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
   private static final Log LOG = ExoLogger.getLogger(DeleteManageComponent.class.getName());
 
   private static final List<UIExtensionFilter> FILTERS
-      = Arrays.asList(new UIExtensionFilter[]{new IsNotLockedFilter(),
+      = Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
+					       new IsNotLockedFilter(),
                                               new CanDeleteNodeFilter(),
                                               new IsNotTrashHomeNodeFilter(),
                                               new IsNotEditingDocumentFilter()});
@@ -135,14 +138,14 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     }
   }
 
-  private void removeMixins(Node node) throws Exception {
+  public void removeMixins(Node node) throws Exception {
     NodeType[] mixins = node.getMixinNodeTypes();
     for (NodeType nodeType : mixins) {
       node.removeMixin(nodeType.getName());
     }
   }
 
-  private void removeAuditForNode(Node node) throws Exception {
+  public void removeAuditForNode(Node node) throws Exception {
     UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
     ManageableRepository repository = uiExplorer.getRepository();
     SessionProvider sessionProvider = uiExplorer.getSystemProvider();
@@ -292,7 +295,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     return ret;
   }
 
-  private void processRemoveNode(String nodePath, Node node, Event<?> event, boolean isMultiSelect)
+  public void processRemoveNode(String nodePath, Node node, Event<?> event, boolean isMultiSelect)
       throws Exception {
     final String virtualNodePath = nodePath;
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
@@ -573,7 +576,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     return uiExplorer.getNodeByPath(nodePath, session, false);
   }
   
-  private String getGroups() throws Exception {
+  public String getGroups() throws Exception {
     StringBuilder ret = new StringBuilder();
     for (String group : Utils.getGroups())
       ret.append(group).append(';');
