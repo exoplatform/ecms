@@ -8,7 +8,7 @@
 %>
 
 	<h5 class="title clearfix">
-		<i class="advancedSearch pull-right" onclick="<%=uicomponent.event("AdvanceSearch")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.AdvanceSearch")%>"></i>
+		<i class="uiIconEcmsSavedSearchesMini pull-right" onclick="<%=uicomponent.event("AdvanceSearch")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.AdvanceSearch")%>"></i>
 		<%=_ctx.appRes("UISavedSearches.title.savedSearches")%>
 	</h5>
 

@@ -54,61 +54,60 @@
 <div class="uiActionBar $actionBarStyle" id="$uicomponent.id" style="position: relative;">
   <div class="uiTabNormal uiTabGrayInPage">
     <ul class="nav nav-tabs uiTabsContainer" $displayTabContainer>
-				<%
-			    def isSelected = false;
-					def selectedTab = uicomponent.getSelectedTab();
-				  if(!tabAvailableList.contains(selectedTab) && tabAvailableList.size() > 0) {
-						selectedTab = tabAvailableList.get(0);
-						uicomponent.setSelectedTab(selectedTab);
+			<%
+				def isSelected = false;
+				def selectedTab = uicomponent.getSelectedTab();
+				if(!tabAvailableList.contains(selectedTab) && tabAvailableList.size() > 0) {
+					selectedTab = tabAvailableList.get(0);
+					uicomponent.setSelectedTab(selectedTab);
+				}
+				int i = 0;
+				for(tab in tabAvailableList) {
+					def tabStyle = "";				   
+					i++;
+					if(tabAvailableList.size() == i) tabStyle = "last ";
+					if(selectedTab.equals(tab)) {
+						isSelected = true;
+						tabStyle += "active ";
 					}
-				  int i = 0;
-					for(tab in tabAvailableList) {
-				    def tabStyle = "";				   
-				    i++;
-				    if(tabAvailableList.size() == i) tabStyle = "last ";
-				    if(selectedTab.equals(tab)) {
-				      isSelected = true;
-				      tabStyle += "active ";
-				    }
-				    if(StringUtils.isNotEmpty(tabStyle)) tabStyle = "class=\""+tabStyle+"\"";
-				    String fullTabName = (String)_ctx.appRes(uicomponent.getId() + ".obtion." + tab);
-				    String displayTabName = fullTabName;
-				    if (fullTabName.length() > 13) {
-				      displayTabName = fullTabName.substring(0, 10) + "..."
-				    }                                                                                                 %>
-                              <li $tabStyle onclick="<%=uicomponent.event('ChangeTab', tab); %>;">
-                                <a rel="tooltip" data-placement="bottom" title="$fullTabName" data-toggle="tab" href="#tab1_4">$displayTabName</a>
-                              </li>                                                                                           <%
-          }/*for tabs loops*/                                                                                   %>
-                              <li class="dropdown pull-right listHiddenTabsContainer">
-                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">More <b class="caret"></b></a>
-                                  <ul class="dropdown-menu">
-                                    <!-- <li><a data-toggle="tab" href="#dropdown1_4">Tab demo1</a></li> -->
-                                  </ul>
-                              </li>
-             </ul>
+					if(StringUtils.isNotEmpty(tabStyle)) tabStyle = "class=\""+tabStyle+"\"";
+					String fullTabName = (String)_ctx.appRes(uicomponent.getId() + ".obtion." + tab);
+					String displayTabName = fullTabName;
+					if (fullTabName.length() > 13) {
+						displayTabName = fullTabName.substring(0, 10) + "..."
+					}                                                                                                 %>
+					<li $tabStyle onclick="<%=uicomponent.event('ChangeTab', tab); %>;">
+						<a rel="tooltip" data-placement="bottom" title="$fullTabName" data-toggle="tab" href="#tab1_4">$displayTabName</a>
+					</li>                                                                                           <%
+				}/*for tabs loops*/                                                                                   %>
+					<li class="dropdown pull-right listHiddenTabsContainer">
+						<a data-toggle="dropdown" class="dropdown-toggle" href="#">More <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<!-- <li><a data-toggle="tab" href="#dropdown1_4">Tab demo1</a></li> -->
+							</ul>
+					</li>
+		 </ul>
 		 <%if(isSelected) {                                                               %>
-               <div id="uiActionsBarContainer" class="tab-content">
-                 <div id="tab1_4" class="tab-pane fade in active">
-                   <ul class="nav nav-pills">
-             <%
-               for(button in uicomponent.getActionInTab(uicomponent.getSelectedTab())) {
-                 def action = uicomponent.getUIAction(button);
-                 if (action != null) {
-                   def title = _ctx.appRes(uicomponent.getId() + ".tooltip." + button);     %>
-                   <li onclick="<%=action.event(button);%>">
-                     <a rel="tooltip" data-placement="bottom" title="$title"><i class="${button}Icon"></i> $title</a>
-                   </li>                                                                    <%
-                 } //if condition
-               } //for loop
-             %>
-                     <li class="dropdown pull-right listHiddenActionsContainer" style="display: none;">
-                       <a data-toggle="dropdown" class="dropdown-toggle" href="#"><%=_ctx.appRes("UIViewBar.label.more")%> <b class="caret"></b></a>
-                       <ul class="dropdown-menu" id="ListHideContainer">
-                       </ul>
-                     </li>
-                   </ul>
-                 </div>
+		 <div id="uiActionsBarContainer" class="tab-content">
+			 <div id="tab1_4" class="tab-pane fade in active">
+				 <ul class="nav nav-pills">
+					 <%
+						 for(button in uicomponent.getActionInTab(uicomponent.getSelectedTab())) {
+							 def action = uicomponent.getUIAction(button);
+							 if (action != null) {
+								 def title = _ctx.appRes(uicomponent.getId() + ".tooltip." + button);     %>
+								 <li onclick="<%=action.event(button);%>">
+									 <a class="actionIcon" rel="tooltip" data-placement="bottom" title="$title"><i class="uiIconEcms${button}"></i> $title</a>
+								 </li>                                                                    <%
+							 } //if condition
+						 } //for loop
+					 %>
+					 <li class="dropdown pull-right listHiddenActionsContainer" style="display: none;">
+						 <a data-toggle="dropdown" class="dropdown-toggle" href="#"><%=_ctx.appRes("UIViewBar.label.more")%> <b class="caret"></b></a>
+						 <ul class="dropdown-menu" id="ListHideContainer"></ul>
+					 </li>
+				 </ul>
+			 </div>
 		 <%}%>
   		<div class="UIViewBarContainer ClearFix" id="UIViewBarContainer">
   		  <%

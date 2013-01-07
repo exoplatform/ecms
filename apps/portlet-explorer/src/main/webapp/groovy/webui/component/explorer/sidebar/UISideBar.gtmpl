@@ -27,7 +27,7 @@
 							def action = itemContext.getUIExtensionName();
 				%>
 					<div class="<%=getCSSClassName(action)%>" onclick="<%=itemContext.event(action)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".label." + action)%>">
-						<i class="itemIcon defaultIcon ${action}Icon"></i>
+						<i class="uiIconEcms${action}Mini"></i>
 					</div>
 				<% } %>
 				

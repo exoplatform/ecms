@@ -14,7 +14,7 @@
 %>
 <div class="uiBox" id="$uicomponent.id">
 	<h5 class="title clearfix">
-		<a class="sideGeneratal" onclick="<%=uicomponent.event("Preferences")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAllItems.label.Configuration")%>"><i class="uiIconSetting"></i></a>
+		<a class="sideGeneratal" onclick="<%=uicomponent.event("Preferences")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAllItems.label.Configuration")%>"><i class="uiIconSetting uiIconLightGrey"></i></a>
 		<%=_ctx.appRes("UIAllItems.title.allItems")%> 
 	</h5>
 
