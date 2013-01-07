@@ -60,7 +60,7 @@
       </depends>
       <depends>
         <module>webui-ext</module>
-      </depends>
+      </depends>      
    </module>
    
    <module>

@@ -68,6 +68,21 @@
          <name>ECM</name>
          <path>/javascript/eXo/wcm/ECM.js</path>
       </script>
+      <depends>
+        <module>bts_button</module>
+      </depends>
+      <depends>
+        <module>bts_collapse</module>
+      </depends>
+      <depends>
+        <module>bts_dropdown</module>
+      </depends>
+      <depends>
+        <module>bts_tab</module>
+      </depends>
+      <depends>
+        <module>bts_tooltip</module>
+      </depends>
    </module>
    
    <module>

@@ -31,6 +31,8 @@ import javax.jcr.nodetype.NodeTypeManager;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.ecm.webui.component.admin.UIECMAdminControlPanel;
+import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.core.UIPagingGrid;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -38,6 +40,7 @@ import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
+import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
@@ -61,6 +64,18 @@ public class UITemplateList extends UIPagingGrid {
 
   private static String[] NODETYPE_BEAN_FIELD = {"name"} ;
   private static String[] NODETYPE_ACTION = {"Edit", "Delete"} ;
+  public static final String DOCUMENTS_TEMPLATE_TYPE = "templates";
+  public static final String ACTIONS_TEMPLATE_TYPE = "actions";
+  public static final String OTHERS_TEMPLATE_TYPE = "others";
+  
+  private String filter = DOCUMENTS_TEMPLATE_TYPE;
+  
+  public void setTemplateFilter(String filter) {
+  	this.filter = filter;
+  }  
+  public String getTemplateFilter() {
+  	return this.filter;
+  }
   
   public UITemplateList() throws Exception {
     getUIPageIterator().setId("NodeTypeListIterator") ;
@@ -82,6 +97,8 @@ public class UITemplateList extends UIPagingGrid {
   static public class EditActionListener extends EventListener<UITemplateList> {
     public void execute(Event<UITemplateList> event) throws Exception {
       UITemplateList nodeTypeList = event.getSource() ;
+      UIECMAdminPortlet adminPortlet = nodeTypeList.getAncestorOfType(UIECMAdminPortlet.class);
+      UIPopupContainer popupContainer = adminPortlet.getChild(UIPopupContainer.class);
       String nodeType = event.getRequestContext().getRequestParameter(OBJECTID) ;
       UITemplatesManager uiTemplatesManager = nodeTypeList.getParent() ;
       UIViewTemplate uiViewTemplate = uiTemplatesManager.createUIComponent(UIViewTemplate.class, null, null) ;
@@ -102,9 +119,9 @@ public class UITemplateList extends UIPagingGrid {
       UITemplateContent uiSkinTabForm = uiViewTemplate.findComponentById(UISkinTab.SKIN_FORM_NAME) ;
       uiSkinTabForm.setNodeTypeName(nodeType) ;
       uiSkinTabForm.update(null) ;
-      uiTemplatesManager.removeChildById(UITemplatesManager.NEW_TEMPLATE) ;
+      popupContainer.removeChildById(UITemplatesManager.NEW_TEMPLATE) ;
       uiTemplatesManager.initPopup(uiViewTemplate, UITemplatesManager.EDIT_TEMPLATE) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiTemplatesManager) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(adminPortlet) ;
     }
  
   }
@@ -136,8 +153,10 @@ public class UITemplateList extends UIPagingGrid {
   static public class AddNewActionListener extends EventListener<UITemplateList> {
     public void execute(Event<UITemplateList> event) throws Exception {
       UITemplatesManager uiTemplatesManager = event.getSource().getAncestorOfType(UITemplatesManager.class) ;
+      UIECMAdminPortlet adminPortlet = uiTemplatesManager.getAncestorOfType(UIECMAdminPortlet.class);
+      UIPopupContainer popupContainer = adminPortlet.getChild(UIPopupContainer.class);
       UITemplateForm uiTemplateForm = uiTemplatesManager.createUIComponent(UITemplateForm.class, null, null) ;
-      uiTemplatesManager.removeChildById(UITemplatesManager.EDIT_TEMPLATE) ;
+      popupContainer.removeChildById(UITemplatesManager.EDIT_TEMPLATE) ;
       if(uiTemplateForm.getOption().size() == 0) {
         UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class) ;
         uiApp.addMessage(new ApplicationMessage("UITemplateList.msg.access-denied", null, ApplicationMessage.WARNING)) ;
@@ -146,7 +165,7 @@ public class UITemplateList extends UIPagingGrid {
       }
       uiTemplateForm.refresh();
       uiTemplatesManager.initPopup(uiTemplateForm, UITemplatesManager.NEW_TEMPLATE) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiTemplatesManager) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(adminPortlet) ;
     }
   }
 
@@ -160,11 +179,12 @@ public class UITemplateList extends UIPagingGrid {
   @Override
   public void refresh(int currentPage) throws Exception {
     TemplateService templateService = getApplicationComponent(TemplateService.class);
+    List<String> documentNodeTypes = templateService.getAllDocumentNodeTypes();
     Node templatesHome = templateService.getTemplatesHome(WCMCoreUtils.getUserSessionProvider());
     List<TemplateData> templateData = new ArrayList<TemplateData>();
     if (templatesHome != null) {
-      NodeTypeManager ntManager = templatesHome.getSession().getWorkspace().getNodeTypeManager();
-      NodeTypeIterator nodetypeIter = ntManager.getAllNodeTypes();
+      NodeTypeManager ntManager = templatesHome.getSession().getWorkspace().getNodeTypeManager();      
+      NodeTypeIterator nodetypeIter = ntManager.getAllNodeTypes();      
       List<String> listNodeTypeName = new ArrayList<String>();
       while (nodetypeIter.hasNext()) {
         NodeType n1 = nodetypeIter.nextNodeType();
@@ -172,9 +192,17 @@ public class UITemplateList extends UIPagingGrid {
       }
       NodeIterator nodes = templatesHome.getNodes();
       while (nodes.hasNext()) {
-        Node node = nodes.nextNode();
+        Node node = nodes.nextNode();        
         if (listNodeTypeName.contains(node.getName())) {
-          templateData.add(new TemplateData(node.getName()));
+        	if(filter.equals(DOCUMENTS_TEMPLATE_TYPE)) {
+        		if(documentNodeTypes.contains(node.getName()))
+        			templateData.add(new TemplateData(node.getName()));
+        	} else if(filter.equals(ACTIONS_TEMPLATE_TYPE)) {
+        		if(node.isNodeType("exo:action")) templateData.add(new TemplateData(node.getName()));
+        	} else {
+        		if(!node.isNodeType("exo:action") && !documentNodeTypes.contains(node.getName())) 
+        			templateData.add(new TemplateData(node.getName()));
+        	}          
         }
       }
       Collections.sort(templateData, new TemplateComparator());
