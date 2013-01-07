@@ -20,6 +20,7 @@
   import org.exoplatform.ecm.webui.component.explorer.DocumentProviderUtils;
   import org.exoplatform.ecm.jcr.model.Preference;
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+  import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
   import javax.jcr.Value;
   import javax.jcr.PathNotFoundException;
   import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -27,7 +28,8 @@
   import org.exoplatform.services.wcm.core.NodetypeConstant;
   import java.net.URLEncoder;
   import org.exoplatform.services.wcm.core.NodeLocation;
-
+  import org.apache.commons.lang.StringUtils;
+  org.exoplatform.services.cms.link.NodeFinder;
   
   def linkManager = WCMCoreUtils.getService(LinkManager.class);
   def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
@@ -58,6 +60,12 @@
 	//Config to display columns with format: ["${column};${width}"]
 	//Default 
 	String[] arrColumns = ["exo:owner;95px","exo:dateModified;123px","exo:dateCreated;121px"];
+	def absNodePath = uiExplorer.getCurrentPath();
+	def relNodePath = uiExplorer.filterPath(absNodePath);
+	def drivePath = new StringBuffer(absNodePath.substring(0, absNodePath.indexOf(relNodePath)));
+	if (StringUtils.isEmpty(drivePath.toString())) {
+	  drivePath.append("/");
+	}
 %>
 <div id="$componentId">
 	<div id="${componentId}-$viewComponentId" class="UIListView">	
@@ -66,10 +74,24 @@
 					<div class="ClearFix">
 					  <div class="Breadcrumb FL"><span></span></div>
 		        <a style="cursor: pointer; -moz-outline: none; -moz-user-select: none;color: black;float: left"
-	             onclick="$rootNodeActionLink" class="NodeLabel">
-	            <strong><%=driveName%></strong>
+	             onclick="<%=uicomponent.event("ChangeNode", drivePath.toString(), new Parameter("workspaceName", uiExplorer.getDriveData().getWorkspace()))%>" class="NodeLabel">
+	            <strong><%=uiExplorer.findFirstComponentOfType(UITreeExplorer.class).getLabel()%></strong>
             </a>
-            
+            <%
+            for (String nodeName : relNodePath.split("/")) {
+              if (!StringUtils.isEmpty(nodeName)) {
+                drivePath.append("/").append(nodeName);
+                def nodeWs = uiExplorer.getDriveData().getWorkspace();
+                %>
+                  <span class="FL"><strong>&nbsp;>&nbsp;</strong></span>
+                  <a style="cursor: pointer; -moz-outline: none; -moz-user-select: none;color: black;float: left"
+                    onclick="<%=uicomponent.event("ChangeNode", drivePath.toString(), new Parameter("workspaceName", nodeWs))%>" class="NodeLabel">
+                   <strong><%=nodeName%></strong>
+                  </a>
+                <%
+              }
+            }
+            %>
 			    </div>
 			    <div style="position: relative; top: 0px; left: 0px; width: 0px; height: 0px">
 						<div class="Mask" style="position: absolute; top: 0px; left: 0px; width: 0px; height: 0px"></div>

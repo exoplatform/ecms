@@ -243,6 +243,7 @@ public class UIDocumentNodeList extends UIContainer {
       UIDocumentNodeList uicomp = event.getSource();
 
       NodeFinder nodeFinder = uicomp.getApplicationComponent(NodeFinder.class);
+      UIJCRExplorer uiExplorer = uicomp.getAncestorOfType(UIJCRExplorer.class);
       String uri = event.getRequestContext().getRequestParameter(OBJECTID);
       String workspaceName = event.getRequestContext().getRequestParameter("workspaceName");
       UIApplication uiApp = uicomp.getAncestorOfType(UIApplication.class);
@@ -254,6 +255,7 @@ public class UIDocumentNodeList extends UIContainer {
         if ((item instanceof Node) && Utils.isInTrash((Node) item)) {
           return;
         }
+//        uiExplorer.setSelectNode(workspaceName, uri);
         Node clickedNode = (Node)item;
 //        UIDocumentNodeList uiDocNodeListChild = uicomp.addChild(UIDocumentNodeList.class, null, 
 //                                                                String.valueOf(clickedNode.getPath().hashCode()));
@@ -297,7 +299,7 @@ public class UIDocumentNodeList extends UIContainer {
       // Manage ../ and ./
       uri = LinkUtils.evaluatePath(uri);
       // Just in order to check if the node exists
-      Node currentNode = (Node)nodeFinder.getItem(workspaceName, uri);currentNode.getProperty("a").getString().length();
+      Node currentNode = (Node)nodeFinder.getItem(workspaceName, uri);
       uiExplorer.setIsHidePopup(false);
       if (currentNode.canAddMixin(Utils.MIX_VERSIONABLE)) {
         UIPopupContainer.activate(UIActivateVersion.class, 400);
