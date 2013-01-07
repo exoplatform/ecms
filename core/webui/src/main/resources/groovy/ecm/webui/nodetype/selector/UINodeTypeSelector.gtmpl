@@ -53,7 +53,7 @@
               <td width="40px" align="center">
                 <div class="default16x16Icon ${nodeType}16x16Icon" style="margin:auto"><span></span></div>
               </td>
-              <td align="center"><div class="Text"><%=node.getName()%></div></td>
+              <td align="center"><div class="text"><%=node.getName()%></div></td>
               <td align="center">
                   <%
                     String booleanText ;

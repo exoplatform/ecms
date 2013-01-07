@@ -40,7 +40,7 @@
 	            def fieldClass = fieldValue.getClass() ;
 	            if(fieldClass == Integer.class)  cssClass = "number" ;
 	            else if(fieldClass == java.util.Date.class)  cssClass = "Date" ;
-	            else cssClass = "Text" ;
+	            else cssClass = "text" ;
 	          } else {
 	            fieldValue = "";
 	          }

@@ -35,17 +35,17 @@
       %>
 		      <tr class="$rowClass">
 		        <td>
-		          <div class="Text">
+		          <div class="text">
 		          	<%if(action.hasProperty("exo:name")){%>
 		          		<%=action.getProperty("exo:name").getString()%>
 		          	<%}%>
 		          </div>
 		        </td>
 		        <td>
-	            <div class="Text">[<%=action.getPrimaryNodeType().getName()%>]</div>
+	            <div class="text">[<%=action.getPrimaryNodeType().getName()%>]</div>
 	          </td>
 		        <td>
-		          <div class="Text">
+		          <div class="text">
 		          <%if(action.hasProperty("exo:lifecyclePhase")){
 		            sB = new StringBuilder();
 		            def values = action.getProperty("exo:lifecyclePhase").getValues();          

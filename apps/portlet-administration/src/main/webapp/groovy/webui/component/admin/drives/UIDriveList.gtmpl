@@ -61,11 +61,11 @@
   	    	views = views.replaceAll(",","<br/>");
       %>
           <tr>
-            <td><div class="Text" rel="tooltip" data-placement="bottom" title="<%=drive.getName().replace("|", " | ")%>"><%=drive.getName().replace("|", " | ")%></div></td>
-            <td><div class="Text" rel="tooltip" data-placement="bottom" title="$drive.workspace">$drive.workspace</div></td>
-            <td><div class="Text" rel="tooltip" data-placement="bottom" title="<%=drive.getHomePath().replace("/", " /")%>"><%=drive.getHomePath().replace("/", " /")%></div></td>
-            <td><div class="Text" rel="tooltip" data-placement="bottom" title="$drive.permissions"><%=bufPermission.toString()%></div></td>
-            <td><div class="Text" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getDriveViews(drive)%>"><%=views%></div></td>
+            <td><div class="text" rel="tooltip" data-placement="bottom" title="<%=drive.getName().replace("|", " | ")%>"><%=drive.getName().replace("|", " | ")%></div></td>
+            <td><div class="text" rel="tooltip" data-placement="bottom" title="$drive.workspace">$drive.workspace</div></td>
+            <td><div class="text" rel="tooltip" data-placement="bottom" title="<%=drive.getHomePath().replace("/", " /")%>"><%=drive.getHomePath().replace("/", " /")%></div></td>
+            <td><div class="text" rel="tooltip" data-placement="bottom" title="$drive.permissions"><%=bufPermission.toString()%></div></td>
+            <td><div class="text" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getDriveViews(drive)%>"><%=views%></div></td>
 	          <td class="center">
 	            <a class="actionIcon" onclick="<%=uicomponent.event("EditInfo", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDriveList.tooltip.EditInfo")%>" ><i class="uiIconEditInfo"></i></a>
 					    <a class="actionIcon" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDriveList.tooltip.Delete")%>" ><i class="uiIconDelete"></i></a>

@@ -46,7 +46,7 @@
 	  					%>
 		      				<tr class="$rowClass">
 	    	    				<td>
-	        	  					<div class="Text">
+	        	  					<div class="text">
 	          							<%
 	          								if(action.hasProperty("exo:name")){
 	          									%><%=action.getProperty("exo:name").getString()%><%
@@ -55,7 +55,7 @@
 		          					</div>
 		        				</td>
 		        				<td>
-		          					<div class="Text">
+		          					<div class="text">
 		          						<%
 		          							if(action.hasProperty("exo:description")){
 		          								%><%=action.getProperty("exo:description").getString()%><%
@@ -64,7 +64,7 @@
 		          					</div>
 		          				</td>
 		        				<td>
-		          					<div class="Text">[<%=action.getPrimaryNodeType().getName()%>]</div>
+		          					<div class="text">[<%=action.getPrimaryNodeType().getName()%>]</div>
 		        				</td>
 		        				<td class="center">
 			        					<%

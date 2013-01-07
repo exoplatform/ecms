@@ -51,7 +51,7 @@
               String nodeType = node.getName() ;
               nodeType = nodeType.replace(":", "_") ;
             %>            
-            <td><div class="Text"><%=node.getName()%></div></td>
+            <td><div class="text"><%=node.getName()%></div></td>
             <% if (!(node instanceof Node)) { %>
               <td>
                 <%
@@ -66,7 +66,7 @@
                   }
                 %>
                 <div class="TrueFalseContainer">
-	                <div class="Text">$booleanText</div>
+	                <div class="text">$booleanText</div>
 	              </div>
               </td>
               <td>
@@ -80,10 +80,10 @@
                   }
                 %>
                 <div class="TrueFalseContainer">
-	                <div class="Text">$booleanText</div>
+	                <div class="text">$booleanText</div>
 	              </div>
               </td>
-              <td align="center"><div class="Text"><%=_ctx.appRes("UINodeTypeList.info.description")%></div></td>
+              <td align="center"><div class="text"><%=_ctx.appRes("UINodeTypeList.info.description")%></div></td>
               <td class="center">                
                 <i onclick="<%=uicomponent.event("View", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UINodeTypeList.tooltip.View")%>" class="uiIconPreview"></i>
               </td>
@@ -101,7 +101,7 @@
                   }
                 %>
                 <div class="TrueFalseContainer">
-	                <div class="Text">$booleanText</div>
+	                <div class="text">$booleanText</div>
 	              </div>
               </td>
               <td>
@@ -115,10 +115,10 @@
                   }
                 %>
                 <div class="TrueFalseContainer">
-                	<div class="Text">$booleanText</div>
+                	<div class="text">$booleanText</div>
                 </div>
               </td>
-              <td align="center"><div class="Text"><%=_ctx.appRes("UINodeTypeList.info.description")%></div></td>
+              <td align="center"><div class="text"><%=_ctx.appRes("UINodeTypeList.info.description")%></div></td>
               <td class="center">                                
                 <i onclick="<%=uicomponent.event("Edit", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UINodeTypeList.tooltip.Edit")%>" class="uiIconEdit"></i>
                 <i onclick="<%=uicomponent.event("Delete", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UINodeTypeList.tooltip.Delete")%>" class="uiIconDelete"></i>

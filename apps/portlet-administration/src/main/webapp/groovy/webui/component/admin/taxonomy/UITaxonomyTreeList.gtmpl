@@ -48,9 +48,9 @@
             }
         %>
             <tr class="$rowClass">
-              <td><div class="Text" rel="tooltip" data-placement="bottom" title="<%=taxonomyTree.getTaxoTreeName().replace("|", " | ")%>"><% if (!taxonomyTree.isEdit()) { %><sup>*** </sup><%}%><%=taxonomyTree.getTaxoTreeName().replace("|", " | ")%></div></td>
-              <td><div class="Text" rel="tooltip" data-placement="bottom" title="$taxonomyTree.taxoTreeWorkspace">$taxonomyTree.taxoTreeWorkspace</div></td>
-              <td><div class="Text" rel="tooltip" data-placement="bottom" title="<%=taxonomyTree.getTaxoTreeHomePath().replace("/", " /")%>"><%=taxonomyTree.getTaxoTreeHomePath().replace("/", " /")%></div></td>
+              <td><div class="text" rel="tooltip" data-placement="bottom" title="<%=taxonomyTree.getTaxoTreeName().replace("|", " | ")%>"><% if (!taxonomyTree.isEdit()) { %><sup>*** </sup><%}%><%=taxonomyTree.getTaxoTreeName().replace("|", " | ")%></div></td>
+              <td><div class="text" rel="tooltip" data-placement="bottom" title="$taxonomyTree.taxoTreeWorkspace">$taxonomyTree.taxoTreeWorkspace</div></td>
+              <td><div class="text" rel="tooltip" data-placement="bottom" title="<%=taxonomyTree.getTaxoTreeHomePath().replace("/", " /")%>"><%=taxonomyTree.getTaxoTreeHomePath().replace("/", " /")%></div></td>
               <td class="center">
                   <% if (taxonomyTree.isEdit()) { %>
 					<a class="actionIcon" onclick="<%=uicomponent.event("EditTaxonomyTree", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.EditTaxonomyTree")%>" ><i class="uiIconEditInfo"></i></a>

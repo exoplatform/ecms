@@ -34,7 +34,7 @@
 			  <tbody>
 			  <%if (uicomponent.getClipboardData().isEmpty()) { %>
 			    <tr class="OddRow">
-			      <td class="Text" colspan="3">
+			      <td class="text" colspan="3">
 			      	<div class="ActionContainer">
 				        <%=_ctx.appRes(name+".label.nocommand")%>
 				      </div>
@@ -53,8 +53,8 @@
 				      if (path.length() > 20 ) path = "..." + path.substring(path.length() - 20, path.length());
 				%>
 				    <tr class="$rowClass">
-				      <td class="Text" rel="tooltip" data-placement="bottom" title="<%=fullPath%>"><%=path%></td>
-				    	<td class="Text"><%=item.getType()%></td>
+				      <td class="text" rel="tooltip" data-placement="bottom" title="<%=fullPath%>"><%=path%></td>
+				    	<td class="text"><%=item.getType()%></td>
 				      <td>         
 				        <div class="ActionContainer">
 				          <%for(action in beanActions) { %>
@@ -66,7 +66,7 @@
 				    <%index++ ;
 				    }%>
 				  <tr class="EvenRow">
-			      <td class="Text" colspan="3">
+			      <td class="text" colspan="3">
 			        <div class="ClearAllBlock ClearFix" style="text-align: center">
 								<a  class="Icon ScissorsEraserWarning16x16Icon" href="<%=uicomponent.event('ClearAll', 'All')%>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								  <%=_ctx.appRes(name+".action.clearall")%>

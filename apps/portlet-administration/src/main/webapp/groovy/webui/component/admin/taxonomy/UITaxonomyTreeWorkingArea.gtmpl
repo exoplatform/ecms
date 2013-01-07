@@ -33,7 +33,7 @@
 			            String path = node.getPath() ;
 			            String nodeName = path.substring(path.lastIndexOf("/") + 1, path.length()) ;
 			           %>
-			          <div class="Text" rel="tooltip" data-placement="bottom" title="$nodeName">$nodeName</div>
+			          <div class="text" rel="tooltip" data-placement="bottom" title="$nodeName">$nodeName</div>
 			        </td>
 			        <td class="center">
 		              <%
@@ -57,7 +57,7 @@
 		    } else {
 		  %>
 		  		<tr class="EvenRow">
-		  			<td colspan="2"><div class="Text"><%=_ctx.appRes("UITreeList.info.child-not-found")%></div></td>
+		  			<td colspan="2"><div class="text"><%=_ctx.appRes("UITreeList.info.child-not-found")%></div></td>
 		  		</tr>
 		  <%  	
 		    }

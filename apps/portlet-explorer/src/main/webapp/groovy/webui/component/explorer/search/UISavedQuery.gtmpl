@@ -49,7 +49,7 @@
 		              storedQueryPath =  storedQueryPath.substring(storedQueryPath.lastIndexOf("/") + 1, storedQueryPath.length()) ;
 		            %>
 		            <td><div class="text" rel="tooltip" data-placement="bottom" title="<%=object.getStoredQueryPath()%>"><%=storedQueryPath%></div></td>
-		            <td><%=object.getLanguage()%></td>
+		            <td><div class="text"><%=object.getLanguage()%></div></td>
 		            <td>
 		            	<%
 		            		String statement = object.getStatement() ;
@@ -72,8 +72,8 @@
 		        		if(object.hasProperty("jcr:language")) {
 		        %>
 				  	   <tr>
-		            <td><%=object.getName()%></td>
-		            <td><%=object.getProperty("jcr:language").getString()%></td>
+		            <td><div class="text"><%=object.getName()%></div></td>
+		            <td><div class="text"><%=object.getProperty("jcr:language").getString()%></div></td>
 		            <td>
 		            	<div class="text" rel="tooltip" data-placement="bottom" title="<%=object.getProperty("jcr:statement").getString()%>">
 			            	<%
@@ -91,7 +91,7 @@
 		            		else sharedPermissions = sharedPermissions + "," + per.getString() ;
 		            	}
 		            %>
-		            	<%=sharedPermissions%>
+		            	<div class="text"><%=sharedPermissions%></div>
 		            </td>
 			          <td class="center">
 									<div class="actionContainer">

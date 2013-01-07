@@ -265,7 +265,7 @@ public class UIViewList extends UIPagingGrid {
       permissions = per ;
       StringBuilder str = new StringBuilder() ;
       for(int i = 0; i < tabs.size(); i++) {
-        str.append(" [ ").append(tabs.get(i)).append(" ]");
+        str.append(" [").append(tabs.get(i)).append("]");
       }
       tabList = str.toString() ;
     }

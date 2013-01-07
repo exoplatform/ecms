@@ -34,7 +34,7 @@
 	          metaType = metaType.replace(":", "_") ;
 	        %>
 	        <td>
-	        	<div class="Text">
+	        	<div class="text">
 	          	<img src="/eXoResources/skin/sharedImages/Blank.gif" alt="$metadataType.name" class="default16x16Icon ${metaType}16x16Icon"/>
 		          <span>$metadataType.name</span>
 		        </div>
@@ -113,7 +113,7 @@
 	          <td width="36px">
 	            <div class="default16x16Icon ${nodeType}16x16Icon" style="margin:auto"></div>                      
 	          </td>
-	          <td><div class="Text">$meta.name</div></td>
+	          <td><div class="text">$meta.name</div></td>
 	          <td align="center"><%=uicomponent.resolveType(meta.getRequiredType())%></td>
 	          <td align="center"><%=_ctx.appRes("UIMetadataView.info.description")%></td>
 	        </tr>

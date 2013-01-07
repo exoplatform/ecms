@@ -68,10 +68,10 @@
     %>        
           <td>
             <div class="default16x16Icon ItemIcon <%=Utils.getNodeTypeIcon(node, "16x16Icon")%>" style="width: auto; height: auto; background-position: left top; padding-left: 20px">
-              <div class="Text">$titleNode</div>
-              <div class="Text">$expect</div>
-              <div class="Text">$path</div>
-              <div class="Text">$date</div>
+              <div class="text">$titleNode</div>
+              <div class="text">$expect</div>
+              <div class="text">$path</div>
+              <div class="text">$date</div>
             </div>
           </td>
           
@@ -80,7 +80,7 @@
           </td>
           
           <td>
-            <div class="Text">$publicationState</div>
+            <div class="text">$publicationState</div>
           </td>
     <%
     	if(beanActions != null && beanActions.length > 0) { 

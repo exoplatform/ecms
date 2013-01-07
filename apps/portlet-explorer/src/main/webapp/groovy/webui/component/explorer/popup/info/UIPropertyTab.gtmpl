@@ -61,11 +61,11 @@ import org.exoplatform.wcm.webui.reader.ContentReader;
 			    </td>
 			    <td>
 				    <%if ((value == "binary")||(value == "notavailable")||(value == "cannotget")) {%>
-			    	<div class="Text" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPropertyTab.label." + value)%>">
+			    	<div class="text" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPropertyTab.label." + value)%>">
 				      <%=_ctx.appRes("UIPropertyTab.label." + value)%>
 				    </div>  
 				    <%} else {%>
-				    <div class="Text" rel="tooltip" data-placement="bottom" title="<%=value%>">
+				    <div class="text" rel="tooltip" data-placement="bottom" title="<%=value%>">
 				      <%=value%>
 				   	</div>
 				    <%}%>  

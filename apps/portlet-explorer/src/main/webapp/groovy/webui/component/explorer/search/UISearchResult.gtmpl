@@ -123,7 +123,7 @@
               <div class="default16x16Icon ItemIcon <%=Utils.getNodeTypeIcon(node, "16x16Icon")%>" style="margin:auto"><span></span></div>
             </td>
             <td>
-              <div class="Text" rel="tooltip" data-placement="bottom" title="<%=dateFormat.format(uicomponent.getDateCreated(node))%>">
+              <div class="text" rel="tooltip" data-placement="bottom" title="<%=dateFormat.format(uicomponent.getDateCreated(node))%>">
                 <%=Utils.getTitleWithSymlink(node)%>
               </div>
               <div>$excerpt</div>
