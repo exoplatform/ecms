@@ -38,15 +38,7 @@ public interface BasePath {
   public static final String METADATA_PATH = "metadataPath" ;
   public static final String QUERIES_PATH = "queriesPath" ;
   public static final String EXO_DRIVES_PATH = "exoDrivesPath" ;
-  public static final String ECM_BUSINESS_PROCESSES_PATH ="businessProcessesPath" ;
-
   public static final String ECM_EXPLORER_TEMPLATES = "ecmExplorerTemplates" ;
-  public static final String CONTENT_BROWSER_TEMPLATES = "contentBrowserTemplates" ;
-  public static final String CB_PATH_TEMPLATES = "cbPathTemplates" ;
-  public static final String CB_QUERY_TEMPLATES = "cbQueryTemplates" ;
-  public static final String CB_SCRIPT_TEMPLATES = "cbScriptTemplates" ;
-  public static final String CB_DETAIL_VIEW_TEMPLATES = "cbDetaiViewTemplates" ;
-
   public static final String CMS_SCRIPTS_PATH = "cmsScriptsPath" ;
   public static final String CONTENT_BROWSER_SCRIPTS = "contentBrowserScripts" ;
   public static final String ECM_EXPLORER_SCRIPTS = "ecmExplorerScripts" ;

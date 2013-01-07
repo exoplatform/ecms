@@ -122,7 +122,7 @@ public class TestApplicationTemplateManagerService extends BaseWCMTestCase {
    */
   public void testGetTemplateByPath() throws Exception {
     assertNotNull(
-        appTemplateManagerService.getTemplateByPath("/exo:ecm/views/templates/content-browser/detail-document/DocumentView",
+        appTemplateManagerService.getTemplateByPath("/exo:ecm/views/templates/ecm-explorer/ListView",
                                                               sessionProviderService_.getSystemSessionProvider(null)));
   }
 

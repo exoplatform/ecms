@@ -75,7 +75,6 @@ public class TestScriptService extends BaseWCMTestCase {
   public void testInitRepo() throws Exception {
     scriptService.initRepo();
     assertTrue(sessionDMS.itemExists(cmsScriptsPath));
-    assertTrue(sessionDMS.itemExists(cmsScriptsPath + "/content-browser"));
     assertTrue(sessionDMS.itemExists(cmsScriptsPath + "/ecm-explorer"));
   }
 

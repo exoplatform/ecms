@@ -43,10 +43,6 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 public class ManageViewPlugin extends BaseComponentPlugin {
 
-  private static String CB_PATH_TEMPLATE = "pathTemplate" ;
-  private static String CB_QUERY_TEMPLATE = "queryTemplate" ;
-  private static String CB_DETAIL_VIEW_TEMPLATE = "detailViewTemplate" ;
-  private static String CB_SCRIPT_TEMPLATE = "scriptTemplate" ;
   private static String ECM_EXPLORER_TEMPLATE = "ecmExplorerTemplate" ;
   private InitParams params_ ;
   private RepositoryService repositoryService_ ;
@@ -85,7 +81,6 @@ public class ManageViewPlugin extends BaseComponentPlugin {
     return;
   }
 
-  @SuppressWarnings("unchecked")
   private void importPredefineViews() throws Exception {
     configuredTemplate_ = new HashSet<String>();
     configuredViews_ = new HashSet<String>();
@@ -144,14 +139,6 @@ public class ManageViewPlugin extends BaseComponentPlugin {
     String alias = "" ;
     if(type.equals(ECM_EXPLORER_TEMPLATE)) {
       alias = BasePath.ECM_EXPLORER_TEMPLATES ;
-    }else if(type.equals(CB_PATH_TEMPLATE)) {
-      alias = BasePath.CB_PATH_TEMPLATES ;
-    }else if(type.equals(CB_QUERY_TEMPLATE)) {
-      alias = BasePath.CB_QUERY_TEMPLATES ;
-    }else if(type.equals(CB_SCRIPT_TEMPLATE)) {
-      alias = BasePath.CB_SCRIPT_TEMPLATES ;
-    }else if(type.equals(CB_DETAIL_VIEW_TEMPLATE)) {
-      alias = BasePath.CB_DETAIL_VIEW_TEMPLATES ;
     }
     String templateHomePath = nodeHierarchyCreator_.getJcrPath(alias) ;
     Node templateHomeNode = (Node)session.getItem(templateHomePath) ;

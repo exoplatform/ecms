@@ -21,7 +21,6 @@ import java.util.List;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
-import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.version.VersionHistory;
 
@@ -133,17 +132,7 @@ public class UITemplateForm extends UIForm {
         typeList.add(new SelectItemOption<String>(ecmTemplateHome.getName(), ecmTemplateHome
             .getPath()));
       }
-    } else {
-      Node cbTemplateHome = getApplicationComponent(ManageViewService.class).getTemplateHome(
-          BasePath.CONTENT_BROWSER_TEMPLATES, provider);
-      if (cbTemplateHome != null) {
-        NodeIterator iter = cbTemplateHome.getNodes();
-        while (iter.hasNext()) {
-          Node template = iter.nextNode();
-          typeList.add(new SelectItemOption<String>(template.getName(), template.getPath()));
-        }
-      }
-    }
+    } 
     return typeList;
   }
 

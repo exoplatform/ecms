@@ -65,10 +65,6 @@ public class TestManageViewService extends BaseWCMTestCase {
 
   private String                      templatesPathEx;
 
-  private String                      templatesPathCb;
-
-  private String                      templatesQuery;
-
   @Override
   protected void afterContainerStart() {
     super.afterContainerStart();
@@ -76,8 +72,6 @@ public class TestManageViewService extends BaseWCMTestCase {
     nodeHierarchyCreator = (NodeHierarchyCreator)container.getComponentInstanceOfType(NodeHierarchyCreator.class);   
     viewsPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_VIEWS_PATH);
     templatesPathEx = nodeHierarchyCreator.getJcrPath(BasePath.ECM_EXPLORER_TEMPLATES);
-    templatesPathCb = nodeHierarchyCreator.getJcrPath(BasePath.CB_PATH_TEMPLATES);
-    templatesQuery = nodeHierarchyCreator.getJcrPath(BasePath.CB_QUERY_TEMPLATES);
   }
   
   @BeforeMethod
@@ -101,7 +95,6 @@ public class TestManageViewService extends BaseWCMTestCase {
     assertTrue(buttons.contains("WatchDocument"));
     assertTrue(sessionDMS.itemExists(viewsPath));
     assertTrue(sessionDMS.itemExists(templatesPathEx));
-    assertTrue(sessionDMS.itemExists(templatesQuery));
 
     assertTrue(sessionDMS.itemExists(viewsPath + "/admin-view"));
     assertTrue(sessionDMS.itemExists(viewsPath + "/admin-view/Admin"));
