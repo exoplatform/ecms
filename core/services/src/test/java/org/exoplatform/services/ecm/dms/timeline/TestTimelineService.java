@@ -344,8 +344,7 @@ public class TestTimelineService extends BaseWCMTestCase {
                                                                    createSessionProvider(),
                                                                    "root",
                                                                    true);
-    //Temporary to disabled this test.                                                                   
-    //assertEquals("testGetDocumentsOfEarlierThisWeek failed! ", Math.min(5, currentTime.get(Calendar.DAY_OF_WEEK)-2), res.size());
+    assertEquals("testGetDocumentsOfEarlierThisWeek failed! ", Math.min(5, currentTime.get(Calendar.DAY_OF_WEEK)-2), res.size());
   }
   
   /**
