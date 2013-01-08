@@ -43,6 +43,10 @@
   min-width: 655px;
 }
 
+.UIJCRExplorerPortlet .UIFileView .UIListGrid {
+  min-width: 200px;
+}
+
 .UIJCRExplorerPortlet .UIFormGrid {
 	width: 100%;
 }

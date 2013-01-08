@@ -19,6 +19,7 @@ function UIFileView() {
 	
 	UIFileView.prototype.t1 = 0;
 	UIFileView.prototype.t2 = 0;
+	UIFileView.prototype.minBreadcrumbTop = 0;
 
 UIFileView.prototype.clickFolder =  function (folderDiv, link, docListId) {
 	if (!folderDiv) return;
@@ -893,6 +894,25 @@ UIFileView.prototype.postGroupAction = function(moveActionNode, ext) {
 UIFileView.prototype.checkBoxItem = function() {
 	eXo.ecm.UIFileView.clickCheckBox = true;
 	console.log('check: ' + Self.clickCheckBox)
+};
+
+UIFileView.prototype.initStickBreadcrumb = function() {
+	var stickBreadcrumb = function() {
+		var breadcrumb = gj('#FileViewBreadcrumb');
+		var breadCrumbOffTop = breadcrumb.offset().top;
+		if (eXo.ecm.UIFileView.minBreadcrumbTop == 0) {
+			eXo.ecm.UIFileView.minBreadcrumbTop = breadCrumbOffTop;
+		}
+		var scroll_top = gj(window).scrollTop(); // our current vertical position from the top
+		if (scroll_top >= eXo.ecm.UIFileView.minBreadcrumbTop) {
+			breadcrumb.css({ 'position': 'fixed', 'top':0, zIndex:100});
+			breadcrumb.width(breadcrumb.parent().width());
+		} else {
+			breadcrumb.css({ 'position': 'relative' });  
+		}   
+	};
+	stickBreadcrumb;
+	gj(window).scroll(stickBreadcrumb);
 };
 
 //private method

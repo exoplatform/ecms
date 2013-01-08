@@ -1064,6 +1064,10 @@ var ListView = function() {
     });
     eXo.ecm.ECMUtils.documentContainer_OnResize = function(){
     	eXo.ecm.ECMUtils.updateListGridWidth();
+    	var breadcrumb = gj('#FileViewBreadcrumb');
+    	if (breadcrumb) {
+    		breadcrumb.width(breadcrumb.parent().width());
+    	}
     }
 		//update width of UIListGrid
 		eXo.ecm.ECMUtils.updateListGridWidth();	

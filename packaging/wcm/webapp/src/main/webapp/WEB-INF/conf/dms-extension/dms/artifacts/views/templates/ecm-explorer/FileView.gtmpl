@@ -51,7 +51,7 @@
   def jsManager = rcontext.getJavascriptManager();
   jsManager.require("SHARED/ecm-utils", "ecmutil").
             require("SHARED/explorer-module", "explorer").
-//  addScripts("explorer.UIListView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');").
+  addScripts("explorer.UIFileView.initStickBreadcrumb();").
   addScripts("ecmutil.ECMUtils.initClipboard('clip_button','1','$size');").
 	addScripts('explorer.UIListView.loadEffectedWidthColumn();').
   addScripts('explorer.UIFileView.clearOpenDivs();').
@@ -68,9 +68,9 @@
 	}
 %>
 <div id="$componentId">
-	<div id="${componentId}-$viewComponentId" class="UIListView">	
+	<div id="${componentId}-$viewComponentId" class="UIListView UIFileView">	
 		<div class="UIListGrid">
-				<div class="TitleTable">
+				<div class="TitleTable" id="FileViewBreadcrumb">
 					<div class="ClearFix">
 					  <div class="Breadcrumb FL"><span></span></div>
 		        <a style="cursor: pointer; -moz-outline: none; -moz-user-select: none;color: black;float: left"
@@ -139,7 +139,7 @@
 								 </div>
 						</div>
 					</div>
-				</div>
+				</div><!--TitleTable-->
       <%      	
         def uiDocumentNodeList = uicomponent.getChild(UIDocumentNodeList.class);
         if (uiDocumentNodeList != null) {
