@@ -196,7 +196,11 @@ public class NavigationUtils {
       sbJsonTree.append("\"label\":\"").append(child.getLabel()).append("\",");
       sbJsonTree.append("\"name\":\"").append(child.getName()).append("\",");
       sbJsonTree.append("\"resolvedLabel\":\"").append(child.getResolvedLabel()).append("\",");
-      sbJsonTree.append("\"uri\":\"").append(child.getURI()).append("\",");
+      String childURI = "";
+      if (child.getPageRef() != null){
+        childURI = child.getURI();
+      }
+      sbJsonTree.append("\"uri\":\"").append(childURI).append("\",");
 
       WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
       MimeResponse res = context.getResponse();

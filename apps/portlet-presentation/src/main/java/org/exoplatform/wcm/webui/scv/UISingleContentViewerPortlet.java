@@ -268,7 +268,11 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
     UserNode selectedNode = Util.getUIPortal().getNavPath();
     json.put("isSelected", nodeId.equals(selectedNode.getId()));
     json.put("icon", node.getIcon());
-    json.put("uri", node.getURI());
+    String nodeURI = "";
+    if(node.getPageRef() != null){
+      nodeURI = node.getURI();
+    }
+    json.put("uri", nodeURI);
 
     ResourceURL rsURL = res.createResourceURL();
     rsURL.setResourceID(res.encodeURL(node.getURI()));
