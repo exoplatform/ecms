@@ -111,24 +111,12 @@
 	  						 }
 								//IE upload box
 								 if (action instanceof UploadActionComponent) {
-		               %>
-		               <div id="UploadButtonDivIE" class="NormalSubItem SubTabItem" style="width: auto;" onclick="uploadFileForIE();">
-		               <div class="NormalSubTabItemL">
-		                 <div class="NormalSubTabItemR">
-		                   <div class="NormalSubTabItemM">
-		                    <div class="Split">
-		                      <div title="$title" class="SubTabIcon DefaultActionIcon ${button}Icon">$title</div>
-		                     </div>
-		                   </div>
-		                 </div>
-		               </div>
-		             </div>
-		               
-		               <%
-		             }
-		             //end of IE upload box
-								 
-							 <%
+		             %>		              	             
+		               <li id="UploadButtonDivIE" onclick="uploadFileForIE();">
+								     <a class="actionIcon" rel="tooltip" data-placement="bottom" title="$title"><i class="uiIconEcms${button}"></i> $title</a>
+							     </li>		               
+		             <%
+		             } 
 							 } //if condition
 						 } //for loop
 					 %>
@@ -167,3 +155,54 @@
   jsManager.require("SHARED/ecm-utils", "ecmutil").addScripts('ecmutil.ECMUtils.tabsContainer_OnResize();');
   jsManager.require("SHARED/ecm-utils", "ecmutil").addScripts('ecmutil.ECMUtils.actionbarContainer_OnResize();');
 %>
+
+
+
+<% if (showUploadInput) { %>
+<div style="height:0px;width:0px">
+  <input  style="height:0px;width:0px" id="MultiUploadInputFiles" type="file" multiple="multiple" onchange="eXo.ecm.MultiUpload.handleFiles(this.files);eXo.ecm.MultiUpload.openMultiUploadBox();"/>
+</div>
+<% } %>
+
+<div style="height:0px;width:0px">
+<iframe id="iFrameUpload" name="iFrameUpload" class="iFrameUpload" frameborder="0px" border="0px" style="width: 0px; height:0px">
+</iframe>
+</div>
+
+<div style="height:0px;width:0px">
+<xmp id="iContentUpLoad" style="display:none">
+<html style="padding: 0px; margin: 0px;">
+<head>
+ <script type="text/javascript">_module = {};</script>
+ <script type="text/javascript" src="../../../eXoResources/javascript/jquery-1.7.1.js"></script>   
+ <script type="text/javascript" src="../../../eXoResources/javascript/eXo.js"></script>
+ <script type="text/javascript" src="../../../eXoWCMResources/javascript/eXo/wcm/ECM.js"></script>
+ <script type="text/javascript" src="../../../eXoWCMResources/javascript/eXo/wcm/backoffice/private/WCMUtils.js"></script> 
+ <script type="text/javascript" src="../../../ecmexplorer/javascript/eXo/ecm/MultiUpload.js"></script>
+<head>
+<body style="margin: 0px; padding: 0px; overflow: hidden;width: 0px; height:0px">
+
+<form style="height:0px;width:0px" enctype="multipart/form-data" method="post" target="iTarget">
+<input type="file" name="file" class="file" style="height:0px;width:0px" 
+      id="IEUploadInputFile" 
+      onchange="eXo.ecm.MultiUpload.handleFileIE(this, document.getElementById('UIMultiUpload'));eXo.ecm.MultiUpload.openMultiUploadBox();"/>
+</form>
+<iframe name="iTarget" id="iTarget" style="height:0px;width:0px"></iframe>
+</body>
+</html>
+</xmp>
+
+</div>
+
+<script type="text/javascript">
+function uploadFileForIE() {
+var xmp = document.getElementsByTagName("xmp")[0];
+var ifr = document.getElementById("iFrameUpload");
+with (ifr.contentWindow) {
+document.open();
+document.write(xmp.innerHTML);
+document.close();
+document.getElementById("IEUploadInputFile").click();  
+}
+}
+</script>
