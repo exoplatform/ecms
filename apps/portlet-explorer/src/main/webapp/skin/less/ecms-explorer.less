@@ -25,10 +25,58 @@
 		position: relative;
 		.border-radius(0px);
 	}
-	.UIViewBarContainer {
+	
+	.listHiddenActionsContainer {
+		
+		.actionIcon {
+			margin: 0px;
+			border: none;
+		
+			&:hover {
+				.border-radius(0px);
+				box-shadow: none;
+				
+				> [class^="uiIcon"] {
+				background-image: url("/eXoWCMResources/skin/images/Icons/uiIconsWhite.png");
+				}
+			
+				> [class^="uiIconEcms"] {
+					background-image: url("/eXoWCMResources/skin/images/Icons/uiIconsEcmsWhite.png");
+				}
+			}
+		}
+	}
+	
+	.uiViewBarContainer {
 		position: absolute;
 		right: 10px;
-		top: 3px;
+		top: 4px;
+		
+		.setupPreferencesButton {
+			margin: 3px 0px 0px 3px;
+		}
+		
+		.showDrivesButton {
+			padding: 3px 6px;
+			color: @grayDark;
+		}
+		
+		.noneDrivesButton {
+			padding: 3px 6px;
+			color: @grayDark;
+			box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15) inset;
+			background-color: #ECECEC;
+			border: 1px solid #C7C7C7;
+			border-radius: 3px 3px 3px 3px;
+			
+			> [class^="uiIcon"] {
+				background-image: url("/eXoWCMResources/skin/images/Icons/uiIconsBlue.png");
+			}
+			
+			> [class^="uiIconEcms"] {
+				background-image: url("/eXoWCMResources/skin/images/Icons/uiIconsEcmsBlue.png");
+			}
+		}
 	}
 }
 
@@ -38,11 +86,6 @@
 	}
 }
 
-.UIJCRExplorerPortlet .ShowDrivesButton {
-	height: 28px;
-	border: 1px solid #cfcfcf;
-	border-bottom: none;
-}
 
 /********Resize Content********/
 .uiWorkingArea {
@@ -215,7 +258,7 @@
 			
 			[class^="uiIcon"] {
 				width: 11px;
-				margin-top: 4px;
+				margin-top: 3px;
 			}
 	}
 

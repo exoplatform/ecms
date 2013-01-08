@@ -23,7 +23,7 @@ def escapeChar = '%' as char
 
 .uiAuthoringDashboard .alignLeft {
 	float: left;
-	width: 31%;
+	width: 30%;
 	margin-left: 20px;
 }
 
