@@ -519,15 +519,14 @@
 	overflow: hidden;
 }
 
-<<<<<<< HEAD
 .UIJCRExplorerPortlet .UIListGrid .FileDrag {
 	background: grey;
-=======
+}
+
 .UIJCRExplorerPortlet .UIListGrid .fileViewRowView {
 	height: 40px;
 	border-bottom: 1px solid grey;
 	padding-bottom: 10px;
->>>>>>> ECMS-4195 add new UI layout for file info in FileView
 }
 
 .MoveItem .UIListGrid .RowView {
@@ -1741,7 +1740,8 @@
 
 .NoShow {
 	display:none;
-
+}
+	
 .UIJCRExplorerPortlet .Breadcrumb {
 	width: 16px; 
 	height: 16px; 
