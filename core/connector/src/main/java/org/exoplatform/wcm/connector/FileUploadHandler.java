@@ -21,6 +21,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Map;
+import java.util.Set;
 
 import javax.jcr.Node;
 import javax.servlet.http.HttpServletRequest;
@@ -37,6 +41,7 @@ import org.exoplatform.commons.utils.IOUtil;
 import org.exoplatform.commons.utils.MimeTypeResolver;
 import org.exoplatform.ecm.connector.fckeditor.FCKMessage;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
+import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.upload.UploadResource;
@@ -66,6 +71,15 @@ public class FileUploadHandler {
 
   /** The Constant SAVE_ACTION. */
   public final static String SAVE_ACTION = "save";
+  
+  /** The Constant CHECK_EXIST. */
+  public final static String CHECK_EXIST= "exist";
+  
+  /** The Constant REPLACE. */
+  public final static String REPLACE= "replace";
+
+  /** The Constant KEEP_BOTH. */
+  public final static String KEEP_BOTH= "keepBoth";
 
   /** The Constant LAST_MODIFIED_PROPERTY. */
   private static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
@@ -78,6 +92,12 @@ public class FileUploadHandler {
 
   /** The fck message. */
   private FCKMessage fckMessage;
+  
+  /** The uploadIds - time Map */
+  private Map<String, Long> uploadIdTimeMap;
+  
+  /** The maximal life time for an upload */
+  private long UPLOAD_LIFE_TIME;
 
   /**
    * Instantiates a new file upload handler.
@@ -87,6 +107,9 @@ public class FileUploadHandler {
   public FileUploadHandler() {
     uploadService = WCMCoreUtils.getService(UploadService.class);
     fckMessage = new FCKMessage();
+    uploadIdTimeMap = new Hashtable<String, Long>();
+    UPLOAD_LIFE_TIME = System.getProperty("MULTI_UPLOAD_LIFE_TIME") == null ? 600 ://10 minutes
+                                        Long.parseLong(System.getProperty("MULTI_UPLOAD_LIFE_TIME"));
   }
 
   /**
@@ -100,6 +123,7 @@ public class FileUploadHandler {
   public Response upload(HttpServletRequest servletRequest, String uploadId, Integer limit) throws Exception{
     uploadService.addUploadLimit(uploadId, limit);
     uploadService.createUploadResource(servletRequest);
+    uploadIdTimeMap.put(uploadId, System.currentTimeMillis());
     CacheControl cacheControl = new CacheControl();
     cacheControl.setNoCache(true);
     cacheControl.setNoStore(true);
@@ -133,7 +157,7 @@ public class FileUploadHandler {
       
       // Remove upload Id
       uploadService.removeUploadResource(uploadId);
-      
+      uploadIdTimeMap.remove(uploadId);
       // Get message warning upload exceed limit
       String uploadLimit = String.valueOf(uploadService.getUploadLimits().get(uploadId).getLimit());
       Document fileExceedLimit =
@@ -143,9 +167,9 @@ public class FileUploadHandler {
                                    new String[]{uploadLimit});
       
       return Response.ok(new DOMSource(fileExceedLimit), MediaType.TEXT_XML)
-        .cacheControl(cacheControl)
-        .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
-        .build();
+                      .cacheControl(cacheControl)
+                      .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                      .build();
     }
     
     return null;
@@ -175,12 +199,14 @@ public class FileUploadHandler {
                      .build();
     } else if (FileUploadHandler.ABORT_ACTION.equals(action)) {
       uploadService.removeUploadResource(uploadId);
+      uploadIdTimeMap.remove(uploadId);
       return Response.ok(null, MediaType.TEXT_XML)
                      .cacheControl(cacheControl)
                      .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
                      .build();
     } else if (FileUploadHandler.DELETE_ACTION.equals(action)) {
       uploadService.removeUploadResource(uploadId);
+      uploadIdTimeMap.remove(uploadId);
       return Response.ok(null, MediaType.TEXT_XML)
                      .cacheControl(cacheControl)
                      .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
@@ -192,6 +218,34 @@ public class FileUploadHandler {
                    .build();
   }
 
+  /**
+   * checks if file already existed in parent folder
+   *
+   * @param parent the parent
+   * @param fileName the file name
+   * @return the response
+   *
+   * @throws Exception the exception
+   */
+  public Response checkExistence(Node parent, String fileName) throws Exception {
+    CacheControl cacheControl = new CacheControl();
+    cacheControl.setNoCache(true);
+    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+    
+    //create ret
+    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    DocumentBuilder builder = factory.newDocumentBuilder();
+    Document fileExistence = builder.newDocument();
+    Element rootElement = fileExistence.createElement(
+                              parent.hasNode(fileName) ? "Existed" : "NotExisted");
+    fileExistence.appendChild(rootElement);
+    //return ret;
+    return Response.ok(new DOMSource(fileExistence), MediaType.TEXT_XML)
+                   .cacheControl(cacheControl)
+                   .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                   .build();
+  }
+  
   /**
    * Save as nt file.
    *
@@ -210,6 +264,27 @@ public class FileUploadHandler {
                                String language,
                                String siteName,
                                String userId) throws Exception {
+    return saveAsNTFile(parent, uploadId, fileName, language, siteName, userId, KEEP_BOTH); 
+  }
+  /**
+   * Save as nt file.
+   *
+   * @param parent the parent
+   * @param uploadId the upload id
+   * @param fileName the file name
+   * @param language the language
+   *
+   * @return the response
+   *
+   * @throws Exception the exception
+   */
+  public Response saveAsNTFile(Node parent,
+                               String uploadId,
+                               String fileName,
+                               String language,
+                               String siteName,
+                               String userId,
+                               String existenceAction) throws Exception {
     CacheControl cacheControl = new CacheControl();
     cacheControl.setNoCache(true);
     UploadResource resource = uploadService.getUploadResource(uploadId);
@@ -239,21 +314,26 @@ public class FileUploadHandler {
       fileName = resource.getFileName();
     }
     if (parent.hasNode(fileName)) {
-      Object args[] = { fileName, parent.getPath() };
-      Document fileExisted = fckMessage.createMessage(FCKMessage.FILE_EXISTED,
-                                                      FCKMessage.ERROR,
-                                                      language,
-                                                      args);
-      return Response.ok(new DOMSource(fileExisted), MediaType.TEXT_XML)
-                     .cacheControl(cacheControl)
-                     .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
-                     .build();
+//      Object args[] = { fileName, parent.getPath() };
+//      Document fileExisted = fckMessage.createMessage(FCKMessage.FILE_EXISTED,
+//                                                      FCKMessage.ERROR,
+//                                                      language,
+//                                                      args);
+//      return Response.ok(new DOMSource(fileExisted), MediaType.TEXT_XML)
+//                     .cacheControl(cacheControl)
+//                     .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+//                     .build();
+      if (REPLACE.equals(existenceAction)) {
+        parent.getNode(fileName).remove();
+        parent.save();
+      }
     }
     String location = resource.getStoreLocation();
     byte[] uploadData = IOUtil.getFileContentAsBytes(location);
     Node file = parent.addNode(fileName,FCKUtils.NT_FILE);
     Node jcrContent = file.addNode("jcr:content","nt:resource");
-    MimeTypeResolver mimeTypeResolver = new MimeTypeResolver();
+    //MimeTypeResolver mimeTypeResolver = new MimeTypeResolver();
+    DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();
     String mimetype = mimeTypeResolver.getMimeType(resource.getFileName());
     jcrContent.setProperty("jcr:data",new ByteArrayInputStream(uploadData));
     jcrContent.setProperty("jcr:lastModified",new GregorianCalendar());
@@ -261,14 +341,38 @@ public class FileUploadHandler {
     parent.getSession().save();
     parent.getSession().refresh(true); // Make refreshing data
     uploadService.removeUploadResource(uploadId);
+    uploadIdTimeMap.remove(uploadId);
     WCMPublicationService wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);
     wcmPublicationService.updateLifecyleOnChangeContent(file, siteName, userId);
-    return Response.ok(null, MediaType.TEXT_XML)
+    return Response.ok(createDOMResponse("Result", mimetype), MediaType.TEXT_XML)
                    .cacheControl(cacheControl)
                    .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
                    .build();
   }
+  
+  /**
+   * get number of files uploading 
+   * @return number of files uploading
+   */
+  public long getUploadingFileCount() {
+    removeDeadUploads();
+    return uploadIdTimeMap.size();
+  }
 
+  /**
+   * removes dead uploads
+   */
+  private void removeDeadUploads() {
+    Set<String> removedIds = new HashSet<String>();
+    for (String id : uploadIdTimeMap.keySet()) {
+      if ((System.currentTimeMillis() - uploadIdTimeMap.get(id)) > UPLOAD_LIFE_TIME * 1000) {
+        removedIds.add(id);
+      }
+    }
+    for (String id : removedIds) {
+      uploadIdTimeMap.remove(id);
+    }
+  }
   /**
    * Gets the progress.
    *
@@ -283,20 +387,39 @@ public class FileUploadHandler {
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = factory.newDocumentBuilder();
     Document doc = builder.newDocument();
-    if(resource == null) {
-      return doc;
-    }
     Double percent = 0.0;
-    if (resource.getStatus() == UploadResource.UPLOADING_STATUS) {
-      percent = (resource.getUploadedSize() * 100) / resource.getEstimatedSize();
-    } else {
-      percent = 100.0;
+    if(resource != null) {
+      if (resource.getStatus() == UploadResource.UPLOADING_STATUS) {
+        percent = (resource.getUploadedSize() * 100) / resource.getEstimatedSize();
+      } else {
+        percent = 100.0;
+      }
     }
     Element rootElement = doc.createElement("UploadProgress");
     rootElement.setAttribute("uploadId", uploadId);
-    rootElement.setAttribute("fileName", resource.getFileName());
+    rootElement.setAttribute("fileName", resource == null ? "" : resource.getFileName());
     rootElement.setAttribute("percent", percent.intValue() + "");
+    rootElement.setAttribute("uploadedSize", resource == null ? "0" : resource.getUploadedSize() + "");
+    rootElement.setAttribute("totalSize", resource == null ? "0" : resource.getEstimatedSize() + "");
+    rootElement.setAttribute("fileType", resource == null ? "null" : resource.getMimeType() + "");
     doc.appendChild(rootElement);
     return doc;
   }
+  
+  /**
+   * returns a DOMSource object containing given message
+   * @param message the message
+   * @return DOMSource object
+   * @throws Exception
+   */
+  private DOMSource createDOMResponse(String name, String mimeType) throws Exception {
+    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    DocumentBuilder builder = factory.newDocumentBuilder();
+    Document doc = builder.newDocument();
+    Element rootElement = doc.createElement(name);
+    rootElement.setAttribute("mimetype", mimeType);
+    doc.appendChild(rootElement);
+    return new DOMSource(doc);
+  }
+  
 }

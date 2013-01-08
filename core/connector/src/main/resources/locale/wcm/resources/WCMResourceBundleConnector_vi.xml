@@ -14,4 +14,19 @@
       <renaming>Đang đổi tên...</renaming>
     </msg>
   </RenameConnector>
+  <UIMultiUpload>
+  	<label>
+  		<AbortAllConfirmation>Bạn có muốn hủy bỏ tất cả các tập tin đang được tải lên?</AbortAllConfirmation>
+  		<MaxFileSizeAlert>Kích thước của tập tin vượt quá giới hạn </MaxFileSizeAlert>
+  		<in>Trong</in>
+      <Canceled>Huỷ bỏ</Canceled>
+      <Cancel>Huỷ bỏ</Cancel>
+  		<Error>Lỗi</Error>
+  		<Keep>Giữ cả hai</Keep>
+  		<Replace>Thay thế</Replace>
+  		<Waiting>Đợi</Waiting>
+  		<AlreadyInUse>Đã tồn tại</AlreadyInUse>
+  		<or>hoặc</or>
+  	</label>
+  </UIMultiUpload>
 </bundle>

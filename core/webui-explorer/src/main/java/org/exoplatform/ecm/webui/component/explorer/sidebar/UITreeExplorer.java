@@ -55,6 +55,7 @@ import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -431,6 +432,15 @@ public class UITreeExplorer extends UIContainer {
 //      UIDocumentInfo uiDocumentInfo = uiDocumentContainer.getChildById("UIDocumentInfo") ;
 
       uiExplorer.updateAjax(event);
+      event.getRequestContext().getJavascriptManager().
+            require("SHARED/explorer-module", "explorer").
+            addScripts("explorer.MultiUpload.setLocation('" + 
+                       uiExplorer.getWorkspaceName()  + "','" + 
+                       uiExplorer.getDriveData().getName()  + "','" +
+                       uiTreeExplorer.getLabel()  + "','" +
+                       uiExplorer.getCurrentPath() + "','" +
+                       Utils.getPersonalDrivePath(uiExplorer.getDriveData().getHomePath(),
+                       ConversationState.getCurrent().getIdentity().getUserId()) + "');");
     }
 
   }
@@ -489,6 +499,7 @@ public class UITreeExplorer extends UIContainer {
       if (uiExplorer.getPreference().isShowSideBar()
           && uiExplorer.getAncestorOfType(UIJCRExplorerPortlet.class).isShowSideBar()) {
         uiTreeExplorer.buildTree(path);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiTreeExplorer);
       }
     }
   }
@@ -526,7 +537,6 @@ public class UITreeExplorer extends UIContainer {
    * @throws Exception
    */
   public boolean hasChildNode(Node node) throws Exception {
-    List<Node> childrenList = new ArrayList<Node>();
     if(!node.hasNodes()) return false;
     UIJCRExplorer uiExplorer =  getAncestorOfType(UIJCRExplorer.class);
     Preference preferences = uiExplorer.getPreference();
@@ -537,28 +547,22 @@ public class UITreeExplorer extends UIContainer {
       Node tmpNode = iterator.nextNode();
       // Not allow to show hidden and non-document nodes
       if (!preferences.isShowHiddenNode() && !preferences.isShowNonDocumentType()) {
-        if(!tmpNode.isNodeType(org.exoplatform.ecm.webui.utils.Utils.EXO_HIDDENABLE) && isDocumentOrFolderType(tmpNode))
-          childrenList.add(tmpNode);
+        if(!tmpNode.isNodeType(org.exoplatform.ecm.webui.utils.Utils.EXO_HIDDENABLE) && isDocumentOrFolderType(tmpNode)) 
+        	return true;                 
       }
       // Not allow to show non-document nodes
       else if (preferences.isShowHiddenNode() && !preferences.isShowNonDocumentType()) {
-        if(isDocumentOrFolderType(tmpNode))
-          childrenList.add(tmpNode);
+        if(isDocumentOrFolderType(tmpNode)) return true; 
       }
       // Not allow to show hidden nodes
       else if (!preferences.isShowHiddenNode() && preferences.isShowNonDocumentType()) {
         if(!tmpNode.isNodeType(org.exoplatform.ecm.webui.utils.Utils.EXO_HIDDENABLE))
-          childrenList.add(tmpNode);
+        	return true;
       }
       // Allow to show hidden and non-document nodes
-      else {
-        childrenList.add(tmpNode);
-      }
+      else return true;
     }
-    if (childrenList.size() > 0)
-      return true;
-    else
-      return false;
+    return false;
   }
   /**
    * Check the node is passed is a document/folder or not.

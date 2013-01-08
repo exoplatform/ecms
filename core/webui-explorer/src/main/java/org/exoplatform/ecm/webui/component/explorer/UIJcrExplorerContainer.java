@@ -44,13 +44,17 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.web.application.JavascriptManager;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIApplication;
+import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIRightClickPopupMenu;
 import org.exoplatform.webui.core.model.SelectItemOption;
+import org.exoplatform.webui.event.Event;
+import org.exoplatform.webui.event.MonitorEvent;
 /**
  * Created by The eXo Platform SARL
  */
@@ -61,6 +65,7 @@ public class UIJcrExplorerContainer extends UIContainer {
   private static final Log LOG  = ExoLogger.getLogger(UIJcrExplorerContainer.class.getName());
   public UIJcrExplorerContainer() throws Exception {
     addChild(UIJCRExplorer.class, null, null);
+    addChild(UIMultiUpload.class, null, null);
   }
 
   public String getUserAgent() {
@@ -203,4 +208,11 @@ public class UIJcrExplorerContainer extends UIContainer {
       }
     }
   }
+  
+  @Override
+  public void processRender(WebuiRequestContext context) throws Exception
+  {
+    super.processRender(context);
+  }
+
 }

@@ -23,6 +23,8 @@ import java.util.BitSet;
  * This Class provides some text related utilities
  */
 public class Text {
+  
+  private static final String SPECIAL_CHARACTERS = "&#*@\'\"|.\t\r\n$&\\><:";
 
   public static String escape(String string, char escape, boolean isPath) {
     return escape(string, escape, isPath, "");
@@ -121,6 +123,29 @@ public class Text {
    */
   public static String unescapeIllegalJcrChars(String name) {
     return org.exoplatform.services.jcr.util.Text.unescapeIllegalJcrChars(name);
+  }
+  
+  /**
+   * converts all illegal JCR name characters of a string to '-'
+   *
+   * @param name
+   *          the name to escape
+   * @return the converted name
+   */
+  public static String convertJcrChars(String name) {
+    if (name == null || name.length() == 0) {
+      return "";
+    }
+    StringBuffer buffer = new StringBuffer(name.length() * 2);
+    for (int i = 0; i < name.length(); i++) {
+      char ch = name.charAt(i);
+      if (SPECIAL_CHARACTERS.indexOf(ch) != -1){
+        buffer.append('-');
+      } else {
+        buffer.append(ch);
+      }
+    }
+    return buffer.toString();
   }
 
 }

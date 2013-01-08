@@ -15,6 +15,7 @@
   import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
   import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
   import org.apache.commons.lang.StringUtils;
+  import org.exoplatform.ecm.webui.component.explorer.control.action.UploadActionComponent;
   
   def uiPortlet = uicomponent.getAncestorOfType(UIJCRExplorerPortlet.class);
   def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
@@ -23,6 +24,9 @@
   def uiFormId = uicomponent.id;
   
   def jsManager = rcontext.getJavascriptManager();
+  jsManager.require("SHARED/ecm-utils", "ecmutil").require("SHARED/explorer-module", "explorer")
+  .addScripts('explorer.MultiUpload.displayCorrectUploadButton();');
+  def showUploadInput = false;
   
   def tabs = uicomponent.getTabList() ;
   def actionBarStyle = "";
@@ -95,10 +99,36 @@
 						 for(button in uicomponent.getActionInTab(uicomponent.getSelectedTab())) {
 							 def action = uicomponent.getUIAction(button);
 							 if (action != null) {
-								 def title = _ctx.appRes(uicomponent.getId() + ".tooltip." + button);     %>
-								 <li onclick="<%=action.event(button);%>">
+								 def actionOnClick = (action instanceof UploadActionComponent) ? "document.getElementById('MultiUploadInputFiles').click();" : action.event(button);
+								 def title = _ctx.appRes(uicomponent.getId() + ".tooltip." + button);
+								 String idUpload = (action instanceof UploadActionComponent) ? "id='UploadButtonDiv'" : "";
+							 %>
+								 <li <%=idUpload%> onclick="<%= actionOnClick %>">
 									 <a class="actionIcon" rel="tooltip" data-placement="bottom" title="$title"><i class="uiIconEcms${button}"></i> $title</a>
-								 </li>                                                                    <%
+								 </li>
+								 <% if (action instanceof UploadActionComponent) {
+	  						   showUploadInput = true;
+	  						 }
+								//IE upload box
+								 if (action instanceof UploadActionComponent) {
+		               %>
+		               <div id="UploadButtonDivIE" class="NormalSubItem SubTabItem" style="width: auto;" onclick="uploadFileForIE();">
+		               <div class="NormalSubTabItemL">
+		                 <div class="NormalSubTabItemR">
+		                   <div class="NormalSubTabItemM">
+		                    <div class="Split">
+		                      <div title="$title" class="SubTabIcon DefaultActionIcon ${button}Icon">$title</div>
+		                     </div>
+		                   </div>
+		                 </div>
+		               </div>
+		             </div>
+		               
+		               <%
+		             }
+		             //end of IE upload box
+								 
+							 <%
 							 } //if condition
 						 } //for loop
 					 %>

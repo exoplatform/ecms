@@ -119,7 +119,13 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
   /** The limit. */
   private int limit;
-
+  
+  /** The file number limit on client side. */
+  private int limitCountClient_ = 3;
+  
+  /** The file number limit on server side. */
+  private int limitCountServer_ = 30;
+  
   private ResourceBundleService resourceBundleService=null;
 
   private String resourceBundleNames[];
@@ -134,8 +140,26 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    */
   public DriverConnector(InitParams params) {
     limit = Integer.parseInt(params.getValueParam("upload.limit.size").getValue());
+    if (params.getValueParam("upload.limit.count.client") != null) {
+      limitCountClient_ = Integer.parseInt(params.getValueParam("upload.limit.count.client").getValue());
+    }
+    if (params.getValueParam("upload.limit.count.server") != null) {
+      limitCountServer_ = Integer.parseInt(params.getValueParam("upload.limit.count.server").getValue());
+    }
   }
+  
+  /**
+   * gets the file size limit
+   * @return the file size limit
+   */
+  public int getLimitSize() { return limit; }
 
+  /**
+   * gets the file upload number limit on client side
+   * @return the file upload number limit on client side
+   */
+  public int getMaxUploadCount() { return limitCountClient_; }
+  
   /**
    * Return a list of drives for the current user.
    *
@@ -237,6 +261,24 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
 
+  
+  /**
+   * checks if can upload a new file
+   * @return Response containing the status indicating if upload is available 
+   * @throws Exception
+   */
+  @GET
+  @Path("/uploadFile/checkUploadAvailable/")
+  public Response checkUploadAvailable() throws Exception {
+    CacheControl cacheControl = new CacheControl();
+    cacheControl.setNoCache(true);
+    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+    String msg = fileUploadHandler.getUploadingFileCount() < limitCountServer_ ? "uploadAvailable" : "uploadNotAvailable";
+    return Response.ok(createDOMResponse(msg), MediaType.TEXT_XML)
+                    .cacheControl(cacheControl)
+                    .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                    .build();
+  }
 
   /**
    * Upload a file.
@@ -263,7 +305,51 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 //  @OutputTransformer(XMLOutputTransformer.class)
   public Response uploadFile(@Context HttpServletRequest servletRequest,
       @QueryParam("uploadId") String uploadId) throws Exception {
+    //check if number of file uploading is greater than the limit
+//    if (fileUploadHandler.getUploadingFileCount() >= limitCountServer_) {
+//      CacheControl cacheControl = new CacheControl();
+//      cacheControl.setNoCache(true);
+//      DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+//      return Response.ok(createDOMResponse("uploadNotAvailable"), MediaType.TEXT_XML)
+//                      .cacheControl(cacheControl)
+//                      .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+//                      .build();
+//    }
     return fileUploadHandler.upload(servletRequest, uploadId, limit);
+  }
+  
+  /**
+   * Control the process of uploading a file, such as aborting, deleting or progressing the file.
+   *
+   * @TODO
+   * 
+   * @anchor CONTref.Devref.PublicRestAPIs.DriverConnector.checkExistence
+   */
+  @GET
+  @Path("/uploadFile/checkExistence/")
+//  @OutputTransformer(XMLOutputTransformer.class)
+  public Response checkExistence(
+      @QueryParam("repositoryName") String repositoryName,
+      @QueryParam("workspaceName") String workspaceName,
+      @QueryParam("driverName") String driverName,
+      @QueryParam("currentFolder") String currentFolder,
+      @QueryParam("currentPortal") String siteName,
+      @QueryParam("language") String language,
+      @QueryParam("fileName") String fileName) throws Exception {
+    try {
+      // Check file existence
+      Node currentFolderNode = getParentFolderNode(workspaceName,
+                                                   Text.escapeIllegalJcrChars(driverName),
+                                                   Text.escapeIllegalJcrChars(currentFolder));
+      return fileUploadHandler.checkExistence(currentFolderNode, fileName);
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Error when perform processUpload: ", e);
+      }
+    }
+
+    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+    return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
 
   /**
@@ -299,7 +385,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       @QueryParam("action") String action,
       @QueryParam("language") String language,
       @QueryParam("fileName") String fileName,
-      @QueryParam("uploadId") String uploadId) throws Exception {
+      @QueryParam("uploadId") String uploadId,
+      @QueryParam("existenceAction") String existenceAction) throws Exception {
     try {
       // Check upload status
       Response msgResponse = fileUploadHandler.checkStatus(uploadId, language);
@@ -308,7 +395,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       if ((repositoryName != null) && (workspaceName != null) && (driverName != null)
           && (currentFolder != null)) {
         ManageDriveService manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
-        workspaceName = manageDriveService.getDriveByName(Text.escapeIllegalJcrChars(driverName)).getWorkspace();
+        workspaceName = workspaceName != null ? workspaceName : manageDriveService.getDriveByName(Text.escapeIllegalJcrChars(driverName)).getWorkspace();
 
         Node currentFolderNode = getParentFolderNode(workspaceName,
                                                      Text.escapeIllegalJcrChars(driverName),
@@ -321,7 +408,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
                                            action,
                                            language,
                                            fileName,
-                                           uploadId);
+                                           uploadId,
+                                           existenceAction);
       }
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
@@ -761,11 +849,12 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
                                                  String action,
                                                  String language,
                                                  String fileName,
-                                                 String uploadId) throws Exception {
+                                                 String uploadId,
+                                                 String existenceAction) throws Exception {
     if (FileUploadHandler.SAVE_ACTION.equals(action)) {
       CacheControl cacheControl = new CacheControl();
       cacheControl.setNoCache(true);
-      return fileUploadHandler.saveAsNTFile(currentFolderNode, uploadId, fileName, language, siteName, userId);
+      return fileUploadHandler.saveAsNTFile(currentFolderNode, uploadId, fileName, language, siteName, userId, existenceAction);
     }
     return fileUploadHandler.control(uploadId, action);
   }
@@ -783,16 +872,21 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @throws Exception the exception
    */
   private Node getParentFolderNode(String workspaceName, String driverName, String currentFolder) throws Exception {
-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
     ManageableRepository manageableRepository = WCMCoreUtils.getRepository();
     Session session = sessionProvider.getSession(workspaceName, manageableRepository);
     ManageDriveService manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
 
     try {
-      String parentPath =
-              manageDriveService.getDriveByName(driverName).getHomePath()
-              + ((currentFolder != null && currentFolder.length() != 0) ? "/" : "")
-              + currentFolder;
+      DriveData driveData = manageDriveService.getDriveByName(driverName);
+      String parentPath = (driveData != null ? driveData.getHomePath() : "");
+      NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
+      if(driveData != null && 
+         driveData.getHomePath().startsWith(nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH) + "/${userId}")) {
+         parentPath = Utils.getPersonalDrivePath(driveData.getHomePath(), 
+                                                 ConversationState.getCurrent().getIdentity().getUserId());
+      };
+      parentPath += ((currentFolder != null && currentFolder.length() != 0) ? "/" : "") + currentFolder;
       parentPath = parentPath.replace("//", "/");
       return (Node)session.getItem(parentPath);
     } catch (Exception e) {
@@ -815,4 +909,21 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       if (nodeDriveName!=null && nodeDriveName.length()>0) folder.setAttribute("nodeDriveName", nodeDriveName);
       return folder;
     }
+  
+  
+  /**
+   * returns a DOMSource object containing given message
+   * @param message the message
+   * @return DOMSource object
+   * @throws Exception
+   */
+  private DOMSource createDOMResponse(String message) throws Exception {
+    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    DocumentBuilder builder = factory.newDocumentBuilder();
+    Document doc = builder.newDocument();
+    Element rootElement = doc.createElement(message);
+    doc.appendChild(rootElement);
+    return new DOMSource(doc);
+  }
+  
 }

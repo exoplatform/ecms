@@ -16,8 +16,6 @@
  */
 package org.exoplatform.services.ecm.dms.timeline;
 
-import static org.testng.AssertJUnit.assertEquals;
-
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -25,12 +23,9 @@ import java.util.List;
 import javax.jcr.Node;
 
 import org.exoplatform.services.cms.timeline.TimelineService;
+import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.wcm.BaseWCMTestCase;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SARL
@@ -39,22 +34,18 @@ import org.testng.annotations.Test;
  * Oct 22, 2009
  * 10:50:05 AM
  */
-public class TestTimelineService extends BaseWCMTestCase {
+public class TestTimelineService extends BaseDMSTestCase {
 
   private TimelineService timelineService;
   final private static String EXO_MODIFIED_DATE = "exo:dateModified";
 
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
+  /**
+   * {@inheritDoc}
+   */
+  public void setUp() throws Exception {
+    super.setUp();
     timelineService = (TimelineService)container.getComponentInstanceOfType(TimelineService.class);
   }
-  
-  @BeforeMethod
-  public void setUp() throws Exception {
-    applyUserSession("root", "gtn",COLLABORATION_WS);
-  }
-
 
   /**
    * test method getDocumentsOfToday
@@ -65,19 +56,19 @@ public class TestTimelineService extends BaseWCMTestCase {
    * expectedValue:  2(today1 and today2);
    * @throws Exception
    */
-  @Test
-  public void testGetDocumentsOfToday() throws Exception {    
+  public void testGetDocumentsOfToday() throws Exception {
+    applyUserSession("root", "exo");
     Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
 
     Calendar currentTime = new GregorianCalendar();
 
-    Node today1 = testNode.addNode("today1", "exo:article");
+    Node today1 = testNode.addNode("today1", "exo:sample");
     today1.setProperty("exo:title", "sample");
     if(today1.canAddMixin("exo:datetime")) today1.addMixin("exo:datetime");
     today1.setProperty(EXO_MODIFIED_DATE, currentTime);
 
-    Node today2 = testNode.addNode("today2", "exo:article");
+    Node today2 = testNode.addNode("today2", "exo:sample");
     today2.setProperty("exo:title", "sample");
     if(today2.canAddMixin("exo:datetime")) today2.addMixin("exo:datetime");
     today2.setProperty(EXO_MODIFIED_DATE, currentTime);
@@ -85,7 +76,7 @@ public class TestTimelineService extends BaseWCMTestCase {
     Calendar yesterdayTime = (Calendar)currentTime.clone();
     yesterdayTime.add(Calendar.DATE, -1);
 
-    Node yesterday1 = testNode.addNode("yesterday1", "exo:article");
+    Node yesterday1 = testNode.addNode("yesterday1", "exo:sample");
     yesterday1.setProperty("exo:title", "sample");
     if(yesterday1.canAddMixin("exo:datetime")) yesterday1.addMixin("exo:datetime");
     yesterday1.setProperty(EXO_MODIFIED_DATE, yesterdayTime);
@@ -112,39 +103,39 @@ public class TestTimelineService extends BaseWCMTestCase {
    * expectedValue:  6(today1, today2, today3, today4, today5 and today6);
    * @throws Exception
    */
-  @Test
   public void testGetDocumentsOfTodayUnLimited() throws Exception {
+    applyUserSession("root", "exo");
     Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
 
     Calendar currentTime = new GregorianCalendar();
 
-    Node today1 = testNode.addNode("today1", "exo:article");
+    Node today1 = testNode.addNode("today1", "exo:sample");
     today1.setProperty("exo:title", "sample");
     if(today1.canAddMixin("exo:datetime")) today1.addMixin("exo:datetime");
     today1.setProperty(EXO_MODIFIED_DATE, currentTime);
 
-    Node today2 = testNode.addNode("today2", "exo:article");
+    Node today2 = testNode.addNode("today2", "exo:sample");
     today2.setProperty("exo:title", "sample");
     if(today2.canAddMixin("exo:datetime")) today2.addMixin("exo:datetime");
     today2.setProperty(EXO_MODIFIED_DATE, currentTime);
     
-    Node today3 = testNode.addNode("today3", "exo:article");
+    Node today3 = testNode.addNode("today3", "exo:sample");
     today3.setProperty("exo:title", "sample");
     if(today3.canAddMixin("exo:datetime")) today3.addMixin("exo:datetime");
     today3.setProperty(EXO_MODIFIED_DATE, currentTime);
     
-    Node today4 = testNode.addNode("today4", "exo:article");
+    Node today4 = testNode.addNode("today4", "exo:sample");
     today4.setProperty("exo:title", "sample");
     if(today4.canAddMixin("exo:datetime")) today4.addMixin("exo:datetime");
     today4.setProperty(EXO_MODIFIED_DATE, currentTime);
     
-    Node today5 = testNode.addNode("today5", "exo:article");
+    Node today5 = testNode.addNode("today5", "exo:sample");
     today5.setProperty("exo:title", "sample");
     if(today5.canAddMixin("exo:datetime")) today5.addMixin("exo:datetime");
     today5.setProperty(EXO_MODIFIED_DATE, currentTime);
     
-    Node today6 = testNode.addNode("today6", "exo:article");
+    Node today6 = testNode.addNode("today6", "exo:sample");
     today6.setProperty("exo:title", "sample");
     if(today6.canAddMixin("exo:datetime")) today6.addMixin("exo:datetime");
     today6.setProperty(EXO_MODIFIED_DATE, currentTime);    
@@ -152,7 +143,7 @@ public class TestTimelineService extends BaseWCMTestCase {
     Calendar yesterdayTime = (Calendar)currentTime.clone();
     yesterdayTime.add(Calendar.DATE, -1);
 
-    Node yesterday1 = testNode.addNode("yesterday1", "exo:article");
+    Node yesterday1 = testNode.addNode("yesterday1", "exo:sample");
     yesterday1.setProperty("exo:title", "sample");
     if(yesterday1.canAddMixin("exo:datetime")) yesterday1.addMixin("exo:datetime");
     yesterday1.setProperty(EXO_MODIFIED_DATE, yesterdayTime);
@@ -176,21 +167,21 @@ public class TestTimelineService extends BaseWCMTestCase {
    * expectedValue:  1(yesterday1)
    * @throws Exception
    */
-  @Test
   public void testGetDocumentsOfYesterday() throws Exception {
+    applyUserSession("root", "exo");
     Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
 
     Calendar currentTime = new GregorianCalendar();
 
-    Node today1 = testNode.addNode("today1", "exo:article");
+    Node today1 = testNode.addNode("today1", "exo:sample");
     today1.setProperty("exo:title", "sample");
     if(today1.canAddMixin("exo:datetime")) {
       today1.addMixin("exo:datetime");
     }
     today1.setProperty(EXO_MODIFIED_DATE, currentTime);
 
-    Node today2 = testNode.addNode("today2", "exo:article");
+    Node today2 = testNode.addNode("today2", "exo:sample");
     today2.setProperty("exo:title", "sample");
     if(today2.canAddMixin("exo:datetime")) {
       today2.addMixin("exo:datetime");
@@ -200,7 +191,7 @@ public class TestTimelineService extends BaseWCMTestCase {
     Calendar yesterdayTime = (Calendar)currentTime.clone();
     yesterdayTime.add(Calendar.DATE, -1);
 
-    Node yesterday1 = testNode.addNode("yesterday1", "exo:article");
+    Node yesterday1 = testNode.addNode("yesterday1", "exo:sample");
     yesterday1.setProperty("exo:title", "sample");
     if(yesterday1.canAddMixin("exo:datetime")) {
       yesterday1.addMixin("exo:datetime");
@@ -231,21 +222,21 @@ public class TestTimelineService extends BaseWCMTestCase {
    * expectedValue:  7(yesterday1, yesterday2, yesterday3, yesterday4, yesterday5, yesterday6, yesterday6));
    * @throws Exception
    */
-  @Test
   public void testGetDocumentsOfYesterdayUnLimited() throws Exception {
+    applyUserSession("root", "exo");
     Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
 
     Calendar currentTime = new GregorianCalendar();
 
-    Node today1 = testNode.addNode("today1", "exo:article");
+    Node today1 = testNode.addNode("today1", "exo:sample");
     today1.setProperty("exo:title", "sample");
     if(today1.canAddMixin("exo:datetime")) {
       today1.addMixin("exo:datetime");
     }
     today1.setProperty(EXO_MODIFIED_DATE, currentTime);
 
-    Node today2 = testNode.addNode("today2", "exo:article");
+    Node today2 = testNode.addNode("today2", "exo:sample");
     today2.setProperty("exo:title", "sample");
     if(today2.canAddMixin("exo:datetime")) {
       today2.addMixin("exo:datetime");
@@ -255,49 +246,49 @@ public class TestTimelineService extends BaseWCMTestCase {
     Calendar yesterdayTime = (Calendar)currentTime.clone();
     yesterdayTime.add(Calendar.DATE, -1);
 
-    Node yesterday1 = testNode.addNode("yesterday1", "exo:article");
+    Node yesterday1 = testNode.addNode("yesterday1", "exo:sample");
     yesterday1.setProperty("exo:title", "sample");
     if(yesterday1.canAddMixin("exo:datetime")) {
       yesterday1.addMixin("exo:datetime");
     }
     yesterday1.setProperty(EXO_MODIFIED_DATE, yesterdayTime);
     
-    Node yesterday2 = testNode.addNode("yesterday2", "exo:article");
+    Node yesterday2 = testNode.addNode("yesterday2", "exo:sample");
     yesterday2.setProperty("exo:title", "sample");
     if(yesterday2.canAddMixin("exo:datetime")) {
       yesterday2.addMixin("exo:datetime");
     }
     yesterday2.setProperty(EXO_MODIFIED_DATE, yesterdayTime);
     
-    Node yesterday3 = testNode.addNode("yesterday3", "exo:article");
+    Node yesterday3 = testNode.addNode("yesterday3", "exo:sample");
     yesterday3.setProperty("exo:title", "sample");
     if(yesterday3.canAddMixin("exo:datetime")) {
       yesterday3.addMixin("exo:datetime");
     }
     yesterday3.setProperty(EXO_MODIFIED_DATE, yesterdayTime);
 
-    Node yesterday4 = testNode.addNode("yesterday4", "exo:article");
+    Node yesterday4 = testNode.addNode("yesterday4", "exo:sample");
     yesterday4.setProperty("exo:title", "sample");
     if(yesterday4.canAddMixin("exo:datetime")) {
       yesterday4.addMixin("exo:datetime");
     }
     yesterday4.setProperty(EXO_MODIFIED_DATE, yesterdayTime);
     
-    Node yesterday5 = testNode.addNode("yesterday5", "exo:article");
+    Node yesterday5 = testNode.addNode("yesterday5", "exo:sample");
     yesterday5.setProperty("exo:title", "sample");
     if(yesterday5.canAddMixin("exo:datetime")) {
       yesterday5.addMixin("exo:datetime");
     }
     yesterday5.setProperty(EXO_MODIFIED_DATE, yesterdayTime);
     
-    Node yesterday6 = testNode.addNode("yesterday6", "exo:article");
+    Node yesterday6 = testNode.addNode("yesterday6", "exo:sample");
     yesterday6.setProperty("exo:title", "sample");
     if(yesterday6.canAddMixin("exo:datetime")) {
       yesterday6.addMixin("exo:datetime");
     }
     yesterday6.setProperty(EXO_MODIFIED_DATE, yesterdayTime);
     
-    Node yesterday7 = testNode.addNode("yesterday7", "exo:article");
+    Node yesterday7 = testNode.addNode("yesterday7", "exo:sample");
     yesterday7.setProperty("exo:title", "sample");
     if(yesterday7.canAddMixin("exo:datetime")) {
       yesterday7.addMixin("exo:datetime");
@@ -334,17 +325,17 @@ public class TestTimelineService extends BaseWCMTestCase {
    * expectedValue:  (depends on current date time, must calculate yourself);
    * @throws Exception
    */
-  @Test
   public void testGetDocumentsOfEarlierThisWeek() throws Exception {
+    applyUserSession("root", "exo");
     Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
-
+    int count = 0;
     Calendar currentTime = new GregorianCalendar();
     Calendar time = (Calendar)currentTime.clone();
     int index = 0;
     while (currentTime.get(Calendar.WEEK_OF_YEAR) == time.get(Calendar.WEEK_OF_YEAR)) {
-
-      Node dayNode = testNode.addNode("dayNode" + index++, "exo:article");
+      count++;
+      Node dayNode = testNode.addNode("dayNode" + index++, "exo:sample");
       dayNode.setProperty("exo:title", "sample");
       if(dayNode.canAddMixin("exo:datetime")) {
         dayNode.addMixin("exo:datetime");
@@ -352,14 +343,20 @@ public class TestTimelineService extends BaseWCMTestCase {
       dayNode.setProperty(EXO_MODIFIED_DATE, time);
       time.add(Calendar.DATE, -1);
     }
-    
+    //exclude today and yesterday
+    if (count < 2){
+      count = 0;
+    }else{
+      count -= 2;
+    }
+
     session.save();
     List<Node> res = timelineService.getDocumentsOfEarlierThisWeek(rootNode.getPath(),
                                                                    COLLABORATION_WS,
                                                                    createSessionProvider(),
                                                                    "root",
                                                                    true);
-    assertEquals("testGetDocumentsOfEarlierThisWeek failed! ", Math.min(5, currentTime.get(Calendar.DAY_OF_WEEK)-2), res.size());
+    assertEquals("testGetDocumentsOfEarlierThisWeek failed! ", count, res.size());
   }
   
   /**
@@ -373,23 +370,29 @@ public class TestTimelineService extends BaseWCMTestCase {
    * expectedValue:  (depends on current date time, must calculate yourself);
    * @throws Exception
    */
-  @Test
   public void testGetDocumentsOfEarlierThisWeek2() throws Exception {
+    applyUserSession("root", "exo");
     Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
-
+    int count = 0;
     Calendar currentTime = new GregorianCalendar();
     Calendar time = (Calendar)currentTime.clone();
     int index = 0;
     while (currentTime.get(Calendar.WEEK_OF_YEAR) == time.get(Calendar.WEEK_OF_YEAR)) {
-
-      Node dayNode = testNode.addNode("dayNode" + index++, "exo:article");
+      count++;
+      Node dayNode = testNode.addNode("dayNode" + index++, "exo:sample");
       dayNode.setProperty("exo:title", "sample");
       if(dayNode.canAddMixin("exo:datetime")) {
         dayNode.addMixin("exo:datetime");
       }
       dayNode.setProperty(EXO_MODIFIED_DATE, time);
       time.add(Calendar.DATE, -1);
+    }
+    //exclude today and yesterday
+    if (count < 2){
+      count = 0;
+    }else{
+      count -= 2;
     }
 
     session.save();
@@ -399,8 +402,7 @@ public class TestTimelineService extends BaseWCMTestCase {
                                                                    "root",
                                                                    true,
                                                                    false);
-    //Temporary to disabled this test.                                                             
-    //assertEquals("testGetDocumentsOfEarlierThisWeek failed! ", currentTime.get(Calendar.DAY_OF_WEEK) - 2, res.size());
+    assertEquals("testGetDocumentsOfEarlierThisWeek failed! ", count, res.size());
   }  
 
   /**
@@ -414,9 +416,9 @@ public class TestTimelineService extends BaseWCMTestCase {
    * expectedValue:  (depends on current date time, must calculate yourself);
    * @throws Exception
    */
-  @Test
   public void testGetDocumentsOfEarlierThisMonth() throws Exception {
-     Node rootNode = session.getRootNode();
+    applyUserSession("root", "exo");
+    Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
 
     Calendar currentTime = new GregorianCalendar();
@@ -428,7 +430,7 @@ public class TestTimelineService extends BaseWCMTestCase {
         if (time.get(Calendar.WEEK_OF_YEAR) < currentTime.get(Calendar.WEEK_OF_YEAR))
           count++;
       }
-      Node dayNode = testNode.addNode("dayNode" + index++, "exo:article");
+      Node dayNode = testNode.addNode("dayNode" + index++, "exo:sample");
       dayNode.setProperty("exo:title", "sample");
       if(dayNode.canAddMixin("exo:datetime")) {
         dayNode.addMixin("exo:datetime");
@@ -457,8 +459,8 @@ public class TestTimelineService extends BaseWCMTestCase {
    * expectedValue:  (depends on current date time, must calculate yourself);
    * @throws Exception
    */
-  @Test
   public void testGetDocumentsOfEarlierThisMonth2() throws Exception {
+    applyUserSession("root", "exo");
     Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
 
@@ -471,7 +473,7 @@ public class TestTimelineService extends BaseWCMTestCase {
         if (time.get(Calendar.WEEK_OF_YEAR) < currentTime.get(Calendar.WEEK_OF_YEAR))
           count++;
       }
-      Node dayNode = testNode.addNode("dayNode" + index++, "exo:article");
+      Node dayNode = testNode.addNode("dayNode" + index++, "exo:sample");
       dayNode.setProperty("exo:title", "sample");
       if(dayNode.canAddMixin("exo:datetime")) {
         dayNode.addMixin("exo:datetime");
@@ -501,8 +503,8 @@ public class TestTimelineService extends BaseWCMTestCase {
    * expectedValue:  (depends on current date time, must calculate yourself);
    * @throws Exception
    */
-  @Test
   public void testGetDocumentsOfEarlierThisYear() throws Exception {
+    applyUserSession("root", "exo");
     Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
 
@@ -515,7 +517,7 @@ public class TestTimelineService extends BaseWCMTestCase {
         if (time.get(Calendar.MONTH) < currentTime.get(Calendar.MONTH))
           count++;
       }
-      Node dayNode = testNode.addNode("dayNode" + index++, "exo:article");
+      Node dayNode = testNode.addNode("dayNode" + index++, "exo:sample");
       dayNode.setProperty("exo:title", "sample");
       if(dayNode.canAddMixin("exo:datetime")) {
         dayNode.addMixin("exo:datetime");
@@ -544,8 +546,8 @@ public class TestTimelineService extends BaseWCMTestCase {
    * expectedValue:  (depends on current date time, must calculate yourself);
    * @throws Exception
    */
-  @Test
   public void testGetDocumentsOfEarlierThisYear2() throws Exception {
+    applyUserSession("root", "exo");
     Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
 
@@ -558,7 +560,7 @@ public class TestTimelineService extends BaseWCMTestCase {
         if (time.get(Calendar.MONTH) < currentTime.get(Calendar.MONTH))
           count++;
       }
-      Node dayNode = testNode.addNode("dayNode" + index++, "exo:article");
+      Node dayNode = testNode.addNode("dayNode" + index++, "exo:sample");
       dayNode.setProperty("exo:title", "sample");
       if(dayNode.canAddMixin("exo:datetime")) {
         dayNode.addMixin("exo:datetime");
@@ -581,19 +583,18 @@ public class TestTimelineService extends BaseWCMTestCase {
    * private method create sessionProvider instance.
    * @return SessionProvider
    */
-  @Test
   private SessionProvider createSessionProvider() {
     SessionProviderService sessionProviderService = (SessionProviderService) container
         .getComponentInstanceOfType(SessionProviderService.class);
     return sessionProviderService.getSystemSessionProvider(null);
   }
 
-  @AfterMethod
   public void tearDown() throws Exception {
   Node rootNode = session.getRootNode();
   Node testNode = rootNode.getNode("testNode");
   if (testNode != null)
     testNode.remove();
     session.save();
+    super.tearDown();
   }
 }

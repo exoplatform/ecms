@@ -49,6 +49,8 @@ import javax.jcr.Session;
 import javax.jcr.Value;
 import javax.jcr.lock.LockException;
 import javax.jcr.nodetype.ConstraintViolationException;
+import javax.jcr.nodetype.NodeDefinition;
+import javax.jcr.nodetype.NodeType;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
@@ -101,6 +103,7 @@ import org.exoplatform.services.jcr.ext.audit.AuditService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
@@ -1139,6 +1142,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
       NodeFinder nodeFinder = uicomp.getApplicationComponent(NodeFinder.class);
       UIJCRExplorer uiExplorer = uicomp.getAncestorOfType(UIJCRExplorer.class);
+      UITreeExplorer uiTreeExplorer = uiExplorer.findFirstComponentOfType(UITreeExplorer.class);      
       String uri = event.getRequestContext().getRequestParameter(OBJECTID);
       String workspaceName = event.getRequestContext().getRequestParameter("workspaceName");
       boolean findDrive = Boolean.getBoolean(event.getRequestContext().getRequestParameter("findDrive"));
@@ -1172,6 +1176,15 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
           uiExplorer.setDriveData(uicomp.getDrive(driveList, uiExplorer.getCurrentNode()));
         }
         uiExplorer.updateAjax(event);
+        event.getRequestContext().getJavascriptManager().
+        require("SHARED/explorer-module", "explorer").
+        addScripts("explorer.MultiUpload.setLocation('" + 
+                   uiExplorer.getWorkspaceName()  + "','" + 
+                   uiExplorer.getDriveData().getName()  + "','" +
+                   uiTreeExplorer.getLabel()  + "','" +
+                   uiExplorer.getCurrentPath() + "','" +
+                   org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(uiExplorer.getDriveData().getHomePath(),
+                   ConversationState.getCurrent().getIdentity().getUserId())+ "');");
       } catch(ItemNotFoundException nu) {
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.null-exception", null, ApplicationMessage.WARNING)) ;
 
@@ -1660,4 +1673,70 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
              parent.isNodeType(NodetypeConstant.EXO_ACCESSIBLE_MEDIA);
     } catch (Exception e) { return false; }
   }
+  
+  /**
+   * checks if user has permission to add nt:file to current node
+   * @throws Exception
+   */
+  public boolean canAddNode() throws Exception {
+    Node currentNode = getAncestorOfType(UIJCRExplorer.class).getCurrentNode();
+    return canAddNode(currentNode);
+  }
+
+  /**
+   * checks if user has permission to add nt:file to node
+   * @throws Exception
+   */
+  public boolean canAddNode(Node node) throws Exception {
+    if (node == null || !PermissionUtil.canAddNode(node)) {
+      return false;
+    }
+    List<NodeDefinition> defs = new ArrayList<NodeDefinition>();
+    defs.addAll(Arrays.asList(node.getPrimaryNodeType().getChildNodeDefinitions()));
+    for (NodeType mix : node.getMixinNodeTypes()) {
+      defs.addAll(Arrays.asList(mix.getChildNodeDefinitions()));
+    }
+    for (NodeDefinition def : defs) {
+      for (NodeType type : def.getRequiredPrimaryTypes()) {
+        if ((NodetypeConstant.NT_FILE.equals(type.getName()) || 
+             NodetypeConstant.NT_BASE.equals(type.getName()) ||
+             NodetypeConstant.NT_HIERARCHY_NODE.equals(type.getName())) &&
+            "*".equals(def.getName())) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+  
+  public String getDragAndDropEvents(Node node) throws Exception{
+    //define events for drag&drop files into subfolders  
+    if (this.canAddNode(node)) {
+    StringBuilder dragEvents = new StringBuilder().append("ondragover='eXo.ecm.MultiUpload.enableDragItemArea(event, this)' ").
+                                                    append("ondragleave='eXo.ecm.MultiUpload.disableDragItemArea(this)' ").
+                                                    append("ondragend='eXo.ecm.MultiUpload.disableDragItemArea(this)' ").
+                                                    append("onmouseout='eXo.ecm.MultiUpload.disableDragItemArea(this)' ");
+    //add ondrop event
+      dragEvents.append("ondrop='eXo.ecm.MultiUpload.doDropItemArea(event, this,\"").
+                 append(node.getPath()).append("\")' ");
+      return dragEvents.toString();
+    } else {
+      return "";
+    }
+  }
+  
+  @Override
+  public void processRender(WebuiRequestContext context) throws Exception {
+    //check if current user can add node to current node
+    if (canAddNode()) {
+      context.getJavascriptManager().require("SHARED/explorer-module", "explorer").
+              addScripts("explorer.MultiUpload.registerEvents('" + this.getId() +"');");
+    } else {
+      context.getJavascriptManager().require("SHARED/explorer-module", "explorer").
+              addScripts("explorer.MultiUpload.unregisterEvents();");
+    }
+    super.processRender(context);
+  }
+  
+
 }

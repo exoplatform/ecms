@@ -3520,5 +3520,15 @@
     <label>
       <add_node>Quyền sửa</add_node>
     </label>
-  </UIPermissionForm>  
+  </UIPermissionForm>
+  <UIMultiUpload>
+  	<label>
+  		<AbortAll>Hủy bỏ tất cả</AbortAll>
+  		<AbortAllFiles>Hủy bỏ tất cả các tập tin</AbortAllFiles>
+  		<MaxFileSize>Kích thước tập tin tối đa là </MaxFileSize>
+  		<InvalidCharacters>Ký tự không hợp lệ sẽ được thay đổi bằng '-'</InvalidCharacters>
+  		<DropFileMessage>Thả file vào đây</DropFileMessage>
+  		<Close>Đóng</Close>  		
+  	</label>
+  </UIMultiUpload>
 </bundle>
