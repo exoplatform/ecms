@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <bundle>
   <UICLVContainer>
     <label>
@@ -7,32 +7,36 @@
       <ManageContent>Gérer les contenus</ManageContent>
     </label>
     <msg>
-      <non-contents>Excusez-nous, aucun article n'est disponible.</non-contents>
-      <item-not-found>Le contenu n'a pas été trouvé</item-not-found>
-      <no-permission>Vous n'avez pas la permission d'accéder à ce contenu</no-permission>
+      <non-contents>Désolé, aucun article n'est disponible.</non-contents>
+      <item-not-found>Le contenu n'a pas été trouvé.</item-not-found>
+      <no-permission>Vous n'avez pas la permission d'accéder à ce contenu.</no-permission>
       <category-back>Aller à la catégorie précédente</category-back>
     </msg>
   </UICLVContainer>
   <UIViewerManagementPopupWindow>
     <title>
-      <UICLVConfig>Préférences des contenus</UICLVConfig>
+      <UICLVConfig>paramètres</UICLVConfig>
     </title>
   </UIViewerManagementPopupWindow>
   <UICLVConfig>
     <label>
-      <Title>Préférences des contenus</Title>
+      <Title>Paramètres</Title>
       <ContentSelectionBlock>Sélection de contenus</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Mode</UICLVConfigDisplayModeFormRadioBoxInput>
       <UICLVConfigItemPathFormInputSet>Chemin du répertoire</UICLVConfigItemPathFormInputSet>
 	  <UICLVConfigItemPathFormStringInput>Chemin du répertoire</UICLVConfigItemPathFormStringInput>	
       <UICLVConfigOrderByFormSelectBox>Classement par</UICLVConfigOrderByFormSelectBox>
       <option>
-        <exo>index\=Index</exo>
-        <publication>liveDate\=Date de publication</publication>
+        <exo:title>Titre</exo:title>
+        <exo:dateCreated>Date de Création</exo:dateCreated>
+        <exo:dateModified>Date de modification</exo:dateModified>
+        <publication:liveDate>Date de publication</publication:liveDate>
+        <exo:startEvent>Date de l'événement</exo:startEvent>
+        <exo:index>Index</exo:index>
       </option>
       <DisplaySettingBlock>Paramètres d'affichage</DisplaySettingBlock>
       <UICLVConfigHeaderFormStringInput>Entête</UICLVConfigHeaderFormStringInput>
-      <UICLVConfigDisplayTemplateFormSelectBox>Template</UICLVConfigDisplayTemplateFormSelectBox>
+      <UICLVConfigDisplayTemplateFormSelectBox>Gabarit</UICLVConfigDisplayTemplateFormSelectBox>
       <UICLVConfigPaginatorTemplateFormSelectBox>Pagination</UICLVConfigPaginatorTemplateFormSelectBox>
       <UICLVConfigItemsPerPageFormStringInput>Contenus par page</UICLVConfigItemsPerPageFormStringInput>
       <UICLVConfigShowIllustrationFormCheckboxInput>Afficher l'image</UICLVConfigShowIllustrationFormCheckboxInput>
@@ -52,7 +56,7 @@
       <UICLVConfigShowCLVByStringInput>par</UICLVConfigShowCLVByStringInput>
       <UICLVConfigshowSCVWithStringInput>avec</UICLVConfigshowSCVWithStringInput>
       <UICLVConfigTargetPageFormInputSet>Afficher dans la page</UICLVConfigTargetPageFormInputSet>
-      <content-not-found>Le contenu n'a pas été trouvé</content-not-found>
+      <content-not-found>Le contenu n'a pas été trouvé.</content-not-found>
       <ContentPath>Chemin de contenu</ContentPath>
       <Up>Monter</Up>
       <Down>Descendre</Down>
@@ -66,7 +70,7 @@
       <ModeSelectionHelp>Deux modes sont disponibles pour affichers les contenus. "Par répertoire" affichage de tous les contenus présents dans le répertoire (ou catégorie) sélectionné ; "Par contenus" vous permet de choisir manuellement les contenus à afficher.</ModeSelectionHelp>
       <FolderPathHelp>Sélectionnez les contenus qui vous souhaitez afficher. La sélection par défaut sera remplacée dynamiquement si vous activez la Navigation Dynamique (voir Avancé, ci-dessous)</FolderPathHelp>
       <HeaderOptionHelp>Afficher un entête sur la liste des contenus. Si la "Détection automatique" est activée, l'application tentera d'afficher un entête basé sur la sélection courante.</HeaderOptionHelp>
-      <GeneralOptionHelp>Choisissez les éléments graphiques que vous souhaitez voir. Suivant le modèle de vue choisi, certains éléments ne seront pas disponibles.</GeneralOptionHelp>
+      <GeneralOptionHelp>Choisissez les éléments graphiques que vous souhaitez voir. Suivant le gabarit d'affichage choisi, certains éléments ne seront pas disponibles.</GeneralOptionHelp>
       <ContextualHelp>Active la navigation dynamique. Les contenus peuvent être changés dynamiquement par un chemin fourni dans un paramètre de l'URL.</ContextualHelp>
       <ParameterHelp>Ce paramètre sera utilisé pour récupérer le contenu si la Navigation Dynamique est activée.</ParameterHelp>
       <ShowDetailInPageHelp>Cliquer sur un contenu redirige sur une page de détail. Vous devez avoir une portlet "Contenu par URL" configurée en "Navigation dynamique" sur la page cible pour afficher le contenu.</ShowDetailInPageHelp>
@@ -121,7 +125,6 @@
     <label>
       <readmore>Lire la suite</readmore>
       <rssFeed>Flux RSS</rssFeed>
-      <draft>Brouillon</draft>
     </label>
     <action>
       <refresh>Rafraîchir</refresh>
@@ -129,6 +132,9 @@
       <delete>Effacer</delete>
       <publish>Publier</publish>
     </action>
+    <label>
+      <draft>Brouillon</draft>
+    </label>
   </UICLVPresentation>
   <CorrectContentSelectorPopupWindow>
     <title>

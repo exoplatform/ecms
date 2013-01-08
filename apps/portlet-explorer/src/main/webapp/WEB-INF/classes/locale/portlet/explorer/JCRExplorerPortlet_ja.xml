@@ -3205,6 +3205,11 @@
   </UIActionBar>
 
   <UIPublicationPanel>
+      <action>
+        <Save>#{word.save}</Save>
+        <Reset>Reset</Reset>
+        <Close>#{word.close}</Close>
+      </action>
     <button>
       <Close>閉じる</Close>
     </button>

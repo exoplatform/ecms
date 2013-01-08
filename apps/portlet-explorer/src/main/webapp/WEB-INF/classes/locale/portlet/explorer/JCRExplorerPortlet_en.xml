@@ -135,7 +135,7 @@
       <anonymous-view>Icons</anonymous-view>
       <taxonomy-list>Details</taxonomy-list>
       <taxonomy-icons>Icons</taxonomy-icons>
-      <timeline-view>Timeline view</timeline-view>
+      <timeline-view>Timeline View</timeline-view>
     </label>
   </Views>
   <!--
@@ -197,7 +197,7 @@
   #########################################################################################
   -->
   <UIAllItemsPreferenceForm>
-    <title>Set Up Preferences</title>
+    <title>Set Up Filter Preferences</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Save>#{word.save}</Save>
