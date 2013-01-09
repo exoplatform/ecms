@@ -15,32 +15,36 @@
 <% if (uiPortlet.isShowTopBar()) { %>
 	<table class="tblAddressBar">
 		<tr class="block">
-		<%
-			int viewCount = 0;
-			def extendMap = new HashMap<String, String>();
-			if(uicomponent.getViewList().size() > 1) {
-				for(viewStyle in uicomponent.getViewList()) { 
-					def label = _ctx.appRes("Views.label." + viewStyle);
-					def viewIcon = viewStyle;
-					def defaultView = "defaultView";
-					if(uicomponent.isSelectedView(viewStyle)) {
-						viewIcon = viewStyle + "-selected";
-						defaultView = "defaultViewSelected";
-					}
-					viewCount++;
-					if(viewCount < 8) {
-			%>
-				<td class="iconFileExplorer">
-						<a href="<%=uicomponent.event("ChangeView", viewStyle)%>" class="$defaultView $viewIcon viewIcon" rel="tooltip" data-placement="bottom" title="$label"><span></span></a>
-				</td>
-			<%  } else {
-						extendMap.put(viewStyle, label + ";" + viewIcon);
-					}
-				}
-			} else {
-				viewCount++;
-			}
-		 %>
+			<td class="detailViewIcon">
+				<div class="btn-group">
+						<%
+							int viewCount = 0;
+							def extendMap = new HashMap<String, String>();
+							if(uicomponent.getViewList().size() > 1) {
+								for(viewStyle in uicomponent.getViewList()) { 
+									def label = _ctx.appRes("Views.label." + viewStyle);
+									def viewIcon = viewStyle;
+									def defaultView = "uiIconEcmsViewDefault";
+									def activeClass = "";
+									if(uicomponent.isSelectedView(viewStyle)) {
+										activeClass = "active";
+									}
+									viewCount++;
+									if(viewCount < 8) {
+							%>
+								
+										<button href="<%=uicomponent.event("ChangeView", viewStyle)%>" class="btn $activeClass" rel="tooltip" data-placement="bottom" title="$label"><i class="$defaultView $viewIcon"></i></button>
+								
+							<%  } else {
+										extendMap.put(viewStyle, label + ";" + viewIcon);
+									}
+								}
+							} else {
+								viewCount++;
+							}
+						 %>
+			</div>
+		 </td>
 		<%
 			if(!extendMap.isEmpty()) {
 		%>
@@ -65,8 +69,8 @@
 				<%}%>
 			</td>
 			<td class="backAndRefreshBlock">
-				<a class="backBtn pull-left" href="<%=uicomponent.event("Back")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("uiAddressBar.title.backButton")%>"><span></span></a>	
-				<a class="refreshSessionButton pull-left" href="<%=uicomponent.event("RefreshSession")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIViewBar.label.refesh")%>"><span></span></a>
+				<a class="backIcon pull-left" href="<%=uicomponent.event("Back")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("uiAddressBar.title.backButton")%>"><i class="uiIconEcmsGoBack"></i></a>	
+				<a class="refreshIcon pull-left" href="<%=uicomponent.event("RefreshSession")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIViewBar.label.refesh")%>"><i class="uiIconRefresh"></i></a>
 			</td>	
 			<%
 				 def viewSize = "";
