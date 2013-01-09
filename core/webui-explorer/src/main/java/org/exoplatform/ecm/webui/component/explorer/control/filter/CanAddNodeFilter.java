@@ -22,6 +22,7 @@ import javax.jcr.Node;
 
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.webui.ext.filter.UIExtensionAbstractFilter;
+import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
 
 /**
  * Created by The eXo Platform SAS
@@ -31,7 +32,17 @@ import org.exoplatform.webui.ext.filter.UIExtensionAbstractFilter;
  */
 public class CanAddNodeFilter extends UIExtensionAbstractFilter {
 
+  
+  public CanAddNodeFilter() {
+    this(null);
+  }
+
+  public CanAddNodeFilter(String messageKey) {
+    super(messageKey, UIExtensionFilterType.MANDATORY);
+  }
+
   public boolean accept(Map<String, Object> context) throws Exception {
+    if (context == null) return true;
     Node currentNode = (Node) context.get(Node.class.getName());
     return PermissionUtil.canAddNode(currentNode);
   }

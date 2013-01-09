@@ -31,6 +31,7 @@
   def viewComponentId  = new Date().getTime();
   def rcontext = _ctx.getRequestContext();
   rcontext.getJavascriptManager().require("SHARED/uiListView", "uiListView").
+                                 require("SHARED/multiUpload", "multiUpload").
   addScripts("uiListView.UIListView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');");
 %>
 <div id="$componentId">
@@ -160,7 +161,7 @@
             //nodePath = nodePath + "&workspaceName=" + preferenceWS;
             String actionLink = uicomponent.event("ChangeNode",Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS));
         %>
-        <div class="RowView Normal ClearFix" isFile="<%=data.isNodeType("nt:file")%>" objectId="<%=org.exoplatform.services.cms.impl.Utils.getObjectId(nodePath)%>" ondblclick="$actionLink">
+        <div <%= uicomponent.getDragAndDropEvents(data) %> class="RowView Normal ClearFix" ondblclick="$actionLink" isFile="<%=data.isNodeType("nt:file")%>" objectId="<%=org.exoplatform.services.cms.impl.Utils.getObjectId(nodePath)%>" >
           <div class="LeftColumn" style="float: left; width: 30px; height: 19px; padding: 2px 0px;  border-right: none;">
             <div title="$name" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(data, "16x16Icon")%>">              
             <%if(uicomponent.isSymLink(data)) {%>

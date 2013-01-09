@@ -38,6 +38,7 @@ import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentForm
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentFormController;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UIAllItems;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
+import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
@@ -46,6 +47,7 @@ import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -219,6 +221,8 @@ public class UIDrivesArea extends UIContainer {
       uiParent.setFlagSelect(true);
       UIJcrExplorerContainer explorerContainer = uiParent.getChild(UIJcrExplorerContainer.class);
       UIJCRExplorer uiJCRExplorer = explorerContainer.getChild(UIJCRExplorer.class);
+      UITreeExplorer uiTreeExplorer = uiJCRExplorer.findFirstComponentOfType(UITreeExplorer.class);      
+
 
       Preference pref = uiJCRExplorer.getPreference();
       pref.setShowSideBar(drive.getViewSideBar());
@@ -274,7 +278,6 @@ public class UIDrivesArea extends UIContainer {
       UIAddressBar uiAddressBar = uiControl.getChild(UIAddressBar.class);
       uiAddressBar.setViewList(viewList);
       uiAddressBar.setSelectedViewName(selectedView);
-      explorerContainer.setRenderedChild(UIJCRExplorer.class);
       uiWorkingArea.getChild(UISideBar.class).initialize();
       for(UIComponent uiComp : uiWorkingArea.getChildren()) {
         if(uiComp instanceof UIDrivesArea) uiComp.setRendered(false);
@@ -286,6 +289,15 @@ public class UIDrivesArea extends UIContainer {
         controller.getChild(UIDocumentForm.class).releaseLock();
       }
       uiParent.setRenderedChild(UIJcrExplorerContainer.class);
+      event.getRequestContext().getJavascriptManager().
+      require("SHARED/multiUpload", "multiUpload").
+      addScripts("multiUpload.setLocation('" + 
+                 uiJCRExplorer.getWorkspaceName()  + "','" + 
+                 uiJCRExplorer.getDriveData().getName()  + "','" +
+                 uiTreeExplorer.getLabel()  + "','" +
+                 uiJCRExplorer.getCurrentPath() + "','" +
+                 org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(uiJCRExplorer.getDriveData().getHomePath(),
+                 ConversationState.getCurrent().getIdentity().getUserId())+ "');");
       uiJCRExplorer.updateAjax(event);
     }
   }

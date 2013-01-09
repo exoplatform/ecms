@@ -151,5 +151,9 @@
       <artifactId>servlet-api</artifactId>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-core-connector</artifactId>
+    </dependency>
   </dependencies>
 </project>

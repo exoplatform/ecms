@@ -34,7 +34,7 @@
 										onClick = "javascript:eXo.ecm.Rename.showRenamePopup();";
 									} else {
 										href = "href=\"" + itemContext.event(action) + "\"";
-										onClick = "return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);";
+										onClick = "";
 									}
 					 		%>
 					   	<div class="MenuItem"> 	

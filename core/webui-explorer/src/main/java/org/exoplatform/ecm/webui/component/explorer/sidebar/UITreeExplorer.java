@@ -55,6 +55,7 @@ import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -431,6 +432,15 @@ public class UITreeExplorer extends UIContainer {
 //      UIDocumentInfo uiDocumentInfo = uiDocumentContainer.getChildById("UIDocumentInfo") ;
 
       uiExplorer.updateAjax(event);
+      event.getRequestContext().getJavascriptManager().
+            require("SHARED/multiUpload", "multiUpload").
+            addScripts("multiUpload.setLocation('" + 
+                       uiExplorer.getWorkspaceName()  + "','" + 
+                       uiExplorer.getDriveData().getName()  + "','" +
+                       uiTreeExplorer.getLabel()  + "','" +
+                       uiExplorer.getCurrentPath() + "','" +
+                       Utils.getPersonalDrivePath(uiExplorer.getDriveData().getHomePath(),
+                       ConversationState.getCurrent().getIdentity().getUserId()) + "');");
     }
 
   }
@@ -489,6 +499,7 @@ public class UITreeExplorer extends UIContainer {
       if (uiExplorer.getPreference().isShowSideBar()
           && uiExplorer.getAncestorOfType(UIJCRExplorerPortlet.class).isShowSideBar()) {
         uiTreeExplorer.buildTree(path);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiTreeExplorer);
       }
     }
   }

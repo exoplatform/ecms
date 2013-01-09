@@ -1,0 +1,64 @@
+<%
+  import java.net.URLEncoder;
+  
+  def rcontext = _ctx.getRequestContext() ;
+  def jsManager = rcontext.getJavascriptManager();
+  jsManager.require("SHARED/multiUpload", "multiUpload").
+  addScripts("multiUpload.initDropBox('" + uicomponent.getId() + "');").
+  addScripts("multiUpload.setMaxFileSize(" + uicomponent.getLimitFileSize() + ");").
+  addScripts("multiUpload.setMaxUploadCount(" + uicomponent.getMaxUploadCount() + ");").
+  addScripts("multiUpload.loadMsg();").
+  addScripts("multiUpload.setDropFileMessage('" + 
+             _ctx.appRes(uicomponent.getId() + ".label.DropFileMessage") + "');");
+%>
+
+<div id="$uicomponent.id" class = "$uicomponent.id NoShow" >
+
+  <div id="MultiUploadDragFileBackground" class="MultiUploadDragFileBackground">
+    <div id="MultiUploadDragFile" class="MultiUploadDragFile"><span></span></div>
+  </div>
+  
+  <!-- status infor bar -->
+  <div id="MultiUploadFilesShortInfo" class="MultiUploadFilesShortInfo ClearFix">
+    <span id="MultiUploadFilesUploaded" style="display:none">
+      0
+    </span> <span id="MultiUploadFilesUploaded-text" style="display:none">file(s) uploaded,</span>
+    <span id="MultiUploadFilesUploading" style="display:none">
+      0
+    </span> <span id="MultiUploadFilesUploading-text" style="display:none">file(s) in progress,</span>
+    <span id="MultiUploadFilesCanceled" style="display:none">
+      0
+    </span> <span id="MultiUploadFilesCanceled-text" style="display:none">file(s) canceled,</span>
+    <span id="MultiUploadFilesAwaiting" style="display:none">
+      0
+    </span> <span id="MultiUploadFilesAwaiting-text" style="display:none">file(s) awaiting,</span>
+
+    <div id="MultiUploadClose" class="MultiUploadClose FR DeleteIconInactive"       
+      title="<%=_ctx.appRes(uicomponent.getId() + ".label.Close") %>">
+      &nbsp;
+    </div>
+    <span class="FR">&nbsp;&nbsp;&nbsp;</span>
+    <a id="MultiUploadHelp" style="display:none" class="MultiUploadHelp FR" href="#"       
+          title="<%= _ctx.appRes(uicomponent.getId() + ".label.MaxFileSize") + " " + uicomponent.getLimitFileSize() + " Mb.\r\n" + _ctx.appRes(uicomponent.getId() + ".label.InvalidCharacters") %>">
+      &nbsp;
+     </a>
+    <span class="FR">&nbsp;&nbsp;&nbsp;</span>
+    <div id="MultiUploadAbortAll" style="display:none" class="MultiUploadAbortAll FR" href="#"
+          title="<%= _ctx.appRes(uicomponent.getId() + ".label.AbortAllFiles") %>">
+        <a class="Action"><u><%= _ctx.appRes(uicomponent.getId() + ".label.AbortAll") %></u></a>
+    </div>
+  </div>
+  <br/>
+  
+  
+  <!-- processing file list -->
+  <div id="MultiUploadFileListProgress" class="MultiUploadFileList">
+    <span id = "MultiUploadListSeperator"/>
+  </div>
+  <br/>
+  
+  <!-- div containing URL to refresh UIJCRExplorer -->
+  <div id="MultiUploadRefreshExplorer" style="display:none">
+    <%=URLEncoder.encode(org.apache.commons.lang.StringEscapeUtils.unescapeHtml(uicomponent.event("RefreshExplorer")), "utf-8")%>
+  </div>
+</div>

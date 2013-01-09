@@ -43,6 +43,7 @@
   def jsManager = rcontext.getJavascriptManager();
   jsManager.require("SHARED/ecm-utils", "ecmutil").
             require("SHARED/uiListView", "uiListView").
+            require("SHARED/multiUpload", "multiUpload").
   addScripts("uiListView.UIListView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');").
   addScripts("ecmutil.ECMUtils.initClipboard('clip_button','1','$size');").
 	addScripts('uiListView.UIListView.loadEffectedWidthColumn();');
@@ -252,7 +253,7 @@
 	          for (act in customActs) {
 	            String actName = act.getProperty("exo:name").getValue().getString() ;
 	            params = [new Parameter("workspaceName", preferenceWS), new Parameter("actionName",Utils.formatNodeName(act.getName()))] ;
-	            strActs += "<a class=\"MenuItem\" style='display: block;' onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + uiCustomActionComponent.event("Custom",Utils.formatNodeName(nodePath),params) + "\">" ;
+	            strActs += "<a class=\"MenuItem\" style='display: block;'  href=\"" + uiCustomActionComponent.event("Custom",Utils.formatNodeName(nodePath),params) + "\">" ;
 	            strActs += "  <div class=\"ItemIcon " + Utils.getNodeTypeIcon(act, "16x16Icon") + "\">$actName</div>" ;
 	            strActs += "</a>" ;
 	          }            
@@ -285,7 +286,10 @@
 	        if (Utils.isTrashHomeNode(data)) isTrashHome = "true"
 	        if (!uicomponent.isSystemWorkspace()) rightClickMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(nodePath), uiWorkingArea.getActionsExtensionList(data)) ;	          
 	      %>
-		      <div <%=rightClickMenu%> class="RowView Normal ClearFix" trashHome="$isTrashHome" locked="$isLocked" mediaType="$isMediaType" removeFavourite="$isFavourite" isFile="<%=data.isNodeType("nt:file")%>" inTrash="$isInTrash" workspacename="$preferenceWS"  objectId="<%=org.exoplatform.services.cms.impl.Utils.getObjectId(nodePath)%>" ondblclick="$actionLink">
+		      <div <%= uicomponent.getDragAndDropEvents(data) %> <%=rightClickMenu%> class="RowView Normal ClearFix" trashHome="$isTrashHome" locked="$isLocked" 
+		            mediaType="$isMediaType" removeFavourite="$isFavourite" inTrash="$isInTrash" workspacename="$preferenceWS" 
+		              objectId="<%=org.exoplatform.services.cms.impl.Utils.getObjectId(nodePath)%>" ondblclick="$actionLink"
+	              isFile="<%=data.isNodeType("nt:file")%>">
 			      $strActs
 		        <div class="ColumnIcon" style="padding: 2px 0px; 	border-right: none; width: 30px;">
 						  <div title="$title" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(data, "16x16Icon")%>">
