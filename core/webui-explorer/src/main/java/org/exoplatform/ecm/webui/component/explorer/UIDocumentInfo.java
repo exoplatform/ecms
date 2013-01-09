@@ -1234,16 +1234,17 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
       try {
         String sortParam = event.getRequestContext().getRequestParameter(OBJECTID) ;
         String[] array = sortParam.split(";");
-        String order = "";
-        if (array[0].trim().equals(Preference.ASCENDING_ORDER)) order = Preference.BLUE_DOWN_ARROW;
-        else order = Preference.BLUE_UP_ARROW;
+        String order = Preference.ASCENDING_ORDER.equals(array[0].trim()) || !array[1].trim().equals(uicomp.getTypeSort()) ? 
+                       Preference.BLUE_DOWN_ARROW : Preference.BLUE_UP_ARROW;
+        
+        String prefOrder = Preference.ASCENDING_ORDER.equals(array[0].trim()) || !array[1].trim().equals(uicomp.getTypeSort())?
+                           Preference.ASCENDING_ORDER : Preference.DESCENDING_ORDER;                                                                                                     
         uicomp.setSortOrder(order);
         uicomp.setTypeSort(array[1]);
-
         Preference pref = uiExplorer.getPreference();
         if (array.length == 2) {
           pref.setSortType(array[1].trim());
-          pref.setOrder(array[0].trim());
+          pref.setOrder(prefOrder);
         } else {
           return ;
         }

@@ -48,6 +48,7 @@ import org.exoplatform.ecm.jcr.model.ClipboardCommand;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
 import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.ecm.webui.comparator.DateComparator;
 import org.exoplatform.ecm.webui.comparator.NodeTitleComparator;
 import org.exoplatform.ecm.webui.comparator.PropertyValueComparator;
 import org.exoplatform.ecm.webui.comparator.StringComparator;
@@ -986,6 +987,8 @@ public class UIJCRExplorer extends UIContainer {
         Collections.sort(childrenList, new PropertyValueComparator(Utils.EXO_CREATED_DATE, preferences_.getOrder()));
     } else if (Preference.SORT_BY_MODIFIED_DATE.equals(preferences_.getSortType())) {
         Collections.sort(childrenList, new PropertyValueComparator(Utils.EXO_MODIFIED_DATE, preferences_.getOrder()));
+    } else if (Preference.SORT_BY_DATE.equals(preferences_.getSortType())) {
+      Collections.sort(childrenList, new DateComparator(preferences_.getOrder()));
     } else {
       Collections.sort(childrenList, new PropertyValueComparator(preferences_.getSortType(), preferences_.getOrder()));
     }

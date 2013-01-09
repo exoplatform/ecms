@@ -1066,7 +1066,7 @@ var ListView = function() {
     	eXo.ecm.ECMUtils.updateListGridWidth();
     	var breadcrumb = gj('#FileViewBreadcrumb');
     	if (breadcrumb) {
-    		breadcrumb.width(breadcrumb.parent().width());
+    		breadcrumb.width(breadcrumb.parent().width()-2);
     	}
     }
 		//update width of UIListGrid

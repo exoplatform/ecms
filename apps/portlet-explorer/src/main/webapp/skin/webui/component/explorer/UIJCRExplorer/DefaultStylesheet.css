@@ -419,6 +419,15 @@
   border: 1px solid #e1e1e1;
 }
 
+.UIJCRExplorerPortlet .UIFileView .TitleTable {
+	font-weight: lighter;
+}
+
+.UIJCRExplorerPortlet .UIFileView .TitleTable .NodeButton {
+	font-weight: bold;
+}
+
+
 .UIJCRExplorerPortlet .UIListGrid  .ColumnIcon .BlueDownArrow16x16Icon{
 	background-position: center center;
 }
@@ -987,6 +996,20 @@
   height: 16px;
   width: 16px;
   float: left;
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIDocumentWorkspace .Breadcrumb {
+	width: 16px; 
+	height: 16px; 
+	background: url('/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/TreeNodeIcon.gif');
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIDocumentWorkspace .NodeButton {
+	cursor: pointer;
+	-moz-outline: none; 
+	-moz-user-select: none;
+	color: black;
+	float: left
 }
 
 /*############################## -- END UIDocumentInfo -- ##############################*/
@@ -1742,8 +1765,3 @@
 	display:none;
 }
 	
-.UIJCRExplorerPortlet .Breadcrumb {
-	width: 16px; 
-	height: 16px; 
-	background: url('/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/TreeNodeIcon.gif');
-}

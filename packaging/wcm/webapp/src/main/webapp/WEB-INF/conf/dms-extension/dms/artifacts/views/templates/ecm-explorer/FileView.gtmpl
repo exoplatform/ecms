@@ -73,7 +73,8 @@
 				<div class="TitleTable" id="FileViewBreadcrumb">
 					<div class="ClearFix">
 					  <div class="Breadcrumb FL"><span></span></div>
-		        <a style="cursor: pointer; -moz-outline: none; -moz-user-select: none;color: black;float: left"
+					  <!--Breadcrumb links-->
+		        <a class="NodeButton"
 	             onclick="<%=uicomponent.event("ChangeNode", drivePath.toString(), new Parameter("workspaceName", uiExplorer.getDriveData().getWorkspace()))%>" class="NodeLabel">
 	            <strong><%=uiExplorer.findFirstComponentOfType(UITreeExplorer.class).getLabel()%></strong>
             </a>
@@ -83,8 +84,8 @@
                 drivePath.append("/").append(nodeName);
                 def nodeWs = uiExplorer.getDriveData().getWorkspace();
                 %>
-                  <span class="FL"><strong>&nbsp;>&nbsp;</strong></span>
-                  <a style="cursor: pointer; -moz-outline: none; -moz-user-select: none;color: black;float: left"
+                  <span class="FL">&nbsp;>&nbsp;</span>
+                  <a class="NodeButton"
                     onclick="<%=uicomponent.event("ChangeNode", drivePath.toString(), new Parameter("workspaceName", nodeWs))%>" class="NodeLabel">
                    <strong><%=nodeName%></strong>
                   </a>
@@ -92,7 +93,34 @@
               }
             }
             %>
-			    </div>
+            <!--End of Breadcrumb links-->
+            <!--=======================================================-->
+            <!--Breadcrumb sort-->
+              <%
+                String selectedSortType = uicomponent.getTypeSort();
+                String sortOrder = uicomponent.getSortOrder();
+                String typeActionLink = "";
+                if (sortOrder.equals("BlueDownArrow")) {
+                  typeActionLink = "Descending;";
+                } else {
+                  typeActionLink = "Ascending;";
+                }
+                def selectedName = "Alphabetic".equals(selectedSortType)?"selected":"";
+                def selectedDate = "Date".equals(selectedSortType)?"selected":"";
+              %>
+              <!--===============DropDownBox===================-->
+              <select class="FR" onchange="window.location.href=this.options[this.selectedIndex].value; return false;"
+                                 onclick="window.location.href=this.options[this.selectedIndex].value; return false;">
+                <option value="<%=uicomponent.event("Sort", typeActionLink + "Alphabetic")%>"<%=selectedName%>><%=_ctx.appRes("FileView.label.name")%></option>
+                <option value="<%=uicomponent.event("Sort", typeActionLink + "Date")%>" <%=selectedDate%>><%=_ctx.appRes("FileView.label.date")%></option>
+              </select>
+              <!--===============Sort By label =================-->
+              <div class="FR">
+                <%=_ctx.appRes("FileView.label.sortBy")%>
+              </div>
+            <!--End of Breadcrumb sort-->
+			    </div><!--End of ClearFix-->			    
+			    <!--=======================================================-->
 			    <div style="position: relative; top: 0px; left: 0px; width: 0px; height: 0px">
 						<div class="Mask" style="position: absolute; top: 0px; left: 0px; width: 0px; height: 0px"></div>
 						

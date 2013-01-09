@@ -19,6 +19,7 @@
   import java.net.URLEncoder;
   import org.exoplatform.services.wcm.core.NodeLocation;
   import org.exoplatform.services.cms.link.NodeLinkAware;
+  import javax.jcr.Node;
 
   def linkManager = WCMCoreUtils.getService(LinkManager.class);
   def uiDocumentInfo = uicomponent.getAncestorOfType(UIDocumentInfo.class);
@@ -44,6 +45,7 @@
   //Config to display columns with format: ["${column};${width}"]
   //Default 
   String[] arrColumns = ["exo:owner;95px","exo:dateModified;123px","exo:dateCreated;121px"];
+  
 %>
   <div id="$componentId" class="UIListView" style="padding-left:20px"> 
     <div class="UIListGrid">
@@ -203,7 +205,7 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
     </div>
     <div class="ColumnName" style="width: 300px;" title="<%=title%> $lockedLabel">
       <div>
-        <a style="cursor: pointer; -moz-outline: none; -moz-user-select: none;$hiddenStyle;color: black;float: left"
+        <a class="NodeButton"
              onclick="$actionLink" class="NodeLabel" >
             <strong><%=fileName%></strong>
         </a>

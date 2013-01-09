@@ -3089,4 +3089,12 @@
   		<you>you</you>
   	</label>
   </UIDocumentNodeList>
+  <FileView>
+    <label>
+      <name>Name</name>
+      <date>Date</date>
+      <size>Size</size>
+      <sortBy>Sort by:</sortBy>
+    </label>
+  </FileView>
 </bundle>

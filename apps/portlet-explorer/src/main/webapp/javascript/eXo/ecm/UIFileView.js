@@ -350,7 +350,7 @@ Self.t1 = d.getTime();
 	document.onselectstart = function(){return false};
 	var rightClick = (event.which && event.which > 1) || (event.button && event.button == 2);
 	if (!rightClick) {
-		console.log('mouseDown: ' + Self.clickCheckBox);
+		//console.log('mouseDown: ' + Self.clickCheckBox);
 		if (!inArray(Self.itemsSelected, element) && !event.ctrlKey && !event.shiftKey && !eXo.ecm.UIFileView.clickCheckBox) {
 			Self.clickItem(event, element);
 		};
@@ -893,7 +893,7 @@ UIFileView.prototype.postGroupAction = function(moveActionNode, ext) {
 
 UIFileView.prototype.checkBoxItem = function() {
 	eXo.ecm.UIFileView.clickCheckBox = true;
-	console.log('check: ' + Self.clickCheckBox)
+	//console.log('check: ' + Self.clickCheckBox)
 };
 
 UIFileView.prototype.initStickBreadcrumb = function() {
@@ -913,6 +913,8 @@ UIFileView.prototype.initStickBreadcrumb = function() {
 	};
 	stickBreadcrumb;
 	gj(window).scroll(stickBreadcrumb);
+	var breadcrumb = gj('#FileViewBreadcrumb');
+	breadcrumb.width(breadcrumb.parent().width()-2);
 };
 
 //private method
