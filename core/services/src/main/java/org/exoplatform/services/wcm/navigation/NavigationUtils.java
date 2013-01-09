@@ -27,6 +27,7 @@ import javax.portlet.MimeResponse;
 import javax.portlet.ResourceURL;
 
 import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.config.UserPortalConfig;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.mop.SiteKey;
@@ -43,6 +44,8 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.application.WebuiRequestContext;
+import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 
 /**
  * Created by The eXo Platform SAS
@@ -81,13 +84,17 @@ public class NavigationUtils {
   }
   
   public static UserNavigation getUserNavigationOfPortal(UserPortal userPortal, String portalName) throws Exception {
+    UIPortalApplication portalApp = Util.getUIPortalApplication();
+    UserACL userACL = portalApp.getApplicationComponent(UserACL.class);
     UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
     NavigationContext portalNav = userPortalConfigService.getNavigationService().
                                         loadNavigation(new SiteKey(SiteType.PORTAL, portalName));
     if (portalNav ==null) {
       return null;
-    }else {
-      return userNavigationCtor.newInstance(userPortal, portalNav, false);
+    } else {
+      return userNavigationCtor.newInstance(
+                          userPortal, portalNav, 
+                          userACL.hasEditPermission(Util.getPortalRequestContext().getUserPortalConfig().getPortalConfig()));
     }
   }
   
