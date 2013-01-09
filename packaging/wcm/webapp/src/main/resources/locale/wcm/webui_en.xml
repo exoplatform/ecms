@@ -46,16 +46,8 @@
       <admin-view>Admin View</admin-view>
       <icon-view>Icon View</icon-view>
       <thumbails-view>Thumbnails View</thumbails-view>
-      <cover-flow>Cover Flow View</cover-flow>
-      <simple-view>Simple View</simple-view>
-      <system-view>System View</system-view>
-      <anonymous-view>Anonymous View</anonymous-view>
-      <taxonomy-list>Taxonomy List View</taxonomy-list>
-      <taxonomy-icons>Taxonomy Icon View</taxonomy-icons>
-      <timeline-view>Timeline View</timeline-view>
       <list-view>List View</list-view>
       <authoring-view>Authoring View</authoring-view>
-      <slide-show>Slide Show View</slide-show>
       <wcm-category-view>WCM Category View</wcm-category-view>
     </label>
   </Views>
