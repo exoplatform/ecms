@@ -17,6 +17,8 @@
 package org.exoplatform.ecm.webui.component.admin.templates;
 
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
+import org.exoplatform.ecm.webui.component.admin.views.UIECMTemplateList;
+import org.exoplatform.ecm.webui.component.admin.templates.UITemplateContainer;
 import org.exoplatform.ecm.webui.selector.UIPermissionSelector;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -42,8 +44,8 @@ events = { @EventConfig(listeners = UITemplatesManager.SelectTabActionListener.c
 public class UITemplatesManager extends UIAbstractManager {
   final static public String EDIT_TEMPLATE = "EditTemplatePopup" ;
   final static public String NEW_TEMPLATE = "TemplatePopup" ;
-  final static public String ACTIONS_TEMPLATE_ID = "UIActionsTemplateList";
-  final static public String OTHERS_TEMPLATE_ID = "UIOthersTemplateList";
+  final static public String ACTIONS_TEMPLATE_ID = "ActionsTemplate";
+  final static public String OTHERS_TEMPLATE_ID = "OthersTemplate";
   
   
   private String selectedTabId = "";
@@ -64,10 +66,18 @@ public class UITemplatesManager extends UIAbstractManager {
   }
 
   public UITemplatesManager() throws Exception {
-    addChild(UITemplateList.class, null, null).setTemplateFilter(UITemplateList.DOCUMENTS_TEMPLATE_TYPE) ;
-    addChild(UITemplateList.class, null, ACTIONS_TEMPLATE_ID);
-    addChild(UITemplateList.class, null, OTHERS_TEMPLATE_ID);
-    this.setSelectedTab(UITemplateList.DOCUMENTS_TEMPLATE_TYPE);
+    //addChild(UITemplateList.class, null, null).setTemplateFilter(UITemplateList.DOCUMENTS_TEMPLATE_TYPE) ;
+    //addChild(UITemplateList.class, null, ACTIONS_TEMPLATE_ID);
+    //addChild(UITemplateList.class, null, OTHERS_TEMPLATE_ID);
+    //setSelectedTab(UITemplateList.DOCUMENTS_TEMPLATE_TYPE);
+    
+    UITemplateContainer uiTemp = addChild(UITemplateContainer.class, null, null) ;
+    
+    UITemplateContainer uiActionsTemp = addChild(UITemplateContainer.class, null, ACTIONS_TEMPLATE_ID) ;
+    
+    UITemplateContainer uiOthersTemp = addChild(UITemplateContainer.class, null, OTHERS_TEMPLATE_ID) ;
+    
+    setSelectedTab("UITemplateContainer");
   }
 
   public boolean isEditingTemplate() {
@@ -79,16 +89,17 @@ public class UITemplatesManager extends UIAbstractManager {
   }
 
   public void initPopup(UIComponent uiComponent, String title) throws Exception {
-    String popuId = title ;
-    if (title == null ) popuId = uiComponent.getId() ;
+    String popupId = title ;
+    if (title == null ) popupId = uiComponent.getId() ;
     UIECMAdminPortlet adminPortlet = this.getAncestorOfType(UIECMAdminPortlet.class);
     UIPopupContainer popupContainer = adminPortlet.getChild(UIPopupContainer.class);
     UIPopupWindow uiPopup = popupContainer.getChild(UIPopupWindow.class);
     if(uiPopup == null) {
-      uiPopup = popupContainer.addChild(UIPopupWindow.class, null, popuId) ;
+      uiPopup = popupContainer.addChild(UIPopupWindow.class, null, popupId) ;
       uiPopup.setWindowSize(700, 500) ;
       uiPopup.setShowMask(true);
     } else {
+    	uiPopup.setId(popupId);
       uiPopup.setRendered(true) ;
     }
     uiPopup.setUIComponent(uiComponent) ;
@@ -98,9 +109,16 @@ public class UITemplatesManager extends UIAbstractManager {
 
   public void initPopupPermission(String id, String membership) throws Exception {
     String popupId = id.concat(UITemplateContent.TEMPLATE_PERMISSION);
-    UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, popupId);
-    uiPopup.setShowMask(true);
-    uiPopup.setWindowSize(560, 300);
+    UIECMAdminPortlet adminPortlet = getAncestorOfType(UIECMAdminPortlet.class);
+    UIPopupContainer popupContainer = adminPortlet.getChild(UIPopupContainer.class);
+    UIPopupWindow uiPopup = popupContainer.getChild(UIPopupWindow.class);
+    if(uiPopup == null) {
+      uiPopup = popupContainer.addChild(UIPopupWindow.class, null, popupId) ;
+      uiPopup.setWindowSize(560, 300);
+      uiPopup.setShowMask(true);
+    } else {
+    	uiPopup.setId(popupId);
+    }
     UIPermissionSelector uiECMPermission = createUIComponent(UIPermissionSelector.class, null, null);
     uiECMPermission.setSelectedMembership(true);
     if (membership != null && membership.indexOf(":/") > -1) {
@@ -108,29 +126,31 @@ public class UITemplatesManager extends UIAbstractManager {
       uiECMPermission.setCurrentPermission("/" + arrMember[1]);
     }
     if (id.equals("AddNew")) {
-      UITemplateForm uiForm = findFirstComponentOfType(UITemplateForm.class);
+      UITemplateForm uiForm = adminPortlet.findFirstComponentOfType(UITemplateForm.class);
       uiECMPermission.setSourceComponent(uiForm, null);
     } else {
-      UITemplateContent uiTemContent = findComponentById(id);
+      UITemplateContent uiTemContent = adminPortlet.findComponentById(id);
       uiECMPermission.setSourceComponent(uiTemContent, null);
     }
     uiPopup.setUIComponent(uiECMPermission);
     uiPopup.setRendered(true);
-    uiPopup.setShow(true);
     uiPopup.setResizable(true);
     return;
   }
 
-  public void refresh() throws Exception {
-    getChild(UITemplateList.class).refresh(1);
+  public void refresh() throws Exception {	
+    UITemplateContainer templateContainer = ((UITemplateContainer)getChildById("UITemplateContainer"));
+    templateContainer.update();
+    templateContainer.getChild(UITemplateList.class).refresh(1);
     
-    UITemplateList uiActionTemplate = ((UITemplateList)getChildById(ACTIONS_TEMPLATE_ID));
-    uiActionTemplate.setTemplateFilter(UITemplateList.ACTIONS_TEMPLATE_TYPE);
-    uiActionTemplate.refresh(1);
+    UITemplateContainer templateActionsContainer = ((UITemplateContainer)getChildById(ACTIONS_TEMPLATE_ID));
+    templateActionsContainer.update();
+    templateActionsContainer.getChild(UITemplateList.class).refresh(1);
     
-    UITemplateList uiOtherTemplate = ((UITemplateList)getChildById(OTHERS_TEMPLATE_ID));
-    uiOtherTemplate.setTemplateFilter(UITemplateList.OTHERS_TEMPLATE_TYPE);
-    uiOtherTemplate.refresh(1);
+    UITemplateContainer templateOthersContainer = ((UITemplateContainer)getChildById(OTHERS_TEMPLATE_ID));
+    templateOthersContainer.update();
+    templateOthersContainer.getChild(UITemplateList.class).refresh(1);   
+    
   }
   
   static public class SelectTabActionListener extends EventListener<UITemplatesManager>

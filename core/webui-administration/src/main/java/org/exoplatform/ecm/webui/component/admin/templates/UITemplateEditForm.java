@@ -18,10 +18,12 @@ package org.exoplatform.ecm.webui.component.admin.templates;
 
 import javax.jcr.Node;
 
+import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
@@ -97,10 +99,11 @@ public class UITemplateEditForm extends UIForm {
 
   static  public class CancelActionListener extends EventListener<UITemplateEditForm> {
     public void execute(Event<UITemplateEditForm> event) throws Exception {
-      UITemplatesManager uiManager = event.getSource().getAncestorOfType(UITemplatesManager.class) ;
-      UIPopupWindow uiPopupWindow = uiManager.getChildById(UITemplatesManager.EDIT_TEMPLATE) ;
+    	UIECMAdminPortlet adminPortlet = event.getSource().getAncestorOfType(UIECMAdminPortlet.class);
+    	UIPopupContainer popupContainer = adminPortlet.getChild(UIPopupContainer.class);
+      UIPopupWindow uiPopupWindow = popupContainer.getChildById(UITemplatesManager.EDIT_TEMPLATE) ;
       uiPopupWindow.setRendered(false) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(popupContainer) ;
     }
   }
 }

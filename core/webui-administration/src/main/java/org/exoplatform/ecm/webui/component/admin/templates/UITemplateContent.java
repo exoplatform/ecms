@@ -25,6 +25,7 @@ import javax.jcr.Value;
 import javax.jcr.version.VersionHistory;
 
 import org.exoplatform.ecm.jcr.model.VersionNode;
+import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -36,6 +37,7 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
+import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
@@ -213,8 +215,9 @@ public class UITemplateContent extends UIForm implements UISelectable {
       viewPermission = sb.toString();
     }
     getUIStringInput(FIELD_VIEWPERMISSION).setValue(viewPermission) ;
-    UITemplatesManager uiManager = getAncestorOfType(UITemplatesManager.class) ;
-    uiManager.removeChildById(getId() + TEMPLATE_PERMISSION) ;
+    //UIECMAdminPortlet adminPortlet = getAncestorOfType(UIECMAdminPortlet.class);
+    //UITemplatesManager uiManager = adminPortlet.findFirstComponentOfType(UITemplatesManager.class);
+    //removeChildById(getId() + TEMPLATE_PERMISSION) ;
   }
 
   static public class RestoreActionListener extends EventListener<UITemplateContent> {
@@ -356,21 +359,11 @@ public class UITemplateContent extends UIForm implements UISelectable {
   static public class AddPermissionActionListener extends EventListener<UITemplateContent> {
     public void execute(Event<UITemplateContent> event) throws Exception {
       UITemplateContent uiTempContent = event.getSource() ;
-      UITemplatesManager uiManager = uiTempContent.getAncestorOfType(UITemplatesManager.class) ;
+      UIECMAdminPortlet adminPortlet = uiTempContent.getAncestorOfType(UIECMAdminPortlet.class);
+      UITemplatesManager uiManager = adminPortlet.findFirstComponentOfType(UITemplatesManager.class) ;
       UIViewTemplate uiViewTemp = uiTempContent.getAncestorOfType(UIViewTemplate.class) ;
-
-      // The codes are updated by lampt.
-      List<UIComponent> uicomponents = uiManager.getChildren();
-      List<UIComponent> parentUIComponents = new ArrayList<UIComponent>();
-      parentUIComponents.addAll(uicomponents);
-      for (UIComponent uicomponent : parentUIComponents) {
-        if (UIPopupWindow.class.isInstance(uicomponent)) {
-          if (!uicomponent.getId().equals(UITemplatesManager.NEW_TEMPLATE) &&
-                                !uicomponent.getId().equals(UITemplatesManager.EDIT_TEMPLATE)) {
-            uiManager.removeChildById(uicomponent.getId());
-          }
-        }
-      }
+      
+      
 
       String membership = uiTempContent.getUIStringInput(FIELD_VIEWPERMISSION).getValue() ;
       uiManager.initPopupPermission(uiTempContent.getId(), membership) ;
@@ -381,7 +374,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
       } else if(uiTempContent.getId().equals(UISkinTab.SKIN_FORM_NAME)) {
         uiViewTemp.setRenderedChild(UISkinTab.class) ;
       }
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(adminPortlet) ;
     }
   }
 
@@ -411,13 +404,14 @@ public class UITemplateContent extends UIForm implements UISelectable {
   static public class CancelActionListener extends EventListener<UITemplateContent> {
     public void execute(Event<UITemplateContent> event) throws Exception {
       UITemplateContent uiTemplateContent = event.getSource() ;
-      UITemplatesManager uiManager = uiTemplateContent.getAncestorOfType(UITemplatesManager.class) ;
-      uiManager.removeChildById(UIDialogTab.DIALOG_FORM_NAME + TEMPLATE_PERMISSION) ;
-      uiManager.removeChildById(UIViewTab.VIEW_FORM_NAME + TEMPLATE_PERMISSION) ;
-      uiManager.removeChildById(UISkinTab.SKIN_FORM_NAME + TEMPLATE_PERMISSION) ;
+      UIECMAdminPortlet adminPortlet = uiTemplateContent.getAncestorOfType(UIECMAdminPortlet.class);
+      UIPopupContainer popupContainer = adminPortlet.getChild(UIPopupContainer.class);
+      popupContainer.removeChildById(UIDialogTab.DIALOG_FORM_NAME + TEMPLATE_PERMISSION) ;
+      popupContainer.removeChildById(UIViewTab.VIEW_FORM_NAME + TEMPLATE_PERMISSION) ;
+      popupContainer.removeChildById(UISkinTab.SKIN_FORM_NAME + TEMPLATE_PERMISSION) ;
       uiTemplateContent.reset() ;
-      uiManager.removeChild(UIPopupWindow.class) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
+      popupContainer.removeChild(UIPopupWindow.class) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(adminPortlet) ;
     }
   }
 

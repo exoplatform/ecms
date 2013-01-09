@@ -16,7 +16,12 @@
  */
 package org.exoplatform.ecm.webui.component.admin.views;
 
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIComponent;
+import org.exoplatform.webui.event.Event;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.ext.manager.UIAbstractManager;
 
 /**
@@ -27,13 +32,33 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
  * 11:45:11 AM
  */
 
-@ComponentConfig(template = "system:/groovy/webui/core/UITabPane.gtmpl")
+@ComponentConfig(template = "system:/groovy/webui/core/UITabPane_New.gtmpl", 
+events = { @EventConfig(listeners = UIViewManager.SelectTabActionListener.class) })
+
 public class UIViewManager extends UIAbstractManager {
+	
+	private String selectedTabId = "";
+
+  public String getSelectedTabId()
+  {
+     return selectedTabId;
+  }
+
+  public void setSelectedTab(String renderTabId)
+  {
+     selectedTabId = renderTabId;
+  }
+
+  public void setSelectedTab(int index)
+  {
+     selectedTabId = ((UIComponent)getChild(index - 1)).getId();
+  }
+  
   public UIViewManager() throws Exception{	
-    addChild(UIViewContainer.class, null, null) ;
+    addChild(UIViewContainer.class, null, null);
     UITemplateContainer uiECMTemp = addChild(UITemplateContainer.class, null, "ECMTemplate") ;
     uiECMTemp.addChild(UIECMTemplateList.class, null, null) ;
-    uiECMTemp.setRendered(false) ;
+    setSelectedTab("UIViewContainer");
   }
 
   public void refresh() throws Exception {
@@ -45,5 +70,19 @@ public class UIViewManager extends UIAbstractManager {
     UIECMTemplateList uiECMTemplateList = ((UITemplateContainer)getChildById("ECMTemplate")).getChild(UIECMTemplateList.class);
     uiECMTemplateList.refresh(uiECMTemplateList.getUIPageIterator().getCurrentPage());
   }
+  
+  static public class SelectTabActionListener extends EventListener<UIViewManager>
+  {
+     public void execute(Event<UIViewManager> event) throws Exception
+     {
+        WebuiRequestContext context = event.getRequestContext();
+        String renderTab = context.getRequestParameter(UIComponent.OBJECTID);
+        if (renderTab == null)
+           return;
+        event.getSource().setSelectedTab(renderTab);
+        context.setResponseComplete(true);
+        context.addUIComponentToUpdateByAjax(event.getSource().getParent());
+     }
+  }  
 }
 

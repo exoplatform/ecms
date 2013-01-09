@@ -33,6 +33,7 @@ import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminControlPanel;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
+import org.exoplatform.ecm.webui.component.admin.views.UIViewContainer;
 import org.exoplatform.ecm.webui.core.UIPagingGrid;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -96,12 +97,13 @@ public class UITemplateList extends UIPagingGrid {
 
   static public class EditActionListener extends EventListener<UITemplateList> {
     public void execute(Event<UITemplateList> event) throws Exception {
-      UITemplateList nodeTypeList = event.getSource() ;
-      UIECMAdminPortlet adminPortlet = nodeTypeList.getAncestorOfType(UIECMAdminPortlet.class);
-      UIPopupContainer popupContainer = adminPortlet.getChild(UIPopupContainer.class);
+      UITemplateList nodeTemplateList = event.getSource() ;
+      UITemplateContainer uiTemplateContainer = nodeTemplateList.getParent() ;
+      uiTemplateContainer.removeChildById(UITemplatesManager.NEW_TEMPLATE) ;
+      uiTemplateContainer.initPopup(UITemplatesManager.EDIT_TEMPLATE) ;
+      
       String nodeType = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      UITemplatesManager uiTemplatesManager = nodeTypeList.getParent() ;
-      UIViewTemplate uiViewTemplate = uiTemplatesManager.createUIComponent(UIViewTemplate.class, null, null) ;
+      UIViewTemplate uiViewTemplate = uiTemplateContainer.findFirstComponentOfType(UIViewTemplate.class) ;
       uiViewTemplate.getChild(UITemplateEditForm.class).update(nodeType) ;
       uiViewTemplate.setNodeTypeName(nodeType) ;
       UIDialogTab uiDialogTab = uiViewTemplate.findFirstComponentOfType(UIDialogTab.class) ;
@@ -119,9 +121,8 @@ public class UITemplateList extends UIPagingGrid {
       UITemplateContent uiSkinTabForm = uiViewTemplate.findComponentById(UISkinTab.SKIN_FORM_NAME) ;
       uiSkinTabForm.setNodeTypeName(nodeType) ;
       uiSkinTabForm.update(null) ;
-      popupContainer.removeChildById(UITemplatesManager.NEW_TEMPLATE) ;
-      uiTemplatesManager.initPopup(uiViewTemplate, UITemplatesManager.EDIT_TEMPLATE) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(adminPortlet) ;
+      
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiTemplateContainer) ;
     }
  
   }

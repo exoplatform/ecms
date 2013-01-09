@@ -81,6 +81,7 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
   final static public String FIELD_TAB_VIEW = "defaultView" ;
   final static public String FIELD_TAB_SKIN = "defaultSkin" ;
   final static public String FIELD_PERMISSION = "permission" ;
+  final static public String POPUP_PERMISSION = "PopupViewPermission" ;
 
   public UITemplateForm() throws Exception {
     super("UITemplateForm") ;

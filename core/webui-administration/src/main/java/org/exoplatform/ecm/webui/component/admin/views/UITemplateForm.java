@@ -71,7 +71,8 @@ public class UITemplateForm extends UIForm {
 
   final static private String FIELD_HOMETEMPLATE  = "homeTemplate";
 
-  final static private String FIELD_ENABLEVERSION = "enableVersion";
+  final static private String FIELD_ENABLEVERSION = "enableVersion"; 
+  
 
   private NodeLocation      template_           = null;
 
