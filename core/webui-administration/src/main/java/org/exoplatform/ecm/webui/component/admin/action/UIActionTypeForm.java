@@ -62,23 +62,17 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
 )
 public class UIActionTypeForm extends UIForm {
 
-  final static public String FIELD_ACTIONTYPE = "actionType" ;
   final static public String FIELD_EXECUTEACTION = "executeAction" ;
   final static public String FIELD_NAME = "name" ;
-  final static public String FIELD_ISMOVE = "isMove" ;
   final static public String FIELD_VARIABLES = "variables" ;
+  public static final String ACTION_TYPE = "exo:scriptAction";
 
   public UIFormMultiValueInputSet uiFormMultiValue = null ;
 
   public UIActionTypeForm() throws Exception {
-    List<SelectItemOption<String>> actionOptions = new ArrayList<SelectItemOption<String>>() ;
-    UIFormSelectBox actionType =
-      new UIFormSelectBox(FIELD_ACTIONTYPE, FIELD_ACTIONTYPE, actionOptions) ;
-    actionType.setOnChange("ChangeType") ;
-    addUIFormInput(actionType) ;
+    
     addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).
         addValidator(MandatoryValidator.class)) ;
-    addUIFormInput(new UIFormCheckBoxInput<Boolean>(FIELD_ISMOVE, FIELD_ISMOVE, null)) ;
     UIFormSelectBox actionExecutables = new UIFormSelectBox(FIELD_EXECUTEACTION,FIELD_EXECUTEACTION,
         new ArrayList<SelectItemOption<String>>());
     addUIFormInput(actionExecutables) ;
@@ -128,22 +122,17 @@ public class UIActionTypeForm extends UIForm {
     reset() ;
     List<SelectItemOption<String>> actionOptions = getActionTypesValues() ;
     String actionTypeName = actionOptions.get(0).getValue() ;
-    getUIFormSelectBox(FIELD_ACTIONTYPE).setOptions(actionOptions) ;
-    getUIFormSelectBox(FIELD_ACTIONTYPE).setValue(actionTypeName) ;
+    
+    
     getUIStringInput(FIELD_NAME).setValue("") ;
-    getUIFormCheckBoxInput(FIELD_ISMOVE).setChecked(false) ;
     List<SelectItemOption<String>> executableOptions = getExecutableOptions(actionTypeName) ;
     getUIFormSelectBox(FIELD_EXECUTEACTION).setOptions(executableOptions) ;
-//    getUIFormSelectBox(FIELD_EXECUTEACTION).setName(actionTypeName.replace(":", "_")) ;
     initMultiValuesField() ;
   }
 
   static public class ChangeTypeActionListener extends EventListener<UIActionTypeForm> {
     public void execute(Event<UIActionTypeForm> event) throws Exception {
       UIActionTypeForm uiForm = event.getSource() ;
-      String actionTypeName = uiForm.getUIFormSelectBox(FIELD_ACTIONTYPE).getValue() ;
-//      uiForm.getUIFormSelectBox(FIELD_EXECUTEACTION).setName(actionTypeName.replace(":", "_")) ;
-      uiForm.getUIFormSelectBox(FIELD_EXECUTEACTION).setOptions(uiForm.getExecutableOptions(actionTypeName));
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent()) ;
     }
   }
@@ -159,7 +148,6 @@ public class UIActionTypeForm extends UIForm {
       ActionServiceContainer actionServiceContainer =
         uiForm.getApplicationComponent(ActionServiceContainer.class) ;
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
-      String selectValue = uiForm.getUIFormSelectBox(FIELD_ACTIONTYPE).getValue() ;
       String actionName = uiForm.getUIStringInput(FIELD_NAME).getValue();
       Object[] args = {actionName} ;
       String[] arrFilterChar = {"&", "$", "^", "(", ")", "@", "]", "[", "*", "%", "!", "+"} ;
@@ -190,10 +178,9 @@ public class UIActionTypeForm extends UIForm {
         }
       }
       try {
-        boolean isMove = uiForm.getUIFormCheckBoxInput(FIELD_ISMOVE).isChecked() ;
         String execute = uiForm.getUIFormSelectBox(FIELD_EXECUTEACTION).getValue() ;
-        actionServiceContainer.createActionType(actionName, selectValue, execute, variables,
-                                                isMove, repository);
+        actionServiceContainer.createActionType(actionName, ACTION_TYPE, execute, variables,
+                                                false, repository);
         uiActionManager.refresh() ;
         uiForm.refresh() ;
         uiActionManager.removeChild(UIPopupWindow.class) ;

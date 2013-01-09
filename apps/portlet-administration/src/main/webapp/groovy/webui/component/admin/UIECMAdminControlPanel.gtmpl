@@ -54,7 +54,7 @@
 					for(group in groups) {
 						String cssName = group.getUIExtensionName();
 						if(cssName.startsWith("UI")) cssName = cssName.substring(2);
-						cssName = "uiIcon" + cssName;
+						cssName = "uiIconEcms" + cssName;
 						String itemCss = "";
 						if(group.getUIExtensionName().equals(uiWorkingArea.getRenderedCompId()))
 							itemCss = " selected";
