@@ -1,9 +1,9 @@
 <%
   /**
    * Created by The eXo Platform SARL
-   * Author : Dang Van Minh
-   *          minhdv@exoplatform.com
-   * July 25, 2006
+   * Author : Nguyen Anh Vu
+   *          vuna@exoplatform.com
+   * Jan 04, 2013
    * 8:16:23 AM
    */
 %>
@@ -71,7 +71,28 @@
 	<div id="${componentId}-$viewComponentId" class="UIListView UIFileView">	
 		<div class="UIListGrid">
 				<div class="TitleTable" id="FileViewBreadcrumb">
-					<div class="ClearFix">
+				  <!--============FirstRow===============-->
+          <div class="TitleTableRow">
+            <div id="FileViewStatus" class="NoShow">
+                <div  style="cursor:pointer" id="FileViewClearSelection" class="FR" onclick="eXo.ecm.UIFileView.clearCheckboxes(event);">
+                  <u><%=_ctx.appRes("FileView.label.ClearSelection")%></u>
+                </div>
+                
+                <div class="FR">&nbsp;</div>
+                
+                <div class="FR">
+                  <%=_ctx.appRes("FileView.label.filesAreSelected")%>
+                </div>
+                
+                <div class="FR">&nbsp;</div>
+                
+                <div id="FileViewItemCount" class="FR">
+                  <span></span>
+                </div>
+            </div>
+          </div>
+          <!--============SecondRow===============-->
+					<div class="ClearFix TitleTableRow">
 					  <div class="Breadcrumb FL"><span></span></div>
 					  <!--Breadcrumb links-->
 		        <a class="NodeButton"
@@ -94,7 +115,11 @@
             }
             %>
             <!--End of Breadcrumb links-->
-            <!--=======================================================-->
+          <!--=======================================================-->
+            <!--End of Breadcrumb links-->
+            <input id="UIFileViewCheckBox" type="checkbox" class="FR" onclick="eXo.ecm.UIFileView.toggleCheckboxes(this, event);"/>
+            <!--End of Breadcrumb links-->
+          <!--=======================================================-->
             <!--Breadcrumb sort-->
               <%
                 String selectedSortType = uicomponent.getTypeSort();
@@ -108,19 +133,19 @@
                 def selectedName = "Alphabetic".equals(selectedSortType)?"selected":"";
                 def selectedDate = "Date".equals(selectedSortType)?"selected":"";
               %>
-              <!--===============DropDownBox===================-->
+            <!--===============DropDownBox===================-->
               <select class="FR" onchange="window.location.href=this.options[this.selectedIndex].value; return false;"
                                  onclick="window.location.href=this.options[this.selectedIndex].value; return false;">
                 <option value="<%=uicomponent.event("Sort", typeActionLink + "Alphabetic")%>"<%=selectedName%>><%=_ctx.appRes("FileView.label.name")%></option>
                 <option value="<%=uicomponent.event("Sort", typeActionLink + "Date")%>" <%=selectedDate%>><%=_ctx.appRes("FileView.label.date")%></option>
               </select>
-              <!--===============Sort By label =================-->
+            <!--===============Sort By label =================-->
               <div class="FR">
                 <%=_ctx.appRes("FileView.label.sortBy")%>
               </div>
             <!--End of Breadcrumb sort-->
 			    </div><!--End of ClearFix-->			    
-			    <!--=======================================================-->
+		    <!--=======================================================-->
 			    <div style="position: relative; top: 0px; left: 0px; width: 0px; height: 0px">
 						<div class="Mask" style="position: absolute; top: 0px; left: 0px; width: 0px; height: 0px"></div>
 						

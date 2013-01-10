@@ -13,6 +13,7 @@ function UIFileView() {
 	UIFileView.prototype.actionAreaId = null;
 	UIFileView.prototype.enableDragDrop = null;
 	UIFileView.prototype.clickCheckBox = false;
+	UIFileView.prototype.clickTotalCheckBox = false;
 
 	UIFileView.prototype.colorSelected = "#e7f3ff";
 	UIFileView.prototype.colorHover = "#f2f8ff";
@@ -20,6 +21,9 @@ function UIFileView() {
 	UIFileView.prototype.t1 = 0;
 	UIFileView.prototype.t2 = 0;
 	UIFileView.prototype.minBreadcrumbTop = 0;
+	UIFileView.prototype.clickedItem = null;
+	UIFileView.prototype.selectBoxType = null;
+	UIFileView.prototype.firstTimeClick = false;
 
 UIFileView.prototype.clickFolder =  function (folderDiv, link, docListId) {
 	if (!folderDiv) return;
@@ -340,9 +344,10 @@ UIFileView.prototype.mouseDownItem = function(evt) {
 	eval("var event = ''");
 	event = evt || window.event;
 	event.cancelBubble = true;
-	var element = this;
+	var element = Self.clickedItem || this;
 	removeMobileElement();
 	Self.hideContextMenu();
+	Self.firstTimeClick = false;
 	var d = new Date();		
 Self.t1 = d.getTime();   
 	Self.enableDragDrop = true;
@@ -351,9 +356,21 @@ Self.t1 = d.getTime();
 	var rightClick = (event.which && event.which > 1) || (event.button && event.button == 2);
 	if (!rightClick) {
 		//console.log('mouseDown: ' + Self.clickCheckBox);
-		if (!inArray(Self.itemsSelected, element) && !event.ctrlKey && !event.shiftKey && !eXo.ecm.UIFileView.clickCheckBox) {
+		if (!inArray(Self.itemsSelected, element) && !event.ctrlKey && !event.shiftKey && !Self.clickCheckBox && !Self.clickTotalCheckBox) {
 			Self.clickItem(event, element);
-		};
+			Self.firstTimeClick = true;
+		} else if (Self.clickTotalCheckBox) {
+			//toggle current node's check box
+			gj("input:checkbox", element).each(function(index, elem) {
+				var value = Self.selectBoxType;
+				gj(elem).attr("checked", value);
+			});
+		} 
+		else if (!Self.clickCheckBox) {
+			gj("input:checkbox", element).each(function(index, elem) {
+				gj(elem).attr("checked", !elem.checked);
+			});
+		}
 
 		// init drag drop;
 		document.onmousemove = Self.dragItemsSelected;
@@ -387,6 +404,9 @@ Self.t1 = d.getTime();
 		mobileElement.appendChild(listViewElement);
 		document.body.appendChild(mobileElement);
 	}
+//	Self.clickedItem = null;
+//	Self.clickCheckBox = false;
+//	Self.clickTotalCheckBox = false;
 };
 
 UIFileView.prototype.dragItemsSelected = function(event) {
@@ -449,7 +469,7 @@ UIFileView.prototype.clickItem = function(event, element, callback) {
 UIFileView.prototype.mouseUpItem = function(evt) {
 	eval("var event=''");
 	event = evt || window.event;
-	var element = this;
+	var element = Self.clickedItem || this;
 	Self.enableDragDrop = null;
 	document.onmousemove = null;
 	revertResizableBlock();
@@ -480,7 +500,7 @@ UIFileView.prototype.mouseUpItem = function(evt) {
 				  Self.postGroupAction(moveAction, "&destInfo=" + wsTarget + ":" + idTarget);
 			}
 		} else {
-			if ((event.ctrlKey || Self.clickCheckBox) && !element.selected) {
+			if ((event.ctrlKey || Self.clickCheckBox || (Self.clickTotalCheckBox && Self.selectBoxType)) && !element.selected) {
 				element.selected = true;
 				//for select use shilf key;
 				Self.temporaryItem = element;
@@ -488,7 +508,7 @@ UIFileView.prototype.mouseUpItem = function(evt) {
 				//Dunghm: Check Shift key
 				element.setAttribute("isLink",null);
 				if(event.shiftKey) element.setAttribute("isLink",true);
-			} else if((event.ctrlKey || Self.clickCheckBox) && element.selected) {
+			} else if((event.ctrlKey || Self.clickCheckBox || Self.clickTotalCheckBox) && element.selected) {
 				element.selected = null;
 				element.setAttribute("isLink",null);
 				element.style.background = "none";
@@ -528,7 +548,11 @@ UIFileView.prototype.mouseUpItem = function(evt) {
 			eval(element.getAttribute("mousedown"));
 		}
 	}
+	Self.clickedItem = null;
 	Self.clickCheckBox = false;
+	Self.clickTotalCheckBox = false;
+	Self.firstTimeClick = false
+	Self.checkSelectedItemCount();
 };
 
 //event in ground
@@ -915,6 +939,43 @@ UIFileView.prototype.initStickBreadcrumb = function() {
 	gj(window).scroll(stickBreadcrumb);
 	var breadcrumb = gj('#FileViewBreadcrumb');
 	breadcrumb.width(breadcrumb.parent().width()-2);
+};
+
+UIFileView.prototype.toggleCheckboxes = function(checkbox, evt) {
+	Self.allItems.each(function(index, elem){
+		Self.selectBoxType = checkbox.checked;
+		Self.clickedItem = elem;
+		Self.clickTotalCheckBox = true;
+		Self.mouseDownItem(evt);
+		//-------------------------
+		Self.selectBoxType = checkbox.checked;
+		Self.clickedItem = elem;
+		Self.clickTotalCheckBox = true;
+		Self.mouseUpItem(evt);
+	});
+};
+
+UIFileView.prototype.clearCheckboxes = function(evt) {
+	Self.allItems.each(function(index, elem){
+		Self.selectBoxType = false;
+		Self.clickedItem = elem;
+		Self.clickTotalCheckBox = true;
+		Self.mouseDownItem(evt);
+		//-------------------------
+		Self.selectBoxType = false;
+		Self.clickedItem = elem;
+		Self.clickTotalCheckBox = true;
+		Self.mouseUpItem(evt);
+	});
+};
+
+UIFileView.prototype.checkSelectedItemCount = function() {
+	if (Self.itemsSelected.length > 1) {
+		gj("#FileViewStatus").removeClass("NoShow");
+		gj("#FileViewItemCount").html(Self.itemsSelected.length);
+	} else {
+		gj("#FileViewStatus").addClass("NoShow");
+	}
 };
 
 //private method

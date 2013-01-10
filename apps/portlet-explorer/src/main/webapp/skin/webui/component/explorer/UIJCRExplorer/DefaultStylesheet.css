@@ -421,6 +421,11 @@
 
 .UIJCRExplorerPortlet .UIFileView .TitleTable {
 	font-weight: lighter;
+	line-height: 55px; height: 57px;	
+}
+
+.UIJCRExplorerPortlet .UIFileView .TitleTable .TitleTableRow {
+	line-height: 25px; height: 27px;	
 }
 
 .UIJCRExplorerPortlet .UIFileView .TitleTable .NodeButton {
@@ -963,6 +968,10 @@
 }
 
 /*############################## -- BEGIN UIDocumentInfo -- ##############################*/
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIDocumentWorkspace {
+	min-height: 500px;
+}
 
 .UIJCRExplorerPortlet .UIJCRExplorer .UIDocumentWorkspace .TitleBG {
 	height: 18px;

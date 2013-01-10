@@ -3494,6 +3494,8 @@
       <date>Date</date>
       <size>Size</size>
       <sortBy>Sort by:</sortBy>
+      <filesAreSelected>files are selected.</filesAreSelected>
+      <ClearSelection>Clear selection</ClearSelection>
     </label>
   </FileView>
 </bundle>
