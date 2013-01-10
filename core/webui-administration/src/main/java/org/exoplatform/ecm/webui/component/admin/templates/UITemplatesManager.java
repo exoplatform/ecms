@@ -44,11 +44,14 @@ events = { @EventConfig(listeners = UITemplatesManager.SelectTabActionListener.c
 public class UITemplatesManager extends UIAbstractManager {
   final static public String EDIT_TEMPLATE = "EditTemplatePopup" ;
   final static public String NEW_TEMPLATE = "TemplatePopup" ;
-  final static public String ACTIONS_TEMPLATE_ID = "ActionsTemplate";
-  final static public String OTHERS_TEMPLATE_ID = "OthersTemplate";
+  final static public String ACTIONS_TEMPLATE_ID = "UIActionsTemplateContainer";
+  final static public String OTHERS_TEMPLATE_ID = "UIOthersTemplateContainer";
+  
+  final static public String ACTIONS_TEMPLATE_LIST_ID = "UIActionsTemplateList";
+  final static public String OTHERS_TEMPLATE_LIST_ID  = "UIOthersTemplateList";
   
   
-  private String selectedTabId = "";
+  private String selectedTabId = "UITemplateContainer";
 
   public String getSelectedTabId()
   {
@@ -65,17 +68,17 @@ public class UITemplatesManager extends UIAbstractManager {
      selectedTabId = ((UIComponent)getChild(index - 1)).getId();
   }
 
-  public UITemplatesManager() throws Exception {
-    //addChild(UITemplateList.class, null, null).setTemplateFilter(UITemplateList.DOCUMENTS_TEMPLATE_TYPE) ;
-    //addChild(UITemplateList.class, null, ACTIONS_TEMPLATE_ID);
-    //addChild(UITemplateList.class, null, OTHERS_TEMPLATE_ID);
-    //setSelectedTab(UITemplateList.DOCUMENTS_TEMPLATE_TYPE);
-    
+  public UITemplatesManager() throws Exception {    
     UITemplateContainer uiTemp = addChild(UITemplateContainer.class, null, null) ;
+    uiTemp.getChild(UITemplateList.class).setTemplateFilter(UITemplateList.DOCUMENTS_TEMPLATE_TYPE);
     
     UITemplateContainer uiActionsTemp = addChild(UITemplateContainer.class, null, ACTIONS_TEMPLATE_ID) ;
+    uiActionsTemp.getChild(UITemplateList.class).setTemplateFilter(UITemplateList.ACTIONS_TEMPLATE_TYPE);
+    uiActionsTemp.getChild(UITemplateList.class).setId(ACTIONS_TEMPLATE_LIST_ID);
     
     UITemplateContainer uiOthersTemp = addChild(UITemplateContainer.class, null, OTHERS_TEMPLATE_ID) ;
+    uiOthersTemp.getChild(UITemplateList.class).setTemplateFilter(UITemplateList.OTHERS_TEMPLATE_TYPE);
+    uiOthersTemp.getChild(UITemplateList.class).setId(OTHERS_TEMPLATE_LIST_ID);
     
     setSelectedTab("UITemplateContainer");
   }
@@ -86,57 +89,7 @@ public class UITemplatesManager extends UIAbstractManager {
   	UIPopupWindow uiPopup = popupContainer.getChild(UIPopupWindow.class);
   	uiPopup.setId(EDIT_TEMPLATE);
     return (uiPopup != null && uiPopup.isShow() && uiPopup.isRendered());
-  }
-
-  public void initPopup(UIComponent uiComponent, String title) throws Exception {
-    String popupId = title ;
-    if (title == null ) popupId = uiComponent.getId() ;
-    UIECMAdminPortlet adminPortlet = this.getAncestorOfType(UIECMAdminPortlet.class);
-    UIPopupContainer popupContainer = adminPortlet.getChild(UIPopupContainer.class);
-    UIPopupWindow uiPopup = popupContainer.getChild(UIPopupWindow.class);
-    if(uiPopup == null) {
-      uiPopup = popupContainer.addChild(UIPopupWindow.class, null, popupId) ;
-      uiPopup.setWindowSize(700, 500) ;
-      uiPopup.setShowMask(true);
-    } else {
-    	uiPopup.setId(popupId);
-      uiPopup.setRendered(true) ;
-    }
-    uiPopup.setUIComponent(uiComponent) ;
-    uiPopup.setShow(true) ;
-    uiPopup.setResizable(true) ;
-  }
-
-  public void initPopupPermission(String id, String membership) throws Exception {
-    String popupId = id.concat(UITemplateContent.TEMPLATE_PERMISSION);
-    UIECMAdminPortlet adminPortlet = getAncestorOfType(UIECMAdminPortlet.class);
-    UIPopupContainer popupContainer = adminPortlet.getChild(UIPopupContainer.class);
-    UIPopupWindow uiPopup = popupContainer.getChild(UIPopupWindow.class);
-    if(uiPopup == null) {
-      uiPopup = popupContainer.addChild(UIPopupWindow.class, null, popupId) ;
-      uiPopup.setWindowSize(560, 300);
-      uiPopup.setShowMask(true);
-    } else {
-    	uiPopup.setId(popupId);
-    }
-    UIPermissionSelector uiECMPermission = createUIComponent(UIPermissionSelector.class, null, null);
-    uiECMPermission.setSelectedMembership(true);
-    if (membership != null && membership.indexOf(":/") > -1) {
-      String[] arrMember = membership.split(":/");
-      uiECMPermission.setCurrentPermission("/" + arrMember[1]);
-    }
-    if (id.equals("AddNew")) {
-      UITemplateForm uiForm = adminPortlet.findFirstComponentOfType(UITemplateForm.class);
-      uiECMPermission.setSourceComponent(uiForm, null);
-    } else {
-      UITemplateContent uiTemContent = adminPortlet.findComponentById(id);
-      uiECMPermission.setSourceComponent(uiTemContent, null);
-    }
-    uiPopup.setUIComponent(uiECMPermission);
-    uiPopup.setRendered(true);
-    uiPopup.setResizable(true);
-    return;
-  }
+  }  
 
   public void refresh() throws Exception {	
     UITemplateContainer templateContainer = ((UITemplateContainer)getChildById("UITemplateContainer"));

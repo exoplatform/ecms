@@ -303,17 +303,17 @@
 }
 /*############################## -- ECMTemplate -- ########################*/
 
-.UIECMAdminPortlet .ECMTemplate .ECMTempForm {
+.UIECMAdminPortlet .ECMTemplate .ecmTempForm {
 	padding: 10px;
 }
 
-.UIECMAdminPortlet .ECMTemplate .ECMTempForm .HorizontalLayout {
+.UIECMAdminPortlet .ECMTemplate .ecmTempForm .HorizontalLayout {
   background: #f7f7f7;
   padding-top: 10px;
   border: 1px solid #b7b7b7;
 }
 
-.ECMTempForm .HorizontalLayout .textarea {
+.ecmTempForm .HorizontalLayout .textarea {
   width: 95%;
   height: 350px;
 }
@@ -340,7 +340,7 @@
 	padding: 10px;
 }
 
-.UIECMScripts .ECMScriptForm {
+.UIECMScripts .ecmScriptForm {
 	padding: 10px;
 }
 
@@ -348,7 +348,7 @@
 	padding: 7px 4px 0px 4px;
 }
 
-.UIECMScripts .ECMScriptForm .HorizontalLayout {
+.UIECMScripts .ecmScriptForm .HorizontalLayout {
   padding-top: 10px;
   background: #f7f7f7;
   border: 1px solid #b7b7b7;

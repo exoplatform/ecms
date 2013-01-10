@@ -14,6 +14,9 @@
         <Advanced>Advanced</Advanced>
       </label>
     </tab>
+    <header>
+      <UITemplatesManager>Manage Templates</UITemplatesManager>
+    </header>
     <label>     
       <UITaxonomyManager>Manage Simple Category</UITaxonomyManager>
       <UITaxonomyManagerTrees>Categories</UITaxonomyManagerTrees>
@@ -993,10 +996,13 @@
       <ECMTemplate>ECM Sjablonen</ECMTemplate>
       <CBTemplate>BC Sjablonen</CBTemplate>
       <UICBScripts>BC Scripts</UICBScripts>
-      <UIECMScripts>ECM Scripts</UIECMScripts>
+      <uiECMScripts>ECM Scripts</uiECMScripts>
       <UIDialogTab>Dialog</UIDialogTab>
       <UIViewTab>Zicht</UIViewTab>
       <UITemplateEditForm>Sjablonen</UITemplateEditForm>
+      <UITemplateContainer>Documents</UITemplateContainer>
+      <UIActionsTemplateContainer>Actions</UIActionsTemplateContainer>
+      <UIOthersTemplateContainer>Others</UIOthersTemplateContainer>
     </title>
   </UITabPane>
   <!--
@@ -1194,10 +1200,10 @@
   </UITemplateForm>
   <!--
   ################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.view.ECMTempForm			 #
+  #             org.exoplatform.ecm.webui.component.admin.view.ecmTempForm			 #
   ################################################################################
   -->
-  <ECMTempForm>
+  <ecmTempForm>
     <label>
       <version>Selecteer versie</version>
       <content>Inhoud</content>
@@ -1205,23 +1211,23 @@
       <homeTemplate>Sjabloon Type</homeTemplate>
       <enableVersion>Inschakelen Versie</enableVersion>
     </label>
-  </ECMTempForm>
-  <ECMTempFormPopup>
+  </ecmTempForm>
+  <ecmTempFormPopup>
     <title>
-      <ECMTempForm>Toevoegen/Wijzigen zicht Sjabloon</ECMTempForm>
+      <ecmTempForm>Toevoegen/Wijzigen zicht Sjabloon</ecmTempForm>
     </title>
-  </ECMTempFormPopup>
-  <ECMTempFormAdd>
+  </ecmTempFormPopup>
+  <ecmTempFormAdd>
     <title>
-      <ECMTempForm>ECM Sjabloon toevoegen</ECMTempForm>
-      <ECMTempFormAdd>ECM Sjabloon toevoegen</ECMTempFormAdd>
+      <ecmTempForm>ECM Sjabloon toevoegen</ecmTempForm>
+      <ecmTempFormAdd>ECM Sjabloon toevoegen</ecmTempFormAdd>
     </title>
-  </ECMTempFormAdd>
-  <ECMTempFormEdit>
+  </ecmTempFormAdd>
+  <ecmTempFormEdit>
     <title>
-      <ECMTempForm>ECM Sjabloon wijzigen</ECMTempForm>
+      <ecmTempForm>ECM Sjabloon wijzigen</ecmTempForm>
     </title>
-  </ECMTempFormEdit>
+  </ecmTempFormEdit>
   <!--
   ################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.CBTempForm				 #
@@ -1297,11 +1303,11 @@
   #             org.exoplatform.ecm.webui.component.admin.script.UIScriptForm		 #
   ######################################################################################
   -->
-  <UIECMScriptsPopup>
+  <uiECMScriptsPopup>
     <title>
-      <ECMScriptForm>ECM Script Vorm</ECMScriptForm>
+      <ecmScriptForm>ECM Script Vorm</ecmScriptForm>
     </title>
-  </UIECMScriptsPopup>
+  </uiECMScriptsPopup>
   <UICBScriptsPopup>
     <title>
       <CBScriptForm>BC Script Vorm</CBScriptForm>
@@ -1329,7 +1335,7 @@
   -->
   <ECMScriptPopupWindow>
     <title>
-      <ECMScriptForm>Toevoegen/wijzigen script</ECMScriptForm>
+      <ecmScriptForm>Toevoegen/wijzigen script</ecmScriptForm>
     </title>
   </ECMScriptPopupWindow>
   <CBScriptForm>
@@ -1342,7 +1348,7 @@
   </CBScriptForm>
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.script.ECMScriptForm	 #
+  #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm	 #
   ######################################################################################
   -->
   <BCScriptPopupWindow>
@@ -1350,14 +1356,14 @@
       <CBScriptForm>Toevoegen/wijzigen script</CBScriptForm>
     </title>
   </BCScriptPopupWindow>
-  <ECMScriptForm>
+  <ecmScriptForm>
     <label>
       <selectVersion>versies</selectVersion>
       <scriptContent>Script inhoud</scriptContent>
       <scriptName>Script Naam</scriptName>
       <enableVersion>is in Staat Versie</enableVersion>
     </label>
-  </ECMScriptForm>
+  </ecmScriptForm>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyForm			 #
@@ -1648,6 +1654,38 @@
       <access-denied>Toegang geweigerd! Heb je niet de toestemming voor het gebruik van deze functie.</access-denied>
     </msg>
   </UITemplateList>
+  
+  <UIActionsTemplateList>
+    <header>
+      <name>Template Name</name>
+      <action>Action</action>
+    </header>
+    <action>
+      <AddNew>Add Template</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Do you really want to delete?</confirm-delete>
+      <access-denied>Access denied! You haven't got permission to use this function.</access-denied>
+      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
+      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+    </msg>
+  </UIActionsTemplateList>
+  
+  <UIOthersTemplateList>
+    <header>
+      <name>Template Name</name>
+      <action>Action</action>
+    </header>
+    <action>
+      <AddNew>Add Template</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Do you really want to delete?</confirm-delete>
+      <access-denied>Access denied! You haven't got permission to use this function.</access-denied>
+      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
+      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+    </msg>
+  </UIOthersTemplateList>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateForm		 #

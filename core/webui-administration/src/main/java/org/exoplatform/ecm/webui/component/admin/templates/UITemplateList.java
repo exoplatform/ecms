@@ -63,7 +63,7 @@ import org.exoplatform.webui.event.EventListener;
 
 public class UITemplateList extends UIPagingGrid {
 
-  private static String[] NODETYPE_BEAN_FIELD = {"name"} ;
+  private static String[] NODETYPE_BEAN_FIELD = {"label", "name"} ;
   private static String[] NODETYPE_ACTION = {"Edit", "Delete"} ;
   public static final String DOCUMENTS_TEMPLATE_TYPE = "templates";
   public static final String ACTIONS_TEMPLATE_TYPE = "actions";
@@ -98,7 +98,10 @@ public class UITemplateList extends UIPagingGrid {
   static public class EditActionListener extends EventListener<UITemplateList> {
     public void execute(Event<UITemplateList> event) throws Exception {
       UITemplateList nodeTemplateList = event.getSource() ;
-      UITemplateContainer uiTemplateContainer = nodeTemplateList.getParent() ;
+      
+      UITemplatesManager uiManager = nodeTemplateList.getAncestorOfType(UITemplatesManager.class);
+      UITemplateContainer uiTemplateContainer = uiManager.getChildById(uiManager.getSelectedTabId()) ;
+      
       uiTemplateContainer.removeChildById(UITemplatesManager.NEW_TEMPLATE) ;
       uiTemplateContainer.initPopup(UITemplatesManager.EDIT_TEMPLATE) ;
       
@@ -130,7 +133,8 @@ public class UITemplateList extends UIPagingGrid {
   static public class DeleteActionListener extends EventListener<UITemplateList> {
     public void execute(Event<UITemplateList> event) throws Exception {
       UITemplateList nodeTypeList = event.getSource();
-      UITemplatesManager uiTemplatesManager = nodeTypeList.getParent();
+      UITemplatesManager uiTemplatesManager = nodeTypeList.getAncestorOfType(UITemplatesManager.class);
+      
       if (uiTemplatesManager.isEditingTemplate()) {
         UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class) ;
         uiApp.addMessage(new ApplicationMessage("UITemplateList.msg.editing-template", null, ApplicationMessage.WARNING)) ;
@@ -147,34 +151,36 @@ public class UITemplateList extends UIPagingGrid {
         return;
       }
       nodeTypeList.refresh(nodeTypeList.getUIPageIterator().getCurrentPage());
-      event.getRequestContext().addUIComponentToUpdateByAjax(nodeTypeList.getParent());
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiTemplatesManager);
     }
   }
 
   static public class AddNewActionListener extends EventListener<UITemplateList> {
     public void execute(Event<UITemplateList> event) throws Exception {
-      UITemplatesManager uiTemplatesManager = event.getSource().getAncestorOfType(UITemplatesManager.class) ;
+      UITemplatesManager uiTemplatesManager = event.getSource().getAncestorOfType(UITemplatesManager.class) ;      
       UIECMAdminPortlet adminPortlet = uiTemplatesManager.getAncestorOfType(UIECMAdminPortlet.class);
-      UIPopupContainer popupContainer = adminPortlet.getChild(UIPopupContainer.class);
+      UITemplateContainer uiTemplateContainer = uiTemplatesManager.getChildById(uiTemplatesManager.getSelectedTabId());
+      
       UITemplateForm uiTemplateForm = uiTemplatesManager.createUIComponent(UITemplateForm.class, null, null) ;
-      popupContainer.removeChildById(UITemplatesManager.EDIT_TEMPLATE) ;
+      uiTemplateContainer.removeChildById(UITemplatesManager.EDIT_TEMPLATE) ;
       if(uiTemplateForm.getOption().size() == 0) {
         UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class) ;
-        uiApp.addMessage(new ApplicationMessage("UITemplateList.msg.access-denied", null, ApplicationMessage.WARNING)) ;
-        
+        uiApp.addMessage(new ApplicationMessage("UITemplateList.msg.access-denied", null, ApplicationMessage.WARNING)) ;        
         return ;
       }
       uiTemplateForm.refresh();
-      uiTemplatesManager.initPopup(uiTemplateForm, UITemplatesManager.NEW_TEMPLATE) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(adminPortlet) ;
+      uiTemplateContainer.initPopup(UITemplatesManager.NEW_TEMPLATE) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiTemplatesManager) ;
     }
   }
 
   static public class TemplateData {
     private String name ;
+    private String label;
 
     public TemplateData(String temp ) { name = temp ;}
     public String getName() { return name ;}
+    public String getLabel() { return label;}
   }
 
   @Override
@@ -199,9 +205,9 @@ public class UITemplateList extends UIPagingGrid {
         		if(documentNodeTypes.contains(node.getName()))
         			templateData.add(new TemplateData(node.getName()));
         	} else if(filter.equals(ACTIONS_TEMPLATE_TYPE)) {
-        		if(node.isNodeType("exo:action")) templateData.add(new TemplateData(node.getName()));
+        		if(ntManager.getNodeType(node.getName()).isNodeType("exo:action")) templateData.add(new TemplateData(node.getName()));
         	} else {
-        		if(!node.isNodeType("exo:action") && !documentNodeTypes.contains(node.getName())) 
+        		if(!ntManager.getNodeType(node.getName()).isNodeType("exo:action") && !documentNodeTypes.contains(node.getName())) 
         			templateData.add(new TemplateData(node.getName()));
         	}          
         }

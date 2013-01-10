@@ -14,6 +14,9 @@
         <Advanced>Advanced</Advanced>
       </label>
     </tab>
+    <header>
+      <UITemplatesManager>Manage Templates</UITemplatesManager>
+    </header>
     <label>     
       <UITaxonomyManager>Manage Simple Category</UITaxonomyManager>
       <UITaxonomyManagerTrees>Categories</UITaxonomyManagerTrees>
@@ -992,10 +995,13 @@
       <ECMTemplate>Các mẫu ECM</ECMTemplate>
       <CBTemplate>Các mẫu BC</CBTemplate>
       <UICBScripts>Kịch bản với BC</UICBScripts>
-      <UIECMScripts>Kịch bản với ECM</UIECMScripts>
+      <uiECMScripts>Kịch bản với ECM</uiECMScripts>
       <UIDialogTab>Hộp thoại</UIDialogTab>
       <UIViewTab>Khung nhìn</UIViewTab>
       <UITemplateEditForm>Mẫu</UITemplateEditForm>
+      <UITemplateContainer>Documents</UITemplateContainer>
+      <UIActionsTemplateContainer>Actions</UIActionsTemplateContainer>
+      <UIOthersTemplateContainer>Others</UIOthersTemplateContainer>
     </title>
   </UITabPane>
   <!--
@@ -1193,10 +1199,10 @@
   </UITemplateForm>
   <!--
   ################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.view.ECMTempForm			 #
+  #             org.exoplatform.ecm.webui.component.admin.view.ecmTempForm			 #
   ################################################################################
   -->
-  <ECMTempForm>
+  <ecmTempForm>
     <label>
       <version>Lựa chọn phiên bản</version>
       <content>Nội dung</content>
@@ -1204,23 +1210,23 @@
       <homeTemplate>Kiểu mẫu</homeTemplate>
       <enableVersion>Kích hoạt phiên bản</enableVersion>
     </label>
-  </ECMTempForm>
-  <ECMTempFormPopup>
+  </ecmTempForm>
+  <ecmTempFormPopup>
     <title>
-      <ECMTempForm>Thêm/Sửa mẫu khung nhìn</ECMTempForm>
+      <ecmTempForm>Thêm/Sửa mẫu khung nhìn</ecmTempForm>
     </title>
-  </ECMTempFormPopup>
-  <ECMTempFormAdd>
+  </ecmTempFormPopup>
+  <ecmTempFormAdd>
     <title>
-      <ECMTempForm>Thêm mẫu ECM</ECMTempForm>
-      <ECMTempFormAdd>Thêm mẫu ECM</ECMTempFormAdd>
+      <ecmTempForm>Thêm mẫu ECM</ecmTempForm>
+      <ecmTempFormAdd>Thêm mẫu ECM</ecmTempFormAdd>
     </title>
-  </ECMTempFormAdd>
-  <ECMTempFormEdit>
+  </ecmTempFormAdd>
+  <ecmTempFormEdit>
     <title>
-      <ECMTempForm>Sửa mẫu ECM</ECMTempForm>
+      <ecmTempForm>Sửa mẫu ECM</ecmTempForm>
     </title>
-  </ECMTempFormEdit>
+  </ecmTempFormEdit>
   <!--
   ################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.CBTempForm				 #
@@ -1296,11 +1302,11 @@
   #             org.exoplatform.ecm.webui.component.admin.script.UIScriptForm		 #
   ######################################################################################
   -->
-  <UIECMScriptsPopup>
+  <uiECMScriptsPopup>
     <title>
-      <ECMScriptForm>Mẫu ECM Script</ECMScriptForm>
+      <ecmScriptForm>Mẫu ECM Script</ecmScriptForm>
     </title>
-  </UIECMScriptsPopup>
+  </uiECMScriptsPopup>
   <UICBScriptsPopup>
     <title>
       <CBScriptForm>Mẫu BC Script</CBScriptForm>
@@ -1328,7 +1334,7 @@
   -->
   <ECMScriptPopupWindow>
     <title>
-      <ECMScriptForm>Tạo/Sửa script</ECMScriptForm>
+      <ecmScriptForm>Tạo/Sửa script</ecmScriptForm>
     </title>
   </ECMScriptPopupWindow>
   <CBScriptForm>
@@ -1341,7 +1347,7 @@
   </CBScriptForm>
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.script.ECMScriptForm	 #
+  #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm	 #
   ######################################################################################
   -->
   <BCScriptPopupWindow>
@@ -1349,14 +1355,14 @@
       <CBScriptForm>Tạo/Sửa script</CBScriptForm>
     </title>
   </BCScriptPopupWindow>
-  <ECMScriptForm>
+  <ecmScriptForm>
     <label>
       <selectVersion>Các phiên bản</selectVersion>
       <scriptContent>Nội dung kịch bản</scriptContent>
       <scriptName>Tên kịch bản</scriptName>
       <enableVersion>Kích hoạt phiên bản</enableVersion>
     </label>
-  </ECMScriptForm>
+  </ecmScriptForm>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyForm			 #
@@ -1641,6 +1647,38 @@
       <access-denied>Bạn không có quyền truy cập vào chức năng này</access-denied>
     </msg>
   </UITemplateList>
+  
+  <UIActionsTemplateList>
+    <header>
+      <name>Template Name</name>
+      <action>Action</action>
+    </header>
+    <action>
+      <AddNew>Add Template</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Do you really want to delete?</confirm-delete>
+      <access-denied>Access denied! You haven't got permission to use this function.</access-denied>
+      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
+      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+    </msg>
+  </UIActionsTemplateList>
+  
+  <UIOthersTemplateList>
+    <header>
+      <name>Template Name</name>
+      <action>Action</action>
+    </header>
+    <action>
+      <AddNew>Add Template</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Do you really want to delete?</confirm-delete>
+      <access-denied>Access denied! You haven't got permission to use this function.</access-denied>
+      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
+      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+    </msg>
+  </UIOthersTemplateList>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateForm		 #

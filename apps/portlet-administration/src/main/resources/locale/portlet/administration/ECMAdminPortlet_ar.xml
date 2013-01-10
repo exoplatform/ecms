@@ -14,6 +14,9 @@
         <Advanced>Advanced</Advanced>
       </label>
     </tab>
+    <header>
+      <UITemplatesManager>Manage Templates</UITemplatesManager>
+    </header>
     <label>     
       <UITaxonomyManager>Manage Simple Category</UITaxonomyManager>
       <UITaxonomyManagerTrees>Categories</UITaxonomyManagerTrees>
@@ -989,10 +992,13 @@
       <ECMTemplate> قوالب الـ 'ECM' </ECMTemplate>
       <CBTemplate>القوالب 'BC' </CBTemplate>
       <UICBScripts> سكريبتات الـ'BC' </UICBScripts>
-      <UIECMScripts> سكريبتات الـ'ECM' </UIECMScripts>
+      <uiECMScripts> سكريبتات الـ'ECM' </uiECMScripts>
       <UIDialogTab>واجهة المستخدم</UIDialogTab>
       <UIViewTab>المشهد</UIViewTab>
       <UITemplateEditForm>القالب</UITemplateEditForm>
+      <UITemplateContainer>Documents</UITemplateContainer>
+      <UIActionsTemplateContainer>Actions</UIActionsTemplateContainer>
+      <UIOthersTemplateContainer>Others</UIOthersTemplateContainer>
     </title>
   </UITabPane>
   <!--
@@ -1190,10 +1196,10 @@
   </UITemplateForm>
   <!--
   ################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.view.ECMTempForm #
+  #             org.exoplatform.ecm.webui.component.admin.view.ecmTempForm #
   ################################################################################
   -->
-  <ECMTempForm>
+  <ecmTempForm>
     <label>
       <version>إختيار الإصدار</version>
       <content>المحتوى</content>
@@ -1201,23 +1207,23 @@
       <homeTemplate>السماح بالإصدار </homeTemplate>
      <enableVersion>تفعييل الإصدار</enableVersion>
     </label>
-  </ECMTempForm>
-  <ECMTempFormPopup>
+  </ecmTempForm>
+  <ecmTempFormPopup>
     <title>
-      <ECMTempForm>إضافة/تغيير قالب المشهد  Template</ECMTempForm>
+      <ecmTempForm>إضافة/تغيير قالب المشهد  Template</ecmTempForm>
     </title>
-  </ECMTempFormPopup>
-  <ECMTempFormAdd>
+  </ecmTempFormPopup>
+  <ecmTempFormAdd>
     <title>
-      <ECMTempForm>  إضافة قالب 'ECM' </ECMTempForm>
-      <ECMTempFormAdd>إضافة قالب </ECMTempFormAdd>
+      <ecmTempForm>  إضافة قالب 'ECM' </ecmTempForm>
+      <ecmTempFormAdd>إضافة قالب </ecmTempFormAdd>
     </title>
-  </ECMTempFormAdd>
-  <ECMTempFormEdit>
+  </ecmTempFormAdd>
+  <ecmTempFormEdit>
     <title>
-      <ECMTempForm> تغيير القالب 'ECM' </ECMTempForm>
+      <ecmTempForm> تغيير القالب 'ECM' </ecmTempForm>
     </title>
-  </ECMTempFormEdit>
+  </ecmTempFormEdit>
   <!--
   ################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.CBTempForm #
@@ -1293,11 +1299,11 @@
   #             org.exoplatform.ecm.webui.component.admin.script.UIScriptForm #
   ######################################################################################
   -->
-  <UIECMScriptsPopup>
+  <uiECMScriptsPopup>
     <title>
-      <ECMScriptForm>سكريبتات الـ'ECM' </ECMScriptForm>
+      <ecmScriptForm>سكريبتات الـ'ECM' </ecmScriptForm>
     </title>
-  </UIECMScriptsPopup>
+  </uiECMScriptsPopup>
   <UICBScriptsPopup>
     <title>
       <CBScriptForm> سكريبتات الـ'BC' </CBScriptForm>
@@ -1325,7 +1331,7 @@
   -->
   <ECMScriptPopupWindow>
     <title>
-      <ECMScriptForm>إضاف/تغيير سكريبت</ECMScriptForm>
+      <ecmScriptForm>إضاف/تغيير سكريبت</ecmScriptForm>
     </title>
   </ECMScriptPopupWindow>
   <CBScriptForm>
@@ -1338,7 +1344,7 @@
   </CBScriptForm>
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.script.ECMScriptForm #
+  #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm #
   ######################################################################################
   -->
   <BCScriptPopupWindow>
@@ -1346,14 +1352,14 @@
       <CBScriptForm>إضاف/تغيير سكريبت</CBScriptForm>
     </title>
   </BCScriptPopupWindow>
-  <ECMScriptForm>
+  <ecmScriptForm>
     <label>
       <selectVersion>الإصدار</selectVersion>
       <scriptContent>محتوى السكريبت</scriptContent>
       <scriptName>اسم السكريبت</scriptName>
       <enableVersion>مسموح بالإصدار</enableVersion>
     </label>
-  </ECMScriptForm>
+  </ecmScriptForm>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyForm #
@@ -1643,6 +1649,38 @@
       <access-denied>غير مسموح بالدخول!  لم تتحصل على الصلاحية في هذه المهمة!</access-denied>
     </msg>
   </UITemplateList>
+  
+  <UIActionsTemplateList>
+    <header>
+      <name>Template Name</name>
+      <action>Action</action>
+    </header>
+    <action>
+      <AddNew>Add Template</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Do you really want to delete?</confirm-delete>
+      <access-denied>Access denied! You haven't got permission to use this function.</access-denied>
+      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
+      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+    </msg>
+  </UIActionsTemplateList>
+  
+  <UIOthersTemplateList>
+    <header>
+      <name>Template Name</name>
+      <action>Action</action>
+    </header>
+    <action>
+      <AddNew>Add Template</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Do you really want to delete?</confirm-delete>
+      <access-denied>Access denied! You haven't got permission to use this function.</access-denied>
+      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
+      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+    </msg>
+  </UIOthersTemplateList>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateForm #

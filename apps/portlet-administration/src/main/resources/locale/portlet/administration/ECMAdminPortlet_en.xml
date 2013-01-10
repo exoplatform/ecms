@@ -990,10 +990,13 @@
       <ECMTemplate>ECM Templates</ECMTemplate>
       <CBTemplate>BC Templates</CBTemplate>
       <UICBScripts>BC Scripts</UICBScripts>
-      <UIECMScripts>ECM Scripts</UIECMScripts>
+      <uiECMScripts>ECM Scripts</uiECMScripts>
       <UIDialogTab>Dialog</UIDialogTab>
       <UIViewTab>View</UIViewTab>
       <UITemplateEditForm>Template</UITemplateEditForm>
+      <UITemplateContainer>Documents</UITemplateContainer>
+      <UIActionsTemplateContainer>Actions</UIActionsTemplateContainer>
+      <UIOthersTemplateContainer>Others</UIOthersTemplateContainer>
     </title>
   </UITabPane>
   <!--
@@ -1191,10 +1194,10 @@
   </UITemplateForm>
   <!--
   ################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.view.ECMTempForm			 #
+  #             org.exoplatform.ecm.webui.component.admin.view.ecmTempForm			 #
   ################################################################################
   -->
-  <ECMTempForm>
+  <ecmTempForm>
     <label>
       <version>Select Version</version>
       <content>Content</content>
@@ -1202,23 +1205,23 @@
       <homeTemplate>Template Type</homeTemplate>
       <enableVersion>Enabled Version</enableVersion>
     </label>
-  </ECMTempForm>
-  <ECMTempFormPopup>
+  </ecmTempForm>
+  <ecmTempFormPopup>
     <title>
-      <ECMTempForm>Add/Edit View Template</ECMTempForm>
+      <ecmTempForm>Add/Edit View Template</ecmTempForm>
     </title>
-  </ECMTempFormPopup>
-  <ECMTempFormAdd>
+  </ecmTempFormPopup>
+  <ecmTempFormAdd>
     <title>
-      <ECMTempForm>Add ECM Template</ECMTempForm>
-      <ECMTempFormAdd>Add ECM Template</ECMTempFormAdd>
+      <ecmTempForm>Add ECM Template</ecmTempForm>
+      <ecmTempFormAdd>Add ECM Template</ecmTempFormAdd>
     </title>
-  </ECMTempFormAdd>
-  <ECMTempFormEdit>
+  </ecmTempFormAdd>
+  <ecmTempFormEdit>
     <title>
-      <ECMTempForm>Edit ECM Template</ECMTempForm>
+      <ecmTempForm>Edit ECM Template</ecmTempForm>
     </title>
-  </ECMTempFormEdit>
+  </ecmTempFormEdit>
   <!--
   ################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.CBTempForm				 #
@@ -1294,11 +1297,11 @@
   #             org.exoplatform.ecm.webui.component.admin.script.UIScriptForm		 #
   ######################################################################################
   -->
-  <UIECMScriptsPopup>
+  <uiECMScriptsPopup>
     <title>
-      <ECMScriptForm>ECM Script</ECMScriptForm>
+      <ecmScriptForm>ECM Script</ecmScriptForm>
     </title>
-  </UIECMScriptsPopup>
+  </uiECMScriptsPopup>
   <UICBScriptsPopup>
     <title>
       <CBScriptForm>BC Script</CBScriptForm>
@@ -1326,7 +1329,7 @@
   -->
   <ECMScriptPopupWindow>
     <title>
-      <ECMScriptForm>Add/Edit Script</ECMScriptForm>
+      <ecmScriptForm>Add/Edit Script</ecmScriptForm>
     </title>
   </ECMScriptPopupWindow>
   <CBScriptForm>
@@ -1339,7 +1342,7 @@
   </CBScriptForm>
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.script.ECMScriptForm	 #
+  #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm	 #
   ######################################################################################
   -->
   <BCScriptPopupWindow>
@@ -1347,14 +1350,14 @@
       <CBScriptForm>Add/Edit Script</CBScriptForm>
     </title>
   </BCScriptPopupWindow>
-  <ECMScriptForm>
+  <ecmScriptForm>
     <label>
       <selectVersion>Versions</selectVersion>
       <scriptContent>Script Content</scriptContent>
       <scriptName>Script Name</scriptName>
       <enableVersion>is Enabled Version</enableVersion>
     </label>
-  </ECMScriptForm>
+  </ecmScriptForm>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyForm			 #
@@ -1648,6 +1651,38 @@
       <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
     </msg>
   </UITemplateList>
+  
+  <UIActionsTemplateList>
+    <header>
+      <name>Template Name</name>
+      <action>Action</action>
+    </header>
+    <action>
+      <AddNew>Add Template</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Do you really want to delete?</confirm-delete>
+      <access-denied>Access denied! You haven't got permission to use this function.</access-denied>
+      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
+      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+    </msg>
+  </UIActionsTemplateList>
+  
+  <UIOthersTemplateList>
+    <header>
+      <name>Template Name</name>
+      <action>Action</action>
+    </header>
+    <action>
+      <AddNew>Add Template</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Do you really want to delete?</confirm-delete>
+      <access-denied>Access denied! You haven't got permission to use this function.</access-denied>
+      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
+      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+    </msg>
+  </UIOthersTemplateList>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateForm		 #

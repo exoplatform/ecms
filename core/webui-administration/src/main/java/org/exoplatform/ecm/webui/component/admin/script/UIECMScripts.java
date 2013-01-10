@@ -42,8 +42,8 @@ import org.exoplatform.webui.core.model.SelectItemOption;
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
 
 public class UIECMScripts extends UIContainer {
-  public static String SCRIPTLIST_NAME = "ECMScriptList" ;
-  public static String SCRIPTFORM_NAME = "ECMScriptForm" ;
+  public static String SCRIPTLIST_NAME = "ecmScriptList" ;
+  public static String SCRIPTFORM_NAME = "ecmScriptForm" ;
   public static String SCRIPT_PAGE =  "PageIterator" ;
 
   public UIECMScripts() throws Exception {

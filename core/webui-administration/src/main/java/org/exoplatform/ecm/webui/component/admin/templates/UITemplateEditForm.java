@@ -101,7 +101,7 @@ public class UITemplateEditForm extends UIForm {
   static  public class CancelActionListener extends EventListener<UITemplateEditForm> {
     public void execute(Event<UITemplateEditForm> event) throws Exception {    	     
       UITemplatesManager uiManager = event.getSource().getAncestorOfType(UITemplatesManager.class) ;
-      UITemplateContainer uiTemplateContainer = event.getSource().getAncestorOfType(UITemplateContainer.class) ;
+      UITemplateContainer uiTemplateContainer = uiManager.getChildById(uiManager.getSelectedTabId());
       UIPopupWindow uiPopupWindow = uiTemplateContainer.getChildById(UITemplatesManager.EDIT_TEMPLATE) ;
       uiPopupWindow.setRendered(false) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;

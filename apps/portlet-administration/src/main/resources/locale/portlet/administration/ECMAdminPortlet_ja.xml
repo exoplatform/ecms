@@ -14,6 +14,9 @@
         <Advanced>Advanced</Advanced>
       </label>
     </tab>
+    <header>
+      <UITemplatesManager>Manage Templates</UITemplatesManager>
+    </header>
     <label>     
       <UITaxonomyManager>Manage Simple Category</UITaxonomyManager>
       <UITaxonomyManagerTrees>Categories</UITaxonomyManagerTrees>
@@ -989,10 +992,13 @@
       <ECMTemplate>ECMテンプレート</ECMTemplate>
       <CBTemplate>BCテンプレート</CBTemplate>
       <UICBScripts>BCスクリプト</UICBScripts>
-      <UIECMScripts>ECMスクリプト</UIECMScripts>
+      <uiECMScripts>ECMスクリプト</uiECMScripts>
       <UIDialogTab>ダイアログ</UIDialogTab>
       <UIViewTab>ビュー</UIViewTab>
       <UITemplateEditForm>テンプレート</UITemplateEditForm>
+      <UITemplateContainer>Documents</UITemplateContainer>
+      <UIActionsTemplateContainer>Actions</UIActionsTemplateContainer>
+      <UIOthersTemplateContainer>Others</UIOthersTemplateContainer>
     </title>
   </UITabPane>
   <!--
@@ -1190,10 +1196,10 @@
   </UITemplateForm>
   <!--
   ################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.view.ECMTempForm			 #
+  #             org.exoplatform.ecm.webui.component.admin.view.ecmTempForm			 #
   ################################################################################
   -->
-  <ECMTempForm>
+  <ecmTempForm>
     <label>
       <version>バージョンの選択</version>
       <content>コンテンツ</content>
@@ -1201,23 +1207,23 @@
       <homeTemplate>テンプレート タイプ</homeTemplate>
       <enableVersion>バージョンの許可</enableVersion>
     </label>
-  </ECMTempForm>
-  <ECMTempFormPopup>
+  </ecmTempForm>
+  <ecmTempFormPopup>
     <title>
-       <ECMTempForm>ビューテンプレートの追加/編集 </ECMTempForm>
+       <ecmTempForm>ビューテンプレートの追加/編集 </ecmTempForm>
     </title>
-  </ECMTempFormPopup>
-  <ECMTempFormAdd>
+  </ecmTempFormPopup>
+  <ecmTempFormAdd>
     <title>
-      <ECMTempForm>ECMテンプレートの追加</ECMTempForm>
-      <ECMTempFormAdd>ECMテンプレートの追加</ECMTempFormAdd>
+      <ecmTempForm>ECMテンプレートの追加</ecmTempForm>
+      <ecmTempFormAdd>ECMテンプレートの追加</ecmTempFormAdd>
     </title>
-  </ECMTempFormAdd>
-  <ECMTempFormEdit>
+  </ecmTempFormAdd>
+  <ecmTempFormEdit>
     <title>
-      <ECMTempForm>ECMテンプレートの編集</ECMTempForm>
+      <ecmTempForm>ECMテンプレートの編集</ecmTempForm>
     </title>
-  </ECMTempFormEdit>
+  </ecmTempFormEdit>
   <!--
   ################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.CBTempForm				 #
@@ -1293,11 +1299,11 @@
   #             org.exoplatform.ecm.webui.component.admin.script.UIScriptForm		 #
   ######################################################################################
   -->
-  <UIECMScriptsPopup>
+  <uiECMScriptsPopup>
     <title>
-      <ECMScriptForm>ECMスクリプトフォーム</ECMScriptForm>
+      <ecmScriptForm>ECMスクリプトフォーム</ecmScriptForm>
     </title>
-  </UIECMScriptsPopup>
+  </uiECMScriptsPopup>
   <UICBScriptsPopup>
     <title>
       <CBScriptForm>BCスクリプトフォーム</CBScriptForm>
@@ -1325,7 +1331,7 @@
   -->
   <ECMScriptPopupWindow>
     <title>
-      <ECMScriptForm>スクリプトの追加/編集</ECMScriptForm>
+      <ecmScriptForm>スクリプトの追加/編集</ecmScriptForm>
     </title>
   </ECMScriptPopupWindow>
   <CBScriptForm>
@@ -1338,7 +1344,7 @@
   </CBScriptForm>
   <!--
   ######################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.script.ECMScriptForm	 #
+  #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm	 #
   ######################################################################################
   -->
   <BCScriptPopupWindow>
@@ -1346,14 +1352,14 @@
       <CBScriptForm>スクリプトの追加/編集</CBScriptForm>
     </title>
   </BCScriptPopupWindow>
-  <ECMScriptForm>
+  <ecmScriptForm>
     <label>
       <selectVersion>バージョン</selectVersion>
       <scriptContent>スクリプトコンテンツ</scriptContent>
       <scriptName>スクリプト名</scriptName>
       <enableVersion>許可されたバージョン</enableVersion>
     </label>
-  </ECMScriptForm>
+  </ecmScriptForm>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyForm			 #
@@ -1645,6 +1651,38 @@
       <editing-template>アクセスできません。テンプレートの削除と編集はできません。</editing-template>
     </msg>
   </UITemplateList>
+  
+  <UIActionsTemplateList>
+    <header>
+      <name>Template Name</name>
+      <action>Action</action>
+    </header>
+    <action>
+      <AddNew>Add Template</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Do you really want to delete?</confirm-delete>
+      <access-denied>Access denied! You haven't got permission to use this function.</access-denied>
+      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
+      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+    </msg>
+  </UIActionsTemplateList>
+  
+  <UIOthersTemplateList>
+    <header>
+      <name>Template Name</name>
+      <action>Action</action>
+    </header>
+    <action>
+      <AddNew>Add Template</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Do you really want to delete?</confirm-delete>
+      <access-denied>Access denied! You haven't got permission to use this function.</access-denied>
+      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
+      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+    </msg>
+  </UIOthersTemplateList>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateForm		 #

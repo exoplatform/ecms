@@ -360,8 +360,10 @@ public class UITemplateContent extends UIForm implements UISelectable {
   static public class AddPermissionActionListener extends EventListener<UITemplateContent> {
     public void execute(Event<UITemplateContent> event) throws Exception {
       UITemplateContent uiTempContent = event.getSource() ;
+      
       UITemplatesManager uiManager = uiTempContent.getAncestorOfType(UITemplatesManager.class) ;
-      UITemplateContainer uiTemplateCotainer = uiTempContent.getAncestorOfType(UITemplateContainer.class);      
+      UITemplateContainer uiTemplateCotainer = uiManager.getChildById(uiManager.getSelectedTabId());      
+      
       UIViewTemplate uiViewTemp = uiTempContent.getAncestorOfType(UIViewTemplate.class) ; 
       String membership = uiTempContent.getUIStringInput(FIELD_VIEWPERMISSION).getValue() ;
       uiTemplateCotainer.initPopupPermission(uiTempContent.getId(), membership) ;

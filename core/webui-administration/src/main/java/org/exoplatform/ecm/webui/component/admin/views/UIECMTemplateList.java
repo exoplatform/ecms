@@ -59,7 +59,7 @@ import org.exoplatform.webui.event.EventListener;
 public class UIECMTemplateList extends UIPagingGrid {
   private static String[] VIEW_BEAN_FIELD = {"name", "path", "baseVersion"} ;
   private static String[] VIEW_ACTION = {"EditInfo","Delete"} ;
-  public static String ST_ECMTempForm = "ecmTempForm" ;
+  public static String ST_ecmTempForm = "ecmTempForm" ;
   public static String ST_ECMTemp = "ECMTemplate" ;
 
   public UIECMTemplateList() throws Exception {
@@ -124,8 +124,8 @@ public class UIECMTemplateList extends UIPagingGrid {
       }
       UIViewManager uiViewManager = uiECMTempList.getAncestorOfType(UIViewManager.class) ;
       UITemplateContainer uiECMTempContainer = uiViewManager.getChildById(UIECMTemplateList.ST_ECMTemp) ;
-      uiECMTempContainer.removeChildById(UIECMTemplateList.ST_ECMTempForm + "Edit") ;
-      uiECMTempContainer.initPopup(UIECMTemplateList.ST_ECMTempForm, "Add") ;
+      uiECMTempContainer.removeChildById(UIECMTemplateList.ST_ecmTempForm + "Edit") ;
+      uiECMTempContainer.initPopup(UIECMTemplateList.ST_ecmTempForm, "Add") ;
       uiViewManager.setRenderedChild(UIECMTemplateList.ST_ECMTemp) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiECMTempContainer) ;
     }
@@ -167,9 +167,9 @@ public class UIECMTemplateList extends UIPagingGrid {
       String tempPath = event.getRequestContext().getRequestParameter(OBJECTID) ;
       UITemplateContainer uiTempContainer = uiECMTemp.getParent() ;
       UIViewManager uiViewManager = uiECMTemp.getAncestorOfType(UIViewManager.class) ;
-      uiTempContainer.removeChildById(UIECMTemplateList.ST_ECMTempForm + "Add") ;
-      uiTempContainer.initPopup(UIECMTemplateList.ST_ECMTempForm, "Edit") ;
-      UITemplateForm uiTempForm = uiTempContainer.findComponentById(UIECMTemplateList.ST_ECMTempForm) ;
+      uiTempContainer.removeChildById(UIECMTemplateList.ST_ecmTempForm + "Add") ;
+      uiTempContainer.initPopup(UIECMTemplateList.ST_ecmTempForm, "Edit") ;
+      UITemplateForm uiTempForm = uiTempContainer.findComponentById(UIECMTemplateList.ST_ecmTempForm) ;
       uiTempForm.update(tempPath, null) ;
       uiViewManager.setRenderedChild(UIECMTemplateList.ST_ECMTemp) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTempContainer) ;
