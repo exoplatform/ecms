@@ -749,6 +749,19 @@ public class CmsServiceImpl implements CmsService {
               i++;
             }
             node.setProperty(propertyName, convertedCalendarValues);
+          }else if (value instanceof GregorianCalendar){
+            Value value2add = session.getValueFactory().createValue((GregorianCalendar) value);
+            node.setProperty(propertyName, new Value[]{value2add});
+          }else if (value instanceof GregorianCalendar[]){
+            GregorianCalendar[] values = (GregorianCalendar[]) value;
+            Value[] convertedCalendarValues = new Value[values.length];
+            int i = 0;
+            for (GregorianCalendar cvalue : values) {
+              Value value2add = session.getValueFactory().createValue(cvalue);
+              convertedCalendarValues[i] = value2add;
+              i++;
+            }
+            node.setProperty(propertyName, convertedCalendarValues);
           }
         } else {
           if (value instanceof String) {
@@ -1023,6 +1036,23 @@ public class CmsServiceImpl implements CmsService {
             int i = 0;
             for (String stringValue : values) {
               Value value2add = session.getValueFactory().createValue(ISO8601.parse(stringValue));
+              convertedCalendarValues[i] = value2add;
+              i++;
+            }
+            if(!property.getValues().equals(convertedCalendarValues)) {
+              node.setProperty(propertyName, convertedCalendarValues);
+            }
+          }else if (value instanceof GregorianCalendar){
+            Value value2add = session.getValueFactory().createValue((GregorianCalendar)value);
+            if(!property.getValues().equals(new Value[]{value2add})) {
+              node.setProperty(propertyName, new Value[]{value2add});
+            }
+          }else if (value instanceof GregorianCalendar[]){
+            GregorianCalendar[] values = (GregorianCalendar[]) value;
+            Value[] convertedCalendarValues = new Value[values.length];
+            int i = 0;
+            for (GregorianCalendar cvalue : values) {
+              Value value2add = session.getValueFactory().createValue(cvalue);
               convertedCalendarValues[i] = value2add;
               i++;
             }
