@@ -1607,5 +1607,18 @@ ECMUtils.prototype.ajaxRedirect = function(url) {
   window.location.href = url ;
 };
 
+ECMUtils.prototype.onLoadUIAddressBar = function() {
+  // 
+  var uiAddressBar = gj("#UIAddressBar");
+	if (uiAddressBar) {
+	  var detailViewIcon = gj(uiAddressBar).find('td.detailViewIcon');
+		if (detailViewIcon) {
+			var detailViewBtnGroup = gj(detailViewIcon).find('div.btn-group');
+			gj(detailViewIcon).width(gj(detailViewBtnGroup).width());
+		}
+	}
+};
+
+
 eXo.ecm.ECMUtils = new ECMUtils();
 _module.ECMUtils = eXo.ecm.ECMUtils;

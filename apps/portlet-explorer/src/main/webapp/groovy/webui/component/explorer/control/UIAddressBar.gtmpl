@@ -8,7 +8,9 @@
   
   jsmanager.require("SHARED/ecm-utils", "ecmutil").
   addScripts('ecmutil.ECMUtils.onKeyAddressBarPress();').
-  addScripts('ecmutil.ECMUtils.onKeySimpleSearchPress();') ;
+  addScripts('ecmutil.ECMUtils.onKeySimpleSearchPress();').
+  addScripts('ecmutil.ECMUtils.onLoadUIAddressBar();') ;
+
 %>
 <% uiform.begin() %>
 <div class="uiAddressBar uiGrayLightBox">
@@ -23,29 +25,29 @@
 								%>
 								<td class="detailViewIcon">
 								  <div class="btn-group">
-								<%
-								for(viewStyle in uicomponent.getViewList()) { 
-									String label = _ctx.appRes("Views.label." + viewStyle);
-									def viewIcon = "";
-									if(viewStyle.indexOf("-") > 0)
-									  viewIcon = "uiIconEcmsView" + uicomponent.UppercaseFirstLetters(viewStyle.substring(0, viewStyle.indexOf("-")));
-									else viewIcon = "uiIconEcmsView" + uicomponent.UppercaseFirstLetters(viewStyle);
-									def defaultView = "uiIconEcmsViewDefault";
-									def activeClass = "";
-									if(uicomponent.isSelectedView(viewStyle)) {
-										activeClass = "active";
-									}
-									viewCount++;
-									if(viewCount < 8) {
-							%>
+										<%
+										for(viewStyle in uicomponent.getViewList()) { 
+											String label = _ctx.appRes("Views.label." + viewStyle);
+											def viewIcon = "";
+											if(viewStyle.indexOf("-") > 0)
+												viewIcon = "uiIconEcmsView" + uicomponent.UppercaseFirstLetters(viewStyle.substring(0, viewStyle.indexOf("-")));
+											else viewIcon = "uiIconEcmsView" + uicomponent.UppercaseFirstLetters(viewStyle);
+											def defaultView = "uiIconEcmsViewDefault";
+											def activeClass = "";
+											if(uicomponent.isSelectedView(viewStyle)) {
+												activeClass = "active";
+											}
+											viewCount++;
+											if(viewCount < 8) {
+									%>
 								
-										<button onclick="<%=uicomponent.event("ChangeView", viewStyle)%>" class="btn $activeClass" rel="tooltip" data-placement="bottom" title="$label"><i class="$defaultView $viewIcon"></i></button>
+									<button onclick="<%=uicomponent.event("ChangeView", viewStyle)%>" class="btn $activeClass" rel="tooltip" data-placement="bottom" title="$label"><i class="$defaultView $viewIcon"></i></button>
 								
-							<%  } else {
-										extendMap.put(viewStyle, label + ";" + viewIcon);
+										<%  } else {
+											extendMap.put(viewStyle, label + ";" + viewIcon);
+										}
 									}
-								}
-								%>
+									%>
 								   </div>
 								 </td>
 								<%
