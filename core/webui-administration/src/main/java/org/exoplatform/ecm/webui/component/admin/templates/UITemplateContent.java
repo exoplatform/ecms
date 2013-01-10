@@ -26,6 +26,7 @@ import javax.jcr.version.VersionHistory;
 
 import org.exoplatform.ecm.jcr.model.VersionNode;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
+import org.exoplatform.ecm.webui.component.admin.views.UIViewContainer;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -359,14 +360,11 @@ public class UITemplateContent extends UIForm implements UISelectable {
   static public class AddPermissionActionListener extends EventListener<UITemplateContent> {
     public void execute(Event<UITemplateContent> event) throws Exception {
       UITemplateContent uiTempContent = event.getSource() ;
-      UIECMAdminPortlet adminPortlet = uiTempContent.getAncestorOfType(UIECMAdminPortlet.class);
-      UITemplatesManager uiManager = adminPortlet.findFirstComponentOfType(UITemplatesManager.class) ;
-      UIViewTemplate uiViewTemp = uiTempContent.getAncestorOfType(UIViewTemplate.class) ;
-      
-      
-
+      UITemplatesManager uiManager = uiTempContent.getAncestorOfType(UITemplatesManager.class) ;
+      UITemplateContainer uiTemplateCotainer = uiTempContent.getAncestorOfType(UITemplateContainer.class);      
+      UIViewTemplate uiViewTemp = uiTempContent.getAncestorOfType(UIViewTemplate.class) ; 
       String membership = uiTempContent.getUIStringInput(FIELD_VIEWPERMISSION).getValue() ;
-      uiManager.initPopupPermission(uiTempContent.getId(), membership) ;
+      uiTemplateCotainer.initPopupPermission(uiTempContent.getId(), membership) ;
       if(uiTempContent.getId().equals(UIDialogTab.DIALOG_FORM_NAME)) {
         uiViewTemp.setRenderedChild(UIDialogTab.class) ;
       } else if(uiTempContent.getId().equals(UIViewTab.VIEW_FORM_NAME)) {
@@ -374,7 +372,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
       } else if(uiTempContent.getId().equals(UISkinTab.SKIN_FORM_NAME)) {
         uiViewTemp.setRenderedChild(UISkinTab.class) ;
       }
-      event.getRequestContext().addUIComponentToUpdateByAjax(adminPortlet) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
 
@@ -404,14 +402,14 @@ public class UITemplateContent extends UIForm implements UISelectable {
   static public class CancelActionListener extends EventListener<UITemplateContent> {
     public void execute(Event<UITemplateContent> event) throws Exception {
       UITemplateContent uiTemplateContent = event.getSource() ;
-      UIECMAdminPortlet adminPortlet = uiTemplateContent.getAncestorOfType(UIECMAdminPortlet.class);
-      UIPopupContainer popupContainer = adminPortlet.getChild(UIPopupContainer.class);
-      popupContainer.removeChildById(UIDialogTab.DIALOG_FORM_NAME + TEMPLATE_PERMISSION) ;
-      popupContainer.removeChildById(UIViewTab.VIEW_FORM_NAME + TEMPLATE_PERMISSION) ;
-      popupContainer.removeChildById(UISkinTab.SKIN_FORM_NAME + TEMPLATE_PERMISSION) ;
+      UITemplateContainer uiTemplateContainer = uiTemplateContent.getAncestorOfType(UITemplateContainer.class) ;
+      UITemplatesManager uiManager = uiTemplateContent.getAncestorOfType(UITemplatesManager.class) ;
+      uiManager.removeChildById(UIDialogTab.DIALOG_FORM_NAME + TEMPLATE_PERMISSION) ;
+      uiManager.removeChildById(UIViewTab.VIEW_FORM_NAME + TEMPLATE_PERMISSION) ;
+      uiManager.removeChildById(UISkinTab.SKIN_FORM_NAME + TEMPLATE_PERMISSION) ;
       uiTemplateContent.reset() ;
-      popupContainer.removeChild(UIPopupWindow.class) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(adminPortlet) ;
+      uiTemplateContainer.removeChild(UIPopupWindow.class) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
 

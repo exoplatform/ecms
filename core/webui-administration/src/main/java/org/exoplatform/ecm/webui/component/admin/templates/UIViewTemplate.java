@@ -16,8 +16,13 @@
  */
 package org.exoplatform.ecm.webui.component.admin.templates;
 
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
+import org.exoplatform.webui.event.Event;
+import org.exoplatform.webui.event.EventListener;
 
 /**
  * Created by The eXo Platform SARL
@@ -26,16 +31,35 @@ import org.exoplatform.webui.core.UIContainer;
  * Oct 03, 2006
  * 9:43:23 AM
  */
-@ComponentConfig(template = "system:/groovy/webui/core/UITabPane.gtmpl")
+@ComponentConfig(template = "system:/groovy/webui/core/UITabPane_New.gtmpl", 
+events = { @EventConfig(listeners = UIViewTemplate.SelectTabActionListener.class) })
 
 public class UIViewTemplate extends UIContainer {
   private String nodeTypeName_ ;
+  
+  private String selectedTabId = "";
+
+  public String getSelectedTabId()
+  {
+     return selectedTabId;
+  }
+
+  public void setSelectedTab(String renderTabId)
+  {
+     selectedTabId = renderTabId;
+  }
+
+  public void setSelectedTab(int index)
+  {
+     selectedTabId = ((UIComponent)getChild(index - 1)).getId();
+  }
 
   public UIViewTemplate() throws Exception {
     addChild(UITemplateEditForm.class, null, null) ;
-    addChild(UIDialogTab.class, null, null).setRendered(false) ;
-    addChild(UIViewTab.class, null, null).setRendered(false) ;
-    addChild(UISkinTab.class, null, null).setRendered(false);
+    setSelectedTab("UITemplateEditForm");
+    addChild(UIDialogTab.class, null, null);
+    addChild(UIViewTab.class, null, null);
+    addChild(UISkinTab.class, null, null);
   }
 
   public void refresh() throws Exception {
@@ -46,4 +70,18 @@ public class UIViewTemplate extends UIContainer {
   public void setNodeTypeName(String nodeType) { nodeTypeName_ = nodeType ; }
 
   public String getNodeTypeName() { return nodeTypeName_ ; }
+  
+  static public class SelectTabActionListener extends EventListener<UIViewTemplate>
+  {
+     public void execute(Event<UIViewTemplate> event) throws Exception
+     {
+        WebuiRequestContext context = event.getRequestContext();
+        String renderTab = context.getRequestParameter(UIComponent.OBJECTID);
+        if (renderTab == null)
+           return;
+        event.getSource().setSelectedTab(renderTab);
+        context.setResponseComplete(true);
+        context.addUIComponentToUpdateByAjax(event.getSource().getParent());
+     }
+  } 
 }

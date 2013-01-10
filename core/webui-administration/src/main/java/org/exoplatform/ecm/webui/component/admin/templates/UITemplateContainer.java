@@ -51,24 +51,30 @@ public class UITemplateContainer extends UIContainer {
   public void update() throws Exception {
   	UITemplateList uiTemplateList = getChild(UITemplateList.class);
   	uiTemplateList.refresh(uiTemplateList.getUIPageIterator().getCurrentPage());
-  }
-
-  public void initPopupPermission(String membership) throws Exception {
-    removeChildById(UITemplateForm.POPUP_PERMISSION) ;
-    UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, UITemplateForm.POPUP_PERMISSION);
+  }  
+  
+  public void initPopupPermission(String id, String membership) throws Exception {
+    String popupId = id.concat(UITemplateContent.TEMPLATE_PERMISSION);
+    UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, popupId);
     uiPopup.setShowMask(true);
-    uiPopup.setWindowSize(600, 300);
-    UIPermissionSelector uiECMPermission =
-      createUIComponent(UIPermissionSelector.class, null, null) ;
+    uiPopup.setWindowSize(560, 300);
+    UIPermissionSelector uiECMPermission = createUIComponent(UIPermissionSelector.class, null, null);
     uiECMPermission.setSelectedMembership(true);
-    if(membership != null && membership.indexOf(":/") > -1) {
-      String[] arrMember = membership.split(":/") ;
-      uiECMPermission.setCurrentPermission("/" + arrMember[1]) ;
+    if (membership != null && membership.indexOf(":/") > -1) {
+      String[] arrMember = membership.split(":/");
+      uiECMPermission.setCurrentPermission("/" + arrMember[1]);
+    }
+    if (id.equals("AddNew")) {
+      UITemplateForm uiForm = findFirstComponentOfType(UITemplateForm.class);
+      uiECMPermission.setSourceComponent(uiForm, null);
+    } else {
+      UITemplateContent uiTemContent = findComponentById(id);
+      uiECMPermission.setSourceComponent(uiTemContent, null);
     }
     uiPopup.setUIComponent(uiECMPermission);
-    UITemplateForm templateForm = findFirstComponentOfType(UITemplateForm.class) ;    
-    uiECMPermission.setSourceComponent(templateForm, new String[] {UITemplateForm.FIELD_PERMISSION}) ;
-    uiPopup.setShow(true) ;
-    uiPopup.setResizable(true) ;
+    uiPopup.setRendered(true);
+    uiPopup.setShow(true);
+    uiPopup.setResizable(true);
+    return;
   }
 }
