@@ -3225,7 +3225,12 @@
 				  <not-exist-categories>There isn't any category</not-exist-categories>
 				</msg>
 		</UIActionBar>
-			<UIPublicationPanel>
+    <UIPublicationPanel>
+      <action>
+        <Save>#{word.save}</Save>
+        <Reset>Reset</Reset>
+        <Close>#{word.close}</Close>
+      </action>
     <button>
       <Close>Close</Close>
     </button>
