@@ -18,6 +18,7 @@ package org.exoplatform.ecm.webui.component.admin.drives;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
@@ -27,6 +28,7 @@ import javax.jcr.Node;
 import javax.jcr.Session;
 import javax.jcr.nodetype.NodeType;
 
+import org.exoplatform.ecm.webui.comparator.ItemOptionNameComparator;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.form.validator.DrivePermissionValidator;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
@@ -137,6 +139,7 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
       }
     }
     getUIFormSelectBox(FIELD_WORKSPACE).setOptions(workspace);
+    Collections.sort(foldertypeOptions, new ItemOptionNameComparator());
     getUIFormSelectBox(FIELD_ALLOW_CREATE_FOLDERS).setOptions(foldertypeOptions);
     getUIFormSelectBox(FIELD_ALLOW_CREATE_FOLDERS).setMultiple(true);
     if(drive != null) {
@@ -162,7 +165,7 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
       } else {
         folderOptions.addAll(foldertypeOptions);
       }
-
+      Collections.sort(folderOptions, new ItemOptionNameComparator());
       getUIFormSelectBox(FIELD_ALLOW_CREATE_FOLDERS).setOptions(folderOptions);
       getUIFormSelectBox(FIELD_ALLOW_CREATE_FOLDERS).setSelectedValues(selectedFolderTypes);
       getUIStringInput(FIELD_NAME).setEditable(false);
@@ -197,6 +200,7 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
           }
         }
       }
+      Collections.sort(foldertypeOptions, new ItemOptionNameComparator());
       getUIFormSelectBox(FIELD_ALLOW_CREATE_FOLDERS).setOptions(foldertypeOptions);
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
