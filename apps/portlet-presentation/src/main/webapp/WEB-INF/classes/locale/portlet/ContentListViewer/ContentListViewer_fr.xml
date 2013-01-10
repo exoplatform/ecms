@@ -15,7 +15,7 @@
   </UICLVContainer>
   <UIViewerManagementPopupWindow>
     <title>
-      <UICLVConfig>paramètres</UICLVConfig>
+      <UICLVConfig>Paramètres</UICLVConfig>
     </title>
   </UIViewerManagementPopupWindow>
   <UICLVConfig>
@@ -28,7 +28,7 @@
       <UICLVConfigOrderByFormSelectBox>Classement par</UICLVConfigOrderByFormSelectBox>
       <option>
         <exo:title>Titre</exo:title>
-        <exo:dateCreated>Date de Création</exo:dateCreated>
+        <exo:dateCreated>Date de création</exo:dateCreated>
         <exo:dateModified>Date de modification</exo:dateModified>
         <publication:liveDate>Date de publication</publication:liveDate>
         <exo:startEvent>Date de l'événement</exo:startEvent>
