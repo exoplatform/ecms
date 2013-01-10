@@ -59,7 +59,7 @@ import org.exoplatform.webui.event.EventListener;
 public class UIECMTemplateList extends UIPagingGrid {
   private static String[] VIEW_BEAN_FIELD = {"name", "path", "baseVersion"} ;
   private static String[] VIEW_ACTION = {"EditInfo","Delete"} ;
-  public static String ST_ECMTempForm = "ECMTempForm" ;
+  public static String ST_ECMTempForm = "ecmTempForm" ;
   public static String ST_ECMTemp = "ECMTemplate" ;
 
   public UIECMTemplateList() throws Exception {
