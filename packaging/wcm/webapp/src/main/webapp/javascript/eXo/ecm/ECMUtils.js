@@ -957,7 +957,7 @@ function ECMUtils() {
     if (eXo.ecm.ECMUtils.savedLeftContainer && eXo.ecm.ECMUtils.savedResizableMouseX) {
       if (eXo.ecm.ECMUtils.isResizedLeft == true) leftContainer.style.width = eXo.ecm.ECMUtils.savedLeftContainer;
       var documentInfo = document.getElementById("UIDocumentInfo");
-      var listGrid = gj(documentInfo).find("div.UIListGrid:first")[0];
+      var listGrid = gj(documentInfo).find("div.uiListGrid:first")[0];
       if (listGrid) listGrid.style.width = listGrid.offsetWidth + 200 + parseInt(eXo.ecm.ECMUtils.savedResizableMouseX) + "px";
     }
     eXo.ecm.ECMUtils.focusCurrentNodeInTree(id);
@@ -1512,7 +1512,7 @@ function ECMUtils() {
 
   ECMUtils.prototype.updateListGridWidth = function () {
     var documentInfo = document.getElementById("UIDocumentInfo");
-    var listGrid = gj(documentInfo).find("div.UIListGrid:first")[0];
+    var listGrid = gj(documentInfo).find("div.uiListGrid:first")[0];
     if (listGrid) {
       var minimumWidth = eXo.ecm.ECMUtils.getMinimumWidthOfUIListGrid(listGrid);
       listGrid.style.width = (documentInfo.offsetWidth < minimumWidth) ? minimumWidth + 'px' : 'auto';
@@ -1521,13 +1521,13 @@ function ECMUtils() {
 
   ECMUtils.prototype.getMinimumWidthOfUIListGrid = function (listGrid) {
     if (!listGrid) return 0;
-    var titleTable = gj(listGrid).find("div.TitleTable:first")[0];
+    var titleTable = gj(listGrid).find("div.titleTable:first")[0];
     var uiClearFix = gj(listGrid).find("div.ClearFix")[0];
     var chidrenItems = gj(uiClearFix).children("div");
 
     var minimumWidth = 0;
     for (var i = 0; i < chidrenItems.length; i++) {
-      if (chidrenItems[i].className == "LineLeft" || chidrenItems[i].className.indexOf("Column") == 0) {
+      if (chidrenItems[i].className == "lineLeft" || chidrenItems[i].className.indexOf("Column") == 0) {
         minimumWidth += chidrenItems[i].offsetWidth;
       }
     }

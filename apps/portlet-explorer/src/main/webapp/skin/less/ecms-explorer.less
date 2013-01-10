@@ -136,13 +136,148 @@
 		.border-bottom-radius(4px);
 		padding: 4px;
 	}
+}
+
+/*=============================== UIListView ===================================*/
 	
-	.UIListView {
-		padding: 15px;
-		border-top: 0px;
+.uiListView {
+	padding: 15px;
+	border-top: 0px;
+	position: relative;
+}
+
+.uiListGrid {
+	-moz-user-select: none;
+	overflow-y: hidden;
+	overflow-x: auto;
+}
+
+.uiListGrid .titleTable {
+	font-weight: bold;
+	line-height: 25px; 
+	height: 27px;
+  background: #f8f8f8;
+  border: 1px solid #e1e1e1;
+}
+
+.uiListGrid  .columnIcon .BlueDownArrow16x16Icon{
+	background-position: center center;
+}
+
+.uiListGrid .BlueDownArrow16x16Icon{
+	margin: 6px 0px 0px 0px;
+	line-height: 14px;
+	padding-left: 0px !important;
+}
+
+.uiListGrid .OverHeader {
+  background: url('DefaultSkin/background/OverThGridRepeatBg1x19.gif') repeat-x center;
+	font-weight: bold;
+	line-height: 19px; height: 19px;
+}
+
+.uiListGrid .columnName .NodeLabel {
+  margin-right: 10px;
+  overflow: hidden;
+}
+
+.uiListGrid .columnIcon,
+.uiListGrid .columnName,
+.uiListGrid .columnAuditing,
+.uiListGrid .columnVersion,
+.uiListGrid .columnowner,
+.uiListGrid .columndateModified,
+.uiListGrid .columndateCreated,
+.uiListGrid .column {
+	float: left;
+	height: 19px;
+	overflow: hidden;
+  white-space: nowrap;
+  padding-left: 3px;
+  color: #4f4f4f;
+}
+
+.uiListGrid .columnName .NodeLabel div{
+	font-size: 12px;
+}
+
+.uiListGrid .RowView {
+	line-height: 19px;
+	margin-top: 6px;
+	
+	.columnIcon,.columnName,.columnAuditing,.columnVersion,
+	.columndateModified,.columnDatetime,.columndateCreated,
+	.columnOwner,.columnModified,.columnCreated {
+		padding: 2px 0px 2px 3px;
+		border-right: none;
 	}
 }
-/*===============================UIDrivesArea===================================*/
+
+.uiListGrid .FileDrag {
+	background: grey;
+}
+
+.MoveItem .uiListGrid .RowView {
+	margin-top: 0px;
+}
+
+
+
+.uiListGrid .Icon16x16 {
+	float: none;
+	margin: auto;
+	width: 20px;
+	line-height: 16px;
+}
+
+.uiListGrid .LinkSmall {
+	background: url('DefaultSkin/background/LinkSmall.gif') no-repeat right bottom;
+  width: 20px;
+  height: 16px;
+}
+
+.uiListGrid .IconLocked {
+	background: url('DefaultSkin/background/IconLocked.gif') no-repeat right top;
+  width: 20px;
+  height: 16px;
+  float: left;
+}
+
+.uiListGrid .lineLeft {
+	background: url('/ecmexplorer/skin/icons/24x24/DefaultSkin/Split.gif') no-repeat center;
+  width: 3px;
+  height: 19px;
+  float: left;
+  cursor: col-resize;
+  margin: 4px 0px 0px;
+  padding: 0px 2px;
+}
+
+.RowView .lineLeftItem {  
+  width: 3px;
+  height: 19px;
+  float: left;
+  margin: 4px 0px 0px;
+  padding: 0px 2px;
+}
+
+.uiListGrid .ResizeHandle {
+		cursor: col-resize;
+		width: 1px;
+		height: 190px; /* default height */
+		border-right: 1px dashed #000;
+		position: absolute;
+		top: 0;
+		left: 0;
+}
+
+
+.uiListGrid .RowView .ResizeColumn .NodeLabel {
+	width: 95%;
+	overflow: hidden;
+}
+
+/*=============================== UIDrivesArea ===================================*/
 
 .uiDrivesArea {
 	background: @white;

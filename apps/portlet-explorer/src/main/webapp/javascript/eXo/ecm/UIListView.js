@@ -61,7 +61,7 @@ var ListView = function() {
 		var fillOutElement = document.createElement('div');
 		fillOutElement.id = "FillOutElement";
 		
-		var listGrid = gj(actionArea).find("div.UIListGrid:first")[0];
+		var listGrid = gj(actionArea).find("div.uiListGrid:first")[0];
 		if (listGrid) {
 			listGrid.appendChild(fillOutElement);
 		}
@@ -333,7 +333,7 @@ var ListView = function() {
 			
 			mobileElement.style.opacity = 64/100 ;
 			Self.mobileId = mobileElement.getAttribute('id');
-			var coverElement = newElement({className: "UIListGrid"});
+			var coverElement = newElement({className: "uiListGrid"});
 			for(var i in Self.itemsSelected) {
 				if (Array.prototype[i]) continue;
 				var childNode = Self.itemsSelected[i].cloneNode(true);
@@ -508,7 +508,7 @@ var ListView = function() {
 			mask.style.opacity = 17/100;
 			
 			//store position for all item
-			var listGrid = gj(element).find("div.UIListGrid:first")[0];
+			var listGrid = gj(element).find("div.uiListGrid:first")[0];
 			for( var i = 0 ; i < Self.allItems.length; ++i) {
 				Self.allItems[i].posX = Math.abs(eXo.core.Browser.findPosXInContainer(Self.allItems[i], element)) - listGrid.scrollLeft;
 				Self.allItems[i].posY = Math.abs(eXo.core.Browser.findPosYInContainer(Self.allItems[i], element)) - listGrid.scrollTop;
@@ -894,7 +894,7 @@ var ListView = function() {
 	
 	ListView.prototype.setHeight = function() {		
 		var root = document.getElementById("UIDocumentInfo");
-		var view = gj(root).find("div.UIListGrid:first")[0];
+		var view = gj(root).find("div.uiListGrid:first")[0];
 		var workingArea = document.getElementById('UIWorkingArea');
 		var actionBar = document.getElementById('UIActionBar');	
 		var actionBaroffsetHeight = 0;
@@ -903,7 +903,7 @@ var ListView = function() {
 		var documentWorkspace = gj(workingArea).find("div.UIDocumentWorkspace:first")[0];
 		var workingContainer = document.getElementById('UIDocumentContainer');								
 		var page = gj(root).find("div.PageAvailable:first")[0];
-		var title = gj(root).find("div.TitleTable:first")[0];
+		var title = gj(root).find("div.titleTable:first")[0];
 		var sizeBarContainer = gj(workingArea).find("div.UISideBarContainer:first")[0];
 		var resizeSizeBar = gj(workingArea).find("div.ResizeSideBar:first")[0];		
 		var uiResizableBlock = gj(workingArea).find("div.UIResizableBlock:first")[0];
@@ -949,7 +949,7 @@ var ListView = function() {
 		var event = event || window.event;
 		event.cancelBubble = true;
 		
-		var listGrid = gj(obj).parents(".UIListGrid:first")[0];
+		var listGrid = gj(obj).parents(".uiListGrid:first")[0];
 		var rowClazz = gj(listGrid).find("div.RowView,div.Normal");						
     if(!gj.data(Self.columnData)) {
       gj.data(Self.columnData, {}, {});
@@ -976,7 +976,7 @@ var ListView = function() {
 		Self.objResizingHeader = gj(obj).prevAll("div:first")[0];
     Self.objResizeValue = Self.objResizingHeader.offsetWidth;
     Self.currentMouseX = event.clientX;
-    Self.listGrid = gj(Self.objResizingHeader).parents(".UIListGrid:first")[0];				
+    Self.listGrid = gj(Self.objResizingHeader).parents(".uiListGrid:first")[0];				
 		document.onmousemove = eXo.ecm.UIListView.resizeMouseMoveListView;		
 		document.onmouseup = eXo.ecm.UIListView.resizeMouseUpListView;
 	}
@@ -997,7 +997,7 @@ var ListView = function() {
 			var workspace = gj(Self.objResizingHeader).parents(".UIDocumentWorkspace:first")[0];
 			resizeDiv.style.height = workspace.offsetHeight + "px";
 			var documentInfo = document.getElementById('UIDocumentInfo');
-			gj(documentInfo).find("div.UIListGrid:first")[0].appendChild(resizeDiv);	
+			gj(documentInfo).find("div.uiListGrid:first")[0].appendChild(resizeDiv);	
 		}
 		var X_Resize = eXo.core.Browser.findMouseRelativeX(Self.listGrid,event);				
 		eXo.core.Browser.setPositionInContainer(Self.listGrid, resizeDiv, X_Resize, 0);
@@ -1028,7 +1028,7 @@ var ListView = function() {
     if (Self.listGrid && resizeDiv) 
       Self.listGrid.removeChild(resizeDiv);
 			
-		//update width of UIListGrid
+		//update width of uiListGrid
 		eXo.ecm.ECMUtils.updateListGridWidth();	
 		
 		document.onmousemove = null;
@@ -1040,7 +1040,7 @@ var ListView = function() {
 	ListView.prototype.loadEffectedWidthColumn = function() {
 		var objResizeClazz = eXo.ecm.UIListView.objRowClazz;
 		var root = document.getElementById("UIDocumentWorkspace");
-		var listGrid = gj(root).find("div.UIListGrid:first")[0];
+		var listGrid = gj(root).find("div.uiListGrid:first")[0];
 		root.style.overflow = "auto";
 		var rightContainer = gj(listGrid).parents(".RightContainer:first")[0];
 		

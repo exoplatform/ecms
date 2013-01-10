@@ -36,6 +36,7 @@ import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 import javax.jcr.query.Row;
+import org.exoplatform.ecm.jcr.model.Preference;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
@@ -327,12 +328,12 @@ public class UISearchResult extends UIContainer {
       if (objectId.equals("type")) {
         uiSearchResult.pageList.setSortByField(Utils.JCR_PRIMARYTYPE);
         comparator.setSortType(SearchComparator.SORT_TYPE);
-        iconType = "BlueDownArrow";
+        iconType = Preference.BLUE_DOWN_ARROW;
         iconScore = "";
       } else if (objectId.equals("score")) {
         uiSearchResult.pageList.setSortByField(Utils.JCR_SCORE);
         comparator.setSortType(SearchComparator.SORT_SCORE);
-        iconScore = "BlueDownArrow";
+        iconScore = Preference.BLUE_DOWN_ARROW;
         iconType = "";
       }
       comparator.setOrderType(SearchComparator.ASC);
@@ -351,12 +352,12 @@ public class UISearchResult extends UIContainer {
       if (objectId.equals("type")) {
         uiSearchResult.pageList.setSortByField(Utils.JCR_PRIMARYTYPE);
         comparator.setSortType(SearchComparator.SORT_TYPE);
-        iconType = "BlueUpArrow";
+        iconType = Preference.BLUE_UP_ARROW;
         iconScore = "";
       } else if (objectId.equals("score")) {
         uiSearchResult.pageList.setSortByField(Utils.JCR_SCORE);
         comparator.setSortType(SearchComparator.SORT_SCORE);
-        iconScore = "BlueUpArrow";
+        iconScore = Preference.BLUE_UP_ARROW;
         iconType = "";
       }
       comparator.setOrderType(SearchComparator.DESC);

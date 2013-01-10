@@ -77,99 +77,104 @@
   String[] arrColumns = ["exo:dateCreated;123px", "exo:owner;123px"];
 %>
 <div id="$componentId">
-  <div id="${componentId}-$viewComponentId" class="UIListView">
-    <div class="UIListGrid">
-      <div class="TitleTable">
-      <div class="ClearFix">
+  <div id="${componentId}-$viewComponentId" class="uiListView">
+    <div class="uiListGrid">
+			<div class="uiBox noRounded">
+      <div class="titleTable clearfix">
         <%
           String selectedSortType = uicomponent.getTypeSort() ;   
           String sortOrder = uicomponent.getSortOrder();
           String typeActionLink = "";
-          if (sortOrder.equals("BlueDownArrow")) {
+          if (sortOrder.equals("DownMini")) {
             typeActionLink = "Descending;";
           } else {
             typeActionLink = "Ascending;";
           }
         %>
-        <div class="ColumnIcon" style="width: 20px;" onclick="<%= uicomponent.event("Sort", typeActionLink + "Type")%>" style="cursor:pointer;">
+        <div class="columnIcon" style="width: 20px;" onclick="<%= uicomponent.event("Sort", typeActionLink + "Type")%>" style="cursor:pointer;">
           <%
             if (selectedSortType.equals("Type")) {
               %>
-                <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-right: 20px; cursor: pointer;"><span></span></div>
+								<i class="uiIconArrow${sortOrder}"></i>
               <%
             }
           %>
         </div>
-        <div class="LineLeft" style="cursor:default;"><span></span></div>
+        <div class="lineLeft" style="cursor:default;"><span></span></div>
 <!-- Title -->
-        <div class="ColumnName" style="width: 200px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "Alphabetic")%>">
+        <div class="columnName" style="width: 200px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "Alphabetic")%>">
           <%
             if (selectedSortType.equals("Alphabetic")) {
               %>
-                <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;"><%=_ctx.appRes("WCMContentView.header.title")%></div>
+                <i class="uiIconArrow${sortOrder} pull-right"></i>
+								<%=_ctx.appRes("WCMContentView.header.title")%>
               <%
             } else { 
               %><%=_ctx.appRes("WCMContentView.header.title")%><%
             } 
           %>
         </div>
-        <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
+        <div class="lineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
         onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
 <!-- Date created -->
-        <div class="ColumnDatetime Column" style="width: 93px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "exo:dateCreated")%>">
+        <div class="columnDatetime column" style="width: 93px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "exo:dateCreated")%>">
           <%
             if (selectedSortType.equals("exo:dateCreated")) {
               %>
-                <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;"><%=_ctx.appRes("WCMContentView.header.date")%></div>
+                <i class="uiIconArrow${sortOrder} pull-right"></i>
+								<%=_ctx.appRes("WCMContentView.header.date")%>
               <%
             } else { 
               %><%=_ctx.appRes("WCMContentView.header.date")%><%
             } 
           %>
         </div>
-        <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
+        <div class="lineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
         onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
 <!-- Author --> 
-        <div class="ColumnAuthor Column" style="width: 93px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "exo:owner")%>">
+        <div class="columnAuthor column" style="width: 93px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "exo:owner")%>">
           <%
             if (selectedSortType.equals("exo:owner")) {
               %>
-                <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;"><%=_ctx.appRes("WCMContentView.header.author")%></div>
+                <i class="uiIconArrow${sortOrder} pull-right"></i>
+								<%=_ctx.appRes("WCMContentView.header.author")%>
               <%
             } else { 
               %><%=_ctx.appRes("WCMContentView.header.author")%><%
             } 
           %>
         </div>
-        <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
+        <div class="lineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
         onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
 <!-- Last User --> 
-        <div class="ColumnLastUser Column" style="width: 93px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "publication:lastUser")%>">
+        <div class="columnLastUser column" style="width: 93px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "publication:lastUser")%>">
           <%
             if (selectedSortType.equals("publication:lastUser")) {
               %>
-                <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;"><%=_ctx.appRes("WCMContentView.header.lastUser")%></div>
+                <i class="uiIconArrow${sortOrder} pull-right"></i>
+								<%=_ctx.appRes("WCMContentView.header.lastUser")%>
               <%
             } else { 
               %><%=_ctx.appRes("WCMContentView.header.lastUser")%><%
             } 
           %>
         </div>
-        <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
+        <div class="lineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
         onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
 <!-- Status -->
-        <div class="ColumnStatus Column" style="width: 93px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "publication:currentState")%>">
+        <div class="columnStatus column" style="width: 93px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "publication:currentState")%>">
           <%
             if (selectedSortType.equals("publication:currentState")) {
               %>
-                <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;"><%=_ctx.appRes("WCMContentView.header.status")%></div>
+                <i class="uiIconArrow${sortOrder} pull-right"></i>
+								<%=_ctx.appRes("WCMContentView.header.status")%>
               <%
             } else { 
               %><%=_ctx.appRes("WCMContentView.header.status")%><%
             } 
           %>
         </div>
-        <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
+        <div class="lineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
         </div>
         <div style="position: relative; top: 0px; left: 0px; width: 0px; height: 0px">
           <div class="Mask" style="position: absolute; top: 0px; left: 0px; width: 0px; height: 0px"></div>
@@ -206,7 +211,6 @@
               </div>
             </div>
           </div>
-        </div>
       </div> <!-- End TitleTable -->
       
       <%        
@@ -345,7 +349,7 @@
                  ondblclick="$actionLink" isFile="<%=data.isNodeType("nt:file")%>" 
                  objectId="<%=org.exoplatform.services.cms.impl.Utils.getObjectId(nodePath)%>" 
                  >$strActs
-              <div class="ColumnIcon" style="padding: 2px 0px; border-right: none; width: 24px;">
+              <div class="columnIcon" style="padding: 2px 0px; border-right: none; width: 24px;">
                 <div rel="tooltip" data-placement="bottom" title="$name" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(data, "16x16Icon")%>">
                   <%if(isLocked) {%>
                     <div class="IconLocked"></div>
@@ -357,47 +361,48 @@
                   %>
                 </div>
               </div>
-              <div class="LineLeftItem"><span></span></div>
+              <div class="lineLeftItem"><span></span></div>
 <!-- Title-->
-              <div class="ColumnName" style="width: 200px;">
+              <div class="columnName" style="width: 200px;">
                 <div class="NodeLabel">
                   <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;$hiddenStyle" rel="tooltip" data-placement="bottom" title="$title $lockedLabel">$title</div>
                 </div>
               </div>
-              <div class="LineLeftItem"><span></span></div>
+              <div class="lineLeftItem"><span></span></div>
 <!-- Date created -->
-              <div class="ColumnDatetime Column" style="width: 93px; padding-left:3px">
+              <div class="columnDatetime column" style="width: 93px; padding-left:3px">
                 <div class="NodeLabel">
                   <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" rel="tooltip" data-placement="bottom" title="<%= datetime %>"><%= datetime %></div>
                 </div>
               </div>
-              <div class="LineLeftItem"><span></span></div>
+              <div class="lineLeftItem"><span></span></div>
 <!-- Author -->
-              <div class="ColumnAuthor Column" style="width: 93px; padding-left:3px">
+              <div class="columnAuthor column" style="width: 93px; padding-left:3px">
                 <div class="NodeLabel">
                   <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" rel="tooltip" data-placement="bottom" title="<%= author %>"><%= author %></div>
                 </div>
               </div>
-              <div class="LineLeftItem"><span></span></div>
+              <div class="lineLeftItem"><span></span></div>
 <!-- Last User -->
-              <div class="ColumnLastUser Column" style="width: 93px; padding-left:3px">
+              <div class="columnLastUser column" style="width: 93px; padding-left:3px">
                 <div class="NodeLabel">
                   <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" rel="tooltip" data-placement="bottom" title="<%= lastUser %>"><%= lastUser %></div>
                 </div>
               </div>
-              <div class="LineLeftItem"><span></span></div>
+              <div class="lineLeftItem"><span></span></div>
 <!-- Status-->
-              <div class="ColumnStatus Column" style="width: 93px; padding-left:3px">
+              <div class="columnStatus column" style="width: 93px; padding-left:3px">
                 <div class="NodeLabel">
                   <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" rel="tooltip" data-placement="bottom" title="status"><%=_ctx.appRes("UIPublicationPanel.status." + status) %></div>
                 </div>
               </div>
-              <div class="LineLeftItem"><span></span></div>
+              <div class="lineLeftItem"><span></span></div>
               
             </div>
           <%
         }
       %>
+    </div>
     </div>
     <% 
       //re-initialize action

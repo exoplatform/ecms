@@ -51,10 +51,10 @@
 	String[] arrColumns = ["exo:owner;95px","exo:dateModified;123px","exo:dateCreated;121px"];
 %>
 <div id="$componentId">
-	<div id="${componentId}-$viewComponentId" class="UIListView">	
-		<div class="UIListGrid">
-				<div class="TitleTable">
-					<div class="ClearFix">
+	<div id="${componentId}-$viewComponentId" class="uiListView">	
+		<div class="uiListGrid">
+				<div class="titleTable clearfix">
+					
 			    <%
 			      String selectedSortType = uicomponent.getTypeSort();
 			      String sortOrder = uicomponent.getSortOrder();
@@ -66,51 +66,49 @@
 		        }
 			    %>
 			    
-				    <div class="ColumnIcon" style="width: 20px;" onclick="<%= uicomponent.event("Sort", typeActionLink + "Type")%>" style="cursor:pointer;" >
+				    <div class="columnIcon" style="width: 20px;" onclick="<%= uicomponent.event("Sort", typeActionLink + "Type")%>" style="cursor:pointer;" >
 			        <%
 			          if (selectedSortType.equals("Type")) {
 			        %>
-				        <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-right: 20px; cursor:pointer;">
-				          <span></span>
-				        </div>
+				        <i class="uiIconArrow${sortOrder}"></i>
 				      <%}%>
 				    </div>
-				    <div class="LineLeft"><span></span></div>
-				    <div class="ColumnName" style="width: 125px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "Alphabetic")%>">
+				    <div class="lineLeft"><span></span></div>
+				    <div class="columnName" style="width: 125px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "Alphabetic")%>">
 			        <%
 			          if (selectedSortType.equals("Alphabetic")) {
 			        %>
-				        <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;">
-				        	<%=_ctx.appRes("ListView.view.label.name")%>
-				        </div>
+				        <i class="uiIconArrow${sortOrder} pull-right"></i>
+								<%=_ctx.appRes("ListView.view.label.name")%>
+				        
 				      <%} else { %>
 				        <%=_ctx.appRes("ListView.view.label.name")%>
 				      <%} %>
 				    </div>
 					<!--
-					<div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);" 
+					<div class="lineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);" 
 					                      onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
 				    <div class="ColumnAuditing" style="border: none; width: 105px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "Auditing")%>">
 			        <%
 			          if (selectedSortType.equals("Auditing")) {
 			        %>
-				        <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;">
-				        	<%=_ctx.appRes("ListView.view.label.auditing")%>
-				        </div>
+				        <i class="uiIconArrow${sortOrder} pull-right"></i>
+								<%=_ctx.appRes("ListView.view.label.auditing")%>
+				        
 				      <%} else { %>
 				        <%=_ctx.appRes("ListView.view.label.auditing")%>
 				      <%} %>
 				    </div>
 					-->
-					<div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);" 
+					<div class="lineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);" 
 					                      onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
-				    <div class="ColumnVersion" style="width: 95px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "Versionable")%>">
+				    <div class="columnVersion" style="width: 95px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "Versionable")%>">
 			        <%
 			          if (selectedSortType.equals("Versionable")) {
 			        %>
-				        <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;">
-				        	<%=_ctx.appRes("ListView.view.label.versionable")%>
-				        </div>
+				        <i class="uiIconArrow${sortOrder} pull-right"></i>
+								<%=_ctx.appRes("ListView.view.label.versionable")%>
+				        
 				      <%} else { %>
 				        <%=_ctx.appRes("ListView.view.label.versionable")%>
 				      <%} %>
@@ -119,15 +117,15 @@
 			      for(String sortType : arrColumns) {
 							def arrColumn = sortType.split(";");
 			    %>
-						<div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
+						<div class="lineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
 						                      onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
-              <div class="Column<%=uicomponent.getPropertyNameWithoutNamespace(arrColumn[0])%>" style="width: ${arrColumn[1]}" onclick="<%= uicomponent.event("Sort", typeActionLink + arrColumn[0])%>">
+              <div class="column<%=uicomponent.getPropertyNameWithoutNamespace(arrColumn[0])%>" style="width: ${arrColumn[1]}" onclick="<%= uicomponent.event("Sort", typeActionLink + arrColumn[0])%>">
 			       <%  
 			       if (arrColumn[0].equals(selectedSortType)) {
              %>
-				        <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;">
-				        	<%=_ctx.appRes("ListView.view.label." + arrColumn[0].replace(":","_"))%>
-				        </div>
+				        <i class="uiIconArrow${sortOrder} pull-right"></i>
+								<%=_ctx.appRes("ListView.view.label." + arrColumn[0].replace(":","_"))%>
+				        
 			       <%} else { %>
 			         <%=_ctx.appRes("ListView.view.label." + arrColumn[0].replace(":","_"))%>
 			       <%} %>
@@ -135,7 +133,7 @@
 			    <%
 		  	    }
 			    %>
-						<div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
+						<div class="lineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
 						                      onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
 		      </a>
 			    </div>
@@ -184,7 +182,6 @@
 									 </div>	
 								 </div>
 						</div>
-					</div>
 				</div>
       <%      	
       	String portalName = uicomponent.getPortalName() ;
@@ -289,7 +286,7 @@
 		              objectId="<%=org.exoplatform.services.cms.impl.Utils.getObjectId(nodePath)%>" ondblclick="$actionLink"
 	              isFile="<%=data.isNodeType("nt:file")%>">
 			      $strActs
-		        <div class="ColumnIcon" style="padding: 2px 0px; 	border-right: none; width: 30px;">
+		        <div class="columnIcon" style="padding: 2px 0px; 	border-right: none; width: 30px;">
 						  <div rel="tooltip" data-placement="bottom" title="$title" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(data, "16x16Icon")%>">
                 <%if(isLocked) {%>
                   <div class="IconLocked"></div>
@@ -299,13 +296,13 @@
 						    <%}%>
 						  </div>
 		        </div>
-		        <div class="ColumnName" style="width: 125px;">
+		        <div class="columnName" style="width: 125px;">
 							<div class="NodeLabel">
 								<div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;$hiddenStyle;" rel="tooltip" data-placement="bottom"  title="<%=title%> $lockedLabel"><%=title%></div>
 		 					</div>
 		        </div>
 		        <!--
-						<div class="ColumnAuditing" style="border: none; width: 108px;">
+						<div class="columnAuditing" style="border: none; width: 108px;">
 		           <%= Utils.isAuditable(data)%>
 		           <% if (Utils.isAuditable(data)&& uicomponent.hasAuditHistory(data)) 
 		                println "("+ uicomponent.getNumAuditHistory(data)+")";
@@ -314,7 +311,7 @@
 		            %>
 		        </div>
 						-->
-		        <div class="ColumnVersion" style="width: 98px;">
+		        <div class="columnVersion" style="width: 98px;">
 			         	<%=Utils.isVersionable(data)%>
 			          <%
 			            if(Utils.isVersionable(data) && !uicomponent.getVersionName(data).equals("jcr:rootVersion")) {
@@ -328,7 +325,7 @@
 								def arrColumnValue = uicomponent.getPropertyValue(data, arrColumn[0]);
 								if ("exo:owner".equals(arrColumn[0]) && "__system".equals(arrColumnValue) ) arrColumnValue = ""; 
 						%>
-			        <div class="Column<%=uicomponent.getPropertyNameWithoutNamespace(arrColumn[0])%>" style="width: ${arrColumn[1]}">
+			        <div class="column<%=uicomponent.getPropertyNameWithoutNamespace(arrColumn[0])%>" style="width: ${arrColumn[1]}">
 				        <%=arrColumnValue%>
 			        </div>
 		        <%}%>
