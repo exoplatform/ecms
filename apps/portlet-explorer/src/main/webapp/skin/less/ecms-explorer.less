@@ -150,15 +150,31 @@
 	-moz-user-select: none;
 	overflow-y: hidden;
 	overflow-x: auto;
+	
+	.titleTable {
+		font-weight: bold;
+		height: 34px;
+		background: #f0f0f0;
+		border-bottom: 1px solid #cfcfcf;
+	}
+	
+	.lineLeft {
+		border-left: 1px solid #cfcfcf;
+		width: 2px;
+		height: 34px;
+		float: left;
+		cursor: col-resize;
+	}
+	
+	.odd {
+		background: #f9f9f9;
+	}
+	
+	.even {
+		background: #fff;
+	}
 }
 
-.uiListGrid .titleTable {
-	font-weight: bold;
-	line-height: 25px; 
-	height: 27px;
-  background: #f8f8f8;
-  border: 1px solid #e1e1e1;
-}
 
 .uiListGrid  .columnIcon .BlueDownArrow16x16Icon{
 	background-position: center center;
@@ -181,35 +197,56 @@
   overflow: hidden;
 }
 
-.uiListGrid .columnIcon,
-.uiListGrid .columnName,
-.uiListGrid .columnAuditing,
-.uiListGrid .columnVersion,
-.uiListGrid .columnowner,
-.uiListGrid .columndateModified,
-.uiListGrid .columndateCreated,
-.uiListGrid .column {
-	float: left;
-	height: 19px;
-	overflow: hidden;
-  white-space: nowrap;
-  padding-left: 3px;
-  color: #4f4f4f;
+.uiListGrid { 
+	.columnIcon,
+	.columnName,
+	.columnAuditing,
+	.columnVersion,
+	.columnowner,
+	.columndateModified,
+	.columndateCreated,
+	.column {
+		float: left;
+		height: 20px;
+		overflow: hidden;
+		white-space: nowrap;
+		padding: 7px 0px 7px 12px;
+		color: #4f4f4f;
+	}
+	
+	.columnIcon {
+		padding: 7px;
+		text-align: center;
+	}
 }
 
 .uiListGrid .columnName .NodeLabel div{
 	font-size: 12px;
 }
 
-.uiListGrid .RowView {
-	line-height: 19px;
-	margin-top: 6px;
+.uiListGrid .rowView {
+	line-height: 20px;
+	
+	&:hover {
+		background: #e8e8e8;
+	}
 	
 	.columnIcon,.columnName,.columnAuditing,.columnVersion,
 	.columndateModified,.columnDatetime,.columndateCreated,
 	.columnOwner,.columnModified,.columnCreated {
-		padding: 2px 0px 2px 3px;
-		border-right: none;
+		padding: 7px 0px 7px 12px;
+	}
+	
+	.columnIcon {
+		padding: 7px;
+		text-align: center;
+	}
+	
+	.lineLeftItem {  
+		width: 2px;
+		height: 34px;
+		float: left;
+		border-left: 1px solid #cfcfcf;
 	}
 }
 
@@ -217,11 +254,9 @@
 	background: grey;
 }
 
-.MoveItem .uiListGrid .RowView {
+.MoveItem .uiListGrid .rowView {
 	margin-top: 0px;
 }
-
-
 
 .uiListGrid .Icon16x16 {
 	float: none;
@@ -243,24 +278,6 @@
   float: left;
 }
 
-.uiListGrid .lineLeft {
-	background: url('/ecmexplorer/skin/icons/24x24/DefaultSkin/Split.gif') no-repeat center;
-  width: 3px;
-  height: 19px;
-  float: left;
-  cursor: col-resize;
-  margin: 4px 0px 0px;
-  padding: 0px 2px;
-}
-
-.RowView .lineLeftItem {  
-  width: 3px;
-  height: 19px;
-  float: left;
-  margin: 4px 0px 0px;
-  padding: 0px 2px;
-}
-
 .uiListGrid .ResizeHandle {
 		cursor: col-resize;
 		width: 1px;
@@ -272,7 +289,7 @@
 }
 
 
-.uiListGrid .RowView .ResizeColumn .NodeLabel {
+.uiListGrid .rowView .ResizeColumn .NodeLabel {
 	width: 95%;
 	overflow: hidden;
 }

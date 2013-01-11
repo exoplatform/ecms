@@ -53,6 +53,7 @@
 <div id="$componentId">
 	<div id="${componentId}-$viewComponentId" class="uiListView">	
 		<div class="uiListGrid">
+			<div class="uiBox noRounded">
 				<div class="titleTable clearfix">
 					
 			    <%
@@ -70,7 +71,7 @@
 			        <%
 			          if (selectedSortType.equals("Type")) {
 			        %>
-				        <i class="uiIconArrow${sortOrder}"></i>
+				        <i class="uiIconArrow${sortOrder} uiIconLightGrey"></i>
 				      <%}%>
 				    </div>
 				    <div class="lineLeft"><span></span></div>
@@ -78,7 +79,7 @@
 			        <%
 			          if (selectedSortType.equals("Alphabetic")) {
 			        %>
-				        <i class="uiIconArrow${sortOrder} pull-right"></i>
+				        <i class="uiIconArrow${sortOrder} uiIconLightGrey pull-right"></i>
 								<%=_ctx.appRes("ListView.view.label.name")%>
 				        
 				      <%} else { %>
@@ -92,7 +93,7 @@
 			        <%
 			          if (selectedSortType.equals("Auditing")) {
 			        %>
-				        <i class="uiIconArrow${sortOrder} pull-right"></i>
+				        <i class="uiIconArrow${sortOrder} uiIconLightGrey pull-right"></i>
 								<%=_ctx.appRes("ListView.view.label.auditing")%>
 				        
 				      <%} else { %>
@@ -102,11 +103,11 @@
 					-->
 					<div class="lineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);" 
 					                      onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
-				    <div class="columnVersion" style="width: 95px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "Versionable")%>">
+				    <div class="columnVersion" style="width: 100px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "Versionable")%>">
 			        <%
 			          if (selectedSortType.equals("Versionable")) {
 			        %>
-				        <i class="uiIconArrow${sortOrder} pull-right"></i>
+				        <i class="uiIconArrow${sortOrder} uiIconLightGrey pull-right"></i>
 								<%=_ctx.appRes("ListView.view.label.versionable")%>
 				        
 				      <%} else { %>
@@ -123,7 +124,7 @@
 			       <%  
 			       if (arrColumn[0].equals(selectedSortType)) {
              %>
-				        <i class="uiIconArrow${sortOrder} pull-right"></i>
+				        <i class="uiIconArrow${sortOrder} uiIconLightGrey pull-right"></i>
 								<%=_ctx.appRes("ListView.view.label." + arrColumn[0].replace(":","_"))%>
 				        
 			       <%} else { %>
@@ -190,6 +191,7 @@
       	String restContextName = Utils.getRestContextName(portalName);
       	def permlink;
         int i = 0;
+				String oddEvenClassRow = "odd";
         for (data in uicomponent.getChildrenList()) {
     		  try {
 						data.getSession().getItem(data.getPath());
@@ -281,12 +283,12 @@
 	        if (Utils.isTrashHomeNode(data)) isTrashHome = "true"
 	        if (!uicomponent.isSystemWorkspace()) rightClickMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(nodePath), uiWorkingArea.getActionsExtensionList(data)) ;	          
 	      %>
-		      <div <%= uicomponent.getDragAndDropEvents(data) %> <%=rightClickMenu%> class="RowView Normal ClearFix" trashHome="$isTrashHome" locked="$isLocked" 
+		      <div <%= uicomponent.getDragAndDropEvents(data) %> <%=rightClickMenu%> class="rowView $oddEvenClassRow clearfix" trashHome="$isTrashHome" locked="$isLocked" 
 		            mediaType="$isMediaType" removeFavourite="$isFavourite" inTrash="$isInTrash" workspacename="$preferenceWS" 
 		              objectId="<%=org.exoplatform.services.cms.impl.Utils.getObjectId(nodePath)%>" ondblclick="$actionLink"
 	              isFile="<%=data.isNodeType("nt:file")%>">
 			      $strActs
-		        <div class="columnIcon" style="padding: 2px 0px; 	border-right: none; width: 30px;">
+		        <div class="columnIcon" style="width: 20px;">
 						  <div rel="tooltip" data-placement="bottom" title="$title" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(data, "16x16Icon")%>">
                 <%if(isLocked) {%>
                   <div class="IconLocked"></div>
@@ -296,11 +298,16 @@
 						    <%}%>
 						  </div>
 		        </div>
+						
+						<div class="lineLeftItem"><span></span></div>
+						
 		        <div class="columnName" style="width: 125px;">
 							<div class="NodeLabel">
 								<div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;$hiddenStyle;" rel="tooltip" data-placement="bottom"  title="<%=title%> $lockedLabel"><%=title%></div>
 		 					</div>
 		        </div>
+						
+						<div class="lineLeftItem"><span></span></div>
 		        <!--
 						<div class="columnAuditing" style="border: none; width: 108px;">
 		           <%= Utils.isAuditable(data)%>
@@ -311,7 +318,7 @@
 		            %>
 		        </div>
 						-->
-		        <div class="columnVersion" style="width: 98px;">
+		        <div class="columnVersion" style="width: 100px;">
 			         	<%=Utils.isVersionable(data)%>
 			          <%
 			            if(Utils.isVersionable(data) && !uicomponent.getVersionName(data).equals("jcr:rootVersion")) {
@@ -319,6 +326,8 @@
 			            }
 			          %>
 		        </div>
+						
+						<div class="lineLeftItem"><span></span></div>
 						<%
 							for(column in arrColumns) {
 								def arrColumn = column.split(";");
@@ -328,13 +337,18 @@
 			        <div class="column<%=uicomponent.getPropertyNameWithoutNamespace(arrColumn[0])%>" style="width: ${arrColumn[1]}">
 				        <%=arrColumnValue%>
 			        </div>
+							<div class="lineLeftItem"><span></span></div>
 		        <%}%>
 		        
 		        
 			    </div>
-	      <%}%>
+	      <%
+					// Make css for odd and event rows
+					oddEvenClassRow = (oddEvenClassRow.equals("odd"))? "even" : "odd";
+				}%>
 	      
 	      </div>
+			</div>
 	 <% 
 	 //re-initialize action
 	 	uiWorkingArea.initialize();

@@ -40,8 +40,8 @@ public class Preference {
   public static final String SQL_QUERY = "SQL";
   public static final String XPATH_QUERY = "XPATH";
 
-  public static final String BLUE_DOWN_ARROW = "DownMini" ;
-  public static final String BLUE_UP_ARROW = "UpMini" ;
+  public static final String BLUE_DOWN_ARROW = "Down" ;
+  public static final String BLUE_UP_ARROW = "Up" ;
   public static final String NODES_PER_PAGE = "nbPerPage";
   public static final String PREFERENCE_ORDER_BY = "preferenceOrderBy";
   public static final String PREFERENCE_SORT_BY = "preferenceSortBy";

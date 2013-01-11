@@ -13,8 +13,7 @@ var ListView = function() {
 	ListView.prototype.actionAreaId = null;
 	ListView.prototype.enableDragDrop = null;
 
-	ListView.prototype.colorSelected = "#e7f3ff";
-	ListView.prototype.colorHover = "#f2f8ff";
+	ListView.prototype.colorSelected = "#e8e8e8";
 	
 	ListView.prototype.t1 = 0;
 	ListView.prototype.t2 = 0;
@@ -28,7 +27,7 @@ var ListView = function() {
 		if (!actionArea) return;
 		var mousedown = null;
 		var keydown = null;
-		Self.allItems = gj(actionArea).find("div.RowView");
+		Self.allItems = gj(actionArea).find("div.rowView");
 		Self.allItems.each(function(index, elem){
 			if (!Array.prototype[index]) {
 				var item = elem;
@@ -278,7 +277,6 @@ var ListView = function() {
 		var event = event || window.event;
 		var element = this;
 		if (!element.selected) {
-			element.style.background = Self.colorHover;
 			element.temporary = true;
 			//eXo.core.Browser.setOpacity(element, 100);
 		}
@@ -288,10 +286,10 @@ var ListView = function() {
 		var event = event || window.event;
 		var element = this;
 		element.temporary = false;
-		if (!element.selected) {
-			element.style.background = "none";
-			//eXo.core.Browser.setOpacity(element, 85);
-		}
+		//if (!element.selected) {
+		//	element.style.background = "none";
+		//  eXo.core.Browser.setOpacity(element, 85);
+	  //}
 	};
 	
 	ListView.prototype.mouseDownItem = function(evt) {
@@ -391,7 +389,7 @@ var ListView = function() {
 		//for select use shilf key;
 		Self.temporaryItem = element;
 		Self.itemsSelected = new Array(element);
-		element.style.background = Self.colorSelected;
+		// element.style.background = Self.colorSelected;
 		//eXo.core.Browser.setOpacity(element, 100);
 	};
 	
@@ -864,7 +862,7 @@ var ListView = function() {
 		for(var i in Self.itemsSelected) {
 			if (Array.prototype[i]) continue;
 			Self.itemsSelected[i].selected = null;
-			Self.itemsSelected[i].style.background = "none";
+			Self.itemsSelected[i].style.background = "";
 			//eXo.core.Browser.setOpacity(Self.itemsSelected[i], 85);
 		}
 		Self.itemsSelected = new Array();
@@ -950,7 +948,7 @@ var ListView = function() {
 		event.cancelBubble = true;
 		
 		var listGrid = gj(obj).parents(".uiListGrid:first")[0];
-		var rowClazz = gj(listGrid).find("div.RowView,div.Normal");						
+		var rowClazz = gj(listGrid).find("div.rowView,div.Normal");						
     if(!gj.data(Self.columnData)) {
       gj.data(Self.columnData, {}, {});
     }		
@@ -1011,7 +1009,7 @@ var ListView = function() {
 		var event = event || window.event;
 		event.cancelBubble = true;
 		var columnClass = Self.objResizingHeader.className;
-    columnClass = columnClass.replace(" Column", "").trim();
+    columnClass = columnClass.replace(" column", "").trim();
     var resizeValue = event.clientX - eXo.ecm.UIListView.currentMouseX;
     var newWidth    = Self.objResizeValue + resizeValue + "px";
     var div2Resize  = gj(Self.listGrid).find("div." + columnClass);

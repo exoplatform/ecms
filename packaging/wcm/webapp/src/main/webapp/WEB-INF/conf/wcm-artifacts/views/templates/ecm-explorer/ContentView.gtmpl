@@ -85,7 +85,7 @@
           String selectedSortType = uicomponent.getTypeSort() ;   
           String sortOrder = uicomponent.getSortOrder();
           String typeActionLink = "";
-          if (sortOrder.equals("DownMini")) {
+          if (sortOrder.equals("Down")) {
             typeActionLink = "Descending;";
           } else {
             typeActionLink = "Ascending;";
@@ -95,7 +95,7 @@
           <%
             if (selectedSortType.equals("Type")) {
               %>
-								<i class="uiIconArrow${sortOrder}"></i>
+								<i class="uiIconArrow${sortOrder} uiIconLightGrey"></i>
               <%
             }
           %>
@@ -106,7 +106,7 @@
           <%
             if (selectedSortType.equals("Alphabetic")) {
               %>
-                <i class="uiIconArrow${sortOrder} pull-right"></i>
+                <i class="uiIconArrow${sortOrder} uiIconLightGrey pull-right"></i>
 								<%=_ctx.appRes("WCMContentView.header.title")%>
               <%
             } else { 
@@ -117,11 +117,11 @@
         <div class="lineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"
         onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
 <!-- Date created -->
-        <div class="columnDatetime column" style="width: 93px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "exo:dateCreated")%>">
+        <div class="columnDatetime column" style="width: 105px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "exo:dateCreated")%>">
           <%
             if (selectedSortType.equals("exo:dateCreated")) {
               %>
-                <i class="uiIconArrow${sortOrder} pull-right"></i>
+                <i class="uiIconArrow${sortOrder} uiIconLightGrey pull-right"></i>
 								<%=_ctx.appRes("WCMContentView.header.date")%>
               <%
             } else { 
@@ -136,7 +136,7 @@
           <%
             if (selectedSortType.equals("exo:owner")) {
               %>
-                <i class="uiIconArrow${sortOrder} pull-right"></i>
+                <i class="uiIconArrow${sortOrder} uiIconLightGrey pull-right"></i>
 								<%=_ctx.appRes("WCMContentView.header.author")%>
               <%
             } else { 
@@ -151,7 +151,7 @@
           <%
             if (selectedSortType.equals("publication:lastUser")) {
               %>
-                <i class="uiIconArrow${sortOrder} pull-right"></i>
+                <i class="uiIconArrow${sortOrder} uiIconLightGrey pull-right"></i>
 								<%=_ctx.appRes("WCMContentView.header.lastUser")%>
               <%
             } else { 
@@ -166,7 +166,7 @@
           <%
             if (selectedSortType.equals("publication:currentState")) {
               %>
-                <i class="uiIconArrow${sortOrder} pull-right"></i>
+                <i class="uiIconArrow${sortOrder} uiIconLightGrey pull-right"></i>
 								<%=_ctx.appRes("WCMContentView.header.status")%>
               <%
             } else { 
@@ -221,6 +221,7 @@
         WCMPublicationService wcmPublicationService = uicomponent.getApplicationComponent(WCMPublicationService.class);
         def permlink;
         int i = 0;
+				String oddEvenClassRow = "odd";
         for (data in uicomponent.getChildrenList()) {
           try {
             data.getSession().getItem(data.getPath());
@@ -344,12 +345,12 @@
           if (Utils.isTrashHomeNode(data)) isTrashHome = "true"
           if (!uicomponent.isSystemWorkspace()) rightClickMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(nodePath), uiWorkingArea.getActionsExtensionList(data)) ;            
           %>
-            <div <%= uicomponent.getDragAndDropEvents(data) %>  <%=rightClickMenu%> class="RowView Normal ClearFix" trashHome="$isTrashHome" locked="$isLocked" 
+            <div <%= uicomponent.getDragAndDropEvents(data) %>  <%=rightClickMenu%> class="rowView $oddEvenClassRow clearfix" trashHome="$isTrashHome" locked="$isLocked" 
                  mediaType="$isMediaType" removeFavourite="$isFavourite" inTrash="$isInTrash" workspacename="$preferenceWS" 
                  ondblclick="$actionLink" isFile="<%=data.isNodeType("nt:file")%>" 
                  objectId="<%=org.exoplatform.services.cms.impl.Utils.getObjectId(nodePath)%>" 
                  >$strActs
-              <div class="columnIcon" style="padding: 2px 0px; border-right: none; width: 24px;">
+              <div class="columnIcon" style="width: 20px;">
                 <div rel="tooltip" data-placement="bottom" title="$name" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(data, "16x16Icon")%>">
                   <%if(isLocked) {%>
                     <div class="IconLocked"></div>
@@ -370,28 +371,28 @@
               </div>
               <div class="lineLeftItem"><span></span></div>
 <!-- Date created -->
-              <div class="columnDatetime column" style="width: 93px; padding-left:3px">
+              <div class="columnDatetime column" style="width: 105px;">
                 <div class="NodeLabel">
                   <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" rel="tooltip" data-placement="bottom" title="<%= datetime %>"><%= datetime %></div>
                 </div>
               </div>
               <div class="lineLeftItem"><span></span></div>
 <!-- Author -->
-              <div class="columnAuthor column" style="width: 93px; padding-left:3px">
+              <div class="columnAuthor column" style="width: 93px;">
                 <div class="NodeLabel">
                   <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" rel="tooltip" data-placement="bottom" title="<%= author %>"><%= author %></div>
                 </div>
               </div>
               <div class="lineLeftItem"><span></span></div>
 <!-- Last User -->
-              <div class="columnLastUser column" style="width: 93px; padding-left:3px">
+              <div class="columnLastUser column" style="width: 93px;">
                 <div class="NodeLabel">
                   <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" rel="tooltip" data-placement="bottom" title="<%= lastUser %>"><%= lastUser %></div>
                 </div>
               </div>
               <div class="lineLeftItem"><span></span></div>
 <!-- Status-->
-              <div class="columnStatus column" style="width: 93px; padding-left:3px">
+              <div class="columnStatus column" style="width: 93px;">
                 <div class="NodeLabel">
                   <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" rel="tooltip" data-placement="bottom" title="status"><%=_ctx.appRes("UIPublicationPanel.status." + status) %></div>
                 </div>
@@ -400,6 +401,8 @@
               
             </div>
           <%
+					// Make css for odd and event rows
+					oddEvenClassRow = (oddEvenClassRow.equals("odd"))? "even" : "odd";
         }
       %>
     </div>
