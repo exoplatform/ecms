@@ -232,6 +232,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   public UIDocumentInfo() throws Exception {
     pageIterator_ = addChild(UIPageIterator.class, null, CONTENT_PAGE_ITERATOR_ID);
     documentNodeList_ = addChild(UIDocumentNodeList.class, null, null);
+    documentNodeList_.setShowPageIterator(false);
     todayPageIterator_ = addChild(UIPageIterator.class, null, CONTENT_TODAY_PAGE_ITERATOR_ID);
     yesterdayPageIterator_ = addChild(UIPageIterator.class, null, CONTENT_YESTERDAY_PAGE_ITERATOR_ID);
     earlierThisWeekPageIterator_ = addChild(UIPageIterator.class, null, CONTENT_WEEK_PAGE_ITERATOR_ID);

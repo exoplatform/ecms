@@ -121,6 +121,7 @@
 
 .UIRightClickPopupMenu .MenuItem {
 	padding: 0 10px;
+	float: left;
 } 
 
 .UIRightClickPopupMenu .RightClickCustomItem {
@@ -131,7 +132,6 @@
 	padding: 5px 0px 5px 26px; /* orientation=lt */
 	padding: 5px 26px 5px 0px; /* orientation=rt */
 	line-height: 16px;
-	width: auto;
 	cursor: pointer;
 	white-space: nowrap;
 	display: block;

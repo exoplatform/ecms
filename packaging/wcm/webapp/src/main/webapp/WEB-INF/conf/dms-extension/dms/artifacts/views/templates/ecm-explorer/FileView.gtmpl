@@ -71,9 +71,10 @@
 	<div id="${componentId}-$viewComponentId" class="UIListView UIFileView">	
 		<div class="UIListGrid">
 				<div class="TitleTable" id="FileViewBreadcrumb">
-				  <!--============FirstRow===============-->
+	  <!--============FirstRow==================================================================-->
           <div class="TitleTableRow">
-            <div id="FileViewStatus" class="NoShow">
+            <div id="ActionMenuPlaceHolder" class="FL"><span></span></div>
+            <div id="FileViewStatus" class="NoShow FR">
                 <div  style="cursor:pointer" id="FileViewClearSelection" class="FR" onclick="eXo.ecm.UIFileView.clearCheckboxes(event);">
                   <u><%=_ctx.appRes("FileView.label.ClearSelection")%></u>
                 </div>
@@ -91,7 +92,7 @@
                 </div>
             </div>
           </div>
-          <!--============SecondRow===============-->
+    <!--============SecondRow=================================================================-->
 					<div class="ClearFix TitleTableRow">
 					  <div class="Breadcrumb FL"><span></span></div>
 					  <!--Breadcrumb links-->
@@ -116,9 +117,40 @@
             %>
             <!--End of Breadcrumb links-->
           <!--=======================================================-->
-            <!--End of Breadcrumb links-->
+            <!--Total Check box-->
             <input id="UIFileViewCheckBox" type="checkbox" class="FR" onclick="eXo.ecm.UIFileView.toggleCheckboxes(this, event);"/>
-            <!--End of Breadcrumb links-->
+            <!--End of Total Check Box-->
+          <!--=======================================================-->
+            <!--Paginator-->
+              <% def pageIterator = uicomponent.getContentPageIterator();
+                 int availablePage = pageIterator.getAvailablePage();
+                 int currentPage = pageIterator.getCurrentPage();
+                 System.out.println(currentPage + ": " + availablePage);
+                 if (availablePage > 1) {
+              %>
+                <div id="FileViewPageIterator" class="FR">
+                  <!--Begin of prev-->
+                  <% if (currentPage > 1) {%>
+                    <u><a href="<%=pageIterator.event("ShowPage","${currentPage - 1}")%>" class="Icon LastPageIcon" title="<%=_ctx.appRes("UIPageIterator.label.previous")%>"><%=_ctx.appRes("UIPageIterator.label.previous")%></a></u>
+                  <%}%>
+                  <!--End of prev-->
+                  <!--Begin of drop down list-->
+                  <select onchange="window.location.href=this.options[this.selectedIndex].value; return false;">
+                    <% for (int i = 1; i <= availablePage; i++) {%>
+                      <option value="<%=pageIterator.event("ShowPage", "$i")%>" <%=(currentPage==i)?"selected":""%>><%=i%></option>
+                    <%}%>
+                  </select>
+                  <!--End of drop down list-->
+                  <!--Begin of next-->
+                  <% if (currentPage < availablePage) {%>
+                    <u><a href="<%=pageIterator.event("ShowPage","${currentPage + 1}")%>" class="Icon NextPageIcon" title="<%=_ctx.appRes("UIPageIterator.label.next")%>"><%=_ctx.appRes("UIPageIterator.label.next")%></a></u>
+                  <%}%>
+                  <!--End of next-->
+                </div>
+              <%
+                 }
+              %>
+            <!--End of Paginator-->
           <!--=======================================================-->
             <!--Breadcrumb sort-->
               <%

@@ -82,6 +82,8 @@ public class UIDocumentNodeList extends UIContainer {
   
   private int padding_;
   
+  private boolean showPageIterator_ = true;
+  
   public UIDocumentNodeList() throws Exception {
     linkManager_ = WCMCoreUtils.getService(LinkManager.class);
     addChild(ManageVersionsActionComponent.class, null, null);
@@ -101,6 +103,9 @@ public class UIDocumentNodeList extends UIContainer {
   
   public int getPadding() { return padding_; }
   public void setPadding(int value) { padding_ = value; }
+  
+  public boolean isShowPageIterator() { return showPageIterator_; }
+  public void setShowPageIterator(boolean value) { showPageIterator_ = value; }
   
   public void setCurrentNode(Node node) throws Exception {
     UIDocumentInfo uiDocInfo = getAncestorOfType(UIDocumentInfo.class);

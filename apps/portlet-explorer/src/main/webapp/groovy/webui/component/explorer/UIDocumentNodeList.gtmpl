@@ -75,7 +75,7 @@
    //re-initialize action
 //    uiWorkingArea.initialize();
     int availablePage = uicomponent.getContentPageIterator().getAvailablePage();
-    if (availablePage > 1) { 
+    if (uicomponent.isShowPageIterator() && availablePage > 1) { 
   %>  
       <div class="PageAvailable" pageAvailable='$availablePage'>
         <%_ctx.renderUIComponent(uicomponent.getContentPageIterator())%>
