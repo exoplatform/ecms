@@ -175,17 +175,6 @@
 	}
 }
 
-
-.uiListGrid  .columnIcon .BlueDownArrow16x16Icon{
-	background-position: center center;
-}
-
-.uiListGrid .BlueDownArrow16x16Icon{
-	margin: 6px 0px 0px 0px;
-	line-height: 14px;
-	padding-left: 0px !important;
-}
-
 .uiListGrid .OverHeader {
   background: url('DefaultSkin/background/OverThGridRepeatBg1x19.gif') repeat-x center;
 	font-weight: bold;
@@ -218,10 +207,24 @@
 		padding: 7px;
 		text-align: center;
 	}
-}
-
-.uiListGrid .columnName .NodeLabel div{
-	font-size: 12px;
+	
+	.columnName .NodeLabel div{
+		font-size: 12px;
+	}
+	
+	.FileDrag {
+		background: grey;
+	}
+	
+	.uiListGrid .ResizeHandle {
+		cursor: col-resize;
+		width: 1px;
+		height: 190px; /* default height */
+		border-right: 1px dashed #000;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
 }
 
 .uiListGrid .rowView {
@@ -248,50 +251,37 @@
 		float: left;
 		border-left: 1px solid #cfcfcf;
 	}
-}
-
-.uiListGrid .FileDrag {
-	background: grey;
+	
+	.ResizeColumn .NodeLabel {
+		width: 95%;
+		overflow: hidden;
+	}
 }
 
 .MoveItem .uiListGrid .rowView {
 	margin-top: 0px;
 }
 
-.uiListGrid .Icon16x16 {
-	float: none;
-	margin: auto;
-	width: 20px;
-	line-height: 16px;
-}
-
-.uiListGrid .LinkSmall {
-	background: url('DefaultSkin/background/LinkSmall.gif') no-repeat right bottom;
-  width: 20px;
-  height: 16px;
-}
-
-.uiListGrid .IconLocked {
-	background: url('DefaultSkin/background/IconLocked.gif') no-repeat right top;
-  width: 20px;
-  height: 16px;
-  float: left;
-}
-
-.uiListGrid .ResizeHandle {
-		cursor: col-resize;
-		width: 1px;
-		height: 190px; /* default height */
-		border-right: 1px dashed #000;
-		position: absolute;
-		top: 0;
-		left: 0;
-}
-
-
-.uiListGrid .rowView .ResizeColumn .NodeLabel {
-	width: 95%;
-	overflow: hidden;
+.uiListGrid { 
+	.Icon16x16 {
+		float: none;
+		margin: auto;
+		width: 20px;
+		line-height: 16px;
+	}
+	
+	.LinkSmall {
+		background: url('/portlet-explorer/src/main/webapp/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/LinkSmall.gif') no-repeat right bottom;
+		width: 20px;
+		height: 16px;
+	}
+	
+	.IconLocked {
+		background: url('/portlet-explorer/src/main/webapp/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/IconLocked.gif') no-repeat right top;
+		width: 20px;
+		height: 16px;
+		float: left;
+	}
 }
 
 /*=============================== UIDrivesArea ===================================*/
