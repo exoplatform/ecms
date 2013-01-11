@@ -3457,6 +3457,27 @@
     <label>
       <add_node>Modify Right</add_node>
     </label>
-  </UIPermissionForm>  
+  </UIPermissionForm>
+  <UIMultiUpload>
+  	<label>
+          <AbortAll>Abort all</AbortAll>
+          <AbortAllFiles>Abort all files</AbortAllFiles>
+          <MaxFileSize>Maximal file size is </MaxFileSize>
+          <InvalidCharacters>Invalid characters will be changed by '-'</InvalidCharacters>
+          <AbortAllConfirmation>Do you want to abort all files in progress?</AbortAllConfirmation>
+          <MaxFileSizeAlert>The file's size exceeds the size limit of </MaxFileSizeAlert>
+          <DropFileMessage>Drop your files here in the current folder</DropFileMessage>
+          <in>in</in>
+          <Canceled>Canceled</Canceled>
+          <Cancel>Cancel</Cancel>
+          <Error>Error</Error>
+          <Keep>Keep both</Keep>
+          <Replace>Replace</Replace>
+          <Waiting>Waiting</Waiting>
+          <AlreadyInUse>Already in use</AlreadyInUse>
+          <or>or</or>
+          <Close>Close</Close>
+  	</label>
+  </UIMultiUpload>    
 </bundle>
 

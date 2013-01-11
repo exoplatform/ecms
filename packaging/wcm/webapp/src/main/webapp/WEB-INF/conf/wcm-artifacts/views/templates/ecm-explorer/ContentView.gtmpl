@@ -72,7 +72,6 @@
   addScripts("explorer.UIListView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');").
   addScripts("ecmutil.ECMUtils.initClipboard('clip_button','1','$size');").  
   addScripts('explorer.UIListView.loadEffectedWidthColumn();');
-  
   //Config to display columns with format: ["${column};${width}"]
   //Default 
   String[] arrColumns = ["exo:dateCreated;123px", "exo:owner;123px"];
@@ -341,7 +340,11 @@
           if (Utils.isTrashHomeNode(data)) isTrashHome = "true"
           if (!uicomponent.isSystemWorkspace()) rightClickMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(nodePath), uiWorkingArea.getActionsExtensionList(data)) ;            
           %>
-            <div <%=rightClickMenu%> class="RowView Normal ClearFix" trashHome="$isTrashHome" locked="$isLocked" mediaType="$isMediaType" removeFavourite="$isFavourite" inTrash="$isInTrash" workspacename="$preferenceWS" isFile="<%=data.isNodeType("nt:file")%>" objectId="<%=org.exoplatform.services.cms.impl.Utils.getObjectId(nodePath)%>" ondblclick="$actionLink">$strActs
+            <div <%= uicomponent.getDragAndDropEvents(data) %>  <%=rightClickMenu%> class="RowView Normal ClearFix" trashHome="$isTrashHome" locked="$isLocked" 
+                 mediaType="$isMediaType" removeFavourite="$isFavourite" inTrash="$isInTrash" workspacename="$preferenceWS" 
+                 ondblclick="$actionLink" isFile="<%=data.isNodeType("nt:file")%>" 
+                 objectId="<%=org.exoplatform.services.cms.impl.Utils.getObjectId(nodePath)%>" 
+                 >$strActs
               <div class="ColumnIcon" style="padding: 2px 0px; border-right: none; width: 24px;">
                 <div title="$name" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(data, "16x16Icon")%>">
                   <%if(isLocked) {%>

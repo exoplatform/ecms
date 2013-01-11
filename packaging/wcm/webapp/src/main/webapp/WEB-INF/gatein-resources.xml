@@ -36,6 +36,10 @@
    <module>
       <name>ecm-utils</name>
       <as>ecm_utils</as>
+	    <script>
+	      <name>eXo.ecm.ZeroClipboard</name>
+	      <path>/javascript/eXo/ecm/ZeroClipboard.js</path>
+	    </script>
       <script>
          <name>eXo.ecm.DMSBrowser</name>
          <path>/javascript/eXo/ecm/DMSBrowser.js</path>

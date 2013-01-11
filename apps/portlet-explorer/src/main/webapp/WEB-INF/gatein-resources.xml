@@ -100,6 +100,10 @@
        <name>eXo.ecm.Rename</name>
        <path>/javascript/eXo/ecm/Rename.js</path>
     </script>
+    <script>
+      <name>eXo.ecm.MultiUpload</name>
+      <path>/javascript/eXo/ecm/MultiUpload.js</path>
+    </script>    
     <depends>
       <module>jquery</module>
       <as>gj</as>

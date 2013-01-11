@@ -53,6 +53,7 @@ import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiApplication;
@@ -207,7 +208,17 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
 //    elementS.setAttribute("type", "text/javascript");
 //    elementS.setAttribute("src", "/eXoWCMResources/javascript/eXo/wcm/backoffice/public/Components.js");
 //    response.addProperty(MimeResponse.MARKUP_HEAD_ELEMENT,elementS);
-
+    UIJCRExplorer uiExplorer = explorerContainer.getChild(UIJCRExplorer.class);
+    UITreeExplorer uiTreeExplorer = uiExplorer.findFirstComponentOfType(UITreeExplorer.class);      
+    context.getJavascriptManager().
+    require("SHARED/explorer-module", "explorer").
+    addScripts("explorer.MultiUpload.setLocation('" + 
+               uiExplorer.getWorkspaceName()  + "','" + 
+               uiExplorer.getDriveData().getName()  + "','" +
+               uiTreeExplorer.getLabel()  + "','" +
+               uiExplorer.getCurrentPath() + "','" +
+               org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(uiExplorer.getDriveData().getHomePath(),
+               ConversationState.getCurrent().getIdentity().getUserId())+ "');");
     super.processRender(app, context);
   }
 
@@ -474,7 +485,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
       }
     }
     uiExplorer.refreshExplorer(null, (isAddNew && isEdit) && isEditInNewWindow());
-    uiExplorer.setRenderSibling(UIJCRExplorer.class);
+    //uiExplorer.setRenderSibling(UIJCRExplorer.class);
   }
 
   private boolean canManageNode(Node selectedNode,

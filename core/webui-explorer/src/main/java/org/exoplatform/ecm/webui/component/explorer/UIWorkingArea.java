@@ -424,6 +424,7 @@ public class UIWorkingArea extends UIContainer {
     UIJCRExplorerPortlet uiPortlet = getAncestorOfType(UIJCRExplorerPortlet.class);
     UIActionBar uiActionBar = findFirstComponentOfType(UIActionBar.class);
     uiActionBar.setRendered(uiPortlet.isShowActionBar());
+    
     super.processRender(context);
   }
 
