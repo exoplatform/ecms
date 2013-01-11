@@ -53,7 +53,7 @@ import org.exoplatform.webui.event.EventListener;
  * 9:43:23 AM
  */
 @ComponentConfig(
-    template = "system:/groovy/ecm/webui/UIGridWithButton.gtmpl",
+		template = "app:/groovy/webui/component/admin/template/UITemplateList.gtmpl",
     events = {
       @EventConfig(listeners = UITemplateList.EditActionListener.class),
       @EventConfig(listeners = UITemplateList.DeleteActionListener.class, confirm = "UITemplateList.msg.confirm-delete"),
@@ -63,11 +63,14 @@ import org.exoplatform.webui.event.EventListener;
 
 public class UITemplateList extends UIPagingGrid {
 
-  private static String[] NODETYPE_BEAN_FIELD = {"label", "name"} ;
+  private static String[] NODETYPE_BEAN_FIELD = {"icon", "label", "name"} ;
   private static String[] NODETYPE_ACTION = {"Edit", "Delete"} ;
   public static final String DOCUMENTS_TEMPLATE_TYPE = "templates";
   public static final String ACTIONS_TEMPLATE_TYPE = "actions";
   public static final String OTHERS_TEMPLATE_TYPE = "others";
+  public static final String LABEL_PROPERTY = "label";
+  public static final String ICON_FIELD = "icon";
+  public static final String LABEL_FIELD = "label";
   
   private String filter = DOCUMENTS_TEMPLATE_TYPE;
   
@@ -177,10 +180,16 @@ public class UITemplateList extends UIPagingGrid {
   static public class TemplateData {
     private String name ;
     private String label;
+    private String icon;
 
-    public TemplateData(String temp ) { name = temp ;}
-    public String getName() { return name ;}
-    public String getLabel() { return label;}
+    public TemplateData(String dataName, String dataLabel, String dataIcon) { 
+    	name = dataName ;
+    	label = dataLabel;
+    	icon = dataIcon;
+    }
+    public String getName() { return name ; }
+    public String getLabel() { return label; }
+    public String getIcon() { return icon; }
   }
 
   @Override
@@ -198,17 +207,24 @@ public class UITemplateList extends UIPagingGrid {
         listNodeTypeName.add(n1.getName());
       }
       NodeIterator nodes = templatesHome.getNodes();
+      String label = "";
+      String icon = "";
       while (nodes.hasNext()) {
         Node node = nodes.nextNode();        
         if (listNodeTypeName.contains(node.getName())) {
-        	if(filter.equals(DOCUMENTS_TEMPLATE_TYPE)) {
+        	label = node.hasProperty(LABEL_PROPERTY) ? node.getProperty(LABEL_PROPERTY).getString() : "";
+      		if(label.length() > 0 && label.indexOf(" ") > 0) icon = "uiIconEcms" + label.substring(0,label.indexOf(" "));
+      		else icon = "uiIconEcms" + label;
+      		icon = "uiIconFileDefault " + icon;
+        	if(filter.equals(DOCUMENTS_TEMPLATE_TYPE)) {        		
         		if(documentNodeTypes.contains(node.getName()))
-        			templateData.add(new TemplateData(node.getName()));
+        			templateData.add(new TemplateData(node.getName(), label, icon));
         	} else if(filter.equals(ACTIONS_TEMPLATE_TYPE)) {
-        		if(ntManager.getNodeType(node.getName()).isNodeType("exo:action")) templateData.add(new TemplateData(node.getName()));
+        		if(ntManager.getNodeType(node.getName()).isNodeType("exo:action")) templateData.add(new TemplateData(node.getName(), 
+        				label, icon ));
         	} else {
         		if(!ntManager.getNodeType(node.getName()).isNodeType("exo:action") && !documentNodeTypes.contains(node.getName())) 
-        			templateData.add(new TemplateData(node.getName()));
+        			templateData.add(new TemplateData(node.getName(), label, icon ));
         	}          
         }
       }

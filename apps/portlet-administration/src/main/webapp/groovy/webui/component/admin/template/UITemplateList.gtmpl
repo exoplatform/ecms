@@ -1,0 +1,117 @@
+<%
+  import org.exoplatform.webui.core.UIComponent ;
+  import org.exoplatform.wcm.webui.reader.ContentReader;
+  
+  String[] beanFields =  uicomponent.getBeanFields() ;
+  String[] beanActions =  uicomponent.getBeanActions() ;
+  UIComponent uiParent = uicomponent.getParent() ;
+  String name = uicomponent.getId() ; 
+%>
+
+<div id="$uicomponent.id">
+  <%
+    if (uicomponent.getUIPageIterator().getTotalItems() > 5) {
+      uicomponent.getUIPageIterator().setUseMaxSizeSetting(true);
+      _ctx.renderUIComponent(uicomponent.getUIPageIterator());
+    }
+  %>
+	<table class="uiGrid table table-hover table-striped">
+	  <thead>
+	    <tr>
+	      <%if(name != null) { %>
+	        <%for(field in beanFields) { %>
+	          <th><%=_ctx.appRes(name+".header."+field)%></th>
+	        <%}%>
+	        <%if(beanActions != null) { %>
+	          <th class="span2 center"><%=_ctx.appRes(name+".header.action")%></th>
+	        <%}%>
+	      <%}%>
+	      <%if(name == null) {%>
+	        <%for(field in beanFields) { %>
+	          <th><%=_ctx.appRes(uiParent.getName()+".header."+field)%></th>
+	        <%}%>
+	        <%if(beanActions != null && beanActions.length > 0) { %>
+	          <th class="span2 center"><%=_ctx.appRes(uiParent.getName()+".header.action")%></th>
+	        <%}%>
+	      <%}%>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  <%if(uicomponent.getUIPageIterator().getAvailable() < 1) {%>
+	    <tr>
+	      <td style="font-style:italic; color: #FF5604" colspan="<%=beanFields.length+1%>">
+	      	<div class="actionContainer">
+		        <%=_ctx.appRes(uicomponent.id + ".grid.msg.empty")%>
+		      </div>
+	      </td>
+	    </tr>  
+	  <%} else { 
+	    for (bean in uicomponent.getBeans())  {
+	  %>
+	    <tr>
+	      <%
+	        for(field in beanFields) { 
+	          def fieldValue = uicomponent.getFieldValue(bean, field) ;
+	          def cssClass = "" ;
+	          if(fieldValue != null) {
+	            fieldValue = ContentReader.getXSSCompatibilityContent(fieldValue);
+	            def fieldClass = fieldValue.getClass() ;
+	            if(fieldClass == Integer.class)  cssClass = "number" ;
+	            else if(fieldClass == java.util.Date.class)  cssClass = "Date" ;
+	            else cssClass = "Text" ;
+	          } else {
+	            fieldValue = "";
+	          }
+	          if(field.equals(uicomponent.ICON_FIELD)) {
+	          %>
+	          <td><div class="$cssClass" rel="tooltip" data-placement="bottom">
+	            <i class="$fieldValue" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getFieldValue(bean, uicomponent.LABEL_FIELD)%>"></i>
+	          </div></td>
+	          <%
+	          } else {
+	          %>
+	          <td><div class="$cssClass" rel="tooltip" data-placement="bottom" title="$fieldValue">$fieldValue</div></td>
+	          <%
+	          }
+	       }%>
+	      <%if(beanActions != null && beanActions.length > 0) { %>
+	        <td class="center">         
+	            <%def beanIdField = uicomponent.getBeanIdField() ; %>          
+	            <%for(action in beanActions) { %>
+	            <%  def beanId = uicomponent.getFieldValue(bean,beanIdField)  ; %>               
+	              <% 
+	                if(action != null) { 
+	                  if(uicomponent.isUseAjax()){
+	             %>             
+	                <a class="actionIcon" onclick="<%=uicomponent.event(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "$action" ><i class="uiIcon${action}"></i></a>
+	              <%  }else{ %>
+	                <a class="actionIcon" onclick="<%=uicomponent.url(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "$action" ><i class="uiIcon${action}"></i></a>
+	              <%  } %> 
+	              <%} %> 
+	            <%}%>      
+	        </td>
+	      <% } %>  
+	    </tr>
+	  <%}
+	  }
+	  %>
+	  </tbody>
+	</table> 
+	<!--End UIGrid-->
+  <%
+    if (uicomponent.getUIPageIterator().getTotalItems() > 5) {
+      uicomponent.getUIPageIterator().setUseMaxSizeSetting(false);
+      _ctx.renderUIComponent(uicomponent.getUIPageIterator());
+    }
+  %>
+</div>
+
+<% if(uicomponent.getActions() != null) { %>
+	<div class="$uicomponent.id">
+		<div class="uiAction uiActionBorder"> 
+		  <% for(action in uicomponent.getActions()) { %>
+		        <button onclick="<%=uicomponent.event(action)%>" class="btn"><%=_ctx.appRes(uicomponent.getId() + ".action." + action)%></button>
+		  <% } %>
+		</div>
+	</div>    
+<% }%>

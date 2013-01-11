@@ -29,7 +29,7 @@
 					<%}%>
 	
 	      </ul>
-	      <div class="tab-content" id="myTabContent">
+	      <div class="tab-content resizable" id="myTabContent">
 						<%
 							for(uiChild in uicomponent.getChildren()) { 
 								String display = "none" ;

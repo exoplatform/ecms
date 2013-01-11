@@ -1638,8 +1638,10 @@
   -->
   <UITemplateList>
     <header>
-      <name>Template Name</name>
+      <name>Type</name>
       <action>Action</action>
+      <label>Template</label>
+      <icon>Icon</icon>
     </header>
     <action>
       <AddNew>Add</AddNew>
@@ -1654,8 +1656,10 @@
   
   <UIActionsTemplateList>
     <header>
-      <name>Template Name</name>
+      <name>Type</name>
       <action>Action</action>
+      <label>Template</label>
+      <icon>Icon</icon>
     </header>
     <action>
       <AddNew>Add Template</AddNew>
@@ -1670,7 +1674,9 @@
   
   <UIOthersTemplateList>
     <header>
-      <name>Template Name</name>
+      <name>Type</name>
+      <label>Template</label>
+      <icon>Icon</icon>
       <action>Action</action>
     </header>
     <action>
