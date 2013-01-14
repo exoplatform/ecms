@@ -38,10 +38,11 @@ public class UITemplateContainer extends UIContainer {
 
   public void initPopup(String popupId) throws Exception {
     removeChildById(popupId) ;
+    UITemplatesManager uiManager = getParent();
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, popupId) ;
     uiPopup.setShowMask(true);
     uiPopup.setWindowSize(600,400) ;
-    UIViewTemplate uiViewTemplate = createUIComponent(UIViewTemplate.class, null, null) ;
+    UIViewTemplate uiViewTemplate = createUIComponent(UIViewTemplate.class, null, "UIViewTemplate" + "_" + uiManager.getSelectedTabId()) ;
     uiPopup.setUIComponent(uiViewTemplate) ;
     uiPopup.setShow(true) ;
     uiPopup.setResizable(true) ;

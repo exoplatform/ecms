@@ -11,10 +11,9 @@
   import org.exoplatform.webui.form.UIFormRadioBoxInput ;
   import org.exoplatform.webui.form.UIFormCheckBoxInput;
 %>
-<div class="$uicomponent.id resizable">
-  <table>
-	<tbody>
-            
+<div class="$uicomponent.id">
+  
+   <div class="form-horizontal resizable">       
     <%
       def formName = uicomponent.getFormName() ;
     	def parentFormName = uicomponent.getParent().getName();
@@ -25,14 +24,15 @@
       for(inputEntry in uicomponent.getChildren()) {
         if(inputEntry.isRendered()) {
     %>
-          <tr >
+           <div class="control-group">
                <%
                 String label = _ctx.appRes(formName + ".label." + inputEntry.getId()) ;
                 if(!label.equals(inputEntry.getId()) || inputEntry instanceof UIFormCheckBoxInput) {
               %>
-                  <td class="FieldLabel"><label for="<%=inputEntry.getId()%>"><%=label%></label></td>
+                  <label for="<%=inputEntry.getId()%>" class="control-label"><%=label%></label>
+
                <%}%>
-                <td class="FieldComponent">
+               <div class="controls">
                 <% 
               if(inputEntry instanceof UIFormRadioBoxInput) {
                 println "<div class=\"MultiRadioInput\">" ;
@@ -119,22 +119,22 @@
                if(actionField != null && actionField.length > 0) {
                  for(i in 0..actionField.length -1) {
              %>      
-                      <i onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>', '<%=actionField[i]%>', true)" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".title." + actionField[i])%>" class="uiIconPlus" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%=_ctx.appRes(uicomponent.getId() + ".title." + actionField[i])%>"></i>
+                      <i onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>', '<%=actionField[i]%>', true)" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".title." + actionField[i])%>" class="uiIconLightGray uiIcon<%=actionField[i]%>" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%=_ctx.appRes(uicomponent.getId() + ".title." + actionField[i])%>"></i>
              <%
                   }
                }
               } else if(isShowAction) {                
                for(String action : uicomponent.getFieldActions(inputEntry.getName())) {
              %>      
-                      <i onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>', '<%=action%>', true)" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".title." + action)%>" class="uiIconPlus" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%=_ctx.appRes(uicomponent.getId() + ".title." + action)%>"></i>
+                      <i onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>', '<%=action%>', true)" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".title." + action)%>" class="uiIconLightGray uiIcon$action" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%=_ctx.appRes(uicomponent.getId() + ".title." + action)%>"></i>
              <%
                 }
               }
               if(uicomponent.getMsgKey(inputEntry.getName()) != null) { %>
                       <span class="Introduction"><%=_ctx.appRes(uicomponent.getMsgKey(inputEntry.getName()))%></span>                
               <%}%>
-                </td>
-				 </tr>
+                </div>
+				 </div>
      
     <%
         }
@@ -142,22 +142,21 @@
 	  
     %>
 
-	</tbody>
-  </table>
+	</div>
   
     <%if(actions != null && actions.length > 0) { %>
-     <div class="UIAction">
+    <div class="uiAction uiActionBorder">
        <%for(i in 0..actions.length -1) { 
             if(actionValues != null && actionValues.length > 0) { 
               if(actionValues[i] != null) { %>
-                   <a class="ActionButton LightBlueStyle" onclick="javascript:eXo.webui.UIForm.submitEvent('<%=formName%>','<%=actions[i]%>','&objectId=<%=actionValues[i]%>');" href="javascript:void(0);"><%=_ctx.appRes(formName + ".action." + actions[i])%></a>   
+                   <button onclick="javascript:eXo.webui.UIForm.submitEvent('<%=formName%>','<%=actions[i]%>','&objectId=<%=actionValues[i]%>');" class="btn"><%=_ctx.appRes(formName + ".action." + actions[i])%></button>
             			<%} else { %> 
-                    <a class="ActionButton LightBlueStyle" onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>','<%=actions[i]%>', true);" href="javascript:void(0);"><%=_ctx.appRes(formName + ".action." + actions[i])%></a>   
+            			  <button onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>','<%=actions[i]%>', true);" class="btn"><%=_ctx.appRes(formName + ".action." + actions[i])%></button>
                   <%
                      }
                } else { 
                %>
-               <a class="ActionButton LightBlueStyle" onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>','<%=actions[i]%>', true);" href="javascript:void(0);"><%=_ctx.appRes(formName + ".action." + actions[i])%></a>
+               <button onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>','<%=actions[i]%>', true);" class="btn"><%=_ctx.appRes(formName + ".action." + actions[i])%></button>
             <%}%>                         
                 <%} %>          
         </div>

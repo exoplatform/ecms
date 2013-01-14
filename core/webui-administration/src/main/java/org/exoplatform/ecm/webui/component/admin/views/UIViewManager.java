@@ -16,6 +16,7 @@
  */
 package org.exoplatform.ecm.webui.component.admin.views;
 
+import org.exoplatform.ecm.webui.component.admin.templates.UIViewTemplate;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -73,16 +74,23 @@ public class UIViewManager extends UIAbstractManager {
   
   static public class SelectTabActionListener extends EventListener<UIViewManager>
   {
-     public void execute(Event<UIViewManager> event) throws Exception
-     {
-        WebuiRequestContext context = event.getRequestContext();
-        String renderTab = context.getRequestParameter(UIComponent.OBJECTID);
-        if (renderTab == null)
-           return;
-        event.getSource().setSelectedTab(renderTab);
-        context.setResponseComplete(true);
-        context.addUIComponentToUpdateByAjax(event.getSource().getParent());
-     }
-  }  
+  	public void execute(Event<UIViewManager> event) throws Exception
+    {
+       WebuiRequestContext context = event.getRequestContext();
+       String renderTab = context.getRequestParameter(UIComponent.OBJECTID);
+       if (renderTab == null)
+          return;
+       event.getSource().setSelectedTab(renderTab);
+       WebuiRequestContext parentContext = (WebuiRequestContext)context.getParentAppRequestContext();
+       if (parentContext != null)
+       {
+          parentContext.setResponseComplete(true);
+       }
+       else
+       {
+          context.setResponseComplete(true);
+       }
+    }
+  } 
 }
 

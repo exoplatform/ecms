@@ -105,8 +105,8 @@ public class UITemplateList extends UIPagingGrid {
       UITemplatesManager uiManager = nodeTemplateList.getAncestorOfType(UITemplatesManager.class);
       UITemplateContainer uiTemplateContainer = uiManager.getChildById(uiManager.getSelectedTabId()) ;
       
-      uiTemplateContainer.removeChildById(UITemplatesManager.NEW_TEMPLATE) ;
-      uiTemplateContainer.initPopup(UITemplatesManager.EDIT_TEMPLATE) ;
+      uiTemplateContainer.removeChildById(UITemplatesManager.NEW_TEMPLATE + "_" + uiManager.getSelectedTabId()) ;
+      uiTemplateContainer.initPopup(UITemplatesManager.EDIT_TEMPLATE + "_" + uiManager.getSelectedTabId()) ;
       
       String nodeType = event.getRequestContext().getRequestParameter(OBJECTID) ;
       UIViewTemplate uiViewTemplate = uiTemplateContainer.findFirstComponentOfType(UIViewTemplate.class) ;
@@ -128,7 +128,7 @@ public class UITemplateList extends UIPagingGrid {
       uiSkinTabForm.setNodeTypeName(nodeType) ;
       uiSkinTabForm.update(null) ;
       
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiTemplateContainer) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
  
   }
@@ -161,18 +161,17 @@ public class UITemplateList extends UIPagingGrid {
   static public class AddNewActionListener extends EventListener<UITemplateList> {
     public void execute(Event<UITemplateList> event) throws Exception {
       UITemplatesManager uiTemplatesManager = event.getSource().getAncestorOfType(UITemplatesManager.class) ;      
-      UIECMAdminPortlet adminPortlet = uiTemplatesManager.getAncestorOfType(UIECMAdminPortlet.class);
       UITemplateContainer uiTemplateContainer = uiTemplatesManager.getChildById(uiTemplatesManager.getSelectedTabId());
       
       UITemplateForm uiTemplateForm = uiTemplatesManager.createUIComponent(UITemplateForm.class, null, null) ;
-      uiTemplateContainer.removeChildById(UITemplatesManager.EDIT_TEMPLATE) ;
+      uiTemplateContainer.removeChildById(UITemplatesManager.EDIT_TEMPLATE + "_" + uiTemplatesManager.getSelectedTabId()) ;
       if(uiTemplateForm.getOption().size() == 0) {
         UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class) ;
         uiApp.addMessage(new ApplicationMessage("UITemplateList.msg.access-denied", null, ApplicationMessage.WARNING)) ;        
         return ;
       }
       uiTemplateForm.refresh();
-      uiTemplateContainer.initPopup(UITemplatesManager.NEW_TEMPLATE) ;
+      uiTemplateContainer.initPopup(UITemplatesManager.NEW_TEMPLATE + "_" + uiTemplatesManager.getSelectedTabId()) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTemplatesManager) ;
     }
   }

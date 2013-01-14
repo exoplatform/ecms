@@ -73,15 +73,22 @@ public class UIViewTemplate extends UIContainer {
   
   static public class SelectTabActionListener extends EventListener<UIViewTemplate>
   {
-     public void execute(Event<UIViewTemplate> event) throws Exception
-     {
-        WebuiRequestContext context = event.getRequestContext();
-        String renderTab = context.getRequestParameter(UIComponent.OBJECTID);
-        if (renderTab == null)
-           return;
-        event.getSource().setSelectedTab(renderTab);
-        context.setResponseComplete(true);
-        context.addUIComponentToUpdateByAjax(event.getSource().getParent());
-     }
+  	public void execute(Event<UIViewTemplate> event) throws Exception
+    {
+       WebuiRequestContext context = event.getRequestContext();
+       String renderTab = context.getRequestParameter(UIComponent.OBJECTID);
+       if (renderTab == null)
+          return;
+       event.getSource().setSelectedTab(renderTab);
+       WebuiRequestContext parentContext = (WebuiRequestContext)context.getParentAppRequestContext();
+       if (parentContext != null)
+       {
+          parentContext.setResponseComplete(true);
+       }
+       else
+       {
+          context.setResponseComplete(true);
+       }
+    }
   } 
 }

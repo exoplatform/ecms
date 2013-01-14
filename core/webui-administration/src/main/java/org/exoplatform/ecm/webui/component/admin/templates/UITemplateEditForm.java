@@ -41,7 +41,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    template = "system:/groovy/webui/form/UIForm.gtmpl",
+    		template = "system:/groovy/webui/component/admin/template/UITemplateEditForm.gtmpl",
     events = {
       @EventConfig(listeners = UITemplateEditForm.SaveActionListener.class),
       @EventConfig(phase=Phase.DECODE, listeners = UITemplateEditForm.CancelActionListener.class)
@@ -92,7 +92,7 @@ public class UITemplateEditForm extends UIForm {
       uiForm.reset() ;
       UITemplatesManager uiManager = uiForm.getAncestorOfType(UITemplatesManager.class) ;
       UITemplateContainer uiTemplateContainer = uiForm.getAncestorOfType(UITemplateContainer.class) ;
-      UIPopupWindow uiPopupWindow = uiTemplateContainer.getChildById(UITemplatesManager.EDIT_TEMPLATE) ;
+      UIPopupWindow uiPopupWindow = uiTemplateContainer.getChildById(UITemplatesManager.EDIT_TEMPLATE + "_" + uiManager.getSelectedTabId()) ;
       uiPopupWindow.setRendered(false) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
@@ -102,7 +102,7 @@ public class UITemplateEditForm extends UIForm {
     public void execute(Event<UITemplateEditForm> event) throws Exception {    	     
       UITemplatesManager uiManager = event.getSource().getAncestorOfType(UITemplatesManager.class) ;
       UITemplateContainer uiTemplateContainer = uiManager.getChildById(uiManager.getSelectedTabId());
-      UIPopupWindow uiPopupWindow = uiTemplateContainer.getChildById(UITemplatesManager.EDIT_TEMPLATE) ;
+      UIPopupWindow uiPopupWindow = uiTemplateContainer.getChildById(UITemplatesManager.EDIT_TEMPLATE + "_" + uiManager.getSelectedTabId()) ;
       uiPopupWindow.setRendered(false) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
