@@ -41,7 +41,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    		template = "system:/groovy/webui/component/admin/template/UITemplateEditForm.gtmpl",
+    		template = "system:/groovy/webui/form/UIForm.gtmpl",
     events = {
       @EventConfig(listeners = UITemplateEditForm.SaveActionListener.class),
       @EventConfig(phase=Phase.DECODE, listeners = UITemplateEditForm.CancelActionListener.class)

@@ -119,14 +119,14 @@
                if(actionField != null && actionField.length > 0) {
                  for(i in 0..actionField.length -1) {
              %>      
-                      <i onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>', '<%=actionField[i]%>', true)" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".title." + actionField[i])%>" class="uiIconLightGray uiIcon<%=actionField[i]%>" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%=_ctx.appRes(uicomponent.getId() + ".title." + actionField[i])%>"></i>
+                      <i onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>', '<%=actionField[i]%>', true)" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".title." + actionField[i])%>" class="uiIcon<%=actionField[i]%> uiIconLightGray" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%=_ctx.appRes(uicomponent.getId() + ".title." + actionField[i])%>"></i>
              <%
                   }
                }
               } else if(isShowAction) {                
                for(String action : uicomponent.getFieldActions(inputEntry.getName())) {
              %>      
-                      <i onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>', '<%=action%>', true)" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".title." + action)%>" class="uiIconLightGray uiIcon$action" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%=_ctx.appRes(uicomponent.getId() + ".title." + action)%>"></i>
+                      <i onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>', '<%=action%>', true)" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".title." + action)%>" class="uiIcon$action uiIconLightGray" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%=_ctx.appRes(uicomponent.getId() + ".title." + action)%>"></i>
              <%
                 }
               }
