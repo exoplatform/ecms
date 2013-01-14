@@ -302,10 +302,8 @@
 						<div class="lineLeftItem"><span></span></div>
 						
 		        <div class="columnName" style="width: 125px;">
-							<div class="NodeLabel">
-								<div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;$hiddenStyle;" rel="tooltip" data-placement="bottom"  title="<%=title%> $lockedLabel"><%=title%></div>
-		 					</div>
-		        </div>
+								<div class="nodeLabel" style="$hiddenStyle;" rel="tooltip" data-placement="bottom"  title="<%=title%> $lockedLabel"><%=title%></div>
+		 				</div>
 						
 						<div class="lineLeftItem"><span></span></div>
 		        <!--

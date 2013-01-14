@@ -173,20 +173,20 @@
 	.even {
 		background: #fff;
 	}
-}
-
-.uiListGrid .OverHeader {
-  background: url('DefaultSkin/background/OverThGridRepeatBg1x19.gif') repeat-x center;
-	font-weight: bold;
-	line-height: 19px; height: 19px;
-}
-
-.uiListGrid .columnName .NodeLabel {
-  margin-right: 10px;
-  overflow: hidden;
-}
-
-.uiListGrid { 
+	
+	.OverHeader {
+		background: url('DefaultSkin/background/OverThGridRepeatBg1x19.gif') repeat-x center;
+		font-weight: bold;
+		line-height: 19px; height: 19px;
+	}
+	
+	.nodeLabel {
+		overflow: hidden;
+		cursor: pointer; 
+		-moz-outline: none; 
+		-moz-user-select: none;
+	}
+	
 	.columnIcon,
 	.columnName,
 	.columnAuditing,
@@ -203,13 +203,13 @@
 		color: #4f4f4f;
 	}
 	
+	.titleTable [class^="uiIcon"] {
+		margin: 2px 0px 0px 0px;
+	}
+	
 	.columnIcon {
 		padding: 7px;
 		text-align: center;
-	}
-	
-	.columnName .NodeLabel div{
-		font-size: 12px;
 	}
 	
 	.FileDrag {
@@ -225,41 +225,37 @@
 		top: 0;
 		left: 0;
 	}
-}
-
-.uiListGrid .rowView {
-	line-height: 20px;
 	
-	&:hover {
-		background: #e8e8e8;
+	.rowView {
+		line-height: 20px;
+		
+		&:hover {
+			background: #e8e8e8;
+		}
+		
+		.columnIcon,.columnName,.columnAuditing,.columnVersion,
+		.columndateModified,.columnDatetime,.columndateCreated,
+		.columnOwner,.columnModified,.columnCreated {
+			padding: 7px 0px 7px 12px;
+		}
+		
+		.columnIcon {
+			padding: 7px;
+			text-align: center;
+		}
+		
+		.lineLeftItem {  
+			width: 2px;
+			height: 34px;
+			float: left;
+			border-left: 1px solid #cfcfcf;
+		}
+		
+		.ResizeColumn .NodeLabel {
+			width: 95%;
+			overflow: hidden;
+		}
 	}
-	
-	.columnIcon,.columnName,.columnAuditing,.columnVersion,
-	.columndateModified,.columnDatetime,.columndateCreated,
-	.columnOwner,.columnModified,.columnCreated {
-		padding: 7px 0px 7px 12px;
-	}
-	
-	.columnIcon {
-		padding: 7px;
-		text-align: center;
-	}
-	
-	.lineLeftItem {  
-		width: 2px;
-		height: 34px;
-		float: left;
-		border-left: 1px solid #cfcfcf;
-	}
-	
-	.ResizeColumn .NodeLabel {
-		width: 95%;
-		overflow: hidden;
-	}
-}
-
-.MoveItem .uiListGrid .rowView {
-	margin-top: 0px;
 }
 
 .uiListGrid { 
@@ -271,13 +267,13 @@
 	}
 	
 	.LinkSmall {
-		background: url('/portlet-explorer/src/main/webapp/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/LinkSmall.gif') no-repeat right bottom;
+		background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/background/LinkSmall.gif') no-repeat right bottom;
 		width: 20px;
 		height: 16px;
 	}
 	
 	.IconLocked {
-		background: url('/portlet-explorer/src/main/webapp/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/IconLocked.gif') no-repeat right top;
+		background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/background/IconLocked.gif') no-repeat right top;
 		width: 20px;
 		height: 16px;
 		float: left;
@@ -616,9 +612,14 @@
 		margin-bottom: 15px;
 	}
 	
-	.sortByContent .selectbox {
+	.sortByContent .uiSelectbox {
 		width: 160px;
 		margin-left: 15px;
+		vertical-align: middle;
+		
+		.selectbox {
+			width: 185px;
+		}
 	}
 	
 	.checkBoxContent {
@@ -637,9 +638,14 @@
 	.nodesContent {
 		margin-left: 10px;
 		
-		.selectbox {
+		.uiSelectbox {
 			width: 60px;
 			margin-left: 10px;
+			vertical-align: middle;
+			
+			.selectbox {
+				width: 85px;
+			}
 		}
 	}
 	
@@ -655,9 +661,14 @@
 			width: 200px;
 		}
 		
-		.span12 .selectbox {
+		.span12 .uiSelectbox {
 			width: 80px;
 			margin-left: 10px;
+			vertical-align: middle;
+			
+			.selectbox {
+				width: 105px;
+			}
 		}
 	}
 }

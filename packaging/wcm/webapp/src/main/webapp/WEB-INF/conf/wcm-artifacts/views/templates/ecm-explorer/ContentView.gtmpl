@@ -365,37 +365,27 @@
               <div class="lineLeftItem"><span></span></div>
 <!-- Title-->
               <div class="columnName" style="width: 200px;">
-                <div class="NodeLabel">
-                  <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;$hiddenStyle" rel="tooltip" data-placement="bottom" title="$title $lockedLabel">$title</div>
-                </div>
+                  <div class="nodeLabel" style="$hiddenStyle" rel="tooltip" data-placement="bottom" title="$title $lockedLabel">$title</div>
               </div>
               <div class="lineLeftItem"><span></span></div>
 <!-- Date created -->
               <div class="columnDatetime column" style="width: 105px;">
-                <div class="NodeLabel">
-                  <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" rel="tooltip" data-placement="bottom" title="<%= datetime %>"><%= datetime %></div>
-                </div>
+                  <div class="nodeLabel" rel="tooltip" data-placement="bottom" title="<%= datetime %>"><%= datetime %></div>
               </div>
               <div class="lineLeftItem"><span></span></div>
 <!-- Author -->
               <div class="columnAuthor column" style="width: 93px;">
-                <div class="NodeLabel">
-                  <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" rel="tooltip" data-placement="bottom" title="<%= author %>"><%= author %></div>
-                </div>
+                  <div class="nodeLabel" rel="tooltip" data-placement="bottom" title="<%= author %>"><%= author %></div>
               </div>
               <div class="lineLeftItem"><span></span></div>
 <!-- Last User -->
               <div class="columnLastUser column" style="width: 93px;">
-                <div class="NodeLabel">
-                  <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" rel="tooltip" data-placement="bottom" title="<%= lastUser %>"><%= lastUser %></div>
-                </div>
+                  <div class="nodeLabel" rel="tooltip" data-placement="bottom" title="<%= lastUser %>"><%= lastUser %></div>
               </div>
               <div class="lineLeftItem"><span></span></div>
 <!-- Status-->
               <div class="columnStatus column" style="width: 93px;">
-                <div class="NodeLabel">
-                  <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" rel="tooltip" data-placement="bottom" title="status"><%=_ctx.appRes("UIPublicationPanel.status." + status) %></div>
-                </div>
+                  <div class="nodeLabel" rel="tooltip" data-placement="bottom" title="status"><%=_ctx.appRes("UIPublicationPanel.status." + status) %></div>
               </div>
               <div class="lineLeftItem"><span></span></div>
               
