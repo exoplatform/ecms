@@ -530,7 +530,7 @@ UIFileView.prototype.mouseUpItem = function(evt) {
 					if(event.ctrlKey) element.setAttribute("isLink",true);
 					Self.itemsSelected.push(Self.allItems[i]);
 				}
-			} else {
+			} else if (Self.selectBoxType || !Self.clickTotalCheckBox) {
 				Self.clickItem(event, element);
 			}
 			for(var i in Self.itemsSelected) {
@@ -544,10 +544,15 @@ UIFileView.prototype.mouseUpItem = function(evt) {
 			//event.cancelBubble = true;
 			if (inArray(Self.itemsSelected, element) && Self.itemsSelected.length > 1){
 				Self.showItemContextMenu(event, element);
-			} else {
+			} else if (Self.itemsSelected.length > 0) {
 				//Self.clickItem(event, element);
-				Self.showItemContextMenu(event, element);
-				//eval(element.getAttribute("mousedown"));
+				//Self.showItemContextMenu(event, element);
+				var action = element.getAttribute("mousedown");
+				//alert(action);				
+				action = action.replace('this', 'element');
+				//alert(action);
+				eval(action);
+				//eXo.webui.UIRightClickPopupMenu.clickRightMouse(event, element, 'ECMContextMenu', )
 			}
 		}
 	} else {
@@ -736,6 +741,7 @@ UIFileView.prototype.mouseUpGround = function(evt) {
 
 // working with item context menu
 UIFileView.prototype.showItemContextMenu = function (event, element) {
+	gj("#UIActionBarTabsContainer").addClass("NoShow");
 	var event = event || window.event;
 	event.cancelBubble = true;
 	if (document.getElementById(Self.contextMenuId)) {
@@ -878,6 +884,9 @@ UIFileView.prototype.hideContextMenu = function() {
 	var contextMenu = document.getElementById(Self.contextMenuId);
 	if (contextMenu) contextMenu.style.display = "none";
 	
+	var contextMenu = document.getElementById('ECMContextMenu');
+	if (contextMenu) contextMenu.style.display = "none";
+	
 	//remove default context menu;
 	eval(eXo.core.MouseEventManager.onMouseDownHandlers);
 	eXo.core.MouseEventManager.onMouseDownHandlers = null;
@@ -985,6 +994,142 @@ UIFileView.prototype.checkSelectedItemCount = function() {
 	} else {
 		gj("#FileViewStatus").addClass("NoShow");
 	}
+	//---------------------------------------------
+	if (Self.itemsSelected.length == 0) {
+		gj("#UIActionBarTabsContainer").removeClass("NoShow");		
+	}
+};
+
+UIFileView.prototype.clickRightMouse = function(event, elemt, menuId, objId, whiteList, opt) {
+	gj("#UIActionBarTabsContainer").addClass("NoShow");
+    if (!event)
+      event = window.event;
+
+    var contextMenu = document.getElementById(menuId);
+    contextMenu.objId = objId;
+
+    //help to disable browser context menu
+    //when onmouseover is registered after the dom has already displayed, mouseover evt'll not be raised
+    var parent = gj(contextMenu).parent();
+    if (!document.oncontextmenu) {
+    	parent.trigger("mouseover");
+    }
+    
+    var jDoc = gj(document);
+    jDoc.trigger("mousedown.RightClickPopUpMenu");    
+    //Register closing contextual menu callback on document
+    jDoc.one("mousedown.RightClickPopUpMenu", function(e)
+    {
+    	Self.hideContextMenu(menuId);
+    });
+
+    //The callback registered on document won't be triggered by current 'mousedown' event
+    if ( event.stopPropagation ) {
+    	event.stopPropagation();
+    }
+    event.cancelBubble = true;
+
+    if (whiteList) {
+      gj(contextMenu).find("a").each(function()
+      {
+        var item = gj(this);
+        if(whiteList.indexOf(item.attr("exo:attr")) > -1)
+        {
+          item.css("display", "block");
+        }
+        else
+        {
+          item.css("display", "none");
+        }
+      });
+    }
+
+    var customItem = gj(elemt).find("div.RightClickCustomItem").eq(0);
+    var tmpCustomItem = gj(contextMenu).find("div.RightClickCustomItem").eq(0);
+    if(customItem && tmpCustomItem)
+    {
+      tmpCustomItem.html(customItem.html());
+      tmpCustomItem.css("display", "inline");
+    }
+    else if(tmpCustomItem)
+    {
+      tmpCustomItem.css("display", "none");
+    }
+    /*
+     * fix bug right click in IE7.
+     */
+    var fixWidthForIE7 = 0;
+    var UIWorkingWorkspace = document.getElementById("UIWorkingWorkspace");
+    if (eXo.core.Browser.isIE7() && document.getElementById("UIDockBar")) {
+      if (event.clientX > UIWorkingWorkspace.offsetLeft)
+        fixWidthForIE7 = UIWorkingWorkspace.offsetLeft;
+    }
+
+    eXo.core.Mouse.update(event);
+    gj("#ActionMenuPlaceHolder").prepend(contextMenu);
+    eXo.webui.UIPopup.show(contextMenu);
+    
+//    var ctxMenuContainer = gj(contextMenu).children("div.UIContextMenuContainer")[0];
+//    var offset = gj(contextMenu).offset();
+//    var intTop = eXo.core.Mouse.mouseyInPage
+//        - (offset.top - contextMenu.offsetTop);
+//    var intLeft = eXo.core.Mouse.mousexInPage
+//        - (offset.left - contextMenu.offsetLeft)
+//        + fixWidthForIE7;
+//    if (eXo.core.I18n.isRT()) {
+//      // scrollWidth is width of browser scrollbar
+//      var scrollWidth = 16;
+//      if (eXo.core.Browser.isFF())
+//        scrollWidth = 0;
+//      intLeft = contextMenu.offsetParent.offsetWidth - intLeft + fixWidthForIE7
+//          + scrollWidth;
+//      var clickCenter = gj(contextMenu).find("div.ClickCenterBottom")[0];
+//      if (clickCenter) {
+//        var clickCenterWidth = clickCenter ? parseInt(gj(clickCenter).css("marginRight")) : 0;
+//        intLeft += (ctxMenuContainer.offsetWidth - 2 * clickCenterWidth);
+//      }
+//    }
+//
+//    var jWin = gj(window);
+//    var browserHeight = jWin.height();
+//    var browserWidth = jWin.width();
+//    switch (opt) {
+//    case 1:
+//      intTop -= ctxMenuContainer.offsetHeight;
+//      break;
+//    case 2:
+//      break;
+//    case 3:
+//      break;
+//    case 4:
+//      break;
+//    default:
+//      // if it isn't fit to be showed down BUT is fit to to be showed up
+//      if ((eXo.core.Mouse.mouseyInClient + ctxMenuContainer.offsetHeight) > browserHeight
+//          && (intTop > ctxMenuContainer.offsetHeight)) {
+//        intTop -= ctxMenuContainer.offsetHeight;
+//      }
+//      break;
+//    }
+//
+//    if (eXo.core.I18n.isLT()) {
+//      // move context menu to center of screen to fix width
+//      contextMenu.style.left = browserWidth * 0.5 + "px";
+//      ctxMenuContainer.style.width = "auto";
+//      ctxMenuContainer.style.width = ctxMenuContainer.offsetWidth + 2 + "px";
+//      // end fix width
+//      // need to add 1 more pixel because IE8 will dispatch onmouseout event to
+//      // contextMenu.parent
+//      contextMenu.style.left = (intLeft + 1) + "px";
+//    } else {
+//      // move context menu to center of screen to fix width
+//      contextMenu.style.right = browserWidth * 0.5 + "px";
+//      ctxMenuContainer.style.width = "auto";
+//      ctxMenuContainer.style.width = ctxMenuContainer.offsetWidth + 2 + "px";
+//      // end fix width
+//      contextMenu.style.right = intLeft + "px";
+//    }
+//    ctxMenuContainer.style.width = ctxMenuContainer.offsetWidth + "px";
 };
 
 //private method

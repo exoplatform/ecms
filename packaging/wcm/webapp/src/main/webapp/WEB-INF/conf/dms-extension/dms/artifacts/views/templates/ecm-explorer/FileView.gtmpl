@@ -73,7 +73,7 @@
 				<div class="TitleTable" id="FileViewBreadcrumb">
 	  <!--============FirstRow==================================================================-->
           <div class="TitleTableRow">
-            <div id="ActionMenuPlaceHolder" class="FL"><span></span></div>
+            <!--div id="ActionMenuPlaceHolder" class="FL"><span></span></div-->
             <div id="FileViewStatus" class="NoShow FR">
                 <div  style="cursor:pointer" id="FileViewClearSelection" class="FR" onclick="eXo.ecm.UIFileView.clearCheckboxes(event);">
                   <u><%=_ctx.appRes("FileView.label.ClearSelection")%></u>

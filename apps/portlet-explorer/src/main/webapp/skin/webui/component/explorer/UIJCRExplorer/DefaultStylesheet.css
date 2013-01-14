@@ -246,6 +246,15 @@
   padding: 0px 12px;
 }
 
+.UIJCRExplorerPortlet .UIJCRExplorer .UIWorkingArea .UIActionBar .UIContextMenuContainer {
+	width: auto;
+	overflow: hidden;
+}
+
+.UIActionBar .UIRightClickPopupMenu .MenuItem {
+	float: left;
+} 
+
 /*############################## -- TabContainer -- ##############################*/
 
 /*############################## -- End UIJCRExplorer -- ##############################*/
