@@ -16,15 +16,12 @@
  */
 package org.exoplatform.wcm.connector.authoring;
 
-import static org.testng.AssertJUnit.assertEquals;
-
 import javax.ws.rs.core.Response;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.BaseConnectorTestCase;
 import org.exoplatform.services.rest.impl.ContainerResponse;
 import org.exoplatform.services.rest.wadl.research.HTTPMethods;
-import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SAS
@@ -34,12 +31,9 @@ import org.testng.annotations.Test;
  */
 public class TestCopyContentFile extends BaseConnectorTestCase {
 
-  /**
-   * Bind CopyContentFile REST service
-   */
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
+  public void setUp() throws Exception {
+    super.setUp();
+    // Bind CopyContentFile REST service
     CopyContentFile restService = (CopyContentFile) this.container.getComponentInstanceOfType(CopyContentFile.class);
     this.binder.addResource(restService, null);
   }
@@ -50,10 +44,13 @@ public class TestCopyContentFile extends BaseConnectorTestCase {
    * Expect: connector return data ok
    * @throws Exception
    */
-  @Test
   public void testCopyFile() throws Exception{
     String restPath = "/copyfile/copy/";
     ContainerResponse response = service(HTTPMethods.POST.toString(), restPath, StringUtils.EMPTY, null, null);
     assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+  }
+  
+  public void tearDown() throws Exception {
+    super.tearDown();
   }
 }

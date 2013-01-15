@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="iso-8859-1"?>
 <!--
 
     Copyright (C) 2009 eXo Platform SAS.
@@ -21,8 +21,8 @@
 -->
 
 <gatein-resources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_resources_1_2_1 http://www.gatein.org/xml/ns/gatein_resources_1_2_1" 
-    xmlns="http://www.gatein.org/xml/ns/gatein_resources_1_2_1">
+    xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_resources_1_3 http://www.gatein.org/xml/ns/gatein_resources_1_3" 
+    xmlns="http://www.gatein.org/xml/ns/gatein_resources_1_3">
 
   <!-- FileExplorerPortlet skin -->
   <portlet-skin>
@@ -35,97 +35,222 @@
   <portlet>
     <name>FileExplorerPortlet</name>
     <module>
+      <depends>
+        <module>multiUpload</module>
+      </depends>
+      <depends>
+        <module>mouseEventManager</module>
+      </depends>
+      <depends>
+        <module>autoComplete</module>
+      </depends>
+      <depends>
+        <module>flowplayer</module>
+      </depends>
+      <depends>
+        <module>uiCoverFlow</module>
+      </depends>
+      <depends>
+        <module>uiDocumentForm</module>
+      </depends>
+      <depends>
+        <module>uiJCRExplorer</module>
+      </depends>
+      <depends>
+        <module>uiListView</module>
+      </depends>
+      <depends>
+        <module>uiSimpleView</module>
+      </depends>
+      <depends>
+        <module>uiTimelineView</module>
+      </depends>
+      <depends>
+        <module>zeroClipboard</module>
+      </depends>
+      <depends>
+        <module>rename</module>
+      </depends>
 	    <depends>
-	    	<module>explorer-module</module>
+	     <module>wcm-utils</module>
+	    </depends>
+	    <depends>
+	      <module>ecm-utils</module>
 	    </depends>
     </module>
   </portlet>
-  
+
   <module>
-  	<name>explorer-module</name>
-  	<as>explorer_module</as>
+    <name>uiTimelineView</name>
     <script>
-      <name>eXo.core.MouseEventManager</name>
-      <path>/javascript/eXo/ecm/MouseEventManager.js</path>
-    </script>
-    <script>
-      <name>eXo.ecm.AutoComplete</name>
-      <path>/javascript/eXo/ecm/AutoComplete.js</path>
-    </script>
-    <script>
-      <name>eXo.ecm.CoverFlowLib</name>
-      <path>/javascript/eXo/ecm/CoverFlowLib.js</path>
-    </script>
-    <script>
-      <name>eXo.ecm.Flowplayer</name>
-      <path>/javascript/eXo/ecm/flowplayer-3.2.6.min.js</path>
-    </script>
-    <script>
-      <name>eXo.ecm.Mootools</name>
-      <path>/javascript/eXo/ecm/Mootools.js</path>
-    </script>
-    <script>
-      <name>eXo.ecm.Slideshow</name>
-      <path>/javascript/eXo/ecm/Slideshow.js</path>
-    </script>
-    <script>
-      <name>eXo.ecm.UICoverFlow</name>
-      <path>/javascript/eXo/ecm/UICoverFlow.js</path>
-    </script>
-    <script>
-      <name>eXo.ecm.UIDocumentForm</name>
-      <path>/javascript/eXo/ecm/UIDocumentForm.js</path>
-    </script>
-    <script>
-      <name>eXo.ecm.UIJCRExplorer</name>
-      <path>/javascript/eXo/ecm/UIJCRExplorer.js</path>
-    </script>
-    <script>
-      <name>eXo.ecm.UIListView</name>
-      <path>/javascript/eXo/ecm/UIListView.js</path>
-    </script>
-    <script>
-      <name>eXo.ecm.UIFileView</name>
-      <path>/javascript/eXo/ecm/UIFileView.js</path>
-    </script>
-    <script>
-      <name>eXo.ecm.UISimpleView</name>
-      <path>/javascript/eXo/ecm/UISimpleView.js</path>
-    </script>
-    <script>
-      <name>eXo.ecm.UITimelineView</name>
       <path>/javascript/eXo/ecm/UITimelineView.js</path>
     </script>
-    <script>
-      <name>eXo.ecm.ZeroClipboard</name>
-      <path>/javascript/eXo/ecm/ZeroClipboard.js</path>
-    </script>
-    <script>
-       <name>eXo.ecm.Rename</name>
-       <path>/javascript/eXo/ecm/Rename.js</path>
-    </script>
-    <script>
-      <name>eXo.ecm.MultiUpload</name>
-      <path>/javascript/eXo/ecm/MultiUpload.js</path>
-    </script>    
     <depends>
       <module>jquery</module>
       <as>gj</as>
     </depends>
-     <depends>
-       <module>quick-edit</module>
-     </depends>
-     <depends>
-       <module>webui</module>
-     </depends>
-     <depends>
-       <module>webui-ext</module>
-     </depends>
-     <depends>
-       <module>ecm-utils</module>
-     </depends>
-     <depends>
-       <module>wcm-utils</module>
-     </depends>
+    <depends>
+      <module>base</module>
+    </depends>
+    <depends>
+     <module>wcm-utils</module>
+    </depends>
+    <depends>
+      <module>ecm-utils</module>
+    </depends>
+  </module>
+  
+  <module>
+    <name>uiSimpleView</name>
+    <script>
+      <path>/javascript/eXo/ecm/UISimpleView.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+      <as>gj</as>
+    </depends>
+    <depends>
+      <module>base</module>
+    </depends>
+    <depends>
+     <module>wcm-utils</module>
+    </depends>
+  </module>
+  
+  <module>
+    <name>uiCoverFlow</name>
+    <script>
+      <path>/javascript/eXo/ecm/UICoverFlow.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+      <as>gj</as>
+    </depends>
+    <depends>
+      <module>base</module>
+    </depends>
+  </module>
+
+  <module>
+    <name>uiJCRExplorer</name>
+    <script>
+      <path>/javascript/eXo/ecm/UIJCRExplorer.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+      <as>gj</as>
+    </depends>
+  </module>
+  
+  <module>
+    <name>uiDocumentForm</name>
+    <script>
+      <path>/javascript/eXo/ecm/UIDocumentForm.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+      <as>gj</as>
+    </depends>
+    <depends>
+      <module>ecm-utils</module>
+    </depends>
+  </module>
+  
+  <module>
+    <name>uiListView</name>
+    <script>
+      <path>/javascript/eXo/ecm/UIListView.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+      <as>gj</as>
+    </depends>
+    <depends>
+      <module>ecm-utils</module>
+    </depends>
+    <depends>
+      <module>wcm-utils</module>
+    </depends>
+    <depends>
+      <module>webui-ext</module>
+    </depends>
+  </module>
+  
+  <module>
+    <name>uiFileView</name>
+    <script>
+      <path>/javascript/eXo/ecm/UIFileView.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+      <as>gj</as>
+    </depends>
+    <depends>
+      <module>ecm-utils</module>
+    </depends>
+    <depends>
+      <module>wcm-utils</module>
+    </depends>
+    <depends>
+      <module>webui-ext</module>
+    </depends>
+  </module>
+    
+  <module>
+    <name>rename</name>
+    <script>
+      <path>/javascript/eXo/ecm/Rename.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+      <as>gj</as>
+    </depends>
+    <depends>
+      <module>wcm-utils</module>
+    </depends>
+  </module>
+  
+  <module>
+    <name>autoComplete</name>
+    <as>autoComplete</as>
+    <script>
+      <path>/javascript/eXo/ecm/AutoComplete.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+      <as>gj</as>
+    </depends>
+    <depends>
+      <module>base</module>
+    </depends>
+  </module>
+  
+  <module>
+    <name>multiUpload</name>
+    <as>multiUpload</as>
+    <script>
+      <path>/javascript/eXo/ecm/MultiUpload.js</path>
+    </script>
+    <depends>
+      <module>ecm-bootstrap</module>
+    </depends>
+    <depends>
+      <module>jquery</module>
+      <as>gj</as>
+    </depends>
+    <depends>
+      <module>wcm-utils</module>
+    </depends>
+  </module>
+  
+  <module>
+    <name>mouseEventManager</name>
+    <as>mouseEventManager</as>
+    <script>
+      <path>/javascript/eXo/ecm/MouseEventManager.js</path>
+    </script>
+    <depends>
+      <module>base</module>
+    </depends>
   </module>
 </gatein-resources>

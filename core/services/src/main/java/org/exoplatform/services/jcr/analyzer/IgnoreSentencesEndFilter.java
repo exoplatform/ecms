@@ -16,9 +16,11 @@
  */
 package org.exoplatform.services.jcr.analyzer;
 
-import org.apache.lucene.analysis.Token;
+import java.io.IOException;
+
 import org.apache.lucene.analysis.TokenFilter;
 import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 
 /**
  * Created by The eXo Platform SAS
@@ -27,21 +29,30 @@ import org.apache.lucene.analysis.TokenStream;
  * 9 May 2012  
  */
 public class IgnoreSentencesEndFilter extends TokenFilter {
-  
+  private final CharTermAttribute termAtt = addAttribute(CharTermAttribute.class);
+
   protected IgnoreSentencesEndFilter(TokenStream input) {
     super(input);
   }
-  public final Token next() throws java.io.IOException {
-    Token nextToken = input.next();
-    if (nextToken != null) {
-      String tokenText = nextToken.termText();
-      tokenText = tokenText.replaceAll("([\\.,;:]+$)", "");
-//      System.out.println("tokenText1: " + tokenText1 + "      tokenText: " + tokenText);
-      if(tokenText.equals("")||tokenText.trim().equals("")){
-        return new Token("", 0, 0, nextToken.type());
-      }
-      return new Token(tokenText.trim(),nextToken.startOffset(), nextToken.startOffset()+tokenText.length(), nextToken.type());
-    } else
-      return null;
+  
+  @Override
+  public boolean incrementToken() throws IOException {
+    if (!input.incrementToken()) {
+      return false;
+    }
+    
+    final char[] buffer = termAtt.buffer();
+    final int bufferLength = termAtt.length();
+    
+    String tokenText = new String(buffer);
+    tokenText = tokenText.replaceAll("([\\.,;:]+$)", "");
+    
+    int newLen = tokenText.toCharArray().length;
+    if (newLen < bufferLength) {
+      termAtt.copyBuffer(tokenText.toCharArray(), 0, newLen);
+      termAtt.setLength(newLen);
+    }
+    
+    return true;
   }
 }

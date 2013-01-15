@@ -17,6 +17,8 @@
 package org.exoplatform.ecm.webui.component.explorer.popup.admin;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIContainer;
@@ -34,26 +36,40 @@ import org.exoplatform.webui.core.UIPopupWindow;
 @ComponentConfig(template = "system:/groovy/webui/core/UITabPane.gtmpl")
 public class UIActionManager extends UIContainer implements UIPopupComponent {
 
+  private static final Log LOG = ExoLogger.getLogger(UIActionManager.class.getName());
+
   public UIActionManager() throws Exception {
     addChild(UIActionListContainer.class, null, null);
     addChild(UIActionContainer.class, null, null).setRendered(false);
   }
 
-  public void activate() throws Exception {
-    UIActionTypeForm uiActionTypeForm = findFirstComponentOfType(UIActionTypeForm.class);
-    uiActionTypeForm.update();
-    UIActionList uiActionList = findFirstComponentOfType(UIActionList.class);
-    uiActionList.updateGrid(getAncestorOfType(UIJCRExplorer.class).getCurrentNode(),
+  public void activate() {
+    try {
+      UIActionTypeForm uiActionTypeForm = findFirstComponentOfType(UIActionTypeForm.class);
+      uiActionTypeForm.update();
+      UIActionList uiActionList = findFirstComponentOfType(UIActionList.class);
+      uiActionList.updateGrid(getAncestorOfType(UIJCRExplorer.class).getCurrentNode(),
                             uiActionList.getChild(UIPageIterator.class).getCurrentPage());
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error!", e.getMessage());
+      }
+    }
   }
 
   /**
    * Remove lock if node is locked for editing
    */
-  public void deActivate() throws Exception {
-    UIActionForm uiForm = findFirstComponentOfType(UIActionForm.class);
-    if (uiForm != null) {
-      uiForm.releaseLock();
+  public void deActivate() {
+    try {
+      UIActionForm uiForm = findFirstComponentOfType(UIActionForm.class);
+      if (uiForm != null) {
+        uiForm.releaseLock();
+      }
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error!", e.getMessage());
+      }
     }
   }
 

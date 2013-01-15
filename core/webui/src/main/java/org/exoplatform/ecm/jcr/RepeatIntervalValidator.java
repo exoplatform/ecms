@@ -20,7 +20,7 @@ import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.form.UIFormInput;
 import org.exoplatform.webui.form.validator.Validator;
-import org.quartz.SimpleTrigger;
+import org.quartz.impl.triggers.SimpleTriggerImpl;
 
 /**
  * Created by The eXo Platform SARL
@@ -33,7 +33,7 @@ public class RepeatIntervalValidator implements Validator {
   public void validate(UIFormInput uiInput) throws Exception {
     try {
       long timeInterval = Long.parseLong(uiInput.getValue().toString()) ;
-      new SimpleTrigger().setRepeatInterval(timeInterval) ;
+      new SimpleTriggerImpl().setRepeatInterval(timeInterval) ;
     } catch(Exception e) {
       throw new MessageException(
           new ApplicationMessage("RepeatIntervalValidator.msg.invalid-value", null, ApplicationMessage.WARNING)) ;

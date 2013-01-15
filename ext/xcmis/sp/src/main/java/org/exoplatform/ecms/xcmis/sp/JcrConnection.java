@@ -17,6 +17,9 @@
 
 package org.exoplatform.ecms.xcmis.sp;
 
+import javax.jcr.RepositoryException;
+
+import org.xcmis.spi.CmisRuntimeException;
 import org.xcmis.spi.Connection;
 import org.xcmis.spi.ObjectData;
 import org.xcmis.spi.Storage;
@@ -41,7 +44,11 @@ public class JcrConnection extends Connection
     */
    public void close()
    {
-      ((StorageImpl)storage).session.logout();
+      try {
+        ((StorageImpl)storage).getSession().logout();
+      } catch (RepositoryException re) {
+        throw new CmisRuntimeException(re.getMessage(), re);
+      }
       closed = true;
    }
 

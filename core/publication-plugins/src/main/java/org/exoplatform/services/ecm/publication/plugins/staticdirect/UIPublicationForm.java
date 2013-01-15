@@ -32,7 +32,6 @@ import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.impl.core.lock.LockManagerImpl;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
@@ -68,7 +67,6 @@ public class UIPublicationForm extends UIForm {
   final static public String STATE = "state";
 
   private VersionNode curentVersion_;
-  private VersionNode rootVersion_;
   private NodeLocation currentNode_;
   private String visibility_;
   private String state_;
@@ -119,7 +117,6 @@ public class UIPublicationForm extends UIForm {
 
   public void initForm(Node currentNode) throws Exception {
     currentNode_ = NodeLocation.getNodeLocationByNode(currentNode);
-    rootVersion_ = new VersionNode(currentNode.getVersionHistory().getRootVersion());
     curentVersion_ = new VersionNode(currentNode.getBaseVersion());
     visibility_ = currentNode.getProperty(StaticAndDirectPublicationPlugin.VISIBILITY).getString();
 
@@ -136,7 +133,8 @@ public class UIPublicationForm extends UIForm {
     PortalRequestContext requestContext = Util.getPortalRequestContext();
     HttpSession httpSession = requestContext.getRequest().getSession();
     String key = createLockKey(node);
-    Map<String,String> lockedNodesInfo = (Map<String,String>)httpSession.getAttribute(LockManagerImpl.class.getName());
+    Map<String,String> lockedNodesInfo = (Map<String,String>)httpSession.getAttribute(
+      "org.exoplatform.services.jcr.impl.core.lock.LockManagerImpl");
     if(lockedNodesInfo == null) return null;
     return lockedNodesInfo.get(key);
   }
@@ -151,9 +149,9 @@ public class UIPublicationForm extends UIForm {
           .append(node.getPath());
     return buffer.toString();
   }
-  
+
   private Node getRealCurrentNode() {
-    return NodeLocation.getNodeByLocation(currentNode_); 
+    return NodeLocation.getNodeByLocation(currentNode_);
   }
 
   static public class SaveActionListener extends EventListener<UIPublicationForm> {
@@ -170,7 +168,7 @@ public class UIPublicationForm extends UIForm {
       }
       if(!uiForm.getRealCurrentNode().isCheckedOut()) {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null,
-            ApplicationMessage.WARNING));        
+            ApplicationMessage.WARNING));
         return;
       }
       PublicationService publicationService = uiForm.getApplicationComponent(PublicationService.class);
@@ -219,7 +217,7 @@ public class UIPublicationForm extends UIForm {
        * Unsubcribe lifecycle and display message to inform
        */
       publicationService.unsubcribeLifecycle(selectedNode);
-      uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.unsubcriber-lifecycle-finish", null));      
+      uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.unsubcriber-lifecycle-finish", null));
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup.getParent());
       return;
     }

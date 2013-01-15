@@ -44,9 +44,9 @@
   def managersMultiItemContext =  uiWorkingArea.getMultiActionsExtensionList();
   def managersGroundContext = uiWorkingArea.getGroundActionsExtensionList();
   def jsManager = rcontext.getJavascriptManager();
-  jsManager.require("SHARED/explorer-module", "explorer").
+  jsManager.require("SHARED/uiTimelineView", "uiTimelineView").
             require("SHARED/ecm-utils", "ecmutil").
-  addScripts("explorer.UITimelineView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');").
+  addScripts("uiTimelineView.UITimelineView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');").
   addScripts("ecmutil.ECMUtils.initClipboard('clip_button','1','$size');").
   addScripts('ecmutil.ECMUtils.loadEffectedItemsInSideBar();');
 
@@ -260,7 +260,7 @@
               for (act in customActs) {
                 String actName = act.getProperty("exo:name").getValue().getString() ;
                 params = [new Parameter("workspaceName", preferenceWS), new Parameter("actionName",Utils.formatNodeName(act.getName()))] ;
-                strActs += "<a class=\"MenuItem\" style='display: block;' onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + uiCustomActionComponent.event("Custom",Utils.formatNodeName(nodePath),params) + "\">" ;
+                strActs += "<a class=\"MenuItem\" style='display: block;' href=\"" + uiCustomActionComponent.event("Custom",Utils.formatNodeName(nodePath),params) + "\">" ;
                 strActs += "  <div class=\"ItemIcon " + Utils.getNodeTypeIcon(act, "16x16Icon") + "\">$actName</div>" ;
                 strActs += "</a>" ;
               }            

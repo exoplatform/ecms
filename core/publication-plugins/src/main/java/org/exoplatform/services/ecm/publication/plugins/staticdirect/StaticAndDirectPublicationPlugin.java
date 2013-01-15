@@ -593,7 +593,7 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
     ClassLoader cl = this.getClass().getClassLoader();
     ResourceBundle resourceBundle = ResourceBundle.getBundle(localeFile, locale, cl);
     String result = resourceBundle.getString(key);
-    return String.format(result, values);
+    return String.format(result, (Object[])values);
   }
 
   public Node getNodeView(Node currentNode, Map<String, Object> context) throws Exception {

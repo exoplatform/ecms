@@ -16,10 +16,6 @@
  */
 package org.exoplatform.services.ecm.dms.folksonomy;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertFalse;
-import static org.testng.AssertJUnit.assertTrue;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,11 +27,9 @@ import javax.jcr.Session;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SARL
@@ -53,6 +47,7 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
 
   private NewFolksonomyService newFolksonomyService_;
   private LinkManager linkManager;
+  private NodeHierarchyCreator      nodeHierarchyCreator;
   private Node test, test2;
   private Node folksonomyNode;
   private Node groupAFolksonomyNode;
@@ -60,16 +55,12 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
   private Node publicFolksonomyNode;
   private Node siteFolksonomyNode;
 
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
-    newFolksonomyService_ = (NewFolksonomyService) container.getComponentInstanceOfType(NewFolksonomyService.class);
-    linkManager = (LinkManager) container.getComponentInstanceOfType(LinkManager.class);
-  }
-
-  @BeforeMethod
   public void setUp() throws Exception {
-    applySystemSession();
+    super.setUp();
+    newFolksonomyService_ = (NewFolksonomyService) container.getComponentInstanceOfType(NewFolksonomyService.class);
+    this.nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
+    linkManager = (LinkManager) container.getComponentInstanceOfType(LinkManager.class);
+    applyUserSession("john", "gtn", COLLABORATION_WS);
 //    String userName = session.getUserID();
     String userName = session.getUserID();
     Node root = session.getRootNode();
@@ -80,8 +71,9 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
                     applicationData.getNode("Tags") :
                     applicationData.addNode("Tags");
     Node rootNode = root.hasNode("Users") ? root.getNode("Users") : root.addNode("Users");
-    Node userNode = rootNode.hasNode(userName) ? rootNode.getNode(userName) :
-                                                  rootNode.addNode(userName);
+//    Node userNode = rootNode.hasNode(userName) ? rootNode.getNode(userName) :
+//                                                  rootNode.addNode(userName);
+    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, "john");
     Node groupsNode = root.hasNode("Groups") ? root.getNode("Groups") :
                                                     root.addNode("Groups");
     Node platformNode = groupsNode.hasNode("platform") ? groupsNode.getNode("platform") :
@@ -114,6 +106,14 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
 
     publicFolksonomyNode = tagsNode;
     session.save();
+    
+    String site = "portal1";
+    Node siteTags = root.hasNode("SiteTags") ?
+                    root.getNode("SiteTags") :
+                    root.addNode("SiteTags");
+    siteFolksonomyNode = siteTags.addNode(site);
+    session.save();
+    
   }
 
   /**
@@ -127,7 +127,7 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
    *        property 'exo:total' of 'sport' node must be 1
    *        property 'exo:total' of 'weather' node must be 1   *
    */
-  @Test
+  
   public void testAddPrivateTag() throws Exception {
     String[] tags = { "sport", "weather" };
     newFolksonomyService_.addPrivateTag(tags, test, COLLABORATION_WS, session.getUserID());
@@ -152,7 +152,7 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
    * test addPrivateTag(): case the node already is added private tag before
    * @throws Exception
    */
-  @Test
+  
   public void testAddPrivateTag2() throws Exception {
     String[] tags = { "sport" };
 
@@ -172,7 +172,6 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
    * test addPrivateTag(): add private tag for symlink
    * @throws Exception
    */
-  @Test
   public void testAddPrivateTag3() throws Exception {
     // Create a symlink to document
     linkManager.createLink(test.getParent(), test);
@@ -210,7 +209,6 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
    *        property 'exo:total' of 'sport' node must be 1
    *        property 'exo:total' of 'weather' node must be 1   *
    */
-  @Test
   public void testAddGroupsTag() throws Exception {
     String[] tags = { "sport", "weather" };
     newFolksonomyService_.addGroupsTag(tags, test, COLLABORATION_WS, groups);
@@ -259,7 +257,6 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
    *        property 'exo:total' of 'sport' node must be 1
    *        property 'exo:total' of 'weather' node must be 1   *
    */
-  @Test
   public void testAddPublicTag() throws Exception {
     String[] tags = { "sport", "weather" };
     String publicFolksonomyTreePath = "/Application Data/Tags";
@@ -295,7 +292,6 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
    *        property 'exo:total' of 'sport' node must be 1
    *        property 'exo:total' of 'weather' node must be 1   *
    */
-  @Test
   public void testAddSiteTag() throws Exception {
     String[] tags = { "sport", "weather" };
     String site = "portal1";
@@ -303,30 +299,31 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
     Node siteTags = root.hasNode("SiteTags") ?
                     root.getNode("SiteTags") :
                     root.addNode("SiteTags");
-
+    Node test = nodeHierarchyCreator.getUserNode(sessionProvider, "john").getNode("Private").addNode("a");
+    session.save();
     siteFolksonomyNode = siteTags.addNode(site);
     session.save();
     newFolksonomyService_.addSiteTag(site,
                                      tags,
                                      test,
                                      COLLABORATION_WS);
+    siteFolksonomyNode = siteTags.getNode(site);
     assertTrue("testAddSiteTag failed! ", siteFolksonomyNode.hasNode("sport"));
     assertTrue("testAddSiteTag failed! ", siteFolksonomyNode.hasNode("weather"));
 
     Node sportTagNode = siteFolksonomyNode.getNode("sport");
-    Node link = sportTagNode.getNodes().nextNode();
+    Node link = sportTagNode.getNode("a");
     Node targetNode = linkManager.getTarget(link);
     assertTrue("testAddSiteTag failed! ", test.isSame(targetNode));
 
     Node weatherTagNode = siteFolksonomyNode.getNode("weather");
-    link = weatherTagNode.getNodes().nextNode();
+    link = weatherTagNode.getNode("a");
     targetNode = linkManager.getTarget(link);
     assertTrue("testAddSiteTag failed! ", test.isSame(targetNode));
 
     assertEquals("testAddSiteTag failed! ", 1L, sportTagNode.getProperty(EXO_TOTAL).getLong());
     assertEquals("testAddSiteTag failed! ", 1L, weatherTagNode.getProperty(EXO_TOTAL).getLong());
   }
-
 
   /**
    * Test Method: getAllDocumentsByTag()
@@ -336,7 +333,7 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
    * Expected Result:
    *              'test' and 'test2'
    */
-  @Test
+  
   public void testGetAllDocumentsByTag() throws Exception {
     String[] tags = { "sport", "weather" };
     String user = session.getUserID();
@@ -376,7 +373,6 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
    *               'sport', 'weather', 'music' of b
    *               total 6
    */
-  @Test
   public void testGetAllGroupTagsOfManyRoles() throws Exception {
     String[] tags = { "sport", "weather" };
     String[] tags2 = { "sport", "music" };
@@ -403,7 +399,7 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
    * Expected Result:
    *               'sport', 'weather', 'music'
    */
-  @Test
+  
   public void testGetAllGroupTags() throws Exception {
     String[] tags = { "sport", "weather" };
     String[] tags2 = { "sport", "music" };
@@ -430,7 +426,7 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
    * Expected Result:
    *               'sport', 'weather', 'xyz'
    */
-  @Test
+  
   public void testGetAllPrivateTags() throws Exception {
     String[] tags = { "sport", "weather" };
     newFolksonomyService_.addPrivateTag(tags, test, COLLABORATION_WS, session.getUserID());
@@ -456,7 +452,6 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
    * Expected Result:
    *               sport, weather, boy, girl
    */
-  @Test
   public void testGetAllPublicTags() throws Exception {
     String[] tags = { "sport", "weather" };
     String[] tags2 = { "boy", "girl", "sport" };
@@ -481,7 +476,6 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
     assertEquals("testGetAllPublicTags failed!", 4, count);
   }
 
-
   /**
    * Test Method : getAllSiteTags()
    * Input: Node 'test', 'test2'
@@ -491,11 +485,18 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
    * Expected Result:
    *               sport, weather, boy, girl
    */
-  @Test
   public void testGetAllSiteTags() throws Exception {
     String[] tags = { "sport", "weather" };
     String[] tags2 = { "boy", "girl", "sport" };
     String site = "portal1";
+    Node root = session.getRootNode();
+    Node siteTags = root.hasNode("SiteTags") ?
+                    root.getNode("SiteTags") :
+                    root.addNode("SiteTags");
+
+    siteFolksonomyNode = siteTags.addNode(site);
+    session.save();
+    
     newFolksonomyService_.addSiteTag(site,
                                        tags,
                                        test,
@@ -525,7 +526,6 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
    *               get all public tags -> football, weather
    *               node 'football' must have a symlink child which points to 'test' node
    */
-  @Test
   public void testModifyTagName() throws Exception {
     String[] tags = { "sport", "weather" };
     String publicFolksonomyTreePath = "/Application Data/Tags";
@@ -553,7 +553,6 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
    * Expected Result:
    *               'nobita', 'weather'
    */
-  @Test
   public void testRemoveTag() throws Exception {
     String[] tags = { "sport", "weather", "nobita"};
     String publicFolksonomyTreePath = "/Application Data/Tags";
@@ -584,7 +583,6 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
    * Expected Result:
    *               none
    */
-  @Test
   public void testRemoveTagOfDocument() throws Exception {
     String[] tags = { "sport", "weather" };
     newFolksonomyService_.addPrivateTag(tags, test, COLLABORATION_WS, session.getUserID());
@@ -598,7 +596,6 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
    * Clean data test
    */
 
-  @Test
   public void testGetAllTagNamesWithPublicScope() throws Exception {
     String[] tags = { "sport", "weather" };
     String[] tags2 = { "boy", "girl", "sport" };
@@ -622,7 +619,6 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
     assertEquals("getAllTagNames failed!", 4, tagListPublic.size());
   }
 
-  @Test
   public void testGetAllTagNamesWithPrivateScope() throws Exception {
     String[] tags = { "sport", "weather" };
     newFolksonomyService_.addPrivateTag(tags, test, COLLABORATION_WS, session.getUserID());
@@ -637,7 +633,6 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
     assertEquals("getAllTagNames failed! ", 3, tagList.size());
   }
 
-  @Test
   public void testGetAllTagNamesWithGroupScope() throws Exception {
     String[] tags = { "sport", "weather" };
     String[] tags2 = { "sport", "music" };
@@ -652,7 +647,6 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
     assertEquals("getAllTagNames failed! ", 6, groupTags.size());
   }
 
-  @Test
   public void testGetAllTagNamesWithGroupScope2() throws Exception {
     String[] tags = { "sport", "weather" };
     String[] tags2 = { "sport", "music" };
@@ -667,7 +661,6 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
     assertEquals("getAllTagNames failed! ", 3, groupTags.size());
   }
 
-  @Test
   public void testGetAllTagNamesWithSiteScope() throws Exception {
     String[] tags = { "sport", "weather" };
     String[] tags2 = { "boy", "girl", "sport" };
@@ -689,7 +682,6 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
     assertEquals("getAllTagNames failed!", 4, tagList.size());
   }
 
-  @Test
   public void testGetAllTagNamesWithNoneExistingScope() throws Exception {
     String[] tags = { "sport", "weather" };
     String[] tags2 = { "boy", "girl", "sport" };
@@ -711,7 +703,6 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
     assertEquals("getAllTagNames failed!", 0, tagList.size());
   }
 
-  @Test
   public void testCanEditTag1() throws Exception {
     String[] tags = { "sport", "weather" };
     String[] tags2 = { "boy", "girl", "sport" };
@@ -743,7 +734,6 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
     assertTrue(newFolksonomyService_.canEditTag(1, memberships));
   }
 
-  @Test
   public void testCanEditTag2() throws Exception {
     String[] tags = { "sport", "weather" };
     String[] tags2 = { "boy", "girl", "sport" };
@@ -765,7 +755,7 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
     newFolksonomyService_.addTagPermission("*:/platform/administrators");
   }
 
-  @Test
+  
   public void testGetLinkedTagsOfDocumentByScopeWithPrivateScope() throws Exception {
     String[] tags = { "sport", "weather" };
     newFolksonomyService_.addPrivateTag(tags, test, COLLABORATION_WS, session.getUserID());
@@ -782,7 +772,6 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
     assertEquals("getLinkedTagsOfDocumentByScope failed! ", 2, linkedTags.size());
   }
 
-  @Test
   public void testGetLinkedTagsOfDocumentByScopeWithPublicScope() throws Exception {
     String[] tags = { "sport", "weather" };
     String[] tags2 = { "boy", "girl", "sport" };
@@ -807,8 +796,7 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
 
     assertEquals("getLinkedTagsOfDocumentByScope failed! ", 2, linkedTags.size());
   }
-
-  @Test
+  
   public void testGetLinkedTagsOfDocumentByScopeWithGroupScope() throws Exception {
     String[] tags = { "sport", "weather" };
     String[] tags2 = { "sport", "music" };
@@ -825,7 +813,6 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
     assertEquals("getLinkedTagsOfDocumentByScope failed! ", 2, tagNames.size());
   }
 
-  @Test
   public void testGetLinkedTagsOfDocument() throws Exception {
     String[] tags = { "sport", "weather" };
     String[] tags2 = { "boy", "girl", "sport" };
@@ -847,8 +834,7 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
     assertFalse(tagNames.contains("music"));
     assertEquals("getLinkedTagsOfDocument failed! ", 8, tagNames.size());
   }
-
-  @Test
+  
   public void testRemoveTagsOfNodeRecursively() throws Exception {
     String[] tags = { "sport", "weather" };
     String[] tags2 = { "boy", "girl", "sport" };
@@ -867,7 +853,6 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
     assertEquals("removeTagsOfNodeRecursively failed! ", 0, tagNames.size());
   }
 
-  @Test
   public void testManipulateTagStyle() throws Exception {
     String normal = "normal";
     String normalTagRange = "0..2";
@@ -902,16 +887,17 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
     return nodeNames;
   }
 
-  @AfterMethod
   public void tearDown() throws Exception {
+    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, "john");
     String[] nodes = {"/Application Data/Tags",
-                      "/Users/" + session.getUserID() + "/Private/Folksonomy",
-                      "Groups/platform/users/ApplicationData/Tags",
-                      "Groups/platform/guests/ApplicationData/Tags",
-                      TEST, TEST2,
+                      "/Groups/platform/users/ApplicationData/Tags",
+                      "/Groups/platform/guests/ApplicationData/Tags", "/SiteTags",
+                      "/test","/test2", userNode.getNode("Private/" + TEST).getPath(), userNode.getNode("Private/" + TEST2).getPath(),
+                      userNode.getNode("Private/Folksonomy").getPath(),
                       session.getUserID()};
     for (String node : nodes)
       if (session.itemExists(node)) {
+        //System.out.println("Delete: -----------------------------" + node);
         Node n = (Node)session.getItem(node);
         n.remove();
         session.save();
@@ -927,5 +913,6 @@ public class TestNewFolksonomyService extends BaseWCMTestCase {
     }
     dmsSession.save();
     dmsSession.logout();
+    super.tearDown();
   }
 }

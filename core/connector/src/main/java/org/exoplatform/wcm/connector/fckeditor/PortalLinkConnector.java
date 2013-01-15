@@ -25,6 +25,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.servlet.ServletContext;
+import org.exoplatform.portal.mop.page.PageContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
@@ -49,6 +50,7 @@ import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.config.model.PortalConfig;
 import org.exoplatform.portal.mop.SiteKey;
+import org.exoplatform.portal.mop.page.PageKey;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserPortal;
@@ -68,7 +70,7 @@ import org.w3c.dom.Element;
  * @author Anh Do Ngoc <anh.do@exoplatform.com>
  * @since      Jul 11, 2008
  * @copyright  eXo Platform SEA
- * 
+ *
  * @anchor CONTref.Devref.PublicRestAPIs.PortalLinkConnector
  */
 @SuppressWarnings("deprecation")
@@ -123,7 +125,7 @@ public class PortalLinkConnector implements ResourceContainer {
    * @param type The type.
    * @return The page URI.
    * @throws Exception The exception
-   * 
+   *
    * @anchor CONTref.Devref.PublicRestAPIs.PortalLinkConnector.getFoldersAndFiles
    */
   @GET
@@ -278,7 +280,7 @@ public class PortalLinkConnector implements ResourceContainer {
       RequestLifeCycle.end();
       return rootElement.getOwnerDocument();
     }
-    
+
     if ("/".equals(pageNodeUri)) {
       userNode = userPortal.getNode(navigation, NavigationUtils.ECMS_NAVIGATION_SCOPE, null, null);
     } else {
@@ -346,8 +348,8 @@ public class PortalLinkConnector implements ResourceContainer {
                                Element filesElement,
                                String userId,
                                UserPortalConfigService portalConfigService) throws Exception {
-    String pageId = userNode.getPageRef();
-    Page page = portalConfigService.getPage(pageId, userId);
+    PageKey pageRef = userNode.getPageRef();
+    PageContext page = portalConfigService.getPage(pageRef);
     String pageUri = "";
     if (page == null) {
     pageUri = "/";

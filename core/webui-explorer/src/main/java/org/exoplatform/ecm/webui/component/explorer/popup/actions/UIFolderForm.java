@@ -32,6 +32,8 @@ import org.exoplatform.ecm.webui.comparator.ItemOptionNameComparator;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -59,6 +61,8 @@ import org.exoplatform.webui.form.input.UICheckBoxInput;
 )
 
 public class UIFolderForm extends UIForm implements UIPopupComponent {
+  private static final Log LOG  = ExoLogger.getLogger(UIFolderForm.class.getName());
+
   public static final String FIELD_TITLE_TEXT_BOX = "titleTextBox";
   public static final String FIELD_CUSTOM_TYPE_CHECK_BOX = "customTypeCheckBox";
   public static final String FIELD_CUSTOM_TYPE_SELECT_BOX = "customTypeSelectBox";
@@ -95,34 +99,40 @@ public class UIFolderForm extends UIForm implements UIPopupComponent {
   /**
    * Activate form.
    */
-  public void activate() throws Exception {
-    UICheckBoxInput customTypeCheckBox = this.getUICheckBoxInput(FIELD_CUSTOM_TYPE_CHECK_BOX);
-    UIFormSelectBox customTypeSelectBox = this.getUIFormSelectBox(FIELD_CUSTOM_TYPE_SELECT_BOX);
+  public void activate() {
+    try {
+      UICheckBoxInput customTypeCheckBox = this.getUICheckBoxInput(FIELD_CUSTOM_TYPE_CHECK_BOX);
+      UIFormSelectBox customTypeSelectBox = this.getUIFormSelectBox(FIELD_CUSTOM_TYPE_SELECT_BOX);
+        
+      // Get allowed folder types in current path
+      UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
+      List<String> folderTypes = Utils.getAllowedFolderTypesInCurrentPath(uiExplorer.getCurrentNode(),
+                                                                          uiExplorer.getDriveData());
       
-    // Get allowed folder types in current path
-    UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
-    List<String> folderTypes = Utils.getAllowedFolderTypesInCurrentPath(uiExplorer.getCurrentNode(),
-                                                                        uiExplorer.getDriveData());
-    
-    // Only render custom type checkbox if at least 2 folder types allowed
-    if (folderTypes.size() > 1) {
-      customTypeCheckBox.setRendered(true);
-      if (MANAGED_SITES.equals(this.getAncestorOfType(UIJCRExplorer.class).getDriveData().getName())) {
-        customTypeCheckBox.setChecked(true);
-        customTypeSelectBox.setRendered(true);
-        this.fillCustomTypeSelectBox(folderTypes);
+      // Only render custom type checkbox if at least 2 folder types allowed
+      if (folderTypes.size() > 1) {
+        customTypeCheckBox.setRendered(true);
+        if (MANAGED_SITES.equals(this.getAncestorOfType(UIJCRExplorer.class).getDriveData().getName())) {
+          customTypeCheckBox.setChecked(true);
+          customTypeSelectBox.setRendered(true);
+          this.fillCustomTypeSelectBox(folderTypes);
+        } else {
+          customTypeCheckBox.setChecked(false);
+          customTypeSelectBox.setRendered(false);
+        }
       } else {
-        customTypeCheckBox.setChecked(false);
+        customTypeCheckBox.setRendered(false);
         customTypeSelectBox.setRendered(false);
+        this.setSelectedType(folderTypes.get(0));
       }
-    } else {
-      customTypeCheckBox.setRendered(false);
-      customTypeSelectBox.setRendered(false);
-      this.setSelectedType(folderTypes.get(0));
+    } catch(Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e.getMessage());
+      }
     }
   }
   
-  public void deActivate() throws Exception {}
+  public void deActivate() {}
   
   /**
    * Fill data to custom type select box.

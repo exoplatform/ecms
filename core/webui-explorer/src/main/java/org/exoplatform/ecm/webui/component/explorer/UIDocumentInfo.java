@@ -1192,8 +1192,8 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         }
         uiExplorer.updateAjax(event);
         event.getRequestContext().getJavascriptManager().
-        require("SHARED/explorer-module", "explorer").
-        addScripts("explorer.MultiUpload.setLocation('" + 
+        require("SHARED/multiUpload", "multiUpload").
+        addScripts("multiUpload.setLocation('" + 
                    uiExplorer.getWorkspaceName()  + "','" + 
                    uiExplorer.getDriveData().getName()  + "','" +
                    uiTreeExplorer.getLabel()  + "','" +
@@ -1746,11 +1746,11 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     //check if current user can add node to current node
     //for MuiltUpload drag&drop feature
     if (canAddNode()) {
-      context.getJavascriptManager().require("SHARED/explorer-module", "explorer").
-              addScripts("explorer.MultiUpload.registerEvents('" + this.getId() +"');");
+      context.getJavascriptManager().require("SHARED/multiUpload", "multiUpload").
+              addScripts("multiUpload.registerEvents('" + this.getId() +"');");
     } else {
-      context.getJavascriptManager().require("SHARED/explorer-module", "explorer").
-              addScripts("explorer.MultiUpload.unregisterEvents();");
+      context.getJavascriptManager().require("SHARED/multiUpload", "multiUpload").
+              addScripts("multiUpload.unregisterEvents();");
     }
     //for FileView feature
     getAncestorOfType(UIJCRExplorer.class).setCanShowSideBar(true);

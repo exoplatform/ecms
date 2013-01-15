@@ -16,6 +16,8 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.upload;
 
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIContainer;
@@ -32,6 +34,7 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
     lifecycle = UIContainerLifecycle.class
 )
 public class UIUploadManager extends UIContainer implements UIPopupComponent {
+  private static final Log LOG = ExoLogger.getLogger(UISingleUploadManager.class.getName());
 
   final static public String EXTARNAL_METADATA_POPUP = "AddMetadataPopup" ;
   final static public String SAMENAME_POPUP = "SameNamePopup" ;
@@ -63,12 +66,18 @@ public class UIUploadManager extends UIContainer implements UIPopupComponent {
     return uiPopup;
   }
 
-  public void activate() throws Exception {
-    UIUploadForm uiUploadForm = getChild(UIUploadForm.class);
-    uiUploadForm.initFieldInput();
+  public void activate() {
+    try {
+      UIUploadForm uiUploadForm = getChild(UIUploadForm.class);
+      uiUploadForm.initFieldInput();
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error!", e.getMessage());
+      }
+    }
   }
 
-  public void deActivate() throws Exception {}
+  public void deActivate() {}
 
   public void initMetadataPopup() throws Exception {
     removeChildById(EXTARNAL_METADATA_POPUP) ;

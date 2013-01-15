@@ -152,16 +152,22 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
     getChild(UIDocumentForm.class).resetProperties();
   }
 
-  public void activate() throws Exception {
+  public void activate() {
   }
 
   /**
    * Remove lock if node is locked for editing
    */
-  public void deActivate() throws Exception {
-    UIDocumentForm uiDocumentForm = getChild(UIDocumentForm.class);
-    if (uiDocumentForm != null) {
-      uiDocumentForm.releaseLock();
+  public void deActivate() {
+    try {
+      UIDocumentForm uiDocumentForm = getChild(UIDocumentForm.class);
+      if (uiDocumentForm != null) {
+        uiDocumentForm.releaseLock();
+      }
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error!", e.getMessage());
+      }
     }
   }
 

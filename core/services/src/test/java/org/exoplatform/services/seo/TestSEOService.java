@@ -16,28 +16,21 @@
  */
 package org.exoplatform.services.seo;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertNotNull;
-import static org.testng.AssertJUnit.assertNull;
 import java.util.ArrayList;
+
 import javax.jcr.Node;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.application.PortalRequestContext;
-import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.webui.portal.UIPortal;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
-import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
-import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.gatein.pc.api.PortletInvoker;
 import org.mockito.Mockito;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SAS
@@ -51,22 +44,16 @@ public class TestSEOService extends BaseWCMTestCase{
   /** The SEO Service. */
   private SEOService seoService;
   
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart(); 
+  public void setUp() throws Exception {
+    super.setUp();
     ExoContainer manager = ExoContainerContext.getCurrentContainer();    
     PortletInvoker portletInvoker = Mockito.mock(PortletInvoker.class);
     manager.addComponentToCtx(portletInvoker.hashCode(), portletInvoker);
     sessionProvider = sessionProviderService_.getSystemSessionProvider(null);
     seoService = (SEOService) container.getComponentInstanceOfType(SEOService.class);
-  }
-  
-  @BeforeMethod
-  public void setUp() throws Exception {
     applySystemSession();
   }
   
-  @Test
   public void testConstruct() throws Exception{
     assertNotNull(seoService);
   }
@@ -75,7 +62,6 @@ public class TestSEOService extends BaseWCMTestCase{
    * test store page metadata
    * @throws Exception
    */
-  @Test
   public void testStorePageMetadata() throws Exception {
    PageMetadataModel metaModel = new PageMetadataModel();
     metaModel.setUri("home");
@@ -117,6 +103,11 @@ public class TestSEOService extends BaseWCMTestCase{
    * @throws Exception
    */
   public void testStoreContentMetadata() throws Exception {
+    applyUserSession("john", "gtn", "collaboration");
+    WebuiRequestContext context = Mockito.mock(WebuiRequestContext.class); 
+    WebuiRequestContext.setCurrentInstance(context);
+    PortalRequestContext ctx = Mockito.mock(PortalRequestContext.class);
+    Mockito.when(Util.getPortalRequestContext()).thenReturn(ctx);
     PageMetadataModel metaModel = new PageMetadataModel();
     Node seoNode = session.getRootNode().addNode("parentNode").addNode("childNode");
     if(!seoNode.isNodeType("mix:referenceable")) {
@@ -169,4 +160,7 @@ public class TestSEOService extends BaseWCMTestCase{
     assertNull(seoService.getPageMetadata("home", "en"));     
   }
   
+  public void tearDown() throws Exception {
+    super.tearDown();
+  }
 }

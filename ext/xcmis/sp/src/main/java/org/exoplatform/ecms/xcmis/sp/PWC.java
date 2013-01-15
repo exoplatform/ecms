@@ -197,7 +197,7 @@ class PWC extends DocumentDataImpl
          // To recreate the latestVersion Document instance since 
          // the Id of DocumentDataImpl and JcrNodeEntry wouldn't change
          try {
-            JcrNodeEntry fromNode = entry.storage.fromNode(latestVersion.entry.node);
+            JcrNodeEntry fromNode = entry.storage.fromNode(latestVersion.entry.getNode());
             latestVersion = new DocumentDataImpl(fromNode);
          } catch (ObjectNotFoundException e) {
             throw new StorageException("Can't recreate the latest document object from node", e);

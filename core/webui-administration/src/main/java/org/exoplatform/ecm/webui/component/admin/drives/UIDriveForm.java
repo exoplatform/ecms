@@ -33,6 +33,7 @@ import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.WorkspaceEntry;
+import org.exoplatform.services.jcr.impl.core.WorkspaceInitializer;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -169,7 +170,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
     String wsInitRootNodeType = null;
     for(WorkspaceEntry wsEntry : wsEntries) {
       if(wsEntry.getName().equals(selectedWorkspace)) {
-        wsInitRootNodeType = wsEntry.getAutoInitializedRootNt();
+        wsInitRootNodeType = wsEntry.getInitializer().getParameterValue(WorkspaceInitializer.ROOT_NODETYPE_PARAMETER);
         break;
       }
     }
@@ -377,7 +378,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       String wsInitRootNodeType = null;
       for(WorkspaceEntry wsEntry : wsEntries) {
         if(wsEntry.getName().equals(selectedWorkspace)) {
-          wsInitRootNodeType = wsEntry.getAutoInitializedRootNt();
+          wsInitRootNodeType = wsEntry.getInitializer().getParameterValue(WorkspaceInitializer.ROOT_NODETYPE_PARAMETER);
         }
       }
 

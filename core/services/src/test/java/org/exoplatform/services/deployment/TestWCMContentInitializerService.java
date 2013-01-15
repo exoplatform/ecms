@@ -17,9 +17,6 @@
 package org.exoplatform.services.deployment;
 
 import org.exoplatform.services.wcm.BaseWCMTestCase;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SAS
@@ -29,23 +26,18 @@ import org.testng.annotations.Test;
  */
 public class TestWCMContentInitializerService extends BaseWCMTestCase {
   WCMContentInitializerService WCIService;
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
-    WCIService = (WCMContentInitializerService)container.getComponentInstanceOfType(WCMContentInitializerService.class);
-    WCIService.start();
-  }
-  @Test
   public void testRemoveGroupsOrUsersForLock() throws Exception {
     //For recovering sonar
     WCIService.addPlugin(null);
   }
-  @BeforeMethod
   public void setUp() throws Exception {
+    super.setUp();
+    WCIService = (WCMContentInitializerService)container.getComponentInstanceOfType(WCMContentInitializerService.class);
+    WCIService.start();
     applySystemSession();
   }
   
-  @AfterMethod
   public void tearDown() throws Exception {
+    super.tearDown();
   }
 }

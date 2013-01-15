@@ -126,7 +126,7 @@
   			  for(act in customActs) {
   			    String actName = act.getProperty("exo:name").getValue().getString() ;
   			    params = [new Parameter("workspaceName", preferenceWS), new Parameter("actionName", Utils.formatNodeName(act.getName()))] ;
-  			    strActs += "<a class=\"MenuItem\" style='display: block;' title=\"$actName\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + uiCustomActionComponent.event("Custom", Utils.formatNodeName(path), params) + "\">" ;
+  			    strActs += "<a class=\"MenuItem\" style='display: block;' title=\"$actName\" href=\"" + uiCustomActionComponent.event("Custom", Utils.formatNodeName(path), params) + "\">" ;
   		      strActs += "  <div class=\"ItemIcon " + Utils.getNodeTypeIcon(act, "16x16Icon") + "\">";
   		      if (actName.length() > 10) strActs += actName.substring(0, 10) + "...";
   		      else strActs += actName;

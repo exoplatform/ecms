@@ -17,12 +17,6 @@
  **************************************************************************/
 package org.exoplatform.services.ecm.dms.thumbnail;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertFalse;
-import static org.testng.AssertJUnit.assertNotNull;
-import static org.testng.AssertJUnit.assertNull;
-import static org.testng.AssertJUnit.assertTrue;
-
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -37,9 +31,6 @@ import org.exoplatform.services.cms.impl.ImageUtils;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SARL
@@ -51,14 +42,9 @@ public class TestThumbnailService extends BaseWCMTestCase {
 
   private ThumbnailService thumbnailService;
   
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
-    thumbnailService = (ThumbnailService)container.getComponentInstanceOfType(ThumbnailService.class);
-  }
-  
-  @BeforeMethod
   public void setUp() throws Exception {
+    super.setUp();
+    thumbnailService = (ThumbnailService)container.getComponentInstanceOfType(ThumbnailService.class);
     applySystemSession(); 
   }
 
@@ -68,7 +54,6 @@ public class TestThumbnailService extends BaseWCMTestCase {
    * Expect: Node with name = identifier of test node in ThumbnailService.EXO_THUMBNAILS_FOLDER node exists
    * @throws Exception
    */
-  @Test
   public void testAddThumbnailNode1() throws Exception {
     Node test = session.getRootNode().addNode("test");
     session.save();
@@ -86,7 +71,6 @@ public class TestThumbnailService extends BaseWCMTestCase {
    * Expect: Node with name = identifier of test node in ThumbnailService.EXO_THUMBNAILS_FOLDER node exists
    * @throws Exception
    */
-  @Test
   public void testAddThumbnailNode2() throws Exception {
     Node test = session.getRootNode().addNode("test");
     test.getParent().addNode(ThumbnailService.EXO_THUMBNAILS_FOLDER, ThumbnailService.EXO_THUMBNAILS);
@@ -105,7 +89,6 @@ public class TestThumbnailService extends BaseWCMTestCase {
    * Expect: return empty list images of node test
    * @throws Exception
    */
-  @Test
   public void testGetFlowImages1() throws Exception {
     Node test = session.getRootNode().addNode("test");
     session.save();
@@ -119,7 +102,6 @@ public class TestThumbnailService extends BaseWCMTestCase {
    * Expect: return list images of childTest node with one node name = identifier of childTest node
    * @throws Exception
    */
-  @Test
   public void testGetFlowImages2() throws Exception {
     Node test = session.getRootNode().addNode("test");
     Node childTest = test.addNode("childTest");
@@ -147,7 +129,6 @@ public class TestThumbnailService extends BaseWCMTestCase {
    * Expect: List of 2 node file1 and file2
    * @throws Exception
    */
-  @Test
   public void testGetAllFileInNode() throws Exception {
     Node test = session.getRootNode().addNode("test");
     session.save();
@@ -179,7 +160,6 @@ public class TestThumbnailService extends BaseWCMTestCase {
    *         with type = text/xml return list of 1 node (file2)
    * @throws Exception
    */
-  @Test
   public void testGetFileNodesByType() throws Exception {
     Node test = session.getRootNode().addNode("test");
     session.save();
@@ -212,7 +192,6 @@ public class TestThumbnailService extends BaseWCMTestCase {
    * Expect: data in property exo:smallSize of thumbmail node is resource with height*width = 32x32
    * @throws Exception
    */
-  @Test
   public void testAddThumbnailImage() throws Exception {
     Node test = session.getRootNode().addNode("test");
     session.save();
@@ -228,7 +207,6 @@ public class TestThumbnailService extends BaseWCMTestCase {
    * Expect: property exo:smallSize contains data of resource = /conf/dms/artifacts/images/ThumnailView.jpg
    * @throws Exception
    */
-  @Test
   public void testGetThumbnailImage() throws Exception {
     Node test = session.getRootNode().addNode("test");
     assertNull(thumbnailService.getThumbnailImage(test, "exo:smallSize"));
@@ -245,7 +223,6 @@ public class TestThumbnailService extends BaseWCMTestCase {
    *           /conf/dms/artifacts/images/ThumnailView.jpg which is scale by size = 32*32
    * @throws Exception
    */
-  @Test
   public void testCreateSpecifiedThumbnail() throws Exception {
     Node test = session.getRootNode().addNode("test");
 //    Value value = session.getValueFactory().createValue(ImageUtils.scaleImage(ImageIO.read(getClass().getResourceAsStream("/conf/dms/artifacts/images/ThumnailView.jpg")), 32, 32));
@@ -261,7 +238,6 @@ public class TestThumbnailService extends BaseWCMTestCase {
    *           /conf/dms/artifacts/images/ThumnailView.jpg which is scale by size = 32*32, 64*64, 300*300 respectively
    * @throws Exception
    */
-  @Test
   public void testCreateThumbnailImage() throws Exception {
     Node test = session.getRootNode().addNode("test");
 //    Value value1 = session.getValueFactory().createValue(ImageUtils.scaleImage(ImageIO.read(getClass().getResourceAsStream("/conf/dms/artifacts/images/ThumnailView.jpg")), 32, 32));
@@ -283,7 +259,6 @@ public class TestThumbnailService extends BaseWCMTestCase {
    *         with binary data = /conf/dms/artifacts/images/ThumnailView.jpg
    * @throws Exception
    */
-  @Test
   public void testProcessThumbnailList() throws Exception {
     Node test = session.getRootNode().addNode("test2");
     Node child1 = test.addNode("child1", "nt:file");
@@ -335,7 +310,6 @@ public class TestThumbnailService extends BaseWCMTestCase {
    *          2. return thumbnail node of test node
    * @throws Exception
    */
-  @Test
   public void testGetThumbnailNode() throws Exception {
     Node test = session.getRootNode().addNode("test");
     session.save();
@@ -353,7 +327,6 @@ public class TestThumbnailService extends BaseWCMTestCase {
    * Output: Delete thumbnail node of test node if it exists
    * @throws Exception
    */
-  @Test
   public void testProcessRemoveThumbnail() throws Exception {
     Node test = session.getRootNode().addNode("test");
     session.save();
@@ -369,7 +342,6 @@ public class TestThumbnailService extends BaseWCMTestCase {
   /**
    * Clean data
    */
-  @AfterMethod
   public void tearDown() throws Exception {
     String[] paths = {"test2", "test", ThumbnailService.EXO_THUMBNAILS_FOLDER};
     for (String path : paths) {
@@ -379,5 +351,6 @@ public class TestThumbnailService extends BaseWCMTestCase {
       }
     }
     session.logout();
+    super.tearDown();
   }
 }

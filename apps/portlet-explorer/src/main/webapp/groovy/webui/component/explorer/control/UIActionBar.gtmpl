@@ -23,9 +23,9 @@
   def uiFormId = uicomponent.id;
   
   def jsManager = rcontext.getJavascriptManager();
-  jsManager.require("SHARED/ecm-utils", "ecmutil").require("SHARED/explorer-module", "explorer")
+  jsManager.require("SHARED/ecm-utils", "ecmutil").require("SHARED/multiUpload", "multiUpload")
 //  .addScripts('ecmutil.ECMUtils.checkAvailableSpace();')
-  .addScripts('explorer.MultiUpload.displayCorrectUploadButton();');
+  .addScripts('multiUpload.displayCorrectUploadButton();');
   
   def showUploadInput = false;
   

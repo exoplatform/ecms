@@ -173,8 +173,8 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
     setActions( new String[]{"Save", "Refresh", "Cancel"}) ;
   }
 
-  public void activate() throws Exception { }
-  public void deActivate() throws Exception { }
+  public void activate() { }
+  public void deActivate() { }
 
   static public class SaveActionListener extends EventListener<UIScriptForm> {
     public void execute(Event<UIScriptForm> event) throws Exception {

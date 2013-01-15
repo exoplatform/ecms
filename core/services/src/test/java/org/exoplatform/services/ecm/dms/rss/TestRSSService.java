@@ -16,22 +16,14 @@
  */
 package org.exoplatform.services.ecm.dms.rss;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertNotNull;
-import static org.testng.AssertJUnit.assertTrue;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.jcr.Node;
-import javax.jcr.Value;
 
 import org.exoplatform.services.cms.rss.RSSService;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SARL
@@ -43,14 +35,9 @@ public class TestRSSService extends BaseWCMTestCase {
   
   final static public String MIX_REFERENCEABLE = "mix:referenceable";
 
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
-    rssService = (RSSService)container.getComponentInstanceOfType(RSSService.class);
-  }
-  
-  @BeforeMethod
   public void setUp() throws Exception {
+    super.setUp();
+    rssService = (RSSService)container.getComponentInstanceOfType(RSSService.class);
     applySystemSession();
   }
 
@@ -61,7 +48,6 @@ public class TestRSSService extends BaseWCMTestCase {
    * Expect: Create a Feed file (feed type is RSS or Podcast)
    * @throws Exception
    */
-  @Test
   public void testGenerateFeed() throws Exception {
     Map<String, String> contextRss = new HashMap<String, String>();
    
@@ -119,7 +105,6 @@ public class TestRSSService extends BaseWCMTestCase {
     }
   }
 
-  @Test
   public void testGenerateFeed2() throws Exception {
     Map<String, String> contextPodcast = new HashMap<String, String>();
     
@@ -170,7 +155,6 @@ public class TestRSSService extends BaseWCMTestCase {
   /**
    * Clean all node for testing
    */
-  @AfterMethod
   public void tearDown() throws Exception {
     Node myRoot = session.getRootNode();
     if (myRoot.hasNode("Feeds")) {
@@ -180,5 +164,6 @@ public class TestRSSService extends BaseWCMTestCase {
     	myRoot.getNode("Documents").remove();
     }
     session.save();
+    super.tearDown();
   }
 }
