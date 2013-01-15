@@ -218,6 +218,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                       @PathParam("repoPath") String repoPath,
                       @HeaderParam(ExtHttpHeaders.RANGE) String rangeHeader,
                       @HeaderParam(ExtHttpHeaders.IF_MODIFIED_SINCE) String ifModifiedSince,
+                      @HeaderParam(ExtHttpHeaders.IF_NONE_MATCH) String ifNoneMatch,
                       @QueryParam("version") String version,
                       @Context UriInfo uriInfo) {
 
@@ -233,7 +234,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       }
       return Response.serverError().build();
     }
-    return super.get(repoName, repoPath, rangeHeader, ifModifiedSince, version, uriInfo);
+    return super.get(repoName, repoPath, rangeHeader, ifModifiedSince, ifNoneMatch, version, uriInfo);
   }
 
   @HEAD

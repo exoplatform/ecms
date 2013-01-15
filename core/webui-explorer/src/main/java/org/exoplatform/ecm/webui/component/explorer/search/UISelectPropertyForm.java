@@ -28,18 +28,20 @@ import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.nodetype.PropertyDefinition;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.webui.core.UIPopupComponent;
-import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIPopupComponent;
+import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormRadioBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
@@ -62,6 +64,8 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 )
 public class UISelectPropertyForm extends UIForm implements UIPopupComponent {
 
+  private static final Log LOG = ExoLogger.getLogger(UIECMSearch.class.getName());
+
   final static public String METADATA_TYPE= "metadataType" ;
   final static public String PROPERTY = "property" ;
 
@@ -81,31 +85,37 @@ public class UISelectPropertyForm extends UIForm implements UIPopupComponent {
     }
   }
 
-  public void activate() throws Exception {
-    List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>() ;
-    NodeHierarchyCreator nodeHierarchyCreator = getApplicationComponent(NodeHierarchyCreator.class) ;
-    UIFormSelectBox uiSelect = new UIFormSelectBox(METADATA_TYPE, METADATA_TYPE, options) ;
-    uiSelect.setOnChange("ChangeMetadataType") ;
-    addUIFormInput(uiSelect) ;
-    String metadataPath = nodeHierarchyCreator.getJcrPath(BasePath.METADATA_PATH) ;
-    UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
-    DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-    String workspaceName = dmsConfiguration.getConfig().getSystemWorkspace();
-    Session session = uiExplorer.getSystemProvider().getSession(workspaceName, uiExplorer.getRepository());
-    Node homeNode = (Node) session.getItem(metadataPath) ;
-    NodeIterator nodeIter = homeNode.getNodes() ;
-    Node meta = nodeIter.nextNode() ;
-    renderProperties(meta.getName()) ;
-    options.add(new SelectItemOption<String>(meta.getName(), meta.getName())) ;
-    while(nodeIter.hasNext()) {
-      meta = nodeIter.nextNode() ;
+  public void activate() {
+    try {
+      List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>() ;
+      NodeHierarchyCreator nodeHierarchyCreator = getApplicationComponent(NodeHierarchyCreator.class) ;
+      UIFormSelectBox uiSelect = new UIFormSelectBox(METADATA_TYPE, METADATA_TYPE, options) ;
+      uiSelect.setOnChange("ChangeMetadataType") ;
+      addUIFormInput(uiSelect) ;
+      String metadataPath = nodeHierarchyCreator.getJcrPath(BasePath.METADATA_PATH) ;
+      UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
+      DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
+      String workspaceName = dmsConfiguration.getConfig().getSystemWorkspace();
+      Session session = uiExplorer.getSystemProvider().getSession(workspaceName, uiExplorer.getRepository());
+      Node homeNode = (Node) session.getItem(metadataPath) ;
+      NodeIterator nodeIter = homeNode.getNodes() ;
+      Node meta = nodeIter.nextNode() ;
+      renderProperties(meta.getName()) ;
       options.add(new SelectItemOption<String>(meta.getName(), meta.getName())) ;
+      while(nodeIter.hasNext()) {
+        meta = nodeIter.nextNode() ;
+        options.add(new SelectItemOption<String>(meta.getName(), meta.getName())) ;
+      }
+      addUIFormInput(new UIFormRadioBoxInput(PROPERTY, null, properties_).
+                         setAlign(UIFormRadioBoxInput.VERTICAL_ALIGN)) ;
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error!", e.getMessage());
+      }
     }
-    addUIFormInput(new UIFormRadioBoxInput(PROPERTY, null, properties_).
-                       setAlign(UIFormRadioBoxInput.VERTICAL_ALIGN)) ;
   }
 
-  public void deActivate() throws Exception {}
+  public void deActivate() {}
 
   public void setFieldName(String fieldName) { fieldName_ = fieldName ; }
 

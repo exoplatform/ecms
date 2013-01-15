@@ -16,9 +16,11 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.upload;
 
-import org.exoplatform.webui.core.UIPopupComponent;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIContainer;
+import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 
@@ -32,6 +34,9 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
     lifecycle = UIContainerLifecycle.class
 )
 public class UISingleUploadManager extends UIContainer implements UIPopupComponent {
+
+  private static final Log LOG = ExoLogger.getLogger(UISingleUploadManager.class.getName());
+
   final static public String EXTARNAL_METADATA_POPUP = "AddMetadataPopup" ;
 
   public UISingleUploadManager() throws Exception {
@@ -50,12 +55,18 @@ public class UISingleUploadManager extends UIContainer implements UIPopupCompone
     return uiPopup;
   }
 
-  public void activate() throws Exception {
-    UISingleUploadForm uiSingleUploadForm = getChild(UISingleUploadForm.class);
-    uiSingleUploadForm.initFieldInput();
+  public void activate() {
+    try {
+      UISingleUploadForm uiSingleUploadForm = getChild(UISingleUploadForm.class);
+      uiSingleUploadForm.initFieldInput();
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error!", e.getMessage());
+      }
+    }
   }
 
-  public void deActivate() throws Exception {}
+  public void deActivate() {}
 
   public void initMetadataPopup() throws Exception {
     removeChildById(EXTARNAL_METADATA_POPUP) ;

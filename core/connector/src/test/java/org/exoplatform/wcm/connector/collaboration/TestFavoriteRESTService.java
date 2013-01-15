@@ -16,8 +16,6 @@
  */
 package org.exoplatform.wcm.connector.collaboration;
 
-import static org.testng.AssertJUnit.assertEquals;
-
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -33,7 +31,6 @@ import org.exoplatform.services.rest.impl.ContainerResponse;
 import org.exoplatform.services.rest.wadl.research.HTTPMethods;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.connector.collaboration.FavoriteRESTService.ListResultNode;
-import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SAS
@@ -50,15 +47,15 @@ public class TestFavoriteRESTService extends BaseConnectorTestCase {
   private static final String    DATE_MODIFIED   = "exo:dateModified";
   private static final String    restPath        = "/favorite/all/repository/collaboration/john";
   
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
+  public void setUp() throws Exception {
+    super.setUp();
+    
+    // Bind FavoriteRESTService REST service
     FavoriteRESTService restService = (FavoriteRESTService) this.container.getComponentInstanceOfType(FavoriteRESTService.class);
     this.binder.addResource(restService, null);
     favoriteService = WCMCoreUtils.getService(FavoriteService.class);
-
   }
-  @Test
+  
   public void testGetFavoriteByUser() throws Exception{
     applyUserSession("john", "gtn", "collaboration");
     /* Prepare the favourite nodes */
@@ -83,5 +80,9 @@ public class TestFavoriteRESTService extends BaseConnectorTestCase {
     ListResultNode object = (ListResultNode) response.getEntity();
     //Is Rest service properly run
     assertEquals(2, object.getListFavorite().size());
+  }
+  
+  public void tearDown() throws Exception {
+    super.tearDown();
   }
 }

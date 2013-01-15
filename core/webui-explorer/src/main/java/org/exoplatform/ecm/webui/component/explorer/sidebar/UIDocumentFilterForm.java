@@ -53,10 +53,10 @@ import org.exoplatform.webui.form.UIFormCheckBoxInput;
   public UIDocumentFilterForm(){
   }
 
-  public void activate() throws Exception {
+  public void activate() {
   }
 
-  public void deActivate() throws Exception {
+  public void deActivate() {
   }
 
   public void invoke(List<String> checkedTypes) {

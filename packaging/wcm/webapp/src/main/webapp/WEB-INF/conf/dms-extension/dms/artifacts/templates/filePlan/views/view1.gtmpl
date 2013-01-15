@@ -20,8 +20,8 @@
     def rcontext = _ctx.getRequestContext() ;
     Parameter[] params = [new Parameter("workspaceName", node.getSession().getWorkspace().getName()), new Parameter("findDrive","true")];
 //    rcontext.getJavascriptManager().importJavascript('eXo.ecm.UIJCRExplorer','/ecmexplorer/javascript/');
-    rcontext.getJavascriptManager().require("SHARED/explorer-module", "explorer").
-    addScripts('explorer.UIJCRExplorer.loadViewNodeScroll();');
+    rcontext.getJavascriptManager().require("SHARED/uiJCRExplorer", "uiJCRExplorer").
+    addScripts('uiJCRExplorer.UIJCRExplorer.loadViewNodeScroll();');
 %>
 <style>
   <% _ctx.include(uicomponent.getTemplateSkin("rma:filePlan", "Stylesheet")); %>    

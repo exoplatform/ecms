@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+  ~ Copyright (C) 2009 eXo Platform SAS.
+  ~
+  ~ This is free software; you can redistribute it and/or modify it
+  ~ under the terms of the GNU Lesser General Public License as
+  ~ published by the Free Software Foundation; either version 2.1 of
+  ~ the License, or (at your option) any later version.
+  ~
+  ~ This software is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  ~ Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public
+  ~ License along with this software; if not, write to the Free
+  ~ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  ~ 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+  -->
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_2.xsd http://www.exoplaform.org/xml/ns/kernel_1_2.xsd"
+xmlns="http://www.exoplaform.org/xml/ns/kernel_1_2.xsd">
+  <component>
+    <key>org.exoplatform.services.idgenerator.IDGeneratorService</key>
+    <type>org.exoplatform.services.idgenerator.impl.IDGeneratorServiceImpl</type>
+  </component>
+  <component>
+    <type>org.exoplatform.services.security.IdentityRegistry</type>
+  </component>
+  <component>
+    <key>org.exoplatform.services.jdbc.DataSourceProvider</key>
+    <type>org.exoplatform.services.jdbc.impl.DataSourceProviderImpl</type>
+  </component>
+  <component>
+    <key>org.jboss.cache.transaction.TransactionManagerLookup</key>
+    <type>org.jboss.cache.transaction.JBossStandaloneJTAManagerLookup</type>
+  </component>
+  <component>
+    <key>org.exoplatform.services.transaction.TransactionService</key>
+    <type>org.exoplatform.services.transaction.jbosscache.JBossTransactionsService</type>
+    <init-params>
+      <value-param>
+        <name>timeout</name>
+        <value>300</value>
+      </value-param>
+    </init-params>
+  </component>
+  <component>
+    <key>org.exoplatform.services.document.DocumentReaderService</key>
+    <type>org.exoplatform.services.document.impl.DocumentReaderServiceImpl</type>
+    <component-plugins>
+      <component-plugin>
+        <name>pdf.document.reader</name>
+        <set-method>addDocumentReader</set-method>
+        <type>org.exoplatform.services.document.impl.PDFDocumentReader</type>
+        <description>to read the pdf inputstream</description>
+        <init-params>
+          <values-param>
+            <name>document.known.types</name>
+            <description>description</description>
+            <value>application/pdf</value>
+          </values-param>
+        </init-params>
+      </component-plugin>
+      <component-plugin>
+        <name>document.readerMSWord</name>
+        <set-method>addDocumentReader</set-method>
+        <type>org.exoplatform.services.document.impl.MSWordDocumentReader</type>
+        <description>to read the ms word inputstream</description>
+        <init-params>
+          <values-param>
+            <name>document.known.typesMSWord</name>
+            <description>description</description>
+            <value>application/msword</value>
+          </values-param>
+        </init-params>
+      </component-plugin>
+      <component-plugin>
+        <name>document.readerMSExcel</name>
+        <set-method>addDocumentReader</set-method>
+        <type>org.exoplatform.services.document.impl.MSExcelDocumentReader</type>
+        <description>to read the ms excel inputstream</description>
+        <init-params>
+          <values-param>
+            <name>document.known.typesMSExcel</name>
+            <description>description</description>
+            <value>application/excel</value>
+          </values-param>
+        </init-params>
+      </component-plugin>
+      <component-plugin>
+        <name>document.readerMSOutlook</name>
+        <set-method>addDocumentReader</set-method>
+        <type>org.exoplatform.services.document.impl.MSOutlookDocumentReader</type>
+        <description>to read the ms outlook inputstream</description>
+        <init-params>
+          <values-param>
+            <name>document.known.typesMSOutlook</name>
+            <description>description</description>
+            <value>application/vnd.ms-outlook</value>
+          </values-param>
+        </init-params>
+      </component-plugin>
+      <component-plugin>
+        <name>PPTdocument.reader</name>
+        <set-method>addDocumentReader</set-method>
+        <type>org.exoplatform.services.document.impl.PPTDocumentReader</type>
+        <description>to read the ms ppt inputstream</description>
+        <init-params>
+          <values-param>
+            <name>document.known.typesPPT</name>
+            <description>description</description>
+            <value>application/ppt</value>
+          </values-param>
+        </init-params>
+      </component-plugin>
+      <component-plugin>
+        <name>document.readerHTML</name>
+        <set-method>addDocumentReader</set-method>
+        <type>org.exoplatform.services.document.impl.HTMLDocumentReader</type>
+        <description>to read the html inputstream</description>
+        <init-params>
+          <values-param>
+            <name>document.known.typesHTML</name>
+            <description>description</description>
+            <value>text/html</value>
+          </values-param>
+        </init-params>
+      </component-plugin>
+      <component-plugin>
+        <name>document.readerXML</name>
+        <set-method>addDocumentReader</set-method>
+        <type>org.exoplatform.services.document.impl.XMLDocumentReader</type>
+        <description>to read the xml inputstream</description>
+        <init-params>
+          <values-param>
+            <name>document.known.typesXML</name>
+            <description>description</description>
+            <value>text/xml</value>
+          </values-param>
+        </init-params>
+      </component-plugin>
+      <component-plugin>
+        <name>TPdocument.reader</name>
+        <set-method>addDocumentReader</set-method>
+        <type>org.exoplatform.services.document.impl.TextPlainDocumentReader</type>
+        <description>to read the plain text inputstream</description>
+        <init-params>
+          <values-param>
+            <name>document.known.typesTextPlain</name>
+            <description>description</description>
+            <value>text/plain</value>
+          </values-param>
+          <!-- values-param>
+            <name>defaultEncoding</name>
+            <description>description</description>
+            <value>UTF-8</value>
+         </values-param -->
+        </init-params>
+      </component-plugin>
+      <component-plugin>
+        <name>document.readerOO</name>
+        <set-method>addDocumentReader</set-method>
+        <type>org.exoplatform.services.document.impl.OpenOfficeDocumentReader</type>
+        <description>to read the OO inputstream</description>
+      </component-plugin>
+    </component-plugins>
+  </component>
+  <component>
+    <key>org.exoplatform.services.jcr.config.RepositoryServiceConfiguration</key>
+    <type>org.exoplatform.services.jcr.impl.config.RepositoryServiceConfigurationImpl</type>
+    <init-params>
+      <value-param>
+        <name>conf-path</name>
+        <description>JCR configuration file</description>
+        <value>classpath:/conf/standalone/jcr/test-repository-configuration.xml</value>
+      </value-param>
+    </init-params>
+  </component>
+  <component>
+    <type>org.exoplatform.services.jcr.impl.RepositoryCreationSynchronizer</type>
+    <init-params>
+      <value-param>
+        <name>disabled</name>
+        <value>false</value>
+      </value-param>
+    </init-params>
+  </component>
+  <component>
+    <key>org.exoplatform.services.jcr.RepositoryService</key>
+    <type>org.exoplatform.services.jcr.impl.RepositoryServiceImpl</type>
+  </component>
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
+    <component-plugin>
+      <name>add.namespaces</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.impl.AddNamespacesPlugin</type>
+      <init-params>
+        <properties-param>
+          <name>namespaces</name>
+          <property name="dc" value="http://purl.org/dc/elements/1.1/" />
+          <property name="rma" value="http://www.rma.com/jcr/" />
+          <property name="metadata" value="http://www.exoplatform.com/jcr/metadata/1.1/" />
+          <property name="Fwd" value="http://www.exoplatform.com/jcr/Fwd/1.1/" />
+          <property name="Re" value="http://www.exoplatform.com/jcr/Re/1.1/" />
+          <property name="kfx" value="http://www.exoplatform.com/jcr/kfx/1.1/" />
+          <property name="publication" value="http://www.exoplatform.com/jcr/publication/1.1/" />
+          <property name="gtn" value="http://www.gatein.org/jcr/gatein/1.0/" />
+          <property name="mop" value="http://www.gatein.org/jcr/mop/1.0/" />
+          <property name="app" value="http://www.gatein.org/jcr/application-registry/1.0/" />
+          <property name="tkn" value="http://www.gatein.org/jcr/token/1.0/" />
+          <property name="wsrp" value="http://www.gatein.org/jcr/wsrp/1.0/" />
+          <property name="pc" value="http://www.gatein.org/jcr/pc/1.0/" />
+          <property name="jos" value="http://nl.ijs.si/jos/" />
+        </properties-param>
+      </init-params>
+    </component-plugin>
+    <component-plugin>
+      <name>add.nodeType</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.impl.AddNodeTypePlugin</type>
+      <init-params>
+        <values-param>
+          <name>autoCreatedInNewRepository</name>
+          <description>Node types configuration file</description>
+          <value>jar:/conf/ext-nodetypes-config.xml</value>
+          <value>jar:/conf/organization-nodetypes.xml</value>
+          <value>jar:/conf/gatein-nodetypes.xml</value>
+          <value>jar:/conf/mop-nodetypes.xml</value>
+          <value>jar:/conf/content-nodetypes.xml</value>
+          <value>classpath:/conf/standalone/jcr/ecms-test-nodetypes-config.xml</value>
+          <value>classpath:/conf/standalone/jcr/ecms-test-publication-nodetypes-config.xml</value>
+        </values-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.naming.InitialContextInitializer</target-component>
+    <component-plugin>
+      <name>bind.datasource</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.naming.BindReferencePlugin</type>
+      <init-params>
+        <value-param>
+          <name>bind-name</name>
+          <value>jdbcexo</value>
+        </value-param>
+        <value-param>
+          <name>class-name</name>
+          <value>javax.sql.DataSource</value>
+        </value-param>
+        <value-param>
+          <name>factory</name>
+          <value>org.apache.commons.dbcp.BasicDataSourceFactory</value>
+        </value-param>
+        <properties-param>
+          <name>ref-addresses</name>
+          <description>ref-addresses</description>
+          <property name="driverClassName" value="org.hsqldb.jdbcDriver" />
+          <property name='url' value='jdbc:hsqldb:mem:db/jdbcexo' />
+          <property name="username" value="sa" />
+          <property name="password" value="" />
+        </properties-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+  <external-component-plugins>
+    <target-component>
+    org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator</target-component>
+    <component-plugin>
+      <name>addPaths</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.jcr.ext.hierarchy.impl.AddPathPlugin</type>
+      <init-params>
+        <object-param>
+          <name>cms.configuration</name>
+          <description>configuration for the ecms path</description>
+          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig">
+            <field name="workspaces">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <string>collaboration</string>
+                </value>
+              </collection>
+            </field>
+            <field name="jcrPaths">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+
+                    <field name="alias">
+                      <string>eXoApplications</string>
+                    </field>
+                    <field name="path">
+                      <string>/exo:applications</string>
+                    </field>
+                    <field name="mixinTypes">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <string>exo:hiddenable</string>
+                        </value>
+                      </collection>
+                    </field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+
+                            <field name="identity">
+                              <string>*:/platform/administrators</string>
+                            </field>
+                            <field name="read">
+                              <string>true</string>
+                            </field>
+                            <field name="addNode">
+                              <string>true</string>
+                            </field>
+                            <field name="setProperty">
+                              <string>true</string>
+                            </field>
+                            <field name="remove">
+                              <string>true</string>
+                            </field>
+                          </object>
+                        </value>
+                      </collection>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+
+                    <field name="alias">
+                      <string>eXoServices</string>
+                    </field>
+                    <field name="path">
+                      <string>/exo:services</string>
+                    </field>
+                    <field name="mixinTypes">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <string>exo:hiddenable</string>
+                        </value>
+                      </collection>
+                    </field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+
+                            <field name="identity">
+                              <string>*:/platform/administrators</string>
+                            </field>
+                            <field name="read">
+                              <string>true</string>
+                            </field>
+                            <field name="addNode">
+                              <string>true</string>
+                            </field>
+                            <field name="setProperty">
+                              <string>true</string>
+                            </field>
+                            <field name="remove">
+                              <string>true</string>
+                            </field>
+                          </object>
+                        </value>
+                      </collection>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+
+                    <field name="alias">
+                      <string>usersPath</string>
+                    </field>
+                    <field name="path">
+                      <string>/Users</string>
+                    </field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+
+                            <field name="identity">
+                              <string>*:/platform/administrators</string>
+                            </field>
+                            <field name="read">
+                              <string>true</string>
+                            </field>
+                            <field name="addNode">
+                              <string>false</string>
+                            </field>
+                            <field name="setProperty">
+                              <string>false</string>
+                            </field>
+                            <field name="remove">
+                              <string>false</string>
+                            </field>
+                          </object>
+                        </value>
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+
+                            <field name="identity">
+                              <string>any</string>
+                            </field>
+                            <field name="read">
+                              <string>true</string>
+                            </field>
+                            <field name="addNode">
+                              <string>false</string>
+                            </field>
+                            <field name="setProperty">
+                              <string>false</string>
+                            </field>
+                            <field name="remove">
+                              <string>false</string>
+                            </field>
+                          </object>
+                        </value>
+                      </collection>
+                    </field>
+                  </object>
+                </value>
+                <value>
+                  <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$JcrPath">
+
+                    <field name="alias">
+                      <string>groupsPath</string>
+                    </field>
+                    <field name="path">
+                      <string>/Groups</string>
+                    </field>
+                    <field name="permissions">
+                      <collection type="java.util.ArrayList">
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+
+                            <field name="identity">
+                              <string>*:/platform/administrators</string>
+                            </field>
+                            <field name="read">
+                              <string>true</string>
+                            </field>
+                            <field name="addNode">
+                              <string>false</string>
+                            </field>
+                            <field name="setProperty">
+                              <string>false</string>
+                            </field>
+                            <field name="remove">
+                              <string>false</string>
+                            </field>
+                          </object>
+                        </value>
+                        <value>
+                          <object type="org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig$Permission">
+
+                            <field name="identity">
+                              <string>any</string>
+                            </field>
+                            <field name="read">
+                              <string>true</string>
+                            </field>
+                            <field name="addNode">
+                              <string>false</string>
+                            </field>
+                            <field name="setProperty">
+                              <string>true</string>
+                            </field>
+                            <field name="remove">
+                              <string>false</string>
+                            </field>
+                          </object>
+                        </value>
+                      </collection>
+                    </field>
+                  </object>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+  
+</configuration>
+

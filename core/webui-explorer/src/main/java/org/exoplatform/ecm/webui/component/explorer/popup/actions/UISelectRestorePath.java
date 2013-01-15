@@ -105,23 +105,27 @@ public class UISelectRestorePath extends UIForm implements UIPopupComponent, UIS
     this.srcPath = srcPath;
   }
 
-  public void activate() throws Exception {
-    //this.addChild(new UIFormMessage(CHOOSE_PATH_TO_RESTORE_NODE));
-    UIFormInputSet uiFormInputAction = new UIFormInputSetWithAction("UIFormInputSetWithAction");
-
-    UIFormStringInput homePathField = new UIFormStringInput(FORM_INPUT, FORM_INPUT, null);
-    homePathField.setValue("");
-    homePathField.setEditable(false);
-
-    uiFormInputAction.addUIFormInput(homePathField);
-    uiFormInputAction.setId(FIELD_PATH);
-    ((UIFormInputSetWithAction)uiFormInputAction).setActionInfo(FORM_INPUT, new String[]{"Add"});
-
-    this.addUIFormInput(uiFormInputAction);
-    setActions(new String[] {"Save", "Cancel"});
+  public void activate() {
+    try {
+      UIFormInputSet uiFormInputAction = new UIFormInputSetWithAction("UIFormInputSetWithAction");
+      UIFormStringInput homePathField = new UIFormStringInput(FORM_INPUT, FORM_INPUT, null);
+      homePathField.setValue("");
+      homePathField.setEditable(false);
+  
+      uiFormInputAction.addUIFormInput(homePathField);
+      uiFormInputAction.setId(FIELD_PATH);
+      ((UIFormInputSetWithAction)uiFormInputAction).setActionInfo(FORM_INPUT, new String[]{"Add"});
+  
+      this.addUIFormInput(uiFormInputAction);
+      setActions(new String[] {"Save", "Cancel"});
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error!", e.getMessage());
+      }
+    }
   }
 
-  public void deActivate() throws Exception {
+  public void deActivate() {
   }
 
   public void doSelect(String selectField, Object value) throws Exception {

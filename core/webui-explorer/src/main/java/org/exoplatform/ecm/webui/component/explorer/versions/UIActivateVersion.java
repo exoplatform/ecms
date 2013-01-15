@@ -53,8 +53,8 @@ public class UIActivateVersion extends UIContainer implements UIPopupComponent {
 
   public UIActivateVersion() throws Exception {}
 
-  public void activate() throws Exception {}
-  public void deActivate() throws Exception {}
+  public void activate() {}
+  public void deActivate() {}
 
   static public class EnableVersionActionListener extends EventListener<UIActivateVersion> {
     public void execute(Event<UIActivateVersion> event) throws Exception {

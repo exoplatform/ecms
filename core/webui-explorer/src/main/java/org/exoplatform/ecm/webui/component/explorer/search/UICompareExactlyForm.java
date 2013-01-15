@@ -63,8 +63,8 @@ public class UICompareExactlyForm extends UIForm implements UIPopupComponent {
 
   public UICompareExactlyForm() throws Exception {}
 
-  public void activate() throws Exception {}
-  public void deActivate() throws Exception {}
+  public void activate() {}
+  public void deActivate() {}
 
   public void init(String properties, QueryResult result) throws Exception {
     listValue_ = new ArrayList<String>() ;

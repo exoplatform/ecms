@@ -16,10 +16,6 @@
  */
 package org.exoplatform.services.ecm.dms.relation;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertFalse;
-import static org.testng.AssertJUnit.assertTrue;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,9 +24,6 @@ import javax.jcr.Value;
 
 import org.exoplatform.services.cms.relations.RelationsService;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SARL
@@ -43,14 +36,9 @@ public class TestRelationsService extends BaseWCMTestCase {
   private static final String RELATION_MIXIN = "exo:relationable";
   private static final String RELATION_PROP = "exo:relation";
 
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
-    relationsService = (RelationsService) container.getComponentInstanceOfType(RelationsService.class);
-  }
-  
-  @BeforeMethod
   public void setUp() throws Exception {
+    super.setUp();
+    relationsService = (RelationsService) container.getComponentInstanceOfType(RelationsService.class);
     applySystemSession();
   }
 
@@ -60,7 +48,6 @@ public class TestRelationsService extends BaseWCMTestCase {
    * Expect: Initial the root of relation node and its sub node
    * @throws Exception
    */
-  @Test
   public void testInit() throws Exception {
   }
 
@@ -72,7 +59,6 @@ public class TestRelationsService extends BaseWCMTestCase {
    * Expect: Removes the relation to the given node
    * @throws Exception
    */
-  @Test
   public void testAddRelation() throws Exception {
     Node root = session.getRootNode();
     Node aaa = root.addNode("AAA");
@@ -93,7 +79,6 @@ public class TestRelationsService extends BaseWCMTestCase {
    * Expect: Returns true is the given node has relation
    * @throws Exception
    */
-  @Test
   public void testHasRelations() throws Exception {
     Node root = session.getRootNode();
     Node aaa = root.addNode("AAA");
@@ -113,7 +98,6 @@ public class TestRelationsService extends BaseWCMTestCase {
    * Expect: Return all node that has relation to the given node
    * @throws Exception
    */
-  @Test
   public void testGetRelations() throws Exception {
     Node root = session.getRootNode();
     Node aaa = root.addNode("AAA");
@@ -143,7 +127,6 @@ public class TestRelationsService extends BaseWCMTestCase {
    * Expect: Removes the relation to the given node
    * @throws Exception
    */
-  @Test
   public void testRemoveRelation() throws Exception {
     Node root = session.getRootNode();
     Node aaa = root.addNode("AAA");
@@ -180,7 +163,6 @@ public class TestRelationsService extends BaseWCMTestCase {
   /**
    * Clean all node for testing
    */
-  @AfterMethod
   public void tearDown() throws Exception {
     Node root = session.getRootNode();
     String[] paths = new String[] {"AAA", "BBB", "CCC", "DDD"};
@@ -190,5 +172,6 @@ public class TestRelationsService extends BaseWCMTestCase {
       }
     }
     session.save();
+    super.tearDown();
   }
 }

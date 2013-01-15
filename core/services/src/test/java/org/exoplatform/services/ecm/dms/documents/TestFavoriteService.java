@@ -16,7 +16,7 @@
  */
 package org.exoplatform.services.ecm.dms.documents;
 
-import static org.testng.AssertJUnit.assertEquals;
+import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.Session;
@@ -26,13 +26,14 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.FixMethodOrder;
+import org.junit.runners.MethodSorters;
 
 /**
  * Created by The eXo Platform SARL Author : Nguyen Anh Vu anhvurz90@gmail.com
  * Nov 17, 2009 11:14:48 AM
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestFavoriteService extends BaseWCMTestCase {
 
   // final static public String EXO_FAVOURITE_NODE = "exo:favourite";
@@ -41,14 +42,9 @@ public class TestFavoriteService extends BaseWCMTestCase {
   private FavoriteService favoriteService;
   private Node            rootNode;
   
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
-    favoriteService = (FavoriteService) container.getComponentInstanceOfType(FavoriteService.class);
-  }
-  
-  @BeforeMethod
   public void setUp() throws Exception {
+    super.setUp();
+    favoriteService = (FavoriteService) container.getComponentInstanceOfType(FavoriteService.class);
     applyUserSession("john", "gtn",COLLABORATION_WS);
     SessionProviderService sessionProviderService = (SessionProviderService) container.getComponentInstanceOfType(SessionProviderService.class);
     SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
@@ -61,7 +57,16 @@ public class TestFavoriteService extends BaseWCMTestCase {
         rootNode.getNode(name).remove();
         rootNode.save();
       }
-
+  }
+  
+  public void tearDown() throws Exception {
+    List<Node> favoritesOfJohn = favoriteService.getAllFavoriteNodesByUser(session.getWorkspace().getName(), REPO_NAME, "john");
+    for (Node node : favoritesOfJohn) {
+      favoriteService.removeFavorite(node, "john");
+      node.remove();
+    }
+    session.save();
+    super.tearDown();
   }
 
   /**
@@ -71,7 +76,6 @@ public class TestFavoriteService extends BaseWCMTestCase {
    *
    * @throws Exception
    */
-  @Test
   public void testAddFavorite() throws Exception {
     Node testAddFavouriteNode1 = rootNode.addNode("testAddFavorite1");
     Node testAddFavouriteNode2 = rootNode.addNode("testAddFavorite2");
@@ -100,7 +104,6 @@ public class TestFavoriteService extends BaseWCMTestCase {
    * @author vinh_nguyen
    * @throws Exception
    */
-  @Test
   public void testIsFavoriter() throws Exception {
     Node testAddFavouriteNode1 = rootNode.addNode("testAddFavorite1");
     favoriteService.addFavorite(testAddFavouriteNode1, "john");
@@ -117,7 +120,6 @@ public class TestFavoriteService extends BaseWCMTestCase {
    *
    * @throws Exception
    */
-  @Test
   public void testRemoveFavorite() throws Exception {
     Node test1Remove = rootNode.addNode("test1");
     Node test2Remove = rootNode.addNode("test2");
@@ -149,16 +151,15 @@ public class TestFavoriteService extends BaseWCMTestCase {
    *
    * @throws Exception
    */
-  @Test
   public void testGetAllFavouriteNodesByUser() throws Exception {
-    Node testNode = rootNode.addNode("testNode");
+
+    Node node0 = rootNode.addNode("node0");
+    Node node1 = rootNode.addNode("node1");
+    Node node2 = rootNode.addNode("node2");
+    Node node3 = rootNode.addNode("node3");
+    Node node4 = rootNode.addNode("node4");
     session.save();
 
-    Node node0 = testNode.addNode("node0");
-    Node node1 = testNode.addNode("node1");
-    Node node2 = testNode.addNode("node2");
-    Node node3 = testNode.addNode("node3");
-    Node node4 = node3.addNode("node4");
 
     favoriteService.addFavorite(node0, "john");
     favoriteService.addFavorite(node1, "john");
@@ -170,7 +171,6 @@ public class TestFavoriteService extends BaseWCMTestCase {
         .getAllFavoriteNodesByUser(
             rootNode.getSession().getWorkspace().getName(), "repository",
             "john").size());
-    testNode.remove();
     session.save();
   }
 }

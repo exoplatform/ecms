@@ -60,13 +60,19 @@ public class UICategoryForm extends UIForm implements UIPopupComponent {
 
   final static private Log LOG = ExoLogger.getLogger(UICategoryForm.class.getName());
 
-  public void activate() throws Exception {
-    addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class));
-    setActions(new String[] { "Save", "Cancel" });
-    getUIStringInput(FIELD_NAME).setValue(null);
+  public void activate() {
+    try {
+      addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class));
+      setActions(new String[] { "Save", "Cancel" });
+      getUIStringInput(FIELD_NAME).setValue(null);
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error!", e.getMessage());
+      }
+    }
   }
 
-  public void deActivate() throws Exception {}
+  public void deActivate() {}
 
   static public class SaveActionListener extends EventListener<UICategoryForm> {
     public void execute(Event<UICategoryForm> event) throws Exception {

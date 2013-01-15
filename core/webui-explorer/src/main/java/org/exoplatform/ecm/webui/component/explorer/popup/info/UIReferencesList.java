@@ -62,9 +62,15 @@ public class UIReferencesList extends UIGrid implements UIPopupComponent{
 
   public UIReferencesList() throws Exception {}
 
-  public void activate() throws Exception {
-    configure("workspace", REFERENCES_BEAN_FIELD, null) ;
-    updateGrid() ;
+  public void activate() {
+    try {
+      configure("workspace", REFERENCES_BEAN_FIELD, null) ;
+      updateGrid();
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error!", e.getMessage());
+      }
+    }
   }
 
   public void deActivate() {}

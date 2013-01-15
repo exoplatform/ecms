@@ -86,7 +86,7 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
     addUIFormInput(uiHistoryFileUpload);
   }
 
-  public void activate() throws Exception {
+  public void activate() {
     List<SelectItemOption<String>> importBehavior = new ArrayList<SelectItemOption<String>>();
     RequestContext context = RequestContext.getCurrentInstance();
     ResourceBundle res = context.getApplicationResourceBundle();
@@ -109,7 +109,7 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
     getUIFormSelectBox(IMPORT_BEHAVIOR).setOptions(importBehavior);
   }
 
-  public void deActivate() throws Exception {
+  public void deActivate() {
   }
 
   private boolean validHistoryUploadFile(Event<?> event) throws Exception {

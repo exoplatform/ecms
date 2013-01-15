@@ -1,7 +1,5 @@
 package org.exoplatform.services.ecm.dms.documents;
 
-import static org.testng.AssertJUnit.assertEquals;
-
 import java.util.List;
 
 import javax.jcr.Node;
@@ -16,9 +14,6 @@ import org.exoplatform.services.cms.relations.RelationsService;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 import org.gatein.pc.api.PortletInvoker;
 import org.mockito.Mockito;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 public class TestTrashService extends BaseWCMTestCase {
 
@@ -29,26 +24,21 @@ public class TestTrashService extends BaseWCMTestCase {
 
   private TrashService trashService;
 
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
+  public void setUp() throws Exception {
+    super.setUp();
     ExoContainer manager = ExoContainerContext.getCurrentContainer();
     PortletInvoker portletInvoker = Mockito.mock(PortletInvoker.class);
     manager.addComponentToCtx(portletInvoker.hashCode(), portletInvoker);
     sessionProvider = sessionProviderService_.getSystemSessionProvider(null);
     trashService = (TrashService) container.getComponentInstanceOfType(TrashService.class);
-  }
-
-  @BeforeMethod
-  public void setUp() throws Exception {
     applySystemSession();
   }
   
-  @AfterMethod
   public void tearDown() throws Exception {
 //    Node trashNode = session.getRootNode().getNode("TrashNode");
 //    trashNode.remove();
     session.logout();
+    super.tearDown();
   }
 
   /**
@@ -62,7 +52,6 @@ public class TestTrashService extends BaseWCMTestCase {
    *
    * @throws Exception
    */
-  @Test
   public void testMoveToTrashSameWorkspace() throws Exception {
     Node rootNode = session.getRootNode();    
     Node trashNode = rootNode.addNode("Trash");    
@@ -99,7 +88,6 @@ public class TestTrashService extends BaseWCMTestCase {
    *
    * @throws Exception
    */
-  @Test
   public void testMoveSymlinkToTrash() throws Exception {
   	Node rootNode = session.getRootNode();
   	Node trashNode = rootNode.addNode("Trash");
@@ -134,7 +122,6 @@ public class TestTrashService extends BaseWCMTestCase {
    *
    * @throws Exception
    */
-  @Test
   public void testMoveToTrashDifferentWorkspaces() throws Exception {
     Node rootNode = session.getRootNode();    
     Node tagsNode = rootNode.addNode("tags");
@@ -187,7 +174,6 @@ public class TestTrashService extends BaseWCMTestCase {
    *
    * @throws Exception
    */
-  @Test
   public void testRestoreFromTrashSameWorkspace() throws Exception {
     Node rootNode = session.getRootNode();
 
@@ -235,7 +221,6 @@ public class TestTrashService extends BaseWCMTestCase {
    *
    * @throws Exception
    */
-  @Test
   public void testRestoreFromTrashDifferentWorkspaces() throws Exception {
     Node trashRootNode = session.getRootNode();
     Node trashNode = trashRootNode.addNode("Trash");
@@ -292,7 +277,6 @@ public class TestTrashService extends BaseWCMTestCase {
    *
    * @throws Exception
    */
-  @Test
   public void testRestoreSymlinkFromTrash() throws Exception {
   	Node rootNode = session.getRootNode();
   	Node trashNode = rootNode.addNode("Trash");
@@ -331,7 +315,6 @@ public class TestTrashService extends BaseWCMTestCase {
    *
    * @throws Exception
    */
-  @Test
   public void testGetAllNodeInTrash() throws Exception {
     Node rootNode = session.getRootNode();
 
@@ -375,7 +358,6 @@ public class TestTrashService extends BaseWCMTestCase {
    *
    * @throws Exception
    */
-  @Test
   public void testGetAllNodeInTrashByUser() throws Exception {
     Node rootNode = session.getRootNode();
 
@@ -410,7 +392,6 @@ public class TestTrashService extends BaseWCMTestCase {
    * And node3 is NOT in trash, <code>isInTrash()</code> return <code>false</code>
    * @throws Exception
    */
-  @Test
   public void testIsInTrash1() throws Exception {
     Node rootNode = session.getRootNode();
 
@@ -447,7 +428,6 @@ public class TestTrashService extends BaseWCMTestCase {
    * expectedValue : 0 (number of relation nodes of /testNode/node0 )   
    * @throws Exception
    */
-  @Test
   public void testRemoveRelations() throws Exception {
   	Node rootNode = session.getRootNode();
   	Node testNode = rootNode.addNode("testNode");
@@ -477,7 +457,6 @@ public class TestTrashService extends BaseWCMTestCase {
    * expectedValue: node0 is in /Trash/ and all child nodes of node0 (node1 and node2) are also in /Trash/
    * @throws Exception
    */
-  @Test
   public void testIsInTrash2() throws Exception {
     Node rootNode = session.getRootNode();
 

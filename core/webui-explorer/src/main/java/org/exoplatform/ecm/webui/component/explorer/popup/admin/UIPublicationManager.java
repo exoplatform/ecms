@@ -32,11 +32,11 @@ public class UIPublicationManager extends UIContainer implements UIPopupComponen
   public UIPublicationManager() throws Exception {
   }
 
-  public void activate() throws Exception {
+  public void activate() {
 
   }
 
-  public void deActivate() throws Exception {
+  public void deActivate() {
 
   }
 

@@ -17,47 +17,6 @@
 
 package org.exoplatform.ecms.xcmis.sp;
 
-import org.exoplatform.services.jcr.access.AccessControlList;
-import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.core.ExtendedNode;
-import org.exoplatform.services.jcr.core.ExtendedSession;
-import org.exoplatform.services.jcr.impl.core.NodeImpl;
-import org.exoplatform.services.jcr.impl.core.value.BooleanValue;
-import org.exoplatform.services.jcr.impl.core.value.DateValue;
-import org.exoplatform.services.jcr.impl.core.value.DoubleValue;
-import org.exoplatform.services.jcr.impl.core.value.LongValue;
-import org.exoplatform.services.jcr.impl.core.value.StringValue;
-import org.exoplatform.services.jcr.util.IdGenerator;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.xcmis.spi.BaseContentStream;
-import org.xcmis.spi.CmisConstants;
-import org.xcmis.spi.CmisRuntimeException;
-import org.xcmis.spi.ContentStream;
-import org.xcmis.spi.ItemsIterator;
-import org.xcmis.spi.LazyIterator;
-import org.xcmis.spi.NameConstraintViolationException;
-import org.xcmis.spi.ObjectNotFoundException;
-import org.xcmis.spi.StorageException;
-import org.xcmis.spi.TypeNotFoundException;
-import org.xcmis.spi.model.AccessControlEntry;
-import org.xcmis.spi.model.BaseType;
-import org.xcmis.spi.model.Property;
-import org.xcmis.spi.model.PropertyDefinition;
-import org.xcmis.spi.model.PropertyType;
-import org.xcmis.spi.model.RelationshipDirection;
-import org.xcmis.spi.model.TypeDefinition;
-import org.xcmis.spi.model.Permission.BasicPermissions;
-import org.xcmis.spi.model.impl.BooleanProperty;
-import org.xcmis.spi.model.impl.DateTimeProperty;
-import org.xcmis.spi.model.impl.DecimalProperty;
-import org.xcmis.spi.model.impl.HtmlProperty;
-import org.xcmis.spi.model.impl.IdProperty;
-import org.xcmis.spi.model.impl.IntegerProperty;
-import org.xcmis.spi.model.impl.StringProperty;
-import org.xcmis.spi.model.impl.UriProperty;
-import org.xcmis.spi.utils.MimeType;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -76,6 +35,8 @@ import java.util.Set;
 
 import javax.jcr.InvalidItemStateException;
 import javax.jcr.ItemExistsException;
+import javax.jcr.LoginException;
+import javax.jcr.NoSuchWorkspaceException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
@@ -86,6 +47,48 @@ import javax.jcr.Value;
 import javax.jcr.ValueFormatException;
 import javax.jcr.Workspace;
 import javax.jcr.nodetype.NodeType;
+
+import org.exoplatform.services.jcr.access.AccessControlList;
+import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.services.jcr.core.ExtendedSession;
+import org.exoplatform.services.jcr.impl.core.NodeImpl;
+import org.exoplatform.services.jcr.impl.core.value.BooleanValue;
+import org.exoplatform.services.jcr.impl.core.value.DateValue;
+import org.exoplatform.services.jcr.impl.core.value.DoubleValue;
+import org.exoplatform.services.jcr.impl.core.value.LongValue;
+import org.exoplatform.services.jcr.impl.core.value.StringValue;
+import org.exoplatform.services.jcr.util.IdGenerator;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.xcmis.spi.BaseContentStream;
+import org.xcmis.spi.CmisConstants;
+import org.xcmis.spi.CmisRuntimeException;
+import org.xcmis.spi.ContentStream;
+import org.xcmis.spi.ItemsIterator;
+import org.xcmis.spi.LazyIterator;
+import org.xcmis.spi.NameConstraintViolationException;
+import org.xcmis.spi.ObjectNotFoundException;
+import org.xcmis.spi.StorageException;
+import org.xcmis.spi.TypeNotFoundException;
+import org.xcmis.spi.model.AccessControlEntry;
+import org.xcmis.spi.model.BaseType;
+import org.xcmis.spi.model.Permission.BasicPermissions;
+import org.xcmis.spi.model.Property;
+import org.xcmis.spi.model.PropertyDefinition;
+import org.xcmis.spi.model.PropertyType;
+import org.xcmis.spi.model.RelationshipDirection;
+import org.xcmis.spi.model.TypeDefinition;
+import org.xcmis.spi.model.impl.BooleanProperty;
+import org.xcmis.spi.model.impl.DateTimeProperty;
+import org.xcmis.spi.model.impl.DecimalProperty;
+import org.xcmis.spi.model.impl.HtmlProperty;
+import org.xcmis.spi.model.impl.IdProperty;
+import org.xcmis.spi.model.impl.IntegerProperty;
+import org.xcmis.spi.model.impl.StringProperty;
+import org.xcmis.spi.model.impl.UriProperty;
+import org.xcmis.spi.utils.MimeType;
 
 /**
  * @author <a href="mailto:andrew00x@gmail.com">Andrey Parfonov</a>
@@ -106,21 +109,21 @@ class JcrNodeEntry
     protected void fetchNext() {
       next = null;
       while (next == null && iter.hasNext()) {
-        Node node = iter.nextNode();
+        Node fetchNode = iter.nextNode();
         try {
-          if (SKIP_CHILD_ITEMS.contains(node.getName())) {
+          if (SKIP_CHILD_ITEMS.contains(getNode().getName())) {
             continue;
           }
 
-          if (!((NodeImpl) node).isValid()) {
+          if (!((NodeImpl) fetchNode).isValid()) {
             continue; // TODO temporary. Be sure it fixed in JCR back-end.
           }
 
-          if (node.isNodeType(JcrCMIS.JCR_XCMIS_LINKEDFILE)) {
+          if (getNode().isNodeType(JcrCMIS.JCR_XCMIS_LINKEDFILE)) {
             javax.jcr.Property propertyWithId = null;
-            for (PropertyIterator iter = node.getProperties(); iter.hasNext()
+            for (PropertyIterator iterPro = getNode().getProperties(); iterPro.hasNext()
                 && propertyWithId == null;) {
-              javax.jcr.Property nextProperty = iter.nextProperty();
+              javax.jcr.Property nextProperty = iterPro.nextProperty();
               // iterate while don't get the property with CMIS Object Id in the
               // name.
               // xcmis:linkedFile extends nt:base which has two properties by
@@ -130,22 +133,22 @@ class JcrNodeEntry
                 propertyWithId = nextProperty;
               }
             }
-            node = propertyWithId.getNode();
+            fetchNode = propertyWithId.getNode();
             try {
-              next = storage.fromNode(node);
+              next = storage.fromNode(fetchNode);
             } catch (ObjectNotFoundException e) {
               continue;
             }
-          } else if (node.isNodeType("exo:symlink")) {
+          } else if (getNode().isNodeType("exo:symlink")) {
             try {
               // May be sub-types of exo:symlink
-              next = storage.fromNode(node);
+              next = storage.fromNode(fetchNode);
             } catch (ObjectNotFoundException e) {
               continue;
             }
           } else {
             try {
-              next = storage.fromNode(node);
+              next = storage.fromNode(fetchNode);
             } catch (ObjectNotFoundException e) {
               continue;
             }
@@ -183,13 +186,15 @@ class JcrNodeEntry
 
    private static final Log LOG = ExoLogger.getLogger(JcrNodeEntry.class.getName());
 
-   protected Node node;
-
    protected final TypeDefinition type;
 
    protected BaseJcrStorage storage;
 
    private String id = null;
+   
+   protected String path;
+   
+   protected String workspace;
 
    /**
     * @param node back-end JCR node
@@ -201,21 +206,21 @@ class JcrNodeEntry
     * @see Workspace#getNodeTypeManager()
     * @see RepositoryException
     */
-   JcrNodeEntry(Node node, BaseJcrStorage storage) throws RepositoryException
+   JcrNodeEntry(String path, String workspace,BaseJcrStorage storage) throws RepositoryException
    {
-      Session session = node.getSession();
+      this.path = path;
+      this.workspace = workspace;
       NodeType nodeType = null;
-      if (node.isNodeType(JcrCMIS.NT_FROZEN_NODE))
+      if (getNode().isNodeType(JcrCMIS.NT_FROZEN_NODE))
       {
          nodeType =
-            session.getWorkspace().getNodeTypeManager()
-               .getNodeType(node.getProperty(JcrCMIS.JCR_FROZEN_PRIMARY_TYPE).getString());
+            getNode().getSession().getWorkspace().getNodeTypeManager()
+               .getNodeType(getNode().getProperty(JcrCMIS.JCR_FROZEN_PRIMARY_TYPE).getString());
       }
       else
       {
-         nodeType = node.getPrimaryNodeType();
+         nodeType = getNode().getPrimaryNodeType();
       }
-      this.node = node;
       this.type = storage.getTypeDefinition(nodeType, true);
       this.storage = storage;
    }
@@ -227,7 +232,7 @@ class JcrNodeEntry
 
       if (StorageImpl.PWC_LABEL.equalsIgnoreCase(getString(CmisConstants.VERSION_LABEL))) {
          try {
-            id = ((ExtendedNode)node).getIdentifier();
+            id = ((ExtendedNode)getNode()).getIdentifier();
          } catch (RepositoryException e) {
             throw new CmisRuntimeException("Unable get objects's id ." + e.getMessage(), e);
          }
@@ -240,7 +245,7 @@ class JcrNodeEntry
       {
          // if not PWC and not Document (with stored objectId)
          try {
-             id = ((ExtendedNode)node).getIdentifier();
+             id = ((ExtendedNode)getNode()).getIdentifier();
           } catch (RepositoryException e) {
              throw new CmisRuntimeException("Unable get objects's id ." + e.getMessage(), e);
           }
@@ -252,7 +257,7 @@ class JcrNodeEntry
    {
       try
       {
-         return node.getName();
+         return getNode().getName();
       }
       catch (RepositoryException re)
       {
@@ -272,17 +277,17 @@ class JcrNodeEntry
       }
       try
       {
-         if (node.getParent().hasNode(name))
+         if (getNode().getParent().hasNode(name))
          {
             throw new NameConstraintViolationException("Object with name " + name + " already exists.");
          }
          if (name != null)
          {
-            Session session = node.getSession();
+            Session session = getNode().getSession();
             String srcPath = path();
             String destPath = srcPath.substring(0, srcPath.lastIndexOf('/') + 1) + name;
             session.move(srcPath, destPath);
-            node = (Node)session.getItem(destPath);
+            path = destPath;
             // 'cmis:name' is not stored as property. This is virtual property in xcmis-jcr.
          }
       }
@@ -323,14 +328,7 @@ class JcrNodeEntry
 
    String path()
    {
-      try
-      {
-         return node.getPath();
-      }
-      catch (RepositoryException re)
-      {
-         throw new CmisRuntimeException("Unable get JCR node path. " + re.getMessage(), re);
-      }
+     return path;
    }
 
    boolean isRoot()
@@ -338,9 +336,9 @@ class JcrNodeEntry
       return "/".equals(getPath());
    }
 
-   boolean isNew()
+   boolean isNew() throws LoginException, NoSuchWorkspaceException, RepositoryException
    {
-      return node.isNew();
+      return getNode().isNew();
    }
 
    Collection<JcrNodeEntry> getPolicies()
@@ -388,9 +386,9 @@ class JcrNodeEntry
       try
       {
          String policyId = policy.getId();
-         if (!node.hasProperty(policyId))
+         if (!getNode().hasProperty(policyId))
          {
-            node.setProperty(policyId, policy.getNode());
+            getNode().setProperty(policyId, policy.getNode());
          }
       }
       catch (RepositoryException re)
@@ -404,7 +402,7 @@ class JcrNodeEntry
       try
       {
          String policyId = policy.getId();
-         node.setProperty(policyId, (Node)null);
+         getNode().setProperty(policyId, (Node)null);
       }
       catch (RepositoryException re)
       {
@@ -478,11 +476,11 @@ class JcrNodeEntry
    {
       try
       {
-         if (!node.isNodeType(JcrCMIS.EXO_PRIVILEGABLE))
+         if (!getNode().isNodeType(JcrCMIS.EXO_PRIVILEGABLE))
          {
-            node.addMixin(JcrCMIS.EXO_PRIVILEGABLE);
+            getNode().addMixin(JcrCMIS.EXO_PRIVILEGABLE);
          }
-         ExtendedNode extNode = (ExtendedNode)node;
+         ExtendedNode extNode = (ExtendedNode)getNode();
          // Not merge ACL overwrite it.
          extNode.clearACL();
          if (aces != null && aces.size() > 0)
@@ -497,7 +495,7 @@ class JcrNodeEntry
    }
 
    /**
-    * Create permission map which can be passed to JCR node.
+    * Create permission map which can be passed to JCR getNode().
     *
     * @param source source ACL
     * @return permission map
@@ -546,19 +544,19 @@ class JcrNodeEntry
       return aces;
    }
 
-   Collection<JcrNodeEntry> getRelationships(RelationshipDirection direction, TypeDefinition type,
+   Collection<JcrNodeEntry> getRelationships(RelationshipDirection direction, TypeDefinition typeDef,
       boolean includeSubRelationshipTypes)
    {
       Collection<JcrNodeEntry> relationships = new HashSet<JcrNodeEntry>();
       Collection<String> typeFilter = new HashSet<String>();
-      typeFilter.add(type.getId());
+      typeFilter.add(typeDef.getId());
 
       if (includeSubRelationshipTypes)
       {
          Collection<TypeDefinition> subTypes = null;
          try
          {
-            subTypes = storage.getSubTypes(type.getId(), false);
+            subTypes = storage.getSubTypes(typeDef.getId(), false);
          }
          catch (TypeNotFoundException e)
          {
@@ -572,7 +570,7 @@ class JcrNodeEntry
       }
       try
       {
-         for (PropertyIterator references = node.getReferences(); references.hasNext();)
+         for (PropertyIterator references = getNode().getReferences(); references.hasNext();)
          {
 
             javax.jcr.Property prop = references.nextProperty();
@@ -614,16 +612,16 @@ class JcrNodeEntry
    {
       if (getBaseType() == BaseType.DOCUMENT)
       {
-         String id = getString(CmisConstants.CONTENT_STREAM_ID);
-         if (id == null)
+         String streamId = getString(CmisConstants.CONTENT_STREAM_ID);
+         if (streamId == null)
          {
             try
             {
-               Node contentNode = node.getNode(JcrCMIS.JCR_CONTENT);
+               Node contentNode = getNode().getNode(JcrCMIS.JCR_CONTENT);
                long contentLength = contentNode.getProperty(JcrCMIS.JCR_DATA).getLength();
                if (contentLength > 0)
                {
-                  id = ((ExtendedNode)contentNode).getIdentifier();
+                  streamId = ((ExtendedNode)contentNode).getIdentifier();
                }
             }
             catch (RepositoryException re)
@@ -631,7 +629,7 @@ class JcrNodeEntry
                throw new CmisRuntimeException(re.getMessage(), re);
             }
          }
-         return id;
+         return streamId;
       }
       return null;
    }
@@ -661,7 +659,7 @@ class JcrNodeEntry
             {
                return null;
             }
-            Node contentNode = node.getNode(JcrCMIS.JCR_CONTENT);
+            Node contentNode = getNode().getNode(JcrCMIS.JCR_CONTENT);
             long contentLength = contentNode.getProperty(JcrCMIS.JCR_DATA).getLength();
             if (contentLength == 0)
             {
@@ -676,27 +674,24 @@ class JcrNodeEntry
             return new BaseContentStream(contentNode.getProperty(JcrCMIS.JCR_DATA).getStream(), contentLength,
                getContentStreamFileName(), mimeType);
          }
-         else
+         try
          {
-            try
-            {
-               Node rendition = node.getNode(streamId);
-               javax.jcr.Property renditionContent = rendition.getProperty(JcrCMIS.CMIS_RENDITION_STREAM);
-               MimeType mimeType =
-                  MimeType.fromString(rendition.getProperty(JcrCMIS.CMIS_RENDITION_MIME_TYPE).getString());
-               if (rendition.hasProperty(JcrCMIS.CMIS_RENDITION_ENCODING))
-               {
-                  mimeType.getParameters().put(CmisConstants.CHARSET,
+           Node rendition = getNode().getNode(streamId);
+           javax.jcr.Property renditionContent = rendition.getProperty(JcrCMIS.CMIS_RENDITION_STREAM);
+           MimeType mimeType =
+                   MimeType.fromString(rendition.getProperty(JcrCMIS.CMIS_RENDITION_MIME_TYPE).getString());
+           if (rendition.hasProperty(JcrCMIS.CMIS_RENDITION_ENCODING))
+           {
+             mimeType.getParameters().put(CmisConstants.CHARSET,
                      rendition.getProperty(JcrCMIS.CMIS_RENDITION_ENCODING).getString());
-               }
-               return new BaseContentStream(renditionContent.getStream(), renditionContent.getLength(), null, mimeType);
-            }
-            catch (PathNotFoundException pnfe)
-            {
-               if (LOG.isWarnEnabled())
-                  LOG.warn(pnfe.getMessage(), pnfe);
-               return null;
-            }
+           }
+           return new BaseContentStream(renditionContent.getStream(), renditionContent.getLength(), null, mimeType);
+         }
+         catch (PathNotFoundException pnfe)
+         {
+           if (LOG.isWarnEnabled())
+             LOG.warn(pnfe.getMessage(), pnfe);
+           return null;
          }
       }
       catch (RepositoryException re)
@@ -721,8 +716,8 @@ class JcrNodeEntry
       try
       {
          // jcr:content
-         Node contentNode =
-            node.hasNode(JcrCMIS.JCR_CONTENT) ? node.getNode(JcrCMIS.JCR_CONTENT) : node.addNode(JcrCMIS.JCR_CONTENT,
+         Node contentNode = getNode().hasNode(JcrCMIS.JCR_CONTENT) ? getNode().getNode(JcrCMIS.JCR_CONTENT) : 
+           getNode().addNode(JcrCMIS.JCR_CONTENT,
                JcrCMIS.NT_RESOURCE);
          if (content != null)
          {
@@ -730,16 +725,16 @@ class JcrNodeEntry
             // Re-count content length
             long contentLength = contentNode.setProperty(JcrCMIS.JCR_DATA, content.getStream()).getLength();
             contentNode.setProperty(JcrCMIS.JCR_LAST_MODIFIED, Calendar.getInstance());
-            if (node.isNodeType(JcrCMIS.CMIS_MIX_DOCUMENT))
+            if (getNode().isNodeType(JcrCMIS.CMIS_MIX_DOCUMENT))
             {
                // Update CMIS properties
-               if (!node.hasProperty(CmisConstants.CONTENT_STREAM_ID))
+               if (!getNode().hasProperty(CmisConstants.CONTENT_STREAM_ID))
                {
                   // If new node
-                  node.setProperty(CmisConstants.CONTENT_STREAM_ID, ((ExtendedNode)contentNode).getIdentifier());
+                  getNode().setProperty(CmisConstants.CONTENT_STREAM_ID, ((ExtendedNode)contentNode).getIdentifier());
                }
-               node.setProperty(CmisConstants.CONTENT_STREAM_LENGTH, contentLength);
-               node.setProperty(CmisConstants.CONTENT_STREAM_MIME_TYPE, mediaType.getBaseType());
+               getNode().setProperty(CmisConstants.CONTENT_STREAM_LENGTH, contentLength);
+               getNode().setProperty(CmisConstants.CONTENT_STREAM_MIME_TYPE, mediaType.getBaseType());
             }
             // Add/update mimeType property after content updated. Need for fixing AddMetadataAction (JCR).
             contentNode.setProperty(JcrCMIS.JCR_MIMETYPE, mediaType.getBaseType());
@@ -754,12 +749,12 @@ class JcrNodeEntry
             contentNode.setProperty(JcrCMIS.JCR_ENCODING, (Value)null);
             contentNode.setProperty(JcrCMIS.JCR_DATA, new ByteArrayInputStream(new byte[0]));
             contentNode.setProperty(JcrCMIS.JCR_LAST_MODIFIED, Calendar.getInstance());
-            if (node.isNodeType(JcrCMIS.CMIS_MIX_DOCUMENT))
+            if (getNode().isNodeType(JcrCMIS.CMIS_MIX_DOCUMENT))
             {
                // Update CMIS properties
-               node.setProperty(CmisConstants.CONTENT_STREAM_ID, (Value)null);
-               node.setProperty(CmisConstants.CONTENT_STREAM_LENGTH, 0);
-               node.setProperty(CmisConstants.CONTENT_STREAM_MIME_TYPE, (Value)null);
+               getNode().setProperty(CmisConstants.CONTENT_STREAM_ID, (Value)null);
+               getNode().setProperty(CmisConstants.CONTENT_STREAM_LENGTH, 0);
+               getNode().setProperty(CmisConstants.CONTENT_STREAM_MIME_TYPE, (Value)null);
             }
          }
       }
@@ -778,7 +773,7 @@ class JcrNodeEntry
       }
       try
       {
-         Node contentNode = node.getNode(JcrCMIS.JCR_CONTENT);
+         Node contentNode = getNode().getNode(JcrCMIS.JCR_CONTENT);
          long contentLength = contentNode.getProperty(JcrCMIS.JCR_DATA).getLength();
          return contentLength > 0;
       }
@@ -792,7 +787,7 @@ class JcrNodeEntry
    {
       try
       {
-         javax.jcr.Property jcrProperty = node.getProperty(definition.getId());
+         javax.jcr.Property jcrProperty = getNode().getProperty(definition.getId());
          return createProperty(definition, definition.isMultivalued() ? jcrProperty.getValues()
             : new Value[]{jcrProperty.getValue()});
       }
@@ -916,7 +911,7 @@ class JcrNodeEntry
       // 4. Single-valued property does not contains more then one value.
       try
       {
-         if (!node.isNew() && property.getId().equals(CmisConstants.NAME) && property.getValues().size() > 0)
+         if (!getNode().isNew() && property.getId().equals(CmisConstants.NAME) && property.getValues().size() > 0)
          {
             // Special property for JCR back-end.
             String name = (String)property.getValues().get(0);
@@ -930,11 +925,11 @@ class JcrNodeEntry
                List<Boolean> booleans = (List<Boolean>)property.getValues();
                if (booleans.size() == 0)
                {
-                  node.setProperty(property.getId(), (Value)null);
+                  getNode().setProperty(property.getId(), (Value)null);
                }
                else if (!multivalued)
                {
-                  node.setProperty(property.getId(), booleans.get(0));
+                  getNode().setProperty(property.getId(), booleans.get(0));
                }
                else
                {
@@ -943,7 +938,7 @@ class JcrNodeEntry
                   {
                      jcrValue[i] = new BooleanValue(booleans.get(i));
                   }
-                  node.setProperty(property.getId(), jcrValue);
+                  getNode().setProperty(property.getId(), jcrValue);
                }
             }
             else if (property.getType() == PropertyType.DATETIME)
@@ -951,11 +946,11 @@ class JcrNodeEntry
                List<Calendar> datetime = (List<Calendar>)property.getValues();
                if (datetime.size() == 0)
                {
-                  node.setProperty(property.getId(), (Value)null);
+                  getNode().setProperty(property.getId(), (Value)null);
                }
                else if (!multivalued)
                {
-                  node.setProperty(property.getId(), datetime.get(0));
+                  getNode().setProperty(property.getId(), datetime.get(0));
                }
                else
                {
@@ -964,7 +959,7 @@ class JcrNodeEntry
                   {
                      jcrValue[i] = new DateValue(datetime.get(i));
                   }
-                  node.setProperty(property.getId(), jcrValue);
+                  getNode().setProperty(property.getId(), jcrValue);
                }
             }
             else if (property.getType() == PropertyType.DECIMAL)
@@ -972,11 +967,11 @@ class JcrNodeEntry
                List<BigDecimal> doubles = (List<BigDecimal>)property.getValues();
                if (doubles.size() == 0)
                {
-                  node.setProperty(property.getId(), (Value)null);
+                  getNode().setProperty(property.getId(), (Value)null);
                }
                else if (!multivalued)
                {
-                  node.setProperty(property.getId(), doubles.get(0).doubleValue());
+                  getNode().setProperty(property.getId(), doubles.get(0).doubleValue());
                }
                else
                {
@@ -985,7 +980,7 @@ class JcrNodeEntry
                   {
                      jcrValue[i] = new DoubleValue(doubles.get(i).doubleValue());
                   }
-                  node.setProperty(property.getId(), jcrValue);
+                  getNode().setProperty(property.getId(), jcrValue);
                }
             }
             else if (property.getType() == PropertyType.INTEGER)
@@ -993,11 +988,11 @@ class JcrNodeEntry
                List<BigInteger> integers = (List<BigInteger>)property.getValues();
                if (integers.size() == 0)
                {
-                  node.setProperty(property.getId(), (Value)null);
+                  getNode().setProperty(property.getId(), (Value)null);
                }
                else if (!multivalued)
                {
-                  node.setProperty(property.getId(), integers.get(0).longValue());
+                  getNode().setProperty(property.getId(), integers.get(0).longValue());
                }
                else
                {
@@ -1006,7 +1001,7 @@ class JcrNodeEntry
                   {
                      jcrValue[i] = new LongValue(integers.get(i).longValue());
                   }
-                  node.setProperty(property.getId(), jcrValue);
+                  getNode().setProperty(property.getId(), jcrValue);
                }
             }
             else if (property.getType() == PropertyType.HTML || property.getType() == PropertyType.ID
@@ -1015,11 +1010,11 @@ class JcrNodeEntry
                List<String> text = (List<String>)property.getValues();
                if (text.size() == 0)
                {
-                  node.setProperty(property.getId(), (Value)null);
+                  getNode().setProperty(property.getId(), (Value)null);
                }
                else if (!multivalued)
                {
-                  node.setProperty(property.getId(), text.get(0));
+                  getNode().setProperty(property.getId(), text.get(0));
                }
                else
                {
@@ -1028,7 +1023,7 @@ class JcrNodeEntry
                   {
                      jcrValue[i] = new StringValue(text.get(i));
                   }
-                  node.setProperty(property.getId(), jcrValue);
+                  getNode().setProperty(property.getId(), jcrValue);
                }
             }
             else if (property.getType() == PropertyType.URI)
@@ -1036,11 +1031,11 @@ class JcrNodeEntry
                List<URI> uris = (List<URI>)property.getValues();
                if (uris.size() == 0)
                {
-                  node.setProperty(property.getId(), (Value)null);
+                  getNode().setProperty(property.getId(), (Value)null);
                }
                else if (!multivalued)
                {
-                  node.setProperty(property.getId(), uris.get(0).toString());
+                  getNode().setProperty(property.getId(), uris.get(0).toString());
                }
                else
                {
@@ -1049,7 +1044,7 @@ class JcrNodeEntry
                   {
                      jcrValue[i] = new StringValue(uris.get(i).toString());
                   }
-                  node.setProperty(property.getId(), jcrValue);
+                  getNode().setProperty(property.getId(), jcrValue);
                }
             }
          }
@@ -1073,7 +1068,7 @@ class JcrNodeEntry
       }
       try
       {
-         return new ChildrenIterator(node.getNodes());
+         return new ChildrenIterator(getNode().getNodes());
       }
       catch (RepositoryException re)
       {
@@ -1090,9 +1085,9 @@ class JcrNodeEntry
    {
       try
       {
-         Session session = node.getSession();
+         Session session = getNode().getSession();
          Node entryNode = entry.getNode();
-         Node link = node.addNode(entry.getName(), JcrCMIS.JCR_XCMIS_LINKEDFILE);
+         Node link = getNode().addNode(entry.getName(), JcrCMIS.JCR_XCMIS_LINKEDFILE);
          link.setProperty(JcrCMIS.JCR_MULTIFILING_PROPERTY_PREFIX + entryNode.getUUID(), entryNode);
          session.save();
       }
@@ -1107,9 +1102,9 @@ class JcrNodeEntry
    {
       try
       {
-         Session session = node.getSession();
+         Session session = getNode().getSession();
          Node entryNode = entry.getNode();
-         if (((ExtendedNode)entryNode.getParent()).getIdentifier().equals(((ExtendedNode)node).getIdentifier()))
+         if (((ExtendedNode)entryNode.getParent()).getIdentifier().equals(((ExtendedNode)getNode()).getIdentifier()))
          {
             // Node 'entryNode' is filed in current folder directly.
             // Check links from other folders.
@@ -1154,7 +1149,7 @@ class JcrNodeEntry
             {
                Node next = references.nextProperty().getParent();
                if (next.isNodeType(JcrCMIS.JCR_XCMIS_LINKEDFILE)
-                  && ((ExtendedNode)next.getParent()).getIdentifier().equals(((ExtendedNode)node).getIdentifier()))
+                  && ((ExtendedNode)next.getParent()).getIdentifier().equals(((ExtendedNode)getNode()).getIdentifier()))
                {
                   next.remove();
                   break;
@@ -1171,7 +1166,7 @@ class JcrNodeEntry
 
   void moveTo(JcrNodeEntry target) throws NameConstraintViolationException, StorageException {
     try {
-      Session session = node.getSession();
+      Session session = getNode().getSession();
       String objectPath = path();
       StringBuffer destinationPath = new StringBuffer(target.getNode().getPath());
       if ("/".equals(destinationPath.toString())) {
@@ -1194,7 +1189,7 @@ class JcrNodeEntry
          Set<JcrNodeEntry> parents = new HashSet<JcrNodeEntry>();
          if (getBaseType() == BaseType.DOCUMENT)
          {
-            for (PropertyIterator iterator = node.getReferences(); iterator.hasNext();)
+            for (PropertyIterator iterator = getNode().getReferences(); iterator.hasNext();)
             {
                Node refer = iterator.nextProperty().getParent();
                if (refer.isNodeType(JcrCMIS.JCR_XCMIS_LINKEDFILE))
@@ -1215,7 +1210,7 @@ class JcrNodeEntry
          {
             try
             {
-               JcrNodeEntry parent = storage.fromNode(node.getParent());
+               JcrNodeEntry parent = storage.fromNode(getNode().getParent());
                parents.add(parent);
             }
             catch (ObjectNotFoundException onfe)
@@ -1231,11 +1226,11 @@ class JcrNodeEntry
       }
    }
 
-   Boolean getBoolean(String id)
+   Boolean getBoolean(String strID)
    {
       try
       {
-         return node.getProperty(id).getBoolean();
+         return getNode().getProperty(strID).getBoolean();
       }
       catch (PathNotFoundException pe)
       {
@@ -1244,15 +1239,15 @@ class JcrNodeEntry
       }
       catch (RepositoryException re)
       {
-         throw new CmisRuntimeException("Unable get property " + id + ". " + re.getMessage(), re);
+         throw new CmisRuntimeException("Unable get property " + strID + ". " + re.getMessage(), re);
       }
    }
 
-   Boolean[] getBooleans(String id)
+   Boolean[] getBooleans(String strID)
    {
       try
       {
-         Value[] values = node.getProperty(id).getValues();
+         Value[] values = getNode().getProperty(strID).getValues();
          Boolean[] res = new Boolean[values.length];
          for (int i = 0; i < values.length; i++)
          {
@@ -1267,15 +1262,15 @@ class JcrNodeEntry
       }
       catch (RepositoryException re)
       {
-         throw new CmisRuntimeException("Unable get property " + id + ". " + re.getMessage(), re);
+         throw new CmisRuntimeException("Unable get property " + strID + ". " + re.getMessage(), re);
       }
    }
 
-   Calendar getDate(String id)
+   Calendar getDate(String strID)
    {
       try
       {
-         return node.getProperty(id).getDate();
+         return getNode().getProperty(strID).getDate();
       }
       catch (PathNotFoundException pe)
       {
@@ -1284,15 +1279,15 @@ class JcrNodeEntry
       }
       catch (RepositoryException re)
       {
-         throw new CmisRuntimeException("Unable get property " + id + ". " + re.getMessage(), re);
+         throw new CmisRuntimeException("Unable get property " + strID + ". " + re.getMessage(), re);
       }
    }
 
-   Calendar[] getDates(String id)
+   Calendar[] getDates(String strID)
    {
       try
       {
-         Value[] values = node.getProperty(id).getValues();
+         Value[] values = getNode().getProperty(strID).getValues();
          Calendar[] res = new Calendar[values.length];
          for (int i = 0; i < values.length; i++)
          {
@@ -1307,15 +1302,15 @@ class JcrNodeEntry
       }
       catch (RepositoryException re)
       {
-         throw new CmisRuntimeException("Unable get property " + id + ". " + re.getMessage(), re);
+         throw new CmisRuntimeException("Unable get property " + strID + ". " + re.getMessage(), re);
       }
    }
 
-   Double getDouble(String id)
+   Double getDouble(String strID)
    {
       try
       {
-         return node.getProperty(id).getDouble();
+         return getNode().getProperty(strID).getDouble();
       }
       catch (PathNotFoundException pe)
       {
@@ -1324,15 +1319,15 @@ class JcrNodeEntry
       }
       catch (RepositoryException re)
       {
-         throw new CmisRuntimeException("Unable get property " + id + ". " + re.getMessage(), re);
+         throw new CmisRuntimeException("Unable get property " + strID + ". " + re.getMessage(), re);
       }
    }
 
-   Double[] getDoubles(String id)
+   Double[] getDoubles(String strID)
    {
       try
       {
-         Value[] values = node.getProperty(id).getValues();
+         Value[] values = getNode().getProperty(strID).getValues();
          Double[] res = new Double[values.length];
          for (int i = 0; i < values.length; i++)
          {
@@ -1347,15 +1342,15 @@ class JcrNodeEntry
       }
       catch (RepositoryException re)
       {
-         throw new CmisRuntimeException("Unable get property " + id + ". " + re.getMessage(), re);
+         throw new CmisRuntimeException("Unable get property " + strID + ". " + re.getMessage(), re);
       }
    }
 
-   Long getLong(String id)
+   Long getLong(String strID)
    {
       try
       {
-         return node.getProperty(id).getLong();
+         return getNode().getProperty(strID).getLong();
       }
       catch (PathNotFoundException pe)
       {
@@ -1364,15 +1359,15 @@ class JcrNodeEntry
       }
       catch (RepositoryException re)
       {
-         throw new CmisRuntimeException("Unable get property " + id + ". " + re.getMessage(), re);
+         throw new CmisRuntimeException("Unable get property " + strID + ". " + re.getMessage(), re);
       }
    }
 
-   Long[] getLongs(String id)
+   Long[] getLongs(String strID)
    {
       try
       {
-         Value[] values = node.getProperty(id).getValues();
+         Value[] values = getNode().getProperty(strID).getValues();
          Long[] res = new Long[values.length];
          for (int i = 0; i < values.length; i++)
          {
@@ -1387,15 +1382,15 @@ class JcrNodeEntry
       }
       catch (RepositoryException re)
       {
-         throw new CmisRuntimeException("Unable get property " + id + ". " + re.getMessage(), re);
+         throw new CmisRuntimeException("Unable get property " + strID + ". " + re.getMessage(), re);
       }
    }
 
-   String getString(String id)
+   String getString(String strID)
    {
       try
       {
-         return node.getProperty(id).getString();
+         return getNode().getProperty(strID).getString();
       }
       catch (PathNotFoundException pe)
       {
@@ -1404,15 +1399,15 @@ class JcrNodeEntry
       }
       catch (RepositoryException re)
       {
-         throw new CmisRuntimeException("Unable get property " + id + ". " + re.getMessage(), re);
+         throw new CmisRuntimeException("Unable get property " + strID + ". " + re.getMessage(), re);
       }
    }
 
-   String[] getStrings(String id)
+   String[] getStrings(String strID)
    {
       try
       {
-         Value[] values = node.getProperty(id).getValues();
+         Value[] values = getNode().getProperty(strID).getValues();
          String[] res = new String[values.length];
          for (int i = 0; i < values.length; i++)
          {
@@ -1427,7 +1422,7 @@ class JcrNodeEntry
       }
       catch (RepositoryException re)
       {
-         throw new CmisRuntimeException("Unable get property " + id + ". " + re.getMessage(), re);
+         throw new CmisRuntimeException("Unable get property " + strID + ". " + re.getMessage(), re);
       }
    }
 
@@ -1435,7 +1430,7 @@ class JcrNodeEntry
    {
       try
       {
-         node.setProperty(id, value);
+         getNode().setProperty(id, value);
       }
       catch (RepositoryException re)
       {
@@ -1447,7 +1442,7 @@ class JcrNodeEntry
    {
       try
       {
-         node.setProperty(id, values);
+         getNode().setProperty(id, values);
       }
       catch (RepositoryException re)
       {
@@ -1459,7 +1454,7 @@ class JcrNodeEntry
    {
       try
       {
-         node.setProperty(id, value);
+         getNode().setProperty(id, value);
       }
       catch (RepositoryException re)
       {
@@ -1476,7 +1471,7 @@ class JcrNodeEntry
          {
             jcrValue[i] = new BooleanValue(values[i]);
          }
-         node.setProperty(id, jcrValue);
+         getNode().setProperty(id, jcrValue);
       }
       catch (IOException ioe)
       {
@@ -1492,7 +1487,7 @@ class JcrNodeEntry
    {
       try
       {
-         node.setProperty(id, value);
+         getNode().setProperty(id, value);
       }
       catch (RepositoryException re)
       {
@@ -1509,7 +1504,7 @@ class JcrNodeEntry
          {
             jcrValue[i] = new DateValue(values[i]);
          }
-         node.setProperty(id, jcrValue);
+         getNode().setProperty(id, jcrValue);
       }
       catch (IOException io)
       {
@@ -1526,7 +1521,7 @@ class JcrNodeEntry
    {
       try
       {
-         node.setProperty(id, value);
+         getNode().setProperty(id, value);
       }
       catch (RepositoryException re)
       {
@@ -1543,7 +1538,7 @@ class JcrNodeEntry
          {
             jcrValue[i] = new DoubleValue(values[i]);
          }
-         node.setProperty(id, jcrValue);
+         getNode().setProperty(id, jcrValue);
       }
       catch (IOException io)
       {
@@ -1560,7 +1555,7 @@ class JcrNodeEntry
    {
       try
       {
-         node.setProperty(id, value);
+         getNode().setProperty(id, value);
       }
       catch (RepositoryException re)
       {
@@ -1577,7 +1572,7 @@ class JcrNodeEntry
          {
             jcrValue[i] = new LongValue(values[i]);
          }
-         node.setProperty(id, jcrValue);
+         getNode().setProperty(id, jcrValue);
       }
       catch (IOException io)
       {
@@ -1594,7 +1589,7 @@ class JcrNodeEntry
    {
       try
       {
-         node.setProperty(id, value);
+         getNode().setProperty(id, value);
       }
       catch (RepositoryException re)
       {
@@ -1611,7 +1606,7 @@ class JcrNodeEntry
          {
             jcrValue[i] = new StringValue(strings[i]);
          }
-         node.setProperty(id, jcrValue);
+         getNode().setProperty(id, jcrValue);
       }
       catch (IOException io)
       {
@@ -1633,12 +1628,12 @@ class JcrNodeEntry
    {
       try
       {
-         Session session = node.getSession();
+         Session session = getNode().getSession();
          if (updateLastModifiedAttributes)
          {
-            node.setProperty(CmisConstants.LAST_MODIFICATION_DATE, Calendar.getInstance());
-            node.setProperty(CmisConstants.LAST_MODIFIED_BY, node.getSession().getUserID());
-            node.setProperty(CmisConstants.CHANGE_TOKEN, IdGenerator.generate());
+            getNode().setProperty(CmisConstants.LAST_MODIFICATION_DATE, Calendar.getInstance());
+            getNode().setProperty(CmisConstants.LAST_MODIFIED_BY, getNode().getSession().getUserID());
+            getNode().setProperty(CmisConstants.CHANGE_TOKEN, IdGenerator.generate());
          }
          session.save();
       }
@@ -1674,8 +1669,7 @@ class JcrNodeEntry
 
       try
       {
-         String path = path();
-         Session session = node.getSession();
+         Session session = getNode().getSession();
          switch (getBaseType())
          {
             case DOCUMENT :
@@ -1684,7 +1678,7 @@ class JcrNodeEntry
 
                // Check is Document node has any references.
                // It minds Document is multifiled, need remove all links first.
-               PropertyIterator references = node.getReferences();
+               PropertyIterator references = getNode().getReferences();
                while(references.hasNext())
                {
                   javax.jcr.Property nextProperty = references.nextProperty();
@@ -1706,20 +1700,20 @@ class JcrNodeEntry
                   Node pwcNode = ((ExtendedSession)session).getNodeByIdentifier(pwcId);
                   pwcNode.getParent().remove();
                }
-               node.remove();
+               getNode().remove();
                break;
             case FOLDER :
                if (LOG.isDebugEnabled())
                   LOG.debug("remove folder " + path);
 
-               node.remove();
+               getNode().remove();
                break;
             case POLICY :
                if (LOG.isDebugEnabled())
                   LOG.debug("remove policy " + path);
 
                // Check is policy applied to at least one object.
-               for (PropertyIterator iter = node.getReferences(); iter.hasNext();)
+               for (PropertyIterator iter = getNode().getReferences(); iter.hasNext();)
                {
                   Node controllable = iter.nextProperty().getParent();
                   if (controllable.isNodeType(JcrCMIS.NT_FILE) //
@@ -1729,13 +1723,13 @@ class JcrNodeEntry
                      throw new StorageException("Unable to delete applied policy.");
                   }
                }
-               node.remove();
+               getNode().remove();
                break;
             case RELATIONSHIP :
                if (LOG.isDebugEnabled())
                   LOG.debug("remove relationship " + path);
 
-               node.remove();
+               getNode().remove();
                break;
          }
          session.save();
@@ -1749,10 +1743,11 @@ class JcrNodeEntry
       }
    }
 
-   Node getNode()
+   Node getNode() throws LoginException, NoSuchWorkspaceException, RepositoryException
    {
-      return node;
-   }
+      Session session = WCMCoreUtils.getUserSessionProvider().getSession(workspace, WCMCoreUtils.getRepository());
+      return (Node)session.getItem(path);
+   }  
 
    /**
     * {@inheritDoc}
@@ -1779,9 +1774,5 @@ class JcrNodeEntry
       hash = hash * 31 + getId().hashCode();
       return hash;
    }
-
-   // public String toString()
-   // {
-   //    return getType().getId() + "; " + getPath() + "; " + getId();
-   // }
+   
 }

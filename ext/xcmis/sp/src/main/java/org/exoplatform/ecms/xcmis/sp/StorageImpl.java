@@ -17,6 +17,29 @@
 
 package org.exoplatform.ecms.xcmis.sp;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.jcr.Item;
+import javax.jcr.ItemNotFoundException;
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
+import javax.jcr.version.Version;
+import javax.jcr.version.VersionHistory;
+import javax.jcr.version.VersionIterator;
+
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.log.ExoLogger;
@@ -69,6 +92,7 @@ import org.xcmis.spi.model.CapabilityQuery;
 import org.xcmis.spi.model.CapabilityRendition;
 import org.xcmis.spi.model.ChangeEvent;
 import org.xcmis.spi.model.Permission;
+import org.xcmis.spi.model.Permission.BasicPermissions;
 import org.xcmis.spi.model.PermissionMapping;
 import org.xcmis.spi.model.Property;
 import org.xcmis.spi.model.PropertyDefinition;
@@ -80,35 +104,10 @@ import org.xcmis.spi.model.TypeDefinition;
 import org.xcmis.spi.model.UnfileObject;
 import org.xcmis.spi.model.Updatability;
 import org.xcmis.spi.model.VersioningState;
-import org.xcmis.spi.model.Permission.BasicPermissions;
 import org.xcmis.spi.model.impl.StringProperty;
 import org.xcmis.spi.query.Query;
 import org.xcmis.spi.query.Result;
 import org.xcmis.spi.utils.CmisUtils;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.jcr.Item;
-import javax.jcr.ItemNotFoundException;
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-import javax.jcr.version.Version;
-import javax.jcr.version.VersionHistory;
-import javax.jcr.version.VersionIterator;
 
 /**
  * @author <a href="mailto:andrew00x@gmail.com">Andrey Parfonov</a>
@@ -166,10 +165,10 @@ public class StorageImpl extends BaseJcrStorage implements Storage
     */
    private final QueryParser cmisQueryParser;
 
-   public StorageImpl(Session session, StorageConfiguration configuration, SearchService searchService,
+   public StorageImpl(StorageConfiguration configuration, SearchService searchService,
       PermissionService permissionService, Map<String, TypeMapping> nodeTypeMapping)
    {
-      super(session, configuration, nodeTypeMapping);
+      super(configuration, nodeTypeMapping);
       this.searchService = searchService;
       this.permissionService = permissionService;
       this.cmisQueryParser = new CmisQueryParser();
@@ -262,18 +261,22 @@ public class StorageImpl extends BaseJcrStorage implements Storage
       JcrNodeEntry documentEntry =
          createDocumentEntry(parent != null ? ((FolderDataImpl)parent).getNodeEntry() : null, name, typeDefinition,
             versioningState);
+      try {
 
-      documentEntry.setValue(CmisConstants.OBJECT_TYPE_ID, typeDefinition.getId());
-      documentEntry.setValue(CmisConstants.BASE_TYPE_ID, typeDefinition.getBaseId().value());
-      documentEntry.setValue(CmisConstants.CREATED_BY, session.getUserID());
-      documentEntry.setValue(CmisConstants.CREATION_DATE, Calendar.getInstance());
-      documentEntry.setValue(CmisConstants.VERSION_SERIES_ID, documentEntry.getString(JcrCMIS.JCR_VERSION_HISTORY));
-      documentEntry.setValue(CmisConstants.OBJECT_ID, 
-                             documentEntry.getString(JcrCMIS.JCR_VERSION_HISTORY) + JcrCMIS.ID_SEPARATOR + "1");
-      documentEntry.setValue(CmisConstants.IS_LATEST_VERSION, true);
-      documentEntry.setValue(CmisConstants.IS_MAJOR_VERSION, versioningState == VersioningState.MAJOR);
-      // TODO : support for checked-out initial state
-      documentEntry.setValue(CmisConstants.VERSION_LABEL, LATEST_LABEL);
+        documentEntry.setValue(CmisConstants.OBJECT_TYPE_ID, typeDefinition.getId());
+        documentEntry.setValue(CmisConstants.BASE_TYPE_ID, typeDefinition.getBaseId().value());
+        documentEntry.setValue(CmisConstants.CREATED_BY, getSession().getUserID());
+        documentEntry.setValue(CmisConstants.CREATION_DATE, Calendar.getInstance());
+        documentEntry.setValue(CmisConstants.VERSION_SERIES_ID, documentEntry.getString(JcrCMIS.JCR_VERSION_HISTORY));
+        documentEntry.setValue(CmisConstants.OBJECT_ID, 
+                documentEntry.getString(JcrCMIS.JCR_VERSION_HISTORY) + JcrCMIS.ID_SEPARATOR + "1");
+        documentEntry.setValue(CmisConstants.IS_LATEST_VERSION, true);
+        documentEntry.setValue(CmisConstants.IS_MAJOR_VERSION, versioningState == VersioningState.MAJOR);
+        // TODO : support for checked-out initial state
+        documentEntry.setValue(CmisConstants.VERSION_LABEL, LATEST_LABEL);
+      } catch(RepositoryException re) {
+        throw new CmisRuntimeException(re.getMessage(), re);
+      }
 
       Property<?> contentFileNameProperty = properties.get(CmisConstants.CONTENT_STREAM_FILE_NAME);
       if (content != null && (contentFileNameProperty == null || contentFileNameProperty.getValues().isEmpty()))
@@ -339,12 +342,14 @@ public class StorageImpl extends BaseJcrStorage implements Storage
       }
 
       JcrNodeEntry folderEntry = createFolderEntry(((FolderDataImpl)parent).getNodeEntry(), name, typeDefinition);
-
-      folderEntry.setValue(CmisConstants.OBJECT_TYPE_ID, typeDefinition.getId());
-      folderEntry.setValue(CmisConstants.BASE_TYPE_ID, typeDefinition.getBaseId().value());
-      folderEntry.setValue(CmisConstants.CREATED_BY, session.getUserID());
-      folderEntry.setValue(CmisConstants.CREATION_DATE, Calendar.getInstance());
-
+      try {
+        folderEntry.setValue(CmisConstants.OBJECT_TYPE_ID, typeDefinition.getId());
+        folderEntry.setValue(CmisConstants.BASE_TYPE_ID, typeDefinition.getBaseId().value());
+        folderEntry.setValue(CmisConstants.CREATED_BY, getSession().getUserID());
+        folderEntry.setValue(CmisConstants.CREATION_DATE, Calendar.getInstance());
+      } catch(RepositoryException re) {
+        throw new CmisRuntimeException(re.getMessage(), re);
+      }
       for (Property<?> property : properties.values())
       {
          PropertyDefinition<?> definition = typeDefinition.getPropertyDefinition(property.getId());
@@ -394,11 +399,14 @@ public class StorageImpl extends BaseJcrStorage implements Storage
       }
 
       JcrNodeEntry policyEntry = createPolicyEntry(name, typeDefinition);
-      policyEntry.setValue(CmisConstants.OBJECT_TYPE_ID, typeDefinition.getId());
-      policyEntry.setValue(CmisConstants.BASE_TYPE_ID, typeDefinition.getBaseId().value());
-      policyEntry.setValue(CmisConstants.CREATED_BY, session.getUserID());
-      policyEntry.setValue(CmisConstants.CREATION_DATE, Calendar.getInstance());
-
+      try {
+        policyEntry.setValue(CmisConstants.OBJECT_TYPE_ID, typeDefinition.getId());
+        policyEntry.setValue(CmisConstants.BASE_TYPE_ID, typeDefinition.getBaseId().value());
+        policyEntry.setValue(CmisConstants.CREATED_BY, getSession().getUserID());
+        policyEntry.setValue(CmisConstants.CREATION_DATE, Calendar.getInstance());
+      } catch(RepositoryException re) {
+        throw new CmisRuntimeException(re.getMessage(), re); 
+      }
       for (Property<?> property : properties.values())
       {
          PropertyDefinition<?> definition = typeDefinition.getPropertyDefinition(property.getId());
@@ -448,11 +456,15 @@ public class StorageImpl extends BaseJcrStorage implements Storage
       JcrNodeEntry relationshipEntry =
          createRelationshipEntry(name, typeDefinition, ((BaseObjectData)source).getNodeEntry(),
             ((BaseObjectData)target).getNodeEntry());
+      try {
 
-      relationshipEntry.setValue(CmisConstants.OBJECT_TYPE_ID, typeDefinition.getId());
-      relationshipEntry.setValue(CmisConstants.BASE_TYPE_ID, typeDefinition.getBaseId().value());
-      relationshipEntry.setValue(CmisConstants.CREATED_BY, session.getUserID());
-      relationshipEntry.setValue(CmisConstants.CREATION_DATE, Calendar.getInstance());
+        relationshipEntry.setValue(CmisConstants.OBJECT_TYPE_ID, typeDefinition.getId());
+        relationshipEntry.setValue(CmisConstants.BASE_TYPE_ID, typeDefinition.getBaseId().value());
+        relationshipEntry.setValue(CmisConstants.CREATED_BY, getSession().getUserID());
+        relationshipEntry.setValue(CmisConstants.CREATION_DATE, Calendar.getInstance());
+      } catch(RepositoryException re) {
+        throw new CmisRuntimeException(re.getMessage(), re);  
+      }
 
       for (Property<?> property : properties.values())
       {
@@ -486,45 +498,45 @@ public class StorageImpl extends BaseJcrStorage implements Storage
     * {@inheritDoc}
     */
    public void deleteObject(ObjectData object, boolean deleteAllVersions) throws UpdateConflictException,
-      VersioningException, StorageException
+   VersioningException, StorageException
    {
-      Node node = ((BaseObjectData)object).entry.node;
-      Node parentNode = null;
-      try {
-         parentNode = node.getParent();
-      }  catch (RepositoryException  e) {
-         throw new CmisRuntimeException("Unable get parent. " + e.getMessage(), e);
-      }
-      if (object.getBaseType() == BaseType.DOCUMENT && object.getTypeDefinition().isVersionable() && deleteAllVersions)
-      {
+     try {
+       Node node = ((BaseObjectData)object).entry.getNode();
+       Node parentNode = node.getParent();
+
+       if (object.getBaseType() == BaseType.DOCUMENT && object.getTypeDefinition().isVersionable() && deleteAllVersions)
+       {
          try
          {
-            if (node.getParent() instanceof Version) {
-               // Delete version
-               Version version = (Version)node.getParent();
-               VersionHistory versionHistory = version.getContainingHistory();
-               DocumentDataImpl documentDataImpl = 
-                 new DocumentDataImpl(((BaseObjectData)object).entry.storage.getEntry(versionHistory.getVersionableUUID()));
-               documentDataImpl.delete();
-            } else {
-               // Delete object
-               ((BaseObjectData)object).delete();  
-            }
+           if (node.getParent() instanceof Version) {
+             // Delete version
+             Version version = (Version)node.getParent();
+             VersionHistory versionHistory = version.getContainingHistory();
+             DocumentDataImpl documentDataImpl = 
+                     new DocumentDataImpl(((BaseObjectData)object).entry.storage.getEntry(versionHistory.getVersionableUUID()));
+             documentDataImpl.delete();
+           } else {
+             // Delete object
+             ((BaseObjectData)object).delete();  
+           }
          }
          catch (RepositoryException re)
          {
-            throw new CmisRuntimeException("Unable get latest version of document. " + re.getMessage(), re);
+           throw new CmisRuntimeException("Unable get latest version of document. " + re.getMessage(), re);
          }
          catch (ObjectNotFoundException e)
          {
-            throw new CmisRuntimeException("Unable get latest version of document. " + e.getMessage(), e);
+           throw new CmisRuntimeException("Unable get latest version of document. " + e.getMessage(), e);
          }
        } else if (object.getBaseType() == BaseType.DOCUMENT && !(parentNode instanceof Version) && !deleteAllVersions) {
-          // use deleteAllVersions=true to delete all versions of the document
-          throw new CmisRuntimeException("Unable to delete latest version at one.");
+         // use deleteAllVersions=true to delete all versions of the document
+         throw new CmisRuntimeException("Unable to delete latest version at one.");
        } else {
-          ((BaseObjectData)object).delete();
+         ((BaseObjectData)object).delete();
        }
+     }  catch (RepositoryException  e) {
+       throw new CmisRuntimeException("Unable get parent. " + e.getMessage(), e);
+     }
    }
 
    /**
@@ -594,7 +606,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
    {
       try
       {
-         Node node = ((ExtendedSession)session).getNodeByIdentifier(versionSeriesId);
+         Node node = ((ExtendedSession)getSession()).getNodeByIdentifier(versionSeriesId);
          VersionHistory vh = (VersionHistory)node;
          List<DocumentData> versions = new ArrayList<DocumentData>();
          VersionIterator iterator = vh.getAllVersions();
@@ -641,7 +653,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
       try
       {
          Node workingCopies =
-            (Node)session.getItem(StorageImpl.XCMIS_SYSTEM_PATH + "/" + StorageImpl.XCMIS_WORKING_COPIES);
+            (Node)getSession().getItem(StorageImpl.XCMIS_SYSTEM_PATH + "/" + StorageImpl.XCMIS_WORKING_COPIES);
 
          List<DocumentData> checkedOut = new ArrayList<DocumentData>();
          for (NodeIterator iterator = workingCopies.getNodes(); iterator.hasNext();)
@@ -717,7 +729,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
          {
             path = path1 + path;
          }
-         Item item = session.getItem(path);
+         Item item = getSession().getItem(path);
          if (!item.isNode())
          {
             throw new ObjectNotFoundException("Object '" + path + "' does not exist.");
@@ -841,7 +853,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
          {
             try
             {
-               rootIdentifier = ((ExtendedNode)session.getItem(rootFolderPath)).getIdentifier();
+               rootIdentifier = ((ExtendedNode)getSession().getItem(rootFolderPath)).getIdentifier();
             }
             catch (RepositoryException re)
             {

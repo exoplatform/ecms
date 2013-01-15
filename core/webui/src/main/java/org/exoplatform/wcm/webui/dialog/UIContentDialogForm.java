@@ -694,13 +694,13 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
   /* (non-Javadoc)
    * @see org.exoplatform.webui.core.UIPopupComponent#activate()
    */
-  public void activate() throws Exception {
+  public void activate() {
   }
 
   /* (non-Javadoc)
    * @see org.exoplatform.webui.core.UIPopupComponent#deActivate()
    */
-  public void deActivate() throws Exception {
+  public void deActivate() {
   }
 
   /* (non-Javadoc)

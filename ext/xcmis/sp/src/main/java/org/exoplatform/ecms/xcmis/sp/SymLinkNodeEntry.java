@@ -53,7 +53,7 @@ class SymLinkNodeEntry extends JcrNodeEntry
     */
    public SymLinkNodeEntry(Node link, Node node, BaseJcrStorage storage) throws RepositoryException
    {
-      super(node, storage);
+      super(node.getPath(), node.getSession().getWorkspace().getName(), storage);
       this.link = link;
    }
 

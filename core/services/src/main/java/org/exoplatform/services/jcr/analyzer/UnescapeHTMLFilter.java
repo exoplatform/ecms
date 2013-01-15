@@ -16,43 +16,46 @@
  */
 package org.exoplatform.services.jcr.analyzer;
 
+import java.io.IOException;
+
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.lucene.analysis.TokenFilter;
 import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.Token;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 
 /**
  * Created by The eXo Platform SARL
  * Author : Nguyen Van Chien
  *          chien.nguyen@exoplatform.com
  * Jul 19, 2010
- * A filter that replaces accented characters in the ISO Latin 1 character set
- * (ISO-8859-1) by their unaccented equivalent. The case will not be altered.
- * <p>
- * For instance, '&agrave;' will be replaced by 'a'.
- * <p>
  */
 public class UnescapeHTMLFilter extends TokenFilter {
+  private final CharTermAttribute termAtt = addAttribute(CharTermAttribute.class);
+  
   public UnescapeHTMLFilter(TokenStream input) {
     super(input);
   }
 
-  public final Token next() throws java.io.IOException {
-    Token nextToken = input.next();
-    if (nextToken != null) {
-      String tokenText = nextToken.termText();
-      String brTokenText = tokenText.replaceAll("<br", "");
-      tokenText = StringEscapeUtils.unescapeHtml(brTokenText);
-      tokenText = tokenText.replaceAll("\\<.*?>", "");
-      // Finally we return a new token with transformed characters.
-      if(tokenText.equals("")||tokenText.trim().equals("")){
-        return new Token("", 0, 0, nextToken.type());
-      }else{
-      return new Token(tokenText.trim(), nextToken.startOffset(), nextToken.startOffset()+tokenText.length(), nextToken.type());
-      }
-
-    } else
-      return null;
+  @Override
+  public boolean incrementToken() throws IOException {
+    if (!input.incrementToken()) {
+      return false;
+    }
+    
+    final char[] buffer = termAtt.buffer();
+    final int bufferLength = termAtt.length();
+    
+    String tokenText = new String(buffer);
+    tokenText = tokenText.replaceAll("<br", "");
+    tokenText = StringEscapeUtils.unescapeHtml(tokenText);
+    tokenText = tokenText.replaceAll("\\<.*?>", "");
+    
+    int newLen = tokenText.toCharArray().length;
+    if (newLen < bufferLength) {
+      termAtt.copyBuffer(tokenText.toCharArray(), 0, newLen);
+      termAtt.setLength(newLen);
+    }
+    
+    return true;
   }
-
- }
+}

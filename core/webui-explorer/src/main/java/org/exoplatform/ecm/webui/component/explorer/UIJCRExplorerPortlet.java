@@ -211,8 +211,8 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     UIJCRExplorer uiExplorer = explorerContainer.getChild(UIJCRExplorer.class);
     UITreeExplorer uiTreeExplorer = uiExplorer.findFirstComponentOfType(UITreeExplorer.class);      
     context.getJavascriptManager().
-    require("SHARED/explorer-module", "explorer").
-    addScripts("explorer.MultiUpload.setLocation('" + 
+    require("SHARED/multiUpload", "multiUpload").
+    addScripts("multiUpload.setLocation('" + 
                uiExplorer.getWorkspaceName()  + "','" + 
                uiExplorer.getDriveData().getName()  + "','" +
                uiTreeExplorer.getLabel()  + "','" +
