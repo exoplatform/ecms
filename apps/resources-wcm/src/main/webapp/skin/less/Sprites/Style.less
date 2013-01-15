@@ -39,7 +39,7 @@
 .dropdown-menu > li > a > [class^="uiIconEcms"],
 .dropdown-menu > .active > a > [class^="uiIconEcms"],
 .uiDropdownWithIcon .dropdown-submenu> a > [class^="uiIconEcms"],
-.uiDropDownCal li a [class^="uiIconEcms"], .uiActionBar [class^="uiIconEcms"], .uiIconEcmsLightGrey
+.uiActionBar [class^="uiIconEcms"], .uiIconEcmsLightGrey
 {
   background-image: url("/eXoWCMResources/skin/images/Icons/uiIconsEcmsLightGray.png");
 }
@@ -107,7 +107,7 @@
 	background-position: 0px -20px;
 }
 
-.uiIconEcmsFavorite,.uiIconEcmsVote {
+.uiIconEcmsFavorite {
 	background-position: -20px -20px;
 }
 
@@ -295,7 +295,7 @@
 	background-position: -140px -100px;
 }
 
-.uiIconEcmsLock {
+.uiIconEcmsLock,.uiIconEcmsViewPermissions {
 	background-position: -160px -100px;
 }
 
@@ -338,6 +338,79 @@
 
 .uiIconEcmsTagExplorerMini:hover {
 	background-image: url("/eXoResources/skin/images/Icons/uiIconsBlue.png");
+}
+
+.dropdown-menu > li > a >,
+.uiActionBar  {
+	.uiIconEcmsEditDocument,
+	.uiIconEcmsManageActions,
+	.uiIconEcmsWatchDocument,
+	.uiIconEcmsManageCategories,
+	.uiIconEcmsUpload,
+	.uiIconEcmsComment,
+	.uiIconEcmsVote,
+	.uiIconEcmsTaggingDocument {
+		background-image: url("/eXoResources/skin/images/Icons/uiIconsLightGray.png");
+	}
+}
+
+.uiIconEcmsEditDocument {
+	background-position: -40px 0px;
+}
+
+.uiIconEcmsManageActions {
+	background-position: 0px -40px;
+}
+
+.uiIconEcmsTaggingDocument {
+	background-position: -60px -20px;
+}
+
+.uiIconEcmsWatchDocument {
+	background-position: -100px 0px;
+}
+
+.uiIconEcmsManageCategories {
+	background-position: -20px -60px;
+}
+
+.uiIconEcmsUpload {
+	background-position: -20px -20px;
+}
+
+.uiIconEcmsComment {
+	background-position: -140px -20px;
+}
+
+.uiIconEcmsVote {
+	background-position: -20px -80px;
+}
+
+.dropdown-menu > li > a >,
+.uiActionBar  {
+	.actionIcon:hover .uiIconEcmsEditDocument,.uiIconEcmsEditDocument:hover,
+	.actionIcon:hover .uiIconEcmsManageActions,.uiIconEcmsManageActions:hover,
+	.actionIcon:hover .uiIconEcmsWatchDocument,.uiIconEcmsWatchDocument:hover,
+	.actionIcon:hover .uiIconEcmsManageCategories,.uiIconEcmsManageCategories:hover,
+	.actionIcon:hover .uiIconEcmsUpload,.uiIconEcmsUpload:hover,
+	.actionIcon:hover .uiIconEcmsComment,.uiIconEcmsComment:hover,
+	.actionIcon:hover .uiIconEcmsVote,.uiIconEcmsVote:hover,
+	.actionIcon:hover .uiIconEcmsTaggingDocument,.uiIconEcmsTaggingDocument:hover {
+		background-image: url("/eXoResources/skin/images/Icons/uiIconsBlue.png");
+	}
+}
+
+.uiActionBar .listHiddenActionsContainer .dropdown-menu {
+	.actionIcon:hover .uiIconEcmsEditDocument,.uiIconEcmsEditDocument:hover,
+	.actionIcon:hover .uiIconEcmsManageActions,.uiIconEcmsManageActions:hover,
+	.actionIcon:hover .uiIconEcmsWatchDocument,.uiIconEcmsWatchDocument:hover,
+	.actionIcon:hover .uiIconEcmsManageCategories,.uiIconEcmsManageCategories:hover,
+	.actionIcon:hover .uiIconEcmsUpload,.uiIconEcmsUpload:hover,
+	.actionIcon:hover .uiIconEcmsComment,.uiIconEcmsComment:hover,
+	.actionIcon:hover .uiIconEcmsVote,.uiIconEcmsVote:hover,
+	.actionIcon:hover .uiIconEcmsTaggingDocument,.uiIconEcmsTaggingDocument:hover {
+		background-image: url("/eXoResources/skin/images/Icons/uiIconsWhite.png");
+	}
 }
 
 
