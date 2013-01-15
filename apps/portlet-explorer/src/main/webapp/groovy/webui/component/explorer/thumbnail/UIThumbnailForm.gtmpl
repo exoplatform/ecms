@@ -1,43 +1,42 @@
 <%
   def selectedNode = uicomponent.getSelectedNode();
 %>
-<div class="UIForm LayoutContent">
+<div class="uiForm uiThumbnailForm">
 	<% uiform.begin() %>
-  <div class="HorizontalLayout">
-  	<table class="UIFormGrid">	  
-	    <tr>		          					
-	      <td class="FieldLabel"><%=_ctx.appRes("UIThumbnailForm.label.mediumSize")%></td>
-	      <td class="FieldComponent">
-		      <%
-		        def thumbnailNode = uicomponent.getThumbnailNode(selectedNode);
-		        if(thumbnailNode != null && thumbnailNode.hasProperty("exo:mediumSize")) { 
-							String thumbnailImage = uicomponent.getThumbnailImage(selectedNode);
-							def actionLink = uicomponent.event("RemoveThumbnail");
-						%>		
-							<div>
-								<img src="$thumbnailImage" alt="$thumbnailImage" />
-								<img onclick="$actionLink" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%=_ctx.appRes("UIThumbnailForm.title.remove-thumbnail")%>" class="ActionIcon Remove16x16Icon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIThumbnailForm.title.remove-thumbnail")%>"/>
-							</div>
-						<%
-						} else if(uicomponent.isRemovedThumbnail()) {
-						  uicomponent.renderChildren();
-						}	else {
-              uicomponent.renderChildren();
-						}
-		      %>
-		    </td>
-	    </tr>
-	  </table>
+	<div class="form-horizontal resizable">
+		<div class="control-group">		          					
+			<label class="control-label"><%=_ctx.appRes("UIThumbnailForm.label.mediumSize")%></label>
+			<div class="controls">
+				<%
+					def thumbnailNode = uicomponent.getThumbnailNode(selectedNode);
+					if(thumbnailNode != null && thumbnailNode.hasProperty("exo:mediumSize")) { 
+						String thumbnailImage = uicomponent.getThumbnailImage(selectedNode);
+						def actionLink = uicomponent.event("RemoveThumbnail");
+					%>		
+						<div>
+							<img src="$thumbnailImage" alt="$thumbnailImage" />
+							<img onclick="$actionLink" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%=_ctx.appRes("UIThumbnailForm.title.remove-thumbnail")%>" class="ActionIcon Remove16x16Icon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIThumbnailForm.title.remove-thumbnail")%>"/>
+						</div>
+					<%
+					} else if(uicomponent.isRemovedThumbnail()) {
+						uicomponent.renderChildren();
+					}	else {
+						uicomponent.renderChildren();
+					}
+				%>
+			</div>
+		</div>
+	</div>
 		<%/* start render action*/%>
-	<div class="UIAction"> 
+	<div class="uiAction uiActionBorder"> 
 		  <% for(action in uicomponent.getActions()) { 
 				 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
 						 String link = uicomponent.event(action) ;
 		  %>
-				<a onclick="$link" class="ActionButton LightBlueStyle" href="javascript:void(0);">$actionLabel</a>
+				<button type="button" onclick="$link" class="btn" href="javascript:void(0);">$actionLabel</button>
 			<%}%>          
 	</div>
 	  <%/* end render action*/%>
-  </div>
+
   <% uiform.end() %>
 </div>

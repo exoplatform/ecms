@@ -7,11 +7,12 @@
 	 */
 %>
 
-<div class="UIActivateAuditing">
-  <div style="text-align: center; margin: 10px;"><%=_ctx.appRes(uicomponent.getId() + ".label.note")%></div>
-  <div style="text-align: center; margin: 10px;"><%=_ctx.appRes(uicomponent.getId() + ".label.question")%></div>
-	<div class="UIAction">
-	  <a onclick="<%=uicomponent.event("EnableAuditing")%>" class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=_ctx.appRes("UIActivateAuditing.action.activate")%></a>
-	  <a onclick="<%=uicomponent.event("Cancel")%>" class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=_ctx.appRes("UIActivateAuditing.action.cancel")%> </a>
+<div class="uiActivateAuditing">
+	<ul class="singleMessage popupMessage resizable">
+		<li><span class="confirmationIcon"><%=_ctx.appRes(uicomponent.getId() + ".label.note")%> <%=_ctx.appRes(uicomponent.getId() + ".label.question")%></span></li>
+	</ul>
+	<div class="uiAction uiActionBorder">
+	  <button type="button" onclick="<%=uicomponent.event("EnableAuditing")%>" class="btn" href="javascript:void(0);"><%=_ctx.appRes("UIActivateAuditing.action.activate")%></button>
+	  <button type="button" onclick="<%=uicomponent.event("Cancel")%>" class="btn" href="javascript:void(0);"><%=_ctx.appRes("UIActivateAuditing.action.cancel")%> </button>
     </div>   
 </div>
