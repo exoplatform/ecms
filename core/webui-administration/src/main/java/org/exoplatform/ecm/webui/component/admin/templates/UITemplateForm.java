@@ -38,6 +38,7 @@ import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
+import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
@@ -192,6 +193,9 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
   static public class SaveActionListener extends EventListener<UITemplateForm> {
     public void execute(Event<UITemplateForm> event) throws Exception {
       UITemplateForm uiForm = event.getSource() ;
+      UITemplatesManager uiManager = event.getSource().getAncestorOfType(UITemplatesManager.class) ;
+      UITemplateContainer uiTemplateContainer = uiManager.getChildById(uiManager.getSelectedTabId());
+      
       String name = uiForm.getUIFormSelectBox(FIELD_NAME).getValue().trim() ;
       String label = uiForm.getUIStringInput(FIELD_LABEL).getValue().trim() ;
       String dialog = uiForm.getUIFormTextAreaInput(FIELD_DIALOG).getValue() ;
@@ -223,20 +227,20 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
           TemplateService.DEFAULT_SKIN, roles, new ByteArrayInputStream(skin.getBytes())) ;
       WCMComposer composer = WCMCoreUtils.getService(WCMComposer.class);
       composer.updateTemplatesSQLFilter();
-      UITemplatesManager uiManager = uiForm.getAncestorOfType(UITemplatesManager.class) ;      
       uiManager.refresh() ;
       uiForm.refresh() ;
-      uiManager.removeChildById("TemplatePopup") ;
+      UIPopupWindow uiPopupWindow = uiTemplateContainer.getChildById(UITemplatesManager.NEW_TEMPLATE + "_" + uiManager.getSelectedTabId()) ;
+      uiPopupWindow.setRendered(false) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
 
   static  public class CancelActionListener extends EventListener<UITemplateForm> {
-    public void execute(Event<UITemplateForm> event) throws Exception {
-      UITemplateForm uiTemplateForm = event.getSource() ;
-      UITemplatesManager uiManager = uiTemplateForm.getAncestorOfType(UITemplatesManager.class) ;
-      uiTemplateForm.reset() ;
-      uiManager.removeChildById("TemplatePopup") ;
+    public void execute(Event<UITemplateForm> event) throws Exception {      
+      UITemplatesManager uiManager = event.getSource().getAncestorOfType(UITemplatesManager.class) ;
+      UITemplateContainer uiTemplateContainer = uiManager.getChildById(uiManager.getSelectedTabId());
+      UIPopupWindow uiPopupWindow = uiTemplateContainer.getChildById(UITemplatesManager.NEW_TEMPLATE + "_" + uiManager.getSelectedTabId()) ;
+      uiPopupWindow.setRendered(false) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }

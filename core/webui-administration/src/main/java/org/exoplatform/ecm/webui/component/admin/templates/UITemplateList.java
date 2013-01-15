@@ -105,11 +105,9 @@ public class UITemplateList extends UIPagingGrid {
       UITemplatesManager uiManager = nodeTemplateList.getAncestorOfType(UITemplatesManager.class);
       UITemplateContainer uiTemplateContainer = uiManager.getChildById(uiManager.getSelectedTabId()) ;
       
-      uiTemplateContainer.removeChildById(UITemplatesManager.NEW_TEMPLATE + "_" + uiManager.getSelectedTabId()) ;
-      uiTemplateContainer.initPopup(UITemplatesManager.EDIT_TEMPLATE + "_" + uiManager.getSelectedTabId()) ;
-      
       String nodeType = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      UIViewTemplate uiViewTemplate = uiTemplateContainer.findFirstComponentOfType(UIViewTemplate.class) ;
+      UIViewTemplate uiViewTemplate = uiTemplateContainer.createUIComponent(UIViewTemplate.class, null, 
+      		"UIViewTemplate" + "_" + uiManager.getSelectedTabId()) ;
       uiViewTemplate.getChild(UITemplateEditForm.class).update(nodeType) ;
       uiViewTemplate.setNodeTypeName(nodeType) ;
       UIDialogTab uiDialogTab = uiViewTemplate.findFirstComponentOfType(UIDialogTab.class) ;
@@ -127,6 +125,9 @@ public class UITemplateList extends UIPagingGrid {
       UITemplateContent uiSkinTabForm = uiViewTemplate.findComponentById(UISkinTab.SKIN_FORM_NAME) ;
       uiSkinTabForm.setNodeTypeName(nodeType) ;
       uiSkinTabForm.update(null) ;
+      
+      uiTemplateContainer.removeChildById(UITemplatesManager.NEW_TEMPLATE + "_" + uiManager.getSelectedTabId()) ;
+      uiTemplateContainer.initPopup(uiViewTemplate, UITemplatesManager.EDIT_TEMPLATE + "_" + uiManager.getSelectedTabId()) ;
       
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
@@ -163,7 +164,7 @@ public class UITemplateList extends UIPagingGrid {
       UITemplatesManager uiTemplatesManager = event.getSource().getAncestorOfType(UITemplatesManager.class) ;      
       UITemplateContainer uiTemplateContainer = uiTemplatesManager.getChildById(uiTemplatesManager.getSelectedTabId());
       
-      UITemplateForm uiTemplateForm = uiTemplatesManager.createUIComponent(UITemplateForm.class, null, null) ;
+      UITemplateForm uiTemplateForm = uiTemplateContainer.createUIComponent(UITemplateForm.class, null, null) ;
       uiTemplateContainer.removeChildById(UITemplatesManager.EDIT_TEMPLATE + "_" + uiTemplatesManager.getSelectedTabId()) ;
       if(uiTemplateForm.getOption().size() == 0) {
         UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class) ;
@@ -171,7 +172,7 @@ public class UITemplateList extends UIPagingGrid {
         return ;
       }
       uiTemplateForm.refresh();
-      uiTemplateContainer.initPopup(UITemplatesManager.NEW_TEMPLATE + "_" + uiTemplatesManager.getSelectedTabId()) ;
+      uiTemplateContainer.initPopup(uiTemplateForm, UITemplatesManager.NEW_TEMPLATE + "_" + uiTemplatesManager.getSelectedTabId()) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTemplatesManager) ;
     }
   }

@@ -20,6 +20,7 @@ import org.exoplatform.ecm.webui.selector.UIPermissionSelector;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
@@ -44,14 +45,14 @@ public class UITemplateContainer extends UIContainer {
     addChild(UITemplateList.class, null, null) ;
   }
 
-  public void initPopup(String popupId) throws Exception {
+  public void initPopup(UIComponent uiComponent, String popupId) throws Exception {
     removeChildById(popupId) ;
     UITemplatesManager uiManager = getParent();
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, popupId) ;
     uiPopup.setShowMask(true);
     uiPopup.setWindowSize(600,400) ;
-    UIViewTemplate uiViewTemplate = createUIComponent(UIViewTemplate.class, null, "UIViewTemplate" + "_" + uiManager.getSelectedTabId()) ;
-    uiPopup.setUIComponent(uiViewTemplate) ;
+    //UIViewTemplate uiViewTemplate = createUIComponent(UIViewTemplate.class, null, "UIViewTemplate" + "_" + uiManager.getSelectedTabId()) ;
+    uiPopup.setUIComponent(uiComponent) ;
     uiPopup.setShow(true) ;
     uiPopup.setResizable(true) ;
   }
@@ -90,7 +91,7 @@ public class UITemplateContainer extends UIContainer {
     public void execute(Event<UIPopupWindow> event) throws Exception {
     	UITemplatesManager uiManager = event.getSource().getAncestorOfType(UITemplatesManager.class) ;
       UITemplateContainer uiTemplateContainer = uiManager.getChildById(uiManager.getSelectedTabId());
-      UIPopupWindow uiPopupWindow = uiTemplateContainer.getChildById(UITemplatesManager.EDIT_TEMPLATE + "_" + uiManager.getSelectedTabId()) ;
+      UIPopupWindow uiPopupWindow = uiTemplateContainer.getChild(UIPopupWindow.class) ;
       uiPopupWindow.setRendered(false) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }

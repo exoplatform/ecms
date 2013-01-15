@@ -26,6 +26,8 @@ import javax.jcr.version.VersionHistory;
 
 import org.exoplatform.ecm.jcr.model.VersionNode;
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
+import org.exoplatform.ecm.webui.component.admin.templates.UITemplateContainer;
+import org.exoplatform.ecm.webui.component.admin.templates.UITemplatesManager;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.groovyscript.text.TemplateService;
@@ -334,13 +336,14 @@ public class UITemplateForm extends UIForm {
     public void execute(Event<UITemplateForm> event) throws Exception {
       UITemplateForm uiForm = event.getSource();
       uiForm.refresh();
+      UITemplatesManager uiManager = event.getSource().getAncestorOfType(UITemplatesManager.class) ;
       UITemplateContainer uiTemplateContainer = uiForm.getAncestorOfType(UITemplateContainer.class);
       if (uiForm.isAddNew_) {
         uiTemplateContainer.removeChildById(UIECMTemplateList.ST_ecmTempForm + "Add");
       } else {
         uiTemplateContainer.removeChildById(UIECMTemplateList.ST_ecmTempForm + "Edit");
       }
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiTemplateContainer);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiTemplateContainer);      
     }
   }
 
