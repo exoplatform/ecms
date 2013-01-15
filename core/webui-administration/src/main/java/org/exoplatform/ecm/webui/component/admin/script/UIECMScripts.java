@@ -101,7 +101,7 @@ public class UIECMScripts extends UIContainer {
     removeChildById(id);
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, id);
     uiPopup.setShowMask(true);
-    uiPopup.setWindowSize(600, 500);
+    uiPopup.setWindowSize(600, 250);
     UIScriptForm uiForm = createUIComponent(UIScriptForm.class, null, null);
     uiPopup.setUIComponent(uiForm);
     uiPopup.setRendered(true);

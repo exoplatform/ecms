@@ -51,7 +51,7 @@ public class UITagManager extends UIContainer {
     removeChildById("FolksonomyPopup") ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "FolksonomyPopup") ;
     uiPopup.setShowMask(true);
-    uiPopup.setWindowSize(600, 330) ;
+    uiPopup.setWindowSize(600, 280) ;
     UITagStyleForm uiForm = createUIComponent(UITagStyleForm.class, null, null) ;
     uiForm.setTagStyle(selectedTagStyle) ;
     uiPopup.setUIComponent(uiForm) ;

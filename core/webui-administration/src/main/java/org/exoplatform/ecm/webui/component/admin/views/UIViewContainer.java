@@ -41,7 +41,7 @@ public class UIViewContainer extends UIContainer {
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, popupId) ;
     uiPopup.setShowMask(true);
     uiPopup.setShowMask(true);
-    uiPopup.setWindowSize(600,400) ;
+    uiPopup.setWindowSize(600,300) ;
     UIViewFormTabPane uiViewForm = createUIComponent(UIViewFormTabPane.class, null, null) ;
     uiPopup.setUIComponent(uiViewForm) ;
     uiPopup.setShow(true) ;

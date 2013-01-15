@@ -64,9 +64,9 @@
 	          }
 	          if(field.equals(uicomponent.ICON_FIELD)) {
 	          %>
-	          <td><div class="$cssClass" rel="tooltip" data-placement="bottom">
+	          <td>
 	            <i class="$fieldValue" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getFieldValue(bean, uicomponent.LABEL_FIELD)%>"></i>
-	          </div></td>
+	          </td>
 	          <%
 	          } else {
 	          %>
