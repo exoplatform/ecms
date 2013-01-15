@@ -172,6 +172,9 @@
       <module>jquery</module>
       <as>gj</as>
     </depends>
+    <depends>
+      <module>uiForm</module>
+    </depends>
   </module>
   
   <module>
