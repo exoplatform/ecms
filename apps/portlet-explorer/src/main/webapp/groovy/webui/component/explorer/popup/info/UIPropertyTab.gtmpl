@@ -10,28 +10,26 @@
 import org.exoplatform.wcm.webui.reader.ContentReader;
  
 %>
-<div class="UIPropertyTab">
+<div class="uiPropertyTab">
   <table class="uiGrid table table-hover table-striped" >
 	  <thead>
 			<tr>
 			  <%
 			    String[] beanFields =  uicomponent.getBeanFields() ;  
-				def style = "";
-			    for(int i = 0; i < beanFields.size(); i++) {
-				if ("action".equals(beanFields[i])) {
-					style="text-align:center;width:100px";
-				}
-				%>
-			    <th class="Field<%=(i+1)%>" style="$style"><%=_ctx.appRes("UIPropertyTab.header." + beanFields[i])%></th>
+					def classCenter = "";
+			    for(int i = 1; i < beanFields.size(); i++) {
+						if ("action".equals(beanFields[i])) {
+							classCenter="center";
+						}
+						%>
+			    <th class="field<%=(i+1)%> $classCenter"><%=_ctx.appRes("UIPropertyTab.header." + beanFields[i])%></th>
 			  <%}%>  
 			</tr>
 	  </thead>
 	  <tbody>
 	  <%
 	    def value ;
-	    String rowClass = null ;
 	    String nodeIcon ;
-	    boolean even = true ;
 	    boolean multiValue = false ;
 	    String key ;
 	    for (bean in uicomponent.getProperties())  {
@@ -41,22 +39,16 @@ import org.exoplatform.wcm.webui.reader.ContentReader;
 		    } catch(Exception e) {
 		    }
 		    value = ContentReader.getXSSCompatibilityContent(uicomponent.getPropertyValue(bean));
-		    
-	      if(even) rowClass = "EvenRow" ;  
-	      else rowClass =  "OddRow" ; 
-	      even = !even ; %>
-		    <tr class="$rowClass">
-		      <td style="width: 20px;">
-		        <div style="margin: auto" class="Icon16x16 default16x16Icon ${nodeIcon}16x16Icon"><span></span></div>					        
-		      </td>
+			%>
+		    <tr>
 			    <td style="overflow: hidden;" title="$bean.name">$bean.name</td>
-			    <td>
-		        <div class="MultiValue">
+			    <td class="center">
+		        <div class="multiValue">
 		          <%
 		            String multiType = "False" ;
 		            if(multiValue) multiType = "True" ;
 		          %>
-					    <div class="Icon16x16 ${multiType}16x16Icon">$multiValue</div>					  	
+					    $multiValue				  	
 			      </div>
 			    </td>
 			    <td>
@@ -70,13 +62,13 @@ import org.exoplatform.wcm.webui.reader.ContentReader;
 				   	</div>
 				    <%}%>  
 			    </td>
-			    <td class="center">
+			    <td class="center actionContainer">
 					    <%
 					    if(uicomponent.isCanbeEdit(bean)) {%> 			    
-					      <a class="actionIcon" onclick="<%=uicomponent.event("Edit", bean.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPropertyTab.title.edit")%>" ><i class="uiIconEditInfo"></i></a>
+					      <a class="actionIcon" onclick="<%=uicomponent.event("Edit", bean.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPropertyTab.title.edit")%>" ><i class="uiIconEdit uiIconLightGrey"></i></a>
 					    <%}%>
 					    <%if(uicomponent.isCanbeRemoved(bean.getName())) {%>
-					      <a class="actionIcon" onclick="<%=uicomponent.event("Delete", bean.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPropertyTab.title.delete")%>" ><i class="uiIconDelete"></i></a>
+					      <a class="actionIcon" onclick="<%=uicomponent.event("Delete", bean.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPropertyTab.title.delete")%>" ><i class="uiIconDelete uiIconLightGrey"></i></a>
 					    <%}%>  
 			    </td>
 			  </tr>    
@@ -85,12 +77,12 @@ import org.exoplatform.wcm.webui.reader.ContentReader;
   </table>
 
   <%/* start render action*/%>
-	<div class="UIAction"> 
+	<div class="uiAction"> 
 		<% for(action in uicomponent.getActions()) {
 		String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
 		String link = uicomponent.event(action) ;
 		%>
-			<a onclick="$link" class="ActionButton LightBlueStyle" href="javascript:void(0);">$actionLabel</a>
+			<button type="button" onclick="$link" class="btn" href="javascript:void(0);">$actionLabel</button>
 		<%}%>          
 	</div>
 	<%/* end render action*/%>
