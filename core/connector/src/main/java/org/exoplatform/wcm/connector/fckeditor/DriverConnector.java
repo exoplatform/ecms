@@ -53,6 +53,7 @@ import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -127,6 +128,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   private int limitCountServer_ = 30;
   
   private ResourceBundleService resourceBundleService=null;
+  private NodeFinder nodeFinder_ = null;
+  private LinkManager linkManager_ = null;
 
   private String resourceBundleNames[];
   private ResourceBundle sharedResourceBundle=null;
@@ -341,6 +344,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       Node currentFolderNode = getParentFolderNode(workspaceName,
                                                    Text.escapeIllegalJcrChars(driverName),
                                                    Text.escapeIllegalJcrChars(currentFolder));
+      
       return fileUploadHandler.checkExistence(currentFolderNode, fileName);
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
@@ -878,7 +882,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     ManageableRepository manageableRepository = WCMCoreUtils.getRepository();
     Session session = sessionProvider.getSession(workspaceName, manageableRepository);
     ManageDriveService manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
-
+    Node ret = null;
     try {
       DriveData driveData = manageDriveService.getDriveByName(driverName);
       String parentPath = (driveData != null ? driveData.getHomePath() : "");
@@ -890,7 +894,24 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       };
       parentPath += ((currentFolder != null && currentFolder.length() != 0) ? "/" : "") + currentFolder;
       parentPath = parentPath.replace("//", "/");
-      return (Node)session.getItem(parentPath);
+      //return result;
+      return getTargetNode(session, parentPath);
+    } catch (Exception e) {
+      return null;
+    }
+  }
+  
+  private Node getTargetNode(Session session, String path) {
+    try {
+      Node node = null;
+      if (linkManager_ == null) {
+        linkManager_ = WCMCoreUtils.getService(LinkManager.class);
+      }
+      if (nodeFinder_ == null) {
+        nodeFinder_ = WCMCoreUtils.getService(NodeFinder.class);
+      }
+      node = (Node)nodeFinder_.getItem(session, path, true);
+      return node;
     } catch (Exception e) {
       return null;
     }
