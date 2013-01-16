@@ -1644,7 +1644,7 @@
       <icon>Icon</icon>
     </header>
     <action>
-      <AddNew>Add</AddNew>
+      <AddNew>Add Template</AddNew>
     </action>
     <msg>
       <confirm-delete>Do you really want to delete?</confirm-delete>
@@ -1742,7 +1742,9 @@
   </ViewFormTemplatePermission>
   <EditTemplatePopup>
     <title>
-      <UIViewTemplate><![CDATA[View & Edit Template]]></UIViewTemplate>
+      <UIViewTemplate_UITemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UITemplateContainer>
+      <UIViewTemplate_UIActionsTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
+      <UIViewTemplate_UIOthersTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
     </title>
   </EditTemplatePopup>
   <UITemplatesManager>

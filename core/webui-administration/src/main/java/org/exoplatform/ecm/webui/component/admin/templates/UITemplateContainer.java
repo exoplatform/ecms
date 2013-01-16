@@ -36,8 +36,8 @@ import org.exoplatform.webui.event.EventListener;
  */
 @ComponentConfigs( {
 	@ComponentConfig(lifecycle = UIContainerLifecycle.class),			
-	@ComponentConfig(type = UIPopupWindow.class, template = "system:/groovy/webui/core/UIPopupWindow.gtmpl", 
-			events = @EventConfig(listeners = UITemplateContainer.CloseActionListener.class, name = "ClosePopup"))})
+	@ComponentConfig(type = UIPopupWindow.class, id="UITemplateContainer", template = "system:/groovy/webui/core/UIPopupWindow.gtmpl", 
+			events = @EventConfig(listeners = UITemplateContainer.CloseActionListener.class))})
 
 public class UITemplateContainer extends UIContainer {
 
@@ -46,15 +46,13 @@ public class UITemplateContainer extends UIContainer {
   }
 
   public void initPopup(UIComponent uiComponent, String popupId) throws Exception {
-    removeChildById(popupId) ;
+    removeChildById(popupId) ;    
     UITemplatesManager uiManager = getParent();
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, popupId) ;
-    uiPopup.setShowMask(true);
-
+    uiPopup.setShowMask(true);    
     uiPopup.setWindowSize(600,300) ;
     UIViewTemplate uiViewTemplate = createUIComponent(UIViewTemplate.class, null, "UIViewTemplate" + "_" + uiManager.getSelectedTabId()) ;
     uiPopup.setUIComponent(uiViewTemplate) ;
-
     uiPopup.setShow(true) ;
     uiPopup.setResizable(true) ;
   }
