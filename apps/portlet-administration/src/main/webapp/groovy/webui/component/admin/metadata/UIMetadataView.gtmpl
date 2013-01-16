@@ -7,121 +7,131 @@
  * 11:57:24 AM 
  */
 %>
-<% def metadataType = uicomponent.getMetadata() %>
-<div class="UIMetadataManager">
-  <div class="MetadataInfo">
-    <div class="GridTitleBar">
-      <div class="GridTitleLeftBar">
-        <div class="GridTitleRightBar">
-          <div class="GridTitleMiddleBar"><%=_ctx.appRes("UIMetadataView.tab.metadataView")%></div>
-        </div>
-      </div>
+<% 
+  def metadataType = uicomponent.getMetadata() 
+  def rcontext = _ctx.getRequestContext();
+  rcontext.getJavascriptManager().require("SHARED/bts_tab");
+  
+  def metadataCSS = "";
+  def elementCSS = "";
+  String selTabId = uicomponent.getSelectedTabId();
+  if(uicomponent.METADATA_VIEW.equals(selTabId)) metadataCSS="class=\"active\"";
+  else if(uicomponent.ELEMENT_VIEW.equals(selTabId)) elementCSS="class=\"active\"";
+%>
+
+<div class="UITabPane uiTabNormal" id="$uicomponent.id">
+  <ul class="nav nav-tabs" id="myTab">
+    <li $metadataCSS onclick="ajaxAsyncGetRequest('" + uicomponent.url("SelectTab", uicomponent.METADATA_VIEW) + "', true)">
+	    <a data-toggle="tab" href="#tab-<%=uicomponent.METADATA_VIEW%>"><%=_ctx.appRes("UIMetadataView.tab.metadataView")%></a>
+    </li>
+    <li elementCSS onclick="ajaxAsyncGetRequest('" + uicomponent.url("SelectTab", uicomponent.ELEMENT_VIEW) + "', true)">
+      <a data-toggle="tab" href="#tab-<%=uicomponent.ELEMENT_VIEW%>"><%=_ctx.appRes("UIMetadataView.tab.element")%></a>
+    </li>
+  </ul>
+  
+  <div class="tab-content resizable" id="myTabContent">  
+  
+    <div class="tab-pane fade in active" id="tab-<%=uicomponent.METADATA_VIEW%>">
+			    <div class="MetadataInfoDetails">
+				  <table class="uiGrid table table-hover table-striped">
+					  <thead>
+					    <tr>
+						    <th><%=_ctx.appRes("UIMetadataList.header.name")%></th>
+						    <th><%=_ctx.appRes("UIMetadataView.header.isMixin")%></th>
+						    <th><%=_ctx.appRes("UIMetadataView.header.orderable")%></th>
+					    </tr>
+					  </thead>
+					  <tbody>
+				      <tr class="EvenRow">
+				        <%
+				          String metaType = metadataType.getName() ;
+				          metaType = metaType.replace(":", "_") ;
+				        %>
+				        <td>
+				        	<div class="text">
+				          	<img src="/eXoResources/skin/sharedImages/Blank.gif" alt="$metadataType.name" class="default16x16Icon ${metaType}16x16Icon"/>
+					          <span>$metadataType.name</span>
+					        </div>
+				        </td>
+				        <td>
+				          <%
+				            String booleanText ;
+				            String iconType ;
+				            if(metadataType.isMixin()) {
+				              booleanText = _ctx.appRes("UIMetadataList.label.true") ;
+				              iconType = "True" ;
+				            } else {
+				              booleanText = _ctx.appRes("UIMetadataList.label.false") ;
+				              iconType = "False" ;
+				            }
+				          %>
+				          <div class="ActionContainer Text">
+				          	<img alt="$booleanText" src="/eXoResources/skin/sharedImages/Blank.gif" class="${iconType}16x16Icon"/>
+					          <span>$booleanText</span>
+					        </div>
+				        </td>
+				        <td>
+				          <%
+				            if(metadataType.hasOrderableChildNodes()) {
+				              booleanText = _ctx.appRes("UIMetadataList.label.true") ;
+				              iconType = "True" ;
+				            } else {
+				              booleanText = _ctx.appRes("UIMetadataList.label.false") ;
+				              iconType = "False" ;
+				            }
+				          %>
+				          <div class="ActionContainer Text">
+				          	<img alt="$booleanText" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 ${iconType}16x16Icon"/>
+					          <span>$booleanText</span>
+					        </div>
+				        </td>
+				      </tr>
+					  </tbody>
+				  </table>
+				</div>
     </div>
+  
+	  <div class="tab-pane fade" id="tab-<%=uicomponent.ELEMENT_VIEW%>">
+				<div class="MetadataInfoDetails">
+				  <table class="uiGrid table table-hover table-striped">
+					  <thead>
+					    <tr>
+					      <th></th>
+						    <th><%=_ctx.appRes("UIMetadataView.header.name")%></th>
+						    <th><%=_ctx.appRes("UIMetadataView.header.type")%></th>
+						    <th><%=_ctx.appRes("UIMetadataView.header.description")%></th>
+					    </tr>
+					  </thead>
+					  <tbody>
+				      <%
+				        def rowClass = null ;
+						    boolean even = true ;
+						    boolean found = false ;
+						    for (meta in metadataType.getPropertyDefinitions()) {
+						      found = true  ;
+						      if(even) rowClass = "EvenRow" ;  
+						      else rowClass =  "OddRow" ; 
+						      even = !even ;
+				      %>
+				        <tr class="$rowClass">
+				          <%
+				            String nodeType = meta.getName() ;
+				            nodeType = nodeType.replace(":", "_") ;
+				          %>
+				          <td width="36px">
+				            <div class="default16x16Icon ${nodeType}16x16Icon" style="margin:auto"></div>                      
+				          </td>
+				          <td><div class="text">$meta.name</div></td>
+				          <td align="center"><%=uicomponent.resolveType(meta.getRequiredType())%></td>
+				          <td align="center"><%=_ctx.appRes("UIMetadataView.info.description")%></td>
+				        </tr>
+				      <%}%>  
+					  </tbody>
+				  </table>
+				</div>
+	  </div>
   </div>
-  <div class="MetadataInfoDetails">
-	  <table class="uiGrid table table-hover table-striped">
-		  <thead>
-		    <tr>
-			    <th><%=_ctx.appRes("UIMetadataList.header.name")%></th>
-			    <th><%=_ctx.appRes("UIMetadataView.header.isMixin")%></th>
-			    <th><%=_ctx.appRes("UIMetadataView.header.orderable")%></th>
-		    </tr>
-		  </thead>
-		  <tbody>
-	      <tr class="EvenRow">
-	        <%
-	          String metaType = metadataType.getName() ;
-	          metaType = metaType.replace(":", "_") ;
-	        %>
-	        <td>
-	        	<div class="text">
-	          	<img src="/eXoResources/skin/sharedImages/Blank.gif" alt="$metadataType.name" class="default16x16Icon ${metaType}16x16Icon"/>
-		          <span>$metadataType.name</span>
-		        </div>
-	        </td>
-	        <td>
-	          <%
-	            String booleanText ;
-	            String iconType ;
-	            if(metadataType.isMixin()) {
-	              booleanText = _ctx.appRes("UIMetadataList.label.true") ;
-	              iconType = "True" ;
-	            } else {
-	              booleanText = _ctx.appRes("UIMetadataList.label.false") ;
-	              iconType = "False" ;
-	            }
-	          %>
-	          <div class="ActionContainer Text">
-	          	<img alt="$booleanText" src="/eXoResources/skin/sharedImages/Blank.gif" class="${iconType}16x16Icon"/>
-		          <span>$booleanText</span>
-		        </div>
-	        </td>
-	        <td>
-	          <%
-	            if(metadataType.hasOrderableChildNodes()) {
-	              booleanText = _ctx.appRes("UIMetadataList.label.true") ;
-	              iconType = "True" ;
-	            } else {
-	              booleanText = _ctx.appRes("UIMetadataList.label.false") ;
-	              iconType = "False" ;
-	            }
-	          %>
-	          <div class="ActionContainer Text">
-	          	<img alt="$booleanText" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 ${iconType}16x16Icon"/>
-		          <span>$booleanText</span>
-		        </div>
-	        </td>
-	      </tr>
-		  </tbody>
-	  </table>
-	</div>
-  <div class="MetadataInfo">
-    <div class="GridTitleBar">
-      <div class="GridTitleLeftBar">
-        <div class="GridTitleRightBar">
-          <div class="GridTitleMiddleBar"><%=_ctx.appRes("UIMetadataView.tab.element")%></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="MetadataInfoDetails">
-	  <table class="uiGrid table table-hover table-striped">
-		  <thead>
-		    <tr>
-		      <th></th>
-			    <th><%=_ctx.appRes("UIMetadataView.header.name")%></th>
-			    <th><%=_ctx.appRes("UIMetadataView.header.type")%></th>
-			    <th><%=_ctx.appRes("UIMetadataView.header.description")%></th>
-		    </tr>
-		  </thead>
-		  <tbody>
-	      <%
-	        def rowClass = null ;
-			    boolean even = true ;
-			    boolean found = false ;
-			    for (meta in metadataType.getPropertyDefinitions()) {
-			      found = true  ;
-			      if(even) rowClass = "EvenRow" ;  
-			      else rowClass =  "OddRow" ; 
-			      even = !even ;
-	      %>
-	        <tr class="$rowClass">
-	          <%
-	            String nodeType = meta.getName() ;
-	            nodeType = nodeType.replace(":", "_") ;
-	          %>
-	          <td width="36px">
-	            <div class="default16x16Icon ${nodeType}16x16Icon" style="margin:auto"></div>                      
-	          </td>
-	          <td><div class="text">$meta.name</div></td>
-	          <td align="center"><%=uicomponent.resolveType(meta.getRequiredType())%></td>
-	          <td align="center"><%=_ctx.appRes("UIMetadataView.info.description")%></td>
-	        </tr>
-	      <%}%>  
-		  </tbody>
-	  </table>
-	</div>
-	<div class="UIAction" >
-		<a  onclick="<%=uicomponent.event("Cancel")%>" class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=_ctx.appRes("UIMetadataView.action.Cancel")%></a>
-  </div>			  
+  <div class="uiAction uiActionBorder">  
+	  <button onclick="<%=uicomponent.event("Cancel")%>" class="btn"><%=_ctx.appRes("UIMetadataView.action.Cancel")%></button>
+  </div>	
 </div>
