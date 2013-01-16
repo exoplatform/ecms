@@ -10,7 +10,7 @@
         <!-- Group or user who may view audit information -->
         <value-param>
           <name>adminIdentity</name>
-          <value>*:/Platform/Administrators</value>
+          <value>${ecms.audit.adminIdentity:*:/platform/administrators}</value>
         </value-param>
     </init-params>
   </component>	
