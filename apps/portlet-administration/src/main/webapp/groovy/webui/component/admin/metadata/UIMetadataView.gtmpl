@@ -29,10 +29,10 @@
     </li>
   </ul>
   
-  <div class="tab-content resizable" id="myTabContent">  
+  <div class="tab-content" id="myTabContent">  
   
-    <div class="tab-pane fade in active" id="tab-<%=uicomponent.METADATA_VIEW%>">
-			    <div class="MetadataInfoDetails">
+    <div class="tab-pane fade in active resizable" id="tab-<%=uicomponent.METADATA_VIEW%>">
+			    <div class="metadataInfoDetails">
 				  <table class="uiGrid table table-hover table-striped">
 					  <thead>
 					    <tr>
@@ -42,47 +42,39 @@
 					    </tr>
 					  </thead>
 					  <tbody>
-				      <tr class="EvenRow">
+				      <tr>
 				        <%
 				          String metaType = metadataType.getName() ;
 				          metaType = metaType.replace(":", "_") ;
 				        %>
 				        <td>
 				        	<div class="text">
-				          	<img src="/eXoResources/skin/sharedImages/Blank.gif" alt="$metadataType.name" class="default16x16Icon ${metaType}16x16Icon"/>
-					          <span>$metadataType.name</span>
+					          <span><i class="uiIconFileDefault uiIcon${metaType}"></i> $metadataType.name</span>
 					        </div>
 				        </td>
 				        <td>
 				          <%
 				            String booleanText ;
-				            String iconType ;
 				            if(metadataType.isMixin()) {
 				              booleanText = _ctx.appRes("UIMetadataList.label.true") ;
-				              iconType = "True" ;
 				            } else {
 				              booleanText = _ctx.appRes("UIMetadataList.label.false") ;
-				              iconType = "False" ;
 				            }
 				          %>
 				          <div class="ActionContainer Text">
-				          	<img alt="$booleanText" src="/eXoResources/skin/sharedImages/Blank.gif" class="${iconType}16x16Icon"/>
-					          <span>$booleanText</span>
+					          $booleanText
 					        </div>
 				        </td>
 				        <td>
 				          <%
 				            if(metadataType.hasOrderableChildNodes()) {
 				              booleanText = _ctx.appRes("UIMetadataList.label.true") ;
-				              iconType = "True" ;
 				            } else {
 				              booleanText = _ctx.appRes("UIMetadataList.label.false") ;
-				              iconType = "False" ;
 				            }
 				          %>
 				          <div class="ActionContainer Text">
-				          	<img alt="$booleanText" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 ${iconType}16x16Icon"/>
-					          <span>$booleanText</span>
+					          $booleanText
 					        </div>
 				        </td>
 				      </tr>
@@ -91,12 +83,12 @@
 				</div>
     </div>
   
-	  <div class="tab-pane fade" id="tab-<%=uicomponent.ELEMENT_VIEW%>">
-				<div class="MetadataInfoDetails">
+	  <div class="tab-pane fade resizable" id="tab-<%=uicomponent.ELEMENT_VIEW%>">
+				<div class="metadataInfoDetails">
 				  <table class="uiGrid table table-hover table-striped">
 					  <thead>
 					    <tr>
-					      <th></th>
+							<th class="span1 center">Icon</th>
 						    <th><%=_ctx.appRes("UIMetadataView.header.name")%></th>
 						    <th><%=_ctx.appRes("UIMetadataView.header.type")%></th>
 						    <th><%=_ctx.appRes("UIMetadataView.header.description")%></th>
@@ -104,22 +96,17 @@
 					  </thead>
 					  <tbody>
 				      <%
-				        def rowClass = null ;
-						    boolean even = true ;
 						    boolean found = false ;
 						    for (meta in metadataType.getPropertyDefinitions()) {
 						      found = true  ;
-						      if(even) rowClass = "EvenRow" ;  
-						      else rowClass =  "OddRow" ; 
-						      even = !even ;
 				      %>
-				        <tr class="$rowClass">
+				        <tr>
 				          <%
 				            String nodeType = meta.getName() ;
 				            nodeType = nodeType.replace(":", "_") ;
 				          %>
-				          <td width="36px">
-				            <div class="default16x16Icon ${nodeType}16x16Icon" style="margin:auto"></div>                      
+				          <td class="center">
+				            <i class="uiIconFileDefault uiIcon${nodeType}"></i>                      
 				          </td>
 				          <td><div class="text">$meta.name</div></td>
 				          <td align="center"><%=uicomponent.resolveType(meta.getRequiredType())%></td>
