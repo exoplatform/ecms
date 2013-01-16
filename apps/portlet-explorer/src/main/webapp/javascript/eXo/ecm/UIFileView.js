@@ -1,11 +1,13 @@
-function UIFileView() {
+(function(gj, webuiExt, ecm_utils, wcm_utils) {
+  var UIFileView = function() {
+
 	this.openDivs = {};
 	// eXo.ecm.UIFileView
 	
-	Self = this;
+	var Self = this;
 	Self.columnData = {};
-	BROW = eXo.core.Browser;
-};
+	var BROW = eXo.core.Browser;
+	
 	UIFileView.prototype.temporaryItem = null;
 	UIFileView.prototype.itemsSelected = [];
 	UIFileView.prototype.allItems = [];
@@ -115,96 +117,6 @@ UIFileView.prototype.initAllEvent = function(actionAreaId, enableDragAndDrop) {
 	//remove context menu
 	var contextMenu = document.getElementById(Self.contextMenuId);
 	if (contextMenu) contextMenu.parentNode.removeChild(contextMenu);
-	//registry action drag drop in tree list
-	eXo.ecm.UIFileView.initDragDropForTreeEvent("UIWorkingArea", enableDragAndDrop);		
-//	var UIWorkingArea = DOM.findAncestorByClass(actionArea, "UIWorkingArea");
-//	var UITreeExplorer = DOM.findFirstDescendantByClass(UIWorkingArea, "div", "UITreeExplorer");
-//	if (UITreeExplorer) {
-//		DOM.getElementsBy(
-//				function(element) {return element.getAttribute("objectId");},
-//				"div",
-//				UITreeExplorer,
-//				function(element) {
-//					if (element.getAttribute("onmousedown")) {
-//						mousedown = element.getAttributeNode("onmousedown").value;
-//						element.setAttribute("mousedown", mousedown);
-//					}
-//					if (enableDragAndDrop == "true") {
-//						element.onmousedown = Self.mouseDownTree;
-//						element.onmouseup = Self.mouseUpTree;
-//						element.onmouseover = Self.mouseOverTree;
-//						element.onmouseout = Self.mouseOutTree;
-//					}
-//				}
-//		);
-//	}
-};
-
-UIFileView.prototype.initDragDropForTreeEvent = function(actionAreaId, enableDragAndDrop) {
-	//registry action drag drop in tree list
-	eXo.ecm.UIFileView.enableDragAndDrop = enableDragAndDrop;
-//	var UIWorkingArea =	document.getElementById(actionAreaId);
-//	var UITreeExplorer = DOM.findFirstDescendantByClass(UIWorkingArea, "div", "UITreeExplorer");
-//	if (UITreeExplorer) {
-//		DOM.getElementsBy(
-//				function(element) {return element.getAttribute("objectId");},
-//				"div",
-//				UITreeExplorer,
-//				function(element) {
-//					if (element.getAttribute("onmousedown") &&!element.getAttribute("mousedown")) {
-//						mousedown = element.getAttributeNode("onmousedown").value;
-//						element.setAttribute("mousedown", mousedown);
-//					}
-//        if (element.getAttribute("onkeydown") &&!element.getAttribute("keydown")) {
-//          keydown = element.getAttributeNode("onkeydown").value;
-//          element.setAttribute("keydown", keydown);
-//        }						
-////					if (enableDragAndDrop == "true") {
-//						element.onmousedown = Self.mouseDownTree;
-//						element.onkeydown = Self.mouseDownTree;
-//						element.onmouseup = Self.mouseUpTree;
-//						element.onmouseover = Self.mouseOverTree;
-//						element.onmouseout = Self.mouseOutTree;
-//          element.onfocus = Self.mouseOverTree;
-//          element.onblur = Self.mouseOutTree;							
-////					}
-//				}
-//		);
-		gj("#" + actionAreaId + " div.UITreeExplorer:first").find("div[objectId]").each(			
-		function(index, element) {
-			if (element.getAttribute("onmousedown") &&!element.getAttribute("mousedown")) {
-				mousedown = element.getAttributeNode("onmousedown").value;
-				element.setAttribute("mousedown", mousedown);
-			}
-            if (element.getAttribute("onkeydown") &&!element.getAttribute("keydown")) {
-              keydown = element.getAttributeNode("onkeydown").value;
-              element.setAttribute("keydown", keydown);
-            }			 			
-			  element.onmousedown = Self.mouseDownTree;
-			  element.onkeydown = Self.mouseDownTree;
-			  element.onmouseup = Self.mouseUpTree;
-			  element.onmouseover = Self.mouseOverTree;
-			  element.onmouseout = Self.mouseOutTree;
-	          element.onfocus = Self.mouseOverTree;
-	          element.onblur = Self.mouseOutTree;							
-		});
-};
-
-//event in tree list
-UIFileView.prototype.mouseOverTree = function(event) {
-	var event = event || window.event;
-	var element = this;
-	var mobileElement = document.getElementById(Self.mobileId);
-	if (mobileElement && mobileElement.move) {
-		var expandElement = gj(element).parents(".ExpandIcon:first")[0];
-		if(expandElement && expandElement.onclick) {
-			if (expandElement.onclick instanceof Function) {
-				element.Timeout = setTimeout(function() {expandElement.onclick(event)}, 1000);
-			} 
-		}
-	}
-	var scroller = gj(element).parents(".SideContent:first")[0];
-scroller.onmousemove = eXo.ecm.UIFileView.setScroll ;
 };
 
 UIFileView.prototype.setScroll = function(evt){
@@ -218,105 +130,6 @@ UIFileView.prototype.setScroll = function(evt){
 	element.scrollTop = element.scrollTop - 5;  
 	}
   }
-};
-
-UIFileView.prototype.mouseOutTree = function(event) {
-	var element = this;
-	clearTimeout(element.Timeout);
-};
-
-UIFileView.prototype.mouseDownTree = function(evt) {
-	eval("var event = ''");
-	event = evt || window.event;
-	var element = this;
-	Self.enableDragDrop = true;
-	Self.srcPath = element.getAttribute("objectId");
-	resetArrayItemsSelected();
-	var rightClick = (event.which && event.which > 1) || (event.button && event.button == 2);
-	if (rightClick) {
-		eval(element.getAttribute("mousedown"));
-	} else {
-		// init drag drop;
-		document.onmousemove = Self.dragItemsSelected;
-		document.onmouseup = Self.dropOutActionArea;
-		var itemSelected = element.cloneNode(true);
-		Self.itemsSelected = new Array(itemSelected);
-		//var uiResizableBlock = DOM.findAncestorByClass(element, "UIResizableBlock");
-		//if (uiResizableBlock) uiResizableBlock.style.overflow = "hidden";
-		
-		//create mobile element
-		var mobileElement = newElement({
-			className: "UIJCRExplorerPortlet",
-			id: eXo.generateId('Id'),
-			style: {
-				position: "absolute",
-				display: "none",
-				overflow: "hidden",
-      padding: "1px",
-      background: "white",
-      border: "1px solid gray",
-      width: element.offsetWidth + 50 + "px",
-      height: "25px"
-			}
-		});
-		mobileElement.style.opacity = 65/100;
-		Self.mobileId = mobileElement.id;
-		var coverElement = newElement({
-			className: "UITreeExplorer",
-			style: {margin: "0px 3px", padding: "3px 0px"}
-		});
-		coverElement.appendChild(itemSelected);
-		mobileElement.appendChild(coverElement);
-		document.body.appendChild(mobileElement);
-	}
-};
-
-UIFileView.prototype.mouseUpTree = function(evt) {
-	eval("var event = ''");
-	event = evt || window.event;
-	var element = this;
-	revertResizableBlock();
-	Self.enableDragDrop = null;
-	var mobileElement = document.getElementById(Self.mobileId);
-	if (!mobileElement && eXo.ecm.UISimpleView && eXo.ecm.UISimpleView.mobileId)
-		mobileElement = document.getElementById(eXo.ecm.UISimpleView.mobileId);
-	
-//	Self.clickItem(event, element);		
-	if (mobileElement && mobileElement.move) {
-		//post action
-		var actionArea = document.getElementById("UIWorkingArea");
-		var moveAction = gj(actionArea).find("div.JCRMoveAction:first")[0];
-		var wsTarget = element.getAttribute('workspacename');
-		var idTarget = element.getAttribute('objectId');
-		var targetPath = decodeURIComponent(idTarget);
-		var srcPath = Self.srcPath ?  decodeURIComponent(Self.srcPath) :
-			decodeURIComponent(eXo.ecm.UISimpleView.srcPath);
-//		var regex = new RegExp("^"+decodeURIComponent(idTarget) + "/");
-//		alert("^"+decodeURIComponent(idTarget) + "/" + "\n" + "^"+decodeURIComponent(Self.srcPath) + "/");
-//		var regex1 = new RegExp("^"+decodeURIComponent(Self.srcPath) + "/");
-//		alert(regex.test(decodeURIComponent(Self.srcPath) + "/") + "\n" + regex1.test(decodeURIComponent(idTarget) + "/"))
-//		if(regex.test(decodeURIComponent(Self.srcPath) + "/")){
-//		  delete Self.srcPath;
-//		  return ;
-//		}
-//		if(regex1.test(decodeURIComponent(idTarget) + "/")) {
-//		  delete Self.srcPath;
-//		  return;
-//		}
-		if (targetPath.indexOf(srcPath) == 0) {
-			delete Self.srcPath;
-			return;
-		}
-		//Dunghm : check symlink
-		if (eXo.ecm.UIFileView.enableDragAndDrop == "true") {
-			if(event.ctrlKey && event.shiftKey)
-			  Self.postGroupAction(moveAction.getAttribute("symlink"), "&destInfo=" + wsTarget + ":" + idTarget);
-			else {
-			  Self.postGroupAction(moveAction, "&destInfo=" + wsTarget + ":" + idTarget);
-			}
-		}			
-	}
-//	Self.clickItem(event, element);		
 };
 
 //event in item
@@ -542,17 +355,20 @@ UIFileView.prototype.mouseUpItem = function(evt) {
 		//show menu actions
 		if (!Self.clickTotalCheckBox) {
 			//event.cancelBubble = true;
-			if (inArray(Self.itemsSelected, element) && Self.itemsSelected.length > 1){
-				Self.showItemContextMenu(event, element);
-			} else if (Self.itemsSelected.length > 0) {
-				//Self.clickItem(event, element);
-				//Self.showItemContextMenu(event, element);
-				var action = element.getAttribute("mousedown");
-				//alert(action);				
-				action = action.replace('this', 'element');
-				//alert(action);
-				eval(action);
-				//eXo.webui.UIRightClickPopupMenu.clickRightMouse(event, element, 'ECMContextMenu', )
+			if (inArray(Self.itemsSelected, element)){
+				if (Self.itemsSelected.length > 1) {
+					Self.showItemContextMenu(event, element);
+				} else {//Self.itemsSelected.length==1
+					var action = element.getAttribute("mousedown").replace('this', 'element');
+					eval(action);
+				}
+			} else {// if (!inArray(Self.itemsSelected, element) && Self.itemsSelected.length == 1)
+				if (Self.itemsSelected.length > 1) {
+					Self.showItemContextMenu(event, element);
+				} else if (Self.itemsSelected.length = 1) {
+					var action = Self.itemsSelected[0].getAttribute("mousedown").replace('this', 'element');
+					eval(action);
+				}
 			}
 		}
 	} else {
@@ -570,7 +386,7 @@ UIFileView.prototype.mouseDownGround = function(evt) {
 	event = evt || window.event;
 	var element = this;
 	element.holdMouse = true;
-	Self.hideContextMenu();
+	//Self.hideContextMenu();
 	Self.temporaryItem = null;
 	document.onselectstart = function(){return false};
 	
@@ -833,10 +649,6 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 	if (event.clientY + contentMenu.offsetHeight > portHeight) Y -= contentMenu.offsetHeight + 5;
 //	contextMenu.style.top = Y + 5 + "px";
 //	contextMenu.style.left = X + 5 + "px";
-	
-	contextMenu.onmouseup = Self.hideContextMenu;
-	document.body.onmousedown = Self.hideContextMenu;
-	document.body.onkeydown = Self.hideContextMenu;
 };
 
 // working with ground context menu
@@ -874,9 +686,9 @@ UIFileView.prototype.showGroundContextMenu = function(event, element) {
 	contextMenu.style.top = Y + 5 + "px";
 	contextMenu.style.left = X + 5 + "px";
 	
-	contextMenu.onmouseup = Self.hideContextMenu;
-	document.body.onmousedown = Self.hideContextMenu;
-	document.body.onkeydown = Self.hideContextMenu;
+//	contextMenu.onmouseup = Self.hideContextMenu;
+//	document.body.onmousedown = Self.hideContextMenu;
+//	document.body.onkeydown = Self.hideContextMenu;
 };
 
 // hide context menu
@@ -985,6 +797,7 @@ UIFileView.prototype.clearCheckboxes = function(evt) {
 		Self.clickTotalCheckBox = true;
 		Self.mouseUpItem(evt);
 	});
+	gj("#UIFileViewCheckBox").attr("checked", false);
 };
 
 UIFileView.prototype.checkSelectedItemCount = function() {
@@ -1020,7 +833,7 @@ UIFileView.prototype.clickRightMouse = function(event, elemt, menuId, objId, whi
     //Register closing contextual menu callback on document
     jDoc.one("mousedown.RightClickPopUpMenu", function(e)
     {
-    	Self.hideContextMenu(menuId);
+//    	Self.hideContextMenu(menuId);
     });
 
     //The callback registered on document won't be triggered by current 'mousedown' event
@@ -1069,67 +882,6 @@ UIFileView.prototype.clickRightMouse = function(event, elemt, menuId, objId, whi
     gj("#ActionMenuPlaceHolder").prepend(contextMenu);
     eXo.webui.UIPopup.show(contextMenu);
     
-//    var ctxMenuContainer = gj(contextMenu).children("div.UIContextMenuContainer")[0];
-//    var offset = gj(contextMenu).offset();
-//    var intTop = eXo.core.Mouse.mouseyInPage
-//        - (offset.top - contextMenu.offsetTop);
-//    var intLeft = eXo.core.Mouse.mousexInPage
-//        - (offset.left - contextMenu.offsetLeft)
-//        + fixWidthForIE7;
-//    if (eXo.core.I18n.isRT()) {
-//      // scrollWidth is width of browser scrollbar
-//      var scrollWidth = 16;
-//      if (eXo.core.Browser.isFF())
-//        scrollWidth = 0;
-//      intLeft = contextMenu.offsetParent.offsetWidth - intLeft + fixWidthForIE7
-//          + scrollWidth;
-//      var clickCenter = gj(contextMenu).find("div.ClickCenterBottom")[0];
-//      if (clickCenter) {
-//        var clickCenterWidth = clickCenter ? parseInt(gj(clickCenter).css("marginRight")) : 0;
-//        intLeft += (ctxMenuContainer.offsetWidth - 2 * clickCenterWidth);
-//      }
-//    }
-//
-//    var jWin = gj(window);
-//    var browserHeight = jWin.height();
-//    var browserWidth = jWin.width();
-//    switch (opt) {
-//    case 1:
-//      intTop -= ctxMenuContainer.offsetHeight;
-//      break;
-//    case 2:
-//      break;
-//    case 3:
-//      break;
-//    case 4:
-//      break;
-//    default:
-//      // if it isn't fit to be showed down BUT is fit to to be showed up
-//      if ((eXo.core.Mouse.mouseyInClient + ctxMenuContainer.offsetHeight) > browserHeight
-//          && (intTop > ctxMenuContainer.offsetHeight)) {
-//        intTop -= ctxMenuContainer.offsetHeight;
-//      }
-//      break;
-//    }
-//
-//    if (eXo.core.I18n.isLT()) {
-//      // move context menu to center of screen to fix width
-//      contextMenu.style.left = browserWidth * 0.5 + "px";
-//      ctxMenuContainer.style.width = "auto";
-//      ctxMenuContainer.style.width = ctxMenuContainer.offsetWidth + 2 + "px";
-//      // end fix width
-//      // need to add 1 more pixel because IE8 will dispatch onmouseout event to
-//      // contextMenu.parent
-//      contextMenu.style.left = (intLeft + 1) + "px";
-//    } else {
-//      // move context menu to center of screen to fix width
-//      contextMenu.style.right = browserWidth * 0.5 + "px";
-//      ctxMenuContainer.style.width = "auto";
-//      ctxMenuContainer.style.width = ctxMenuContainer.offsetWidth + 2 + "px";
-//      // end fix width
-//      contextMenu.style.right = intLeft + "px";
-//    }
-//    ctxMenuContainer.style.width = ctxMenuContainer.offsetWidth + "px";
 };
 
 //private method
@@ -1186,6 +938,9 @@ function revertResizableBlock() {
 	
 }
 
-
+  };
 eXo.ecm.UIFileView = new UIFileView();
-_module.UIFileView = eXo.ecm.UIFileView;
+  return {
+    UIFileView : eXo.ecm.UIFileView
+  };
+})(gj, webuiExt, ecm_utils, wcm_utils);

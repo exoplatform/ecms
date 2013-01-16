@@ -60,6 +60,9 @@
         <module>uiListView</module>
       </depends>
       <depends>
+        <module>uiFileView</module>
+      </depends>
+      <depends>
         <module>uiSimpleView</module>
       </depends>
       <depends>

@@ -20,7 +20,9 @@ import java.io.InputStream;
 import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -44,6 +46,7 @@ import javax.jcr.nodetype.NodeTypeManager;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.definition.PortalContainerConfig;
@@ -1100,4 +1103,36 @@ public class Utils {
       
     return allowedTypes;
   }
+  
+  /**
+   * removes child nodes in path list if ancestor of the node exists in list
+   * @param srcPath the list of nodes
+   * @return the node list with out child nodes
+   */
+  public static String[] removeChildNodes(String srcPath) {
+    if (StringUtils.isEmpty(srcPath)) {
+      return new String[]{};
+    }
+    if (!srcPath.contains(";")) {
+      return new String[]{srcPath};
+    }
+    String[] paths = srcPath.split(";");
+    List<String> ret = new ArrayList<String>();
+    for (int i = 0; i < paths.length; i++) {
+      boolean ok = true;
+      for (int j = 0; j < paths.length; j++) {
+        //check if [i] is child of [j]
+        if ((i != j) && paths[i].startsWith(paths[j]) && (paths[i].length() > paths[j].length()) &&
+            (paths[i].charAt(paths[j].length() + 1) != '[')) {//check same name sibling
+          ok = false;
+          break;
+        }
+      }
+      if (ok) {
+        ret.add(paths[i]);
+      }
+    }
+    return ret.toArray(new String[]{});
+  }
+  
 }

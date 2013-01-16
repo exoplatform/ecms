@@ -1755,8 +1755,8 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     //for FileView feature
     getAncestorOfType(UIJCRExplorer.class).setCanShowSideBar(true);
     context.getJavascriptManager().
-    require("SHARED/explorer-module", "explorer").
-    addScripts("explorer.UIFileView.showSideBar();");
+    require("SHARED/uiFileView", "uiFileView").
+    addScripts("uiFileView.UIFileView.showSideBar();");
     
     super.processRender(context);
   }

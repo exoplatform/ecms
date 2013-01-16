@@ -40,8 +40,8 @@
   def size = uicomponent.getNodeChildrenList().size();
   def jsManager = rcontext.getJavascriptManager();
 
-  jsManager.require("SHARED/explorer-module", "explorer").
-  addScripts("explorer.UIFileView.initAllEvent('UIDocumentInfo', '$enableDragAndDrop');");
+  jsManager.require("SHARED/uiFileView", "uiFileView").
+  addScripts("uiFileView.UIFileView.initAllEvent('UIDocumentInfo', '$enableDragAndDrop');");
   //Config to display columns with format: ["${column};${width}"]
   //Default 
   String[] arrColumns = ["exo:owner;95px","exo:dateModified;123px","exo:dateCreated;121px"];
@@ -179,7 +179,9 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
   if (data.isNodeType("exo:restoreLocation")) isInTrash = "true";
   if (uiDocumentInfo.isMediaType(data)) isMediaType = "true";
   if (Utils.isTrashHomeNode(data)) isTrashHome = "true"
-  if (!uiDocumentInfo.isSystemWorkspace()) rightClickMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(nodePath), uiWorkingArea.getActionsExtensionList(data)) ;            
+//  if (!uiDocumentInfo.isSystemWorkspace()) rightClickMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(nodePath), uiWorkingArea.getActionsExtensionList(data)) ;            
+  if (!uiDocumentInfo.isSystemWorkspace()) 
+    rightClickMenu = "onmousedown=\"eXo.ecm.UIFileView.clickRightMouse(event, this, 'ECMContextMenu','" + preferenceWS + ":" + Utils.formatNodeName(nodePath) + "','" + uiWorkingArea.getActionsExtensionList(data) + "');\"";
 %>
   <div <%= uiDocumentInfo.getDragAndDropEvents(data) %> <%=rightClickMenu%> class="RowView fileViewRowView Normal ClearFix" trashHome="$isTrashHome" locked="$isLocked" mediaType="$isMediaType" removeFavourite="$isFavourite" inTrash="$isInTrash" workspacename="$preferenceWS" objectId="<%=URLEncoder.encode(Utils.formatNodeName(nodePath), "utf-8")%>">
     $strActs

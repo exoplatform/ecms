@@ -36,6 +36,7 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFi
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -159,7 +160,7 @@ public class CutManageComponent extends UIAbstractManagerComponent {
     String nodePath = event.getRequestContext().getRequestParameter(OBJECTID);
     if(nodePath.indexOf(";") > -1) {
       uiWorkingArea.getVirtualClipboards().clear();
-      processMultipleCut(nodePath.split(";"), event, uiExplorer);
+      processMultipleCut(Utils.removeChildNodes(nodePath), event, uiExplorer);
     } else {
       processCut(nodePath, event, uiExplorer, false);
     }

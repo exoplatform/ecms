@@ -50,13 +50,15 @@
   def size = uicomponent.getChildrenList().size();
   def jsManager = rcontext.getJavascriptManager();
   jsManager.require("SHARED/ecm-utils", "ecmutil").
-            require("SHARED/explorer-module", "explorer").
-  addScripts("explorer.UIFileView.initStickBreadcrumb();").
+            require("SHARED/uiListView", "uiListView").
+            require("SHARED/uiFileView", "uiFileView").
+            require("SHARED/multiUpload", "multiUpload").
+  addScripts("uiFileView.UIFileView.initStickBreadcrumb();").
   addScripts("ecmutil.ECMUtils.initClipboard('clip_button','1','$size');").
-	addScripts('explorer.UIListView.loadEffectedWidthColumn();').
-  addScripts('explorer.UIFileView.clearOpenDivs();').
-  addScripts('explorer.UIFileView.clearSideBar();');
-	
+	addScripts('uiListView.UIListView.loadEffectedWidthColumn();').
+  addScripts('uiFileView.UIFileView.clearOpenDivs();').
+  addScripts('uiFileView.UIFileView.clearSideBar();');
+  
 	//Config to display columns with format: ["${column};${width}"]
 	//Default 
 	String[] arrColumns = ["exo:owner;95px","exo:dateModified;123px","exo:dateCreated;121px"];
@@ -194,7 +196,7 @@
 												for(itemContext in managersMultiItemContext) {
 													action = itemContext.getUIExtensionName();
 											%>
-													<a class="MenuItem" style="display: block;" onclick=eXo.ecm.UIListView.postGroupAction("<%=itemContext.event(action)%>")> 	
+													<a class="MenuItem" style="display: block;" onclick=eXo.ecm.UIFileView.postGroupAction("<%=itemContext.event(action)%>")> 	
 													<div class="ItemIcon ${action}16x16Icon">
 													<%=_ctx.appRes("ECMContextMenu.event." + action)%>
 													</div>
