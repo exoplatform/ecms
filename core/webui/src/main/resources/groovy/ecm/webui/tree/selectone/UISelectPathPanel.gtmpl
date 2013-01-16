@@ -25,19 +25,12 @@
 	  <tbody>
       <%
         def nodes = uicomponent.getSelectableNodes() ;
-        def rowClass = "OddRow" ;
-		    boolean even = true ;
 		    if(nodes.size() > 0) {
 			    for(node in nodes) {
-			      if(even) {
-			      	rowClass = "EvenRow" ;  
-			      } else {
-			      	rowClass =  "OddRow" ; 
-			      }
-			      even = !even ;
+
 	      %>
 			      <%if(!uicomponent.isExceptedNodeType(node)) {%>
-				      <tr class="$rowClass">
+				      <tr>
 				        <td>
 				        <%
                   String nodeName = ContentReader.getXSSCompatibilityContent(Utils.getIndexName(node));          
@@ -53,9 +46,9 @@
 	                <%}%>
 				          $nodeName</div>
 				        </td>
-				        <td>
-		              <a href="<%=uicomponent.event("Select", Utils.formatNodeName(node.getPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITreeList.action.title.select")%>">
-		                <div class="Select16x16Icon" style="margin-left:15px;"></div>
+				        <td class="center">
+		              <a class="actionIcon" href="<%=uicomponent.event("Select", Utils.formatNodeName(node.getPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITreeList.action.title.select")%>">
+		                <i class="uiIconValidate"></i>
 		              </a>
 				        </td>
 				      </tr>

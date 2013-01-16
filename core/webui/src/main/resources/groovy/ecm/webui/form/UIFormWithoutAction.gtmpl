@@ -9,30 +9,29 @@
 
 import org.apache.commons.lang.StringUtils;
 %>
-  <div class="UIFormWithoutAction $uicomponent.id">
+<div class="uiFormWithoutAction $uicomponent.id">
     <% uiform.begin() %>
-    <div class="HorizontalLayout">
-      <table class="UIFormGrid">
+  <div class="form-horizontal">
       <% 
         for(field in uiform.getChildren()) { 
           if(field.isRendered()) {
             String fieldLabel = uicomponent.getLabel(field.getName());
       %>
-						<tr>
-              <%if(!uicomponent.getId().equals(fieldLabel)) { 
-                  if(StringUtils.isNotEmpty(fieldLabel)) {%>
-                    <td class="FieldLabel" style="vertical-align: middle;"><label for="<%=field.getId()%>"><%=fieldLabel%></label></td>
-                <% }%>
-  						  <td class="FieldComponent"><% uiform.renderField(field) %></td>
-              <%} else {%>
-                <td colspan="2" class="FieldComponent"><% uiform.renderField(field) %></td>
-              <%}%>
-						</tr>
+			<div class="control-group">
+				<%if(!uicomponent.getId().equals(fieldLabel)) { 
+					if(StringUtils.isNotEmpty(fieldLabel)) {%>
+					<label class="control-label" for="<%=field.getId()%>"><%=fieldLabel%></label>
+					<% }%>
+					 <div class="controls"><% uiform.renderField(field) %></div>
+				<%} else {%>
+					 <div class="controls-full"><% uiform.renderField(field) %></div>
+				<%}%>
+			</div>
       <%
           }
         }
       %>
-      </table>
-    </div>
-    <%uiform.end()%>
+			
   </div>
+    <%uiform.end()%>
+</div>

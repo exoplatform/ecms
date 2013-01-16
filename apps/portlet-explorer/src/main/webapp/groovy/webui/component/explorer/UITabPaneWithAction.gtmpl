@@ -9,42 +9,42 @@
 %>
 <div class="$uicomponent.id" id="$uicomponent.id">
 
-	    <div class="WorkingAreaWithHelp uiTabNormal">
-	      
-				<ul class="nav nav-tabs">
-					<%
-					  int count = 0;
-						def children = uicomponent.getChildren();
-						for(uiChild in children) {
-							String style = "" ;
-							if(uiChild.isRendered()) style = "active" ;
-							if (count++ == 0) {
-								style+= children.size() == 1 ? " only" : " first";
-							}
-					%>
-						<li class="$style" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this)">             
-								<a data-toggle="tab"><%=_ctx.appRes(uicomponent.getId() + ".tab.label." + uiChild.getId())%></a>
-						
-						</li>              
-					<%}%>
-	
-	      </ul>
-	      <div class="tab-content resizable" id="myTabContent">
-						<%
-							for(uiChild in uicomponent.getChildren()) { 
-								String display = "none" ;
-								if(uiChild.isRendered()) display="block" ;
-								println "<div class=\"UITabContent\" style=\"display: $display\">" ;
-								uicomponent.renderUIComponent(uiChild) ;
-								println "</div>" ;
-							}
-						%>
-	      </div>  
-	    </div>  
-	    <div class="UIAction"> 
-			<%for(action in uicomponent.getActions()) { %>
-			<a onclick="<%=uicomponent.event(action)%>" class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=_ctx.appRes(uicomponent.getId() + ".action." + action)%></a>
-		  <%} %>
-		</div>
+	<div class="WorkingAreaWithHelp uiTabNormal">
+		
+		<ul class="nav nav-tabs">
+			<%
+				int count = 0;
+				def children = uicomponent.getChildren();
+				for(uiChild in children) {
+					String style = "" ;
+					String tabId = uiChild.getId();
+					if(uiChild.isRendered()) style = "active" ;
+					if (count++ == 0) {
+						style+= children.size() == 1 ? " only" : " first";
+					}
+			%>
+				<li class="$style">             
+						<a href="#tab-$tabId" data-toggle="tab"><%=_ctx.appRes(uicomponent.getId() + ".tab.label." + uiChild.getId())%></a>
+				</li>              
+			<%}%>
+
+		</ul>
+		<div class="tab-content" id="myTabContent">
+			<%
+				for(uiChild in uicomponent.getChildren()) { 
+					String active = "";
+				  if(uiChild.isRendered()) active="in active";				
+				  println "<div class=\"tab-pane fade $active\" id=\"tab-" + uiChild.getId() + "\">";
+					uicomponent.renderUIComponent(uiChild) ;
+					println "</div>" ;
+				}
+			%>
+		</div>  
+	</div>  
+	<div class="uiAction"> 
+		<%for(action in uicomponent.getActions()) { %>
+		<button onclick="<%=uicomponent.event(action)%>" class="btn" href="javascript:void(0);"><%=_ctx.appRes(uicomponent.getId() + ".action." + action)%></button>
+		<%} %>
+	</div>
  
 </div>

@@ -9,25 +9,25 @@
 %>
 <div class="UIFormWithoutAction  $uicomponent.id">
   <% uiform.begin() %>
-  <div class="HorizontalLayout">
-    <table class="UIFormGrid">
+  <div class="form-horizontal">
+    
     <% 
       for(field in uiform.getChildren()) { 
         if(field.isRendered()) {
     %>
-			<tr>
-      <%if(!uicomponent.getLabel(field.getName()).equals(uicomponent.getId())) { %>                        
-				<td class="FieldLabel"><label for="<%=field.getId()%>"><%=uicomponent.getLabel(field.getName())%></label></td>
-  		  <td class="FieldComponent"><% uiform.renderField(field) %></td>
-      <%} else {%>
-        <td colspan="2" class="FieldComponent"><% uiform.renderField(field) %></td>
-      <%}%>
-			</tr>
+			<div class="control-group">
+				<%if(!uicomponent.getLabel(field.getName()).equals(uicomponent.getId())) { %>                        
+				<label class="control-label" for="<%=field.getId()%>"><%=uicomponent.getLabel(field.getName())%></label>
+  		  <div class="controls"><% uiform.renderField(field) %></div>
+				<%} else {%>
+        <div class="controls-full"><% uiform.renderField(field) %></div>
+				<%}%>
+			</div>
       <%
           }
         }
       %>
-    </table>
+    
   </div>
   <%uiform.end()%>
 </div>

@@ -5,13 +5,13 @@ import org.exoplatform.ecm.webui.tree.UINodeTreeBuilder;
 import org.exoplatform.ecm.webui.tree.selectone.UISelectPathPanel;
 %>
 
-<div class="$uicomponent.id" id="$uicomponent.id">
+<div class="uiOneNodePathSelector" id="$uicomponent.id">
   <div>
     <%
-      uicomponent.renderChild(UIBreadcumbs.class);
       uicomponent.renderChild(UIWorkspaceList.class);
+      uicomponent.renderChild(UIBreadcumbs.class);
     %>
-    <div class="ClearFix">
+    <div class="clearfix">
     <%
       uicomponent.renderChild(UINodeTreeBuilder.class);
       uicomponent.renderChild(UISelectPathPanel.class);

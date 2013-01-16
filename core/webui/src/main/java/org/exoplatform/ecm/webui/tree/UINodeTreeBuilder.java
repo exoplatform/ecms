@@ -269,13 +269,9 @@ public class UINodeTreeBuilder extends UIContainer {
    */
   public void processRender(WebuiRequestContext context) throws Exception {
     Writer writer = context.getWriter() ;
-    writer.write("<div class=\"Explorer\">") ;
-    writer.write("<div class=\"ExplorerTree\">") ;
-    writer.write("<div class=\"InnerExplorerTree\">") ;
+    writer.write("<div class=\"explorerTree\">") ;
       buildTree() ;
       super.renderChildren() ;
-    writer.write("</div>") ;
-    writer.write("</div>") ;
     writer.write("</div>") ;
   }
 

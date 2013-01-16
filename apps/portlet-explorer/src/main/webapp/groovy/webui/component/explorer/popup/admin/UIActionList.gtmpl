@@ -33,7 +33,7 @@
 			      else rowClass =  "OddRow" ; 
 			      even = !even ;
       %>
-		      <tr class="$rowClass">
+		      <tr>
 		        <td>
 		          <div class="text">
 		          	<%if(action.hasProperty("exo:name")){%>
@@ -59,14 +59,14 @@
 		            }%>
 		          </div>
 		        </td>		       
-		        <td>
-		        	<div class="ActionContainer">
+		        <td class="actionContainer">
+		        	
 			        <%
 			          for(act in uicomponent.getActions()) { 
 			        %>
-	            	<img class="${act}16x16Icon" src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UIActionList.action." + act)%>" onclick="<%=uicomponent.event(act, action.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionList.action." + act)%>"/>
+	            	<a class="actionIcon"><i class="uiIcon${act}" onclick="<%=uicomponent.event(act, action.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionList.action." + act)%>"></i></a>
 			        <%} %>
-	           	</div>
+	           	
 		        </td>
 		      </tr>
 	    <%
@@ -78,7 +78,7 @@
   <% if(totalPages > 1){ %>
   <% uicomponent.renderChild(UIPageIterator.class) %>
   <% } %>
-  <div class="UIAction"> 
-		<a onclick="<%=uicomponent.event("Close")%>" class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=_ctx.appRes("UIActionList.action.Close")%></a>
+  <div class="uiAction"> 
+		<button type="button" onclick="<%=uicomponent.event("Close")%>" class="btn" href="javascript:void(0);"><%=_ctx.appRes("UIActionList.action.Close")%></button>
 	</div>
 </div>
