@@ -9,8 +9,8 @@
 
   def refreshAction = URLEncoder.encode(uicomponent.getAncestorOfType(UIWorkingArea.class).event(UIWorkingArea.REFRESH_ACTION), "utf-8");
   
-  rcontext.getJavascriptManager().require("SHARED/webui-ext", "webuiExt").
-  addScripts("webuiExt.UIRightClickPopupMenu.init('" + uicomponent.getId() + "');").
+  rcontext.getJavascriptManager().require("SHARED/uiRightClickPopupMenu", "uiRightClickPopupMenu").
+  addScripts("uiRightClickPopupMenu.init('" + uicomponent.getId() + "');").
   addScripts("eXo.ecm.Rename.init('" + refreshAction + "') ;");
 %>
 <div class="UIRightClickPopupMenu" id="$uicomponent.id">
@@ -34,7 +34,7 @@
 										onClick = "javascript:eXo.ecm.Rename.showRenamePopup();";
 									} else {
 										href = "href=\"" + itemContext.event(action) + "\"";
-										onClick = "return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);";
+										onClick = "";
 									}
 					 		%>
 					   	<div class="MenuItem"> 	

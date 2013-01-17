@@ -290,8 +290,8 @@ public class UIDrivesArea extends UIContainer {
       }
       uiParent.setRenderedChild(UIJcrExplorerContainer.class);
       event.getRequestContext().getJavascriptManager().
-      require("SHARED/explorer-module", "explorer").
-      addScripts("explorer.MultiUpload.setLocation('" + 
+      require("SHARED/multiUpload", "multiUpload").
+      addScripts("multiUpload.setLocation('" + 
                  uiJCRExplorer.getWorkspaceName()  + "','" + 
                  uiJCRExplorer.getDriveData().getName()  + "','" +
                  uiTreeExplorer.getLabel()  + "','" +

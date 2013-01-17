@@ -93,7 +93,7 @@ public class UIViewRelationList extends UIContainer{
         ManageableRepository repository = repositoryService.getCurrentRepository();
         Session session = null ;
         for(String workspace : repository.getWorkspaceNames()) {
-          session = repository.getSystemSession(workspace) ;
+          session = WCMCoreUtils.getSystemSessionProvider().getSession(workspace, repository) ;
           try{
             Node lookupNode = session.getNodeByUUID(uuid) ;
             PropertyIterator iter = lookupNode.getReferences() ;
@@ -106,9 +106,6 @@ public class UIViewRelationList extends UIContainer{
             }
           } catch(Exception e) {
             continue;
-          }
-          finally {
-            session.logout() ;
           }
         }
       } catch (UnsupportedRepositoryOperationException e) {

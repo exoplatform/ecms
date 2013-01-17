@@ -16,6 +16,8 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.search;
 
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -39,6 +41,8 @@ import org.exoplatform.webui.event.EventListener;
                  events = { @EventConfig(listeners = UIECMSearch.SelectTabActionListener.class) })
 public class UIECMSearch extends UITabPane implements UIPopupComponent {
 
+  private static final Log LOG = ExoLogger.getLogger(UIECMSearch.class.getName());
+
   static public String ADVANCED_RESULT = "AdvancedSearchResult" ;
 
   public UIECMSearch() throws Exception {
@@ -52,14 +56,20 @@ public class UIECMSearch extends UITabPane implements UIPopupComponent {
     uiPageIterator.setId("AdvanceSearchIterator") ;
   }
 
-  public void activate() throws Exception {
-    UIJCRAdvancedSearch advanceSearch = getChild(UIJCRAdvancedSearch.class);
-    advanceSearch.update(null);
-    UISavedQuery uiQuery = getChild(UISavedQuery.class);
-    uiQuery.updateGrid(1);
+  public void activate() {
+    try {
+      UIJCRAdvancedSearch advanceSearch = getChild(UIJCRAdvancedSearch.class);
+      advanceSearch.update(null);
+      UISavedQuery uiQuery = getChild(UISavedQuery.class);
+      uiQuery.updateGrid(1);
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error!", e.getMessage());
+      }
+    }
   }
 
-  public void deActivate() throws Exception {
+  public void deActivate() {
   }
   
   static public class SelectTabActionListener extends EventListener<UIECMSearch>

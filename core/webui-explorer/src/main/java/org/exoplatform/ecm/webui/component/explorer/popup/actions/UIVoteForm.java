@@ -49,8 +49,8 @@ import org.exoplatform.webui.event.EventListener;
 public class UIVoteForm extends UIComponent implements UIPopupComponent {
   public UIVoteForm() throws Exception {}
 
-  public void activate() throws Exception {}
-  public void deActivate() throws Exception {}
+  public void activate() {}
+  public void deActivate() {}
 
   public double getRating() throws Exception {
     VotingService votingService = WCMCoreUtils.getService(VotingService.class);

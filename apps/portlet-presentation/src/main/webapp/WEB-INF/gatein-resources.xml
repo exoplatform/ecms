@@ -21,8 +21,8 @@
 -->
 
 <gatein-resources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_resources_1_2_1 http://www.gatein.org/xml/ns/gatein_resources_1_2_1" 
-    xmlns="http://www.gatein.org/xml/ns/gatein_resources_1_2_1">
+    xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_resources_1_3 http://www.gatein.org/xml/ns/gatein_resources_1_3" 
+    xmlns="http://www.gatein.org/xml/ns/gatein_resources_1_3">
 
   <!-- SingleContentViewer skins -->
 
@@ -91,6 +91,9 @@
       <depends>
       	<module>content-selector</module>
       </depends>
+      <depends>
+        <module>uiCalendar</module>
+      </depends>
     </module>
   </portlet>
 
@@ -125,8 +128,7 @@
         <module>clv</module>
       </depends>
     </module>
-  </portlet>  
-  
+  </portlet>
   
 </gatein-resources>
 

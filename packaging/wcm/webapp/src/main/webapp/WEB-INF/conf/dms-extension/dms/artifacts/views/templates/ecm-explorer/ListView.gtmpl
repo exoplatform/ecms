@@ -42,10 +42,12 @@
   def size = uicomponent.getChildrenList().size();
   def jsManager = rcontext.getJavascriptManager();
   jsManager.require("SHARED/ecm-utils", "ecmutil").
-            require("SHARED/explorer-module", "explorer").
-  addScripts("explorer.UIListView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');").
+            require("SHARED/uiListView", "uiListView").
+            require("SHARED/multiUpload", "multiUpload").
+  addScripts("uiListView.UIListView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');").
   addScripts("ecmutil.ECMUtils.initClipboard('clip_button','1','$size');").
-	addScripts('explorer.UIListView.loadEffectedWidthColumn();');
+	addScripts('uiListView.UIListView.loadEffectedWidthColumn();');
+	
 	//Config to display columns with format: ["${column};${width}"]
 	//Default 
 	String[] arrColumns = ["exo:owner;95px","exo:dateModified;123px","exo:dateCreated;121px"];
@@ -251,7 +253,7 @@
 	          for (act in customActs) {
 	            String actName = act.getProperty("exo:name").getValue().getString() ;
 	            params = [new Parameter("workspaceName", preferenceWS), new Parameter("actionName",Utils.formatNodeName(act.getName()))] ;
-	            strActs += "<a class=\"MenuItem\" style='display: block;' onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + uiCustomActionComponent.event("Custom",Utils.formatNodeName(nodePath),params) + "\">" ;
+	            strActs += "<a class=\"MenuItem\" style='display: block;'  href=\"" + uiCustomActionComponent.event("Custom",Utils.formatNodeName(nodePath),params) + "\">" ;
 	            strActs += "  <div class=\"ItemIcon " + Utils.getNodeTypeIcon(act, "16x16Icon") + "\">$actName</div>" ;
 	            strActs += "</a>" ;
 	          }            

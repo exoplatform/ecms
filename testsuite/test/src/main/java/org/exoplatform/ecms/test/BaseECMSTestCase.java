@@ -16,11 +16,13 @@
  */
 package org.exoplatform.ecms.test;
 
-import static org.testng.AssertJUnit.fail;
-
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
+import org.exoplatform.commons.testing.BaseExoTestCase;
+import org.exoplatform.component.test.ConfigurationUnit;
+import org.exoplatform.component.test.ConfiguredBy;
+import org.exoplatform.component.test.ContainerScope;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
@@ -29,6 +31,8 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.impl.core.SessionImpl;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.rest.impl.ApplicationContextImpl;
 import org.exoplatform.services.rest.impl.ProviderBinder;
@@ -38,14 +42,22 @@ import org.exoplatform.services.security.ConversationState;
 
 /**
  * Created by The eXo Platform SAS
- * Author : Lai Trung Hieu
- *          hieult@exoplatform.com
- * Jun 6, 2012  
+ * @author : Pham Duy Dong
+ *          dongpd@exoplatform.com
  */
-public class BaseECMSTestCase extends AbstractECMSTestCase {  
 
+@ConfiguredBy({
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.portal-configuration.xml"),
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.identity-configuration.xml"),
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-test-configuration.xml"),
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/portal/mock-rest-configuration.xml")
+})
+public abstract class BaseECMSTestCase extends BaseExoTestCase {
+
+  protected static Log                  log                    = ExoLogger.getLogger("org.exoplatform.ecms.test");
+  
   protected PortalContainer        container;
-
+  
   protected ProviderBinder         providers;
 
   protected ResourceBinder         binder;
@@ -75,10 +87,28 @@ public class BaseECMSTestCase extends AbstractECMSTestCase {
   protected final String           COLLABORATION_WS = "collaboration";
   
   @Override
-  protected void afterContainerStart() {
+  public void setUp() throws Exception {
+    begin();
     initServices();
   }
 
+  @Override
+  public void tearDown() throws Exception {
+
+    removeAllData();
+    end();
+  }
+
+  private void removeAllData() {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @SuppressWarnings("unchecked")
+  public <T> T getService(Class<T> clazz) {
+    return (T) getContainer().getComponentInstanceOfType(clazz);
+  }
+  
   /**
    * Apply a system session
    * @throws RepositoryConfigurationException 
@@ -117,7 +147,6 @@ public class BaseECMSTestCase extends AbstractECMSTestCase {
     ((DumpThreadLocalSessionProviderService)sessionProviderService_).applyUserSession(session);
   }
   
-
   private void initServices(){
     container = PortalContainer.getInstance();
     orgService = (OrganizationService) container.getComponentInstanceOfType(OrganizationService.class);
@@ -145,6 +174,7 @@ public class BaseECMSTestCase extends AbstractECMSTestCase {
     sessionProviderService_.removeSessionProvider(null);
     ConversationState.setCurrent(null);
   }
+  
   /**
    * Close current session
    */
@@ -156,5 +186,4 @@ public class BaseECMSTestCase extends AbstractECMSTestCase {
       ((DumpThreadLocalSessionProviderService) sessionProviderService_).applyUserSession(null);
     }
   }
-
 }

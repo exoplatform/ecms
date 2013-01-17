@@ -191,10 +191,10 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
           .append("\" value=\"\"/></div>");
   }
 
-  public void activate() throws Exception {
+  public void activate() {
   }
 
-  public void deActivate() throws Exception {
+  public void deActivate() {
   }
 
   public void update(Preference pref) {

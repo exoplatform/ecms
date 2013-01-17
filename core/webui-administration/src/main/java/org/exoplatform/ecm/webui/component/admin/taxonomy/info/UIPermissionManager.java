@@ -18,15 +18,17 @@ package org.exoplatform.ecm.webui.component.admin.taxonomy.info;
 
 import javax.jcr.Node;
 
-import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.ecm.permission.info.UIPermissionInputSet;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIGrid;
+import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.event.Event;
@@ -46,6 +48,8 @@ import org.exoplatform.webui.organization.account.UIUserSelector;
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
 
 public class UIPermissionManager extends UIContainer implements UIPopupComponent{
+  private static final Log LOG = ExoLogger.getLogger(UIPermissionManager.class.getName());
+
   public UIPermissionManager() throws Exception {
     addChild(UIPermissionInfo.class, null, null);
     addChild(UIPermissionForm.class, null, null);
@@ -75,9 +79,16 @@ public class UIPermissionManager extends UIContainer implements UIPopupComponent
     uiPopup.setResizable(true) ;
   }
 
-  public void activate() throws Exception {
-    getChild(UIPermissionInfo.class).updateGrid() ;
+  public void activate() {
+    try {
+      getChild(UIPermissionInfo.class).updateGrid();
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error!", e.getMessage());
+      }
+    }
   }
+  
   public void checkPermissonInfo(Node node) throws Exception {
     if(node.isLocked()){
       String lockToken = LockUtil.getLockToken(node);
@@ -99,7 +110,7 @@ public class UIPermissionManager extends UIContainer implements UIPopupComponent
       }
     }
   }
-  public void deActivate() throws Exception {}
+  public void deActivate() {}
 
   static  public class AddUserActionListener extends EventListener<UIUserSelector> {
     public void execute(Event<UIUserSelector> event) throws Exception {

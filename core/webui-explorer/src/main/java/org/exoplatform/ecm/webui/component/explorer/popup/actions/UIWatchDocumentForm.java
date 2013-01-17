@@ -23,18 +23,20 @@ import javax.jcr.Node;
 import javax.jcr.lock.LockException;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.services.cms.watch.WatchDocumentService;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
+import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormSelectBox;
 
@@ -55,6 +57,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
     }
 )
 public class UIWatchDocumentForm extends UIForm implements UIPopupComponent {
+  private static final Log LOG  = ExoLogger.getLogger(UIWatchDocumentForm.class.getName());
 
   final static public String NOTIFICATION_TYPE = "notificationType" ;
   final static public String NOTIFICATION_BY_EMAIL = "Email" ;
@@ -98,12 +101,18 @@ public class UIWatchDocumentForm extends UIForm implements UIPopupComponent {
     return watchService.getNotificationType(getWatchNode(), getUserName()) ;
   }
 
-  public void activate() throws Exception {
-    if(!isWatching()) setActions(new String[] {"Watch", "Cancel"}) ;
-    else setActions(new String[] {"Unwatch", "Cancel"}) ;
+  public void activate() {
+    try {
+      if(!isWatching()) setActions(new String[] {"Watch", "Cancel"}) ;
+      else setActions(new String[] {"Unwatch", "Cancel"}) ;
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error!", e.getMessage());
+      }
+    }
   }
 
-  public void deActivate() throws Exception {
+  public void deActivate() {
   }
 
   static  public class CancelActionListener extends EventListener<UIWatchDocumentForm> {

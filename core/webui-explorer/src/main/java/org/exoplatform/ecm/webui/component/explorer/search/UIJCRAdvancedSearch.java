@@ -129,9 +129,9 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
   public void setIsEdit(boolean isEdit) { isEdit_ = isEdit ; }
   public boolean isEdit() { return isEdit_ ; }
 
-  public void activate() throws Exception {}
+  public void activate() {}
 
-  public void deActivate() throws Exception {}
+  public void deActivate() {}
 
   static  public class CancelActionListener extends EventListener<UIJCRAdvancedSearch> {
     public void execute(Event<UIJCRAdvancedSearch> event) throws Exception {

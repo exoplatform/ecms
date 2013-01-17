@@ -224,7 +224,7 @@ public abstract class BaseTest extends TestCase
       DocumentData document =
          storageA.createDocument(folder, documentTypeDefinition, properties, content, null, null,
             versioningState == null ? VersioningState.MAJOR : versioningState);
-      return (DocumentData)document;
+      return document;
    }
    
    protected FolderData createFolder(FolderData folder, String name, String typeId) throws Exception

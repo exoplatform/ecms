@@ -96,8 +96,8 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
   public UISymLinkForm() throws Exception {
   }
 
-  public void activate() throws Exception {}
-  public void deActivate() throws Exception {}
+  public void activate() {}
+  public void deActivate() {}
 
   public void initFieldInput() throws Exception {
     UIFormMultiValueInputSet uiFormMultiValue = createUIComponent(UIFormMultiValueInputSet.class,

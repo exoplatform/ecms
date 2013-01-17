@@ -188,7 +188,7 @@ import org.exoplatform.webui.form.UIForm;
    *
    * @see org.exoplatform.ecm.webui.popup.UIPopupComponent#activate()
    */
-  public void activate() throws Exception {
+  public void activate() {
   }
 
   /*
@@ -196,7 +196,7 @@ import org.exoplatform.webui.form.UIForm;
    *
    * @see org.exoplatform.ecm.webui.popup.UIPopupComponent#deActivate()
    */
-  public void deActivate() throws Exception {
+  public void deActivate() {
   }
 
   /**

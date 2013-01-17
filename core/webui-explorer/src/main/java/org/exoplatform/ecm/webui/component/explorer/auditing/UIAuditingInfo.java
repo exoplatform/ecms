@@ -43,8 +43,8 @@ public class UIAuditingInfo extends UIContainer implements UIPopupComponent {
     uiPageIterator_ = addChild(UIPageIterator.class, null, "AuditingInfoIterator");
   }
 
-  public void activate() throws Exception { }
-  public void deActivate() throws Exception { }
+  public void activate() { }
+  public void deActivate() { }
 
   public Node getCurrentNode() throws Exception {
     return getAncestorOfType(UIJCRExplorer.class).getCurrentNode();

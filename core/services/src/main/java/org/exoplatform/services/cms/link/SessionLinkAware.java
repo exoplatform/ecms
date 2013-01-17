@@ -51,6 +51,7 @@ import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.core.NamespaceAccessor;
 import org.exoplatform.services.jcr.core.SessionLifecycleListener;
 import org.exoplatform.services.jcr.impl.core.LocationFactory;
+import org.exoplatform.services.jcr.impl.core.SessionImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -71,7 +72,7 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
   private static final Log LOG  = ExoLogger.getLogger(SessionLinkAware.class.getName());
 
   private ItemLinkAware itemLA;
-  
+
   private final String originalWorkspace;
 
   private volatile ExtendedSession[] sessions;
@@ -95,11 +96,11 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
     }
     return sessions;
   }
-  
+
   private ExtendedSession getSession() throws RepositoryException {
     return (ExtendedSession)itemLA.getItemSession();
   }
-  
+
   private ExtendedSession getOriginalSession() throws RepositoryException {
     return (ExtendedSession)WCMCoreUtils.getUserSessionProvider().
                     getSession(originalWorkspace, WCMCoreUtils.getRepository());
@@ -586,7 +587,7 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
       boolean exportChildVersionHisotry) throws IOException, PathNotFoundException, RepositoryException {
     getTargetSession().exportSystemView(absPath, out, skipBinary, noRecurse, exportChildVersionHisotry);
   }
-  
+
   @Override
   public XAResource getXAResource() {
     try {
@@ -595,7 +596,7 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
       return null;
     }
   }
-  
+
   @Override
   public boolean hasExpired() {
     try {
@@ -604,7 +605,7 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
       return true;
     }
   }
-  
+
   @Override
   public void setTimeout(long timeout) {
     try {
@@ -613,13 +614,35 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
       LOG.warn(e.getMessage());
     }
   }
-  
+
   @Override
   public long getTimeout() {
     try {
       return getTargetSession().getTimeout();
     } catch (RepositoryException e) {
       return 0;
+    }
+  }
+
+  @Override
+  public void move(String srcAbsPath,
+                   String destAbsPath,
+                   boolean triggerEventsForDescendentsOnRename) throws ItemExistsException,
+                                                               PathNotFoundException,
+                                                               VersionException,
+                                                               ConstraintViolationException,
+                                                               LockException,
+                                                               RepositoryException {
+    Item srcItem = getItem(srcAbsPath);
+    Session srcSession = getTargetSession(srcAbsPath, srcItem);
+    Session destParentSession = getTargetSession(LinkUtils.getParentPath(destAbsPath));
+    if (srcSession.getWorkspace().equals(destParentSession.getWorkspace())) {
+      ((SessionImpl)srcSession).move(srcAbsPath, srcAbsPath, triggerEventsForDescendentsOnRename);
+    } else {
+      destParentSession.getWorkspace().clone(srcSession.getWorkspace().getName(),
+                                             srcAbsPath,
+                                             destAbsPath,
+                                             false);
     }
   }
 }

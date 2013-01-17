@@ -23,6 +23,7 @@ import java.util.ResourceBundle;
 
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.Page;
+import org.exoplatform.portal.mop.page.PageContext;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -226,9 +227,7 @@ public class UIPublicationTree extends UITree {
       UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
       for(UserNode pNode: userNodes) {
         if (pNode.getPageRef() == null) continue;
-        Page page = userPortalConfigService.getPage(pNode.getPageRef(),
-                                                    org.exoplatform.portal.webui.util.Util.getPortalRequestContext()
-                                                                                          .getRemoteUser());
+        PageContext page = userPortalConfigService.getPage(pNode.getPageRef());
         if (page == null) continue;
         TreeNode treeNode = new TreeNode(portalName, navigation, resourceBundle, true);
         treeNode.setUserNode(pNode);
@@ -248,19 +247,19 @@ public class UIPublicationTree extends UITree {
      * @throws Exception the exception
      */
     public TreeNode searchTreeNodeByURI(String uri) throws Exception {
-         
+
       /**
       * TODO: the API for loading navigations was changed (replaced [PageNavigation, PageNode] by [UserNavigation, UserNode])
       * after refactoring, PageNavigationUtils class was removed from inside API so we can't use this class any more
-      * 
-      * UIPublicationTree class is useless in ECMS project now, 
+      *
+      * UIPublicationTree class is useless in ECMS project now,
       * so we've temporarily commented some lines below and we will refactor them later
-      */    
+      */
       //      if (uri.equals("/" + portalName)) {
       //        TreeNode treeNode = new TreeNode(portalName, navigation, resourceBundle, false);
       //        treeNode.setChildrenByPageNodes(navigation.getNodes());
       //        return treeNode;
-      //      }   
+      //      }
       //      String pageNodeURI = StringUtils.substringAfter(uri, "/" + portalName + "/");
       //      PageNode other = PageNavigationUtils.searchPageNodeByUri(this.navigation, pageNodeURI);
       //      if(other == null) return null;
