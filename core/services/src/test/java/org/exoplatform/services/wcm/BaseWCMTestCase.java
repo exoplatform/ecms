@@ -16,9 +16,6 @@
  */
 package org.exoplatform.services.wcm;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.fail;
-
 import java.util.Date;
 
 import javax.jcr.Node;
@@ -37,6 +34,8 @@ import org.exoplatform.services.jcr.impl.core.NodeImpl;
  * Jul 14, 2009
  */
 @ConfiguredBy({
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.portal-configuration.xml"),
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.identity-configuration.xml"),
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-test-configuration.xml"),
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-core-service-test-configuration.xml") 
   })
@@ -110,17 +109,6 @@ public abstract class BaseWCMTestCase extends BaseECMSTestCase {
   protected String execTime(long from) {
     return Math.round(((System.currentTimeMillis() - from) * 100.00d / 60000.00d)) / 100.00d
     + "min";
-  }
-
-  /**
-   * Gets the service.
-   *
-   * @param clazz the clazz
-   *
-   * @return the service
-   */
-  protected <T> T getService(Class<T> clazz) {
-    return clazz.cast(container.getComponentInstanceOfType(clazz));
   }
 
   /**

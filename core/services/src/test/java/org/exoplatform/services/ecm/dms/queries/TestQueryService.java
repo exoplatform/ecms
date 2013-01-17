@@ -16,10 +16,6 @@
  */
 package org.exoplatform.services.ecm.dms.queries;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertNotNull;
-import static org.testng.AssertJUnit.assertNull;
-
 import java.util.List;
 
 import javax.jcr.Node;
@@ -34,9 +30,6 @@ import org.exoplatform.services.cms.queries.QueryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SARL Author : Ly Dinh Quang
@@ -52,19 +45,16 @@ public class TestQueryService extends BaseWCMTestCase {
   private String               baseQueriesPath;
 
   private String               relativePath = "Private/Searches";
-
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
+  
+  private static final String[] USERS = {"john", "root", "demo"};
+  
+  public void setUp() throws Exception {
+    super.setUp();
     queryService = (QueryService) container.getComponentInstanceOfType(QueryService.class);
     nodeHierarchyCreator = (NodeHierarchyCreator) container
         .getComponentInstanceOfType(NodeHierarchyCreator.class);
     baseUserPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH);
     baseQueriesPath = nodeHierarchyCreator.getJcrPath(BasePath.QUERIES_PATH);
-  }
-  
-  @BeforeMethod
-  public void setUp() throws Exception {
     applySystemSession();
   }
 
@@ -77,7 +67,6 @@ public class TestQueryService extends BaseWCMTestCase {
    *    AllArticles node
    * @throws Exception
    */
-  @Test
   public void testInit() throws Exception {
     Session mySession = sessionProviderService_.getSystemSessionProvider(null).getSession(DMSSYSTEM_WS, repository);
     Node queriesHome = (Node) mySession.getItem(baseQueriesPath);
@@ -97,20 +86,20 @@ public class TestQueryService extends BaseWCMTestCase {
    *    node: name = "QueryAll" not null;
    * @throws Exception
    */
-  @Test
   public void testAddQuery() throws Exception {
     queryService.addQuery("QueryAll", "Select * from nt:base", "sql", "root");
-    String userPath = baseUserPath + "/root/" + relativePath;
+    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, "root");
+    String userPath = userNode.getPath() + "/" +  relativePath;
     Node nodeSearch = (Node) session.getItem(userPath);
     Node queryAll = nodeSearch.getNode("QueryAll");
     assertNotNull(queryAll);
   }
   
-  @Test
   public void testGetQuery() throws Exception {
-    queryService.addQuery("QueryAll", "Select * from nt:base", "sql", "demo");
-    String queryPath = baseUserPath + "/demo/" + relativePath + "/QueryAll";
-    assertNotNull(queryService.getQuery(queryPath, COLLABORATION_WS, sessionProvider, "demo"));
+    queryService.addQuery("QueryAll", "Select * from nt:base", "sql", "john");
+    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, "john");
+    String queryPath = userNode.getPath() + "/" +  relativePath + "/QueryAll";
+    assertNotNull(queryService.getQuery(queryPath, COLLABORATION_WS, sessionProvider, "john"));
   }
 
   /**
@@ -129,7 +118,6 @@ public class TestQueryService extends BaseWCMTestCase {
    * Expect: Size of list node = 0
    * @throws Exception
    */
-  @Test
   public void testGetQueries() throws Exception {
     SessionProvider sessionProvider = sessionProviderService_.getSystemSessionProvider(null);
     queryService.addQuery("QueryAll1", "Select * from nt:base", "sql", "root");
@@ -164,13 +152,13 @@ public class TestQueryService extends BaseWCMTestCase {
    *    exception: Query path not found!
    * @throws Exception
    */
-  @Test
   public void testRemoveQuery() throws Exception {
     SessionProvider sessionProvider = sessionProviderService_.getSystemSessionProvider(null);
     queryService.addQuery("QueryAll1", "Select * from nt:base", "sql", "root");
     List<Query> listQuery = queryService.getQueries("root", sessionProvider);
     assertEquals(listQuery.size(), 1);
-    String queryPathRoot = baseUserPath + "/root/" + relativePath + "/QueryAll1";
+    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, "root");
+    String queryPathRoot = userNode.getPath() + "/" +  relativePath + "/QueryAll1";
     queryService.removeQuery(queryPathRoot, "root");
     listQuery = queryService.getQueries("root", sessionProvider);
     assertEquals(listQuery.size(), 0);
@@ -196,18 +184,18 @@ public class TestQueryService extends BaseWCMTestCase {
    *    node: query node is null
    * @throws Exception
    */
-  @Test
   public void testGetQueryByPath() throws Exception {
     SessionProvider sessionProvider = sessionProviderService_.getSystemSessionProvider(null);
+    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, "root");
     queryService.addQuery("QueryAll1", "Select * from nt:base", "sql", "root");
     queryService.addQuery("QueryAll2", "//element(*, exo:article)", "xpath", "root");
 
-    String queryPath1 = baseUserPath + "/root/" + relativePath + "/QueryAll1";
+    String queryPath1 = userNode.getPath() + "/" +  relativePath + "/QueryAll1";
     Query query = queryService.getQueryByPath(queryPath1, "root", sessionProvider);
     assertNotNull(query);
     assertEquals(query.getStatement(), "Select * from nt:base");
 
-    String queryPath2 = baseUserPath + "/root/" + relativePath + "/QueryAll3";
+    String queryPath2 = userNode.getPath() + "/" +  relativePath + "/QueryAll3";
     query = queryService.getQueryByPath(queryPath2, "root", sessionProvider);
     assertNull(query);
   }
@@ -225,7 +213,6 @@ public class TestQueryService extends BaseWCMTestCase {
    *      exo:accessPermissions = *:/platform/administrators
    * @throws Exception
    */
-  @Test
   public void testAddSharedQuery() throws Exception {
     Session mySession = sessionProviderService_.getSystemSessionProvider(null).getSession(DMSSYSTEM_WS, repository);
     queryService.addSharedQuery("QueryAll1", "Select * from nt:base", "sql",
@@ -264,7 +251,6 @@ public class TestQueryService extends BaseWCMTestCase {
    *      exo:accessPermissions = *:/platform/administrators
    * @throws Exception
    */
-  @Test
   public void testGetSharedQuery() throws Exception {
     SessionProvider sessionProvider = sessionProviderService_.getSystemSessionProvider(null);
     queryService.addSharedQuery("QueryAll1", "Select * from nt:base", "sql",
@@ -298,7 +284,6 @@ public class TestQueryService extends BaseWCMTestCase {
    *    node: name = "QueryAll1" is removed
    * @throws Exception
    */
-  @Test
   public void testRemoveSharedQuery() throws Exception {
     queryService.addSharedQuery("QueryAll1",
                                 "Select * from nt:base",
@@ -346,7 +331,6 @@ public class TestQueryService extends BaseWCMTestCase {
    *    Size of listNode = 1, contains QueryAll2
    * @throws Exception
    */
-  @Test
   public void testGetSharedQueries() throws Exception {
     SessionProvider sessionProvider = sessionProviderService_.getSystemSessionProvider(null);
     queryService.addSharedQuery("QueryAll1", "Select * from nt:base", "sql",
@@ -388,7 +372,6 @@ public class TestQueryService extends BaseWCMTestCase {
    *    exception: Query Path not found!
    * @throws Exception
    */
-  @Test
   public void testExecute() throws Exception {
     SessionProvider sessionProvider = sessionProviderService_.getSystemSessionProvider(null);
     queryService.addSharedQuery("QueryAll1",
@@ -411,28 +394,17 @@ public class TestQueryService extends BaseWCMTestCase {
     queriesHome.save();
   }
 
-  @AfterMethod
   public void tearDown() throws Exception {
-    try {
-      Session mySession = sessionProviderService_.getSystemSessionProvider(null).getSession(COLLABORATION_WS, repository);
-      Node nodeUser = (Node) mySession.getItem(baseUserPath);
-      NodeIterator iter = nodeUser.getNodes();
-      while (iter.hasNext()) {
-        try {
-          Node node = iter.nextNode().getNode(relativePath);
-          node.remove();
-        } catch (Exception ex) {}
+    Session mySession = sessionProviderService_.getSystemSessionProvider(null).getSession(COLLABORATION_WS, repository);
+    for (String user : USERS) {
+      try {
+        Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, user);
+        String searchPaths = userNode.getPath() + "/" +  relativePath;
+        ((Node)mySession.getItem(searchPaths)).remove();
+        mySession.save();
+      } catch (PathNotFoundException e) {
       }
-      mySession.save();
-
-//      mySession = sessionProviderService_.getSystemSessionProvider(null).getSession(DMSSYSTEM_WS, repository);
-//      Node nodeQueryHome = (Node) mySession.getItem(baseQueriesPath);
-//      iter = nodeQueryHome.getNodes();
-//      while (iter.hasNext()) {
-//      	iter.nextNode().remove();
-//      }
-//      mySession.save();
-    } catch (PathNotFoundException e) {
     }
+    super.tearDown();
   }
 }

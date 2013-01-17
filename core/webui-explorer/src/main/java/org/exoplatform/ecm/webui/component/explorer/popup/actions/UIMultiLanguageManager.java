@@ -21,14 +21,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.resources.LocaleConfig;
 import org.exoplatform.services.resources.LocaleConfigService;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIContainer;
+import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.model.SelectItemOption;
 
 /**
@@ -40,17 +42,24 @@ import org.exoplatform.webui.core.model.SelectItemOption;
  */
 @ComponentConfig(template = "system:/groovy/webui/core/UITabPane.gtmpl")
 public class UIMultiLanguageManager extends UIContainer implements UIPopupComponent {
+  private static final Log LOG  = ExoLogger.getLogger(UIDocumentFormController.class.getName());
 
   public UIMultiLanguageManager() throws Exception {
     addChild(UIMultiLanguageForm.class, null, null) ;
     addChild(UIAddLanguageContainer.class, null, null).setRendered(false) ;
   }
 
-  public void activate() throws Exception {
-    UIMultiLanguageForm uiForm = getChild(UIMultiLanguageForm.class) ;
-    uiForm.doSelect(getAncestorOfType(UIJCRExplorer.class).getCurrentNode()) ;
+  public void activate() {
+    try {
+      UIMultiLanguageForm uiForm = getChild(UIMultiLanguageForm.class) ;
+      uiForm.doSelect(getAncestorOfType(UIJCRExplorer.class).getCurrentNode()) ;
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error!", e.getMessage());
+      }
+    }
   }
-  public void deActivate() throws Exception {}
+  public void deActivate() {}
 
   public List<SelectItemOption<String>> languages() throws Exception {
     

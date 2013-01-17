@@ -21,11 +21,11 @@
 	int left = uicomponent.getWindowLeft();
 	
 	if(uicomponent.isShow()) {
-	  jsManager.require("SHARED/webui", "webui").
-	  addScripts("webui.UIPopupWindow.show('$popupId', $uicomponent.showMask);");
+	  jsManager.require("SHARED/uiPopupWindow", "uiPopupWindow").
+	  addScripts("uiPopupWindow.show('$popupId', $uicomponent.showMask);");
 	} else if (rcontext.useAjax()) {
-    jsManager.require("SHARED/webui", "webui").
-    addScripts("webui.UIPopupWindow.hide('$popupId', $uicomponent.showMask);");
+    jsManager.require("SHARED/uiPopupWindow", "uiPopupWindow").
+    addScripts("uiPopupWindow.hide('$popupId', $uicomponent.showMask);");
 	}	
 	
 	String title = rsId;

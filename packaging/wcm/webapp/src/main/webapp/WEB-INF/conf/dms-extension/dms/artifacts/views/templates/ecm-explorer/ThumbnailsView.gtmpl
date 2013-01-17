@@ -36,8 +36,9 @@
   def rcontext = _ctx.getRequestContext() ;
   def jsManager = rcontext.getJavascriptManager();
   jsManager.require("SHARED/ecm-utils", "ecmutil").
-            require("SHARED/explorer-module", "explorer").
-  addScripts("explorer.UISimpleView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');").
+            require("SHARED/uiSimpleView", "uiSimpleView").
+            require("SHARED/multiUpload", "multiUpload").
+  addScripts("uiSimpleView.UISimpleView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');").
 	addScripts("ecmutil.ECMUtils.initClipboard('clip_button','1','$size');");
 %>
 <div id="$componentId">
@@ -153,7 +154,7 @@
                 for(act in customActs) {
                   String actName = act.getProperty("exo:name").getValue().getString() ;
                   params = [new Parameter("workspaceName", preferenceWS), new Parameter("actionName",act.getName())] ;
-                  strActs += "<a class=\"MenuItem\" style='display: block;' onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + uiCustomActionComponent.event("Custom",nodePath,params) + "\">" ;
+                  strActs += "<a class=\"MenuItem\" style='display: block;' href=\"" + uiCustomActionComponent.event("Custom",nodePath,params) + "\">" ;
                   strActs += "  <div class=\"ItemIcon " + Utils.getNodeTypeIcon(act, "16x16Icon") + "\">$actName</div>" ;
                   strActs += "</a>" ;
                   }            

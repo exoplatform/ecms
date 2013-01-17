@@ -27,8 +27,8 @@
  %>
  <%
   def rcontext = _ctx.getRequestContext() ;
-  rcontext.getJavascriptManager().require("SHARED/explorer-module", "explorer").
-  addScripts('explorer.UIJCRExplorer.loadNodeTypeScroll();');
+  rcontext.getJavascriptManager().require("SHARED/uiJCRExplorer", "uiJCRExplorer").
+  addScripts('uiJCRExplorer.UIJCRExplorer.loadNodeTypeScroll();');
 
 %>
 

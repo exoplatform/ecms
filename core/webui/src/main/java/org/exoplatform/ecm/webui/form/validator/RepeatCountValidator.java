@@ -20,7 +20,7 @@ import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.form.UIFormInput;
 import org.exoplatform.webui.form.validator.Validator;
-import org.quartz.SimpleTrigger;
+import org.quartz.impl.triggers.SimpleTriggerImpl;
 
 /**
  * Created by The eXo Platform SARL
@@ -33,7 +33,7 @@ public class RepeatCountValidator implements Validator {
   public void validate(UIFormInput uiInput) throws Exception {
     try {
       int repeatCount = Integer.parseInt(uiInput.getValue().toString()) ;
-      new SimpleTrigger().setRepeatCount(repeatCount) ;
+      new SimpleTriggerImpl().setRepeatCount(repeatCount) ;
     } catch(Exception e) {
       throw new MessageException(
           new ApplicationMessage("RepeatCountValidator.msg.invalid-value", null, ApplicationMessage.WARNING)) ;

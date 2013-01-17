@@ -17,12 +17,10 @@
     <type>org.exoplatform.services.scheduler.impl.QuartzSheduler</type>
   </component>
   
-  <import>classpath:/conf/standalone/core/ecms-test-core-configuration.xml</import>
+  <import>classpath:/conf/standalone/jcr/exo.ecms.test.jcr-configuration.xml</import>
+  <import>classpath:/conf/standalone/jcr/ecms-test-system-configuration.xml</import>
+  <import>classpath:/conf/standalone/jcr/ecms-test-wcmjcr-configuration.xml</import>
   <import>classpath:/conf/standalone/core/ecms-test-organization-configuration.xml</import>
   <import>classpath:/conf/standalone/core/rest/ecms-test-rest-configuration.xml</import>
-  <import>classpath:/conf/standalone/jcr/ecms-test-jcr-configuration.xml</import>
-  <import>classpath:/conf/standalone/jcr/ecms-test-wcmjcr-configuration.xml</import>
-  <import>classpath:/conf/standalone/jcr/ecms-test-system-configuration.xml</import>
   <import>classpath:/conf/standalone/portal/ecms-test-portal-configuration.xml</import>
-
 </configuration>

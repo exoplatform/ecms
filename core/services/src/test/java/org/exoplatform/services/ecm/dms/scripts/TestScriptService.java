@@ -16,12 +16,6 @@
  */
 package org.exoplatform.services.ecm.dms.scripts;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertNotNull;
-import static org.testng.AssertJUnit.assertNull;
-import static org.testng.AssertJUnit.assertTrue;
-import static org.testng.AssertJUnit.fail;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,9 +26,6 @@ import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.scripts.ScriptService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SARL
@@ -49,16 +40,11 @@ public class TestScriptService extends BaseWCMTestCase {
   private String cmsScriptsPath;
   private Session sessionDMS;
   
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
+  public void setUp() throws Exception {
+    super.setUp();
     scriptService = (ScriptService)container.getComponentInstanceOfType(ScriptService.class);
     nodeHierarchyCreator = (NodeHierarchyCreator)container.getComponentInstanceOfType(NodeHierarchyCreator.class);
     cmsScriptsPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_SCRIPTS_PATH);
-  }
-  
-  @BeforeMethod
-  public void setUp() throws Exception {
     applySystemSession();
     sessionDMS = sessionProviderService_.getSystemSessionProvider(null).getSession(DMSSYSTEM_WS, repository);
   }
@@ -71,7 +57,6 @@ public class TestScriptService extends BaseWCMTestCase {
    * Expect: Return all data initiated from repository in test-scripts-configuration.xml file
    * @throws Exception
    */
-  @Test
   public void testInitRepo() throws Exception {
     scriptService.initRepo();
     assertTrue(sessionDMS.itemExists(cmsScriptsPath));
@@ -87,7 +72,6 @@ public class TestScriptService extends BaseWCMTestCase {
    * Expect: Return "/exo:ecm/scripts/ecm-explorer" is path of node for ECM Explorer Scripts
    * @throws Exception
    */
-  @Test
   public void testGetECMScriptHome() throws Exception {
     assertNotNull(scriptService.getECMScriptHome(sessionProviderService_.getSystemSessionProvider(null)));
     assertEquals(expectedECMScriptHomePath, scriptService.getECMScriptHome(
@@ -102,7 +86,6 @@ public class TestScriptService extends BaseWCMTestCase {
    * Expect: Return All node for ECM Action Scripts
    * @throws Exception
    */
-  @Test
   public void testGetECMActionScripts() throws Exception {
     List<Node> listECMScripts = scriptService.getECMActionScripts(sessionProviderService_.getSystemSessionProvider(null));
     assertTrue(listECMScripts.size() >0);
@@ -122,7 +105,6 @@ public class TestScriptService extends BaseWCMTestCase {
    * Expect: Return All node for ECM Interceptor Scripts
    * @throws Exception
    */
-  @Test
   public void testGetECMInterceptorScripts() throws Exception {
     List<Node> listECMInterceptorcripts = scriptService.getECMInterceptorScripts(
         sessionProviderService_.getSystemSessionProvider(null));
@@ -143,7 +125,6 @@ public class TestScriptService extends BaseWCMTestCase {
    * Expect: Return All node for ECM Widget Scripts
    * @throws Exception
    */
-  @Test
   public void testGetECMWidgetScripts() throws Exception {
     List<Node> listECMWidgetScripts = scriptService.getECMWidgetScripts(sessionProviderService_.getSystemSessionProvider(null));
     assertTrue(listECMWidgetScripts.size() >0);
@@ -164,7 +145,6 @@ public class TestScriptService extends BaseWCMTestCase {
    * Expect: Return script
    * @throws Exception
    */
-  @Test
   public void testGetScript() throws Exception {
     assertNotNull(scriptService.getScript("content-browser/GetDocuments.groovy"));
     try {
@@ -179,7 +159,6 @@ public class TestScriptService extends BaseWCMTestCase {
    * Expect: Return "/exo:ecm/scripts" is base path of script
    * @throws Exception
    */
-  @Test
   public void testGetBaseScriptPath() throws Exception {
     assertEquals(expectedBaseScriptPath, scriptService.getBaseScriptPath());
   }
@@ -195,7 +174,6 @@ public class TestScriptService extends BaseWCMTestCase {
    * Expect: Insert a new script
    * @throws Exception
    */
-  @Test
   public void testAddScript() throws Exception {
     scriptService.addScript("Hello Name", "Hello Text", sessionProviderService_.getSystemSessionProvider(null));
     Node hello = (Node)sessionDMS.getItem("/exo:ecm/scripts/Hello Name");
@@ -213,7 +191,6 @@ public class TestScriptService extends BaseWCMTestCase {
    * Expect: Return script node
    * @throws Exception
    */
-  @Test
   public void testGetScriptNode() throws Exception {
     scriptService.addScript("My script 2", "This is my script as text 2", sessionProviderService_.getSystemSessionProvider(null));
 
@@ -232,7 +209,6 @@ public class TestScriptService extends BaseWCMTestCase {
    * Expect: remove the script
    * @throws Exception
    */
-  @Test
   public void testRemoveScript() throws Exception {
     scriptService.addScript("Hello Name", "Hello Text", sessionProviderService_.getSystemSessionProvider(null));
 
@@ -247,7 +223,6 @@ public class TestScriptService extends BaseWCMTestCase {
   /**
    * Clean all scripts for testing
    */
-  @AfterMethod
   public void tearDown() throws Exception {
     Node rootScripts = (Node)sessionDMS.getItem(cmsScriptsPath);
     String[] paths = new String[] {"My script", "My script 2", "Hello Name"};
@@ -257,5 +232,6 @@ public class TestScriptService extends BaseWCMTestCase {
       }
     }
     sessionDMS.save();
+    super.tearDown();
   }
 }

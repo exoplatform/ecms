@@ -9,66 +9,69 @@
 		<link type="text/css" rel="stylesheet" href="../../../eXoWCMResources/skin/DefaultSkin/DMSStylesheet.css"/>
 		<link type="text/css" rel="stylesheet" href="../../../eXoWCMResources/skin/DefaultSkin/WCMStylesheet.css"/>
 		<link type="text/css" rel="stylesheet" href="css/content.css"/>
-		<script type="text/javascript">
-     if (!window._module) {
-       window._module = {};
-     }   
-     </script>
-		<script type="text/javascript" src="../../../eXoResources/javascript/jquery-1.7.1.js"></script>		
+		<script type="text/javascript" src="../../../eXoResources/javascript/jquery-1.7.1.js"></script>
+		<script type="text/javascript" src="../../../eXoResources/javascript/eXo/core/require.js"></script>
 		<script type="text/javascript" src="../../../eXoResources/javascript/eXo.js"></script>
-		<script type="text/javascript" src="../../../eXoWCMResources/javascript/eXo/wcm/ECM.js"></script>
-		<script type="text/javascript" src="../../../eXoResources/javascript/eXo/core/Util.js"></script>		
-		<script type="text/javascript" src="../../../eXoResources/javascript/eXo/core/Browser.js"></script>
-		<script type="text/javascript" src="../../../eXoResources/javascript/eXo/core/UIMaskLayer.js"></script>
-		<script type="text/javascript" src="../../../eXoWCMResources/javascript/eXo/wcm/backoffice/private/WCMUtils.js"></script>	
-		<script type="text/javascript" src="../../../eXoWCMResources/javascript/eXo/wcm/frontoffice/private/ContentSelector.js"></script>	
-		<script type="text/javascript" src="../../eXoPlugins.js"></script>	
-		<script type="text/javascript" src="js/UploadForm.js"></script>	
 		<script type="text/javascript">
-			var gj=$;
 			var CKEDITOR = window.opener.CKEDITOR || {};
-			eXp.init();      
-			eXp.userLanguage = eXo.ecm.ECS.userLanguage || "en";
-    		eXp.loadScript(window, "lang/" + eXp.userLanguage + ".js"); 
-			var strHTML = "";   
-			if(eXo.ecm.ECS.insertContentType=="Image") {
-				strHTML = "<input type=\"hidden\" name=\"Filter\" id=\"Filter\" value=\"Image\">";
-			} else {
-				strHTML = "<div class=\"FinterTitle\" userLanguage=\"UserLanguage.Filter\"><label for=\"Filter\">Filter</label></div>";
-				strHTML += "<div class=\"FinterInput\"><select class=\"Pinter\" id=\"Filter\" onchange=\"eXo.ecm.ECS.changeFilter();\">";
-				strHTML += "<option value=\"All\" selected=\"selected\" userLanguage=\"UserLanguage.All\">All</option>";
-				strHTML += "<option value=\"Web Contents\" userLanguage=\"UserLanguage.WebContents\">Web Contents</option>";
-				strHTML += "<option value=\"DMS Documents\" userLanguage=\"UserLanguage.DMSDocuments\">DMS Documents</option>";
-				strHTML += "<option value=\"Medias\" userLanguage=\"UserLanguage.Medias\">Medias</option>";
-				strHTML += "</select></div><div class=\"SeparatorLineL\"><span></span></div>";
-			}        			
-			var strView = "";
-			var strViewPresent = "";
-			if(eXo.ecm.ECS.viewType=="list") {
-				strView = "<div id=\"view\" class=\"ViewType\"><a onClick=\"eXo.ecm.ECS.changeViewType('thumbnail');\" title=\"Thumbnail View\" class=\"thumbnail-view\" ><span></span></a><a class=\"list-view-selected\" title=\"List View\"><span></span></a><input type=\"hidden\" id=\"viewTypeID\" value=\"list\"><div style=\"clear:both\"></div></div>";
-				strViewPresent = "<div class=\"ListView\"><table cellspacing=\"0\" style=\"table-layout: fixed; width: 100%;\" id=\"ListRecords\">";
-				strViewPresent += "<thead><tr><th class=\"THBar\" userLanguage=\"UserLanguage.FileName\"> Name </th>";
-				strViewPresent += "<th class=\"THBar\" style=\"width: 120px;\" userLanguage=\"UserLanguage.CreateDate\"> Date </th>";
-				strViewPresent += "<th class=\"THBar\" style=\"width: 80px;\" userLanguage=\"UserLanguage.FileSize\"> Size </th></tr></thead>";
-				strViewPresent += "<tr><td class=\"Item TRNoContent\" colspan=\"3\" userLanguage=\"UserLanguage.NoContent\">There is no content</td></tr></table></div>";
-} else {    
-				strView = "<div id=\"view\" class=\"ViewType\"><a class=\"thumbnail-view-selected\" title=\"Thumbnail View\"><span></span></a><a onClick=\"eXo.ecm.ECS.changeViewType('list');\" class=\"list-view\" title=\"List View\"><span></span></a><input type=\"hidden\" id=\"viewTypeID\" value=\"thumbnail\"><div style=\"clear:both\"></div></div>";								
-				strViewPresent = "<div class=\"UIThumbnailsView\" style=\"overflow-y: auto; overflow-x: hidden;\"><div class=\"ActionIconsContainer\" id=\"ActionIconsContainer\"><div class=\"NoContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div></div></div>";
-			}			
+			require(["../../../eXoResources/javascript/eXo/core/Base.js"], function(base) {
+				window.base = base; require(["../../../eXoResources/javascript/eXo/webui/UIPopup.js"], function(uiPopup) {
+					window.uiPopup = uiPopup; require(["../../../eXoResources/javascript/eXo/core/UIMaskLayer.js"], function(uiMaskLayer) {
+						window.uiMaskLayer = uiMaskLayer; require(["../../../eXoWCMResources/javascript/eXo/wcm/backoffice/private/WCMUtils.js"], function(wcm_utils) {
+							window.wcm_utils = wcm_utils; require(["../../../eXoWCMResources/javascript/eXo/wcm/frontoffice/private/ContentSelector.js"], function(content_selector) {
+								window.content_selector = content_selector; require(["../../eXoPlugins.js"], function() {
+									eXp.init();
+									eXp.userLanguage = eXo.ecm.ECS.userLanguage || "en";
+										eXp.loadScript(window, "lang/" + eXp.userLanguage + ".js");
+									if(eXo.ecm.ECS.insertContentType=="Image") {
+										strHTML = "<input type=\"hidden\" name=\"Filter\" id=\"Filter\" value=\"Image\">";
+									} else {
+										strHTML = "<div class=\"FinterTitle\" userLanguage=\"UserLanguage.Filter\"><label for=\"Filter\">Filter</label></div>";
+										strHTML += "<div class=\"FinterInput\"><select class=\"Pinter\" id=\"Filter\" onchange=\"eXo.ecm.ECS.changeFilter();\">";
+										strHTML += "<option value=\"All\" selected=\"selected\" userLanguage=\"UserLanguage.All\">All</option>";
+										strHTML += "<option value=\"Web Contents\" userLanguage=\"UserLanguage.WebContents\">Web Contents</option>";
+										strHTML += "<option value=\"DMS Documents\" userLanguage=\"UserLanguage.DMSDocuments\">DMS Documents</option>";
+										strHTML += "<option value=\"Medias\" userLanguage=\"UserLanguage.Medias\">Medias</option>";
+										strHTML += "</select></div><div class=\"SeparatorLineL\"><span></span></div>";
+									}
+									document.getElementById("filterAreaID").innerHTML = strHTML;
+
+									if(eXo.ecm.ECS.viewType=="list") {
+										strView = "<div id=\"view\" class=\"ViewType\"><a onClick=\"eXo.ecm.ECS.changeViewType('thumbnail');\" title=\"Thumbnail View\" class=\"thumbnail-view\" ><span></span></a><a class=\"list-view-selected\" title=\"List View\"><span></span></a><input type=\"hidden\" id=\"viewTypeID\" value=\"list\"><div style=\"clear:both\"></div></div>";
+										strViewPresent = "<div class=\"ListView\"><table cellspacing=\"0\" style=\"table-layout: fixed; width: 100%;\" id=\"ListRecords\">";
+										strViewPresent += "<thead><tr><th class=\"THBar\" userLanguage=\"UserLanguage.FileName\"> Name </th>";
+										strViewPresent += "<th class=\"THBar\" style=\"width: 120px;\" userLanguage=\"UserLanguage.CreateDate\"> Date </th>";
+										strViewPresent += "<th class=\"THBar\" style=\"width: 80px;\" userLanguage=\"UserLanguage.FileSize\"> Size </th></tr></thead>";
+										strViewPresent += "<tr><td class=\"Item TRNoContent\" colspan=\"3\" userLanguage=\"UserLanguage.NoContent\">There is no content</td></tr></table></div>";
+									} else {
+										strView = "<div id=\"view\" class=\"ViewType\"><a class=\"thumbnail-view-selected\" title=\"Thumbnail View\"><span></span></a><a onClick=\"eXo.ecm.ECS.changeViewType('list');\" class=\"list-view\" title=\"List View\"><span></span></a><input type=\"hidden\" id=\"viewTypeID\" value=\"thumbnail\"><div style=\"clear:both\"></div></div>";
+										strViewPresent = "<div class=\"UIThumbnailsView\" style=\"overflow-y: auto; overflow-x: hidden;\"><div class=\"ActionIconsContainer\" id=\"ActionIconsContainer\"><div class=\"NoContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div></div></div>";
+									}
+									document.getElementById("viewTypeAreaID").innerHTML = strView;
+									document.getElementById("viewPresentAreaID").innerHTML = strViewPresent;
+								});
+							});
+						});
+					});
+				});
+			});
+			var gj=$;
 		</script>
+
+		<script type="text/javascript" src="../../../eXoWCMResources/javascript/eXo/wcm/ECM.js"></script>
+		<script type="text/javascript" src="js/UploadForm.js"></script>
 </head>
 <body>
 	<div class="UIHomePagePortlet">
 		<div class="UIHomePageDT" >
-			
+
 			<div class="TitleBar">
 				CONTENT SELECTOR
 			</div>
 			<div class="UIWorkingWorkspace">
 				<div class="ActionBar">
-					<script type="text/javascript">
-						document.write(strHTML);
-					</script>	
+					<div id="filterAreaID">
+					</div>
 					<!--
 					<div class="ControlButton InsertLinksIcon">
 						<a href="javascript: void(0);" class="InseartButton">Insert a links</a>
@@ -78,9 +81,9 @@
 					<div class="ControlButton UploadIcon" id="UploadItem" style="display:none;">
 							<a class="Item IconUpload" href="javascript:void(0);" onclick="eXo.ecm.UploadForm.showUploadForm();" userLanguage="UserLanguage.UploadFile">Upload File</a>
 					</div>
-					<!-- ====================================== UPLOAD ============================================-->					
+					<!-- ====================================== UPLOAD ============================================-->
 					<!-- ====================================== SETTING ============================================-->
-					<div class="SettingIcon" onmouseover="" style="position:relative;">	
+					<div class="SettingIcon" onmouseover="" style="position:relative;">
 						<a href="#" userLanguage="UserLanguage.SettingTitle" style="display:none;">Setting</a>
 						<div class="SettingContainer">
 				      <div style="display: none; position: absolute;" class="UIRightClickPopupMenu">
@@ -93,7 +96,7 @@
 					        <div class="MiddleLeftRightClickPopupMenu">
 					          <div class="MiddleRightRightClickPopupMenu">
 					            <div class="UIRightPopupMenuContainer">
-					              <div class="MenuItem" style="white-space:nowrap;" onmouseover="eXo.ecm.PluginUtils.showSubMenuSettings(this);">   
+					              <div class="MenuItem" style="white-space:nowrap;" onmouseover="eXo.ecm.PluginUtils.showSubMenuSettings(this);">
 					                <a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.SetView">View</a>
 				                	<div class="ChildrenContainer" style="position: relative;">
 														<div style="display: none; position: absolute;" class="UIRightClickPopupMenu">
@@ -106,11 +109,11 @@
 																<div class="MiddleLeftRightClickPopupMenu">
 																	<div class="MiddleRightRightClickPopupMenu">
 																		<div class="UIRightPopupMenuContainer">
-																			<div class="MenuItem" style="white-space:nowrap;">   
-																				<a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.ViewList">List</a>   
+																			<div class="MenuItem" style="white-space:nowrap;">
+																				<a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.ViewList">List</a>
 																			</div>
-																			<div class="MenuItem">   
-																				<a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.ViewThumbnail">Thumbnails</a>  
+																			<div class="MenuItem">
+																				<a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.ViewThumbnail">Thumbnails</a>
 																			</div>
 																		</div>
 																	</div>
@@ -124,7 +127,7 @@
 														</div>
 													</div>
 					              </div>
-					              <div class="MenuItem">   
+					              <div class="MenuItem">
 					                <a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.SetSort">Sort</a>
 					                	<div class="ChildrenContainer" style="position: relative;">
 															<div style="display: none; position: absolute;" class="UIRightClickPopupMenu">
@@ -137,14 +140,14 @@
 																	<div class="MiddleLeftRightClickPopupMenu">
 																		<div class="MiddleRightRightClickPopupMenu">
 																			<div class="UIRightPopupMenuContainer">
-																				<div class="MenuItem" style="white-space:nowrap;">   
-																					<a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.SortName">By Name</a>   
+																				<div class="MenuItem" style="white-space:nowrap;">
+																					<a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.SortName">By Name</a>
 																				</div>
-																				<div class="MenuItem">   
-																					<a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.SortDate">By Date</a>  
+																				<div class="MenuItem">
+																					<a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.SortDate">By Date</a>
 																				</div>
-																				<div class="MenuItem">   
-																					<a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.SortSize">By Size</a>  
+																				<div class="MenuItem">
+																					<a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.SortSize">By Size</a>
 																				</div>
 																			</div>
 																		</div>
@@ -171,32 +174,27 @@
 				    </div>
 					</div>
 					<div class="SeparatorLineR"><span></span></div>
-					<!--<div style="clear: both;"><span></span></div>-->
-					<script type="text/javascript">
-						document.write(strView);
-					</script>
+					<div id="viewTypeAreaID"></div>
 				</div>
 				<div class="BreadcumbsPortlet">
-					<div class="HomeIcon"><span></span></div> 
+					<div class="HomeIcon"><span></span></div>
 					<div class="BreadcumbsContainer" id="BreadcumbsContainer">
 						<a class="Nomal" title="Home" href="#" userLanguage="UserLanguage.Home">Home</a>
 					</div>
 				</div>
 				<div class="ListContainer">
 					<div class="LeftWorkspace" id="LeftWorkspace">
-					
+
 					</div>
 					<div class="RightWorkspace" id="RightWorkspace">
-						<script type="text/javascript">
-							document.write(strViewPresent);
-						</script>
+						<div id = "viewPresentAreaID"></div>
 						<div class="PageIterator" id="pageNavPosition"></div>
 					<div style="clear: left;"><span></span></div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 <!-- =================================BEGIN UPLOAD ====================================== -->
 <div id="hideContainer" class="HideContainer" style="display: none;">
 	<div class="AlertContainer">
@@ -206,7 +204,7 @@
 				<table class="ActionContainer LightBlueStyle" align="center">
 					<tr>
 						<td align="center">
-						
+
 							<div class="ActionButton Delete LightBlueStyle" onclick="eXo.ecm.UploadForm.showUploadForm();">
 								<div class="ButtonLeft">
 									<div class="ButtonRight">
@@ -255,9 +253,9 @@
 						<div class="NumberProgress">0%</div>
 					</td>
 					<td>
-					
-						
-						
+
+
+
 						<div class="UIAction Abort">
 							<table class="ActionContainer">
 								<tbody>
@@ -272,12 +270,12 @@
 													</div>
 												</div>
 											</div>
-											
+
 										</td>
 									</tr>
 								</tbody>
 							</table>
-						</div>	
+						</div>
 						<div class="ActionButton Delete LightBlueStyle" onclick="eXo.ecm.UploadForm.uploadFileDelete();">
 							<div class="ButtonLeft">
 								<div class="ButtonRight">
@@ -324,10 +322,10 @@
 									</tr>
 								</tbody>
 							</table>
-						</div>	
+						</div>
 
 					</td>
-				</tr>	
+				</tr>
 				<tr class="CancelAction">
 					<td colspan="2">
 
@@ -358,14 +356,14 @@
 									</tr>
 								</tbody>
 							</table>
-						</div>	
+						</div>
 
 					</td>
 				</tr>
 			</table>
 		</div>
 	</div>
-</div>	
+</div>
 <!-- =================================END UPLOAD ======================================== -->
 <div class="Mask" id="Mask"></div>
 <div class="PopupContainer"  id="PopupContainer"></div>
@@ -377,4 +375,4 @@
     };
 </script>
 </body>
-</html>
+

@@ -16,8 +16,6 @@
  */
 package org.exoplatform.wcm.connector.authoring;
 
-import static org.testng.AssertJUnit.assertEquals;
-
 import javax.ws.rs.core.Response;
 import javax.xml.transform.dom.DOMSource;
 
@@ -28,7 +26,6 @@ import org.exoplatform.services.rest.wadl.research.HTTPMethods;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.testng.annotations.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -44,14 +41,16 @@ public class TestLifecycleConnector extends BaseConnectorTestCase {
 
   JSONParser parser = new JSONParser();
   
-  /**
-   * Bind LifecycleConnector REST service
-   */
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
+  public void setUp() throws Exception {
+    super.setUp();
+    
+    // Bind LifecycleConnector REST service
     LifecycleConnector restService = (LifecycleConnector) this.container.getComponentInstanceOfType(LifecycleConnector.class);
     this.binder.addResource(restService, null);
+  }
+  
+  public void tearDown() throws Exception {
+    super.tearDown();
   }
   
   /**
@@ -66,7 +65,6 @@ public class TestLifecycleConnector extends BaseConnectorTestCase {
    *                 publication:startPublishedDate is 03/18/2012
    * @throws Exception
    */
-  @Test
   public void testByState() throws Exception{
     String restPath = "/authoring/bystate?fromstate=draft&user=root&lang=en&workspace=collaboration&json=true";
     ContainerResponse response = service(HTTPMethods.GET.toString(), restPath, StringUtils.EMPTY, null, null);
@@ -95,7 +93,6 @@ public class TestLifecycleConnector extends BaseConnectorTestCase {
    *                 publication:startPublishedDate is 03/18/2012
    * @throws Exception
    */
-  @Test
   public void testToState() throws Exception{
     String restPath = "/authoring/tostate?fromstate=draft&tostate=pending&user=root&lang=en&workspace=collaboration&json=true";
     ContainerResponse response = service(HTTPMethods.GET.toString(), restPath, StringUtils.EMPTY, null, null);
@@ -124,7 +121,6 @@ public class TestLifecycleConnector extends BaseConnectorTestCase {
    *                 publication:startPublishedDate is 03/18/2012
    * @throws Exception
    */
-  @Test
   public void testByDate() throws Exception {
     String restPath = "/authoring/bydate?fromstate=staged&date=2&lang=en&workspace=collaboration";
     ContainerResponse response = service(HTTPMethods.GET.toString(), restPath, StringUtils.EMPTY, null, null);

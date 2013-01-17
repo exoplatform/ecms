@@ -16,9 +16,6 @@
  */
 package org.exoplatform.wcm.connector.fckeditor;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertNotNull;
-
 import javax.ws.rs.core.Response;
 import javax.xml.transform.dom.DOMSource;
 
@@ -28,7 +25,6 @@ import org.exoplatform.services.rest.impl.ContainerResponse;
 import org.exoplatform.services.rest.wadl.research.HTTPMethods;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
-import org.testng.annotations.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -42,14 +38,15 @@ import org.w3c.dom.NodeList;
  */
 public class TestPortalLinkConnector extends BaseConnectorTestCase {
   
-  /**
-   * Bind PortalLinkConnector REST service
-   */
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
+  public void setUp() throws Exception {
+    super.setUp();
+    // Bind PortalLinkConnector REST service
     PortalLinkConnector restService = (PortalLinkConnector) this.container.getComponentInstanceOfType(PortalLinkConnector.class);
     this.binder.addResource(restService, null);
+  }
+  
+  public void tearDown() throws Exception {
+    super.tearDown();
   }
   
   /**
@@ -82,7 +79,6 @@ public class TestPortalLinkConnector extends BaseConnectorTestCase {
    * </Connector>
    * @throws Exception
    */
-  @Test
   public void testGetPageURI() throws Exception{
     ConversationState.setCurrent(new ConversationState(new Identity("root")));
     String restPath = "/portalLinks/getFoldersAndFiles/";

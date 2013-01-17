@@ -523,7 +523,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
     String[] nodeTypeName = null;
     String[] uuid = null;
     if (mappings.containsKey("/node/exo:isDeep")) {
-      isDeep = (Boolean) ((JcrInputProperty) mappings.get("/node/exo:isDeep")).getValue();
+      isDeep = Boolean.valueOf(((JcrInputProperty)mappings.get("/node/exo:isDeep")).getValue().toString());
     }
     if (mappings.containsKey("/node/exo:uuid")) {
       uuid = (String[]) ((JcrInputProperty) mappings.get("/node/exo:uuid")).getValue();

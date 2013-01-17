@@ -16,15 +16,12 @@
  */
 package org.exoplatform.wcm.connector.collaboration;
 
-import static org.testng.AssertJUnit.assertEquals;
-
 import javax.ws.rs.core.Response;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.BaseConnectorTestCase;
 import org.exoplatform.services.rest.impl.ContainerResponse;
 import org.exoplatform.services.rest.wadl.research.HTTPMethods;
-import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SAS
@@ -34,19 +31,24 @@ import org.testng.annotations.Test;
  */
 public class TestDownloadConnector extends BaseConnectorTestCase{
   private static final String    restPath        = "/contents/download/collaboration/offices.jpg";
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
+  
+  public void setUp() throws Exception {
+    super.setUp();
+    
+    // Bind DownloadConnector REST service
     DownloadConnector restService = (DownloadConnector) this.container.getComponentInstanceOfType(DownloadConnector.class);
     this.binder.addResource(restService, null);
   }
   
-  @Test
   public void testDownload() throws Exception{
 //    ConversationState.setCurrent(new ConversationState(new Identity("root")));
     applyUserSession("john", "gtn", "collaboration");
     /* Prepare the favourite nodes */
     ContainerResponse response = service(HTTPMethods.GET.toString(), restPath, StringUtils.EMPTY, null, null);
     assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+  }
+  
+  public void tearDown() throws Exception {
+    super.tearDown();
   }
 }

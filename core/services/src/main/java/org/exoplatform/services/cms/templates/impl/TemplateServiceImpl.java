@@ -51,8 +51,10 @@ import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.DynamicIdentity;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.core.nodetype.NodeTypeDataManager;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.jcr.impl.Constants;
 import org.exoplatform.services.jcr.impl.core.nodetype.NodeTypeImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -259,7 +261,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       allNodeTypes.add(mixin);
     }
     for (NodeType nodetype:allNodeTypes) {
-      if (((NodeTypeImpl)nodetype).isChildNodePrimaryTypeAllowed(childNodeTypeName)) {
+      if (((NodeTypeImpl)nodetype).isChildNodePrimaryTypeAllowed(Constants.JCR_ANY_NAME, ((NodeTypeImpl)childNodeType).getQName())) {
         return true;
       }
     }
@@ -911,12 +913,10 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     managedDocumentTypesMap.put(getRepoName(), types);
   }
 
-  @Override
   public Set<String> getAllConfiguredNodeTypes() {
     return configuredNodeTypes;
   }
 
-  @Override
   public Set<String> getAllEditedConfiguredNodeTypes() throws Exception {
     HashSet<String> editedConfigNodetypes = new HashSet<String>();
     Node serviceLogContentNode= Utils.getServiceLogContentNode(this.getClass().getSimpleName(), EDITED_CONFIGURED_NODE_TYPES);

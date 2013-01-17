@@ -83,10 +83,10 @@ public class UIPropertiesManager extends UIContainer implements UIPopupComponent
     wsName_ = wsName;
   }
 
-  public void activate() throws Exception {
+  public void activate() {
   }
 
-  public void deActivate() throws Exception {}
+  public void deActivate() {}
   public void setLockForm(boolean isLockForm) {
     getChild(UIPropertyForm.class).lockForm(isLockForm) ;
   }

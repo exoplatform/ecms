@@ -16,28 +16,17 @@
  */
 package org.exoplatform.services.wcm.publication;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertNotNull;
-import static org.testng.AssertJUnit.assertNull;
-
 import java.util.HashMap;
 import java.util.Locale;
 
 import javax.jcr.Node;
 
-import org.exoplatform.component.test.ConfigurationUnit;
-import org.exoplatform.component.test.ConfiguredBy;
-import org.exoplatform.component.test.ContainerScope;
-import org.exoplatform.ecms.test.BaseECMSTestCase;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.publication.lifecycle.simple.SimplePublicationPlugin;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SAS
@@ -45,12 +34,7 @@ import org.testng.annotations.Test;
  *          exo@exoplatform.com
  * Jul 24, 2012  
  */
-
-@ConfiguredBy({
-  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-test-configuration.xml"),
-  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/wcm/test-publication-configuration.xml")
-  })
-public class TestSimplePublicationPlugin extends BaseECMSTestCase {
+public class TestSimplePublicationPlugin extends BasePublicationPluginTestCase {
   
   private static final String CURRENT_STATE = "publication:currentState";
   private static final String TEST = "test";
@@ -62,14 +46,9 @@ public class TestSimplePublicationPlugin extends BaseECMSTestCase {
   private PublicationPlugin plugin_;
   private Node node_;
   
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
-    publicationService_ = WCMCoreUtils.getService(PublicationService.class);
-  }
-
-  @BeforeMethod
   public void setUp() throws Exception {
+    super.setUp();
+    publicationService_ = WCMCoreUtils.getService(PublicationService.class);
     applySystemSession();
     node_ = session.getRootNode().addNode(TEST);
     session.save();
@@ -81,17 +60,16 @@ public class TestSimplePublicationPlugin extends BaseECMSTestCase {
     publicationService_.addPublicationPlugin(plugin_);
   }
   
-  @AfterMethod
   public void tearDown() throws Exception {
     publicationService_.getPublicationPlugins().clear();
     node_.remove();
     session.save();
+    super.tearDown();
   }
 
   /**
    * tests changing state for a node 
    */
-  @Test
   public void testChangeState() throws Exception {
     HashMap<String, String> context = new HashMap<String, String>();
     publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
@@ -114,7 +92,6 @@ public class TestSimplePublicationPlugin extends BaseECMSTestCase {
   /**
   * tests getting user info
   */
-  @Test
   public void testGetUserInfo() throws Exception {
     publicationService_.enrollNodeInLifecycle(node_, plugin_.getLifecycleName());
     assertNull(plugin_.getUserInfo(node_, new Locale("en")));
@@ -123,7 +100,6 @@ public class TestSimplePublicationPlugin extends BaseECMSTestCase {
   /**
   * tests getting state image 
   */
-  @Test
   public void testGetStateImage() throws Exception {
     HashMap<String, String> context = new HashMap<String, String>();
 
@@ -135,10 +111,8 @@ public class TestSimplePublicationPlugin extends BaseECMSTestCase {
   /**
    * tests getLocalizedAndSubstituteLog
    */
-  @Test
   public void testGetLocalizedAndSubstituteLog() throws Exception {
     assertEquals("The web content has been published", plugin_.getLocalizedAndSubstituteMessage(
          new Locale("en"), "PublicationService.SimplePublicationPlugin.changeState.published", new String[]{}));
   }
-  
 }

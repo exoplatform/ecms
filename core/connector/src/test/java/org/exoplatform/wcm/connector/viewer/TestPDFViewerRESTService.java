@@ -16,8 +16,6 @@
  */
 package org.exoplatform.wcm.connector.viewer;
 
-import static org.testng.AssertJUnit.assertEquals;
-
 import javax.jcr.Node;
 import javax.jcr.Session;
 import javax.ws.rs.core.Response;
@@ -28,7 +26,6 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.rest.impl.ContainerResponse;
 import org.exoplatform.services.rest.wadl.research.HTTPMethods;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SAS
@@ -40,15 +37,18 @@ public class TestPDFViewerRESTService extends BaseConnectorTestCase {
   private static final String    restPath        = "/pdfviewer/repository/collaboration/1/0.0/1.0/";
   private static final String    WrongNumberPath = "/pdfviewer/repository/collaboration/1a/0.a/1.b/";
   private ManageableRepository   manageableRepository;
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
+  
+  public void setUp() throws Exception {
+    super.setUp();
     PDFViewerRESTService pdfViewerRestService = (PDFViewerRESTService) this.container.getComponentInstanceOfType(PDFViewerRESTService.class);
     this.binder.addResource(pdfViewerRestService, null);
   }
   
-//http://localhost:8080/ecmdemo/rest-ecmdemo4d725eb57f0001010030cc50eb140189?2012-08-22T15:28:05.522+07:00  
-  @Test
+  public void tearDown() throws Exception {
+    super.tearDown();
+  }
+  
+  //http://localhost:8080/ecmdemo/rest-ecmdemo4d725eb57f0001010030cc50eb140189?2012-08-22T15:28:05.522+07:00  
   public void testGetFavoriteByUser() throws Exception{
     /* Prepare the favourite nodes */
     manageableRepository = repositoryService.getCurrentRepository();

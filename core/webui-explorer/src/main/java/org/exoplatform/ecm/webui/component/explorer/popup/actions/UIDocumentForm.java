@@ -240,9 +240,9 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
   @Override
   public void processRender(WebuiRequestContext context) throws Exception {
     context.getJavascriptManager().
-    require("SHARED/explorer-module", "explorer").
-    addScripts("explorer.UIDocForm.UpdateGUI();").
-    addScripts("explorer.UIDocForm.AutoFocus();");
+    require("SHARED/uiDocumentForm", "uiDocumentForm").
+    addScripts("uiDocumentForm.UIDocForm.UpdateGUI();").
+    addScripts("uiDocumentForm.UIDocForm.AutoFocus();");
 
     context.getJavascriptManager().loadScriptResource("wcm-webui-ext");
     context.getJavascriptManager().addCustomizedOnLoadScript("changeWarning();");
@@ -288,7 +288,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     writer.append("</tr>");
     writer.append("</table>");
     writer.append("</div>");
-    context.getJavascriptManager().loadScriptResource("explorer-module");
+    context.getJavascriptManager().loadScriptResource("uiDocumentForm");
     context.getJavascriptManager().addCustomizedOnLoadScript("eXo.webui.UIDocForm.initFullScreenStatus(\"" + contextID + "\");");
   }
 
@@ -297,8 +297,8 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     return getAncestorOfType(UIJCRExplorer.class).getJCRTemplateResourceResolver();
   }
 
-  public void activate() throws Exception {}
-  public void deActivate() throws Exception {}
+  public void activate() {}
+  public void deActivate() {}
 
   public Node getCurrentNode() throws Exception {
     return getAncestorOfType(UIJCRExplorer.class).getCurrentNode();

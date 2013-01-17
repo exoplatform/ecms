@@ -20,7 +20,7 @@ import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.form.UIFormInput;
 import org.exoplatform.webui.form.validator.Validator;
-import org.quartz.CronTrigger;
+import org.quartz.impl.triggers.CronTriggerImpl;
 
 /**
  * Created by The eXo Platform SAS
@@ -33,7 +33,7 @@ public class CronExpressionValidator implements Validator {
 
   public void validate(UIFormInput uiInput) throws Exception {
     try {
-      new CronTrigger().setCronExpression((String) uiInput.getValue());
+      new CronTriggerImpl().setCronExpression((String) uiInput.getValue());
     } catch (Exception e) {
       throw new MessageException(new ApplicationMessage("CronExpressionValidator.invalid-input",
                                                         null,
