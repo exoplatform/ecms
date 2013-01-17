@@ -1029,7 +1029,7 @@
               <string>portal</string>
             </field>
             <field name="templateLocation">
-              <string>classpath:/portal</string>
+              <string>classpath:/conf/portal</string>
             </field>
           </object>
         </object-param>

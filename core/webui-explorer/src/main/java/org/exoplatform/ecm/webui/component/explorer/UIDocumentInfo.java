@@ -61,7 +61,6 @@ import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.container.component.ComponentPlugin;
-import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.ecm.jcr.model.Preference;
@@ -794,8 +793,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   public String getRssLink() { return null ; }
 
   public String getPortalName() {
-    PortalContainerInfo containerInfo = WCMCoreUtils.getService(PortalContainerInfo.class) ;
-    return containerInfo.getContainerName() ;
+    return WCMCoreUtils.getPortalName();
   }
 
   public String getRepository() throws Exception {
