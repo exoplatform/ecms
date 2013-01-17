@@ -9,45 +9,44 @@
 %>
 <%
   import org.exoplatform.webui.form.UIFormRadioBoxInput ;
+	String componentID = uicomponent.id.replace("UI","ui");
 %>	
-<div class="UIForm $uicomponent.id">
+<div class="uiForm $componentID">
 	<% uiform.begin() %>
-	<div class="HorizontalLayout">
-		<table class="UIFormGrid">
+		<div class="form-horizontal resizable">
 			<% 
 				for(field in uiform.getChildren()) { 
-					if(field.isRendered()) {
+				if(field.isRendered()) {
 			%>
-						<tr>
-							<td class="FieldLabel"><label for="<%=field.getId()%>">
-								<%if(!uicomponent.getLabel(field.getName()).equals(uicomponent.getId())) { %>												
-										<%=uicomponent.getLabel(field.getName())+": " %>
-								<%}%>
-							</label></td>
-							<td class="FieldComponent">
-								<%if(field instanceof UIFormRadioBoxInput) {
-										println "<div class=\"MultiRadioInput\" >" ;
-											uiform.renderField(field) ;
-										println "</div>" ;
-									} else { 
-										uiform.renderField(field) ;
-									} 
-								%>
-							</td>
-						</tr>
+			<div class="control-group">
+				<label class="control-label" for="<%=field.getId()%>">
+					<%if(!uicomponent.getLabel(field.getName()).equals(uicomponent.getId())) { %>												
+						<%=uicomponent.getLabel(field.getName())+": " %>
+					<%}%>
+				</label>
+				<div class="controls">
+					<%if(field instanceof UIFormRadioBoxInput) {
+							println "<div class=\"multiRadioInput\" >" ;
+								uiform.renderField(field) ;
+							println "</div>" ;
+						} else { 
+							uiform.renderField(field) ;
+						} 
+					%>
+				</div>
+			</div>
 			<%
 					}
 				}
 			%>
-		</table>
-		<div class="UIAction">
+		</div>
+		<div class="uiAction uiActionBorder">
 			<% for(action in uicomponent.getActions()) { 
 				 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
 				 String link = uicomponent.event(action) ;
 			%>
-				 <a onclick="$link" class="ActionButton LightBlueStyle"  href="javascript:void(0);">$actionLabel</a>
+				 <button type="button" onclick="$link" class="btn"  href="javascript:void(0);">$actionLabel</button>
 			<%}%>					
 		</div>
-	</div>
 	<%uiform.end()%>
 </div>
