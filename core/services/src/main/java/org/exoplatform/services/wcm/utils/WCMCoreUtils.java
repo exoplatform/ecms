@@ -598,4 +598,9 @@ public class WCMCoreUtils {
            .append("?param=").append(propertyName);
     return builder.toString();
   }
+  
+  public static String getPortalName() {
+    PortalContainerInfo containerInfo = WCMCoreUtils.getService(PortalContainerInfo.class) ;
+    return containerInfo.getContainerName() ;
+  }
 }

@@ -139,7 +139,7 @@
              eXo.developing = true ;
      <% } %>
      eXo.env.portal.context = "<%=docBase%>" ;
-     eXo.env.portal.containerName = "portal" ;
+     eXo.env.portal.containerName = "<%=WCMCoreUtils.getPortalName() %>" ;
      <%
       if(rcontext.getAccessPath() == 0) {%>eXo.env.portal.accessMode = "public" ;<%}
      else {%>eXo.env.portal.accessMode = "private" ;<%}%>
