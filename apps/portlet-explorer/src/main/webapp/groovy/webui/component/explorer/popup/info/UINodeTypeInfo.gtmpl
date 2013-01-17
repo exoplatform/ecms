@@ -14,14 +14,14 @@
   Collection collect = uicomponent.getNodeTypes();
   public void repairName(boolean bln) {
     println """
-      <div class="Icon16x16 ${bln}16x16Icon">$bln</div>
+      <div>$bln</div>
     """;
   }
 
   public void repairName(String name) {
     String str = name.replace(":", "_");
     println """
-	    <div class="Icon16x16 default16x16Icon ${str}16x16Icon" title="$name">$name</div>
+	    <div title="$name">$name</div>
     """;
   }
  %>
@@ -33,165 +33,147 @@
 %>
 
 
-<div class="UINodeTypeInfo uiTabNormal" id="UINodeTypeInfoPopup">
-  <ul class="nav nav-tabs">
-				  <%
-				  String style="active";
-					int count = 0;
-				  for(nodeType in collect) {
-						if (count++ == collect.size()-1) 
-							style += " last";
-				  %>
-			      <li class="$style" onClick="eXo.ecm.UIJCRExplorer.displayTabContent(this)">
-	                  <a>$nodeType.name</a>
-			      </li>
-				  <%
-				    style = "" ;
-				  }
-				  %>
-	</ul>
+<div class="uiNodeTypeInfo" id="UINodeTypeInfoPopup">
+	<div class="uiTabNormal resizable" id="UINodeTypeInfoPopup">
+		<ul class="nav nav-tabs">
+						<%
+						String style="active";
+						int count = 0;
+						for(nodeType in collect) {
+							if (count++ == collect.size()-1) 
+								style += " last";
+						%>
+							<li class="$style" onClick="eXo.ecm.UIJCRExplorer.displayTabContent(this)">
+								<a>$nodeType.name</a>
+							</li>
+						<%
+							style = "" ;
+						}
+						%>
+		</ul>
 
-	<div class="tab-content" id="myTabContent">
-	  <%
-	  style="display: block;" ;
-	    for(nodeType in collect) {%>
-	      <div class="UITabContent" style="$style">
-	        <table class="uiGrid table table-hover table-striped" cellspacing="0" borderspacing="0">
-	          <thead>
-	            <tr>
-	              <th><%=_ctx.appRes("UINodeTypeInfo.label.name")%></th>
-	              <th><%=_ctx.appRes("UINodeTypeInfo.label.item")%></th>
-	              <th><%=_ctx.appRes("UINodeTypeInfo.label.super-types")%></th>
-	              <th><%=_ctx.appRes("UINodeTypeInfo.label.mixin")%></th>
-	              <th><%=_ctx.appRes("UINodeTypeInfo.label.orderable-children")%></th>
-	            </tr>
-	          </thead>
-	          <tbody>
-	            <tr>
-	              <td><%repairName(nodeType.getName());%></td>
-	              <td>
-	                  <%
-	                  if(nodeType.getPrimaryItemName() != null) println nodeType.getPrimaryItemName();
-	                  else println "N/A";
-	                  %>
-	              </td>
-	              <td>
-	              <%
-	                for(parent in nodeType.getSupertypes()) {
-				  	      	    println "<div>" ;
-				  	      	    repairName(parent.getName()) ;
-				  	      	    println "</div>" ;
-					  	        }
-					  	      %>
-	              </td>
-	              <td><%repairName(nodeType.isMixin())%></td>
-	              <td><%repairName(nodeType.hasOrderableChildNodes())%></td>
-	            </tr>
-	          </tbody>
-	        </table>
-	        <div class="GridTitleBar">
-	        	<table>
-	        		<tr>
-	        			<td>
-				          <div class="GridTitleLeftBar">
-				            <div class="GridTitleRightBar">
-				              <div class="GridTitleMiddleBar"><%=_ctx.appRes("UINodeTypeInfo.label.property-def")%></div>
-				            </div>
-				          </div>
-				        </td>
-	        		</tr>
-	        	</table>
-	        </div>
-	        <table class="uiGrid table table-hover table-striped" cellspacing="0" borderspacing="0">
-	          <col><col><col width="50"><col width="50"><col width="50"><col width="50"><col><col>
-	          <thead>
-	            <tr>
-	              <th><%=_ctx.appRes("UINodeTypeInfo.label.prop-name")%></th>
-	              <th><%=_ctx.appRes("UINodeTypeInfo.label.prop-type")%></th>
-	              <th><%=_ctx.appRes("UINodeTypeInfo.label.prop-mandatory")%></th>
-	              <th><%=_ctx.appRes("UINodeTypeInfo.label.prop-protected")%></th>
-	              <th><%=_ctx.appRes("UINodeTypeInfo.label.prop-auto-create")%></th>
-	              <th><%=_ctx.appRes("UINodeTypeInfo.label.prop-multiple")%></th>
-	              <th><%=_ctx.appRes("UINodeTypeInfo.label.prop-default-values")%></th>
-	              <th><%=_ctx.appRes("UINodeTypeInfo.label.prop-constraints")%></th>
-	            </tr>
-	          </thead>
-	          <tbody>
-	            <%for(bean in nodeType.getPropertyDefinitions()) {%>
-	            <tr>
-	              <td><%repairName(bean.getName())%></td>
-	              <td><%=uicomponent.resolveType(bean.getRequiredType())%></td>
-	              <td><%repairName(bean.isMandatory())%></td>
-	              <td><%repairName(bean.isProtected())%></td>
-	              <td><%repairName(bean.isAutoCreated())%></td>
-	              <td><%repairName(bean.isMultiple())%></td>
-	              <td><%=uicomponent.getDefaultValue(bean)%></td>
-	              <%
-	                StringBuilder contraints = new StringBuilder() ;
-							    String[] contraintValues = bean.getValueConstraints() ;
-							    if(contraintValues != null && contraintValues.length > 0) {
-								    for(value in contraintValues) {
-								      if(value != null) {
-								        if(contraints.length() > 0) contraints.append(",") ;
-									      contraints.append(value) ;
-								      }
-								    }
-								  }
-	              %>
-	              <td><%=contraints.toString()%></td>
-	            </tr>
-	            <%}%>
-	          </tbody>
-	        </table>
-	        <div class="GridTitleBar">
-	        	<table>
-	        		<tr>
-	        			<td>
-				          <div class="GridTitleLeftBar">
-				            <div class="GridTitleRightBar">
-				              <div class="GridTitleMiddleBar"><%=_ctx.appRes("UINodeTypeInfo.label.node-def")%></div>
-				            </div>
-				          </div>
-	        			</td>
-	        		</tr>
-	        	</table>
-	        </div>
-	        <table class="uiGrid table table-hover table-striped" cellspacing="0" borderspacing="0">
-	          <col><col><col width="60"><col width="60"><col width="60"><col>
-	          <thead>
-	            <tr>
-	              <th><%=_ctx.appRes("UINodeTypeInfo.label.node-def-name")%></th>
-	              <th><%=_ctx.appRes("UINodeTypeInfo.label.node-def-opv")%></th>
-	              <th><%=_ctx.appRes("UINodeTypeInfo.label.node-def-man")%></th>
-	              <th><%=_ctx.appRes("UINodeTypeInfo.label.node-def-pr")%></th>
-	              <th><%=_ctx.appRes("UINodeTypeInfo.label.node-def-ac")%></th>
-	              <th><%=_ctx.appRes("UINodeTypeInfo.label.node-def-dnt")%></th>
-	            </tr>
-	          </thead>
-	          <tbody>
-	            <%for(bean in nodeType.getChildNodeDefinitions()) {%>
-	            <tr>
-	              <td><%repairName(bean.getName())%></td>
-	              <td><%=uicomponent.resolveOnParentVersion(bean.getOnParentVersion())%></td>
-	              <td><%repairName(bean.isMandatory())%></td>
-	              <td><%repairName(bean.isProtected())%></td>
-	              <td><%repairName(bean.isAutoCreated())%></td>
-	              <td><%repairName(bean.getDeclaringNodeType().getName())%></td>
-	            </tr>
-	            <%}%>
-	          </tbody>
-	        </table>
-	      </div>
-	  <%
-	    style = "display: none";
-	  }%>
+		<div class="tab-content" id="myTabContent">
+			<%
+			style="display: block;" ;
+				for(nodeType in collect) {%>
+					<div class="UITabContent" style="$style">
+						<table class="uiGrid table table-hover table-striped" cellspacing="0" borderspacing="0">
+							<thead>
+								<tr>
+									<th><%=_ctx.appRes("UINodeTypeInfo.label.name")%></th>
+									<th><%=_ctx.appRes("UINodeTypeInfo.label.item")%></th>
+									<th><%=_ctx.appRes("UINodeTypeInfo.label.super-types")%></th>
+									<th><%=_ctx.appRes("UINodeTypeInfo.label.mixin")%></th>
+									<th><%=_ctx.appRes("UINodeTypeInfo.label.orderable-children")%></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><%repairName(nodeType.getName());%></td>
+									<td>
+											<%
+											if(nodeType.getPrimaryItemName() != null) println nodeType.getPrimaryItemName();
+											else println "N/A";
+											%>
+									</td>
+									<td>
+									<%
+										for(parent in nodeType.getSupertypes()) {
+													println "<div>" ;
+													repairName(parent.getName()) ;
+													println "</div>" ;
+												}
+											%>
+									</td>
+									<td><%repairName(nodeType.isMixin())%></td>
+									<td><%repairName(nodeType.hasOrderableChildNodes())%></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="gridTitleBar">
+							<h5><%=_ctx.appRes("UINodeTypeInfo.label.property-def")%></h5>
+						</div>
+						<table class="uiGrid table table-hover table-striped" cellspacing="0" borderspacing="0">
+							<col><col><col width="50"><col width="50"><col width="50"><col width="50"><col><col>
+							<thead>
+								<tr>
+									<th><%=_ctx.appRes("UINodeTypeInfo.label.prop-name")%></th>
+									<th><%=_ctx.appRes("UINodeTypeInfo.label.prop-type")%></th>
+									<th><%=_ctx.appRes("UINodeTypeInfo.label.prop-mandatory")%></th>
+									<th><%=_ctx.appRes("UINodeTypeInfo.label.prop-protected")%></th>
+									<th><%=_ctx.appRes("UINodeTypeInfo.label.prop-auto-create")%></th>
+									<th><%=_ctx.appRes("UINodeTypeInfo.label.prop-multiple")%></th>
+									<th><%=_ctx.appRes("UINodeTypeInfo.label.prop-default-values")%></th>
+									<th><%=_ctx.appRes("UINodeTypeInfo.label.prop-constraints")%></th>
+								</tr>
+							</thead>
+							<tbody>
+								<%for(bean in nodeType.getPropertyDefinitions()) {%>
+								<tr>
+									<td><%repairName(bean.getName())%></td>
+									<td><%=uicomponent.resolveType(bean.getRequiredType())%></td>
+									<td><%repairName(bean.isMandatory())%></td>
+									<td><%repairName(bean.isProtected())%></td>
+									<td><%repairName(bean.isAutoCreated())%></td>
+									<td><%repairName(bean.isMultiple())%></td>
+									<td><%=uicomponent.getDefaultValue(bean)%></td>
+									<%
+										StringBuilder contraints = new StringBuilder() ;
+										String[] contraintValues = bean.getValueConstraints() ;
+										if(contraintValues != null && contraintValues.length > 0) {
+											for(value in contraintValues) {
+												if(value != null) {
+													if(contraints.length() > 0) contraints.append(",") ;
+													contraints.append(value) ;
+												}
+											}
+										}
+									%>
+									<td><%=contraints.toString()%></td>
+								</tr>
+								<%}%>
+							</tbody>
+						</table>
+						<div class="gridTitleBar">
+							<h5><%=_ctx.appRes("UINodeTypeInfo.label.node-def")%></h5>
+						</div>
+						<table class="uiGrid table table-hover table-striped" cellspacing="0" borderspacing="0">
+							<col><col><col width="60"><col width="60"><col width="60"><col>
+							<thead>
+								<tr>
+									<th><%=_ctx.appRes("UINodeTypeInfo.label.node-def-name")%></th>
+									<th><%=_ctx.appRes("UINodeTypeInfo.label.node-def-opv")%></th>
+									<th><%=_ctx.appRes("UINodeTypeInfo.label.node-def-man")%></th>
+									<th><%=_ctx.appRes("UINodeTypeInfo.label.node-def-pr")%></th>
+									<th><%=_ctx.appRes("UINodeTypeInfo.label.node-def-ac")%></th>
+									<th><%=_ctx.appRes("UINodeTypeInfo.label.node-def-dnt")%></th>
+								</tr>
+							</thead>
+							<tbody>
+								<%for(bean in nodeType.getChildNodeDefinitions()) {%>
+								<tr>
+									<td><%repairName(bean.getName())%></td>
+									<td><%=uicomponent.resolveOnParentVersion(bean.getOnParentVersion())%></td>
+									<td><%repairName(bean.isMandatory())%></td>
+									<td><%repairName(bean.isProtected())%></td>
+									<td><%repairName(bean.isAutoCreated())%></td>
+									<td><%repairName(bean.getDeclaringNodeType().getName())%></td>
+								</tr>
+								<%}%>
+							</tbody>
+						</table>
+					</div>
+			<%
+				style = "display: none";
+			}%>
+		</div>
 	</div>
-  <div class="UIAction">
+  <div class="uiAction">
 		<%for(action in uicomponent.getActions()) {
 		String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action)
 		String link = uicomponent.event(action) ;
 		%>
-		<a  onclick="$link" class="ActionButton LightBlueStyle" href="javascript:void(0);">$actionLabel</a>
+		<button  onclick="$link" class="btn" href="javascript:void(0);">$actionLabel</button>
 		<%}%>
 	</div>
 </div>
