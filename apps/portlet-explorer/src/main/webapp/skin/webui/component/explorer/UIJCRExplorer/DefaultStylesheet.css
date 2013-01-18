@@ -478,7 +478,7 @@
 	overflow: hidden;
   white-space: nowrap;
   padding-left: 3px;
-  color: #4f4f4f;
+  color: darkgray;
 }
 
 .UIJCRExplorerPortlet .UIListGrid .ColumnAuditing {
@@ -651,11 +651,11 @@
   padding: 0px 2px;
 }
 
-.UIJCRExplorerPortlet .RowView .LineLeftItem {  
+.UIJCRExplorerPortlet .RowView .LineLeftItem {
   width: 3px;
   height: 19px;
   float: left;/* orientation=lt */
-  float: right;/* orientation=rt */  
+  float: right;/* orientation=rt */
   margin: 4px 0px 0px;
   padding: 0px 2px;
 }
@@ -682,9 +682,13 @@
 
 .UIJCRExplorerPortlet .fileInfoVersion {
 	color: white;
-	background-color: grey;
+	background-color: darkgray;
 	width: 20px;
 	display: inline-block;
+	border-radius: 4px 4px 4px 4px;
+	font-size: 9px;
+	font-weight: bold;
+	text-align: center;
 }
 
 /*############################## -- Begin TimelineView -- ##############################*/
