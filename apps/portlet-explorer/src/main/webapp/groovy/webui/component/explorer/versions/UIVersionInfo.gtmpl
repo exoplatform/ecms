@@ -47,23 +47,23 @@
 			""";
 			if(!uicomponent.isBaseVersion(node)&&uicomponent.getCurrentNode().isNodeType("nt:file")) {						
   			println "<a class=\"actionIcon\" onclick=\"" + 
-	  		         uicomponent.event("CompareVersion",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.compareVersion") + "\"><i class=\"Icon16x16 CompareVersion16x16Icon\"></i></a>" ;			
+	  		         uicomponent.event("CompareVersion",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.compareVersion") + "\"><i class=\"uiIconViewChange uiIconLightGray\"></i></a>" ;			
 			}
       println "<a class=\"actionIcon\" onclick=\"" + 
-               uicomponent.event("AddLabel",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.addLabel") + "\"><i class=\"Icon16x16 BlueRoundedPlusPage16x16Icon\"></i></a>" ;
+               uicomponent.event("AddLabel",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.addLabel") + "\"><i class=\"uiIconPlus uiIconLightGray\"></i></a>" ;
 			if(uicomponent.getVersionLabels(node).size() > 0){
 				println "<a class=\"actionIcon\" onclick=\"" + 
-				         uicomponent.event("RemoveLabel",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.removeLable") + "\"><i class=\"Icon16x16 RedRoundedPlusPage16x16Icon\"></i></a>" ;      
+				         uicomponent.event("RemoveLabel",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.removeLable") + "\"><i class=\"uiIconMinus uiIconLightGray\"></i></a>" ;      
 			}         
 			if(!uicomponent.isBaseVersion(node)){
 				println "<a class=\"actionIcon\" onclick=\"" + 
-				         uicomponent.event("RestoreVersion",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.restoreVersion") + "\"><i class=\"Icon16x16 RestoreVersion16x16Icon\"></i></a>" ;
+				         uicomponent.event("RestoreVersion",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.restoreVersion") + "\"><i class=\"uiIconRestore uiIconLightGray\"></i></a>" ;
 			}         
 			println "<a class=\"actionIcon\" onclick=\"" +  
-			         uicomponent.event("ViewVersion",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.viewVersion") + "\"><i class=\"Icon16x16 View16x16Icon\"></i></a>" ;
+			         uicomponent.event("ViewVersion",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.viewVersion") + "\"><i class=\"uiIconPreview uiIconLightGray\"></i></a>" ;
 			if(!uicomponent.isBaseVersion(node)){
 				println "<a class=\"actionIcon\" onclick=\"" + 
-				         uicomponent.event("DeleteVersion",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.deleteVersion") + "\"><i class=\"Icon16x16 Remove16x16Icon\"></i></a>" ;
+				         uicomponent.event("DeleteVersion",   node.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UIVersionInfo.tooltip.deleteVersion") + "\"><i class=\"uiIconTrash uiIconLightGray\"></i></a>" ;
 			}         
 			println "</td></tr>" ;      
 			
@@ -75,7 +75,7 @@
 <div class="uiVersionInfo resizable" id="$uicomponent.id">
 	<div class="uiBox noRounded">
 		<h5 class="title" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getCurrentNode().getName()%>">
-			<i class="Icon24x24 HomeIcon"></i><%=uicomponent.getCurrentNode().getName()%>
+			<i class="uiIconFile uiIconLightGray"></i> <%=uicomponent.getCurrentNode().getName()%>
 		</h5>
 		<table class="uiGrid table no-border-cell table-hover table-striped">
 			<%

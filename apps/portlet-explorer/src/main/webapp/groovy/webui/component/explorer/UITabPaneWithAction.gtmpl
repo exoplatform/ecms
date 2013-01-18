@@ -9,7 +9,7 @@
 %>
 <div class="$uicomponent.id" id="$uicomponent.id">
 
-	<div class="WorkingAreaWithHelp uiTabNormal">
+	<div class="workingAreaWithHelp uiTabNormal resizable">
 		
 		<ul class="nav nav-tabs">
 			<%
