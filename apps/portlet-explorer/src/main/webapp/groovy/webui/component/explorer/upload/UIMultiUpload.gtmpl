@@ -3,12 +3,12 @@
   
   def rcontext = _ctx.getRequestContext() ;
   def jsManager = rcontext.getJavascriptManager();
-  jsManager.require("SHARED/explorer-module", "explorer").
-  addScripts("explorer.MultiUpload.initDropBox('" + uicomponent.getId() + "');").
-  addScripts("explorer.MultiUpload.setMaxFileSize(" + uicomponent.getLimitFileSize() + ");").
-  addScripts("explorer.MultiUpload.setMaxUploadCount(" + uicomponent.getMaxUploadCount() + ");").
-  addScripts("explorer.MultiUpload.loadMsg();").
-  addScripts("explorer.MultiUpload.setDropFileMessage('" + 
+  jsManager.require("SHARED/multiUpload", "multiUpload").
+  addScripts("multiUpload.initDropBox('" + uicomponent.getId() + "');").
+  addScripts("multiUpload.setMaxFileSize(" + uicomponent.getLimitFileSize() + ");").
+  addScripts("multiUpload.setMaxUploadCount(" + uicomponent.getMaxUploadCount() + ");").
+  addScripts("multiUpload.loadMsg();").
+  addScripts("multiUpload.setDropFileMessage('" + 
              _ctx.appRes(uicomponent.getId() + ".label.DropFileMessage") + "');");
 %>
 

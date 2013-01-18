@@ -66,6 +66,6 @@ public class UIViewMetadataManager extends UIContainer implements UIPopupCompone
     uiPopup.setResizable(true) ;
   }
 
-  public void activate() throws Exception {}
-  public void deActivate() throws Exception {}
+  public void activate() {}
+  public void deActivate() {}
 }

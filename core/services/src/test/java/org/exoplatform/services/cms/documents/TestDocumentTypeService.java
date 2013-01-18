@@ -17,11 +17,6 @@
  **************************************************************************/
 package org.exoplatform.services.cms.documents;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertFalse;
-import static org.testng.AssertJUnit.assertNotNull;
-import static org.testng.AssertJUnit.assertTrue;
-
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -32,9 +27,6 @@ import javax.jcr.RepositoryException;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SARL Author : Phan Trong Lam
@@ -57,23 +49,18 @@ public class TestDocumentTypeService extends BaseWCMTestCase {
 
   private DocumentTypeService documentTypeService_;
 
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
-    documentTypeService_ = (DocumentTypeService) container.getComponentInstanceOfType(DocumentTypeService.class);
-  }
-
-  @BeforeMethod
   public void setUp() throws Exception {
+    super.setUp();
+    documentTypeService_ = (DocumentTypeService) container.getComponentInstanceOfType(DocumentTypeService.class);
     applySystemSession();
     init();
   }
 
-  @AfterMethod
   public void tearDown() throws Exception {
     clear();
     session.save();
     session.logout();
+    super.tearDown();
   }
 
   /**
@@ -82,7 +69,6 @@ public class TestDocumentTypeService extends BaseWCMTestCase {
    * Expect: Get list of all supported types include Video, Images.
    * @throws Exception
    */
-  @Test
   public void testAllSupportedType() throws Exception {
 
     List<String> resultList = documentTypeService_.getAllSupportedType();
@@ -96,7 +82,6 @@ public class TestDocumentTypeService extends BaseWCMTestCase {
    * Expect: Get list of mime types of Video supported type.
    * @throws Exception
    */
-  @Test
   public void testAllDocumentsByKindOfDocumentType() throws Exception {
     Node rootNode = session.getRootNode();
     Node documentNode = getDocument(rootNode, "document");
@@ -121,7 +106,6 @@ public class TestDocumentTypeService extends BaseWCMTestCase {
    * Expect: Get list of nodes in which jcr:mimeType properties are image/gif types.
    * @throws Exception
    */
-  @Test
   public void testAllDocumentsByType() throws Exception {
     Node rootNode = session.getRootNode();
     Node documentNode = getDocument(rootNode, "document");
@@ -145,7 +129,6 @@ public class TestDocumentTypeService extends BaseWCMTestCase {
    * audio/mp3, text/plain types.
    * @throws Exception
    */
-  @Test
   public void testAllDocumentsByTypes() throws Exception {
     String[] mimeTypes = { "image/gif", "audio/mp3" };
     Node rootNode = session.getRootNode();
@@ -169,7 +152,6 @@ public class TestDocumentTypeService extends BaseWCMTestCase {
    * exo:owner is root
    * @throws Exception
    */
-  @Test
   public void testAllDocumentsByUser01() throws Exception {
     String[] mimeTypes = { "audio/mp3", "text/plain" };
     Node rootNode = session.getRootNode();
@@ -199,7 +181,6 @@ public class TestDocumentTypeService extends BaseWCMTestCase {
    * Expect: Get an empty list of nodes.
    * @throws Exception
    */
-  @Test
   public void testAllDocumentsByUser02() throws Exception {
     String[] mimeTypes = { "audio/mp3", "text/plain" };
     Node rootNode = session.getRootNode();
@@ -225,7 +206,6 @@ public class TestDocumentTypeService extends BaseWCMTestCase {
    * Expect: empty list of nodes.
    * @throws Exception
    */
-  @Test
   public void testGetAllDocumentByContentsTypeIsNoneContent() throws Exception {
     Node rootNode = session.getRootNode();
     Node documentNode = getDocument(rootNode, "document");
@@ -249,7 +229,6 @@ public class TestDocumentTypeService extends BaseWCMTestCase {
    * Expect: nodes that are content
    * @throws Exception
    */
-  @Test
   public void testGetAllDocumentByContentsTypeIsContent() throws Exception {
     Node rootNode = session.getRootNode();
     Node documentNode = getDocument(rootNode, "document");
@@ -278,7 +257,6 @@ public class TestDocumentTypeService extends BaseWCMTestCase {
    * Expect: nodes that are content and have specific owner
    * @throws Exception
    */
-  @Test
   public void testGetAllDocumentByContentsTypeAndOwner() throws Exception {
     Node rootNode = session.getRootNode();
     Node documentNode = getDocument(rootNode, "document");

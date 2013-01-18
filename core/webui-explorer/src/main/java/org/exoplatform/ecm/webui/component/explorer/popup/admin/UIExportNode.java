@@ -46,6 +46,8 @@ import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.compress.CompressData;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.web.application.RequireJS;
@@ -78,6 +80,8 @@ import org.exoplatform.webui.form.UIFormRadioBoxInput;
     }
 )
 public class UIExportNode extends UIForm implements UIPopupComponent {
+
+  private static final Log LOG  = ExoLogger.getLogger(UIExportNode.class.getName());
 
   public static final String NODE_PATH         = "nodePath";
 
@@ -114,11 +118,17 @@ public class UIExportNode extends UIForm implements UIPopupComponent {
     getUIFormInputInfo(NODE_PATH).setValue(Text.unescapeIllegalJcrChars(node.getPath())) ;
   }
 
-  public void activate() throws Exception {
-    update(getAncestorOfType(UIJCRExplorer.class).getCurrentNode()) ;
+  public void activate() {
+    try {
+      update(getAncestorOfType(UIJCRExplorer.class).getCurrentNode());
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error!", e.getMessage());
+      }
+    }
   }
 
-  public void deActivate() throws Exception { }
+  public void deActivate() { }
 
   public QueryResult getQueryResult(Node currentNode) throws RepositoryException {
     QueryManager queryManager = currentNode.getSession().getWorkspace().getQueryManager();

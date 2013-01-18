@@ -62,6 +62,8 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import javax.jcr.ItemNotFoundException;
+import javax.jcr.LoginException;
+import javax.jcr.NoSuchWorkspaceException;
 import javax.jcr.Node;
 import javax.jcr.PropertyIterator;
 import javax.jcr.RepositoryException;
@@ -121,31 +123,24 @@ abstract class BaseJcrStorage implements TypeManager
       IGNORED_PROPERTIES.add(XCMIS_PROPERTY_TYPE_PATTERN);
    }
 
-   //
-
-   protected Session session;
-
    protected StorageConfiguration storageConfiguration;
 
    protected Map<String, TypeMapping> nodeTypeMapping;
 
    protected final String rootPath;
 
-  public BaseJcrStorage(Session session,
-                        StorageConfiguration storageConfiguration,
-                        Map<String, TypeMapping> nodeTypeMapping) {
-    this.session = session;
+  public BaseJcrStorage(StorageConfiguration storageConfiguration, Map<String, TypeMapping> nodeTypeMapping) {
     this.storageConfiguration = storageConfiguration;
     this.nodeTypeMapping = nodeTypeMapping;
-    String rootPath = storageConfiguration.getRootNodePath();
-    if (rootPath.contains("${userId}")) {
+    String rootNodePath = storageConfiguration.getRootNodePath();
+    if (rootNodePath.contains("${userId}")) {
       // process root path template
       String userPath = null;
       try {
         // get user node path
         userPath = WCMCoreUtils.getService(NodeHierarchyCreator.class)
                                .getUserNode(SessionProvider.createSystemProvider(),
-                                            session.getUserID())
+                                            getSession().getUserID())
                                .getPath();
       } catch (Exception e) {
         // nothing
@@ -153,14 +148,14 @@ abstract class BaseJcrStorage implements TypeManager
       if (userPath != null) {
         // add to the path the /Private or /Public path segment from the template
         StringBuffer sb = new StringBuffer();
-        sb.append(userPath).append(rootPath.substring(rootPath.indexOf("${userId}") + "${userId}".length()));
+        sb.append(userPath).append(rootNodePath.substring(rootNodePath.indexOf("${userId}") + "${userId}".length()));
         userPath = sb.toString();
 
         storageConfiguration.setRootNodePath(userPath);
-        rootPath = userPath;
+        rootNodePath = userPath;
       }
     }
-    this.rootPath = rootPath;
+    this.rootPath = rootNodePath;
   }
 
    // ================= TypeManager =================
@@ -358,7 +353,7 @@ abstract class BaseJcrStorage implements TypeManager
             nodeTypeValue.setDeclaredPropertyDefinitionValues(jcrPropDefintions);
          }
 
-         ExtendedNodeTypeManager nodeTypeManager = (ExtendedNodeTypeManager)session.getWorkspace().getNodeTypeManager();
+         ExtendedNodeTypeManager nodeTypeManager = (ExtendedNodeTypeManager)getSession().getWorkspace().getNodeTypeManager();
          NodeType nodeType = nodeTypeManager.registerNodeType(nodeTypeValue, ExtendedNodeTypeManager.FAIL_IF_EXISTS);
          return nodeType.getName();
       }
@@ -399,7 +394,7 @@ abstract class BaseJcrStorage implements TypeManager
          {
             TypeDefinition typeDefinition = getTypeDefinition(typeId, includePropertyDefinitions);
             String nodeTypeName = typeDefinition.getLocalName();
-            NodeTypeManager nodeTypeManager = session.getWorkspace().getNodeTypeManager();
+            NodeTypeManager nodeTypeManager = getSession().getWorkspace().getNodeTypeManager();
             for (NodeTypeIterator iter = nodeTypeManager.getPrimaryNodeTypes(); iter.hasNext();)
             {
                NodeType nt = iter.nextNodeType();
@@ -453,7 +448,7 @@ abstract class BaseJcrStorage implements TypeManager
       typeId = getNodeType(typeId);
       try
       {
-         NodeType nodeType = session.getWorkspace().getNodeTypeManager().getNodeType(typeId);
+         NodeType nodeType = getSession().getWorkspace().getNodeTypeManager().getNodeType(typeId);
          return getTypeDefinition(nodeType, includePropertyDefinition);
       }
       catch (NoSuchNodeTypeException e)
@@ -499,7 +494,7 @@ abstract class BaseJcrStorage implements TypeManager
       }
       try
       {
-         ExtendedNodeTypeManager nodeTypeManager = (ExtendedNodeTypeManager)session.getWorkspace().getNodeTypeManager();
+         ExtendedNodeTypeManager nodeTypeManager = (ExtendedNodeTypeManager)getSession().getWorkspace().getNodeTypeManager();
          nodeTypeManager.unregisterNodeType(typeDefinition.getLocalName());
       }
       catch (RepositoryException re)
@@ -1138,7 +1133,7 @@ abstract class BaseJcrStorage implements TypeManager
    {
       try
       {
-         Node policiesStore = (Node)session.getItem(StorageImpl.XCMIS_SYSTEM_PATH + "/" + StorageImpl.XCMIS_POLICIES);
+         Node policiesStore = (Node)getSession().getItem(StorageImpl.XCMIS_SYSTEM_PATH + "/" + StorageImpl.XCMIS_POLICIES);
          if (policiesStore.hasNode(name))
          {
             throw new NameConstraintViolationException("Policy with name " + name + " already exists.");
@@ -1162,7 +1157,7 @@ abstract class BaseJcrStorage implements TypeManager
       try
       {
          Node relationships =
-            (Node)session.getItem(StorageImpl.XCMIS_SYSTEM_PATH + "/" + StorageImpl.XCMIS_RELATIONSHIPS);
+            (Node)getSession().getItem(StorageImpl.XCMIS_SYSTEM_PATH + "/" + StorageImpl.XCMIS_RELATIONSHIPS);
          if (relationships.hasNode(name))
          {
             throw new NameConstraintViolationException("Relationship with name " + name + " already exists.");
@@ -1197,7 +1192,7 @@ abstract class BaseJcrStorage implements TypeManager
       internal = id;
     }
     try {
-      Node node = ((ExtendedSession) session).getNodeByIdentifier(internal);
+      Node node = ((ExtendedSession) getSession()).getNodeByIdentifier(internal);
       if (node.isNodeType(JcrCMIS.NT_VERSION_HISTORY) && v != null) {
         VersionHistory vh = (VersionHistory) node;
         try {
@@ -1220,7 +1215,7 @@ abstract class BaseJcrStorage implements TypeManager
           }
 
           if ("1".equals(v) || lastVersion == Integer.parseInt(v)) {
-            node = ((ExtendedSession) session).getNodeByIdentifier(vh.getVersionableUUID());
+            node = ((ExtendedSession) getSession()).getNodeByIdentifier(vh.getVersionableUUID());
           } else {
             throw new ObjectNotFoundException("Object '" + id + "' does not exist.");
           }
@@ -1246,7 +1241,7 @@ abstract class BaseJcrStorage implements TypeManager
       if (node.isNodeType("exo:symlink")) {
         Node link = node;
         try {
-          node = ((ExtendedSession) session).getNodeByIdentifier(node.getProperty("exo:uuid")
+          node = ((ExtendedSession) getSession()).getNodeByIdentifier(node.getProperty("exo:uuid")
                                                                      .getString());
         } catch (ItemNotFoundException e) {
           throw new ObjectNotFoundException("Target of exo:symlink " + link.getPath()
@@ -1268,9 +1263,9 @@ abstract class BaseJcrStorage implements TypeManager
         }
         Node target = propertyWithId.getNode();
 
-        return new JcrNodeEntry(target, this);
+        return new JcrNodeEntry(target.getPath(), target.getSession().getWorkspace().getName(), this);
       }
-      return new JcrNodeEntry(node, this);
+      return new JcrNodeEntry(node.getPath(), node.getSession().getWorkspace().getName(), this);
     } catch (RepositoryException re) {
       throw new CmisRuntimeException(re.getMessage(), re);
     }
@@ -1285,7 +1280,7 @@ abstract class BaseJcrStorage implements TypeManager
    {
       try
       {
-         NodeType nodeType = session.getWorkspace().getNodeTypeManager().getNodeType(nodeTypeName);
+         NodeType nodeType = getSession().getWorkspace().getNodeTypeManager().getNodeType(nodeTypeName);
          return nodeType.isNodeType(JcrCMIS.NT_FILE) || nodeType.isNodeType(JcrCMIS.NT_FOLDER)
             || nodeType.isNodeType(JcrCMIS.CMIS_NT_POLICY) || nodeType.isNodeType(JcrCMIS.CMIS_NT_RELATIONSHIP)
             || getTypeMapping(nodeType) != null;
@@ -1311,5 +1306,9 @@ abstract class BaseJcrStorage implements TypeManager
    public Map<String, TypeMapping> getNodeTypeMapping()
    {
       return nodeTypeMapping;
+   }
+   
+   public Session getSession() throws RepositoryException {
+     return WCMCoreUtils.getUserSessionProvider().getSession(storageConfiguration.getWorkspace(), WCMCoreUtils.getRepository());
    }
 }

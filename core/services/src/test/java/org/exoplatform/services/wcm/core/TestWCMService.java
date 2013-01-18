@@ -16,18 +16,10 @@
  */
 package org.exoplatform.services.wcm.core;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertFalse;
-import static org.testng.AssertJUnit.assertNull;
-import static org.testng.AssertJUnit.assertTrue;
-
 import javax.jcr.Node;
 
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SAS
@@ -43,17 +35,12 @@ public class TestWCMService extends BaseWCMTestCase {
   /** The jcr node. */
   private Node node;
   
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
-    wcmService = (WCMService) container.getComponentInstanceOfType(WCMService.class);
-  }
-
   /* (non-Javadoc)
    * @see org.exoplatform.services.wcm.core.BaseWCMTestCase#setUp()
    */
-  @BeforeMethod
   public void setUp() throws Exception {
+    super.setUp();
+    wcmService = (WCMService) container.getComponentInstanceOfType(WCMService.class);
     applySystemSession();
     node = session.getRootNode().addNode("parentNode").addNode("childNode");
     node.addMixin("mix:referenceable");
@@ -66,7 +53,6 @@ public class TestWCMService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
-  @Test
   public void testGetReferencedContent1() throws Exception {
     String nodePath = "/parentNode/childNode";
     Node resultNode = wcmService.getReferencedContent(WCMCoreUtils.getSystemSessionProvider(), COLLABORATION_WS, nodePath);
@@ -78,7 +64,6 @@ public class TestWCMService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
-  @Test
   public void testGetReferencedContent2() throws Exception {
     String nodeUUID = node.getUUID();
     Node resultNode = wcmService.getReferencedContent(WCMCoreUtils.getSystemSessionProvider(), COLLABORATION_WS, nodeUUID);
@@ -90,7 +75,6 @@ public class TestWCMService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
-  @Test
   public void testGetReferencedContent3() throws Exception {
     String nodeIdentifier = "WrongIdentifier";
     Node resultNode = wcmService.getReferencedContent(WCMCoreUtils.getSystemSessionProvider(), COLLABORATION_WS, nodeIdentifier);
@@ -102,7 +86,6 @@ public class TestWCMService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
-  @Test
   public void testIsSharedPortal1() throws Exception {
     boolean isSharedPortal = wcmService.isSharedPortal(WCMCoreUtils.getSystemSessionProvider(), "shared");
     assertTrue(isSharedPortal);
@@ -113,7 +96,6 @@ public class TestWCMService extends BaseWCMTestCase {
    *
    * @throws Exception the exception
    */
-  @Test
   public void testIsSharedPortal2() throws Exception {
     boolean isSharedPortal = wcmService.isSharedPortal(WCMCoreUtils.getSystemSessionProvider(), "classic");
     assertFalse(isSharedPortal);
@@ -122,9 +104,9 @@ public class TestWCMService extends BaseWCMTestCase {
   /* (non-Javadoc)
    * @see junit.framework.TestCase#tearDown()
    */
-  @AfterMethod
-  protected void tearDown() throws Exception {
+  public void tearDown() throws Exception {
     session.getRootNode().getNode("parentNode").remove();
     session.save();
+    super.tearDown();
   }
 }

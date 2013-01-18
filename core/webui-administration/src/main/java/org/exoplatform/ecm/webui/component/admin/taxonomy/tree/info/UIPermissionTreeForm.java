@@ -147,7 +147,6 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
           getUICheckBoxInput(PermissionType.READ).setValue(permBeanTemp.isRead());
           getUICheckBoxInput(PermissionType.ADD_NODE).setValue(permBeanTemp.isAddNode());
           getUICheckBoxInput(PermissionType.REMOVE).setValue(permBeanTemp.isRemove());
-          getUICheckBoxInput(PermissionType.SET_PROPERTY).setValue(permBeanTemp.isSetProperty());
           break;
         }
       }
@@ -228,7 +227,6 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
       permBean.setRead(uiForm.getUICheckBoxInput(PermissionType.READ).isChecked());
       permBean.setAddNode(uiForm.getUICheckBoxInput(PermissionType.ADD_NODE).isChecked());
       permBean.setRemove(uiForm.getUICheckBoxInput(PermissionType.REMOVE).isChecked());
-      permBean.setSetProperty(uiForm.getUICheckBoxInput(PermissionType.SET_PROPERTY).isChecked());
 
       for (String perm : PERMISSIONS) {
         if (uiForm.getUICheckBoxInput(perm).isChecked()) {
@@ -238,8 +236,7 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
         }
       }
       if (uiForm.getUICheckBoxInput(PermissionType.ADD_NODE).isChecked()
-          || uiForm.getUICheckBoxInput(PermissionType.REMOVE).isChecked()
-          || uiForm.getUICheckBoxInput(PermissionType.SET_PROPERTY).isChecked()) {
+          || uiForm.getUICheckBoxInput(PermissionType.REMOVE).isChecked()) {
 
         if (!permsList.contains(PermissionType.READ)) {
           permsList.add(PermissionType.READ);

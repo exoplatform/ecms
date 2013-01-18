@@ -18,8 +18,8 @@ import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 
   String uiWorkingAreaId = uicomponent.getAncestorOfType(UIWorkingArea.class).getId();
   def jsManager = rcontext.getJavascriptManager();
-  jsManager.require("SHARED/ecm-utils", "ecmutil").require("SHARED/explorer-module", "explorer").
-  addScripts("explorer.UIListView.initDragDropForTreeEvent('$uiWorkingAreaId', '$enableDragAndDrop');").
+  jsManager.require("SHARED/ecm-utils", "ecmutil").require("SHARED/uiListView", "uiListView").
+  addScripts("uiListView.UIListView.initDragDropForTreeEvent('$uiWorkingAreaId', '$enableDragAndDrop');").
   addScripts("ecmutil.ECMUtils.loadEffectedItemsInSideBar();").
   addScripts("ecmutil.ECMUtils.loadEffectedSideBar('$focusNode');");  
   

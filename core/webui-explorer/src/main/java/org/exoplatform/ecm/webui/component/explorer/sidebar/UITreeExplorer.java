@@ -433,8 +433,8 @@ public class UITreeExplorer extends UIContainer {
 
       uiExplorer.updateAjax(event);
       event.getRequestContext().getJavascriptManager().
-            require("SHARED/explorer-module", "explorer").
-            addScripts("explorer.MultiUpload.setLocation('" + 
+            require("SHARED/multiUpload", "multiUpload").
+            addScripts("multiUpload.setLocation('" + 
                        uiExplorer.getWorkspaceName()  + "','" + 
                        uiExplorer.getDriveData().getName()  + "','" +
                        uiTreeExplorer.getLabel()  + "','" +

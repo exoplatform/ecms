@@ -33,12 +33,12 @@
     def focusNode = uiTreeExplorer.getEncodeCurrentPath();
     def expandNode = uiTreeExplorer.getEncodeExpandPath();
     def isExpand = uiTreeExplorer.getIsExpand();
-
+ 
   String componentId = uicomponent.getId();
   def jsManager = rcontext.getJavascriptManager();
-  jsManager.require("SHARED/ecm-utils", "ecmutil").require("SHARED/explorer-module", "explorer").
-  addScripts("explorer.UIListView.initDragDropForTreeEvent('$componentId', '$enableDragAndDrop');");
-
+  jsManager.require("SHARED/ecm-utils", "ecmutil").require("SHARED/uiListView", "uiListView").
+  addScripts("uiListView.UIListView.initDragDropForTreeEvent('$componentId', '$enableDragAndDrop');");
+  
 //WCM Notice
  def nodePathDelete = uicomponent.getNodePathDelete();
  def deleteNotice = uicomponent.getDeleteNotice();
@@ -63,7 +63,8 @@
     jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.loadEffectedSideBar('$focusNode');");
   else if(isExpand && expandNode != null)
     jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.loadEffectedSideBar('$expandNode');");
-  }
+  }    
+
 %>
 <div id="wcm-notice" style="display: none;" class="alert alert-success wcmAlertSuccess"></div>
 <div class="uiWorkingArea ClearFix" id="UIWorkingArea" initWithoutLeftContainer="$initWithoutLeftContainer">

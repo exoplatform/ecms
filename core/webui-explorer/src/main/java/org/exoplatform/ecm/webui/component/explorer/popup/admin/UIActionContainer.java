@@ -40,8 +40,8 @@ public class UIActionContainer extends UIContainer implements UIPopupComponent {
     addChild(UIActionForm.class, null, null) ;
   }
 
-  public void activate() throws Exception { }
-  public void deActivate() throws Exception { }
+  public void activate() { }
+  public void deActivate() { }
 
   public void initPopup(UIComponent uiComp) throws Exception {
     removeChildById("PopupComponent") ;

@@ -106,9 +106,9 @@ public class UINodeTypeSelectForm extends UIForm implements UIPopupComponent {
                      .setValue(strNodeTypes.toString());
   }
 
-  public void activate() throws Exception {}
+  public void activate() {}
 
-  public void deActivate() throws Exception {}
+  public void deActivate() {}
 
   static public class SaveActionListener extends EventListener<UINodeTypeSelectForm> {
     public void execute(Event<UINodeTypeSelectForm> event) throws Exception {

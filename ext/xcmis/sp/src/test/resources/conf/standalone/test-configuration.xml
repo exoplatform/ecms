@@ -30,6 +30,128 @@
       </init-params>
    </component>
 
+  <component>
+    <key>org.exoplatform.services.document.DocumentReaderService</key>
+    <type>org.exoplatform.services.document.impl.DocumentReaderServiceImpl</type>
+    <component-plugins>
+      <component-plugin>
+        <name>pdf.document.reader</name>
+        <set-method>addDocumentReader</set-method>
+        <type>org.exoplatform.services.document.impl.PDFDocumentReader</type>
+        <description>to read the pdf inputstream</description>
+        <init-params>
+          <values-param>
+            <name>document.known.types</name>
+            <description>description</description>
+            <value>application/pdf</value>
+          </values-param>
+        </init-params>
+      </component-plugin>
+      <component-plugin>
+        <name>document.readerMSWord</name>
+        <set-method>addDocumentReader</set-method>
+        <type>org.exoplatform.services.document.impl.MSWordDocumentReader</type>
+        <description>to read the ms word inputstream</description>
+        <init-params>
+          <values-param>
+            <name>document.known.typesMSWord</name>
+            <description>description</description>
+            <value>application/msword</value>
+          </values-param>
+        </init-params>
+      </component-plugin>
+      <component-plugin>
+        <name>document.readerMSExcel</name>
+        <set-method>addDocumentReader</set-method>
+        <type>org.exoplatform.services.document.impl.MSExcelDocumentReader</type>
+        <description>to read the ms excel inputstream</description>
+        <init-params>
+          <values-param>
+            <name>document.known.typesMSExcel</name>
+            <description>description</description>
+            <value>application/excel</value>
+          </values-param>
+        </init-params>
+      </component-plugin>
+      <component-plugin>
+        <name>document.readerMSOutlook</name>
+        <set-method>addDocumentReader</set-method>
+        <type>org.exoplatform.services.document.impl.MSOutlookDocumentReader</type>
+        <description>to read the ms outlook inputstream</description>
+        <init-params>
+          <values-param>
+            <name>document.known.typesMSOutlook</name>
+            <description>description</description>
+            <value>application/vnd.ms-outlook</value>
+          </values-param>
+        </init-params>
+      </component-plugin>
+      <component-plugin>
+        <name>PPTdocument.reader</name>
+        <set-method>addDocumentReader</set-method>
+        <type>org.exoplatform.services.document.impl.PPTDocumentReader</type>
+        <description>to read the ms ppt inputstream</description>
+        <init-params>
+          <values-param>
+            <name>document.known.typesPPT</name>
+            <description>description</description>
+            <value>application/ppt</value>
+          </values-param>
+        </init-params>
+      </component-plugin>
+      <component-plugin>
+        <name>document.readerHTML</name>
+        <set-method>addDocumentReader</set-method>
+        <type>org.exoplatform.services.document.impl.HTMLDocumentReader</type>
+        <description>to read the html inputstream</description>
+        <init-params>
+          <values-param>
+            <name>document.known.typesHTML</name>
+            <description>description</description>
+            <value>text/html</value>
+          </values-param>
+        </init-params>
+      </component-plugin>
+      <component-plugin>
+        <name>document.readerXML</name>
+        <set-method>addDocumentReader</set-method>
+        <type>org.exoplatform.services.document.impl.XMLDocumentReader</type>
+        <description>to read the xml inputstream</description>
+        <init-params>
+          <values-param>
+            <name>document.known.typesXML</name>
+            <description>description</description>
+            <value>text/xml</value>
+          </values-param>
+        </init-params>
+      </component-plugin>
+      <component-plugin>
+        <name>TPdocument.reader</name>
+        <set-method>addDocumentReader</set-method>
+        <type>org.exoplatform.services.document.impl.TextPlainDocumentReader</type>
+        <description>to read the plain text inputstream</description>
+        <init-params>
+          <values-param>
+            <name>document.known.typesTextPlain</name>
+            <description>description</description>
+            <value>text/plain</value>
+          </values-param>
+          <!-- values-param>
+            <name>defaultEncoding</name>
+            <description>description</description>
+            <value>UTF-8</value>
+         </values-param -->
+        </init-params>
+      </component-plugin>
+      <component-plugin>
+        <name>document.readerOO</name>
+        <set-method>addDocumentReader</set-method>
+        <type>org.exoplatform.services.document.impl.OpenOfficeDocumentReader</type>
+        <description>to read the OO inputstream</description>
+      </component-plugin>
+    </component-plugins>
+  </component>
+
    <component>
       <key>org.exoplatform.services.jcr.RepositoryService</key>
       <type>org.exoplatform.services.jcr.impl.RepositoryServiceImpl</type>
@@ -42,11 +164,7 @@
                <properties-param>
                   <name>namespaces</name>
                   <property name="dc" value="http://purl.org/dc/elements/1.1/"/>
-                  <property name="rma" value="http://www.rma.com/jcr/"/>
                   <property name="metadata" value="http://www.exoplatform.com/jcr/metadata/1.1/"/>
-                  <property name="Fwd" value="http://www.exoplatform.com/jcr/Fwd/1.1/"/>
-                  <property name="Re" value="http://www.exoplatform.com/jcr/Re/1.1/"/>
-                  <property name="kfx" value="http://www.exoplatform.com/jcr/kfx/1.1/"/>
                   <property name="cmis" value="http://www.exoplatform.com/jcr/cmis/1.0"/>
                   <property name="xcmis" value="http://www.exoplatform.com/jcr/xcmis/1.0"/>
                </properties-param>

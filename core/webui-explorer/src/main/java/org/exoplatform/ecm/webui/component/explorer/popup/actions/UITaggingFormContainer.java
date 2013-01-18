@@ -25,6 +25,8 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
@@ -46,15 +48,19 @@ import org.exoplatform.webui.event.EventListener;
 @ComponentConfig(
     lifecycle = UIContainerLifecycle.class,
     template = "system:/groovy/portal/webui/container/UIContainer.gtmpl"
-//    events = {
-//      @EventConfig(listeners = UITaggingFormContainer.EditActionListener.class, phase = Phase.DECODE)
-//    }
 )
 public class UITaggingFormContainer extends UIContainer implements UIPopupComponent {
+  private static final Log LOG = ExoLogger.getLogger(UICommentForm.class.getName());
 
-  public void activate() throws Exception {
-    UITaggingForm uiForm = addChild(UITaggingForm.class, null, null);
-    uiForm.activate();
+  public void activate() {
+    try {
+      UITaggingForm uiForm = addChild(UITaggingForm.class, null, null);
+      uiForm.activate();
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error!", e.getMessage());
+      }
+    }
   }
 
   @Override
@@ -63,7 +69,7 @@ public class UITaggingFormContainer extends UIContainer implements UIPopupCompon
     super.processRender(context);
   }
 
-  public void deActivate() throws Exception {
+  public void deActivate() {
   }
 
   private void initTaggingFormPopup(Node selectedTag) throws Exception {

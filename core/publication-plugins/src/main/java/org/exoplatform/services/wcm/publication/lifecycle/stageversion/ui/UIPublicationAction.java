@@ -25,6 +25,7 @@ import javax.jcr.Value;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.mop.SiteKey;
+import org.exoplatform.portal.mop.page.PageContext;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserPortal;
@@ -110,7 +111,7 @@ public class UIPublicationAction extends UIForm {
 
       if (selectedNode == null) {
         application.addMessage(new ApplicationMessage("UIPublicationAction.msg.none", null, ApplicationMessage.WARNING));
-        
+
         return;
       }
 
@@ -133,7 +134,7 @@ public class UIPublicationAction extends UIForm {
       UserNode userNode = selectedNode.getUserNode();
       if (userNode == null) {
         application.addMessage(new ApplicationMessage("UIPublicationAction.msg.wrongNode", null, ApplicationMessage.WARNING));
-        
+
         return;
       }
 
@@ -171,22 +172,21 @@ public class UIPublicationAction extends UIForm {
 
       if (selectedNavigationNodeURI == null) {
         UIApplication application = publicationAction.getAncestorOfType(UIApplication.class);
-        application.addMessage(new ApplicationMessage("UIPublicationAction.msg.none", null, ApplicationMessage.WARNING));        
+        application.addMessage(new ApplicationMessage("UIPublicationAction.msg.none", null, ApplicationMessage.WARNING));
         return;
       }
       String portalName = selectedNavigationNodeURI.substring(1, selectedNavigationNodeURI.indexOf("/", 1));
       String pageNodeUri = selectedNavigationNodeURI.replaceFirst("/\\w+/", "");
-      
+
       UserPortal userPortal = Util.getUIPortalApplication().getUserPortalConfig().getUserPortal();
       UserNavigation navigation = userPortal.getNavigation(SiteKey.portal(portalName));
-      Page page = null;
+      PageContext pageContext = null;
       Node contentNode = null;
       if (navigation != null) {
         contentNode = publicationPages.getNode();
         if (contentNode.hasProperty("publication:applicationIDs")) {
           UserNode userNode = getUserNodeByUri(navigation, pageNodeUri);
-          page = userPortalConfigService.getPage(userNode.getPageRef(), event.getRequestContext().getRemoteUser());
-        }
+          pageContext = userPortalConfigService.getPage(userNode.getPageRef());        }
       }
       publicationAction.updateUI();
       UIPublicationPagesContainer publicationPagesContainer = publicationPages.
@@ -202,9 +202,9 @@ public class UIPublicationAction extends UIForm {
      * @return
      */
     private UserNode getUserNodeByUri(UserNavigation pageNav, String uri) {
-      if(pageNav == null || uri == null) return null;      
+      if(pageNav == null || uri == null) return null;
       UserPortal userPortal = Util.getUIPortalApplication().getUserPortalConfig().getUserPortal();
-      return userPortal.resolvePath(pageNav, null, uri);     
+      return userPortal.resolvePath(pageNav, null, uri);
     }
   }
 

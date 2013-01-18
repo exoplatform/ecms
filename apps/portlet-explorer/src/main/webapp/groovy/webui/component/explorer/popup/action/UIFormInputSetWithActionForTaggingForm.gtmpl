@@ -12,8 +12,8 @@
 	import org.exoplatform.ecm.webui.component.explorer.popup.actions.UITaggingForm;
 
 	def context = _ctx.getRequestContext();
-	context.getJavascriptManager().require("SHARED/explorer-module", "explorer").
-	addScripts("explorer.AutoComplete.disposeCount();"); 
+	context.getJavascriptManager().require("SHARED/autoComplete", "autoComplete").
+	addScripts("autoComplete.AutoComplete.disposeCount();"); 
 %>
 <div class="$uicomponent.id">
  <div class="UIFormInputSet">

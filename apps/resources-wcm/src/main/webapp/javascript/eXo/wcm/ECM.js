@@ -1,3 +1,5 @@
-if (!eXo.ecm) {
-  eXo.ecm = {};
-}
+(function() {
+	if (!eXo.ecm) {
+	  eXo.ecm = {};
+	}
+})();

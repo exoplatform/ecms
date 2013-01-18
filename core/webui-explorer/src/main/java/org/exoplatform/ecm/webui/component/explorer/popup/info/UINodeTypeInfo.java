@@ -29,13 +29,15 @@ import javax.jcr.nodetype.PropertyDefinition;
 import javax.jcr.version.OnParentVersionAction;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.services.jcr.core.ExtendedPropertyType;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIContainer;
+import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
@@ -54,14 +56,16 @@ import org.exoplatform.webui.event.EventListener;
 )
 
 public class UINodeTypeInfo extends UIContainer implements UIPopupComponent {
+  private static final Log LOG  = ExoLogger.getLogger(UINodeTypeInfo.class.getName());
+
   private Collection nodeTypes ;
 
   public UINodeTypeInfo() throws Exception {}
 
-  public void activate() throws Exception {
+  public void activate() {
     UIJCRExplorer uiJCRExplorer = getAncestorOfType(UIJCRExplorer.class) ;
-    Node node = uiJCRExplorer.getCurrentNode() ;
     try {
+      Node node = uiJCRExplorer.getCurrentNode() ;
       NodeType nodetype = node.getPrimaryNodeType() ;
       Collection<NodeType> types = new ArrayList<NodeType>() ;
       types.add(nodetype) ;
@@ -73,7 +77,13 @@ public class UINodeTypeInfo extends UIContainer implements UIPopupComponent {
       nodeTypes = types ;
     } catch (Exception e) {
       UIApplication uiApp = uiJCRExplorer.getAncestorOfType(UIApplication.class) ;
-      JCRExceptionManager.process(uiApp, e);
+      try {
+        JCRExceptionManager.process(uiApp, e);
+      } catch (Exception e1) {
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error!", e.getMessage());
+        }
+      }
     }
   }
 
@@ -90,7 +100,7 @@ public class UINodeTypeInfo extends UIContainer implements UIPopupComponent {
     return null ;
   }
 
-  public void deActivate() throws Exception {}
+  public void deActivate() {}
 
   public String[] getActions() {return new String[] {"Close"} ;}
 

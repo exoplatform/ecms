@@ -61,7 +61,6 @@ import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.container.component.ComponentPlugin;
-import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.ecm.jcr.model.Preference;
@@ -790,8 +789,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   public String getRssLink() { return null ; }
 
   public String getPortalName() {
-    PortalContainerInfo containerInfo = WCMCoreUtils.getService(PortalContainerInfo.class) ;
-    return containerInfo.getContainerName() ;
+    return WCMCoreUtils.getPortalName();
   }
 
   public String getRepository() throws Exception {
@@ -1177,8 +1175,8 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         }
         uiExplorer.updateAjax(event);
         event.getRequestContext().getJavascriptManager().
-        require("SHARED/explorer-module", "explorer").
-        addScripts("explorer.MultiUpload.setLocation('" + 
+        require("SHARED/multiUpload", "multiUpload").
+        addScripts("multiUpload.setLocation('" + 
                    uiExplorer.getWorkspaceName()  + "','" + 
                    uiExplorer.getDriveData().getName()  + "','" +
                    uiTreeExplorer.getLabel()  + "','" +
@@ -1729,11 +1727,11 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   public void processRender(WebuiRequestContext context) throws Exception {
     //check if current user can add node to current node
     if (canAddNode()) {
-      context.getJavascriptManager().require("SHARED/explorer-module", "explorer").
-              addScripts("explorer.MultiUpload.registerEvents('" + this.getId() +"');");
+      context.getJavascriptManager().require("SHARED/multiUpload", "multiUpload").
+              addScripts("multiUpload.registerEvents('" + this.getId() +"');");
     } else {
-      context.getJavascriptManager().require("SHARED/explorer-module", "explorer").
-              addScripts("explorer.MultiUpload.unregisterEvents();");
+      context.getJavascriptManager().require("SHARED/multiUpload", "multiUpload").
+              addScripts("multiUpload.unregisterEvents();");
     }
     super.processRender(context);
   }

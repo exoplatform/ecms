@@ -6,6 +6,30 @@
    xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
   <component>
+    <key>org.exoplatform.services.jcr.ext.audit.AuditService</key>  
+    <type>org.exoplatform.services.jcr.ext.audit.AuditServiceImpl</type>
+      <init-params>
+        <!-- Group or user who may view audit information -->
+        <value-param>
+          <name>adminIdentity</name>
+          <value>*:/Platform/Administrators</value>
+        </value-param>
+    </init-params>
+  </component>
+  
+  <component>
+    <key>org.exoplatform.services.portletcache.FragmentCacheService</key>
+    <type>org.exoplatform.services.portletcache.FragmentCacheService</type>
+    <init-params>
+      <value-param>
+        <name>cleanup-cache</name>
+        <description>The cleanup cache period in seconds</description>
+        <value>300</value>
+      </value-param>
+    </init-params>
+  </component>
+
+  <component>
     <key>org.exoplatform.webui.ext.UIExtensionManager</key>
     <type>org.exoplatform.webui.ext.impl.UIExtensionManagerImpl</type>
   </component>

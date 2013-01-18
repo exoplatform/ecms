@@ -65,6 +65,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.impl.Constants;
 import org.exoplatform.services.jcr.impl.core.nodetype.NodeTypeImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -838,7 +839,7 @@ public class Utils {
     SkinConfig customSkin = skinService.getSkin(portal, upc.getPortalConfig().getSkin());
     if (customSkin != null) portalSkins.add(customSkin);
     for (SkinConfig portalSkin : portalSkins) {
-      contentsCss.append("'").append(portalSkin.createURL()).append("',");
+      contentsCss.append("'").append(portalSkin.createURL(Util.getPortalRequestContext().getControllerContext())).append("',");
     }
     contentsCss.delete(contentsCss.length() - 1, contentsCss.length());
     contentsCss.append("]");
@@ -1093,9 +1094,11 @@ public class Utils {
     List<String> allowedTypes = new ArrayList<String>();
     NodeTypeImpl currentNodeType = (NodeTypeImpl)currentNode.getPrimaryNodeType(); 
     String[] arrFoldertypes = currentDrive.getAllowCreateFolders().split(",");
+    NodeTypeManager ntManager = currentNode.getSession().getWorkspace().getNodeTypeManager();
 
     for(String strFolderType : arrFoldertypes) {
-      if ((currentNodeType).isChildNodePrimaryTypeAllowed(strFolderType)) {
+      NodeType folderType = ntManager.getNodeType(strFolderType);
+      if ((currentNodeType).isChildNodePrimaryTypeAllowed(Constants.JCR_ANY_NAME, ((NodeTypeImpl)folderType).getQName())) {
         allowedTypes.add(strFolderType);
       }
     }

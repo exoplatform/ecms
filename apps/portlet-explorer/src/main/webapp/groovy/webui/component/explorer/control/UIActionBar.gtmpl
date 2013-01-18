@@ -24,8 +24,9 @@
   def uiFormId = uicomponent.id;
   
   def jsManager = rcontext.getJavascriptManager();
-  jsManager.require("SHARED/ecm-utils", "ecmutil").require("SHARED/explorer-module", "explorer")
-  .addScripts('explorer.MultiUpload.displayCorrectUploadButton();');
+  jsManager.require("SHARED/ecm-utils", "ecmutil").require("SHARED/multiUpload", "multiUpload")
+  .addScripts('multiUpload.displayCorrectUploadButton();');
+  
   def showUploadInput = false;
   
   def tabs = uicomponent.getTabList() ;

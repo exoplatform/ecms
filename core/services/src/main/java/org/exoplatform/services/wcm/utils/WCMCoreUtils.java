@@ -68,6 +68,7 @@ import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.quartz.JobExecutionContext;
+import org.quartz.impl.JobDetailImpl;
 
 /**
  * Created by The eXo Platform SAS
@@ -152,7 +153,7 @@ public class WCMCoreUtils {
   }
 
   public static String getContainerNameFromJobContext(JobExecutionContext context) {
-    return context.getJobDetail().getGroup().split(":")[0];
+    return ((JobDetailImpl)context.getJobDetail()).getGroup().split(":")[0];
   }
 
   /**
@@ -596,5 +597,10 @@ public class WCMCoreUtils {
            .append(nodeIdentifiler)
            .append("?param=").append(propertyName);
     return builder.toString();
+  }
+  
+  public static String getPortalName() {
+    PortalContainerInfo containerInfo = WCMCoreUtils.getService(PortalContainerInfo.class) ;
+    return containerInfo.getContainerName() ;
   }
 }

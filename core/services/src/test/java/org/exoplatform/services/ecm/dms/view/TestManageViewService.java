@@ -17,12 +17,6 @@
  **************************************************************************/
 package org.exoplatform.services.ecm.dms.view;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertFalse;
-import static org.testng.AssertJUnit.assertNotNull;
-import static org.testng.AssertJUnit.assertTrue;
-import static org.testng.AssertJUnit.fail;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,9 +31,6 @@ import org.exoplatform.services.cms.views.ViewConfig.Tab;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SARL
@@ -65,17 +56,12 @@ public class TestManageViewService extends BaseWCMTestCase {
 
   private String                      templatesPathEx;
 
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
+  public void setUp() throws Exception {
+    super.setUp();
     manageViewService = (ManageViewService)container.getComponentInstanceOfType(ManageViewService.class);
     nodeHierarchyCreator = (NodeHierarchyCreator)container.getComponentInstanceOfType(NodeHierarchyCreator.class);   
     viewsPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_VIEWS_PATH);
     templatesPathEx = nodeHierarchyCreator.getJcrPath(BasePath.ECM_EXPLORER_TEMPLATES);
-  }
-  
-  @BeforeMethod
-  public void setUp() throws Exception {
     applySystemSession();   
     sessionDMS = sessionProviderService_.getSystemSessionProvider(null).getSession(DMSSYSTEM_WS, repository);
   }
@@ -111,7 +97,7 @@ public class TestManageViewService extends BaseWCMTestCase {
    * Check all data initiated from repository
    * @throws Exception
    */
-  @Test
+  
   public void testInit() throws Exception {
     manageViewService.init();
     checkInitData();
@@ -127,7 +113,7 @@ public class TestManageViewService extends BaseWCMTestCase {
    * Output: Node view is registered with all component and properties defined above
    * @throws Exception
    */
-  @Test
+  
   public void testAddView() throws Exception {
     String name = "templateTest";
     String permission = "*:/platform/administrators";
@@ -162,7 +148,7 @@ public class TestManageViewService extends BaseWCMTestCase {
    * Expect: Return node admin-view with node type = exo:view
    * @throws Exception
    */
-  @Test
+  
   public void testGetViewByName() throws Exception {
     Node adminView = manageViewService.getViewByName("admin-view", WCMCoreUtils.getSystemSessionProvider());
     assertEquals(VIEW_NODETYPE, adminView.getPrimaryNodeType().getName());
@@ -171,7 +157,7 @@ public class TestManageViewService extends BaseWCMTestCase {
    * Test ManageViewServiceImpl.getButtons()
    * Get all buttons that are registered
    */
-  @Test
+  
   public void testGetButtons() {
     //refer to testStart() method
   }
@@ -182,7 +168,7 @@ public class TestManageViewService extends BaseWCMTestCase {
    * Expect: anonymous-view in viewsPath does not exist
    * @throws Exception
    */
-  @Test
+  
   public void testRemoveView() throws Exception {
     manageViewService.removeView("anonymous-view");
     assertFalse(sessionDMS.itemExists(viewsPath + "/anonymous-view"));
@@ -195,7 +181,7 @@ public class TestManageViewService extends BaseWCMTestCase {
    * Expect: Return 8 views (view total is 9 views)
    * @throws Exception
    */
-  @Test
+  
   public void testGetAllViews() throws Exception {
     List<ViewConfig> viewList = manageViewService.getAllViews();
     assertNotNull(viewList.size());
@@ -208,7 +194,7 @@ public class TestManageViewService extends BaseWCMTestCase {
    *         2. Return false with view name = admin_view in path = /exo:ecm/views/userviews in dms-system
    * @throws Exception
    */
-  @Test
+  
   public void testHasView() throws Exception {
     assertTrue(manageViewService.hasView("admin-view"));
     assertFalse(manageViewService.hasView("admin_view"));
@@ -220,7 +206,7 @@ public class TestManageViewService extends BaseWCMTestCase {
    * Expect: Node in dms-system workspace
    * @throws Exception
    */
-  @Test
+  
   public void testGetTemplateHome() throws Exception {
     Node homeNode = manageViewService.getTemplateHome(BasePath.CMS_VIEWS_PATH, WCMCoreUtils.getSystemSessionProvider());
     assertEquals("/exo:ecm/views/userviews", homeNode.getPath());
@@ -232,7 +218,7 @@ public class TestManageViewService extends BaseWCMTestCase {
    * Expect: Return 5 view template: SystemView, CoverFlow, IconView, ListView, ThumbnailsView
    * @throws Exception
    */
-  @Test
+  
   public void testGetAllTemplates() throws Exception {
     List<Node> lstNode = manageViewService.getAllTemplates(BasePath.ECM_EXPLORER_TEMPLATES, 
         WCMCoreUtils.getSystemSessionProvider());
@@ -250,7 +236,7 @@ public class TestManageViewService extends BaseWCMTestCase {
    * Expect: 2 new templates (SimpleView, SystemView) are added with property exo:templateFile is value of variable templateFile
    * @throws Exception
    */  
-  @Test
+  
   public void testAddTemplate() throws Exception {
     String templateFile = "<%import org.exoplatform.ecm.webui.utils.Utils; " +
         "import org.exoplatform.web.application.Parameter;" +
@@ -269,7 +255,7 @@ public class TestManageViewService extends BaseWCMTestCase {
    * Test add template with system session provider
    * @throws Exception
    */
-  @Test
+  
   public void testAddTemplate2() throws Exception {
     String templateFile = "<%import org.exoplatform.ecm.webui.utils.Utils; "
         + "import org.exoplatform.web.application.Parameter;"
@@ -295,7 +281,7 @@ public class TestManageViewService extends BaseWCMTestCase {
    * expected result: AccessDeniedException
    * @throws Exception
    */
-  @Test
+  
   public void testAddTemplate3() throws Exception {    
     applyUserSession("marry", "gtn",DMSSYSTEM_WS);
     String templateFile = "<%import org.exo platform.ecm.webui.utils.Utils; "
@@ -320,7 +306,7 @@ public class TestManageViewService extends BaseWCMTestCase {
    * Expect: Node with above path does not exist
    * @throws Exception
    */
-  @Test
+  
   public void testRemoveTemplate() throws Exception {
     String templateFile = "<%import org.exoplatform.ecm.webui.utils.Utils; " +
     "import org.exoplatform.web.application.Parameter;" +
@@ -339,7 +325,7 @@ public class TestManageViewService extends BaseWCMTestCase {
    * 
    * @throws Exception
    */
-  @Test
+  
   public void testRemoveTemplate2() throws Exception {
     String templateFile = "<%import org.exoplatform.ecm.webui.utils.Utils; "
         + "import org.exoplatform.web.application.Parameter;"
@@ -355,7 +341,7 @@ public class TestManageViewService extends BaseWCMTestCase {
     assertFalse(sessionDMS.itemExists(templatesPathEx + "/SimpleView"));
   }
   
-  @Test
+  
   public void testRemoveTemplate3() throws Exception {
 
     applyUserSession("marry", "gtn",DMSSYSTEM_WS);
@@ -374,7 +360,7 @@ public class TestManageViewService extends BaseWCMTestCase {
    * 
    * @throws Exception
    */
-  @Test
+  
   public void testUpdateTemplate() throws Exception {
     String templateFile = "<%import org.exoplatform.ecm.webui.utils.Utils; "
         + "import org.exoplatform.web.application.Parameter;"
@@ -420,7 +406,7 @@ public class TestManageViewService extends BaseWCMTestCase {
    * 
    * @throws Exception
    */
-  @Test
+  
   public void testUpdateTemplate2() throws Exception {
     applyUserSession("marry", "gtn", DMSSYSTEM_WS);
     String updateTemplateFile = "<%import org.exoplatform.ecm.webui.utils.Utils; "
@@ -445,7 +431,7 @@ public class TestManageViewService extends BaseWCMTestCase {
    * Expect: One tab with these buttons are added, all tabs and buttons of old views does not change
    * @throws Exception
    */
-  @Test
+  
   public void testAddTab() throws Exception {
     Node nodeHome = (Node)sessionDMS.getItem(viewsPath + "/admin-view");
     String buttons = "Zoom Out; Zoom In";
@@ -467,7 +453,6 @@ public class TestManageViewService extends BaseWCMTestCase {
   /**
    * Clean templateTest node
    */
-  @AfterMethod
   public void tearDown() throws Exception {
     if (sessionDMS.itemExists(viewsPath + "/templateTest")) {
       Node templateTest = (Node)sessionDMS.getItem(viewsPath + "/templateTest");
@@ -475,6 +460,6 @@ public class TestManageViewService extends BaseWCMTestCase {
       sessionDMS.save();
       sessionDMS.logout();
     }
+    super.tearDown();
   }
-
 }

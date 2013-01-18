@@ -16,9 +16,6 @@
  */
 package org.exoplatform.ecms.test;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertNotNull;
-
 import java.io.StringWriter;
 
 import javax.jcr.RepositoryException;
@@ -27,48 +24,72 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.common.http.HTTPMethods;
 import org.exoplatform.component.test.ConfigurationUnit;
 import org.exoplatform.component.test.ConfiguredBy;
 import org.exoplatform.component.test.ContainerScope;
 import org.exoplatform.ecms.test.mock.MockRestService;
 import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
+import org.exoplatform.services.resources.LocaleConfigService;
 import org.exoplatform.services.rest.impl.ContainerResponse;
 import org.exoplatform.services.rest.impl.MultivaluedMapImpl;
-import org.exoplatform.services.rest.wadl.research.HTTPMethods;
 import org.exoplatform.services.security.IdentityConstants;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * Created by The eXo Platform SAS
- * Author : Lai Trung Hieu
- *          hieult@exoplatform.com
- * Jun 6, 2012  
+ * @author : Pham Duy Dong
+ *          dongpd@exoplatform.com
  */
 @ConfiguredBy({
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.portal-configuration.xml"),
+  @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/exo.portal.component.identity-configuration.xml"),
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-test-configuration.xml"),
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/portal/mock-rest-configuration.xml")
-  })
+})
 public class DummyECMSTestCase extends BaseECMSResourceTestCase {
-  
   private final String MOCK_RESOURCE_URL = "/mock/guest";
-  
-  /* (non-Javadoc)
-   * @see org.exoplatform.ecms.test.BaseECMSTestCase#afterContainerStart()
-   */
-  @Override
-  protected void afterContainerStart() {
-    super.afterContainerStart();
+
+  public void setUp() throws Exception {
+    super.setUp();
     MockRestService restService = (MockRestService) this.container.getComponentInstanceOfType(MockRestService.class);
     this.binder.addResource(restService, null);
-  }
-  
-  @BeforeMethod
-  protected void setUp() throws Exception {
     applySystemSession();
   }
 
-  @Test
+  public void testInitServices() throws Exception {
+    assertNotNull(repositoryService);
+    assertEquals(repositoryService.getDefaultRepository().getConfiguration().getName(),
+                 "repository");
+    assertEquals(repositoryService.getDefaultRepository()
+                                  .getConfiguration()
+                                  .getDefaultWorkspaceName(), "collaboration");
+    assertNotNull(container);
+   // assertEquals(repositoryService.getCurrentRepository().getWorkspaceNames().length, 4);
+    
+    assertNotNull(getService(LocaleConfigService.class));
+//    System.out.println("Num of workspace: " + repositoryService.getCurrentRepository().getWorkspaceNames().length);
+//    System.out.println("Num of node types: " + repositoryService.getCurrentRepository().getNodeTypeManager().getAllNodeTypes().getSize());
+//    System.out.println("Num of locales: " + getService(LocaleConfigService.class).getLocalConfigs().size());
+//    System.out.println("hibernate" + (getService(HibernateService.class) == null));
+//    System.out.println("Cache: " + (getService(CacheService.class) == null));
+//    System.out.println("Document Reader : " + (getService(DocumentReaderService.class) == null));
+//    System.out.println("DescriptionService : " + (getService(DescriptionService.class) == null));
+//    System.out.println("DataStorage : " + (getService(DataStorage.class) == null));
+//    System.out.println("TransactionManagerLookup : " + (getService(TransactionManagerLookup.class)));
+//    System.out.println("TransactionService : " + (getService(TransactionService.class)));
+//    System.out.println("POMSessionManager : " + (getService(POMSessionManager.class)));
+//    System.out.println("ChromatticManager : " + (getService(ChromatticManager.class)));
+//    System.out.println("PicketLinkIDMService : " + (getService(PicketLinkIDMService.class)));
+//    System.out.println("PicketLinkIDMCacheService : " + (getService(PicketLinkIDMCacheService.class)));
+//    System.out.println("ResourceCompressor : " + (getService(ResourceCompressor.class)));
+//    System.out.println("ModelDataStorage : " + (getService(ModelDataStorage.class)));
+//    System.out.println("NavigationService : " + (getService(NavigationService.class)));
+//    System.out.println("JTAUserTransactionLifecycleService : " + (getService(JTAUserTransactionLifecycleService.class)));
+//    System.out.println("SkinService : " + (getService(SkinService.class)));
+//    System.out.println("PortalContainerInfo : " + (getService(PortalContainerInfo.class)));
+//    System.out.println("LogConfigurationInitializer : " + (getService(LogConfigurationInitializer.class)));
+  }
+  
   public void testInitializedServices() {
     assertNotNull(this.container);
     assertNotNull(this.orgService);
@@ -76,7 +97,6 @@ public class DummyECMSTestCase extends BaseECMSResourceTestCase {
     assertNotNull(this.sessionProviderService_);
   }
   
-  @Test
   public void testApplySession() throws RepositoryConfigurationException, RepositoryException{
     assertNotNull(this.session);
     assertNotNull(this.repository);
@@ -91,7 +111,6 @@ public class DummyECMSTestCase extends BaseECMSResourceTestCase {
     assertEquals("john", session.getUserID());
   }
   
-  @Test
   public void testAchieveResource() throws Exception{
     StringWriter writer = new StringWriter().append("name=guest");
     byte[] data = writer.getBuffer().toString().getBytes("UTF-8");
@@ -109,6 +128,9 @@ public class DummyECMSTestCase extends BaseECMSResourceTestCase {
     response = service(HTTPMethods.DELETE.toString(), MOCK_RESOURCE_URL + "?name=guest", StringUtils.EMPTY, null, null);
     assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
     assertEquals("Removed guest", response.getEntity().toString());    
-    
+  }
+  
+  public void tearDown() throws Exception {
+    super.tearDown();
   }
 }

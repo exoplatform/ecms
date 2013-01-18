@@ -182,26 +182,9 @@ public class StorageProviderImpl implements StorageProvider, Startable
          throw new InvalidArgumentException("CMIS repository is not configured.");
       }
 
-      String ws = storageConfiguration.getWorkspace();
-
-      try
-      {
-         ManageableRepository repository = repositoryService.getCurrentRepository();
-         Session session = repository.login(ws);
          StorageImpl storage =
-            new StorageImpl(session, storageConfiguration, searchService, permissionService, nodeTypeMapping);
+            new StorageImpl(storageConfiguration, searchService, permissionService, nodeTypeMapping);
          return new JcrConnection(storage);
-      }
-      catch (RepositoryException re)
-      {
-         throw new CmisRuntimeException("Unable get CMIS storage " + storageConfiguration.getId() + ". "
-            + re.getMessage(), re);
-      }
-//      catch (RepositoryConfigurationException rce)
-//      {
-//         throw new CmisRuntimeException("Unable get CMIS storage " + storageConfiguration.getId() + ". "
-//            + rce.getMessage(), rce);
-//      }
    }
 
    /**
