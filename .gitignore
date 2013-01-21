@@ -30,6 +30,11 @@ target/
 .classpath
 .project
 
+# Bin
+bin/
+# Log 
+*.log
+
 # OS
 .DS_Store
 

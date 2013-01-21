@@ -21,6 +21,7 @@ import javax.jcr.Session;
 
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.CmsService;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommons;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.jcr.util.Text;
@@ -55,6 +56,8 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
 
   /** The web content schema handler. */
   private WebContentSchemaHandler webContentSchemaHandler;
+  
+  private ListenerService         listenerService = null;
 
   /**
    * Instantiates a new post create content event listener.
@@ -75,6 +78,9 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
    * @see org.exoplatform.services.listener.Listener#onEvent(org.exoplatform.services.listener.Event)
    */
   public void onEvent(Event<CmsService, Node> event) throws Exception {
+    if (listenerService==null) {
+      listenerService = WCMCoreUtils.getService(ListenerService.class);
+    }
     Node currentNode = event.getData();
     if(currentNode.canAddMixin("exo:rss-enable")) {
       currentNode.addMixin("exo:rss-enable");
@@ -85,7 +91,6 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
     if (currentNode.isNodeType("exo:cssFile") || currentNode.isNodeType("exo:jsFile")
         || currentNode.getParent().isNodeType("exo:actionStorage")) {
       if (currentNode.isNodeType("exo:cssFile") || currentNode.isNodeType("exo:jsFile")) {
-        ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
         CmsService cmsService = WCMCoreUtils.getService(CmsService.class);
         listenerService.broadcast(POST_INIT_STATE_EVENT, cmsService, currentNode);
       }
@@ -117,6 +122,12 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
       if (LOG.isDebugEnabled()) LOG.debug("No portal context available");
     }
     if (LOG.isInfoEnabled()) LOG.info(currentNode.getPath() + "::" + siteName + "::"+remoteUser);
-    if (remoteUser != null) publicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser);
+    if (remoteUser != null) { 
+      publicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser);
+    //Broadcast event to activity only for this condition
+      if (ActivityCommons.isAcceptedNode(currentNode)) {
+        listenerService.broadcast(ActivityCommons.NODE_CREATED_ACTIVITY, null, currentNode);
+      }
+    }
   }
 }

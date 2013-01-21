@@ -32,7 +32,9 @@ import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.comments.CommentsService;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommons;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -65,6 +67,7 @@ public class CommentsServiceImpl implements CommentsService {
 
   private ExoCache<String, List<Node>> commentsCache_ ;
   private MultiLanguageService multiLangService_ ;
+  private ListenerService      listenerService;
 
   /**
    * Constructor Method
@@ -81,6 +84,9 @@ public class CommentsServiceImpl implements CommentsService {
    * {@inheritDoc}
    */
   public void addComment(Node node, String commentor,String email, String site, String comment,String language) throws Exception {
+    if (listenerService==null) {
+      listenerService = WCMCoreUtils.getService(ListenerService.class);
+    }
     Session session = node.getSession();
     ManageableRepository  repository = (ManageableRepository)session.getRepository();
     //TODO check if really need delegate to system session
@@ -140,6 +146,17 @@ public class CommentsServiceImpl implements CommentsService {
       }
       document.save();
       systemSession.save();
+      if (listenerService!=null) {
+        try {
+          if (ActivityCommons.isAcceptedNode(node)) {
+            listenerService.broadcast(ActivityCommons.COMMENT_ADDED_ACTIVITY, document, "");
+          }
+        } catch (Exception e) {
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Can not notify CommentAddedActivity because of: " + e.getMessage());
+          }
+        }
+      }
       commentsCache_.remove(commentNode.getPath()) ;
     } catch(Exception e) {
       if (LOG.isErrorEnabled()) {

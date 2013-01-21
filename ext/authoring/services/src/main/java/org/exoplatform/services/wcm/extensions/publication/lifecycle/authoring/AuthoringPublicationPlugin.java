@@ -18,6 +18,7 @@ import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.CmsService;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommons;
 import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleException;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
@@ -44,11 +45,13 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
 
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(AuthoringPublicationPlugin.class.getName());
+  ListenerService listenerService;
 
   /**
    * Instantiates a new stage and version publication plugin.
    */
   public AuthoringPublicationPlugin() {
+    listenerService = WCMCoreUtils.getService(ListenerService.class);
   }
 
   /*
@@ -328,17 +331,18 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
     //raise event to notify that state is changed
     if (!PublicationDefaultStates.ENROLLED.equalsIgnoreCase(newState)) {
 
-      ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
       CmsService cmsService = WCMCoreUtils.getService(CmsService.class);
 
       if ("true".equalsIgnoreCase(context.get(StageAndVersionPublicationConstant.IS_INITIAL_PHASE))) {
         listenerService.broadcast(StageAndVersionPublicationConstant.POST_INIT_STATE_EVENT, cmsService, node);
       } else {
         listenerService.broadcast(StageAndVersionPublicationConstant.POST_CHANGE_STATE_EVENT, cmsService, node);
+        if (ActivityCommons.isAcceptedNode(node)) {
+          listenerService.broadcast(ActivityCommons.STATE_CHANGED_ACTIVITY, node, newState);
+        }
       }
     }
 
-    ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class, containerName);
     listenerService.broadcast(AuthoringPublicationConstant.POST_UPDATE_STATE_EVENT, null, node);
   }
 

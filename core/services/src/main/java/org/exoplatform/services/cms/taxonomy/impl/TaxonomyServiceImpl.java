@@ -45,6 +45,7 @@ import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommons;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -55,9 +56,11 @@ import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
 
 /**
@@ -80,6 +83,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
   private static final String    EXO_UUID        = "exo:uuid";
 
   private LinkManager            linkManager_;
+  private ListenerService        listenerService;
 
   private final String           SQL_QUERY       = "Select * from exo:taxonomyLink where jcr:path like '$0/%' "
                                                      + "and exo:uuid = '$1' "
@@ -434,6 +438,9 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
    */
   public void addCategories(Node node, String taxonomyName, String[] categoryPaths, boolean system)
       throws RepositoryException {
+    if (listenerService ==null) {
+      listenerService = WCMCoreUtils.getService(ListenerService.class);
+    }
     String category = "";
     try {
       Node rootNodeTaxonomy = getTaxonomyTree(taxonomyName, system);
@@ -476,10 +483,20 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
           }
           linkName = node.getName() + index++;
         }
-
+        
         //create link
         linkManager_.createLink(categoryNode, TAXONOMY_LINK, node, linkName);
-
+        if (listenerService!=null) {
+          try {
+            if (ActivityCommons.isAcceptedNode(node)) {
+              listenerService.broadcast(ActivityCommons.CATEGORY_ADDED_ACTIVITY, node, linkName);
+            }
+          } catch (Exception e) {
+            if (LOG.isErrorEnabled()) {
+              LOG.error("Can not notify CategoryAddedActivity because of: " + e.getMessage());
+            }
+          }
+        }
       }
     } catch (PathNotFoundException e) {
       throw new RepositoryException(e);
@@ -569,6 +586,17 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       nodeTaxonomyLink.remove();
       categoryNode.save();
       node.getSession().save();
+      if (listenerService!=null) {
+        try {
+          if (ActivityCommons.isAcceptedNode(node)) {
+            listenerService.broadcast(ActivityCommons.CATEGORY_REMOVED_ACTIVITY, node, taxonomyName);
+          }
+        } catch (Exception e) {
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Can not notify Activity because of: " + e.getMessage());
+          }
+        }
+      }
     } catch (PathNotFoundException e) {
       throw new RepositoryException(e);
     }

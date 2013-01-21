@@ -42,8 +42,11 @@ import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommons;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -226,18 +229,29 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
       Workspace destWorkspace = destNode.getSession().getWorkspace();
       if (srcPath.indexOf(":/") > -1)
         srcPath = srcPath.substring(srcPath.indexOf(":/") + 1);
+      ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
       if (srcWorkspace.equals(destWorkspace)) {
         srcWorkspace.move(srcPath, destPath);
         //delete EXO_RESTORE_LOCATION if source is in trash
         removeMixinEXO_RESTORE_LOCATION(srcSession, destPath);
-        LockUtil.changeLockToken(srcPath, (Node)srcSession.getItem(destPath));
+        Node desNode = (Node)srcSession.getItem(destPath);
+        LockUtil.changeLockToken(srcPath, desNode);
+        if (ActivityCommons.isAcceptedNode(desNode)) {
+          listenerService.broadcast(ActivityCommons.NODE_MOVED_ACTIVITY, desNode, desNode.getPath());
+        }
         srcSession.save();
       } else {
         destWorkspace.clone(srcWorkspace.getName(), srcPath, destPath, false);
+        Node desNode =(Node) destWorkspace.getSession().getItem(destPath);
+        if (ActivityCommons.isAcceptedNode(desNode)) {
+          listenerService.broadcast(ActivityCommons.NODE_MOVED_ACTIVITY, desNode, destPath);
+        }
         //delete EXO_RESTORE_LOCATION if source is in trash
         removeMixinEXO_RESTORE_LOCATION(destWorkspace.getSession(), destPath);
         destWorkspace.getSession().save();
       }
+      
+      
     } catch (Exception e) {
       Object[] args = { srcPath, messagePath };
       uiApp.addMessage(new ApplicationMessage("UIWorkingArea.msg.move-problem", args,

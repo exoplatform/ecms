@@ -36,13 +36,17 @@ import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
+import nl.captcha.gimpy.FishEyeGimpyRenderer;
+
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommons;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -84,6 +88,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   private Set<String>               tagPermissionList      = new HashSet<String>();
 
   private Map<String, String>       sitesTagPath           = new HashMap<String, String>();
+  
+  private ListenerService           listenerService;
 
   public NewFolksonomyServiceImpl(InitParams initParams,
                                   NodeHierarchyCreator nodeHierarchyCreator,
@@ -180,19 +186,42 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
                            String workspace) throws Exception {
     Node publicFolksonomyTreeNode = getNode(workspace, treePath);
     Node targetNode = getTargetNode(documentNode);
+    boolean firstTagFlag = true;
+    if (listenerService ==null) {
+      listenerService = WCMCoreUtils.getService(ListenerService.class);
+    }
+    StringBuffer tagValue = new StringBuffer();
+    
     for (String tag : tagsName) {
       try {
         // Find tag node
         Node tagNode = getTagNode(publicFolksonomyTreeNode, tag);
-
         // Add symlink and total
         addTag(tagNode, targetNode);
-
         publicFolksonomyTreeNode.getSession().save();
+         if (firstTagFlag) {
+           firstTagFlag = false;
+           tagValue.append(tag);
+         }else {
+           tagValue.append(ActivityCommons.VALUE_SEPERATOR).append(tag);
+         }
       } catch (Exception e) {
         if (LOG.isErrorEnabled()) {
           LOG.error("can't add tag '" + tag + "' to node: " + targetNode.getPath()
             + " in public folksonomy tree!");
+        }
+      }
+    }
+    if (ActivityCommons.isAcceptedNode(targetNode)) {
+      if (listenerService!=null) {
+        try {
+          if (ActivityCommons.isAcceptedNode(documentNode)) {
+            listenerService.broadcast(ActivityCommons.TAG_ADDED_ACTIVITY, documentNode, tagValue.toString());
+          }
+        } catch (Exception e) {
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Can not notify Tag Added Activity because of: " + e.getMessage());
+          }
         }
       }
     }
@@ -425,6 +454,9 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   public void removeTagOfDocument(String tagPath, Node document, String workspace) throws Exception {
     Node tagNode = getNode(workspace, tagPath);
     NodeIterator nodeIter = tagNode.getNodes();
+    StringBuffer removedTags = new StringBuffer();
+    String tagName ;
+    boolean isFirstFlag =  true;
     while (nodeIter.hasNext()) {
       Node link = nodeIter.nextNode();
       if (linkManager.isLink(link)) {
@@ -437,7 +469,15 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
           }
         }
         if (document.isSame(targetNode)) {
+          tagName = tagNode.getName();
+          if (isFirstFlag) {
+            removedTags.append(tagName);
+            isFirstFlag = false;
+          }else {
+            removedTags.append(ActivityCommons.VALUE_SEPERATOR).append(tagName);
+          }
           link.remove();
+          
           long total = tagNode.getProperty(EXO_TOTAL).getLong();
           tagNode.setProperty(EXO_TOTAL, total - 1);
           Node parentNode = tagNode.getParent();
@@ -445,6 +485,17 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
             tagNode.remove();
           parentNode.getSession().save();
           break;
+        }
+      }
+    }
+    if (listenerService!=null) {
+      try {
+        if (ActivityCommons.isAcceptedNode(document)) {
+          listenerService.broadcast(ActivityCommons.TAG_REMOVED_ACTIVITY, document, removedTags.toString());
+        }
+      } catch (Exception e) {
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Can not notify RemoveTag Activity because of: " + e.getMessage());
         }
       }
     }

@@ -36,6 +36,8 @@ import javax.jcr.version.Version;
 import javax.jcr.version.VersionIterator;
 
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommons;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
@@ -89,6 +91,8 @@ public class UIPublicationPanel extends UIForm {
   private List<NodeLocation> viewedRevisions = new ArrayList<NodeLocation>(3);
 
   private WCMPublicationService wcmPublicationService;
+  
+  private ListenerService listenerService;
 
   private String sitename;
 
@@ -559,10 +563,13 @@ public class UIPublicationPanel extends UIForm {
       } catch (Exception ex) {
         userId = currentNode.getSession().getUserID();
       }
-      
       //restore the version
       try {
         currentNode.restore(version,true);
+        ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class); 
+        if (ActivityCommons.isAcceptedNode(currentNode)) {
+          listenerService.broadcast(ActivityCommons.NODE_REVISION_CHANGED, currentNode, version.getName());
+        }
         if(!currentNode.isCheckedOut())
           currentNode.checkout();
         Value[] values = currentNode.getProperty("publication:revisionData").getValues();

@@ -50,6 +50,7 @@ import org.exoplatform.commons.utils.ISO8601;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.JcrInputProperty;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommons;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.idgenerator.IDGeneratorService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -1143,6 +1144,15 @@ public class CmsServiceImpl implements CmsService {
           createNode(destSession, destPath);
         }
         workspace.clone(srcWorkspace, nodePath, destPath, true);
+        try {
+          if (listenerService!=null && ActivityCommons.isAcceptedNode(srcNode)) {
+            listenerService.broadcast(ActivityCommons.NODE_MOVED_ACTIVITY, srcNode, destPath);
+          }
+        }catch (Exception e) {
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Can not notify NodeMovedActivity: " + e.getMessage());
+          }
+        }
         //Remove src node
         srcNode.remove();
         srcSession.save();
@@ -1168,7 +1178,18 @@ public class CmsServiceImpl implements CmsService {
           createNode(session, destPath);
           session.refresh(false) ;
         }
+        
         workspace.move(nodePath, destPath);
+        try {
+          Node movedNode =(Node) session.getItem(destPath);        
+          if (listenerService!=null && ActivityCommons.isAcceptedNode(movedNode)) {
+            listenerService.broadcast(ActivityCommons.NODE_MOVED_ACTIVITY, movedNode, destPath);
+          }
+        }catch (Exception e) {
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Can not notify NodeMovedActivity: " + e.getMessage());
+          }
+        }
         session.logout();
       } catch (Exception e) {
         if (LOG.isWarnEnabled()) {
