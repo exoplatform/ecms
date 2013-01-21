@@ -75,6 +75,7 @@ import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.cms.link.NodeLinkAware;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
@@ -82,6 +83,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -142,14 +144,6 @@ public class UIJCRExplorer extends UIContainer {
   private boolean isFilterSave_ ;
   private boolean  isShowDocumentViewForFile_ = true;
   private boolean preferencesSaved_ = false;
-  private boolean canShowSideBar = true;
-
-  public boolean canShowSideBar() {
-    return canShowSideBar;
-  }
-  public void setCanShowSideBar(boolean canShowSideBar) {
-    this.canShowSideBar = canShowSideBar;
-  }
 
   private int tagScope;
 
@@ -742,7 +736,7 @@ public class UIJCRExplorer extends UIContainer {
     }
     uiActionBar.setRendered(uiPortlet.isShowActionBar());
     uiAddressBar.setRendered(uiPortlet.isShowTopBar());
-    uiSideBar.setRendered(this.getPreference().isShowSideBar());
+    uiSideBar.setRendered(preferences_.isShowSideBar());
     event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea);
     if (uiSideBar.isRendered()) event.getRequestContext().addUIComponentToUpdateByAjax(uiSideBar);
     event.getRequestContext().addUIComponentToUpdateByAjax(getChild(UIControl.class)) ;

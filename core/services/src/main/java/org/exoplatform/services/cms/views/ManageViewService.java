@@ -49,6 +49,19 @@ public interface ManageViewService {
    * @throws Exception
    */
   public void addView(String name, String permissions, String template, List<?> tabs) throws Exception;
+  
+  /**
+   * Inserts a new view by giving the following params
+   * 
+   * @param name String The name of view
+   * @param permissions String who can access the view
+   * @param hideExplorerPanel Boolean if the explorer panel is hidden
+   * @param template String The name of template
+   * @param tabs List tabs list
+   * @see Node
+   * @throws Exception
+   */
+  public void addView(String name, String permissions, boolean hideExplorerPanel, String template, List<?> tabs) throws Exception;
 
   /**
    * Return specify view depend on Name by giving the following params

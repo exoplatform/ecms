@@ -30,6 +30,7 @@ public class ViewConfig {
   private String name ;
   private String permissions ;
   private String template ;
+  private boolean hideExplorerPanel = false;
   private List<Tab> tabList = new ArrayList<Tab>() ;
 
   public  ViewConfig() { }
@@ -45,6 +46,9 @@ public class ViewConfig {
 
   public List<Tab> getTabList() { return this.tabList ; }
   public void setTabList(List<Tab> tabs) { this.tabList = tabs ; }
+  
+  public boolean isHideExplorerPanel() { return hideExplorerPanel; }
+  public void setHideExplorerPanel(boolean value) { this.hideExplorerPanel = value; }  
 
   @SuppressWarnings("unchecked")
   public List getAllPermissions() {

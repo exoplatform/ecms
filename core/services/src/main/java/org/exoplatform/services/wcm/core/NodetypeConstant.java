@@ -172,6 +172,7 @@ public class NodetypeConstant {
   
   public static final String MEDIA_ALTERNATIVE_TEXT = "alternativeText";
   
+  public static final String EXO_HIDE_EXPLORER_PANEL = "exo:hideExplorerPanel";
   
   // public static final String PUBLICATION_STATE_AND_VERSION_BASED_PUBLICATION
   // = "publication:stateAndVersionBasedPublication";

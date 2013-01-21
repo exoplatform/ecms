@@ -34,7 +34,6 @@
   def linkManager = WCMCoreUtils.getService(LinkManager.class);
   def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
   def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
-  uiExplorer.setCanShowSideBar(false);
   def pref = uiExplorer.getPreference();
   def enableDragAndDrop = pref.isEnableDragAndDrop();
   def uiCustomActionComponent = uiWorkingArea.getCustomAction();
@@ -56,8 +55,7 @@
   addScripts("uiFileView.UIFileView.initStickBreadcrumb();").
   addScripts("ecmutil.ECMUtils.initClipboard('clip_button','1','$size');").
 	addScripts('uiListView.UIListView.loadEffectedWidthColumn();').
-  addScripts('uiFileView.UIFileView.clearOpenDivs();').
-  addScripts('uiFileView.UIFileView.clearSideBar();');
+  addScripts('uiFileView.UIFileView.clearOpenDivs();');
   
 	//Config to display columns with format: ["${column};${width}"]
 	//Default 

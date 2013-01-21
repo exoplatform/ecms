@@ -27,7 +27,7 @@
 	UIFileView.prototype.selectBoxType = null;
 	UIFileView.prototype.firstTimeClick = false;
 
-UIFileView.prototype.clickFolder =  function (folderDiv, link, docListId) {
+UIFileView.prototype.clickFolder =  function (folderDiv, link, docListId,event) {
 	if (!folderDiv) return;
     folderDiv.className = "FolderCollapsed" == folderDiv.className ? "FolderExpanded" : "FolderCollapsed";
     var docList = document.getElementById(docListId);
@@ -42,28 +42,16 @@ UIFileView.prototype.clickFolder =  function (folderDiv, link, docListId) {
         docList.style.display="block";        
       }
     }
+    var evt = event || window.event;
+    evt.cancelBubble = true;
+}
+
+UIFileView.prototype.cancelEvent = function(event) {
+	event.cancelBubble=true;
 }
 
 UIFileView.prototype.clearOpenDivs =  function () {
 	eXo.ecm.UIFileView.openDivs = {};
-}
-
-UIFileView.prototype.clearSideBar =  function () {
-	var sidebar = document.getElementById("LeftContainer");
-	sidebar.className = "LeftContainer NoShow";
-	eXo.ecm.ECMUtils.showHideSideBar();
-	var workingArea = gj(sidebar).parents(".UIWorkingArea:first")[0];
-	var resizeButton = gj(workingArea).find("div.ResizeSideBar:first")[0];
-	resizeButton.className = "ResizeSideBar NoShow";
-}
-
-UIFileView.prototype.showSideBar =  function () {
-	var sidebar = document.getElementById("LeftContainer");
-	sidebar.className = "LeftContainer";
-	eXo.ecm.ECMUtils.showHideSideBar();
-	var workingArea = gj(sidebar).parents(".UIWorkingArea:first")[0];
-	var resizeButton = gj(workingArea).find("div.ResizeSideBar:first")[0];
-	resizeButton.className = "ResizeSideBar";
 }
 
 //init event
@@ -365,7 +353,7 @@ UIFileView.prototype.mouseUpItem = function(evt) {
 			} else {// if (!inArray(Self.itemsSelected, element) && Self.itemsSelected.length == 1)
 				if (Self.itemsSelected.length > 1) {
 					Self.showItemContextMenu(event, element);
-				} else if (Self.itemsSelected.length = 1) {
+				} else if (Self.itemsSelected.length == 1) {
 					var action = Self.itemsSelected[0].getAttribute("mousedown").replace('this', 'element');
 					eval(action);
 				}

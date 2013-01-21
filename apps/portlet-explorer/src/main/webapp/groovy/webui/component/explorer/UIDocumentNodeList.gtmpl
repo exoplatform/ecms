@@ -183,7 +183,14 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
   if (!uiDocumentInfo.isSystemWorkspace()) 
     rightClickMenu = "onmousedown=\"eXo.ecm.UIFileView.clickRightMouse(event, this, 'ECMContextMenu','" + preferenceWS + ":" + Utils.formatNodeName(nodePath) + "','" + uiWorkingArea.getActionsExtensionList(data) + "');\"";
 %>
-  <div <%= uiDocumentInfo.getDragAndDropEvents(data) %> <%=rightClickMenu%> class="RowView fileViewRowView Normal ClearFix" trashHome="$isTrashHome" locked="$isLocked" mediaType="$isMediaType" removeFavourite="$isFavourite" inTrash="$isInTrash" workspacename="$preferenceWS" objectId="<%=URLEncoder.encode(Utils.formatNodeName(nodePath), "utf-8")%>">
+  <div <%= uiDocumentInfo.getDragAndDropEvents(data) %> 
+       <%=rightClickMenu%> 
+       class="RowView fileViewRowView Normal ClearFix" 
+       trashHome="$isTrashHome" locked="$isLocked" 
+       mediaType="$isMediaType" removeFavourite="$isFavourite" 
+       inTrash="$isInTrash" workspacename="$preferenceWS" 
+       objectId="<%=org.exoplatform.services.cms.impl.Utils.getObjectId(nodePath)%>"
+       isFile="<%=data.isNodeType("nt:file")%>">
     $strActs
     <% def folderIcon = data.isNodeType(NodetypeConstant.NT_FOLDER) || data.isNodeType(NodetypeConstant.NT_UNSTRUCTURED) ? "FolderCollapsed" : "NoArrow"
        String expandLink = uicomponent.event("ExpandNode",Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS)) ;
@@ -191,7 +198,9 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
        def docListId = uicomponent.getID(data);
        def manageVersionAction = uicomponent.event("ManageVersions", Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS));
     %>
-    <div class="$folderIcon" style="padding: 2px 0px;  border-right: none;" onclick="eXo.ecm.UIFileView.clickFolder(this,'$expandLink', '$docListId');">
+    <div class="$folderIcon" style="padding: 2px 0px;  border-right: none;" 
+         onmousedown="eXo.ecm.UIFileView.clickFolder(this,'$expandLink', '$docListId',event);"
+         onmouseup="eXo.ecm.UIFileView.cancelEvent(event);">
       <span>
       </span>
     </div>
@@ -209,7 +218,7 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
       <div>
         <a class="NodeButton"
              onclick="$actionLink" class="NodeLabel" >
-            <strong><%=fileName%></strong>
+            <strong><span class="NodeName"><%=fileName%><span></strong>
         </a>
         <span class="NodeLabel" style="display:inline-block;padding-left:20px;">
           <%=fileExtension%>

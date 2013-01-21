@@ -1750,12 +1750,6 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
       context.getJavascriptManager().require("SHARED/multiUpload", "multiUpload").
               addScripts("multiUpload.unregisterEvents();");
     }
-    //for FileView feature
-    getAncestorOfType(UIJCRExplorer.class).setCanShowSideBar(true);
-    context.getJavascriptManager().
-    require("SHARED/uiFileView", "uiFileView").
-    addScripts("uiFileView.UIFileView.showSideBar();");
-    
     super.processRender(context);
   }
   
