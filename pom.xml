@@ -706,7 +706,7 @@
         <groupId>org.gatein.portal</groupId>
         <artifactId>exo.portal.component.identity</artifactId>
         <version>${org.gatein.portal.version}</version>
-        <classifier>tests</classifier>
+        <type>test-jar</type>
       </dependency>
       <dependency>
         <groupId>org.gatein.portal</groupId>
@@ -749,7 +749,7 @@
         <groupId>org.gatein.portal</groupId>
         <artifactId>exo.portal.component.portal</artifactId>
         <version>${org.gatein.portal.version}</version>
-        <classifier>tests</classifier>
+        <type>test-jar</type>
       </dependency>
       <dependency>
         <groupId>org.gatein.portal</groupId>
