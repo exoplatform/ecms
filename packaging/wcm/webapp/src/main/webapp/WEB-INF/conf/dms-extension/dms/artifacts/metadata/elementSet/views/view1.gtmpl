@@ -5,174 +5,105 @@
 	  def node = uicomponent.getViewNode("dc:elementSet") ;
 		def values = uicomponent.getMultiValues(node, name) ;
 		if(values.size() == 0) { %>
-	    <div style="overflow:hidden; width:99.5%; margin-top:5px; margin-left:5px">
-	      <div class="MetaImage"><img style="height:4px; vertical-align:middle; margin-right:3px" alt="<%=_ctx.appRes("ElementSet.view.label.not-avaliable")%>" src='/ecmexplorer/skin/images/metadata/rect.gif'/></div>     
-	      <div class="text"><%=_ctx.appRes("ElementSet.view.label.not-avaliable")%></div>
-	    </div>    		
+	    <div class="metaContent">
+	      <span>*</span><%=_ctx.appRes("ElementSet.view.label.not-avaliable")%>
+	    </div> 		
 	<%} else {
 			for(value in values) { %>
-	      <div style="overflow:hidden; width:99.5%; margin-top:5px; margin-left:5px">
-	        <div class="MetaImage"><img style="height:4px; vertical-align:middle; margin-right:3px" alt="$value" src='/ecmexplorer/skin/images/metadata/rect.gif'/></div>     
-	        <div style="Text"><%= ContentReader.getXSSCompatibilityContent(value) %></div>
-	      </div>    			
+	      <div class="metaContent">
+	        <span>*</span><%= ContentReader.getXSSCompatibilityContent(value) %>
+	      </div> 			
 	<%	}
 		}
 	}
 %>
 
-<div class="Header">DC:ELEMENTSET</div>
-<div>     
-  <div class="ContentBlock" style="width:43%">
-    <div class="Title">
-      <div class="LabelMetadata">Title</div>
-    </div>          
-    <div><% renderDCValues("dc:title") %></div>
-  </div>
-
-  <div class=" ClearFix">
-    <div style="float: left; width:44%;">
-      <div class="ContentBlock">
-        <div class="Title">
-          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.date")%></div>
-          <div><% renderDCValues("dc:date") %></div>
-        </div>                        
-      </div>
-    </div>
-    <div style="float:right; width:44%;">
-      <div class="ContentBlock">
-        <div class="Title">
-          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.subject")%></div>
-        </div>
-        <div><% renderDCValues("dc:subject") %></div>
-      </div>
-    </div>
-    
-  </div>
-
-  <div class=" ClearFix">
-    <div style="float: left; width:44%">
-      <div class="ContentBlock">
-        <div class="Title">
-          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.description")%></div>
-          <div><% renderDCValues("dc:description") %></div>
-        </div>                        
-      </div>
-    </div>
-    <div style="float:right; width:44%">
-      <div class="ContentBlock">
-        <div class="Title">
-          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.languages")%></div>
-        </div>
-        <div><% renderDCValues("dc:language") %></div>
-      </div>
-    </div> 
-             
-  </div>
-
-  <div class=" ClearFix">
-    <div style="float: left; width:44%">
-      <div class="ContentBlock">
-        <div class="Title">
-          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.creator")%></div>
-          <div><% renderDCValues("dc:creator") %></div>
-        </div>                        
-      </div>
-    </div>
-    <div style="float:right; width:44%">
-      <div class="ContentBlock">
-        <div class="Title">
-          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.publisher")%></div>
-        </div>
-        <div><% renderDCValues("dc:publisher") %></div>
-      </div>
-    </div>  
-           
-  </div>
-
-  <div class=" ClearFix">
-    <div style="float: left; width:44%">
-      <div class="ContentBlock">
-        <div class="Title">
-          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.contributor")%></div>
-          <div><% renderDCValues("dc:contributor") %></div>
-        </div>                        
-      </div>
-    </div>
-    <div style="float:right; width:44%">
-      <div class="ContentBlock">
-        <div class="Title">
-          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.identifier")%></div>
-        </div>
-        <div><% renderDCValues("dc:identifier") %></div>
-      </div>
-    </div>  
-         
-  </div>
-
-  <div class=" ClearFix">
-    <div style="float: left; width:44%">
-      <div class="ContentBlock">
-        <div class="Title">
-          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.resource-type")%></div>
-          <div><% renderDCValues("dc:resourceType") %></div>
-        </div>                        
-      </div>
-    </div>
-    <div style="float:right;width:44%">
-      <div class="ContentBlock">
-        <div class="Title">
-          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.format")%></div>
-        </div>
-        <div><% renderDCValues("dc:format") %></div>
-      </div>
-    </div>   
-   
-  </div>
-
-  <div class=" ClearFix">
-    <div style="float: left; width:44%">
-      <div class="ContentBlock">
-        <div class="Title">
-          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.relation")%></div>
-          <div><% renderDCValues("dc:relation") %></div>
-        </div>                        
-      </div>
-    </div>
-    <div style="float:right; width:44%">
-      <div class="ContentBlock">
-        <div class="Title">
-          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.rights")%></div>
-        </div>
-        <div><% renderDCValues("dc:rights") %></div>
-      </div>
-    </div>  
-      
-  </div>
-
-  <div class=" ClearFix">
-    <div style="float: left; width:44%">
-      <div class="ContentBlock">
-        <div class="Title">
-          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.source")%></div>
-          <div><% renderDCValues("dc:source") %></div>
-        </div>                        
-      </div>
-    </div>
-    <div style="float:right; width:44%">
-      <div class="ContentBlock">
-        <div class="Title">
-          <div class="LabelMetadata"><%=_ctx.appRes("ElementSet.view.label.coverage")%></div>
-        </div>
-        <div><% renderDCValues("dc:coverage") %></div>
-      </div>
-    </div>              
-   
-  </div>  
+<h5 class="header">dc:elementSet</h5>
+<div class="row-fluid">
+	<ul class="span6">
+		<li class="contentBlock">
+			<div class="title">Title</div>
+			<% renderDCValues("dc:title") %>
+		</li>
+		
+		<li class="contentBlock">
+			<div class="title"><%=_ctx.appRes("ElementSet.view.label.date")%></div>
+			<% renderDCValues("dc:date") %>
+		</li>
+		
+		<li class="contentBlock">
+			<div class="title"><%=_ctx.appRes("ElementSet.view.label.description")%></div>
+			<% renderDCValues("dc:description") %>
+		</li>
+		
+		<li class="contentBlock">
+			<div class="title"><%=_ctx.appRes("ElementSet.view.label.creator")%></div>
+			<% renderDCValues("dc:creator") %>
+		</li>
+		
+		<li class="contentBlock">
+			<div class="title"><%=_ctx.appRes("ElementSet.view.label.contributor")%></div>
+			<% renderDCValues("dc:contributor") %> 
+		</li>
+		
+		<li class="contentBlock">
+			<div class="title"><%=_ctx.appRes("ElementSet.view.label.resource-type")%></div>
+			<% renderDCValues("dc:resourceType") %> 
+		</li>
+		
+		<li class="contentBlock">
+			<div class="title"><%=_ctx.appRes("ElementSet.view.label.relation")%></div>
+			<% renderDCValues("dc:relation") %>
+		</li>
+		
+		<li class="contentBlock">
+			<div class="title"><%=_ctx.appRes("ElementSet.view.label.source")%></div>
+			<% renderDCValues("dc:source") %>
+		</li>
+	</ul>
+	
+	<ul class="span6">
+		<li class="contentBlock">
+			<div class="title"><%=_ctx.appRes("ElementSet.view.label.subject")%></div>
+			<% renderDCValues("dc:subject") %>
+		</li>
+		
+		<li class="contentBlock">
+			<div class="title"><%=_ctx.appRes("ElementSet.view.label.languages")%></div>
+			<% renderDCValues("dc:language") %>
+		</li>
+		
+		<li class="contentBlock">
+			<div class="title"><%=_ctx.appRes("ElementSet.view.label.publisher")%></div>
+			<% renderDCValues("dc:publisher") %>
+		</li>
+		
+		<li class="contentBlock">
+			<div class="title"><%=_ctx.appRes("ElementSet.view.label.identifier")%></div>
+			<% renderDCValues("dc:identifier") %>
+		</li>
+		
+		<li class="contentBlock">
+			<div class="title"><%=_ctx.appRes("ElementSet.view.label.format")%></div>
+			<% renderDCValues("dc:format") %>
+		</li>
+		
+		<li class="contentBlock">
+			<div class="title"><%=_ctx.appRes("ElementSet.view.label.rights")%></div>
+			<% renderDCValues("dc:rights") %>
+		</li>
+		
+		<li class="contentBlock">
+			<div class="title"><%=_ctx.appRes("ElementSet.view.label.coverage")%></div>
+			<% renderDCValues("dc:coverage") %>
+		</li>	
+	</ul> 
+	
 </div>
 <%/* start render action*/%>
-<div class="UIAction"> 
-    <a href="javascript:void(0);" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("ElementSet.view.tooltip.add-edit")%>" onclick="<%=uicomponent.event("EditProperty", "dc:elementSet")%>" class="ActionButton LightBlueStyle"><%=_ctx.appRes("ElementSet.view.action.add-edit")%></a>
-    <a href="javascript:void(0);" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("ElementSet.view.tooltip.cancel")%>" onclick="<%=uicomponent.event("Cancel")%>" class="ActionButton LightBlueStyle"><%=_ctx.appRes("ElementSet.view.action.cancel")%></a>
+<div class="uiAction"> 
+ <button href="javascript:void(0);" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("ElementSet.view.tooltip.add-edit")%>" onclick="<%=uicomponent.event("EditProperty", "dc:elementSet")%>" class="btn"><%=_ctx.appRes("ElementSet.view.action.add-edit")%></button>
+ <button href="javascript:void(0);" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("ElementSet.view.tooltip.cancel")%>" onclick="<%=uicomponent.event("Cancel")%>" class="btn"><%=_ctx.appRes("ElementSet.view.action.cancel")%></button>
 </div>
 <%/* end render action*/%>
  
