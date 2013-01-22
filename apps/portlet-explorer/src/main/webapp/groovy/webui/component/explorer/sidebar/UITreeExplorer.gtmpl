@@ -208,7 +208,7 @@
 
  
 	<h5 class="title" style="cursor: pointer;" rel="tooltip" data-placement="bottom" title="$label" onclick="<%=uicomponent.event("Expand",treeNodeRoot.getPath())%>" $contextMenuEvent>
-		${label}
+		<i class="uiIconEcmsHome"></i> ${label}
 	</h5>			  	
 			  	
 

@@ -21,43 +21,43 @@
 					String[] arrComp = [uicomponent.getCurrentComp()];
 					uicomponent.renderSideBarChild(arrComp); 
 				 %>    
-			<div class="uiSelectContent ClearFix">
-				<%
-				for(itemContext in uicomponent.getLstVisibleComp()) {
-							def action = itemContext.getUIExtensionName();
-				%>
-					<div class="<%=getCSSClassName(action)%>" onclick="<%=itemContext.event(action)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".label." + action)%>">
-						<i class="uiIconEcms${action}Mini"></i>
-					</div>
-				<% } %>
-				
-				<% if (uicomponent.getLstHiddenComp().size() > 0) { %>
-					<!--More button -->
-					<div class="moreItem" onclick="eXo.ecm.ECMUtils.hiddenExtendedListTrigger(event, this);">
-						<div class="itemIcon actionItem" ><span></span></div>
-						
-						<!-- Hidden drop down-->
-						<div style="display: none;" id="ListExtendedComponent" class="ListExtendedItem UIDropDownMenu">
-							<%
-										for(itemContext in uicomponent.getLstHiddenComp()) {
-											def action = itemContext.getUIExtensionName();
-									%>
-									<a rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".label." + action)%>" class="IconPopup ${action}Icon" href="<%=itemContext.event(action)%>">&nbsp;</a>
-						<% } %>
+				<div class="uiSelectContent clearfix">
+					<%
+					for(itemContext in uicomponent.getLstVisibleComp()) {
+								def action = itemContext.getUIExtensionName();
+					%>
+						<div class="<%=getCSSClassName(action)%>" onclick="<%=itemContext.event(action)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".label." + action)%>">
+							<i class="uiIconEcms${action}Mini"></i>
 						</div>
-					</div>
-				<% } else { %>
-					<!--More button -->
-					<div class="moreItem" style="display:none" onclick="eXo.ecm.ECMUtils.hiddenExtendedListTrigger(event, this);">
-						<div class="itemIcon actionItem" ><span></span></div>
-						
-						<!-- Hidden drop down-->
-						<div style="display: none;" id="ListExtendedComponent" class="ListExtendedItem UIDropDownMenu"></div>						
-					</div>			
-				<% } %>
+					<% } %>
+					
+					<% if (uicomponent.getLstHiddenComp().size() > 0) { %>
+						<!--More button -->
+						<div class="moreItem" onclick="eXo.ecm.ECMUtils.hiddenExtendedListTrigger(event, this);">
+							<div class="itemIcon actionItem" ><span></span></div>
+							
+							<!-- Hidden drop down-->
+							<div style="display: none;" id="ListExtendedComponent" class="ListExtendedItem UIDropDownMenu">
+								<%
+											for(itemContext in uicomponent.getLstHiddenComp()) {
+												def action = itemContext.getUIExtensionName();
+										%>
+										<a rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".label." + action)%>" class="IconPopup ${action}Icon" href="<%=itemContext.event(action)%>">&nbsp;</a>
+							<% } %>
+							</div>
+						</div>
+					<% } else { %>
+						<!--More button -->
+						<div class="moreItem" style="display:none" onclick="eXo.ecm.ECMUtils.hiddenExtendedListTrigger(event, this);">
+							<div class="itemIcon actionItem" ><span></span></div>
+							
+							<!-- Hidden drop down-->
+							<div style="display: none;" id="ListExtendedComponent" class="ListExtendedItem UIDropDownMenu"></div>						
+						</div>			
+					<% } %>
+				</div>
 			</div>
-		</div>
-    <% if (uicomponent.getAncestorOfType(UIJCRExplorerPortlet.class).isShowFilterBar()) { %>   
+			<% if (uicomponent.getAncestorOfType(UIJCRExplorerPortlet.class).isShowFilterBar()) { %>   
 	    <div class="resizeTreeExplorer">
 				<i class="uiIconArrowDown" onclick="eXo.ecm.ECMUtils.showHideItemsInSideBar(this)"></i>
 			</div>

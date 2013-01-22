@@ -15,7 +15,7 @@
 					%>		
 						<div>
 							<img src="$thumbnailImage" alt="$thumbnailImage" />
-							<img onclick="$actionLink" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%=_ctx.appRes("UIThumbnailForm.title.remove-thumbnail")%>" class="ActionIcon Remove16x16Icon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIThumbnailForm.title.remove-thumbnail")%>"/>
+							<i onclick="$actionLink" class="uiIconTrash" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIThumbnailForm.title.remove-thumbnail")%>"></i>
 						</div>
 					<%
 					} else if(uicomponent.isRemovedThumbnail()) {

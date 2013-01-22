@@ -106,14 +106,6 @@
 		margin-top:4px;
 		width:17px;
 	}
-
-	.tagExplorer {
-		background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/Tags.png') no-repeat center;
-		.size(15px, 15px);
-		cursor: pointer;
-		margin-top:4px;
-		display: block;
-	}
 }
 
 
@@ -131,54 +123,6 @@
 			margin: 4px 0;
 			padding: 2px 6px;
 	}
-
-	.SideGeneratal {
-		background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/Generatal.png') no-repeat center;
-		.size(17px, 17px);
-	}
-
-	.Search {
-		background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/Search.png') no-repeat center;
-		.size(17px, 17px);
-	}
-
-	.advancedSearch {
-		background: url("/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/SearchIcon.png") no-repeat scroll center center transparent;
-		.size(17px, 17px);
-		cursor: pointer;
-		display: block;
-	}
-
-	.uiViewRelationList .TitleLabel {
-		padding: 5px 0px 5px 8px;
-		font: normal bold 11px Verdana;
-	}
-
-	.selectedNode {
-		font-weight: bold;
-	}
-}
-
-/*############################## -- UIViewRelationList   -- ##############################*/
-
-.uiSideBar .UIViewRelationList {
-	width:auto;
-	
-	.RelationFrame {
-		margin-top: 2px;
-		border: solid 1px #bdbdbd;
-	}
-	
-	.RelationFrame .TitleLabel {
-		height: 18px;
-		padding: 2px 0px 0px 15px;
-		font: normal bold 11px Verdana;
-		background: url('/eXoWCMResources/skin/images/article/EventFrameBG.gif') repeat-x;
-	}
-	
-	.RelationFrame .FrameContent {
-		padding: 10px;
-	}
 }
 
 
@@ -190,28 +134,12 @@
 	text-align: left;
 	line-height: 22px;
 	
-	.TagmapTitle {
-		height: 19px; line-height: 19px;
-		margin: 0px;
-		background: url('DefaultSkin/background/TagmapTitleBG1x19.gif') repeat-x;
-		border: solid 1px #e1e1e1;
-		border-bottom: none;
-	}
-	
-	.TagLabel {
-		padding: 0px 8px;
-		line-height: 19px;
-		font-weight: bold;
-	}
-	
 	a {
-		 color: red;
-		 padding: 3px 7px 3px 0px;
-	}
-	
-	a:hover {
-		 color: yellow;
-		 padding: 3px 7px 3px 0px;
+		 color: @grayDark;
+		 margin: 0px 15px 7px 0px;
+		 &:hover {
+			color: @linkColorHover;
+		 }
 	}
 }
 

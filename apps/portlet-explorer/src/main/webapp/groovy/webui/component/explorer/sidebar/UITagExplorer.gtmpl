@@ -3,7 +3,7 @@
 %>
 
 	<h5 class="title clearfix">
-		<i class="uiIconTag pull-right" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITagExplorer.title.EditPrivateTags")%>"
+		<i class="uiIconPlus uiIconLightGray pull-right" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITagExplorer.title.EditPrivateTags")%>"
 			 onclick="<%=uicomponent.event("EditTags", "Private")%>"></i>
 		<%=_ctx.appRes("UITagExplorer.title.PrivateTags")%>
 	</h5>
@@ -15,19 +15,17 @@
 				for(tag in uicomponent.getPrivateTagLink()){
 					String tagLink = uicomponent.event('ViewTag',tag.getPath()) ;
 					int tagCount = 0 ;
-					String style = "" ;
 					if(tag.hasProperty("exo:total")) {
 						tagCount = (int)tag.getProperty("exo:total").getValue().getLong() ;
-						style = "Style = '" + uicomponent.getTagHtmlStyle(tagStyle, tagCount)+ "'" ;
 					}
-					println "<a href=\"$tagLink\" $style>$tag.name</a>" ;
+					println "<a href=\"$tagLink\">$tag.name</a>" ;
 				}
 			%>
 		</div>
   </div>
 
 	<h5 class="title clearfix">
-		<i class="uiIconTag pull-right" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITagExplorer.title.EditPublicTags")%>"
+		<i class="uiIconPlus uiIconLightGray pull-right" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITagExplorer.title.EditPublicTags")%>"
 			 onclick="<%=uicomponent.event("EditTags", "Public")%>" ></i>
 		<%=_ctx.appRes("UITagExplorer.title.PublicTags")%>
 	</h5>
@@ -39,12 +37,10 @@
 						for(tag in uicomponent.getPublicTagLink()){
 							String tagLink = uicomponent.event('ViewTag',tag.getPath()) ;
 							int tagCount = 0;
-							String style = "" ;
 							if(tag.hasProperty("exo:total")) {
 								tagCount = (int)tag.getProperty("exo:total").getValue().getLong() ;
-								style = "Style = '" + uicomponent.getTagHtmlStyle(tagStyle, tagCount)+ "'" ;
 							}
-							println "<a href=\"$tagLink\" $style>$tag.name</a>" ;
+							println "<a href=\"$tagLink\" >$tag.name</a>" ;
 						}
 					%>
 		</div>
