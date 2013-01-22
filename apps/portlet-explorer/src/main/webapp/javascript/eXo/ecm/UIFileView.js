@@ -23,6 +23,7 @@
 	UIFileView.prototype.t1 = 0;
 	UIFileView.prototype.t2 = 0;
 	UIFileView.prototype.minBreadcrumbTop = 0;
+	UIFileView.prototype.minActionbarTop = 0;
 	UIFileView.prototype.clickedItem = null;
 	UIFileView.prototype.selectBoxType = null;
 	UIFileView.prototype.firstTimeClick = false;
@@ -689,15 +690,23 @@ UIFileView.prototype.checkBoxItem = function() {
 UIFileView.prototype.initStickBreadcrumb = function() {
 	var stickBreadcrumb = function() {
 		var breadcrumb = gj('#FileViewBreadcrumb');
+		var actionbar = gj('#UIActionBar');
 		var breadCrumbOffTop = breadcrumb.offset().top;
-		if (eXo.ecm.UIFileView.minBreadcrumbTop == 0) {
+		var actionbarOffTop = actionbar.offset().top;
+		if (eXo.ecm.UIFileView.minBreadcrumbTop == 0) 
 			eXo.ecm.UIFileView.minBreadcrumbTop = breadCrumbOffTop;
-		}
+		if (eXo.ecm.UIFileView.minActionbarTop == 0) 
+			eXo.ecm.UIFileView.minActionbarTop = actionbarOffTop;
+		
 		var scroll_top = gj(window).scrollTop(); // our current vertical position from the top
-		if (scroll_top >= eXo.ecm.UIFileView.minBreadcrumbTop) {
-			breadcrumb.css({ 'position': 'fixed', 'top':0, zIndex:100});
+		
+		if (scroll_top >= eXo.ecm.UIFileView.minActionbarTop) {
+			actionbar.css({ 'position': 'fixed', 'top':0, zIndex:1});
+			actionbar.width(actionbar.parent().width());
+			breadcrumb.css({ 'position': 'fixed', 'top':actionbar.height(), zIndex:1});
 			breadcrumb.width(breadcrumb.parent().width());
 		} else {
+			actionbar.css({ 'position': 'relative' });  
 			breadcrumb.css({ 'position': 'relative' });  
 		}   
 	};
@@ -705,6 +714,8 @@ UIFileView.prototype.initStickBreadcrumb = function() {
 	gj(window).scroll(stickBreadcrumb);
 	var breadcrumb = gj('#FileViewBreadcrumb');
 	breadcrumb.width(breadcrumb.parent().width()-2);
+	var actionbar= gj('#UIActionBar');
+	actionbar.width(actionbar.parent().width()-2);
 };
 
 UIFileView.prototype.toggleCheckboxes = function(checkbox, evt) {

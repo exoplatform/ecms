@@ -53,7 +53,7 @@
   
   <!-- processing file list -->
   <div id="MultiUploadFileListProgress" class="MultiUploadFileList">
-    <span id = "MultiUploadListSeperator"/>
+    <span id = "MultiUploadListSeperator"></span>
   </div>
   <br/>
   

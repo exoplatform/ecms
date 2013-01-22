@@ -943,6 +943,7 @@
 
 .UIJCRExplorerPortlet .UIActionBar .MoreContainerActivated {
   border: 1px solid #e1e1e1;
+  z-index: 2;
 }
 
 .UIJCRExplorerPortlet .UIActionBar .MoreContainerActivated .WhiteBG {
