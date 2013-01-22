@@ -99,7 +99,7 @@ public class UIPublicationPanel
     super.init(node);
     String currentState = node.getProperty(StageAndVersionPublicationConstant.CURRENT_STATE)
             .getString();
-    if (PublicationDefaultStates.PUBLISHED.equals(currentState) || PublicationDefaultStates.UNPUBLISHED.equals(currentState)) {
+    if (PublicationDefaultStates.PUBLISHED.equals(currentState) || PublicationDefaultStates.UNPUBLISHED.equals(currentState) || PublicationDefaultStates.OBSOLETE.equals(currentState)) {
       nodeVersionUUID = node.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)
                             .getString();
       if (!"".equals(nodeVersionUUID)) {
@@ -163,7 +163,7 @@ public class UIPublicationPanel
         String nodeVersionUUID = null;
         String currentState = currentNode.getProperty(StageAndVersionPublicationConstant.CURRENT_STATE)
                 .getString();
-        if (PublicationDefaultStates.PUBLISHED.equals(currentState) || PublicationDefaultStates.UNPUBLISHED.equals(currentState)) {
+        if (PublicationDefaultStates.PUBLISHED.equals(currentState) || PublicationDefaultStates.UNPUBLISHED.equals(currentState) || PublicationDefaultStates.OBSOLETE.equals(currentState)) {
           if(currentNode.hasProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)){
             nodeVersionUUID = currentNode.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP).getString();
           }
