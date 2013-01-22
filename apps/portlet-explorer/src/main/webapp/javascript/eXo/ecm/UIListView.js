@@ -1014,9 +1014,12 @@
       var resizeValue = event.clientX - eXo.ecm.UIListView.currentMouseX;
       var newWidth    = Self.objResizeValue + resizeValue + "px";
       var div2Resize  = gj(Self.listGrid).find("div." + columnClass);
-      for (var i=0; i< div2Resize.length; i++) {
+      var i=0;
+      for (;div2Resize[i];) {
         div2Resize[i].style.width = newWidth;
+        i++;
       }
+      
       if (gj(Self.columnData).data(columnClass)) {
         gj(Self.columnData).removeData(columnClass);
       }
@@ -1026,7 +1029,20 @@
       var resizeDiv = document.getElementById("ResizeDiv");   
       if (Self.listGrid && resizeDiv) 
         Self.listGrid.removeChild(resizeDiv);
-    
+      var documentInfo = document.getElementById('UIDocumentInfo');
+      var uiListGrid = gj(documentInfo).find("div.uiListGrid")[0];
+      var tableBox = gj(documentInfo).find("div.uiBox")[0];
+      var headerRow = gj(documentInfo).find("div.titleTable")[0];
+      var colDiv = gj(headerRow).children("div");
+      var totalWidth = 0; i=0;
+      for (;colDiv[i];) {
+        totalWidth += colDiv[i].offsetWidth;
+        i++;
+      }
+      if (totalWidth < uiListGrid.offsetWidth-2) {
+      	totalWidth = uiListGrid.offsetWidth-2;
+      }
+      gj(tableBox).css("width", totalWidth + "px");
       //update width of uiListGrid
       eXo.ecm.ECMUtils.updateListGridWidth();  
   

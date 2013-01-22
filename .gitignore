@@ -14,8 +14,9 @@
 /*.ipr
 /*.iws
 /temp
-/bin
+bin/
 /target
+*.log
 
 # /apps/
 /apps/.settings
