@@ -28,6 +28,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -223,10 +224,14 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
   private TemplateService       templateService;
 
+  //used for timeline view, indicating which type of content is shown(daily, this week, this month, this year)
   private HashMap<String, String> isExpanded_;
 
   //flag indicating if we need to update data for Timeline
   private boolean updateTimeLineData_ = false;
+  
+  //used in File View, indicating which folders are expanded
+  private Set<String> expandedFolders_;
 
   public UIDocumentInfo() throws Exception {
     pageIterator_ = addChild(UIPageIterator.class, null, CONTENT_PAGE_ITERATOR_ID);
@@ -242,6 +247,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     templateService = getApplicationComponent(TemplateService.class) ;
     displayCategory_ = UIDocumentInfo.CATEGORY_ALL;
     isExpanded_ = new HashMap<String, String>();
+    expandedFolders_ = new HashSet<String>();
   }
 
   /**
@@ -1657,6 +1663,10 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
    */
   public HashMap<String, String> getIsExpanded() {
     return isExpanded_;
+  }
+  
+  public Set<String> getExpandedFolders() {
+    return this.expandedFolders_;
   }
 
   @Override

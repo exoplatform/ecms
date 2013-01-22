@@ -30,6 +30,7 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.commons.utils.EmptySerializablePageList;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.ecm.webui.component.explorer.control.action.ManageVersionsActionComponent;
 import org.exoplatform.ecm.webui.component.explorer.versions.UIActivateVersion;
@@ -69,6 +70,7 @@ import org.exoplatform.webui.event.EventListener;
     template =  "app:/groovy/webui/component/explorer/UIDocumentNodeList.gtmpl",
     events = {
         @EventConfig(listeners = UIDocumentNodeList.ExpandNodeActionListener.class),
+        @EventConfig(listeners = UIDocumentNodeList.CollapseNodeActionListener.class),
         @EventConfig(listeners = UIDocumentNodeList.ManageVersionsActionListener.class)
     }
 )
@@ -248,7 +250,6 @@ public class UIDocumentNodeList extends UIContainer {
       UIDocumentNodeList uicomp = event.getSource();
 
       NodeFinder nodeFinder = uicomp.getApplicationComponent(NodeFinder.class);
-      UIJCRExplorer uiExplorer = uicomp.getAncestorOfType(UIJCRExplorer.class);
       String uri = event.getRequestContext().getRequestParameter(OBJECTID);
       String workspaceName = event.getRequestContext().getRequestParameter("workspaceName");
       UIApplication uiApp = uicomp.getAncestorOfType(UIApplication.class);
@@ -266,6 +267,7 @@ public class UIDocumentNodeList extends UIContainer {
 //                                                                String.valueOf(clickedNode.getPath().hashCode()));
         UIDocumentNodeList uiDocNodeListChild = uicomp.getChildById(uicomp.getID(clickedNode));
         uiDocNodeListChild.setCurrentNode(clickedNode);
+        uicomp.getAncestorOfType(UIDocumentInfo.class).getExpandedFolders().add(uri);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiDocNodeListChild);
       } catch(ItemNotFoundException nu) {
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.null-exception", null, ApplicationMessage.WARNING)) ;
@@ -293,6 +295,51 @@ public class UIDocumentNodeList extends UIContainer {
       }
     }
   }
+  
+  static public class CollapseNodeActionListener extends EventListener<UIDocumentNodeList> {
+    public void execute(Event<UIDocumentNodeList> event) throws Exception {
+      UIDocumentNodeList uicomp = event.getSource();
+
+      NodeFinder nodeFinder = uicomp.getApplicationComponent(NodeFinder.class);
+      String uri = event.getRequestContext().getRequestParameter(OBJECTID);
+      String workspaceName = event.getRequestContext().getRequestParameter("workspaceName");
+      UIApplication uiApp = uicomp.getAncestorOfType(UIApplication.class);
+      try {
+        // Manage ../ and ./
+        uri = LinkUtils.evaluatePath(uri);
+        // Just in order to check if the node exists
+        Item item = nodeFinder.getItem(workspaceName, uri);
+        if ((item instanceof Node) && Utils.isInTrash((Node) item)) {
+          return;
+        }
+        Node clickedNode = (Node)item;
+        UIDocumentNodeList uiDocNodeListChild = uicomp.getChildById(uicomp.getID(clickedNode));
+        uiDocNodeListChild.setPageList(EmptySerializablePageList.get());
+        uicomp.getAncestorOfType(UIDocumentInfo.class).getExpandedFolders().remove(uri);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiDocNodeListChild);
+      } catch(ItemNotFoundException nu) {
+        uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.null-exception", null, ApplicationMessage.WARNING)) ;
+        return ;
+      } catch(PathNotFoundException pa) {
+        uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.path-not-found", null, ApplicationMessage.WARNING)) ;
+        return ;
+      } catch(AccessDeniedException ace) {
+        uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.access-denied", null, ApplicationMessage.WARNING)) ;
+        return ;
+      } catch(RepositoryException e) {
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Repository cannot be found");
+        }
+        uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
+            ApplicationMessage.WARNING)) ;
+        return ;
+      } catch (Exception e) {
+        JCRExceptionManager.process(uiApp, e);
+        return;
+      }
+    }
+  }
+  
   
   public static class ManageVersionsActionListener extends EventListener<UIDocumentNodeList> {
     public void execute(Event<UIDocumentNodeList> event) throws Exception {

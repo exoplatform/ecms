@@ -27,20 +27,14 @@
 	UIFileView.prototype.selectBoxType = null;
 	UIFileView.prototype.firstTimeClick = false;
 
-UIFileView.prototype.clickFolder =  function (folderDiv, link, docListId,event) {
+UIFileView.prototype.clickFolder =  function (folderDiv, expandLink, collapseLink, docListId,event) {
 	if (!folderDiv) return;
     folderDiv.className = "FolderCollapsed" == folderDiv.className ? "FolderExpanded" : "FolderCollapsed";
     var docList = document.getElementById(docListId);
     if ("FolderCollapsed" == folderDiv.className) {
-      docList.style.display="none";
+    	eval(decodeURIComponent(collapseLink));
     } else {
-      if (eXo.ecm.UIFileView.openDivs[docListId]) {
-        docList.style.display="block";
-      } else {
-        eval(decodeURIComponent(link));
-        eXo.ecm.UIFileView.openDivs[docListId] = docListId;
-        docList.style.display="block";        
-      }
+    	eval(decodeURIComponent(expandLink));
     }
     var evt = event || window.event;
     evt.cancelBubble = true;
