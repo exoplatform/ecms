@@ -65,7 +65,7 @@ public class VotingServiceImpl implements VotingService {
     NodeIterator nodeIter = multiLanguages.getNodes() ;
     while(nodeIter.hasNext()) {
       Node languageNode = nodeIter.nextNode() ;
-      if(node.getPrimaryNodeType().getName().equals("nt:file")) {
+      if(node.isNodeType("nt:file")) {
         languageNode = getFileLangNode(languageNode) ;
       }
       if(languageNode.hasProperty(VOTE_TOTAL_LANG_PROP)) {
@@ -85,7 +85,7 @@ public class VotingServiceImpl implements VotingService {
       NodeIterator nodeIter = currentNode.getNodes() ;
       while(nodeIter.hasNext()) {
         Node ntFile = nodeIter.nextNode() ;
-        if(ntFile.getPrimaryNodeType().getName().equals("nt:file")) {
+        if(ntFile.isNodeType("nt:file")) {
           return ntFile ;
         }
       }
@@ -193,7 +193,7 @@ public class VotingServiceImpl implements VotingService {
         multiLanguages = node.getNode(LANGUAGES) ;
         if(multiLanguages.hasNode(language)) {
           languageNode = multiLanguages.getNode(language) ;
-          if(node.getPrimaryNodeType().getName().equals("nt:file")) {
+          if(node.isNodeType("nt:file")) {
             languageNode = getFileLangNode(languageNode) ;
           }
         }
@@ -231,8 +231,7 @@ public class VotingServiceImpl implements VotingService {
     if (voterVoteValue != null) {
       String stValue = voterVoteValue.getString();
       return Double.parseDouble(stValue.substring(stValue.indexOf(SPACE) + 1));
-    } else {
-      return 0;
-    }
+    } 
+    return 0;
   }
 }

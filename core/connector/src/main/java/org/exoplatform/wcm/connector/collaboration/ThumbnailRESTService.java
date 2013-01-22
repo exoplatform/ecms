@@ -214,10 +214,9 @@ public class ThumbnailRESTService implements ResourceContainer {
       return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
     Node showingNode = getShowingNode(wsName, getNodePath(nodePath));
     Node targetNode = getTargetNode(showingNode);
-    if (targetNode.getPrimaryNodeType().getName().equals("nt:file")
-        || targetNode.getPrimaryNodeType().getName().equals("nt:resource")) {
+    if (targetNode.isNodeType("nt:file") || targetNode.isNodeType("nt:resource")) {
       Node content = targetNode;
-      if (targetNode.getPrimaryNodeType().getName().equals("nt:file"))
+      if (targetNode.isNodeType("nt:file"))
         content = targetNode.getNode("jcr:content");
       if (ifModifiedSince != null) {
         // get last-modified-since from header
@@ -257,7 +256,7 @@ public class ThumbnailRESTService implements ResourceContainer {
     Node parentNode = showingNode.getParent();
     String identifier = ((NodeImpl) showingNode).getInternalIdentifier();
     Node targetNode = getTargetNode(showingNode);
-    if(targetNode.getPrimaryNodeType().getName().equals("nt:file")) {
+    if(targetNode.isNodeType("nt:file")) {
       Node content = targetNode.getNode("jcr:content");
       String mimeType = content.getProperty("jcr:mimeType").getString();
       for(ComponentPlugin plugin : thumbnailService_.getComponentPlugins()) {

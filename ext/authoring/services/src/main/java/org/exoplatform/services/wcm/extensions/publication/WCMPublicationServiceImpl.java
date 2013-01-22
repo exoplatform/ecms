@@ -105,7 +105,7 @@ public class WCMPublicationServiceImpl
               && (workspace.equals(pathTab[1]));
         }
         if (nodetype != null)
-          nodetypeVerified = nodetype.equals(node.getPrimaryNodeType().getName());
+          nodetypeVerified = node.isNodeType(nodetype);
         if (site != null)
           siteVerified = site.equals(siteName);
         if (memberships.size() > 0) {

@@ -36,8 +36,6 @@ import org.exoplatform.services.cms.impl.ImageUtils;
 import org.exoplatform.services.cms.thumbnail.ThumbnailPlugin;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
 
 /**
  * Created by The eXo Platform SARL
@@ -47,8 +45,6 @@ import org.exoplatform.services.log.Log;
  */
 public class ThumbnailServiceImpl implements ThumbnailService {
 
-  private static final Log LOG  = ExoLogger.getLogger(ThumbnailServiceImpl.class.getName());
-  
   final private static String JCR_CONTENT = "jcr:content";
   final private static String JCR_MIMETYPE = "jcr:mimeType";
   final private static String JCR_DATA = "jcr:data";
@@ -79,8 +75,7 @@ public class ThumbnailServiceImpl implements ThumbnailService {
     while(nodeIter.hasNext()) {
       Node childNode = nodeIter.nextNode();
       thumbnailNode = addThumbnailNode(childNode);
-      if(thumbnailNode != null && thumbnailNode.getPrimaryNodeType().getName().equals(EXO_THUMBNAIL)
-          && thumbnailNode.hasProperty(BIG_SIZE)) {
+      if(thumbnailNode != null && thumbnailNode.isNodeType(EXO_THUMBNAIL) && thumbnailNode.hasProperty(BIG_SIZE)) {
         listNodes.add(childNode);
       }
     }
@@ -96,7 +91,7 @@ public class ThumbnailServiceImpl implements ThumbnailService {
     Node childNode = null;
     while(nodeIter.hasNext()) {
       childNode = nodeIter.nextNode();
-      if(childNode.getPrimaryNodeType().getName().equals(NT_FILE)) {
+      if(childNode.isNodeType(NT_FILE)) {
         fileListNodes.add(childNode);
       }
     }

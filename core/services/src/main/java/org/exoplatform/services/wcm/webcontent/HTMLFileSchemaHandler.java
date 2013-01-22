@@ -75,7 +75,7 @@ public class HTMLFileSchemaHandler extends BaseWebSchemaHandler {
    * @throws Exception the exception
    */
   private boolean matchNodeType(Node node) throws Exception{
-    return node.getPrimaryNodeType().getName().equals("nt:file");
+    return node.isNodeType("nt:file");
   }
 
   /**

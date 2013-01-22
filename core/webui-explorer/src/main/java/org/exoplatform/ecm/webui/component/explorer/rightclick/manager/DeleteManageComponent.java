@@ -36,7 +36,6 @@ import javax.jcr.ReferentialIntegrityException;
 import javax.jcr.Session;
 import javax.jcr.lock.LockException;
 import javax.jcr.nodetype.ConstraintViolationException;
-import javax.jcr.nodetype.NodeType;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
@@ -71,7 +70,6 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -80,6 +78,7 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
+import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
@@ -155,13 +154,6 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     while (iterator.hasNext()) {
       path = iterator.next();
       processRemoveOrMoveToTrash(path, mapNode.get(path), event, true, true);
-    }
-  }
-
-  private void removeMixins(Node node) throws Exception {
-    NodeType[] mixins = node.getMixinNodeTypes();
-    for (NodeType nodeType : mixins) {
-      node.removeMixin(nodeType.getName());
     }
   }
 
@@ -569,7 +561,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
   	int content_type = 1;  	
     Node node = getNodeByPath(nodePath);
     String primaryType = node.getPrimaryNodeType().getName();
-    if(primaryType.equals(NodetypeConstant.NT_FILE)) content_type = 2;
+    if(node.isNodeType(NodetypeConstant.NT_FILE)) content_type = 2;
     else if (primaryType.equals(NodetypeConstant.NT_FOLDER) || primaryType.equals(NodetypeConstant.NT_UNSTRUCTURED)) 
     	content_type = 3;
     else content_type = 1;   
@@ -588,14 +580,14 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
   	boolean isFile = false;
     boolean isFolder = false;
   	
-  	for(int i=0; i<nodePaths.length; i++) { 
-  		Node node = getNodeByPath(nodePaths[i]);
-  		String primaryType = node.getPrimaryNodeType().getName();
-  		if(primaryType.equals(NodetypeConstant.NT_FILE)) isFile = true;
+    for(int i=0; i<nodePaths.length; i++) { 
+      Node node = getNodeByPath(nodePaths[i]);
+      String primaryType = node.getPrimaryNodeType().getName();
+      if(node.isNodeType(NodetypeConstant.NT_FILE)) isFile = true;
       else if (primaryType.equals(NodetypeConstant.NT_FOLDER) || primaryType.equals(NodetypeConstant.NT_UNSTRUCTURED))
-      	isFolder = true;
+        isFolder = true;
       else isGeneric = true;
-  	}
+    }
   	if(isGeneric) sBuffer.append("1");
   	else sBuffer.append("0");
   	

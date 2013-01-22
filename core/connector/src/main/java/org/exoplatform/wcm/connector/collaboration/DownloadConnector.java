@@ -77,7 +77,7 @@ public class DownloadConnector implements ResourceContainer{
     } catch (AccessDeniedException ade) {
       return Response.status(HTTPStatus.UNAUTHORIZED).build();
     }
-    if (node.getPrimaryNodeType().getName().equals("nt:file")) {
+    if (node.isNodeType("nt:file")) {
       mimeType = node.getNode("jcr:content").getProperty("jcr:mimeType").getString();
     }
     return Response.ok(is, mimeType)

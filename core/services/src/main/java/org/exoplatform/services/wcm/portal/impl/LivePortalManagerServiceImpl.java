@@ -135,7 +135,7 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
     Node portalsStorage = getLivePortalsStorage(sessionProvider);
     for (NodeIterator iterator = portalsStorage.getNodes(); iterator.hasNext(); ) {
       Node node = iterator.nextNode();
-      if (PORTAL_FOLDER.equals(node.getPrimaryNodeType().getName())) {
+      if (node.isNodeType(PORTAL_FOLDER)) {
         list.add(node);
       }
     }

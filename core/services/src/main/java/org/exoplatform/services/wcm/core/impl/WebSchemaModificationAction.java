@@ -48,7 +48,7 @@ public class WebSchemaModificationAction implements Action{
       return propertyName.equalsIgnoreCase("exo:active");
     }
     Node grandParent = property.getParent().getParent();
-    if(propertyName.equals("jcr:data") && !grandParent.getPrimaryNodeType().getName().equals("nt:file"))
+    if(propertyName.equals("jcr:data") && !grandParent.isNodeType("nt:file"))
       return false;
 
     WebSchemaConfigService schemaConfigService = WCMCoreUtils.getService(WebSchemaConfigService.class);

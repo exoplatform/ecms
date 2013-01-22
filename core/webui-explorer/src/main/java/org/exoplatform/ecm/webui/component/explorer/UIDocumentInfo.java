@@ -555,7 +555,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   }
 
   public boolean isSupportedThumbnailImage(Node node) throws Exception {
-    if(node.getPrimaryNodeType().getName().equals(Utils.NT_FILE)) {
+    if(node.isNodeType(Utils.NT_FILE)) {
       Node contentNode = node.getNode(Utils.JCR_CONTENT);
       ThumbnailService thumbnailService = getApplicationComponent(ThumbnailService.class);
       for(ComponentPlugin plugin : thumbnailService.getComponentPlugins()) {
@@ -573,7 +573,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   }
 
   public boolean isImageType(Node node) throws Exception {
-    if(node.getPrimaryNodeType().getName().equals(Utils.NT_FILE)) {
+    if(node.isNodeType(Utils.NT_FILE)) {
       Node contentNode = node.getNode(Utils.JCR_CONTENT);
       if(contentNode.getProperty(Utils.JCR_MIMETYPE).getString().startsWith("image")) return true;
     }
@@ -1099,7 +1099,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
     if(!found && allItemsByTypeFilterSet.contains(Contents_Document_Type)) {
       for(String contentType:templateService.getAllDocumentNodeTypes()){
-        if (contentType.equals(node.getPrimaryNodeType().getName())){
+        if (node.isNodeType(contentType)){
           found=true;
           break;
         }

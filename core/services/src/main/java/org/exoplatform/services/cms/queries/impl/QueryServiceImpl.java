@@ -211,7 +211,7 @@ public class QueryServiceImpl implements QueryService, Startable{
     NodeIterator iter = queriesHome.getNodes();
     while (iter.hasNext()) {
       Node node = iter.nextNode();
-      if("nt:query".equals(node.getPrimaryNodeType().getName())) queries.add(manager.getQuery(node));
+      if(node.isNodeType("nt:query")) queries.add(manager.getQuery(node));
     }
     return queries;
   }  
@@ -371,8 +371,9 @@ public class QueryServiceImpl implements QueryService, Startable{
     NodeIterator iter = sharedQueryHome.getNodes();
     while (iter.hasNext()) {
       Node node = iter.nextNode();
-      if("nt:query".equals(node.getPrimaryNodeType().getName()))
+      if(node.isNodeType("nt:query")) {
         queries.add(node);
+      }
     }
     return queries;
   }

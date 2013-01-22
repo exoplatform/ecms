@@ -967,7 +967,7 @@ public class Utils {
    */
   public static String getDownloadLink(Node node) throws Exception {
 
-    if (!Utils.getRealNode(node).getPrimaryNodeType().getName().equals(NT_FILE)) return null;
+    if (!Utils.getRealNode(node).isNodeType(NT_FILE)) return null;
     return org.exoplatform.ecm.webui.utils.Utils.getDownloadRestServiceLink(node);
   }
 
@@ -984,7 +984,7 @@ public class Utils {
         NodeIterator nodeIter = currentNode.getNodes() ;
         while(nodeIter.hasNext()) {
           Node ntFile = nodeIter.nextNode() ;
-          if(ntFile.getPrimaryNodeType().getName().equals(NT_FILE)) {
+          if(ntFile.isNodeType(NT_FILE)) {
             return ntFile ;
           }
         }

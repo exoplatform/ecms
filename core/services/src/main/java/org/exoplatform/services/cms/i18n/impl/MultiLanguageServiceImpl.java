@@ -408,7 +408,7 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
       NodeIterator nodeIter = languageNode.getNodes() ;
       while(nodeIter.hasNext()) {
         Node ntFile = nodeIter.nextNode() ;
-        if(ntFile.getPrimaryNodeType().getName().equals("nt:file")) {
+        if(ntFile.isNodeType(NTFILE)) {
           return ntFile ;
         }
       }
@@ -886,7 +886,7 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
     String defaultLang = getDefault(node) ;
     while(nodeIter.hasNext()) {
       Node languageNode = nodeIter.nextNode() ;
-      if(node.getPrimaryNodeType().getName().equals(NTFILE)) {
+      if(node.isNodeType(NTFILE)) {
         Node jcrContentNode = node.getNode(JCRCONTENT);
         if(!jcrContentNode.getProperty(JCR_MIMETYPE).getString().startsWith("text")) {
           languageNode = getFileLangNode(languageNode) ;
@@ -1155,7 +1155,7 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
       NodeIterator nodeIter = node.getNodes() ;
       while(nodeIter.hasNext()) {
         Node childNode = nodeIter.nextNode() ;
-        if(childNode.getPrimaryNodeType().getName().equals("nt:resource")) return true ;
+        if(childNode.isNodeType("nt:resource")) return true ;
       }
     }
     return false ;
@@ -1173,7 +1173,7 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
       NodeIterator nodeIter = node.getNodes() ;
       while(nodeIter.hasNext()) {
         Node childNode = nodeIter.nextNode() ;
-        if(childNode.getPrimaryNodeType().getName().equals("nt:resource")) return childNode.getName() ;
+        if(childNode.isNodeType("nt:resource")) return childNode.getName() ;
       }
     }
     return null ;

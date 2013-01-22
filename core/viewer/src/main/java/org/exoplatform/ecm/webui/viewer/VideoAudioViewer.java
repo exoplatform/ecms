@@ -81,7 +81,7 @@ public class VideoAudioViewer extends UIComponent {
         NodeIterator nodeIter = currentNode.getNodes() ;
         while(nodeIter.hasNext()) {
           Node ntFile = nodeIter.nextNode() ;
-          if(ntFile.getPrimaryNodeType().getName().equals("nt:file")) {
+          if(ntFile.isNodeType("nt:file")) {
             return ntFile ;
           }
         }

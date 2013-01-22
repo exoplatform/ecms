@@ -45,7 +45,7 @@ public abstract class BaseWebSchemaHandler extends BaseComponentPlugin implement
   public boolean matchHandler(SessionProvider sessionProvider, Node node) throws Exception {
     String handlerNodeType = getHandlerNodeType();
     String parentNodeType = getParentNodeType();
-    if(!node.getPrimaryNodeType().getName().equals(handlerNodeType))
+    if(!node.isNodeType(handlerNodeType))
       return false;
     if(!node.getParent().isNodeType(parentNodeType))
       return false;

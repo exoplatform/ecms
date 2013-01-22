@@ -543,7 +543,7 @@ public class Utils {
       throws Exception {
     ThumbnailService thumbnailService = Util.getUIPortal()
         .getApplicationComponent(ThumbnailService.class);
-    if (node.getPrimaryNodeType().getName().equals(NT_FILE)) {
+    if (node.isNodeType(NT_FILE)) {
       String mimeType = node.getNode(JCR_CONTENT).getProperty(JCR_MIMETYPE)
           .getString();
       if (mimeType.startsWith("image")) {
