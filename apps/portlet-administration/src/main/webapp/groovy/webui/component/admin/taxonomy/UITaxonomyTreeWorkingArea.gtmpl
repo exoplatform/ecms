@@ -6,10 +6,8 @@
  * April 13, 2009
  */
 %>
-<div class="$uicomponent.id UITreeList" id="$uicomponent.id">
+<div class="uiTaxonomyTreeWorkingArea uiTreeList" id="$uicomponent.id">
   <table class="uiGrid table table-hover table-striped">
-	  <col></col>
-	  <col style="width:200px;"></col>
 	  <thead>
 	    <tr>
 	      <th><%=_ctx.appRes("UITreeList.header.name")%></th>
@@ -17,46 +15,46 @@
 	    </tr>
 	  </thead>
 	  <tbody>
-      <%
-        def nodes = uicomponent.getListNodes() ;
-        def rowClass = "OddRow" ;
+      <%	def nodes = uicomponent.getListNodes() ;
 		    boolean even = true ;
 		    if(nodes.size() > 0) {
 			    for(node in nodes) {
-			      if(even) rowClass = "EvenRow" ;  
-			      else rowClass =  "OddRow" ; 
 			      even = !even ;
       %>
-			      <tr class="$rowClass">
-			        <td class="Truncated">
+			      <tr>
+			        <td>
 			          <%
 			            String path = node.getPath() ;
 			            String nodeName = path.substring(path.lastIndexOf("/") + 1, path.length()) ;
 			           %>
 			          <div class="text" rel="tooltip" data-placement="bottom" title="$nodeName">$nodeName</div>
 			        </td>
-			        <td class="center">
+			        
 		              <%
 		                if(uicomponent.isRootNode()) {
 		              %>
-		                <img onclick="<%=uicomponent.event("Add", node.getPath())%>" rel="tooltip" data-placement="bottom" alt="<%=_ctx.appRes("UITaxonomyManager.title.add")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Add16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.add")%>" />
-		                <img onclick="<%=uicomponent.event("Paste", node.getPath())%>" alt="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Paste16x16Icon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>" />
-		              <%} else {%>
-			              <img onclick="<%=uicomponent.event("Add", node.getPath())%>" alt="<%=_ctx.appRes("UITaxonomyManager.title.add")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Add16x16Icon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.add")%>" />
-		                <img onclick="<%=uicomponent.event("Copy", node.getPath())%>" alt="<%=_ctx.appRes("UITaxonomyManager.title.copy")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Copy16x16Icon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.copy")%>" />
-			              <img onclick="<%=uicomponent.event("Cut", node.getPath())%>" alt="<%=_ctx.appRes("UITaxonomyManager.title.cut")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Cut16x16Icon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.cut")%>" />
-		                <img onclick="<%=uicomponent.event("Paste", node.getPath())%>" alt="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Paste16x16Icon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>" />
-		                <img onclick="<%=uicomponent.event("ViewPermission", node.getPath())%>" alt="<%=_ctx.appRes("UITaxonomyManager.title.permission")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Permission16x16Icon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.permission")%>" />
-		                <img onclick="<%=uicomponent.event("Remove", node.getPath())%>" alt="<%=_ctx.appRes("UITaxonomyManager.title.remove")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Remove16x16Icon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.remove")%>" />
-		              <%}%>
+					<td class="span2 center">
+		               	<a class="actionIcon" onclick="<%=uicomponent.event("Add", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.add")%>"><i class="uiIconAddPermission"></i></a>
+						<a class="actionIcon" onclick="<%=uicomponent.event("Paste", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>" ><i class="uiIconEcmsPatse"></i></a>
+					</td>
+					 <%} else {%>
+					 <td class="span4 center">
+		                <a class="actionIcon" onclick="<%=uicomponent.event("Add", node.getPath())%>"  rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.add")%>" ><i class="uiIconAddPermission"></i></a>
+						<a class="actionIcon" onclick="<%=uicomponent.event("Copy", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.copy")%>" ><i class="uiIconEcmsCopy"></i></a>	
+		               <a class="actionIcon"onclick="<%=uicomponent.event("Cut", node.getPath())%>"  rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.cut")%>" ><i class="uiIconEcmsCut"></i></a>
+		               <a class="actionIcon" onclick="<%=uicomponent.event("Paste", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>" ><i class="uiIconEcmsPatse"></i></a>
+		                <a class="actionIcon" onclick="<%=uicomponent.event("ViewPermission", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.permission")%>"><i class="uiIconEcmsViewPermissions"></i></a>
+						<a class="actionIcon" onclick="<%=uicomponent.event("Remove", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITaxonomyManager.title.remove")%>"><i class="uiIconDelete"></i></a>
+					 </td>
+					  <%}%>
 		           
-			        </td>
+			        
 			      </tr>
 			<%
 		    	}
 		    } else {
 		  %>
-		  		<tr class="EvenRow">
+		  		<tr>
 		  			<td colspan="2"><div class="text"><%=_ctx.appRes("UITreeList.info.child-not-found")%></div></td>
 		  		</tr>
 		  <%  	
@@ -71,11 +69,11 @@
   </div>
   <% } %>
 </div>
-<div class="UIAction">
+<div class="uiAction uiActionBorder">
 	<%for(action in uicomponent.getActions()) { 
 		String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action);
 		String link = uicomponent.event(action) ;
 	%>
-		<a onclick="$link" class="ActionButton LightBlueStyle" href="javascript:void(0);">$actionLabel</a>
+		<button onclick="$link" class="btn" href="javascript:void(0);">$actionLabel</button>
 	<%}%>
 </div>

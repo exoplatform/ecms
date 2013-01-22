@@ -395,18 +395,18 @@ public class Utils {
         }
       }
     }
-    nodeType = nodeType.replace(':', '_') + appended;
+    nodeType = appended + nodeType.replace(':', '_');
     str.append(nodeType);
     str.append(" ");
-    str.append("default16x16Icon");
+    str.append("uiIconNode");
     if (mode != null && mode.equalsIgnoreCase("Collapse"))
       str.append(' ').append(mode).append(nodeType);
     if (node.isNodeType(NT_FILE)) {
       if (node.hasNode(JCR_CONTENT)) {
         Node jcrContentNode = node.getNode(JCR_CONTENT);
-        str.append(' ').append(
+        str.append(' ').append(appended).append(
             jcrContentNode.getProperty(JCR_MIMETYPE).getString().toLowerCase().replaceAll(
-                "/|\\.", "_")).append(appended);
+                "/|\\.", ""));
       }
     }
     return str.toString();

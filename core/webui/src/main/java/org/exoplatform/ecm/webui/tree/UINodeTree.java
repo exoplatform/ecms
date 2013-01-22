@@ -76,7 +76,7 @@ public class UINodeTree extends UITree {
    */
   public String renderNode(Object obj) throws Exception {
     Node node = (Node) obj;
-    String nodeTypeIcon = Utils.getNodeTypeIcon(node,"16x16Icon");
+    String nodeTypeIcon = Utils.getNodeTypeIcon(node,"uiIconEcms");
 
     String nodeIcon = this.getExpandIcon();
     String iconGroup = this.getIcon();
@@ -84,7 +84,7 @@ public class UINodeTree extends UITree {
     if(isSelected(obj)) {
       nodeIcon = getColapseIcon();
       iconGroup = getSelectedIcon();
-      note = " NodeSelected" ;
+      note = " nodeSelected" ;
     }
     String beanIconField = getBeanIconField();
     if(beanIconField != null && beanIconField.length() > 0) {
@@ -113,36 +113,33 @@ public class UINodeTree extends UITree {
     UIRightClickPopupMenu popupMenu = getUiPopupMenu();
     String beanFieldValue = getDisplayFieldValue(obj);
     beanFieldValue = Text.unescapeIllegalJcrChars(Utils.getIndexName(node));
-    String className="NodeIcon";
+    String className="uiIconFileDefault";
     boolean flgSymlink = false;
     if (Utils.isSymLink(node)) {
       flgSymlink = true;
-      className = "NodeIconLink";
+      className = "uiIconNodeLink";
     }
     if(popupMenu == null) {
-      builder.append(" <div class=\"").append(className).append(" ").append(iconGroup).append(" ").append(nodeTypeIcon)
+      builder.append(" <i class=\"").append(className).append(" ").append(iconGroup).append(" ").append(nodeTypeIcon)
           .append(note).append("\"").append(" title=\"").append(beanFieldValue)
           .append("\"").append(">");
       if (flgSymlink) {
-        builder.append("  <div class=\"LinkSmall\">")
-          .append(beanFieldValue)
-          .append("</div>");
-      } else {
-        builder.append(beanFieldValue);
-      }
-      builder.append("</div>");
+        builder.append("  <i class=\"linkSmall\">")          
+          .append("</i>").append(beanFieldValue);
+      } 
+      builder.append("</i>");
+      builder.append(beanFieldValue);
     } else {
-      builder.append(" <div class=\"").append(className).append(" ").append(iconGroup).append(" ").append(nodeTypeIcon)
+      builder.append(" <i class=\"").append(className).append(" ").append(iconGroup).append(" ").append(nodeTypeIcon)
           .append(note).append("\" ").append(popupMenu.getJSOnclickShowPopup(objId, null)).append(
               " title=\"").append(beanFieldValue).append("\"").append(">");
       if (flgSymlink) {
-        builder.append("  <div class=\"LinkSmall\">")
+        builder.append("  <i class=\"linkSmall\">")
           .append(beanFieldValue)
-          .append("</div>");
-      } else {
-        builder.append(beanFieldValue);
-      }
-      builder.append("</div>");
+          .append("</i>");
+      } 
+      builder.append("</i>");
+      builder.append(beanFieldValue);
     }
     builder.append(" </a>");
     return builder.toString();
