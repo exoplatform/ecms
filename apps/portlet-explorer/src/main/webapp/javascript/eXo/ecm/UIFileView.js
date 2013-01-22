@@ -539,8 +539,8 @@ UIFileView.prototype.mouseUpGround = function(evt) {
 		if (item.selected && !inArray(Self.itemsSelected, item)) Self.itemsSelected.push(item);
 	}
 	//show context menu
-	var rightClick = (event.which && event.which > 1) || (event.button && event.button == 2);
-	if (rightClick) Self.showGroundContextMenu(event, element);
+//	var rightClick = (event.which && event.which > 1) || (event.button && event.button == 2);
+//	if (rightClick) Self.showGroundContextMenu(event, element);
 };
 
 // working with item context menu
@@ -637,46 +637,6 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 	if (event.clientY + contentMenu.offsetHeight > portHeight) Y -= contentMenu.offsetHeight + 5;
 //	contextMenu.style.top = Y + 5 + "px";
 //	contextMenu.style.left = X + 5 + "px";
-};
-
-// working with ground context menu
-UIFileView.prototype.showGroundContextMenu = function(event, element) {
-	var event = event || window.event;
-	resetArrayItemsSelected();
-	if (document.getElementById(Self.contextMenuId)) {
-		var contextMenu = document.getElementById(Self.contextMenuId);
-		contextMenu.parentNode.removeChild(contextMenu);
-	}
-	//create context menu
-	var actionArea = document.getElementById(Self.actionAreaId);
-	var context = gj(actionArea).find("div.GroundContextMenu:first")[0];
-	var contextMenu = newElement({
-		innerHTML: context.innerHTML,
-		id: Self.contextMenuId,
-		style: {
-			position: "absolute",
-			height: "0px",
-			width: "0px",
-			top: "-1000px",
-			display: "block"
-		}
-	});
-	document.body.appendChild(contextMenu);
-	
-	//check position popup
-	var X = event.pageX;
-	var Y = event.pageY;
-	var portWidth = gj(window).width();
-	var portHeight = gj(window).height();
-	var contentMenu = gj(contextMenu).children("div.UIRightClickPopupMenu:first")[0];
-	if (event.clientX + contentMenu.offsetWidth > portWidth) X -= contentMenu.offsetWidth;
-	if (event.clientY + contentMenu.offsetHeight > portHeight) Y -= contentMenu.offsetHeight + 5;
-	contextMenu.style.top = Y + 5 + "px";
-	contextMenu.style.left = X + 5 + "px";
-	
-//	contextMenu.onmouseup = Self.hideContextMenu;
-//	document.body.onmousedown = Self.hideContextMenu;
-//	document.body.onkeydown = Self.hideContextMenu;
 };
 
 // hide context menu
