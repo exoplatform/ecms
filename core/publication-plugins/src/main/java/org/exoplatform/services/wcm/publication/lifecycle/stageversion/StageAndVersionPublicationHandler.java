@@ -35,6 +35,11 @@ import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
  * hoa.phamvu@exoplatform.com
  * Mar 5, 2009
  */
+/**
+ * This class will not be supported anymore. It will be removed in next major version.
+ *
+ */
+@Deprecated
 public class StageAndVersionPublicationHandler extends BaseWebSchemaHandler {
 
   /** The Logger **/

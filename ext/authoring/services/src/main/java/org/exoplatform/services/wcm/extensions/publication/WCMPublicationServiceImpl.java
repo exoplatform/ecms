@@ -42,7 +42,6 @@ import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.Lifecy
 import org.exoplatform.services.wcm.extensions.utils.ContextComparator;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.publication.WebpagePublicationPlugin;
-import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 public class WCMPublicationServiceImpl
@@ -188,7 +187,7 @@ public class WCMPublicationServiceImpl
           }
         }
 
-        context.put(StageAndVersionPublicationConstant.IS_INITIAL_PHASE, "true");
+        context.put(AuthoringPublicationConstant.IS_INITIAL_PHASE, "true");
         publicationPlugin.changeState(node, initialState, context);
         node.setProperty("publication:lastUser", remoteUser);
         node.getSession().save();

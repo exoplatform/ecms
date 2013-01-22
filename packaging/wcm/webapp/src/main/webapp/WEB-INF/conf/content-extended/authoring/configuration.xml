@@ -9,12 +9,6 @@
   <type>org.exoplatform.services.wcm.extensions.publication.WCMPublicationServiceImpl</type>
   <component-plugins>
 	  <component-plugin>
-	    <name>States and versions based publication</name>
-	    <set-method>addPublicationPlugin</set-method>
-	    <type>org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationPlugin</type>
-	    <description>This publication lifecycle publish a web content or DMS document to a portal page with more state and version.</description>	    	    	   
-	  </component-plugin>
-	  <component-plugin>
 	    <name>Authoring publication</name>
 	    <set-method>addPublicationPlugin</set-method>
 	    <type>org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.AuthoringPublicationPlugin</type>
@@ -164,7 +158,7 @@
               <property name="fromState" value="staged"/>
               <property name="toState" value="published"/>
 														<!--The syntax of predefinedPath must follow this structure: workspaceName:nodePath-->
-              <property name="predefinedPath" value="collaboration:/"/>
+              <property name="predefinedPath" value="${wcm.publication.path:collaboration:/sites}"/>
           </properties-param>
         </init-params>
       </component-plugin>
@@ -192,7 +186,7 @@
               <property name="fromState" value="published"/>
               <property name="toState" value="unpublished"/>
 														<!--The syntax of predefinedPath must follow this structure: workspaceName:nodePath-->
-              <property name="predefinedPath" value="collaboration:/"/>
+              <property name="predefinedPath" value="${wcm.publication.path:collaboration:/sites}"/>
           </properties-param>
         </init-params>
       </component-plugin>

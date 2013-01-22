@@ -12,6 +12,11 @@ import org.exoplatform.webui.form.UIForm;
     lifecycle = UIApplicationLifecycle.class,
     template = "classpath:resources/templates/staticdirect/published.gtmpl"
 )
+/**
+ * This class will not be supported anymore. It will be removed in next major version.
+ *
+ */
+@Deprecated
 public class UIPublishedForm extends UIForm {
 
   public UIPublishedForm() throws Exception {

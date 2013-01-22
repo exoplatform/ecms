@@ -36,6 +36,11 @@ import org.exoplatform.webui.form.UIForm;
     lifecycle = UIApplicationLifecycle.class,
     template = "classpath:groovy/wcm/webui/publication/lifecycle/simple/ui/UIPublishingPanel.gtmpl"
 )
+/**
+ * This class will not be supported anymore. It will be removed in next major version.
+ *
+ */
+@Deprecated
 public class UIPublishingPanel extends UIForm implements UIPopupComponent {
 
   /** The current node. */

@@ -43,7 +43,11 @@ import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
     lifecycle = UIApplicationLifecycle.class,
     template = "classpath:resources/templates/staticdirect/publication.gtmpl"
 )
-
+/**
+ * This class will not be supported anymore. It will be removed in next major version.
+ *
+ */
+@Deprecated
 public class UIPublicationComponent extends UIComponent {
 
   private NodeLocation node_;

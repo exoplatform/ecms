@@ -37,6 +37,11 @@ import org.exoplatform.webui.form.UIForm;
       @EventConfig(listeners = UICloseForm.CloseActionListener.class)
     }
 )
+/**
+ * This class will not be supported anymore. It will be removed in next major version.
+ *
+ */
+@Deprecated
 public class UICloseForm extends UIForm {
 
   /**

@@ -44,7 +44,6 @@ import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.Lifecy
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.State;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
-import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationConstant;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationContainer;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -70,10 +69,8 @@ import org.exoplatform.webui.form.UIFormDateTimeInput;
     @EventConfig(listeners = UIPublicationPanel.SaveActionListener.class),
     @EventConfig(listeners = UIPublicationPanel.ResetActionListener.class),
     @EventConfig(listeners = UIPublicationPanel.CloseActionListener.class) })
-public class UIPublicationPanel
-                               extends
-                               org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationPanel {
-  final static public String OBJECTID          = "objectId";
+
+public class UIPublicationPanel extends org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationPanel {
 
   public static final String START_PUBLICATION = "UIPublicationPanelStartDateInput";
 
@@ -97,10 +94,10 @@ public class UIPublicationPanel
     Calendar endDate = null;
     String nodeVersionUUID = null;
     super.init(node);
-    String currentState = node.getProperty(StageAndVersionPublicationConstant.CURRENT_STATE)
+    String currentState = node.getProperty(AuthoringPublicationConstant.CURRENT_STATE)
             .getString();
     if (PublicationDefaultStates.PUBLISHED.equals(currentState) || PublicationDefaultStates.UNPUBLISHED.equals(currentState)) {
-      nodeVersionUUID = node.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)
+      nodeVersionUUID = node.getProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)
                             .getString();
       if (!"".equals(nodeVersionUUID)) {
         Node revision = this.getRevisionByUUID(nodeVersionUUID);
@@ -161,11 +158,11 @@ public class UIPublicationPanel
         currentNode.setProperty("publication:lastUser", event.getRequestContext().getRemoteUser());
 
         String nodeVersionUUID = null;
-        String currentState = currentNode.getProperty(StageAndVersionPublicationConstant.CURRENT_STATE)
+        String currentState = currentNode.getProperty(AuthoringPublicationConstant.CURRENT_STATE)
                 .getString();
         if (PublicationDefaultStates.PUBLISHED.equals(currentState) || PublicationDefaultStates.UNPUBLISHED.equals(currentState)) {
-          if(currentNode.hasProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)){
-            nodeVersionUUID = currentNode.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP).getString();
+          if(currentNode.hasProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)){
+            nodeVersionUUID = currentNode.getProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP).getString();
           }
           if (nodeVersionUUID != null && !nodeVersionUUID.isEmpty()) {
             publicationPanel.setCurrentRevision(publicationPanel.getRevisionByUUID(nodeVersionUUID));
@@ -224,7 +221,7 @@ public class UIPublicationPanel
           LOG.error("Error when adding properties to node");
         }
       }
-      UIPopupContainer uiPopupContainer = (UIPopupContainer) publicationPanel.getAncestorOfType(UIPopupContainer.class);
+      UIPopupContainer uiPopupContainer = publicationPanel.getAncestorOfType(UIPopupContainer.class);
       uiPopupContainer.deActivate();
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupContainer);
     }
@@ -370,8 +367,5 @@ public class UIPublicationPanel
     }
     return false;
   }
-
-
-
 
 }

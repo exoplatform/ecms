@@ -186,6 +186,31 @@ public class TestMetadataService extends BaseWCMTestCase {
     metadataService.removeMetadata(EXO_ARTICLE);
     assertFalse(metadataService.hasMetadata(EXO_ARTICLE));
   }
+  
+  /**
+   * Test method: MetadataServiceImpl.getMetadata(String metaName)
+   * Input: metaName            Name of Metadata 
+   * Expect: Return a Metadata node based on its name
+   * @throws Exception
+   */
+  public void testGetMetadata() throws Exception {
+    metadataService.addMetadata(EXO_ARTICLE, true, "*:/platform/administrators", "This is content", true);
+    Node node = metadataService.getMetadata(EXO_ARTICLE);
+    assertEquals(node.getName(), EXO_ARTICLE);
+  }
+  
+  /**
+   * Test method: MetadataServiceImpl.getMetadataLabel(String metaName)
+   * Input: metaName            Name of Metadata
+   * Expect: Return the label of Metadata node based on its name
+   * @throws Exception
+   */
+  public void testGetMetadataLabel() throws Exception {
+    metadataService.addMetadata(EXO_ARTICLE, true, "*:/platform/administrators", "This is content", true);
+    Node node = metadataService.getMetadata(EXO_ARTICLE);
+    node.setProperty("label", "Article metadata label");
+    assertEquals("Article metadata label", metadataService.getMetadataLabel(EXO_ARTICLE));
+  }
 
   /**
    * Clean all metadata test node

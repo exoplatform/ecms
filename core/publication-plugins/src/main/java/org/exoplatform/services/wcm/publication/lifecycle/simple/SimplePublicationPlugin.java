@@ -71,6 +71,11 @@ import org.exoplatform.webui.form.UIForm;
  * hoa.pham@exoplatform.com
  * Sep 30, 2008
  */
+/**
+ * This plugin will not be supported anymore. It will be removed in next major version.
+ *
+ */
+@Deprecated
 public class SimplePublicationPlugin extends WebpagePublicationPlugin{
 
   /** The Constant DEFAULT_STATE. */

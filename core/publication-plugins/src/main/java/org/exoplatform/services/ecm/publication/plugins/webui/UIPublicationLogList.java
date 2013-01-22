@@ -49,6 +49,7 @@ import org.exoplatform.webui.event.EventListener;
         @EventConfig(listeners = UIPublicationLogList.CloseActionListener.class)
     }
 )
+
 public class UIPublicationLogList extends UIComponentDecorator {
 
   private UIPageIterator uiPageIterator_ ;

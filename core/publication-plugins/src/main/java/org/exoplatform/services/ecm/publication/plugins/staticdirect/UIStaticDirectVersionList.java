@@ -32,6 +32,11 @@ import org.exoplatform.webui.config.annotation.EventConfig;
         @EventConfig(listeners = UIVersionTreeList.SelectActionListener.class)
     }
 )
+/**
+ * This class will not be supported anymore. It will be removed in next major version.
+ *
+ */
+@Deprecated
 public class UIStaticDirectVersionList extends UIVersionTreeList {
 
   public UIStaticDirectVersionList() throws Exception {

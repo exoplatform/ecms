@@ -27,6 +27,11 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
  * Jun 26, 2008 1:21:07 AM
  */
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
+/**
+ * This class will not be supported anymore. It will be removed in next major version.
+ *
+ */
+@Deprecated
 public class UIPublicationContainer extends UIContainer {
 
   public UIPublicationContainer() throws Exception {

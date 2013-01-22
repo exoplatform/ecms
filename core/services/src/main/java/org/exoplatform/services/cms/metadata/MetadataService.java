@@ -18,6 +18,8 @@ package org.exoplatform.services.cms.metadata;
 
 import java.util.List;
 
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.jcr.nodetype.NodeType;
 
 
@@ -116,5 +118,22 @@ public interface MetadataService {
    * @throws Exception
    */
   public void init() throws Exception ;
+  
+  /**
+   * Get the metadata node based on its name
+   * @param metaName Name of metadata
+   * @return Node instance of give metadata
+   * @throws RepositoryException 
+   * @throws Exception 
+   */
+  public Node getMetadata(String metaName) throws Exception;
+  
+  /**
+   * Get metadata label based on its name
+   * @param metaName Name of metadata
+   * @return Label of given metadata
+   * @throws Exception 
+   */
+  public String getMetadataLabel(String metaName) throws Exception;
 
 }

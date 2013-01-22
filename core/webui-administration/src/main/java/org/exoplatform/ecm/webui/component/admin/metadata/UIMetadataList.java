@@ -70,8 +70,6 @@ public class UIMetadataList extends UIPagingGridDecorator {
       getUIPageIterator().setCurrentPage(currentPage);    
   }
 
-  @SuppressWarnings("unchecked")
-
   public List<Metadata> getAllMetadatas() throws Exception {
     List<Metadata> metadatas = new ArrayList<Metadata>() ;
     MetadataService metadataService = getApplicationComponent(MetadataService.class) ;
@@ -81,6 +79,7 @@ public class UIMetadataList extends UIPagingGridDecorator {
       Metadata mt = new Metadata() ;
       mt.setName(nt.getName()) ;
       mt.isTemplate(metadataService.hasMetadata(nt.getName())) ;
+      mt.setLabel(metadataService.getMetadataLabel(nt.getName()));
       for(PropertyDefinition def : nt.getPropertyDefinitions()) {
         if(def.getName().equals(INTERNAL_USE)) {
           if(def.getDefaultValues() != null && def.getDefaultValues()[0].getBoolean()) {
@@ -92,8 +91,6 @@ public class UIMetadataList extends UIPagingGridDecorator {
           break;
         }
       }
-//      PropertyDefinition def =
-//        ((ExtendedNodeType)nt).getPropertyDefinitions(INTERNAL_USE).getAnyDefinition() ;
     }
     return metadatas ;
   }
@@ -143,6 +140,7 @@ public class UIMetadataList extends UIPagingGridDecorator {
     private String name ;
     private String internalUse ;
     private boolean hasTemplate = false;
+    private String label;
 
     public Metadata() {}
 
@@ -154,5 +152,8 @@ public class UIMetadataList extends UIPagingGridDecorator {
 
     public boolean hasTemplate() { return hasTemplate ; }
     public void isTemplate(boolean isTemplate) { hasTemplate = isTemplate ; }
+    
+    public String getLabel() { return label; }
+    public void setLabel(String label) { this.label = label; }
   }
 }

@@ -27,6 +27,11 @@ import org.exoplatform.services.log.Log;
  * hoa.phamvu@exoplatform.com
  * Apr 1, 2009
  */
+/**
+ * This class will not be supported anymore. It will be removed in next major version.
+ *
+ */
+@Deprecated
 public class StageAndVersionPublicationState {
 
   /** The Constant ENROLLED. */

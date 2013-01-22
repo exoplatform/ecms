@@ -38,6 +38,11 @@ import org.exoplatform.webui.form.UIForm;
       @EventConfig(listeners = UIPublicationAction.RemoveActionListener.class)
     }
 )
+/**
+ * This class will not be supported anymore. It will be removed in next major version.
+ *
+ */
+@Deprecated
 public class UIPublicationAction extends UIForm {
 
   /**

@@ -24,7 +24,6 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.AuthoringPublicationConstant;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
-import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.quartz.Job;
 import org.quartz.JobDataMap;
@@ -45,8 +44,6 @@ public class ChangeStateCronJobImpl implements Job {
   
   private static final int STAGED_NODE = 1;
   
-  private static int count = 0;
-
   private String              fromState           = null;
 
   private String              toState             = null;
@@ -176,8 +173,8 @@ public class ChangeStateCronJobImpl implements Job {
               + format.format(nodeDate) + ")");
   
           if (PublicationDefaultStates.UNPUBLISHED.equals(toState)) {
-            if (node_.hasProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)) {
-              String liveRevisionProperty = node_.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)
+            if (node_.hasProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)) {
+              String liveRevisionProperty = node_.getProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)
               .getString();
               if (!"".equals(liveRevisionProperty)) {
                 Node liveRevision = session.getNodeByUUID(liveRevisionProperty);

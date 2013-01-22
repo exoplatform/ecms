@@ -97,6 +97,14 @@ public interface AuthoringPublicationConstant {
 
   /** The Constant POST_UPDATE_STATE_EVENT. */
   public static final String POST_UPDATE_STATE_EVENT = "PublicationService.event.postUpdateState";
+  
+ public static final String IS_INITIAL_PHASE           = "Publication.context.isInitialPhase";
+  
+  public static final String DONT_BROADCAST_EVENT       = "Publication.context.dontBroadcastEvent";
+
+  public static final String POST_INIT_STATE_EVENT      = "PublicationService.event.postInitState";
+  
+  public static final String POST_CHANGE_STATE_EVENT    = "PublicationService.event.postChangeState";
 
   /**
    * The Enum SITE_MODE.

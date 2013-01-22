@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeIterator;
@@ -35,7 +36,6 @@ import org.exoplatform.services.cms.metadata.MetadataService;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.templates.impl.TemplatePlugin;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
@@ -116,9 +116,9 @@ public class MetadataServiceImpl implements MetadataService, Startable{
 
   /**
    * Constructor method
-   * Init nodeHierarchyCreator_, repositoryService_, baseMetadataPath_
    * @param nodeHierarchyCreator  NodeHierarchyCreator object
    * @param repositoryService     RepositoryService object
+   * @param dmsConfiguration DMSConfiguration object
    * @throws Exception
    */
   public MetadataServiceImpl(NodeHierarchyCreator nodeHierarchyCreator,
@@ -194,16 +194,14 @@ public class MetadataServiceImpl implements MetadataService, Startable{
         Node view1 = metadataHome.getNode(nodetype).getNode(VIEWS).getNode(VIEW1);
         path = templateService.updateTemplate(view1, new ByteArrayInputStream(content.getBytes()), role.split(";"));
       }
-    } else {
-      Node metadata = null;
-      if(metadataHome.hasNode(nodetype)) metadata = metadataHome.getNode(nodetype);
-      else metadata = metadataHome.addNode(nodetype, NT_UNSTRUCTURED);
-      addTemplate(metadata, role, new ByteArrayInputStream(content.getBytes()), isDialog);
-      metadataHome.save();
-    }
-    session.save();
-    session.logout();
-    return path;
+      return path;
+    } 
+    Node metadata = null;
+    if(metadataHome.hasNode(nodetype)) metadata = metadataHome.getNode(nodetype);
+    else metadata = metadataHome.addNode(nodetype, NT_UNSTRUCTURED);
+    addTemplate(metadata, role, new ByteArrayInputStream(content.getBytes()), isDialog);
+    metadataHome.save();
+    return metadata.getPath();
   }  
 
   /**
@@ -236,8 +234,6 @@ public class MetadataServiceImpl implements MetadataService, Startable{
     Node metadata = metadataHome.getNode(nodetype);
     metadata.remove();
     metadataHome.save();
-    session.save();
-    session.logout();
   }  
   
   /**
@@ -298,7 +294,6 @@ public class MetadataServiceImpl implements MetadataService, Startable{
     if(isDialog) template = metadataHome.getNode(name).getNode(DIALOGS).getNode(DIALOG1);
     else template = metadataHome.getNode(name).getNode(VIEWS).getNode(VIEW1);
     String ret = templateService.getTemplate(template);
-    session.logout();
     return ret;
   }  
 
@@ -316,7 +311,6 @@ public class MetadataServiceImpl implements MetadataService, Startable{
       template = metadataHome.getNode(name).getNode(VIEWS).getNode(VIEW1);
     }
     String ret = template.getPath();
-    session.logout();
     return ret;
   }  
 
@@ -334,7 +328,6 @@ public class MetadataServiceImpl implements MetadataService, Startable{
       template = metadataHome.getNode(name).getNode(VIEWS).getNode(VIEW1);
     }
     String ret = templateService.getTemplateRoles(template);
-    session.logout();
     return ret;
   }  
   
@@ -345,10 +338,8 @@ public class MetadataServiceImpl implements MetadataService, Startable{
     Session session = getSession();
     Node metadataHome = (Node)session.getItem(baseMetadataPath_);
     if(metadataHome.hasNode(name)) {
-      session.logout();
       return true;
     }
-    session.logout();
     return false;
   }  
   
@@ -371,16 +362,34 @@ public class MetadataServiceImpl implements MetadataService, Startable{
   }
   
 
+  @Override
   /**
-   * Get session of respository
-   * @param repository    The name of repository
-   * @see                 Session
-   * @return              Session
-   * @throws Exception
+   * {@inheritDoc}
    */
-  private Session getSession() throws Exception{
-    ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
-    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
-    return manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace());
+  public Node getMetadata(String metaName) throws Exception {
+    Node metadataHome = (Node)getSession().getItem(baseMetadataPath_);
+    try {
+      return metadataHome.getNode(metaName);
+    } catch(PathNotFoundException pne) {
+      return null;
+    } 
   }
+
+  @Override
+  /**
+   * {@inheritDoc}
+   */
+  public String getMetadataLabel(String metaName) throws Exception {
+    if(getMetadata(metaName) != null) {
+      return getMetadata(metaName).getProperty("label").getString();
+    }
+    return null;
+  }
+  
+  private Session getSession() throws Exception{
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
+    return WCMCoreUtils.getSystemSessionProvider().getSession(dmsRepoConfig.getSystemWorkspace(), 
+            repositoryService_.getCurrentRepository());
+  }
+
 }

@@ -40,6 +40,11 @@ import org.exoplatform.webui.event.EventListener;
         @EventConfig(listeners = UIVersionTreeList.SelectActionListener.class)
     }
 )
+/**
+ * This class will not be supported anymore. It will be removed in next major version.
+ *
+ */
+@Deprecated
 public abstract class UIVersionTreeList extends UIContainer {
 
   protected VersionNode rootVersion_ ;

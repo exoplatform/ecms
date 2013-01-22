@@ -61,6 +61,11 @@ import org.exoplatform.webui.form.UIFormRadioBoxInput;
       @EventConfig(listeners = UIPublicationForm.CancelActionListener.class)
     }
 )
+/**
+ * This class will not be supported anymore. It will be removed in next major version.
+ *
+ */
+@Deprecated
 public class UIPublicationForm extends UIForm {
 
   final static public String VISIBILITY = "visibility";

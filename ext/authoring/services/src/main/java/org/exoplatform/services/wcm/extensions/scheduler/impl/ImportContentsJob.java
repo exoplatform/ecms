@@ -28,7 +28,6 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.AuthoringPublicationConstant;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
-import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.quartz.Job;
 import org.quartz.JobDataMap;
@@ -166,12 +165,12 @@ public class ImportContentsJob implements Job {
                         HashMap<String, String> variables = new HashMap<String, String>();
                         variables.put("nodePath", contentTargetPath);
                         variables.put("workspaceName", workspace);
-                        if (currentContent.hasProperty(StageAndVersionPublicationConstant.PUBLICATION_LIFECYCLE_NAME)
+                        if (currentContent.hasProperty(AuthoringPublicationConstant.PUBLICATION_LIFECYCLE_NAME)
                             && AuthoringPublicationConstant.LIFECYCLE_NAME.equals(
                                 currentContent.getProperty(
-                                    StageAndVersionPublicationConstant.PUBLICATION_LIFECYCLE_NAME).getString())
+                                        AuthoringPublicationConstant.PUBLICATION_LIFECYCLE_NAME).getString())
                             && PublicationDefaultStates.PUBLISHED.equals(
-                                currentContent.getProperty(StageAndVersionPublicationConstant.CURRENT_STATE).getString())) {
+                                currentContent.getProperty(AuthoringPublicationConstant.CURRENT_STATE).getString())) {
 
                           publicationPlugin.changeState(currentContent,
                                                         PublicationDefaultStates.UNPUBLISHED,

@@ -69,7 +69,11 @@ import org.exoplatform.webui.form.UIForm;
 /**
  * The Class StageAndVersionPublicationPlugin.
  */
-@SuppressWarnings("deprecation")
+/**
+ * This plugin will not be supported anymore. It will be removed in next major version.
+ *
+ */
+@Deprecated
 public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
 
   private WCMComposer composer;

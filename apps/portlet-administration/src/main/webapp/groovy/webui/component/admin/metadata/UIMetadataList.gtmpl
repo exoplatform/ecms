@@ -37,12 +37,8 @@
 		      found = true  ;
       %>
           <tr>
-            <%
-              String nodeType = meta.getName() ;
-              nodeType = nodeType.replace(":", "_") ;
-            %>
             <td>
-              <div><%=meta.getName()%></div>
+              <div><%=meta.getLabel()%></div>
             </td>
             <td>$meta.name</td>
             

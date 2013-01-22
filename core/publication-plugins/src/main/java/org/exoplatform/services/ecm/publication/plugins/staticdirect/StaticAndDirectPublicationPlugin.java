@@ -58,6 +58,12 @@ import org.exoplatform.webui.form.UIForm;
  *          romain.denarie@exoplatform.com
  * 16 mai 08
  */
+/**
+ * This plugin will not be supported anymore. It will be removed in next major version.
+ * @author minh_dang
+ *
+ */
+@Deprecated
 public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
 
   public static final String ENROLLED = "enrolled";

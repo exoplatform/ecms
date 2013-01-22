@@ -1,12 +1,17 @@
 package org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 import javax.jcr.Node;
 import javax.jcr.Value;
@@ -14,23 +19,38 @@ import javax.jcr.ValueFactory;
 import javax.jcr.version.Version;
 import javax.portlet.PortletMode;
 
+import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.portal.config.DataStorage;
+import org.exoplatform.portal.config.Query;
+import org.exoplatform.portal.config.UserACL;
+import org.exoplatform.portal.config.UserPortalConfig;
+import org.exoplatform.portal.config.UserPortalConfigService;
+import org.exoplatform.portal.config.model.Page;
+import org.exoplatform.portal.config.model.PortalConfig;
+import org.exoplatform.portal.mop.navigation.Scope;
+import org.exoplatform.portal.mop.user.UserNavigation;
+import org.exoplatform.portal.mop.user.UserNode;
+import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleException;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.resources.ResourceBundleService;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.extensions.publication.impl.PublicationManagerImpl;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.ui.UIPublicationContainer;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.Lifecycle;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.State;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
+import org.exoplatform.services.wcm.publication.PublicationUtil;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
-import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationConstant;
-import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationPlugin;
+import org.exoplatform.services.wcm.publication.WebpagePublicationPlugin;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.config.VersionData;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.config.VersionLog;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -40,7 +60,7 @@ import org.exoplatform.webui.form.UIForm;
 /**
  * Created by The eXo Platform MEA Author : haikel.thamri@exoplatform.com
  */
-public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin {
+public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
 
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(AuthoringPublicationPlugin.class.getName());
@@ -61,7 +81,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
                           String newState,
                           HashMap<String, String> context) throws IncorrectStateUpdateLifecycleException,
                                                                                       Exception {
-    String versionName = context.get(StageAndVersionPublicationConstant.CURRENT_REVISION_NAME);
+    String versionName = context.get(AuthoringPublicationConstant.CURRENT_REVISION_NAME);
     String logItemName = versionName;
     String userId = "";
     try {
@@ -89,12 +109,12 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       }
     }
     if (PublicationDefaultStates.PENDING.equals(newState)) {
-      node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE, newState);
+      node.setProperty(AuthoringPublicationConstant.CURRENT_STATE, newState);
       versionLog = new VersionLog(logItemName,
                                   newState,
                                   userId,
                                   GregorianCalendar.getInstance(),
-                                  StageAndVersionPublicationConstant.PUBLICATION_LOG_DRAFT);
+                                  AuthoringPublicationConstant.CHANGE_TO_DRAFT);
       addLog(node, versionLog);
       VersionData versionData = revisionsMap.get(node.getUUID());
       if (versionData != null) {
@@ -108,7 +128,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
 
     } else if (PublicationDefaultStates.APPROVED.equals(newState)) {
 
-      node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE, newState);
+      node.setProperty(AuthoringPublicationConstant.CURRENT_STATE, newState);
       versionLog = new VersionLog(logItemName,
                                   newState,
                                   userId,
@@ -127,7 +147,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
 
     } else if (PublicationDefaultStates.STAGED.equals(newState)) {
 
-      node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE, newState);
+      node.setProperty(AuthoringPublicationConstant.CURRENT_STATE, newState);
       versionLog = new VersionLog(logItemName,
                                   newState,
                                   userId,
@@ -149,8 +169,8 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
                                   newState,
                                   userId,
                                   GregorianCalendar.getInstance(),
-                                  StageAndVersionPublicationConstant.PUBLICATION_LOG_LIFECYCLE);
-      node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE, newState);
+                                  AuthoringPublicationConstant.ENROLLED_TO_LIFECYCLE);
+      node.setProperty(AuthoringPublicationConstant.CURRENT_STATE, newState);
       VersionData revisionData = new VersionData(node.getUUID(), newState, userId);
       revisionsMap.put(node.getUUID(), revisionData);
       addRevisionData(node, revisionsMap.values());
@@ -173,21 +193,21 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       revisionsMap.put(selectedRevision.getUUID(), versionData);
       addLog(node, versionLog);
       // change base version to unpublished state
-      node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE,
+      node.setProperty(AuthoringPublicationConstant.CURRENT_STATE,
                        PublicationDefaultStates.UNPUBLISHED);
       addRevisionData(node, revisionsMap.values());
     } else if (PublicationDefaultStates.OBSOLETE.equals(newState)) {
       Value value = valueFactory.createValue(selectedRevision);
       Value liveRevision = null;
-      if (node.hasProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)) {
-        liveRevision = node.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)
+      if (node.hasProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)) {
+        liveRevision = node.getProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)
                                .getValue();
       }
       if (liveRevision != null && value.getString().equals(liveRevision.getString())) {
-        node.setProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP,
+        node.setProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP,
                          valueFactory.createValue(""));
       }
-      node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE, newState);
+      node.setProperty(AuthoringPublicationConstant.CURRENT_STATE, newState);
       versionLog = new VersionLog(logItemName,
                                   newState,
                                   userId,
@@ -205,10 +225,10 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       addRevisionData(node, revisionsMap.values());
     } else if (PublicationDefaultStates.ARCHIVED.equalsIgnoreCase(newState)) {
       Value value = valueFactory.createValue(selectedRevision);
-      Value liveRevision = node.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)
+      Value liveRevision = node.getProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)
                                .getValue();
       if (liveRevision != null && value.getString().equals(liveRevision.getString())) {
-        node.setProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP,
+        node.setProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP,
                          valueFactory.createValue(""));
       }
       versionLog = new VersionLog(selectedRevision.getName(),
@@ -228,16 +248,16 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       revisionsMap.put(selectedRevision.getUUID(), versionData);
       addLog(node, versionLog);
       // change base version to archived state
-      node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE,
+      node.setProperty(AuthoringPublicationConstant.CURRENT_STATE,
                        PublicationDefaultStates.ARCHIVED);
       addRevisionData(node, revisionsMap.values());
     } else if (PublicationDefaultStates.DRAFT.equalsIgnoreCase(newState)) {
-      node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE, newState);
+      node.setProperty(AuthoringPublicationConstant.CURRENT_STATE, newState);
       versionLog = new VersionLog(logItemName,
                                   newState,
                                   userId,
                                   GregorianCalendar.getInstance(),
-                                  StageAndVersionPublicationConstant.PUBLICATION_LOG_DRAFT);
+                                  AuthoringPublicationConstant.CHANGE_TO_DRAFT);
       addLog(node, versionLog);
       VersionData versionData = revisionsMap.get(node.getUUID());
       if (versionData != null) {
@@ -281,7 +301,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
                                   AuthoringPublicationConstant.CHANGE_TO_LIVE);
       addLog(node, versionLog);
       // change base version to published state
-      node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE,
+      node.setProperty(AuthoringPublicationConstant.CURRENT_STATE,
                        PublicationDefaultStates.PUBLISHED);
       VersionData editableRevision = revisionsMap.get(node.getUUID());
       if (editableRevision != null) {
@@ -307,10 +327,10 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
                                   PublicationDefaultStates.DRAFT,
                                   userId,
                                   new GregorianCalendar(),
-                                  StageAndVersionPublicationConstant.PUBLICATION_LOG_LIFECYCLE);
+                                  AuthoringPublicationConstant.ENROLLED_TO_LIFECYCLE);
       Value liveVersionValue = valueFactory.createValue(liveVersion);
-      node.setProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP, liveVersionValue);
-      node.setProperty(StageAndVersionPublicationConstant.LIVE_DATE_PROP, new GregorianCalendar());
+      node.setProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP, liveVersionValue);
+      node.setProperty(AuthoringPublicationConstant.LIVE_DATE_PROP, new GregorianCalendar());
       VersionData liveRevisionData = new VersionData(liveVersion.getUUID(),
                                                      PublicationDefaultStates.PUBLISHED,
                                                      userId);
@@ -318,7 +338,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       addRevisionData(node, revisionsMap.values());
     }
 
-    if (!"__system".equals(userId)) {
+    if (!IdentityConstants.SYSTEM.equals(userId)) {
       node.setProperty("publication:lastUser", userId);
     }
 
@@ -331,10 +351,10 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
       CmsService cmsService = WCMCoreUtils.getService(CmsService.class);
 
-      if ("true".equalsIgnoreCase(context.get(StageAndVersionPublicationConstant.IS_INITIAL_PHASE))) {
-        listenerService.broadcast(StageAndVersionPublicationConstant.POST_INIT_STATE_EVENT, cmsService, node);
+      if ("true".equalsIgnoreCase(context.get(AuthoringPublicationConstant.IS_INITIAL_PHASE))) {
+        listenerService.broadcast(AuthoringPublicationConstant.POST_INIT_STATE_EVENT, cmsService, node);
       } else {
-        listenerService.broadcast(StageAndVersionPublicationConstant.POST_CHANGE_STATE_EVENT, cmsService, node);
+        listenerService.broadcast(AuthoringPublicationConstant.POST_CHANGE_STATE_EVENT, cmsService, node);
       }
     }
 
@@ -460,7 +480,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
    */
   public void updateLifecyleOnChangeContent(Node node, String remoteUser, String newState) throws Exception {
 
-    String state = node.getProperty(StageAndVersionPublicationConstant.CURRENT_STATE).getString();
+    String state = node.getProperty(AuthoringPublicationConstant.CURRENT_STATE).getString();
     if (newState == null) {
       PublicationManagerImpl publicationManagerImpl = WCMCoreUtils.getService(PublicationManagerImpl.class);
       Lifecycle lifecycle = publicationManagerImpl.getLifecycle(node.getProperty("publication:lifecycle")
@@ -485,10 +505,10 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
    */
   private Node getLiveRevision(Node node) {
     try {
-      String nodeVersionUUID = node.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)
+      String nodeVersionUUID = node.getProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)
                                    .getString();
       if ("".equals(nodeVersionUUID)
-          && PublicationDefaultStates.PUBLISHED.equals(node.getProperty(StageAndVersionPublicationConstant.CURRENT_STATE)
+          && PublicationDefaultStates.PUBLISHED.equals(node.getProperty(AuthoringPublicationConstant.CURRENT_STATE)
                                                            .getString()))
         return node;
       return node.getVersionHistory().getSession().getNodeByUUID(nodeVersionUUID);
@@ -521,12 +541,87 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
     if (liveNode != null) {
       if (liveNode.hasNode("jcr:frozenNode")) {
         return liveNode.getNode("jcr:frozenNode");
-      } else {
-        return liveNode;
-      }
-    } else
-      return null;
-
+      } 
+      return liveNode;
+    }
+    return null;
   }
 
+  @Override
+  /**
+   * In this publication process, we put the content in Draft state when editing it.
+   */
+  public void updateLifecyleOnChangeContent(Node node, String remoteUser)
+  throws Exception {
+    updateLifecyleOnChangeContent(node, remoteUser, PublicationDefaultStates.DRAFT);
+  }
+
+  @Override
+  public List<String> getListUserNavigationUri(Page page, String remoteUser) throws Exception {
+    List<String> listPageNavigationUri = new ArrayList<String>();
+    for (String portalName : getRunningPortals(remoteUser)) {
+
+      UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
+      UserPortalConfig userPortalCfg = userPortalConfigService.getUserPortalConfig(portalName,
+                                                                                   remoteUser,
+                                                                                   PortalRequestContext.USER_PORTAL_CONTEXT);
+      UserPortal userPortal = userPortalCfg.getUserPortal();
+
+      // get nodes
+      List<UserNavigation> navigationList = userPortal.getNavigations();
+      for (UserNavigation nav : navigationList) {
+        UserNode root = userPortal.getNode(nav, Scope.ALL, null, null);
+        List<UserNode> userNodeList = PublicationUtil.findUserNodeByPageId(root, page.getPageId());
+        for (UserNode node : userNodeList) {
+          listPageNavigationUri.add(PublicationUtil.setMixedNavigationUri(portalName, node.getURI()));
+        }
+      }
+    }
+    return listPageNavigationUri;
+  }
+
+  @Override
+  public byte[] getStateImage(Node node, Locale locale) throws IOException, FileNotFoundException,
+          Exception {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public String getUserInfo(Node node, Locale locale) throws Exception {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public String getLocalizedAndSubstituteMessage(Locale locale, String key, String[] values) throws Exception {
+    ClassLoader cl=this.getClass().getClassLoader();
+    ResourceBundleService bundleService = WCMCoreUtils.getService(ResourceBundleService.class);
+    ResourceBundle resourceBundle= bundleService.getResourceBundle(AuthoringPublicationConstant.LOCALIZATION, locale, cl);
+    String result = "";
+    try {
+      result = resourceBundle.getString(key);
+    } catch (MissingResourceException e) {
+      result = key;
+    }
+    if(values != null) {
+      return String.format(result, (Object[])values);
+    }
+    return result;
+  }
+
+  private List<String> getRunningPortals(String userId) throws Exception {
+    List<String> listPortalName = new ArrayList<String>();
+    DataStorage service = WCMCoreUtils.getService(DataStorage.class);
+    Query<PortalConfig> query = new Query<PortalConfig>(null, null, null, null, PortalConfig.class) ;
+    PageList pageList = service.find(query) ;
+    UserACL userACL = WCMCoreUtils.getService(UserACL.class);
+    for(Object object:pageList.getAll()) {
+      PortalConfig portalConfig = (PortalConfig)object;
+      if(userACL.hasPermission(portalConfig)) {
+        listPortalName.add(portalConfig.getName());
+      }
+    }
+    return listPortalName;
+  }
 }

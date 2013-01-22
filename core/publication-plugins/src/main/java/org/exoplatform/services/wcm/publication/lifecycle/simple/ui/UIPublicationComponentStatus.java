@@ -47,7 +47,11 @@ import org.exoplatform.webui.form.UIForm;
       @EventConfig(listeners = UIPublicationComponentStatus.CloseActionListener.class)
     }
 )
-
+/**
+ * This class will not be supported anymore. It will be removed in next major version.
+ *
+ */
+@Deprecated
 public class UIPublicationComponentStatus extends UIForm {
 
   /** The node_. */
