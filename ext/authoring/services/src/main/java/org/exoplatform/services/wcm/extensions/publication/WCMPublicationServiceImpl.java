@@ -50,9 +50,6 @@ public class WCMPublicationServiceImpl
 
   private static final Log LOG = ExoLogger.getLogger(WCMPublicationServiceImpl.class.getName());
 
-  /** The publication service. */
-  private PublicationService publicationService;
-
   /** The content composer. */
   private WCMComposer        wcmComposer;
 
@@ -105,7 +102,7 @@ public class WCMPublicationServiceImpl
               && (workspace.equals(pathTab[1]));
         }
         if (nodetype != null)
-          nodetypeVerified = node.isNodeType(nodetype);
+          nodetypeVerified = nodetype.equals(node.getPrimaryNodeType().getName());
         if (site != null)
           siteVerified = site.equals(siteName);
         if (memberships.size() > 0) {
@@ -157,7 +154,6 @@ public class WCMPublicationServiceImpl
       }
     } else {
       String initialState = states.get(0).getState();
-      PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);
       PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins()
                                                               .get(AuthoringPublicationConstant.LIFECYCLE_NAME);
       HashMap<String, String> context = new HashMap<String, String>();
