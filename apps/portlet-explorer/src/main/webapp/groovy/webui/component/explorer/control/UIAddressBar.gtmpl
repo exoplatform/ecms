@@ -80,7 +80,7 @@
 				<%}%>
 			</td>
 			<td class="backAndRefreshBlock">
-				<a class="backIcon pull-left" href="<%=uicomponent.event("Back")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("uiAddressBar.title.backButton")%>"><i class="uiIconEcmsGoBack"></i></a>	
+				<a class="backIcon pull-left" href="<%=uicomponent.event("Back")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAddressBar.title.backButton")%>"><i class="uiIconEcmsGoBack"></i></a>	
 				<a class="refreshIcon pull-left" href="<%=uicomponent.event("RefreshSession")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIViewBar.label.refesh")%>"><i class="uiIconRefresh"></i></a>
 			</td>	
 			<%
@@ -90,10 +90,10 @@
 			<td id="UIAddressBarAction" class="uiAddressBarAction">
 				<div class="blockMiddle${viewSize} uiPopupSelector ClearFix">
 					<div class="dropDownButtonBox" onmousedown="eXo.ecm.ECMUtils.clickLeftMouse(event,this,2,1)" onkeydown="eXo.ecm.ECMUtils.clickLeftMouse(event,this,2,1)">
-						<div class="dropDownButton Style1DownArrow16x16Icon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("uiAddressBar.title.showHistory")%>"><span></span></div>
+						<div class="dropDownButton Style1DownArrow16x16Icon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAddressBar.title.showHistory")%>"><span></span></div>
 					</div>
 					<div class="inputContainer"  id="AddressBarControl">
-						<a href="<%=uicomponent.event("ChangeNode")%>" id="GotoLocation" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("uiAddressBar.title.changeNode")%>"></a>
+						<a href="<%=uicomponent.event("ChangeNode")%>" id="GotoLocation" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAddressBar.title.changeNode")%>"></a>
 						<% uicomponent.renderChild(0); %>
 						<% uicomponent.renderChild(2); %>
 						<div class="uiSelectContent">
