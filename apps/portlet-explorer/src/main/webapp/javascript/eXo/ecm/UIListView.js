@@ -1071,7 +1071,21 @@
         }
       });
       eXo.ecm.ECMUtils.documentContainer_OnResize = function(){
-        eXo.ecm.ECMUtils.updateListGridWidth();
+	      var documentInfo = document.getElementById('UIDocumentInfo');
+	      var uiListGrid = gj(documentInfo).find("div.uiListGrid")[0];
+	      var tableBox = gj(documentInfo).find("div.uiBox")[0];
+	      var headerRow = gj(documentInfo).find("div.titleTable")[0];
+	      var colDiv = gj(headerRow).children("div");
+	      var totalWidth = 0; i=0;
+	      for (;colDiv[i];) {
+	        totalWidth += colDiv[i].offsetWidth;
+	        i++;
+	      }
+	      if (totalWidth < uiListGrid.offsetWidth-2) {
+	        totalWidth = uiListGrid.offsetWidth-2;
+	      }
+	      gj(tableBox).css("width", totalWidth + "px");
+	      eXo.ecm.ECMUtils.updateListGridWidth();
       }
       //update width of UIListGrid
       eXo.ecm.ECMUtils.updateListGridWidth();  
