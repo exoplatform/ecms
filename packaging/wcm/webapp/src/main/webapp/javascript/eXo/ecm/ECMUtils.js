@@ -8,7 +8,7 @@
 		Self.waitContainerRetry = 0;
 		Self.waitContainerRetryMax = 200;
 		Self.MiniumLeftContainerWidth = 250;
-		Self.MiniumRightContainerWidth = 251;
+		Self.MiniumRightContainerWidth = 351;
 		Self.waitInterval              = 25;
 		Self.UIBrokenCheckingInterval  = 50;
 		Self.UIBrokenCheckingHandler   = null;

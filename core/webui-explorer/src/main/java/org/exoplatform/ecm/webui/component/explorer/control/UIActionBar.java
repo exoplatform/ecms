@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -45,13 +47,17 @@ import org.exoplatform.ecm.webui.component.explorer.search.UISavedQuery;
 import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
 import org.exoplatform.ecm.webui.component.explorer.search.UISimpleSearch;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.queries.QueryService;
 import org.exoplatform.services.cms.views.ManageViewService;
+import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.web.application.RequireJS;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -359,5 +365,24 @@ public class UIActionBar extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea) ;
     }
   }
-
+  public String getDriveLabel() {
+    RequestContext context = RequestContext.getCurrentInstance();
+    ResourceBundle res = context.getApplicationResourceBundle();
+    DriveData driveData = getAncestorOfType(UIJCRExplorer.class).getDriveData();
+    String id = driveData.getName();
+    String path = driveData.getHomePath();
+    try {
+      return res.getString("Drives.label." + id.replace(".", "").replace(" ", ""));
+    } catch (MissingResourceException ex) {
+      try {
+        RepositoryService repoService = WCMCoreUtils.getService(RepositoryService.class);
+        Node groupNode = (Node)WCMCoreUtils.getSystemSessionProvider().getSession(
+                                      repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName(),
+                                      repoService.getCurrentRepository()).getItem(path);
+        return groupNode.getProperty(NodetypeConstant.EXO_LABEL).getString();
+      } catch(Exception e) {
+        return id.replace(".", " / ");
+      }
+    }
+  }
 }
