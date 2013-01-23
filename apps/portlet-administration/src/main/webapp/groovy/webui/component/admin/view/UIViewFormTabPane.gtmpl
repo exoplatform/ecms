@@ -1,0 +1,45 @@
+<%	
+	def rcontext = _ctx.getRequestContext();
+	rcontext.getJavascriptManager().require("SHARED/webui").require("SHARED/bts_tab");
+	
+%>
+<div class="UITabPane uiTabNormal" id="$uicomponent.id">
+	<ul class="nav nav-tabs" id="myTab">
+		<%
+			String url = uicomponent.url("SelectTab");
+			String selTabId = uicomponent.getSelectedTabId();
+			for(uiChild in uicomponent.getChildren()) {
+				if(!uiChild.isRendered()) continue; 
+				String style = "";
+				String tabId = uiChild.getId();
+				if(tabId.equals(selTabId)) style="active";
+		%>
+		
+			<% String actionLink = "ajaxAsyncGetRequest('" + uicomponent.url("SelectTab",tabId) + "', true)" %>								
+			<li class="$style" onclick="$actionLink">
+				<a data-toggle="tab" href="#tab-$tabId"><%=_ctx.appRes("UIViewFormTabPane.tab.label." + uiChild.getId());%></a>
+			</li>
+		
+		<%}%>
+	</ul>
+	<div class="tab-content" id="myTabContent">
+		<%
+			for(uiChild in uicomponent.getChildren()) {
+				if(!uiChild.isRendered()) continue; 
+				String active = "";
+				if(uiChild.getId().equals(selTabId)) active="in active";				
+				println "<div class=\"tab-pane fade $active\" id=\"tab-" + uiChild.getId() + "\">";
+				uicomponent.renderUIComponent(uiChild);
+				println "</div>";
+			}
+		%>
+	</div>
+	<div class="uiAction"> 
+		<% 
+		  String saveLink = uicomponent.event("Save");
+			String cancelLink = uicomponent.event("Cancel");
+		%>
+		<button type="button" onclick="$saveLink" class="btn">Save</button>
+		<button type="button" onclick="$cancelLink" class="btn">Cancel</button>
+  </div>
+</div>	

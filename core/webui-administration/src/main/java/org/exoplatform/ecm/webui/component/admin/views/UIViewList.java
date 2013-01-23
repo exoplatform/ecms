@@ -157,7 +157,7 @@ public class UIViewList extends UIPagingGrid {
       uiViewContainer.initPopup(UIViewList.ST_ADD) ;
       UIViewFormTabPane uiViewTabPane =
         uiViewContainer.findFirstComponentOfType(UIViewFormTabPane.class) ;
-      uiViewTabPane.reset() ;
+      //uiViewTabPane.reset() ;
       UIViewManager uiManager = uiViewList.getAncestorOfType(UIViewManager.class) ;
       uiManager.setRenderedChild(UIViewContainer.class) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiViewContainer) ;
@@ -214,13 +214,14 @@ public class UIViewList extends UIPagingGrid {
       viewForm.update(viewNode, false, null) ;
       if(viewForm.getUIFormCheckBoxInput(UIViewForm.FIELD_ENABLEVERSION).isChecked()) {
         viewForm.getUIFormCheckBoxInput(UIViewForm.FIELD_ENABLEVERSION).setEnable(false);
-        viewForm.setActions(new String[]{"Save", "Restore", "Cancel", "AddTabForm"}, null) ;
+        //viewForm.setActions(new String[]{"Save", "Restore", "Cancel", "AddTabForm"}, null) ;
       } else {
         viewForm.getUIFormCheckBoxInput(UIViewForm.FIELD_ENABLEVERSION).setEnable(true);
-        viewForm.setActions(new String[]{"Save", "Cancel", "AddTabForm"}, null) ;
+        //viewForm.setActions(new String[]{"Save", "Cancel", "AddTabForm"}, null) ;
+        //viewForm.setActions(new String[]{"Save", "Cancel"}, null) ;
       }
-      viewForm.setActionInfo(UIViewForm.FIELD_PERMISSION, new String[] {"AddPermission","RemovePermission"}) ;
-      viewTabPane.getChild(UITabForm.class).setActions(new String[]{"Save"}, null) ;
+      //viewForm.setActionInfo(UIViewForm.FIELD_PERMISSION, new String[] {"AddPermission","RemovePermission"}) ;
+      //viewTabPane.getChild(UITabForm.class).setActions(new String[]{"Save", "Cancel"}, null) ;
       viewTabPane.setSelectedTab(viewForm.getId()) ;
       UIViewManager uiManager = uiViewList.getAncestorOfType(UIViewManager.class) ;
       uiManager.setRenderedChild(UIViewContainer.class) ;
@@ -244,9 +245,9 @@ public class UIViewList extends UIPagingGrid {
       UIViewForm uiViewForm = uiViewTabPane.getChild(UIViewForm.class) ;
       uiViewForm.refresh(false) ;
       uiViewForm.update(viewNode, true, null) ;
-      uiViewForm.setActionInfo(UIViewForm.FIELD_PERMISSION, null) ;
-      uiViewForm.setActions(new String[]{"Close"}, null) ;
-      uiViewTabPane.getChild(UITabForm.class).setActions(new String[]{"BackViewForm"}, null);
+      //uiViewForm.setActionInfo(UIViewForm.FIELD_PERMISSION, null) ;
+      //uiViewForm.setActions(new String[]{"Close"}, null) ;
+      //uiViewTabPane.getChild(UITabForm.class).setActions(new String[]{"BackViewForm"}, null);
       uiViewTabPane.setRenderedChild(UIViewForm.class) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiViewContainer) ;
     }

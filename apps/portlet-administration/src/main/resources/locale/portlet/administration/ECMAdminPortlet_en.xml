@@ -1059,6 +1059,11 @@
       <mustbe-add-tab>Please add a tab.</mustbe-add-tab>
       <view-exist>The view name already exists.</view-exist>
     </msg>
+    <label>
+      <viewName>Name</viewName>
+      <template>Templates</template>
+      <enableVersion>Enable Version</enableVersion>
+    </label>
   </UIViewForm>
   <UITabForm>
     <msg>
@@ -1066,12 +1071,67 @@
       <tab-name-error>The tab name is required.</tab-name-error>
       <fileName-invalid>The tab name contains some invalid characters.</fileName-invalid>
     </msg>
+    <label>
+      <version>Restore Version</version>
+      <viewName>Name</viewName>
+      <tabName>Tab Name</tabName>
+      <permission>Permission</permission>
+      <tabs>Tabs</tabs>
+      <template>Templates</template>
+      <enableVersion>Enable Version</enableVersion>
+      <addFolder>Add Folder</addFolder>
+      <addSignature>Add Signature</addSignature>
+      <addDocument>Add Document</addDocument>
+      <editDocument>Edit Document</editDocument>
+      <upload>Upload</upload>
+      <createTicket>Create Ticket</createTicket>
+      <paste>Paste</paste>
+      <search>Search</search>
+      <viewReferences>View References</viewReferences>
+      <viewNodeType>View Node Type</viewNodeType>
+      <viewPermissions>View Permissions</viewPermissions>
+      <viewProperties>View Properties</viewProperties>
+      <manageVersions>Manage Versions</manageVersions>
+      <manageAuditing>Manage Auditing</manageAuditing>
+      <managePublications>Manage Publication</managePublications>
+      <manageCategories>Manage Categories</manageCategories>
+      <manageRelations>Manage Relations</manageRelations>
+      <manageActions>Manage Actions</manageActions>
+      <exportNode>Export Node</exportNode>
+      <importNode>Import Node</importNode>
+      <viewRelations>View Relations</viewRelations>
+      <showJCRStructure>Show JCR Structure</showJCRStructure>
+      <watchDocument>Watch Document</watchDocument>
+      <taggingDocument>Tag Document</taggingDocument>
+      <multiLanguage>Multi Language</multiLanguage>
+      <viewMetadatas>View Metadata</viewMetadatas>
+      <overloadThumbnail>Overload Thumbnail</overloadThumbnail>
+      <manageHidden>Hide/Show Content</manageHidden>
+      <comment>Comment</comment>
+      <vote>Vote</vote>	  
+      <manageSimpleCategories>Manage Simple Categories</manageSimpleCategories>
+      <addCategory>Add Category</addCategory>
+      <addLocalizationLink>Add Translation</addLocalizationLink>
+      <publicationRequestApproval>Request Approval</publicationRequestApproval>
+      <publicationApproveContent>Approve Content</publicationApproveContent>
+      <publicationPublish>Publish</publicationPublish>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>      
+      <Cancel>#{word.cancel}</Cancel>      
+    </action>
   </UITabForm>
+  <UIPermissionForm>
+    <label>
+      <permission>Permission</permission>
+    </label>
+  </UIPermissionForm>
   <UIViewFormTabPane>
     <tab>
       <label>
-        <UITabForm>Tab Form</UITabForm>
-        <UIViewForm>View Form</UIViewForm>
+        <UITabForm>Action</UITabForm>
+        <UIViewForm>Setting</UIViewForm>
+        <UIPermissionForm>Permission</UIPermissionForm>    
       </label>
     </tab>
     <action>

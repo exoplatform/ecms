@@ -19,13 +19,20 @@ package org.exoplatform.ecm.webui.component.admin.views;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import org.exoplatform.ecm.webui.component.admin.templates.UITemplateContainer;
+import org.exoplatform.ecm.webui.component.admin.templates.UITemplatesManager;
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIComponent;
+import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.ext.manager.UIAbstractManager;
+import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTabPane;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
@@ -39,7 +46,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    template =  "system:/groovy/webui/form/UIFormTabPane.gtmpl",
+    template =  "app:/groovy/webui/component/admin/view/UIViewFormTabPane.gtmpl",
     events = {
       @EventConfig(listeners = UIViewFormTabPane.SaveActionListener.class),
       @EventConfig(listeners = UIViewFormTabPane.ResetActionListener.class, phase = Phase.DECODE),
@@ -53,27 +60,42 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
       @EventConfig(listeners = UIViewForm.AddPermissionActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIViewForm.RemovePermissionActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIViewForm.ChangeVersionActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UITabForm.AddTabActionListener.class, phase = Phase.DECODE)
+      @EventConfig(listeners = UITabForm.AddTabActionListener.class, phase = Phase.DECODE),
+      @EventConfig(listeners = UITemplateContainer.CloseActionListener.class)
     }
 )
-public class UIViewFormTabPane extends UIFormTabPane {
-
+public class UIViewFormTabPane extends UIContainer {
   final static public String POPUP_PERMISSION = "PopupViewPermission" ;
 
   private UIViewForm uiViewForm ;
   private UITabForm uiTabForm ;
+  
+  private String selectedTabId = "UITemplateContainer";
+
+  public String getSelectedTabId()
+  {
+     return selectedTabId;
+  }
+
+  public void setSelectedTab(String renderTabId)
+  {
+     selectedTabId = renderTabId;
+  }
+
+  public void setSelectedTab(int index)
+  {
+     selectedTabId = ((UIComponent)getChild(index - 1)).getId();
+  }
 
   public UIViewFormTabPane() throws Exception {
-    super("UIViewFormTabPane") ;
-
-    uiViewForm = new UIViewForm("UIViewForm") ;
-    addUIComponentInput(uiViewForm) ;
-
-    uiTabForm = new UITabForm("UITabForm") ;
-    addUIComponentInput(uiTabForm) ;
-    uiTabForm.setRendered(false);
-    setSelectedTab(uiViewForm.getId()) ;
-    setActions(new String[]{}) ;
+  	UIViewForm uiViewForm = addChild(UIViewForm.class, null, null) ;
+  	
+  	UITabForm uiTabForm = addChild(UITabForm.class, null, null) ;
+  	
+  	UIPermissionForm uiPermissionForm = addChild(UIPermissionForm.class, null, null) ;
+    
+  	setSelectedTab(uiViewForm.getId()) ;
+  	//setActions(new String[]{"Save", "Cancel"});
   }
 
   public String getLabel(ResourceBundle res, String id)  {
@@ -129,8 +151,8 @@ public class UIViewFormTabPane extends UIFormTabPane {
           getChildById(UITabForm.FIELD_NAME)).addValidator(MandatoryValidator.class);
       uiViewTabPane.uiViewForm.setViewName(((UIFormStringInput)
           uiViewTabPane.uiViewForm.getChildById(UIViewForm.FIELD_NAME)).getValue());
-      uiViewTabPane.uiViewForm.setPermission(((UIFormStringInput)
-          uiViewTabPane.uiViewForm.getChildById(UIViewForm.FIELD_PERMISSION)).getValue());
+      //uiViewTabPane.uiViewForm.setPermission(((UIFormStringInput)
+      //    uiViewTabPane.uiViewForm.getChildById(UIViewForm.FIELD_PERMISSION)).getValue());
       UIViewContainer uiViewContainer = uiViewTabPane.getAncestorOfType(UIViewContainer.class);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiViewContainer);
     }
@@ -149,7 +171,7 @@ public class UIViewFormTabPane extends UIFormTabPane {
       }
       ((UIFormStringInput)uiTabForm.getChildById(UITabForm.FIELD_NAME)).getValidators().clear();
       ((UIFormStringInput)uiViewForm.getChildById(UIViewForm.FIELD_NAME)).setValue(uiViewForm.getViewName());
-      ((UIFormStringInput)uiViewForm.getChildById(UIViewForm.FIELD_PERMISSION)).setValue(uiViewForm.getPermission());
+      //((UIFormStringInput)uiViewForm.getChildById(UIViewForm.FIELD_PERMISSION)).setValue(uiViewForm.getPermission());
       uiTabForm.setRendered(false);
       uiViewForm.setRendered(true);
       uiViewForm.update(null, false, null);
@@ -182,8 +204,8 @@ public class UIViewFormTabPane extends UIFormTabPane {
       ((UIFormStringInput)uiTabForm.getChildById(UITabForm.FIELD_NAME)).addValidator(MandatoryValidator.class);
       uiViewTabPane.uiViewForm.setViewName(((UIFormStringInput) uiViewTabPane.
           uiViewForm.getChildById(UIViewForm.FIELD_NAME)).getValue());
-      uiViewTabPane.uiViewForm.setPermission(((UIFormStringInput) uiViewTabPane.
-          uiViewForm.getChildById(UIViewForm.FIELD_PERMISSION)).getValue());
+      //uiViewTabPane.uiViewForm.setPermission(((UIFormStringInput) uiViewTabPane.
+      //    uiViewForm.getChildById(UIViewForm.FIELD_PERMISSION)).getValue());
       uiViewTabPane.setSelectedTab(uiTabForm.getId()) ;
       uiViewTabPane.uiViewForm.editTab(tabName);
       uiViewTabPane.uiViewForm.setRendered(false);
@@ -217,4 +239,27 @@ public class UIViewFormTabPane extends UIFormTabPane {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiViewContainer) ;
     }
   }
+
+
+	
+	static public class SelectTabActionListener extends EventListener<UIViewFormTabPane>
+  {
+  	public void execute(Event<UIViewFormTabPane> event) throws Exception
+    {
+       WebuiRequestContext context = event.getRequestContext();
+       String renderTab = context.getRequestParameter(UIComponent.OBJECTID);
+       if (renderTab == null)
+          return;
+       event.getSource().setSelectedTab(renderTab);
+       WebuiRequestContext parentContext = (WebuiRequestContext)context.getParentAppRequestContext();
+       if (parentContext != null)
+       {
+          parentContext.setResponseComplete(true);
+       }
+       else
+       {
+          context.setResponseComplete(true);
+       }
+    }
+  } 
 }

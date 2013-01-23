@@ -67,7 +67,7 @@ public class UIViewContainer extends UIContainer {
     }
     uiPopup.setUIComponent(uiECMPermission);
     UIViewForm uiViewForm = findFirstComponentOfType(UIViewForm.class) ;    
-    uiECMPermission.setSourceComponent(uiViewForm, new String[] {UIViewForm.FIELD_PERMISSION}) ;
+    //uiECMPermission.setSourceComponent(uiViewForm, new String[] {UIViewForm.FIELD_PERMISSION}) ;
     uiPopup.setShow(true) ;
     uiPopup.setResizable(true) ;
   }

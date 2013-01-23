@@ -20,14 +20,18 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
+import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.cms.views.ViewConfig.Tab;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormStringInput;
 
@@ -38,14 +42,24 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Jun 28, 2006
  */
 
-@ComponentConfig(template = "classpath:groovy/ecm/webui/form/UIFormInputSetWithAction.gtmpl")
-public class UITabForm extends UIFormInputSetWithAction {
+@ComponentConfig(
+		template = "app:/groovy/webui/component/admin/view/UITabForm.gtmpl",
+		events = {	  
+	      @EventConfig(listeners = UITabForm.SaveActionListener.class, phase = Phase.DECODE),
+	      @EventConfig(listeners = UITabForm.CancelActionListener.class, phase = Phase.DECODE)
+	  }
+)
+public class UITabForm extends UIForm implements UISelectable{
 
   final static public String FIELD_NAME = "tabName" ;
   private List<?> buttons_ ;
+  
+  
+  public UITabForm() throws Exception {
+  	this("UITabForm");
+  }
 
   public UITabForm(String name) throws Exception {
-    super(name) ;
     setComponentConfig(getClass(), null) ;
     addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null)) ;
     ManageViewService vservice_ = getApplicationComponent(ManageViewService.class) ;
@@ -53,7 +67,6 @@ public class UITabForm extends UIFormInputSetWithAction {
     for(Object bt : buttons_) {
       addUIFormInput(new UIFormCheckBoxInput<Boolean>(getButtonName(bt), "", null)) ;
     }
-    setActions(new String[]{"AddTab", "Reset", "BackViewForm"}, null) ;
   }
 
   private String getButtonName(Object bt) {
@@ -70,7 +83,8 @@ public class UITabForm extends UIFormInputSetWithAction {
     for(Object bt : buttons_){
       getUIFormCheckBoxInput(getButtonName(bt)).setChecked(false).setEditable(isEditable) ;
     }
-    if(isEditable) setActions(new String[]{"AddTab", "Reset", "BackViewForm"}, null) ;
+    //if(isEditable) setActions(new String[]{"AddTab", "Reset", "Cancel"}, null) ;
+    //else setActions(new String[]{"Save", "AddTab", "Cancel"}, null) ;
   }
 
   public void update(Tab tab, boolean isView) throws Exception{
@@ -134,4 +148,22 @@ public class UITabForm extends UIFormInputSetWithAction {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiViewContainer) ;
     }
   }
+  
+  static public class SaveActionListener extends EventListener<UITabForm> {
+    public void execute(Event<UITabForm> event) throws Exception {
+    	
+    }
+  }
+  
+  static public class CancelActionListener extends EventListener<UITabForm> {
+    public void execute(Event<UITabForm> event) throws Exception {
+    	
+    }
+  }
+
+	@Override
+	public void doSelect(String selectField, Object value) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 }
