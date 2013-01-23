@@ -1464,7 +1464,11 @@
 		    var fillOutElement = document.getElementById('FillOutElement');
 		    if (fillOutElement) {
 		      fillOutElement.style.width = "0px";
-		      fillOutElement.style.height = leftContainer.offsetHeight - rightContainer.offsetHeight + "px";
+		      if (leftContainer.offsetHeight - rightContainer.offsetHeight>0){
+		        fillOutElement.style.height = leftContainer.offsetHeight - rightContainer.offsetHeight + "px";
+		      } else {
+		      	fillOutElement.style.height = "0px";
+		      }
 		    }
 		  }
 		}
