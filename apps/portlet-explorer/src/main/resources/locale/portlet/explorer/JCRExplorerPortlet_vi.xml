@@ -2021,7 +2021,7 @@
       <Unwatch>Ngừng theo dõi</Unwatch>
     </action>
     <label>
-      <notificationType>Kiểu thông báo</notificationType>
+      <notificationType>Kiểu thông báo:</notificationType>
     </label>
     <msg>
       <not-support>Chúng tôi không hỗ trợ kiểu thông báo này.Vui lòng chọn kiểu thông báo mà chúng tôi hỗ trợ cho bạn.</not-support>

@@ -2015,7 +2015,7 @@
       <Unwatch>Se désabonner</Unwatch>
     </action>
     <label>
-      <notificationType>Type de notification</notificationType>
+      <notificationType>Type de notification:</notificationType>
     </label>
     <msg>
       <not-support>Nous ne supportons pas cette notification. Veuillez en choisir une des notres.</not-support>

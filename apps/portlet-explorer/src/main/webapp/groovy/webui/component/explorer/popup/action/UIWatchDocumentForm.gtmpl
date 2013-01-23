@@ -1,0 +1,29 @@
+<% String fieldName; %>
+<div class="UIForm $uicomponent.id">
+  <%uiform.begin()%>
+  <div class="HorizontalLayout">
+    <div class="FormContainer">
+      <table class="UIFormGrid">
+        <tr>
+          <td class="FieldLabel portlet-form-label">
+            <%=_ctx.appRes(uicomponent.getName() + ".label.notificationType") %>
+          </td>
+          <td class="FieldComponent portlet-input-field">
+            <%uiform.renderField(uiform.NOTIFICATION_TYPE); %>
+          </td>
+          <td class="FieldLabel portlet-form-label">
+          </td>
+        </tr>
+      </table>
+      <div class="UIAction"> 
+        <% for(action in uicomponent.getActions()) { 
+             String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action);
+             String link = uicomponent.event(action);
+        %>
+              <a href="javascript:void(0);" onclick="$link" class="ActionButton LightBlueStyle">$actionLabel</a>
+        <%}%>  
+      </div>
+    </div>
+  </div>
+  <%uiform.end()%>
+</div>

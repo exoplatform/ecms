@@ -1284,7 +1284,7 @@
 			          noticeElem.style.top = (pos.top + 5) + "px";
 			        }     
 			        noticeElem.style.display = "block";            
-			        noticeElem.innerHTML = restoreNotice;
+			        noticeElem.innerHTML = '<i class="uiIconSuccess"></i>' + restoreNotice;
 				noticeElem.style.marginLeft = "-" + noticeElem.offsetWidth/2 + "px";
 			      }
 		}

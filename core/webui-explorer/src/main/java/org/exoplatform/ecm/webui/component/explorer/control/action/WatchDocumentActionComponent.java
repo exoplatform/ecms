@@ -61,7 +61,8 @@ public class WatchDocumentActionComponent extends UIComponent {
     public void processEvent(Event<WatchDocumentActionComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
-      UIPopupContainer.activate(UIWatchDocumentForm.class, 600);
+      UIWatchDocumentForm wathDocumentForm = UIPopupContainer.createUIComponent(UIWatchDocumentForm.class, null, null);
+      UIPopupContainer.activate(wathDocumentForm, 420, 0, false);
       event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
     }
   }

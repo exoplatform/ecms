@@ -18,14 +18,17 @@ package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.jcr.Node;
 import javax.jcr.lock.LockException;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.services.cms.watch.WatchDocumentService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -38,7 +41,7 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormSelectBox;
+import org.exoplatform.webui.form.UIFormRadioBoxInput;
 
 /**
  * Created by The eXo Platform SARL
@@ -49,7 +52,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    template =  "system:/groovy/webui/form/UIForm.gtmpl",
+    template =  "app:/groovy/webui/component/explorer/popup/action/UIWatchDocumentForm.gtmpl",
     events = {
       @EventConfig(listeners = UIWatchDocumentForm.WatchActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIWatchDocumentForm.CancelActionListener.class, phase = Phase.DECODE),
@@ -58,53 +61,26 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 )
 public class UIWatchDocumentForm extends UIForm implements UIPopupComponent {
   private static final Log LOG  = ExoLogger.getLogger(UIWatchDocumentForm.class.getName());
-
-  final static public String NOTIFICATION_TYPE = "notificationType" ;
-  final static public String NOTIFICATION_BY_EMAIL = "Email" ;
-  final static public String NOTIFICATION_BY_RSS = "RSS" ;
+  private static final String NOTIFICATION_TYPE = "notificationType";
+  private static final String NOTIFICATION_TYPE_BY_EMAIL = "Email";
 
   public UIWatchDocumentForm() throws Exception {
-    List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>() ;
-    UIFormSelectBox uiSelectBox = new UIFormSelectBox(NOTIFICATION_TYPE, NOTIFICATION_TYPE, options) ;
-    addUIFormInput(uiSelectBox) ;
+    List<SelectItemOption<String>> nodifyOptions = new ArrayList<SelectItemOption<String>>();
+    nodifyOptions.add(new SelectItemOption<String>(NOTIFICATION_TYPE_BY_EMAIL, NOTIFICATION_TYPE_BY_EMAIL));
+    UIFormRadioBoxInput notificationTypeRadioBoxInput =
+        new UIFormRadioBoxInput(NOTIFICATION_TYPE, NOTIFICATION_TYPE, nodifyOptions);
+    addUIFormInput(notificationTypeRadioBoxInput);
   }
-
-  public Node getWatchNode() throws Exception{
-    return getAncestorOfType(UIJCRExplorer.class).getCurrentNode() ; }
-
-  public String getUserName() {
-    WebuiRequestContext context = WebuiRequestContext.getCurrentInstance() ;
-    return context.getRemoteUser() ;
-  }
-
-  public boolean isWatching() throws Exception{
-    List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>() ;
-    WatchDocumentService watchService = getApplicationComponent(WatchDocumentService.class) ;
-    int notifyType = watchService.getNotificationType(getWatchNode(),getUserName()) ;
-    if(notifyType == WatchDocumentService.FULL_NOTIFICATION) {
-      options.add(new SelectItemOption<String>(NOTIFICATION_BY_EMAIL,NOTIFICATION_BY_EMAIL)) ;
-      getUIFormSelectBox(NOTIFICATION_TYPE).setOptions(options) ;
-      return true ;
-    } else if(notifyType == WatchDocumentService.NOTIFICATION_BY_EMAIL ) {
-      options.add(new SelectItemOption<String>(NOTIFICATION_BY_EMAIL,NOTIFICATION_BY_EMAIL)) ;
-      getUIFormSelectBox(NOTIFICATION_TYPE).setOptions(options) ;
-      return true ;
-    } else {
-      options.add(new SelectItemOption<String>(NOTIFICATION_BY_EMAIL,NOTIFICATION_BY_EMAIL)) ;
-      getUIFormSelectBox(NOTIFICATION_TYPE).setOptions(options) ;
-      return false ;
-    }
-  }
-
-  public int getNotifyType() throws Exception {
-    WatchDocumentService watchService = getApplicationComponent(WatchDocumentService.class) ;
-    return watchService.getNotificationType(getWatchNode(), getUserName()) ;
-  }
-
+  
   public void activate() {
     try {
-      if(!isWatching()) setActions(new String[] {"Watch", "Cancel"}) ;
-      else setActions(new String[] {"Unwatch", "Cancel"}) ;
+      if(!isWatching()) setActions(new String[] {"Watch", "Cancel"});
+      else {
+        setActions(new String[] {"Unwatch", "Cancel"});
+        UIFormRadioBoxInput notificationTypeRadioBoxInput = this.getChildById(NOTIFICATION_TYPE);
+        notificationTypeRadioBoxInput.setValue(NOTIFICATION_TYPE_BY_EMAIL);
+        notificationTypeRadioBoxInput.setReadOnly(true);
+      }
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("Unexpected error!", e.getMessage());
@@ -115,73 +91,82 @@ public class UIWatchDocumentForm extends UIForm implements UIPopupComponent {
   public void deActivate() {
   }
 
-  static  public class CancelActionListener extends EventListener<UIWatchDocumentForm> {
-    public void execute(Event<UIWatchDocumentForm> event) throws Exception {
-      UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class) ;
-      uiExplorer.cancelAction() ;
+  private Node getWatchNode() throws Exception{
+    return getAncestorOfType(UIJCRExplorer.class).getCurrentNode(); }
+
+  private String getUserName() {
+    WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
+    return context.getRemoteUser();
+  }
+
+  private boolean isWatching() throws Exception{
+    return (WatchDocumentService.NOTIFICATION_BY_EMAIL == this.getNotifyType());
+  }
+
+  private int getNotifyType() throws Exception {
+    WatchDocumentService watchService = getApplicationComponent(WatchDocumentService.class);
+    return watchService.getNotificationType(this.getWatchNode(), this.getUserName());
+  }
+  
+  private void showFinishMessage(Event<UIWatchDocumentForm> event, String messageKey) throws Exception {
+    ResourceBundle res = event.getRequestContext().getApplicationResourceBundle();
+    UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
+    uiExplorer.getChild(UIWorkingArea.class).setWCMNotice(res.getString(messageKey));
+    uiExplorer.updateAjax(event);
+  }
+  
+  private void toogleWatch(Event<UIWatchDocumentForm> event) throws Exception {
+    UIApplication uiApp = this.getAncestorOfType(UIApplication.class);
+    
+    // Add lock token
+    this.getAncestorOfType(UIJCRExplorer.class).addLockToken(this.getWatchNode());
+    
+    try {
+      WatchDocumentService watchService = WCMCoreUtils.getService(WatchDocumentService.class);
+      if (isWatching()) {
+        watchService.unwatchDocument(this.getWatchNode(), this.getUserName(), WatchDocumentService.NOTIFICATION_BY_EMAIL);
+        this.showFinishMessage(event, "UIWatchDocumentForm.msg.unwatching-successfully");
+      } else {
+        watchService.watchDocument(this.getWatchNode(), this.getUserName(), WatchDocumentService.NOTIFICATION_BY_EMAIL);
+        this.showFinishMessage(event, "UIWatchDocumentForm.msg.watching-successfully");
+      }
+    } catch (LockException e) {
+      uiApp.addMessage(new ApplicationMessage("UIWatchDocumentForm.msg.node-is-locked", null, ApplicationMessage.WARNING));
+    } catch (Exception e) {
+      uiApp.addMessage(new ApplicationMessage("UIWatchDocumentForm.msg.unknown-error", null, ApplicationMessage.ERROR));
     }
   }
 
-  static  public class WatchActionListener extends EventListener<UIWatchDocumentForm> {
+  public static class CancelActionListener extends EventListener<UIWatchDocumentForm> {
     public void execute(Event<UIWatchDocumentForm> event) throws Exception {
-      UIWatchDocumentForm uiForm = event.getSource() ;
-      String notifyType = uiForm.getUIFormSelectBox(NOTIFICATION_TYPE).getValue() ;
-      WatchDocumentService watchService = uiForm.getApplicationComponent(WatchDocumentService.class) ;
-      UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
-      UIJCRExplorer uiExplorer = uiForm.getAncestorOfType(UIJCRExplorer.class) ;
-      Node currentNode = uiExplorer.getCurrentNode();
-      uiExplorer.addLockToken(currentNode);
-      if(notifyType.equalsIgnoreCase(NOTIFICATION_BY_EMAIL)) {
-        try {
-          watchService.watchDocument(uiForm.getWatchNode(), uiForm.getUserName(), WatchDocumentService.NOTIFICATION_BY_EMAIL) ;
-          uiForm.isWatching() ;
-        } catch (LockException e) {
-          uiApp.addMessage(new ApplicationMessage("UIWatchDocumentForm.msg.node-is-locked", null,
-                                                  ApplicationMessage.WARNING));
-        } catch (Exception e) {
-          uiApp.addMessage(new ApplicationMessage("UIWatchDocumentForm.msg.unknown-error", null,
-                                                  ApplicationMessage.ERROR));
-        }
-      } else {
-        uiApp.addMessage(new ApplicationMessage("UIWatchDocumentForm.msg.not-support", null,
-                                                ApplicationMessage.WARNING));
-        
-        return ;
-      }
-      uiApp.addMessage(new ApplicationMessage("UIWatchDocumentForm.msg.watching-successfully", null)) ;
-      uiForm.getAncestorOfType(UIJCRExplorer.class).updateAjax(event) ;
-      
+      UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
+      uiExplorer.cancelAction();
     }
   }
 
-  static  public class UnwatchActionListener extends EventListener<UIWatchDocumentForm> {
+  public static class WatchActionListener extends EventListener<UIWatchDocumentForm> {
     public void execute(Event<UIWatchDocumentForm> event) throws Exception {
-      UIWatchDocumentForm uiForm = event.getSource() ;
-      String notifyType = uiForm.getUIFormSelectBox(NOTIFICATION_TYPE).getValue() ;
-      WatchDocumentService watchService = uiForm.getApplicationComponent(WatchDocumentService.class) ;
-      UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
-      UIJCRExplorer uiExplorer = uiForm.getAncestorOfType(UIJCRExplorer.class) ;
-      Node currentNode = uiExplorer.getCurrentNode();
-      uiExplorer.addLockToken(currentNode);
-      if(notifyType.equalsIgnoreCase(NOTIFICATION_BY_EMAIL)) {
-        try {
-          watchService.unwatchDocument(uiForm.getWatchNode(), uiForm.getUserName(), WatchDocumentService.NOTIFICATION_BY_EMAIL) ;
-        } catch (LockException e) {
-          uiApp.addMessage(new ApplicationMessage("UIWatchDocumentForm.msg.node-is-locked", null,
-                                                  ApplicationMessage.WARNING));
-        } catch (Exception e) {
-          uiApp.addMessage(new ApplicationMessage("UIWatchDocumentForm.msg.unknown-error", null,
-                                                  ApplicationMessage.ERROR));
-        }
-      } else {
-        uiApp.addMessage(new ApplicationMessage("UIWatchDocumentForm.msg.not-support", null,
-                                                ApplicationMessage.WARNING)) ;
-        
-        return ;
-      }
-      uiApp.addMessage(new ApplicationMessage("UIWatchDocumentForm.msg.unwatching-successfully", null)) ;
-      uiForm.getAncestorOfType(UIJCRExplorer.class).updateAjax(event) ;
+      UIWatchDocumentForm uiForm = event.getSource();
+      UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
       
+      // Add lock token
+      uiForm.getAncestorOfType(UIJCRExplorer.class).addLockToken(uiForm.getWatchNode());
+      
+      // Add watching
+      boolean isNotifyByEmail = 
+          NOTIFICATION_TYPE_BY_EMAIL.equalsIgnoreCase(((UIFormRadioBoxInput)uiForm.getChildById(NOTIFICATION_TYPE)).getValue());
+      if(isNotifyByEmail) {
+        uiForm.toogleWatch(event);
+      } else {
+        uiApp.addMessage(new ApplicationMessage("UIWatchDocumentForm.msg.not-support", null, ApplicationMessage.WARNING));
+      }
+    }
+  }
+
+  public static class UnwatchActionListener extends EventListener<UIWatchDocumentForm> {
+    public void execute(Event<UIWatchDocumentForm> event) throws Exception {
+      UIWatchDocumentForm uiForm = event.getSource();
+      uiForm.toogleWatch(event);
     }
   }
 }

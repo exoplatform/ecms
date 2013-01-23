@@ -2015,7 +2015,7 @@
       <Unwatch>Unwatch</Unwatch>
     </action>
     <label>
-      <notificationType>Notification Type</notificationType>
+      <notificationType>Notification Type:</notificationType>
     </label>
     <msg>
       <not-support>This notification type is not supported. Please select another one.</not-support>

@@ -126,7 +126,7 @@ public class EmailNotifyListener implements EventListener {
                                          .load(0, 1)[0].getFullName());
 
     Node node = NodeLocation.getNodeByLocation(observedNode_);
-    binding.put("doc_title", node.getProperty("exo:title").getValue().getString());
+    binding.put("doc_title", org.exoplatform.services.cms.impl.Utils.getTitle(node));
     binding.put("doc_name", node.getName());
     binding.put("doc_url", getViewableLink());
     message.setBody(engine.createTemplate(messageConfig.getContent()).make(binding).toString());
