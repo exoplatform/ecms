@@ -5,13 +5,13 @@ import org.exoplatform.ecm.webui.tree.UITreeTaxonomyBuilder;
 import org.exoplatform.ecm.webui.tree.selectone.UISelectTaxonomyPanel;
 %>
 
-<div class="$uicomponent.id" id="$uicomponent.id">
+<div class="uiOneTaxonomySelector" id="$uicomponent.id">
   <div>
     <%
       uicomponent.renderChild(UIBreadcumbs.class);
       uicomponent.renderChild(UITreeTaxonomyList.class);
     %>
-    <div class="ClearFix">
+    <div class="clearfix">
     <%
       uicomponent.renderChild(UITreeTaxonomyBuilder.class);
       uicomponent.renderChild(UISelectTaxonomyPanel.class);

@@ -8,8 +8,10 @@
  */
 
 import org.apache.commons.lang.StringUtils;
+
+ String componentID = uicomponent.id.replace("UI","ui");
 %>
-<div class="uiFormWithoutAction $uicomponent.id">
+<div class="uiFormWithoutAction $componentID">
     <% uiform.begin() %>
   <div class="form-horizontal">
       <% 
