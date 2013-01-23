@@ -113,7 +113,7 @@ public class UINodeTree extends UITree {
     UIRightClickPopupMenu popupMenu = getUiPopupMenu();
     String beanFieldValue = getDisplayFieldValue(obj);
     beanFieldValue = Text.unescapeIllegalJcrChars(Utils.getIndexName(node));
-    String className="uiIconFileDefault";
+    String className="uiIconFile";
     boolean flgSymlink = false;
     if (Utils.isSymLink(node)) {
       flgSymlink = true;

@@ -49,7 +49,7 @@
 				        %>
 				        <td>
 				        	<div class="text">
-					          <span><i class="uiIconFileDefault uiIcon${metaType}"></i> $metadataType.name</span>
+					          <span><i class="uiIconFile uiIcon${metaType}"></i> $metadataType.name</span>
 					        </div>
 				        </td>
 				        <td>
@@ -106,7 +106,7 @@
 				            nodeType = nodeType.replace(":", "_") ;
 				          %>
 				          <td class="center">
-				            <i class="uiIconFileDefault uiIcon${nodeType}"></i>                      
+				            <i class="uiIconFile uiIcon${nodeType}"></i>                      
 				          </td>
 				          <td><div class="text">$meta.name</div></td>
 				          <td align="center"><%=uicomponent.resolveType(meta.getRequiredType())%></td>
