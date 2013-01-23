@@ -407,6 +407,7 @@
 
 .UIJCRExplorerPortlet .UIListView {
 	position: relative;
+	z-index:0;
 }
 
 .UIJCRExplorerPortlet .UITabPane .UIListView {

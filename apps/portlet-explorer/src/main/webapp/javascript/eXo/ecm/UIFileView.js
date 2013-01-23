@@ -294,6 +294,7 @@ UIFileView.prototype.mouseUpItem = function(evt) {
 				  Self.postGroupAction(moveAction.getAttribute("symlink"), "&destInfo=" + wsTarget + ":" + idTarget);
 				else
 				  Self.postGroupAction(moveAction, "&destInfo=" + wsTarget + ":" + idTarget);
+				gj(mobileElement).hide();
 			}
 		} else {
 			if ((event.ctrlKey || Self.clickCheckBox || (Self.clickTotalCheckBox && Self.selectBoxType)) && !element.selected) {
@@ -342,14 +343,14 @@ UIFileView.prototype.mouseUpItem = function(evt) {
 				if (Self.itemsSelected.length > 1) {
 					Self.showItemContextMenu(event, element);
 				} else {//Self.itemsSelected.length==1
-					var action = element.getAttribute("mousedown").replace('this', 'element');
+					var action = element.getAttribute("mousedown");
 					eval(action);
 				}
 			} else {// if (!inArray(Self.itemsSelected, element) && Self.itemsSelected.length == 1)
 				if (Self.itemsSelected.length > 1) {
 					Self.showItemContextMenu(event, element);
 				} else if (Self.itemsSelected.length == 1) {
-					var action = Self.itemsSelected[0].getAttribute("mousedown").replace('this', 'element');
+					var action = Self.itemsSelected[0].getAttribute("mousedown");
 					eval(action);
 				}
 			}
@@ -562,6 +563,8 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 	  }
 	});
 	gj("#ActionMenuPlaceHolder").prepend(contextMenu);
+    gj(".UIRightClickPopupMenu", contextMenu).addClass("MenuBar");
+    gj(".UIRightPopupMenuContainer", contextMenu).addClass("ClearFix");
 	//check lock, unlock action
 	var checkUnlock = false;
 	var checkRemoveFavourite = false;
@@ -632,6 +635,14 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 	if (event.clientY + contentMenu.offsetHeight > portHeight) Y -= contentMenu.offsetHeight + 5;
 //	contextMenu.style.top = Y + 5 + "px";
 //	contextMenu.style.left = X + 5 + "px";
+    var menubar = gj('div.MenuBar');
+    if (menubar) {
+    	menubar.width(gj("div#UIActionBar").width() - 120);
+    }	
+    var moreButton = gj("#ShowMoreActionContainer");
+    if (moreButton) {
+    	moreButton.hide();
+    }
 };
 
 // hide context menu
@@ -707,7 +718,7 @@ UIFileView.prototype.initStickBreadcrumb = function() {
 			breadcrumb.width(breadcrumb.parent().width());
 		} else {
 			actionbar.css({ 'position': 'relative' });  
-			breadcrumb.css({ 'position': 'relative' });  
+			breadcrumb.css({ 'position': 'relative', 'top' :0 });  
 		}   
 	};
 	stickBreadcrumb;
@@ -833,8 +844,16 @@ UIFileView.prototype.clickRightMouse = function(event, elemt, menuId, objId, whi
 
     eXo.core.Mouse.update(event);
     gj("#ActionMenuPlaceHolder").prepend(contextMenu);
+    gj(contextMenu).addClass("MenuBar");
     eXo.webui.UIPopup.show(contextMenu);
-    
+    var menubar = gj('div.MenuBar');
+    if (menubar) {
+    	menubar.width(gj("div#UIActionBar").width() - 120);
+    }    
+    var moreButton = gj("#ShowMoreActionContainer");
+    if (moreButton) {
+    	moreButton.hide();
+    }
 };
 
 //private method

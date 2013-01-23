@@ -62,7 +62,12 @@
 	String[] arrColumns = ["exo:owner;95px","exo:dateModified;123px","exo:dateCreated;121px"];
 	def absNodePath = uiExplorer.getCurrentPath();
 	def relNodePath = uiExplorer.filterPath(absNodePath);
-	def drivePath = new StringBuffer(absNodePath.substring(0, absNodePath.indexOf(relNodePath)));
+	def drivePath = absNodePath;
+	if ("/".equals(relNodePath)) {
+	  drivePath = absNodePath;
+	} else {
+	  drivePath = new StringBuffer(absNodePath.substring(0, absNodePath.lastIndexOf(relNodePath)));
+	}
 	if (StringUtils.isEmpty(drivePath.toString())) {
 	  drivePath.append("/");
 	}

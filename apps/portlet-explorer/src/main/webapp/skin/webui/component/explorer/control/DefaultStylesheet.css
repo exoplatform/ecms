@@ -924,6 +924,7 @@
   margin-top: 3px;
   position: relative;
   cursor: pointer;
+  z-index: 2;
 }
 
 .UIJCRExplorerPortlet .UIActionBar .ShowMoreActionContainer:hover {
@@ -943,7 +944,6 @@
 
 .UIJCRExplorerPortlet .UIActionBar .MoreContainerActivated {
   border: 1px solid #e1e1e1;
-  z-index: 2;
 }
 
 .UIJCRExplorerPortlet .UIActionBar .MoreContainerActivated .WhiteBG {
@@ -981,7 +981,7 @@
 	border: solid 1px #e1e1e1;
 	position: absolute;
 	margin: 0px;
-	z-index: 1;
+	z-index: 2;
 	right: -1px;
 }
 
@@ -1004,4 +1004,19 @@
 .UIJCRExplorerPortlet .UIJCRExplorer .UIFormGrid .UICalendarComponent {
    position: absolute;
    z-index: 100;
+}
+
+.MenuBar{
+	 border: none;
+	 box-shadow: none;
+	 width: 920px;
+}
+
+.MenuBar .UIContextMenuContainer, .MenuBar .UIRightPopupMenuContainer{
+ 	background: none repeat scroll 0 0 #F8F8F8;
+  border: none;
+  padding-top: 3px;
+}
+.MenuBar .UIContextMenuContainer .MenuItem, .MenuBar .UIRightPopupMenuContainer .MenuItem{
+ 	border-right: 1px solid #c7c7c7;
 }
