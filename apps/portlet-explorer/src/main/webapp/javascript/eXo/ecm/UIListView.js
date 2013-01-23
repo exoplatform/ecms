@@ -1073,6 +1073,7 @@
       eXo.ecm.ECMUtils.documentContainer_OnResize = function(){
 	      var documentInfo = document.getElementById('UIDocumentInfo');
 	      var uiListGrid = gj(documentInfo).find("div.uiListGrid")[0];
+	      if (!uiListGrid) return;
 	      var tableBox = gj(documentInfo).find("div.uiBox")[0];
 	      var headerRow = gj(documentInfo).find("div.titleTable")[0];
 	      var colDiv = gj(headerRow).children("div");
