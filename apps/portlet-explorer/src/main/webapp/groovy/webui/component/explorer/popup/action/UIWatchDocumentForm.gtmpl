@@ -1,29 +1,19 @@
 <% String fieldName; %>
-<div class="UIForm $uicomponent.id">
+<div class="uiForm $uicomponent.id">
   <%uiform.begin()%>
-  <div class="HorizontalLayout">
-    <div class="FormContainer">
-      <table class="UIFormGrid">
-        <tr>
-          <td class="FieldLabel portlet-form-label">
-            <%=_ctx.appRes(uicomponent.getName() + ".label.notificationType") %>
-          </td>
-          <td class="FieldComponent portlet-input-field">
-            <%uiform.renderField(uiform.NOTIFICATION_TYPE); %>
-          </td>
-          <td class="FieldLabel portlet-form-label">
-          </td>
-        </tr>
-      </table>
-      <div class="UIAction"> 
+      <div class="form-horizontal resizable">
+        <div class="control-group">
+          <label class="control-label"><%=_ctx.appRes(uicomponent.getName() + ".label.notificationType") %></label>
+          <div class="controls"><%uiform.renderField(uiform.NOTIFICATION_TYPE); %></div>
+        </div>
+      </div>
+      <div class="uiAction uiActionBorder"> 
         <% for(action in uicomponent.getActions()) { 
              String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action);
              String link = uicomponent.event(action);
         %>
-              <a href="javascript:void(0);" onclick="$link" class="ActionButton LightBlueStyle">$actionLabel</a>
+              <button href="javascript:void(0);" onclick="$link" class="btn">$actionLabel</button>
         <%}%>  
       </div>
-    </div>
-  </div>
   <%uiform.end()%>
 </div>
