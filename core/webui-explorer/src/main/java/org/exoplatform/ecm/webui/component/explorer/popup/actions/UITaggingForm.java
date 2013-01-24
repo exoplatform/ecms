@@ -276,7 +276,7 @@ public class UITaggingForm extends UIForm {
           
           return;
         }
-        String[] arrFilterChar = { "&", "'", "$", "@", ":", "]", "[", "*", "%", "!", "/", "\\" };
+        String[] arrFilterChar = { "&", "'", "$", "@", ":", "]", "[", "*", "%", "!", "/", "\\" , "\"" };
         for (String filterChar : arrFilterChar) {
           if (t.indexOf(filterChar) > -1) {
             uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tagName-invalid",
