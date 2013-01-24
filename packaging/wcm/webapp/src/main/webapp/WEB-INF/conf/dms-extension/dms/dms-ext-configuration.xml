@@ -335,10 +335,20 @@
 					</object>
 				</object-param>
 				<object-param>
-					<name>UIMetadataManager</name>
+					<name>UICLVTemplatesManager</name>
 					<object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
 						<field name="rank"><int>120</int></field>
+						<field name="name"><string>UICLVTemplatesManager</string></field>
+						<field name="category"><string>Templates</string></field>
+						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UICLVTemplatesManagerComponent</string></field>
+					</object>
+				</object-param>				
+				<object-param>
+					<name>UIMetadataManager</name>
+					<object type="org.exoplatform.webui.ext.UIExtension">
+						<field name="type"><string>org.exoplatform.ecm.dms.UIECMAdminControlPanel</string></field>
+						<field name="rank"><int>130</int></field>
 						<field name="name"><string>UIMetadataManager</string></field>
 						<field name="category"><string>Templates</string></field>
 						<field name="component"><string>org.exoplatform.ecm.webui.component.admin.manager.UIMetadataManagerComponent</string></field>

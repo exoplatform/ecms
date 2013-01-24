@@ -17,9 +17,6 @@
 package org.exoplatform.ecm.webui.component.admin.templates;
 
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
-import org.exoplatform.ecm.webui.component.admin.views.UIECMTemplateList;
-import org.exoplatform.ecm.webui.component.admin.templates.UITemplateContainer;
-import org.exoplatform.ecm.webui.selector.UIPermissionSelector;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -65,7 +62,7 @@ public class UITemplatesManager extends UIAbstractManager {
 
   public void setSelectedTab(int index)
   {
-     selectedTabId = ((UIComponent)getChild(index - 1)).getId();
+     selectedTabId = getChild(index - 1).getId();
   }
 
   public UITemplatesManager() throws Exception {    

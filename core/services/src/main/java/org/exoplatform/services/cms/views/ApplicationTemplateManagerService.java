@@ -43,6 +43,13 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
    * */
 public interface ApplicationTemplateManagerService {
 
+  public final static String CLV_PAGINATOR_TEMPLATE_CATEGORY             = "paginators";
+  
+  public final static String CLV_NAVIGATION_TEMPLATE_CATEGORY             = "navigation";
+  
+  public final static String CLV_LIST_TEMPLATE_CATEGORY             = "list";
+  
+  public final static String CLV_TEMPLATE_STORAGE_FOLDER                 = "content-list-viewer";
   /**
    * Adds the plugin.
    *

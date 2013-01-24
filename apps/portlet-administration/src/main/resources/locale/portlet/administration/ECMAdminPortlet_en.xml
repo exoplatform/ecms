@@ -21,6 +21,7 @@
       <UINamespaceManager>Namespaces</UINamespaceManager>
       <UINodeTypeManager>Node Types</UINodeTypeManager>
       <UITemplatesManager>Documents</UITemplatesManager>
+						<UICLVTemplatesManager>List</UICLVTemplatesManager>
       <UIViewManager>Views</UIViewManager>
       <UIDriveManager>Drives</UIDriveManager>
       <UIQueriesManager>Queries</UIQueriesManager>
@@ -997,6 +998,9 @@
       <UITemplateContainer>Documents</UITemplateContainer>
       <UIActionsTemplateContainer>Actions</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Others</UIOthersTemplateContainer>
+						<ContentTemplateContainer>Content</ContentTemplateContainer>
+						<CateTemplateContainer>Category</CateTemplateContainer>
+						<PageTemplateContainer>Paginators</PageTemplateContainer>
     </title>
   </UITabPane>
   <!--
@@ -1689,6 +1693,31 @@
       <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
     </msg>
   </UIOthersTemplateList>
+		
+	 <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UICLVTemplateList		 #
+  ######################################################################################
+  -->
+  <UICLVTemplateList>
+    <header>
+      <name>Name</name>
+      <action>Action</action>
+      <template>Template</template>
+    </header>
+    <action>
+      <AddTemplate>Add Template</AddTemplate>
+						<Edit>Edit</Edit>
+						<Delete>Delete</Delete>
+    </action>
+    <msg>
+      <confirm-delete>Do you really want to delete?</confirm-delete>
+      <access-denied>Access denied! You haven't got permission to use this function.</access-denied>
+      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
+      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+    </msg>
+  </UICLVTemplateList>
+			
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateForm		 #
