@@ -1,0 +1,51 @@
+<% 
+	import org.exoplatform.webui.form.UIFormInputBase;
+	
+	String fieldName; %>
+<div class="UIFormWithTitle $uicomponent.id" onkeypress="javascript:SubmitAction.call(this, event);">
+	<% uiform.begin() %>
+	<div class="HorizontalLayout">
+		<div class="FormContainer">
+			<table class="UIFormGrid">
+				<tr>
+					<td colspan="4" >
+						<%=_ctx.appRes(uicomponent.getName() + ".title"); %>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<% uiform.renderField(uiform.PERMISSION) %>
+					</td>
+					<td style=" vertical-align: top; ">
+						<div class="UIAction"> 
+							<a href="javascript:void(0);" onclick="<%=uicomponent.event("Save") %>" class="ActionButton LightBlueStyle"><%=_ctx.appRes(uicomponent.getName() + ".action.Save")%></a>
+							<a href="javascript:void(0);" onclick="<%=uicomponent.event("Reset") %>" class="ActionButton LightBlueStyle"><%=_ctx.appRes(uicomponent.getName() + ".action.Reset")%></a>
+						</div>
+					</td>
+				</tr>
+			</table>
+			<%//Rerender this	component with the new structure%>
+			<%// start render action%>
+			<div class="UIAction"> 
+				<%
+				 String closeActionLabel = _ctx.appRes(uicomponent.getName() + ".action.Close");
+				 String actionLink = uicomponent.event("Close");
+				%>
+				<a href="javascript:void(0);" onclick="$actionLink" class="ActionButton LightBlueStyle">$closeActionLabel</a>
+			</div>
+			<%// end render action%>
+		</div>
+	</div>
+	<%uiform.end()%>
+</div>
+<script language="javascript">
+	function SubmitAction(event) {
+		var event = window.event || event;
+		var code;
+		if(event.keyCode) code = event.keyCode;
+		else if (event.which) code = event.which;
+		if(code ==13) {
+			this.onsubmit = function(){ return false; }				
+		}
+	}	
+</script>

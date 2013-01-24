@@ -32,7 +32,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  *          trongtt@gmail.com
  * Jun 28, 2006
  */
-@ComponentConfig(template = "classpath:groovy/ecm/webui/form/UIFormInputSetWithAction.gtmpl")
+@ComponentConfig(template = "classpath:groovy/ecm/webui/form/UIPermissionInputSet.gtmpl")
 public class UIPermissionInputSet extends UIFormInputSetWithAction {
 
   final static public String FIELD_USERORGROUP = "userOrGroup";
