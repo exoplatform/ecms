@@ -2500,6 +2500,13 @@
     <label>
       <add_node>Droit d'édition</add_node>
     </label>
-  </UIPermissionForm>  
+  </UIPermissionForm>
+  
+  <UIViewFormTabPane>
+		<label>  
+  		<hideExplorerPanel>Hide explorer panel in side bar</hideExplorerPanel>
+ 		</label>
+	</UIViewFormTabPane>
+    
 </bundle>
 

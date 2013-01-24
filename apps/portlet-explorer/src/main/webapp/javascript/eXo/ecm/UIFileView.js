@@ -702,6 +702,7 @@ UIFileView.prototype.initStickBreadcrumb = function() {
 	var stickBreadcrumb = function() {
 		var breadcrumb = gj('#FileViewBreadcrumb');
 		var actionbar = gj('#UIActionBar');
+		if (!breadcrumb) return;
 		var breadCrumbOffTop = breadcrumb.offset().top;
 		var actionbarOffTop = actionbar.offset().top;
 		if (eXo.ecm.UIFileView.minBreadcrumbTop == 0) 

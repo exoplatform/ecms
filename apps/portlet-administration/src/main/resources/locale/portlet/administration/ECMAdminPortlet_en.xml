@@ -1078,6 +1078,7 @@
       <tabs>Tabs</tabs>
       <template>Templates</template>
       <enableVersion>Enable Version</enableVersion>
+      <hideExplorerPanel>Hide explorer panel in side bar</hideExplorerPanel>
       <addFolder>Add Folder</addFolder>
       <addSignature>Add Signature</addSignature>
       <addDocument>Add Document</addDocument>

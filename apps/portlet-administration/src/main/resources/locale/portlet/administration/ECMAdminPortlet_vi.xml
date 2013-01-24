@@ -2504,5 +2504,12 @@
     <label>
       <add_node>Sửa</add_node>
     </label>
-  </UIPermissionForm>  
+  </UIPermissionForm>
+  
+  <UIViewFormTabPane>
+		<label>  
+  		<hideExplorerPanel>Hide explorer panel in side bar</hideExplorerPanel>
+ 		</label>
+	</UIViewFormTabPane>
+    
 </bundle>

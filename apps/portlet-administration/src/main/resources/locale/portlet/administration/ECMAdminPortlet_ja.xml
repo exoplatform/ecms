@@ -2484,5 +2484,12 @@
       <add_node>Modify</add_node>
     </label>
   </UIPermissionForm>
+  
+  <UIViewFormTabPane>
+		<label>  
+  		<hideExplorerPanel>Hide explorer panel in side bar</hideExplorerPanel>
+ 		</label>
+	</UIViewFormTabPane>
+  
 </bundle>
 
