@@ -35,12 +35,13 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
  * Oct 03, 2006
  * 9:43:23 AM
  */
-@ComponentConfig(template = "system:/groovy/webui/core/UITabPane_New.gtmpl", 
+@ComponentConfig(template = "app:/groovy/webui/component/admin/template/UITemplatesManager.gtmpl", 
 events = { @EventConfig(listeners = UITemplatesManager.SelectTabActionListener.class) })
 
 public class UITemplatesManager extends UIAbstractManager {
   final static public String EDIT_TEMPLATE = "EditTemplatePopup" ;
   final static public String NEW_TEMPLATE = "TemplatePopup" ;
+  final static public String POPUP_TEMPLATE_ID = "TemplateContainerPopup";
   final static public String ACTIONS_TEMPLATE_ID = "UIActionsTemplateContainer";
   final static public String OTHERS_TEMPLATE_ID = "UIOthersTemplateContainer";
   
@@ -77,14 +78,48 @@ public class UITemplatesManager extends UIAbstractManager {
     uiOthersTemp.getChild(UITemplateList.class).setTemplateFilter(UITemplateList.OTHERS_TEMPLATE_TYPE);
     uiOthersTemp.getChild(UITemplateList.class).setId(OTHERS_TEMPLATE_LIST_ID);
     
+    UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, POPUP_TEMPLATE_ID) ;    
+    UIPopupWindow uiPopupPermission = addChild(UIPopupWindow.class, null, UITemplateContent.TEMPLATE_PERMISSION) ;
     setSelectedTab("UITemplateContainer");
+  }
+  
+  public void initPopup(UIComponent uiComponent, String popupId) throws Exception {
+    UIPopupWindow uiPopup = getChildById(POPUP_TEMPLATE_ID);
+    uiPopup.setRendered(true);
+    uiPopup.setShowMask(true);    
+    uiPopup.setWindowSize(600,300) ;
+    uiPopup.setUIComponent(uiComponent) ;
+    uiPopup.setShow(true) ;
+    uiPopup.setResizable(true) ;
+  }
+  
+  public void initPopupPermission(String id, String membership) throws Exception {
+    UIPopupWindow uiPopup = getChildById(UITemplateContent.TEMPLATE_PERMISSION);
+    uiPopup.setWindowSize(560, 300);
+    UIPermissionSelector uiECMPermission = createUIComponent(UIPermissionSelector.class, null, null);
+    uiECMPermission.setSelectedMembership(true);
+    if (membership != null && membership.indexOf(":/") > -1) {
+      String[] arrMember = membership.split(":/");
+      uiECMPermission.setCurrentPermission("/" + arrMember[1]);
+    }
+    if (id.equals("AddNew")) {
+      UITemplateForm uiForm = findFirstComponentOfType(UITemplateForm.class);
+      uiECMPermission.setSourceComponent(uiForm, null);
+    } else {
+      UITemplateContent uiTemContent = findComponentById(id);
+      uiECMPermission.setSourceComponent(uiTemContent, null);
+    }
+    uiPopup.setUIComponent(uiECMPermission);
+    uiPopup.setRendered(true);
+    uiPopup.setShow(true);
+    uiPopup.setResizable(true);
   }
 
   public boolean isEditingTemplate() {
   	UIECMAdminPortlet adminPortlet = this.getAncestorOfType(UIECMAdminPortlet.class);
   	UIPopupContainer popupContainer = adminPortlet.getChild(UIPopupContainer.class);
   	UIPopupWindow uiPopup = popupContainer.getChild(UIPopupWindow.class);
-  	uiPopup.setId(EDIT_TEMPLATE);
+  	uiPopup.setId(POPUP_TEMPLATE_ID);
     return (uiPopup != null && uiPopup.isShow() && uiPopup.isRendered());
   }  
 

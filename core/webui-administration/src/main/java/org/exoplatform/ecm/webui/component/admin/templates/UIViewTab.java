@@ -103,7 +103,8 @@ public class UIViewTab extends UIContainer {
 
   public void setTabRendered() {
     UIViewTemplate uiViewTemplate = getAncestorOfType(UIViewTemplate.class) ;
-    uiViewTemplate.setRenderedChild(UIViewTab.class) ;
+
+    uiViewTemplate.setSelectedTab(UIViewTab.class.getSimpleName()) ;
   }
 
   static public class EditActionListener extends EventListener<UIViewTab> {

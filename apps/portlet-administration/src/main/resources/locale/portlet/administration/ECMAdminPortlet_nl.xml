@@ -1696,11 +1696,11 @@
       <UIPermissionSelector>Selecteer rechten</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
-  <TemplatePopup>
+  <TemplateContainerPopup>
     <title>
       <UITemplateForm>Sjabloon Vorm</UITemplateForm>
     </title>
-  </TemplatePopup>
+  </TemplateContainerPopup>
   <ViewForm>
     <label>
       <UITemplateContent>ViewForm</UITemplateContent>
@@ -1737,11 +1737,11 @@
       <UIPermissionSelector>Selecteer Rechten</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
-  <EditTemplatePopup>
+  <TemplateContainerPopup>
     <title>
       <UIViewTemplate><![CDATA[Toon & wijzigen Template]]></UIViewTemplate>
     </title>
-  </EditTemplatePopup>
+  </TemplateContainerPopup>
   <UITemplatesManager>
     <title>
       <Edit>Wijzigen</Edit>

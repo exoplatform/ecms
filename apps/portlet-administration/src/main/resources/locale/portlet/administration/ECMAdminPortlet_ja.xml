@@ -1693,11 +1693,11 @@
       <UIPermissionSelector>権限の選択</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
-  <TemplatePopup>
+  <TemplateContainerPopup>
     <title>
       <UITemplateForm>テンプレートフォーム</UITemplateForm>
     </title>
-  </TemplatePopup>
+  </TemplateContainerPopup>
   <ViewForm>
     <label>
       <UITemplateContent>ビューフォーム</UITemplateContent>
@@ -1734,11 +1734,11 @@
       <UIPermissionSelector>権限の選択</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
-  <EditTemplatePopup>
+  <TemplateContainerPopup>
     <title>
       <UIViewTemplate><![CDATA[View & Edit Template]]></UIViewTemplate>
     </title>
-  </EditTemplatePopup>
+  </TemplateContainerPopup>
   <UITemplatesManager>
     <title>
       <Edit>編集</Edit>

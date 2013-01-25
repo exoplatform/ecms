@@ -73,7 +73,7 @@ public class UISkinTab extends UIContainer {
 
   public void setTabRendered() {
     UIViewTemplate uiViewTemplate = getAncestorOfType(UIViewTemplate.class) ;
-    uiViewTemplate.setRenderedChild(UISkinTab.class) ;
+    uiViewTemplate.setSelectedTab(UISkinTab.class.getSimpleName()) ;
   }
 
   public List<String> getListSkin() { return listSkin_ ; }

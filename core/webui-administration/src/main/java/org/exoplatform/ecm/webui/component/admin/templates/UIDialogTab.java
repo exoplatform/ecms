@@ -103,7 +103,7 @@ public class UIDialogTab extends UIContainer {
 
   public void setTabRendered() {
     UIViewTemplate uiViewTemplate = getAncestorOfType(UIViewTemplate.class) ;
-    uiViewTemplate.setRenderedChild(UIDialogTab.class) ;
+    uiViewTemplate.setSelectedTab(UIDialogTab.class.getSimpleName()) ;
   }
 
   static public class EditActionListener extends EventListener<UIDialogTab> {

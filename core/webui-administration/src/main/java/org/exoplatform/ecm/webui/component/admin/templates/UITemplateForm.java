@@ -28,6 +28,7 @@ import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeIterator;
 import javax.jcr.nodetype.NodeTypeManager;
 
+import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -100,15 +101,20 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
                                                      null).setEditable(false).addValidator(MandatoryValidator.class));
     templateTab.setActionInfo(FIELD_PERMISSION, new String[] {"AddPermission"}) ;
     addUIComponentInput(templateTab) ;
+    
+    
     setSelectedTab(templateTab.getId()) ;
     UIFormInputSet defaultDialogTab = new UIFormInputSet(FIELD_TAB_DIALOG) ;
     defaultDialogTab.addUIFormInput(new UIFormTextAreaInput(FIELD_DIALOG, FIELD_DIALOG, null).
                                     addValidator(MandatoryValidator.class)) ;
     addUIFormInput(defaultDialogTab) ;
+    
+    
     UIFormInputSet defaultViewTab = new UIFormInputSet(FIELD_TAB_VIEW) ;
     defaultViewTab.addUIFormInput(new UIFormTextAreaInput(FIELD_VIEW, FIELD_VIEW, null).
                                   addValidator(MandatoryValidator.class)) ;
     addUIFormInput(defaultViewTab) ;
+    
     UIFormInputSet defaultSkinTab = new UIFormInputSet(FIELD_TAB_SKIN) ;
     defaultSkinTab.addUIFormInput(new UIFormTextAreaInput(FIELD_SKIN, FIELD_SKIN, null)) ;
     addUIFormInput(defaultSkinTab) ;
@@ -185,9 +191,7 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
 
   public void doSelect(String selectField, Object value) {
     UIFormInputSetWithAction uiFormAction = getChildById(FIELD_TAB_TEMPLATE) ;
-    uiFormAction.getUIStringInput(FIELD_PERMISSION).setValue(value.toString()) ;
-    UITemplatesManager uiManager = getAncestorOfType(UITemplatesManager.class) ;
-    uiManager.removeChildById("AddNewTemplatePermission") ;
+    uiFormAction.getUIStringInput(FIELD_PERMISSION).setValue(value.toString()) ;    
   }
 
   static public class SaveActionListener extends EventListener<UITemplateForm> {
@@ -229,7 +233,7 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
       composer.updateTemplatesSQLFilter();
       uiManager.refresh() ;
       uiForm.refresh() ;
-      UIPopupWindow uiPopupWindow = uiTemplateContainer.getChildById(UITemplatesManager.NEW_TEMPLATE + "_" + uiManager.getSelectedTabId()) ;
+      UIPopupWindow uiPopupWindow = uiManager.getChildById(UITemplatesManager.POPUP_TEMPLATE_ID) ;
       uiPopupWindow.setRendered(false) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
@@ -238,8 +242,7 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
   static  public class CancelActionListener extends EventListener<UITemplateForm> {
     public void execute(Event<UITemplateForm> event) throws Exception {      
       UITemplatesManager uiManager = event.getSource().getAncestorOfType(UITemplatesManager.class) ;
-      UITemplateContainer uiTemplateContainer = uiManager.getChildById(uiManager.getSelectedTabId());
-      UIPopupWindow uiPopupWindow = uiTemplateContainer.getChildById(UITemplatesManager.NEW_TEMPLATE + "_" + uiManager.getSelectedTabId()) ;
+      UIPopupWindow uiPopupWindow = uiManager.getChildById(UITemplatesManager.POPUP_TEMPLATE_ID) ;
       uiPopupWindow.setRendered(false) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
@@ -266,12 +269,12 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
 
   static public class AddPermissionActionListener extends EventListener<UITemplateForm> {
     public void execute(Event<UITemplateForm> event) throws Exception {
-      UITemplateForm uiTemplateForm = event.getSource() ;
+      UITemplateForm uiTemplateForm = event.getSource() ;      
       UITemplatesManager uiManager = uiTemplateForm.getAncestorOfType(UITemplatesManager.class) ;
-      UITemplateContainer uiTemplateContainer = uiManager.getChildById(uiManager.getSelectedTabId());
       String membership = uiTemplateForm.getUIStringInput(FIELD_PERMISSION).getValue() ;
-      uiTemplateContainer.initPopupPermission("AddNew", membership) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
+      uiManager.initPopupPermission("AddNew", membership) ;
+      UIPopupWindow uiPopup = uiManager.getChildById(UITemplateContent.TEMPLATE_PERMISSION);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup) ;
     }
   }
 }

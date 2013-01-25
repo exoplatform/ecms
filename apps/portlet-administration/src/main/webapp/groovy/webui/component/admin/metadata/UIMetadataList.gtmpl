@@ -38,7 +38,11 @@
       %>
           <tr>
             <td>
-              <div><%=meta.getLabel()%></div>
+              <%
+                def label = meta.getLabel();
+                if(label == null) label = meta.getName();
+              %>
+              <div><%=label%></div>
             </td>
             <td>$meta.name</td>
             

@@ -1691,11 +1691,11 @@
       <UIPermissionSelector>إختيار صلاحية</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
-  <TemplatePopup>
+  <TemplateContainerPopup>
     <title>
       <UITemplateForm>شكل القالب</UITemplateForm>
     </title>
-  </TemplatePopup>
+  </TemplateContainerPopup>
   <ViewForm>
     <label>
       <UITemplateContent>عرض نموذج</UITemplateContent>
@@ -1732,11 +1732,11 @@
       <UIPermissionSelector>إختيار صلاحية</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
-  <EditTemplatePopup>
+  <TemplateContainerPopup>
     <title>
       <UIViewTemplate>تغيير و مشاهدة القالب</UIViewTemplate>
     </title>
-  </EditTemplatePopup>
+  </TemplateContainerPopup>
   <UITemplatesManager>
     <title>
       <Edit>تغيير</Edit>

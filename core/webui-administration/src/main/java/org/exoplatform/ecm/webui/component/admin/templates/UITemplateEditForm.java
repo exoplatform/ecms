@@ -92,7 +92,7 @@ public class UITemplateEditForm extends UIForm {
       uiForm.reset() ;
       UITemplatesManager uiManager = uiForm.getAncestorOfType(UITemplatesManager.class) ;
       UITemplateContainer uiTemplateContainer = uiForm.getAncestorOfType(UITemplateContainer.class) ;
-      UIPopupWindow uiPopupWindow = uiTemplateContainer.getChildById(UITemplatesManager.NEW_TEMPLATE + "_" + uiManager.getSelectedTabId()) ;
+      UIPopupWindow uiPopupWindow = uiTemplateContainer.getChildById(UITemplatesManager.POPUP_TEMPLATE_ID) ;
       uiPopupWindow.setRendered(false) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
@@ -101,8 +101,7 @@ public class UITemplateEditForm extends UIForm {
   static  public class CancelActionListener extends EventListener<UITemplateEditForm> {
     public void execute(Event<UITemplateEditForm> event) throws Exception {    	     
       UITemplatesManager uiManager = event.getSource().getAncestorOfType(UITemplatesManager.class) ;
-      UITemplateContainer uiTemplateContainer = uiManager.getChildById(uiManager.getSelectedTabId());
-      UIPopupWindow uiPopupWindow = uiTemplateContainer.getChildById(UITemplatesManager.EDIT_TEMPLATE + "_" + uiManager.getSelectedTabId()) ;
+      UIPopupWindow uiPopupWindow = uiManager.getChildById(UITemplatesManager.POPUP_TEMPLATE_ID) ;
       uiPopupWindow.setRendered(false) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }

@@ -120,11 +120,9 @@ public class UITemplateList extends UIPagingGrid {
       uiSkinTab.updateGrid(nodeType) ;
       UITemplateContent uiSkinTabForm = uiViewTemplate.findComponentById(UISkinTab.SKIN_FORM_NAME) ;
       uiSkinTabForm.setNodeTypeName(nodeType) ;
-      uiSkinTabForm.update(null) ;
+      uiSkinTabForm.update(null) ;           
       
-      uiTemplateContainer.removeChildById(UITemplatesManager.NEW_TEMPLATE + "_" + uiManager.getSelectedTabId()) ;
-      uiTemplateContainer.initPopup(uiViewTemplate, UITemplatesManager.EDIT_TEMPLATE + "_" + uiManager.getSelectedTabId()) ;
-      
+      uiManager.initPopup(uiViewTemplate, UITemplatesManager.POPUP_TEMPLATE_ID) ;      
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
  
@@ -161,14 +159,13 @@ public class UITemplateList extends UIPagingGrid {
       UITemplateContainer uiTemplateContainer = uiTemplatesManager.getChildById(uiTemplatesManager.getSelectedTabId());
       
       UITemplateForm uiTemplateForm = uiTemplateContainer.createUIComponent(UITemplateForm.class, null, null) ;
-      uiTemplateContainer.removeChildById(UITemplatesManager.EDIT_TEMPLATE + "_" + uiTemplatesManager.getSelectedTabId()) ;
       if(uiTemplateForm.getOption().size() == 0) {
         UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class) ;
         uiApp.addMessage(new ApplicationMessage("UITemplateList.msg.access-denied", null, ApplicationMessage.WARNING)) ;        
         return ;
       }
       uiTemplateForm.refresh();
-      uiTemplateContainer.initPopup(uiTemplateForm, UITemplatesManager.NEW_TEMPLATE + "_" + uiTemplatesManager.getSelectedTabId()) ;
+      uiTemplatesManager.initPopup(uiTemplateForm, UITemplatesManager.POPUP_TEMPLATE_ID) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTemplatesManager) ;
     }
   }

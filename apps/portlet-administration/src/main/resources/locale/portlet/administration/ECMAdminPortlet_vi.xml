@@ -1689,11 +1689,11 @@
       <UIPermissionSelector>Chọn quyền truy nhập</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
-  <TemplatePopup>
+  <TemplateContainerPopup>
     <title>
       <UITemplateForm>Kiểu mẫu</UITemplateForm>
     </title>
-  </TemplatePopup>
+  </TemplateContainerPopup>
   <ViewForm>
     <label>
       <UITemplateContent>ViewForm</UITemplateContent>
@@ -1730,11 +1730,11 @@
       <UIPermissionSelector>Chọn quyền truy nhậpn</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
-  <EditTemplatePopup>
+  <TemplateContainerPopup>
     <title>
       <UIViewTemplate>Xem và Sửa mẫu</UIViewTemplate>
     </title>
-  </EditTemplatePopup>
+  </TemplateContainerPopup>
   <UITemplatesManager>
     <title>
       <Edit>Sửa</Edit>

@@ -47,12 +47,10 @@ public class UITemplateContainer extends UIContainer {
 
   public void initPopup(UIComponent uiComponent, String popupId) throws Exception {
     removeChildById(popupId) ;    
-    UITemplatesManager uiManager = getParent();
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, popupId) ;
     uiPopup.setShowMask(true);    
     uiPopup.setWindowSize(600,300) ;
-    UIViewTemplate uiViewTemplate = createUIComponent(UIViewTemplate.class, null, "UIViewTemplate" + "_" + uiManager.getSelectedTabId()) ;
-    uiPopup.setUIComponent(uiViewTemplate) ;
+    uiPopup.setUIComponent(uiComponent) ;
     uiPopup.setShow(true) ;
     uiPopup.setResizable(true) ;
   }
@@ -62,7 +60,7 @@ public class UITemplateContainer extends UIContainer {
   	uiTemplateList.refresh(uiTemplateList.getUIPageIterator().getCurrentPage());
   }  
   
-  public void initPopupPermission(String id, String membership) throws Exception {
+  public void initPopupPermission(String id, String membership) throws Exception {  	
     String popupId = id.concat(UITemplateContent.TEMPLATE_PERMISSION);
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, popupId);
     uiPopup.setShowMask(true);
@@ -84,7 +82,6 @@ public class UITemplateContainer extends UIContainer {
     uiPopup.setRendered(true);
     uiPopup.setShow(true);
     uiPopup.setResizable(true);
-    return;
   }
   
   public static class CloseActionListener extends EventListener<UIPopupWindow> {

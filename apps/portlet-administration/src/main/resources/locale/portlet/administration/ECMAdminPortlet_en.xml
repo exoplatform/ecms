@@ -1788,11 +1788,11 @@
       <UIPermissionSelector>Select Permission</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
-  <TemplatePopup>
+  <TemplateContainerPopup>
     <title>
       <UITemplateForm>Template Form</UITemplateForm>
     </title>
-  </TemplatePopup>
+  </TemplateContainerPopup>
   <ViewForm>
     <label>
       <UITemplateContent>ViewForm</UITemplateContent>
@@ -1829,13 +1829,13 @@
       <UIPermissionSelector>Select Permission</UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
-  <EditTemplatePopup>
+  <TemplateContainerPopup>
     <title>
       <UIViewTemplate_UITemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UITemplateContainer>
       <UIViewTemplate_UIActionsTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
       <UIViewTemplate_UIOthersTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
     </title>
-  </EditTemplatePopup>
+  </TemplateContainerPopup>
   <UITemplatesManager>
     <title>
       <Edit>Edit</Edit>

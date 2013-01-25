@@ -1691,11 +1691,11 @@
       <UIPermissionSelector><![CDATA[Genehmigung ausw&auml;hlen]]></UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
-  <TemplatePopup>
+  <TemplateContainerPopup>
     <title>
       <UITemplateForm>Vorlagenform</UITemplateForm>
     </title>
-  </TemplatePopup>
+  </TemplateContainerPopup>
   <ViewForm>
     <label>
       <UITemplateContent>ViewForm</UITemplateContent>
@@ -1732,11 +1732,11 @@
       <UIPermissionSelector><![CDATA[Genehmigung ausw&auml;hlen]]></UIPermissionSelector>
     </title>
   </ViewFormTemplatePermission>
-  <EditTemplatePopup>
+  <TemplateContainerPopup>
     <title>
       <UIViewTemplate><![CDATA[Vorlage anschauen und &auml;ndern]]></UIViewTemplate>
     </title>
-  </EditTemplatePopup>
+  </TemplateContainerPopup>
   <UITemplatesManager>
     <title>
       <Edit><![CDATA[&Auml;ndern]]></Edit>
