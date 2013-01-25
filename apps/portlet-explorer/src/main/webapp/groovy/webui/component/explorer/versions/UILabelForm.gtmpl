@@ -1,0 +1,41 @@
+<% 
+  import org.exoplatform.webui.form.UIFormInputBase;
+%>
+<div class="uiFormWithTitle uiBox $uicomponent.id" onkeypress="javascript:SubmitAction.call(this, event);" style="border: 2spx solid blue">
+  <h5 class="title"><%=_ctx.appRes(uicomponent.getName() + ".title")%></h5>
+  <% uiform.begin() %>
+  <div class="uiContentBox">
+    <div class="form-horizontal">
+      <div class="control-group">
+        <label class="control-label portlet-form-label">
+          <%=uicomponent.getLabel(uicomponent.FIELD_LABEL) %>
+        </label>
+        <div class="controls portlet-input-field">
+          <% 
+          uiform.renderField(uicomponent.FIELD_LABEL)
+          %>
+          <%
+          for(action in uicomponent.getActions()) { 
+            String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action)
+            String link = uicomponent.event(action); 
+          %>
+            <button type="button" onclick="$link; window.scroll(0,0);" class="btn">$actionLabel</button>
+          <%
+          }%>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%uiform.end()%>
+</div>
+<script language="javascript">
+  function SubmitAction(event) {
+    var event = window.event || event;
+    var code;
+    if(event.keyCode) code = event.keyCode;
+    else if (event.which) code = event.which;
+    if(code ==13) {
+      this.onsubmit = function(){ return false; }
+    }
+  }  
+</script>

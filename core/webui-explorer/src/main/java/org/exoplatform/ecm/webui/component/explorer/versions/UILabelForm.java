@@ -20,16 +20,16 @@ import javax.jcr.Node;
 import javax.jcr.version.VersionException;
 
 import org.exoplatform.ecm.jcr.model.VersionNode;
-import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
@@ -46,7 +46,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
 
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    template =  "system:/groovy/webui/form/UIFormWithTitle.gtmpl",
+    template =  "app:/groovy/webui/component/explorer/versions/UILabelForm.gtmpl",
     events = {
       @EventConfig(listeners = UILabelForm.SaveActionListener.class),
       @EventConfig(listeners = UILabelForm.CancelActionListener.class, phase = Phase.DECODE)
@@ -61,7 +61,6 @@ public class UILabelForm extends UIForm {
     addUIFormInput(new UIFormStringInput(FIELD_LABEL , FIELD_LABEL , null).addValidator(MandatoryValidator.class));
   }
 
-  @SuppressWarnings("unused")
   static  public class SaveActionListener extends EventListener<UILabelForm> {
     public void execute(Event<UILabelForm> event) throws Exception {
       UILabelForm uiLabelForm = event.getSource();
@@ -90,7 +89,6 @@ public class UILabelForm extends UIForm {
     }
   }
 
-  @SuppressWarnings("unused")
   static  public class CancelActionListener extends EventListener<UILabelForm> {
     public void execute(Event<UILabelForm> event) throws Exception {
       UILabelForm uiLabelForm = event.getSource();

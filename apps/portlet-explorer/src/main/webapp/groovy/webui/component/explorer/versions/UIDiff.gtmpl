@@ -1,7 +1,7 @@
 <%
 	import org.exoplatform.services.document.diff.Delta ;
 	def rcontext = _ctx.getRequestContext() ;
-	def jm = rcontext.getJavascriptManager(
+	def jm = rcontext.getJavascriptManager();
 %>
 <div class="UIDiff">
 	<div class="FileContent">

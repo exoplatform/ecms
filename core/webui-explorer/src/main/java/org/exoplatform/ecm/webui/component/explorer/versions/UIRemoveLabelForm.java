@@ -44,7 +44,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    template =  "system:/groovy/webui/form/UIFormWithTitle.gtmpl",
+    template =  "app:/groovy/webui/component/explorer/versions/UILabelForm.gtmpl",
     events = {
       @EventConfig(listeners = UIRemoveLabelForm.RemoveActionListener.class),
       @EventConfig(listeners = UIRemoveLabelForm.CancelActionListener.class)
