@@ -497,6 +497,10 @@
 		 */
 		ECMUtils.prototype.actionbarContainer_OnResize = function () {
 			Self.actionBarContainer = gj(Self.uiRightContainer).find('div.UIActionBar:first')[0];
+			var actionbar= gj('#UIActionBar');
+			if (actionbar) { //VinhNT workaround for the un-expand width of ActionBar problem, should be improved later
+			  actionbar.width(actionbar.parent().width()-2);
+			}
 			var dmsMenuContainer    = gj(Self.uiRightContainer).find('div.DMSMenuItemContainer:first')[0];
 			if (!Self.actionBarContainer) return;//No action bar, no resize
 			Self.showMoreActionContainer = document.getElementById("ShowMoreActionContainer");
