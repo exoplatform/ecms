@@ -78,11 +78,11 @@ public class UINodeTree extends UITree {
     Node node = (Node) obj;
     String nodeTypeIcon = Utils.getNodeTypeIcon(node,"uiIconEcms");
 
-    String nodeIcon = this.getExpandIcon();
+    String nodeIcon = this.getColapseIcon();
     String iconGroup = this.getIcon();
     String note = "" ;
     if(isSelected(obj)) {
-      nodeIcon = getColapseIcon();
+      nodeIcon = getExpandIcon();
       iconGroup = getSelectedIcon();
       note = " nodeSelected" ;
     }
@@ -94,7 +94,7 @@ public class UINodeTree extends UITree {
     String objId = Utils.formatNodeName(String.valueOf(getId(obj)));
     String actionLink = event("ChangeNode", objId);
     StringBuilder builder = new StringBuilder();
-    if(nodeIcon.equals(getExpandIcon())) {
+    if(nodeIcon.equals(getColapseIcon())) {
       builder.append(" <a class=\"")
              .append(nodeIcon)
              .append(" ")
