@@ -780,3 +780,59 @@
 	margin-left: 250px;
 }
 
+/******** UIRightClickPopupMenu **************/
+.uiRightClickPopupMenu {
+	display: none;
+	position: absolute;
+	
+	.uiRightPopupMenuContainer {
+		display: block;
+		position: static;
+		
+		> li > a:hover > [class^="uiIconEcms"] {
+			background-image: url("/eXoWCMResources/skin/images/Icons/uiIconsEcmsWhite.png");
+		}
+	}
+
+	.uiRightPopupMenuContainer > li > a  {
+		.uiIconEcmsEditDocument,
+		.uiIconEcmsDelete,
+		.uiIconEcmsMoveNode,
+		.uiIconEcmsRestoreFromTrash,
+		.uiIconEcmsViewInfo {
+			background-image: url("/eXoResources/skin/images/Icons/uiIconsLightGray.png");
+		}
+
+		.uiIconEcmsEditDocument {
+			background-position: -40px 0px;
+		}
+
+		.uiIconEcmsDelete {
+			background-position: -20px 0px;
+		}
+
+		.uiIconEcmsMoveNode {
+			background-position: -120px 0px;
+		}
+		
+		.uiIconEcmsRestoreFromTrash {
+			background-position: -160px 0px;
+		}
+
+		.uiIconEcmsViewInfo {
+			background-position: -140px -60px;
+		}
+	}
+	
+	.uiRightPopupMenuContainer > li > a:hover  {
+		.uiIconEcmsEditDocument,
+		.uiIconEcmsDelete,
+		.uiIconEcmsMoveNode,
+		.uiIconEcmsRestoreFromTrash,
+		.uiIconEcmsUpload,
+		.uiIconEcmsViewInfo {
+			background-image: url("/eXoResources/skin/images/Icons/uiIconsWhite.png");
+		}
+	}
+}
+
