@@ -1,46 +1,37 @@
 <% String fieldName; %>
-<div class="UIForm $uiform.id">
+<div class="UIForm uiAddFolder">
   <%uiform.begin()%>
-  <div class="HorizontalLayout">
-    <div class="FormContainer">
-      <table class="UIFormGrid">
-        <tr>
-          <td style="text-align: left" class="FieldLabel" colspan="3">
-            <label for="<%=uiform.FIELD_TITLE_TEXT_BOX%>" ><%=uiform.getLabel(uiform.FIELD_TITLE_TEXT_BOX) %></label>
-          </td>
-        </tr>
-        <tr>
-          <td class="FieldComponent" colspan="3"><% uiform.renderChild(uiform.FIELD_TITLE_TEXT_BOX) %></td>
-        </tr>
-       <tr>
-          <td class ="tdShowHelp" colspan="2">
+      <div class="form-horizontal resizable">
+				<label for="<%=uiform.FIELD_TITLE_TEXT_BOX%>"><%=uiform.getLabel(uiform.FIELD_TITLE_TEXT_BOX) %></label>
+				<div class="controls-full">
+					<% uiform.renderChild(uiform.FIELD_TITLE_TEXT_BOX) %>
+				</div>
+				<div class="actionLabel">
+          <label class="checkbox inline" for="<%=uiform.FIELD_CUSTOM_TYPE_CHECK_BOX%>">
           <%
            if(uiform.getChildById(uiform.FIELD_CUSTOM_TYPE_CHECK_BOX).isRendered()) {
           %>
             <span title="<%=_ctx.appRes("UIFolderForm.help.customTypeCheckBoxHelp") %>">
               <% uiform.renderChild(uiform.FIELD_CUSTOM_TYPE_CHECK_BOX) %>
-              <label for="<%=uiform.FIELD_CUSTOM_TYPE_CHECK_BOX%>" ><%=uiform.getLabel(uiform.FIELD_CUSTOM_TYPE_CHECK_BOX) %></label>
+              <%=uiform.getLabel(uiform.FIELD_CUSTOM_TYPE_CHECK_BOX) %>
             </span>
           <%}%>
-          </td>
-          <td align="right">
+          </label>
+          
           <%
            if(uiform.getChildById(uiform.FIELD_CUSTOM_TYPE_SELECT_BOX).isRendered()) {
              uiform.renderChild(uiform.FIELD_CUSTOM_TYPE_SELECT_BOX)
            }
            %>
-          </td>
-        </tr>
-      </table>
-      <div class="UIAction">
+        </div>
+      </div>
+      <div class="uiAction uiActionBorder">
         <% for(action in uiform.getActions()) {
              String actionLabel = _ctx.appRes(uiform.getName() + ".action." + action);
              String link = uiform.event(action);
         %>
-          <a href="javascript:void(0);" onclick="$link" class="ActionButton LightBlueStyle">$actionLabel</a>
+          <button href="javascript:void(0);" onclick="$link" class="btn">$actionLabel</button>
         <%}%>
       </div>
-    </div>
-  </div>
   <%uiform.end()%>
 </div>
