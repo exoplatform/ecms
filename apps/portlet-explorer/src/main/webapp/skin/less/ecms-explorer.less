@@ -808,6 +808,18 @@
 
 /******** uiClipboard **************/
 .uiClipboard {
+	margin: -10px;
+	padding-bottom: 20px;
+	
+	.table {
+		border: none;
+		border-bottom: 1px solid @tableBorder;
+		
+		td:first-child,th:first-child {
+			border-left: none;
+		}
+	}
+	
 	.text {
 		word-break: break-all;
 	}
