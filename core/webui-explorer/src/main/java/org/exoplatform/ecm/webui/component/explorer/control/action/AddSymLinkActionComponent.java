@@ -121,6 +121,16 @@ public class AddSymLinkActionComponent extends UIAbstractManagerComponent {
               
               continue;
             }
+            if (!selectedNode.isCheckedOut()) {
+              String[] args = new String[]{ Text.unescapeIllegalJcrChars(selectedNode.getName()),
+                  Text.unescapeIllegalJcrChars(currentNode.getPath()) };
+              ApplicationMessage appMsg= new ApplicationMessage("UIWorkingArea.msg.create-link-problem", args,
+                                                                ApplicationMessage.WARNING);
+              appMsg.setArgsLocalized(false);
+              uiApp.addMessage(appMsg);
+              
+              continue;
+            }
             try {
               if (selectedNode.getName().indexOf(".lnk") > -1)
                 symLinkName = selectedNode.getName();
@@ -130,9 +140,11 @@ public class AddSymLinkActionComponent extends UIAbstractManagerComponent {
             } catch (Exception e) {
               Object[] arg = { Text.unescapeIllegalJcrChars(selectedNode.getPath()),
                   Text.unescapeIllegalJcrChars(currentNode.getPath()) };
-              uiApp.addMessage(new ApplicationMessage("UIWorkingArea.msg.create-link-problem",
-                                                      arg,
-                                                      ApplicationMessage.WARNING));
+              ApplicationMessage appMsg = new ApplicationMessage("UIWorkingArea.msg.create-link-problem",
+                                     arg,
+                                     ApplicationMessage.WARNING);
+              appMsg.setArgsLocalized(false);
+              uiApp.addMessage(appMsg);
 
               return;
             }
