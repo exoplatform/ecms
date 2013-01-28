@@ -49,7 +49,7 @@ public class UIPermissionInputSet extends UIFormInputSetWithAction {
       addUIFormInput(checkBoxInput);
       checkBoxInput.setOnChange("OnChange");
     }
-    setActionInfo(FIELD_USERORGROUP, new String[] {"SelectUser", "SelectMember", "AddAny"}) ;
+    setActionInfo(FIELD_USERORGROUP, new String[] {"SelectUser", "SelectMember", "AddAny"});
   }
   
   static public class OnChangeActionListener extends EventListener<UIForm> {
