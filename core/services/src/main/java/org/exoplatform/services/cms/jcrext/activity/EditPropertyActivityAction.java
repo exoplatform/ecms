@@ -47,8 +47,11 @@ public class EditPropertyActivityAction implements Action{
     if (ConversationState.getCurrent() == null) return false;
     
     if(node.isNodeType("nt:resource")) node = node.getParent();
+    //filter node type
+    if (ActivityCommon.isAcceptedNode(node)) {
     //Notify to update activity
-    listenerService.broadcast(ActivityCommons.EDIT_ACTIVITY, node, propertyName);
+      listenerService.broadcast(ActivityCommon.EDIT_ACTIVITY, node, propertyName);
+    }
     return false;
   }
 
