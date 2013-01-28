@@ -22,7 +22,6 @@
       <tr>
   	    <th><%=_ctx.appRes("UIScriptList.header.scriptName")%></th>
   	    <th><%=_ctx.appRes("UIScriptList.header.path")%></th>
-  	    <th><%=_ctx.appRes("UIScriptList.header.baseVersion")%></th>
   	    <th class="center span2"><%=_ctx.appRes("UIScriptList.header.action")%></th>
       </tr>
     </thead>
@@ -32,8 +31,7 @@
       %>
           <tr>
             <td><div class="text"><%=node.getName()%></div></td>
-            <td><div class="text" rel="tooltip" data-placement="bottom" title="<%=node.getPath()%>"><%=pathTitle(node.getPath(), 30)%></div></td>
-            <td><div class="text"><%=node.getBaseVersion()%></div></td>
+            <td><div class="text" rel="tooltip" data-placement="bottom" title="<%=node.getName()%>"><%=node.getName();%></div></td>
 			<td class="center">
 				<a class="actionIcon" onclick="<%=uicomponent.event("Edit", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIScriptList.tooltip.Edit")%>" ><i class="uiIconEditInfo"></i></a>
 				<a class="actionIcon" onclick="<%=uicomponent.event("Delete", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIScriptList.tooltip.Delete")%>" ><i class="uiIconDelete"></i></a>

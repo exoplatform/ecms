@@ -16,6 +16,7 @@
  */
 package org.exoplatform.ecm.webui.component.admin.script;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -26,6 +27,7 @@ import javax.jcr.Node;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.scripts.ScriptService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -58,6 +60,18 @@ public class UIScriptList extends UIComponentDecorator {
 
   private UIPageIterator uiPageIterator_;
   final static public String ECMScript_EDIT = "ECMScriptPopupWindow";
+  public static final String ACTION_SCRIPT_TYPE = "action";
+  public static final String INTERCEPTOR_SCRIPT_TYPE = "interceptor";
+  public static final String WIDGET_SCRIPT_TYPE = "widget";
+  
+  private String filter = ACTION_SCRIPT_TYPE;
+  
+  public void setTemplateFilter(String filter) {
+  	this.filter = filter;
+  }  
+  public String getTemplateFilter() {
+  	return this.filter;
+  }
 
   public UIScriptList() throws Exception {
     uiPageIterator_ = createUIComponent(UIPageIterator.class, null, "ScriptListIterator");
@@ -93,9 +107,29 @@ public class UIScriptList extends UIComponentDecorator {
     return script.getPath().substring(basePath.length());
   }
 
-  public void refresh(int currentPage) throws Exception {
-    UIScriptManager sManager = getAncestorOfType(UIScriptManager.class);
-    sManager.getChild(UIECMScripts.class).refresh(currentPage);
+  public void refresh(int currentPage) throws Exception {  	
+    this.updateGrid(getcript(filter), currentPage);
+  }
+  
+  public List<ScriptData> getcript(String name) throws Exception {
+    List <ScriptData> scriptData = new ArrayList <ScriptData>() ;
+    List<Node> scripts = new ArrayList<Node> () ;
+    if(name.equals(ACTION_SCRIPT_TYPE)) {
+      scripts = getApplicationComponent(ScriptService.class).getECMActionScripts(WCMCoreUtils.getSystemSessionProvider());
+    }else if(name.equals(WIDGET_SCRIPT_TYPE)){
+      scripts = getApplicationComponent(ScriptService.class).getECMWidgetScripts(WCMCoreUtils.getUserSessionProvider());
+    }else if(name.equals(INTERCEPTOR_SCRIPT_TYPE)) {
+      scripts = 
+        getApplicationComponent(ScriptService.class).getECMInterceptorScripts(WCMCoreUtils.getSystemSessionProvider());
+    }
+    for(Node scriptNode : scripts) {
+      String version = "" ;
+      if(scriptNode.isNodeType(Utils.MIX_VERSIONABLE) && !scriptNode.isNodeType(Utils.NT_FROZEN)){
+        version = scriptNode.getBaseVersion().getName();
+      }
+      scriptData.add(new ScriptData(scriptNode.getName(), scriptNode.getPath(), version)) ;
+    }
+    return scriptData ;
   }
 
   public String[] getActions() {return new String[]{"AddNew"};}
@@ -105,11 +139,7 @@ public class UIScriptList extends UIComponentDecorator {
     ScriptService scriptService =  getApplicationComponent(ScriptService.class);
     Node script = null ;
     if(parent instanceof UIECMScripts) {
-      UIECMFilterForm filterForm = parent.findFirstComponentOfType(UIECMFilterForm.class);
-      String categoryName =
-        filterForm.getUIFormSelectBox(UIECMFilterForm.FIELD_SELECT_SCRIPT).getValue();
-      Node category = scriptService.getECMScriptHome(WCMCoreUtils.getUserSessionProvider())
-                                   .getNode(categoryName);
+      Node category = scriptService.getECMScriptHome(WCMCoreUtils.getUserSessionProvider()).getNode(filter);
       script = category.getNode(nodeName);
     } 
     return script;

@@ -43,8 +43,8 @@ public class UIScriptManagerComponent extends UIAbstractManagerComponent {
     public void processEvent(Event<UIScriptManagerComponent> event) throws Exception {
       UIECMAdminPortlet portlet = event.getSource().getAncestorOfType(UIECMAdminPortlet.class);
       UIECMAdminWorkingArea uiWorkingArea = portlet.getChild(UIECMAdminWorkingArea.class);
-      uiWorkingArea.getChild(UIScriptManager.class).refresh() ;
       uiWorkingArea.setChild(UIScriptManager.class) ;
+      uiWorkingArea.getChild(UIScriptManager.class).refresh() ;      
       event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea) ;
     }
   }

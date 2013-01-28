@@ -16,8 +16,13 @@
  */
 package org.exoplatform.ecm.webui.component.admin.script;
 
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPopupWindow;
+import org.exoplatform.webui.event.Event;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.ext.manager.UIAbstractManager;
 
 /**
@@ -27,20 +32,87 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
  * September 27, 2006
  * 09:13:15 AM
  */
-@ComponentConfig(template = "system:/groovy/webui/core/UITabPane.gtmpl")
+@ComponentConfig(template = "app:/groovy/webui/component/admin/script/UIScriptManager.gtmpl",
+events = { @EventConfig(listeners = UIScriptManager.SelectTabActionListener.class) })
 
 public class UIScriptManager extends UIAbstractManager {
+	
+	private String selectedTabId = "UIScriptContainer";
+	
+	final static public String POPUP_TEMPLATE_ID = "TemplateContainerPopup";
+  final static public String ACTION_TEMPLATE_ID = "UIActionScriptContainer";
+  final static public String INTERCEPTOR_TEMPLATE_ID = "UIInterceptorScriptContainer";
+  final static public String WIDGET_TEMPLATE_ID = "UIWidgetScriptContainer";
+  
+  final static public String ACTION_TEMPLATE_LIST_ID = "UIActionTemplateList";
+  final static public String INTERCEPTOR_TEMPLATE_LIST_ID  = "UIInterceptorTemplateList";
+  final static public String WIDGET_TEMPLATE_LIST_ID  = "UIWidgetTemplateList";
+
+  public String getSelectedTabId()
+  {
+     return selectedTabId;
+  }
+
+  public void setSelectedTab(String renderTabId)
+  {
+     selectedTabId = renderTabId;
+  }
+
+  public void setSelectedTab(int index)
+  {
+     selectedTabId = getChild(index - 1).getId();
+  }
 
   public UIScriptManager() throws Exception {
-    addChild(UIECMScripts.class, null , "uiECMScripts") ;
+  	UIScriptContainer uiActionTemp = addChild(UIScriptContainer.class, null, ACTION_TEMPLATE_ID) ;
+  	uiActionTemp.getChild(UIScriptList.class).setTemplateFilter(UIScriptList.ACTION_SCRIPT_TYPE);
+  	uiActionTemp.getChild(UIScriptList.class).setId(ACTION_TEMPLATE_LIST_ID);
+    
+    UIScriptContainer uiInterceptorTemp = addChild(UIScriptContainer.class, null, INTERCEPTOR_TEMPLATE_ID) ;
+    uiInterceptorTemp.getChild(UIScriptList.class).setTemplateFilter(UIScriptList.INTERCEPTOR_SCRIPT_TYPE);
+    uiInterceptorTemp.getChild(UIScriptList.class).setId(INTERCEPTOR_TEMPLATE_LIST_ID);
+    
+    UIScriptContainer uiWidgetTemp = addChild(UIScriptContainer.class, null, WIDGET_TEMPLATE_ID) ;
+    uiWidgetTemp.getChild(UIScriptList.class).setTemplateFilter(UIScriptList.WIDGET_SCRIPT_TYPE);
+    uiWidgetTemp.getChild(UIScriptList.class).setId(WIDGET_TEMPLATE_LIST_ID);
+    
+    UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, POPUP_TEMPLATE_ID) ;    
+    setSelectedTab(ACTION_TEMPLATE_ID);
   }
 
   public void refresh()throws Exception {
-    getChild(UIECMScripts.class).refresh(1);
-  }
-
-  public void removeECMScripForm() {
-    getChild(UIECMScripts.class).removeChild(UIPopupWindow.class) ;
-  }
+  	UIScriptContainer actionContainer = ((UIScriptContainer)getChildById(ACTION_TEMPLATE_ID));
+  	actionContainer.update();
+  	actionContainer.getChild(UIScriptList.class).refresh(1);
+  	
+  	UIScriptContainer interceptorContainer = ((UIScriptContainer)getChildById(INTERCEPTOR_TEMPLATE_ID));
+  	interceptorContainer.update();
+  	interceptorContainer.getChild(UIScriptList.class).refresh(1);
+  	
+  	UIScriptContainer widgetContainer = ((UIScriptContainer)getChildById(WIDGET_TEMPLATE_ID));
+  	widgetContainer.update();
+  	widgetContainer.getChild(UIScriptList.class).refresh(1);  	
+  }  
+  
+  static public class SelectTabActionListener extends EventListener<UIScriptManager>
+  {
+  	public void execute(Event<UIScriptManager> event) throws Exception
+    {
+       WebuiRequestContext context = event.getRequestContext();
+       String renderTab = context.getRequestParameter(UIComponent.OBJECTID);
+       if (renderTab == null)
+          return;
+       event.getSource().setSelectedTab(renderTab);
+       WebuiRequestContext parentContext = (WebuiRequestContext)context.getParentAppRequestContext();
+       if (parentContext != null)
+       {
+          parentContext.setResponseComplete(true);
+       }
+       else
+       {
+          context.setResponseComplete(true);
+       }
+    }
+  } 
 
 }

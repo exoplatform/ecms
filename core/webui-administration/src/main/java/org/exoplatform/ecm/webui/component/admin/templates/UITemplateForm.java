@@ -39,6 +39,7 @@ import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
+import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
@@ -62,13 +63,14 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    template =  "system:/groovy/webui/form/UIFormTabPane.gtmpl",
+    template =  "system:/groovy/webui/core/UITabPane_New.gtmpl",
     events = {
       @EventConfig(listeners = UITemplateForm.SaveActionListener.class),
       @EventConfig(listeners = UITemplateForm.RefreshActionListener.class, phase=Phase.DECODE),
       @EventConfig(listeners = UITemplateForm.CancelActionListener.class, phase=Phase.DECODE),
       @EventConfig(listeners = UITemplateForm.AddPermissionActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UITemplateForm.OnChangeActionListener.class, phase = Phase.DECODE)
+      @EventConfig(listeners = UITemplateForm.OnChangeActionListener.class, phase = Phase.DECODE),
+      @EventConfig(listeners = UIViewTemplate.SelectTabActionListener.class)
     }
 )
 public class UITemplateForm extends UIFormTabPane implements UISelectable {
@@ -84,6 +86,23 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
   final static public String FIELD_TAB_SKIN = "defaultSkin" ;
   final static public String FIELD_PERMISSION = "permission" ;
   final static public String POPUP_PERMISSION = "PopupViewPermission" ;
+  
+  private String selectedTabId = "";
+  
+  public String getSelectedTabId()
+  {
+     return selectedTabId;
+  }
+
+  public void setSelectedTab(String renderTabId)
+  {
+     selectedTabId = renderTabId;
+  }
+
+  public void setSelectedTab(int index)
+  {
+  	selectedTabId = ((UIComponent)getChild(index - 1)).getId();
+  }
 
   public UITemplateForm() throws Exception {
     super("UITemplateForm") ;
@@ -118,7 +137,8 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
     UIFormInputSet defaultSkinTab = new UIFormInputSet(FIELD_TAB_SKIN) ;
     defaultSkinTab.addUIFormInput(new UIFormTextAreaInput(FIELD_SKIN, FIELD_SKIN, null)) ;
     addUIFormInput(defaultSkinTab) ;
-    setActions(new String[]{"Save", "Refresh", "Cancel"}) ;
+    setActions(new String[]{"Save", "Refresh", "Cancel"}) ;    
+    setSelectedTab(FIELD_TAB_TEMPLATE);
   }
 
   public void refresh()throws Exception {
