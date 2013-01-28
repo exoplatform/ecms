@@ -16,10 +16,8 @@
  */
 package org.exoplatform.ecm.webui.component.admin.script;
 
-import org.exoplatform.ecm.webui.component.admin.templates.UITemplateList;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
-import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
@@ -53,12 +51,6 @@ public class UIScriptContainer extends UIContainer {
   
   public void update() throws Exception {
   	UIScriptList uiScriptList = getChild(UIScriptList.class);
-  	uiScriptList.refresh(uiScriptList.getUIPageIterator().getCurrentPage());
-  } 
-
-  
-  
-  
-  
-  
+  	uiScriptList.refresh(uiScriptList.getTemplateFilter(), uiScriptList.getUIPageIterator().getCurrentPage());
+  }  
 }

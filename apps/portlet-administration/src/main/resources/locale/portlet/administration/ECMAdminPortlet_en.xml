@@ -21,7 +21,7 @@
       <UINamespaceManager>Namespaces</UINamespaceManager>
       <UINodeTypeManager>Node Types</UINodeTypeManager>
       <UITemplatesManager>Documents</UITemplatesManager>
-						<UICLVTemplatesManager>List</UICLVTemplatesManager>
+			<UICLVTemplatesManager>List</UICLVTemplatesManager>
       <UIViewManager>Views</UIViewManager>
       <UIDriveManager>Drives</UIDriveManager>
       <UIQueriesManager>Queries</UIQueriesManager>
@@ -991,16 +991,19 @@
       <ECMTemplate>ECM Templates</ECMTemplate>
       <CBTemplate>BC Templates</CBTemplate>
       <UICBScripts>BC Scripts</UICBScripts>
-      <uiECMScripts>ECM Scripts</uiECMScripts>
+      <UIScriptForm>Scripts</UIScriptForm>
       <UIDialogTab>Dialog</UIDialogTab>
       <UIViewTab>View</UIViewTab>
       <UITemplateEditForm>Template</UITemplateEditForm>
       <UITemplateContainer>Documents</UITemplateContainer>
       <UIActionsTemplateContainer>Actions</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Others</UIOthersTemplateContainer>
-						<ContentTemplateContainer>Content</ContentTemplateContainer>
-						<CateTemplateContainer>Category</CateTemplateContainer>
-						<PageTemplateContainer>Paginators</PageTemplateContainer>
+			<ContentTemplateContainer>Content</ContentTemplateContainer>
+			<CateTemplateContainer>Category</CateTemplateContainer>
+			<PageTemplateContainer>Paginators</PageTemplateContainer>
+			<UIActionScriptContainer>Action</UIActionScriptContainer>
+			<UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
+			<UIInterceptorScriptContainer>Interceptors</UIInterceptorScriptContainer>
     </title>
   </UITabPane>
   <!--
@@ -1340,7 +1343,7 @@
     <action>
       <Edit>#{word.edit}</Edit>
       <Delete>#{word.delete}</Delete>
-      <AddNew>Add</AddNew>
+      <AddNew>Add Script</AddNew>
     </action>
     <msg>
       <confirm-delete>Are you sure to delete this script?</confirm-delete>
@@ -1391,19 +1394,20 @@
   #             org.exoplatform.ecm.webui.component.admin.script.CBScriptForm		 #
   ######################################################################################
   -->
-  <ECMScriptPopupWindow>
+  <ScriptContainerPopup>
     <title>
-      <ecmScriptForm>Add/Edit Script</ecmScriptForm>
+      <UIScriptForm>Add/Edit Script</UIScriptForm>
     </title>
-  </ECMScriptPopupWindow>
-  <CBScriptForm>
+  </ScriptContainerPopup>
+  <UIScriptForm>
     <label>
       <selectVersion>Versions</selectVersion>
       <scriptContent>Script Content</scriptContent>
       <scriptName>Script Name</scriptName>
       <enableVersion>is Enabled Version</enableVersion>
+      
     </label>
-  </CBScriptForm>
+  </UIScriptForm>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm	 #

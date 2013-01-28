@@ -999,6 +999,9 @@
       <UITemplateContainer>Documents</UITemplateContainer>
       <UIActionsTemplateContainer>Actions</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Others</UIOthersTemplateContainer>
+      <UIActionScriptContainer>Action</UIActionScriptContainer>
+			<UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
+			<UIInterceptorScriptContainer>Interceptors</UIInterceptorScriptContainer>
     </title>
   </UITabPane>
   <!--
@@ -1299,11 +1302,11 @@
   #             org.exoplatform.ecm.webui.component.admin.script.UIScriptForm		 #
   ######################################################################################
   -->
-  <uiECMScriptsPopup>
+  <ScriptContainerPopup>
     <title>
       <ecmScriptForm>ECM Skript Form</ecmScriptForm>
     </title>
-  </uiECMScriptsPopup>
+  </ScriptContainerPopup>
   <UICBScriptsPopup>
     <title>
       <CBScriptForm>BC Skript Form</CBScriptForm>

@@ -39,7 +39,7 @@ public class UIScriptManager extends UIAbstractManager {
 	
 	private String selectedTabId = "UIScriptContainer";
 	
-	final static public String POPUP_TEMPLATE_ID = "TemplateContainerPopup";
+	final static public String POPUP_TEMPLATE_ID = "ScriptContainerPopup";
   final static public String ACTION_TEMPLATE_ID = "UIActionScriptContainer";
   final static public String INTERCEPTOR_TEMPLATE_ID = "UIInterceptorScriptContainer";
   final static public String WIDGET_TEMPLATE_ID = "UIWidgetScriptContainer";
@@ -66,32 +66,39 @@ public class UIScriptManager extends UIAbstractManager {
   public UIScriptManager() throws Exception {
   	UIScriptContainer uiActionTemp = addChild(UIScriptContainer.class, null, ACTION_TEMPLATE_ID) ;
   	uiActionTemp.getChild(UIScriptList.class).setTemplateFilter(UIScriptList.ACTION_SCRIPT_TYPE);
-  	uiActionTemp.getChild(UIScriptList.class).setId(ACTION_TEMPLATE_LIST_ID);
     
     UIScriptContainer uiInterceptorTemp = addChild(UIScriptContainer.class, null, INTERCEPTOR_TEMPLATE_ID) ;
     uiInterceptorTemp.getChild(UIScriptList.class).setTemplateFilter(UIScriptList.INTERCEPTOR_SCRIPT_TYPE);
-    uiInterceptorTemp.getChild(UIScriptList.class).setId(INTERCEPTOR_TEMPLATE_LIST_ID);
     
     UIScriptContainer uiWidgetTemp = addChild(UIScriptContainer.class, null, WIDGET_TEMPLATE_ID) ;
     uiWidgetTemp.getChild(UIScriptList.class).setTemplateFilter(UIScriptList.WIDGET_SCRIPT_TYPE);
-    uiWidgetTemp.getChild(UIScriptList.class).setId(WIDGET_TEMPLATE_LIST_ID);
     
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, POPUP_TEMPLATE_ID) ;    
     setSelectedTab(ACTION_TEMPLATE_ID);
+  }
+  
+  public void initPopup(UIComponent uiComponent) throws Exception {
+    UIPopupWindow uiPopup = getChildById(POPUP_TEMPLATE_ID);
+    uiPopup.setRendered(true);
+    uiPopup.setShowMask(true);    
+    uiPopup.setWindowSize(600,300) ;
+    uiPopup.setUIComponent(uiComponent) ;
+    uiPopup.setShow(true) ;
+    uiPopup.setResizable(true) ;
   }
 
   public void refresh()throws Exception {
   	UIScriptContainer actionContainer = ((UIScriptContainer)getChildById(ACTION_TEMPLATE_ID));
   	actionContainer.update();
-  	actionContainer.getChild(UIScriptList.class).refresh(1);
+  	actionContainer.getChild(UIScriptList.class).refresh(UIScriptList.ACTION_SCRIPT_TYPE, 1);
   	
   	UIScriptContainer interceptorContainer = ((UIScriptContainer)getChildById(INTERCEPTOR_TEMPLATE_ID));
   	interceptorContainer.update();
-  	interceptorContainer.getChild(UIScriptList.class).refresh(1);
+  	interceptorContainer.getChild(UIScriptList.class).refresh(UIScriptList.INTERCEPTOR_SCRIPT_TYPE, 1);
   	
   	UIScriptContainer widgetContainer = ((UIScriptContainer)getChildById(WIDGET_TEMPLATE_ID));
   	widgetContainer.update();
-  	widgetContainer.getChild(UIScriptList.class).refresh(1);  	
+  	widgetContainer.getChild(UIScriptList.class).refresh(UIScriptList.WIDGET_SCRIPT_TYPE, 1);  	
   }  
   
   static public class SelectTabActionListener extends EventListener<UIScriptManager>
