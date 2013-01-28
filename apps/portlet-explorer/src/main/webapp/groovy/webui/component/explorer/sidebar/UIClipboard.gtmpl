@@ -60,7 +60,7 @@
 			  </tbody>
 			</table> <!--End UIGrid-->
 			<div class="center">
-				<button type="button" class="btn" href="<%=uicomponent.event('ClearAll', 'All')%>">
+				<button type="button" class="btn" onclick="<%=uicomponent.event('ClearAll', 'All')%>">
 					<%=_ctx.appRes(name+".action.clearall")%>
 				</button>
 			</div>
