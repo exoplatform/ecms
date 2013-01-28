@@ -105,8 +105,10 @@ public class UITaggingForm extends UIForm {
     RequestContext context = RequestContext.getCurrentInstance();
     ResourceBundle res = context.getApplicationResourceBundle();
     List<SelectItemOption<String>> tagScopes = new ArrayList<SelectItemOption<String>>();
+    /* Only Public tag enabled in PLF 4
     tagScopes.add(new SelectItemOption<String>(res.getString("UITaggingForm.label." + Utils.PRIVATE),
-                                               Utils.PRIVATE));
+                                            Utils.PRIVATE));
+    */
     tagScopes.add(new SelectItemOption<String>(res.getString("UITaggingForm.label." + Utils.PUBLIC),
                                                Utils.PUBLIC));
     /*
@@ -119,7 +121,8 @@ public class UITaggingForm extends UIForm {
     UIFormSelectBox box = new UIFormSelectBox(TAG_SCOPES, TAG_SCOPES, tagScopes);
     box.setOnChange("Change");
     uiInputSet.addUIFormInput(box);
-    box.setSelectedValues(new String[] { Utils.PRIVATE });
+    box.setSelectedValues(new String[] { Utils.PUBLIC });
+    box.setRendered(false);
 
     uiInputSet.addUIFormInput(new UIFormInputInfo(LINKED_TAGS, LINKED_TAGS, null));
     uiInputSet.setIntroduction(TAG_NAMES, "UITaggingForm.introduction.tagName");

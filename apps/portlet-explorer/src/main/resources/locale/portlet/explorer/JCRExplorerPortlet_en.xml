@@ -2048,7 +2048,7 @@
       <path-not-found>This tag has been deleted or changed. Please click on the Refresh button.</path-not-found>
     </msg>
     <introduction>
-      <tagName>(Seperate mutiple tags with the commas.)</tagName>
+      <tagName>(Separate multiple tags by commas ",")</tagName>
     </introduction>
   </UITaggingForm>
   <!--
