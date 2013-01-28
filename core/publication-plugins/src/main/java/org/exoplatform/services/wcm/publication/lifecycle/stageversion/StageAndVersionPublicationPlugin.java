@@ -49,7 +49,7 @@ import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.pom.config.POMSessionManager;
 import org.exoplatform.services.cms.CmsService;
-import org.exoplatform.services.cms.jcrext.activity.ActivityCommons;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommon;
 import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleException;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.resources.ResourceBundleService;
@@ -253,8 +253,8 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
         listenerService.broadcast(StageAndVersionPublicationConstant.POST_INIT_STATE_EVENT, cmsService, node);
       } else {
         listenerService.broadcast(StageAndVersionPublicationConstant.POST_CHANGE_STATE_EVENT, cmsService, node);
-        if (ActivityCommons.isAcceptedNode(node)) {
-          listenerService.broadcast(ActivityCommons.STATE_CHANGED_ACTIVITY, node, newState);
+        if (ActivityCommon.isAcceptedNode(node)) {
+          listenerService.broadcast(ActivityCommon.STATE_CHANGED_ACTIVITY, node, newState);
         }
       }
     }

@@ -45,7 +45,7 @@ import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
-import org.exoplatform.services.cms.jcrext.activity.ActivityCommons;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommon;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -488,8 +488,8 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
         linkManager_.createLink(categoryNode, TAXONOMY_LINK, node, linkName);
         if (listenerService!=null) {
           try {
-            if (ActivityCommons.isAcceptedNode(node)) {
-              listenerService.broadcast(ActivityCommons.CATEGORY_ADDED_ACTIVITY, node, linkName);
+            if (ActivityCommon.isAcceptedNode(node)) {
+              listenerService.broadcast(ActivityCommon.CATEGORY_ADDED_ACTIVITY, node, linkName);
             }
           } catch (Exception e) {
             if (LOG.isErrorEnabled()) {
@@ -588,8 +588,8 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       node.getSession().save();
       if (listenerService!=null) {
         try {
-          if (ActivityCommons.isAcceptedNode(node)) {
-            listenerService.broadcast(ActivityCommons.CATEGORY_REMOVED_ACTIVITY, node, taxonomyName);
+          if (ActivityCommon.isAcceptedNode(node)) {
+            listenerService.broadcast(ActivityCommon.CATEGORY_REMOVED_ACTIVITY, node, taxonomyName);
           }
         } catch (Exception e) {
           if (LOG.isErrorEnabled()) {

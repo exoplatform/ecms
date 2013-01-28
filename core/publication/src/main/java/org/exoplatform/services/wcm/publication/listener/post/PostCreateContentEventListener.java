@@ -21,7 +21,7 @@ import javax.jcr.Session;
 
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.CmsService;
-import org.exoplatform.services.cms.jcrext.activity.ActivityCommons;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommon;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.jcr.util.Text;
@@ -125,8 +125,8 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
     if (remoteUser != null) { 
       publicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser);
     //Broadcast event to activity only for this condition
-      if (ActivityCommons.isAcceptedNode(currentNode)) {
-        listenerService.broadcast(ActivityCommons.NODE_CREATED_ACTIVITY, null, currentNode);
+      if (ActivityCommon.isAcceptedNode(currentNode)) {
+        listenerService.broadcast(ActivityCommon.NODE_CREATED_ACTIVITY, null, currentNode);
       }
     }
   }

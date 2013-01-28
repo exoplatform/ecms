@@ -32,7 +32,7 @@ import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.comments.CommentsService;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
-import org.exoplatform.services.cms.jcrext.activity.ActivityCommons;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommon;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
@@ -148,8 +148,8 @@ public class CommentsServiceImpl implements CommentsService {
       systemSession.save();
       if (listenerService!=null) {
         try {
-          if (ActivityCommons.isAcceptedNode(node)) {
-            listenerService.broadcast(ActivityCommons.COMMENT_ADDED_ACTIVITY, document, "");
+          if (ActivityCommon.isAcceptedNode(node)) {
+            listenerService.broadcast(ActivityCommon.COMMENT_ADDED_ACTIVITY, document, "");
           }
         } catch (Exception e) {
           if (LOG.isErrorEnabled()) {

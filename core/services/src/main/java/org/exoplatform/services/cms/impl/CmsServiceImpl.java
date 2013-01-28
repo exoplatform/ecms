@@ -50,7 +50,7 @@ import org.exoplatform.commons.utils.ISO8601;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.JcrInputProperty;
-import org.exoplatform.services.cms.jcrext.activity.ActivityCommons;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommon;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.idgenerator.IDGeneratorService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -178,13 +178,20 @@ public class CmsServiceImpl implements CmsService {
       listenerService.broadcast(POST_CREATE_CONTENT_EVENT,this,currentNode);
     } else {
       currentNode = storeHomeNode.getNode(nodeName);
-    //Broadcast CmsService.event.preEdit event
+      if (!currentNode.canAddMixin(ActivityCommon.MIX_COMMENT)) {
+        currentNode.addMixin(ActivityCommon.MIX_COMMENT);
+      }
+      //Broadcast CmsService.event.preEdit event
       listenerService.broadcast(PRE_EDIT_CONTENT_EVENT,currentNode,mappings);
+      
       updateNodeRecursively(NODE, currentNode, nodeType, mappings);
       if (currentNode.isNodeType("exo:datetime")) {
         currentNode.setProperty("exo:dateModified", new GregorianCalendar());
       }
       listenerService.broadcast(POST_EDIT_CONTENT_EVENT, this, currentNode);
+      if (currentNode.isNodeType(ActivityCommon.MIX_COMMENT)) {
+        currentNode.removeMixin(ActivityCommon.MIX_COMMENT);
+      }
     }
     //add lastModified property to jcr:content
     session.save();
@@ -1145,8 +1152,8 @@ public class CmsServiceImpl implements CmsService {
         }
         workspace.clone(srcWorkspace, nodePath, destPath, true);
         try {
-          if (listenerService!=null && ActivityCommons.isAcceptedNode(srcNode)) {
-            listenerService.broadcast(ActivityCommons.NODE_MOVED_ACTIVITY, srcNode, destPath);
+          if (listenerService!=null && ActivityCommon.isAcceptedNode(srcNode)) {
+            listenerService.broadcast(ActivityCommon.NODE_MOVED_ACTIVITY, srcNode, destPath);
           }
         }catch (Exception e) {
           if (LOG.isErrorEnabled()) {
@@ -1182,8 +1189,8 @@ public class CmsServiceImpl implements CmsService {
         workspace.move(nodePath, destPath);
         try {
           Node movedNode =(Node) session.getItem(destPath);        
-          if (listenerService!=null && ActivityCommons.isAcceptedNode(movedNode)) {
-            listenerService.broadcast(ActivityCommons.NODE_MOVED_ACTIVITY, movedNode, destPath);
+          if (listenerService!=null && ActivityCommon.isAcceptedNode(movedNode)) {
+            listenerService.broadcast(ActivityCommon.NODE_MOVED_ACTIVITY, movedNode, destPath);
           }
         }catch (Exception e) {
           if (LOG.isErrorEnabled()) {

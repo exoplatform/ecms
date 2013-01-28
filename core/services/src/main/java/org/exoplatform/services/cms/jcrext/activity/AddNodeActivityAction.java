@@ -40,10 +40,10 @@ public class AddNodeActivityAction implements Action{
     Object item = context.get("currentItem");
     if (item instanceof Node) {
       Node node = (Node)item;
-      if (node.getPrimaryNodeType().isNodeType(ActivityCommons.NT_FILE)) {
+      if (node.getPrimaryNodeType().isNodeType(ActivityCommon.NT_FILE)) {
         Node parent = node.getParent();
-        if (ActivityCommons.isAcceptedNode(parent)) {
-          listenerService.broadcast(ActivityCommons.ATTACH_ADDED_ACTIVITY, parent, node);
+        if (ActivityCommon.isAcceptedNode(parent)) {
+          listenerService.broadcast(ActivityCommon.ATTACH_ADDED_ACTIVITY, parent, node);
         }
       }
     }

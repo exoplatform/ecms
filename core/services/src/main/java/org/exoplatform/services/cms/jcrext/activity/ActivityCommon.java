@@ -27,7 +27,7 @@ import javax.jcr.RepositoryException;
  * List of node-type with allow the activity raise on.
  * 15 Jan 2013  
  */
-public class ActivityCommons {
+public class ActivityCommon {
   public static String acceptedNodeTypes = "{exo:accessibleMedia}{exo:article}{exo:contact_us}{exo:event}{exo:htmlFile}" +
                                            "{rma:filePlan}{exo:webContent}{kfx:document}{exo:pictureOnHeadWebcontent}" +
                                            "{exo:podcast}{exo:sample}{exo:link}";
@@ -52,7 +52,12 @@ public class ActivityCommons {
   public static String STATE_CHANGED_ACTIVITY     = "ActivityNotify.event.StateChanged";
   
   
-  public static String VALUE_SEPERATOR            = ",";
+  public static String VALUE_SEPERATOR            = "{S_E_P_R}";
+  
+  public static String MIX_COMMENT                = "exo:activityComment";
+  public static String MIX_COMMENT_CREATOR        = "exo:activityCreator";
+  public static String MIX_COMMENT_ACTIVITY_ID    = "exo:activityCommentID";
+  
   public static boolean isAcceptedNode(Node node) {
     try {
       return node==null?false:acceptedNodeTypes.indexOf(node.getPrimaryNodeType().getName())>0;

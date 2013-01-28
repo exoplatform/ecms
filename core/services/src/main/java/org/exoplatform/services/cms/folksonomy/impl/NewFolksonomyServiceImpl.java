@@ -41,7 +41,7 @@ import nl.captcha.gimpy.FishEyeGimpyRenderer;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
-import org.exoplatform.services.cms.jcrext.activity.ActivityCommons;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommon;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -203,7 +203,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
            firstTagFlag = false;
            tagValue.append(tag);
          }else {
-           tagValue.append(ActivityCommons.VALUE_SEPERATOR).append(tag);
+           tagValue.append(ActivityCommon.VALUE_SEPERATOR).append(tag);
          }
       } catch (Exception e) {
         if (LOG.isErrorEnabled()) {
@@ -212,11 +212,11 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
         }
       }
     }
-    if (ActivityCommons.isAcceptedNode(targetNode)) {
+    if (ActivityCommon.isAcceptedNode(targetNode)) {
       if (listenerService!=null) {
         try {
-          if (ActivityCommons.isAcceptedNode(documentNode)) {
-            listenerService.broadcast(ActivityCommons.TAG_ADDED_ACTIVITY, documentNode, tagValue.toString());
+          if (ActivityCommon.isAcceptedNode(documentNode)) {
+            listenerService.broadcast(ActivityCommon.TAG_ADDED_ACTIVITY, documentNode, tagValue.toString());
           }
         } catch (Exception e) {
           if (LOG.isErrorEnabled()) {
@@ -474,7 +474,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
             removedTags.append(tagName);
             isFirstFlag = false;
           }else {
-            removedTags.append(ActivityCommons.VALUE_SEPERATOR).append(tagName);
+            removedTags.append(ActivityCommon.VALUE_SEPERATOR).append(tagName);
           }
           link.remove();
           
@@ -490,8 +490,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     }
     if (listenerService!=null) {
       try {
-        if (ActivityCommons.isAcceptedNode(document)) {
-          listenerService.broadcast(ActivityCommons.TAG_REMOVED_ACTIVITY, document, removedTags.toString());
+        if (ActivityCommon.isAcceptedNode(document)) {
+          listenerService.broadcast(ActivityCommon.TAG_REMOVED_ACTIVITY, document, removedTags.toString());
         }
       } catch (Exception e) {
         if (LOG.isErrorEnabled()) {
