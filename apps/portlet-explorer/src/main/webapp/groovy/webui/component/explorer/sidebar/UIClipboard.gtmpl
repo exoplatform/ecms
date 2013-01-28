@@ -17,7 +17,7 @@
 %> 
 	<h5 class="title">Clipboard</h5>
   <div class="uiContentBox">
-		<div class="UIClipboard" id="$uicomponent.id">
+		<div class="uiClipboard" id="$uicomponent.id">
 			<table class="uiGrid table table-hover table-striped">
 			  <thead>
 			    <tr>
@@ -26,58 +26,44 @@
 				          <th><%=_ctx.appRes(name+".header."+field)%></th>
 				      <%}
 				        if(beanActions != null) { %>
-				          <th><%=_ctx.appRes(name+".header.action")%></th>
+				          <th class="center"><%=_ctx.appRes(name+".header.action")%></th>
 				      <%}
 			        }%>
 			    </tr>
 			  </thead>
 			  <tbody>
 			  <%if (uicomponent.getClipboardData().isEmpty()) { %>
-			    <tr class="OddRow">
-			      <td class="text" colspan="3">
-			      	<div class="ActionContainer">
-				        <%=_ctx.appRes(name+".label.nocommand")%>
-				      </div>
+			    <tr>
+			      <td colspan="3">
+							<%=_ctx.appRes(name+".label.nocommand")%>
 			      </td>
 			    </tr>  
 		    <%} else {
-				    def rowClass = null ;
-				    boolean even = true ;
 				    String path, fullPath ;
 				    int index = 1 ;
 				    for(item in uicomponent.getClipboardData()) {
-				      if(even) rowClass = "EvenRow";  
-				      else rowClass =  "OddRow"; 
-				      even = !even ;
 				      path = fullPath = (item.getWorkspace()+ ":" + item.getSrcPath());
 				      if (path.length() > 20 ) path = "..." + path.substring(path.length() - 20, path.length());
 				%>
-				    <tr class="$rowClass">
+				    <tr>
 				      <td class="text" rel="tooltip" data-placement="bottom" title="<%=fullPath%>"><%=path%></td>
-				    	<td class="text"><%=item.getType()%></td>
-				      <td>         
-				        <div class="ActionContainer">
+				      <td class="actionContainer center">
 				          <%for(action in beanActions) { %>
-		                <img onclick="<%=uicomponent.event(action, index.toString())%>" rel="tooltip" data-placement="bottom" title = "$action" alt="$action" src="/eXoResources/skin/sharedImages/Blank.gif" class="${action}Icon" />
+		                <a class="actionIcon"><i onclick="<%=uicomponent.event(action, index.toString())%>" rel="tooltip" data-placement="bottom" class="uiIconEcms${action} uiIconEcmsLightGrey"></i></a>
 				          <%}%>        
-				        </div>
-				      </td>
+							</td>
 				    </tr>
 				    <%index++ ;
 				    }%>
-				  <tr class="EvenRow">
-			      <td class="text" colspan="3">
-			        <div class="ClearAllBlock ClearFix" style="text-align: center">
-								<a  class="Icon ScissorsEraserWarning16x16Icon" href="<%=uicomponent.event('ClearAll', 'All')%>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								  <%=_ctx.appRes(name+".action.clearall")%>
-								</a>
-							 
-							</div>
-			      </td>
-			    </tr>  
+						
 			  <%}%>
 			  </tbody>
-			</table> <!--End UIGrid-->  
+			</table> <!--End UIGrid-->
+			<div class="center">
+				<button type="button" class="btn" href="<%=uicomponent.event('ClearAll', 'All')%>">
+					<%=_ctx.appRes(name+".action.clearall")%>
+				</button>
+			</div>
 		</div>
   </div>
 

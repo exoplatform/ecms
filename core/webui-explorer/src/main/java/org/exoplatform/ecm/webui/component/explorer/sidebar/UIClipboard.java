@@ -48,7 +48,7 @@ import org.exoplatform.webui.event.EventListener;
   )
 
 public class UIClipboard extends UIComponent {
-  final static public String[] CLIPBOARD_BEAN_FIELD = {"path", "command"} ;
+  final static public String[] CLIPBOARD_BEAN_FIELD = {"path"} ;
   final static public String[]  CLIPBOARD_ACTIONS = {"Paste", "Delete"} ;
 
   private LinkedList<ClipboardCommand> clipboard_ ;
