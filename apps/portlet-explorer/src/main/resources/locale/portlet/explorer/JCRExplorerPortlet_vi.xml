@@ -2054,7 +2054,7 @@
       <path-not-found>Có thể thẻ đã bị xóa hoặc bị thay đổi. Vui lòng nhấp nút Refresh.</path-not-found>
     </msg>
     <introduction>
-      <tagName>(Sử dụng dấu "," để thêm nhiều thẻ)</tagName>
+      <tagName>Sử dụng dấu "," để thêm nhiều thẻ</tagName>
     </introduction>
   </UITaggingForm>
   <!--

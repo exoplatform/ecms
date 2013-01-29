@@ -2048,7 +2048,7 @@
       <path-not-found>Ce tag a été supprimé ou modifié. Veuillez cliquer sur le bouton Rafraîchir.</path-not-found>
     </msg>
     <introduction>
-      <tagName>(Utilisez le séparateur "," pour ajouter plusieurs tags)</tagName>
+      <tagName>Utilisez le séparateur "," pour ajouter plusieurs tags</tagName>
     </introduction>
   </UITaggingForm>
   <!--

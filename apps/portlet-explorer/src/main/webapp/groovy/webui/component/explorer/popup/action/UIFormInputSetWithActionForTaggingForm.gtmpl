@@ -10,6 +10,8 @@
 <%
 	import org.exoplatform.webui.form.UIFormRadioBoxInput;
 	import org.exoplatform.ecm.webui.component.explorer.popup.actions.UITaggingForm;
+	import org.exoplatform.webui.form.UIFormStringInput;
+
 
 	def context = _ctx.getRequestContext();
 	context.getJavascriptManager().require("SHARED/autoComplete", "autoComplete").
@@ -59,7 +61,12 @@
                   uicomponent.renderUIComponent(inputEntry) ; 
                 println "</div>" ;
               } else {
-                uicomponent.renderUIComponent(inputEntry) ; 
+                uicomponent.renderUIComponent(inputEntry) ;
+                if(inputEntry instanceof UIFormStringInput) {
+                  %>
+                    <button type="button" class="btn" onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>','AddTag', true);"><%=_ctx.appRes(formName + ".action.AddTag")%></button>
+                  <%
+                }
               }
               String infor = uicomponent.getInfoField(inputEntry.getName()) ;
               def listInfor = uicomponent.getListInfoField(inputEntry.getName()) ;
@@ -150,6 +157,7 @@
              <%
                 }
               }
+              
               if(uicomponent.getMsgKey(inputEntry.getName()) != null) { %>
                       <span class="Introduction"><%=_ctx.appRes(uicomponent.getMsgKey(inputEntry.getName()))%></span>                
               <%}%>
