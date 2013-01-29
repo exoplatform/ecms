@@ -99,6 +99,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     this.nodeHierarchyCreator = nodeHierarchyCreator;
     this.linkManager = linkManager;
     this.initParams_ = initParams;
+    listenerService = WCMCoreUtils.getService(ListenerService.class);
     this.activityService = WCMCoreUtils.getService(ActivityCommonService.class);
   }
 
@@ -210,9 +211,6 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     Node publicFolksonomyTreeNode = getNode(workspace, treePath);
     Node targetNode = getTargetNode(documentNode);
     boolean firstTagFlag = true;
-    if (listenerService ==null) {
-      listenerService = WCMCoreUtils.getService(ListenerService.class);
-    }
     StringBuffer tagValue = new StringBuffer();
     
     for (String tag : tagsName) {
