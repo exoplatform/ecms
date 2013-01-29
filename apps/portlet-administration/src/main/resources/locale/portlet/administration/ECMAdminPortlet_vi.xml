@@ -999,6 +999,7 @@
       <UIDialogTab>Hộp thoại</UIDialogTab>
       <UIViewTab>Khung nhìn</UIViewTab>
       <UITemplateEditForm>Mẫu</UITemplateEditForm>
+      <UITemplateForm>Mẫu</UITemplateForm>
       <UITemplateContainer>Documents</UITemplateContainer>
       <UIActionsTemplateContainer>Actions</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Others</UIOthersTemplateContainer>

@@ -36,8 +36,8 @@ import org.exoplatform.webui.event.EventListener;
  */
 @ComponentConfigs( {
 	@ComponentConfig(lifecycle = UIContainerLifecycle.class),			
-	@ComponentConfig(type = UIPopupWindow.class, id="UITemplateContainer", template = "system:/groovy/webui/core/UIPopupWindow.gtmpl", 
-			events = @EventConfig(listeners = UITemplateContainer.CloseActionListener.class))})
+	@ComponentConfig(type = UIPopupWindow.class, id="UITemplateContainer", template = "system:/groovy/webui/core/UIPopupWindow.gtmpl"
+)})
 
 public class UITemplateContainer extends UIContainer {
 
@@ -82,15 +82,5 @@ public class UITemplateContainer extends UIContainer {
     uiPopup.setRendered(true);
     uiPopup.setShow(true);
     uiPopup.setResizable(true);
-  }
-  
-  public static class CloseActionListener extends EventListener<UIPopupWindow> {
-    public void execute(Event<UIPopupWindow> event) throws Exception {
-    	UITemplatesManager uiManager = event.getSource().getAncestorOfType(UITemplatesManager.class) ;
-      UITemplateContainer uiTemplateContainer = uiManager.getChildById(uiManager.getSelectedTabId());
-      UIPopupWindow uiPopupWindow = uiTemplateContainer.getChild(UIPopupWindow.class) ;
-      uiPopupWindow.setRendered(false) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
-    }
-  }
+  }  
 }

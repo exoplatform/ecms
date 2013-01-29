@@ -1002,6 +1002,7 @@
       <UIDialogTab>Edition</UIDialogTab>
       <UIViewTab>Visualisation</UIViewTab>
       <UITemplateEditForm>Formulaire</UITemplateEditForm>
+      <UITemplateForm>Formulaire</UITemplateForm>
       <UITemplateContainer>Documents</UITemplateContainer>
       <UIActionsTemplateContainer>Actions</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Others</UIOthersTemplateContainer>

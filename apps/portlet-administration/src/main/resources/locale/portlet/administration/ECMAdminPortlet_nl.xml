@@ -1000,6 +1000,7 @@
       <UIDialogTab>Dialog</UIDialogTab>
       <UIViewTab>Zicht</UIViewTab>
       <UITemplateEditForm>Sjablonen</UITemplateEditForm>
+      <UITemplateForm>Sjablonen</UITemplateForm>
       <UITemplateContainer>Documents</UITemplateContainer>
       <UIActionsTemplateContainer>Actions</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Others</UIOthersTemplateContainer>

@@ -62,7 +62,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    template =  "system:/groovy/webui/core/UITabPane_New.gtmpl",
+    template =  "app:/groovy/webui/component/admin/template/UITemplateForm.gtmpl",
     events = {
       @EventConfig(listeners = UITemplateForm.SaveActionListener.class),
       @EventConfig(listeners = UITemplateForm.RefreshActionListener.class, phase=Phase.DECODE),
@@ -79,10 +79,10 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
   final static public String FIELD_DIALOG = "dialog" ;
   final static public String FIELD_VIEW = "view" ;
   final static public String FIELD_SKIN = "skin";
-  final static public String FIELD_TAB_TEMPLATE = "template" ;
-  final static public String FIELD_TAB_DIALOG = "defaultDialog" ;
-  final static public String FIELD_TAB_VIEW = "defaultView" ;
-  final static public String FIELD_TAB_SKIN = "defaultSkin" ;
+  final static public String FIELD_TAB_TEMPLATE = "UITemplateForm" ;
+  final static public String FIELD_TAB_DIALOG = "UIDialogTab" ;
+  final static public String FIELD_TAB_VIEW = "UIViewTab" ;
+  final static public String FIELD_TAB_SKIN = "UISkinTab" ;
   final static public String FIELD_PERMISSION = "permission" ;
   final static public String POPUP_PERMISSION = "PopupViewPermission" ;
   
@@ -253,7 +253,7 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
       uiManager.refresh() ;
       uiForm.refresh() ;
       UIPopupWindow uiPopupWindow = uiManager.getChildById(UITemplatesManager.POPUP_TEMPLATE_ID) ;
-      uiPopupWindow.setRendered(false) ;
+      uiPopupWindow.setShow(false) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
@@ -262,7 +262,7 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
     public void execute(Event<UITemplateForm> event) throws Exception {      
       UITemplatesManager uiManager = event.getSource().getAncestorOfType(UITemplatesManager.class) ;
       UIPopupWindow uiPopupWindow = uiManager.getChildById(UITemplatesManager.POPUP_TEMPLATE_ID) ;
-      uiPopupWindow.setRendered(false) ;
+      uiPopupWindow.setShow(false) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
@@ -292,6 +292,7 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
       UITemplatesManager uiManager = uiTemplateForm.getAncestorOfType(UITemplatesManager.class) ;
       String membership = uiTemplateForm.getUIStringInput(FIELD_PERMISSION).getValue() ;
       uiManager.initPopupPermission("AddNew", membership) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
       UIPopupWindow uiPopup = uiManager.getChildById(UITemplateContent.TEMPLATE_PERMISSION);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup) ;
     }

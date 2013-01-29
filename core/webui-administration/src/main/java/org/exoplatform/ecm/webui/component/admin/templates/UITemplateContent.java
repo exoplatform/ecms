@@ -362,6 +362,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
       UIViewTemplate uiViewTemp = uiTempContent.getAncestorOfType(UIViewTemplate.class) ; 
       String membership = uiTempContent.getUIStringInput(FIELD_VIEWPERMISSION).getValue() ;
       uiManager.initPopupPermission(uiTempContent.getId(), membership) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
       if(uiTempContent.getId().equals(UIDialogTab.DIALOG_FORM_NAME)) {
         uiViewTemp.setSelectedTab(UIDialogTab.class.getSimpleName()) ;
       } else if(uiTempContent.getId().equals(UIViewTab.VIEW_FORM_NAME)) {
@@ -406,7 +407,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
       uiManager.removeChildById(UISkinTab.SKIN_FORM_NAME + TEMPLATE_PERMISSION) ;
       uiTemplateContent.reset() ;
       UIPopupWindow uiPopupWindow = uiManager.getChildById(UITemplatesManager.POPUP_TEMPLATE_ID) ;
-      uiPopupWindow.setRendered(false) ;
+      uiPopupWindow.setShow(false) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }

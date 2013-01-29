@@ -17,6 +17,7 @@
 package org.exoplatform.ecm.webui.component.admin.templates;
 
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
+import org.exoplatform.ecm.webui.core.UIECMPageIterator;
 import org.exoplatform.ecm.webui.selector.UIPermissionSelector;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -40,14 +41,14 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
 events = { @EventConfig(listeners = UITemplatesManager.SelectTabActionListener.class) })
 
 public class UITemplatesManager extends UIAbstractManager {
-  final static public String EDIT_TEMPLATE = "EditTemplatePopup" ;
-  final static public String NEW_TEMPLATE = "TemplatePopup" ;
   final static public String POPUP_TEMPLATE_ID = "TemplateContainerPopup";
   final static public String ACTIONS_TEMPLATE_ID = "UIActionsTemplateContainer";
   final static public String OTHERS_TEMPLATE_ID = "UIOthersTemplateContainer";
   
   final static public String ACTIONS_TEMPLATE_LIST_ID = "UIActionsTemplateList";
   final static public String OTHERS_TEMPLATE_LIST_ID  = "UIOthersTemplateList";
+  final static public String ACTIONS_ITERATOR_ID = "ActionsNodeTypeListIterator";
+  final static public String OTHERS_ITERATOR_ID = "OthersNodeTypeListIterator";
   
   
   private String selectedTabId = "UITemplateContainer";
@@ -73,11 +74,9 @@ public class UITemplatesManager extends UIAbstractManager {
     
     UITemplateContainer uiActionsTemp = addChild(UITemplateContainer.class, null, ACTIONS_TEMPLATE_ID) ;
     uiActionsTemp.getChild(UITemplateList.class).setTemplateFilter(UITemplateList.ACTIONS_TEMPLATE_TYPE);
-    uiActionsTemp.getChild(UITemplateList.class).setId(ACTIONS_TEMPLATE_LIST_ID);
     
     UITemplateContainer uiOthersTemp = addChild(UITemplateContainer.class, null, OTHERS_TEMPLATE_ID) ;
     uiOthersTemp.getChild(UITemplateList.class).setTemplateFilter(UITemplateList.OTHERS_TEMPLATE_TYPE);
-    uiOthersTemp.getChild(UITemplateList.class).setId(OTHERS_TEMPLATE_LIST_ID);
     
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, POPUP_TEMPLATE_ID) ;    
     UIPopupWindow uiPopupPermission = addChild(UIPopupWindow.class, null, UITemplateContent.TEMPLATE_PERMISSION) ;
@@ -132,10 +131,12 @@ public class UITemplatesManager extends UIAbstractManager {
     UITemplateContainer templateActionsContainer = ((UITemplateContainer)getChildById(ACTIONS_TEMPLATE_ID));
     templateActionsContainer.update();
     templateActionsContainer.getChild(UITemplateList.class).refresh(1);
+    templateContainer.getChild(UITemplateList.class).getUIPageIterator().setId(ACTIONS_ITERATOR_ID);
     
     UITemplateContainer templateOthersContainer = ((UITemplateContainer)getChildById(OTHERS_TEMPLATE_ID));
     templateOthersContainer.update();
-    templateOthersContainer.getChild(UITemplateList.class).refresh(1);   
+    templateOthersContainer.getChild(UITemplateList.class).refresh(1);
+    templateOthersContainer.getChild(UITemplateList.class).getUIPageIterator().setId(OTHERS_ITERATOR_ID);
     
   }
   

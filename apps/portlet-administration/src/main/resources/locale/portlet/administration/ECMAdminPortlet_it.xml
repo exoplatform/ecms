@@ -997,6 +997,7 @@
       <UIDialogTab>Dialogo</UIDialogTab>
       <UIViewTab>Vista</UIViewTab>
       <UITemplateEditForm>Template</UITemplateEditForm>
+      <UITemplateForm>Template</UITemplateForm>
       <UITemplateContainer>Documents</UITemplateContainer>
       <UIActionsTemplateContainer>Actions</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Others</UIOthersTemplateContainer>

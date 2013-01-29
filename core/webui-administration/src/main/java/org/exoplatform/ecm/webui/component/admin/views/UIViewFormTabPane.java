@@ -60,8 +60,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
       @EventConfig(listeners = UIViewForm.AddPermissionActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIViewForm.RemovePermissionActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIViewForm.ChangeVersionActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UITabForm.AddTabActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UITemplateContainer.CloseActionListener.class)
+      @EventConfig(listeners = UITabForm.AddTabActionListener.class, phase = Phase.DECODE)
     }
 )
 public class UIViewFormTabPane extends UIContainer {

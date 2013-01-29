@@ -102,7 +102,7 @@ public class UITemplateEditForm extends UIForm {
     public void execute(Event<UITemplateEditForm> event) throws Exception {    	     
       UITemplatesManager uiManager = event.getSource().getAncestorOfType(UITemplatesManager.class) ;
       UIPopupWindow uiPopupWindow = uiManager.getChildById(UITemplatesManager.POPUP_TEMPLATE_ID) ;
-      uiPopupWindow.setRendered(false) ;
+      uiPopupWindow.setShow(false) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
