@@ -2,40 +2,24 @@
 	import org.exoplatform.webui.form.UIFormInputBase;
 	
 	String fieldName; %>
-<div class="UIFormWithTitle $uicomponent.id" onkeypress="javascript:SubmitAction.call(this, event);">
+<div class="uiPermissionForm" onkeypress="javascript:SubmitAction.call(this, event);">
 	<% uiform.begin() %>
-	<div class="HorizontalLayout">
-		<div class="FormContainer">
-			<table class="UIFormGrid">
-				<tr>
-					<td colspan="4" >
-						<%=_ctx.appRes(uicomponent.getName() + ".title"); %>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="3">
-						<% uiform.renderField(uiform.PERMISSION) %>
-					</td>
-					<td style=" vertical-align: top; ">
-						<div class="UIAction"> 
-							<a href="javascript:void(0);" onclick="<%=uicomponent.event("Save") %>" class="ActionButton LightBlueStyle"><%=_ctx.appRes(uicomponent.getName() + ".action.Save")%></a>
-							<a href="javascript:void(0);" onclick="<%=uicomponent.event("Reset") %>" class="ActionButton LightBlueStyle"><%=_ctx.appRes(uicomponent.getName() + ".action.Reset")%></a>
-						</div>
-					</td>
-				</tr>
-			</table>
+			<div>
+				<h5><%=_ctx.appRes(uicomponent.getName() + ".title"); %></h5>
+		
+				<% uiform.renderField(uiform.PERMISSION) %>
+			</div>
 			<%//Rerender this	component with the new structure%>
 			<%// start render action%>
-			<div class="UIAction"> 
+			<div class="uiAction uiActionBorder"> 
 				<%
 				 String closeActionLabel = _ctx.appRes(uicomponent.getName() + ".action.Close");
 				 String actionLink = uicomponent.event("Close");
 				%>
-				<a href="javascript:void(0);" onclick="$actionLink" class="ActionButton LightBlueStyle">$closeActionLabel</a>
+				<button href="javascript:void(0);" onclick="$actionLink" class="btn">$closeActionLabel</button>
 			</div>
 			<%// end render action%>
-		</div>
-	</div>
+
 	<%uiform.end()%>
 </div>
 <script language="javascript">

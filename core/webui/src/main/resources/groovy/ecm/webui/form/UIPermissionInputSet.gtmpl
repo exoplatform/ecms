@@ -8,42 +8,37 @@ def actionValues = uicomponent.getActionValues();
 def uiForm = uicomponent.getAncestorOfType(UIForm.class);
 %>
 <div class="$uicomponent.id">
-  <div class="form-horizontal resizable">
-    <div class="control-group">
-      <div class="controls">
-        <%
-        uicomponent.renderChild(uicomponent.FIELD_USERORGROUP);
-        def actionField = uicomponent.getActionInfo(uicomponent.FIELD_USERORGROUP);
-        if(actionField != null && actionField.length > 0) {
-          for(i in 0..actionField.length -1) {
-          %>
-            <i onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>', '<%=actionField[i]%>', true)" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".title." + actionField[i])%>" class="uiIcon<%=actionField[i]%> uiIconLightGray" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%=_ctx.appRes(uicomponent.getId() + ".title." + actionField[i])%>"></i>
-          <%
-          }
-        }
-        %>
-        <div class="UIAction"> 
-          <a href="javascript:void(0);" onclick="<%=uiForm.event("Save") %>" class="ActionButton LightBlueStyle"><%=_ctx.appRes(uiForm.getName() + ".action.Save")%></a>
-          <a href="javascript:void(0);" onclick="<%=uiForm.event("Reset") %>" class="ActionButton LightBlueStyle"><%=_ctx.appRes(uiForm.getName() + ".action.Reset")%></a>
-        </div>
-      </div>
-    </div>
-    <div class="control-group">
+		<div class="controls">
+			<%
+			uicomponent.renderChild(uicomponent.FIELD_USERORGROUP);
+			def actionField = uicomponent.getActionInfo(uicomponent.FIELD_USERORGROUP);
+			if(actionField != null && actionField.length > 0) {
+				for(i in 0..actionField.length -1) {
+				%>
+					<i onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>', '<%=actionField[i]%>', true)" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".title." + actionField[i])%>" class="uiIcon<%=actionField[i]%> uiIconLightGray"></i>
+				<%
+				}
+			}
+			%>
+			<button type="button" onclick="<%=uiForm.event("Save") %>" class="btn btn-primary"><%=_ctx.appRes(uiForm.getName() + ".action.Save")%></button>
+			<button type="button" onclick="<%=uiForm.event("Reset") %>" class="btn"><%=_ctx.appRes(uiForm.getName() + ".action.Reset")%></button>
+		</div>
+    <div class="form-inline">
       <%
       for(inputEntry in uicomponent.getChildren()) {
         String label = _ctx.appRes(formName + ".label." + inputEntry.getId());
         if(inputEntry instanceof UICheckBoxInput) {
           %>
-          <div>
-           <label for="<%=inputEntry.getId()%>" class="control-label"><%=label%></label>
+          
+          <label for="<%=inputEntry.getId()%>" class="checkbox"><%=label%>
             <%
             uicomponent.renderChild(inputEntry);
             %>
-          </div>
+					</label>
+          
           <%
         }
       }
       %>
     </div>
-  </div>
 </div>
