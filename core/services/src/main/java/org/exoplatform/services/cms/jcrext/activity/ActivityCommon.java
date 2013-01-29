@@ -52,7 +52,7 @@ public class ActivityCommon {
   public static String STATE_CHANGED_ACTIVITY     = "ActivityNotify.event.StateChanged";
   
   
-  public static String VALUE_SEPERATOR            = "{S_E_P_R}";
+  public static String VALUE_SEPERATOR            = "_S_E_P_R_";
   
   public static String MIX_COMMENT                = "exo:activityComment";
   public static String MIX_COMMENT_CREATOR        = "exo:activityCreator";

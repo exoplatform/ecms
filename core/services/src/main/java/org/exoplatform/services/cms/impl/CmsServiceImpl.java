@@ -178,7 +178,7 @@ public class CmsServiceImpl implements CmsService {
       listenerService.broadcast(POST_CREATE_CONTENT_EVENT,this,currentNode);
     } else {
       currentNode = storeHomeNode.getNode(nodeName);
-      if (!currentNode.canAddMixin(ActivityCommon.MIX_COMMENT)) {
+      if (currentNode.canAddMixin(ActivityCommon.MIX_COMMENT)) {
         currentNode.addMixin(ActivityCommon.MIX_COMMENT);
       }
       //Broadcast CmsService.event.preEdit event
