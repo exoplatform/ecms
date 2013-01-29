@@ -2549,4 +2549,147 @@
       <add_node>Sửa</add_node>
     </label>
   </UIPermissionForm>  
+ <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.clv package		 #
+  ######################################################################################
+  -->
+		
+		<UITabPane>
+			 <title>
+			 		<ContentTemplateContainer>Content</ContentTemplateContainer>
+						<CateTemplateContainer>Navigation</CateTemplateContainer>
+						<PageTemplateContainer>Paginator</PageTemplateContainer>
+			 </title>
+		</UITabPane>
+		
+  <UICLVTemplateList>
+    <header>
+      <title>Name</title>
+      <action>Action</action>
+      <template>Template</template>
+    </header>
+    <action>
+      <AddTemplate>Add Template</AddTemplate>
+						<Edit>Edit</Edit>
+						<Delete>Delete</Delete>
+    </action>
+    <msg>
+      <confirm-delete>Are you sure you want to delete this template?</confirm-delete>
+      <access-denied>Access denied! You haven't got permission to use this function.</access-denied>
+      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
+      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+    </msg>
+  </UICLVTemplateList>
+		
+		<CateTemplateList>
+    <header>
+      <title>Name</title>
+      <action>Action</action>
+      <template>Template</template>
+    </header>
+    <action>
+      <AddTemplate>Add Template</AddTemplate>
+						<Edit>Edit</Edit>
+						<Delete>Delete</Delete>
+    </action>
+		</CateTemplateList>
+		
+		<PageTemplateList>
+	    <header>
+      <title>Name</title>
+      <action>Action</action>
+      <template>Template</template>
+    </header>
+    <action>
+      <AddTemplate>Add Template</AddTemplate>
+						<Edit>Edit</Edit>
+						<Delete>Delete</Delete>
+    </action>		
+		</PageTemplateList>
+		
+		<EditCLVTemplatePopup_ContentTemplateContainer>
+			 <title>
+			 	  <UICLVTemplateForm_ContentTemplateContainer>Edit List Template</UICLVTemplateForm_ContentTemplateContainer>			 	  	
+			 </title>
+		</EditCLVTemplatePopup_ContentTemplateContainer>
+		
+		<EditCLVTemplatePopup_CateTemplateContainer>
+			 <title>
+			 	  <UICLVTemplateForm_CateTemplateContainer>Edit List Template</UICLVTemplateForm_CateTemplateContainer>			 	  	
+			 </title>
+		</EditCLVTemplatePopup_CateTemplateContainer>
+		
+		<EditCLVTemplatePopup_PageTemplateContainer>
+			 <title>
+			 	  <UICLVTemplateForm_PageTemplateContainer>Edit List Template</UICLVTemplateForm_PageTemplateContainer>			 	  	
+			 </title>
+		</EditCLVTemplatePopup_PageTemplateContainer>
+		
+	<CLVTemplatePopup_ContentTemplateContainer>
+			 <title>
+			 	  <UICLVTemplateForm_ContentTemplateContainer>Add List Template</UICLVTemplateForm_ContentTemplateContainer>			 	  	
+			 </title>
+		</CLVTemplatePopup_ContentTemplateContainer>
+		
+		<CLVTemplatePopup_CateTemplateContainer>
+			 <title>
+			 	  <UICLVTemplateForm_CateTemplateContainer>Add List Template</UICLVTemplateForm_CateTemplateContainer>			 	  	
+			 </title>
+		</CLVTemplatePopup_CateTemplateContainer>
+		
+		<CLVTemplatePopup_PageTemplateContainer>
+			 <title>
+			 	  <UICLVTemplateForm_PageTemplateContainer>Add List Template</UICLVTemplateForm_PageTemplateContainer>			 	  	
+			 </title>
+		</CLVTemplatePopup_PageTemplateContainer>
+		
+		<UICLVTemplateForm_ContentTemplateContainer>
+			 <action>
+			 	 <Save>#{word.save}</Save>
+						<Reset>Reset</Reset>
+						<Cancel>#{word.cancel}</Cancel>
+			 </action>
+				<label>
+					 <title>Name</title>
+						<template>Template Name</template>
+						<content>Content</content>
+						<type>Template Type</type>
+				</label>
+		</UICLVTemplateForm_ContentTemplateContainer>	
+		
+			<UICLVTemplateForm_PageTemplateContainer>
+			 <action>
+			 	 <Save>#{word.save}</Save>
+						<Reset>Reset</Reset>
+						<Cancel>#{word.cancel}</Cancel>
+			 </action>
+				<label>
+					 <title>Name</title>
+						<template>Template Name</template>
+						<content>Content</content>
+						<type>Template Type</type>
+				</label>
+		</UICLVTemplateForm_PageTemplateContainer>
+		
+			<UICLVTemplateForm_CateTemplateContainer>
+			 <action>
+			 	 <Save>#{word.save}</Save>
+						<Reset>Reset</Reset>
+						<Cancel>#{word.cancel}</Cancel>
+			 </action>
+				<label>
+					 <title>Name</title>
+						<template>Template Name</template>
+						<content>Content</content>
+						<type>Template Type</type>
+				</label>
+		</UICLVTemplateForm_CateTemplateContainer>		
+		<UICLVTemplateForm>
+			  <label>
+			  	  <paginators>Paginator</paginators>
+								<list>Content</list>
+								<navigation>Navigation</navigation>
+			  </label>
+		</UICLVTemplateForm>			
 </bundle>
