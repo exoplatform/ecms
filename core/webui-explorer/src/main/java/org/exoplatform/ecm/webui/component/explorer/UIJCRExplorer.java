@@ -344,7 +344,9 @@ public class UIJCRExplorer extends UIContainer {
         if (uiTreeExplorer != null) {
           UITreeNodePageIterator extendedPageIterator =
               uiTreeExplorer.getUIPageIterator(previousPath);
-          extendedPageIterator.setCurrentPage(previousPageIndex);
+          if (extendedPageIterator != null) {
+            extendedPageIterator.setCurrentPage(previousPageIndex);
+          }
         }
       }
     }
