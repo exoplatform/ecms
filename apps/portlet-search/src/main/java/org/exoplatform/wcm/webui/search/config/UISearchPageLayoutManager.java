@@ -62,7 +62,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
 public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
 
   /** The Constant PORTLET_NAME. */
-  public static final String PORTLET_NAME                       = "WCM Advance Search";
+  public static final String PORTLET_NAME                       = "search";
 
   /** The Constant SEARCH_PAGE_LAYOUT_CATEGORY. */
   public static final String SEARCH_PAGE_LAYOUT_CATEGORY        = "search-page-layout";

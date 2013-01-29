@@ -89,6 +89,7 @@ public class PortletTemplatePlugin extends BaseComponentPlugin{
     private ArrayList<String> accessPermissions;
     private ArrayList<String> editPermissions;
     private String templateName;
+    private String title;
     private String templateData;
 
     /**
@@ -162,6 +163,24 @@ public class PortletTemplatePlugin extends BaseComponentPlugin{
     public void setTemplateName(String templateName) {
       this.templateName = templateName;
     }
+    
+    /**
+     * Gets the full text template name.
+     *
+     * @return the template name
+     */
+    public String getTitle() {
+      return title;
+    }
+
+    /**
+     * Sets the full text template name.
+     *
+     * @param templateName the new template name
+     */
+    public void setTitle(String title) {
+      this.title = title;
+    }    
 
     /**
      * Gets the template data.

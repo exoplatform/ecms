@@ -30,7 +30,9 @@ import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.core.UIPagingGrid;
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.views.ApplicationTemplateManagerService;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -56,18 +58,13 @@ import org.exoplatform.webui.event.EventListener;
 )
 public class UICLVTemplateList extends UIPagingGrid {
 
-  private static String[] NODETYPE_BEAN_FIELD = {"name", "template"} ;
+  private static String[] NODETYPE_BEAN_FIELD = {"title", "template"} ;
   private static String[] NODETYPE_ACTION = {"Edit", "Delete"} ;
-  public static final String CONTENT_TEMPLATE_TYPE = "contents";
-  public static final String CATEGORY_TEMPLATE_TYPE = "category";
-  public static final String PAGINATOR_TEMPLATE_TYPE = "paginators";
-  public static final String TEMPLATE_PROPERTY = "label";
   
-  private String filter = CONTENT_TEMPLATE_TYPE;
+  private String filter = UICLVTemplatesManager.CONTENT_TEMPLATE_TYPE;
   
   
   public UICLVTemplateList() throws Exception {
-    getUIPageIterator().setId("CLVTemplateListIterator") ;
     configure("template", NODETYPE_BEAN_FIELD, NODETYPE_ACTION) ;
   }
   
@@ -88,17 +85,17 @@ public class UICLVTemplateList extends UIPagingGrid {
     ApplicationTemplateManagerService templateService = WCMCoreUtils.getService(ApplicationTemplateManagerService.class);
     List<CLVTemplateData> templateData = new ArrayList<CLVTemplateData>();
       
-    if(filter.equals(CONTENT_TEMPLATE_TYPE)) { 
+    if(filter.equals(UICLVTemplatesManager.CONTENT_TEMPLATE_TYPE)) { 
       templateData = convetListNodeToListData(templateService.getTemplatesByCategory(
               ApplicationTemplateManagerService.CLV_TEMPLATE_STORAGE_FOLDER, 
               ApplicationTemplateManagerService.CLV_LIST_TEMPLATE_CATEGORY, 
               WCMCoreUtils.getUserSessionProvider()));
-    } else if(filter.equals(CATEGORY_TEMPLATE_TYPE)) {
+    } else if(filter.equals(UICLVTemplatesManager.CATEGORY_TEMPLATE_TYPE)) {
       templateData = convetListNodeToListData(templateService.getTemplatesByCategory(
               ApplicationTemplateManagerService.CLV_TEMPLATE_STORAGE_FOLDER, 
               ApplicationTemplateManagerService.CLV_NAVIGATION_TEMPLATE_CATEGORY, 
               WCMCoreUtils.getUserSessionProvider()));
-    } else if(filter.equals(PAGINATOR_TEMPLATE_TYPE)){
+    } else if(filter.equals(UICLVTemplatesManager.PAGINATOR_TEMPLATE_TYPE)){
       templateData = convetListNodeToListData(templateService.getTemplatesByCategory(
               ApplicationTemplateManagerService.CLV_TEMPLATE_STORAGE_FOLDER, 
               ApplicationTemplateManagerService.CLV_PAGINATOR_TEMPLATE_CATEGORY, 
@@ -120,20 +117,44 @@ public class UICLVTemplateList extends UIPagingGrid {
   private List<CLVTemplateData> convetListNodeToListData(List<Node> list) throws RepositoryException {
     List<CLVTemplateData> templateDatas = new ArrayList<CLVTemplateData>();
     for(Node node : list) {
-      templateDatas.add(new CLVTemplateData(node.getName(), node.getName()));
+      Node content = node.getNode(Utils.JCR_CONTENT);
+      templateDatas.add(new CLVTemplateData(content.getProperty(
+              NodetypeConstant.DC_TITLE).getValues()[0].getString(), node.getName()));
     }
     return templateDatas;
   }
   
   static public class EditActionListener extends EventListener<UICLVTemplateList> {
     public void execute(Event<UICLVTemplateList> event) throws Exception {
-      
+      UICLVTemplateList clvTemplateList = event.getSource();
+      UICLVTemplatesManager uiTemplatesManager = clvTemplateList.getAncestorOfType(UICLVTemplatesManager.class) ;      
+      UICLVTemplateContainer uiTemplateContainer = uiTemplatesManager.getChildById(uiTemplatesManager.getSelectedTabId());
+      UICLVTemplateForm uiTemplateForm = uiTemplateContainer.createUIComponent(UICLVTemplateForm.class, null, 
+              "UICLVTemplateForm_" + uiTemplatesManager.getSelectedTabId());
+      String template = event.getRequestContext().getRequestParameter(OBJECTID);
+      uiTemplateForm.update(clvTemplateList.getCategoryFromFilter(), template);
+      uiTemplateContainer.removeChildById(UICLVTemplatesManager.NEW_TEMPLATE + "_" + uiTemplatesManager.getSelectedTabId());
+      uiTemplateContainer.initPopup(uiTemplateForm, 
+              UICLVTemplatesManager.EDIT_CLV_TEMPLATE + "_" + uiTemplatesManager.getSelectedTabId());
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiTemplatesManager);
     }
   }
   
   static public class AddTemplateActionListener extends EventListener<UICLVTemplateList> {
     public void execute(Event<UICLVTemplateList> event) throws Exception {
+      UICLVTemplateList uiList = event.getSource();
+      UICLVTemplatesManager uiTemplatesManager = uiList.getAncestorOfType(UICLVTemplatesManager.class) ;      
+      UICLVTemplateContainer uiTemplateContainer = uiTemplatesManager.getChildById(uiTemplatesManager.getSelectedTabId());
       
+      UICLVTemplateForm uiTemplateForm = uiTemplateContainer.createUIComponent(UICLVTemplateForm.class, null, 
+              "UICLVTemplateForm_" + uiTemplatesManager.getSelectedTabId()) ;
+      uiTemplateContainer.removeChildById(UICLVTemplatesManager.EDIT_CLV_TEMPLATE + "_" + uiTemplatesManager.getSelectedTabId()) ;
+      
+      uiTemplateForm.refresh(uiList.getCategoryFromFilter());
+      
+      uiTemplateContainer.initPopup(uiTemplateForm, 
+              UICLVTemplatesManager.NEW_TEMPLATE + "_" + uiTemplatesManager.getSelectedTabId()) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiTemplatesManager) ;
     }
   }
   
@@ -149,13 +170,12 @@ public class UICLVTemplateList extends UIPagingGrid {
       }
       
       String template = event.getRequestContext().getRequestParameter(OBJECTID);
-      String category = clvTemplateList.getCategoryFromFilter(clvTemplateList.getTemplateFilter());
       ApplicationTemplateManagerService templateService = 
               clvTemplateList.getApplicationComponent(ApplicationTemplateManagerService.class);
       try {
         templateService.removeTemplate(
                 ApplicationTemplateManagerService.CLV_TEMPLATE_STORAGE_FOLDER, 
-                category, 
+                clvTemplateList.getCategoryFromFilter(), 
                 template, 
                 WCMCoreUtils.getUserSessionProvider());
       } catch (PathNotFoundException ex) {
@@ -171,30 +191,30 @@ public class UICLVTemplateList extends UIPagingGrid {
   
   static public class CLVTemplateComparator implements Comparator<CLVTemplateData> {
     public int compare(CLVTemplateData t1, CLVTemplateData t2) throws ClassCastException {
-      String name1 = t1.getName();
-      String name2 = t2.getName();
-      return name1.compareToIgnoreCase(name2);
+      String title1 = t1.getTitle();
+      String title2 = t2.getTitle();
+      return title1.compareToIgnoreCase(title2);
     }
   }  
   
   static public class CLVTemplateData {
-    private String name ;
+    private String title ;
     private String template;
 
-    public CLVTemplateData(String name, String template) { 
-        this.name = name ;
+    public CLVTemplateData(String title, String template) { 
+        this.title = title ;
         this.template = template;
     }
-    public String getName() { return name ; }
+    public String getTitle() { return title ; }
     public String getTemplate() { return template; }
   }
   
-  private String getCategoryFromFilter(String filterType) {
-    if(filterType.equals(CONTENT_TEMPLATE_TYPE)) { 
+  private String getCategoryFromFilter() {
+    if(filter.equals(UICLVTemplatesManager.CONTENT_TEMPLATE_TYPE)) { 
       return ApplicationTemplateManagerService.CLV_LIST_TEMPLATE_CATEGORY;
-    } else if(filterType.equals(CATEGORY_TEMPLATE_TYPE)) {
+    } else if(filter.equals(UICLVTemplatesManager.CATEGORY_TEMPLATE_TYPE)) {
       return ApplicationTemplateManagerService.CLV_NAVIGATION_TEMPLATE_CATEGORY;
-    } else if(filterType.equals(PAGINATOR_TEMPLATE_TYPE)){
+    } else if(filter.equals(UICLVTemplatesManager.PAGINATOR_TEMPLATE_TYPE)){
       return ApplicationTemplateManagerService.CLV_PAGINATOR_TEMPLATE_CATEGORY; 
     } 
     return null;

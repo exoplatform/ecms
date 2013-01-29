@@ -113,6 +113,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
     }
     if (!category.hasNode(config.getTemplateName())) {
       templateService.createTemplate(category,
+                                     config.getTitle(),
                                      config.getTemplateName(),
                                      new ByteArrayInputStream(config.getTemplateData().getBytes()),
                                      new String[] { "*" });

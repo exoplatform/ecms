@@ -814,15 +814,24 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public String createTemplate(Node templateFolder, String name, InputStream data, String[] roles) {
+    return createTemplate(templateFolder, name, name, data, roles);
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public String createTemplate(Node templateFolder, String title, String templateName, InputStream data, String[] roles) {
     try {
-      Node contentNode = templateFolder.addNode(name, NodetypeConstant.NT_FILE);
+      Node contentNode = templateFolder.addNode(templateName, NodetypeConstant.NT_FILE);
       Node resourceNode = contentNode.addNode(NodetypeConstant.JCR_CONTENT, NodetypeConstant.EXO_RESOURCES);
       resourceNode.setProperty(NodetypeConstant.JCR_ENCODING, "UTF-8");
       resourceNode.setProperty(NodetypeConstant.JCR_MIME_TYPE, "application/x-groovy+html");
       resourceNode.setProperty(NodetypeConstant.JCR_LAST_MODIFIED, new GregorianCalendar());
       resourceNode.setProperty(NodetypeConstant.JCR_DATA, data);
       resourceNode.setProperty(NodetypeConstant.EXO_ROLES, roles);
+      resourceNode.setProperty(NodetypeConstant.DC_TITLE, new String[] {title});
       resourceNode.getSession().save();
       return contentNode.getPath();
     } catch (Exception e) {
@@ -831,7 +840,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       }
     }
     return null;
-  }
+  }  
 
   /**
    * {@inheritDoc}

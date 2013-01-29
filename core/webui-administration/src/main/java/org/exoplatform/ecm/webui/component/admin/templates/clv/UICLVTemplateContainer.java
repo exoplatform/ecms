@@ -17,11 +17,10 @@
  **************************************************************************/
 package org.exoplatform.ecm.webui.component.admin.templates.clv;
 
-import org.exoplatform.ecm.webui.component.admin.templates.UITemplatesManager;
-import org.exoplatform.ecm.webui.component.admin.templates.UIViewTemplate;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
@@ -47,14 +46,12 @@ public class UICLVTemplateContainer  extends UIContainer  {
     addChild(UICLVTemplateList.class, null, null);
   }
 
-  public void initPopup(String popupId) throws Exception {
+  public void initPopup(UIComponent uiComponent, String popupId) throws Exception {
     removeChildById(popupId) ;    
-    UITemplatesManager uiManager = getParent();
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, popupId) ;
     uiPopup.setShowMask(true);    
     uiPopup.setWindowSize(600,300) ;
-    UIViewTemplate uiViewTemplate = createUIComponent(UIViewTemplate.class, null, "UICLVViewTemplate" + "_" + uiManager.getSelectedTabId()) ;
-    uiPopup.setUIComponent(uiViewTemplate) ;
+    uiPopup.setUIComponent(uiComponent) ;
     uiPopup.setShow(true) ;
     uiPopup.setResizable(true) ;
   }

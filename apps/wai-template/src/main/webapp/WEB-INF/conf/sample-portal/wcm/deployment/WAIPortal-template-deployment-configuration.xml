@@ -47,6 +47,9 @@
           <name>Authentication Area</name>
           <description>Authentication Area Template</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="title">
+              <string>Authentication Area</string>
+            </field>
             <field name="templateName">
               <string>AuthenticationArea.gtmpl</string>
             </field>
@@ -59,6 +62,9 @@
           <name>WAI Portal ToolBar</name>
           <description>WAI Portal ToolBar Template</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="title">
+              <string>Accessible Toolbar</string>
+            </field>
             <field name="templateName">
               <string>AccessibleToolbar.gtmpl</string>
             </field>
@@ -71,6 +77,9 @@
           <name>category.folder.list.viewer</name>
           <description>Category navigation template</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="title">
+              <string>Accessible Navigation</string>
+            </field>
             <field name="templateName">
               <string>AccessibleNavigation.gtmpl</string>
             </field>
@@ -83,6 +92,9 @@
           <name>Breadcrumb Navigation</name>
           <description>Breadcrumb template</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="title">
+              <string>Accessible Breadcrumb</string>
+            </field>
             <field name="templateName">
               <string>AccessibleBreadcrumb.gtmpl</string>
             </field>
@@ -95,6 +107,9 @@
           <name>Site map template</name>
           <description>Site map template</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="title">
+              <string>Accessible Sitemap</string>
+            </field>
             <field name="templateName">
               <string>AccessibleSitemap.gtmpl</string>
             </field>
@@ -107,6 +122,9 @@
           <name>WAI Portal Banner</name>
           <description>WAI Portal Banner Template</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="title">
+              <string>Accessible Banner</string>
+            </field>
             <field name="templateName">
               <string>AccessibleBanner.gtmpl</string>
             </field>

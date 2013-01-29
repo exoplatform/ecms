@@ -77,8 +77,7 @@ public class TestWCMConfigurationService extends BaseWCMTestCase {
     assertEquals("printviewer", configurationService.getRuntimeContextParam(WCMConfigurationService.PRINT_VIEWER_PAGE));
     assertEquals("/presentation/ContentListViewerPortlet", configurationService.getRuntimeContextParam(WCMConfigurationService.CLV_PORTLET));
     assertEquals("/presentation/SingleContentViewer", configurationService.getRuntimeContextParam(WCMConfigurationService.SCV_PORTLET));
-    assertEquals("/exo:ecm/views/templates/content-list-viewer/list/UIContentListPresentationDefault.gtmpl", configurationService.getRuntimeContextParam(WCMConfigurationService.FORM_VIEW_TEMPLATE_PATH));
-    assertEquals("/exo:ecm/views/templates/content-list-viewer/paginators/UIPaginatorDefault.gtmpl", configurationService.getRuntimeContextParam(WCMConfigurationService.PAGINATOR_TEMPLAET_PATH));
+    assertEquals("/exo:ecm/views/templates/content-list-viewer/paginators/DefaultPaginator.gtmpl", configurationService.getRuntimeContextParam(WCMConfigurationService.PAGINATOR_TEMPLAET_PATH));
   }
 
   /**
@@ -91,8 +90,7 @@ public class TestWCMConfigurationService extends BaseWCMTestCase {
     assertTrue(runtimeContextParams.contains("printviewer"));
     assertTrue(runtimeContextParams.contains("/presentation/ContentListViewerPortlet"));
     assertTrue(runtimeContextParams.contains("/presentation/SingleContentViewer"));
-    assertTrue(runtimeContextParams.contains("/exo:ecm/views/templates/content-list-viewer/list/UIContentListPresentationDefault.gtmpl"));
-    assertTrue(runtimeContextParams.contains("/exo:ecm/views/templates/content-list-viewer/paginators/UIPaginatorDefault.gtmpl"));
+    assertTrue(runtimeContextParams.contains("/exo:ecm/views/templates/content-list-viewer/paginators/DefaultPaginator.gtmpl"));
     assertEquals(7, runtimeContextParams.size());
   }
 

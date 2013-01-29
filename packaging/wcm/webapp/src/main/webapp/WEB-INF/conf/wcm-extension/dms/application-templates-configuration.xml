@@ -47,8 +47,11 @@
           <name>Two columns CLV template</name>
           <description>Two columns CLV template</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
-            <field name="templateName">
-              <string>TwoColumnsCLVTemplate.gtmpl</string>
+            <field name="title">
+            	 <string>Two Columns</string>
+												</field>
+												<field name="templateName">
+              <string>TwoColumns.gtmpl</string>
             </field>
             <field name="category">
               <string>list</string>
@@ -59,8 +62,11 @@
           <name>One column CLV template</name>
           <description>One column CLV template</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
-            <field name="templateName">
-              <string>OneColumnCLVTemplate.gtmpl</string>
+             <field name="title">
+            	 <string>One Column</string>
+												</field>
+	           <field name="templateName">
+              <string>OneColumn.gtmpl</string>
             </field>
             <field name="category">
               <string>list</string>
@@ -71,6 +77,9 @@
           <name>Category Tree</name>
           <description>Category Tree</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+             <field name="title">
+            	 <string>Category Tree</string>
+												</field>
             <field name="templateName">
               <string>CategoryTree.gtmpl</string>
             </field>
@@ -83,6 +92,9 @@
           <name>Category List</name>
           <description>Category List</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+             <field name="title">
+            	 <string>Category List</string>
+												</field>
             <field name="templateName">
               <string>CategoryList.gtmpl</string>
             </field>
@@ -95,6 +107,9 @@
           <name>Tags Cloud</name>
           <description>Tags Cloud</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="title">
+            	 <string>Tags Cloud</string>
+												</field>
             <field name="templateName">
               <string>TagsCloud.gtmpl</string>
             </field>
@@ -107,8 +122,11 @@
           <name>Documents template</name>
           <description>Documents template</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="title">
+            	 <string>Documents</string>
+												</field>
             <field name="templateName">
-              <string>DocumentsTemplate.gtmpl</string>
+              <string>Documents.gtmpl</string>
             </field>
             <field name="category">
               <string>list</string>
@@ -119,8 +137,11 @@
           <name>default.paginator</name>
           <description>Default paginator groovy template</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="title">
+            	 <string>Default Paginator</string>
+												</field>
             <field name="templateName">
-              <string>UIPaginatorDefault.gtmpl</string>
+              <string>DefaultPaginator.gtmpl</string>
             </field>
             <field name="category">
               <string>paginators</string>
@@ -131,8 +152,11 @@
           <name>empty.paginator</name>
           <description>Empty paginator groovy template</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="title">
+            	 <string>No Pagination</string>
+												</field>
             <field name="templateName">
-              <string>UIPaginatorEmpty.gtmpl</string>
+              <string>EmptyPaginator.gtmpl</string>
             </field>
             <field name="category">
               <string>paginators</string>
@@ -154,7 +178,7 @@
       <init-params>
         <value-param>
           <name>portletName</name>
-          <value>WCM Advance Search</value>
+          <value>search</value>
         </value-param>
         <value-param>
           <name>portlet.template.path</name>
@@ -164,8 +188,11 @@
           <name>default.searchPageLayout</name>
           <description>Default search page layout template</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="title">
+            	 <string>Page Layout</string>
+												</field>
             <field name="templateName">
-              <string>UISearchPageLayoutDefault.gtmpl</string>
+              <string>PageLayout.gtmpl</string>
             </field>
             <field name="category">
               <string>search-page-layout</string>
@@ -176,8 +203,11 @@
           <name>default.searchForm</name>
           <description>Default search form template</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="title">
+            	 <string>Form</string>
+												</field>
             <field name="templateName">
-              <string>UIDefaultSearchForm.gtmpl</string>
+              <string>Form.gtmpl</string>
             </field>
             <field name="category">
               <string>search-form</string>
@@ -186,10 +216,13 @@
         </object-param>
         <object-param>
           <name>default.searchResult</name>
-          <description>Default search form template</description>
+          <description>Default search result template</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="title">
+            	 <string>Results</string>
+												</field>
             <field name="templateName">
-              <string>UIDefaultSearchResult.gtmpl</string>
+              <string>Results.gtmpl</string>
             </field>
             <field name="category">
               <string>search-result</string>
@@ -200,8 +233,11 @@
           <name>default.searchPaginator</name>
           <description>Default search paginator template</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="title">
+            	 <string>Paginator</string>
+												</field>
             <field name="templateName">
-              <string>UIDefaultSearchPaginator.gtmpl</string>
+              <string>Paginator.gtmpl</string>
             </field>
             <field name="category">
               <string>search-paginator</string>

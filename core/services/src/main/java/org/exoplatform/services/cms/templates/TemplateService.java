@@ -357,7 +357,18 @@ public interface TemplateService {
    * @param data The template's data
    * @param roles The template's roles
    */
+  @Deprecated
   public String createTemplate(Node templateFolder, String name, InputStream data, String[] roles);
+  
+  /**
+   * Insert a template into JCR database as an nt:file node. This method should be used for all the template types.
+   * @param templateFolder The parent node which contains the template node
+   * @param title The template title
+   * @param templateName The template's name
+   * @param data The template's data
+   * @param roles The template's roles
+   */
+  public String createTemplate(Node templateFolder, String title, String templateName, InputStream data, String[] roles);  
 
   /**
    * Update a template inside JCR database. This method should be used for all the template types.
