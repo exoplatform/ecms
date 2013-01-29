@@ -49,7 +49,7 @@ import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.pom.config.POMSessionManager;
 import org.exoplatform.services.cms.CmsService;
-import org.exoplatform.services.cms.jcrext.activity.ActivityCommon;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleException;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.resources.ResourceBundleService;
@@ -73,8 +73,9 @@ import org.exoplatform.webui.form.UIForm;
 @SuppressWarnings("deprecation")
 public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
 
-  private WCMComposer composer;
-  ListenerService listenerService;
+  private WCMComposer             composer;
+  private ListenerService         listenerService;
+  private ActivityCommonService   activityService;
 
   /**
    * Instantiates a new stage and version publication plugin.
@@ -84,6 +85,7 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
     WCMCoreUtils.getService(POMSessionManager.class);
     composer = WCMCoreUtils.getService(WCMComposer.class);
     listenerService = WCMCoreUtils.getService(ListenerService.class);
+    activityService = WCMCoreUtils.getService(ActivityCommonService.class);
   }
 
   public String getLifecycleType() {
@@ -253,8 +255,8 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
         listenerService.broadcast(StageAndVersionPublicationConstant.POST_INIT_STATE_EVENT, cmsService, node);
       } else {
         listenerService.broadcast(StageAndVersionPublicationConstant.POST_CHANGE_STATE_EVENT, cmsService, node);
-        if (ActivityCommon.isAcceptedNode(node)) {
-          listenerService.broadcast(ActivityCommon.STATE_CHANGED_ACTIVITY, node, newState);
+        if (activityService.isAcceptedNode(node)) {
+          listenerService.broadcast(ActivityCommonService.STATE_CHANGED_ACTIVITY, node, newState);
         }
       }
     }

@@ -50,7 +50,7 @@ import org.exoplatform.commons.utils.ISO8601;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.JcrInputProperty;
-import org.exoplatform.services.cms.jcrext.activity.ActivityCommon;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.idgenerator.IDGeneratorService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -73,6 +73,7 @@ public class CmsServiceImpl implements CmsService {
   private static final String MIX_REFERENCEABLE = "mix:referenceable" ;
   private static final Log LOG  = ExoLogger.getLogger(CmsServiceImpl.class.getName());
   private ListenerService listenerService;
+  private ActivityCommonService activityService = null;
 
   /**
    * Method constructor
@@ -178,8 +179,8 @@ public class CmsServiceImpl implements CmsService {
       listenerService.broadcast(POST_CREATE_CONTENT_EVENT,this,currentNode);
     } else {
       currentNode = storeHomeNode.getNode(nodeName);
-      if (currentNode.canAddMixin(ActivityCommon.MIX_COMMENT)) {
-        currentNode.addMixin(ActivityCommon.MIX_COMMENT);
+      if (currentNode.canAddMixin(ActivityCommonService.MIX_COMMENT)) {
+        currentNode.addMixin(ActivityCommonService.MIX_COMMENT);
       }
       //Broadcast CmsService.event.preEdit event
       listenerService.broadcast(PRE_EDIT_CONTENT_EVENT,currentNode,mappings);
@@ -189,8 +190,8 @@ public class CmsServiceImpl implements CmsService {
         currentNode.setProperty("exo:dateModified", new GregorianCalendar());
       }
       listenerService.broadcast(POST_EDIT_CONTENT_EVENT, this, currentNode);
-      if (currentNode.isNodeType(ActivityCommon.MIX_COMMENT)) {
-        currentNode.removeMixin(ActivityCommon.MIX_COMMENT);
+      if (currentNode.isNodeType(ActivityCommonService.MIX_COMMENT)) {
+        currentNode.removeMixin(ActivityCommonService.MIX_COMMENT);
       }
     }
     //add lastModified property to jcr:content
@@ -1152,8 +1153,11 @@ public class CmsServiceImpl implements CmsService {
         }
         workspace.clone(srcWorkspace, nodePath, destPath, true);
         try {
-          if (listenerService!=null && ActivityCommon.isAcceptedNode(srcNode)) {
-            listenerService.broadcast(ActivityCommon.NODE_MOVED_ACTIVITY, srcNode, destPath);
+          if (activityService==null) {
+            activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+          }
+          if (listenerService!=null && activityService.isAcceptedNode(srcNode)) {
+            listenerService.broadcast(ActivityCommonService.NODE_MOVED_ACTIVITY, srcNode, destPath);
           }
         }catch (Exception e) {
           if (LOG.isErrorEnabled()) {
@@ -1188,9 +1192,12 @@ public class CmsServiceImpl implements CmsService {
         
         workspace.move(nodePath, destPath);
         try {
-          Node movedNode =(Node) session.getItem(destPath);        
-          if (listenerService!=null && ActivityCommon.isAcceptedNode(movedNode)) {
-            listenerService.broadcast(ActivityCommon.NODE_MOVED_ACTIVITY, movedNode, destPath);
+          Node movedNode =(Node) session.getItem(destPath);
+          if (activityService==null) {
+            activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+          }
+          if (listenerService!=null && activityService.isAcceptedNode(movedNode)) {
+            listenerService.broadcast(ActivityCommonService.NODE_MOVED_ACTIVITY, movedNode, destPath);
           }
         }catch (Exception e) {
           if (LOG.isErrorEnabled()) {

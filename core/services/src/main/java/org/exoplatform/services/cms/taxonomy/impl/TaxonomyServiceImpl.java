@@ -45,7 +45,7 @@ import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
-import org.exoplatform.services.cms.jcrext.activity.ActivityCommon;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -84,6 +84,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
 
   private LinkManager            linkManager_;
   private ListenerService        listenerService;
+  private ActivityCommonService  activityService;
 
   private final String           SQL_QUERY       = "Select * from exo:taxonomyLink where jcr:path like '$0/%' "
                                                      + "and exo:uuid = '$1' "
@@ -132,6 +133,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
     if (objectParam != null)
       taxonomyTreeDefaultUserPermissions_
         = getPermissions(((TaxonomyTreeDefaultUserPermission)objectParam.getObject()).getPermissions());
+    activityService = WCMCoreUtils.getService(ActivityCommonService.class);
   }
 
   public String getCategoryNameLength() {
@@ -488,8 +490,8 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
         linkManager_.createLink(categoryNode, TAXONOMY_LINK, node, linkName);
         if (listenerService!=null) {
           try {
-            if (ActivityCommon.isAcceptedNode(node)) {
-              listenerService.broadcast(ActivityCommon.CATEGORY_ADDED_ACTIVITY, node, linkName);
+            if (activityService.isAcceptedNode(node)) {
+              listenerService.broadcast(ActivityCommonService.CATEGORY_ADDED_ACTIVITY, node, linkName);
             }
           } catch (Exception e) {
             if (LOG.isErrorEnabled()) {
@@ -588,8 +590,8 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       node.getSession().save();
       if (listenerService!=null) {
         try {
-          if (ActivityCommon.isAcceptedNode(node)) {
-            listenerService.broadcast(ActivityCommon.CATEGORY_REMOVED_ACTIVITY, node, taxonomyName);
+          if (activityService.isAcceptedNode(node)) {
+            listenerService.broadcast(ActivityCommonService.CATEGORY_REMOVED_ACTIVITY, node, taxonomyName);
           }
         } catch (Exception e) {
           if (LOG.isErrorEnabled()) {

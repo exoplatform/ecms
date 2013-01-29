@@ -16,7 +16,19 @@
       </properties-param>
     </init-params>
   </component>
-  
+  <component>
+    <type>org.exoplatform.services.cms.jcrext.activity.ActivityCommonService</type>
+    <init-params>
+      <value-param>
+        <name>acceptedNodeTypes</name>
+        <value>{exo:accessibleMedia}{exo:article}{exo:contact_us}{exo:event}{exo:htmlFile}{rma:filePlan}{exo:webContent}{kfx:document}{exo:pictureOnHeadWebcontent}{exo:podcast}{exo:sample}{exo:link}</value>
+      </value-param>
+      <value-param>
+        <name>acceptedProperties</name>
+        <value>{exo:summary}{exo:title}{exo:text}</value>
+      </value-param>
+    </init-params>
+  </component>
   <component>
     <key>org.exoplatform.services.cms.link.LinkManager</key>
     <type>org.exoplatform.services.cms.link.impl.LinkManagerImpl</type>

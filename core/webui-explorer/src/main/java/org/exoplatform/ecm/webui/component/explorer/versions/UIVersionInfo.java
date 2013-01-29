@@ -27,7 +27,7 @@ import org.exoplatform.ecm.jcr.model.VersionNode;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.UIPopupContainer;
-import org.exoplatform.services.cms.jcrext.activity.ActivityCommon;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.jcr.impl.storage.JCRInvalidItemStateException;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.wcm.core.NodeLocation;
@@ -183,9 +183,10 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
         String versionName = uiVersionInfo.curentVersion_.getName();
         restoredNode.restore(versionName, true);
         ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
+        ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
         try {
-          if (listenerService!=null && ActivityCommon.isAcceptedNode(restoredNode)) {
-            listenerService.broadcast(ActivityCommon.NODE_REVISION_CHANGED, restoredNode, versionName);
+          if (listenerService!=null && activityService !=null && activityService.isAcceptedNode(restoredNode)) {
+            listenerService.broadcast(ActivityCommonService.NODE_REVISION_CHANGED, restoredNode, versionName);
           }
         }catch (Exception e) {
           if (LOG.isErrorEnabled()) {

@@ -19,6 +19,8 @@ package org.exoplatform.services.cms.jcrext.activity;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
+import org.exoplatform.container.xml.InitParams;
+
 /**
  * Created by The eXo Platform SAS
  * Author : Nguyen The Vinh From ECM Of eXoPlatform
@@ -27,10 +29,9 @@ import javax.jcr.RepositoryException;
  * List of node-type with allow the activity raise on.
  * 15 Jan 2013  
  */
-public class ActivityCommon {
-  public static String acceptedNodeTypes = "{exo:accessibleMedia}{exo:article}{exo:contact_us}{exo:event}{exo:htmlFile}" +
-                                           "{rma:filePlan}{exo:webContent}{kfx:document}{exo:pictureOnHeadWebcontent}" +
-                                           "{exo:podcast}{exo:sample}{exo:link}";
+public class ActivityCommonService {
+  private String acceptedNodeTypes;
+  private String acceptedProperties;// = "{exo:summary}{exo:title}{exo:text}";
   public static String NT_FILE                    = "nt:file";
   public static String EDIT_ACTIVITY              = "ActivityNotify.event.PropertyUpdated";
   
@@ -48,21 +49,33 @@ public class ActivityCommon {
   public static String TAG_ADDED_ACTIVITY         = "ActivityNotify.event.TagAdded";
   public static String TAG_REMOVED_ACTIVITY       = "ActivityNotify.event.TagRemoved";
   
-  public static String COMMENT_ADDED_ACTIVITY     = "ActivityNotify.event.CommentAdded";
+  public static String COMMENT_ACTION_ACTIVITY    = "ActivityNotify.event.CommentAction";
+  public static String COMMENT_ADDED              = "commentAdded";
+  public static String COMMENT_MODIFIED           = "commentModified";
+  public static String COMMENT_REMOVED            = "commentRemoved";
+  
   public static String STATE_CHANGED_ACTIVITY     = "ActivityNotify.event.StateChanged";
   
   
-  public static String VALUE_SEPERATOR            = "_S_E_P_R_";
+  public static String VALUE_SEPERATOR            = "_S#E#P#R_";
   
   public static String MIX_COMMENT                = "exo:activityComment";
   public static String MIX_COMMENT_CREATOR        = "exo:activityCreator";
   public static String MIX_COMMENT_ACTIVITY_ID    = "exo:activityCommentID";
-  
-  public static boolean isAcceptedNode(Node node) {
+  public ActivityCommonService(InitParams initParams) {
+    this.acceptedNodeTypes = initParams.getValueParam("acceptedNodeTypes").getValue();
+    this.acceptedProperties = initParams.getValueParam("acceptedProperties").getValue();
+    if (acceptedNodeTypes==null) acceptedNodeTypes = "";
+    if (acceptedProperties==null) acceptedProperties =""; 
+  }
+  public boolean isAcceptedNode(Node node) {
     try {
-      return node==null?false:acceptedNodeTypes.indexOf(node.getPrimaryNodeType().getName())>0;
+      return node==null?false:acceptedNodeTypes.indexOf("{" + node.getPrimaryNodeType().getName() +"}")>=0;
     } catch (RepositoryException e) {
       return false;
     }
+  }
+  public boolean isAcceptedProperties(String propertyName) {
+    return acceptedProperties.indexOf("{" + propertyName + "}")>=0;
   }
 }

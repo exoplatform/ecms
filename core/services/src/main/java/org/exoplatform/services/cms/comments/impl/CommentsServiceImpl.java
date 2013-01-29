@@ -32,14 +32,14 @@ import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.comments.CommentsService;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
-import org.exoplatform.services.cms.jcrext.activity.ActivityCommon;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.organization.User;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 
 /**
@@ -66,9 +66,9 @@ public class CommentsServiceImpl implements CommentsService {
   private static final String ANONYMOUS = "anonymous" ;
 
   private ExoCache<String, List<Node>> commentsCache_ ;
-  private MultiLanguageService multiLangService_ ;
-  private ListenerService      listenerService;
-
+  private MultiLanguageService         multiLangService_ ;
+  private ListenerService              listenerService;
+  private ActivityCommonService        activityService;
   /**
    * Constructor Method
    * @param cacheService        CacheService Object
@@ -78,6 +78,7 @@ public class CommentsServiceImpl implements CommentsService {
       MultiLanguageService multiLangService) throws Exception {
     commentsCache_ = cacheService.getCacheInstance(CommentsService.class.getName()) ;
     multiLangService_ = multiLangService ;
+    activityService = WCMCoreUtils.getService(ActivityCommonService.class);
   }
 
   /**
@@ -148,8 +149,8 @@ public class CommentsServiceImpl implements CommentsService {
       systemSession.save();
       if (listenerService!=null) {
         try {
-          if (ActivityCommon.isAcceptedNode(node)) {
-            listenerService.broadcast(ActivityCommon.COMMENT_ADDED_ACTIVITY, document, "");
+          if (activityService.isAcceptedNode(node)) {
+            listenerService.broadcast(ActivityCommonService.COMMENT_ACTION_ACTIVITY, document, ActivityCommonService.COMMENT_ADDED);
           }
         } catch (Exception e) {
           if (LOG.isErrorEnabled()) {
@@ -176,6 +177,18 @@ public class CommentsServiceImpl implements CommentsService {
     commentNode.setProperty(CREATED_DATE, commentDate);
     commentNode.setProperty(MESSAGE, newComment);
     commentNode.save();
+    Node documentNode = commentNode.getParent().getParent();
+    if (listenerService!=null && activityService!=null) {
+      try {
+        if (activityService.isAcceptedNode(documentNode)) {
+          listenerService.broadcast(ActivityCommonService.COMMENT_ACTION_ACTIVITY, documentNode, ActivityCommonService.COMMENT_MODIFIED);
+        }
+      } catch (Exception e) {
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Can not notify CommentModifiedActivity because of: " + e.getMessage());
+        }
+      }
+    }
   }
 
   /**
@@ -185,6 +198,17 @@ public class CommentsServiceImpl implements CommentsService {
     Node document = commentNode.getParent();
     commentNode.remove();
     document.save();
+    if (listenerService!=null) {
+      try {
+        if (activityService.isAcceptedNode(document.getParent())) {
+          listenerService.broadcast(ActivityCommonService.COMMENT_ACTION_ACTIVITY, document.getParent(), ActivityCommonService.COMMENT_REMOVED);
+        }
+      } catch (Exception e) {
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Can not notify CommentRemovedActivity because of: " + e.getMessage());
+        }
+      }
+    }
   }
 
   /**

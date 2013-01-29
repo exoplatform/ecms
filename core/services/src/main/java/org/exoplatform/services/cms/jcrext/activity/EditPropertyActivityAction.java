@@ -33,9 +33,10 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  */
 public class EditPropertyActivityAction implements Action{
   private ListenerService listenerService=null;
-  private String handledProperties = "{exo:summary}{exo:title}{exo:text}";
+  private ActivityCommonService activityService = null;
   public EditPropertyActivityAction() {
     listenerService =  WCMCoreUtils.getService(ListenerService.class);
+    activityService = WCMCoreUtils.getService(ActivityCommonService.class);
   }
   @Override
   public boolean execute(Context context) throws Exception {
@@ -43,14 +44,14 @@ public class EditPropertyActivityAction implements Action{
     Node node = (item instanceof Property) ?((Property)item).getParent():(Node)item;
     String propertyName = (item instanceof Property) ?((Property)item).getName():((Node)item).getName();
     // Do not create / update activity for bellow cases
-    if (handledProperties.indexOf("{" + propertyName + "}")<0) return false;
+    if (!activityService.isAcceptedProperties(propertyName)) return false;
     if (ConversationState.getCurrent() == null) return false;
     
     if(node.isNodeType("nt:resource")) node = node.getParent();
     //filter node type
-    if (ActivityCommon.isAcceptedNode(node)) {
+    if (activityService.isAcceptedNode(node)) {
     //Notify to update activity
-      listenerService.broadcast(ActivityCommon.EDIT_ACTIVITY, node, propertyName);
+      listenerService.broadcast(ActivityCommonService.EDIT_ACTIVITY, node, propertyName);
     }
     return false;
   }

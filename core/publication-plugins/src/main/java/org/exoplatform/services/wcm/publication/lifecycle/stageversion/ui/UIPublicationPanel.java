@@ -36,7 +36,7 @@ import javax.jcr.version.Version;
 import javax.jcr.version.VersionIterator;
 
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.services.cms.jcrext.activity.ActivityCommon;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
@@ -92,8 +92,6 @@ public class UIPublicationPanel extends UIForm {
 
   private WCMPublicationService wcmPublicationService;
   
-  private ListenerService listenerService;
-
   private String sitename;
 
   private String remoteuser;
@@ -566,9 +564,10 @@ public class UIPublicationPanel extends UIForm {
       //restore the version
       try {
         currentNode.restore(version,true);
-        ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class); 
-        if (ActivityCommon.isAcceptedNode(currentNode)) {
-          listenerService.broadcast(ActivityCommon.NODE_REVISION_CHANGED, currentNode, version.getName());
+        ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
+         ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+        if (activityService.isAcceptedNode(currentNode)) {
+          listenerService.broadcast(ActivityCommonService.NODE_REVISION_CHANGED, currentNode, version.getName());
         }
         if(!currentNode.isCheckedOut())
           currentNode.checkout();

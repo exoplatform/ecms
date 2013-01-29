@@ -31,19 +31,20 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  */
 public class RemoveNodeActivityAction implements Action{
   private ListenerService listenerService=null;
-  
+  private ActivityCommonService activityService = null;
   public RemoveNodeActivityAction() {
     listenerService =  WCMCoreUtils.getService(ListenerService.class);
+    activityService = WCMCoreUtils.getService(ActivityCommonService.class);
   }
   public boolean execute(Context context) throws Exception {
     if (listenerService ==null) return false;
     Object item = context.get("currentItem");
     if (item instanceof Node) {
       Node node = (Node)item;
-      if (node.getPrimaryNodeType().isNodeType(ActivityCommon.NT_FILE)) {
+      if (node.getPrimaryNodeType().isNodeType(ActivityCommonService.NT_FILE)) {
         Node parent = node.getParent();
-        if (ActivityCommon.isAcceptedNode(parent)) {
-          listenerService.broadcast(ActivityCommon.ATTACH_REMOVED_ACTIVITY, parent, node);
+        if (activityService.isAcceptedNode(parent)) {
+          listenerService.broadcast(ActivityCommonService.ATTACH_REMOVED_ACTIVITY, parent, node);
         }
       }
     }

@@ -18,7 +18,7 @@ import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.CmsService;
-import org.exoplatform.services.cms.jcrext.activity.ActivityCommon;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleException;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
@@ -44,14 +44,16 @@ import org.exoplatform.webui.form.UIForm;
 public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin {
 
   /** The log. */
-  private static final Log LOG = ExoLogger.getLogger(AuthoringPublicationPlugin.class.getName());
-  ListenerService listenerService;
+  private static final Log      LOG = ExoLogger.getLogger(AuthoringPublicationPlugin.class.getName());
+  private ListenerService       listenerService;
+  private ActivityCommonService activityService;
 
   /**
    * Instantiates a new stage and version publication plugin.
    */
   public AuthoringPublicationPlugin() {
     listenerService = WCMCoreUtils.getService(ListenerService.class);
+    activityService = WCMCoreUtils.getService(ActivityCommonService.class);
   }
 
   /*
@@ -337,8 +339,8 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
         listenerService.broadcast(StageAndVersionPublicationConstant.POST_INIT_STATE_EVENT, cmsService, node);
       } else {
         listenerService.broadcast(StageAndVersionPublicationConstant.POST_CHANGE_STATE_EVENT, cmsService, node);
-        if (ActivityCommon.isAcceptedNode(node)) {
-          listenerService.broadcast(ActivityCommon.STATE_CHANGED_ACTIVITY, node, newState);
+        if (activityService.isAcceptedNode(node)) {
+          listenerService.broadcast(ActivityCommonService.STATE_CHANGED_ACTIVITY, node, newState);
         }
       }
     }

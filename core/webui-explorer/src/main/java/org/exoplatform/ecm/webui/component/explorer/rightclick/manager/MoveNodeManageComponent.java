@@ -42,7 +42,7 @@ import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.services.cms.jcrext.activity.ActivityCommon;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -230,21 +230,22 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
       if (srcPath.indexOf(":/") > -1)
         srcPath = srcPath.substring(srcPath.indexOf(":/") + 1);
       ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
+      ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
       if (srcWorkspace.equals(destWorkspace)) {
         srcWorkspace.move(srcPath, destPath);
         //delete EXO_RESTORE_LOCATION if source is in trash
         removeMixinEXO_RESTORE_LOCATION(srcSession, destPath);
         Node desNode = (Node)srcSession.getItem(destPath);
         LockUtil.changeLockToken(srcPath, desNode);
-        if (ActivityCommon.isAcceptedNode(desNode)) {
-          listenerService.broadcast(ActivityCommon.NODE_MOVED_ACTIVITY, desNode, desNode.getPath());
+        if (activityService.isAcceptedNode(desNode)) {
+          listenerService.broadcast(ActivityCommonService.NODE_MOVED_ACTIVITY, desNode, desNode.getPath());
         }
         srcSession.save();
       } else {
         destWorkspace.clone(srcWorkspace.getName(), srcPath, destPath, false);
         Node desNode =(Node) destWorkspace.getSession().getItem(destPath);
-        if (ActivityCommon.isAcceptedNode(desNode)) {
-          listenerService.broadcast(ActivityCommon.NODE_MOVED_ACTIVITY, desNode, destPath);
+        if (activityService.isAcceptedNode(desNode)) {
+          listenerService.broadcast(ActivityCommonService.NODE_MOVED_ACTIVITY, desNode, destPath);
         }
         //delete EXO_RESTORE_LOCATION if source is in trash
         removeMixinEXO_RESTORE_LOCATION(destWorkspace.getSession(), destPath);

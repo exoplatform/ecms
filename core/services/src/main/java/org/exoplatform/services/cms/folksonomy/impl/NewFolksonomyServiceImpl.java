@@ -41,7 +41,7 @@ import nl.captcha.gimpy.FishEyeGimpyRenderer;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
-import org.exoplatform.services.cms.jcrext.activity.ActivityCommon;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -90,6 +90,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   private Map<String, String>       sitesTagPath           = new HashMap<String, String>();
   
   private ListenerService           listenerService;
+  
+  private ActivityCommonService     activityService;
 
   public NewFolksonomyServiceImpl(InitParams initParams,
                                   NodeHierarchyCreator nodeHierarchyCreator,
@@ -97,7 +99,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     this.nodeHierarchyCreator = nodeHierarchyCreator;
     this.linkManager = linkManager;
     this.initParams_ = initParams;
-
+    this.activityService = WCMCoreUtils.getService(ActivityCommonService.class);
   }
 
   /**
@@ -130,24 +132,45 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
                             String userName) throws Exception {
     Node userFolksonomyNode = getUserFolksonomyFolder(userName);
     Node targetNode = getTargetNode(documentNode);
+    boolean firstTagFlag = true;
+    StringBuffer tagValue = new StringBuffer();
     for (String tag : tagsName) {
       try {
         // Find tag node
         Node tagNode = getTagNode(userFolksonomyNode, tag);
-
         // Add symlink and total
         addTag(tagNode, targetNode);
-
         userFolksonomyNode.getSession().save();
+        if (firstTagFlag) {
+          firstTagFlag = false;
+          tagValue.append(tag);
+        }else {
+          tagValue.append(ActivityCommonService.VALUE_SEPERATOR).append(tag);
+        }
+        
       } catch (Exception e) {
         if (LOG.isErrorEnabled()) {
           LOG.error("can't add tag '" + tag + "' to node: " + targetNode.getPath() + " for user: "
             + userName);
         }
       }
+    }//
+    broadcastActivityTag(documentNode, tagValue.toString());
+  }
+  private void broadcastActivityTag(Node documentNode, String tagValue ) {
+    if (listenerService!=null && activityService !=null) {
+      try {
+        if (activityService.isAcceptedNode(documentNode)) {
+          listenerService.broadcast(ActivityCommonService.TAG_ADDED_ACTIVITY, documentNode, tagValue);
+        }
+      } catch (Exception e) {
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Can not notify Tag Added Activity because of: " + e.getMessage());
+        }
+      }
     }
   }
-
+  
   /**
    * {@inheritDoc}
    */
@@ -203,7 +226,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
            firstTagFlag = false;
            tagValue.append(tag);
          }else {
-           tagValue.append(ActivityCommon.VALUE_SEPERATOR).append(tag);
+           tagValue.append(ActivityCommonService.VALUE_SEPERATOR).append(tag);
          }
       } catch (Exception e) {
         if (LOG.isErrorEnabled()) {
@@ -211,20 +234,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
             + " in public folksonomy tree!");
         }
       }
-    }
-    if (ActivityCommon.isAcceptedNode(targetNode)) {
-      if (listenerService!=null) {
-        try {
-          if (ActivityCommon.isAcceptedNode(documentNode)) {
-            listenerService.broadcast(ActivityCommon.TAG_ADDED_ACTIVITY, documentNode, tagValue.toString());
-          }
-        } catch (Exception e) {
-          if (LOG.isErrorEnabled()) {
-            LOG.error("Can not notify Tag Added Activity because of: " + e.getMessage());
-          }
-        }
-      }
-    }
+    }//off for
+    broadcastActivityTag(documentNode, tagValue.toString());
   }
 
   private Node getTargetNode(Node showingNode) throws Exception {
@@ -474,7 +485,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
             removedTags.append(tagName);
             isFirstFlag = false;
           }else {
-            removedTags.append(ActivityCommon.VALUE_SEPERATOR).append(tagName);
+            removedTags.append(ActivityCommonService.VALUE_SEPERATOR).append(tagName);
           }
           link.remove();
           
@@ -488,10 +499,10 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
         }
       }
     }
-    if (listenerService!=null) {
+    if (listenerService!=null && activityService!=null) {
       try {
-        if (ActivityCommon.isAcceptedNode(document)) {
-          listenerService.broadcast(ActivityCommon.TAG_REMOVED_ACTIVITY, document, removedTags.toString());
+        if (activityService.isAcceptedNode(document)) {
+          listenerService.broadcast(ActivityCommonService.TAG_REMOVED_ACTIVITY, document, removedTags.toString());
         }
       } catch (Exception e) {
         if (LOG.isErrorEnabled()) {
