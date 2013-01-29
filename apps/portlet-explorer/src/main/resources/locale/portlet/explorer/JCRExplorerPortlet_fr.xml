@@ -3534,20 +3534,20 @@
   </UIMultiUpload>    
   <UIDocumentNodeList>
   	<label>
-  		<CreatedOn>Created on</CreatedOn>
-  		<Updated>Updated </Updated>
-  		<by>by</by>
-  		<you>you</you>
+  		<CreatedOn>Créé le</CreatedOn>
+  		<Updated>Mis à jour le </Updated>
+  		<by>par</by>
+  		<you>vous</you>
   	</label>
   </UIDocumentNodeList>
   <FileView>
     <label>
-      <name>Name</name>
+      <name>Nom</name>
       <date>Date</date>
-      <size>Size</size>
-      <sortBy>Sort by:</sortBy>
-      <filesAreSelected>files are selected.</filesAreSelected>
-      <ClearSelection>Clear selection</ClearSelection>
+      <size>Taille</size>
+      <sortBy>Trier par:</sortBy>
+      <filesAreSelected>fichier sont selectionnés.</filesAreSelected>
+      <ClearSelection>Annuler la sélection</ClearSelection>
     </label>
   </FileView>
 </bundle>
