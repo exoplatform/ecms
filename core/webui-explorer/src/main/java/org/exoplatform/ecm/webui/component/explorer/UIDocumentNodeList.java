@@ -16,8 +16,11 @@
  */
 package org.exoplatform.ecm.webui.component.explorer;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -27,6 +30,8 @@ import javax.jcr.Item;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
+import javax.jcr.Property;
+import javax.jcr.PropertyType;
 import javax.jcr.RepositoryException;
 
 import org.apache.commons.lang.StringUtils;
@@ -37,6 +42,8 @@ import org.exoplatform.ecm.webui.component.explorer.versions.UIActivateVersion;
 import org.exoplatform.ecm.webui.component.explorer.versions.UIVersionInfo;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.link.NodeFinder;
@@ -200,11 +207,24 @@ public class UIDocumentNodeList extends UIContainer {
    * @throws Exception
    */
   public String getFileDate(Node file) throws Exception {
-    UIDocumentInfo uiDocInfo = getAncestorOfType(UIDocumentInfo.class);
-    String createdDate = uiDocInfo.getPropertyValue(file, NodetypeConstant.EXO_DATE_CREATED);
-    String modifiedDate = uiDocInfo.getPropertyValue(file, NodetypeConstant.EXO_DATE_MODIFIED);
+    String createdDate = this.getDatePropertyValue(file, NodetypeConstant.EXO_DATE_CREATED);
+    String modifiedDate = this.getDatePropertyValue(file, NodetypeConstant.EXO_DATE_MODIFIED);
     return createdDate.equals(modifiedDate) || StringUtils.isEmpty(modifiedDate)? 
             getLabel("CreatedOn") + " " + createdDate : getLabel("Updated") + " " +  modifiedDate;
+  }
+  
+  public String getDatePropertyValue(Node node, String propertyName) throws Exception {
+    try {
+      Property property = node.getProperty(propertyName);
+      if(property != null) {
+        Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale();
+        DateFormat dateFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.SHORT, locale);
+        return dateFormat.format(property.getDate().getTime());
+      }
+    } catch(PathNotFoundException PNE) {
+      return "";
+    }
+    return "";
   }
   
   /**
