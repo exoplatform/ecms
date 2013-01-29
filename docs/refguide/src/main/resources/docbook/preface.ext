@@ -40,7 +40,7 @@
       <listitem>
         <para>
           <emphasis role="bold">
-            <link linkend="CONTref.DeveloperReferences">Developer References</link></emphasis>
+            <link linkend="CONTref.DeveloperReferences">Developer Reference</link></emphasis>
 		</para>
 		<para>
             Many useful information of WCM templates, WCM Explorer, extensions, examples of CMIS Usage code, public REST APIs, and Public Java APIs. Also, this chapter lists deprecated portlets and gives reference links as well FAQs related to Content.

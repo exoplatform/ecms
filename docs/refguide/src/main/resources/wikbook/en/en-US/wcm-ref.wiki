@@ -136,7 +136,7 @@ h2. CMIS configuration {anchor:id=CONTref.CMIS.Configuration}
 {include:document="xCMIS/Authentication.wiki" /}
 {include:document="xCMIS/Index.wiki" /}
 
-h1. Developer references {anchor:id=CONTref.DeveloperReferences}
+h1. Developer Reference {anchor:id=CONTref.DeveloperReferences}
 {include:document="pages/developer-ref.wiki" /}
 h2. WCM Templates {anchor:id=CONTref.InsideWCMTemplates}
 {include:document="pages/InsideWCMTemplates.wiki" /}
