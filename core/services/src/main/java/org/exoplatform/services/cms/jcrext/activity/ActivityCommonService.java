@@ -49,25 +49,25 @@ public class ActivityCommonService {
   public static String TAG_ADDED_ACTIVITY         = "ActivityNotify.event.TagAdded";
   public static String TAG_REMOVED_ACTIVITY       = "ActivityNotify.event.TagRemoved";
   
-  public static String COMMENT_ACTION_ACTIVITY    = "ActivityNotify.event.CommentAction";
-  public static String COMMENT_ADDED              = "commentAdded";
-  public static String COMMENT_MODIFIED           = "commentModified";
-  public static String COMMENT_REMOVED            = "commentRemoved";
+  public static String COMMENT_ADDED_ACTIVITY     = "ActivityNotify.event.CommentAdded";
+  public static String COMMENT_UPDATED_ACTIVITY   = "ActivityNotify.event.CommentUpdated";
+  public static String COMMENT_REMOVED_ACTIVITY   = "ActivityNotify.event.CommentRemoved";
   
   public static String STATE_CHANGED_ACTIVITY     = "ActivityNotify.event.StateChanged";
-  
   
   public static String VALUE_SEPERATOR            = "_S#E#P#R_";
   
   public static String MIX_COMMENT                = "exo:activityComment";
   public static String MIX_COMMENT_CREATOR        = "exo:activityCreator";
   public static String MIX_COMMENT_ACTIVITY_ID    = "exo:activityCommentID";
+  
   public ActivityCommonService(InitParams initParams) {
     this.acceptedNodeTypes = initParams.getValueParam("acceptedNodeTypes").getValue();
     this.acceptedProperties = initParams.getValueParam("acceptedProperties").getValue();
     if (acceptedNodeTypes==null) acceptedNodeTypes = "";
     if (acceptedProperties==null) acceptedProperties =""; 
   }
+  
   public boolean isAcceptedNode(Node node) {
     try {
       return node==null?false:acceptedNodeTypes.indexOf("{" + node.getPrimaryNodeType().getName() +"}")>=0;

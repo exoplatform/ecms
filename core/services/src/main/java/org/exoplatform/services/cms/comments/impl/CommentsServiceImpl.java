@@ -28,6 +28,7 @@ import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.Session;
 
+import org.exoplatform.commons.utils.ActivityTypeUtils;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.comments.CommentsService;
@@ -149,8 +150,8 @@ public class CommentsServiceImpl implements CommentsService {
       systemSession.save();
       if (listenerService!=null) {
         try {
-          if (activityService.isAcceptedNode(node)) {
-            listenerService.broadcast(ActivityCommonService.COMMENT_ACTION_ACTIVITY, document, ActivityCommonService.COMMENT_ADDED);
+          if (activityService.isAcceptedNode(document)) {
+            listenerService.broadcast(ActivityCommonService.COMMENT_ADDED_ACTIVITY, document, newComment);
           }
         } catch (Exception e) {
           if (LOG.isErrorEnabled()) {
@@ -181,7 +182,7 @@ public class CommentsServiceImpl implements CommentsService {
     if (listenerService!=null && activityService!=null) {
       try {
         if (activityService.isAcceptedNode(documentNode)) {
-          listenerService.broadcast(ActivityCommonService.COMMENT_ACTION_ACTIVITY, documentNode, ActivityCommonService.COMMENT_MODIFIED);
+          listenerService.broadcast(ActivityCommonService.COMMENT_UPDATED_ACTIVITY, documentNode, commentNode);
         }
       } catch (Exception e) {
         if (LOG.isErrorEnabled()) {
@@ -196,12 +197,18 @@ public class CommentsServiceImpl implements CommentsService {
    */
   public void deleteComment(Node commentNode) throws Exception {
     Node document = commentNode.getParent();
+    String activityID;
+    try {
+      activityID = ActivityTypeUtils.getActivityId(commentNode);
+    }catch (Exception e) {
+      activityID = null;
+    }
     commentNode.remove();
     document.save();
-    if (listenerService!=null) {
+    if (listenerService!=null && activityID !=null && activityService !=null) {
       try {
         if (activityService.isAcceptedNode(document.getParent())) {
-          listenerService.broadcast(ActivityCommonService.COMMENT_ACTION_ACTIVITY, document.getParent(), ActivityCommonService.COMMENT_REMOVED);
+          listenerService.broadcast(ActivityCommonService.COMMENT_REMOVED_ACTIVITY, document.getParent(), activityID);
         }
       } catch (Exception e) {
         if (LOG.isErrorEnabled()) {
