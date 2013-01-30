@@ -41,7 +41,10 @@ import org.exoplatform.commons.utils.IOUtil;
 import org.exoplatform.commons.utils.MimeTypeResolver;
 import org.exoplatform.ecm.connector.fckeditor.FCKMessage;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
+import org.exoplatform.services.listener.ListenerService;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.upload.UploadResource;
@@ -86,9 +89,16 @@ public class FileUploadHandler {
 
   /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
   private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
-
+  
+  public final static String POST_CREATE_CONTENT_EVENT = "CmsService.event.postCreate";
+  
   /** The upload service. */
   private UploadService uploadService;
+  
+  /** The listener service. */
+  ListenerService listenerService;
+  
+  private ActivityCommonService   activityService;
 
   /** The fck message. */
   private FCKMessage fckMessage;
@@ -106,6 +116,8 @@ public class FileUploadHandler {
    */
   public FileUploadHandler() {
     uploadService = WCMCoreUtils.getService(UploadService.class);
+    listenerService = WCMCoreUtils.getService(ListenerService.class);
+    activityService = WCMCoreUtils.getService(ActivityCommonService.class);
     fckMessage = new FCKMessage();
     uploadIdTimeMap = new Hashtable<String, Long>();
     UPLOAD_LIFE_TIME = System.getProperty("MULTI_UPLOAD_LIFE_TIME") == null ? 600 ://10 minutes
@@ -331,6 +343,9 @@ public class FileUploadHandler {
     String location = resource.getStoreLocation();
     byte[] uploadData = IOUtil.getFileContentAsBytes(location);
     Node file = parent.addNode(fileName,FCKUtils.NT_FILE);
+    if(!file.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
+    	file.addMixin(NodetypeConstant.MIX_REFERENCEABLE);
+    }
     Node jcrContent = file.addNode("jcr:content","nt:resource");
     //MimeTypeResolver mimeTypeResolver = new MimeTypeResolver();
     DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();
@@ -342,8 +357,11 @@ public class FileUploadHandler {
     parent.getSession().refresh(true); // Make refreshing data
     uploadService.removeUploadResource(uploadId);
     uploadIdTimeMap.remove(uploadId);
-    WCMPublicationService wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);
+    WCMPublicationService wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);    
     wcmPublicationService.updateLifecyleOnChangeContent(file, siteName, userId);
+    if (activityService.isAcceptedNode(file)) {
+      listenerService.broadcast(ActivityCommonService.NODE_CREATED_ACTIVITY, null, file);
+    }
     return Response.ok(createDOMResponse("Result", mimetype), MediaType.TEXT_XML)
                    .cacheControl(cacheControl)
                    .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
