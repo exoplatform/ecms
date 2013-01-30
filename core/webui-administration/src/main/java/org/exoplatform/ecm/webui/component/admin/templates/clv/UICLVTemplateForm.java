@@ -61,7 +61,7 @@ import org.exoplatform.webui.form.UIFormTextAreaInput;
         events = {
           @EventConfig(listeners = UICLVTemplateForm.SaveActionListener.class),
           @EventConfig(listeners = UICLVTemplateForm.ResetActionListener.class, phase=Phase.DECODE),
-          @EventConfig(listeners = UICLVTemplateForm.CancelActionListener.class, phase=Phase.DECODE),
+          @EventConfig(listeners = UICLVTemplateForm.CancelActionListener.class, phase=Phase.DECODE)
         }
     )
 public class UICLVTemplateForm extends UIForm {
