@@ -38,10 +38,10 @@
    <name>عنوان</name>
    <selectTemplate>حدد نموذج </selectTemplate>
    <option>
-    <exo:siteBreadcrumb>موقع تفصيلي</exo:siteBreadcrumb>
-    <exo:siteNavigationWebContent>موقع الملاحة</exo:siteNavigationWebContent>
+    <wai:siteBreadcrumb>موقع تفصيلي</wai:siteBreadcrumb>
+    <wai:siteNavigationWebContent>موقع الملاحة</wai:siteNavigationWebContent>
     <exo:pictureOnHeadWebcontent>الصورة على تخطيط رئيس محتوى الويب</exo:pictureOnHeadWebcontent>
-    <exo:siteSearchBox>موقع الويب مربع البحث محتوى</exo:siteSearchBox>
+    <wai:siteSearchBox>موقع الويب مربع البحث محتوى</wai:siteSearchBox>
     <exo:webContent>الحرة محتوى تخطيط ويب</exo:webContent>
    </option>
   </label>

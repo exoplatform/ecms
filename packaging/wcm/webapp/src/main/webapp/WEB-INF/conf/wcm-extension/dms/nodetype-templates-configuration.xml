@@ -257,13 +257,13 @@
                 <value>
                   <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
                     <field name="nodetypeName">
-                      <string>exo:siteSearchBox</string>
+                      <string>wai:siteSearchBox</string>
                     </field>
                     <field name="documentTemplate">
                       <boolean>true</boolean>
                     </field>
                     <field name="label">
-                      <string>Site search box webcontent</string>
+                      <string>Accessible Site Search Box</string>
                     </field>
                     <field name="referencedView">
                       <collection type="java.util.ArrayList">
@@ -305,7 +305,7 @@
                       <boolean>true</boolean>
                     </field>
                     <field name="label">
-                      <string>Picture on head layout webcontent</string>
+                      <string>Illustrated Web Content</string>
                     </field>
                     <field name="referencedView">
                       <collection type="java.util.ArrayList">
@@ -352,7 +352,7 @@
                       <boolean>true</boolean>
                     </field>
                     <field name="label">
-                      <string>Free layout webcontent</string>
+                      <string>Web Content</string>
                     </field>
                     <field name="referencedView">
                       <collection type="java.util.ArrayList">
@@ -390,13 +390,13 @@
                 <value>
                   <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
                     <field name="nodetypeName">
-                      <string>exo:siteNavigationWebContent</string>
+                      <string>wai:siteNavigationWebContent</string>
                     </field>
                     <field name="documentTemplate">
                       <boolean>true</boolean>
                     </field>
                     <field name="label">
-                      <string>Site Navigation</string>
+                      <string>Accessible Navigation</string>
                     </field>
                     <field name="referencedView">
                       <collection type="java.util.ArrayList">
@@ -433,13 +433,13 @@
                 <value>
                   <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
                     <field name="nodetypeName">
-                      <string>exo:siteBreadcrumb</string>
+                      <string>wai:siteBreadcrumb</string>
                     </field>
                     <field name="documentTemplate">
                       <boolean>true</boolean>
                     </field>
                     <field name="label">
-                      <string>Site Breadcrumb</string>
+                      <string>Accessible Breadcrumb</string>
                     </field>
                     <field name="referencedView">
                       <collection type="java.util.ArrayList">
@@ -560,7 +560,7 @@
                 <value>
                   <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
                     <field name="nodetypeName">
-                      <string>exo:contact_us</string>
+                      <string>acme:contact_us</string>
                     </field>
                     <field name="documentTemplate">
                       <boolean>true</boolean>

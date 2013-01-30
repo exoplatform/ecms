@@ -61,13 +61,13 @@
     </propertyDefinitions>
   </nodeType>
 
-  <nodeType name="exo:siteSearchBox" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+  <nodeType name="wai:siteSearchBox" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
     <supertypes>
       <supertype>exo:webContent</supertype>
     </supertypes>
   </nodeType>
 
-  <nodeType name="exo:siteNavigationWebContent" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+  <nodeType name="wai:siteNavigationWebContent" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
     <supertypes>
       <supertype>exo:webContent</supertype>
     </supertypes>
@@ -93,37 +93,37 @@
     </propertyDefinitions>
   </nodeType>
 
-  <nodeType name="exo:siteBreadcrumb" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+  <nodeType name="wai:siteBreadcrumb" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
     <supertypes>
       <supertype>exo:webContent</supertype>
     </supertypes>
   </nodeType>
 
 
-  <nodeType name="exo:contact_us" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
+  <nodeType name="acme:contact_us" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
     <supertypes>
       <supertype>nt:base</supertype>
     </supertypes>
     <propertyDefinitions>
-      <propertyDefinition name="exo:fg_p_label" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+      <propertyDefinition name="acme:fg_p_label" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints />
       </propertyDefinition>
-      <propertyDefinition name="exo:fg_p_select_a_recipient" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+      <propertyDefinition name="acme:fg_p_select_a_recipient" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints />
       </propertyDefinition>
-      <propertyDefinition name="exo:fg_p_your_name" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+      <propertyDefinition name="acme:fg_p_your_name" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints />
       </propertyDefinition>
-      <propertyDefinition name="exo:fg_p_your_address" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+      <propertyDefinition name="acme:fg_p_your_address" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints />
       </propertyDefinition>
-      <propertyDefinition name="exo:fg_p_your_email_address" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+      <propertyDefinition name="acme:fg_p_your_email_address" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints />
       </propertyDefinition>
-      <propertyDefinition name="exo:fg_p_your_phone_number" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+      <propertyDefinition name="acme:fg_p_your_phone_number" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints />
       </propertyDefinition>
-      <propertyDefinition name="exo:fg_p_your_message" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+      <propertyDefinition name="acme:fg_p_your_message" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints />
       </propertyDefinition>
       <propertyDefinition name="jcr:primaryType" requiredType="Name" autoCreated="true" mandatory="true" onParentVersion="COMPUTE" protected="true" multiple="false">

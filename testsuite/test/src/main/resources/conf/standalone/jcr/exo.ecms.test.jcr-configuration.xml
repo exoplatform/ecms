@@ -200,6 +200,8 @@ xmlns="http://www.exoplaform.org/xml/ns/kernel_1_2.xsd">
         <properties-param>
           <name>namespaces</name>
           <property name="dc" value="http://purl.org/dc/elements/1.1/" />
+										<property name="wai" value="http://www.exoplatform.com/ecm/accessibility/1.0"/>
+										<property name="acme" value="http://www.exoplatform.com/plf/acme/4.0/"/>
           <property name="rma" value="http://www.rma.com/jcr/" />
           <property name="metadata" value="http://www.exoplatform.com/jcr/metadata/1.1/" />
           <property name="Fwd" value="http://www.exoplatform.com/jcr/Fwd/1.1/" />

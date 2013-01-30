@@ -147,7 +147,7 @@
                     <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
                       <field  name="nodetypeName"><string>exo:autoVersioning</string></field>
                       <field  name="documentTemplate"><boolean>false</boolean></field>
-                      <field  name="label"><string>Automation Versioning </string></field>
+                      <field  name="label"><string>Automatic Versioning</string></field>
                       <field  name="referencedView">
                         <collection type="java.util.ArrayList">
                           <value>
@@ -208,7 +208,7 @@
                     <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
                       <field name="nodetypeName"><string>exo:comments</string></field>
                       <field name="documentTemplate"><boolean>false</boolean></field>
-                      <field name="label"><string>Comments Info</string></field>
+                      <field name="label"><string>Comments</string></field>
                       <field name="referencedView">
                         <collection type="java.util.ArrayList">
                           <value>
@@ -242,7 +242,7 @@
                     <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
                       <field  name="nodetypeName"><string>nt:resource</string></field>
                       <field  name="documentTemplate"><boolean>false</boolean></field>
-                      <field  name="label"><string>Exo data</string></field>
+                      <field  name="label"><string>File Content</string></field>
                       <field  name="referencedView">
                         <collection type="java.util.ArrayList">
                           <value>

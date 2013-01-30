@@ -56,7 +56,7 @@
                       <boolean>false</boolean>
                     </field>
                     <field name="label">
-                      <string>Web Site Metadata</string>
+                      <string>Site Metadata</string>
                     </field>
                     <field name="referencedDialog">
                       <collection type="java.util.ArrayList">
