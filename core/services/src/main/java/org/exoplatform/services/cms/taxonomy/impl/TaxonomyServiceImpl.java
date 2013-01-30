@@ -491,7 +491,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
         if (listenerService!=null) {
           try {
             if (activityService.isAcceptedNode(node)) {
-              listenerService.broadcast(ActivityCommonService.CATEGORY_ADDED_ACTIVITY, node, linkName);
+              listenerService.broadcast(ActivityCommonService.CATEGORY_ADDED_ACTIVITY, node, taxonomyName);
             }
           } catch (Exception e) {
             if (LOG.isErrorEnabled()) {

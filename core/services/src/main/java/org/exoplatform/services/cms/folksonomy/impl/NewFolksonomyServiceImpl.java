@@ -146,7 +146,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
           firstTagFlag = false;
           tagValue.append(tag);
         }else {
-          tagValue.append(ActivityCommonService.VALUE_SEPERATOR).append(tag);
+          tagValue.append(",").append(tag);
         }
         
       } catch (Exception e) {
@@ -224,7 +224,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
            firstTagFlag = false;
            tagValue.append(tag);
          }else {
-           tagValue.append(ActivityCommonService.VALUE_SEPERATOR).append(tag);
+           tagValue.append(",").append(tag);
          }
       } catch (Exception e) {
         if (LOG.isErrorEnabled()) {
