@@ -43,18 +43,14 @@
 								 <%}%>
 									<div class="controls">
 									<% 
-								if(inputEntry instanceof UIFormRadioBoxInput) {
-									println "<div class=\"MultiRadioInput\">" ;
-										uicomponent.renderUIComponent(inputEntry) ; 
-									println "</div>" ;
-								} else {
-									uicomponent.renderUIComponent(inputEntry) ;
-									if(inputEntry instanceof UIFormStringInput) {
-										%>
-											<button type="button" class="btn btn-primary" onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>','AddTag', true);"><%=_ctx.appRes(formName + ".action.AddTag")%></button>
-										<%
-									}
+						
+								uicomponent.renderUIComponent(inputEntry) ;
+								if(inputEntry instanceof UIFormStringInput) {
+									%>
+										<button type="button" class="btn btn-primary" onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>','AddTag', true);"><%=_ctx.appRes(formName + ".action.AddTag")%></button>
+									<%
 								}
+								
 								String infor = uicomponent.getInfoField(inputEntry.getName()) ;
 								def listInfor = uicomponent.getListInfoField(inputEntry.getName()) ;
 								def actionInfo = uicomponent.getActionInfo(inputEntry.getName()) ;

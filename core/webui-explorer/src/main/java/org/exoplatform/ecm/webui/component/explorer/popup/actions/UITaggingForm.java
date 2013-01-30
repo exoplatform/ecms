@@ -128,7 +128,7 @@ public class UITaggingForm extends UIForm {
     uiInputSet.setIntroduction(TAG_NAMES, "UITaggingForm.introduction.tagName");
     addUIComponentInput(uiInputSet);
     uiInputSet.setIsView(false);
-    super.setActions(new String[] { "AddTag", "Cancel" });
+    super.setActions(new String[] {"Cancel" });
   }
 
   public void activate() throws Exception {

@@ -86,29 +86,29 @@
 	}
 }
 
-/******** itemList ********/
+/******** uiItemList ********/
 
-.itemList {
+.uiItemList {
 	li {
-		padding-left:15px;
-		line-height: 23px;
+		padding: 2px 0px 2px 15px;
 		font-size: 12px;
 		
 		> a {
 			color: #25155d;
 			
 			&:hover {
-				color: blue;
+				color: @linkColorHover;
 			}
 		}
-	}
 	
-	.arrowSidContent{
-		background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/ArrowSideBar.gif') no-repeat left center;
-	}
-	
-	.trueSelectIcon {
-		background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/background/SelectCheck.gif') no-repeat -5px center;
+		.selectedNode {
+			color: @linkColorHover;
+		}
+		
+		> [class^="uiIcon"] {
+			float: left;
+			margin: 3px 0px 0px -21px;
+		}
 	}
 }
 
@@ -916,5 +916,10 @@
 			background-image: url("/eXoResources/skin/images/Icons/uiIconsWhite.png");
 		}
 	}
+}
+
+/******** iFrameUpload **************/
+.iFrameUpload {
+	border: none;
 }
 
