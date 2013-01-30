@@ -1,5 +1,6 @@
 <% 
 	import org.exoplatform.webui.form.UIFormInputBase;
+	import org.exoplatform.webui.form.UIForm;
 	
 	def uiform = uicomponent.getChild(UIForm.class);
 	String fieldName; %>
@@ -10,8 +11,8 @@
 	<%// start render action%>
 	<div class="uiAction uiActionBorder"> 
 		<%
-		 String closeActionLabel = _ctx.appRes(uicomponent.getName() + ".action.Close");
-		 String actionLink = uicomponent.event("Close");
+		 String closeActionLabel = _ctx.appRes(uiform.getName() + ".action.Close");
+		 String actionLink = uiform.event("Close");
 		%>
 		<button href="javascript:void(0);" onclick="$actionLink" class="btn">$closeActionLabel</button>
 	</div>
