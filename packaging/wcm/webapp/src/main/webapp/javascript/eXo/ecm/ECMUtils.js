@@ -1475,7 +1475,7 @@
 
 		ECMUtils.prototype.disableAutocomplete = function (id) {
 			var clickedElement = document.getElementById(id);
-			tagNameInput = gj(clickedElement).find("div.UITagNameInput:first")[0];
+			tagNameInput = gj(clickedElement).find("div.uiTagNameInput:first")[0];
 			gj(tagNameInput).find("#names:first")[0].setAttribute("autocomplete", "off");
 		}
 

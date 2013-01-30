@@ -1,6 +1,6 @@
 <div class="<%=uicomponent.getId()%>" id="<%=uicomponent.getId()%>">
-	<div class="UIAction"> 
+	<div class="uiAction"> 
 		<% String action = "AddTag"; %>
-		<a onclick="<%=uicomponent.getParent().event(action)%>" class="ActionButton LightBlueStyle" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIEditingTagsForm.action.title." + action)%>" href="javascript:void(0);"><%=_ctx.appRes("UIEditingTagsForm.action.title." + action)%></a>
+		<button type="button" onclick="<%=uicomponent.getParent().event(action)%>" class="btn" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIEditingTagsForm.action.title." + action)%>" href="javascript:void(0);"><%=_ctx.appRes("UIEditingTagsForm.action.title." + action)%></button>
 	</div>
 </div>

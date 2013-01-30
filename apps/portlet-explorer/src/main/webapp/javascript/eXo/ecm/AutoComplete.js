@@ -19,9 +19,9 @@
 			var event = event || window.event;
 			event.cancelBubble = true; 
 			popupSelector = gj(clickedElement).parents(".UITaggingForm:first")[0];
-			showBlock = gj(popupSelector).find("div.UIFormTextAreaInput:first")[0];
+			//showBlock = gj(popupSelector).find("div.uiFormTextAreaInput:first")[0];
 			itemList = gj(showBlock).find("option.Item");
-			tagNameInput = gj(popupSelector).find("div.UITagNameInput:first")[0];
+			tagNameInput = gj(popupSelector).find("div.uiTagNameInput:first")[0];
 			inputBox = gj(tagNameInput).find("#names:first")[0];
 			tags = new Array(itemList.length);
 			itemList.each(function(index, elem) {
