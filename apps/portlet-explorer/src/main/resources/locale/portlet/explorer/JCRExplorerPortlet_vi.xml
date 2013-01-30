@@ -3134,8 +3134,8 @@
    <UITagExplorer>
     <title>
       <EditPrivateTags>Sửa nhãn riêng</EditPrivateTags>
-      <PublicTags>Nhãn chung</PublicTags>
-      <EditPublicTags>Sửa nhãn chung</EditPublicTags>
+      <PublicTags>Nhãn</PublicTags>
+      <EditPublicTags>Sửa nhãn</EditPublicTags>
       <PrivateTags>Nhãn riêng</PrivateTags>
      </title>
    </UITagExplorer>

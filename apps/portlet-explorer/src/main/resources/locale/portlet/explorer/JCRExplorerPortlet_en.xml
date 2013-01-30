@@ -3112,9 +3112,9 @@
   <UITagExplorer>
     <title>
       <EditPrivateTags>Edit Private Tags</EditPrivateTags>
-      <PublicTags>Public Tags</PublicTags>
-      <EditPublicTags>Edit Public Tags</EditPublicTags>
-      <PrivateTags>Private Tags</PrivateTags>
+      <PublicTags>Tags</PublicTags>
+      <EditPublicTags>Edit Tags</EditPublicTags>
+      <PrivateTags>Tags</PrivateTags>
     </title>
   </UITagExplorer>
 

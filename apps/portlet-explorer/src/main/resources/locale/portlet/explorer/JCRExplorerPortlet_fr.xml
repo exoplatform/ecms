@@ -3122,8 +3122,8 @@
    <UITagExplorer>
     <title>
       <EditPrivateTags>Editer les tags privés</EditPrivateTags>
-      <PublicTags>Tags publics</PublicTags>
-      <EditPublicTags>Editer les tags publics</EditPublicTags>
+      <PublicTags>Tags</PublicTags>
+      <EditPublicTags>Editer les tags</EditPublicTags>
       <PrivateTags>Tags privés</PrivateTags>
      </title>
    </UITagExplorer>
