@@ -644,8 +644,8 @@
 			}
 		};
 		ECMUtils.prototype.initWithoutLeftContainer = function () {
-			var value = gj(Self.uiWorkingArea).attr("initWithoutLeftContainer")!='true';
-			return value;
+			var value = gj("#LeftContainer:first");
+			return (value.length == 0);
 		}
 		ECMUtils.prototype.resizeSideBar = function (event) {
 			var event = event || window.event;
