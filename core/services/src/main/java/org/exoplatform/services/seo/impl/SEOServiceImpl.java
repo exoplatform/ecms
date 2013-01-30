@@ -55,6 +55,8 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import org.exoplatform.ecm.utils.text.Text;
+
 /**
  * Created by The eXo Platform SAS Author : eXoPlatform exo@exoplatform.com Jun
  * 17, 2011
@@ -667,7 +669,7 @@ public class SEOServiceImpl implements SEOService {
       path = path.substring(0, path.length() - 1);
     return path;
   }
-
+  
   public Node getContentNode(String seoPath) throws Exception {
     Node seoNode = null;
     if (seoPath != null && seoPath.length() > 0) {
@@ -696,7 +698,7 @@ public class SEOServiceImpl implements SEOService {
             if (isWs) {
               Session session = WCMCoreUtils.getUserSessionProvider()
                   .getSession(ws, manageRepo);
-              nodePath = nodePath.replaceAll("//", "/");
+              nodePath = Text.escapeIllegalJcrChars(nodePath.replaceAll("//", "/"));
               if (session.getItem(nodePath) != null) {
                 if (session.getItem(nodePath).isNode()) {
                   seoNode = (Node) session.getItem(nodePath);
