@@ -57,7 +57,7 @@
         def permlink;
         int i = 0;
         for (data in uicomponent.getNodeChildrenList()) {
-          writeNodes(0, i, data, uiWorkingArea, linkManager, restContextName, repository, permlink, contextMenu, arrColumns, uiDocumentInfo, portalName);
+          writeNodes(0, i, data, uiWorkingArea, linkManager, restContextName, repository, permlink, contextMenu, arrColumns, uiDocumentInfo, portalName, uiCustomActionComponent);
           if (data.isNodeType(NodetypeConstant.NT_FOLDER) || data.isNodeType(NodetypeConstant.NT_UNSTRUCTURED)) {
             if (data instanceof NodeLinkAware) {
               data = ((NodeLinkAware)data).getRealNode();
@@ -88,7 +88,7 @@
 </div>  
 
 <%
-public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextName, repository, permlink, contextMenu, arrColumns, uiDocumentInfo, portalName) {
+public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextName, repository, permlink, contextMenu, arrColumns, uiDocumentInfo, portalName, uiCustomActionComponent) {
   try {
     data.getSession().getItem(data.getPath());
   } catch(PathNotFoundException pne) {
