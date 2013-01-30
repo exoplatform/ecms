@@ -422,6 +422,10 @@
 	overflow-x: auto;
 }
 
+.UIJCRExplorerPortlet .UIFileView .UIListGrid {
+	overflow-x: hidden;
+}
+
 .UIJCRExplorerPortlet .UIListView .TitleTable {
 	font-weight: bold;
 	line-height: 25px; height: 27px;
