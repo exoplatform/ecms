@@ -54,7 +54,7 @@ public class UITaxonomyManagerTrees extends UIAbstractManager {
     UIPopupWindow uiPopup = getChildById(id);
     if (uiPopup == null) {
       uiPopup = addChild(UIPopupWindow.class, null, id);
-      uiPopup.setWindowSize(650, 450);      
+      uiPopup.setWindowSize(650, 170);      
       uiTaxonomyTreeContainer = createUIComponent(UITaxonomyTreeContainer.class, null, null);
     } else {
       uiTaxonomyTreeContainer = uiPopup.findFirstComponentOfType(UITaxonomyTreeContainer.class);

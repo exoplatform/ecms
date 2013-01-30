@@ -39,7 +39,7 @@ public class UITemplateContainer extends UIContainer {
     removeChildById(popupId) ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, popupId) ;
     uiPopup.setShowMask(true);
-    uiPopup.setWindowSize(600,400) ;
+    uiPopup.setWindowSize(600,280) ;
     UITemplateForm uiTempForm = createUIComponent(UITemplateForm.class, null, compId) ;
     if(type.equals("Add")) {
       uiTempForm.isAddNew_ = true ;

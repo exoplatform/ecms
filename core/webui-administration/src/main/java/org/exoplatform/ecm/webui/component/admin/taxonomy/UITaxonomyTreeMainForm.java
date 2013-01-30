@@ -23,6 +23,8 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeManager;
+import org.exoplatform.ecm.webui.component.admin.templates.UITemplateForm;
+import org.exoplatform.ecm.webui.component.admin.templates.UITemplatesManager;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.BasePath;
@@ -44,6 +46,8 @@ import org.exoplatform.webui.form.UIFormInputBase;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
+import org.exoplatform.webui.core.UIPopupWindow;
+
 
 /**
  * Created by The eXo Platform SARL
@@ -58,6 +62,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
     events = {
       @EventConfig(listeners = UITaxonomyTreeMainForm.ChangeActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UITaxonomyTreeMainForm.ResetActionListener.class, phase = Phase.DECODE),
+      @EventConfig(listeners = UITaxonomyTreeMainForm.CancelActionListener.class, phase=Phase.DECODE),
       @EventConfig(listeners = UITaxonomyTreeMainForm.AddPathActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UITaxonomyTreeMainForm.NextViewPermissionActionListener.class)
     }
@@ -82,7 +87,7 @@ public class UITaxonomyTreeMainForm extends UIForm {
         .setEditable(false));
     uiActionHomePath.setActionInfo(FIELD_HOMEPATH, new String[] { "AddPath" });
     addUIComponentInput(uiActionHomePath);
-    setActions(new String[] {"Reset", "NextViewPermission"});
+    setActions(new String[] {"NextViewPermission", "Cancel"});
   }
 
   public void update(TaxonomyTreeData taxonomyTree) throws Exception {
@@ -261,5 +266,15 @@ public class UITaxonomyTreeMainForm extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTaxonomyManagerTrees);
     }
   }
+  
+  static  public class CancelActionListener extends EventListener<UITaxonomyTreeMainForm> {
+	    public void execute(Event<UITaxonomyTreeMainForm> event) throws Exception {      
+	      UITaxonomyTreeMainForm uiTaxonomyTreeForm = event.getSource();
+	      UITaxonomyTreeContainer uiContainer = uiTaxonomyTreeForm.getAncestorOfType(UITaxonomyTreeContainer.class);
+	      UIPopupWindow uiPopupWindow = uiContainer.getParent();
+	      uiPopupWindow.setRendered(false) ;
+	      event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupWindow) ;
+	    }
+	  }
 
 }
