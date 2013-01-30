@@ -35,7 +35,7 @@
 				    } else {
 				%>
 				<a class="driveLabel" href="<%=uicomponent.event("SelectDrive", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom"  title="<%=uicomponent.getLabel(drive.getName())%>">
-					<i class="uiIconEcms24x24DriveGeneral uiIconEcms24x24Drive${drive.workspace} uiIconEcms24x24LightGray driveIcon" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getLabel(drive.getName())%>"></i> <%=uicomponent.getLabel(drive.getName())%>
+					<i class="uiIconEcms24x24DriveGeneral uiIconEcms24x24Drive${drive.workspace} uiIconEcms24x24LightGray driveIcon"></i><%=uicomponent.getLabel(drive.getName())%>
 				</a>
 				<%      
 				    }
@@ -59,7 +59,7 @@
 					</i>
 	        <%  } else {  %>
 					<a class="driveLabel" href="<%=uicomponent.event("SelectDrive","${groupDrive.name}")%>" rel="tooltip" data-placement="bottom" title="${groupLabel}">
-						<i class="uiIconEcms24x24DriveGroup uiIconEcms24x24LightGray driveIcon" onclick="<%=uicomponent.event("SelectDrive","${groupDrive.name}")%>" rel="tooltip" data-placement="bottom" title="${groupLabel}"><span></span></i>${groupLabel}
+						<i class="uiIconEcms24x24DriveGroup uiIconEcms24x24LightGray driveIcon"></i>${groupLabel}
 					</a>
 		      <%
 		          }
@@ -83,7 +83,7 @@
 				</i>
 	      <%  } else { %>
 				<a class="driveLabel" href="<%=uicomponent.event("SelectDrive","${drive.name}")%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getLabel(drive.getName())%>">
-					<i class="uiIconEcms24x24Drive${drive.name} uiIconEcms24x24LightGray driveIcon" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getLabel(drive.getName())%>"></i> <%=uicomponent.getLabel(drive.getName())%>
+					<i class="uiIconEcms24x24Drive${drive.name} uiIconEcms24x24LightGray driveIcon"></i> <%=uicomponent.getLabel(drive.getName())%>
 				</a>
         <%
             }
