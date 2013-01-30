@@ -125,19 +125,13 @@ public class UITemplatesManager extends UIAbstractManager {
 
   public void refresh() throws Exception {	
     UITemplateContainer templateContainer = ((UITemplateContainer)getChildById("UITemplateContainer"));
-    templateContainer.update();
-    templateContainer.getChild(UITemplateList.class).refresh(1);
-    
     UITemplateContainer templateActionsContainer = ((UITemplateContainer)getChildById(ACTIONS_TEMPLATE_ID));
-    templateActionsContainer.update();
-    templateActionsContainer.getChild(UITemplateList.class).refresh(1);
-    templateContainer.getChild(UITemplateList.class).getUIPageIterator().setId(ACTIONS_ITERATOR_ID);
-    
     UITemplateContainer templateOthersContainer = ((UITemplateContainer)getChildById(OTHERS_TEMPLATE_ID));
-    templateOthersContainer.update();
-    templateOthersContainer.getChild(UITemplateList.class).refresh(1);
+    templateContainer.getChild(UITemplateList.class).getUIPageIterator().setId(ACTIONS_ITERATOR_ID);
     templateOthersContainer.getChild(UITemplateList.class).getUIPageIterator().setId(OTHERS_ITERATOR_ID);
-    
+    templateContainer.update();    
+    templateActionsContainer.update();   
+    templateOthersContainer.update();    
   }
   
   static public class SelectTabActionListener extends EventListener<UITemplatesManager>

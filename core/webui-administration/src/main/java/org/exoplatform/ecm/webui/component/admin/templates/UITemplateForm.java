@@ -85,17 +85,27 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
   final static public String FIELD_TAB_SKIN = "UISkinTab" ;
   final static public String FIELD_PERMISSION = "permission" ;
   final static public String POPUP_PERMISSION = "PopupViewPermission" ;
+  public static final String DOCUMENTS_TEMPLATE_TYPE = "templates";
+  public static final String ACTIONS_TEMPLATE_TYPE = "actions";
+  public static final String OTHERS_TEMPLATE_TYPE = "others";
   
   private String selectedTabId = "";
+  private static String filter = ""; //DOCUMENTS_TEMPLATE_TYPE;
   
-  public String getSelectedTabId()
-  {
+  public String getSelectedTabId() {
      return selectedTabId;
   }
 
-  public void setSelectedTab(String renderTabId)
-  {
+  public void setSelectedTab(String renderTabId) {
      selectedTabId = renderTabId;
+  }
+  
+  public String getFilter() {
+  	return filter;
+  }
+  
+  public void setFilter(String filter) {
+  	this.filter = filter;
   }
 
   public void setSelectedTab(int index)
@@ -183,25 +193,40 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
   }
 
   @SuppressWarnings("unchecked")
-  public List<SelectItemOption<String>> getOption() throws Exception {
+  public List<SelectItemOption<String>> getOption() throws Exception { 
+  	TemplateService templateService = getApplicationComponent(TemplateService.class);
+    List<String> documentNodeTypes = templateService.getAllDocumentNodeTypes();
+    
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>() ;
     NodeTypeManager nodeTypeManager =
         getApplicationComponent(RepositoryService.class).getCurrentRepository().getNodeTypeManager() ;
     Node templatesHome = getApplicationComponent(TemplateService.class).
         getTemplatesHome(WCMCoreUtils.getUserSessionProvider());
+    
     if(templatesHome != null) {
       NodeIterator templateIter = templatesHome.getNodes() ;
       List<String> templates = new ArrayList<String>() ;
       while (templateIter.hasNext()) {
         templates.add(templateIter.nextNode().getName()) ;
       }
+      
       NodeTypeIterator iter = nodeTypeManager.getAllNodeTypes() ;
       while (iter.hasNext()) {
         NodeType nodeType = iter.nextNodeType();
         if (nodeType.isMixin()) continue;
         String nodeTypeName = nodeType.getName();
-        if (!templates.contains(nodeTypeName))
-          options.add(new SelectItemOption<String>(nodeTypeName, nodeTypeName));
+        if (!templates.contains(nodeTypeName)) {
+        	/*if(filter.equals(DOCUMENTS_TEMPLATE_TYPE)) {
+        		if(documentNodeTypes.contains(nodeTypeName)) options.add(new SelectItemOption<String>(nodeTypeName, nodeTypeName));
+        	} else if(filter.equals(ACTIONS_TEMPLATE_TYPE)) {
+        		if(nodeTypeManager.getNodeType(nodeTypeName).isNodeType("exo:action")) 
+        			options.add(new SelectItemOption<String>(nodeTypeName, nodeTypeName));
+        	} else {
+        		if(!nodeTypeManager.getNodeType(nodeTypeName).isNodeType("exo:action") && !documentNodeTypes.contains(nodeTypeName))
+        			options.add(new SelectItemOption<String>(nodeTypeName, nodeTypeName));
+        	}*/
+        	options.add(new SelectItemOption<String>(nodeTypeName, nodeTypeName));
+        }
       }
       Collections.sort(options, new TemplateNameComparator()) ;
     }
