@@ -160,12 +160,7 @@ public class UITemplateList extends UIPagingGrid {
       UITemplateContainer uiTemplateContainer = uiTemplatesManager.getChildById(uiTemplatesManager.getSelectedTabId());
       UITemplateList uiList = uiTemplateContainer.getChild(UITemplateList.class);
       UITemplateForm uiTemplateForm = uiTemplateContainer.createUIComponent(UITemplateForm.class, null, null) ;
-      uiTemplateForm.setFilter(uiList.getTemplateFilter());
-      if(uiTemplateForm.getOption().size() == 0) {
-        UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class) ;
-        uiApp.addMessage(new ApplicationMessage("UITemplateList.msg.access-denied", null, ApplicationMessage.WARNING)) ;        
-        return ;
-      }      
+      uiTemplateForm.setFilter(uiList.getTemplateFilter());         
       uiTemplateForm.refresh();
       uiTemplatesManager.initPopup(uiTemplateForm, UITemplatesManager.POPUP_TEMPLATE_ID) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTemplatesManager) ;

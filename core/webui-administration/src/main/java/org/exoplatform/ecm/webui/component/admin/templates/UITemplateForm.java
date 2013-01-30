@@ -154,7 +154,9 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
     getUIFormSelectBox(FIELD_NAME).setOptions(getOption());
     String nodeType = getUIFormSelectBox(FIELD_NAME).getValue();
     getUIStringInput(FIELD_LABEL).setValue("");
-    getUIFormCheckBoxInput(FIELD_ISTEMPLATE).setChecked(true);
+    if(filter.equals(DOCUMENTS_TEMPLATE_TYPE)) getUIFormCheckBoxInput(FIELD_ISTEMPLATE).setChecked(true);
+    else getUIFormCheckBoxInput(FIELD_ISTEMPLATE).setChecked(false);
+    getUIFormCheckBoxInput(FIELD_ISTEMPLATE).setDisabled(true);
     initTemplate(nodeType);
     getUIStringInput(FIELD_PERMISSION).setValue("");
   }
@@ -216,16 +218,11 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
         if (nodeType.isMixin()) continue;
         String nodeTypeName = nodeType.getName();
         if (!templates.contains(nodeTypeName)) {
-        	/*if(filter.equals(DOCUMENTS_TEMPLATE_TYPE)) {
-        		if(documentNodeTypes.contains(nodeTypeName)) options.add(new SelectItemOption<String>(nodeTypeName, nodeTypeName));
-        	} else if(filter.equals(ACTIONS_TEMPLATE_TYPE)) {
-        		if(nodeTypeManager.getNodeType(nodeTypeName).isNodeType("exo:action")) 
-        			options.add(new SelectItemOption<String>(nodeTypeName, nodeTypeName));
+        	if(filter.equals(ACTIONS_TEMPLATE_TYPE) && nodeTypeManager.getNodeType(nodeTypeName).isNodeType("exo:action")) {
+        	  options.add(new SelectItemOption<String>(nodeTypeName, nodeTypeName));
         	} else {
-        		if(!nodeTypeManager.getNodeType(nodeTypeName).isNodeType("exo:action") && !documentNodeTypes.contains(nodeTypeName))
-        			options.add(new SelectItemOption<String>(nodeTypeName, nodeTypeName));
-        	}*/
-        	options.add(new SelectItemOption<String>(nodeTypeName, nodeTypeName));
+        		options.add(new SelectItemOption<String>(nodeTypeName, nodeTypeName));
+        	}
         }
       }
       Collections.sort(options, new TemplateNameComparator()) ;
@@ -242,7 +239,6 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
     public void execute(Event<UITemplateForm> event) throws Exception {
       UITemplateForm uiForm = event.getSource() ;
       UITemplatesManager uiManager = event.getSource().getAncestorOfType(UITemplatesManager.class) ;
-      UITemplateContainer uiTemplateContainer = uiManager.getChildById(uiManager.getSelectedTabId());
       
       String name = uiForm.getUIFormSelectBox(FIELD_NAME).getValue().trim() ;
       String label = uiForm.getUIStringInput(FIELD_LABEL).getValue().trim() ;
@@ -276,7 +272,7 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
       WCMComposer composer = WCMCoreUtils.getService(WCMComposer.class);
       composer.updateTemplatesSQLFilter();
       uiManager.refresh() ;
-      uiForm.refresh() ;
+      //uiForm.refresh() ;
       UIPopupWindow uiPopupWindow = uiManager.getChildById(UITemplatesManager.POPUP_TEMPLATE_ID) ;
       uiPopupWindow.setShow(false) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
@@ -294,9 +290,9 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
 
   static  public class RefreshActionListener extends EventListener<UITemplateForm> {
     public void execute(Event<UITemplateForm> event) throws Exception {
-      UITemplateForm uiFormTabPane = event.getSource() ;
-      uiFormTabPane.refresh() ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiFormTabPane.getParent()) ;
+      UITemplateForm uiForm = event.getSource() ;
+      uiForm.refresh() ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent()) ;
     }
   }
 
