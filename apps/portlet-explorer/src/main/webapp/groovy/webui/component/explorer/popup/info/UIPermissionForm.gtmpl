@@ -9,17 +9,6 @@
 		
 				<% uiform.renderField(uiform.PERMISSION) %>
 			</div>
-			<%//Rerender this	component with the new structure%>
-			<%// start render action%>
-			<div class="uiAction uiActionBorder"> 
-				<%
-				 String closeActionLabel = _ctx.appRes(uicomponent.getName() + ".action.Close");
-				 String actionLink = uicomponent.event("Close");
-				%>
-				<button href="javascript:void(0);" onclick="$actionLink" class="btn">$closeActionLabel</button>
-			</div>
-			<%// end render action%>
-
 	<%uiform.end()%>
 </div>
 <script language="javascript">

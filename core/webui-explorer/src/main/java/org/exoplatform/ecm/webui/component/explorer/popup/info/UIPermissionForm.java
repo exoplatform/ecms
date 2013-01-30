@@ -44,6 +44,7 @@ import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
+import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
@@ -291,7 +292,12 @@ public class UIPermissionForm extends UIForm implements UISelectable {
     public void execute(Event<UIPermissionForm> event) throws Exception {
       UIPermissionForm uiForm = event.getSource();
       ((UIPermissionManager)uiForm.getParent()).initUserSelector();
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
+      UIPopupContainer popupContainer = uiForm.getAncestorOfType(UIPopupContainer.class);
+      if (popupContainer != null) {
+        event.getRequestContext().addUIComponentToUpdateByAjax(popupContainer);
+      } else {
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
+      }
     }
   }
 
@@ -302,7 +308,12 @@ public class UIPermissionForm extends UIForm implements UISelectable {
       uiInputSet.getUIStringInput(UIPermissionInputSet.FIELD_USERORGROUP).setValue(IdentityConstants.ANY);
       uiForm.checkAll(false);
       uiInputSet.getUICheckBoxInput(PermissionType.READ).setChecked(true);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
+      UIPopupContainer popupContainer = uiForm.getAncestorOfType(UIPopupContainer.class);
+      if (popupContainer != null) {
+        event.getRequestContext().addUIComponentToUpdateByAjax(popupContainer);
+      } else {
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
+      }
     }
   }
 
@@ -312,7 +323,12 @@ public class UIPermissionForm extends UIForm implements UISelectable {
       UIGroupMemberSelector uiGroupMemberSelector = uiForm.createUIComponent(UIGroupMemberSelector.class, null, null);
       uiGroupMemberSelector.setSourceComponent(uiForm, new String[] { UIPermissionInputSet.FIELD_USERORGROUP });
       uiForm.getAncestorOfType(UIPermissionManager.class).initPopupPermission(uiGroupMemberSelector);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
+      UIPopupContainer popupContainer = uiForm.getAncestorOfType(UIPopupContainer.class);
+      if (popupContainer != null) {
+        event.getRequestContext().addUIComponentToUpdateByAjax(popupContainer);
+      } else {
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
+      }
     }
   }
 

@@ -30,7 +30,6 @@ import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIGrid;
 import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.UIPopupWindow;
-import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.organization.account.UIUserSelector;
@@ -45,8 +44,7 @@ import org.exoplatform.webui.organization.account.UIUserSelector;
  * Oct 13, 2006
  */
 
-@ComponentConfig(lifecycle = UIContainerLifecycle.class)
-
+@ComponentConfig(template = "app:/groovy/webui/component/explorer/popup/info/UIPermissionManager.gtmpl")
 public class UIPermissionManager extends UIContainer implements UIPopupComponent{
   private static final Log LOG  = ExoLogger.getLogger(UIPermissionManager.class.getName());
 
@@ -114,7 +112,7 @@ public class UIPermissionManager extends UIContainer implements UIPopupComponent
       }
     }
   }
-
+  
   public void deActivate() {
   }
 
