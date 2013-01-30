@@ -20,24 +20,23 @@
     <% } %>
 	  <%if(mainDrives.size() > 0) {%>
 			<div class="rowDrives clearfix">
-				<div class="iconArrowDrives textTitleDriver"><%=_ctx.appRes("UIDrivesBrowser.title.GeneralDrives" )%></div>
+				<h5 class="titleDriver"><i class="uiIconArrowRightMini uiIconLightGray"></i><%=_ctx.appRes("UIDrivesBrowser.title.GeneralDrives" )%></h5>
 				<%
 				  for(drive in mainDrives) {
     				println("<div class=\"drive\">");
     				if(drive.getIcon() != null && drive.getIcon().length() > 0) {
   	          String[] mainIconPath = drive.getIcon().split(":/") ;
   	    %>
-  	          <i class="driveIcon" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>" rel="tooltip" data-placement="bottom" title="${drive.name}">
-    	          <img rel="tooltip" data-placement="bottom" title="${drive.name}" alt="${drive.name}" src="/${uicomponent.getPortalName()}/${uicomponent.getRestName()}/jcr/${repository}/${mainIconPath[0]}/${mainIconPath[1]}" width="27" height="27" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>"/>
-    	        </i>
-		          <a class="driveLabel" href="<%=uicomponent.event("SelectDrive", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getLabel(drive.getName())%>"><%=uicomponent.getLabel(drive.getName())%></a>
+				<i class="driveIcon" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>" rel="tooltip" data-placement="bottom" title="${drive.name}">
+					<img rel="tooltip" data-placement="bottom" title="${drive.name}" alt="${drive.name}" src="/${uicomponent.getPortalName()}/${uicomponent.getRestName()}/jcr/${repository}/${mainIconPath[0]}/${mainIconPath[1]}" width="27" height="27" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>"/>
+				</i>
+				<a class="driveLabel" href="<%=uicomponent.event("SelectDrive", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getLabel(drive.getName())%>"><%=uicomponent.getLabel(drive.getName())%></a>
 				<%
 				    } else {
 				%>
-				      <i class="iconDrivesDefault iconDrives${drive.workspace} driveIcon" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getLabel(drive.getName())%>"></i>
- 				      <a class="driveLabel" href="<%=uicomponent.event("SelectDrive", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom"  title="<%=uicomponent.getLabel(drive.getName())%>">
- 				        <%=uicomponent.getLabel(drive.getName())%>
-			        </a>
+				<a class="driveLabel" href="<%=uicomponent.event("SelectDrive", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom"  title="<%=uicomponent.getLabel(drive.getName())%>">
+					<i class="uiIconEcms24x24DriveGeneral uiIconEcms24x24Drive${drive.workspace} uiIconEcms24x24LightGray driveIcon" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getLabel(drive.getName())%>"></i> <%=uicomponent.getLabel(drive.getName())%>
+				</a>
 				<%      
 				    }
 				    println("</div>");
@@ -47,7 +46,7 @@
 		<%}%>
 		<%if(groupDrives.size() > 0) {%>
 			<div class="rowDrives rowDrivesGroups clearfix">
-				<div class="iconArrowDrives textTitleDriver"><%=_ctx.appRes("UIDrivesBrowser.title.GroupDrives" )%></div>
+				<h5 class="titleDriver"><i class="uiIconArrowRightMini uiIconLightGray"></i><%=_ctx.appRes("UIDrivesBrowser.title.GroupDrives" )%></h5>
 	        <%
 	          for(groupDrive in groupDrives) {
 	            println("<div class=\"drive\">");
@@ -55,14 +54,13 @@
 	  	        if(groupDrive.getIcon() != null && groupDrive.getIcon().length() > 0) {
 		  		      String[] groupIconPath = groupDrive.getIcon().split(":/") ;
 		      %>
-			        <div class="Icon" onclick="<%=uicomponent.event("SelectDrive","${groupDrive.name}")%>" rel="tooltip" data-placement="bottom" title="${groupDrive.name}">
-			        	<img rel="tooltip" data-placement="bottom" title="${groupDrive.name}" alt="${groupDrive.name}" src="/${uicomponent.getPortalName()}/rest/jcr/${repository}/${groupIconPath[0]}/${groupIconPath[1]}" width="48" height="41" />			                				                  
-			        </div>
+					<i class="Icon" onclick="<%=uicomponent.event("SelectDrive","${groupDrive.name}")%>" rel="tooltip" data-placement="bottom" title="${groupDrive.name}">
+						<img rel="tooltip" data-placement="bottom" title="${groupDrive.name}" alt="${groupDrive.name}" src="/${uicomponent.getPortalName()}/rest/jcr/${repository}/${groupIconPath[0]}/${groupIconPath[1]}" width="48" height="41" />			                				                  
+					</i>
 	        <%  } else {  %>
-				        <i class="iconDrivesUse driveIcon" onclick="<%=uicomponent.event("SelectDrive","${groupDrive.name}")%>" rel="tooltip" data-placement="bottom" title="${groupLabel}"><span></span></i>
-	  			      <a class="driveLabel" href="<%=uicomponent.event("SelectDrive","${groupDrive.name}")%>" rel="tooltip" data-placement="bottom" title="${groupLabel}">
-	  			        ${groupLabel}
-  			        </a>
+					<a class="driveLabel" href="<%=uicomponent.event("SelectDrive","${groupDrive.name}")%>" rel="tooltip" data-placement="bottom" title="${groupLabel}">
+						<i class="uiIconEcms24x24DriveGroup uiIconEcms24x24LightGray driveIcon" onclick="<%=uicomponent.event("SelectDrive","${groupDrive.name}")%>" rel="tooltip" data-placement="bottom" title="${groupLabel}"><span></span></i>${groupLabel}
+					</a>
 		      <%
 		          }
 		          println("</div>");
@@ -73,21 +71,20 @@
 		<%}%>	
 		<%if(personalDrives.size() > 0) {%>
 			<div class="rowNormal clearfix">
-				<div class="iconArrowDrives textTitleDriver"><%=_ctx.appRes("UIDrivesBrowser.title.PersonalDrives" )%></div>
+				<h5 class="titleDriver"><i class="uiIconArrowRightMini uiIconLightGray"></i><%=_ctx.appRes("UIDrivesBrowser.title.PersonalDrives" )%></h5>
         <%
           for(drive in personalDrives) {
 	          println("<div class=\"drive\">");
 	          if(drive.getIcon() != null && drive.getIcon().length() > 0) {
 	            String[] personalIconPath = drive.getIcon().split(":/") ;
 	      %>
-			        <i class="driveIcon" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>" rel="tooltip" data-placement="bottom" title="${drive.name}">
-			        	<img alt="${drive.name}" src="/${uicomponent.getPortalName()}/rest/jcr/${repository}/${personalIconPath[0]}/${personalIconPath[1]}" alt="" width="48" height="41" />			                				                			                  
-			        </i>
+				<i class="driveIcon" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>" rel="tooltip" data-placement="bottom" title="${drive.name}">
+					<img alt="${drive.name}" src="/${uicomponent.getPortalName()}/rest/jcr/${repository}/${personalIconPath[0]}/${personalIconPath[1]}" alt="" width="48" height="41" />			                				                			                  
+				</i>
 	      <%  } else { %>
-	            <i class="iconDrives${drive.name} driveIcon" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getLabel(drive.getName())%>"></i>
-  	          <a class="driveLabel" href="<%=uicomponent.event("SelectDrive","${drive.name}")%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getLabel(drive.getName())%>">
-  	            <%=uicomponent.getLabel(drive.getName())%>
-	            </a>
+				<a class="driveLabel" href="<%=uicomponent.event("SelectDrive","${drive.name}")%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getLabel(drive.getName())%>">
+					<i class="uiIconEcms24x24Drive${drive.name} uiIconEcms24x24LightGray driveIcon" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getLabel(drive.getName())%>"></i> <%=uicomponent.getLabel(drive.getName())%>
+				</a>
         <%
             }
             println("</div>");
