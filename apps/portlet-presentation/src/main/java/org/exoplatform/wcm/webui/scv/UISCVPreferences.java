@@ -403,7 +403,7 @@ public class UISCVPreferences extends UIForm implements UISelectable{
     }
     if (title==null) title = node.getName();
 
-    return ContentReader.getXSSCompatibilityContent(title);
+    return Text.unescapeIllegalJcrChars(title);
   }
   public void setContentSelectorID(String id) {
     this.contentSelectorID = id;
@@ -434,7 +434,7 @@ public class UISCVPreferences extends UIForm implements UISelectable{
       strNodeUUID = selectedNode.getUUID();
       this.setSelectedNodeInfo(strNodeUUID, strRepository, strWorkspace, strDrive);
       this.setSelectedNodePath(selectedNode.getPath());
-      getUIStringInput(selectField).setValue(ContentReader.getXSSCompatibilityContent(getTitle(selectedNode)));
+      getUIStringInput(selectField).setValue(getTitle(selectedNode));
     }else if (PRINT_VIEW_PAGE_INPUT.equals(selectField)) {
       getUIStringInput(selectField).setValue(strPath);
     }
