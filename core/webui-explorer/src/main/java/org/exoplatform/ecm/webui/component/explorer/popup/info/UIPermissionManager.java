@@ -16,116 +16,25 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.popup.info;
 
-import javax.jcr.Node;
-
-import org.exoplatform.ecm.permission.info.UIPermissionInputSet;
-import org.exoplatform.ecm.webui.utils.LockUtil;
-import org.exoplatform.ecm.webui.utils.PermissionUtil;
-import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
+import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.core.UIPermissionManagerBase;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
-import org.exoplatform.webui.core.UIComponent;
-import org.exoplatform.webui.core.UIContainer;
-import org.exoplatform.webui.core.UIGrid;
-import org.exoplatform.webui.core.UIPopupComponent;
-import org.exoplatform.webui.core.UIPopupWindow;
+import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.organization.account.UIUserSelector;
 
-/**
- * Created by The eXo Platform SARL
- * Author : TrongTT
- *          TrongTT@exoplatform.com
- * Sep 13, 2006
- * Editor : TuanP
- *        phamtuanchip@yahoo.de
- * Oct 13, 2006
- */
-
-@ComponentConfig(template = "app:/groovy/webui/component/explorer/popup/info/UIPermissionManager.gtmpl")
-public class UIPermissionManager extends UIContainer implements UIPopupComponent{
-  private static final Log LOG  = ExoLogger.getLogger(UIPermissionManager.class.getName());
-
+@ComponentConfig(template = "app:/groovy/webui/component/explorer/popup/info/UIPermissionManager.gtmpl", 
+events = { @EventConfig(listeners = UIPermissionManager.CloseActionListener.class) })
+public class UIPermissionManager extends UIPermissionManagerBase {
   public UIPermissionManager() throws Exception {
-    addChild(UIPermissionInfo.class, null, null);
-    addChild(UIPermissionForm.class, null, null);
-  }
-  public void initPopupPermission(UIComponent uiSelector) throws Exception {
-    UIPopupWindow uiPopup = getChildById(UIPermissionForm.POPUP_SELECT);
-    if(uiPopup == null) {
-      uiPopup = addChild(UIPopupWindow.class, null, UIPermissionForm.POPUP_SELECT);
-      uiPopup.setWindowSize(560, 300);
-      uiPopup.setShowMask(true);
-    } else {
-      uiPopup.setShowMask(true);
-      uiPopup.setRendered(true);
-    }
-    uiPopup.setUIComponent(uiSelector);
-    uiPopup.setShow(true);
-    uiPopup.setResizable(true);
-  }
-
-  public void initUserSelector() throws Exception {
-    UIPopupWindow uiPopup = getChildById("PopupUserSelector");
-    if(uiPopup == null) {
-      uiPopup = addChild(UIPopupWindow.class, null, "PopupUserSelector");
-    }
-    uiPopup.setWindowSize(790, 400);
-    UIUserContainer uiUserContainer = createUIComponent(UIUserContainer.class, null, null);
-    uiPopup.setUIComponent(uiUserContainer);
-    uiPopup.setShow(true);
-    uiPopup.setShowMask(true);
-    uiPopup.setResizable(true);
-  }
-
-  public void activate() {
-    try {
-      getChild(UIPermissionInfo.class).updateGrid(1);
-    } catch (Exception e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error("Unexpected error!", e.getMessage());
-      }
-    }
-  }
-
-  public void checkPermissonInfo(Node node) throws Exception {
-    if (node.isLocked()) {
-      String lockToken = LockUtil.getLockToken(node);
-      if (lockToken != null)
-        node.getSession().addLockToken(lockToken);
-      if (!Utils.isLockTokenHolder(node)) {
-        getChild(UIPermissionInfo.class).getChild(UIGrid.class)
-                                        .configure("usersOrGroups",
-                                                   UIPermissionInfo.PERMISSION_BEAN_FIELD,
-                                                   new String[] {});
-        getChild(UIPermissionForm.class).setRendered(false);
-      }
-    } else {
-      if (!PermissionUtil.canChangePermission(node)) {
-        getChild(UIPermissionInfo.class).getChild(UIGrid.class)
-                                        .configure("usersOrGroups",
-                                                   UIPermissionInfo.PERMISSION_BEAN_FIELD,
-                                                   new String[] {});
-        getChild(UIPermissionForm.class).setRendered(false);
-      }
-    }
+    this.addChild(UIPermissionInfo.class, null, null);
+    this.addChild(UIPermissionForm.class, null, null);
   }
   
-  public void deActivate() {
-  }
-
-  static public class AddUserActionListener extends EventListener<UIUserSelector> {
-    public void execute(Event<UIUserSelector> event) throws Exception {
-      UIUserSelector uiForm = event.getSource();
-      UIPermissionManager uiParent = uiForm.getAncestorOfType(UIPermissionManager.class);
-      UIPermissionForm uiPermissionForm = uiParent.getChild(UIPermissionForm.class);
-      uiPermissionForm.doSelect(UIPermissionInputSet.FIELD_USERORGROUP, uiForm.getSelectedUsers());
-      UIPopupWindow uiPopup = uiParent.getChild(UIPopupWindow.class);
-      uiPopup.setUIComponent(null);
-      uiPopup.setShow(false);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiParent);
+  static public class CloseActionListener extends EventListener<UIPermissionManager> {
+    public void execute(Event<UIPermissionManager> event) throws Exception {
+      UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
+      uiExplorer.cancelAction();
     }
   }
 }

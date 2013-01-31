@@ -23,6 +23,7 @@ import javax.jcr.Node;
 
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.core.UIPermissionManagerBase;
 import org.exoplatform.ecm.webui.selector.ComponentSelector;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -147,7 +148,7 @@ public class UIGroupSelector extends UIGroupMembershipSelector implements Compon
       UIPopupWindow uiPopup = uiGroupSelector.getParent() ;
       uiGroupSelector.setDefaultValue() ;
       uiPopup.setShow(false) ;
-      UIPermissionManager uiManager = uiGroupSelector.getAncestorOfType(UIPermissionManager.class) ;
+      UIPermissionManagerBase uiManager = uiGroupSelector.getAncestorOfType(UIPermissionManagerBase.class) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }

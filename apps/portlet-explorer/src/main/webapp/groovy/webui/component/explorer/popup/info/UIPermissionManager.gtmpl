@@ -4,7 +4,7 @@
 	
 	def uiform = uicomponent.getChild(UIForm.class);
 	String fieldName; %>
-<div class="UIPermissionManager" onkeypress="javascript:SubmitAction.call(this, event);">
+<div id="$uicomponent.id" class="UIPermissionManager" onkeypress="javascript:SubmitAction.call(this, event);">
 	<div class="resizable">
 		<% uicomponent.renderChildren();%>
 	</div>
@@ -12,7 +12,7 @@
 	<div class="uiAction uiActionBorder"> 
 		<%
 		 String closeActionLabel = _ctx.appRes(uiform.getName() + ".action.Close");
-		 String actionLink = uiform.event("Close");
+		 String actionLink = uicomponent.event("Close");
 		%>
 		<button href="javascript:void(0);" onclick="$actionLink" class="btn">$closeActionLabel</button>
 	</div>

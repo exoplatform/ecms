@@ -19,6 +19,7 @@ package org.exoplatform.ecm.webui.component.explorer.control.action;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
 import org.exoplatform.ecm.webui.component.explorer.popup.info.UIPermissionManager;
+import org.exoplatform.ecm.webui.core.UIPermissionManagerBase;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
@@ -42,7 +43,7 @@ public class ViewPermissionsActionComponent extends UIComponent {
     public void processEvent(Event<ViewPermissionsActionComponent> event) throws Exception {
       UIJCRExplorer uiJCRExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       UIPopupContainer UIPopupContainer = uiJCRExplorer.getChild(UIPopupContainer.class);
-      UIPermissionManager uiPerMan = UIPopupContainer.activate(UIPermissionManager.class, 700);
+      UIPermissionManagerBase uiPerMan = UIPopupContainer.activate(UIPermissionManager.class, 700);
       uiPerMan.checkPermissonInfo(uiJCRExplorer.getCurrentNode());
       event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
     }

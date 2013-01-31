@@ -600,12 +600,7 @@ public class UIJCRExplorer extends UIContainer {
    * Allows you to add a lock token to the given node
    */
   public void addLockToken(Node node) throws Exception {
-    if (node.isLocked()) {
-      String lockToken = LockUtil.getLockToken(node);
-      if(lockToken != null) {
-        node.getSession().addLockToken(lockToken);
-      }
-    }
+    org.exoplatform.wcm.webui.Utils.addLockToken(node);
   }
 
   public boolean hasAddPermission() {

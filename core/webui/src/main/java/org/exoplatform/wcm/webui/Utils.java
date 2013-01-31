@@ -36,6 +36,7 @@ import javax.portlet.PortletPreferences;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.config.UserPortalConfigService;
@@ -992,5 +993,17 @@ public class Utils {
       }
     }
     return currentNode ;
+  }
+  
+  /**
+   * Allows you to add a lock token to the given node
+   */
+  public static void addLockToken(Node node) throws Exception {
+    if (node.isLocked()) {
+      String lockToken = LockUtil.getLockToken(node);
+      if(lockToken != null) {
+        node.getSession().addLockToken(lockToken);
+      }
+    }
   }
 }

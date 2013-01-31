@@ -2,7 +2,7 @@
  * Copyright 2001-2008 The eXo Platform SARL         All rights reserved.  *
  * Please look at license.txt in info directory for more license detail.   *
  **************************************************************************/
-package org.exoplatform.ecm.webui.component.explorer.popup.info;
+package org.exoplatform.ecm.webui.core;
 
 import org.exoplatform.ecm.permission.info.UIPermissionInputSet;
 import org.exoplatform.webui.core.UIPopupComponent;
@@ -52,8 +52,8 @@ public class UIUserContainer extends UIContainer implements UIPopupComponent  {
     public void execute(Event<UIUserContainer> event) throws Exception {
       UIUserContainer uiUserContainer = event.getSource();
       UIUserSelector uiUserSelector = uiUserContainer.getChild(UIUserSelector.class);
-      UIPermissionManager uiParent = uiUserContainer.getAncestorOfType(UIPermissionManager.class);
-      UIPermissionForm uiPermissionForm = uiParent.getChild(UIPermissionForm.class);
+      UIPermissionManagerBase uiParent = uiUserContainer.getAncestorOfType(UIPermissionManagerBase.class);
+      UIPermissionFormBase uiPermissionForm = uiParent.getChild(UIPermissionFormBase.class);
       uiPermissionForm.doSelect(UIPermissionInputSet.FIELD_USERORGROUP, uiUserSelector.getSelectedUsers());
       UIPopupWindow uiPopup = uiParent.findComponentById("PopupUserSelector");
       uiPopup.setShow(false);
