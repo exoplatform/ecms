@@ -43,7 +43,7 @@
     <org.exoplatform.jcr.version>1.15.0-GA</org.exoplatform.jcr.version>
     <org.exoplatform.jcr-services.version>1.15.0-GA</org.exoplatform.jcr-services.version>
     <org.exoplatform.doc.doc-style.version>1.0.9-SNAPSHOT</org.exoplatform.doc.doc-style.version>
-    <org.exoplatform.commons.version>4.0.0.Alpha1-SNAPSHOT</org.exoplatform.commons.version>
+    <org.exoplatform.commons.version>4.0.0.Alpha1-unified-search-SNAPSHOT</org.exoplatform.commons.version>
     <org.gatein.pc.version>2.4.0.Final</org.gatein.pc.version>
     <org.gatein.portal.version>3.5.0.Final</org.gatein.portal.version>
     <org.gatein.wci.version>2.3.0.Final</org.gatein.wci.version>
