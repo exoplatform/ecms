@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms-apps</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>4.0.0.Alpha1-SNAPSHOT</version>
+    <version>4.0.0.Alpha1-unified-search-SNAPSHOT</version>
   </parent>
   <artifactId>ecms-apps-resources-wcm</artifactId>
   <packaging>war</packaging>
