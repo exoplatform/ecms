@@ -43,6 +43,8 @@ public class ActivityCommonService {
   public static String NODE_MOVED_ACTIVITY        = "ActivityNotify.event.NodeMoved";
   public static String NODE_REVISION_CHANGED      = "ActivityNotify.event.RevisionChanged";
   
+  public static String FILE_CREATED_ACTIVITY      = "ActivityNotify.event.FileCreated";
+  
   public static String CATEGORY_ADDED_ACTIVITY    = "ActivityNotify.event.CategoryAdded";
   public static String CATEGORY_REMOVED_ACTIVITY  = "ActivityNotify.event.CategoryRemoved";
   

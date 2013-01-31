@@ -360,7 +360,7 @@ public class FileUploadHandler {
     WCMPublicationService wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);    
     wcmPublicationService.updateLifecyleOnChangeContent(file, siteName, userId);
     if (activityService.isAcceptedNode(file)) {
-      listenerService.broadcast(ActivityCommonService.NODE_CREATED_ACTIVITY, null, file);
+      listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, file);
     }
     return Response.ok(createDOMResponse("Result", mimetype), MediaType.TEXT_XML)
                    .cacheControl(cacheControl)
