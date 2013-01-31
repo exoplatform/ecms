@@ -8,27 +8,36 @@
 %>
 
 	<h5 class="title clearfix">
-		<i class="uiIconEcmsSavedSearchesMini pull-right" onclick="<%=uicomponent.event("AdvanceSearch")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.AdvanceSearch")%>"></i>
+		<a class="actionIcon advancedSearchIcon pull-right"><i class="uiIconSearch" onclick="<%=uicomponent.event("AdvanceSearch")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.AdvanceSearch")%>"></i></a>
 		<%=_ctx.appRes("UISavedSearches.title.savedSearches")%>
 	</h5>
 
   <div class="uiContentBox">
-    <%if(queryListData.size() == 0) { %>
-        <div><span>No query found</span></div>
-    <%} else {
-        for(object in queryListData) {
-          String selectedCss;
-          if(object instanceof QueryData) {
-            def storedQueryPath = object.getStoredQueryPath() ;
-	          def queryName =  storedQueryPath.substring(storedQueryPath.lastIndexOf("/") + 1) ;
-	          selectedCss = (storedQueryPath.equals(uicomponent.getQueryPath()) ? "selectedNode" : "");
-			  		println("<a class=\"$selectedCss arrowSidContent textSiderContent\" href=\"" + uicomponent.event("Execute", Utils.formatNodeName(storedQueryPath)) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UISavedQuery.tooltip.Execute") + "\">" + queryName +"</a>");			  			  
-	          
-          } else if(object instanceof NodeData) {			
-					selectedCss = object.getPath().equals(uicomponent.getQueryPath()) ? "selectedNode" : "";	          
-						println("<a class=\"$selectedCss arrowSidContent textSiderContent\" href=\"" + uicomponent.event("Execute", object.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UISavedQuery.tooltip.Execute") + "\">" + object.getName() +"</a>");
-          }
-        }
-      }
-    %>
+		<ul class="uiItemList">
+			<%if(queryListData.size() == 0) { %>
+					<li><span>No query found</span></li>
+			<%} else {
+					for(object in queryListData) {
+						String selectedCss;
+							%>
+							<li>
+							<%
+								if(object instanceof QueryData) {
+									def storedQueryPath = object.getStoredQueryPath() ;
+									def queryName =  storedQueryPath.substring(storedQueryPath.lastIndexOf("/") + 1) ;
+									selectedCss = (storedQueryPath.equals(uicomponent.getQueryPath()) ? "selectedNode" : "");
+						
+									println("<i class=\"uiIconArrowRightMini\"></i><a class=\"$selectedCss\" href=\"" + uicomponent.event("Execute", Utils.formatNodeName(storedQueryPath)) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UISavedQuery.tooltip.Execute") + "\">" + queryName +"</a>");			  			  
+						
+								} else if(object instanceof NodeData) {			
+									selectedCss = object.getPath().equals(uicomponent.getQueryPath()) ? "selectedNode" : "";	          
+									println("<i class=\"uiIconArrowRightMini\"></i><a class=\"$selectedCss\" href=\"" + uicomponent.event("Execute", object.getPath()) + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + _ctx.appRes("UISavedQuery.tooltip.Execute") + "\">" + object.getName() +"</a>");
+								}
+							%>
+							</li>
+							<%
+					}
+				}
+			%>
+		</ul>
   </div>

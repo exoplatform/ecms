@@ -12,15 +12,16 @@
 		<%=_ctx.appRes("UIAllItemsByType.label.ByType")%>
 	</h5>					
 	<div class="uiContentBox">
-		<ul class="itemList">
+		<ul class="uiItemList">
 			<% 
 				def supportedTypes = uicomponent.getAllSupportedType();  
 				for (type in supportedTypes) {                                  
 					String supportedLink = uicomponent.event("ShowDocumentType", type) ;
 					String classValue = (allItemByTypeFilterMap.contains(type) ?
-							"trueSelectIcon" : "arrowSidContent");
+							"uiIconTick" : "uiIconEcmsDottedArrow");
 			%>
-			<li class="$classValue">
+			<li>
+				<i class="$classValue"></i>
 				<a href="$supportedLink" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAllItemsByType.title.Show"+type)%>">
 					<%=_ctx.appRes("DocumentType.label." + type)%>
 				</a>

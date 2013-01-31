@@ -19,12 +19,13 @@
 	</h5>
 
 	<div class="uiContentBox">
-		<ul class="itemList">
+		<ul class="uiItemList">
 			<% if (pref.isShowOwnedByUserDoc()) { 
 					String classValue = (allItemFilterMap.contains(ownedByMe) ?
-							"trueSelectIcon" : "arrowSidContent");
+							"uiIconTick" : "uiIconEcmsDottedArrow");
 				%>
-				<li class="$classValue">
+				<li>
+					<i class="$classValue"></i>
 					<a href="<%=uicomponent.event("ClickFilter", ownedByMe)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.ShowAllOwnedByUser")%>">
 						<%=_ctx.appRes("UIAllItems.label.OwnedByMe")%>
 					</a>
@@ -33,9 +34,10 @@
 			
 			<% if (pref.isShowFavouriteDoc()) { 
 					String classValue = (allItemFilterMap.contains(favorite) ?
-							"trueSelectIcon" : "arrowSidContent");
+							"uiIconTick" : "uiIconEcmsDottedArrow");
 				%>
-				<li class="$classValue">
+				<li>
+					<i class="$classValue"></i>
 					<a href="<%=uicomponent.event("ClickFilter", favorite)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.ShowAllFavourite")%>">
 						<%=_ctx.appRes("UIAllItems.label.Favourites")%>
 					</a>
@@ -44,9 +46,10 @@
 					
 			<% if (pref.isShowHiddenDoc()) {
 				String classValue = (allItemFilterMap.contains(hidden) ?
-						"trueSelectIcon" : "arrowSidContent");
+						"uiIconTick" : "uiIconEcmsDottedArrow");
 				%>
-				<li class="$classValue">
+				<li>
+					<i class="$classValue"></i>
 					<a href="<%=uicomponent.event("ClickFilter", hidden)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.ShowAllHidden")%>">
 						<%=_ctx.appRes("UIAllItems.label.Hidden")%>
 					</a>
