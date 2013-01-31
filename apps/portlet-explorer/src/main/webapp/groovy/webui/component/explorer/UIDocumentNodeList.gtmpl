@@ -227,7 +227,7 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
     <div class="ColumnName" style="width: 300px;" title="<%=title%> $lockedLabel">
       <div>
         <a class="NodeButton"
-             onclick="$actionLink" class="NodeLabel" >
+             onmousedown="$actionLink" onmouseup="eXo.ecm.UIFileView.cancelEvent(event);" class="NodeLabel" >
             <strong><span class="NodeName"><%=fileName%><span></strong>
         </a>
         <span class="NodeLabel" style="display:inline-block;padding-left:20px;">
