@@ -711,7 +711,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     }
     if (title==null) title = selectedNode.getName();
 
-    return ContentReader.getXSSCompatibilityContent(title);
+    return Text.unescapeIllegalJcrChars(title);
   }
 
   /**
