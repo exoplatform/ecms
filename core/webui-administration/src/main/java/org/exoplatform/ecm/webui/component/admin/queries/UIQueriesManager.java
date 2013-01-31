@@ -47,7 +47,7 @@ public class UIQueriesManager extends UIAbstractManager {
     removeChildById(id) ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, id) ;
     uiPopup.setShowMask(true);
-    uiPopup.setWindowSize(600, 500) ;
+    uiPopup.setWindowSize(600, 325) ;
     UIQueriesForm uiForm = createUIComponent(UIQueriesForm.class, null, null) ;
     uiForm.setIsAddNew(true) ;
     uiPopup.setUIComponent(uiForm) ;
