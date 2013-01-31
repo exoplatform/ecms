@@ -446,6 +446,13 @@
 	font-weight: bold;
 }
 
+.UIJCRExplorerPortlet .UIFileView .MoreButton {
+	color:#058ee6;
+	font-weight:bold;
+	margin-right:20px;
+	text-decoration:underline;
+	cursor:pointer;
+}
 
 .UIJCRExplorerPortlet .UIListGrid  .ColumnIcon .BlueDownArrow16x16Icon{
 	background-position: center center;

@@ -77,12 +77,13 @@
    <% 
    //re-initialize action
 //    uiWorkingArea.initialize();
-    int availablePage = uicomponent.getContentPageIterator().getAvailablePage();
-    if (uicomponent.isShowPageIterator() && availablePage > 1) { 
-  %>  
-      <div class="PageAvailable" pageAvailable='$availablePage'>
-        <%_ctx.renderUIComponent(uicomponent.getContentPageIterator())%>
+    if (uicomponent.isShowMoreButton()) { 
+  %>
+      
+      <div class="FR MoreButton" onclick="<%=uicomponent.event("More")%>">
+        <%=_ctx.appRes("FileView.label.more")%>
       </div>
+      <br/>
   <% } %>
 
 </div>  

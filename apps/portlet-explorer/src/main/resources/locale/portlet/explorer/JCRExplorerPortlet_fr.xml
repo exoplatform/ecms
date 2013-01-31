@@ -3548,6 +3548,7 @@
       <sortBy>Trier par:</sortBy>
       <filesAreSelected>fichier sont selectionnés.</filesAreSelected>
       <ClearSelection>Annuler la sélection</ClearSelection>
+      <more>Plus</more>
     </label>
   </FileView>
 </bundle>

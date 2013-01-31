@@ -3496,6 +3496,7 @@
       <sortBy>Sort by:</sortBy>
       <filesAreSelected>files are selected.</filesAreSelected>
       <ClearSelection>Clear selection</ClearSelection>
+      <more>More</more>
     </label>
   </FileView>
 </bundle>

@@ -18,6 +18,7 @@ package org.exoplatform.ecm.webui.component.explorer;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -77,7 +78,8 @@ import org.exoplatform.webui.event.EventListener;
     events = {
         @EventConfig(listeners = UIDocumentNodeList.ExpandNodeActionListener.class),
         @EventConfig(listeners = UIDocumentNodeList.CollapseNodeActionListener.class),
-        @EventConfig(listeners = UIDocumentNodeList.ManageVersionsActionListener.class)
+        @EventConfig(listeners = UIDocumentNodeList.ManageVersionsActionListener.class),
+        @EventConfig(listeners = UIDocumentNodeList.MoreActionListener.class)
     }
 )
 public class UIDocumentNodeList extends UIContainer {
@@ -88,9 +90,11 @@ public class UIDocumentNodeList extends UIContainer {
   
   private LinkManager linkManager_;
   
+  private List dataList_;
+  
   private int padding_;
   
-  private boolean showPageIterator_ = true;
+  private boolean showMoreButton_ = true;
   
   public UIDocumentNodeList() throws Exception {
     linkManager_ = WCMCoreUtils.getService(LinkManager.class);
@@ -101,19 +105,27 @@ public class UIDocumentNodeList extends UIContainer {
   
   @SuppressWarnings("unchecked")
   public List<Node> getNodeChildrenList() throws Exception {
-    return NodeLocation.getNodeListByLocationList(pageIterator_.getCurrentPageData());
+    return NodeLocation.getNodeListByLocationList(dataList_);
   }
   
   public void setPageList(PageList p) throws Exception {
     pageIterator_.setPageList(p);
+    dataList_ = new ArrayList();
+    if (p != null && p.getAvailable() > 0) {
+      dataList_.addAll(p.getPage(1));
+    }
     updateUIDocumentNodeListChildren();
   }
   
   public int getPadding() { return padding_; }
   public void setPadding(int value) { padding_ = value; }
   
-  public boolean isShowPageIterator() { return showPageIterator_; }
-  public void setShowPageIterator(boolean value) { showPageIterator_ = value; }
+  public boolean isShowMoreButton() { 
+    return showMoreButton_ && (pageIterator_ != null) &&
+            (pageIterator_.getPageList() != null) &&
+            (dataList_ != null) && (dataList_.size() < pageIterator_.getPageList().getAvailable()); 
+  }
+  public void setShowMoreButton(boolean value) { showMoreButton_ = value; }
   
   public void setCurrentNode(Node node) throws Exception {
     UIDocumentInfo uiDocInfo = getAncestorOfType(UIDocumentInfo.class);
@@ -384,5 +396,30 @@ public class UIDocumentNodeList extends UIContainer {
     }
   }
 
+  public static class MoreActionListener extends EventListener<UIDocumentNodeList> {
+    public void execute(Event<UIDocumentNodeList> event) throws Exception {
+      UIDocumentNodeList uicomp = event.getSource();
+
+      UIApplication uiApp = uicomp.getAncestorOfType(UIApplication.class);
+      try {
+        int currentPage = uicomp.dataList_.size() / uicomp.pageIterator_.getPageList().getPageSize();
+        uicomp.dataList_.addAll(uicomp.pageIterator_.getPageList().getPage(currentPage + 1));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uicomp);
+      } catch(AccessDeniedException ace) {
+        uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.access-denied", null, ApplicationMessage.WARNING)) ;
+        return ;
+      } catch(RepositoryException e) {
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Repository cannot be found");
+        }
+        uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
+            ApplicationMessage.WARNING)) ;
+        return ;
+      } catch (Exception e) {
+        JCRExceptionManager.process(uiApp, e);
+        return;
+      }
+    }
+  }
   
 }
