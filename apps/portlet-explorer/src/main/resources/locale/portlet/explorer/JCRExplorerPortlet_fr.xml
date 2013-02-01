@@ -3530,6 +3530,17 @@
       <InvalidCharacters>Les caractères invalides seront remplacés par un '-'</InvalidCharacters>
       <DropFileMessage>Déposer vos fichiers dans le répertoire courant</DropFileMessage>
       <Close>Fermer</Close>
+      <AbortAllConfirmation>Voulez vous annuler tous les fichiers en cours de téléchargement?</AbortAllConfirmation>
+      <MaxFileSizeAlert>La taille du fichier excède la taille limite accordée de </MaxFileSizeAlert>
+      <in>dans</in>
+      <Canceled>Annulé</Canceled>
+      <Cancel>annuler</Cancel>
+      <Error>erreur</Error>
+      <Keep>Garder tous</Keep>
+      <Replace>remplacer</Replace>
+      <Waiting>En attente</Waiting>
+      <AlreadyInUse>Déjà utilisé</AlreadyInUse>
+      <or>ou</or>
   	</label>
   </UIMultiUpload>    
   <UIDocumentNodeList>

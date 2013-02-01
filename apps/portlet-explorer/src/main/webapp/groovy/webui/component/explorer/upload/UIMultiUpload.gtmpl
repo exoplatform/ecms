@@ -1,15 +1,28 @@
 <%
   import java.net.URLEncoder;
   
+  public String getMsg(String msg) {
+    return _ctx.appRes(uicomponent.getId() + ".label." + msg);
+  }
+
   def rcontext = _ctx.getRequestContext() ;
   def jsManager = rcontext.getJavascriptManager();
   jsManager.require("SHARED/multiUpload", "multiUpload").
   addScripts("multiUpload.initDropBox('" + uicomponent.getId() + "');").
   addScripts("multiUpload.setMaxFileSize(" + uicomponent.getLimitFileSize() + ");").
   addScripts("multiUpload.setMaxUploadCount(" + uicomponent.getMaxUploadCount() + ");").
-  addScripts("multiUpload.loadMsg();").
-  addScripts("multiUpload.setDropFileMessage('" + 
-             _ctx.appRes(uicomponent.getId() + ".label.DropFileMessage") + "');");
+  addScripts("multiUpload.loadMsg('" + getMsg("in") + "','" + 
+                                       getMsg("MaxFileSizeAlert") + "','" + 
+                                       getMsg("Waiting") + "','" +
+                                       getMsg("Error") + "','" +
+                                       getMsg("or") + "','" +
+                                       getMsg("AlreadyInUse") + "','" +
+                                       getMsg("Keep") + "','" +
+                                       getMsg("Replace") + "','" +
+                                       getMsg("Canceled") + "','" +
+                                       getMsg("Cancel") + "','" +
+                                       getMsg("AbortAllConfirmation") + "');").
+  addScripts("multiUpload.setDropFileMessage('" + getMsg("DropFileMessage") + "');");
 %>
 
 <div id="$uicomponent.id" class = "$uicomponent.id NoShow" >

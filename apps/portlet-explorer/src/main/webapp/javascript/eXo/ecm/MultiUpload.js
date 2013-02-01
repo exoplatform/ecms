@@ -53,18 +53,18 @@
 		return eXo.ecm.WCMUtils.getBundle("UIMultiUpload.label." + msg, eXo.env.portal.language);
 	};
 
-	MultiUpload.prototype.loadMsg = function() {
-		eXo.ecm.MultiUpload.IN = eXo.ecm.MultiUpload.getMsg("in");
-		eXo.ecm.MultiUpload.MAX_SIZE_ALERT = eXo.ecm.MultiUpload.getMsg("MaxFileSizeAlert");
-		eXo.ecm.MultiUpload.WAITING_TXT = eXo.ecm.MultiUpload.getMsg("Waiting");
-		eXo.ecm.MultiUpload.ERROR = eXo.ecm.MultiUpload.getMsg("Error");
-		eXo.ecm.MultiUpload.OR = eXo.ecm.MultiUpload.getMsg("or");
-		eXo.ecm.MultiUpload.INUSE = eXo.ecm.MultiUpload.getMsg("AlreadyInUse");
-		eXo.ecm.MultiUpload.KEEP = eXo.ecm.MultiUpload.getMsg("Keep");
-		eXo.ecm.MultiUpload.REPLACE = eXo.ecm.MultiUpload.getMsg("Replace");
-		eXo.ecm.MultiUpload.CANCEL_TXT = eXo.ecm.MultiUpload.getMsg("Canceled");
-		eXo.ecm.MultiUpload.CANCEL = eXo.ecm.MultiUpload.getMsg("Cancel");
-		eXo.ecm.MultiUpload.ABORT_ALL = eXo.ecm.MultiUpload.getMsg("AbortAllConfirmation");
+	MultiUpload.prototype.loadMsg = function(inMsg, maxSizeMsg, waitingMsg, errorMsg, orMsg, inUseMsg, keepMsg, replaceMsg, canceled, cancel, abort) {
+		eXo.ecm.MultiUpload.IN = inMsg;
+		eXo.ecm.MultiUpload.MAX_SIZE_ALERT = maxSizeMsg;
+		eXo.ecm.MultiUpload.WAITING_TXT = waitingMsg;
+		eXo.ecm.MultiUpload.ERROR = errorMsg;
+		eXo.ecm.MultiUpload.OR = orMsg;
+		eXo.ecm.MultiUpload.INUSE = inUseMsg;
+		eXo.ecm.MultiUpload.KEEP = keepMsg;
+		eXo.ecm.MultiUpload.REPLACE = replaceMsg;
+		eXo.ecm.MultiUpload.CANCEL_TXT = canceled;
+		eXo.ecm.MultiUpload.CANCEL = cancel;
+		eXo.ecm.MultiUpload.ABORT_ALL = abort;
 	};
 	//---------------All setter methods---------------------//
 	MultiUpload.prototype.setMaxFileSize = function(value) {
