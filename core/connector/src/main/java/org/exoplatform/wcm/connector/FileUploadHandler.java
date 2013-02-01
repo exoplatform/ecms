@@ -348,6 +348,9 @@ public class FileUploadHandler {
     if(!file.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
     	file.addMixin(NodetypeConstant.MIX_REFERENCEABLE);
     }
+    if(!file.hasProperty(NodetypeConstant.EXO_TITLE)) {
+    	file.setProperty(NodetypeConstant.EXO_TITLE, file.getName());
+    }
     Node jcrContent = file.addNode("jcr:content","nt:resource");
     //MimeTypeResolver mimeTypeResolver = new MimeTypeResolver();
     DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();
@@ -360,6 +363,7 @@ public class FileUploadHandler {
     	dcValues[0] = jcrContent.getSession().getValueFactory().createValue(file.getName());
     	jcrContent.setProperty(NodetypeConstant.DC_TITLE, dcValues);
     }
+    
     if(!jcrContent.hasProperty(NodetypeConstant.DC_DESCRIPTION)) {
     	Value[] dcValues = new Value[1];
     	dcValues[0] = jcrContent.getSession().getValueFactory().createValue(Strings.EMPTY);

@@ -42,6 +42,8 @@ public class NodetypeConstant {
   
   public static final String DC_DESCRIPTION							      = "dc:description";
   
+  public static final String DC_CREATOR							          = "dc:creator";
+  
 
   public static final String JCR_ROOT_VERSION                 = "jcr:rootVersion";
 
