@@ -43,7 +43,10 @@ public class FCKFileHandler {
                                                                                          SimpleDateFormat.SHORT);
     if(sourceNode.hasProperty("exo:dateCreated")){
       file.setAttribute("dateCreated", formatter.format(sourceNode.getProperty("exo:dateCreated").getDate().getTime()));
+    }else if(sourceNode.hasProperty("jcr:created")){
+      file.setAttribute("dateCreated", formatter.format(sourceNode.getProperty("jcr:created").getDate().getTime()));
     }
+
     if(sourceNode.hasProperty("exo:dateModified")) {
       file.setAttribute("dateModified", formatter.format(sourceNode.getProperty("exo:dateModified")
                                                                    .getDate()
