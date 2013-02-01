@@ -11,72 +11,73 @@ import org.exoplatform.wcm.webui.reader.ContentReader;
  
 %>
 <div class="uiPropertyTab">
-  <table class="uiGrid table table-hover table-striped" >
-	  <thead>
-			<tr>
-			  <%
-			    String[] beanFields =  uicomponent.getBeanFields() ;  
-					def classCenter = "";
-			    for(int i = 1; i < beanFields.size(); i++) {
-						if ("action".equals(beanFields[i])) {
-							classCenter="center";
-						}
-						%>
-			    <th class="field<%=(i+1)%> $classCenter"><%=_ctx.appRes("UIPropertyTab.header." + beanFields[i])%></th>
-			  <%}%>  
-			</tr>
-	  </thead>
-	  <tbody>
-	  <%
-	    def value ;
-	    String nodeIcon ;
-	    boolean multiValue = false ;
-	    String key ;
-	    for (bean in uicomponent.getProperties())  {
-	      nodeIcon = bean.name.replace(":", "_");
-		    try {
-			    multiValue = bean.getDefinition().isMultiple() ;
-		    } catch(Exception e) {
-		    }
-		    value = ContentReader.getXSSCompatibilityContent(uicomponent.getPropertyValue(bean));
-			%>
-		    <tr>
-			    <td style="overflow: hidden;" title="$bean.name">$bean.name</td>
-			    <td class="center">
-		        <div class="multiValue">
-		          <%
-		            String multiType = "False" ;
-		            if(multiValue) multiType = "True" ;
-		          %>
-					    $multiValue				  	
-			      </div>
-			    </td>
-			    <td>
-				    <%if ((value == "binary")||(value == "notavailable")||(value == "cannotget")) {%>
-			    	<div class="text" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPropertyTab.label." + value)%>">
-				      <%=_ctx.appRes("UIPropertyTab.label." + value)%>
-				    </div>  
-				    <%} else {%>
-				    <div class="text" rel="tooltip" data-placement="bottom" title="<%=value%>">
-				      <%=value%>
-				   	</div>
-				    <%}%>  
-			    </td>
-			    <td class="center actionContainer">
-					    <%
-					    if(uicomponent.isCanbeEdit(bean)) {%> 			    
-					      <a class="actionIcon" onclick="<%=uicomponent.event("Edit", bean.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPropertyTab.title.edit")%>" ><i class="uiIconEdit uiIconLightGrey"></i></a>
-					    <%}%>
-					    <%if(uicomponent.isCanbeRemoved(bean.getName())) {%>
-					      <a class="actionIcon" onclick="<%=uicomponent.event("Delete", bean.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPropertyTab.title.delete")%>" ><i class="uiIconDelete uiIconLightGrey"></i></a>
-					    <%}%>  
-			    </td>
-			  </tr>    
-	    <%}%>
-	  </tbody>
-  </table>
-
-  <%/* start render action*/%>
+	<div class="resizable">
+		<table class="uiGrid table table-hover table-striped" >
+			<thead>
+				<tr>
+					<%
+						String[] beanFields =  uicomponent.getBeanFields() ;  
+						def classCenter = "";
+						for(int i = 1; i < beanFields.size(); i++) {
+							if ("action".equals(beanFields[i])) {
+								classCenter="center";
+							}
+							%>
+						<th class="field<%=(i+1)%> $classCenter"><%=_ctx.appRes("UIPropertyTab.header." + beanFields[i])%></th>
+					<%}%>  
+				</tr>
+			</thead>
+			<tbody>
+			<%
+				def value ;
+				String nodeIcon ;
+				boolean multiValue = false ;
+				String key ;
+				for (bean in uicomponent.getProperties())  {
+					nodeIcon = bean.name.replace(":", "_");
+					try {
+						multiValue = bean.getDefinition().isMultiple() ;
+					} catch(Exception e) {
+					}
+					value = ContentReader.getXSSCompatibilityContent(uicomponent.getPropertyValue(bean));
+				%>
+					<tr>
+						<td style="overflow: hidden;" title="$bean.name">$bean.name</td>
+						<td class="center">
+							<div class="multiValue">
+								<%
+									String multiType = "False" ;
+									if(multiValue) multiType = "True" ;
+								%>
+								$multiValue				  	
+							</div>
+						</td>
+						<td>
+							<%if ((value == "binary")||(value == "notavailable")||(value == "cannotget")) {%>
+							<div class="text" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPropertyTab.label." + value)%>">
+								<%=_ctx.appRes("UIPropertyTab.label." + value)%>
+							</div>  
+							<%} else {%>
+							<div class="text" rel="tooltip" data-placement="bottom" title="<%=value%>">
+								<%=value%>
+							</div>
+							<%}%>  
+						</td>
+						<td class="center actionContainer">
+								<%
+								if(uicomponent.isCanbeEdit(bean)) {%> 			    
+									<a class="actionIcon" onclick="<%=uicomponent.event("Edit", bean.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPropertyTab.title.edit")%>" ><i class="uiIconEdit uiIconLightGrey"></i></a>
+								<%}%>
+								<%if(uicomponent.isCanbeRemoved(bean.getName())) {%>
+									<a class="actionIcon" onclick="<%=uicomponent.event("Delete", bean.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPropertyTab.title.delete")%>" ><i class="uiIconDelete uiIconLightGrey"></i></a>
+								<%}%>  
+						</td>
+					</tr>    
+				<%}%>
+			</tbody>
+		</table>
+	</div>
+		<%/* start render action*/%>
 	<div class="uiAction"> 
 		<% for(action in uicomponent.getActions()) {
 		String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
