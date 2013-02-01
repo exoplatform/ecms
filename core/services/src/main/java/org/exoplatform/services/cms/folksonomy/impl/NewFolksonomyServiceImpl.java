@@ -455,6 +455,17 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     Node parentNode = tagNode.getParent();
     tagNode.remove();
     parentNode.getSession().save();
+    if (listenerService!=null && activityService!=null) {
+      try {
+        if (activityService.isAcceptedNode(tagNode)) {
+          listenerService.broadcast(ActivityCommonService.TAG_REMOVED_ACTIVITY, tagNode, tagNode.getName());
+        }
+      } catch (Exception e) {
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Can not notify RemoveTag Activity because of: " + e.getMessage());
+        }
+      }
+    }
   }
 
   /**

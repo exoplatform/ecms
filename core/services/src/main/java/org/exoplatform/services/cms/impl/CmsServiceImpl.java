@@ -44,6 +44,7 @@ import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.nodetype.PropertyDefinition;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 import org.exoplatform.commons.utils.ISO8601;
@@ -875,10 +876,8 @@ public class CmsServiceImpl implements CmsService {
               node.setProperty(propertyName, new String[] { (String)value});
             }
           } else if (value instanceof String[]) {
-          	List list1 = Arrays.asList(property.getValues());
-          	List list2 = Arrays.asList(value);
-          	list1.equals(list2);
-            if(!Arrays.equals(property.getValues(), (Object[]) value)) node.setProperty(propertyName, (String[]) value);
+          	if(!isEqualsValueStringArrays(property.getValues(), (String[]) value))
+          		node.setProperty(propertyName, (String[]) value);          	      
           }
         } else {
           if(!property.getValue().getString().equals(value)) {
@@ -1141,6 +1140,26 @@ public class CmsServiceImpl implements CmsService {
       }
     }
     return null;
+  }
+  
+  public boolean isEqualsValueStringArrays(Value[] arrayValue1, String[] arrayValue2) throws ValueFormatException, 
+  IllegalStateException, RepositoryException {
+  	if(arrayValue1 != null) {
+  	  String[] stringArray = new String[arrayValue1.length];
+  	  int i = 0;
+  	  for (Value valueItem : arrayValue1) {
+  	  	if(valueItem != null && valueItem.getString().length() > 0)
+  	  	stringArray[i] = valueItem.getString();
+			}
+  	  if(stringArray != null && stringArray.length > 0)
+  	    Arrays.sort(stringArray);
+  	  if(arrayValue2 != null && arrayValue2.length > 0)
+  	    Arrays.sort(arrayValue2);
+  	  return ArrayUtils.isEquals(stringArray, arrayValue2);  	    
+  	} else {
+  		if(arrayValue2 != null) return false;
+  		else return true;
+  	}	
   }
 
   /**

@@ -53,7 +53,7 @@ public class EditPropertyActivityAction implements Action{
     //filter node type
     if (activityService.isAcceptedNode(node)) {
       //Notify to update activity
-      if(node.isNodeType(NodetypeConstant.NT_FILE)) {
+      if(node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
         listenerService.broadcast(ActivityCommonService.FILE_EDIT_ACTIVITY, nodeTemp, propertyName);
       } else {
         if (!activityService.isCreating(node)) {

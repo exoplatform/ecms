@@ -467,6 +467,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
         } else {
           categoryNode = (Node) rootNodeTaxonomy.getSession().getItem(category);
         }
+        String categoryName = categoryNode.getName();
         //add mix referenceable for node
         if (node.canAddMixin("mix:referenceable")) {
           node.addMixin("mix:referenceable");
@@ -491,7 +492,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
         if (listenerService!=null) {
           try {
             if (activityService.isAcceptedNode(node)) {
-              listenerService.broadcast(ActivityCommonService.CATEGORY_ADDED_ACTIVITY, node, taxonomyName);
+              listenerService.broadcast(ActivityCommonService.CATEGORY_ADDED_ACTIVITY, node, categoryName);
             }
           } catch (Exception e) {
             if (LOG.isErrorEnabled()) {
@@ -566,6 +567,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
         category = rootNodeTaxonomy.getPath() + categoryPath;
       }
       Node categoryNode = ((Node) rootNodeTaxonomy.getSession().getItem(category));
+      String categoryName = categoryNode.getName();
       //get taxonomyLink node
       String sql = StringUtils.replace(SQL_QUERY_EXACT_PATH, "$0", categoryNode.getPath());
       sql = StringUtils.replace(sql, "$1", node.getUUID());
@@ -591,7 +593,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       if (listenerService!=null) {
         try {
           if (activityService.isAcceptedNode(node)) {
-            listenerService.broadcast(ActivityCommonService.CATEGORY_REMOVED_ACTIVITY, node, taxonomyName);
+            listenerService.broadcast(ActivityCommonService.CATEGORY_REMOVED_ACTIVITY, node, categoryName);
           }
         } catch (Exception e) {
           if (LOG.isErrorEnabled()) {
