@@ -52,11 +52,14 @@ public class EditPropertyActivityAction implements Action{
     if(node.isNodeType("nt:resource")) node = node.getParent();
     //filter node type
     if (activityService.isAcceptedNode(node)) {
-    //Notify to update activity
-    	if(node.isNodeType(NodetypeConstant.NT_FILE))
-    		listenerService.broadcast(ActivityCommonService.FILE_EDIT_ACTIVITY, nodeTemp, propertyName);
-    	else
-        listenerService.broadcast(ActivityCommonService.EDIT_ACTIVITY, node, propertyName);
+      //Notify to update activity
+      if(node.isNodeType(NodetypeConstant.NT_FILE)) {
+        listenerService.broadcast(ActivityCommonService.FILE_EDIT_ACTIVITY, nodeTemp, propertyName);
+      } else {
+        if (!activityService.isCreating(node)) {
+          listenerService.broadcast(ActivityCommonService.EDIT_ACTIVITY, node, propertyName);
+        }
+      }
     }
     return false;
   }

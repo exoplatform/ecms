@@ -44,7 +44,7 @@ public class AddNodeActivityAction implements Action{
       Node node = (Node)item;
       if (node.getPrimaryNodeType().isNodeType(ActivityCommonService.NT_FILE)) {
         Node parent = node.getParent();
-        if (activityService.isAcceptedNode(parent)) {
+        if (activityService.isAcceptedNode(parent) && !activityService.isCreating(parent)) {
           listenerService.broadcast(ActivityCommonService.ATTACH_ADDED_ACTIVITY, parent, node);
         }
       }

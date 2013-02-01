@@ -17,7 +17,9 @@
 package org.exoplatform.services.cms.jcrext.activity;
 
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
+import javax.jcr.ValueFormatException;
 
 import org.exoplatform.container.xml.InitParams;
 
@@ -62,6 +64,7 @@ public class ActivityCommonService {
   
   public static String MIX_COMMENT                = "exo:activityComment";
   public static String MIX_COMMENT_CREATOR        = "exo:activityCreator";
+  public static String MIX_COMMENT_CREATING       = "exo:creating";
   public static String MIX_COMMENT_ACTIVITY_ID    = "exo:activityCommentID";
   
   public ActivityCommonService(InitParams initParams) {
@@ -71,6 +74,20 @@ public class ActivityCommonService {
     if (acceptedProperties==null) acceptedProperties =""; 
   }
   
+  public boolean isCreating(Node node) {
+    String isCreating;
+    try {
+      if (node.isNodeType(MIX_COMMENT)) {
+        if (node.hasProperty(MIX_COMMENT_CREATING)) {
+          isCreating = node.getProperty(MIX_COMMENT_CREATING).getString();
+          return isCreating.equalsIgnoreCase("true");
+        }
+      }
+    } catch (Exception e) {
+      return false;
+    }
+    return false;
+  }
   public boolean isAcceptedNode(Node node) {
     try {
       return node==null?false:acceptedNodeTypes.indexOf("{" + node.getPrimaryNodeType().getName() +"}")>=0;

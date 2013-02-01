@@ -136,6 +136,10 @@ public class CmsServiceImpl implements CmsService {
       //Broadcast CmsService.event.preCreate event
       listenerService.broadcast(PRE_CREATE_CONTENT_EVENT,storeHomeNode,mappings);
       currentNode = storeHomeNode.addNode(nodeName, primaryType);
+      if (currentNode.canAddMixin(ActivityCommonService.MIX_COMMENT)) {
+        currentNode.addMixin(ActivityCommonService.MIX_COMMENT);
+        currentNode.setProperty(ActivityCommonService.MIX_COMMENT_CREATING, "true");
+      }
       createNodeRecursively(NODE, currentNode, nodeType, mappings);
       if(mixinTypes != null){
         for(String type : mixinTypes){
@@ -174,6 +178,9 @@ public class CmsServiceImpl implements CmsService {
       //all document node should be mix:referenceable that allow retrieve UUID by method Node.getUUID()
       if(!currentNode.isNodeType(MIX_REFERENCEABLE)) {
         currentNode.addMixin(MIX_REFERENCEABLE);
+      }
+      if (currentNode.isNodeType(ActivityCommonService.MIX_COMMENT)) {
+        currentNode.removeMixin(ActivityCommonService.MIX_COMMENT);
       }
     //Broadcast CmsService.event.postCreate event
       listenerService.broadcast(POST_CREATE_CONTENT_EVENT,this,currentNode);
