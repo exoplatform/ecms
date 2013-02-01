@@ -68,7 +68,7 @@ public class TrashFolderScript implements CmsScript {
       }
     }
     if ((eventType & Event.NODE_ADDED) > 0) {
-    	if (!node.isNodeType(EXO_RESTORELOCATION)) {
+    	if (node != null && !node.isNodeType(EXO_RESTORELOCATION)) {
     		node.addMixin(EXO_RESTORELOCATION);    		
   			node.setProperty(EXO_RESTOREPATH, fixRestorePath(srcPath));
   			node.setProperty(EXO_RESTORE_WORKSPACE, workspace);
