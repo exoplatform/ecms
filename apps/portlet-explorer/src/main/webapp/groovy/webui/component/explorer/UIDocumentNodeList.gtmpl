@@ -224,7 +224,8 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
         <%}%>
       </div>
     </div>
-    <div class="ColumnName" style="width: 300px;" title="<%=title%> $lockedLabel">
+    <input type="checkbox" class="FR"/>
+    <div class="ColumnName" style="margin:0px 25px 0px 55px;float:none" title="<%=title%> $lockedLabel">
       <div>
         <a class="NodeButton"
              onmousedown="$actionLink" onmouseup="eXo.ecm.UIFileView.cancelEvent(event);" class="NodeLabel" >
@@ -242,7 +243,6 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
         <%=author%>
       </p>
     </div>
-    <input type="checkbox" class="FR"/>
   </div>
 <%
     

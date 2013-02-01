@@ -105,7 +105,7 @@ public class UIDocumentNodeList extends UIContainer {
   
   @SuppressWarnings("unchecked")
   public List<Node> getNodeChildrenList() throws Exception {
-    return NodeLocation.getNodeListByLocationList(dataList_);
+    return NodeLocation.getNodeListByLocationList(showMoreButton_ ? dataList_ : pageIterator_.getCurrentPageData());
   }
   
   public void setPageList(PageList p) throws Exception {
