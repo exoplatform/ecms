@@ -34,6 +34,7 @@ public class ActivityCommonService {
   private String acceptedProperties;// = "{exo:summary}{exo:title}{exo:text}";
   public static String NT_FILE                    = "nt:file";
   public static String EDIT_ACTIVITY              = "ActivityNotify.event.PropertyUpdated";
+  public static String FILE_EDIT_ACTIVITY         = "FileActivityNotify.event.PropertyUpdated";
   
   public static String ATTACH_ADDED_ACTIVITY      = "ActivityNotify.event.AttachmentAdded";
   public static String ATTACH_REMOVED_ACTIVITY    = "ActivityNotify.event.AttachmentRemoved";

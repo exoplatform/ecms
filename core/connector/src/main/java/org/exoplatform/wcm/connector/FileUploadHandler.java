@@ -27,6 +27,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.jcr.Node;
+import javax.jcr.Value;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.MediaType;
@@ -49,6 +50,7 @@ import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.upload.UploadResource;
 import org.exoplatform.upload.UploadService;
+import org.jboss.util.Strings;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -353,7 +355,16 @@ public class FileUploadHandler {
     jcrContent.setProperty("jcr:data",new ByteArrayInputStream(uploadData));
     jcrContent.setProperty("jcr:lastModified",new GregorianCalendar());
     jcrContent.setProperty("jcr:mimeType",mimetype);
-    parent.getSession().save();
+    if(!jcrContent.hasProperty(NodetypeConstant.DC_TITLE)) {
+    	Value[] dcValues = new Value[1];
+    	dcValues[0] = jcrContent.getSession().getValueFactory().createValue(file.getName());
+    	jcrContent.setProperty(NodetypeConstant.DC_TITLE, dcValues);
+    }
+    if(!jcrContent.hasProperty(NodetypeConstant.DC_DESCRIPTION)) {
+    	Value[] dcValues = new Value[1];
+    	dcValues[0] = jcrContent.getSession().getValueFactory().createValue(Strings.EMPTY);
+    	jcrContent.setProperty(NodetypeConstant.DC_DESCRIPTION, dcValues);
+    }
     parent.getSession().refresh(true); // Make refreshing data
     uploadService.removeUploadResource(uploadId);
     uploadIdTimeMap.remove(uploadId);
@@ -362,6 +373,7 @@ public class FileUploadHandler {
     if (activityService.isAcceptedNode(file)) {
       listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, file);
     }
+    file.getSession().save();
     return Response.ok(createDOMResponse("Result", mimetype), MediaType.TEXT_XML)
                    .cacheControl(cacheControl)
                    .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))

@@ -863,12 +863,15 @@ public class CmsServiceImpl implements CmsService {
         }
       } else {
         if(isMultiple) {
-          if (value instanceof String) {
+          if (value instanceof String) { 
             if(!property.getValues().equals(value)) {
               node.setProperty(propertyName, new String[] { (String)value});
             }
           } else if (value instanceof String[]) {
-            if(!property.getValues().equals(value)) node.setProperty(propertyName, (String[]) value);
+          	List list1 = Arrays.asList(property.getValues());
+          	List list2 = Arrays.asList(value);
+          	list1.equals(list2);
+            if(!Arrays.equals(property.getValues(), (Object[]) value)) node.setProperty(propertyName, (String[]) value);
           }
         } else {
           if(!property.getValue().getString().equals(value)) {

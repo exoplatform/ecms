@@ -37,6 +37,11 @@ public class NodetypeConstant {
   public static final String NT_VERSIONED_CHILD               = "nt:versionedChild";
 
   public static final String DC_ELEMENT_SET                   = "dc:elementSet";
+  
+  public static final String DC_TITLE 												= "dc:title";
+  
+  public static final String DC_DESCRIPTION							      = "dc:description";
+  
 
   public static final String JCR_ROOT_VERSION                 = "jcr:rootVersion";
 

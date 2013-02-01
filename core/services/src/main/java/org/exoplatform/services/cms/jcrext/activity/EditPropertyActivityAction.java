@@ -23,6 +23,7 @@ import org.apache.commons.chain.Context;
 import org.exoplatform.services.command.action.Action;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -42,6 +43,7 @@ public class EditPropertyActivityAction implements Action{
   public boolean execute(Context context) throws Exception {
     Object item = context.get("currentItem");
     Node node = (item instanceof Property) ?((Property)item).getParent():(Node)item;
+    Node nodeTemp = node;
     String propertyName = (item instanceof Property) ?((Property)item).getName():((Node)item).getName();
     // Do not create / update activity for bellow cases
     if (!activityService.isAcceptedProperties(propertyName)) return false;
@@ -51,7 +53,10 @@ public class EditPropertyActivityAction implements Action{
     //filter node type
     if (activityService.isAcceptedNode(node)) {
     //Notify to update activity
-      listenerService.broadcast(ActivityCommonService.EDIT_ACTIVITY, node, propertyName);
+    	if(node.isNodeType(NodetypeConstant.NT_FILE))
+    		listenerService.broadcast(ActivityCommonService.FILE_EDIT_ACTIVITY, nodeTemp, propertyName);
+    	else
+        listenerService.broadcast(ActivityCommonService.EDIT_ACTIVITY, node, propertyName);
     }
     return false;
   }
