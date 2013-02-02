@@ -358,7 +358,7 @@ public class FileUploadHandler {
     jcrContent.setProperty("jcr:data",new ByteArrayInputStream(uploadData));
     jcrContent.setProperty("jcr:lastModified",new GregorianCalendar());
     jcrContent.setProperty("jcr:mimeType",mimetype);
-    if(!jcrContent.hasProperty(NodetypeConstant.DC_TITLE)) {
+    /*if(!jcrContent.hasProperty(NodetypeConstant.DC_TITLE)) {
     	Value[] dcValues = new Value[1];
     	dcValues[0] = jcrContent.getSession().getValueFactory().createValue(file.getName());
     	jcrContent.setProperty(NodetypeConstant.DC_TITLE, dcValues);
@@ -368,7 +368,7 @@ public class FileUploadHandler {
     	Value[] dcValues = new Value[1];
     	dcValues[0] = jcrContent.getSession().getValueFactory().createValue(Strings.EMPTY);
     	jcrContent.setProperty(NodetypeConstant.DC_DESCRIPTION, dcValues);
-    }
+    }*/
     parent.getSession().refresh(true); // Make refreshing data
     uploadService.removeUploadResource(uploadId);
     uploadIdTimeMap.remove(uploadId);

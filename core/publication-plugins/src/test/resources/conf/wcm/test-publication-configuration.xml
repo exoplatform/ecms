@@ -27,6 +27,10 @@
         <name>acceptedProperties</name>
         <value>{dc:title}{dc:description}{dc:creator}{exo:summary}{exo:title}{exo:text}</value>
       </value-param>
+      <value-param>
+        <name>acceptedFileProperties</name>
+        <value>{dc:title}{dc:description}{dc:creator}{dc:source}</value>
+      </value-param>
     </init-params>
   </component>
   <component>

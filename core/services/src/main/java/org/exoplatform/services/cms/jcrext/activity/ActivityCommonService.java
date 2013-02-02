@@ -34,9 +34,11 @@ import org.exoplatform.container.xml.InitParams;
 public class ActivityCommonService {
   private String acceptedNodeTypes;
   private String acceptedProperties;// = "{exo:summary}{exo:title}{exo:text}";
+  private String acceptedFileProperties;
   public static String NT_FILE                    = "nt:file";
   public static String EDIT_ACTIVITY              = "ActivityNotify.event.PropertyUpdated";
   public static String FILE_EDIT_ACTIVITY         = "FileActivityNotify.event.PropertyUpdated";
+  public static String FILE_ADD_ACTIVITY          = "FileActivityNotify.event.PropertyAdded";
   
   public static String ATTACH_ADDED_ACTIVITY      = "ActivityNotify.event.AttachmentAdded";
   public static String ATTACH_REMOVED_ACTIVITY    = "ActivityNotify.event.AttachmentRemoved";
@@ -70,8 +72,10 @@ public class ActivityCommonService {
   public ActivityCommonService(InitParams initParams) {
     this.acceptedNodeTypes = initParams.getValueParam("acceptedNodeTypes").getValue();
     this.acceptedProperties = initParams.getValueParam("acceptedProperties").getValue();
+    this.acceptedFileProperties = initParams.getValueParam("acceptedFileProperties").getValue();
     if (acceptedNodeTypes==null) acceptedNodeTypes = "";
     if (acceptedProperties==null) acceptedProperties =""; 
+    if (acceptedFileProperties==null) acceptedFileProperties ="";
   }
   
   public boolean isCreating(Node node) {
@@ -97,5 +101,8 @@ public class ActivityCommonService {
   }
   public boolean isAcceptedProperties(String propertyName) {
     return acceptedProperties.indexOf("{" + propertyName + "}")>=0;
+  }
+  public boolean isAcceptedFileProperties(String propertyName) {
+    return acceptedFileProperties.indexOf("{" + propertyName + "}")>=0;
   }
 }

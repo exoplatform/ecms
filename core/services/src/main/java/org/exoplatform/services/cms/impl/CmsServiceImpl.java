@@ -1148,7 +1148,7 @@ public class CmsServiceImpl implements CmsService {
   	  String[] stringArray = new String[arrayValue1.length];
   	  int i = 0;
   	  for (Value valueItem : arrayValue1) {
-  	  	if(valueItem != null && valueItem.getString().length() > 0)
+  	  	if(valueItem != null && valueItem.getString() != null)
   	  	stringArray[i] = valueItem.getString();
 			}
   	  if(stringArray != null && stringArray.length > 0)
