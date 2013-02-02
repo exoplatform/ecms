@@ -62,7 +62,7 @@
         </value-param>
         <value-param>
           <name>path</name>
-          <value>/sites content/live/{portalName}/categories</value>
+          <value>/sites/{portalName}/categories</value>
         </value-param>
         <value-param>
           <name>treeName</name>
@@ -160,13 +160,13 @@
                       <string></string>
                     </field>
                     <field name="homePath">
-                      <string>collaboration:/sites content/live/{portalName}/categories/{treeName}</string>
+                      <string>collaboration:/sites/{portalName}/categories/{treeName}</string>
                     </field>
                     <field name="targetWspace">
                       <string>collaboration</string>
                     </field>
                     <field name="targetPath">
-                      <string>/sites content/live/{portalName}/web contents</string>
+                      <string>/sites/{portalName}/web contents</string>
                     </field>
                     <field name="lifecyclePhase">
                       <collection type="java.util.ArrayList">

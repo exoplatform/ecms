@@ -48,10 +48,8 @@
   
   <import>war:/conf/wcm-extension/kernel/schedule-configuration.xml</import>
   <import>war:/conf/wcm-extension/portal/resource-bundle-configuration.xml</import>
-  <import>war:/conf/wcm-extension/dms/explorer-views-configuration.xml</import>
   <import>war:/conf/wcm-extension/dms/nodetype-templates-configuration.xml</import>
   <import>war:/conf/wcm-extension/dms/application-templates-configuration.xml</import>
-  <import>war:/conf/wcm-extension/dms/drives-configuration.xml</import>
   <import>war:/conf/wcm-extension/dms/ext-configuration.xml</import>
   <import>war:/conf/wcm-extension/wcm/system-configuration.xml</import>
   <import>war:/conf/wcm-extension/wcm/publication-configuration.xml</import>

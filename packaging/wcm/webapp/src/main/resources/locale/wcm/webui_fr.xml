@@ -42,21 +42,13 @@
 
   <Views>
     <label>
-      <wcm-view>Vue WCM</wcm-view>
-      <admin-view>Vue administration</admin-view>
-      <icon-view>Vue icônes</icon-view>
-      <thumbails-view>Vue vignettes</thumbails-view>
-      <cover-flow>Vue défilé</cover-flow>
-      <simple-view>Vue simple</simple-view>
-      <system-view>Vue système</system-view>
-      <anonymous-view>Vue anonyme</anonymous-view>
-      <taxonomy-list>Vue liste de taxonomie</taxonomy-list>
-      <taxonomy-icons>Vue icône de taxonomie</taxonomy-icons>
-      <timeline-view>Vue frise chronologique</timeline-view>
-      <list-view>Vue liste</list-view>
-      <authoring-view>Vue auteur</authoring-view>
-      <slide-show>Vue diaporama</slide-show>
-      <wcm-category-view>Vue catégorie du WCM</wcm-category-view>
+      <wcm-view>Web</wcm-view>
+      <admin-view>Administration</admin-view>
+      <icon-view>Icônes</icon-view>
+      <thumbails-view>Vignettes</thumbails-view>
+      <list-view>Liste</list-view>
+      <authoring-view>Auteur</authoring-view>
+      <wcm-category-view>Catégories</wcm-category-view>
     </label>
   </Views>
 

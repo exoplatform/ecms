@@ -36,7 +36,7 @@
             <preferences>
               <preference>
                 <name>folderPath</name>
-                <value>repository:collaboration:/sites content/live/@owner@/categories/@owner@</value>
+                <value>repository:collaboration:/sites/@owner@/categories/@owner@</value>
                 <read-only>false</read-only>
               </preference>
               <preference>
@@ -102,7 +102,7 @@
             <preferences>
               <preference>
                 <name>folderPath</name>
-                <value>repository:collaboration:/sites content/live/@owner@/categories/@owner@</value>
+                <value>repository:collaboration:/sites/@owner@/categories/@owner@</value>
                 <read-only>false</read-only>
               </preference>
               <preference>
@@ -177,7 +177,7 @@
                 </preference>
                 <preference>
                   <name>nodeIdentifier</name>
-                  <value>/sites content/live/@owner@/categories/@owner@/home</value>
+                  <value>/sites/@owner@/categories/@owner@/home</value>
                   <read-only>false</read-only>
                 </preference>
                 <preference>
@@ -326,7 +326,7 @@
           </preference>
           <preference>
             <name>nodeIdentifier</name>
-            <value>/sites content/live/@owner@/web contents/accessibility</value>
+            <value>/sites/@owner@/web contents/accessibility</value>
             <read-only>false</read-only>
           </preference>
           <preference>
@@ -391,7 +391,7 @@
         <preferences>
           <preference>
             <name>folderPath</name>
-            <value>repository:collaboration:/sites content/live/@owner@/categories/@owner@</value>
+            <value>repository:collaboration:/sites/@owner@/categories/@owner@</value>
             <read-only>false</read-only>
           </preference>
           <preference>

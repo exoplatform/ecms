@@ -72,7 +72,7 @@
       </preference>
       <preference>
         <name>driveName</name>     
-        <value>Private</value>        
+        <value>Personal Documents</value>        
         <read-only>false</read-only>
       </preference>
 

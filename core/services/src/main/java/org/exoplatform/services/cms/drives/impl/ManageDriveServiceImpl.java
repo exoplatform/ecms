@@ -279,7 +279,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
       String groupName = name.replace(".", "/");
       if (groupDriveTemplate_ == null) return null;
       DriveData drive = groupDriveTemplate_.clone();
-      drive.setHomePath("/Groups" + groupName);
+      drive.setHomePath(groupDriveTemplate_.getHomePath().replace("${groupId}", groupName));
       drive.setName(name);
       drive.setPermissions("*:" + groupName);
       return drive;
@@ -514,7 +514,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
       String group = role.substring(role.indexOf(":")+1);
       if (groupDriveTemplate_ != null && group.charAt(0)=='/') {
         DriveData drive = groupDriveTemplate_.clone();
-        drive.setHomePath(groupPath + group);
+        drive.setHomePath(groupDriveTemplate_.getHomePath().replace("${groupId}", group));
         drive.setName(group.replace("/", "."));
         drive.setPermissions("*:"+group);
         if (!groupDrives.contains(drive))

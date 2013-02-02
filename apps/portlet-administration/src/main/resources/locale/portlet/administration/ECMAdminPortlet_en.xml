@@ -21,7 +21,7 @@
       <UINamespaceManager>Namespaces</UINamespaceManager>
       <UINodeTypeManager>Node Types</UINodeTypeManager>
       <UITemplatesManager>Documents</UITemplatesManager>
-			<UICLVTemplatesManager>List</UICLVTemplatesManager>
+			   <UICLVTemplatesManager>List</UICLVTemplatesManager>
       <UIViewManager>Views</UIViewManager>
       <UIDriveManager>Drives</UIDriveManager>
       <UIQueriesManager>Queries</UIQueriesManager>
@@ -988,7 +988,7 @@
   <UITabPane>
     <title>
       <UIViewContainer>Views</UIViewContainer>
-      <ECMTemplate>ECM Templates</ECMTemplate>
+      <ECMTemplate>Explorer Templates</ECMTemplate>
       <CBTemplate>BC Templates</CBTemplate>
       <UICBScripts>BC Scripts</UICBScripts>
       <UIScriptForm>Scripts</UIScriptForm>

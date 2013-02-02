@@ -42,7 +42,7 @@
         <property name="CLVPortlet" value="/presentation/ContentListViewerPortlet" />
         <property name="SCVPortlet" value="/presentation/SingleContentViewer" />
 
-        <property name="formViewTemplatePath" value="/exo:ecm/views/templates/content-list-viewer/list/UIContentListPresentationDefault.gtmpl" />
+        <property name="formViewTemplatePath" value="" />
         <property name="paginatorTemplatePath" value="/exo:ecm/views/templates/content-list-viewer/paginators/DefaultPaginator.gtmpl" />
       </properties-param>
       <properties-param>
@@ -58,7 +58,7 @@
             <string>collaboration</string>
           </field>
           <field name="path">
-            <string>/sites content/live</string>
+            <string>/sites</string>
           </field>
         </object>
       </object-param>
@@ -82,7 +82,7 @@
             <string></string>
           </field>
           <field name="views">
-            <string>wcm-category-view</string>
+            <string>Categories</string>
           </field>
           <field name="viewPreferences">
             <boolean>false</boolean>
@@ -203,7 +203,7 @@
                       <string>collaboration</string>
                     </field>
                     <field name="path">
-                      <string>/sites content</string>
+                      <string>/sites</string>
                     </field>
                     <field name="isDeep">
                       <boolean>true</boolean>
@@ -225,7 +225,7 @@
                       <string>collaboration</string>
                     </field>
                     <field name="path">
-                      <string>/sites content</string>
+                      <string>/sites</string>
                     </field>
                     <field name="isDeep">
                       <boolean>true</boolean>
@@ -247,7 +247,7 @@
                       <string>collaboration</string>
                     </field>
                     <field name="path">
-                      <string>/sites content</string>
+                      <string>/sites</string>
                     </field>
                     <field name="isDeep">
                       <boolean>true</boolean>
@@ -297,7 +297,7 @@
                       <string>siteContent</string>
                     </field>
                     <field name="path">
-                      <string>/sites content</string>
+                      <string>/sites</string>
                     </field>
                     <field name="permissions">
                       <collection type="java.util.ArrayList">
@@ -368,7 +368,7 @@
                       <string>liveSiteContent</string>
                     </field>
                     <field name="path">
-                      <string>/sites content/live</string>
+                      <string>/sites</string>
                     </field>
                     <field name="permissions">
                       <collection type="java.util.ArrayList">

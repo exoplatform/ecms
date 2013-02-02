@@ -246,7 +246,7 @@
 	    		  }
           }
     		  //End WebDav Action
-	        List customActs = uicomponent.getCustomActions(data);  
+	        def customActs = uicomponent.getCustomActions(data);  
 	        Parameter[] params ;
 	        if (customActs.size() > 0) {            
 	          for (act in customActs) {

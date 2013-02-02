@@ -42,11 +42,13 @@ import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -103,9 +105,12 @@ public class UIDrivesArea extends UIContainer {
   public String getGroupLabel(DriveData driveData) throws Exception{
     try {
       RepositoryService repoService = WCMCoreUtils.getService(RepositoryService.class);
+      NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
+      String groupPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_GROUPS_PATH);
       Node groupNode = (Node)WCMCoreUtils.getSystemSessionProvider().getSession(
                                     repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName(),
-                                    repoService.getCurrentRepository()).getItem(driveData.getHomePath());
+                                    repoService.getCurrentRepository()).getItem(
+                                            groupPath + driveData.getName().replace(".", "/"));
       return groupNode.getProperty(NodetypeConstant.EXO_LABEL).getString();
     } catch(Exception e) {
       return driveData.getName().replace(".", " / ");

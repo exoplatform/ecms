@@ -47,10 +47,12 @@ import org.exoplatform.ecm.webui.component.explorer.search.UISavedQuery;
 import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
 import org.exoplatform.ecm.webui.component.explorer.search.UISimpleSearch;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.queries.QueryService;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
@@ -370,15 +372,17 @@ public class UIActionBar extends UIForm {
     ResourceBundle res = context.getApplicationResourceBundle();
     DriveData driveData = getAncestorOfType(UIJCRExplorer.class).getDriveData();
     String id = driveData.getName();
-    String path = driveData.getHomePath();
     try {
       return res.getString("Drives.label." + id.replace(".", "").replace(" ", ""));
     } catch (MissingResourceException ex) {
       try {
         RepositoryService repoService = WCMCoreUtils.getService(RepositoryService.class);
+        NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
+        String groupPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_GROUPS_PATH);
         Node groupNode = (Node)WCMCoreUtils.getSystemSessionProvider().getSession(
                                       repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName(),
-                                      repoService.getCurrentRepository()).getItem(path);
+                                      repoService.getCurrentRepository()).getItem(
+                                              groupPath + driveData.getName().replace(".", "/"));
         return groupNode.getProperty(NodetypeConstant.EXO_LABEL).getString();
       } catch(Exception e) {
         return id.replace(".", " / ");

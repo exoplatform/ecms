@@ -59,7 +59,7 @@
               <value>
                 <object type="org.exoplatform.services.wcm.friendly.impl.FriendlyConfig$Friendly">
                   <field name="friendlyUri"><string>acme</string></field>
-                  <field name="unfriendlyUri"><string>/public/acme/detail?path=/repository/collaboration/sites content/live/acme/web contents</string></field>
+                  <field name="unfriendlyUri"><string>/public/acme/detail?path=/repository/collaboration/sites/acme/web contents</string></field>
                 </object>
               </value>
               <value>
@@ -83,10 +83,10 @@
               <value>
                 <object type="org.exoplatform.services.wcm.friendly.impl.FriendlyConfig$Friendly">
                   <field name="friendlyUri"><string>acme-documents</string></field>
-                  <field name="unfriendlyUri"><string>/rest-ecmdemo/jcr/repository/collaboration/sites content/live/acme/documents</string></field>
+                  <field name="unfriendlyUri"><string>/rest-ecmdemo/jcr/repository/collaboration/sites/acme/documents</string></field>
                 </object>
               </value>
-     http://localhost:8080/ecmdemo/public/acme/detail?content-id=/repository/collaboration/sites%20content/live/acme/web%20contents/Events/Event1
+     http://localhost:8080/ecmdemo/public/acme/detail?content-id=/repository/collaboration/sites/acme/web%20contents/Events/Event1
               -->
               <value>
                 <object type="org.exoplatform.services.wcm.friendly.impl.FriendlyConfig$Friendly">
@@ -97,7 +97,7 @@
               <value>
                 <object type="org.exoplatform.services.wcm.friendly.impl.FriendlyConfig$Friendly">
                   <field name="friendlyUri"><string>files</string></field>
-                  <field name="unfriendlyUri"><string>/rest-ecmdemo/jcr/repository/collaboration</string></field>
+                  <field name="unfriendlyUri"><string>/rest/jcr/repository/collaboration</string></field>
                 </object>
               </value>
             </collection>

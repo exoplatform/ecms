@@ -17,7 +17,6 @@
 package org.exoplatform.ecm.webui.component.admin.templates;
 
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
-import org.exoplatform.ecm.webui.core.UIECMPageIterator;
 import org.exoplatform.ecm.webui.selector.UIPermissionSelector;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -78,8 +77,8 @@ public class UITemplatesManager extends UIAbstractManager {
     UITemplateContainer uiOthersTemp = addChild(UITemplateContainer.class, null, OTHERS_TEMPLATE_ID) ;
     uiOthersTemp.getChild(UITemplateList.class).setTemplateFilter(UITemplateList.OTHERS_TEMPLATE_TYPE);
     
-    UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, POPUP_TEMPLATE_ID) ;    
-    UIPopupWindow uiPopupPermission = addChild(UIPopupWindow.class, null, UITemplateContent.TEMPLATE_PERMISSION) ;
+    addChild(UIPopupWindow.class, null, POPUP_TEMPLATE_ID) ;    
+    addChild(UIPopupWindow.class, null, UITemplateContent.TEMPLATE_PERMISSION) ;
     setSelectedTab("UITemplateContainer");
   }
   

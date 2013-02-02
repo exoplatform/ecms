@@ -42,13 +42,13 @@
 
   <Views>
     <label>
-      <wcm-view>WCM View</wcm-view>
-      <admin-view>Admin View</admin-view>
-      <icon-view>Icon View</icon-view>
-      <thumbails-view>Thumbnails View</thumbails-view>
-      <list-view>List View</list-view>
-      <authoring-view>Authoring View</authoring-view>
-      <wcm-category-view>WCM Category View</wcm-category-view>
+      <wcm-view>Web</wcm-view>
+      <admin-view>Admin</admin-view>
+      <icon-view>Icons</icon-view>
+      <thumbails-view>Thumbnails</thumbails-view>
+      <list-view>List</list-view>
+      <authoring-view>Authoring</authoring-view>
+      <wcm-category-view>Categories</wcm-category-view>
     </label>
   </Views>
 

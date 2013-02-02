@@ -20,12 +20,30 @@
 						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.sidebar.action.ExplorerActionComponent</string></field>
 					</object>
 				</object-param>
+					<object-param>
+					<name>TagExplorer</name>
+					<object type="org.exoplatform.webui.ext.UIExtension">
+						<field name="type"><string>org.exoplatform.ecm.dms.UISideBar</string></field>
+						<field name="name"><string>TagExplorer</string></field>
+						<field name="rank"><int>120</int></field>
+						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.sidebar.action.TagExplorerActionComponent</string></field>
+					</object>
+				</object-param>	
+					<object-param>
+					<name>SavedSearches</name>
+					<object type="org.exoplatform.webui.ext.UIExtension">
+						<field name="type"><string>org.exoplatform.ecm.dms.UISideBar</string></field>
+						<field name="name"><string>SavedSearches</string></field>
+						<field name="rank"><int>130</int></field>
+						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.sidebar.action.SavedSearchesActionComponent</string></field>
+					</object>
+				</object-param>					
 				<object-param>
 					<name>Relation</name>
 					<object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UISideBar</string></field>
 						<field name="name"><string>Relation</string></field>
-						<field name="rank"><int>120</int></field>
+						<field name="rank"><int>140</int></field>
 						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.sidebar.action.RelationActionComponent</string></field>
 					</object>
 				</object-param>
@@ -34,28 +52,10 @@
 					<object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UISideBar</string></field>
 						<field name="name"><string>Clipboard</string></field>
-						<field name="rank"><int>130</int></field>
+						<field name="rank"><int>150</int></field>
 						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.sidebar.action.ClipboardActionComponent</string></field>
 					</object>
 				</object-param>
-				<object-param>
-					<name>TagExplorer</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UISideBar</string></field>
-						<field name="name"><string>TagExplorer</string></field>
-						<field name="rank"><int>140</int></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.sidebar.action.TagExplorerActionComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>SavedSearches</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UISideBar</string></field>
-						<field name="name"><string>SavedSearches</string></field>
-						<field name="rank"><int>150</int></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.sidebar.action.SavedSearchesActionComponent</string></field>
-					</object>
-				</object-param>									
 			</init-params>
 		</component-plugin>				
 		<component-plugin>

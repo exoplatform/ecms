@@ -1097,6 +1097,7 @@ public class Utils {
     NodeTypeManager ntManager = currentNode.getSession().getWorkspace().getNodeTypeManager();
 
     for(String strFolderType : arrFoldertypes) {
+      if(strFolderType.isEmpty()) continue;
       NodeType folderType = ntManager.getNodeType(strFolderType);
       if ((currentNodeType).isChildNodePrimaryTypeAllowed(Constants.JCR_ANY_NAME, ((NodeTypeImpl)folderType).getQName())) {
         allowedTypes.add(strFolderType);

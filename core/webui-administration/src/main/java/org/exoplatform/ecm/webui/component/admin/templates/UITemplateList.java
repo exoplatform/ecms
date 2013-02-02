@@ -78,7 +78,6 @@ public class UITemplateList extends UIPagingGrid {
   }
   
   public UITemplateList() throws Exception {
-    getUIPageIterator().setId("NodeTypeListIterator") ;
     configure("name", NODETYPE_BEAN_FIELD, NODETYPE_ACTION) ;
   }
 

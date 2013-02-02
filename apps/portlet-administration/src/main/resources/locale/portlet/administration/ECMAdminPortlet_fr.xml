@@ -995,7 +995,7 @@
   <UITabPane>
     <title>
       <UIViewContainer>Vues</UIViewContainer>
-      <ECMTemplate>Formulaires ECM</ECMTemplate>
+      <ECMTemplate>Formulaires Explorer</ECMTemplate>
       <CBTemplate>Formulaires Portlet BC</CBTemplate>
       <UICBScripts>Scripts portlet BC</UICBScripts>
       <uiECMScripts>Scripts ECM</uiECMScripts>

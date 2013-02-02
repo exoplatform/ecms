@@ -89,7 +89,6 @@ public class UIViewList extends UIPagingGrid {
 
   public String[] getActions() { return ACTIONS ; }
 
-  @SuppressWarnings("unchecked")
   public void refresh(int currentPage) throws Exception {
     List<ViewBean> viewBean = getViewsBean();
     Collections.sort(viewBean, new ViewComparator());
