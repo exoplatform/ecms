@@ -47,7 +47,7 @@
   String[] arrColumns = ["exo:owner;95px","exo:dateModified;123px","exo:dateCreated;121px"];
   
 %>
-  <div id="$componentId" class="UIListView" style="padding-left:20px"> 
+  <div id="$componentId" class="UIListView"> 
     <div class="UIListGrid">
       <%        
         String portalName = uiDocumentInfo.getPortalName() ;
@@ -194,7 +194,8 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
        mediaType="$isMediaType" removeFavourite="$isFavourite" 
        inTrash="$isInTrash" workspacename="$preferenceWS" 
        objectId="<%=org.exoplatform.services.cms.impl.Utils.getObjectId(nodePath)%>"
-       isFile="<%=data.isNodeType("nt:file")%>">
+       isFile="<%=data.isNodeType("nt:file")%>"
+       style="padding-left:<%=uicomponent.getPadding()*25%>px">
     $strActs
     <% def folderIcon = "NoArrow";
        if (data.isNodeType(NodetypeConstant.NT_FOLDER) || data.isNodeType(NodetypeConstant.NT_UNSTRUCTURED)) { 

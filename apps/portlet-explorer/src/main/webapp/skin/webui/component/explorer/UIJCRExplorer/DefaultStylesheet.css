@@ -490,7 +490,11 @@
 	overflow: hidden;
   white-space: nowrap;
   padding-left: 3px;
-  color: darkgray;
+  color: #4f4f4f;
+}
+
+.UIJCRExplorerPortlet .UIFileView .UIListGrid .ColumnName {
+	color: darkgray;
 }
 
 .UIJCRExplorerPortlet .UIListGrid .ColumnAuditing {
