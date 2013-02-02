@@ -37,15 +37,15 @@
     <init-params>
       <value-param>
         <name>useCache</name>
-        <value>false</value>
+        <value>${wcm.composer.useCache:true}</value>
       </value-param>
       <value-param>
         <name>useDefaultLanguage</name>
-        <value>true</value>
+        <value>${wcm.composer.useDefaultLanguage:true}</value>
       </value-param>
       <value-param>
       	<name>sharedGroup</name>
-      	<value>*:/platform/users</value>
+      	<value>${wcm.composer.sharedGroup:*:/platform/users}</value>
       </value-param>
     </init-params>
   </component>

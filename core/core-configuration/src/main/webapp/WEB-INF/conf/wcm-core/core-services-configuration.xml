@@ -315,7 +315,7 @@
             <object type="org.exoplatform.services.cms.lock.impl.LockGroupsOrUsersConfig">
               <field  name="settingLockList">
                 <collection type="java.util.ArrayList">
-			            			<value><string>*:/platform/administrators</string></value>
+			            			<value><string>${wcm.lock.admin:*:/platform/administrators}</string></value>
                 </collection>
               </field>
             </object>

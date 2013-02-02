@@ -10,7 +10,7 @@
         onParentVersion="COPY" protected="true" multiple="false">
         <valueConstraints/>
         <defaultValues>
-          <defaultValue>ecm-explorer/action/EnableVersioningScript.groovy</defaultValue>
+          <defaultValue>ecm-explorer/action/EnableVersioning.groovy</defaultValue>
         </defaultValues>
       </propertyDefinition>
     </propertyDefinitions>
@@ -25,7 +25,7 @@
         onParentVersion="COPY" protected="true" multiple="false">
         <valueConstraints/>
         <defaultValues>
-          <defaultValue>ecm-explorer/action/AutoVersioningScript.groovy</defaultValue>
+          <defaultValue>ecm-explorer/action/AutoVersioning.groovy</defaultValue>
         </defaultValues>
       </propertyDefinition>
     </propertyDefinitions>

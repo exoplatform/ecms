@@ -17,7 +17,7 @@
           <properties-param>
             <name>search.exclude.datatypes</name>
             <description>exclude some data type when search</description>
-            <property name="mimetypes" value="text/css,text/javascript,application/x-javascript,text/ecmascript" />
+            <property name="mimetypes" value="${wcm.search.excluded-mimetypes:text/css,text/javascript,application/x-javascript,text/ecmascript}" />
           </properties-param>
         </init-params>
       </component-plugin>
@@ -25,11 +25,11 @@
     <init-params>
       <value-param>
         <name>isEnabledFuzzySearch</name>
-        <value>true</value>
+        <value>${wcm.search.enableFuzzySearch:true}</value>
       </value-param>
       <value-param>
         <name>fuzzySearchIndex</name>
-        <value></value>
+        <value>${wcm.search.fuzzySearchIndex:}</value>
       </value-param>
     </init-params>
   </component>

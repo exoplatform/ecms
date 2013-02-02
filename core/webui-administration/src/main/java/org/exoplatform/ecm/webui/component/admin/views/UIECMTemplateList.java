@@ -28,7 +28,6 @@ import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.core.UIPagingGrid;
-import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.views.ManageViewService;
@@ -57,7 +56,7 @@ import org.exoplatform.webui.event.EventListener;
     }
 )
 public class UIECMTemplateList extends UIPagingGrid {
-  private static String[] VIEW_BEAN_FIELD = {"name", "path", "baseVersion"} ;
+  private static String[] VIEW_BEAN_FIELD = {"name", "path"} ;
   private static String[] VIEW_ACTION = {"EditInfo","Delete"} ;
   public static String ST_ecmTempForm = "ecmTempForm" ;
   public static String ST_ECMTemp = "ECMTemplate" ;
@@ -69,11 +68,6 @@ public class UIECMTemplateList extends UIPagingGrid {
 
   public String[] getActions() { return new String[] {"Add"} ; }
 
-  public String getBaseVersion(Node node) throws Exception {
-    if(!node.isNodeType(Utils.MIX_VERSIONABLE) || node.isNodeType(Utils.NT_FROZEN)) return "";
-    return node.getBaseVersion().getName();
-  }
-
   public void refresh(int currentPage) throws Exception {
     List<Node> nodes = getApplicationComponent(ManageViewService.class)
                                                .getAllTemplates(
@@ -81,7 +75,7 @@ public class UIECMTemplateList extends UIPagingGrid {
                                                                 WCMCoreUtils.getUserSessionProvider());
     List<TemplateBean> tempBeans = new ArrayList<TemplateBean>();
     for (Node node : nodes) {
-      tempBeans.add(new TemplateBean(node.getName(), node.getPath(), getBaseVersion(node)));
+      tempBeans.add(new TemplateBean(node.getName(), node.getPath()));
     }
     Collections.sort(tempBeans, new ECMViewComparator());
     ListAccess<TemplateBean> tmplBeanList = new ListAccessImpl<TemplateBean>(TemplateBean.class,

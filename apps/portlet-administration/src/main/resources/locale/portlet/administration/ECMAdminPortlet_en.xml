@@ -254,7 +254,7 @@
       <name>Metadata</name>
       <type>Type</type>
       <internalUse>Internal Use</internalUse>
-      <action>Action</action>
+      <action>Actions</action>
     </header>
     <msg>
       <confirm-delete>Are you sure to delete this metadata?</confirm-delete>
@@ -1278,13 +1278,13 @@
   </ecmTempFormPopup>
   <ecmTempFormAdd>
     <title>
-      <ecmTempForm>Add ECM Template</ecmTempForm>
-      <ecmTempFormAdd>Add ECM Template</ecmTempFormAdd>
+      <ecmTempForm>Add Explorer Template</ecmTempForm>
+      <ecmTempFormAdd>Add Explorer Template</ecmTempFormAdd>
     </title>
   </ecmTempFormAdd>
   <ecmTempFormEdit>
     <title>
-      <ecmTempForm>Edit ECM Template</ecmTempForm>
+      <ecmTempForm>Edit Explorer Template</ecmTempForm>
     </title>
   </ecmTempFormEdit>
   <!--

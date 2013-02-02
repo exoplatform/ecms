@@ -27,10 +27,11 @@ public class PostNodeSaveInterceptor implements CmsScript {
   public void execute(Object context) {
     String path = (String) context;       
 
-    String[] splittedContent = path.split("&workspaceName=");
-    println("Post node save interceptor, created node: " + splittedContent[0]);
+    println("PostNodeSaveInterceptor: All available data in current context are " + path);
   }
 
-  public void setParams(String[] params) {}
+  public void setParams(String[] params) {
+    println("PostNodeSaveInterceptor: All available data in current params are " + params);
+  }
 
 }

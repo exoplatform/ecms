@@ -19,60 +19,6 @@
       <type>org.exoplatform.services.document.impl.diff.SimpleDiff</type>
    </component>
     
-  <component>
-	  <key>org.exoplatform.services.jcr.webdav.WebDavServiceImpl</key>
-	  <type>org.exoplatform.services.cms.webdav.WebDavServiceImpl</type>
-	  <init-params>
-			<value-param>
-				<name>auto-mix-lockable</name>
-				<value>${webdav.auto-mix-lockable:false}</value>
-			</value-param>
-				
-			<value-param>
-				<name>def-folder-node-type</name>
-				<value>${webdav.def-folder-node-type:nt:folder}</value>
-			</value-param>
-				
-			<value-param>
-				<name>def-file-node-type</name>
-				<value>${webdav.def-file-node-type:nt:file}</value>
-			</value-param>
-				
-			<value-param>
-				<name>def-file-mimetype</name>
-				<value>${webdav.def-file-mimetype:text/plain}</value>
-			</value-param>
-			
-			<value-param>
-	      <name>folder-icon-path</name>
-	      <value>${webdav.folder-icon-path:/ecmexplorer/skin/icons/16x16/NodeTypes/DefaultSkin/nt-folder.gif}</value>
-    	</value-param>
-				
-			<value-param>
-				<name>update-policy</name>
-				<value>${webdav.update-policy:update}</value>
-				<!--value>replace</value -->
-				<!-- value>add</value -->
-			</value-param>
-			
-			<value-param>
-				<name>auto-version</name>
-				<value>${webdav.auto-version:checkout}</value>
-			</value-param>
-			
-	  <value-param>
-     <name>cache-control</name>
-     <value>${webdav.cache-control:text/*:max-age=3600;image/*:max-age=1800;*/*:no-cache}</value>
-   </value-param>
-
-   <values-param>
-     <name>untrusted-user-agents</name>
-     <value>Microsoft Office Core Storage Infrastructure/1.0</value>
-   </values-param>		
-			
-		</init-params>
-</component>
-    
   <external-component-plugins>
     <target-component>org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator</target-component>
     <component-plugin>

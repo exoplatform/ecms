@@ -20,11 +20,6 @@
     <key>org.exoplatform.services.wcm.publication.WCMPublicationService</key>
     <type>org.exoplatform.services.wcm.publication.WCMPublicationServiceImpl</type>
   </component>
-
-  <component>
-    <key>org.exoplatform.services.wcm.publication.WCMComposer</key>
-    <type>org.exoplatform.services.wcm.publication.WCMComposerImpl</type>
-  </component>
 	
    <external-component-plugins>
   	<target-component>org.exoplatform.services.jcr.RepositoryService</target-component>

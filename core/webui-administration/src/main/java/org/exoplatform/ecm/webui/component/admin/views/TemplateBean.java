@@ -31,16 +31,11 @@ import org.exoplatform.web.application.RequestContext;
 public class TemplateBean {
   private String name ;
   private String path ;
-  private String baseVersion =  "";
 
-  public TemplateBean(String n, String p, String baVer) {
+  public TemplateBean(String n, String p) {
     name = n ;
     path = p ;
-    baseVersion = baVer ;
   }
-
-  public String getBaseVersion() { return baseVersion; }
-  public void setBaseVersion(String baVer) { baseVersion = baVer; }
 
   public String getName() {
     ResourceBundle res = RequestContext.getCurrentInstance().getApplicationResourceBundle();

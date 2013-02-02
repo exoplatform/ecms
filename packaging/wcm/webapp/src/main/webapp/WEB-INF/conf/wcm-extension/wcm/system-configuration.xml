@@ -33,17 +33,17 @@
         <name>RuntimeContextParams</name>
         <description>some params for runtime</description>
 
-        <property name="parameterizedPageURI" value="/detail" />
-        <property name="printPageURI" value="/printviewer" />
-        <property name="printViewerPage" value="printviewer" />
-        <property name="editorPageURI" value="editor" />
-        <property name="siteExplorerURI" value="siteExplorer" />
+        <property name="parameterizedPageURI" value="${wcm.config.parameterizedPageURI:/detail}" />
+        <property name="printPageURI" value="${wcm.config.printPageURI:/printviewer}" />
+        <property name="printViewerPage" value="${wcm.config.printViewerPage:printviewer}" />
+        <property name="editorPageURI" value="${wcm.config.editorPageURI:editor}" />
+        <property name="siteExplorerURI" value="{wcm.config.siteExplorerURI:siteExplorer}" />
 
         <property name="CLVPortlet" value="/presentation/ContentListViewerPortlet" />
         <property name="SCVPortlet" value="/presentation/SingleContentViewer" />
 
-        <property name="formViewTemplatePath" value="" />
-        <property name="paginatorTemplatePath" value="/exo:ecm/views/templates/content-list-viewer/paginators/DefaultPaginator.gtmpl" />
+        <property name="formViewTemplatePath" value="{wcm.config.formViewTemplatePath:}" />
+        <property name="paginatorTemplatePath" value="{wcm.config.paginatorTemplatePath:/exo:ecm/views/templates/content-list-viewer/paginators/DefaultPaginator.gtmpl}" />
       </properties-param>
       <properties-param>
         <name>share.portal.config</name>
@@ -114,9 +114,9 @@
       <properties-param>
         <name>server.config</name>
         <description>server.address</description>
-        <property name="scheme" value="http" />
-        <property name="hostName" value="localhost" />
-        <property name="port" value="8080" />
+        <property name="scheme" value="${wcm.linkmanager.scheme:http}" />
+        <property name="hostName" value="${wcm.linkmanager.hostname:localhost}" />
+        <property name="port" value="${wcm.linkmanager.port:8080}" />
       </properties-param>
     </init-params>
   </component>

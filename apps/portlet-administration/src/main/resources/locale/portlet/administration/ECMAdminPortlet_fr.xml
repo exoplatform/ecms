@@ -261,7 +261,7 @@
       <internalUse>Usage interne</internalUse>
       <name>Metadata</name>
       <type>Type</type>
-      <action>Action</action>
+      <action>Actions</action>
     </header>
     <msg>
       <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
@@ -995,7 +995,7 @@
   <UITabPane>
     <title>
       <UIViewContainer>Vues</UIViewContainer>
-      <ECMTemplate>Formulaires Explorer</ECMTemplate>
+      <ECMTemplate>Gabarits d'Explorateur</ECMTemplate>
       <CBTemplate>Formulaires Portlet BC</CBTemplate>
       <UICBScripts>Scripts portlet BC</UICBScripts>
       <uiECMScripts>Scripts ECM</uiECMScripts>
@@ -1225,13 +1225,13 @@
   </ecmTempFormPopup>
   <ecmTempFormAdd>
     <title>
-      <ecmTempForm>Ajout de formulaire ECM</ecmTempForm>
-      <ecmTempFormAdd>Ajout de formulaire ECM</ecmTempFormAdd>
+      <ecmTempForm>Ajout de formulaire Explorer</ecmTempForm>
+      <ecmTempFormAdd>Ajout de formulaire Explorer</ecmTempFormAdd>
     </title>
   </ecmTempFormAdd>
   <ecmTempFormEdit>
     <title>
-      <ecmTempForm>Edition de formulaire ECM</ecmTempForm>
+      <ecmTempForm>Edition de formulaire Explorer</ecmTempForm>
     </title>
   </ecmTempFormEdit>
   <!--

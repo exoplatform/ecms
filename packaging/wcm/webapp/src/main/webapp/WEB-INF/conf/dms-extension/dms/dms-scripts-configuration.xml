@@ -35,45 +35,37 @@
                   <!-- ecm-explorer/action -->
                   <value>
                     <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-                      <field  name="name"><string>ecm-explorer/action/TrashFolderScript.groovy</string></field>
+                      <field  name="name"><string>ecm-explorer/action/TrashFolder.groovy</string></field>
                     </object>
                   </value>
                   <value>
                     <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-                      <field  name="name"><string>ecm-explorer/action/EnableVersioningScript.groovy</string></field>
+                      <field  name="name"><string>ecm-explorer/action/EnableVersioning.groovy</string></field>
                     </object>
                   </value>
                   <value>
                     <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-                      <field  name="name"><string>ecm-explorer/action/AutoVersioningScript.groovy</string></field>
+                      <field  name="name"><string>ecm-explorer/action/AutoVersioning.groovy</string></field>
                     </object>
                   </value>
                   <value>
                     <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-                      <field  name="name"><string>ecm-explorer/action/AddMetadataScript.groovy</string></field>
+                      <field  name="name"><string>ecm-explorer/action/AddMetadata.groovy</string></field>
+                    </object>
+                  </value>
+
+                  <value>
+                    <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+                      <field  name="name"><string>ecm-explorer/action/AddCategory.groovy</string></field>
                     </object>
                   </value>
                   <value>
                     <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-                      <field  name="name"><string>ecm-explorer/action/PublishingRequestScript.groovy</string></field>
-                    </object>
-                  </value>
-                  <value>
-                    <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-                      <field  name="name"><string>ecm-explorer/action/AddTaxonomyActionScript.groovy</string></field>
-                    </object>
-                  </value>
-                  <value>
-                    <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-                      <field  name="name"><string>ecm-explorer/action/AddToFavoriteScript.groovy</string></field>
+                      <field  name="name"><string>ecm-explorer/action/AddToFavorites.groovy</string></field>
                     </object>
                   </value>
                   <!-- ecm-explorer/widget -->
-                  <value>
-                    <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-                      <field  name="name"><string>ecm-explorer/widget/FillSelectBoxWithCalendarCategories.groovy</string></field>
-                    </object>
-                  </value>
+
                   <value>
                     <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
                       <field  name="name"><string>ecm-explorer/widget/FillSelectBoxWithMetadatas.groovy</string></field>
@@ -84,11 +76,7 @@
                       <field  name="name"><string>ecm-explorer/widget/FillSelectBoxWithWorkspaces.groovy</string></field>
                     </object>
                   </value>
-                  <value>
-                    <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-                      <field  name="name"><string>ecm-explorer/widget/FillSelectBoxWithNodeChildren.groovy</string></field>
-                    </object>
-                  </value>
+
                   <value>
                     <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
                       <field  name="name"><string>ecm-explorer/widget/FillSelectBoxWithLanguage.groovy</string></field>
