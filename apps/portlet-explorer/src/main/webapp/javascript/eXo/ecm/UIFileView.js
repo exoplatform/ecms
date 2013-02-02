@@ -152,7 +152,7 @@ Self.t1 = d.getTime();
 	var rightClick = (event.which && event.which > 1) || (event.button && event.button == 2);
 	if (!rightClick) {
 		//console.log('mouseDown: ' + Self.clickCheckBox);
-		if (!inArray(Self.itemsSelected, element) && !event.ctrlKey && !event.shiftKey && !Self.clickCheckBox && !Self.clickTotalCheckBox) {
+		if (!inArray(Self.itemsSelected, element) && !pressCtrl(event) && !event.shiftKey && !Self.clickCheckBox && !Self.clickTotalCheckBox) {
 			Self.clickItem(event, element);
 			Self.firstTimeClick = true;
 		} else if (Self.clickTotalCheckBox) {
@@ -215,7 +215,7 @@ UIFileView.prototype.dragItemsSelected = function(event) {
   if((Self.t2-Self.t1)<200) 
 			return;
 		var mobileElement = document.getElementById(Self.mobileId);
-		if (Self.enableDragDrop && mobileElement && (!event.ctrlKey || (event.shiftKey && event.ctrlKey))) {
+		if (Self.enableDragDrop && mobileElement && (!pressCtrl(event) || (event.shiftKey && pressCtrl(event)))) {
 			mobileElement.style.display = "block";
 			var X = event.pageX;
 			var Y = event.pageY;
@@ -290,14 +290,14 @@ UIFileView.prototype.mouseUpItem = function(evt) {
 			  return ;
 			}
 			if (eXo.ecm.UIFileView.enableDragAndDrop == "true") {
-				if(event.ctrlKey && event.shiftKey)
+				if(pressCtrl(event) && event.shiftKey)
 				  Self.postGroupAction(moveAction.getAttribute("symlink"), "&destInfo=" + wsTarget + ":" + idTarget);
 				else
 				  Self.postGroupAction(moveAction, "&destInfo=" + wsTarget + ":" + idTarget);
 				gj(mobileElement).hide();
 			}
 		} else {
-			if ((event.ctrlKey || Self.clickCheckBox || (Self.clickTotalCheckBox && Self.selectBoxType)) && !element.selected) {
+			if ((pressCtrl(event) || Self.clickCheckBox || (Self.clickTotalCheckBox && Self.selectBoxType)) && !element.selected) {
 				element.selected = true;
 				//for select use shilf key;
 				Self.temporaryItem = element;
@@ -305,7 +305,7 @@ UIFileView.prototype.mouseUpItem = function(evt) {
 				//Dunghm: Check Shift key
 				element.setAttribute("isLink",null);
 				if(event.shiftKey) element.setAttribute("isLink",true);
-			} else if((event.ctrlKey || Self.clickCheckBox || Self.clickTotalCheckBox) && element.selected) {
+			} else if((pressCtrl(event) || Self.clickCheckBox || Self.clickTotalCheckBox) && element.selected) {
 				element.selected = null;
 				element.setAttribute("isLink",null);
 				element.style.background = "none";
@@ -324,7 +324,7 @@ UIFileView.prototype.mouseUpItem = function(evt) {
 					Self.allItems[i].selected = true;
 					//Dunghm: Check Shift key
 					element.setAttribute("isLink",null);
-					if(event.ctrlKey) element.setAttribute("isLink",true);
+					if(pressCtrl(event)) element.setAttribute("isLink",true);
 					Self.itemsSelected.push(Self.allItems[i]);
 				}
 			} else if (Self.selectBoxType || !Self.clickTotalCheckBox) {
@@ -458,7 +458,7 @@ UIFileView.prototype.mutipleSelect = function(event) {
 						itemBox.selected = true;
 						//Dunghm: Check Shift key
 						itemBox.setAttribute("isLink",null);
-						if(event.ctrlKey && event.shiftKey) itemBox.setAttribute("isLink",true);
+						if(pressCtrl(event) && event.shiftKey) itemBox.setAttribute("isLink",true);
 						itemBox.style.background = Self.colorSelected;
 						//eXo.core.Browser.setOpacity(itemBox, 100);
 					} else {
@@ -490,7 +490,7 @@ UIFileView.prototype.mutipleSelect = function(event) {
 						itemBox.selected = true;
 						//Dunghm: Check Shift key
 						itemBox.setAttribute("isLink",null);
-						if(event.ctrlKey && event.shiftKey) itemBox.setAttribute("isLink",true);
+						if(pressCtrl(event) && event.shiftKey) itemBox.setAttribute("isLink",true);
 						itemBox.style.background = Self.colorSelected;
 						//eXo.core.Browser.setOpacity(itemBox, 100);
 					} else {
@@ -857,6 +857,10 @@ UIFileView.prototype.clickRightMouse = function(event, elemt, menuId, objId, whi
     	moreButton.hide();
     }
 };
+
+function pressCtrl(event) {
+	return event.ctrlKey || event.metaKey;
+}
 
 //private method
 function newElement(option) {

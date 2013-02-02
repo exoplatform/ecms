@@ -558,6 +558,10 @@
 	overflow: hidden;
 }
 
+.UIJCRExplorerPortlet .UIFileView .UIListGrid .RowView {
+	margin-top: 0px;
+}
+
 .UIJCRExplorerPortlet .UIListGrid .FileDrag {
 	background: grey;
 }
