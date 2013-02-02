@@ -10,6 +10,7 @@
 <%
   import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar ;
   import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace ;
+  import org.exoplatform.ecm.webui.component.explorer.UISelectDocumentTemplateTitle;
   import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
   import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea ;
   import org.exoplatform.webui.core.UIRightClickPopupMenu ;
@@ -90,6 +91,7 @@
   <div class="rightContainer">
 		<% 
 		  uicomponent.renderChild(UIActionBar.class) ;
+		  uicomponent.renderChild(UISelectDocumentTemplateTitle.class);
 		  uicomponent.renderChild(UIDocumentWorkspace.class) ;
 		  uicomponent.renderChild(UIDrivesArea.class);
 		%>

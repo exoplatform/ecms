@@ -1,0 +1,22 @@
+<%
+import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
+import org.exoplatform.portal.webui.workspace.UIWorkingWorkspace;
+import org.exoplatform.ecm.webui.component.explorer.popup.actions.UISelectDocumentForm;
+import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentFormController;
+import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
+
+  UIWorkingArea uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
+  UISelectDocumentForm uiSelectForm = uiWorkingArea.getChild(UIDocumentWorkspace.class).getChild(UIDocumentFormController.class).getChild(UISelectDocumentForm.class);
+  def thumbnailClass = "ChangeThumbnailViewIcon";
+  def listViewClass = "SelectedListViewIcon";
+  if (uiSelectForm.getTemplate().contains(uicomponent.THUMBNAIL_VIEW_TEMPLATE)) {
+    thumbnailClass = "SelectedThumbnailViewIcon";
+    listViewClass = "ChangeListViewIcon";
+  }
+%>
+<div class="SelectTemplateTitle" style="height:25px">
+  <div style="float:left"><%=_ctx.appRes("UISelectDocumentForm.label.selectTemplate")%></div>
+  <div rel="tooltip" data-placement="bottom" title='<%=_ctx.appRes("UISelectDocumentForm.label.Cancel")%>' class="CancelNewDoc" onclick="<%=uicomponent.event('Cancel');%>"></div>
+  <div rel="tooltip" data-placement="bottom" title='<%=_ctx.appRes("UISelectDocumentForm.label.ThumbnailView")%>' class="$thumbnailClass" onclick="<%=uicomponent.event('ChangeView', 'ThumbnailView');%>"></div>
+  <div rel="tooltip" data-placement="bottom" title='<%=_ctx.appRes("UISelectDocumentForm.label.ListView")%>' class="$listViewClass" onclick="<%=uicomponent.event('ChangeView', 'ListView');%>"></div>
+</div>

@@ -25,9 +25,7 @@ import java.util.Map;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
-import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIContainer;
@@ -44,20 +42,12 @@ import org.exoplatform.webui.event.EventListener;
 @ComponentConfig(
     template = "app:/groovy/webui/component/explorer/UISelectDocumentFormThumbnailView.gtmpl",
     events = {
-      @EventConfig(listeners = UISelectDocumentForm.ChangeViewActionListener.class),
-      @EventConfig(listeners = UISelectDocumentForm.SelectTemplateActionListener.class),
-      @EventConfig(listeners = UISelectDocumentForm.CancelActionListener.class)
+      @EventConfig(listeners = UISelectDocumentForm.SelectTemplateActionListener.class)
     }
 )
 public class UISelectDocumentForm extends UIContainer {
 
   private final static String DOCUMENT_TEMPLATE_ITERATOR_ID = "DocumentTemplateIterator";
-
-  private final static String THUMBNAIL_VIEW_TEMPLATE       =
-    "app:/groovy/webui/component/explorer/UISelectDocumentFormThumbnailView.gtmpl";
-
-  private final static String LIST_VIEW_TEMPLATE            =
-    "app:/groovy/webui/component/explorer/UISelectDocumentFormListView.gtmpl";
 
   private String uiComponentTemplate;
 
@@ -141,37 +131,6 @@ public class UISelectDocumentForm extends UIContainer {
       documentForm.setRendered(true);
 
       event.getRequestContext().addUIComponentToUpdateByAjax(uiDCFormController) ;
-    }
-  }
-
-  static public class ChangeViewActionListener extends EventListener<UISelectDocumentForm> {
-    private static final String THUMBNAIL_VIEW_TYPE = "ThumbnailView";
-
-  public void execute(Event<UISelectDocumentForm> event) throws Exception {
-      String viewType = event.getRequestContext().getRequestParameter(OBJECTID);
-      UISelectDocumentForm uiSelectForm = event.getSource() ;
-      UIJCRExplorer uiExplorer = uiSelectForm.getAncestorOfType(UIJCRExplorer.class);
-      if (viewType.equals(THUMBNAIL_VIEW_TYPE)) {
-      uiSelectForm.setTemplate(THUMBNAIL_VIEW_TEMPLATE);
-      } else {
-      uiSelectForm.setTemplate(LIST_VIEW_TEMPLATE);
-      }
-      uiExplorer.updateAjax(event);
-    }
-  }
-  
-  static public class CancelActionListener extends EventListener<UISelectDocumentForm> {
-  public void execute(Event<UISelectDocumentForm> event) throws Exception {
-    UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
-    if(uiExplorer != null) {
-      UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
-      UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
-      if (uiDocumentWorkspace.getChild(UIDocumentFormController.class) != null) {
-        uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
-      } else
-        uiExplorer.cancelAction();
-      uiExplorer.updateAjax(event);
-    }
     }
   }
 }

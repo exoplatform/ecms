@@ -1,12 +1,5 @@
 <div id="$uicomponent.id" class="$uicomponent.id">
 	<div class="SelectTemplateThumbnailView">
-		<div class="SelectTemplateTitle" style="height:25px">
-		  <div style="float:left"><%=_ctx.appRes("UISelectDocumentForm.label.selectTemplate")%></div>
-		  <div rel="tooltip" data-placement="bottom" title='<%=_ctx.appRes("UISelectDocumentForm.label.Cancel")%>' class="CancelNewDoc" onclick="<%=uicomponent.event('Cancel');%>"></div>
-		  <div rel="tooltip" data-placement="bottom" title='<%=_ctx.appRes("UISelectDocumentForm.label.ThumbnailView")%>' class="ChangeThumbnailViewIcon" onclick="<%=uicomponent.event('ChangeView', 'ThumbnailView');%>"></div>
-		  <div rel="tooltip" data-placement="bottom" title='<%=_ctx.appRes("UISelectDocumentForm.label.ListView")%>' class="SelectedListViewIcon" onclick="<%=uicomponent.event('ChangeView', 'ListView');%>"></div>
-		</div>
-		<hr>
 		<div class="SelectTemplateArea" style="padding-top:10px; padding-left:40px">	
 			<% 
 				def templates = uicomponent.getChildrenList();

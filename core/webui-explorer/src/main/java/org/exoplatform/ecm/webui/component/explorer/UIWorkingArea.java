@@ -32,8 +32,9 @@ import javax.jcr.Value;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.jcr.model.ClipboardCommand;
-import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
+import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentFormController;
+import org.exoplatform.ecm.webui.component.explorer.popup.actions.UISelectDocumentForm;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -48,7 +49,6 @@ import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
-import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -150,6 +150,7 @@ public class UIWorkingArea extends UIContainer {
     addChild(UIRightClickPopupMenu.class, "ECMContextMenu", null);
     addChild(UISideBar.class, null, null);
     addChild(UIActionBar.class, null, null) ;
+    addChild(UISelectDocumentTemplateTitle.class, null, null);
     addChild(UIDocumentWorkspace.class, null, null);
     addChild(UIDrivesArea.class, null, null).setRendered(false);
   }
@@ -425,6 +426,13 @@ public class UIWorkingArea extends UIContainer {
     UIJCRExplorerPortlet uiPortlet = getAncestorOfType(UIJCRExplorerPortlet.class);
     UIActionBar uiActionBar = findFirstComponentOfType(UIActionBar.class);
     uiActionBar.setRendered(uiPortlet.isShowActionBar());
+    UISelectDocumentTemplateTitle uiTemplateTitle = findFirstComponentOfType(UISelectDocumentTemplateTitle.class);
+    UIDocumentFormController uiDocumentController = findFirstComponentOfType(UIDocumentFormController.class);
+    boolean isUITemplateTitleRendered = 
+        (uiDocumentController != null
+        && uiDocumentController.isRendered()
+        && uiDocumentController.getChild(UISelectDocumentForm.class).isRendered());
+    uiTemplateTitle.setRendered(isUITemplateTitleRendered);
     
     super.processRender(context);
   }
