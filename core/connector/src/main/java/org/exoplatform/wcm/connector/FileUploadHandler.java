@@ -44,6 +44,7 @@ import org.exoplatform.ecm.connector.fckeditor.FCKMessage;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
+import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
@@ -358,23 +359,14 @@ public class FileUploadHandler {
     jcrContent.setProperty("jcr:data",new ByteArrayInputStream(uploadData));
     jcrContent.setProperty("jcr:lastModified",new GregorianCalendar());
     jcrContent.setProperty("jcr:mimeType",mimetype);
-    /*if(!jcrContent.hasProperty(NodetypeConstant.DC_TITLE)) {
-    	Value[] dcValues = new Value[1];
-    	dcValues[0] = jcrContent.getSession().getValueFactory().createValue(file.getName());
-    	jcrContent.setProperty(NodetypeConstant.DC_TITLE, dcValues);
-    }
     
-    if(!jcrContent.hasProperty(NodetypeConstant.DC_DESCRIPTION)) {
-    	Value[] dcValues = new Value[1];
-    	dcValues[0] = jcrContent.getSession().getValueFactory().createValue(Strings.EMPTY);
-    	jcrContent.setProperty(NodetypeConstant.DC_DESCRIPTION, dcValues);
-    }*/
     parent.getSession().refresh(true); // Make refreshing data
     uploadService.removeUploadResource(uploadId);
     uploadIdTimeMap.remove(uploadId);
     WCMPublicationService wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);    
     wcmPublicationService.updateLifecyleOnChangeContent(file, siteName, userId);
-    if (activityService.isAcceptedNode(file)) {
+   
+    if (!isDocumentNodeType(parent) && activityService.isAcceptedNode(file)) {
       listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, file);
     }
     file.getSession().save();
@@ -382,6 +374,11 @@ public class FileUploadHandler {
                    .cacheControl(cacheControl)
                    .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
                    .build();
+  }
+  
+  public boolean isDocumentNodeType(Node node) throws Exception {
+    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
+    return templateService.isManagedNodeType(node.getPrimaryNodeType().getName());
   }
   
   /**
