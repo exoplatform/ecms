@@ -38,6 +38,7 @@ public class ActivityCommonService {
   public static String NT_FILE                    = "nt:file";
   public static String EDIT_ACTIVITY              = "ActivityNotify.event.PropertyUpdated";
   public static String FILE_EDIT_ACTIVITY         = "FileActivityNotify.event.PropertyUpdated";
+  public static String FILE_REMOVE_ACTIVITY       = "FileActivityNotify.event.PropertyRemoved";
   public static String FILE_ADD_ACTIVITY          = "FileActivityNotify.event.PropertyAdded";
   
   public static String ATTACH_ADDED_ACTIVITY      = "ActivityNotify.event.AttachmentAdded";
@@ -100,9 +101,9 @@ public class ActivityCommonService {
     }
   }
   public boolean isAcceptedProperties(String propertyName) {
-    return acceptedProperties.indexOf("{" + propertyName + "}")>=0;
+    return (acceptedProperties.indexOf("{" + propertyName + "}")>=0 || propertyName.startsWith("dc:"));
   }
   public boolean isAcceptedFileProperties(String propertyName) {
-    return acceptedFileProperties.indexOf("{" + propertyName + "}")>=0;
+    return (acceptedFileProperties.indexOf("{" + propertyName + "}")>=0 || propertyName.startsWith("dc:"));  
   }
 }

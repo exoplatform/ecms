@@ -13,7 +13,7 @@
       </value-param>
       <value-param>
         <name>acceptedProperties</name>
-        <value>{dc:title}{dc:description}{dc:creator}{exo:summary}{exo:title}{exo:text}</value>
+        <value>{dc:title}{dc:description}{dc:creator}{dc:source}{exo:summary}{exo:title}{exo:text}</value>
       </value-param>
       <value-param>
         <name>acceptedFileProperties</name>

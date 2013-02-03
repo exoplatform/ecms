@@ -32,10 +32,10 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  *          vinh_nguyen@exoplatform.com
  * 11 Jan 2013  
  */
-public class AddFilePropertyActivityAction implements Action{
+public class RemoveFilePropertyActivityAction implements Action{
   private ListenerService listenerService=null;
   private ActivityCommonService activityService = null;
-  public AddFilePropertyActivityAction() {
+  public RemoveFilePropertyActivityAction() {
     listenerService =  WCMCoreUtils.getService(ListenerService.class);
     activityService = WCMCoreUtils.getService(ActivityCommonService.class);
   }
@@ -52,10 +52,10 @@ public class AddFilePropertyActivityAction implements Action{
     if(node.isNodeType("nt:resource")) node = node.getParent();
     //filter node type
     if (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
-      //Notify to update activity
-    	listenerService.broadcast(ActivityCommonService.FILE_ADD_ACTIVITY, nodeTemp, propertyName);    	
+    //Notify to update activity
+      listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, nodeTemp, propertyName);    	
     }
     return false;
-  }
+  } 
 
 }

@@ -17,45 +17,42 @@
 package org.exoplatform.services.cms.jcrext.activity;
 
 import javax.jcr.Node;
-import javax.jcr.Property;
 
 import org.apache.commons.chain.Context;
+import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.command.action.Action;
 import org.exoplatform.services.listener.ListenerService;
-import org.exoplatform.services.security.ConversationState;
-import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS
  * Author : Nguyen The Vinh From ECM Of eXoPlatform
  *          vinh_nguyen@exoplatform.com
- * 11 Jan 2013  
+ * 14 Jan 2013  
  */
-public class AddFilePropertyActivityAction implements Action{
+public class RemoveFileActivityAction implements Action{
   private ListenerService listenerService=null;
   private ActivityCommonService activityService = null;
-  public AddFilePropertyActivityAction() {
+  public RemoveFileActivityAction() {
     listenerService =  WCMCoreUtils.getService(ListenerService.class);
     activityService = WCMCoreUtils.getService(ActivityCommonService.class);
   }
-  @Override
   public boolean execute(Context context) throws Exception {
+    if (listenerService ==null) return false;
     Object item = context.get("currentItem");
-    Node node = (item instanceof Property) ?((Property)item).getParent():(Node)item;
-    Node nodeTemp = node;
-    String propertyName = (item instanceof Property) ?((Property)item).getName():((Node)item).getName();
-    // Do not create / update activity for bellow cases
-    if (!activityService.isAcceptedFileProperties(propertyName)) return false;
-    if (ConversationState.getCurrent() == null) return false;
-    
-    if(node.isNodeType("nt:resource")) node = node.getParent();
-    //filter node type
-    if (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
-      //Notify to update activity
-    	listenerService.broadcast(ActivityCommonService.FILE_ADD_ACTIVITY, nodeTemp, propertyName);    	
+    if (item instanceof Node) {
+      Node node = (Node)item;
+      Node parent = node.getParent();
+      if (node.getPrimaryNodeType().isNodeType(ActivityCommonService.NT_FILE)) {        
+        if (activityService.isAcceptedNode(node) && !isDocumentNodeType(parent)) {
+          listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, node, parent);
+        }
+      }
     }
     return false;
   }
-
+  public boolean isDocumentNodeType(Node node) throws Exception {
+    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
+    return templateService.isManagedNodeType(node.getPrimaryNodeType().getName());
+  }
 }
