@@ -280,6 +280,127 @@
 	}
 }
 
+/*############################## -- Begin UIThumbnailsView -- ##############################*/
+
+.uiThumbnailsView {
+	overflow-y: auto;
+	overflow-x: hidden;
+	
+	.actionIconsContainer {
+	
+		.actionIconBox {
+			.size(200px, 148px);
+			float: left;
+			margin: 10px;
+			padding: 0px !important;
+			overflow: hidden;
+			cursor: pointer;
+			
+			&:hover {
+				.nodeLabel {
+					background: #f0f0f0;
+				}
+			}
+		}
+		
+		.selectedBox {
+			.nodeLabel {
+				background: #cfcfcf;
+			}
+			
+			.actionIconLabel {
+				background: #2f5e92;
+				
+				> a {
+					color: @white;
+				}
+			}
+		}
+		
+		.bgThumbnailImage {
+			padding: 5px;
+			background: #fff;
+			box-shadow: 1px 1px 3px 1px rgba(25,44,48,0.2);
+			display: inline-block;
+		}
+		
+		.loadingProgressIcon {
+			.size(64px,64px);
+			background: url('/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/LoadingProgress.gif') no-repeat center center;
+			position: relative;
+			
+			img {
+				display: none;
+				max-width: 116px;
+				max-height: 116px;
+				margin: auto;
+				border: 1px solid #afafaf;
+			}
+		}
+		
+		.nodeLabel {
+			.size(148px,148px);
+			.border-radius(3px);
+			margin-bottom: 5px;
+		}
+
+		.actionIcon {
+			width: 50px;
+			height: 50px;
+			margin: 9px auto 0px auto;
+		}
+
+		.thumbnailImage {
+			width: 128px;
+			height: 128px;
+			border: none;
+			text-align: center;
+			display: table-cell;
+			vertical-align: middle;
+			padding: 10px;
+		}
+
+		.actionIconLabel {
+			line-height: 15px;
+			max-height: 32px;
+			overflow: hidden;
+			margin: auto;
+			text-align: center;
+			padding: 5px;
+			.border-radius(3px);
+			
+			> a {
+				color: #333333;
+			}
+		}
+	}
+	
+	[class^="uiIcon64x64FileDefault"] {
+		margin: auto;
+		position: relative;
+	}
+	
+	.Link {
+		background: url('/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/Link.gif') no-repeat right bottom;
+		position: absolute;
+		width: 16px;
+		height: 16px;
+		right: 0;
+		bottom: 0;
+	}
+	
+	.IconLocked {
+		background: url('/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/IconLockedBig.gif') no-repeat right top;
+		position: absolute;
+		width: 16px;
+		height: 48px;
+		right: 0;
+		bottom: 0;
+	}
+}
+
+/*############################## -- End UIThumbnailsView -- ##############################*/
+
 /*=============================== UIDrivesArea ===================================*/
 
 .uiDrivesArea {

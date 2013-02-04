@@ -14,6 +14,7 @@
 
     SimpleView.prototype.colorSelected = "#e7f3ff";
     SimpleView.prototype.colorHover = "#f2f8ff";
+    SimpleView.prototype.selectedItemClass = "selectedBox";
 
     SimpleView.prototype.t1 = 0;
     SimpleView.prototype.t2 = 0;
@@ -28,7 +29,7 @@
       if (!actionArea) return; 
       var mousedown = null;
       var keydown = null;
-      Self.allItems = gj(actionArea).find("div.ActionIconBox");
+      Self.allItems = gj(actionArea).find("div.actionIconBox");
       Self.allItems.each(function(i, elem){
         if (!Array.prototype[i]) {
         var item = Self.allItems[i];
@@ -250,7 +251,7 @@
       var event = event || window.event;
       var element = this;
       if (!element.selected) {
-        element.style.background = Self.colorHover;
+        //element.style.background = Self.colorHover;
         element.temporary = true;
         //eXo.core.Browser.setOpacity(element, 100);
       }
@@ -260,10 +261,10 @@
       var event = event || window.event;
       var element = this;
       element.temporary = false;
-      if (!element.selected) {
-        element.style.background = "none";
-        //eXo.core.Browser.setOpacity(element, 85);
-      }
+    //if (!element.selected) {
+      //element.style.background = "none";
+      //eXo.core.Browser.setOpacity(element, 85);
+    //}
     };
 
     SimpleView.prototype.mouseDownItem = function(evt) {
@@ -304,7 +305,7 @@
         mobileElement.style.opacity = 64/100;
         Self.mobileId = mobileElement.getAttribute('id');
         var coverElement = newElement({
-          className: "UIThumbnailsView",
+          className: "uiThumbnailsView",
           style: {clear: "left"}
         });
         for(var i in Self.itemsSelected) {
@@ -360,7 +361,8 @@
       //for select use shilf key;
       Self.temporaryItem = element;
       Self.itemsSelected = new Array(element);
-      element.style.background = Self.colorSelected;
+      gj(element).addClass(eXo.ecm.UISimpleView.selectedItemClass);
+      //element.style.background = Self.colorSelected;
       //eXo.core.Browser.setOpacity(element, 100);
     };
 
@@ -431,7 +433,7 @@
           for(var i in Self.itemsSelected) {
             if (Array.prototype[i]) continue;
             //eXo.core.Browser.setOpacity(Self.itemsSelected[i], 100);
-            Self.itemsSelected[i].style.background = Self.colorSelected;
+            //Self.itemsSelected[i].style.background = Self.colorSelected;
           }
         }
       }else {
@@ -505,7 +507,7 @@
         mask.style.opacity = 17/100;
 
         //store position for all item
-        var thumbnailView = gj(element).find("div.UIThumbnailsView:first")[0];
+        var thumbnailView = gj(element).find("div.uiThumbnailsView:first")[0];
         for( var i = 0 ; i < Self.allItems.length; ++i) {
           Self.allItems[i].posX = Math.abs(eXo.core.Browser.findPosXInContainer(Self.allItems[i], element)) - thumbnailView.scrollLeft;
           Self.allItems[i].posY = Math.abs(eXo.core.Browser.findPosYInContainer(Self.allItems[i], element)) - thumbnailView.scrollTop;
@@ -900,7 +902,8 @@
       for(var i in Self.itemsSelected) {
         if (Array.prototype[i]) continue;
         Self.itemsSelected[i].selected = null;
-        Self.itemsSelected[i].style.background = "none";
+        Self.itemsSelected[i].style.background = "";
+        gj(Self.itemsSelected[i]).removeClass(eXo.ecm.UISimpleView.selectedItemClass);
         //eXo.core.Browser.setOpacity(Self.itemsSelected[i], 85);
       }
       Self.itemsSelected = new Array();
@@ -928,7 +931,7 @@
 
     SimpleView.prototype.setHeight = function() {
       var root = document.getElementById("UIDocumentInfo");
-      var view = gj(root).find("div.UIThumbnailsView:first")[0];
+      var view = gj(root).find("div.uiThumbnailsView:first")[0];
       var workingArea = document.getElementById('UIWorkingArea');
       var documentWorkspace = gj(workingArea).find("div.UIDocumentWorkspace:first")[0];  
       var actionBar = document.getElementById('UIActionBar');  

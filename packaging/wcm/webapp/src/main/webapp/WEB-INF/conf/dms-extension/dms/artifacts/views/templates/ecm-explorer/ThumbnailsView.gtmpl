@@ -50,7 +50,7 @@
     if (tryCount>15) return;
     tryCount++;
     if (eXo.ecm.UISimpleView != null) {
-      eXo.ecm.UISimpleView.errorCallback(objImage);
+      eXo.ecm.UISimpleView.errorCallback(objImage.parentNode);
     }else {
       objImage.setAttribute("retryCount", tryCount);
       setTimeout(function(){loadImageOnError(objImage)},300);
@@ -98,8 +98,8 @@
 					 </div>
 			</div>
 		</div>
-		<div class="UIThumbnailsView" style="overflow-y: auto; overflow-x: hidden;">
-		  <div class="ActionIconsContainer">
+		<div class="uiThumbnailsView">
+		  <div class="actionIconsContainer clearfix">
 		    <%
 		      int i = 0;
 		      def permlink;
@@ -187,33 +187,34 @@
                if (uicomponent.isMediaType(data)) isMediaType = "true";
                if(!uicomponent.isSystemWorkspace()) rightClickMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(nodePath), uicomponent.getActionsList(data)) ;
 		        %>   
-		      <div class="ActionIconBox" <%= uicomponent.getDragAndDropEvents(data) %> 
+		      <div class="actionIconBox" <%= uicomponent.getDragAndDropEvents(data) %> 
 		                                 locked="<%=isLocked%>"
 		      													 trashHome="$isTrashHome" 
 																		 removeFavourite="$isFavourite"
 																		 inTrash="$isInTrash"
 																		 mediaType="$isMediaType"
-		      													 <%=rightClickMenu%> style="padding: 4px 0px 4px 0px; height: auto;"
+		      													 <%=rightClickMenu%>
 		       													 objectId="<%=org.exoplatform.services.cms.impl.Utils.getObjectId(data.getPath())%>"
 		       													 isFile="<%=data.isNodeType("nt:file")%>"
 		       													 workspaceName="$preferenceWS" 
 	       													   ondblclick="$actionLink">
 		        <div style="height: auto; width: auto; border: none; -moz-user-select: none;" unselectable="on">
-							<div class="NodeLabel">
-								<div class="ThumbnailImage">
+							<div class="nodeLabel">
+								<div class="thumbnailImage">
                   <%
                     def encodedPath = URLEncoder.encode(Utils.formatNodeName(data.getPath()), "utf-8");
                     encodedPath = encodedPath.replaceAll ("%2F", "/");    //we won't encode the slash characters in the path
                     
-									  String thumbnailImage = "/" + portalName + "/" + restContextName + "/thumbnailImage/medium/" + repository + "/" + preferenceWS + encodedPath;
+									  String thumbnailImage = "/" + portalName + "/" + restContextName + "/thumbnailImage/custom/116x116/" + repository + "/" + preferenceWS + encodedPath;
 									%>
-							    <div style="display: block;" class="LoadingProgressIcon">
-							        <%if(uicomponent.isSymLink(data)) {%>
-							          <div class="Link"></div>
-							        <%}%>
-							        <img src="$thumbnailImage" retryCount="0"  onerror='loadImageOnError(this);' onload="this.parentNode.style.backgroundImage = 'url(' + this.src + ')';this.style.display = 'none';" />
-							    </div>
-							    <div style="display: none;" class="Icon48x48 default48x48Icon <%=Utils.getNodeTypeIcon(data, "48x48Icon")%>">
+									<div class="loadingProgressIcon" style="display: block;">
+											<%if(uicomponent.isSymLink(data)) {%>
+												<div class="Link"></div>
+											<%}%>
+											<div class="bgThumbnailImage"><img src="$thumbnailImage" retryCount="0"  onerror='loadImageOnError(this);' onload="this.parentNode.parentNode.style.backgroundImage = 'none'; this.parentNode.parentNode.style.width = 'auto'; this.parentNode.parentNode.style.height = 'auto'; this.style.display = 'block';" /></div>
+									</div>
+							    
+							    <div style="display: none;" class="uiIcon64x64FileDefault <%=Utils.getNodeTypeIcon(data, "48x48Icon")%>">
                       <%if(isLocked) {%>
                         <div class="IconLocked"></div>
                       <%}%>
@@ -222,9 +223,9 @@
 							        <%}%>
 							    </div>
 								</div>
-							</div>			        
-			        <div class="ActionIconLabel" style="width: auto; overflow: hidden;">
-			          <a class="ActionLabel" style="$hiddenStyle" rel="tooltip" data-placement="bottom" title="<%=title%> $lockedLabel"><%=title%></a>
+							</div>
+			        <div class="actionIconLabel" style="width: auto; overflow: hidden;">
+			          <a class="actionLabel" style="$hiddenStyle" rel="tooltip" data-placement="bottom" title="<%=title%> $lockedLabel"><%=title%></a>
 			        </div>
 			      </div>
 			      $strActs

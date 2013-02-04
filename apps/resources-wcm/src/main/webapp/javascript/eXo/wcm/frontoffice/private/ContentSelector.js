@@ -545,7 +545,7 @@
 	        var container = gj(rightWS).find('div.ActionIconsContainer:first')[0];			
 					var strViewContent = "";
 					var command = ECS.connector + "/thumbnailImage/medium/" + ECS.repositoryName + "/" + ECS.workspaceName + path + "/?reloadnum=" + Math.random();        
-					strViewContent += '<div class="ActionIconBox" onclick="eXo.ecm.ECS.insertContent(this);" url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" title="'+decodeURIComponent(node)+'"><div class="NodeLabel"><div class="ThumbnailImage"><div style="display: block;" class="LoadingProgressIcon"><img alt="Loading Process" src="'+command+'" onerror="var img = gj(this.parentNode).nextAll(\'div:first\')[0]; img.style.display = \'block\'; this.parentNode.style.display = \'none\';" onload="this.parentNode.style.backgroundImage=\'none\'" /></div><div style="display: none;" class="Icon48x48 default48x48Icon '+nodeTypeIcon+'"></div></div><div class="ActionIconLabel" style="width: auto;"><a class="ActionLabel" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" title="'+decodeURIComponent(node)+'">'+decodeURIComponent(node)+'</a></div></div>';	        
+					strViewContent += '<div class="actionIconBox" onclick="eXo.ecm.ECS.insertContent(this);" url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" title="'+decodeURIComponent(node)+'"><div class="nodeLabel"><div class="thumbnailImage"><div style="display: block;" class="loadingProgressIcon"><img alt="Loading Process" src="'+command+'" onerror="var img = gj(this.parentNode).nextAll(\'div:first\')[0]; img.style.display = \'block\'; this.parentNode.style.display = \'none\';" onload="this.parentNode.style.backgroundImage=\'none\'" /></div><div style="display: none;" class="Icon48x48 default48x48Icon '+nodeTypeIcon+'"></div></div><div class="ActionIconLabel" style="width: auto;"><a class="ActionLabel" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" title="'+decodeURIComponent(node)+'">'+decodeURIComponent(node)+'</a></div></div>';	        
 					container.innerHTML += strViewContent;
 				}
 			}			
@@ -572,7 +572,7 @@
 			strViewPresent += "<th class=\"THBar\" style=\"width: 80px;\" userLanguage=\"UserLanguage.FileSize\"> Size </th></tr></thead>";
 			strViewPresent += "</table></div>";
 		} else {
-			strViewPresent = "<div class=\"UIThumbnailsView\" style=\"overflow-y: auto; overflow-x: hidden;\"><div class=\"ActionIconsContainer\" id=\"ActionIconsContainer\"></div></div>";
+			strViewPresent = "<div class=\"uiThumbnailsView\" style=\"overflow-y: auto; overflow-x: hidden;\"><div class=\"ActionIconsContainer\" id=\"ActionIconsContainer\"></div></div>";
 		}
 		var rightWS = document.getElementById('RightWorkspace');  
 	  if(rightWS) {
@@ -720,7 +720,7 @@
 			}
 		} else {
 			var icon_container = document.getElementById(eXo.ecm.Pager.tableName);    
-	    icons =  gj(icon_container).children("div.ActionIconBox");    
+	    icons =  gj(icon_container).children("div.actionIconBox");    
 	    len = icons.length;		
 		}
 	  var records = len; 
@@ -762,7 +762,7 @@
 		} else {
 			var icons = null;   
 	    var icon_container = document.getElementById(eXo.ecm.Pager.tableName);    
-	    icons =  gj(icon_container).children("div.ActionIconBox");    
+	    icons =  gj(icon_container).children("div.actionIconBox");    
 	    len = icons.length;		
 			for (var i = 0; i < len; i++) {
 				if (i < from || i > to)  {
@@ -1026,7 +1026,7 @@
 	      strViewPresent += "<tr><td class=\"Item TRNoContent\" colspan=\"3\" userLanguage=\"UserLanguage.NoContent\">There is no content</td></tr>";
 				strViewPresent += "</table></div>";
 			} else {
-				strViewPresent = "<div class=\"UIThumbnailsView\" style=\"overflow-y: auto; overflow-x: hidden;\"><div class=\"ActionIconsContainer\" id=\"ActionIconsContainer\"><div class=\"NoContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div></div></div>";
+				strViewPresent = "<div class=\"uiThumbnailsView\" style=\"overflow-y: auto; overflow-x: hidden;\"><div class=\"ActionIconsContainer\" id=\"ActionIconsContainer\"><div class=\"NoContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div></div></div>";
 			}
 			var rightWS = document.getElementById('RightWorkspace');  
 			if(rightWS) {
