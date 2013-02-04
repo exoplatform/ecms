@@ -36,6 +36,8 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.jcr.impl.storage.JCRItemExistsException;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.upload.UploadService;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
@@ -61,6 +63,7 @@ import org.exoplatform.webui.form.UIFormUploadInput;
     @EventConfig(listeners = UIImportNode.ImportActionListener.class),
     @EventConfig(listeners = UIImportNode.CancelActionListener.class, phase = Phase.DECODE) })
 public class UIImportNode extends UIForm implements UIPopupComponent {
+  private static final Log LOG  = ExoLogger.getLogger(UIImportNode.class.getName());
 
   public static final String FORMAT                      = "format";
 
@@ -234,6 +237,9 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
 
         return;
       } catch (Exception ise) {
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Unexpected error", ise);
+        }
         session.refresh(false);
         uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.filetype-error", null,
             ApplicationMessage.WARNING));
