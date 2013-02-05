@@ -633,7 +633,9 @@ public class CmsServiceImpl implements CmsService {
             node.setProperty(propertyName, (String[]) value);
           }
         } else {
-          node.setProperty(propertyName, (String) value);
+        	if(!node.hasProperty(propertyName) || (node.hasProperty(propertyName) && 
+        			!node.getProperty(propertyName).getString().equals((String)value)))
+            node.setProperty(propertyName, (String) value);
         }
       }
       break;
