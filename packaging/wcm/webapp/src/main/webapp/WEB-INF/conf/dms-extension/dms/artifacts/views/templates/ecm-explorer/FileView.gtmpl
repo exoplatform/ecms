@@ -99,29 +99,6 @@
           </div>
     <!--============SecondRow=================================================================-->
 					<div class="ClearFix TitleTableRow">
-					  <div class="Breadcrumb FL"><span></span></div>
-					  <!--Breadcrumb links-->
-		        <a class="NodeButton"
-	             onclick="<%=uicomponent.event("ChangeNode", drivePath.toString(), new Parameter("workspaceName", uiExplorer.getDriveData().getWorkspace()))%>" class="NodeLabel">
-	            <strong><%=uiExplorer.findFirstComponentOfType(UITreeExplorer.class).getLabel()%></strong>
-            </a>
-            <%
-            for (String nodeName : relNodePath.split("/")) {
-              if (!StringUtils.isEmpty(nodeName)) {
-                drivePath.append("/").append(nodeName);
-                def nodeWs = uiExplorer.getDriveData().getWorkspace();
-                %>
-                  <span class="FL">&nbsp;>&nbsp;</span>
-                  <a class="NodeButton"
-                    onclick="<%=uicomponent.event("ChangeNode", drivePath.toString(), new Parameter("workspaceName", nodeWs))%>" class="NodeLabel">
-                   <strong><%=nodeName%></strong>
-                  </a>
-                <%
-              }
-            }
-            %>
-            <!--End of Breadcrumb links-->
-          <!--=======================================================-->
             <!--Total Check box-->
             <input id="UIFileViewCheckBox" type="checkbox" class="FR" onclick="eXo.ecm.UIFileView.toggleCheckboxes(this, event);"/>
             <!--End of Total Check Box-->
@@ -181,6 +158,35 @@
                 <%=_ctx.appRes("FileView.label.sortBy")%>
               </div>
             <!--End of Breadcrumb sort-->
+            
+            <div class="Breadcrumb FL"><span></span></div>
+            <!--Breadcrumb links-->
+            <div class="BreadcrumbLink ClearFix">
+              <a class="NodeButton"
+                 onclick="<%=uicomponent.event("ChangeNode", drivePath.toString(), new Parameter("workspaceName", uiExplorer.getDriveData().getWorkspace()))%>" class="NodeLabel"
+                 title="<%=uiExplorer.findFirstComponentOfType(UITreeExplorer.class).getLabel()%>">
+                <strong><%=uiExplorer.findFirstComponentOfType(UITreeExplorer.class).getLabel()%></strong>
+              </a>
+              <%
+              for (String nodeName : relNodePath.split("/")) {
+                if (!StringUtils.isEmpty(nodeName)) {
+                  drivePath.append("/").append(nodeName);
+                  def nodeWs = uiExplorer.getDriveData().getWorkspace();
+                  %>
+                    <span class="FL">&nbsp;>&nbsp;</span>
+                    <a class="NodeButton"
+                      onclick="<%=uicomponent.event("ChangeNode", drivePath.toString(), new Parameter("workspaceName", nodeWs))%>" class="NodeLabel"
+                      title="<%=nodeName%>">
+                     <strong><%=nodeName%></strong>
+                    </a>
+                  <%
+                }
+              }
+              %>
+            </div>
+            <!--End of Breadcrumb links-->
+          <!--=======================================================-->
+            
 			    </div><!--End of ClearFix-->			    
 		    <!--=======================================================-->
 			    <div style="position: relative; top: 0px; left: 0px; width: 0px; height: 0px">

@@ -444,6 +444,10 @@
 
 .UIJCRExplorerPortlet .UIFileView .TitleTable .NodeButton {
 	font-weight: bold;
+	display:block;
+	max-width:100px;
+	overflow:hidden;
+	text-overflow:ellipsis
 }
 
 .UIJCRExplorerPortlet .UIFileView .MoreButton {
@@ -452,6 +456,12 @@
 	margin-right:20px;
 	text-decoration:underline;
 	cursor:pointer;
+}
+
+.UIJCRExplorerPortlet .UIFileView .BreadcrumbLink {
+ margin-right:170px;
+ overflow:hidden;
+ white-space:nowrap;	
 }
 
 .UIJCRExplorerPortlet .UIListGrid  .ColumnIcon .BlueDownArrow16x16Icon{
