@@ -369,7 +369,20 @@ public class Utils {
     StringBuilder str = new StringBuilder();
     if (node == null)
       return "";
+    
     String nodeType = node.getPrimaryNodeType().getName();
+    
+    // Default css class
+    String defaultCssClass;
+    if (nodeType.equals(NT_UNSTRUCTURED) || nodeType.equals(NT_FOLDER)) {
+      defaultCssClass = "Folder";
+    } else if (node.isNodeType(NT_FILE)) {
+      defaultCssClass = "File";
+    } else {
+      defaultCssClass = nodeType;
+    }
+    defaultCssClass += "Default";
+    
     if (node.isNodeType(EXO_SYMLINK)) {
       LinkManager linkManager = Util.getUIPortal().getApplicationComponent(
           LinkManager.class);
@@ -395,12 +408,15 @@ public class Utils {
         }
       }
     }
-    nodeType = appended + nodeType.replace(':', '_');
-    str.append(nodeType);
+    nodeType = nodeType.replace(':', '_');
+    
+    str.append(appended);
+    str.append(defaultCssClass);
     str.append(" ");
-    str.append("uiIconNode");
+    str.append(appended);
+    str.append(nodeType);
     if (mode != null && mode.equalsIgnoreCase("Collapse"))
-      str.append(' ').append(mode).append(nodeType);
+      str.append(' ').append(mode).append(appended).append(nodeType);
     if (node.isNodeType(NT_FILE)) {
       if (node.hasNode(JCR_CONTENT)) {
         Node jcrContentNode = node.getNode(JCR_CONTENT);
