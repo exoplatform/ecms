@@ -253,49 +253,6 @@
                   </object>
                 </value>
 
-                <!-- Only webdesigner profile can edit this content -->
-                <value>
-                  <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
-                    <field name="nodetypeName">
-                      <string>wai:siteSearchBox</string>
-                    </field>
-                    <field name="documentTemplate">
-                      <boolean>true</boolean>
-                    </field>
-                    <field name="label">
-                      <string>Accessible Site Search Box</string>
-                    </field>
-                    <field name="referencedView">
-                      <collection type="java.util.ArrayList">
-                        <value>
-                          <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
-                            <field name="templateFile">
-                              <string>/siteSearchBoxWebContent/views/view1.gtmpl</string>
-                            </field>
-                            <field name="roles">
-                              <string>*</string>
-                            </field>
-                          </object>
-                        </value>
-                      </collection>
-                    </field>
-                    <field name="referencedDialog">
-                      <collection type="java.util.ArrayList">
-                        <value>
-                          <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
-                            <field name="templateFile">
-                              <string>/siteSearchBoxWebContent/dialogs/dialog1.gtmpl</string>
-                            </field>
-                            <field name="roles">
-                              <string>webdesigner:/platform/web-contributors</string>
-                            </field>
-                          </object>
-                        </value>
-                      </collection>
-                    </field>
-                  </object>
-                </value>
-
                 <value>
                   <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
                     <field name="nodetypeName">
@@ -377,93 +334,6 @@
                             </field>
                             <field name="roles">
                               <string>*:/platform/web-contributors</string>
-                            </field>
-                          </object>
-                        </value>
-                      </collection>
-                    </field>
-                  </object>
-                </value>
-
-
-                <!-- Only webdesigner profile can edit this content -->
-                <value>
-                  <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
-                    <field name="nodetypeName">
-                      <string>wai:siteNavigationWebContent</string>
-                    </field>
-                    <field name="documentTemplate">
-                      <boolean>true</boolean>
-                    </field>
-                    <field name="label">
-                      <string>Accessible Navigation</string>
-                    </field>
-                    <field name="referencedView">
-                      <collection type="java.util.ArrayList">
-                        <value>
-                          <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
-                            <field name="templateFile">
-                              <string>/siteNavigationWebContent/views/view1.gtmpl</string>
-                            </field>
-                            <field name="roles">
-                              <string>*</string>
-                            </field>
-                          </object>
-                        </value>
-                      </collection>
-                    </field>
-                    <field name="referencedDialog">
-                      <collection type="java.util.ArrayList">
-                        <value>
-                          <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
-                            <field name="templateFile">
-                              <string>/siteNavigationWebContent/dialogs/dialog1.gtmpl</string>
-                            </field>
-                            <field name="roles">
-                              <string>webdesigner:/platform/web-contributors</string>
-                            </field>
-                          </object>
-                        </value>
-                      </collection>
-                    </field>
-                  </object>
-                </value>
-
-                <!-- Only webdesigner profile can edit this content -->
-                <value>
-                  <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
-                    <field name="nodetypeName">
-                      <string>wai:siteBreadcrumb</string>
-                    </field>
-                    <field name="documentTemplate">
-                      <boolean>true</boolean>
-                    </field>
-                    <field name="label">
-                      <string>Accessible Breadcrumb</string>
-                    </field>
-                    <field name="referencedView">
-                      <collection type="java.util.ArrayList">
-                        <value>
-                          <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
-                            <field name="templateFile">
-                              <string>/siteBreadcrumbWebContent/views/view1.gtmpl</string>
-                            </field>
-                            <field name="roles">
-                              <string>*</string>
-                            </field>
-                          </object>
-                        </value>
-                      </collection>
-                    </field>
-                    <field name="referencedDialog">
-                      <collection type="java.util.ArrayList">
-                        <value>
-                          <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
-                            <field name="templateFile">
-                              <string>/siteBreadcrumbWebContent/dialogs/dialog1.gtmpl</string>
-                            </field>
-                            <field name="roles">
-                              <string>webdesigner:/platform/web-contributors</string>
                             </field>
                           </object>
                         </value>
@@ -556,48 +426,6 @@
                     </field>
                   </object>
                 </value-->
-
-                <value>
-                  <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
-                    <field name="nodetypeName">
-                      <string>acme:contact_us</string>
-                    </field>
-                    <field name="documentTemplate">
-                      <boolean>true</boolean>
-                    </field>
-                    <field name="label">
-                      <string>Contact Us</string>
-                    </field>
-                    <field name="referencedView">
-                      <collection type="java.util.ArrayList">
-                        <value>
-                          <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
-                            <field name="templateFile">
-                              <string>/contactUs/views/view1.gtmpl</string>
-                            </field>
-                            <field name="roles">
-                              <string>*</string>
-                            </field>
-                          </object>
-                        </value>
-                      </collection>
-                    </field>
-                    <field name="referencedDialog">
-                      <collection type="java.util.ArrayList">
-                        <value>
-                          <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Template">
-                            <field name="templateFile">
-                              <string>/contactUs/dialogs/dialog1.gtmpl</string>
-                            </field>
-                            <field name="roles">
-                              <string>*</string>
-                            </field>
-                          </object>
-                        </value>
-                      </collection>
-                    </field>
-                  </object>
-                </value>
 
               </collection>
             </field>

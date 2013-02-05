@@ -35,32 +35,38 @@
                   <!-- ecm-explorer/action -->
                   <value>
                     <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+                      <field  name="description"><string>Trash Document</string></field>
                       <field  name="name"><string>ecm-explorer/action/TrashFolder.groovy</string></field>
                     </object>
                   </value>
                   <value>
                     <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+                      <field  name="description"><string>Enable Versioning</string></field>
                       <field  name="name"><string>ecm-explorer/action/EnableVersioning.groovy</string></field>
                     </object>
                   </value>
                   <value>
                     <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+                      <field  name="description"><string>Auto Versioning</string></field>
                       <field  name="name"><string>ecm-explorer/action/AutoVersioning.groovy</string></field>
                     </object>
                   </value>
                   <value>
                     <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+                      <field  name="description"><string>Add Metadata</string></field>
                       <field  name="name"><string>ecm-explorer/action/AddMetadata.groovy</string></field>
                     </object>
                   </value>
 
                   <value>
                     <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-                      <field  name="name"><string>ecm-explorer/action/AddCategory.groovy</string></field>
+                      <field  name="description"><string>Add to Category</string></field>
+                      <field  name="name"><string>ecm-explorer/action/AddToCategory.groovy</string></field>
                     </object>
                   </value>
                   <value>
                     <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+                      <field  name="description"><string>Add to Favorites</string></field>
                       <field  name="name"><string>ecm-explorer/action/AddToFavorites.groovy</string></field>
                     </object>
                   </value>
@@ -68,28 +74,33 @@
 
                   <value>
                     <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+                      <field  name="description"><string>Fill SelectBox With Metadatas</string></field>
                       <field  name="name"><string>ecm-explorer/widget/FillSelectBoxWithMetadatas.groovy</string></field>
                     </object>
                   </value>
                   <value>
                     <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+                      <field  name="description"><string>Fill SelectBox With Workspaces</string></field>
                       <field  name="name"><string>ecm-explorer/widget/FillSelectBoxWithWorkspaces.groovy</string></field>
                     </object>
                   </value>
 
                   <value>
                     <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+                      <field  name="description"><string>Fill SelectBox With Workspaces</string></field>
                       <field  name="name"><string>ecm-explorer/widget/FillSelectBoxWithLanguage.groovy</string></field>
                     </object>
                   </value>
                   <!-- ecm-explorer/interceptor -->
                   <value>
                     <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+                      <field  name="description"><string>PreNodeSaveInterceptor</string></field>
                       <field  name="name"><string>ecm-explorer/interceptor/PreNodeSaveInterceptor.groovy</string></field>
                     </object>
                   </value>
                   <value>
                     <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
+                      <field  name="description"><string>PostNodeSaveInterceptor</string></field>
                       <field  name="name"><string>ecm-explorer/interceptor/PostNodeSaveInterceptor.groovy</string></field>
                     </object>
                   </value>

@@ -37,7 +37,7 @@
     <init-params>
       <value-param>
         <name>useCache</name>
-        <value>${wcm.composer.useCache:true}</value>
+        <value>${wcm.composer.useCache:false}</value>
       </value-param>
       <value-param>
         <name>useDefaultLanguage</name>

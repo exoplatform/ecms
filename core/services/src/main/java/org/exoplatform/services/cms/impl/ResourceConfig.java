@@ -23,9 +23,9 @@ public class ResourceConfig {
 
   private List<Resource> resources = new ArrayList<Resource>(5);
 
-  public List getRessources() { return resources ; }
-  @SuppressWarnings("unchecked")
-  public void setRessources(List resources) { this.resources = resources ; }
+  public List<Resource> getRessources() { return resources ; }
+
+  public void setRessources(List<Resource> resources) { this.resources = resources ; }
 
   static public class Resource {
     private String name ;

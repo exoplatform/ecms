@@ -19,7 +19,6 @@ package org.exoplatform.services.cms.actions.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -254,7 +253,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
    * @throws Exception
    */
   @SuppressWarnings("unchecked")
-  public void createActionType(String actionTypeName, String parentActionTypeName, String executable,
+  public void createActionType(String actionTypeName, String parentActionTypeName, String executable, String actionLabel,
       List<String> variableNames, boolean isMoveType, String repository) throws Exception {
     NodeTypeValue nodeTypeValue = new NodeTypeValue();
     nodeTypeValue.setName(actionTypeName);
@@ -267,15 +266,20 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
 
     List propDefs = new ArrayList();
     PropertyDefinitionValue propDef = null;
-    for (Iterator iter = variableNames.iterator(); iter.hasNext();) {
-      String variableName = (String) iter.next();
+    for (String variableName : variableNames) {
       propDef = createPropertyDef(variableName);
       propDefs.add(propDef);
     }
     propDef = createPropertyDef(getActionPluginForActionType(parentActionTypeName).getExecutableDefinitionName());
-    List defaultValues = new ArrayList();
-    defaultValues.add(executable);
-    propDef.setDefaultValueStrings(defaultValues);
+    List scriptDefaultValues = new ArrayList();
+    scriptDefaultValues.add(executable);
+    propDef.setDefaultValueStrings(scriptDefaultValues);
+    propDef.setMandatory(false);
+    propDefs.add(propDef);
+    propDef = createPropertyDef(getActionPluginForActionType(parentActionTypeName).getActionExecutableLabel());
+    List labelDefaultValues = new ArrayList();
+    labelDefaultValues.add(actionLabel);
+    propDef.setDefaultValueStrings(labelDefaultValues);
     propDef.setMandatory(false);
     propDefs.add(propDef);
 

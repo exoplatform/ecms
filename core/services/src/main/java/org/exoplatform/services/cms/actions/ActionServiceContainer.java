@@ -55,6 +55,7 @@ public interface ActionServiceContainer {
    * @param actionTypeName        name of action type
    * @param parentActionTypeName  name of parent action
    * @param executable            String value of execuable
+   * @param actionLabel           Label of action type
    * @param variableNames         List name of variable
    * @param isMoveType            is moved or not
    * @param repository            repository name
@@ -63,6 +64,7 @@ public interface ActionServiceContainer {
   public void createActionType(String actionTypeName,
                                String parentActionTypeName,
                                String executable,
+                               String actionLabel,
                                List<String> variableNames,
                                boolean isMoveType,
                                String repository) throws Exception;

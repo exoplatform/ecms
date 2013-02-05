@@ -13,6 +13,13 @@
           <defaultValue>ecm-explorer/action/AddMetadata.groovy</defaultValue>
         </defaultValues>
       </propertyDefinition>
+      <propertyDefinition name="exo:scriptLabel" requiredType="String" autoCreated="true" mandatory="true"
+        onParentVersion="COPY" protected="true" multiple="false">
+        <valueConstraints/>
+        <defaultValues>
+          <defaultValue>Add Metadata</defaultValue>
+        </defaultValues>
+      </propertyDefinition>						
       <propertyDefinition name="exo:mixinMetadata" requiredType="String" autoCreated="false" mandatory="true" onParentVersion="COPY"
         protected="false" multiple="false"/>
     </propertyDefinitions>
@@ -30,6 +37,13 @@
           <defaultValue>ecm-explorer/action/TrashFolder.groovy</defaultValue>
         </defaultValues>
       </propertyDefinition>
+      <propertyDefinition name="exo:scriptLabel" requiredType="String" autoCreated="true" mandatory="true"
+        onParentVersion="COPY" protected="true" multiple="false">
+        <valueConstraints/>
+        <defaultValues>
+          <defaultValue>Trash Document</defaultValue>
+        </defaultValues>
+      </propertyDefinition>						
     </propertyDefinitions>
   </nodeType>
 
@@ -45,6 +59,13 @@
           <defaultValue>ecm-explorer/action/AddToFavorites.groovy</defaultValue>
         </defaultValues>
       </propertyDefinition>
+	     <propertyDefinition name="exo:scriptLabel" requiredType="String" autoCreated="true" mandatory="true"
+        onParentVersion="COPY" protected="true" multiple="false">
+        <valueConstraints/>
+        <defaultValues>
+          <defaultValue>Add To Favorites</defaultValue>
+        </defaultValues>
+      </propertyDefinition>					
     </propertyDefinitions>
   </nodeType>
 
@@ -538,9 +559,16 @@
         onParentVersion="COPY" protected="true" multiple="false">
         <valueConstraints/>
         <defaultValues>
-          <defaultValue>ecm-explorer/action/AddCategory.groovy</defaultValue>
+          <defaultValue>ecm-explorer/action/AddToCategory.groovy</defaultValue>
         </defaultValues>
       </propertyDefinition>
+	     <propertyDefinition name="exo:scriptLabel" requiredType="String" autoCreated="true" mandatory="true"
+        onParentVersion="COPY" protected="true" multiple="false">
+        <valueConstraints/>
+        <defaultValues>
+          <defaultValue>Add To Category</defaultValue>
+        </defaultValues>
+      </propertyDefinition>						
       <propertyDefinition name="exo:storeHomePath" requiredType="String" autoCreated="false" mandatory="true" onParentVersion="COPY"
         protected="false" multiple="false"/>
       <propertyDefinition name="exo:targetWorkspace" requiredType="String" autoCreated="false" mandatory="true" onParentVersion="COPY"

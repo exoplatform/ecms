@@ -17,19 +17,28 @@
 package org.exoplatform.ecm.webui.component.admin.action;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 import javax.jcr.nodetype.NodeType;
+import javax.jcr.nodetype.NodeTypeManager;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.core.UIPagingGrid;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
+import org.exoplatform.services.cms.scripts.impl.ScriptServiceImpl;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
@@ -43,38 +52,42 @@ import org.exoplatform.webui.event.EventListener;
 @ComponentConfig(
     template = "system:/groovy/ecm/webui/UIGridWithButton.gtmpl",
     events = {
-        @EventConfig(listeners = UIActionTypeList.AddActionActionListener.class)
+        @EventConfig(listeners = UIActionTypeList.AddActionActionListener.class),
+        @EventConfig(listeners = UIActionTypeList.EditActionListener.class),
+        @EventConfig(listeners = UIActionTypeList.DeleteActionListener.class, 
+          confirm = "UIActionTypeList.msg.confirm-delete")
     }
 )
 
 public class UIActionTypeList extends UIPagingGrid {
 
-  private static String[] ACTIONTYPE_BEAN_FIELD = {"name", "extendType"} ;
+  private static String[] ACTIONTYPE_BEAN_FIELD = {"label", "name"} ;
+  private static String[] ACTIONTYPE_ACTION = {"Edit", "Delete"} ;
 
   public UIActionTypeList() throws Exception {
     getUIPageIterator().setId("ActionTypeListIterator");
-    configure("name", ACTIONTYPE_BEAN_FIELD, null) ;
+    configure("type", ACTIONTYPE_BEAN_FIELD, ACTIONTYPE_ACTION) ;
   }
 
   public String[] getActions() { return new String[] {"AddAction"} ;}
 
-  @SuppressWarnings("unchecked")
+  @Override
   public void refresh(int currentPage) throws Exception {
     ActionServiceContainer actionsServiceContainer =
       getApplicationComponent(ActionServiceContainer.class) ;
     String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
-    List actionList = (List)actionsServiceContainer.getCreatedActionTypes(repository) ;
+    ScriptServiceImpl scriptService = WCMCoreUtils.getService(ScriptServiceImpl.class);
+    Collection<NodeType> actionList = actionsServiceContainer.getCreatedActionTypes(repository) ;
     List<ActionData> actions = new ArrayList<ActionData>(actionList.size()) ;
-    for(int i = 0; i < actionList.size(); i ++) {
-      ActionData bean = new ActionData() ;
-      NodeType action = (NodeType)actionList.get(i) ;
-      bean.setName(action.getName()) ;
-      NodeType[] superTypes = action.getSupertypes() ;
-      StringBuilder types = new StringBuilder() ;
-      for(int j = 0; j < superTypes.length; j ++) {
-        types.append("[").append(superTypes[j].getName()).append("] ") ;
-      }
-      bean.setExtendType(types.toString()) ;
+    UIActionManager uiManager = getParent();
+    for(NodeType action : actionList) {
+      ActionData bean = new ActionData();
+      String resourceName = scriptService.getResourceNameByNodeType(action);
+      if(StringUtils.isEmpty(resourceName)) continue;
+      bean.setLabel(uiManager.getScriptLabel(action));
+      if(resourceName.length() == 0) resourceName = action.getName();
+      bean.setType(action.getName());
+      bean.setName(StringUtils.substringAfterLast(resourceName, "/")) ;
       actions.add(bean) ;
     }
     Collections.sort(actions, new ActionComparator()) ;
@@ -88,15 +101,49 @@ public class UIActionTypeList extends UIPagingGrid {
     else
       getUIPageIterator().setCurrentPage(currentPage);    
   }
-
+  
   static public class ActionComparator implements Comparator<ActionData> {
     public int compare(ActionData a1, ActionData a2) throws ClassCastException {
-      String name1 = a1.getName();
-      String name2 = a2.getName();
-      return name1.compareToIgnoreCase(name2);
+      String label1 = a1.getLabel();
+      String label2 = a2.getLabel();
+      return label1.compareToIgnoreCase(label2);
     }
   }
 
+  static public class EditActionListener extends EventListener<UIActionTypeList> {
+    public void execute(Event<UIActionTypeList> event) throws Exception {
+      UIActionTypeList uiList = event.getSource();
+      UIActionManager uiActionMan = uiList.getParent() ;
+      UIActionTypeForm uiForm = uiActionMan.findFirstComponentOfType(UIActionTypeForm.class) ;
+      if (uiForm == null) uiForm = uiActionMan.createUIComponent(UIActionTypeForm.class, null, null) ;
+      String name = event.getRequestContext().getRequestParameter(OBJECTID);
+      NodeTypeManager ntManager = WCMCoreUtils.getRepository().getNodeTypeManager();
+      String label = uiActionMan.getScriptLabel(ntManager.getNodeType(name));
+      uiForm.update(name, label) ;
+      uiActionMan.initPopup(uiForm, 600) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiActionMan) ;
+    }
+  }
+  
+  static public class DeleteActionListener extends EventListener<UIActionTypeList> {
+    public void execute(Event<UIActionTypeList> event) throws Exception {
+      UIActionTypeList uiList = event.getSource();
+      String nodeTypeName = event.getRequestContext().getRequestParameter(OBJECTID);
+      UIActionManager uiActionMan = uiList.getParent() ;
+      RepositoryService repoService = WCMCoreUtils.getService(RepositoryService.class);
+      ExtendedNodeTypeManager ntManager = repoService.getCurrentRepository().getNodeTypeManager();
+      try {
+        ntManager.unregisterNodeType(nodeTypeName);
+      } catch(Exception e) {
+        UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class) ;
+        uiApp.addMessage(new ApplicationMessage("UIActionTypeList.msg.cannot-delete", null, ApplicationMessage.WARNING)) ;
+        return;
+      }
+      uiList.refresh(uiList.getUIPageIterator().getCurrentPage());
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiActionMan) ;
+    }
+  }
+  
   static public class AddActionActionListener extends EventListener<UIActionTypeList> {
     public void execute(Event<UIActionTypeList> event) throws Exception {
       UIActionManager uiActionMan = event.getSource().getParent() ;
@@ -106,16 +153,20 @@ public class UIActionTypeList extends UIPagingGrid {
       uiActionMan.initPopup(uiForm, 600) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiActionMan) ;
     }
-  }
+  }  
 
   public static class ActionData {
+    private String label ;
     private String name ;
-    private String extendType ;
+    private String type;
 
     public String getName() { return name ; }
     public void setName(String s) { name = s ; }
 
-    public String getExtendType() { return extendType ; }
-    public void setExtendType(String s) { extendType = s ; }
+    public String getLabel() { return label ; }
+    public void setLabel(String s) { label = s ; }
+    
+    public String getType() { return type; }
+    public void setType(String type) { this.type = type; }
   }
 }

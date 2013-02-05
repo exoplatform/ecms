@@ -17,14 +17,16 @@
 package org.exoplatform.ecm.webui.component.admin.action;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.jcr.nodetype.NodeType;
-import javax.portlet.PortletPreferences;
+import javax.jcr.nodetype.NodeTypeManager;
 
-import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.services.cms.actions.ActionPlugin;
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
+import org.exoplatform.services.cms.scripts.impl.ScriptServiceImpl;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -37,7 +39,6 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
@@ -62,10 +63,12 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
 )
 public class UIActionTypeForm extends UIForm {
 
-  final static public String FIELD_EXECUTEACTION = "executeAction" ;
+  final static public String FIELD_SCRIPT = "script" ;
   final static public String FIELD_NAME = "name" ;
   final static public String FIELD_VARIABLES = "variables" ;
   public static final String ACTION_TYPE = "exo:scriptAction";
+  
+  private boolean isEdit = false;
 
   public UIFormMultiValueInputSet uiFormMultiValue = null ;
 
@@ -73,25 +76,10 @@ public class UIActionTypeForm extends UIForm {
     
     addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).
         addValidator(MandatoryValidator.class)) ;
-    UIFormSelectBox actionExecutables = new UIFormSelectBox(FIELD_EXECUTEACTION,FIELD_EXECUTEACTION,
+    UIFormSelectBox actionExecutables = new UIFormSelectBox(FIELD_SCRIPT,FIELD_SCRIPT,
         new ArrayList<SelectItemOption<String>>());
     addUIFormInput(actionExecutables) ;
     setActions( new String[]{"Save", "Cancel"}) ;
-  }
-
-  private List<SelectItemOption<String>> getActionTypesValues() throws Exception {
-    ActionServiceContainer actionServiceContainer =
-      getApplicationComponent(ActionServiceContainer.class) ;
-    List <String> actionsTypes= (List <String>) actionServiceContainer.getActionPluginNames();
-    List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>() ;
-    List<String> lstOpt = new ArrayList<String>();
-    for(int i =0 ; i< actionsTypes.size() ; i++){
-      if(!lstOpt.contains(actionsTypes.get(i))) {
-        options.add(new SelectItemOption<String>(actionsTypes.get(i),actionsTypes.get(i))) ;
-        lstOpt.add(actionsTypes.get(i));
-      }
-    }
-    return options ;
   }
 
   private void initMultiValuesField() throws Exception {
@@ -106,27 +94,37 @@ public class UIActionTypeForm extends UIForm {
     addUIFormInput(uiFormMultiValue) ;
   }
 
-  private List<SelectItemOption<String>> getExecutableOptions(String actionTypeName) throws Exception {
+  private List<SelectItemOption<String>> getScriptOptions() throws Exception {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>() ;
     ActionServiceContainer actionServiceContainer =
       getApplicationComponent(ActionServiceContainer.class) ;
-    ActionPlugin actionPlugin = actionServiceContainer.getActionPluginForActionType(actionTypeName) ;
-    List<String> executables = (List<String>)actionPlugin.getActionExecutables();
-    for(String actionExec : executables) {
-      options.add(new SelectItemOption<String>(actionExec, actionExec)) ;
+    Collection<NodeType> actionList = 
+            actionServiceContainer.getCreatedActionTypes(WCMCoreUtils.getRepository().getConfiguration().getName()) ;
+    ScriptServiceImpl scriptService = WCMCoreUtils.getService(ScriptServiceImpl.class);
+    for(NodeType nodeType : actionList) {
+      String resourceName = scriptService.getResourceNameByNodeType(nodeType);
+      if(StringUtils.isEmpty(resourceName)) continue;
+      options.add(new SelectItemOption<String>(StringUtils.substringAfterLast(resourceName, "/"), resourceName)) ;
     }
     return options ;
   }
 
   public void refresh() throws Exception{
     reset() ;
-    List<SelectItemOption<String>> actionOptions = getActionTypesValues() ;
-    String actionTypeName = actionOptions.get(0).getValue() ;
-    
-    
     getUIStringInput(FIELD_NAME).setValue("") ;
-    List<SelectItemOption<String>> executableOptions = getExecutableOptions(actionTypeName) ;
-    getUIFormSelectBox(FIELD_EXECUTEACTION).setOptions(executableOptions) ;
+    List<SelectItemOption<String>> scriptOptions = getScriptOptions() ;
+    getUIFormSelectBox(FIELD_SCRIPT).setOptions(scriptOptions);
+    initMultiValuesField() ;
+  }
+  
+  public void update(String actionName, String actionLabel) throws Exception {
+    isEdit = true;
+    ScriptServiceImpl scriptService = WCMCoreUtils.getService(ScriptServiceImpl.class);
+    NodeTypeManager ntManager = WCMCoreUtils.getRepository().getNodeTypeManager();
+    NodeType nodeType = ntManager.getNodeType(actionName);
+    String resourceName = scriptService.getResourceNameByNodeType(nodeType);
+    getUIStringInput(FIELD_NAME).setValue(actionLabel);
+    getUIFormSelectBox(FIELD_SCRIPT).setOptions(getScriptOptions()).setValue(resourceName) ;
     initMultiValuesField() ;
   }
 
@@ -142,28 +140,14 @@ public class UIActionTypeForm extends UIForm {
     public void execute(Event<UIActionTypeForm> event) throws Exception {
       UIActionTypeForm uiForm = event.getSource() ;
       PortletRequestContext context = (PortletRequestContext) event.getRequestContext() ;
-      PortletPreferences preferences = context.getRequest().getPreferences() ;
-      String repository = preferences.getValue(Utils.REPOSITORY, "") ;
+      String repository = WCMCoreUtils.getRepository().getConfiguration().getName() ;
       UIActionManager uiActionManager = uiForm.getAncestorOfType(UIActionManager.class) ;
       ActionServiceContainer actionServiceContainer =
         uiForm.getApplicationComponent(ActionServiceContainer.class) ;
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
-      String actionName = uiForm.getUIStringInput(FIELD_NAME).getValue();
-      Object[] args = {actionName} ;
-      String[] arrFilterChar = {"&", "$", "^", "(", ")", "@", "]", "[", "*", "%", "!", "+"} ;
-      String[] arrActionNames = actionName.split(":") ;
-      for(String filterChar : arrFilterChar) {
-        if(actionName.indexOf(filterChar) > -1) {
-          uiApp.addMessage(new ApplicationMessage("UIActionTypeForm.msg.fileName-invalid", null,
-              ApplicationMessage.WARNING)) ;
-          return ;
-        }
-      }
-      if(!actionName.startsWith("exo:")) {
-        uiApp.addMessage(new ApplicationMessage("UIActionTypeForm.msg.action-name-invalid", args,
-                                                 ApplicationMessage.WARNING)) ;
-        return ;
-      }
+      String actionLabel = uiForm.getUIStringInput(FIELD_NAME).getValue();
+      String actionName = "exo:" + org.exoplatform.services.cms.impl.Utils.cleanString(actionLabel);
+
       List<String> variables = new ArrayList<String>();
       List values = uiForm.uiFormMultiValue.getValue();
       if(values != null && values.size() > 0) {
@@ -178,14 +162,14 @@ public class UIActionTypeForm extends UIForm {
         }
       }
       try {
-        String execute = uiForm.getUIFormSelectBox(FIELD_EXECUTEACTION).getValue() ;
-        actionServiceContainer.createActionType(actionName, ACTION_TYPE, execute, variables,
+        String script = uiForm.getUIFormSelectBox(FIELD_SCRIPT).getValue() ;
+        actionServiceContainer.createActionType(actionName, ACTION_TYPE, script, actionLabel, variables,
                                                 false, repository);
         uiActionManager.refresh() ;
         uiForm.refresh() ;
         uiActionManager.removeChild(UIPopupWindow.class) ;
       } catch(Exception e) {
-        uiApp.addMessage(new ApplicationMessage("UIActionTypeForm.msg.action-type-create-error", args,
+        uiApp.addMessage(new ApplicationMessage("UIActionTypeForm.msg.action-type-create-error", new Object[] {actionLabel},
                                                 ApplicationMessage.WARNING)) ;
         return ;
       }

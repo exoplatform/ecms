@@ -158,8 +158,10 @@ public interface WCMComposer {
    * @param path the path
    * @param filters the filters
    * @return true, if successful
+   * Since version 4.0 this method will be deprecated.
    */
-  public boolean updateContent(String workspace,
+ @Deprecated 
+ public boolean updateContent(String workspace,
                                String nodeIdentifier,
                                HashMap<String, String> filters) throws Exception;
 
@@ -170,8 +172,10 @@ public interface WCMComposer {
    * @param path the path
    * @param filters the filters
    * @return true, if successful
+   * * Since version 4.0 this method will be deprecated.
    */
-  public boolean updateContents(String workspace, String path, HashMap<String, String> filters) throws Exception;
+ @Deprecated
+ public boolean updateContents(String workspace, String path, HashMap<String, String> filters) throws Exception;
 
   /**
    * returns allowed states for a specified mode.
@@ -195,7 +199,9 @@ public interface WCMComposer {
    * Check isCache or not
    * @return 
    * @throws Exception the exception
+   * Since version 4.0 this method will be deprecated.
    */
+  @Deprecated
   public boolean isCached() throws Exception;
   /**
    * Update all document nodetypes and write a query statement   

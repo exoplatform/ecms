@@ -67,7 +67,7 @@ public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlu
     return actionScriptNames;
   }  
 
-  public String getActionExecutableLabel() { return "Groovy Scripts:"; }
+  public String getActionExecutableLabel() { return "exo:scriptLabel"; }
 
   public String getExecutableDefinitionName() { return "exo:script"; }
   protected String getWorkspaceName() { return config_.getWorkspace() ; }

@@ -946,12 +946,16 @@
   -->
   <UIActionTypeList>
     <header>
-      <name>Nom</name>
-      <extendType>Types d'action hérités</extendType>
+      <name>Types</name>
+      <label>Nom</label>
     </header>
     <action>
-      <AddAction>Ajouter</AddAction>
+      <AddAction>Ajouter Type d'Action</AddAction>
     </action>
+				<msg>
+					 <confirm-delete>Êtes-vous sûr de vouloir supprimer ce type d'action?</confirm-delete>
+						<cannot-delete>Vous ne pouvez pas supprimer ce type d'action car il est utilisé par le système.</cannot-delete>
+				</msg>			
   </UIActionTypeList>
   <!--
   ######################################################################################
@@ -967,13 +971,13 @@
     <title>Ajout/Edition d'un type d'action</title>
     <label>
       <actionType>Types d'action hérités</actionType>
-      <name>Nom (débute par "exo:")</name>
+      <name>Nom</name>
       <isMove>Action avec déplacement</isMove>
       <variables>Variables</variables>
       <exo_businessProcessAction>Processus métiers</exo_businessProcessAction>
       <exo_scriptAction>Scripts Groovy</exo_scriptAction>
       <exo_ruleAction>Règles</exo_ruleAction>
-      <executeAction>Exécuter</executeAction>
+      <script>Script</script>
     </label>
     <action>
       <Save>#{word.save}</Save>

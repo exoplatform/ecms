@@ -56,7 +56,7 @@ import org.exoplatform.webui.event.EventListener;
     }
 )
 public class UIECMTemplateList extends UIPagingGrid {
-  private static String[] VIEW_BEAN_FIELD = {"name", "path"} ;
+  private static String[] VIEW_BEAN_FIELD = {"name"} ;
   private static String[] VIEW_ACTION = {"EditInfo","Delete"} ;
   public static String ST_ecmTempForm = "ecmTempForm" ;
   public static String ST_ECMTemp = "ECMTemplate" ;
@@ -96,10 +96,6 @@ public class UIECMTemplateList extends UIPagingGrid {
       return name1.compareToIgnoreCase(name2);
     }
   }
-
-//  public String getRepository() {
-//    return getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
-//  }
 
   static  public class AddActionListener extends EventListener<UIECMTemplateList> {
     public void execute(Event<UIECMTemplateList> event) throws Exception {

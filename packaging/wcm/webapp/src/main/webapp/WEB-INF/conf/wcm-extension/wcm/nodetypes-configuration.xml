@@ -42,18 +42,6 @@
     </propertyDefinitions>
   </nodeType>
 
-  <nodeType name="wai:siteSearchBox" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
-    <supertypes>
-      <supertype>exo:webContent</supertype>
-    </supertypes>
-  </nodeType>
-
-  <nodeType name="wai:siteNavigationWebContent" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
-    <supertypes>
-      <supertype>exo:webContent</supertype>
-    </supertypes>
-  </nodeType>
-
   <nodeType name="metadata:siteMetadata" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
     <supertypes>
       <supertype>exo:metadata</supertype>
@@ -69,48 +57,6 @@
         <valueConstraints />
       </propertyDefinition>
       <propertyDefinition name="robots" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
-        <valueConstraints />
-      </propertyDefinition>
-    </propertyDefinitions>
-  </nodeType>
-
-  <nodeType name="wai:siteBreadcrumb" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
-    <supertypes>
-      <supertype>exo:webContent</supertype>
-    </supertypes>
-  </nodeType>
-
-
-  <nodeType name="acme:contact_us" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
-    <supertypes>
-      <supertype>nt:base</supertype>
-    </supertypes>
-    <propertyDefinitions>
-      <propertyDefinition name="acme:fg_p_label" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
-        <valueConstraints />
-      </propertyDefinition>
-      <propertyDefinition name="acme:fg_p_select_a_recipient" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
-        <valueConstraints />
-      </propertyDefinition>
-      <propertyDefinition name="acme:fg_p_your_name" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
-        <valueConstraints />
-      </propertyDefinition>
-      <propertyDefinition name="acme:fg_p_your_address" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
-        <valueConstraints />
-      </propertyDefinition>
-      <propertyDefinition name="acme:fg_p_your_email_address" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
-        <valueConstraints />
-      </propertyDefinition>
-      <propertyDefinition name="acme:fg_p_your_phone_number" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
-        <valueConstraints />
-      </propertyDefinition>
-      <propertyDefinition name="acme:fg_p_your_message" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
-        <valueConstraints />
-      </propertyDefinition>
-      <propertyDefinition name="jcr:primaryType" requiredType="Name" autoCreated="true" mandatory="true" onParentVersion="COMPUTE" protected="true" multiple="false">
-        <valueConstraints />
-      </propertyDefinition>
-      <propertyDefinition name="jcr:mixinTypes" requiredType="Name" autoCreated="false" mandatory="false" onParentVersion="COMPUTE" protected="true" multiple="true">
         <valueConstraints />
       </propertyDefinition>
     </propertyDefinitions>

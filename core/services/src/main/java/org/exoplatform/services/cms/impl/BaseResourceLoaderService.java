@@ -18,19 +18,22 @@ package org.exoplatform.services.cms.impl;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.GregorianCalendar;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
+import javax.jcr.nodetype.NodeType;
+import javax.jcr.nodetype.PropertyDefinition;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
+import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.scripts.CmsScript;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -120,23 +123,23 @@ public abstract class BaseResourceLoaderService implements Startable{
    * @see                 ResourceConfig
    * @throws Exception
    */
-  protected void addScripts(Session session, List resources, String location) throws Exception{
+  protected void addScripts(Session session, List<ResourceConfig.Resource> resources, String location) throws Exception{
     String resourcesPath = getBasePath();
     if (resources.size() == 0) return;
     try {
-      String firstResourceName = ((ResourceConfig.Resource) resources.get(0)).getName();
+      String firstResourceName = resources.get(0).getName();
       session.getItem(resourcesPath + "/" + firstResourceName);
       return;
     } catch (PathNotFoundException e) {
       Node root = session.getRootNode();
       Node resourcesHome = (Node) session.getItem(resourcesPath);
       String warPath = location + resourcesPath.substring(resourcesPath.lastIndexOf("/")) ;
-      for (Iterator iter = resources.iterator(); iter.hasNext();) {
-        ResourceConfig.Resource resource = (ResourceConfig.Resource) iter.next();
+      for (ResourceConfig.Resource resource : resources) {
         String name = resource.getName();
+        String description = resource.getDescription();
         String path = warPath + "/" + name;
         InputStream in = cservice_.getInputStream(path);
-        addResource(resourcesHome, name, in);
+        addResource(resourcesHome, name, description, in);
       }
       root.save();
     }
@@ -150,6 +153,18 @@ public abstract class BaseResourceLoaderService implements Startable{
    * @throws Exception
    */
   public void addResource(Node resourcesHome, String resourceName, InputStream in)
+  throws Exception {
+    addResource(resourcesHome, resourceName, resourceName, in);
+  }
+  
+  /**
+   * add Resource
+   * @param resourcesHome     Node
+   * @param resourceName      String
+   * @param in                InputStream
+   * @throws Exception
+   */
+  public void addResource(Node resourcesHome, String resourceName, String resourceDescription, InputStream in)
   throws Exception {
     Node contentNode = null;
     if(resourceName.lastIndexOf("/")>-1) {
@@ -169,9 +184,10 @@ public abstract class BaseResourceLoaderService implements Startable{
       contentNode.setProperty(NodetypeConstant.JCR_MIME_TYPE, "application/x-groovy");
     }
     contentNode.setProperty(NodetypeConstant.JCR_DATA, in);
+    contentNode.setProperty(NodetypeConstant.DC_DESCRIPTION, new String[] { resourceDescription });
     contentNode.setProperty(NodetypeConstant.JCR_LAST_MODIFIED, new GregorianCalendar());
     resourcesHome.save() ;
-  }
+  }  
 
   /**
    * get ResourcesHome
@@ -200,16 +216,75 @@ public abstract class BaseResourceLoaderService implements Startable{
    * @throws Exception
    */
   public String getResourceAsText(String resourceName) throws Exception {
-    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
-    try {
-      Node resourcesHome = getResourcesHome(sessionProvider);
-      Node resourceNode = resourcesHome.getNode(resourceName);
-      String text = resourceNode.getNode("jcr:content").getProperty("jcr:data").getString();
-      return text;
-    } finally {
-      sessionProvider.close();
+    Node resourceNode = getResourceByName(resourceName);
+    String text = resourceNode.getNode("jcr:content").getProperty("jcr:data").getString();
+    return text;
+  }
+  
+  /**
+   * get Resource By Name
+   * @param resourceName    String
+   * @return                Node
+   * @throws Exception
+   */  
+  public Node getResourceByName(String resourceName) throws Exception {
+    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    Node resourcesHome = getResourcesHome(sessionProvider);
+    return resourcesHome.getNode(resourceName);
+  }
+  
+  /**
+   * Get resource name from Node Type
+   * @param nodeType
+   * @return
+   * @throws Exception
+   */
+  public String getResourceNameByNodeType(NodeType nodeType) throws Exception {
+    if(nodeType.isNodeType("exo:scriptAction")) {
+      PropertyDefinition[] arrProperties = nodeType.getPropertyDefinitions();
+      for(PropertyDefinition property : arrProperties) {
+        if(property.getName().equals("exo:script")) {
+          return property.getDefaultValues()[0].getString();
+        }
+      }
     }
-  }  
+    return StringUtils.EMPTY;
+  }
+  
+  /**
+   * Get NodeType by the given resource name
+   * @param resourceName Name of resource
+   * @return NodeType object
+   * @throws Exception
+   */
+  public NodeType getNodeTypeByResourceName(String resourceName) throws Exception {
+    ActionServiceContainer actionsServiceContainer = WCMCoreUtils.getService(ActionServiceContainer.class) ;
+    Collection<NodeType> actionList = actionsServiceContainer.getCreatedActionTypes(
+            WCMCoreUtils.getRepository().getConfiguration().getName()) ;
+    for(NodeType nodeType : actionList) {
+      if(nodeType.isNodeType("exo:scriptAction")) {
+        PropertyDefinition[] arrProperties = nodeType.getPropertyDefinitions();
+        for(PropertyDefinition property : arrProperties) {
+          if(property.getName().equals("exo:script") && property.getDefaultValues()[0].getString().equals(resourceName)) {
+            return nodeType;
+          }
+        }
+      }
+    }
+    return null;
+  }
+  
+  /**
+   * get Resource Description
+   * @param resourceName    String
+   * @see
+   * @return                String
+   * @throws Exception
+   */  
+  public String getResourceDescription(String resourceName) throws Exception {
+    Node resource = getResourceByName(resourceName);
+    return resource.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.DC_DESCRIPTION).getValues()[0].getString();
+  }
   
   /**
    * get Resource As Stream
@@ -219,9 +294,7 @@ public abstract class BaseResourceLoaderService implements Startable{
    * @throws Exception
    */
   public InputStream getResourceAsStream(String resourceName) throws Exception {
-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    Node resourcesHome = getResourcesHome(sessionProvider);
-    Node resourceNode = resourcesHome.getNode(resourceName);
+    Node resourceNode = getResourceByName(resourceName);
     InputStream stream = resourceNode.getNode("jcr:content").getProperty("jcr:data").getStream();
     return stream;
   }  

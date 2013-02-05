@@ -16,6 +16,10 @@
  */
 package org.exoplatform.ecm.webui.component.admin.action;
 
+import javax.jcr.nodetype.NodeType;
+import javax.jcr.nodetype.PropertyDefinition;
+
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPopupWindow;
@@ -36,13 +40,25 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
 public class UIActionManager extends UIAbstractManager {
 
   public UIActionManager() throws Exception {
-    addChild(UIActionTypeList.class, null, "uiActionTypeList") ;
+    addChild(UIActionTypeList.class, null, null) ;
   }
 
   public void refresh() throws Exception {
     UIActionTypeList list = getChild(UIActionTypeList.class) ;
     list.refresh(1);
   }
+  
+  public String getScriptLabel(NodeType nodeType) throws Exception {
+    if(nodeType.isNodeType("exo:scriptAction")) {
+      PropertyDefinition[] arrProperties = nodeType.getPropertyDefinitions();
+      for(PropertyDefinition property : arrProperties) {
+        if(property.getName().equals("exo:scriptLabel")) {
+          return property.getDefaultValues()[0].getString();
+        }
+      }
+    }
+    return StringUtils.EMPTY;
+  }  
 
   public void initPopup(UIComponent uiActionForm, int width) throws Exception {
     UIPopupWindow uiPopup = getChild(UIPopupWindow.class) ;
