@@ -160,14 +160,6 @@
 					</object>
 				</object-param>
 				<object-param>
-					<name>ViewReferences</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
-						<field name="name"><string>ViewReferences</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.ViewReferencesActionComponent</string></field>
-					</object>
-				</object-param>
-				<object-param>
 					<name>ViewMetadatas</name>
 					<object type="org.exoplatform.webui.ext.UIExtension">
 						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
@@ -301,14 +293,6 @@
 						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.ManageRelationsActionComponent</string></field>
 					</object>
 				</object-param>
-				<object-param>
-					<name>ViewRelations</name>
-					<object type="org.exoplatform.webui.ext.UIExtension">
-						<field name="type"><string>org.exoplatform.ecm.dms.UIActionBar</string></field>
-						<field name="name"><string>ViewRelations</string></field>
-						<field name="component"><string>org.exoplatform.ecm.webui.component.explorer.control.action.ViewRelationsActionComponent</string></field>
-					</object>
-				</object-param>					
 				<object-param>
 					<name>TaggingDocument</name>
 					<object type="org.exoplatform.webui.ext.UIExtension">
