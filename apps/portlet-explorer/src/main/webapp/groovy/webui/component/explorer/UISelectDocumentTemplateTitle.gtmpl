@@ -7,16 +7,18 @@ import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 
   UIWorkingArea uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
   UISelectDocumentForm uiSelectForm = uiWorkingArea.getChild(UIDocumentWorkspace.class).getChild(UIDocumentFormController.class).getChild(UISelectDocumentForm.class);
-  def thumbnailClass = "ChangeThumbnailViewIcon";
-  def listViewClass = "SelectedListViewIcon";
+  def thumbnailClass = "";
+  def listViewClass = "active";
   if (uiSelectForm.getTemplate().contains(uicomponent.THUMBNAIL_VIEW_TEMPLATE)) {
-    thumbnailClass = "SelectedThumbnailViewIcon";
-    listViewClass = "ChangeListViewIcon";
+    thumbnailClass = "active";
+    listViewClass = "";
   }
 %>
-<div class="SelectTemplateTitle" style="height:25px">
-  <div style="float:left"><%=_ctx.appRes("UISelectDocumentForm.label.selectTemplate")%></div>
-  <div rel="tooltip" data-placement="bottom" title='<%=_ctx.appRes("UISelectDocumentForm.label.Cancel")%>' class="CancelNewDoc" onclick="<%=uicomponent.event('Cancel');%>"></div>
-  <div rel="tooltip" data-placement="bottom" title='<%=_ctx.appRes("UISelectDocumentForm.label.ThumbnailView")%>' class="$thumbnailClass" onclick="<%=uicomponent.event('ChangeView', 'ThumbnailView');%>"></div>
-  <div rel="tooltip" data-placement="bottom" title='<%=_ctx.appRes("UISelectDocumentForm.label.ListView")%>' class="$listViewClass" onclick="<%=uicomponent.event('ChangeView', 'ListView');%>"></div>
+<div class="selectTemplateTitle clearfix">
+  <i class="uiIconClose uiIconLightGray pull-right" rel="tooltip" data-placement="bottom" title='<%=_ctx.appRes("UISelectDocumentForm.label.Cancel")%>' onclick="<%=uicomponent.event('Cancel');%>"></i>
+  <div class="btn-group pull-right">
+		<button type="button" class="btn $thumbnailClass" rel="tooltip" data-placement="bottom" title='<%=_ctx.appRes("UISelectDocumentForm.label.ThumbnailView")%>' onclick="<%=uicomponent.event('ChangeView', 'ThumbnailView');%>"><i class="uiIconEcmsViewIcons"></i></button>
+		<button type="button" class="btn $listViewClass" rel="tooltip" data-placement="bottom" title='<%=_ctx.appRes("UISelectDocumentForm.label.ListView")%>' onclick="<%=uicomponent.event('ChangeView', 'ListView');%>"><i class="uiIconEcmsViewList"></i></button>
+	</div>
+  <h5 class="templateTitle"><%=_ctx.appRes("UISelectDocumentForm.label.selectTemplate")%></h5>
 </div>

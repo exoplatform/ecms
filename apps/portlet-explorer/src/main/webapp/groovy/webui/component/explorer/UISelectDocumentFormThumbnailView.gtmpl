@@ -1,35 +1,29 @@
 <div id="$uicomponent.id" class="$uicomponent.id">
-	<div class="SelectTemplateThumbnailView">
-		<div class="SelectTemplateArea">	
-			<% 
-				def templates = uicomponent.getChildrenList();
-				if (templates != null) {
-				  for (int i = 0; i < templates.size(); i++) {
-					  def label = templates.get(i);
-					  def contentType = uicomponent.getContentType(label);
-					  def actionLink = uicomponent.event("SelectTemplate", contentType);
-					  def cssClass = uicomponent.getTemplateIconStylesheet(contentType);
-			%>
-			
-			<!-- 1 template-->
-			<div class="TemplateBox" onclick="$actionLink">
-				<div style="height: auto; width: auto; border: none;">
-					<div>
-						<div class="TemplateIconContainer">
-							<div rel="tooltip" data-placement="bottom" title="$label" class="TemplateIcon default70x80Icon $cssClass"></div>
-						</div>
-					</div>
-					<div class="TemplateLabel" >
-						<a href="javascript:void(0);">$label</a>
-					</div>
-				</div>
+	<div class="selectTemplateArea">	
+		<% 
+			def templates = uicomponent.getChildrenList();
+			if (templates != null) {
+				for (int i = 0; i < templates.size(); i++) {
+					def label = templates.get(i);
+					def contentType = uicomponent.getContentType(label);
+					def actionLink = uicomponent.event("SelectTemplate", contentType);
+					def cssClass = uicomponent.getTemplateIconStylesheet(contentType);
+		%>
+		
+		<!-- 1 template-->
+		<div class="templateBox" onclick="$actionLink">
+			<div class="templateIconContainer">
+				<i rel="tooltip" data-placement="bottom" title="$label" class="uiIcon64x64FileDefault uiIcon64x64$cssClass"></i>
 			</div>
-			
-			<%
-				  }
-				}
-			%>
+			<div class="templateLabel" >
+				<a href="javascript:void(0);">$label</a>
+			</div>
 		</div>
+		
+		<%
+				}
+			}
+		%>
 	</div>
 	<% 
 	  int availablePage = uicomponent.getContentPageIterator().getAvailablePage();

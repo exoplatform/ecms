@@ -955,6 +955,87 @@
 	}
 }
 
+/***** New Content *****/
+
+.selectTemplateTitle {
+	background-color: #F0F0F0;
+	border: 1px solid #c2c2c2;
+	border-bottom: 1px solid #CFCFCF;
+	border-radius: 4px 4px 0 0;
+	line-height: 20px;
+	margin: 0;
+	padding: 5px 20px;
+	word-wrap: break-word;
+	
+	.templateTitle {
+		margin: 4px 130px 0px 0px;
+	}
+	
+	.uiIconClose {
+		margin: 7px 0px 0px 10px;
+		cursor: pointer;
+	}
+}
+
+.selectTemplateArea{
+	overflow-x:hidden;
+	overflow-y:auto;
+	margin: -19px;
+
+	.templateBox {
+		height: auto; 
+		width: 120px; 
+		float: left;
+		overflow: hidden;
+		border-right: 1px solid #dedede;
+		border-bottom: 1px solid #dedede;
+		cursor: pointer;
+	
+		.templateIconContainer {
+			width: 64px; 
+			height: 70px;
+			margin: 0px auto;
+			padding-top: 20px;
+		}
+
+		.templateLabel {
+			height: 40px;
+			width: 100px;
+			line-height: 14px;
+			text-align: center;
+			padding: 0px 10px;
+			display: table-cell;
+			vertical-align: middle;
+			
+			> a {
+				color: #444444;
+			}
+		}
+		
+		&:hover {
+			background-color: #e5e5e5;
+		}
+	}
+	
+	.itemDocumentListView {
+		border-bottom: 1px solid #dedede;
+		padding: 5px 20px;
+		cursor: pointer;
+		
+		> a {
+			margin-left: 15px;
+			color: #444444;
+			vertical-align: middle;
+		}
+		
+		&:hover {
+			background-color: #e6e6e6;
+		}
+	}
+}
+
+
+
 /******** UIRightClickPopupMenu **************/
 .uiRightClickPopupMenu {
 	display: none;
