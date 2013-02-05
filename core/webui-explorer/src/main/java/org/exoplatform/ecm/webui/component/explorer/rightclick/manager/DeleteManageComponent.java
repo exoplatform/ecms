@@ -220,8 +220,8 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
         ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
         Node parent = node.getParent();
-        if (node.getPrimaryNodeType().isNodeType(ActivityCommonService.NT_FILE)) {        
-          if (activityService.isAcceptedNode(node) && !activityService.isDocumentNodeType(parent)) {
+        if (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {        
+          if (activityService.isAcceptedNode(node) && !activityService.isBroadcastNTFileEvents(node)) {
             listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, parent, node);
           }
         }

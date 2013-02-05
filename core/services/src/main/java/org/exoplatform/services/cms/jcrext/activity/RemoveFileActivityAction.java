@@ -44,15 +44,11 @@ public class RemoveFileActivityAction implements Action{
       Node node = (Node)item;
       Node parent = node.getParent();
       if (node.getPrimaryNodeType().isNodeType(ActivityCommonService.NT_FILE)) {        
-        if (activityService.isAcceptedNode(node) && !isDocumentNodeType(parent)) {
+        if (activityService.isAcceptedNode(node) && activityService.isBroadcastNTFileEvents(node)) {
           listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, parent, node);
         }
       }
     }
     return false;
-  }
-  public boolean isDocumentNodeType(Node node) throws Exception {
-    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
-    return templateService.isManagedNodeType(node.getPrimaryNodeType().getName());
-  }
+  }  
 }

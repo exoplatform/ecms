@@ -21,6 +21,7 @@ import javax.jcr.Node;
 import org.apache.commons.chain.Context;
 import org.exoplatform.services.command.action.Action;
 import org.exoplatform.services.listener.ListenerService;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -42,7 +43,7 @@ public class AddNodeActivityAction implements Action{
     Object item = context.get("currentItem");
     if (item instanceof Node) {
       Node node = (Node)item;
-      if (node.getPrimaryNodeType().isNodeType(ActivityCommonService.NT_FILE)) {
+      if (node.getPrimaryNodeType().getName().equals((NodetypeConstant.NT_FILE))) {
         Node parent = node.getParent();
         if (activityService.isAcceptedNode(parent) && !activityService.isCreating(parent)) {
           listenerService.broadcast(ActivityCommonService.ATTACH_ADDED_ACTIVITY, parent, node);
