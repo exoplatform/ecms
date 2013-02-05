@@ -55,6 +55,7 @@
   addScripts("uiFileView.UIFileView.initStickBreadcrumb();").
   addScripts("ecmutil.ECMUtils.initClipboard('clip_button','1','$size');").
 	addScripts('uiListView.UIListView.loadEffectedWidthColumn();').
+	addScripts('uiFileView.UIFileView.clearItemsSelected();').
   addScripts('uiFileView.UIFileView.clearOpenDivs();');
   
 	//Config to display columns with format: ["${column};${width}"]

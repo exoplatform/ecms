@@ -49,6 +49,11 @@ UIFileView.prototype.clearOpenDivs =  function () {
 	eXo.ecm.UIFileView.openDivs = {};
 }
 
+UIFileView.prototype.clearItemsSelected = function() {
+	Self.itemsSelected = [];
+	Self.allItems = [];
+}
+
 //init event
 UIFileView.prototype.initAllEvent = function(actionAreaId, enableDragAndDrop) {
 	eXo.ecm.UIFileView.enableDragAndDrop = enableDragAndDrop;
