@@ -45,21 +45,11 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
-/**
- * Created by The eXo Platform SARL
- * Author : nqhungvn
- *          nguyenkequanghung@yahoo.com
- * July 3, 2006
- * 10:07:15 AM
- * Editor : TuanP
- *        phamtuanchip@yahoo.de
- * Oct 13, 20006
- */
 @ComponentConfigs({
     @ComponentConfig(lifecycle = UIContainerLifecycle.class, events = {
         @EventConfig(listeners = UIPermissionInfo.DeleteActionListener.class, confirm = "UIPermissionInfo.msg.confirm-delete-permission"),
         @EventConfig(listeners = UIPermissionInfo.EditActionListener.class) }),
-    @ComponentConfig(type = UIGrid.class, template = "app:/groovy/webui/component/explorer/popup/info/UIPermissionInfoGrid.gtmpl") })
+    @ComponentConfig(type = UIGrid.class, template = "classpath:groovy/wcm/webui/core/UIPermissionInfoGrid.gtmpl") })
 public class UIPermissionInfo extends UIPermissionInfoBase {
 
   public UIPermissionInfo() throws Exception {

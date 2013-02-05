@@ -44,7 +44,7 @@ import org.exoplatform.webui.event.EventListener;
 
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    template = "app:/groovy/webui/component/explorer/popup/info/UIPermissionForm.gtmpl",
+    template = "classpath:groovy/wcm/webui/core/UIPermissionForm.gtmpl",
     events = {
       @EventConfig(listeners = UIPermissionForm.SaveActionListener.class),
       @EventConfig(phase = Phase.DECODE, listeners = UIPermissionForm.ResetActionListener.class),

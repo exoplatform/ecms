@@ -23,7 +23,7 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
-@ComponentConfig(template = "app:/groovy/webui/component/explorer/popup/info/UIPermissionManager.gtmpl", 
+@ComponentConfig(template = "classpath:groovy/wcm/webui/core/UIPermissionManager.gtmpl", 
 events = { @EventConfig(listeners = UIPermissionManager.CloseActionListener.class) })
 public class UIPermissionManager extends UIPermissionManagerBase {
   public UIPermissionManager() throws Exception {
