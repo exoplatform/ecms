@@ -27,7 +27,6 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.jcr.Node;
-import javax.jcr.Value;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.MediaType;
@@ -39,7 +38,6 @@ import javax.xml.transform.dom.DOMSource;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.commons.utils.IOUtil;
-import org.exoplatform.commons.utils.MimeTypeResolver;
 import org.exoplatform.ecm.connector.fckeditor.FCKMessage;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
@@ -51,7 +49,6 @@ import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.upload.UploadResource;
 import org.exoplatform.upload.UploadService;
-import org.jboss.util.Strings;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 

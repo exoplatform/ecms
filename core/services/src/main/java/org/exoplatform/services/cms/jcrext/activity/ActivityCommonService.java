@@ -22,6 +22,7 @@ import javax.jcr.RepositoryException;
 
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -102,9 +103,18 @@ public class ActivityCommonService {
       return false;
     }
   }
-  public boolean isDocumentNodeType(Node node) throws Exception {
+  private boolean isDocumentNodeType(Node node) throws Exception {
     TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
     return templateService.isManagedNodeType(node.getPrimaryNodeType().getName());
+  }
+  
+  public boolean isBroadcastNTFileEvents(Node node) throws Exception {
+  	boolean result = true;
+  	while(result && !((NodeImpl)node).isRoot()) {
+  		node = node.getParent();
+  		result = !isDocumentNodeType(node);
+  	}
+  	return result;
   }
   public boolean isAcceptedProperties(String propertyName) {
     return (acceptedProperties.indexOf("{" + propertyName + "}")>=0 || propertyName.startsWith("dc:"));

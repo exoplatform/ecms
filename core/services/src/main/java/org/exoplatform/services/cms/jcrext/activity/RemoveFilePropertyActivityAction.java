@@ -51,7 +51,7 @@ public class RemoveFilePropertyActivityAction implements Action{
     
     if(node.isNodeType("nt:resource")) node = node.getParent();
     //filter node type
-    if (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
+    if (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) && activityService.isBroadcastNTFileEvents(node)) {
     //Notify to update activity
       listenerService.broadcast(ActivityCommonService.FILE_PROPERTY_REMOVE_ACTIVITY, nodeTemp, propertyName);    	
     }
