@@ -114,41 +114,6 @@
     <type>org.exoplatform.services.cms.link.impl.LinkManagerImpl</type>
   </component>
 
-	<component>
-	  <key>org.exoplatform.services.cms.taxonomy.TaxonomyService</key>
-	  <type>org.exoplatform.services.cms.taxonomy.impl.TaxonomyServiceImpl</type>
-	  <init-params>
-      <object-param>
-        <name>defaultPermission.configuration</name>
-	        <object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission">
-	          <field name="permissions">
-	            <collection type="java.util.ArrayList">
-	              <value>
-	                <object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission$Permission">
-	                  <field name="identity"><string>*:/platform/administrators</string></field>
-	                  <field name="read"><string>true</string></field>
-	                  <field name="addNode"><string>true</string></field>
-	                  <field name="setProperty"><string>true</string></field>
-	                  <field name="remove"><string>true</string></field>
-	                </object>
-	              </value>
-                <value>
-                  <object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission$Permission">
-                    <field name="identity"><string>*:/platform/users</string></field>
-                    <field name="read"><string>true</string></field>
-                    <field name="addNode"><string>true</string></field>
-                    <field name="setProperty"><string>true</string></field>
-                    <field name="remove"><string>false</string></field>
-                  </object>
-                </value>
-	            </collection>
-	          </field>
-	        </object>
-      </object-param>
-	  </init-params>
-
-	</component>
-
   <component>
 	  <key>org.exoplatform.services.cms.thumbnail.ThumbnailService</key>
 	  <type>org.exoplatform.services.cms.thumbnail.impl.ThumbnailServiceImpl</type>
