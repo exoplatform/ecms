@@ -1299,7 +1299,7 @@
     </msg>
     <header>
       <scriptName>Nom</scriptName>
-      <path>Répertoire</path>
+      <path>Type</path>
       <baseVersion>Version de base</baseVersion>
       <action>Actions</action>
     </header>
@@ -1318,11 +1318,7 @@
       <ecmScriptForm>Scripts ECM</ecmScriptForm>
     </title>
   </ScriptContainerPopup>
-  <UICBScriptsPopup>
-    <title>
-      <CBScriptForm>Script portlet BC</CBScriptForm>
-    </title>
-  </UICBScriptsPopup>
+
   <UIScriptForm>
     <action>
       <Save>#{word.save}</Save>
@@ -1337,6 +1333,13 @@
       <name-exist>Le script '{0}' existe déjà</name-exist>
       <fileName-invalid>Caractères invalides détectés dans le nom du script.</fileName-invalid>
     </msg>
+    <label>
+      <selectVersion>Versions</selectVersion>
+      <scriptContent>Contenu</scriptContent>
+      <scriptLabel>Nom</scriptLabel>
+      <scriptName>Type</scriptName>
+      <enableVersion>Activer le versionning</enableVersion>
+    </label>
   </UIScriptForm>
   <!--
   ######################################################################################
@@ -1348,29 +1351,17 @@
       <ecmScriptForm>Ajout/Edition de scripts</ecmScriptForm>
     </title>
   </ECMScriptPopupWindow>
-  <CBScriptForm>
-    <label>
-      <selectVersion>Versions</selectVersion>
-      <scriptContent>Script</scriptContent>
-      <scriptName>Nom</scriptName>
-      <enableVersion>Activer le versionning</enableVersion>
-    </label>
-  </CBScriptForm>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm	 #
   ######################################################################################
   -->
-  <BCScriptPopupWindow>
-    <title>
-      <CBScriptForm>Ajout/Edition script</CBScriptForm>
-    </title>
-  </BCScriptPopupWindow>
   <ecmScriptForm>
     <label>
       <selectVersion>Versions</selectVersion>
       <scriptContent>Script</scriptContent>
-      <scriptName>Nom</scriptName>
+      <scriptLabel>Nom</scriptLabel>
+      <scriptName>Type</scriptName>
       <enableVersion>Activer le versionning</enableVersion>
     </label>
   </ecmScriptForm>

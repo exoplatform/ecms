@@ -18,6 +18,7 @@ package org.exoplatform.services.cms.scripts.impl;
 
 import groovy.lang.GroovyClassLoader;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -274,9 +275,19 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
    */
   @Override
   public void addScript(String name, String text, SessionProvider provider) throws Exception {
-    addResource(name, text, provider);
-    removeFromCache(name) ;
+    addScript(name, name, text, provider);
   }  
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void addScript(String name, String description, String text, SessionProvider provider) throws Exception {
+    Node resourcesHome = getResourcesHome(provider);
+    InputStream in = new ByteArrayInputStream(text.getBytes());
+    addResource(resourcesHome, name, description, in);
+    removeFromCache(name) ;
+  }   
   
   /**
    * {@inheritDoc}

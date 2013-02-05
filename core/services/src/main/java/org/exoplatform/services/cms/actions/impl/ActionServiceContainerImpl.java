@@ -254,7 +254,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
    */
   @SuppressWarnings("unchecked")
   public void createActionType(String actionTypeName, String parentActionTypeName, String executable, String actionLabel,
-      List<String> variableNames, boolean isMoveType, String repository) throws Exception {
+      List<String> variableNames, boolean isMoveType, boolean isUpdate) throws Exception {
     NodeTypeValue nodeTypeValue = new NodeTypeValue();
     nodeTypeValue.setName(actionTypeName);
 
@@ -274,18 +274,19 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
     List scriptDefaultValues = new ArrayList();
     scriptDefaultValues.add(executable);
     propDef.setDefaultValueStrings(scriptDefaultValues);
-    propDef.setMandatory(false);
+    propDef.setMandatory(true);
     propDefs.add(propDef);
     propDef = createPropertyDef(getActionPluginForActionType(parentActionTypeName).getActionExecutableLabel());
     List labelDefaultValues = new ArrayList();
     labelDefaultValues.add(actionLabel);
     propDef.setDefaultValueStrings(labelDefaultValues);
-    propDef.setMandatory(false);
+    propDef.setMandatory(true);
     propDefs.add(propDef);
 
     nodeTypeValue.setDeclaredPropertyDefinitionValues(propDefs);
     nodeTypeValue.setDeclaredChildNodeDefinitionValues(new ArrayList());
     ExtendedNodeTypeManager ntmanager = repositoryService_.getCurrentRepository().getNodeTypeManager();
+    if(isUpdate) ntmanager.registerNodeType(nodeTypeValue, ExtendedNodeTypeManager.REPLACE_IF_EXISTS);
     ntmanager.registerNodeType(nodeTypeValue, ExtendedNodeTypeManager.IGNORE_IF_EXISTS);
   }
 

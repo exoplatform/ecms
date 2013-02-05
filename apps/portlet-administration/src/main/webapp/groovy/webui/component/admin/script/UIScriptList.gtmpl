@@ -30,7 +30,7 @@
   	    for (node in uicomponent.getScriptList()) {
       %>
           <tr>
-            <td><div class="text"><%=node.getName()%></div></td>
+            <td><div class="text"><%=node.getLabel()%></div></td>
             <td><div class="text" rel="tooltip" data-placement="bottom" title="<%=node.getName()%>"><%=node.getName();%></div></td>
 			<td class="center">
 				<a class="actionIcon" onclick="<%=uicomponent.event("Edit", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIScriptList.tooltip.Edit")%>" ><i class="uiIconEditInfo"></i></a>

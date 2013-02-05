@@ -1353,7 +1353,7 @@
     </msg>
     <header>
       <scriptName>Name</scriptName>
-      <path>Path</path>
+      <path>Type</path>
       <baseVersion>Base Version</baseVersion>
       <action>Actions</action>
     </header>
@@ -1372,11 +1372,7 @@
       <ecmScriptForm>ECM Script</ecmScriptForm>
     </title>
   </uiECMScriptsPopup>
-  <UICBScriptsPopup>
-    <title>
-      <CBScriptForm>BC Script</CBScriptForm>
-    </title>
-  </UICBScriptsPopup>
+
   <UIScriptForm>
     <action>
       <Save>#{word.save}</Save>
@@ -1405,10 +1401,10 @@
   <UIScriptForm>
     <label>
       <selectVersion>Versions</selectVersion>
-      <scriptContent>Script Content</scriptContent>
-      <scriptName>Script Name</scriptName>
-      <enableVersion>is Enabled Version</enableVersion>
-      
+      <scriptContent>Content</scriptContent>
+      <scriptLabel>Name</scriptLabel>
+      <scriptName>Type</scriptName>
+      <enableVersion>Enabled Version</enableVersion>
     </label>
   </UIScriptForm>
   <!--
@@ -1416,17 +1412,14 @@
   #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm	 #
   ######################################################################################
   -->
-  <BCScriptPopupWindow>
-    <title>
-      <CBScriptForm>Add/Edit Script</CBScriptForm>
-    </title>
-  </BCScriptPopupWindow>
+ 
   <ecmScriptForm>
     <label>
       <selectVersion>Versions</selectVersion>
-      <scriptContent>Script Content</scriptContent>
-      <scriptName>Script Name</scriptName>
-      <enableVersion>is Enabled Version</enableVersion>
+      <scriptContent>Content</scriptContent>
+      <scriptLabel>Name</scriptLabel>
+      <scriptName>Type</scriptName>
+      <enableVersion>Enabled Version</enableVersion>
     </label>
   </ecmScriptForm>
   <!--

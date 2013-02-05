@@ -22,6 +22,8 @@ import java.util.List;
 
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeManager;
+import javax.jcr.nodetype.PropertyDefinition;
+import javax.jcr.version.OnParentVersionAction;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
@@ -68,7 +70,9 @@ public class UIActionTypeForm extends UIForm {
   final static public String FIELD_VARIABLES = "variables" ;
   public static final String ACTION_TYPE = "exo:scriptAction";
   
-  private boolean isEdit = false;
+  private String actionName_;
+  
+  private boolean isUpdate = false;
 
   public UIFormMultiValueInputSet uiFormMultiValue = null ;
 
@@ -118,14 +122,25 @@ public class UIActionTypeForm extends UIForm {
   }
   
   public void update(String actionName, String actionLabel) throws Exception {
-    isEdit = true;
+    isUpdate = true;
     ScriptServiceImpl scriptService = WCMCoreUtils.getService(ScriptServiceImpl.class);
     NodeTypeManager ntManager = WCMCoreUtils.getRepository().getNodeTypeManager();
     NodeType nodeType = ntManager.getNodeType(actionName);
+    actionName_ = actionName;
     String resourceName = scriptService.getResourceNameByNodeType(nodeType);
     getUIStringInput(FIELD_NAME).setValue(actionLabel);
-    getUIFormSelectBox(FIELD_SCRIPT).setOptions(getScriptOptions()).setValue(resourceName) ;
+    getUIFormSelectBox(FIELD_SCRIPT).setOptions(getScriptOptions()).setValue(resourceName);
+    List<String> valueList = new ArrayList<String>();
+    PropertyDefinition[] proDefs = nodeType.getPropertyDefinitions();
+    for(PropertyDefinition pro : proDefs) {
+      //Check if require type is STRING
+      if(pro.isProtected() || pro.isAutoCreated() || pro.isMultiple() || pro.isMandatory()) continue;
+      if(pro.getRequiredType() == 1 && pro.getOnParentVersion() == OnParentVersionAction.COPY) {
+        valueList.add(pro.getName());
+      }
+    }
     initMultiValuesField() ;
+    uiFormMultiValue.setValue(valueList);
   }
 
   static public class ChangeTypeActionListener extends EventListener<UIActionTypeForm> {
@@ -147,6 +162,7 @@ public class UIActionTypeForm extends UIForm {
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
       String actionLabel = uiForm.getUIStringInput(FIELD_NAME).getValue();
       String actionName = "exo:" + org.exoplatform.services.cms.impl.Utils.cleanString(actionLabel);
+      if(uiForm.isUpdate) actionName = uiForm.actionName_;
 
       List<String> variables = new ArrayList<String>();
       List values = uiForm.uiFormMultiValue.getValue();
@@ -155,16 +171,18 @@ public class UIActionTypeForm extends UIForm {
           variables.add((String)value) ;
         }
       }
-      for(NodeType nodeType : actionServiceContainer.getCreatedActionTypes(repository)) {
-        if(actionName.equals(nodeType.getName())) {
-          uiApp.addMessage(new ApplicationMessage("UIActionTypeForm.msg.action-exist", null)) ;          
-          return ;
+      if(!uiForm.isUpdate) {
+        for(NodeType nodeType : actionServiceContainer.getCreatedActionTypes(repository)) {
+          if(actionName.equals(nodeType.getName())) {
+            uiApp.addMessage(new ApplicationMessage("UIActionTypeForm.msg.action-exist", null, ApplicationMessage.WARNING)) ;          
+            return ;
+          }
         }
       }
       try {
         String script = uiForm.getUIFormSelectBox(FIELD_SCRIPT).getValue() ;
         actionServiceContainer.createActionType(actionName, ACTION_TYPE, script, actionLabel, variables,
-                                                false, repository);
+                                                false, uiForm.isUpdate);
         uiActionManager.refresh() ;
         uiForm.refresh() ;
         uiActionManager.removeChild(UIPopupWindow.class) ;

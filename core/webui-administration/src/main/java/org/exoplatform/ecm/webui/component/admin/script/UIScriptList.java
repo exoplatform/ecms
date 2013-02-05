@@ -29,6 +29,7 @@ import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.scripts.ScriptService;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -119,11 +120,9 @@ public class UIScriptList extends UIComponentDecorator {
         getApplicationComponent(ScriptService.class).getECMInterceptorScripts(WCMCoreUtils.getSystemSessionProvider());
     }
     for(Node scriptNode : scripts) {
-      String version = "" ;
-      if(scriptNode.isNodeType(Utils.MIX_VERSIONABLE) && !scriptNode.isNodeType(Utils.NT_FROZEN)){
-        version = scriptNode.getBaseVersion().getName();
-      }
-      scriptData.add(new ScriptData(scriptNode.getName(), scriptNode.getPath(), version)) ;
+      Node content = scriptNode.getNode(NodetypeConstant.JCR_CONTENT);
+      String scriptDescription = content.getProperty(NodetypeConstant.DC_DESCRIPTION).getValues()[0].getString();
+      scriptData.add(new ScriptData(scriptNode.getName(), scriptNode.getPath(), scriptDescription)) ;
     }
     return scriptData ;
   }
@@ -193,15 +192,15 @@ public class UIScriptList extends UIComponentDecorator {
   public static class ScriptData {
     private String name;
     private String path;
-    private String baseVersion;
+    private String label;
 
-    public ScriptData(String scriptName, String scriptParth, String version) {
-      name = scriptName;
-      path = scriptParth;
-      baseVersion = version;
+    public ScriptData(String scriptName, String scriptParth, String label) {
+      this.name = scriptName;
+      this.path = scriptParth;
+      this.label = label;
     }
     public String getName() { return name; }
     public String getPath() { return path; }
-    public String getBaseVersion() { return baseVersion; }
+    public String getLabel() { return label; }
   }
 }

@@ -54,11 +54,11 @@ public interface ActionServiceContainer {
    * Create NodeTypeValue is in kind of ActionType following action type name
    * @param actionTypeName        name of action type
    * @param parentActionTypeName  name of parent action
-   * @param executable            String value of execuable
+   * @param executable            String value of executable
    * @param actionLabel           Label of action type
    * @param variableNames         List name of variable
    * @param isMoveType            is moved or not
-   * @param repository            repository name
+   * @param isUpdate              True if the action type is updating
    * @throws Exception
    */
   public void createActionType(String actionTypeName,
@@ -67,7 +67,7 @@ public interface ActionServiceContainer {
                                String actionLabel,
                                List<String> variableNames,
                                boolean isMoveType,
-                               String repository) throws Exception;
+                               boolean isUpdate) throws Exception;
 
   /**
    * Get all created node with nodetype = "exo:action

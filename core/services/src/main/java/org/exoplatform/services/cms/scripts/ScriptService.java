@@ -110,6 +110,18 @@ public interface ScriptService {
   public void addScript(String name, String text, SessionProvider provider) throws Exception;
   
   /**
+   * This method will add script by giving the following params: name, text, description, provider
+   * @param name          String
+   *                      The name of script
+   * @param text          String
+   * @param description   String
+   * @param provider      SessionProvider
+   * @see                 SessionProvider
+   * @throws Exception
+   */
+  public void addScript(String name, String description, String text, SessionProvider provider) throws Exception;  
+  
+  /**
    * This method will remove script by giving the following params: name, text, provider
    * @param scriptPath    String
    *                      The path of script
