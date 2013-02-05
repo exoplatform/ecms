@@ -19,6 +19,7 @@ package org.exoplatform.ecm.webui.component.explorer;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -219,9 +220,24 @@ public class UIDocumentNodeList extends UIContainer {
    */
   public String getFileDate(Node file) throws Exception {
     String createdDate = this.getDatePropertyValue(file, NodetypeConstant.EXO_DATE_CREATED);
-    String modifiedDate = this.getDatePropertyValue(file, NodetypeConstant.EXO_DATE_MODIFIED);
-    return createdDate.equals(modifiedDate) || StringUtils.isEmpty(modifiedDate)? 
+    String modifiedDate = this.getDatePropertyValue(file, NodetypeConstant.EXO_LAST_MODIFIED_DATE);
+    return StringUtils.isEmpty(modifiedDate) || 
+            equalDates(file, NodetypeConstant.EXO_DATE_CREATED, NodetypeConstant.EXO_LAST_MODIFIED_DATE)? 
             getLabel("CreatedOn") + " " + createdDate : getLabel("Updated") + " " +  modifiedDate;
+  }
+  
+  private boolean equalDates(Node node, String p1, String p2) {
+    Calendar pr1 = null;
+    Calendar pr2 = null;
+    try {
+      pr1 = node.getProperty(p1).getDate();
+    } catch (Exception e) {}
+    try {
+      pr2 = node.getProperty(p2).getDate();
+    } catch (Exception e) {}
+    if ((pr1 == null) && (pr2 == null)) return true;
+    if ((pr1 == null) || (pr2 == null)) return false;
+    return Math.abs(pr1.getTimeInMillis() - pr2.getTimeInMillis()) < 1000;
   }
   
   public String getDatePropertyValue(Node node, String propertyName) throws Exception {

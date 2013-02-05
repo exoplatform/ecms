@@ -83,6 +83,8 @@ public class NodetypeConstant {
   public static final String EXO_DATE_CREATED                 = "exo:dateCreated";
 
   public static final String EXO_DATE_MODIFIED                = "exo:dateModified";
+  
+  public static final String EXO_LAST_MODIFIED_DATE = "exo:lastModifiedDate";
 
   public static final String EXO_DOCUMENT_FOLDER              = "exo:documentFolder";
 
