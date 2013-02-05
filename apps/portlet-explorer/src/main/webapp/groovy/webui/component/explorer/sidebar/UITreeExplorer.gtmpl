@@ -164,7 +164,7 @@
 	    }
 	    
 	    if(!uicomponent.isSymLink(node)) {		     
-	      if(!uicomponent.hasChildNode(node)) iconType = "Empty";				
+	      if(!uicomponent.hasChildNode(node)) iconType = "empty";				
 	    }
 	    def hiddenStyle = "";
 	    if (node.isNodeType("exo:hiddenable")) hiddenStyle = "color: #A0A0A0;";
@@ -174,10 +174,8 @@
 	    if (node.isLocked()) {
         println "<div class=\"IconLocked\"></div>";
 	    }
-	    println "    <div id=\"iconTreeExplorer" + treeNode.getNodePath4ID() + "\" isFile=\"" + node.isNodeType("nt:file") + "\" onclick=\"event.cancelBubble=true;" + expandLink + "\" objectId=\"" + org.exoplatform.services.cms.impl.Utils.getObjectId(treeNode.getPath()) + "\" workspacename=\"" + preferenceWS + "\" class=\"${iconClassLink}Icon16x16 default16x16Icon " + Utils.getNodeTypeIcon(node, "16x16Icon", iconType) + "\" " + ctMenu + ">" + strActs ;
-	    println "      <div class='NodeLabel'>" ;
-	    println "			   <a  onclick=\"event.cancelBubble=true;" + expandLink + "\" style='cursor: pointer;$hiddenStyle' rel=\"tooltip\" data-placement=\"bottom\" title=\"$treeNodeName $lockedLabel\">$treeNodeName</a>" ;
-	    println "      </div>" ; 
+	    println "    <div id=\"iconTreeExplorer" + treeNode.getNodePath4ID() + "\" isFile=\"" + node.isNodeType("nt:file") + "\" onclick=\"event.cancelBubble=true;" + expandLink + "\" objectId=\"" + org.exoplatform.services.cms.impl.Utils.getObjectId(treeNode.getPath()) + "\" workspacename=\"" + preferenceWS + Utils.getNodeTypeIcon(node, "16x16Icon", iconType) + "\" " + ctMenu + ">" + strActs ;
+	    println "		<a  onclick=\"event.cancelBubble=true;" + expandLink + "\" style='cursor: pointer;$hiddenStyle' rel=\"tooltip\" data-placement=\"bottom\" title=\"$treeNodeName $lockedLabel\"><i title=\"$treeNodeName\" class=\"uiIconFile  uiIcon${iconClassLink} uiIconNode\"></i>$treeNodeName</a>" ;
 	    println "    </div>" ; 
 	    println "  </div>" ; 
 	    if(treeNode.getChildrenSize() > 0) {
@@ -213,7 +211,7 @@
 			  	
 
   <div class="uiContentBox">
-	  <div class="UITreeExplorer" id="UITreeExplorer">
+	  <div class="uiTreeExplorer" id="UITreeExplorer">
 		  <div style="white-space: nowrap; -moz-user-select: none;">
 		    <div class="NodeGroup">
 		      <%
