@@ -88,6 +88,8 @@ public class NodetypeConstant {
   public static final String EXO_PRIVILEGEABLE                = "exo:privilegeable";
 
   public static final String EXO_TITLE                        = "exo:title";
+  
+  public static final String EXO_LANGUAGE                     = "exo:language";
 
   public static final String EXO_DATE_CREATED                 = "exo:dateCreated";
 

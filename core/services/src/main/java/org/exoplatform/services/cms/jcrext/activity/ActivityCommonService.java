@@ -22,6 +22,8 @@ import javax.jcr.RepositoryException;
 import javax.jcr.ValueFormatException;
 
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS
@@ -35,14 +37,15 @@ public class ActivityCommonService {
   private String acceptedNodeTypes;
   private String acceptedProperties;// = "{exo:summary}{exo:title}{exo:text}";
   private String acceptedFileProperties;
-  public static String NT_FILE                    = "nt:file";
-  public static String EDIT_ACTIVITY              = "ActivityNotify.event.PropertyUpdated";
-  public static String FILE_EDIT_ACTIVITY         = "FileActivityNotify.event.PropertyUpdated";
-  public static String FILE_REMOVE_ACTIVITY       = "FileActivityNotify.event.PropertyRemoved";
-  public static String FILE_ADD_ACTIVITY          = "FileActivityNotify.event.PropertyAdded";
+  public static String NT_FILE                       = "nt:file";
+  public static String EDIT_ACTIVITY                 = "ActivityNotify.event.PropertyUpdated";
+  public static String FILE_EDIT_ACTIVITY            = "FileActivityNotify.event.PropertyUpdated";
+  public static String FILE_PROPERTY_REMOVE_ACTIVITY = "FileActivityNotify.event.PropertyRemoved";
+  public static String FILE_ADD_ACTIVITY             = "FileActivityNotify.event.PropertyAdded";
+  public static String FILE_REMOVE_ACTIVITY          = "FileActivityNotify.event.FileRemoved";
   
-  public static String ATTACH_ADDED_ACTIVITY      = "ActivityNotify.event.AttachmentAdded";
-  public static String ATTACH_REMOVED_ACTIVITY    = "ActivityNotify.event.AttachmentRemoved";
+  public static String ATTACH_ADDED_ACTIVITY         = "ActivityNotify.event.AttachmentAdded";
+  public static String ATTACH_REMOVED_ACTIVITY       = "ActivityNotify.event.AttachmentRemoved";
   
   public static String NODE_CREATED_ACTIVITY      = "ActivityNotify.event.NodeCreated";
   public static String NODE_REMOVED_ACTIVITY      = "ActivityNotify.event.NodeRemoved";
@@ -99,6 +102,10 @@ public class ActivityCommonService {
     } catch (RepositoryException e) {
       return false;
     }
+  }
+  public boolean isDocumentNodeType(Node node) throws Exception {
+    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
+    return templateService.isManagedNodeType(node.getPrimaryNodeType().getName());
   }
   public boolean isAcceptedProperties(String propertyName) {
     return (acceptedProperties.indexOf("{" + propertyName + "}")>=0 || propertyName.startsWith("dc:"));

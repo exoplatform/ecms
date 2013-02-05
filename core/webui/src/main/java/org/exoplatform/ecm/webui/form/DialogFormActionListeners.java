@@ -20,6 +20,9 @@ import javax.jcr.Node;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
+import org.exoplatform.services.listener.ListenerService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
@@ -74,6 +77,17 @@ public class DialogFormActionListeners {
           uiForm.setDataRemoved(true);
         }
       }
+      //Broadcast the remove data event
+      Node node = uiForm.getNode();
+      ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
+      ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+      Node parent = node.getParent();
+      if (node.getPrimaryNodeType().isNodeType(ActivityCommonService.NT_FILE)) {        
+        if (activityService.isAcceptedNode(node) && !activityService.isDocumentNodeType(parent)) {
+          listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, parent, node);
+        }
+      }
+      
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
     }
   }

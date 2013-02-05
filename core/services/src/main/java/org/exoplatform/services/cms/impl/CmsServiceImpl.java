@@ -867,7 +867,8 @@ public class CmsServiceImpl implements CmsService {
         if(isMultiple) {
           node.setProperty(propertyName, new String[] {StringUtils.EMPTY});
         } else {
-          node.setProperty(propertyName, StringUtils.EMPTY);
+        	if(property.getValue() != null && !property.getValue().getString().equals(StringUtils.EMPTY))
+            node.setProperty(propertyName, StringUtils.EMPTY);
         }
       } else {
         if(isMultiple) {

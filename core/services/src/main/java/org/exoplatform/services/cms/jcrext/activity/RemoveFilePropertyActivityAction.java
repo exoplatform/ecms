@@ -53,7 +53,7 @@ public class RemoveFilePropertyActivityAction implements Action{
     //filter node type
     if (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
     //Notify to update activity
-      listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, nodeTemp, propertyName);    	
+      listenerService.broadcast(ActivityCommonService.FILE_PROPERTY_REMOVE_ACTIVITY, nodeTemp, propertyName);    	
     }
     return false;
   } 

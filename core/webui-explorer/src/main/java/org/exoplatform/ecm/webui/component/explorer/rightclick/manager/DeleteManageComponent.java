@@ -60,12 +60,14 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.relations.RelationsService;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
@@ -214,6 +216,15 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
           wcmComposer.updateContent(trashWorkspace, nodeUUID, new HashMap<String, String>());
         }
         wcmComposer.updateContents(parentWSpace, parentPath, new HashMap<String, String>());
+        //Broadcast the event when user move node to Trash
+        ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
+        ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+        Node parent = node.getParent();
+        if (node.getPrimaryNodeType().isNodeType(ActivityCommonService.NT_FILE)) {        
+          if (activityService.isAcceptedNode(node) && !activityService.isDocumentNodeType(parent)) {
+            listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, parent, node);
+          }
+        }
       }
   }
   }

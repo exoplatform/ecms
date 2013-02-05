@@ -45,7 +45,7 @@ public class RemoveFileActivityAction implements Action{
       Node parent = node.getParent();
       if (node.getPrimaryNodeType().isNodeType(ActivityCommonService.NT_FILE)) {        
         if (activityService.isAcceptedNode(node) && !isDocumentNodeType(parent)) {
-          listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, node, parent);
+          listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, parent, node);
         }
       }
     }
