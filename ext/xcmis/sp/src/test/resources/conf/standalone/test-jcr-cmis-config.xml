@@ -20,8 +20,8 @@
               <value-storage id="system"
                 class="org.exoplatform.services.jcr.impl.storage.value.fs.TreeFileValueStorage">
                 <properties>
-                  <property name="path"
-                    value="${gatein.test.tmp.dir}/jcr/values/ws" />
+                  <property name="path" value="${gatein.test.tmp.dir}/jcr/values/ws" />
+                   <property name="enabled" value="${gatein.jcr.storage.enabled:true}" />
                 </properties>
                 <filters>
                   <filter property-type="Binary" />
@@ -74,8 +74,8 @@
               <value-storage id="system"
                 class="org.exoplatform.services.jcr.impl.storage.value.fs.TreeFileValueStorage">
                 <properties>
-                  <property name="path"
-                    value="${gatein.test.tmp.dir}/jcr/values/ws1" />
+                  <property name="path" value="${gatein.test.tmp.dir}/jcr/values/ws1" />
+                   <property name="enabled" value="${gatein.jcr.storage.enabled:true}" />
                 </properties>
                 <filters>
                   <filter property-type="Binary" />
