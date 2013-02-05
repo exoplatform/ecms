@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.cms.jcrext.activity;
 
+import javax.jcr.Item;
 import javax.jcr.Node;
 import javax.jcr.Property;
 
@@ -43,8 +44,15 @@ public class EditPropertyActivityAction implements Action{
   public boolean execute(Context context) throws Exception {
     Object item = context.get("currentItem");
     Node node = (item instanceof Property) ?((Property)item).getParent():(Node)item;
-    Node nodeTemp = node;
+    Node nodeTemp = activityService.isSpecialContentNodeType((Item) item);
     String propertyName = (item instanceof Property) ?((Property)item).getName():((Node)item).getName();
+    if (nodeTemp !=null) {
+      if (!activityService.isCreating(node)) { 
+        //Consider this special case as changing of content 
+        listenerService.broadcast(ActivityCommonService.EDIT_ACTIVITY, nodeTemp, "exo:text");
+      }
+    }
+    nodeTemp = node;
     // Do not create / update activity for bellow cases
     if (!activityService.isAcceptedProperties(propertyName)) return false;
     if (ConversationState.getCurrent() == null) return false;

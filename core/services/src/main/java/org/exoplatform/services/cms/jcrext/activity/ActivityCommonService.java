@@ -16,10 +16,9 @@
  */
 package org.exoplatform.services.cms.jcrext.activity;
 
+import javax.jcr.Item;
 import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
-import javax.jcr.ValueFormatException;
 
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -112,5 +111,24 @@ public class ActivityCommonService {
   }
   public boolean isAcceptedFileProperties(String propertyName) {
     return (acceptedFileProperties.indexOf("{" + propertyName + "}")>=0 || propertyName.startsWith("dc:"));  
+  }
+  
+  public Node isSpecialContentNodeType(Item item) {
+    String webSpecialContentPath = "default.html/jcr:content/jcr:data";
+    String path;
+    try {
+      path = item.getPath();
+    } catch (RepositoryException e1) {
+      return null;
+    }
+    if ( path.endsWith(webSpecialContentPath)) {
+      try {
+        Node node = (Node) item.getParent().getParent().getParent();
+        if (node.isNodeType("exo:webContent")) return node;
+      }catch (Exception e) {
+        return null;
+      }
+    }
+    return null;
   }
 }
