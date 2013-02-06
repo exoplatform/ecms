@@ -208,6 +208,9 @@
 									  String thumbnailImage = "/" + portalName + "/" + restContextName + "/thumbnailImage/custom/116x116/" + repository + "/" + preferenceWS + encodedPath;
 									%>
 									<div class="loadingProgressIcon" style="display: block;">
+											<%if(isLocked) {%>
+                        <div class="IconLocked"></div>
+                      <%}%>
 											<%if(uicomponent.isSymLink(data)) {%>
 												<div class="Link"></div>
 											<%}%>
