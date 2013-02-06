@@ -218,7 +218,7 @@
 											<div class="bgThumbnailImage"><img src="$thumbnailImage" retryCount="0"  onerror='loadImageOnError(this);' onload="if (this.parentNode) {this.parentNode.parentNode.style.backgroundImage = 'none'; this.parentNode.parentNode.style.width = 'auto'; this.parentNode.parentNode.style.height = 'auto';} this.style.display = 'block';" /></div>
 									</div>
 							    
-							    <div style="display: none;" class="uiIcon64x64FileDefault <%=Utils.getNodeTypeIcon(data, "uiIcon64x64")%>">
+							    <div style="display: none;" class="<%=Utils.getNodeTypeIcon(data, "uiIcon64x64")%>">
                       <%if(isLocked) {%>
                         <div class="IconLocked"></div>
                       <%}%>

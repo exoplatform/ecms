@@ -291,7 +291,7 @@
 	              isFile="<%=data.isNodeType("nt:file")%>">
 			      $strActs
 		        <div class="columnIcon" style="width: 20px;">
-						  <div rel="tooltip" data-placement="bottom" title="$title" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(data, "16x16Icon")%>">
+						  <div rel="tooltip" data-placement="bottom" title="$title" class="<%=Utils.getNodeTypeIcon(data, "uiIcon16x16")%>">
                 <%if(isLocked) {%>
                   <div class="IconLocked"></div>
                 <%}%>

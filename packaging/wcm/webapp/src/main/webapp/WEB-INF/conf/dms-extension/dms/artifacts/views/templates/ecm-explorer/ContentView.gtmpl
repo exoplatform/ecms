@@ -352,7 +352,7 @@
                  objectId="<%=org.exoplatform.services.cms.impl.Utils.getObjectId(nodePath)%>" 
                  >$strActs
               <div class="columnIcon" style="width: 20px;">
-                <div rel="tooltip" data-placement="bottom" title="$name" class="Icon16x16 default16x16Icon <%=Utils.getNodeTypeIcon(data, "16x16Icon")%>">
+                <div rel="tooltip" data-placement="bottom" title="$name" class="<%=Utils.getNodeTypeIcon(data, "uiIcon16x16")%>">
                   <%if(isLocked) {%>
                     <div class="IconLocked"></div>
                   <%}%>
