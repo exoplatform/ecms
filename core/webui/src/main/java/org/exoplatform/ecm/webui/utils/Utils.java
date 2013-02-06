@@ -44,7 +44,6 @@ import javax.jcr.nodetype.NodeTypeManager;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.definition.PortalContainerConfig;
@@ -55,7 +54,6 @@ import org.exoplatform.portal.config.UserPortalConfig;
 import org.exoplatform.portal.resource.SkinConfig;
 import org.exoplatform.portal.resource.SkinService;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.link.LinkManager;
@@ -84,10 +82,6 @@ import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
-import java.util.Iterator;
-import org.exoplatform.services.resources.LocaleConfig;
-import org.exoplatform.services.resources.LocaleConfigService;
-import org.exoplatform.webui.core.model.SelectItemOption;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh
@@ -370,19 +364,10 @@ public class Utils {
     if (node == null)
       return "";
     
+    // Primary node type
     String nodeType = node.getPrimaryNodeType().getName();
     
-    // Default css class
-    String defaultCssClass;
-    if (nodeType.equals(NT_UNSTRUCTURED) || nodeType.equals(NT_FOLDER)) {
-      defaultCssClass = "Folder";
-    } else if (node.isNodeType(NT_FILE)) {
-      defaultCssClass = "File";
-    } else {
-      defaultCssClass = nodeType;
-    }
-    defaultCssClass += "Default";
-    
+    // Get real node if node is symlink
     if (node.isNodeType(EXO_SYMLINK)) {
       LinkManager linkManager = Util.getUIPortal().getApplicationComponent(
           LinkManager.class);
@@ -395,19 +380,24 @@ public class Utils {
         return "";
       }
     }
+    
     if (node.isNodeType(EXO_TRASH_FOLDER)) {
       nodeType = EXO_TRASH_FOLDER;
     }
     if (node.isNodeType(EXO_FAVOURITE_FOLDER))
       nodeType = EXO_FAVOURITE_FOLDER;
-    if (nodeType.equals(NT_UNSTRUCTURED) || nodeType.equals(NT_FOLDER)) {
-      for (String specificFolder : SPECIFIC_FOLDERS) {
-        if (node.isNodeType(specificFolder)) {
-          nodeType = specificFolder;
-          break;
-        }
-      }
+    
+    // Default css class
+    String defaultCssClass;
+    if (node.isNodeType(NT_UNSTRUCTURED) || node.isNodeType(NT_FOLDER)) {
+      defaultCssClass = "Folder";
+    } else if (node.isNodeType(NT_FILE)) {
+      defaultCssClass = "File";
+    } else {
+      defaultCssClass = nodeType;
     }
+    defaultCssClass += "Default";
+
     nodeType = nodeType.replace(':', '_');
     
     str.append(appended);
