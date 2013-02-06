@@ -283,7 +283,7 @@ public class UIDocumentNodeList extends UIContainer {
   }
   
   public String getAuthorName(Node file) throws Exception {
-    String userName = getAncestorOfType(UIDocumentInfo.class).getPropertyValue(file, NodetypeConstant.EXO_OWNER);
+    String userName = getAncestorOfType(UIDocumentInfo.class).getPropertyValue(file, NodetypeConstant.EXO_LAST_MODIFIER);
     if (IdentityConstants.SYSTEM.equals(userName)) {
       return "";
     }
