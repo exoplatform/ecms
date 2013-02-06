@@ -36,14 +36,17 @@ import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.seo.SEOService;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.gatein.pc.api.PortletInvoker;
 import org.gatein.pc.api.info.PortletInfo;
@@ -160,6 +163,15 @@ public class TrashServiceImpl implements TrashService {
           + fixRestorePath(nodeName);
       if (trashSession.getWorkspace().getName().equals(
           nodeSession.getWorkspace().getName())) {
+        if (node.getPrimaryNodeType().getName().equals((NodetypeConstant.NT_FILE))) {
+          Node parent = node.getParent();
+          ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+          ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
+          if (listenerService ==null || activityService == null) return;
+          if (activityService.isAcceptedNode(parent) && !activityService.isCreating(parent)) {
+            listenerService.broadcast(ActivityCommonService.ATTACH_REMOVED_ACTIVITY, parent, node);
+          }
+        }
         trashSession.getWorkspace().move(node.getPath(),
             actualTrashPath);
       } else {
@@ -182,6 +194,15 @@ public class TrashServiceImpl implements TrashService {
                   tag.setProperty(EXO_TOTAL, total + 1);
                   tag.getSession().save();
             }
+        }
+        if (node.getPrimaryNodeType().getName().equals((NodetypeConstant.NT_FILE))) {
+          Node parent = node.getParent();
+          ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+          ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
+          if (listenerService ==null || activityService == null) return;
+          if (activityService.isAcceptedNode(parent) && !activityService.isCreating(parent)) {
+            listenerService.broadcast(ActivityCommonService.ATTACH_REMOVED_ACTIVITY, parent, node);
+          }
         }
         node.remove();
       }

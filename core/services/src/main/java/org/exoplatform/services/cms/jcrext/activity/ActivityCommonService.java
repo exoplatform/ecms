@@ -38,6 +38,7 @@ public class ActivityCommonService {
   private String acceptedProperties;// = "{exo:summary}{exo:title}{exo:text}";
   private String acceptedFileProperties;
   public static String NT_FILE                       = "nt:file";
+  public static String WEB_CONTENT                   = "exo:webContent";
   public static String EDIT_ACTIVITY                 = "ActivityNotify.event.PropertyUpdated";
   public static String FILE_EDIT_ACTIVITY            = "FileActivityNotify.event.PropertyUpdated";
   public static String FILE_PROPERTY_REMOVE_ACTIVITY = "FileActivityNotify.event.PropertyRemoved";
@@ -132,9 +133,10 @@ public class ActivityCommonService {
       return null;
     }
     if ( path.endsWith(webSpecialContentPath)) {
+      System.out.println(path);
       try {
         Node node = (Node) item.getParent().getParent().getParent();
-        if (node.isNodeType("exo:webContent")) return node;
+        if (node.isNodeType(WEB_CONTENT)) return node;
       }catch (Exception e) {
         return null;
       }

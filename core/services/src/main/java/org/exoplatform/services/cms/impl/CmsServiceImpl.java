@@ -922,7 +922,7 @@ public class CmsServiceImpl implements CmsService {
             node.setProperty(propertyName, new ByteArrayInputStream((byte[]) value));
           }
         } else if (value instanceof String) {
-          if(!property.getValue().getStream().equals(new ByteArrayInputStream(((String)value).getBytes()))) {
+          if(!property.getValue().getString().equals(value)) {
             node.setProperty(propertyName, value.toString(), PropertyType.BINARY);
           }
         }
