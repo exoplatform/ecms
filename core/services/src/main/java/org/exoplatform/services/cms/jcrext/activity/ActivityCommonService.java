@@ -133,7 +133,6 @@ public class ActivityCommonService {
       return null;
     }
     if ( path.endsWith(webSpecialContentPath)) {
-      System.out.println(path);
       try {
         Node node = (Node) item.getParent().getParent().getParent();
         if (node.isNodeType(WEB_CONTENT)) return node;
