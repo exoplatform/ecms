@@ -960,10 +960,7 @@
               <org.apache.commons.logging.simplelog.log.org.exoplatform>debug</org.apache.commons.logging.simplelog.log.org.exoplatform>
               <org.apache.commons.logging.simplelog.log.net.hibernate>warn</org.apache.commons.logging.simplelog.log.net.hibernate>
               <java.naming.factory.initial>org.exoplatform.services.naming.SimpleContextFactory</java.naming.factory.initial>
-              <gatein.test.tmp.dir>${project.build.directory}</gatein.test.tmp.dir>
-              <com.arjuna.ats.arjuna.objectstore.objectStoreDir>${project.build.directory}</com.arjuna.ats.arjuna.objectstore.objectStoreDir>
               <exo.profiles>hsqldb</exo.profiles>
-              <gatein.test.output.path>${project.build.directory}</gatein.test.output.path>
             </systemPropertyVariables>
           </configuration>
         </plugin>
