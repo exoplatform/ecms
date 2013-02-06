@@ -246,7 +246,7 @@
 	  var textElements = new Array();
 	  var elements = this.getElementsOfRenamedNode();
 	  for (var i=0; i< elements.length; i++) {
-	    textElements.push(gj(elements[i]).find("span.NodeName:first")[0]);
+	    textElements.push(gj(elements[i]).find("span.nodeName:first")[0]);
 	  }
 	  return textElements;
 	};
@@ -292,7 +292,7 @@
 	Rename.prototype.getRightClickedElement = function() {
 	  // Get offset of resize bar.
 	  var workingArea = document.getElementById('UIWorkingArea');
-	  var resizeSideBar = gj(workingArea).find("div.ResizeSideBar:first")[0];
+	  var resizeSideBar = gj(workingArea).find("div.resizeBar:first")[0];
 	  var resizeSideBarOffset = gj(resizeSideBar).offset();
 	
 	  // Get offset of context menu.
