@@ -88,7 +88,7 @@ public class UISelectDocumentForm extends UIContainer {
   }
 
   public String getTemplateIconStylesheet(String contentType) {
-    return contentType.replace(":", "_") + "70x80Icon";
+    return contentType.replace(":", "_");
   }
 
   public List<?> getChildrenList() throws Exception {
