@@ -25,11 +25,11 @@
       </value-param>
       <value-param>
         <name>acceptedProperties</name>
-        <value>{dc:title}{dc:description}{dc:creator}{dc:source}{exo:summary}{exo:title}{exo:language}{jcr:data}{exo:text}</value>
+        <value>{dc:title}{dc:description}{dc:creator}{dc:source}{exo:summary}{exo:title}{exo:language}{exo:text}</value>
       </value-param>
       <value-param>
         <name>acceptedFileProperties</name>
-        <value>{dc:title}{dc:description}{dc:creator}{dc:source}</value>
+        <value>{dc:title}{dc:description}{dc:creator}{dc:source}{exo:summary}{exo:title}{exo:language}{jcr:data}</value>
       </value-param>
     </init-params>
   </component>

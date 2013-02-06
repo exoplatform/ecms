@@ -33,10 +33,10 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  *          vinh_nguyen@exoplatform.com
  * 11 Jan 2013  
  */
-public class EditPropertyActivityAction implements Action{
+public class EditFilePropertyActivityAction implements Action{
   private ListenerService listenerService=null;
   private ActivityCommonService activityService = null;
-  public EditPropertyActivityAction() {
+  public EditFilePropertyActivityAction() {
     listenerService =  WCMCoreUtils.getService(ListenerService.class);
     activityService = WCMCoreUtils.getService(ActivityCommonService.class);
   }
@@ -44,27 +44,18 @@ public class EditPropertyActivityAction implements Action{
   public boolean execute(Context context) throws Exception {
     Object item = context.get("currentItem");
     Node node = (item instanceof Property) ?((Property)item).getParent():(Node)item;
-    Node nodeTemp = activityService.isSpecialContentNodeType((Item) item);
-    String propertyName = (item instanceof Property) ?((Property)item).getName():((Node)item).getName();
-    if (nodeTemp !=null) {
-      if (!activityService.isCreating(node)) { 
-        //Consider this special case as changing of content 
-        listenerService.broadcast(ActivityCommonService.EDIT_ACTIVITY, nodeTemp, "exo:text");
-      }
-    }
-    nodeTemp = node;
+    Node nodeTemp = node;
+    String propertyName = (item instanceof Property) ?((Property)item).getName():((Node)item).getName();    
     // Do not create / update activity for bellow cases
-    if (!activityService.isAcceptedProperties(propertyName)) return false;
-    if (ConversationState.getCurrent() == null) return false;
-    
+    if (!activityService.isAcceptedFileProperties(propertyName)) return false;
+    if (ConversationState.getCurrent() == null) return false;    
     if(node.isNodeType("nt:resource")) node = node.getParent();
-    //filter node type
-    if (activityService.isAcceptedNode(node)) {
-      //Notify to update activity
-      if (!activityService.isCreating(node)) {
-        listenerService.broadcast(ActivityCommonService.EDIT_ACTIVITY, node, propertyName);
-      }      
-    }
+    if(!node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) return false;
+    
+    //Notify to update activity
+    if(activityService.isBroadcastNTFileEvents(node)) {
+      listenerService.broadcast(ActivityCommonService.FILE_EDIT_ACTIVITY, nodeTemp, propertyName);
+    }    
     return false;
   }
 

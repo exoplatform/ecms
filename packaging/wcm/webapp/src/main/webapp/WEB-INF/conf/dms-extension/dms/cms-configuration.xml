@@ -9,15 +9,15 @@
     <init-params>
       <value-param>
         <name>acceptedNodeTypes</name>
-        <value>{nt:file}{exo:accessibleMedia}{exo:article}{exo:contact_us}{exo:event}{exo:htmlFile}{rma:filePlan}{exo:webContent}{kfx:document}{exo:pictureOnHeadWebcontent}{exo:podcast}{exo:sample}{exo:link}{exo:product}</value>
+        <value>{exo:accessibleMedia}{exo:article}{exo:contact_us}{exo:event}{exo:htmlFile}{rma:filePlan}{exo:webContent}{kfx:document}{exo:pictureOnHeadWebcontent}{exo:podcast}{exo:sample}{exo:link}{exo:product}</value>
       </value-param>
       <value-param>
         <name>acceptedProperties</name>
-        <value>{dc:title}{dc:description}{dc:creator}{dc:source}{exo:summary}{exo:title}{exo:language}{jcr:data}{exo:text}</value>
+        <value>{dc:title}{dc:description}{dc:creator}{dc:source}{exo:summary}{exo:title}{exo:text}</value>
       </value-param>
       <value-param>
         <name>acceptedFileProperties</name>
-        <value>{dc:title}{dc:description}{dc:creator}{dc:source}</value>
+        <value>{dc:title}{dc:description}{dc:creator}{dc:source}{exo:summary}{exo:title}{exo:language}{jcr:data}</value>
       </value-param>
     </init-params>
   </component>

@@ -43,6 +43,8 @@ public class ActivityCommonService {
   public static String FILE_PROPERTY_REMOVE_ACTIVITY = "FileActivityNotify.event.PropertyRemoved";
   public static String FILE_ADD_ACTIVITY             = "FileActivityNotify.event.PropertyAdded";
   public static String FILE_REMOVE_ACTIVITY          = "FileActivityNotify.event.FileRemoved";
+  public static String FILE_CREATED_ACTIVITY         = "ActivityNotify.event.FileCreated";
+  
   
   public static String ATTACH_ADDED_ACTIVITY         = "ActivityNotify.event.AttachmentAdded";
   public static String ATTACH_REMOVED_ACTIVITY       = "ActivityNotify.event.AttachmentRemoved";
@@ -50,9 +52,7 @@ public class ActivityCommonService {
   public static String NODE_CREATED_ACTIVITY      = "ActivityNotify.event.NodeCreated";
   public static String NODE_REMOVED_ACTIVITY      = "ActivityNotify.event.NodeRemoved";
   public static String NODE_MOVED_ACTIVITY        = "ActivityNotify.event.NodeMoved";
-  public static String NODE_REVISION_CHANGED      = "ActivityNotify.event.RevisionChanged";
-  
-  public static String FILE_CREATED_ACTIVITY      = "ActivityNotify.event.FileCreated";
+  public static String NODE_REVISION_CHANGED      = "ActivityNotify.event.RevisionChanged";  
   
   public static String CATEGORY_ADDED_ACTIVITY    = "ActivityNotify.event.CategoryAdded";
   public static String CATEGORY_REMOVED_ACTIVITY  = "ActivityNotify.event.CategoryRemoved";

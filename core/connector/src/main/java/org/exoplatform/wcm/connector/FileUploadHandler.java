@@ -363,7 +363,7 @@ public class FileUploadHandler {
     WCMPublicationService wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);    
     wcmPublicationService.updateLifecyleOnChangeContent(file, siteName, userId);
    
-    if (!isDocumentNodeType(parent) && activityService.isAcceptedNode(file)) {
+    if (activityService.isBroadcastNTFileEvents(file)) {
       listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, file);
     }
     file.getSession().save();

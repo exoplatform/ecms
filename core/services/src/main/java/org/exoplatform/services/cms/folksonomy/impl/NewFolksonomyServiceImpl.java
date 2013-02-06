@@ -49,6 +49,7 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
 
@@ -161,7 +162,9 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   private void broadcastActivityTag(Node documentNode, String tagValue ) {
     if (listenerService!=null && activityService !=null) {
       try {
-        if (activityService.isAcceptedNode(documentNode)) {
+        if (activityService.isAcceptedNode(documentNode) || 
+        		(documentNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) && 
+        				activityService.isBroadcastNTFileEvents(documentNode))) {
           listenerService.broadcast(ActivityCommonService.TAG_ADDED_ACTIVITY, documentNode, tagValue);
         }
       } catch (Exception e) {
@@ -457,7 +460,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     parentNode.getSession().save();
     if (listenerService!=null && activityService!=null) {
       try {
-        if (activityService.isAcceptedNode(tagNode)) {
+        if (activityService.isAcceptedNode(tagNode) || (tagNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) &&
+        		activityService.isBroadcastNTFileEvents(tagNode))) {
           listenerService.broadcast(ActivityCommonService.TAG_REMOVED_ACTIVITY, tagNode, tagNode.getName());
         }
       } catch (Exception e) {
@@ -510,7 +514,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     }
     if (listenerService!=null && activityService!=null) {
       try {
-        if (activityService.isAcceptedNode(document)) {
+        if (activityService.isAcceptedNode(document) || (document.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) &&
+        		activityService.isBroadcastNTFileEvents(document))) {
           listenerService.broadcast(ActivityCommonService.TAG_REMOVED_ACTIVITY, document, removedTags.toString());
         }
       } catch (Exception e) {

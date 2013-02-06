@@ -35,11 +35,13 @@ import org.exoplatform.services.cms.comments.CommentsService;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.impl.core.nodetype.registration.CNDParser.nodeattribute_return;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.organization.User;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 
@@ -150,7 +152,8 @@ public class CommentsServiceImpl implements CommentsService {
       systemSession.save();
       if (listenerService!=null) {
         try {
-          if (activityService.isAcceptedNode(document)) {
+          if (activityService.isAcceptedNode(document) || (document.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) 
+          		&& activityService.isBroadcastNTFileEvents(document))) {
             listenerService.broadcast(ActivityCommonService.COMMENT_ADDED_ACTIVITY, document, newComment);
           }
         } catch (Exception e) {
@@ -181,7 +184,9 @@ public class CommentsServiceImpl implements CommentsService {
     Node documentNode = commentNode.getParent().getParent();
     if (listenerService!=null && activityService!=null) {
       try {
-        if (activityService.isAcceptedNode(documentNode)) {
+        if (activityService.isAcceptedNode(documentNode) || 
+        		(documentNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) && 
+        				activityService.isBroadcastNTFileEvents(documentNode))) {
           listenerService.broadcast(ActivityCommonService.COMMENT_UPDATED_ACTIVITY, documentNode, commentNode);
         }
       } catch (Exception e) {
@@ -204,11 +209,14 @@ public class CommentsServiceImpl implements CommentsService {
       activityID = null;
     }
     commentNode.remove();
-    document.save();
+    document.save();    
     if (listenerService!=null && activityID !=null && activityService !=null) {
+    	Node parentNode = document.getParent();
       try {
-        if (activityService.isAcceptedNode(document.getParent())) {
-          listenerService.broadcast(ActivityCommonService.COMMENT_REMOVED_ACTIVITY, document.getParent(), activityID);
+        if (activityService.isAcceptedNode(parentNode) || 
+        		(parentNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) && 
+        				activityService.isBroadcastNTFileEvents(parentNode))) {
+          listenerService.broadcast(ActivityCommonService.COMMENT_REMOVED_ACTIVITY, parentNode, activityID);
         }
       } catch (Exception e) {
         if (LOG.isErrorEnabled()) {

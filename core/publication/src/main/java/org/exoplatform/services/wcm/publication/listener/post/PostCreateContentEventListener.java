@@ -30,6 +30,7 @@ import org.exoplatform.services.listener.Listener;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.core.WebSchemaConfigService;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
@@ -129,7 +130,8 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
     //Broadcast event to activity only for this condition
       if (activityService.isAcceptedNode(currentNode)) {
         listenerService.broadcast(ActivityCommonService.NODE_CREATED_ACTIVITY, null, currentNode);
-      }
+      } else if(currentNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE))
+      	listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, currentNode);
     }
   }
 }

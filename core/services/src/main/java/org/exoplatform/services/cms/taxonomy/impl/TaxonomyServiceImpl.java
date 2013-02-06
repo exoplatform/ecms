@@ -60,6 +60,7 @@ import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
 
@@ -491,7 +492,8 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
         linkManager_.createLink(categoryNode, TAXONOMY_LINK, node, linkName);
         if (listenerService!=null) {
           try {
-            if (activityService.isAcceptedNode(node)) {
+            if (activityService.isAcceptedNode(node) || (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) &&
+            		activityService.isBroadcastNTFileEvents(node))) {
               listenerService.broadcast(ActivityCommonService.CATEGORY_ADDED_ACTIVITY, node, categoryName);
             }
           } catch (Exception e) {
@@ -592,7 +594,8 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       node.getSession().save();
       if (listenerService!=null) {
         try {
-          if (activityService.isAcceptedNode(node)) {
+          if (activityService.isAcceptedNode(node) || (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) &&
+          		activityService.isBroadcastNTFileEvents(node))) {
             listenerService.broadcast(ActivityCommonService.CATEGORY_REMOVED_ACTIVITY, node, categoryName);
           }
         } catch (Exception e) {
