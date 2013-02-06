@@ -12,7 +12,7 @@
 		
 		<!-- 1 template-->
 		<div class="itemDocumentListView">
-			<i class="uiIcon24x24FileDefault uiIcon24x24$cssClass" onclick="$actionLink"></i>
+			<i class="uiIcon24x24Template$cssClass" onclick="$actionLink"></i>
 			<a href="javascript:void(0);" onclick="$actionLink">$label</a>
 		</div>
 		<%

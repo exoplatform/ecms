@@ -13,7 +13,7 @@
 		<!-- 1 template-->
 		<div class="templateBox" onclick="$actionLink">
 			<div class="templateIconContainer">
-				<i rel="tooltip" data-placement="bottom" title="$label" class="uiIcon64x64FileDefault uiIcon64x64$cssClass"></i>
+				<i rel="tooltip" data-placement="bottom" title="$label" class="uiIcon64x64Template$cssClass"></i>
 			</div>
 			<div class="templateLabel" >
 				<a href="javascript:void(0);">$label</a>
