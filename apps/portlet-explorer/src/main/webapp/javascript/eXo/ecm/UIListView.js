@@ -1041,6 +1041,12 @@
     ListView.prototype.loadEffectedWidthColumn = function() {
       var objResizeClazz = eXo.ecm.UIListView.objRowClazz;
       var root = document.getElementById("UIDocumentWorkspace");
+	  var workingArea = document.getElementById("UIWorkingArea");
+	  var leftContainer = document.getElementById("LeftContainer");
+	  var dynamicWidth = 0;
+	  if (leftContainer) {
+	    dynamicWidth = workingArea.offsetWidth - leftContainer.offsetWidth - 6 ;
+	  }
       var listGrid = gj(root).find("div.UIListGrid:first")[0];
       root.style.overflow = "auto";
       var rightContainer = gj(listGrid).parents(".RightContainer:first")[0];
@@ -1058,6 +1064,14 @@
       });
       eXo.ecm.ECMUtils.documentContainer_OnResize = function(){
         eXo.ecm.ECMUtils.updateListGridWidth();
+        var breadcrumb = gj('#FileViewBreadcrumb');
+        if (breadcrumb) {
+          breadcrumb.width(breadcrumb.parent().width()-2);
+        }        
+        var menubar = gj('div.MenuBar');
+        if (menubar) {
+        	menubar.width(gj("div#UIActionBar").width() - 120);
+        }
       }
       //update width of UIListGrid
       eXo.ecm.ECMUtils.updateListGridWidth();  

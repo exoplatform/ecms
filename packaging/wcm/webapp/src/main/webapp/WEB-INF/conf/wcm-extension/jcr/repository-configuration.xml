@@ -39,6 +39,7 @@
               <value-storage id="wcm-system" class="org.exoplatform.services.jcr.impl.storage.value.fs.TreeFileValueStorage">
                 <properties>
                   <property name="path" value="${gatein.jcr.storage.data.dir}/wcm-system${container.name.suffix}" />
+                   <property name="enabled" value="${gatein.jcr.storage.enabled:true}" />
                 </properties>
                 <filters>
                   <filter property-type="Binary" />

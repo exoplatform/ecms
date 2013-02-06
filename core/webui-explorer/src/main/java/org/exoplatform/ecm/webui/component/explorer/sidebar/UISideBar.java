@@ -22,12 +22,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.jcr.Node;
+
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
 import org.exoplatform.ecm.webui.component.explorer.UIJcrExplorerContainer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
+import org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar;
+import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
@@ -115,15 +121,23 @@ public class UISideBar extends UIContainer {
     }
   }
 
-  public String getCurrentComp() {
-    if(currentComp == null || currentComp.length() == 0)
+  public String getCurrentComp() throws Exception {
+    if(currentComp == null || currentComp.length() == 0) {
       currentComp = getChild(UITreeExplorer.class).getId();
+    }
+    if (isHideExplorerPanel() && getChild(UITreeExplorer.class).getId().equals(currentComp)) {
+      currentComp = getChild(UITagExplorer.class).getId();
+    }
     return currentComp;
   }
 
-  public String getSelectedComp() {
-    if(selectedComp == null || selectedComp.length() == 0)
+  public String getSelectedComp() throws Exception {
+    if(selectedComp == null || selectedComp.length() == 0) {
       selectedComp = "Explorer";
+    }
+    if (isHideExplorerPanel() && "Explorer".equals(selectedComp)) {
+      selectedComp = "TagExplorer";
+    }
     return selectedComp;
   }
 
@@ -213,6 +227,22 @@ public class UISideBar extends UIContainer {
 
   public void unregister(UIAbstractManagerComponent component) {
     managers.remove(component);
+  }
+  
+  public boolean isRenderComponent(String actionName) throws Exception {
+    if ("Explorer".equals(actionName)) {
+      return !isHideExplorerPanel();
+    }
+    return true;
+  }
+  
+  private boolean isHideExplorerPanel() throws Exception {
+    UIAddressBar uiAddress = this.getAncestorOfType(UIJCRExplorer.class).
+    findFirstComponentOfType(UIAddressBar.class);
+    String viewName = uiAddress.getSelectedViewName();
+    Node viewNode = WCMCoreUtils.getService(ManageViewService.class).getViewByName(
+                                 viewName, WCMCoreUtils.getSystemSessionProvider());
+    return viewNode.getProperty(NodetypeConstant.EXO_HIDE_EXPLORER_PANEL).getBoolean();
   }
 
 }

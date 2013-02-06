@@ -93,10 +93,12 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
   public void activate() {
     try {
       UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
-      node_ = NodeLocation.getNodeLocationByNode(uiExplorer.getCurrentNode());
+      if (node_ == null) {
+        node_ = NodeLocation.getNodeLocationByNode(uiExplorer.getCurrentNode());
+      }
       rootVersion_ = new VersionNode(NodeLocation.getNodeByLocation(node_)
-                                               .getVersionHistory()
-                                               .getRootVersion(), uiExplorer.getSession());
+                                                 .getVersionHistory()
+                                                 .getRootVersion(), uiExplorer.getSession());
       curentVersion_ = rootVersion_;
       getChild(UIViewVersion.class).update();
     } catch (Exception e) {
@@ -109,8 +111,13 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
   public void deActivate() {}
 
   public VersionNode getCurrentVersionNode() { return curentVersion_ ;}
+  
   public Node getCurrentNode() {
     return NodeLocation.getNodeByLocation(node_);
+  }
+  
+  public void setCurrentNode(Node node) {
+    node_ = NodeLocation.getNodeLocationByNode(node);
   }
 
   public boolean isViewVersion() {

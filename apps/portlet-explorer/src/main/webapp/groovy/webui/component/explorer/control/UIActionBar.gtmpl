@@ -58,7 +58,8 @@
 <% uiform.begin() %>
 <div class="UIActionBar $actionBarStyle" id="$uicomponent.id">
 	<div class="UIHorizontalTabs">
-		<div class="TabsContainer">
+	  <div id="ActionMenuPlaceHolder" class="FL"><span></span></div>
+		<div class="TabsContainer" id="UIActionBarTabsContainer">
 		  <div $displayTabContainer class="MainTabsContainer ClearFix">
 				<%
 			    def isSelected = false;
@@ -169,6 +170,7 @@
     </div>
   <% uiform.end() %>
 <%}
+  jsManager.require("SHARED/ecm-utils", "ecmutil").addScripts('ecmutil.ECMUtils.loadContainerReference();');
   jsManager.require("SHARED/ecm-utils", "ecmutil").addScripts('ecmutil.ECMUtils.tabsContainer_OnResize();');
   jsManager.require("SHARED/ecm-utils", "ecmutil").addScripts('ecmutil.ECMUtils.actionbarContainer_OnResize();');
 %>
