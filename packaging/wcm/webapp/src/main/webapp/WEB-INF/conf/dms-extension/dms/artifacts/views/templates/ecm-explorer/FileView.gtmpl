@@ -29,9 +29,10 @@
   import java.net.URLEncoder;
   import org.exoplatform.services.wcm.core.NodeLocation;
   import org.apache.commons.lang.StringUtils;
-  org.exoplatform.services.cms.link.NodeFinder;
+  import org.exoplatform.services.cms.link.NodeFinder;
   
   def linkManager = WCMCoreUtils.getService(LinkManager.class);
+  def nodeFinder = WCMCoreUtils.getService(NodeFinder.class);
   def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
   def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
   def pref = uiExplorer.getPreference();
@@ -171,14 +172,19 @@
               <%
               for (String nodeName : relNodePath.split("/")) {
                 if (!StringUtils.isEmpty(nodeName)) {
-                  drivePath.append("/").append(nodeName);
+                  if (drivePath.charAt(drivePath.length()-1) != '/') {
+                    drivePath.append('/');
+                  }
+                  drivePath.append(nodeName);
                   def nodeWs = uiExplorer.getDriveData().getWorkspace();
+                  def curNode = (javax.jcr.Node)nodeFinder.getItem(nodeWs, drivePath.toString());
+                  def curTitle = org.exoplatform.services.cms.impl.Utils.getTitle(curNode);
                   %>
                     <span class="FL">&nbsp;>&nbsp;</span>
                     <a class="NodeButton"
                       onclick="<%=uicomponent.event("ChangeNode", drivePath.toString(), new Parameter("workspaceName", nodeWs))%>" class="NodeLabel"
-                      title="<%=nodeName%>">
-                     <strong><%=nodeName%></strong>
+                      title="<%=curTitle%>">
+                     <strong><%=curTitle%></strong>
                     </a>
                   <%
                 }
