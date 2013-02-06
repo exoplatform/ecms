@@ -1,0 +1,259 @@
+<%
+  /**
+   * Created by The eXo Platform SARL
+   * Author : Nguyen Anh Vu
+   *          vuna@exoplatform.com
+   * Jan 04, 2013
+   * 8:16:23 AM
+   */
+%>
+<%
+  import java.util.ArrayList;
+	import java.net.URLEncoder;
+  import org.exoplatform.ecm.webui.utils.Utils ;
+  import org.exoplatform.web.application.Parameter ;
+  import org.exoplatform.webui.core.UIRightClickPopupMenu ;
+  import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
+  import org.exoplatform.ecm.webui.component.explorer.UIDocumentNodeList;
+  import org.exoplatform.ecm.utils.text.Text;
+  import org.exoplatform.services.cms.link.LinkManager;
+  import org.exoplatform.ecm.webui.component.explorer.DocumentProviderUtils;
+  import org.exoplatform.ecm.jcr.model.Preference;
+  import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+  import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
+  import javax.jcr.Value;
+  import javax.jcr.PathNotFoundException;
+  import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+  import org.exoplatform.services.jcr.RepositoryService;
+  import org.exoplatform.services.wcm.core.NodetypeConstant;
+  import java.net.URLEncoder;
+  import org.exoplatform.services.wcm.core.NodeLocation;
+  import org.apache.commons.lang.StringUtils;
+  import org.exoplatform.services.cms.link.NodeFinder;
+  
+  def linkManager = WCMCoreUtils.getService(LinkManager.class);
+  def nodeFinder = WCMCoreUtils.getService(NodeFinder.class);
+  def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
+  def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
+  def pref = uiExplorer.getPreference();
+  def enableDragAndDrop = pref.isEnableDragAndDrop();
+  def uiCustomActionComponent = uiWorkingArea.getCustomAction();
+  def managersMultiItemContext =  uiWorkingArea.getMultiActionsExtensionList();
+  def managersGroundContext = uiWorkingArea.getGroundActionsExtensionList();
+  def action = "";
+  def permLinkComponent = null;
+  UIRightClickPopupMenu contextMenu = uicomponent.getContextMenu() ;
+  String componentId = uicomponent.getId();
+  java.text.DateFormat dateFormat = uicomponent.getSimpleDateFormat();
+  def viewComponentId  = new Date().getTime();
+  def rcontext = _ctx.getRequestContext() ;
+  def size = uicomponent.getChildrenList().size();
+  def jsManager = rcontext.getJavascriptManager();
+  jsManager.require("SHARED/ecm-utils", "ecmutil").
+            require("SHARED/uiListView", "uiListView").
+            require("SHARED/uiFileView", "uiFileView").
+            require("SHARED/multiUpload", "multiUpload").
+  addScripts("uiFileView.UIFileView.initStickBreadcrumb();").
+  addScripts("ecmutil.ECMUtils.initClipboard('clip_button','1','$size');").
+	addScripts('uiListView.UIListView.loadEffectedWidthColumn();').
+	addScripts('uiFileView.UIFileView.clearItemsSelected();').
+  addScripts('uiFileView.UIFileView.clearOpenDivs();');
+  
+	//Config to display columns with format: ["${column};${width}"]
+	//Default 
+	String[] arrColumns = ["exo:owner;95px","exo:dateModified;123px","exo:dateCreated;121px"];
+	def absNodePath = uiExplorer.getCurrentPath();
+	def relNodePath = uiExplorer.filterPath(absNodePath);
+	def drivePath = absNodePath;
+	if ("/".equals(relNodePath)) {
+	  drivePath = absNodePath;
+	} else {
+	  drivePath = new StringBuffer(absNodePath.substring(0, absNodePath.lastIndexOf(relNodePath)));
+	}
+	if (StringUtils.isEmpty(drivePath.toString())) {
+	  drivePath.append("/");
+	}
+%>
+<div id="$componentId">
+	<div id="${componentId}-$viewComponentId" class="UIListView UIFileView">	
+		<div class="UIListGrid">
+				<div class="TitleTable" id="FileViewBreadcrumb">
+	  <!--============FirstRow==================================================================-->
+          <div class="TitleTableRow">
+            <!--div id="ActionMenuPlaceHolder" class="FL"><span></span></div-->
+            <div id="FileViewStatus" class="NoShow FR">
+                <div  style="cursor:pointer" id="FileViewClearSelection" class="FR" onclick="eXo.ecm.UIFileView.clearCheckboxes(event);">
+                  <u><%=_ctx.appRes("FileView.label.ClearSelection")%></u>
+                </div>
+                
+                <div class="FR">&nbsp;</div>
+                
+                <div class="FR">
+                  <%=_ctx.appRes("FileView.label.filesAreSelected")%>
+                </div>
+                
+                <div class="FR">&nbsp;</div>
+                
+                <div id="FileViewItemCount" class="FR">
+                  <span></span>
+                </div>
+            </div>
+          </div>
+    <!--============SecondRow=================================================================-->
+					<div class="ClearFix TitleTableRow">
+            <!--Total Check box-->
+            <input id="UIFileViewCheckBox" type="checkbox" class="FR" onclick="eXo.ecm.UIFileView.toggleCheckboxes(this, event);"/>
+            <!--End of Total Check Box-->
+          <!--=======================================================-->
+            <!--Paginator-->
+              <% def pageIterator = uicomponent.getContentPageIterator();
+                 int availablePage = pageIterator.getAvailablePage();
+                 int currentPage = pageIterator.getCurrentPage();
+                 System.out.println(currentPage + ": " + availablePage);
+                 if (availablePage > 1) {
+              %>
+                <div id="FileViewPageIterator" class="FR">
+                  <!--Begin of prev-->
+                  <% if (currentPage > 1) {%>
+                    <u><a href="<%=pageIterator.event("ShowPage","${currentPage - 1}")%>" class="Icon LastPageIcon" title="<%=_ctx.appRes("UIPageIterator.label.previous")%>"><%=_ctx.appRes("UIPageIterator.label.previous")%></a></u>
+                  <%}%>
+                  <!--End of prev-->
+                  <!--Begin of drop down list-->
+                  <select onchange="window.location.href=this.options[this.selectedIndex].value; return false;">
+                    <% for (int i = 1; i <= availablePage; i++) {%>
+                      <option value="<%=pageIterator.event("ShowPage", "$i")%>" <%=(currentPage==i)?"selected":""%>><%=i%></option>
+                    <%}%>
+                  </select>
+                  <!--End of drop down list-->
+                  <!--Begin of next-->
+                  <% if (currentPage < availablePage) {%>
+                    <u><a href="<%=pageIterator.event("ShowPage","${currentPage + 1}")%>" class="Icon NextPageIcon" title="<%=_ctx.appRes("UIPageIterator.label.next")%>"><%=_ctx.appRes("UIPageIterator.label.next")%></a></u>
+                  <%}%>
+                  <!--End of next-->
+                </div>
+              <%
+                 }
+              %>
+            <!--End of Paginator-->
+          <!--=======================================================-->
+            <!--Breadcrumb sort-->
+              <%
+                String selectedSortType = uicomponent.getTypeSort();
+                String sortOrder = uicomponent.getSortOrder();
+                String typeActionLink = "";
+                if (sortOrder.equals("BlueDownArrow")) {
+                  typeActionLink = "Descending;";
+                } else {
+                  typeActionLink = "Ascending;";
+                }
+                def selectedName = "Alphabetic".equals(selectedSortType)?"selected":"";
+                def selectedDate = "Date".equals(selectedSortType)?"selected":"";
+              %>
+            <!--===============DropDownBox===================-->
+              <select class="FR" onchange="window.location.href=this.options[this.selectedIndex].value; return false;"
+                                 onclick="window.location.href=this.options[this.selectedIndex].value; return false;">
+                <option value="<%=uicomponent.event("Sort", typeActionLink + "Alphabetic")%>"<%=selectedName%>><%=_ctx.appRes("FileView.label.name")%></option>
+                <option value="<%=uicomponent.event("Sort", typeActionLink + "Date")%>" <%=selectedDate%>><%=_ctx.appRes("FileView.label.date")%></option>
+              </select>
+            <!--===============Sort By label =================-->
+              <div class="FR">
+                <%=_ctx.appRes("FileView.label.sortBy")%>
+              </div>
+            <!--End of Breadcrumb sort-->
+            
+            <div class="Breadcrumb FL"><span></span></div>
+            <!--Breadcrumb links-->
+            <div class="BreadcrumbLink ClearFix">
+              <a class="NodeButton"
+                 onclick="<%=uicomponent.event("ChangeNode", drivePath.toString(), new Parameter("workspaceName", uiExplorer.getDriveData().getWorkspace()))%>" class="NodeLabel"
+                 title="<%=uiExplorer.findFirstComponentOfType(UITreeExplorer.class).getLabel()%>">
+                <strong><%=uiExplorer.findFirstComponentOfType(UITreeExplorer.class).getLabel()%></strong>
+              </a>
+              <%
+              for (String nodeName : relNodePath.split("/")) {
+                if (!StringUtils.isEmpty(nodeName)) {
+                  if (drivePath.charAt(drivePath.length()-1) != '/') {
+                    drivePath.append('/');
+                  }
+                  drivePath.append(nodeName);
+                  def nodeWs = uiExplorer.getDriveData().getWorkspace();
+                  def curNode = (javax.jcr.Node)nodeFinder.getItem(nodeWs, drivePath.toString());
+                  def curTitle = org.exoplatform.services.cms.impl.Utils.getTitle(curNode);
+                  %>
+                    <span class="FL">&nbsp;>&nbsp;</span>
+                    <a class="NodeButton"
+                      onclick="<%=uicomponent.event("ChangeNode", drivePath.toString(), new Parameter("workspaceName", nodeWs))%>" class="NodeLabel"
+                      title="<%=curTitle%>">
+                     <strong><%=curTitle%></strong>
+                    </a>
+                  <%
+                }
+              }
+              %>
+            </div>
+            <!--End of Breadcrumb links-->
+          <!--=======================================================-->
+            
+			    </div><!--End of ClearFix-->			    
+		    <!--=======================================================-->
+			    <div style="position: relative; top: 0px; left: 0px; width: 0px; height: 0px">
+						<div class="Mask" style="position: absolute; top: 0px; left: 0px; width: 0px; height: 0px"></div>
+						
+						<div class="JCRMoveAction" 
+								 style="display: none;" 
+								 request="<%=uiWorkingArea.getJCRMoveAction().event(UIWorkingArea.MOVE_NODE)%>" 
+								 symlink="<%=uiWorkingArea.getCreateLinkAction().event(UIWorkingArea.CREATE_LINK)%>">
+						</div>
+						
+						<div class="ItemContextMenu" style="position: absolute; top: 0px; left: 0px; display: none;">
+							<div class="UIRightClickPopupMenu" style="display: block;">
+								<div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" onkeydown="event.cancelBubble = true;">									
+											<%
+												for(itemContext in managersMultiItemContext) {
+													action = itemContext.getUIExtensionName();
+											%>
+													<a class="MenuItem" style="display: block;" onclick=eXo.ecm.UIFileView.postGroupAction("<%=itemContext.event(action)%>")> 	
+													<div class="ItemIcon ${action}16x16Icon">
+													<%=_ctx.appRes("ECMContextMenu.event." + action)%>
+													</div>
+								 			</a>
+											<%
+												}
+											%>
+										
+								 </div>	
+							 </div> 
+						</div>
+						<div class="GroundContextMenu" style="position: absolute;
+											 top: 0px; left: 0px; display: none;">
+								<div class="UIRightClickPopupMenu" style="display: block;">
+									<div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" onkeydown="event.cancelBubble = true;">					
+										<%
+													for(itemGroundContext in managersGroundContext) {
+													action = itemGroundContext.getUIExtensionName();
+										%>
+									<a class="MenuItem" href="<%=itemGroundContext.event(action)%>" style="display: block;"> 	
+											<div class="ItemIcon ${action}16x16Icon">
+												<%=_ctx.appRes("ECMContextMenu.event." + action)%>
+											</div>
+									 	</a>
+									<%}%>			
+									 </div>	
+								 </div>
+						</div>
+					</div>
+				</div><!--TitleTable-->
+      <%      	
+        def uiDocumentNodeList = uicomponent.getChild(UIDocumentNodeList.class);
+        if (uiDocumentNodeList != null) {
+          uicomponent.renderChild(uiDocumentNodeList);
+        }
+        %>
+	      </div>
+	 <% 
+	 //re-initialize action
+	 	uiWorkingArea.initialize(); %>
+		</div>
+
+</div>	
+

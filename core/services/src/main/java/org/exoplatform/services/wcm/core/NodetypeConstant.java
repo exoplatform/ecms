@@ -83,6 +83,9 @@ public class NodetypeConstant {
   public static final String EXO_DATE_CREATED                 = "exo:dateCreated";
 
   public static final String EXO_DATE_MODIFIED                = "exo:dateModified";
+  
+  public static final String EXO_LAST_MODIFIED_DATE = "exo:lastModifiedDate";
+  public static final String EXO_LAST_MODIFIER = "exo:lastModifier";
 
   public static final String EXO_DOCUMENT_FOLDER              = "exo:documentFolder";
 
@@ -172,6 +175,7 @@ public class NodetypeConstant {
   
   public static final String MEDIA_ALTERNATIVE_TEXT = "alternativeText";
   
+  public static final String EXO_HIDE_EXPLORER_PANEL = "exo:hideExplorerPanel";
   
   // public static final String PUBLICATION_STATE_AND_VERSION_BASED_PUBLICATION
   // = "publication:stateAndVersionBasedPublication";

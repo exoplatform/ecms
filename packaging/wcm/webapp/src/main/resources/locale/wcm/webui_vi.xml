@@ -47,6 +47,7 @@
       <icon-view>Chế độ nhìn biểu tượng</icon-view>
       <thumbails-view>Chế độ nhìn hỉnh ảnh</thumbails-view>
       <cover-flow>Chế độ nhìn lướt</cover-flow>
+      <file-view>File Management View</file-view>
     </label>
   </Views>
 

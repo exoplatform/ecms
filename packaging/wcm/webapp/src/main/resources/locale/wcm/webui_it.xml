@@ -43,6 +43,7 @@
             <icon-view>Vista Icone</icon-view>
             <thumbails-view>Vista Thumbnails</thumbails-view>
             <cover-flow>Vista CoverFlow</cover-flow>
+            <file-view>File Management View</file-view>
         </label>
     </Views>
     <UIActionBar>

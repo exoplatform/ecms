@@ -42,7 +42,20 @@ public class NodeLocation extends ItemLocation {
 
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(NodeLocation.class.getName());
+  
+  private List<NodeLocation> children_;
 
+  public List<NodeLocation> getChildren() {
+    return children_;
+  }
+
+  public void setChildren(List<NodeLocation> children) {
+    children_ = children;
+  }
+
+  public boolean hasChildren() {
+    return children_ != null && children_.size() > 0;
+  }
   /**
    * Instantiates a new node location.
    */

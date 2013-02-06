@@ -33,6 +33,7 @@ import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.jcr.SimpleSearchValidator;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
+import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
@@ -252,6 +253,7 @@ public class UIAddressBar extends UIForm {
       uiAddressBar.setSelectedViewName(viewName);
       UIActionBar uiActionBar = uiWorkingArea.getChild(UIActionBar.class);
       uiActionBar.setTabOptions(viewName) ;
+      uiExplorer.findFirstComponentOfType(UIDocumentInfo.class).getExpandedFolders().clear();
       uiExplorer.updateAjax(event);
     }
   }

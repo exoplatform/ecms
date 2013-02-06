@@ -62,8 +62,8 @@
 						<a href="<%=uicomponent.event("ChangeView", key)%>" class="$defaultView $viewIcon ViewIcon" title="$label"><span></span></a>
 					<%}%>
 				</div>
-				<%}%>
 			</td>
+			<%}%>
   			<td class="BackAndRefreshBlock" style="width: 55px;">
   				<a class="BackBtn FloatLeft" href="<%=uicomponent.event("Back")%>" title="<%=_ctx.appRes("UIAddressBar.title.backButton")%>"><span></span></a>	
   				<a class="RefreshSessionButton FloatLeft" href="<%=uicomponent.event("RefreshSession")%>" title="<%=_ctx.appRes("UIViewBar.label.refesh")%>"><span></span></a>

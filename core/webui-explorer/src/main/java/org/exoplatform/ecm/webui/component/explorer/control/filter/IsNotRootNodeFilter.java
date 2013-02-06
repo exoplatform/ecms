@@ -41,8 +41,9 @@ public class IsNotRootNodeFilter extends UIExtensionAbstractFilter {
   }
 
   public boolean accept(Map<String, Object> context) throws Exception {
+    if (context == null) return true;
     Node currentNode = (Node) context.get(Node.class.getName());
-    return !((NodeImpl)currentNode).isRoot();
+    return currentNode.getPath().length() != 1;
   }
 
   public void onDeny(Map<String, Object> context) throws Exception {

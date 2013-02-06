@@ -62,6 +62,7 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
   protected final static String ADMIN_VIEW = "admin" ;
   protected final static String DEFAULT_VIEW = "default" ;
   protected final static String EXO_PERMISSIONS = "exo:accessPermissions"  ;
+  protected final static String EXO_HIDE_EXPLORER_PANEL = "exo:hideExplorerPanel";
   protected final static String BUTTON_PROP = "exo:buttons" ;
 
   private final List<ManageViewPlugin> plugins_ = new ArrayList<ManageViewPlugin> ();
@@ -223,11 +224,18 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
       return null;
     }
   }  
-  
+
   /**
    * {@inheritDoc}
    */
   public void addView(String name, String permissions, String template, List<?> tabs) throws Exception {
+    addView(name, permissions, false, template, tabs);
+  }  
+  
+  /**
+   * {@inheritDoc}
+   */
+  public void addView(String name, String permissions, boolean hideExplorerPanel, String template, List<?> tabs) throws Exception {
     Session session = getSession();
     Node viewHome = (Node) session.getItem(baseViewPath_);
     Node view;
@@ -237,8 +245,9 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
         view.checkout();
       view.setProperty(EXO_PERMISSIONS, permissions);
       view.setProperty(EXO_TEMPLATE, template);
+      view.setProperty(EXO_HIDE_EXPLORER_PANEL, hideExplorerPanel);
     } else {
-      view = addView(viewHome, name, permissions, template);
+      view = addView(viewHome, name, hideExplorerPanel, permissions, template);
     }
     String tabName;
     String buttons;
@@ -448,10 +457,11 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
    * @return
    * @throws Exception
    */
-  private Node addView(Node viewManager, String name, String permissions, String template) throws Exception {
+  private Node addView(Node viewManager, String name, boolean hideExplorerPanel, String permissions, String template) throws Exception {
     Node contentNode = viewManager.addNode(name, "exo:view");
     contentNode.setProperty("exo:accessPermissions", permissions);
     contentNode.setProperty("exo:template", template);
+    contentNode.setProperty(EXO_HIDE_EXPLORER_PANEL, hideExplorerPanel);
     viewManager.save();
     return contentNode;
   }

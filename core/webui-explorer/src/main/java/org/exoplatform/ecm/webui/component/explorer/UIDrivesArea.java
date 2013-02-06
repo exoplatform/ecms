@@ -298,6 +298,7 @@ public class UIDrivesArea extends UIContainer {
                  uiJCRExplorer.getCurrentPath() + "','" +
                  org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(uiJCRExplorer.getDriveData().getHomePath(),
                  ConversationState.getCurrent().getIdentity().getUserId())+ "');");
+      uiJCRExplorer.findFirstComponentOfType(UIDocumentInfo.class).getExpandedFolders().clear();
       uiJCRExplorer.updateAjax(event);
     }
   }
