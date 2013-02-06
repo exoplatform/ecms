@@ -48,6 +48,7 @@ import org.exoplatform.ecm.jcr.model.ClipboardCommand;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
 import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.ecm.webui.comparator.DateComparator;
 import org.exoplatform.ecm.webui.comparator.NodeTitleComparator;
 import org.exoplatform.ecm.webui.comparator.PropertyValueComparator;
 import org.exoplatform.ecm.webui.comparator.StringComparator;
@@ -74,6 +75,7 @@ import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.cms.link.NodeLinkAware;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
@@ -81,6 +83,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -341,7 +344,9 @@ public class UIJCRExplorer extends UIContainer {
         if (uiTreeExplorer != null) {
           UITreeNodePageIterator extendedPageIterator =
               uiTreeExplorer.getUIPageIterator(previousPath);
-          extendedPageIterator.setCurrentPage(previousPageIndex);
+          if (extendedPageIterator != null) {
+            extendedPageIterator.setCurrentPage(previousPageIndex);
+          }
         }
       }
     }
@@ -733,7 +738,7 @@ public class UIJCRExplorer extends UIContainer {
     }
     uiActionBar.setRendered(uiPortlet.isShowActionBar());
     uiAddressBar.setRendered(uiPortlet.isShowTopBar());
-    uiSideBar.setRendered(this.getPreference().isShowSideBar());
+    uiSideBar.setRendered(preferences_.isShowSideBar());
     event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea);
     if (uiSideBar.isRendered()) event.getRequestContext().addUIComponentToUpdateByAjax(uiSideBar);
     event.getRequestContext().addUIComponentToUpdateByAjax(getChild(UIControl.class)) ;
@@ -978,6 +983,8 @@ public class UIJCRExplorer extends UIContainer {
         Collections.sort(childrenList, new PropertyValueComparator(Utils.EXO_CREATED_DATE, preferences_.getOrder()));
     } else if (Preference.SORT_BY_MODIFIED_DATE.equals(preferences_.getSortType())) {
         Collections.sort(childrenList, new PropertyValueComparator(Utils.EXO_MODIFIED_DATE, preferences_.getOrder()));
+    } else if (Preference.SORT_BY_DATE.equals(preferences_.getSortType())) {
+      Collections.sort(childrenList, new DateComparator(preferences_.getOrder()));
     } else {
       Collections.sort(childrenList, new PropertyValueComparator(preferences_.getSortType(), preferences_.getOrder()));
     }

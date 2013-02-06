@@ -497,6 +497,10 @@
 		 */
 		ECMUtils.prototype.actionbarContainer_OnResize = function () {
 			Self.actionBarContainer = gj(Self.uiRightContainer).find('div.UIActionBar:first')[0];
+			var actionbar= gj('#UIActionBar');
+			if (actionbar) { //VinhNT workaround for the un-expand width of ActionBar problem, should be improved later
+			  actionbar.width(actionbar.parent().width()-2);
+			}
 			var dmsMenuContainer    = gj(Self.uiRightContainer).find('div.DMSMenuItemContainer:first')[0];
 			if (!Self.actionBarContainer) return;//No action bar, no resize
 			Self.showMoreActionContainer = document.getElementById("ShowMoreActionContainer");
@@ -640,8 +644,8 @@
 			}
 		};
 		ECMUtils.prototype.initWithoutLeftContainer = function () {
-			var value = gj(Self.uiWorkingArea).attr("initWithoutLeftContainer")!='true';
-			return value;
+			var value = gj("#LeftContainer:first");
+			return (value.length == 0);
 		}
 		ECMUtils.prototype.resizeSideBar = function (event) {
 			var event = event || window.event;
@@ -1046,9 +1050,9 @@
 			var rightContainer = gj(Self.uiWorkingArea).find("div.RightContainer:first")[0];
 			var resizeButton = gj(Self.uiWorkingArea).find("div.ResizeButton:first")[0];
 			// The bellow block are updated
-			if (leftContainer.style.display == 'none') {
-			  leftContainer.style.display = 'block';
-			  gj(resizeButton).removeClass("ShowLeftContent");
+		    if (leftContainer.className == "LeftContainer NoShow") {
+		      gj(leftContainer).removeClass("NoShow");			  
+		      gj(resizeButton).removeClass("ShowLeftContent");
 			  gj(Self.uiResizeSideBar).removeClass("ResizeNoneBorder");
 			  Self.uiResizeSideBar.style.height = leftContainer.offsetHeight + "px";
 			  showSideBar = true;
@@ -1062,7 +1066,7 @@
 			    }
 			 }
 			} else {
-			  leftContainer.style.display = 'none';
+			  gj(leftContainer).addClass("LeftContainer");
 			  gj(resizeButton).addClass("ShowLeftContent");
 			  gj(Self.uiResizeSideBar).addClass("ResizeNoneBorder");
 			  showSideBar = false;

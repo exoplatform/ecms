@@ -121,6 +121,10 @@
 
 .UIRightClickPopupMenu .MenuItem {
 	padding: 0 10px;
+}
+
+.UIFileView .UIRightClickPopupMenu .MenuItem {
+	float: left;
 } 
 
 .UIRightClickPopupMenu .RightClickCustomItem {
@@ -137,6 +141,10 @@
 	display: block;
 }
 
+.UIFileView .UIRightClickPopupMenu .MenuItem .ItemIcon {
+	width: none;
+}
+	
 .UIRightClickPopupMenu .MenuItem:hover {
 	background: #eaeaea;
 }

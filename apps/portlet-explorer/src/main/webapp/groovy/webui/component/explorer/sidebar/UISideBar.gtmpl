@@ -24,12 +24,14 @@
 		<div class="UISelectContent ClearFix">
 			<%
 			for(itemContext in uicomponent.getLstVisibleComp()) {
-	        	def action = itemContext.getUIExtensionName();
+      	def action = itemContext.getUIExtensionName();
+	      if (uicomponent.isRenderComponent(action)) {  	
 			%>
 				<div class="<%=getCSSClassName(action)%>" onclick="<%=itemContext.event(action)%>" title="<%=_ctx.appRes(uicomponent.getId() + ".label." + action)%>">
 					<div class="ItemIcon DefaultIcon ${action}Icon"><span></span></div>
 				</div>
-			<% } %>
+			<% } 
+			}%>
 			
 			<% if (uicomponent.getLstHiddenComp().size() > 0) { %>
 				<!--More button -->

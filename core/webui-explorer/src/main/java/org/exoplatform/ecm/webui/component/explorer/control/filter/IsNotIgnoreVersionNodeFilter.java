@@ -36,6 +36,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
 public class IsNotIgnoreVersionNodeFilter implements UIExtensionFilter {
 
  public boolean accept(Map<String, Object> context) throws Exception {
+   if (context == null) return true;
    boolean ignore_version = true;
    Node currentNode = (Node) context.get(Node.class.getName());
    Node parrentNode = currentNode.getParent();

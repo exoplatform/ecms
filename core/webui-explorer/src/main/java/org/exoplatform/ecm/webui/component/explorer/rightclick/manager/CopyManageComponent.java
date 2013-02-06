@@ -34,6 +34,7 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashF
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -144,7 +145,7 @@ public class CopyManageComponent extends UIAbstractManagerComponent {
     String srcPath = event.getRequestContext().getRequestParameter(OBJECTID);
     uiWorkingArea.getVirtualClipboards().clear();
     if(srcPath.indexOf(";") > -1) {      
-      multipleCopy(srcPath.split(";"), event);
+      multipleCopy(Utils.removeChildNodes(srcPath), event);
     } else {
       processCopy(srcPath, event, false);
     }

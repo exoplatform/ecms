@@ -25,6 +25,12 @@ target/
 *.ipr
 .idea/
 
+#bin folder
+bin/
+
+#log file
+*.log
+
 # eclipse project file
 .settings/
 .classpath
