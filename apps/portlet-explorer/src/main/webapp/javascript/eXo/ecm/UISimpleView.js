@@ -362,8 +362,6 @@
       Self.temporaryItem = element;
       Self.itemsSelected = new Array(element);
       gj(element).addClass(eXo.ecm.UISimpleView.selectedItemClass);
-      //element.style.background = Self.colorSelected;
-      //eXo.core.Browser.setOpacity(element, 100);
     };
 
     SimpleView.prototype.mouseUpItem = function(evt) {
@@ -407,7 +405,7 @@
             if(event.shiftKey) element.setAttribute("isLink",true);
           } else if(event.ctrlKey && element.selected) {
             element.selected = null;
-            element.style.background = "none";
+            gj(element).removeClass(eXo.ecm.UISimpleView.selectedItemClass);
             element.setAttribute("isLink",null);
             removeItem(Self.itemsSelected, element);
           } else if (event.shiftKey) {
@@ -432,8 +430,7 @@
           }
           for(var i in Self.itemsSelected) {
             if (Array.prototype[i]) continue;
-            //eXo.core.Browser.setOpacity(Self.itemsSelected[i], 100);
-            //Self.itemsSelected[i].style.background = Self.colorSelected;
+            gj(Self.itemsSelected[i]).addClass(eXo.ecm.UISimpleView.selectedItemClass);
           }
         }
       }else {
@@ -469,13 +466,14 @@
     SimpleView.prototype.selectAllItems = function() {
       if (Self.allItems) {
         resetArrayItemsSelected();
-        for(var i in Self.allItems) {
-          if (Array.prototype[i]) continue;
-          var item = Self.allItems[i];
-          item.selected = true;
-          item.style.background = Self.colorSelected;
-          Self.itemsSelected.push(item);
-        }
+        Self.allItems.each(function(i, elem){
+          if (!Array.prototype[i]) {
+            var item = Self.allItems[i];
+            item.selected = true;
+            gj(item).addClass(eXo.ecm.UISimpleView.selectedItemClass);
+            Self.itemsSelected.push(item);
+          }
+        });
       }
     };
 
@@ -561,13 +559,11 @@
               //Dunghm: Check Shift key
               itemBox.setAttribute("isLink",null);
               if(event.ctrlKey && event.shiftKey) itemBox.setAttribute("isLink",true);
-              itemBox.style.background = Self.colorSelected;
-              //eXo.core.Browser.setOpacity(itemBox, 100);
+              gj(itemBox).addClass(eXo.ecm.UISimpleView.selectedItemClass);
             } else {
               itemBox.selected = null;
               itemBox.setAttribute("isLink",null);
-              itemBox.style.background = "none";
-              //eXo.core.Browser.setOpacity(itemBox, 85);
+              gj(itemBox).removeClass(eXo.ecm.UISimpleView.selectedItemClass);
             }
            }
           });
@@ -598,12 +594,12 @@
               //Dunghm: Check Shift key
               itemBox.setAttribute("isLink",null);
               if(event.ctrlKey && event.shiftKey) itemBox.setAttribute("isLink",true);
-              itemBox.style.background = Self.colorSelected;
+              gj(itemBox).addClass(eXo.ecm.UISimpleView.selectedItemClass);
               //eXo.core.Browser.setOpacity(itemBox, 100);
             } else {
               itemBox.selected = null;
               itemBox.setAttribute("isLink",null);
-              itemBox.style.background = "none";
+              gj(itemBox).removeClass(eXo.ecm.UISimpleView.selectedItemClass);
               //eXo.core.Browser.setOpacity(itemBox, 85);
             }
            }
@@ -630,11 +626,11 @@
             if ( posX < mask.X && mask.storeX < posX&&
                 mask.Y < posY && posY < mask.storeY ) {
                 itemBox.selected = true;
-                itemBox.style.background = Self.colorSelected;
+                gj(itemBox).addClass(eXo.ecm.UISimpleView.selectedItemClass);
                 //eXo.core.Browser.setOpacity(itemBox, 100);
             } else {
               itemBox.selected = null;
-              itemBox.style.background = "none";
+              gj(itemBox).removeClass(eXo.ecm.UISimpleView.selectedItemClass);
               //eXo.core.Browser.setOpacity(itemBox, 85);
             }
            }
@@ -658,11 +654,11 @@
             if (mask.storeX < posX && posX < mask.X &&
                 mask.storeY < posY && posY < mask.Y) {
               itemBox.selected = true;
-              itemBox.style.background = Self.colorSelected;
+              gj(itemBox).addClass(eXo.ecm.UISimpleView.selectedItemClass);
               //eXo.core.Browser.setOpacity(itemBox, 100);
             } else {
               itemBox.selected = null;
-              itemBox.style.background = "none";
+              gj(itemBox).removeClass(eXo.ecm.UISimpleView.selectedItemClass);
               //eXo.core.Browser.setOpacity(itemBox, 85);
             }
           });
