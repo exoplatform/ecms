@@ -150,7 +150,7 @@ public class UIDialogForm extends UIForm {
   protected JCRResourceResolver resourceResolver;
   private String childPath;
   private boolean isNotEditNode;
-  private boolean dataRemoved_;
+  private boolean dataRemoved_ = false;;
 
   private boolean isNTFile;
   private boolean isOnchange;
@@ -1695,20 +1695,8 @@ public class UIDialogForm extends UIForm {
     return dservice.getDownloadLink(dservice.addDownloadResource(dresource));
   }
 
-  @Deprecated
-  /**
-   * TODO: This method still used in dialog1.gtmpl of podcast
-   * @return
-   */
   public boolean dataRemoved() { return dataRemoved_; }
 
-  @Deprecated
-  /**
-   * Using dataRemoved_ to sign removing data (image or other some binary data.
-   * But if in one form we have more than one field (eg: contain 2 field) then
-   * this code make potential bug. Simplest way is checking existence of UIFormInput
-   * Please refer to dialog of Sample Node or WebContent
-   */
   public void setDataRemoved(boolean dataRemoved) { dataRemoved_ = dataRemoved; }
 
   public void resetProperties() { properties.clear(); }

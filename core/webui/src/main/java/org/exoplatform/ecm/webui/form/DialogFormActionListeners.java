@@ -59,9 +59,7 @@ public class DialogFormActionListeners {
       }
       if (referenceNodePath.startsWith("/")) {
         Node referenceNode = (Node)uiForm.getSession().getItem(uiForm.getNodePath() + referenceNodePath);
-        if(referenceNode.hasProperty(Utils.JCR_DATA)) {
-          referenceNode.setProperty(Utils.JCR_MIMETYPE, "");
-          referenceNode.setProperty(Utils.JCR_DATA, "");
+        if(referenceNode.hasProperty(Utils.JCR_DATA)) {          
           uiForm.setDataRemoved(true);
         }
       } else {
@@ -77,16 +75,6 @@ public class DialogFormActionListeners {
           uiForm.setDataRemoved(true);
         }
       }
-      //Broadcast the remove data event
-      /*Node node = uiForm.getNode();
-      ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
-      ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
-      Node parent = node.getParent();
-      if (node.getPrimaryNodeType().isNodeType(ActivityCommonService.NT_FILE)) {        
-        if (activityService.isAcceptedNode(node) && !activityService.isDocumentNodeType(parent)) {
-          listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, parent, node);
-        }
-      }*/
       
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
     }
