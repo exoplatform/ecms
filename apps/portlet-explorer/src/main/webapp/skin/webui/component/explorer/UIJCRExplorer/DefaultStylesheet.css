@@ -461,7 +461,8 @@
 .UIJCRExplorerPortlet .UIFileView .BreadcrumbLink {
  margin-right:170px;
  overflow:hidden;
- white-space:nowrap;	
+ white-space:nowrap;
+ height: 20px;	
 }
 
 .UIJCRExplorerPortlet .UIListGrid  .ColumnIcon .BlueDownArrow16x16Icon{
