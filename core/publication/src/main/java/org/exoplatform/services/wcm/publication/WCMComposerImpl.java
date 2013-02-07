@@ -84,8 +84,6 @@ public class WCMComposerImpl implements WCMComposer, Startable {
   /** The cache. */
   private ExoCache<String, Object> cache;
 
-  private boolean useDefaultLanguage = true;
-
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(WCMComposerImpl.class.getName());
 
@@ -108,9 +106,6 @@ public class WCMComposerImpl implements WCMComposer, Startable {
    */
   public WCMComposerImpl(InitParams params) throws Exception {
     if (params!=null) {
-      ValueParam useDefaultLang = params.getValueParam("useDefaultLanguage");
-      if (useDefaultLang != null)
-        this.useDefaultLanguage = Boolean.parseBoolean(useDefaultLang.getValue());
       ValueParam sharedGroupParam = params.getValueParam("sharedGroup");
       if (sharedGroupParam != null) {
         this.sharedGroup = sharedGroupParam.getValue();
@@ -411,9 +406,8 @@ public class WCMComposerImpl implements WCMComposer, Startable {
         viewNode = getPublishedContent(lnode, filters);
         if (viewNode!=null) {
           return viewNode;
-        } else if (!useDefaultLanguage) {
-          return null;
         }
+        return null;
       }
     }
 
@@ -544,22 +538,9 @@ public class WCMComposerImpl implements WCMComposer, Startable {
   }
 
   @Managed
-  @ManagedDescription("Use the default language if translation is not published ?")
-  public boolean useDefaultLanguage() {
-    return useDefaultLanguage;
-  }
-
-  @Managed
   @ManagedDescription("How many nodes in the cache ?")
   public int getCachedEntries() {
     return this.cache.getCacheSize();
-  }
-
-  public void setDefaultLanguagePolicy(boolean useDefaultLanguage) {
-    /**
-     * we don't expose this thru JMX as it's not persistent and it won't work in Cluster environement.
-     */
-    this.useDefaultLanguage = useDefaultLanguage;
   }
 
   @Managed

@@ -175,7 +175,7 @@
                     <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
                       <field name="nodetypeName"><string>mix:votable</string></field>
                       <field name="documentTemplate"><boolean>false</boolean></field>
-                      <field name="label"><string>Vote Info</string></field>
+                      <field name="label"><string>Votes</string></field>
                       <field name="referencedView">
                         <collection type="java.util.ArrayList">
                           <value>
@@ -275,7 +275,7 @@
                     <object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">
                       <field  name="nodetypeName"><string>exo:taxonomyAction</string></field>
                       <field  name="documentTemplate"><boolean>false</boolean></field>
-                      <field  name="label"><string>Add taxonomy Action</string></field>
+                      <field  name="label"><string>Add Category Action</string></field>
                       <field  name="referencedView">
                         <collection type="java.util.ArrayList">
                           <value>

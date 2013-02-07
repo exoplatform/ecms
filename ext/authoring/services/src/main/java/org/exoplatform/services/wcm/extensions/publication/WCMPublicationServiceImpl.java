@@ -24,6 +24,8 @@ import java.util.TreeSet;
 import javax.jcr.Node;
 import javax.jcr.lock.Lock;
 
+import org.apache.commons.lang.StringUtils;
+import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
@@ -34,13 +36,13 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig.Context;
 import org.exoplatform.services.wcm.extensions.publication.impl.PublicationManagerImpl;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.AuthoringPublicationConstant;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.Lifecycle;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.State;
 import org.exoplatform.services.wcm.extensions.utils.ContextComparator;
-import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.publication.WebpagePublicationPlugin;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
@@ -49,18 +51,28 @@ public class WCMPublicationServiceImpl
                                       org.exoplatform.services.wcm.publication.WCMPublicationServiceImpl {
 
   private static final Log LOG = ExoLogger.getLogger(WCMPublicationServiceImpl.class.getName());
-
-  /** The content composer. */
-  private WCMComposer        wcmComposer;
+  
+  private String publicationLocation = "collaboration:/";
+  
+  private String[] notAllowChildNodeEnrollInPubliction = new String[] { NodetypeConstant.EXO_WEBCONTENT };
 
   /**
    * Instantiates a new WCM publication service. This service delegate to
    * PublicationService to manage the publication
    */
-  public WCMPublicationServiceImpl() {
+  public WCMPublicationServiceImpl(InitParams initParams) {
     super();
     this.publicationService = WCMCoreUtils.getService(PublicationService.class);
-    this.wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
+    if(initParams.getValueParam("publicationLocation") != null) {
+      publicationLocation = initParams.getValueParam("publicationLocation").getValue();
+    }
+    if(initParams.getValueParam("notAllowChildNodeEnrollInPubliction") != null) {
+      if(initParams.getValueParam("notAllowChildNodeEnrollInPubliction").getValue().indexOf(";") > -1) {
+        notAllowChildNodeEnrollInPubliction = 
+                initParams.getValueParam("notAllowChildNodeEnrollInPubliction").getValue().split(";");
+      }
+      
+    }
   }
 
   /**
@@ -70,6 +82,12 @@ public class WCMPublicationServiceImpl
    */
   public void enrollNodeInLifecycle(Node node, String siteName, String remoteUser) {
     try {
+      if(!node.getPath().startsWith(publicationLocation.split(":")[1])) return;
+      if(node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
+        for(String nodeType : notAllowChildNodeEnrollInPubliction) {
+          if(!allowEnrollInPublication(node, nodeType)) return;
+        }
+      }
       if (LOG.isInfoEnabled()) LOG.info(node.getPath() + "::" + siteName + "::"+remoteUser);
 
       PublicationManagerImpl publicationManagerImpl = WCMCoreUtils.getService(PublicationManagerImpl.class);
@@ -208,6 +226,12 @@ public class WCMPublicationServiceImpl
                                             String siteName,
                                             String remoteUser,
                                             String newState) throws Exception {
+    if(!node.getPath().startsWith(publicationLocation.split(":")[1])) return;
+    if(node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
+      for(String nodeType : notAllowChildNodeEnrollInPubliction) {
+        if(!allowEnrollInPublication(node, nodeType)) return;
+      }
+    }
     if (!publicationService.isNodeEnrolledInLifecycle(node)) {
       enrollNodeInLifecycle(node, siteName, remoteUser);
     }
@@ -217,9 +241,17 @@ public class WCMPublicationServiceImpl
 
     publicationPlugin.updateLifecyleOnChangeContent(node, remoteUser, newState);
 
-    wcmComposer.updateContent(node.getSession().getWorkspace().getName(),
-                              node.getPath(),
-                              new HashMap<String, String>());
     listenerService.broadcast(UPDATE_EVENT, cmsService, node);
+  }
+  
+  private boolean allowEnrollInPublication(Node node, String nodeType) throws Exception {
+    String path = node.getPath();
+    Node parentNode = node.getParent();
+    while(!path.equals("/") || path.length() > 0) {
+      parentNode = (Node)node.getSession().getItem(path);
+      if(parentNode.isNodeType(nodeType)) return false;
+      path = StringUtils.substringBefore(path, path.substring(path.lastIndexOf("/"), path.length()));
+    }
+    return true;
   }
 }

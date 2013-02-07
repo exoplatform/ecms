@@ -37,7 +37,7 @@
       </preference>
       <preference>
         <name>drive</name>
-        <value>collaboration</value>
+        <value>Collaboration</value>
         <read-only>false</read-only>
       </preference>
     </portlet-preferences>

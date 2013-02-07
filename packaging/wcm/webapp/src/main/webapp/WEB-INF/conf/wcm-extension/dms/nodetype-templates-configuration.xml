@@ -220,7 +220,7 @@
                       <boolean>true</boolean>
                     </field>
                     <field name="label">
-                      <string>JS File</string>
+                      <string>Javascript File</string>
                     </field>
                     <field name="referencedView">
                       <collection type="java.util.ArrayList">
