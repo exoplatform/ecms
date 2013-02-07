@@ -4,7 +4,7 @@
   <parent>
     <artifactId>maven-parent-pom</artifactId>
     <groupId>org.exoplatform</groupId>
-    <version>9-SNAPSHOT</version>
+    <version>9-beta-1</version>
     <relativePath></relativePath>
   </parent>
   <groupId>org.exoplatform.ecms</groupId>
@@ -37,12 +37,13 @@
     <!-- **************************************** -->
     <!-- Project Dependencies                     -->
     <!-- **************************************** -->
+    <org.exoplatform.depmgt.version>2</org.exoplatform.depmgt.version>
     <org.exoplatform.kernel.version>2.4.0-GA</org.exoplatform.kernel.version>
     <org.exoplatform.core.version>2.5.0-GA</org.exoplatform.core.version>
     <org.exoplatform.ws.version>2.3.0-GA</org.exoplatform.ws.version>
     <org.exoplatform.jcr.version>1.15.0-GA</org.exoplatform.jcr.version>
     <org.exoplatform.jcr-services.version>1.15.0-GA</org.exoplatform.jcr-services.version>
-    <org.exoplatform.doc.doc-style.version>1.0.9-SNAPSHOT</org.exoplatform.doc.doc-style.version>
+    <org.exoplatform.doc.doc-style.version>4.0.0-Alpha1-SNAPSHOT</org.exoplatform.doc.doc-style.version>
     <org.exoplatform.commons.version>4.0.0.Alpha1-SNAPSHOT</org.exoplatform.commons.version>
     <org.gatein.pc.version>2.4.0.Final</org.gatein.pc.version>
     <org.gatein.portal.version>3.5.0.Final</org.gatein.portal.version>
@@ -71,7 +72,7 @@
       <dependency>
         <groupId>org.exoplatform</groupId>
         <artifactId>maven-depmgt-pom</artifactId>
-        <version>2-SNAPSHOT</version>
+        <version>${org.exoplatform.depmgt.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -950,10 +951,7 @@
               <org.apache.commons.logging.simplelog.log.org.exoplatform>debug</org.apache.commons.logging.simplelog.log.org.exoplatform>
               <org.apache.commons.logging.simplelog.log.net.hibernate>warn</org.apache.commons.logging.simplelog.log.net.hibernate>
               <java.naming.factory.initial>org.exoplatform.services.naming.SimpleContextFactory</java.naming.factory.initial>
-              <gatein.test.tmp.dir>${project.build.directory}</gatein.test.tmp.dir>
-              <com.arjuna.ats.arjuna.objectstore.objectStoreDir>${project.build.directory}</com.arjuna.ats.arjuna.objectstore.objectStoreDir>
               <exo.profiles>hsqldb</exo.profiles>
-              <gatein.test.output.path>${project.build.directory}</gatein.test.output.path>
             </systemPropertyVariables>
           </configuration>
         </plugin>
