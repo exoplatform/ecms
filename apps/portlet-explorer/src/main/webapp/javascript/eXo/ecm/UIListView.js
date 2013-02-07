@@ -742,7 +742,7 @@
       var Y = event.pageY;
       var portWidth = gj(window).width();
       var portHeight = gj(window).height();
-      var contentMenu = gj(contextMenu).children("div.UIRightClickPopupMenu:first")[0];
+      var contentMenu = gj(contextMenu).children("div.uiRightClickPopupMenu:first")[0];
       if (event.clientX + contentMenu.offsetWidth > portWidth) X -= contentMenu.offsetWidth;
       if (event.clientY + contentMenu.offsetHeight > portHeight) Y -= contentMenu.offsetHeight + 5;
       contextMenu.style.top = Y + 5 + "px";
@@ -763,7 +763,7 @@
       }
       //create context menu
       var actionArea = document.getElementById(Self.actionAreaId);
-      var context = gj(actionArea).find("div.GroundContextMenu:first")[0];
+      var context = gj(actionArea).find("div.groundContextMenu:first")[0];
       var contextMenu = newElement({
         innerHTML: context.innerHTML,
         id: Self.contextMenuId,
@@ -782,7 +782,7 @@
       var Y = event.pageY;
       var portWidth = gj(window).width();
       var portHeight = gj(window).height();
-      var contentMenu = gj(contextMenu).children("div.UIRightClickPopupMenu:first")[0];
+      var contentMenu = gj(contextMenu).children("div.uiRightClickPopupMenu:first")[0];
       if (event.clientX + contentMenu.offsetWidth > portWidth) X -= contentMenu.offsetWidth;
       if (event.clientY + contentMenu.offsetHeight > portHeight) Y -= contentMenu.offsetHeight + 5;
       contextMenu.style.top = Y + 5 + "px";

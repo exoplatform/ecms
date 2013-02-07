@@ -150,40 +150,39 @@
 						</div>
 						
 						<div class="ItemContextMenu" style="position: absolute; top: 0px; left: 0px; display: none;">
-							<div class="UIRightClickPopupMenu" style="display: block;">
-								<div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" onkeydown="event.cancelBubble = true;">									
+							<div class="uiRightClickPopupMenu" style="display: block;">
+								<ul class="dropdown-menu uiRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" onkeydown="event.cancelBubble = true;">									
 											<%
 												for(itemContext in managersMultiItemContext) {
 													action = itemContext.getUIExtensionName();
 											%>
-													<a class="MenuItem" style="display: block;" onclick=eXo.ecm.UIListView.postGroupAction("<%=itemContext.event(action)%>")> 	
-													<div class="ItemIcon ${action}16x16Icon">
-													<%=_ctx.appRes("ECMContextMenu.event." + action)%>
-													</div>
-								 			</a>
+												<li class="menuItem" style="display: block;"> 	
+													<a onclick=eXo.ecm.UIListView.postGroupAction("<%=itemContext.event(action)%>")> 	
+														<i class="uiIconEcms${action}"></i> <%=_ctx.appRes("ECMContextMenu.event." + action)%>
+													</a>
+												</li>
 											<%
 												}
 											%>
 										
-								 </div>	
+								 </ul>	
 							 </div> 
 						</div>
-						<div class="GroundContextMenu" style="position: absolute;
-											 top: 0px; left: 0px; display: none;">
-								<div class="UIRightClickPopupMenu" style="display: block;">
-									<div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" onkeydown="event.cancelBubble = true;">					
+						<div class="groundContextMenu" style="position: absolute; top: 0px; left: 0px; display: none;">
+								<div class="uiRightClickPopupMenu" style="display: block;">
+									<ul class="dropdown-menu uiRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" onkeydown="event.cancelBubble = true;">					
 										<%
 													for(itemGroundContext in managersGroundContext) {
 													action = itemGroundContext.getUIExtensionName();
 										%>
-									<a class="MenuItem" href="<%=itemGroundContext.event(action)%>" style="display: block;"> 	
-											<div class="ItemIcon ${action}16x16Icon">
-												<%=_ctx.appRes("ECMContextMenu.event." + action)%>
-											</div>
-									 	</a>
-									<%}%>			
-									 </div>	
-								 </div>
+										<li class="menuItem" style="display: block;"> 	
+											<a href="<%=itemGroundContext.event(action)%>"> 	
+												<i class="uiIconEcms${action}"></i> <%=_ctx.appRes("ECMContextMenu.event." + action)%>
+											</a>
+										</li>
+										<%}%>			
+									</ul>	
+								</div>
 						</div>
 				</div>
       <%      	
