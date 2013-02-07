@@ -175,7 +175,7 @@
         println "<div class=\"IconLocked\"></div>";
 	    }
 	    println "    <div id=\"iconTreeExplorer" + treeNode.getNodePath4ID() + "\" isFile=\"" + node.isNodeType("nt:file") + "\" onclick=\"event.cancelBubble=true;" + expandLink + "\" objectId=\"" + org.exoplatform.services.cms.impl.Utils.getObjectId(treeNode.getPath()) + "\" workspacename=\"" + preferenceWS + Utils.getNodeTypeIcon(node, "16x16Icon", iconType) + "\" " + ctMenu + ">" + strActs ;
-	    println "		<a  onclick=\"event.cancelBubble=true;" + expandLink + "\" style='cursor: pointer;$hiddenStyle' rel=\"tooltip\" data-placement=\"bottom\" title=\"$treeNodeName $lockedLabel\"><i title=\"$treeNodeName\" class=\"" + Utils.getNodeTypeIcon(node, "uiIcon16x16") + "\"></i><span class='nodeName'>$treeNodeName</span></a>" ;
+	    println "		<a  onclick=\"event.cancelBubble=true;" + expandLink + "\" style='cursor: pointer;$hiddenStyle' rel=\"tooltip\" data-placement=\"bottom\" title=\"$treeNodeName $lockedLabel\"><i title=\"$treeNodeName\" class=\"" + Utils.getNodeTypeIcon(node, "uiIcon16x16") + "\"></i> <span class='nodeName'>$treeNodeName</span></a>" ;
 	    println "    </div>" ; 
 	    println "  </div>" ; 
 	    if(treeNode.getChildrenSize() > 0) {
