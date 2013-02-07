@@ -370,7 +370,7 @@
               <div class="lineLeftItem"><span></span></div>
 <!-- Title-->
               <div class="columnName" style="width: 200px;">
-                  <div class="nodeLabel" style="$hiddenStyle" rel="tooltip" data-placement="bottom" title="$title $lockedLabel">$title</div>
+                  <div class="nodeLabel" style="$hiddenStyle" rel="tooltip" data-placement="bottom" title="$title $lockedLabel"><span class="nodeName"><%=title%></span></div>
               </div>
               <div class="lineLeftItem"><span></span></div>
 <!-- Date created -->

@@ -303,7 +303,7 @@
 						<div class="lineLeftItem"><span></span></div>
 						
 		        <div class="columnName" style="width: 125px;">
-								<div class="nodeLabel" style="$hiddenStyle;" rel="tooltip" data-placement="bottom"  title="<%=title%> $lockedLabel"><%=title%></div>
+								<div class="nodeLabel" style="$hiddenStyle;" rel="tooltip" data-placement="bottom"  title="<%=title%> $lockedLabel"><span class="nodeName"><%=title%></span></div>
 		 				</div>
 						
 						<div class="lineLeftItem"><span></span></div>
