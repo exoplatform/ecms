@@ -37,6 +37,7 @@
     <!-- **************************************** -->
     <!-- Project Dependencies                     -->
     <!-- **************************************** -->
+    <org.exoplatform.depmgt.version>2-SNAPSHOT</org.exoplatform.depmgt.version>
     <org.exoplatform.kernel.version>2.4.0-GA</org.exoplatform.kernel.version>
     <org.exoplatform.core.version>2.5.0-GA</org.exoplatform.core.version>
     <org.exoplatform.ws.version>2.3.0-GA</org.exoplatform.ws.version>
@@ -93,7 +94,7 @@
       <dependency>
         <groupId>org.exoplatform</groupId>
         <artifactId>maven-depmgt-pom</artifactId>
-        <version>2-SNAPSHOT</version>
+        <version>${org.exoplatform.depmgt.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
