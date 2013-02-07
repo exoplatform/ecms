@@ -30,7 +30,7 @@
              String actionLabel = _ctx.appRes(uiform.getName() + ".action." + action);
              String link = uiform.event(action);
         %>
-          <button href="javascript:void(0);" onclick="$link" class="btn">$actionLabel</button>
+          <button type="button" href="javascript:void(0);" onclick="$link" class="btn">$actionLabel</button>
         <%}%>
       </div>
   <%uiform.end()%>
