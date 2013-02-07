@@ -20,6 +20,7 @@ import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.selector.UIPermissionSelector;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPopupContainer;
@@ -36,8 +37,10 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
  * Oct 03, 2006
  * 9:43:23 AM
  */
-@ComponentConfig(template = "app:/groovy/webui/component/admin/template/UITemplatesManager.gtmpl", 
-events = { @EventConfig(listeners = UITemplatesManager.SelectTabActionListener.class) })
+@ComponentConfigs( {
+	@ComponentConfig(template = "app:/groovy/webui/component/admin/template/UITemplatesManager.gtmpl", 
+			events = { @EventConfig(listeners = UITemplatesManager.SelectTabActionListener.class) })
+})
 
 public class UITemplatesManager extends UIAbstractManager {
   final static public String POPUP_TEMPLATE_ID = "TemplateContainerPopup";
@@ -73,16 +76,19 @@ public class UITemplatesManager extends UIAbstractManager {
     
     UITemplateContainer uiActionsTemp = addChild(UITemplateContainer.class, null, ACTIONS_TEMPLATE_ID) ;
     uiActionsTemp.getChild(UITemplateList.class).setTemplateFilter(UITemplateList.ACTIONS_TEMPLATE_TYPE);
+    uiActionsTemp.getChild(UITemplateList.class).setId(ACTIONS_TEMPLATE_LIST_ID);
     
     UITemplateContainer uiOthersTemp = addChild(UITemplateContainer.class, null, OTHERS_TEMPLATE_ID) ;
     uiOthersTemp.getChild(UITemplateList.class).setTemplateFilter(UITemplateList.OTHERS_TEMPLATE_TYPE);
+    uiOthersTemp.getChild(UITemplateList.class).setId(OTHERS_TEMPLATE_LIST_ID);
     
     addChild(UIPopupWindow.class, null, POPUP_TEMPLATE_ID) ;    
     addChild(UIPopupWindow.class, null, UITemplateContent.TEMPLATE_PERMISSION) ;
+    
     setSelectedTab("UITemplateContainer");
   }
   
-  public void initPopup(UIComponent uiComponent, String popupId) throws Exception {
+  public void initPopup(UIComponent uiComponent) throws Exception {
     UIPopupWindow uiPopup = getChildById(POPUP_TEMPLATE_ID);
     uiPopup.setRendered(true);
     uiPopup.setShowMask(true);    
@@ -152,6 +158,15 @@ public class UITemplatesManager extends UIAbstractManager {
           context.setResponseComplete(true);
        }
     }
-  } 
+  }
+  
+  public static class CloseActionListener extends EventListener<UIPopupWindow> {
+    public void execute(Event<UIPopupWindow> event) throws Exception {
+  	  UITemplatesManager uiManager = event.getSource().getAncestorOfType(UITemplatesManager.class) ;
+  	  UIPopupWindow uiPopupWindow = uiManager.getChild(UIPopupWindow.class) ;
+  	  uiPopupWindow.setRendered(false) ;
+  	  event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
+  	}
+  }
   
 }

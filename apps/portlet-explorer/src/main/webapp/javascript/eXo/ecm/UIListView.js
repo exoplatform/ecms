@@ -563,8 +563,8 @@
               mask.style.left = mask.X + "px";
             }
             //detect element 
-            for (var i in Self.allItems) {
-              if (Array.prototype[i]) continue;
+            Self.allItems.each(function(i, elem){
+             if (!Array.prototype[i]) {
               var itemBox = Self.allItems[i];
               var posX = itemBox.posX + itemBox.offsetWidth/2;
               var posY = itemBox.posY + itemBox.offsetHeight/2;
@@ -581,7 +581,8 @@
                 itemBox.style.background = "none";
                 //eXo.core.Browser.setOpacity(itemBox, 85);
               }
-            }
+             }
+            });
           // II  of +
           } else if (mask.deltaX > 0 && mask.deltaY < 0) {
             if (mask.offsetHeight > top) {
@@ -595,8 +596,8 @@
             } 
             mask.style.left = mask.storeX + "px";
             //detect element;
-            for (var i in Self.allItems) {
-              if (Array.prototype[i]) continue;
+            Self.allItems.each(function(i, elem){
+             if (!Array.prototype[i]) {
               var itemBox = Self.allItems[i];
               var posX = itemBox.posX + itemBox.offsetWidth/2;
               var posY = itemBox.posY + itemBox.offsetHeight/2;
@@ -613,7 +614,8 @@
                 itemBox.style.background = "none";
                 //eXo.core.Browser.setOpacity(itemBox, 85);
               }
-            }
+             }
+            });
           // I of +
           } else {
             if (mask.offsetHeight > bottom) {
@@ -691,51 +693,51 @@
         if (Self.itemsSelected[i].getAttribute('mediaType') == "true") checkMediaType = true;
         if (Self.itemsSelected[i].getAttribute('trashHome') == "true") checkEmptyTrash = true;
       }
-      var lockAction = gj(contextMenu).find("div.Lock16x16Icon:first")[0];
-      var unlockAction = gj(contextMenu).find("div.Unlock16x16Icon:first")[0];
+      var lockAction = gj(contextMenu).find("i.uiIconEcmsLock:first")[0];
+      var unlockAction = gj(contextMenu).find("i.uiIconEcmsUnlock:first")[0];
 
       if (checkUnlock) {
-        unlockAction.parentNode.style.display = "block";
-        lockAction.parentNode.style.display = "none";
+        unlockAction.parentNode.parentNode.style.display = "block";
+        lockAction.parentNode.parentNode.style.display = "none";
       } else {
-        unlockAction.parentNode.style.display = "none";
-        lockAction.parentNode.style.display = "block";
+        unlockAction.parentNode.parentNode.style.display = "none";
+        lockAction.parentNode.parentNode.style.display = "block";
       }
 
-      var addFavouriteAction = gj(contextMenu).find("div.AddToFavourite16x16Icon:first")[0];
-      var removeFavouriteAction = gj(contextMenu).find("div.RemoveFromFavourite16x16Icon:first")[0];
+      var addFavouriteAction = gj(contextMenu).find("i.uiIconEcmsAddToFavourite:first")[0];
+      var removeFavouriteAction = gj(contextMenu).find("i.uiIconEcmsRemoveFromFavourite:first")[0];
       if (checkRemoveFavourite) {
-        removeFavouriteAction.parentNode.style.display = "block";
-        addFavouriteAction.parentNode.style.display = "none";
+        removeFavouriteAction.parentNode.parentNode.style.display = "block";
+        addFavouriteAction.parentNode.parentNode.style.display = "none";
       } else {
-        addFavouriteAction.parentNode.style.display = "block";
-        removeFavouriteAction.parentNode.style.display = "none";
+        addFavouriteAction.parentNode.parentNode.style.display = "block";
+        removeFavouriteAction.parentNode.parentNode.style.display = "none";
       }
-      var restoreFromTrashAction = gj(contextMenu).find("div.RestoreFromTrash16x16Icon:first")[0];
-      var emptyTrashAction = gj(contextMenu).find("div.EmptyTrash16x16Icon:first")[0];
-      var playMediaAction = gj(contextMenu).find("div.PlayMedia16x16Icon:first")[0];
+      var restoreFromTrashAction = gj(contextMenu).find("i.uiIconEcmsRestoreFromTrash:first")[0];
+      var emptyTrashAction = gj(contextMenu).find("i.uiIconEcmsEmptyTrash:first")[0];
+      var playMediaAction = gj(contextMenu).find("i.uiIconEcmsPlayMedia:first")[0];
 
       if (!checkInTrash) {
-        restoreFromTrashAction.parentNode.style.display = "none";
+        restoreFromTrashAction.parentNode.parentNode.style.display = "none";
       } else {
-        restoreFromTrashAction.parentNode.style.display = "block";
+        restoreFromTrashAction.parentNode.parentNode.style.display = "block";
       }
       if (!checkMediaType) {
-        playMediaAction.parentNode.style.display = "none";
+        playMediaAction.parentNode.parentNode.style.display = "none";
       } else {
-        playMediaAction.parentNode.style.display = "block";
+        playMediaAction.parentNode.parentNode.style.display = "block";
       }
       if (emptyTrashAction) {
         if (!checkEmptyTrash) {
-          emptyTrashAction.parentNode.style.display = "none";
+          emptyTrashAction.parentNode.parentNode.style.display = "none";
         } else {
-          emptyTrashAction.parentNode.style.display = "block";
+          emptyTrashAction.parentNode.parentNode.style.display = "block";
         }
       }
-      var pasteAction = gj(contextMenu).find("div.Paste16x16Icon:first")[0];
+      var pasteAction = gj(contextMenu).find("i.uiIconEcmsPaste:first")[0];
 
       if (Self.itemsSelected.length > 1) {
-        pasteAction.parentNode.style.display = "none";
+        pasteAction.parentNode.parentNode.style.display = "none";
       }
       //check position popup
       var X = event.pageX;
@@ -1040,7 +1042,7 @@
         i++;
       }
       if (totalWidth < uiListGrid.offsetWidth-2) {
-      	totalWidth = uiListGrid.offsetWidth-2;
+        totalWidth = uiListGrid.offsetWidth-2;
       }
       gj(tableBox).css("width", totalWidth + "px");
       //update width of uiListGrid
@@ -1071,31 +1073,30 @@
         }
       });
       eXo.ecm.ECMUtils.documentContainer_OnResize = function(){
-	      var documentInfo = document.getElementById('UIDocumentInfo');
-	      var uiListGrid = gj(documentInfo).find("div.uiListGrid")[0];
-	      if (!uiListGrid) return;
-	      var tableBox = gj(documentInfo).find("div.uiBox")[0];
-	      var headerRow = gj(documentInfo).find("div.titleTable")[0];
-	      var colDiv = gj(headerRow).children("div");
-	      var totalWidth = 0; i=0;
-	      for (;colDiv[i];) {
-	        totalWidth += colDiv[i].offsetWidth;
-	        i++;
-	      }
-	      if (totalWidth < uiListGrid.offsetWidth-2) {
-	        totalWidth = uiListGrid.offsetWidth-2;
-	      }
-	      gj(tableBox).css("width", totalWidth + "px");
-	      eXo.ecm.ECMUtils.updateListGridWidth();
-          var breadcrumb = gj('#FileViewBreadcrumb');
-	      if (breadcrumb) {
-	        breadcrumb.width(breadcrumb.parent().width()-2);
-	      }        
-	      var menubar = gj('div.MenuBar');
-	      if (menubar) {
-	      	menubar.width(gj("div#UIActionBar").width() - 120);
-	      }	      
-      }
+        var documentInfo = document.getElementById('UIDocumentInfo');
+        var uiListGrid = gj(documentInfo).find("div.uiListGrid")[0];
+        if (!uiListGrid) return;
+        var tableBox = gj(documentInfo).find("div.uiBox")[0];
+        var headerRow = gj(documentInfo).find("div.titleTable")[0];
+        var colDiv = gj(headerRow).children("div");
+        var totalWidth = 0; i=0;
+        for (;colDiv[i];) {
+          totalWidth += colDiv[i].offsetWidth;
+          i++;
+        }
+        if (totalWidth < uiListGrid.offsetWidth-2) {
+          totalWidth = uiListGrid.offsetWidth-2;
+        }
+        gj(tableBox).css("width", totalWidth + "px");
+        eXo.ecm.ECMUtils.updateListGridWidth();
+                  var breadcrumb = gj('#FileViewBreadcrumb');
+		    if (breadcrumb) {
+		        breadcrumb.width(breadcrumb.parent().width()-2);
+		      }        
+		     var menubar = gj('div.MenuBar');
+		     if (menubar) {
+		    menubar.width(gj("div#UIActionBar").width() - 120);
+		    }
       //update width of UIListGrid
       eXo.ecm.ECMUtils.updateListGridWidth();  
     }

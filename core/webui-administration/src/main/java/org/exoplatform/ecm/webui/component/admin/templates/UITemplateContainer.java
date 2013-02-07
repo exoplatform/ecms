@@ -19,7 +19,6 @@ package org.exoplatform.ecm.webui.component.admin.templates;
 import org.exoplatform.ecm.webui.selector.UIPermissionSelector;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
-import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
@@ -35,11 +34,7 @@ import org.exoplatform.webui.event.EventListener;
  * 2:09:18 PM
  */
 @ComponentConfigs( {
-	@ComponentConfig(lifecycle = UIContainerLifecycle.class),			
-	@ComponentConfig( 
-		type = UIPopupWindow.class, id="UITemplateContainer", 
-	  template = "system:/groovy/webui/core/UIPopupWindow.gtmpl", 
-	  events = @EventConfig(listeners = UITemplateContainer.CloseActionListener.class))
+	@ComponentConfig(lifecycle = UIContainerLifecycle.class)	
 })
 
 public class UITemplateContainer extends UIContainer {

@@ -38,6 +38,7 @@ import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
+import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
@@ -119,10 +120,10 @@ public class UITemplateList extends UIPagingGrid {
       uiSkinTab.updateGrid(nodeType) ;
       UITemplateContent uiSkinTabForm = uiViewTemplate.findComponentById(UISkinTab.SKIN_FORM_NAME) ;
       uiSkinTabForm.setNodeTypeName(nodeType) ;
-      uiSkinTabForm.update(null) ;           
-      
-      uiManager.initPopup(uiViewTemplate, UITemplatesManager.POPUP_TEMPLATE_ID) ;      
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
+      uiSkinTabForm.update(null);      
+      uiManager.initPopup(uiViewTemplate);
+      UIPopupWindow uiPopup = uiManager.getChildById(UITemplatesManager.POPUP_TEMPLATE_ID);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup) ;
     }
  
   }
@@ -161,8 +162,9 @@ public class UITemplateList extends UIPagingGrid {
       UITemplateForm uiTemplateForm = uiTemplateContainer.createUIComponent(UITemplateForm.class, null, null) ;
       uiTemplateForm.setFilter(uiList.getTemplateFilter());         
       uiTemplateForm.refresh();
-      uiTemplatesManager.initPopup(uiTemplateForm, UITemplatesManager.POPUP_TEMPLATE_ID) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiTemplatesManager) ;
+      uiTemplatesManager.initPopup(uiTemplateForm);
+      UIPopupWindow uiPopup = uiTemplatesManager.getChildById(UITemplatesManager.POPUP_TEMPLATE_ID);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup) ;
     }
   }
 
