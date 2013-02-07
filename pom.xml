@@ -399,6 +399,18 @@
       </dependency>
       <dependency>
         <groupId>org.exoplatform.ecms</groupId>
+        <artifactId>ecms-ext-fastcontentcreator-portlet</artifactId>
+        <version>${project.version}</version>
+        <type>war</type>
+      </dependency>
+      <dependency>
+        <groupId>org.exoplatform.ecms</groupId>
+        <artifactId>ecms-ext-fastcontentcreator-portlet</artifactId>
+        <version>${project.version}</version>
+        <type>pom</type>
+      </dependency>
+      <dependency>
+        <groupId>org.exoplatform.ecms</groupId>
         <artifactId>ecms-ext-webui</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -425,7 +437,7 @@
         <version>${project.version}</version>
       </dependency>
       <!-- To be replaced by an import of jcr parent POM -->
-     <dependency>
+      <dependency>
         <groupId>org.exoplatform.jcr</groupId>
         <artifactId>exo.jcr.component.core</artifactId>
         <version>${org.exoplatform.jcr.version}</version>
@@ -469,7 +481,7 @@
           </exclusion>
         </exclusions>
       </dependency>
-       <dependency>
+      <dependency>
         <groupId>org.exoplatform.jcr</groupId>
         <artifactId>exo.jcr.component.ext</artifactId>
         <version>${org.exoplatform.jcr.version}</version>
@@ -565,7 +577,7 @@
           </exclusion>
         </exclusions>
       </dependency>
-     <dependency>
+      <dependency>
         <groupId>org.exoplatform.kernel</groupId>
         <artifactId>exo.kernel.component.common</artifactId>
         <version>${org.exoplatform.kernel.version}</version>

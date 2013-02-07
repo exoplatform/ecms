@@ -15,7 +15,7 @@
 			<span style="display: none;"></span>
 		</div>
 	</div>
-	<div style="!width: expression(this.previousSibling.offsetWidth - 2 + 'px'); margin: auto; !border: 1px solid white; min-width: 920px;">
+	<div style="!width: expression(this.previousSibling.offsetWidth - 2 + 'px'); margin: auto; !border: 1px solid white;">
  		<%  uicomponent.renderChildren(); %>
   </div>
 </div>

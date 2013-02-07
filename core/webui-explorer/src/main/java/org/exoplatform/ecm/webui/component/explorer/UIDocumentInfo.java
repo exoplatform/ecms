@@ -28,6 +28,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -185,6 +186,8 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
   final protected static String CONTENT_YEAR_PAGE_ITERATOR_ID      = "ContentYearPageIterator";
 
+  protected UIDocumentNodeList    documentNodeList_;
+  
   private static final Log      LOG                                = ExoLogger.getLogger(UIDocumentInfo.class.getName());
 
   private String                typeSort_                          = Preference.SORT_BY_NODETYPE;
@@ -198,7 +201,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   private NodeLocation          currentNode_;
 
   private UIPageIterator        pageIterator_;
-
+  
   private UIPageIterator        todayPageIterator_;
 
   private UIPageIterator        yesterdayPageIterator_;
@@ -221,13 +224,19 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
   private TemplateService       templateService;
 
+  //used for timeline view, indicating which type of content is shown(daily, this week, this month, this year)
   private HashMap<String, String> isExpanded_;
 
   //flag indicating if we need to update data for Timeline
   private boolean updateTimeLineData_ = false;
+  
+  //used in File View, indicating which folders are expanded
+  private Set<String> expandedFolders_;
 
   public UIDocumentInfo() throws Exception {
     pageIterator_ = addChild(UIPageIterator.class, null, CONTENT_PAGE_ITERATOR_ID);
+    documentNodeList_ = addChild(UIDocumentNodeList.class, null, null);
+    documentNodeList_.setShowMoreButton(false);
     todayPageIterator_ = addChild(UIPageIterator.class, null, CONTENT_TODAY_PAGE_ITERATOR_ID);
     yesterdayPageIterator_ = addChild(UIPageIterator.class, null, CONTENT_YESTERDAY_PAGE_ITERATOR_ID);
     earlierThisWeekPageIterator_ = addChild(UIPageIterator.class, null, CONTENT_WEEK_PAGE_ITERATOR_ID);
@@ -238,6 +247,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     templateService = getApplicationComponent(TemplateService.class) ;
     displayCategory_ = UIDocumentInfo.CATEGORY_ALL;
     isExpanded_ = new HashMap<String, String>();
+    expandedFolders_ = new HashSet<String>();
   }
 
   /**
@@ -874,38 +884,49 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     if(uiExplorer.getAllClipBoard().size() > 0) return true;
     return false;
   }
-
+  
   @SuppressWarnings("unchecked")
   public void updatePageListData() throws Exception {
+    UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
+    String currentPath = uiExplorer.getCurrentPath();
+
+    LazyPageList<Object> pageList = getPageList(currentPath);
+    pageIterator_.setPageList(pageList);
+    if (documentNodeList_ != null) {
+      documentNodeList_.removeChild(UIDocumentNodeList.class);
+      documentNodeList_.setPageList(pageList);
+    }
+    updateTimeLineData_ = true;
+  }  
+
+  @SuppressWarnings("unchecked")
+  public LazyPageList<Object> getPageList(String path) throws Exception {
     UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
 
     Preference pref = uiExplorer.getPreference();
     int nodesPerPage = pref.getNodesPerPage();
     List<Node> nodeList = new ArrayList<Node>();
 
-    String currentPath = uiExplorer.getCurrentPath();
     if(!uiExplorer.isViewTag()) {
       Set<String> allItemByTypeFilterMap = uiExplorer.getAllItemByTypeFilterMap();
       if (allItemByTypeFilterMap.size() > 0)
-        nodeList = filterNodeList(uiExplorer.getChildrenList(currentPath, !pref.isShowPreferenceDocuments()));
+        nodeList = filterNodeList(uiExplorer.getChildrenList(path, !pref.isShowPreferenceDocuments()));
       else
-        nodeList = filterNodeList(uiExplorer.getChildrenList(currentPath, pref.isShowPreferenceDocuments()));
+        nodeList = filterNodeList(uiExplorer.getChildrenList(path, pref.isShowPreferenceDocuments()));
     } else { // if (uiExplorer.isViewTag())
       nodeList = uiExplorer.getDocumentByTag();
     }
 
     ListAccess<Object> nodeAccList = new ListAccessImpl<Object>(Object.class,
                                                                 NodeLocation.getLocationsByNodeList(nodeList));
-    pageIterator_.setPageList(new LazyPageList<Object>(nodeAccList, nodesPerPage));
-
-    updateTimeLineData_ = true;
+    return new LazyPageList<Object>(nodeAccList, nodesPerPage);
   }
 
   @SuppressWarnings("unchecked")
   public List<Node> getChildrenList() throws Exception {
     return NodeLocation.getNodeListByLocationList(pageIterator_.getCurrentPageData());
   }
-
+  
   public String getTypeSort() { return typeSort_; }
 
   public void setTypeSort(String typeSort) {
@@ -1218,16 +1239,17 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
       try {
         String sortParam = event.getRequestContext().getRequestParameter(OBJECTID) ;
         String[] array = sortParam.split(";");
-        String order = "";
-        if (array[0].trim().equals(Preference.ASCENDING_ORDER)) order = Preference.BLUE_DOWN_ARROW;
-        else order = Preference.BLUE_UP_ARROW;
+        String order = Preference.ASCENDING_ORDER.equals(array[0].trim()) || !array[1].trim().equals(uicomp.getTypeSort()) ? 
+                       Preference.BLUE_DOWN_ARROW : Preference.BLUE_UP_ARROW;
+        
+        String prefOrder = Preference.ASCENDING_ORDER.equals(array[0].trim()) || !array[1].trim().equals(uicomp.getTypeSort())?
+                           Preference.ASCENDING_ORDER : Preference.DESCENDING_ORDER;                                                                                                     
         uicomp.setSortOrder(order);
         uicomp.setTypeSort(array[1]);
-
         Preference pref = uiExplorer.getPreference();
         if (array.length == 2) {
           pref.setSortType(array[1].trim());
-          pref.setOrder(array[0].trim());
+          pref.setOrder(prefOrder);
         } else {
           return ;
         }
@@ -1540,7 +1562,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
       }
     }
   }
-
+  
   private class SearchComparator implements Comparator<NodeLocation> {
     public int compare(NodeLocation nodeA, NodeLocation nodeB) {
       try {
@@ -1642,6 +1664,10 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   public HashMap<String, String> getIsExpanded() {
     return isExpanded_;
   }
+  
+  public Set<String> getExpandedFolders() {
+    return this.expandedFolders_;
+  }
 
   @Override
   public boolean isDisplayAlternativeText() {
@@ -1726,6 +1752,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   @Override
   public void processRender(WebuiRequestContext context) throws Exception {
     //check if current user can add node to current node
+    //for MuiltUpload drag&drop feature
     if (canAddNode()) {
       context.getJavascriptManager().require("SHARED/multiUpload", "multiUpload").
               addScripts("multiUpload.registerEvents('" + this.getId() +"');");
@@ -1736,5 +1763,12 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     super.processRender(context);
   }
   
+  public boolean hasChildren(Node node) {
+    return false;
+  }
+  
+  public List<Node> getChildrenFromNode(Node node) {
+    return null;
+  }
 
 }

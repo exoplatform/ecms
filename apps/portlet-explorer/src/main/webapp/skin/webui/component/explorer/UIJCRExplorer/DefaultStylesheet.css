@@ -246,6 +246,15 @@
   padding: 0px 12px;
 }
 
+.UIJCRExplorerPortlet .UIJCRExplorer .UIWorkingArea .UIActionBar .UIContextMenuContainer {
+	width: auto;
+	overflow: hidden;
+}
+
+.UIActionBar .UIRightClickPopupMenu .MenuItem {
+	float: left;
+} 
+
 /*############################## -- TabContainer -- ##############################*/
 
 /*############################## -- End UIJCRExplorer -- ##############################*/
@@ -398,6 +407,7 @@
 
 .UIJCRExplorerPortlet .UIListView {
 	position: relative;
+	z-index:0;
 }
 
 .UIJCRExplorerPortlet .UITabPane .UIListView {
@@ -412,11 +422,47 @@
 	overflow-x: auto;
 }
 
+.UIJCRExplorerPortlet .UIFileView .UIListGrid {
+	overflow-x: hidden;
+}
+
 .UIJCRExplorerPortlet .UIListView .TitleTable {
 	font-weight: bold;
 	line-height: 25px; height: 27px;
   background: #f8f8f8;
   border: 1px solid #e1e1e1;
+}
+
+.UIJCRExplorerPortlet .UIFileView .TitleTable {
+	font-weight: lighter;
+	line-height: 55px; height: 57px;	
+}
+
+.UIJCRExplorerPortlet .UIFileView .TitleTable .TitleTableRow {
+	line-height: 25px; height: 27px;	
+}
+
+.UIJCRExplorerPortlet .UIFileView .TitleTable .NodeButton {
+	font-weight: bold;
+	display:block;
+	max-width:100px;
+	overflow:hidden;
+	text-overflow:ellipsis
+}
+
+.UIJCRExplorerPortlet .UIFileView .MoreButton {
+	color:#058ee6;
+	font-weight:bold;
+	margin-right:20px;
+	text-decoration:underline;
+	cursor:pointer;
+}
+
+.UIJCRExplorerPortlet .UIFileView .BreadcrumbLink {
+ margin-right:170px;
+ overflow:hidden;
+ white-space:nowrap;
+ height: 20px;	
 }
 
 .UIJCRExplorerPortlet .UIListGrid  .ColumnIcon .BlueDownArrow16x16Icon{
@@ -452,11 +498,14 @@
 .UIJCRExplorerPortlet .UIListGrid .ColumnName {
 	float: left; /* orientation=lt */
 	float: right; /* orientation=rt */
-	height: 19px;
 	overflow: hidden;
   white-space: nowrap;
   padding-left: 3px;
   color: #4f4f4f;
+}
+
+.UIJCRExplorerPortlet .UIFileView .UIListGrid .ColumnName {
+	color: darkgray;
 }
 
 .UIJCRExplorerPortlet .UIListGrid .ColumnAuditing {
@@ -514,12 +563,24 @@
 }
 
 .UIJCRExplorerPortlet .UIListGrid .RowView {
-	line-height: 19px;
 	margin-top: 6px;
+	height: 19px;
+	line-height: 19px;
+	overflow: hidden;
+}
+
+.UIJCRExplorerPortlet .UIFileView .UIListGrid .RowView {
+	margin-top: 0px;
 }
 
 .UIJCRExplorerPortlet .UIListGrid .FileDrag {
 	background: grey;
+}
+
+.UIJCRExplorerPortlet .UIListGrid .fileViewRowView {
+	height: 40px;
+	border-bottom: 1px solid grey;
+	padding-bottom: 10px;
 }
 
 .MoveItem .UIListGrid .RowView {
@@ -621,11 +682,11 @@
   padding: 0px 2px;
 }
 
-.UIJCRExplorerPortlet .RowView .LineLeftItem {  
+.UIJCRExplorerPortlet .RowView .LineLeftItem {
   width: 3px;
   height: 19px;
   float: left;/* orientation=lt */
-  float: right;/* orientation=rt */  
+  float: right;/* orientation=rt */
   margin: 4px 0px 0px;
   padding: 0px 2px;
 }
@@ -644,6 +705,21 @@
 .UIJCRExplorerPortlet .UIListGrid .RowView .ResizeColumn .NodeLabel {
 	width: 95%;
 	overflow: hidden;
+}
+
+.UIJCRExplorerPortlet .fileInfoBottom {
+	margin: 0px;
+}
+
+.UIJCRExplorerPortlet .fileInfoVersion {
+	color: white;
+	background-color: darkgray;
+	width: 20px;
+	display: inline-block;
+	border-radius: 4px 4px 4px 4px;
+	font-size: 9px;
+	font-weight: bold;
+	text-align: center;
 }
 
 /*############################## -- Begin TimelineView -- ##############################*/
@@ -937,6 +1013,10 @@
 
 /*############################## -- BEGIN UIDocumentInfo -- ##############################*/
 
+.UIJCRExplorerPortlet .UIJCRExplorer .UIDocumentWorkspace {
+	min-height: 500px;
+}
+
 .UIJCRExplorerPortlet .UIJCRExplorer .UIDocumentWorkspace .TitleBG {
 	height: 18px;
   background: url('/eXoWCMResources/skin/images/event/EventFrameBG.gif') repeat-x;
@@ -949,6 +1029,40 @@
   height: 18px;
   border: solid 1px #bdbdbd;
   border-bottom: none;
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIDocumentWorkspace .FolderExpanded {
+  background: url('/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/BlackDownArrow.gif') no-repeat scroll 0% 0%;
+  height: 16px;
+  width: 16px;
+  float: left;
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIDocumentWorkspace .FolderCollapsed {
+  background: url('/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/BlackNextArrow.gif') no-repeat scroll 0% 0%;
+  height: 16px;
+  width: 16px;
+  float: left;
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIDocumentWorkspace .NoArrow {
+  height: 16px;
+  width: 16px;
+  float: left;
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIDocumentWorkspace .Breadcrumb {
+	width: 16px; 
+	height: 16px; 
+	background: url('/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/TreeNodeIcon.gif');
+}
+
+.UIJCRExplorerPortlet .UIJCRExplorer .UIDocumentWorkspace .NodeButton {
+	cursor: pointer;
+	-moz-outline: none; 
+	-moz-user-select: none;
+	color: black;
+	float: left
 }
 
 /*############################## -- END UIDocumentInfo -- ##############################*/
@@ -1716,3 +1830,4 @@
 .NoShow {
 	display:none;
 }
+	

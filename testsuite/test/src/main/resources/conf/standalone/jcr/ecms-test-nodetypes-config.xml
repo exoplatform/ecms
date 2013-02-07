@@ -1299,8 +1299,14 @@
 
         <valueConstraints/>
 
-      </propertyDefinition>   
-
+      </propertyDefinition>
+      <propertyDefinition name="exo:hideExplorerPanel" requiredType="Boolean" autoCreated="true" mandatory="true"
+      	onParentVersion="COPY" protected="false" multiple="false">
+        <valueConstraints/>
+        <defaultValues>
+          <defaultValue>false</defaultValue>
+        </defaultValues>
+      </propertyDefinition>
     </propertyDefinitions>
 
     <childNodeDefinitions>
@@ -2050,8 +2056,6 @@
     </supertypes>
 
   </nodeType>  
-
-  
 
   <nodeType name="exo:thumbnail" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
 

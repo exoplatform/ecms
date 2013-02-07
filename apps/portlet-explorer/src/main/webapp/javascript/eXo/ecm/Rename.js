@@ -282,6 +282,9 @@
 	  // Get offset of right clicked element.
 	  var clickedElmt =  this.getRightClickedElement();
 	  var popupOffset = gj(clickedElmt).offset();
+	  if (!popupOffset) {
+		  popupOffset = gj(eXo.ecm.UIFileView.itemsSelected[0]).offset();
+	  }
 	  popupOffset.top -= 15;
 	  return popupOffset;
 	};

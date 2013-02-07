@@ -47,6 +47,7 @@
       <icon-view>アイコン ビュー</icon-view>
       <thumbails-view>サムネイル ビュー</thumbails-view>
       <cover-flow>カバーフロー ビュー</cover-flow>
+      <file-view>File Management View</file-view>
     </label>
   </Views>
 

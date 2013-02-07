@@ -1134,13 +1134,14 @@
       <manageSimpleCategories>Gérer les catégories simples</manageSimpleCategories>
 	  <option>
 	  	<ListView>Vue de liste</ListView>
-		<TimelineView>Vue de chronologie</TimelineView>
-		<ThumbnailsView>Vue des vignettes</ThumbnailsView>
-		<CoverFlow>Flux de couverture</CoverFlow>
-		<IconView>Visualisation de l'icône</IconView>
-		<SlideShowView>Vue du diaporama</SlideShowView>
-		<SystemView>Vue du système</SystemView>
-		<ContentView>Visualisation du contenu</ContentView>
+		  <TimelineView>Vue de chronologie</TimelineView>
+		  <ThumbnailsView>Vue des vignettes</ThumbnailsView>
+		  <CoverFlow>Flux de couverture</CoverFlow>
+		  <IconView>Visualisation de l'icône</IconView>
+		  <SlideShowView>Vue du diaporama</SlideShowView>
+		  <SystemView>Vue du système</SystemView>
+		  <ContentView>Visualisation du contenu</ContentView>
+		  <FileView>File Management View</FileView>
 	  </option>
     </label>
   </UIViewFormTabPane>
@@ -2684,5 +2685,10 @@
 			  </label>
 		</UICLVTemplateForm>	
 		  
+  <UIViewFormTabPane>
+		<label>  
+  		<hideExplorerPanel>Hide explorer panel in side bar</hideExplorerPanel>
+ 		</label>
+	</UIViewFormTabPane>
 </bundle>
 

@@ -22,6 +22,10 @@
   padding: 9px;
 }
 
+.UIJCRExplorerPortlet .NoShow {	
+	display: none;
+}
+
 .UIJCRExplorerPortlet .LeftContainer {
 	float: left; /* orientation=lt */
 	float: right; /* orientation=rt */
@@ -40,6 +44,10 @@
 
 .UIJCRExplorerPortlet .UIListView .UIListGrid {
   min-width: 655px;
+}
+
+.UIJCRExplorerPortlet .UIFileView .UIListGrid {
+  min-width: 200px;
 }
 
 .UIJCRExplorerPortlet .UIFormGrid {

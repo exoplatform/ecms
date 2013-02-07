@@ -49,6 +49,7 @@
       <list-view>Liste</list-view>
       <authoring-view>Auteur</authoring-view>
       <wcm-category-view>Catégories</wcm-category-view>
+      <file-view>File Management View</file-view>
     </label>
   </Views>
 

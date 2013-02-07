@@ -101,7 +101,8 @@ public class ManageViewPlugin extends BaseComponentPlugin {
         String viewNodeName = viewObject.getName();
         configuredViews_.add(viewNodeName);
         if(viewHomeNode.hasNode(viewNodeName)) continue ;
-        Node viewNode = addView(viewHomeNode,viewNodeName,viewObject.getPermissions(),viewObject.getTemplate()) ;
+        Node viewNode = addView(viewHomeNode,viewNodeName,viewObject.getPermissions(),
+                                viewObject.isHideExplorerPanel(), viewObject.getTemplate()) ;
         for(Tab tab:viewObject.getTabList()) {
           addTab(viewNode,tab.getTabName(),tab.getButtons()) ;
         }
@@ -115,10 +116,12 @@ public class ManageViewPlugin extends BaseComponentPlugin {
     session.logout();
   }
 
-  private Node addView(Node viewManager, String name, String permissions, String template) throws Exception {
+  private Node addView(Node viewManager, String name, String permissions, boolean hideExplorerPanel, String template) 
+  throws Exception {
     Node contentNode = viewManager.addNode(name, "exo:view");
     contentNode.setProperty("exo:accessPermissions", permissions);
     contentNode.setProperty("exo:template", template);
+    contentNode.setProperty("exo:hideExplorerPanel", hideExplorerPanel);
     viewManager.save() ;
     return contentNode ;
   }

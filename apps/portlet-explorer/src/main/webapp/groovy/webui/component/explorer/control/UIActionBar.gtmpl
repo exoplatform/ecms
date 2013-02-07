@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%
 	/**
 	 * Created by The eXo Platform SARL
@@ -57,6 +58,7 @@
 <%if (uiPortlet.isShowActionBar() && !uiExplorer.isAddingDocument()) {%>
 <% uiform.begin() %>
 <div class="uiActionBar $actionBarStyle" id="$uicomponent.id" style="position: relative;">
+  <div id="ActionMenuPlaceHolder" class="FL"><span></span></div>
   <div class="uiTabNormal uiTabGrayInPage">
     <ul class="nav nav-tabs uiTabsContainer" $displayTabContainer>
 			<%
@@ -153,6 +155,7 @@
     </div>
   <% uiform.end() %>
 <%}
+  jsManager.require("SHARED/ecm-utils", "ecmutil").addScripts('ecmutil.ECMUtils.loadContainerReference();');
   jsManager.require("SHARED/ecm-utils", "ecmutil").addScripts('ecmutil.ECMUtils.tabsContainer_OnResize();');
   jsManager.require("SHARED/ecm-utils", "ecmutil").addScripts('ecmutil.ECMUtils.actionbarContainer_OnResize();');
 %>

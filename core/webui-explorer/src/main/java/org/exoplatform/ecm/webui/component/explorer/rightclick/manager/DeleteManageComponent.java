@@ -448,7 +448,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     String deleteNotice = "";
     String deleteNoticeParam = "";
     if (nodePath.indexOf(";") > -1) {
-      processRemoveMultiple(nodePath.split(";"), event);
+      processRemoveMultiple(Utils.removeChildNodes(nodePath), event);
       if(checkToMoveToTrash) deleteNotice = "UIWorkingArea.msg.feedback-delete-multi";
       else deleteNotice = "UIWorkingArea.msg.feedback-delete-permanently-multi";
       deleteNoticeParam = String.valueOf(nodePath.split(";").length);

@@ -36,6 +36,7 @@ import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.cms.views.ViewConfig;
 import org.exoplatform.services.cms.views.ViewConfig.Tab;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -50,6 +51,7 @@ import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
 
 /**
@@ -69,7 +71,7 @@ public class UIViewForm extends UIForm implements UISelectable {
   final static public String FIELD_TEMPLATE = "template" ;
   final static public String FIELD_ENABLEVERSION = "enableVersion" ;
 	final static public String FIELD_PERMISSION = "permission" ;
-
+  final static public String FIELD_HIDE_EXPLORER_PANEL = "hideExplorerPanel" ;
 
   private boolean isView_ = true ;
   private NodeLocation views_;
@@ -136,6 +138,11 @@ public class UIViewForm extends UIForm implements UISelectable {
     addUIFormInput(enableVersion) ;
     //setActions(new String[]{"Save", "Reset", "Cancel", "AddTabForm"}, null) ;
     //setActions(new String[]{"Save", "Cancel"}, null) ;
+    //prefernce: is show side bar
+    UICheckBoxInput hideExplorerPanel = 
+      new UICheckBoxInput(FIELD_HIDE_EXPLORER_PANEL, FIELD_HIDE_EXPLORER_PANEL, false);
+    hideExplorerPanel.setRendered(false);
+    addUIFormInput(hideExplorerPanel);
   }
 
   public void processRender(WebuiRequestContext context) throws Exception {
@@ -250,6 +257,7 @@ public class UIViewForm extends UIForm implements UISelectable {
     getUIFormSelectBox(FIELD_TEMPLATE).setValue(null) ;
     getUIFormSelectBox(FIELD_TEMPLATE).setDisabled(!isAddNew) ;
     getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setRendered(!isAddNew) ;
+    getUICheckBoxInput(FIELD_HIDE_EXPLORER_PANEL).setRendered(!isAddNew);
     setViewName("");
     if(isAddNew) {
     	//setActions(new String[]{"Save", "Reset", "Cancel"}, null) ;
@@ -258,6 +266,7 @@ public class UIViewForm extends UIForm implements UISelectable {
       tabMap_.clear() ;
       views_ = null ;
       //setActionInfo(FIELD_TABS, null) ;
+      getUICheckBoxInput(FIELD_HIDE_EXPLORER_PANEL).setValue(false);
     }
     selectedVersion_ = null ;
     baseVersionName_ = null ;
@@ -291,6 +300,11 @@ public class UIViewForm extends UIForm implements UISelectable {
         getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setEnable(true) ;
       }
     }
+    //pref is show side bar
+    getUICheckBoxInput(FIELD_HIDE_EXPLORER_PANEL).setRendered(true);
+    getUICheckBoxInput(FIELD_HIDE_EXPLORER_PANEL).setValue(
+                     viewNode.getProperty(NodetypeConstant.EXO_HIDE_EXPLORER_PANEL).getBoolean());
+    //---------------------
     Node viewsNode = NodeLocation.getNodeByLocation(views_);
     if (selectedVersion != null) {
       viewsNode.restore(selectedVersion.getName(), false) ;
@@ -338,6 +352,7 @@ public class UIViewForm extends UIForm implements UISelectable {
       }
     }
     boolean isEnableVersioning = getUIFormCheckBoxInput(FIELD_ENABLEVERSION).isChecked() ;
+    boolean hideExplorerPanel = getUICheckBoxInput(FIELD_HIDE_EXPLORER_PANEL).isChecked();
     List<ViewConfig> viewList = vservice_.getAllViews() ;
     UIPopupWindow uiPopup = getAncestorOfType(UIPopupWindow.class) ;
     uiPopup.setShowMask(true);
@@ -371,7 +386,7 @@ public class UIViewForm extends UIForm implements UISelectable {
     List<Tab> tabList = new ArrayList<Tab>(tabMap_.values());
     Node viewNode = NodeLocation.getNodeByLocation(views_);
     if(views_ == null || !isEnableVersioning) {
-      //vservice_.addView(viewName, permissions, template, tabList) ;
+      //vservice_.addView(viewName, permissions, hideExplorerPanel, template, tabList) ;
       if(viewNode != null) {
         for(NodeIterator iter = viewNode.getNodes(); iter.hasNext(); ) {
           Node tab = iter.nextNode() ;
@@ -390,7 +405,7 @@ public class UIViewForm extends UIForm implements UISelectable {
         Node tab = iter.nextNode() ;
         if(!tabMap_.containsKey(tab.getName())) tab.remove() ;
       }
-      //vservice_.addView(viewName, permissions, template, tabList) ;
+      //vservice_.addView(viewName, permissions, hideExplorerPanel, template, tabList) ;
       try {
         viewNode.save() ;
         viewNode.checkin();

@@ -694,6 +694,12 @@
 		 */
 		ECMUtils.prototype.actionbarContainer_OnResize = function () {
 			var divAction = document.getElementById("uiActionsBarContainer");
+			
+			var actionbar= gj('#uiActionBar');
+			if (actionbar) { //VinhNT workaround for the un-expand width of ActionBar problem, should be improved later
+			  actionbar.width(actionbar.parent().width()-2);
+			}
+			
 			var uiMainActionContainer   = gj(divAction).find("ul.nav-pills")[0];
 			if (!uiMainActionContainer) return; 
 			var listHiddenActionContainer = gj(uiMainActionContainer).find("li.listHiddenActionsContainer:first")[0];

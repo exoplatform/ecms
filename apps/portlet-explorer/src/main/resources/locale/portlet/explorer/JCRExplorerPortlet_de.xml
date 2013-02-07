@@ -3513,6 +3513,36 @@
 	    <InvalidCharacters>Invalid characters will be changed by '-'</InvalidCharacters>
 	    <DropFileMessage>Drop your files here in the current folder</DropFileMessage>
 	    <Close>Close</Close>
+	    <in>in</in>
+	    <MaxFileSizeAlert>The file size exceeds the size limit of </MaxFileSizeAlert>
+	    <Waiting>Waiting</Waiting>
+	    <Error>Error</Error>
+	    <or>or</or>
+	    <AlreadyInUse>Already in use</AlreadyInUse>
+	    <Keep>Keep both</Keep>
+	    <Replace>Replace</Replace>
+	    <Canceled>Canceled</Canceled>
+	    <Cancel>Cancel</Cancel>
+	    <AbortAllConfirmation>Do you want to abort all files in progress?</AbortAllConfirmation>
   	</label>
   </UIMultiUpload>    
+  <UIDocumentNodeList>
+  	<label>
+  		<CreatedOn>Created on</CreatedOn>
+  		<Updated>Updated </Updated>
+  		<by>by</by>
+  		<you>you</you>
+  	</label>
+  </UIDocumentNodeList>
+  <FileView>
+    <label>
+      <name>Name</name>
+      <date>Date</date>
+      <size>Size</size>
+      <sortBy>Sort by:</sortBy>
+      <filesAreSelected>files are selected.</filesAreSelected>
+      <ClearSelection>Clear selection</ClearSelection>
+      <more>More</more>
+    </label>
+  </FileView>
 </bundle>

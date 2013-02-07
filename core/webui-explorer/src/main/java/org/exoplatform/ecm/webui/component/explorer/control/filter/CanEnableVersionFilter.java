@@ -32,6 +32,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionAbstractFilter;
 public class CanEnableVersionFilter extends UIExtensionAbstractFilter {
 
   public boolean accept(Map<String, Object> context) throws Exception {
+    if (context == null) return true;
     Node currentNode = (Node) context.get(Node.class.getName());
     return currentNode.canAddMixin(Utils.MIX_VERSIONABLE) || currentNode.isNodeType(Utils.MIX_VERSIONABLE);
   }

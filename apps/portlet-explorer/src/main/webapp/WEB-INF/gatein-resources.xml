@@ -69,6 +69,9 @@
         <module>uiListView</module>
       </depends>
       <depends>
+        <module>uiFileView</module>
+      </depends>
+      <depends>
         <module>uiSimpleView</module>
       </depends>
       <depends>
@@ -185,6 +188,26 @@
     </depends>
   </module>
   
+  <module>
+    <name>uiFileView</name>
+    <script>
+      <path>/javascript/eXo/ecm/UIFileView.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+      <as>gj</as>
+    </depends>
+    <depends>
+      <module>ecm-utils</module>
+    </depends>
+    <depends>
+      <module>wcm-utils</module>
+    </depends>
+    <depends>
+      <module>webui-ext</module>
+    </depends>
+  </module>
+    
   <module>
     <name>rename</name>
     <script>

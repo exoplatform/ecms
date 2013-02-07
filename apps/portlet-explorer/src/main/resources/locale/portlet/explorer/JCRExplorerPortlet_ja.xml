@@ -3459,24 +3459,46 @@
   </UIPermissionForm>
   <UIMultiUpload>
   	<label>
-          <AbortAll>Abort all</AbortAll>
-          <AbortAllFiles>Abort all files</AbortAllFiles>
-          <MaxFileSize>Maximal file size is </MaxFileSize>
-          <InvalidCharacters>Invalid characters will be changed by '-'</InvalidCharacters>
-          <AbortAllConfirmation>Do you want to abort all files in progress?</AbortAllConfirmation>
-          <MaxFileSizeAlert>The file's size exceeds the size limit of </MaxFileSizeAlert>
-          <DropFileMessage>Drop your files here in the current folder</DropFileMessage>
-          <in>in</in>
-          <Canceled>Canceled</Canceled>
-          <Cancel>Cancel</Cancel>
-          <Error>Error</Error>
-          <Keep>Keep both</Keep>
-          <Replace>Replace</Replace>
-          <Waiting>Waiting</Waiting>
-          <AlreadyInUse>Already in use</AlreadyInUse>
-          <or>or</or>
-          <Close>Close</Close>
+      <AbortAll>Abort all</AbortAll>
+      <AbortAllFiles>Abort all files</AbortAllFiles>
+      <MaxFileSize>Maximal file size is </MaxFileSize>
+      <InvalidCharacters>Invalid characters will be changed by '-'</InvalidCharacters>
+      <AbortAllConfirmation>Do you want to abort all files in progress?</AbortAllConfirmation>
+      <DropFileMessage>Drop your files here in the current folder</DropFileMessage>
+      <AlreadyInUse>Already in use</AlreadyInUse>
+      <or>or</or>
+      <Close>Close</Close>
+	    <in>in</in>
+	    <MaxFileSizeAlert>The file size exceeds the size limit of </MaxFileSizeAlert>
+	    <Waiting>Waiting</Waiting>
+	    <Error>Error</Error>
+	    <or>or</or>
+	    <AlreadyInUse>Already in use</AlreadyInUse>
+	    <Keep>Keep both</Keep>
+	    <Replace>Replace</Replace>
+	    <Canceled>Canceled</Canceled>
+	    <Cancel>Cancel</Cancel>
+	    <AbortAllConfirmation>Do you want to abort all files in progress?</AbortAllConfirmation>
   	</label>
   </UIMultiUpload>    
-</bundle>
 
+  <UIDocumentNodeList>
+  	<label>
+  		<CreatedOn>Created on</CreatedOn>
+  		<Updated>Updated </Updated>
+  		<by>by</by>
+  		<you>you</you>
+  	</label>
+  </UIDocumentNodeList>
+  <FileView>
+    <label>
+      <name>Name</name>
+      <date>Date</date>
+      <size>Size</size>
+      <sortBy>Sort by:</sortBy>
+      <filesAreSelected>files are selected.</filesAreSelected>
+      <ClearSelection>Clear selection</ClearSelection>
+      <more>More</more>
+    </label>
+  </FileView>
+</bundle>

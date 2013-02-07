@@ -22,6 +22,7 @@ public class Preference {
   public static final String SORT_BY_NODENAME = "Alphabetic" ;
   public static final String SORT_BY_NODETYPE= "Type" ;
   public static final String SORT_BY_CREATED_DATE= "CreatedDate" ;
+  public static final String SORT_BY_DATE= "Date" ;
   public static final String SORT_BY_MODIFIED_DATE= "ModifiedDate" ;
   public static final String PROPERTY_SORT = "Property" ;
   public static final String SORT_BY_OWNER = "Owner";

@@ -1087,6 +1087,14 @@
 	      }
 	      gj(tableBox).css("width", totalWidth + "px");
 	      eXo.ecm.ECMUtils.updateListGridWidth();
+          var breadcrumb = gj('#FileViewBreadcrumb');
+	      if (breadcrumb) {
+	        breadcrumb.width(breadcrumb.parent().width()-2);
+	      }        
+	      var menubar = gj('div.MenuBar');
+	      if (menubar) {
+	      	menubar.width(gj("div#UIActionBar").width() - 120);
+	      }	      
       }
       //update width of UIListGrid
       eXo.ecm.ECMUtils.updateListGridWidth();  
