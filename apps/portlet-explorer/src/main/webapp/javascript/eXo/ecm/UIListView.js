@@ -1065,7 +1065,6 @@
         return;
       }
   //    var _columnData = gj(Self.columnData).data();
-  
       gj.each( gj(Self.columnData).data(),function(key, value) {
        var div2Resize  = gj(listGrid).find("div." + key);
         for (var i=0; i< div2Resize.length; i++) {
