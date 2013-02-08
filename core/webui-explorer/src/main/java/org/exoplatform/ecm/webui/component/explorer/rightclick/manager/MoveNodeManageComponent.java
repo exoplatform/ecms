@@ -46,6 +46,7 @@ import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -237,14 +238,14 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
         removeMixinEXO_RESTORE_LOCATION(srcSession, destPath);
         Node desNode = (Node)srcSession.getItem(destPath);
         LockUtil.changeLockToken(srcPath, desNode);
-        if (activityService.isAcceptedNode(desNode)) {
+        if (activityService.isAcceptedNode(desNode) || desNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
           listenerService.broadcast(ActivityCommonService.NODE_MOVED_ACTIVITY, desNode, desNode.getPath());
         }
         srcSession.save();
       } else {
         destWorkspace.clone(srcWorkspace.getName(), srcPath, destPath, false);
         Node desNode =(Node) destWorkspace.getSession().getItem(destPath);
-        if (activityService.isAcceptedNode(desNode)) {
+        if (activityService.isAcceptedNode(desNode) || desNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
           listenerService.broadcast(ActivityCommonService.NODE_MOVED_ACTIVITY, desNode, destPath);
         }
         //delete EXO_RESTORE_LOCATION if source is in trash

@@ -69,6 +69,8 @@ public class ActivityCommonService {
   
   public static String VALUE_SEPERATOR            = "_S#E#P#R_";
   
+  public static String METADATA_VALUE_SEPERATOR   = "_M#S#E#P#R_";
+  
   public static String MIX_COMMENT                = "exo:activityComment";
   public static String MIX_COMMENT_CREATOR        = "exo:activityCreator";
   public static String MIX_COMMENT_CREATING       = "exo:creating";
