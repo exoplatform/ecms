@@ -1064,42 +1064,43 @@
       if(!gj.data(Self.columnData)) { 
         return;
       }
-  //    var _columnData = gj(Self.columnData).data();
       gj.each( gj(Self.columnData).data(),function(key, value) {
        var div2Resize  = gj(listGrid).find("div." + key);
         for (var i=0; i< div2Resize.length; i++) {
           div2Resize[i].style.width = value;
         }
       });
-      eXo.ecm.ECMUtils.documentContainer_OnResize = function(){
-        var documentInfo = document.getElementById('UIDocumentInfo');
-        var uiListGrid = gj(documentInfo).find("div.uiListGrid")[0];
-        if (!uiListGrid) return;
-        var tableBox = gj(documentInfo).find("div.uiBox")[0];
-        var headerRow = gj(documentInfo).find("div.titleTable")[0];
-        var colDiv = gj(headerRow).children("div");
-        var totalWidth = 0; i=0;
-        for (;colDiv[i];) {
-          totalWidth += colDiv[i].offsetWidth;
-          i++;
-        }
-        if (totalWidth < uiListGrid.offsetWidth-2) {
-          totalWidth = uiListGrid.offsetWidth-2;
-        }
-        gj(tableBox).css("width", totalWidth + "px");
-        eXo.ecm.ECMUtils.updateListGridWidth();
-                  var breadcrumb = gj('#FileViewBreadcrumb');
-		    if (breadcrumb) {
-		        breadcrumb.width(breadcrumb.parent().width()-2);
-		      }        
-		     var menubar = gj('div.MenuBar');
-		     if (menubar) {
-		    menubar.width(gj("div#UIActionBar").width() - 120);
-		    }
-      //update width of UIListGrid
-      eXo.ecm.ECMUtils.updateListGridWidth();  
     }
-
+    
+    eXo.ecm.ECMUtils.documentContainer_OnResize = function(){
+      var documentInfo = document.getElementById('UIDocumentInfo');
+      var uiListGrid = gj(documentInfo).find("div.uiListGrid")[0];
+      if (!uiListGrid) return;
+      var tableBox = gj(documentInfo).find("div.uiBox")[0];
+      var headerRow = gj(documentInfo).find("div.titleTable")[0];
+      var colDiv = gj(headerRow).children("div");
+      var totalWidth = 0; i=0;
+      for (;colDiv[i];) {
+        totalWidth += colDiv[i].offsetWidth;
+        i++;
+      }
+      if (totalWidth < uiListGrid.offsetWidth-2) {
+        totalWidth = uiListGrid.offsetWidth-2;
+      }
+      gj(tableBox).css("width", totalWidth + "px");
+      eXo.ecm.ECMUtils.updateListGridWidth();
+                var breadcrumb = gj('#FileViewBreadcrumb');
+      if (breadcrumb) {
+          breadcrumb.width(breadcrumb.parent().width()-2);
+        }        
+       var menubar = gj('div.MenuBar');
+       if (menubar) {
+      menubar.width(gj("div#UIActionBar").width() - 120);
+      }
+      
+      //update width of UIListGrid
+      eXo.ecm.ECMUtils.updateListGridWidth();
+    }
   };
 
   eXo.ecm.UIListView = new ListView();
