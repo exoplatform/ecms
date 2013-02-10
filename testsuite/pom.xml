@@ -3,8 +3,8 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>ecms</artifactId>
-    <version>4.0.0.Alpha1-relooking-SNAPSHOT</version>
     <groupId>org.exoplatform.ecms</groupId>
+    <version>4.0.0-relooking-SNAPSHOT</version>
   </parent>
   <artifactId>ecms-testsuite</artifactId>
   <packaging>pom</packaging>
