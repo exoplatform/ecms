@@ -5,7 +5,7 @@
     <artifactId>maven-parent-pom</artifactId>
     <groupId>org.exoplatform</groupId>
     <version>9-beta-1</version>
-    <relativePath />
+    <relativePath></relativePath>
   </parent>
   <groupId>org.exoplatform.ecms</groupId>
   <artifactId>ecms</artifactId>
@@ -23,8 +23,8 @@
   <scm>
     <connection>scm:git:git://github.com/exoplatform/ecms.git</connection>
     <developerConnection>scm:git:git@github.com:exoplatform/ecms.git</developerConnection>
-    <url>https://fisheye.exoplatform.com/browse/ecms</url>
     <tag>HEAD</tag>
+    <url>https://fisheye.exoplatform.com/browse/ecms</url>
   </scm>
   <properties>
     <!-- **************************************** -->
