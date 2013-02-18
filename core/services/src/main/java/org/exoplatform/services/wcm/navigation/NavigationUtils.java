@@ -96,6 +96,25 @@ public class NavigationUtils {
     }
   }
   
+  /**
+   * @purpose Get UserNavigation of a specified element
+   * @param UserPortal
+   * @param Site Key
+   * @return UserNavigation of group  
+   */
+  public static UserNavigation getUserNavigation(UserPortal userPortal, SiteKey siteKey) throws Exception {
+	    UIPortalApplication portalApp = Util.getUIPortalApplication();
+	    UserACL userACL = portalApp.getApplicationComponent(UserACL.class);
+	    UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
+	    NavigationContext portalNav = userPortalConfigService.getNavigationService().
+	                                                          loadNavigation(siteKey);
+	    if (portalNav == null) {
+	      return null;
+	    } else {
+	      return userNavigationCtor.newInstance(userPortal, portalNav, userACL.hasEditPermission(portalApp.getUserPortalConfig().getPortalConfig()));
+	    }
+	  }
+  
   public static void removeNavigationAsJson (String portalName, String username) throws Exception
   {
     String key = portalName + " " + username;
