@@ -42,6 +42,7 @@ import org.exoplatform.portal.config.DataStorage;
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.mop.SiteType;
+import org.exoplatform.portal.mop.SiteKey;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserPortal;
@@ -883,11 +884,11 @@ public class Utils {
                                              currentUIPortal.getEditPermission());
   }
 
-  public static UserNavigation getSelectedNavigation() throws Exception {
-    
-    return NavigationUtils.getUserNavigationOfPortal(
-                 Util.getPortalRequestContext().getUserPortalConfig().getUserPortal(),
-                 Util.getUIPortal().getSiteKey().getName());
+  public static UserNavigation getSelectedNavigation() throws Exception { 
+    SiteKey siteKey = Util.getUIPortal().getSiteKey();
+    return NavigationUtils.getUserNavigation(
+          Util.getPortalRequestContext().getUserPortalConfig().getUserPortal(),
+          siteKey);
   }
 
   public static String sanitize(String value) {
