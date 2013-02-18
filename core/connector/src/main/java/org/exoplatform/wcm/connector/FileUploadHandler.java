@@ -346,6 +346,16 @@ public class FileUploadHandler {
     if(!file.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
     	file.addMixin(NodetypeConstant.MIX_REFERENCEABLE);
     }
+    
+    if(!file.isNodeType(NodetypeConstant.MIX_COMMENTABLE))
+    	file.addMixin(NodetypeConstant.MIX_COMMENTABLE);
+    
+    if(!file.isNodeType(NodetypeConstant.MIX_VOTABLE))
+    	file.addMixin(NodetypeConstant.MIX_VOTABLE);
+    
+    if(!file.isNodeType(NodetypeConstant.MIX_I18N))
+    	file.addMixin(NodetypeConstant.MIX_I18N);
+    
     if(!file.hasProperty(NodetypeConstant.EXO_TITLE)) {
     	file.setProperty(NodetypeConstant.EXO_TITLE, file.getName());
     }

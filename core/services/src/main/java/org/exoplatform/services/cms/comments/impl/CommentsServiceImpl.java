@@ -106,7 +106,7 @@ public class CommentsServiceImpl implements CommentsService {
       if(!document.hasNode(LANGUAGES) || language.equals(multiLangService_.getDefault(document))) {
         if(document.hasNode(COMMENTS)) commentNode = document.getNode(COMMENTS) ;
         else {
-          commentNode = document.addNode(COMMENTS,NT_UNSTRUCTURE) ;
+          commentNode = document.addNode(COMMENTS,NT_UNSTRUCTURE) ;          
           commentNode.addMixin("exo:hiddenable");
         }
       } else {

@@ -188,6 +188,12 @@ public class NodetypeConstant {
   
   public static final String EXO_HIDE_EXPLORER_PANEL = "exo:hideExplorerPanel";
   
+  public static final String MIX_COMMENTABLE = "mix:commentable";
+  
+  public static final String MIX_VOTABLE = "mix:votable";
+  
+  public static final String MIX_I18N = "mix:i18n";
+  
   // public static final String PUBLICATION_STATE_AND_VERSION_BASED_PUBLICATION
   // = "publication:stateAndVersionBasedPublication";
 
