@@ -9,7 +9,7 @@
   </parent>
   <groupId>org.exoplatform.ecms</groupId>
   <artifactId>exo-ecms</artifactId>
-  <version>2.3.10-SNAPSHOT</version>
+  <version>2.3.11-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>eXo ECM Suite</name>
   <description>eXo Entreprise Content Management Suite</description>
@@ -28,14 +28,14 @@
   </ciManagement>
   <properties>
     <!-- Dependencies versions -->
-    <org.exoplatform.kernel.version>2.3.10-GA-SNAPSHOT</org.exoplatform.kernel.version>
-    <org.exoplatform.core.version>2.4.10-GA-SNAPSHOT</org.exoplatform.core.version>
-    <org.exoplatform.ws.version>2.2.10-GA-SNAPSHOT</org.exoplatform.ws.version>
-    <org.exoplatform.jcr.version>1.14.10-GA-SNAPSHOT</org.exoplatform.jcr.version>
-    <org.exoplatform.jcr-services.version>1.14.10-GA-SNAPSHOT</org.exoplatform.jcr-services.version>
-    <org.exoplatform.portal.version>3.2.7-PLF-SNAPSHOT</org.exoplatform.portal.version>
+    <org.exoplatform.kernel.version>2.3.11-GA-SNAPSHOT</org.exoplatform.kernel.version>
+    <org.exoplatform.core.version>2.4.11-GA-SNAPSHOT</org.exoplatform.core.version>
+    <org.exoplatform.ws.version>2.2.11-GA-SNAPSHOT</org.exoplatform.ws.version>
+    <org.exoplatform.jcr.version>1.14.11-GA-SNAPSHOT</org.exoplatform.jcr.version>
+    <org.exoplatform.jcr-services.version>1.14.11-GA-SNAPSHOT</org.exoplatform.jcr-services.version>
+    <org.exoplatform.portal.version>3.2.8-PLF-SNAPSHOT</org.exoplatform.portal.version>
     <exo.tool.framework.junit.version>1.2.0</exo.tool.framework.junit.version>
-    <org.exoplatform.commons.version>1.1.11-SNAPSHOT</org.exoplatform.commons.version>
+    <org.exoplatform.commons.version>1.1.12-SNAPSHOT</org.exoplatform.commons.version>
     <org.exoplatform.tool.version>1.0.0</org.exoplatform.tool.version>
     <chromattic.version>1.1.2</chromattic.version>
     <org.xcmis.version>1.2.2</org.xcmis.version>
@@ -102,7 +102,7 @@
     <org.jbossxb.version>2.0.1.GA</org.jbossxb.version>
     <org.jbosscore.version>2.2.9.GA</org.jbosscore.version>
     <org.imgscalr.version>4.2</org.imgscalr.version>
-    <org.exoplatform.doc.doc-style.version>1.0.9-SNAPSHOT</org.exoplatform.doc.doc-style.version>
+    <org.exoplatform.doc.doc-style.version>1.0.10-SNAPSHOT</org.exoplatform.doc.doc-style.version>
         <!-- Wikbook -->
     <wikbook.version>0.9.41</wikbook.version>
     <!-- ************** -->
@@ -442,7 +442,6 @@
     <module>packaging</module>
     <module>examples</module>
     <module>docs</module>
-    <module>testsuite</module>
     <module>upgrade</module>
   </modules>
 </project>

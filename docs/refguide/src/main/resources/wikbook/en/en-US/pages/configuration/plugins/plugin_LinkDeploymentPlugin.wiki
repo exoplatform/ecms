@@ -1,15 +1,12 @@
 This plugin is used to create predefined Symlinks into the system.
 
 To use the plugin in the component configuration, you must use the following target-component:
-{code:xml}
-<target-component>org.exoplatform.services.deployment.WCMContentInitializerService</target-component>
-{code}
+{code:xml}<target-component>org.exoplatform.services.deployment.WCMContentInitializerService</target-component>{code}
 
 The configuration is applied mainly in _packaging/ecmdemo/webapp/src/main/webapp/WEB-INF/conf/sample-portal/wcm/deployment/acme-deployment-configuration.xml_.
 
 *Sample configuration*:
-{code:xml}
-<external-component-plugins>
+{code:xml}<external-component-plugins>
     <target-component>org.exoplatform.services.deployment.WCMContentInitializerService</target-component>
     <component-plugin>
         <name>Content Initializer Service</name>
@@ -55,8 +52,7 @@ The configuration is applied mainly in _packaging/ecmdemo/webapp/src/main/webapp
             </object-param>
         </init-params>
     </component-plugin>
-</external-component-plugins>
-{code}
+</external-component-plugins>{code}
 
 In which:
 

@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -493,6 +494,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
         generalDrivers.add(drive);
       }
     }
+    Collections.sort(generalDrivers);
     return generalDrivers;
   }
 
@@ -535,6 +537,19 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     return currentUserIdentity.getMemberships();
   }
 
+  private static class NodeTitleComparator implements Comparator<Node>{
+    @Override
+    public int compare(Node node1, Node node2) {
+      try{
+        String titleNode1 = Utils.getTitle(node1);
+        String titleNode2 = Utils.getTitle(node2);
+        return titleNode1.compareToIgnoreCase(titleNode2) ;
+      }catch (Exception e) {
+        return 0;
+      }
+    } 
+  }
+
   /**
    * Build an XML response for children nodes.
    *
@@ -566,8 +581,12 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       files.setAttribute("isUpload", "true");
       Node sourceNode = null;
       Node checkNode = null;
+      List<Node> childList = new ArrayList<Node>();
       for (NodeIterator iterator = node.getNodes(); iterator.hasNext();) {
-        Node child = iterator.nextNode();
+        childList.add(iterator.nextNode());
+      }
+      Collections.sort(childList,new NodeTitleComparator());
+      for (Node child:childList) {
         String fileType = null;
         if (child.isNodeType(FCKUtils.EXO_HIDDENABLE))
           continue;

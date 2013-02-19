@@ -17,6 +17,7 @@
 package org.exoplatform.ecm.webui.tree.selectone;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.jcr.Node;
@@ -27,6 +28,7 @@ import javax.jcr.nodetype.NodeType;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.ecm.webui.comparator.NodeTitleComparator;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.tree.UIBaseNodeTreeSelector;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -159,6 +161,7 @@ public class UISelectPathPanel extends UIContainer {
         list.add(child);
       }
     }
+    Collections.sort(list, new NodeTitleComparator(NodeTitleComparator.ASCENDING_ORDER));
     List<Node> listNodeCheck = new ArrayList<Node>();
     for (Node node : list) {
       addNodePublish(listNodeCheck, node, publicationService_);

@@ -1,0 +1,41 @@
+<%
+  import org.exoplatform.ecm.utils.text.Text;
+  import org.exoplatform.wcm.webui.reader.ContentReader;
+  def escapeChar = '%' as char
+%>
+
+<div class="$uicomponent.id AlignLeft" id="$uicomponent.id">
+   <%
+      def nodes = uicomponent.getNodes();
+    %>
+  <div class="Header ClearFix">
+    <div class="Title"><%=uicomponent.getLabel()%></div>
+    <% if (nodes.size()>0) { %>
+      <div class="Total"><%=uicomponent.getUIPageIterator().getAvailable()%></div>
+    <% } %>
+  </div>
+
+  <div class="Elements">
+  <%
+    for (Node node:nodes) {
+      def path = Text.escape(node.getPath(),escapeChar, true);
+      def name = node.getName();            
+      if (node.hasProperty("exo:title")) name = node.getProperty("exo:title").getString();
+      name = ContentReader.getEscapeHtmlContent(name);
+    %>
+      <div class="Element"><a href="<%= uicomponent.event("ShowDocument", path) %>" title="<%=path%>"><%=name%></a><br/></div>
+    <%
+    }
+    %>
+    <% if (nodes.size()==0) { %>
+      <div class="NoContent"><%=_ctx.appRes("UIDashboardForm.label.nocontent")%></div>
+    <% } %>
+    
+    <!-- page iterator -->
+    <% if(uicomponent.getUIPageIterator().getAvailablePage() > 1){ %>
+    <div style="margin:1px 0px 10px 0px;width:228px">
+    <%_ctx.renderUIComponent(uicomponent.getUIPageIterator())%>
+    </div>
+    <% } %>
+  </div>
+ </div>

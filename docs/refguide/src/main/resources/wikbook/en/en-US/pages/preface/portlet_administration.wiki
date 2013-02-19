@@ -16,15 +16,13 @@ This is an example of the *Administration* portlet used in Content:
 
 * *Sample Configuration* {anchor:id=CONTref.Portlets.Administration.SampleConfiguration}
 
-{code:xml}
-<portlet-preferences>
+{code:xml}<portlet-preferences>
   <preference>
     <name>repository</name>
     <value>repository</value>
     <read-only>false</read-only>
   </preference>
-</portlet-preferences>
-{code}
+</portlet-preferences>{code}
 
 {docbook}
 <para>

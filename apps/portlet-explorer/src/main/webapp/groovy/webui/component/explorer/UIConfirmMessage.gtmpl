@@ -8,6 +8,7 @@
 	 */
 
 	 import org.exoplatform.wcm.webui.reader.ContentReader;
+         import java.util.regex.Matcher;
 
 %>
 <div class="UIForm $uicomponent.id">
@@ -16,7 +17,7 @@
     String[] msgArguments = uicomponent.getArguments();
     if(msgArguments.length > 0) {
 	    for(i in 0..msgArguments.length-1){
-	  	  msgValue = msgValue.replaceAll("\\{" + i + "\\}", msgArguments[i]);
+	  	  msgValue = msgValue.replaceAll("\\{" + i + "\\}", Matcher.quoteReplacement(msgArguments[i]));
 		  }
     }
     msgValue = ContentReader.getXSSCompatibilityContent(msgValue);    

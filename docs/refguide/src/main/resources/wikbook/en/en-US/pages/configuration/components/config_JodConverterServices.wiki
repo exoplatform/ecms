@@ -1,8 +1,7 @@
 The _JodConverterServices_ component is used to convert documents into different office formats. This component is enabled by default.
 The configuration of this component is found in _/core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-services-configuration.xml_.
 
-{code:xml}
-<component>
+{code:xml}<component>
    <key>org.exoplatform.services.cms.jodconverter.JodConverterService</key>
    <type>org.exoplatform.services.cms.jodconverter.impl.JodConverterServiceImpl</type>
    <init-params>
@@ -31,8 +30,7 @@ The configuration of this component is found in _/core/core-configuration/src/ma
        <value>${jodconverter.retryTimeout}</value>
      </value-param>
    </init-params>
- </component>
-{code}
+</component>{code}
 
 *Details*:
 

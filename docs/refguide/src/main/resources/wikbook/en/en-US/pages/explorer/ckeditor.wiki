@@ -8,8 +8,7 @@
 
 Basically, if you want to add a rich text area to your dialogs, you can use the [_addRichtextField_|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.RichTextField] method. However, in case you want to add the rich text editor manually, you first need to use the [_addTextAreaField_|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.TextAreaField] method and some additional Javascripts as shown below:
 
-{code:groovy}
-<%
+{code:groovy}<%
 	String[] fieldDescription = ["jcrPath=/node/exo:description"] ;
 	uicomponent.addTextAreaField("description", fieldDescription)
 %>
@@ -20,8 +19,7 @@ Basically, if you want to add a rich text area to your dialogs, you can use the 
     toolbar : 'CompleteWCM',
     uiColor : '#9AB8F3'
   });
-</script>
-{code}
+</script>{code}
 
 !images/custom_ck.png|align="center" width="120mm" fo:scalefit="1" html:scalefit="0"!
 

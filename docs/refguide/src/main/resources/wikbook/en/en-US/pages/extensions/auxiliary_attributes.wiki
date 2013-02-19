@@ -5,8 +5,7 @@ based on these attributes.
 
 This context looks like:
 
-{code:java}
-public class DocumentContext {
+{code:java}public class DocumentContext {
 private static ThreadLocal<DocumentContext> current = new ThreadLocal<DocumentContext>();
 
 public static DocumentContext getCurrent() {
@@ -31,25 +30,20 @@ public static DocumentContext getCurrent() {
   public void setAttributes(HashMap<String, Object> attributes) {
     this.attributes = attributes;
   }
-}
-{code}
+}{code}
 
 *For example*:
 
 When you upload a document to a drive by using _ManageDocumentService_, but do not want to publish this activity on the activity stream, you can do as follows:
 
-{code}
-DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, true);
-{code}
+{code}DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, true);{code}
 
 Then, this activity is skipped at:
 
-{code:java}
- Object isSkipRaiseAct = DocumentContext.getCurrent().getAttributes().get(DocumentContext.IS_SKIP_RAISE_ACT);
+{code:java} Object isSkipRaiseAct = DocumentContext.getCurrent().getAttributes().get(DocumentContext.IS_SKIP_RAISE_ACT);
 if (isSkipRaiseAct != null && Boolean.valueOf(isSkipRaiseAct.toString())) {
   return;
- }
-{code}
+ }{code}
 
 {note}
 The _DocumentContext_ class is able to help developers manage various kinds of actions with a document based on its auxiliary attributes.

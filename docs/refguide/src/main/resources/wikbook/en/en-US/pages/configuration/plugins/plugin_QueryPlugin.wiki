@@ -1,16 +1,13 @@
 This plugin is used to store predefined queries into the repositories of the system.
 
 To use the plugin in the component configuration, you must use the following target-component:
-{code:xml}
-<target-component>org.exoplatform.services.cms.queries.QueryService</target-component>
-{code}
+{code:xml}<target-component>org.exoplatform.services.cms.queries.QueryService</target-component>{code}
 
 The configuration is applied mainly in _/packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/dms-queries-configuration.xml_.
 
 *Sample configuration*:
 
-{code:xml}
-<external-component-plugins>
+{code:xml}<external-component-plugins>
     <target-component>org.exoplatform.services.cms.queries.QueryService</target-component>
     <component-plugin>
         <name>query.plugin</name>
@@ -107,8 +104,7 @@ The configuration is applied mainly in _/packaging/wcm/webapp/src/main/webapp/WE
             </object-param>
         </init-params>
     </component-plugin>
-</external-component-plugins>
-{code}
+</external-component-plugins>{code}
 In which:
 * *Name*: {{predefinedTaxonomyPlugin}}
 * *Set-method*: {{setQueryPlugin}}

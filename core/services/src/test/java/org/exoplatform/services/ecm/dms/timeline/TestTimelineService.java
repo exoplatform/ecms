@@ -329,16 +329,12 @@ public class TestTimelineService extends BaseDMSTestCase {
     applyUserSession("root", "exo");
     Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
-
+    int count = 0;
     Calendar currentTime = new GregorianCalendar();
     Calendar time = (Calendar)currentTime.clone();
-    int count = 0;
     int index = 0;
     while (currentTime.get(Calendar.WEEK_OF_YEAR) == time.get(Calendar.WEEK_OF_YEAR)) {
-      if (currentTime.get(Calendar.WEEK_OF_YEAR) == time.get(Calendar.WEEK_OF_YEAR)) {
-        if (time.get(Calendar.DAY_OF_YEAR) < currentTime.get(Calendar.DAY_OF_YEAR)-1)
-          count++;
-      }
+      count++;
       Node dayNode = testNode.addNode("dayNode" + index++, "exo:sample");
       dayNode.setProperty("exo:title", "sample");
       if(dayNode.canAddMixin("exo:datetime")) {
@@ -347,6 +343,12 @@ public class TestTimelineService extends BaseDMSTestCase {
       dayNode.setProperty(EXO_MODIFIED_DATE, time);
       time.add(Calendar.DATE, -1);
     }
+    //exclude today and yesterday
+    if (count < 2){
+      count = 0;
+    }else{
+      count -= 2;
+    }
 
     session.save();
     List<Node> res = timelineService.getDocumentsOfEarlierThisWeek(rootNode.getPath(),
@@ -354,7 +356,7 @@ public class TestTimelineService extends BaseDMSTestCase {
                                                                    createSessionProvider(),
                                                                    "root",
                                                                    true);
-    assertEquals("testGetDocumentsOfEarlierThisWeek failed! ", Math.min(5, count), res.size());
+    assertEquals("testGetDocumentsOfEarlierThisWeek failed! ", count, res.size());
   }
   
   /**
@@ -372,16 +374,12 @@ public class TestTimelineService extends BaseDMSTestCase {
     applyUserSession("root", "exo");
     Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
-
+    int count = 0;
     Calendar currentTime = new GregorianCalendar();
     Calendar time = (Calendar)currentTime.clone();
-    int count = 0;
     int index = 0;
     while (currentTime.get(Calendar.WEEK_OF_YEAR) == time.get(Calendar.WEEK_OF_YEAR)) {
-      if (currentTime.get(Calendar.WEEK_OF_YEAR) == time.get(Calendar.WEEK_OF_YEAR)) {
-        if (time.get(Calendar.DAY_OF_YEAR) < currentTime.get(Calendar.DAY_OF_YEAR)-1)
-          count++;
-      }
+      count++;
       Node dayNode = testNode.addNode("dayNode" + index++, "exo:sample");
       dayNode.setProperty("exo:title", "sample");
       if(dayNode.canAddMixin("exo:datetime")) {
@@ -389,6 +387,12 @@ public class TestTimelineService extends BaseDMSTestCase {
       }
       dayNode.setProperty(EXO_MODIFIED_DATE, time);
       time.add(Calendar.DATE, -1);
+    }
+    //exclude today and yesterday
+    if (count < 2){
+      count = 0;
+    }else{
+      count -= 2;
     }
 
     session.save();

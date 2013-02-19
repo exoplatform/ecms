@@ -17,7 +17,7 @@ This is an example of the *Sites Explorer* portlet used in Content:
 | *drive* | {{string}} | {{N/A}} | Not in use. Replaced by the driveName preference. |
 | *views* | {{string}} | {{N/A}} | Not in use. The views will be displayed basing on the Drive which the user has the access permission.|
 | *allowCreateFolders* | {{string}} | {{N/A}} | Allow creating a folder by type. When you do not specify the value, the default value will be nt:unstructured, nt:folder. |
-| *categoryMandatoryWhenFileUpload* | {{boolean}} | false | Force a user to add a category when uploading or creating a document. |
+| *categoryMandatoryWhenFileUpload* | {{boolean}} | {{false}} | Force a user to add a category when uploading or creating a document. |
 | *uploadFileSizeLimitMB* | {{float}} | 150 | The maximum size of a file that is uploaded to the system (MB). |
 | *usecase* | {{string}} | {{selection}} | The behavior to access Sites Explorer. By default, the "selection" option is configured. Besides "selection", there are four other ways to configure the Sites Explorer: *Jailed*, *Personal*, *Social*, *Parameterize*. |
 | *driveName* | {{string}} | {{private}} | The name of drive which the user wants to access. |
@@ -32,8 +32,7 @@ This is an example of the *Sites Explorer* portlet used in Content:
 
 * *Sample Configuration* {anchor:id=CONTref.Portlets.Explorer.ExampleConfiguration}
 
-{code:xml}
-<portlet-preferences>
+{code:xml}<portlet-preferences>
   <preference>
     <name>repository</name>
     <value>repository</value>
@@ -124,8 +123,7 @@ This is an example of the *Sites Explorer* portlet used in Content:
     <value>true</value>
     <read-only>false</read-only>
   </preference>
-</portlet-preferences>
-{code}
+</portlet-preferences>{code}
 
 {docbook}
 <para>

@@ -1,8 +1,7 @@
 The _ThumbnailService_ component is used to resize all the images into different sizes. Besides the default sizes, it also allows users to customize the images into the desired sizes.
 The configuration of this component is found in  _/core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-services-configuration.xml_.
 
-{code:xml}
-<component>
+{code:xml}<component>
     <key>org.exoplatform.services.cms.thumbnail.ThumbnailService</key>
     <type>org.exoplatform.services.cms.thumbnail.impl.ThumbnailServiceImpl</type>
     <init-params>
@@ -27,8 +26,7 @@ The configuration of this component is found in  _/core/core-configuration/src/m
             <value>image/jpeg;image/png;image/gif;image/bmp</value>
         </value-param>
     </init-params>
-</component>
-{code}
+</component>{code}
 
 *Details*:
 

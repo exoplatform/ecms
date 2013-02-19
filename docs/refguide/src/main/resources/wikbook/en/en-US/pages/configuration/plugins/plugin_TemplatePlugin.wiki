@@ -10,9 +10,7 @@ See details at [ContentType|#CONTref.CONTref.InsideWCMTemplates.ContentTypes].
 
 To use the plugin in the component configuration, you must use the following target-component:
 
-{code:xml}
-<target-component>org.exoplatform.services.cms.templates.TemplateService</target-component>
-{code}
+{code:xml}<target-component>org.exoplatform.services.cms.templates.TemplateService</target-component>{code}
 
 The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/dms-templates-configuration.xml_.
 
@@ -21,8 +19,7 @@ The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB
 This below example is configuration for the _nt\:file_ template, any other template will be put in the same level with this template starting from the line
 _{{{<object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType>}}}_ as the another node type.
 
-{code:xml}
-<external-component-plugins>
+{code:xml}<external-component-plugins>
     <target-component>org.exoplatform.services.cms.templates.TemplateService</target-component>
     <component-plugin>
         <name>addTemplates</name>
@@ -138,8 +135,7 @@ _{{{<object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$Nod
             </object-param>
         </init-params>
     </component-plugin>
-</external-component-plugins>
-{code}
+</external-component-plugins>{code}
 In which:
 
 * *name*: _addTemplates_

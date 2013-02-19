@@ -1,4 +1,10 @@
 ﻿/**
+ * Variable to check if Content Selector is opened in IE
+ * - true if Content Selector is opened
+ **/
+var popup_opened = false;
+
+/**
  * Variable to check if some content has changed
  * - true if some content has changed
  **/
@@ -94,6 +100,16 @@ UIForm.prototype.submitForm = function(formId, action, useAjax, callback) {
   }
  } catch(e) {}
   form.elements['formOp'].value = action ;
+
+  if (navigator.appName == 'Microsoft Internet Explorer')
+   {
+	if ((action.toLowerCase() == "save" || action.toLowerCase() == "saveandclose" || action.toLowerCase() == "close") && popup_opened == true) {
+		window.onbeforeunload = null;
+		useAjax=false;
+		popup_opened = false;
+      }
+   }
+
   if(useAjax) {
     b_changed = false;
     this.ajaxPost(form, callback) ;
@@ -148,6 +164,14 @@ UIForm.prototype.submitEvent = function(formId, action, params) {
 	form.action =  form.originalAction +  encodeURI(params) ;
   b_changed = false;
   this.ajaxPost(form) ;
+  
+  if (navigator.appName == 'Microsoft Internet Explorer')
+   {
+	if (action.toLowerCase() == "changetab" && popup_opened == true) {
+		popup_opened = false;
+		form.submit();
+      }   
+   }    
 } ;
 
 /**

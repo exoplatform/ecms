@@ -40,6 +40,12 @@ public class ChangeStateCronJobImpl implements Job {
   private static final String START_TIME_PROPERTY = "publication:startPublishedDate";
 
   private static final String END_TIME_PROPERTY   = "publication:endPublishedDate";
+  
+  private static final int NORMAL_NODE = 0;
+  
+  private static final int STAGED_NODE = 1;
+  
+  private static int count = 0;
 
   private String              fromState           = null;
 
@@ -48,11 +54,11 @@ public class ChangeStateCronJobImpl implements Job {
   private String              predefinedPath      = null;
 
   private String              workspace           = null;
-
   private String              contentPath         = null;
+  
 
   public void execute(JobExecutionContext context) throws JobExecutionException {
-    Session session = null;
+    SessionProvider sessionProvider = null;
     try {
       RuntimeMXBean mx = ManagementFactory.getRuntimeMXBean();
       if (mx.getUptime()>120000) {
@@ -70,86 +76,58 @@ public class ChangeStateCronJobImpl implements Job {
         }
         if (LOG.isDebugEnabled()) LOG.debug("Start Execute ChangeStateCronJob: change the State from " + fromState + " to "
             + toState);
-        SessionProvider sessionProvider = SessionProvider.createSystemProvider();
-        String containerName = WCMCoreUtils.getContainerNameFromJobContext(context);
-        RepositoryService repositoryService_ = WCMCoreUtils.getService(RepositoryService.class, containerName);
-        PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class, containerName);
-        ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
-        if (manageableRepository == null) {
-          if (LOG.isDebugEnabled()) LOG.debug("Repository not found. Ignoring");
-          return;
-        }
-        session = sessionProvider.getSession(workspace, manageableRepository);
-        QueryManager queryManager = session.getWorkspace().getQueryManager();
+        
+        sessionProvider = SessionProvider.createSystemProvider();
+        
         String property = null;
         if ("staged".equals(fromState) && "published".equals(toState)) {
           property = START_TIME_PROPERTY;
         } else if ("published".equals(fromState) && "unpublished".equals(toState)) {
           property = END_TIME_PROPERTY;
-
         }
-        if (property != null) {
 
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+        Date now = Calendar.getInstance().getTime();
+        String currentTime = format.format(now);
+
+        if (property != null) {
           // appends trailing / if missing
           if (contentPath != null) {
             if (!contentPath.endsWith("/")) {
               contentPath += "/";
             }
           }
-
-          Query query = queryManager.createQuery("select * from nt:base where " +
-              "publication:currentState='" + fromState + "'" +
-              " and jcr:path like '" + contentPath + "%'",
-              Query.SQL);
-          QueryResult queryResult = query.execute();
-          long numberOfItemsToChange = queryResult.getNodes().getSize();
-
+          
+          StringBuilder normalNodesStatement 
+               = new StringBuilder().append("select * from nt:base where ").
+                                     append("(publication:currentState='").append(fromState).append("') ").
+                                     append(" and (").append(property).append(" IS NOT NULL )").
+                                     append(" and (").append(property).append(" < TIMESTAMP '").append(currentTime).append("') ").  
+                                     append(" and (jcr:path like '").append(contentPath).append("%' )");
+          
+          StringBuilder stagedNodesStatement
+               = new StringBuilder().append("select * from nt:base where ").
+                                     append("(publication:currentState='").append(fromState).append("') ").
+                                     append(" and (").append(property).append(" IS NULL ) "). 
+                                     append(" and (jcr:path like '").append(contentPath).append("%' )");
+                                     
+          long normalCount = changeStateForNodes(sessionProvider, property, NORMAL_NODE, normalNodesStatement.toString());
+          long stagedCount = (START_TIME_PROPERTY.equals(property)) ? 
+                              changeStateForNodes(sessionProvider, property, STAGED_NODE, stagedNodesStatement.toString()) : 0;
+                              
+          long numberOfItemsToChange = normalCount + stagedCount;
+          
           if (numberOfItemsToChange > 0) {
-
-            if (LOG.isDebugEnabled()) LOG.debug(numberOfItemsToChange + " '" + fromState + "' candidates for state '" + toState
+            if (LOG.isDebugEnabled()) { 
+              LOG.debug(numberOfItemsToChange + " '" + fromState + "' candidates for state '" + toState
                 + "' found in " + predefinedPath);
-            PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins()
-            .get(AuthoringPublicationConstant.LIFECYCLE_NAME);
-            HashMap<String, String> context_ = new HashMap<String, String>();
-            context_.put("containerName", containerName);
-            for (NodeIterator iter = queryResult.getNodes(); iter.hasNext();) {
-              Node node_ = iter.nextNode();
-              String path = node_.getPath();
-              if (!path.startsWith("/jcr:system")) {
-                if (node_.hasProperty(property)) {
-
-                  SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy - HH:mm");
-                  Date now = Calendar.getInstance().getTime();
-                  Date nodeDate = node_.getProperty(property).getDate().getTime();
-                  if (now.compareTo(nodeDate) >= 0) {
-                    if (LOG.isInfoEnabled()) LOG.info("'" + toState + "' " + node_.getPath() + " (" + property + "="
-                        + format.format(nodeDate) + ")");
-
-                    if (PublicationDefaultStates.UNPUBLISHED.equals(toState)) {
-                      if (node_.hasProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)) {
-                        String liveRevisionProperty = node_.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)
-                        .getString();
-                        if (!"".equals(liveRevisionProperty)) {
-                          Node liveRevision = session.getNodeByUUID(liveRevisionProperty);
-                          if (liveRevision != null) {
-                            context_.put(AuthoringPublicationConstant.CURRENT_REVISION_NAME,
-                                liveRevision.getName());
-                          }
-                        }
-                      }
-
-                    }
-                    publicationPlugin.changeState(node_, toState, context_);
-                  }
-                } else if (START_TIME_PROPERTY.equals(property)) {
-                  if (LOG.isInfoEnabled()) LOG.info("'" + toState + "' " + node_.getPath());
-                  publicationPlugin.changeState(node_, toState, context_);
-                }
-              }
             }
           } else {
-            if (LOG.isDebugEnabled()) LOG.debug("no '" + fromState + "' content found in " + predefinedPath);
+            if (LOG.isDebugEnabled()) {
+              LOG.debug("no '" + fromState + "' content found in " + predefinedPath);
+            }
           }
+          
         }
         if (LOG.isDebugEnabled()) LOG.debug("End Execute ChangeStateCronJob");
       }
@@ -159,8 +137,72 @@ public class ChangeStateCronJobImpl implements Job {
     } catch (Exception ex) {
       if (LOG.isErrorEnabled()) LOG.error("error when changing the state of the content : " + ex.getMessage(), ex);
     } finally {
-      if (session != null)
-        session.logout();
+      if (sessionProvider != null)
+        sessionProvider.close();
     }
+  }
+  
+  private long changeStateForNodes(SessionProvider sessionProvider, String property, int nodeType, String statement) 
+  throws Exception {
+    long ret = 0;
+    RepositoryService repositoryService_ = WCMCoreUtils.getService(RepositoryService.class);
+    PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);
+    PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins()
+    .get(AuthoringPublicationConstant.LIFECYCLE_NAME);
+    HashMap<String, String> context_ = new HashMap<String, String>();
+    
+    ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
+    if (manageableRepository == null) {
+      if (LOG.isDebugEnabled()) LOG.debug("ManageableRepository not found. Ignoring");
+      return 0;
+    }
+
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+    Session session = sessionProvider.getSession(workspace, manageableRepository);
+    QueryManager queryManager = session.getWorkspace().getQueryManager();
+    
+    Query query = queryManager.createQuery(statement, Query.SQL);
+    QueryResult queryResult = query.execute();
+    
+    for (NodeIterator iter = queryResult.getNodes(); iter.hasNext();) {
+      String path = "path not found";
+      String nodeDateStr = "date not found";
+      Node node_ = iter.nextNode();
+      try{
+        path = node_.getPath();
+        if (!path.startsWith("/jcr:system")) {
+          if (NORMAL_NODE == nodeType) {
+            Date nodeDate = node_.getProperty(property).getDate().getTime();
+            nodeDateStr = format.format(nodeDate);
+            if (LOG.isInfoEnabled()) LOG.info("'" + toState + "' " + node_.getPath() + " (" + property + "="
+                + nodeDateStr + ")");
+  
+            if (PublicationDefaultStates.UNPUBLISHED.equals(toState)) {
+              if (node_.hasProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)) {
+                String liveRevisionProperty = node_.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)
+                .getString();
+                if (!"".equals(liveRevisionProperty)) {
+                  Node liveRevision = session.getNodeByUUID(liveRevisionProperty);
+                  if (liveRevision != null) {
+                    context_.put(AuthoringPublicationConstant.CURRENT_REVISION_NAME,
+                        liveRevision.getName());
+                  }
+                }
+              }
+  
+            }
+            publicationPlugin.changeState(node_, toState, context_);
+            ret ++;
+          } else {
+            if (LOG.isInfoEnabled()) LOG.info("'" + toState + "' " + node_.getPath());
+            publicationPlugin.changeState(node_, toState, context_);
+          }
+        }
+      }catch( Exception e ) {
+        if (LOG.isErrorEnabled()) LOG.error("Exception while changing '" + toState + "' " + path + " (" + property + "="
+          + nodeDateStr + ")", e);
+       }
+    }
+     return ret;
   }
 }

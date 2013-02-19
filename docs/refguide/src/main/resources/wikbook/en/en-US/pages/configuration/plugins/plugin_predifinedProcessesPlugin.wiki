@@ -1,15 +1,12 @@
 This plugin is used to import the predefined processes into the system.
 
 To use the plugin in the component configuration, you must use the following target-component:
-{code:xml}
-<target-component>org.exoplatform.services.workflow.WorkflowServiceContainer</target-component>
-{code}
+{code:xml}<target-component>org.exoplatform.services.workflow.WorkflowServiceContainer</target-component>{code}
 
 The configuration is applied mainly in _packaging/workflow/webapp/src/main/webapp/WEB-INF/workflow-extension/workflow/bonita-configuration.xml_.
 
 *Sample configuration*:
-{code:xml}
-<external-component-plugins>
+{code:xml}<external-component-plugins>
     <target-component>org.exoplatform.services.workflow.WorkflowServiceContainer</target-component>
     <component-plugin>
         <name>deploy.predefined.processes</name>
@@ -40,8 +37,7 @@ The configuration is applied mainly in _packaging/workflow/webapp/src/main/webap
             </object-param>
         </init-params>
     </component-plugin>
-</external-component-plugins>
-{code}
+</external-component-plugins>{code}
 
 In which:
 

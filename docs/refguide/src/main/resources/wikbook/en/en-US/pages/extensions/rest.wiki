@@ -68,16 +68,14 @@ The response format can be specified by a parameter in the request: "_format_". 
 
 First, you need to register the REST service class to the configuration file in the package named _conf.portal_.
 
-{code:xml}
-<configuration
+{code:xml}<configuration
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd http://www.exoplaform.org/xml/ns/kernel_1_1.xsd"
   xmlns="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd">
   <component>    			        	   
     <type>org.exoplatform.services.ecm.publication.REST.presentation.document.publication.PublicationGetDocumentRESTService</type>
   </component>	
-</configuration>
-{code}
+</configuration>{code}
 
 
 {docbook}
@@ -90,8 +88,7 @@ First, you need to register the REST service class to the configuration file in 
 
 You can start creating _GetEditedDocumentRESTService_ that implements from the ResourceContainer interface as follows:
 
-{code:java}
-@Path("/presentation/document/edit/")
+{code:java}@Path("/presentation/document/edit/")
 public class GetEditedDocumentRESTService implements ResourceContainer {
 	@Path("/{repository}/")
 		@GET
@@ -99,8 +96,7 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
 		   @QueryParam("showItems") String showItems) throws Exception {
 		   ........
 		}
-}
-{code}
+}{code}
 
 || *Parameters* ||*Definition*||
 | @Path("/presentation/document/edit/") | Specify the URI path which a resource or class method will serve requests for.|

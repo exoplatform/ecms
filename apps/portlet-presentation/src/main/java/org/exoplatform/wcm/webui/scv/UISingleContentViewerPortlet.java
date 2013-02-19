@@ -162,7 +162,7 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
 
     if (context.getRemoteUser() == null
         || (Utils.isLiveMode() && sharedCache && !Utils.isPortalEditMode())
-        && Utils.isPortletViewMode()) {
+        && PortletMode.VIEW.equals(pContext.getApplicationMode())) {
       WCMService wcmService = getApplicationComponent(WCMService.class);
       pContext.getResponse().setProperty(MimeResponse.EXPIRATION_CACHE, ""+wcmService.getPortletExpirationCache());
       if (log.isTraceEnabled())
@@ -230,7 +230,9 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
     // get user node & update children
     UserNode userNode;
     if (context.getRemoteUser() != null) {
-      userNode = userPortal.resolvePath(Util.getUIPortal().getUserNavigation(), filterConfig, nodeURI);
+      userNode = userPortal.resolvePath(NavigationUtils.getUserNavigationOfPortal(
+                                            userPortal, Util.getUIPortal().getSiteKey().getName()),
+                                        filterConfig, nodeURI);
     } else {
       userNode = userPortal.resolvePath(filterConfig, nodeURI);
     }

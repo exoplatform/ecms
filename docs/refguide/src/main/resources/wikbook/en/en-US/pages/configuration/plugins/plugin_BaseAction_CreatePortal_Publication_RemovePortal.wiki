@@ -1,4 +1,4 @@
-All these plugins allows creating a link to its children.
+All these plugins allows creating a link to their children.
 {include:document="plugin_BaseActionPlugin.wiki"}
 {include:document="plugin_CreatePortalPlugin.wiki"}
 {include:document="plugin_PublicationPlugin.wiki"}

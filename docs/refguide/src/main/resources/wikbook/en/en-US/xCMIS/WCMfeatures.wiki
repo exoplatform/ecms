@@ -64,15 +64,12 @@ Refer to the WCM drives mappings to know actual location of a content you will a
 * Login to the website as a user with the developer role.
 * Open *Group --> Sites Explorer*, you can see the drives set of WCM, such as *Sites Management*, *DMS Administration*.
 * Get the list of these WCM drives via CMIS using _Curl_, asking _getRepositories_ service:
-{code}
-curl -o getrepos.xml -u root:gtn http://localhost:8080/rest/private/cmisatom/ 
-{code}
+{code}curl -o getrepos.xml -u root:gtn http://localhost:8080/rest/private/cmisatom/{code}
 
 The requested file (_getrepos.xml_) contains the set of Repositories in the AtomPub format.
 The root element represents the set of *workspaces* representing *WCM drives* related to resources, 
 for example, for *DMS Administration*, the response will contain data like:
-{code:xml}
-   <service xmlns="http://www.w3.org/2007/app" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/">
+{code:xml}<service xmlns="http://www.w3.org/2007/app" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/">
    <workspace>
       <atom:title type="text">DMS Administration</atom:title>
       <cmisra:repositoryInfo xmlns:cmis="http://docs.oasis-open.org/ns/cmis/core/200908/">
@@ -125,14 +122,11 @@ for example, for *DMS Administration*, the response will contain data like:
          <cmisra:mediatype>application/atom+xml;type=entry</cmisra:mediatype>
       </cmisra:uritemplate>
    </workspace>
- </service>
-{code}
+</service>{code}
 
 Here are the collection of services and predefined templates which can be used from the client side to request resources related to this repository.
 For example, to get the WCM node of the *DMS Administration* drive by path, the *objectbypath* template can be used:
-{code}
-http://localhost:8080/rest/private/cmisatom/DMS%20Administration/objectbypath?path={path}&amp;filter={filter}&amp;includeAllowableActions={includeAllowableActions}&amp;includePolicyIds={includePolicyIds}&amp;includeRelationships={includeRelationships}&amp;includeACL={includeACL}&amp;renditionFilter={renditionFilter}
-{code}
+{code}http://localhost:8080/rest/private/cmisatom/DMS%20Administration/objectbypath?path={path}&amp;filter={filter}&amp;includeAllowableActions={includeAllowableActions}&amp;includePolicyIds={includePolicyIds}&amp;includeRelationships={includeRelationships}&amp;includeACL={includeACL}&amp;renditionFilter={renditionFilter}{code}
 where parameters include:
 * Required:
 ** ID repositoryId: The identifier for the repository.
@@ -176,17 +170,14 @@ Use Case: Follow Symlinks
 
 *5.* Get content of folder _/acme/categories/acme/News_ via CMIS:
 
-{code}
-curl -o news.xml -u root:gtn http://localhost:8080/rest/private/cmisatom/Managed%20Sites/objectbypath?path=/acme/categories/acme/News
-{code}
+{code}curl -o news.xml -u root:gtn http://localhost:8080/rest/private/cmisatom/Managed%20Sites/objectbypath?path=/acme/categories/acme/News{code}
 
 The requested file (_products.xml_) contains the entry with information about the folder.
 * The list of properties for the object (such as node Id or type).
 * Allowable actions can be performed on the document; for example, requesting the children list.
 * ACL and policies information.
 
-{code:xml}
-<entry xmlns="http://www.w3.org/2005/Atom" xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/">
+{code:xml}<entry xmlns="http://www.w3.org/2005/Atom" xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/">
    <id>f59a3539c0a80003625790bdadf566c5</id>
    <published>2010-09-09T18:11:57.707Z</published>
    <updated>2010-09-09T18:11:57.707Z</updated>
@@ -269,17 +260,13 @@ The requested file (_products.xml_) contains the entry with information about th
       <cmis:policyIds></cmis:policyIds>
       <cmis:rendition></cmis:rendition>
    </cmisra:object>
-</entry>
-{code}
+</entry>{code}
  
 To get the file which has been uploaded above, use the *children* service to get the list of child nodes of _/acme/documents_. Find this service URL in the response XML above:
-{code}
-curl -o childs.xml -u root:gtn http://localhost:8080/rest/private/cmisatom/Managed%20Sites/children/f59a3539c0a80003625790bdadf566c5
-{code}
+{code}curl -o childs.xml -u root:gtn http://localhost:8080/rest/private/cmisatom/Managed%20Sites/children/f59a3539c0a80003625790bdadf566c5{code}
 
 In the requested file (_childs.xml_), find the entry related to _test.txt_ file uploaded via the *Sites Explorer*. Search for the "test.txt" name by title.
-{code:xml}
-   <entry xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/">
+{code:xml}<entry xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/">
       <id>f708e208c0a80003554babb97bd934ba</id>
       <published>2010-09-09T18:06:31.987Z</published>
       <updated>2010-09-09T18:06:31.987Z</updated>
@@ -414,13 +401,10 @@ In the requested file (_childs.xml_), find the entry related to _test.txt_ file 
          <cmis:policyIds></cmis:policyIds>
          <cmis:rendition></cmis:rendition>
       </cmisra:object>
-   </entry>
-{code}
+</entry>{code}
 
 Then, get the _test.txt_ file content via CMIS by using the *file* service and *id* of the file _test.txt_ from _childs.xml_:
-{code}
-curl -o test.txt -u root:gtn http://localhost:8080/rest/private/cmisatom/Managed%20Sites/file/f708e208c0a80003554babb97bd934ba
-{code}
+{code}curl -o test.txt -u root:gtn http://localhost:8080/rest/private/cmisatom/Managed%20Sites/file/f708e208c0a80003554babb97bd934ba{code}
 
 Get results in the _test.txt_ file in the local folder.
 In this way, you will get file stored in the *Sites Explorer* to folder _/acme/documents/test.txt_ via *eXo CMIS* by symlink path _/acme/categories/acme/News/test.txt_.
@@ -434,9 +418,7 @@ Upload the modified local file using the command with id of the file stored in W
 
 To update any file via CMIS, use the *file* service and the PUT request. Use the same file as in the previous use case (_/acme/documents/test.txt_, id:f708e208c0a80003554babb97bd934ba).
 
-{code}
-curl -T test.txt -X PUT -H "Content-Type:text/plain; charset=UTF-8" -u root:gtn http://localhost:8080/rest/private/cmisatom/Managed%20Sites/file/f708e208c0a80003554babb97bd934ba
-{code}
+{code}curl -T test.txt -X PUT -H "Content-Type:text/plain; charset=UTF-8" -u root:gtn http://localhost:8080/rest/private/cmisatom/Managed%20Sites/file/f708e208c0a80003554babb97bd934ba{code}
 
 Go to the *Sites Explorer* to see changes applied from the local file in _/acme/documents/test.txt_.
 
@@ -492,9 +474,7 @@ h4. Simple query {anchor:id=Dev_CMIS.features.Simple_query}
 
 Query: Select all {{{cmis:document}}}.
 
-{code}
-SELECT * FROM cmis:document
-{code}
+{code}SELECT * FROM cmis:document{code}
 
 Query result:
 * All documents from the Apollo program.
@@ -509,9 +489,7 @@ Initial data:
 * document2: {{{apollo:propertyBooster}}} - Saturn V,  {{{apollo:propertyCommander}}} - Frank F. Borman, II
 * document3: {{{apollo:propertyBooster}}} - Saturn V,  {{{apollo:propertyCommander}}} - James A. Lovell, Jr.
 
-{code}
-SELECT * FROM cmis:document WHERE apollo:propertyBooster = 'Saturn V' AND (apollo:propertyCommander = 'Frank F. Borman, II' OR  apollo:propertyCommander = 'James A. Lovell, Jr.')
-{code}
+{code}SELECT * FROM cmis:document WHERE apollo:propertyBooster = 'Saturn V' AND (apollo:propertyCommander = 'Frank F. Borman, II' OR  apollo:propertyCommander = 'James A. Lovell, Jr.'){code}
 
 Query result:
 * document2 and document3.
@@ -524,9 +502,7 @@ Initial data:
 * document1: content - "There must be test word"
 * document2: content - "Test word is not here"
 
-{code}
-SELECT * FROM cmis:document WHERE CONTAINS('here')
-{code}
+{code}SELECT * FROM cmis:document WHERE CONTAINS('here'){code}
 
 Query result:
 * document2.
@@ -540,9 +516,7 @@ Initial data:
 * document2: content - "Test word is not here. Another check-word."
 * document3: content - "There must be check-word."
 
-{code}
-SELECT * FROM cmis:document WHERE CONTAINS("There must" - "check-word")
-{code}
+{code}SELECT * FROM cmis:document WHERE CONTAINS("There must" - "check-word"){code}
 
 Query result:
 * document1.
@@ -556,9 +530,7 @@ Initial data:
 * document1: cmis:lastModificationDate - 2006-08-08
 * document2: cmis:lastModificationDate - 2009-08-08
 
-{code}
-SELECT * FROM cmis:document WHERE (cmis:lastModificationDate >= TIMESTAMP '2007-01-01T00:00:00.000Z')"
-{code}
+{code}SELECT * FROM cmis:document WHERE (cmis:lastModificationDate >= TIMESTAMP '2007-01-01T00:00:00.000Z')"{code}
 
 Query result:
 * document2.
@@ -571,9 +543,7 @@ Initial data:
 * document1: {{{apollo:someProperty}}} - true
 * document2: {{{apollo:someProperty}}} - false
 
-{code}
-SELECT * FROM cmis:document WHERE (apollo:someProperty = FALSE)
-{code}
+{code}SELECT * FROM cmis:document WHERE (apollo:someProperty = FALSE){code}
   
 Query result:
 * document2.
@@ -588,9 +558,7 @@ Initial data:
 * document3: {{{apollo:propertyCommander}}} - James A. Lovell, Jr.
 * document4: {{{apollo:propertyCommander}}} - Eugene A. Cernan
 
-{code}
-SELECT * FROM cmis:document WHERE apollo:propertyCommander IN ('Virgil I. Grissom', 'Frank F. Borman, II', 'James A. Lovell, Jr.')
-{code}
+{code}SELECT * FROM cmis:document WHERE apollo:propertyCommander IN ('Virgil I. Grissom', 'Frank F. Borman, II', 'James A. Lovell, Jr.'){code}
 
 Query result:
 * document2, document3.
@@ -605,9 +573,7 @@ Initial data:
 * document3: {{{apollo:propertyCommander}}} - James A. Lovell, Jr.
 * document4: {{{apollo:propertyCommander}}} - Eugene A. Cerna
 
-{code}
-SELECT * FROM cmis:document WHERE apollo:PropertyCommander NOT IN ('Walter M. Schirra', 'James A. Lovell, Jr.')
-{code}
+{code}SELECT * FROM cmis:document WHERE apollo:PropertyCommander NOT IN ('Walter M. Schirra', 'James A. Lovell, Jr.'){code}
 
 Query result:
 * document2, document4.
@@ -622,9 +588,7 @@ Initial data:
 * document3: {{{apollo:propertyCommander}}} - James A. Lovell, Jr.
 * document4: {{{apollo:propertyCommander}}} - Eugene A. Cerna
 
-{code}
-SELECT * FROM cmis:document WHERE  NOT (apollo:propertyCommander NOT IN ('James A. Lovell, Jr.'))
-{code}
+{code}SELECT * FROM cmis:document WHERE  NOT (apollo:propertyCommander NOT IN ('James A. Lovell, Jr.')){code}
 
 Query result:
 * document3.
@@ -641,9 +605,7 @@ Initial data:
 * folder2:
 ** document2: Title - node2
 
-{code}
-SELECT * FROM cmis:folder WHERE IN_FOLDER('123456789')
-{code}
+{code}SELECT * FROM cmis:folder WHERE IN_FOLDER('123456789'){code}
 
 Query result:
 * folder3.
@@ -658,9 +620,7 @@ Initial data:
 * folder2:
 ** document2: Title - node2
 
-{code}
-SELECT * FROM cmis:document WHERE IN_FOLDER('123456789')
-{code}
+{code}SELECT * FROM cmis:document WHERE IN_FOLDER('123456789'){code}
 
 Query result:
 * document1.
@@ -672,9 +632,7 @@ Initial data:
 * document1: Title - node1 typeID - cmis:article-sports
 * document2: Title - node2 typeID - cmis:article-animals
 
-{code}
-SELECT * FROM cmis:article WHERE IN_FOLDER('123456789')
-{code}
+{code}SELECT * FROM cmis:article WHERE IN_FOLDER('123456789'){code}
 
 Query result:
 * document1, document2.
@@ -689,9 +647,7 @@ Initial data:
 * folder2:
 ** document2
 
-{code}
-SELECT * FROM cmis:document WHERE IN_TREE('123456789')
-{code}
+{code}SELECT * FROM cmis:document WHERE IN_TREE('123456789'){code}
 
 Query result:
 * document1, document2.
@@ -707,9 +663,7 @@ Initial data:
 * document4: {{{apollo:propertyCommander}}} - Eugene A. James
 
 
-{code}
-SELECT * FROM cmis:document AS doc WHERE apollo:PropertyCommander LIKE 'James%'
-{code}
+{code}SELECT * FROM cmis:document AS doc WHERE apollo:PropertyCommander LIKE 'James%'{code}
 
 Query result:
 * document3.
@@ -723,9 +677,7 @@ Initial data:
 * document2: Title - node2, apollo:someProperty - admin operator
 * document3: Title - node2, apollo:someProperty - radmin
 
-{code}
-SELECT * FROM cmis:document AS doc WHERE apollo:someProperty  LIKE 'ad%min%'
-{code}
+{code}SELECT * FROM cmis:document AS doc WHERE apollo:someProperty  LIKE 'ad%min%'{code}
 
 Query result:
 * document1.
@@ -738,9 +690,7 @@ Initial data:
 * document1: Title - node1, content - hello world
 * document2: Title - node2, content - hello
 
-{code}
-SELECT * FROM cmis:document WHERE NOT CONTAINS('world')
-{code}
+{code}SELECT * FROM cmis:document WHERE NOT CONTAINS('world'){code}
 
 Query result:
 * document2.
@@ -755,9 +705,7 @@ Initial data:
 * document3: {{{apollo:propertyCommander}}} - James A. Lovell, Jr.
 * document4: {{{apollo:propertyCommander}}} - 
 
-{code}
-SELECT * FROM cmis:document WHERE apollo:propertyCommander is NOT NULL
-{code}
+{code}SELECT * FROM cmis:document WHERE apollo:propertyCommander is NOT NULL{code}
 
 Query result:
 * document1, document3.
@@ -772,9 +720,7 @@ Initial data:
 * document3: Title - Apollo 13
 * document4: Title - Apollo 17
 
-{code}
-SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM cmis:document
-{code}
+{code}SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM cmis:document{code}
 
 Query result:
 * document3, document4, document1, document2.
@@ -789,9 +735,7 @@ Initial data:
 * document3: {{{apollo:propertyCommander}}} - James A. Lovell, Jr.
 * document4: {{{apollo:propertyCommander}}} - Eugene A. Cerna
 
-{code}
-SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM cmis:document ORDER BY apollo:propertyCommander
-{code}
+{code}SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM cmis:document ORDER BY apollo:propertyCommander{code}
 
 Query result:
 * document4, document2, document3, document1.
@@ -807,9 +751,7 @@ Initial data:
 * document3: {{{apollo:propertyCommander}}} - James A. Lovell, Jr.
 * document4: {{{apollo:propertyCommander}}} - Eugene A. James
 
-{code}
-SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM cmis:document ORDER BY cmis:propertyCommander DESC
-{code}
+{code}SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM cmis:document ORDER BY cmis:propertyCommander DESC{code}
 
 Query result:
 * document1, document3, document2, document4.
@@ -824,9 +766,7 @@ Initial data:
 * document3: content - "NASA intended to land on the Moon, but a mid-mission technical"
 * document4: content - "It was the first night launch of a U.S. human"
 
-{code}
-SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM cmis:document WHERE CONTAINS('moon') ORDER BY SCORE()
-{code}
+{code}SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM cmis:document WHERE CONTAINS('moon') ORDER BY SCORE(){code}
 
 Query result:
 * document2, document3.
@@ -840,9 +780,7 @@ Initial data:
 * document1: Title - node1, {{{apollo:propertyBooster}}} - 3
 * document2: Title - node2, {{{apollo:propertyBooster}}} - 15
 
-{code}
-SELECT * FROM cmis:document WHERE apollo:propertyBooster <> 3
-{code}
+{code}SELECT * FROM cmis:document WHERE apollo:propertyBooster <> 3{code}
 
 Query result:
 * document2.
@@ -855,9 +793,7 @@ Initial data:
 * document1: apollo:someProperty - "test word first"
 * document2: apollo:someProperty - "test word second"
 
-{code}
-SELECT * FROM cmis:document WHERE apollo:someProperty <> 'test word second'
-{code}
+{code}SELECT * FROM cmis:document WHERE apollo:someProperty <> 'test word second'{code}
 
 Query result:
 * document1.
@@ -870,9 +806,7 @@ Initial data:
 * document1: {{{apollo:propertyBooster}}} - 3
 * document2: {{{apollo:propertyBooster}}} - 15
 
-{code}
-SELECT * FROM cmis:document WHERE apollo:propertyBooster > 5
-{code}
+{code}SELECT * FROM cmis:document WHERE apollo:propertyBooster > 5{code}
 
 Query result:
 * document2.

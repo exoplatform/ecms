@@ -17,8 +17,7 @@ You have to set values for the name and location of the workflow which you want 
 
 You can use "war:(FOLDER_PATH)" to configure which _.jar_ files contain your workflow processes inside the _.war_ file.
 	
-{code:xml}
-<external-component-plugins>
+{code:xml}<external-component-plugins>
   <target-component>org.exoplatform.services.workflow.WorkflowServiceContainer</target-component>
   <component-plugin>
     <name>deploy.predefined.processes</name>
@@ -49,16 +48,14 @@ You can use "war:(FOLDER_PATH)" to configure which _.jar_ files contain your wor
       </object-param>
     </init-params>
   </component-plugin>
-</external-component-plugins>
-{code}
+</external-component-plugins>{code}
 
 * *Deploy a workflow inside a .jar file* {anchor:id=CONTref.FAQ.DeployWorkflowJarFile}
 
 
 You can use _classpath\:_ to configure which _.jar_ files contain your workflow processes inside the _.jar_ file.
 	
-{code:xml}
-<external-component-plugins>
+{code:xml}<external-component-plugins>
   <target-component>org.exoplatform.services.workflow.WorkflowServiceContainer</target-component>
   <component-plugin>
     <name>deploy.predefined.processes</name>
@@ -83,8 +80,7 @@ You can use _classpath\:_ to configure which _.jar_ files contain your workflow 
       </object-param>
     </init-params>
   </component-plugin>
-</external-component-plugins>
-{code}	
+</external-component-plugins>{code}
   
 The notification message is displayed when you deploy a workflow on Jboss. If you use _classpath\:_ to register, you must put your workflow in the _.jar_ files inside the _gatein.ear/lib_ folder (instead of the _lib_ folder) to make it work.
 

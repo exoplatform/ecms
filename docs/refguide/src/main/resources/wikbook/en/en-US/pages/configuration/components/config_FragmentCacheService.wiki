@@ -2,8 +2,7 @@ The _FragmentCacheService_ component is used to cache the response fragments whi
 
 The configuration of this component is found in _core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/wcm-configuration.xml_.
 
-{code:xml}
-<component>
+{code:xml}<component>
     <key>org.exoplatform.services.portletcache.FragmentCacheService</key>
     <type>org.exoplatform.services.portletcache.FragmentCacheService</type>
     <init-params>
@@ -13,8 +12,7 @@ The configuration of this component is found in _core/core-configuration/src/mai
             <value>300</value>
         </value-param>
     </init-params>
-</component>
-{code}
+</component>{code}
 
 *Details*
 

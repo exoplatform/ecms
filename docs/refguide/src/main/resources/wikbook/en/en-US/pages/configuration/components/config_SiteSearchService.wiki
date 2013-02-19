@@ -2,14 +2,11 @@ The _SiteSearchService_ component is used in the Search portlet that allows user
 
 It is configured in the _core/core-configuration/src/main/webapp/WEB-INF/conf/configuration.xml_ file as follows:
 
-{code:xml}
-<import>war:/conf/wcm-core/core-search-configuration.xml</import>
-{code}
+{code:xml}<import>war:/conf/wcm-core/core-search-configuration.xml</import>{code}
 
 The component configuration maps the _SiteSearchService_ component with its own implementation: _SiteSearchServiceImpl_.
 
-{code:xml}
-<component>
+{code:xml}<component>
   <key>org.exoplatform.services.wcm.search.SiteSearchService</key>
   <type>org.exoplatform.services.wcm.search.SiteSearchServiceImpl</type>
   <component-plugins>
@@ -25,8 +22,7 @@ The component configuration maps the _SiteSearchService_ component with its own 
       <value></value>
     </value-param>
   </init-params>
-</component>
-{code}
+</component>{code}
 
 *Detail*:
 

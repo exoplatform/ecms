@@ -7,12 +7,14 @@
 
   def rcontext = _ctx.getRequestContext() ;
   def userName = rcontext.getRemoteUser();
+  def portalName = Util.getPortalRequestContext().getPortalOwner();
   
   def selectedNodeUri = Util.getUIPortal().getSelectedUserNode().getURI();
   def session = _ctx.getRequestContext().getRequest().getSession();
   def previousURI = session.getAttribute("previousURI");
   
-  NavigationUtils.setGotNavigation(false);
+  NavigationUtils.removeNavigationAsJson(portalName, userName);
+  
   session.setAttribute("previousURI", selectedNodeUri);
   if (userName==null && session.getMaxInactiveInterval()>60) {
     session.setAttribute("DefaultMaxInactiveInterval", new Integer(session.getMaxInactiveInterval()));

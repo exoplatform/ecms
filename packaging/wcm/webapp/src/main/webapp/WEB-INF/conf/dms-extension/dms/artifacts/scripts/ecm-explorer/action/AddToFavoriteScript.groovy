@@ -42,23 +42,16 @@ public class AddToFavoriteScript implements CmsScript {
   
   private static final String  FAVORITE_ALIAS = "userPrivateFavorites";
 
-  private RepositoryService repositoryService_;
-
-  private FavoriteService   favoriteService_;
-  
-  private NodeHierarchyCreator nodeHierarchyCreator_;
-  
-  private TemplateService templateService_;
-
-  public AddToFavoriteScript(RepositoryService repositoryService, FavoriteService favoriteService,
-                             NodeHierarchyCreator nodeHierarchyCreator, TemplateService templateService) {
-    repositoryService_ = repositoryService;
-    favoriteService_ = favoriteService;
-    nodeHierarchyCreator_ = nodeHierarchyCreator;
-    templateService_ = templateService;
+  public AddToFavoriteScript() {
   }
 
   public void execute(Object context) {
+
+    RepositoryService repositoryService_ = WCMCoreUtils.getService(RepositoryService.class);
+    FavoriteService   favoriteService_ = WCMCoreUtils.getService(FavoriteService.class);
+    NodeHierarchyCreator nodeHierarchyCreator_ = WCMCoreUtils.getService(NodeHierarchyCreator.class);
+    TemplateService templateService_ = WCMCoreUtils.getService(TemplateService.class);
+
     Map variables = (Map) context;
     String nodePath = (String) variables.get("nodePath");
     String workspace = (String) variables.get("srcWorkspace");

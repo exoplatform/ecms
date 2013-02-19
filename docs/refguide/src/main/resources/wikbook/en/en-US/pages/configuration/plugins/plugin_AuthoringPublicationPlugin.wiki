@@ -2,8 +2,7 @@ This plugin is used to manage the publication lifecycle of web contents and DMS 
 The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/content-extended/authoring/configuration.xml_.
 
 *Sample configuration*:
-{code:xml}
-<component-plugin>
+{code:xml}<component-plugin>
      <name>Authoring publication</name>
      <set-method>addPublicationPlugin</set-method>
      <type>org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.AuthoringPublicationPlugin
@@ -11,8 +10,7 @@ The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB
      <description>This publication lifecycle publish a web content or DMS document to a portal page with more
         states and version.
      </description>
-</component-plugin>
-{code}
+</component-plugin>{code}
 
 In which: 
 * *Name*: _Authoring publication_

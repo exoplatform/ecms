@@ -1,15 +1,12 @@
 This plugin is used to control the state life cycle of a content.
 
 To use the plugin in the component configuration, you must use the following target-component:
-{code:xml}
-<target-component>org.exoplatform.services.wcm.extensions.publication.PublicationManager</target-component>
-{code}
+{code:xml}<target-component>org.exoplatform.services.wcm.extensions.publication.PublicationManager</target-component>{code}
 
 The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/content-extended/authoring/configuration.xml_.
 
 *Sample configuration*:
-{code:xml}
-<component-plugin>
+{code:xml}<component-plugin>
     <name>AddLifecycle</name>
     <set-method>addLifecycle</set-method>
     <type>org.exoplatform.services.wcm.extensions.publication.lifecycle.StatesLifecyclePlugin</type>
@@ -90,8 +87,7 @@ The configuration is applied mainly in _packaging/wcm/webapp/src/main/webapp/WEB
             </object>
         </object-param>
     </init-params>
-</component-plugin>
-{code}
+</component-plugin>{code}
 
 In which:
 
