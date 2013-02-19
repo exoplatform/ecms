@@ -101,7 +101,7 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
     tree.setIcon("GroupAdminIcon");
     tree.setSelectedIcon("PortalIcon");
     tree.setBeanIdField("id");
-    tree.setBeanLabelField("groupName");
+    tree.setBeanLabelField("label");
     uiBreadcumbs.setBreadcumbsStyle("UIExplorerHistoryPath") ;
   }
 
@@ -147,7 +147,7 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
     OrganizationService service = WCMCoreUtils.getService(OrganizationService.class);
     Group group = service.getGroupHandler().findGroupById(id);
     if(group == null) return list;
-    list.add(0, new LocalPath(group.getId(), group.getGroupName()));
+    list.add(0, new LocalPath(group.getId(), group.getLabel()));
     getPath(list, group.getParentId());
     return list ;
   }
