@@ -36,12 +36,8 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.core.ExtendedSession;
-import org.exoplatform.services.jcr.datamodel.InternalQName;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.impl.Constants;
-import org.exoplatform.services.jcr.impl.core.LocationFactory;
-import org.exoplatform.services.jcr.impl.core.RepositoryImpl;
 import org.exoplatform.services.jcr.impl.core.nodetype.NodeTypeImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -49,9 +45,9 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.model.SelectItemOption;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
 
 /**
@@ -94,18 +90,18 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
     addUIFormInput(new UIFormSelectBox(FIELD_WORKSPACE, FIELD_WORKSPACE, null));
     UIFormStringInput homePathField = new UIFormStringInput(FIELD_HOMEPATH, FIELD_HOMEPATH, null);
     homePathField.setValue("/");
-    homePathField.setEditable(false);
+    homePathField.setDisabled(true);
     addUIFormInput(homePathField);
-    addUIFormInput(new UIFormStringInput(FIELD_WORKSPACEICON, FIELD_WORKSPACEICON, null).setEditable(false));
+    addUIFormInput(new UIFormStringInput(FIELD_WORKSPACEICON, FIELD_WORKSPACEICON, null).setDisabled(true));
     UIFormStringInput permissonSelectField = new UIFormStringInput(FIELD_PERMISSION , FIELD_PERMISSION , null);
     permissonSelectField.addValidator(MandatoryValidator.class);
     permissonSelectField.addValidator(DrivePermissionValidator.class);
-    permissonSelectField.setEditable(true);
+    permissonSelectField.setDisabled(false);
     addUIFormInput(permissonSelectField);
-    addUIFormInput(new UIFormCheckBoxInput<String>(FIELD_VIEWPREFERENCESDOC, FIELD_VIEWPREFERENCESDOC, null));
-    addUIFormInput(new UIFormCheckBoxInput<String>(FIELD_VIEWNONDOC, FIELD_VIEWNONDOC, null));
-    addUIFormInput(new UIFormCheckBoxInput<String>(FIELD_VIEWSIDEBAR, FIELD_VIEWSIDEBAR, null));
-    addUIFormInput(new UIFormCheckBoxInput<String>(SHOW_HIDDEN_NODE, SHOW_HIDDEN_NODE, null));
+    addUIFormInput(new UICheckBoxInput(FIELD_VIEWPREFERENCESDOC, FIELD_VIEWPREFERENCESDOC, null));
+    addUIFormInput(new UICheckBoxInput(FIELD_VIEWNONDOC, FIELD_VIEWNONDOC, null));
+    addUIFormInput(new UICheckBoxInput(FIELD_VIEWSIDEBAR, FIELD_VIEWSIDEBAR, null));
+    addUIFormInput(new UICheckBoxInput(SHOW_HIDDEN_NODE, SHOW_HIDDEN_NODE, null));
 
     addUIFormInput(new UIFormSelectBox(FIELD_ALLOW_CREATE_FOLDERS, 
                                        FIELD_ALLOW_CREATE_FOLDERS, 
@@ -174,15 +170,15 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
       Collections.sort(folderOptions, new ItemOptionNameComparator());
       getUIFormSelectBox(FIELD_ALLOW_CREATE_FOLDERS).setOptions(folderOptions);
       getUIFormSelectBox(FIELD_ALLOW_CREATE_FOLDERS).setSelectedValues(selectedFolderTypes);
-      getUIStringInput(FIELD_NAME).setEditable(false);
+      getUIStringInput(FIELD_NAME).setDisabled(true);
       return;
     }
-    getUIStringInput(FIELD_NAME).setEditable(true);
+    getUIStringInput(FIELD_NAME).setDisabled(false);
     reset();
-    getUIFormCheckBoxInput(FIELD_VIEWPREFERENCESDOC).setChecked(false);
-    getUIFormCheckBoxInput(FIELD_VIEWNONDOC).setChecked(false);
-    getUIFormCheckBoxInput(FIELD_VIEWSIDEBAR).setChecked(false);
-    getUIFormCheckBoxInput(SHOW_HIDDEN_NODE).setChecked(false);
+    getUICheckBoxInput(FIELD_VIEWPREFERENCESDOC).setChecked(false);
+    getUICheckBoxInput(FIELD_VIEWNONDOC).setChecked(false);
+    getUICheckBoxInput(FIELD_VIEWSIDEBAR).setChecked(false);
+    getUICheckBoxInput(SHOW_HIDDEN_NODE).setChecked(false);
   }
 
   public void updateFolderAllowed(String path) {

@@ -1047,6 +1047,31 @@
       <UIViewFormTabPane>Edit View</UIViewFormTabPane>
     </title>
   </EditPopup>
+		
+		<UITabList>
+			 <header>
+			 	 <tabName>Tab</tabName>
+			 	 <buttons>Description</buttons>
+						<action>Actions</action>
+				</header>
+				<action>
+					 <AddTab>Add</AddTab>
+				</action>
+				<msg>
+					 <confirm-delete>Are you sure want to delete this tab?</confirm-delete>
+				</msg>
+		</UITabList>
+		
+		<UIViewPermissionForm>
+			 <title>Select Owner with permissions on this view</title>
+				<action>
+					 <Save>Add</Save>
+						<Reset>Reset</Reset>
+				</action>
+				<label>
+					 <userOrGroup>User or Group</userOrGroup>
+				</label>				
+		</UIViewPermissionForm>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.UIViewFormTabPane	   #
@@ -1069,6 +1094,7 @@
       <viewName>Name</viewName>
       <template>Templates</template>
       <enableVersion>Enable Version</enableVersion>
+      <hideExplorerPanel>Hide explorer panel in side bar</hideExplorerPanel>						
     </label>
   </UIViewForm>
   <UITabForm>
@@ -1135,9 +1161,9 @@
   <UIViewFormTabPane>
     <tab>
       <label>
-        <UITabForm>Action</UITabForm>
+        <UITabList>Action</UITabList>
         <UIViewForm>Setting</UIViewForm>
-        <UIPermissionForm>Permission</UIPermissionForm>    
+        <UIViewPermissionContainer>Permission</UIViewPermissionContainer>    
       </label>
     </tab>
     <action>
@@ -1148,56 +1174,17 @@
       <Restore>Restore</Restore>
     </action>
     <label>
-      <version>Restore Version</version>
-      <viewName>Name</viewName>
-      <tabName>Name</tabName>
-      <permission>Permission</permission>
-      <tabs>Tabs</tabs>
-      <template>Templates</template>
-      <enableVersion>Enable Version</enableVersion>
-      <hideExplorerPanel>Hide explorer panel in side bar</hideExplorerPanel>
-      <addFolder>Add Folder</addFolder>
-      <addSignature>Add Signature</addSignature>
-      <addDocument>Add Document</addDocument>
-      <editDocument>Edit Document</editDocument>
-      <upload>Upload</upload>
-      <createTicket>Create Ticket</createTicket>
-      <paste>Paste</paste>
-      <search>Search</search>
-      <viewReferences>View References</viewReferences>
-      <viewNodeType>View Node Type</viewNodeType>
-      <viewPermissions>View Permissions</viewPermissions>
-      <viewProperties>View Properties</viewProperties>
-      <manageVersions>Manage Versions</manageVersions>
-      <manageAuditing>Manage Auditing</manageAuditing>
-      <managePublications>Manage Publication</managePublications>
-      <manageCategories>Manage Categories</manageCategories>
-      <manageRelations>Manage Relations</manageRelations>
-      <manageActions>Manage Actions</manageActions>
-      <exportNode>Export Node</exportNode>
-      <importNode>Import Node</importNode>
-      <viewRelations>View Relations</viewRelations>
-      <showJCRStructure>Show JCR Structure</showJCRStructure>
-      <watchDocument>Watch Document</watchDocument>
-      <taggingDocument>Tag Document</taggingDocument>
-      <multiLanguage>Multi Language</multiLanguage>
-      <viewMetadatas>View Metadata</viewMetadatas>
-      <overloadThumbnail>Overload Thumbnail</overloadThumbnail>
-      <manageHidden>Hide/Show Content</manageHidden>
-      <comment>Comment</comment>
-      <vote>Vote</vote>	  
-      <manageSimpleCategories>Manage Simple Categories</manageSimpleCategories>
-	  <option>
-	  	<ListView>List View</ListView>
-		  <TimelineView>Timeline View</TimelineView>
-		  <ThumbnailsView>Thumbnails View</ThumbnailsView>
-		  <CoverFlow>Cover Flow</CoverFlow>
-		  <IconView>Icon View</IconView>
-		  <SlideShowView>Slide Show View</SlideShowView>
-		  <SystemView>System View</SystemView>
-		  <ContentView>Content View</ContentView>
-		  <FileView>File Management View</FileView>
-	  </option>
+	     <option>
+	  	    <ListView>List View</ListView>
+        <TimelineView>Timeline View</TimelineView>
+		      <ThumbnailsView>Thumbnails View</ThumbnailsView>
+		      <CoverFlow>Cover Flow</CoverFlow>
+		      <IconView>Icon View</IconView>
+		      <SlideShowView>Slide Show View</SlideShowView>
+		      <SystemView>System View</SystemView>
+		      <ContentView>Content View</ContentView>
+		      <FileView>File Management View</FileView>
+	    </option>
     </label>
   </UIViewFormTabPane>
   <PopupViewPermission>
@@ -1205,6 +1192,20 @@
       <UIPermissionSelector>Select Permission</UIPermissionSelector>
     </title>
   </PopupViewPermission>
+		
+		<TabForm_Popup>
+			 <title>
+			 	 <UITabForm>Add/Edit Tab</UITabForm>
+			 </title>
+		</TabForm_Popup>
+		
+		<tab_permission>
+			 <title>
+			 	 <SelectUser>Select User</SelectUser>
+						<SelectMemeber>Select Member</SelectMemeber>
+						<AddAny>Any</AddAny>
+			 </title>
+		</tab_permission>		
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.UIECMTemplateList	   #
@@ -1294,36 +1295,7 @@
       <ecmTempForm>Edit Explorer Template</ecmTempForm>
     </title>
   </ecmTempFormEdit>
-  <!--
-  ################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.view.CBTempForm				 #
-  ################################################################################
-  -->
-  <CBTempForm>
-    <label>
-      <version>Select Version</version>
-      <content>Content</content>
-      <name>Name</name>
-      <homeTemplate>Template Type</homeTemplate>
-      <enableVersion>Enable Version</enableVersion>
-    </label>
-  </CBTempForm>
-  <CBTempFormAdd>
-    <title>
-      <CBTempForm>Add BC Template</CBTempForm>
-    </title>
-  </CBTempFormAdd>
-  <CBTempFormEdit>
-    <title>
-      <CBTempForm>Edit BC Template</CBTempForm>
-    </title>
-  </CBTempFormEdit>
-  <CBTemplate>
-    <title>
-      <Delete>Delete</Delete>
-      <EditInfo>Edit</EditInfo>
-    </title>
-  </CBTemplate>
+
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.script.UIScriptManager	 #

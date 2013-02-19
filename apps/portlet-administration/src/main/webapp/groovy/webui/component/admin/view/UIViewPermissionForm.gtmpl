@@ -1,0 +1,9 @@
+<div class="uiViewPermissionForm" id="UIViewPermissionForm">
+	<% uiform.begin() %>
+			<div>
+				<h5><%=_ctx.appRes(uicomponent.getName() + ".title"); %></h5>
+		
+				<% uiform.renderChildren() %>
+			</div>
+	<%uiform.end()%>
+</div>

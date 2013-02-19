@@ -127,9 +127,9 @@ public class UIViewList extends UIPagingGrid {
     }
   }
 
-  public boolean canDelete(List drivers, String viewName) {
-    for(Object driver : drivers){
-      String views = ((DriveData)driver).getViews() ;
+  public boolean canDelete(List<DriveData> drivers, String viewName) {
+    for(DriveData driver : drivers){
+      String views = driver.getViews() ;
       for(String view: views.split(",")){
         if(viewName.equals(view.trim())) return false ;
       }
@@ -153,10 +153,8 @@ public class UIViewList extends UIPagingGrid {
       UIViewContainer uiViewContainer = uiViewList.getParent() ;
       uiViewContainer.removeChildById(UIViewList.ST_VIEW) ;
       uiViewContainer.removeChildById(UIViewList.ST_EDIT) ;
-      uiViewContainer.initPopup(UIViewList.ST_ADD) ;
-      UIViewFormTabPane uiViewTabPane =
-        uiViewContainer.findFirstComponentOfType(UIViewFormTabPane.class) ;
-      //uiViewTabPane.reset() ;
+      UIViewFormTabPane uiViewForm = uiViewContainer.createUIComponent(UIViewFormTabPane.class, null, null) ;
+      uiViewContainer.initPopup(UIViewList.ST_ADD, uiViewForm) ;
       UIViewManager uiManager = uiViewList.getAncestorOfType(UIViewManager.class) ;
       uiManager.setRenderedChild(UIViewContainer.class) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiViewContainer) ;
@@ -206,21 +204,21 @@ public class UIViewList extends UIPagingGrid {
       UIViewContainer uiViewContainer = uiViewList.getParent() ;
       uiViewContainer.removeChildById(UIViewList.ST_VIEW) ;
       uiViewContainer.removeChildById(UIViewList.ST_ADD) ;
-      uiViewContainer.initPopup(UIViewList.ST_EDIT) ;
-      UIViewFormTabPane viewTabPane = uiViewContainer.findFirstComponentOfType(UIViewFormTabPane.class) ;
+      UIViewFormTabPane viewTabPane = uiViewContainer.createUIComponent(UIViewFormTabPane.class, null, null) ;
+      UIViewPermissionList uiPerList = viewTabPane.findFirstComponentOfType(UIViewPermissionList.class);
+      uiPerList.setViewName(viewName);
+      uiViewContainer.initPopup(UIViewList.ST_EDIT, viewTabPane) ;
       UIViewForm viewForm = viewTabPane.getChild(UIViewForm.class) ;
       viewForm.refresh(true) ;
       viewForm.update(viewNode, false, null) ;
-      if(viewForm.getUIFormCheckBoxInput(UIViewForm.FIELD_ENABLEVERSION).isChecked()) {
-        viewForm.getUIFormCheckBoxInput(UIViewForm.FIELD_ENABLEVERSION).setEnable(false);
-        //viewForm.setActions(new String[]{"Save", "Restore", "Cancel", "AddTabForm"}, null) ;
+      if(viewForm.getUICheckBoxInput(UIViewForm.FIELD_ENABLEVERSION).isChecked()) {
+        viewForm.getUICheckBoxInput(UIViewForm.FIELD_ENABLEVERSION).setDisabled(true);
       } else {
-        viewForm.getUIFormCheckBoxInput(UIViewForm.FIELD_ENABLEVERSION).setEnable(true);
-        //viewForm.setActions(new String[]{"Save", "Cancel", "AddTabForm"}, null) ;
-        //viewForm.setActions(new String[]{"Save", "Cancel"}, null) ;
+        viewForm.getUICheckBoxInput(UIViewForm.FIELD_ENABLEVERSION).setDisabled(false);
       }
-      //viewForm.setActionInfo(UIViewForm.FIELD_PERMISSION, new String[] {"AddPermission","RemovePermission"}) ;
-      //viewTabPane.getChild(UITabForm.class).setActions(new String[]{"Save", "Cancel"}, null) ;
+      UITabList uiTab = viewTabPane.getChild(UITabList.class);
+      uiTab.setViewName(viewName);
+      uiTab.refresh(uiTab.getUIPageIterator().getCurrentPage());
       viewTabPane.setSelectedTab(viewForm.getId()) ;
       UIViewManager uiManager = uiViewList.getAncestorOfType(UIViewManager.class) ;
       uiManager.setRenderedChild(UIViewContainer.class) ;
@@ -238,9 +236,8 @@ public class UIViewList extends UIPagingGrid {
       UIViewContainer uiViewContainer = uiViewList.getParent() ;
       uiViewContainer.removeChildById(UIViewList.ST_EDIT) ;
       uiViewContainer.removeChildById(UIViewList.ST_ADD) ;
-      uiViewContainer.initPopup(UIViewList.ST_VIEW) ;
-      UIViewFormTabPane uiViewTabPane =
-        uiViewContainer.findFirstComponentOfType(UIViewFormTabPane.class);
+      UIViewFormTabPane uiViewTabPane = uiViewContainer.createUIComponent(UIViewFormTabPane.class, null, null) ;
+      uiViewContainer.initPopup(UIViewList.ST_VIEW, uiViewTabPane) ;
       UIViewForm uiViewForm = uiViewTabPane.getChild(UIViewForm.class) ;
       uiViewForm.refresh(false) ;
       uiViewForm.update(viewNode, true, null) ;
@@ -259,7 +256,7 @@ public class UIViewList extends UIPagingGrid {
     private String tabList ;
     private String baseVersion =  "";
 
-    public ViewBean(String n, String per, List tabs) {
+    public ViewBean(String n, String per, List<String> tabs) {
       id = n;
       name = n ;
       permissions = per ;

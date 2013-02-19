@@ -19,6 +19,7 @@ package org.exoplatform.ecm.webui.component.admin.views;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import org.exoplatform.ecm.permission.info.UIPermissionInputSet;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -30,6 +31,7 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIFormStringInput;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
 
 /**
@@ -50,12 +52,11 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
       @EventConfig(listeners = UIViewFormTabPane.RestoreActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIViewFormTabPane.CancelActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIViewFormTabPane.CloseActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIViewFormTabPane.AddTabFormActionListener.class),
       @EventConfig(listeners = UIViewFormTabPane.BackViewFormActionListener.class, phase = Phase.DECODE),
+      @EventConfig(listeners = UIViewFormTabPane.SelectTabActionListener.class),
       @EventConfig(listeners = UIViewForm.AddPermissionActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIViewForm.RemovePermissionActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIViewForm.ChangeVersionActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UITabForm.AddTabActionListener.class, phase = Phase.DECODE)
+      @EventConfig(listeners = UIViewForm.ChangeVersionActionListener.class, phase = Phase.DECODE)
     }
 )
 public class UIViewFormTabPane extends UIContainer {
@@ -81,9 +82,16 @@ public class UIViewFormTabPane extends UIContainer {
   public UIViewFormTabPane() throws Exception {
   	UIViewForm uiViewForm = addChild(UIViewForm.class, null, null) ;
   	
-  	addChild(UITabForm.class, null, null) ;
+  	addChild(UITabList.class, null, null);
   	
-  	addChild(UIPermissionForm.class, null, null) ;
+  	UIViewPermissionContainer permissionContainer = addChild(UIViewPermissionContainer.class, null, null);
+  	UIViewPermissionForm uiPermissionForm = permissionContainer.getChild(UIViewPermissionForm.class);
+  	UIPermissionInputSet uiPermissionInputSet = uiPermissionForm.getChildById(UIViewPermissionForm.TAB_PERMISSION);
+  	for(UIComponent uiComp : uiPermissionInputSet.getChildren()) {
+  	  if(uiComp instanceof UICheckBoxInput) {
+  	    uiPermissionInputSet.removeChildById(uiComp.getId());
+  	  }
+  	}
     
   	setSelectedTab(uiViewForm.getId()) ;
   }

@@ -1053,6 +1053,31 @@
       <UIViewFormTabPane>Edition d'une vue</UIViewFormTabPane>
     </title>
   </EditPopup>
+		
+		<UITabList>
+			 <header>
+			 	 <tabName>Tab</tabName>
+			 	 <buttons>Description</buttons>
+						<action>Actions</action>
+				</header>
+				<action>
+					 <AddTab>Add</AddTab>
+				</action>
+				<msg>
+					 <confirm-delete>Are you sure want to delete this tab?</confirm-delete>
+				</msg>
+		</UITabList>
+		
+		<UIViewPermissionForm>
+			 <title>Select Owner with permissions on this view</title>
+				<action>
+					 <Save>Add</Save>
+						<Reset>Reset</Reset>
+				</action>
+				<label>
+					 <userOrGroup>User or Group</userOrGroup>
+				</label>
+		</UIViewPermissionForm>				
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.UIViewFormTabPane	   #
@@ -1071,6 +1096,12 @@
       <mustbe-add-tab>Vous devez ajouter au moins une barre d'outils</mustbe-add-tab>
       <view-exist>Ce nom de vue existe déjà</view-exist>
     </msg>
+    <label>
+      <viewName>Name</viewName>
+      <template>Templates</template>
+      <enableVersion>Enable Version</enableVersion>
+      <hideExplorerPanel>Hide explorer panel in side bar</hideExplorerPanel>						
+    </label>				
   </UIViewForm>
   <UITabForm>
     <msg>
@@ -1082,8 +1113,9 @@
   <UIViewFormTabPane>
     <tab>
       <label>
-        <UITabForm>Barre d'outil</UITabForm>
         <UIViewForm>Vue</UIViewForm>
+								<UITabList>Barre d'outil</UITabList>
+								<UIViewPermissionContainer>Permission</UIViewPermissionContainer>
       </label>
     </tab>
     <action>
@@ -1094,44 +1126,6 @@
       <Restore>Restaurer</Restore>
     </action>
     <label>
-      <version>Restaurer la version</version>
-      <viewName>Nom</viewName>
-      <tabName>Nom</tabName>
-      <permission>Permission</permission>
-      <tabs>Barres d'outils</tabs>
-      <template>Formulaires</template>
-      <enableVersion>Activer le versionning</enableVersion>
-      <addFolder>Ajouter un répertoire</addFolder>
-      <addSignature>Ajouter une signature</addSignature>
-      <addDocument>Ajouter un document</addDocument>
-      <editDocument>Editer un document</editDocument>
-      <upload>Uploader</upload>
-      <createTicket>Créer un ticket</createTicket>
-      <paste>Coller</paste>
-      <search>Rechercher</search>
-      <viewReferences>Voir les références</viewReferences>
-      <viewNodeType>Voir les types de noeud</viewNodeType>
-      <viewPermissions>Voir les permissions</viewPermissions>
-      <viewProperties>Voir les propriétés</viewProperties>
-      <manageVersions>Gérer les versions</manageVersions>
-      <manageAuditing>Gérer la traçabilité</manageAuditing>
-      <managePublications>Gérer les publications</managePublications>
-      <manageCategories>Gérer les catégories</manageCategories>
-      <manageRelations>Gérer les relations</manageRelations>
-      <manageActions>Gérer les actions</manageActions>
-      <exportNode>Exporter un noeud</exportNode>
-      <importNode>Importer un noeud</importNode>
-      <viewRelations>Voir les relations</viewRelations>
-      <showJCRStructure>Afficher la structure du JCR</showJCRStructure>
-      <watchDocument>S'abonner à un document</watchDocument>
-      <taggingDocument>Marquer un document</taggingDocument>
-      <multiLanguage>Multilangues</multiLanguage>
-      <viewMetadatas>Voir les métadonnées</viewMetadatas>
-      <overloadThumbnail>Surcharger une vignette</overloadThumbnail>
-      <manageHidden>Cacher/Montrer le contenu</manageHidden>
-      <comment>Commenter</comment>
-      <vote>Voter</vote>	  
-      <manageSimpleCategories>Gérer les catégories simples</manageSimpleCategories>
 	  <option>
 	  	<ListView>Vue de liste</ListView>
 		  <TimelineView>Vue de chronologie</TimelineView>
@@ -1150,6 +1144,20 @@
       <UIPermissionSelector>Sélection d'une permission</UIPermissionSelector>
     </title>
   </PopupViewPermission>
+		
+		<TabForm_Popup>
+			 <title>
+			 	 <UITabForm>Add/Edit Tab</UITabForm>
+			 </title>
+		</TabForm_Popup>	
+		
+		<tab_permission>
+			 <title>
+			 	 <SelectUser>Select User</SelectUser>
+						<SelectMemeber>Select Member</SelectMemeber>
+						<AddAny>Any</AddAny>
+			 </title>
+		</tab_permission>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.UIECMTemplateList	   #
@@ -2685,10 +2693,5 @@
 			  </label>
 		</UICLVTemplateForm>	
 		  
-  <UIViewFormTabPane>
-		<label>  
-  		<hideExplorerPanel>Hide explorer panel in side bar</hideExplorerPanel>
- 		</label>
-	</UIViewFormTabPane>
 </bundle>
 

@@ -223,21 +223,19 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       }
 
       boolean viewReferences =
-        driveInputSet.getUIFormCheckBoxInput(UIDriveInputSet.FIELD_VIEWPREFERENCESDOC).isChecked();
+        driveInputSet.getUICheckBoxInput(UIDriveInputSet.FIELD_VIEWPREFERENCESDOC).isChecked();
       boolean viewSideBar =
-        driveInputSet.getUIFormCheckBoxInput(UIDriveInputSet.FIELD_VIEWSIDEBAR).isChecked();
+        driveInputSet.getUICheckBoxInput(UIDriveInputSet.FIELD_VIEWSIDEBAR).isChecked();
       boolean showHiddenNode =
-        driveInputSet.getUIFormCheckBoxInput(UIDriveInputSet.SHOW_HIDDEN_NODE).isChecked();
+        driveInputSet.getUICheckBoxInput(UIDriveInputSet.SHOW_HIDDEN_NODE).isChecked();
       boolean viewNonDocument =
-        driveInputSet.getUIFormCheckBoxInput(UIDriveInputSet.FIELD_VIEWNONDOC).isChecked();
+        driveInputSet.getUICheckBoxInput(UIDriveInputSet.FIELD_VIEWNONDOC).isChecked();
       String[] allowCreateFolders = driveInputSet.getUIFormSelectBox(UIDriveInputSet.FIELD_ALLOW_CREATE_FOLDERS)
                                                  .getSelectedValues();
       if (allowCreateFolders == null || allowCreateFolders.length == 0 ) {
-        uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.allowedCreateFolder", null,
-            ApplicationMessage.WARNING));
-        return;
+        allowCreateFolders = new String[] {};
       }
-      StringBuilder foldertypes = new StringBuilder();
+      StringBuilder foldertypes = new StringBuilder("");
       for (String allowCreateFolder : allowCreateFolders) {
         foldertypes.append(allowCreateFolder).append(",");
       }

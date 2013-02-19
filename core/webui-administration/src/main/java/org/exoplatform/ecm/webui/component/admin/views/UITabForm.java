@@ -18,21 +18,25 @@ package org.exoplatform.ecm.webui.component.admin.views;
 
 import java.util.List;
 
+import javax.jcr.Node;
+
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.cms.views.ViewConfig.Tab;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
+import org.exoplatform.webui.core.UIPopupWindow;
+import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormStringInput;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 
 /**
  * Created by The eXo Platform SARL
@@ -43,28 +47,25 @@ import org.exoplatform.webui.form.UIFormStringInput;
 
 @ComponentConfig(
 		template = "app:/groovy/webui/component/admin/view/UITabForm.gtmpl",
+		lifecycle = UIFormLifecycle.class,
 		events = {	  
-	      @EventConfig(listeners = UITabForm.SaveActionListener.class, phase = Phase.DECODE),
+	      @EventConfig(listeners = UITabForm.SaveActionListener.class),
 	      @EventConfig(listeners = UITabForm.CancelActionListener.class, phase = Phase.DECODE)
 	  }
 )
-public class UITabForm extends UIForm implements UISelectable{
+public class UITabForm extends UIForm {
 
   final static public String FIELD_NAME = "tabName" ;
+  private String viewName;
   private List<?> buttons_ ;
   
-  
   public UITabForm() throws Exception {
-  	this("UITabForm");
-  }
-
-  public UITabForm(String name) throws Exception {
     setComponentConfig(getClass(), null) ;
     addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null)) ;
     ManageViewService vservice_ = getApplicationComponent(ManageViewService.class) ;
     buttons_ = vservice_.getButtons();
     for(Object bt : buttons_) {
-      addUIFormInput(new UIFormCheckBoxInput<Boolean>(getButtonName(bt), "", null)) ;
+      addUIFormInput(new UICheckBoxInput(getButtonName(bt), "", null)) ;
     }
   }
 
@@ -78,31 +79,37 @@ public class UITabForm extends UIForm implements UISelectable{
   }
 
   public void refresh(boolean isEditable) throws Exception {
-    getUIStringInput(FIELD_NAME).setEditable(isEditable).setValue(null) ;
+    getUIStringInput(FIELD_NAME).setDisabled(!isEditable).setValue(null) ;
     for(Object bt : buttons_){
-      getUIFormCheckBoxInput(getButtonName(bt)).setChecked(false).setEditable(isEditable) ;
+      getUICheckBoxInput(getButtonName(bt)).setChecked(false).setDisabled(!isEditable) ;
     }
-    //if(isEditable) setActions(new String[]{"AddTab", "Reset", "Cancel"}, null) ;
-    //else setActions(new String[]{"Save", "AddTab", "Cancel"}, null) ;
   }
 
   public void update(Tab tab, boolean isView) throws Exception{
     refresh(!isView) ;
     if(tab == null) return ;
-    getUIStringInput(FIELD_NAME).setEditable(false).setValue(tab.getTabName()) ;
+    getUIStringInput(FIELD_NAME).setDisabled(true).setValue(tab.getTabName()) ;
     String buttonsProperty = tab.getButtons() ;
     String[] buttonArray = StringUtils.split(buttonsProperty, ";") ;
     for(String bt : buttonArray){
-      UIFormCheckBoxInput<?> cbInput = getUIFormCheckBoxInput(bt.trim()) ;
+      UICheckBoxInput cbInput = getUICheckBoxInput(bt.trim()) ;
       if(cbInput != null) cbInput.setChecked(true) ;
     }
   }
-
-  static public class AddTabActionListener extends EventListener<UIViewFormTabPane> {
-    public void execute(Event<UIViewFormTabPane> event) throws Exception {
-      UIViewFormTabPane viewFormTabPane = event.getSource();
-      UIViewForm uiViewForm = viewFormTabPane.getChild(UIViewForm.class) ;
-      UITabForm uiTabForm = viewFormTabPane.getChild(UITabForm.class) ;
+  
+  public String getViewName() {
+    return viewName;
+  }
+  
+  public void setViewName(String name) {
+    viewName = name;
+  }  
+  
+  static public class SaveActionListener extends EventListener<UITabForm> {
+    public void execute(Event<UITabForm> event) throws Exception {
+      UITabForm uiTabForm = event.getSource();
+      UIViewContainer uiContainer = uiTabForm.getAncestorOfType(UIViewContainer.class);
+      UIViewFormTabPane viewFormTabPane = uiContainer.findFirstComponentOfType(UIViewFormTabPane.class);
       String tabName = uiTabForm.getUIStringInput(FIELD_NAME).getValue() ;
       UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class) ;
       if(tabName == null || tabName.trim().length() == 0) {
@@ -123,7 +130,7 @@ public class UITabForm extends UIForm implements UISelectable{
       boolean isSelected = false ;
       for(Object bt : uiTabForm.buttons_ ) {
         String button = uiTabForm.getButtonName(bt) ;
-        if(uiTabForm.getUIFormCheckBoxInput(button).isChecked()) {
+        if(uiTabForm.getUICheckBoxInput(button).isChecked()) {
           isSelected = true ;
           if(selectedButton.length() > 0) selectedButton.append(";").append(button) ;
           else selectedButton.append(button) ;
@@ -135,34 +142,28 @@ public class UITabForm extends UIForm implements UISelectable{
         
         return;
       }
-      uiViewForm.setRendered(true);
-      uiTabForm.setRendered(false);
-      ((UIFormStringInput)uiTabForm.getChildById(UITabForm.FIELD_NAME)).getValidators().clear();      
-      ((UIFormStringInput)uiViewForm.getChildById(UIViewForm.FIELD_NAME)).setValue(uiViewForm.getViewName());
-      ((UIFormStringInput)uiViewForm.getChildById(UIViewForm.FIELD_PERMISSION)).setValue(uiViewForm.getPermission());
-      viewFormTabPane.setSelectedTab(uiViewForm.getId()) ;
-      uiViewForm.addTab(tabName, selectedButton.toString()) ;
-      uiViewForm.update(null, false, null) ;
-      UIViewContainer uiViewContainer = uiTabForm.getAncestorOfType(UIViewContainer.class) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiViewContainer) ;
-    }
-  }
-  
-  static public class SaveActionListener extends EventListener<UITabForm> {
-    public void execute(Event<UITabForm> event) throws Exception {
-    	
+      ManageViewService manageViewService = WCMCoreUtils.getService(ManageViewService.class);
+      Node viewNode = manageViewService.getViewByName(uiTabForm.getViewName(), WCMCoreUtils.getUserSessionProvider());
+      manageViewService.addTab(viewNode, tabName, selectedButton.toString());
+      UIPopupWindow uiPopup = uiContainer.getChildById(UITabList.TAPFORM_POPUP);
+      uiPopup.setShow(false);
+      uiPopup.setRendered(false);
+      viewFormTabPane.setSelectedTab(uiTabForm.getId()) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
     }
   }
   
   static public class CancelActionListener extends EventListener<UITabForm> {
     public void execute(Event<UITabForm> event) throws Exception {
-    	
+      UITabForm uiTabForm = event.getSource();
+      UIViewContainer uiContainer = uiTabForm.getAncestorOfType(UIViewContainer.class);
+      UIViewFormTabPane viewFormTabPane = uiContainer.findFirstComponentOfType(UIViewFormTabPane.class);
+      UIPopupWindow uiPopup = uiContainer.getChildById(UITabList.TAPFORM_POPUP);
+      uiPopup.setShow(false);
+      uiPopup.setRendered(false);
+      viewFormTabPane.setSelectedTab(uiTabForm.getId()) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
     }
   }
 
-	@Override
-	public void doSelect(String selectField, Object value) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
 }

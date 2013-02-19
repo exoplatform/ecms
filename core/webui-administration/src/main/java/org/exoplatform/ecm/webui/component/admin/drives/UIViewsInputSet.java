@@ -27,8 +27,8 @@ import org.exoplatform.services.cms.views.ViewConfig;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.exception.MessageException;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormInputSet;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 
 /**
  * Created by The eXo Platform SARL
@@ -47,7 +47,7 @@ public class UIViewsInputSet extends UIFormInputSet {
     List<ViewConfig> views_ = getApplicationComponent(ManageViewService.class).getAllViews();
     for(ViewConfig view : views_){
       String viewName= view.getName() ;
-      boolean checked = getUIFormCheckBoxInput(viewName).isChecked() ;
+      boolean checked = getUICheckBoxInput(viewName).isChecked() ;
       if(checked){
         if(selectedView.length() > 0) selectedView.append(", ") ;
         selectedView.append(viewName) ;
@@ -67,9 +67,9 @@ public class UIViewsInputSet extends UIFormInputSet {
     for(ViewConfig view : views_){
       String viewName = view.getName() ;
       if(getUIFormCheckBoxInput(viewName) != null) {
-        getUIFormCheckBoxInput(viewName).setChecked(false) ;
+        getUICheckBoxInput(viewName).setChecked(false) ;
       }else{
-        addUIFormInput(new UIFormCheckBoxInput<Boolean>(viewName, viewName, null)) ;
+        addUIFormInput(new UICheckBoxInput(viewName, viewName, null)) ;
       }
 
     }
@@ -99,7 +99,7 @@ public class UIViewsInputSet extends UIFormInputSet {
     String views = drive.getViews() ;
     String[] array = views.split(",") ;
     for(String view: array){
-      getUIFormCheckBoxInput(view.trim()).setChecked(true) ;
+      getUICheckBoxInput(view.trim()).setChecked(true) ;
     }
   }
 }

@@ -1,5 +1,5 @@
 <%
-  import org.exoplatform.webui.form.UIFormCheckBoxInput;
+  import org.exoplatform.webui.form.input.UICheckBoxInput;
   
   String fieldName; 
 %>
@@ -20,7 +20,7 @@
 		  
 		  <% 
 				for(field in uiform.getChildren()) { 
-					if(field instanceof UIFormCheckBoxInput) {
+					if(field instanceof UICheckBoxInput) {
 			%>
 			      <div clas="control-group tabActions" style="width:240px; float:left;">
 							<%fieldName = uicomponent.getLabel(field.getName());%>																		

@@ -1,5 +1,5 @@
-/*
- * Copyright (C) 2003-2011 eXo Platform SAS.
+/***************************************************************************
+ * Copyright (C) 2003-2009 eXo Platform SAS.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Affero General Public License
@@ -13,30 +13,28 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
- */
+ *
+ **************************************************************************/
 package org.exoplatform.ecm.webui.component.admin.views;
 
 import org.exoplatform.webui.config.annotation.ComponentConfig;
-import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
-import org.exoplatform.webui.form.UIForm;
-
+import org.exoplatform.webui.core.UIContainer;
+import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 
 /**
- * Created by The eXo Platform SAS
- * Author : viet.nguyen
- *          viet.nguyen@exoplatform.com
- * Jan 5, 2011  
+ * Created by The eXo Platform SARL
+ * Author : Dang Van Minh
+ *          minh.dang@exoplatform.com
+ * Feb 19, 2013
+ * 4:30:37 PM  
  */
-@ComponentConfig(
-  lifecycle = UIFormLifecycle.class,
-  template = "system:/groovy/webui/form/UIForm.gtmpl"
-)
-public class UIPermissionForm extends UIForm {
 
-  
+@ComponentConfig(lifecycle = UIContainerLifecycle.class)
 
-  public UIPermissionForm() throws Exception {
-    
+public class UIViewPermissionContainer extends UIContainer {
+
+  public UIViewPermissionContainer() throws Exception {
+    addChild(UIViewPermissionList.class, null, null);
+    addChild(UIViewPermissionForm.class, null, null);
   }
- 
 }

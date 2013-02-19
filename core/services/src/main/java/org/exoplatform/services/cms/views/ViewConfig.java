@@ -50,28 +50,27 @@ public class ViewConfig {
   public boolean isHideExplorerPanel() { return hideExplorerPanel; }
   public void setHideExplorerPanel(boolean value) { this.hideExplorerPanel = value; }  
 
-  @SuppressWarnings("unchecked")
-  public List getAllPermissions() {
+  public List<String> getAllPermissions() {
     String[] allPermissions = StringUtils.split(permissions, ";");
-    List permissionList = new ArrayList() ;
+    List<String> permissionList = new ArrayList<String>() ;
     for(int i = 0 ; i < allPermissions.length ; i ++ ){
       permissionList.add(allPermissions[i].trim()) ;
     }
     return permissionList ;
   }
 
-  @SuppressWarnings("hiding")
   public boolean hasPermission(String permission) {
-    List permissions = getAllPermissions() ;
+    List<String> allPermissions = getAllPermissions() ;
     if(permission == null) return false ;
     String[] array = StringUtils.split(permission , ":/") ;
     if(array == null || array.length < 2) return false ;
-    int i = permissions.indexOf("*:/"+array[1]) ;
+    int i = allPermissions.indexOf("*:/"+array[1]) ;
     if( i > -1) return true ;
-    return permissions.contains(permission) ;
+    return allPermissions.contains(permission) ;
   }
 
-  public static class Tab{
+  public static class Tab {
+    
     private String tabName ;
     private String buttons ;
 

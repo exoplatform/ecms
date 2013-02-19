@@ -296,7 +296,6 @@ public class UIFCCActionForm extends UIDialogForm implements UISelectable {
       Map<String, JcrInputProperty> sortedInputs = DialogFormUtil.prepareMap(fccActionForm.getChildren(),
                                                                              fccActionForm.getInputProperties(),
                                                                              fccActionForm.getInputOptions());
-      String repository = UIFCCUtils.getPreferenceRepository() ;
       // Update action node:
       if(!fccActionForm.isAddNew) {
         CmsService cmsService = fccActionForm.getApplicationComponent(CmsService.class) ;

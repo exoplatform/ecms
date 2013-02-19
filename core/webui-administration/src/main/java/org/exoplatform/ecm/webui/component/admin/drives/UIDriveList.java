@@ -80,7 +80,7 @@ public class UIDriveList extends UIPagingGridDecorator {
       getUIPageIterator().setCurrentPage(currentPage);
   }
 
-  public List getDriveList() throws Exception { return getUIPageIterator().getCurrentPageData() ; }
+  public List<DriveData> getDriveList() throws Exception { return getUIPageIterator().getCurrentPageData() ; }
 
   public String getRequestContextName() {
     return WCMCoreUtils.getRestContextName();
@@ -156,10 +156,10 @@ public class UIDriveList extends UIPagingGridDecorator {
     }
     return false ;
   }
-  static public class DriveComparator implements Comparator {
-    public int compare(Object o1, Object o2) throws ClassCastException {
-      String name1 = ((DriveData) o1).getName() ;
-      String name2 = ((DriveData) o2).getName() ;
+  static public class DriveComparator implements Comparator<DriveData> {
+    public int compare(DriveData o1, DriveData o2) throws ClassCastException {
+      String name1 = o1.getName() ;
+      String name2 = o2.getName() ;
       return name1.compareToIgnoreCase(name2) ;
     }
   }

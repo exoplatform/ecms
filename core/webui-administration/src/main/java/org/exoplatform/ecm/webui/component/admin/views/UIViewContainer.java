@@ -18,6 +18,7 @@ package org.exoplatform.ecm.webui.component.admin.views;
 
 import org.exoplatform.ecm.webui.selector.UIPermissionSelector;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
@@ -36,17 +37,20 @@ public class UIViewContainer extends UIContainer {
     addChild(UIViewList.class, null, null) ;
   }
 
-  public void initPopup(String popupId) throws Exception {
+  public void initPopup(String popupId, UIComponent uiComponent) throws Exception {
+    initPopup(popupId, uiComponent, 600, 300);
+  }  
+  
+  public void initPopup(String popupId, UIComponent uiComponent, int width, int height) throws Exception {
     removeChildById(popupId) ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, popupId) ;
     uiPopup.setShowMask(true);
     uiPopup.setShowMask(true);
-    uiPopup.setWindowSize(600,300) ;
-    UIViewFormTabPane uiViewForm = createUIComponent(UIViewFormTabPane.class, null, null) ;
-    uiPopup.setUIComponent(uiViewForm) ;
+    uiPopup.setWindowSize(width, height) ;
+    uiPopup.setUIComponent(uiComponent);
     uiPopup.setShow(true) ;
-    uiPopup.setResizable(true) ;
-  }
+    uiPopup.setResizable(true);
+  }    
 
   public void update() throws Exception {
     UIViewList uiViewList = getChild(UIViewList.class);

@@ -79,7 +79,6 @@ public class UINodeTypeSelector extends
     }
   }
 
-  @SuppressWarnings("unchecked")
   public static class OnChangeActionListener extends EventListener<UINodeTypeSelector> {
 
     private void updateCheckBox(List<String> selectedNodetypes, UIFormCheckBoxInput uiCheckBox) {
@@ -123,7 +122,6 @@ public class UINodeTypeSelector extends
     }
   }
 
-  @SuppressWarnings("unchecked")
   public static class SaveActionListener extends EventListener<UINodeTypeSelector> {
     public void execute(Event<UINodeTypeSelector> event) throws Exception {
       UINodeTypeSelector uiNodeTypeSelector = event.getSource();
@@ -161,7 +159,6 @@ public class UINodeTypeSelector extends
     }
   }
 
-  @SuppressWarnings("unchecked")
   public static class RefreshActionListener extends EventListener<UINodeTypeSelector> {
     public void execute(Event<UINodeTypeSelector> event) throws Exception {
       UINodeTypeSelector uiNodeTypeSelector = event.getSource();
@@ -177,7 +174,6 @@ public class UINodeTypeSelector extends
     }
   }
 
-  @SuppressWarnings("unchecked")
   public static class SelectedAllNodeTypesActionListener extends EventListener<UINodeTypeSelector> {
     public void execute(Event<UINodeTypeSelector> event) throws Exception {
       UINodeTypeSelector uiNodeTypeSelector = event.getSource();
@@ -191,7 +187,6 @@ public class UINodeTypeSelector extends
     }
   }
 
-  @SuppressWarnings("unchecked")
   public static class ShowPageActionListener extends EventListener<UIPageIterator> {
     public void execute(Event<UIPageIterator> event) throws Exception {
       UINodeTypeSelector uiNodeTypeSelector = event.getSource().getAncestorOfType(UINodeTypeSelector.class);

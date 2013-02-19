@@ -27,7 +27,6 @@ import javax.jcr.version.VersionHistory;
 import org.exoplatform.ecm.jcr.model.VersionNode;
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
 import org.exoplatform.ecm.webui.component.admin.templates.UITemplateContainer;
-import org.exoplatform.ecm.webui.component.admin.templates.UITemplatesManager;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.groovyscript.text.TemplateService;
@@ -47,10 +46,10 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
 
 /**
@@ -105,7 +104,7 @@ public class UITemplateForm extends UIForm {
         MandatoryValidator.class).addValidator(ECMNameValidator.class));
     List<SelectItemOption<String>> typeList = new ArrayList<SelectItemOption<String>>();
     addUIFormInput(new UIFormSelectBox(FIELD_HOMETEMPLATE, FIELD_HOMETEMPLATE, typeList));
-    UIFormCheckBoxInput enableVersion = new UIFormCheckBoxInput<Boolean>(FIELD_ENABLEVERSION,
+    UICheckBoxInput enableVersion = new UICheckBoxInput(FIELD_ENABLEVERSION,
         FIELD_ENABLEVERSION, null);
     enableVersion.setRendered(false);
     addUIFormInput(enableVersion);
@@ -186,7 +185,7 @@ public class UITemplateForm extends UIForm {
     if (isAddNew_) {
       versionField.setRendered(false);
       getUIFormTextAreaInput(FIELD_CONTENT).setValue(null);
-      getUIStringInput(FIELD_NAME).setEditable(true).setValue(null);
+      getUIStringInput(FIELD_NAME).setDisabled(false).setValue(null);
       getUIFormSelectBox(FIELD_HOMETEMPLATE).setValue(null);
       getUIFormSelectBox(FIELD_HOMETEMPLATE).setDisabled(false);
       getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setRendered(false);
@@ -205,7 +204,7 @@ public class UITemplateForm extends UIForm {
               getTemplate(templatePath, WCMCoreUtils.getUserSessionProvider());
       template_ = NodeLocation.getNodeLocationByNode(templateNode);
       getUIStringInput(FIELD_NAME).setValue(templateNode.getName());
-      getUIStringInput(FIELD_NAME).setEditable(false);
+      getUIStringInput(FIELD_NAME).setDisabled(true);
       String value = templatePath.substring(0, templatePath.lastIndexOf("/"));
       getUIFormSelectBox(FIELD_HOMETEMPLATE).setValue(value);
       getUIFormSelectBox(FIELD_HOMETEMPLATE).setDisabled(false);
@@ -216,14 +215,14 @@ public class UITemplateForm extends UIForm {
         List<SelectItemOption<String>> options = getVersionValues(templateNode);
         getUIFormSelectBox(FIELD_VERSION).setOptions(options).setRendered(true);
         getUIFormSelectBox(FIELD_VERSION).setValue(baseVersionName_);
-        getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setChecked(true).setEnable(false);
+        getUICheckBoxInput(FIELD_ENABLEVERSION).setChecked(true).setDisabled(true);
         if (options.size() > 1)
           setActions(new String[] { "Save", "Reset", "Restore", "Cancel" });
         else
           setActions(new String[] { "Save", "Reset", "Cancel" });
       } else if (canEnableVersionning(templateNode)) {
         getUIFormSelectBox(FIELD_VERSION).setRendered(false);
-        getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setChecked(false).setEditable(true);
+        getUICheckBoxInput(FIELD_ENABLEVERSION).setChecked(false).setDisabled(false);
       }
     }
     if (selectedVersion != null) {
@@ -250,7 +249,7 @@ public class UITemplateForm extends UIForm {
         String tempPath = uiForm.template_.getPath();
         homeTemplate = tempPath.substring(0, tempPath.lastIndexOf("/"));
       }
-      boolean isEnableVersioning = uiForm.getUIFormCheckBoxInput(FIELD_ENABLEVERSION).isChecked();
+      boolean isEnableVersioning = uiForm.getUICheckBoxInput(FIELD_ENABLEVERSION).isChecked();
       String path = null;
       if (uiForm.getId().equalsIgnoreCase(UIECMTemplateList.ST_ecmTempForm)) {
         List<Node> ecmTemps = manageViewService.getAllTemplates(BasePath.ECM_EXPLORER_TEMPLATES,
@@ -328,7 +327,7 @@ public class UITemplateForm extends UIForm {
         uiECMTempList.refresh(uiECMTempList.getUIPageIterator().getCurrentPage());
         uiECMTempList.setRenderSibling(UIECMTemplateList.class);
       }
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiTempContainer);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiTempContainer.getParent());
     }
   }
 
@@ -336,14 +335,13 @@ public class UITemplateForm extends UIForm {
     public void execute(Event<UITemplateForm> event) throws Exception {
       UITemplateForm uiForm = event.getSource();
       uiForm.refresh();
-      UITemplatesManager uiManager = event.getSource().getAncestorOfType(UITemplatesManager.class) ;
       UITemplateContainer uiTemplateContainer = uiForm.getAncestorOfType(UITemplateContainer.class);
       if (uiForm.isAddNew_) {
         uiTemplateContainer.removeChildById(UIECMTemplateList.ST_ecmTempForm + "Add");
       } else {
         uiTemplateContainer.removeChildById(UIECMTemplateList.ST_ecmTempForm + "Edit");
       }
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiTemplateContainer);      
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiTemplateContainer.getParent());      
     }
   }
 

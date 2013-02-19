@@ -48,7 +48,6 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.input.UICheckBoxInput;
@@ -70,14 +69,14 @@ public class UIViewForm extends UIForm implements UISelectable {
   final static public String FIELD_TABS = "tabs" ;
   final static public String FIELD_TEMPLATE = "template" ;
   final static public String FIELD_ENABLEVERSION = "enableVersion" ;
-	final static public String FIELD_PERMISSION = "permission" ;
+  final static public String FIELD_PERMISSION = "permission" ;
   final static public String FIELD_HIDE_EXPLORER_PANEL = "hideExplorerPanel" ;
 
   private boolean isView_ = true ;
   private NodeLocation views_;
   private HashMap<String, Tab> tabMap_ = new HashMap<String, Tab>() ;
   private ManageViewService vservice_ = null ;
-  private String viewName = null;
+  private String viewName_ = null;
   private String permission = null;
   private List<String> listVersion = new ArrayList<String>() ;
   private String baseVersionName_;
@@ -87,11 +86,11 @@ public class UIViewForm extends UIForm implements UISelectable {
   Map<String, String> tempMap = new HashMap<String, String>();
 
   public String getViewName() {
-    return viewName;
+    return viewName_;
   }
 
   public void setViewName(String viewName) {
-    this.viewName = viewName;
+    this.viewName_ = viewName;
   }
 
   public String getPermission() {
@@ -132,8 +131,7 @@ public class UIViewForm extends UIForm implements UISelectable {
       }
     }
     addUIFormInput(new UIFormSelectBox(FIELD_TEMPLATE,FIELD_TEMPLATE, temp)) ;
-    UIFormCheckBoxInput enableVersion =
-      new UIFormCheckBoxInput<Boolean>(FIELD_ENABLEVERSION, FIELD_ENABLEVERSION, null) ;
+    UICheckBoxInput enableVersion = new UICheckBoxInput(FIELD_ENABLEVERSION, FIELD_ENABLEVERSION, null) ;
     enableVersion.setRendered(true) ;
     addUIFormInput(enableVersion) ;
     //setActions(new String[]{"Save", "Reset", "Cancel", "AddTabForm"}, null) ;
@@ -160,9 +158,9 @@ public class UIViewForm extends UIForm implements UISelectable {
         String[] permissionsArray = valuePermissions.split(",");
         permissionsList = Arrays.asList(permissionsArray);
         if (permissionsList.size() > 0) {
-          for (String permission : permissionsList) {
+          for (String permissionNew : permissionsList) {
             if(newsPermissions.length() > 0) newsPermissions.append(",");
-            newsPermissions.append(permission.trim());
+            newsPermissions.append(permissionNew.trim());
           }
         }
         if(!permissionsList.contains(membership)) {
@@ -251,12 +249,12 @@ public class UIViewForm extends UIForm implements UISelectable {
   public void refresh(boolean isAddNew) throws Exception {
     getUIFormSelectBox(FIELD_VERSION).setRendered(!isAddNew) ;
     getUIFormSelectBox(FIELD_VERSION).setDisabled(!isAddNew) ;
-    getUIStringInput(FIELD_NAME).setEditable(isAddNew).setValue(null) ;
+    getUIStringInput(FIELD_NAME).setDisabled(!isAddNew).setValue(null) ;
     //getUIStringInput(FIELD_PERMISSION).setValue(null) ;
     //getUIFormInputInfo(FIELD_TABS).setEditable(isAddNew).setValue(null) ;
     getUIFormSelectBox(FIELD_TEMPLATE).setValue(null) ;
     getUIFormSelectBox(FIELD_TEMPLATE).setDisabled(!isAddNew) ;
-    getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setRendered(!isAddNew) ;
+    getUICheckBoxInput(FIELD_ENABLEVERSION).setRendered(!isAddNew) ;
     getUICheckBoxInput(FIELD_HIDE_EXPLORER_PANEL).setRendered(!isAddNew);
     setViewName("");
     if(isAddNew) {
@@ -287,17 +285,17 @@ public class UIViewForm extends UIForm implements UISelectable {
         tabMap_.put(tab.getName(), tabObj) ;
       }
 
-      getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setRendered(true) ;
+      getUICheckBoxInput(FIELD_ENABLEVERSION).setRendered(true) ;
       if (isVersioned(viewNode)) {
         rootVersionNode = getRootVersion(viewNode);
         getUIFormSelectBox(FIELD_VERSION).setOptions(getVersionValues(viewNode)).setRendered(true) ;
         getUIFormSelectBox(FIELD_VERSION).setValue(baseVersionName_) ;
-        getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setChecked(true) ;
-        getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setEnable(true) ;
+        getUICheckBoxInput(FIELD_ENABLEVERSION).setChecked(true) ;
+        getUICheckBoxInput(FIELD_ENABLEVERSION).setDisabled(false);
       } else if (!isVersioned(viewNode)) {
         getUIFormSelectBox(FIELD_VERSION).setRendered(false) ;
-        getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setChecked(false) ;
-        getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setEnable(true) ;
+        getUICheckBoxInput(FIELD_ENABLEVERSION).setChecked(false) ;
+        getUICheckBoxInput(FIELD_ENABLEVERSION).setDisabled(false);
       }
     }
     //pref is show side bar
@@ -321,7 +319,7 @@ public class UIViewForm extends UIForm implements UISelectable {
       selectedVersion_ = selectedVersion;
     }
     if(viewsNode != null) {
-      getUIStringInput(FIELD_NAME).setEditable(false).setValue(viewsNode.getName()) ;
+      getUIStringInput(FIELD_NAME).setDisabled(true).setValue(viewsNode.getName()) ;
       //getUIStringInput(FIELD_PERMISSION).setValue(viewsNode.getProperty("exo:accessPermissions").getString()) ;
       getUIFormSelectBox(FIELD_TEMPLATE).setValue(tempMap.get(viewsNode.getProperty("exo:template").getString()));
     }
@@ -351,7 +349,7 @@ public class UIViewForm extends UIForm implements UISelectable {
                                                           ApplicationMessage.WARNING)) ;
       }
     }
-    boolean isEnableVersioning = getUIFormCheckBoxInput(FIELD_ENABLEVERSION).isChecked() ;
+    boolean isEnableVersioning = getUICheckBoxInput(FIELD_ENABLEVERSION).isChecked() ;
     boolean hideExplorerPanel = getUICheckBoxInput(FIELD_HIDE_EXPLORER_PANEL).isChecked();
     List<ViewConfig> viewList = vservice_.getAllViews() ;
     UIPopupWindow uiPopup = getAncestorOfType(UIPopupWindow.class) ;

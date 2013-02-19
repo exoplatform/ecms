@@ -84,7 +84,7 @@
               <string>AccessibleNavigation.gtmpl</string>
             </field>
             <field name="category">
-              <string>list</string>
+              <string>navigation</string>
             </field>
           </object>
         </object-param>
