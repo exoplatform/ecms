@@ -16,6 +16,15 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.Set;
+
+import javax.jcr.Node;
+
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.jcr.model.Preference;
@@ -40,10 +49,11 @@ import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.form.*;
-
-import javax.jcr.Node;
-import java.util.*;
+import org.exoplatform.webui.form.UIForm;
+import org.exoplatform.webui.form.UIFormInputInfo;
+import org.exoplatform.webui.form.UIFormSelectBox;
+import org.exoplatform.webui.form.UIFormStringInput;
+import org.exoplatform.webui.form.UIFormTextAreaInput;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh
@@ -128,7 +138,7 @@ public class UITaggingForm extends UIForm {
     NewFolksonomyService folksonomyService = getApplicationComponent(NewFolksonomyService.class);
 
     StringBuilder linkedTags = new StringBuilder();
-    Set<String> linkedTagSet = new HashSet<String>();
+    List<String> linkedTagList = new ArrayList<String>();
     String tagScope = this.getUIFormSelectBox(TAG_SCOPES).getValue();
 
     Node currentNode = getAncestorOfType(UIJCRExplorer.class).getCurrentNode();
@@ -138,12 +148,10 @@ public class UITaggingForm extends UIForm {
                                                                                  currentNode),
                                                                      currentNode,
                                                                      workspace)) {
-      linkedTagSet.add(tag.getName());
+      linkedTagList.add(tag.getName());
     }
-      List<String> linkedTagList = new ArrayList<String>(linkedTagSet);
-      Collections.sort(linkedTagList);
-
-      for (String tagName : linkedTagList) {
+    Collections.sort(linkedTagList);
+    for (String tagName : linkedTagList) {
       if (linkedTags.length() > 0)
         linkedTags = linkedTags.append(",");
       linkedTags.append(tagName);
