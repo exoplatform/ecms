@@ -195,7 +195,7 @@ For example: _Two lifecycles with/without states_
 		<type>org.exoplatform.services.wcm.extensions.publication.lifecycle.StatesLifecyclePlugin</type>
 		<init-params>
 			<object-param>
-				<name>lifecyles</name>
+				<name>lifecycles</name>
 				<object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig">
 					<field name="lifecycles">
 						<collection type="java.util.ArrayList">
