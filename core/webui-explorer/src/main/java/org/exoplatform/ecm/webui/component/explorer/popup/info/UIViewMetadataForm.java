@@ -33,9 +33,11 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.form.UIDialogForm;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.resolver.ResourceResolver;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.metadata.MetadataService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
@@ -112,6 +114,13 @@ public class UIViewMetadataForm extends UIDialogForm {
       if(parent.isLocked()) {
         parent.getSession().addLockToken(LockUtil.getLockToken(parent));  
       }
+      //Add MIX_COMMENT before update property
+      Node activityNode = node;
+      if(node.isNodeType(NodetypeConstant.NT_RESOURCE)) activityNode = node.getParent();
+      
+      if (activityNode.canAddMixin(ActivityCommonService.MIX_COMMENT)) {
+      	activityNode.addMixin(ActivityCommonService.MIX_COMMENT);
+      }
       NodeTypeManager ntManager = uiJCRExplorer.getSession().getWorkspace().getNodeTypeManager();
       PropertyDefinition[] props = ntManager.getNodeType(uiForm.getNodeType()).getPropertyDefinitions();
       List<Value> valueList = new ArrayList<Value>();
@@ -162,6 +171,10 @@ public class UIViewMetadataForm extends UIDialogForm {
             }
           }
         }
+      }
+      //Remove MIX_COMMENT after update property
+      if (activityNode.isNodeType(ActivityCommonService.MIX_COMMENT)) {
+      	activityNode.removeMixin(ActivityCommonService.MIX_COMMENT);
       }
       node.getSession().save();
       event.getRequestContext().addUIComponentToUpdateByAjax(uiViewManager);

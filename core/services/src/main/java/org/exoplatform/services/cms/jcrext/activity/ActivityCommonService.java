@@ -16,11 +16,15 @@
  */
 package org.exoplatform.services.cms.jcrext.activity;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.jcr.Item;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -75,6 +79,12 @@ public class ActivityCommonService {
   public static String MIX_COMMENT_CREATOR        = "exo:activityCreator";
   public static String MIX_COMMENT_CREATING       = "exo:creating";
   public static String MIX_COMMENT_ACTIVITY_ID    = "exo:activityCommentID";
+  
+  private Map<String, Object> properties = new HashMap<String, Object>();
+  
+  public Map<String, Object> getPreProperties() { return properties; }
+  
+  public void setPreProperties(Map<String, Object> preProperties) { properties = preProperties; }
   
   public ActivityCommonService(InitParams initParams) {
     this.acceptedNodeTypes = initParams.getValueParam("acceptedNodeTypes").getValue();

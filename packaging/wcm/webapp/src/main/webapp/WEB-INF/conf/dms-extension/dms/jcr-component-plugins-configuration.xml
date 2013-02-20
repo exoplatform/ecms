@@ -153,7 +153,7 @@
                     <field  name="eventTypes"><string>changeProperty</string></field>                     
                     <field  name="actionClassName"><string>org.exoplatform.services.cms.jcrext.activity.EditFilePropertyActivityAction</string></field>
                   </object>
-                </value>               
+                </value>      
                 <!-- Vinh_NGUYEN Processing before notify Social Activity segment-->
                 <value>
                     <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">

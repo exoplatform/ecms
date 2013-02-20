@@ -49,7 +49,7 @@ public class EditFilePropertyActivityAction implements Action{
     // Do not create / update activity for bellow cases
     if (!activityService.isAcceptedFileProperties(propertyName)) return false;
     if (ConversationState.getCurrent() == null) return false;    
-    if(node.isNodeType("nt:resource")) node = node.getParent();
+    if(node.isNodeType(NodetypeConstant.NT_RESOURCE)) node = node.getParent();
     if(!node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) return false;
     
     //Notify to update activity
