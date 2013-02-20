@@ -500,11 +500,11 @@ float: left;
 	clear: both;
 }
 
-.UITaxonomyManagerTrees .PopupContent {
+/*.UITaxonomyManagerTrees .PopupContent {
 	margin:  0px;
 	background: #F9F9F9 none repeat scroll 0 0;
 	padding:  0px;
-}
+}*/
 
 .UITaxonomyTreeWizard .WorkingArea .SelectedLabel {
 	border-bottom: 1px solid #B7B7B7;
