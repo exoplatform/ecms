@@ -28,6 +28,7 @@ import javax.jcr.Node;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.ecm.permission.info.UIPermissionInputSet;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.core.UIPagingGrid;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -41,8 +42,10 @@ import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
+import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 /**
  * Created by The eXo Platform SARL
  * Author : Tran The Trong
@@ -155,6 +158,7 @@ public class UIViewList extends UIPagingGrid {
       uiViewContainer.removeChildById(UIViewList.ST_EDIT) ;
       UIViewFormTabPane uiViewForm = uiViewContainer.createUIComponent(UIViewFormTabPane.class, null, null) ;
       uiViewContainer.initPopup(UIViewList.ST_ADD, uiViewForm) ;
+      uiViewForm.update(false);
       UIViewManager uiManager = uiViewList.getAncestorOfType(UIViewManager.class) ;
       uiManager.setRenderedChild(UIViewContainer.class) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiViewContainer) ;
@@ -205,8 +209,18 @@ public class UIViewList extends UIPagingGrid {
       uiViewContainer.removeChildById(UIViewList.ST_VIEW) ;
       uiViewContainer.removeChildById(UIViewList.ST_ADD) ;
       UIViewFormTabPane viewTabPane = uiViewContainer.createUIComponent(UIViewFormTabPane.class, null, null) ;
+      viewTabPane.update(true);
       UIViewPermissionList uiPerList = viewTabPane.findFirstComponentOfType(UIViewPermissionList.class);
       uiPerList.setViewName(viewName);
+      uiPerList.refresh(uiPerList.getUIPageIterator().getCurrentPage());
+      UIViewPermissionForm uiPermissionForm = viewTabPane.findFirstComponentOfType(UIViewPermissionForm.class);
+      UIPermissionInputSet uiPermissionInputSet = uiPermissionForm.getChildById(UIViewPermissionForm.TAB_PERMISSION);
+      for(UIComponent uiComp : uiPermissionInputSet.getChildren()) {
+        if(uiComp instanceof UICheckBoxInput) {
+          uiPermissionInputSet.removeChildById(uiComp.getId());
+        }
+      }
+      uiPermissionForm.setViewName(viewName);
       uiViewContainer.initPopup(UIViewList.ST_EDIT, viewTabPane) ;
       UIViewForm viewForm = viewTabPane.getChild(UIViewForm.class) ;
       viewForm.refresh(true) ;
@@ -236,15 +250,26 @@ public class UIViewList extends UIPagingGrid {
       UIViewContainer uiViewContainer = uiViewList.getParent() ;
       uiViewContainer.removeChildById(UIViewList.ST_EDIT) ;
       uiViewContainer.removeChildById(UIViewList.ST_ADD) ;
-      UIViewFormTabPane uiViewTabPane = uiViewContainer.createUIComponent(UIViewFormTabPane.class, null, null) ;
-      uiViewContainer.initPopup(UIViewList.ST_VIEW, uiViewTabPane) ;
-      UIViewForm uiViewForm = uiViewTabPane.getChild(UIViewForm.class) ;
+      UIViewFormTabPane viewTabPane = uiViewContainer.createUIComponent(UIViewFormTabPane.class, null, null) ;
+      viewTabPane.update(false);
+      UIViewPermissionList uiPerList = viewTabPane.findFirstComponentOfType(UIViewPermissionList.class);
+      uiPerList.configure("permission", UIViewPermissionList.PERMISSION_BEAN_FIELD, new String[] {});
+      uiPerList.setViewName(viewName);
+      uiPerList.refresh(uiPerList.getUIPageIterator().getCurrentPage());
+      UIViewPermissionContainer uiPerContainer = uiPerList.getParent();
+      uiPerContainer.setRenderedChild(UIViewPermissionList.class);
+      uiViewContainer.initPopup(UIViewList.ST_VIEW, viewTabPane) ;
+      UITabList uiTab = viewTabPane.getChild(UITabList.class);
+      uiTab.setViewName(viewName);
+      uiTab.refresh(uiTab.getUIPageIterator().getCurrentPage());
+      uiTab.configure("tabName", UITabList.TAB_BEAN_FIELD, new String[] {"Edit"}) ;
+      UIViewForm uiViewForm = viewTabPane.getChild(UIViewForm.class) ;
       uiViewForm.refresh(false) ;
       uiViewForm.update(viewNode, true, null) ;
-      //uiViewForm.setActionInfo(UIViewForm.FIELD_PERMISSION, null) ;
-      //uiViewForm.setActions(new String[]{"Close"}, null) ;
-      //uiViewTabPane.getChild(UITabForm.class).setActions(new String[]{"BackViewForm"}, null);
-      uiViewTabPane.setRenderedChild(UIViewForm.class) ;
+      viewTabPane.setSelectedTab(uiViewForm.getId()) ;
+      viewTabPane.setActions(new String[] {"Close"});
+      UIViewManager uiManager = uiViewList.getAncestorOfType(UIViewManager.class) ;
+      uiManager.setRenderedChild(UIViewContainer.class) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiViewContainer) ;
     }
   }

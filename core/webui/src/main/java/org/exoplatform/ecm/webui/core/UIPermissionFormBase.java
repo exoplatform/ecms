@@ -47,7 +47,7 @@ public abstract class UIPermissionFormBase extends UIForm implements UISelectabl
   public static final String SYMLINK = "exo:symlink";
   
   private static final String[] PERMISSION_TYPES = {PermissionType.READ, PermissionType.ADD_NODE, PermissionType.REMOVE}; 
-  private static final Log LOG  = ExoLogger.getLogger(UIPermissionFormBase.class.getName());
+  protected static final Log LOG  = ExoLogger.getLogger(UIPermissionFormBase.class.getName());
 
   public UIPermissionFormBase() throws Exception {
     addChild(new UIPermissionInputSet(PERMISSION));
@@ -81,20 +81,6 @@ public abstract class UIPermissionFormBase extends UIForm implements UISelectabl
     }
   }
 
-  public void doSelect(String selectField, Object value) {
-    try {
-      ExtendedNode node = (ExtendedNode)this.getCurrentNode();
-      checkAll(false);
-      fillForm(value.toString(), node);
-      lockForm(value.toString().equals(getExoOwner(node)));
-      getUIStringInput(selectField).setValue(value.toString());
-    } catch (Exception e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error("Unexpected error", e);
-      }
-    }
-  }
-  
   public void updateSymlinks(Node node) throws Exception {
     if(node.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)){
       LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
@@ -134,14 +120,14 @@ public abstract class UIPermissionFormBase extends UIForm implements UISelectabl
     checkAll(false);
   }
 
-  private void checkAll(boolean check) {
+  protected void checkAll(boolean check) {
     UIPermissionInputSet uiInputSet = getChildById(PERMISSION);
     for (String perm : PERMISSION_TYPES) {
       uiInputSet.getUICheckBoxInput(perm).setChecked(check);
     }
   }
 
-  private String  getExoOwner(Node node) throws Exception {
+  protected String  getExoOwner(Node node) throws Exception {
     return Utils.getNodeOwner(node);
   }
 

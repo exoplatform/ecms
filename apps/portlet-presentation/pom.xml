@@ -169,7 +169,6 @@
               <includes>
                 <include>ecms-presentation-singlecontentviewer.less</include>
                 <include>ecms-presentation-contentlistviewerportlet.less</include>
-                <include>ecms-presentation-categorynavigationportlet.less</include>
               </includes>
             </configuration>
           </execution>

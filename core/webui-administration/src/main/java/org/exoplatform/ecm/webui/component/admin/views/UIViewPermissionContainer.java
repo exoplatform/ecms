@@ -17,8 +17,8 @@
  **************************************************************************/
 package org.exoplatform.ecm.webui.component.admin.views;
 
+import org.exoplatform.ecm.webui.core.UIPermissionManagerBase;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
-import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 
 /**
@@ -31,7 +31,7 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
 
-public class UIViewPermissionContainer extends UIContainer {
+public class UIViewPermissionContainer extends UIPermissionManagerBase {
 
   public UIViewPermissionContainer() throws Exception {
     addChild(UIViewPermissionList.class, null, null);

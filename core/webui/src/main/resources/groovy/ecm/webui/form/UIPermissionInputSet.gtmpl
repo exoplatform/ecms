@@ -6,6 +6,8 @@ def formName = uicomponent.getFormName();
 def actions = uicomponent.getInputSetActions();
 def actionValues = uicomponent.getActionValues();
 def uiForm = uicomponent.getAncestorOfType(UIForm.class);
+def buttonActions = uicomponent.getButtonActions();
+def primaryButton = uicomponent.getPrimaryButtonAction();
 %>
 <div class="$uicomponent.id">
 		<div class="controls">
@@ -20,8 +22,12 @@ def uiForm = uicomponent.getAncestorOfType(UIForm.class);
 				}
 			}
 			%>
-			<button type="button" onclick="<%=uiForm.event("Save") %>" class="btn btn-primary"><%=_ctx.appRes(uiForm.getName() + ".action.Save")%></button>
-			<button type="button" onclick="<%=uiForm.event("Reset") %>" class="btn"><%=_ctx.appRes(uiForm.getName() + ".action.Reset")%></button>
+			<% for(buttonAct in buttonActions) { 
+			     def classbtn = "btn"
+			     if(buttonAct.equals(primaryButton)) classbtn = "btn btn-primary"
+			%>
+			     <button type="button" onclick="<%=uiForm.event(buttonAct) %>" class="$classbtn"><%=_ctx.appRes(uiForm.getName() + ".action." + buttonAct)%></button>
+		 <% } %>
 		</div>
     <div class="form-inline">
       <%

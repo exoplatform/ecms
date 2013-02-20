@@ -1,9 +1,7 @@
-<div class="uiViewPermissionForm" id="UIViewPermissionForm">
+<div class="uiViewPermissionForm">
 	<% uiform.begin() %>
 			<div>
-				<h5><%=_ctx.appRes(uicomponent.getName() + ".title"); %></h5>
-		
-				<% uiform.renderChildren() %>
+				<% uiform.renderChild(uiform.TAB_PERMISSION) %>
 			</div>
-	<%uiform.end()%>
+	<% uiform.end() %>
 </div>

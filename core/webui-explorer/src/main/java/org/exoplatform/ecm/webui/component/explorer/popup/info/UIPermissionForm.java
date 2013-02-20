@@ -172,6 +172,20 @@ public class UIPermissionForm extends UIPermissionFormBase implements UISelectab
       uiExplorer.updateAjax(event);
     }
   }
+  
+  public void doSelect(String selectField, Object value) {
+    try {
+      ExtendedNode node = (ExtendedNode)this.getCurrentNode();
+      checkAll(false);
+      fillForm(value.toString(), node);
+      lockForm(value.toString().equals(getExoOwner(node)));
+      getUIStringInput(selectField).setValue(value.toString());
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Unexpected error", e);
+      }
+    }
+  }  
 
   static public class CloseActionListener extends EventListener<UIPermissionForm> {
     public void execute(Event<UIPermissionForm> event) throws Exception {

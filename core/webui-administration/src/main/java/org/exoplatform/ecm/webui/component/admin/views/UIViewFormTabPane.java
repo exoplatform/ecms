@@ -19,20 +19,15 @@ package org.exoplatform.ecm.webui.component.admin.views;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-import org.exoplatform.ecm.permission.info.UIPermissionInputSet;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
-import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
-import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
+import org.exoplatform.webui.core.UITabPane;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.form.UIFormStringInput;
-import org.exoplatform.webui.form.input.UICheckBoxInput;
-import org.exoplatform.webui.form.validator.MandatoryValidator;
 
 /**
  * Created by The eXo Platform SARL
@@ -42,27 +37,25 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  * 5:31:04 PM
  */
 @ComponentConfig(
-    lifecycle = UIFormLifecycle.class,
     template =  "app:/groovy/webui/component/admin/view/UIViewFormTabPane.gtmpl",
     events = {
       @EventConfig(listeners = UIViewFormTabPane.SaveActionListener.class),
-      @EventConfig(listeners = UIViewFormTabPane.ResetActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIViewFormTabPane.EditTabActionListener.class),
-      @EventConfig(listeners = UIViewFormTabPane.DeleteTabActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIViewFormTabPane.RestoreActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIViewFormTabPane.CancelActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIViewFormTabPane.CloseActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIViewFormTabPane.BackViewFormActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIViewFormTabPane.SelectTabActionListener.class),
-      @EventConfig(listeners = UIViewForm.AddPermissionActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIViewForm.RemovePermissionActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIViewForm.ChangeVersionActionListener.class, phase = Phase.DECODE)
     }
 )
-public class UIViewFormTabPane extends UIContainer {
+public class UIViewFormTabPane extends UITabPane {
   final static public String POPUP_PERMISSION = "PopupViewPermission" ;
 
   private String selectedTabId = "UITemplateContainer";
+  
+  private String[] actions_ = new String[] {"Save", "Cancel"};
+  private String primaryBtn_ = "Save";
+  
+  private boolean isUpdate_ = false;
 
   public String getSelectedTabId()
   {
@@ -78,21 +71,28 @@ public class UIViewFormTabPane extends UIContainer {
   {
      selectedTabId = getChild(index - 1).getId();
   }
+  
+  public String[] getActions() {
+    if(actions_.length == 1) primaryBtn_ = actions_[0];
+    return actions_;
+  }
+  
+  public void setActions(String[] actions) {
+    actions_ = actions;
+  }
+  
+  public String getPrimaryButtonAction() {
+    return primaryBtn_;
+  }
+  
+  public void setPrimaryButtonAction(String primaryBtn) {
+    primaryBtn_ = primaryBtn;
+  }  
 
   public UIViewFormTabPane() throws Exception {
   	UIViewForm uiViewForm = addChild(UIViewForm.class, null, null) ;
-  	
   	addChild(UITabList.class, null, null);
-  	
-  	UIViewPermissionContainer permissionContainer = addChild(UIViewPermissionContainer.class, null, null);
-  	UIViewPermissionForm uiPermissionForm = permissionContainer.getChild(UIViewPermissionForm.class);
-  	UIPermissionInputSet uiPermissionInputSet = uiPermissionForm.getChildById(UIViewPermissionForm.TAB_PERMISSION);
-  	for(UIComponent uiComp : uiPermissionInputSet.getChildren()) {
-  	  if(uiComp instanceof UICheckBoxInput) {
-  	    uiPermissionInputSet.removeChildById(uiComp.getId());
-  	  }
-  	}
-    
+  	addChild(UIViewPermissionContainer.class, null, null);
   	setSelectedTab(uiViewForm.getId()) ;
   }
 
@@ -103,13 +103,28 @@ public class UIViewFormTabPane extends UIContainer {
       return id ;
     }
   }
+  
+  public void update(boolean isUpdate) {
+    isUpdate_ = isUpdate;
+  }
+  
+  public boolean isUpdate() {
+    return isUpdate_;
+  }
 
   static  public class SaveActionListener extends EventListener<UIViewFormTabPane> {
     public void execute(Event<UIViewFormTabPane> event) throws Exception {
       UIViewFormTabPane uiViewTabPane = event.getSource();
       UIViewContainer uiViewContainer = uiViewTabPane.getAncestorOfType(UIViewContainer.class) ;
       uiViewTabPane.getChild(UIViewForm.class).save() ;
-      uiViewContainer.removeChild(UIPopupWindow.class) ;
+      UIPopupWindow uiPopup = null;
+      if(uiViewTabPane.isUpdate()) {
+        uiPopup = uiViewContainer.getChildById(UIViewList.ST_EDIT);
+      } else {
+        uiPopup = uiViewContainer.getChildById(UIViewList.ST_ADD);
+      }
+      uiPopup.setShow(false);
+      uiPopup.setRendered(false);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiViewContainer) ;
     }
   }
@@ -117,11 +132,15 @@ public class UIViewFormTabPane extends UIContainer {
   static  public class CancelActionListener extends EventListener<UIViewFormTabPane> {
     public void execute(Event<UIViewFormTabPane> event) throws Exception {
       UIViewFormTabPane uiViewTabPane = event.getSource();
-      uiViewTabPane.getChild(UITabForm.class).refresh(true) ;
-      uiViewTabPane.getChild(UIViewForm.class).refresh(true) ;
-      uiViewTabPane.removeChildById(POPUP_PERMISSION) ;
       UIViewContainer uiViewContainer = uiViewTabPane.getAncestorOfType(UIViewContainer.class) ;
-      uiViewContainer.removeChild(UIPopupWindow.class) ;
+      UIPopupWindow uiPopup = null;
+      if(uiViewTabPane.isUpdate()) {
+        uiPopup = uiViewContainer.getChildById(UIViewList.ST_EDIT);
+      } else {
+        uiPopup = uiViewContainer.getChildById(UIViewList.ST_ADD);
+      }
+      uiPopup.setShow(false);
+      uiPopup.setRendered(false);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiViewContainer) ;
     }
   }
@@ -131,97 +150,16 @@ public class UIViewFormTabPane extends UIContainer {
       UIViewFormTabPane uiViewTabPane = event.getSource();
       uiViewTabPane.getChild(UITabForm.class).refresh(true) ;
       uiViewTabPane.getChild(UIViewForm.class).refresh(true) ;
-      uiViewTabPane.removeChildById(POPUP_PERMISSION) ;
       UIViewContainer uiViewContainer = uiViewTabPane.getAncestorOfType(UIViewContainer.class) ;
-      uiViewContainer.removeChild(UIPopupWindow.class) ;
+      UIPopupWindow uiPopup = null;
+      if(uiViewTabPane.isUpdate()) {
+        uiPopup = uiViewContainer.getChildById(UIViewList.ST_EDIT);
+      } else {
+        uiPopup = uiViewContainer.getChildById(UIViewList.ST_ADD);
+      }
+      uiPopup.setShow(false);
+      uiPopup.setRendered(false);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiViewContainer) ;
-    }
-  }
-
-  static public class AddTabFormActionListener extends EventListener<UIViewFormTabPane> {
-    public void execute(Event<UIViewFormTabPane> event) throws Exception {
-      UIViewFormTabPane uiViewTabPane = event.getSource();
-      UIViewForm uiViewForm = uiViewTabPane.getChild(UIViewForm.class);
-      UITabForm uiTabForm = uiViewTabPane.getChild(UITabForm.class);
-      uiViewForm.refresh(true);
-      uiTabForm.setRendered(true);
-      uiViewForm.setRendered(false);
-      uiViewTabPane.setSelectedTab(uiTabForm.getId());
-      ((UIFormStringInput) uiTabForm.
-          getChildById(UITabForm.FIELD_NAME)).addValidator(MandatoryValidator.class);
-      uiViewTabPane.getChild(UIViewForm.class).setViewName(((UIFormStringInput)
-              uiViewTabPane.getChild(UIViewForm.class).getChildById(UIViewForm.FIELD_NAME)).getValue());
-      //uiViewTabPane.uiViewForm.setPermission(((UIFormStringInput)
-      //    uiViewTabPane.uiViewForm.getChildById(UIViewForm.FIELD_PERMISSION)).getValue());
-      UIViewContainer uiViewContainer = uiViewTabPane.getAncestorOfType(UIViewContainer.class);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiViewContainer);
-    }
-  }
-
-  static public class BackViewFormActionListener extends EventListener<UIViewFormTabPane> {
-    public void execute(Event<UIViewFormTabPane> event) throws Exception {
-      UIViewFormTabPane uiViewTabPane = event.getSource();
-      UIViewForm uiViewForm = uiViewTabPane.getChild(UIViewForm.class) ;
-      UITabForm uiTabForm = uiViewTabPane.getChild(UITabForm.class) ;
-      String tabName = uiViewForm.getTabList();
-      if (tabName != null && tabName.length() != 0) {
-        if (tabName.indexOf(",") > 0) {
-          tabName = tabName.substring(0, tabName.indexOf(","));
-        }
-      }
-      ((UIFormStringInput)uiTabForm.getChildById(UITabForm.FIELD_NAME)).getValidators().clear();
-      ((UIFormStringInput)uiViewForm.getChildById(UIViewForm.FIELD_NAME)).setValue(uiViewForm.getViewName());
-      //((UIFormStringInput)uiViewForm.getChildById(UIViewForm.FIELD_PERMISSION)).setValue(uiViewForm.getPermission());
-      uiTabForm.setRendered(false);
-      uiViewForm.setRendered(true);
-      uiViewForm.update(null, false, null);
-      uiViewTabPane.setSelectedTab(uiViewForm.getId());
-      UIViewContainer uiViewContainer = uiViewTabPane.getAncestorOfType(UIViewContainer.class);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiViewContainer);
-    }
-  }
-
-  static  public class ResetActionListener extends EventListener<UIViewFormTabPane> {
-    public void execute(Event<UIViewFormTabPane> event) throws Exception {
-      UIViewFormTabPane uiViewTabPane = event.getSource();
-      UIViewForm uiViewForm = uiViewTabPane.getChild(UIViewForm.class) ;
-      UITabForm uiTabForm = uiViewTabPane.getChild(UITabForm.class) ;
-      uiTabForm.refresh(true) ;
-      if(uiViewTabPane.getSelectedTabId().equalsIgnoreCase(uiViewForm.getId())) {
-        uiViewForm.revertVersion() ;
-        uiViewForm.refresh(true) ;
-        uiViewTabPane.setSelectedTab(uiViewForm.getId()) ;
-      }
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiViewTabPane.getParent()) ;
-    }
-  }
-
-  static  public class EditTabActionListener extends EventListener<UIViewFormTabPane> {
-    public void execute(Event<UIViewFormTabPane> event) throws Exception {
-      UIViewFormTabPane uiViewTabPane = event.getSource();
-      UITabForm uiTabForm = uiViewTabPane.getChild(UITabForm.class) ;
-      UIViewForm uiViewForm = uiViewTabPane.getChild(UIViewForm.class) ;
-      String tabName = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      uiTabForm.setRendered(true);
-      ((UIFormStringInput)uiTabForm.getChildById(UITabForm.FIELD_NAME)).addValidator(MandatoryValidator.class);
-      uiViewForm.setViewName(((UIFormStringInput) uiViewForm.getChildById(UIViewForm.FIELD_NAME)).getValue());
-      //uiViewTabPane.uiViewForm.setPermission(((UIFormStringInput) uiViewTabPane.
-      //    uiViewForm.getChildById(UIViewForm.FIELD_PERMISSION)).getValue());
-      uiViewTabPane.setSelectedTab(uiTabForm.getId()) ;
-      uiViewForm.editTab(tabName);
-      uiViewForm.setRendered(false);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiViewTabPane.getParent()) ;
-    }
-  }
-
-  static  public class DeleteTabActionListener extends EventListener<UIViewFormTabPane> {
-    public void execute(Event<UIViewFormTabPane> event) throws Exception {
-      UIViewFormTabPane uiViewTabPane = event.getSource();
-      String tabName = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      UIViewForm uiViewForm = uiViewTabPane.getChild(UIViewForm.class) ;
-      uiViewTabPane.setSelectedTab(uiViewForm.getId()) ;
-      uiViewForm.deleteTab(tabName) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiViewTabPane.getParent()) ;
     }
   }
 

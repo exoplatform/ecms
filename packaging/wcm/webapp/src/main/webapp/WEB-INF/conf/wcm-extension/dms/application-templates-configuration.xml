@@ -74,21 +74,6 @@
           </object>
         </object-param>
         <object-param>
-          <name>Category Tree</name>
-          <description>Category Tree</description>
-          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
-             <field name="title">
-            	 <string>Category Tree</string>
-												</field>
-            <field name="templateName">
-              <string>CategoryTree.gtmpl</string>
-            </field>
-            <field name="category">
-              <string>navigation</string>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
           <name>Category List</name>
           <description>Category List</description>
           <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
@@ -97,21 +82,6 @@
 												</field>
             <field name="templateName">
               <string>CategoryList.gtmpl</string>
-            </field>
-            <field name="category">
-              <string>navigation</string>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
-          <name>Tags Cloud</name>
-          <description>Tags Cloud</description>
-          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
-            <field name="title">
-            	 <string>Tags Cloud</string>
-												</field>
-            <field name="templateName">
-              <string>TagsCloud.gtmpl</string>
             </field>
             <field name="category">
               <string>navigation</string>

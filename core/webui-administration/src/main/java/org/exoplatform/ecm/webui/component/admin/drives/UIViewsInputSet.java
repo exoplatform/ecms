@@ -66,7 +66,7 @@ public class UIViewsInputSet extends UIFormInputSet {
     Collections.sort(views_, new ViewComparator());
     for(ViewConfig view : views_){
       String viewName = view.getName() ;
-      if(getUIFormCheckBoxInput(viewName) != null) {
+      if(getUICheckBoxInput(viewName) != null) {
         getUICheckBoxInput(viewName).setChecked(false) ;
       }else{
         addUIFormInput(new UICheckBoxInput(viewName, viewName, null)) ;

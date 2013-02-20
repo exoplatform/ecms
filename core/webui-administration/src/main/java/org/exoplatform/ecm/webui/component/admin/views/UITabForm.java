@@ -148,7 +148,9 @@ public class UITabForm extends UIForm {
       UIPopupWindow uiPopup = uiContainer.getChildById(UITabList.TAPFORM_POPUP);
       uiPopup.setShow(false);
       uiPopup.setRendered(false);
-      viewFormTabPane.setSelectedTab(uiTabForm.getId()) ;
+      viewFormTabPane.setSelectedTab(viewFormTabPane.getSelectedTabId()) ;
+      UITabList uiTabList = viewFormTabPane.getChild(UITabList.class);
+      uiTabList.refresh(uiTabList.getUIPageIterator().getCurrentPage());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
     }
   }
@@ -161,7 +163,7 @@ public class UITabForm extends UIForm {
       UIPopupWindow uiPopup = uiContainer.getChildById(UITabList.TAPFORM_POPUP);
       uiPopup.setShow(false);
       uiPopup.setRendered(false);
-      viewFormTabPane.setSelectedTab(uiTabForm.getId()) ;
+      viewFormTabPane.setSelectedTab(viewFormTabPane.getSelectedTabId()) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
     }
   }

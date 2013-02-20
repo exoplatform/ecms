@@ -36,6 +36,8 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
 public class UIPermissionInputSet extends UIFormInputSetWithAction {
 
   final static public String FIELD_USERORGROUP = "userOrGroup";
+  private String[] buttonActions_ = {"Save", "Reset"};
+  private String primaryBtn_ = "Save";
 
   public UIPermissionInputSet(String name) throws Exception {
     super(name);
@@ -50,6 +52,22 @@ public class UIPermissionInputSet extends UIFormInputSetWithAction {
       checkBoxInput.setOnChange("OnChange");
     }
     setActionInfo(FIELD_USERORGROUP, new String[] {"SelectUser", "SelectMember", "AddAny"});
+  }
+  
+  public String[] getButtonActions() {
+    return buttonActions_;
+  }
+  
+  public void setButtonActions(String[] actions) {
+    buttonActions_ = actions;
+  }
+  
+  public String getPrimaryButtonAction() {
+    return primaryBtn_;
+  }
+  
+  public void setPrimaryButtonAction(String primaryBtn) {
+    primaryBtn_ = primaryBtn;
   }
   
   static public class OnChangeActionListener extends EventListener<UIForm> {

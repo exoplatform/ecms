@@ -113,11 +113,6 @@ public class UIViewForm extends UIForm implements UISelectable {
     versions.setRendered(false) ;
     addUIFormInput(versions) ;
     addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class)) ;
-    //addUIFormInput(new UIFormStringInput(FIELD_PERMISSION, FIELD_PERMISSION, null).setEditable(true)
-    //                                                                              .addValidator(MandatoryValidator.class)
-    //                                                                              .addValidator(PermissionValidator.class));
-    //addUIFormInput(new UIFormInputInfo(FIELD_TABS, FIELD_TABS, null)) ;
-    //setActionInfo(FIELD_PERMISSION, new String[] {"AddPermission","RemovePermission"}) ;
     vservice_ = getApplicationComponent(ManageViewService.class) ;
     Node ecmTemplateHome = vservice_.getTemplateHome(BasePath.ECM_EXPLORER_TEMPLATES, WCMCoreUtils.getUserSessionProvider());
     List<SelectItemOption<String>> temp = new ArrayList<SelectItemOption<String>>() ;
@@ -320,19 +315,8 @@ public class UIViewForm extends UIForm implements UISelectable {
     }
     if(viewsNode != null) {
       getUIStringInput(FIELD_NAME).setDisabled(true).setValue(viewsNode.getName()) ;
-      //getUIStringInput(FIELD_PERMISSION).setValue(viewsNode.getProperty("exo:accessPermissions").getString()) ;
       getUIFormSelectBox(FIELD_TEMPLATE).setValue(tempMap.get(viewsNode.getProperty("exo:template").getString()));
     }
-    //setInfoField(FIELD_TABS, getTabList()) ;
-    String[] actionInfor ;
-    if(isView_) {
-      actionInfor = new String[] {"EditTab"} ;
-      //setIsView(true) ;
-    } else {
-      actionInfor = new String[] {"EditTab", "DeleteTab"} ;
-      //setIsView(false) ;
-    }
-    //setActionInfo(FIELD_TABS, actionInfor) ;
   }
 
   public void save() throws Exception {
@@ -363,16 +347,6 @@ public class UIViewForm extends UIForm implements UISelectable {
         }
       }
     }
-    /*String permissions = getUIStringInput(FIELD_PERMISSION).getValue() ;
-    if(permissions.subSequence(permissions.length()-1, permissions.length()).equals(","))
-      permissions = permissions.substring(0,permissions.length()-1);
-    String[] arrPermissions = permissions.split(",");
-    for(String itemPermission : arrPermissions) {
-      if(itemPermission!=null && itemPermission.trim().equals("*")) {
-        permissions = "*";
-        break;
-      }
-    }*/
 
     if(tabMap_.size() < 1 ){
       message = new ApplicationMessage("UIViewForm.msg.mustbe-add-tab", null,
@@ -410,8 +384,6 @@ public class UIViewForm extends UIForm implements UISelectable {
       } catch (Exception e) {
         UIApplication uiApp = getAncestorOfType(UIApplication.class) ;
         JCRExceptionManager.process(uiApp, e);
-        WebuiRequestContext context = WebuiRequestContext.getCurrentInstance() ;
-
         return ;
       }
     }
@@ -452,25 +424,6 @@ public class UIViewForm extends UIForm implements UISelectable {
   public void revertVersion() throws Exception {
     if (selectedVersion_ != null && !selectedVersion_.getName().equals(baseVersionName_)) {
       NodeLocation.getNodeByLocation(views_).restore(baseVersionName_, true);
-    }
-  }
-
-  static public class AddPermissionActionListener extends EventListener<UIViewFormTabPane> {
-    public void execute(Event<UIViewFormTabPane> event) throws Exception {
-      UIViewFormTabPane uiViewTabPane = event.getSource() ;
-      UIViewContainer uiContainer = uiViewTabPane.getAncestorOfType(UIViewContainer.class) ;
-      //String memberShip = uiViewTabPane.getUIStringInput(UIViewForm.FIELD_PERMISSION).getValue() ;
-      //uiViewTabPane.getUIStringInput(UIViewForm.FIELD_PERMISSION).setValue(memberShip);
-      //uiContainer.initPopupPermission(memberShip) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer) ;
-    }
-  }
-
-  static public class RemovePermissionActionListener extends EventListener<UIViewFormTabPane> {
-    public void execute(Event<UIViewFormTabPane> event) throws Exception {
-      UIViewFormTabPane uiViewTabPane = event.getSource();
-      //uiViewTabPane.getUIStringInput(UIViewForm.FIELD_PERMISSION).setValue(null);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiViewTabPane);
     }
   }
 

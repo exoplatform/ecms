@@ -289,8 +289,16 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       uiDriveForm.refresh(null);
       UIDriveManager uiDriveManager = uiDriveForm.getAncestorOfType(UIDriveManager.class);
       uiDriveManager.removeChildById(UIDriveForm.POPUP_DRIVEPERMISSION);
-      uiDriveManager.removeChildById(UIDriveList.ST_ADD);
-      uiDriveManager.removeChildById(UIDriveList.ST_EDIT);
+      UIPopupWindow uiPopup = uiDriveManager.getChildById(UIDriveList.ST_ADD);
+      if(uiPopup != null) {
+        uiPopup.setShow(false);
+        uiPopup.setRendered(false);
+      }
+      UIPopupWindow uiEditPopup = uiDriveManager.getChildById(UIDriveList.ST_EDIT);
+      if(uiEditPopup != null) {
+        uiEditPopup.setShow(false);
+        uiEditPopup.setRendered(false);
+      }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiDriveManager);
     }
   }
@@ -301,8 +309,16 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       uiDriveForm.refresh(null);
       UIDriveManager uiDriveManager = uiDriveForm.getAncestorOfType(UIDriveManager.class);
       uiDriveManager.removeChildById(UIDriveForm.POPUP_DRIVEPERMISSION);
-      uiDriveManager.removeChildById(UIDriveList.ST_ADD);
-      uiDriveManager.removeChildById(UIDriveList.ST_EDIT);
+      UIPopupWindow uiPopup = uiDriveManager.getChildById(UIDriveList.ST_ADD);
+      if(uiPopup != null) {
+        uiPopup.setShow(false);
+        uiPopup.setRendered(false);
+      }
+      UIPopupWindow uiEditPopup = uiDriveManager.getChildById(UIDriveList.ST_EDIT);
+      if(uiEditPopup != null) {
+        uiEditPopup.setShow(false);
+        uiEditPopup.setRendered(false);
+      }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiDriveManager);
     }
   }

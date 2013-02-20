@@ -16,7 +16,6 @@
  */
 package org.exoplatform.ecm.webui.component.admin.views;
 
-import org.exoplatform.ecm.webui.selector.UIPermissionSelector;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
@@ -57,22 +56,4 @@ public class UIViewContainer extends UIContainer {
     uiViewList.refresh(uiViewList.getUIPageIterator().getCurrentPage());
   }
 
-  public void initPopupPermission(String membership) throws Exception {
-    removeChildById(UIViewFormTabPane.POPUP_PERMISSION) ;
-    UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, UIViewFormTabPane.POPUP_PERMISSION);
-    uiPopup.setShowMask(true);
-    uiPopup.setWindowSize(600, 300);
-    UIPermissionSelector uiECMPermission =
-      createUIComponent(UIPermissionSelector.class, null, null) ;
-    uiECMPermission.setSelectedMembership(true);
-    if(membership != null && membership.indexOf(":/") > -1) {
-      String[] arrMember = membership.split(":/") ;
-      uiECMPermission.setCurrentPermission("/" + arrMember[1]) ;
-    }
-    uiPopup.setUIComponent(uiECMPermission);
-    UIViewForm uiViewForm = findFirstComponentOfType(UIViewForm.class) ;    
-    //uiECMPermission.setSourceComponent(uiViewForm, new String[] {UIViewForm.FIELD_PERMISSION}) ;
-    uiPopup.setShow(true) ;
-    uiPopup.setResizable(true) ;
-  }
 }

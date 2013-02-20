@@ -1068,8 +1068,29 @@
 				</msg>
 		</UITabList>
 		
+		<UIViewPermissionList>
+			 <title>Select Owner with permissions on this view:</title>
+				<label>
+					 <permission>{0} in {1}</permission>
+				</label>
+				<msg>
+					 <confirm-delete>Are you sure want to delete this permission?</confirm-delete>
+				</msg>				
+		</UIViewPermissionList>
+		
+		<UIViewPermissionContainer>
+			 <header>
+			 	 <friendlyPermission>Permissions</friendlyPermission>
+			 	 <action>Actions</action>
+			 </header>
+				<action>
+					 <title>
+					 	 <Delete>Delete</Delete>
+					 </title>
+				</action>
+		</UIViewPermissionContainer>	
+		
 		<UIViewPermissionForm>
-			 <title>Select Owner with permissions on this view</title>
 				<action>
 					 <Save>Add</Save>
 						<Reset>Reset</Reset>
@@ -1077,7 +1098,11 @@
 				<label>
 					 <userOrGroup>User or Group</userOrGroup>
 				</label>
-		</UIViewPermissionForm>				
+				<msg>
+					 <permission-exist>The permission '{0}' already exist in the list.</permission-exist>
+				</msg>					
+		</UIViewPermissionForm>		
+						
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.view.UIViewFormTabPane	   #

@@ -3,6 +3,8 @@
 	def jsManager = rcontext.getJavascriptManager();
 	jsManager.require("SHARED/bts_tab");
 	
+	def buttonActions = uicomponent.getActions();
+ def primaryButton = uicomponent.getPrimaryButtonAction();
 %>
 <div class="UITabPane uiTabNormal" id="$uicomponent.id">
 	<ul class="nav nav-tabs" id="myTab">
@@ -36,11 +38,11 @@
 		%>
 	</div>
 	<div class="uiAction"> 
-		<% 
-		  String saveLink = uicomponent.event("Save");
-			String cancelLink = uicomponent.event("Cancel");
-		%>
-		<button type="button" onclick="$saveLink" class="btn">Save</button>
-		<button type="button" onclick="$cancelLink" class="btn">Cancel</button>
+				<% for(buttonAct in buttonActions) { 
+			     def classbtn = "btn"
+			     if(buttonAct.equals(primaryButton)) classbtn = "btn btn-primary"
+			%>
+			     <button type="button" onclick="<%=uicomponent.event(buttonAct) %>" class="$classbtn"><%=_ctx.appRes(uicomponent.getId() + ".action." + buttonAct)%></button>
+		 <% } %>
   </div>
 </div>	

@@ -60,7 +60,7 @@ public class UITabList extends UIPagingGrid {
   
   final static public String   TAPFORM_POPUP         = "TabForm_Popup";
   
-  private static String[] TAB_BEAN_FIELD = {"tabName", "buttons"} ;
+  public static String[] TAB_BEAN_FIELD = {"tabName", "buttons"} ;
   private static String[] TAB_ACTION = {"Edit","Delete"} ;
   public static String TAB_LIST = "ECMTabList" ;
   
@@ -71,7 +71,10 @@ public class UITabList extends UIPagingGrid {
     configure("tabName", TAB_BEAN_FIELD, TAB_ACTION) ;
   }
   
-  public String[] getActions() { return new String[] {"AddTab"} ; }
+  public String[] getActions() { 
+    if(TAB_ACTION.length == 0) return new String[] {};
+    return new String[] {"AddTab"} ; 
+  }
 
   @Override
   public void refresh(int currentPage) throws Exception {
@@ -122,7 +125,7 @@ public class UITabList extends UIPagingGrid {
       uiTabForm.setViewName(uiTabList.getViewName());
       uiContainer.initPopup(UITabList.TAPFORM_POPUP, uiTabForm, 760, 0);
       UIViewFormTabPane uiTabPane = uiTabList.getParent();
-      uiTabPane.setSelectedTab(uiTabPane.getSelectedTabId());
+      uiTabPane.setSelectedTab(uiTabList.getId());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
     }
   }
@@ -135,6 +138,9 @@ public class UITabList extends UIPagingGrid {
       Node viewNode = manageViewService.getViewByName(uiTabList.getViewName(), WCMCoreUtils.getUserSessionProvider());
       viewNode.getNode(tabName).remove();
       viewNode.save();
+      uiTabList.refresh(uiTabList.getUIPageIterator().getCurrentPage());
+      UIViewFormTabPane uiTabPane = uiTabList.getParent();
+      uiTabPane.setSelectedTab(uiTabList.getId());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTabList.getParent());
     }
   }
@@ -150,7 +156,7 @@ public class UITabList extends UIPagingGrid {
       uiTabForm.update(tab, false);
       uiContainer.initPopup(UITabList.TAPFORM_POPUP, uiTabForm, 760, 0);
       UIViewFormTabPane uiTabPane = uiTabList.getParent();
-      uiTabPane.setSelectedTab(uiTabPane.getSelectedTabId());
+      uiTabPane.setSelectedTab(uiTabList.getId());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
     }
   }  
