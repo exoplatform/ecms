@@ -17,6 +17,7 @@
 package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -137,7 +138,7 @@ public class UITaggingForm extends UIForm {
     NewFolksonomyService folksonomyService = getApplicationComponent(NewFolksonomyService.class);
 
     StringBuilder linkedTags = new StringBuilder();
-    Set<String> linkedTagSet = new HashSet<String>();
+    List<String> linkedTagList = new ArrayList<String>();
     String tagScope = this.getUIFormSelectBox(TAG_SCOPES).getValue();
 
     Node currentNode = getAncestorOfType(UIJCRExplorer.class).getCurrentNode();
@@ -147,9 +148,10 @@ public class UITaggingForm extends UIForm {
                                                                                  currentNode),
                                                                      currentNode,
                                                                      workspace)) {
-      linkedTagSet.add(tag.getName());
+      linkedTagList.add(tag.getName());
     }
-    for (String tagName : linkedTagSet) {
+    Collections.sort(linkedTagList);
+    for (String tagName : linkedTagList) {
       if (linkedTags.length() > 0)
         linkedTags = linkedTags.append(",");
       linkedTags.append(tagName);
