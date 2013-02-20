@@ -739,6 +739,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     while (nodeIter.hasNext()) {
       ret.add(nodeIter.nextNode());
     }
+    Collections.sort(ret, new NodeComparator());
     return ret;
   }
 
@@ -890,6 +891,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
         }
       }
     }
+    Collections.sort(ret, new NodeComparator());
     return ret;
   }  
   /**
