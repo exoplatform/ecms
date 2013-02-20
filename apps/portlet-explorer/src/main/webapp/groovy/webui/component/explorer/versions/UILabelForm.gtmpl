@@ -1,7 +1,7 @@
 <% 
   import org.exoplatform.webui.form.UIFormInputBase;
 %>
-<div class="uiFormWithTitle uiBox $uicomponent.id" onkeypress="javascript:SubmitAction.call(this, event);" style="border: 2spx solid blue">
+<div class="uiFormWithTitle uiBox $uicomponent.id" onkeypress="javascript:SubmitAction.call(this, event);">
   <h5 class="title"><%=_ctx.appRes(uicomponent.getName() + ".title")%></h5>
   <% uiform.begin() %>
   <div class="uiContentBox">
@@ -17,9 +17,11 @@
           <%
           for(action in uicomponent.getActions()) { 
             String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action)
-            String link = uicomponent.event(action); 
+            String link = uicomponent.event(action);
+						String primaryClass = "";
+						if (!action.equals("Cancel")) primaryClass = "btn-primary";
           %>
-            <button type="button" onclick="$link; window.scroll(0,0);" class="btn">$actionLabel</button>
+            <button type="button" onclick="$link; window.scroll(0,0);" class="btn $primaryClass">$actionLabel</button>
           <%
           }%>
         </div>
