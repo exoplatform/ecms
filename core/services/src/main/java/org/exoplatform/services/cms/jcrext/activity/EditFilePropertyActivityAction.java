@@ -16,7 +16,6 @@
  */
 package org.exoplatform.services.cms.jcrext.activity;
 
-import javax.jcr.Item;
 import javax.jcr.Node;
 import javax.jcr.Property;
 
@@ -27,12 +26,6 @@ import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
-/**
- * Created by The eXo Platform SAS
- * Author : Nguyen The Vinh From ECM Of eXoPlatform
- *          vinh_nguyen@exoplatform.com
- * 11 Jan 2013  
- */
 public class EditFilePropertyActivityAction implements Action{
   private ListenerService listenerService=null;
   private ActivityCommonService activityService = null;

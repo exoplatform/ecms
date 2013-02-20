@@ -24,7 +24,6 @@ import org.apache.commons.chain.Context;
 import org.exoplatform.services.command.action.Action;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.security.ConversationState;
-import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**

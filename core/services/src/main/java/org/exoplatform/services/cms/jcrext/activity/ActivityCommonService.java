@@ -24,7 +24,6 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -77,7 +76,7 @@ public class ActivityCommonService {
   
   public static String MIX_COMMENT                = "exo:activityComment";
   public static String MIX_COMMENT_CREATOR        = "exo:activityCreator";
-  public static String MIX_COMMENT_CREATING       = "exo:creating";
+  public static String MIX_COMMENT_CREATING       = "exo:activityCreating";
   public static String MIX_COMMENT_ACTIVITY_ID    = "exo:activityCommentID";
   
   private Map<String, Object> properties = new HashMap<String, Object>();
@@ -130,7 +129,7 @@ public class ActivityCommonService {
   	return result;
   }
   public boolean isAcceptedProperties(String propertyName) {
-    return (acceptedProperties.indexOf("{" + propertyName + "}")>=0 || propertyName.startsWith("dc:"));
+    return (acceptedProperties.indexOf("{" + propertyName + "}")>=0);
   }
   public boolean isAcceptedFileProperties(String propertyName) {
     return (acceptedFileProperties.indexOf("{" + propertyName + "}")>=0 || propertyName.startsWith("dc:"));  

@@ -20,9 +20,6 @@ import javax.jcr.Node;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
-import org.exoplatform.services.listener.ListenerService;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
@@ -59,8 +56,9 @@ public class DialogFormActionListeners {
       }
       if (referenceNodePath.startsWith("/")) {
         Node referenceNode = (Node)uiForm.getSession().getItem(uiForm.getNodePath() + referenceNodePath);
-        if(referenceNode.hasProperty(Utils.JCR_DATA)) {          
-          uiForm.setDataRemoved(true);
+        if(referenceNode.hasProperty(Utils.JCR_DATA)) {
+          uiForm.removeData(referenceNodePath);
+//          uiForm.setDataRemoved(true);
         }
       } else {
         Node currentNode = uiForm.getNode();
@@ -71,8 +69,8 @@ public class DialogFormActionListeners {
           return;
         }
         if (currentNode.hasProperty(referenceNodePath)) {
-          currentNode.setProperty(referenceNodePath, "");
-          uiForm.setDataRemoved(true);
+          uiForm.removeData(referenceNodePath);
+//          uiForm.setDataRemoved(true);
         }
       }
       

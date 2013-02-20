@@ -95,7 +95,7 @@
 							def curNode = uicomponent.getNode();
 							if (curNode.hasNode("exo:image")) {
 								def imageNode = curNode.getNode("exo:image") ;
-								if (imageNode.getProperty("jcr:data").getStream().available() > 0 && (uicomponent.findComponentById(image) == null)) {
+								if (imageNode.getProperty("jcr:data").getStream().available() > 0 && !uicomponent.isDataRemoved("/exo:image") && (uicomponent.findComponentById(image) == null)) {
 									def imgSrc = uicomponent.getImage(curNode, "exo:image");
 									def actionLink = uicomponent.event("RemoveData", "/exo:image");
 						%>		

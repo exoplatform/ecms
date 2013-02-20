@@ -127,7 +127,7 @@
 							def curNode = uicomponent.getNode() ;
 							if (curNode.hasNode("jcr:content")) {
 								def imageNode = curNode.getNode("jcr:content") ;
-								if (imageNode.getProperty("jcr:data").getStream().available() > 0) {
+								if (imageNode.getProperty("jcr:data").getStream().available() > 0 && !uicomponent.isDataRemoved("/jcr:content") ) {
 									def actionLink = uicomponent.event("RemoveData", "/jcr:content");
 						%>		
 									<div>

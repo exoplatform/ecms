@@ -25,6 +25,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -168,13 +169,15 @@ public class UIDialogForm extends UIForm {
   protected String workspaceName;
   protected boolean isReference;
   protected boolean isShowActionsOnTop_ = false;
-
+  private List<String> removedBinary ;
   /** Selected Tab id */
   private String selectedTab;
 
   private String SEPARATOR_VALUE = "::";
 
-  public UIDialogForm() { }
+  public UIDialogForm() { 
+    removedBinary = new ArrayList<String>();
+  }
 
   public boolean isEditing() { return !isAddNew;}
   public boolean isAddNew() { return isAddNew;}
@@ -1694,11 +1697,36 @@ public class UIDialogForm extends UIForm {
     dresource.setDownloadName(nodeName);
     return dservice.getDownloadLink(dservice.addDownloadResource(dresource));
   }
-
+  @Deprecated
+  /**
+   * Deprecated method, should used removeData(String path) next time
+   */
   public boolean dataRemoved() { return dataRemoved_; }
-
+  @Deprecated
   public void setDataRemoved(boolean dataRemoved) { dataRemoved_ = dataRemoved; }
 
+  /**
+   * @param       path: of property content binarydata for uploading 
+   * @Objective : Mark a uploaded field as removed.
+   * @Author    : Nguyen The Vinh from ECM of eXoPlatform
+   */
+  public void removeData(String path) {
+    if (!removedBinary.contains(path)) {
+      removedBinary.add(path);
+    }
+  }
+  /**
+   * @param       path: of property content binarydata for uploading
+   * @return    : True if the uploaded field is removed from UI
+   * @Objective : Checking the binary field is removed or not
+   * @Author    : Nguyen The Vinh from ECM of eXoPlatform
+   */
+  public boolean isDataRemoved(String path) {
+    return removedBinary.contains(path);
+  }
+  public void clearDataRemovedList() {
+    removedBinary.clear();
+  }
   public void resetProperties() { properties.clear(); }
 
   public void resetInterceptors(){

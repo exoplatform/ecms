@@ -136,7 +136,7 @@
 						      <%
 						        if(uicomponent.isEditing()) { 
 											if (webContentNode != null && webContentNode.hasProperty("exo:image")) {
-												if(webContentNode.getProperty("exo:image").getStream().available() > 0) {
+												if(webContentNode.getProperty("exo:image").getStream().available() > 0 && !uicomponent.isDataRemoved("exo:image")) {
 													DownloadService dservice = uicomponent.getApplicationComponent(DownloadService.class);
 											    InputStream input = webContentNode.getProperty("exo:image").getStream();
 											    InputStreamDownloadResource dresource = new InputStreamDownloadResource(input, "image");
@@ -244,7 +244,7 @@
 										if(webContentNode != null && webContentNode.hasNode("medias/images/illustration")) {
 											def imageNode = webContentNode.getNode("medias/images/illustration") ;
 											def resourceNode = imageNode.getNode("jcr:content");
-											if(resourceNode.getProperty("jcr:data").getStream().available() > 0) {
+											if(resourceNode.getProperty("jcr:data").getStream().available() > 0 && !uicomponent.isDataRemoved("/medias/images/illustration/jcr:content") ){
 												def imgSrc = uicomponent.getImage(imageNode, "jcr:content");
 												def actionLink = uicomponent.event("RemoveData", "/medias/images/illustration/jcr:content");
 												%>		

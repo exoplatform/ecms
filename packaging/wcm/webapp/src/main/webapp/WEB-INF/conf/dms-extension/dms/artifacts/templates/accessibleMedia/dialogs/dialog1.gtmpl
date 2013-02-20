@@ -31,7 +31,7 @@
   
   def node = uicomponent.getNode();
   Parameter[] params;
-  
+  def objectID;
 %>
 <div class="UIForm FormLayout FormScrollLayout">  
   <% uiform.begin() %>
@@ -80,7 +80,7 @@
             def content = "content";
             if(node != null && (uicomponent.findComponentById(content) == null)) {
               def resourceNode = node.getNode("jcr:content");
-              if(resourceNode.getProperty("jcr:data").getStream().available() > 0) {
+              if(resourceNode.getProperty("jcr:data").getStream().available() > 0 && !uicomponent.isDataRemoved("/jcr:content")) {
                 def nodeName = node.getName();
                 def actionLink = uicomponent.event("RemoveData", "/jcr:content");
                 %>    
@@ -146,11 +146,12 @@
               def captionsNode = uicomponent.getNodeByType(NodetypeConstant.EXO_CAPTIONS);
               if(captionsNode != null && (uicomponent.findComponentById(captions) == null)) {
                 def captionsResourceNode = captionsNode.getNode("jcr:content");
-                if(captionsResourceNode.getProperty("jcr:data").getStream().available() > 0) {
-                  def captionsName = captionsNode.getName();
+                def captionsName = captionsNode.getName();
+                objectID  = "/" + captionsName + "/jcr:content";
+                if(captionsResourceNode.getProperty("jcr:data").getStream().available() > 0 && !uicomponent.isDataRemoved(objectID)) {
+                  objectID = objectID + "\$" + captionsName;
                   //params = [new Parameter("removeNode", captionsName)];
-                  def captionsActionLink = uicomponent.event("RemoveData", "/" + captionsName + "/jcr:content" +
-                  		                                                     "\$" + captionsName);
+                  def captionsActionLink = uicomponent.event("RemoveData", objectID);
                   %>    
                     <div>
                       <span><%=captionsName%></span>
@@ -194,11 +195,12 @@
             def audioDescriptionNode = uicomponent.getNodeByType(NodetypeConstant.EXO_AUDIO_DESCRIPTION);
             if(audioDescriptionNode != null && (uicomponent.findComponentById(audioDescription) == null)) {
               def audioResourceNode = audioDescriptionNode.getNode("jcr:content");
-              if(audioResourceNode.getProperty("jcr:data").getStream().available() > 0) {
-                def audioDescriptionName = audioDescriptionNode.getName();
+              def audioDescriptionName = audioDescriptionNode.getName();
+              objectID  = "/" + audioDescriptionName + "/jcr:content";
+              if(audioResourceNode.getProperty("jcr:data").getStream().available() > 0 && !uicomponent.isDataRemoved(objectID)) {
+                objectID = objectID + "\$" + audioDescriptionName;
                 //params = [new Parameter("removeNode", audioDescriptionName)];
-                def audioActionLink = uicomponent.event("RemoveData", "/" + audioDescriptionName + "/jcr:content" + 
-                                                                      "\$" + audioDescriptionName);
+                def audioActionLink = uicomponent.event("RemoveData", objectID);
                 %>    
                   <div>
                     <span><%=audioDescriptionName%></span>
