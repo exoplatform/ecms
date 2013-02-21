@@ -40,7 +40,6 @@ import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.version.VersionException;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.jcr.model.ClipboardCommand;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
@@ -53,9 +52,14 @@ import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.relations.RelationsService;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -433,6 +437,8 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       }
     }
     // Add locked token for the source node
+    ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
+    ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
     uiExplorer.addLockToken(srcNode);
     if (workspace.getName().equals(srcWorkspace)) {
       try {
@@ -458,7 +464,9 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
         if (!session.itemExists(uiExplorer.getCurrentPath())) {
           uiExplorer.setCurrentPath(LinkUtils.getParentPath(uiExplorer.getCurrentPath()));
         }
-
+        if (activityService.isAcceptedNode(desNode) || desNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
+          listenerService.broadcast(ActivityCommonService.NODE_MOVED_ACTIVITY, desNode, desNode.getPath());
+        }
         if (!(desNode.getPath().equals(uiExplorer.getCurrentPath())))
           actionContainer.initiateObservation(desNode);
         for (int i = 0; i < refList.size(); i++) {
@@ -476,6 +484,10 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       }
     } else {
       workspace.clone(srcWorkspace, srcPath, destPath, false);
+      Node desNode =(Node) workspace.getSession().getItem(destPath);
+      if (activityService.isAcceptedNode(desNode) || desNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
+        listenerService.broadcast(ActivityCommonService.NODE_MOVED_ACTIVITY, desNode, destPath);
+      }
       if (!isMultiSelect || (isMultiSelect && isLastPaste)) {
         uiWorkingArea.getVirtualClipboards().clear();
       }
