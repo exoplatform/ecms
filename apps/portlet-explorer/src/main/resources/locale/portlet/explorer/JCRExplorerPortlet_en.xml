@@ -2311,9 +2311,11 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
+      <RemoveThumbnail>Remove Thumbnail</RemoveThumbnail>
     </action>
     <label>
       <mediumSize>Thumbnail Image</mediumSize>
+      <SelectFile>Choose Thumbnail Image</SelectFile>
     </label>
     <msg>
       <mimetype-incorrect>Incorrect file type. Thumbnails can only be created from .JPG, .PNG or .GIF files.</mimetype-incorrect>

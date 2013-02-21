@@ -15,7 +15,7 @@
       </value-param>
       <value-param>
       	<name>mediumSize</name>
-	      <value>64x64</value>
+	      <value>116x116</value>
       </value-param> 
       <value-param>
       	<name>bigSize</name>

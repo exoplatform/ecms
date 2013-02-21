@@ -1,5 +1,6 @@
 (function(gj, ecm_bootstrap, webuiExt) {
 	function ECMUtils() {
+		this.previewThumbnailAction;
 		var Self = this;
 		var showSideBar = true;
 		var editFullScreen = false;
@@ -1628,6 +1629,24 @@
 				gj(detailViewIcon).width(gj(detailViewBtnGroup).width());
 			}
 		}
+	};
+	
+	ECMUtils.prototype.onLoadUIThumbnailForm = function(previewAction) {
+		eXo.ecm.ECMUtils.previewThumbnailAction = previewAction;
+		// 
+		var uploadProgressTimer;
+		gj("div.uploadButton").mouseup(function (e){
+			uploadProgressTimer = setInterval(function() {
+				var percent = gj("div.uploadContainer").find('div.percent').text();
+				if (percent == "100%") {
+					//gj("div.uploadButton").unbind(e);
+					clearInterval(uploadProgressTimer);
+					
+					// Request preview
+					eXo.webui.UIForm.submitForm('UIThumbnailForm','Preview',true);
+				}
+			}, 1*1000);
+		});
 	};
 
 	eXo.ecm.ECMUtils = new ECMUtils();

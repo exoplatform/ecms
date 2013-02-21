@@ -206,7 +206,7 @@
                     def encodedPath = URLEncoder.encode(Utils.formatNodeName(data.getPath()), "utf-8");
                     encodedPath = encodedPath.replaceAll ("%2F", "/");    //we won't encode the slash characters in the path
                     
-									  String thumbnailImage = "/" + portalName + "/" + restContextName + "/thumbnailImage/custom/116x116/" + repository + "/" + preferenceWS + encodedPath;
+									  String thumbnailImage = "/" + portalName + "/" + restContextName + "/thumbnailImage/medium/" + repository + "/" + preferenceWS + encodedPath;
 									%>
 									<div class="loadingProgressIcon" style="display: block;">
 											<%if(isLocked) {%>

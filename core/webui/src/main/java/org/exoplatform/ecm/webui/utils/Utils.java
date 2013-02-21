@@ -20,9 +20,7 @@ import java.io.InputStream;
 import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -557,6 +555,15 @@ public class Utils {
     return zipStream.getNextEntry() == null ? null : zipStream;
   }
 
+  public static String getThumbnailImage(InputStream input, String downloadName)
+      throws Exception {
+    DownloadService dservice = WCMCoreUtils.getService(DownloadService.class);
+    InputStreamDownloadResource dresource = new InputStreamDownloadResource(
+        input, "image");
+    dresource.setDownloadName(downloadName);
+    return dservice.getDownloadLink(dservice.addDownloadResource(dresource));
+  }
+  
   public static String getThumbnailImage(Node node, String propertyName)
       throws Exception {
     ThumbnailService thumbnailService = Util.getUIPortal()

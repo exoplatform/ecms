@@ -2311,9 +2311,11 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
+      <RemoveThumbnail>Supprimer miniature</RemoveThumbnail>
     </action>
     <label>
       <mediumSize>Vignette</mediumSize>
+      <SelectFile>Sélectionner image miniature</SelectFile>
     </label>
     <msg>
       <mimetype-incorrect>Type de fichier incorrect. Sélectionner une image de type JPG, PNG ou GIF.</mimetype-incorrect>

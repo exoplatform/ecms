@@ -17,7 +17,6 @@
 package org.exoplatform.ecm.webui.component.explorer.thumbnail;
 
 import java.awt.image.BufferedImage;
-import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 import javax.jcr.AccessDeniedException;
@@ -26,22 +25,26 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.lock.LockException;
 import javax.jcr.version.VersionException;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.upload.UploadResource;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormUploadInput;
 
@@ -51,16 +54,13 @@ import org.exoplatform.webui.form.UIFormUploadInput;
  *          minh.dang@exoplatform.com
  * Oct 24, 2008 10:52:13 AM
  */
-@ComponentConfig(
-    lifecycle = UIFormLifecycle.class,
-    template =  "app:/groovy/webui/component/explorer/thumbnail/UIThumbnailForm.gtmpl",
-    events = {
-      @EventConfig(listeners = UIThumbnailForm.SaveActionListener.class),
-      @EventConfig(listeners = UIThumbnailForm.CancelActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIThumbnailForm.RemoveThumbnailActionListener.class,
-          confirm = "UIThumbnailForm.msg.confirm-delete", phase = Phase.DECODE)
-    }
-)
+@ComponentConfigs({
+    @ComponentConfig(lifecycle = UIFormLifecycle.class, template = "app:/groovy/webui/component/explorer/thumbnail/UIThumbnailForm.gtmpl", events = {
+        @EventConfig(listeners = UIThumbnailForm.SaveActionListener.class),
+        @EventConfig(listeners = UIThumbnailForm.CancelActionListener.class, phase = Phase.DECODE),
+        @EventConfig(listeners = UIThumbnailForm.RemoveThumbnailActionListener.class, confirm = "UIThumbnailForm.msg.confirm-delete", phase = Phase.DECODE),
+        @EventConfig(listeners = UIThumbnailForm.PreviewActionListener.class) }),
+    @ComponentConfig(type = UIFormUploadInput.class, template = "app:/groovy/webui/component/explorer/thumbnail/UIFormUploadInput.gtmpl") })
 public class UIThumbnailForm extends UIForm implements UIPopupComponent {
 
   /**
@@ -68,22 +68,54 @@ public class UIThumbnailForm extends UIForm implements UIPopupComponent {
    */
   private static final Log LOG  = ExoLogger.getLogger(UIThumbnailForm.class.getName());
 
-  final static public String THUMBNAIL_FIELD = "mediumSize";
-  private boolean thumbnailRemoved_ = false;
+  private static final String THUMBNAIL_FIELD = "mediumSize";
+  
+  private UploadResource currentUploadResource;
+  private BufferedImage currentUploadImage;
+  private String currentPreviewLink;
 
   public UIThumbnailForm() throws Exception {
-    setMultiPart(true) ;
-    UIFormUploadInput uiInput = new UIFormUploadInput(THUMBNAIL_FIELD, THUMBNAIL_FIELD) ;
+    initForm();
+  }
+  
+  private void initForm() throws Exception {
+    currentUploadResource = null;
+    currentUploadImage = null;
+    currentPreviewLink = null;
+    
+    setMultiPart(true);
+    UIFormUploadInput uiInput = new UIFormUploadInput(THUMBNAIL_FIELD, THUMBNAIL_FIELD);
     uiInput.setAutoUpload(true);
-    addUIFormInput(uiInput) ;
+    removeChild(UIFormUploadInput.class);
+    addUIFormInput(uiInput);
   }
 
   public String getThumbnailImage(Node node) throws Exception {
     return Utils.getThumbnailImage(node, ThumbnailService.MEDIUM_SIZE);
   }
+  
+  public String getPreviewImage() throws Exception {
+    UIFormUploadInput input = (UIFormUploadInput)this.getUIInput(THUMBNAIL_FIELD);
+    if (input.getUploadResource() == null) return null;
+    return Utils.getThumbnailImage(input.getUploadDataAsStream(), input.getUploadResource().getFileName());
+  }
 
   public Node getSelectedNode() throws Exception {
     return getAncestorOfType(UIJCRExplorer.class).getRealCurrentNode();
+  }
+
+  /* (non-Javadoc)
+   * @see org.exoplatform.webui.form.UIForm#processRender(org.exoplatform.webui.application.WebuiRequestContext)
+   */
+  @Override
+  public void processRender(WebuiRequestContext context) throws Exception {
+    Node currentRealNode = getSelectedNode();
+    if (getThumbnailImage(currentRealNode) == null) {
+      setActions(new String[] {"Save", "Cancel"});
+    } else {
+      setActions(new String[] {"RemoveThumbnail", "Cancel"});
+    }
+    super.processRender(context);
   }
 
   public Node getThumbnailNode(Node node) throws Exception {
@@ -91,25 +123,64 @@ public class UIThumbnailForm extends UIForm implements UIPopupComponent {
     return thumbnailService.getThumbnailNode(node);
   }
 
-  public boolean isRemovedThumbnail() { return thumbnailRemoved_; }
+  /**
+   * @return the currentUploadImage
+   */
+  public BufferedImage getCurrentUploadImage() {
+    return currentUploadImage;
+  }
 
-  public String[] getActions() { return new String[] {"Save", "Cancel"}; }
+  /**
+   * @param currentUploadImage the currentUploadImage to set
+   */
+  public void setCurrentUploadImage(BufferedImage currentUploadImage) {
+    this.currentUploadImage = currentUploadImage;
+  }
+
+  /**
+   * @return the currentUploadResource
+   */
+  public UploadResource getCurrentUploadResource() {
+    return currentUploadResource;
+  }
+  
+  /**
+   * @param currentUploadResource the currentUploadResource to set
+   */
+  public void setCurrentUploadResource(UploadResource currentUploadResource) {
+    this.currentUploadResource = currentUploadResource;
+  }
+
+  /**
+   * @param currentPreviewLink the currentPreviewLink to set
+   */
+  public void setCurrentPreviewLink(String currentPreviewLink) {
+    this.currentPreviewLink = currentPreviewLink;
+  }
+
+  /**
+   * @return the currentPreviewLink
+   */
+  public String getCurrentPreviewLink() {
+    return currentPreviewLink;
+  }
 
   static  public class SaveActionListener extends EventListener<UIThumbnailForm> {
     public void execute(Event<UIThumbnailForm> event) throws Exception {
       UIThumbnailForm uiForm = event.getSource();
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
       UIJCRExplorer uiExplorer = uiForm.getAncestorOfType(UIJCRExplorer.class);
-      UIFormUploadInput input = (UIFormUploadInput)uiForm.getUIInput(THUMBNAIL_FIELD);
-      if(input.getUploadResource() == null) {
+      
+      // Check resource available
+      if(uiForm.getCurrentUploadResource() == null) {
         uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.fileName-error", null,
                                                 ApplicationMessage.WARNING));
 
         return;
       }
-      Node selectedNode = uiExplorer.getRealCurrentNode();
-      uiExplorer.addLockToken(selectedNode);
-      String fileName = input.getUploadResource().getFileName();
+      
+      // Check if file is image
+      String fileName = uiForm.getCurrentUploadResource().getFileName();
       DMSMimeTypeResolver mimeTypeSolver = DMSMimeTypeResolver.getInstance();
       String mimeType = mimeTypeSolver.getMimeType(fileName) ;
       if(!mimeType.startsWith("image")) {
@@ -118,42 +189,57 @@ public class UIThumbnailForm extends UIForm implements UIPopupComponent {
 
         return;
       }
-      InputStream inputStream = input.getUploadDataAsStream();
-      ThumbnailService thumbnailService = uiForm.getApplicationComponent(ThumbnailService.class);
-      BufferedImage image = ImageIO.read(inputStream);
+      
+      // Add lock token
+      Node selectedNode = uiExplorer.getRealCurrentNode();
+      uiExplorer.addLockToken(selectedNode);
+
+      // Create thumbnail
+      ThumbnailService thumbnailService = WCMCoreUtils.getService(ThumbnailService.class);
       try {
-        thumbnailService.createThumbnailImage(selectedNode, image, mimeType);
+        thumbnailService.createThumbnailImage(selectedNode, uiForm.getCurrentUploadImage(), mimeType);
+        
+        selectedNode.getSession().save();
+        uiExplorer.updateAjax(event);
       } catch(AccessDeniedException ace) {
-        uiApp.addMessage(new ApplicationMessage("UIThumbnailForm.msg.access-denied", null,
-            ApplicationMessage.WARNING));
-
-        return;
+        uiApp.addMessage(new ApplicationMessage("UIThumbnailForm.msg.access-denied", null, ApplicationMessage.WARNING));
       } catch(VersionException ver) {
-        uiApp.addMessage(new ApplicationMessage("UIThumbnailForm.msg.is-checked-in", null,
-            ApplicationMessage.WARNING));
-
-        return;
+        uiApp.addMessage(new ApplicationMessage("UIThumbnailForm.msg.is-checked-in", null, ApplicationMessage.WARNING));
       } catch(LockException lock) {
         Object[] arg = { selectedNode.getPath() };
-        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", arg,
-            ApplicationMessage.WARNING));
-
-        return;
+        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", arg, ApplicationMessage.WARNING));
       } catch(PathNotFoundException path) {
-        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
-            null,ApplicationMessage.WARNING));
-
-        return;
+        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", null,ApplicationMessage.WARNING));
       } catch(Exception e) {
         if (LOG.isErrorEnabled()) {
           LOG.error("An unexpected error occurs", e);
         }
         JCRExceptionManager.process(uiApp, e);
-
-        return;
       }
-      selectedNode.getSession().save();
-      uiExplorer.updateAjax(event);
+    }
+  }
+  
+  static  public class PreviewActionListener extends EventListener<UIThumbnailForm> {
+    public void execute(Event<UIThumbnailForm> event) throws Exception {
+      UIThumbnailForm uiForm = event.getSource();
+      
+      // Current review link
+      UIFormUploadInput input = (UIFormUploadInput)uiForm.getUIInput(THUMBNAIL_FIELD);
+      if (input.getUploadDataAsStream() != null) {
+        uiForm.setCurrentPreviewLink(uiForm.getPreviewImage());
+        uiForm.setCurrentUploadImage(ImageIO.read(input.getUploadDataAsStream()));
+        uiForm.setCurrentUploadResource(input.getUploadResource());
+      } else {
+        uiForm.setCurrentPreviewLink(null);
+        uiForm.setCurrentUploadImage(null);
+        uiForm.setCurrentUploadResource(null);
+      }
+      
+      // New upload input
+      uiForm.removeChild(UIFormUploadInput.class);
+      UIFormUploadInput uiInput = new UIFormUploadInput(THUMBNAIL_FIELD, THUMBNAIL_FIELD) ;
+      uiInput.setAutoUpload(true);
+      uiForm.addUIFormInput(uiInput) ;
     }
   }
 
@@ -161,7 +247,6 @@ public class UIThumbnailForm extends UIForm implements UIPopupComponent {
     public void execute(Event<UIThumbnailForm> event) throws Exception {
       UIThumbnailForm uiForm = event.getSource();
       UIJCRExplorer uiExplorer = uiForm.getAncestorOfType(UIJCRExplorer.class);
-      uiForm.thumbnailRemoved_ = true;
       Node selectedNode = uiExplorer.getRealCurrentNode();
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
       uiExplorer.addLockToken(selectedNode);
@@ -169,37 +254,28 @@ public class UIThumbnailForm extends UIForm implements UIPopupComponent {
       Node thumbnailNode = thumbnailService.getThumbnailNode(selectedNode);
       if(thumbnailNode != null) {
         try {
+          // Remove thumbmail
           thumbnailNode.remove();
           selectedNode.getSession().save();
+          
+          // Reset form
+          uiForm.initForm();
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
         } catch(LockException lock) {
           Object[] arg = { selectedNode.getPath() };
-          uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", arg,
-              ApplicationMessage.WARNING));
-
-          return;
+          uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", arg, ApplicationMessage.WARNING));
         } catch(AccessDeniedException ace) {
-          uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.access-denied", null,
-              ApplicationMessage.WARNING));
-
+          uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.access-denied", null, ApplicationMessage.WARNING));
           uiExplorer.updateAjax(event);
-          return;
         } catch(PathNotFoundException path) {
-          uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
-              null,ApplicationMessage.WARNING));
-
-          return;
+          uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", null,ApplicationMessage.WARNING));
         } catch(Exception e) {
           if (LOG.isErrorEnabled()) {
             LOG.error("An unexpected error occurs", e);
           }
           JCRExceptionManager.process(uiApp, e);
-
-          return;
         }
       }
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
-      uiExplorer.setIsHidePopup(true);
-      uiExplorer.updateAjax(event);
     }
   }
 

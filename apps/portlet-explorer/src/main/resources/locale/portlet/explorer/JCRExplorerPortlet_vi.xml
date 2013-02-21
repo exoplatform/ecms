@@ -2317,9 +2317,11 @@
     <action>
       <Save>Lưu</Save>
       <Cancel>Hủy bỏ</Cancel>
+      <RemoveThumbnail>Xoá ảnh nhỏ</RemoveThumbnail>
     </action>
     <label>
       <mediumSize>Ảnh nhỏ</mediumSize>
+      <SelectFile>Chọn ảnh nhỏ</SelectFile>
     </label>
     <msg>
       <mimetype-incorrect>Kiểu tệp tin không hợp lệ. Chọn một kiểu hình ảnh để thêm(JPG, PNG, GIF)</mimetype-incorrect>

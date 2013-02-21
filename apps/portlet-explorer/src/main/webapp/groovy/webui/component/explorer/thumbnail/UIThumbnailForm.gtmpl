@@ -1,42 +1,46 @@
 <%
   def selectedNode = uicomponent.getSelectedNode();
+  
+  def jsManager = _ctx.getRequestContext().getJavascriptManager();
+  def previewAction = URLEncoder.encode(uiform.event("Preview"), "utf-8");
+  jsManager.require("SHARED/ecm-utils", "ecmutil").addScripts("ecmutil.ECMUtils.onLoadUIThumbnailForm('$previewAction');");
+
 %>
 <div class="uiForm uiThumbnailForm">
-	<% uiform.begin() %>
-	<div class="form-horizontal resizable">
-		<div class="control-group">		          					
-			<label class="control-label"><%=_ctx.appRes("UIThumbnailForm.label.mediumSize")%></label>
-			<div class="controls">
-				<%
-					def thumbnailNode = uicomponent.getThumbnailNode(selectedNode);
-					if(thumbnailNode != null && thumbnailNode.hasProperty("exo:mediumSize")) { 
-						String thumbnailImage = uicomponent.getThumbnailImage(selectedNode);
-						def actionLink = uicomponent.event("RemoveThumbnail");
-					%>		
-						<div>
-							<img src="$thumbnailImage" alt="$thumbnailImage" />
-							<i onclick="$actionLink" class="uiIconTrash" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIThumbnailForm.title.remove-thumbnail")%>"></i>
-						</div>
-					<%
-					} else if(uicomponent.isRemovedThumbnail()) {
-						uicomponent.renderChildren();
-					}	else {
-						uicomponent.renderChildren();
-					}
-				%>
-			</div>
-		</div>
-	</div>
-		<%/* start render action*/%>
-	<div class="uiAction uiActionBorder"> 
-		  <% for(action in uicomponent.getActions()) { 
-				 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
-						 String link = uicomponent.event(action) ;
-		  %>
-				<button type="button" onclick="$link" class="btn" href="javascript:void(0);">$actionLabel</button>
-			<%}%>          
-	</div>
-	  <%/* end render action*/%>
-
+  <% uiform.begin() %>
+  <div class="form-horizontal resizable">
+    <div class="control-group">
+      <div class="controls">
+        <%
+          def thumbnailNode = uicomponent.getThumbnailNode(selectedNode);
+          if(thumbnailNode != null && thumbnailNode.hasProperty("exo:mediumSize")) {
+            String thumbnailImage = uicomponent.getThumbnailImage(selectedNode);
+          %>
+            <div>
+              <img src="$thumbnailImage" alt="$thumbnailImage" />
+            </div>
+          <%
+          } else if(uiform.currentPreviewLink != null) {
+          %>
+            <div>
+              <img style="max-width:116px; max-height:116px" src="$uiform.currentPreviewLink" alt="$uiform.currentPreviewLink" />
+            </div>
+          <%
+            uiform.renderChildren();
+          } else {
+            uiform.renderChildren();
+          }
+        %>
+      </div>
+    </div>
+  </div>
+  <div class="uiAction uiActionBorder"> 
+      <% for(action in uicomponent.getActions()) {
+           String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action);
+           String link = uicomponent.event(action);
+      %>
+        <button type="button" onclick="$link" class="btn" href="javascript:void(0);">$actionLabel</button>
+      <%}%>
+  </div>
   <% uiform.end() %>
 </div>

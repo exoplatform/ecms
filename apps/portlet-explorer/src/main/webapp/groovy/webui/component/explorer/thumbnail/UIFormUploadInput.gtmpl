@@ -1,0 +1,38 @@
+<%
+  String uploadId = uicomponent.getUploadId();
+  def rcontext = _ctx.getRequestContext();
+  def id = uicomponent.getId();
+  rcontext.getJavascriptManager().require("SHARED/upload", "upload")
+    .addScripts("upload.UIUpload.initUploadEntry('" + id + "','" + uploadId+ "');");
+%>
+<div id="$id" class="uiUploadInput">
+<div class="limitMessage" style="display: none;"><%= _ctx.appRes("UIFormUploadInput.msg.limit"); %></div>
+<input type="hidden" name="<%=uicomponent.getName();%>" value="false"/>
+<script type="text/template">
+  <div class="uploadContainer" style="display:none">
+    <div class="fileHidden" style="overflow:hidden">
+      <input class="file" name="file" type='file' style="display:none"/>
+    </div>
+    <div class="progressBarFrame clearfix" style="display:none">
+      <div class="fileNameLabel pull-left"></div>
+      <div class="pull-left percent">0%</div>
+      <div class="progress  progress-striped">
+        <div class="bar" style="width:0%"></div>
+      </div>
+    </div>
+    <div class="selectFileFrame clearfix" style="display: none;">
+      <div class="fileNameLabel"></div>
+    </div>
+    <iframe height="0" width="0" style="display: none;" name="uploadIFrame">
+      <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+      <html xmlns='http://www.w3.org/1999/xhtml'>
+        <head></head>
+        <body></body>
+      </html>
+    </iframe>
+  </div>
+</script>
+<div class="uploadButton">
+  <label class="btn"><%=_ctx.appRes("UIThumbnailForm.label.SelectFile")%></label>
+</div>  
+</div>
