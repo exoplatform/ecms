@@ -164,7 +164,7 @@
                           onParentVersion="COPY" protected="false" multiple="false" >
         <valueConstraints/>
       </propertyDefinition>
-      <propertyDefinition name="exo:creating" requiredType="String" autoCreated="false" mandatory="false" 
+      <propertyDefinition name="exo:activityCreating" requiredType="String" autoCreated="false" mandatory="false" 
                           onParentVersion="COPY" protected="false" multiple="false" >
         <valueConstraints/>
       </propertyDefinition>
