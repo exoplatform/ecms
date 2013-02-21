@@ -47,8 +47,14 @@ public class EditPropertyActivityAction implements Action{
     String propertyName = (item instanceof Property) ?((Property)item).getName():((Node)item).getName();
     if (nodeTemp !=null) {
       if (!activityService.isCreating(node)) { 
-        //Consider this special case as changing of content 
-        listenerService.broadcast(ActivityCommonService.EDIT_ACTIVITY, nodeTemp, "exo:text");
+        //Consider this special case as changing of content
+        String itemPath = ((Item) item).getPath();
+        String nodePath = nodeTemp.getPath();
+        String referencePath = itemPath.substring(nodePath.length());
+        if (referencePath.startsWith("/")) {
+          referencePath = referencePath.substring(1);
+        }
+        listenerService.broadcast(ActivityCommonService.EDIT_ACTIVITY, nodeTemp, referencePath);
       }
     }
     nodeTemp = node;
