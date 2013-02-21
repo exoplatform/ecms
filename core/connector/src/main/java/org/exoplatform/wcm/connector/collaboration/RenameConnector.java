@@ -36,6 +36,7 @@ import javax.ws.rs.core.Response;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.lock.LockService;
 import org.exoplatform.services.cms.relations.RelationsService;
@@ -93,8 +94,7 @@ public class RenameConnector implements ResourceContainer {
       if (StringUtils.isBlank(newTitle)) {
         return Response.status(HTTPStatus.BAD_REQUEST).build();
       }
-      String newExoTitle = Text.escapeIllegalJcrChars(newTitle);
-
+      String newExoTitle = Text.escapeIllegalJcrChars(newTitle);      
       // Clarify new name & check to add extension
       String newName = Text.escapeIllegalJcrChars(org.exoplatform.services.cms.impl.Utils.cleanString(newTitle));
       Node renamedNode = this.getNodeByPath(oldPath);
@@ -109,6 +109,10 @@ public class RenameConnector implements ResourceContainer {
       String oldExoTitle = (renamedNode.hasProperty("exo:title")) ? renamedNode.getProperty("exo:title")
                                                                                .getString()
                                                                  : StringUtils.EMPTY;
+      CmsService cmsService = WCMCoreUtils.getService(CmsService.class);
+      cmsService.getPreProperties().clear();
+      cmsService.getPreProperties().put(renamedNode.getUUID() + "_" + "exo:name", oldExoTitle);
+      
       if (renamedNode.getName().equals(newName) && oldExoTitle.equals(newExoTitle)) {
         return Response.status(HTTPStatus.BAD_REQUEST).build();
       }
@@ -169,7 +173,7 @@ public class RenameConnector implements ResourceContainer {
           destNode.addMixin("exo:modify");
         }
         destNode.setProperty("exo:lastModifier", nodeSession.getUserID());
-
+        
         // Update exo:name
         if(renamedNode.canAddMixin("exo:sortable")) {
           renamedNode.addMixin("exo:sortable");

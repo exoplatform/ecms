@@ -871,7 +871,8 @@ public class CmsServiceImpl implements CmsService {
    */
   private void processProperty(Property property, Node node, int requiredtype,
       Object value, boolean isMultiple) throws Exception {
-  	String nodeUUID = node.getUUID();  	
+  	String nodeUUID = "";
+  	if(node.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) nodeUUID = node.getUUID();  	
     String propertyName = property.getName() ;
     String updatedProperty = nodeUUID + "_" + propertyName;
     if(isMultiple) properties.put(updatedProperty, property.getValues());
