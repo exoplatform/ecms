@@ -111,7 +111,9 @@ public class RenameConnector implements ResourceContainer {
                                                                  : StringUtils.EMPTY;
       CmsService cmsService = WCMCoreUtils.getService(CmsService.class);
       cmsService.getPreProperties().clear();
-      cmsService.getPreProperties().put(renamedNode.getUUID() + "_" + "exo:name", oldExoTitle);
+      String nodeUUID = "";
+      if(renamedNode.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) nodeUUID = renamedNode.getUUID();
+      cmsService.getPreProperties().put(nodeUUID + "_" + "exo:title", oldExoTitle);
       
       if (renamedNode.getName().equals(newName) && oldExoTitle.equals(newExoTitle)) {
         return Response.status(HTTPStatus.BAD_REQUEST).build();
