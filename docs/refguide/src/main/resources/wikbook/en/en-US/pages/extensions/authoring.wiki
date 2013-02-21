@@ -526,7 +526,7 @@ For example, *Different Contexts*:
 	</component-plugin>
 </external-component-plugins>{code}
 
-The logic is very simple. When creating a content, it should be attached a lifecycle with the lifecyle priority:
+The logic is very simple. When creating a content, it should be attached a lifecycle with the lifecycle priority:
 * _context4_ is the most important (priority=50): you will enroll the content in the lifecycle "lifecycle4" if:
 ** The content creator has the _manager\:/company/finances_ membership.
 ** The content is stored in _repository\:collaboration\:/documents/company/finances_ or any subfolders.
