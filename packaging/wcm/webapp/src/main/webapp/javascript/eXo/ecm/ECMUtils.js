@@ -1639,7 +1639,7 @@
 			uploadProgressTimer = setInterval(function() {
 				var percent = gj("div.uploadContainer").find('div.percent').text();
 				if (percent == "100%") {
-					//gj("div.uploadButton").unbind(e);
+					gj("div.uploadButton").unbind(e);
 					clearInterval(uploadProgressTimer);
 					
 					// Request preview
