@@ -174,16 +174,16 @@
   <UIPreferencesForm>
     <title>Préférences</title>
     <label>
-      <enableStructure>Activer Structure DMS</enableStructure>
-      <showSideBar>Afficher le panneau latéral</showSideBar>
-      <showHiddenNode>Afficher les éléments cachés</showHiddenNode>
-      <showNonDocument>Afficher les "non documents"</showNonDocument>
-      <showRefDocuments>Afficher les documents référencés</showRefDocuments>
+      <enableStructure>Activer Structure DMS:</enableStructure>
+      <showSideBar>Afficher le panneau latéral:</showSideBar>
+      <showHiddenNode>Afficher les éléments cachés:</showHiddenNode>
+      <showNonDocument>Afficher les "non documents":</showNonDocument>
+      <showRefDocuments>Afficher les documents référencés:</showRefDocuments>
       <showItemsByUserInTimeline>Afficher les éléments chronologiquement par utilisateur</showItemsByUserInTimeline>
-      <enableDragAndDrop>Activer le glisser-déposer</enableDragAndDrop>
-      <sortBy>Trier par</sortBy>
+      <enableDragAndDrop>Activer le glisser-déposer:</enableDragAndDrop>
+      <sortBy>Trier par:</sortBy>
       <order>Ordre</order>
-      <nodesPerPage>Noeuds par page</nodesPerPage>
+      <nodesPerPage>Noeuds par page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -3225,7 +3225,7 @@
 
   <UIPreferencesForm>
   		<label>
-						<queryType>Type de Requête</queryType>
+						<queryType>Type de Requête:</queryType>
 						<SQL>SQL</SQL>
 						<XPATH>XPATH</XPATH>
   		</label>

@@ -175,16 +175,16 @@
   <UIPreferencesForm>
     <title>Set up your browsing preferences</title>
     <label>
-      <enableStructure>Enable DMS Structure</enableStructure>
-      <showSideBar>Show Sidebar</showSideBar>
-      <showHiddenNode>Show Hidden Nodes</showHiddenNode>
-      <showNonDocument>Show Non-document Nodes</showNonDocument>
-      <showRefDocuments>Show Referenced Documents</showRefDocuments>
+      <enableStructure>Enable DMS Structure:</enableStructure>
+      <showSideBar>Show Sidebar:</showSideBar>
+      <showHiddenNode>Show Hidden Nodes:</showHiddenNode>
+      <showNonDocument>Show Non-document Nodes:</showNonDocument>
+      <showRefDocuments>Show Referenced Documents:</showRefDocuments>
       <showItemsByUserInTimeline>Show items by user in Timeline View</showItemsByUserInTimeline>
-      <enableDragAndDrop>Enable Drag &amp; Drop</enableDragAndDrop>
-      <sortBy>Sort by</sortBy>
+      <enableDragAndDrop>Enable Drag &amp; Drop:</enableDragAndDrop>
+      <sortBy>Sort by:</sortBy>
       <order>Order by</order>
-      <nodesPerPage>Nodes Per Page</nodesPerPage>
+      <nodesPerPage>Nodes Per Page:</nodesPerPage>
     </label>
     <action>
       <Back>#{word.close}</Back>
@@ -3214,7 +3214,7 @@
 
   <UIPreferencesForm>
       <label>
-            <queryType>Query Type</queryType>
+            <queryType>Query Type:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>

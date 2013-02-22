@@ -177,12 +177,12 @@
   <UIPreferencesForm>
     <title>Thiết lập hiển thị</title>
     <label>
-      <enableStructure>Hiển thị cấu trúc DMS</enableStructure>
-      <showSideBar>Hiển thị sidebar.</showSideBar>
-      <showHiddenNode>Hiển thị các node ẩn</showHiddenNode>
-      <showNonDocument>Hiển thị các node không phải kiểu tài liệu</showNonDocument>
-      <showRefDocuments>Hiển thị các tài liệu được tham chiếu</showRefDocuments>
-      <sortBy>Xắp xếp theo</sortBy>
+      <enableStructure>Hiển thị cấu trúc DMS:</enableStructure>
+      <showSideBar>Hiển thị sidebar:</showSideBar>
+      <showHiddenNode>Hiển thị các node ẩn:</showHiddenNode>
+      <showNonDocument>Hiển thị các node không phải kiểu tài liệu:</showNonDocument>
+      <showRefDocuments>Hiển thị các tài liệu được tham chiếu:</showRefDocuments>
+      <sortBy>Xắp xếp theo:</sortBy>
       <order>Thứ tự</order>
       <nodesPerPage>Số node trên một trang</nodesPerPage>
     </label>
@@ -3234,7 +3234,7 @@
 
   <UIPreferencesForm>
   		<label>
-						<queryType>Kiểu truy vấn</queryType>
+						<queryType>Kiểu truy vấn:</queryType>
 						<SQL>SQL</SQL>
 						<XPATH>XPATH</XPATH>
   		</label>
