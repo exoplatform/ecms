@@ -22,63 +22,64 @@
 	}
   jsManager.require("SHARED/content-selector", "selector").
   addScripts("selector.ECS.loadListContent(\""+itemPaths+"\", \"" +itemTargetPath +"\");");%>
-<div id="$uicomponent.id" class="UIWCMSearchContainer $uicomponent.id">
-	<div class="ActionBar ClearFix">
-		<div class="FilterTitle"><label for="Filter">Filter</label></div>
-		<div class="FilterInput">
-			<select onchange="eXo.ecm.ECS.changeFilter();" id="Filter" class="Filter" action="<%= uicomponent.event("ChangeContentType") %>">
-				<option selected="selected" value="All">All</option>
-				<option value="Web Contents">Web Contents</option>
-				<option value="DMS Documents">DMS Documents</option>
-				<option value="Medias">Medias</option>
-			</select>
+<div id="$uicomponent.id" class="UIWCMSearchContainer resizable $uicomponent.id">
+	<div class="actionBar form-horizontal">
+		<div class="control-group">
+			<label class="control-label" for="Filter">Filter</label>
+			<div class="controls">
+				<span class="uiSelectbox">
+					<select onchange="eXo.ecm.ECS.changeFilter();" id="Filter" class="selectbox filter" action="<%= uicomponent.event("ChangeContentType") %>">
+						<option selected="selected" value="All">All</option>
+						<option value="Web Contents">Web Contents</option>
+						<option value="DMS Documents">DMS Documents</option>
+						<option value="Medias">Medias</option>
+					</select>
+				</span>
+			</div>
 		</div>
-		<div class="SeparatorLineL"><span></span></div>
-		
 	</div>
-	<div class="BreadcumbsPortlet">
-		<div class="HomeIcon"><span></span></div> 
-		<div id="BreadcumbsContainer" class="BreadcumbsContainer"></div>
-	</div>
-	<div class="ListContainer ClearFix">
-		<div class="LeftWorkspace" id="LeftWorkspace">
+	<div class="breadcumbsPortlet breadcumbsContainer clearfix" id="BreadcumbsContainer"></div>
+	<div class="listContainer clearfix">
+		<div class="leftWorkspace" id="LeftWorkspace">
 			<div class ="LoadingProgress"><span></span></div>
 		</div>
-		<div class="RightWorkspace" id="RightWorkspace" action="<%= uicomponent.event("Select") %>" actionSaveTemp="<%= uicomponent.event("SaveTemporary") %>">
-			<div class="MultiListContainer">
-				<div class="ListView">
-		  			<table cellspacing="0" style="table-layout: fixed; width: 100%; *width: 96%;" id="ListRecords">
+		<div class="rightWorkspace" id="RightWorkspace" action="<%= uicomponent.event("Select") %>" actionSaveTemp="<%= uicomponent.event("SaveTemporary") %>">
+			<div class="multiListContainer">
+				<div class="listView">
+		  			<table class="uiGrid table table-hover table-striped" id="ListRecords">
 		    			<thead>
 		    				<tr>
-			    		  		<th class="THBar"> Name </th>
+			    		  		<th> Name </th>
 			    	 		</tr>
 				    	</thead>
-			    		<tr>
-				    		<td class="Item TRNoContent">There is no content</td>
-		    			</tr>
+				    	<tbody>
+								<tr>
+									<td class="item noContent">There is no content</td>
+								</tr>
+		    			</tbody>
 		  			</table>
 				</div>
-				<div class="ListFileContainer">
-		  			<table cellspacing="0" style="table-layout: fixed; width: 100%; *width: 96%;" id="ListFilesContent">
+				<div class="listFileContainer">
+		  			<table class="uiGrid table table-hover table-striped" id="ListFilesContent">
 		    			<thead>
 		    				<tr>
-			    		  		<th class="THBar"> List Content </th>
-			    		  		<th width='60px' class="THBar"> Action </th>
+			    		  		<th> List Content </th>
+			    		  		<th width='60px'> Action </th>
 			    	 		</tr>
 				    	</thead>
 			    		<tr>
-				    		<td class="Item TRNoContent">There is no file</td>
-				    		<td class="Item"></td>
+				    		<td class="item noContent">There is no file</td>
+				    		<td class="item"></td>
 		    			</tr>
 		  			</table>
 				</div>
 				<div class="PageIterator" id="pageNavPosition"></div>
 			</div>
 		</div>
-		<div class="UIAction">
-	      <a href="#" class="ActionButton LightBlueStyle" onclick="eXo.ecm.ECS.insertMultiContent();"><%=uicomponent.getLocaleMsg("UIContentBrowsePanelMulti.action.Save")%></a>    
-	      <a href="#" class="ActionButton LightBlueStyle" onclick="<%= uicomponent.event("Close") %>"><%=uicomponent.getLocaleMsg("UIContentBrowsePanelMulti.action.Cancel")%></a>          
-	    </div>
+		<div class="uiAction">
+			<button type="button" href="#" class="btn" onclick="eXo.ecm.ECS.insertMultiContent();"><%=uicomponent.getLocaleMsg("UIContentBrowsePanelMulti.action.Save")%></button>    
+			<button type="button" href="#" class="btn" onclick="<%= uicomponent.event("Close") %>"><%=uicomponent.getLocaleMsg("UIContentBrowsePanelMulti.action.Cancel")%></button>          
+		</div>
 		
 	</div>
 </div>

@@ -19,10 +19,10 @@
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
   String repositoryName = rService.getCurrentRepository().getConfiguration().getName();  
 %>
-<div id="$uicomponent.id">
+<div id="$uicomponent.id" class="uiContentSearchResult">
   <table class="uiGrid table table-hover table-striped" cellspacing="0">
     <thead>
-      <tr class="UIWCMSearchContent">
+      <tr class="uiWCMSearchContent">
         <%
 	        int count = 0;
         		for(field in beanFields) {

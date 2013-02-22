@@ -12,53 +12,100 @@
   addScripts("clv.CLV.setHiddenValue();");
 %>
 
-<div class="$uicomponent.id">
+<div class="uiContentSearchForm">
   <%uiform.begin();%>
-    <div class="ContentSearchForm">
-    <span><label for="<%=uicomponent.LOCATION%>"><%= _ctx.appRes("UIContentSearchForm.title.Location")%>: </label></span> <%uiform.renderField(uiform.getChildById(uicomponent.LOCATION));%>
+	<div class="form-horizontal resizable">
+    <div class="control-group">
+			<div class="control-label" for="<%=uicomponent.LOCATION%>">
+				<%= _ctx.appRes("UIContentSearchForm.title.Location")%>:
+			</div>
+			<div class="controls"><%uiform.renderField(uiform.getChildById(uicomponent.LOCATION));%></div>
     </div>
     <input type="hidden" class="hidden" id="<%=uicomponent.CHECKED_RADIO_ID%>" name="<%=uicomponent.CHECKED_RADIO_ID%>" />
-    <div class="ContentSearchForm"> 
-      <input type="radio" checked="checked" class="radioboxes" id="<%=uicomponent.SEARCH_BY_NAME%>" name="<%=uicomponent.RADIO_NAME%>" value="<%=uicomponent.SEARCH_BY_NAME%>"/>
-      <span><%= _ctx.appRes("UIContentSearchForm.title.SearchByName")%></span> <%uiform.renderField(uiform.getChildById(uicomponent.SEARCH_BY_NAME));%>
+    <div class="control-group"> 
+      <div class="control-label">
+				<label class="uiRadio">
+					<input type="radio" checked="checked" class="radio" id="<%=uicomponent.SEARCH_BY_NAME%>" name="<%=uicomponent.RADIO_NAME%>" value="<%=uicomponent.SEARCH_BY_NAME%>" />
+					<span></span>
+				</label>
+			</div>
+      <div class="controls">
+				<label class="txt"><%= _ctx.appRes("UIContentSearchForm.title.SearchByName")%></label> 
+				<%uiform.renderField(uiform.getChildById(uicomponent.SEARCH_BY_NAME));%>
+			</div>
     </div>
 
-    <div class="ContentSearchForm">		 
-      <input type="radio" class="radioboxes" id="<%=uiform.SEARCH_BY_CONTENT%>" name="<%=uicomponent.RADIO_NAME%>" value="<%=uicomponent.SEARCH_BY_CONTENT%>"/>
-      <span><%= _ctx.appRes("UIContentSearchForm.title.Fulltext")%>:</span> <%uiform.renderField(uiform.getChildById(uicomponent.SEARCH_BY_CONTENT));%>
+    <div class="control-group">		 
+      <div class="control-label">
+				<label class="uiRadio">
+					<input type="radio" class="radio radioboxes" id="<%=uiform.SEARCH_BY_CONTENT%>" name="<%=uicomponent.RADIO_NAME%>" value="<%=uicomponent.SEARCH_BY_CONTENT%>"/>
+					<span></span>
+				</label>
+			</div>
+      <div class="controls">
+				<label class="txt"><%= _ctx.appRes("UIContentSearchForm.title.Fulltext")%>:</label> 
+				<%uiform.renderField(uiform.getChildById(uicomponent.SEARCH_BY_CONTENT));%>
+			</div>
     </div>
 
-    <div class="ContentSearchForm">
-      <input type="radio" class="radioboxes" id="<%=uicomponent.PROPERTY%>" name="<%=uicomponent.RADIO_NAME%>" value="<%=uicomponent.PROPERTY%>"/>
-      <label class="Label"><span><%= _ctx.appRes("UIContentSearchForm.title.Property")%>:</span></label> <%uiform.renderField(uiform.getChildById(uicomponent.PROPERTY));%>
-      <img class="IconConstraint AddMetadataTypeIcon" onclick="<%=uicomponent.event("AddMetadataType")%>" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%= _ctx.appRes("UIContentSearchForm.tooltip.AddMetadataType")%>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIContentSearchForm.tooltip.AddMetadataType")%>" />
-      <label calss="Label"><span><%= _ctx.appRes("UIContentSearchForm.title.Contain")%> :</span> </label> <%uiform.renderField(uiform.getChildById(uicomponent.CONTAIN));%>
+    <div class="control-group">
+      <div class="control-label">
+				<label class="uiRadio">
+					<input type="radio" class="radio" id="<%=uicomponent.PROPERTY%>" name="<%=uicomponent.RADIO_NAME%>" value="<%=uicomponent.PROPERTY%>"/>
+					<span></span>
+				</label>
+			</div>
+      <div class="controls inputGroup">
+				<label class="txt"><%= _ctx.appRes("UIContentSearchForm.title.Property")%>:</label> 
+				<%uiform.renderField(uiform.getChildById(uicomponent.PROPERTY));%>
+				<i class="uiIconPlus" onclick="<%=uicomponent.event("AddMetadataType")%>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIContentSearchForm.tooltip.AddMetadataType")%>"></i>
+				<label class="txt"><%= _ctx.appRes("UIContentSearchForm.title.Contain")%> :</label> 
+				<%uiform.renderField(uiform.getChildById(uicomponent.CONTAIN));%>
+			</div>
     </div>
  
-    <div class="ContentSearchForm ClearFix">
-      <input style="float:left;" type="radio" class="radioboxes" id="<%=uicomponent.TIME_OPTION%>" name="<%=uicomponent.RADIO_NAME%>" value="<%=uicomponent.TIME_OPTION%>"/>
-      <div style="float:left;"><%uiform.renderField(uiform.getChildById(uicomponent.TIME_OPTION));%> </div>
-      <span class="TitleTextBox"><%= _ctx.appRes("UIContentSearchForm.title.FromDate")%></span>
-      <div class="DateInput"><%uiform.renderField(uiform.getChildById(uicomponent.START_TIME));%></div>
-      <span class="TitleTextBox"><%= _ctx.appRes("UIContentSearchForm.title.ToDate")%></span>
-      <div class="DateInput"><%uiform.renderField(uiform.getChildById(uicomponent.END_TIME));%></div>
-	  	
+    <div class="control-group">
+      <div class="control-label">
+				<label class="uiRadio">
+					<input type="radio" class="radio" id="<%=uicomponent.TIME_OPTION%>" name="<%=uicomponent.RADIO_NAME%>" value="<%=uicomponent.TIME_OPTION%>"/>
+					<span></span>
+				</label>
+			</div>
+      <div class="controls clearfix">
+				<div><%uiform.renderField(uiform.getChildById(uicomponent.TIME_OPTION));%></div>
+				<div class="dateInput pull-left">
+					<label class="txt"><%= _ctx.appRes("UIContentSearchForm.title.FromDate")%></label>
+					<%uiform.renderField(uiform.getChildById(uicomponent.START_TIME));%>
+				</div>
+				<div class="dateInput pull-left">
+					<label class="txt"><%= _ctx.appRes("UIContentSearchForm.title.ToDate")%></label>
+					<%uiform.renderField(uiform.getChildById(uicomponent.END_TIME));%>
+				</div>
+			</div>
     </div>
  
-    <div class="ContentSearchForm">
-      <input type="radio" class="radioboxes" id="<%=uicomponent.DOC_TYPE%>" name="<%=uicomponent.RADIO_NAME%>" value="<%=uicomponent.DOC_TYPE%>"/>
-      <span><%= _ctx.appRes("UIContentSearchForm.title.DocumentType")%>:</span>
-      <%uiform.renderField(uiform.getChildById(uicomponent.DOC_TYPE));%>
-      <img class="IconConstraint AddMetadataTypeIcon" onclick="<%=uicomponent.event("AddNodeType")%>" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%= _ctx.appRes("UIContentSearchForm.tooltip.AddNodeType")%>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIContentSearchForm.tooltip.AddNodeType")%>" />
+    <div class="control-group">
+      <div class="control-label">
+				<label class="uiRadio">
+					<input type="radio" class="radio" id="<%=uicomponent.DOC_TYPE%>" name="<%=uicomponent.RADIO_NAME%>" value="<%=uicomponent.DOC_TYPE%>"/>
+					<span></span>
+				</label>
+			</div>
+      <div class="controls">
+				<label class="txt"><%= _ctx.appRes("UIContentSearchForm.title.DocumentType")%>:</label>
+				<%uiform.renderField(uiform.getChildById(uicomponent.DOC_TYPE));%>
+				<i class="uiIconPlus" onclick="<%=uicomponent.event("AddNodeType")%>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIContentSearchForm.tooltip.AddNodeType")%>"></i>
+			</div>
     </div>
      
-      <div class="UIAction">
-            <% for(action in uicomponent.getActions()) { 
-              String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
-              String link = uicomponent.event(action) ;
-            %>
-            <a onclick="$link" class="ActionButton LightBlueStyle" href="javascript:void(0);">$actionLabel</a>
-            <%}%>
-           </div> 
-   <%uiform.end();%>
+		<div class="uiAction">
+				<% for(action in uicomponent.getActions()) { 
+					String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
+					String link = uicomponent.event(action) ;
+				%>
+				<button onclick="$link" type="button" class="btn" href="javascript:void(0);">$actionLabel</button>
+				<%}%>
+		</div> 
+	</div> 
+  <%uiform.end();%>
 </div>

@@ -18,40 +18,43 @@
 	}
 %>
 
-<div id="$uicomponent.id" class="UIWCMSearchContainer $uicomponent.id  ClearFix">
-	<div class="ActionBar ClearFix">
-	  <div class="FilterTitle"><label for="Filter">Filter</label></div>
-		<div class="FilterInput">
-			<select onchange="eXo.ecm.ECS.changeFilter();" id="Filter" class="Filter">
-				<option selected="selected" value="Web Contents">Web Contents</option>
-				<option value="DMS Documents">DMS Documents</option>
-				<option value="Medias">Medias</option>
-			</select>
+<div id="$uicomponent.id" class="UIWCMSearchContainer resizable $uicomponent.id">
+	<div class="actionBar form-horizontal">
+		<div class="control-group">
+			<label class="control-label" for="Filter">Filter</label>
+			<div class="controls">
+				<span class="uiSelectbox">
+					<select onchange="eXo.ecm.ECS.changeFilter();" id="Filter" class="selectbox filter">
+						<option selected="selected" value="Web Contents">Web Contents</option>
+						<option value="DMS Documents">DMS Documents</option>
+						<option value="Medias">Medias</option>
+					</select>
+				</span>
+			</div>
 		</div>
-		<div class="SeparatorLineL"><span></span></div>
-		
 	</div>
-	<div class="BreadcumbsPortlet">
-		<div class="HomeIcon"><span></span></div> 
-		<div id="BreadcumbsContainer" class="BreadcumbsContainer"></div>
-	</div>
-	<div class="LeftWorkspace" id="LeftWorkspace">
-		<div class ="LoadingProgress"><span></span></div>
-	</div>
-	<div class="RightWorkspace" id="RightWorkspace" action="<%= uicomponent.event("Select") %>">
-		<div class="ListView">
-		  	<table cellspacing="0" style="table-layout: fixed; width: 100%; *width: 96%;" id="ListRecords">
-		    	<thead>
-		    		<tr>
-		    		  <th class="THBar" > Name </th>
-		    	 	</tr>
-		    	</thead>
-		    	<tr>
-		    		<td class="Item TRNoContent">There is no content</td>
-		    	</tr>
-		  	</table>
+	<div class="breadcumbsPortlet breadcumbsContainer clearfix" id="BreadcumbsContainer"></div>
+	<div class="listContainer clearfix">
+		<div class="leftWorkspace" id="LeftWorkspace">
+			<div class ="LoadingProgress"><span></span></div>
 		</div>
-		<div class="PageIterator" id="pageNavPosition"></div>
-	</div>	
+		<div class="rightWorkspace" id="RightWorkspace" action="<%= uicomponent.event("Select") %>">
+			<div class="listView">
+					<table class="uiGrid table table-hover table-striped" id="ListRecords">
+						<thead>
+							<tr>
+								<th> Name </th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="item noContent">There is no content</td>
+							</tr>
+						</tbody>
+					</table>
+			</div>
+			<div class="PageIterator" id="pageNavPosition"></div>
+		</div>
+	</div>
 	
 </div>

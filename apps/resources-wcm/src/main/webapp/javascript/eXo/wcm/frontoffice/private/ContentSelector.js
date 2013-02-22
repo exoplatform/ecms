@@ -393,12 +393,12 @@
 		var breadcrumbContainer = document.getElementById("BreadcumbsContainer");
 		breadcrumbContainer.innerHTML = '';
 		var beforeNode = null;
-		while(currentNode.className != "LeftWorkspace") {
+		while(currentNode.className != "leftWorkspace") {
 			var curName = currentNode.getAttribute('name');
 			var label = currentNode.getAttribute('title');
 			if(curName) {
 				var tmpNode = document.createElement("div");	
-				tmpNode.className = 'BreadcumbTab';
+				tmpNode.className = 'breadcumbTab';
 				var strHTML = '';
 				var strOnclick = '';
 				var node = document.getElementById(currentNode.id);
@@ -408,12 +408,12 @@
 					strOnclick = "eXo.ecm.ECS.actionBreadcrumbs('"+node.id+"');";		
 				}
 				if(beforeNode == null) {
-					strHTML += '<a class="Nomal" href="javascript:void(0);" onclick="'+strOnclick+'">'+decodeURIComponent(label)+'</a>';
+					strHTML += '<a class="active" href="javascript:void(0);" onclick="'+strOnclick+'">'+decodeURIComponent(label)+'</a>';
 					tmpNode.innerHTML = strHTML;
 					breadcrumbContainer.appendChild(tmpNode);
 				} else {
-					strHTML += '<a class="Nomal" href="javascript:void(0);" onclick="'+strOnclick+'">'+decodeURIComponent(label)+'</a>';
-					strHTML += '<div class="RightArrowIcon"><span></span></div>';
+					strHTML += '<a class="normal" href="javascript:void(0);" onclick="'+strOnclick+'">'+decodeURIComponent(label)+'</a>';
+					strHTML += '<i class="uiIconArrowRightMini"></i>';
 					tmpNode.innerHTML = strHTML;
 					breadcrumbContainer.insertBefore(tmpNode, beforeNode);
 				}
@@ -537,8 +537,8 @@
 	        var tblRWS  = gj(rightWS).find("table")[0];
 					var clazzItem = eXo.ecm.ECS.getClazzIcon(list[i].getAttribute("nodeType"));
 					var newRow = tblRWS.insertRow(i+1);
-					newRow.className = clazz;					
-					newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.insertContent(this);">'+decodeURIComponent(node)+'</a>';
+					newRow.className = clazz;
+					newRow.insertCell(0).innerHTML = '<a url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.insertContent(this);">'+decodeURIComponent(node)+'</a>';
 					newRow.insertCell(1).innerHTML = '<div class="Item">'+ list[i].getAttribute("dateCreated") +'</div>';
 					newRow.insertCell(2).innerHTML = '<div class="Item">'+ size +'</div>';
 				} else {				  
@@ -1079,7 +1079,7 @@
 		var actionBaroffsetHeight = 0;
 		if(actionBar)
 		  actionBaroffsetHeight = actionBar.offsetHeight;
-		var breadcumbsPortlet = gj(uiWorkingWorkspace).find("div.BreadcumbsPortlet:first")[0];
+		var breadcumbsPortlet = gj(uiWorkingWorkspace).find("div.breadcumbsPortlet:first")[0];
 		leftWS.style.height = windowHeight - (titleBar.offsetHeight + actionBaroffsetHeight + breadcumbsPortlet.offsetHeight + 55) + "px";
 		if(rightWS)
 		  rightWS.style.height = windowHeight - (titleBar.offsetHeight + actionBaroffsetHeight + breadcumbsPortlet.offsetHeight + 55) + "px";
@@ -1132,7 +1132,7 @@
 		initDrive = initDrive.replace(/ /g, "");
 		initPath = initPath.replace(/ /g, "");
 		var contentBrowsePanel = document.getElementById(componentId);
-		var leftWorkspace = gj(contentBrowsePanel).find("div.LeftWorkspace")[0];
+		var leftWorkspace = gj(contentBrowsePanel).find("div.leftWorkspace")[0];
 		var tagADrives = gj(leftWorkspace).find("a");
 		for (var i = 0; i < tagADrives.length; ++i) {
 			if (tagADrives[i].getAttribute("id")) {
