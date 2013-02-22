@@ -137,6 +137,7 @@ public class ActivityCommonService {
   
   public Node isSpecialContentNodeType(Item item) {
     String webSpecialContentPath = "default.html/jcr:content/jcr:data";
+    String specialSummaryCase    = "jcr:content/dc:description";
     String path;
     try {
       path = item.getPath();
@@ -147,6 +148,13 @@ public class ActivityCommonService {
       try {
         Node node = (Node) item.getParent().getParent().getParent();
         if (node.isNodeType(WEB_CONTENT)) return node;
+      }catch (Exception e) {
+        return null;
+      }
+    }else if (path.endsWith(specialSummaryCase)){
+      try {
+        Node node = (Node) item.getParent().getParent();
+        if (isDocumentNodeType(node)) return node;
       }catch (Exception e) {
         return null;
       }
