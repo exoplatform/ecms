@@ -84,11 +84,25 @@ public class BaseSearchTest extends BaseECMSTestCase {
   }
 
   protected void addDocuments() throws Exception {
-    Node classicPortal = (Node)session.getItem("/sites content/live/classic/web contents");
+    Node classicPortal = getNode("sites content/live/classic/web contents");
     addChildNodes(classicPortal);
 
-    Node sharedPortal = (Node)session.getItem("/sites content/live/shared/documents");
+    Node sharedPortal = getNode("sites content/live/shared/documents");
     addChildNodes(sharedPortal);
+  }
+  
+  protected Node getNode(String path) throws Exception {
+    Node root = session.getRootNode();
+    for (String name : path.split("/")) {
+      if (root.hasNode(name)) {
+        root = root.getNode(name);
+      } else {
+        Node tmp = root.addNode(name);
+        session.save();
+        root = tmp;
+      }
+    }
+    return root;
   }
 
   protected void addChildNodes(Node parentNode)throws Exception{
