@@ -88,6 +88,18 @@ public class QueryCriteria {
 
   /** The starting offset */
   private long offset = -1;
+  
+  /** The search limit */
+  private long limit = -1;
+  
+  /** Sort by value */
+  private String sortBy_ = null;
+  
+  /** order by */
+  private String orderBy_ = null;
+  
+  /** multiple search enable/disable */
+  private boolean multipleSearch_ = false;
 
   /** Pagination mode :
    * - none : no pagination
@@ -103,13 +115,25 @@ public class QueryCriteria {
     this.pageMode = pageMode;
   }
 
-  public long getOffset() {
-    return offset;
-  }
+  public long getOffset() { return offset; }
 
-  public void setOffset(long offset) {
-    this.offset = offset;
-  }
+  public void setOffset(long offset) { this.offset = offset; }
+  
+  public long getLimit() { return limit; }
+  
+  public void setLimit(long value) { this.limit = value; }
+  
+  public String getSortBy() { return sortBy_; }
+  
+  public void setSortBy(String value) { sortBy_ = value; }
+  
+  public String getOrderBy() { return orderBy_; }
+  
+  public void setOrderBy(String value) { orderBy_ = value; }
+  
+  public boolean isMultiplePhaseSearch() { return multipleSearch_; }
+  
+  public void setMultiplePhaseSearch(boolean value) { multipleSearch_ = value; }
   
   /**
    * Checks if is live mode.

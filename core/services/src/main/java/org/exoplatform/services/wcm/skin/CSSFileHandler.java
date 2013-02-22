@@ -127,7 +127,7 @@ public class CSSFileHandler extends BaseWebSchemaHandler {
     WebSchemaConfigService schemaConfigService = WCMCoreUtils.getService(WebSchemaConfigService.class);
     PortalFolderSchemaHandler schemaHandler = schemaConfigService.getWebSchemaHandlerByType(PortalFolderSchemaHandler.class);
     Node cssFolder = schemaHandler.getCSSFolder(portal);
-    return file.getPath().startsWith(cssFolder.getPath());
+    return cssFolder == null ? false : file.getPath().startsWith(cssFolder.getPath());
   }
 
   /*

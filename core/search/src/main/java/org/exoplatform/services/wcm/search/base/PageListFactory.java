@@ -32,8 +32,10 @@ import javax.jcr.query.Row;
 import javax.jcr.query.RowIterator;
 
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -53,7 +55,8 @@ public class PageListFactory {
                                                        NodeSearchFilter filter,
                                                        SearchDataCreator<E> dataCreator,
                                                        int pageSize,
-                                                       int bufferSize) throws LoginException,
+                                                       int bufferSize,
+                                                       QueryCriteria criteria) throws LoginException,
                                                                       NoSuchWorkspaceException,
                                                                       RepositoryException {
     if (pageSize == 0) {
@@ -67,6 +70,9 @@ public class PageListFactory {
     Session session = sessionProvider.getSession(workspace, WCMCoreUtils.getRepository());
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     Query query = queryManager.createQuery(queryStatement, language);
+    if (criteria != null) {
+      if (criteria.getOffset() > 0) { ((QueryImpl)query).setOffset(criteria.getOffset()); }
+    }
     QueryResult result = query.execute();
     int totalNodes = (int)result.getNodes().getSize();
     if (totalNodes <= AbstractPageList.RESULT_SIZE_SEPARATOR) {
@@ -76,6 +82,21 @@ public class PageListFactory {
       QueryResultPageList<E> ret = new QueryResultPageList<E>(pageSize, queryData, totalNodes, bufferSize, filter, dataCreator);
       return ret;        
     }
+  }
+  
+  public static <E> AbstractPageList<E> createPageList(String queryStatement,
+                                                       String workspace,
+                                                       String language,
+                                                       boolean isSystemSession,
+                                                       NodeSearchFilter filter,
+                                                       SearchDataCreator<E> dataCreator,
+                                                       int pageSize,
+                                                       int bufferSize) throws LoginException,
+                                                                      NoSuchWorkspaceException,
+                                                                      RepositoryException {
+    return createPageList(queryStatement, workspace, language,
+                           isSystemSession, filter, dataCreator,
+                           pageSize, bufferSize, null);
   }
   
   public static <E> AbstractPageList<E> createPageList(String queryStatement,
