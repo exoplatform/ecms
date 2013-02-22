@@ -73,6 +73,7 @@ public class ViewConfig {
     
     private String tabName ;
     private String buttons ;
+    private String localizeButtons;
 
     public Tab() {}
 
@@ -81,6 +82,9 @@ public class ViewConfig {
 
     public String getButtons() { return this.buttons ; }
     public void setButtons( String buttons) { this.buttons = buttons ; }
+    
+    public String getLocalizeButtons() { return this.localizeButtons ; }
+    public void setLocalizeButtons(String buttons) { this.localizeButtons = buttons ; }    
 
   }
 }

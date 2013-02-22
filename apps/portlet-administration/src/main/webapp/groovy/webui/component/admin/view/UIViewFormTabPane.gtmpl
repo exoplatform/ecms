@@ -1,7 +1,7 @@
 <%	
 	def rcontext = _ctx.getRequestContext();
 	def jsManager = rcontext.getJavascriptManager();
-	jsManager.require("SHARED/bts_tab");
+	jsManager.require("SHARED/bts_tab").require("SHARED/uiForm");
 	
 	def buttonActions = uicomponent.getActions();
  def primaryButton = uicomponent.getPrimaryButtonAction();

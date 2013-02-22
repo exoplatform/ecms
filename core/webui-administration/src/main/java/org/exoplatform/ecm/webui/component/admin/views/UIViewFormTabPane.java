@@ -16,18 +16,24 @@
  */
 package org.exoplatform.ecm.webui.component.admin.views;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.UITabPane;
+import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
+import org.exoplatform.webui.form.UIForm;
+import org.exoplatform.webui.form.UIFormInputBase;
 
 /**
  * Created by The eXo Platform SARL
@@ -36,17 +42,24 @@ import org.exoplatform.webui.event.EventListener;
  * Sep 19, 2006
  * 5:31:04 PM
  */
-@ComponentConfig(
-    template =  "app:/groovy/webui/component/admin/view/UIViewFormTabPane.gtmpl",
-    events = {
-      @EventConfig(listeners = UIViewFormTabPane.SaveActionListener.class),
-      @EventConfig(listeners = UIViewFormTabPane.RestoreActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIViewFormTabPane.CancelActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIViewFormTabPane.CloseActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIViewFormTabPane.SelectTabActionListener.class),
-      @EventConfig(listeners = UIViewForm.ChangeVersionActionListener.class, phase = Phase.DECODE)
-    }
-)
+@ComponentConfigs({
+        @ComponentConfig(
+                type = UIViewForm.class,
+                lifecycle = UIFormLifecycle.class,
+                template = "system:/groovy/webui/form/UIForm.gtmpl",
+                events = {
+                        @EventConfig(listeners = UIViewFormTabPane.SaveActionListener.class),
+                        @EventConfig(listeners = UIViewFormTabPane.RestoreActionListener.class, phase = Phase.DECODE),
+                        @EventConfig(listeners = UIViewFormTabPane.CancelActionListener.class, phase = Phase.DECODE),
+                        @EventConfig(listeners = UIViewFormTabPane.CloseActionListener.class, phase = Phase.DECODE),
+                        @EventConfig(listeners = UIViewFormTabPane.SelectTabActionListener.class, phase = Phase.DECODE),
+                        @EventConfig(listeners = UIViewForm.ChangeVersionActionListener.class, phase = Phase.DECODE)
+                }),
+        @ComponentConfig(
+                template =  "app:/groovy/webui/component/admin/view/UIViewFormTabPane.gtmpl"
+                )
+                
+})
 public class UIViewFormTabPane extends UITabPane {
   final static public String POPUP_PERMISSION = "PopupViewPermission" ;
 
@@ -90,10 +103,10 @@ public class UIViewFormTabPane extends UITabPane {
   }  
 
   public UIViewFormTabPane() throws Exception {
-  	UIViewForm uiViewForm = addChild(UIViewForm.class, null, null) ;
-  	addChild(UITabList.class, null, null);
-  	addChild(UIViewPermissionContainer.class, null, null);
-  	setSelectedTab(uiViewForm.getId()) ;
+    UIViewForm uiViewForm = addChild(UIViewForm.class, null, null) ;
+    addChild(UITabList.class, null, null);
+    addChild(UIViewPermissionContainer.class, null, null);
+    setSelectedTab(uiViewForm.getId()) ;
   }
 
   public String getLabel(ResourceBundle res, String id)  {
@@ -106,15 +119,21 @@ public class UIViewFormTabPane extends UITabPane {
   
   public void update(boolean isUpdate) {
     isUpdate_ = isUpdate;
+    getChild(UIViewPermissionContainer.class).update(isUpdate);
   }
+  
+  public void view(boolean isView) {
+    getChild(UITabList.class).view(isView);
+    getChild(UIViewPermissionContainer.class).view(isView);
+  }  
   
   public boolean isUpdate() {
     return isUpdate_;
   }
 
-  static  public class SaveActionListener extends EventListener<UIViewFormTabPane> {
-    public void execute(Event<UIViewFormTabPane> event) throws Exception {
-      UIViewFormTabPane uiViewTabPane = event.getSource();
+  static  public class SaveActionListener extends EventListener<UIViewForm> {
+    public void execute(Event<UIViewForm> event) throws Exception {
+      UIViewFormTabPane uiViewTabPane = event.getSource().getParent();
       UIViewContainer uiViewContainer = uiViewTabPane.getAncestorOfType(UIViewContainer.class) ;
       uiViewTabPane.getChild(UIViewForm.class).save() ;
       UIPopupWindow uiPopup = null;
@@ -129,9 +148,9 @@ public class UIViewFormTabPane extends UITabPane {
     }
   }
 
-  static  public class CancelActionListener extends EventListener<UIViewFormTabPane> {
-    public void execute(Event<UIViewFormTabPane> event) throws Exception {
-      UIViewFormTabPane uiViewTabPane = event.getSource();
+  static  public class CancelActionListener extends EventListener<UIViewForm> {
+    public void execute(Event<UIViewForm> event) throws Exception {
+      UIViewFormTabPane uiViewTabPane = event.getSource().getParent();
       UIViewContainer uiViewContainer = uiViewTabPane.getAncestorOfType(UIViewContainer.class) ;
       UIPopupWindow uiPopup = null;
       if(uiViewTabPane.isUpdate()) {
@@ -145,27 +164,20 @@ public class UIViewFormTabPane extends UITabPane {
     }
   }
 
-  static  public class CloseActionListener extends EventListener<UIViewFormTabPane> {
-    public void execute(Event<UIViewFormTabPane> event) throws Exception {
-      UIViewFormTabPane uiViewTabPane = event.getSource();
-      uiViewTabPane.getChild(UITabForm.class).refresh(true) ;
-      uiViewTabPane.getChild(UIViewForm.class).refresh(true) ;
+  static  public class CloseActionListener extends EventListener<UIViewForm> {
+    public void execute(Event<UIViewForm> event) throws Exception {
+      UIViewFormTabPane uiViewTabPane = event.getSource().getParent();
       UIViewContainer uiViewContainer = uiViewTabPane.getAncestorOfType(UIViewContainer.class) ;
-      UIPopupWindow uiPopup = null;
-      if(uiViewTabPane.isUpdate()) {
-        uiPopup = uiViewContainer.getChildById(UIViewList.ST_EDIT);
-      } else {
-        uiPopup = uiViewContainer.getChildById(UIViewList.ST_ADD);
-      }
+      UIPopupWindow uiPopup = uiViewContainer.getChildById(UIViewList.ST_VIEW);;
       uiPopup.setShow(false);
       uiPopup.setRendered(false);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiViewContainer) ;
     }
   }
 
-  static  public class RestoreActionListener extends EventListener<UIViewFormTabPane> {
-    public void execute(Event<UIViewFormTabPane> event) throws Exception {
-      UIViewFormTabPane uiViewTabPane = event.getSource();
+  static  public class RestoreActionListener extends EventListener<UIViewForm> {
+    public void execute(Event<UIViewForm> event) throws Exception {
+      UIViewFormTabPane uiViewTabPane = event.getSource().getParent();
       UIViewForm uiViewForm = uiViewTabPane.getChild(UIViewForm.class) ;
       UITabForm uiTabForm = uiViewTabPane.getChild(UITabForm.class) ;
       uiViewForm.changeVersion() ;
@@ -201,4 +213,31 @@ public class UIViewFormTabPane extends UITabPane {
       }
     }
   } 
+  
+  public void processDecode(WebuiRequestContext context) throws Exception {
+    List<UIFormInputBase> inputs = new ArrayList<UIFormInputBase>();
+    this.findComponentOfType(inputs, UIFormInputBase.class);
+    String action = context.getRequestParameter(UIForm.ACTION);
+    for (UIFormInputBase input : inputs) {
+      if (!input.isValid()) {
+        continue;
+      }
+      String inputValue = context.getRequestParameter(input.getId());
+      if (inputValue == null || inputValue.trim().length() == 0) {
+        inputValue = context.getRequestParameter(input.getName());
+      }
+      input.decode(inputValue, context);
+    }
+    Event<UIComponent> event =  this.createEvent(action, Event.Phase.DECODE, context);
+    if (event != null) {
+      event.broadcast();
+    }
+  }
+  
+  public String event(String name) throws Exception {
+    StringBuilder b = new StringBuilder();
+    b.append("javascript:eXo.webui.UIForm.submitForm('").append("UIViewForm").append("','");
+    b.append(name).append("',true)");
+    return b.toString();
+  }  
 }

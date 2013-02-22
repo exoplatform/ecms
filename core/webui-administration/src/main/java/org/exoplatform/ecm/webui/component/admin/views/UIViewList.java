@@ -113,7 +113,7 @@ public class UIViewList extends UIPagingGrid {
       for (ViewConfig.Tab tab : view.getTabList()) {
         tabsName.add(tab.getTabName());
       }
-      ViewBean bean = new ViewBean(view.getName(), view.getPermissions(), tabsName);
+      ViewBean bean = new ViewBean(view.getName(), getFriendlyViewPermission(view.getPermissions()), tabsName);
       if (getBaseVersion(view.getName()) == null)
         continue;
       bean.setBaseVersion(getBaseVersion(view.getName()));
@@ -150,15 +150,21 @@ public class UIViewList extends UIPagingGrid {
       if(uiViewList.getViewsBean().size() == 0) {
         UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class) ;
         uiApp.addMessage(new ApplicationMessage("UIViewList.msg.access-denied", null, ApplicationMessage.WARNING)) ;
-        
         return ;
       }
       UIViewContainer uiViewContainer = uiViewList.getParent() ;
       uiViewContainer.removeChildById(UIViewList.ST_VIEW) ;
       uiViewContainer.removeChildById(UIViewList.ST_EDIT) ;
-      UIViewFormTabPane uiViewForm = uiViewContainer.createUIComponent(UIViewFormTabPane.class, null, null) ;
-      uiViewContainer.initPopup(UIViewList.ST_ADD, uiViewForm) ;
-      uiViewForm.update(false);
+      UIViewFormTabPane uiTabPane = uiViewContainer.createUIComponent(UIViewFormTabPane.class, null, null) ;
+      uiViewContainer.initPopup(UIViewList.ST_ADD, uiTabPane) ;
+      uiTabPane.update(false);
+      UIViewPermissionForm uiPermissionForm = uiTabPane.findFirstComponentOfType(UIViewPermissionForm.class);
+      UIPermissionInputSet uiPermissionInputSet = uiPermissionForm.getChildById(UIViewPermissionForm.TAB_PERMISSION);
+      for(UIComponent uiComp : uiPermissionInputSet.getChildren()) {
+        if(uiComp instanceof UICheckBoxInput) {
+          uiPermissionInputSet.removeChildById(uiComp.getId());
+        }
+      }
       UIViewManager uiManager = uiViewList.getAncestorOfType(UIViewManager.class) ;
       uiManager.setRenderedChild(UIViewContainer.class) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiViewContainer) ;
@@ -210,18 +216,6 @@ public class UIViewList extends UIPagingGrid {
       uiViewContainer.removeChildById(UIViewList.ST_ADD) ;
       UIViewFormTabPane viewTabPane = uiViewContainer.createUIComponent(UIViewFormTabPane.class, null, null) ;
       viewTabPane.update(true);
-      UIViewPermissionList uiPerList = viewTabPane.findFirstComponentOfType(UIViewPermissionList.class);
-      uiPerList.setViewName(viewName);
-      uiPerList.refresh(uiPerList.getUIPageIterator().getCurrentPage());
-      UIViewPermissionForm uiPermissionForm = viewTabPane.findFirstComponentOfType(UIViewPermissionForm.class);
-      UIPermissionInputSet uiPermissionInputSet = uiPermissionForm.getChildById(UIViewPermissionForm.TAB_PERMISSION);
-      for(UIComponent uiComp : uiPermissionInputSet.getChildren()) {
-        if(uiComp instanceof UICheckBoxInput) {
-          uiPermissionInputSet.removeChildById(uiComp.getId());
-        }
-      }
-      uiPermissionForm.setViewName(viewName);
-      uiViewContainer.initPopup(UIViewList.ST_EDIT, viewTabPane) ;
       UIViewForm viewForm = viewTabPane.getChild(UIViewForm.class) ;
       viewForm.refresh(true) ;
       viewForm.update(viewNode, false, null) ;
@@ -230,6 +224,17 @@ public class UIViewList extends UIPagingGrid {
       } else {
         viewForm.getUICheckBoxInput(UIViewForm.FIELD_ENABLEVERSION).setDisabled(false);
       }
+      UIViewPermissionList uiPerList = viewTabPane.findFirstComponentOfType(UIViewPermissionList.class);
+      uiPerList.setViewName(viewName);
+      UIViewPermissionForm uiPermissionForm = viewTabPane.findFirstComponentOfType(UIViewPermissionForm.class);
+      UIPermissionInputSet uiPermissionInputSet = uiPermissionForm.getChildById(UIViewPermissionForm.TAB_PERMISSION);
+      for(UIComponent uiComp : uiPermissionInputSet.getChildren()) {
+        if(uiComp instanceof UICheckBoxInput) {
+          uiPermissionInputSet.removeChildById(uiComp.getId());
+        }
+      }
+      uiViewContainer.initPopup(UIViewList.ST_EDIT, viewTabPane) ;
+      uiPerList.refresh(uiPerList.getUIPageIterator().getCurrentPage());
       UITabList uiTab = viewTabPane.getChild(UITabList.class);
       uiTab.setViewName(viewName);
       uiTab.refresh(uiTab.getUIPageIterator().getCurrentPage());
@@ -252,17 +257,19 @@ public class UIViewList extends UIPagingGrid {
       uiViewContainer.removeChildById(UIViewList.ST_ADD) ;
       UIViewFormTabPane viewTabPane = uiViewContainer.createUIComponent(UIViewFormTabPane.class, null, null) ;
       viewTabPane.update(false);
+      viewTabPane.view(true);
       UIViewPermissionList uiPerList = viewTabPane.findFirstComponentOfType(UIViewPermissionList.class);
-      uiPerList.configure("permission", UIViewPermissionList.PERMISSION_BEAN_FIELD, new String[] {});
+      uiPerList.configure("permission", UIViewPermissionList.PERMISSION_BEAN_FIELD, null);
       uiPerList.setViewName(viewName);
-      uiPerList.refresh(uiPerList.getUIPageIterator().getCurrentPage());
       UIViewPermissionContainer uiPerContainer = uiPerList.getParent();
       uiPerContainer.setRenderedChild(UIViewPermissionList.class);
       uiViewContainer.initPopup(UIViewList.ST_VIEW, viewTabPane) ;
+      uiPerList.refresh(uiPerList.getUIPageIterator().getCurrentPage());
       UITabList uiTab = viewTabPane.getChild(UITabList.class);
       uiTab.setViewName(viewName);
+      uiTab.setActions(new String[] {});
+      uiTab.configure("tabName", UITabList.TAB_BEAN_FIELD, null) ;
       uiTab.refresh(uiTab.getUIPageIterator().getCurrentPage());
-      uiTab.configure("tabName", UITabList.TAB_BEAN_FIELD, new String[] {"Edit"}) ;
       UIViewForm uiViewForm = viewTabPane.getChild(UIViewForm.class) ;
       uiViewForm.refresh(false) ;
       uiViewForm.update(viewNode, true, null) ;
@@ -314,5 +321,21 @@ public class UIViewList extends UIPagingGrid {
     public void setTabList(String ls) { tabList = ls; }
     
     public String getId() { return id; }
+  }
+  
+  private String getFriendlyViewPermission(String permissions) throws Exception {
+    UIViewContainer uiViewContainer = getParent() ;
+    String[] arrPers = new String[] {};
+    if(permissions.contains(",")) {
+      arrPers = permissions.split(",");
+    } else {
+      arrPers = new String[] {permissions};
+    }
+    StringBuilder perBuilder = new StringBuilder(); 
+    for(String per : arrPers) {
+      if(perBuilder.length() > 0) perBuilder.append(", ");
+      perBuilder.append(uiViewContainer.getFriendlyPermission(per));
+    }
+    return perBuilder.toString();
   }
 }

@@ -18,12 +18,9 @@ package org.exoplatform.ecm.webui.component.admin.views;
 
 import java.util.List;
 
-import javax.jcr.Node;
-
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.cms.views.ViewConfig.Tab;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -46,17 +43,16 @@ import org.exoplatform.webui.form.input.UICheckBoxInput;
  */
 
 @ComponentConfig(
-		template = "app:/groovy/webui/component/admin/view/UITabForm.gtmpl",
-		lifecycle = UIFormLifecycle.class,
-		events = {	  
-	      @EventConfig(listeners = UITabForm.SaveActionListener.class),
-	      @EventConfig(listeners = UITabForm.CancelActionListener.class, phase = Phase.DECODE)
-	  }
+        template = "app:/groovy/webui/component/admin/view/UITabForm.gtmpl",
+        lifecycle = UIFormLifecycle.class,
+        events = {    
+          @EventConfig(listeners = UITabForm.SaveActionListener.class),
+          @EventConfig(listeners = UITabForm.CancelActionListener.class, phase = Phase.DECODE)
+      }
 )
 public class UITabForm extends UIForm {
 
   final static public String FIELD_NAME = "tabName" ;
-  private String viewName;
   private List<?> buttons_ ;
   
   public UITabForm() throws Exception {
@@ -97,14 +93,6 @@ public class UITabForm extends UIForm {
     }
   }
   
-  public String getViewName() {
-    return viewName;
-  }
-  
-  public void setViewName(String name) {
-    viewName = name;
-  }  
-  
   static public class SaveActionListener extends EventListener<UITabForm> {
     public void execute(Event<UITabForm> event) throws Exception {
       UITabForm uiTabForm = event.getSource();
@@ -142,9 +130,8 @@ public class UITabForm extends UIForm {
         
         return;
       }
-      ManageViewService manageViewService = WCMCoreUtils.getService(ManageViewService.class);
-      Node viewNode = manageViewService.getViewByName(uiTabForm.getViewName(), WCMCoreUtils.getUserSessionProvider());
-      manageViewService.addTab(viewNode, tabName, selectedButton.toString());
+      UIViewForm uiViewForm = viewFormTabPane.getChild(UIViewForm.class);
+      uiViewForm.addTab(tabName, selectedButton.toString());
       UIPopupWindow uiPopup = uiContainer.getChildById(UITabList.TAPFORM_POPUP);
       uiPopup.setShow(false);
       uiPopup.setRendered(false);

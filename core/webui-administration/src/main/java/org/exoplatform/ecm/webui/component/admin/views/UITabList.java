@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -34,7 +32,6 @@ import org.exoplatform.ecm.webui.core.UIPagingGrid;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.cms.views.ViewConfig.Tab;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.event.Event;
@@ -60,34 +57,53 @@ public class UITabList extends UIPagingGrid {
   
   final static public String   TAPFORM_POPUP         = "TabForm_Popup";
   
-  public static String[] TAB_BEAN_FIELD = {"tabName", "buttons"} ;
-  private static String[] TAB_ACTION = {"Edit","Delete"} ;
+  public static String[] TAB_BEAN_FIELD = {"tabName", "localizeButtons"} ;
   public static String TAB_LIST = "ECMTabList" ;
+  private String[] actions_ = new String[] {"AddTab"};
+  private boolean isView_ = false;
   
   private String viewName;
   
   public UITabList() throws Exception {
     getUIPageIterator().setId("TabListPageIterator") ;
-    configure("tabName", TAB_BEAN_FIELD, TAB_ACTION) ;
+    configure("tabName", UITabList.TAB_BEAN_FIELD, new String[] {"Edit","Delete"}) ;
   }
   
   public String[] getActions() { 
-    if(TAB_ACTION.length == 0) return new String[] {};
-    return new String[] {"AddTab"} ; 
+    return actions_; 
   }
+  
+  public void setActions(String[] actions) {
+    actions_ = actions;
+  }
+  
+  public boolean isView() {
+    return isView_;
+  }
+  
+  public void view(boolean isView) {
+    isView_ = isView;
+  }  
 
   @Override
   public void refresh(int currentPage) throws Exception {
-    ManageViewService viewService = WCMCoreUtils.getService(ManageViewService.class);
-    Node viewNode = viewService.getViewByName(viewName, WCMCoreUtils.getUserSessionProvider());
     List<Tab> tabList = new ArrayList<Tab>();
-    NodeIterator nodeIter = viewNode.getNodes();
-    while(nodeIter.hasNext()) {
-      Node tabNode = nodeIter.nextNode();
-      Tab tab = new Tab();
-      tab.setTabName(tabNode.getName());
-      tab.setButtons(getLocalizationButtons(tabNode.getProperty("exo:buttons").getValue().getString()));
-      tabList.add(tab);
+    UIViewFormTabPane uiTabPane = getParent();
+    UIViewForm uiViewForm = uiTabPane.getChild(UIViewForm.class);
+    if(isView_) {
+      ManageViewService viewService = WCMCoreUtils.getService(ManageViewService.class);
+      Node viewNode = viewService.getViewByName(viewName, WCMCoreUtils.getUserSessionProvider());
+      NodeIterator nodeIter = viewNode.getNodes();
+      while(nodeIter.hasNext()) {
+        Node tabNode = nodeIter.nextNode();
+        Tab tab = new Tab();
+        tab.setTabName(tabNode.getName());
+        tab.setButtons(tabNode.getProperty("exo:buttons").getValue().getString());
+        tab.setLocalizeButtons(uiViewForm.getLocalizationButtons(tabNode.getProperty("exo:buttons").getValue().getString()));
+        tabList.add(tab);
+      }
+    } else {
+      tabList = uiViewForm.getTabs();
     }
     Collections.sort(tabList, new TabComparator());
     ListAccess<Tab> tabBeanList = new ListAccessImpl<Tab>(Tab.class, tabList);
@@ -122,7 +138,6 @@ public class UITabList extends UIPagingGrid {
       UITabList uiTabList = event.getSource();
       UIViewContainer uiContainer = uiTabList.getAncestorOfType(UIViewContainer.class);
       UITabForm uiTabForm = uiContainer.createUIComponent(UITabForm.class, null, null);
-      uiTabForm.setViewName(uiTabList.getViewName());
       uiContainer.initPopup(UITabList.TAPFORM_POPUP, uiTabForm, 760, 0);
       UIViewFormTabPane uiTabPane = uiTabList.getParent();
       uiTabPane.setSelectedTab(uiTabList.getId());
@@ -133,13 +148,11 @@ public class UITabList extends UIPagingGrid {
   static  public class DeleteActionListener extends EventListener<UITabList> {
     public void execute(Event<UITabList> event) throws Exception {
       UITabList uiTabList = event.getSource();
-      ManageViewService manageViewService = WCMCoreUtils.getService(ManageViewService.class);
       String tabName = event.getRequestContext().getRequestParameter(OBJECTID);
-      Node viewNode = manageViewService.getViewByName(uiTabList.getViewName(), WCMCoreUtils.getUserSessionProvider());
-      viewNode.getNode(tabName).remove();
-      viewNode.save();
-      uiTabList.refresh(uiTabList.getUIPageIterator().getCurrentPage());
       UIViewFormTabPane uiTabPane = uiTabList.getParent();
+      UIViewForm uiViewForm = uiTabPane.getChild(UIViewForm.class);
+      uiViewForm.getTabMap().remove(tabName);
+      uiTabList.refresh(uiTabList.getUIPageIterator().getCurrentPage());
       uiTabPane.setSelectedTab(uiTabList.getId());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTabList.getParent());
     }
@@ -152,7 +165,6 @@ public class UITabList extends UIPagingGrid {
       String tabName = event.getRequestContext().getRequestParameter(OBJECTID);
       Tab tab = uiTabList.getTabByName(tabName);
       UITabForm uiTabForm = uiContainer.createUIComponent(UITabForm.class, null, null);
-      uiTabForm.setViewName(uiTabList.getViewName());
       uiTabForm.update(tab, false);
       uiContainer.initPopup(UITabList.TAPFORM_POPUP, uiTabForm, 760, 0);
       UIViewFormTabPane uiTabPane = uiTabList.getParent();
@@ -167,25 +179,5 @@ public class UITabList extends UIPagingGrid {
       String name2 = o2.getTabName();
       return name1.compareToIgnoreCase(name2);
     }
-  }
-  
-  private String getLocalizationButtons(String buttons) {
-    StringBuilder localizationButtons = new StringBuilder();
-    RequestContext context = RequestContext.getCurrentInstance();
-    ResourceBundle res = context.getApplicationResourceBundle();
-    if(buttons.contains(";")) {
-      String[] arrButtons = buttons.split(";");
-      for(int i = 0; i < arrButtons.length; i++) {
-        try {
-          localizationButtons.append(res.getString("UITabForm.label." + arrButtons[i].trim()));
-        } catch(MissingResourceException mre) {
-          localizationButtons.append(arrButtons[i]);
-        }
-        if(i < arrButtons.length - 1) {
-          localizationButtons.append(", ");
-        }
-      }
-    }
-    return localizationButtons.toString();
   }
 }

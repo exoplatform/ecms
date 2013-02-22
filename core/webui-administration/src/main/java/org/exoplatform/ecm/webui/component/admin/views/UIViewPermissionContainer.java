@@ -33,8 +33,27 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 
 public class UIViewPermissionContainer extends UIPermissionManagerBase {
 
+  private boolean isUpdate_ = false;
+  private boolean isView_ = false;
+  
   public UIViewPermissionContainer() throws Exception {
     addChild(UIViewPermissionList.class, null, null);
     addChild(UIViewPermissionForm.class, null, null);
   }
+  
+  public void update(boolean isUpdate) {
+    isUpdate_ = isUpdate;
+  }
+  
+  public boolean isUpdate() {
+    return isUpdate_;
+  }
+  
+  public boolean isView() {
+    return isView_;
+  }
+  
+  public void view(boolean isView) {
+    isView_ = isView;
+  }   
 }

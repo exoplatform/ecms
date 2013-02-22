@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import javax.jcr.Node;
 
@@ -31,7 +30,6 @@ import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.core.UIPagingGrid;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.event.Event;
@@ -46,22 +44,23 @@ import org.exoplatform.webui.event.EventListener;
  */
 
 @ComponentConfig(
-        template = "classpath:groovy/ecm/webui/core/UIGrid.gtmpl",
-        events = {
-            @EventConfig(listeners = UIViewPermissionList.DeleteActionListener.class, confirm = "UIViewPermissionList.msg.confirm-delete")
-        }
-    )
+  template = "system:/groovy/ecm/webui/UIGridWithButton.gtmpl",
+  events = {
+    @EventConfig(listeners = UIViewPermissionList.DeleteActionListener.class, confirm = "UIViewPermissionList.msg.confirm-delete")
+  }
+)
 public class UIViewPermissionList extends UIPagingGrid {
 
   public static String[] PERMISSION_BEAN_FIELD = {"friendlyPermission"} ;
-  public static String[] PERMISSION_ACTION = {"Delete"} ;
   
   private String viewName;
   
   public UIViewPermissionList() throws Exception {
     getUIPageIterator().setId("PermissionListPageIterator") ;
-    configure("permission", PERMISSION_BEAN_FIELD, PERMISSION_ACTION) ;
+    configure("permission", UIViewPermissionList.PERMISSION_BEAN_FIELD, new String[] {"Delete"});
   }
+  
+  public String[] getActions() { return new String[] {} ;}
 
   public String getViewName() {
     return viewName;
@@ -71,43 +70,19 @@ public class UIViewPermissionList extends UIPagingGrid {
     viewName = name;
   }  
   
-  public String getFriendlyPermission(String permission) throws Exception {
-    RequestContext context = RequestContext.getCurrentInstance();
-    ResourceBundle res = context.getApplicationResourceBundle();
-    String permissionLabel = res.getString(getId() + ".label.permission");
-    if(permission.indexOf(":") > -1) {
-      String[] arr = permission.split(":");
-      if(arr[0].equals("*")) {
-        permissionLabel = permissionLabel.replace("{0}", "Any");
-      } else {
-        permissionLabel = permissionLabel.replace("{0}", standardizeGroupName(arr[0]));
-      }
-      String groupName = arr[1];
-      groupName = groupName.substring(groupName.lastIndexOf("/")+1); 
-      permissionLabel = permissionLabel.replace("{1}", standardizeGroupName(groupName));
-    } else {
-      permissionLabel = standardizeGroupName(permission);
-    }
-    return permissionLabel;
-  }
-  
   @Override
   public void refresh(int currentPage) throws Exception {
-    ManageViewService viewService = WCMCoreUtils.getService(ManageViewService.class);
-    Node viewNode = viewService.getViewByName(viewName, WCMCoreUtils.getUserSessionProvider());
+    UIViewPermissionContainer uiPerContainer = getParent();
+    UIViewFormTabPane uiTabPane = uiPerContainer.getParent();
+    UIViewForm uiViewForm = uiTabPane.getChild(UIViewForm.class);
     List<PermissionBean> permissions = new ArrayList<PermissionBean>();
-    String strPermission = viewNode.getProperty("exo:accessPermissions").getString();
-    String[] arrPers = new String[] {};
-    if(strPermission.contains(",")) {
-      arrPers = strPermission.split(",");
+    if(uiPerContainer.isView()) {
+      ManageViewService viewService = WCMCoreUtils.getService(ManageViewService.class);
+      Node viewNode = viewService.getViewByName(viewName, WCMCoreUtils.getUserSessionProvider());
+      String strPermission = viewNode.getProperty("exo:accessPermissions").getString();
+      permissions = getBeanList(strPermission);
     } else {
-      arrPers = new String[] {strPermission};
-    }
-    for(String per : arrPers) {
-      PermissionBean bean = new PermissionBean();
-      bean.setPermission(per);
-      bean.setFriendlyPermission(getFriendlyPermission(per));
-      permissions.add(bean);
+      permissions = getBeanList(uiViewForm.getPermission());
     }
     Collections.sort(permissions, new ViewPermissionComparator());
     ListAccess<PermissionBean> permissionBeanList = new ListAccessImpl<PermissionBean>(PermissionBean.class, permissions);
@@ -123,21 +98,12 @@ public class UIViewPermissionList extends UIPagingGrid {
   static  public class DeleteActionListener extends EventListener<UIViewPermissionList> {
     public void execute(Event<UIViewPermissionList> event) throws Exception {
       UIViewPermissionList uiPermissionList = event.getSource();
-      ManageViewService viewService = WCMCoreUtils.getService(ManageViewService.class);
+      UIViewPermissionContainer uiContainer = uiPermissionList.getParent();
+      UIViewFormTabPane uiTabPane = uiContainer.getParent();
+      UIViewForm uiViewForm = uiTabPane.getChild(UIViewForm.class);
       String permission = event.getRequestContext().getRequestParameter(OBJECTID);
-      Node viewNode = viewService.getViewByName(uiPermissionList.getViewName(), WCMCoreUtils.getUserSessionProvider());
-      String strPermission = viewNode.getProperty("exo:accessPermissions").getString();
-      StringBuilder perBuilder = new StringBuilder();
-      if(strPermission.indexOf(",") > -1) {
-        String[] arrPer = strPermission.split(",");
-        for(String per : arrPer) {
-          if(per.equals(permission)) continue;
-          if(perBuilder.length() > 0) perBuilder.append(",");
-          perBuilder.append(per);
-        }
-      }
-      viewNode.setProperty("exo:accessPermissions", perBuilder.toString());
-      viewNode.save();
+      uiViewForm.setPermission(uiPermissionList.removePermission(permission, uiViewForm.getPermission()));        
+      uiPermissionList.refresh(uiPermissionList.getUIPageIterator().getCurrentPage());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPermissionList.getParent());
     }
   }  
@@ -148,7 +114,7 @@ public class UIViewPermissionList extends UIPagingGrid {
       String per2 = t2.getPermission();
       return per1.compareToIgnoreCase(per2);
     }
-  }   
+  } 
   
   public static class PermissionBean {
     
@@ -164,12 +130,34 @@ public class UIViewPermissionList extends UIPagingGrid {
     public void setFriendlyPermission(String friendlyPer) { this.friendlyPermission = friendlyPer; }
   }
   
-  public String standardizeGroupName(String groupName) throws Exception {
-    groupName = groupName.replaceAll("-", " ");
-    char[] stringArray = groupName.toCharArray();
-    stringArray[0] = Character.toUpperCase(stringArray[0]);
-    groupName = new String(stringArray);
-    return groupName;
+  private String removePermission(String removePermission, String permissions) {
+    StringBuilder perBuilder = new StringBuilder();
+    if(permissions.indexOf(",") > -1) {
+      String[] arrPer = permissions.split(",");
+      for(String per : arrPer) {
+        if(per.equals(removePermission)) continue;
+        if(perBuilder.length() > 0) perBuilder.append(",");
+        perBuilder.append(per);
+      }
+    }
+    return perBuilder.toString();
   }
-
+  
+  private List<PermissionBean> getBeanList(String permissions) throws Exception {
+    UIViewContainer uiContainer = getAncestorOfType(UIViewContainer.class);
+    List<PermissionBean> listBean = new ArrayList<PermissionBean>();
+    String[] arrPers = new String[] {};
+    if(permissions.contains(",")) {
+      arrPers = permissions.split(",");
+    } else {
+      arrPers = new String[] {permissions};
+    }
+    for(String per : arrPers) {
+      PermissionBean bean = new PermissionBean();
+      bean.setPermission(per);
+      bean.setFriendlyPermission(uiContainer.getFriendlyPermission(per));
+      listBean.add(bean);
+    }
+    return listBean;
+  }
 }

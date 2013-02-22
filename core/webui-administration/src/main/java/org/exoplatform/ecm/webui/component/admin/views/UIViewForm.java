@@ -17,16 +17,18 @@
 package org.exoplatform.ecm.webui.component.admin.views;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.version.VersionHistory;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.jcr.model.VersionNode;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
@@ -39,8 +41,8 @@ import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.model.SelectItemOption;
@@ -59,9 +61,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  *          trongtt@yahoo.com
  * Jun 28, 2006
  */
-@ComponentConfig(
-		template = "system:/groovy/webui/form/UIForm.gtmpl"
-)
+
 public class UIViewForm extends UIForm implements UISelectable {
 
   final static public String FIELD_VERSION = "version" ;
@@ -77,7 +77,7 @@ public class UIViewForm extends UIForm implements UISelectable {
   private HashMap<String, Tab> tabMap_ = new HashMap<String, Tab>() ;
   private ManageViewService vservice_ = null ;
   private String viewName_ = null;
-  private String permission = null;
+  private String permission = StringUtils.EMPTY;
   private List<String> listVersion = new ArrayList<String>() ;
   private String baseVersionName_;
   private VersionNode selectedVersion_;
@@ -97,6 +97,8 @@ public class UIViewForm extends UIForm implements UISelectable {
     return permission;
   }
 
+  public String[] getActions() { return new String[] {}; }
+  
   public void setPermission(String permission) {
     this.permission = permission;
   }
@@ -129,8 +131,6 @@ public class UIViewForm extends UIForm implements UISelectable {
     UICheckBoxInput enableVersion = new UICheckBoxInput(FIELD_ENABLEVERSION, FIELD_ENABLEVERSION, null) ;
     enableVersion.setRendered(true) ;
     addUIFormInput(enableVersion) ;
-    //setActions(new String[]{"Save", "Reset", "Cancel", "AddTabForm"}, null) ;
-    //setActions(new String[]{"Save", "Cancel"}, null) ;
     //prefernce: is show side bar
     UICheckBoxInput hideExplorerPanel = 
       new UICheckBoxInput(FIELD_HIDE_EXPLORER_PANEL, FIELD_HIDE_EXPLORER_PANEL, false);
@@ -144,34 +144,7 @@ public class UIViewForm extends UIForm implements UISelectable {
 
   public void doSelect(String selectField, Object value) {
     UIFormStringInput uiStringInput = getUIStringInput(selectField);
-    if (selectField.equals(UIViewForm.FIELD_PERMISSION)){
-      String membership = value.toString();
-      String valuePermissions = uiStringInput.getValue();
-      List<String> permissionsList = new ArrayList<String>();
-      StringBuilder newsPermissions = new StringBuilder();
-      if(valuePermissions != null) {
-        String[] permissionsArray = valuePermissions.split(",");
-        permissionsList = Arrays.asList(permissionsArray);
-        if (permissionsList.size() > 0) {
-          for (String permissionNew : permissionsList) {
-            if(newsPermissions.length() > 0) newsPermissions.append(",");
-            newsPermissions.append(permissionNew.trim());
-          }
-        }
-        if(!permissionsList.contains(membership)) {
-          if(newsPermissions.length() > 0) {
-            newsPermissions.append(",").append(membership.trim());
-          } else {
-            newsPermissions.append(membership.trim());
-          }
-        }
-        uiStringInput.setValue(newsPermissions.toString());
-      } else uiStringInput.setValue(value.toString());
-    } else {
-      uiStringInput.setValue(value.toString());
-    }
-    UIViewContainer uiContainer = getAncestorOfType(UIViewContainer.class) ;
-    uiContainer.removeChildById(UIViewFormTabPane.POPUP_PERMISSION) ;
+    uiStringInput.setValue(value.toString());
   }
 
   public boolean isView() { return isView_ ; }
@@ -221,13 +194,38 @@ public class UIViewForm extends UIForm implements UISelectable {
     }
     return options ;
   }
+  
+  public HashMap<String, Tab> getTabMap() {
+    return tabMap_;
+  }
 
   public void addTab(String tabName, String buttons){
     Tab tab = new Tab() ;
     tab.setTabName(tabName) ;
     tab.setButtons(buttons) ;
+    tab.setLocalizeButtons(getLocalizationButtons(buttons));
     tabMap_.put(tabName, tab) ;
   }
+  
+  public String getLocalizationButtons(String buttons) {
+    StringBuilder localizationButtons = new StringBuilder();
+    RequestContext context = RequestContext.getCurrentInstance();
+    ResourceBundle res = context.getApplicationResourceBundle();
+    if(buttons.contains(";")) {
+      String[] arrButtons = buttons.split(";");
+      for(int i = 0; i < arrButtons.length; i++) {
+        try {
+          localizationButtons.append(res.getString("UITabForm.label." + arrButtons[i].trim()));
+        } catch(MissingResourceException mre) {
+          localizationButtons.append(arrButtons[i]);
+        }
+        if(i < arrButtons.length - 1) {
+          localizationButtons.append(", ");
+        }
+      }
+    }
+    return localizationButtons.toString();
+  }  
 
   public String getTabList() throws Exception {
     StringBuilder result = new StringBuilder() ;
@@ -240,25 +238,23 @@ public class UIViewForm extends UIForm implements UISelectable {
     }
     return result.toString() ;
   }
+  
+  public List<Tab> getTabs() throws Exception {
+    return new ArrayList<Tab>(tabMap_.values());
+  }  
 
   public void refresh(boolean isAddNew) throws Exception {
     getUIFormSelectBox(FIELD_VERSION).setRendered(!isAddNew) ;
     getUIFormSelectBox(FIELD_VERSION).setDisabled(!isAddNew) ;
     getUIStringInput(FIELD_NAME).setDisabled(!isAddNew).setValue(null) ;
-    //getUIStringInput(FIELD_PERMISSION).setValue(null) ;
-    //getUIFormInputInfo(FIELD_TABS).setEditable(isAddNew).setValue(null) ;
     getUIFormSelectBox(FIELD_TEMPLATE).setValue(null) ;
     getUIFormSelectBox(FIELD_TEMPLATE).setDisabled(!isAddNew) ;
     getUICheckBoxInput(FIELD_ENABLEVERSION).setRendered(!isAddNew) ;
     getUICheckBoxInput(FIELD_HIDE_EXPLORER_PANEL).setRendered(!isAddNew);
     setViewName("");
     if(isAddNew) {
-    	//setActions(new String[]{"Save", "Reset", "Cancel"}, null) ;
-      //setActions(new String[]{"Save", "Reset", "Cancel", "AddTabForm"}, null) ;
-      //setActionInfo(FIELD_PERMISSION, new String[] {"AddPermission"}) ;
       tabMap_.clear() ;
       views_ = null ;
-      //setActionInfo(FIELD_TABS, null) ;
       getUICheckBoxInput(FIELD_HIDE_EXPLORER_PANEL).setValue(false);
     }
     selectedVersion_ = null ;
@@ -268,6 +264,7 @@ public class UIViewForm extends UIForm implements UISelectable {
   public void update(Node viewNode, boolean isView, VersionNode selectedVersion) throws Exception {
     isView_ = isView ;
     if(viewNode != null) {
+      setPermission(viewNode.getProperty("exo:accessPermissions").getString());
       views_ = NodeLocation.getNodeLocationByNode(viewNode);
       if(isVersioned(viewNode)) baseVersionName_ = viewNode.getBaseVersion().getName();
       tabMap_.clear() ;
@@ -277,6 +274,7 @@ public class UIViewForm extends UIForm implements UISelectable {
         Tab tabObj = new Tab() ;
         tabObj.setTabName(tab.getName()) ;
         tabObj.setButtons(buttons) ;
+        tabObj.setLocalizeButtons(getLocalizationButtons(buttons));
         tabMap_.put(tab.getName(), tabObj) ;
       }
 
@@ -320,12 +318,13 @@ public class UIViewForm extends UIForm implements UISelectable {
   }
 
   public void save() throws Exception {
-    String viewName = getUIStringInput(FIELD_NAME).getValue().trim();
+    String viewName = getUIStringInput(FIELD_NAME).getValue();
     ApplicationMessage message ;
-    if(viewName == null || viewName.length() == 0){
+    if(viewName == null || viewName.trim().length() == 0){
       throw new MessageException(new ApplicationMessage("UIViewForm.msg.view-name-invalid", null,
                                                         ApplicationMessage.WARNING)) ;
     }
+    viewName = viewName.trim();
     String[] arrFilterChar = {"&", "$", "@", ",", ":","]", "[", "*", "%", "!", "#", "/", "\\", "\""} ;
     for(String filterChar : arrFilterChar) {
       if(viewName.indexOf(filterChar) > -1) {
@@ -358,7 +357,7 @@ public class UIViewForm extends UIForm implements UISelectable {
     List<Tab> tabList = new ArrayList<Tab>(tabMap_.values());
     Node viewNode = NodeLocation.getNodeByLocation(views_);
     if(views_ == null || !isEnableVersioning) {
-      //vservice_.addView(viewName, permissions, hideExplorerPanel, template, tabList) ;
+      vservice_.addView(viewName, permission, hideExplorerPanel, template, tabList) ;
       if(viewNode != null) {
         for(NodeIterator iter = viewNode.getNodes(); iter.hasNext(); ) {
           Node tab = iter.nextNode() ;
@@ -377,7 +376,7 @@ public class UIViewForm extends UIForm implements UISelectable {
         Node tab = iter.nextNode() ;
         if(!tabMap_.containsKey(tab.getName())) tab.remove() ;
       }
-      //vservice_.addView(viewName, permissions, hideExplorerPanel, template, tabList) ;
+      vservice_.addView(viewName, permission, hideExplorerPanel, template, tabList) ;
       try {
         viewNode.save() ;
         viewNode.checkin();
@@ -404,7 +403,6 @@ public class UIViewForm extends UIForm implements UISelectable {
   //String permLastest = viewTabPane.getUIStringInput(UIViewForm.FIELD_PERMISSION).getValue();
     tabMap_.remove(tabName) ;
     update(null, false, null) ;
-    //getUIStringInput(FIELD_PERMISSION).setValue(permLastest);
     UIViewContainer uiViewContainer = getAncestorOfType(UIViewContainer.class) ;
     UIViewList uiViewList = uiViewContainer.getChild(UIViewList.class) ;
     uiViewList.refresh(uiViewList.getUIPageIterator().getCurrentPage());

@@ -16,6 +16,9 @@
  */
 package org.exoplatform.ecm.webui.component.admin.views;
 
+import java.util.ResourceBundle;
+
+import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
@@ -54,6 +57,34 @@ public class UIViewContainer extends UIContainer {
   public void update() throws Exception {
     UIViewList uiViewList = getChild(UIViewList.class);
     uiViewList.refresh(uiViewList.getUIPageIterator().getCurrentPage());
+  }
+  
+  public String getFriendlyPermission(String permission) throws Exception {
+    RequestContext context = RequestContext.getCurrentInstance();
+    ResourceBundle res = context.getApplicationResourceBundle();
+    String permissionLabel = res.getString(getId() + ".label.permission");
+    if(permission.indexOf(":") > -1) {
+      String[] arr = permission.split(":");
+      if(arr[0].equals("*")) {
+        permissionLabel = permissionLabel.replace("{0}", "Any");
+      } else {
+        permissionLabel = permissionLabel.replace("{0}", standardizeGroupName(arr[0]));
+      }
+      String groupName = arr[1];
+      groupName = groupName.substring(groupName.lastIndexOf("/")+1); 
+      permissionLabel = permissionLabel.replace("{1}", standardizeGroupName(groupName));
+    } else {
+      permissionLabel = standardizeGroupName(permission);
+    }
+    return permissionLabel;
+  }
+  
+  public String standardizeGroupName(String groupName) throws Exception {
+    groupName = groupName.replaceAll("-", " ");
+    char[] stringArray = groupName.toCharArray();
+    stringArray[0] = Character.toUpperCase(stringArray[0]);
+    groupName = new String(stringArray);
+    return groupName;
   }
 
 }

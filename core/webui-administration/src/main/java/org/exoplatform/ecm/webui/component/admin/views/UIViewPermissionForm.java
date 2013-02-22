@@ -24,9 +24,7 @@ import org.exoplatform.ecm.webui.core.UIPermissionFormBase;
 import org.exoplatform.ecm.webui.core.UIPermissionManagerBase;
 import org.exoplatform.ecm.webui.selector.UIGroupMemberSelector;
 import org.exoplatform.ecm.webui.selector.UISelectable;
-import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.security.IdentityConstants;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -58,7 +56,6 @@ import org.exoplatform.webui.event.EventListener;
 public class UIViewPermissionForm extends UIPermissionFormBase implements UISelectable{
   
   public static final String TAB_PERMISSION   = "tab_permission";
-  private String viewName;
 
   public UIViewPermissionForm() throws Exception {
     removeChildById(UIPermissionFormBase.PERMISSION);
@@ -67,14 +64,6 @@ public class UIViewPermissionForm extends UIPermissionFormBase implements UISele
     uiPerInputset.setButtonActions(new String[] {"Add"});
     uiPerInputset.setPrimaryButtonAction("Add");
   }
-  
-  public String getViewName() {
-    return viewName;
-  }
-  
-  public void setViewName(String name) {
-    viewName = name;
-  }   
   
   static public class SelectUserActionListener extends EventListener<UIViewPermissionForm> {
     public void execute(Event<UIViewPermissionForm> event) throws Exception {
@@ -122,11 +111,11 @@ public class UIViewPermissionForm extends UIPermissionFormBase implements UISele
     public void execute(Event<UIViewPermissionForm> event) throws Exception {
       UIViewPermissionForm uiForm = event.getSource();
       UIViewPermissionContainer uiContainer = uiForm.getParent();
+      UIViewFormTabPane uiTabPane = uiContainer.getParent();
+      UIViewForm uiViewForm = uiTabPane.getChild(UIViewForm.class);
       UIViewPermissionList uiList = uiContainer.getChild(UIViewPermissionList.class);
       String permission = uiForm.getUIStringInput(UIPermissionInputSet.FIELD_USERORGROUP).getValue();
-      ManageViewService viewService = WCMCoreUtils.getService(ManageViewService.class);
-      Node viewNode = viewService.getViewByName(uiForm.getViewName(), WCMCoreUtils.getUserSessionProvider());
-      String strPermission = viewNode.getProperty("exo:accessPermissions").getString();
+      String strPermission = uiViewForm.getPermission();
       if(strPermission.contains(permission)) {
         UIApplication app = uiForm.getAncestorOfType(UIApplication.class);
         Object[] args = { permission };
@@ -136,9 +125,11 @@ public class UIViewPermissionForm extends UIPermissionFormBase implements UISele
         return;
       }
       StringBuilder strBuilder = new StringBuilder(strPermission); 
-      if(strPermission.length() > 0) strBuilder = strBuilder.append(",").append(permission);
-      viewNode.setProperty("exo:accessPermissions", strBuilder.toString());
-      viewNode.save();
+      if(strPermission.length() > 0) {
+        strBuilder = strBuilder.append(",");
+      } 
+      strBuilder.append(permission);
+      uiViewForm.setPermission(strBuilder.toString());
       uiList.refresh(uiList.getUIPageIterator().getCurrentPage());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
     }

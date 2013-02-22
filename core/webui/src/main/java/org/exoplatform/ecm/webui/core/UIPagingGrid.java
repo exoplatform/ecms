@@ -31,33 +31,32 @@ import org.exoplatform.webui.core.UIGrid;
 @ComponentConfig(template = "classpath:groovy/ecm/webui/core/UIGrid.gtmpl")
 public abstract class UIPagingGrid extends UIGrid {
   /** The page iterator */
-  protected UIECMPageIterator uiIterator_;
+  protected UIECMPageIterator uiPageIterator_;
 
   public UIPagingGrid() throws Exception
   {
-     uiIterator_ = createUIComponent(UIECMPageIterator.class, null, null);
-     uiIterator_.setParent(this);
+     uiPageIterator_ = createUIComponent(UIECMPageIterator.class, null, null);
+     uiPageIterator_.setParent(this);
   }
   
   public abstract void refresh(int currentPage) throws Exception;
   
   public UIECMPageIterator getUIPageIterator()
   {
-     return uiIterator_;
+     return uiPageIterator_;
   }
 
 
   public List<?> getBeans() throws Exception
   {
-     return uiIterator_.getCurrentPageData();
+     return uiPageIterator_.getCurrentPageData();
   }
 
-  @SuppressWarnings("unchecked")
   public UIComponent findComponentById(String lookupId)
   {
-     if (uiIterator_.getId().equals(lookupId))
+     if (uiPageIterator_.getId().equals(lookupId))
      {
-        return uiIterator_;
+        return uiPageIterator_;
      }
      return super.findComponentById(lookupId);
   }

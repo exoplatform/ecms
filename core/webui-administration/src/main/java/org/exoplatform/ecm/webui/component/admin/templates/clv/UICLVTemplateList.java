@@ -49,13 +49,13 @@ import org.exoplatform.webui.event.EventListener;
  * 9:55:06 AM  
  */
 @ComponentConfig(
-        template = "app:/groovy/webui/component/admin/template/UICLVTemplateList.gtmpl",
-    events = {
-      @EventConfig(listeners = UICLVTemplateList.EditActionListener.class),
-      @EventConfig(listeners = UICLVTemplateList.DeleteActionListener.class, confirm = "UICLVTemplateList.msg.confirm-delete"),
-      @EventConfig(listeners = UICLVTemplateList.AddTemplateActionListener.class)
-    }
-)
+        template = "system:/groovy/ecm/webui/UIGridWithButton.gtmpl",
+        events = {
+                @EventConfig(listeners = 
+                        UICLVTemplateList.DeleteActionListener.class, confirm = "UICLVTemplateList.msg.confirm-delete"),
+                @EventConfig(listeners = UICLVTemplateList.EditActionListener.class),
+                @EventConfig(listeners = UICLVTemplateList.AddTemplateActionListener.class)
+        })
 public class UICLVTemplateList extends UIPagingGrid {
 
   private static String[] NODETYPE_BEAN_FIELD = {"title", "template"} ;

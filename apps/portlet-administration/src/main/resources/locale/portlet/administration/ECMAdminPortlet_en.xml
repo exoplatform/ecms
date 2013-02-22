@@ -1051,7 +1051,7 @@
 		<UITabList>
 			 <header>
 			 	 <tabName>Tab</tabName>
-			 	 <buttons>Description</buttons>
+			 	 <localizeButtons>Description</localizeButtons>
 						<action>Actions</action>
 				</header>
 				<action>
@@ -1060,6 +1060,11 @@
 				<msg>
 					 <confirm-delete>Are you sure want to delete this tab?</confirm-delete>
 				</msg>
+				<grid>
+					 <msg>
+					 	 <empty>There is no tab on this view</empty>
+					 </msg>
+				</grid>
 		</UITabList>
 		
 		<UIViewPermissionList>
@@ -1072,7 +1077,7 @@
 				</msg>
 		</UIViewPermissionList>
 		
-		<UIViewPermissionContainer>
+		<UIViewPermissionList>
 			 <header>
 						<friendlyPermission>Permissions</friendlyPermission>
 			 	 <action>Actions</action>
@@ -1082,12 +1087,16 @@
 					 	 <Delete>Delete</Delete>
 					 </title>
 				</action>
-		</UIViewPermissionContainer>
+				<grid>
+					 <msg>
+					 	 <empty>There is no permission on this view</empty>
+					 </msg>
+				</grid>				
+		</UIViewPermissionList>
 		
 		<UIViewPermissionForm>
 				<action>
-					 <Save>Add</Save>
-						<Reset>Reset</Reset>
+					 <Add>Add</Add>
 				</action>
 				<label>
 					 <userOrGroup>User or Group</userOrGroup>
@@ -2270,6 +2279,9 @@
       <EditInfo>Edit</EditInfo>
       <Delete>Delete</Delete>
     </title>
+				<label>
+					  <permission>{0} in {1}</permission>
+				</label>
   </UIViewContainer>
   <ECMTemplate>
     <title>
