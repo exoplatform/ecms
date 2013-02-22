@@ -51,7 +51,8 @@ public class AddFilePropertyActivityAction implements Action{
     
     if(node.isNodeType("nt:resource")) node = node.getParent();
     //filter node type
-    if (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) && activityService.isBroadcastNTFileEvents(node)) {
+    if (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) && activityService.isBroadcastNTFileEvents(node)
+    		&& !activityService.isCreating(node)) {
       //Notify to update activity
     	listenerService.broadcast(ActivityCommonService.FILE_ADD_ACTIVITY, nodeTemp, propertyName);    	
     }
