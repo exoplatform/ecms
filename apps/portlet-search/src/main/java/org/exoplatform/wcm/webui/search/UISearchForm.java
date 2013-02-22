@@ -11,6 +11,7 @@
  */
 package org.exoplatform.wcm.webui.search;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -233,7 +234,7 @@ public class UISearchForm extends UIForm {
         keyword = newKey;
         uiKeywordInput.setValue(newKey);
       }
-      keyword = keyword.replace('-', ' ').toLowerCase(portletRequestContext.getLocale());
+      keyword = Normalizer.normalize(keyword, Normalizer.Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
       keyword = keyword.replaceAll("'","''");
       uiSearchResult.setResultType(resultType);
       String selectedPortal = uiPortalSelectBox.getValue();
