@@ -433,7 +433,6 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     try {
       CmsService cmsService = documentForm.getApplicationComponent(CmsService.class);
       cmsService.getPreProperties().clear();
-      cmsService.getUpdatedProperties().clear();
       String addedPath = cmsService.storeNode(nodeType, homeNode, inputProperties, documentForm.isAddNew());
       try {
         newNode = (Node)homeNode.getSession().getItem(addedPath);

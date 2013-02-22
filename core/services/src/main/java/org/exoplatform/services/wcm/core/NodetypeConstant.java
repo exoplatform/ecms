@@ -194,6 +194,8 @@ public class NodetypeConstant {
   
   public static final String MIX_I18N = "mix:i18n";
   
+  public static final String EXO_THUMBNAILS_FOLDER = "exo:thumbnails";
+  
   // public static final String PUBLICATION_STATE_AND_VERSION_BASED_PUBLICATION
   // = "publication:stateAndVersionBasedPublication";
 

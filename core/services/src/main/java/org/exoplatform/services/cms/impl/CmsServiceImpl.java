@@ -77,13 +77,8 @@ public class CmsServiceImpl implements CmsService {
   private ListenerService listenerService;
   private ActivityCommonService activityService = null;
   
-  public static Map<String, Object> properties = new HashMap<String, Object>();
-  public static Map<String, Object> updatedProperties = new HashMap<String, Object>();
-  
-  public Map<String, Object> getPreProperties() { return properties; } 
-  
-  public Map<String, Object> getUpdatedProperties() { return updatedProperties; }
-  
+  public static Map<String, Object> properties = new HashMap<String, Object>();  
+  public Map<String, Object> getPreProperties() { return properties; }  
 
   /**
    * Method constructor
@@ -872,7 +867,8 @@ public class CmsServiceImpl implements CmsService {
   private void processProperty(Property property, Node node, int requiredtype,
       Object value, boolean isMultiple) throws Exception {
   	String nodeUUID = "";
-  	if(node.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) nodeUUID = node.getUUID();  	
+  	if(node.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) nodeUUID = node.getUUID();
+  	else nodeUUID = node.getName();
     String propertyName = property.getName() ;
     String updatedProperty = nodeUUID + "_" + propertyName;
     if(isMultiple) properties.put(updatedProperty, property.getValues());
@@ -881,11 +877,9 @@ public class CmsServiceImpl implements CmsService {
     case PropertyType.STRING:
       if (value == null) {
         if(isMultiple) {
-        	if(property.getValues().length > 0) updatedProperties.put(propertyName, new String[] {StringUtils.EMPTY});
           node.setProperty(propertyName, new String[] {StringUtils.EMPTY});          
         } else {
         	if(property.getValue() != null && !property.getValue().getString().equals(StringUtils.EMPTY)) {
-        		updatedProperties.put(updatedProperty, StringUtils.EMPTY);
         		node.setProperty(propertyName, StringUtils.EMPTY);        		
         	}            
         }        
@@ -893,18 +887,15 @@ public class CmsServiceImpl implements CmsService {
         if(isMultiple) {
           if (value instanceof String) { 
             if(!property.getValues().equals(value)) {
-            	updatedProperties.put(updatedProperty, new String[] { (String)value});
               node.setProperty(propertyName, new String[] { (String)value});              
             }
           } else if (value instanceof String[]) {
           	if(!isEqualsValueStringArrays(property.getValues(), (String[]) value)) {
-          		updatedProperties.put(updatedProperty, (String[]) value);
           		node.setProperty(propertyName, (String[]) value);
           	}
           }
         } else {
           if(!property.getValue().getString().equals(value)) {
-          	updatedProperties.put(updatedProperty, (String) value);
             node.setProperty(propertyName, (String) value);            
           }
         }
@@ -924,7 +915,6 @@ public class CmsServiceImpl implements CmsService {
               fileNode = storedNode.addNode(fileName, NodetypeConstant.NT_FILE);
               jcrContentNode = fileNode.addNode(NodetypeConstant.JCR_CONTENT);
               jcrContentNode.setProperty(NodetypeConstant.JCR_MIME_TYPE, (String)param.get(0));
-              updatedProperties.put(updatedProperty, new ByteArrayInputStream((byte[])param.get(1)));
               jcrContentNode.setProperty(NodetypeConstant.JCR_DATA, new ByteArrayInputStream((byte[])param.get(1)));              
             } else {
               jcrContentNode = storedNode.getNode(fileName).getNode(NodetypeConstant.JCR_CONTENT);
@@ -935,22 +925,18 @@ public class CmsServiceImpl implements CmsService {
       } else {
         if (value == null ) {
         	if(node.getProperty(propertyName) != null && !node.getProperty(propertyName).getString().equals("")) {
-        		updatedProperties.put(updatedProperty, "");
             node.setProperty(propertyName, "");            
         	}
         } else if(value instanceof InputStream) {
           if(!property.getValue().getStream().equals(value)) {
-          	updatedProperties.put(updatedProperty, (InputStream)value);
             node.setProperty(propertyName, (InputStream)value);
           }
         } else if (value instanceof byte[]) {
           if(!property.getValue().getStream().equals(new ByteArrayInputStream((byte[]) value))) {
-          	updatedProperties.put(updatedProperty, new ByteArrayInputStream((byte[]) value));
             node.setProperty(propertyName, new ByteArrayInputStream((byte[]) value));
           }
         } else if (value instanceof String) {
           if(!property.getValue().getString().equals(value)) {
-          	updatedProperties.put(updatedProperty, value.toString());
             node.setProperty(propertyName, value.toString(), PropertyType.BINARY);
           }
         }
@@ -963,12 +949,10 @@ public class CmsServiceImpl implements CmsService {
         node.setProperty(propertyName, ((Boolean) value).booleanValue());
       }else if (value instanceof String) {
         if(property.getValue().getBoolean() != new Boolean((String) value).booleanValue()) {
-        	updatedProperties.put(updatedProperty, new Boolean((String) value).booleanValue());
           node.setProperty(propertyName, new Boolean((String) value).booleanValue());
         }
       } else if (value instanceof String[]) {
         if(!checkEqual(property.getValues(), (String[])value)) {
-        	updatedProperties.put(updatedProperty, (String[]) value);
           node.setProperty(propertyName, (String[]) value);
         }
       }
@@ -978,12 +962,10 @@ public class CmsServiceImpl implements CmsService {
         node.setProperty(propertyName, 0);
       } else if (value instanceof String) {
         if(property.getValue().getLong() != new Long((String) value).longValue()) {
-        	updatedProperties.put(updatedProperty, new Long((String) value).longValue());
           node.setProperty(propertyName, new Long((String) value).longValue());
         }
       } else if (value instanceof String[]) {
         if(!checkEqual(property.getValues(), (String[])value)) {
-        	updatedProperties.put(updatedProperty, (String[]) value);
           node.setProperty(propertyName, (String[]) value);
         }
       } else if (value instanceof Long) {
@@ -995,12 +977,10 @@ public class CmsServiceImpl implements CmsService {
         node.setProperty(propertyName, 0);
       } else if (value instanceof String) {
         if(property.getValue().getDouble() != new Double((String) value).doubleValue()) {
-        	updatedProperties.put(updatedProperty, new Double((String) value).doubleValue());
           node.setProperty(propertyName, new Double((String) value).doubleValue());
         }
       } else if (value instanceof String[]) {
         if(!checkEqual(property.getValues(), (String[])value)) {
-        	updatedProperties.put(updatedProperty, (String[]) value);
           node.setProperty(propertyName, (String[]) value);
         }
       } else if (value instanceof Double) {

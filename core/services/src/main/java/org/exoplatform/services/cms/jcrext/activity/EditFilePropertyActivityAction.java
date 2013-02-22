@@ -44,7 +44,14 @@ public class EditFilePropertyActivityAction implements Action{
     if (ConversationState.getCurrent() == null) return false;    
     if(node.isNodeType(NodetypeConstant.NT_RESOURCE)) node = node.getParent();
     if(!node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) return false;
-    
+    if(propertyName.equals(NodetypeConstant.JCR_DATA)) {
+    	Node parent = node.getParent();
+    	if(parent.hasNode(NodetypeConstant.EXO_THUMBNAILS_FOLDER)) {
+    		Node thumnail = parent.getNode(NodetypeConstant.EXO_THUMBNAILS_FOLDER);
+    		if(thumnail.hasNode(node.getUUID())) thumnail.getNode(node.getUUID()).remove();
+    		node.getSession().save();
+    	}
+    }
     //Notify to update activity
     if(activityService.isBroadcastNTFileEvents(node)) {
       listenerService.broadcast(ActivityCommonService.FILE_EDIT_ACTIVITY, nodeTemp, propertyName);
