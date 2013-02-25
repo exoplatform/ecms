@@ -1133,6 +1133,7 @@
     <label>
       <viewName>Name</viewName>
       <template>Templates</template>
+						<version>Restore Version</version>
       <enableVersion>Enable Version</enableVersion>
       <hideExplorerPanel>Hide explorer panel in side bar</hideExplorerPanel>						
     </label>				
