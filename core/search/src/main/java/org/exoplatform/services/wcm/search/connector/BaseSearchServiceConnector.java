@@ -28,6 +28,7 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 import org.exoplatform.commons.api.search.SearchServiceConnector;
+import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -66,7 +67,8 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
   }
   
   @Override
-  public Collection<SearchResult> search(String query,
+  public Collection<SearchResult> search(SearchContext context,
+                                         String query,
                                          Collection<String> sites,
                                          int offset,
                                          int limit,
