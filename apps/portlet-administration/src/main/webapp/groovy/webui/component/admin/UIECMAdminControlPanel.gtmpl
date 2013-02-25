@@ -28,7 +28,7 @@
   rcontext.getJavascriptManager().require("SHARED/ecm-utils", "ecmutil").addScripts("ecmutil.ECMUtils.loadTab() ;");
 %>
 		<div class="accordion" id="accordion">
-			<h6 class="menuHeader"><%=_ctx.appRes("UIRepositoryList.titlebar.label")%></h6>
+			<h5 class="menuHeader"><%=_ctx.appRes("UIRepositoryList.titlebar.label")%></h5>
 		<%
 		 int i = 0;		 
 		 for(type in typeManage) {
