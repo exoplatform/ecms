@@ -157,7 +157,7 @@
                 <!-- Vinh_NGUYEN Processing before notify Social Activity segment-->
                 <value>
                     <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
-                    <field  name="eventTypes"><string>changeProperty</string></field>                     
+                    <field  name="eventTypes"><string>changeProperty,addProperty</string></field>                     
                     <field  name="actionClassName"><string>org.exoplatform.services.cms.jcrext.activity.EditPropertyActivityAction</string></field>
                   </object>
                 </value>

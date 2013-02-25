@@ -46,7 +46,7 @@ public class EditPropertyActivityAction implements Action{
     Node nodeTemp = activityService.isSpecialContentNodeType((Item) item);
     String propertyName = (item instanceof Property) ?((Property)item).getName():((Node)item).getName();
     if (nodeTemp !=null) {
-      if (!activityService.isCreating(node)) { 
+      if (!activityService.isCreating(nodeTemp)) { 
         //Consider this special case as changing of content
         String itemPath = ((Item) item).getPath();
         String nodePath = nodeTemp.getPath();
