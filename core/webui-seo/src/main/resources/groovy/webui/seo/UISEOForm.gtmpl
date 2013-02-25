@@ -18,23 +18,22 @@
   def count = 0;
   def path = uicomponent.getContentPath();
   def fullStatus = "Empty"; 
-  def style = "ClearFix";  
+  def style = "clearfix";  
   
   ExoContainer container = ExoContainerContext.getCurrentContainer() ;
   SEOService seoService = (SEOService)container.getComponentInstanceOfType(SEOService.class);
   Locale inLocale = WebuiRequestContext.getCurrentInstance().getLocale();
 %>
-<div class="$uicomponent.id">
+<div class="uiSEOForm">
 	<%uiform.begin()%>
-	<div class="HorizontalLayout">
-		<div class="FormContainer">
+		<div class="formContainer">
 		
-			<div id="LeftContainer" class="LeftContainer">
+			<div id="LeftContainer" class="leftContainer">
 				
 					<%
 			    if(locales != null && locales.size() > 0) {
 			    %>
-			      <div class="SEOLanguage">
+			      <div class="seoLanguage">
 			    <%
 			      for(locale in locales) {			   
 			      	String lang = locale.getLanguage();
@@ -43,17 +42,17 @@
 			        count++;
 			        if(seoService != null) fullStatus = seoService.getState(path, lang, uicomponent.getOnContent());
 			        def seo_icon = fullStatus + ".png";	          
-			        if(uicomponent.getSelectedLanguage().equals(lang)) {			        	
+			        if(uicomponent.getSelectedLanguage().equals(lang)) {
 				      %>
-				        <div class="ClearFix SEOTab Selected Hover" onclick="<%=uicomponent.event("Update", lang)%>">
+				        <div class="itemTab selected clearfix" onclick="<%=uicomponent.event("Update", lang)%>">
 								  <a href="javaScript:void(0);"><img class="SEOFlag" src="/seo/skin/webui/seo/DefaultSkin/icons/${seo_icon}" width="16px" /></a>
 								  <a href="javaScript:void(0);"> <%= uicomponent.CapitalFirstLetters(locale.getDisplayName(inLocale)) %> </a>
-								  <a title="<%=seo_delete%>" href="<%=uicomponent.event("Remove",uicomponent.id, lang)%>" class="SEODustBin FR"><img src="/ecmexplorer/skin/icons/16x16/DefaultSkin/DustBin.gif" width="16px" /></a>
+								  <i class="uiIconDelete uiIconLightGray pull-right" title="<%=seo_delete%>" onclick="<%=uicomponent.event("Remove",uicomponent.id, lang)%>"></i>
 							  </div>
 				      <%
 				      } else {
 				      %>
-				        <div class="ClearFix SEOTab Hover" onclick="<%=uicomponent.event("Update", lang)%>">
+				        <div class="itemTab clearfix" onclick="<%=uicomponent.event("Update", lang)%>">
 								  <a href="javaScript:void(0);"><img class="SEOFlag" src="/seo/skin/webui/seo/DefaultSkin/icons/${seo_icon}" width="16px" /></a>
 								  <a href="javaScript:void(0);"> <%= uicomponent.CapitalFirstLetters(locale.getDisplayName(inLocale)) %> </a>
 							  </div>
@@ -65,114 +64,114 @@
 			    }
 			  %>
 			  <% if (uicomponent.isAddNew) {%>
-				  <div class="ClearFix SEOTab Hover" id="addNewSEO" style="text-align: center; height: 20px;">
-				  <a onclick="eXo.ecm.WCMUtils.showSEOLanguage(true)">
-				    <img class="AddIcon16x16" style="margin-top: 2px;" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" />
-				  </a>
-				  </div>
+				<div class="addNewSEO" id="addNewSEO">
+					<button class="btn" type="button" onclick="eXo.ecm.WCMUtils.showSEOLanguage(true)">
+						<i class="uiIconPlus uiIconLightGray"></i> Add Language
+					</button>
+				</div>
 				<% } %>
-			  <div class="ClearFix" id="selectSEOLanguage" style="display:none; text-align: center;">
-					<% uiform.renderField(uicomponent.LANGUAGE_TYPE) %>					
+			  <div class="selectSEOLanguage clearfix" id="selectSEOLanguage">
+					<% uiform.renderField(uicomponent.LANGUAGE_TYPE) %>
 				</div>
 			</div>
 			
-			<div id="RightContainer" style="display:block;" class="RightContainer">			  
-				<table class="UIFormGrid">
-				    <%if(!uicomponent.getOnContent()) { %>
-				        <tr>
-				    	    <td class="FieldLabel"><label for="<%=uicomponent.TITLE%>"><%=uicomponent.getLabel(uicomponent.TITLE) %></label></td>
-				    	    <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.TITLE) %></td>
-				        </tr>
-				    <%}%>
-				    <tr>
-				    	<td class="FieldLabel"><label for="<%=uicomponent.DESCRIPTION%>"><%=uicomponent.getLabel(uicomponent.DESCRIPTION) %></label></td>
-				    	<td class="FieldComponent"><% uiform.renderField(uicomponent.DESCRIPTION) %></td>
-				    	<td class ="tdShowHelp">
-		            <div class="IconInContextHelp ShowHelpIcon" id="DescriptionHelp" 
-		                  onmouseover="eXo.ecm.WCMUtils.showInContextHelp('DescriptionHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('DescriptionHelp', 'false')"
-		                  onfocus="eXo.ecm.WCMUtils.showInContextHelp('DescriptionHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('DescriptionHelp', 'false')">
-		              <div style="position: absolute;">
-		                <div class="InContextHelpContent">                    
-		                  <div class="InContextHelpPopup">
-		                   <div id="ContentPathHelpID" class="LeftInContextHelpPopup">
-		                     <%= _ctx.appRes("UISEOForm.help.description") %>
-		                    </div>
-		                  </div>                      
-		                </div>
-		              </div>
-		            </div>
-	          </td>
-	          
-				    </tr>
-				    <tr>
-				    	<td class="FieldLabel"><label for="<%=uicomponent.KEYWORDS%>"><%=uicomponent.getLabel(uicomponent.KEYWORDS) %></label></td>
-				    	<td class="FieldComponent"><% uiform.renderField(uicomponent.KEYWORDS) %></td>
-				    	<td class ="tdShowHelp">
-		            <div class="IconInContextHelp ShowHelpIcon" id="KeywordsHelp" 
-		                  onmouseover="eXo.ecm.WCMUtils.showInContextHelp('KeywordsHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('KeywordsHelp', 'false')"
-		                  onfocus="eXo.ecm.WCMUtils.showInContextHelp('KeywordsHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('KeywordsHelp', 'false')">
-		              <div style="position: absolute;">
-		                <div class="InContextHelpContent">                    
-		                  <div class="InContextHelpPopup">
-		                   <div id="ContentPathHelpID" class="LeftInContextHelpPopup">
-		                     <%= _ctx.appRes("UISEOForm.help.keywords") %>
-		                    </div>
-		                  </div>                      
-		                </div>
-		              </div>
-		            </div>
-		          </td>
-				    </tr>	
-				     
-					  <%if(!uicomponent.getOnContent()) { %>
-					    <tr>
-					    	<td class="FieldLabel"><label for="$uicomponent.ROBOTS_INDEX"><%=uicomponent.getLabel(uicomponent.ROBOTS) %></label></td>
-					    	<td class="FieldComponent"><% uiform.renderField(uicomponent.ROBOTS_INDEX) %></td>
-					    	<td class="FieldComponent"><% uiform.renderField(uicomponent.ROBOTS_FOLLOW) %></td>
-					    </tr>
-					    
-					    <tr>
-					    	<td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SITEMAP) %></td>
-					    	<td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.SITEMAP) %> <span style="vertical-align: middle;"><%=uicomponent.getLabel(uicomponent.SITEMAP_VISIBLE) %></span></td>
-					    </tr>			    
-					    <tr>
-					    	<td class="FieldLabel"><label for="$uicomponent.FREQUENCY"><%=uicomponent.getLabel(uicomponent.FREQUENCY) %></label></td>
-					    	<td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.FREQUENCY) %></td>
-					    </tr>
-					    <tr>
-					    	<td class="FieldLabel"><label for="<%=uicomponent.PRIORITY%>"><%=uicomponent.getLabel(uicomponent.PRIORITY) %></label></td>
-					    	<td class="FieldComponent"><% uiform.renderField(uicomponent.PRIORITY) %></td>
-					    	<td class ="tdShowHelp">
-			            <div class="IconInContextHelp ShowHelpIcon" id="PriorityHelp" 
-			                  onmouseover="eXo.ecm.WCMUtils.showInContextHelp('PriorityHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('PriorityHelp', 'false')"
-			                  onfocus="eXo.ecm.WCMUtils.showInContextHelp('PriorityHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('PriorityHelp', 'false')">
-			              <div style="position: absolute;">
-			                <div class="InContextHelpContent" >                    
-			                  <div class="InContextHelpPopup">
-			                   <div id="ContentPathHelpID" class="LeftInContextHelpPopup">
-			                     <%= _ctx.appRes("UISEOForm.help.priority") %>
-			                    </div>
-			                  </div>                      
-			                </div>
-			              </div>
-			            </div>
-			          </td>
-					    </tr>			
-				    <%}%>		   
-				</table>			
-				<div class="UIActionSEO"> 				
+			<div id="RightContainer" style="display:block;" class="rightContainer">			  
+				<div class="form-horizontal">
+					<%if(!uicomponent.getOnContent()) { %>
+					<div class="control-group">
+						<label class="control-label" for="<%=uicomponent.TITLE%>"><%=uicomponent.getLabel(uicomponent.TITLE) %></label>
+						<div class="controls"><% uiform.renderField(uicomponent.TITLE) %></div>
+					</div>
+					<%}%>
+					<div class="control-group">
+						<label class="control-label" for="<%=uicomponent.DESCRIPTION%>"><%=uicomponent.getLabel(uicomponent.DESCRIPTION) %></label>
+						<div class="controls">
+							<% uiform.renderField(uicomponent.DESCRIPTION) %>
+							<i class="uiIconQuestion" id="DescriptionHelp" 
+										onmouseover="eXo.ecm.WCMUtils.showInContextHelp('DescriptionHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('DescriptionHelp', 'false')"
+										onfocus="eXo.ecm.WCMUtils.showInContextHelp('DescriptionHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('DescriptionHelp', 'false')">
+								<div style="position: absolute;">
+									<div class="InContextHelpContent">                    
+										<div class="InContextHelpPopup">
+										 <div id="ContentPathHelpID" class="LeftInContextHelpPopup">
+											 <%= _ctx.appRes("UISEOForm.help.description") %>
+											</div>
+										</div>                      
+									</div>
+								</div>
+							</i>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="<%=uicomponent.KEYWORDS%>"><%=uicomponent.getLabel(uicomponent.KEYWORDS) %></label>
+						<div class="controls">
+							<% uiform.renderField(uicomponent.KEYWORDS) %>
+							<i class="uiIconQuestion" id="KeywordsHelp" 
+										onmouseover="eXo.ecm.WCMUtils.showInContextHelp('KeywordsHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('KeywordsHelp', 'false')"
+										onfocus="eXo.ecm.WCMUtils.showInContextHelp('KeywordsHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('KeywordsHelp', 'false')">
+								<div style="position: absolute;">
+									<div class="InContextHelpContent">                    
+										<div class="InContextHelpPopup">
+										 <div id="ContentPathHelpID" class="LeftInContextHelpPopup">
+											 <%= _ctx.appRes("UISEOForm.help.keywords") %>
+											</div>
+										</div>                      
+									</div>
+								</div>
+							</i>
+						</div>
+					</div>	
+					 
+					<%if(!uicomponent.getOnContent()) { %>
+						<div class="control-group">
+							<label class="control-label" for="$uicomponent.ROBOTS_INDEX"><%=uicomponent.getLabel(uicomponent.ROBOTS) %></label>
+							<div class="controls">
+								<% uiform.renderField(uicomponent.ROBOTS_INDEX) %>
+								<% uiform.renderField(uicomponent.ROBOTS_FOLLOW) %>
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label"><%=uicomponent.getLabel(uicomponent.SITEMAP) %></label>
+							<div class="controls">
+								<% uiform.renderField(uicomponent.SITEMAP) %> <span style="vertical-align: middle;"><%=uicomponent.getLabel(uicomponent.SITEMAP_VISIBLE) %></span>
+							</div>
+						</div>			    
+						<div class="control-group">
+							<label class="control-label" for="$uicomponent.FREQUENCY"><%=uicomponent.getLabel(uicomponent.FREQUENCY) %></label>
+							<div class="controls"><% uiform.renderField(uicomponent.FREQUENCY) %></div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="<%=uicomponent.PRIORITY%>"><%=uicomponent.getLabel(uicomponent.PRIORITY) %></label>
+							<div class="controls">
+								<% uiform.renderField(uicomponent.PRIORITY) %>
+								<i class="uiIconQuestion" id="PriorityHelp" 
+											onmouseover="eXo.ecm.WCMUtils.showInContextHelp('PriorityHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('PriorityHelp', 'false')"
+											onfocus="eXo.ecm.WCMUtils.showInContextHelp('PriorityHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('PriorityHelp', 'false')">
+									<div style="position: absolute;">
+										<div class="InContextHelpContent" >                    
+											<div class="InContextHelpPopup">
+											 <div id="ContentPathHelpID" class="LeftInContextHelpPopup">
+												 <%= _ctx.appRes("UISEOForm.help.priority") %>
+												</div>
+											</div>                      
+										</div>
+									</div>
+								</i>
+							</div>
+						</div>			
+					<%}%>		   
+				</div>			
+				<div class="uiAction uiActionBorder uiActionSEO"> 				
 					<% for(action in uicomponent.getActions()) { 
 							 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action);
 							 String link = uicomponent.event(action);
-							 String classAction = "ActionButton LightBlueStyle";
-							 if(action.equals("Cancel")) classAction = "ActionButton LightBlueStyle CancelButton";
 					%>							
-			 		  <a href="javascript:void(0);" onclick="$link" class="$classAction">$actionLabel</a>
+			 		  <button type="button" href="javascript:void(0);" onclick="$link" class="btn">$actionLabel</button>
 					<%}%>					
 				</div>	    
 			</div>	  	
 			
 		</div>
-	</div>
 	<%uiform.end()%>	
 </div>

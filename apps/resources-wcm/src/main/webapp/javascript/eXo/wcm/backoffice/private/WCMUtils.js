@@ -204,12 +204,10 @@
 		var rightContainer = document.getElementById("RightContainer");
 		if(gj(leftContainer).height() > 455) rightContainer.style.height = gj(leftContainer).height() + "px";
 		var seoPopup = document.getElementById("UISEOPopupWindow");
-		var formContainer = gj(seoPopup).find("div.FormContainer:first")[0];
+		var formContainer = gj(seoPopup).find("div.formContainer:first")[0];
 		var resizeButton = null;	
 		rightContainer.style.display = 'block';
-		seoPopup.style.width = "640px";	  
-		leftContainer.style.marginRight="395px";
-		formContainer.style.width = "610px";
+		seoPopup.style.width = "640px";
 	}
 
 	WCMUtils.prototype.showSEOLanguage = function(isShow) {

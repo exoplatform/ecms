@@ -1,0 +1,131 @@
+.uiSEOForm {
+	min-width: 600px;
+	background: #F7F7F7;
+	
+	.formContainer .leftContainer {
+		float: left;
+		width: 165px;
+		padding: 20px 0px 0px 10px;
+
+		.itemTab {
+			border: 1px solid #f7f7f7;
+			margin: 0px 0px 5px 0;
+			cursor: pointer;
+			line-height: 27px;
+			.border-left-radius(3px);
+			
+			&:hover {
+				background: #e2e2e2;
+				border: 1px solid #e2e2e2;
+			}
+			
+			a {
+				color: #333333;
+			}
+		}
+		
+		.seoLanguage {
+			margin-bottom: 15px;
+		}
+
+		.selected {
+			background: white;    
+			margin: 0px -1px 5px 0;
+			border: 1px solid #ccc;
+			border-right: 1px solid white;
+			box-shadow: -2px 2px 2px rgba(0,0,0,0.15);
+			
+			&:hover {
+				background: white;
+				border: 1px solid #ccc;
+				border-right: 1px solid white;
+			}
+			
+			a {
+				font-weight: bold;
+			}
+		}
+		
+		.uiIconDelete {
+			margin-top: 5px;
+		}
+		
+		.addNewSEO {
+			margin-left: 15px;
+		}
+	
+		.selectSEOLanguage {
+			display: none;
+			margin-left: 5px;
+		}
+	
+		.uiSelectbox {
+			width: 145px;
+			
+			.selectbox {
+				width: 170px;
+			}
+		}
+	}
+	
+	.formContainer .rightContainer {
+		border-left: 1px solid #ccc;
+		overflow: auto;
+		padding: 10px;
+		margin-left: 175px;
+		background: #fff;
+	}
+	
+	.form-horizontal {
+		padding-top: 12px;
+		
+		.control-label {
+			width: 90px;
+		}
+		
+		.controls {
+			margin-left: 100px;
+			
+			.uiSelectbox {
+				width: 100px;
+				
+				.selectbox {
+					width: 125px;
+				}
+			}
+		}
+	}
+
+	.uiActionSEO {
+		margin: -10px -10px 0px -10px;
+	}
+}
+/************** For edit UISEOForm ***********************/
+.uiSEOForm {
+
+	.formContainer .ResizeSideBar {
+		float: right;        
+		width: 14px;    
+	}
+
+	.formContainer .ResizeSideBar .ResizeButton {
+		background: url("/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/ShowLeftContent.gif") no-repeat scroll center center transparent;
+		cursor: pointer;    
+		margin: auto;    
+		width: 14px;
+		display: block;
+		margin: auto;
+		position: static;
+	}
+
+	.formContainer .ResizeSideBar .ShowRightContent {
+		background: url("/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/ResizeButton.gif") no-repeat scroll center center transparent;
+		cursor: pointer;
+		height: 14px;
+		margin: auto;    
+		width: 14px;
+		display: block;
+		margin: auto;
+		position: static;
+	}
+}
