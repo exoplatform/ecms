@@ -77,8 +77,8 @@
   //Default 
   String[] arrColumns = ["exo:dateCreated;123px", "exo:owner;123px"];
 %>
-<div id="$componentId">
-  <div id="${componentId}-$viewComponentId" class="uiListView">
+<div id="$componentId" >
+  <div id="${componentId}-$viewComponentId" class="uiListView $componentId">
     <div class="uiListGrid">
 			<div class="uiBox noRounded">
       <div class="titleTable clearfix">

@@ -99,7 +99,7 @@
 					</div>
 			</div>
 		</div>
-		<div class="uiThumbnailsView">
+		<div class="uiThumbnailsView $componentId">
 		  <div class="actionIconsContainer clearfix">
 		    <%
 		      int i = 0;

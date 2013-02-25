@@ -53,7 +53,7 @@
 	String[] arrColumns = ["exo:owner;95px","exo:dateModified;123px","exo:dateCreated;121px"];
 %>
 <div id="$componentId">
-	<div id="${componentId}-$viewComponentId" class="uiListView">	
+	<div id="${componentId}-$viewComponentId" class="uiListView $componentId">	
 		<div class="uiListGrid">
 			<div class="uiBox noRounded">
 				<div class="titleTable clearfix">
