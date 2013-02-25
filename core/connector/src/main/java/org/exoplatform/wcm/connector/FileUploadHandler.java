@@ -331,6 +331,9 @@ public class FileUploadHandler {
     String location = resource.getStoreLocation();
     byte[] uploadData = IOUtil.getFileContentAsBytes(location);
     Node file = parent.addNode(fileName,FCKUtils.NT_FILE);
+    file.addMixin("mix:i18n");
+    file.addMixin("mix:votable");
+    file.addMixin("mix:commentable");
     Node jcrContent = file.addNode("jcr:content","nt:resource");
     //MimeTypeResolver mimeTypeResolver = new MimeTypeResolver();
     DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();
