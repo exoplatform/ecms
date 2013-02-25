@@ -204,9 +204,9 @@ public class UITemplateList extends UIPagingGrid {
         Node node = nodes.nextNode();        
         if (listNodeTypeName.contains(node.getName())) {
         	label = node.hasProperty(LABEL_PROPERTY) ? node.getProperty(LABEL_PROPERTY).getString() : "";
-      		if(label.length() > 0 && label.indexOf(" ") > 0) icon = "uiIconEcms" + label.substring(0,label.indexOf(" "));
-      		else icon = "uiIconEcms" + label;
-      		icon = "uiIconFile " + icon;
+        	label = label.replaceAll(" ", "");
+      		icon = "uiIcon16x16Template" + label;
+      		icon = icon + " uiIconFile";
         	if(filter.equals(DOCUMENTS_TEMPLATE_TYPE)) {        		
         		if(documentNodeTypes.contains(node.getName()))
         			templateData.add(new TemplateData(node.getName(), label, icon));
