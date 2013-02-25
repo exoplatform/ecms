@@ -26,7 +26,6 @@ import javax.jcr.version.VersionHistory;
 
 import org.exoplatform.ecm.jcr.model.VersionNode;
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
-import org.exoplatform.ecm.webui.component.admin.templates.UITemplateContainer;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.groovyscript.text.TemplateService;
@@ -40,6 +39,7 @@ import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
+import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
@@ -188,7 +188,7 @@ public class UITemplateForm extends UIForm {
       getUIStringInput(FIELD_NAME).setDisabled(false).setValue(null);
       getUIFormSelectBox(FIELD_HOMETEMPLATE).setValue(null);
       getUIFormSelectBox(FIELD_HOMETEMPLATE).setDisabled(false);
-      getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setRendered(false);
+      getUICheckBoxInput(FIELD_ENABLEVERSION).setRendered(false);
       template_ = null;
       selectedVersion_ = null;
       baseVersionName_ = null;
@@ -208,7 +208,7 @@ public class UITemplateForm extends UIForm {
       String value = templatePath.substring(0, templatePath.lastIndexOf("/"));
       getUIFormSelectBox(FIELD_HOMETEMPLATE).setValue(value);
       getUIFormSelectBox(FIELD_HOMETEMPLATE).setDisabled(false);
-      getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setRendered(true);
+      getUICheckBoxInput(FIELD_ENABLEVERSION).setRendered(true);
       if (isVersioned(templateNode)) {
         rootVersionNode = getRootVersion(templateNode);
         baseVersionName_ = templateNode.getBaseVersion().getName();
@@ -242,7 +242,6 @@ public class UITemplateForm extends UIForm {
       String templateName = uiForm.getUIStringInput(FIELD_NAME).getValue().trim();
       String content = uiForm.getUIFormTextAreaInput(FIELD_CONTENT).getValue();
       String homeTemplate = uiForm.getUIFormSelectBox(FIELD_HOMETEMPLATE).getValue();
-      UITemplateContainer uiTempContainer = uiForm.getAncestorOfType(UITemplateContainer.class);
       ManageViewService manageViewService = uiForm.getApplicationComponent(ManageViewService.class);
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
       if (homeTemplate == null) {
@@ -319,15 +318,16 @@ public class UITemplateForm extends UIForm {
       String workspaceName = NodeLocation.getNodeByLocation(uiForm.template_).getSession().getWorkspace().getName();
       JCRResourceResolver resourceResolver = new JCRResourceResolver(workspaceName);
       TemplateService templateService = uiForm.getApplicationComponent(TemplateService.class);
-      if (path != null)
-        templateService.invalidateTemplate(path, resourceResolver);
-      uiForm.refresh();
-      if (uiForm.getId().equalsIgnoreCase(UIECMTemplateList.ST_ecmTempForm)) {
-        UIECMTemplateList uiECMTempList = uiTempContainer.getChild(UIECMTemplateList.class);
-        uiECMTempList.refresh(uiECMTempList.getUIPageIterator().getCurrentPage());
-        uiECMTempList.setRenderSibling(UIECMTemplateList.class);
+      if (path != null) templateService.invalidateTemplate(path, resourceResolver);
+      UITemplateContainer uiTempContainer = uiForm.getAncestorOfType(UIPopupWindow.class).getParent();
+      UIECMTemplateList uiECMTempList = uiTempContainer.getChild(UIECMTemplateList.class);
+      uiECMTempList.refresh(uiECMTempList.getUIPageIterator().getCurrentPage());
+      if (uiForm.isAddNew_) {
+        uiTempContainer.removeChildById(UIECMTemplateList.ST_ecmTempForm + "Add");
+      } else {
+        uiTempContainer.removeChildById(UIECMTemplateList.ST_ecmTempForm + "Edit");
       }
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiTempContainer.getParent());
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiTempContainer);
     }
   }
 
@@ -335,20 +335,20 @@ public class UITemplateForm extends UIForm {
     public void execute(Event<UITemplateForm> event) throws Exception {
       UITemplateForm uiForm = event.getSource();
       uiForm.refresh();
-      UITemplateContainer uiTemplateContainer = uiForm.getAncestorOfType(UITemplateContainer.class);
+      UITemplateContainer uiTempContainer = uiForm.getAncestorOfType(UIPopupWindow.class).getParent();
       if (uiForm.isAddNew_) {
-        uiTemplateContainer.removeChildById(UIECMTemplateList.ST_ecmTempForm + "Add");
+        uiTempContainer.removeChildById(UIECMTemplateList.ST_ecmTempForm + "Add");
       } else {
-        uiTemplateContainer.removeChildById(UIECMTemplateList.ST_ecmTempForm + "Edit");
+        uiTempContainer.removeChildById(UIECMTemplateList.ST_ecmTempForm + "Edit");
       }
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiTemplateContainer.getParent());      
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiTempContainer);
     }
   }
 
   static public class ResetActionListener extends EventListener<UITemplateForm> {
     public void execute(Event<UITemplateForm> event) throws Exception {
       UITemplateForm uiForm = event.getSource();
-      UITemplateContainer uiTempContainer = uiForm.getAncestorOfType(UITemplateContainer.class);
+      UITemplateContainer uiTempContainer = uiForm.getAncestorOfType(UIPopupWindow.class).getParent();
       if (uiForm.selectedVersion_ != null) {
         if (!uiForm.selectedVersion_.getName().equals(uiForm.baseVersionName_)) {
           Node templateNode = NodeLocation.getNodeByLocation(uiForm.template_);
@@ -357,10 +357,9 @@ public class UITemplateForm extends UIForm {
         }
       }
       uiForm.refresh();
-      if (uiForm.getId().equalsIgnoreCase(UIECMTemplateList.ST_ecmTempForm)) {
-        UIECMTemplateList uiECMTempList = uiTempContainer.getChild(UIECMTemplateList.class);
-        uiECMTempList.refresh(uiECMTempList.getUIPageIterator().getCurrentPage());
-      }
+      UIECMTemplateList uiECMTempList = uiTempContainer.getChild(UIECMTemplateList.class);
+      uiECMTempList.refresh(uiECMTempList.getUIPageIterator().getCurrentPage());
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
     }
   }
 
@@ -373,11 +372,7 @@ public class UITemplateForm extends UIForm {
       Node frozenNode = versionNode.getNode(Utils.JCR_FROZEN);
       String content = uiForm.templateService.getTemplate(frozenNode);
       uiForm.getUIFormTextAreaInput(FIELD_CONTENT).setValue(content);
-      UITemplateContainer uiTempContainer = uiForm.getAncestorOfType(UITemplateContainer.class);
-      if (uiForm.getId().equalsIgnoreCase(UIECMTemplateList.ST_ecmTempForm)) {
-        UIECMTemplateList uiECMTempList = uiTempContainer.getChild(UIECMTemplateList.class);
-        uiECMTempList.refresh(uiECMTempList.getUIPageIterator().getCurrentPage());
-      }
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
     }
   }
 
@@ -390,19 +385,16 @@ public class UITemplateForm extends UIForm {
       if (uiForm.baseVersionName_.equals(selectedVesion.getName()))
         return;
       uiForm.update(null, selectedVesion);
-      UITemplateContainer uiTempContainer = uiForm.getAncestorOfType(UITemplateContainer.class);
-      if (uiForm.getId().equalsIgnoreCase(UIECMTemplateList.ST_ecmTempForm)) {
-        UIECMTemplateList uiECMTempList = uiTempContainer.getChild(UIECMTemplateList.class);
-        uiECMTempList.refresh(uiECMTempList.getUIPageIterator().getCurrentPage());
-      }
-
-      uiForm.refresh();
+      UITemplateContainer uiTempContainer = uiForm.getAncestorOfType(UIPopupWindow.class).getParent();
+      UIECMTemplateList uiECMTempList = uiTempContainer.getChild(UIECMTemplateList.class);
+      uiECMTempList.refresh(uiECMTempList.getUIPageIterator().getCurrentPage());
       UITemplateContainer uiTemplateContainer = uiForm.getAncestorOfType(UITemplateContainer.class);
       if (uiForm.isAddNew_) {
         uiTemplateContainer.removeChildById(UIECMTemplateList.ST_ecmTempForm + "Add");
       } else {
         uiTemplateContainer.removeChildById(UIECMTemplateList.ST_ecmTempForm + "Edit");
       }
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiTempContainer);
     }
   }
 }
