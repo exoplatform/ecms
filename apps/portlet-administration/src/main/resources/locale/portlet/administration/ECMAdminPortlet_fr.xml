@@ -946,7 +946,7 @@
   -->
   <UIActionTypeList>
     <header>
-      <name>Types</name>
+      <name>Script</name>
       <label>Nom</label>
     </header>
     <action>
@@ -1343,7 +1343,7 @@
     </msg>
     <header>
       <scriptName>Nom</scriptName>
-      <path>Type</path>
+      <path>Script</path>
       <baseVersion>Version de base</baseVersion>
       <action>Actions</action>
     </header>
@@ -1381,7 +1381,7 @@
       <selectVersion>Versions</selectVersion>
       <scriptContent>Contenu</scriptContent>
       <scriptLabel>Nom</scriptLabel>
-      <scriptName>Type</scriptName>
+      <scriptName>Script</scriptName>
       <enableVersion>Activer le versionning</enableVersion>
     </label>
   </UIScriptForm>
@@ -1405,7 +1405,7 @@
       <selectVersion>Versions</selectVersion>
       <scriptContent>Script</scriptContent>
       <scriptLabel>Nom</scriptLabel>
-      <scriptName>Type</scriptName>
+      <scriptName>Script</scriptName>
       <enableVersion>Activer le versionning</enableVersion>
     </label>
   </ecmScriptForm>

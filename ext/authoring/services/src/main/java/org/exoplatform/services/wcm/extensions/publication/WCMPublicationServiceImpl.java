@@ -247,7 +247,7 @@ public class WCMPublicationServiceImpl
   private boolean allowEnrollInPublication(Node node, String nodeType) throws Exception {
     String path = node.getPath();
     Node parentNode = node.getParent();
-    while(!path.equals("/") || path.length() > 0) {
+    while(!path.equals("/") && path.length() > 0) {
       parentNode = (Node)node.getSession().getItem(path);
       if(parentNode.isNodeType(nodeType)) return false;
       path = StringUtils.substringBefore(path, path.substring(path.lastIndexOf("/"), path.length()));
