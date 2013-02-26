@@ -161,16 +161,19 @@ public class TrashServiceImpl implements TrashService {
       Session trashSession = WCMCoreUtils.getSystemSessionProvider().getSession(this.trashWorkspace_, manageableRepository);
       String actualTrashPath = this.trashHome_ + (this.trashHome_.endsWith("/") ? "" : "/")
           + fixRestorePath(nodeName);
+      ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+      ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
       if (trashSession.getWorkspace().getName().equals(
           nodeSession.getWorkspace().getName())) {
         if (node.getPrimaryNodeType().getName().equals((NodetypeConstant.NT_FILE))) {
           Node parent = node.getParent();
-          ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
-          ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
+          
           if (listenerService ==null || activityService == null) return;
           if (activityService.isAcceptedNode(parent) && !activityService.isCreating(parent)) {
             listenerService.broadcast(ActivityCommonService.ATTACH_REMOVED_ACTIVITY, parent, node);
           }
+        } else if (activityService.isAcceptedNode(node)) {
+          listenerService.broadcast(ActivityCommonService.NODE_REMOVED_ACTIVITY, node, null);
         }
         trashSession.getWorkspace().move(node.getPath(),
             actualTrashPath);
@@ -197,12 +200,14 @@ public class TrashServiceImpl implements TrashService {
         }
         if (node.getPrimaryNodeType().getName().equals((NodetypeConstant.NT_FILE))) {
           Node parent = node.getParent();
-          ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
-          ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
+          activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+          listenerService = WCMCoreUtils.getService(ListenerService.class);
           if (listenerService ==null || activityService == null) return;
           if (activityService.isAcceptedNode(parent) && !activityService.isCreating(parent)) {
             listenerService.broadcast(ActivityCommonService.ATTACH_REMOVED_ACTIVITY, parent, node);
           }
+        }else if (activityService.isAcceptedNode(node)) {
+          listenerService.broadcast(ActivityCommonService.NODE_REMOVED_ACTIVITY, node, null);
         }
         node.remove();
       }

@@ -46,6 +46,8 @@ public class RemoveNodeActivityAction implements Action{
         if (activityService.isAcceptedNode(parent)) {
           listenerService.broadcast(ActivityCommonService.ATTACH_REMOVED_ACTIVITY, parent, node);
         }
+      } else if (activityService.isAcceptedNode(node) && !activityService.isCreating(node)) {
+        listenerService.broadcast(ActivityCommonService.NODE_REMOVED_ACTIVITY, node, null);
       }
     }
     return false;
