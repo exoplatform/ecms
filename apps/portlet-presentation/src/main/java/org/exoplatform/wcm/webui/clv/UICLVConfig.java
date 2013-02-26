@@ -337,6 +337,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     UIFormStringInput itemPathInput =
       new UIFormStringInput(ITEM_PATH_FORM_STRING_INPUT, ITEM_PATH_FORM_STRING_INPUT, itemPath);
     itemPathInput.setEditable(false);
+    itemPathInput.setDisabled(true);
     itemPathInput.addValidator(MandatoryValidator.class);
     UIFormInputSetWithAction itemPathInputSet = new UIFormInputSetWithAction(ITEM_PATH_FORM_INPUT_SET);
     itemPathInputSet.setActionInfo(ITEM_PATH_FORM_STRING_INPUT, new String[] { "SelectFolderPath" }) ;
