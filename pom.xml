@@ -83,14 +83,6 @@
       <type>jar</type>
     </dependency>
 
-    <!-- ECMS (NodeFinder) -->
-    <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-services</artifactId>
-      <scope>provided</scope>
-      <type>jar</type>
-    </dependency>
-
     <!-- Google API -->
     <dependency>
       <groupId>com.google.api-client</groupId>
@@ -135,42 +127,16 @@
       <artifactId>slf4j-log4j12</artifactId>
       <scope>test</scope>
     </dependency>
-    <!-- dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-services</artifactId>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>org.exoplatform.portal</groupId>
-          <artifactId>exo.portal.webui.portal</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency -->
-    <!-- dependency>
-      <groupId>com.exoplatform.platform.cloud</groupId>
-      <artifactId>exo-platform-cloud-services</artifactId>
-      <scope>test</scope>
-    </dependency -->
     <dependency>
       <groupId>org.exoplatform.platform</groupId>
       <artifactId>exo.platform.component.organization</artifactId>
       <scope>test</scope>
     </dependency>
-    <!-- dependency>
-      <groupId>com.exoplatform.cloudworkspaces</groupId>
-      <artifactId>cloud-workspaces-component-organization</artifactId>
-      <scope>test</scope>
-    </dependency -->
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
       <scope>test</scope>
     </dependency>
-    <!-- dependency>
-      <groupId>com.exoplatform.cloud-management</groupId>
-      <artifactId>cloud-rest-everrest</artifactId>
-      <scope>test</scope>
-    </dependency -->
   </dependencies>
 
   <build>

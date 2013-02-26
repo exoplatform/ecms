@@ -35,8 +35,8 @@
     <init-params>
       <properties-param>
         <name>storage-configuration</name>
-        <property name="root-dir" value="${exo.shared.dir}/filedrive" />
-        <property name="base-url" value="file:///${exo.shared.dir}/filedrive" />
+        <property name="root-dir" value="${exo.shared.dir}/filedrive"/>
+        <property name="base-url" value="file:///${exo.shared.dir}/filedrive"/>
         <!-- property name="base-url" value="${filedrive.rest.url}" / -->
       </properties-param>
     </init-params>
@@ -105,8 +105,8 @@
       <init-params>
         <properties-param>
           <name>drive-configuration</name>
-          <property name="provider-id" value="gdrive" />
-          <property name="provider-name" value="Google Drive" />
+          <property name="provider-id" value="gdrive"/>
+          <property name="provider-name" value="Google Drive"/>
         </properties-param>
       </init-params>
     </component-plugin>
@@ -117,8 +117,8 @@
       <init-params>
         <properties-param>
           <name>drive-configuration</name>
-          <property name="provider-id" value="exo" />
-          <property name="provider-name" value="eXo Test Drive" />
+          <property name="provider-id" value="exo"/>
+          <property name="provider-name" value="eXo Test Drive"/>
         </properties-param>
       </init-params>
     </component-plugin>

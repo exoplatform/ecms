@@ -23,7 +23,6 @@ import javax.annotation.security.RolesAllowed;
 import javax.jcr.Item;
 import javax.jcr.LoginException;
 import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.ws.rs.FormParam;
@@ -46,15 +45,14 @@ import org.exoplatform.clouddrive.CloudFile;
 import org.exoplatform.clouddrive.CloudProvider;
 import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.NotCloudFileException;
-import org.exoplatform.services.cms.link.NodeFinder;
+import org.exoplatform.clouddrive.jcr.JCRNodeFinder;
+import org.exoplatform.clouddrive.jcr.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
-
 
 /**
  * REST service providing information about providers. Created by The eXo Platform SAS.
@@ -79,9 +77,13 @@ public class DriveService implements ResourceContainer {
   protected final NodeFinder             finder;
 
   /**
-   * REST cloudDrives uses {@link CloudDriveService} for actual job.
+   * REST cloudDrives uses {@link CloudDriveService} for actual job. This service will use {@link NodeFinder}
+   * injected from container.
    * 
-   * @param {@link CloudDriveService} cloudDrives
+   * @param cloudDrives {@link CloudDriveService}
+   * @param jcrService {@link RepositoryService}
+   * @param sessionProviders {@link SessionProviderService}
+   * @param finder {@link NodeFinder}
    */
   public DriveService(CloudDriveService cloudDrives,
                       RepositoryService jcrService,
@@ -91,6 +93,22 @@ public class DriveService implements ResourceContainer {
     this.jcrService = jcrService;
     this.sessionProviders = sessionProviders;
     this.finder = finder;
+  }
+
+  /**
+   * REST cloudDrives uses {@link CloudDriveService} for actual job.
+   * 
+   * @param cloudDrives {@link CloudDriveService}
+   * @param jcrService {@link RepositoryService}
+   * @param sessionProviders {@link SessionProviderService}
+   */
+  public DriveService(CloudDriveService cloudDrives,
+                      RepositoryService jcrService,
+                      SessionProviderService sessionProviders) {
+    this.cloudDrives = cloudDrives;
+    this.jcrService = jcrService;
+    this.sessionProviders = sessionProviders;
+    this.finder = new JCRNodeFinder(jcrService);
   }
 
   /**
