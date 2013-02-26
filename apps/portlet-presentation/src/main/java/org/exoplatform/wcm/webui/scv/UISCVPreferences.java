@@ -116,6 +116,7 @@ public class UISCVPreferences extends UIForm implements UISelectable{
     String strNodeName = getNodeNameByPreferences();
     txtContentPath = new UIFormStringInput(CONTENT_PATH_INPUT, CONTENT_PATH_INPUT, strNodeName);
     txtContentPath.setReadOnly(true);
+    txtContentPath.setDisabled(true);
 
     UIFormInputSetWithAction itemPathInputSet = new UIFormInputSetWithAction(ITEM_PATH_FORM_INPUT_SET);
     itemPathInputSet.setActionInfo(CONTENT_PATH_INPUT, new String[] { "SelectFolderPath" }) ;
