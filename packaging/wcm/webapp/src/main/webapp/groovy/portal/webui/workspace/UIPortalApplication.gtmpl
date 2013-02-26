@@ -175,15 +175,9 @@
 
  <div class="$uicomponent.skin" id="UIPortalApplication" style="!height: 100%;">
      
-   <div class="AjaxLoadingMask" id="AjaxLoadingMask" style="display: none; margin: auto;">
-     <div class="LoadingContainer">
-       <div class="LoadingText"><%=_ctx.appRes("UIPortalApplication.label.Loading")%></div>
-       <span class="LoadingProgressBar"></span>
-       
-       <div class="UIAction"> 
-         <a href="javascript:ajaxAbort();" class="ActionButton LightBlueStyle"><%=_ctx.appRes("UIPortalApplication.label.Abort")%></a>
-       </div>
-     
-     </div>
+   <div class="ajaxLoadingMask clearfix" id="AjaxLoadingMask" style="display: none; margin: auto;">
+		<a href="javascript:ajaxAbort();" class="uiIconClose uiIconWhite pull-right"></a>
+		<i class="loadingProgressBar pull-left"></i>
+		<div class="loadingText"><%=_ctx.appRes("UIPortalApplication.label.Loading")%></div>
    </div>
  
