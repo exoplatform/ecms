@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
 
-    Copyright (C) 2012 eXo Platform SAS.
+    Copyright (C) 2013 eXo Platform SAS.
     
     This is free software; you can redistribute it and/or modify it
     under the terms of the GNU Lesser General Public License as
@@ -25,8 +25,8 @@
   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
   <component>
-    <key>org.exoplatform.clouddrive.action.CloudDriveUIService</key>
-    <type>org.exoplatform.clouddrive.action.CloudDriveUIService</type>
+    <key>org.exoplatform.clouddrive.ecms.CloudDriveUIService</key>
+    <type>org.exoplatform.clouddrive.ecms.CloudDriveUIService</type>
   </component>
 
   <external-component-plugins>
@@ -46,12 +46,12 @@
               <string>ShowConnectCloudDrive</string>
             </field>
             <field name="component">
-              <string>org.exoplatform.clouddrive.action.ShowConnectCloudDriveActionComponent</string>
+              <string>org.exoplatform.clouddrive.ecms.ShowConnectCloudDriveActionComponent</string>
             </field>
             <field name="extendedFilters">
               <collection type="java.util.ArrayList">
                 <value>
-                  <object type="org.exoplatform.clouddrive.filters.PersonalDocumentsFilter"></object>
+                  <object type="org.exoplatform.clouddrive.ecms.filters.PersonalDocumentsFilter"></object>
                 </value>
               </collection>
             </field>
@@ -67,12 +67,12 @@
               <string>ConnectGoogleDrive</string>
             </field>
             <field name="component">
-              <string>org.exoplatform.clouddrive.action.ConnectGoogleDriveActionComponent</string>
+              <string>org.exoplatform.clouddrive.ecms.ConnectGoogleDriveActionComponent</string>
             </field>
             <field name="extendedFilters">
               <collection type="java.util.ArrayList">
                 <value>
-                  <object type="org.exoplatform.clouddrive.filters.PersonalDocumentsFilter"></object>
+                  <object type="org.exoplatform.clouddrive.ecms.filters.PersonalDocumentsFilter"></object>
                 </value>
               </collection>
             </field>
@@ -96,11 +96,8 @@
               <string>OpenCloudFile</string>
             </field>
             <field name="component">
-              <string>org.exoplatform.clouddrive.action.OpenCloudFileManagerComponent</string>
+              <string>org.exoplatform.clouddrive.ecms.OpenCloudFileManagerComponent</string>
             </field>
-            <!-- field name="category"><string>FileViewer</string></field -->
-            <!-- field name="category"><string>PermlinkContextMenu</string></field -->
-            <!-- field name="category"><string>GroundContextMenu</string></field -->
             <field name="category">
               <string>ItemContextMenu_SingleSelection</string>
             </field>
@@ -126,7 +123,7 @@
               <string>RefreshCloudDrive</string>
             </field>
             <field name="component">
-              <string>org.exoplatform.clouddrive.action.RefreshCloudDriveManagerComponent</string>
+              <string>org.exoplatform.clouddrive.ecms.RefreshCloudDriveManagerComponent</string>
             </field>
             <field name="category">
               <string>ItemContextMenu_SingleSelection</string>
@@ -153,7 +150,7 @@
               <string>ShowCloudFile</string>
             </field>
             <field name="component">
-              <string>org.exoplatform.clouddrive.action.CloudFileViewerComponent</string>
+              <string>org.exoplatform.clouddrive.ecms.CloudFileViewerComponent</string>
             </field>
             <field name="category">
               <string>FileViewer</string>

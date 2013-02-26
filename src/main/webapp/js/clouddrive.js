@@ -630,7 +630,7 @@ function CloudDrive() {
 					fail : function(err, status) {
 						log("ERROR: Cloud Drive file " + nodeWorkspace + ":" + nodePath + " cannot be read: " + err
 								+ " (" + status + ")");
-						CWUtil.showError("Error reading drive file", err);
+						cloudDriveUI.showError("Error reading drive file", err);
 					},
 					done : function(file, status) {
 						if (status != 204) {
@@ -654,7 +654,7 @@ function CloudDrive() {
 				fail : function(err, status) {
 					log("ERROR: Cloud Drive " + nodeWorkspace + ":" + nodePath + " cannot be read: " + err + " ("
 							+ status + ")");
-					CWUtil.showError("Error reading drive", err);
+					cloudDriveUI.showError("Error reading drive", err);
 				},
 				done : function(drive, status) {
 					if (status != 204) {
@@ -1097,10 +1097,8 @@ function CloudDriveUI() {
 				var docsUrl = ", \"" + location + "\"";
 				var docsOnclick = personalDocumentsLink();
 				docsOnclick = docsOnclick ? ", \"" + docsOnclick + "\"" : "";
-				task = "CWUtil.loadIfUndefined(\"cloudDriveUI\", \"/cloud-workspaces-drives/js/clouddrive.js\", "
-						+ "function() {cloudDriveUI.connectState(\"" + state.serviceUrl + "\"" + docsUrl + docsOnclick
-						+ ");}, 500);";
-				CWTasks.add(task);
+				task = "cloudDriveUI.connectState(\"" + state.serviceUrl + "\"" + docsUrl + docsOnclick + ");";
+				cloudDriveUI.add(task);
 
 				progress = state.progress;
 				driveName = state.drive.provider.name;
@@ -1198,31 +1196,31 @@ function CloudDriveUI() {
 				}
 				var titleLink = "<span><a href=\"" + ahref + "\">" + drive.provider.name
 						+ " Synchronized.</a></span>"
-				CWUtil.showInfo(titleLink, details);
+				cloudDriveUI.showInfo(titleLink, details);
 			} else {
 				var titleLink = "<span><a href=\"" + ahref + "\">" + drive.provider.name
 						+ " Already Up To Date.</a></span>"
-				CWUtil.showInfo(titleLink, "Files on " + driveLink + " are in actual state.");
+				cloudDriveUI.showInfo(titleLink, "Files on " + driveLink + " are in actual state.");
 			}
 		});
 		process.fail(function(response, status, err) {
 			if (status == 403 && response.name) {
 				// assuming provider object in response
-				CWUtil.showWarn("Error Synchronizing with " + response.name,
+				cloudDriveUI.showWarn("Error Synchronizing with " + response.name,
 						"<span>Access rewoked or outdated. Start <a href='javascript:cloudDrive.synchronize(this)'>"
 								+ "Synchronization</a> again to renew access.</span>");
 			} else {
-				CWUtil.showError("Error Synchronizing Drive", response + " (" + status + ")");
+				cloudDriveUI.showError("Error Synchronizing Drive", response + " (" + status + ")");
 			}
 		});
-	}
+	};
 
 	/**
 	 * Refresh WCM explorer documents.
 	 */
 	this.refreshDocuments = function(currentNodePath) {
 		refresh(currentNodePath);
-	}
+	};
 
 	/**
 	 * Open or refresh drive node in WCM explorer.
@@ -1384,7 +1382,163 @@ function CloudDriveUI() {
 			this.alt = $(this).text();
 		});
 	};
-}
+};
+
+function TaskStore() {
+	var COOKIE_NAME = "tasks.exoplatform.org";
+	var loaded = false;
+
+	var store = function(tasks) {
+		setCookie(COOKIE_NAME, tasks, 20 * 60 * 1000); // 20min
+	};
+
+	var removeTask = function(task) {
+		var pcookie = getCookie(COOKIE_NAME);
+		if (pcookie && pcookie.length > 0) {
+			var updated = "";
+			var existing = pcookie.split("~");
+			for ( var i = 0; i < existing.length; i++) {
+				var t = existing[i];
+				if (t != task) {
+					updated += updated.length > 0 ? "~" + t : t;
+				}
+			}
+			store(updated);
+		}
+	};
+
+	var addTask = function(task) {
+		var pcookie = getCookie(COOKIE_NAME);
+		if (pcookie) {
+			if (pcookie.indexOf(task) < 0) {
+				var tasks = pcookie.length > 0 ? pcookie + "~" + task : task;
+				store(tasks);
+			}
+		} else {
+			store(task);
+		}
+	};
+
+	/**
+	 * Register task in store.
+	 */
+	this.add = function(task) {
+		if (task) {
+			addTask(task);
+		} else {
+			log("not valid task (code is not defined)");
+		}
+	};
+
+	/**
+	 * Remove task from the store.
+	 */
+	this.remove = function(task) {
+		removeTask(task);
+	}
+
+	/**
+	 * Load stored tasks.
+	 */
+	this.load = function() {
+		// load once per page
+		if (loaded)
+			return;
+
+		// read cookie and eval each stored code
+		var pcookie = getCookie(COOKIE_NAME);
+		if (pcookie && pcookie.length > 0) {
+			try {
+				var tasks = pcookie.split("~");
+				for ( var i = 0; i < tasks.length; i++) {
+					var task = tasks[i];
+					try {
+						removeTask(task);
+						log("Loading task [" + task + "]");
+						eval(task);
+					} catch (e) {
+						log("Error evaluating task: " + task + ":" + e + ". Skipped.");
+					}
+				}
+			} finally {
+				loaded = true;
+				log("Tasks loaded.");
+			}
+		}
+	};
+
+	/**
+	 * Add style to current document (to the end of head).
+	 */
+	this.loadStyle = function(cssUrl) {
+		if (document.createStyleSheet) {
+			document.createStyleSheet(cssUrl); // IE way
+		} else {
+			var style = document.createElement("link");
+			style.type = "text/css";
+			style.rel = "stylesheet";
+			style.href = cssUrl;
+			var headElems = document.getElementsByTagName("head");
+			headElems[headElems.length - 1].appendChild(style);
+			// $("head").append($("<link href='" + cssUrl + "' rel='stylesheet' type='text/css' />"));
+		}
+	};
+
+	/**
+	 * Show notice to user. Options support "icon" class, "hide", "closer" and "nonblock" features.
+	 */
+	this.showNotice = function(type, title, text, options) {
+		var noticeOptions = {
+			title : title,
+			text : text,
+			type : type,
+			icon : "picon " + (options ? options.icon : ""),
+			hide : options && typeof options.hide != "undefined" ? options.hide : false,
+			closer : options && typeof options.closer != "undefined" ? options.closer : true,
+			sticker : false,
+			opacity : .75,
+			shadow : true,
+			width : options && options.width ? options.width : $.pnotify.defaults.width,
+			nonblock : options && typeof options.nonblock != "undefined" ? options.nonblock : false,
+			nonblock_opacity : .25
+		};
+
+		return $.pnotify(noticeOptions);
+	};
+
+	/**
+	 * Show error notice to user. Error will stick until an user close it.
+	 */
+	this.showError = function(title, text) {
+		return cloudDriveUI.showNotice("error", title, text, {
+			icon : "picon-dialog-error",
+			hide : false,
+			delay : 0
+		});
+	};
+
+	/**
+	 * Show info notice to user. Info will be show for 8sec and hided then.
+	 */
+	this.showInfo = function(title, text) {
+		return cloudDriveUI.showNotice("info", title, text, {
+			hide : true,
+			delay : 8000,
+			icon : "picon-dialog-information"
+		});
+	};
+
+	/**
+	 * Show warning notice to user. Info will be show for 8sec and hided then.
+	 */
+	this.showWarn = function(title, text) {
+		return cloudDriveUI.showNotice("info", title, text, {
+			hide : true,
+			delay : 8000,
+			icon : "picon-dialog-warning"
+		});
+	};
+};
 
 if (typeof cloudDrive == "undefined") {
 	cloudDrive = new CloudDrive();
@@ -1394,9 +1548,26 @@ if (typeof cloudDriveUI == "undefined") {
 	cloudDriveUI = new CloudDriveUI(cloudDrive);
 }
 
+if (typeof taskStore == "undefined") {
+	taskStore = new TaskStore();
+}
+
 $(function() {
-	// workaround to let portal-utils.js load and init
-	setTimeout(function() {
-		cloudDriveUI.init();
-	}, 250);
+	try {
+		// preload jQuery UI and Pinest Notify
+		cloudDriveUI.loadStyle("http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css");
+		$.getScript("/cloud-drive/js/jquery.pnotify.min.js", function() {
+			$.pnotify.defaults.styling = "jqueryui"; // use jQuery UI css
+			$.pnotify.defaults.history = false; // no history roller in the right corner
+
+			// init UI
+			cloudDriveUI.init();
+			// and load stored tasks
+			taskStore.load();
+		});
+	} catch (e) {
+		log("Error initializing CloudDrive: " + e);
+		console.trace();
+		console.log(e.stack);
+	}
 });

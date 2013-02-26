@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (C) 2012 eXo Platform SAS.
+    Copyright (C) 2013 eXo Platform SAS.
 
     This is free software; you can redistribute it and/or modify it
     under the terms of the GNU Lesser General Public License as
@@ -21,49 +21,7 @@
 -->
 <web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-  <display-name>cloud-workspaces-drives</display-name>
-
-   <!-- filter>
-      <filter-name>SetCurrentIdentityFilter</filter-name>
-      <filter-class>org.exoplatform.services.security.web.SetCurrentIdentityFilter</filter-class>
-      <init-param>
-         <param-name>restoreIdentity</param-name>
-         <param-value>true</param-value>
-      </init-param>
-   </filter>
-   <filter>
-      <filter-name>ThreadLocalSessionProviderInitializedFilter</filter-name>
-      <filter-class>org.exoplatform.frameworks.jcr.web.ThreadLocalSessionProviderInitializedFilter</filter-class>
-   </filter>
-   <filter>
-      <filter-name>RestEncodingFilter</filter-name>
-      <filter-class>org.exoplatform.services.rest.servlet.RestEncodingFilter</filter-class>
-      <init-param>
-         <param-name>REQUEST_ENCODING</param-name>
-         <param-value>UTF-8</param-value>
-      </init-param>
-   </filter -->
-   <!-- filter>
-      <filter-name>RememberMeFilter</filter-name>
-      <filter-class>org.exoplatform.web.login.RememberMeFilter</filter-class>
-   </filter -->
-
-   <!-- filter-mapping>
-      <filter-name>RememberMeFilter</filter-name>
-      <servlet-name>portal</servlet-name>
-   </filter-mapping -->
-   <!-- filter-mapping>
-      <filter-name>SetCurrentIdentityFilter</filter-name>
-      <url-pattern>/*</url-pattern>
-   </filter-mapping>
-   <filter-mapping>
-      <filter-name>ThreadLocalSessionProviderInitializedFilter</filter-name>
-      <url-pattern>/*</url-pattern>
-   </filter-mapping>
-   <filter-mapping>
-      <filter-name>RestEncodingFilter</filter-name>
-      <url-pattern>/*</url-pattern>
-   </filter-mapping --> 
+  <display-name>cloud-drive</display-name>
 
   <filter>
     <filter-name>ResourceRequestFilter</filter-name>
