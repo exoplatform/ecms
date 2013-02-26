@@ -48,6 +48,13 @@
     </dependency>
 
     <!-- ECMS -->
+    <!-- ECMS's NodeFinder here -->
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-core-services</artifactId>
+      <scope>provided</scope>
+      <type>jar</type>
+    </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo-ecms-core-webui-explorer</artifactId>
@@ -58,6 +65,17 @@
       <artifactId>exo-ecms-core-webui</artifactId>
       <scope>provided</scope>
     </dependency>
+    <!-- dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-core-services</artifactId>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.exoplatform.portal</groupId>
+          <artifactId>exo.portal.webui.portal</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency -->
   </dependencies>
 
   <build>
