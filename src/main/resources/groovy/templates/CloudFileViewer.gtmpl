@@ -1,0 +1,61 @@
+
+<%
+  /**
+  Copyright (C) 2012 eXo Platform SAS.
+ 
+  This is free software; you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation; either version 2.1 of
+  the License, or (at your option) any later version.
+ 
+  This software is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  Lesser General Public License for more details.
+ 
+  You should have received a copy of the GNU Lesser General Public
+  License along with this software; if not, write to the Free
+  Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+  02110-1301 USA, or see the FSF site: http://www.fsf.org.
+*/
+%>
+<%
+import com.exoplatform.cloudworkspaces.drives.CloudDrive;
+import org.exoplatform.wcm.webui.reader.ContentReader
+import groovy.text.*
+
+def rcontext = _ctx.getRequestContext()
+def uiParent = uicomponent.getParent()
+def currentNode = uiParent.getNode()
+
+// should be set in CloudFileFilter
+def drive = rcontext.getAttribute(CloudDrive.class)  
+if (drive) {
+    def providerName = drive.user.provider.name
+    def openOn = _ctx.appRes("CloudFileViewer.event.OpenOn")
+%>
+<div id="CloudFileViewer" file-open-on="${openOn} ${providerName}" style="position: relative; padding-top: 0; padding-bottom: 100%; height: 100%; overflow: hidden;">
+	<%
+    // TODO simple view
+  	// def fileName = ContentReader.getXSSCompatibilityContent(currentNode.property("exo:title"))
+	def templateEngine = new SimpleTemplateEngine ()
+   	def values = ['fileUrl' : "<a href='#' target='_blank'></a>",
+					'providerName' : providerName]
+	def viewerMessage = templateEngine.createTemplate(_ctx.appRes('CloudFileViewer.event.OpenFileOn')).make(values)
+	%><p style="display: none;">$viewerMessage</p><%
+	
+	// preview/edit view
+  	def viewFile = _ctx.appRes("CloudFileViewer.event.ViewFile")
+  	def editFile = _ctx.appRes("CloudFileViewer.event.EditFile")
+	%>
+	<div style="display: none;"><span id="ViewerSwitch" view-title="${viewFile}" edit-title="${editFile}"
+		style="position: relative; padding-left: 5px; font-weight: normal; font-size: 11px;">(<a href="javascript:cloudDriveUI.swicthFileViewer();">${editFile}</a>)</span>
+		<iframe frameborder="0"
+			style="position: absolute; width: 100%; height: 100%; marginwidth: 0; marginheight: 0;"
+			src="">
+		</iframe>
+	</div>
+</div>
+<%
+}
+%>

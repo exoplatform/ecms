@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIPopupWindow>
+    <title>
+      <ConnectCloudDriveForm>Connect Cloud Documents</ConnectCloudDriveForm>
+    </title>
+  </UIPopupWindow>
+  <UIActionBar>
+    <tooltip>
+      <ShowConnectCloudDrive>Connect Cloud Documents</ShowConnectCloudDrive>
+    </tooltip>
+  </UIActionBar>
+    <UIActionBar>
+    <tooltip>
+      <ConnectGoogleDrive>Connect your Google Drive</ConnectGoogleDrive>
+    </tooltip>
+  </UIActionBar>
+  <ECMContextMenu>
+    <event>
+      <OpenCloudFile>Open on</OpenCloudFile>
+    </event>
+    <event>
+      <RefreshCloudDrive>Sync with </RefreshCloudDrive>
+    </event>
+  </ECMContextMenu>
+  <CloudFileViewer>
+    <event>
+      <OpenFileOn>Open $fileUrl on $providerName</OpenFileOn>
+    </event>
+    <event>
+      <OpenOn>Open on</OpenOn>
+    </event>
+    <event>
+      <EditFile>Edit</EditFile>
+    </event>
+    <event>
+      <ViewFile>View</ViewFile>
+    </event>
+  </CloudFileViewer>
+</bundle>
