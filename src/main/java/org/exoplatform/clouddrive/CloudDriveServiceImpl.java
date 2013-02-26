@@ -346,7 +346,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
   // *********************** internal stuff *********************
 
   /**
-   * Load connected drives from started repository.
+   * Load connected drives from started repository. Actual for mutlitenant environments.
    * 
    * @param name {@link String}
    */
@@ -384,7 +384,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
   }
 
   /**
-   * Unload drives mapped to stopped repository.
+   * Unload drives mapped to stopped repository. Actual for mutlitenant environments.
    * 
    * @param name {@link String}
    */
