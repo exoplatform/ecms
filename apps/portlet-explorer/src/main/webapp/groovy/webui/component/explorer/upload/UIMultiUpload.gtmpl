@@ -25,50 +25,40 @@
   addScripts("multiUpload.setDropFileMessage('" + getMsg("DropFileMessage") + "');");
 %>
 
-<div id="$uicomponent.id" class = "$uicomponent.id NoShow" >
+<div id="$uicomponent.id" class="uiBox uiMultiUpload NoShow" >
 
   <div id="MultiUploadDragFileBackground" class="MultiUploadDragFileBackground">
     <div id="MultiUploadDragFile" class="MultiUploadDragFile"><span></span></div>
   </div>
   
   <!-- status infor bar -->
-  <div id="MultiUploadFilesShortInfo" class="MultiUploadFilesShortInfo ClearFix">
-    <span id="MultiUploadFilesUploaded" style="display:none">
-      0
-    </span> <span id="MultiUploadFilesUploaded-text" style="display:none">file(s) uploaded,</span>
-    <span id="MultiUploadFilesUploading" style="display:none">
-      0
-    </span> <span id="MultiUploadFilesUploading-text" style="display:none">file(s) in progress,</span>
-    <span id="MultiUploadFilesCanceled" style="display:none">
-      0
-    </span> <span id="MultiUploadFilesCanceled-text" style="display:none">file(s) canceled,</span>
-    <span id="MultiUploadFilesAwaiting" style="display:none">
-      0
-    </span> <span id="MultiUploadFilesAwaiting-text" style="display:none">file(s) awaiting,</span>
+  <div id="MultiUploadFilesShortInfo" class="MultiUploadFilesShortInfo title clearfix">
+    <span id="MultiUploadFilesUploaded" style="display:none">0</span>
+		<span id="MultiUploadFilesUploaded-text" style="display:none">file(s) uploaded,</span>
+    <span id="MultiUploadFilesUploading" style="display:none">0</span> 
+		<span id="MultiUploadFilesUploading-text" style="display:none">file(s) in progress,</span>
+    <span id="MultiUploadFilesCanceled" style="display:none">0</span>
+		<span id="MultiUploadFilesCanceled-text" style="display:none">file(s) canceled,</span>
+    <span id="MultiUploadFilesAwaiting" style="display:none">0</span>
+		<span id="MultiUploadFilesAwaiting-text" style="display:none">file(s) awaiting,</span>
 
-    <div id="MultiUploadClose" class="MultiUploadClose FR DeleteIconInactive"       
-      title="<%=_ctx.appRes(uicomponent.getId() + ".label.Close") %>">
-      &nbsp;
-    </div>
-    <span class="FR">&nbsp;&nbsp;&nbsp;</span>
-    <a id="MultiUploadHelp" style="display:none" class="MultiUploadHelp FR" href="#"       
+    <a id="MultiUploadHelp" style="display:none" class="pull-right" href="#"       
           title="<%= _ctx.appRes(uicomponent.getId() + ".label.MaxFileSize") + " " + uicomponent.getLimitFileSize() + " Mb.\r\n" + _ctx.appRes(uicomponent.getId() + ".label.InvalidCharacters") %>">
-      &nbsp;
-     </a>
-    <span class="FR">&nbsp;&nbsp;&nbsp;</span>
+      <i class="uiIconQuestion uiIconLightGray"></i>
+    </a>
     <div id="MultiUploadAbortAll" style="display:none" class="MultiUploadAbortAll FR" href="#"
           title="<%= _ctx.appRes(uicomponent.getId() + ".label.AbortAllFiles") %>">
         <a class="Action"><u><%= _ctx.appRes(uicomponent.getId() + ".label.AbortAll") %></u></a>
     </div>
-  </div>
-  <br/>
-  
+		<div id="MultiUploadClose" class="MultiUploadClose FR DeleteIconInactive" title="<%=_ctx.appRes(uicomponent.getId() + ".label.Close") %>">
+      &nbsp;
+    </div>
+  </div>  
   
   <!-- processing file list -->
   <div id="MultiUploadFileListProgress" class="MultiUploadFileList">
-    <span id = "MultiUploadListSeperator"></span>
+    <span id = "MultiUploadListSeperator" class="multiUploadListSeperator"></span>
   </div>
-  <br/>
   
   <!-- div containing URL to refresh UIJCRExplorer -->
   <div id="MultiUploadRefreshExplorer" style="display:none">

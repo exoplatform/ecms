@@ -92,9 +92,7 @@
 	};
 
 	MultiUpload.prototype.openMultiUploadBox = function() {
-		  var multiUploadDiv = eXo.ecm.MultiUpload.document.getElementById("UIMultiUpload");
-		  
-		multiUploadDiv.className="UIMultiUpload";
+		gj("#UIMultiUpload", eXo.ecm.MultiUpload.document).removeClass("NoShow");
 		//focus UIDocumentInfo
 		div=eXo.ecm.MultiUpload.document.getElementById("UIDocumentInfo");
 		try {
@@ -108,22 +106,16 @@
 	};
 
 	MultiUpload.prototype.disableMultiUploadBox = function(event) {
-		var multiUploadDiv = eXo.ecm.MultiUpload.document.getElementById("UIMultiUpload");
 		var evt =  event || window.event;
 		if (evt.clientX > 30 && evt.clientX < document.documentElement.clientWidth - 30 &&
 			evt.clientY > 30 && evt.clientY < document.documentElement.clientHeight - 30) {
 			return;
 		}
-		if (multiUploadDiv) {
-			if (noFileDropped()) {
-				multiUploadDiv.className="UIMultiUpload NoShow";
-			}
-		}
+		gj("#UIMultiUpload", eXo.ecm.MultiUpload.document).addClass("NoShow");
 	};
 
 	MultiUpload.prototype.closeMultiUploadBox = function(event) {
-		var multiUploadDiv = eXo.ecm.MultiUpload.document.getElementById("UIMultiUpload");
-		multiUploadDiv.className="UIMultiUpload NoShow";
+		gj("#UIMultiUpload", eXo.ecm.MultiUpload.document).addClass("NoShow");
 	}
 
 	MultiUpload.prototype.outFocus = function() {
@@ -222,8 +214,6 @@
 		evt = event || window.event;
 		evt.stopPropagation();
 		evt.preventDefault();
-		dropbox= eXo.ecm.MultiUpload.document.getElementById("UIMultiUpload");        
-		dropbox.style.background="pink";
 		//enable drop zone;
 		eXo.ecm.MultiUpload.document.getElementById("MultiUploadDragFile").style.display="block";
 		eXo.ecm.MultiUpload.document.getElementById("MultiUploadDragFileBackground").style.display="block";
@@ -235,8 +225,6 @@
 		    evt.stopPropagation();
 		    evt.preventDefault();
 		}
-		dropbox = eXo.ecm.MultiUpload.document.getElementById("UIMultiUpload");
-		dropbox.style.background="#DDDDDF";//lightgrey
 		//disable drop zone;
 		eXo.ecm.MultiUpload.document.getElementById("MultiUploadDragFile").style.display="none";
 		eXo.ecm.MultiUpload.document.getElementById("MultiUploadDragFileBackground").style.display="none";
@@ -381,7 +369,7 @@
 			loadContentDiv.innerHTML = "";
 		} else {
 			loadContentDiv = eXo.ecm.MultiUpload.document.createElement("div");
-			loadContentDiv.className = "LoadContent";
+			loadContentDiv.className = "loadContent uiContentBox clearfix";
 			loadContentDiv.id = "LoadContent" + fileID;
 			if (listDivID == eXo.ecm.MultiUpload.PROCESS) {
 				//divList.append(br);
@@ -403,12 +391,14 @@
 		}
 		//add file icon div
 		var iconDiv = eXo.ecm.MultiUpload.document.createElement("div");
-		iconDiv.className = "FL Icon16x16 default16x16Icon nt_file16x16Icon default16x16Icon " + file.type.replace(/\./g,'_').replace('/','_').replace('\\','_') + "16x16Icon";
+		iconDiv.className = "uploadIconContainer";
 		iconDiv.id = "icon" + fileID;
-		iconDiv.innerHTML = "<span>&nbsp;</span>";
-		iconDiv.style.width="50px";
 		eXo.ecm.MultiUpload.fileType[fileID]=file.type;
 		loadContentDiv.appendChild(iconDiv);
+		//add icon i
+		var iconI = eXo.ecm.MultiUpload.document.createElement("i");
+		iconI.className="uiIcon16x16FileDefault uiIcon16x16" + file.type.replace(/\./g,'').replace('/','').replace('\\','');
+		iconDiv.appendChild(iconI);
 		//add file name div
 		var info = eXo.ecm.MultiUpload.document.createElement("div");
 		info.id = "file" + fileID;
@@ -489,8 +479,7 @@
 		eXo.ecm.MultiUpload.document.getElementById("MultiUploadDragFile").style.display="none";
 		eXo.ecm.MultiUpload.document.getElementById("MultiUploadDragFileBackground").style.display="none";
 		//enable multiupload box
-		var multiUploadDiv = eXo.ecm.MultiUpload.document.getElementById("UIMultiUpload");
-		multiUploadDiv.className="UIMultiUpload";
+		gj("#UIMultiUpload", eXo.ecm.MultiUpload.document).removeClass("NoShow");
 		//process drop
 		evt = event || window.event;
 		evt.stopPropagation();
