@@ -22,7 +22,6 @@
 								window.content_selector = content_selector; require(["../../eXoPlugins.js"], function() {
 									eXp.init();
 									eXp.userLanguage = eXo.ecm.ECS.userLanguage || "en";
-										eXp.loadScript(window, "lang/" + eXp.userLanguage + ".js");
 									if(eXo.ecm.ECS.insertContentType=="Image") {
 										strHTML = "<input type=\"hidden\" name=\"Filter\" id=\"Filter\" value=\"Image\">";
 									} else {
@@ -49,6 +48,12 @@
 									}
 									document.getElementById("viewTypeAreaID").innerHTML = strView;
 									document.getElementById("viewPresentAreaID").innerHTML = strViewPresent;
+
+									require(["lang/" + eXp.userLanguage + ".js"], function() {
+										eXo.ecm.ECS.initRequestXmlTree('editor');
+										eXo.ecm.ECS.languageInit();
+										eXo.ecm.ECS.fixHeightTrees();
+									});
 								});
 							});
 						});
@@ -367,12 +372,5 @@
 <!-- =================================END UPLOAD ======================================== -->
 <div class="Mask" id="Mask"></div>
 <div class="PopupContainer"  id="PopupContainer"></div>
-<script type="text/javascript">
-    window.onload = function(){
-	    eXo.ecm.ECS.initRequestXmlTree('editor');
-      eXo.ecm.ECS.languageInit();
-      eXo.ecm.ECS.fixHeightTrees();
-    };
-</script>
 </body>
 
