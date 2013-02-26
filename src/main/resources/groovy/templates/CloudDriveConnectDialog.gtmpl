@@ -22,8 +22,8 @@
 
 -->
 */
-import com.exoplatform.cloudworkspaces.drives.CloudDriveService;
-import com.exoplatform.cloudworkspaces.drives.CloudProvider;
+import org.exoplatform.clouddrive.ecms.CloudDriveService;
+import org.exoplatform.clouddrive.ecms.CloudProvider;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 

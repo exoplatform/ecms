@@ -58,7 +58,7 @@ public class CloudDriveContext {
     Object script = requestContext.getAttribute(JAVASCRIPT);
     if (script == null) {
       JavascriptManager jsManager = requestContext.getJavascriptManager();
-      jsManager.importJavascript("clouddrive", "/cloud-workspaces-drives/js");
+      jsManager.importJavascript("clouddrive", "/cloud-drive/js");
       requestContext.setAttribute(JAVASCRIPT, JAVASCRIPT);
       return true;
     } else {

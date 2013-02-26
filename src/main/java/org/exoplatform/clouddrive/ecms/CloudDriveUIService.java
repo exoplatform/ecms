@@ -16,7 +16,21 @@
  */
 package org.exoplatform.clouddrive.ecms;
 
-// TODO import com.exoplatform.cloud.multitenancy.TenantLifecycle;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.jcr.AccessDeniedException;
+import javax.jcr.InvalidItemStateException;
+import javax.jcr.ItemExistsException;
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.jcr.lock.LockException;
+import javax.jcr.nodetype.ConstraintViolationException;
+import javax.jcr.nodetype.NoSuchNodeTypeException;
+import javax.jcr.version.VersionException;
+
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -27,18 +41,13 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
 import org.picocontainer.Startable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import javax.jcr.Node;
-import javax.jcr.Session;
 
 /**
  * Add ImportCloudDocument button in ListView. We're doing this by hack of already stored DMS navigation.
  */
-public class CloudDriveUIService implements Startable /* TODO, TenantLifecycle */ {
+public class CloudDriveUIService implements Startable {
 
-  private static final Log         LOG                        = ExoLogger.getLogger(CloudDriveUIService.class.getName());
+  private static final Log         LOG                        = ExoLogger.getLogger(CloudDriveUIService.class);
 
   private static final String      EXO_BUTTONS                = "exo:buttons";
 
@@ -66,15 +75,15 @@ public class CloudDriveUIService implements Startable /* TODO, TenantLifecycle *
     this.uiExtensions = uiExtensions;
   }
 
-  public void prepareViews() {
-    // find all Cloud Drive actions configured for action bar 
+  public void prepareViews() throws Exception {
+    // find all Cloud Drive actions configured for action bar
     List<String> cdActions = new ArrayList<String>();
-    for (UIExtension ext: uiExtensions.getUIExtensions(ManageViewService.EXTENSION_TYPE)) {
+    for (UIExtension ext : uiExtensions.getUIExtensions(ManageViewService.EXTENSION_TYPE)) {
       if (ConnectCloudDriveManagerComponent.class.isAssignableFrom(ext.getComponent())) {
         cdActions.add(ext.getName());
       }
     }
-    
+
     SessionProvider jcrSessions = SessionProvider.createSystemProvider();
     try {
       Session session = jcrSessions.getSession("dms-system", jcrService.getCurrentRepository());
@@ -83,7 +92,7 @@ public class CloudDriveUIService implements Startable /* TODO, TenantLifecycle *
         StringBuilder newActions = new StringBuilder();
         if (listNode.hasProperty(EXO_BUTTONS)) {
           String[] actions = listNode.getProperty(EXO_BUTTONS).getString().split(";");
-          for (int i=0; i<actions.length; i++) {
+          for (int i = 0; i < actions.length; i++) {
             newActions.append(actions[i].trim());
             if (i < actions.length - 1) {
               newActions.append(';');
@@ -91,7 +100,7 @@ public class CloudDriveUIService implements Startable /* TODO, TenantLifecycle *
             }
           }
         }
-        
+
         for (String cda : cdActions) {
           // action not found, add it
           // doing some trick to fix the string: make first char lowercase
@@ -102,25 +111,26 @@ public class CloudDriveUIService implements Startable /* TODO, TenantLifecycle *
           if (newActions.indexOf(new String(ac)) < 0) {
             newActions.append(';');
             newActions.append(' ');
-            newActions.append(ac);  
+            newActions.append(ac);
           }
         }
-        
+
         listNode.setProperty(EXO_BUTTONS, newActions.toString());
       }
       session.save();
-      LOG.info("Connect Cloud Drive Action added successfully.");
-    } catch (Exception e) {
-      LOG.error("Error adding Connect Cloud Drive Action: " + e.getMessage(), e);
     } finally {
       jcrSessions.close();
     }
   }
 
   @Override
-  public void start()
-  {
-    prepareViews();
+  public void start() {
+    try {
+      prepareViews();
+      LOG.info("Connect Cloud Drive action successfully added");
+    } catch (Exception e) {
+      LOG.error("Error adding Connect Cloud Drive Action: " + e.getMessage(), e);
+    }
   }
 
   @Override
@@ -128,21 +138,22 @@ public class CloudDriveUIService implements Startable /* TODO, TenantLifecycle *
     // nothing
   }
 
-  // TODO @Override
-  public void tenantStarted(String tenantName)
-  {
-    try
-    {
-      jcrService.setCurrentRepositoryName(tenantName);
+  // ******** internals **********
+
+  /**
+   * Action on repository start. Actual for mutlitenant environments.
+   * 
+   * @param name {@link String} repository name
+   */
+  protected void repositoryStarted(String name) {
+    try {
+      jcrService.setCurrentRepositoryName(name);
       prepareViews();
     } catch (RepositoryConfigurationException e) {
-      LOG.error("Error adding Connect Cloud Drive Action - cannot set current repository name '" + tenantName + "': " + e.getMessage(), e);
+      LOG.error("Error adding Connect Cloud Drive Action - cannot set current repository name '" + name
+          + "': " + e.getMessage(), e);
+    } catch (Exception e) {
+      LOG.error("Error adding Connect Cloud Drive Action to " + name + "': " + e.getMessage(), e);
     }
-  }
-
-  // TODO @Override
-  public void tenantStopped(String tenantName)
-  {
-    // Nothing
   }
 }
