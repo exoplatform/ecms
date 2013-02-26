@@ -40,12 +40,11 @@
 			        String country = locale.getCountry(); 
 			        if(StringUtils.isNotEmpty(country)) lang += "_" + country;
 			        count++;
-			        if(seoService != null) fullStatus = seoService.getState(path, lang, uicomponent.getOnContent());
-			        def seo_icon = fullStatus + ".png";	          
+			        if(seoService != null) fullStatus = seoService.getState(path, lang, uicomponent.getOnContent());          
 			        if(uicomponent.getSelectedLanguage().equals(lang)) {
 				      %>
 				        <div class="itemTab selected clearfix" onclick="<%=uicomponent.event("Update", lang)%>">
-								  <a href="javaScript:void(0);"><img class="SEOFlag" src="/seo/skin/webui/seo/DefaultSkin/icons/${seo_icon}" width="16px" /></a>
+								  <i class="uiIconSeo${fullStatus}"></i>
 								  <a href="javaScript:void(0);"> <%= uicomponent.CapitalFirstLetters(locale.getDisplayName(inLocale)) %> </a>
 								  <i class="uiIconDelete uiIconLightGray pull-right" title="<%=seo_delete%>" onclick="<%=uicomponent.event("Remove",uicomponent.id, lang)%>"></i>
 							  </div>
@@ -53,7 +52,7 @@
 				      } else {
 				      %>
 				        <div class="itemTab clearfix" onclick="<%=uicomponent.event("Update", lang)%>">
-								  <a href="javaScript:void(0);"><img class="SEOFlag" src="/seo/skin/webui/seo/DefaultSkin/icons/${seo_icon}" width="16px" /></a>
+								  <i class="uiIconSeo${fullStatus}"></i>
 								  <a href="javaScript:void(0);"> <%= uicomponent.CapitalFirstLetters(locale.getDisplayName(inLocale)) %> </a>
 							  </div>
 				      <% } %>
