@@ -1,0 +1,395 @@
+/*
+ * Copyright (C) 2003-2012 eXo Platform SAS.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+package org.exoplatform.clouddrive;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.List;
+
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.Repository;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+
+import junit.framework.TestCase;
+
+import org.exoplatform.clouddrive.CloudDrive;
+import org.exoplatform.clouddrive.CloudDriveException;
+import org.exoplatform.clouddrive.CloudDriveService;
+import org.exoplatform.clouddrive.CloudProvider;
+import org.exoplatform.clouddrive.CloudUser;
+import org.exoplatform.clouddrive.NotConnectedException;
+import org.exoplatform.clouddrive.exodrive.ExoDriveUser;
+import org.exoplatform.clouddrive.exodrive.service.ExoDriveException;
+import org.exoplatform.clouddrive.exodrive.service.ExoDriveRepository;
+import org.exoplatform.clouddrive.exodrive.service.ExoDriveService;
+import org.exoplatform.clouddrive.exodrive.service.FileStore;
+import org.exoplatform.container.PortalContainer;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.Authenticator;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Credential;
+import org.exoplatform.services.security.PasswordCredential;
+import org.exoplatform.services.security.UsernameCredential;
+
+
+/**
+ * Created by The eXo Platform SAS.
+ * 
+ * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
+ * @version $Id: TestCloudDriveService.java 00000 Sep 12, 2012 pnedonosko $
+ */
+public class TestCloudDriveService extends TestCase {
+
+  protected static final Log     LOG               = ExoLogger.getLogger(TestCloudDriveService.class);
+
+  public static final String     USER1_NAME        = "user1";
+
+  public static final String     USER2_NAME        = "user2";
+
+  public static final String     FILE_NAME_PATTERN = "test_file";
+
+  private CloudDriveService      cdService;
+
+  private PortalContainer        container;
+
+  private RepositoryService      repositoryService;
+
+  private SessionProviderService sessionProviders;
+
+  private Repository             repository;
+
+  private Session                session;
+
+  private String                 testWorkspace;
+
+  private String                 testPath;
+  
+  private Node                 testRoot;
+
+  private CloudUser              cloudUser;
+
+  private CloudProvider          provider;
+
+  private ExoDriveRepository     exoDrives;
+  
+  private CloudDrive drive;
+
+  /**
+   * setUp.
+   * 
+   * @throws java.lang.Exception
+   */
+  protected void setUp() throws Exception {
+    super.setUp();
+
+    // String containerConf =
+    // TestCloudDriveService.class.getResource("/conf/portal/test-clouddrive-configuration.xml").toString();
+    // StandaloneContainer.addConfigurationURL(containerConf);
+
+    container = PortalContainer.getInstance();
+    repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
+    repositoryService.setCurrentRepositoryName(System.getProperty("gatein.jcr.repository.default"));
+
+    sessionProviders = (SessionProviderService) container.getComponentInstanceOfType(SessionProviderService.class);
+
+    // login via Authenticator
+    Authenticator authr = (Authenticator) container.getComponentInstanceOfType(Authenticator.class);
+    String user = authr.validateUser(new Credential[] { new UsernameCredential("root"),
+        new PasswordCredential("12345") });
+    ConversationState.setCurrent(new ConversationState(authr.createIdentity(user)));
+
+    // and set session provider to the service
+    SessionProvider sessionProvider = new SessionProvider(ConversationState.getCurrent());
+    sessionProvider.setCurrentRepository(repositoryService.getCurrentRepository());
+    sessionProvider.setCurrentWorkspace("collaboration");
+    sessionProviders.setSessionProvider(null, sessionProvider);
+
+    session = sessionProviders.getSessionProvider(null).getSession(sessionProvider.getCurrentWorkspace(),
+                                                                   sessionProvider.getCurrentRepository());
+
+    // repository = repositoryService.getCurrentRepository();
+    // Credentials credentials = new CredentialsImpl("root",
+    // "12345".toCharArray());
+    // session = repository.login(credentials, "collaboration");
+
+    testRoot = session.getRootNode().addNode("testCloudDriveService", "nt:folder");
+    session.save();
+    testWorkspace = session.getWorkspace().getName();
+    testPath = testRoot.getPath(); 
+
+    cdService = (CloudDriveService) container.getComponentInstanceOfType(CloudDriveService.class);
+
+    provider = cdService.getProvider("exo"); // eXo Drive provider
+
+    cloudUser = new ExoDriveUser("cloudTester", "tester@exoplatform.com", provider);
+
+    ExoDriveService exoDriveServices = (ExoDriveService) container.getComponentInstanceOfType(ExoDriveService.class);
+    exoDrives = exoDriveServices.open(repositoryService.getCurrentRepository().getConfiguration().getName());
+
+    // create 1- files in the exo drive
+    int filesCount = 10;
+
+    String fileContnetPattern = "test";
+    exoDrives.createUser(cloudUser.getUsername());
+    for (int i = 1; i <= filesCount; i++) {
+      String fname = FILE_NAME_PATTERN + i + ".txt";
+      FileStore fs = exoDrives.create(cloudUser.getUsername(), fname, "tetx/plain", Calendar.getInstance());
+      InputStream stream = new ByteArrayInputStream((fileContnetPattern + i).getBytes());
+      fs.write(stream);
+      stream.close();
+    }
+  }
+
+  /**
+   * tearDown.
+   * 
+   * @throws java.lang.Exception
+   */
+  protected void tearDown() throws Exception {
+
+    try {
+      if (drive != null) {
+        drive.disconnect();
+      }
+      //cdService.disconnect(cloudUser);
+    } catch (NotConnectedException e) {
+      LOG.warn("tearDown() Drive wasn't connected:" + e.getMessage());
+    }
+
+    testRoot.remove();
+    session.save();
+    session.logout();
+
+    for (FileStore fs : exoDrives.listFiles(cloudUser.getUsername())) {
+      fs.remove();
+    }
+
+    super.tearDown();
+  }
+
+  protected void assertNodesExist(NodeIterator nodes, String... expected) throws RepositoryException {
+    List<String> names = new ArrayList<String>(Arrays.asList(expected));
+    while (nodes.hasNext()) {
+      Node node = nodes.nextNode();
+      String nname = node.getName();
+      if (names.contains(nname)) {
+        names.remove(nname);
+      }
+    }
+
+    if (names.size() > 0) {
+      fail("Expected nodes not exist: " + names);
+    }
+  }
+
+  protected void assertFilesExist(List<FileStore> files, String... expected) {
+    List<String> names = new ArrayList<String>(Arrays.asList(expected));
+    for (FileStore f : files) {
+      if (names.contains(f.getName())) {
+        names.remove(f.getName());
+      }
+    }
+
+    if (names.size() > 0) {
+      fail("Expected files not exist: " + names);
+    }
+  }
+
+  protected void assertFilesNotExist(List<FileStore> files, String... notExpected) {
+    List<String> names = Arrays.asList(notExpected);
+    List<String> unexpected = new ArrayList<String>();
+    for (FileStore f : files) {
+      if (names.contains(f.getName())) {
+        unexpected.add(f.getName());
+      }
+    }
+
+    if (unexpected.size() > 0) {
+      fail("Unexpected files exist: " + unexpected);
+    }
+  }
+
+  /**
+   * Test if drive connected well, has expected nodetypes and subnodes.
+   * 
+   * @throws RepositoryException
+   */
+  public void testConnect() throws RepositoryException {
+    // call cloudDrives
+    try {
+      drive = cdService.createDrive(cloudUser, testRoot);
+      drive.connect();      
+    } catch (CloudDriveException e) {
+      LOG.error("testConnect(): ", e);
+      fail("Error: " + e);
+    }
+    
+    // test what it did
+    String driveName = provider.getName() + " - " + cloudUser.getEmail();
+    assertTrue(testRoot.hasNode(driveName));
+
+    Node driveNode = testRoot.getNode(driveName);
+    assertTrue("Drive node is not a nt:folder", driveNode.isNodeType("nt:folder"));
+    assertTrue("Drive node is not a ecd:cloudDrive", driveNode.isNodeType("ecd:cloudDrive"));
+    assertTrue("Drive should have ecd:connected property with value true",
+               driveNode.getProperty("ecd:connected").getBoolean());
+
+    assertTrue("Drive node should have sub-files", driveNode.getNodes().getSize() > 0);
+
+    Node file1 = driveNode.getNode(FILE_NAME_PATTERN + "1.txt");
+    assertTrue("Drive file is not a nt:file", file1.isNodeType("nt:file"));
+    assertTrue("Drive file is not a ecd:cloudFile", file1.isNodeType("ecd:cloudFile"));
+
+    Node resource1 = file1.getNode("jcr:content");
+    assertTrue("Drive file content is not a nt:resource", resource1.isNodeType("nt:resource"));
+    assertTrue("Drive file content is not a ecd:cloudFileResource",
+               resource1.isNodeType("ecd:cloudFileResource"));
+  }
+
+  /**
+   * Test if drive disconnected well and doesn't have subnodes.
+   * 
+   * @throws RepositoryException
+   */
+  public void testDisconnect() throws RepositoryException {
+    // connect
+    try {
+      drive = cdService.createDrive(cloudUser, testRoot);
+      drive.connect();
+    } catch (CloudDriveException e) {
+      LOG.error("testDisconnect(): ", e);
+      fail("Error: " + e);
+    }
+
+    try {
+      drive.disconnect();
+      //cdService.disconnect(cloudUser);
+    } catch (CloudDriveException e) {
+      LOG.error("testDisconnect(): ", e);
+      fail("Error: " + e);
+    }
+
+    // test what it did
+    String driveName = provider.getName() + " - " + cloudUser.getEmail();
+    assertTrue(testRoot.hasNode(driveName));
+
+    Node driveNode = testRoot.getNode(driveName);
+    assertTrue("Drive node is not a nt:folder", driveNode.isNodeType("nt:folder"));
+    assertTrue("Drive node is not a ecd:cloudDrive", driveNode.isNodeType("ecd:cloudDrive"));
+    assertFalse("Drive should have ecd:connected property with value false",
+                driveNode.getProperty("ecd:connected").getBoolean());
+
+    assertTrue("Drive node should not have sub-files", driveNode.getNodes().getSize() == 0);
+  }
+
+  public void testSynchronize() throws RepositoryException {
+    try {
+      // connect
+      drive = cdService.createDrive(cloudUser, testRoot);
+      drive.connect();
+      
+      // Node driveRoot = ((JCRLocalCloudDrive) localDrive).getRoootNode();
+      Node driveNode = testRoot.getNode(provider.getName() + " - " + cloudUser.getEmail());
+
+      // create local node in JCR
+      Node syncNode1 = driveNode.addNode("test_to_sync1", "nt:file");
+      Node syncRes1 = syncNode1.addNode("jcr:content", "nt:resource");
+      // nt:resource
+      syncRes1.setProperty("jcr:mimeType", "text/plain");
+      syncRes1.setProperty("jcr:data", "data to sync #1");
+      syncRes1.setProperty("jcr:lastModified", Calendar.getInstance());
+
+      Node syncNode2 = driveNode.addNode("test_to_sync2", "nt:file");
+      Node syncRes2 = syncNode2.addNode("jcr:content", "nt:resource");
+      // nt:resource
+      syncRes2.setProperty("jcr:mimeType", "text/plain");
+      syncRes2.setProperty("jcr:data", "data to sync #2");
+      syncRes2.setProperty("jcr:lastModified", Calendar.getInstance());
+
+      driveNode.save();
+
+      // synchronize the whole drive, only cloud files should be on the drive
+      drive.synchronize();
+
+      // check if both nodes are on the drive storage
+      assertFilesNotExist(exoDrives.listFiles(cloudUser.getUsername()), "test_to_sync1", "test_to_sync2");
+
+      // check if nodes still exist in JCR
+      assertNodesExist(driveNode.getNodes(), "test_to_sync1", "test_to_sync2");
+
+    } catch (CloudDriveException e) {
+      LOG.error("testSynchronize(): ", e);
+      fail("Error: " + e);
+    } catch (ExoDriveException e) {
+      LOG.error("testSynchronize(): ", e);
+      fail("Error: " + e);
+    }
+  }
+
+  public void testSynchronizeNode() throws RepositoryException {
+    try {
+      // connect
+      drive = cdService.createDrive(cloudUser, testRoot);
+      drive.connect();
+      
+      // Node driveRoot = ((JCRLocalCloudDrive) localDrive).getRoootNode();
+      Node driveNode = testRoot.getNode(provider.getName() + " - " + cloudUser.getEmail());
+
+      // create local node in JCR
+      Node syncNode1 = driveNode.addNode("test_to_sync1", "nt:file");
+      Node syncRes1 = syncNode1.addNode("jcr:content", "nt:resource");
+      // nt:resource
+      syncRes1.setProperty("jcr:mimeType", "text/plain");
+      syncRes1.setProperty("jcr:data", "data to sync #1");
+      syncRes1.setProperty("jcr:lastModified", Calendar.getInstance());
+
+      Node syncNode2 = driveNode.addNode("test_to_sync2", "nt:file");
+      Node syncRes2 = syncNode2.addNode("jcr:content", "nt:resource");
+      // nt:resource
+      syncRes2.setProperty("jcr:mimeType", "text/plain");
+      syncRes2.setProperty("jcr:data", "data to sync #2");
+      syncRes2.setProperty("jcr:lastModified", Calendar.getInstance());
+
+      driveNode.save();
+
+      // synchronize the whole drive
+      drive.synchronize(syncNode2);
+
+      // check if file well added to cloud drive
+      assertFilesExist(exoDrives.listFiles(cloudUser.getUsername()), "test_to_sync2");
+
+      // check if node are on the drive storage
+      assertNodesExist(driveNode.getNodes(), "test_to_sync2");
+
+    } catch (CloudDriveException e) {
+      LOG.error("testSynchronizeNode(): ", e);
+      fail("Error: " + e);
+    } catch (ExoDriveException e) {
+      LOG.error("testSynchronizeNode(): ", e);
+      fail("Error: " + e);
+    }
+  }
+}
