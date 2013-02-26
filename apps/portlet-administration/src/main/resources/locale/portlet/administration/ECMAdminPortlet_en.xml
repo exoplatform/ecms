@@ -1074,6 +1074,7 @@
 				</label>
 				<msg>
 					 <confirm-delete>Are you sure want to delete this permission?</confirm-delete>
+				  <permission-cannot-empty>The view permission is required and cannot be empty.</permission-cannot-empty>
 				</msg>
 		</UIViewPermissionList>
 		

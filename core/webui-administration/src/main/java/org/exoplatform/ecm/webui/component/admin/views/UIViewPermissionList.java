@@ -30,8 +30,10 @@ import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.core.UIPagingGrid;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
@@ -102,7 +104,17 @@ public class UIViewPermissionList extends UIPagingGrid {
       UIViewFormTabPane uiTabPane = uiContainer.getParent();
       UIViewForm uiViewForm = uiTabPane.getChild(UIViewForm.class);
       String permission = event.getRequestContext().getRequestParameter(OBJECTID);
-      uiViewForm.setPermission(uiPermissionList.removePermission(permission, uiViewForm.getPermission()));        
+      String permissions = uiPermissionList.removePermission(permission, uiViewForm.getPermission());
+      if(permissions.length() == 0) {
+        UIApplication uiApp = uiPermissionList.getAncestorOfType(UIApplication.class);
+        uiApp.addMessage(new ApplicationMessage("UIViewPermissionList.msg.permission-cannot-empty",
+                                              null,
+                                              ApplicationMessage.WARNING));
+        uiTabPane.setSelectedTab(uiTabPane.getSelectedTabId());
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiTabPane);
+        return;
+      }
+      uiViewForm.setPermission(permissions); 
       uiPermissionList.refresh(uiPermissionList.getUIPageIterator().getCurrentPage());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPermissionList.getParent());
     }
@@ -149,7 +161,7 @@ public class UIViewPermissionList extends UIPagingGrid {
     String[] arrPers = new String[] {};
     if(permissions.contains(",")) {
       arrPers = permissions.split(",");
-    } else {
+    } else if(permissions.length() > 0) {
       arrPers = new String[] {permissions};
     }
     for(String per : arrPers) {

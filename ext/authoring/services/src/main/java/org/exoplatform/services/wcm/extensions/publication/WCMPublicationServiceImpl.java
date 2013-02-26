@@ -82,12 +82,6 @@ public class WCMPublicationServiceImpl
    */
   public void enrollNodeInLifecycle(Node node, String siteName, String remoteUser) {
     try {
-      if(!node.getPath().startsWith(publicationLocation.split(":")[1])) return;
-      if(node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
-        for(String nodeType : notAllowChildNodeEnrollInPubliction) {
-          if(!allowEnrollInPublication(node, nodeType)) return;
-        }
-      }
       if (LOG.isInfoEnabled()) LOG.info(node.getPath() + "::" + siteName + "::"+remoteUser);
 
       PublicationManagerImpl publicationManagerImpl = WCMCoreUtils.getService(PublicationManagerImpl.class);

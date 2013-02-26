@@ -328,7 +328,7 @@ public class UIViewList extends UIPagingGrid {
     String[] arrPers = new String[] {};
     if(permissions.contains(",")) {
       arrPers = permissions.split(",");
-    } else {
+    } else if(permissions.length() > 0){
       arrPers = new String[] {permissions};
     }
     StringBuilder perBuilder = new StringBuilder(); 

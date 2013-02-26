@@ -63,6 +63,7 @@ public class UIViewPermissionForm extends UIPermissionFormBase implements UISele
     UIPermissionInputSet uiPerInputset = getChildById(TAB_PERMISSION);
     uiPerInputset.setButtonActions(new String[] {"Add"});
     uiPerInputset.setPrimaryButtonAction("Add");
+    uiPerInputset.setActionInfo(UIPermissionInputSet.FIELD_USERORGROUP, new String[] {"SelectUser", "SelectMember"});
   }
   
   static public class SelectUserActionListener extends EventListener<UIViewPermissionForm> {
