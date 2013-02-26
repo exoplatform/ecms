@@ -19,8 +19,11 @@ package org.exoplatform.ecms.upgrade.plugins;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.PropertyType;
 import javax.jcr.Session;
+import javax.jcr.query.Query;
 
 import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
 import org.exoplatform.container.xml.InitParams;
@@ -77,17 +80,28 @@ public class UpgradeExoViewNodeTypePlugin extends UpgradeProductPlugin {
           break;
         }
       }
-      //add new property
+      //add new property definition
       if (!propertyExists) {
         List<String> defaultValues = new ArrayList<String>();
-        defaultValues.add("true");
+        defaultValues.add("false");
         propertyDefinitionList.add(new PropertyDefinitionValue(EXO_HIDE_EXPLORER_PANEL, true, true, 1, false,
                                                     defaultValues, false, PropertyType.BOOLEAN, new ArrayList<String>()));
         exoView.setDeclaredPropertyDefinitionValues(propertyDefinitionList);
         nodeTypeManager.registerNodeType(exoView, ExtendedNodeTypeManager.REPLACE_IF_EXISTS);
       }
       if (LOG.isInfoEnabled()) {
-        LOG.info("Add new property '" + EXO_HIDE_EXPLORER_PANEL + "' for node type '" + EXO_VIEW + "' successfully!");
+        LOG.info("Add new property definition '" + EXO_HIDE_EXPLORER_PANEL + "' for node type definition '" + EXO_VIEW + "' successfully!");
+      }
+      //add new property value
+      String statement = "SELECT * FROM exo:view where exo:hideExplorerPanel IS NULL";
+      Query query = session.getWorkspace().getQueryManager().createQuery(statement, Query.SQL);
+      for (NodeIterator iter = query.execute().getNodes(); iter.hasNext();) {
+        Node viewNode = iter.nextNode();
+        viewNode.setProperty(EXO_HIDE_EXPLORER_PANEL, false);
+        viewNode.save();
+      }
+      if (LOG.isInfoEnabled()) {
+        LOG.info("Add new property value '" + EXO_HIDE_EXPLORER_PANEL + "' for node type '" + EXO_VIEW + "' successfully!");
       }
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {

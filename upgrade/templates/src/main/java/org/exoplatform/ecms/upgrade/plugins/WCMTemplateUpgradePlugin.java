@@ -69,7 +69,7 @@ public class WCMTemplateUpgradePlugin extends UpgradeProductPlugin {
     String unchangedClvTemplates = PrivilegedSystemHelper.getProperty("unchanged-clv-templates");
     String unchangedSearchTemplates = PrivilegedSystemHelper.getProperty("unchanged-wcm-search-templates");
     upgrade(unchangedClvTemplates, "content-list-viewer");
-    upgrade(unchangedSearchTemplates, "WCM Advance Search");
+    upgrade(unchangedSearchTemplates, "search");
     
     try {
       // re-initialize new scripts
