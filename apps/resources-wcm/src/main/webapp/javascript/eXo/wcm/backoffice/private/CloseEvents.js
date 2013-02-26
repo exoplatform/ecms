@@ -81,8 +81,8 @@ UIForm.prototype.submitForm = function(formId, action, useAjax, callback) {
     }
   }
  } catch(e) {}
-
- try {
+  form.elements['formOp'].value = action ;
+  try {
   
   if (CKEDITOR && typeof CKEDITOR == "object") {
     for ( var name in CKEDITOR.instances ) {
@@ -90,8 +90,9 @@ UIForm.prototype.submitForm = function(formId, action, useAjax, callback) {
       try {
         oEditor = CKEDITOR.instances[name] ;
         if (oEditor && document.getElementById(name)) {
-            var rendered = eXo.core.DOMUtil.findNextElementByTagName(document.getElementById(name), 'span').id.indexOf('cke');
-            if (rendered == 0) document.getElementById(name).value = oEditor.getData();
+          var rendered = eXo.core.DOMUtil.findNextElementByTagName(document.getElementById(name), 'span').id.indexOf('cke');
+          if (rendered == 0) document.getElementById(name).value = oEditor.getData();
+          if (action.toLowerCase() == "saveandclose" || action.toLowerCase() == "close") oEditor.destroy();
         }
       } catch(e) {
         continue ;
@@ -99,8 +100,6 @@ UIForm.prototype.submitForm = function(formId, action, useAjax, callback) {
     }
   }
  } catch(e) {}
-  form.elements['formOp'].value = action ;
-
   if (navigator.appName == 'Microsoft Internet Explorer')
    {
 	if ((action.toLowerCase() == "save" || action.toLowerCase() == "saveandclose" || action.toLowerCase() == "close") && popup_opened == true) {
