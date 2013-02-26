@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+
+<gatein-resources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_resources_1_2 http://www.gatein.org/xml/ns/gatein_resources_1_2"
+  xmlns="http://www.gatein.org/xml/ns/gatein_resources_1_2">
+
+  <!-- Cloud Drive Style -->
+  <portal-skin>
+    <skin-name>Default</skin-name>
+    <skin-module>CloudDrive</skin-module>
+    <css-path>/skin/cloud-drive-skin/cloud-drive.css</css-path>
+    <css-priority>1</css-priority>
+  </portal-skin>
+  <portal-skin>
+    <skin-name>SimpleSkin</skin-name>
+    <skin-module>CloudDrive</skin-module>
+    <css-path>/skin/cloud-drive-skin/cloud-drive.css</css-path>
+    <css-priority>1</css-priority>
+  </portal-skin>
+
+  <!-- Pinest Notify Style -->
+  <portal-skin>
+    <skin-name>Default</skin-name>
+    <skin-module>PinestNotify</skin-module>
+    <css-path>/skin/cloud-drive-skin/jquery.pnotify.default.css</css-path>
+    <css-priority>1</css-priority>
+  </portal-skin>
+  <portal-skin>
+    <skin-name>SimpleSkin</skin-name>
+    <skin-module>PinestNotify</skin-module>
+    <css-path>/skin/cloud-drive-skin/jquery.pnotify.default.css</css-path>
+    <css-priority>1</css-priority>
+  </portal-skin>
+  <portal-skin>
+    <skin-name>Default</skin-name>
+    <skin-module>PinestNotifyIcons</skin-module>
+    <css-path>/skin/cloud-drive-skin/jquery.pnotify.default.icons.css</css-path>
+    <css-priority>1</css-priority>
+  </portal-skin>
+  <portal-skin>
+    <skin-name>SimpleSkin</skin-name>
+    <skin-module>PinestNotifyIcons</skin-module>
+    <css-path>/skin/cloud-drive-skin/jquery.pnotify.default.icons.css</css-path>
+    <css-priority>1</css-priority>
+  </portal-skin>  
+</gatein-resources>
