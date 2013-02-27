@@ -73,6 +73,7 @@
               <td class="FieldLabel">&nbsp;</td>
               <td class="FieldComponent" colspan="4"><% uiform.renderField(uicomponent.ORDER_TYPE_FORM_RADIO_BOX_INPUT) %></td>
             </tr>
+           </table>
             <% 
               List<String> contents = uiform.getItems();
               if (contents != null && !contents.isEmpty()) {
@@ -120,7 +121,6 @@
                 <%
               }
             %>
-          </table>
         </fieldset>   
         <fieldset class="fieldsetPreferences">
           <legend class="StyleLegend"><%= _ctx.appRes("UICLVConfig.label.DisplaySettingBlock") %></legend>
