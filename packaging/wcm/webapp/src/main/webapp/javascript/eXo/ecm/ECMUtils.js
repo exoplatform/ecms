@@ -1152,7 +1152,7 @@
 			var itemArea = document.getElementById("SelectItemArea");
 
 			var container = eXo.ecm.ECMUtils.getContainerToResize();
-			eXo.ecm.ECMUtils.initialHeightOfOtherTab = container.offsetHeight;
+			eXo.ecm.ECMUtils.initialHeightOfOtherTab = (container) ? container.offsetHeight : 100;
 
 			if (leftContainer.offsetHeight > rightContainer.offsetHeight) {
 			  container.style.height = container.offsetHeight + itemArea.offsetHeight + "px";
@@ -1185,11 +1185,9 @@
 
 		  var workingArea = document.getElementById('UIWorkingArea');
 		  var listContainers = gj(workingArea).find("div.uiResizableBlock:first")[0];
-		  for (var k = 0; k < listContainers.length; k++) {
-		    if (listContainers[k].parentNode.className != "uiResizableBlock") {
-		      return listContainers[k - 1];
-		    }
-		  }
+			var box = gj(listContainers).find("div.uiContentBox");
+			var lastDiv = gj(box).find("div:first")[0]
+		  return lastDiv;
 		}
 
 		ECMUtils.prototype.loadEffectedItemsInSideBar = function () {

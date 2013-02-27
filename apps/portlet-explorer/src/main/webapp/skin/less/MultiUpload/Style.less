@@ -1,27 +1,37 @@
 /* ======== Multi Upload  ==========*/
 .uiMultiUpload {
-	margin: 10px 0 0 450px !important;
+	margin: 10px 0 0 400px !important;
 	overflow: hidden;
 	position: relative;
+	font-size: 12px;
 	
 	.uploadIconContainer {
 		float: left;
-		width: 25px;
+		width: 30px;
+		
+		img {
+			width: 20px;
+			.border-radius(2px);
+		}
 	}
 
 	.loadContent {
 		padding: 10px !important;
 
-		.FileName {
+		.fileName {
 			cursor: pointer;
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
+			
+			a {
+				color: #333;
+			}
 		}
 
-		.FileSize {
+		.fileSize {
 			width: 100px; 
-			text-align: center;
+			text-align: right;
 		}
 
 		.LoaddingPercent {
@@ -52,19 +62,42 @@
 		display: block;
 	}
 	
-	.MultiUploadFileList {
+	.multiUploadFileList {
 		overflow-y: auto;
-		max-height: 150px;
+		max-height: 163px;
+		
+		.loadContent .WarningIcon {
+			background: url("/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/Warning.gif") no-repeat left;
+			padding: 2px 6px 0px 20px;
+			line-height:14px;
+		}
+		
+		.loadContent .Action {
+			color: #466799;
+			height: 20px;
+			text-align: center;
+			cursor: pointer;
+		}
 	}
 
 	a {
-		color: #058ee6;
+		color: #2f5e92;
+		text-decoration: none;
 	}
-
-	.MultiUploadFilesShortInfo {
-		padding: 0 0 6px 0;
-		border-bottom: 1px dashed #c7c7c7;
-		font-weight: bolder;
+	
+	.multiUploadFilesShortInfo {
+		[class^="uiIcon"] {
+			margin: 2px 0px 0px 8px;
+		}
+	}
+	
+	.uiIconMultiUploadClose {
+		background: url("/eXoResources/skin/images/Icons/uiIconColor.png") 0px 0px no-repeat;
+		cursor: pointer;
+	}
+		
+	.uiIconNoneClose {
+		background: url("/eXoResources/skin/images/Icons/uiIconColor.png") -180px 0px no-repeat;
 	}
 
 	.MultiUploadHelp {
@@ -81,28 +114,19 @@
 	}
 
 	.DeleteIconInactive {
-		background: url("DefaultSkin/background/closegreyicon.png") no-repeat right ;
+		background: url("/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/closegreyicon.png") no-repeat right ;
 		padding: 2px 6px;
 		width: 16px;
 	}
 
-	.MultiUploadAbortAll .DeleteIcon {
-		padding: 0 23px 0 0;
+	.multiUploadAbortAll  {
+		margin-left: 8px;
+		.Action {
+			cursor:pointer;
+		}
 	}
 
-	.MultiUploadAbortAll .Action {
-		cursor:pointer;
-	}
-
-	.MultiUploadDragFile {
-		text-align: center;
-		font-size: 24px; 
-		padding-top: 69px;
-		color: black;
-		z-index:2;
-	}
-
-	.MultiUploadDragFileBackground {
+	.multiUploadDragFileBackground {
 		position: absolute;
 		left: 0px;
 		top: 0px;
@@ -112,23 +136,18 @@
 		margin: 0px;
 		z-index:1;
 		display: none;
-	}
 
-	.MultiUploadFileList .loadContent .WarningIcon {
-		background: url("/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/Warning.gif") no-repeat left;
-		padding: 2px 6px 0px 20px;
-		line-height:14px;
-	}
-
-	.MultiUploadFileList .loadContent .Action {
-		color: #466799;
-		height: 20px;
-		text-align: center;
-		cursor: pointer;
+		.multiUploadDragFile {
+			text-align: center;
+			font-size: 24px; 
+			padding-top: 69px;
+			color: black;
+			z-index:2;
+		}
 	}
 }
 
-.NoShow {
+.noShow {
 	display:none;
 }
 	
