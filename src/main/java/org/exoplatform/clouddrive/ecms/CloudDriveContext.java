@@ -17,40 +17,35 @@
 
 package org.exoplatform.clouddrive.ecms;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.exoplatform.web.application.JavascriptManager;
 import org.exoplatform.web.application.RequestContext;
-import org.exoplatform.webui.application.WebuiRequestContext;
 
 /**
  * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudDriveContext.java 00000 Oct 22, 2012 pnedonosko $
- * 
  */
 public class CloudDriveContext {
 
-  protected final static String NAME = CloudDriveContext.class.getName();
-  
-  protected final static String PATHS = "CloudDriveContext_Paths".intern();
-  
+  protected final static String NAME       = CloudDriveContext.class.getName();
+
+  protected final static String PATHS      = "CloudDriveContext_Paths".intern();
+
   protected final static String JAVASCRIPT = "CloudDriveContext_Javascript".intern();
-  
+
   public static boolean addScript(RequestContext requestContext) {
-//    @SuppressWarnings("unchecked")
-//    Object script = requestContext.getAttribute(JAVASCRIPT);
-//    if (script == null) {
-//      JavascriptManager jsManager = requestContext.getJavascriptManager();
-//      jsManager.importJavascript("clouddrive", "/cloud-drive/js");
-//      requestContext.setAttribute(JAVASCRIPT, JAVASCRIPT);
-//      return true;
-//    } else {
-//      return false; // already added
-//    }
-    
+    // TODO cleanup, we don't need this since move to the addon
+    // @SuppressWarnings("unchecked")
+    // Object script = requestContext.getAttribute(JAVASCRIPT);
+    // if (script == null) {
+    // JavascriptManager jsManager = requestContext.getJavascriptManager();
+    // jsManager.importJavascript("clouddrive", "/cloud-drive/js");
+    // requestContext.setAttribute(JAVASCRIPT, JAVASCRIPT);
+    // return true;
+    // } else {
+    // return false; // already added
+    // }
+
     return false;
   }
 }
