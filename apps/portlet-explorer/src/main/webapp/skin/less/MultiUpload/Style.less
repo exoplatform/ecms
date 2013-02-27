@@ -1,0 +1,134 @@
+/* ======== Multi Upload  ==========*/
+.uiMultiUpload {
+	margin: 10px 0 0 450px !important;
+	overflow: hidden;
+	position: relative;
+	
+	.uploadIconContainer {
+		float: left;
+		width: 25px;
+	}
+
+	.loadContent {
+		padding: 10px !important;
+
+		.FileName {
+			cursor: pointer;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		.FileSize {
+			width: 100px; 
+			text-align: center;
+		}
+
+		.LoaddingPercent {
+			width: 270px; 
+			height: 15px; 
+			text-align: center;
+			background: white;
+			border: 1px solid #3c7fb1;
+			position: relative;
+		}
+
+		.Loadding {
+			box-shadow: 0 -6px 9px #9ECDE7 inset;
+			height: 15px;
+			display: block;
+		}
+		
+		.Percent {
+			position: absolute;
+			z-index: 10;
+			top: 0px;
+			left: 40%;
+		}
+	}
+
+	.multiUploadListSeperator {
+		border-top: 1px solid #CFCFCF;
+		display: block;
+	}
+	
+	.MultiUploadFileList {
+		overflow-y: auto;
+		max-height: 150px;
+	}
+
+	a {
+		color: #058ee6;
+	}
+
+	.MultiUploadFilesShortInfo {
+		padding: 0 0 6px 0;
+		border-bottom: 1px dashed #c7c7c7;
+		font-weight: bolder;
+	}
+
+	.MultiUploadHelp {
+		float: right;
+		cursor: pointer;
+		background: url("/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/UserIcons/Help.gif") no-repeat scroll left center transparent;
+		padding: 0px 6px;
+	}
+
+	.DeleteIcon {
+		background: url("/eXoResources/skin/DefaultSkin/portal/webui/component/view/UIPortalComponent/background/Close.gif") no-repeat right ;
+		padding: 2px 6px;
+		width: 16px;
+	}
+
+	.DeleteIconInactive {
+		background: url("DefaultSkin/background/closegreyicon.png") no-repeat right ;
+		padding: 2px 6px;
+		width: 16px;
+	}
+
+	.MultiUploadAbortAll .DeleteIcon {
+		padding: 0 23px 0 0;
+	}
+
+	.MultiUploadAbortAll .Action {
+		cursor:pointer;
+	}
+
+	.MultiUploadDragFile {
+		text-align: center;
+		font-size: 24px; 
+		padding-top: 69px;
+		color: black;
+		z-index:2;
+	}
+
+	.MultiUploadDragFileBackground {
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		width: 100%;
+		height:100%;
+		background: rgba(143, 143, 143, 0.7);
+		margin: 0px;
+		z-index:1;
+		display: none;
+	}
+
+	.MultiUploadFileList .loadContent .WarningIcon {
+		background: url("/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/Warning.gif") no-repeat left;
+		padding: 2px 6px 0px 20px;
+		line-height:14px;
+	}
+
+	.MultiUploadFileList .loadContent .Action {
+		color: #466799;
+		height: 20px;
+		text-align: center;
+		cursor: pointer;
+	}
+}
+
+.NoShow {
+	display:none;
+}
+	
