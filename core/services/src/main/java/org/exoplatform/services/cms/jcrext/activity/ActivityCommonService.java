@@ -42,6 +42,7 @@ public class ActivityCommonService {
   private String acceptedFileProperties;
   public static String NT_FILE                       = "nt:file";
   public static String WEB_CONTENT                   = "exo:webContent";
+  public static String ACCESSIBLE_MEDIA              = "exo:accessibleMedia";
   public static String EDIT_ACTIVITY                 = "ActivityNotify.event.PropertyUpdated";
   public static String FILE_EDIT_ACTIVITY            = "FileActivityNotify.event.PropertyUpdated";
   public static String FILE_PROPERTY_REMOVE_ACTIVITY = "FileActivityNotify.event.PropertyRemoved";
@@ -154,7 +155,7 @@ public class ActivityCommonService {
     }else if (path.endsWith(specialSummaryCase)){
       try {
         Node node = (Node) item.getParent().getParent();
-        if (isDocumentNodeType(node)) return node;
+        if (isAcceptedNode(node)) return node;
       }catch (Exception e) {
         return null;
       }
