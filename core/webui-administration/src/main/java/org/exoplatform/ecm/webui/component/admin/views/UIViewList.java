@@ -156,7 +156,6 @@ public class UIViewList extends UIPagingGrid {
       uiViewContainer.removeChildById(UIViewList.ST_VIEW) ;
       uiViewContainer.removeChildById(UIViewList.ST_EDIT) ;
       UIViewFormTabPane uiTabPane = uiViewContainer.createUIComponent(UIViewFormTabPane.class, null, null) ;
-      uiViewContainer.initPopup(UIViewList.ST_ADD, uiTabPane) ;
       uiTabPane.update(false);
       UIViewPermissionForm uiPermissionForm = uiTabPane.findFirstComponentOfType(UIViewPermissionForm.class);
       UIPermissionInputSet uiPermissionInputSet = uiPermissionForm.getChildById(UIViewPermissionForm.TAB_PERMISSION);
@@ -165,8 +164,7 @@ public class UIViewList extends UIPagingGrid {
           uiPermissionInputSet.removeChildById(uiComp.getId());
         }
       }
-      UIViewManager uiManager = uiViewList.getAncestorOfType(UIViewManager.class) ;
-      uiManager.setRenderedChild(UIViewContainer.class) ;
+      uiViewContainer.initPopup(UIViewList.ST_ADD, uiTabPane) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiViewContainer) ;
     }
   }
@@ -238,9 +236,6 @@ public class UIViewList extends UIPagingGrid {
       UITabList uiTab = viewTabPane.getChild(UITabList.class);
       uiTab.setViewName(viewName);
       uiTab.refresh(uiTab.getUIPageIterator().getCurrentPage());
-      viewTabPane.setSelectedTab(viewForm.getId()) ;
-      UIViewManager uiManager = uiViewList.getAncestorOfType(UIViewManager.class) ;
-      uiManager.setRenderedChild(UIViewContainer.class) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiViewContainer) ;
     }
   }
@@ -273,10 +268,7 @@ public class UIViewList extends UIPagingGrid {
       UIViewForm uiViewForm = viewTabPane.getChild(UIViewForm.class) ;
       uiViewForm.refresh(false) ;
       uiViewForm.update(viewNode, true, null) ;
-      viewTabPane.setSelectedTab(uiViewForm.getId()) ;
       viewTabPane.setActions(new String[] {"Close"});
-      UIViewManager uiManager = uiViewList.getAncestorOfType(UIViewManager.class) ;
-      uiManager.setRenderedChild(UIViewContainer.class) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiViewContainer) ;
     }
   }
