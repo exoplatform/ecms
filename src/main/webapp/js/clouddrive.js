@@ -1,27 +1,10 @@
 /**
- * Stuff grabbed from CW's commons.js
- */
-function pageBaseUrl(theLocation) {
-	if (!theLocation) {
-		theLocation = window.location;
-	}
-
-	var theHostName = theLocation.hostname;
-	var theQueryString = theLocation.search;
-
-	if (theLocation.port) {
-		theHostName += ":" + theLocation.port;
-	}
-
-	return theLocation.protocol + "//" + theHostName;
-}
-
-var prefixUrl = pageBaseUrl(location);
-
-/**
  * Singleton to handle CloudDrive connections.
  */
 function CloudDrive() {
+	var utils = new BrowserUtils();
+	var prefixUrl = utils.pageBaseUrl(location);
+
 	var contextNode;
 	var contextDrive;
 	var excluded = {};
@@ -339,12 +322,12 @@ function CloudDrive() {
 	var waitAuth = function(provider, callbacks) {
 		var i = 0;
 		var intervalId = setInterval(function() {
-			var connectId = getCookie("cloud-drive-connect-id");
+			var connectId = utils.getCookie("cloud-drive-connect-id");
 			if (connectId) {
 				intervalId = clearInterval(intervalId);
 				callbacks.done();
 			} else {
-				var error = getCookie("cloud-drive-error");
+				var error = utils.getCookie("cloud-drive-error");
 				if (error) {
 					intervalId = clearInterval(intervalId);
 					callbacks.error(error);
@@ -740,6 +723,8 @@ function CloudDriveUI() {
 			"ViewMetadatasIcon", "VoteIcon", "CommentIcon" ];
 	var ALLOWED_DMS_MENU_DRIVE_ACTION_CLASSES = [ "DeleteNodeIcon" ];
 
+	var initLock = null;
+
 	var getAllowedItems = function(menu, items, allowed) {
 		var newParams = "";
 		$.each(items, function(i, item) {
@@ -988,6 +973,15 @@ function CloudDriveUI() {
 	};
 
 	this.connectState = function(checkUrl, docsUrl, docsOnclick) {
+		var task;
+		if (taskStore) {
+			// add check task to get user notified in case of leaving this page
+			task = "cloudDriveUI.connectState(\"" + checkUrl + "\", \"" + docsUrl + "\", \"" + docsOnclick + "\");"
+			taskStore.add(task);
+		} else {
+			log("taskStore not defined");
+		}
+
 		var state = cloudDrive.state(checkUrl);
 		state.done(function(state) {
 			var message;
@@ -1000,7 +994,6 @@ function CloudDriveUI() {
 			} else {
 				message = "Find your drive in Personal Documents";
 			}
-			log("message: " + message);
 
 			$.pnotify({
 				title : "Your " + state.drive.provider.name + " connected!",
@@ -1034,6 +1027,11 @@ function CloudDriveUI() {
 				shadow : true,
 				width : $.pnotify.defaults.width
 			});
+		});
+		state.always(function() {
+			if (task) {
+				taskStore.remove(task);
+			}
 		});
 	};
 
@@ -1094,12 +1092,6 @@ function CloudDriveUI() {
 		process.progress(function(state) {
 			if (!task) {
 				// start progress
-				var docsUrl = ", \"" + location + "\"";
-				var docsOnclick = personalDocumentsLink();
-				docsOnclick = docsOnclick ? ", \"" + docsOnclick + "\"" : "";
-				task = "cloudDriveUI.connectState(\"" + state.serviceUrl + "\"" + docsUrl + docsOnclick + ");";
-				cloudDriveUI.add(task);
-
 				progress = state.progress;
 				driveName = state.drive.provider.name;
 
@@ -1115,6 +1107,17 @@ function CloudDriveUI() {
 						width : "200px"
 					});
 				}, 4000);
+
+				// add as tasks also
+				if (taskStore) {
+					var docsUrl = ", \"" + location + "\"";
+					var docsOnclick = personalDocumentsLink();
+					docsOnclick = docsOnclick ? ", \"" + docsOnclick + "\"" : "";
+					task = "cloudDriveUI.connectState(\"" + state.serviceUrl + "\"" + docsUrl + docsOnclick + ");";
+					taskStore.add(task);
+				} else {
+					log("taskStore not defined");
+				}
 			} else {
 				// continue progress
 				progress = state.progress < 100 ? state.progress : 99;
@@ -1138,7 +1141,7 @@ function CloudDriveUI() {
 
 		process.always(function() {
 			if (task) {
-				CWTasks.remove(task);
+				taskStore.remove(task);
 			}
 		});
 
@@ -1280,11 +1283,25 @@ function CloudDriveUI() {
 	 * Init all UI (dialogs, menus, views etc). Called on browser load.
 	 */
 	this.init = function() {
-		// init on each document reload (incl. ajax calls)
 		initDocument();
 
+		// init on each document reload (incl. ajax calls)
+		// XXX using deprecated DOMNodeInserted and context menu selector to get less events here for DOM
+		// reloading during the navigation
+		$("#UIWorkingArea").on("DOMNodeInserted", "#ECMContextMenu", function(event) {
+			log("DOMSubtreeModified " + event.target); // DOMSubtreeModified
+			if (!initLock) {
+				initLock = setTimeout(function() {
+					initDocument();
+					initLock = null;
+				}, 250);
+			}
+			return true;
+		});
+
 		// tuning of on-file context menu
-		if (UIRightClickPopupMenu && typeof UIRightClickPopupMenu.prototype.__cw_overridden == "undefined") {
+		if (typeof UIRightClickPopupMenu != "undefined"
+				&& typeof UIRightClickPopupMenu.prototype.__cw_overridden == "undefined") {
 			var clickRightMouse_orig = UIRightClickPopupMenu.prototype.clickRightMouse;
 			UIRightClickPopupMenu.prototype.clickRightMouse = function(event, elemt, menuId, objId, params, opt) {
 				if (params.indexOf(MENU_OPEN_FILE) >= 0) {
@@ -1300,7 +1317,7 @@ function CloudDriveUI() {
 			UIRightClickPopupMenu.prototype.__cw_overridden = true;
 		}
 
-		if (ListView && typeof ListView.prototype.__cw_overridden == "undefined") {
+		if (typeof ListView != "undefined" && typeof ListView.prototype.__cw_overridden == "undefined") {
 			// based on code from UIListView.js
 			function selectedFiles(drivePath) {
 				var itemsSelected = eXo.ecm.UIListView.itemsSelected;
@@ -1382,107 +1399,6 @@ function CloudDriveUI() {
 			this.alt = $(this).text();
 		});
 	};
-};
-
-function TaskStore() {
-	var COOKIE_NAME = "tasks.exoplatform.org";
-	var loaded = false;
-
-	var store = function(tasks) {
-		setCookie(COOKIE_NAME, tasks, 20 * 60 * 1000); // 20min
-	};
-
-	var removeTask = function(task) {
-		var pcookie = getCookie(COOKIE_NAME);
-		if (pcookie && pcookie.length > 0) {
-			var updated = "";
-			var existing = pcookie.split("~");
-			for ( var i = 0; i < existing.length; i++) {
-				var t = existing[i];
-				if (t != task) {
-					updated += updated.length > 0 ? "~" + t : t;
-				}
-			}
-			store(updated);
-		}
-	};
-
-	var addTask = function(task) {
-		var pcookie = getCookie(COOKIE_NAME);
-		if (pcookie) {
-			if (pcookie.indexOf(task) < 0) {
-				var tasks = pcookie.length > 0 ? pcookie + "~" + task : task;
-				store(tasks);
-			}
-		} else {
-			store(task);
-		}
-	};
-
-	/**
-	 * Register task in store.
-	 */
-	this.add = function(task) {
-		if (task) {
-			addTask(task);
-		} else {
-			log("not valid task (code is not defined)");
-		}
-	};
-
-	/**
-	 * Remove task from the store.
-	 */
-	this.remove = function(task) {
-		removeTask(task);
-	}
-
-	/**
-	 * Load stored tasks.
-	 */
-	this.load = function() {
-		// load once per page
-		if (loaded)
-			return;
-
-		// read cookie and eval each stored code
-		var pcookie = getCookie(COOKIE_NAME);
-		if (pcookie && pcookie.length > 0) {
-			try {
-				var tasks = pcookie.split("~");
-				for ( var i = 0; i < tasks.length; i++) {
-					var task = tasks[i];
-					try {
-						removeTask(task);
-						log("Loading task [" + task + "]");
-						eval(task);
-					} catch (e) {
-						log("Error evaluating task: " + task + ":" + e + ". Skipped.");
-					}
-				}
-			} finally {
-				loaded = true;
-				log("Tasks loaded.");
-			}
-		}
-	};
-
-	/**
-	 * Add style to current document (to the end of head).
-	 */
-	this.loadStyle = function(cssUrl) {
-		if (document.createStyleSheet) {
-			document.createStyleSheet(cssUrl); // IE way
-		} else {
-			var style = document.createElement("link");
-			style.type = "text/css";
-			style.rel = "stylesheet";
-			style.href = cssUrl;
-			var headElems = document.getElementsByTagName("head");
-			headElems[headElems.length - 1].appendChild(style);
-			// $("head").append($("<link href='" + cssUrl + "' rel='stylesheet' type='text/css' />"));
-		}
-	};
 
 	/**
 	 * Show notice to user. Options support "icon" class, "hide", "closer" and "nonblock" features.
@@ -1545,29 +1461,14 @@ if (typeof cloudDrive == "undefined") {
 }
 
 if (typeof cloudDriveUI == "undefined") {
-	cloudDriveUI = new CloudDriveUI(cloudDrive);
-}
-
-if (typeof taskStore == "undefined") {
-	taskStore = new TaskStore();
+	cloudDriveUI = new CloudDriveUI();
 }
 
 $(function() {
 	try {
-		// preload jQuery UI and Pinest Notify
-		cloudDriveUI.loadStyle("http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css");
-		$.getScript("/cloud-drive/js/jquery.pnotify.min.js", function() {
-			$.pnotify.defaults.styling = "jqueryui"; // use jQuery UI css
-			$.pnotify.defaults.history = false; // no history roller in the right corner
-
-			// init UI
-			cloudDriveUI.init();
-			// and load stored tasks
-			taskStore.load();
-		});
+		log("Initializing CloudDrive");
+		cloudDriveUI.init();
 	} catch (e) {
-		log("Error initializing CloudDrive: " + e);
-		console.trace();
-		console.log(e.stack);
+		log("Error initializing CloudDrive", e);
 	}
 });
