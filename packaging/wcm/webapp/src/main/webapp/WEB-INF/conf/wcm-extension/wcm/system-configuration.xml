@@ -37,6 +37,7 @@
         <property name="printPageURI" value="/printviewer" />
         <property name="printViewerPage" value="printviewer" />
         <property name="editorPageURI" value="editor" />
+        <property name="editPageURI" value="edit" />
         <property name="siteExplorerURI" value="siteExplorer" />
 
         <property name="CLVPortlet" value="/presentation/ContentListViewerPortlet" />
