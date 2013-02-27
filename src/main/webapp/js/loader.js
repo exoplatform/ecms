@@ -91,12 +91,16 @@ if (window == top) {
 
 			// required local scripts (eXo.loadJS injects script text to the page body, thus we don't use it)
 			waitFor("$", function() {
+				log("jQuery loaded");
 				loadScript("/cloud-drive/js/jquery.pnotify.min.js", "$.pnotify", function() {
+					log("Pinest Notify loaded");
 					$.pnotify.defaults.styling = "jqueryui"; // use jQuery UI css
 					$.pnotify.defaults.history = false; // no history roller in the right corner
 
 					loadScript("/cloud-drive/js/utils.js", "taskStore", function() {
+						log("CloudDrive utils loaded");
 						loadScript("/cloud-drive/js/clouddrive.js", "cloudDrive", function() {
+							log("CloudDrive core loaded");
 							// ok
 						}, function() {
 							log("Failed to load CloudDrive core script");
@@ -113,5 +117,5 @@ if (window == top) {
 		} catch (e) {
 			log("Error loading CloudDrive ", e);
 		}
-	}, 2);
+	}, 50);
 }

@@ -724,7 +724,7 @@ function CloudDriveUI() {
 	var ALLOWED_DMS_MENU_DRIVE_ACTION_CLASSES = [ "DeleteNodeIcon" ];
 
 	var initLock = null;
-
+	
 	var getAllowedItems = function(menu, items, allowed) {
 		var newParams = "";
 		$.each(items, function(i, item) {
@@ -1283,16 +1283,17 @@ function CloudDriveUI() {
 	 * Init all UI (dialogs, menus, views etc). Called on browser load.
 	 */
 	this.init = function() {
+		// inut doc view (list of file view)
 		initDocument();
-
+		
 		// init on each document reload (incl. ajax calls)
 		// XXX using deprecated DOMNodeInserted and context menu selector to get less events here for DOM
 		// reloading during the navigation
-		$("#UIWorkingArea").on("DOMNodeInserted", "#ECMContextMenu", function(event) {
+		$("#UIWorkingArea").on("DOMNodeInserted", "#LeftContainer .LastNode div", function(event) { // 
 			//log("DOMSubtreeModified " + event.target); // DOMSubtreeModified
 			if (!initLock) {
 				initLock = setTimeout(function() {
-					initDocument();
+					cloudDriveUI.init();
 					initLock = null;
 				}, 250);
 			}
@@ -1467,7 +1468,7 @@ if (typeof cloudDriveUI == "undefined") {
 $(function() {
 	try {
 		log("Initializing CloudDrive");
-		cloudDriveUI.init();
+		cloudDriveUI.init();		
 	} catch (e) {
 		log("Error initializing CloudDrive", e);
 	}
