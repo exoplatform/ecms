@@ -92,7 +92,7 @@
 	};
 
 	MultiUpload.prototype.openMultiUploadBox = function() {
-		gj("#UIMultiUpload", eXo.ecm.MultiUpload.document).removeClass("NoShow");
+		gj("#UIMultiUpload", eXo.ecm.MultiUpload.document).removeClass("noShow");
 		//focus UIDocumentInfo
 		div=eXo.ecm.MultiUpload.document.getElementById("UIDocumentInfo");
 		try {
@@ -111,11 +111,11 @@
 			evt.clientY > 30 && evt.clientY < document.documentElement.clientHeight - 30) {
 			return;
 		}
-		gj("#UIMultiUpload", eXo.ecm.MultiUpload.document).addClass("NoShow");
+		gj("#UIMultiUpload", eXo.ecm.MultiUpload.document).addClass("noShow");
 	};
 
 	MultiUpload.prototype.closeMultiUploadBox = function(event) {
-		gj("#UIMultiUpload", eXo.ecm.MultiUpload.document).addClass("NoShow");
+		gj("#UIMultiUpload", eXo.ecm.MultiUpload.document).addClass("noShow");
 	}
 
 	MultiUpload.prototype.outFocus = function() {
@@ -311,17 +311,17 @@
 		
 		if (processingFiles == 0) {
 			close.addEventListener("click", eXo.ecm.MultiUpload.closeMultiUploadBox, false);
-			close.className = "MultiUploadClose FR DeleteIcon";
+			close.className = "uiIconMultiUploadClose pull-right";
 			abortAll.style.display = "none";  
 		} else {
 			close.removeEventListener("click", eXo.ecm.MultiUpload.closeMultiUploadBox, false);
-			close.className = "MultiUploadClose FR DeleteIconInactive";
+			close.className = "uiIconNoneClose pull-right";
 			abortAll.style.display = "";
 		}
 
 		eXo.ecm.MultiUpload.document.getElementById("MultiUploadClose").className =
-			(processingFiles == 0) ? "MultiUploadClose FR DeleteIcon" :
-													  "MultiUploadClose FR DeleteIconInactive";
+			(processingFiles == 0) ? "uiIconMultiUploadClose pull-right" :
+													  "uiIconNoneClose pull-right";
 	};
 
 	MultiUpload.prototype.processFiles = function() {
@@ -403,7 +403,7 @@
 		var info = eXo.ecm.MultiUpload.document.createElement("div");
 		info.id = "file" + fileID;
 		info.innerHTML = decodeURIComponent(cleanName(file.name));
-		info.className = "FileName FL";
+		info.className = "fileName FL";
 		if (eXo.ecm.MultiUpload.pathMap[fileID] != undefined) {
 			info.title = eXo.ecm.MultiUpload.IN + " " + eXo.ecm.MultiUpload.driveTitle + (eXo.ecm.MultiUpload.pathMap[fileID].indexOf("/") == 0 ? "" : "/") + 
 						   eXo.ecm.MultiUpload.pathMap[fileID];
@@ -479,7 +479,7 @@
 		eXo.ecm.MultiUpload.document.getElementById("MultiUploadDragFile").style.display="none";
 		eXo.ecm.MultiUpload.document.getElementById("MultiUploadDragFileBackground").style.display="none";
 		//enable multiupload box
-		gj("#UIMultiUpload", eXo.ecm.MultiUpload.document).removeClass("NoShow");
+		gj("#UIMultiUpload", eXo.ecm.MultiUpload.document).removeClass("noShow");
 		//process drop
 		evt = event || window.event;
 		evt.stopPropagation();
@@ -498,7 +498,7 @@
 		if (eXo.ecm.MultiUpload.processFiles() == 0) {
 			var close = eXo.ecm.MultiUpload.document.getElementById("MultiUploadClose");
 			close.addEventListener("click", eXo.ecm.MultiUpload.closeMultiUploadBox, false);
-			close.className = "MultiUploadClose FR DeleteIcon";
+			close.className = "uiIconMultiUploadClose pull-right";
 		}
 	
 		var ids = new Array();
@@ -626,7 +626,7 @@
 	
 		//keepBoth
 		keepBoth.className = "FR Action"
-		keepBoth.innerHTML = "<u>" + eXo.ecm.MultiUpload.KEEP + "</u>";
+		keepBoth.innerHTML = eXo.ecm.MultiUpload.KEEP;
 		keepBoth.onclick=function abortUpload(myFileDiv, fileId, evt) {
 		  return function(evt) {
 			myFileDiv.parentNode.removeChild(myFileDiv);
@@ -639,7 +639,7 @@
 		}(loadContentDiv, id);
 		//replace
 		replaceDiv.className = "FR Action";
-		replaceDiv.innerHTML = "<u>" + eXo.ecm.MultiUpload.REPLACE + "</u>";
+		replaceDiv.innerHTML = eXo.ecm.MultiUpload.REPLACE;
 		replaceDiv.onclick=function abortUpload(myFileDiv, myfile, evt) {
 		  return function(evt) {
 			myFileDiv.parentNode.removeChild(myFileDiv);
@@ -652,7 +652,7 @@
 		}(loadContentDiv, id);
 		//cancel
 		cancel.className = "FR Action";
-		cancel.innerHTML = "<u>" + eXo.ecm.MultiUpload.CANCEL + "</u>";
+		cancel.innerHTML = eXo.ecm.MultiUpload.CANCEL;
 		cancel.onclick = eXo.ecm.MultiUpload.handleReaderAbort(id, eXo.ecm.MultiUpload.CANCEL_TXT);
 	};
 
@@ -835,7 +835,7 @@
 		  	  if (progMeter && cancelButton) {
 			  	  progMeter.parentNode.parentNode.removeChild(progMeter.parentNode);
 			  	  cancelButton.innerHTML= getFileSizeFormat(eXo.ecm.MultiUpload.sizeMap[progressID]);
-			  	  cancelButton.className = "FileSize FR";
+			  	  cancelButton.className = "fileSize pull-right";
 		  	  } else {
 				var e = eXo.ecm.MultiUpload.handleReaderLoad(progressID);
 				setTimeout(function(){e(window.event);}, 1000);
@@ -847,11 +847,12 @@
 		  		  if (result && result.length > 0) {
 		  			  var filetype = result[0].getAttribute("mimetype");
 				  	  var icon = gj("#icon" + progressID, eXo.ecm.MultiUpload.document)[0];
-				  	  if (filetype && icon && (filetype.indexOf("image") == -1)) {
-						var className = icon.className;
-						var typeFormatted = filetype.replace(/\./g, "_").replace("/", "_").replace("\\","_");
+							var iDiv = gj("i", icon);
+				  	  if (filetype && iDiv && (filetype.indexOf("image") == -1)) {
+						var className = iDiv.className;
+						var typeFormatted = filetype.replace(/\./g, "").replace("/", "").replace("\\","");
 						if (className.indexOf(typeFormatted) == -1) {
-							icon.className = className + " " + typeFormatted + "16x16Icon";
+							iDiv.className = className + " uiIcon16x16" + typeFormatted;
 						}
 				    	  }
 		  		  }
@@ -867,8 +868,8 @@
 		  	  "/" + cleanName(file.name);
 				var icon = gj("#icon" + progressID, eXo.ecm.MultiUpload.document)[0];
 		  	  if (icon && eXo.ecm.MultiUpload.fileType[progressID].indexOf("image") != -1) {
-		  		  icon.className="FL";
-		  		  icon.innerHTML="<img style='margin-top: -8px; height: 25px; width: 25px;' src='" +
+		  		  icon.className="uploadIconContainer";
+		  		  icon.innerHTML="<img src='" +
 		  		  eXo.ecm.MultiUpload.restContext + "/thumbnailImage/small/repository/" +
 		  		  eXo.ecm.MultiUpload.ws + nodePath + "'>";
 		  	  }
@@ -926,7 +927,7 @@
 		  	gj("#msg" + progressID, eXo.ecm.MultiUpload.document).remove();
 		  }
 		  gj("#LoadContent" + progressID, eXo.ecm.MultiUpload.document).insertAfter("#MultiUploadListSeperator");
-		  cancelButton.className = "FileSize FR";
+		  cancelButton.className = "fileSize pull-right";
 		  cancelButton.innerHTML = message;
 		cancelButton.style.color="darkgray";
 		var filename = eXo.ecm.MultiUpload.document.getElementById("file" + progressID);
