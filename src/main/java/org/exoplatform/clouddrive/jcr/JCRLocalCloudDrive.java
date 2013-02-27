@@ -421,10 +421,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     void finishRemove(Session session, String rootPath) {
       // reset flags and unregister both listeners from the Observation
       removed = added = false;
+
       try {
-        ObservationManager manager = session.getWorkspace().getObservationManager();
-        manager.removeEventListener(removeListener);
-        manager.removeEventListener(addListener);
+        removeJCRListener(session);
       } catch (RepositoryException e) {
         LOG.error("Error unregistering Cloud Drive '" + title() + "' node listeners: " + e.getMessage(), e);
       }
@@ -706,7 +705,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       try {
         startAction(JCRLocalCloudDrive.this);
 
-        int attemptNumb = 1;
+        int attemptNumb = 0;
         while (true) {
           try {
             process();
@@ -1045,6 +1044,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
 
   protected final ThreadLocal<SoftReference<Node>> rootNodeHolder;
 
+  protected final NodeRemoveHandler                handler;
+
   /**
    * Title has special care. It used in error logs and an attempt to read <code>exo:title</code> property can
    * cause another {@link RepositoryException}. Thus need it pre-cached in the variable and try to read the
@@ -1096,7 +1097,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     this.rootNodeHolder.set(new SoftReference<Node>(driveNode));
 
     // add drive removal listener
-    addRemoveListener(driveNode);
+    this.handler = addJCRListener(driveNode);
   }
 
   /**
@@ -1553,6 +1554,16 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
    * @param commandDescription {@link String}
    */
   void handleError(Node rootNode, Throwable error, String commandDescription) {
+    if (commandDescription.equals("connect")) {
+      try {
+        // XXX it's workaround to prevent JCR Observation NPE
+        removeJCRListener(rootNode.getSession());
+      } catch (Throwable e) {
+        LOG.warn("Error removing observation listener on connect error '" + error.getMessage() + "' "
+            + " on Cloud Drive '" + title() + "':" + e.getMessage());
+      }
+    }
+
     rollback(rootNode);
     try {
       listeners.fireOnError(new CloudDriveEvent(getUser(), rootWorkspace, rootNode.getPath()), error);
@@ -2025,8 +2036,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
    * 
    * @param driveNode {@link Node}
    * @throws RepositoryException
+   * @return NodeRemoveHandler
    */
-  protected void addRemoveListener(Node driveNode) throws RepositoryException {
+  protected NodeRemoveHandler addJCRListener(Node driveNode) throws RepositoryException {
     NodeRemoveHandler handler = new NodeRemoveHandler(driveNode.getPath());
     ObservationManager observation = driveNode.getSession().getWorkspace().getObservationManager();
     observation.addEventListener(handler.removeListener,
@@ -2043,6 +2055,19 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
                                  null,
                                  new String[] { EXO_TRASHFOLDER },
                                  true);
+    return handler;
+  }
+
+  /**
+   * Remove Observation listener to removal from parent and addition to the Trash.
+   * 
+   * @param session {@link Session}
+   * @throws RepositoryException
+   */
+  protected void removeJCRListener(Session session) throws RepositoryException {
+    ObservationManager observation = session.getWorkspace().getObservationManager();
+    observation.removeEventListener(handler.removeListener);
+    observation.removeEventListener(handler.addListener);
   }
 
   // ============== abstract ==============

@@ -592,9 +592,13 @@ public class ConnectService implements ResourceContainer {
         connect.lock.lock();
         try {
           if (connect.error != null) {
-            // KO:error during the connect
-            // XXX drive should be removed in onError()
-            resp.error(connect.error.getMessage()).status(Status.INTERNAL_SERVER_ERROR);
+            // KO:error during the connect            
+            // TODO hack for 503 from Google, move this logic to Google connector, as well as access_denied
+            String error = connect.error.getMessage();
+            if (error.indexOf("backendError") >= 0) {
+              error = "Google backend error. Try again later.";
+            }
+            resp.error(error).status(Status.INTERNAL_SERVER_ERROR);
           } else {
             // OK:connected or accepted (in progress)
             // XXX don't send files each time but on done only
@@ -765,7 +769,7 @@ public class ConnectService implements ResourceContainer {
               // we have an error from provider
               LOG.warn(cloudProvider.getName() + " error: " + error);
 
-              // XXX hack for access_denied
+              // TODO hack for access_denied from Google, move this logic to Google connector
               if (error.indexOf("access_denied") >= 0) {
                 resp.authError("Acccess denied.",
                                connect.host.getHost(),

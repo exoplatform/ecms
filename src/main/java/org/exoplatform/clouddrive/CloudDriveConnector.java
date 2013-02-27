@@ -56,7 +56,7 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
 
   public static final int                PROVIDER_REQUEST_ATTEMPTS        = 3;
 
-  public static final long               PROVIDER_REQUEST_ATTEMPT_TIMEOUT = 1000;                                          // 1sec
+  public static final long               PROVIDER_REQUEST_ATTEMPT_TIMEOUT = 5000;                                          // 5sec
 
   protected static final Log             LOG                              = ExoLogger.getLogger(CloudDriveConnector.class);
 
