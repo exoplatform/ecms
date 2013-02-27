@@ -51,6 +51,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.link.LinkManager;
@@ -63,6 +64,10 @@ import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.jcr.util.VersionHistoryImporter;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.security.IdentityRegistry;
+import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
@@ -516,4 +521,108 @@ public class Utils {
     return clean;
   }
 
+  public static List<String> getMemberships() throws Exception {
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+    List<String> userMemberships = new ArrayList<String>();
+   userMemberships.add(userId);
+    // here we must retrieve memberships of the user using the
+    // IdentityRegistry Service instead of Organization Service to
+    // allow JAAS based authorization
+    Collection<MembershipEntry> memberships = getUserMembershipsFromIdentityRegistry(userId);
+    if (memberships != null) {
+      for (MembershipEntry membership : memberships) {
+        String role = membership.getMembershipType() + ":" + membership.getGroup();
+        userMemberships.add(role);
+      }
+   }
+   return userMemberships;
+  }
+
+  /**
+   * this method retrieves memberships of the user having the given id using the
+   * IdentityRegistry service instead of the Organization service to allow JAAS
+   * based authorization
+   *
+   * @param authenticatedUser the authenticated user id
+   * @return a collection of MembershipEntry
+   */
+  private static Collection<MembershipEntry> getUserMembershipsFromIdentityRegistry(String authenticatedUser) {
+    IdentityRegistry identityRegistry = WCMCoreUtils.getService(IdentityRegistry.class);
+    Identity currentUserIdentity = identityRegistry.getIdentity(authenticatedUser);
+    return currentUserIdentity.getMemberships();
+  }
+  
+  public static String getNodeTypeIcon(Node node, String appended, String mode)
+  throws RepositoryException {
+    StringBuilder str = new StringBuilder();
+    if (node == null)
+      return "";
+    
+    // Primary node type
+    String nodeType = node.getPrimaryNodeType().getName();
+    
+    // Get real node if node is symlink
+    if (node.isNodeType(EXO_SYMLINK)) {
+      LinkManager linkManager = Util.getUIPortal().getApplicationComponent(
+          LinkManager.class);
+      try {
+        nodeType = node.getProperty(NodetypeConstant.EXO_PRIMARYTYPE).getString();
+        node = linkManager.getTarget(node);
+        if (node == null)
+          return "";
+      } catch (Exception e) {
+        return "";
+      }
+    }
+    
+    if (node.isNodeType(NodetypeConstant.EXO_TRASH_FOLDER)) {
+      nodeType = NodetypeConstant.EXO_TRASH_FOLDER;
+    }
+    else if (node.isNodeType(NodetypeConstant.EXO_FAVOURITE_FOLDER)) {
+      nodeType = NodetypeConstant.EXO_FAVOURITE_FOLDER;
+    }
+    else if (nodeType.equals(NodetypeConstant.NT_UNSTRUCTURED) || nodeType.equals(NodetypeConstant.NT_FOLDER)) {
+      for (String specificFolder : NodetypeConstant.SPECIFIC_FOLDERS) {
+        if (node.isNodeType(specificFolder)) {
+          nodeType = specificFolder;
+          break;
+        }
+      }
+    }
+
+    nodeType = nodeType.replace(':', '_');
+
+    // Default css class
+    String defaultCssClass;
+    if (node.isNodeType(NodetypeConstant.NT_UNSTRUCTURED) || node.isNodeType(NodetypeConstant.NT_FOLDER)) {
+      defaultCssClass = "Folder";
+    } else if (node.isNodeType(NodetypeConstant.NT_FILE)) {
+      defaultCssClass = "File";
+    } else {
+      defaultCssClass = nodeType;
+    }
+    defaultCssClass += "Default";
+    
+    str.append(appended);
+    str.append(defaultCssClass);
+    str.append(" ");
+    str.append(appended);
+    str.append(nodeType);
+    if (mode != null && mode.equalsIgnoreCase("Collapse"))
+      str.append(' ').append(mode).append(appended).append(nodeType);
+    if (node.isNodeType(NodetypeConstant.NT_FILE)) {
+      if (node.hasNode(NodetypeConstant.JCR_CONTENT)) {
+        Node jcrContentNode = node.getNode(NodetypeConstant.JCR_CONTENT);
+        str.append(' ').append(appended).append(
+            jcrContentNode.getProperty(NodetypeConstant.JCR_MIMETYPE).getString().toLowerCase().replaceAll(
+                "/|\\.", ""));
+      }
+    }
+    return str.toString();
+  }
+    
+  public static String getNodeTypeIcon(Node node, String appended)
+    throws RepositoryException {
+    return getNodeTypeIcon(node, appended, null);
+  }
 }

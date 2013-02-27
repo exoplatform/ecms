@@ -183,21 +183,7 @@
 	WCMUtils.prototype.hideContextMenu = function(menuItemElem)  {
 		var contextMenu = gj(menuItemElem).parents(".UIRightClickPopupMenu:first")[0];
 		contextMenu.style.display = "none" ;
-	}
-
-	WCMUtils.prototype.changePriorityCss = function() {
-	  priorityField = document.getElementById("priority");
-	  if(priorityField != null) {
-		  if(isNaN(priorityField.value)) {
-		  	priorityField.className = "Tip";		
-		  }
-		  priorityField.onclick = function() { 
-		    priorityField.className = "SeoPriority"; 
-		    if(isNaN(priorityField.value))
-		      priorityField.value = ""; 
-		  } ;
-		}
-	}
+	};
 
 	WCMUtils.prototype.setHeightRightContainer = function() {
 		var leftContainer = document.getElementById("LeftContainer");
@@ -208,7 +194,7 @@
 		var resizeButton = null;	
 		rightContainer.style.display = 'block';
 		seoPopup.style.width = "640px";
-	}
+	};
 
 	WCMUtils.prototype.showSEOLanguage = function(isShow) {
 		var addNewSEO = document.getElementById("addNewSEO");
@@ -220,7 +206,7 @@
 		  addNewSEO.style.display = "block";
 		  selectSEOLanguage.style.display = "none";
 		}
-	}
+	};
 	
 	WCMUtils.prototype.addParamIntoAjaxEventRequest = function(eventReq, extParam) {
 	    return eventReq.substring(0, eventReq.length - 2) + extParam +  "\')";	

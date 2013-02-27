@@ -79,7 +79,7 @@ public class JSFileHandler extends BaseWebSchemaHandler {
     WebSchemaConfigService schemaConfigService = getService(WebSchemaConfigService.class);
     PortalFolderSchemaHandler schemaHandler = schemaConfigService.getWebSchemaHandlerByType(PortalFolderSchemaHandler.class);
     Node jsFolder = schemaHandler.getJSFolder(portal);
-    return file.getPath().startsWith(jsFolder.getPath());
+    return jsFolder == null ? false : file.getPath().startsWith(jsFolder.getPath());
   }
 
   public void onCreateNode(SessionProvider sessionProvider, Node file) throws Exception {

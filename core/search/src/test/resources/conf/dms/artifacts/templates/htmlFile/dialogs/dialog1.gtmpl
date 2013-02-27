@@ -1,0 +1,69 @@
+<%  
+  String[] hiddenField1 = ["jcrPath=/node/jcr:content", "nodetype=nt:resource", "mixintype=dc:elementSet", "visible=false"] ; 
+  String[] hiddenField2 = ["jcrPath=/node/jcr:content/jcr:encoding", "visible=false", "UTF-8"] ;  
+  String[] hiddenField4 = ["jcrPath=/node/jcr:content/jcr:lastModified", "visible=false"] ;
+  String[] hiddenField5 = ["jcrPath=/node/jcr:content/dc:date", "visible=false"] ;
+  String[] hiddenField6 = ["jcrPath=/node/jcr:content/jcr:mimeType", "visible=false", "text/html"] ;
+  String[] hiddenField7 = ["jcrPath=/node/exo:presentationType", "visible=false", "exo:htmlFile"] ;
+  uicomponent.addHiddenField("hiddenInput1", hiddenField1) ;
+  uicomponent.addHiddenField("hiddenInput2", hiddenField2) ;
+  uicomponent.addCalendarField("hiddenInput4", hiddenField4) ;
+  uicomponent.addCalendarField("hiddenInput5", hiddenField5) ;
+  uicomponent.addHiddenField("hiddenInput6", hiddenField6) ;
+  uicomponent.addHiddenField("hiddenInput7", hiddenField7) ;
+%>
+<div class="UIForm FormScrollLayout">  
+  <% uiform.begin() %>
+  <%/* start render action*/%>
+  <% if (uiform.isShowActionsOnTop()) {
+            uiform.processRenderAction()
+         }
+  %>
+  <%/* end render action*/%> 
+  <div class="HorizontalLayout">
+    <table class="UIFormGrid">
+        <tr>
+          <td class="FieldLabel"><label for="name"><%=_ctx.appRes("HtmlFile.dialog.label.name")%></label></td>
+          <td class="FieldComponent">
+            <%
+              String[] fieldName = ["jcrPath=/node", "nodetype=nt:file", "mixintype=mix:votable,mix:commentable,exo:htmlFile,mix:i18n", "editable=if-null", "validate=name, empty"] ;
+              uicomponent.addTextField("name", fieldName) ; 
+            %>
+          </td>
+        </tr>   
+		<tr>
+        	<td class="FieldLabel"><label for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%></label></td>
+			<td class="FieldComponent">
+			<%
+			  String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().toString();
+			  String[] fieldLang = ["jcrPath=/node/exo:language", "script=ecm-explorer/widget/FillSelectBoxWithLanguage.groovy", lang] ;
+			  uicomponent.addSelectBoxField("content-lang", fieldLang) ;
+			%>
+			</td>
+		</tr>    
+        <tr>
+          <td class="FieldLabel"><label for="contentHtml"><%=_ctx.appRes("HtmlFile.dialog.label.content")%></label></td>
+          <td class="FieldComponent">
+            <%
+              if(uicomponent.isEditing()) { 
+                def curNode = uicomponent.getNode() ;
+                if(curNode.hasNode("jcr:content")) {
+                  def content = curNode.getNode("jcr:content") ;                                      
+                  String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "", "validate=empty", "options=noSanitization"] ;
+                  uicomponent.addRichtextField("contentHtml", fieldSummary) ;
+                }
+              } else {                           
+                String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "", "options=noSanitization"] ;
+                uicomponent.addRichtextField("contentHtml", fieldSummary) ;                
+              }
+            %>      
+          </td>
+        </tr>       
+    </table>       
+  </div>
+  <% if (!uiform.isShowActionsOnTop()) {
+            uiform.processRenderAction()
+         }
+  %>
+  <%uiform.end()%>
+</div>

@@ -175,15 +175,16 @@
 <div style="height:0px;width:0px">
 <xmp id="iContentUpLoad" style="display:none">
 <html style="padding: 0px; margin: 0px;">
-<head>
- <script type="text/javascript">_module = {};</script>
- <script type="text/javascript" src="../../../eXoResources/javascript/jquery-1.7.1.js"></script>   
- <script type="text/javascript" src="../../../eXoResources/javascript/eXo.js"></script>
- <script type="text/javascript" src="../../../eXoWCMResources/javascript/eXo/wcm/ECM.js"></script>
- <script type="text/javascript" src="../../../eXoWCMResources/javascript/eXo/wcm/backoffice/private/WCMUtils.js"></script> 
- <script type="text/javascript" src="../../../ecmexplorer/javascript/eXo/ecm/MultiUpload.js"></script>
-<head>
-<body style="margin: 0px; padding: 0px; overflow: hidden;width: 0px; height:0px">
+  <head>
+  <script type="text/javascript">_module = {};
+    eXo = document.parentWindow.parent.eXo;
+    ecm_bootstrap = document.parentWindow.parent.ecm_bootstrap;
+    gj=document.parentWindow.parent.gj;
+    require=document.parentWindow.parent.require;
+    wcm_utils = document.parentWindow.parent.eXo.ecm.WCMUtils;
+  </script>
+  <head>
+  <body style="margin: 0px; padding: 0px; overflow: hidden;width: 0px; height:0px">
 
 <form style="height:0px;width:0px" enctype="multipart/form-data" method="post" target="iTarget">
 <input type="file" name="file" class="file" style="height:0px;width:0px" 

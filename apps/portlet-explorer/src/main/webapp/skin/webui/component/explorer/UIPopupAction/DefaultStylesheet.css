@@ -427,7 +427,12 @@
 }
 
 .UIJCRExplorerPortlet .UIRenameForm .UIWindowContent {
-	margin: 0px; 
+	margin: 0px;
+	overflow: hidden;
+}
+
+.UIJCRExplorerPortlet .UIRenameForm .PopupContent {
+	overflow: hidden;
 }
 /*############################## -- End RenameForm   -- ##############################*/
 

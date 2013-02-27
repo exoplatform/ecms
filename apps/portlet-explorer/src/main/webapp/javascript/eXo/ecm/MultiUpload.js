@@ -992,7 +992,6 @@
 		eXo.ecm.MultiUpload.existingBehavior = document.parentWindow.parent.eXo.ecm.MultiUpload.existingBehavior;
 	
 		eXo.ecm.MultiUpload.document = document.parentWindow.parent.document;
-		gj = $;
 	
 		eXo.ecm.MultiUpload.uploadingFileCount = document.parentWindow.parent.eXo.ecm.MultiUpload.uploadingFileCount;
 		eXo.ecm.MultiUpload.maxFileSize = document.parentWindow.parent.eXo.ecm.MultiUpload.maxFileSize;
