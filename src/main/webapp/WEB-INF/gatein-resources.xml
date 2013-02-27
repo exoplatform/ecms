@@ -40,44 +40,4 @@
     </param>
   </javascript>
   
-
-  <!-- Cloud Drive Style -->
-  <!-- portal-skin>
-    <skin-name>Default</skin-name>
-    <skin-module>CloudDrive</skin-module>
-    <css-path>/skin/cloud-drive-skin/cloud-drive.css</css-path>
-    <css-priority>1</css-priority>
-  </portal-skin>
-  <portal-skin>
-    <skin-name>SimpleSkin</skin-name>
-    <skin-module>CloudDrive</skin-module>
-    <css-path>/skin/cloud-drive-skin/cloud-drive.css</css-path>
-    <css-priority>1</css-priority>
-  </portal-skin -->
-
-  <!-- Pinest Notify Style -->
-  <!-- portal-skin>
-    <skin-name>Default</skin-name>
-    <skin-module>jquery.pnotify.default</skin-module>
-    <css-path>/skin/cloud-drive-skin/jquery.pnotify.default.css</css-path>
-    <css-priority>1</css-priority>
-  </portal-skin>
-  <portal-skin>
-    <skin-name>SimpleSkin</skin-name>
-    <skin-module>jquery.pnotify.default</skin-module>
-    <css-path>/skin/cloud-drive-skin/jquery.pnotify.default.css</css-path>
-    <css-priority>1</css-priority>
-  </portal-skin>
-  <portal-skin>
-    <skin-name>Default</skin-name>
-    <skin-module>jquery.pnotify.default.icons</skin-module>
-    <css-path>/skin/cloud-drive-skin/jquery.pnotify.default.icons.css</css-path>
-    <css-priority>1</css-priority>
-  </portal-skin>
-  <portal-skin>
-    <skin-name>SimpleSkin</skin-name>
-    <skin-module>jquery.pnotify.default.icons</skin-module>
-    <css-path>/skin/cloud-drive-skin/jquery.pnotify.default.icons.css</css-path>
-    <css-priority>1</css-priority>
-  </portal-skin -->
 </gatein-resources>

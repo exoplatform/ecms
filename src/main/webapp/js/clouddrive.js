@@ -1289,7 +1289,7 @@ function CloudDriveUI() {
 		// XXX using deprecated DOMNodeInserted and context menu selector to get less events here for DOM
 		// reloading during the navigation
 		$("#UIWorkingArea").on("DOMNodeInserted", "#ECMContextMenu", function(event) {
-			log("DOMSubtreeModified " + event.target); // DOMSubtreeModified
+			//log("DOMSubtreeModified " + event.target); // DOMSubtreeModified
 			if (!initLock) {
 				initLock = setTimeout(function() {
 					initDocument();

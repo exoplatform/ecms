@@ -113,5 +113,5 @@ if (window == top) {
 		} catch (e) {
 			log("Error loading CloudDrive ", e);
 		}
-	}, 5);
+	}, 2);
 }

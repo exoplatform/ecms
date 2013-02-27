@@ -163,16 +163,12 @@ function TaskStore() {
 		removeTask(task);
 	}
 
-	// constructor logic: load stored tasks after page load
-	// setTimeout(function() {
-	// onLoad(load);
-	// }, 3000);
 	$(function() {
 		try {
 			setTimeout(function() {
 				log("Loading deffered tasks");
 				load();
-			}, 5000);
+			}, 4000);
 		} catch (e) {
 			log("Error loading tasks", e);
 		}
