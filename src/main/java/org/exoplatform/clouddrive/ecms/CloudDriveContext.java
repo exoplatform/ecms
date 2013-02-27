@@ -39,47 +39,18 @@ public class CloudDriveContext {
   
   protected final static String JAVASCRIPT = "CloudDriveContext_Javascript".intern();
   
-  protected final Map<String, Object> context = new HashMap<String, Object>();
-  
-  private boolean isScriptAdded() {
-    return context.containsKey(JAVASCRIPT);
-  }
-  
-  private Object addScript() {
-    return context.put(JAVASCRIPT, JAVASCRIPT);
-  }
-  
-  
-  
-  // static
-  
   public static boolean addScript(RequestContext requestContext) {
-    @SuppressWarnings("unchecked")
-    Object script = requestContext.getAttribute(JAVASCRIPT);
-    if (script == null) {
-      JavascriptManager jsManager = requestContext.getJavascriptManager();
-      jsManager.importJavascript("clouddrive", "/cloud-drive/js");
-      requestContext.setAttribute(JAVASCRIPT, JAVASCRIPT);
-      return true;
-    } else {
-      return false; // already added
-    }
-  }
-  
-  @Deprecated
-  private static boolean addScript_Old(WebuiRequestContext requestContext) {
-    @SuppressWarnings("unchecked")
-    CloudDriveContext cdContext = (CloudDriveContext) requestContext.getAttribute(CloudDriveContext.NAME);
-    if (cdContext == null) {
-      cdContext = new CloudDriveContext();
-      requestContext.setAttribute(CloudDriveContext.NAME, cdContext);
-    } else if (cdContext.isScriptAdded()) {
-      return false; // already added
-    }
+//    @SuppressWarnings("unchecked")
+//    Object script = requestContext.getAttribute(JAVASCRIPT);
+//    if (script == null) {
+//      JavascriptManager jsManager = requestContext.getJavascriptManager();
+//      jsManager.importJavascript("clouddrive", "/cloud-drive/js");
+//      requestContext.setAttribute(JAVASCRIPT, JAVASCRIPT);
+//      return true;
+//    } else {
+//      return false; // already added
+//    }
     
-    JavascriptManager jsManager = requestContext.getJavascriptManager();
-    jsManager.importJavascript("clouddrive", "/cloud-workspaces-drives/js");
-    cdContext.addScript();
-    return true;
+    return false;
   }
 }

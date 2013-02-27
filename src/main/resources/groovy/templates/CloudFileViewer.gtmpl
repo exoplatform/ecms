@@ -1,4 +1,3 @@
-
 <%
   /**
   Copyright (C) 2012 eXo Platform SAS.
@@ -20,7 +19,7 @@
 */
 %>
 <%
-import com.exoplatform.cloudworkspaces.drives.CloudDrive;
+import org.exoplatform.clouddrive.CloudDrive
 import org.exoplatform.wcm.webui.reader.ContentReader
 import groovy.text.*
 
