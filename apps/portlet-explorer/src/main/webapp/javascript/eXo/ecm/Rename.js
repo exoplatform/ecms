@@ -10,10 +10,6 @@
 	  this.contextObj = "";          // Store value of ECMContextMenu.obj
 	  this.objectid = "";            // Store objectid value used to find html elements of rename node
 	  this.currentNodePath = "";     // Store current node path
-	
-	  this.renameLabel = eXo.ecm.WCMUtils.getBundle('RenameConnector.label.rename', eXo.env.portal.language);
-	  this.cancelLabel = eXo.ecm.WCMUtils.getBundle('RenameConnector.label.cancel', eXo.env.portal.language);
-	  this.renamingStatus = eXo.ecm.WCMUtils.getBundle('RenameConnector.msg.renaming', eXo.env.portal.language);
 	};
 	
 	/** Store refresh action **/
@@ -66,7 +62,7 @@
 	*/
 	Rename.prototype.createFormMarkup = function() {
 	  var formMarkup = '';
-	  formMarkup += '<div class="UIPopupWindow UIRenameForm" id="UIRenameWindowPopup" style="width: auto; visibility: visible; z-index: 15;">';
+	  formMarkup += '<div class="UIPopupWindow UIRenameForm" id="UIRenameWindowPopup" style="width: auto; max-width: 335px; max-height: 43px; visibility: visible; z-index: 15;">';
 	  formMarkup += '  <div class="UIWindowContent">';
 	  formMarkup += '    <div class="PopupContent">';
 	  formMarkup += '      <table>';
@@ -74,10 +70,10 @@
 	  formMarkup += '          <tr>';
 	  formMarkup += '            <td><input name="renameField" type="text" id="renameField" value =""></td>';
 	  formMarkup += '            <td class="UIAction">';
-	  formMarkup += '              <a id = "renameLink" class="ActionButton LightBlueStyle" onclick="eXo.ecm.Rename.clickSave();">' + this.renameLabel + '</a>';
+	  formMarkup += '              <a id = "renameLink" class="ActionButton LightBlueStyle" onclick="eXo.ecm.Rename.clickSave();">' + eXo.ecm.WCMUtils.getBundle('RenameConnector.label.rename', eXo.env.portal.language) + '</a>';
 	  formMarkup += '            </td>';
 	  formMarkup += '            <td class="UIAction">';
-	  formMarkup += '              <a class="ActionButton LightBlueStyle" onclick="eXo.ecm.Rename.closePopup();">' + this.cancelLabel + '</a>';
+	  formMarkup += '              <a class="ActionButton LightBlueStyle" onclick="eXo.ecm.Rename.closePopup();">' + eXo.ecm.WCMUtils.getBundle('RenameConnector.label.cancel', eXo.env.portal.language) + '</a>';
 	  formMarkup += '            </td>';
 	  formMarkup += '          </tr>';
 	  formMarkup += '        </tbody>';
@@ -155,7 +151,7 @@
 	  if (newTitle == this.getNodeTitle(false)) return;
 	
 	  // Update status to in progress renaming
-	  this.setNodeTitle(this.renamingStatus, true);
+	  this.setNodeTitle(eXo.ecm.WCMUtils.getBundle('RenameConnector.msg.renaming', eXo.env.portal.language), true);
 	
 	  // Build url to request rest service to execute rename on server
 	  var oldPath = this.getNodePath(true);

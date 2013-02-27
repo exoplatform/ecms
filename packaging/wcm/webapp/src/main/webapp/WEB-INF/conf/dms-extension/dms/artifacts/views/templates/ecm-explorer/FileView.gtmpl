@@ -75,7 +75,7 @@
 	}
 %>
 <div id="$componentId">
-	<div id="${componentId}-$viewComponentId" class="UIListView UIFileView">	
+	<div id="${componentId}-$viewComponentId" class="UIListView UIFileView $componentId">	
 		<div class="UIListGrid">
 				<div class="TitleTable" id="FileViewBreadcrumb">
 	  <!--============FirstRow==================================================================-->

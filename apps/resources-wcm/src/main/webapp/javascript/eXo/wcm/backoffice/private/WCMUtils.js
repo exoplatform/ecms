@@ -3,6 +3,8 @@
 	function WCMUtils(){
 		this.cmdEcmBundle = "/bundle/";
 		this.cmdGetBundle = "getBundle?";
+		this.showRightContent = true;
+
 	}
 	
 	WCMUtils.prototype.getHostName = function() {
@@ -125,6 +127,36 @@
 			}
 	};
 	
+	WCMUtils.prototype.showHideSideBar = function(event) {
+	  var leftContainer = document.getElementById("LeftContainer");  
+	  var rightContainer = document.getElementById("RightContainer");
+	  var resizeBar = document.getElementById("ResizeSideBar");  
+	  var seoPopup = document.getElementById("UISEOPopupWindow");
+	  var formContainer = gj(seoPopup).find("div.FormContainer:first")[0];
+	  var resizeButton = null;
+	  if(this.showRightContent)
+	    resizeButton = gj(resizeBar).find("div.ShowRightContent:first")[0];
+	  else
+	    resizeButton = gj(resizeBar).find("div.ResizeButton:first")[0];
+	  if(rightContainer.style.display == 'none') {
+	    rightContainer.style.display = 'block';    
+	    resizeButton.className = "ResizeSideBar ShowRightContent";    
+	    seoPopup.style.width = "640px";
+	    this.showRightContent = true;
+	    leftContainer.style.marginRight="244px";
+	    formContainer.style.width = "610px";
+	    seoPopup.style.left = seoPopup.offsetLeft - 240 + "px";
+	  } else {
+	    rightContainer.style.display = 'none';
+	    seoPopup.style.width = "400px";    
+	    resizeButton.className = "ResizeButton";  
+	    this.showRightContent = false;
+	    leftContainer.style.marginRight="none";
+	    formContainer.style.width = "370px";
+	    seoPopup.style.left = seoPopup.offsetLeft + 240 + "px";
+	  }  
+	}
+	
 	WCMUtils.prototype.setScrollBar = function()  {     
 	    try	{
 	      var elementWorkingArea = document.getElementById('UIWorkingArea');
@@ -152,21 +184,32 @@
 	WCMUtils.prototype.hideContextMenu = function(menuItemElem)  {
 		var contextMenu = gj(menuItemElem).parents(".UIRightClickPopupMenu:first")[0];
 		contextMenu.style.display = "none" ;
-	}
+	};
 	
-	WCMUtils.prototype.changePriorityCss = function() {
-	  priorityField = document.getElementById("priority");
-	  if(priorityField != null) {
-		  if(isNaN(priorityField.value)) {
-		  	priorityField.className = "Tip";		
-		  }
-		  priorityField.onclick = function() { 
-		    priorityField.className = "SeoPriority"; 
-		    if(isNaN(priorityField.value))
-		      priorityField.value = ""; 
-		  } ;
-		}
-	}
+	 WCMUtils.prototype.setHeightRightContainer = function() {
+	   var leftContainer = document.getElementById("LeftContainer");
+	   var rightContainer = document.getElementById("RightContainer");
+	   if(gj(leftContainer).height() > 455) rightContainer.style.height = gj(leftContainer).height() + "px";
+	   var seoPopup = document.getElementById("UISEOPopupWindow");
+	   var formContainer = gj(seoPopup).find("div.FormContainer:first")[0];
+	   var resizeButton = null;  
+	   rightContainer.style.display = 'block';
+	   seoPopup.style.width = "640px";    
+	   leftContainer.style.marginRight="395px";
+	   formContainer.style.width = "610px";
+	  };
+	 
+	 WCMUtils.prototype.showSEOLanguage = function(isShow) {
+	   var addNewSEO = document.getElementById("addNewSEO");
+	   var selectSEOLanguage = document.getElementById("selectSEOLanguage");  
+	   if(isShow) {
+	     addNewSEO.style.display = "none";
+	     selectSEOLanguage.style.display = "block";
+	   } else {
+	     addNewSEO.style.display = "block";
+	     selectSEOLanguage.style.display = "none";
+	   }
+	 };
 	
 	WCMUtils.prototype.addParamIntoAjaxEventRequest = function(eventReq, extParam) {
 	    return eventReq.substring(0, eventReq.length - 2) + extParam +  "\')";	

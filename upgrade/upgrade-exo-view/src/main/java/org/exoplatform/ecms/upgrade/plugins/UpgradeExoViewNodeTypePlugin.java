@@ -81,6 +81,7 @@ public class UpgradeExoViewNodeTypePlugin extends UpgradeProductPlugin {
       if (!propertyExists) {
         List<String> defaultValues = new ArrayList<String>();
         defaultValues.add("true");
+
         propertyDefinitionList.add(new PropertyDefinitionValue(EXO_HIDE_EXPLORER_PANEL, true, true, 1, false,
                                                     defaultValues, false, PropertyType.BOOLEAN, new ArrayList<String>()));
         exoView.setDeclaredPropertyDefinitionValues(propertyDefinitionList);

@@ -1,0 +1,99 @@
+<%
+  String[] hiddenField1 = ["jcrPath=/node/jcr:content", "nodetype=nt:resource", "mixintype=dc:elementSet", "visible=false"] ; 
+  String[] hiddenField2 = ["jcrPath=/node/jcr:content/jcr:encoding", "visible=false", "UTF-8"] ;  
+  String[] hiddenField4 = ["jcrPath=/node/jcr:content/jcr:lastModified", "visible=false"] ;
+  String[] hiddenField5 = ["jcrPath=/node/jcr:content/dc:date", "visible=false"] ;
+  String[] hiddenField6 = ["jcrPath=/node/jcr:content/jcr:mimeType", "visible=false", "text/css"] ;
+  String[] hiddenField7 = ["jcrPath=/node/exo:presentationType", "visible=false", "exo:cssFile"] ;
+  uicomponent.addHiddenField("hiddenInput1", hiddenField1) ;
+  uicomponent.addHiddenField("hiddenInput2", hiddenField2) ;
+  uicomponent.addHiddenField("hiddenInput6", hiddenField6) ;
+  uicomponent.addHiddenField("hiddenInput7", hiddenField7) ;
+  uicomponent.addCalendarField("hiddenInput4", hiddenField4) ;
+  uicomponent.addCalendarField("hiddenInput5", hiddenField5) ;
+  
+%>
+<style>
+	.UIForm .HorizontalLayout textarea { 
+	  font-size:11px;
+	  height:275px !important;
+	  width:525px !important;
+	 }
+</style>
+<div class="UIForm FormScrollLayout">  
+  <% uiform.begin() %>
+  <%/* start render action*/%>
+  <% if (uiform.isShowActionsOnTop()) {
+            uiform.processRenderAction()
+        }
+  %>
+
+  <%/* end render action*/%>
+  <div class="HorizontalLayout">
+    <table class="UIFormGrid">
+        <tr>
+          <td class="FieldLabel"><label for="name"><%=_ctx.appRes("CSSFile.dialog.label.name")%></label></td>
+          <td class="FieldComponent">
+            <%
+              String[] fieldName = ["jcrPath=/node", "nodetype=nt:file", "mixintype=exo:cssFile,mix:i18n","editable=if-null", "validate=name, empty"] ;
+              uicomponent.addTextField("name", fieldName) ; 
+            %>
+          </td>
+        </tr>
+        
+        <tr>
+        	<td class="FieldLabel"><label for="activeCSS"><%=_ctx.appRes("CSSFile.dialog.label.active")%></label></td>
+        	<td class="FieldComponent">
+        		<%
+        			String[] fieldActive = ["jcrPath=/node/exo:active", "options=true,false", "onchange=false"] ;
+        			uicomponent.addSelectBoxField("activeCSS", fieldActive) ;
+        		%>
+        	</td>
+        </tr>
+        
+        <tr>
+        	<td class="FieldLabel"><label for="CSSpriority"><%=_ctx.appRes("CSSFile.dialog.label.priority")%></label></td>
+        	<td class="FieldComponent">
+        		<%
+        			String[] fieldPriority = ["jcrPath=/node/exo:priority", "validate=org.exoplatform.webui.form.validator.NumberFormatValidator"] ;
+        			uicomponent.addTextField("CSSpriority", fieldPriority) ;
+        		%>
+        	</td>
+        </tr>
+        <tr>
+        	<td class="FieldLabel"><label for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%></label></td>
+			<td class="FieldComponent">
+			<%
+			  String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().toString();
+			  String[] fieldLang = ["jcrPath=/node/exo:language", "script=ecm-explorer/widget/FillSelectBoxWithLanguage.groovy", lang] ;
+			  uicomponent.addSelectBoxField("content-lang", fieldLang) ;
+			%>
+			</td>
+		</tr>     
+        <tr>
+          <td class="FieldLabel"><label for="contentHtml"><%=_ctx.appRes("CSSFile.dialog.label.content")%></label></td>
+          <td class="FieldComponent">
+            <%
+              if(uicomponent.isEditing()) { 
+                def curNode = uicomponent.getNode() ;
+                if(curNode.hasNode("jcr:content")) {
+                  def content = curNode.getNode("jcr:content") ;                                      
+                  String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "options=noSanitization"] ;
+                  uicomponent.addTextAreaField("contentHtml", fieldSummary) ;                                                       
+                  }
+                } else {                           
+                String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "options=noSanitization"] ;
+                uicomponent.addTextAreaField("contentHtml", fieldSummary) ;                
+              }
+            %>      
+          </td>
+        </tr>
+               
+    </table>       
+  </div>    
+  <% if (!uiform.isShowActionsOnTop()) {
+            uiform.processRenderAction()
+         }
+  %>
+  <%uiform.end()%>
+</div>

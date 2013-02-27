@@ -17,6 +17,7 @@
 package org.exoplatform.services.wcm.search;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -36,6 +37,7 @@ import javax.jcr.query.RowIterator;
 import javax.portlet.PortletRequest;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.portal.application.PortalRequestContext;
@@ -48,6 +50,7 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.wcm.publication.WCMComposer;
@@ -58,13 +61,14 @@ import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.search.base.NodeSearchFilter;
 import org.exoplatform.services.wcm.search.base.PageListFactory;
 import org.exoplatform.services.wcm.search.base.SearchDataCreator;
+import org.exoplatform.services.wcm.search.connector.BaseSearchServiceConnector;
+import org.exoplatform.services.wcm.utils.SQLQueryBuilder;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.COMPARISON_TYPE;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.LOGICAL;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.ORDERBY;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.PATH_TYPE;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.QueryTermHelper;
-import org.exoplatform.services.wcm.utils.SQLQueryBuilder;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 
@@ -195,7 +199,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
                                               new NodeFilter(isSearchContent, queryCriteria),
                                               new DataCreator(),
                                               pageSize,
-                                              0);
+                                              0, queryCriteria);
     
     long queryTime = System.currentTimeMillis() - startTime;
     pageList.setQueryTime(queryTime);
@@ -383,6 +387,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     orderBy(queryCriteria, queryBuilder);
     String queryStatement = queryBuilder.createQueryStatement();
     Query query = queryManager.createQuery(queryStatement, Query.SQL);
+//    System.out.println(queryStatement);
     return query;
   }
 
@@ -432,32 +437,68 @@ public class SiteSearchServiceImpl implements SiteSearchService {
    */
   private void mapFulltextQueryTearm(final QueryCriteria queryCriteria,
                                      final SQLQueryBuilder queryBuilder, LOGICAL condition) {
-    String keyword = queryCriteria.getKeyword();
-    if (keyword == null || keyword.length() == 0)
+    String queryString = queryCriteria.getKeyword();
+    if (queryString == null || queryString.length() == 0)
       return;
-    QueryTermHelper queryTermHelper = new QueryTermHelper();
-    String queryTerm = null;
-    if (isEnabledFuzzySearch) {
-      if (keyword.contains("*") || keyword.contains("?") || keyword.contains("~")) {
-        queryTerm = queryTermHelper.contains(keyword).buildTerm();
+    int count = 0;
+    for (String keyword : getKeywords(queryString, queryCriteria.isMultiplePhaseSearch())) {
+      keyword = keyword.trim();
+      if (StringUtils.isBlank(keyword)) continue;
+      QueryTermHelper queryTermHelper = new QueryTermHelper();
+      String queryTerm = null;
+      if (isEnabledFuzzySearch) {
+        if (keyword.contains("*") || keyword.contains("?") || keyword.contains("~")) {
+          queryTerm = queryTermHelper.contains(keyword).buildTerm();
+        } else {
+          queryTerm = queryTermHelper.contains(keyword).allowFuzzySearch(fuzzySearchIndex).buildTerm();
+        }      
       } else {
-        queryTerm = queryTermHelper.contains(keyword).allowFuzzySearch(fuzzySearchIndex).buildTerm();
-      }      
-    } else {
-      keyword = keyword.replace("~", "\\~");
-      keyword = keyword.replace("*", "\\*");
-      keyword = keyword.replace("?", "\\?");
-      queryTerm = queryTermHelper.contains(keyword).buildTerm();
-    }
-    String[] props = queryCriteria.getFulltextSearchProperty();
-    if (props == null || props.length == 0 || QueryCriteria.ALL_PROPERTY_SCOPE.equals(props[0])) {
-      queryBuilder.contains(null, queryTerm, LOGICAL.NULL);
-    } else {
-      queryBuilder.contains(props[0], queryTerm, LOGICAL.NULL);
-      for (int i = 1; i < props.length; i++) {
-        queryBuilder.contains(props[i], queryTerm, condition);
+        keyword = keyword.replace("~", "\\~");
+        keyword = keyword.replace("*", "\\*");
+        keyword = keyword.replace("?", "\\?");
+        queryTerm = queryTermHelper.contains(keyword).buildTerm();
+      }
+      String[] props = queryCriteria.getFulltextSearchProperty();
+      if (props == null || props.length == 0 || QueryCriteria.ALL_PROPERTY_SCOPE.equals(props[0])) {
+        queryBuilder.contains(null, queryTerm, (count++ == 0 ? LOGICAL.NULL : LOGICAL.OR));
+      } else {
+        queryBuilder.contains(props[0], queryTerm, (count++ == 0 ? LOGICAL.NULL : LOGICAL.OR));
+        for (int i = 1; i < props.length; i++) {
+          queryBuilder.contains(props[i], queryTerm, condition);
+        }
       }
     }
+  }
+  
+  private List<String> getKeywords(String queryString, boolean isMultiplePhaseSearch) {
+    List<String> ret = new ArrayList<String>();
+    if (!isMultiplePhaseSearch) {
+      ret.add(queryString);
+    } else {
+      boolean inQuote = false;
+      StringBuffer currentTerm = new StringBuffer();
+      for (int i = 0; i < queryString.length(); i++) {
+        char c = queryString.charAt(i);
+        if ('"' == c) {//change status inQuote outQuote
+          inQuote = !inQuote;
+          ret.add(currentTerm.toString());
+          currentTerm = new StringBuffer();
+        } else {//not change state
+          if (inQuote) {// in quote
+            currentTerm.append(c);
+          } else {// out quote
+            if (' ' != c) { //not space
+              currentTerm.append(c);
+            } else { // space
+              ret.add(currentTerm.toString());
+              currentTerm = new StringBuffer();
+            }
+          }
+        }
+      }
+      ret.add(currentTerm.toString());
+    }
+    return ret;
   }
 
   /**
@@ -611,7 +652,9 @@ public class SiteSearchServiceImpl implements SiteSearchService {
       mapQuerySpecificNodeTypes(queryCriteria, queryBuilder, manager);
       return;
     }
-    List<String> selectedNodeTypes = templateService.getDocumentTemplates();
+    List<String> selectedNodeTypes =  
+      (contentTypes != null && contentTypes.length > 0) ? Arrays.asList(contentTypes) :
+                                                          templateService.getDocumentTemplates();
     queryBuilder.openGroup(LOGICAL.AND);
     queryBuilder.equal("jcr:primaryType", "nt:resource", LOGICAL.NULL);
     // query on exo:rss-enable nodetypes for title, summary field
@@ -664,8 +707,19 @@ public class SiteSearchServiceImpl implements SiteSearchService {
    * @param queryCriteria the query criteria
    * @param queryBuilder the query builder
    */
-  private void orderBy(final QueryCriteria queryCriteria, final SQLQueryBuilder queryBuilder) {
-    queryBuilder.orderBy("jcr:score", ORDERBY.DESC);
+  private void orderBy(final QueryCriteria criteria, final SQLQueryBuilder queryBuilder) {
+    String sortBy = "jcr:score";
+    String orderBy = "desc";
+    //sort by
+    if (BaseSearchServiceConnector.sortByTitle.equals(criteria.getSortBy())) {
+      sortBy = NodetypeConstant.EXO_TITLE;
+    } else if (BaseSearchServiceConnector.sortByDate.equals(criteria.getSortBy())) {
+      sortBy = NodetypeConstant.EXO_LAST_MODIFIED_DATE;
+    }
+    if (StringUtils.isNotBlank(criteria.getOrderBy())) {
+      orderBy = criteria.getOrderBy();
+    }
+    queryBuilder.orderBy(sortBy, "desc".equals(orderBy) ? ORDERBY.DESC : ORDERBY.ASC);
   }
   
   public static class NodeFilter implements NodeSearchFilter {
