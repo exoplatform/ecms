@@ -1,9 +1,42 @@
 /* ======== Multi Upload  ==========*/
 .uiMultiUpload {
-	margin: 10px 0 0 400px !important;
-	overflow: hidden;
+	margin: 10px 0;
 	position: relative;
 	font-size: 12px;
+
+	a {
+		color: @linkColor;
+		text-decoration: none;
+	}
+
+	.multiUploadDragFileBackground {
+		position: absolute;
+		background: rgba(235, 235, 235, 0.8);
+		border: 4px dashed #ccc;
+		right: 0px;
+		top: 0px;
+		width: 644px;
+		height: 99%;
+		z-index:1;
+		display: none;
+		margin: -4px 0px 0px 0px;
+
+		.multiUploadDragFile {
+			text-align: center;
+			font-size: 18px;
+			color: black;
+			z-index:2;
+			position: absolute;
+			width: 100%;
+			top: 30%;
+		}
+	}
+	
+	.uiBox {
+		margin: 0px;
+		width: 650px;
+		float: right;
+	}
 	
 	.uploadIconContainer {
 		float: left;
@@ -15,8 +48,23 @@
 		}
 	}
 
+	.multiUploadAbortAll  {
+		margin-left: 8px;
+		.action {
+			cursor:pointer;
+		
+			&:hover {
+				color: @grayDark;
+			}
+		}
+	}
+
 	.loadContent {
 		padding: 10px !important;
+		
+		&:hover {
+			background: #f8f8f8;
+		}
 
 		.fileName {
 			cursor: pointer;
@@ -25,7 +73,7 @@
 			white-space: nowrap;
 			
 			a {
-				color: #333;
+				color: @textColor;
 			}
 		}
 
@@ -33,26 +81,38 @@
 			width: 100px; 
 			text-align: right;
 		}
+		
+		.warningContainer {
+			margin-right: 10px;
+		}
+		
+		.action {
+			margin-left: 5px;
+			
+			&:hover {
+				color: @grayDark;
+			}
+		}
 
-		.LoaddingPercent {
+		.loaddingPercent {
 			width: 270px; 
 			height: 15px; 
 			text-align: center;
 			background: white;
-			border: 1px solid #3c7fb1;
+			border: 1px solid #cbcbcb;
 			position: relative;
 		}
 
-		.Loadding {
-			box-shadow: 0 -6px 9px #9ECDE7 inset;
+		.loadding {
+			background: #f0f0f0;
 			height: 15px;
 			display: block;
 		}
 		
-		.Percent {
+		.percent {
 			position: absolute;
 			z-index: 10;
-			top: 0px;
+			top: -3px;
 			left: 40%;
 		}
 	}
@@ -66,23 +126,12 @@
 		overflow-y: auto;
 		max-height: 163px;
 		
-		.loadContent .WarningIcon {
-			background: url("/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/Warning.gif") no-repeat left;
-			padding: 2px 6px 0px 20px;
-			line-height:14px;
-		}
-		
 		.loadContent .Action {
 			color: #466799;
 			height: 20px;
 			text-align: center;
 			cursor: pointer;
 		}
-	}
-
-	a {
-		color: #2f5e92;
-		text-decoration: none;
 	}
 	
 	.multiUploadFilesShortInfo {
@@ -91,59 +140,17 @@
 		}
 	}
 	
+	.uiIconWarning {
+			background: url("/eXoResources/skin/images/Icons/uiIconColor.png") no-repeat -20px 0px;
+		}
+		
 	.uiIconMultiUploadClose {
-		background: url("/eXoResources/skin/images/Icons/uiIconColor.png") 0px 0px no-repeat;
+		background: url("/eXoResources/skin/images/Icons/uiIconColor.png") no-repeat 0px 0px;
 		cursor: pointer;
 	}
 		
 	.uiIconNoneClose {
-		background: url("/eXoResources/skin/images/Icons/uiIconColor.png") -180px 0px no-repeat;
-	}
-
-	.MultiUploadHelp {
-		float: right;
-		cursor: pointer;
-		background: url("/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/UserIcons/Help.gif") no-repeat scroll left center transparent;
-		padding: 0px 6px;
-	}
-
-	.DeleteIcon {
-		background: url("/eXoResources/skin/DefaultSkin/portal/webui/component/view/UIPortalComponent/background/Close.gif") no-repeat right ;
-		padding: 2px 6px;
-		width: 16px;
-	}
-
-	.DeleteIconInactive {
-		background: url("/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/closegreyicon.png") no-repeat right ;
-		padding: 2px 6px;
-		width: 16px;
-	}
-
-	.multiUploadAbortAll  {
-		margin-left: 8px;
-		.Action {
-			cursor:pointer;
-		}
-	}
-
-	.multiUploadDragFileBackground {
-		position: absolute;
-		left: 0px;
-		top: 0px;
-		width: 100%;
-		height:100%;
-		background: rgba(143, 143, 143, 0.7);
-		margin: 0px;
-		z-index:1;
-		display: none;
-
-		.multiUploadDragFile {
-			text-align: center;
-			font-size: 24px; 
-			padding-top: 69px;
-			color: black;
-			z-index:2;
-		}
+		background: url("/eXoResources/skin/images/Icons/uiIconColor.png") no-repeat -180px 0px;
 	}
 }
 

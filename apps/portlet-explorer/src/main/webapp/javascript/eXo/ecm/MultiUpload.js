@@ -415,9 +415,10 @@
 
 	MultiUpload.prototype.insertFileNameWithMessage = function(listDivID, file, fileID, msg, position) {
 		var loadContentDiv = eXo.ecm.MultiUpload.insertFileName(listDivID, file, fileID, position);
+		//outer div
 		var msgDiv = eXo.ecm.MultiUpload.document.createElement("div");
-		msgDiv.className = "FR WarningIcon";
-		msgDiv.innerHTML = msg;
+		msgDiv.className = "pull-right warningContainer";
+		msgDiv.innerHTML = "<i class='uiIconWarning'></i> " + msg;
 		msgDiv.id = "msg" + fileID;
 		loadContentDiv.appendChild(msgDiv);
 	};
@@ -426,15 +427,15 @@
 		var loadContentDiv = eXo.ecm.MultiUpload.insertFileName(listDivID, file, fileID);
 		//outer progress
 		  var outerProgress = eXo.ecm.MultiUpload.document.createElement("div");
-		  outerProgress.className = "LoaddingPercent FR";
+		  outerProgress.className = "loaddingPercent pull-right";
 		  //progress
 		  var progress = eXo.ecm.MultiUpload.document.createElement("div");
 		  progress.id = fileID;
-		  progress.className = "Percent";
+		  progress.className = "percent";
 		  progress.innerHTML = "0%";
 		  //span
 		  var spanProgress = eXo.ecm.MultiUpload.document.createElement("span");
-		  spanProgress.className="Loadding";
+		  spanProgress.className="loadding";
 		  spanProgress.style.width="0%";
 		  //empty div
 		  var span = eXo.ecm.MultiUpload.document.createElement("div");
@@ -586,34 +587,32 @@
 		var file = eXo.ecm.MultiUpload.uploadingFileIds[id];
 		var loadContentDiv = eXo.ecm.MultiUpload.insertFileName(eXo.ecm.MultiUpload.PROCESS, file, id, "TOP");
 	
-		var span = eXo.ecm.MultiUpload.document.createElement("div");
-		span.innerHTML="&nbsp;&nbsp;&nbsp;&nbsp;";
-		span.className="FR";
-		span.id="span" + id;
 		//span1
-		var span1 = eXo.ecm.MultiUpload.document.createElement("div");
-		span1.innerHTML=",&nbsp;";
-		span1.className="FR";
+		var span1 = eXo.ecm.MultiUpload.document.createElement("span");
+		span1.innerHTML=",";
+		span1.className="pull-right";
 		span1.id="span1" + id;
 		//span2
-		var span2 = eXo.ecm.MultiUpload.document.createElement("div");
-		span2.innerHTML="&nbsp;" + eXo.ecm.MultiUpload.OR + "&nbsp;";
-		span2.className="FR";
+		var span2 = eXo.ecm.MultiUpload.document.createElement("span");
+		span2.innerHTML="&nbsp;" + eXo.ecm.MultiUpload.OR;
+		span2.className="pull-right";
 		span2.id="span2" + id;
 		//keepBoth
-		var keepBoth = eXo.ecm.MultiUpload.document.createElement("div");
+		var keepBoth = eXo.ecm.MultiUpload.document.createElement("a");
 		keepBoth.id="keepBoth" + id;
+		gj(keepBoth).attr("href","javascript:void(0)");
 		//replaceDiv
-		var replaceDiv = eXo.ecm.MultiUpload.document.createElement("div");
+		var replaceDiv = eXo.ecm.MultiUpload.document.createElement("a");
 		replaceDiv.id="replaceDiv" + id;
+		gj(replaceDiv).attr("href","javascript:void(0)");
 		//cancel
-		var cancel = eXo.ecm.MultiUpload.document.createElement("div");
+		var cancel = eXo.ecm.MultiUpload.document.createElement("a");
 		cancel.id = "cancel" + id;
-
+		gj(cancel).attr("href","javascript:void(0)");
 		//add msg 'already in use'
 		var msgDiv = eXo.ecm.MultiUpload.document.createElement("div");
-		msgDiv.className = "FR WarningIcon";
-		msgDiv.innerHTML = eXo.ecm.MultiUpload.INUSE;
+		msgDiv.className = "pull-right warningContainer";
+		msgDiv.innerHTML = "<i class='uiIconWarning'></i> " + eXo.ecm.MultiUpload.INUSE;
 		msgDiv.id = "msg" + id;
 	
 		loadContentDiv.appendChild(cancel);
@@ -621,11 +620,10 @@
 		loadContentDiv.appendChild(replaceDiv);
 		loadContentDiv.appendChild(span1);
 		loadContentDiv.appendChild(keepBoth);
-		loadContentDiv.appendChild(span);
 		loadContentDiv.appendChild(msgDiv);
 	
 		//keepBoth
-		keepBoth.className = "FR Action"
+		keepBoth.className = "pull-right action"
 		keepBoth.innerHTML = eXo.ecm.MultiUpload.KEEP;
 		keepBoth.onclick=function abortUpload(myFileDiv, fileId, evt) {
 		  return function(evt) {
@@ -638,7 +636,7 @@
 		  }
 		}(loadContentDiv, id);
 		//replace
-		replaceDiv.className = "FR Action";
+		replaceDiv.className = "pull-right action";
 		replaceDiv.innerHTML = eXo.ecm.MultiUpload.REPLACE;
 		replaceDiv.onclick=function abortUpload(myFileDiv, myfile, evt) {
 		  return function(evt) {
@@ -651,7 +649,7 @@
 		  }
 		}(loadContentDiv, id);
 		//cancel
-		cancel.className = "FR Action";
+		cancel.className = "pull-right action";
 		cancel.innerHTML = eXo.ecm.MultiUpload.CANCEL;
 		cancel.onclick = eXo.ecm.MultiUpload.handleReaderAbort(id, eXo.ecm.MultiUpload.CANCEL_TXT);
 	};
