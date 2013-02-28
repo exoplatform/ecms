@@ -223,6 +223,12 @@ public class UIViewForm extends UIForm implements UISelectable {
           localizationButtons.append(", ");
         }
       }
+    } else {
+      try {
+        localizationButtons.append(res.getString("UITabForm.label." + buttons.trim()));
+      } catch(MissingResourceException mre) {
+        localizationButtons.append(buttons.trim());
+      }
     }
     return localizationButtons.toString();
   }  

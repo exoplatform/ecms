@@ -116,15 +116,6 @@ public class UITabList extends UIPagingGrid {
     }
   }
   
-  public Tab getTabByName(String tabName) throws Exception {
-    ManageViewService viewService = WCMCoreUtils.getService(ManageViewService.class);
-    Node viewNode = viewService.getViewByName(viewName, WCMCoreUtils.getUserSessionProvider());
-    Tab tab = new Tab();
-    tab.setTabName(tabName);
-    tab.setButtons(viewNode.getNode(tabName).getProperty("exo:buttons").getValue().getString());
-    return tab;
-  }
-  
   public String getViewName() {
     return viewName;
   }
@@ -163,11 +154,12 @@ public class UITabList extends UIPagingGrid {
       UITabList uiTabList = event.getSource();
       UIViewContainer uiContainer = uiTabList.getAncestorOfType(UIViewContainer.class);
       String tabName = event.getRequestContext().getRequestParameter(OBJECTID);
-      Tab tab = uiTabList.getTabByName(tabName);
+      UIViewFormTabPane uiTabPane = uiTabList.getParent();
+      UIViewForm uiViewForm = uiTabPane.getChild(UIViewForm.class);
+      Tab tab = uiViewForm.getTabMap().get(tabName);
       UITabForm uiTabForm = uiContainer.createUIComponent(UITabForm.class, null, null);
       uiTabForm.update(tab, false);
       uiContainer.initPopup(UITabList.TAPFORM_POPUP, uiTabForm, 760, 0);
-      UIViewFormTabPane uiTabPane = uiTabList.getParent();
       uiTabPane.setSelectedTab(uiTabList.getId());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
     }

@@ -110,7 +110,7 @@ public class UITabForm extends UIForm {
       for(String filterChar : arrFilterChar) {
         if(tabName.indexOf(filterChar) > -1) {
           uiApp.addMessage(new ApplicationMessage("UITabForm.msg.fileName-invalid", null, ApplicationMessage.WARNING)) ;
-          
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiTabForm);
           return ;
         }
       }
@@ -127,7 +127,7 @@ public class UITabForm extends UIForm {
       if(!isSelected) {
         viewFormTabPane.setSelectedTab(uiTabForm.getId());
         uiApp.addMessage(new ApplicationMessage("UITabForm.msg.button-select-error", null, ApplicationMessage.WARNING));
-        
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiTabForm);
         return;
       }
       UIViewForm uiViewForm = viewFormTabPane.getChild(UIViewForm.class);
@@ -146,11 +146,11 @@ public class UITabForm extends UIForm {
     public void execute(Event<UITabForm> event) throws Exception {
       UITabForm uiTabForm = event.getSource();
       UIViewContainer uiContainer = uiTabForm.getAncestorOfType(UIViewContainer.class);
-      UIViewFormTabPane viewFormTabPane = uiContainer.findFirstComponentOfType(UIViewFormTabPane.class);
+      UIViewFormTabPane uiTabPane = uiContainer.findFirstComponentOfType(UIViewFormTabPane.class);
       UIPopupWindow uiPopup = uiContainer.getChildById(UITabList.TAPFORM_POPUP);
       uiPopup.setShow(false);
       uiPopup.setRendered(false);
-      viewFormTabPane.setSelectedTab(viewFormTabPane.getSelectedTabId()) ;
+      uiTabPane.setSelectedTab(uiTabPane.getChild(UITabList.class).getId());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
     }
   }
