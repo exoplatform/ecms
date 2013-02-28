@@ -97,15 +97,15 @@
 				<i class="uiIconPlus" onclick="<%=uicomponent.event("AddNodeType")%>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIContentSearchForm.tooltip.AddNodeType")%>"></i>
 			</div>
     </div>
-     
-		<div class="uiAction">
-				<% for(action in uicomponent.getActions()) { 
-					String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
-					String link = uicomponent.event(action) ;
-				%>
-				<button onclick="$link" type="button" class="btn" href="javascript:void(0);">$actionLabel</button>
-				<%}%>
-		</div> 
 	</div> 
   <%uiform.end();%>
+	
+	<div class="uiAction uiActionBorder">
+			<% for(action in uicomponent.getActions()) { 
+				String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
+				String link = uicomponent.event(action) ;
+			%>
+			<button onclick="$link" type="button" class="btn" href="javascript:void(0);">$actionLabel</button>
+			<%}%>
+	</div> 
 </div>

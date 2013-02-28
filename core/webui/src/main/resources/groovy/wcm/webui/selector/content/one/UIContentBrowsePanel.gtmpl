@@ -52,7 +52,7 @@
 				    	</thead>
 				    	<tbody>
 								<tr>
-									<td class="item noContent" colSpan="3">There is no content</td>
+									<td class="item center noContent" colSpan="3">There is no content</td>
 								</tr>
 		    			</tbody>
 		  			</table>

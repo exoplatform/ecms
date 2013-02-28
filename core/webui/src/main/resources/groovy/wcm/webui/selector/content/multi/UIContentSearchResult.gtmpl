@@ -43,7 +43,7 @@
     	if(uicomponent.getUIPageIterator().getAvailable() < 1) {
     %>
       <tr>
-        <td style="font-style:italic; color: #FF5604; text-align: center;" colspan="<%=beanFields.length+1%>">
+        <td class="center noContent" colspan="<%=beanFields.length+1%>">
           <%=_ctx.appRes("UIGrid.msg.empty")%>
         </td>
       </tr>  
