@@ -62,7 +62,7 @@
 			      String selectedSortType = uicomponent.getTypeSort();
 			      String sortOrder = uicomponent.getSortOrder();
 			      String typeActionLink = "";
-			      if (sortOrder.equals("BlueDownArrow")) {
+			      if (sortOrder.equals("Down")) {
 			        typeActionLink = "Descending;";
 		        } else {
 		          typeActionLink = "Ascending;";
