@@ -1301,7 +1301,8 @@ function CloudDriveUI() {
 		initDocument();
 
 		// init on each document reload (incl. ajax calls)
-		// XXX using deprecated DOMNodeInserted and context menu selector to get less events here for DOM
+		// XXX using deprecated DOMNodeInserted and the explorer panes selector
+		// choose better selector to get less events here for DOM, now it's tens of events
 		// reloading during the navigation
 		var ieVersion = getIEVersion();
 		var domEvent = ieVersion > 0 && ieVersion < 9.0 ? "onpropertychange" : "DOMNodeInserted"; // DOMSubtreeModified  
