@@ -211,14 +211,15 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     UIJCRExplorer uiExplorer = explorerContainer.getChild(UIJCRExplorer.class);
     UITreeExplorer uiTreeExplorer = uiExplorer.findFirstComponentOfType(UITreeExplorer.class);      
     context.getJavascriptManager().
-    require("SHARED/multiUpload", "multiUpload").
-    addScripts("multiUpload.setLocation('" + 
+    require("SHARED/multiUpload", "multiUpload").require("SHARED/jquery", "gj")
+      .addScripts("multiUpload.setLocation('" + 
                uiExplorer.getWorkspaceName()  + "','" + 
                uiExplorer.getDriveData().getName()  + "','" +
                uiTreeExplorer.getLabel()  + "','" +
                uiExplorer.getCurrentPath() + "','" +
                org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(uiExplorer.getDriveData().getHomePath(),
-               ConversationState.getCurrent().getIdentity().getUserId())+ "');");
+               ConversationState.getCurrent().getIdentity().getUserId())+ "');")
+      .addScripts("gj(document).ready(function() { gj(\"*[rel='tooltip']\").tooltip();});");
     super.processRender(app, context);
   }
 
