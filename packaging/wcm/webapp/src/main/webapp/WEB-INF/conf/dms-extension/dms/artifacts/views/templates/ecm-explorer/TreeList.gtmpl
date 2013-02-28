@@ -76,7 +76,7 @@
 %>
 <div id="$componentId">
 	<div id="${componentId}-$viewComponentId" class="UIListView UIFileView $componentId">	
-		<div class="UIListGrid">
+		<div class="UIListGrid" style="min-height:400px">
 				<div class="TitleTable" id="FileViewBreadcrumb">
 	  <!--============FirstRow==================================================================-->
           <div class="TitleTableRow">
@@ -118,12 +118,20 @@
                     <u><a href="<%=pageIterator.event("ShowPage","${currentPage - 1}")%>" class="Icon LastPageIcon" title="<%=_ctx.appRes("UIPageIterator.label.previous")%>"><%=_ctx.appRes("UIPageIterator.label.previous")%></a></u>
                   <%}%>
                   <!--End of prev-->
+                  
+                  
                   <!--Begin of drop down list-->
-                  <select onchange="window.location.href=this.options[this.selectedIndex].value; return false;">
-                    <% for (int i = 1; i <= availablePage; i++) {%>
-                      <option value="<%=pageIterator.event("ShowPage", "$i")%>" <%=(currentPage==i)?"selected":""%>><%=i%></option>
-                    <%}%>
-                  </select>
+                    <div class="btn-group">
+                      <button data-toggle="dropdown" class="btn dropdown-toggle">
+                        $currentPage of $availablePage  
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" style="max-height:290px;min-width:80px;overflow:auto">
+                        <% for (int i = 1; i <= availablePage; i++) {%>
+                          <li><a href="<%=pageIterator.event("ShowPage", "$i")%>"><%=i%></a></li>
+                        <%}%>
+                      </ul>
+                    </div>
                   <!--End of drop down list-->
                   <!--Begin of next-->
                   <% if (currentPage < availablePage) {%>
