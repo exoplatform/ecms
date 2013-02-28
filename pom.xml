@@ -38,14 +38,14 @@
     <!-- **************************************** -->
     <!-- Project Dependencies                     -->
     <!-- **************************************** -->
-    <org.exoplatform.depmgt.version>3-SNAPSHOT</org.exoplatform.depmgt.version>
+    <org.exoplatform.depmgt.version>3</org.exoplatform.depmgt.version>
     <org.exoplatform.kernel.version>2.4.2-GA</org.exoplatform.kernel.version>
     <org.exoplatform.core.version>2.5.2-GA</org.exoplatform.core.version>
     <org.exoplatform.ws.version>2.3.2-GA</org.exoplatform.ws.version>
     <org.exoplatform.jcr.version>1.15.2-GA</org.exoplatform.jcr.version>
     <org.exoplatform.jcr-services.version>1.15.2-GA</org.exoplatform.jcr-services.version>
-    <org.exoplatform.doc.doc-style.version>4.0.0-SNAPSHOT</org.exoplatform.doc.doc-style.version>
-    <org.exoplatform.commons.version>4.0.0-SNAPSHOT</org.exoplatform.commons.version>
+    <org.exoplatform.doc.doc-style.version>4.0.0-Beta1</org.exoplatform.doc.doc-style.version>
+    <org.exoplatform.commons.version>4.0.0-Beta1</org.exoplatform.commons.version>
     <org.gatein.pc.version>2.4.0.Final</org.gatein.pc.version>
     <org.gatein.portal.version>3.5.2.Final</org.gatein.portal.version>
     <org.gatein.wci.version>2.3.0.Final</org.gatein.wci.version>
