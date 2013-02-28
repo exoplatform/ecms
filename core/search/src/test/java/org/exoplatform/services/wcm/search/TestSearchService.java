@@ -20,25 +20,18 @@ import java.util.Date;
 import java.util.HashMap;
 
 import javax.jcr.Node;
-import javax.jcr.NodeIterator;
 
 import org.exoplatform.component.test.ConfigurationUnit;
 import org.exoplatform.component.test.ConfiguredBy;
 import org.exoplatform.component.test.ContainerScope;
-import org.exoplatform.ecms.test.BaseECMSTestCase;
-import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.mop.SiteKey;
 import org.exoplatform.portal.mop.page.PageContext;
 import org.exoplatform.portal.mop.page.PageKey;
 import org.exoplatform.portal.mop.page.PageService;
 import org.exoplatform.portal.mop.page.PageState;
-import org.exoplatform.portal.pom.config.POMSession;
-import org.exoplatform.portal.pom.config.POMSessionManager;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
-import org.exoplatform.services.wcm.publication.WCMPublicationService;
-import org.exoplatform.services.wcm.publication.WebpagePublicationPlugin;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
+import org.exoplatform.services.wcm.search.base.BaseSearchTest;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -53,51 +46,13 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/standalone/ecms-test-configuration.xml"),
   @ConfigurationUnit(scope = ContainerScope.PORTAL, path = "conf/wcm/test-search-configuration.xml")
 })
-public class TestSearchService extends BaseECMSTestCase {
-  QueryCriteria queryCriteria = new QueryCriteria();
-
-  private SiteSearchService siteSearchService;
-
-  private WCMPublicationService wcmPublicationService;
-
-  private WebpagePublicationPlugin publicationPlugin ;
-
-  private UserPortalConfigService userPortalConfigService;
-
-  private final String searchKeyword = "This is";
-
-  private SessionProvider sessionProvider;
-
-  private POMSessionManager pomManager;
-
-  private POMSession  pomSession;
-
-  private int seachItemsPerPage = 100;
+public class TestSearchService extends BaseSearchTest {
 
   public void setUp() throws Exception {
     super.setUp();
-    siteSearchService = WCMCoreUtils.getService(SiteSearchService.class);
-    userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
-    pomManager = WCMCoreUtils.getService(POMSessionManager.class);
-    sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);
-
-    publicationPlugin = new DumpPublicationPlugin();
-    publicationPlugin.setName(DumpPublicationPlugin.LIFECYCLE_NAME);
-    wcmPublicationService.addPublicationPlugin(publicationPlugin);
-    applySystemSession();
-    addDocuments();
   }
-
-  private void addDocuments() throws Exception {
-    Node classicPortal = (Node)session.getItem("/sites content/live/classic/web contents");
-    addChildNodes(classicPortal);
-
-    Node sharedPortal = (Node)session.getItem("/sites content/live/shared/documents");
-    addChildNodes(sharedPortal);
-  }
-
-  private void addChildNodes(Node parentNode)throws Exception{
+  
+  protected void addChildNodes(Node parentNode)throws Exception{
     PageService pageService = getService(PageService.class);
     pomSession = pomManager.getSession();
     if (pomManager.getSession() == null) pomSession = pomManager.openSession();
@@ -129,6 +84,112 @@ public class TestSearchService extends BaseECMSTestCase {
     pomSession.close();
   }
 
+  protected Node createWebcontentNode(Node parentNode,
+                                      String nodeName,
+                                      String htmlData,
+                                      String cssData,
+                                      String jsData) throws Exception {
+    Node webcontent = parentNode.addNode(nodeName, "exo:webContent");
+    webcontent.setProperty("exo:title", nodeName);
+    Node htmlNode;
+    try {
+      htmlNode = webcontent.getNode("default.html");
+    } catch (Exception ex) {
+      htmlNode = webcontent.addNode("default.html", "nt:file");
+    }
+    if (!htmlNode.isNodeType("exo:htmlFile"))
+      htmlNode.addMixin("exo:htmlFile");
+    Node htmlContent;
+    try {
+      htmlContent = htmlNode.getNode("jcr:content");
+    } catch (Exception ex) {
+      htmlContent = htmlNode.addNode("jcr:content", "nt:resource");
+    }
+    htmlContent.setProperty("jcr:encoding", "UTF-8");
+    htmlContent.setProperty("jcr:mimeType", "text/html");
+    htmlContent.setProperty("jcr:lastModified", new Date().getTime());
+    if (htmlData == null)
+      htmlData = "This is the default.html file.";
+    htmlContent.setProperty("jcr:data", htmlData);
+
+    Node jsFolder;
+    try {
+      jsFolder = webcontent.getNode("js");
+    } catch (Exception ex) {
+      jsFolder = webcontent.addNode("js", "exo:jsFolder");
+    }
+    Node jsNode;
+    try {
+      jsNode = jsFolder.getNode("default.js");
+    } catch (Exception ex) {
+      jsNode = jsFolder.addNode("default.js", "nt:file");
+    }
+    if (!jsNode.isNodeType("exo:jsFile"))
+      jsNode.addMixin("exo:jsFile");
+    jsNode.setProperty("exo:active", true);
+    jsNode.setProperty("exo:priority", 1);
+    jsNode.setProperty("exo:sharedJS", true);
+
+    Node jsContent;
+    try {
+      jsContent = jsNode.getNode("jcr:content");
+    } catch (Exception ex) {
+      jsContent = jsNode.addNode("jcr:content", "nt:resource");
+    }
+    jsContent.setProperty("jcr:encoding", "UTF-8");
+    jsContent.setProperty("jcr:mimeType", "text/javascript");
+    jsContent.setProperty("jcr:lastModified", new Date().getTime());
+    if (jsData == null)
+      jsData = "This is the default.js file.";
+    jsContent.setProperty("jcr:data", jsData);
+
+    Node cssFolder;
+    try {
+      cssFolder = webcontent.getNode("css");
+    } catch (Exception ex) {
+      cssFolder = webcontent.addNode("css", "exo:cssFolder");
+    }
+    Node cssNode;
+    try {
+      cssNode = cssFolder.getNode("default.css");
+    } catch (Exception ex) {
+      cssNode = cssFolder.addNode("default.css", "nt:file");
+    }
+    if (!cssNode.isNodeType("exo:cssFile"))
+      cssNode.addMixin("exo:cssFile");
+    cssNode.setProperty("exo:active", true);
+    cssNode.setProperty("exo:priority", 1);
+    cssNode.setProperty("exo:sharedCSS", true);
+
+    Node cssContent;
+    try {
+      cssContent = cssNode.getNode("jcr:content");
+    } catch (Exception ex) {
+      cssContent = cssNode.addNode("jcr:content", "nt:resource");
+    }
+    cssContent.setProperty("jcr:encoding", "UTF-8");
+    cssContent.setProperty("jcr:mimeType", "text/css");
+    cssContent.setProperty("jcr:lastModified", new Date().getTime());
+    if (cssData == null)
+      cssData = "This is the default.css file.";
+    cssContent.setProperty("jcr:data", cssData);
+
+    Node mediaFolder;
+    try {
+      mediaFolder = webcontent.getNode("medias");
+    } catch (Exception ex) {
+      mediaFolder = webcontent.addNode("medias");
+    }
+    if (!mediaFolder.hasNode("images"))
+      mediaFolder.addNode("images", "nt:folder");
+    if (!mediaFolder.hasNode("videos"))
+      mediaFolder.addNode("videos", "nt:folder");
+    if (!mediaFolder.hasNode("audio"))
+      mediaFolder.addNode("audio", "nt:folder");
+    session.save();
+    return webcontent;
+  }
+  
   private AbstractPageList<ResultNode> getSearchResult() throws Exception{
     return siteSearchService.searchSiteContents(WCMCoreUtils.getSystemSessionProvider(),
                                                 queryCriteria, seachItemsPerPage, false);
@@ -593,7 +654,7 @@ public class TestSearchService extends BaseECMSTestCase {
     queryCriteria.setFulltextSearchProperty(null);
     String author = "root";
     queryCriteria.setAuthors(new String[]{author});
-    assertEquals(4, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
+    assertEquals(6, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
   }
 
   public void testSearchByMimeTypes()throws Exception{
@@ -607,7 +668,8 @@ public class TestSearchService extends BaseECMSTestCase {
     queryCriteria.setFulltextSearch(true);
     queryCriteria.setFulltextSearchProperty(null);
     queryCriteria.setMimeTypes(new String[]{"exo:webContent", " exo:siteBreadcrumb"});
-    assertEquals(4, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
+    AbstractPageList<ResultNode> pageList = siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true);
+    assertEquals(6, pageList.getTotalNodes());
   }
 
   public void testSearchByTagUUID() throws Exception{
@@ -624,134 +686,11 @@ public class TestSearchService extends BaseECMSTestCase {
     Node node = (Node)session.getItem("/sites content/live/classic/web contents/webcontent0");
     String uuid = node.getUUID();
     queryCriteria.setTagUUIDs(new String[]{uuid});
-    assertEquals(4, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
+    assertEquals(6, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
   }
 
   public void tearDown() throws Exception {
-
-    NodeIterator iterator = null;
-    Node classicPortal = (Node)session.getItem("/sites content/live/classic/web contents");
-    iterator = classicPortal.getNodes();
-    while (iterator.hasNext()) {
-      iterator.nextNode().remove();
-    }
-
-    Node sharedPortal = (Node)session.getItem("/sites content/live/shared/documents");
-    iterator = sharedPortal.getNodes();
-    while (iterator.hasNext()) {
-      iterator.nextNode().remove();
-    }
-
-    session.save();
     super.tearDown();
   }
 
-  protected Node createWebcontentNode(Node parentNode,
-                                      String nodeName,
-                                      String htmlData,
-                                      String cssData,
-                                      String jsData) throws Exception {
-    Node webcontent = parentNode.addNode(nodeName, "exo:webContent");
-    webcontent.setProperty("exo:title", nodeName);
-    Node htmlNode;
-    try {
-      htmlNode = webcontent.getNode("default.html");
-    } catch (Exception ex) {
-      htmlNode = webcontent.addNode("default.html", "nt:file");
-    }
-    Node articleNode = webcontent.addNode("article", "exo:article");
-    articleNode.setProperty("exo:title", "This is");
-    articleNode.setProperty("exo:text", "This is text");
-    if (!htmlNode.isNodeType("exo:htmlFile"))
-      htmlNode.addMixin("exo:htmlFile");
-    Node htmlContent;
-    try {
-      htmlContent = htmlNode.getNode("jcr:content");
-    } catch (Exception ex) {
-      htmlContent = htmlNode.addNode("jcr:content", "nt:resource");
-    }
-    htmlContent.setProperty("jcr:encoding", "UTF-8");
-    htmlContent.setProperty("jcr:mimeType", "text/html");
-    htmlContent.setProperty("jcr:lastModified", new Date().getTime());
-    if (htmlData == null)
-      htmlData = "This is the default.html file.";
-    htmlContent.setProperty("jcr:data", htmlData);
-
-    Node jsFolder;
-    try {
-      jsFolder = webcontent.getNode("js");
-    } catch (Exception ex) {
-      jsFolder = webcontent.addNode("js", "exo:jsFolder");
-    }
-    Node jsNode;
-    try {
-      jsNode = jsFolder.getNode("default.js");
-    } catch (Exception ex) {
-      jsNode = jsFolder.addNode("default.js", "nt:file");
-    }
-    if (!jsNode.isNodeType("exo:jsFile"))
-      jsNode.addMixin("exo:jsFile");
-    jsNode.setProperty("exo:active", true);
-    jsNode.setProperty("exo:priority", 1);
-    jsNode.setProperty("exo:sharedJS", true);
-
-    Node jsContent;
-    try {
-      jsContent = jsNode.getNode("jcr:content");
-    } catch (Exception ex) {
-      jsContent = jsNode.addNode("jcr:content", "nt:resource");
-    }
-    jsContent.setProperty("jcr:encoding", "UTF-8");
-    jsContent.setProperty("jcr:mimeType", "text/javascript");
-    jsContent.setProperty("jcr:lastModified", new Date().getTime());
-    if (jsData == null)
-      jsData = "This is the default.js file.";
-    jsContent.setProperty("jcr:data", jsData);
-
-    Node cssFolder;
-    try {
-      cssFolder = webcontent.getNode("css");
-    } catch (Exception ex) {
-      cssFolder = webcontent.addNode("css", "exo:cssFolder");
-    }
-    Node cssNode;
-    try {
-      cssNode = cssFolder.getNode("default.css");
-    } catch (Exception ex) {
-      cssNode = cssFolder.addNode("default.css", "nt:file");
-    }
-    if (!cssNode.isNodeType("exo:cssFile"))
-      cssNode.addMixin("exo:cssFile");
-    cssNode.setProperty("exo:active", true);
-    cssNode.setProperty("exo:priority", 1);
-    cssNode.setProperty("exo:sharedCSS", true);
-
-    Node cssContent;
-    try {
-      cssContent = cssNode.getNode("jcr:content");
-    } catch (Exception ex) {
-      cssContent = cssNode.addNode("jcr:content", "nt:resource");
-    }
-    cssContent.setProperty("jcr:encoding", "UTF-8");
-    cssContent.setProperty("jcr:mimeType", "text/css");
-    cssContent.setProperty("jcr:lastModified", new Date().getTime());
-    if (cssData == null)
-      cssData = "This is the default.css file.";
-    cssContent.setProperty("jcr:data", cssData);
-
-    Node mediaFolder;
-    try {
-      mediaFolder = webcontent.getNode("medias");
-    } catch (Exception ex) {
-      mediaFolder = webcontent.addNode("medias");
-    }
-    if (!mediaFolder.hasNode("images"))
-      mediaFolder.addNode("images", "nt:folder");
-    if (!mediaFolder.hasNode("videos"))
-      mediaFolder.addNode("videos", "nt:folder");
-    if (!mediaFolder.hasNode("audio"))
-      mediaFolder.addNode("audio", "nt:folder");
-    session.save();
-    return webcontent;
-  }
 }

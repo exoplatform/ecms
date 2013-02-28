@@ -70,7 +70,7 @@
   
 %>
 <div id="$componentId">
-<div id="${componentId}-$viewComponentId" class="UIListView" style="">
+<div id="${componentId}-$viewComponentId" class="UIListView $uicomponent.id" style="">
   <div class="UIListGrid UITimelineView">
     <div style="padding:4px 3px 0px 3px;">
       <div class="TitleTable ClearFix">

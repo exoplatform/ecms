@@ -35,7 +35,7 @@
   addScripts("uiListView.UIListView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');");
 %>
 <div id="$componentId">
-  <div id="${componentId}-$viewComponentId" class="UIListView" style="">  
+  <div id="${componentId}-$viewComponentId" class="UIListView $uicomponent.id" style="">  
     <div class="UIListGrid">
         <div class="TitleTable ClearFix">
           

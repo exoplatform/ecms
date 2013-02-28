@@ -1065,6 +1065,10 @@
 	float: left
 }
 
+.UIJCRExplorerPortlet .UIJCRExplorer .UIDocumentWorkspace .UIDocumentInfo {
+	min-height: 500px;
+}
+
 /*############################## -- END UIDocumentInfo -- ##############################*/
 
 /*===========================Folder Form=====================*/

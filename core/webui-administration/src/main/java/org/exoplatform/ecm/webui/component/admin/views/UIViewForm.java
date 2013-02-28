@@ -294,11 +294,11 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
         getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setChecked(false) ;
         getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setEnable(true) ;
       }
+      //pref is show side bar
+      getUICheckBoxInput(FIELD_HIDE_EXPLORER_PANEL).setRendered(true);
+      getUICheckBoxInput(FIELD_HIDE_EXPLORER_PANEL).setValue(
+                       viewNode.getProperty(NodetypeConstant.EXO_HIDE_EXPLORER_PANEL).getBoolean());
     }
-    //pref is show side bar
-    getUICheckBoxInput(FIELD_HIDE_EXPLORER_PANEL).setRendered(true);
-    getUICheckBoxInput(FIELD_HIDE_EXPLORER_PANEL).setValue(
-                     viewNode.getProperty(NodetypeConstant.EXO_HIDE_EXPLORER_PANEL).getBoolean());
     //---------------------
     Node viewsNode = NodeLocation.getNodeByLocation(views_);
     if (selectedVersion != null) {

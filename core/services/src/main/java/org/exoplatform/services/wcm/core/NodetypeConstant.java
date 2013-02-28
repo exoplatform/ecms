@@ -196,6 +196,27 @@ public class NodetypeConstant {
   
   public static final String EXO_THUMBNAILS_FOLDER = "exo:thumbnails";
   
+  public static final String EXO_PRIMARYTYPE = "exo:primaryType";
+  
+  public static final String EXO_TRASH_FOLDER = "exo:trashFolder";
+  
+  public static final String EXO_FAVOURITE_FOLDER = "exo:favoriteFolder";
+  
+  public final static String EXO_MUSICFOLDER = "exo:musicFolder";
+  
+  public final static String EXO_VIDEOFOLDER = "exo:videoFolder";
+  
+  public final static String EXO_PICTUREFOLDER = "exo:pictureFolder";
+  
+  public final static String EXO_DOCUMENTFOLDER = "exo:documentFolder";
+  
+  public final static String EXO_SEARCHFOLDER = "exo:searchFolder";
+  
+  public static final String[] SPECIFIC_FOLDERS = { EXO_MUSICFOLDER,
+                                              EXO_VIDEOFOLDER, EXO_PICTUREFOLDER, EXO_DOCUMENTFOLDER, EXO_SEARCHFOLDER };
+					      
+  public static final String JCR_MIMETYPE = "jcr:mimeType";
+
   // public static final String PUBLICATION_STATE_AND_VERSION_BASED_PUBLICATION
   // = "publication:stateAndVersionBasedPublication";
 

@@ -49,7 +49,7 @@ public class PortalFolderSchemaHandler extends BaseWebSchemaHandler {
    * @throws Exception the exception
    */
   public Node getCSSFolder(final Node portalFolder) throws Exception {
-    return portalFolder.getNode("css");
+    return portalFolder.hasNode("css") ? portalFolder.getNode("css") : null;
   }
 
   /**
@@ -60,7 +60,7 @@ public class PortalFolderSchemaHandler extends BaseWebSchemaHandler {
    * @throws Exception the exception
    */
   public Node getJSFolder(final Node portalFolder) throws Exception {
-    return portalFolder.getNode("js");
+    return portalFolder.hasNode("js") ? portalFolder.getNode("js") : null;
   }
 
   /**

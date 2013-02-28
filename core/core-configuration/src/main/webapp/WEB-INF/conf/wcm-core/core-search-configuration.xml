@@ -33,5 +33,41 @@
       </value-param>
     </init-params>
   </component>
+  
+	<component>
+		<key>org.exoplatform.services.wcm.search.connector.DocumentSearchServiceConnector</key>
+		<type>org.exoplatform.services.wcm.search.connector.DocumentSearchServiceConnector</type>
+		<init-params>
+         <properties-param>
+           <name>constructor.params</name>
+           <property name="searchType" value="Document"/>
+           <property name="displayName" value="Document"/>
+         </properties-param>
+    </init-params>   
+	</component>
 
+	<component>
+		<key>org.exoplatform.services.wcm.search.connector.FileSearchServiceConnector</key>
+		<type>org.exoplatform.services.wcm.search.connector.FileSearchServiceConnector</type>
+		<init-params>
+         <properties-param>
+           <name>constructor.params</name>
+           <property name="searchType" value="File"/>
+           <property name="displayName" value="File"/>
+         </properties-param>
+    </init-params>   
+	</component>
+	
+	<component>
+		<key>org.exoplatform.services.wcm.search.connector.PageSearchServiceConnector</key>
+		<type>org.exoplatform.services.wcm.search.connector.PageSearchServiceConnector</type>
+		<init-params>
+         <properties-param>
+           <name>constructor.params</name>
+           <property name="searchType" value="Page"/>
+           <property name="displayName" value="Page"/>
+         </properties-param>
+    </init-params>   
+	</component>  
+  
 </configuration>

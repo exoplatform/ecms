@@ -32,7 +32,7 @@
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
   String repository = rService.getCurrentRepository().getConfiguration().getName();	
 %>
-  <div id="$uicomponent.id" class="UISlideShowView UICoverFlowView">
+  <div id="$uicomponent.id" class="UISlideShowView UICoverFlowView $uicomponent.id">
     <div class="TLBox">
       <div class="TRBox">
         <div class="TMBox"><span></span></div>

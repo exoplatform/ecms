@@ -365,55 +365,12 @@ public class Utils {
 
   public static String getNodeTypeIcon(Node node, String appended, String mode)
       throws RepositoryException {
-    StringBuilder str = new StringBuilder();
-    if (node == null)
-      return "";
-    String nodeType = node.getPrimaryNodeType().getName();
-    if (node.isNodeType(EXO_SYMLINK)) {
-      LinkManager linkManager = Util.getUIPortal().getApplicationComponent(
-          LinkManager.class);
-      try {
-        nodeType = node.getProperty(EXO_PRIMARYTYPE).getString();
-        node = linkManager.getTarget(node);
-        if (node == null)
-          return "";
-      } catch (Exception e) {
-        return "";
-      }
-    }
-    if (node.isNodeType(EXO_TRASH_FOLDER)) {
-      nodeType = EXO_TRASH_FOLDER;
-    }
-    if (node.isNodeType(EXO_FAVOURITE_FOLDER))
-      nodeType = EXO_FAVOURITE_FOLDER;
-    if (nodeType.equals(NT_UNSTRUCTURED) || nodeType.equals(NT_FOLDER)) {
-      for (String specificFolder : SPECIFIC_FOLDERS) {
-        if (node.isNodeType(specificFolder)) {
-          nodeType = specificFolder;
-          break;
-        }
-      }
-    }
-    nodeType = nodeType.replace(':', '_') + appended;
-    str.append(nodeType);
-    str.append(" ");
-    str.append("default16x16Icon");
-    if (mode != null && mode.equalsIgnoreCase("Collapse"))
-      str.append(' ').append(mode).append(nodeType);
-    if (node.isNodeType(NT_FILE)) {
-      if (node.hasNode(JCR_CONTENT)) {
-        Node jcrContentNode = node.getNode(JCR_CONTENT);
-        str.append(' ').append(
-            jcrContentNode.getProperty(JCR_MIMETYPE).getString().toLowerCase().replaceAll(
-                "/|\\.", "_")).append(appended);
-      }
-    }
-    return str.toString();
+    return org.exoplatform.services.cms.impl.Utils.getNodeTypeIcon(node, appended, mode);
   }
 
   public static String getNodeTypeIcon(Node node, String appended)
       throws RepositoryException {
-    return getNodeTypeIcon(node, appended, null);
+    return org.exoplatform.services.cms.impl.Utils.getNodeTypeIcon(node, appended);
   }
 
   public static NodeIterator getAuthorizedChildNodes(Node node)
@@ -445,34 +402,7 @@ public class Utils {
   }
 
   public static List<String> getMemberships() throws Exception {
-    String userId = Util.getPortalRequestContext().getRemoteUser();
-    List<String> userMemberships = new ArrayList<String>();
-   userMemberships.add(userId);
-    // here we must retrieve memberships of the user using the
-    // IdentityRegistry Service instead of Organization Service to
-    // allow JAAS based authorization
-    Collection<MembershipEntry> memberships = getUserMembershipsFromIdentityRegistry(userId);
-    if (memberships != null) {
-      for (MembershipEntry membership : memberships) {
-        String role = membership.getMembershipType() + ":" + membership.getGroup();
-        userMemberships.add(role);
-      }
-   }
-   return userMemberships;
-  }
-
-  /**
-   * this method retrieves memberships of the user having the given id using the
-   * IdentityRegistry service instead of the Organization service to allow JAAS
-   * based authorization
-   *
-   * @param authenticatedUser the authenticated user id
-   * @return a collection of MembershipEntry
-   */
-  private static Collection<MembershipEntry> getUserMembershipsFromIdentityRegistry(String authenticatedUser) {
-    IdentityRegistry identityRegistry = WCMCoreUtils.getService(IdentityRegistry.class);
-    Identity currentUserIdentity = identityRegistry.getIdentity(authenticatedUser);
-    return currentUserIdentity.getMemberships();
+    return org.exoplatform.services.cms.impl.Utils.getMemberships();
   }
 
   public static List<String> getGroups() throws Exception {

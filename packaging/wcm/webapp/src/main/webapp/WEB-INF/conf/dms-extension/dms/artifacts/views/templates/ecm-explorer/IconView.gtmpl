@@ -84,7 +84,7 @@
 				</div>
 			</div>
 		<%}%>	
-		<div class="UIThumbnailsView" style="overflow-y: auto; overflow-x: hidden;">
+		<div class="UIThumbnailsView $uicomponent.id" style="overflow-y: auto; overflow-x: hidden;">
 		  <div class="ActionIconsContainer">
 		    <%
 		      int i = 0;
