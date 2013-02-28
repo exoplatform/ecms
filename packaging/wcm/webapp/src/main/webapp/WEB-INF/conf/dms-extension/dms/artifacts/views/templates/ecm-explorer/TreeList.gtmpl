@@ -153,19 +153,31 @@
                 } else {
                   typeActionLink = "Ascending;";
                 }
-                def selectedName = "Alphabetic".equals(selectedSortType)?"selected":"";
-                def selectedDate = "Date".equals(selectedSortType)?"selected":"";
+                def bgColorName = "Alphabetic".equals(selectedSortType)?"yellow":"";
+                def bgColorDate = "Date".equals(selectedSortType)?"yellow":"";
               %>
             <!--===============DropDownBox===================-->
               <div class="btn-group FR">
                 <button data-toggle="dropdown" class="btn dropdown-toggle">
                   <%=_ctx.appRes("FileView.label." + ("Alphabetic".equals(selectedSortType)?"name":"date"))%>
-                  ;$typeActionLink
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" style="max-height:290px;min-width:80px;overflow:auto">
-                    <li><a href="<%=uicomponent.event("Sort", typeActionLink + "Alphabetic")%>"><%=_ctx.appRes("FileView.label.name")%></a></li>
-                    <li><a href="<%=uicomponent.event("Sort", typeActionLink + "Date")%>"><%=_ctx.appRes("FileView.label.date")%></a></li>
+                    <li>
+                      <a style="background-color:$bgColorName" href="<%=uicomponent.event("Sort", typeActionLink + "Alphabetic")%>">
+                        <%=_ctx.appRes("FileView.label.name")%>
+                        <% if ("yellow".equals(bgColorName)) {%>
+                          <i class="uiIconSort$sortOrder">&nbsp;</i>
+                        <%} %>
+                      </a>
+                    </li>
+                    <li>
+                      <a style="background-color:$bgColorDate" href="<%=uicomponent.event("Sort", typeActionLink + "Date")%>"><%=_ctx.appRes("FileView.label.date")%>
+                        <% if ("yellow".equals(bgColorDate)) {%>
+                          <i class="uiIconSort$sortOrder">&nbsp;</i>
+                        <%} %>
+                      </a>
+                    </li>
                 </ul>
               </div>
             <!--===============Sort By label =================-->
