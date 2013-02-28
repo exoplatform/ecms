@@ -724,7 +724,21 @@ function CloudDriveUI() {
 	var ALLOWED_DMS_MENU_DRIVE_ACTION_CLASSES = [ "DeleteNodeIcon" ];
 
 	var initLock = null;
-	
+
+	var getIEVersion = function()
+	// Returns the version of Windows Internet Explorer or a -1
+	// (indicating the use of another browser).
+	{
+		var rv = -1; // Return value assumes failure.
+		if (navigator.appName == "Microsoft Internet Explorer") {
+			var ua = navigator.userAgent;
+			var re = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+			if (re.exec(ua) != null)
+				rv = parseFloat(RegExp.$1);
+		}
+		return rv;
+	};
+
 	var getAllowedItems = function(menu, items, allowed) {
 		var newParams = "";
 		$.each(items, function(i, item) {
@@ -1285,17 +1299,22 @@ function CloudDriveUI() {
 	this.init = function() {
 		// inut doc view (list of file view)
 		initDocument();
-		
+
 		// init on each document reload (incl. ajax calls)
 		// XXX using deprecated DOMNodeInserted and context menu selector to get less events here for DOM
 		// reloading during the navigation
-		$("#UIWorkingArea").on("DOMNodeInserted", "#LeftContainer .LastNode div", function(event) { // 
+		var ieVersion = getIEVersion();
+		var domEvent = ieVersion > 0 && ieVersion < 9.0 ? "onpropertychange" : "DOMNodeInserted"; // DOMSubtreeModified  
+		$(".PORTLET-FRAGMENT").on(domEvent, ".LeftCotainer, .RightCotainer", function(event) { //  #UIJCRExplorerPortlet 
 			//log("DOMSubtreeModified " + event.target); // DOMSubtreeModified
 			if (!initLock) {
 				initLock = setTimeout(function() {
-					cloudDriveUI.init();
-					initLock = null;
-				}, 250);
+					//log(">>>>>>>>> initDocument");
+					initDocument();
+					setTimeout(function() {
+						initLock = null;
+					}, 1000);
+				}, 200);
 			}
 			return true;
 		});
@@ -1468,7 +1487,7 @@ if (typeof cloudDriveUI == "undefined") {
 $(function() {
 	try {
 		log("Initializing CloudDrive");
-		cloudDriveUI.init();		
+		cloudDriveUI.init();
 	} catch (e) {
 		log("Error initializing CloudDrive", e);
 	}
