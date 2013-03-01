@@ -41,19 +41,27 @@ public class UIPermissionInputSet extends UIFormInputSetWithAction {
 
   public UIPermissionInputSet(String name) throws Exception {
     super(name);
+    initComponent(true);
+  }
+  private void initComponent(boolean hasPermissionCheckbox) throws Exception{
     setComponentConfig(getClass(), null);
     UIFormStringInput userGroup = new UIFormStringInput(FIELD_USERORGROUP, FIELD_USERORGROUP, null);
     userGroup.addValidator(MandatoryValidator.class);
     userGroup.setReadOnly(true);
     addUIFormInput(userGroup);
-    for (String perm : new String[] { PermissionType.READ, PermissionType.ADD_NODE, PermissionType.REMOVE }) {
-      UICheckBoxInput checkBoxInput = new UICheckBoxInput(perm, perm, false);
-      addUIFormInput(checkBoxInput);
-      checkBoxInput.setOnChange("OnChange");
+    if (hasPermissionCheckbox) {
+      for (String perm : new String[] { PermissionType.READ, PermissionType.ADD_NODE, PermissionType.REMOVE }) {
+        UICheckBoxInput checkBoxInput = new UICheckBoxInput(perm, perm, false);
+        addUIFormInput(checkBoxInput);
+        checkBoxInput.setOnChange("OnChange");
+      }
     }
     setActionInfo(FIELD_USERORGROUP, new String[] {"SelectUser", "SelectMember", "AddAny"});
   }
-  
+  public UIPermissionInputSet(String name, boolean hasPermissionCheckbox) throws Exception {
+    super(name);
+    initComponent(hasPermissionCheckbox);
+  }
   public String[] getButtonActions() {
     return buttonActions_;
   }

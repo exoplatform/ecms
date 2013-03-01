@@ -36,9 +36,9 @@ public class UITagPermissionInputSet extends UIFormInputSetWithAction {
     setComponentConfig(getClass(), null) ;
     UIFormStringInput userGroup = new UIFormStringInput(FIELD_USERORGROUP, FIELD_USERORGROUP, null) ;
     userGroup.addValidator(MandatoryValidator.class) ;
-    userGroup.setEditable(false) ;
+    userGroup.setReadOnly(true);
     addUIFormInput(userGroup) ;
-    setActionInfo(FIELD_USERORGROUP, new String[] {"SelectMember"}) ;
+    setActionInfo(FIELD_USERORGROUP, new String[] {"SelectUser", "SelectMember", "AddAny"});
   }
 
 }

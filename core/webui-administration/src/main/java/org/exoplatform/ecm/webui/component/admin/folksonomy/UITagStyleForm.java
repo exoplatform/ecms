@@ -76,7 +76,7 @@ public class UITagStyleForm extends UIForm {
     selectedTagStyle_ = NodeLocation.getNodeLocationByNode(selectedTagStyle);
     if (selectedTagStyle != null) {
       getUIStringInput(STYLE_NAME).setValue(selectedTagStyle.getName()) ;
-      getUIStringInput(STYLE_NAME).setEditable(false) ;
+      getUIStringInput(STYLE_NAME).setReadOnly(true);
       String range = selectedTagStyle.getProperty(UITagStyleList.RANGE_PROP).getValue().getString() ;
       getUIStringInput(DOCUMENT_RANGE).setValue(range) ;
       String htmlStyle = selectedTagStyle.getProperty(UITagStyleList.HTML_STYLE_PROP).getValue().getString() ;

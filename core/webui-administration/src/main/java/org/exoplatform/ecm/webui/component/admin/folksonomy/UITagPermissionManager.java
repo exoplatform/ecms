@@ -16,14 +16,11 @@
  */
 package org.exoplatform.ecm.webui.component.admin.folksonomy;
 
+import org.exoplatform.ecm.webui.core.UIPermissionManagerBase;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
-import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
-import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.organization.account.UIUserSelector;
 
 /**
  * Created by The eXo Platform SARL
@@ -35,7 +32,7 @@ import org.exoplatform.webui.organization.account.UIUserSelector;
 @ComponentConfig(
     lifecycle = UIContainerLifecycle.class
 )
-public class UITagPermissionManager extends UIContainer {
+public class UITagPermissionManager extends UIPermissionManagerBase {
 
   public UITagPermissionManager() throws Exception {
     addChild(UITagPermissionInfo.class, null, null);
@@ -55,19 +52,4 @@ public class UITagPermissionManager extends UIContainer {
     uiPopup.setShow(true);
     uiPopup.setResizable(true);
   }
-
-  static  public class AddUserActionListener extends EventListener<UIUserSelector> {
-    public void execute(Event<UIUserSelector> event) throws Exception {
-      UIUserSelector uiForm = event.getSource();
-      UITagPermissionManager uiParent = uiForm.getAncestorOfType(UITagPermissionManager.class);
-      UITagPermissionForm uiTagPermissionForm = uiParent.getChild(UITagPermissionForm.class);
-      uiTagPermissionForm.doSelect(UITagPermissionInputSet.FIELD_USERORGROUP, uiForm.getSelectedUsers());
-      UIPopupWindow uiPopup = uiParent.getChild(UIPopupWindow.class);
-      uiPopup.setUIComponent(null);
-      uiPopup.setShow(false);
-      uiPopup.setShowMask(true);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiParent);
-    }
-  }
-
 }

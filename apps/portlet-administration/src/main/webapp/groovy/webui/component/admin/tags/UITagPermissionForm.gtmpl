@@ -1,0 +1,7 @@
+<div class="uiTagPermissionForm">
+  <% uiform.begin() %>
+      <div>
+        <% uiform.renderChild(uiform.TAGS_PERMISSION) %>
+      </div>
+  <% uiform.end() %>
+</div>

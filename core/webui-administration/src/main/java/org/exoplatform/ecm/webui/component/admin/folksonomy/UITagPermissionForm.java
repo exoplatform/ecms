@@ -16,22 +16,27 @@
  */
 package org.exoplatform.ecm.webui.component.admin.folksonomy;
 
-import org.exoplatform.services.log.Log;
-import org.exoplatform.ecm.webui.selector.UIAnyPermission;
+import javax.jcr.Node;
+
+import org.exoplatform.ecm.permission.info.UIPermissionInputSet;
+import org.exoplatform.ecm.webui.core.UIPermissionFormBase;
+import org.exoplatform.ecm.webui.core.UIPermissionManagerBase;
 import org.exoplatform.ecm.webui.selector.UIGroupMemberSelector;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
+import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
-import org.exoplatform.webui.form.UIForm;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIFormStringInput;
 
 /**
@@ -43,30 +48,36 @@ import org.exoplatform.webui.form.UIFormStringInput;
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    template = "system:/groovy/webui/form/UIFormWithTitle.gtmpl",
+    template = "app:/groovy/webui/component/admin/tags/UITagPermissionForm.gtmpl",
     events = {
-      @EventConfig(listeners = UITagPermissionForm.SaveActionListener.class),
-      @EventConfig(phase = Phase.DECODE, listeners = UITagPermissionForm.SelectMemberActionListener.class)
+      @EventConfig(listeners = UITagPermissionForm.AddActionListener.class),
+      @EventConfig(phase = Phase.DECODE, listeners = UITagPermissionForm.SelectMemberActionListener.class),
+      @EventConfig(phase = Phase.DECODE, listeners = UITagPermissionForm.SelectUserActionListener.class),
+      @EventConfig(phase = Phase.DECODE, listeners = UITagPermissionForm.AddAnyActionListener.class)
     }
 )
-public class UITagPermissionForm extends UIForm implements UISelectable {
-  final static public String PERMISSION   = "permission";
+public class UITagPermissionForm extends UIPermissionFormBase implements UISelectable{
+  final static public String TAGS_PERMISSION   = "tags_permission";
 
   final static public String POPUP_SELECT = "SelectUserOrGroup";
   private static final Log LOG  = ExoLogger.getLogger(UITagPermissionForm.class.getName());
 
   public UITagPermissionForm() throws Exception {
-    addChild(new UITagPermissionInputSet(PERMISSION));
-    setActions(new String[] {"Save"});
+    removeChildById(UIPermissionFormBase.PERMISSION);
+    addChild(new UIPermissionInputSet(TAGS_PERMISSION, false));
+    UIPermissionInputSet uiPerInputset = getChildById(TAGS_PERMISSION);
+    uiPerInputset.setButtonActions(new String[] {"Add"});
+    uiPerInputset.setPrimaryButtonAction("Add");
+    uiPerInputset.setActionInfo(UIPermissionInputSet.FIELD_USERORGROUP, new String[] {"SelectUser", "SelectMember", "AddAny"});
   }
 
-  static public class SaveActionListener extends EventListener<UITagPermissionForm> {
+  static public class AddActionListener extends EventListener<UITagPermissionForm> {
     public void execute(Event<UITagPermissionForm> event) throws Exception {
        UITagPermissionForm uiForm = event.getSource();
        UITagPermissionManager uiParent = uiForm.getParent();
        UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
-       String userOrGroup = uiForm.getChild(UITagPermissionInputSet.class).getUIStringInput(
-           UITagPermissionInputSet.FIELD_USERORGROUP).getValue();
+       String userOrGroup = uiForm.getChild(UIPermissionInputSet.class).getUIStringInput(
+           UIPermissionInputSet.FIELD_USERORGROUP).getValue();
       NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class);
 
       if (Utils.isNameEmpty(userOrGroup)) {
@@ -84,7 +95,7 @@ public class UITagPermissionForm extends UIForm implements UISelectable {
 
       newFolksonomyService.addTagPermission(userOrGroup);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiParent);
-      uiForm.getChild(UITagPermissionInputSet.class).getChild(UIFormStringInput.class).setValue("");
+      uiForm.getChild(UIPermissionInputSet.class).getChild(UIFormStringInput.class).setValue("");
     }
   }
 
@@ -92,11 +103,39 @@ public class UITagPermissionForm extends UIForm implements UISelectable {
     public void execute(Event<UITagPermissionForm> event) throws Exception {
       UITagPermissionForm uiForm = event.getSource();
       UIGroupMemberSelector uiGroupMemberSelector = uiForm.createUIComponent(UIGroupMemberSelector.class, null, null);
-      uiGroupMemberSelector.setSourceComponent(uiForm, new String[] { UITagPermissionInputSet.FIELD_USERORGROUP });
-      uiGroupMemberSelector.setShowAnyPermission(false);
-      uiGroupMemberSelector.removeChild(UIAnyPermission.class);
-      uiForm.getAncestorOfType(UITagPermissionManager.class).initPopupPermission(uiGroupMemberSelector);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
+      uiGroupMemberSelector.setSourceComponent(uiForm, new String[] { UIPermissionInputSet.FIELD_USERORGROUP });
+      uiForm.getAncestorOfType(UIPermissionManagerBase.class).initPopupPermission(uiGroupMemberSelector);
+      UIPopupContainer popupContainer = uiForm.getAncestorOfType(UIPopupContainer.class);
+      if (popupContainer != null) {
+        event.getRequestContext().addUIComponentToUpdateByAjax(popupContainer);
+      } else {
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
+      }
+    }
+  }
+  static public class SelectUserActionListener extends EventListener<UITagPermissionForm> {
+    public void execute(Event<UITagPermissionForm> event) throws Exception {
+      UITagPermissionForm uiForm = event.getSource();
+      ((UIPermissionManagerBase)uiForm.getParent()).initUserSelector();
+      UIPopupContainer popupContainer = uiForm.getAncestorOfType(UIPopupContainer.class);
+      if (popupContainer != null) {
+        event.getRequestContext().addUIComponentToUpdateByAjax(popupContainer);
+      } else {
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
+      }
+    }
+  }
+  static public class AddAnyActionListener extends EventListener<UITagPermissionForm> {
+    public void execute(Event<UITagPermissionForm> event) throws Exception {
+      UITagPermissionForm uiForm = event.getSource();
+      UIPermissionInputSet uiInputSet = uiForm.getChildById(UITagPermissionForm.TAGS_PERMISSION);
+      uiInputSet.getUIStringInput(UIPermissionInputSet.FIELD_USERORGROUP).setValue(IdentityConstants.ANY);
+      UIPopupContainer popupContainer = uiForm.getAncestorOfType(UIPopupContainer.class);
+      if (popupContainer != null) {
+        event.getRequestContext().addUIComponentToUpdateByAjax(popupContainer);
+      } else {
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
+      }
     }
   }
 
@@ -110,4 +149,9 @@ public class UITagPermissionForm extends UIForm implements UISelectable {
     }
   }
 
+  @Override
+  public Node getCurrentNode() throws Exception {
+    //Nothing to do with get current node in tags permissions form
+    return null;
+  }
 }
