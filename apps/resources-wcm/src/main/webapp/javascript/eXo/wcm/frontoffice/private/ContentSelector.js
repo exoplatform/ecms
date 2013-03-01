@@ -134,9 +134,14 @@
 			var isUpload = nodeList[i].getAttribute("isUpload");
 			var nodeDriveName = nodeList[i].getAttribute("nodeDriveName");
 			if (nodeDriveName==null) nodeDriveName='';
-	
-			treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this);">';
-			treeHTML += 	'<div class="ExpandIcon">';		
+			var tmp = eXo.ecm.ECS.renderSubTree(nodeList[i]);
+			if (tmp == '') {
+				treeHTML += '<div class="Node">';
+				treeHTML += 	'<div class="emptyIcon">';
+			} else {
+				treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this, event);">';
+				treeHTML += 	'<div class="ExpandIcon">';
+			}
 			treeHTML += 		'<a title="'+decodeURIComponent(strName)+'"href="javascript:void(0);" class="nodeIcon" onclick="eXo.ecm.ECS.renderBreadcrumbs(this);eXo.ecm.ECS.listRootFolder(this);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
 			treeHTML +=				'<i class="uiIcon16x16FolderDefault" title="acme"></i>';
 			treeHTML += 			'<span class="nodeName">';
@@ -145,7 +150,7 @@
 			treeHTML +=			'</a>';
 			treeHTML += 	'</div>';			
 			treeHTML += '</div>';			
-			var tmp = eXo.ecm.ECS.renderSubTree(nodeList[i]);
+
 			if(tmp != '') treeHTML += tmp;
 		}
 		var uiLeftWorkspace = document.getElementById('LeftWorkspace');	
@@ -237,11 +242,17 @@
 				var isUpload = nodeList[i].getAttribute("isUpload");
 				var label = nodeList[i].getAttribute("label");
 				var nodeDriveName = nodeList[i].getAttribute("nodeDriveName");
+				var hasFolderChild = nodeList[i].getAttribute("hasFolderChild");
 				if (nodeDriveName==null) nodeDriveName='';			
 				if (!label) label = strName;
-				treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this);">';
-				treeHTML += 	'<div class="ExpandIcon">';
-				treeHTML +=			'<a title="'+decodeURIComponent(label)+'" href="javascript:void(0);" class="nodeIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'"  driverPath="'+driverPath+'" repository="'+repository+'" workspace="'+workspace+'">';
+				treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this, event);">';
+				if (hasFolderChild == "true") {
+					treeHTML += 	'<div class="ExpandIcon">';
+					treeHTML +=			'<a title="'+decodeURIComponent(label)+'" href="javascript:void(0);" class="nodeIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'"  driverPath="'+driverPath+'" repository="'+repository+'" workspace="'+workspace+'">';
+				} else {
+					treeHTML += 	'<div class="emptyIcon">';
+					treeHTML +=			'<a title="'+decodeURIComponent(label)+'" href="javascript:void(0);" class="nodeIcon" name="'+decodeURIComponent(strName)+'" id="'+id+'"  driverPath="'+driverPath+'" repository="'+repository+'" workspace="'+workspace+'">';
+				}
 				treeHTML +=				'<i class="uiIcon16x16FolderDefault" title="acme"></i>';
 				treeHTML += 			'<span class="nodeName">';
 				treeHTML += 				label;	
@@ -308,10 +319,16 @@
 				var strName = nodeList[i].getAttribute("name");
 				var isUpload = nodeList[i].getAttribute("isUpload");
 				var nodeDriveName = nodeList[i].getAttribute("nodeDriveName");
+				var hasFolderChild = nodeList[i].getAttribute("hasFolderChild");
 				if (nodeDriveName==null) nodeDriveName='';
-				treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this);">';
-				treeHTML += 	'<div class="ExpandIcon">';
-				treeHTML +=			'<a title="'+ decodeURIComponent(strName) +'" href="javascript:void(0);" class="nodeIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
+				treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this, event);">';
+				if (hasFolderChild == true) {
+					treeHTML += 	'<div class="ExpandIcon">';
+					treeHTML +=			'<a  title="'+ decodeURIComponent(strName) +'" href="javascript:void(0);" class="nodeIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
+				} else {
+					treeHTML += 	'<div class="emptyIcon">';
+					treeHTML +=			'<a  title="'+ decodeURIComponent(strName) +'" href="javascript:void(0);" class="nodeIcon" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
+				}
 				treeHTML +=				'<i class="uiIcon16x16FolderDefault" title="acme"></i>';
 				treeHTML += 			'<span class="nodeName">';
 				treeHTML += 				decodeURIComponent(strName);
@@ -332,10 +349,16 @@
 					var	strName	= currentNodeList[i].getAttribute("name");
 					var isUpload = currentNodeList[i].getAttribute("isUpload");
 					var nodeDriveName = currentNodeList[i].getAttribute("nodeDriveName");
+					var hasFolderChild = currentNodeList[i].getAttribute("hasFolderChild");
 					if (nodeDriveName==null) nodeDriveName='';
-					treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this);">';
-					treeHTML += 	'<div class="ExpandIcon">';
-					treeHTML +=			'<a title="'+decodeURIComponent(strName)+'" href="javascript:void(0);" class="nodeIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
+					treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this, event);">';
+					if (hasFolderChild == "true") {
+						treeHTML += 	'<div class="ExpandIcon">';
+						treeHTML +=			'<a  title="'+decodeURIComponent(strName)+'" href="javascript:void(0);" class="nodeIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
+					} else {
+						treeHTML += 	'<div class="emptyIcon">';
+						treeHTML +=			'<a  title="'+decodeURIComponent(strName)+'" href="javascript:void(0);" class="nodeIcon" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
+					}
 					treeHTML +=				'<i class="uiIcon16x16FolderDefault" title="acme"></i>';
 					treeHTML += 			'<span class="nodeName">';
 					treeHTML += 				decodeURIComponent(strName);
@@ -373,11 +396,12 @@
 		}
 	};
 	
-	EcmContentSelector.prototype.actionColExp = function(objNode) {
+	EcmContentSelector.prototype.actionColExp = function(objNode, event) {
 	 
 		if(!objNode) return;
 		var nextElt = gj(objNode).nextAll("div:first")[0];
 		var iconElt = gj(objNode).children("div")[0];
+		var hasFolderChild = objNode.getAttribute("hasFolderChild");
 		if(!nextElt || nextElt.className != "ChildrenContainer") {
 			var currentNode	= gj(objNode).find("a.nodeIcon:first")[0];
 			if (currentNode != null) {      
@@ -388,13 +412,17 @@
 			if (nextElt!=null && nextElt.className == "ChildrenContainer") {
 				nextElt.style.display = 'block';	
 			}
-			iconElt.className = 'CollapseIcon';
+			if (hasFolderChild == true || !event) {
+				iconElt.className = 'CollapseIcon';
+			}
 		} else if(!eXo.ecm.ECS.switchView) {
 			eXo.ecm.ECS.switchView = false;
 			if (nextElt!=null && nextElt.className == "ChildrenContainer") {
 				nextElt.style.display = 'none';
 			}
-			iconElt.className = 'ExpandIcon';
+			if (hasFolderChild == true || !event) {
+				iconElt.className = 'ExpandIcon';
+			}
 		}
 	};
 	

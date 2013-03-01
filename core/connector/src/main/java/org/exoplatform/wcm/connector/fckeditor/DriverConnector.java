@@ -709,6 +709,19 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
         || checkNode.isNodeType(NodetypeConstant.NT_FOLDER)
         || checkNode.isNodeType(NodetypeConstant.EXO_TAXONOMY);
   }
+  
+  /**
+   * Check if specific node has child of folder type.
+   * 
+   * @param checkNode
+   * @return
+   * @throws Exception
+   */
+  private boolean hasFolderChild(Node checkNode) throws Exception {
+    return (Utils.hasChild(checkNode, NodetypeConstant.NT_UNSTRUCTURED) 
+              || Utils.hasChild(checkNode, NodetypeConstant.NT_FOLDER)
+              || Utils.hasChild(checkNode, NodetypeConstant.EXO_TAXONOMY));
+  }
 
   /**
    * Checks if is dMS document.(not including free layout webcontent & media & article)
@@ -927,6 +940,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       folder.setAttribute("folderType", folderType);
       folder.setAttribute("path", child.getPath());
       folder.setAttribute("isUpload", "true");
+      folder.setAttribute("hasFolderChild", String.valueOf(this.hasFolderChild(child)));
+
       if (nodeDriveName!=null && nodeDriveName.length()>0) folder.setAttribute("nodeDriveName", nodeDriveName);
       return folder;
     }
