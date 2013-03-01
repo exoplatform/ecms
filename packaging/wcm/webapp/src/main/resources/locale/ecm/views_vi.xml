@@ -76,7 +76,8 @@
   <File>
     <view>
       <label>
-        <not-viewable>Không thể xem nội dung. Xin vui lòng tải về hoặc dùng WebDAV</not-viewable>
+        <not-viewable>Không thể xem nội dung</not-viewable>
+        <using-webDAV>hoặc dùng WebDAV để xem content</using-webDAV>
         <file-size-too-big>The content of this file is too big. You should download and open in the client.</file-size-too-big>
         <webDAV>WebDAV View</webDAV>
         <download>Tải file về</download>

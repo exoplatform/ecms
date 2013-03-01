@@ -233,8 +233,15 @@
 	</div>
   </div>
 <% }else {%>	
-	  <div style="text-align:center; font-style:italic">
-	    <%=_ctx.appRes("File.view.label.not-viewable")%>
-	  </div>
+      <div class="uiUnEditable clearfix">
+        <div class="iconContainer">
+          <i class="<%=Utils.getNodeTypeIcon(currentNode, "uiIcon64x64")%>"></i>
+        </div>
+        <div class="detailContainer">
+          <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
+          <a class="btn btn-primary" href="$downloadLink"><%=_ctx.appRes("File.view.label.download")%></a>
+          <span><%=_ctx.appRes("File.view.label.using-webDAV")%></span>
+        </div>
+      </div>
 <% }%>
 <%uiform.end()%>		
