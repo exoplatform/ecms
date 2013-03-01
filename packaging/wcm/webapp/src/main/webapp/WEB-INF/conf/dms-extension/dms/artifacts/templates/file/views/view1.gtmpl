@@ -91,7 +91,6 @@
           <%
             if(fileComponent != null) {
             uicomponent.renderUIComponent(fileComponent);
-            print "$fileComponent";
             } else {
           %>
             <div class="uiUnEditable clearfix">
