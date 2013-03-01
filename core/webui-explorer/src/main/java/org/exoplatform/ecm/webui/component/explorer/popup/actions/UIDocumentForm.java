@@ -261,7 +261,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     String link;
     int count = 0;
     for (String action : listAction) {
-      String btn = (count++ == 0) ? "btn" : "btn btn-primary";
+      String btn = (count++ == 0) ? "btn btn-primary" : "btn";
       try {
         actionLabel = res.getString(getName() + ".action." + action);
       } catch (MissingResourceException e) {
