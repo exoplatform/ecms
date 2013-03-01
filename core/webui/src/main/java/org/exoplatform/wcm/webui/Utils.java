@@ -1006,4 +1006,19 @@ public class Utils {
       }
     }
   }
+  
+  /**
+   * sets to lower case n first elements of string
+   * @param st
+   * @param n
+   */
+  public static String toLowerCase(String st, int n) {
+    StringBuilder sb = new StringBuilder(st);
+    for (int i = 0; i < n; i++) {
+      if (i < sb.length()) {
+        sb.setCharAt(i, Character.toLowerCase(st.charAt(i)));
+      }
+    }
+    return sb.toString();
+  }
 }

@@ -44,7 +44,7 @@ public class UINamespaceManager extends UIAbstractManager {
     if(uiPopup == null) {      
       uiPopup = addChild(UIPopupWindow.class, null, "NamespacePopup") ;
       uiPopup.setWindowSize(600,0) ;
-      UINamespaceForm uiNamespaceForm = createUIComponent(UINamespaceForm.class, null, null) ;
+      UINamespaceForm uiNamespaceForm = createUIComponent(UINamespaceForm.class, null, "UINamespaceForm") ;
       uiPopup.setUIComponent(uiNamespaceForm) ;
       uiPopup.setShow(true) ;
       uiPopup.setResizable(true) ;

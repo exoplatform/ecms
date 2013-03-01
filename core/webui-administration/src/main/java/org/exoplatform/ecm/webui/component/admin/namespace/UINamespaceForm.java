@@ -41,7 +41,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
 
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    template = "system:/groovy/webui/form/UIForm.gtmpl",
+    template = "classpath:groovy/ecm/webui/form/UIForm.gtmpl",
     events = {
       @EventConfig(listeners = UINamespaceForm.SaveActionListener.class),
       @EventConfig(phase=Phase.DECODE, listeners = UINamespaceForm.CancelActionListener.class)
