@@ -44,7 +44,7 @@
   <div class="HorizontalLayout">
     <table class="UIFormGrid">
         <tr>
-          <td class="FieldLabel"><label for="name"><%=_ctx.appRes("File.dialog.label.name")%></label></td>
+          <td class="FieldLabel"><label for="name"><%=_ctx.appRes("File.dialog.label.name")%>:</label></td>
           <td class="FieldComponent">
             <%
               String[] fieldName = ["jcrPath=/node", "mixintype=mix:votable,mix:commentable,mix:i18n,dc:elementSet", "editable=if-null", "validate=empty,name"] ;
@@ -54,7 +54,7 @@
         </tr>
         <%if(!uicomponent.getId().equals("UILanguageDialogForm")){%>
           <tr>
-            <td class="FieldLabel"><label for="categories"><%=_ctx.appRes("File.dialog.label.categories")%></label></td>
+            <td class="FieldLabel"><label for="categories"><%=_ctx.appRes("File.dialog.label.categories")%>:</label></td>
             <td class="FieldComponent">
               <% 
                 String[] fieldCategories = ["jcrPath=/node/exo:category", "multiValues=true", "reference=true", "editable=false"];
@@ -64,7 +64,7 @@
           </tr>
         <%}%>
     <tr>
-      <td class="FieldLabel"><label for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%></label></td>
+      <td class="FieldLabel"><label for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%>:</label></td>
       <td class="FieldComponent">
       <%
         String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().toString();
@@ -74,7 +74,7 @@
       </td>
     </tr>
         <tr>
-          <td class="FieldLabel"><label for="content"><%=_ctx.appRes("File.dialog.label.content")%></label></td>
+          <td class="FieldLabel"><label for="content"><%=_ctx.appRes("File.dialog.label.content")%>:</label></td>
           <td class="FieldComponent">
           <%          
             def content = "content";
@@ -101,7 +101,7 @@
           </td>
         </tr>       
           <tr>
-            <td class="FieldLabel"><label for="title"><%=_ctx.appRes("ElementSet.dialog.label.title")%></label></td>
+            <td class="FieldLabel"><label for="title"><%=_ctx.appRes("ElementSet.dialog.label.title")%>:</label></td>
             <td class="FieldComponent">
               <%
                 String[] fieldTitle = ["jcrPath=/node/jcr:content/dc:title", "multiValues=true"] ;
@@ -110,7 +110,7 @@
             </td>
           </tr>
           <tr>
-            <td class="FieldLabel"><label for="description"><%=_ctx.appRes("ElementSet.dialog.label.description")%></label></td>
+            <td class="FieldLabel"><label for="description"><%=_ctx.appRes("ElementSet.dialog.label.description")%>:</label></td>
             <td class="FieldComponent">
               <%
                 String[] fieldDescription = ["jcrPath=/node/jcr:content/dc:description", "multiValues=true"] ;
@@ -119,7 +119,7 @@
             </td>
           </tr>
           <tr>
-            <td class="FieldLabel"><label for="creator"><%=_ctx.appRes("ElementSet.dialog.label.creator")%></label></td>
+            <td class="FieldLabel"><label for="creator"><%=_ctx.appRes("ElementSet.dialog.label.creator")%>:</label></td>
             <td class="FieldComponent">
               <%
                 String[] fieldCreator = ["jcrPath=/node/jcr:content/dc:creator", "multiValues=true"] ;
@@ -128,7 +128,7 @@
             </td>
           </tr>
           <tr>
-            <td class="FieldLabel"><label for="source"><%=_ctx.appRes("ElementSet.dialog.label.source")%></label></td>
+            <td class="FieldLabel"><label for="source"><%=_ctx.appRes("ElementSet.dialog.label.source")%>:</label></td>
             <td class="FieldComponent">
               <%
                 String[] fieldSource = ["jcrPath=/node/jcr:content/dc:source", "multiValues=true"] ;
@@ -235,7 +235,7 @@
       
       <!-- Alternative text-->
       <tr>
-        <td class="FieldLabel"><label for="alternativeText"><%=_ctx.appRes("AccessibleMedia.dialog.label.alternativeText")%></label></td>
+        <td class="FieldLabel"><label for="alternativeText"><%=_ctx.appRes("AccessibleMedia.dialog.label.alternativeText")%>:</label></td>
         <td class="FieldComponent">
           <% String[] fieldAltText = ["jcrPath=/node/exo:alternativeText", "fillJcrDataOfFile=false"] ;
              uicomponent.addRichtextField("alternativeText", fieldAltText) ;            

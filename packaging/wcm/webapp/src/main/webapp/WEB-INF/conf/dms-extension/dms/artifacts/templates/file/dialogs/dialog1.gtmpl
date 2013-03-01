@@ -21,7 +21,7 @@
   <%/* end render action*/%>
     <div class="form-horizontal uiContentBox">
         <div class="control-group">
-          <label class="control-label" for="name"><%=_ctx.appRes("File.dialog.label.name")%></label>
+          <label class="control-label" for="name"><%=_ctx.appRes("File.dialog.label.name")%>:</label>
           <div class="controls">
             <%
               String[] fieldName = ["jcrPath=/node", "mixintype=mix:votable,mix:commentable,mix:i18n,dc:elementSet", "editable=if-null", "validate=empty,name"];
@@ -31,7 +31,7 @@
         </div>
 				<%if(!uicomponent.getId().equals("UILanguageDialogForm")){%>
 					<div class="control-group">
-			      <label class="control-label" for="categories"><%=_ctx.appRes("File.dialog.label.categories")%></label>
+			      <label class="control-label" for="categories"><%=_ctx.appRes("File.dialog.label.categories")%>:</label>
 			      <div class="controls">
 				      <% 
 				        String[] fieldCategories = ["jcrPath=/node/exo:category", "multiValues=true", "reference=true", "editable=false"];
@@ -43,7 +43,7 @@
         <%
         if(!uicomponent.isEditing()){%>
             <div class="control-group">                      
-              <label class="control-label" for="mimetype"><%=_ctx.appRes("File.dialog.label.mimeType")%></label>
+              <label class="control-label" for="mimetype"><%=_ctx.appRes("File.dialog.label.mimeType")%>:</label>
               <div class="controls">
                 <%
                   String[] mimetype = ["jcrPath=/node/jcr:content/jcr:mimeType", "text/html", "options=text/html,text/plain,application/x-groovy+html", "onchange=true"] ;
@@ -53,7 +53,7 @@
             </div>
         <%}%>
 				<div class="control-group">
-							<label class="control-label" for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%></label>
+							<label class="control-label" for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%>:</label>
 					<div class="controls">
 			<%
 			  String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().toString();
@@ -63,7 +63,7 @@
 					</div>
 				</div>
         <div class="control-group">
-          <label class="control-label" for="content"><%=_ctx.appRes("File.dialog.label.content")%></label>
+          <label class="control-label" for="content"><%=_ctx.appRes("File.dialog.label.content")%>:</label>
           <div class="controls">
               <%
                 if(uicomponent.isEditing()) { 
@@ -126,7 +126,7 @@
           </div>
         </div>     
           <div class="control-group">
-            <label class="control-label" for="title"><%=_ctx.appRes("ElementSet.dialog.label.title")%></label>
+            <label class="control-label" for="title"><%=_ctx.appRes("ElementSet.dialog.label.title")%>:</label>
             <div class="controls">
               <%
                 String[] fieldTitle = ["jcrPath=/node/jcr:content/dc:title", "multiValues=true"] ;
@@ -135,7 +135,7 @@
             </div>
           </div>
           <div class="control-group">
-            <label class="control-label" for="description"><%=_ctx.appRes("ElementSet.dialog.label.description")%></label>
+            <label class="control-label" for="description"><%=_ctx.appRes("ElementSet.dialog.label.description")%>:</label>
             <div class="controls">
               <%
                 String[] fieldDescription = ["jcrPath=/node/jcr:content/dc:description", "multiValues=true"] ;
@@ -144,7 +144,7 @@
             </div>
           </div>
           <div class="control-group">
-            <label class="control-label" for="creator"><%=_ctx.appRes("ElementSet.dialog.label.creator")%></label>
+            <label class="control-label" for="creator"><%=_ctx.appRes("ElementSet.dialog.label.creator")%>:</label>
             <div class="controls">
               <%
                 String[] fieldCreator = ["jcrPath=/node/jcr:content/dc:creator", "multiValues=true"] ;
@@ -153,7 +153,7 @@
             </div>
           </div>
           <div class="control-group">
-           <label class="control-label" for="source"><%=_ctx.appRes("ElementSet.dialog.label.source")%></label>
+           <label class="control-label" for="source"><%=_ctx.appRes("ElementSet.dialog.label.source")%>:</label>
             <div class="controls">
               <%
                 String[] fieldSource = ["jcrPath=/node/jcr:content/dc:source", "multiValues=true"] ;

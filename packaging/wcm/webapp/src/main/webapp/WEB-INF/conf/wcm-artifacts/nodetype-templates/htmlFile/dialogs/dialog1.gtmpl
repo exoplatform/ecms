@@ -23,7 +23,7 @@
   <div class="HorizontalLayout">
     <table class="UIFormGrid">
         <tr>
-          <td class="FieldLabel"><label for="name"><%=_ctx.appRes("HtmlFile.dialog.label.name")%></label></td>
+          <td class="FieldLabel"><label for="name"><%=_ctx.appRes("HtmlFile.dialog.label.name")%>:</label></td>
           <td class="FieldComponent">
             <%
               String[] fieldName = ["jcrPath=/node", "nodetype=nt:file", "mixintype=mix:votable,mix:commentable,exo:htmlFile,mix:i18n", "editable=if-null", "validate=name, empty"] ;
@@ -32,7 +32,7 @@
           </td>
         </tr>   
 		<tr>
-        	<td class="FieldLabel"><label for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%></label></td>
+        	<td class="FieldLabel"><label for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%>:</label></td>
 			<td class="FieldComponent">
 			<%
 			  String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().toString();
@@ -42,7 +42,7 @@
 			</td>
 		</tr>    
         <tr>
-          <td class="FieldLabel"><label for="contentHtml"><%=_ctx.appRes("HtmlFile.dialog.label.content")%></label></td>
+          <td class="FieldLabel"><label for="contentHtml"><%=_ctx.appRes("HtmlFile.dialog.label.content")%>:</label></td>
           <td class="FieldComponent">
             <%
               if(uicomponent.isEditing()) { 

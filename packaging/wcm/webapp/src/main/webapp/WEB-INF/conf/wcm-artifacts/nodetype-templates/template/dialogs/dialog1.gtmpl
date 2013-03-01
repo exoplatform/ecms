@@ -12,7 +12,7 @@
         </td>
 			</tr>
 			<tr>
-        		<td class="FieldLabel"><label for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%></label></td>
+        		<td class="FieldLabel"><label for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%>:</label></td>
 				<td class="FieldComponent">
 				<%
 				  String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().toString();
@@ -22,7 +22,7 @@
 				</td>
 			</tr>
 			<tr>
-			  <td class="FieldLabel"><label for="templateFile">Template</label></td>
+			  <td class="FieldLabel"><label for="templateFile">Template:</label></td>
 			  <td class="FieldComponent">
 			  <style>
 			  	textarea#templateFile {

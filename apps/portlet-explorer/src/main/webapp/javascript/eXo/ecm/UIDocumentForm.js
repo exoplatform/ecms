@@ -74,11 +74,11 @@
 			eXo.webui.UIDocForm.horizontalForm = gj(uiDocumentForm).find("div.form-horizontal:first")[0];
 		}
 
-		if (element.className == "MaximizeScreen20x20Icon") {
-			element.className = "MinimizeScreen20x20Icon";
+		if (element.className == "uiIconEcmsExpand uiIconEcmsLightGrey") {
+			element.className = "uiIconEcmsCollapse uiIconEcmsLightGrey";
 			eXo.ecm.ECMUtils.editFullScreen = true;
 		} else {
-			element.className = "MaximizeScreen20x20Icon";
+			element.className = "uiIconEcmsExpand uiIconEcmsLightGrey";
 			eXo.ecm.ECMUtils.editFullScreen = false;
 		}
 		
@@ -104,8 +104,8 @@
 			uiDocumentWorkspace.style.background = '#FFFFFF';
 
 			eXo.webui.UIDocForm.horizontalForm.style.height = 'auto';
-			eXo.webui.UIDocForm.horizontalForm.addClass("form-horizontal");
-			eXo.webui.UIDocForm.horizontalForm.addClass("uiContentBox");
+			gj(eXo.webui.UIDocForm.horizontalForm).addClass("form-horizontal");
+			gj(eXo.webui.UIDocForm.horizontalForm).addClass("uiContentBox");
 			window.scrollTo(0, 0)
 		} else {
 			if (changeTypeLink) {

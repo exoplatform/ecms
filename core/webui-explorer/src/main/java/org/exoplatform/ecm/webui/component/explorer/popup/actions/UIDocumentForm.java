@@ -259,7 +259,9 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     String contextID = "UIDocumentForm_" + System.currentTimeMillis();
     String actionLabel;
     String link;
+    int count = 0;
     for (String action : listAction) {
+      String btn = (count++ == 0) ? "btn" : "btn btn-primary";
       try {
         actionLabel = res.getString(getName() + ".action." + action);
       } catch (MissingResourceException e) {
@@ -269,16 +271,16 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       writer.append("<button type=\"button\" ")
             .append("onclick=\"")
             .append(link)
-            .append("\" class=\"btn\">")
+            .append("\" class=\"" + btn  +"\">")
             .append(actionLabel)
             .append("</button>");
     }
     String fullscreen = res.getString(getName() + ".tooltip.FullScreen");
-    writer.append("<a href=\"javascript:void(0);\"")
+    writer.append("<i")
           .append(fullscreen)
           .append("\" id=\"")
           .append(contextID)
-          .append("\" class=\"MaximizeScreen20x20Icon\" onclick='eXo.webui.UIDocForm.FullScreenToggle(this); return false;'></a>");
+          .append("\" class=\"uiIconEcmsExpand uiIconEcmsLightGrey\" onclick='eXo.webui.UIDocForm.FullScreenToggle(this); return false;'></i>");
 					
     writer.append("</div>");
     writer.append("<span class='uiDialogTitle'>" + getTemplateLabel() + " " + getChangeTypeActionLink () + "</span>");

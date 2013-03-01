@@ -3,7 +3,7 @@
   <div class="HorizontalLayout">
   	<table class="UIFormGrid">
   		<tr>
-	      <td class="FieldLabel"><label for="siteTitle"><%=_ctx.appRes("SiteMetadata.dialog.label.title")%></label></td>
+	      <td class="FieldLabel"><label for="siteTitle"><%=_ctx.appRes("SiteMetadata.dialog.label.title")%>:</label></td>
 	      <td class="FieldComponent">
 		      <%                                                            
 		        String[] fieldTitle = ["jcrPath=/node/metadata:siteMetadata/siteTitle"] ;
@@ -12,7 +12,7 @@
 		    </td>
 		  </tr>  		
 		  <tr>
-	      <td class="FieldLabel"><label for="description"><%=_ctx.appRes("SiteMetadata.dialog.label.description")%></label></td>
+	      <td class="FieldLabel"><label for="description"><%=_ctx.appRes("SiteMetadata.dialog.label.description")%>:</label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldDescription = ["jcrPath=/node/metadata:siteMetadata/description"] ;
@@ -21,7 +21,7 @@
 		    </td>
 		  </tr>		  
 		  <tr>
-	      <td class="FieldLabel"><label for="keywords"><%=_ctx.appRes("SiteMetadata.dialog.label.keywords")%></label></td>
+	      <td class="FieldLabel"><label for="keywords"><%=_ctx.appRes("SiteMetadata.dialog.label.keywords")%>:</label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldKeywords = ["jcrPath=/node/metadata:siteMetadata/keywords"] ;
@@ -30,7 +30,7 @@
 		    </td>
 		  </tr>		  
 		  <tr>
-	      <td class="FieldLabel"><label for="robots"><%=_ctx.appRes("SiteMetadata.dialog.label.robots")%></label></td>
+	      <td class="FieldLabel"><label for="robots"><%=_ctx.appRes("SiteMetadata.dialog.label.robots")%>:</label></td>
 	      <td class="FieldComponent">
 		      <%
 		        String[] fieldRobots = ["jcrPath=/node/metadata:siteMetadata/robots", "defaultValues=index,follow"] ;

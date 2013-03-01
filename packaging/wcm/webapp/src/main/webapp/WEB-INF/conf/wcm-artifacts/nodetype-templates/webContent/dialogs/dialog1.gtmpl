@@ -107,7 +107,7 @@
 						<div class="UITabContent" style="<%=getDisplayTab("mainWebcontent")%>">
 							<table class="UIFormGrid">
                 <tr>
-                  <td class="FieldLabel"><label for="title"><%=_ctx.appRes("WebContent.dialog.label.title")%></label></td>
+                  <td class="FieldLabel"><label for="title"><%=_ctx.appRes("WebContent.dialog.label.title")%>:</label></td>
                     <td class="FieldComponent">
                     <%
                           String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=empty", "editable=if-null"];
@@ -116,7 +116,7 @@
                   </td>
                 </tr>
         	    	<tr>
-        					<td class="FieldLabel"><label for="name"><%=_ctx.appRes("WebContent.dialog.label.name")%></label></td>
+        					<td class="FieldLabel"><label for="name"><%=_ctx.appRes("WebContent.dialog.label.name")%>:</label></td>
           					<td class="FieldComponent">
             					<%
 			              	 		String[] webContentFieldName = ["jcrPath=/node", "nodetype=exo:webContent", "mixintype=mix:votable,mix:commentable,mix:i18n", "editable=if-null","validate=name,empty"] ;
@@ -143,7 +143,7 @@
 	          			 	</td>
 	        			</tr>
 						<tr>
-        					<td class="FieldLabel"><label for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%></label></td>
+        					<td class="FieldLabel"><label for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%>:</label></td>
 							<td class="FieldComponent">
 							<%
 							  String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().toString();
@@ -233,7 +233,7 @@
 						<div class="UITabContent" style="<%=getDisplayTab("contentCSSWebcontent")%>">
 							<table class="UIFormGrid">
 								<tr>
-									<td class="FieldLabel"><label for="$cssFormId"><%=_ctx.appRes("WebContent.dialog.label.ContentCSS")%></label></td>
+									<td class="FieldLabel"><label for="$cssFormId"><%=_ctx.appRes("WebContent.dialog.label.ContentCSS")%>:</label></td>
 									<td class="FieldComponent" style="width:520px">
 										<%
 											String[] cssHiddenField1 = ["jcrPath=/node/css/default.css", "nodetype=nt:file", "defaultValues=default.css"] ;
@@ -264,7 +264,7 @@
 							</table>
 							<table class="UIFormGrid">
 								<tr>
-									<td class="FieldLabel"><label for="$jsFormId"><%=_ctx.appRes("WebContent.dialog.label.ContentJS")%></label></td>
+									<td class="FieldLabel"><label for="$jsFormId"><%=_ctx.appRes("WebContent.dialog.label.ContentJS")%>:</label></td>
 									<td class="FieldComponent" style="width:520px">
 										<%
 											String[] jsHiddenField1 = ["jcrPath=/node/js/default.js", "nodetype=nt:file", "defaultValues=default.js"];

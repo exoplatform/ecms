@@ -30,7 +30,7 @@
   <div class="HorizontalLayout">
     <table class="UIFormGrid">
         <tr>
-          <td class="FieldLabel"><label for="name"><%=_ctx.appRes("JSFile.dialog.label.name")%></label></td>
+          <td class="FieldLabel"><label for="name"><%=_ctx.appRes("JSFile.dialog.label.name")%>:</label></td>
           <td class="FieldComponent">
             <%
               String[] fieldName = ["jcrPath=/node", "nodetype=nt:file", "mixintype=exo:jsFile,mix:i18n","editable=if-null", "validate=name, empty"];
@@ -40,7 +40,7 @@
         </tr>
         
         <tr>
-        	<td class="FieldLabel"><label for="activeJS"><%=_ctx.appRes("JSFile.dialog.label.active")%></label></td>
+        	<td class="FieldLabel"><label for="activeJS"><%=_ctx.appRes("JSFile.dialog.label.active")%>:</label></td>
         	<td class="FieldComponent">
         		<%
         			String[] fieldActive = ["jcrPath=/node/exo:active", "options=true,false", "onchange=false"] ;
@@ -50,7 +50,7 @@
         </tr>
         
            <tr>
-        	<td class="FieldLabel"><label for="JSpriority"><%=_ctx.appRes("JSFile.dialog.label.priority")%></label></td>
+        	<td class="FieldLabel"><label for="JSpriority"><%=_ctx.appRes("JSFile.dialog.label.priority")%>:</label></td>
         	<td class="FieldComponent">
         		<%
         			String[] fieldPriority = ["jcrPath=/node/exo:priority", "validate=org.exoplatform.webui.form.validator.NumberFormatValidator"] ;
@@ -59,7 +59,7 @@
         	</td>
         </tr>
         <tr>
-        	<td class="FieldLabel"><label for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%></label></td>
+        	<td class="FieldLabel"><label for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%>:</label></td>
 			<td class="FieldComponent">
 			<%
 			  String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().toString();
@@ -69,7 +69,7 @@
 			</td>
 		</tr>      
         <tr>
-          <td class="FieldLabel"><label for="contentHtml"><%=_ctx.appRes("JSFile.dialog.label.content")%></label></td>
+          <td class="FieldLabel"><label for="contentHtml"><%=_ctx.appRes("JSFile.dialog.label.content")%>:</label></td>
           <td class="FieldComponent">
             <%
               if(uicomponent.isEditing()) { 

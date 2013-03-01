@@ -323,7 +323,7 @@ public class UIDialogForm extends UIForm {
     if (node != null && !isShowingComponent && !isRemovePreference && !isRemoveActionField) {
       if (jcrPath.equals("/node")
           && (!formActionField.isEditable() || formActionField.isEditableIfNull())) {
-        ((UIFormStringInput) uiInput).setEditable(false);
+        ((UIFormStringInput) uiInput).setDisabled(true);
       }
     }
 

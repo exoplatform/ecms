@@ -19,7 +19,7 @@
   <div class="HorizontalLayout">
     <table class="UIFormGrid">
         <tr>
-          <td class="FieldLabel"><label for="name"><%=_ctx.appRes("WebLink.dialog.label.name")%></label></td>
+          <td class="FieldLabel"><label for="name"><%=_ctx.appRes("WebLink.dialog.label.name")%>:</label></td>
           <td class="FieldComponent">
             <%
               String[] fieldName = ["jcrPath=/node", "nodetype=exo:link", "mixintype=mix:i18n", "editable=if-null", "validate=name,empty"] ;
@@ -29,7 +29,7 @@
         </tr>
         
         <tr>
-        	<td class="FieldLabel"><label for="LinkURL"><%=_ctx.appRes("WebLink.dialog.label.url")%></label></td>
+        	<td class="FieldLabel"><label for="LinkURL"><%=_ctx.appRes("WebLink.dialog.label.url")%>:</label></td>
         	<td class="FieldComponent">
             <%
               String[] fieldUrl = ["jcrPath=/node/exo:linkURL", "validate=empty"] ;
@@ -38,7 +38,7 @@
         	</td>
         </tr>
 		<tr>
-        	<td class="FieldLabel"><label for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%></label></td>
+        	<td class="FieldLabel"><label for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%>:</label></td>
 			<td class="FieldComponent">
 			<%
 			  String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().toString();
@@ -49,7 +49,7 @@
 		</tr>
         
         <tr>
-          <td class="FieldLabel"><label for="LinkDescription"><%=_ctx.appRes("WebLink.dialog.label.description")%></label></td>
+          <td class="FieldLabel"><label for="LinkDescription"><%=_ctx.appRes("WebLink.dialog.label.description")%>:</label></td>
           <td class="FieldComponent">
             <%
               if(uicomponent.isEditing()) { 
