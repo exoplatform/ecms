@@ -175,8 +175,8 @@
 		    var optsCon = gj(this).find("div.optionsContainer:first")[0];
 		    var opts = gj(optsCon).children("div");
 		    for (var j = 0; j < opts.length; j++) {
-		      if (j < this.rate) opts[j].className = "uiIconRatedVote";
-		      else opts[j].className = "uiIconNormalVote";
+		      if (j < this.rate && (opts[j] == "uiIconNormalVote" || opts[j].className == "uiIconOverVote")) opts[j].className = "uiIconRatedVote";
+		      if (j >= this.rate && (opts[j] == "uiIconRatedVote" || opts[j].className == "uiIconOverVote")) opts[j].className = "uiIconNormalVote";
 		    }
 		  }
 		  optsContainer.onmouseover = function (event) {
@@ -191,12 +191,12 @@
 		  var i = opts.length;
 		  for (--i; i >= 0; i--) {
 		    if (opts[i] == this) break;
-		    if (i < voteRate) opts[i].className = "uiIconRatedVote";
-		    else opts[i].className = "uiIconNormalVote";
+		    if (i < voteRate && (opts[i].className=="uiIconNormalVote" || opts[i].className == "uiIconOverVote")) opts[i].className = "uiIconRatedVote";
+		    else if (i >= voteRate && (opts[i].className == "uiIconRatedVote" || opts[i].className == "uiIconOverVote")) opts[i].className = "uiIconNormalVote";
 		  }
 		  if (opts[i].className == "uiIconOverVote") return;
 		  for (; i >= 0; i--) {
-		    opts[i].className = "uiIconOverVote";
+		    if (opts[i].className == "uiIconNormalVote" || opts[i].className == "uiIconRatedVote") opts[i].className = "uiIconOverVote";
 		  }
 		};
 
