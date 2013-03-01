@@ -16,6 +16,7 @@
  */
 package org.exoplatform.ecm.webui.component.admin.folksonomy;
 
+import org.apache.poi.ss.formula.functions.T;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.ext.manager.UIAbstractManager;
 
@@ -41,5 +42,12 @@ public class UIFolksonomyManager extends UIAbstractManager {
   public void update() throws Exception {
     getChild(UITagManager.class).update();
   }
-
+  public void selectUITagPermissionManager() {
+    getChild(UITagManager.class).setRendered(false);
+    getChild(UITagPermissionManager.class).setRendered(true);
+  }
+  public void selectUITagManager() {
+    getChild(UITagManager.class).setRendered(true);
+    getChild(UITagPermissionManager.class).setRendered(false);
+  }
 }

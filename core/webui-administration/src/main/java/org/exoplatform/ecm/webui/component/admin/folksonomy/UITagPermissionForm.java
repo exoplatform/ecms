@@ -84,15 +84,22 @@ public class UITagPermissionForm extends UIPermissionFormBase implements UISelec
         uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.userOrGroup-required", null,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiParent);
+        UIFolksonomyManager uiContainer = uiForm.getAncestorOfType(UIFolksonomyManager.class);
+        if (uiContainer!=null) {
+          uiContainer.selectUITagPermissionManager();
+        }
         return;
       }
       if (newFolksonomyService.getTagPermissionList().contains(userOrGroup)) {
         uiApp.addMessage(new ApplicationMessage("UITagPermissionForm.msg.userOrGroup-alreadyExists", null,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiParent);
+        UIFolksonomyManager uiContainer = uiForm.getAncestorOfType(UIFolksonomyManager.class);
+        if (uiContainer!=null) {
+          uiContainer.selectUITagPermissionManager();
+        }
         return;
       }
-
       newFolksonomyService.addTagPermission(userOrGroup);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiParent);
       uiForm.getChild(UIPermissionInputSet.class).getChild(UIFormStringInput.class).setValue("");
