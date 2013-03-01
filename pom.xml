@@ -5,7 +5,7 @@
     <artifactId>maven-parent-pom</artifactId>
     <groupId>org.exoplatform</groupId>
     <version>9-beta-1</version>
-    <relativePath></relativePath>
+    <relativePath />
   </parent>
   <groupId>org.exoplatform.ecms</groupId>
   <artifactId>ecms</artifactId>
@@ -38,7 +38,7 @@
     <!-- **************************************** -->
     <!-- Project Dependencies                     -->
     <!-- **************************************** -->
-    <org.exoplatform.depmgt.version>3-SNAPSHOT</org.exoplatform.depmgt.version>
+    <org.exoplatform.depmgt.version>3</org.exoplatform.depmgt.version>
     <org.exoplatform.kernel.version>2.4.2-GA</org.exoplatform.kernel.version>
     <org.exoplatform.core.version>2.5.2-GA</org.exoplatform.core.version>
     <org.exoplatform.ws.version>2.3.2-GA</org.exoplatform.ws.version>
