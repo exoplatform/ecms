@@ -68,12 +68,12 @@
 	    def isPreferenceNode = uicomponent.isPreferenceNode(node) ;
 	    def preferenceWS = node.getSession().getWorkspace().getName() ;
 	    String mode = "ExpandTree";
-	    String iconType = "Expand";
+	    String iconType = "expand";
 	    String actionLink  ;
 	    String expandLink ;
 	    if(treeNode.isExpanded()) { 
 	      mode = "Collapse" ;
-	      iconType = "Collapse";
+	      iconType = "collapse";
 	    }
 	    if(isPreferenceNode) {
 	      actionLink = uicomponent.event(mode, treeNode.getPath(), new Parameter("workspaceName", preferenceWS)) ;
@@ -147,7 +147,7 @@
 	    }
 	    String lastNodeClass = "" ;
 	    if (counter >= childrenSize && !isPaginated) {
-	    	lastNodeClass = "LastNode " ;
+	    	lastNodeClass = "lastNode " ;
 	    }
 	    def ctMenu = "" ;
 	    def isLocked = false;
@@ -169,7 +169,7 @@
 	    def hiddenStyle = "";
 	    if (node.isNodeType("exo:hiddenable")) hiddenStyle = "color: #A0A0A0;";
 	    if(!uicomponent.isSystemWorkspace()) ctMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(node.getPath()), uicomponent.getActionsList(node)) ;
-	    println "<div  class=\"${lastNodeClass}Node\" >" ;
+	    println "<div  class=\"${lastNodeClass}node\" >" ;
 	    println "  <div class=\"${iconType}Icon\" id=\"" + uicomponent.encodeBase64(treeNode.getPath()) + "\" onclick=\"event.cancelBubble=true; if(eXo.ecm.ECMUtils.collapseExpand(this)) return; " + actionLink + "\">" ;
 	    if (node.isLocked()) {
         println "<div class=\"IconLocked\"></div>";
@@ -179,10 +179,10 @@
 	    println "    </div>" ; 
 	    println "  </div>" ; 
 	    if(treeNode.getChildrenSize() > 0) {
-	      println "<div class=\"NodeGroup\">" ;
+	      println "<div class=\"nodeGroup\">" ;
 	      writeNodes(treeNode) ;
 	      if(uicomponent.isPaginated(treeNode)) {
-			      println "<div class=\"Node PageIterator\">"	    	
+			      println "<div class=\"node PageIterator\">"	    	
 		    		_ctx.renderUIComponent(uicomponent.getUIPageIterator(treeNode.getPath())); 				
 		    		println "</div>" ;
 		    }		    	
@@ -213,13 +213,13 @@
   <div class="uiContentBox">
 	  <div class="uiTreeExplorer" id="UITreeExplorer">
 		  <div style="white-space: nowrap; -moz-user-select: none;">
-		    <div class="NodeGroup">
+		    <div class="nodeGroup">
 		      <%
 		        //re-initialize action
 		       writeNodes(treeNodeRoot);
     	     uicomponent.getWorkingArea().initialize();
 		       if(uicomponent.isPaginated(treeNodeRoot)) {%>
-		       			<div class="Node PageIterator">
+		       			<div class="node PageIterator">
 		       				<% _ctx.renderUIComponent(uicomponent.getUIPageIterator(treeNodeRoot.getPath())); %>
 		       			</div>       	
 						<%}

@@ -285,7 +285,7 @@
 
 		ECMUtils.prototype.collapseExpand = function (element) {
 			var node = element.parentNode;
-			var subGroup = gj(node).children("div.NodeGroup:first")[0];
+			var subGroup = gj(node).children("div.nodeGroup:first")[0];
 			if (!subGroup) return false;
 			if (subGroup.style.display == "none") {
 			  if (element.className.match("ExpandIcon")) element.className = element.className.replace("ExpandIcon", "CollapseIcon");

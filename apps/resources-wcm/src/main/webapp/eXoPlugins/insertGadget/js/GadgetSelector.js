@@ -76,7 +76,7 @@ GadgetSelector.loadGadgets = function() {
 	var treeHTML = '';
 	for(var i = 0; i < nodeList.length; i++) {
 		var nameFolder = nodeList[i].getAttribute("name");
-		treeHTML 	  +=	'<div class="NodeGroup">';
+		treeHTML 	  +=	'<div class="nodeGroup">';
 		treeHTML 		+= 		'<div class="Node">';
 		treeHTML		+=			'<div class="Expand">';
 		treeHTML 		+= 				'<div name="/'+GadgetSelector.currentFolder+'/" class="IconNode nt_unstructured16x16Icon 16x16Icon">'	;
