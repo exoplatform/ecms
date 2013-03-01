@@ -134,7 +134,7 @@
   		  if (uicomponent.hasBackButton()) {%>
   		  <a class ="URLBackToButton" href="<%=uicomponent.event("BackTo")%>"></a>
   		  <%}%>  	      
-  	    <a class="setupPreferencesButton pull-right" href="<%=uicomponent.event("Preferences")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIViewBar.label.setUpBrowser")%>"><i class="uiIconSetting uiIconLightGrey"></i></a>
+  	    <a class="setupPreferencesButton actionIcon pull-right" href="<%=uicomponent.event("Preferences")%>" rel="tooltip" data-placement="left" title="<%=_ctx.appRes("UIViewBar.label.setUpBrowser")%>"><i class="uiIconSetting uiIconLightGray"></i></a>
 
 			 <%if (!uicomponent.isDirectlyDrive()) {%>
   	     <a class="<%=getCSSClassOfDrivesButton()%> actionIcon pull-right" href="<%=uicomponent.event("ShowDrives")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDrivesArea.DrivesArea.ShowDrives")%>"><i class="uiIconEcmsGeneralDrive"></i> <%=uicomponent.getDriveLabel();%> <i class="uiIconArrowDown"></i></a>
