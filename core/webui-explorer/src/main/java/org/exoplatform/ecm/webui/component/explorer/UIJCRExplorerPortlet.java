@@ -326,7 +326,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
   private void showDocument(WebuiRequestContext context, HashMap<String, String> map) throws Exception {
     String repositoryName = String.valueOf(map.get("repository"));
     String driveName = String.valueOf(map.get("drive"));
-    String path = String.valueOf(map.get("path"));
+    String path = Text.unescapeIllegalJcrChars(String.valueOf(map.get("path")));
     if (path.indexOf("&") > 0) {
       path = path.substring(0, path.indexOf("&"));
     }
