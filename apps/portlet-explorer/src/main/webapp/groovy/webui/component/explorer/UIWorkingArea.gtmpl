@@ -82,7 +82,7 @@
     %>
       <div class="resizeBar" onmousedown="eXo.ecm.ECMUtils.resizeSideBar(event)">
 				<div class="resizeBarContent">
-					<div class="resizeButton" onmousedown="eXo.ecm.ECMUtils.showHideSideBar(event);"><i class="uiIconArrowLeft"></i></div>
+					<a class="resizeButton" onmousedown="eXo.ecm.ECMUtils.showHideSideBar(event);"><i class="uiIconArrowLeft"></i></a>
 				</div>
       </div>
     <%
