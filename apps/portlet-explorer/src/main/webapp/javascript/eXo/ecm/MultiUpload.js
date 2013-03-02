@@ -849,7 +849,7 @@
 				  	  if (filetype && iDiv && (filetype.indexOf("image") == -1)) {
 						var className = iDiv.attr('class');
 						var typeFormatted = filetype.replace(/\./g, "").replace("/", "").replace("\\","");
-						if (className.indexOf(typeFormatted) == -1) {
+						if (className && (className.indexOf(typeFormatted) == -1)) {
 							iDiv.attr("class", className + " uiIcon16x16" + typeFormatted);
 						}
 				    	  }
