@@ -11,7 +11,7 @@
           <%
            if(uiform.getChildById(uiform.FIELD_CUSTOM_TYPE_CHECK_BOX).isRendered()) {
           %>
-            <span title="<%=_ctx.appRes("UIFolderForm.help.customTypeCheckBoxHelp") %>">
+            <span rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIFolderForm.help.customTypeCheckBoxHelp") %>">
               <% uiform.renderChild(uiform.FIELD_CUSTOM_TYPE_CHECK_BOX) %>
               <%=uiform.getLabel(uiform.FIELD_CUSTOM_TYPE_CHECK_BOX) %>
             </span>
