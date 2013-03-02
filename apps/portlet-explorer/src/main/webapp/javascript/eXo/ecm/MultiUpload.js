@@ -847,10 +847,10 @@
 				  	  var icon = gj("#icon" + progressID, eXo.ecm.MultiUpload.document)[0];
 							var iDiv = gj("i", icon);
 				  	  if (filetype && iDiv && (filetype.indexOf("image") == -1)) {
-						var className = iDiv.className;
+						var className = iDiv.attr('class');
 						var typeFormatted = filetype.replace(/\./g, "").replace("/", "").replace("\\","");
 						if (className.indexOf(typeFormatted) == -1) {
-							iDiv.className = className + " uiIcon16x16" + typeFormatted;
+							iDiv.attr("class", className + " uiIcon16x16" + typeFormatted);
 						}
 				    	  }
 		  		  }
