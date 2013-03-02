@@ -237,7 +237,7 @@ public class UIDocumentNodeList extends UIContainer {
     } catch (Exception e) {}
     if ((pr1 == null) && (pr2 == null)) return true;
     if ((pr1 == null) || (pr2 == null)) return false;
-    return Math.abs(pr1.getTimeInMillis() - pr2.getTimeInMillis()) < 1000;
+    return Math.abs(pr1.getTimeInMillis() - pr2.getTimeInMillis()) < 3000;
   }
   
   public String getDatePropertyValue(Node node, String propertyName) throws Exception {
