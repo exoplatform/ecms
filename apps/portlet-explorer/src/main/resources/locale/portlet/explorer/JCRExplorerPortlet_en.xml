@@ -1799,7 +1799,7 @@
     <header>
       <path>Path</path>
       <command>Cm</command>
-      <action>Act</action>
+      <action>Action</action>
     </header>
     <label>
       <nocommand>There are no items in the clipboard.</nocommand>

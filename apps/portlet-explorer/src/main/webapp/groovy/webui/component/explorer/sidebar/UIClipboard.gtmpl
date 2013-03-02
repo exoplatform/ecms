@@ -34,7 +34,7 @@
 			  <tbody>
 			  <%if (uicomponent.getClipboardData().isEmpty()) { %>
 			    <tr>
-			      <td colspan="3">
+			      <td colspan="2">
 							<%=_ctx.appRes(name+".label.nocommand")%>
 			      </td>
 			    </tr>  
@@ -46,11 +46,11 @@
 				      if (path.length() > 20 ) path = "..." + path.substring(path.length() - 20, path.length());
 				%>
 				    <tr>
-				      <td class="text" rel="tooltip" data-placement="bottom" title="<%=fullPath%>"><%=path%></td>
+				      <td class="text"><div rel="tooltip" data-placement="bottom" title="<%=fullPath%>"><%=path%></div></td>
 				      <td class="actionContainer center">
 				          <%for(action in beanActions) { %>
-		                <a class="actionIcon"><i onclick="<%=uicomponent.event(action, index.toString())%>" rel="tooltip" data-placement="bottom" class="uiIconEcms${action} uiIconEcmsLightGrey"></i></a>
-				          <%}%>        
+		                <a class="actionIcon" onclick="<%=uicomponent.event(action, index.toString())%>" rel="tooltip" data-placement="bottom" title="${action}"><i class="uiIconEcms${action} uiIconEcmsLightGrey"></i></a>
+				          <%}%> 
 							</td>
 				    </tr>
 				    <%index++ ;
