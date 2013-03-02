@@ -21,19 +21,16 @@
     }
     msgValue = ContentReader.getXSSCompatibilityContent(msgValue);    
   %>
-  <div class="HorizontalLayout">
-    <div class="ClearFix">
-    	<div class="RecycleBinFull"><span></span></div>
-    	<div class="text" rel="tooltip" data-placement="bottom" title="<%=msgValue%>"><%=msgValue%></div>
-    </div>
- <div class="UIAction">
+	<ul class="singleMessage popupMessage resizable">
+		<li><span class="confirmationIcon"> <%=msgValue%></span></li>
+	</ul>
+	<div class="uiAction uiActionBorder">
 		<%
-		  int tabIndex = 1;
-		  for(action in uicomponent.getActions()) {
+			int tabIndex = 1;
+			for(action in uicomponent.getActions()) {
 		%>
-			<a onclick="<%=uicomponent.event(action)%>" tabindex=<%=tabIndex++%> class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=_ctx.appRes("UIConfirmMessage.label." + action)%></a>
+			<button type="button" onclick="<%=uicomponent.event(action)%>" tabindex=<%=tabIndex++%> class="btn" href="javascript:void(0);"><%=_ctx.appRes("UIConfirmMessage.label." + action)%></button>
 		<%}%>
-	    </div>
-	 <%// end render action%>
-  </div>
+	</div>
+	<%// end render action%>
 </div>
