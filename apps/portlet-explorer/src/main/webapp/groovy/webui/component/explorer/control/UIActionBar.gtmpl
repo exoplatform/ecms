@@ -106,7 +106,7 @@
 								 String idUpload = (action instanceof UploadActionComponent) ? "id='UploadButtonDiv'" : "";
 							 %>
 								 <li <%=idUpload%> onclick="<%= actionOnClick %>">
-									 <a class="actionIcon" rel="tooltip" data-placement="bottom" title="$title"><i class="uiIconEcms${button}"></i> $title</a>
+									 <a class="actionIcon"><i class="uiIconEcms${button}"></i> $title</a>
 								 </li>
 								 <% if (action instanceof UploadActionComponent) {
 	  						   showUploadInput = true;
@@ -115,7 +115,7 @@
 								 if (action instanceof UploadActionComponent) {
 		             %>		              	             
 		               <li id="UploadButtonDivIE" onclick="uploadFileForIE();">
-								     <a class="actionIcon" rel="tooltip" data-placement="bottom" title="$title"><i class="uiIconEcms${button}"></i> $title</a>
+								     <a class="actionIcon"><i class="uiIconEcms${button}"></i> $title</a>
 							     </li>		               
 		             <%
 		             } 
