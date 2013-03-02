@@ -189,7 +189,7 @@
             <div class="Breadcrumb FL"><span></span></div>
             <!--Breadcrumb links-->
             <div class="BreadcrumbLink ClearFix">
-              <a class="NodeButton"
+              <a class="NodeButton DriveNameNodeButton"
                  onclick="<%=uicomponent.event("ChangeNode", drivePath.toString(), new Parameter("workspaceName", uiExplorer.getDriveData().getWorkspace()))%>" class="NodeLabel"
                  title="<%=uiExplorer.findFirstComponentOfType(UITreeExplorer.class).getLabel()%>">
                 <strong><%=uiExplorer.findFirstComponentOfType(UITreeExplorer.class).getLabel()%></strong>

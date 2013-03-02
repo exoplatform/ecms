@@ -450,6 +450,10 @@
 	text-overflow:ellipsis
 }
 
+.UIJCRExplorerPortlet .UIFileView .TitleTable .DriveNameNodeButton {
+	 max-width: none;
+}
+
 .UIJCRExplorerPortlet .UIFileView .MoreButton {
 	color:#058ee6;
 	font-weight:bold;
