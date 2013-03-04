@@ -16,7 +16,7 @@
  */
 package org.exoplatform.ecm.webui.component.admin.queries;
 
-import org.exoplatform.ecm.webui.selector.UIPermissionSelector;
+import org.exoplatform.ecm.webui.selector.UIGroupMemberSelector;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
@@ -61,12 +61,12 @@ public class UIQueriesManager extends UIAbstractManager {
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "PermissionPopup");
     uiPopup.setShowMask(true);
     uiPopup.setWindowSize(560, 250);
-    UIPermissionSelector uiECMPermission =
-      createUIComponent(UIPermissionSelector.class, null, "QueriesPermissionBrowse") ;
+    UIGroupMemberSelector uiECMPermission =
+      createUIComponent(UIGroupMemberSelector.class, null, "QueriesPermissionBrowse") ;
     uiECMPermission.setSelectedMembership(true);
     if(membership != null && membership.indexOf(":/") > -1) {
       String[] arrMember = membership.split(":/") ;
-      uiECMPermission.setCurrentPermission("/" + arrMember[1]) ;
+      uiECMPermission.changeGroup("/" + arrMember[1]) ;
     }
     uiPopup.setUIComponent(uiECMPermission);
     UIQueriesForm uiForm = findFirstComponentOfType(UIQueriesForm.class) ;

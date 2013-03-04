@@ -116,7 +116,6 @@ public class UIECMTemplateList extends UIPagingGrid {
       UITemplateContainer uiECMTempContainer = uiViewManager.getChildById(UIECMTemplateList.ST_ECMTemp) ;
       uiECMTempContainer.removeChildById(UIECMTemplateList.ST_ecmTempForm + "Edit") ;
       uiECMTempContainer.initPopup(UIECMTemplateList.ST_ecmTempForm, "Add") ;
-      uiViewManager.setRenderedChild(UIECMTemplateList.ST_ECMTemp) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiECMTempContainer) ;
     }
   }
@@ -156,12 +155,10 @@ public class UIECMTemplateList extends UIPagingGrid {
       UIECMTemplateList uiECMTemp = event.getSource() ;
       String tempPath = event.getRequestContext().getRequestParameter(OBJECTID) ;
       UITemplateContainer uiTempContainer = uiECMTemp.getParent() ;
-      UIViewManager uiViewManager = uiECMTemp.getAncestorOfType(UIViewManager.class) ;
       uiTempContainer.removeChildById(UIECMTemplateList.ST_ecmTempForm + "Add") ;
       uiTempContainer.initPopup(UIECMTemplateList.ST_ecmTempForm, "Edit") ;
       UITemplateForm uiTempForm = uiTempContainer.findComponentById(UIECMTemplateList.ST_ecmTempForm) ;
       uiTempForm.update(tempPath, null) ;
-      uiViewManager.setRenderedChild(UIECMTemplateList.ST_ECMTemp) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTempContainer) ;
     }
   }

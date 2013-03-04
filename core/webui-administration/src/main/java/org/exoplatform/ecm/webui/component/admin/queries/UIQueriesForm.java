@@ -42,10 +42,10 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
 
 /**
@@ -93,9 +93,9 @@ public class UIQueriesForm extends UIForm implements UISelectable {
     uiStatement.setValue(XPATH_QUERY) ;
     uiStatement.addValidator(MandatoryValidator.class) ;
     addUIFormInput(uiStatement) ;
-    addUIFormInput(new UIFormCheckBoxInput<Boolean>(CACHE_RESULT, CACHE_RESULT, null)) ;
+    addUIFormInput(new UICheckBoxInput(CACHE_RESULT, CACHE_RESULT, null)) ;
     UIFormInputSetWithAction uiInputAct = new UIFormInputSetWithAction("PermissionButton") ;
-    uiInputAct.addUIFormInput(new UIFormStringInput(PERMISSIONS, PERMISSIONS, null).setEditable(false)
+    uiInputAct.addUIFormInput(new UIFormStringInput(PERMISSIONS, PERMISSIONS, null).setDisabled(true)
                                                                                    .addValidator(MandatoryValidator.class));
     uiInputAct.setActionInfo(PERMISSIONS, new String[] {"AddPermission"}) ;
     addUIComponentInput(uiInputAct) ;
@@ -123,11 +123,11 @@ public class UIQueriesForm extends UIForm implements UISelectable {
     }
     Node query = queryService.getSharedQuery(queryName, WCMCoreUtils.getSystemSessionProvider());
     getUIStringInput(QUERY_NAME).setValue(queryName) ;
-    getUIStringInput(QUERY_NAME).setEditable(false) ;
+    getUIStringInput(QUERY_NAME).setDisabled(true);
     if(query.hasProperty("exo:cachedResult")) {
-      getUIFormCheckBoxInput(CACHE_RESULT).setChecked(query.getProperty("exo:cachedResult").getBoolean()) ;
+      getUICheckBoxInput(CACHE_RESULT).setChecked(query.getProperty("exo:cachedResult").getBoolean()) ;
     } else {
-      getUIFormCheckBoxInput(CACHE_RESULT).setChecked(false) ;
+      getUICheckBoxInput(CACHE_RESULT).setChecked(false) ;
     }
     if(query.hasProperty("jcr:statement")) {
       getUIFormTextAreaInput(STATEMENT).setValue(query.getProperty("jcr:statement").getString()) ;
@@ -185,7 +185,7 @@ public class UIQueriesForm extends UIForm implements UISelectable {
         return ;
       }
       String queryType = uiForm.getUIFormSelectBox(QUERY_TYPE).getValue() ;
-      boolean cacheResult = uiForm.getUIFormCheckBoxInput(CACHE_RESULT).isChecked() ;
+      boolean cacheResult = uiForm.getUICheckBoxInput(CACHE_RESULT).isChecked() ;
       try {
         if(permissions.indexOf(",") > -1) {
           queryService.addSharedQuery(queryName,

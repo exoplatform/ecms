@@ -110,8 +110,8 @@ public class UIViewPermissionList extends UIPagingGrid {
         uiApp.addMessage(new ApplicationMessage("UIViewPermissionList.msg.permission-cannot-empty",
                                               null,
                                               ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiPermissionList.getParent());
-        uiTabPane.setSelectedTab(uiPermissionList.getParent().getId());
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
+        uiTabPane.setSelectedTab(uiContainer.getId());
         return;
       }
       uiViewForm.setPermission(permissions); 

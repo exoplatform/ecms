@@ -123,6 +123,8 @@ public class UIViewPermissionForm extends UIPermissionFormBase implements UISele
         app.addMessage(new ApplicationMessage("UIViewPermissionForm.msg.permission-exist",
                                               args,
                                               ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
+        uiTabPane.setSelectedTab(uiContainer.getId());
         return;
       }
       StringBuilder strBuilder = new StringBuilder(strPermission); 
@@ -132,6 +134,7 @@ public class UIViewPermissionForm extends UIPermissionFormBase implements UISele
       strBuilder.append(permission);
       uiViewForm.setPermission(strBuilder.toString());
       uiList.refresh(uiList.getUIPageIterator().getCurrentPage());
+      uiForm.getUIStringInput(UIPermissionInputSet.FIELD_USERORGROUP).setValue(null);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
     }
   }
