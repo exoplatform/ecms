@@ -632,13 +632,14 @@
 		  if (!showSideBar) {
 		    container.style.display = 'none';
 		    var resizeButton = gj(Self.uiWorkingArea).find("div.resizeButton:first")[0];
-		    resizeButton.className = "resizeButton";
+		    if (resizeButton) resizeButton.className = "resizeButton";
 		  }
 		}
 
 		ECMUtils.prototype.moveItemToDropDown = function (movedItem) {
 			var lstExtendedComponent = document.getElementById('ListExtendedComponent');
 			var iconOfMovedItem = gj(movedItem).children('div')[0];
+			if (!iconOfMovedItem) return;
 			var classesOfIcon = iconOfMovedItem.className.split(' ');
 
 			var link = document.createElement('a');
@@ -857,7 +858,7 @@
 		      Self.uiResizeSideBar.style.height = Self.uiRightContainer.offsetHeight + "px";
 		      var resizeButton = gj(Self.uiResizeSideBar).find("div.resizeButton:first")[0];
 			var iArrow = gj(resizeButton).children("i:first")[0];
-			iArrow.className = "uiIconArrowRight";
+			if (iArrow) iArrow.className = "uiIconArrowRight";
 		      gj(Self.uiResizeSideBar).addClass("resizeNoneBorder");
 		    }
 			var resizeBarContent = gj(Self.uiResizeSideBar).find("div.resizeBarContent:first")[0];
@@ -948,12 +949,12 @@
 		        eXo.ecm.ECMUtils.heightOfItemArea = 286;
 		      }
 		    }
-		    iArrow.className = "uiIconArrowLeft";
+		    if (iArrow) iArrow.className = "uiIconArrowLeft";
 		  } else {
 		    leftContainer.style.display = 'none';
 		    gj(Self.uiResizeSideBar).addClass("resizeNoneBorder");
 		    showSideBar = false;
-			iArrow.className = "uiIconArrowRight";
+			if (iArrow) iArrow.className = "uiIconArrowRight";
 		  }
 		  Self.setCookie(eXo.env.portal.userName + "_CEShowSideBar", showSideBar, 20);
 		  Self.loadContainerWidth();

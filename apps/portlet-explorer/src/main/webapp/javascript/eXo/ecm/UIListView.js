@@ -1089,15 +1089,16 @@
       }
       gj(tableBox).css("width", totalWidth + "px");
       eXo.ecm.ECMUtils.updateListGridWidth();
-                var breadcrumb = gj('#FileViewBreadcrumb');
+      var breadcrumb = gj('#FileViewBreadcrumb');
       if (breadcrumb) {
-          breadcrumb.width(breadcrumb.parent().width()-2);
+          breadcrumb.width(breadcrumb.parent().width());
         }        
        var menubar = gj('div.MenuBar');
        if (menubar) {
-      menubar.width(gj("div#UIActionBar").width() - 120);
+      menubar.width(gj("div#uiActionBar").width() - 120);
       }
-      
+   	  var actionbar= gj('#UIActionBar');
+	  actionbar.width(actionbar.parent().width());
       //update width of UIListGrid
       eXo.ecm.ECMUtils.updateListGridWidth();
     }

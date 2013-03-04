@@ -731,9 +731,9 @@ UIFileView.prototype.initStickBreadcrumb = function() {
 	stickBreadcrumb;
 	gj(window).scroll(stickBreadcrumb);
 	var breadcrumb = gj('#FileViewBreadcrumb');
-	breadcrumb.width(breadcrumb.parent().width()-2);
+	breadcrumb.width(breadcrumb.parent().width());
 	var actionbar= gj('#UIActionBar');
-	actionbar.width(actionbar.parent().width()-2);
+	actionbar.width(actionbar.parent().width());
 };
 
 UIFileView.prototype.toggleCheckboxes = function(checkbox, evt) {
