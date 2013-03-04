@@ -184,7 +184,7 @@ public class UINodeTypeList extends UIPagingGridDecorator {
           tab.setRendered(true) ;
           tab.setActions(new String[] {"Close"}, null) ;
         } else {
-          tab.setRendered(false) ;
+          tab.setRendered(true) ;
           tab.setActions(null, null) ;
         }
       }

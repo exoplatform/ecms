@@ -36,6 +36,7 @@ import org.exoplatform.services.jcr.core.nodetype.NodeDefinitionValue;
 import org.exoplatform.services.jcr.core.nodetype.NodeTypeValue;
 import org.exoplatform.services.jcr.core.nodetype.PropertyDefinitionValue;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -63,13 +64,14 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
 @ComponentConfigs ({
   @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    template = "system:/groovy/webui/form/UIFormTabPane.gtmpl",
+    template = "app:/groovy/webui/component/admin/nodetype/UINodeTypeForm.gtmpl",
     events = {
       @EventConfig(listeners = UINodeTypeForm.CancelActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UINodeTypeForm.CloseActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UINodeTypeOptionList.CancelTabActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UINodeTypeForm.SaveDraftActionListener.class),
       @EventConfig(listeners = UINodeTypeForm.SaveActionListener.class),
+      @EventConfig(listeners = UINodeTypeForm.SelectTabActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIPropertyDefinitionForm.AddPropertyActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIChildNodeDefinitionForm.AddChildActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UINodeTypeForm.ViewChildNodeActionListener.class, phase = Phase.DECODE),
@@ -107,7 +109,7 @@ public class UINodeTypeForm extends UIFormTabPane {
   final static public String PROPERTY_DEFINITIONS = "propertiesDefinitions" ;
   final static public String CHILDNODE_DEFINITIONS = "childDefinitions" ;
   final static public String SUPER_TYPE = "superTypes" ;
-  final static public String SUPER_TYPE_TAB = "SuperTypeTab" ;
+  final static public String SUPER_TYPE_TAB = "superTypeTab" ;
   final static public String DEFAULT_PRIMARY_TYPE_TAB = "DefaultTypeTab" ;
   final static public String REQUIRED_PRIMARY_TYPE_TAB = "RequiredTypeTab" ;
   final static public String NODETYPE_DEFINITION = "nodeTypeDefinition" ;
@@ -168,6 +170,7 @@ public class UINodeTypeForm extends UIFormTabPane {
     UIFormInputSetWithAction childTab = new UIChildNodeDefinitionForm(CHILDNODE_DEFINITION) ;
     setActionInTab(childTab) ;
     addUIComponentInput(childTab) ;
+    setSelectedTab(NODETYPE_DEFINITION);
   }
 
   public void setActionInTab(UIFormInputSetWithAction tab) {
@@ -486,7 +489,7 @@ public class UINodeTypeForm extends UIFormTabPane {
       UIPopupWindow uiPopup = uiForm.getParent() ;
       uiPopup.setRendered(false) ;      
       uiPopup.setShow(false) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getAncestorOfType(UINodeTypeManager.class)) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm) ;
     }
   }
 
@@ -498,7 +501,7 @@ public class UINodeTypeForm extends UIFormTabPane {
       UIPopupWindow uiPopup = uiForm.getParent() ;
       uiPopup.setRendered(false) ;
       uiPopup.setShow(false) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getAncestorOfType(UINodeTypeManager.class)) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent()) ;
     }
   }
 
@@ -799,4 +802,27 @@ public class UINodeTypeForm extends UIFormTabPane {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent()) ;
     }
   }
+  
+  static public class SelectTabActionListener extends EventListener<UINodeTypeForm>
+  {
+  	public void execute(Event<UINodeTypeForm> event) throws Exception
+    {
+       WebuiRequestContext context = event.getRequestContext();
+       String renderTab = context.getRequestParameter(UIComponent.OBJECTID);
+       if (renderTab == null)
+          return;
+       event.getSource().setSelectedTab(renderTab);
+       WebuiRequestContext parentContext = (WebuiRequestContext)context.getParentAppRequestContext();
+       if (parentContext != null)
+       {
+          parentContext.setResponseComplete(true);
+       }
+       else
+       {
+          context.setResponseComplete(true);
+       }
+    }		
+  } 
+  
+  
 }

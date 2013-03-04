@@ -1007,6 +1007,14 @@
       <UIActionScriptContainer>Action</UIActionScriptContainer>
 			<UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
 			<UIInterceptorScriptContainer>Interceptors</UIInterceptorScriptContainer>
+			
+			<nodeTypeDefinition>Node Type</nodeTypeDefinition>
+      <propertyDefinition>Property</propertyDefinition>
+      <childNodeDefinition>Child Node</childNodeDefinition>
+      <SuperTypeTab>Super Types</SuperTypeTab>
+      <DefaultTypeTab>Default Primary</DefaultTypeTab>
+      <RequiredTypeTab>Required Primary</RequiredTypeTab>
+      <Contraints>Constraints</Contraints>
     </title>
   </UITabPane>
   <!--
