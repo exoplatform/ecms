@@ -136,11 +136,11 @@
 			if (nodeDriveName==null) nodeDriveName='';
 			var tmp = eXo.ecm.ECS.renderSubTree(nodeList[i]);
 			if (tmp == '') {
-				treeHTML += '<div class="Node">';
+				treeHTML += '<div class="node">';
 				treeHTML += 	'<div class="emptyIcon">';
 			} else {
-				treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this, event);">';
-				treeHTML += 	'<div class="ExpandIcon">';
+				treeHTML += '<div class="node" onclick="eXo.ecm.ECS.actionColExp(this, event);">';
+				treeHTML += 	'<div class="expandIcon">';
 			}
 			treeHTML += 		'<a title="'+decodeURIComponent(strName)+'"href="javascript:void(0);" class="nodeIcon" onclick="eXo.ecm.ECS.renderBreadcrumbs(this);eXo.ecm.ECS.listRootFolder(this);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
 			treeHTML +=				'<i class="uiIcon16x16FolderDefault" title="acme"></i>';
@@ -245,10 +245,10 @@
 				var hasFolderChild = nodeList[i].getAttribute("hasFolderChild");
 				if (nodeDriveName==null) nodeDriveName='';			
 				if (!label) label = strName;
-				treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this, event);">';
+				treeHTML += '<div class="node" onclick="eXo.ecm.ECS.actionColExp(this, event);">';
 				if (hasFolderChild == "true") {
-					treeHTML += 	'<div class="ExpandIcon">';
-					treeHTML +=			'<a title="'+decodeURIComponent(label)+'" href="javascript:void(0);" class="nodeIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'"  driverPath="'+driverPath+'" repository="'+repository+'" workspace="'+workspace+'">';
+					treeHTML += 	'<div class="expandIcon">';
+					treeHTML +=			'<a title="'+decodeURIComponent(label)+'" href="javascript:void(0);" class="nodeIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'"  driverPath="'+driverPath+ '" hasFolderChild="' + hasFolderChild + '" repository="'+repository+'" workspace="'+workspace+'">';
 				} else {
 					treeHTML += 	'<div class="emptyIcon">';
 					treeHTML +=			'<a title="'+decodeURIComponent(label)+'" href="javascript:void(0);" class="nodeIcon" name="'+decodeURIComponent(strName)+'" id="'+id+'"  driverPath="'+driverPath+'" repository="'+repository+'" workspace="'+workspace+'">';
@@ -321,13 +321,13 @@
 				var nodeDriveName = nodeList[i].getAttribute("nodeDriveName");
 				var hasFolderChild = nodeList[i].getAttribute("hasFolderChild");
 				if (nodeDriveName==null) nodeDriveName='';
-				treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this, event);">';
+				treeHTML += '<div class="node" onclick="eXo.ecm.ECS.actionColExp(this, event);">';
 				if (hasFolderChild == true) {
-					treeHTML += 	'<div class="ExpandIcon">';
-					treeHTML +=			'<a  title="'+ decodeURIComponent(strName) +'" href="javascript:void(0);" class="nodeIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
+					treeHTML += 	'<div class="expandIcon">';
+					treeHTML +=			'<a  title="'+ decodeURIComponent(strName) +'" href="javascript:void(0);" class="nodeIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+ '" hasFolderChild="' + hasFolderChild + '" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
 				} else {
 					treeHTML += 	'<div class="emptyIcon">';
-					treeHTML +=			'<a  title="'+ decodeURIComponent(strName) +'" href="javascript:void(0);" class="nodeIcon" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
+					treeHTML +=			'<a  title="'+ decodeURIComponent(strName) +'" href="javascript:void(0);" class="nodeIcon" name="'+decodeURIComponent(strName)+'" id="'+id +'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
 				}
 				treeHTML +=				'<i class="uiIcon16x16FolderDefault" title="acme"></i>';
 				treeHTML += 			'<span class="nodeName">';
@@ -351,13 +351,13 @@
 					var nodeDriveName = currentNodeList[i].getAttribute("nodeDriveName");
 					var hasFolderChild = currentNodeList[i].getAttribute("hasFolderChild");
 					if (nodeDriveName==null) nodeDriveName='';
-					treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this, event);">';
+					treeHTML += '<div class="node" onclick="eXo.ecm.ECS.actionColExp(this, event);">';
 					if (hasFolderChild == "true") {
-						treeHTML += 	'<div class="ExpandIcon">';
-						treeHTML +=			'<a  title="'+decodeURIComponent(strName)+'" href="javascript:void(0);" class="nodeIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
+						treeHTML += 	'<div class="expandIcon">';
+						treeHTML +=			'<a  title="'+decodeURIComponent(strName)+'" href="javascript:void(0);" class="nodeIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+ '" hasFolderChild="' + hasFolderChild + '" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
 					} else {
 						treeHTML += 	'<div class="emptyIcon">';
-						treeHTML +=			'<a  title="'+decodeURIComponent(strName)+'" href="javascript:void(0);" class="nodeIcon" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
+						treeHTML +=			'<a  title="'+decodeURIComponent(strName)+'" href="javascript:void(0);" class="nodeIcon" name="'+decodeURIComponent(strName)+'" id="'+id + '" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
 					}
 					treeHTML +=				'<i class="uiIcon16x16FolderDefault" title="acme"></i>';
 					treeHTML += 			'<span class="nodeName">';
@@ -367,21 +367,21 @@
 					treeHTML +=		'</div>';
 					treeHTML +=	'</div>';
 				}
-				var parentNode = gj(currentNode).parents(".Node:first")[0];
+				var parentNode = gj(currentNode).parents(".node:first")[0];
 				var nodeIcon = gj(currentNode).parents("div:first")[0];
 				var nextElementNode = gj(parentNode).nextAll("div:first")[0];
 				var tmpNode = document.createElement("div");
 				tmpNode.className = "ChildrenContainer" ;      
 				tmpNode.innerHTML = treeHTML;
-				if(nextElementNode && nextElementNode.className == "Node") {        
+				if(nextElementNode && nextElementNode.className == "node") {        
 					nextElementNode.parentNode.insertBefore(tmpNode, nextElementNode) ;
-					nodeIcon.className = 'CollapseIcon';				
+					nodeIcon.className = 'collapseIcon';				
 					tmpNode.style.display = "block";
 				} else if(nextElementNode && nextElementNode.className == "ChildrenContainer"){				
 					eXo.ecm.ECS.actionColExp(parentNode);
 				} else {				
 					var cldrContainer = gj(currentNode).parents(".ChildrenContainer:first")[0];
-					nodeIcon.className = 'CollapseIcon';
+					nodeIcon.className = 'collapseIcon';
 					cldrContainer.appendChild(tmpNode);
 				}
 			}
@@ -401,28 +401,27 @@
 		if(!objNode) return;
 		var nextElt = gj(objNode).nextAll("div:first")[0];
 		var iconElt = gj(objNode).children("div")[0];
-		var hasFolderChild = objNode.getAttribute("hasFolderChild");
+		var aElt = gj(iconElt).children("a")[0];
+		var hasFolderChild = aElt.getAttribute("hasFolderChild");
 		if(!nextElt || nextElt.className != "ChildrenContainer") {
 			var currentNode	= gj(objNode).find("a.nodeIcon:first")[0];
 			if (currentNode != null) {      
 				eXo.ecm.ECS.getDir(currentNode, false);
 			} else return;
 		}
-		if(iconElt.className != 'CollapseIcon') {
+		if(iconElt.className != 'collapseIcon') {
 			if (nextElt!=null && nextElt.className == "ChildrenContainer") {
 				nextElt.style.display = 'block';	
 			}
-			if (hasFolderChild == true || !event) {
-				iconElt.className = 'CollapseIcon';
-			}
+			if ((event && iconElt.className != 'emptyIcon') || !event)
+				iconElt.className = 'collapseIcon';
 		} else if(!eXo.ecm.ECS.switchView) {
 			eXo.ecm.ECS.switchView = false;
 			if (nextElt!=null && nextElt.className == "ChildrenContainer") {
 				nextElt.style.display = 'none';
 			}
-			if (hasFolderChild == true || !event) {
-				iconElt.className = 'ExpandIcon';
-			}
+			if ((event && iconElt.className != 'emptyIcon') || !event)
+				iconElt.className = 'expandIcon';
 		}
 	};
 	
@@ -470,7 +469,7 @@
 	EcmContentSelector.prototype.actionBreadcrumbs = function(nodeId) {
 		var ECS = eXo.ecm.ECS;
 		var element = document.getElementById(nodeId);
-		var node =  gj(element).parents(".Node:first")[0];
+		var node =  gj(element).parents(".node:first")[0];
 		eXo.ecm.ECS.actionColExp(node);
 		eXo.ecm.ECS.renderBreadcrumbs(element);
 		var currentFolder;
@@ -1179,7 +1178,7 @@
 				var id = tagADrives[i].getAttribute("id");
 				if (id && (id.indexOf('_' + initDrive + '_') >= 0)) {
 					var nodeContainer = gj(tagADrives[i]).parents(".ChildrenContainer:first")[0];
-					var nodeParent = gj(tagADrives[i]).parents(".Node:first")[0];
+					var nodeParent = gj(tagADrives[i]).parents(".node:first")[0];
 					if(!nodeContainer) return;
 					var nodeADriveType = nodeContainer.previousSibling;
 					if(!nodeADriveType) return;
@@ -1215,7 +1214,7 @@
 					node = node.parentNode;
 				}
 				if (node.getAttribute("id") != "LeftWorkspace")	node = node.previousSibling;
-				if (node.className == "Node") {
+				if (node.className == "node") {
 					height += 27;
 				}
 			}
@@ -1228,7 +1227,7 @@
 			if (tagADrives[i].getAttribute("id")) {
 				var id = tagADrives[i].getAttribute("id");
 				if (id && (id.indexOf(preStr) >= 0)) {
-					nodeParent = gj(tagADrives[i]).parents(".Node:first")[0];
+					nodeParent = gj(tagADrives[i]).parents(".node:first")[0];
 					var event = false;				
 					eXo.ecm.ECS.getDir(tagADrives[i], event);
 					//eXo.ecm.ECS.actionColExp(nodeParent);

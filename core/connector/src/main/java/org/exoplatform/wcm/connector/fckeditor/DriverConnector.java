@@ -473,6 +473,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       folder.setAttribute("repository", repository);
       folder.setAttribute("workspace", workspace);
       folder.setAttribute("isUpload", "true");
+      folder.setAttribute("hasFolderChild", String.valueOf(this.hasFolderChild(driveNode)));
       folders.appendChild(folder);
     }
     return folders;
@@ -711,7 +712,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
   
   /**
-   * Check if specific node has child of folder type.
+   * Check if specific node has child which is type of nt:folder or nt:unstructured.
    * 
    * @param checkNode
    * @return
@@ -719,8 +720,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    */
   private boolean hasFolderChild(Node checkNode) throws Exception {
     return (Utils.hasChild(checkNode, NodetypeConstant.NT_UNSTRUCTURED) 
-              || Utils.hasChild(checkNode, NodetypeConstant.NT_FOLDER)
-              || Utils.hasChild(checkNode, NodetypeConstant.EXO_TAXONOMY));
+              || Utils.hasChild(checkNode, NodetypeConstant.NT_FOLDER));
   }
 
   /**
