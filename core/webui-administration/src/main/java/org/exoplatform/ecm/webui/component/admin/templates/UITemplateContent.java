@@ -26,6 +26,7 @@ import javax.jcr.Value;
 import javax.jcr.version.VersionHistory;
 
 import org.exoplatform.ecm.jcr.model.VersionNode;
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -298,7 +299,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
         uiForm.getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).isChecked() ;
       if(uiForm.isAddNew_){
         templateService.addTemplate(uiForm.getTemplateType(), uiForm.nodeTypeName_, null, false, name, new String[] {role},
-            new ByteArrayInputStream(content.getBytes()));
+            new ByteArrayInputStream(content.getBytes("utf-8")));
       } else {
         Node node =
           templateService.getTemplateNode(uiForm.getTemplateType(), uiForm.nodeTypeName_, name,
@@ -313,7 +314,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
                                       false,
                                       name,
                                       new String[] { role },
-                                      new ByteArrayInputStream(content.getBytes()));
+                                      new ByteArrayInputStream(content.getBytes("utf-8")));
         } else {
           return;
         }
