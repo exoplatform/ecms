@@ -474,6 +474,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       folder.setAttribute("workspace", workspace);
       folder.setAttribute("isUpload", "true");
       folder.setAttribute("hasFolderChild", String.valueOf(this.hasFolderChild(driveNode)));
+      folder.setAttribute("nodeTypeCssClass", Utils.getNodeTypeIcon(driveNode, "uiIcon16x16"));
+
       folders.appendChild(folder);
     }
     return folders;
@@ -941,6 +943,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       folder.setAttribute("path", child.getPath());
       folder.setAttribute("isUpload", "true");
       folder.setAttribute("hasFolderChild", String.valueOf(this.hasFolderChild(child)));
+      folder.setAttribute("nodeTypeCssClass", Utils.getNodeTypeIcon(child, "uiIcon16x16"));
+      
 
       if (nodeDriveName!=null && nodeDriveName.length()>0) folder.setAttribute("nodeDriveName", nodeDriveName);
       return folder;

@@ -253,8 +253,8 @@
 					treeHTML += 	'<div class="emptyIcon">';
 					treeHTML +=			'<a title="'+decodeURIComponent(label)+'" href="javascript:void(0);" class="nodeIcon" name="'+decodeURIComponent(strName)+'" id="'+id+'"  driverPath="'+driverPath+'" repository="'+repository+'" workspace="'+workspace+'">';
 				}
-				treeHTML +=				'<i class="uiIcon16x16FolderDefault" title="acme"></i>';
-				treeHTML += 			'<span class="nodeName">';
+				treeHTML +=				'<i class="uiIconEcms16x16DriveGeneral"></i>';
+				treeHTML += 			'<span class="nodeName"> ';
 				treeHTML += 				label;	
 				treeHTML +=				'</span>';	
 				treeHTML += 		'</a>';
@@ -320,6 +320,7 @@
 				var isUpload = nodeList[i].getAttribute("isUpload");
 				var nodeDriveName = nodeList[i].getAttribute("nodeDriveName");
 				var hasFolderChild = nodeList[i].getAttribute("hasFolderChild");
+				var nodeTypeCssClass = nodeList[i].getAttribute("nodeTypeCssClass");
 				if (nodeDriveName==null) nodeDriveName='';
 				treeHTML += '<div class="node" onclick="eXo.ecm.ECS.actionColExp(this, event);">';
 				if (hasFolderChild == true) {
@@ -329,7 +330,7 @@
 					treeHTML += 	'<div class="emptyIcon">';
 					treeHTML +=			'<a  title="'+ decodeURIComponent(strName) +'" href="javascript:void(0);" class="nodeIcon" name="'+decodeURIComponent(strName)+'" id="'+id +'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
 				}
-				treeHTML +=				'<i class="uiIcon16x16FolderDefault" title="acme"></i>';
+				treeHTML +=				'<i class="' + nodeTypeCssClass + '"></i>';
 				treeHTML += 			'<span class="nodeName">';
 				treeHTML += 				decodeURIComponent(strName);
 				treeHTML +=				'</span>';	
@@ -350,6 +351,7 @@
 					var isUpload = currentNodeList[i].getAttribute("isUpload");
 					var nodeDriveName = currentNodeList[i].getAttribute("nodeDriveName");
 					var hasFolderChild = currentNodeList[i].getAttribute("hasFolderChild");
+					var nodeTypeCssClass = currentNodeList[i].getAttribute("nodeTypeCssClass");
 					if (nodeDriveName==null) nodeDriveName='';
 					treeHTML += '<div class="node" onclick="eXo.ecm.ECS.actionColExp(this, event);">';
 					if (hasFolderChild == "true") {
@@ -359,7 +361,7 @@
 						treeHTML += 	'<div class="emptyIcon">';
 						treeHTML +=			'<a  title="'+decodeURIComponent(strName)+'" href="javascript:void(0);" class="nodeIcon" name="'+decodeURIComponent(strName)+'" id="'+id + '" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
 					}
-					treeHTML +=				'<i class="uiIcon16x16FolderDefault" title="acme"></i>';
+					treeHTML +=				'<i class="' + nodeTypeCssClass + '"></i>';
 					treeHTML += 			'<span class="nodeName">';
 					treeHTML += 				decodeURIComponent(strName);
 					treeHTML +=				'</span>';	
