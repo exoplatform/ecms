@@ -49,6 +49,7 @@ import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.pom.config.POMSessionManager;
 import org.exoplatform.services.cms.CmsService;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleException;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.resources.ResourceBundleService;
@@ -76,7 +77,9 @@ import org.exoplatform.webui.form.UIForm;
 @Deprecated
 public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
 
-  private WCMComposer composer;
+  private WCMComposer             composer;
+  private ListenerService         listenerService;
+  private ActivityCommonService   activityService;
 
   /**
    * Instantiates a new stage and version publication plugin.
@@ -85,6 +88,8 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
     WCMCoreUtils.getService(DataStorage.class);
     WCMCoreUtils.getService(POMSessionManager.class);
     composer = WCMCoreUtils.getService(WCMComposer.class);
+    listenerService = WCMCoreUtils.getService(ListenerService.class);
+    activityService = WCMCoreUtils.getService(ActivityCommonService.class);
   }
 
   public String getLifecycleType() {
@@ -249,14 +254,14 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
 
     //raise event to notify that state is changed
     if (!PublicationDefaultStates.ENROLLED.equalsIgnoreCase(newState)) {
-      
-      ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
       CmsService cmsService = WCMCoreUtils.getService(CmsService.class);
-
       if ("true".equalsIgnoreCase(context.get(StageAndVersionPublicationConstant.IS_INITIAL_PHASE))) {
         listenerService.broadcast(StageAndVersionPublicationConstant.POST_INIT_STATE_EVENT, cmsService, node);
       } else {
         listenerService.broadcast(StageAndVersionPublicationConstant.POST_CHANGE_STATE_EVENT, cmsService, node);
+        if (activityService.isAcceptedNode(node)) {
+          listenerService.broadcast(ActivityCommonService.STATE_CHANGED_ACTIVITY, node, newState);
+        }
       }
     }
     

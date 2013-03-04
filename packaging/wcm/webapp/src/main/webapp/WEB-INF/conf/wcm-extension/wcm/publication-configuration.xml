@@ -104,7 +104,7 @@
       <set-method>addListener</set-method>
       <type>org.exoplatform.services.wcm.publication.listener.post.PostEditContentEventListener</type>
       <description>this listener will change state of document to draft after editing</description>
-    </component-plugin>
+    </component-plugin>    
   </external-component-plugins>
   
   <external-component-plugins>

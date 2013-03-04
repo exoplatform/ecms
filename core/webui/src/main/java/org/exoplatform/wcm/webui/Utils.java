@@ -40,6 +40,7 @@ import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.config.UserPortalConfigService;
+import org.exoplatform.portal.config.model.PortalConfig;
 import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.mop.page.PageContext;
 import org.exoplatform.portal.mop.page.PageKey;
@@ -104,6 +105,8 @@ public class Utils {
   private static final String NT_FILE = "nt:file";
 
   private static final String NT_UNSTRUCTURED = "nt:unstructured";
+  
+  private static final String DOCUMENTS_ACTIVITY = "documents";
 
   private static ConfigurationManager cservice_ ;
   /**
@@ -439,6 +442,15 @@ public class Utils {
       return null;
     }
   }
+  
+  public static String getActivityEditLink(Node node) {
+    try {
+      String itemPath = node.getSession().getWorkspace().getName() + node.getPath();
+      return getActivityEditLink(itemPath);
+    } catch (RepositoryException e) {
+      return null;
+    }
+  }
 
   /**
    * Creates a restfull compliant link to the editor for editing a content,
@@ -477,6 +489,51 @@ public class Utils {
     nodeURL.setQueryParameterValue(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO, backto);
 
     return nodeURL.toString();
+  }
+  
+  public static String getActivityEditLink(String itemPath) {
+    PortalRequestContext pContext = Util.getPortalRequestContext();    
+    String siteType = pContext.getSiteKey().getType().getName();
+    String backto = pContext.getRequestURI();
+    WCMConfigurationService configurationService = Util.getUIPortalApplication()
+    		.getApplicationComponent(WCMConfigurationService.class);
+    
+    String editorPageURI = null;
+    if(siteType.equals(PortalConfig.PORTAL_TYPE))
+      editorPageURI = configurationService.getRuntimeContextParam(WCMConfigurationService.EDIT_PAGE_URI);
+    else if(siteType.equals(PortalConfig.GROUP_TYPE)) {
+    	editorPageURI = pContext.getSiteName();
+    	editorPageURI = editorPageURI.substring(editorPageURI.lastIndexOf("/")+1, editorPageURI.length());
+    	editorPageURI = editorPageURI + "/" + DOCUMENTS_ACTIVITY;
+    }
+    UserNode editorNode = getEditorNode(editorPageURI, siteType);
+
+    if (editorNode == null) {
+      return "";
+    }
+
+    NodeURL nodeURL = pContext.createURL(NodeURL.TYPE);
+    nodeURL.setNode(editorNode);
+    nodeURL.setQueryParameterValue("path", itemPath);
+    nodeURL.setQueryParameterValue("edit", "true");   
+    nodeURL.setQueryParameterValue(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO, backto);
+
+    return nodeURL.toString();
+  }
+  
+  private static UserNode getEditorNode(String editorPageURI, String siteType) {
+    UserPortal userPortal = Util.getPortalRequestContext().getUserPortalConfig().getUserPortal();
+    List<UserNavigation> allNavs = userPortal.getNavigations();
+
+    for (UserNavigation nav : allNavs) {
+      if (nav.getKey().getType().getName().equalsIgnoreCase(siteType)) {
+        UserNode userNode = userPortal.resolvePath(nav, null, editorPageURI);
+        if (userNode != null) {
+          return userNode;
+        }
+      }
+    }
+    return null;
   }
 
   private static UserNode getEditorNode(String editorPageURI) {

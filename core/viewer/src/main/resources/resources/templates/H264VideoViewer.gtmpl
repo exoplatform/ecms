@@ -37,6 +37,12 @@
   def binarySrc = Utils.getWebdavURL(currentNode);
 %>
 
-  <video src="$binarySrc" controls="controls" width="600">
+  <video src="$binarySrc" controls="controls" class="videoContent">
   your browser does not support the video tag
   </video>
+  
+  <style>
+  .videoContent{  	
+  	width:600px;
+  }
+  </style>

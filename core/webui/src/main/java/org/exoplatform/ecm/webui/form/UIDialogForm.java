@@ -25,6 +25,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -150,7 +151,7 @@ public class UIDialogForm extends UIForm {
   protected JCRResourceResolver resourceResolver;
   private String childPath;
   private boolean isNotEditNode;
-  private boolean dataRemoved_;
+  private boolean dataRemoved_ = false;;
 
   private boolean isNTFile;
   private boolean isOnchange;
@@ -168,13 +169,15 @@ public class UIDialogForm extends UIForm {
   protected String workspaceName;
   protected boolean isReference;
   protected boolean isShowActionsOnTop_ = false;
-
+  private List<String> removedBinary ;
   /** Selected Tab id */
   private String selectedTab;
 
   private String SEPARATOR_VALUE = "::";
 
-  public UIDialogForm() { }
+  public UIDialogForm() { 
+    removedBinary = new ArrayList<String>();
+  }
 
   public boolean isEditing() { return !isAddNew;}
   public boolean isAddNew() { return isAddNew;}
@@ -1694,23 +1697,36 @@ public class UIDialogForm extends UIForm {
     dresource.setDownloadName(nodeName);
     return dservice.getDownloadLink(dservice.addDownloadResource(dresource));
   }
-
   @Deprecated
   /**
-   * TODO: This method still used in dialog1.gtmpl of podcast
-   * @return
+   * Deprecated method, should used removeData(String path) next time
    */
   public boolean dataRemoved() { return dataRemoved_; }
-
   @Deprecated
-  /**
-   * Using dataRemoved_ to sign removing data (image or other some binary data.
-   * But if in one form we have more than one field (eg: contain 2 field) then
-   * this code make potential bug. Simplest way is checking existence of UIFormInput
-   * Please refer to dialog of Sample Node or WebContent
-   */
   public void setDataRemoved(boolean dataRemoved) { dataRemoved_ = dataRemoved; }
 
+  /**
+   * @param       path: of property content binarydata for uploading 
+   * @Objective : Mark a uploaded field as removed.
+   * @Author    : Nguyen The Vinh from ECM of eXoPlatform
+   */
+  public void removeData(String path) {
+    if (!removedBinary.contains(path)) {
+      removedBinary.add(path);
+    }
+  }
+  /**
+   * @param       path: of property content binarydata for uploading
+   * @return    : True if the uploaded field is removed from UI
+   * @Objective : Checking the binary field is removed or not
+   * @Author    : Nguyen The Vinh from ECM of eXoPlatform
+   */
+  public boolean isDataRemoved(String path) {
+    return removedBinary.contains(path);
+  }
+  public void clearDataRemovedList() {
+    removedBinary.clear();
+  }
   public void resetProperties() { properties.clear(); }
 
   public void resetInterceptors(){

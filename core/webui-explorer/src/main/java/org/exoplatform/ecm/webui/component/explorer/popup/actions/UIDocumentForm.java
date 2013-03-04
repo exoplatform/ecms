@@ -54,6 +54,7 @@ import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -399,7 +400,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
           }
         }
       }
-    }
+    }        
     Map inputProperties = DialogFormUtil.prepareMap(inputs, documentForm.getInputProperties(), documentForm.getInputOptions());
     Node newNode = null;
     String nodeType;
@@ -428,6 +429,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     }
     try {
       CmsService cmsService = documentForm.getApplicationComponent(CmsService.class);
+      cmsService.getPreProperties().clear();
       String addedPath = cmsService.storeNode(nodeType, homeNode, inputProperties, documentForm.isAddNew());
       try {
         newNode = (Node)homeNode.getSession().getItem(addedPath);

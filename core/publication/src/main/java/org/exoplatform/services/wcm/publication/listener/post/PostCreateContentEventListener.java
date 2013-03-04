@@ -21,6 +21,7 @@ import javax.jcr.Session;
 
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.CmsService;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.jcr.util.Text;
@@ -29,6 +30,7 @@ import org.exoplatform.services.listener.Listener;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.core.WebSchemaConfigService;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
@@ -55,6 +57,9 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
 
   /** The web content schema handler. */
   private WebContentSchemaHandler webContentSchemaHandler;
+  
+  private ListenerService         listenerService = null;
+  private ActivityCommonService   activityService;
 
   /**
    * Instantiates a new post create content event listener.
@@ -69,12 +74,16 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
     this.publicationService = publicationService;
     this.configurationService = configurationService;
     webContentSchemaHandler = schemaConfigService.getWebSchemaHandlerByType(WebContentSchemaHandler.class);
+    activityService = WCMCoreUtils.getService(ActivityCommonService.class);
   }
 
   /* (non-Javadoc)
    * @see org.exoplatform.services.listener.Listener#onEvent(org.exoplatform.services.listener.Event)
    */
   public void onEvent(Event<CmsService, Node> event) throws Exception {
+    if (listenerService==null) {
+      listenerService = WCMCoreUtils.getService(ListenerService.class);
+    }
     Node currentNode = event.getData();
     if(currentNode.canAddMixin("exo:rss-enable")) {
       currentNode.addMixin("exo:rss-enable");
@@ -85,7 +94,6 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
     if (currentNode.isNodeType("exo:cssFile") || currentNode.isNodeType("exo:jsFile")
         || currentNode.getParent().isNodeType("exo:actionStorage")) {
       if (currentNode.isNodeType("exo:cssFile") || currentNode.isNodeType("exo:jsFile")) {
-        ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
         CmsService cmsService = WCMCoreUtils.getService(CmsService.class);
         listenerService.broadcast(POST_INIT_STATE_EVENT, cmsService, currentNode);
       }
@@ -117,6 +125,13 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
       if (LOG.isDebugEnabled()) LOG.debug("No portal context available");
     }
     if (LOG.isInfoEnabled()) LOG.info(currentNode.getPath() + "::" + siteName + "::"+remoteUser);
-    if (remoteUser != null) publicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser);
+    if (remoteUser != null) { 
+      publicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser);
+    //Broadcast event to activity only for this condition
+      if (activityService.isAcceptedNode(currentNode)) {
+        listenerService.broadcast(ActivityCommonService.NODE_CREATED_ACTIVITY, null, currentNode);
+      } else if(currentNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE))
+      	listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, currentNode);
+    }
   }
 }

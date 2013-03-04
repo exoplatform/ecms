@@ -17,20 +17,27 @@
 package org.exoplatform.ecm.webui.component.explorer.popup.info;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.jcr.Node;
+import javax.jcr.Property;
+import javax.jcr.RepositoryException;
 import javax.jcr.Value;
+import javax.jcr.ValueFormatException;
 import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.nodetype.PropertyDefinition;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.form.UIDialogForm;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.resolver.ResourceResolver;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.metadata.MetadataService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
@@ -107,11 +114,18 @@ public class UIViewMetadataForm extends UIDialogForm {
       if(parent.isLocked()) {
         parent.getSession().addLockToken(LockUtil.getLockToken(parent));  
       }
+      //Add MIX_COMMENT before update property
+      Node activityNode = node;
+      if(node.isNodeType(NodetypeConstant.NT_RESOURCE)) activityNode = node.getParent();
+      
+      if (activityNode.canAddMixin(ActivityCommonService.MIX_COMMENT)) {
+      	activityNode.addMixin(ActivityCommonService.MIX_COMMENT);
+      }
       NodeTypeManager ntManager = uiJCRExplorer.getSession().getWorkspace().getNodeTypeManager();
       PropertyDefinition[] props = ntManager.getNodeType(uiForm.getNodeType()).getPropertyDefinitions();
       List<Value> valueList = new ArrayList<Value>();
       for (PropertyDefinition prop : props) {
-        String name = prop.getName();
+        String name = prop.getName();        
         String inputName = name.substring(name.indexOf(":") + 1);
         if (!prop.isProtected()) {
           int requiredType = prop.getRequiredType();
@@ -124,10 +138,15 @@ public class UIViewMetadataForm extends UIDialogForm {
               UIFormInput uiInput = uiForm.getUIInput(inputName);
               if(uiInput instanceof UIFormSelectBox) {
                 String[] valuesReal = ((UIFormSelectBox)uiInput).getSelectedValues();
-                node.setProperty(name, valuesReal);
+                if(!node.hasProperty(name) || (node.hasProperty(name) && 
+                		!uiForm.isEqualsValueStringArrays(node.getProperty(name).getValues(), valuesReal)))
+                  node.setProperty(name, valuesReal);
               } else {
                 List<String> values = (List<String>) ((UIFormMultiValueInputSet)uiInput).getValue();
-                node.setProperty(name, values.toArray(new String[values.size()]));
+                if(!node.hasProperty(name) || (node.hasProperty(name) && 
+                		!uiForm.isEqualsValueStringArrays(node.getProperty(name).getValues(), 
+                				values.toArray(new String[values.size()]))))
+                  node.setProperty(name, values.toArray(new String[values.size()]));
               }
             }
           } else {
@@ -135,7 +154,9 @@ public class UIViewMetadataForm extends UIDialogForm {
               UIFormInput uiInput = uiForm.getUIInput(inputName);
               String value = "false";
               if(uiInput instanceof UIFormSelectBox) value =  ((UIFormSelectBox)uiInput).getValue();
-              node.setProperty(name, Boolean.parseBoolean(value));
+              if(!node.hasProperty(name) || (node.hasProperty(name) && 
+              		node.getProperty(name).getBoolean() != Boolean.parseBoolean(value)))
+                node.setProperty(name, Boolean.parseBoolean(value));
             } else if (requiredType == 5) { // date
               UIFormDateTimeInput cal = (UIFormDateTimeInput) uiForm.getUIInput(inputName);
               node.setProperty(name, cal.getCalendar());
@@ -145,10 +166,15 @@ public class UIViewMetadataForm extends UIDialogForm {
                 value = ((UIFormStringInput)uiForm.getUIInput(inputName)).getValue();
                 if (value == null) value = "";
               }
-              node.setProperty(name, value);
+              if(!node.hasProperty(name) || (node.hasProperty(name) && !node.getProperty(name).getString().equals(value)))
+                node.setProperty(name, value);
             }
           }
         }
+      }
+      //Remove MIX_COMMENT after update property
+      if (activityNode.isNodeType(ActivityCommonService.MIX_COMMENT)) {
+      	activityNode.removeMixin(ActivityCommonService.MIX_COMMENT);
       }
       node.getSession().save();
       event.getRequestContext().addUIComponentToUpdateByAjax(uiViewManager);
@@ -178,5 +204,26 @@ public class UIViewMetadataForm extends UIDialogForm {
     public void execute(Event<UIViewMetadataForm> event) throws Exception {
       event.getRequestContext().addUIComponentToUpdateByAjax(event.getSource().getParent());
     }
+  }
+  
+  public boolean isEqualsValueStringArrays(Value[] arrayValue1, String[] arrayValue2) throws ValueFormatException, 
+  IllegalStateException, RepositoryException {
+  	if(arrayValue1 != null) {
+  	  String[] stringArray = new String[arrayValue1.length];
+  	  int i = 0;
+  	  for (Value valueItem : arrayValue1) {  	  	
+  	  	if(valueItem != null && valueItem.getString() != null)
+  	  	stringArray[i] = valueItem.getString();
+  	  	i++;
+			}
+  	  if(stringArray != null && stringArray.length > 0)
+  	    Arrays.sort(stringArray);
+  	  if(arrayValue2 != null && arrayValue2.length > 0)
+  	    Arrays.sort(arrayValue2);
+  	  return ArrayUtils.isEquals(stringArray, arrayValue2);  	    
+  	} else {
+  		if(arrayValue2 != null) return false;
+  		else return true;
+  	}	
   }
 }

@@ -74,6 +74,27 @@
 	      </object-param>
 	    </init-params>
 	  </component-plugin>
+	  
+	  <component-plugin>
+	    <name>PDFThumbnailPlugin</name>   
+	    <set-method>addPlugin</set-method>
+	    <type>org.exoplatform.services.cms.thumbnail.impl.OfficeDocumentThumbnailPlugin</type>
+	    <init-params>
+	      <object-param>
+	        <name>thumbnailType</name>
+	        <description>Thumbnail types</description>
+	        <object type="org.exoplatform.services.cms.thumbnail.impl.ThumbnailType">
+						<field name="mimeTypes">
+							<collection type="java.util.ArrayList">
+								<value><string>application/msword</string></value>
+								<value><string>application/vnd.oasis.opendocument.text</string></value>
+							</collection>
+						</field>
+	        </object>
+	      </object-param>
+	    </init-params>
+	  </component-plugin>
+	  
   </external-component-plugins>  	  
 
 </configuration>

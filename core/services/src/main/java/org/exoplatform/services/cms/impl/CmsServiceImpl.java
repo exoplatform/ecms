@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -44,12 +45,14 @@ import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.nodetype.PropertyDefinition;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 import org.exoplatform.commons.utils.ISO8601;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.JcrInputProperty;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.idgenerator.IDGeneratorService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -72,6 +75,10 @@ public class CmsServiceImpl implements CmsService {
   private static final String MIX_REFERENCEABLE = "mix:referenceable" ;
   private static final Log LOG  = ExoLogger.getLogger(CmsServiceImpl.class.getName());
   private ListenerService listenerService;
+  private ActivityCommonService activityService = null;
+  
+  public static Map<String, Object> properties = new HashMap<String, Object>();  
+  public Map<String, Object> getPreProperties() { return properties; }  
 
   /**
    * Method constructor
@@ -134,6 +141,10 @@ public class CmsServiceImpl implements CmsService {
       //Broadcast CmsService.event.preCreate event
       listenerService.broadcast(PRE_CREATE_CONTENT_EVENT,storeHomeNode,mappings);
       currentNode = storeHomeNode.addNode(nodeName, primaryType);
+      if (currentNode.canAddMixin(ActivityCommonService.MIX_COMMENT)) {
+        currentNode.addMixin(ActivityCommonService.MIX_COMMENT);
+        currentNode.setProperty(ActivityCommonService.MIX_COMMENT_CREATING, "true");
+      }
       createNodeRecursively(NODE, currentNode, nodeType, mappings);
       if(mixinTypes != null){
         for(String type : mixinTypes){
@@ -173,17 +184,27 @@ public class CmsServiceImpl implements CmsService {
       if(!currentNode.isNodeType(MIX_REFERENCEABLE)) {
         currentNode.addMixin(MIX_REFERENCEABLE);
       }
+      if (currentNode.isNodeType(ActivityCommonService.MIX_COMMENT)) {
+        currentNode.removeMixin(ActivityCommonService.MIX_COMMENT);
+      }
     //Broadcast CmsService.event.postCreate event
       listenerService.broadcast(POST_CREATE_CONTENT_EVENT,this,currentNode);
     } else {
       currentNode = storeHomeNode.getNode(nodeName);
-    //Broadcast CmsService.event.preEdit event
+      if (currentNode.canAddMixin(ActivityCommonService.MIX_COMMENT)) {
+        currentNode.addMixin(ActivityCommonService.MIX_COMMENT);
+      }
+      //Broadcast CmsService.event.preEdit event
       listenerService.broadcast(PRE_EDIT_CONTENT_EVENT,currentNode,mappings);
+      
       updateNodeRecursively(NODE, currentNode, nodeType, mappings);
       if (currentNode.isNodeType("exo:datetime")) {
         currentNode.setProperty("exo:dateModified", new GregorianCalendar());
       }
       listenerService.broadcast(POST_EDIT_CONTENT_EVENT, this, currentNode);
+      if (currentNode.isNodeType(ActivityCommonService.MIX_COMMENT)) {
+        currentNode.removeMixin(ActivityCommonService.MIX_COMMENT);
+      }
     }
     //add lastModified property to jcr:content
     session.save();
@@ -616,7 +637,9 @@ public class CmsServiceImpl implements CmsService {
             node.setProperty(propertyName, (String[]) value);
           }
         } else {
-          node.setProperty(propertyName, (String) value);
+        	if(!node.hasProperty(propertyName) || (node.hasProperty(propertyName) && 
+        			!node.getProperty(propertyName).getString().equals((String)value)))
+            node.setProperty(propertyName, (String) value);
         }
       }
       break;
@@ -843,27 +866,37 @@ public class CmsServiceImpl implements CmsService {
    */
   private void processProperty(Property property, Node node, int requiredtype,
       Object value, boolean isMultiple) throws Exception {
+  	String nodeUUID = "";
+  	if(node.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) nodeUUID = node.getUUID();
+  	else nodeUUID = node.getName();
     String propertyName = property.getName() ;
+    String updatedProperty = nodeUUID + "_" + propertyName;
+    if(isMultiple) properties.put(updatedProperty, property.getValues());
+    else properties.put(updatedProperty, property.getValue());
     switch (requiredtype) {
     case PropertyType.STRING:
       if (value == null) {
         if(isMultiple) {
-          node.setProperty(propertyName, new String[] {StringUtils.EMPTY});
+          node.setProperty(propertyName, new String[] {StringUtils.EMPTY});          
         } else {
-          node.setProperty(propertyName, StringUtils.EMPTY);
-        }
+        	if(property.getValue() != null && !property.getValue().getString().equals(StringUtils.EMPTY)) {
+        		node.setProperty(propertyName, StringUtils.EMPTY);        		
+        	}            
+        }        
       } else {
         if(isMultiple) {
-          if (value instanceof String) {
+          if (value instanceof String) { 
             if(!property.getValues().equals(value)) {
-              node.setProperty(propertyName, new String[] { (String)value});
+              node.setProperty(propertyName, new String[] { (String)value});              
             }
           } else if (value instanceof String[]) {
-            if(!property.getValues().equals(value)) node.setProperty(propertyName, (String[]) value);
+          	if(!isEqualsValueStringArrays(property.getValues(), (String[]) value)) {
+          		node.setProperty(propertyName, (String[]) value);
+          	}
           }
         } else {
           if(!property.getValue().getString().equals(value)) {
-            node.setProperty(propertyName, (String) value);
+            node.setProperty(propertyName, (String) value);            
           }
         }
       }
@@ -878,10 +911,11 @@ public class CmsServiceImpl implements CmsService {
             Node fileNode = null;
             Node jcrContentNode = null;
             if (!storedNode.hasNode(fileName)) {
+            	
               fileNode = storedNode.addNode(fileName, NodetypeConstant.NT_FILE);
               jcrContentNode = fileNode.addNode(NodetypeConstant.JCR_CONTENT);
               jcrContentNode.setProperty(NodetypeConstant.JCR_MIME_TYPE, (String)param.get(0));
-              jcrContentNode.setProperty(NodetypeConstant.JCR_DATA, new ByteArrayInputStream((byte[])param.get(1)));
+              jcrContentNode.setProperty(NodetypeConstant.JCR_DATA, new ByteArrayInputStream((byte[])param.get(1)));              
             } else {
               jcrContentNode = storedNode.getNode(fileName).getNode(NodetypeConstant.JCR_CONTENT);
             }
@@ -889,8 +923,10 @@ public class CmsServiceImpl implements CmsService {
           }
         }
       } else {
-        if (value == null) {
-          node.setProperty(propertyName, "");
+        if (value == null ) {
+        	if(node.getProperty(propertyName) != null && !node.getProperty(propertyName).getString().equals("")) {
+            node.setProperty(propertyName, "");            
+        	}
         } else if(value instanceof InputStream) {
           if(!property.getValue().getStream().equals(value)) {
             node.setProperty(propertyName, (InputStream)value);
@@ -900,7 +936,7 @@ public class CmsServiceImpl implements CmsService {
             node.setProperty(propertyName, new ByteArrayInputStream((byte[]) value));
           }
         } else if (value instanceof String) {
-          if(!property.getValue().getStream().equals(new ByteArrayInputStream(((String)value).getBytes()))) {
+          if(!property.getValue().getString().equals(value)) {
             node.setProperty(propertyName, value.toString(), PropertyType.BINARY);
           }
         }
@@ -1123,6 +1159,27 @@ public class CmsServiceImpl implements CmsService {
     }
     return null;
   }
+  
+  public boolean isEqualsValueStringArrays(Value[] arrayValue1, String[] arrayValue2) throws ValueFormatException, 
+  IllegalStateException, RepositoryException {
+  	if(arrayValue1 != null) {
+  	  String[] stringArray = new String[arrayValue1.length];
+  	  int i = 0;
+  	  for (Value valueItem : arrayValue1) {  	  	
+  	  	if(valueItem != null && valueItem.getString() != null)
+  	  	stringArray[i] = valueItem.getString();
+  	  	i++;
+			}
+  	  if(stringArray != null && stringArray.length > 0)
+  	    Arrays.sort(stringArray);
+  	  if(arrayValue2 != null && arrayValue2.length > 0)
+  	    Arrays.sort(arrayValue2);
+  	  return ArrayUtils.isEquals(stringArray, arrayValue2);  	    
+  	} else {
+  		if(arrayValue2 != null) return false;
+  		else return true;
+  	}	
+  }
 
   /**
    * {@inheritDoc}
@@ -1143,6 +1200,18 @@ public class CmsServiceImpl implements CmsService {
           createNode(destSession, destPath);
         }
         workspace.clone(srcWorkspace, nodePath, destPath, true);
+        try {
+          if (activityService==null) {
+            activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+          }
+          if (listenerService!=null && activityService.isAcceptedNode(srcNode)) {
+            listenerService.broadcast(ActivityCommonService.NODE_MOVED_ACTIVITY, srcNode, destPath);
+          }
+        }catch (Exception e) {
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Can not notify NodeMovedActivity: " + e.getMessage());
+          }
+        }
         //Remove src node
         srcNode.remove();
         srcSession.save();
@@ -1168,7 +1237,21 @@ public class CmsServiceImpl implements CmsService {
           createNode(session, destPath);
           session.refresh(false) ;
         }
+        
         workspace.move(nodePath, destPath);
+        try {
+          Node movedNode =(Node) session.getItem(destPath);
+          if (activityService==null) {
+            activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+          }
+          if (listenerService!=null && activityService.isAcceptedNode(movedNode)) {
+            listenerService.broadcast(ActivityCommonService.NODE_MOVED_ACTIVITY, movedNode, destPath);
+          }
+        }catch (Exception e) {
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Can not notify NodeMovedActivity: " + e.getMessage());
+          }
+        }
         session.logout();
       } catch (Exception e) {
         if (LOG.isWarnEnabled()) {

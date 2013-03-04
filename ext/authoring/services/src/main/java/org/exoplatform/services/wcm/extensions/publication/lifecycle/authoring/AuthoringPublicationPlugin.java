@@ -36,6 +36,7 @@ import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.CmsService;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleException;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
@@ -63,12 +64,16 @@ import org.exoplatform.webui.form.UIForm;
 public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
 
   /** The log. */
-  private static final Log LOG = ExoLogger.getLogger(AuthoringPublicationPlugin.class.getName());
+  private static final Log      LOG = ExoLogger.getLogger(AuthoringPublicationPlugin.class.getName());
+  private ListenerService       listenerService;
+  private ActivityCommonService activityService;
 
   /**
    * Instantiates a new stage and version publication plugin.
    */
   public AuthoringPublicationPlugin() {
+    listenerService = WCMCoreUtils.getService(ListenerService.class);
+    activityService = WCMCoreUtils.getService(ActivityCommonService.class);
   }
 
   /*
@@ -348,17 +353,18 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
     //raise event to notify that state is changed
     if (!PublicationDefaultStates.ENROLLED.equalsIgnoreCase(newState)) {
 
-      ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
       CmsService cmsService = WCMCoreUtils.getService(CmsService.class);
 
       if ("true".equalsIgnoreCase(context.get(AuthoringPublicationConstant.IS_INITIAL_PHASE))) {
         listenerService.broadcast(AuthoringPublicationConstant.POST_INIT_STATE_EVENT, cmsService, node);
       } else {
         listenerService.broadcast(AuthoringPublicationConstant.POST_CHANGE_STATE_EVENT, cmsService, node);
+        if (activityService.isAcceptedNode(node)) {
+          listenerService.broadcast(ActivityCommonService.STATE_CHANGED_ACTIVITY, node, newState);
+        }
       }
     }
 
-    ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class, containerName);
     listenerService.broadcast(AuthoringPublicationConstant.POST_UPDATE_STATE_EVENT, null, node);
   }
 

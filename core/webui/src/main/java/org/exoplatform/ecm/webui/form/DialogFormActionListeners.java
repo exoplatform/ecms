@@ -57,9 +57,8 @@ public class DialogFormActionListeners {
       if (referenceNodePath.startsWith("/")) {
         Node referenceNode = (Node)uiForm.getSession().getItem(uiForm.getNodePath() + referenceNodePath);
         if(referenceNode.hasProperty(Utils.JCR_DATA)) {
-          referenceNode.setProperty(Utils.JCR_MIMETYPE, "");
-          referenceNode.setProperty(Utils.JCR_DATA, "");
-          uiForm.setDataRemoved(true);
+          uiForm.removeData(referenceNodePath);
+//          uiForm.setDataRemoved(true);
         }
       } else {
         Node currentNode = uiForm.getNode();
@@ -70,10 +69,11 @@ public class DialogFormActionListeners {
           return;
         }
         if (currentNode.hasProperty(referenceNodePath)) {
-          currentNode.setProperty(referenceNodePath, "");
-          uiForm.setDataRemoved(true);
+          uiForm.removeData(referenceNodePath);
+//          uiForm.setDataRemoved(true);
         }
       }
+      
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
     }
   }

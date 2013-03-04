@@ -28,16 +28,20 @@ import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.Session;
 
+import org.exoplatform.commons.utils.ActivityTypeUtils;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.comments.CommentsService;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.organization.User;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 
 /**
@@ -64,8 +68,9 @@ public class CommentsServiceImpl implements CommentsService {
   private static final String ANONYMOUS = "anonymous" ;
 
   private ExoCache<String, List<Node>> commentsCache_ ;
-  private MultiLanguageService multiLangService_ ;
-
+  private MultiLanguageService         multiLangService_ ;
+  private ListenerService              listenerService;
+  private ActivityCommonService        activityService;
   /**
    * Constructor Method
    * @param cacheService        CacheService Object
@@ -75,12 +80,16 @@ public class CommentsServiceImpl implements CommentsService {
       MultiLanguageService multiLangService) throws Exception {
     commentsCache_ = cacheService.getCacheInstance(CommentsService.class.getName()) ;
     multiLangService_ = multiLangService ;
+    activityService = WCMCoreUtils.getService(ActivityCommonService.class);
   }
 
   /**
    * {@inheritDoc}
    */
   public void addComment(Node node, String commentor,String email, String site, String comment,String language) throws Exception {
+    if (listenerService==null) {
+      listenerService = WCMCoreUtils.getService(ListenerService.class);
+    }
     Session session = node.getSession();
     ManageableRepository  repository = (ManageableRepository)session.getRepository();
     //TODO check if really need delegate to system session
@@ -96,7 +105,7 @@ public class CommentsServiceImpl implements CommentsService {
       if(!document.hasNode(LANGUAGES) || language.equals(multiLangService_.getDefault(document))) {
         if(document.hasNode(COMMENTS)) commentNode = document.getNode(COMMENTS) ;
         else {
-          commentNode = document.addNode(COMMENTS,NT_UNSTRUCTURE) ;
+          commentNode = document.addNode(COMMENTS,NT_UNSTRUCTURE) ;          
           commentNode.addMixin("exo:hiddenable");
         }
       } else {
@@ -140,6 +149,18 @@ public class CommentsServiceImpl implements CommentsService {
       }
       document.save();
       systemSession.save();
+      if (listenerService!=null) {
+        try {
+          if (activityService.isAcceptedNode(document) || (document.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) 
+          		&& activityService.isBroadcastNTFileEvents(document))) {
+            listenerService.broadcast(ActivityCommonService.COMMENT_ADDED_ACTIVITY, document, newComment);
+          }
+        } catch (Exception e) {
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Can not notify CommentAddedActivity because of: " + e.getMessage());
+          }
+        }
+      }
       commentsCache_.remove(commentNode.getPath()) ;
     } catch(Exception e) {
       if (LOG.isErrorEnabled()) {
@@ -159,6 +180,20 @@ public class CommentsServiceImpl implements CommentsService {
     commentNode.setProperty(CREATED_DATE, commentDate);
     commentNode.setProperty(MESSAGE, newComment);
     commentNode.save();
+    Node documentNode = commentNode.getParent().getParent();
+    if (listenerService!=null && activityService!=null) {
+      try {
+        if (activityService.isAcceptedNode(documentNode) || 
+        		(documentNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) && 
+        				activityService.isBroadcastNTFileEvents(documentNode))) {
+          listenerService.broadcast(ActivityCommonService.COMMENT_UPDATED_ACTIVITY, documentNode, commentNode);
+        }
+      } catch (Exception e) {
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Can not notify CommentModifiedActivity because of: " + e.getMessage());
+        }
+      }
+    }
   }
 
   /**
@@ -166,8 +201,28 @@ public class CommentsServiceImpl implements CommentsService {
    */
   public void deleteComment(Node commentNode) throws Exception {
     Node document = commentNode.getParent();
+    String activityID;
+    try {
+      activityID = ActivityTypeUtils.getActivityId(commentNode);
+    }catch (Exception e) {
+      activityID = null;
+    }
     commentNode.remove();
-    document.save();
+    document.save();    
+    if (listenerService!=null && activityID !=null && activityService !=null) {
+    	Node parentNode = document.getParent();
+      try {
+        if (activityService.isAcceptedNode(parentNode) || 
+        		(parentNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) && 
+        				activityService.isBroadcastNTFileEvents(parentNode))) {
+          listenerService.broadcast(ActivityCommonService.COMMENT_REMOVED_ACTIVITY, parentNode, activityID);
+        }
+      } catch (Exception e) {
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Can not notify CommentRemovedActivity because of: " + e.getMessage());
+        }
+      }
+    }
   }
 
   /**

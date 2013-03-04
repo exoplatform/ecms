@@ -45,6 +45,7 @@ import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -55,9 +56,12 @@ import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
 
 /**
@@ -80,6 +84,8 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
   private static final String    EXO_UUID        = "exo:uuid";
 
   private LinkManager            linkManager_;
+  private ListenerService        listenerService;
+  private ActivityCommonService  activityService;
 
   private final String           SQL_QUERY       = "Select * from exo:taxonomyLink where jcr:path like '$0/%' "
                                                      + "and exo:uuid = '$1' "
@@ -128,6 +134,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
     if (objectParam != null)
       taxonomyTreeDefaultUserPermissions_
         = getPermissions(((TaxonomyTreeDefaultUserPermission)objectParam.getObject()).getPermissions());
+    activityService = WCMCoreUtils.getService(ActivityCommonService.class);
   }
 
   public String getCategoryNameLength() {
@@ -434,6 +441,9 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
    */
   public void addCategories(Node node, String taxonomyName, String[] categoryPaths, boolean system)
       throws RepositoryException {
+    if (listenerService ==null) {
+      listenerService = WCMCoreUtils.getService(ListenerService.class);
+    }
     String category = "";
     try {
       Node rootNodeTaxonomy = getTaxonomyTree(taxonomyName, system);
@@ -458,6 +468,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
         } else {
           categoryNode = (Node) rootNodeTaxonomy.getSession().getItem(category);
         }
+        String categoryName = categoryNode.getName();
         //add mix referenceable for node
         if (node.canAddMixin("mix:referenceable")) {
           node.addMixin("mix:referenceable");
@@ -476,10 +487,21 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
           }
           linkName = node.getName() + index++;
         }
-
+        
         //create link
         linkManager_.createLink(categoryNode, TAXONOMY_LINK, node, linkName);
-
+        if (listenerService!=null) {
+          try {
+            if (activityService.isAcceptedNode(node) || (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) &&
+            		activityService.isBroadcastNTFileEvents(node))) {
+              listenerService.broadcast(ActivityCommonService.CATEGORY_ADDED_ACTIVITY, node, categoryName);
+            }
+          } catch (Exception e) {
+            if (LOG.isErrorEnabled()) {
+              LOG.error("Can not notify CategoryAddedActivity because of: " + e.getMessage());
+            }
+          }
+        }
       }
     } catch (PathNotFoundException e) {
       throw new RepositoryException(e);
@@ -547,6 +569,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
         category = rootNodeTaxonomy.getPath() + categoryPath;
       }
       Node categoryNode = ((Node) rootNodeTaxonomy.getSession().getItem(category));
+      String categoryName = categoryNode.getName();
       //get taxonomyLink node
       String sql = StringUtils.replace(SQL_QUERY_EXACT_PATH, "$0", categoryNode.getPath());
       sql = StringUtils.replace(sql, "$1", node.getUUID());
@@ -569,6 +592,18 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       nodeTaxonomyLink.remove();
       categoryNode.save();
       node.getSession().save();
+      if (listenerService!=null) {
+        try {
+          if (activityService.isAcceptedNode(node) || (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) &&
+          		activityService.isBroadcastNTFileEvents(node))) {
+            listenerService.broadcast(ActivityCommonService.CATEGORY_REMOVED_ACTIVITY, node, categoryName);
+          }
+        } catch (Exception e) {
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Can not notify Activity because of: " + e.getMessage());
+          }
+        }
+      }
     } catch (PathNotFoundException e) {
       throw new RepositoryException(e);
     }

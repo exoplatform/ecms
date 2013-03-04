@@ -89,20 +89,20 @@
 	                  <field  name="actionClassName"><string>org.exoplatform.services.jcr.ext.audit.RemoveAuditableAction</string></field>
 	                </object>
 	              </value>
-								<value>
+                <value>
 	                <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
 	                  <field  name="eventTypes"><string>addProperty,changeProperty</string></field>	                  	                  
 	                  <field  name="nodeTypes"><string>nt:resource</string></field>
 	                  <field  name="actionClassName"><string>org.exoplatform.services.jcr.ext.metadata.AddMetadataAction</string></field>
 	                </object>
-	             </value>
-							 <value>
+	              </value>
+                <value>
 	                <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
 	                  <field  name="eventTypes"><string>addNode</string></field>	                  
 	                  <field  name="actionClassName"><string>org.exoplatform.services.jcr.ext.owner.AddOwneableAction</string></field>
 	                </object>
 	              </value>
-								<value>
+                <value>
 	                <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
 	                  <field  name="eventTypes"><string>addNode</string></field>	                  
 	                  <field  name="actionClassName"><string>org.exoplatform.services.cms.jcrext.AddDateTimeAction</string></field>
@@ -114,24 +114,62 @@
 	                  <field  name="actionClassName"><string>org.exoplatform.services.cms.jcrext.AddFileDocumentAction</string></field>
 	                </object>
 	              </value>
-								<value>
+                <value>
 	                <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
 	                  <field  name="eventTypes"><string>removeNode</string></field>	                  
 	                  <field  name="actionClassName"><string>org.exoplatform.services.cms.jcrext.RemoveNodeAction</string></field>
 	                </object>
 	              </value>
-								<value>
+                <value>
 	                <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
 	                  <field  name="eventTypes"><string>addProperty,changeProperty,removeProperty,addNode</string></field>	                  
 	                  <field  name="actionClassName"><string>org.exoplatform.services.cms.jcrext.ModifyNodeAction</string></field>
 	                </object>
 	              </value>								
-								<value>
+                <value>
                   <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
                     <field  name="eventTypes"><string>addNode</string></field>                     
                     <field  name="actionClassName"><string>org.exoplatform.services.cms.jcrext.AddNodeNameAction</string></field>
                   </object>
-                </value>   	              
+                </value>
+                <value>
+                    <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
+                    <field  name="eventTypes"><string>addProperty</string></field>                     
+                    <field  name="actionClassName"><string>org.exoplatform.services.cms.jcrext.activity.AddFilePropertyActivityAction</string></field>
+                  </object>
+                </value>
+                <value>
+                    <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
+                    <field  name="eventTypes"><string>removeProperty</string></field>                     
+                    <field  name="actionClassName"><string>org.exoplatform.services.cms.jcrext.activity.RemoveFilePropertyActivityAction</string></field>
+                  </object>
+                </value>
+                <value>
+                    <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
+                    <field  name="eventTypes"><string>changeProperty</string></field>                     
+                    <field  name="actionClassName"><string>org.exoplatform.services.cms.jcrext.activity.EditFilePropertyActivityAction</string></field>
+                  </object>
+                </value>      
+                <!-- Vinh_NGUYEN Processing before notify Social Activity segment-->
+                <value>
+                    <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
+                    <field  name="eventTypes"><string>changeProperty,addProperty</string></field>                     
+                    <field  name="actionClassName"><string>org.exoplatform.services.cms.jcrext.activity.EditPropertyActivityAction</string></field>
+                  </object>
+                </value>
+                <value>
+                    <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
+                    <field  name="eventTypes"><string>removeNode</string></field>                     
+                    <field  name="actionClassName"><string>org.exoplatform.services.cms.jcrext.activity.RemoveNodeActivityAction</string></field>
+                  </object>
+                </value>
+                <value>
+                    <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
+                    <field  name="eventTypes"><string>addNode</string></field>                     
+                    <field  name="actionClassName"><string>org.exoplatform.services.cms.jcrext.activity.AddNodeActivityAction</string></field>
+                  </object>
+                </value>
+                <!-- End of Social Activity segment-->
 	            </collection>
 	          </field>
 	        </object>

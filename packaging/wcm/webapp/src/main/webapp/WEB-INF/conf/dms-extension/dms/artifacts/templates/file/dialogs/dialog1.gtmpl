@@ -81,7 +81,7 @@
                               uicomponent.addTextAreaField("content", fieldSummary) ;
                       }
                     } else {
-                    if (content.getProperty("jcr:data").getStream().available() > 0) {
+                    if (content.getProperty("jcr:data").getStream().available() > 0 && !uicomponent.isDataRemoved("/jcr:content")) {
                         def actionLink = uicomponent.event("RemoveData", "/jcr:content");
                         def fileName = Utils.getTitle(curNode);
                         %> 

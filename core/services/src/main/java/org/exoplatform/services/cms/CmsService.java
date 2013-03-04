@@ -110,4 +110,6 @@ public interface CmsService {
    */
   public void moveNode(String nodePath, String srcWorkspace, String destWorkspace, String destPath);
   
+  public Map<String, Object> getPreProperties();  
+  
 }

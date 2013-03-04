@@ -17,25 +17,24 @@
 package org.exoplatform.services.cms.thumbnail.impl;
 
 import java.awt.image.BufferedImage;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.File;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.jcr.Node;
 
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.thumbnail.ThumbnailPlugin;
+import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.icepdf.core.exceptions.PDFException;
-import org.icepdf.core.exceptions.PDFSecurityException;
+import org.exoplatform.services.pdfviewer.PDFViewerService;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.icepdf.core.pobjects.Document;
 import org.icepdf.core.pobjects.Page;
-import org.icepdf.core.pobjects.Stream;
 import org.icepdf.core.util.GraphicsRenderingHints;
 
 /**
@@ -45,14 +44,14 @@ import org.icepdf.core.util.GraphicsRenderingHints;
  * OCt 22, 2009
  * 2:20:33 PM
  */
-public class PDFThumbnailPlugin implements ComponentPlugin, ThumbnailPlugin {
+public class OfficeDocumentThumbnailPlugin implements ComponentPlugin, ThumbnailPlugin {
 
   private ThumbnailType config;
   private String description;
   private String name;
-  private static final Log LOG = ExoLogger.getExoLogger(PDFThumbnailPlugin.class.getName());
+  private static final Log LOG = ExoLogger.getExoLogger(OfficeDocumentThumbnailPlugin.class.getName());
 
-  public PDFThumbnailPlugin(InitParams initParams) throws Exception {
+  public OfficeDocumentThumbnailPlugin(InitParams initParams) throws Exception {
     config = initParams.getObjectParamValues(ThumbnailType.class).get(0);
   }
 
@@ -73,40 +72,20 @@ public class PDFThumbnailPlugin implements ComponentPlugin, ThumbnailPlugin {
   }
 
   public BufferedImage getBufferedImage(Node contentNode, String nodePath) throws Exception {
-    Document document = new Document();
-
-    // Turn off Log of org.icepdf.core.pobjects.Stream to not print error stack trace in case
-    // viewing a PDF file including CCITT (Fax format) images
-    // TODO: Remove these statement and comments after IcePDF fix ECMS-3765
-    Logger.getLogger(Stream.class.toString()).setLevel(Level.OFF);
-
-    try {
-      InputStream input = contentNode.getProperty("jcr:data").getStream() ;
-      document.setInputStream(input, nodePath);      
-    } catch (PDFException ex) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn("Error parsing PDF document " + ex);
-      }
-    } catch (PDFSecurityException ex) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn("Error encryption not supported " + ex);
-      }
-    } catch (FileNotFoundException ex) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn("Error file not found " + ex);
-      }
-    } catch (IOException ex) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn("Error handling PDF document " + ex);
-      }
-    }
-    // Paint each pages content to an image and write the image to file
-    BufferedImage image = (BufferedImage) document.getPageImage(0, GraphicsRenderingHints.SCREEN,
+  	RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
+    String repository = repositoryService.getCurrentRepository().getConfiguration().getName();
+    Document pdfDocument = new Document();
+    if(contentNode.isNodeType(NodetypeConstant.NT_RESOURCE)) contentNode = contentNode.getParent();
+    PDFViewerService pdfViewerService = WCMCoreUtils.getService(PDFViewerService.class);
+    pdfDocument = pdfViewerService.initDocument(contentNode,repository);    
+    BufferedImage image = (BufferedImage) pdfDocument.getPageImage(0, GraphicsRenderingHints.SCREEN,
         Page.BOUNDARY_CROPBOX, 0.0f, 1.0f);
-    document.dispose();
+    pdfDocument.dispose();
     return image;
+    
   }
-
+  
+  
   public List<String> getMimeTypes() {
     return config.getMimeTypes();
   }
