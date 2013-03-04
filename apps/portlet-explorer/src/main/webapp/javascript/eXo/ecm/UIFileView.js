@@ -17,8 +17,8 @@
 	UIFileView.prototype.clickCheckBox = false;
 	UIFileView.prototype.clickTotalCheckBox = false;
 
-	UIFileView.prototype.colorSelected = "#e7f3ff";
-	UIFileView.prototype.colorHover = "#f2f8ff";
+	UIFileView.prototype.colorSelected = "#e5e5e5";
+	UIFileView.prototype.colorHover = "#eeeeee";
 	
 	UIFileView.prototype.t1 = 0;
 	UIFileView.prototype.t2 = 0;
@@ -30,9 +30,9 @@
 
 UIFileView.prototype.clickFolder =  function (folderDiv, expandLink, collapseLink, docListId,event) {
 	if (!folderDiv) return;
-    folderDiv.className = "FolderCollapsed" == folderDiv.className ? "FolderExpanded" : "FolderCollapsed";
+    folderDiv.className = "uiIconArrowRight" == folderDiv.className ? "uiIconArrowDown" : "uiIconArrowRight";
     var docList = document.getElementById(docListId);
-    if ("FolderCollapsed" == folderDiv.className) {
+    if ("uiIconArrowRight" == folderDiv.className) {
     	eval(decodeURIComponent(collapseLink));
     } else {
     	eval(decodeURIComponent(expandLink));
@@ -63,7 +63,7 @@ UIFileView.prototype.initAllEvent = function(actionAreaId, enableDragAndDrop) {
 	if (!actionArea) return;
 	var mousedown = null;
 	var keydown = null;
-	Self.allItems = gj(actionArea).find("div.RowView");
+	Self.allItems = gj(actionArea).find("div.rowView");
 	Self.allItems.each(function(index, elem){
 		if (!Array.prototype[index]) {
 			var item = elem;
@@ -97,7 +97,7 @@ UIFileView.prototype.initAllEvent = function(actionAreaId, enableDragAndDrop) {
 	var fillOutElement = document.createElement('div');
 	fillOutElement.id = "FillOutElement";
 	
-	var listGrid = gj(actionArea).find("div.UIListGrid:first")[0];
+	var listGrid = gj(actionArea).find("div.uiListGrid:first")[0];
 	if (listGrid) {
 		listGrid.appendChild(fillOutElement);
 	}
@@ -193,7 +193,7 @@ Self.t1 = d.getTime();
 		
 		mobileElement.style.opacity = 64/100 ;
 		Self.mobileId = mobileElement.getAttribute('id');
-		var coverElement = newElement({className: "UIListGrid"});
+		var coverElement = newElement({className: "uiListGrid"});
 		for(var i in Self.itemsSelected) {
 			if (Array.prototype[i]) continue;
 			var childNode = Self.itemsSelected[i].cloneNode(true);
@@ -398,7 +398,7 @@ UIFileView.prototype.mouseDownGround = function(evt) {
 		mask.style.opacity = 17/100;
 		
 		//store position for all item
-		var listGrid = gj(element).find("div.UIListGrid:first")[0];
+		var listGrid = gj(element).find("div.uiListGrid:first")[0];
 		for( var i = 0 ; i < Self.allItems.length; ++i) {
 			Self.allItems[i].posX = Math.abs(eXo.core.Browser.findPosXInContainer(Self.allItems[i], element)) - listGrid.scrollLeft;
 			Self.allItems[i].posY = Math.abs(eXo.core.Browser.findPosYInContainer(Self.allItems[i], element)) - listGrid.scrollTop;

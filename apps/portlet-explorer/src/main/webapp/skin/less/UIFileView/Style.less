@@ -1,0 +1,84 @@
+
+.uiFileView  {
+	margin: -4px;
+	
+	.columnCheckbox {
+		padding: 3px 10px;
+		float: right;
+	}
+	
+	.columnArrow {
+		width: 35px;
+		min-height: 30px;
+		float: left;
+		text-align: center;
+		
+		[class^="uiIconArrow"] {
+			margin-top: 5px;
+		}
+	}
+	
+	.columnNodeType {
+		width: 30px;
+		float: left;
+	}
+	
+	.columnText {
+		margin: 0px 25px 0px 75px;
+	}
+	
+	.fileViewRowView {
+		border-bottom: 1px solid #dedede;
+		padding: 10px 0px;
+		
+		.nodeName {
+			font-weight: bold;
+			color: @grayDark;
+		}
+		
+		.nodeLabel {
+			color: @grayLight;
+		}
+		
+		.fileInfoBottom {
+			color: @grayLight;
+		}
+		
+		.fileInfoVersion {
+			background-color: darkgray;
+			border-radius: 4px 4px 4px 4px;
+			color: white;
+			display: inline;
+			font-size: 9px;
+			font-weight: bold;
+			width: auto;
+			padding: 2px 5px;
+		}
+	}
+	
+	.uiListGrid .titleTable {
+		font-weight: lighter;
+		padding: 5px 0px;
+		background: #f8f8f8;
+    border-bottom: 1px solid #dedede;
+    font-weight: normal;
+		height: auto;
+		line-height: 28px;
+
+		.breadcrumbLink {
+		 margin-right: 200px;
+		 overflow: hidden;
+		 white-space: nowrap;
+		 line-height: 28px;	
+		 padding-left: 15px;
+		}
+	}
+}
+
+.uiFileView .MoreButton {
+	color:#058ee6;
+	font-weight:bold;
+	margin-right:20px;
+	text-decoration:underline;
+	cursor:pointer;
+}

@@ -75,12 +75,12 @@
 	}
 %>
 <div id="$componentId">
-	<div id="${componentId}-$viewComponentId" class="UIListView UIFileView $componentId">	
+	<div id="${componentId}-$viewComponentId" class="uiFileView $componentId">	
 		<div class="uiListGrid" style="min-height:400px">
-				<div class="TitleTable" id="FileViewBreadcrumb">
+				<div class="titleTable clearfix" id="FileViewBreadcrumb">
 	  <!--============FirstRow==================================================================-->
-          <div class="TitleTableRow">
-            <!--div id="ActionMenuPlaceHolder" class="FL"><span></span></div-->
+          <!--div class="TitleTableRow clearfix">
+            <div id="ActionMenuPlaceHolder" class="FL"><span></span></div>
             <div id="FileViewStatus" class="NoShow FR">
                 <div  style="cursor:pointer" id="FileViewClearSelection" class="FR" onclick="eXo.ecm.UIFileView.clearCheckboxes(event);">
                   <u><%=_ctx.appRes("FileView.label.ClearSelection")%></u>
@@ -98,12 +98,13 @@
                   <span></span>
                 </div>
             </div>
-          </div>
+          </div-->
     <!--============SecondRow=================================================================-->
-					<div class="ClearFix TitleTableRow">
             <!--Total Check box-->
-            <input id="UIFileViewCheckBox" type="checkbox" class="FR" onclick="eXo.ecm.UIFileView.toggleCheckboxes(this, event);"/>
-            <!--End of Total Check Box-->
+						<div class="columnCheckbox">
+							<span class="uiCheckbox"><input type="checkbox" name="UIFileViewCheckBox" class="checkbox" id="UIFileViewCheckBox" onclick="eXo.ecm.UIFileView.toggleCheckboxes(this, event);"><span></span></span>
+            </div>
+						<!--End of Total Check Box-->
           <!--=======================================================-->
             <!--Paginator-->
               <% def pageIterator = uicomponent.getContentPageIterator();
@@ -112,7 +113,7 @@
                  System.out.println(currentPage + ": " + availablePage);
                  if (availablePage > 1) {
               %>
-                <div id="FileViewPageIterator" class="FR">
+                <div id="FileViewPageIterator" class="pull-right">
                   <!--Begin of prev-->
                   <% if (currentPage > 1) {%>
                     <u><a href="<%=pageIterator.event("ShowPage","${currentPage - 1}")%>" class="Icon LastPageIcon" title="<%=_ctx.appRes("UIPageIterator.label.previous")%>"><%=_ctx.appRes("UIPageIterator.label.previous")%></a></u>
@@ -157,7 +158,7 @@
                 def bgColorDate = "Date".equals(selectedSortType)?"yellow":"";
               %>
             <!--===============DropDownBox===================-->
-              <div class="btn-group FR">
+              <div class="btn-group pull-right">
                 <button data-toggle="dropdown" class="btn dropdown-toggle">
                   <%=_ctx.appRes("FileView.label." + ("Alphabetic".equals(selectedSortType)?"name":"date"))%>
                   <span class="caret"></span>
@@ -181,16 +182,14 @@
                 </ul>
               </div>
             <!--===============Sort By label =================-->
-              <div class="FR">
-                <%=_ctx.appRes("FileView.label.sortBy")%>
+              <div class="pull-right">
+                <%=_ctx.appRes("FileView.label.sortBy")%> 
               </div>
-            <!--End of Breadcrumb sort-->
-            
-            <div class="Breadcrumb FL"><span></span></div>
             <!--Breadcrumb links-->
-            <div class="BreadcrumbLink ClearFix">
-              <a class="NodeButton DriveNameNodeButton"
-                 onclick="<%=uicomponent.event("ChangeNode", drivePath.toString(), new Parameter("workspaceName", uiExplorer.getDriveData().getWorkspace()))%>" class="NodeLabel"
+            <div class="breadcrumbLink">
+							<i class="uiIconTree"></i> 
+              <a class="nodeLabel" data-placement="bottom" rel="tooltip"
+                 onclick="<%=uicomponent.event("ChangeNode", drivePath.toString(), new Parameter("workspaceName", uiExplorer.getDriveData().getWorkspace()))%>"
                  title="<%=uiExplorer.findFirstComponentOfType(UITreeExplorer.class).getLabel()%>">
                 <strong><%=uiExplorer.findFirstComponentOfType(UITreeExplorer.class).getLabel()%></strong>
               </a>
@@ -205,9 +204,9 @@
                   def curNode = (javax.jcr.Node)nodeFinder.getItem(nodeWs, drivePath.toString());
                   def curTitle = org.exoplatform.services.cms.impl.Utils.getTitle(curNode);
                   %>
-                    <span class="FL">&nbsp;>&nbsp;</span>
-                    <a class="NodeButton"
-                      onclick="<%=uicomponent.event("ChangeNode", drivePath.toString(), new Parameter("workspaceName", nodeWs))%>" class="NodeLabel"
+                    <i class="uiIconArrowRightMini"></i>
+                    <a class="nodeLabel" data-placement="bottom" rel="tooltip"
+                      onclick="<%=uicomponent.event("ChangeNode", drivePath.toString(), new Parameter("workspaceName", nodeWs))%>"
                       title="<%=curTitle%>">
                      <strong><%=curTitle%></strong>
                     </a>
@@ -219,7 +218,7 @@
             <!--End of Breadcrumb links-->
           <!--=======================================================-->
             
-			    </div><!--End of ClearFix-->			    
+			   <!--End of ClearFix-->			    
 		    <!--=======================================================-->
 			    <div style="position: relative; top: 0px; left: 0px; width: 0px; height: 0px">
 						<div class="Mask" style="position: absolute; top: 0px; left: 0px; width: 0px; height: 0px"></div>
