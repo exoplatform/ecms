@@ -80,9 +80,9 @@ public class ChangeStateCronJobImpl implements Job {
         sessionProvider = SessionProvider.createSystemProvider();
         
         String property = null;
-        if ("staged".equals(fromState) && "published".equals(toState)) {
+        if (!"published".equals(fromState) && "published".equals(toState)) {
           property = START_TIME_PROPERTY;
-        } else if ("published".equals(fromState) && "unpublished".equals(toState)) {
+        } else if (!"unpublished".equals(fromState) && "unpublished".equals(toState)) {
           property = END_TIME_PROPERTY;
         }
 
