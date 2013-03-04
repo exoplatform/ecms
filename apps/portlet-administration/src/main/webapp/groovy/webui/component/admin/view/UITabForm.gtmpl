@@ -3,7 +3,7 @@
   
   String fieldName; 
 %>
-<div class="uiForm $uicomponent.id" style="border: 2px solid green;">
+<div class="uiForm $uicomponent.id">
 	<%
 	uiform.begin()
 		//this template is reused much (especially in ecms)
