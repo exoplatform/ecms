@@ -568,8 +568,8 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 	  }
 	});
 	gj("#ActionMenuPlaceHolder").prepend(contextMenu);
-    gj(".UIRightClickPopupMenu", contextMenu).addClass("MenuBar");
-    gj(".UIRightPopupMenuContainer", contextMenu).addClass("ClearFix");
+    gj(".uiRightClickPopupMenu", contextMenu).addClass("MenuBar");
+    gj(".uiRightPopupMenuContainer", contextMenu).addClass("ClearFix");
 	//check lock, unlock action
 	var checkUnlock = false;
 	var checkRemoveFavourite = false;
@@ -584,8 +584,8 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 	  if (Self.itemsSelected[i].getAttribute('mediaType') == "true") checkMediaType = true;
 	  if (Self.itemsSelected[i].getAttribute('trashHome') == "true") checkEmptyTrash = true;
 	}
-	var lockAction = gj(contextMenu).find("div.Lock16x16Icon:first")[0];
-	var unlockAction = gj(contextMenu).find("div.Unlock16x16Icon:first")[0];
+    var lockAction = gj(contextMenu).find("i.uiIconEcmsLock:first")[0];
+    var unlockAction = gj(contextMenu).find("i.uiIconEcmsUnlock:first")[0];
 	
 	if (checkUnlock) {
 	  unlockAction.parentNode.style.display = "block";
@@ -595,8 +595,8 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 	  lockAction.parentNode.style.display = "block";
 	}
 	
-	var addFavouriteAction = gj(contextMenu).find("div.AddToFavourite16x16Icon:first")[0];
-	var removeFavouriteAction = gj(contextMenu).find("div.RemoveFromFavourite16x16Icon:first")[0];
+    var addFavouriteAction = gj(contextMenu).find("i.uiIconEcmsAddToFavourite:first")[0];
+    var removeFavouriteAction = gj(contextMenu).find("i.uiIconEcmsRemoveFromFavourite:first")[0];
 	if (checkRemoveFavourite) {
 	  removeFavouriteAction.parentNode.style.display = "block";
 	  addFavouriteAction.parentNode.style.display = "none";
@@ -604,9 +604,9 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 	  addFavouriteAction.parentNode.style.display = "block";
 	  removeFavouriteAction.parentNode.style.display = "none";
 	}
-	var restoreFromTrashAction = gj(contextMenu).find("div.RestoreFromTrash16x16Icon:first")[0];
-	var emptyTrashAction = gj(contextMenu).find("div.EmptyTrash16x16Icon:first")[0];
-	var playMediaAction = gj(contextMenu).find("div.PlayMedia16x16Icon:first")[0];
+    var restoreFromTrashAction = gj(contextMenu).find("i.uiIconEcmsRestoreFromTrash:first")[0];
+    var emptyTrashAction = gj(contextMenu).find("i.uiIconEcmsEmptyTrash:first")[0];
+    var playMediaAction = gj(contextMenu).find("i.uiIconEcmsPlayMedia:first")[0];
 	
 	if (!checkInTrash) {
 	  restoreFromTrashAction.parentNode.style.display = "none";
@@ -625,7 +625,7 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 	    emptyTrashAction.parentNode.style.display = "block";
 	  }
 	}
-	var pasteAction = gj(contextMenu).find("div.Paste16x16Icon:first")[0];
+    var pasteAction = gj(contextMenu).find("i.uiIconEcmsPaste:first")[0];
 	
 	if (Self.itemsSelected.length > 1) {
 	  pasteAction.parentNode.style.display = "none";
@@ -635,7 +635,7 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 	var Y = event.pageY;
 	var portWidth = gj(window).width();
 	var portHeight = gj(window).height();
-	var contentMenu = gj(contextMenu).children("div.UIRightClickPopupMenu:first")[0];
+    var contentMenu = gj(contextMenu).children("div.uiRightClickPopupMenu:first")[0];
 	if (event.clientX + contentMenu.offsetWidth > portWidth) X -= contentMenu.offsetWidth;
 	if (event.clientY + contentMenu.offsetHeight > portHeight) Y -= contentMenu.offsetHeight + 5;
 //	contextMenu.style.top = Y + 5 + "px";
