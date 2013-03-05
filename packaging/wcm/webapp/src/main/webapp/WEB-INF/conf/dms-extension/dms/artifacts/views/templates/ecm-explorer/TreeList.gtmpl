@@ -226,7 +226,7 @@
                           action = itemContext.getUIExtensionName();
                       %>
                         <li class="menuItem" style="block">   
-                          <a class="actionIcon" onclick=eXo.ecm.UIListView.postGroupAction("<%=itemContext.event(action)%>")>  
+                          <a onclick=eXo.ecm.UIListView.postGroupAction("<%=itemContext.event(action)%>")>  
                             <i class="uiIconEcms${action}"></i> <%=_ctx.appRes("ECMContextMenu.event." + action)%>
                           </a>
                         </li>
@@ -243,15 +243,13 @@
                </div>
                <!--==================-->
                <div id="FileViewStatus" class="fileViewStatus">
-                 <div  style="cursor:pointer" id="FileViewClearSelection" class="FR" onclick="eXo.ecm.UIFileView.clearCheckboxes(event);">
-                   <u><%=_ctx.appRes("FileView.label.ClearSelection")%></u>
-                 </div>
-                 <div class="FR">&nbsp;</div>
-                 <div class="FR">
+                 <button type="button" class="btn pull-right" id="FileViewClearSelection" onclick="eXo.ecm.UIFileView.clearCheckboxes(event);">
+                   <%=_ctx.appRes("FileView.label.ClearSelection")%>
+                 </button>
+                 <div class="text pull-right">
                    <%=_ctx.appRes("FileView.label.filesAreSelected")%>
                  </div>
-                 <div class="FR">&nbsp;</div>
-                 <div id="FileViewItemCount" class="FR">
+                 <div id="FileViewItemCount" class="fileViewItemCount pull-right">
                    <span></span>
                  </div>
                </div>               
@@ -264,7 +262,7 @@
                       action = itemGroundContext.getUIExtensionName();
                 %>
                 <li class="menuItem" style="block">   
-                  <a class="actionIcon" href="<%=itemGroundContext.event(action)%>">   
+                  <a href="<%=itemGroundContext.event(action)%>">   
                     <i class="uiIconEcms${action}"></i> <%=_ctx.appRes("ECMContextMenu.event." + action)%>
                   </a>
                 </li>
@@ -279,13 +277,13 @@
             </div>
             <!--==================-->
             <div id="FileViewStatus" class="pull-right">
-              <button type="button" id="FileViewClearSelection" class="btn pull-right" onclick="eXo.ecm.UIFileView.clearCheckboxes(event);">
+              <button type="button" class="btn pull-right" id="FileViewClearSelection" onclick="eXo.ecm.UIFileView.clearCheckboxes(event);">
                 <%=_ctx.appRes("FileView.label.ClearSelection")%>
               </button>
-              <div class="pull-right">
+              <div class="text pull-right">
                 <%=_ctx.appRes("FileView.label.filesAreSelected")%>
               </div>
-              <div id="FileViewItemCount" class="pull-right">
+              <div id="FileViewItemCount" class="fileViewItemCount pull-right">
                 <span></span>
               </div>
             </div>

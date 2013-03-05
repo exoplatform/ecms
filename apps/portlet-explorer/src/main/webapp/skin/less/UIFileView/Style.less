@@ -95,7 +95,7 @@
 	
 		.uiRightPopupMenuContainer {
 			margin: 0px;
-			padding: 0px;
+			padding: 0px 10px;
 			float: none;
 			background: none;
 			border: none;
@@ -103,21 +103,32 @@
 			
 			li {
 				float: left;
-				padding: 3px 0px;
+				padding: 4px 0px;
 				
 				a {
-					padding: 4px 7px;
+					padding: 4px 6px;
+					border: 1px solid transparent;
+					line-height: 18px;
+					cursor: pointer;
 				}
 				
 				> a:hover, > a:active {
 					#gradient > .vertical(#ffffff, #e6e6e6);
-					line-height: 18px;
 					border: 1px solid #c7c7c7;
 					.border-radius(@borderRadiusSmall);
 					color: @grayDark;
 					padding: 4px 6px;
 					
 					> i {
+						background-image: url("/eXoWCMResources/skin/images/Icons/uiIconsEcmsBlue.png");
+					}
+					
+					.uiIconEcmsEditDocument,
+					.uiIconEcmsDelete,
+					.uiIconEcmsMoveNode,
+					.uiIconEcmsRestoreFromTrash,
+					.uiIconEcmsUpload,
+					.uiIconEcmsViewInfo {
 						background-image: url("/eXoResources/skin/images/Icons/uiIconsBlue.png");
 					}
 				}
@@ -128,5 +139,15 @@
 	.fileViewStatus {
 		position: absolute;
 		right: 0px;
+		line-height: 27px;
+		padding: 5px 10px 0px 0px;
+		
+		.text {
+			margin: 0px 5px;
+		}
+		
+		.fileViewItemCount {
+			font-weight: bold;
+		}
 	}
 }
