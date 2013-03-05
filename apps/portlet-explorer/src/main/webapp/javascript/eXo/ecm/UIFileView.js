@@ -568,7 +568,7 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 	  }
 	});
 	gj("#ActionMenuPlaceHolder").prepend(contextMenu);
-    gj(".uiRightClickPopupMenu", contextMenu).addClass("MenuBar");
+    gj(".uiRightClickPopupMenu", contextMenu).addClass("uiFileViewActionBar");
     gj(".uiRightPopupMenuContainer", contextMenu).addClass("ClearFix");
 	//check lock, unlock action
 	var checkUnlock = false;
@@ -640,7 +640,7 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 	if (event.clientY + contentMenu.offsetHeight > portHeight) Y -= contentMenu.offsetHeight + 5;
 //	contextMenu.style.top = Y + 5 + "px";
 //	contextMenu.style.left = X + 5 + "px";
-    var menubar = gj('div.MenuBar');
+    var menubar = gj('div.uiFileViewActionBar');
     if (menubar) {
     	menubar.width(gj("div#UIActionBar").width() - 120);
     }	
@@ -817,7 +817,7 @@ UIFileView.prototype.clickRightMouse = function(event, elemt, menuId, objId, whi
       gj(contextMenu).find("a").each(function()
       {
         var item = gj(this);
-        if(whiteList.indexOf(item.attr("exo:attr")) > -1)
+        if(whiteList.indexOf(item.attr("exo:attr")) > -1 || item.className=="dropdown-toggle")
         {
           item.css("display", "block");
         }
@@ -851,9 +851,12 @@ UIFileView.prototype.clickRightMouse = function(event, elemt, menuId, objId, whi
 
     eXo.core.Mouse.update(event);
     gj("#ActionMenuPlaceHolder").prepend(contextMenu);
-    gj(contextMenu).addClass("MenuBar");
+    gj(contextMenu).addClass("uiFileViewActionBar");
+    var moreButton = gj("#hiddenMoreButton:first")[0];
+    gj(contextMenu).find("ul:first").append(moreButton);
+    
     eXo.webui.UIPopup.show(contextMenu);
-    var menubar = gj('div.MenuBar');
+    var menubar = gj('div.uiFileViewActionBar');
     if (menubar) {
     	menubar.width(gj("div#UIActionBar").width() - 120);
     }    

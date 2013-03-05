@@ -79,26 +79,8 @@
 		<div class="uiListGrid" style="min-height:400px">
 				<div class="titleTable clearfix" id="FileViewBreadcrumb">
 	  <!--============FirstRow==================================================================-->
-          <!--div class="TitleTableRow clearfix">
-            <div id="ActionMenuPlaceHolder" class="FL"><span></span></div>
-            <div id="FileViewStatus" class="NoShow FR">
-                <div  style="cursor:pointer" id="FileViewClearSelection" class="FR" onclick="eXo.ecm.UIFileView.clearCheckboxes(event);">
-                  <u><%=_ctx.appRes("FileView.label.ClearSelection")%></u>
-                </div>
-                
-                <div class="FR">&nbsp;</div>
-                
-                <div class="FR">
-                  <%=_ctx.appRes("FileView.label.filesAreSelected")%>
-                </div>
-                
-                <div class="FR">&nbsp;</div>
-                
-                <div id="FileViewItemCount" class="FR">
-                  <span></span>
-                </div>
-            </div>
-          </div-->
+          <div class="TitleTableRow clearfix">
+          </div>
     <!--============SecondRow=================================================================-->
             <!--Total Check box-->
 						<div class="columnCheckbox">
@@ -222,6 +204,15 @@
 		    <!--=======================================================-->
 			    <div style="position: relative; top: 0px; left: 0px; width: 0px; height: 0px">
 						<div class="Mask" style="position: absolute; top: 0px; left: 0px; width: 0px; height: 0px"></div>
+
+						<ul>
+  					  <li id="hiddenMoreButton" class="dropdown pull-right listHiddenTabsContainer">
+    					  <a data-toggle="dropdown" class="dropdown-toggle" href="#">More <b class="caret"></b></a>
+    					  <ul class="dropdown-menu">
+    					    <!-- <li><a data-toggle="tab" href="#dropdown1_4">Tab demo1</a></li> -->
+    					  </ul>
+  					  </li>
+						</ul>
 						
 						<div class="JCRMoveAction" 
 								 style="display: none;" 
@@ -230,24 +221,43 @@
 						</div>
 						
             <div class="ItemContextMenu" style="position: absolute; top: 0px; left: 0px; display: none;">
-            <div class="uiRightClickPopupMenu" style="display: block;">
-              <ul class="dropdown-menu uiRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" onkeydown="event.cancelBubble = true;">                  
-                    <%
-                      for(itemContext in managersMultiItemContext) {
-                        action = itemContext.getUIExtensionName();
-                    %>
-                      <li class="menuItem" style="display: block;">   
-                        <a onclick=eXo.ecm.UIListView.postGroupAction("<%=itemContext.event(action)%>")>  
-                          <i class="uiIconEcms${action}"></i> <%=_ctx.appRes("ECMContextMenu.event." + action)%>
-                        </a>
+              <div class="uiRightClickPopupMenu" style="display: block;">
+                <ul class="dropdown-menu uiRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" onkeydown="event.cancelBubble = true;">                  
+                      <%
+                        for(itemContext in managersMultiItemContext) {
+                          action = itemContext.getUIExtensionName();
+                      %>
+                        <li class="menuItem" style="display: block;">   
+                          <a onclick=eXo.ecm.UIListView.postGroupAction("<%=itemContext.event(action)%>")>  
+                            <i class="uiIconEcms${action}"></i> <%=_ctx.appRes("ECMContextMenu.event." + action)%>
+                          </a>
+                        </li>
+                      <%
+                        }
+                      %>
+                      <li class="dropdown pull-right listHiddenTabsContainer">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">More <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          <!-- <li><a data-toggle="tab" href="#dropdown1_4">Tab demo1</a></li> -->
+                        </ul>
                       </li>
-                    <%
-                      }
-                    %>
-                  
-               </ul>  
-             </div> 
-            </div>
+                 </ul>  
+               </div>
+               <!--==================-->
+               <div id="FileViewStatus" class="FR">
+                 <div  style="cursor:pointer" id="FileViewClearSelection" class="FR" onclick="eXo.ecm.UIFileView.clearCheckboxes(event);">
+                   <u><%=_ctx.appRes("FileView.label.ClearSelection")%></u>
+                 </div>
+                 <div class="FR">&nbsp;</div>
+                 <div class="FR">
+                   <%=_ctx.appRes("FileView.label.filesAreSelected")%>
+                 </div>
+                 <div class="FR">&nbsp;</div>
+                 <div id="FileViewItemCount" class="FR">
+                   <span></span>
+                 </div>
+               </div>               
+            </div><!--end of item context menu-->
             <div class="GroundContextMenu" style="position: absolute; top: 0px; left: 0px; display: none;">
             <div class="uiRightClickPopupMenu" style="display: block;">
               <ul class="dropdown-menu uiRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" onkeydown="event.cancelBubble = true;">          
@@ -260,11 +270,32 @@
                     <i class="uiIconEcms${action}"></i> <%=_ctx.appRes("ECMContextMenu.event." + action)%>
                   </a>
                 </li>
-                <%}%>     
+                <%}%>
+                <li class="dropdown pull-right listHiddenTabsContainer">
+                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">More <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <!-- <li><a data-toggle="tab" href="#dropdown1_4">Tab demo1</a></li> -->
+                  </ul>
+                </li>
               </ul> 
             </div>
-        </div>					</div>
-				</div><!--TitleTable-->
+            <!--==================-->
+            <div id="FileViewStatus" class="FR">
+              <div  style="cursor:pointer" id="FileViewClearSelection" class="FR" onclick="eXo.ecm.UIFileView.clearCheckboxes(event);">
+                <u><%=_ctx.appRes("FileView.label.ClearSelection")%></u>
+              </div>
+              <div class="FR">&nbsp;</div>
+              <div class="FR">
+                <%=_ctx.appRes("FileView.label.filesAreSelected")%>
+              </div>
+              <div class="FR">&nbsp;</div>
+              <div id="FileViewItemCount" class="FR">
+                <span></span>
+              </div>
+            </div>
+        </div><!--end of ground context menu-->
+      </div>
+		</div><!--TitleTable-->
       <%      	
         def uiDocumentNodeList = uicomponent.getChild(UIDocumentNodeList.class);
         if (uiDocumentNodeList != null) {

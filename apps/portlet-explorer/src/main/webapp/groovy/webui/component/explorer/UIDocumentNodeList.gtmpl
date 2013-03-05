@@ -166,6 +166,7 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
     strActs +=  " </div>" ;
     strActs +=  "</a>";
   }
+  
   strActs += "</div>";
   def rightClickMenu = "" ;
   Boolean isLocked = false;

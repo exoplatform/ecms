@@ -1093,7 +1093,7 @@
       if (breadcrumb) {
           breadcrumb.width(breadcrumb.parent().width());
         }        
-       var menubar = gj('div.MenuBar');
+       var menubar = gj('div.uiFileViewActionBar');
        if (menubar) {
       menubar.width(gj("div#uiActionBar").width() - 120);
       }
