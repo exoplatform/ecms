@@ -78,9 +78,7 @@
 	<div id="${componentId}-$viewComponentId" class="uiFileView $componentId">	
 		<div class="uiListGrid" style="min-height:400px">
 				<div class="titleTable clearfix" id="FileViewBreadcrumb">
-	  <!--============FirstRow==================================================================-->
-          <div class="TitleTableRow clearfix">
-          </div>
+
     <!--============SecondRow=================================================================-->
             <!--Total Check box-->
 						<div class="columnCheckbox">
@@ -202,7 +200,7 @@
             
 			   <!--End of ClearFix-->			    
 		    <!--=======================================================-->
-			    <div style="position: relative; top: 0px; left: 0px; width: 0px; height: 0px">
+			    <div style="position: relative; top: 0px; left: 0px; width: 0px; height: 0px; display: none;">
 						<div class="Mask" style="position: absolute; top: 0px; left: 0px; width: 0px; height: 0px"></div>
 
 						<ul>
@@ -227,8 +225,8 @@
                         for(itemContext in managersMultiItemContext) {
                           action = itemContext.getUIExtensionName();
                       %>
-                        <li class="menuItem" style="display: block;">   
-                          <a onclick=eXo.ecm.UIListView.postGroupAction("<%=itemContext.event(action)%>")>  
+                        <li class="menuItem" style="block">   
+                          <a class="actionIcon" onclick=eXo.ecm.UIListView.postGroupAction("<%=itemContext.event(action)%>")>  
                             <i class="uiIconEcms${action}"></i> <%=_ctx.appRes("ECMContextMenu.event." + action)%>
                           </a>
                         </li>
@@ -244,7 +242,7 @@
                  </ul>  
                </div>
                <!--==================-->
-               <div id="FileViewStatus" class="FR">
+               <div id="FileViewStatus" class="fileViewStatus">
                  <div  style="cursor:pointer" id="FileViewClearSelection" class="FR" onclick="eXo.ecm.UIFileView.clearCheckboxes(event);">
                    <u><%=_ctx.appRes("FileView.label.ClearSelection")%></u>
                  </div>
@@ -265,8 +263,8 @@
                       for(itemGroundContext in managersGroundContext) {
                       action = itemGroundContext.getUIExtensionName();
                 %>
-                <li class="menuItem" style="display: block;">   
-                  <a href="<%=itemGroundContext.event(action)%>">   
+                <li class="menuItem" style="block">   
+                  <a class="actionIcon" href="<%=itemGroundContext.event(action)%>">   
                     <i class="uiIconEcms${action}"></i> <%=_ctx.appRes("ECMContextMenu.event." + action)%>
                   </a>
                 </li>
@@ -280,16 +278,14 @@
               </ul> 
             </div>
             <!--==================-->
-            <div id="FileViewStatus" class="FR">
-              <div  style="cursor:pointer" id="FileViewClearSelection" class="FR" onclick="eXo.ecm.UIFileView.clearCheckboxes(event);">
-                <u><%=_ctx.appRes("FileView.label.ClearSelection")%></u>
-              </div>
-              <div class="FR">&nbsp;</div>
-              <div class="FR">
+            <div id="FileViewStatus" class="pull-right">
+              <button type="button" id="FileViewClearSelection" class="btn pull-right" onclick="eXo.ecm.UIFileView.clearCheckboxes(event);">
+                <%=_ctx.appRes("FileView.label.ClearSelection")%>
+              </button>
+              <div class="pull-right">
                 <%=_ctx.appRes("FileView.label.filesAreSelected")%>
               </div>
-              <div class="FR">&nbsp;</div>
-              <div id="FileViewItemCount" class="FR">
+              <div id="FileViewItemCount" class="pull-right">
                 <span></span>
               </div>
             </div>

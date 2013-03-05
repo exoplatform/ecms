@@ -82,3 +82,51 @@
 	text-decoration:underline;
 	cursor:pointer;
 }
+
+.ActionMenuPlaceHolder {
+	position: relative;
+	z-index: 10;
+	
+	.uiFileViewActionBar {
+		background: #f0f0f0;
+		border: 1px solid #cfcfcf;
+		.border-radius(3px 3px 0px 0px);
+		height: 36px;
+	
+		.uiRightPopupMenuContainer {
+			margin: 0px;
+			padding: 0px;
+			float: none;
+			background: none;
+			border: none;
+			box-shadow: none;
+			
+			li {
+				float: left;
+				padding: 3px 0px;
+				
+				a {
+					padding: 4px 7px;
+				}
+				
+				> a:hover, > a:active {
+					#gradient > .vertical(#ffffff, #e6e6e6);
+					line-height: 18px;
+					border: 1px solid #c7c7c7;
+					.border-radius(@borderRadiusSmall);
+					color: @grayDark;
+					padding: 4px 6px;
+					
+					> i {
+						background-image: url("/eXoResources/skin/images/Icons/uiIconsBlue.png");
+					}
+				}
+			}
+		}
+	}
+	
+	.fileViewStatus {
+		position: absolute;
+		right: 0px;
+	}
+}
