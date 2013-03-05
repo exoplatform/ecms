@@ -43,10 +43,10 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
 
 /**
@@ -94,15 +94,14 @@ public class UITemplateContent extends UIForm implements UISelectable {
     addUIFormInput(versions) ;
     addUIFormInput(new UIFormTextAreaInput(FIELD_CONTENT, FIELD_CONTENT, null).addValidator(MandatoryValidator.class)) ;
     addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class)) ;
-    UIFormCheckBoxInput isVersion =
-      new UIFormCheckBoxInput<Boolean>(FIELD_ENABLE_VERSION , FIELD_ENABLE_VERSION, null) ;
+    UICheckBoxInput isVersion =
+      new UICheckBoxInput(FIELD_ENABLE_VERSION , FIELD_ENABLE_VERSION, null) ;
     isVersion.setRendered(false) ;
     addUIFormInput(isVersion) ;
     UIFormInputSetWithAction uiActionTab = new UIFormInputSetWithAction("UITemplateContent");
     uiActionTab.addUIFormInput(new UIFormStringInput(FIELD_VIEWPERMISSION,
                                                      FIELD_VIEWPERMISSION,
-                                                     null).setEditable(false)
-                                                          .addValidator(MandatoryValidator.class));
+                                                     null).setDisabled(true).addValidator(MandatoryValidator.class));
     uiActionTab.setActionInfo(FIELD_VIEWPERMISSION, new String[] { "AddPermission",
         "RemovePermission" });
     addUIComponentInput(uiActionTab) ;
@@ -121,7 +120,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
       String templateContent = templateService.getTemplate(templateType, nodeTypeName_, templateName) ;
       Node template =
         templateService.getTemplateNode(templateType, nodeTypeName_, templateName, WCMCoreUtils.getSystemSessionProvider()) ;
-      getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setRendered(true) ;
+      getUICheckBoxInput(FIELD_ENABLE_VERSION).setRendered(true) ;
       String templateRole =
         templateService.getTemplateRoles(template) ;
       boolean isVersioned = template.isNodeType(Utils.MIX_VERSIONABLE) ;
@@ -129,25 +128,25 @@ public class UITemplateContent extends UIForm implements UISelectable {
         getUIFormSelectBox(FIELD_SELECT_VERSION).setRendered(true) ;
         getUIFormSelectBox(FIELD_SELECT_VERSION).setOptions(getVersionValues(template)) ;
         getUIFormSelectBox(FIELD_SELECT_VERSION).setValue(template.getBaseVersion().getName()) ;
-        getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setEnable(false) ;
-        getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setChecked(true) ;
+        getUICheckBoxInput(FIELD_ENABLE_VERSION).setDisabled(true);
+        getUICheckBoxInput(FIELD_ENABLE_VERSION).setChecked(true) ;
         setActions(new String[]{"Save", "Restore", "Refresh", "Cancel"}) ;
       } else {
         getUIFormSelectBox(FIELD_SELECT_VERSION).setRendered(false) ;
-        getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setEnable(true) ;
-        getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setChecked(false) ;
+        getUICheckBoxInput(FIELD_ENABLE_VERSION).setDisabled(false);
+        getUICheckBoxInput(FIELD_ENABLE_VERSION).setChecked(false) ;
         setActions( new String[]{"Save", "Refresh", "Cancel"}) ;
       }
       getUIFormTextAreaInput(FIELD_CONTENT).setValue(templateContent) ;
       getUIStringInput(FIELD_NAME).setValue(template.getName()) ;
-      getUIStringInput(FIELD_NAME).setEditable(false) ;
+      getUIStringInput(FIELD_NAME).setDisabled(true);
       getUIStringInput(FIELD_VIEWPERMISSION).setValue(templateRole) ;
       return ;
     }
     isAddNew_ = true ;
     getUIFormSelectBox(FIELD_SELECT_VERSION).setRendered(false) ;
-    getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setRendered(false) ;
-    getUIStringInput(FIELD_NAME).setEditable(true) ;
+    getUICheckBoxInput(FIELD_ENABLE_VERSION).setRendered(false) ;
+    getUIStringInput(FIELD_NAME).setDisabled(false);
     setActions( new String[]{"Save", "Refresh", "Cancel"}) ;
   }
 
@@ -291,7 +290,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
       }
       TemplateService templateService = uiForm.getApplicationComponent(TemplateService.class) ;
       boolean isEnableVersioning =
-        uiForm.getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).isChecked() ;
+        uiForm.getUICheckBoxInput(FIELD_ENABLE_VERSION).isChecked() ;
       if(uiForm.isAddNew_){
         templateService.addTemplate(uiForm.getTemplateType(), uiForm.nodeTypeName_, null, false, name, new String[] {role},
             new ByteArrayInputStream(content.getBytes()));
@@ -302,7 +301,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
         if(isEnableVersioning && !node.isNodeType(Utils.MIX_VERSIONABLE)) {
           node.addMixin(Utils.MIX_VERSIONABLE) ;
         }
-        if (areValidPermissions(role, uiForm, event)) {
+        if (areValidPermissions(role, uiForm)) {
           templateService.addTemplate(uiForm.getTemplateType(),
                                       uiForm.nodeTypeName_,
                                       null,
@@ -410,8 +409,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
   }
 
   private static boolean areValidPermissions(String permissions,
-                                             UITemplateContent uiTemplateContent,
-                                             Event event) throws Exception {
+                                             UITemplateContent uiTemplateContent) throws Exception {
     Boolean areValidPermissions = false;
     UIApplication uiApp = uiTemplateContent.getAncestorOfType(UIApplication.class);
     if (permissions == null || permissions.trim().length() == 0) {

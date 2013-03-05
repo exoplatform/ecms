@@ -38,19 +38,18 @@ import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
-import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormInputSet;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTabPane;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
 
 /**
@@ -90,7 +89,7 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
   public static final String OTHERS_TEMPLATE_TYPE = "others";
   
   private String selectedTabId = "";
-  private static String filter = ""; //DOCUMENTS_TEMPLATE_TYPE;
+  private String filter = ""; //DOCUMENTS_TEMPLATE_TYPE;
   
   public String getSelectedTabId() {
      return selectedTabId;
@@ -110,7 +109,7 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
 
   public void setSelectedTab(int index)
   {
-  	selectedTabId = ((UIComponent)getChild(index - 1)).getId();
+  	selectedTabId = getChild(index - 1).getId();
   }
 
   public UITemplateForm() throws Exception {
@@ -122,11 +121,11 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
     templateTab.addUIFormInput(new UIFormStringInput(FIELD_LABEL, FIELD_LABEL, null).
                                addValidator(MandatoryValidator.class)) ;
 
-    templateTab.addUIFormInput(new UIFormCheckBoxInput(FIELD_ISTEMPLATE,
+    templateTab.addUIFormInput(new UICheckBoxInput(FIELD_ISTEMPLATE,
                                                                 FIELD_ISTEMPLATE,
                                                                 null).setChecked(true));
     templateTab.addUIFormInput(new UIFormStringInput(FIELD_PERMISSION, FIELD_PERMISSION,
-                                                     null).setEditable(false).addValidator(MandatoryValidator.class));
+                                                     null).setDisabled(true).addValidator(MandatoryValidator.class));
     templateTab.setActionInfo(FIELD_PERMISSION, new String[] {"AddPermission"}) ;
     addUIComponentInput(templateTab) ;
     
@@ -154,9 +153,9 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
     getUIFormSelectBox(FIELD_NAME).setOptions(getOption());
     String nodeType = getUIFormSelectBox(FIELD_NAME).getValue();
     getUIStringInput(FIELD_LABEL).setValue("");
-    if(filter.equals(DOCUMENTS_TEMPLATE_TYPE)) getUIFormCheckBoxInput(FIELD_ISTEMPLATE).setChecked(true);
-    else getUIFormCheckBoxInput(FIELD_ISTEMPLATE).setChecked(false);
-    getUIFormCheckBoxInput(FIELD_ISTEMPLATE).setDisabled(true);
+    if(filter.equals(DOCUMENTS_TEMPLATE_TYPE)) getUICheckBoxInput(FIELD_ISTEMPLATE).setChecked(true);
+    else getUICheckBoxInput(FIELD_ISTEMPLATE).setChecked(false);
+    getUICheckBoxInput(FIELD_ISTEMPLATE).setDisabled(true);
     initTemplate(nodeType);
     getUIStringInput(FIELD_PERMISSION).setValue("");
   }
@@ -182,11 +181,11 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
     return templateService.buildDialogForm(nodeType);
   }
 
-  static public class TemplateNameComparator implements Comparator {
-    public int compare(Object o1, Object o2) throws ClassCastException {
+  static public class TemplateNameComparator implements Comparator<SelectItemOption<String>> {
+    public int compare(SelectItemOption<String> o1, SelectItemOption<String> o2) throws ClassCastException {
       try {
-        String name1 = ((SelectItemOption) o1).getValue().toString() ;
-        String name2 = ((SelectItemOption) o2).getValue().toString() ;
+        String name1 = o1.getValue().toString() ;
+        String name2 = o2.getValue().toString() ;
         return name1.compareToIgnoreCase(name2) ;
       } catch(Exception e) {
         return 0;
@@ -194,10 +193,7 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
     }
   }
 
-  @SuppressWarnings("unchecked")
   public List<SelectItemOption<String>> getOption() throws Exception { 
-  	TemplateService templateService = getApplicationComponent(TemplateService.class);
-    List<String> documentNodeTypes = templateService.getAllDocumentNodeTypes();
     
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>() ;
     NodeTypeManager nodeTypeManager =
@@ -246,7 +242,7 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
       String view = uiForm.getUIFormTextAreaInput(FIELD_VIEW).getValue();
       String skin = uiForm.getUIFormTextAreaInput(FIELD_SKIN).getValue();
       if(skin == null) skin = "";
-      boolean isDocumentTemplate = uiForm.getUIFormCheckBoxInput(FIELD_ISTEMPLATE).isChecked() ;
+      boolean isDocumentTemplate = uiForm.getUICheckBoxInput(FIELD_ISTEMPLATE).isChecked() ;
       UIFormInputSetWithAction permField = uiForm.getChildById(UITemplateForm.FIELD_TAB_TEMPLATE) ;
       String role = permField.getUIStringInput(FIELD_PERMISSION).getValue();
       if ((role == null) || (role.trim().length() == 0)) {

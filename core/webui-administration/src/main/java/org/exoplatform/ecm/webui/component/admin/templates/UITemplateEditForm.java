@@ -28,8 +28,8 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormStringInput;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 
 /**
  * Created by The eXo Platform SARL
@@ -57,7 +57,7 @@ public class UITemplateEditForm extends UIForm {
   public UITemplateEditForm() {
     addChild(new UIFormStringInput(FIELD_NAME, null)) ;
     addChild(new UIFormStringInput(FIELD_LABEL, null)) ;
-    addChild(new UIFormCheckBoxInput(FIELD_ISTEMPLATE, null, null)) ;
+    addChild(new UICheckBoxInput(FIELD_ISTEMPLATE, null, null)) ;
   }
 
   private boolean isDocumentTemplate(String nodeType)throws Exception {
@@ -72,11 +72,11 @@ public class UITemplateEditForm extends UIForm {
     if(node.hasProperty(TemplateService.TEMPLATE_LABEL)) {
       label = node.getProperty(TemplateService.TEMPLATE_LABEL).getString() ;
     }
-    getUIFormCheckBoxInput(FIELD_ISTEMPLATE).setChecked(isDocumentTemplate(nodeType)) ;
+    getUICheckBoxInput(FIELD_ISTEMPLATE).setChecked(isDocumentTemplate(nodeType)) ;
     getUIStringInput(FIELD_NAME).setValue(nodeType) ;
     getUIStringInput(FIELD_LABEL).setValue(label) ;
-    getUIFormCheckBoxInput(FIELD_ISTEMPLATE).setEnable(false) ;
-    getUIStringInput(FIELD_NAME).setEditable(false) ;
+    getUICheckBoxInput(FIELD_ISTEMPLATE).setDisabled(true);
+    getUIStringInput(FIELD_NAME).setDisabled(true);
     nodeType_ = nodeType ;
   }
 

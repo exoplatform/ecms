@@ -36,6 +36,7 @@ import org.exoplatform.services.jcr.config.WorkspaceEntry;
 import org.exoplatform.services.jcr.impl.core.WorkspaceInitializer;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -459,9 +460,12 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
 
   static public class SelectTabActionListener extends EventListener<UIDriveForm> {
     public void execute(Event<UIDriveForm> event) throws Exception {
-      UIDriveForm uiView = event.getSource() ;
-      UIDriveManager uiMetaManager = uiView.getAncestorOfType(UIDriveManager.class) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiMetaManager) ;
+      WebuiRequestContext context = event.getRequestContext();
+      String renderTab = context.getRequestParameter(UIComponent.OBJECTID);
+      if (renderTab == null)
+          return;
+      event.getSource().setSelectedTab(renderTab);
+      event.getRequestContext().addUIComponentToUpdateByAjax(event.getSource());
     }
  }
 

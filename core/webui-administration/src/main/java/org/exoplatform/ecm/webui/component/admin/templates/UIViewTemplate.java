@@ -51,7 +51,7 @@ public class UIViewTemplate extends UIContainer {
 
   public void setSelectedTab(int index)
   {
-     selectedTabId = ((UIComponent)getChild(index - 1)).getId();
+     selectedTabId = getChild(index - 1).getId();
   }
 
   public UIViewTemplate() throws Exception {
