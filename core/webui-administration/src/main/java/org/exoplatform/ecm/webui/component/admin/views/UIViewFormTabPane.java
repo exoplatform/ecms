@@ -46,7 +46,7 @@ import org.exoplatform.webui.form.UIFormInputBase;
         @ComponentConfig(
                 type = UIViewForm.class,
                 lifecycle = UIFormLifecycle.class,
-                template = "system:/groovy/webui/form/UIForm.gtmpl",
+                template = "app:/groovy/webui/component/admin/view/UIForm.gtmpl",
                 events = {
                         @EventConfig(listeners = UIViewFormTabPane.SaveActionListener.class),
                         @EventConfig(listeners = UIViewFormTabPane.RestoreActionListener.class, phase = Phase.DECODE),
