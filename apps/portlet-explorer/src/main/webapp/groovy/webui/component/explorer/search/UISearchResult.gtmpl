@@ -24,11 +24,11 @@
   int resultSize = uicomponent.getUIPageIterator().getAvailable();  
   java.text.DateFormat dateFormat = uicomponent.getSimpleDateFormat();
 %>
-<div class="UISearchResult" id="$uicomponent.id">
+<div class="uiSearchResult resizable" id="$uicomponent.id">
   <table class="uiGrid table table-hover table-striped" >
     <thead>
       <tr>
-        <th width="45">
+        <th>
           <%
             if (uicomponent.iconType.equals("BlueUpArrow")) {
           %>
@@ -52,7 +52,7 @@
           <% } %>
         </th>
         <th><%=_ctx.appRes("UISearchResult.header.name")%></th>
-        <th width="80">
+        <th>
           <%
             if (uicomponent.iconScore.equals("BlueUpArrow")) {
           %>
@@ -75,7 +75,7 @@
             </a>
           <% } %>
 		 </th>
-        <th width="80"class="center"><%=_ctx.appRes("UISearchResult.header.action")%></th>
+        <th class="center"><%=_ctx.appRes("UISearchResult.header.action")%></th>
       </tr>
     </thead>
     <tbody>
@@ -118,32 +118,30 @@
         String score = row.getJcrScore();
 			if (node != null) {
       %>
-          <tr class="$rowClass">
-            <td>
-              <div class="default16x16Icon ItemIcon <%=Utils.getNodeTypeIcon(node, "16x16Icon")%>" style="margin:auto"><span></span></div>
+          <tr>
+            <td class="center">
+              <i class="<%=Utils.getNodeTypeIcon(node, "uiIcon16x16")%>"><span></span></i>
             </td>
             <td>
-              <div class="text" rel="tooltip" data-placement="bottom" title="<%=dateFormat.format(uicomponent.getDateCreated(node))%>">
+              <h5 class="title" rel="tooltip" data-placement="bottom" title="<%=dateFormat.format(uicomponent.getDateCreated(node))%>">
                 <%=Utils.getTitleWithSymlink(node)%>
-              </div>
-              <div>$excerpt</div>
-              <div><%=_ctx.appRes("UISearchResult.header.path")%>: <%=ContentReader.getXSSCompatibilityContent(node.getPath())%></div>
-              <div><%=_ctx.appRes("UISearchResult.header.dateCreated")%>: <%=dateFormat.format(uicomponent.getDateCreated(node))%></div>
+              </h5>
+              <p class="text">$excerpt</p>
+              <p class="text"><%=_ctx.appRes("UISearchResult.header.path")%>: <%=ContentReader.getXSSCompatibilityContent(node.getPath())%></p>
+              <p class="text"><%=_ctx.appRes("UISearchResult.header.dateCreated")%>: <%=dateFormat.format(uicomponent.getDateCreated(node))%></p>
             </td>
-            <td><div class="ActionContainer">$score</div></td>
-            <td>
-              <div class="ActionContainer">
-                <img onclick="<%=uicomponent.event("View", Utils.formatNodeName(node.getPath()))%>" alt="<%=_ctx.appRes("UISearchResult.tooltip.View")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISearchResult.tooltip.View")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="View16x16Icon"/>
-                <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("OpenFolder", Utils.formatNodeName(node.getPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISearchResult.tooltip.OpenFolder")%>" alt="<%=_ctx.appRes("UISearchResult.tooltip.OpenFolder")%>" class="OpenFolder16x16Icon"/>
-              </div>
-            </td>
+            <td class="center">$score</td>
+            <td class="center actionContainer">
+							<a class="actionIcon" onclick="<%=uicomponent.event("View", Utils.formatNodeName(node.getPath()))%>" alt="<%=_ctx.appRes("UISearchResult.tooltip.View")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISearchResult.tooltip.View")%>"><i class="uiIconPreview"></i></a>
+							<a class="actionIcon" onclick="<%=uicomponent.event("OpenFolder", Utils.formatNodeName(node.getPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISearchResult.tooltip.OpenFolder")%>" alt="<%=_ctx.appRes("UISearchResult.tooltip.OpenFolder")%>"><i class="uiIconEcmsGotoFolder"></i></a>
+						</td>
           </tr>
     <%
 		  }
         }
       } else {
     %>
-      <tr class="EvenRow">
+      <tr>
         <td colspan="4" style="text-align:center;font-style:italic; color: #EF5604;"><%=_ctx.appRes("UISearchResult.msg.empty")%></td>
       </tr>
     <%}%>
