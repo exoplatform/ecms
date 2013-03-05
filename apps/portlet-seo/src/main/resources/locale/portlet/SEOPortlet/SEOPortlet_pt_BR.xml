@@ -51,6 +51,9 @@
     <title>
       <seo>Administração SEO</seo>
     </title>
+    <label>
+  	  <seo>SEO</seo>
+  	</label>
   </UISEOToolbarForm>  
   <FloatNumberValidator>
     <msg>
