@@ -87,7 +87,7 @@
 
                   <value>
                     <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-                      <field  name="description"><string>Fill SelectBox With Workspaces</string></field>
+                      <field  name="description"><string>Fill SelectBox With Language</string></field>
                       <field  name="name"><string>ecm-explorer/widget/FillSelectBoxWithLanguage.groovy</string></field>
                     </object>
                   </value>
