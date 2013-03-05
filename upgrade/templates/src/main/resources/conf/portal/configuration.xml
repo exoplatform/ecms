@@ -131,6 +131,16 @@
           <description>The plugin execution order</description>
           <value>2</value>
       </value-param>
+      <value-param>
+          <name>source.node</name>
+          <description>The old position of moved node (workspace name + absolute path)</description>
+          <value>collaboration:/sites content/live</value>
+      </value-param>
+      <value-param>
+          <name>target.node</name>
+          <description>The new position of moved node (absolute path)</description>
+          <value>/sites</value>
+      </value-param>
       </init-params>
     </component-plugin>
 	</external-component-plugins>
