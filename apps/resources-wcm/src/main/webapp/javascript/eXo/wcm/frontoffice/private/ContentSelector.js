@@ -1116,7 +1116,7 @@
 		var root = gj(leftWS).parents(".UIHomePageDT:first")[0];
 		var titleBar = gj(root).find("div.TitleBar:first")[0];
 		var uiWorkingWorkspace = gj(root).find("div.UIWorkingWorkspace:first")[0];
-		var actionBar = gj(uiWorkingWorkspace).find("div.ActionBar:first")[0];
+		var actionBar = gj(uiWorkingWorkspace).find("div.actionBar:first")[0];
 		var actionBaroffsetHeight = 0;
 		if(actionBar)
 		  actionBaroffsetHeight = actionBar.offsetHeight;
@@ -1128,7 +1128,7 @@
 	
 	EcmContentSelector.prototype.isShowFilter = function() {
 		var selectFilter = document.getElementById("Filter");
-		var filterContainer = gj(selectFilter).parents(".ActionBar:first")[0];
+		var filterContainer = gj(selectFilter).parents(".actionBar:first")[0];
 		if(eXo.ecm.ECS.typeObj == "folder") {
 			filterContainer.style.display = "none";
 		} 
