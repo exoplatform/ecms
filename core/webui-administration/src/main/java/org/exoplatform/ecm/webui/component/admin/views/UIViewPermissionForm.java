@@ -97,6 +97,7 @@ public class UIViewPermissionForm extends UIPermissionFormBase implements UISele
     public void execute(Event<UIViewPermissionForm> event) throws Exception {
       UIViewPermissionForm uiForm = event.getSource();
       UIGroupMemberSelector uiGroupMemberSelector = uiForm.createUIComponent(UIGroupMemberSelector.class, null, null);
+      uiGroupMemberSelector.setShowAnyPermission(false);
       uiGroupMemberSelector.setSourceComponent(uiForm, new String[] { UIPermissionInputSet.FIELD_USERORGROUP });
       uiForm.getAncestorOfType(UIPermissionManagerBase.class).initPopupPermission(uiGroupMemberSelector);
       UIPopupContainer popupContainer = uiForm.getAncestorOfType(UIPopupContainer.class);
