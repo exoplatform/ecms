@@ -14,10 +14,10 @@ import org.exoplatform.services.log.Log;
 /**
  * 
  * This class is used to migrade nodes which path is changed. It will move these nodes to new position. We must
- * configured source node and target node in configuration.properties via two variable source-node and target-node.
- * source-node must contains the workspace name.
- * Ex: source-node=collaboration:/sites content/live
- *     target-node=/sites
+ * configured source node and target node in configuration.xml via two variable source.node and target.node.
+ * source.node must contains the workspace name.
+ * Ex: source.node=collaboration:/sites content/live
+ *     target.node=/sites
  *
  */
 
