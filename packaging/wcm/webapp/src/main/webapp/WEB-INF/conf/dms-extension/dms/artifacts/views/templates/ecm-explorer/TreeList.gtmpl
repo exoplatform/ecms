@@ -162,9 +162,9 @@
                 </ul>
               </div>
             <!--===============Sort By label =================-->
-              <div class="pull-right">
-                <%=_ctx.appRes("FileView.label.sortBy")%> 
-              </div>
+						<div class="sortByLabel pull-right">
+							<%=_ctx.appRes("FileView.label.sortBy")%> 
+						</div>
             <!--Breadcrumb links-->
             <div class="breadcrumbLink">
 							<i class="uiIconTree"></i> 
