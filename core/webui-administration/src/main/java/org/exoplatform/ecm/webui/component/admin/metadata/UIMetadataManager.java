@@ -55,7 +55,7 @@ public class UIMetadataManager extends UIAbstractManager {
     removeChildById(METADATA_POPUP) ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, METADATA_POPUP);
     uiPopup.setShowMask(true);
-    uiPopup.setWindowSize(650, 150);
+    uiPopup.setWindowSize(650, 220);
     UIMetadataForm uiMetaForm = createUIComponent(UIMetadataForm.class, null, null) ;
     uiPopup.setUIComponent(uiMetaForm) ;
     uiPopup.setRendered(true);

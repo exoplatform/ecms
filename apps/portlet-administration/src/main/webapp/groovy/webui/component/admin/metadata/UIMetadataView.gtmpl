@@ -118,7 +118,7 @@
 				</div>
 	  </div>
   </div>
-  <div class="uiAction uiActionBorder">  
+  <div class="uiAction">  
 	  <button onclick="<%=uicomponent.event("Cancel")%>" class="btn"><%=_ctx.appRes("UIMetadataView.action.Cancel")%></button>
   </div>	
 </div>
