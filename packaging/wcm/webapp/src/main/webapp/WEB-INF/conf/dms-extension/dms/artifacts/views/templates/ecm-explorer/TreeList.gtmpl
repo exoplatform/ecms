@@ -93,10 +93,10 @@
                  System.out.println(currentPage + ": " + availablePage);
                  if (availablePage > 1) {
               %>
-                <div id="FileViewPageIterator" class="pull-right">
+                <div id="FileViewPageIterator" class="fileViewPageIterator pull-right">
                   <!--Begin of prev-->
                   <% if (currentPage > 1) {%>
-                    <u><a href="<%=pageIterator.event("ShowPage","${currentPage - 1}")%>" class="Icon LastPageIcon" title="<%=_ctx.appRes("UIPageIterator.label.previous")%>"><%=_ctx.appRes("UIPageIterator.label.previous")%></a></u>
+                    <a href="<%=pageIterator.event("ShowPage","${currentPage - 1}")%>" class="prevPageIcon" title="<%=_ctx.appRes("UIPageIterator.label.previous")%>"><%=_ctx.appRes("UIPageIterator.label.previous")%></a>
                   <%}%>
                   <!--End of prev-->                  
                   
@@ -115,7 +115,7 @@
                   <!--End of drop down list-->
                   <!--Begin of next-->
                   <% if (currentPage < availablePage) {%>
-                    <u><a href="<%=pageIterator.event("ShowPage","${currentPage + 1}")%>" class="Icon NextPageIcon" title="<%=_ctx.appRes("UIPageIterator.label.next")%>"><%=_ctx.appRes("UIPageIterator.label.next")%></a></u>
+                    <a href="<%=pageIterator.event("ShowPage","${currentPage + 1}")%>" class="nextPageIcon" title="<%=_ctx.appRes("UIPageIterator.label.next")%>"><%=_ctx.appRes("UIPageIterator.label.next")%></a>
                   <%}%>
                   <!--End of next-->
                 </div>
