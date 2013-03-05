@@ -94,13 +94,13 @@
                   <!-- ecm-explorer/interceptor -->
                   <value>
                     <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-                      <field  name="description"><string>PreNodeSaveInterceptor</string></field>
+                      <field  name="description"><string>Pre Node Save Interceptor</string></field>
                       <field  name="name"><string>ecm-explorer/interceptor/PreNodeSaveInterceptor.groovy</string></field>
                     </object>
                   </value>
                   <value>
                     <object type="org.exoplatform.services.cms.impl.ResourceConfig$Resource">
-                      <field  name="description"><string>PostNodeSaveInterceptor</string></field>
+                      <field  name="description"><string>Post Node Save Interceptor</string></field>
                       <field  name="name"><string>ecm-explorer/interceptor/PostNodeSaveInterceptor.groovy</string></field>
                     </object>
                   </value>
