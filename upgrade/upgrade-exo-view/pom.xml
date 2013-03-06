@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
     <artifactId>exo-ecms-upgrade</artifactId>
-    <version>4.0.0-SNAPSHOT</version>
+    <version>4.0.0-relooking-SNAPSHOT</version>
   </parent>
   <artifactId>exo-ecms-upgrade-exo-view</artifactId>
   <name>eXo ECMS upgrade node type exo:view</name>
