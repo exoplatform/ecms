@@ -44,14 +44,16 @@
 }
 
 .SEOToolbar img {
-	width: 16px;
-	height: 16px;
+	width: 14px;
+	height: 14px;
 	border: 0;
+	vertical-align: text-top;
+	margin-left: 5px;
 }
 .UISEOToolbarPorlet .SEOToolbar .Enable {
 	cursor: pointer;
-	line-height: 32px; 
-	padding: 0 20px 0 5px;
+	line-height: 20px; 
+	padding: 0;
 }
 
 .UISEOToolbarPorlet .SEOToolbar .Disable {
