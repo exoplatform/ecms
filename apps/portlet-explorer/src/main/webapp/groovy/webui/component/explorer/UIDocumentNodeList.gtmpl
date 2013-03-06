@@ -235,7 +235,9 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
 			</a>
 			<span class="nodeLabel"><%=fileExtension%></span>
       <p class="fileInfoBottom">
-        <a href="<%=manageVersionAction%>" class="fileInfoVersion"><%=versionNum%></a>
+        <% if (!"".equals(versionNum)) {%>
+          <a href="<%=manageVersionAction%>" class="fileInfoVersion"><%=versionNum%></a>
+        <% } %>
         <%=fileDate%>
         <%=author%>
       </p>

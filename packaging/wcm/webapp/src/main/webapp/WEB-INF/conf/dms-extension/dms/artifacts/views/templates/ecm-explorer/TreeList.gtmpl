@@ -204,7 +204,7 @@
 						<div class="Mask" style="position: absolute; top: 0px; left: 0px; width: 0px; height: 0px"></div>
 
 						<ul>
-  					  <li id="hiddenMoreButton" class="dropdown pull-right listHiddenTabsContainer">
+  					  <li id="hiddenMoreButton" class="dropdown pull-right listHiddenActionsContainer">
     					  <a data-toggle="dropdown" class="dropdown-toggle" href="#">More <b class="caret"></b></a>
     					  <ul class="dropdown-menu">
     					    <!-- <li><a data-toggle="tab" href="#dropdown1_4">Tab demo1</a></li> -->
@@ -226,14 +226,14 @@
                           action = itemContext.getUIExtensionName();
                       %>
                         <li class="menuItem" style="block">   
-                          <a onclick=eXo.ecm.UIListView.postGroupAction("<%=itemContext.event(action)%>")>  
+                          <a onclick=eXo.ecm.UIFileView.postGroupAction("<%=itemContext.event(action)%>")>  
                             <i class="uiIconEcms${action}"></i> <%=_ctx.appRes("ECMContextMenu.event." + action)%>
                           </a>
                         </li>
                       <%
                         }
                       %>
-                      <li class="dropdown pull-right listHiddenTabsContainer">
+                      <li class="dropdown pull-right listHiddenActionsContainer">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">More <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                           <!-- <li><a data-toggle="tab" href="#dropdown1_4">Tab demo1</a></li> -->
@@ -267,7 +267,7 @@
                   </a>
                 </li>
                 <%}%>
-                <li class="dropdown pull-right listHiddenTabsContainer">
+                <li class="dropdown pull-right listHiddenActionsContainer">
                   <a data-toggle="dropdown" class="dropdown-toggle" href="#">More <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <!-- <li><a data-toggle="tab" href="#dropdown1_4">Tab demo1</a></li> -->

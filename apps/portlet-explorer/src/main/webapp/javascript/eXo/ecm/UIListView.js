@@ -1093,12 +1093,12 @@
       if (breadcrumb) {
           breadcrumb.width(breadcrumb.parent().width());
         }        
-       var menubar = gj('div.uiFileViewActionBar');
-       if (menubar) {
-      menubar.width(gj("div#uiActionBar").width() - 120);
-      }
    	  var actionbar= gj('#UIActionBar');
 	  actionbar.width(actionbar.parent().width());
+	  var menubar = gj('div.uiFileViewActionBar');
+	  if (menubar) {
+		  menubar.width(gj("div#UIActionBar").width()-1);
+	  }
       //update width of UIListGrid
       eXo.ecm.ECMUtils.updateListGridWidth();
     }

@@ -712,6 +712,31 @@
 			var visibleTabsChildren  = gj(uiMainActionContainer).children("li").not(".dropdown");
 			gj(visibleTabsChildren[visibleTabsChildren.length-1]).addClass("last");
 		};
+
+		/**
+		 * @function       contextActionBarContainer_OnResize
+		 * @purpose        Handle for the resize event of Content Explorer
+		 *                  Calculate to determine which actionButton will be visible, which will be put
+		 *                  in HiddenActionList for context bar (when selecting nodes in TreeList template)
+		 */
+		ECMUtils.prototype.contextActionBarContainer_OnResize = function () {
+			var divAction = document.getElementById("ActionMenuPlaceHolder");
+			var actionbar= gj('#UIActionBar')[0];
+//			if (actionbar) { //VinhNT workaround for the un-expand width of ActionBar problem, should be improved later
+//			  actionbar.width(actionbar.parent().width()-2);
+//			}
+			var uiMainActionContainer   = gj(divAction).find("ul.dropdown-menu")[0];
+			if (!uiMainActionContainer) return; 
+			var listHiddenActionContainer = gj(uiMainActionContainer).find("li.listHiddenActionsContainer:first")[0];
+			var uiDropdownContainer   = gj(listHiddenActionContainer).find("ul.dropdown-menu:first")[0];
+			
+			var fileViewStatus = gj(actionbar).find("#FileViewStatus:first")[0];
+			var allowedSpace  = actionbar.offsetWidth - (fileViewStatus?fileViewStatus.offsetWidth : 50);
+			gj(uiMainActionContainer).find("li").removeClass("last");
+			Self.containerWithDropDownItem_OnResize(uiMainActionContainer, allowedSpace, listHiddenActionContainer, uiDropdownContainer, "active");
+			var visibleTabsChildren  = gj(uiMainActionContainer).children("li").not(".dropdown");
+			gj(visibleTabsChildren[visibleTabsChildren.length-1]).addClass("last");
+		};		
 		/**
 		 * @function       tabsContainer_OnResize
 		 * @purpose        re-arrange the TabsContainer inside Right Container
@@ -789,7 +814,9 @@
 			  sumWidth += listHiddenContainer.offsetWidth;
 			} else {
 			  gj(listHiddenContainer).css("display", "none");
-			return;
+			  mainContainer.removeChild(listHiddenContainer);
+			  gj(mainContainer).append(listHiddenContainer);
+			  return;
 			}
 			removedItem = dropdownContainer.removeChild(hiddenTabsChildren[0]);
 			gj(mainContainer).append(removedItem);
@@ -807,7 +834,10 @@
 			    }
 			  }
 			}
+		  mainContainer.removeChild(listHiddenContainer);
+		  gj(mainContainer).append(listHiddenContainer);
 		}
+		
 		/**
 		 * @function        loadContainerReference
 		 * @purpose         Maintain object reference to some container which are accessed during resize
@@ -872,6 +902,7 @@
 		  }
 		  Self.resizeVisibleComponent();
 		  Self.actionbarContainer_OnResize();
+		  Self.contextActionBarContainer_OnResize();
 		  if (Self.documentContainer_OnResize) Self.documentContainer_OnResize();
 		  Self.tabsContainer_OnResize();
 		  Self.clearFillOutElement();

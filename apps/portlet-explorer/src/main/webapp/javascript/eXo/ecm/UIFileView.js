@@ -367,43 +367,7 @@ UIFileView.prototype.mouseUpItem = function(evt) {
 	Self.clickTotalCheckBox = false;
 	Self.firstTimeClick = false
 	Self.checkSelectedItemCount();
-};
-
-//event in ground
-UIFileView.prototype.mouseDownGround = function(evt) {
-	eval("var event = ''");
-	event = evt || window.event;
-	var element = this;
-	element.holdMouse = true;
-	//Self.hideContextMenu();
-	Self.temporaryItem = null;
-	document.onselectstart = function(){return false};
-	
-	var rightClick = (event.which && event.which > 1) || (event.button && event.button == 2);
-	if (!rightClick && eXo.ecm.UIFileView.objResize == null) {
-		resetArrayItemsSelected();
-		element.onmousemove = Self.mutipleSelect;
-		var mask = gj(element).find("div.Mask:first")[0];
-		mask.storeX = eXo.ecm.DMSBrowser.findMouseRelativeX(element, event);
-		mask.storeY = eXo.core.Browser.findMouseRelativeY(element, event);
-		addStyle(mask, {
-			left: mask.storeX + "px",
-			top: mask.storeY + "px",
-			zIndex: 1,
-			width: "0px",
-			height: "0px",
-			backgroundColor: "gray",
-			border: "1px dotted black"
-		});
-		mask.style.opacity = 17/100;
-		
-		//store position for all item
-		var listGrid = gj(element).find("div.uiListGrid:first")[0];
-		for( var i = 0 ; i < Self.allItems.length; ++i) {
-			Self.allItems[i].posX = Math.abs(eXo.core.Browser.findPosXInContainer(Self.allItems[i], element)) - listGrid.scrollLeft;
-			Self.allItems[i].posY = Math.abs(eXo.core.Browser.findPosYInContainer(Self.allItems[i], element)) - listGrid.scrollTop;
-		}
-	}
+    eXo.ecm.ECMUtils.loadContainerWidth();
 };
 
 UIFileView.prototype.mutipleSelect = function(event) {
@@ -519,31 +483,6 @@ UIFileView.prototype.mutipleSelect = function(event) {
 	}
 };
 
-UIFileView.prototype.mouseUpGround = function(evt) {
-	eval("var event = ''");
-	event = evt || window.event;
-	var element = this;
-	element.holdMouse = null;
-	element.onmousemove = null;
-	revertResizableBlock();
-	removeMobileElement();
-	Self.enableDragDrop = null;
-	document.onselectstart = function(){return true};
-	
-	var mask = gj(element).find("div.Mask:first")[0];
-	addStyle(mask, {width: "0px", height: "0px", top: "0px", left: "0px", border: "none"});
-	//collect item
-	var item = null;
-	for(var i in Self.allItems) {
-		if (Array.prototype[i]) continue;
-		item = Self.allItems[i];
-		if (item.selected && !inArray(Self.itemsSelected, item)) Self.itemsSelected.push(item);
-	}
-	//show context menu
-//	var rightClick = (event.which && event.which > 1) || (event.button && event.button == 2);
-//	if (rightClick) Self.showGroundContextMenu(event, element);
-};
-
 // working with item context menu
 UIFileView.prototype.showItemContextMenu = function (event, element) {
 	gj("#UIActionBarTabsContainer").addClass("NoShow");
@@ -642,12 +581,13 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 //	contextMenu.style.left = X + 5 + "px";
     var menubar = gj('div.uiFileViewActionBar');
     if (menubar) {
-    	menubar.width(gj("div#UIActionBar").width() - 120);
+    	menubar.width(gj("div#UIActionBar").width());
     }	
     var moreButton = gj("#ShowMoreActionContainer");
     if (moreButton) {
     	moreButton.hide();
     }
+    eXo.ecm.ECMUtils.loadContainerWidth();
 };
 
 // hide context menu
@@ -737,6 +677,7 @@ UIFileView.prototype.initStickBreadcrumb = function() {
 };
 
 UIFileView.prototype.toggleCheckboxes = function(checkbox, evt) {
+	resetArrayItemsSelected();
 	Self.allItems.each(function(index, elem){
 		Self.selectBoxType = checkbox.checked;
 		Self.clickedItem = elem;
@@ -773,10 +714,10 @@ UIFileView.prototype.clearCheckboxes = function(evt) {
 
 UIFileView.prototype.checkSelectedItemCount = function() {
 	if (Self.itemsSelected.length > 1) {
-		gj("#FileViewStatus").removeClass("NoShow");
 		gj("#FileViewItemCount").html(Self.itemsSelected.length);
 	} else {
 		gj("#FileViewStatus").addClass("NoShow");
+		gj("#FileViewStatus").removeClass("NoShow");
 	}
 	//---------------------------------------------
 	if (Self.itemsSelected.length == 0) {
@@ -817,7 +758,7 @@ UIFileView.prototype.clickRightMouse = function(event, elemt, menuId, objId, whi
       gj(contextMenu).find("a").each(function()
       {
         var item = gj(this);
-        if(whiteList.indexOf(item.attr("exo:attr")) > -1 || item.className=="dropdown-toggle")
+        if(whiteList.indexOf(item.attr("exo:attr")) > -1 || item.hasClass("dropdown-toggle"))
         {
           item.css("display", "block");
         }
@@ -858,8 +799,9 @@ UIFileView.prototype.clickRightMouse = function(event, elemt, menuId, objId, whi
     eXo.webui.UIPopup.show(contextMenu);
     var menubar = gj('div.uiFileViewActionBar');
     if (menubar) {
-    	menubar.width(gj("div#UIActionBar").width() - 120);
+    	menubar.width(gj("div#UIActionBar").width());
     }    
+    eXo.ecm.ECMUtils.loadContainerWidth();
     var moreButton = gj("#ShowMoreActionContainer");
     if (moreButton) {
     	moreButton.hide();
