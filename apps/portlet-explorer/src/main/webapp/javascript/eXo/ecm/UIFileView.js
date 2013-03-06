@@ -769,8 +769,8 @@ UIFileView.prototype.clickRightMouse = function(event, elemt, menuId, objId, whi
       });
     }
 
-    var customItem = gj(elemt).find("div.RightClickCustomItem").eq(0);
-    var tmpCustomItem = gj(contextMenu).find("div.RightClickCustomItem").eq(0);
+    var customItem = gj(elemt).find("li.RightClickCustomItem").eq(0);
+    var tmpCustomItem = gj(contextMenu).find("li.RightClickCustomItem").eq(0);
     if(customItem && tmpCustomItem)
     {
       tmpCustomItem.html(customItem.html());

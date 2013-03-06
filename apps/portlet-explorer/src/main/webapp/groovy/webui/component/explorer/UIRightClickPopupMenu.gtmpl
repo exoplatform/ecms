@@ -36,6 +36,8 @@
 					</li>
 					
 				<%}%>
+				<li class="RightClickCustomItem">
+        </li>
 			</ul>
 	</div>
 </div>
