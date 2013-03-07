@@ -29,12 +29,12 @@
 			int iVote = 0;
 			while(++iVote <= voteRating) {
 		%>
-					<div class="voted"><span></span></div>
+					<i class="voted"></i>
 			<%
 				}
 				while(iVote++ <= 5) {
 			%>
-				<div class="unvoted"><span></span></div>
+				<i class="unvoted"></i>
 			<%}%>
 	</div>
 </div>
