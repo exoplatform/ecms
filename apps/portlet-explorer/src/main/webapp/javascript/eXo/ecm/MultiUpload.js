@@ -1021,6 +1021,25 @@
 
 		eXo.ecm.MultiUpload.processUploadRequest3(progressId);
 	};
+	
+	MultiUpload.prototype.uploadByRightClick = function() {
+		if (eXo.ecm.MultiUpload.SUPPORT_FILE_API) {
+			eXo.ecm.MultiUpload.document.getElementById('MultiUploadInputFiles').click();
+		} else {
+			eXo.ecm.MultiUpload.uploadFileForIE(eXo.ecm.MultiUpload.document);
+		}
+	};
+	
+	MultiUpload.prototype.uploadFileForIE = function(doc) {
+		var xmp = doc.getElementsByTagName("xmp")[0];
+		var ifr = doc.getElementById("iFrameUpload");
+		with (ifr.contentWindow) {
+			document.open();
+			document.write(xmp.innerHTML);
+			document.close();
+			document.getElementById("IEUploadInputFile").click();  
+		}
+	};
 
 	eXo.ecm.MultiUpload = new MultiUpload();
 	

@@ -114,7 +114,7 @@
 								//IE upload box
 								 if (action instanceof UploadActionComponent) {
 		             %>		              	             
-		               <li id="UploadButtonDivIE" onclick="uploadFileForIE();">
+		               <li id="UploadButtonDivIE" onclick="eXo.ecm.MultiUpload.uploadFileForIE(document);">
 								     <a class="actionIcon"><i class="uiIconEcms${button}"></i> $title</a>
 							     </li>		               
 		             <%
@@ -161,11 +161,9 @@
 
 
 
-<% if (showUploadInput) { %>
 <div style="height:0px;width:0px">
   <input  style="height:0px;width:0px" id="MultiUploadInputFiles" type="file" multiple="multiple" onchange="eXo.ecm.MultiUpload.handleFiles(this.files);eXo.ecm.MultiUpload.openMultiUploadBox();"/>
 </div>
-<% } %>
 
 <div style="height:0px;width:0px">
 <iframe id="iFrameUpload" name="iFrameUpload" class="iFrameUpload" frameborder="0px" border="0px" style="width: 0px; height:0px">
@@ -198,15 +196,3 @@
 
 </div>
 
-<script type="text/javascript">
-function uploadFileForIE() {
-var xmp = document.getElementsByTagName("xmp")[0];
-var ifr = document.getElementById("iFrameUpload");
-with (ifr.contentWindow) {
-document.open();
-document.write(xmp.innerHTML);
-document.close();
-document.getElementById("IEUploadInputFile").click();  
-}
-}
-</script>

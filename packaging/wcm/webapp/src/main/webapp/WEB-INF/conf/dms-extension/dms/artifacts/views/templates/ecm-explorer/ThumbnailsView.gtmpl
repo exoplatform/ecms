@@ -88,9 +88,10 @@
 							<%
 								for(itemGroundContext in managersGroundContext) {
 								action = itemGroundContext.getUIExtensionName();
+								def actionClick = "Upload".equals(action) ? "eXo.ecm.MultiUpload.uploadByRightClick()" : itemGroundContext.event(action);
 							%>
 							<li class="menuItem" style="display: block;"> 	
-								<a href="<%=itemGroundContext.event(action)%>">
+							<a onclick="<%=actionClick%>" href="javascript:void(0)">
 									<i class="uiIconEcms${action}"></i> <%=_ctx.appRes("ECMContextMenu.event." + action)%>
 								</a>
 							</li>
