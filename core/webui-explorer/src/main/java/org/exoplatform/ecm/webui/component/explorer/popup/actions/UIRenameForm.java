@@ -17,6 +17,7 @@
 package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.jcr.AccessDeniedException;
@@ -36,7 +37,9 @@ import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.ecm.webui.form.validator.IllegalDMSCharValidator;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.relations.RelationsService;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -45,8 +48,8 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
@@ -159,6 +162,7 @@ public class UIRenameForm extends UIForm implements UIPopupComponent {
       //change name and title main process
       try {
         //change name
+        boolean changed = false;
         if (!currentNode.getName().equals(newName)) {
           // get list of nodes that have reference to this node
           try {
@@ -206,6 +210,7 @@ public class UIRenameForm extends UIForm implements UIPopupComponent {
           }
           destNode.setProperty(Utils.EXO_LASTMODIFIER, nodeSession.getUserID());
           currentNode = destNode;
+          changed = true;
         }
         //change title
         if (!sameTitle(uiRenameForm, currentNode)) {
@@ -214,10 +219,17 @@ public class UIRenameForm extends UIForm implements UIPopupComponent {
             if (!currentNode.hasProperty(Utils.EXO_TITLE))
               currentNode.addMixin(Utils.EXO_RSS_ENABLE);
             currentNode.setProperty(Utils.EXO_TITLE, newTitle);
+            changed = true;
           }
         }
-
         nodeSession.save();
+        if (changed){//if the name or title has changed, broadcast to change publication state
+          ListenerService listenerService = uiRenameForm.getApplicationComponent(ListenerService.class);
+          if (currentNode.isNodeType("exo:datetime")) {
+            currentNode.setProperty("exo:dateModified", new GregorianCalendar());
+          }
+          listenerService.broadcast(CmsService.POST_EDIT_CONTENT_EVENT, this, currentNode);
+        }
         uiJCRExplorer.updateAjax(event);
         
       } catch (AccessDeniedException ace) {
