@@ -43,10 +43,10 @@
     <% String versionName = currentRevision.getName();
        String verName = ContentReader.getXSSCompatibilityContent(versionName);
     %>
-    <legend class="Legend" style="max-width: 600px;"><div rel="tooltip" data-placement="bottom" title="$verName" style="overflow: hidden;"><%=_ctx.appRes("UIPublicationPanel.status.version")%>: $verName </div></legend>
+    <h5 rel="tooltip" data-placement="bottom" title="$verName" style="overflow: hidden;"><%=_ctx.appRes("UIPublicationPanel.status.version")%>: <span>$verName</span></h5>
     <div class="StatusAction">
       <div class="StatusTitle"><%=_ctx.appRes("UIPublicationPanel.status.title")%>: </div>
-      <div class="StatusLink ClearFix">
+      <div class="StatusLink clearfix">
         <%
 		
  for (State state : states) {
@@ -95,23 +95,21 @@
       </div>
     </div>
   </fieldset>
-  <fieldset class="StatusTable">
-  	<legend class="Legend"><%=_ctx.appRes("UIPublicationPanel.scheduled.title")%></legend>
-  	<table class="">
-  		<tr>
-  			<td><%=_ctx.appRes("UIPublicationPanel.scheduled.from")%>&nbsp;<% uicomponent.renderChild(uicomponent.START_PUBLICATION); %></td>
-  			<td><%=_ctx.appRes("UIPublicationPanel.scheduled.to")%>&nbsp;<% uicomponent.renderChild(uicomponent.END_PUBLICATION); %></td>
-  		</tr>
-  	</table>
+  <fieldset class="scheduled">
+  	<h5><%=_ctx.appRes("UIPublicationPanel.scheduled.title")%></h5>
+  	<div class="form-inline">
+  		<span class="help-inline"><%=_ctx.appRes("UIPublicationPanel.scheduled.from")%></span><% uicomponent.renderChild(uicomponent.START_PUBLICATION); %>
+  		<span class="help-inline"><%=_ctx.appRes("UIPublicationPanel.scheduled.to")%></span><% uicomponent.renderChild(uicomponent.END_PUBLICATION); %>
+  	</div>
   </fieldset>
-  <table class="RevisionsTable" border="1">
+  <table class="revisionsTable uiGrid table table-hover table-striped">
   <thead>
     <tr>
-      <th class="Version"><%=_ctx.appRes("UIPublicationPanel.revisions.version")%></th>
-      <th class="Date"><%=_ctx.appRes("UIPublicationPanel.revisions.date")%></th>
-      <th class="Author"><%=_ctx.appRes("UIPublicationPanel.revisions.author")%></th>
-      <th class="Status"><%=_ctx.appRes("UIPublicationPanel.revisions.status")%></th>
-      <th class="Action"><%=_ctx.appRes("UIPublicationPanel.revisions.action")%></th>
+      <th class="version"><%=_ctx.appRes("UIPublicationPanel.revisions.version")%></th>
+      <th class="date"><%=_ctx.appRes("UIPublicationPanel.revisions.date")%></th>
+      <th class="author"><%=_ctx.appRes("UIPublicationPanel.revisions.author")%></th>
+      <th class="status"><%=_ctx.appRes("UIPublicationPanel.revisions.status")%></th>
+      <th class="action"><%=_ctx.appRes("UIPublicationPanel.revisions.action")%></th>
     </tr>
 	</thead>
 	<tbody>
@@ -130,11 +128,11 @@
       	def nodeName = Utils.getTitle(revision);
       	%>
           <tr>
-            <td class="Name">
+            <td class="name">
               <%
                 if (versionName.equals(revision.getName())) {
                   %>
-                    <div rel="tooltip" data-placement="bottom" title="<%=nodeName%>" style="width:200px; overflow:hidden; margin-right: 3px;"><%=_ctx.appRes("UIPublicationPanel.revisions.label")%>:<%= nodeName %></div>
+                    <div rel="tooltip" data-placement="bottom" title="<%=nodeName%>"><%=_ctx.appRes("UIPublicationPanel.revisions.label")%>:<%= nodeName %></div>
                   <%
                 } else {
                   %>
@@ -155,14 +153,14 @@
                 }
               %>
             </td>
-            <td>
-              <div rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPublicationPanel.title.preview")%>" class="Preview" onclick="<%= uicomponent.event("PreviewVersion", revision.getUUID()) %>"><span></span></div>
+            <td class="center actionContainer">
+              <a class="actionIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPublicationPanel.title.preview")%>" onclick="<%= uicomponent.event("PreviewVersion", revision.getUUID()) %>"><i class="uiIconPreview"></i></a>
               <%
                 if (revisions.indexOf(revision) != 0) {
                   if (PublicationDefaultStates.DRAFT.equals(uicomponent.getRevisionState(revisions.get(0)))) {
-                    %><div rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPublicationPanel.title.restore")%>" class="Restore" onclick="if (confirm('<%=_ctx.appRes("UIPublicationPanel.revisions.confirm")%>')) <%= uicomponent.event("RestoreVersion", revision.getUUID()) %>"><span></span></div><%
+                    %><a class="actionIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPublicationPanel.title.restore")%>" onclick="if (confirm('<%=_ctx.appRes("UIPublicationPanel.revisions.confirm")%>')) <%= uicomponent.event("RestoreVersion", revision.getUUID()) %>"><i class="uiIconRestore"></i></a><%
                   } else {
-                    %><div rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPublicationPanel.title.restore")%>" class="Restore" onclick="<%= uicomponent.event("RestoreVersion", revision.getUUID()) %>"><span></span></div><%
+                    %><a class="actionIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPublicationPanel.title.restore")%>" onclick="<%= uicomponent.event("RestoreVersion", revision.getUUID()) %>"><i class="uiIconRestore"></i></a><%
                   }
                 }
               %>
@@ -183,13 +181,13 @@
       <%
     }
   %>
-	<div class="UIAction"> 
-      <% for(action in uicomponent.getActions()) { 
-       	 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
-          String link = uicomponent.event(action) ;
+	<div class="uiAction"> 
+		<% for(action in uicomponent.getActions()) { 
+			 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
+			 String link = uicomponent.event(action) ;
  		%>
-             <a href="javascript:void(0);" onclick="$link" class="ActionButton LightBlueStyle">$actionLabel</a>
+		<button type="button" href="javascript:void(0);" onclick="$link" class="btn">$actionLabel</button>
  		<%}%>        
-     </div>
+	</div>
 </div>
 <% uicomponent.end(); %>
