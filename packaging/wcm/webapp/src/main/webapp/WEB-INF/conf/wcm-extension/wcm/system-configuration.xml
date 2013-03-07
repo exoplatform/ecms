@@ -37,7 +37,7 @@
         <property name="printPageURI" value="${wcm.config.printPageURI:/printviewer}" />
         <property name="printViewerPage" value="${wcm.config.printViewerPage:printviewer}" />
         <property name="editorPageURI" value="${wcm.config.editorPageURI:editor}" />
-        <property name="siteExplorerURI" value="{wcm.config.siteExplorerURI:siteExplorer}" />
+        <property name="siteExplorerURI" value="${wcm.config.siteExplorerURI:siteExplorer}" />
 
         <property name="CLVPortlet" value="/presentation/ContentListViewerPortlet" />
         <property name="SCVPortlet" value="/presentation/SingleContentViewer" />
