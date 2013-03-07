@@ -2472,6 +2472,7 @@
 	<UIPopupWindow>
 		<title>
 			<UISymLinkManager>Ajouter un lien</UISymLinkManager>
+      <UIAddTranslationManager>Ajouter Traduction</UIAddTranslationManager>
 		</title>
 	</UIPopupWindow>
 
@@ -2502,6 +2503,35 @@
     </msg>
 	</UISymLinkForm>
 
+  <UIAddTranslationForm>
+    <label>
+      <symLinkName>Nom du raccourci</symLinkName>
+			<pathNode>Chemin du document:</pathNode>
+      <note>Sélectionnez un autre document qui servira de la traduction</note>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <SelectDocument>Sélectionnez Document</SelectDocument>
+    </action>
+    <msg>
+      <addFolder-successful>Le raccourci '{0}' a été ajouté avec succès</addFolder-successful>
+			<name-invalid>Veuillez saisir un nom de raccourci!</name-invalid>
+      <name-not-allowed>Ce nom n'est pas autorisé.</name-not-allowed>
+      <fileName-error>Nom de fichier invalide</fileName-error>
+      <constraint-violation>Le noeud courant ne permet pas d'ajouter le type de noeud '{0}'</constraint-violation>
+      <repository-exception>Accès refusé! Vous n'avez pas la permission d'ajouter un lien symbolique vers ce noeud.</repository-exception>
+      <numberformat-exception>Impossible de sauvegarder ce répertoire. Vous devez saisir un format numérique.</numberformat-exception>
+			<path-node-invalid>Veuillez saisir le chemin du noeud!</path-node-invalid>
+			<path-node-not-allowed>Ce nom n'est pas autorisé.</path-node-not-allowed>
+			<non-node>Vous n'avez pas les droits d'accès au noeud cible</non-node>
+			<cannot-save>Certaines contraintes ont été violées durant cette opération.</cannot-save>
+			<item-exists-exception>Un noeud du même nom existe déjà</item-exists-exception>
+      <translation-node-same-language-default>Cette traduction possède la même langue que le contenu courant.</translation-node-same-language-default>
+			<UnsupportedRepositoryOperationException>Cette cible ne peut pas être référencée</UnsupportedRepositoryOperationException>
+    </msg>
+  </UIAddTranslationForm>
+  
 	<UIPopupSymLink>
 		<title>
 			<UIOneNodePathSelector>Choisir un noeud cible</UIOneNodePathSelector>

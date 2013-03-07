@@ -2475,6 +2475,7 @@
 	<UIPopupWindow>
 		<title>
 			<UISymLinkManager>Add Link</UISymLinkManager>
+      <UIAddTranslationManager>Add Translation</UIAddTranslationManager>
 		</title>
 	</UIPopupWindow>
 
@@ -2504,6 +2505,35 @@
 			<UnsupportedRepositoryOperationException>Node được liên kết không được thể tham chiếu đến (có thể do bị khóa)</UnsupportedRepositoryOperationException>
     </msg>
 	</UISymLinkForm>
+	
+  <UIAddTranslationForm>
+    <label>
+      <symLinkName>Symlink Name</symLinkName>
+      <pathNode>Document Path:</pathNode>
+      <note>Select another document that will serve as the translation</note>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <SelectDocument>Select Document</SelectDocument>
+    </action>
+    <msg>
+      <addFolder-successful>The symlink '{0}' is added successfully.</addFolder-successful>
+      <name-invalid>Please enter the symlink name.</name-invalid>
+      <name-not-allowed>This name is not allowed.</name-not-allowed>
+      <fileName-error>The file name is invalid.</fileName-error>
+      <constraint-violation>Cannot add the'{0}' node type to the current node.</constraint-violation>
+      <repository-exception>Access denied! You do not have the permission to add symlink to this node.</repository-exception>
+      <numberformat-exception>Cannot save this folder. The name provided must be a numerical format.</numberformat-exception>
+      <path-node-invalid>Please enter the path node.</path-node-invalid>
+      <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
+      <non-node>Please select the trust target node; or you do not have right to read this node.</non-node>
+      <cannot-save>An error occurred while creating the symlink.</cannot-save>
+      <item-exists-exception>The node name already exists.</item-exists-exception>
+      <translation-node-same-language-default>The translation node has the same language as the default language of current node.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>This target node is not refered.</UnsupportedRepositoryOperationException>
+    </msg>
+  </UIAddTranslationForm>
 
 	<UIPopupSymLink>
 		<title>

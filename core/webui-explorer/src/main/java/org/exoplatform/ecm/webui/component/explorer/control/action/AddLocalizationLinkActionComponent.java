@@ -27,9 +27,7 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFi
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotSymlinkFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
-import org.exoplatform.ecm.webui.component.explorer.symlink.UISymLinkManager;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
+import org.exoplatform.ecm.webui.component.explorer.symlink.UIAddTranslationManager;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIPopupContainer;
@@ -61,8 +59,6 @@ public class AddLocalizationLinkActionComponent extends UIAbstractManagerCompone
                                           new IsNotTrashHomeNodeFilter(),
                                           new IsNotInTrashFilter()});
 
-  private static final Log LOG = ExoLogger.getLogger(AddLocalizationLinkActionComponent.class.getName());
-
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
@@ -72,9 +68,8 @@ public class AddLocalizationLinkActionComponent extends UIAbstractManagerCompone
     public void processEvent(Event<AddLocalizationLinkActionComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
     UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
-    UISymLinkManager uiSymLinkManager = event.getSource().createUIComponent(UISymLinkManager.class, null, null);
-    uiSymLinkManager.enableLocalizationMode();
-    UIPopupContainer.activate(uiSymLinkManager, 600, 155);
+    UIAddTranslationManager uiAddTranslationManager = event.getSource().createUIComponent(UIAddTranslationManager.class, null, null);
+    UIPopupContainer.activate(uiAddTranslationManager, 600, 155);
     event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
     }
   }
