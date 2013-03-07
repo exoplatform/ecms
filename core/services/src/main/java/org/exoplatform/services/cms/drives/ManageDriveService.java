@@ -25,7 +25,14 @@ import java.util.List;
  * Feb 27, 2006
  */
 public interface ManageDriveService {
+  
+  public static String COLLABORATION_DRIVE = "Collaboration";
 
+  /**
+   * Get Drive name which point to root folder of default workspace
+   * @return String Name of drive.
+   */
+  public String getDriveOfDefaultWorkspace() throws Exception;
   /**
    * Register a new drive to workspace or update if the drive is existing
    *

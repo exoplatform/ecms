@@ -607,4 +607,23 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   public void setNewRoleUpdated(boolean newRoleUpdated) {
     this.newRoleUpdated = newRoleUpdated;
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getDriveOfDefaultWorkspace() throws Exception {
+    DriveData collaDrive = getDriveByName(COLLABORATION_DRIVE);
+    if(collaDrive != null && collaDrive.getHomePath().equals("/")) {
+      return COLLABORATION_DRIVE;
+    }
+    List<DriveData> listDrive = getAllDrives();
+    String defautlWsName = repositoryService_.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
+    for(DriveData drive : listDrive) {
+      if(drive.getWorkspace().equals(defautlWsName) && drive.getHomePath().equals("/")) {
+        return drive.getName();
+      }
+    }
+    return null;
+  }
 }
