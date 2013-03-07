@@ -768,7 +768,8 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     String wsName = null;
     Session session = null;
     String[] nodePaths = nodePath.split(";");
-
+    RelationsService rlService = WCMCoreUtils.getService(RelationsService.class);
+    SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
     List<String> listNodesHaveRelations = new ArrayList<String>();
     for (int i = 0; i < nodePaths.length; i++) {
       Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(nodePaths[i]);
@@ -777,9 +778,8 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         nodePath = matcher.group(2);
         session = uiExplorer.getSessionByWorkspace(wsName);
         node = uiExplorer.getNodeByPath(nodePath, session, false);
-
+        if (rlService.getRelations(node, sessionProvider).size()>0) {
         //check references
-        if (node.getReferences().getSize() > 0) {
           listNodesHaveRelations.add(nodePath);
         }
       } else {
