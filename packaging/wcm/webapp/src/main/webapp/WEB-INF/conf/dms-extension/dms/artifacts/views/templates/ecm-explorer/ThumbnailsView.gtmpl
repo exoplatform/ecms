@@ -112,16 +112,19 @@
               String title = uiWorkingArea.getTitle(data);              
 		          String nodePath = data.getPath();
 		          String actionLink = uicomponent.event("ChangeNode", Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS));
-		          String strActs = "<div class=\"RightClickCustomItem\" style=\"display: none;\">";
+		          String strActs = "<li class=\"RightClickCustomItem\" style=\"display: none;\">";
+		          strActs += "<ul>";
 		          //Begin permlink
 		          permLinkComponent =  uiWorkingArea.getPermlink(data);
 		          if (permLinkComponent != null) {
 		            permlink = permLinkComponent.getUIExtensionName();
-		            strActs +=  "<a class='MenuItem' style='display: block;' href=\"" + permLinkComponent.getPermlink(data) + "\" target='_new' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\">";
-		            strActs +=  " <div class='ItemIcon ${permlink}16x16Icon'>";
+		            strActs +=  "<li class='menuItem'>";
+		            strActs +=  "<a exo:attr='ViewDocument' style='display: block;' href=\"" + permLinkComponent.getPermlink(data) + "\" target='_new' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\">" ;
+		            strActs +=  " <i class='uiIconEcmsViewDocument'>" ;
+		            strActs +=  " </i>";
                 strActs +=    _ctx.appRes("ECMContextMenu.event." + permlink);
-		            strActs +=  " </div>";
 		            strActs +=  "</a>";
+		            strActs +=  "</li>";
 		          }   
 		          if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {
 			          //Begin WebDav Action
@@ -132,19 +135,23 @@
 									} catch (Exception e) {											
 									}
 									String webDavPath = data.getPath().contains("%27") ? data.getPath().replaceAll("%27","%2527") : data.getPath();
-							  	String link ="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('','"+portalName+"','"+restContextName+"','"+repository+"','"+ preferenceWS+ "','" + webDavPath +"','"+mimeType+"')";				  					  					  	
-				        	strActs +=		"<a class=\"MenuItem\" style='display: block;' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\" href=\"" + link + "\">" ;	        
-							  	strActs += 		"  <div class=\"ItemIcon WebDAV16x16Icon\">" + _ctx.appRes("UITreeExplorer.label.webDavView") + "</div>" ;
-							  	strActs += 		"</a>" ;				  	
+							  	String link ="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('','"+portalName+"','"+restContextName+"','"+repository+"','"+ preferenceWS+ "','" + webDavPath +"','"+mimeType+"')";
+							  	strActs +=  "<li class='menuItem'>";
+							  	strActs +=    "<a exo:attr='Download' style='display: block;' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\" href=\"" + link + "\" >" ;          
+							  	strActs +=    "  <i class=\"uiIconDownload\"></i>" + _ctx.appRes("UITreeExplorer.label.webDavView");
+							  	strActs +=    "</a>" ;            
+							  	strActs += "</li>";							  	
 							  }else {
 							  	//data = Utils.getNodeSymLink(data);
 							  	def dataTarget = data;
 							  	if(uicomponent.isSymLink(data)) dataTarget = Utils.getNodeSymLink(data);
 							  	if (dataTarget != null) {
-  							  	String link = "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + dataTarget.getPath(); 
-  				        	strActs +=		"<a class=\"MenuItem\" style='display: block; {behavior: url(#default#AnchorClick);}' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\"  href=\"" +link + "\" target='_new' folder=\"" + link +"\">" ;	        
-  							  	strActs += 		"  <div class=\"ItemIcon WebDAV16x16Icon\">" + _ctx.appRes("UITreeExplorer.label.webDavView") + "</div>" ;
-  							  	strActs += 		"</a>" ;
+							  	  String link = "/" + restContextName + "/private/jcr/" + repository+ "/" + preferenceWS + Utils.formatNodeName(dataTarget.getPath());
+							  	  strActs +=  "<li class='menuItem'>";
+							  	  strActs +=    "<a exo:attr='Download' style='display: block; {behavior: url(#default#AnchorClick);}' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\" href=\"" +link + "\" target='_new' folder=\"" + link +"\">" ;          
+							  	  strActs +=    "  <i class=\"uiIconDownload\"></i>" + _ctx.appRes("UITreeExplorer.label.webDavView");
+							  	  strActs +=    "</a>" ;
+							  	  strActs += "</li>";							  	  
 							  	}
 							  }
 							  //End WebDav Action
@@ -155,20 +162,24 @@
                 for(act in customActs) {
                   String actName = act.getProperty("exo:name").getValue().getString() ;
                   params = [new Parameter("workspaceName", preferenceWS), new Parameter("actionName",act.getName())] ;
-                  strActs += "<a class=\"MenuItem\" style='display: block;' href=\"" + uiCustomActionComponent.event("Custom",nodePath,params) + "\">" ;
-                  strActs += "  <div class=\"ItemIcon " + Utils.getNodeTypeIcon(act, "16x16Icon") + "\">$actName</div>" ;
+                  strActs +=  "<li class='menuItem'>";
+                  strActs += "<a exo:attr=\"" +  Utils.getNodeTypeIcon(act,"") + "\" style='display: block;' onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + uiCustomActionComponent.event("Custom",Utils.formatNodeName(nodePath),params) + "\">" ;
+                  strActs += "  <i class=\"" + Utils.getNodeTypeIcon(act, "uiIconEcms") + "\"></i>$actName" ;
                   strActs += "</a>" ;
+                  strActs += "</li>";                  
                   }            
                 }
               if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {  
               	String clipboardLink = "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + data.getPath();
-	               strActs +=	"<a class='MenuItem' style='display: block;' id='clip_button1$i' path='$clipboardLink' onclick=\"eXo.ecm.ECMUtils.pushToClipboard(event,'$clipboardLink');\">" ;
-	               strActs +=  "	<div class='ItemIcon GetURL16x16Icon'>" ;
-	               strActs +=	  _ctx.appRes("ECMContextMenu.event.GetURL");
-	               strActs +=  "	</div>" ;
-	               strActs +=  "</a>";
+              	strActs +=  "<li class='menuItem'>";
+              	strActs +=  "<a exo:attr='CopyUrlToClipboard' style='display: block;' id='clip_button1$i' path='$clipboardLink' onclick=\"eXo.ecm.ECMUtils.pushToClipboard(event,'$clipboardLink');\">" ;
+              	strActs +=  " <i class='uiIconEcmsCopyUrlToClipboard'>" ;
+              	strActs +=  " </i>" ;
+              	strActs +=    _ctx.appRes("ECMContextMenu.event.GetURL");
+          	    strActs +=  "</a>";
+              	strActs += "</li>";
               }
-              strActs += "</div>" ;
+              strActs += "</ul></li>" ;
                 
               def rightClickMenu = "" ;
               Boolean isLocked = false;
