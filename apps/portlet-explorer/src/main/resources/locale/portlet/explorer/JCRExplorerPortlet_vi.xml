@@ -1282,6 +1282,10 @@
       <ConstraintOption-To>Đến</ConstraintOption-To>
       <DocumentType-label>Kiểu tài liệu</DocumentType-label>
       <Category-label>loại</Category-label>
+      <created>Created</created>
+      <modified>Modified</modified>
+      <and>And</and>
+      <or>Or</or>
     </label>
   </UIConstraintForm>
   <NodeTypePopup>

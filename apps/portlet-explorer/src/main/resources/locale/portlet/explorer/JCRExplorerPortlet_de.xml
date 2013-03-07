@@ -1095,6 +1095,10 @@
       <ConstraintOption-To>An</ConstraintOption-To>
       <DocumentType-label>Dockmenttyp</DocumentType-label>
       <Category-label>Kategorie</Category-label>
+      <created>Created</created>
+      <modified>Modified</modified>
+      <and>And</and>
+      <or>Or</or>
     </label>
   </UIConstraintForm>
   <NodeTypePopup>

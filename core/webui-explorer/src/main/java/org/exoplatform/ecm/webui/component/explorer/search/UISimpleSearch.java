@@ -18,6 +18,7 @@ package org.exoplatform.ecm.webui.component.explorer.search;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import javax.jcr.Node;
@@ -39,8 +40,8 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormInputInfo;
 import org.exoplatform.webui.form.UIFormSelectBox;
@@ -93,18 +94,22 @@ public class UISimpleSearch extends UIForm {
 
   private static final String SQL_QUERY        = "SELECT * FROM nt:base WHERE jcr:path LIKE '$0/%' ";
 
-  private String              _OR;
+  private String              _OR  = "Or";
 
-  private String              _AND;
+  private String              _AND = "And";
 
   public UISimpleSearch() throws Exception {
     addUIFormInput(new UIFormInputInfo(NODE_PATH, NODE_PATH, null));
     addUIFormInput(new UIFormStringInput(INPUT_SEARCH, INPUT_SEARCH, null));
     List<SelectItemOption<String>> operators = new ArrayList<SelectItemOption<String>>();
     RequestContext context = RequestContext.getCurrentInstance();
+    try {
     ResourceBundle res = context.getApplicationResourceBundle();
     _AND = res.getString("UIConstraintForm.label.and");
     _OR = res.getString("UIConstraintForm.label.or");
+    }catch (MissingResourceException e) {
+      // There is no resource found, just use the default resource-bundle in English as first value of _OR & _AND
+    }
     operators.add(new SelectItemOption<String>(_AND, AND));
     operators.add(new SelectItemOption<String>(_OR, OR));
     addUIFormInput(new UIFormSelectBox(FIRST_OPERATOR, FIRST_OPERATOR, operators));

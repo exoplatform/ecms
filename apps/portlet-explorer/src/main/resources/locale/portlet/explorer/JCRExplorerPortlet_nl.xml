@@ -1231,6 +1231,10 @@
 			<ConstraintOption-To>Aan</ConstraintOption-To>
 			<DocumentType-label>Document Type</DocumentType-label>
 			<Category-label>Category</Category-label>
+      <created>Created</created>
+      <modified>Modified</modified>
+      <and>And</and>
+      <or>Or</or>
 		</label>
 	</UIConstraintForm>
 	<NodeTypePopup>

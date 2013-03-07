@@ -1088,6 +1088,10 @@
       <ConstraintOption-To>إلى</ConstraintOption-To>
       <DocumentType-label>نوع الوثيقة</DocumentType-label>
       <Category-label>فئة</Category-label>
+      <created>Created</created>
+      <modified>Modified</modified>
+      <and>And</and>
+      <or>Or</or>
     </label>
   </UIConstraintForm>
   <NodeTypePopup>

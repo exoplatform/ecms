@@ -1211,6 +1211,10 @@
       <ConstraintOption-To>To</ConstraintOption-To>
       <DocumentType-label>ドキュメントタイプ</DocumentType-label>
       <Category-label>カテゴリ</Category-label>
+      <created>Created</created>
+      <modified>Modified</modified>
+      <and>And</and>
+      <or>Or</or>
     </label>
   </UIConstraintForm>
   <NodeTypePopup>
