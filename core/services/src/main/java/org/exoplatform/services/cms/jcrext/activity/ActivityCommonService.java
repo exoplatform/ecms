@@ -26,6 +26,7 @@ import javax.jcr.RepositoryException;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -117,8 +118,16 @@ public class ActivityCommonService {
     }
   }
   private boolean isDocumentNodeType(Node node) throws Exception {
+  	boolean isBroadCast = true;
     TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
-    return templateService.isManagedNodeType(node.getPrimaryNodeType().getName());
+    isBroadCast = templateService.getAllDocumentNodeTypes().contains(node.getPrimaryNodeType().getName());
+    
+    
+    
+    if(!isBroadCast) {
+    	isBroadCast = !(node.isNodeType(NodetypeConstant.NT_UNSTRUCTURED) || node.isNodeType(NodetypeConstant.NT_FOLDER));
+    }
+    return isBroadCast;
   }
   
   public boolean isBroadcastNTFileEvents(Node node) throws Exception {

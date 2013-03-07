@@ -134,18 +134,21 @@
                 </value>
                 <value>
                     <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
+                    <field  name="nodeTypes"><string>nt:file,nt:resource</string></field>
                     <field  name="eventTypes"><string>addProperty</string></field>                     
                     <field  name="actionClassName"><string>org.exoplatform.services.cms.jcrext.activity.AddFilePropertyActivityAction</string></field>
                   </object>
                 </value>
                 <value>
                     <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
+                    <field  name="nodeTypes"><string>nt:file,nt:resource</string></field>
                     <field  name="eventTypes"><string>removeProperty</string></field>                     
                     <field  name="actionClassName"><string>org.exoplatform.services.cms.jcrext.activity.RemoveFilePropertyActivityAction</string></field>
                   </object>
                 </value>
                 <value>
                     <object type="org.exoplatform.services.jcr.impl.ext.action.ActionConfiguration">
+                    <field  name="nodeTypes"><string>nt:file,nt:resource</string></field>
                     <field  name="eventTypes"><string>changeProperty</string></field>                     
                     <field  name="actionClassName"><string>org.exoplatform.services.cms.jcrext.activity.EditFilePropertyActivityAction</string></field>
                   </object>
