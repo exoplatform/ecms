@@ -13,7 +13,7 @@
   
 %>
 
-<div class="$uicomponent.id" id="$uicomponent.id">
+<div class="uiPublicationHistory resizable" id="$uicomponent.id">
   <table class="uiGrid table table-hover table-striped">
     <thead>
       <tr>
@@ -45,13 +45,13 @@
     </tbody>
   </table>
   <% if(uicomponent.getUIPageIterator().getAvailablePage() > 1){ %>
-  <div style="margin:1px 0px 5px 0px;">
+  <div>
     <%_ctx.renderUIComponent(uicomponent.getUIPageIterator())%>
   </div>
   <% } %>
-	<div class="UIAction">
-		      <% for(action in uicomponent.getActions()) { %>
-	  							  <a rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPublicationLogList.action." + action)%>" onclick="<%=uicomponent.event(action)%>" class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=_ctx.appRes("UIPublicationLogList.action." + action)%></a>
-	  				    <% } %>
-    		</div>
+</div>
+<div class="uiAction">
+	<% for(action in uicomponent.getActions()) { %>
+		<button type="button" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPublicationLogList.action." + action)%>" onclick="<%=uicomponent.event(action)%>" class="btn" href="javascript:void(0);"><%=_ctx.appRes("UIPublicationLogList.action." + action)%></button>
+	<% } %>
 </div>

@@ -1,0 +1,65 @@
+
+.StatusTable {
+	h5 {
+		font-size: 13px;
+		span {
+			font-weight: normal;
+		}
+	}
+}
+
+.statusAction {
+	background: url(/eXoWCMResources/skin/images/Publication/bgPublication.png) no-repeat 28px top;
+	padding: 0px;
+	margin: 0px 0px 15px 60px;
+	
+	.activeStatus,
+	.disableStatus,
+	.currentStatus {
+		float: left; 
+		width: 101px;
+		text-align: center;
+		
+		p {
+			color: @grayDark;
+			font-size: 13px;
+			font-weight: bold;
+			margin: 10px 0px;
+		}
+
+		.node {
+			background: url(/eXoWCMResources/skin/images/Publication/normalNode.png) no-repeat left top; 
+			width: 48px; 
+			height: 48px; 
+			display: block; 
+			margin: 0px auto; 
+			cursor: pointer;
+		}
+	}
+	
+	.disableStatus p {
+		color: @grayLight;
+	}
+
+	.currentStatus p {
+		color: #2f5e92;
+	}
+
+	.disableStatus .node {
+		background: url(/eXoWCMResources/skin/images/Publication/unTickNode.png) no-repeat left top; 
+		cursor: no-drop;
+	}
+
+	.currentStatus .node {
+		background: url(/eXoWCMResources/skin/images/Publication/tickNode.png) no-repeat left top;
+	}
+}
+
+.scheduled {
+	margin: 0px 0px 20px 0px;
+	
+	.form-inline input {
+		width: 150px;
+		margin-left: 5px;
+	}
+}

@@ -33,7 +33,7 @@
 	}  
 %>
 <% uicomponent.begin(); %>
-<div class="UIPublicationPanel" id="$uicomponent.id">
+<div class="uiPublicationPanel resizable" id="$uicomponent.id">
 
   <% if (states.size() == 0) { %>
   <%=_ctx.appRes("UIPublicationPanel.msg.no-states")%> 
@@ -43,63 +43,62 @@
     <% String versionName = currentRevision.getName();
        String verName = ContentReader.getXSSCompatibilityContent(versionName);
     %>
-    <h5 rel="tooltip" data-placement="bottom" title="$verName" style="overflow: hidden;"><%=_ctx.appRes("UIPublicationPanel.status.version")%>: <span>$verName</span></h5>
-    <div class="StatusAction">
-      <div class="StatusTitle"><%=_ctx.appRes("UIPublicationPanel.status.title")%>: </div>
-      <div class="StatusLink clearfix">
-        <%
-		
- for (State state : states) {
- 
-	if(states.indexOf(state)==states.size()-1) lastState=true;
-		 String membership = state.getMembership();
-		 String status = state.getState();
-		 boolean isAutomatic = false;
-		 if(!"automatic".equals(membership)){
-           enableState = uicomponent.canReachState(state, remoteUser, cNode) ;
-         }
-		 else{
-		    isAutomatic=true;
-		 }
-		 if (isCurrentRevision(status,currentRevision)){		
-  			isBeforeCurrentState=false;
-  			
-  			if(isBaseVersion&&cNode.hasProperty("publication:currentState")&&!cNode.getProperty("publication:currentState").getString().equals(status)){
-  			%>
-  			<a class="ActiveStatus" href="<%= uicomponent.event("ChangeState", status)%>">
-  			<%}
-  			else{%>
-  			<a class="CurrentStatus">
-  			<%}
-  			
-  			}else if((!isBaseVersion&&isBeforeCurrentState)||isAutomatic||!enableState) {
-  			
-  			%>
-  			<a class="DisableStatus">
-  			<%}
-  			
-  			else  if(!isAutomatic&&enableState){
-  			%>	
-  			<a class="ActiveStatus" href="<%= uicomponent.event("ChangeState", status)%>">
-  			
-  			<%}%>
-  			<%=_ctx.appRes("UIPublicationPanel.status."+status)%></a>
-  			<%if(!lastState){%>
-  			
-  			<span class="StatusArrow"></span>
-  			<%}else{%>
-  			 
-  			<%}
+    <h5><%=_ctx.appRes("UIPublicationPanel.status.version")%>: <span rel="tooltip" data-placement="bottom" title="$verName">$verName</span></h5>
+		<ul class="statusAction clearfix">
+			<%
+	
+			for (State state : states) {
+	 
+			if(states.indexOf(state)==states.size()-1) lastState=true;
+			 String membership = state.getMembership();
+			 String status = state.getState();
+			 boolean isAutomatic = false;
+			 if(!"automatic".equals(membership)){
+						 enableState = uicomponent.canReachState(state, remoteUser, cNode) ;
+					 }
+			 else{
+					isAutomatic=true;
+			 }
+			 if (isCurrentRevision(status,currentRevision)){		
+				isBeforeCurrentState=false;
 			
-	   }%>
-      </div>
-    </div>
+				if(isBaseVersion&&cNode.hasProperty("publication:currentState")&&!cNode.getProperty("publication:currentState").getString().equals(status)){
+				%>
+				<li class="activeStatus" onclick="<%= uicomponent.event("ChangeState", status)%>"><a class="node">
+				<%}
+				else{%>
+				<li class="currentStatus"><a class="node">
+				<%}
+				
+				}else if((!isBaseVersion&&isBeforeCurrentState)||isAutomatic||!enableState) {
+				
+				%>
+				<li class="disableStatus"><a class="node">
+				<%}
+				
+				else  if(!isAutomatic&&enableState){
+				%>	
+				<li class="activeStatus" onclick="<%= uicomponent.event("ChangeState", status)%>"><a class="node">
+					
+					<%}%>
+					</a>
+					<p><%=_ctx.appRes("UIPublicationPanel.status."+status)%></p>
+				</li>
+				<%if(!lastState){%>
+				
+				
+				<%}else{%>
+				 
+				<%}
+			
+			}%>
+		</ul>
   </fieldset>
   <fieldset class="scheduled">
   	<h5><%=_ctx.appRes("UIPublicationPanel.scheduled.title")%></h5>
   	<div class="form-inline">
-  		<span class="help-inline"><%=_ctx.appRes("UIPublicationPanel.scheduled.from")%></span><% uicomponent.renderChild(uicomponent.START_PUBLICATION); %>
-  		<span class="help-inline"><%=_ctx.appRes("UIPublicationPanel.scheduled.to")%></span><% uicomponent.renderChild(uicomponent.END_PUBLICATION); %>
+  		<span class="help-inline"> <%=_ctx.appRes("UIPublicationPanel.scheduled.from")%></span><% uicomponent.renderChild(uicomponent.START_PUBLICATION); %>
+  		<span class="help-inline"> <%=_ctx.appRes("UIPublicationPanel.scheduled.to")%></span><% uicomponent.renderChild(uicomponent.END_PUBLICATION); %>
   	</div>
   </fieldset>
   <table class="revisionsTable uiGrid table table-hover table-striped">
@@ -181,13 +180,13 @@
       <%
     }
   %>
-	<div class="uiAction"> 
-		<% for(action in uicomponent.getActions()) { 
-			 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
-			 String link = uicomponent.event(action) ;
- 		%>
-		<button type="button" href="javascript:void(0);" onclick="$link" class="btn">$actionLabel</button>
- 		<%}%>        
-	</div>
+</div>
+<div class="uiAction"> 
+	<% for(action in uicomponent.getActions()) { 
+		 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
+		 String link = uicomponent.event(action) ;
+	%>
+	<button type="button" href="javascript:void(0);" onclick="$link" class="btn">$actionLabel</button>
+	<%}%>        
 </div>
 <% uicomponent.end(); %>
