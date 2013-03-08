@@ -659,7 +659,7 @@ UIFileView.prototype.initStickBreadcrumb = function() {
 		var scroll_top = gj(window).scrollTop(); // our current vertical position from the top
 		
 		if (scroll_top >= eXo.ecm.UIFileView.minActionbarTop) {
-			actionbar.css({ 'position': 'fixed', 'top':0, zIndex:1});
+			actionbar.css({ 'position': 'fixed', 'top':0});
 			actionbar.width(actionbar.parent().width());
 			breadcrumb.css({ 'position': 'fixed', 'top':actionbar.height(), zIndex:1});
 			breadcrumb.width(breadcrumb.parent().width());

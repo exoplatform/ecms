@@ -117,7 +117,7 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
     strActs +=  "<li class='menuItem'>";
     strActs +=  "<a exo:attr='ViewDocument' style='display: block;' href=\"" + permLinkComponent.getPermlink(data) + "\" target='_new' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\">" ;
     strActs +=  " <i class='uiIconEcmsViewDocument'>" ;
-    strActs +=  " </i>";
+    strActs +=  " </i>&nbsp;";
     strActs +=    _ctx.appRes("ECMContextMenu.event." + permlink);
     strActs +=  "</a>";
     strActs += "</li>";
@@ -135,7 +135,7 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
       String link ="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('','"+ portalName +"','"+ restContextName +"','"+repository+"','"+ preferenceWS+ "','" + webDavPath +"','"+mimeType+"')";
       strActs +=  "<li class='menuItem'>";
       strActs +=    "<a exo:attr='Download' style='display: block;' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\" href=\"" + link + "\" >" ;          
-      strActs +=    "  <i class=\"uiIconDownload\"></i>" + _ctx.appRes("UITreeExplorer.label.webDavView");
+      strActs +=    "  <i class=\"uiIconDownload\"></i>&nbsp;" + _ctx.appRes("UITreeExplorer.label.webDavView");
       strActs +=    "</a>" ;            
       strActs += "</li>";
     } else {
@@ -146,7 +146,7 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
         String link = "/" + restContextName + "/private/jcr/" + repository+ "/" + preferenceWS + Utils.formatNodeName(dataTarget.getPath());
         strActs +=  "<li class='menuItem'>";
         strActs +=    "<a exo:attr='Download' style='display: block; {behavior: url(#default#AnchorClick);}' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\" href=\"" +link + "\" target='_new' folder=\"" + link +"\">" ;          
-        strActs +=    "  <i class=\"uiIconDownload\"></i>" + _ctx.appRes("UITreeExplorer.label.webDavView");
+        strActs +=    "  <i class=\"uiIconDownload\"></i>&nbsp;" + _ctx.appRes("UITreeExplorer.label.webDavView");
         strActs +=    "</a>" ;
         strActs += "</li>";
       }
@@ -172,7 +172,7 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
     strActs +=  "<li class='menuItem'>";
     strActs +=  "<a exo:attr='CopyUrlToClipboard' style='display: block;' id='clip_button1$i' path='$clipboardLink' onclick=\"eXo.ecm.ECMUtils.pushToClipboard(event,'$clipboardLink');\">" ;
     strActs +=  " <i class='uiIconEcmsCopyUrlToClipboard'>" ;
-    strActs +=  " </i>" ;
+    strActs +=  " </i>&nbsp;" ;
     strActs +=    _ctx.appRes("ECMContextMenu.event.GetURL");
     strActs +=  "</a>";
     strActs += "</li>";
