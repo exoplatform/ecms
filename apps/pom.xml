@@ -19,6 +19,5 @@
     <module>portlet-search</module>
     <module>resources-wcm</module>
     <module>portlet-seo</module>
-    <module>wai-template</module>
   </modules>
 </project>
