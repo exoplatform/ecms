@@ -16,9 +16,11 @@
  */
 package org.exoplatform.services.wcm.search.connector;
 
+import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.ResultNode;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
@@ -72,5 +74,16 @@ public class PageSearchServiceConnector extends BaseSearchServiceConnector {
   protected ResultNode filterNode(ResultNode node) throws RepositoryException {
     return node;
   }
+  
+  @Override
+  protected String getPath(DriveData driveData, ResultNode node) throws Exception {
+    return node.getUserNavigationURI();
+  }
+
+  @Override
+  protected String getFileType(ResultNode node) throws Exception {
+    return "FileDefault";
+  }
+  
 
 }

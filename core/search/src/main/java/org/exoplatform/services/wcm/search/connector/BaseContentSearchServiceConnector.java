@@ -17,6 +17,7 @@
 package org.exoplatform.services.wcm.search.connector;
 
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.search.QueryCriteria;
@@ -66,6 +67,21 @@ public abstract class BaseContentSearchServiceConnector extends BaseSearchServic
   protected AbstractPageList<ResultNode> searchNodes(QueryCriteria criteria) throws Exception {
     return siteSearch_.searchSiteContents(WCMCoreUtils.getUserSessionProvider(),
                                            criteria, (int)criteria.getLimit(), true);
+  }
+
+  @Override
+  protected String getPath(DriveData driveData, ResultNode node) throws Exception {
+    String subPath = node.getPath().substring(driveData.getHomePath().length());
+    if (!subPath.startsWith("/")) {
+      subPath = '/' + subPath;
+    }
+    return '/' + driveData.getName() + subPath;
+  }
+  
+  @Override
+  protected String getFileType(ResultNode node) throws Exception {
+    return org.exoplatform.services.cms.impl.Utils.getNodeTypeIcon(node, "").
+            replace(".", "").replace("/", "").replace("\\","").replace(".", "");
   }
 
   /**

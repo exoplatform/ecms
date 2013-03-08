@@ -844,16 +844,16 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     @Override
     public ResultNode createData(Node node, Row row) {
       try {
-        PortalRequestContext portalRequestContext = Util.getPortalRequestContext();        
-        PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-        PortletRequest portletRequest = portletRequestContext.getRequest();
-
-        StringBuffer baseURI = new StringBuffer();
-        baseURI.append(portletRequest.getScheme()).append("://").append(portletRequest.getServerName());
-        if (portletRequest.getServerPort() != 80) {
-          baseURI.append(":").append(String.format("%s", portletRequest.getServerPort()));
-        }
-        baseURI.append(portalRequestContext.getPortalContextPath());
+//        PortalRequestContext portalRequestContext = Util.getPortalRequestContext();        
+//        PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+//        PortletRequest portletRequest = portletRequestContext.getRequest();
+        
+//        StringBuffer baseURI = new StringBuffer();
+//        baseURI.append(portletRequest.getScheme()).append("://").append(portletRequest.getServerName());
+//        if (portletRequest.getServerPort() != 80) {
+//          baseURI.append(":").append(String.format("%s", portletRequest.getServerPort()));
+//        }
+//        baseURI.append(portalRequestContext.getPortalContextPath());
         if (node.isNodeType("mop:pagelink")) {
           node = node.getParent();
         }
@@ -861,7 +861,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
         if (node.isNodeType("gtn:language")) {
           node = node.getParent().getParent();
         }
-        String userNaviUri = baseURI.toString() + "/" + PageDataCreator.getUserNavigationURI(node).toString();
+        String userNaviUri = "/" + WCMCoreUtils.getPortalName() + "/" + PageDataCreator.getUserNavigationURI(node).toString();
         if (userNavigationUriList.contains(userNaviUri)) {
           return null;
         }

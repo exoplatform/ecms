@@ -41,6 +41,7 @@ import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.ResultNode;
 import org.exoplatform.services.wcm.search.SiteSearchService;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
+import org.exoplatform.services.wcm.search.base.EcmsSearchResult;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -87,15 +88,20 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
         ret = convertResult(searchNodes(criteria), limit);
       } else {//search in many sites
         Iterator<String> iter = sites.iterator();
+        criteria.setOffset(0);
         while (iter.hasNext() && limit > 0) {
           criteria.setSiteName(iter.next());
           List<SearchResult> ret1 = convertResult(searchNodes(criteria), limit);
-          if (ret1.size() <= limit) {
-            limit -= ret1.size();
-            ret.addAll(ret1);
-            criteria.setOffset(0);
-          } else {//ret1.size() > limit
-            ret.addAll(ret1.subList(0, limit));
+          //0 ----- offset ------ offset + limit
+          if (ret1.size() <= offset) {
+            offset-= ret1.size();
+          } else if (ret1.size() < offset + limit) {
+            ret.addAll(ret1.subList(offset, ret1.size() - offset));
+            limit -= (ret1.size() - offset);
+            offset = 0;
+          } else {//ret1.size() >= offset + limit
+            ret.addAll(ret1.subList(offset, limit - offset));
+            offset = 0;
             limit = 0;
           }
         }
@@ -151,15 +157,16 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
               //generate SearchResult object
               DriveData driveData = getDriveData(retNode);
               Calendar date = getDate(retNode);
-              SearchResult result = 
+              EcmsSearchResult result = 
               //  new SearchResult(url, title, excerpt, detail, imageUrl, date, relevancy);
-                  new SearchResult(getPath(driveData, retNode), 
-                                   retNode.getTitle(), 
-                                   retNode.getExcerpt(), 
-                                   driveData.getName() + formatDate(date), 
-                                   org.exoplatform.services.cms.impl.Utils.getNodeTypeIcon(retNode, "16x16Icon"), 
-                                   date.getTimeInMillis(), 
-                                   (long)retNode.getScore());
+                  new EcmsSearchResult(getPath(driveData, retNode), 
+                                       retNode.getTitle(), 
+                                       retNode.getExcerpt(), 
+                                       driveData.getName() + formatDate(date), 
+                                       getImageUrl(), 
+                                       date.getTimeInMillis(), 
+                                       (long)retNode.getScore(),
+                                       getFileType(retNode));
               ret.add(result);
               if (ret.size() >= limit) {
                 return ret;
@@ -184,13 +191,23 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
    * @return the expected path
    * @throws Exception
    */
-  protected String getPath(DriveData driveData, Node node) throws Exception {
-    String subPath = node.getPath().substring(driveData.getHomePath().length());
-    if (!subPath.startsWith("/")) {
-      subPath = '/' + subPath;
-    }
-    return driveData.getName() + subPath;
+  protected abstract String getPath(DriveData driveData, ResultNode node) throws Exception;
+  
+  /**
+   * gets the image url
+   * @return
+   * @throws Exception
+   */
+  protected String getImageUrl() {
+    return "/eXoResources/skin/images/Icons/FileTypeIcons/uiIconsFileType64x64.png";
   }
+  
+  /**
+   * gets the file type
+   * @return
+   * @throws Exception
+   */
+  protected abstract String getFileType(ResultNode node) throws Exception;
   
   /**
    * returns the drive data object which is closest to the node (in term of path)
