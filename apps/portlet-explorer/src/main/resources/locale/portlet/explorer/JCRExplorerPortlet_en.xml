@@ -2502,7 +2502,7 @@
       <path-node-invalid>Please enter the path node.</path-node-invalid>
       <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
       <non-node>Please select the trust target node; or you do not have right to read this node.</non-node>
-      <cannot-save>An error occurred while creating the symlink.</cannot-save>
+      <cannot-save>Cannot add a symlink for this node type.</cannot-save>
       <item-exists-exception>The node name already exists.</item-exists-exception>
       <translation-node-same-language-default>The translation node has the same language as the default language of current node.</translation-node-same-language-default>
       <UnsupportedRepositoryOperationException>This target node is not refered.</UnsupportedRepositoryOperationException>

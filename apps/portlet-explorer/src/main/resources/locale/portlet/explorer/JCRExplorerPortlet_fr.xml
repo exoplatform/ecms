@@ -2496,7 +2496,7 @@
 			<path-node-invalid>Veuillez saisir le chemin du noeud!</path-node-invalid>
 			<path-node-not-allowed>Ce nom n'est pas autorisé.</path-node-not-allowed>
 			<non-node>Vous n'avez pas les droits d'accès au noeud cible</non-node>
-			<cannot-save>Certaines contraintes ont été violées durant cette opération.</cannot-save>
+			<cannot-save>Impossible d'ajouter un lien symbolique pour ce type de noeud</cannot-save>
 			<item-exists-exception>Un noeud du même nom existe déjà</item-exists-exception>
       <translation-node-same-language-default>Cette traduction possède la même langue que le contenu courant.</translation-node-same-language-default>
 			<UnsupportedRepositoryOperationException>Cette cible ne peut pas être référencée</UnsupportedRepositoryOperationException>
