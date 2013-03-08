@@ -1153,6 +1153,53 @@
       <tab-name-error>Veuillez saisir un nom de barre d'outils</tab-name-error>
       <fileName-invalid>Caractères invalides détectés dans le nom</fileName-invalid>
     </msg>
+	    <label>
+      <version>Restaurer la version</version>
+      <viewName>Nom</viewName>
+      <tabName>Nom</tabName>
+      <permission>Permission</permission>
+      <tabs>Barres d'outils</tabs>
+      <template>Formulaires</template>
+      <enableVersion>Activer le versionning</enableVersion>
+      <addFolder>Ajouter un répertoire</addFolder>
+      <addSignature>Ajouter une signature</addSignature>
+      <addDocument>Ajouter un document</addDocument>
+      <editDocument>Editer un document</editDocument>
+      <upload>Uploader</upload>
+      <createTicket>Créer un ticket</createTicket>
+      <paste>Coller</paste>
+      <search>Rechercher</search>
+      <viewReferences>Voir les références</viewReferences>
+      <viewNodeType>Voir les types de noeud</viewNodeType>
+      <viewPermissions>Voir les permissions</viewPermissions>
+      <viewProperties>Voir les propriétés</viewProperties>
+      <manageVersions>Gérer les versions</manageVersions>
+      <manageAuditing>Gérer la traçabilité</manageAuditing>
+      <managePublications>Gérer les publications</managePublications>
+      <manageCategories>Gérer les catégories</manageCategories>
+      <manageRelations>Gérer les relations</manageRelations>
+      <manageActions>Gérer les actions</manageActions>
+      <exportNode>Exporter un noeud</exportNode>
+      <importNode>Importer un noeud</importNode>
+      <viewRelations>Voir les relations</viewRelations>
+      <showJCRStructure>Afficher la structure du JCR</showJCRStructure>
+      <watchDocument>S'abonner à un document</watchDocument>
+      <taggingDocument>Marquer un document</taggingDocument>
+      <multiLanguage>Multilangues</multiLanguage>
+      <viewMetadatas>Voir les métadonnées</viewMetadatas>
+      <overloadThumbnail>Surcharger une vignette</overloadThumbnail>
+      <manageHidden>Cacher/Montrer le contenu</manageHidden>
+      <comment>Commenter</comment>
+      <vote>Voter</vote>	  
+      <manageSimpleCategories>Gérer les catégories simples</manageSimpleCategories>
+      <addCategory>Add Category</addCategory>
+      <addLocalizationLink>Add Translation</addLocalizationLink>
+      <publicationRequestApproval>Request Approval</publicationRequestApproval>
+      <publicationApproveContent>Approve Content</publicationApproveContent>
+      <publicationPublish>Publish</publicationPublish>
+						<contentNavigation>Content Navigation</contentNavigation>
+						<addSymLink>Add Symlink</addSymLink>
+    </label>			
   </UITabForm>
   <UIViewFormTabPane>
     <tab>

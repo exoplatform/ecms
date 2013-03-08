@@ -1191,6 +1191,8 @@
       <publicationRequestApproval>Request Approval</publicationRequestApproval>
       <publicationApproveContent>Approve Content</publicationApproveContent>
       <publicationPublish>Publish</publicationPublish>
+						<contentNavigation>Content Navigation</contentNavigation>
+						<addSymLink>Add Symlink</addSymLink>
     </label>
     <action>
       <Save>#{word.save}</Save>      
