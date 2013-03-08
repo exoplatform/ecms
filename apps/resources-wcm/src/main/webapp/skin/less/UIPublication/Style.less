@@ -7,51 +7,52 @@
 		}
 	}
 }
-
-.statusAction {
-	background: url(/eXoWCMResources/skin/images/Publication/bgPublication.png) no-repeat 28px top;
-	padding: 0px;
-	margin: 0px 0px 15px 60px;
-	
-	.activeStatus,
-	.disableStatus,
-	.currentStatus {
-		float: left; 
-		width: 101px;
-		text-align: center;
+.uiPublicationPanel {
+	.statusAction {
+		background: url(/eXoWCMResources/skin/images/Publication/bgPublication.png) no-repeat 28px top;
+		padding: 0px;
+		margin: 0px 0px 15px 60px;
 		
-		p {
-			color: @grayDark;
-			font-size: 13px;
-			font-weight: bold;
-			margin: 10px 0px;
+		.activeStatus,
+		.disableStatus,
+		.currentStatus {
+			float: left; 
+			width: 101px;
+			text-align: center;
+			
+			p {
+				color: @grayDark;
+				font-size: 13px;
+				font-weight: bold;
+				margin: 10px 0px;
+			}
+
+			.node {
+				background: url(/eXoWCMResources/skin/images/Publication/normalNode.png) no-repeat left top; 
+				width: 48px; 
+				height: 48px; 
+				display: block; 
+				margin: 0px auto; 
+				cursor: pointer;
+			}
+		}
+		
+		.disableStatus p {
+			color: @grayLight;
 		}
 
-		.node {
-			background: url(/eXoWCMResources/skin/images/Publication/normalNode.png) no-repeat left top; 
-			width: 48px; 
-			height: 48px; 
-			display: block; 
-			margin: 0px auto; 
-			cursor: pointer;
+		.currentStatus p {
+			color: #2f5e92;
 		}
-	}
-	
-	.disableStatus p {
-		color: @grayLight;
-	}
 
-	.currentStatus p {
-		color: #2f5e92;
-	}
+		.disableStatus .node {
+			background: url(/eXoWCMResources/skin/images/Publication/unTickNode.png) no-repeat left top; 
+			cursor: no-drop;
+		}
 
-	.disableStatus .node {
-		background: url(/eXoWCMResources/skin/images/Publication/unTickNode.png) no-repeat left top; 
-		cursor: no-drop;
-	}
-
-	.currentStatus .node {
-		background: url(/eXoWCMResources/skin/images/Publication/tickNode.png) no-repeat left top;
+		.currentStatus .node {
+			background: url(/eXoWCMResources/skin/images/Publication/tickNode.png) no-repeat left top;
+		}
 	}
 }
 
