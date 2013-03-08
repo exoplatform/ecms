@@ -88,7 +88,7 @@ public class UIPageNodeSelector extends UIContainer {
    * @throws Exception the exception
    */
   public UIPageNodeSelector() throws Exception {    
-    userPortal = Util.getUIPortalApplication().getUserPortalConfig().getUserPortal();    
+    userPortal = Util.getPortalRequestContext().getUserPortalConfig().getUserPortal();
     
     UIDropDownControl uiDopDownControl = addChild(UIDropDownControl.class, "UIDropDown", "UIDropDown");
     uiDopDownControl.setParent(this);
@@ -135,7 +135,8 @@ public class UIPageNodeSelector extends UIContainer {
    */
   private void chooseAndShowNavigation() throws Exception {
     // select the navigation of current portal
-    UserNavigation portalSelectedNav = Util.getUIPortal().getUserNavigation();
+    UserNavigation portalSelectedNav = NavigationUtils.getUserNavigationOfPortal(
+                                                      userPortal, Util.getUIPortal().getSiteKey().getName());
     int portalSelectedNavId = getId(portalSelectedNav);
     if (getUserNavigation(portalSelectedNavId) != null) {
       selectNavigation(portalSelectedNavId);

@@ -174,7 +174,6 @@ public class UIViewInfoContainer extends UIContainer {
    * @throws Exception
    */
   private String getType(Node node) throws Exception {
-    UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
     TemplateService templateService = getApplicationComponent(TemplateService.class);
     NodeType nodeType = node.getPrimaryNodeType();
     String strNodeTypeName = nodeType.getName();

@@ -23,13 +23,11 @@ import javax.jcr.Node;
 import javax.jcr.Value;
 
 import org.exoplatform.portal.config.UserPortalConfigService;
-import org.exoplatform.portal.config.model.Page;
-import org.exoplatform.portal.mop.SiteKey;
-import org.exoplatform.portal.mop.page.PageContext;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.wcm.navigation.NavigationUtils;
 import org.exoplatform.services.wcm.publication.PublicationUtil;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationTree.TreeNode;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -178,15 +176,15 @@ public class UIPublicationAction extends UIForm {
       String portalName = selectedNavigationNodeURI.substring(1, selectedNavigationNodeURI.indexOf("/", 1));
       String pageNodeUri = selectedNavigationNodeURI.replaceFirst("/\\w+/", "");
 
-      UserPortal userPortal = Util.getUIPortalApplication().getUserPortalConfig().getUserPortal();
-      UserNavigation navigation = userPortal.getNavigation(SiteKey.portal(portalName));
-      PageContext pageContext = null;
+      UserPortal userPortal = Util.getPortalRequestContext().getUserPortalConfig().getUserPortal();
+      UserNavigation navigation = NavigationUtils.getUserNavigationOfPortal(userPortal, portalName);
       Node contentNode = null;
       if (navigation != null) {
         contentNode = publicationPages.getNode();
         if (contentNode.hasProperty("publication:applicationIDs")) {
           UserNode userNode = getUserNodeByUri(navigation, pageNodeUri);
-          pageContext = userPortalConfigService.getPage(userNode.getPageRef());        }
+          userPortalConfigService.getPage(userNode.getPageRef());
+        }
       }
       publicationAction.updateUI();
       UIPublicationPagesContainer publicationPagesContainer = publicationPages.
@@ -203,7 +201,7 @@ public class UIPublicationAction extends UIForm {
      */
     private UserNode getUserNodeByUri(UserNavigation pageNav, String uri) {
       if(pageNav == null || uri == null) return null;
-      UserPortal userPortal = Util.getUIPortalApplication().getUserPortalConfig().getUserPortal();
+      UserPortal userPortal = Util.getPortalRequestContext().getUserPortalConfig().getUserPortal();
       return userPortal.resolvePath(pageNav, null, uri);
     }
   }

@@ -16,7 +16,6 @@
  */
 package org.exoplatform.wcm.webui;
 
-import java.io.InputStream;
 import java.security.AccessControlException;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -34,7 +33,6 @@ import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.container.PortalContainer;
-import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.portal.application.PortalRequestContext;
@@ -54,7 +52,6 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIMaskWorkspace;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.portal.webui.workspace.UIWorkingWorkspace;
-import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -65,6 +62,7 @@ import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
+import org.exoplatform.services.wcm.navigation.NavigationUtils;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
@@ -98,19 +96,12 @@ public class Utils {
 
   private static final String POLICY_FILE_LOCATION = "jar:/conf/portal/antisamy.xml";
 
-  private static final String JCR_CONTENT = "jcr:content";
-
-  private static final String JCR_DATA = "jcr:data";
-
-  private static final String JCR_MIMETYPE = "jcr:mimeType";
-
   private static final String NT_FILE = "nt:file";
 
   private static final String NT_UNSTRUCTURED = "nt:unstructured";
   
   private static final String DOCUMENTS_ACTIVITY = "documents";
 
-  private static ConfigurationManager cservice_ ;
   /**
    * Checks if is edits the portlet in create page wizard.
    * @return true, if is edits the portlet in create page wizard
@@ -904,14 +895,14 @@ public class Utils {
   }
 
   public static UserNavigation getSelectedNavigation() throws Exception {
-    return Util.getUIPortal().getUserNavigation();
+    return NavigationUtils.getUserNavigationOfPortal(
+        Util.getPortalRequestContext().getUserPortalConfig().getUserPortal(),
+        Util.getUIPortal().getSiteKey().getName());
   }
 
   public static String sanitize(String value) {
     try {
-      cservice_ = WCMCoreUtils.getService(ConfigurationManager.class);
-      InputStream in = cservice_.getInputStream(POLICY_FILE_LOCATION) ;
-      Policy policy = Policy.getInstance(in);
+      Policy policy = Policy.getInstance(POLICY_FILE_LOCATION);
       AntiSamy as = new AntiSamy();
       CleanResults cr = as.scan(value, policy);
       value = cr.getCleanHTML();

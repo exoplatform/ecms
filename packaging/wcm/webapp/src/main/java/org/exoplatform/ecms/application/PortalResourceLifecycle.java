@@ -18,7 +18,6 @@ package org.exoplatform.ecms.application;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.portal.application.PortalRequestContext;
-import org.gatein.portal.controller.resource.script.FetchMode;
 import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.web.application.Application;
 import org.exoplatform.web.application.ApplicationLifecycle;

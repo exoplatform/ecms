@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.portal.mop.SiteKey;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserPortal;
@@ -51,7 +50,6 @@ import org.exoplatform.webui.event.EventListener;
 public class UIPortalNavigationExplorer extends UIContainer {
 
   /** The portal name. */
-  @SuppressWarnings("unused")
   private String       portalName;
 
   /** The running portals. */
@@ -88,8 +86,8 @@ public class UIPortalNavigationExplorer extends UIContainer {
     if (wcmService.isSharedPortal(sessionProvider, portalName)) {
       UIPublicationTree tree = addChild(UIPublicationTree.class, null, "UIPortalTree");
       for (String portal : this.runningPortals) {
-        UserPortal userPortal = Util.getUIPortalApplication().getUserPortalConfig().getUserPortal();
-        UserNavigation userNavigation = userPortal.getNavigation(SiteKey.portal(portalName));
+        UserPortal userPortal = Util.getPortalRequestContext().getUserPortalConfig().getUserPortal();
+        UserNavigation userNavigation = NavigationUtils.getUserNavigationOfPortal(userPortal, portalName);
         UserNode userNode = userPortal.getNode(userNavigation, NavigationUtils.ECMS_NAVIGATION_SCOPE, null, null);
         ResourceBundle res = localeConfig.getNavigationResourceBundle(userNavigation.getKey().getTypeName(),
                                                                       userNavigation.getKey().getName());
@@ -105,8 +103,8 @@ public class UIPortalNavigationExplorer extends UIContainer {
       tree.setSelectedIcon("DefaultPageIcon");
     } else {
       UIPublicationTree tree = addChild(UIPublicationTree.class, null, "UIPageNodeTree");
-      UserPortal userPortal = Util.getUIPortalApplication().getUserPortalConfig().getUserPortal();
-      UserNavigation userNavigation = userPortal.getNavigation(SiteKey.portal(portalName));
+      UserPortal userPortal = Util.getPortalRequestContext().getUserPortalConfig().getUserPortal();
+      UserNavigation userNavigation = NavigationUtils.getUserNavigationOfPortal(userPortal, portalName);
       UserNode userNode = userPortal.getNode(userNavigation, NavigationUtils.ECMS_NAVIGATION_SCOPE, null, null);
       ResourceBundle res = localeConfig.getNavigationResourceBundle(userNavigation.getKey().getTypeName(),
                                                                     userNavigation.getKey().getName());
@@ -172,8 +170,8 @@ public class UIPortalNavigationExplorer extends UIContainer {
         return;
       List<TreeNode> list = new ArrayList<TreeNode>();
       for (String portal : this.runningPortals) {
-        UserPortal userPortal = Util.getUIPortalApplication().getUserPortalConfig().getUserPortal();
-        UserNavigation userNavigation = userPortal.getNavigation(SiteKey.portal(portalName));
+        UserPortal userPortal = Util.getPortalRequestContext().getUserPortalConfig().getUserPortal();
+        UserNavigation userNavigation = NavigationUtils.getUserNavigationOfPortal(userPortal, portalName);
         UserNode userNode = userPortal.getNode(userNavigation, NavigationUtils.ECMS_NAVIGATION_SCOPE, null, null);
         UIPortalApplication portalApplication = Util.getUIPortalApplication();
         LocaleConfig localeConfig = getApplicationComponent(LocaleConfigService.class).

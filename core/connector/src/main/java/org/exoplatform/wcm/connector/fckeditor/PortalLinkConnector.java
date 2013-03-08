@@ -25,7 +25,6 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.servlet.ServletContext;
-import org.exoplatform.portal.mop.page.PageContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
@@ -47,9 +46,8 @@ import org.exoplatform.portal.config.Query;
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.config.UserPortalConfig;
 import org.exoplatform.portal.config.UserPortalConfigService;
-import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.config.model.PortalConfig;
-import org.exoplatform.portal.mop.SiteKey;
+import org.exoplatform.portal.mop.page.PageContext;
 import org.exoplatform.portal.mop.page.PageKey;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
@@ -273,7 +271,7 @@ public class PortalLinkConnector implements ResourceContainer {
                                                                  userId,
                                                                  NULL_CONTEXT);
     UserPortal userPortal = userPortalCfg.getUserPortal();
-    UserNavigation navigation = userPortal.getNavigation(SiteKey.portal(portalName));
+    UserNavigation navigation = NavigationUtils.getUserNavigationOfPortal(userPortal, portalName);
     UserNode userNode = null;
 
     if (pageNodeUri == null) {
