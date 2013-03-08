@@ -23,7 +23,6 @@ import java.util.Locale;
 import javax.jcr.Node;
 
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationHistory;
-import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationPanel;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIPopupContainer;
