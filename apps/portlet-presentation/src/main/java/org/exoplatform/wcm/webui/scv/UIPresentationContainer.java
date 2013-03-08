@@ -324,10 +324,10 @@ public class UIPresentationContainer extends UIContainer{
       if (path == null){
         return null;
       }
-      parameters = Text.unescape(Util.getPortalRequestContext().getRequestParameter(parameterName));
+      parameters = Text.unescapeIllegalJcrChars(Util.getPortalRequestContext().getRequestParameter(parameterName));
       return parameters.substring(1);
     }
-    return Text.unescape(parameters);
+    return Text.unescapeIllegalJcrChars(parameters);
   }
 
   /**
