@@ -39,19 +39,17 @@
 	if(uicomponent.isShow()) show = "block";
 %>
 
-<div class="UIPopupWindow UIDragObject NormalStyle" exo:minWidth="200" exo:minHeight="200" id="$popupId" style="$widthStyle display: $show;">
-	<div class="OverflowContainer">
+<div class="UIPopupWindow uiPopup UIDragObject NormalStyle" exo:minWidth="200" exo:minHeight="200" id="$popupId" style="$widthStyle display: $show;">
+	<div class="popupHeader">
 		<%if( true) {%>
-		<a class="CloseButton" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPopupWindow.Close")%>" onclick="<%=uicomponent.event(uicomponent.getCloseEvent())%>"></a>
+		<a class="uiIconClose pull-right" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPopupWindow.Close")%>" onclick="<%=uicomponent.event(uicomponent.getCloseEvent())%>"></a>
 		<% } else { %>
 			<div class="PopupTitleIconRight"><span></span></div>
 		<% } %>
-		<span class="PopupTitle"><%=_ctx.appRes(rsId + ".title."+ title)%></span>
+		<span class="PopupTitle popupTitle"><%=_ctx.appRes(rsId + ".title."+ title)%></span>
 	</div>
-	<div class="UIWindowContent">
-		<div class="PopupContent"><% uicomponent.renderChildren(); %></div>
-	</div>
+	<div class="PopupContent popupContent"><% uicomponent.renderChildren(); %></div>
 	 <%if (uicomponent.isResizable()) {%>
-    <span class="ResizeButton"></span>
+    <span class="uiIconResize pull-right"></span>
   <%}%>
 </div>
