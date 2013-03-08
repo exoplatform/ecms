@@ -88,6 +88,8 @@
 							<collection type="java.util.ArrayList">
 								<value><string>application/msword</string></value>
 								<value><string>application/vnd.oasis.opendocument.text</string></value>
+								<value><string>application/vnd.openxmlformats-officedocument.wordprocessingml.document</string></value>
+								<value><string>application/rtf</string></value>								
 							</collection>
 						</field>
 	        </object>
