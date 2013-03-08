@@ -33,18 +33,17 @@
 				      <tr>
 				        <td>
 				        <%
-                  String nodeName = ContentReader.getXSSCompatibilityContent(Utils.getIndexName(node));          
+                  String nodeTitle = ContentReader.getXSSCompatibilityContent(Utils.getTitle(node));
                   String nodeTypeIcon = Utils.getNodeTypeIcon(node,"16x16Icon");
 				          def clazz = "Text"
-						  						
 				          if(Utils.isSymLink(node)) clazz = "TextSymLink";
 				        %>
 				          
 				          <div class="$clazz <%=nodeTypeIcon%>">
 				          <%if(Utils.isSymLink(node)) {%>
-	                  <img class="LinkSmall" alt="<%=nodeName%>" />
+	                  <img class="LinkSmall" alt="<%=nodeTitle%>" />
 	                <%}%>
-				          $nodeName</div>
+	                nodeTitle</div>
 				        </td>
 				        <td class="center">
 		              <a class="actionIcon" href="<%=uicomponent.event("Select", Utils.formatNodeName(node.getPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITreeList.action.title.select")%>">

@@ -316,6 +316,7 @@
 			treeHTML += '<div class="ChildrenContainer" style="display:none;">'	;
 			for(var i = 0; i < nodeList.length; i++) {
 				var id = eXo.ecm.ECS.generateIdNodes(nodeList[i], currentNode.id);
+				var strTitle = nodeList[i].getAttribute("title");
 				var strName = nodeList[i].getAttribute("name");
 				var isUpload = nodeList[i].getAttribute("isUpload");
 				var nodeDriveName = nodeList[i].getAttribute("nodeDriveName");
@@ -325,14 +326,14 @@
 				treeHTML += '<div class="node" onclick="eXo.ecm.ECS.actionColExp(this, event);">';
 				if (hasFolderChild == true) {
 					treeHTML += 	'<div class="expandIcon">';
-					treeHTML +=			'<a  title="'+ decodeURIComponent(strName) +'" href="javascript:void(0);" class="nodeIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+ '" hasFolderChild="' + hasFolderChild + '" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
+					treeHTML +=			'<a  title="'+ decodeURIComponent(strTitle) +'" href="javascript:void(0);" class="nodeIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+ '" hasFolderChild="' + hasFolderChild + '" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
 				} else {
 					treeHTML += 	'<div class="emptyIcon">';
-					treeHTML +=			'<a  title="'+ decodeURIComponent(strName) +'" href="javascript:void(0);" class="nodeIcon" name="'+decodeURIComponent(strName)+'" id="'+id +'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
+					treeHTML +=			'<a  title="'+ decodeURIComponent(strTitle) +'" href="javascript:void(0);" class="nodeIcon" name="'+decodeURIComponent(strName)+'" id="'+id +'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
 				}
 				treeHTML +=				'<i class="' + nodeTypeCssClass + '"></i>';
 				treeHTML += 			'<span class="nodeName">';
-				treeHTML += 				decodeURIComponent(strName);
+				treeHTML += 				decodeURIComponent(strTitle);
 				treeHTML +=				'</span>';	
 				treeHTML += 		'</a>';
 				treeHTML +=		'</div>';
@@ -356,14 +357,14 @@
 					treeHTML += '<div class="node" onclick="eXo.ecm.ECS.actionColExp(this, event);">';
 					if (hasFolderChild == "true") {
 						treeHTML += 	'<div class="expandIcon">';
-						treeHTML +=			'<a  title="'+decodeURIComponent(strName)+'" href="javascript:void(0);" class="nodeIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+ '" hasFolderChild="' + hasFolderChild + '" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
+						treeHTML +=			'<a  title="'+decodeURIComponent(strTitle)+'" href="javascript:void(0);" class="nodeIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+ '" hasFolderChild="' + hasFolderChild + '" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
 					} else {
 						treeHTML += 	'<div class="emptyIcon">';
-						treeHTML +=			'<a  title="'+decodeURIComponent(strName)+'" href="javascript:void(0);" class="nodeIcon" name="'+decodeURIComponent(strName)+'" id="'+id + '" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
+						treeHTML +=			'<a  title="'+decodeURIComponent(strTitle)+'" href="javascript:void(0);" class="nodeIcon" name="'+decodeURIComponent(strName)+'" id="'+id + '" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
 					}
 					treeHTML +=				'<i class="' + nodeTypeCssClass + '"></i>';
 					treeHTML += 			'<span class="nodeName">';
-					treeHTML += 				decodeURIComponent(strName);
+					treeHTML += 				decodeURIComponent(strTitle);
 					treeHTML +=				'</span>';	
 					treeHTML += 		'</a>';
 					treeHTML +=		'</div>';
