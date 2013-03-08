@@ -42,8 +42,8 @@
         <property name="CLVPortlet" value="/presentation/ContentListViewerPortlet" />
         <property name="SCVPortlet" value="/presentation/SingleContentViewer" />
 
-        <property name="formViewTemplatePath" value="{wcm.config.formViewTemplatePath:}" />
-        <property name="paginatorTemplatePath" value="{wcm.config.paginatorTemplatePath:/exo:ecm/views/templates/content-list-viewer/paginators/DefaultPaginator.gtmpl}" />
+        <property name="formViewTemplatePath" value="${wcm.config.formViewTemplatePath:}" />
+        <property name="paginatorTemplatePath" value="${wcm.config.paginatorTemplatePath:/exo:ecm/views/templates/content-list-viewer/paginators/DefaultPaginator.gtmpl}" />
       </properties-param>
       <properties-param>
         <name>share.portal.config</name>
