@@ -55,6 +55,7 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -624,5 +625,24 @@ public class Utils {
   public static String getNodeTypeIcon(Node node, String appended)
     throws RepositoryException {
     return getNodeTypeIcon(node, appended, null);
+  }
+  
+  /**
+   * Check if a node is document type.
+   * @param node
+   * @return true: is document; false: not document
+   * @throws Exception
+   */
+  public static boolean isDocument(Node node) throws Exception {
+    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
+    if (templateService==null) return false;
+    List<String> documentTypeList = templateService.getDocumentTemplates();
+    if (documentTypeList==null) return false;
+    for (String documentType : documentTypeList) {
+      if (node.getPrimaryNodeType().isNodeType(documentType)) {
+        return true;
+      }
+    }
+    return false;
   }
 }
