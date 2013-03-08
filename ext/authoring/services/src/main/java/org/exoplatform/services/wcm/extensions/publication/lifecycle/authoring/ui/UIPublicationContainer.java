@@ -23,15 +23,23 @@ import java.util.Locale;
 import javax.jcr.Node;
 
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationHistory;
+import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationPanel;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
+import org.exoplatform.webui.event.Event;
+import org.exoplatform.webui.event.EventListener;
 
 /**
  * Created by The eXo Platform SAS Author : eXoPlatform
  * chuong_phan@exoplatform.com Mar 4, 2009
  */
 
-@ComponentConfig(lifecycle = Lifecycle.class, template = "system:/groovy/webui/core/UITabPane.gtmpl")
+@ComponentConfig(lifecycle = Lifecycle.class, template = "app:/groovy/webui/component/explorer/popup/action/UITabPane.gtmpl",
+  events = {
+  @EventConfig(listeners = UIPublicationContainer.CloseActionListener.class)
+  })
 public class UIPublicationContainer
                                    extends
                                    org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationContainer {
@@ -67,6 +75,10 @@ public class UIPublicationContainer
     dateTimeFormater = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.MEDIUM,
                                                             SimpleDateFormat.MEDIUM,
                                                             locale);
+    
+    UIPublicationSchedule publicationSchedule = addChild(UIPublicationSchedule.class, null, null);
+    publicationSchedule.init(node);
+    publicationSchedule.setRendered(false);
   }
 
   /**
@@ -77,5 +89,13 @@ public class UIPublicationContainer
   public DateFormat getDateTimeFormater() {
     return dateTimeFormater;
   }
-
+  
+  public static class CloseActionListener extends EventListener<UIPublicationContainer> {
+    public void execute(Event<UIPublicationContainer> event) throws Exception {
+      UIPublicationContainer publicationContainer = event.getSource();
+      UIPopupContainer uiPopupContainer = publicationContainer.getAncestorOfType(UIPopupContainer.class);
+      uiPopupContainer.deActivate();
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupContainer);
+    }
+  }
 }

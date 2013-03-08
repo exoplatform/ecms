@@ -678,6 +678,7 @@
     <title>
       <UIPublishingPanel>Publication Pane</UIPublishingPanel>
       <UIPublicationPanel>Revision</UIPublicationPanel>
+      <UIPublicationSchedule>Scheduled</UIPublicationSchedule>
       <UIPublicationPagesContainer>Pages</UIPublicationPagesContainer>
       <UIPublicationHistory>History</UIPublicationHistory>
       <UIVersionViewer>Version Viewer</UIVersionViewer>
@@ -3368,6 +3369,18 @@
       <description>Description</description>
     </header>
   </UIPublicationHistory>
+  
+  <UIPublicationSchedule>
+    <label>
+      <introduction>You can schedule the publication of your document. Select dates you would like to see your document published</introduction>
+      <no-schedule-info>No publication schedule for your document</no-schedule-info>
+    </label>
+    <scheduled>
+      <title>Scheduled</title>
+      <from>From</from>
+      <to>To</to>
+    </scheduled>
+  </UIPublicationSchedule>
 
   <UIPublicationPanel>
     <label>

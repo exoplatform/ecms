@@ -1,0 +1,20 @@
+<%
+%>
+<% uiform.begin(); %>
+<div class="UIPublicationSchedule" id="$uiform.id">
+  <div><%=_ctx.appRes("UIPublicationSchedule.label.introduction")%></div>
+    <div class="form-inline">
+      <span class="help-inline"> <%=_ctx.appRes("UIPublicationPanel.scheduled.from")%></span><% uicomponent.renderChild(uicomponent.START_PUBLICATION); %>
+      <span class="help-inline"> <%=_ctx.appRes("UIPublicationPanel.scheduled.to")%></span><% uicomponent.renderChild(uicomponent.END_PUBLICATION); %>
+      <%
+        String saveLabel = _ctx.appRes(uiform.getName() + ".action.Save");
+        String saveLink = uiform.event("Save");
+        String resetLabel = _ctx.appRes(uiform.getName() + ".action.Reset");
+        String resetLink = uiform.event("Reset");
+       %>
+        <button type="button" onclick="$saveLink" class="btn-primary">$saveLabel</a>
+        <button type="button" onclick="$resetLink" class="btn-primary">$resetLabel</a>
+    </div>
+    <div><%=_ctx.appRes("UIPublicationSchedule.label.no-schedule-info")%></div>
+</div>
+<% uiform.end(); %>

@@ -30,12 +30,8 @@ import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationConstant;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.config.VersionLog;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
-import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponentDecorator;
 import org.exoplatform.webui.core.UIPageIterator;
-import org.exoplatform.webui.core.UIPopupContainer;
-import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 
 /**
  * Created by The eXo Platform SARL
@@ -47,10 +43,7 @@ import org.exoplatform.webui.event.EventListener;
  */
 @SuppressWarnings("deprecation")
 @ComponentConfig(
-    template = "classpath:groovy/wcm/webui/publication/lifecycle/stageversion/ui/UIPublicationHistory.gtmpl",
-    events = {
-        @EventConfig(listeners = UIPublicationHistory.CloseActionListener.class)
-    }
+    template = "classpath:groovy/wcm/webui/publication/lifecycle/stageversion/ui/UIPublicationHistory.gtmpl"
 )
 public class UIPublicationHistory extends UIComponentDecorator {
 
@@ -135,30 +128,6 @@ public class UIPublicationHistory extends UIComponentDecorator {
    * @return the actions
    */
   public String[] getActions() {return new String[]{"Close"} ;}
-
-  /**
-   * The listener interface for receiving closeAction events.
-   * The class that is interested in processing a closeAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
-   * component's <code>addCloseActionListener<code> method. When
-   * the closeAction event occurs, that object's appropriate
-   * method is invoked.
-   *
-   * @see CloseActionEvent
-   */
-  static public class CloseActionListener extends EventListener<UIPublicationHistory> {
-
-    /* (non-Javadoc)
-     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
-     */
-    public void execute(Event<UIPublicationHistory> event) throws Exception {
-      UIPublicationHistory uiPublicationLogList = event.getSource() ;
-      UIPopupContainer uiPopupContainer = (UIPopupContainer) uiPublicationLogList.getAncestorOfType(UIPopupContainer.class);
-      uiPopupContainer.deActivate();
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupContainer);
-    }
-  }
 
   /**
    * The Class HistoryBean.

@@ -94,13 +94,6 @@
 			}%>
 		</ul>
   </fieldset>
-  <fieldset class="scheduled">
-  	<h5><%=_ctx.appRes("UIPublicationPanel.scheduled.title")%></h5>
-  	<div class="form-inline">
-  		<span class="help-inline"> <%=_ctx.appRes("UIPublicationPanel.scheduled.from")%></span><% uicomponent.renderChild(uicomponent.START_PUBLICATION); %>
-  		<span class="help-inline"> <%=_ctx.appRes("UIPublicationPanel.scheduled.to")%></span><% uicomponent.renderChild(uicomponent.END_PUBLICATION); %>
-  	</div>
-  </fieldset>
   <table class="revisionsTable uiGrid table table-hover table-striped">
   <thead>
     <tr>
@@ -180,13 +173,5 @@
       <%
     }
   %>
-</div>
-<div class="uiAction"> 
-	<% for(action in uicomponent.getActions()) { 
-		 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
-		 String link = uicomponent.event(action) ;
-	%>
-	<button type="button" href="javascript:void(0);" onclick="$link" class="btn">$actionLabel</button>
-	<%}%>        
 </div>
 <% uicomponent.end(); %>
