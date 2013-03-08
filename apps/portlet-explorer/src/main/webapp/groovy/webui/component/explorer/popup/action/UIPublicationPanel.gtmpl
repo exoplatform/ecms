@@ -1,0 +1,177 @@
+<%
+	import java.util.List;
+  import java.util.ArrayList;
+	import javax.jcr.Node;
+	import javax.jcr.version.Version;
+	import org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.ui.UIPublicationPanel;
+	import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
+	import org.exoplatform.container.ExoContainer;
+	import org.exoplatform.container.ExoContainerContext;
+	import org.exoplatform.services.security.Identity;
+	import org.exoplatform.services.security.IdentityRegistry;
+	import org.exoplatform.services.wcm.extensions.publication.impl.PublicationManagerImpl;
+	import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.Lifecycle;
+	import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.State;
+	import org.exoplatform.ecm.webui.utils.Utils;
+	import org.exoplatform.wcm.webui.reader.ContentReader;
+
+	Node currentRevision = uicomponent.getCurrentRevision();
+	def context = _ctx.getRequestContext() ;
+	String remoteUser=context.getRemoteUser();
+	Node cNode = uicomponent.getCurrentNode();
+	boolean lastState=false;
+	boolean isBaseVersion= false;
+	boolean isBeforeCurrentState = true;
+	boolean enableState = false;
+    List<State> states = uicomponent.getStates(cNode);
+	if(currentRevision.getUUID().equals(cNode.getUUID())){
+		isBaseVersion=true;
+	}
+	public boolean isCurrentRevision(String inputStatus, Node revision) throws Exception {    
+	  String state = uicomponent.getRevisionState(revision);
+	  return inputStatus.equals(state) ? true : false;
+	}  
+%>
+<% uicomponent.begin(); %>
+<div class="uiPublicationPanel resizable" id="$uicomponent.id">
+
+  <% if (states.size() == 0) { %>
+  <%=_ctx.appRes("UIPublicationPanel.msg.no-states")%> 
+  <% } %>
+
+  <fieldset class="StatusTable">
+    <% String versionName = currentRevision.getName();
+       String verName = ContentReader.getXSSCompatibilityContent(versionName);
+    %>
+    <h5><%=_ctx.appRes("UIPublicationPanel.status.version")%>: <span rel="tooltip" data-placement="bottom" title="$verName">$verName</span></h5>
+		<ul class="statusAction clearfix">
+			<%
+	
+			for (State state : states) {
+	 
+			if(states.indexOf(state)==states.size()-1) lastState=true;
+			 String membership = state.getMembership();
+			 String status = state.getState();
+			 boolean isAutomatic = false;
+			 if(!"automatic".equals(membership)){
+						 enableState = uicomponent.canReachState(state, remoteUser, cNode) ;
+					 }
+			 else{
+					isAutomatic=true;
+			 }
+			 if (isCurrentRevision(status,currentRevision)){		
+				isBeforeCurrentState=false;
+			
+				if(isBaseVersion&&cNode.hasProperty("publication:currentState")&&!cNode.getProperty("publication:currentState").getString().equals(status)){
+				%>
+				<li class="activeStatus" onclick="<%= uicomponent.event("ChangeState", status)%>"><a class="node">
+				<%}
+				else{%>
+				<li class="currentStatus"><a class="node">
+				<%}
+				
+				}else if((!isBaseVersion&&isBeforeCurrentState)||isAutomatic||!enableState) {
+				
+				%>
+				<li class="disableStatus"><a class="node">
+				<%}
+				
+				else  if(!isAutomatic&&enableState){
+				%>	
+				<li class="activeStatus" onclick="<%= uicomponent.event("ChangeState", status)%>"><a class="node">
+					
+					<%}%>
+					</a>
+					<p><%=_ctx.appRes("UIPublicationPanel.status."+status)%></p>
+				</li>
+				<%if(!lastState){%>
+				
+				
+				<%}else{%>
+				 
+				<%}
+			
+			}%>
+		</ul>
+  </fieldset>
+  <table class="revisionsTable uiGrid table table-hover table-striped">
+  <thead>
+    <tr>
+      <th class="version"><%=_ctx.appRes("UIPublicationPanel.revisions.version")%></th>
+      <th class="date"><%=_ctx.appRes("UIPublicationPanel.revisions.date")%></th>
+      <th class="author"><%=_ctx.appRes("UIPublicationPanel.revisions.author")%></th>
+      <th class="status"><%=_ctx.appRes("UIPublicationPanel.revisions.status")%></th>
+      <th class="action"><%=_ctx.appRes("UIPublicationPanel.revisions.action")%></th>
+    </tr>
+	</thead>
+	<tbody>
+    <%
+      List<Node> revisions = uicomponent.getRevisions();
+      if (revisions.isEmpty()) {
+        %>
+          <tr>
+            <td colspan="5" class="None"><%=_ctx.appRes("UIPublicationPanel.revisions.none")%></td>
+          </tr>
+        <%
+      }
+         
+      for (Node revision : revisions) {
+      	def state = uicomponent.getRevisionState(revision);
+      	def nodeName = Utils.getTitle(revision);
+      	%>
+          <tr>
+            <td class="name">
+              <%
+                if (versionName.equals(revision.getName())) {
+                  %>
+                    <div rel="tooltip" data-placement="bottom" title="<%=nodeName%>"><%=_ctx.appRes("UIPublicationPanel.revisions.label")%>:<%= nodeName %></div>
+                  <%
+                } else {
+                  %>
+                    <a class="ActiveLink" href="<%= uicomponent.event("ChangeVersion", revision.getUUID()) %>"><div rel="tooltip" data-placement="bottom" title="<%=nodeName%>" style="width:200px; overflow:hidden; margin-right: 3px;"><%=_ctx.appRes("UIPublicationPanel.revisions.label")%>:<%= nodeName %></div></a>
+                  <%
+                }
+              %>
+            </td>
+            <td><%= uicomponent.getRevisionCreatedDate(revision)%></td>
+            <td><%= uicomponent.getRevisionAuthor(revision) %></td>
+            <td>
+              <%
+                if (revisions.indexOf(revision) == 0) {
+                  out.print(_ctx.appRes("UIPublicationPanel.status." + uicomponent.getRevisionState(revision)));
+                  out.print("[" + _ctx.appRes("UIPublicationPanel.revisions.currentVersion") + "]");
+                } else {
+                  out.print(_ctx.appRes("UIPublicationPanel.status." + uicomponent.getRevisionState(revision)));
+                }
+              %>
+            </td>
+            <td class="center actionContainer">
+              <a class="actionIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPublicationPanel.title.preview")%>" onclick="<%= uicomponent.event("PreviewVersion", revision.getUUID()) %>"><i class="uiIconPreview"></i></a>
+              <%
+                if (revisions.indexOf(revision) != 0) {
+                  if (PublicationDefaultStates.DRAFT.equals(uicomponent.getRevisionState(revisions.get(0)))) {
+                    %><a class="actionIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPublicationPanel.title.restore")%>" onclick="if (confirm('<%=_ctx.appRes("UIPublicationPanel.revisions.confirm")%>')) <%= uicomponent.event("RestoreVersion", revision.getUUID()) %>"><i class="uiIconRestore"></i></a><%
+                  } else {
+                    %><a class="actionIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPublicationPanel.title.restore")%>" onclick="<%= uicomponent.event("RestoreVersion", revision.getUUID()) %>"><i class="uiIconRestore"></i></a><%
+                  }
+                }
+              %>
+              
+            </td>
+          </tr>
+        <%
+      }
+    %>  
+	</tbody>
+  </table>
+  <%
+    List<Node> allRevisions = uicomponent.getAllRevisions(cNode);
+    if (allRevisions.size() > 3) {
+      %>
+        <div class="SeeAllVersion" onclick="<%= uicomponent.event("SeeAllVersion") %>"><%=_ctx.appRes("UIPublicationPanel.revisions.seeall")%></div>
+       
+      <%
+    }
+  %>
+</div>
+<% uicomponent.end(); %>

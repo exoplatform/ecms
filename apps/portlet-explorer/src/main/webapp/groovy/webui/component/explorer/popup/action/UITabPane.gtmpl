@@ -1,42 +1,43 @@
 <%
+  import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationPanel;
+  
   def rcontext = _ctx.getRequestContext() ;
-	rcontext.getJavascriptManager().require("SHARED/bts_tab");	
+  rcontext.getJavascriptManager().require("SHARED/bts_tab");
+  UIPublicationPanel uiForm = uicomponent.getChild(UIPublicationPanel.class);
 %>
 
 <div class="uiTabPane uiTabNormal" id="$uicomponent.id">
-
-      <ul class="nav nav-tabs">
-			          <%
-			            for(uiChild in uicomponent.getChildren()) {
-			              String style = "" ;
-			              String tabId = uiChild.getId();
-			              String paneId = uicomponent.getId();
-			              if(uiChild.isRendered()) style = "active" ;
-			          %>
-			              <li class="$style">              
-												<a data-toggle="tab" data-target="#$tabId-tab"><%=_ctx.appRes("UITabPane.title." + uiChild.getId());%></a>
-			              </li>           
-			          <%}%>
-      </ul>
-      <div class="tab-content">
-        <%
-          for(uiChild in uicomponent.getChildren()) { 
-            def active = "";
-            if(uiChild.isRendered()) {							
-							active = "in active";
-						} ;
-            println "<div id=\"$uiChild.id-tab\" class=\"tab-pane fade $active\">" ;
-            uicomponent.renderUIComponent(uiChild) ;
-            println "</div>" ;
-          }
-        %>
-      </div> 
-      	<div class="uiAction uiActionBorder"> 
-				<%
-				 String closeActionLabel = _ctx.appRes(uicomponent.getName() + ".action.Close");
-				 String actionLink = uicomponent.event("Close");
-				%>
-				<button type="button" onclick="$actionLink" class="btn">$closeActionLabel</button>
-			</div>
-
+  <ul class="nav nav-tabs">
+            <%
+              for(uiChild in uicomponent.getChildren()) {
+                String style = "" ;
+                String tabId = uiChild.getId();
+                String paneId = uicomponent.getId();
+                if(uiChild.isRendered()) style = "active" ;
+            %>
+                <li class="$style">              
+                    <a data-toggle="tab" data-target="#$tabId-tab"><%=_ctx.appRes("UITabPane.title." + uiChild.getId());%></a>
+                </li>           
+            <%}%>
+  </ul>
+  <div class="tab-content">
+    <%
+      for(uiChild in uicomponent.getChildren()) { 
+        def active = "";
+        if(uiChild.isRendered()) {              
+          active = "in active";
+        } ;
+        println "<div id=\"$uiChild.id-tab\" class=\"tab-pane fade $active\">" ;
+        uicomponent.renderUIComponent(uiChild) ;
+        println "</div>" ;
+      }
+    %>
+  </div>
+    <div class="uiAction uiActionBorder"> 
+    <%
+     String closeActionLabel = _ctx.appRes(uicomponent.getName() + ".action.Close");
+     String actionLink = uiForm.event("Close");
+    %>
+    <button type="button" onclick="$actionLink" class="btn">$closeActionLabel</button>
+  </div>
 </div>  

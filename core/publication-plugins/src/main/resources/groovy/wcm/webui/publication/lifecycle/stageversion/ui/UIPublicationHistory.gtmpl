@@ -50,8 +50,3 @@
   </div>
   <% } %>
 </div>
-<div class="uiAction">
-	<% for(action in uicomponent.getActions()) { %>
-		<button type="button" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPublicationLogList.action." + action)%>" onclick="<%=uicomponent.event(action)%>" class="btn" href="javascript:void(0);"><%=_ctx.appRes("UIPublicationLogList.action." + action)%></button>
-	<% } %>
-</div>
