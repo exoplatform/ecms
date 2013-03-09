@@ -1,8 +1,8 @@
 <%
 %>
 <% uiform.begin(); %>
-<div class="UIPublicationSchedule" id="$uiform.id">
-  <div><%=_ctx.appRes("UIPublicationSchedule.label.introduction")%></div>
+<div class="uiPublicationSchedule" id="$uiform.id">
+  <span class="help-block"><%=_ctx.appRes("UIPublicationSchedule.label.introduction")%></span>
     <div class="form-inline">
       <span class="help-inline"> <%=_ctx.appRes("UIPublicationPanel.scheduled.from")%></span><% uicomponent.renderChild(uicomponent.START_PUBLICATION); %>
       <span class="help-inline"> <%=_ctx.appRes("UIPublicationPanel.scheduled.to")%></span><% uicomponent.renderChild(uicomponent.END_PUBLICATION); %>
@@ -12,9 +12,9 @@
         String resetLabel = _ctx.appRes(uiform.getName() + ".action.Reset");
         String resetLink = uiform.event("Reset");
        %>
-        <button type="button" onclick="$saveLink" class="btn-primary">$saveLabel</a>
-        <button type="button" onclick="$resetLink" class="btn-primary">$resetLabel</a>
+        <button type="button" onclick="$saveLink" class="btn btn-primary">$saveLabel</a>
+        <button type="button" onclick="$resetLink" class="btn">$resetLabel</a>
     </div>
-    <div><%=_ctx.appRes("UIPublicationSchedule.label.no-schedule-info")%></div>
+    <span class="help-block"><%=_ctx.appRes("UIPublicationSchedule.label.no-schedule-info")%></span>
 </div>
 <% uiform.end(); %>

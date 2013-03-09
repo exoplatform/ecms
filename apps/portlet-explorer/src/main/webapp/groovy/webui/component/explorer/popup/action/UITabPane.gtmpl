@@ -33,7 +33,7 @@
       }
     %>
   </div>
-    <div class="uiAction uiActionBorder"> 
+	<div class="uiAction"> 
     <%
      String closeActionLabel = _ctx.appRes(uicomponent.getName() + ".action.Close");
      String actionLink = uiForm.event("Close");
