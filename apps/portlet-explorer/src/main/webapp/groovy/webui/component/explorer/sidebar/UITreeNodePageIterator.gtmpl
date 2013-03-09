@@ -25,16 +25,19 @@ import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
   
 %>
 
-<div class="UITreeNodePageIterator">
-	<table class="NodePageIterator">
-		<tr>
-			<td>
+<div class="uiTreeNodePageIterator pagination uiPageIterator">
+	<ul>
+			
 		    <%if( currentPage - 1 > 0 ){%>        
-		    	  <a href="<%=uicomponent.event("ShowPage","${currentPage - 1}")%>" class="Icon LastPage" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageIterator.label.previous")%>"><span></span></a>
+					<li>
+						<a href="<%=uicomponent.event("ShowPage","${currentPage - 1}")%>" class="Previous Page" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageIterator.label.previous")%>"><i class="uiIconArrowLeftMini"></i></a>
+					</li>
 		    <% } else {%>
-		    	  <a class="Icon LastPage DisablePage" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageIterator.label.previous")%>"><span></span></a>
-		    <%}%>
-		  </td>
+					<li class="disabled">
+		    	  <a class="Previous Page" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageIterator.label.previous")%>"><i class="uiIconArrowLeftMini"></i></a>
+					</li>
+				<%}%>
+		  
       <%
       int min = 1;
       int max = totalPage;
@@ -50,21 +53,26 @@ import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
         max = totalPage;
       }
       for( i in min..max) { %>
-      	<td>
 	      <%if( i == currentPage) { %>
-	          <a href="<%=uicomponent.event("ShowPage","$i")%>" class="PageSelected"><%=i%></a>
-	      <%} else { %>
+					<li class="active">
 	          <a href="<%=uicomponent.event("ShowPage","$i")%>"><%=i%></a>
+					</li>
+	      <%} else { %>
+					<li>
+	          <a href="<%=uicomponent.event("ShowPage","$i")%>"><%=i%></a>
+					</li>
 	      <%} %>
-      	</td> 
+				
       <%}%>
-	    <td>
-		    <% if(currentPage +1 <= totalPage) { %>
-		    	   <a href="<%=uicomponent.event("ShowPage","${currentPage + 1}")%>" class="Icon NextPage" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageIterator.label.next")%>"><span></span></a>
-		    <% } else { %>
-		    	   <a class="Icon NextPage DisablePage" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageIterator.label.next")%>"><span></span></a>
-		    <%}%>
-	    </td>	  
-		</tr>
-	</table>
+			
+			<% if(currentPage +1 <= totalPage) { %>
+				<li>
+					 <a href="<%=uicomponent.event("ShowPage","${currentPage + 1}")%>" class="Next Page" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageIterator.label.next")%>"><i class="uiIconArrowRightMini"></i></a>
+				</li>
+			<% } else { %>
+				<li class="disabled">
+					 <a class="Next Page" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageIterator.label.next")%>"><i class="uiIconArrowRightMini"></i></a>
+				</li>
+			<%}%>
+	</ul>
 </div>
