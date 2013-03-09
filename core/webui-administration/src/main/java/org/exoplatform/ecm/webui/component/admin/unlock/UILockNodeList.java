@@ -49,6 +49,7 @@ import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -142,16 +143,35 @@ public class UILockNodeList extends UIPagingGridDecorator {
     return groupList;
   }
     public void execute(Event<UILockNodeList> event) throws Exception {
+      WebuiRequestContext rContext = event.getRequestContext();
       UIUnLockManager uiUnLockManager = event.getSource().getParent();
       UIApplication uiApp = uiUnLockManager.getAncestorOfType(UIApplication.class);
-      String nodePath = event.getRequestContext().getRequestParameter(OBJECTID);
+      String nodePath = rContext.getRequestParameter(OBJECTID);
       RepositoryService repositoryService = uiUnLockManager.getApplicationComponent(RepositoryService.class);
       ManageableRepository manageRepository = repositoryService.getCurrentRepository();
       Session session = null;
       Node lockedNode = null;
+      UserACL userACLService = WCMCoreUtils.getService(UserACL.class);
+      String remoteUser = rContext.getRemoteUser();
+      boolean isAuthenticated = remoteUser.equals(userACLService.getSuperUser());
+      if (!isAuthenticated) {
+        LockService lockService = WCMCoreUtils.getService(LockService.class);
+        List<String> authenticatedGroups = lockService.getAllGroupsOrUsersForLock();
+        List<String> memberShips = getGroups(remoteUser);
+        for (String group: authenticatedGroups) {
+          if (memberShips.contains(group)){
+          isAuthenticated=true;
+          break;
+          }
+        }
+      }
       RepositoryEntry repo = repositoryService.getCurrentRepository().getConfiguration();
       for(WorkspaceEntry ws : repo.getWorkspaceEntries()) {
-        session = WCMCoreUtils.getUserSessionProvider().getSession(ws.getName(), manageRepository);
+        if (isAuthenticated) {
+          session = WCMCoreUtils.getSystemSessionProvider().getSession(ws.getName(), manageRepository);
+        }else {
+          session = WCMCoreUtils.getUserSessionProvider().getSession(ws.getName(), manageRepository);
+        }
         try {
           lockedNode = (Node) session.getItem(nodePath);
           if ((lockedNode != null) && !Utils.isInTrash(lockedNode)) break;
@@ -173,19 +193,8 @@ public class UILockNodeList extends UIPagingGridDecorator {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiUnLockManager);
         return;
       }
-      LockService lockService = WCMCoreUtils.getService(LockService.class);
-      String remoteUser = lockedNode.getSession().getUserID();
-      List<String> authenticatedGroups = lockService.getAllGroupsOrUsersForLock();
-      List<String> memberShips = getGroups(remoteUser);
-      boolean isAuthenticated =false;
-      for (String group: authenticatedGroups) {
-        if (memberShips.contains(group)){
-        isAuthenticated=true;
-        break;
-        }
-      }
-      UserACL userACLService = WCMCoreUtils.getService(UserACL.class);
-      if (isAuthenticated || remoteUser.equals(userACLService.getSuperUser())) {
+      
+      if (isAuthenticated ) {
         session = WCMCoreUtils.getSystemSessionProvider()
                               .getSession(lockedNode.getSession().getWorkspace().getName(),
                                           (ManageableRepository) lockedNode.getSession()
