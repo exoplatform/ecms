@@ -1,11 +1,11 @@
 <style>
-	.UIForm .HorizontalLayout textarea { 
+	.uiForm .form-horizontal textarea { 
 	  font-size:11px;
 	  height:275px;
 	  width:525px;
 	 }
 </style>
-<div class="UIForm FormScrollLayout">  
+<div class="uiForm FormScrollLayout">  
   <% 
 	uiform.begin() 
   %>
@@ -16,58 +16,55 @@
   %>
 
   <%/* end render action*/%>  
-  <div class="HorizontalLayout">
-    <table class="UIFormGrid">
-        <tr>
-          <td class="FieldLabel"><label for="name"><%=_ctx.appRes("WebLink.dialog.label.name")%>:</label></td>
-          <td class="FieldComponent">
-            <%
-              String[] fieldName = ["jcrPath=/node", "nodetype=exo:link", "mixintype=mix:i18n", "editable=if-null", "validate=name,empty"] ;
-              uicomponent.addTextField("name", fieldName) ; 
-            %>
-          </td>
-        </tr>
-        
-        <tr>
-        	<td class="FieldLabel"><label for="LinkURL"><%=_ctx.appRes("WebLink.dialog.label.url")%>:</label></td>
-        	<td class="FieldComponent">
-            <%
-              String[] fieldUrl = ["jcrPath=/node/exo:linkURL", "validate=empty"] ;
-              uicomponent.addTextField("LinkURL", fieldUrl) ; 
-            %>
-        	</td>
-        </tr>
-		<tr>
-        	<td class="FieldLabel"><label for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%>:</label></td>
-			<td class="FieldComponent">
+  <div class="form-horizontal">
+		<div class="control-group">
+			<label class="control-label" for="name"><%=_ctx.appRes("WebLink.dialog.label.name")%>:</label>
+			<div class="controls">
+				<%
+					String[] fieldName = ["jcrPath=/node", "nodetype=exo:link", "mixintype=mix:i18n", "editable=if-null", "validate=name,empty"] ;
+					uicomponent.addTextField("name", fieldName) ; 
+				%>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label" for="LinkURL"><%=_ctx.appRes("WebLink.dialog.label.url")%>:</label>
+			<div class="controls">
+				<%
+					String[] fieldUrl = ["jcrPath=/node/exo:linkURL", "validate=empty"] ;
+					uicomponent.addTextField("LinkURL", fieldUrl) ; 
+				%>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%>:</label>
+			<div class="controls">
 			<%
-			  String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().toString();
-			  String[] fieldLang = ["jcrPath=/node/exo:language", "script=ecm-explorer/widget/FillSelectBoxWithLanguage.groovy", lang] ;
-			  uicomponent.addSelectBoxField("content-lang", fieldLang) ;
+				String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().toString();
+				String[] fieldLang = ["jcrPath=/node/exo:language", "script=ecm-explorer/widget/FillSelectBoxWithLanguage.groovy", lang] ;
+				uicomponent.addSelectBoxField("content-lang", fieldLang) ;
 			%>
-			</td>
-		</tr>
-        
-        <tr>
-          <td class="FieldLabel"><label for="LinkDescription"><%=_ctx.appRes("WebLink.dialog.label.description")%>:</label></td>
-          <td class="FieldComponent">
-            <%
-              if(uicomponent.isEditing()) { 
-                def curNode = uicomponent.getNode() ;
-                if(curNode.hasProperty("exo:linkDescription")) {
-                  def content = curNode.getProperty("exo:linkDescription") ;                                      
-                  String[] fieldDescription = ["jcrPath=/node/exo:linkDescription"] ;
-                  uicomponent.addTextAreaField("LinkDescription", fieldDescription) ;                                                       
-                } 
-              } else {                           
-                String[] fieldDescription = ["jcrPath=/node/exo:linkDescription"] ;
-                uicomponent.addTextAreaField("LinkDescription", fieldDescription) ;                
-              }
-            %>      
-          </td>
-        </tr>
-               
-    </table>       
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label" for="LinkDescription"><%=_ctx.appRes("WebLink.dialog.label.description")%>:</label>
+			<div class="controls">
+				<%
+					if(uicomponent.isEditing()) { 
+						def curNode = uicomponent.getNode() ;
+						if(curNode.hasProperty("exo:linkDescription")) {
+							def content = curNode.getProperty("exo:linkDescription") ;                                      
+							String[] fieldDescription = ["jcrPath=/node/exo:linkDescription"] ;
+							uicomponent.addTextAreaField("LinkDescription", fieldDescription) ;                                                       
+						} 
+					} else {                           
+						String[] fieldDescription = ["jcrPath=/node/exo:linkDescription"] ;
+						uicomponent.addTextAreaField("LinkDescription", fieldDescription) ;                
+					}
+				%>      
+			</div>
+		</div>    
   </div>
   <% if (!uiform.isShowActionsOnTop()) {
             uiform.processRenderAction()

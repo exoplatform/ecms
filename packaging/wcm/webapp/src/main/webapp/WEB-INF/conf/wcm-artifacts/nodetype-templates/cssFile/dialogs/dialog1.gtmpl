@@ -14,13 +14,13 @@
   
 %>
 <style>
-	.UIForm .HorizontalLayout textarea { 
+	.uiForm .form-horizontal textarea { 
 	  font-size:11px;
 	  height:275px !important;
 	  width:525px !important;
 	 }
 </style>
-<div class="UIForm FormScrollLayout">  
+<div class="uiForm FormScrollLayout">  
   <% uiform.begin() %>
   <%/* start render action*/%>
   <% if (uiform.isShowActionsOnTop()) {
@@ -29,68 +29,66 @@
   %>
 
   <%/* end render action*/%>
-  <div class="HorizontalLayout">
-    <table class="UIFormGrid">
-        <tr>
-          <td class="FieldLabel"><label for="name"><%=_ctx.appRes("CSSFile.dialog.label.name")%>:</label></td>
-          <td class="FieldComponent">
-            <%
-              String[] fieldName = ["jcrPath=/node", "nodetype=nt:file", "mixintype=exo:cssFile,mix:i18n","editable=if-null", "validate=name, empty"] ;
-              uicomponent.addTextField("name", fieldName) ; 
-            %>
-          </td>
-        </tr>
-        
-        <tr>
-        	<td class="FieldLabel"><label for="activeCSS"><%=_ctx.appRes("CSSFile.dialog.label.active")%>:</label></td>
-        	<td class="FieldComponent">
-        		<%
-        			String[] fieldActive = ["jcrPath=/node/exo:active", "options=true,false", "onchange=false"] ;
-        			uicomponent.addSelectBoxField("activeCSS", fieldActive) ;
-        		%>
-        	</td>
-        </tr>
-        
-        <tr>
-        	<td class="FieldLabel"><label for="CSSpriority"><%=_ctx.appRes("CSSFile.dialog.label.priority")%>:</label></td>
-        	<td class="FieldComponent">
-        		<%
-        			String[] fieldPriority = ["jcrPath=/node/exo:priority", "validate=org.exoplatform.webui.form.validator.NumberFormatValidator"] ;
-        			uicomponent.addTextField("CSSpriority", fieldPriority) ;
-        		%>
-        	</td>
-        </tr>
-        <tr>
-        	<td class="FieldLabel"><label for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%>:</label></td>
-			<td class="FieldComponent">
+  <div class="form-horizontal">
+		<div class="control-group">
+			<label class="control-label" for="name"><%=_ctx.appRes("CSSFile.dialog.label.name")%>:</label>
+			<div class="controls">
+				<%
+					String[] fieldName = ["jcrPath=/node", "nodetype=nt:file", "mixintype=exo:cssFile,mix:i18n","editable=if-null", "validate=name, empty"] ;
+					uicomponent.addTextField("name", fieldName) ; 
+				%>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label" for="activeCSS"><%=_ctx.appRes("CSSFile.dialog.label.active")%>:</label>
+			<div class="controls">
+				<%
+					String[] fieldActive = ["jcrPath=/node/exo:active", "options=true,false", "onchange=false"] ;
+					uicomponent.addSelectBoxField("activeCSS", fieldActive) ;
+				%>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label" for="CSSpriority"><%=_ctx.appRes("CSSFile.dialog.label.priority")%>:</label>
+			<div class="controls">
+				<%
+					String[] fieldPriority = ["jcrPath=/node/exo:priority", "validate=org.exoplatform.webui.form.validator.NumberFormatValidator"] ;
+					uicomponent.addTextField("CSSpriority", fieldPriority) ;
+				%>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%>:</label>
+			<div class="controls">
 			<%
-			  String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().toString();
-			  String[] fieldLang = ["jcrPath=/node/exo:language", "script=ecm-explorer/widget/FillSelectBoxWithLanguage.groovy", lang] ;
-			  uicomponent.addSelectBoxField("content-lang", fieldLang) ;
+				String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().toString();
+				String[] fieldLang = ["jcrPath=/node/exo:language", "script=ecm-explorer/widget/FillSelectBoxWithLanguage.groovy", lang] ;
+				uicomponent.addSelectBoxField("content-lang", fieldLang) ;
 			%>
-			</td>
-		</tr>     
-        <tr>
-          <td class="FieldLabel"><label for="contentHtml"><%=_ctx.appRes("CSSFile.dialog.label.content")%>:</label></td>
-          <td class="FieldComponent">
-            <%
-              if(uicomponent.isEditing()) { 
-                def curNode = uicomponent.getNode() ;
-                if(curNode.hasNode("jcr:content")) {
-                  def content = curNode.getNode("jcr:content") ;                                      
-                  String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "options=noSanitization"] ;
-                  uicomponent.addTextAreaField("contentHtml", fieldSummary) ;                                                       
-                  }
-                } else {                           
-                String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "options=noSanitization"] ;
-                uicomponent.addTextAreaField("contentHtml", fieldSummary) ;                
-              }
-            %>      
-          </td>
-        </tr>
-               
-    </table>       
-  </div>    
+			</div>
+		</div>     
+		<div class="control-group">
+			<label class="control-label" for="contentHtml"><%=_ctx.appRes("CSSFile.dialog.label.content")%>:</label>
+			<div class="controls">
+				<%
+					if(uicomponent.isEditing()) { 
+						def curNode = uicomponent.getNode() ;
+						if(curNode.hasNode("jcr:content")) {
+							def content = curNode.getNode("jcr:content") ;                                      
+							String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "options=noSanitization"] ;
+							uicomponent.addTextAreaField("contentHtml", fieldSummary) ;                                                       
+							}
+						} else {                           
+						String[] fieldSummary = ["jcrPath=/node/jcr:content/jcr:data", "options=noSanitization"] ;
+						uicomponent.addTextAreaField("contentHtml", fieldSummary) ;                
+					}
+				%>      
+			</div>
+		</div>
+                    
+  </div>  
   <% if (!uiform.isShowActionsOnTop()) {
             uiform.processRenderAction()
          }

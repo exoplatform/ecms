@@ -42,21 +42,17 @@
 	Node webContentNode = uicomponent.getNode();
 %>
 <style>
-	.UIForm .HorizontalLayout .textarea { 
+	.form-horizontal textarea { 
 	  font-size:11px;
-	  height:275px;
-	  width:525px;
-	 }
-	 
-	 .UIForm .HorizontalLayout .FieldComponent {
-	 	width: 750px;
+	  height:172px;
+	  width:350px;
+		vertical-align: top;
 	 }
 	 
 </style>
-<div class="UITabPane">
+<div class="UITabPane uiTabNormal uiTabInPage">
 <%uiform.begin()%>
-	<div class="TabPaneContent" style="padding:0px"> 
-		<div class="WorkingAreaWithHelp">
+
 			<%/* start render action*/%>
       <% if (uiform.isShowActionsOnTop()) {
                 uiform.processRenderAction()
@@ -64,60 +60,27 @@
       %>
 
 			<%/* end render action*/%> 
-			<div class="UIHorizontalTabs" style="margin-top:5px;">
-				<div class="LeftHorizontalTabs">
-					<div class="RightHorizontalTabs">
-						<div class="CenterHorizontalTabs">
-							<div class="TabsContainer">
-								<div class="UITab NormalTabStyle">
-									<div class="<%= getSelectedTab("mainWebcontent")%>">
-										<div class="LeftTab">
-											<div class="RightTab">                
-												<div class="MiddleTab" onClick="<%=uicomponent.event("ChangeTab", "mainWebcontent")%>"><%=_ctx.appRes("WebContent.dialog.label.MainContent")%></div>
-											</div>
-										</div>
-									</div>
-								</div>  
-								<div class="UITab NormalTabStyle">
-									<div class="<%= getSelectedTab("illustrationWebcontent")%>">
-										<div class="LeftTab">
-											<div class="RightTab">                
-												<div class="MiddleTab" onClick="<%=uicomponent.event("ChangeTab", "illustrationWebcontent")%>"><%=_ctx.appRes("WebContent.dialog.label.Illustration")%></div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="UITab NormalTabStyle">
-									<div class="<%= getSelectedTab("contentCSSWebcontent")%>">
-										<div class="LeftTab">
-											<div class="RightTab">                
-												<div class="MiddleTab" onClick="<%=uicomponent.event("ChangeTab", "contentCSSWebcontent");%>"><%=_ctx.appRes("WebContent.dialog.label.Advanced")%></div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div> <!-- End of TabsContainer-->
-						</div>	<!-- End of CenterHorizontalTabs -->
-					</div>
-				</div>
-			</div> <!-- End of UIHorizontalTabs -->
-			<%/*Start UITabContentContainer*/%>				
-				<div class="HorizontalLayout" style="border: none; margin:0px; background: none; padding: 0px; overflow:auto;">	  
-					<div class="UITabContentContainer">
-						<div class="UITabContent" style="<%=getDisplayTab("mainWebcontent")%>">
-							<table class="UIFormGrid">
-                <tr>
-                  <td class="FieldLabel"><label for="title"><%=_ctx.appRes("WebContent.dialog.label.title")%>:</label></td>
-                    <td class="FieldComponent">
+			<ul id="myTab" class="nav nav-tabs">              
+				<li class="active" onClick="<%=uicomponent.event("ChangeTab", "mainWebcontent")%>"><a data-toggle="tab" href="#tab4"><%=_ctx.appRes("WebContent.dialog.label.MainContent")%></a></li>
+				<li onClick="<%=uicomponent.event("ChangeTab", "illustrationWebcontent")%>"><a data-toggle="tab" href="#tab5"><%=_ctx.appRes("WebContent.dialog.label.Illustration")%></a></li>
+				<li onClick="<%=uicomponent.event("ChangeTab", "contentCSSWebcontent");%>"><a data-toggle="tab" href="#tab6"><%=_ctx.appRes("WebContent.dialog.label.Advanced")%></a></li>
+			</ul>
+			<%/*Start UITabContentContainer*/%>
+			<div class="tab-content" id="myTabContent"> 
+						<div id="tab4" class="tab-pane fade in active">
+							<div class="form-horizontal">
+                <div class="control-group">
+                  <label class="control-label" for="title"><%=_ctx.appRes("WebContent.dialog.label.title")%>:</label>
+									<div class="controls">
                     <%
                           String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=empty", "editable=if-null"];
                           uicomponent.addTextField("title", webContentFieldTitle) ;
                       %>
-                  </td>
-                </tr>
-        	    	<tr>
-        					<td class="FieldLabel"><label for="name"><%=_ctx.appRes("WebContent.dialog.label.name")%>:</label></td>
-          					<td class="FieldComponent">
+                  </div>
+                </div>
+        	    	<div class="control-group">
+        					<label class="control-label" for="name"><%=_ctx.appRes("WebContent.dialog.label.name")%>:</label>
+									<div class="controls">
             					<%
 			              	 		String[] webContentFieldName = ["jcrPath=/node", "nodetype=exo:webContent", "mixintype=mix:votable,mix:commentable,mix:i18n", "editable=if-null","validate=name,empty"] ;
 			              	 		uicomponent.addTextField("name", webContentFieldName) ; 
@@ -140,27 +103,27 @@
                     titleField = document.getElementById("title");
                     titleField.onchange = function() { eXo.ecm.SELocalization.cleanName(this.value, "name"); } ;
                     </script>
-	          			 	</td>
-	        			</tr>
-						<tr>
-        					<td class="FieldLabel"><label for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%>:</label></td>
-							<td class="FieldComponent">
-							<%
-							  String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().toString();
-							  String[] fieldLang = ["jcrPath=/node/exo:language", "script=ecm-explorer/widget/FillSelectBoxWithLanguage.groovy", lang] ;
-							  uicomponent.addSelectBoxField("content-lang", fieldLang) ;
-							%>
-							</td>
-						</tr>
-								<tr>
-						 			<td class="FieldLabel">
-						 				<div rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("WebContent.dialog.label.Synchronize")%>" class="WebContentSynchronize Refresh16x16Icon" onclick="eXo.ecm.CKEditor.insertCSS('<%= htmlWYSIWYGFormId %>', '<%= cssFormId %>')"></div>
-										<div class="WebContentMain"><%=_ctx.appRes("WebContent.dialog.label.WebContentHtml")%></div>
-					 				</td>
-					  				<td class="FieldComponent">
+									</div>
+	        			</div>
+								<div class="control-group">
+									<label class="control-label" for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%>:</label>
+									<div class="controls">
+										<%
+											String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().toString();
+											String[] fieldLang = ["jcrPath=/node/exo:language", "script=ecm-explorer/widget/FillSelectBoxWithLanguage.groovy", lang] ;
+											uicomponent.addSelectBoxField("content-lang", fieldLang) ;
+										%>
+									</div>
+								</div>
+								<div class="control-group">
+									<div class="control-label">
+										<%=_ctx.appRes("WebContent.dialog.label.WebContentHtml")%>
+										<a class="actionIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("WebContent.dialog.label.Synchronize")%>" onclick="eXo.ecm.CKEditor.insertCSS('<%= htmlWYSIWYGFormId %>', '<%= cssFormId %>')"><i class="uiIconRefresh"></i></a>
+									</div>
+									<div class="controls">
 										<%
 											String[] htmlHiddenField1 = ["jcrPath=/node/default.html", "nodetype=nt:file", "defaultValues=default.html", "mixintype=exo:htmlFile"];
-					   					String[] htmlHiddenField2 = ["jcrPath=/node/default.html/jcr:content", "nodetype=nt:resource", "mixintype=dc:elementSet", "visible=false"]; 
+											String[] htmlHiddenField2 = ["jcrPath=/node/default.html/jcr:content", "nodetype=nt:resource", "mixintype=dc:elementSet", "visible=false"]; 
 											String[] htmlHiddenField3 = ["jcrPath=/node/default.html/jcr:content/jcr:encoding", "visible=false", "UTF-8"];
 											String[] htmlHiddenField4 = ["jcrPath=/node/default.html/jcr:content/jcr:lastModified", "visible=false"];
 											String[] htmlHiddenField5 = ["jcrPath=/node/default.html/jcr:content/dc:date", "visible=false"];
@@ -178,18 +141,20 @@
 											}
 											String[] htmlArguments = ["jcrPath=/node/default.html/jcr:content/jcr:data", "options=toolbar:CompleteWCM,height:'410px',noSanitization", htmlContent];
 											uicomponent.addRichtextField(htmlWYSIWYGFormId, htmlArguments) ;
-					      				%>
-									</td>
-								</tr>
-							</table>
+												%>
+									</div>
+								</div>
+							</div>
 						</div>  <!-- End of UITabContent -->
 						<!-- Start of Illustration tab -->
-						<div class="UITabContent" style="<%=getDisplayTab("illustrationWebcontent")%>">
-							<div class="FormHint"><%=_ctx.appRes("WebContent.dialog.label.hintIllustration")%></div>
-							<table class="UIFormGrid">
-								<tr>
-									<td class="FieldLabel"><%=_ctx.appRes("WebContent.dialog.label.illustrationImage")%></td>
-									<td class="FieldComponent">
+						<div id="tab5" class="tab-pane fade">
+							<div class="form-horizontal">
+								<div class="control-group">
+									<div class="controls-full"><span class="helpBlock helpBlockTitle"><i class="uiIconHelp"></i> <%=_ctx.appRes("WebContent.dialog.label.hintIllustration")%></span></div>
+								</div>
+								<div class="control-group">
+									<label class="control-label"><%=_ctx.appRes("WebContent.dialog.label.illustrationImage")%></label>
+									<div class="controls">
 										<%					
 											String illustration = "illustration";
 											if(webContentNode != null && webContentNode.hasNode("medias/images/illustration") && (uicomponent.findComponentById(illustration) == null)) {
@@ -213,11 +178,11 @@
 												setUploadFields(illustration);
 											}
 										%>
-									</td>
-								</tr>												
-								<tr>
-									<td class="FieldLabel"><%=_ctx.appRes("WebContent.dialog.label.Summary")%></td>
-									<td class="FieldComponent">
+									</div>
+								</div>												
+								<div class="control-group">
+									<label class="control-label"><%=_ctx.appRes("WebContent.dialog.label.Summary")%></label>
+									<div class="controls">
 										<%
 											String summaryContent = "";
 											if (webContentNode != null && webContentNode.hasProperty("exo:summary")) { 
@@ -226,15 +191,15 @@
 											String[] fieldSummary = ["jcrPath=/node/exo:summary", "editable=if-null", summaryContent] ;
 											uicomponent.addRichtextField("exo:summary", fieldSummary) ;
 										%>
-									</td>
-								</tr>
-							</table>
+									</div>
+								</div>
+							</div>
 						</div><!-- End of Illustration tab -->		
-						<div class="UITabContent" style="<%=getDisplayTab("contentCSSWebcontent")%>">
-							<table class="UIFormGrid">
-								<tr>
-									<td class="FieldLabel"><label for="$cssFormId"><%=_ctx.appRes("WebContent.dialog.label.ContentCSS")%>:</label></td>
-									<td class="FieldComponent" style="width:520px">
+						<div id="tab6" class="tab-pane fade">
+							<div class="form-horizontal">
+								<div class="control-group">
+									<label class="control-label" for="$cssFormId"><%=_ctx.appRes("WebContent.dialog.label.ContentCSS")%>:</label>
+									<div class="controls">
 										<%
 											String[] cssHiddenField1 = ["jcrPath=/node/css/default.css", "nodetype=nt:file", "defaultValues=default.css"] ;
 											String[] cssHiddenField2 = ["jcrPath=/node/css/default.css/jcr:content", "nodetype=nt:resource", "mixintype=dc:elementSet", "visible=false"] ; 
@@ -256,16 +221,15 @@
 											String[] fieldContentCSS = ["jcrPath=/node/css/default.css/jcr:content/jcr:data", "options=noSanitization", cssContent] ;
 											uicomponent.addTextAreaField(cssFormId, fieldContentCSS) ;
 										%>
-									</td>
-									<td width="260px">
-										<div class="FormHint" style="margin-top:5px"><%=_ctx.appRes("WebContent.dialog.label.hintCSS")%></div>
-									</td>
-								</tr>
-							</table>
-							<table class="UIFormGrid">
-								<tr>
-									<td class="FieldLabel"><label for="$jsFormId"><%=_ctx.appRes("WebContent.dialog.label.ContentJS")%>:</label></td>
-									<td class="FieldComponent" style="width:520px">
+										
+										<span class="helpBlock"><i class="uiIconHelp"></i> <%=_ctx.appRes("WebContent.dialog.label.hintCSS")%></span>
+									</div>
+								</div>
+							</div>
+							<div class="form-horizontal">
+								<div class="control-group">
+									<label class="control-label" for="$jsFormId"><%=_ctx.appRes("WebContent.dialog.label.ContentJS")%>:</label>
+									<div class="controls">
 										<%
 											String[] jsHiddenField1 = ["jcrPath=/node/js/default.js", "nodetype=nt:file", "defaultValues=default.js"];
 											String[] jsHiddenField2 = ["jcrPath=/node/js/default.js/jcr:content", "nodetype=nt:resource", "mixintype=dc:elementSet", "visible=false"]; 
@@ -287,20 +251,18 @@
 											String[] fieldContentJS = ["jcrPath=/node/js/default.js/jcr:content/jcr:data", "options=noSanitization", jsContent];
 											uicomponent.addTextAreaField(jsFormId, fieldContentJS); 								
 										%>
-									</td>
-									<td width="260px">
-										<div class="FormHint" style="margin-top:5px"><%=_ctx.appRes("WebContent.dialog.label.hintJS")%></div>
-									</td>
-								</tr>
-							</table>
+										
+										<span class="helpBlock"><i class="uiIconHelp"></i> <%=_ctx.appRes("WebContent.dialog.label.hintJS")%></span>
+									</div>
+								</div>
+							</div>
 						</div>
-					</div>   <!-- End of UITabContentContainer -->
-			     <% if (!uiform.isShowActionsOnTop()) {
-                     uiform.processRenderAction()
-			            }
-			     %>
-				</div>  
-		</div>   <!-- End of WorkingAreaWithHelp -->
-	</div>  <!-- End of TabPaneContent -->
+
+				 <% if (!uiform.isShowActionsOnTop()) {
+									 uiform.processRenderAction()
+								}
+				 %>
+			</div>  
+
 	<%uiform.end()%>						 
 </div>  <!-- End of UITabPane -->
