@@ -560,14 +560,25 @@
 				var container = gj(rightWS).find('div.ActionIconsContainer:first')[0];
 				if(container) container.innerHTML = "";
 	      else eXo.ecm.ECS.updateHTML(viewType);
+			}
+			var container = gj(rightWS).find('div.ActionIconsContainer:first')[0];
+			if(container) {
+				container.style.display = "none";
 			}			
 			var listItem = '';
+			var strViewContent = "";
+			// Depends on Paginators will be used or not. 'longDesc' if paginator, 'src' else.
+			var imageAttribute = "src";
+			if(list.length > 12) {
+				// Paginator will be used
+				imageAttribute = "longDesc";
+			}			
 			for(var i = 0; i < list.length; i++) {      
 				var url 			= list[i].getAttribute("url");
 				url = encodeURIComponent(url);
 				var path 			= list[i].getAttribute("path");
 				var nodeType	= list[i].getAttribute("nodeType");
-	      var nodeTypeIcon = nodeType.replace(":", "_") + "48x48Icon default16x16Icon";
+				var nodeTypeIcon = nodeType.replace(":", "_") + "48x48Icon default16x16Icon";
 				var node = list[i].getAttribute("name");
 				node = encodeURIComponent(node);
 				var size = 	list[i].getAttribute("size");
@@ -576,7 +587,7 @@
 	      
 	      if(viewType=="list") {	        
 					var clazz = 'OddItem';
-	        var tblRWS  = gj(rightWS).find("table")[0];
+					var tblRWS  = gj(rightWS).find("table")[0];
 					var clazzItem = eXo.ecm.ECS.getClazzIcon(list[i].getAttribute("nodeType"));
 					var newRow = tblRWS.insertRow(i+1);
 					newRow.className = clazz;
@@ -584,12 +595,14 @@
 					newRow.insertCell(1).innerHTML = '<div class="Item">'+ list[i].getAttribute("dateCreated") +'</div>';
 					newRow.insertCell(2).innerHTML = '<div class="Item">'+ size +'</div>';
 				} else {				  
-	        var container = gj(rightWS).find('div.ActionIconsContainer:first')[0];			
-					var strViewContent = "";
-					var command = ECS.connector + "/thumbnailImage/medium/" + ECS.repositoryName + "/" + ECS.workspaceName + path + "/?reloadnum=" + Math.random();        
-					strViewContent += '<div class="actionIconBox" onclick="eXo.ecm.ECS.insertContent(this);" url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" title="'+decodeURIComponent(node)+'"><div class="nodeLabel"><div class="thumbnailImage"><div style="display: block;" class="loadingProgressIcon"><img alt="Loading Process" src="'+command+'" onerror="var img = gj(this.parentNode).nextAll(\'div:first\')[0]; img.style.display = \'block\'; this.parentNode.style.display = \'none\';" onload="this.parentNode.style.backgroundImage=\'none\'" /></div><div style="display: none;" class="Icon48x48 default48x48Icon '+nodeTypeIcon+'"></div></div><div class="ActionIconLabel" style="width: auto;"><a class="ActionLabel" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" title="'+decodeURIComponent(node)+'">'+decodeURIComponent(node)+'</a></div></div>';	        
-					container.innerHTML += strViewContent;
+					var randomId = Math.random();
+					var command = ECS.connector + "/thumbnailImage/medium/" + ECS.repositoryName + "/" + ECS.workspaceName + path + "/?reloadnum=" + randomId;        
+					strViewContent += '<div id="'+randomId+'" class="actionIconBox" onclick="eXo.ecm.ECS.insertContent(this);" url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" title="'+decodeURIComponent(node)+'"><div class="NodeLabel"><div class="ThumbnailImage"><div style="display: block;" class="LoadingProgressIcon"><img alt="Loading Process" id="thumbnail'+randomId+'" '+imageAttribute+'="'+command+'" onerror="var img = gj(this.parentNode).next(\'i:first\')[0]; img.style.display = \'block\'; this.parentNode.style.display = \'none\';" onload="this.parentNode.style.backgroundImage=\'none\'" /></div><i style="display: none;" class="uiIcon64x64FileDefault uiIcon64x64nt_file  '+nodeTypeIcon+'"></i></div><div class="ActionIconLabel" style="width: auto;"><a class="ActionLabel" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" title="'+decodeURIComponent(node)+'">'+decodeURIComponent(node)+'</a></div></div></div>';
 				}
+			}
+			if(container) {
+				container.innerHTML = strViewContent;
+				container.style.display = "";
 			}			
 		}	
 		if(i > 12) {
@@ -811,6 +824,10 @@
 					  icons[i].style.display = 'none';
 				} else {
 					  icons[i].style.display = '';
+					  var thumnailImg = document.getElementById("thumbnail"+icons[i].id);
+					  if(thumnailImg.src || thumnailImg.src == '') {
+						  thumnailImg.src = thumnailImg.longDesc;
+					  }					  
 				}
 			}    
 		}
