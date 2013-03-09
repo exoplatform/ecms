@@ -36,7 +36,7 @@
    String ownerId = Utils.getNodeOwner(currentNode);
    boolean canChangePermission = PermissionUtil.canChangePermission(currentNode);
 %>
-<div id="$uicomponent.id" style="border: 2px solid yellow">
+<div id="$uicomponent.id">
    <table class="uiGrid table table-hover table-striped" cellspacing="0">
       <thead>
       <tr>
@@ -84,6 +84,7 @@
                
                EntityEncoder encoder = HTMLEntityEncoder.getInstance();
                def usersOrGroupsId = uicomponent.getFieldValue(bean, "usersOrGroups");
+							 int fieldCount = 0;
                for (field in beanFields)
                {
                   def fieldValue = uicomponent.getFieldValue(bean, field);
@@ -96,7 +97,7 @@
                         cssClass = "datetime";
                         fieldValue = dateFormat.format(fieldValue);
                   }
-                  else cssClass = "text";
+                  else cssClass = (fieldCount == 0)? "text" : "center";
                   } else {
                      fieldValue = "";
                   }
@@ -126,6 +127,7 @@
                     </td>
                     <%
                   }
+									fieldCount++;
                }
                if (beanActions != null && beanActions.length > 0)
                {

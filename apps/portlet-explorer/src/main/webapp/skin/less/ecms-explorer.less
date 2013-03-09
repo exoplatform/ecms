@@ -866,29 +866,35 @@
 /******** UIPermissionManager **************/
 .UIJCRExplorerPortlet .UIPermissionManager {
 	width: auto;
+	padding: 0px;
 }
-
-.uiPermissionForm .permission {
-	.controls {
-		margin-bottom: 10px;
-		
-		input {
-			width: 350px;
-			margin: 0px;
-		}
-		
-		[class^="uiIcon"] {
-			margin-left: 15px;
-			cursor: pointer;
-		}
-		
-		.btn {
-			margin-left: 10px;
-		}
+.uiPermissionForm {
+	h5 {
+		font-size: 13px;
 	}
-	
-	.form-inline .checkbox {
-		margin-right: 15px;
+	.permission {
+		
+		.form-inline .checkbox {
+			margin-right: 15px;
+		}
+		
+		.controls {
+			margin-bottom: 10px;
+			
+			input {
+				width: 350px;
+				margin: 0px;
+			}
+			
+			[class^="uiIcon"] {
+				margin-left: 13px;
+				cursor: pointer;
+			}
+			
+			.btn {
+				margin-left: 10px;
+			}
+		}
 	}
 }
 
