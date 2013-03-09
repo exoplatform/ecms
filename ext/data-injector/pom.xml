@@ -6,7 +6,7 @@
     <groupId>org.exoplatform.ecms</groupId>
     <version>4.0.0-relooking-SNAPSHOT</version>
   </parent>
-  <artifactId>exo-ecms-ext-data-injector</artifactId>
+  <artifactId>ecms-ext-data-injector</artifactId>
   <packaging>jar</packaging>
   <name>eXo DMS data injector</name>
   <description>eXo DMS data injector service</description>

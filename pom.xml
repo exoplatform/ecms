@@ -18,6 +18,7 @@
     <module>apps</module>
     <module>packaging</module>
     <module>ext</module>
+    <module>upgrade-plugins</module>
     <module>testsuite</module>
   </modules>
   <scm>

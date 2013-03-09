@@ -118,8 +118,12 @@ public class UICLVTemplateList extends UIPagingGrid {
     List<CLVTemplateData> templateDatas = new ArrayList<CLVTemplateData>();
     for(Node node : list) {
       Node content = node.getNode(Utils.JCR_CONTENT);
-      templateDatas.add(new CLVTemplateData(content.getProperty(
-              NodetypeConstant.DC_TITLE).getValues()[0].getString(), node.getName()));
+      try {
+        templateDatas.add(new CLVTemplateData(content.getProperty(
+                NodetypeConstant.DC_TITLE).getValues()[0].getString(), node.getName()));
+      } catch(PathNotFoundException pne) {
+        templateDatas.add(new CLVTemplateData(node.getName(), node.getName()));
+      }
     }
     return templateDatas;
   }

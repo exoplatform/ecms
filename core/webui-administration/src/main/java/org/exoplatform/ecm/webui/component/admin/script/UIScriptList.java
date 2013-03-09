@@ -23,11 +23,11 @@ import java.util.List;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
-import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.scripts.ScriptService;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -121,7 +121,12 @@ public class UIScriptList extends UIComponentDecorator {
     }
     for(Node scriptNode : scripts) {
       Node content = scriptNode.getNode(NodetypeConstant.JCR_CONTENT);
-      String scriptDescription = content.getProperty(NodetypeConstant.DC_DESCRIPTION).getValues()[0].getString();
+      String scriptDescription = "";
+      try {
+        scriptDescription = content.getProperty(NodetypeConstant.DC_DESCRIPTION).getValues()[0].getString();
+      } catch(PathNotFoundException pne) {
+        scriptDescription = scriptNode.getName();
+      }
       scriptData.add(new ScriptData(scriptNode.getName(), scriptNode.getPath(), scriptDescription)) ;
     }
     return scriptData ;

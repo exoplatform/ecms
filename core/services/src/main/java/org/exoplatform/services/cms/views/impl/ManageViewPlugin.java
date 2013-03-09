@@ -116,22 +116,24 @@ public class ManageViewPlugin extends BaseComponentPlugin {
     session.logout();
   }
 
-  private Node addView(Node viewManager, String name, String permissions, boolean hideExplorerPanel, String template) 
+  private Node addView(Node viewManager, String viewName, String permissions, boolean hideExplorerPanel, String template) 
   throws Exception {
-    Node contentNode = viewManager.addNode(name, "exo:view");
+    Node contentNode = viewManager.addNode(viewName, "exo:view");
     contentNode.setProperty("exo:accessPermissions", permissions);
     contentNode.setProperty("exo:template", template);
-    contentNode.setProperty("exo:hideExplorerPanel", hideExplorerPanel);
+    if(contentNode.hasProperty("exo:hideExplorerPanel")) {
+      contentNode.setProperty("exo:hideExplorerPanel", hideExplorerPanel);
+    }
     viewManager.save() ;
     return contentNode ;
   }
 
-  private void addTab(Node view, String name, String buttons) throws Exception {
+  private void addTab(Node view, String tabName, String buttons) throws Exception {
     Node tab ;
-    if(view.hasNode(name)){
-      tab = view.getNode(name) ;
+    if(view.hasNode(tabName)){
+      tab = view.getNode(tabName) ;
     }else {
-      tab = view.addNode(name, "exo:tab");
+      tab = view.addNode(tabName, "exo:tab");
     }
     tab.setProperty("exo:buttons", buttons);
     view.save() ;
