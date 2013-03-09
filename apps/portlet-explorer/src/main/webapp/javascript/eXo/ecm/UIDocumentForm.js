@@ -103,7 +103,7 @@
 			uiDocumentWorkspace.style.height	= oViewPaneSize.Height + "px";
 			uiDocumentWorkspace.style.background = '#FFFFFF';
 
-			eXo.webui.UIDocForm.horizontalForm.style.height = 'auto';
+			gj(eXo.webui.UIDocForm.horizontalForm).height('auto');
 			gj(eXo.webui.UIDocForm.horizontalForm).addClass("form-horizontal");
 			gj(eXo.webui.UIDocForm.horizontalForm).addClass("uiContentBox");
 			window.scrollTo(0, 0)
@@ -114,8 +114,8 @@
 			// Restore original size
 			eXo.webui.UIDocForm.RestoreStyles("UIDocumentWorkspace", uiDocumentWorkspace) ;
 			eXo.webui.UIDocForm.RestoreStyles("form-horizontal", eXo.webui.UIDocForm.horizontalForm);
-		      eXo.webui.UIDocForm.horizontalForm.addClass("form-horizontal");
-			eXo.webui.UIDocForm.horizontalForm.addClass("uiContentBox");
+	        gj(eXo.webui.UIDocForm.horizontalForm).addClass("form-horizontal");
+			gj(eXo.webui.UIDocForm.horizontalForm).addClass("uiContentBox");
 			delete eXo.webui.UIDocForm.horizontalForm;
 		}
 		eXo.webui.UIDocForm.AutoFocus();
@@ -124,6 +124,7 @@
 	UIDocumentForm.prototype.GetStyleData = function( element ) {
 		var objStyleData = new Object() ;
 	
+		if (!element) return "";
 		if ( element.className.length > 0 )	{
 			objStyleData.Class = element.className ;
 			element.className = '' ;
@@ -147,12 +148,14 @@
 	}
 	
 	UIDocumentForm.prototype.SaveStyles = function( key, element ) {
+		if (!element) return;
 		var styleData = this.GetStyleData(element);
 		if(gj.hasData(element)) gj.removeData(element, key);
 	        gj.data(element, key, styleData);
 	}
 	
 	UIDocumentForm.prototype.RestoreStyles = function( key, element ) {
+		if (!element) return;
 		if (!gj.hasData(element)) {
 			return;
 		}
@@ -190,3 +193,5 @@
 		UIDocForm : eXo.webui.UIDocForm
 	};
 })(gj, ecm_utils);
+
+
