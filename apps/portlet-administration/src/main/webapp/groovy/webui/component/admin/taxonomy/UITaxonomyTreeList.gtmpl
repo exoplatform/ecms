@@ -84,7 +84,7 @@
   <%}%>
   <div class="uiAction uiActionBorder">
 	<% for(action in uicomponent.getActions()) { %>
-		<button onclick="<%=uicomponent.event(action)%>" class="btn" href="javascript:void(0);"><%=_ctx.appRes("UITaxonomyTreeList.action." + action)%></button>
+		<button onclick="<%=uicomponent.event(action)%>" class="btn" href="javascript:void(0);" type="button"><%=_ctx.appRes("UITaxonomyTreeList.action." + action)%></button>
 	<% } %>
 	</div>
 </div>

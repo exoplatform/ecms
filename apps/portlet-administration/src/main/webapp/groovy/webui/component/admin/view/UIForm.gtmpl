@@ -33,7 +33,7 @@
            String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action);
            String link = uicomponent.event(action);
       %>
-            <button type="button" onclick="$link" class="btn">$actionLabel</button>
+            <button type="button" onclick="$link" class="btn" type="button">$actionLabel</button>
       <%}%> 
     </div>
     

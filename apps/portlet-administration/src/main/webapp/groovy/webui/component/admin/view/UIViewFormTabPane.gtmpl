@@ -42,7 +42,7 @@
 			     def classbtn = "btn"
 			     if(buttonAct.equals(primaryButton)) classbtn = "btn btn-primary"
 			%>
-			     <button type="button" onclick="<%=uicomponent.event(buttonAct) %>" class="$classbtn"><%=_ctx.appRes(uicomponent.getId() + ".action." + buttonAct)%></button>
+			     <button type="button" onclick="<%=uicomponent.event(buttonAct) %>" class="$classbtn" type="button"><%=_ctx.appRes(uicomponent.getId() + ".action." + buttonAct)%></button>
 		 <% } %>
   </div>
 </div>	

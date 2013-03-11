@@ -57,7 +57,7 @@
   <%}%>
 	<div class="uiAction">
 		<% for(action in uicomponent.getActions()) { %>
-		  <button onclick="<%=uicomponent.event(action)%>" class="btn"><%=_ctx.appRes("UILockNodeList.action." + action)%></button>
+		  <button onclick="<%=uicomponent.event(action)%>" class="btn" type="button"><%=_ctx.appRes("UILockNodeList.action." + action)%></button>
 		 <% } %>
 	</div>
 </div>
