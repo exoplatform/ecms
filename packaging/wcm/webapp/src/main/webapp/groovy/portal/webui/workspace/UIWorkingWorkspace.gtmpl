@@ -2,14 +2,17 @@
   import org.exoplatform.container.PortalContainer;
   import org.exoplatform.web.application.JavascriptManager;
   import org.exoplatform.portal.webui.util.Util;
+  import org.exoplatform.services.wcm.navigation.NavigationUtils;
   import javax.servlet.http.HttpSession;
 
   def rcontext = _ctx.getRequestContext() ;
   def userName = rcontext.getRemoteUser();
+  def portalName = Util.getPortalRequestContext().getPortalOwner();
   
   def selectedNodeUri = Util.getUIPortal().getSelectedUserNode().getURI();
   def session = _ctx.getRequestContext().getRequest().getSession();
   def previousURI = session.getAttribute("previousURI");
+  NavigationUtils.removeNavigationAsJson(portalName, userName);
   
   session.setAttribute("previousURI", selectedNodeUri);
   if (userName==null && session.getMaxInactiveInterval()>60) {

@@ -98,6 +98,15 @@ public class NavigationUtils {
     }
   }
   
+  public static void removeNavigationAsJson (String portalName, String username) throws Exception {
+    String key = portalName + " " + username;
+    Map<String, String> navigations = gotNavigationKeeper.get();
+    if (navigations != null) {
+      navigations.remove(key);
+      gotNavigationKeeper.set(navigations);
+    }
+  }
+  
   public static String getNavigationAsJSON(String portalName, String username) throws Exception {
 
     String key = portalName + " " + username;
