@@ -5,7 +5,7 @@
 	import org.exoplatform.commons.api.settings.SettingValue;
 	import org.exoplatform.commons.api.settings.data.Context;
 	import org.exoplatform.commons.api.settings.data.Scope;
-	import org.exoplatform.container.PortalContainer;
+	import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 	def rcontext = _ctx.getRequestContext();
 	UIPortalApplication uiPortalApp = rcontext.getUIApplication();
@@ -14,7 +14,7 @@
 	if(!uiPortalApp.isEditing() && !hasPermission) return;
 
 /* ADDED PART BY PLF */
-	def settingService =(SettingService) PortalContainer.getInstance().getComponentInstanceOfType(SettingService.class);
+	def settingService =WCMCoreUtils.getService(SettingService.class);
  	String barNavigationStyle = "Dark";
     if (settingService.get(Context.GLOBAL,
                            Scope.GLOBAL,
