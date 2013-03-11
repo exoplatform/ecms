@@ -2,24 +2,25 @@
     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
            "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <%
+  import java.util.Map;
+  import java.util.Iterator;
+  import java.util.ArrayList;
+  import java.util.Enumeration;
+  import org.json.JSONArray;  
+  import org.apache.commons.lang.StringUtils;
   import org.exoplatform.webui.core.UIComponent;
   import org.exoplatform.portal.application.PortalRequestContext ;
-  import java.util.Iterator;
   import org.exoplatform.portal.config.model.PortalProperties ;
   import org.exoplatform.services.seo.SEOService;
   import org.exoplatform.services.seo.PageMetadataModel;
-  import java.util.Enumeration;
-  import java.util.Map;
-  import java.util.ArrayList;  
   import org.exoplatform.portal.mop.user.UserNode;
   import org.exoplatform.portal.webui.portal.UIPortal;
   import org.exoplatform.portal.webui.util.Util;
   import org.exoplatform.portal.webui.workspace.UIPortalApplication;
   import org.exoplatform.portal.webui.workspace.UIWorkingWorkspace;
   import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-  import org.json.JSONArray;  
-  import org.apache.commons.lang.StringUtils;
-		
+  import org.exoplatform.wcm.webui.reader.ContentReader;
+  
   def rcontext = _ctx.getRequestContext() ;
   String docBase =  rcontext.getRequestContextPath() ;  
   String skin = uicomponent.getSkin();
@@ -75,8 +76,8 @@
 		  	hasMetadata = true;
 		  	if(StringUtils.isNotEmpty(metaModel.getTitle()))
 		  	  title = metaModel.getTitle(); 
-		  	keywords = metaModel.getKeywords();
-		    description = metaModel.getDescription();	
+		  	keywords = ContentReader.getXSSCompatibilityContent(metaModel.getKeywords());
+		  	description = ContentReader.getXSSCompatibilityContent(metaModel.getDescription());
 		    robots = metaModel.getRobotsContent();    
 		  }	   
 	  }
