@@ -1,12 +1,29 @@
 <%
 	import org.exoplatform.web.application.JavascriptManager;
 	import org.exoplatform.portal.webui.workspace.UIPortalApplication;
+	import org.exoplatform.commons.api.settings.SettingService;
+	import org.exoplatform.commons.api.settings.SettingValue;
+	import org.exoplatform.commons.api.settings.data.Context;
+	import org.exoplatform.commons.api.settings.data.Scope;
+	import org.exoplatform.container.PortalContainer;
 
 	def rcontext = _ctx.getRequestContext();
-
 	UIPortalApplication uiPortalApp = rcontext.getUIApplication();
 	boolean hasPermission = uicomponent.hasPermission();
+ 
 	if(!uiPortalApp.isEditing() && !hasPermission) return;
+
+/* ADDED PART BY PLF */
+	def settingService =(SettingService) PortalContainer.getInstance().getComponentInstanceOfType(SettingService.class);
+ 	String barNavigationStyle = "Dark";
+    if (settingService.get(Context.GLOBAL,
+                           Scope.GLOBAL,
+                           "bar_navigation_style")!=null) {
+    barNavigationStyle=(String) settingService.get(Context.GLOBAL,Scope.GLOBAL,"bar_navigation_style").getValue();
+    }
+barNavigationStyle="UIToolbarContainer"+barNavigationStyle;
+/* END ADDED PART BY PLF */
+
 
 	/* ADDED PART BY ECMS */
 	if (rcontext.getRequestParameter("noadminbar")!=null) return;
@@ -18,7 +35,7 @@
 	addScripts("portal.UIPortal.initMouseHover('" + uicomponent.id + "');");
 
 %>
-<div class="UIContainer UIToolbarContainer <%=uiPortalApp.isEditing()?"EdittingContainer":""%> <%=hasPermission?"": "ProtectedContainer"%>"
+<div class="UIContainer UIToolbarContainer $barNavigationStyle <%=uiPortalApp.isEditing()?"EdittingContainer":""%> <%=hasPermission?"": "ProtectedContainer"%>"
 				id="${uicomponent.id}">
 	<div class="NormalContainerBlock">
 		<div class="LeftContainerBlock">
