@@ -48,9 +48,9 @@
     		%>
 			<%/* end render action*/%>  
 			<ul id="myTab" class="nav nav-tabs">
-				<li class="active" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this);"><a data-toggle="tab" href="#tab1"><%=_ctx.appRes("WebContent.dialog.label.MainContent")%></a></li>
-				<li onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this);"><a data-toggle="tab" href="#tab2"><%=_ctx.appRes("WebContent.dialog.label.Illustration")%></a></li>
-				<li onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this);"><a data-toggle="tab" href="#tab3"><%=_ctx.appRes("WebContent.dialog.label.Advanced")%></a></li>
+				<li class="active"><a data-toggle="tab" href="#tab1"><%=_ctx.appRes("WebContent.dialog.label.MainContent")%></a></li>
+				<li><a data-toggle="tab" href="#tab2"><%=_ctx.appRes("WebContent.dialog.label.Illustration")%></a></li>
+				<li><a data-toggle="tab" href="#tab3"><%=_ctx.appRes("WebContent.dialog.label.Advanced")%></a></li>
 			</ul> <!-- End of UIHorizontalTabs -->
 			
 			<%/*Start UITabContentContainer*/%>			
