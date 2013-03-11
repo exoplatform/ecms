@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -634,8 +635,12 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       files.setAttribute("isUpload", "true");
       Node sourceNode = null;
       Node checkNode = null;
+      List<Node> childList = new ArrayList<Node>();
       for (NodeIterator iterator = node.getNodes(); iterator.hasNext();) {
-        Node child = iterator.nextNode();
+        childList.add(iterator.nextNode());
+      }
+      Collections.sort(childList,new NodeTitleComparator());
+      for (Node child:childList) {
         String fileType = null;
         if (child.isNodeType(FCKUtils.EXO_HIDDENABLE))
           continue;
@@ -895,7 +900,6 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     ManageableRepository manageableRepository = WCMCoreUtils.getRepository();
     Session session = sessionProvider.getSession(workspaceName, manageableRepository);
     ManageDriveService manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
-    Node ret = null;
     try {
       DriveData driveData = manageDriveService.getDriveByName(driverName);
       String parentPath = (driveData != null ? driveData.getHomePath() : "");
@@ -966,4 +970,16 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     return new DOMSource(doc);
   }
   
+  private static class NodeTitleComparator implements Comparator<Node>{
+    @Override
+    public int compare(Node node1, Node node2) {
+      try{
+        String titleNode1 = Utils.getTitle(node1);
+        String titleNode2 = Utils.getTitle(node2);
+        return titleNode1.compareToIgnoreCase(titleNode2) ;
+      }catch (Exception e) {
+        return 0;
+      }
+    }
+  }
 }
