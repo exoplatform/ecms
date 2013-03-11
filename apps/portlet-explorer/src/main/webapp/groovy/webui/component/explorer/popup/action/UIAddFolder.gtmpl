@@ -6,19 +6,20 @@
 				<div class="controls-full">
 					<% uiform.renderChild(uiform.FIELD_TITLE_TEXT_BOX) %>
 				</div>			
-				
-				<div class="actionLabel clearfix">
-					<div class="controls pull-left"><% uiform.renderChild(uiform.FIELD_CUSTOM_TYPE_CHECK_BOX) %></div>
-					<label class="control-label">
-					  <%=uicomponent.getLabel(uiform.FIELD_CUSTOM_TYPE_CHECK_BOX) %>
-					</label>
-					
-				  <%
-	          if(uiform.getChildById(uiform.FIELD_CUSTOM_TYPE_SELECT_BOX).isRendered()) {
-	            uiform.renderChild(uiform.FIELD_CUSTOM_TYPE_SELECT_BOX)
-	          }
-	        %>        
-        </div>
+				<% if(uiform.getChildById(uiform.FIELD_CUSTOM_TYPE_CHECK_BOX).isRendered()) {%>
+					<div class="actionLabel clearfix">
+						<div class="controls pull-left"><% uiform.renderChild(uiform.FIELD_CUSTOM_TYPE_CHECK_BOX) %></div>
+						<label class="control-label">
+						  <%=uicomponent.getLabel(uiform.FIELD_CUSTOM_TYPE_CHECK_BOX) %>
+						</label>
+						
+					  <%
+		          if(uiform.getChildById(uiform.FIELD_CUSTOM_TYPE_SELECT_BOX).isRendered()) {
+		            uiform.renderChild(uiform.FIELD_CUSTOM_TYPE_SELECT_BOX)
+		          }
+		        %>        
+	        </div>
+	      <%} %>  
       </div>
       <div class="uiAction uiActionBorder">
         <% for(action in uiform.getActions()) {
