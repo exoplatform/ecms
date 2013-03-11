@@ -107,6 +107,7 @@ public class PortletCacheFilter implements PortletFilter, ActionFilter, RenderFi
       if(referer != null){
         query.put("REFERER", new String[] {referer} );
       }
+      query.put("PATH", new String[] {ctx.getRequestURI()} );
       //
       Locale locale = ctx.getLocale();
       //
