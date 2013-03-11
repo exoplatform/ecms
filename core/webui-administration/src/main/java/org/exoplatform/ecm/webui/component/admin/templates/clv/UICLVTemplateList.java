@@ -123,6 +123,8 @@ public class UICLVTemplateList extends UIPagingGrid {
                 NodetypeConstant.DC_TITLE).getValues()[0].getString(), node.getName()));
       } catch(PathNotFoundException pne) {
         templateDatas.add(new CLVTemplateData(node.getName(), node.getName()));
+      } catch(ArrayIndexOutOfBoundsException aoe) {
+        templateDatas.add(new CLVTemplateData(node.getName(), node.getName()));
       }
     }
     return templateDatas;
