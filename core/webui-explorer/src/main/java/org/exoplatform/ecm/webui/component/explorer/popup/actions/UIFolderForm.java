@@ -84,6 +84,7 @@ public class UIFolderForm extends UIForm implements UIPopupComponent {
     // Custom type checkbox
     UICheckBoxInput customTypeCheckBox = new UICheckBoxInput(FIELD_CUSTOM_TYPE_CHECK_BOX, FIELD_CUSTOM_TYPE_CHECK_BOX, false);
     customTypeCheckBox.setRendered(false);
+    customTypeCheckBox.setLabel("UIFolderForm".concat("label").concat(FIELD_CUSTOM_TYPE_CHECK_BOX));
     customTypeCheckBox.setOnChange("OnChange");
     this.addUIFormInput(customTypeCheckBox);
     

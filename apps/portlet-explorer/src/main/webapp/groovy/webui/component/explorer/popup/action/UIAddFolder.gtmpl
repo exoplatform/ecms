@@ -5,24 +5,19 @@
 				<label for="<%=uiform.FIELD_TITLE_TEXT_BOX%>"><%=uiform.getLabel(uiform.FIELD_TITLE_TEXT_BOX) %></label>
 				<div class="controls-full">
 					<% uiform.renderChild(uiform.FIELD_TITLE_TEXT_BOX) %>
-				</div>
+				</div>			
+				
 				<div class="actionLabel">
-          <label class="checkbox inline" for="<%=uiform.FIELD_CUSTOM_TYPE_CHECK_BOX%>">
-          <%
-           if(uiform.getChildById(uiform.FIELD_CUSTOM_TYPE_CHECK_BOX).isRendered()) {
-          %>
-            <span rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIFolderForm.help.customTypeCheckBoxHelp") %>">
-              <% uiform.renderChild(uiform.FIELD_CUSTOM_TYPE_CHECK_BOX) %>
-              <%=uiform.getLabel(uiform.FIELD_CUSTOM_TYPE_CHECK_BOX) %>
-            </span>
-          <%}%>
-          </label>
-          
-          <%
-           if(uiform.getChildById(uiform.FIELD_CUSTOM_TYPE_SELECT_BOX).isRendered()) {
-             uiform.renderChild(uiform.FIELD_CUSTOM_TYPE_SELECT_BOX)
-           }
-           %>
+					<div class="controls pull-left" style="margin: 0px;"><% uiform.renderChild(uiform.FIELD_CUSTOM_TYPE_CHECK_BOX) %></div>
+					<label class="control-label" style="width: 200px; text-align: left; padding: 0px; margin: 0 0 0 18px;">
+					  <%=uicomponent.getLabel(uiform.FIELD_CUSTOM_TYPE_CHECK_BOX) %>
+					</label>
+					
+				  <%
+	          if(uiform.getChildById(uiform.FIELD_CUSTOM_TYPE_SELECT_BOX).isRendered()) {
+	            uiform.renderChild(uiform.FIELD_CUSTOM_TYPE_SELECT_BOX)
+	          }
+	        %>        
         </div>
       </div>
       <div class="uiAction uiActionBorder">
