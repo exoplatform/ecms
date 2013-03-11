@@ -727,7 +727,7 @@
         <nodeTypeDefinition>Type de noeud</nodeTypeDefinition>
         <propertyDefinition>Propriété</propertyDefinition>
         <childNodeDefinition>Fils</childNodeDefinition>
-        <SuperTypeTab>Super types</SuperTypeTab>
+        <superTypeTab>Super types</superTypeTab>
         <DefaultTypeTab>Type primaire par défaut</DefaultTypeTab>
         <RequiredTypeTab>Type primaire obligatoire</RequiredTypeTab>
         <Contraints>Contraintes</Contraints>

@@ -149,14 +149,14 @@
        <%for(i in 0..actions.length -1) { 
             if(actionValues != null && actionValues.length > 0) { 
               if(actionValues[i] != null) { %>
-                   <button onclick="javascript:eXo.webui.UIForm.submitEvent('<%=formName%>','<%=actions[i]%>','&objectId=<%=actionValues[i]%>');" class="btn"><%=_ctx.appRes(formName + ".action." + actions[i])%></button>
+                   <button type="button" onclick="javascript:eXo.webui.UIForm.submitEvent('<%=formName%>','<%=actions[i]%>','&objectId=<%=actionValues[i]%>');" class="btn"><%=_ctx.appRes(formName + ".action." + actions[i])%></button>
             			<%} else { %> 
-            			  <button onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>','<%=actions[i]%>', true);" class="btn"><%=_ctx.appRes(formName + ".action." + actions[i])%></button>
+            			  <button type="button" onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>','<%=actions[i]%>', true);" class="btn"><%=_ctx.appRes(formName + ".action." + actions[i])%></button>
                   <%
                      }
                } else { 
                %>
-               <button onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>','<%=actions[i]%>', true);" class="btn"><%=_ctx.appRes(formName + ".action." + actions[i])%></button>
+               <button type="button" onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>','<%=actions[i]%>', true);" class="btn"><%=_ctx.appRes(formName + ".action." + actions[i])%></button>
             <%}%>                         
                 <%} %>          
         </div>

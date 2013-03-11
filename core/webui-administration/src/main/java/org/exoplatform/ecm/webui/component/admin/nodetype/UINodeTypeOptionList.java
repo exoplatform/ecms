@@ -24,6 +24,7 @@ import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeIterator;
 import javax.jcr.nodetype.NodeTypeManager;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -115,13 +116,19 @@ public class UINodeTypeOptionList extends UIFormInputSetWithAction {
   private void setFieldValues(String fieldName, List<String> selectedNodes) throws Exception {
     StringBuffer strNodeList = null ;
     UINodeTypeForm uiNodeTypeForm = getParent() ;
-    for (int i = 0; i < selectedNodes.size(); i++) {
-      if (strNodeList == null)
-        strNodeList = new StringBuffer(selectedNodes.get(i));
-      else
-        strNodeList.append(",").append(selectedNodes.get(i));
+    if(uiNodeTypeForm == null) return;
+    if(selectedNodes != null && selectedNodes.size() > 0) {
+	    for (int i = 0; i < selectedNodes.size(); i++) {
+	      if (strNodeList == null)
+	        strNodeList = new StringBuffer(selectedNodes.get(i));
+	      else
+	        strNodeList.append(",").append(selectedNodes.get(i));
+	    }
     }
-    uiNodeTypeForm.getUIStringInput(fieldName).setValue(strNodeList.toString()) ;
+    if(strNodeList == null)
+    	uiNodeTypeForm.getUIStringInput(fieldName).setValue(StringUtils.EMPTY) ;
+    else
+      uiNodeTypeForm.getUIStringInput(fieldName).setValue(strNodeList.toString()) ;
     if(fieldName.equals(UINodeTypeForm.SUPER_TYPE)) {
       for(UIComponent uiComp : uiNodeTypeForm.getChildren()) {
         UIFormInputSetWithAction tab = uiNodeTypeForm.getChildById(uiComp.getId()) ;

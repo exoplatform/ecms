@@ -729,7 +729,7 @@
         <nodeTypeDefinition>Node type</nodeTypeDefinition>
         <propertyDefinition>eigenschap</propertyDefinition>
         <childNodeDefinition>Kind knoop</childNodeDefinition>
-        <SuperTypeTab>Super soorten</SuperTypeTab>
+        <superTypeTab>Super soorten</superTypeTab>
         <DefaultTypeTab>Standaard primaire</DefaultTypeTab>
         <RequiredTypeTab>Vereist primaire</RequiredTypeTab>
         <Contraints>Beperkingen</Contraints>

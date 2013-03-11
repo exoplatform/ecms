@@ -28,6 +28,6 @@
 		</table>
 	</div>
 	<div class="uiAction uiActionBorder"> 
-		<button class="btn" type="button" href="javascript:void(0);" onclick="<%=uicomponent.event("Close")%>"><%=_ctx.appRes("UIViewInfoContainer.action.Close")%></button>
+		<button type="button" class="btn" type="button" href="javascript:void(0);" onclick="<%=uicomponent.event("Close")%>"><%=_ctx.appRes("UIViewInfoContainer.action.Close")%></button>
   </div>
 </div>

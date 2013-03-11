@@ -725,7 +725,7 @@
         <nodeTypeDefinition>Knotentyp</nodeTypeDefinition>
         <propertyDefinition>Eigentum</propertyDefinition>
         <childNodeDefinition>Nachfolgeknoten</childNodeDefinition>
-        <SuperTypeTab>Super Typen</SuperTypeTab>
+        <superTypeTab>Super Typen</superTypeTab>
         <DefaultTypeTab>Standardvorwahl</DefaultTypeTab>
         <RequiredTypeTab><![CDATA[Ben&ouml;tigte Vorwahl]]></RequiredTypeTab>
         <Contraints><![CDATA[Einschr&auml;nkungen]]></Contraints>

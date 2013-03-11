@@ -722,7 +722,7 @@
         <nodeTypeDefinition>ノードタイプ</nodeTypeDefinition>
         <propertyDefinition>プロパティ</propertyDefinition>
         <childNodeDefinition>子ノード</childNodeDefinition>
-        <SuperTypeTab>Superタイプ</SuperTypeTab>
+        <superTypeTab>Superタイプ</superTypeTab>
         <DefaultTypeTab>デフォルトプライマリ</DefaultTypeTab>
         <RequiredTypeTab>必須プライマリ</RequiredTypeTab>
         <Contraints>制約</Contraints>

@@ -727,7 +727,7 @@
         <nodeTypeDefinition>Kiểu của node</nodeTypeDefinition>
         <propertyDefinition>Thuộc tính</propertyDefinition>
         <childNodeDefinition>Node con</childNodeDefinition>
-        <SuperTypeTab>Siêu thuộc tính</SuperTypeTab>
+        <superTypeTab>Siêu thuộc tính</superTypeTab>
         <DefaultTypeTab>Kiểu mặc định chính</DefaultTypeTab>
         <RequiredTypeTab>Kiểu bắt buộc chính</RequiredTypeTab>
         <Contraints>Các hạn chế</Contraints>

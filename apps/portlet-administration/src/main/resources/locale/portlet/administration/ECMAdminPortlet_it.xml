@@ -722,7 +722,7 @@
         <nodeTypeDefinition>Tipo Nodo</nodeTypeDefinition>
         <propertyDefinition>Proprietà</propertyDefinition>
         <childNodeDefinition>Nodo Figlio</childNodeDefinition>
-        <SuperTypeTab>Super Tipi</SuperTypeTab>
+        <superTypeTab>Super Tipi</superTypeTab>
         <DefaultTypeTab>Primary Predefinita</DefaultTypeTab>
         <RequiredTypeTab>Primary Richiesta</RequiredTypeTab>
         <Contraints>Costanti</Contraints>

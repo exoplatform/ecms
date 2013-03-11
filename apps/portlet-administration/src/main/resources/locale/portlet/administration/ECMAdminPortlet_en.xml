@@ -720,7 +720,7 @@
         <nodeTypeDefinition>Node Type</nodeTypeDefinition>
         <propertyDefinition>Property</propertyDefinition>
         <childNodeDefinition>Child Node</childNodeDefinition>
-        <SuperTypeTab>Super Types</SuperTypeTab>
+        <superTypeTab>Super Types</superTypeTab>
         <DefaultTypeTab>Default Primary</DefaultTypeTab>
         <RequiredTypeTab>Required Primary</RequiredTypeTab>
         <Contraints>Constraints</Contraints>

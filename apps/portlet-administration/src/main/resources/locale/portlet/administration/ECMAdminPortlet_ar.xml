@@ -725,7 +725,7 @@
         <nodeTypeDefinition>نوع العقدة</nodeTypeDefinition>
         <propertyDefinition>الخاصية</propertyDefinition>
         <childNodeDefinition>الفروع</childNodeDefinition>
-        <SuperTypeTab>الانواع السوبر</SuperTypeTab>
+        <superTypeTab>الانواع السوبر</superTypeTab>
         <DefaultTypeTab>النوع الرئيسي الافتراضي</DefaultTypeTab>
         <RequiredTypeTab>النوع الرئيسي الضروري</RequiredTypeTab>
         <Contraints>القيود</Contraints>
