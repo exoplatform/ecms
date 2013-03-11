@@ -7,9 +7,9 @@
 					<% uiform.renderChild(uiform.FIELD_TITLE_TEXT_BOX) %>
 				</div>			
 				
-				<div class="actionLabel">
-					<div class="controls pull-left" style="margin: 0px;"><% uiform.renderChild(uiform.FIELD_CUSTOM_TYPE_CHECK_BOX) %></div>
-					<label class="control-label" style="width: 200px; text-align: left; padding: 0px; margin: 0 0 0 18px;">
+				<div class="actionLabel clearfix">
+					<div class="controls pull-left"><% uiform.renderChild(uiform.FIELD_CUSTOM_TYPE_CHECK_BOX) %></div>
+					<label class="control-label">
 					  <%=uicomponent.getLabel(uiform.FIELD_CUSTOM_TYPE_CHECK_BOX) %>
 					</label>
 					
