@@ -42,10 +42,9 @@ import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.mop.user.UserPortalImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 
 /**
  * Created by The eXo Platform SAS
@@ -84,18 +83,19 @@ public class NavigationUtils {
   }
   
   public static UserNavigation getUserNavigationOfPortal(UserPortal userPortal, String portalName) throws Exception {
-    UIPortalApplication portalApp = Util.getUIPortalApplication();
-    UserACL userACL = portalApp.getApplicationComponent(UserACL.class);
+    UserACL userACL = WCMCoreUtils.getService(UserACL.class);
     UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
     NavigationContext portalNav = userPortalConfigService.getNavigationService().
                                         loadNavigation(new SiteKey(SiteType.PORTAL, portalName));
     if (portalNav ==null) {
       return null;
-    } else {
-      return userNavigationCtor.newInstance(
-                          userPortal, portalNav, 
-                          userACL.hasEditPermission(Util.getPortalRequestContext().getUserPortalConfig().getPortalConfig()));
-    }
+    } 
+    UserPortalConfig userPortalCfg = userPortalConfigService.getUserPortalConfig(portalName,
+            ConversationState.getCurrent().getIdentity().getUserId(),
+            PortalRequestContext.USER_PORTAL_CONTEXT);
+    return userNavigationCtor.newInstance(
+            userPortal, portalNav, 
+            userACL.hasEditPermission(userPortalCfg.getPortalConfig()));
   }
   
   public static void removeNavigationAsJson (String portalName, String username) throws Exception {

@@ -8,8 +8,8 @@
   </parent>
   <artifactId>ecms-core-connector</artifactId>
   <packaging>jar</packaging>
-  <name>eXo DMS FCKEditor Connector</name>
-  <description>eXo FCKConnector Service</description>
+  <name>eXo ECMS Connector</name>
+  <description>eXo ECMS REST Services</description>
   <dependencies>
     <dependency>
       <groupId>com.googlecode.json-simple</groupId>
