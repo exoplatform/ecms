@@ -3379,6 +3379,21 @@
       <description>La description</description>
     </header>
   </UIPublicationHistory>
+  
+  <UIPublicationSchedule>
+    <label>
+      <introduction>Vous pouvez programmer la publication de votre document. Choisissez la date que vous souhaitez voir votre document publié</introduction>
+      <no-schedule-info>Aucun calendrier de publication de votre document</no-schedule-info>
+    </label>
+    <scheduled>
+      <title>Planifier</title>
+      <from>de</from>
+      <to>à</to>
+    </scheduled>
+    <msg>
+      <save-finished>Nouveau calendrier de publication est sauvegardé avec succès.</save-finished>
+    </msg>
+  </UIPublicationSchedule>
 
   <UIPublicationPanel>
     <label>

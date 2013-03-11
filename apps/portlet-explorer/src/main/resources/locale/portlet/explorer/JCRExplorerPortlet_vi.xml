@@ -3397,6 +3397,21 @@
     </header>
   </UIPublicationHistory>
 
+  <UIPublicationSchedule>
+    <label>
+      <introduction>You can schedule the publication of your document. Select dates you would like to see your document published</introduction>
+      <no-schedule-info>No publication schedule for your document</no-schedule-info>
+    </label>
+    <scheduled>
+      <title>Scheduled</title>
+      <from>From</from>
+      <to>To</to>
+    </scheduled>
+    <msg>
+      <save-finished>New publication schedule is saved successfully.</save-finished>
+    </msg>
+  </UIPublicationSchedule>
+  
   <UIPublicationPanel>
     <label>
       <header>Thời gian xuất bản</header>

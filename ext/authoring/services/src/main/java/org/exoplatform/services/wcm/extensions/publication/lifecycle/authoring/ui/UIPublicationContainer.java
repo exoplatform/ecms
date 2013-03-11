@@ -22,7 +22,10 @@ import java.util.Locale;
 
 import javax.jcr.Node;
 
+import org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.AuthoringPublicationConstant;
+import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationHistory;
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIPopupContainer;
@@ -61,25 +64,32 @@ public class UIPublicationContainer
   public void initContainer(Node node) throws Exception {
     UIPublicationPanel publicationPanel = addChild(UIPublicationPanel.class, null, null);
     publicationPanel.init(node);
-    // UIPublicationPagesContainer publicationPagesContainer =
-    // addChild(UIPublicationPagesContainer.class, null, null);
-    // publicationPagesContainer.init(node);
-    // publicationPagesContainer.setRendered(false);
-    UIPublicationHistory publicationHistory = addChild(UIPublicationHistory.class, null, null);
-    publicationHistory.init(node);
-    publicationHistory.updateGrid();
-    publicationHistory.setRendered(false);
+    
+    this.checkToShowPublicationScheduleAndPublicationHistory(node);
+    
     setSelectedTab(1);
     Locale locale = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale();
     dateTimeFormater = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.MEDIUM,
                                                             SimpleDateFormat.MEDIUM,
                                                             locale);
-    
-    UIPublicationSchedule publicationSchedule = addChild(UIPublicationSchedule.class, null, null);
-    publicationSchedule.init(node);
-    publicationSchedule.setRendered(false);
   }
-
+  
+  private void checkToShowPublicationScheduleAndPublicationHistory(Node node) throws Exception {
+    String currentState = node.getProperty(AuthoringPublicationConstant.CURRENT_STATE).getString();
+    if (PublicationDefaultStates.STAGED.equals(currentState)) {
+      this.removeChild(UIPublicationSchedule.class);
+      UIPublicationSchedule publicationSchedule = addChild(UIPublicationSchedule.class, null, null);
+      publicationSchedule.init(node);
+      publicationSchedule.setRendered(false);
+    }
+    
+    this.removeChild(UIPublicationHistory.class);
+    UIPublicationHistory publicationHistory = addChild(UIPublicationHistory.class, null, null);
+    publicationHistory.init(node);
+    publicationHistory.updateGrid();
+    publicationHistory.setRendered(false);
+  }
+  
   /**
    * Gets the date time formater.
    *
@@ -87,6 +97,17 @@ public class UIPublicationContainer
    */
   public DateFormat getDateTimeFormater() {
     return dateTimeFormater;
+  }
+
+  /* (non-Javadoc)
+   * @see org.exoplatform.webui.form.UIForm#processRender(org.exoplatform.webui.application.WebuiRequestContext)
+   */
+  @Override
+  public void processRender(WebuiRequestContext context) throws Exception {
+    Node currentNode =
+        this.getChild(UIPublicationPanel.class).getCurrentNode();
+    this.checkToShowPublicationScheduleAndPublicationHistory(currentNode);
+    super.processRender(context);
   }
   
   public static class CloseActionListener extends EventListener<UIPublicationContainer> {
