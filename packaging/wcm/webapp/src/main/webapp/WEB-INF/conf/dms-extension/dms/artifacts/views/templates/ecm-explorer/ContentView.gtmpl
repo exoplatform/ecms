@@ -371,11 +371,11 @@
               <div class="columnIcon" style="width: 20px;">
                 <div rel="tooltip" data-placement="bottom" title="$name" class="<%=Utils.getNodeTypeIcon(data, "uiIcon16x16")%>">
                   <%if(isLocked) {%>
-                    <div class="IconLocked"></div>
+                    <div class="iconLockedsmall"></div>
                   <%}%>
                   <%
                     if(isSymLink) {
-                      %><div class="LinkSmall"></div><%
+                      %><div class="iconLinkSmall"></div><%
                     }
                   %>
                 </div>

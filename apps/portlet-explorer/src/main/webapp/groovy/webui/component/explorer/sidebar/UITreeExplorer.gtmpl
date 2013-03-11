@@ -156,10 +156,6 @@
         }	  			
         strActs += "</ul></li>";	    
 	    }
-	    String lastNodeClass = "" ;
-	    if (counter >= childrenSize && !isPaginated) {
-	    	lastNodeClass = "lastNode " ;
-	    }
 	    def ctMenu = "" ;
 	    def isLocked = false;
 	    def lockedLabel = "";
@@ -180,13 +176,17 @@
 	    def hiddenStyle = "";
 	    if (node.isNodeType("exo:hiddenable")) hiddenStyle = "color: #A0A0A0;";
 	    if(!uicomponent.isSystemWorkspace()) ctMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(node.getPath()), uicomponent.getActionsList(node)) ;
-	    println "<div  class=\"${lastNodeClass}node\" >" ;
+	    println "<div  class=\"node\" >" ;
 	    println "  <div class=\"${iconType}Icon\" id=\"" + uicomponent.encodeBase64(treeNode.getPath()) + "\" onclick=\"event.cancelBubble=true; if(eXo.ecm.ECMUtils.collapseExpand(this)) return; " + actionLink + "\">" ;
-	    if (node.isLocked()) {
-        println "<div class=\"IconLocked\"></div>";
-	    }
 	    println "    <div id=\"iconTreeExplorer" + treeNode.getNodePath4ID() + "\" isFile=\"" + node.isNodeType("nt:file") + "\" onclick=\"event.cancelBubble=true;" + expandLink + "\" objectId=\"" + org.exoplatform.services.cms.impl.Utils.getObjectId(treeNode.getPath()) + "\" workspacename=\"" + preferenceWS + Utils.getNodeTypeIcon(node, "16x16Icon", iconType) + "\" " + ctMenu + ">" + strActs ;
-	    println "		<a  onclick=\"event.cancelBubble=true;" + expandLink + "\" style='cursor: pointer;$hiddenStyle' rel=\"tooltip\" data-placement=\"bottom\" title=\"$treeNodeName $lockedLabel\"><i title=\"$treeNodeName\" class=\"" + Utils.getNodeTypeIcon(node, "uiIcon16x16") + "\"></i> <span class='nodeName'>$treeNodeName</span></a>" ;
+	    println "		<a  onclick=\"event.cancelBubble=true;" + expandLink + "\" style='cursor: pointer;$hiddenStyle' rel=\"tooltip\" data-placement=\"bottom\" title=\"$treeNodeName $lockedLabel\"><i title=\"$treeNodeName\" class=\"" + Utils.getNodeTypeIcon(node, "uiIcon16x16") + "\">";
+	    if (node.isLocked()) {
+			println "<i class=\"iconLockedsmall\"></i>";
+	    }
+		if(uicomponent.isSymLink(node)) {
+			println "<i class=\"iconLinkSmall\"></i>";
+	    }		
+		println " </i> <span class='nodeName'>$treeNodeName</span></a>" ;
 	    println "    </div>" ; 
 	    println "  </div>" ; 
 	    if(treeNode.getChildrenSize() > 0) {
