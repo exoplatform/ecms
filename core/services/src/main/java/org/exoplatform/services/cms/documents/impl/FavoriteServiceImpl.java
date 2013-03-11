@@ -134,20 +134,20 @@ public class FavoriteServiceImpl implements FavoriteService {
       // remove favorite
       Node userFavoriteNode = getUserFavoriteFolder(userName);
       if(userFavoriteNode != null){ // to avoid NPE
-		  NodeIterator nodeIter = userFavoriteNode.getNodes();
-		  while (nodeIter.hasNext()) {
-			Node childNode = nodeIter.nextNode();
-			if (linkManager.isLink(childNode)) {
-			  targetNode = getTargetNode(childNode);
-			  if (node.isSame(targetNode)) {
-				childNode.remove();
-				userFavoriteNode.getSession().save();
-				return;
-			  }
-			}
-		  }
-	  }
-	}
+        NodeIterator nodeIter = userFavoriteNode.getNodes();
+        while (nodeIter.hasNext()) {
+          Node childNode = nodeIter.nextNode();
+          if (linkManager.isLink(childNode)) {
+            targetNode = getTargetNode(childNode);
+            if (node.isSame(targetNode)) {
+              childNode.remove();
+              userFavoriteNode.getSession().save();
+              return;
+            }
+          }
+        }
+      }
+    }
   }
 
   public boolean isFavoriter(String userName, Node node) throws Exception {
