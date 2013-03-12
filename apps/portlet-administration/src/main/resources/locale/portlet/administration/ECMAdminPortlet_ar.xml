@@ -280,12 +280,12 @@
       <UIMetadataForm>تغيير قالب قالب المعلومات القياسية</UIMetadataForm>
     </title>
   </MetadataPopupEdit>
-  <PermissionPopup>
+  <MetataPermissionPopup>
     <title>
       <MetadataPermission>إختيار صلاحية</MetadataPermission>
       <QueriesPermissionBrowse>إضافة صلاحية</QueriesPermissionBrowse>
     </title>
-  </PermissionPopup>
+  </MetataPermissionPopup>
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataForm #

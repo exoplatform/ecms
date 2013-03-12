@@ -277,12 +277,12 @@
       <UIMetadataForm>Modifica Template Metadato</UIMetadataForm>
     </title>
   </MetadataPopupEdit>
-  <PermissionPopup>
+  <MetataPermissionPopup>
     <title>
       <MetadataPermission>Imposta permessi</MetadataPermission>
       <QueriesPermissionBrowse>Aggiungi permessi</QueriesPermissionBrowse>
     </title>
-  </PermissionPopup>
+  </MetataPermissionPopup>
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataForm				 #

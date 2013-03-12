@@ -38,7 +38,7 @@ public class UIMetadataManager extends UIAbstractManager {
 
   final static public String METADATA_POPUP = "MetadataPopupEdit" ;
   final static public String VIEW_METADATA_POPUP = "ViewMetadataPopup" ;
-  final static public String PERMISSION_POPUP = "PermissionPopup" ;
+  final static public String PERMISSION_POPUP = "MetataPermissionPopup" ;
 
   public UIMetadataManager() throws Exception {
     addChild(UIMetadataList.class, null, null) ;

@@ -282,12 +282,12 @@
       <UIMetadataForm>Sửa mẫu dữ liệu Metadata</UIMetadataForm>
     </title>
   </MetadataPopupEdit>
-  <PermissionPopup>
+  <MetataPermissionPopup>
     <title>
       <MetadataPermission>Chọn quyền</MetadataPermission>
       <QueriesPermissionBrowse>Quyền truy nhập</QueriesPermissionBrowse>
     </title>
-  </PermissionPopup>
+  </MetataPermissionPopup>
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataForm				 #

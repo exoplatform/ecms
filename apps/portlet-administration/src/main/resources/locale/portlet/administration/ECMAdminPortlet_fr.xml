@@ -282,12 +282,12 @@
       <UIMetadataForm>Editer le formulaire de la métadonnée</UIMetadataForm>
     </title>
   </MetadataPopupEdit>
-  <PermissionPopup>
+  <MetataPermissionPopup>
     <title>
       <MetadataPermission>Sélection d'une permission</MetadataPermission>
       <QueriesPermissionBrowse>Ajout de permissions</QueriesPermissionBrowse>
     </title>
-  </PermissionPopup>
+  </MetataPermissionPopup>
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataForm				 #

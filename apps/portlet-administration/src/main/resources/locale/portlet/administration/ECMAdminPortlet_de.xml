@@ -280,12 +280,12 @@
       <UIMetadataForm><![CDATA[Vorlage der Metadata &auml;ndern]]></UIMetadataForm>
     </title>
   </MetadataPopupEdit>
-  <PermissionPopup>
+  <MetataPermissionPopup>
     <title>
       <MetadataPermission><![CDATA[Genehmigung &auml;ndern]]></MetadataPermission>
       <QueriesPermissionBrowse><![CDATA[Genehmigung hinzuf&uuml;gen]]></QueriesPermissionBrowse>
     </title>
-  </PermissionPopup>
+  </MetataPermissionPopup>
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataForm				 #
