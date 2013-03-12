@@ -61,6 +61,10 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
   
   protected static final Log LOG = ExoLogger.getLogger(BaseSearchServiceConnector.class.getName());
   
+  private static final long KB = 1024L;
+  private static final long MB = 1024L*KB;
+  private static final long GB = 1024L*MB;
+  
   public BaseSearchServiceConnector(InitParams initParams) throws Exception {
     super(initParams);
     siteSearch_ = WCMCoreUtils.getService(SiteSearchService.class);
@@ -162,7 +166,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
                   new EcmsSearchResult(getPath(driveData, retNode), 
                                        retNode.getTitle(), 
                                        retNode.getExcerpt(), 
-                                       driveData.getName() + formatDate(date), 
+                                       driveData.getName() + fileSize(retNode) + formatDate(date), 
                                        getImageUrl(), 
                                        date.getTimeInMillis(), 
                                        (long)retNode.getScore(),
@@ -184,14 +188,53 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
   }
   
   /**---------------------------HELPER METHODS----------------------------------*/
+
   /**
-   * returns path of node in format: "{drivename}/{relative path from drive root node}
-   * @param driveData the drive data object
-   * @param node the node
-   * @return the expected path
+   * gets the file size 
+   * @param node The node
+   * @return the file size
    * @throws Exception
    */
-  protected abstract String getPath(DriveData driveData, ResultNode node) throws Exception;
+  protected String fileSize(Node node) throws Exception {
+    if (!node.isNodeType("nt:file")) {
+      return "";
+    }
+    StringBuffer ret = new StringBuffer();
+    ret.append(" - ");
+    long size = 0;
+    try {
+      size = node.getProperty("jcr:content/jcr:data").getLength();
+    } catch (Exception e) {
+      LOG.error("Can not get file size", e);
+    }
+    long byteSize = size % KB;
+    long kbSize = (size % MB) / KB;
+    long mbSize = (size % GB) / MB;
+    long gbSize = size / GB;
+    
+    if (gbSize >= 1) {
+      ret.append(gbSize).append(refine(mbSize)).append(" GB");
+    } else if (mbSize >= 1) {
+      ret.append(mbSize).append(refine(kbSize)).append(" MB");
+    } else if (kbSize > 1) {
+      ret.append(kbSize).append(refine(byteSize)).append(" KB");
+    } else {
+      ret.append("1 KB");
+    }
+    return ret.toString();
+  }
+  
+  /**
+   * refines the size up to 3 digits, add '0' in front if necessary.
+   * @param size the size
+   * @return the size in 3 digit format
+   */
+  private String refine(long size) {
+    if (size == 0) {
+      return "";
+    }
+    return "," + Math.round(Float.valueOf("0." + size));
+  }
   
   /**
    * gets the image url
@@ -201,13 +244,6 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
   protected String getImageUrl() {
     return "/eXoResources/skin/images/Icons/FileTypeIcons/uiIconsFileType64x64.png";
   }
-  
-  /**
-   * gets the file type
-   * @return
-   * @throws Exception
-   */
-  protected abstract String getFileType(ResultNode node) throws Exception;
   
   /**
    * returns the drive data object which is closest to the node (in term of path)
@@ -256,8 +292,24 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
    * @return the String representation
    */
   protected String formatDate(Calendar date) {
-    DateFormat format = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT, SimpleDateFormat.SHORT);
-    return format.format(date.getTime());
+    DateFormat format = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.FULL, SimpleDateFormat.SHORT);
+    return " - " + format.format(date.getTime());
   }
+  
+  /**
+   * returns path of node in format: "{drivename}/{relative path from drive root node}
+   * @param driveData the drive data object
+   * @param node the node
+   * @return the expected path
+   * @throws Exception
+   */
+  protected abstract String getPath(DriveData driveData, ResultNode node) throws Exception;
+  
+  /**
+   * gets the file type
+   * @return
+   * @throws Exception
+   */
+  protected abstract String getFileType(ResultNode node) throws Exception;
   
 }
