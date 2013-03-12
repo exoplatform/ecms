@@ -533,7 +533,7 @@
 						if(i > 0) tblRWS.deleteRow(rowsRWS[i].rowIndex);
 					}
 				} 
-				var tdNoContent = tblRWS.insertRow(1).insertCell(0);
+				var tdNoContent = tblRWS.tBodies[0].insertRow(0).insertCell(0);
 				tdNoContent.innerHTML = "There is no content";
 				tdNoContent.className = "Item TRNoContent";
 				tdNoContent.setAttribute("colspan",3);
@@ -590,7 +590,7 @@
 					var clazz = 'OddItem';
 					var tblRWS  = gj(rightWS).find("table")[0];
 					var clazzItem = eXo.ecm.ECS.getClazzIcon(list[i].getAttribute("nodeType"));
-					var newRow = tblRWS.insertRow(i+1);
+					var newRow = tblRWS.tBodies[0].insertRow(i);
 					newRow.className = clazz;
 					newRow.insertCell(0).innerHTML = '<a url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.insertContent(this);">'+decodeURIComponent(node)+'</a>';
 					newRow.insertCell(1).innerHTML = '<div class="Item">'+ list[i].getAttribute("dateCreated") +'</div>';
@@ -648,7 +648,7 @@
 			}
 		} 
 		if(!list || list.length <= 0) {
-			var tdNoContent = tblRWS.insertRow(1).insertCell(0);
+			var tdNoContent = tblRWS.tBodies[0].insertRow(0).insertCell(0);
 			tdNoContent.innerHTML = "There is no content";
 			tdNoContent.className = "Item TRNoContent";
 			tdNoContent.userLanguage = "UserLanguage.NoContent";
@@ -656,13 +656,7 @@
 			return;
 		}
 		var listItem = '';
-		var clazz = 'OddItem';
 		for(var i = 0; i < list.length; i++) {
-			if(clazz == 'EventItem') {
-				clazz = 'OddItem';
-			} else if(clazz == 'OddItem') {
-				clazz = 'EventItem';
-			}
 			var clazzItem = eXo.ecm.ECS.getClazzIcon(list[i].getAttribute("nodeType"));
 			var url 			= list[i].getAttribute("url");
 			var path 			= list[i].getAttribute("path");
@@ -670,9 +664,8 @@
 			var node = list[i].getAttribute("name");
 			var label = list[i].getAttribute("label");
 			if (!label) label = node;
-			var newRow = tblRWS.insertRow(i+1);
-			newRow.className = clazz;
-			newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.insertContent(this);">'+decodeURIComponent(label)+'</a>';
+			var newRow = tblRWS.tBodies[0].insertRow(i);
+			newRow.insertCell(0).innerHTML = '<a class="Item" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.insertContent(this);">'+decodeURIComponent(label)+'</a>';
 					
 		}
 		
@@ -697,7 +690,7 @@
 			}
 		} 
 		if(!list || list.length <= 0) {
-			var rowTmp = tblRWS.insertRow(1);
+			var rowTmp = tblRWS.tBodies[0].insertRow(0);
 			var tdNoContent = rowTmp.insertCell(0);
 			tdNoContent.innerHTML = "There is no content";
 			tdNoContent.className = "Item TRNoContent";
@@ -706,22 +699,15 @@
 			return;
 		}
 		var listItem = '';
-		var clazz = 'OddItem';
 		for(var i = 0; i < list.length; i++) {
-			if(clazz == 'EventItem') {
-				clazz = 'OddItem';
-			} else if(clazz == 'OddItem') {
-				clazz = 'EventItem';
-			}
 			var clazzItem = eXo.ecm.ECS.getClazzIcon(list[i].getAttribute("nodeType"));
 			var url 			= list[i].getAttribute("url");
 			var path 			= eXo.ecm.ECS.repositoryName+":"+eXo.ecm.ECS.workspaceName+":"+list[i].getAttribute("path");
 			var linkTarget = list[i].getAttribute("linkTarget");
 			var nodeType	= list[i].getAttribute("nodeType");
 			var node = list[i].getAttribute("name");
-			var newRow = tblRWS.insertRow(i+1);
-			newRow.className = clazz;
-			newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+url+'" linkTarget ="' + linkTarget + '" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.addFile2ListContent(this);">'+decodeURIComponent(node)+'</a>';
+			var newRow = tblRWS.tBodies[0].insertRow(i);
+			newRow.insertCell(0).innerHTML = '<a class="Item" url="'+url+'" linkTarget ="' + linkTarget + '" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.addFile2ListContent(this);">'+decodeURIComponent(node)+'</a>';
 					
 		}
 		
@@ -980,8 +966,8 @@
 	EcmContentSelector.prototype.addFile2ListContent = function(objNode) {  
 		var tblListFilesContent = document.getElementById("ListFilesContent");
 		var rowsContent = gj(tblListFilesContent).find("tr");
-		var trNoContent = gj(tblListFilesContent).find("td.TRNoContent:first")[0];
-		if(trNoContent) tblListFilesContent.deleteRow(trNoContent.parentNode.rowIndex);
+		var tdNoContent = gj(tblListFilesContent).find("td.noContent:first")[0];
+		if(tdNoContent) tblListFilesContent.deleteRow(tdNoContent.parentNode.rowIndex);
 		var url = objNode.getAttribute("url");  
 		var nodeType	= objNode.getAttribute("nodeType");
 		var path = objNode.getAttribute("path");
@@ -996,11 +982,13 @@
 			}
 		}
 		var	clazzItem = objNode.className;
-		var newRow = tblListFilesContent.insertRow(tblListFilesContent.children[0].children.length);
+		var newRow = tblListFilesContent.tBodies[0].insertRow(tblListFilesContent.children[0].children.length - 1);
 		newRow.className = "Item";
 		newRow.insertCell(0).innerHTML = '<a class="Item" url="'+url+'" linkTarget ="' + linkTarget +'" path="'+path+'" nodeType="'+nodeType+' style = "overflow:hidden" title="'+decodeURIComponent(title)+'">'+eXo.ecm.ECS.safe_tags_regex(title)+'</a>';
-		newRow.insertCell(1).innerHTML = '<div class="DeleteIcon" onclick="eXo.ecm.ECS.removeContent(this);"><span></span></div>';
-		this.insertMultiContent("SaveTemporary", path);	
+		var actionCell = newRow.insertCell(1);
+		actionCell.innerHTML = '<a class="actionIcon" onclick="eXo.ecm.ECS.removeContent(this);"><i class="uiIconDelete uiIconLightGray""></i></a>';
+		actionCell.className = "center";
+		//this.insertMultiContent("SaveTemporary", path);	
 	};
 	
 	EcmContentSelector.prototype.addFileSearchListSearch = function() {
@@ -1014,23 +1002,18 @@
 		var arrTarget = strTargetArray.split(";");
 		if (arrContent.length>arrTarget.length) return;
 		if(arrContent.length > 0) {
-			var trNoContent = gj(tblListFilesContent).find("td.TRNoContent:first")[0];
-			if(trNoContent) tblListFilesContent.deleteRow(trNoContent.parentNode.rowIndex);
-			var clazz = 'OddItem';
+			var tdNoContent = gj(tblListFilesContent).find("td.noContent:first")[0];
+			if(tdNoContent) tblListFilesContent.deleteRow(tdNoContent.parentNode.rowIndex);
 			for(var i = 0; i < arrContent.length-1; i++) {
 				var path = arrContent[i];
 				var target = arrTarget[i];
-				var newRow = tblListFilesContent.insertRow(tblListFilesContent.children[0].children.length);
-				if(clazz == 'EventItem') {
-					clazz = 'OddItem';
-				} else if(clazz == 'OddItem') {
-					clazz = 'EventItem';
-				}
-				newRow.className = clazz;
+				var newRow = tblListFilesContent.tBodies[0].insertRow(tblListFilesContent.children[0].children.length - 1);
 				var strTmpArr = arrContent[i].split('/');
 				var nodeName = strTmpArr[strTmpArr.length-1];
 				newRow.insertCell(0).innerHTML = '<a class="Item" linkTarget ="'+ target+ '" path="'+path+'">'+eXo.ecm.ECS.safe_tags_regex(decodeURIComponent(nodeName))+'</a>';
-				newRow.insertCell(1).innerHTML = '<div  class="DeleteIcon" onclick="eXo.ecm.ECS.removeContent(this);"><span></span></div>';
+				var actionCell = newRow.insertCell(1);
+				actionCell.innerHTML = '<a class="actionIcon" onclick="eXo.ecm.ECS.removeContent(this);"><i class="uiIconDelete uiIconLightGray""></i></a>';
+				actionCell.className = "center";
 			}
 		}
 	};
@@ -1044,7 +1027,7 @@
 		var objRow = gj(objNode).parents("tr:first")[0];
 		tblListFilesContent.deleteRow(objRow.rowIndex);	
 		eXo.ecm.ECS.pathContent = false;
-		this.insertMultiContent("SaveTemporary", this.initPathExpanded);
+		//this.insertMultiContent("SaveTemporary", this.initPathExpanded);
 	}
 	
 	EcmContentSelector.prototype.changeFilter = function() {
