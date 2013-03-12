@@ -13,13 +13,6 @@
   uicomponent.addCalendarField("hiddenInput5", hiddenField5) ;
   
 %>
-<style>
-	.uiForm .form-horizontal textarea { 
-	  font-size:11px;
-	  height:275px !important;
-	  width:525px !important;
-	 }
-</style>
 <div class="uiForm FormScrollLayout">  
   <% uiform.begin() %>
   <%/* start render action*/%>
