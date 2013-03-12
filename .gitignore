@@ -47,3 +47,4 @@ bin/
 
 # Misc
 *.swp
+transaction.log
