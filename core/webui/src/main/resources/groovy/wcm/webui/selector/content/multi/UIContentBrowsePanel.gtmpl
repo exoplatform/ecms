@@ -64,7 +64,7 @@
 		    			<thead>
 		    				<tr>
 			    		  		<th> List Content </th>
-			    		  		<th width='60px'> Action </th>
+			    		  		<th class="center"> Action </th>
 			    	 		</tr>
 				    	</thead>
 			    		<tr>
