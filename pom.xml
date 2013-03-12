@@ -424,6 +424,11 @@
         <artifactId>ecms-testsuite-test</artifactId>
         <version>${project.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.exoplatform.ecms</groupId>
+        <artifactId>ecms-upgrade-plugins</artifactId>
+        <version>${project.version}</version>
+      </dependency>
       <!-- To be replaced by an import of jcr parent POM -->
       <dependency>
         <groupId>org.exoplatform.jcr</groupId>
