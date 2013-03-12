@@ -4,3 +4,127 @@
 @import "Sprites/Style.less";
 @import "UITreeJCRExplorer/Style.less";
 @import "UIPublication/Style.less";
+
+
+/******** UIContentBrowserPanel **************/
+
+.uiWCMSearchContainer {
+
+	.breadcumbsPortlet {
+		height: 30px;
+		
+		.breadcumbTab {
+			display: inline-block;
+			font-size: 13px;
+			
+			a.normal {
+				color: @grayDark;
+				
+				&:hover {
+					color: @grayLight;
+				}
+			}
+			
+			a.active {
+				color: @grayLight;
+				font-weight: bold;
+			}
+		}
+	}
+	
+	.actionBar {
+		.control-label {
+			width: auto;
+			margin-right: 20px;
+		}
+		
+		.controls {
+			margin: 0px;
+			
+			.uiSelectbox {
+				width: 120px;
+				
+				.selectbox {
+					width: 145px;
+				}
+			}
+		}
+	}
+	
+	.listContainer {
+		padding-bottom: 10px;
+	}
+	
+	.leftWorkspace {
+		width: 210px;
+		float: left;
+		border: 1px solid #e1e1e1;
+		background: #f7f7f7;
+		overflow: auto;
+		height: 461px;
+		.ChildrenContainer{
+			margin-left: 15px;
+		}
+	}
+	
+	.rightWorkspace{
+		 margin-left: 230px;
+		 
+		.multiListContainer .listFileContainer {
+			margin-top:6px;
+			overflow: auto;
+			height: 130px;
+		}
+
+		.noContent{
+			color: #ccc;
+		}
+	}
+}
+
+.uiContentSearchForm {
+	
+	.dateInput {
+		margin: 10px 10px 0px 0px;
+		
+		input {
+			width: 125px;
+		}
+	}
+	
+	.uiRadio {
+		margin: 0px;
+	}
+	
+	.txt {
+		margin: 5px 0px;
+	}
+	
+	.inputGroup {
+		input {
+			width: 125px;
+		}
+	}
+	
+	.uiSelectbox {
+		width: 123px;
+		.selectbox {
+			width: 148px;
+		}
+	}
+}
+
+.uiContentSearchResult {
+	.uiWCMSearchContent {
+		.title {
+			width: 50%;
+		}
+		.publicationstate {
+			white-space: nowrap;
+		}
+	}
+	
+	.noContent{
+		color: #ccc;
+	}
+}

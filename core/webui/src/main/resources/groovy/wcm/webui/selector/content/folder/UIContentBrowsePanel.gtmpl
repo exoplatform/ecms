@@ -33,9 +33,7 @@
 			</div>
 		</div>
 	</div>
-
 	<div class="breadcumbsPortlet"><div class="breadcumbsContainer clearfix" id="BreadcumbsContainer"></div></div>
-	
 	<div class="listContainer clearfix">
 		<div class="leftWorkspace uiTreeExplorer" id="LeftWorkspace">
 			<div class ="LoadingProgress"><span></span></div>

@@ -22,7 +22,7 @@
 	}
   jsManager.require("SHARED/content-selector", "selector").
   addScripts("selector.ECS.loadListContent(\""+itemPaths+"\", \"" +itemTargetPath +"\");");%>
-<div id="$uicomponent.id" class="UIWCMSearchContainer resizable $uicomponent.id">
+<div id="$uicomponent.id" class="uiWCMSearchContainer resizable $uicomponent.id">
 	<div class="actionBar form-horizontal">
 		<div class="control-group">
 			<label class="control-label" for="Filter">Filter</label>
@@ -38,9 +38,9 @@
 			</div>
 		</div>
 	</div>
-	<div class="breadcumbsPortlet breadcumbsContainer clearfix" id="BreadcumbsContainer"></div>
+	<div class="breadcumbsPortlet"><div class="breadcumbsContainer clearfix" id="BreadcumbsContainer"></div></div>
 	<div class="listContainer clearfix">
-		<div class="leftWorkspace" id="LeftWorkspace">
+		<div class="leftWorkspace uiTreeExplorer" id="LeftWorkspace">
 			<div class ="LoadingProgress"><span></span></div>
 		</div>
 		<div class="rightWorkspace" id="RightWorkspace" action="<%= uicomponent.event("Select") %>" actionSaveTemp="<%= uicomponent.event("SaveTemporary") %>">
@@ -68,8 +68,7 @@
 			    	 		</tr>
 				    	</thead>
 			    		<tr>
-				    		<td class="item noContent">There is no file</td>
-				    		<td class="item"></td>
+				    		<td class="item center noContent" colSpan="2">There is no file</td>
 		    			</tr>
 		  			</table>
 				</div>
