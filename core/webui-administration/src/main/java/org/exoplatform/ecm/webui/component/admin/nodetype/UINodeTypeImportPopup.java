@@ -18,7 +18,7 @@ package org.exoplatform.ecm.webui.component.admin.nodetype;
 
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIContainer;
-import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
+import org.exoplatform.webui.core.lifecycle.Lifecycle;
 
 /**
  * Created by The eXo Platform SARL
@@ -27,7 +27,9 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
  * Oct 2, 2006
  * 5:35:40 PM
  */
-@ComponentConfig (lifecycle = UIContainerLifecycle.class)
+@ComponentConfig (lifecycle = Lifecycle.class,
+                  template =  "classpath:groovy/ecm/webui/container/UIContainer.gtmpl"
+                  )
 public class UINodeTypeImportPopup extends UIContainer {
 
   public UINodeTypeImportPopup() throws Exception {

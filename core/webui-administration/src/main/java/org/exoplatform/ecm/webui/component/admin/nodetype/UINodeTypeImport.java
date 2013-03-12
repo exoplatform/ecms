@@ -54,7 +54,7 @@ import org.exoplatform.webui.form.UIFormTableInputSet;
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    template =  "system:/groovy/webui/form/UIForm.gtmpl",
+    template =  "classpath:groovy/ecm/webui/form/UIForm.gtmpl",
     events = {
       @EventConfig(listeners = UINodeTypeImport.ImportActionListener.class),
       @EventConfig(phase=Phase.DECODE, listeners = UINodeTypeImport.UploadActionListener.class),

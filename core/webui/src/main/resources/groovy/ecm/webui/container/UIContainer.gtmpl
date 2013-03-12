@@ -1,0 +1,3 @@
+<div id="$uicomponent.id" class="<%=org.exoplatform.wcm.webui.Utils.toLowerCase(uicomponent.id, 2)%>">
+  <%uicomponent.renderChildren();%>
+</div>
