@@ -79,7 +79,7 @@ public class UIDriveManager extends UIAbstractManager {
     uiPopup.setShowMask(true);
     uiPopup.setWindowSize(580, 300);
     UIPermissionSelector uiECMPermission =
-      createUIComponent(UIPermissionSelector.class, null, null) ;
+      createUIComponent(UIPermissionSelector.class, null, "UIDrivePermissionSelector") ;
     uiECMPermission.setSelectedMembership(true);
     if(membership != null && membership.indexOf(":/") > -1) {
       String[] arrMember = membership.split(":/") ;

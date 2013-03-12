@@ -375,8 +375,8 @@
   </UIDriveList>
   <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>権限の追加</AddDrivePermissionSelector>
-      <UIPermissionSelector>権限の選択</UIPermissionSelector>
+      <AddDrivePermissionSelector>Add Permissions</AddDrivePermissionSelector>
+      <UIDrivePermissionSelector>Set Permissions</UIDrivePermissionSelector>
     </title>
   </PopupDrivePermission>
   <UIDriveForm>
@@ -1706,6 +1706,11 @@
       <UIPermissionSelector>権限の選択</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
+  <TemplatePermission>
+    <title>
+      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+    </title>
+  </TemplatePermission>
   <TemplateContainerPopup>
     <title>
       <UITemplateForm>テンプレートフォーム</UITemplateForm>

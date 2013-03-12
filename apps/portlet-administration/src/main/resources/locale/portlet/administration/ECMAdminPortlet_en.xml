@@ -374,7 +374,7 @@
   <PopupDrivePermission>
     <title>
       <AddDrivePermissionSelector>Add Permissions</AddDrivePermissionSelector>
-      <UIPermissionSelector>Set Permissions</UIPermissionSelector>
+      <UIDrivePermissionSelector>Set Permissions</UIDrivePermissionSelector>
     </title>
   </PopupDrivePermission>
   <UIDriveForm>
@@ -1928,6 +1928,11 @@
       <UIPermissionSelector>Select Permission</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
+  <TemplatePermission>
+    <title>
+      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+    </title>
+  </TemplatePermission>
   <TemplateContainerPopup>
     <title>
       <UITemplateForm>Template Form</UITemplateForm>

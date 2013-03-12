@@ -1547,8 +1547,8 @@
    
    <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>أضف تصريح</AddDrivePermissionSelector>
-      <UIPermissionSelector>ولا يسمح باختيار</UIPermissionSelector>
+      <AddDrivePermissionSelector>Add Permissions</AddDrivePermissionSelector>
+      <UIDrivePermissionSelector>Set Permissions</UIDrivePermissionSelector>
     </title>
   </PopupDrivePermission>
   
@@ -1704,6 +1704,11 @@
       <UIPermissionSelector>إختيار صلاحية</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
+  <TemplatePermission>
+    <title>
+      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+    </title>
+  </TemplatePermission>
   <TemplateContainerPopup>
     <title>
       <UITemplateForm>شكل القالب</UITemplateForm>

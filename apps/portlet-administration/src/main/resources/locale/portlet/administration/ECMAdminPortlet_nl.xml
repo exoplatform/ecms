@@ -382,8 +382,8 @@
   </UIDriveList>
   <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>rechten toevoegen</AddDrivePermissionSelector>
-      <UIPermissionSelector>selecteer rechten</UIPermissionSelector>
+      <AddDrivePermissionSelector>Add Permissions</AddDrivePermissionSelector>
+      <UIDrivePermissionSelector>Set Permissions</UIDrivePermissionSelector>
     </title>
   </PopupDrivePermission>
   <UIDriveForm>
@@ -1709,6 +1709,11 @@
       <UIPermissionSelector>Selecteer rechten</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
+  <TemplatePermission>
+    <title>
+      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+    </title>
+  </TemplatePermission>
   <TemplateContainerPopup>
     <title>
       <UITemplateForm>Sjabloon Vorm</UITemplateForm>

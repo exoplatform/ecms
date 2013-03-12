@@ -378,8 +378,8 @@
   </UIDriveList>
   <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector><![CDATA[Genehmigung hinzuf&uuml;gen]]></AddDrivePermissionSelector>
-      <UIPermissionSelector><![CDATA[Genehmigung ausw&auml;hlen]]></UIPermissionSelector>
+      <AddDrivePermissionSelector>Add Permissions</AddDrivePermissionSelector>
+      <UIDrivePermissionSelector>Set Permissions</UIDrivePermissionSelector>
     </title>
   </PopupDrivePermission>
   <UIDriveForm>
@@ -1704,6 +1704,11 @@
       <UIPermissionSelector><![CDATA[Genehmigung ausw&auml;hlen]]></UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
+  <TemplatePermission>
+    <title>
+      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+    </title>
+  </TemplatePermission>
   <TemplateContainerPopup>
     <title>
       <UITemplateForm>Vorlagenform</UITemplateForm>

@@ -380,8 +380,8 @@
   </UIDriveList>
   <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>Thêm quyền truy nhập</AddDrivePermissionSelector>
-      <UIPermissionSelector>Chọn quyền truy nhập</UIPermissionSelector>
+      <AddDrivePermissionSelector>Add Permissions</AddDrivePermissionSelector>
+      <UIDrivePermissionSelector>Set Permissions</UIDrivePermissionSelector>
     </title>
   </PopupDrivePermission>
   <UIDriveForm>
@@ -1702,6 +1702,11 @@
       <UIPermissionSelector>Chọn quyền truy nhập</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
+  <TemplatePermission>
+    <title>
+      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+    </title>
+  </TemplatePermission>
   <TemplateContainerPopup>
     <title>
       <UITemplateForm>Kiểu mẫu</UITemplateForm>
