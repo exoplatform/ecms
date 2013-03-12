@@ -111,7 +111,7 @@
 		var formObj = document.getElementById("UICLVConfig");
 		var tdContextualFolder = gj(formObj).find("td.ContextualRadio")[0];
 	
-		var inputs = gj(tdContextualFolder).children("input");
+		var inputs = gj(tdContextualFolder).find("input");
 		var enableInput = inputs[0];
 		var disableInput = inputs[1];
 		
@@ -121,6 +121,7 @@
 		var clvInput = gj(trClv).find("input")[0];
 	
 		enableInput.setAttribute("onmouseup", "eXo.ecm.CLV.enableClvInput(this)");
+
 		disableInput.setAttribute("onmouseup", "eXo.ecm.CLV.disableClvInput(this)");
 		if (enableInput.checked) {
 			clvInput.removeAttribute('readonly');

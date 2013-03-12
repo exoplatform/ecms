@@ -18,7 +18,7 @@
 	}
 %>
 
-<div id="$uicomponent.id" class="UIWCMSearchContainer resizable $uicomponent.id">
+<div id="$uicomponent.id" class="uiWCMSearchContainer resizable $uicomponent.id">
 	<div class="actionBar form-horizontal">
 		<div class="control-group">
 			<label class="control-label" for="Filter">Filter</label>
@@ -33,27 +33,31 @@
 			</div>
 		</div>
 	</div>
-	<div class="breadcumbsPortlet breadcumbsContainer clearfix" id="BreadcumbsContainer"></div>
+
+	<div class="breadcumbsPortlet"><div class="breadcumbsContainer clearfix" id="BreadcumbsContainer"></div></div>
+	
 	<div class="listContainer clearfix">
-		<div class="leftWorkspace" id="LeftWorkspace">
+		<div class="leftWorkspace uiTreeExplorer" id="LeftWorkspace">
 			<div class ="LoadingProgress"><span></span></div>
 		</div>
 		<div class="rightWorkspace" id="RightWorkspace" action="<%= uicomponent.event("Select") %>">
-			<div class="listView">
-					<table class="uiGrid table table-hover table-striped" id="ListRecords">
-						<thead>
-							<tr>
-								<th> Name </th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="item noContent">There is no content</td>
-							</tr>
-						</tbody>
-					</table>
+			<div class="multiListContainer">
+				<div class="listView">
+						<table class="uiGrid table table-hover table-striped" id="ListRecords">
+							<thead>
+								<tr>
+									<th> Name </th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="item center noContent">There is no content</td>
+								</tr>
+							</tbody>
+						</table>
+				</div>
+				<div class="PageIterator" id="pageNavPosition"></div>
 			</div>
-			<div class="PageIterator" id="pageNavPosition"></div>
 		</div>
 	</div>
 	

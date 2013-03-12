@@ -348,6 +348,7 @@
 			if(currentNodeList && currentNodeList.length > 0) {
 				for(var i = 0; i < currentNodeList.length; i++) {
 					var id = eXo.ecm.ECS.generateIdNodes(currentNodeList[i], currentNode.id);
+					var strTitle = currentNodeList[i].getAttribute("title");
 					var	strName	= currentNodeList[i].getAttribute("name");
 					var isUpload = currentNodeList[i].getAttribute("isUpload");
 					var nodeDriveName = currentNodeList[i].getAttribute("nodeDriveName");
