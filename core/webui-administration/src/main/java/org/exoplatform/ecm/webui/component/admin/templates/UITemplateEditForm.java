@@ -89,9 +89,8 @@ public class UITemplateEditForm extends UIForm {
       node.save() ;
       uiForm.reset() ;
       UITemplatesManager uiManager = uiForm.getAncestorOfType(UITemplatesManager.class) ;
-      UITemplateContainer uiTemplateContainer = uiForm.getAncestorOfType(UITemplateContainer.class) ;
-      UIPopupWindow uiPopupWindow = uiTemplateContainer.getChildById(UITemplatesManager.POPUP_TEMPLATE_ID) ;
-      uiPopupWindow.setRendered(false) ;
+      UIPopupWindow uiPopupWindow = uiManager.getChildById(UITemplatesManager.POPUP_TEMPLATE_ID) ;
+      uiPopupWindow.setShow(false) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
