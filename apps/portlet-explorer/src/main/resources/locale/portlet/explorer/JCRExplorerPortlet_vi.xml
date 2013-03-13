@@ -2041,12 +2041,12 @@
   -->
   <UITaggingForm>
     <label>
-      <names>Tên thẻ.</names>
-      <linked>Thẻ đã liên kết</linked>
+      <names>Tên thẻ:</names>
+      <linked>Thẻ đã liên kết:</linked>
       <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
-      <AddTag>Thêm thẻ</AddTag>
+      <AddTag>Thêm</AddTag>
       <Cancel>Đóng</Cancel>
     </action>
     <msg>
@@ -3207,7 +3207,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <tagName>Thêm nhãn</tagName>
+      <tagName>Thêm nhãn:</tagName>
       <relatedDocuments>Tài liệu liên quan</relatedDocuments>
     </label>
   </UITagForm>

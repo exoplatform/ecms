@@ -2031,12 +2031,12 @@
   -->
   <UITaggingForm>
     <label>
-      <names>Noms</names>
-      <linked>Tags liés</linked>
+      <names>Noms:</names>
+      <linked>Tags liés:</linked>
       <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
-      <AddTag>Ajouter des tags</AddTag>
+      <AddTag>Ajouter</AddTag>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -3192,7 +3192,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <tagName>Nom du tag</tagName>
+      <tagName>Nom du tag:</tagName>
       <relatedDocuments>Documents relatifs</relatedDocuments>
     </label>
   </UITagForm>
