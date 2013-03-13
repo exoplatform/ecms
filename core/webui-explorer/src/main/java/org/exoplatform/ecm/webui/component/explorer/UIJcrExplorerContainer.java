@@ -44,17 +44,13 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
-import org.exoplatform.web.application.JavascriptManager;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIApplication;
-import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIRightClickPopupMenu;
 import org.exoplatform.webui.core.model.SelectItemOption;
-import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.MonitorEvent;
 /**
  * Created by The eXo Platform SARL
  */
@@ -129,6 +125,10 @@ public class UIJcrExplorerContainer extends UIContainer {
       if (homePathBuf.indexOf("${userId}") >= 0) 
         homePathBuf = new StringBuffer(org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(homePathBuf.toString(),
                                                                                                     userId));
+      //Check to make sure new behavior will be also correct with the legacy data
+      //By default all the group drive will be point to Documents folder. 
+      //Therefore in the case spaces drives we no need to specify the nodepath or consider it is equals "/"
+      if(drive.getHomePath().startsWith("/Groups/spaces/")) nodePath = "/";
       if (nodePath != null && nodePath.length() > 0 && !nodePath.equals("/"))
         homePathBuf.append("/").append(nodePath);
       String homePath = homePathBuf.toString().replaceAll("//", "/");
