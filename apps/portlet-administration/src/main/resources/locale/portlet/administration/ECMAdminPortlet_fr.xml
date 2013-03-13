@@ -310,6 +310,7 @@
       <metadataName>Nom de la métadonnée</metadataName>
       <viewPermission>Permission</viewPermission>
       <permission>UIMetadataForm</permission>
+						<metadataLabel>Label</metadataLabel>
     </label>
     <tab>
       <label>
@@ -1137,6 +1138,7 @@
       <fileName-invalid>Caractères invalides détectés dans le nom</fileName-invalid>
       <permission-not-empty>Veuillez sélectionner une permission</permission-not-empty>
       <mustbe-add-tab>Vous devez ajouter au moins une barre d'outils</mustbe-add-tab>
+						<mustbe-add-permission>Please select permission for this view</mustbe-add-permission>
       <view-exist>Ce nom de vue existe déjà</view-exist>
     </msg>
     <label>
@@ -1205,7 +1207,7 @@
     <tab>
       <label>
         <UIViewForm>Vue</UIViewForm>
-								<UITabList>Barre d'outil</UITabList>
+								<UITabContainer>Barre d'outil</UITabContainer>
 								<UIViewPermissionContainer>Permission</UIViewPermissionContainer>
       </label>
     </tab>

@@ -88,7 +88,8 @@ public class UITabList extends UIPagingGrid {
   @Override
   public void refresh(int currentPage) throws Exception {
     List<Tab> tabList = new ArrayList<Tab>();
-    UIViewFormTabPane uiTabPane = getParent();
+    UITabContainer uiTabContainer = getParent();
+    UIViewFormTabPane uiTabPane = uiTabContainer.getParent();
     UIViewForm uiViewForm = uiTabPane.getChild(UIViewForm.class);
     if(isView_) {
       ManageViewService viewService = WCMCoreUtils.getService(ManageViewService.class);
@@ -127,11 +128,11 @@ public class UITabList extends UIPagingGrid {
   static  public class AddTabActionListener extends EventListener<UITabList> {
     public void execute(Event<UITabList> event) throws Exception {
       UITabList uiTabList = event.getSource();
-      UIViewContainer uiContainer = uiTabList.getAncestorOfType(UIViewContainer.class);
+      UITabContainer uiContainer = uiTabList.getParent();
       UITabForm uiTabForm = uiContainer.createUIComponent(UITabForm.class, null, null);
       uiContainer.initPopup(UITabList.TAPFORM_POPUP, uiTabForm, 760, 0);
-      UIViewFormTabPane uiTabPane = uiTabList.getParent();
-      uiTabPane.setSelectedTab(uiTabList.getId());
+      UIViewFormTabPane uiTabPane = uiContainer.getParent();
+      uiTabPane.setSelectedTab(uiContainer.getId());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
     }
   }
@@ -140,7 +141,8 @@ public class UITabList extends UIPagingGrid {
     public void execute(Event<UITabList> event) throws Exception {
       UITabList uiTabList = event.getSource();
       String tabName = event.getRequestContext().getRequestParameter(OBJECTID);
-      UIViewFormTabPane uiTabPane = uiTabList.getParent();
+      UITabContainer uiTabContainer = uiTabList.getParent();
+      UIViewFormTabPane uiTabPane = uiTabContainer.getParent();
       UIViewForm uiViewForm = uiTabPane.getChild(UIViewForm.class);
       uiViewForm.getTabMap().remove(tabName);
       uiTabList.refresh(uiTabList.getUIPageIterator().getCurrentPage());
@@ -152,9 +154,9 @@ public class UITabList extends UIPagingGrid {
   static  public class EditActionListener extends EventListener<UITabList> {
     public void execute(Event<UITabList> event) throws Exception {
       UITabList uiTabList = event.getSource();
-      UIViewContainer uiContainer = uiTabList.getAncestorOfType(UIViewContainer.class);
+      UITabContainer uiContainer = uiTabList.getParent();
       String tabName = event.getRequestContext().getRequestParameter(OBJECTID);
-      UIViewFormTabPane uiTabPane = uiTabList.getParent();
+      UIViewFormTabPane uiTabPane = uiContainer.getParent();
       UIViewForm uiViewForm = uiTabPane.getChild(UIViewForm.class);
       Tab tab = uiViewForm.getTabMap().get(tabName);
       UITabForm uiTabForm = uiContainer.createUIComponent(UITabForm.class, null, null);

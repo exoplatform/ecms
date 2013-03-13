@@ -358,6 +358,11 @@ public class UIViewForm extends UIForm implements UISelectable {
                                        ApplicationMessage.WARNING) ;
       throw new MessageException(message) ;
     }
+    if(permission == null || permission.length() == 0){
+      message = new ApplicationMessage("UIViewForm.msg.mustbe-add-permission", null,
+                                       ApplicationMessage.WARNING) ;
+      throw new MessageException(message) ;
+    }    
     String template = templateMap.get(getUIFormSelectBox(FIELD_TEMPLATE).getValue());
 
     List<Tab> tabList = new ArrayList<Tab>(tabMap_.values());

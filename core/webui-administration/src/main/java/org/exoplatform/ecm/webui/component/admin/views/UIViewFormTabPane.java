@@ -104,7 +104,7 @@ public class UIViewFormTabPane extends UITabPane {
 
   public UIViewFormTabPane() throws Exception {
     UIViewForm uiViewForm = addChild(UIViewForm.class, null, null) ;
-    addChild(UITabList.class, null, null);
+    addChild(UITabContainer.class, null, null);
     addChild(UIViewPermissionContainer.class, null, null);
     setSelectedTab(uiViewForm.getId()) ;
   }
@@ -123,7 +123,8 @@ public class UIViewFormTabPane extends UITabPane {
   }
   
   public void view(boolean isView) {
-    getChild(UITabList.class).view(isView);
+    UITabContainer uiContainer = getChild(UITabContainer.class);
+    uiContainer.getChild(UITabList.class).view(isView);
     getChild(UIViewPermissionContainer.class).view(isView);
   }  
   
