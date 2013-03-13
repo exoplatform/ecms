@@ -19,6 +19,7 @@ package org.exoplatform.services.wcm.search.connector;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
+import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.wcm.search.QueryCriteria;
@@ -76,7 +77,7 @@ public class PageSearchServiceConnector extends BaseSearchServiceConnector {
   }
   
   @Override
-  protected String getPath(DriveData driveData, ResultNode node) throws Exception {
+  protected String getPath(DriveData driveData, ResultNode node, SearchContext context) throws Exception {
     return node.getUserNavigationURI();
   }
 

@@ -70,15 +70,6 @@ public abstract class BaseContentSearchServiceConnector extends BaseSearchServic
   }
 
   @Override
-  protected String getPath(DriveData driveData, ResultNode node) throws Exception {
-    String subPath = node.getPath().substring(driveData.getHomePath().length());
-    if (!subPath.startsWith("/")) {
-      subPath = '/' + subPath;
-    }
-    return '/' + driveData.getName() + subPath;
-  }
-  
-  @Override
   protected String getFileType(ResultNode node) throws Exception {
     return org.exoplatform.services.cms.impl.Utils.getNodeTypeIcon(node, "").
             replace(".", "").replace("/", "").replace("\\","").replace(".", "");
