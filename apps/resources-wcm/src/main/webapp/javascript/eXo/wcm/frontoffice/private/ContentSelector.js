@@ -144,7 +144,7 @@
 			}
 			treeHTML += 		'<a title="'+decodeURIComponent(strName)+'"href="javascript:void(0);" class="nodeIcon" onclick="eXo.ecm.ECS.renderBreadcrumbs(this);eXo.ecm.ECS.listRootFolder(this);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
 			treeHTML +=				'<i class="uiIcon16x16FolderDefault" title="acme"></i>';
-			treeHTML += 			'<span class="nodeName">';
+			treeHTML += 			'<span class="nodeName"> ';
 			treeHTML += 				decodeURIComponent(strName);
 			treeHTML +=				'</span>';	
 			treeHTML +=			'</a>';
@@ -332,7 +332,7 @@
 					treeHTML +=			'<a  title="'+ decodeURIComponent(strTitle) +'" href="javascript:void(0);" class="nodeIcon" name="'+decodeURIComponent(strName)+'" id="'+id +'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
 				}
 				treeHTML +=				'<i class="' + nodeTypeCssClass + '"></i>';
-				treeHTML += 			'<span class="nodeName">';
+				treeHTML += 			'<span class="nodeName"> ';
 				treeHTML += 				decodeURIComponent(strTitle);
 				treeHTML +=				'</span>';	
 				treeHTML += 		'</a>';
@@ -364,7 +364,7 @@
 						treeHTML +=			'<a  title="'+decodeURIComponent(strTitle)+'" href="javascript:void(0);" class="nodeIcon" name="'+decodeURIComponent(strName)+'" id="'+id + '" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
 					}
 					treeHTML +=				'<i class="' + nodeTypeCssClass + '"></i>';
-					treeHTML += 			'<span class="nodeName">';
+					treeHTML += 			'<span class="nodeName"> ';
 					treeHTML += 				decodeURIComponent(strTitle);
 					treeHTML +=				'</span>';	
 					treeHTML += 		'</a>';
@@ -535,13 +535,13 @@
 				} 
 				var tdNoContent = tblRWS.tBodies[0].insertRow(0).insertCell(0);
 				tdNoContent.innerHTML = "There is no content";
-				tdNoContent.className = "Item TRNoContent";
+				tdNoContent.className = "item noContent";
 				tdNoContent.setAttribute("colspan",3);
 				tdNoContent.userLanguage = "UserLanguage.NoContent";	
 				document.getElementById("pageNavPosition").innerHTML = "";
 			} else {
 				var container = gj(rightWS).find('div.ActionIconsContainer:first')[0];
-				container.innerHTML = "<div class=\"NoContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div>";
+				container.innerHTML = "<div class=\"noContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div>";
 				document.getElementById("pageNavPosition").innerHTML = "";
 			}
 			return;
@@ -650,7 +650,7 @@
 		if(!list || list.length <= 0) {
 			var tdNoContent = tblRWS.tBodies[0].insertRow(0).insertCell(0);
 			tdNoContent.innerHTML = "There is no content";
-			tdNoContent.className = "Item TRNoContent";
+			tdNoContent.className = "item noContent";
 			tdNoContent.userLanguage = "UserLanguage.NoContent";
 			document.getElementById("pageNavPosition").innerHTML = "";
 			return;
@@ -693,7 +693,7 @@
 			var rowTmp = tblRWS.tBodies[0].insertRow(0);
 			var tdNoContent = rowTmp.insertCell(0);
 			tdNoContent.innerHTML = "There is no content";
-			tdNoContent.className = "Item TRNoContent";
+			tdNoContent.className = "item noContent";
 			tdNoContent.userLanguage = "UserLanguage.NoContent";
 			document.getElementById("pageNavPosition").innerHTML = "";
 			return;
