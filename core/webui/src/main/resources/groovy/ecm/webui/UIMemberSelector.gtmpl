@@ -1,40 +1,63 @@
-<%
-	import	org.exoplatform.webui.core.UIBreadcumbs; 
-	import	org.exoplatform.webui.core.UITree;
-	List<String> groups = uicomponent.getListGroup(); 
+<% 
+  import  org.exoplatform.webui.core.UIBreadcumbs; 
+  import  org.exoplatform.webui.core.UITree; 
+  import org.exoplatform.ecm.webui.selector.UIAnyPermission;
 %>
 <div class="uiGroupSelector uiGroupMembershipSelector uiMemberSelector resizable" id="$uicomponent.id">
 	<div class="uiGrayLightBox uiBox noRounded "><% uicomponent.renderChild(UIBreadcumbs.class); %></div>
-    <div class="row-fluid" >
-	<div class="span6">
-		<div class="uiBox selectGroup noRounded">
-			<h5 class="title"><%=_ctx.appRes("UIGroupSelector.title.selectGroupMember")%></h5>
-			<%uicomponent.renderChild(UITree.class);%>
+	<%
+	  if (uicomponent.isShowAnyPermission()) uicomponent.renderChild(UIAnyPermission.class);
+	%>
+	<div class="row-fluid" >
+		<div class="span6">
+			<div class="uiBox selectGroup noRounded">
+				<h5 class="title"><%=_ctx.appRes(uicomponent.id+".label.selectGroup")%></h5>
+				<%uicomponent.renderChild(UITree.class);%>
+			</div>
 		</div>
+		<div class="span6">
+			<div class="uiBox noRounded childGoup">
+				<h5 class="title">
+					<%
+					String key = uicomponent.id+".label.selectUser";
+					if(uicomponent.isSelectedMembership) key = uicomponent.id+".label.selectMembership";
+				  %>
+				  <%=_ctx.appRes(key)%>
+				</h5>
+				
+				<div class="uiContentBox">
+				  <ul>
+				  <%                
+				  boolean even = true ;		      
+				  if(uicomponent.getCurrentGroup() != null) {
+					if (uicomponent.isSelectedUser) {
+						  for(user in uicomponent.getUsers()){ 
+							even = !even ;
+				  %>
+							<li>
+							  <span class="uiIconMiniArrowRight"></span>
+							  <a lass="ItemIcon" href="<%=uicomponent.event('SelectMembership', user.getUserName())%>"><%=user.getUserName()%></a>	
+							</li>
+				  <% 	
+					  }
+						} else if (uicomponent.isSelectedMembership) {
+							for(member in uicomponent.getListMemberhip()){
+							even = !even ;
+				  %>
+							<li>
+							  <span class="uiIconMiniArrowRight"></span>
+							  <a class="ItemIcon" href="<%=uicomponent.event("SelectMembership", member)%>" rel="tooltip" data-placement="bottom" title="$member">$member</a>
+							</li>
+
+				  <%					        
+							}	        
+						}		      	
+				  } 
+				  %>
+				  </ul>
+				</div>
+			</div>
+		</div>
+		
 	</div>
-	<div class="span6">		
-      <div class="uiBox noRounded childGoup">
-        <h5 class="title"><%=_ctx.appRes("UIGroupSelector.title.selectChildGroup")%></h5>
-        <div class="uiContentBox">
-          <ul>
-          <%
-            if(groups != null && groups.size() > 0) {
-            for(member in groups){
-          %>
-            <li>
-              <span class="uiIconMiniArrowRight"></span>
-              <a href="<%=uicomponent.event("SelectMembership", member)%>" title="$member">$member</a>
-            </li>
-            <%}%>
-          <% } else if( groups != null && groups.size() == 0 ) { %>
-            <li>
-              <span class="uiIconMiniArrowRight"></span>
-              <a href="<%= uicomponent.event("SelectMembership",uicomponent.getCurrentGroup().getId()) %>"><%=_ctx.appRes("UIGroupSelector.title.addGroupButton")%></a>
-            </li>
-          <% } %> 
-          </ul>
-        </div>
-      </div>
-	</div>      
-    </div>
 </div> 		
