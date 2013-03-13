@@ -303,6 +303,7 @@
       <metadataName>Metadata Name</metadataName>
       <viewPermission>Permission</viewPermission>
       <permission>UIMetadataForm</permission>
+						<metadataLabel>Label</metadataLabel>
     </label>
     <tab>
       <label>
@@ -1131,6 +1132,7 @@
       <fileName-invalid>The view name contains some invalid characters.</fileName-invalid>
       <permission-not-empty>Please select a permission for the view.</permission-not-empty>      
       <mustbe-add-tab>Please add a tab.</mustbe-add-tab>
+						<mustbe-add-permission>Please select permission for this view</mustbe-add-permission>
       <view-exist>The view name already exists.</view-exist>
     </msg>
     <label>
@@ -1207,7 +1209,7 @@
   <UIViewFormTabPane>
     <tab>
       <label>
-        <UITabList>Action</UITabList>
+        <UITabContainer>Action</UITabContainer>
         <UIViewForm>Setting</UIViewForm>
         <UIViewPermissionContainer>Permission</UIViewPermissionContainer>    
       </label>

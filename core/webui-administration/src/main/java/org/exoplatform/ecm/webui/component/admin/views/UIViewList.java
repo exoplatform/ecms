@@ -233,7 +233,8 @@ public class UIViewList extends UIPagingGrid {
       }
       uiViewContainer.initPopup(UIViewList.ST_EDIT, viewTabPane) ;
       uiPerList.refresh(uiPerList.getUIPageIterator().getCurrentPage());
-      UITabList uiTab = viewTabPane.getChild(UITabList.class);
+      UITabContainer uiTabContainer = viewTabPane.getChild(UITabContainer.class);
+      UITabList uiTab = uiTabContainer.getChild(UITabList.class);
       uiTab.setViewName(viewName);
       uiTab.refresh(uiTab.getUIPageIterator().getCurrentPage());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiViewContainer) ;
@@ -260,7 +261,8 @@ public class UIViewList extends UIPagingGrid {
       uiPerContainer.setRenderedChild(UIViewPermissionList.class);
       uiViewContainer.initPopup(UIViewList.ST_VIEW, viewTabPane) ;
       uiPerList.refresh(uiPerList.getUIPageIterator().getCurrentPage());
-      UITabList uiTab = viewTabPane.getChild(UITabList.class);
+      UITabContainer uiTabContainer = viewTabPane.getChild(UITabContainer.class);
+      UITabList uiTab = uiTabContainer.getChild(UITabList.class);
       uiTab.setViewName(viewName);
       uiTab.setActions(new String[] {});
       uiTab.configure("tabName", UITabList.TAB_BEAN_FIELD, null) ;

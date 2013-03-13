@@ -61,6 +61,7 @@ public class UIMetadataForm extends UIFormTabPane implements UISelectable {
   final static public String DIALOG_TEMPLATE = "dialogTemplate" ;
   final static public String VIEW_TEMPLATE = "viewTemplate" ;
   final static public String METADATA_NAME = "metadataName" ;
+  final static public String METADATA_LABEL = "metadataLabel" ;
   final static public String VIEW_PERMISSION = "viewPermission" ;
   final static public String METADATA_TAB = "metadataTypeTab" ;
   final static public String DIALOG_TAB = "dialogTab" ;
@@ -77,6 +78,7 @@ public class UIMetadataForm extends UIFormTabPane implements UISelectable {
     uiMetadataType.addUIFormInput(new UIFormStringInput(METADATA_NAME,METADATA_NAME, null)) ;
     uiMetadataType.addUIFormInput(new UIFormStringInput(VIEW_PERMISSION, VIEW_PERMISSION, null).
                                   addValidator(MandatoryValidator.class).setEditable(false)) ;
+    uiMetadataType.addUIFormInput(new UIFormStringInput(METADATA_LABEL,METADATA_LABEL, null)) ;
     uiMetadataType.setActionInfo(VIEW_PERMISSION, new String[] {"AddPermission"}) ;
     addUIComponentInput(uiMetadataType) ;
     setSelectedTab(uiMetadataType.getId()) ;
@@ -101,10 +103,11 @@ public class UIMetadataForm extends UIFormTabPane implements UISelectable {
     repository_ = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
     workspaceName_ = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceWorkspace() ;
     getUIStringInput(METADATA_NAME).setValue(metadata) ;
+    getUIStringInput(METADATA_LABEL).setValue(metadataService.getMetadataLabel(metadata)) ;
     String dialogTemplate = metadataService.getMetadataTemplate(metadata, true) ;
     String viewTemplate = metadataService.getMetadataTemplate(metadata, false) ;
     String role = metadataService.getMetadataRoles(metadata, true) ;
-    getUIStringInput(METADATA_NAME).setEditable(false) ;
+    getUIStringInput(METADATA_NAME).setDisabled(true);
     getUIStringInput(VIEW_PERMISSION).setValue(role) ;
     getUIFormTextAreaInput(DIALOG_TEMPLATE).setValue(dialogTemplate) ;
     getUIFormTextAreaInput(VIEW_TEMPLATE).setValue(viewTemplate) ;
@@ -122,12 +125,14 @@ public class UIMetadataForm extends UIFormTabPane implements UISelectable {
       if(viewTemplate == null) viewTemplate = "" ;
       if(!metadataService.hasMetadata(uiForm.metadataName_)) uiForm.isAddNew_ = true ;
       else uiForm.isAddNew_ = false ;
+      String metaLabel = uiForm.getUIStringInput(METADATA_LABEL).getValue();
       JCRResourceResolver resourceResolver = new JCRResourceResolver(uiForm.workspaceName_);
       TemplateService templateService = uiForm.getApplicationComponent(TemplateService.class) ;
       String path = metadataService.addMetadata(uiForm.metadataName_,
                                                 true,
                                                 roles,
                                                 dialogTemplate,
+                                                metaLabel,
                                                 uiForm.isAddNew_);
       if (path != null)
         templateService.invalidateTemplate(path, resourceResolver);
@@ -135,6 +140,7 @@ public class UIMetadataForm extends UIFormTabPane implements UISelectable {
                                          false,
                                          roles,
                                          viewTemplate,
+                                         metaLabel,
                                          uiForm.isAddNew_);
       if (path != null)
         templateService.invalidateTemplate(path, resourceResolver);

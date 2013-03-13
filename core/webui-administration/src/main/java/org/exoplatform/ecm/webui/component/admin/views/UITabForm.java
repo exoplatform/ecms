@@ -96,14 +96,14 @@ public class UITabForm extends UIForm {
   static public class SaveActionListener extends EventListener<UITabForm> {
     public void execute(Event<UITabForm> event) throws Exception {
       UITabForm uiTabForm = event.getSource();
-      UIViewContainer uiContainer = uiTabForm.getAncestorOfType(UIViewContainer.class);
-      UIViewFormTabPane viewFormTabPane = uiContainer.findFirstComponentOfType(UIViewFormTabPane.class);
+      UITabContainer uiContainer = uiTabForm.getAncestorOfType(UITabContainer.class);
+      UIViewFormTabPane viewFormTabPane = uiContainer.getParent();
       String tabName = uiTabForm.getUIStringInput(FIELD_NAME).getValue() ;
       UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class) ;
       if(tabName == null || tabName.trim().length() == 0) {
         viewFormTabPane.setSelectedTab(uiTabForm.getId()) ;
         uiApp.addMessage(new ApplicationMessage("UITabForm.msg.tab-name-error", null, ApplicationMessage.WARNING)) ;
-        
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiTabForm);
         return ;
       }
       String[] arrFilterChar = {"&", "$", "@", ",", ":","]", "[", "*", "%", "!"} ;
@@ -136,7 +136,7 @@ public class UITabForm extends UIForm {
       uiPopup.setShow(false);
       uiPopup.setRendered(false);
       viewFormTabPane.setSelectedTab(viewFormTabPane.getSelectedTabId()) ;
-      UITabList uiTabList = viewFormTabPane.getChild(UITabList.class);
+      UITabList uiTabList = uiContainer.getChild(UITabList.class);
       uiTabList.refresh(uiTabList.getUIPageIterator().getCurrentPage());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
     }
@@ -145,12 +145,12 @@ public class UITabForm extends UIForm {
   static public class CancelActionListener extends EventListener<UITabForm> {
     public void execute(Event<UITabForm> event) throws Exception {
       UITabForm uiTabForm = event.getSource();
-      UIViewContainer uiContainer = uiTabForm.getAncestorOfType(UIViewContainer.class);
-      UIViewFormTabPane uiTabPane = uiContainer.findFirstComponentOfType(UIViewFormTabPane.class);
+      UITabContainer uiContainer = uiTabForm.getAncestorOfType(UITabContainer.class);
+      UIViewFormTabPane uiTabPane = uiContainer.getParent();
       UIPopupWindow uiPopup = uiContainer.getChildById(UITabList.TAPFORM_POPUP);
       uiPopup.setShow(false);
       uiPopup.setRendered(false);
-      uiTabPane.setSelectedTab(uiTabPane.getChild(UITabList.class).getId());
+      uiTabPane.setSelectedTab(uiContainer.getId());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
     }
   }

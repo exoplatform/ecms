@@ -63,6 +63,26 @@ public interface MetadataService {
                             String content,
                             boolean isAddNew) throws Exception;  
 
+  /**
+   * Add new nodetype and set property  EXO_ROLES_PROP, EXO_TEMPLATE_FILE_PROP
+   * for dialog template node or view template node if node doesn't exist
+   * Set property  EXO_ROLES_PROP, EXO_TEMPLATE_FILE_PROP
+   * for dialog template node or view template node if node exists
+   * @param nodetype    Node name for processing
+   * @param isDialog    true for dialog template
+   * @param role        permission
+   * @param content     content of template
+   * @param label       lable of metadata
+   * @param isAddNew    false if nodetype exist in repository, true if not
+   * @return path to node if node exist, otherwise return null
+   * @throws Exception
+   */
+  public String addMetadata(String nodetype,
+                            boolean isDialog,
+                            String role,
+                            String content,
+                            String label,
+                            boolean isAddNew) throws Exception;
  
   /**
    * Remove node named nodetype below baseMetadataPath_

@@ -183,6 +183,18 @@ public class MetadataServiceImpl implements MetadataService, Startable{
                             String role,
                             String content,
                             boolean isAddNew) throws Exception {
+    return addMetadata(nodetype, isDialog, role, content, nodetype, isAddNew);
+  } 
+  
+  /**
+   * {@inheritDoc}
+   */
+  public String addMetadata(String nodetype,
+                            boolean isDialog,
+                            String role,
+                            String content,
+                            String label,
+                            boolean isAddNew) throws Exception {
     Session session = getSession();
     Node metadataHome = (Node)session.getItem(baseMetadataPath_);
     String path = null;
@@ -190,19 +202,25 @@ public class MetadataServiceImpl implements MetadataService, Startable{
       if(isDialog) {
         Node dialog1 = metadataHome.getNode(nodetype).getNode(DIALOGS).getNode(DIALOG1);
         path = templateService.updateTemplate(dialog1, new ByteArrayInputStream(content.getBytes()), role.split(";"));
+        metadataHome.getNode(nodetype).setProperty("label", label);
+        metadataHome.save();
       } else {
         Node view1 = metadataHome.getNode(nodetype).getNode(VIEWS).getNode(VIEW1);
         path = templateService.updateTemplate(view1, new ByteArrayInputStream(content.getBytes()), role.split(";"));
+        metadataHome.getNode(nodetype).setProperty("label", label);
+        metadataHome.save();
       }
       return path;
     } 
     Node metadata = null;
     if(metadataHome.hasNode(nodetype)) metadata = metadataHome.getNode(nodetype);
     else metadata = metadataHome.addNode(nodetype, NT_UNSTRUCTURED);
+    metadata.setProperty("label", label);
+    metadataHome.save();
     addTemplate(metadata, role, new ByteArrayInputStream(content.getBytes()), isDialog);
     metadataHome.save();
     return metadata.getPath();
-  }  
+  }    
 
   /**
    * Add new node named nodetype
@@ -381,7 +399,11 @@ public class MetadataServiceImpl implements MetadataService, Startable{
    */
   public String getMetadataLabel(String metaName) throws Exception {
     if(getMetadata(metaName) != null) {
-      return getMetadata(metaName).getProperty("label").getString();
+      try {
+        return getMetadata(metaName).getProperty("label").getString();
+      } catch(PathNotFoundException pne) {
+        return metaName;
+      }
     }
     return null;
   }
