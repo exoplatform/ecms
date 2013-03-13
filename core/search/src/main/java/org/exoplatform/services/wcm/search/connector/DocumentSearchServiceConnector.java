@@ -16,14 +16,37 @@
  */
 package org.exoplatform.services.wcm.search.connector;
 
+import java.net.URLDecoder;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.jcr.RepositoryException;
 
+import org.apache.commons.lang.StringUtils;
+import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.portal.config.DataStorage;
+import org.exoplatform.portal.config.UserPortalConfig;
+import org.exoplatform.portal.config.UserPortalConfigService;
+import org.exoplatform.portal.config.model.Application;
+import org.exoplatform.portal.config.model.ModelObject;
+import org.exoplatform.portal.mop.SiteKey;
+import org.exoplatform.portal.mop.SiteType;
+import org.exoplatform.portal.mop.navigation.NavigationContext;
+import org.exoplatform.portal.mop.navigation.NavigationService;
+import org.exoplatform.portal.mop.navigation.NodeContext;
+import org.exoplatform.portal.mop.navigation.NodeModel;
+import org.exoplatform.portal.mop.navigation.Scope;
+import org.exoplatform.portal.mop.user.UserNavigation;
+import org.exoplatform.portal.mop.user.UserPortalContext;
+import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.search.ResultNode;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -68,4 +91,88 @@ public class DocumentSearchServiceConnector extends BaseContentSearchServiceConn
     //do not accept nt:file
     return node.isNodeType(NodetypeConstant.NT_FILE) ? null : node;
   }
+  
+  /**
+   * {@inheritDoc}
+   * @throws RepositoryException 
+   */
+  @Override
+  protected String getPath(DriveData driveData, ResultNode node, SearchContext context) throws Exception {
+    String url = BaseSearchServiceConnector.NONE_NAGVIGATION;
+    if(context != null)
+      try {
+        String handler = WCMCoreUtils.getPortalName();
+        UserPortalConfig prc = getUserPortalConfig();
+        SiteKey siteKey = SiteKey.portal(prc.getPortalConfig().getName());
+        if(siteKey != null) {
+          if(StringUtils.isNotBlank(siteKey.getName())) {
+            String pageName = getPageName(siteKey);
+            if(StringUtils.isNotBlank(pageName)) {
+              siteKey = SiteKey.portal(context.getSiteName() != null ? context.getSiteName():BaseSearchServiceConnector.DEFAULT_SITENAME);
+              pageName = getPageName(siteKey);
+            }
+            url = "/" + handler + context.handler(handler).
+                          lang("").
+                          siteName(siteKey.getName()).
+                          siteType(SiteType.PORTAL.getName()).
+                          path(pageName+"?path=" +driveData.getName() + "/" + node.getPath()).renderLink();
+          }
+        }
+      } catch (Exception e) {
+        LOG.info("Could not build the link of event/task " + e.getMessage());
+        //e.printStackTrace();
+      }
+    return URLDecoder.decode(url, "UTF-8");
+  }
+  
+  private String getPageName(SiteKey siteKey) throws Exception {
+    NavigationService navService = WCMCoreUtils.getService(NavigationService.class);
+    NavigationContext nav = navService.loadNavigation(siteKey);
+    NodeContext<NodeContext<?>> parentNodeCtx = navService.loadNode(NodeModel.SELF_MODEL, nav, Scope.ALL, null);
+    if (parentNodeCtx.getSize() >= 1) {
+      Collection<NodeContext<?>> children = parentNodeCtx.getNodes();
+      if (siteKey.getType() == SiteType.GROUP) {
+        children = parentNodeCtx.get(0).getNodes();
+      }
+      Iterator<NodeContext<?>> it = children.iterator();
+      NodeContext<?> child = null;
+      while (it.hasNext()) {
+        child = it.next();
+        if (hasPortlet(child, BaseSearchServiceConnector.PORTLET_NAME)) {
+          return child.getName();
+        }
+      }
+    }
+    return "";
+  }
+  
+  private static UserPortalConfig getUserPortalConfig() throws Exception {
+    UserPortalConfigService userPortalConfigSer = WCMCoreUtils.getService(UserPortalConfigService.class);
+    UserPortalContext NULL_CONTEXT = new UserPortalContext() {
+      public ResourceBundle getBundle(UserNavigation navigation) {
+        return null;
+      }
+      public Locale getUserLocale() {
+        return Locale.ENGLISH;
+      }
+    };
+    String remoteId = ConversationState.getCurrent().getIdentity().getUserId() ;
+    UserPortalConfig userPortalCfg = userPortalConfigSer.
+        getUserPortalConfig(userPortalConfigSer.getDefaultPortal(), remoteId, NULL_CONTEXT);
+    return userPortalCfg;
+  }
+  
+  private boolean hasPortlet(NodeContext<?> pageCt, String plName) throws Exception {
+    if (plName == null) return false;
+    DataStorage ds = WCMCoreUtils.getService(DataStorage.class);
+    for (ModelObject mo : ds.getPage(pageCt.getState().getPageRef().format()).getChildren()) {
+      if (mo instanceof Application<?>) {
+        if (ds.getId(((Application<?>)mo).getState()).contains(plName)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+  
 }

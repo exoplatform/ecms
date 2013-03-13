@@ -61,6 +61,12 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
   
   protected static final Log LOG = ExoLogger.getLogger(BaseSearchServiceConnector.class.getName());
   
+  public static final String DEFAULT_SITENAME = "intranet";
+  public static final String PAGE_NAGVIGATION = "documents";
+  public static final String NONE_NAGVIGATION = "#";
+  public static final String PORTLET_NAME = "FileExplorerPortlet";
+  
+  
   private static final long KB = 1024L;
   private static final long MB = 1024L*KB;
   private static final long GB = 1024L*MB;
@@ -86,16 +92,16 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
     try {
       if (sites == null || sites.size() == 0) {
         criteria.setSiteName(null);
-        ret = convertResult(searchNodes(criteria), limit);
+        ret = convertResult(searchNodes(criteria), limit, context);
       } else if (sites.size() == 1) {
         criteria.setSiteName(sites.iterator().next());
-        ret = convertResult(searchNodes(criteria), limit);
+        ret = convertResult(searchNodes(criteria), limit, context);
       } else {//search in many sites
         Iterator<String> iter = sites.iterator();
         criteria.setOffset(0);
         while (iter.hasNext() && limit > 0) {
           criteria.setSiteName(iter.next());
-          List<SearchResult> ret1 = convertResult(searchNodes(criteria), limit);
+          List<SearchResult> ret1 = convertResult(searchNodes(criteria), limit, context);
           //0 ----- offset ------ offset + limit
           if (ret1.size() <= offset) {
             offset-= ret1.size();
@@ -147,7 +153,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
    * @param pageList
    * @return
    */
-  protected List<SearchResult> convertResult(AbstractPageList<ResultNode> pageList, int limit) {
+  protected List<SearchResult> convertResult(AbstractPageList<ResultNode> pageList, int limit, SearchContext context) {
     List<SearchResult> ret = new ArrayList<SearchResult>();
     try {
       if (pageList != null) {
@@ -163,7 +169,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
               Calendar date = getDate(retNode);
               EcmsSearchResult result = 
               //  new SearchResult(url, title, excerpt, detail, imageUrl, date, relevancy);
-                  new EcmsSearchResult(getPath(driveData, retNode), 
+                  new EcmsSearchResult(getPath(driveData, retNode, context), 
                                        retNode.getTitle(), 
                                        retNode.getExcerpt(), 
                                        driveData.getName() + fileSize(retNode) + formatDate(date), 
@@ -303,7 +309,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
    * @return the expected path
    * @throws Exception
    */
-  protected abstract String getPath(DriveData driveData, ResultNode node) throws Exception;
+  protected abstract String getPath(DriveData driveData, ResultNode node, SearchContext context) throws Exception;
   
   /**
    * gets the file type
