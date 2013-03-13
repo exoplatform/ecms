@@ -74,7 +74,7 @@
 
 <div class="uiVersionInfo resizable" id="$uicomponent.id">
 	<div class="uiBox noRounded">
-		<h5 class="title" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getCurrentNode().getName()%>">
+		<h5 class="title">
 			<i class="uiIconFile uiIconLightGray"></i> <%=uicomponent.getCurrentNode().getName()%>
 		</h5>
 		<table class="uiGrid table no-border-cell table-hover table-striped">
