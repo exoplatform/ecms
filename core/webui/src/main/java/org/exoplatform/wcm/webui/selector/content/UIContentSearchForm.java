@@ -37,11 +37,13 @@ import org.exoplatform.services.wcm.search.ResultNode;
 import org.exoplatform.services.wcm.search.SiteSearchService;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.wcm.webui.selector.content.one.UIContentSelectorOne;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
+import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
@@ -123,7 +125,7 @@ public class UIContentSearchForm extends UIForm {
 
     setActions(new String[] {"SearchWebContent"} );
   }
-
+  
   private List<String> getPortalNames() throws Exception {
     List<String> portalNames = new ArrayList<String>();
     String currentPortalName = Util.getPortalRequestContext().getPortalOwner();
@@ -139,8 +141,9 @@ public class UIContentSearchForm extends UIForm {
       UIContentSearchForm contentSearchForm = event.getSource();
       UIContentSelector contentSelector = contentSearchForm.getParent();
       contentSearchForm.setCheckedRadioId(event.getRequestContext().getRequestParameter(CHECKED_RADIO_ID));
-      contentSelector.initMetadataPopup();
-      event.getRequestContext().addUIComponentToUpdateByAjax(contentSelector);
+      UIContainer uiContainer = contentSearchForm.getAncestorOfType(UIContentSelectorOne.class).getAncestorOfType(UIContainer.class);
+      contentSelector.initMetadataPopup(uiContainer);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
     }
   }
 
@@ -149,8 +152,9 @@ public class UIContentSearchForm extends UIForm {
       UIContentSearchForm contentSearchForm = event.getSource();
       UIContentSelector contentSelector = contentSearchForm.getParent();
       contentSearchForm.setCheckedRadioId(event.getRequestContext().getRequestParameter(CHECKED_RADIO_ID));
-      contentSelector.initNodeTypePopup();
-      event.getRequestContext().addUIComponentToUpdateByAjax(contentSelector);
+      UIContainer uiContainer = contentSearchForm.getAncestorOfType(UIContentSelectorOne.class).getAncestorOfType(UIContainer.class);
+      contentSelector.initNodeTypePopup(uiContainer);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
     }
   }
 
