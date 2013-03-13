@@ -59,6 +59,15 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 		return maxCols;
 	}
+	
+  function Replace(expr,a,b) {
+   var i=expr.indexOf(a);
+   var inter=expr.substring(i,expr.length);
+   var j=inter.indexOf('px');
+   var long=j-a.length;
+   expr=expr.substring(0,i+a.length)+b+expr.substring(i+a.length+long,expr.length);
+      return expr
+   }
 
 	function tableDialog( editor, command )
 	{
@@ -188,9 +197,12 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 						var cols = parseInt( info.txtCols, 10 ) || 0;
 						if (rows > 0 && cols > 0) {
 							var cellNumber = rows * cols;
-							var styleString = 'border:' + info.txtBorder + 'px solid #000000; padding:' + info.txtCellPad + 'px;';
-							for (var i = 0; i < cellNumber; i++) {
-								this._.selectedElement.$.getElementsByTagName('td')[i].style.cssText = styleString;
+							
+								for (var i = 0; i < cellNumber; i++) {
+							       var styleString = this._.selectedElement.$.getElementsByTagName('td')[i].style.cssText;
+								   styleString = Replace (styleString,"border: ",info.txtBorder);
+								   styleString = Replace (styleString,"padding: ",info.txtCellPad);
+								   this._.selectedElement.$.getElementsByTagName('td')[i].style.cssText = styleString;
 							}
 						}
 					}
