@@ -41,7 +41,7 @@
 											if(viewCount < 8) {
 									%>
 								
-									<button type="button" onclick="<%=uicomponent.event("ChangeView", viewStyle)%>" class="btn $activeClass" rel="tooltip" data-placement="bottom" title="$label"><i class="$defaultView $viewIcon"></i></button>
+									<a onclick="<%=uicomponent.event("ChangeView", viewStyle)%>" class="btn $activeClass"><i rel="tooltip" data-placement="bottom" title="$label" class="$defaultView $viewIcon"></i></a>
 								
 										<%  } else {
 											extendMap.put(viewStyle, label + ";" + viewIcon);
