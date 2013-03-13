@@ -33,6 +33,7 @@ import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.mail.MailService;
 import org.exoplatform.services.organization.Membership;
 import org.exoplatform.services.organization.MembershipHandler;
 import org.exoplatform.services.organization.OrganizationService;
@@ -41,6 +42,7 @@ import org.exoplatform.services.organization.UserHandler;
 import org.exoplatform.services.wcm.extensions.publication.PublicationManager;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.Lifecycle;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.State;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS
@@ -90,21 +92,12 @@ public class PostUpdateStateEventListener extends Listener<CmsService, Node> {
 
       Lifecycle lifecycle = publicationManager.getLifecycle(nodeLifecycle);
       Iterator<State> states = lifecycle.getStates().iterator();
-      State prevState = null;
       while (states.hasNext()) {
         State state = states.next();
         if (state.getState().equals(currentState)) {
-          sendMail(node, state, userId, false, false);
-          if ("published".equals(state.getState()) && prevState != null) {
-            sendMail(node, prevState, userId, false, true);
-          }
-          if (states.hasNext()) {
-            State nextState = states.next();
-            sendMail(node, nextState, userId, true, false);
-            break;
-          }
+          sendMail(node, state, userId);
+          break;
         }
-        prevState = state;
       }
 
       try {
@@ -124,9 +117,7 @@ public class PostUpdateStateEventListener extends Listener<CmsService, Node> {
 
   private void sendMail(Node node,
                         State state,
-                        String userId,
-                        boolean isNextState,
-                        boolean isPublished) throws Exception {
+                        String userId) throws Exception {
     // if (log.isInfoEnabled()) {
     // if (isNextState)
     // log.info("### Next State is "+state.getState());
@@ -139,11 +130,10 @@ public class PostUpdateStateEventListener extends Listener<CmsService, Node> {
       String group = membership[1];
       // ExoContainer container = ExoContainerContext.getCurrentContainer();
       // ExoContainer container = RootContainer.getInstance();
-      ExoContainer container = RootContainer.getInstance().getPortalContainer("ecmdemo");
-      OrganizationService orgService = (OrganizationService) container.getComponentInstanceOfType(OrganizationService.class);
+      OrganizationService orgService = WCMCoreUtils.getService(OrganizationService.class);
       UserHandler userh = orgService.getUserHandler();
-      // MailService mailService =
-      // (MailService)container.getComponentInstanceOfType(MailService.class);
+      MailService mailService = WCMCoreUtils.getService(MailService.class);
+      
       MembershipHandler msh = orgService.getMembershipHandler();
       List<User> users = userh.findUsersByGroup(group).getAll();
       User currentUser = null;
@@ -164,20 +154,9 @@ public class PostUpdateStateEventListener extends Listener<CmsService, Node> {
             String from = "\"" + username + "\" <exocontent@exoplatform.com>";
             String to = user.getEmail();
             String subject, body;
-            String editUrl = "http://localhost:8080/ecmdemo/private/classic/siteExplorer/repository/collaboration"
-                + node.getPath();
-            if (isPublished) {
-              subject = "[eXo Content] Published : (published) " + node.getName();
-            } else {
-              if (isNextState) {
-                subject = "[eXo Content] Request : (" + state.getState() + ") " + node.getName();
-              } else {
-                subject = "[eXo Content] Updated : (" + state.getState() + ") " + node.getName();
-              }
-            }
-            body = "[ <a href=\"" + editUrl + "\">" + editUrl + "</a> ]<br/>" + "updated by "
-                + username;
-            // mailService.sendMessage(from, to, subject, body);
+            subject = "[eXo Content] Updated : (" + state.getState() + ") " + node.getName();
+            body = "Node " + node.getPath()  + " is updated to state "+state.getState()+" by user "  + username;
+             mailService.sendMessage(from, to, subject, body);
             if (LOG.isInfoEnabled()) {
               LOG.info("\n################ SEND MAIL TO USER :: " + user.getUserName() + "\nfrom: "
                   + from + "\nto: " + to + "\nsubject: " + subject + "\nbody: " + body
