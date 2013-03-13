@@ -8,8 +8,8 @@ import org.exoplatform.ecm.webui.tree.selectone.UISelectTaxonomyPanel;
 <div class="uiOneTaxonomySelector" id="$uicomponent.id">
   <div>
     <%
-      uicomponent.renderChild(UIBreadcumbs.class);
       uicomponent.renderChild(UITreeTaxonomyList.class);
+      uicomponent.renderChild(UIBreadcumbs.class);
     %>
     <div class="clearfix">
     <%

@@ -2588,8 +2588,8 @@
 
   <UITreeTaxonomyList>
     <label>
-      <taxonomyTree>Category Tree</taxonomyTree>
-      <rootNodePath>Root Tree</rootNodePath>
+      <taxonomyTree>Category Tree:</taxonomyTree>
+      <rootNodePath>Root Tree:</rootNodePath>
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>

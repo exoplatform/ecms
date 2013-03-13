@@ -2583,7 +2583,7 @@
 
   <UITreeTaxonomyList>
   	<label>
-      <taxonomyTree>Cây phân loại</taxonomyTree>
+      <taxonomyTree>Cây phân loại:</taxonomyTree>
     </label>
   </UITreeTaxonomyList>
 
@@ -3451,7 +3451,7 @@
    -->
   <UITreeTaxonomyList>
     <label>
-      <rootNodePath>Cây gốc</rootNodePath>
+      <rootNodePath>Cây gốc:</rootNodePath>
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>

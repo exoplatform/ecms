@@ -2583,7 +2583,7 @@
 
   <UITreeTaxonomyList>
   	<label>
-      <taxonomyTree>Arbre de Taxonomies</taxonomyTree>
+      <taxonomyTree>Arbre de Taxonomies:</taxonomyTree>
     </label>
   </UITreeTaxonomyList>
 
@@ -3435,7 +3435,7 @@
   -->
   <UITreeTaxonomyList>
     <label>
-      <rootNodePath>Arbre racine</rootNodePath>
+      <rootNodePath>Arbre racine:</rootNodePath>
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>
