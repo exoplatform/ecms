@@ -100,7 +100,7 @@
 
 <% if(uicomponent.getActions() != null) { %>
 	<div class="$uicomponent.id">
-		<div class="uiAction"> 
+		<div class="uiAction uiActionBorder"> 
 		  <% for(action in uicomponent.getActions()) { %>
 		        <button type="button" onclick="<%=uicomponent.event(action)%>" class="btn"><%=_ctx.appRes(uicomponent.getId() + ".action." + action)%></button>
 		  <% } %>

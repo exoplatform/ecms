@@ -7,9 +7,9 @@
   addScripts("ecmutil.ECMUtils.fixHeight('UIECMAdminPortlet') ;") ;
   def userAgent = uicomponent.getUserAgent();
 %>
-<div class="UIECMAdminPortlet" id="UIECMAdminPortlet">
+<div class="uiECMAdminPortlet" id="UIECMAdminPortlet">
   <%uicomponent.renderChild(UIPopupContainer.class);%>
-	<div class="UIResizableBlock ClearFix" style="height: auto;">
+	<div class="uiResizableBlock clearfix">
 	  <%
 	    int style = 6;
 	    def sideBar = "NotShowSideBar";
