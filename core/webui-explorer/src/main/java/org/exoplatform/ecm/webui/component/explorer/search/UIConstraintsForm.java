@@ -576,13 +576,18 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
   /**
    * Set category to text box and closeof choose category popup window
    * @param selectField: name of text field input
-   * @param value: value of choosen category
+   * @param value: value of chosen category
    */
   public void doSelect(String selectField, Object value) throws Exception {
     /* Set value to textbox */
-    getUIStringInput(selectField).setValue(value.toString());
-    /* Set value for checkbox is checked */
-    getUIFormCheckBoxInput(UIConstraintsForm.CATEGORY_PROPERTY).setChecked(true);
+    if (value==null) {
+      getUIStringInput(selectField).setValue("");
+      getUIFormCheckBoxInput(UIConstraintsForm.CATEGORY_PROPERTY).setChecked(false);
+    }else {
+      getUIStringInput(selectField).setValue(value.toString());
+      /* Set value for checkBox is checked */
+      getUIFormCheckBoxInput(UIConstraintsForm.CATEGORY_PROPERTY).setChecked(true);
+    }
     UISearchContainer uiSearchContainer = getAncestorOfType(UISearchContainer.class);
     /*
      *  Close popup window when finish choose category
