@@ -281,7 +281,7 @@ public class PDFViewer extends UIForm {
       String repository = (String) pdfViewer.getMethod(uiParent, "getRepository").invoke(uiParent, (Object[]) null);
       PDFViewerRESTService pdfViewerService = pdfViewer.getApplicationComponent(PDFViewerRESTService.class);
       File file = pdfViewerService.getPDFDocumentFile(node, repository);
-      String fileName = node.getName();
+      String fileName = node.getProperty("exo:name").getString();
       String mimeType = node.getNode("jcr:content").getProperty("jcr:mimeType").getString();
       String extension = DMSMimeTypeResolver.getInstance().getExtension(mimeType);
       fileName = fileName.replace(extension, "pdf");
