@@ -56,7 +56,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    template =  "system:/groovy/webui/form/UIForm.gtmpl",
+    template =  "app:/groovy/webui/component/explorer/search/UISimpleSearch.gtmpl",
     events = {
       @EventConfig(listeners = UISimpleSearch.CancelActionListener.class, phase=Phase.DECODE),
       @EventConfig(listeners = UISimpleSearch.SearchActionListener.class),
@@ -67,12 +67,14 @@ import org.exoplatform.webui.form.UIFormStringInput;
 )
 public class UISimpleSearch extends UIForm {
 
-  final static public String INPUT_SEARCH = "input";
-  final static public String CONSTRAINTS = "constraints";
-  final static public String NODE_PATH = "nodePath";
-  final static public String FIRST_OPERATOR = "firstOperator";
-  final static public String OR = "or";
-  final static public String AND = "and";
+  public static final String CONSTRAINTS_FORM = "ConstraintsForm";
+  public static final String INPUT_SEARCH = "input";
+  public static final String CONSTRAINTS = "constraints";
+  public static final String NODE_PATH = "nodePath";
+  public static final String FIRST_OPERATOR = "firstOperator";
+  public static final String OR = "or";
+  public static final String AND = "and";
+  
   private static final Log LOG  = ExoLogger.getLogger(UISimpleSearch.class.getName());
   private List<String> constraints_ = new ArrayList<String>();
   private List<String> virtualConstraints_ = new ArrayList<String>();
@@ -116,6 +118,10 @@ public class UISimpleSearch extends UIForm {
     UIFormInputSetWithAction uiInputAct = new UIFormInputSetWithAction("moreConstraints");
     uiInputAct.addUIFormInput(new UIFormInputInfo(CONSTRAINTS, CONSTRAINTS, null));
     addUIComponentInput(uiInputAct);
+    UIConstraintsForm uiConstraintsForm = new UIConstraintsForm(CONSTRAINTS_FORM);
+    uiConstraintsForm.setRendered(false);
+    addChild(uiConstraintsForm);
+
     setActions(new String[] {"MoreConstraints", "Search", "Save", "Cancel"});
   }
 
@@ -344,11 +350,11 @@ public class UISimpleSearch extends UIForm {
 
   static  public class MoreConstraintsActionListener extends EventListener<UISimpleSearch> {
     public void execute(Event<UISimpleSearch> event) throws Exception {
-      UISearchContainer uiSearchContainer = event.getSource().getParent();
-      UIConstraintsForm uiConstraintsForm = uiSearchContainer.getChild(UIConstraintsForm.class);
+      UISimpleSearch uiSimpleSearch = event.getSource();
+      UIConstraintsForm uiConstraintsForm = uiSimpleSearch.getChild(UIConstraintsForm.class);
       if(uiConstraintsForm.isRendered()) uiConstraintsForm.setRendered(false);
       else uiConstraintsForm.setRendered(true);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiSearchContainer);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiSimpleSearch);
     }
   }
 }

@@ -29,6 +29,7 @@ import javax.jcr.query.QueryResult;
 import org.exoplatform.commons.utils.ISO8601;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
@@ -37,12 +38,11 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
-import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
+import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormDateTimeInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
@@ -56,7 +56,6 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * 4:29:08 PM
  */
 @ComponentConfig(
-    lifecycle = UIFormLifecycle.class,
     template =  "app:/groovy/webui/component/explorer/search/UIConstraintsForm.gtmpl",
     events = {
       @EventConfig(phase=Phase.DECODE, listeners = UIConstraintsForm.CancelActionListener.class),
@@ -67,7 +66,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
       @EventConfig(listeners = UIConstraintsForm.AddCategoryActionListener.class)
     }
 )
-public class UIConstraintsForm extends UIForm implements UISelectable{
+public class UIConstraintsForm extends UIFormInputSetWithAction implements UISelectable{
 
   final static public String OPERATOR = "operator" ;
   final static public String TIME_OPTION = "timeOpt" ;
@@ -105,14 +104,15 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
 
   private String              _OR_OPERATION;
 
-  public UIConstraintsForm() throws Exception {
+  public UIConstraintsForm(String name) throws Exception {
+    super(name);
     RequestContext context = RequestContext.getCurrentInstance();
     ResourceBundle res = context.getApplicationResourceBundle();
     _AND_OPERATION = res.getString("UIConstraintForm.label.and");
     _OR_OPERATION = res.getString("UIConstraintForm.label.or");
     _CREATED_DATE = res.getString("UIConstraintForm.label.created"); 
     _MODIFIED_DATE = res.getString("UIConstraintForm.label.modified");    
-    setActions(new String[] {"Add", "Cancel"}) ;
+    setActions(new String[] {"Add", "Cancel"}, null) ;
     List<SelectItemOption<String>> typeOperation = new ArrayList<SelectItemOption<String>>() ;
     typeOperation.add(new SelectItemOption<String>(_AND_OPERATION, AND_OPERATION));
     typeOperation.add(new SelectItemOption<String>(_OR_OPERATION, OR_OPERATION));
@@ -287,7 +287,7 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
     String advanceQuery = "" ;
     String property ;
     virtualDateQuery_ = null ;
-    UISimpleSearch uiSimpleSearch = ((UISearchContainer)getParent()).getChild(UISimpleSearch.class) ;
+    UISimpleSearch uiSimpleSearch = this.getParent();
     UIJCRExplorer uiExplorer = uiSimpleSearch.getAncestorOfType(UIJCRExplorer.class);
     Preference pref = uiExplorer.getPreference();
     String queryType = pref.getQueryType();
@@ -501,7 +501,7 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
 
   static public class AddMetadataTypeActionListener extends EventListener<UIConstraintsForm> {
     public void execute(Event<UIConstraintsForm> event) throws Exception {
-      UISearchContainer uiContainer = event.getSource().getParent() ;
+      UISearchContainer uiContainer = event.getSource().getAncestorOfType(UISearchContainer.class);
       String type = event.getRequestContext().getRequestParameter(OBJECTID) ;
       String popupId = PROPERTY1;
       if(type.equals("1")) popupId = PROPERTY2 ;
@@ -513,7 +513,7 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
 
   static public class AddNodeTypeActionListener extends EventListener<UIConstraintsForm> {
     public void execute(Event<UIConstraintsForm> event) throws Exception {
-      UISearchContainer uiContainer = event.getSource().getParent() ;
+      UISearchContainer uiContainer = event.getSource().getAncestorOfType(UISearchContainer.class);
       uiContainer.initNodeTypePopup() ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer) ;
     }
@@ -545,7 +545,7 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
         event.getRequestContext().addUIComponentToUpdateByAjax(uiConstraintForm);
         return ;
       }
-      UISearchContainer uiContainer = uiConstraintForm.getParent() ;
+      UISearchContainer uiContainer = uiConstraintForm.getAncestorOfType(UISearchContainer.class);
       UICompareExactlyForm uiCompareExactlyForm =
         uiContainer.createUIComponent(UICompareExactlyForm.class, null, null) ;
       UIPopupContainer uiPopup = uiContainer.getChild(UIPopupContainer.class);
@@ -559,7 +559,7 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
 
   static public class AddCategoryActionListener extends EventListener<UIConstraintsForm> {
     public void execute(Event<UIConstraintsForm> event) throws Exception {
-      UISearchContainer uiSearchContainer = event.getSource().getParent();
+      UISearchContainer uiSearchContainer = event.getSource().getAncestorOfType(UISearchContainer.class);
       uiSearchContainer.initCategoryPopup();
       event.getRequestContext().addUIComponentToUpdateByAjax(uiSearchContainer) ;
     }
@@ -567,7 +567,7 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
 
   static  public class CancelActionListener extends EventListener<UIConstraintsForm> {
     public void execute(Event<UIConstraintsForm> event) throws Exception {
-      UISearchContainer uiSearchContainer = event.getSource().getParent() ;
+      UISearchContainer uiSearchContainer = event.getSource().getAncestorOfType(UISearchContainer.class);
       event.getSource().setRendered(false) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiSearchContainer) ;
     }
@@ -596,4 +596,8 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
     uiPopup.setRendered(false);
     uiPopup.setShow(false);
   }
+  
+  public UIFormDateTimeInput getUIFormDateTimeInput(String name) {
+    return findComponentById(name);
+}
 }

@@ -1,0 +1,55 @@
+<%
+ import org.exoplatform.ecm.webui.component.explorer.search.UIConstraintsForm;
+ String fieldName; %>
+<div class="uiForm $uicomponent.id">
+	<%
+	uiform.begin()
+		//this template is reused much (especially in ecms)
+		//we need to add .resizable class bydefault to resize content when it is in popup
+	%>
+		<div class="form-horizontal resizable">
+				<% 
+					for(field in uiform.getChildren()) {
+						if (field instanceof UIConstraintsForm) continue;
+						if(field.isRendered()) {
+				%>
+							<div class="control-group">
+								<%fieldName = uicomponent.getLabel(field.getName());%>
+								<%
+									if(fieldName != null && fieldName.length() > 0 && !fieldName.equals(uicomponent.getId()) && !fieldName.equals(field.getName())) {
+								%>												
+									<label class="control-label" for="$field.id">
+										<%=uicomponent.getLabel(field.getName()) %>
+									</label>
+									<div class="controls"><% uiform.renderField(field) %></div>
+								<%} else {%>
+									<div class="controls-full"><% uiform.renderField(field) %></div>
+								<%}%>
+							</div>							
+				<%
+						}
+					}
+				%>
+		</div>
+		<%
+		String actionMoreConstraintsLabel = _ctx.appRes(uicomponent.getName() + ".action.MoreConstraints");
+		String moreConstraintsLink = uicomponent.event("MoreConstraints");
+		%>
+		<button type="button" onclick="$moreConstraintsLink" class="btn">$actionMoreConstraintsLabel</button>
+		<%
+		if (uiform.getChildById(uiform.CONSTRAINTS_FORM).isRendered()) {
+			uiform.renderChild(uiform.CONSTRAINTS_FORM);
+		}
+		%>
+		<div class="uiAction uiActionBorder"> 
+			<% for(action in uicomponent.getActions()) {
+					 if (action.equals("MoreConstraints")) continue;
+					 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action);
+					 String link = uicomponent.event(action);
+			%>
+						<button type="button" onclick="$link" class="btn">$actionLabel</button>
+			<%}%>	
+		</div>
+		
+	<%uiform.end()%>
+</div>
