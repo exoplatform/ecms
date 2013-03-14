@@ -18,7 +18,9 @@ package org.exoplatform.services.wcm.search.base;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -99,6 +101,7 @@ public class ArrayNodePageList<E> extends AbstractPageList<E> {
           }
         }
       }
+      dataList = removeDuplication(dataList);
     } catch (RepositoryException e) {
       if (LOG.isWarnEnabled()) {
         LOG.warn(e.getMessage());
@@ -148,5 +151,19 @@ public class ArrayNodePageList<E> extends AbstractPageList<E> {
         }
       }
     }  
+  }
+  
+  private List<E> removeDuplication(List<E> srcList) {
+    List<E> ret = new ArrayList<E>();
+    Set<E> set = new HashSet<E>();
+    if (srcList != null) {
+      for (E elem : srcList) {
+        if (!set.contains(elem)) {
+          set.add(elem);
+          ret.add(elem);
+        }
+      }
+    }
+    return ret;
   }
 }
