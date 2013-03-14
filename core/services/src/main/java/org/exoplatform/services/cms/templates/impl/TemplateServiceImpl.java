@@ -445,10 +445,10 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   public List<String> getDocumentTemplates() throws Exception {
     List<String> templates = getManagedDocumentTypesMap();
     if (templates != null)
-      return templates;
+      return new ArrayList<String>(templates);
     templates = getAllDocumentNodeTypes();
     setManagedDocumentTypesMap(templates);
-    return templates;
+    return templates == null ? templates : new ArrayList<String>(templates);
   }
 
   /**
