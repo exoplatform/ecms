@@ -17,7 +17,6 @@
 package org.exoplatform.services.wcm.search.connector;
 
 import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.search.QueryCriteria;
@@ -81,6 +80,14 @@ public abstract class BaseContentSearchServiceConnector extends BaseSearchServic
    * @return searched doc types
    */
   protected abstract String[] getSearchedDocTypes();
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String getTitleResult(ResultNode node) throws Exception {
+    return node.getTitle();
+  }
 
 }
 

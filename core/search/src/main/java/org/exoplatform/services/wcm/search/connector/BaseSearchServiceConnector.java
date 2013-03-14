@@ -170,7 +170,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
               EcmsSearchResult result = 
               //  new SearchResult(url, title, excerpt, detail, imageUrl, date, relevancy);
                   new EcmsSearchResult(getPath(driveData, retNode, context), 
-                                       retNode.getTitle(), 
+                                       getTitleResult(retNode), 
                                        retNode.getExcerpt(), 
                                        driveData.getName() + fileSize(retNode) + formatDate(date), 
                                        getImageUrl(), 
@@ -317,5 +317,13 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
    * @throws Exception
    */
   protected abstract String getFileType(ResultNode node) throws Exception;
+  
+  /**
+   * gets the title of result, based on the result type
+   * @param node
+   * @return
+   * @throws Exception
+   */
+  protected abstract String getTitleResult(ResultNode node) throws Exception;
   
 }
