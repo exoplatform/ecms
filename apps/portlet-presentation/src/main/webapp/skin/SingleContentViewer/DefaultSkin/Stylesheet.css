@@ -449,6 +449,12 @@ width: 95%;
    width:auto;
 }
 
+.HorizontalLayout .UIForm input[disabled], .HorizontalLayout .UIForm input.disabled {
+  cursor: default;
+  background: #ECEAE9;
+}
+
+
 .UIPresentationContainer .ActionContainer {
   height: 28px;
   line-height: 28px;
@@ -549,5 +555,10 @@ width: 95%;
 
 .UISingleContentViewerPortlet .UIFormInputSetWithAction input {
 	width:220px;
+}
+
+.UISingleContentViewerPortlet .UIFormInputSetWithAction input.disabled, .UISingleContentViewerPortlet .UIFormInputSetWithAction input[disabled] {
+  cursor: default;
+  background: #ECEAE9; 
 }
 
