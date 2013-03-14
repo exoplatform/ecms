@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.exoplatform.ecms</groupId>
     <artifactId>ecms</artifactId>
-    <version>4.0.0-SNAPSHOT</version>
+    <version>4.0.0-Beta2</version>
   </parent>
   <artifactId>ecms-upgrade-plugins</artifactId>
   <name>eXo ECMS Upgrade Plugins</name>
