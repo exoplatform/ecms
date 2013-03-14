@@ -485,6 +485,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
                                                             targetPage);
     basePathInput.setValue(targetPage);
     basePathInput.setEditable(false);
+    basePathInput.setDisabled(true);
     targetPageInputSet.setActionInfo(TARGET_PAGE_FORM_STRING_INPUT, new String[] {"SelectTargetPage"}) ;
     targetPageInputSet.addUIFormInput(basePathInput);
 

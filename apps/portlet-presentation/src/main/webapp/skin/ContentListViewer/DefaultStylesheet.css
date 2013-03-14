@@ -73,6 +73,13 @@
 	width:220px;
 }
 
+.UICLVPortlet .UIFormInputSetWithAction input.disabled,.HorizontalLayout .UICLVPortlet .UIFormInputSetWithAction input.disabled,
+.UICLVPortlet .UIFormInputSetWithAction input[disabled],.HorizontalLayout .UICLVPortlet .UIFormInputSetWithAction input[disabled]
+{
+    cursor: default;
+    background: #ECEAE9;
+}
+
 .UICLVPortlet .UICLVConfig .FieldLabel {
   width: 125px;
 }

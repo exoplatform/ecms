@@ -176,6 +176,7 @@ public class UISCVPreferences extends UIForm implements UISelectable{
     txtPrintPage = new UIFormStringInput(PRINT_VIEW_PAGE_INPUT, PRINT_VIEW_PAGE_INPUT, strPrintPageName);
     txtPrintPage.setValue(strPrintPageName);
     txtPrintPage.setReadOnly(true);
+    txtPrintPage.setDisabled(true);
     targetPageInputSet.setActionInfo(PRINT_VIEW_PAGE_INPUT, new String[] {"SelectTargetPage"}) ;
     targetPageInputSet.addUIFormInput(txtPrintPage);
 
