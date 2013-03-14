@@ -178,7 +178,7 @@
 	    if(!uicomponent.isSystemWorkspace()) ctMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(node.getPath()), uicomponent.getActionsList(node)) ;
 	    println "<div  class=\"node\" >" ;
 	    println "  <div class=\"${iconType}Icon\" id=\"" + uicomponent.encodeBase64(treeNode.getPath()) + "\" onclick=\"event.cancelBubble=true; if(eXo.ecm.ECMUtils.collapseExpand(this)) return; " + actionLink + "\">" ;
-	    println "    <div id=\"iconTreeExplorer" + treeNode.getNodePath4ID() + "\" isFile=\"" + node.isNodeType("nt:file") + "\" onclick=\"event.cancelBubble=true;" + expandLink + "\" objectId=\"" + org.exoplatform.services.cms.impl.Utils.getObjectId(treeNode.getPath()) + "\" workspacename=\"" + preferenceWS + Utils.getNodeTypeIcon(node, "16x16Icon", iconType) + "\" " + ctMenu + ">" + strActs ;
+	    println "    <div id=\"iconTreeExplorer" + treeNode.getNodePath4ID() + "\" isFile=\"" + node.isNodeType("nt:file") + "\" onclick=\"event.cancelBubble=true;" + expandLink + "\" objectId=\"" + org.exoplatform.services.cms.impl.Utils.getObjectId(treeNode.getPath()) + "\" workspacename=\"" + preferenceWS + "\" " + ctMenu + ">" + strActs ;
 	    println "		<a  onclick=\"event.cancelBubble=true;" + expandLink + "\" style='cursor: pointer;$hiddenStyle' rel=\"tooltip\" data-placement=\"bottom\" title=\"$treeNodeName $lockedLabel\"><i title=\"$treeNodeName\" class=\"" + Utils.getNodeTypeIcon(node, "uiIcon16x16") + "\">";
 	    if (node.isLocked()) {
 			println "<i class=\"iconLockedsmall\"></i>";

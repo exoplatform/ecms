@@ -124,7 +124,7 @@
   ////            }
   //          }
   //      );
-        gj("#" + actionAreaId + " div.UITreeExplorer:first").find("div[objectId]").each(      
+        gj("#" + actionAreaId + " div.uiTreeExplorer:first").find("div[objectId]").each(      
         function(index, element) {
           if (element.getAttribute("onmousedown") &&!element.getAttribute("mousedown")) {
             mousedown = element.getAttributeNode("onmousedown").value;
@@ -216,7 +216,7 @@
         mobileElement.style.opacity = 65/100;
         Self.mobileId = mobileElement.id;
         var coverElement = newElement({
-          className: "UITreeExplorer",
+          className: "uiTreeExplorer",
           style: {margin: "0px 3px", padding: "3px 0px"}
         });
         coverElement.appendChild(itemSelected);
@@ -941,7 +941,7 @@
       }  
   
       var itemArea = document.getElementById("SelectItemArea");
-      if (!itemArea & container.className == "UITreeExplorer") {
+      if (!itemArea & container.className == "uiTreeExplorer") {
         container.style.height = (resizeSizeBar.offsetHeight - barContent.offsetHeight - 30) + "px";
       }  
     }
