@@ -942,7 +942,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       if (StringUtils.isEmpty(logData)) logData = nodeType;
       else if (logData.indexOf(nodeType) == -1) logData = logData + ";" + nodeType;
       serviceLogContentNode.setProperty(NodetypeConstant.JCR_DATA, logData);
-      serviceLogContentNode.save();
+      serviceLogContentNode.getSession().save();
     }
   }
 
