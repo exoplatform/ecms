@@ -1020,7 +1020,7 @@
   </UICategoryManagerSearch>
   <UIContentNameSearch>
     <label>
-      <keyword>Nom de contenu</keyword>
+      <keyword>Nom de contenu:</keyword>
       <location>Répertoire courant</location>
     </label>
     <action>
@@ -1040,10 +1040,10 @@
     </action>
     <label>
       <moreConstraints>UISimpleSearch</moreConstraints>
-      <firstOperator>Opérateur</firstOperator>
-      <input>Mots à rechercher</input>
-      <constraints>Plus de contraintes</constraints>
-      <nodePath>Répertoire courant</nodePath>
+      <firstOperator>Opérateur:</firstOperator>
+      <input>Mots à rechercher:</input>
+      <constraints>Plus de contraintes:</constraints>
+      <nodePath>Répertoire courant:</nodePath>
     </label>
     <msg>
       <keyword-null>Veuillez entrer un mot-clé à rechercher.</keyword-null>
@@ -1313,9 +1313,9 @@
   </UICompareExactlyForm>
   <UIJCRAdvancedSearch>
     <label>
-      <name>Nom</name>
-      <selectBox>Sélection d'un type de requête</selectBox>
-      <query>requête</query>
+      <name>Nom:</name>
+      <selectBox>Sélection d'un type de requête:</selectBox>
+      <query>requête:</query>
     </label>
     <action>
       <Save>#{word.save}</Save>

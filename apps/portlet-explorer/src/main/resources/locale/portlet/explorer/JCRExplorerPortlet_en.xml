@@ -1025,7 +1025,7 @@
   </UICategoryManagerSearch>
   <UIContentNameSearch>
     <label>
-      <keyword>Content Name</keyword>
+      <keyword>Content Name:</keyword>
       <location>Search in this location:</location>
     </label>
     <action>
@@ -1045,10 +1045,10 @@
     </action>
     <label>
       <moreConstraints>UISimpleSearch</moreConstraints>
-      <firstOperator>Operator</firstOperator>
-      <input>A word or phrase in content</input>
-      <constraints>More constraints</constraints>
-      <nodePath>Current location</nodePath>
+      <firstOperator>Operator:</firstOperator>
+      <input>A word or phrase in content:</input>
+      <constraints>More constraints:</constraints>
+      <nodePath>Current location:</nodePath>
     </label>
     <msg>
       <keyword-null>Please enter your keyword.</keyword-null>
@@ -1318,9 +1318,9 @@
   </UICompareExactlyForm>
   <UIJCRAdvancedSearch>
     <label>
-      <name>Name</name>
-      <selectBox>Select Query Style</selectBox>
-      <query>Query</query>
+      <name>Name:</name>
+      <selectBox>Select Query Style:</selectBox>
+      <query>Query:</query>
     </label>
     <action>
       <Save>#{word.save}</Save>

@@ -1034,7 +1034,7 @@
   </UICategoryManagerSearch>
   <UIContentNameSearch>
     <label>
-      <keyword>Tên của nội dung</keyword>
+      <keyword>Tên của nội dung:</keyword>
       <location>Tìm kiếm vị trí này:</location>
     </label>
     <action>
@@ -1054,10 +1054,10 @@
     </action>
     <label>
       <moreConstraints>UISimpleSearch</moreConstraints>
-      <firstOperator>Thao tác</firstOperator>
-      <input>Một từ hoặc cụm từ trong nội dung</input>
-      <constraints>Nhiều ràng buộc hơn</constraints>
-      <nodePath>Vị trí hiện thời</nodePath>
+      <firstOperator>Thao tác:</firstOperator>
+      <input>Một từ hoặc cụm từ trong nội dung:</input>
+      <constraints>Nhiều ràng buộc hơn:</constraints>
+      <nodePath>Vị trí hiện thời:</nodePath>
     </label>
     <msg>
       <keyword-null>Vui lòng nhập khóa của bạn</keyword-null>
@@ -1328,9 +1328,9 @@
   </UICompareExactlyForm>
   <UIJCRAdvancedSearch>
     <label>
-      <name>Tên</name>
-      <selectBox>Lựa chọn kiểu truy vấn</selectBox>
-      <query>Truy vấn</query>
+      <name>Tên:</name>
+      <selectBox>Lựa chọn kiểu truy vấn:</selectBox>
+      <query>Truy vấn:</query>
     </label>
     <action>
       <Save>Lưu</Save>
