@@ -1624,13 +1624,13 @@
 	};
 
 	ECMUtils.prototype.loadTab = function() {
-		gj('.UIECMAdminPortlet a[data-toggle="tab"]').on('show', function (e) {
+		gj('.uiECMAdminPortlet a[data-toggle="tab"]').on('show', function (e) {
 		  var target = e.target;
 		  var parent = gj(target).parent();
 		  var tabClass = "collapsed";
 		  if(gj(parent).hasClass("collapsed")) tabClass = "expaned";
 		  
-		  gj('.UIECMAdminPortlet div[data-toggle="collapse"]').each(function(i,el) {
+		  gj('.uiECMAdminPortlet div[data-toggle="collapse"]').each(function(i,el) {
 		    gj(el).attr("class","accordion-toggle collapsed");      
 		  });
 		  gj(parent).addClass(tabClass);
