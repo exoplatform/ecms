@@ -157,7 +157,12 @@ public class UITaggingForm extends UIForm {
 
     UIFormInputSetWithAction uiLinkedInput = getChildById(LINKED_TAGS_SET);
     uiLinkedInput.setInfoField(LINKED_TAGS, linkedTags.toString());
-    uiLinkedInput.setActionInfo(LINKED_TAGS, new String[] { "Edit", "Remove" });
+    //check if current user can remove tag
+    NewFolksonomyService newFolksonomyService = WCMCoreUtils.getService(NewFolksonomyService.class);
+    List<String> memberships = Utils.getMemberships();
+    String[] actionsForTags = newFolksonomyService.canEditTag(this.getIntValue(tagScope), memberships) ?
+                              new String[] {"Edit", "Remove"} : null;
+    uiLinkedInput.setActionInfo(LINKED_TAGS, actionsForTags);
     uiLinkedInput.setIsShowOnly(true);
     uiLinkedInput.setIsDeleteOnly(false);
   }
