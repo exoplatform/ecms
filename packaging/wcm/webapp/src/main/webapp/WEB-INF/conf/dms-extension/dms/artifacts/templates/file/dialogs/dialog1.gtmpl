@@ -86,9 +86,6 @@
                         def fileName = Utils.getTitle(curNode);
                         %> 
 										
-											<div class="textInfo">
-												<%=_ctx.appRes("File.dialog.label.re-upload")%>
-											</div>
 											<a class="nameInfo" rel="tooltip" data-placement="bottom" title="$fileName">
 												 $fileName
 											</a>
