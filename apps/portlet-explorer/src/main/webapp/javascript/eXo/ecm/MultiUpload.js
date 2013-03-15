@@ -437,15 +437,10 @@
 		  var spanProgress = eXo.ecm.MultiUpload.document.createElement("span");
 		  spanProgress.className="loadding";
 		  spanProgress.style.width="0%";
-		  //empty div
-		  var span = eXo.ecm.MultiUpload.document.createElement("div");
-		  span.innerHTML="&nbsp;&nbsp;&nbsp;&nbsp;";
-		  span.className="FR";
 		  //cancel
-		  var cancel = eXo.ecm.MultiUpload.document.createElement("div");
+		  var cancel = eXo.ecm.MultiUpload.document.createElement("i");
 		  cancel.id = "cancel" + fileID;
-		  cancel.className = "FR DeleteIcon";
-		  cancel.innerHTML = "&nbsp;";
+		  cancel.className = "uiIconRemove uiIconLightGray pull-right";
 		  if (req) {
 			  cancel.onclick=function abortUpload(myreq, evt) {
 			    return function(evt) {
@@ -460,7 +455,6 @@
 		  outerProgress.appendChild(progress);
 		  //---
 		  loadContentDiv.appendChild(cancel);
-		  loadContentDiv.appendChild(span);
 		  loadContentDiv.appendChild(outerProgress);
 		  //return ret
 		  return loadContentDiv;
