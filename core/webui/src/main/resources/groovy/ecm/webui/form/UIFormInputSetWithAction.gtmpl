@@ -32,7 +32,7 @@
                   <label for="<%=inputEntry.getId()%>" class="control-label"><%=label%></label>
 
                <%}%>
-               <div class="controls">
+               <div class="controls controls-nowrap">
                 <% 
               if(inputEntry instanceof UIFormRadioBoxInput) {
                 println "<div class=\"MultiRadioInput\">" ;

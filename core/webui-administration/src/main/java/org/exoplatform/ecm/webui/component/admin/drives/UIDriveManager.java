@@ -62,7 +62,7 @@ public class UIDriveManager extends UIAbstractManager {
     if(uiPopup == null) {
       uiPopup = addChild(UIPopupWindow.class, null, id) ;
       uiPopup.setShowMask(true);
-      uiPopup.setWindowSize(580,420) ;
+      uiPopup.setWindowSize(590,420) ;
       uiDriveForm = createUIComponent(UIDriveForm.class, null, null) ;
     } else {
       uiDriveForm = uiPopup.findFirstComponentOfType(UIDriveForm.class) ;
