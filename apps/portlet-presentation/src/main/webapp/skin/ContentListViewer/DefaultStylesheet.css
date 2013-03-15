@@ -105,6 +105,11 @@
 	border: 1px solid #b7b7b7;
 }
 
+.UICLVPortlet .UICLVConfig .fieldsetPreferences input.disabled , .UICLVPortlet .UICLVConfig .fieldsetPreferences input[disabled] {
+    cursor: default;
+    background: #ECEAE9;
+}
+
 .UICLVPortlet .UICLVConfig .UIFormGrid {
 	width: 100%;
 }
