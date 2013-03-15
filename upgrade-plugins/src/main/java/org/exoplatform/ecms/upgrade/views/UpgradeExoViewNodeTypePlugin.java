@@ -96,9 +96,17 @@ public class UpgradeExoViewNodeTypePlugin extends UpgradeProductPlugin {
       String statement = "SELECT * FROM exo:view where exo:hideExplorerPanel IS NULL";
       Query query = session.getWorkspace().getQueryManager().createQuery(statement, Query.SQL);
       for (NodeIterator iter = query.execute().getNodes(); iter.hasNext();) {
-        Node viewNode = iter.nextNode();
-        viewNode.setProperty(EXO_HIDE_EXPLORER_PANEL, false);
-        viewNode.save();
+        Node viewNode = null;
+        try {
+          viewNode = iter.nextNode();
+          viewNode.setProperty(EXO_HIDE_EXPLORER_PANEL, false);
+          viewNode.save();
+        } catch (Exception e) {
+          if (LOG.isErrorEnabled()) {
+            LOG.error("An unexpected error occurs when add property '" + EXO_HIDE_EXPLORER_PANEL + "' for " +
+                      "node " + viewNode);
+          }
+        }
       }
       if (LOG.isInfoEnabled()) {
         LOG.info("Add new property value '" + EXO_HIDE_EXPLORER_PANEL + "' for node type '" + EXO_VIEW + "' successfully!");
