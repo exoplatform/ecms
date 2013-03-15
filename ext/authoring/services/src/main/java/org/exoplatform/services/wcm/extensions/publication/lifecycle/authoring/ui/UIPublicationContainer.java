@@ -76,8 +76,8 @@ public class UIPublicationContainer
   
   private void checkToShowPublicationScheduleAndPublicationHistory(Node node) throws Exception {
     String currentState = node.getProperty(AuthoringPublicationConstant.CURRENT_STATE).getString();
+    this.removeChild(UIPublicationSchedule.class);
     if (PublicationDefaultStates.STAGED.equals(currentState)) {
-      this.removeChild(UIPublicationSchedule.class);
       UIPublicationSchedule publicationSchedule = addChild(UIPublicationSchedule.class, null, null);
       publicationSchedule.init(node);
       publicationSchedule.setRendered(false);
