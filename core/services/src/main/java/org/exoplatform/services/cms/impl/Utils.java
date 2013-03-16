@@ -514,6 +514,9 @@ public class Utils {
       if(i > 0 && c == '-' && cleanedStr.charAt(i-1) == '-')
         cleanedStr.deleteCharAt(i--);
     }
+    while (StringUtils.isNotEmpty(cleanedStr.toString()) && !Character.isLetterOrDigit(cleanedStr.charAt(0))) {
+      cleanedStr.deleteCharAt(0);
+    }
     String clean = cleanedStr.toString().toLowerCase();
     if (clean.endsWith("-")) {
       clean = clean.substring(0, clean.length()-1);

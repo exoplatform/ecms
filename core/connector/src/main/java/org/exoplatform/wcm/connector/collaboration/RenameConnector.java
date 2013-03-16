@@ -60,6 +60,8 @@ public class RenameConnector implements ResourceContainer {
   private static final Pattern FILE_EXPLORER_URL_SYNTAX = Pattern.compile("([^:/]+):(/.*)");
 
   private static final String  RELATION_PROP            = "exo:relation";
+  
+  private static final String DEFAULT_NAME = "untitled";
 
   /**
    * Get <em>objectid</em> of renamed node <br>
@@ -97,6 +99,10 @@ public class RenameConnector implements ResourceContainer {
       String newExoTitle = Text.escapeIllegalJcrChars(newTitle);      
       // Clarify new name & check to add extension
       String newName = Text.escapeIllegalJcrChars(org.exoplatform.services.cms.impl.Utils.cleanString(newTitle));
+      
+      // Set default name if new title contain no valid character
+      newName = (StringUtils.isEmpty(newName)) ? DEFAULT_NAME : newName;
+      
       Node renamedNode = this.getNodeByPath(oldPath);
       String oldName = renamedNode.getName();
       if (oldName.indexOf('.') != -1 && renamedNode.isNodeType(NodetypeConstant.NT_FILE)) {
