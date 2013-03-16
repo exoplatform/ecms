@@ -57,7 +57,7 @@
 		    } else {
 		  %>
 		  		<tr>
-		  			<td colspan="2"><%=_ctx.appRes("UITreeList.info.child-not-found")%></td>
+		  			<td class="empty center" colspan="2"><%=_ctx.appRes("UITreeList.info.child-not-found")%></td>
 		  		</tr>
 		  <%  	
 		    }
