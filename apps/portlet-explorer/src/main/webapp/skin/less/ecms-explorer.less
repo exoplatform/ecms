@@ -1202,6 +1202,69 @@
 	}
 }
 
+/******** UISimpleSearch **************/
+
+.uiSimpleSearch {
+	.form-horizontal {
+		.control-label {
+			width: 170px;
+		}
+		.controls {
+			margin-left: 190px;
+			
+			.uiInputInfo {
+				padding-top: 5px;
+			}
+		}
+	}
+	.constrainLink {
+		color: @grayDark;
+		font-weight: bold;
+		cursor: pointer;
+		
+		&:hover {
+			color: @linkColor;
+		}
+		
+		[class^="uiIcon"] {
+			margin-top: 2px;
+		}
+	}
+	.constraintsForm {
+		padding: 20px 0px 10px 0px;
+		
+		.constraintOption:first-child {
+			margin-left: 31px;
+		}
+		
+		.constraintOption {
+			margin-bottom: 15px;
+			input {
+				width: 120px;
+			}
+			.uiSelectbox {
+				width: 120px;
+				.selectbox {
+					width: 123px;
+				}
+			}
+			
+			.label-inline {
+				width: 100px;
+				text-align: right;
+				padding-right: 10px;
+			}
+			
+			.uiCheckbox input {
+				width: auto;
+			}
+			[class^="uiIcon"] {
+				cursor: pointer;
+			}
+		}
+	}
+}
+
 /******** UIRightClickPopupMenu **************/
 .uiRightClickPopupMenu {
 	display: none;
