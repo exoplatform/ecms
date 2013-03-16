@@ -17,6 +17,7 @@
 package org.exoplatform.ecm.webui.component.explorer.search;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
@@ -24,6 +25,8 @@ import java.util.ResourceBundle;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import javax.jcr.query.QueryResult;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.jcr.model.Preference;
@@ -37,6 +40,8 @@ import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
+import org.exoplatform.webui.core.UIPopupContainer;
+import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
@@ -62,7 +67,12 @@ import org.exoplatform.webui.form.UIFormStringInput;
       @EventConfig(listeners = UISimpleSearch.SearchActionListener.class),
       @EventConfig(listeners = UISimpleSearch.SaveActionListener.class),
       @EventConfig(listeners = UISimpleSearch.MoreConstraintsActionListener.class, phase=Phase.DECODE),
-      @EventConfig(listeners = UISimpleSearch.RemoveConstraintActionListener.class, phase=Phase.DECODE)
+      @EventConfig(listeners = UISimpleSearch.RemoveConstraintActionListener.class, phase=Phase.DECODE),
+      @EventConfig(listeners = UISimpleSearch.AddActionListener.class),
+      @EventConfig(listeners = UISimpleSearch.CompareExactlyActionListener.class),
+      @EventConfig(listeners = UISimpleSearch.AddMetadataTypeActionListener.class),
+      @EventConfig(listeners = UISimpleSearch.AddNodeTypeActionListener.class),
+      @EventConfig(listeners = UISimpleSearch.AddCategoryActionListener.class)
     }
 )
 public class UISimpleSearch extends UIForm {
@@ -355,6 +365,201 @@ public class UISimpleSearch extends UIForm {
       if(uiConstraintsForm.isRendered()) uiConstraintsForm.setRendered(false);
       else uiConstraintsForm.setRendered(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiSimpleSearch);
+    }
+  }
+  
+  static public class AddActionListener extends EventListener<UISimpleSearch> {
+    public void execute(Event<UISimpleSearch> event) throws Exception {
+      UIConstraintsForm uiForm = event.getSource().getChild(UIConstraintsForm.class);
+      boolean isExactly = uiForm.getUIFormCheckBoxInput(UIConstraintsForm.EXACTLY_PROPERTY).isChecked() ;
+      boolean isContain = uiForm.getUIFormCheckBoxInput(UIConstraintsForm.CONTAIN_PROPERTY).isChecked() ;
+      boolean isNotContain = uiForm.getUIFormCheckBoxInput(UIConstraintsForm.NOT_CONTAIN_PROPERTY).isChecked() ;
+      boolean isDateTime = uiForm.getUIFormCheckBoxInput(UIConstraintsForm.DATE_PROPERTY).isChecked() ;
+      boolean isNodeType = uiForm.getUIFormCheckBoxInput(UIConstraintsForm.NODETYPE_PROPERTY).isChecked() ;
+      boolean isCategory = uiForm.getUIFormCheckBoxInput(UIConstraintsForm.CATEGORY_PROPERTY).isChecked() ;
+      UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
+      if (!isExactly && !isContain && !isNotContain && !isDateTime && !isNodeType && !isCategory) {
+        uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.must-choose-one",
+                                                null,
+                                                ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
+        return;
+      }
+      if (isExactly) {
+        String property = uiForm.getUIStringInput(UIConstraintsForm.PROPERTY1).getValue();
+        if (property == null || property.length() < 1) {
+          uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.properties-required",
+                                                  null,
+                                                  ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
+          return;
+        }
+        String value = uiForm.getUIStringInput(UIConstraintsForm.CONTAIN_EXACTLY).getValue() ;
+        if (value == null || value.trim().length() < 0) {
+          uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.exactly-require",
+                                                  null,
+                                                  ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
+          return;
+        }
+        uiForm.addConstraint(0) ;
+      }
+      if(isContain) {
+        String property = uiForm.getUIStringInput(UIConstraintsForm.PROPERTY2).getValue() ;
+        if(property == null || property.length() < 1) {
+          uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.properties-required", null,
+                                                  ApplicationMessage.WARNING)) ;
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
+          return ;
+        }
+        String value = uiForm.getUIStringInput(UIConstraintsForm.CONTAIN).getValue() ;
+        if(value == null || value.trim().length() < 0) {
+          uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.value-required", null,
+                                                  ApplicationMessage.WARNING)) ;
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
+          return ;
+        }
+        uiForm.addConstraint(1) ;
+      }
+      if(isNotContain) {
+        String property = uiForm.getUIStringInput(UIConstraintsForm.PROPERTY3).getValue() ;
+        if(property == null || property.length() < 1) {
+          uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.properties-required", null,
+                                                  ApplicationMessage.WARNING)) ;
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
+          return ;
+        }
+        String value = uiForm.getUIStringInput(UIConstraintsForm.NOT_CONTAIN).getValue() ;
+        if(value == null || value.trim().length() < 0) {
+          uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.value-required", null,
+                                                  ApplicationMessage.WARNING)) ;
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
+          return ;
+        }
+        uiForm.addConstraint(2) ;
+      }
+      if(isDateTime) {
+        String fromDate = uiForm.getUIFormDateTimeInput(UIConstraintsForm.START_TIME).getValue() ;
+        String toDate = uiForm.getUIFormDateTimeInput(UIConstraintsForm.END_TIME).getValue() ;
+        if(fromDate == null || fromDate.trim().length() == 0) {
+          uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.fromDate-required", null,
+                                                  ApplicationMessage.WARNING)) ;
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
+          return ;
+        }
+        if(!fromDate.matches(UIConstraintsForm.DATETIME_REGEX) || !uiForm.isValidDateTime(fromDate)) {
+          uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.fromDate-invalid", null,
+                                                  ApplicationMessage.WARNING)) ;
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
+          return ;
+        }
+        Calendar bfDate = uiForm.getUIFormDateTimeInput(UIConstraintsForm.START_TIME).getCalendar() ;
+        if(toDate != null && toDate.trim().length() >0) {
+          Calendar afDate = uiForm.getUIFormDateTimeInput(UIConstraintsForm.END_TIME).getCalendar() ;
+          if(!toDate.matches(UIConstraintsForm.DATETIME_REGEX) || !uiForm.isValidDateTime(toDate)) {
+            uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.toDate-invalid", null,
+                                                    ApplicationMessage.WARNING)) ;
+            event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
+            return ;
+          }
+          if(bfDate.compareTo(afDate) == 1) {
+            uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.date-invalid", null,
+                                                    ApplicationMessage.WARNING)) ;
+            event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
+            return ;
+          }
+        }
+        uiForm.addConstraint(3);
+      }
+      if(isNodeType) {
+        String property = uiForm.getUIStringInput(UIConstraintsForm.DOC_TYPE).getValue() ;
+        if(property == null || property.length() < 1) {
+          uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.properties-required", null,
+              ApplicationMessage.WARNING)) ;
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
+          return ;
+        }
+        uiForm.addConstraint(4) ;
+      }
+      if (isCategory) {
+        String category = uiForm.getUIStringInput(UIConstraintsForm.CATEGORY_TYPE).getValue();
+        if (category == null || category.length() < 1) {
+          uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.properties-required",
+              null, ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
+          return;
+        }
+        uiForm.addConstraint(5);
+      }
+
+      uiForm.resetConstraintForm() ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent()) ;
+    }
+  }
+
+  static public class AddMetadataTypeActionListener extends EventListener<UISimpleSearch> {
+    public void execute(Event<UISimpleSearch> event) throws Exception {
+      UISearchContainer uiContainer = event.getSource().getAncestorOfType(UISearchContainer.class);
+      String type = event.getRequestContext().getRequestParameter(OBJECTID) ;
+      String popupId = UIConstraintsForm.PROPERTY1;
+      if(type.equals("1")) popupId = UIConstraintsForm.PROPERTY2 ;
+      else if(type.equals("2")) popupId = UIConstraintsForm.PROPERTY3 ;
+      uiContainer.initMetadataPopup(popupId) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer) ;
+    }
+  }
+
+  static public class AddNodeTypeActionListener extends EventListener<UISimpleSearch> {
+    public void execute(Event<UISimpleSearch> event) throws Exception {
+      UISearchContainer uiContainer = event.getSource().getAncestorOfType(UISearchContainer.class);
+      uiContainer.initNodeTypePopup() ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer) ;
+    }
+  }
+
+  static public class CompareExactlyActionListener extends EventListener<UISimpleSearch> {
+    public void execute(Event<UISimpleSearch> event) throws Exception {
+      UIConstraintsForm uiConstraintForm = event.getSource().getChild(UIConstraintsForm.class);
+      String property = uiConstraintForm.getUIStringInput(UIConstraintsForm.PROPERTY1).getValue() ;
+      UIJCRExplorer uiExplorer = uiConstraintForm.getAncestorOfType(UIJCRExplorer.class);
+      UIApplication uiApp = uiConstraintForm.getAncestorOfType(UIApplication.class) ;
+      if(property == null || property.trim().length() == 0) {
+        uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.properties-null", null,
+                                                 ApplicationMessage.WARNING)) ;
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiConstraintForm);
+        return ;
+      }
+      String currentPath = uiExplorer.getCurrentNode().getPath() ;
+      StringBuffer statement = new StringBuffer("select * from nt:base where ");
+      if (!currentPath.equals("/")) {
+        statement.append("jcr:path like '").append(currentPath).append("/%' AND ");
+      }
+      statement.append(property).append(" is not null");
+      QueryManager queryManager = uiExplorer.getTargetSession().getWorkspace().getQueryManager() ;
+      Query query = queryManager.createQuery(statement.toString(), Query.SQL) ;
+      QueryResult result = query.execute() ;
+      if(result == null || result.getNodes().getSize() == 0) {
+        uiApp.addMessage(new ApplicationMessage("UICompareExactlyForm.msg.not-result-found", null)) ;
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiConstraintForm);
+        return ;
+      }
+      UISearchContainer uiContainer = uiConstraintForm.getAncestorOfType(UISearchContainer.class);
+      UICompareExactlyForm uiCompareExactlyForm =
+        uiContainer.createUIComponent(UICompareExactlyForm.class, null, null) ;
+      UIPopupContainer uiPopup = uiContainer.getChild(UIPopupContainer.class);
+      uiPopup.getChild(UIPopupWindow.class).setId("ExactlyFormPopup") ;
+      uiPopup.getChild(UIPopupWindow.class).setShowMask(true);
+      uiCompareExactlyForm.init(property, result) ;
+      uiPopup.activate(uiCompareExactlyForm, 600, 500) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup) ;
+    }
+  }
+
+  static public class AddCategoryActionListener extends EventListener<UISimpleSearch> {
+    public void execute(Event<UISimpleSearch> event) throws Exception {
+      UISearchContainer uiSearchContainer = event.getSource().getAncestorOfType(UISearchContainer.class);
+      uiSearchContainer.initCategoryPopup();
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiSearchContainer) ;
     }
   }
 }

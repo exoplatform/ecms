@@ -1,59 +1,55 @@
 <%
-/**
- * Created by The eXo Platform SARL
- * Author : Tran The Trong
- *          trong.tran@exoplatform.com
- * @version: $Id$
- * Oct 6, 2006  
- */
+  def uiform = uicomponent.getParent();
 %>
 <div class="constraintsForm" id="$uicomponent.id">
-      <div class="constraintOption form-inline"><label class="label-inline"><%=_ctx.appRes("UIConstraintForm.label.operator")%>:</label> <%uicomponent.renderChild(uicomponent.getChildById("operator"))%></div>
-      <div class="constraintOption form-inline">
-        <%uicomponent.renderChild(uicomponent.getChildById("exactlyPro"))%>
-        <label class="label-inline"><%=_ctx.appRes("UIConstraintForm.label.exactlyPro-properties")%>:</label> <%uicomponent.renderChild(uicomponent.getChildById("property1"))%>
-        <i class="uiIconPlus" onclick="<%=uicomponent.event("AddMetadataType", "0")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIConstraintForm.tooltip.AddMetadataType")%>"></i>
-        <label class="label-inline"><%=_ctx.appRes("UIConstraintForm.label.exactlyPro-ContainExactly")%>:</label> <%uicomponent.renderChild(uicomponent.getChildById("containExactly"))%>
-        <i class="uiIconPlus" onclick="<%=uicomponent.event("CompareExactly")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIConstraintForm.tooltip.FindExactly")%>"></i>
-      </div>
-      <div class="constraintOption form-inline">
-        <%uicomponent.renderChild(uicomponent.getChildById("containPro"))%>
-        <label class="label-inline"><%=_ctx.appRes("UIConstraintForm.label.exactlyPro-properties")%>:</label> <%uicomponent.renderChild(uicomponent.getChildById("property2"))%>
-        <i class="uiIconPlus" onclick="<%=uicomponent.event("AddMetadataType", "1")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIConstraintForm.tooltip.AddMetadataType")%>"></i>
-        <label class="label-inline"><%=_ctx.appRes("UIConstraintForm.label.containPro-Contain")%>:</label> <%uicomponent.renderChild(uicomponent.getChildById("contain"))%>
-      </div>
-      <div class="constraintOption form-inline">
-        <%uicomponent.renderChild(uicomponent.getChildById("notContainPro"))%>
-        <label class="label-inline"><%=_ctx.appRes("UIConstraintForm.label.exactlyPro-properties")%>:</label> <%uicomponent.renderChild(uicomponent.getChildById("property3"))%>
-        <i class="uiIconPlus" onclick="<%=uicomponent.event("AddMetadataType", "2")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIConstraintForm.tooltip.AddMetadataType")%>"></i>
-        <label class="label-inline"><%=_ctx.appRes("UIConstraintForm.label.notContainPro-notContain")%>:</label> <%uicomponent.renderChild(uicomponent.getChildById("notContain"))%>
-      </div>
-      <div class="constraintOption form-inline">
-        <%uicomponent.renderChild(uicomponent.getChildById("datePro"))%>
-				<label class="label-inline"> </label>
-        <%uicomponent.renderChild(uicomponent.getChildById("timeOpt"))%>
-				<label class="help-inline"><%=_ctx.appRes("UIConstraintForm.label.ConstraintOption-From")%></label>
-				<%uicomponent.renderChild(uicomponent.getChildById("startTime"))%>
-				<label class="help-inline"><%=_ctx.appRes("UIConstraintForm.label.ConstraintOption-To")%></label>
-				<%uicomponent.renderChild(uicomponent.getChildById("endTime"))%>
-      </div>
-      <div class="constraintOption form-inline">
-        <%uicomponent.renderChild(uicomponent.getChildById("nodetypePro"))%>
-        <label class="label-inline"><%=_ctx.appRes("UIConstraintForm.label.DocumentType-label")%>:</label> <%uicomponent.renderChild(uicomponent.getChildById("docType"))%>
-        <i class="uiIconPlus" onclick="<%=uicomponent.event("AddNodeType")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIConstraintForm.tooltip.AddNodeType")%>"></i>
-      </div>
-      <div class="constraintOption form-inline">
-        <%uicomponent.renderChild(uicomponent.getChildById("categoryPro"))%>
-        <label class="label-inline"><%=_ctx.appRes("UIConstraintForm.label.Category-label")%>:</label> <%uicomponent.renderChild(uicomponent.getChildById("categoryType"))%>
-        <i class="uiIconPlus" onclick="<%=uicomponent.event("AddCategory")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIConstraintForm.tooltip.AddCategory")%>"></i>
-      </div>
- <div class="uiAction">
-		<% for(action in uicomponent.getInputSetActions()) { 
-		String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
-		String link = uicomponent.event(action) ;
-		%>
-				<button type="button" onclick="$link" class="btn" href="javascript:void(0);">$actionLabel</button>
-		<%}%>
-	</div>
-      <%/* end render action */%>
+  <div class="constraintOption form-inline"><label class="label-inline"><%=_ctx.appRes("UIConstraintForm.label.operator")%>:</label> <%uicomponent.renderChild(uicomponent.getChildById("operator"))%></div>
+  <div class="constraintOption form-inline">
+    <%uicomponent.renderChild(uicomponent.getChildById("exactlyPro"))%>
+    <label class="label-inline"><%=_ctx.appRes("UIConstraintForm.label.exactlyPro-properties")%>:</label> <%uicomponent.renderChild(uicomponent.getChildById("property1"))%>
+    <i class="uiIconPlus" onclick="<%=uiform.event("AddMetadataType", "0")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIConstraintForm.tooltip.AddMetadataType")%>"></i>
+    <label class="label-inline"><%=_ctx.appRes("UIConstraintForm.label.exactlyPro-ContainExactly")%>:</label> <%uicomponent.renderChild(uicomponent.getChildById("containExactly"))%>
+    <i class="uiIconPlus" onclick="<%=uiform.event("CompareExactly")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIConstraintForm.tooltip.FindExactly")%>"></i>
+  </div>
+  <div class="constraintOption form-inline">
+    <%uicomponent.renderChild(uicomponent.getChildById("containPro"))%>
+    <label class="label-inline"><%=_ctx.appRes("UIConstraintForm.label.exactlyPro-properties")%>:</label> <%uicomponent.renderChild(uicomponent.getChildById("property2"))%>
+    <i class="uiIconPlus" onclick="<%=uiform.event("AddMetadataType", "1")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIConstraintForm.tooltip.AddMetadataType")%>"></i>
+    <label class="label-inline"><%=_ctx.appRes("UIConstraintForm.label.containPro-Contain")%>:</label> <%uicomponent.renderChild(uicomponent.getChildById("contain"))%>
+  </div>
+  <div class="constraintOption form-inline">
+    <%uicomponent.renderChild(uicomponent.getChildById("notContainPro"))%>
+    <label class="label-inline"><%=_ctx.appRes("UIConstraintForm.label.exactlyPro-properties")%>:</label> <%uicomponent.renderChild(uicomponent.getChildById("property3"))%>
+    <i class="uiIconPlus" onclick="<%=uiform.event("AddMetadataType", "2")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIConstraintForm.tooltip.AddMetadataType")%>"></i>
+    <label class="label-inline"><%=_ctx.appRes("UIConstraintForm.label.notContainPro-notContain")%>:</label> <%uicomponent.renderChild(uicomponent.getChildById("notContain"))%>
+  </div>
+  <div class="constraintOption form-inline">
+    <%uicomponent.renderChild(uicomponent.getChildById("datePro"))%>
+    <label class="label-inline"> </label>
+    <%uicomponent.renderChild(uicomponent.getChildById("timeOpt"))%>
+    <label class="help-inline"><%=_ctx.appRes("UIConstraintForm.label.ConstraintOption-From")%></label>
+    <%uicomponent.renderChild(uicomponent.getChildById("startTime"))%>
+    <label class="help-inline"><%=_ctx.appRes("UIConstraintForm.label.ConstraintOption-To")%></label>
+    <%uicomponent.renderChild(uicomponent.getChildById("endTime"))%>
+  </div>
+  <div class="constraintOption form-inline">
+    <%uicomponent.renderChild(uicomponent.getChildById("nodetypePro"))%>
+    <label class="label-inline"><%=_ctx.appRes("UIConstraintForm.label.DocumentType-label")%>:</label> <%uicomponent.renderChild(uicomponent.getChildById("docType"))%>
+    <i class="uiIconPlus" onclick="<%=uiform.event("AddNodeType")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIConstraintForm.tooltip.AddNodeType")%>"></i>
+  </div>
+  <div class="constraintOption form-inline">
+    <%uicomponent.renderChild(uicomponent.getChildById("categoryPro"))%>
+    <label class="label-inline"><%=_ctx.appRes("UIConstraintForm.label.Category-label")%>:</label> <%uicomponent.renderChild(uicomponent.getChildById("categoryType"))%>
+    <i class="uiIconPlus" onclick="<%=uiform.event("AddCategory")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIConstraintForm.tooltip.AddCategory")%>"></i>
+  </div>
+  <div class="uiAction">
+    <%
+    String addLabel = _ctx.appRes(uicomponent.getName() + ".action.Add") 
+    String addLink = uiform.event("Add") ;
+    String cancelLabel = _ctx.appRes(uicomponent.getName() + ".action.Cancel") 
+    String moreConstraintsLink = uiform.event("MoreConstraints");
+
+    %>
+    <button type="button" onclick="$addLink" class="btn btn-primary">$addLabel</button>
+    <button type="button" onclick="$moreConstraintsLink" class="btn">$cancelLabel</button>
+  </div>
 </div>
