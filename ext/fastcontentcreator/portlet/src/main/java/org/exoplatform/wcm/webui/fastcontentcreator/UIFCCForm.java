@@ -277,6 +277,13 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
     return dmsConfiguration.getConfig().getSystemWorkspace();
   }
+  
+  @Override
+  public void processRender(WebuiRequestContext context) throws Exception {
+    context.getJavascriptManager().loadScriptResource("wcm-webui-ext");
+    context.getJavascriptManager().addCustomizedOnLoadScript("changeWarning();");
+    super.processRender(context);
+  }  
 
   /**
    * The listener interface for receiving saveAction events.
