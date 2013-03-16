@@ -33,9 +33,11 @@
 				<a class="driveLabel" href="<%=uicomponent.event("SelectDrive", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getLabel(drive.getName())%>"><%=uicomponent.getLabel(drive.getName())%></a>
 				<%
 				    } else {
+						def styleDrive = drive.getName().replace(" ","");
+
 				%>
 				<a class="driveLabel" href="<%=uicomponent.event("SelectDrive", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom"  title="<%=uicomponent.getLabel(drive.getName())%>">
-					<i class="uiIconEcms24x24DriveGeneral uiIconEcms24x24Drive${drive.workspace} uiIconEcms24x24LightGray driveIcon"></i><%=uicomponent.getLabel(drive.getName())%>
+					<i class="uiIconEcms24x24DriveGeneral uiIconEcms24x24Drive${styleDrive} uiIconEcms24x24LightGray driveIcon"></i><%=uicomponent.getLabel(drive.getName())%>
 				</a>
 				<%      
 				    }
