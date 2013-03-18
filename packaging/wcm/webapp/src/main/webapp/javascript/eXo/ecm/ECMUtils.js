@@ -288,10 +288,10 @@
 			var subGroup = gj(node).children("div.nodeGroup:first")[0];
 			if (!subGroup) return false;
 			if (subGroup.style.display == "none") {
-			  if (element.className.match("ExpandIcon")) element.className = element.className.replace("ExpandIcon", "CollapseIcon");
+			  if (element.className.match("expandIcon")) element.className = element.className.replace("expandIcon", "collapseIcon");
 			  subGroup.style.display = "block";
 			} else {
-			  if (element.className.match("CollapseIcon")) element.className = element.className.replace("CollapseIcon", "ExpandIcon");
+			  if (element.className.match("collapseIcon")) element.className = element.className.replace("collapseIcon", "expandIcon");
 			  subGroup.style.display = "none";
 			}
 			return true;
@@ -302,11 +302,11 @@
 			var subGroup1 = gj(node).children("div.NodeGroup1:first")[0];
 			var subGroup2 = gj(node).children("div.NodeGroup2:first")[0];
 			if (subGroup1.style.display == "none") {
-			  if (element.className == "CollapseIcon") element.className = "ExpandIcon";
+			  if (element.className == "collapseIcon") element.className = "expandIcon";
 			  subGroup1.style.display = "block";
 			  subGroup2.style.display = "none";
 			} else {
-			  if (element.className == "ExpandIcon") element.className = "CollapseIcon";
+			  if (element.className == "expandIcon") element.className = "collapseIcon";
 			  subGroup1.style.display = "none";
 			  subGroup2.style.display = "block";
 			}
