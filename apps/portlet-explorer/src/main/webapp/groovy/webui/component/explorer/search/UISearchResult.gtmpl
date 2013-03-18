@@ -142,7 +142,7 @@
       } else {
     %>
       <tr>
-        <td colspan="4" style="text-align:center;font-style:italic; color: #EF5604;"><%=_ctx.appRes("UISearchResult.msg.empty")%></td>
+        <td colspan="4" class="center empty"><%=_ctx.appRes("UISearchResult.msg.empty")%></td>
       </tr>
     <%}%>
     </tbody>
