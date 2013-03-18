@@ -40,7 +40,7 @@
             <td><div class="text"><%= node.getPath(); %></div></td>
             <td><div class="text"><%= node.getLock().getLockOwner(); %></div></td>
 			<td class="center">	          	
-				<a onclick="<%=uicomponent.event("UnLock", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UILockNodeList.tooltip.UnLock")%>" class="actionIcon"><i class="uiIconUnLockMini"></i></a>
+				<a onclick="<%=uicomponent.event("UnLock", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UILockNodeList.tooltip.UnLock")%>" class="actionIcon"><i class="uiIconUnlockMini"></i></a>
 			</td>	                    
           </tr>
       <%}
