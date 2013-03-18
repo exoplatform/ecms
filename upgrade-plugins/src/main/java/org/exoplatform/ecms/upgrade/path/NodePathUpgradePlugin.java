@@ -5,6 +5,7 @@ import javax.jcr.Session;
 import javax.jcr.NodeIterator;
 
 import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
+import org.exoplatform.commons.version.util.VersionComparator;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -76,6 +77,7 @@ public class NodePathUpgradePlugin extends UpgradeProductPlugin {
   
   @Override
   public boolean shouldProceedToUpgrade(String previousVersion, String newVersion) {
-    return true;
+    // --- return true only for the first version of platform
+    return VersionComparator.isAfter(newVersion,previousVersion);
   }
 }

@@ -29,6 +29,7 @@ import javax.jcr.query.QueryManager;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
 import org.exoplatform.commons.utils.PrivilegedSystemHelper;
+import org.exoplatform.commons.version.util.VersionComparator;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.scripts.ScriptService;
 import org.exoplatform.services.cms.scripts.impl.ScriptServiceImpl;
@@ -117,7 +118,8 @@ public class ScriptUpgradePlugin extends UpgradeProductPlugin {
   
   @Override
   public boolean shouldProceedToUpgrade(String previousVersion, String newVersion) {
-    return true;
+    // --- return true only for the first version of platform
+    return VersionComparator.isAfter(newVersion,previousVersion);
   }
   
 }

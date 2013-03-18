@@ -9,6 +9,7 @@ import javax.jcr.query.QueryResult;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
+import org.exoplatform.commons.version.util.VersionComparator;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.InitParams;
@@ -83,6 +84,7 @@ public class ActivitiesUpgradePlugin extends UpgradeProductPlugin {
 	@Override
 	public boolean shouldProceedToUpgrade(String previousVersion,
 			String newVersion) {
-		return true;
+	  // --- return true only for the first version of platform
+    return VersionComparator.isAfter(newVersion,previousVersion);
 	}
 }
