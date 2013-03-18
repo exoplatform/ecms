@@ -26,7 +26,8 @@
     return size;
   }
   
-  if(mimeType.equals("text/html") || mimeType.equals("application/rss+xml")) { 
+  if(mimeType.equals("text/html") || mimeType.equals("application/rss+xml")) {
+  def title = ContentReader.getXSSCompatibilityContent(org.exoplatform.services.cms.impl.Utils.getTitle(originalNode));
 %>
 
 	<div class="UITabPane">
@@ -66,7 +67,7 @@
 	      <div class="UITabContentContainer">
 	        <div class="UITabContent" style="display: block;"> 
 		        <div class="NavigationContainer">       
-	    				<div class="TopTitle" rel="tooltip" data-placement="bottom" title="<%=ContentReader.getXSSCompatibilityContent(originalNode.getName())%>"><%=ContentReader.getXSSCompatibilityContent(originalNode.getName())%></div>
+	    				<div class="TopTitle" rel="tooltip" data-placement="bottom" title="$title">$title</div>
 			        <%
 			        	if(contentNode.hasProperty("jcr:data")){
 			        	  String iframeId = uiParent.getId() + "ifame" ;
@@ -86,7 +87,7 @@
 	        </div>
 	        <div class="UITabContent" style="display: none;"> 
 	        	<div class="NavigationContainer">       
-						<div class="TopTitle" rel="tooltip" data-placement="bottom" title="<%=ContentReader.getXSSCompatibilityContent(originalNode.getName())%>"><%=ContentReader.getXSSCompatibilityContent(originalNode.getName())%></div>
+						<div class="TopTitle" rel="tooltip" data-placement="bottom" title="$title">$title</div>
 		        	<div class="Content">
 		        		<div class="TextContent">
 					        <%

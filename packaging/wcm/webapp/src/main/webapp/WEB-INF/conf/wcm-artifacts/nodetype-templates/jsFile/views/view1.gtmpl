@@ -64,7 +64,7 @@
 %>
 <div class="FileContent">	
   <div class="NavigationContainer">       
-    <div class="TopTitle">$originalNode.name</div>
+    <div class="TopTitle"><%=org.exoplatform.services.cms.impl.Utils.getTitle(originalNode)%></div>
     <div class="Content">
     	<div class="TextContent">
 	      <% println "<pre>" + uicomponent.encodeHTML(contentNode.getProperty("jcr:data").getString()) + "</pre>"; %>     
