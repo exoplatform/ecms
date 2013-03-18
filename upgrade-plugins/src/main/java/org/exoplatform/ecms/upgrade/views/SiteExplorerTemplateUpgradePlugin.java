@@ -28,6 +28,7 @@ import javax.jcr.Session;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
 import org.exoplatform.commons.utils.PrivilegedSystemHelper;
+import org.exoplatform.commons.version.util.VersionComparator;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
@@ -129,7 +130,8 @@ public class SiteExplorerTemplateUpgradePlugin extends UpgradeProductPlugin {
   
   @Override
   public boolean shouldProceedToUpgrade(String previousVersion, String newVersion) {
-    return true;
+    // --- return true only for the first version of platform
+    return VersionComparator.isAfter(newVersion,previousVersion);
   }
 
 }
