@@ -262,24 +262,23 @@
 }
 
 .uiListGrid { 
-	.Icon16x16 {
-		float: none;
-		margin: auto;
-		width: 20px;
-		line-height: 16px;
+	
+	[class^="uiIcon24x24"] {
+		position: relative;
 	}
 	
-	.LinkSmall {
-		background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/background/LinkSmall.gif') no-repeat right bottom;
-		width: 20px;
+	.LinkSmall,.IconLocked  {
+		background: url("/ecmexplorer/skin/images/Icons/IconMedLink.png") no-repeat right top;
+		width: 16px;
 		height: 16px;
+		bottom: 0px;
+		right: 0px;
+		position: absolute;
 	}
 	
 	.IconLocked {
-		background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/background/IconLocked.gif') no-repeat right top;
-		width: 20px;
-		height: 16px;
-		float: left;
+		background: url("/ecmexplorer/skin/images/Icons/IconMedLock.png") no-repeat right top;
+		top: 0px;
 	}
 }
 
@@ -384,22 +383,18 @@
 		position: relative;
 	}
 	
-	.Link {
-		background: url('/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/Link.gif') no-repeat right bottom;
+	.Link,.IconLocked {
+		background: url("/ecmexplorer/skin/images/Icons/IconBigLink.png") no-repeat right top;
 		position: absolute;
-		width: 16px;
-		height: 16px;
-		right: 0;
+		width: 32px;
+		height: 32px;
+		right: -5px;
 		bottom: 0;
 	}
 	
 	.IconLocked {
-		background: url('/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/IconLockedBig.gif') no-repeat right top;
-		position: absolute;
-		width: 16px;
-		height: 48px;
-		right: 0;
-		bottom: 0;
+		background: url("/ecmexplorer/skin/images/Icons/IconBigLock.png") no-repeat right top;
+		top: 0;
 	}
 }
 
