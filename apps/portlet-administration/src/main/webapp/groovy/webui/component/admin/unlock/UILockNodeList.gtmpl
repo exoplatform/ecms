@@ -24,10 +24,42 @@
   </div>
   <%}%>
   <table class="uiGrid table table-hover table-striped">
+		<%
+		  String selectedSortType = uicomponent.getTypeSort() ;   
+		  String sortOrder = uicomponent.getSortOrder();
+		  String typeActionLink = "";
+		  if (sortOrder.equals("Down")) {
+		    typeActionLink = "Descending;";
+		  } else {
+		    typeActionLink = "Ascending;";
+		  }
+		%>
     <thead>
       <tr>
-  	    <th><%=_ctx.appRes("UILockNodeList.header.name")%></th>
-  	    <th><%=_ctx.appRes("UILockNodeList.header.hoderLock")%></th>  	    
+  	    <th onclick="<%=uicomponent.event("Sort", typeActionLink + "Alphabetic")%>">
+  	      <%
+	          if (selectedSortType.equals("Alphabetic")) {
+	            %>
+	              <i class="uiIconArrow${sortOrder} uiIconLightGrey pull-right"></i>
+	              <%=_ctx.appRes("UILockNodeList.header.name")%>
+	            <%
+	          } else { 
+	            %><%=_ctx.appRes("UILockNodeList.header.name")%><%
+	          } 
+	        %>
+  	    </th>
+  	    <th onclick="<%=uicomponent.event("Sort", typeActionLink + "Owner")%>">
+		  	  <%
+		        if (selectedSortType.equals("Owner")) {
+		          %>
+		            <i class="uiIconArrow${sortOrder} uiIconLightGrey pull-right"></i>
+		            <%=_ctx.appRes("UILockNodeList.header.hoderLock")%>
+		          <%
+		        } else { 
+		          %><%=_ctx.appRes("UILockNodeList.header.hoderLock")%><%
+		        } 
+		      %>
+  	    </th>  	    
   	    <th class="center span1"><%=_ctx.appRes("UILockNodeList.header.action")%></th>
       </tr>
     </thead>
@@ -37,7 +69,7 @@
   	    for (node in lockedNodeList) {
       %>
           <tr>
-            <td><div class="text"><%= node.getPath(); %></div></td>
+            <td><div class="text"><%= Utils.getTitle(node); %></div></td>
             <td><div class="text"><%= node.getLock().getLockOwner(); %></div></td>
 			<td class="center">	          	
 				<a onclick="<%=uicomponent.event("UnLock", node.getPath())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UILockNodeList.tooltip.UnLock")%>" class="actionIcon"><i class="uiIconUnlockMini"></i></a>

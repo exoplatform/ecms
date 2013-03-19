@@ -2483,8 +2483,8 @@
   </UILockHolderList>
   <UILockNodeList>
   	<header>
-  		<name>Node Path</name>
-  		<hoderLock>User Lock</hoderLock>
+  		<name>Title</name>
+  		<hoderLock>Lock Owner</hoderLock>
   		<action>Action</action>
   	</header>
   	<tooltip>
