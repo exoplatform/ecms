@@ -134,8 +134,8 @@
                 } else {
                   typeActionLink = "Ascending;";
                 }
-                def bgColorName = "Alphabetic".equals(selectedSortType)?"yellow":"";
-                def bgColorDate = "Date".equals(selectedSortType)?"yellow":"";
+                def nameClass = "Alphabetic".equals(selectedSortType)?"active":"";
+                def dateClass = "Date".equals(selectedSortType)?"active":"";
               %>
             <!--===============DropDownBox===================-->
               <div class="btn-group pull-right">
@@ -144,17 +144,17 @@
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" style="max-height:290px;min-width:80px;overflow:auto">
-                    <li>
-                      <a style="background-color:$bgColorName" href="<%=uicomponent.event("Sort", typeActionLink + "Alphabetic")%>">
+                    <li class="$nameClass">
+                      <a href="<%=uicomponent.event("Sort", typeActionLink + "Alphabetic")%>">
                         <%=_ctx.appRes("FileView.label.name")%>
-                        <% if ("yellow".equals(bgColorName)) {%>
+                        <% if ("active".equals(nameClass)) {%>
                           <i class="uiIconSort$sortOrder">&nbsp;</i>
                         <%} %>
                       </a>
                     </li>
-                    <li>
-                      <a style="background-color:$bgColorDate" href="<%=uicomponent.event("Sort", typeActionLink + "Date")%>"><%=_ctx.appRes("FileView.label.date")%>
-                        <% if ("yellow".equals(bgColorDate)) {%>
+                    <li class="$dateClass">
+                      <a href="<%=uicomponent.event("Sort", typeActionLink + "Date")%>"><%=_ctx.appRes("FileView.label.date")%>
+                        <% if ("active".equals(dateClass)) {%>
                           <i class="uiIconSort$sortOrder">&nbsp;</i>
                         <%} %>
                       </a>
