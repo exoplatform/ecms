@@ -11,13 +11,16 @@
 <div class="uiContentBox">
   <div class="$uicomponent.id"> 
         <%
+          def tagStyle = uicomponent.getTagStyle() ; 
           for(tag in uicomponent.getPublicTagLink()){
             String tagLink = uicomponent.event('ViewTag',tag.getPath()) ;
             int tagCount = 0;
+            String style = "";
             if(tag.hasProperty("exo:total")) {
-              tagCount = (int)tag.getProperty("exo:total").getValue().getLong() ;
+              tagCount = (int)tag.getProperty("exo:total").getValue().getLong();
+              style = "Style = '" + uicomponent.getTagHtmlStyle(tagStyle, tagCount)+ "'";
             }
-            println "<a href=\"$tagLink\" >$tag.name</a>" ;
+            println "<a href=\"$tagLink\" $style>$tag.name</a>" ;
           }
         %>
   </div>
