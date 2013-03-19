@@ -27,6 +27,7 @@ import javax.jcr.query.QueryResult;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
+import org.exoplatform.commons.version.util.VersionComparator;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
@@ -74,8 +75,9 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
   }
   
   @Override
-  public boolean shouldProceedToUpgrade(String previousVersion, String newVersion) {
-    return true;
+  public boolean shouldProceedToUpgrade(String newVersion, String previousVersion) {
+    //return true anly for the first version of platform
+    return VersionComparator.isAfter(newVersion,previousVersion);
   }  
   
   private void migrateViews() {
