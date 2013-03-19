@@ -23,6 +23,7 @@ import javax.jcr.Node;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
+import org.exoplatform.ecm.webui.component.explorer.sidebar.UITagExplorer;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.wcm.core.NodeLocation;
@@ -131,8 +132,16 @@ public class UITagForm extends UIForm {
         // rename tag
         else {
           if (!existTag(tagName, workspace, scope, uiForm, userName)) {
-            newFolksonomyService.modifyTagName(uiForm.oldTagPath_, tagName, workspace);
-            uiExplorer.setTagPath(uiForm.oldTagPath_.replace(uiForm.oldName_, tagName));
+            NodeHierarchyCreator nodeHierarchyCreator = uiForm.getApplicationComponent(NodeHierarchyCreator.class);
+//            if (scope == NewFolksonomyService.PRIVATE) { 
+//              Node newTagNode = newFolksonomyService.modifyPrivateTagName(uiForm.oldTagPath_, tagName, workspace, userName);
+//              uiExplorer.setTagPath(newTagNode.getPath());
+//            } else {
+            //always public tags
+            String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
+            Node newTagNode = newFolksonomyService.modifyPublicTagName(uiForm.oldTagPath_, tagName, workspace, publicTagNodePath);
+            uiExplorer.setTagPath(newTagNode.getPath());
+//            }            
           } else if (!tagName.equals(uiForm.oldName_)) {
             uiApp.addMessage(new ApplicationMessage("UITagForm.msg.NameAlreadyExist", null,
                           ApplicationMessage.WARNING));
@@ -154,6 +163,7 @@ public class UITagForm extends UIForm {
       Preference preferences = uiExplorer.getPreference();
       if (preferences.isShowSideBar()) {
         UISideBar uiSideBar = uiExplorer.findFirstComponentOfType(UISideBar.class);
+        uiSideBar.getChild(UITagExplorer.class).updateTagList();
         event.getRequestContext().addUIComponentToUpdateByAjax(uiSideBar);
       }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup.getParent()) ;

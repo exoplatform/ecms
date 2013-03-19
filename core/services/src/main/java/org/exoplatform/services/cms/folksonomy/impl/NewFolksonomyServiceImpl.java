@@ -25,18 +25,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.Map.Entry;
 
 import javax.jcr.ItemExistsException;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
-
-import nl.captcha.gimpy.FishEyeGimpyRenderer;
 
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
@@ -44,7 +44,11 @@ import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.ext.distribution.DataDistributionManager;
+import org.exoplatform.services.jcr.ext.distribution.DataDistributionMode;
+import org.exoplatform.services.jcr.ext.distribution.DataDistributionType;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
@@ -93,15 +97,33 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   private ListenerService           listenerService;
   
   private ActivityCommonService     activityService;
+  
+  //The DataDistributionType used to store tagNodes
+  private DataDistributionType dataDistributionType;
 
   public NewFolksonomyServiceImpl(InitParams initParams,
                                   NodeHierarchyCreator nodeHierarchyCreator,
-                                  LinkManager linkManager) throws Exception {
+                                  LinkManager linkManager,
+                                  DataDistributionManager dataDistributionManager,
+                                  SessionProviderService sessionProviderService) throws Exception {
     this.nodeHierarchyCreator = nodeHierarchyCreator;
     this.linkManager = linkManager;
     this.initParams_ = initParams;
     listenerService = WCMCoreUtils.getService(ListenerService.class);
     this.activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+    //get the DataDistributionType object;
+    if (initParams != null && initParams.getValueParam("tagDistributionMode") != null) {
+      String strTagDistributionMode = initParams.getValueParam("tagDistributionMode").getValue();
+      if ("none".equals(strTagDistributionMode)) {
+        dataDistributionType = dataDistributionManager.getDataDistributionType(DataDistributionMode.NONE);
+      } else if ("readable".equals(strTagDistributionMode)) {
+        dataDistributionType = dataDistributionManager.getDataDistributionType(DataDistributionMode.READABLE);
+      } else if ("optimized".equals(strTagDistributionMode)) {
+        dataDistributionType = dataDistributionManager.getDataDistributionType(DataDistributionMode.OPTIMIZED);
+      }
+    } else {
+      dataDistributionType = dataDistributionManager.getDataDistributionType(DataDistributionMode.READABLE);
+    }    
   }
 
   /**
@@ -124,6 +146,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
    */
   public void stop() {
   }
+  
+  
 
   /**
    * {@inheritDoc}
@@ -133,6 +157,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
                             String workspace,
                             String userName) throws Exception {
     Node userFolksonomyNode = getUserFolksonomyFolder(userName);
+    userFolksonomyNode.getSession().save();
     Node targetNode = getTargetNode(documentNode);
     boolean firstTagFlag = true;
     StringBuffer tagValue = new StringBuffer();
@@ -305,9 +330,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     Set<Node> tagSet = new TreeSet<Node>(new NodeComparator());
     for (String group : roles) {
       Node groupFolksonomyNode = getGroupFolksonomyFolder(group, workspace);
-      NodeIterator nodeIter = groupFolksonomyNode.getNodes();
-      while (nodeIter.hasNext()) {
-        Node tag = nodeIter.nextNode();
+      List<Node> tagNodes = queryTagNodes(groupFolksonomyNode);
+      for(Node tag : tagNodes) {
         if (!((Node) tag.getAncestor(1)).isNodeType(EXO_TRASH_FOLDER)) {
           tagSet.add(tag);
         }
@@ -315,6 +339,17 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     }
     return new ArrayList<Node>(tagSet);
   }
+  
+  private List<Node> queryTagNodes(Node rootNode) throws Exception {
+    List<Node> ret = new ArrayList<Node>();
+    StringBuilder queryStr = new StringBuilder().append("select * from ").append(EXO_TAGGED).append(" where jcr:path like '").
+    append(rootNode.getPath()).append("/%'");
+    Query query = rootNode.getSession().getWorkspace().getQueryManager().createQuery(queryStr.toString(), Query.SQL); 
+    for (NodeIterator iter = query.execute().getNodes(); iter.hasNext();) {
+      ret.add(iter.nextNode());
+    }
+    return ret;
+  }  
 
   /**
    * {@inheritDoc}
@@ -322,9 +357,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   public List<Node> getAllGroupTags(String role, String workspace) throws Exception {
     List<Node> tagSet = new ArrayList<Node>();
     Node groupFolksonomyNode = getGroupFolksonomyFolder(role, workspace);
-    NodeIterator nodeIter = groupFolksonomyNode.getNodes();
-    while (nodeIter.hasNext()) {
-      tagSet.add(nodeIter.nextNode());
+    for (Node tagNode : queryTagNodes(groupFolksonomyNode)) {
+      tagSet.add(tagNode);
     }
     return tagSet;
   }
@@ -334,7 +368,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
    */
   public List<Node> getAllPrivateTags(String userName) throws Exception {
     Node userFolksonomyNode = getUserFolksonomyFolder(userName);
-    return getChildNodes(userFolksonomyNode);
+    return queryTagNodes(userFolksonomyNode);
   }
 
   /**
@@ -342,7 +376,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
    */
   public List<Node> getAllPublicTags(String treePath, String workspace) throws Exception {
     Node publicFolksonomyTreeNode = getNode(workspace, treePath);
-    return getChildNodes(publicFolksonomyTreeNode);
+    return queryTagNodes(publicFolksonomyTreeNode);
   }
 
   /**
@@ -433,6 +467,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public Node modifyTagName(String tagPath, String newTagName, String workspace) throws Exception {
     Node oldTagNode = getNode(workspace, tagPath);
     if (oldTagNode.getParent().hasNode(newTagName))
@@ -449,7 +484,42 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     session.save();
     return getNode(workspace, newPath.toString());
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public Node modifyPublicTagName(String tagPath, String newTagName, String workspace, String treePath) throws Exception {
+    Node oldTagNode = getNode(workspace, tagPath);
+    Node publicFolksonomyTreeNode = getNode(workspace, treePath);
+    Node newTagNode = null;
+    try {
+      newTagNode = dataDistributionType.getDataNode(publicFolksonomyTreeNode, newTagName);
+      throw new ItemExistsException("node " + newTagName + " has already existed!");
+    } catch (PathNotFoundException e) {
+      //Path not found means newTagName does not exists, it is expected behavior. 
+    }
+    newTagNode = dataDistributionType.getOrCreateDataNode(publicFolksonomyTreeNode, newTagName);
+    newTagNode.addMixin(EXO_TAGGED);
+    if (oldTagNode.hasProperty(EXO_TOTAL)) {
+      newTagNode.setProperty(EXO_TOTAL, oldTagNode.getProperty(EXO_TOTAL).getValue());
+    }
+    
+    Map<String, String> pathMap = new HashMap<String, String>();
+    for (NodeIterator iter = oldTagNode.getNodes(); iter.hasNext();) {
+      Node node = iter.nextNode();
+      pathMap.put(node.getPath(), newTagNode.getPath() + "/" + node.getName());
+    }
 
+    Session session = newTagNode.getSession();
+    for (Entry<String, String> entry : pathMap.entrySet()) {
+      session.move(entry.getKey(), entry.getValue());
+    }
+    oldTagNode.remove();
+    session.save();
+    return newTagNode;
+  }      
+  
+  
   /**
    * {@inheritDoc}
    */
@@ -685,9 +755,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     List<Node> ret = new ArrayList<Node>();
     if (scope == PRIVATE) {
       Node userFolksonomyNode = getUserFolksonomyFolder(value);
-      NodeIterator iter = userFolksonomyNode.getNodes();
-      while (iter.hasNext()) {
-        Node tagNode = iter.nextNode();
+      for (Node tagNode : queryTagNodes(userFolksonomyNode)) {
         if (existSymlink(tagNode, documentNode))
           ret.add(tagNode);
       }
@@ -696,9 +764,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     else if (scope == PUBLIC) {
       String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
       Node publicFolksonomyTreeNode = getNode(workspace, publicTagNodePath);
-      NodeIterator iter = publicFolksonomyTreeNode.getNodes();
-      while (iter.hasNext()) {
-        Node tagNode = iter.nextNode();
+      for (Node tagNode : queryTagNodes(publicFolksonomyTreeNode)) {
         if (existSymlink(tagNode, documentNode))
           ret.add(tagNode);
       }
@@ -710,9 +776,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
         if (group.length() < 1)
           continue;
         Node groupFolksonomyNode = getGroupFolksonomyFolder(group, workspace);
-        NodeIterator iter = groupFolksonomyNode.getNodes();
-        while (iter.hasNext()) {
-          Node tagNode = iter.nextNode();
+        for (Node tagNode : queryTagNodes(groupFolksonomyNode)) {
           if (existSymlink(tagNode, documentNode))
             ret.add(tagNode);
         }
@@ -826,12 +890,9 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   }
 
   private Node getTagNode(Node folksonomyHome, String tagName) throws Exception {
-    Node tagNode = null;
-    if (folksonomyHome.hasNode(tagName)) {
-      tagNode = folksonomyHome.getNode(tagName);
-    } else {
-      tagNode = folksonomyHome.addNode(tagName);
-      if (!tagNode.isNodeType(EXO_TAGGED)) tagNode.addMixin(EXO_TAGGED);
+    Node tagNode = dataDistributionType.getOrCreateDataNode(folksonomyHome, tagName);
+    if (!tagNode.isNodeType(EXO_TAGGED)) {
+      tagNode.addMixin(EXO_TAGGED);
       tagNode.setProperty(EXO_TOTAL, 0);
     }
     return tagNode;
@@ -844,4 +905,12 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
       tagNode.setProperty(EXO_TOTAL, total + 1);
     }
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public DataDistributionType getDataDistributionType() {
+    return this.dataDistributionType;
+  }
+  
 }
