@@ -1909,7 +1909,7 @@ public class UIDialogForm extends UIForm {
   public void processRenderAction() throws Exception {
     WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
     Writer writer = context.getWriter();
-    writer.append("<div class=\"UIAction\">");
+    writer.append("<div class=\"uiAction uiActionBorder\">");
     String[] listAction = getActions();
     ResourceBundle res = context.getApplicationResourceBundle();
     String actionLabel;
@@ -1921,11 +1921,11 @@ public class UIDialogForm extends UIForm {
         actionLabel = action;
       }
       link = event(action);
-      writer.append("<a class=\"ActionButton LightBlueStyle\" onclick =\"")
+      writer.append("<button type=\"button\" class=\"btn\" onclick =\"")
             .append(link)
-            .append("\"  href=\"javascript:void(0);\">")
+            .append("\">")
             .append(actionLabel)
-            .append("</a>");
+            .append("</button>");
     }
     writer.append("</div>");
   }
