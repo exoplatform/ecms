@@ -202,6 +202,18 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
               strViews.append("Icons");
             } else if(view.equals("e_admin-view")) {
               strViews.append("Admin");
+            } else if(view.equals("simple-view")) {
+              strViews.append("Icons");
+            } else if(view.equals("slide-show")) {
+              strViews.append("Icons");
+            } else if(view.equals("anonymous-view")) {
+              strViews.append("Icons");
+            } else if(view.equals("taxonomy-list")) {
+              strViews.append("List");
+            } else if(view.equals("taxonomy-icons")) {
+              strViews.append("Icons");
+            } else if(view.equals("system-view")) {
+              strViews.append("List");
             } else {
               strViews.append(view);
             }
