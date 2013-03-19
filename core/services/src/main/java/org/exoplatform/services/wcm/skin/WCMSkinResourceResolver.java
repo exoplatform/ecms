@@ -70,7 +70,9 @@ public class WCMSkinResourceResolver implements ResourceResolver {
     }
     try {
       Node portalNode = livePortalService.getLivePortal(WCMCoreUtils.getSystemSessionProvider(), portalName);
-      final String cssData = WCMCoreUtils.getSiteGlobalActiveStylesheet(portalNode);
+      
+      String pureCssData = WCMCoreUtils.getSiteGlobalActiveStylesheet(portalNode);
+      final String cssData = pureCssData.replaceAll("@import(.*)[^/]*.css(.*);", "");
       if(cssData == null)
         return null;
       return new Resource(cssPath) {
