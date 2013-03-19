@@ -36,7 +36,7 @@
    String ownerId = Utils.getNodeOwner(currentNode);
    boolean canChangePermission = PermissionUtil.canChangePermission(currentNode);
 %>
-<div id="$uicomponent.id">
+<div id="$uicomponent.id" class="permissionInfo">
    <table class="uiGrid table table-hover table-striped" cellspacing="0">
       <thead>
       <tr>
