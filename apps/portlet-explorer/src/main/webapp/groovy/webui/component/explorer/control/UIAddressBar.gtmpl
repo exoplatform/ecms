@@ -90,7 +90,7 @@
 			<td id="UIAddressBarAction" class="uiAddressBarAction">
 				<div class="blockMiddle${viewSize} uiPopupSelector ClearFix">
 					<div class="dropDownButtonBox" onmousedown="eXo.ecm.ECMUtils.clickLeftMouse(event,this,2,1)" onkeydown="eXo.ecm.ECMUtils.clickLeftMouse(event,this,2,1)">
-						<div class="dropDownButton Style1DownArrow16x16Icon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAddressBar.title.showHistory")%>"><span></span></div>
+						<i class="uiIconArrowDown uiIconLightGray" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAddressBar.title.showHistory")%>"></i>
 					</div>
 					<div class="inputContainer"  id="AddressBarControl">
 						<a href="<%=uicomponent.event("ChangeNode")%>" id="GotoLocation" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAddressBar.title.changeNode")%>"></a>
