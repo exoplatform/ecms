@@ -209,11 +209,17 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
             } else if(view.equals("anonymous-view")) {
               strViews.append("Icons");
             } else if(view.equals("taxonomy-list")) {
-              strViews.append("List");
+              strViews.append("Categories");
             } else if(view.equals("taxonomy-icons")) {
-              strViews.append("Icons");
+              strViews.append("Categories");
             } else if(view.equals("system-view")) {
               strViews.append("List");
+            } else if(view.equals("wcm-view")) {
+              strViews.append("Web");
+            } else if(view.equals("authoring-view")) {
+              strViews.append("Web");
+            } else if(view.equals("wcm-category-view")) {
+              strViews.append("Categories");
             } else {
               strViews.append(view);
             }
