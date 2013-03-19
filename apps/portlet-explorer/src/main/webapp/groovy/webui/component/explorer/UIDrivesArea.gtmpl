@@ -20,7 +20,7 @@
     <% } %>
 	  <%if(mainDrives.size() > 0) {%>
 			<div class="rowDrives clearfix">
-				<h5 class="titleDriver"><i class="uiIconArrowRightMini uiIconLightGray"></i><%=_ctx.appRes("UIDrivesBrowser.title.GeneralDrives" )%></h5>
+				<h5 class="titleDriver"><%=_ctx.appRes("UIDrivesBrowser.title.GeneralDrives" )%></h5>
 				<%
 				  for(drive in mainDrives) {
     				println("<div class=\"drive\">");
@@ -48,7 +48,7 @@
 		<%}%>
 		<%if(groupDrives.size() > 0) {%>
 			<div class="rowDrives rowDrivesGroups clearfix">
-				<h5 class="titleDriver"><i class="uiIconArrowRightMini uiIconLightGray"></i><%=_ctx.appRes("UIDrivesBrowser.title.GroupDrives" )%></h5>
+				<h5 class="titleDriver"><%=_ctx.appRes("UIDrivesBrowser.title.GroupDrives" )%></h5>
 	        <%
 	          for(groupDrive in groupDrives) {
 	            println("<div class=\"drive\">");
@@ -73,7 +73,7 @@
 		<%}%>	
 		<%if(personalDrives.size() > 0) {%>
 			<div class="rowNormal clearfix">
-				<h5 class="titleDriver"><i class="uiIconArrowRightMini uiIconLightGray"></i><%=_ctx.appRes("UIDrivesBrowser.title.PersonalDrives" )%></h5>
+				<h5 class="titleDriver"><%=_ctx.appRes("UIDrivesBrowser.title.PersonalDrives" )%></h5>
         <%
           for(drive in personalDrives) {
 	          println("<div class=\"drive\">");
