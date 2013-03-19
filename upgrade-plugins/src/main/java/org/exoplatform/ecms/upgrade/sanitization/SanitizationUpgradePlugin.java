@@ -75,7 +75,7 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
   }
   
   @Override
-  public boolean shouldProceedToUpgrade(String previousVersion, String newVersion) {
+  public boolean shouldProceedToUpgrade(String newVersion, String previousVersion) {
     //return true anly for the first version of platform
     return VersionComparator.isAfter(newVersion,previousVersion);
   }  
