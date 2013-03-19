@@ -441,7 +441,7 @@
 		var clip = null;
 		ECMUtils.prototype.initClipboard = function (id, level, size) {
 			try {
-			  if (eXo.core.Browser.isIE()) {
+			  if (!eXo.core.Browser.isIE()) {
 			    if (size > 0) {
 			      for (var i = 1; i <= size; i++) {
 			        clip = new ZeroClipboard.Client();

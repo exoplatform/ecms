@@ -57,6 +57,7 @@
   def uiCustomActionComponent = uiWorkingArea.getCustomAction();
   def managersMultiItemContext =  uiWorkingArea.getMultiActionsExtensionList();
   def managersGroundContext = uiWorkingArea.getGroundActionsExtensionList();
+  String serverUrl= uicomponent.getWebDAVServerPrefix();
   def action = "";
   def permLinkComponent = null;
   
@@ -334,10 +335,9 @@
           }
           
           if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {
-          	String clipboardLink = "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + data.getPath();
-          	
+          	String clipboardLink = serverUrl + "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + data.getPath();
           	strActs +=  "<li class='menuItem'>";
-          	strActs +=  "<a exo:attr='CopyUrlToClipboard' style='display: block;' id='clip_button1$i' path='$clipboardLink' onclick=\"eXo.ecm.ECMUtils.pushToClipboard(event,'$clipboardLink');\">" ;
+          	strActs +=  "<a exo:attr='CopyUrlToClipboard' style='display: block;' id='clip_button1$i' data-clipboard-text='$clipboardLink' path='$clipboardLink' onclick=\"eXo.ecm.ECMUtils.pushToClipboard(event,'$clipboardLink');\">" ;
           	strActs +=  " <i class='uiIconEcmsCopyUrlToClipboard'>" ;
           	strActs +=  " </i>" ;
             strActs +=    _ctx.appRes("ECMContextMenu.event.GetURL");

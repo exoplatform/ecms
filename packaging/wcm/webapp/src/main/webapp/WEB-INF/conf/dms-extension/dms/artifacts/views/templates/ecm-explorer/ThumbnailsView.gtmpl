@@ -31,6 +31,8 @@
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
   String repository = rService.getCurrentRepository().getConfiguration().getName();  
   String restContextName = Utils.getRestContextName(portalName);
+  String serverUrl= uicomponent.getWebDAVServerPrefix();
+  
   def size = uicomponent.getChildrenList().size();
   def viewComponentId  = new Date().getTime();
   def rcontext = _ctx.getRequestContext() ;
@@ -171,7 +173,7 @@
                   }            
                 }
               if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {  
-              	String clipboardLink = "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + data.getPath();
+              	String clipboardLink = serverUrl + "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + data.getPath();
               	strActs +=  "<li class='menuItem'>";
               	strActs +=  "<a exo:attr='CopyUrlToClipboard' style='display: block;' id='clip_button1$i' path='$clipboardLink' onclick=\"eXo.ecm.ECMUtils.pushToClipboard(event,'$clipboardLink');\">" ;
               	strActs +=  " <i class='uiIconEcmsCopyUrlToClipboard'>" ;
