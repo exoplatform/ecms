@@ -100,5 +100,6 @@
 	
 </div>
 <%
+  rcontext.getJavascriptManager().require("SHARED/ecm-utils", "ecmutil").addScripts("ecmutil.ECMUtils.checkLeftContainerInPreferences($initWithoutLeftContainer);");
   rcontext.getJavascriptManager().require("SHARED/ecm-utils", "ecmutil").addScripts("ecmutil.ECMUtils.loadEffectedItemsInSideBar();");
 %>

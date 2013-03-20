@@ -522,8 +522,13 @@
 			}
 		};
 		ECMUtils.prototype.initWithoutLeftContainer = function () {
+			Self.uiWorkingArea  = gj(document).find('div.uiWorkingArea:first')[0];
 			var value = gj(Self.uiWorkingArea).attr("initWithoutLeftContainer")!='true';
 			return value;
+		}
+		ECMUtils.prototype.checkLeftContainerInPreferences = function (value) {
+			Self.uiWorkingArea  = gj(document).find('div.uiWorkingArea:first')[0];
+			gj(Self.uiWorkingArea).attr("initWithoutLeftContainer", value);
 		}
 		ECMUtils.prototype.resizeSideBar = function (event) {
 		  var event = event || window.event;
