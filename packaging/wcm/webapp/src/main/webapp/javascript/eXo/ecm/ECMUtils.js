@@ -968,7 +968,7 @@
 		  event.cancelBubble = true;
 		  var leftContainer = document.getElementById("LeftContainer");
 		  var rightContainer = gj(Self.uiWorkingArea).find("div.rightContainer:first")[0];
-		  var resizeButton = gj(Self.uiWorkingArea).find("div.resizeButton:first")[0];
+		  var resizeButton = gj(Self.uiWorkingArea).find("a.resizeButton:first")[0];
 		var iArrow = gj(resizeButton).children("i")[0];
 		  // The bellow block are updated
 		  if (leftContainer.style.display == 'none') {
