@@ -400,7 +400,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
    * @throws Exception the exception
    */
   private void mapQueryPath(final QueryCriteria queryCriteria, final SQLQueryBuilder queryBuilder) throws Exception {
-    queryBuilder.setQueryPath(getSitePath(queryCriteria), PATH_TYPE.DECENDANTS);
+    queryBuilder.setQueryPath(getPath(queryCriteria), PATH_TYPE.DECENDANTS);
   }
 
   /**
@@ -412,13 +412,18 @@ public class SiteSearchServiceImpl implements SiteSearchService {
    *
    * @throws Exception the exception
    */
-  private String getSitePath(final QueryCriteria queryCriteria) throws Exception {
+  private String getPath(final QueryCriteria queryCriteria) throws Exception {
     String siteName = queryCriteria.getSiteName();
+    //search page path
     if (queryCriteria.isSearchWebpage()) {
       if ("all".equals(siteName) || siteName == null || siteName.trim().length() == 0) {
         return "/production/mop:workspace/mop:portalsites";
       }
       return "/production/mop:workspace/mop:portalsites/mop:" + siteName;
+    }
+    //search document path
+    if (queryCriteria.getSearchPath() != null) {
+      return queryCriteria.getSearchPath();
     }
     String sitePath = null;
     if (siteName != null) {
@@ -511,7 +516,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
    */
   private void searchByNodeName(final QueryCriteria queryCriteria,
                                 final SQLQueryBuilder queryBuilder) throws Exception {
-    queryBuilder.queryByNodeName(getSitePath(queryCriteria), queryCriteria.getKeyword());
+    queryBuilder.queryByNodeName(getPath(queryCriteria), queryCriteria.getKeyword());
   }
 
   /**
@@ -762,30 +767,9 @@ public class SiteSearchServiceImpl implements SiteSearchService {
       }
       if (displayNode.isNodeType("exo:htmlFile")) {
         Node parent = displayNode.getParent();
-        if (queryCriteria.isSearchWebContent()) {
-          if (parent.isNodeType("exo:webContent")) return parent;
-          return null;
-        }
-        if (parent.isNodeType("exo:webContent")) return null;
+        if (parent.isNodeType("exo:webContent")) return parent;
         return displayNode;
       }
-      /*
-      if(queryCriteria.isSearchWebContent()) {
-        if(!queryCriteria.isSearchDocument()) {
-          if(!displayNode.isNodeType("exo:webContent"))
-            return null;
-        }
-        if(queryCriteria.isSearchWebpage()) {
-          if (!displayNode.isNodeType("publication:webpagesPublication"))
-            return null;
-        }
-      } else if(queryCriteria.isSearchWebpage()) {
-          if (queryCriteria.isSearchDocument()) {
-            return displayNode;
-          } else if (!displayNode.isNodeType("publication:webpagesPublication"))
-            return null;
-      }
-      */
       String[] contentTypes = queryCriteria.getContentTypes();
       if(contentTypes != null && contentTypes.length>0) {
         String primaryNodeType = displayNode.getPrimaryNodeType().getName();

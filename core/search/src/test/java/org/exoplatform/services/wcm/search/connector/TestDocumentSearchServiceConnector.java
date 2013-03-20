@@ -23,6 +23,7 @@ import java.util.GregorianCalendar;
 import javax.jcr.Node;
 
 import org.exoplatform.commons.api.search.SearchServiceConnector;
+import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.component.test.ConfigurationUnit;
 import org.exoplatform.component.test.ConfiguredBy;
@@ -33,6 +34,8 @@ import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.search.base.BaseSearchTest;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.web.controller.metadata.ControllerDescriptor;
+import org.exoplatform.web.controller.router.Router;
 import org.mockito.Mockito;
 
 /**
@@ -90,27 +93,27 @@ public class TestDocumentSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = documentSearch_.search(null, "anthony", 
+          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "anthony", 
                                    sites, 
                                    0, 20, "title", "asc");
-    assertEquals(2, ret.size());
+    assertEquals(4, ret.size());//2
   }
   
   public void testSearchSingleWithOffset() throws Exception {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = documentSearch_.search(null, "anthony", 
+          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "anthony", 
                                    sites, 
                                    1, 20, "title", "asc");
-    assertEquals(1, ret.size());
+    assertEquals(3, ret.size());//1
   }
   
   public void testSearchSingleWithLimit() throws Exception {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = documentSearch_.search(null, "anthony", 
+          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "anthony", 
                                    sites, 
                                    0, 1, "title", "asc");
     assertEquals(1, ret.size());
@@ -120,27 +123,27 @@ public class TestDocumentSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = documentSearch_.search(null, "anthony john", 
+          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "anthony john", 
                                    sites, 
                                    0, 20, "title", "asc");
-    assertEquals(3, ret.size());
+    assertEquals(6, ret.size());//3
   }
   
   public void testSearchMultipleWithOffset() throws Exception {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = documentSearch_.search(null, "anthony john", 
+          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "anthony john", 
                                    sites, 
                                    1, 20, "title", "asc");
-    assertEquals(2, ret.size());
+    assertEquals(5, ret.size());//2
   }
   
   public void testSearchMultipleWithLimit() throws Exception {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = documentSearch_.search(null, "anthony john", 
+          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "anthony john", 
                                    sites, 
                                    0, 2, "title", "asc");
     assertEquals(2, ret.size());
@@ -151,20 +154,20 @@ public class TestDocumentSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = documentSearch_.search(null, "\"anthony cena\"", 
+          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "\"anthony cena\"", 
                                    sites, 
                                    0, 20, "title", "asc");
-    assertEquals(1, ret.size());
+    assertEquals(2, ret.size());//1
   }
   
   public void testSearchPhraseWithOffset() throws Exception {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = documentSearch_.search(null, "\"anthony cena\"", 
+          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "\"anthony cena\"", 
                                    sites, 
                                    1, 20, "title", "asc");
-    assertEquals(0, ret.size());
+    assertEquals(1, ret.size());//0
   }
   
 }

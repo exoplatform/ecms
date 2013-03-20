@@ -90,7 +90,8 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
     QueryCriteria criteria = createQueryCriteria(query, offset, limit, sort, order);
     //query search result
     try {
-      if (sites == null || sites.size() == 0) {
+      if (sites == null || sites.size() == 0 || 
+          ConversationState.getCurrent().getIdentity().getUserId() != null) {
         criteria.setSiteName(null);
         ret = convertResult(searchNodes(criteria), limit, context);
       } else if (sites.size() == 1) {
@@ -159,29 +160,37 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
       if (pageList != null) {
         for (int i = 1; i <= pageList.getAvailablePage(); i++) {
           for (Object obj : pageList.getPage(i)) {
-            if (obj instanceof ResultNode) {
-              ResultNode retNode = filterNode((ResultNode)obj);
-              if (retNode == null) {
-                continue;
+            try {
+              if (obj instanceof ResultNode) {
+                ResultNode retNode = filterNode((ResultNode)obj);
+                if (retNode == null) {
+                  continue;
+                }
+                //generate SearchResult object
+                DriveData driveData = getDriveData(retNode);
+                Calendar date = getDate(retNode);
+                EcmsSearchResult result = 
+                //  new SearchResult(url, title, excerpt, detail, imageUrl, date, relevancy);
+                    new EcmsSearchResult(getPath(driveData, retNode, context), 
+                                         getTitleResult(retNode), 
+                                         retNode.getExcerpt(), 
+                                         (driveData == null ? "" : driveData.getName()) + fileSize(retNode) + formatDate(date), 
+                                         getImageUrl(), 
+                                         date.getTimeInMillis(), 
+                                         (long)retNode.getScore(),
+                                         getFileType(retNode));
+                if (result != null) {
+                  ret.add(result);
+                }
+                if (ret.size() >= limit) {
+                  return ret;
+                }
+              }//if
+            } catch (Exception e) {
+              if (LOG.isErrorEnabled()) {
+                LOG.error(e);
               }
-              //generate SearchResult object
-              DriveData driveData = getDriveData(retNode);
-              Calendar date = getDate(retNode);
-              EcmsSearchResult result = 
-              //  new SearchResult(url, title, excerpt, detail, imageUrl, date, relevancy);
-                  new EcmsSearchResult(getPath(driveData, retNode, context), 
-                                       getTitleResult(retNode), 
-                                       retNode.getExcerpt(), 
-                                       driveData.getName() + fileSize(retNode) + formatDate(date), 
-                                       getImageUrl(), 
-                                       date.getTimeInMillis(), 
-                                       (long)retNode.getScore(),
-                                       getFileType(retNode));
-              ret.add(result);
-              if (ret.size() >= limit) {
-                return ret;
-              }
-            }//if
+            }
           }//for inner
         } //for outer
       }//if
