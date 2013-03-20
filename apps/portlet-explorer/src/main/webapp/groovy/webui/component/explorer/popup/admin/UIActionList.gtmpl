@@ -13,7 +13,7 @@
    int totalPages = uiIterator.getAvailablePage();
    StringBuilder sB;
 %>
-<div class="UIActionList" id="$uicomponent.id">
+<div class="uiActionList" id="$uicomponent.id">
   <table class="uiGrid table table-hover table-striped">
 	  <thead>
 	    <tr>
