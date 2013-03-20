@@ -1634,11 +1634,7 @@ public class UIDialogForm extends UIForm {
     WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
     Writer w = context.getWriter();
     if(componentSelectors.get(name) != null && name.equals(componentSelectors.get(name).get("returnField"))) {
-      w.write("<table style=\"width: auto;\">");
-      w.write("<tr>");
-      w.write("<td>");
       uiInput.processRender(context);
-      w.write("</td>");
     } else {
       uiInput.processRender(context);
     }
@@ -1653,7 +1649,6 @@ public class UIDialogForm extends UIForm {
       String showComponent = getResourceBundle(context, getId().concat(".title.ShowComponent"));
       String removeReference = getResourceBundle(context, getId().concat(".title.removeReference"));
       if (name.equals(fieldName)) {
-        w.write("<td class=\"MultiValueContainerShow\">");
         w.write("<a class=\"actionIcon\" title=\"" + showComponent + "\""
             + "onclick=\"javascript:eXo.webui.UIForm.submitEvent('" + "" + getId()
             + "','ShowComponent','&objectId=" + fieldName + "' )\"><i"
@@ -1672,9 +1667,6 @@ public class UIDialogForm extends UIForm {
               + "' )\"><i"
               +" class='uiIconTrash'></i>"
               + "</a>");
-        w.write("</td>");
-        w.write("</tr>");
-        w.write("</table>");
       }
     }
   }
