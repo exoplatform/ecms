@@ -1645,7 +1645,7 @@ public class UIDialogForm extends UIForm {
     if(componentSelectors.get(name) != null) {
       Map<String,String> fieldPropertiesMap = componentSelectors.get(name);
       String fieldName = fieldPropertiesMap.get("returnField");
-      String iconClass = "Add16x16Icon";
+      String iconClass = "uiIconPlus";
       if(fieldPropertiesMap.get("selectorIcon") != null) {
         iconClass = fieldPropertiesMap.get("selectorIcon");
       }
@@ -1654,14 +1654,14 @@ public class UIDialogForm extends UIForm {
       String removeReference = getResourceBundle(context, getId().concat(".title.removeReference"));
       if (name.equals(fieldName)) {
         w.write("<td class=\"MultiValueContainerShow\">");
-        w.write("<a style=\"cursor:pointer;\" title=\"" + showComponent + "\""
+        w.write("<a class=\"actionIcon\" title=\"" + showComponent + "\""
             + "onclick=\"javascript:eXo.webui.UIForm.submitEvent('" + "" + getId()
-            + "','ShowComponent','&objectId=" + fieldName + "' )\"><img alt='" + rs.getString("Ecm.dialog.label.add")
-            + "' class='ActionIcon "
-            + iconClass + "' src=\"/eXoResources/skin/DefaultSkin/background/Blank.gif\" /></a>");
+            + "','ShowComponent','&objectId=" + fieldName + "' )\"><i"
+            + " class='"
+            + iconClass + "'></i></a>");
         /* No need Remove action if uiInput is UIFormMultiValueInputSet */
         if (!UIFormMultiValueInputSet.class.isInstance(uiInput))
-          w.write("<a style=\"cursor:pointer;\" title=\""
+          w.write("<a class=\"actionIcon\" title=\""
               + removeReference
               + "\""
               + "onclick=\"javascript:eXo.webui.UIForm.submitEvent('"
@@ -1669,8 +1669,8 @@ public class UIDialogForm extends UIForm {
               + getId()
               + "','RemoveReference','&objectId="
               + fieldName
-              + "' )\"><img alt='"+ rs.getString("Ecm.dialog.label.remove")
-              +"' class='ActionIcon Remove16x16Icon' src=\"/eXoResources/skin/DefaultSkin/background/Blank.gif\" />"
+              + "' )\"><i"
+              +" class='uiIconTrash'></i>"
               + "</a>");
         w.write("</td>");
         w.write("</tr>");

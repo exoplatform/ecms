@@ -1,4 +1,4 @@
-<div class="uiFormWithTitle uiAddActionForm">
+<div class="uiAddActionForm">
   <h6 class="titleBar"><%=_ctx.appRes(uicomponent.getId() + ".title")%></h6>
 	<% uiform.begin() %>
   	<div class="form-horizontal">
@@ -47,7 +47,7 @@
          <label class="control-label" for="nodetypes"><%=_ctx.appRes("AutoVersioning.dialog.label.nodetypes")%>:</label>
          <div class="controls"> 
          <% 
-           String[] fieldnodetypes = ["jcrPath=/node/exo:nodeTypeName", "selectorAction=selectNodeTypes", "multiValues=true", "selectorClass=org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSelector", "selectorIcon=SelectPath24x24Icon", "validate=empty", "editable=false"];         
+           String[] fieldnodetypes = ["jcrPath=/node/exo:nodeTypeName", "selectorAction=selectNodeTypes", "multiValues=true", "selectorClass=org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSelector", "selectorIcon=uiIconSearch", "validate=empty", "editable=false"];         
            uicomponent.addActionField("nodetypes", fieldnodetypes);
          %>
          </div>
@@ -65,7 +65,7 @@
         <label class="control-label" for="affectedNodetypes"><%=_ctx.appRes("AutoVersioning.dialog.label.affectedNodeTypeNames")%>:</label>
         <div class="controls">
 					<% 
-						String[] fieldAffectedNodetypes = ["jcrPath=/node/exo:affectedNodeTypeNames", "selectorAction=selectAffectedNodeTypes", "multiValues=true", "selectorClass=org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSelector", "selectorIcon=SelectPath24x24Icon", "validate=empty", "editable=false"];
+						String[] fieldAffectedNodetypes = ["jcrPath=/node/exo:affectedNodeTypeNames", "selectorAction=selectAffectedNodeTypes", "multiValues=true", "selectorClass=org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSelector", "selectorIcon=uiIconSearch", "validate=empty", "editable=false"];
 						uicomponent.addActionField("affectedNodetypes", fieldAffectedNodetypes);
 					%>
 				</div>
