@@ -392,10 +392,11 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       if (primaryType == null) {
         primaryType = "nt:base";
         Node currentFolder = null;
+        Session systemSession = WCMCoreUtils.getSystemSessionProvider().getSession(workspace, manageableRepository);
         if ("/".equals(path)) {
-          currentFolder = session.getRootNode();
-        } else if (session.getRootNode().hasNode(path.substring(1))) {
-          currentFolder = session.getRootNode().getNode(path.substring(1));
+          currentFolder = systemSession.getRootNode();
+        } else if (systemSession.getRootNode().hasNode(path.substring(1))) {
+          currentFolder = systemSession.getRootNode().getNode(path.substring(1));
         } else {
           return null;
         }
