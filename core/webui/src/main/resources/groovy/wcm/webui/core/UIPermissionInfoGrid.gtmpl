@@ -35,6 +35,7 @@
    Node currentNode = uiJCRExplorer.getCurrentNode();
    String ownerId = Utils.getNodeOwner(currentNode);
    boolean canChangePermission = PermissionUtil.canChangePermission(currentNode);
+   def beanIdField = uicomponent.getBeanIdField();
 %>
 <div id="$uicomponent.id" class="permissionInfo">
    <table class="uiGrid table table-hover table-striped" cellspacing="0">
@@ -42,8 +43,11 @@
       <tr>
          <% if (name != null)
              { for (field in beanFields)
-               { %>
-                 <th><%=_ctx.appRes(name + ".header." + field)%></th>
+               {
+                def tmpStyle = "";
+                if (!beanIdField.equals(field)) tmpStyle = "class=\"center\"";
+               %>
+                 <th $tmpStyle><%=_ctx.appRes(name + ".header." + field)%></th>
              <% }
                if (beanActions != null)
                { %>
@@ -53,8 +57,11 @@
              if (name == null)
              {
                for (field in beanFields)
-               { %>
-                 <th><%=_ctx.appRes(uiParent.getName() + ".header." + field)%></th>
+               { 
+                def tmpStyle = "";
+                if (!beanIdField.equals(field)) tmpStyle = "class=\"center\"";
+               %>
+                 <th $tmpStyle><%=_ctx.appRes(uiParent.getName() + ".header." + field)%></th>
             <% }
                if (beanActions != null && beanActions.length > 0)
                { %>
@@ -134,7 +141,6 @@
          %>
          <td class="center">
            <%
-                 def beanIdField = uicomponent.getBeanIdField();
                  for (action in beanActions)
                  {
                     if (action == null) continue;
