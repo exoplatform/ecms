@@ -30,42 +30,42 @@
   def savedLeftContainerWidthStyle  = leftContainerWidth!=null?"style=\"width:" + leftContainerWidth + "px\"":"";
   def initWithoutLeftContainer = uicomponent.isShowSideBar();
 
+  String componentId = uicomponent.getId();
+  def jsManager = rcontext.getJavascriptManager();
+  
   if(uiTreeExplorer != null && uicomponent.isShowSideBar()) {
     def focusNode = uiTreeExplorer.getEncodeCurrentPath();
     def expandNode = uiTreeExplorer.getEncodeExpandPath();
     def isExpand = uiTreeExplorer.getIsExpand();
- 
-  String componentId = uicomponent.getId();
-  def jsManager = rcontext.getJavascriptManager();
-  jsManager.require("SHARED/ecm-utils", "ecmutil").require("SHARED/uiListView", "uiListView").
-  addScripts("uiListView.UIListView.initDragDropForTreeEvent('$componentId', '$enableDragAndDrop');");
-  
-//WCM Notice
- def nodePathDelete = uicomponent.getNodePathDelete();
- def deleteNotice = uicomponent.getDeleteNotice();
- def wcmNotice = uicomponent.getWCMNotice();
- uicomponent.setNodePathDelete("");
- uicomponent.setDeleteNotice("");
- uicomponent.setWCMNotice("");
- if(StringUtils.isNotEmpty(nodePathDelete)) {
- 	List<UIAbstractManagerComponent> managers = uicomponent.getManagers();
- 	for (UIAbstractManagerComponent manager : managers) {
-		if(manager.getName().equals("RestoreFromTrashManageComponent"))
-				nodePathDelete = manager.event("RestoreFromTrash", nodePathDelete);			
-		}
- 	jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.activateWCMRestoreNotice(\"$wcmNotice\");");
- 	jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.activateWCMDeleteNotice(\"$nodePathDelete\", \""+deleteNotice+"\");");
- } else {	 
-	 jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.activateWCMDeleteNotice(\"$nodePathDelete\", \""+deleteNotice+"\");");
-	 jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.activateWCMRestoreNotice(\"$wcmNotice\");");
- }  
-  
-  if(!isExpand && focusNode != null)
-    jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.loadEffectedSideBar('$focusNode');");
-  else if(isExpand && expandNode != null)
-    jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.loadEffectedSideBar('$expandNode');");
+    
+    jsManager.require("SHARED/ecm-utils", "ecmutil").require("SHARED/uiListView", "uiListView").
+    addScripts("uiListView.UIListView.initDragDropForTreeEvent('$componentId', '$enableDragAndDrop');");  
+	  
+	  if(!isExpand && focusNode != null)
+	    jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.loadEffectedSideBar('$focusNode');");
+	  else if(isExpand && expandNode != null)
+	    jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.loadEffectedSideBar('$expandNode');");
   }    
 
+  //WCM Notice
+  def nodePathDelete = uicomponent.getNodePathDelete();
+  def deleteNotice = uicomponent.getDeleteNotice();
+  def wcmNotice = uicomponent.getWCMNotice();
+  uicomponent.setNodePathDelete("");
+  uicomponent.setDeleteNotice("");
+  uicomponent.setWCMNotice("");
+  if(StringUtils.isNotEmpty(nodePathDelete)) {
+ 	  List<UIAbstractManagerComponent> managers = uicomponent.getManagers();
+ 	  for (UIAbstractManagerComponent manager : managers) {
+		  if(manager.getName().equals("RestoreFromTrashManageComponent"))
+				nodePathDelete = manager.event("RestoreFromTrash", nodePathDelete);			
+		}
+ 	  jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.activateWCMRestoreNotice(\"$wcmNotice\");");
+ 	  jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.activateWCMDeleteNotice(\"$nodePathDelete\", \""+deleteNotice+"\");");
+   } else {	 
+	   jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.activateWCMDeleteNotice(\"$nodePathDelete\", \""+deleteNotice+"\");");
+	   jsManager.getRequireJS().addScripts("ecmutil.ECMUtils.activateWCMRestoreNotice(\"$wcmNotice\");");
+   }  
 %>
 <div id="wcm-notice" style="display: none;" class="alert alert-success wcmAlertSuccess"></div>
 <div class="uiWorkingArea ClearFix" id="UIWorkingArea" initWithoutLeftContainer="$initWithoutLeftContainer">
