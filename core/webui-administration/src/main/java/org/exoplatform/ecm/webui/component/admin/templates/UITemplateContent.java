@@ -259,6 +259,15 @@ public class UITemplateContent extends UIForm implements UISelectable {
       if(content == null) content = "" ;
       UIFormInputSetWithAction permField = uiForm.getChildById("UITemplateContent") ;
       String role = permField.getUIStringInput(FIELD_VIEWPERMISSION).getValue() ;
+      
+      
+        
+      if ((role == null) || (role.trim().length() == 0)) {
+        uiApp.addMessage(new ApplicationMessage("UITemplateForm.msg.role-require",
+                                                null,
+                                                ApplicationMessage.WARNING));        
+        return;
+      }
       UIViewTemplate uiViewTemplate = uiForm.getAncestorOfType(UIViewTemplate.class) ;
       if(uiForm.getId().equals(UIDialogTab.DIALOG_FORM_NAME)) {
         UIDialogTab uiDialogTab = uiViewTemplate.getChild(UIDialogTab.class) ;
