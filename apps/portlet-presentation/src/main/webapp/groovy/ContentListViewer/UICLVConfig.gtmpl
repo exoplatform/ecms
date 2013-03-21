@@ -18,7 +18,7 @@
   def showFolderContexttual = "";
 %>
 
-
+<!--
 <div id="UIViewTemplate_UITemplateContainer" class="UITabPane uiTabNormal">
 	<ul id="myTab" class="nav nav-tabs">							
 			<li onclick="" class="active">
@@ -225,7 +225,7 @@
 </div>
 
   
-<!-- 
+--> 
 <div class="UIForm $uicomponent.id">
   <%
     uiform.begin()
@@ -584,4 +584,3 @@
     uiform.end()
   %>
 </div>
--->

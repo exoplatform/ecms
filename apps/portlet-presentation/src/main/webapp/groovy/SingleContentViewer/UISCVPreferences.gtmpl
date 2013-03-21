@@ -11,7 +11,7 @@
 
 
 
-
+<!--
 <div id="" class="uiTabNormal">
 	<ul id="myTab" class="nav nav-tabs">							
 			<li onclick="" class="active">
@@ -110,7 +110,7 @@
 
 
 
-<!--
+-->
 
 <div class="UIForm $uicomponent.id" >
    <%
@@ -271,4 +271,4 @@
       <%
     uiform.end()
   %>
-</div> -->
+</div>
