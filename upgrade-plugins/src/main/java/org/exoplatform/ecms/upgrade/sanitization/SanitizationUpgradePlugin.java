@@ -192,33 +192,33 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
           for(String view : arrView) {
             if(strViews.length() > 0) strViews.append(", ");
             view = view.trim();
-            if(view.equals("a_timeline-view")) {
+            if(view.contains("timeline-view")) {
               strViews.append("List");
-            } else if(view.equals("b_list-view")) { 
+            } else if(view.contains("list-view")) { 
               strViews.append("List");
-            } else if(view.equals("c_icon-view")) {
+            } else if(view.contains("icon-view")) {
               strViews.append("Icons");
-            } else if(view.equals("d_cover-flow")) {
+            } else if(view.contains("cover-flow")) {
               strViews.append("Icons");
-            } else if(view.equals("e_admin-view")) {
+            } else if(view.contains("admin-view")) {
               strViews.append("Admin");
-            } else if(view.equals("simple-view")) {
+            } else if(view.contains("simple-view")) {
               strViews.append("Icons");
-            } else if(view.equals("slide-show")) {
+            } else if(view.contains("slide-show")) {
               strViews.append("Icons");
-            } else if(view.equals("anonymous-view")) {
+            } else if(view.contains("anonymous-view")) {
               strViews.append("Icons");
-            } else if(view.equals("taxonomy-list")) {
+            } else if(view.contains("taxonomy-list")) {
               strViews.append("Categories");
-            } else if(view.equals("taxonomy-icons")) {
+            } else if(view.contains("taxonomy-icons")) {
               strViews.append("Categories");
-            } else if(view.equals("system-view")) {
+            } else if(view.contains("system-view")) {
               strViews.append("List");
-            } else if(view.equals("wcm-view")) {
+            } else if(view.contains("wcm-view")) {
               strViews.append("Web");
-            } else if(view.equals("authoring-view")) {
+            } else if(view.contains("authoring-view")) {
               strViews.append("Web");
-            } else if(view.equals("wcm-category-view")) {
+            } else if(view.contains("wcm-category-view")) {
               strViews.append("Categories");
             } else {
               strViews.append(view);
