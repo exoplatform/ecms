@@ -41,10 +41,12 @@ import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.lock.LockService;
 import org.exoplatform.services.cms.relations.RelationsService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -198,6 +200,13 @@ public class RenameConnector implements ResourceContainer {
       renamedNode.setProperty("exo:title", newExoTitle);
 
       nodeSession.save();
+      
+      // Update state of node
+      WCMPublicationService publicationService = WCMCoreUtils.getService(WCMPublicationService.class);
+      if (publicationService.isEnrolledInWCMLifecycle(renamedNode)) {
+        ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
+        listenerService.broadcast(CmsService.POST_EDIT_CONTENT_EVENT, this, renamedNode);
+      }
 
       return Response.ok(uuid).build();
     } catch (Exception e) {
