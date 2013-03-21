@@ -20,6 +20,7 @@
   import org.exoplatform.portal.webui.workspace.UIWorkingWorkspace;
   import org.exoplatform.services.wcm.utils.WCMCoreUtils;
   import org.exoplatform.wcm.webui.reader.ContentReader;
+  import org.exoplatform.services.wcm.portal.LivePortalManagerService;
   
   def rcontext = _ctx.getRequestContext() ;
   String docBase =  rcontext.getRequestContextPath() ;  
@@ -30,6 +31,10 @@
   def headerScripts = new LinkedList();	
   def jsConfig = uicomponent.getJSConfig(); 
   def remoteScripts = new JSONArray();
+  def portalName = Util.getPortalRequestContext().getUserPortalConfig().getPortalName();
+  livePortalManagerService_ = WCMCoreUtils.getService(LivePortalManagerService.class);
+  def portalNode = livePortalManagerService_.getLivePortal(WCMCoreUtils.getSystemSessionProvider(), portalName);
+  def livePortalScript = WCMCoreUtils.getSiteGlobalActiveJs(portalNode);
   for (module in scriptsURLs.keySet()) {
     def url = !jsConfig.has("paths") ? null : 
               (!jsConfig.get("paths").has(module) ? null : jsConfig.get("paths").get(module));
@@ -168,7 +173,14 @@
        {
          print(element);  
        }
-    }     
+    }
+    if(!StringUtils.isEmpty(livePortalScript)) { %>
+    <script type="text/javascript">
+    /* <![CDATA[ */ 
+      <%=livePortalScript%>
+    /* ]]> */   
+    </script>
+    <%}
    %>
  </head>
 
@@ -181,4 +193,3 @@
 		<i class="loadingProgressBar pull-left"></i>
 		<div class="loadingText"><%=_ctx.appRes("UIPortalApplication.label.Loading")%></div>
    </div>
- 
