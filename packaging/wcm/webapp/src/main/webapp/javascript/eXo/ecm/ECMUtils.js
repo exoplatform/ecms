@@ -702,7 +702,7 @@
 		ECMUtils.prototype.actionbarContainer_OnResize = function () {
 			var divAction = document.getElementById("uiActionsBarContainer");
 			
-			var actionbar= gj('#uiActionBar');
+			var actionbar= gj('#UIActionBar');
 			if (actionbar) { //VinhNT workaround for the un-expand width of ActionBar problem, should be improved later
 			  actionbar.width(actionbar.parent().width()-2);
 			}
@@ -966,10 +966,14 @@
 		  var event = event || window.event;
 		  if (Self.initWithoutLeftContainer()) return;
 		  event.cancelBubble = true;
+		  if (Self.UIBrokenCheckingHandler) {
+        clearInterval(Self.UIBrokenCheckingHandler);
+        Self.UIBrokenCheckingHandler = null;
+      }
 		  var leftContainer = document.getElementById("LeftContainer");
 		  var rightContainer = gj(Self.uiWorkingArea).find("div.rightContainer:first")[0];
 		  var resizeButton = gj(Self.uiWorkingArea).find("a.resizeButton:first")[0];
-		var iArrow = gj(resizeButton).children("i")[0];
+		  var iArrow = gj(resizeButton).children("i")[0];
 		  // The bellow block are updated
 		  if (leftContainer.style.display == 'none') {
 		    leftContainer.style.display = 'block';
