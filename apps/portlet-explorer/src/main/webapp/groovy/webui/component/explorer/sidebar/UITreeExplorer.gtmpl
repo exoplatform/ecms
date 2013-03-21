@@ -20,7 +20,9 @@
   def rcontext = _ctx.getRequestContext() ;
   def jsManager = rcontext.getJavascriptManager();
   jsManager.require("SHARED/ecm-utils", "ecmutil").
-  addScripts("ecmutil.ECMUtils.selectedPath('${idSelected}');");
+  require("SHARED/jquery","gj").
+  addScripts("ecmutil.ECMUtils.selectedPath('${idSelected}');").
+  addScripts("gj('.UIRightPopupMenuContainer, .uiRightPopupMenuContainer').off('click');");
 
   public void writeNodes(TreeNode rootTree) {
     UIRightClickPopupMenu contextMenu = uicomponent.getContextMenu();

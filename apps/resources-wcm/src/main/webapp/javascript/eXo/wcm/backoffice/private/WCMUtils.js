@@ -181,7 +181,7 @@
 	}; 
 	
 	WCMUtils.prototype.hideContextMenu = function(menuItemElem)  {
-		var contextMenu = gj(menuItemElem).parents(".UIRightClickPopupMenu:first")[0];
+		var contextMenu = gj(menuItemElem).parents(".uiRightClickPopupMenu:first")[0];
 		contextMenu.style.display = "none" ;
 	};
 

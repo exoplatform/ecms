@@ -40,8 +40,11 @@
   jsManager.require("SHARED/ecm-utils", "ecmutil").
             require("SHARED/uiSimpleView", "uiSimpleView").
             require("SHARED/multiUpload", "multiUpload").
+            require("SHARED/jquery","gj").
   addScripts("uiSimpleView.UISimpleView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');").
-	addScripts("ecmutil.ECMUtils.initClipboard('clip_button','1','$size');");
+	addScripts("ecmutil.ECMUtils.initClipboard('clip_button','1','$size');").
+  addScripts("gj('.UIRightPopupMenuContainer, .uiRightPopupMenuContainer').off('click');");
+  
 %>
 <div id="$componentId">
 <script language="JavaScript">

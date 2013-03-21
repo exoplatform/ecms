@@ -41,7 +41,10 @@
   def jsManager = rcontext.getJavascriptManager();
 
   jsManager.require("SHARED/uiFileView", "uiFileView").
-  addScripts("uiFileView.UIFileView.initAllEvent('UIDocumentInfo', '$enableDragAndDrop');");
+  require("SHARED/jquery","gj").
+  addScripts("uiFileView.UIFileView.initAllEvent('UIDocumentInfo', '$enableDragAndDrop');").
+  addScripts("gj('.UIRightPopupMenuContainer, .uiRightPopupMenuContainer').off('click');");
+  
   //Config to display columns with format: ["${column};${width}"]
   //Default 
   String[] arrColumns = ["exo:owner;95px","exo:dateModified;123px","exo:dateCreated;121px"];

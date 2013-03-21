@@ -71,9 +71,12 @@
   jsManager.require("SHARED/ecm-utils", "ecmutil").
             require("SHARED/uiListView", "uiListView").
             require("SHARED/multiUpload", "multiUpload").
+            require("SHARED/jquery","gj").
   addScripts("uiListView.UIListView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');").
   addScripts("ecmutil.ECMUtils.initClipboard('clip_button','1','$size');").  
-  addScripts('uiListView.UIListView.loadEffectedWidthColumn();');
+  addScripts('uiListView.UIListView.loadEffectedWidthColumn();').
+  addScripts("gj('.UIRightPopupMenuContainer, .uiRightPopupMenuContainer').off('click');");
+
   //Config to display columns with format: ["${column};${width}"]
   //Default 
   String[] arrColumns = ["exo:dateCreated;123px", "exo:owner;123px"];
