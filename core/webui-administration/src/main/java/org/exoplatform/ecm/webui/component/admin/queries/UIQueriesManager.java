@@ -62,7 +62,7 @@ public class UIQueriesManager extends UIAbstractManager {
     uiPopup.setShowMask(true);
     uiPopup.setWindowSize(560, 250);
     UIGroupMemberSelector uiECMPermission =
-      createUIComponent(UIGroupMemberSelector.class, null, "QueriesPermissionBrowse") ;
+      createUIComponent(UIGroupMemberSelector.class, null, null) ;
     uiECMPermission.setSelectedMembership(true);
     if(membership != null && membership.indexOf(":/") > -1) {
       String[] arrMember = membership.split(":/") ;

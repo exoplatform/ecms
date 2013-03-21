@@ -2162,6 +2162,11 @@
       <UIQueriesForm>Edit Query</UIQueriesForm>
     </title>
   </EditQueryForm>
+	<PermissionPopup>
+	  <title>
+	    <UIGroupMemberSelector>Select Permission</UIGroupMemberSelector>
+	  </title>
+	</PermissionPopup>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.folksonomy									 #
