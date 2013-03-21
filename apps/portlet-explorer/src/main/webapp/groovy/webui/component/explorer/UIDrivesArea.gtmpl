@@ -13,10 +13,6 @@
     <% if (uicomponent.isFirstVisit()) {
         uicomponent.setFirstVisit(false); 
      %>
-        <div class="info">
-          <i class="uiIconBlueInformation"></i> <%= _ctx.appRes("UIDrivesArea.DrivesArea.allDrives") %>
-          &nbsp;<img alt="<%= _ctx.appRes("UIDrivesArea.DrivesArea.allDrives") %>" src="/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/DriversButton.png" />
-        </div>
     <% } %>
 	  <%if(mainDrives.size() > 0) {%>
 			<div class="rowDrives clearfix">
