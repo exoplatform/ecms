@@ -103,7 +103,6 @@ public class UIPermissionForm extends UIPermissionFormBase implements UISelectab
       if (Utils.isNameEmpty(userOrGroup)) {
         uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.userOrGroup-required", null,
             ApplicationMessage.WARNING));
-
         return;
       }
       if (permsList.size() == 0) {
@@ -169,7 +168,6 @@ public class UIPermissionForm extends UIPermissionFormBase implements UISelectab
       uiForm.refresh();
       uiExplorer.setIsHidePopup(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiParent);
-      uiExplorer.updateAjax(event);
     }
   }
   

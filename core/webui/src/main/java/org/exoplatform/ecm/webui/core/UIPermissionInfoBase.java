@@ -238,7 +238,7 @@ public abstract class UIPermissionInfoBase extends UIContainer {
         uiPermissionForm.updateSymlinks(node);
         node.getSession().save();
         uiPermissionInfo.updateGrid(uiPermissionInfo.getChild(UIGrid.class).getUIPageIterator().getCurrentPage());
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiPermissionForm.getParent());
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiPermissionInfo);
       } catch (AccessDeniedException ade) {
         uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.access-denied", null, ApplicationMessage.WARNING));
       } catch (AccessControlException accessControlException) {

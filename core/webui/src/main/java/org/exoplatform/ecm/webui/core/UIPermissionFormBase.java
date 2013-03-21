@@ -100,11 +100,9 @@ public abstract class UIPermissionFormBase extends UIForm implements UISelectabl
   protected void lockForm(boolean isLock) {
     UIPermissionInputSet uiInputSet = getChildById(PERMISSION);
     if(isLock) {
-      setActions(new String[] {"Reset", "Close" });
-      uiInputSet.setActionInfo(UIPermissionInputSet.FIELD_USERORGROUP, null);
+      uiInputSet.setButtonActions(new String[] {"Reset" });
     } else {
-      setActions(new String[] { "Save", "Reset", "Close" });
-      uiInputSet.setActionInfo(UIPermissionInputSet.FIELD_USERORGROUP, new String[] {"SelectUser", "SelectMember", "AddAny"});
+      uiInputSet.setButtonActions(new String[] {"Save", "Reset" });
     }
     for (String perm : PERMISSION_TYPES) {
       uiInputSet.getUICheckBoxInput(perm).setDisabled(isLock);
@@ -136,7 +134,7 @@ public abstract class UIPermissionFormBase extends UIForm implements UISelectabl
       UIPermissionFormBase uiForm = event.getSource();
       uiForm.lockForm(false);
       uiForm.refresh();
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
     }
   }
 
