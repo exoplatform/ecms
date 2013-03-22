@@ -98,10 +98,26 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
         String templateName = StringUtils.substringAfterLast(template, "/");
         for(String oldTemp : oldViewTemplates) {
           if(templateName.equals(oldTemp)) {
-            if (LOG.isInfoEnabled()) {
-              LOG.info(" * Removing the old view " +viewNode.getName()+ "");
+            if(isContainOldView(viewNode.getName())) {
+              if (LOG.isInfoEnabled()) {
+                LOG.info("=====Removing view '"+viewNode.getName()+"'=====");
+              }
+              viewNode.remove();
+            } else {
+              String newTemplate = "List";
+              if(templateName.equals("ListView")) newTemplate = template.replace(templateName, "List");
+              else if(templateName.equals("ContentView")) newTemplate = template.replace(templateName, "Content");
+              else if(templateName.equals("ThumbnailsView")) newTemplate = template.replace(templateName, "Thumbnails");
+              else if(templateName.equals("IconView")) newTemplate = template.replace(templateName, "Thumbnails");
+              else if(templateName.equals("TimelineView")) newTemplate = template.replace(templateName, "List");
+              else if(templateName.equals("CoverFlow")) newTemplate = template.replace(templateName, "Thumbnails");
+              else if(templateName.equals("SystemView")) newTemplate = template.replace(templateName, "List");
+              else if(templateName.equals("SlideShowView")) newTemplate = template.replace(templateName, "Thumbnails");
+              if (LOG.isInfoEnabled()) {
+                LOG.info("=====Modifying view '"+viewNode.getName()+"'=====");
+              }
+              viewNode.setProperty("exo:template", newTemplate);
             }
-            viewNode.remove();
           }
         }
       }
@@ -115,6 +131,16 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
       }
     }
   }
+  
+  private boolean isContainOldView(String viewName) {
+    String[] oldViewNames = {"timeline-view", "list-view", "icon-view", "admin-view", "simple-view", "slide-show", "cover-flow", 
+          "anonymous-view", "taxonomy-list", "taxonomy-icons", "system-view", "wcm-view", "authoring-view", "wcm-category-view"};
+    for(String vName : oldViewNames) {
+      if(viewName.contains(vName)) return true;
+    }
+    return false;
+  }
+    
   
   private void migrateViewTemplates() {
     try {
@@ -163,8 +189,8 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
           LOG.info(" * Migrating the drive " +drive.getName()+ "");
         }        
         String path = drive.getProperty("exo:path").getString();
-        if(path.equals("/sites content/live")) {
-          drive.setProperty("exo:path", "/sites");
+        if(path.startsWith("/sites content/live")) {
+          drive.setProperty("exo:path", path.replace("/sites content/live", "/sites"));
           drive.setProperty("exo:views", "Web");
         } else if(path.equals("/Groups${groupId}")) {
           path = path.replace("/Groups${groupId}", "/Groups${groupId}/Documents");
