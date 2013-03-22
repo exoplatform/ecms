@@ -713,10 +713,7 @@
 			gj(listHiddenActionContainer).css("margin-right", viewbar.offsetWidth + "px");
 			var uiDropdownContainer   = gj(listHiddenActionContainer).find("ul.dropdown-menu:first")[0];
 			var allowedSpace  = uiMainActionContainer.offsetWidth - viewbar.offsetWidth - 20 ; //left&right padding
-			gj(uiMainActionContainer).find("li").removeClass("last");
 			Self.containerWithDropDownItem_OnResize(uiMainActionContainer, allowedSpace, listHiddenActionContainer, uiDropdownContainer, "active");
-			var visibleTabsChildren  = gj(uiMainActionContainer).children("li").not(".dropdown");
-			gj(visibleTabsChildren[visibleTabsChildren.length-1]).addClass("last");
 		};
 
 		/**
