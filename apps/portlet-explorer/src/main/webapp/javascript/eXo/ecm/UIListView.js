@@ -998,7 +998,12 @@
         var workspace = gj(Self.objResizingHeader).parents(".UIDocumentWorkspace:first")[0];
         resizeDiv.style.height = workspace.offsetHeight + "px";
         var documentInfo = document.getElementById('UIDocumentInfo');
-        gj(documentInfo).find("div.uiListGrid:first")[0].appendChild(resizeDiv);  
+        var firstUIListGrid = gj(documentInfo).find("div.uiListGrid:first")[0];
+        if (!firstUIListGrid) {
+          documentInfo = gj('div.UIDocumentWithTree')[0];
+          firstUIListGrid = gj(documentInfo).find("div.uiListGrid:first")[0].appendChild(resizeDiv);
+        }
+        
       }
       var X_Resize = eXo.core.Browser.findMouseRelativeX(Self.listGrid,event);        
       eXo.core.Browser.setPositionInContainer(Self.listGrid, resizeDiv, X_Resize, 0);
@@ -1033,6 +1038,10 @@
         Self.listGrid.removeChild(resizeDiv);
       var documentInfo = document.getElementById('UIDocumentInfo');
       var uiListGrid = gj(documentInfo).find("div.uiListGrid")[0];
+      if (!uiListGrid) {
+        documentInfo = gj('div.UIDocumentWithTree')[0];
+        uiListGrid = gj(documentInfo).find("div.uiListGrid")[0];
+      }
       var tableBox = gj(documentInfo).find("div.uiBox")[0];
       var headerRow = gj(documentInfo).find("div.titleTable")[0];
       var colDiv = gj(headerRow).children("div");
@@ -1093,12 +1102,12 @@
       if (breadcrumb) {
           breadcrumb.width(breadcrumb.parent().width());
         }        
-   	  var actionbar= gj('#UIActionBar');
-	  actionbar.width(actionbar.parent().width());
-	  var menubar = gj('div.uiFileViewActionBar');
-	  if (menubar) {
-		  menubar.width(gj("div#UIActionBar").width()-1);
-	  }
+      var actionbar= gj('#UIActionBar');
+      actionbar.width(actionbar.parent().width());
+      var menubar = gj('div.uiFileViewActionBar');
+      if (menubar) {
+          menubar.width(gj("div#UIActionBar").width()-1);
+      }
       //update width of UIListGrid
       eXo.ecm.ECMUtils.updateListGridWidth();
     }
