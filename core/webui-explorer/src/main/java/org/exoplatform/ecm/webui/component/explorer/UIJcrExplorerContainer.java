@@ -84,7 +84,7 @@ public class UIJcrExplorerContainer extends UIContainer {
       String userId = Util.getPortalRequestContext().getRemoteUser();
       List<String> userRoles = Utils.getMemberships();
       if(!uiFEPortlet.canUseConfigDrive(driveName)) {
-        drive = getAncestorOfType(UIJCRExplorerPortlet.class).getUserDrive("private");
+        drive = getAncestorOfType(UIJCRExplorerPortlet.class).getUserDrive();
       }
       UIApplication uiApp = getApplicationComponent(UIApplication.class);
       List<String> viewList = new ArrayList<String>();

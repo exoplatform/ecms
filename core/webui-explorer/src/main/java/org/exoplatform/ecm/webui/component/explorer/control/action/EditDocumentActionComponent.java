@@ -32,7 +32,6 @@ import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.UIControl;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanSetPropertyFilter;
@@ -179,7 +178,7 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
       if (LockUtil.getLockTokenOfUser(selectedNode) == null) {
         Object[] arg = { selectedNode.getPath() };
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked-editing", arg,
-            ApplicationMessage.WARNING));
+                ApplicationMessage.WARNING));
         return;
       }
       uiDocumentForm.setNodePath(selectedNode.getPath());
@@ -187,33 +186,27 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
       uiDocumentForm.setWorkspace(selectedNode.getSession().getWorkspace().getName());
       uiDocumentForm.setStoredPath(selectedNode.getPath());
       uiController.setRenderedChild(UIDocumentForm.class);
-      if (uiExplorer.getAncestorOfType(UIJCRExplorerPortlet.class).isEditInNewWindow()) {
-        UIPopupContainer uiPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
-        uiPopupContainer.activate(uiController, 800, 600);
-        context.addUIComponentToUpdateByAjax(uiPopupContainer);
-        context.addUIComponentToUpdateByAjax(uiExplorer.getChild(UIControl.class));
-      } else {
-        UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
-        UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
-        if(!uiDocumentWorkspace.isRendered()) {
-          uiWorkingArea.getChild(UIDrivesArea.class).setRendered(false);
-          uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(true);
-        }
-        uiDocumentWorkspace.getChild(UIDocumentContainer.class).setRendered(false);
-        uiDocumentWorkspace.getChild(UISearchResult.class).setRendered(false);
-        UIDocumentFormController controller = uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
-        if (controller != null) {
-          controller.getChild(UIDocumentForm.class).releaseLock();
-        }
-        uiDocumentWorkspace.addChild(uiController);
-        uiController.initOptionBlockPanel();
-        uiController.setRendered(true);
-        context.addUIComponentToUpdateByAjax(uiWorkingArea);
-        if (event != null) {
-          uiExplorer.updateAjax(event);
-        }
-        context.addUIComponentToUpdateByAjax(uiExplorer.getChild(UIControl.class));
+
+      UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
+      UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
+      if(!uiDocumentWorkspace.isRendered()) {
+        uiWorkingArea.getChild(UIDrivesArea.class).setRendered(false);
+        uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(true);
       }
+      uiDocumentWorkspace.getChild(UIDocumentContainer.class).setRendered(false);
+      uiDocumentWorkspace.getChild(UISearchResult.class).setRendered(false);
+      UIDocumentFormController controller = uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
+      if (controller != null) {
+        controller.getChild(UIDocumentForm.class).releaseLock();
+      }
+      uiDocumentWorkspace.addChild(uiController);
+      uiController.initOptionBlockPanel();
+      uiController.setRendered(true);
+      context.addUIComponentToUpdateByAjax(uiWorkingArea);
+      if (event != null) {
+        uiExplorer.updateAjax(event);
+      }
+      context.addUIComponentToUpdateByAjax(uiExplorer.getChild(UIControl.class));
     }
   }
 
