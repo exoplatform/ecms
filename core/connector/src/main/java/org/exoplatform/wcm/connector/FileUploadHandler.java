@@ -16,7 +16,10 @@
  */
 package org.exoplatform.wcm.connector;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -341,7 +344,6 @@ public class FileUploadHandler {
       }
     }
     String location = resource.getStoreLocation();
-    byte[] uploadData = IOUtil.getFileContentAsBytes(location);
     Node file = parent.addNode(fileName,FCKUtils.NT_FILE);
     if(!file.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
     	file.addMixin(NodetypeConstant.MIX_REFERENCEABLE);
@@ -363,7 +365,7 @@ public class FileUploadHandler {
     //MimeTypeResolver mimeTypeResolver = new MimeTypeResolver();
     DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();
     String mimetype = mimeTypeResolver.getMimeType(resource.getFileName());
-    jcrContent.setProperty("jcr:data",new ByteArrayInputStream(uploadData));
+    jcrContent.setProperty("jcr:data",new BufferedInputStream(new FileInputStream(new File(location))));
     jcrContent.setProperty("jcr:lastModified",new GregorianCalendar());
     jcrContent.setProperty("jcr:mimeType",mimetype);
     
