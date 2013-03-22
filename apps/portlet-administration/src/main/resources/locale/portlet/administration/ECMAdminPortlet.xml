@@ -403,16 +403,21 @@
       </label>
     </tab>
     <label>
-      <name>Name</name>
-      <workspace>Workspace</workspace>
-      <homePath>Home Path</homePath>
-      <icon>Workspace Icon</icon>
-      <viewPreferences>Show Referenced Documents</viewPreferences>
-      <viewNonDocument>Show Non-document Nodes</viewNonDocument>
-      <viewSideBar>Show Sidebar</viewSideBar>
-      <permissions>Permissions</permissions>
-      <showHiddenNode>Show Hidden Nodes</showHiddenNode>
-      <allowCreateFolder>Allow Folder Creation</allowCreateFolder>
+      <name>Name:</name>
+      <workspace>Workspace:</workspace>
+      <homePath>Home Path:</homePath>
+      <icon>Workspace Icon:</icon>
+      <viewPreferences>Show Referenced Documents:</viewPreferences>
+      <viewNonDocument>Show Non-document Nodes:</viewNonDocument>
+      <viewSideBar>Show Sidebar:</viewSideBar>
+      <permissions>Permissions:</permissions>
+      <showHiddenNode>Show Hidden Nodes:</showHiddenNode>
+      <allowCreateFolder>Allow Folder Creation:</allowCreateFolder>
+      <Admin>Admin:</Admin>
+      <Categories>Categories:</Categories>
+      <Icons>Icons:</Icons>
+      <List>List:</List>
+      <Web>Web:</Web>
     </label>
   </UIDriveForm>
   <AddDriveManagerPopup>
@@ -2436,11 +2441,6 @@
       <exo_webFolder>Web Content Folder</exo_webFolder>
    </label>
   </DriveInputSet>
-		<UIDriveForm>
-			<label>
-  		<allowCreateFolders>Allow Folder Creation</allowCreateFolders>	
-  	</label>
-  </UIDriveForm>  
   <UIPermissionTreeInfo>
   	<msg>
       <confirm-delete-permission>Are you sure to delete this permission?</confirm-delete-permission>
@@ -2719,7 +2719,7 @@
   </UIDriveForm>
 	<UIDriveForm>
 		<label>
-			<allowNodeTypesOnTree>Allowance nodetype on left tree</allowNodeTypesOnTree>
+			<allowNodeTypesOnTree>Allowance nodetype on left tree:</allowNodeTypesOnTree>
 		</label>
 	</UIDriveForm>
 	<DriveInputSet>
