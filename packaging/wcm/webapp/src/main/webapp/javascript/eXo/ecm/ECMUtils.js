@@ -1670,6 +1670,10 @@
 			}
 		}
 	};
+
+        ECMUtils.prototype.initTagsTypeAhead = function(tags) {
+          gj("#UITaggingForm").find('#names').typeahead({source: tags.split(",")});          
+        };
 	
 	ECMUtils.prototype.onLoadUIThumbnailForm = function(previewAction) {
 		eXo.ecm.ECMUtils.previewThumbnailAction = previewAction;

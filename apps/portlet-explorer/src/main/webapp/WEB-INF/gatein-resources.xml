@@ -49,10 +49,7 @@
       </depends>
       <depends>
         <module>mouseEventManager</module>
-      </depends>
-      <depends>
-        <module>autoComplete</module>
-      </depends>
+      </depends>      
       <depends>
         <module>flowplayer</module>
       </depends>
@@ -222,21 +219,7 @@
     </depends>
   </module>
   
-  <module>
-    <name>autoComplete</name>
-    <as>autoComplete</as>
-    <script>
-      <path>/javascript/eXo/ecm/AutoComplete.js</path>
-    </script>
-    <depends>
-      <module>jquery</module>
-      <as>gj</as>
-    </depends>
-    <depends>
-      <module>base</module>
-    </depends>
-  </module>
-  
+   
   <module>
     <name>multiUpload</name>
     <as>multiUpload</as>

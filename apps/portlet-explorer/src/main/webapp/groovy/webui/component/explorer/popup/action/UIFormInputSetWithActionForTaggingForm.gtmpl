@@ -12,11 +12,13 @@
 	import org.exoplatform.ecm.webui.component.explorer.popup.actions.UITaggingForm;
 	import org.exoplatform.webui.form.UIFormStringInput;
 
-
 	def context = _ctx.getRequestContext();
-	context.getJavascriptManager().require("SHARED/autoComplete", "autoComplete").
-	addScripts("autoComplete.AutoComplete.disposeCount();"); 
+	def tags = uicomponent.getTagNames();
+	def jsManager = context.getJavascriptManager();
+	jsManager.require("SHARED/ecm-utils", "ecmutil").addScripts('ecmutil.ECMUtils.initTagsTypeAhead("'+tags+'");');
+	
 %>
+
 <div class="form-horizontal $uicomponent.id">
     <%
       def formName = uicomponent.getFormName() ;
@@ -31,7 +33,7 @@
         		 <% 
   				} else {
 	        	if (inputEntry.getName().equals(UITaggingForm.TAG_NAMES)) {	%>
-						<div class="control-group uiTagNameInput" onkeydown="eXo.ecm.AutoComplete.createTags(event, this)"> <%
+						<div class="control-group uiTagNameInput"> <%
     	   	} else { %>
 						<div class="control-group">  <%		
   	      }	%>
@@ -43,13 +45,18 @@
 								 <%}%>
 									<div class="controls">
 									<% 
-						
-								uicomponent.renderUIComponent(inputEntry) ;
-								if(inputEntry instanceof UIFormStringInput) {
-									%>
-										<button type="button" class="btn btn-primary" onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>','AddTag', true);"><%=_ctx.appRes(formName + ".action.AddTag")%></button>
-									<%
-								}
+						      if(inputEntry.getId().equals(UITaggingForm.TAG_NAMES)){
+						      %>
+						        <input name="names" type="text" id="names" data-provide="typeahead" data-items="6" data-items="6">
+						      <%
+						      } else {
+									  uicomponent.renderUIComponent(inputEntry) ;
+						      }
+									if(inputEntry instanceof UIFormStringInput) {
+										%>
+											<button type="button" class="btn btn-primary" onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>','AddTag', true);"><%=_ctx.appRes(formName + ".action.AddTag")%></button>
+										<%
+									}
 								
 								String infor = uicomponent.getInfoField(inputEntry.getName()) ;
 								def listInfor = uicomponent.getListInfoField(inputEntry.getName()) ;
