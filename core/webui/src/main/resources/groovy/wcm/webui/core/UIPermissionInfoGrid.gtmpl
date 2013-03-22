@@ -11,6 +11,7 @@
    import org.exoplatform.ecm.webui.utils.Utils;
    import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
    import org.exoplatform.ecm.webui.utils.PermissionUtil;
+   import org.exoplatform.services.security.IdentityConstants;
 
 
 
@@ -87,7 +88,7 @@
       <tr>
          <%
                String beanId = uicomponent.getBeanIdFor(bean);
-               String readOnly = (beanId.equals(ownerId) || !canChangePermission) ? "disabled" : "";
+               String readOnly = (beanId.equals(ownerId) || !canChangePermission || beanId.equals(IdentityConstants.SYSTEM)) ? "disabled" : "";
                
                EntityEncoder encoder = HTMLEntityEncoder.getInstance();
                def usersOrGroupsId = uicomponent.getFieldValue(bean, "usersOrGroups");
@@ -140,7 +141,7 @@
                {
          %>
          <td class="center">
-           <%  if (!beanId.equals(ownerId) && canChangePermission) {
+           <%  if (!beanId.equals(ownerId) && canChangePermission && !beanId.equals(IdentityConstants.SYSTEM)) {
                  for (action in beanActions)
                  {
                     if (action == null) continue;
