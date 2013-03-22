@@ -706,12 +706,13 @@
 			if (actionbar) { //VinhNT workaround for the un-expand width of ActionBar problem, should be improved later
 			  actionbar.width(actionbar.parent().width()-2);
 			}
-			
+			var viewbar = gj('#UIViewBarContainer')[0];
 			var uiMainActionContainer   = gj(divAction).find("ul.nav-pills")[0];
 			if (!uiMainActionContainer) return; 
 			var listHiddenActionContainer = gj(uiMainActionContainer).find("li.listHiddenActionsContainer:first")[0];
+			gj(listHiddenActionContainer).css("margin-right", viewbar.offsetWidth + "px");
 			var uiDropdownContainer   = gj(listHiddenActionContainer).find("ul.dropdown-menu:first")[0];
-			var allowedSpace  = uiMainActionContainer.offsetWidth - 225;
+			var allowedSpace  = uiMainActionContainer.offsetWidth - viewbar.offsetWidth - 20 ; //left&right padding
 			gj(uiMainActionContainer).find("li").removeClass("last");
 			Self.containerWithDropDownItem_OnResize(uiMainActionContainer, allowedSpace, listHiddenActionContainer, uiDropdownContainer, "active");
 			var visibleTabsChildren  = gj(uiMainActionContainer).children("li").not(".dropdown");
