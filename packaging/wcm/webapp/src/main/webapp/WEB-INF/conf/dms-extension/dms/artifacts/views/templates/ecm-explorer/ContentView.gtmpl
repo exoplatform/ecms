@@ -177,7 +177,6 @@
             } 
           %>
         </div>
-        <div class="lineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"onkeydown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
         </div>
         <div style="position: relative; top: 0px; left: 0px; width: 0px; height: 0px">
           <div class="Mask" style="position: absolute; top: 0px; left: 0px; width: 0px; height: 0px"></div>
@@ -406,8 +405,6 @@
               <div class="columnStatus column" style="width: 93px;">
                   <div class="nodeLabel" rel="tooltip" data-placement="bottom" title="status"><%=_ctx.appRes("UIPublicationPanel.status." + status) %></div>
               </div>
-              <div class="lineLeftItem"><span></span></div>
-              
             </div>
           <%
 					// Make css for odd and event rows
