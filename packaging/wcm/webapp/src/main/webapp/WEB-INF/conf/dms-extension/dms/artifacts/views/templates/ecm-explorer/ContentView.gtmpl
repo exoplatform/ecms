@@ -71,11 +71,9 @@
   jsManager.require("SHARED/ecm-utils", "ecmutil").
             require("SHARED/uiListView", "uiListView").
             require("SHARED/multiUpload", "multiUpload").
-            require("SHARED/jquery","gj").
   addScripts("uiListView.UIListView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');").
   addScripts("ecmutil.ECMUtils.initClipboard('clip_button','1','$size');").  
-  addScripts('uiListView.UIListView.loadEffectedWidthColumn();').
-  addScripts("gj('.UIRightPopupMenuContainer, .uiRightPopupMenuContainer').off('click');");
+  addScripts('uiListView.UIListView.loadEffectedWidthColumn();');
 
   //Config to display columns with format: ["${column};${width}"]
   //Default 
@@ -315,7 +313,7 @@
               if (dataTarget != null) {
                 String link = "/" + restContextName + "/private/jcr/" + repository+ "/" + preferenceWS + Utils.formatNodeName(dataTarget.getPath());
                 strActs +=  "<li class='menuItem'>";
-                strActs +=    "<a exo:attr='Download' style='display: block; {behavior: url(#default#AnchorClick);}' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\" href=\"" +link + "\" target='_new' folder=\"" + link +"\">" ;          
+                strActs +=    "<a exo:attr='Download' style='display: block; {behavior: url(#default#AnchorClick);}' onclick=\"eXo.ecm.WCMUtils.hideContextMenu(this);window.open('" +link + "');\" target='_new' folder=\"" + link +"\">" ;          
                 strActs +=    "  <i class=\"uiIconDownload\"></i>" + _ctx.appRes("UITreeExplorer.label.webDavView");
                 strActs +=    "</a>" ;
                 strActs += "</li>";

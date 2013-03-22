@@ -40,10 +40,8 @@
   jsManager.require("SHARED/ecm-utils", "ecmutil").
             require("SHARED/uiSimpleView", "uiSimpleView").
             require("SHARED/multiUpload", "multiUpload").
-            require("SHARED/jquery","gj").
   addScripts("uiSimpleView.UISimpleView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');").
-	addScripts("ecmutil.ECMUtils.initClipboard('clip_button','1','$size');").
-  addScripts("gj('.UIRightPopupMenuContainer, .uiRightPopupMenuContainer').off('click');");
+	addScripts("ecmutil.ECMUtils.initClipboard('clip_button','1','$size');");
   
 %>
 <div id="$componentId">
@@ -154,7 +152,7 @@
 							  	if (dataTarget != null) {
 							  	  String link = "/" + restContextName + "/private/jcr/" + repository+ "/" + preferenceWS + Utils.formatNodeName(dataTarget.getPath());
 							  	  strActs +=  "<li class='menuItem'>";
-							  	  strActs +=    "<a exo:attr='Download' style='display: block; {behavior: url(#default#AnchorClick);}' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\" href=\"" +link + "\" target='_new' folder=\"" + link +"\">" ;          
+							  	  strActs +=    "<a exo:attr='Download' style='display: block; {behavior: url(#default#AnchorClick);}' onclick=\"eXo.ecm.WCMUtils.hideContextMenu(this);window.open('" +link + "');\" target='_new' folder=\"" + link +"\">" ;          
 							  	  strActs +=    "  <i class=\"uiIconDownload\"></i>" + _ctx.appRes("UITreeExplorer.label.webDavView");
 							  	  strActs +=    "</a>" ;
 							  	  strActs += "</li>";							  	  

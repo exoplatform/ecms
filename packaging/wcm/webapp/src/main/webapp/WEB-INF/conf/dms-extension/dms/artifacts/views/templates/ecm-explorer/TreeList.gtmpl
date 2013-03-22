@@ -53,13 +53,11 @@
             require("SHARED/uiListView", "uiListView").
             require("SHARED/uiFileView", "uiFileView").
             require("SHARED/multiUpload", "multiUpload").
-            require("SHARED/jquery","gj").
   addScripts("uiFileView.UIFileView.initStickBreadcrumb();").
   addScripts("ecmutil.ECMUtils.initClipboard('clip_button','1','$size');").
 	addScripts('uiListView.UIListView.loadEffectedWidthColumn();').
 	addScripts('uiFileView.UIFileView.clearItemsSelected();').
-  addScripts('uiFileView.UIFileView.clearOpenDivs();').
-  addScripts("gj('.UIRightPopupMenuContainer, .uiRightPopupMenuContainer').off('click');");
+  addScripts('uiFileView.UIFileView.clearOpenDivs();');
   
   
 	//Config to display columns with format: ["${column};${width}"]

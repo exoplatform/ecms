@@ -41,9 +41,7 @@
   def jsManager = rcontext.getJavascriptManager();
 
   jsManager.require("SHARED/uiFileView", "uiFileView").
-  require("SHARED/jquery","gj").
-  addScripts("uiFileView.UIFileView.initAllEvent('UIDocumentInfo', '$enableDragAndDrop');").
-  addScripts("gj('.UIRightPopupMenuContainer, .uiRightPopupMenuContainer').off('click');");
+  addScripts("uiFileView.UIFileView.initAllEvent('UIDocumentInfo', '$enableDragAndDrop');");
   
   //Config to display columns with format: ["${column};${width}"]
   //Default 
@@ -148,7 +146,7 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
       if (dataTarget != null) {
         String link = "/" + restContextName + "/private/jcr/" + repository+ "/" + preferenceWS + Utils.formatNodeName(dataTarget.getPath());
         strActs +=  "<li class='menuItem'>";
-        strActs +=    "<a exo:attr='Download' style='display: block; {behavior: url(#default#AnchorClick);}' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\" href=\"" +link + "\" target='_new' folder=\"" + link +"\">" ;          
+        strActs +=    "<a exo:attr='Download' style='display: block; {behavior: url(#default#AnchorClick);}' onclick=\"eXo.ecm.WCMUtils.hideContextMenu(this);window.open('" +link + "');\" target='_new' folder=\"" + link +"\">" ;          
         strActs +=    "  <i class=\"uiIconDownload\"></i>&nbsp;" + _ctx.appRes("UITreeExplorer.label.webDavView");
         strActs +=    "</a>" ;
         strActs += "</li>";
