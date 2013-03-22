@@ -110,7 +110,7 @@
 			</td>
 			<td class="right">
 				<div class="advance" id="SimpleSearchControl">
-					<a href="<%=uicomponent.event("SimpleSearch")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("uiActionBar.title.SimpleSearch")%>" class="searchBtn" id="SimpleSearch"><i class="uiIconSearch uiIconLightGrey"></i></a>
+					<a href="<%=uicomponent.event("SimpleSearch")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.SimpleSearch")%>" class="searchBtn" id="SimpleSearch"><i class="uiIconSearch uiIconLightGrey"></i></a>
 					<% uicomponent.renderChild(1); %>
 				</div>
 			</td>
