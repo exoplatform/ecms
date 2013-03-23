@@ -112,8 +112,8 @@
 	};
 	
 	WCMUtils.prototype.showHideComponent = function(elemtClicked) {		
-			var nodeReference = gj(elemtClicked).parents(".ShowHideContainer:first")[0];    
-			var elemt = gj(nodeReference).find("div.ShowHideComponent:first")[0];		
+			var nodeReference = gj(elemtClicked).parents(".showHideContainer:first")[0];    
+			var elemt = gj(nodeReference).find("div.showHideComponent:first")[0];		
 			if(elemt.style.display == 'none') {		
 				elemtClicked.childNodes[0].style.display = 'none' ;
 				elemtClicked.childNodes[1].style.display = 'block' ;
