@@ -34,6 +34,7 @@ import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.wcm.webui.form.UIFormInputSetWithNoLabel;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -44,7 +45,6 @@ import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.form.UIFormInputSet;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTabPane;
@@ -131,18 +131,18 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
     
     
     setSelectedTab(templateTab.getId()) ;
-    UIFormInputSet defaultDialogTab = new UIFormInputSet(FIELD_TAB_DIALOG) ;
+    UIFormInputSetWithNoLabel defaultDialogTab = new UIFormInputSetWithNoLabel(FIELD_TAB_DIALOG) ;
     defaultDialogTab.addUIFormInput(new UIFormTextAreaInput(FIELD_DIALOG, FIELD_DIALOG, null).
                                     addValidator(MandatoryValidator.class)) ;
     addUIFormInput(defaultDialogTab) ;
     
     
-    UIFormInputSet defaultViewTab = new UIFormInputSet(FIELD_TAB_VIEW) ;
+    UIFormInputSetWithNoLabel defaultViewTab = new UIFormInputSetWithNoLabel(FIELD_TAB_VIEW) ;
     defaultViewTab.addUIFormInput(new UIFormTextAreaInput(FIELD_VIEW, FIELD_VIEW, null).
                                   addValidator(MandatoryValidator.class)) ;
     addUIFormInput(defaultViewTab) ;
     
-    UIFormInputSet defaultSkinTab = new UIFormInputSet(FIELD_TAB_SKIN) ;
+    UIFormInputSetWithNoLabel defaultSkinTab = new UIFormInputSetWithNoLabel(FIELD_TAB_SKIN) ;
     defaultSkinTab.addUIFormInput(new UIFormTextAreaInput(FIELD_SKIN, FIELD_SKIN, null)) ;
     addUIFormInput(defaultSkinTab) ;
     setActions(new String[]{"Save", "Refresh", "Cancel"}) ;    

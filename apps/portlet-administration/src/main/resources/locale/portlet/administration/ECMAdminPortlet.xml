@@ -1309,12 +1309,12 @@
       </label>
     </tab>
     <label>
-      <name>Name</name>
-      <label>Label</label>
-      <isDocumentTemplate>is Document Template</isDocumentTemplate>
+      <name>Name:</name>
+      <label>Label:</label>
+      <isDocumentTemplate>is Document Template:</isDocumentTemplate>
       <dialog>Dialog Content</dialog>
       <view>View Content</view>
-      <permission>Permission</permission>
+      <permission>Permission:</permission>
       <selectPemistion>Permission</selectPemistion>
     </label>
   </UITemplateForm>
@@ -1950,10 +1950,10 @@
       <UITemplateContent>ViewForm</UITemplateContent>
       <UIPopupWindow>View Permission</UIPopupWindow>
       <selectVersion>Versions</selectVersion>
-      <content>Content</content>
-      <name>Name</name>
+      <content>Content:</content>
+      <name>Name:</name>
       <isDocumentTemplate>is Document Template</isDocumentTemplate>
-      <viewPermission>Permission</viewPermission>
+      <viewPermission>Permission:</viewPermission>
       <enableVersion>is Enabled Version</enableVersion>
     </label>
     <title>Add/Edit View</title>
@@ -1963,10 +1963,10 @@
       <UITemplateContent>DialogForm</UITemplateContent>
       <UIPopupWindow>Dialog Permission</UIPopupWindow>
       <selectVersion>Versions</selectVersion>
-      <content>Content</content>
-      <name>Name</name>
+      <content>Content:</content>
+      <name>Name:</name>
       <isDocumentTemplate>is Document Template</isDocumentTemplate>
-      <viewPermission>Permission</viewPermission>
+      <viewPermission>Permission:</viewPermission>
       <enableVersion>is Enabled Version</enableVersion>
     </label>
     <title>Add/Edit Dialog</title>
@@ -2006,9 +2006,9 @@
   -->
   <UITemplateEditForm>
     <label>
-      <name>Name</name>
-      <label>Label</label>
-      <isDocumentTemplate>is Document Template</isDocumentTemplate>
+      <name>Name:</name>
+      <label>Label:</label>
+      <isDocumentTemplate>is Document Template:</isDocumentTemplate>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2560,10 +2560,10 @@
       <UITemplateContent>SkinForm</UITemplateContent>
       <UIPopupWindow>Skin Permission</UIPopupWindow>
       <selectVersion>Versions</selectVersion>
-      <content>Content</content>
-      <name>Name</name>
+      <content>Content:</content>
+      <name>Name:</name>
       <isDocumentTemplate>is Document Template</isDocumentTemplate>
-      <viewPermission>Permission</viewPermission>
+      <viewPermission>Permission:</viewPermission>
       <enableVersion>is Enabled Version</enableVersion>
     </label>
     <title>Add/Edit Skin</title>
