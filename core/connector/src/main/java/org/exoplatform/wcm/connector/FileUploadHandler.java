@@ -17,7 +17,6 @@
 package org.exoplatform.wcm.connector;
 
 import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.text.DateFormat;
@@ -40,9 +39,9 @@ import javax.xml.transform.dom.DOMSource;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.common.http.HTTPStatus;
-import org.exoplatform.commons.utils.IOUtil;
 import org.exoplatform.ecm.connector.fckeditor.FCKMessage;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
+import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -327,6 +326,10 @@ public class FileUploadHandler {
     }
     if ((fileName == null) || (fileName.length() == 0)) {
       fileName = resource.getFileName();
+    }
+    //add lock token
+    if(parent.isLocked()) {
+      parent.getSession().addLockToken(LockUtil.getLockToken(parent));
     }
     if (parent.hasNode(fileName)) {
 //      Object args[] = { fileName, parent.getPath() };

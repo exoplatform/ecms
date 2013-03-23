@@ -143,7 +143,6 @@
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>ecms-core-webui</artifactId>
-      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>xml-apis</groupId>
