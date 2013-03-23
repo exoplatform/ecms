@@ -1325,11 +1325,11 @@
   -->
   <ecmTempForm>
     <label>
-      <version>Select Version</version>
-      <content>Content</content>
-      <name>Name</name>
-      <homeTemplate>Template Type</homeTemplate>
-      <enableVersion>Enabled Version</enableVersion>
+      <version>Select Version:</version>
+      <content>Content:</content>
+      <name>Name:</name>
+      <homeTemplate>Template Type:</homeTemplate>
+      <enableVersion>Enabled Version:</enableVersion>
     </label>
   </ecmTempForm>
   <ecmTempFormPopup>
