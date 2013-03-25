@@ -116,10 +116,8 @@ public class UISEOToolbarForm extends UIForm {
           left = Integer.parseInt(arrCoordinate[1]);
         }
       }
-      if(top > -1 && left > -1)
-        Utils.createPopupWindow(uiSEOToolbar, uiSEOForm, SEO_POPUP_WINDOW, 640, top, left);
-      else
-        Utils.createPopupWindow(uiSEOToolbar, uiSEOForm, SEO_POPUP_WINDOW, 640);
+      Utils.createPopupWindow(uiSEOToolbar, uiSEOForm, SEO_POPUP_WINDOW, true, 640);
+      
     }
   }
 

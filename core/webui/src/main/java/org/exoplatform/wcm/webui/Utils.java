@@ -617,6 +617,18 @@ public class Utils {
     WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
     requestContext.addUIComponentToUpdateByAjax(popupContainer);
   }
+  
+  public static void createPopupWindow(UIContainer container,
+                                       UIComponent component,
+                                       String popupWindowId,
+                                       boolean isMiddle,
+                                       int width) throws Exception {
+    UIPopupContainer popupContainer = initPopup(container, component, popupWindowId, width);
+    UIPopupWindow popupWindow = popupContainer.getChildById(popupWindowId);
+    popupWindow.setMiddle(isMiddle);
+    WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
+    requestContext.addUIComponentToUpdateByAjax(popupContainer);
+  }
 
   private static UIPopupContainer initPopup(UIContainer container,
       UIComponent component,

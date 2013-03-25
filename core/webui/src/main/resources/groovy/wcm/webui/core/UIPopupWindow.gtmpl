@@ -10,6 +10,7 @@
 <%		
 	component = uicomponent.getUIComponent();
 	boolean showCloseButton =	uicomponent.isShowCloseButton()
+	boolean isMiddle = uicomponent.isMiddle();
 	String popupId = uicomponent.getId();
 	String rsId = popupId;
 	if(popupId.indexOf('-')>0){
@@ -37,6 +38,11 @@
 	
 	String show = "none";
 	if(uicomponent.isShow()) show = "block";
+	
+    if (isMiddle) {
+      jsManager.require("SHARED/jquery", "gj")
+        .addScripts("var top = gj('#" + popupId + "').offset().top; var left = Math.floor(window.innerWidth / 2) - Math.floor(gj('#" + popupId + "').width() / 2); gj('#" + popupId + "').offset({ top: top, left: left});");
+     }
 %>
 
 <div class="UIPopupWindow uiPopup UIDragObject NormalStyle" exo:minWidth="200" exo:minHeight="200" id="$popupId" style="$widthStyle display: $show;">
