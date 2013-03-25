@@ -132,8 +132,7 @@
     <dependency>
       <groupId>org.exoplatform.doc</groupId>
       <artifactId>doc-style</artifactId>
-      <classifier>templates</classifier>
-      <scope>provided</scope>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.core</groupId>
@@ -152,7 +151,7 @@
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
-      <scope>test</scope>
+      <optional>true</optional>
     </dependency>
     <!-- "Unused declared" by analyze but still need for testing -->
     <dependency>
@@ -256,7 +255,6 @@
             <configuration>
               <includeGroupIds>org.exoplatform.doc</includeGroupIds>
               <includeArtifactIds>doc-style</includeArtifactIds>
-              <includeClassifiers>templates</includeClassifiers>
               <excludes>META-INF/**</excludes>
               <outputDirectory>${project.build.directory}/templates</outputDirectory>
             </configuration>

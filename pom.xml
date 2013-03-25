@@ -457,7 +457,6 @@
         <groupId>org.exoplatform.doc</groupId>
         <artifactId>doc-style</artifactId>
         <version>${org.exoplatform.doc.doc-style.version}</version>
-        <classifier>templates</classifier>
       </dependency>
     </dependencies>
   </dependencyManagement>
