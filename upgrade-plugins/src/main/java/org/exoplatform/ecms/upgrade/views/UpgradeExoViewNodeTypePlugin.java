@@ -24,6 +24,7 @@ import javax.jcr.NodeIterator;
 import javax.jcr.PropertyType;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
+import javax.jcr.version.VersionException;
 
 import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
 import org.exoplatform.commons.version.util.VersionComparator;
@@ -102,6 +103,11 @@ public class UpgradeExoViewNodeTypePlugin extends UpgradeProductPlugin {
           viewNode = iter.nextNode();
           viewNode.setProperty(EXO_HIDE_EXPLORER_PANEL, false);
           viewNode.save();
+        } catch (VersionException e) {
+          if (viewNode != null) {
+            viewNode.checkout();
+            session.save();
+          }
         } catch (Exception e) {
           if (LOG.isErrorEnabled()) {
             LOG.error("An unexpected error occurs when add property '" + EXO_HIDE_EXPLORER_PANEL + "' for " +
