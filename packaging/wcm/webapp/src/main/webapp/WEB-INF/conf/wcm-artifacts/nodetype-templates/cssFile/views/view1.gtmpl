@@ -1,49 +1,4 @@
-<style>
-  a {behavior: url(#default#AnchorClick);} 
-
-  .FileContent {  
-    padding: 10px;
-    color: #0e396c;
-  }
-  
-  .FileContent .NavigationContainer {  
-    padding-bottom: 5px;
-    background: url('/eXoWCMResources/skin/images/file/TitleBG1x21.gif') repeat-x top;
-    border: 1px solid #cbcbcb;
-  }
-  
-  .FileContent .TopTitle {  
-    padding-left: 10px;
-    height: 21px; line-height: 21px;
-    color: #058ee6; font-weight: bold; 
-    overflow: hidden;
-  }
-  
-  .FileContent .ECMIframe {
-    border: 1px solid #cbcbcb; 
-    height: 100% ;
-    overflow: auto;
-    width: 93.9%;
-    margin: 5px;
-    background: white;
-  }
-  
-  .FileContent .Content {  
-    white-space: normal;
-    overflow: auto;
-    padding: 0px 10px;
-    height: 300px;
-  }
-  
-   .FileContent .Content .TextContent {  
-    margin: auto;
-  }
-  
-  .FileContent .ContentDetail {  
-    text-align: center;
-    overflow: visible;
-    padding: 15px 0px;
-  }      
+<style>  
 </style>
 <%
 		import org.exoplatform.ecm.webui.utils.Utils;
@@ -61,21 +16,17 @@
   }
   String restContextName = Utils.getRestContextName(uicomponent.getPortalName());  
 %>
-<div class="FileContent"> 
-  <div class="NavigationContainer">       
-    <div class="TopTitle"><%=org.exoplatform.services.cms.impl.Utils.getTitle(originalNode)%></div>
-    <div class="Content">
-      <div class="TextContent">
-        <% println "<pre>" + contentNode.getProperty("jcr:data").getString() + "</pre>"; %>     
-       </div>
-    </div>  
-  </div> 
-  <div class="UIAction">                                          
-      <a href="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('','<%=uicomponent.getPortalName()%>','<%=restContextName%>','${repository}','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(originalNode.getPath())%>','<%=mimeType%>')" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("File.view.label.webDAV")%>" class="ActionButton LightBlueStyle">
-          <%=_ctx.appRes("File.view.label.webDAV")%>
-      </a>
-      <a href="<%=uicomponent.getDownloadLink(currentNode)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("File.view.label.download")%>" class="ActionButton LightBlueStyle">
-          <%=_ctx.appRes("File.view.label.download")%>
-      </a>
+<div class="fileContent">     
+	<h6 class="topTitle"><%=org.exoplatform.services.cms.impl.Utils.getTitle(originalNode)%></h6>
+	<div class="textContent">
+		<% println "<pre>" + contentNode.getProperty("jcr:data").getString() + "</pre>"; %>
+	</div>
+  <div class="uiAction">                                          
+		<button type="button" class="btn" href="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('','<%=uicomponent.getPortalName()%>','<%=restContextName%>','${repository}','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(originalNode.getPath())%>','<%=mimeType%>')" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("File.view.label.webDAV")%>">
+				<%=_ctx.appRes("File.view.label.webDAV")%>
+		</button>
+		<button type="button" class="btn" href="<%=uicomponent.getDownloadLink(currentNode)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("File.view.label.download")%>">
+				<%=_ctx.appRes("File.view.label.download")%>
+		</button>
   </div>  
 </div>

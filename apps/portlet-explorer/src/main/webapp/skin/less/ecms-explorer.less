@@ -611,6 +611,21 @@
 .fileContent,
 .mediaContent {
 	padding: 15px;
+	
+	.textContent {
+		max-height: 300px;
+		overflow: auto;
+		
+		pre {
+			min-height: 150px;
+		}
+	}
+}
+
+.webContentContainer {
+	.webContentInformation {
+		padding: 10px;
+	}
 }
 
 /******** Dialog1 **************/
@@ -1454,5 +1469,14 @@
 	.dropdown-menu .active > a, .dropdown-menu .active > a:hover{
 		color: white;
 		background: #517abe;
+	}
+}
+
+
+/*========== UIDocumentWorkspace =============*/
+.UIJCRExplorerPortlet .UIJCRExplorer .UIDocumentWorkspace {
+	min-height: auto;
+	.UIDocumentInfo {
+		min-height: auto;
 	}
 }

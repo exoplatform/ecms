@@ -30,80 +30,42 @@
   def title = ContentReader.getXSSCompatibilityContent(org.exoplatform.services.cms.impl.Utils.getTitle(originalNode));
 %>
 
-	<div class="UITabPane">
-	  <div class="TabPaneContent">
-	    <div class="WorkingAreaWithHelp">
-	      <div class="UIHorizontalTabs">
-	        <div class="LeftHorizontalTabs">
-		     	  <div class="RightHorizontalTabs">
-		     	    <div class="CenterHorizontalTabs">
-				        <div class="TabsContainer">
-				         
-				            <div class="UITab NormalTabStyle">
-				              <div class="SelectedTab">
-				                <div class="LeftTab">
-				                  <div class="RightTab">                
-				                    <div class="MiddleTab" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this)"><%=_ctx.appRes("File.view.label.htmlview")%></div>
-				                  </div>
-				                </div>
-				              </div>
-				            </div> 
-				            
-				            <div class="UITab NormalTabStyle">
-				              <div class="NormalTab">
-				                <div class="LeftTab">
-				                  <div class="RightTab">                
-				                    <div class="MiddleTab" onClick="eXo.webui.UIHorizontalTabs.displayTabContent(this)"><%=_ctx.appRes("File.view.label.plaintextview")%></div>
-				                  </div>
-				                </div>
-				              </div>
-				            </div>   
-				                         
-				        </div>
-				      </div>
-				    </div>
-				  </div>
-	      </div>
-	      <div class="UITabContentContainer">
-	        <div class="UITabContent" style="display: block;"> 
-		        <div class="NavigationContainer">       
-	    				<div class="TopTitle" rel="tooltip" data-placement="bottom" title="$title">$title</div>
-			        <%
-			        	if(contentNode.hasProperty("jcr:data")){
-			        	  String iframeId = uiParent.getId() + "ifame" ;
-			        	  def rqcontext = _ctx.getRequestContext() ;
-			        	  def strContent = StringEscapeUtils.unescapeHtml(contentNode.getProperty("jcr:data").getString());	
-			        	  strContent = ContentReader.getEscapeHtmlContent(Utils.sanitize(strContent));	        	  
-			        %>
-			        	<div style="text-align: center">
-			        	<textarea id="<%=iframeId%>"><%=strContent%></textarea> 
-			        	
-			        	<script type="text/javascript">
-				          eXo.ecm.WCMUtils.replaceToIframe('$iframeId');
-				        </script> 
-			        	</div>
-			        <%}%>
-				    </div>   
-	        </div>
-	        <div class="UITabContent" style="display: none;"> 
-	        	<div class="NavigationContainer">       
-						<div class="TopTitle" rel="tooltip" data-placement="bottom" title="$title">$title</div>
-		        	<div class="Content">
-		        		<div class="TextContent">
-					        <%
-					        	if(contentNode.hasProperty("jcr:data")) {
-					        	  def strContent = StringEscapeUtils.unescapeHtml(contentNode.getProperty("jcr:data").getString());	
-			        	  		strContent = ContentReader.getEscapeHtmlContent(Utils.sanitize(strContent));
-					        		println "<pre>" + strContent + "</pre>"; 
-					        	}
-					        %>
-			        	</div>
-		        	</div>				     
-				  	</div>   
-	        </div>
-	      </div>  
-	    </div>  
-	  </div>  
+	<div class="uiTabNormal">
+		<ul class="nav nav-tabs" id="myTab">
+			<li class="active"><a data-toggle="tab" href="#tab1"><%=_ctx.appRes("File.view.label.htmlview")%></a></li>
+			<li><a data-toggle="tab" href="#tab2"><%=_ctx.appRes("File.view.label.plaintextview")%></a></li> 
+		</ul>
+		<div class="tab-content" id="myTabContent">
+			<div id="tab1" class="tab-pane fade in active">      
+				<h6 class="topTitle">$title</h6>
+				<%
+					if(contentNode.hasProperty("jcr:data")){
+						String iframeId = uiParent.getId() + "ifame" ;
+						def rqcontext = _ctx.getRequestContext() ;
+						def strContent = StringEscapeUtils.unescapeHtml(contentNode.getProperty("jcr:data").getString());	
+						strContent = ContentReader.getEscapeHtmlContent(Utils.sanitize(strContent));	        	  
+				%>
+				<div class="textContent">
+					<textarea id="<%=iframeId%>"><%=strContent%></textarea> 
+					<script type="text/javascript">
+						eXo.ecm.WCMUtils.replaceToIframe('$iframeId');
+					</script> 
+				</div>
+				<%}%>
+			</div>
+			<div id="tab2" class="tab-pane fade">      
+				<h6 class="topTitle">$title</h6>
+				<div class="textContent">
+					<%
+						if(contentNode.hasProperty("jcr:data")) {
+							def strContent = StringEscapeUtils.unescapeHtml(contentNode.getProperty("jcr:data").getString());	
+							strContent = ContentReader.getEscapeHtmlContent(Utils.sanitize(strContent));
+							println "<pre>" + strContent + "</pre>"; 
+						}
+					%>
+				</div> 
+			</div>
+		</div>  
 	</div>  
 <%} else {%>
   <%        
@@ -114,7 +76,7 @@
         println "<pre>" + strContent + "</pre>"; 
       } else {
    %>
-        <div style="text-align:center; font-style:italic">
+        <div class="center">
 			    <%=_ctx.appRes("File.view.label.file-size-too-big")%>
 			  </div>
    <%
