@@ -105,8 +105,14 @@ public class UpgradeExoViewNodeTypePlugin extends UpgradeProductPlugin {
           viewNode.save();
         } catch (VersionException e) {
           if (viewNode != null) {
-            viewNode.checkout();
-            session.save();
+            try {
+              viewNode.checkout();
+              session.save();
+            } catch (Exception ex) {
+              if (LOG.isErrorEnabled()) {
+                LOG.error("Can not checkout node " + viewNode);
+              }
+            }
           }
         } catch (Exception e) {
           if (LOG.isErrorEnabled()) {
