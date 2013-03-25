@@ -9,7 +9,6 @@
    import org.exoplatform.webui.form.input.UICheckBoxInput;
    import org.exoplatform.web.application.Parameter;
    import org.exoplatform.ecm.webui.utils.Utils;
-   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
    import org.exoplatform.ecm.webui.utils.PermissionUtil;
    import org.exoplatform.services.security.IdentityConstants;
 
@@ -32,10 +31,9 @@
    UIForm uiForm = uicomponent.getAncestorOfType(UIForm.class);
    
    // Get owner of current node
-   UIJCRExplorer uiJCRExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
-   Node currentNode = uiJCRExplorer.getCurrentNode();
+   Node currentNode = uicomponent.getParent().getCurrentNode();
    String ownerId = Utils.getNodeOwner(currentNode);
-   boolean canChangePermission = PermissionUtil.canChangePermission(currentNode);
+   boolean canChangePermission = (currentNode == null) || PermissionUtil.canChangePermission(currentNode);
    def beanIdField = uicomponent.getBeanIdField();
 %>
 <div id="$uicomponent.id" class="permissionInfo">

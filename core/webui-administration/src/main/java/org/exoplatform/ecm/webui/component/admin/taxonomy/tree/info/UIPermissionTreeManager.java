@@ -20,6 +20,7 @@ package org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info;
 import javax.jcr.Node;
 
 import org.exoplatform.ecm.permission.info.UIPermissionInputSet;
+import org.exoplatform.ecm.webui.core.UIPermissionManagerBase;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -41,7 +42,7 @@ import org.exoplatform.webui.organization.account.UIUserSelector;
  */
 
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
-public class UIPermissionTreeManager extends UIContainer {
+public class UIPermissionTreeManager extends UIPermissionManagerBase {
 
   public static final String POPUP_TAXONOMY_SELECT_USER = "TaxoPopupUserSelector";
 

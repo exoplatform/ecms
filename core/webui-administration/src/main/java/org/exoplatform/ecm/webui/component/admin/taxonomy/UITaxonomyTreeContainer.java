@@ -26,13 +26,13 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.Workspace;
 
-import org.exoplatform.ecm.permission.PermissionBean;
 import org.exoplatform.ecm.webui.component.admin.taxonomy.action.UIActionForm;
 import org.exoplatform.ecm.webui.component.admin.taxonomy.action.UIActionTaxonomyManager;
 import org.exoplatform.ecm.webui.component.admin.taxonomy.action.UIActionTypeForm;
 import org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm;
 import org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeInfo;
 import org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeManager;
+import org.exoplatform.ecm.webui.core.bean.PermissionBean;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -245,7 +245,7 @@ public class UITaxonomyTreeContainer extends UIContainer implements UISelectable
             if (permBean.isRead()) permsList.add(PermissionType.READ);
             if (permBean.isAddNode()) permsList.add(PermissionType.ADD_NODE);
             if (permBean.isRemove()) permsList.add(PermissionType.REMOVE);
-            if (permBean.isSetProperty()) permsList.add(PermissionType.SET_PROPERTY);
+//            if (permBean.isSetProperty()) permsList.add(PermissionType.SET_PROPERTY);
               if (permsList.size() > 0) {
                 node.setPermission(permBean.getUsersOrGroups(), permsList.toArray(new String[permsList.size()]));
               }

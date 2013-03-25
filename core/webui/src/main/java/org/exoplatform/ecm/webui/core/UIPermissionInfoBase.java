@@ -33,6 +33,7 @@ import javax.jcr.RepositoryException;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.ecm.webui.core.bean.PermissionBean;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
@@ -172,6 +173,10 @@ public abstract class UIPermissionInfoBase extends UIContainer {
     return permsMap;
   }
   
+  public List<PermissionBean> getPermBeans() {
+    return new ArrayList<PermissionBean>();
+  }
+  
   static public class EditActionListener extends EventListener<UIPermissionInfoBase> {
     public void execute(Event<UIPermissionInfoBase> event) throws Exception {
       UIPermissionInfoBase uiPermissionInfo = event.getSource();
@@ -179,29 +184,42 @@ public abstract class UIPermissionInfoBase extends UIContainer {
       WebuiRequestContext requestContext = event.getRequestContext();
       ExtendedNode node = (ExtendedNode)uiPermissionInfo.getCurrentNode();
       
+      // Get selected user/Group
+      String userOrGroupId = requestContext.getRequestParameter(OBJECTID);
+      // Changed permission value
+      String selectedPermission = requestContext.getRequestParameter(FIELD_NAME);
+      String selectedPermissionValue = requestContext.getRequestParameter(FIELD_VALUE);
+      
+      if (node == null) {
+        List<PermissionBean> perBeans = uiPermissionInfo.getPermBeans();
+        for (PermissionBean perm : perBeans) {
+          if (perm.getUsersOrGroups().equals(userOrGroupId)) {
+            if (PermissionType.READ.equals(selectedPermission)) {
+              perm.setRead("true".equals(selectedPermissionValue));
+            } else if (PERMISSION_ADD_NODE_ACTION.equals(selectedPermission) || 
+                        PermissionType.SET_PROPERTY.equals(selectedPermission)) {
+              perm.setAddNode("true".equals(selectedPermissionValue));
+            } else if (PermissionType.REMOVE.equals(selectedPermission)) {
+              perm.setRemove("true".equals(selectedPermissionValue));
+            }
+          }
+        }
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiPermissionInfo);
+        return;
+      }
+
       if (!node.isCheckedOut()) {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null,
             ApplicationMessage.WARNING));
-
         return;
       }
       
       // Current node permissions
       Map<String, List<String>> permsMap = uiPermissionInfo.getPermissionsMap(node);
-      
-      // Get selected user/Group
-      String userOrGroupId = requestContext.getRequestParameter(OBJECTID);
-      
-      // Changed permission value
-      String selectedPermission = requestContext.getRequestParameter(FIELD_NAME);
-      String selectedPermissionValue = requestContext.getRequestParameter(FIELD_VALUE);
-      
       // Current user/group permissions
       List<String> identityPermissions = permsMap.get(userOrGroupId);
-     
       //
       org.exoplatform.wcm.webui.Utils.addLockToken(node);
-      
       try {
         // Change permission
         if (PermissionUtil.canChangePermission(node)) {
@@ -247,26 +265,6 @@ public abstract class UIPermissionInfoBase extends UIContainer {
     }
   }
 
-  public class PermissionBean {
-
-    private String usersOrGroups ;
-    private boolean read ;
-    private boolean addNode ;
-    private boolean remove ;
-
-    public String getUsersOrGroups() { return usersOrGroups ; }
-    public void setUsersOrGroups(String s) { usersOrGroups = s ; }
-
-    public boolean isAddNode() { return addNode ; }
-    public void setAddNode(boolean b) { addNode = b ; }
-
-    public boolean isRead() { return read ; }
-    public void setRead(boolean b) { read = b ; }
-
-    public boolean isRemove() { return remove ; }
-    public void setRemove(boolean b) { remove = b ; }
-  }
-  
   public class PermissionBeanComparator implements Comparator<PermissionBean> {
     public int compare(PermissionBean o1, PermissionBean o2) throws ClassCastException {
       try {
