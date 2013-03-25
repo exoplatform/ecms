@@ -22,7 +22,7 @@
           <%
           } else if(uiform.currentPreviewLink != null) {
           %>
-            <div>
+            <div class="center">
               <img style="max-width:116px; max-height:116px" src="$uiform.currentPreviewLink" alt="$uiform.currentPreviewLink" />
             </div>
           <%
