@@ -60,7 +60,9 @@
 		            <td><%=uicomponent.getCurrentUserId()%></td>
 			          <td class="center">
 									<div class="actionContainer">
-				            <a class="actionIcon" onclick="<%=uicomponent.event("Execute", Utils.formatNodeName(object.getStoredQueryPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Execute")%>" ><i class="uiIconEcmsExecute"></i></a>
+										<a class="actionIcon" onclick="<%=uicomponent.event("Execute", Utils.formatNodeName(object.getStoredQueryPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Execute")%>" ><i class="uiIconEcmsExecute"></i></a>
+                    <a class="actionIcon" onclick="<%=uicomponent.event("Edit", Utils.formatNodeName(object.getStoredQueryPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Edit")%>" ><i class="uiIconEdit"></i></a>
+                    <a class="actionIcon" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(object.getStoredQueryPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Delete")%>" ><i class="uiIconDelete"></i></a> 
 									</div>	                    
 			          </td>	                    
 		          </tr>
