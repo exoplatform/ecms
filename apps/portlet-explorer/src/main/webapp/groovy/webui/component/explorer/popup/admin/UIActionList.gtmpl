@@ -71,6 +71,16 @@
 		      </tr>
 	    <%
 	        }
+	        
+	        if (uicomponent.getListActions().size() == 0) {
+						%>
+						<tr>
+							<td class="empty center" colspan=4">
+								<%=_ctx.appRes("UIGrid.msg.empty")%>
+							</td>
+							</tr> 
+			      <%
+	        }
 	      }
 	    %>
     </tbody>
