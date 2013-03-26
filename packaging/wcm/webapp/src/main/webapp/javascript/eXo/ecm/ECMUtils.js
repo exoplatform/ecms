@@ -1263,13 +1263,15 @@
 					}
 					Self.loadContainerWidth();
 					Self.UIBrokenCheckingHandler = window.setInterval("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
-				} else if (Self.uiLeftContainer.offsetHeight < Self.uiRightContainer.offsetHeight) {
-					if (Self.UIBrokenCheckingHandler) {
-						clearInterval(Self.UIBrokenCheckingHandler);
-						Self.UIBrokenCheckingHandler = null;
+				} else if (Self.uiLeftContainer.offsetHeight != Self.uiRightContainer.offsetHeight) {
+					if (document.getElementById("FillOutElement")) {
+						if (Self.UIBrokenCheckingHandler) {
+							clearInterval(Self.UIBrokenCheckingHandler);
+							Self.UIBrokenCheckingHandler = null;
+						}
+						Self.loadContainerWidth();
+						Self.UIBrokenCheckingHandler = window.setInterval("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
 					}
-					Self.loadContainerWidth();
-					Self.UIBrokenCheckingHandler = window.setInterval("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
 				}
 			}
 		}
