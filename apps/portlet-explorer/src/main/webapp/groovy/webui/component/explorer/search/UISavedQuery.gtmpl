@@ -32,7 +32,7 @@
     <tbody>
       <%if(queryListData.size() == 0) { %>
 	        <tr>
-		        <td colspan="5"><%=_ctx.appRes("UISavedQuery.label.no-children")%></td>
+		        <td colspan="5" class="center empty"><%=_ctx.appRes("UISavedQuery.label.no-children")%></td>
 		      </tr>
       <%} else {   
 	        def rowClass = null ;
