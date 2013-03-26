@@ -18,11 +18,14 @@ package org.exoplatform.ecm.webui.component.admin.metadata;
 
 import javax.jcr.nodetype.NodeType;
 
+import org.exoplatform.ecm.webui.selector.UIAnyPermission;
 import org.exoplatform.ecm.webui.selector.UIPermissionSelector;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.core.UIBreadcumbs;
 import org.exoplatform.webui.core.UIPopupWindow;
+import org.exoplatform.webui.core.UITree;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.ext.manager.UIAbstractManager;
 
@@ -85,6 +88,10 @@ public class UIMetadataManager extends UIAbstractManager {
     uiPopup.setWindowSize(560, 300);
     UIPermissionSelector uiECMPermission =
       createUIComponent(UIPermissionSelector.class, null, "MetadataPermission") ;
+    uiECMPermission.getChild(UIAnyPermission.class).setId("UIMetadataAnyPermission");
+    uiECMPermission.getChild(UIBreadcumbs.class).setId("MetadataBreadcumbGroupSelector");
+    uiECMPermission.getChild(UITree.class).setId("UIMetadataTreeGroupSelector");
+    
     uiECMPermission.setSelectedMembership(true);
     if(membership != null && membership.indexOf(":/") > -1) {
       String[] arrMember = membership.split(":/") ;
