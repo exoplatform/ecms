@@ -85,7 +85,7 @@
             <a class="pull-right" href="$downloadLink"><i class="uiIconDownload"></i> <%=_ctx.appRes("File.view.label.download")%></a>
         <%}%>
         
-        <h6 class="topTitle" rel="tooltip" data-placement="bottom" title="<%=title %>"><%=title %></h6>
+        <div class="topTitle"><%=title %></div>
       </h6>
       <div class="content uiContentBox">
           <%
