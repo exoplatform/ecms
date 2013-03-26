@@ -5,6 +5,7 @@
   import java.util.Locale;
   import org.exoplatform.portal.webui.workspace.UIPortalApplication;
   
+  
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
   String repository = rService.getCurrentRepository().getConfiguration().getName();
   def commentsList = uicomponent.getComments() ;
@@ -14,6 +15,9 @@
     java.text.SimpleDateFormat commentDateFormat = new java.text.SimpleDateFormat("h:mm a. EEE, MMM d, yyyy", locale) ;
     def lastComment = commentsList.get(0) ;
     def rcontext = _ctx.getRequestContext() ;
+    def jsManager = rcontext.getJavascriptManager();
+    jsManager.require("SHARED/wcm-utils", "wcmutil")
+        .addScripts("wcmutil.WCMUtils.onLoadComments();");
     
 %>
   <style>
@@ -27,7 +31,7 @@
 			<label class="viewLabel"><i class="uiIconForum"></i> <%=commentsList.size()%> <%=_ctx.appRes("Comment.view.label.comments")%></label>
 			<div class="labelPostedComment">
 				<%=_ctx.appRes("Comment.view.label.postedBy")%>
-				<a href="#demo">
+				<a href="<%=org.exoplatform.wcm.webui.Utils.getProfileLink(lastComment.getProperty("exo:commentor").getString())%>">
 					<%=lastComment.getProperty("exo:commentorFullName").getString()%>
 				</a>		  			  
 				<%=_ctx.appRes("Comment.view.label.at")%> 
@@ -39,17 +43,22 @@
 		<div class="showHideComponent" style="display: none;">
 		  <%
 		  def uiremovecomment = uicomponent.getRemoveComment();
-		  for(comment in commentsList) {%>
+		  for(comment in commentsList) {
+            String commentor=null;
+            if(comment.hasProperty("exo:commentor")){
+                commentor=comment.getProperty("exo:commentor").getString();
+            }
+		  %>
 				<div class="commentContainer clearfix">
 					<div class="avatarBox pull-left">
-						<a class="avatarMedium" data-placement="bottom" rel="tooltip" href="/portal/intranet/profile/root" data-original-title="Root Root">
-							<img src="/social-resources/skin/images/ShareImages/UserAvtDefault.png" alt="Root Root">
+						<a commentor="$commentor" class="avatarMedium" data-placement="bottom" rel="tooltip" href="<%=org.exoplatform.wcm.webui.Utils.getProfileLink(commentor)%>" data-original-title="<%=comment.getProperty("exo:commentorFullName").getString()%>">
+							<img src="/social-resources/skin/images/ShareImages/UserAvtDefault.png">
 						</a>
 					</div>
 					<div class="commentBox uiBox">
 						<span class="arrowLeft"></span>
 						<div class="commentInfo">
-							<strong><a href="#demo"><%=comment.getProperty("exo:commentorFullName").getString()%></a></strong> 				
+							<strong><a href="<%=org.exoplatform.wcm.webui.Utils.getProfileLink(commentor)%>"><%=comment.getProperty("exo:commentorFullName").getString()%></a></strong> 				
 							<%
 								if(comment.hasProperty("exo:commentorEmail")) {
 									String email = comment.getProperty("exo:commentorEmail").getString() ;
@@ -69,12 +78,8 @@
 								<%}%>
 								
 								<%
-								String commentor=null;
 								String path = comment.getPath();
 								String parentPath = comment.getSession().getWorkspace().getName().concat(":").concat(uicomponent.getNode().getPath());
-								if(comment.hasProperty("exo:commentor")){
-									commentor=comment.getProperty("exo:commentor").getString();
-								}
 								if (commentor!=null && commentor.equals(rcontext.getRemoteUser())) {
 								%>
 								<% if (uicomment != null) {

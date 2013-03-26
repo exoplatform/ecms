@@ -70,6 +70,8 @@ import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.core.UIPopupWindow;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.web.application.RequestContext;
+import org.exoplatform.web.url.navigation.NavigationResource;
 import org.exoplatform.web.url.navigation.NodeURL;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -1087,5 +1089,12 @@ public class Utils {
       }
     }
     return sb.toString();
+  }
+  
+  public static String getProfileLink(String userId) {
+    RequestContext ctx = RequestContext.getCurrentInstance();
+    NodeURL nodeURL = ctx.createURL(NodeURL.TYPE);
+    NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), "profile");
+    return nodeURL.setResource(resource).toString() + "/" + userId;
   }
 }
