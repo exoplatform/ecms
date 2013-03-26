@@ -2346,6 +2346,13 @@
       <anyPermission>Any Permission</anyPermission>
     </label>
   </UIAnyPermission>
+  
+  <UIQueriesAnyPermission>
+    <label>
+      <anyPermission>Any Permission</anyPermission>
+    </label>
+  </UIQueriesAnyPermission>
+  
   <MetadataPermission>
     <label>
       <selectGroup>Select Group</selectGroup>

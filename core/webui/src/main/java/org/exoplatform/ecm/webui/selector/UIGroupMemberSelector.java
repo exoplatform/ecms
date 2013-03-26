@@ -84,7 +84,7 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
   private List<String> listMemberhip;
 
   public UIGroupMemberSelector() throws Exception {
-    addChild(UIAnyPermission.class, null, null);
+    addChild(UIAnyPermission.class, null, "UIQueriesAnyPermission");
     UIBreadcumbs uiBreadcumbs = addChild(UIBreadcumbs.class, "BreadcumbMembershipSelector", "BreadcumbMembershipSelector") ;
     UITree tree = addChild(UITree.class, "UITreeMembershipSelector", "TreeMembershipSelector");
     OrganizationService service = WCMCoreUtils.getService(OrganizationService.class);
