@@ -91,7 +91,6 @@
               <% def pageIterator = uicomponent.getContentPageIterator();
                  int availablePage = pageIterator.getAvailablePage();
                  int currentPage = pageIterator.getCurrentPage();
-                 System.out.println(currentPage + ": " + availablePage);
                  if (availablePage > 1) {
               %>
                 <div id="FileViewPageIterator" class="fileViewPageIterator pull-right">
@@ -137,11 +136,16 @@
                 }
                 def nameClass = "Alphabetic".equals(selectedSortType)?"active":"";
                 def dateClass = "Date".equals(selectedSortType)?"active":"";
+                def sizeClass = "Size".equals(selectedSortType)?"active":"";
               %>
             <!--===============DropDownBox===================-->
               <div class="btn-group pull-right">
                 <button data-toggle="dropdown" class="btn dropdown-toggle">
-                  <%=_ctx.appRes("FileView.label." + ("Alphabetic".equals(selectedSortType)?"name":"date"))%>
+                  <% def sortTypeName = "name";
+                     if ("Date".equals(selectedSortType)) sortTypeName = "date";
+                     if ("Size".equals(selectedSortType)) sortTypeName = "size";
+                  %>
+                  <%=_ctx.appRes("FileView.label." + sortTypeName)%>
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" style="max-height:290px;min-width:80px;overflow:auto">
@@ -160,6 +164,13 @@
                         <%} %>
                       </a>
                     </li>
+                    <li class="$sizeClass">
+                    <a href="<%=uicomponent.event("Sort", typeActionLink + "Size")%>"><%=_ctx.appRes("FileView.label.size")%>
+                      <% if ("active".equals(sizeClass)) {%>
+                        <i class="uiIconSort$sortOrder">&nbsp;</i>
+                      <%} %>
+                    </a>
+                  </li>
                 </ul>
               </div>
             <!--===============Sort By label =================-->
