@@ -1242,15 +1242,36 @@
 		  Self.uiRightContainer = gj(Self.uiWorkingArea).find("div.rightContainer:first")[0];
 		  Self.uiResizeSideBar = gj(Self.uiWorkingArea).find("div.resizeBar:first")[0];
 		  if (Self.uiLeftContainer && Self.uiRightContainer && Self.uiWorkingArea) {
-		    if (Self.uiLeftContainer.offsetWidth + Self.uiRightContainer.offsetWidth + Self.uiResizeSideBar.offsetWidth  > Self.uiWorkingArea) {
-		    	Self.loadContainerWidth();
-		    }else if (Self.uiLeftContainer.offsetWidth + Self.uiRightContainer.offsetWidth + Self.uiResizeSideBar.offsetWidth  < Self.uiWorkingArea -2) {
-		    	Self.loadContainerWidth();
-		    }else if (Self.uiLeftContainer.offsetTop < Self.uiRightContainer.offsetTop) {
-		    	Self.loadContainerWidth();
-		    }
-		    
-		  }
+				if (Self.uiLeftContainer.offsetWidth + Self.uiRightContainer.offsetWidth + Self.uiResizeSideBar.offsetWidth  > Self.uiWorkingArea) {
+					if (Self.UIBrokenCheckingHandler) {
+						clearInterval(Self.UIBrokenCheckingHandler);
+						Self.UIBrokenCheckingHandler = null;
+					}
+					Self.loadContainerWidth();
+					Self.UIBrokenCheckingHandler = window.setInterval("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
+				}else if (Self.uiLeftContainer.offsetWidth + Self.uiRightContainer.offsetWidth + Self.uiResizeSideBar.offsetWidth  < Self.uiWorkingArea -2) {
+					if (Self.UIBrokenCheckingHandler) {
+						clearInterval(Self.UIBrokenCheckingHandler);
+						Self.UIBrokenCheckingHandler = null;
+					}
+					Self.loadContainerWidth();
+					Self.UIBrokenCheckingHandler = window.setInterval("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
+				}else if (Self.uiLeftContainer.offsetTop < Self.uiRightContainer.offsetTop) {
+					if (Self.UIBrokenCheckingHandler) {
+						clearInterval(Self.UIBrokenCheckingHandler);
+						Self.UIBrokenCheckingHandler = null;
+					}
+					Self.loadContainerWidth();
+					Self.UIBrokenCheckingHandler = window.setInterval("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
+				} else if (Self.uiLeftContainer.offsetHeight < Self.uiRightContainer.offsetHeight) {
+					if (Self.UIBrokenCheckingHandler) {
+						clearInterval(Self.UIBrokenCheckingHandler);
+						Self.UIBrokenCheckingHandler = null;
+					}
+					Self.loadContainerWidth();
+					Self.UIBrokenCheckingHandler = window.setInterval("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
+				}
+			}
 		}
 		/**
 		 * @fucntion   waitForContainer
