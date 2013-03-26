@@ -15,7 +15,7 @@
 			  <label class="control-label" for="actionName"><%=_ctx.appRes("AutoVersioning.dialog.label.name")%>:</label>
 			  <div class="controls">
 				  <% 
-					String[] fieldName = ["jcrPath=/node/exo:name", "validate=XSSValidator"];
+					String[] fieldName = ["jcrPath=/node/exo:name", "validate=empty,XSSValidator"];
 					uicomponent.addTextField("actionName", _ctx.appRes("AutoVersioning.dialog.label.name"), fieldName);
 				  %>
 				</div>
