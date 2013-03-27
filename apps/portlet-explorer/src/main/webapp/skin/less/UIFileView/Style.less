@@ -6,6 +6,9 @@
 	.columnCheckbox {
 		padding: 3px 10px;
 		float: right;
+		.uiCheckbox {
+			width: 16px;
+		}
 	}
 	
 	.columnArrow {
@@ -25,7 +28,7 @@
 	}
 	
 	.columnText {
-		margin: 0px 25px 0px 75px;
+		margin: 0px 45px 0px 75px;
 	}
 	
 	.sortByLabel {
@@ -48,6 +51,7 @@
 		
 		.fileInfoBottom {
 			color: @grayLight;
+			font-size: 12px;
 		}
 		
 		.fileInfoVersion {
@@ -60,6 +64,11 @@
 			width: auto;
 			padding: 2px 5px;
 		}
+		
+		.columnCheckbox {
+			position: relative;
+			padding-top: 10px;
+		}
 	}
 	
 	.uiListGrid .titleTable {
@@ -71,11 +80,25 @@
 		height: auto;
 
 		.breadcrumbLink {
-		 margin-right: 200px;
-		 overflow: hidden;
-		 white-space: nowrap;
-		 line-height: 28px;	
-		 padding-left: 15px;
+			margin-right: 200px;
+			overflow: hidden;
+			white-space: nowrap;
+			line-height: 28px;	
+			padding-left: 15px;
+		}
+		
+		.btn-group .btn,.btn-group .dropdown-menu a {
+			font-size: 12px;
+		}
+		
+		.btn-group .dropdown-menu .active a,
+		.btn-group .dropdown-menu .active a:hover	{
+			color: #fff;
+			
+			i {
+				background-image: url("/eXoResources/skin/images/Icons/uiIconsWhite.png");
+				margin: 0px;
+			}
 		}
 	}
 	

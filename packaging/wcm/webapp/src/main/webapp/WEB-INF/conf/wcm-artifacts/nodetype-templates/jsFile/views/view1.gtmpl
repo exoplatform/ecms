@@ -62,21 +62,17 @@
   }
   String restContextName = Utils.getRestContextName(uicomponent.getPortalName());
 %>
-<div class="FileContent">	
-  <div class="NavigationContainer">       
-    <div class="TopTitle">$originalNode.name</div>
-    <div class="Content">
-    	<div class="TextContent">
-	      <% println "<pre>" + uicomponent.encodeHTML(contentNode.getProperty("jcr:data").getString()) + "</pre>"; %>     
-	     </div>
-    </div>  
-  </div> 
-  <div class="UIAction">                                          
-      <a href="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('','<%=uicomponent.getPortalName()%>','<%=restContextName%>','${repository}','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(originalNode.getPath())%>','<%=mimeType%>')" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("File.view.label.webDAV")%>" class="ActionButton LightBlueStyle">
-              <%=_ctx.appRes("File.view.label.webDAV")%>
-      </a>
-      <a href="<%=uicomponent.getDownloadLink(currentNode)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("File.view.label.download")%>" class="ActionButton LightBlueStyle">
-              <%=_ctx.appRes("File.view.label.download")%>
-      </a>
+<div class="fileContent">   
+	<h6 class="topTitle"><%=org.exoplatform.services.cms.impl.Utils.getTitle(originalNode)%></h6>
+	<div class="textContent">
+		<% println "<pre>" + uicomponent.encodeHTML(contentNode.getProperty("jcr:data").getString()) + "</pre>"; %>     
+	</div>
+  <div class="uiAction">                                          
+		<button type="button" class="btn" href="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('','<%=uicomponent.getPortalName()%>','<%=restContextName%>','${repository}','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(originalNode.getPath())%>','<%=mimeType%>')" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("File.view.label.webDAV")%>">
+			<%=_ctx.appRes("File.view.label.webDAV")%>
+		</button>
+		<button type="button" class="btn" href="<%=uicomponent.getDownloadLink(currentNode)%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("File.view.label.download")%>">
+						<%=_ctx.appRes("File.view.label.download")%>
+		</button>
 	</div>  
 </div>

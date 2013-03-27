@@ -100,6 +100,8 @@ public class QueryCriteria {
   
   /** multiple search enable/disable */
   private boolean multipleSearch_ = false;
+  
+  private String searchPath_ = null;
 
   /** Pagination mode :
    * - none : no pagination
@@ -134,6 +136,10 @@ public class QueryCriteria {
   public boolean isMultiplePhaseSearch() { return multipleSearch_; }
   
   public void setMultiplePhaseSearch(boolean value) { multipleSearch_ = value; }
+  
+  public String getSearchPath() { return searchPath_; }
+  
+  public void setSearchPath(String value) { searchPath_ = value; }
   
   /**
    * Checks if is live mode.

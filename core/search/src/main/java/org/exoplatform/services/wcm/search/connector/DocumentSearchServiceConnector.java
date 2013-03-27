@@ -99,29 +99,23 @@ public class DocumentSearchServiceConnector extends BaseContentSearchServiceConn
   @Override
   protected String getPath(DriveData driveData, ResultNode node, SearchContext context) throws Exception {
     String url = BaseSearchServiceConnector.NONE_NAGVIGATION;
-    if(context != null)
-      try {
-        String handler = WCMCoreUtils.getPortalName();
-        UserPortalConfig prc = getUserPortalConfig();
-        SiteKey siteKey = SiteKey.portal(prc.getPortalConfig().getName());
-        if(siteKey != null) {
-          if(StringUtils.isNotBlank(siteKey.getName())) {
-            String pageName = getPageName(siteKey);
-            if(StringUtils.isNotBlank(pageName)) {
-              siteKey = SiteKey.portal(context.getSiteName() != null ? context.getSiteName():BaseSearchServiceConnector.DEFAULT_SITENAME);
-              pageName = getPageName(siteKey);
-            }
-            url = "/" + handler + context.handler(handler).
-                          lang("").
-                          siteName(siteKey.getName()).
-                          siteType(SiteType.PORTAL.getName()).
-                          path(pageName+"?path=" +driveData.getName() + "/" + node.getPath()).renderLink();
-          }
+    String handler = WCMCoreUtils.getPortalName();
+    UserPortalConfig prc = getUserPortalConfig();
+    SiteKey siteKey = SiteKey.portal(prc.getPortalConfig().getName());
+    if(siteKey != null) {
+      if(StringUtils.isNotBlank(siteKey.getName())) {
+        String pageName = getPageName(siteKey);
+        if(StringUtils.isNotBlank(pageName)) {
+          siteKey = SiteKey.portal(context.getSiteName() != null ? context.getSiteName():BaseSearchServiceConnector.DEFAULT_SITENAME);
+          pageName = getPageName(siteKey);
         }
-      } catch (Exception e) {
-        LOG.info("Could not build the link of event/task " + e.getMessage());
-        //e.printStackTrace();
+        url = "/" + handler + context.handler(handler).
+                      lang("").
+                      siteName(siteKey.getName()).
+                      siteType(SiteType.PORTAL.getName()).
+                      path(pageName+"?path=" +driveData.getName() + "/" + node.getPath()).renderLink();
       }
+    }
     return URLDecoder.decode(url, "UTF-8");
   }
   

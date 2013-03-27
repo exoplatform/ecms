@@ -1634,18 +1634,14 @@ public class UIDialogForm extends UIForm {
     WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
     Writer w = context.getWriter();
     if(componentSelectors.get(name) != null && name.equals(componentSelectors.get(name).get("returnField"))) {
-      w.write("<table style=\"width: auto;\">");
-      w.write("<tr>");
-      w.write("<td>");
       uiInput.processRender(context);
-      w.write("</td>");
     } else {
       uiInput.processRender(context);
     }
     if(componentSelectors.get(name) != null) {
       Map<String,String> fieldPropertiesMap = componentSelectors.get(name);
       String fieldName = fieldPropertiesMap.get("returnField");
-      String iconClass = "Add16x16Icon";
+      String iconClass = "uiIconPlus";
       if(fieldPropertiesMap.get("selectorIcon") != null) {
         iconClass = fieldPropertiesMap.get("selectorIcon");
       }
@@ -1653,15 +1649,14 @@ public class UIDialogForm extends UIForm {
       String showComponent = getResourceBundle(context, getId().concat(".title.ShowComponent"));
       String removeReference = getResourceBundle(context, getId().concat(".title.removeReference"));
       if (name.equals(fieldName)) {
-        w.write("<td class=\"MultiValueContainerShow\">");
-        w.write("<a style=\"cursor:pointer;\" title=\"" + showComponent + "\""
+        w.write("<a class=\"actionIcon\" title=\"" + showComponent + "\""
             + "onclick=\"javascript:eXo.webui.UIForm.submitEvent('" + "" + getId()
-            + "','ShowComponent','&objectId=" + fieldName + "' )\"><img alt='" + rs.getString("Ecm.dialog.label.add")
-            + "' class='ActionIcon "
-            + iconClass + "' src=\"/eXoResources/skin/DefaultSkin/background/Blank.gif\" /></a>");
+            + "','ShowComponent','&objectId=" + fieldName + "' )\"><i"
+            + " class='"
+            + iconClass + "'></i></a>");
         /* No need Remove action if uiInput is UIFormMultiValueInputSet */
         if (!UIFormMultiValueInputSet.class.isInstance(uiInput))
-          w.write("<a style=\"cursor:pointer;\" title=\""
+          w.write("<a class=\"actionIcon\" title=\""
               + removeReference
               + "\""
               + "onclick=\"javascript:eXo.webui.UIForm.submitEvent('"
@@ -1669,12 +1664,9 @@ public class UIDialogForm extends UIForm {
               + getId()
               + "','RemoveReference','&objectId="
               + fieldName
-              + "' )\"><img alt='"+ rs.getString("Ecm.dialog.label.remove")
-              +"' class='ActionIcon Remove16x16Icon' src=\"/eXoResources/skin/DefaultSkin/background/Blank.gif\" />"
+              + "' )\"><i"
+              +" class='uiIconTrash'></i>"
               + "</a>");
-        w.write("</td>");
-        w.write("</tr>");
-        w.write("</table>");
       }
     }
   }
@@ -1909,7 +1901,7 @@ public class UIDialogForm extends UIForm {
   public void processRenderAction() throws Exception {
     WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
     Writer writer = context.getWriter();
-    writer.append("<div class=\"UIAction\">");
+    writer.append("<div class=\"uiAction uiActionBorder\">");
     String[] listAction = getActions();
     ResourceBundle res = context.getApplicationResourceBundle();
     String actionLabel;
@@ -1921,11 +1913,11 @@ public class UIDialogForm extends UIForm {
         actionLabel = action;
       }
       link = event(action);
-      writer.append("<a class=\"ActionButton LightBlueStyle\" onclick =\"")
+      writer.append("<button type=\"button\" class=\"btn\" onclick =\"")
             .append(link)
-            .append("\"  href=\"javascript:void(0);\">")
+            .append("\">")
             .append(actionLabel)
-            .append("</a>");
+            .append("</button>");
     }
     writer.append("</div>");
   }

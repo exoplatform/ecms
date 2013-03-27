@@ -44,6 +44,7 @@ import org.exoplatform.ecm.jcr.model.ClipboardCommand;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotNtFileFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsPasteableFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
@@ -88,6 +89,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
   private static final List<UIExtensionFilter> FILTERS
       = Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
                                               new IsPasteableFilter(),
+                                              new IsNotNtFileFilter(),
                                               new IsNotTrashHomeNodeFilter()});
 
   private static final String RELATION_PROP = "exo:relation";

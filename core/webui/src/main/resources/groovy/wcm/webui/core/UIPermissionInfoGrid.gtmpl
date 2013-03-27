@@ -9,8 +9,8 @@
    import org.exoplatform.webui.form.input.UICheckBoxInput;
    import org.exoplatform.web.application.Parameter;
    import org.exoplatform.ecm.webui.utils.Utils;
-   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
    import org.exoplatform.ecm.webui.utils.PermissionUtil;
+   import org.exoplatform.services.security.IdentityConstants;
 
 
 
@@ -31,19 +31,22 @@
    UIForm uiForm = uicomponent.getAncestorOfType(UIForm.class);
    
    // Get owner of current node
-   UIJCRExplorer uiJCRExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
-   Node currentNode = uiJCRExplorer.getCurrentNode();
+   Node currentNode = uicomponent.getParent().getCurrentNode();
    String ownerId = Utils.getNodeOwner(currentNode);
-   boolean canChangePermission = PermissionUtil.canChangePermission(currentNode);
+   boolean canChangePermission = (currentNode == null) || PermissionUtil.canChangePermission(currentNode);
+   def beanIdField = uicomponent.getBeanIdField();
 %>
-<div id="$uicomponent.id">
+<div id="$uicomponent.id" class="permissionInfo">
    <table class="uiGrid table table-hover table-striped" cellspacing="0">
       <thead>
       <tr>
          <% if (name != null)
              { for (field in beanFields)
-               { %>
-                 <th><%=_ctx.appRes(name + ".header." + field)%></th>
+               {
+                def tmpStyle = "";
+                if (!beanIdField.equals(field)) tmpStyle = "class=\"center\"";
+               %>
+                 <th $tmpStyle><%=_ctx.appRes(name + ".header." + field)%></th>
              <% }
                if (beanActions != null)
                { %>
@@ -53,8 +56,11 @@
              if (name == null)
              {
                for (field in beanFields)
-               { %>
-                 <th><%=_ctx.appRes(uiParent.getName() + ".header." + field)%></th>
+               { 
+                def tmpStyle = "";
+                if (!beanIdField.equals(field)) tmpStyle = "class=\"center\"";
+               %>
+                 <th $tmpStyle><%=_ctx.appRes(uiParent.getName() + ".header." + field)%></th>
             <% }
                if (beanActions != null && beanActions.length > 0)
                { %>
@@ -80,7 +86,7 @@
       <tr>
          <%
                String beanId = uicomponent.getBeanIdFor(bean);
-               String readOnly = (beanId.equals(ownerId) || !canChangePermission) ? "disabled" : "";
+               String readOnly = (beanId.equals(ownerId) || !canChangePermission || beanId.equals(IdentityConstants.SYSTEM)) ? "disabled" : "";
                
                EntityEncoder encoder = HTMLEntityEncoder.getInstance();
                def usersOrGroupsId = uicomponent.getFieldValue(bean, "usersOrGroups");
@@ -133,8 +139,7 @@
                {
          %>
          <td class="center">
-           <%
-                 def beanIdField = uicomponent.getBeanIdField();
+           <%  if (!beanId.equals(ownerId) && canChangePermission && !beanId.equals(IdentityConstants.SYSTEM)) {
                  for (action in beanActions)
                  {
                     if (action == null) continue;
@@ -152,7 +157,8 @@
               <a class="actionIcon" href="javascript:void(0)" onclick="$actionLink" rel="tooltip" data-placement="bottom" title="$title" >
                  <i class="uiIcon${action}"></i>
               </a>
-           <% } %>
+           <%   }
+              } %>
            
          </td>
          <%

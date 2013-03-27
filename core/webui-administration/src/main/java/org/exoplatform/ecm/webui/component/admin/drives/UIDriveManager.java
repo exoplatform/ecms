@@ -23,6 +23,7 @@ import java.util.List;
 import javax.jcr.RepositoryException;
 
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
+import org.exoplatform.ecm.webui.selector.UIAnyPermission;
 import org.exoplatform.ecm.webui.selector.UIPermissionSelector;
 import org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -30,7 +31,9 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.core.UIBreadcumbs;
 import org.exoplatform.webui.core.UIPopupWindow;
+import org.exoplatform.webui.core.UITree;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.ext.manager.UIAbstractManager;
 
@@ -62,7 +65,7 @@ public class UIDriveManager extends UIAbstractManager {
     if(uiPopup == null) {
       uiPopup = addChild(UIPopupWindow.class, null, id) ;
       uiPopup.setShowMask(true);
-      uiPopup.setWindowSize(580,420) ;
+      uiPopup.setWindowSize(590,420) ;
       uiDriveForm = createUIComponent(UIDriveForm.class, null, null) ;
     } else {
       uiDriveForm = uiPopup.findFirstComponentOfType(UIDriveForm.class) ;
@@ -79,8 +82,11 @@ public class UIDriveManager extends UIAbstractManager {
     uiPopup.setShowMask(true);
     uiPopup.setWindowSize(580, 300);
     UIPermissionSelector uiECMPermission =
-      createUIComponent(UIPermissionSelector.class, null, null) ;
+      createUIComponent(UIPermissionSelector.class, null, "UIDrivePermissionSelector") ;
     uiECMPermission.setSelectedMembership(true);
+    uiECMPermission.getChild(UIAnyPermission.class).setId("UIMDriveAnyPermission");
+    uiECMPermission.getChild(UIBreadcumbs.class).setId("DriveBreadcumbGroupSelector");
+    uiECMPermission.getChild(UITree.class).setId("UIDriveTreeGroupSelector");
     if(membership != null && membership.indexOf(":/") > -1) {
       String[] arrMember = membership.split(":/") ;
       uiECMPermission.setCurrentPermission("/" + arrMember[1]) ;

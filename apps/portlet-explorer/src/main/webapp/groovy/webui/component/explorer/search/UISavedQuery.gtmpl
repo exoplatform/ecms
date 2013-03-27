@@ -23,7 +23,7 @@
   	    <th><%=_ctx.appRes("UISavedQuery.header.type")%></th>
   	    <th><%=_ctx.appRes("UISavedQuery.header.statement")%></th>
   	    <th><%=_ctx.appRes("UISavedQuery.header.permission")%></th>
-  	    <th><%=_ctx.appRes("UISavedQuery.header.action")%></th>
+  	    <th class="center"><%=_ctx.appRes("UISavedQuery.header.action")%></th>
       </tr>
     </thead>
     <%
@@ -32,7 +32,7 @@
     <tbody>
       <%if(queryListData.size() == 0) { %>
 	        <tr>
-		        <td colspan="5"><%=_ctx.appRes("UISavedQuery.label.no-children")%></td>
+		        <td colspan="5" class="center empty"><%=_ctx.appRes("UISavedQuery.label.no-children")%></td>
 		      </tr>
       <%} else {   
 	        def rowClass = null ;
@@ -60,9 +60,9 @@
 		            <td><%=uicomponent.getCurrentUserId()%></td>
 			          <td class="center">
 									<div class="actionContainer">
-				            <a class="actionIcon" onclick="<%=uicomponent.event("Execute", Utils.formatNodeName(object.getStoredQueryPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Execute")%>" ><i class="uiIconExecute"></i></a>
-				            <a class="actionIcon" onclick="<%=uicomponent.event("Edit", Utils.formatNodeName(object.getStoredQueryPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Edit")%>" ><i class="uiIconEdit"></i></a>
-				            <a class="actionIcon" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(object.getStoredQueryPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Delete")%>" ><i class="uiIconDelete"></i></a>
+										<a class="actionIcon" onclick="<%=uicomponent.event("Execute", Utils.formatNodeName(object.getStoredQueryPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Execute")%>" ><i class="uiIconEcmsExecute"></i></a>
+                    <a class="actionIcon" onclick="<%=uicomponent.event("Edit", Utils.formatNodeName(object.getStoredQueryPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Edit")%>" ><i class="uiIconEdit"></i></a>
+                    <a class="actionIcon" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(object.getStoredQueryPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Delete")%>" ><i class="uiIconDelete"></i></a> 
 									</div>	                    
 			          </td>	                    
 		          </tr>
@@ -95,7 +95,7 @@
 		            </td>
 			          <td class="center">
 									<div class="actionContainer">
-										<a class="actionIcon" onclick="<%=uicomponent.event("Execute", Utils.formatNodeName(object.getPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Execute")%>"><i class="uiIconExecute"></i></a>
+										<a class="actionIcon" onclick="<%=uicomponent.event("Execute", Utils.formatNodeName(object.getPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISavedQuery.tooltip.Execute")%>"><i class="uiIconEcmsExecute"></i></a>
 									</div>	                    
 			          </td>	                    
 		          </tr>

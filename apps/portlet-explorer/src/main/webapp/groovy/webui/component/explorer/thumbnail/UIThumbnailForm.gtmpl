@@ -10,19 +10,19 @@
   <% uiform.begin() %>
   <div class="form-horizontal resizable">
     <div class="control-group">
-      <div class="controls">
+      <div class="controls-full">
         <%
           def thumbnailNode = uicomponent.getThumbnailNode(selectedNode);
           if(thumbnailNode != null && thumbnailNode.hasProperty("exo:mediumSize")) {
             String thumbnailImage = uicomponent.getThumbnailImage(selectedNode);
           %>
-            <div>
+            <div class="center">
               <img src="$thumbnailImage" alt="$thumbnailImage" />
             </div>
           <%
           } else if(uiform.currentPreviewLink != null) {
           %>
-            <div>
+            <div class="center">
               <img style="max-width:116px; max-height:116px" src="$uiform.currentPreviewLink" alt="$uiform.currentPreviewLink" />
             </div>
           <%

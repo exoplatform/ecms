@@ -66,8 +66,8 @@
 	
 	if (isShowCategories || isShowTags) {
 		%>
-			<div class="WebContentContainer">
-				<div class="WebContentInformation">
+			<div class="webContentContainer">
+				<div class="webContentInformation">
 					<% 
 						if(isShowCategories) {
 							TaxonomyService taxonomyService = uicomponent.getApplicationComponent(TaxonomyService.class);
@@ -98,16 +98,16 @@
 								<%	
 							}	
 						}
-						%>
-					</div>
-					<%= html %>
-					<% 
-            if (uicomponent.isEnableVote()) 
-              _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1"));
-            if (uicomponent.isEnableComment())
-              _ctx.include(uicomponent.getViewTemplate("exo:comments", "view1")); 
-          %>
+					%>
 				</div>
+				<%= html %>
+				<% 
+					if (uicomponent.isEnableVote()) 
+						_ctx.include(uicomponent.getViewTemplate("mix:votable", "view1"));
+					if (uicomponent.isEnableComment())
+						_ctx.include(uicomponent.getViewTemplate("exo:comments", "view1")); 
+				%>
+			</div>
 		<%
 	} else {
 		%><%= html %><%

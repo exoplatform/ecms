@@ -11,6 +11,10 @@
 	
 	.detailViewIcon {
 		padding-right: 20px;
+		
+		.btn-group .active > i {
+			background-image: url(/eXoWCMResources/skin/images/Icons/uiIconsEcmsBlue.png);
+		}
 	}
 	
 	.right {
@@ -41,6 +45,13 @@
 			position: absolute;
 			right: 12px;
 			top: 5px;
+			
+			.uiIconArrowDown {
+				cursor: pointer;
+			}
+			.tooltip {
+				white-space: nowrap;
+			}
 		}
 		
 		.dropDownButton {
@@ -111,19 +122,6 @@
 		margin: 0px 1px 0px 0px;
 	}
 
-	.backBtn {
-		background: url('/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/BackBtn.png') no-repeat center center;
-		height: 24px;
-		width: 28px;
-		display: block;
-	}
-	
-	.refreshSessionButton  {
-		width: 24px;
-		height: 24px;
-		background: url('/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/RefreshSessionButton.png') no-repeat center;
-	}
-
 	.backAndRefreshBlock {
 		margin-left: 3px;
 		width: 55px;
@@ -140,13 +138,6 @@
 	.detailMoreViewIcon {
 		width: 17px;
 	}
-	
- .moreViewIcon {
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/MoreViewIcon.gif) no-repeat center;
-		width: 13px;
-		height: 24px;
-		margin-left: 4px;
-	}
 
 	.listExtendedView {
 		position: absolute;
@@ -155,213 +146,14 @@
 		padding: 5px;
 	}
 
-	.MoreViewIconSelected {
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/MoreViewIconSelected.gif) no-repeat center;
-		width: 12px;
-		height: 24px;
-	}
-
 	.ExtendedView {
 		float: left;
 		position: relative;
-	}
-
-	.defaultView {
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/DefaultView.png) no-repeat center;
-		display: block;
 	}
 
 	.HomeLabel {
 		float: left;
 		margin: 0px 0px 0px 4px;
 		color: #515151;
-	}
-
-	.defaultViewSelected {
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/DefaultViewSelected.gif) no-repeat center;
-		display: block;
-	}
-
-	.icon-view{
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/IconView.gif) no-repeat center center;
-		display: block;
-	}
-
-
-	.icon-view-selected{
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/IconViewSelected.gif) no-repeat center;
-		display: block;
-	}
-
-	.admin-view{
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/DetailView.png) no-repeat center;
-		display: block;
-	}
-
-	.anonymous-view{
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/DefaultView.png) no-repeat center;
-		display: block;
-	}
-
-	.authoring-view{
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/authoring-view.png) no-repeat center;
-		display: block;
-	}
-
-	.taxonomy-list{
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/taxonomy-list.png) no-repeat center;
-		display: block;
-	}
-
-	.system-view{
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/system-view.png) no-repeat center;
-		display: block;
-	}
-
-
-	.wcm-category-view{
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/wcm-category-view.png) no-repeat center;
-		display: block;
-	}
-
-	.wcm-view{
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/wcm-view.png) no-repeat center;
-		display: block;
-	}
-
-	.taxonomy-icons{
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/taxonomy-icons.png) no-repeat center;
-		display: block;
-	}
-
-	.anonymous-view-selected{
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/DefaultViewSelected.gif) no-repeat center;
-		display: block;
-	}
-
-	.authoring-view-selected{
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/authoring-view-selected.png) no-repeat center;
-		display: block;
-	}
-
-	.taxonomy-list-selected{
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/taxonomy-list-selected.png) no-repeat center;
-		display: block;
-	}
-
-	.system-view-selected{
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/system-view-selected.png) no-repeat center;
-		display: block;
-	}
-
-
-	.wcm-category-view-selected{
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/wcm-category-view-selected.png) no-repeat center;
-		display: block;
-	}
-
-	.wcm-view-selected{
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/wcm-view-selected.png) no-repeat center;
-		display: block;
-	}
-
-	.taxonomy-icons-selected{
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/taxonomy-icons-selected.png) no-repeat center;
-		display: block;
-	}
-
-	.admin-view-selected{
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/DetailViewSelected.png) no-repeat center;
-		display: block;
-	}
-
-	.simple-view{
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/ThumbnailView.gif) no-repeat center; 
-		display: block;
-	}
-
-	.simple-view-selected{
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/ThumbnailViewSelected.gif) no-repeat center;
-		display: block;
-	}
-
-	.cover-flow{
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/CoverflowView.gif) no-repeat center center;
-		display: block;
-	}
-
-	.cover-flow-selected{
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/CoverflowViewSelected.gif) no-repeat center;
-		display: block;
-	}
-
-	.slide-show {
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/SlideShow.png) no-repeat center;
-		display: block;
-	}
-	.slide-show-selected {
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/SlideShowSelected.png) no-repeat center;
-		display: block;
-	}
-	.timeline-view {
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/TimeLine.png) no-repeat center;
-		display: block;
-	}
-	.timeline-view-selected{
-		background: url(/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/TimeLineSelected.png) no-repeat center;
-		display: block;
-	}
-}
-
-/*********icon2**********/
-
-.uiAddressBar {
-	.a_timeline-view {
-		background: url('/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/TimeLine.png') no-repeat center;
-		display: block;
-	}
-	.a_timeline-view-selected{ 
-		background: url('/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/TimeLineSelected.png') no-repeat center;
-		display: block;
-	}
-
-	.b_list-view {
-		background: url('/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/DefaultView.png') no-repeat center;
-		display: block;
-	}
-
-	.b_list-view-selected {
-		background: url('/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/DefaultViewSelected.gif') no-repeat center;
-		display: block;
-	}
-
-	.c_icon-view{
-		background: url('/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/IconView.gif') no-repeat center center;
-		display: block;
-	}
-
-	.c_icon-view-selected{
-		background: url('/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/IconViewSelected.gif') no-repeat center;
-		display: block;
-	}
-
-	.d_cover-flow{
-		background: url('/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/CoverflowView.gif') no-repeat center center;
-		display: block;
-	}
-
-	.d_cover-flow-selected{
-		background: url('/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/CoverflowViewSelected.gif') no-repeat center;
-		display: block;
-	}
-
-	.e_admin-view{
-		background: url('/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/DetailView.png') no-repeat center;
-		display: block;
-	}
-
-	.e_admin-view-selected{
-		background: url('/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/DetailViewSelected.png') no-repeat center;
-		display: block;
 	}
 }

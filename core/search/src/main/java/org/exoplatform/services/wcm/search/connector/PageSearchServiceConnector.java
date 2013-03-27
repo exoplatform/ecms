@@ -22,6 +22,7 @@ import javax.jcr.RepositoryException;
 import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.drives.DriveData;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.ResultNode;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
@@ -84,6 +85,18 @@ public class PageSearchServiceConnector extends BaseSearchServiceConnector {
   @Override
   protected String getFileType(ResultNode node) throws Exception {
     return "FileDefault";
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String getTitleResult(ResultNode node) throws Exception {
+    try {
+      return ((Node)node.getSession().getItem(node.getProperty("mop:link/mop:page").getString())).getProperty("gtn:name").getString();
+    } catch (Exception e) {
+      return node.getTitle();
+    }
   }
   
 

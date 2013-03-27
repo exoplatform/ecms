@@ -30,7 +30,7 @@ import org.exoplatform.ecm.webui.utils.Utils;
  */
 public class NodeTitleComparator implements Comparator<Node> {
 
-  private static final String ASCENDING_ORDER = "Ascending" ;
+  public static final String ASCENDING_ORDER = "Ascending" ;
   private String order_ ;
 
   public NodeTitleComparator(String pOrder) {

@@ -2,7 +2,7 @@
 String fieldName;
 String userName = uicomponent.getUserName();
 %>
-<div class="uiForm $uicomponent.id">
+<div class="uiForm uiCommentForm">
   <%uiform.begin()%>
 		<div class="form-horizontal resizable">
 			<%
@@ -32,7 +32,7 @@ String userName = uicomponent.getUserName();
 					 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action);
 					 String link = uicomponent.event(action);
 			%>
-			<button type="button" href="javascript:void(0);" onclick="$link" class="btn">$actionLabel</button>
+			<button type="button" onclick="$link" class="btn">$actionLabel</button>
 			<%}%>
 		</div>
   <%uiform.end()%>

@@ -20,6 +20,7 @@ import java.util.Calendar;
 
 import javax.jcr.ItemExistsException;
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -30,7 +31,6 @@ import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
-import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
@@ -52,9 +52,8 @@ events = {
 public class UIPublicationSchedule extends UIForm {
   public static final String START_PUBLICATION = "UIPublicationPanelStartDateInput";
   public static final String END_PUBLICATION   = "UIPublicationPanelEndDateInput";
-  
   private static final Log    LOG               = LogFactory.getLog(UIPublicationSchedule.class.getName());
-
+  
   public UIPublicationSchedule() throws Exception {
     addUIFormInput(new UIFormDateTimeInput(START_PUBLICATION, START_PUBLICATION, null));
     addUIFormInput(new UIFormDateTimeInput(END_PUBLICATION, END_PUBLICATION, null));
@@ -77,10 +76,20 @@ public class UIPublicationSchedule extends UIForm {
       ((UIFormDateTimeInput) getChildById(END_PUBLICATION)).setCalendar(endDate);
     }
   }
+
+  public boolean hasPublicationSchedule() throws RepositoryException {
+    Node currentNode =
+        this.getAncestorOfType(UIPublicationContainer.class).getChild(UIPublicationPanel.class).getCurrentNode();
+    if (currentNode == null) return false;
+    
+    return (currentNode.hasProperty(AuthoringPublicationConstant.END_TIME_PROPERTY)
+        || currentNode.hasProperty(AuthoringPublicationConstant.START_TIME_PROPERTY));
+  }
   
   public static class SaveActionListener extends EventListener<UIPublicationSchedule> {
     public void execute(Event<UIPublicationSchedule> event) throws Exception {
       UIPublicationSchedule publicationSchedule = event.getSource();
+      UIApplication uiApp = publicationSchedule.getAncestorOfType(UIApplication.class);
       UIPublicationPanel publicationPanel =
           publicationSchedule.getAncestorOfType(UIPublicationContainer.class).getChild(UIPublicationPanel.class);
       UIFormDateTimeInput startPublication = publicationSchedule.getChildById(START_PUBLICATION);
@@ -93,13 +102,13 @@ public class UIPublicationSchedule extends UIForm {
       try {
         if ((startDate == null && StringUtils.isNotEmpty(startValue))
           || (endDate == null && StringUtils.isNotEmpty(endValue))) {
-          UIApplication uiApp = publicationSchedule.getAncestorOfType(UIApplication.class);
-          uiApp.addMessage(new ApplicationMessage("UIPublicationPanel.msg.invalid-format", null));
+          uiApp.addMessage(new ApplicationMessage("UIPublicationPanel.msg.invalid-format", null, ApplicationMessage.ERROR));
+          event.getRequestContext().addUIComponentToUpdateByAjax(publicationSchedule);
           return;
         }
         if (startDate != null && endDate != null && startDate.after(endDate)) {
-          UIApplication uiApp = publicationSchedule.getAncestorOfType(UIApplication.class);
-          uiApp.addMessage(new ApplicationMessage("UIPublicationPanel.msg.fromDate-after-toDate", null));
+          uiApp.addMessage(new ApplicationMessage("UIPublicationPanel.msg.fromDate-after-toDate", null, ApplicationMessage.ERROR));
+          event.getRequestContext().addUIComponentToUpdateByAjax(publicationSchedule);
           return;
         }
 
@@ -113,15 +122,16 @@ public class UIPublicationSchedule extends UIForm {
           if (StringUtils.isNotEmpty(endValue))
             node.setProperty(AuthoringPublicationConstant.END_TIME_PROPERTY, endDate);
           node.getSession().save();
+          
+          // Show message save success
+          uiApp.addMessage(new ApplicationMessage("UIPublicationSchedule.msg.save-finished", null, ApplicationMessage.INFO));
+          event.getRequestContext().addUIComponentToUpdateByAjax(publicationSchedule);
         }
       } catch (ItemExistsException iee) {
         if (LOG.isErrorEnabled()) {
           LOG.error("Error when adding properties to node");
         }
       }
-      UIPopupContainer uiPopupContainer = publicationSchedule.getAncestorOfType(UIPopupContainer.class);
-      uiPopupContainer.deActivate();
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupContainer);
     }
   }
   
@@ -143,6 +153,7 @@ public class UIPublicationSchedule extends UIForm {
         node.getProperty(AuthoringPublicationConstant.END_TIME_PROPERTY).remove();
         node.save();
       }
+      event.getRequestContext().addUIComponentToUpdateByAjax(publicationSchedule);
     }
   }
 }

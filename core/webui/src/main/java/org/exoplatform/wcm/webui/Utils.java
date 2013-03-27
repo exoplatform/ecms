@@ -42,6 +42,7 @@ import org.exoplatform.portal.config.model.PortalConfig;
 import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.mop.page.PageContext;
 import org.exoplatform.portal.mop.page.PageKey;
+import org.exoplatform.portal.mop.SiteKey;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserPortal;
@@ -69,6 +70,8 @@ import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.core.UIPopupWindow;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.web.application.RequestContext;
+import org.exoplatform.web.url.navigation.NavigationResource;
 import org.exoplatform.web.url.navigation.NodeURL;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -616,6 +619,18 @@ public class Utils {
     WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
     requestContext.addUIComponentToUpdateByAjax(popupContainer);
   }
+  
+  public static void createPopupWindow(UIContainer container,
+                                       UIComponent component,
+                                       String popupWindowId,
+                                       boolean isMiddle,
+                                       int width) throws Exception {
+    UIPopupContainer popupContainer = initPopup(container, component, popupWindowId, width);
+    UIPopupWindow popupWindow = popupContainer.getChildById(popupWindowId);
+    popupWindow.setMiddle(isMiddle);
+    WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
+    requestContext.addUIComponentToUpdateByAjax(popupContainer);
+  }
 
   private static UIPopupContainer initPopup(UIContainer container,
       UIComponent component,
@@ -894,10 +909,11 @@ public class Utils {
                                              currentUIPortal.getEditPermission());
   }
 
-  public static UserNavigation getSelectedNavigation() throws Exception {
-    return NavigationUtils.getUserNavigationOfPortal(
-        Util.getPortalRequestContext().getUserPortalConfig().getUserPortal(),
-        Util.getUIPortal().getSiteKey().getName());
+  public static UserNavigation getSelectedNavigation() throws Exception { 
+    SiteKey siteKey = Util.getUIPortal().getSiteKey();
+    return NavigationUtils.getUserNavigation(
+          Util.getPortalRequestContext().getUserPortalConfig().getUserPortal(),
+          siteKey);
   }
 
   public static String sanitize(String value) {
@@ -1073,5 +1089,12 @@ public class Utils {
       }
     }
     return sb.toString();
+  }
+  
+  public static String getProfileLink(String userId) {
+    RequestContext ctx = RequestContext.getCurrentInstance();
+    NodeURL nodeURL = ctx.createURL(NodeURL.TYPE);
+    NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), "profile");
+    return nodeURL.setResource(resource).toString() + "/" + userId;
   }
 }

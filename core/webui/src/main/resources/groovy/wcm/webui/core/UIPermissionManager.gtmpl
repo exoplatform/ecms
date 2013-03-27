@@ -14,7 +14,7 @@
 		 String closeActionLabel = _ctx.appRes(uiform.getName() + ".action.Close");
 		 String actionLink = uicomponent.event("Close");
 		%>
-		<button href="javascript:void(0);" onclick="$actionLink" class="btn">$closeActionLabel</button>
+		<button type="button" href="javascript:void(0);" onclick="$actionLink" class="btn">$closeActionLabel</button>
 	</div>
 	<%// end render action%>
 </div>

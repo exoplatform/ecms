@@ -13,14 +13,10 @@
     <% if (uicomponent.isFirstVisit()) {
         uicomponent.setFirstVisit(false); 
      %>
-        <div class="info">
-          <i class="uiIconBlueInformation"></i> <%= _ctx.appRes("UIDrivesArea.DrivesArea.allDrives") %>
-          &nbsp;<img alt="<%= _ctx.appRes("UIDrivesArea.DrivesArea.allDrives") %>" src="/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/DriversButton.png" />
-        </div>
     <% } %>
 	  <%if(mainDrives.size() > 0) {%>
 			<div class="rowDrives clearfix">
-				<h5 class="titleDriver"><i class="uiIconArrowRightMini uiIconLightGray"></i><%=_ctx.appRes("UIDrivesBrowser.title.GeneralDrives" )%></h5>
+				<h5 class="titleDriver"><%=_ctx.appRes("UIDrivesBrowser.title.GeneralDrives" )%></h5>
 				<%
 				  for(drive in mainDrives) {
     				println("<div class=\"drive\">");
@@ -33,9 +29,11 @@
 				<a class="driveLabel" href="<%=uicomponent.event("SelectDrive", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getLabel(drive.getName())%>"><%=uicomponent.getLabel(drive.getName())%></a>
 				<%
 				    } else {
+						def styleDrive = drive.getName().replace(" ","");
+
 				%>
 				<a class="driveLabel" href="<%=uicomponent.event("SelectDrive", Utils.formatNodeName(drive.getName()))%>" rel="tooltip" data-placement="bottom"  title="<%=uicomponent.getLabel(drive.getName())%>">
-					<i class="uiIconEcms24x24DriveGeneral uiIconEcms24x24Drive${drive.workspace} uiIconEcms24x24LightGray driveIcon"></i><%=uicomponent.getLabel(drive.getName())%>
+					<i class="uiIconEcms24x24DriveGeneral uiIconEcms24x24Drive${styleDrive} uiIconEcms24x24LightGray driveIcon"></i><%=uicomponent.getLabel(drive.getName())%>
 				</a>
 				<%      
 				    }
@@ -46,7 +44,7 @@
 		<%}%>
 		<%if(groupDrives.size() > 0) {%>
 			<div class="rowDrives rowDrivesGroups clearfix">
-				<h5 class="titleDriver"><i class="uiIconArrowRightMini uiIconLightGray"></i><%=_ctx.appRes("UIDrivesBrowser.title.GroupDrives" )%></h5>
+				<h5 class="titleDriver"><%=_ctx.appRes("UIDrivesBrowser.title.GroupDrives" )%></h5>
 	        <%
 	          for(groupDrive in groupDrives) {
 	            println("<div class=\"drive\">");
@@ -71,7 +69,7 @@
 		<%}%>	
 		<%if(personalDrives.size() > 0) {%>
 			<div class="rowNormal clearfix">
-				<h5 class="titleDriver"><i class="uiIconArrowRightMini uiIconLightGray"></i><%=_ctx.appRes("UIDrivesBrowser.title.PersonalDrives" )%></h5>
+				<h5 class="titleDriver"><%=_ctx.appRes("UIDrivesBrowser.title.PersonalDrives" )%></h5>
         <%
           for(drive in personalDrives) {
 	          println("<div class=\"drive\">");

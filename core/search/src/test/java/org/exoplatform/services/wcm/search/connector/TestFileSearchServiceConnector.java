@@ -113,7 +113,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
           = fileSearch_.search(null, "anthony", 
                                    sites, 
                                    0, 20, "title", "asc");
-    assertEquals(2, ret.size());
+    assertEquals(4, ret.size());//2
   }
   
   public void testSearchSingleWithOffset() throws Exception {
@@ -123,7 +123,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
           = fileSearch_.search(null, "anthony", 
                                    sites, 
                                    1, 20, "title", "asc");
-    assertEquals(1, ret.size());
+    assertEquals(3, ret.size());//1
   }
   
   public void testSearchSingleWithLimit() throws Exception {
@@ -143,7 +143,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
           = fileSearch_.search(null, "anthony john", 
                                    sites, 
                                    0, 20, "title", "asc");
-    assertEquals(3, ret.size());
+    assertEquals(6, ret.size());//3
   }
   
   public void testSearchMultipleWithOffset() throws Exception {
@@ -153,7 +153,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
           = fileSearch_.search(null, "anthony john", 
                                    sites, 
                                    1, 20, "title", "asc");
-    assertEquals(2, ret.size());
+    assertEquals(5, ret.size());//2
   }
   
   public void testSearchMultipleWithLimit() throws Exception {
@@ -173,7 +173,7 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
           = fileSearch_.search(null, "\"anthony cena\"", 
                                    sites, 
                                    0, 20, "title", "asc");
-    assertEquals(1, ret.size());
+    assertEquals(2, ret.size());//1
   }
 
   public void testSearchPhraseWithOffset() throws Exception {
@@ -183,6 +183,6 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
           = fileSearch_.search(null, "\"anthony cena\"", 
                                    sites, 
                                    1, 20, "title", "asc");
-    assertEquals(0, ret.size());
+    assertEquals(1, ret.size());//0
   }
 }

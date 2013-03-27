@@ -17,9 +17,11 @@
 package org.exoplatform.ecm.webui.selector;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.services.organization.Group;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.organization.User;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -337,5 +339,21 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
   */
  public void setShowAnyPermission(boolean isShowAnyPermission) {
    this.isShowAnyPermission = isShowAnyPermission;
+ }
+ 
+ @SuppressWarnings("unchecked")
+ public List<String> getListGroup() throws Exception {
+   OrganizationService service = WCMCoreUtils.getService(OrganizationService.class);
+   List<String> listGroup = new ArrayList<String>();
+   if(getCurrentGroup() == null) return null;
+   Collection<Object> groups = service.getGroupHandler().findGroups(getCurrentGroup());
+   if(groups.size() > 0) {
+     for (Object child : groups) {
+       Group childGroup = (Group)child;
+       listGroup.add(childGroup.getId()) ;
+     }
+   }
+   return listGroup;
+
  }
 }

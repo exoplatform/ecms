@@ -1020,7 +1020,7 @@
   </UICategoryManagerSearch>
   <UIContentNameSearch>
     <label>
-      <keyword>Nom de contenu</keyword>
+      <keyword>Nom de contenu:</keyword>
       <location>Répertoire courant</location>
     </label>
     <action>
@@ -1040,10 +1040,10 @@
     </action>
     <label>
       <moreConstraints>UISimpleSearch</moreConstraints>
-      <firstOperator>Opérateur</firstOperator>
-      <input>Mots à rechercher</input>
-      <constraints>Plus de contraintes</constraints>
-      <nodePath>Répertoire courant</nodePath>
+      <firstOperator>Opérateur:</firstOperator>
+      <input>Mots à rechercher:</input>
+      <constraints>Plus de contraintes:</constraints>
+      <nodePath>Répertoire courant:</nodePath>
     </label>
     <msg>
       <keyword-null>Veuillez entrer un mot-clé à rechercher.</keyword-null>
@@ -1313,9 +1313,9 @@
   </UICompareExactlyForm>
   <UIJCRAdvancedSearch>
     <label>
-      <name>Nom</name>
-      <selectBox>Sélection d'un type de requête</selectBox>
-      <query>requête</query>
+      <name>Nom:</name>
+      <selectBox>Sélection d'un type de requête:</selectBox>
+      <query>requête:</query>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2031,12 +2031,12 @@
   -->
   <UITaggingForm>
     <label>
-      <names>Noms</names>
-      <linked>Tags liés</linked>
+      <names>Noms:</names>
+      <linked>Tags liés:</linked>
       <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
-      <AddTag>Ajouter des tags</AddTag>
+      <AddTag>Ajouter</AddTag>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -2583,7 +2583,7 @@
 
   <UITreeTaxonomyList>
   	<label>
-      <taxonomyTree>Arbre de Taxonomies</taxonomyTree>
+      <taxonomyTree>Arbre de Taxonomies:</taxonomyTree>
     </label>
   </UITreeTaxonomyList>
 
@@ -3192,7 +3192,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <tagName>Nom du tag</tagName>
+      <tagName>Nom du tag:</tagName>
       <relatedDocuments>Documents relatifs</relatedDocuments>
     </label>
   </UITagForm>
@@ -3379,6 +3379,21 @@
       <description>La description</description>
     </header>
   </UIPublicationHistory>
+  
+  <UIPublicationSchedule>
+    <label>
+      <introduction>Vous pouvez programmer la publication de votre document. Choisissez la date que vous souhaitez voir votre document publié</introduction>
+      <no-schedule-info>Aucun calendrier de publication de votre document</no-schedule-info>
+    </label>
+    <scheduled>
+      <title>Planifier</title>
+      <from>de</from>
+      <to>à</to>
+    </scheduled>
+    <msg>
+      <save-finished>Nouveau calendrier de publication est sauvegardé avec succès.</save-finished>
+    </msg>
+  </UIPublicationSchedule>
 
   <UIPublicationPanel>
     <label>
@@ -3420,7 +3435,7 @@
   -->
   <UITreeTaxonomyList>
     <label>
-      <rootNodePath>Arbre racine</rootNodePath>
+      <rootNodePath>Arbre racine:</rootNodePath>
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>

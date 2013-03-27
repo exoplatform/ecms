@@ -16,7 +16,9 @@
  */
 package org.exoplatform.wcm.connector;
 
-import java.io.ByteArrayInputStream;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -37,9 +39,9 @@ import javax.xml.transform.dom.DOMSource;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.common.http.HTTPStatus;
-import org.exoplatform.commons.utils.IOUtil;
 import org.exoplatform.ecm.connector.fckeditor.FCKMessage;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
+import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -325,6 +327,10 @@ public class FileUploadHandler {
     if ((fileName == null) || (fileName.length() == 0)) {
       fileName = resource.getFileName();
     }
+    //add lock token
+    if(parent.isLocked()) {
+      parent.getSession().addLockToken(LockUtil.getLockToken(parent));
+    }
     if (parent.hasNode(fileName)) {
 //      Object args[] = { fileName, parent.getPath() };
 //      Document fileExisted = fckMessage.createMessage(FCKMessage.FILE_EXISTED,
@@ -341,7 +347,6 @@ public class FileUploadHandler {
       }
     }
     String location = resource.getStoreLocation();
-    byte[] uploadData = IOUtil.getFileContentAsBytes(location);
     Node file = parent.addNode(fileName,FCKUtils.NT_FILE);
     if(!file.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
     	file.addMixin(NodetypeConstant.MIX_REFERENCEABLE);
@@ -363,7 +368,7 @@ public class FileUploadHandler {
     //MimeTypeResolver mimeTypeResolver = new MimeTypeResolver();
     DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();
     String mimetype = mimeTypeResolver.getMimeType(resource.getFileName());
-    jcrContent.setProperty("jcr:data",new ByteArrayInputStream(uploadData));
+    jcrContent.setProperty("jcr:data",new BufferedInputStream(new FileInputStream(new File(location))));
     jcrContent.setProperty("jcr:lastModified",new GregorianCalendar());
     jcrContent.setProperty("jcr:mimeType",mimetype);
     

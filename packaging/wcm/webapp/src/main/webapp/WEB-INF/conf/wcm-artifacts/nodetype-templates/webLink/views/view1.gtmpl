@@ -1,72 +1,22 @@
-<style>
-  a {behavior: url(#default#AnchorClick);} 
 
-  .FileContent {  
-    padding: 10px;
-    color: #0e396c;
-  }
-  
-  .FileContent .NavigationContainer {  
-    padding-bottom: 5px;
-    background: url('/eXoWCMResources/skin/images/file/TitleBG1x21.gif') repeat-x top;
-    border: 1px solid #cbcbcb;
-  }
-  
-  .FileContent .TopTitle {  
-    padding-left: 10px;
-    height: 21px; line-height: 21px;
-    color: #058ee6; font-weight: bold; 
-    overflow: hidden;
-  }
-  
-  .FileContent .ECMIframe {
-   	border: 1px solid #cbcbcb; 
-  	height: 100% ;
-  	overflow: auto;
-  	width: 93.9%;
-  	margin: 5px;
-  	background: white;
-  }
-  
-  .FileContent .Content {  
-   	white-space: normal;
-   	overflow: auto;
-   	padding: 0px 10px;
-   	height: 300px;
-  }
-  
-   .FileContent .Content .TextContent {  
-    margin: auto;
-  }
-  
-  .FileContent .ContentDetail {  
-    text-align: center;
-    overflow: visible;
-    padding: 15px 0px;
-  }      
-</style>
 <% 
 	def contentNode = uicomponent.getNode();
 %>
-<div class="FileContent">	
-  <div class="NavigationContainer">       
-    <div class="TopTitle"><%= contentNode.getName() %></div>
-    <div class="Content">
-    	<div class="TextContent">
-    		<%
-    			def content = "<pre>";
-	    		if (contentNode.hasProperty("exo:linkURL")) {
-	    			def url = uicomponent.encodeHTML(contentNode.getProperty("exo:linkURL").getString());
-	    			content += "	<strong>" + _ctx.appRes("WebLink.view.label.url") + ": </strong><a onclick=\"javascript:window.open('" + url + "');\" style='cursor:pointer'>" + url + "</a><br/>";
-	    		}
-	    		if (contentNode.hasProperty("exo:linkDescription")) {
-	    			def description = uicomponent.encodeHTML(contentNode.getProperty("exo:linkDescription").getString());
-	    			content += "	<strong>" + _ctx.appRes("WebLink.view.label.description") + ": </strong>" + description;
-	    		}
-				content += "</pre>";
-    			println content;
-    		%>
-	     </div>
-    </div>  
-  </div> 
+<div class="fileContent">     
+	<h6 class="topTitle"><%= contentNode.getName() %></h6>
+	<div class="textContent">
+		<%
+			def content = "<pre>";
+			if (contentNode.hasProperty("exo:linkURL")) {
+				def url = uicomponent.encodeHTML(contentNode.getProperty("exo:linkURL").getString());
+				content += "<strong>" + _ctx.appRes("WebLink.view.label.url") + ": </strong><a onclick=\"javascript:window.open('" + url + "');\" style='cursor:pointer'>" + url + "</a><br/>";
+			}
+			if (contentNode.hasProperty("exo:linkDescription")) {
+				def description = uicomponent.encodeHTML(contentNode.getProperty("exo:linkDescription").getString());
+				content += "<strong>" + _ctx.appRes("WebLink.view.label.description") + ": </strong>" + description;
+			}
+		content += "</pre>";
+			println content;
+		%>
+	</div>
 </div>

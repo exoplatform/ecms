@@ -291,6 +291,9 @@ public class UIDocumentNodeList extends UIContainer {
     (userName.equals(ConversationState.getCurrent().getIdentity().getUserId()) ? getLabel("you") : userName);
   }
 
+  public String getFileSize(Node file) throws Exception {
+    return org.exoplatform.services.cms.impl.Utils.fileSize(file);
+  }
   
   static public class ExpandNodeActionListener extends EventListener<UIDocumentNodeList> {
     public void execute(Event<UIDocumentNodeList> event) throws Exception {

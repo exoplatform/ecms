@@ -49,6 +49,7 @@ import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.comparator.DateComparator;
+import org.exoplatform.ecm.webui.comparator.NodeSizeComparator;
 import org.exoplatform.ecm.webui.comparator.NodeTitleComparator;
 import org.exoplatform.ecm.webui.comparator.PropertyValueComparator;
 import org.exoplatform.ecm.webui.comparator.StringComparator;
@@ -968,6 +969,8 @@ public class UIJCRExplorer extends UIContainer {
       Collections.sort(childrenList, new NodeTitleComparator(preferences_.getOrder())) ;
     } else if (Preference.SORT_BY_NODETYPE.equals(preferences_.getSortType())) {
       Collections.sort(childrenList, new TypeNodeComparator(preferences_.getOrder())) ;
+    } else if (Preference.SORT_BY_NODESIZE.equals(preferences_.getSortType())) {
+      Collections.sort(childrenList, new NodeSizeComparator(preferences_.getOrder())) ;
     } else if (Preference.SORT_BY_VERSIONABLE.equals(preferences_.getSortType())) {
       Collections.sort(childrenList, new StringComparator(preferences_.getOrder(), Preference.SORT_BY_VERSIONABLE));
     } else if (Preference.SORT_BY_AUDITING.equals(preferences_.getSortType())) {

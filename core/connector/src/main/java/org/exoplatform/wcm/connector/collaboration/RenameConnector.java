@@ -41,10 +41,12 @@ import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.lock.LockService;
 import org.exoplatform.services.cms.relations.RelationsService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -60,6 +62,8 @@ public class RenameConnector implements ResourceContainer {
   private static final Pattern FILE_EXPLORER_URL_SYNTAX = Pattern.compile("([^:/]+):(/.*)");
 
   private static final String  RELATION_PROP            = "exo:relation";
+  
+  private static final String DEFAULT_NAME = "untitled";
 
   /**
    * Get <em>objectid</em> of renamed node <br>
@@ -97,6 +101,10 @@ public class RenameConnector implements ResourceContainer {
       String newExoTitle = Text.escapeIllegalJcrChars(newTitle);      
       // Clarify new name & check to add extension
       String newName = Text.escapeIllegalJcrChars(org.exoplatform.services.cms.impl.Utils.cleanString(newTitle));
+      
+      // Set default name if new title contain no valid character
+      newName = (StringUtils.isEmpty(newName)) ? DEFAULT_NAME : newName;
+      
       Node renamedNode = this.getNodeByPath(oldPath);
       String oldName = renamedNode.getName();
       if (oldName.indexOf('.') != -1 && renamedNode.isNodeType(NodetypeConstant.NT_FILE)) {
@@ -192,6 +200,13 @@ public class RenameConnector implements ResourceContainer {
       renamedNode.setProperty("exo:title", newExoTitle);
 
       nodeSession.save();
+      
+      // Update state of node
+      WCMPublicationService publicationService = WCMCoreUtils.getService(WCMPublicationService.class);
+      if (publicationService.isEnrolledInWCMLifecycle(renamedNode)) {
+        ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
+        listenerService.broadcast(CmsService.POST_EDIT_CONTENT_EVENT, this, renamedNode);
+      }
 
       return Response.ok(uuid).build();
     } catch (Exception e) {

@@ -49,7 +49,6 @@ public class UISearchContainer extends UIContainer {
 
   public UISearchContainer() throws Exception {
     addChild(UISimpleSearch.class, null, null);
-    addChild(UIConstraintsForm.class, null, null).setRendered(false);
     UIPopupContainer popup = addChild(UIPopupContainer.class, null, METADATA_POPUP);
     popup.getChild(UIPopupWindow.class).setId(METADATA_POPUP + "_Popup");
   }

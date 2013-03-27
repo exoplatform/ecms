@@ -45,7 +45,7 @@
   currentNode = org.exoplatform.wcm.webui.Utils.getRealNode(currentNode);
   def currentNodePath = org.exoplatform.wcm.webui.Utils.getRealNodePath(currentNode);
   def contentNode = currentNode.getNode("jcr:content") ;
-  def title = ContentReader.getXSSCompatibilityContent(currentNode.name);
+  def title = ContentReader.getXSSCompatibilityContent(org.exoplatform.services.cms.impl.Utils.getTitle(currentNode));
   def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
   List<String> unsupportMimeTypeText = new ArrayList<String>();
   unsupportMimeTypeText.add("text/rtf");
@@ -62,7 +62,7 @@
   </style>
   <div class="fileContent">
     <div class="navigationContainer uiBox"> 
-      <h5 class="title clearfix">
+      <h6 class="title clearfix">
         <%
           StringBuilder sb = new StringBuilder();
           String ndPath = currentNode.getPath();
@@ -85,8 +85,8 @@
             <a class="pull-right" href="$downloadLink"><i class="uiIconDownload"></i> <%=_ctx.appRes("File.view.label.download")%></a>
         <%}%>
         
-        <div class="topTitle" rel="tooltip" data-placement="bottom" title="<%=title %>"><%=title %></div>      
-      </h5>
+        <div class="topTitle"><%=title %></div>
+      </h6>
       <div class="content uiContentBox">
           <%
             if(fileComponent != null) {

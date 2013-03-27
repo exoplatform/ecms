@@ -3,7 +3,12 @@
 
 /*=========== Vetical tabs =============*/
 
-.UIECMAdminPortlet{
+.uiECMAdminPortlet{
+	.uiResizableBlock{
+		.ShowSideBar{
+			margin-left: 256px;
+		}
+	}
 	.ecmAdminPanel{
 		height: 100%;
 		overflow: auto;
@@ -21,6 +26,13 @@
 					.textarea{
 						height: 150px;
 						vertical-align: top;
+					}
+				}
+				.controls-full{
+					.textarea{
+						height: 150px;
+						vertical-align: top;
+						width: 100%;
 					}
 				}
 			}
@@ -130,3 +142,49 @@ a:hover .uiIconEcmsUnLockManager{
 		input{ margin: 0px;}
 	}
 }
+
+/*=========== Note type============*/
+
+.superTypeTab{
+	.controls{
+		margin: 0px;
+	}
+}
+
+.uiPopup .popupContent .uiMemberSelector{
+	margin: -10px -10px 10px -10px;
+	.uiAnyPermission, .uiQueriesAnyPermission{
+		margin-top: -24px;
+		height: 56px;
+		.form-horizontal{
+			.control-label{
+				width: 105px;
+				padding-top: 3px;
+			}
+			.controls{
+				margin-left: 105px;
+				.controls{
+					margin-left: 0px;
+				}
+			}
+		}
+	}
+}
+
+/*=========== Note type============*/
+
+.uiNodeTypeImportPopup{
+	.form-horizontal{
+		.control-label{
+			display: none;
+		}
+	}
+}
+.uiNodeTypeExport{
+	.uiCheckbox{
+		width: 12px;
+		margin: auto;
+		display: block;
+	}
+}
+

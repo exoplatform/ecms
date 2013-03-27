@@ -160,9 +160,9 @@
   -->
   <UIViewRelationList>
     <label>
-      <languages-list>Languages List</languages-list>
-      <relation-list>Relations List</relation-list>
-      <references-list>References List</references-list>
+      <languages-list>Translations</languages-list>
+      <relation-list>Relations</relation-list>
+      <references-list>References</references-list>
       <no-related-document>No Related Document</no-related-document>
       <related-document>Related Documents</related-document>
     </label>
@@ -1025,7 +1025,7 @@
   </UICategoryManagerSearch>
   <UIContentNameSearch>
     <label>
-      <keyword>Content Name</keyword>
+      <keyword>Content Name:</keyword>
       <location>Search in this location:</location>
     </label>
     <action>
@@ -1045,10 +1045,10 @@
     </action>
     <label>
       <moreConstraints>UISimpleSearch</moreConstraints>
-      <firstOperator>Operator</firstOperator>
-      <input>A word or phrase in content</input>
-      <constraints>More constraints</constraints>
-      <nodePath>Current location</nodePath>
+      <firstOperator>Operator:</firstOperator>
+      <input>A word or phrase in content:</input>
+      <constraints>More constraints:</constraints>
+      <nodePath>Current location:</nodePath>
     </label>
     <msg>
       <keyword-null>Please enter your keyword.</keyword-null>
@@ -1318,9 +1318,9 @@
   </UICompareExactlyForm>
   <UIJCRAdvancedSearch>
     <label>
-      <name>Name</name>
-      <selectBox>Select Query Style</selectBox>
-      <query>Query</query>
+      <name>Name:</name>
+      <selectBox>Select Query Style:</selectBox>
+      <query>Query:</query>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2032,12 +2032,12 @@
   -->
   <UITaggingForm>
     <label>
-      <names>Tag Names</names>
-      <linked>Linked Tags</linked>
+      <names>Tag Names:</names>
+      <linked>Linked Tags:</linked>
       <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
-      <AddTag>Add Tags</AddTag>
+      <AddTag>Add</AddTag>
       <Cancel>#{word.close}</Cancel>
     </action>
     <msg>
@@ -2588,8 +2588,8 @@
 
   <UITreeTaxonomyList>
     <label>
-      <taxonomyTree>Category Tree</taxonomyTree>
-      <rootNodePath>Root Tree</rootNodePath>
+      <taxonomyTree>Category Tree:</taxonomyTree>
+      <rootNodePath>Root Tree:</rootNodePath>
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>
@@ -3182,7 +3182,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <tagName>Tag Name</tagName>
+      <tagName>Tag Name:</tagName>
       <relatedDocuments>Related Documents</relatedDocuments>
     </label>
   </UITagForm>
@@ -3380,6 +3380,9 @@
       <from>From</from>
       <to>To</to>
     </scheduled>
+    <msg>
+      <save-finished>New publication schedule is saved successfully.</save-finished>
+    </msg>
   </UIPublicationSchedule>
 
   <UIPublicationPanel>

@@ -282,12 +282,12 @@
       <UIMetadataForm>Editer le formulaire de la métadonnée</UIMetadataForm>
     </title>
   </MetadataPopupEdit>
-  <PermissionPopup>
+  <MetataPermissionPopup>
     <title>
       <MetadataPermission>Sélection d'une permission</MetadataPermission>
       <QueriesPermissionBrowse>Ajout de permissions</QueriesPermissionBrowse>
     </title>
-  </PermissionPopup>
+  </MetataPermissionPopup>
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataForm				 #
@@ -381,8 +381,8 @@
   </UIDriveList>
   <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>Ajout d'une permission</AddDrivePermissionSelector>
-      <UIPermissionSelector>Sélection de Permissions</UIPermissionSelector>
+      <AddDrivePermissionSelector>Add Permissions</AddDrivePermissionSelector>
+      <UIDrivePermissionSelector>Set Permissions</UIDrivePermissionSelector>
     </title>
   </PopupDrivePermission>
   <UIDriveForm>
@@ -728,7 +728,7 @@
         <nodeTypeDefinition>Type de noeud</nodeTypeDefinition>
         <propertyDefinition>Propriété</propertyDefinition>
         <childNodeDefinition>Fils</childNodeDefinition>
-        <SuperTypeTab>Super types</SuperTypeTab>
+        <superTypeTab>Super types</superTypeTab>
         <DefaultTypeTab>Type primaire par défaut</DefaultTypeTab>
         <RequiredTypeTab>Type primaire obligatoire</RequiredTypeTab>
         <Contraints>Contraintes</Contraints>
@@ -1800,6 +1800,11 @@
       <UIPermissionSelector>Sélection d'une permission</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
+  <TemplatePermission>
+    <title>
+      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+    </title>
+  </TemplatePermission>
   <TemplateContainerPopup>
     <title>
       <UITemplateForm>Formulaire</UITemplateForm>

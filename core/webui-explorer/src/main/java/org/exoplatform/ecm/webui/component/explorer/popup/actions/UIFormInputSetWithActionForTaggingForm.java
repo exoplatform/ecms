@@ -37,8 +37,17 @@ public class UIFormInputSetWithActionForTaggingForm extends UIFormInputSetWithAc
     super(name);
   }
 
-  public List<String> getTagNames() throws Exception {
-    return this.getAncestorOfType(UITaggingForm.class).getAllTagNames();
+  public String getTagNames() throws Exception {
+  	String tags = "";
+  	StringBuffer sb = new StringBuffer();
+  	List<String> tagsList = this.getAncestorOfType(UITaggingForm.class).getAllTagNames();
+  	for (String string : tagsList) {
+  		sb.append(string).append(",");			
+		}
+  	tags = sb.toString();
+  	if(tags.length() > 0)
+  		tags = tags.substring(0, tags.length()-1);
+  	return tags;
   }
 
 }

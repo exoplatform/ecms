@@ -20,6 +20,7 @@
   import org.exoplatform.services.wcm.core.NodeLocation;
   import org.exoplatform.services.cms.link.NodeLinkAware;
   import javax.jcr.Node;
+  import org.apache.commons.lang.StringUtils;
 
   def linkManager = WCMCoreUtils.getService(LinkManager.class);
   def uiDocumentInfo = uicomponent.getAncestorOfType(UIDocumentInfo.class);
@@ -42,6 +43,7 @@
 
   jsManager.require("SHARED/uiFileView", "uiFileView").
   addScripts("uiFileView.UIFileView.initAllEvent('UIDocumentInfo', '$enableDragAndDrop');");
+  
   //Config to display columns with format: ["${column};${width}"]
   //Default 
   String[] arrColumns = ["exo:owner;95px","exo:dateModified;123px","exo:dateCreated;121px"];
@@ -106,6 +108,7 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
   String fileDate = uicomponent.getFileDate(data);
   def versionNum  = uicomponent.getVersionNumber(data);
   def author = uicomponent.getAuthorName(data);
+  def fileSize = uicomponent.getFileSize(data);
   
   String actionLink = uiDocumentInfo.event("ChangeNode",Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS)) ;
   //Begin permlink
@@ -145,7 +148,7 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
       if (dataTarget != null) {
         String link = "/" + restContextName + "/private/jcr/" + repository+ "/" + preferenceWS + Utils.formatNodeName(dataTarget.getPath());
         strActs +=  "<li class='menuItem'>";
-        strActs +=    "<a exo:attr='Download' style='display: block; {behavior: url(#default#AnchorClick);}' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\" href=\"" +link + "\" target='_new' folder=\"" + link +"\">" ;          
+        strActs +=    "<a exo:attr='Download' style='display: block; {behavior: url(#default#AnchorClick);}' onclick=\"eXo.ecm.WCMUtils.hideContextMenu(this);window.open('" +link + "');\" target='_new' folder=\"" + link +"\">" ;          
         strActs +=    "  <i class=\"uiIconDownload\"></i>&nbsp;" + _ctx.appRes("UITreeExplorer.label.webDavView");
         strActs +=    "</a>" ;
         strActs += "</li>";
@@ -252,6 +255,9 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
         <% } %>
         <%=fileDate%>
         <%=author%>
+        <% if (StringUtils.isNotEmpty(fileSize)) { %>
+          <%=fileSize%> 
+        <%}%>
       </p>
     </div>
   </div>

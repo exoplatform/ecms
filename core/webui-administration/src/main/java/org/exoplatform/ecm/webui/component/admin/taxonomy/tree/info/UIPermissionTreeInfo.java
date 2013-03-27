@@ -30,7 +30,8 @@ import javax.jcr.Node;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
-import org.exoplatform.ecm.permission.PermissionBean;
+import org.exoplatform.ecm.webui.core.UIPermissionInfoBase;
+import org.exoplatform.ecm.webui.core.bean.PermissionBean;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
@@ -40,6 +41,7 @@ import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIContainer;
@@ -56,18 +58,20 @@ import org.exoplatform.webui.event.EventListener;
  * Apr 17, 2009
  */
 
-@ComponentConfig(
-    lifecycle = UIContainerLifecycle.class,
-    events = {
-      @EventConfig (listeners = UIPermissionTreeInfo.DeleteActionListener.class, 
-                    confirm = "UIPermissionTreeInfo.msg.confirm-delete-permission"),
-      @EventConfig (listeners = UIPermissionTreeInfo.EditActionListener.class)
-    }
-)
-public class UIPermissionTreeInfo extends UIContainer {
+@ComponentConfigs({
+  @ComponentConfig(
+      lifecycle = UIContainerLifecycle.class,
+      events = {
+        @EventConfig (listeners = UIPermissionTreeInfo.DeleteActionListener.class, 
+                      confirm = "UIPermissionTreeInfo.msg.confirm-delete-permission"),
+        @EventConfig (listeners = UIPermissionTreeInfo.EditActionListener.class)
+      }
+  ),
+  @ComponentConfig(type = UIGrid.class, template = "classpath:groovy/wcm/webui/core/UIPermissionInfoGrid.gtmpl") 
+})
+public class UIPermissionTreeInfo extends UIPermissionInfoBase {
 
-  public static String[]  PERMISSION_BEAN_FIELD = { "usersOrGroups", "read", "addNode",
-      "setProperty", "remove"                  };
+  public static String[]  PERMISSION_BEAN_FIELD = { "usersOrGroups", "read", "addNode", "remove"};
 
   private static String[] PERMISSION_ACTION     = { "Edit", "Delete" };
 
@@ -78,14 +82,7 @@ public class UIPermissionTreeInfo extends UIContainer {
   private List<PermissionBean> permBeans = new ArrayList<PermissionBean>();
 
   public UIPermissionTreeInfo() throws Exception {
-    UIGrid uiGrid = createUIComponent(UIGrid.class, null, "PermissionInfo");
-    addChild(uiGrid);
-    uiGrid.getUIPageIterator().setId("PermissionInfoIterator");
-    uiGrid.configure("usersOrGroups", PERMISSION_BEAN_FIELD, PERMISSION_ACTION);
-  }
-
-  private String  getExoOwner(Node node) throws Exception {
-    return Utils.getNodeOwner(node);
+    super();
   }
 
   public void updateGrid() throws Exception {
@@ -122,7 +119,7 @@ public class UIPermissionTreeInfo extends UIContainer {
         permOwnerBean.setUsersOrGroups(owner);
         permOwnerBean.setRead(true);
         permOwnerBean.setAddNode(true);
-        permOwnerBean.setSetProperty(true);
+//        permOwnerBean.setSetProperty(true);
         permOwnerBean.setRemove(true);
         permBeans.add(permOwnerBean);
       }
@@ -134,7 +131,7 @@ public class UIPermissionTreeInfo extends UIContainer {
         for(String perm : permissions) {
           if(PermissionType.READ.equals(perm)) permBean.setRead(true);
           else if(PermissionType.ADD_NODE.equals(perm)) permBean.setAddNode(true);
-          else if(PermissionType.SET_PROPERTY.equals(perm)) permBean.setSetProperty(true);
+//          else if(PermissionType.SET_PROPERTY.equals(perm)) permBean.setSetProperty(true);
           else if(PermissionType.REMOVE.equals(perm)) permBean.setRemove(true);
         }
         permBeans.add(permBean);
@@ -148,7 +145,7 @@ public class UIPermissionTreeInfo extends UIContainer {
             permBeanTemp.setAddNode(permBean.isAddNode());
             permBeanTemp.setRead(permBean.isRead());
             permBeanTemp.setRemove(permBean.isRemove());
-            permBeanTemp.setSetProperty(permBean.isSetProperty());
+//            permBeanTemp.setSetProperty(permBean.isSetProperty());
           }
         }
         if (!permBeans.contains(permBean)) {
@@ -165,18 +162,18 @@ public class UIPermissionTreeInfo extends UIContainer {
     uiGrid.getUIPageIterator().setPageList(dataPageList);
   }
 
-  public static class EditActionListener extends EventListener<UIPermissionTreeInfo> {
-    public void execute(Event<UIPermissionTreeInfo> event) throws Exception {
-      UIPermissionTreeInfo uicomp = event.getSource() ;
-      String name = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      Node updateNode = uicomp.getCurrentNode();
-      ExtendedNode node = (ExtendedNode)updateNode;
-      UIPermissionTreeForm uiForm = uicomp.getAncestorOfType(UIPermissionTreeManager.class)
-          .getChild(UIPermissionTreeForm.class);
-      uiForm.fillForm(name, node) ;
-      uiForm.lockForm(name.equals(uicomp.getExoOwner(node)));
-    }
-  }
+//  public static class EditActionListener extends EventListener<UIPermissionTreeInfo> {
+//    public void execute(Event<UIPermissionTreeInfo> event) throws Exception {
+//      UIPermissionTreeInfo uicomp = event.getSource() ;
+//      String name = event.getRequestContext().getRequestParameter(OBJECTID) ;
+//      Node updateNode = uicomp.getCurrentNode();
+//      ExtendedNode node = (ExtendedNode)updateNode;
+//      UIPermissionTreeForm uiForm = uicomp.getAncestorOfType(UIPermissionTreeManager.class)
+//          .getChild(UIPermissionTreeForm.class);
+//      uiForm.fillForm(name, node) ;
+//      uiForm.lockForm(name.equals(uicomp.getExoOwner(node)));
+//    }
+//  }
 
   public static class DeleteActionListener extends EventListener<UIPermissionTreeInfo> {
     public void execute(Event<UIPermissionTreeInfo> event) throws Exception {

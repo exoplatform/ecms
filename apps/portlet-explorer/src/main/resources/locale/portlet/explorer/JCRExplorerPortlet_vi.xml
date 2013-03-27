@@ -1034,7 +1034,7 @@
   </UICategoryManagerSearch>
   <UIContentNameSearch>
     <label>
-      <keyword>Tên của nội dung</keyword>
+      <keyword>Tên của nội dung:</keyword>
       <location>Tìm kiếm vị trí này:</location>
     </label>
     <action>
@@ -1054,10 +1054,10 @@
     </action>
     <label>
       <moreConstraints>UISimpleSearch</moreConstraints>
-      <firstOperator>Thao tác</firstOperator>
-      <input>Một từ hoặc cụm từ trong nội dung</input>
-      <constraints>Nhiều ràng buộc hơn</constraints>
-      <nodePath>Vị trí hiện thời</nodePath>
+      <firstOperator>Thao tác:</firstOperator>
+      <input>Một từ hoặc cụm từ trong nội dung:</input>
+      <constraints>Nhiều ràng buộc hơn:</constraints>
+      <nodePath>Vị trí hiện thời:</nodePath>
     </label>
     <msg>
       <keyword-null>Vui lòng nhập khóa của bạn</keyword-null>
@@ -1328,9 +1328,9 @@
   </UICompareExactlyForm>
   <UIJCRAdvancedSearch>
     <label>
-      <name>Tên</name>
-      <selectBox>Lựa chọn kiểu truy vấn</selectBox>
-      <query>Truy vấn</query>
+      <name>Tên:</name>
+      <selectBox>Lựa chọn kiểu truy vấn:</selectBox>
+      <query>Truy vấn:</query>
     </label>
     <action>
       <Save>Lưu</Save>
@@ -2041,12 +2041,12 @@
   -->
   <UITaggingForm>
     <label>
-      <names>Tên thẻ.</names>
-      <linked>Thẻ đã liên kết</linked>
+      <names>Tên thẻ:</names>
+      <linked>Thẻ đã liên kết:</linked>
       <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
-      <AddTag>Thêm thẻ</AddTag>
+      <AddTag>Thêm</AddTag>
       <Cancel>Đóng</Cancel>
     </action>
     <msg>
@@ -2583,7 +2583,7 @@
 
   <UITreeTaxonomyList>
   	<label>
-      <taxonomyTree>Cây phân loại</taxonomyTree>
+      <taxonomyTree>Cây phân loại:</taxonomyTree>
     </label>
   </UITreeTaxonomyList>
 
@@ -3207,7 +3207,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <tagName>Thêm nhãn</tagName>
+      <tagName>Thêm nhãn:</tagName>
       <relatedDocuments>Tài liệu liên quan</relatedDocuments>
     </label>
   </UITagForm>
@@ -3397,6 +3397,21 @@
     </header>
   </UIPublicationHistory>
 
+  <UIPublicationSchedule>
+    <label>
+      <introduction>You can schedule the publication of your document. Select dates you would like to see your document published</introduction>
+      <no-schedule-info>No publication schedule for your document</no-schedule-info>
+    </label>
+    <scheduled>
+      <title>Scheduled</title>
+      <from>From</from>
+      <to>To</to>
+    </scheduled>
+    <msg>
+      <save-finished>New publication schedule is saved successfully.</save-finished>
+    </msg>
+  </UIPublicationSchedule>
+  
   <UIPublicationPanel>
     <label>
       <header>Thời gian xuất bản</header>
@@ -3436,7 +3451,7 @@
    -->
   <UITreeTaxonomyList>
     <label>
-      <rootNodePath>Cây gốc</rootNodePath>
+      <rootNodePath>Cây gốc:</rootNodePath>
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>

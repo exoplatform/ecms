@@ -25,6 +25,7 @@ import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.tree.UIBaseNodeTreeSelector;
 import org.exoplatform.ecm.webui.tree.UITreeTaxonomyBuilder;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -229,6 +230,7 @@ public class UIOneTaxonomySelector extends UIBaseNodeTreeSelector {
     UISelectTaxonomyPanel selectPathPanel = getChild(UISelectTaxonomyPanel.class);
     UITreeTaxonomyList uiTreeTaxonomyList = getChild(UITreeTaxonomyList.class);
     String taxoTreeName = uiTreeTaxonomyList.getUIFormSelectBox(UITreeTaxonomyList.TAXONOMY_TREE).getValue();
+    if (StringUtils.isEmpty(taxoTreeName)) return;
     Node parentRoot = getTaxoTreeNode(taxoTreeName);
     selectPathPanel.setParentNode(currentNode);
     selectPathPanel.updateGrid();

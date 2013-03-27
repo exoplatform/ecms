@@ -1,0 +1,30 @@
+<div class="uiPermissionTreeForm" onkeypress="javascript:SubmitAction.call(this, event);">
+  <% uiform.begin() %>
+      <div>
+        <h5><%=_ctx.appRes(uicomponent.getName() + ".title"); %></h5>
+        <% uiform.renderField(uiform.PERMISSION) %>
+      </div>
+
+      <%// start render action%>
+      <div class="uiAction uiActionBorder"> 
+        <% for(action in uicomponent.getActions()) { 
+             String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
+             String link = uicomponent.event(action); 
+        %>
+          <button type="button" onclick="$link; window.scroll(0,0);" class="btn">$actionLabel</button>
+        <%}%>
+      </div>
+      <%// end render action%>
+  <%uiform.end()%>
+</div>
+<script language="javascript">
+  function SubmitAction(event) {
+    var event = window.event || event;
+    var code;
+    if(event.keyCode) code = event.keyCode;
+    else if (event.which) code = event.which;
+    if(code ==13) {
+      this.onsubmit = function(){ return false; }       
+    }
+  } 
+</script>

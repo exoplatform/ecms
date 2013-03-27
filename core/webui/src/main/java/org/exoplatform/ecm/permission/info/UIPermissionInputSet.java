@@ -24,7 +24,6 @@ import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.input.UICheckBoxInput;
-import org.exoplatform.webui.form.validator.MandatoryValidator;
 
 /**
  * Created by The eXo Platform SARL
@@ -46,7 +45,6 @@ public class UIPermissionInputSet extends UIFormInputSetWithAction {
   private void initComponent(boolean hasPermissionCheckbox) throws Exception{
     setComponentConfig(getClass(), null);
     UIFormStringInput userGroup = new UIFormStringInput(FIELD_USERORGROUP, FIELD_USERORGROUP, null);
-    userGroup.addValidator(MandatoryValidator.class);
     userGroup.setReadOnly(true);
     addUIFormInput(userGroup);
     if (hasPermissionCheckbox) {

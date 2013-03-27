@@ -102,7 +102,7 @@
   //          }
   //      );
   //    }
-      gj(actionArea).parents(".UIWorkingArea:first").find("div.UITreeExplorer:first").find("div[objectId]").each(
+      gj(actionArea).parents(".uiWorkingArea:first").find("div.uiTreeExplorer:first").find("div[objectId]").each(
       function(index, element) {
         if (element.getAttribute("onmousedown") && !element.getAttribute("mousedown")) {
           mousedown = element.getAttributeNode("onmousedown").value;
@@ -135,8 +135,9 @@
           }
         }
       }
-      var scroller = gj(element).parents(".SideContent:first")[0];
+      var scroller = gj(element).parents(".uiContentBox:first")[0];
       scroller.onmousemove = eXo.ecm.UISimpleView.setScroll ;
+
     };
 
     SimpleView.prototype.setScroll = function(evt){
@@ -196,7 +197,7 @@
         mobileElement.style.opacity = 65/100;
         Self.mobileId = mobileElement.id;
         var coverElement = newElement({
-          className: "UITreeExplorer",
+          className: "uiTreeExplorer",
           style: {margin: "0px 3px", padding: "3px 0px"}
         });
         coverElement.appendChild(itemSelected);

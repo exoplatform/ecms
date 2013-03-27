@@ -1,7 +1,7 @@
 <%  
   def rcontext = _ctx.getRequestContext();
 %>
-
+<div class="$uicomponent.id" id="$uicomponent.id">
 <h5 class="title clearfix">
   <i class="uiIconPlus uiIconLightGray pull-right" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITagExplorer.title.EditPublicTags")%>"
      onclick="<%=uicomponent.event("EditTags", "Public")%>" ></i>
@@ -11,14 +11,25 @@
 <div class="uiContentBox">
   <div class="$uicomponent.id"> 
         <%
+          def tagStyle = uicomponent.getTagStyle() ; 
           for(tag in uicomponent.getPublicTagLink()){
             String tagLink = uicomponent.event('ViewTag',tag.getPath()) ;
             int tagCount = 0;
+            String style = "";
             if(tag.hasProperty("exo:total")) {
-              tagCount = (int)tag.getProperty("exo:total").getValue().getLong() ;
+              tagCount = (int)tag.getProperty("exo:total").getValue().getLong();
+              style = "Style = '" + uicomponent.getTagHtmlStyle(tagStyle, tagCount)+ "'";
             }
-            println "<a href=\"$tagLink\" >$tag.name</a>" ;
+            println "<a href=\"$tagLink\" $style>$tag.name</a>" ;
           }
         %>
   </div>
+</div>
+
+<% if(uicomponent.getPublicPageIterator().getAvailablePage() > 1){ %>
+  <div style="margin:1px 0px 10px 0px;">
+    <%_ctx.renderUIComponent(uicomponent.getPublicPageIterator())%>
+  </div>
+<% } %>
+
 </div>

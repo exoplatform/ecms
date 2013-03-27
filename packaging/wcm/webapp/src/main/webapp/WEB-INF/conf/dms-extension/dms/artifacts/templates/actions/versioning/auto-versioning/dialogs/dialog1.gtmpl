@@ -1,79 +1,80 @@
-<div class="UIFormWithTitle">
-  <div class="TitleBar"><%=_ctx.appRes(uicomponent.getId() + ".title")%></div>
+<div class="uiAddActionForm">
+  <h6 class="titleBar"><%=_ctx.appRes(uicomponent.getId() + ".title")%></h6>
 	<% uiform.begin() %>
-  <div class="HorizontalLayout">
-  	<table class="UIFormGrid">	  
-			<tr>
-		    <td class="FieldLabel" style="display:none"><label for="id"><%=_ctx.appRes("AutoVersioning.dialog.label.id")%></label></td>
-		    <td class="FieldComponent" style="display:none">
+  	<div class="form-horizontal">
+			<div class="control-group" style="display:none">
+		    <label class="control-label" for="id"><%=_ctx.appRes("AutoVersioning.dialog.label.id")%>:</label>
+		    <div class="controls">
 				  <%
 					 String[] fieldId = ["jcrPath=/node", "mixintype=mix:affectedNodeTypes", "editable=false", "visible=if-not-null"] ;
 					 uicomponent.addMixinField("id", fieldId) ;  
 				  %>
-				</td>
-			</tr>
-			<tr>		          					
-			  <td class="FieldLabel"><label for="actionName"><%=_ctx.appRes("AutoVersioning.dialog.label.name")%></label></td>
-			  <td class="FieldComponent">
+				</div>
+			</div>
+			<div class="control-group">		          					
+			  <label class="control-label" for="actionName"><%=_ctx.appRes("AutoVersioning.dialog.label.name")%>:</label>
+			  <div class="controls">
 				  <% 
-					String[] fieldName = ["jcrPath=/node/exo:name", "validate=XSSValidator"];
+					String[] fieldName = ["jcrPath=/node/exo:name", "validate=empty,XSSValidator"];
 					uicomponent.addTextField("actionName", _ctx.appRes("AutoVersioning.dialog.label.name"), fieldName);
 				  %>
-				</td>
-			</tr>
-			<tr>		          					
-			  <td class="FieldLabel"><label for="lifecycle"><%=_ctx.appRes("AutoVersioning.dialog.label.lifecycle")%></label></td>
-			  <td class="FieldComponent">
+				</div>
+			</div>
+			<div class="control-group">		          					
+			  <label class="control-label" for="lifecycle"><%=_ctx.appRes("AutoVersioning.dialog.label.lifecycle")%>:</label>
+			  <div class="controls">
 			  <% 
           String[] fieldLifecycle = ["jcrPath=/node/exo:lifecyclePhase", 
                                      "options=read,node_added,node_removed,property_added,property_removed,property_changed",
                                      "multiValues=true", "onchange=true","size=5","validate=empty"] ;
           uicomponent.addSelectBoxField("lifecycle", fieldLifecycle) ;
         %>
-				</td>
-			</tr>
+				</div>
+			</div>
 			<%
 				String selectValue = uicomponent.getSelectBoxFieldValue("lifecycle") ;
 			%>
-       <tr>                        
-         <td class="FieldLabel"><label for="isDeep"><%=_ctx.appRes("AutoVersioning.dialog.label.isDeep")%></label></td>
-         <td class="FieldComponent"> 
+       <div class="control-group">                        
+         <label class="control-label" for="isDeep"><%=_ctx.appRes("AutoVersioning.dialog.label.isDeep")%>:</label>
+         <div class="controls"> 
          <% 
            String[] fieldDeep = ["jcrPath=/node/exo:isDeep", "defaultValues=true"];         
            uicomponent.addCheckBoxField("isDeep", fieldDeep);
          %>
-         </td>
-       </tr>
-       <tr>                        
-         <td class="FieldLabel"><label for="nodetypes"><%=_ctx.appRes("AutoVersioning.dialog.label.nodetypes")%></label></td>
-         <td class="FieldComponent"> 
+         </div>
+       </div>
+       <div class="control-group">                        
+         <label class="control-label" for="nodetypes"><%=_ctx.appRes("AutoVersioning.dialog.label.nodetypes")%>:</label>
+         <div class="controls"> 
          <% 
-           String[] fieldnodetypes = ["jcrPath=/node/exo:nodeTypeName", "selectorAction=selectNodeTypes", "multiValues=true", "selectorClass=org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSelector", "selectorIcon=SelectPath24x24Icon", "validate=empty", "editable=false"];         
+           String[] fieldnodetypes = ["jcrPath=/node/exo:nodeTypeName", "selectorAction=selectNodeTypes", "multiValues=true", "selectorClass=org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSelector", "selectorIcon=uiIconSearch", "validate=empty", "editable=false"];         
            uicomponent.addActionField("nodetypes", fieldnodetypes);
          %>
-         </td>
-       </tr>
-			<tr>		          					
-			  <td class="FieldLabel"><label for="description"><%=_ctx.appRes("AutoVersioning.dialog.label.description")%></label></td>
-			  <td class="FieldComponent">
+         </div>
+       </div>
+			<div class="control-group">		          					
+			  <label class="control-label" for="description"><%=_ctx.appRes("AutoVersioning.dialog.label.description")%>:</label>
+			  <div class="controls">
 				  <% 
 					String[] fieldDescription = ["jcrPath=/node/exo:description"] ;         
 					uicomponent.addTextAreaField("description", fieldDescription) ;
 				  %>
-				</td>
-			</tr>	
-			<tr>                       
-        <td class="FieldLabel"><label for="affectedNodetypes"><%=_ctx.appRes("AutoVersioning.dialog.label.affectedNodeTypeNames")%></td>
-        <td class="FieldComponent">
-        <% 
-          String[] fieldAffectedNodetypes = ["jcrPath=/node/exo:affectedNodeTypeNames", "selectorAction=selectAffectedNodeTypes", "multiValues=true", "selectorClass=org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSelector", "selectorIcon=SelectPath24x24Icon", "validate=empty", "editable=false"];
-        uicomponent.addActionField("affectedNodetypes", fieldAffectedNodetypes);
-        %>
-      </tr>
-		</table>
-		<%/* start render action*/%>
-		<%uiform.processRenderAction()%>
-		<%/* end render action*/%>
-  </div>
+				</div>
+			</div>	
+			<div class="control-group">                       
+        <label class="control-label" for="affectedNodetypes"><%=_ctx.appRes("AutoVersioning.dialog.label.affectedNodeTypeNames")%>:</label>
+        <div class="controls">
+					<% 
+						String[] fieldAffectedNodetypes = ["jcrPath=/node/exo:affectedNodeTypeNames", "selectorAction=selectAffectedNodeTypes", "multiValues=true", "selectorClass=org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSelector", "selectorIcon=uiIconSearch", "validate=empty", "editable=false"];
+						uicomponent.addActionField("affectedNodetypes", fieldAffectedNodetypes);
+					%>
+				</div>
+      </div>
+		</div>
+
   <%uiform.end()%>
+	
+	<%/* start render action*/%>
+	<%uiform.processRenderAction()%>
+	<%/* end render action*/%>
 </div>

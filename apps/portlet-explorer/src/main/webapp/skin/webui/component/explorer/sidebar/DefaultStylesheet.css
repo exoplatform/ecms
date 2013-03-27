@@ -529,3 +529,7 @@
 		top: 0;
 		left: 0;		
 }
+
+.uiSideBar .UITagExplorer .uiPageIterator a {
+	margin: 0px;
+}

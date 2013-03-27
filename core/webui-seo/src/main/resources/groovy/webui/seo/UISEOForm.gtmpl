@@ -64,7 +64,7 @@
 			  %>
 			  <% if (uicomponent.isAddNew) {%>
 				<div class="addNewSEO" id="addNewSEO">
-					<button class="btn" type="button" onclick="eXo.ecm.WCMUtils.showSEOLanguage(true)">
+					<button type="button" class="btn" type="button" onclick="eXo.ecm.WCMUtils.showSEOLanguage(true)">
 						<i class="uiIconPlus uiIconLightGray"></i> Add Language
 					</button>
 				</div>

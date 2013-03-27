@@ -6,14 +6,14 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import org.exoplatform.services.cms.templates.TemplateService;
-import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 
@@ -78,9 +78,9 @@ public class UIContentNodeTypeSelector extends UIForm {
    * @return true, if successful
    */
   private boolean propertiesSelected(String name) {
-    UIPopupWindow popupWindow = Utils.getPopupContainer(this)
-                                     .getChildById(UIContentSelector.CORRECT_CONTENT_SELECTOR_POPUP_WINDOW);
-    UIContentSelector contentSelector = (UIContentSelector) popupWindow.getUIComponent();
+    UIPopupWindow uiPopupWindow = this.getParent();
+    UIContainer uiContainer = uiPopupWindow.getAncestorOfType(UIContainer.class);
+    UIContentSelector contentSelector = (UIContentSelector) uiContainer.findFirstComponentOfType(UIContentSelector.class);
     UIContentSearchForm contentSearchForm = contentSelector.getChild(UIContentSearchForm.class);
     String typeValues = contentSearchForm.getUIStringInput(UIContentSearchForm.DOC_TYPE).getValue() ;
     if(typeValues == null) return false ;
@@ -131,9 +131,9 @@ public class UIContentNodeTypeSelector extends UIForm {
     @SuppressWarnings("unchecked")
     public void execute(Event<UIContentNodeTypeSelector> event) throws Exception {
       UIContentNodeTypeSelector contentNodetypeSelector = event.getSource();
-      UIPopupWindow popupWindow = Utils.getPopupContainer(contentNodetypeSelector)
-                                       .getChildById(UIContentSelector.CORRECT_CONTENT_SELECTOR_POPUP_WINDOW);
-      UIContentSelector contentSelector = (UIContentSelector) popupWindow.getUIComponent();
+      UIPopupWindow uiPopupWindow = contentNodetypeSelector.getParent();
+      UIContainer uiContainer = uiPopupWindow.getAncestorOfType(UIContainer.class);
+      UIContentSelector contentSelector = (UIContentSelector) uiContainer.findFirstComponentOfType(UIContentSelector.class);
       List<String> selectedNodeTypes = new ArrayList<String>();
       List<UIFormCheckBoxInput> listCheckbox =  new ArrayList<UIFormCheckBoxInput>();
       contentNodetypeSelector.findComponentOfType(listCheckbox, UIFormCheckBoxInput.class);
@@ -141,8 +141,12 @@ public class UIContentNodeTypeSelector extends UIForm {
       String nodeTypesValue = contentSearchForm.getUIStringInput(UIContentSearchForm.DOC_TYPE).getValue();
       contentNodetypeSelector.makeSelectedNode(nodeTypesValue, selectedNodeTypes, listCheckbox);
       contentNodetypeSelector.setNodeTypes(selectedNodeTypes, contentSearchForm);
-      Utils.closePopupWindow(contentNodetypeSelector, WEB_CONTENT_NODETYPE_POPUP);
       contentSelector.setSelectedTab(contentSearchForm.getId());
+      uiPopupWindow.setRendered(false);
+      uiPopupWindow.setShow(false);
+      
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupWindow);
+      event.getRequestContext().addUIComponentToUpdateByAjax(contentSearchForm);
     }
   }
 
@@ -195,12 +199,10 @@ public class UIContentNodeTypeSelector extends UIForm {
      */
     public void execute(Event<UIContentNodeTypeSelector> event) throws Exception {
       UIContentNodeTypeSelector contentNodetypeSelector = event.getSource();
-      UIPopupWindow popupWindow = Utils.getPopupContainer(contentNodetypeSelector)
-                                       .getChildById(UIContentSelector.CORRECT_CONTENT_SELECTOR_POPUP_WINDOW);
-      UIContentSelector contentSelector = (UIContentSelector) popupWindow.getUIComponent();
-      UIContentSearchForm contentSearchForm = contentSelector.getChild(UIContentSearchForm.class);
-      Utils.closePopupWindow(contentNodetypeSelector, WEB_CONTENT_NODETYPE_POPUP);
-      contentSelector.setSelectedTab(contentSearchForm.getId());
+      UIPopupWindow uiPopupWindow = contentNodetypeSelector.getParent();
+      uiPopupWindow.setRendered(false);
+      uiPopupWindow.setShow(false);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupWindow);
     }
   }
 }

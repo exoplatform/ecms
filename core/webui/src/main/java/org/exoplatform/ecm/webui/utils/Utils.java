@@ -275,7 +275,7 @@ public class Utils {
 
   public static boolean isNameValid(String name, String[] regexpression) {
     for (String c : regexpression) {
-      if (name.contains(c))
+      if (name == null || name.contains(c))
         return false;
     }
     return true;

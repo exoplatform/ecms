@@ -1143,64 +1143,6 @@
   padding: 10px;
 }
 
-/*================================UISimpleSearch==============================*/
-
-.UIJCRExplorerPortlet .UISimpleSearch .moreConstraints .InforField {
-	line-height: 18px;
-	_padding-top: 4px;
-}
-
-.UIJCRExplorerPortlet .moreConstraints .UIFormInputSet .UIFormInputSetWithAction .UIFormGrid td.FieldComponent {
-	padding: 0px 4px;
-}
-
-.UIJCRExplorerPortlet .EditQueryForm {
-  margin: 10px;
-	border: 1px solid #AEAEAE;
-	background: #F7F7F7;
-	padding: 10px;
-}
-
-.UIJCRExplorerPortlet .UISaveQueryForm  {
- 	margin: 10px;
-	border: 1px solid #AEAEAE;
-	background: #F7F7F7;
-	padding: 10px;
-}
-
-.UIJCRExplorerPortlet .UISimpleSearch .UIFormGrid{
- table-layout: fixed;
-}
-/*================================UIJCRAdvancedSearch=================================*/
-
-.UIJCRExplorerPortlet .UIJCRAdvancedSearch .FormContainer {
-  width: 550px;
-  margin: auto;
-}
-
-.UIJCRExplorerPortlet .UIJCRAdvancedSearch .HorizontalLayout textarea {
-  padding: 3px;
-}
-
-.UIJCRExplorerPortlet .UISearchContainer .ConstraintOption .IconConstraint {
-	cursor: pointer;
-}
-
-.UIJCRExplorerPortlet #UIECMSearch {
-	padding: 8px;
-	height: auto;
-}
-
-.UIJCRExplorerPortlet #UIECMSearch .TabsContainer {
-	border-bottom: 1px solid #AEAEAE;
-}
-
-.UIJCRExplorerPortlet #UIECMSearch .UITabContentContainer .UITabContent {
-	background: #ffffff;
-}
-
-/*================================UIConstraintsForm=================================*/
-
 /*================================UIMetadataSelectForm=================================*/
 
 .UIJCRExplorerPortlet .UIMetadataSelectForm {

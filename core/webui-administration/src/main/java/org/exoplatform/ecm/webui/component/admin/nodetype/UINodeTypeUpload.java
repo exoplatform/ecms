@@ -51,7 +51,7 @@ import org.jibx.runtime.JiBXException;
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    template =  "app:/groovy/webui/component/admin/nodetype/UINodeTypeUpload.gtmpl",
+    template =  "classpath:groovy/ecm/webui/form/UIForm.gtmpl",
     events = {
       @EventConfig(listeners = UINodeTypeUpload.UploadActionListener.class),
       @EventConfig(listeners = UINodeTypeUpload.CancelActionListener.class)

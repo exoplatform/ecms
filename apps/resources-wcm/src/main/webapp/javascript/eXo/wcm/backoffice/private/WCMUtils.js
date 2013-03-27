@@ -3,6 +3,9 @@
 	function WCMUtils(){
 		this.cmdEcmBundle = "/bundle/";
 		this.cmdGetBundle = "getBundle?";
+		this.cmdSocialPeople = "/social/people/";
+		this.cmdGetPeople = "getPeopleInfo/";
+		
 		this.showRightContent = true;
 	}
 	
@@ -112,8 +115,8 @@
 	};
 	
 	WCMUtils.prototype.showHideComponent = function(elemtClicked) {		
-			var nodeReference = gj(elemtClicked).parents(".ShowHideContainer:first")[0];    
-			var elemt = gj(nodeReference).find("div.ShowHideComponent:first")[0];		
+			var nodeReference = gj(elemtClicked).parents(".showHideContainer:first")[0];    
+			var elemt = gj(nodeReference).find("div.showHideComponent:first")[0];		
 			if(elemt.style.display == 'none') {		
 				elemtClicked.childNodes[0].style.display = 'none' ;
 				elemtClicked.childNodes[1].style.display = 'block' ;
@@ -181,7 +184,7 @@
 	}; 
 	
 	WCMUtils.prototype.hideContextMenu = function(menuItemElem)  {
-		var contextMenu = gj(menuItemElem).parents(".UIRightClickPopupMenu:first")[0];
+		var contextMenu = gj(menuItemElem).parents(".uiRightClickPopupMenu:first")[0];
 		contextMenu.style.display = "none" ;
 	};
 
@@ -324,6 +327,30 @@
 		    gj(this).val(defaultValue);
 		    gj(this).css('color', '#9A9A9A');
 		  }
+		});
+	};
+	
+		
+	WCMUtils.prototype.loadAvartar = function(userId, imgTag) {
+	  var command = this.cmdSocialPeople + this.cmdGetPeople + userId + ".json";
+	  var restUrl = eXo.ecm.WCMUtils.getRestContext() + command;
+		gj.ajax({
+			 type: "GET",
+			 url: restUrl
+		}).complete(function (jqXHR) {
+			 if (jqXHR.readyState === 4) {
+				 var userData = gj.parseJSON(jqXHR.responseText);
+				 gj(imgTag).attr("src", userData.avatarURL);
+			 }
+		});
+	};
+	
+	WCMUtils.prototype.onLoadComments = function() {
+		var comments = gj('#UIDocumentWorkspace').find("div.comments:first")[0];
+		gj(comments).find("a.avatarMedium").each(function(i) {
+			var commentor = gj(this).attr("commentor");
+			var img = gj(this).find("img:first")[0];
+			eXo.ecm.WCMUtils.loadAvartar(commentor, img);
 		});
 	};
 	

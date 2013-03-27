@@ -34,6 +34,25 @@
   </portal-skin>
 
   <!-- Bootstrap Javascripts -->
+  <!-- Twitter Bootstrap bootstrap-typeahead plugin -->
+  <module>
+    <name>wcm_bts_typeahead</name>
+    <load-group>bts</load-group>
+    <script>
+      <adapter>
+        (function($) {
+          var _$ = window.jQuery; window.jQuery = $;
+          <include>/javascript/eXo/wcm/backoffice/private/bootstrap-typeahead.js</include>
+          window.jQuery = _$;
+        })($);
+      </adapter>
+    </script>
+    <depends>
+      <module>jquery</module>
+    </depends>
+  </module>
+  
+  
   <module>
     <name>ecm-bootstrap</name>
     <as>ecm_bootstrap</as>
@@ -54,6 +73,9 @@
     </depends>
     <depends>
       <module>bts_tooltip</module>
+    </depends>
+    <depends>
+      <module>wcm_bts_typeahead</module>
     </depends>
   </module>
   

@@ -280,12 +280,12 @@
       <UIMetadataForm>تغيير قالب قالب المعلومات القياسية</UIMetadataForm>
     </title>
   </MetadataPopupEdit>
-  <PermissionPopup>
+  <MetataPermissionPopup>
     <title>
       <MetadataPermission>إختيار صلاحية</MetadataPermission>
       <QueriesPermissionBrowse>إضافة صلاحية</QueriesPermissionBrowse>
     </title>
-  </PermissionPopup>
+  </MetataPermissionPopup>
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataForm #
@@ -725,7 +725,7 @@
         <nodeTypeDefinition>نوع العقدة</nodeTypeDefinition>
         <propertyDefinition>الخاصية</propertyDefinition>
         <childNodeDefinition>الفروع</childNodeDefinition>
-        <SuperTypeTab>الانواع السوبر</SuperTypeTab>
+        <superTypeTab>الانواع السوبر</superTypeTab>
         <DefaultTypeTab>النوع الرئيسي الافتراضي</DefaultTypeTab>
         <RequiredTypeTab>النوع الرئيسي الضروري</RequiredTypeTab>
         <Contraints>القيود</Contraints>
@@ -1547,8 +1547,8 @@
    
    <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>أضف تصريح</AddDrivePermissionSelector>
-      <UIPermissionSelector>ولا يسمح باختيار</UIPermissionSelector>
+      <AddDrivePermissionSelector>Add Permissions</AddDrivePermissionSelector>
+      <UIDrivePermissionSelector>Set Permissions</UIDrivePermissionSelector>
     </title>
   </PopupDrivePermission>
   
@@ -1704,6 +1704,11 @@
       <UIPermissionSelector>إختيار صلاحية</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
+  <TemplatePermission>
+    <title>
+      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+    </title>
+  </TemplatePermission>
   <TemplateContainerPopup>
     <title>
       <UITemplateForm>شكل القالب</UITemplateForm>

@@ -71,78 +71,30 @@
       if (contextMenu) contextMenu.parentNode.removeChild(contextMenu);
       //registry action drag drop in tree list
       eXo.ecm.UIListView.initDragDropForTreeEvent("UIWorkingArea", enableDragAndDrop);    
-  //    var UIWorkingArea = DOM.findAncestorByClass(actionArea, "UIWorkingArea");
-  //    var UITreeExplorer = DOM.findFirstDescendantByClass(UIWorkingArea, "div", "UITreeExplorer");
-  //    if (UITreeExplorer) {
-  //      DOM.getElementsBy(
-  //          function(element) {return element.getAttribute("objectId");},
-  //          "div",
-  //          UITreeExplorer,
-  //          function(element) {
-  //            if (element.getAttribute("onmousedown")) {
-  //              mousedown = element.getAttributeNode("onmousedown").value;
-  //              element.setAttribute("mousedown", mousedown);
-  //            }
-  //            if (enableDragAndDrop == "true") {
-  //              element.onmousedown = Self.mouseDownTree;
-  //              element.onmouseup = Self.mouseUpTree;
-  //              element.onmouseover = Self.mouseOverTree;
-  //              element.onmouseout = Self.mouseOutTree;
-  //            }
-  //          }
-  //      );
-  //    }
     };
 
     ListView.prototype.initDragDropForTreeEvent = function(actionAreaId, enableDragAndDrop) {
       //registry action drag drop in tree list
       eXo.ecm.UIListView.enableDragAndDrop = enableDragAndDrop;
-  //    var UIWorkingArea =  document.getElementById(actionAreaId);
-  //    var UITreeExplorer = DOM.findFirstDescendantByClass(UIWorkingArea, "div", "UITreeExplorer");
-  //    if (UITreeExplorer) {
-  //      DOM.getElementsBy(
-  //          function(element) {return element.getAttribute("objectId");},
-  //          "div",
-  //          UITreeExplorer,
-  //          function(element) {
-  //            if (element.getAttribute("onmousedown") &&!element.getAttribute("mousedown")) {
-  //              mousedown = element.getAttributeNode("onmousedown").value;
-  //              element.setAttribute("mousedown", mousedown);
-  //            }
-  //            if (element.getAttribute("onkeydown") &&!element.getAttribute("keydown")) {
-  //              keydown = element.getAttributeNode("onkeydown").value;
-  //              element.setAttribute("keydown", keydown);
-  //            }            
-  //  //          if (enableDragAndDrop == "true") {
-  //              element.onmousedown = Self.mouseDownTree;
-  //              element.onkeydown = Self.mouseDownTree;
-  //              element.onmouseup = Self.mouseUpTree;
-  //              element.onmouseover = Self.mouseOverTree;
-  //              element.onmouseout = Self.mouseOutTree;
-  //              element.onfocus = Self.mouseOverTree;
-  //              element.onblur = Self.mouseOutTree;              
-  ////            }
-  //          }
-  //      );
-        gj("#" + actionAreaId + " div.UITreeExplorer:first").find("div[objectId]").each(      
-        function(index, element) {
-          if (element.getAttribute("onmousedown") &&!element.getAttribute("mousedown")) {
-            mousedown = element.getAttributeNode("onmousedown").value;
-            element.setAttribute("mousedown", mousedown);
-          }
-                if (element.getAttribute("onkeydown") &&!element.getAttribute("keydown")) {
-                  keydown = element.getAttributeNode("onkeydown").value;
-                  element.setAttribute("keydown", keydown);
-                }             
-            element.onmousedown = Self.mouseDownTree;
-            element.onkeydown = Self.mouseDownTree;
-            element.onmouseup = Self.mouseUpTree;
-            element.onmouseover = Self.mouseOverTree;
-            element.onmouseout = Self.mouseOutTree;
-                element.onfocus = Self.mouseOverTree;
-                element.onblur = Self.mouseOutTree;              
-        });      
-    };
+        gj("#" + actionAreaId + " div.uiTreeExplorer:first").find("div[objectId]").each(
+      function(index, element) {
+        if (element.getAttribute("onmousedown") &&!element.getAttribute("mousedown")) {
+        mousedown = element.getAttributeNode("onmousedown").value;
+        element.setAttribute("mousedown", mousedown);
+      }
+      if (element.getAttribute("onkeydown") &&!element.getAttribute("keydown")) {
+        keydown = element.getAttributeNode("onkeydown").value;
+        element.setAttribute("keydown", keydown);
+      }
+      element.onmousedown = Self.mouseDownTree;
+      element.onkeydown = Self.mouseDownTree;
+      element.onmouseup = Self.mouseUpTree;
+      element.onmouseover = Self.mouseOverTree;
+      element.onmouseout = Self.mouseOutTree;
+      element.onfocus = Self.mouseOverTree;
+      element.onblur = Self.mouseOutTree;
+    });
+  };
 
     //event in tree list
     ListView.prototype.mouseOverTree = function(event) {
@@ -216,7 +168,7 @@
         mobileElement.style.opacity = 65/100;
         Self.mobileId = mobileElement.id;
         var coverElement = newElement({
-          className: "UITreeExplorer",
+          className: "uiTreeExplorer",
           style: {margin: "0px 3px", padding: "3px 0px"}
         });
         coverElement.appendChild(itemSelected);
@@ -941,7 +893,7 @@
       }  
   
       var itemArea = document.getElementById("SelectItemArea");
-      if (!itemArea & container.className == "UITreeExplorer") {
+      if (!itemArea & container.className == "uiTreeExplorer") {
         container.style.height = (resizeSizeBar.offsetHeight - barContent.offsetHeight - 30) + "px";
       }  
     }
@@ -997,8 +949,9 @@
         resizeDiv.id = "ResizeDiv";      
         var workspace = gj(Self.objResizingHeader).parents(".UIDocumentWorkspace:first")[0];
         resizeDiv.style.height = workspace.offsetHeight + "px";
-        var documentInfo = document.getElementById('UIDocumentInfo');
-        gj(documentInfo).find("div.uiListGrid:first")[0].appendChild(resizeDiv);  
+        var documentInfo = document.getElementById('UIDocumentContainer');
+        var firstUIListGrid = gj(documentInfo).find("div.uiListGrid:first")[0];
+        firstUIListGrid = gj(documentInfo).find("div.uiListGrid:first")[0].appendChild(resizeDiv);
       }
       var X_Resize = eXo.core.Browser.findMouseRelativeX(Self.listGrid,event);        
       eXo.core.Browser.setPositionInContainer(Self.listGrid, resizeDiv, X_Resize, 0);
@@ -1031,10 +984,10 @@
       var resizeDiv = document.getElementById("ResizeDiv");   
       if (Self.listGrid && resizeDiv) 
         Self.listGrid.removeChild(resizeDiv);
-      var documentInfo = document.getElementById('UIDocumentInfo');
-      var uiListGrid = gj(documentInfo).find("div.uiListGrid")[0];
-      var tableBox = gj(documentInfo).find("div.uiBox")[0];
-      var headerRow = gj(documentInfo).find("div.titleTable")[0];
+      var uiDocumentContainer = document.getElementById('UIDocumentContainer');
+      var uiListGrid = gj(uiDocumentContainer).find("div.uiListGrid")[0];
+      var tableBox = gj(uiDocumentContainer).find("div.uiBox")[0];
+      var headerRow = gj(uiDocumentContainer).find("div.titleTable")[0];
       var colDiv = gj(headerRow).children("div");
       var totalWidth = 0; i=0;
       for (;colDiv[i];) {
@@ -1056,20 +1009,29 @@
     }  
     ListView.prototype.loadEffectedWidthColumn = function() {
       var objResizeClazz = eXo.ecm.UIListView.objRowClazz;
-      var root = document.getElementById("UIDocumentWorkspace");
-      var listGrid = gj(root).find("div.uiListGrid:first")[0];
-      root.style.overflow = "auto";
-      var rightContainer = gj(listGrid).parents(".RightContainer:first")[0];
-  
+      var uiDocumentContainer = document.getElementById("UIDocumentContainer");
+      var uiListGrid = gj(uiDocumentContainer).find("div.uiListGrid:first")[0];
       if(!gj.data(Self.columnData)) { 
         return;
       }
       gj.each( gj(Self.columnData).data(),function(key, value) {
-       var div2Resize  = gj(listGrid).find("div." + key);
+       var div2Resize  = gj(uiListGrid).find("div." + key);
         for (var i=0; i< div2Resize.length; i++) {
           div2Resize[i].style.width = value;
         }
       });
+      var tableBox = gj(uiDocumentContainer).find("div.uiBox")[0];
+      var headerRow = gj(uiDocumentContainer).find("div.titleTable")[0];
+      var colDiv = gj(headerRow).children("div");
+      var totalWidth = 0; i=0;
+      for (;colDiv[i];) {
+        totalWidth += colDiv[i].offsetWidth;
+        i++;
+      }
+      if (totalWidth < uiListGrid.offsetWidth-2) {
+        totalWidth = uiListGrid.offsetWidth-2;
+      }
+      gj(tableBox).css("width", totalWidth + "px");
     }
     
     eXo.ecm.ECMUtils.documentContainer_OnResize = function(){
@@ -1093,12 +1055,12 @@
       if (breadcrumb) {
           breadcrumb.width(breadcrumb.parent().width());
         }        
-   	  var actionbar= gj('#UIActionBar');
-	  actionbar.width(actionbar.parent().width());
-	  var menubar = gj('div.uiFileViewActionBar');
-	  if (menubar) {
-		  menubar.width(gj("div#UIActionBar").width()-1);
-	  }
+      var actionbar= gj('#UIActionBar');
+      actionbar.width(actionbar.parent().width());
+      var menubar = gj('div.uiFileViewActionBar');
+      if (menubar) {
+          menubar.width(gj("div#UIActionBar").width()-1);
+      }
       //update width of UIListGrid
       eXo.ecm.ECMUtils.updateListGridWidth();
     }

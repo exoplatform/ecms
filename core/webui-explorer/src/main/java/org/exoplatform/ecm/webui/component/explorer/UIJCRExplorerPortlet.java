@@ -78,10 +78,6 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
    */
   private static final Log LOG  = ExoLogger.getLogger(UIJCRExplorerPortlet.class.getName());
 
-  final static public String REPOSITORY         = "repository";
-
-  final static public String CATEGORY_MANDATORY = "categoryMandatoryWhenFileUpload";
-
   final static public String MAX_SIZE_UPLOAD    = "uploadFileSizeLimitMB";
 
   final static public String ISDIRECTLY_DRIVE   = "isDirectlyDrive";
@@ -108,8 +104,6 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
 
   final static public String SHOW_FILTER_BAR    = "showFilterBar";
 
-  final static public String EDIT_IN_NEW_WINDOW = "editInNewWindow";
-  
   private String backTo ="";
 
   private boolean flagSelect = false;
@@ -250,20 +244,16 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     return getPortletPreferences().getValue(Utils.TRASH_WORKSPACE, "");
   }
 
-  public boolean isEditInNewWindow() {
-    return Boolean.parseBoolean(getPortletPreferences().getValue(UIJCRExplorerPortlet.EDIT_IN_NEW_WINDOW, "true"));
-  }
-
   public PortletPreferences getPortletPreferences() {
     PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
     return pcontext.getRequest().getPreferences();
   }
   
-  public DriveData getUserDrive(String userType) throws Exception {
+  public DriveData getUserDrive() throws Exception {
     ManageDriveService manageDriveService = getApplicationComponent(ManageDriveService.class);
     String userId = Util.getPortalRequestContext().getRemoteUser();
     for(DriveData userDrive : manageDriveService.getPersonalDrives(userId)) {
-      if(userDrive.getName().equalsIgnoreCase(userType)) {
+      if(userDrive.getHomePath().endsWith("/Private")) {
         return userDrive;
       }
     }
@@ -307,15 +297,14 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
         mapParam.put("drive", matcher.group(1));
         mapParam.put("path", matcher.group(2));
         return mapParam;
-      } else {
-        patternUrl = Pattern.compile("(.*)");
-        matcher = patternUrl.matcher(nodePathParam);
-        if (matcher.find()) {
-          mapParam.put("repository", currentRepo);
-          mapParam.put("drive", matcher.group(1));
-          mapParam.put("path", "/");
-          return mapParam;
-        }
+      } 
+      patternUrl = Pattern.compile("(.*)");
+      matcher = patternUrl.matcher(nodePathParam);
+      if (matcher.find()) {
+        mapParam.put("repository", currentRepo);
+        mapParam.put("drive", matcher.group(1));
+        mapParam.put("path", "/");
+        return mapParam;
       }
     }
     return mapParam;
@@ -434,11 +423,9 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     uiAddressBar.setViewList(viewList);
     uiAddressBar.setSelectedViewName(viewList.get(0));
     uiAddressBar.setRendered(isShowTopBar());
-//    if (viewList.size() == 1) uiAddressBar.setRendered(false);
 
     UIWorkingArea uiWorkingArea = findFirstComponentOfType(UIWorkingArea.class);
     UIActionBar uiActionbar = uiWorkingArea.getChild(UIActionBar.class);
-//  uiActionbar.setTabOptions(viewList.get(0));
     boolean isShowActionBar = isShowActionBar() ;
     uiActionbar.setTabOptions(viewList.get(0));
     uiActionbar.setRendered(isShowActionBar);
@@ -485,8 +472,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
                                                 ApplicationMessage.WARNING));
       }
     }
-    uiExplorer.refreshExplorer(null, (isAddNew && isEdit) && isEditInNewWindow());
-    //uiExplorer.setRenderSibling(UIJCRExplorer.class);
+    uiExplorer.refreshExplorer(null, (isAddNew && isEdit));
   }
 
   private boolean canManageNode(Node selectedNode,

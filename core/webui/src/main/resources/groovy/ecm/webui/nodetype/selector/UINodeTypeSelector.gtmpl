@@ -12,25 +12,26 @@
   if(nodeTypes == null) return ;
   int totalPages = uicomponent.getUIPageIterator().getAvailablePage() ;
 %>
-<div class="UINodeTypeList $uicomponent.id">
-<% uiform.begin() %>
-<%
-   uicomponent.renderChild("SearchNodeType");
-%>
- <div class="UINodeTypeList AllDocument">
-    <label for="ALL_DOCUMENT_TYPES"><%=uicomponent.getResource('UINodeTypeSearh.msg.ALL_DOCUMENT_TYPE')%></label>
-    <%
-      uicomponent.renderChild("ALL_DOCUMENT_TYPES");
-    %>
- </div>
- <div>
+<div class="uiNodeTypeList $uicomponent.id resizable">
+	<% uiform.begin() %>
+	<%
+		 uicomponent.renderChild("SearchNodeType");
+	%>
+	<div class="allDocument">
+		<label for="ALL_DOCUMENT_TYPES">
+			<%=uicomponent.getResource("UINodeTypeSearh.msg.ALL_DOCUMENT_TYPE")%>
+			<%
+				uicomponent.renderChild("ALL_DOCUMENT_TYPES");
+			%>
+		</label>
+	</div>
+	<div>
     <table class="uiGrid table table-hover table-striped">
       <thead>
         <tr>
-          <th><%=uicomponent.getResource("UINodeTypeList.header.icon")%></th>
           <th><%=uicomponent.getResource("UINodeTypeList.header.nodeType")%></th>
           <th><%=uicomponent.getResource("UINodeTypeList.header.mixinType")%></th>
-          <th><%=uicomponent.getResource("UINodeTypeList.header.select")%></th>
+          <th width="45" class="center"><%=uicomponent.getResource("UINodeTypeList.header.select")%></th>
         </tr>
       </thead>
       <tbody>
@@ -45,58 +46,55 @@
               else rowClass =  "OddRow" ; 
               even = !even ;
         %>
-            <tr class="$rowClass">
-              <%
-                String nodeType = node.getName();
-                nodeType = nodeType.replace(":", "_");
-              %>
-              <td width="40px" align="center">
-                <div class="default16x16Icon ${nodeType}16x16Icon" style="margin:auto"><span></span></div>
-              </td>
-              <td align="center"><div class="text"><%=node.getName()%></div></td>
-              <td align="center">
-                  <%
-                    String booleanText ;
-                    String iconType ;
-                    if(node.isMixin()) {
-                      booleanText = uicomponent.getResource("UINodeTypeList.label.true");
-                      iconType = "True";
-                    } else {
-                      booleanText = uicomponent.getResource("UINodeTypeList.label.false");
-                      iconType = "False";
-                    }
-                  %>
-                  <div class="TrueFalseContainer">
-                    <div class="Icon16x16 ${iconType}16x16Icon IconNodeType"><span>$booleanText</span></div>
-                  </div>
-              </td>
-              <td align="center">
-                <%
-                  uicomponent.renderChild(node.getName());
-                %>
-              </td>
-            </tr>
+				<tr>
+					<%
+						String nodeType = node.getName();
+						nodeType = nodeType.replace(":", "_");
+					%>
+					<td><%=node.getName()%></td>
+					<td>
+							<%
+								String booleanText ;
+								String iconType ;
+								if(node.isMixin()) {
+									booleanText = uicomponent.getResource("UINodeTypeList.label.true");
+									iconType = "True";
+								} else {
+									booleanText = uicomponent.getResource("UINodeTypeList.label.false");
+									iconType = "False";
+								}
+							%>
+							
+							<span>$booleanText</span>
+							
+					</td>
+					<td class="center">
+						<%
+							uicomponent.renderChild(node.getName());
+						%>
+					</td>
+				</tr>
         <%
           }
         } else {%>
-          <tr class="EvenRow"> 
-            <td colspan="4" style="text-align:center;font-style:italic; color: #EF5604;"><%=uicomponent.getResource("UINodeTypeSelector.msg.no-list")%></td>
+          <tr> 
+            <td colspan="4" class="center empty"><%=uicomponent.getResource("UINodeTypeSelector.msg.no-list")%></td>
           </tr>
         <%}%>
       </tbody>
     </table>
   </div>
   <% if(totalPages>1){ %>
-  <div style="margin:1px 0px 20px 0px;">
-    <%_ctx.renderUIComponent(uicomponent.getUIPageIterator())%>
-  </div>
+
+	<%_ctx.renderUIComponent(uicomponent.getUIPageIterator())%>
+
   <% } %>
-  <div class="UIAction">
-    <% for(action in uicomponent.getActions()) { %>
-           <a onclick="<%=uicomponent.event(action)%>" class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=uicomponent.getResource("UINodeTypeList.action." + action)%></a>
-     <% } %>
-   </div>
   <%uiform.end()%>
+</div>
+<div class="uiAction uiActionBorder">
+	<% for(action in uicomponent.getActions()) { %>
+		 <button type="button" onclick="<%=uicomponent.event(action)%>" class="btn"><%=uicomponent.getResource("UINodeTypeList.action." + action)%></button>
+	 <% } %>
 </div>
 
 

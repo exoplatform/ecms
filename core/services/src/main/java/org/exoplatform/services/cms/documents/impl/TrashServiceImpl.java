@@ -194,7 +194,7 @@ public class TrashServiceImpl implements TrashService {
               linkManager.createLink(tag, clonedNode);
               long total = tag.hasProperty(EXO_TOTAL) ?
                   tag.getProperty(EXO_TOTAL).getLong() : 0;
-                  tag.setProperty(EXO_TOTAL, total + 1);
+                  tag.setProperty(EXO_TOTAL, total - 1);
                   tag.getSession().save();
             }
         }

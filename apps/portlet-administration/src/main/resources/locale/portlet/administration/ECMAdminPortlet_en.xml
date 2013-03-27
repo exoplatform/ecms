@@ -166,7 +166,7 @@
       <Save>Save</Save>
     </action>
     <msg>
-      <name-not-allowed>Forbidden name.</name-not-allowed>
+      <name-not-allowed>Empty name or special characters are not allowed in the action name.</name-not-allowed>
       <path-invalid>The path is invalid.</path-invalid>
       <taxonomy-existed>The category tree already exists.</taxonomy-existed>
       <taxonomy-node-existed>The category node already exists.</taxonomy-node-existed>
@@ -275,12 +275,12 @@
       <UIMetadataForm>Edit Metadata's Template</UIMetadataForm>
     </title>
   </MetadataPopupEdit>
-  <PermissionPopup>
+  <MetataPermissionPopup>
     <title>
       <MetadataPermission>Set Permissions</MetadataPermission>
       <QueriesPermissionBrowse>Add Permissions</QueriesPermissionBrowse>
     </title>
-  </PermissionPopup>
+  </MetataPermissionPopup>
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataForm				 #
@@ -375,7 +375,7 @@
   <PopupDrivePermission>
     <title>
       <AddDrivePermissionSelector>Add Permissions</AddDrivePermissionSelector>
-      <UIPermissionSelector>Set Permissions</UIPermissionSelector>
+      <UIDrivePermissionSelector>Set Permissions</UIDrivePermissionSelector>
     </title>
   </PopupDrivePermission>
   <UIDriveForm>
@@ -403,16 +403,21 @@
       </label>
     </tab>
     <label>
-      <name>Name</name>
-      <workspace>Workspace</workspace>
-      <homePath>Home Path</homePath>
-      <icon>Workspace Icon</icon>
-      <viewPreferences>Show Referenced Documents</viewPreferences>
-      <viewNonDocument>Show Non-document Nodes</viewNonDocument>
-      <viewSideBar>Show Sidebar</viewSideBar>
-      <permissions>Permissions</permissions>
-      <showHiddenNode>Show Hidden Nodes</showHiddenNode>
-      <allowCreateFolder>Allow Folder Creation</allowCreateFolder>
+      <name>Name:</name>
+      <workspace>Workspace:</workspace>
+      <homePath>Home Path:</homePath>
+      <icon>Workspace Icon:</icon>
+      <viewPreferences>Show Referenced Documents:</viewPreferences>
+      <viewNonDocument>Show Non-document Nodes:</viewNonDocument>
+      <viewSideBar>Show Sidebar:</viewSideBar>
+      <permissions>Permissions:</permissions>
+      <showHiddenNode>Show Hidden Nodes:</showHiddenNode>
+      <allowCreateFolder>Allow Folder Creation:</allowCreateFolder>
+      <Admin>Admin:</Admin>
+      <Categories>Categories:</Categories>
+      <Icons>Icons:</Icons>
+      <List>List:</List>
+      <Web>Web:</Web>
     </label>
   </UIDriveForm>
   <AddDriveManagerPopup>
@@ -721,7 +726,7 @@
         <nodeTypeDefinition>Node Type</nodeTypeDefinition>
         <propertyDefinition>Property</propertyDefinition>
         <childNodeDefinition>Child Node</childNodeDefinition>
-        <SuperTypeTab>Super Types</SuperTypeTab>
+        <superTypeTab>Super Types</superTypeTab>
         <DefaultTypeTab>Default Primary</DefaultTypeTab>
         <RequiredTypeTab>Required Primary</RequiredTypeTab>
         <Contraints>Constraints</Contraints>
@@ -1304,12 +1309,12 @@
       </label>
     </tab>
     <label>
-      <name>Name</name>
-      <label>Label</label>
-      <isDocumentTemplate>is Document Template</isDocumentTemplate>
+      <name>Name:</name>
+      <label>Label:</label>
+      <isDocumentTemplate>is Document Template:</isDocumentTemplate>
       <dialog>Dialog Content</dialog>
       <view>View Content</view>
-      <permission>Permission</permission>
+      <permission>Permission:</permission>
       <selectPemistion>Permission</selectPemistion>
     </label>
   </UITemplateForm>
@@ -1320,11 +1325,11 @@
   -->
   <ecmTempForm>
     <label>
-      <version>Select Version</version>
-      <content>Content</content>
-      <name>Name</name>
-      <homeTemplate>Template Type</homeTemplate>
-      <enableVersion>Enabled Version</enableVersion>
+      <version>Select Version:</version>
+      <content>Content:</content>
+      <name>Name:</name>
+      <homeTemplate>Template Type:</homeTemplate>
+      <enableVersion>Enabled Version:</enableVersion>
     </label>
   </ecmTempForm>
   <ecmTempFormPopup>
@@ -1930,6 +1935,11 @@
       <UIPermissionSelector>Select Permission</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
+  <TemplatePermission>
+    <title>
+      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+    </title>
+  </TemplatePermission>
   <TemplateContainerPopup>
     <title>
       <UITemplateForm>Template Form</UITemplateForm>
@@ -1940,10 +1950,10 @@
       <UITemplateContent>ViewForm</UITemplateContent>
       <UIPopupWindow>View Permission</UIPopupWindow>
       <selectVersion>Versions</selectVersion>
-      <content>Content</content>
-      <name>Name</name>
+      <content>Content:</content>
+      <name>Name:</name>
       <isDocumentTemplate>is Document Template</isDocumentTemplate>
-      <viewPermission>Permission</viewPermission>
+      <viewPermission>Permission:</viewPermission>
       <enableVersion>is Enabled Version</enableVersion>
     </label>
     <title>Add/Edit View</title>
@@ -1953,10 +1963,10 @@
       <UITemplateContent>DialogForm</UITemplateContent>
       <UIPopupWindow>Dialog Permission</UIPopupWindow>
       <selectVersion>Versions</selectVersion>
-      <content>Content</content>
-      <name>Name</name>
+      <content>Content:</content>
+      <name>Name:</name>
       <isDocumentTemplate>is Document Template</isDocumentTemplate>
-      <viewPermission>Permission</viewPermission>
+      <viewPermission>Permission:</viewPermission>
       <enableVersion>is Enabled Version</enableVersion>
     </label>
     <title>Add/Edit Dialog</title>
@@ -1996,9 +2006,9 @@
   -->
   <UITemplateEditForm>
     <label>
-      <name>Name</name>
-      <label>Label</label>
-      <isDocumentTemplate>is Document Template</isDocumentTemplate>
+      <name>Name:</name>
+      <label>Label:</label>
+      <isDocumentTemplate>is Document Template:</isDocumentTemplate>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2157,6 +2167,11 @@
       <UIQueriesForm>Edit Query</UIQueriesForm>
     </title>
   </EditQueryForm>
+	<PermissionPopup>
+	  <title>
+	    <UIGroupMemberSelector>Select Permission</UIGroupMemberSelector>
+	  </title>
+	</PermissionPopup>
   <!--
   ######################################################################################
   #             org.exoplatform.ecm.webui.component.admin.folksonomy									 #
@@ -2331,6 +2346,13 @@
       <anyPermission>Any Permission</anyPermission>
     </label>
   </UIAnyPermission>
+  
+  <UIQueriesAnyPermission>
+    <label>
+      <anyPermission>Any Permission</anyPermission>
+    </label>
+  </UIQueriesAnyPermission>
+  
   <MetadataPermission>
     <label>
       <selectGroup>Select Group</selectGroup>
@@ -2426,11 +2448,6 @@
       <exo_webFolder>Web Content Folder</exo_webFolder>
    </label>
   </DriveInputSet>
-		<UIDriveForm>
-			<label>
-  		<allowCreateFolders>Allow Folder Creation</allowCreateFolders>	
-  	</label>
-  </UIDriveForm>  
   <UIPermissionTreeInfo>
   	<msg>
       <confirm-delete-permission>Are you sure to delete this permission?</confirm-delete-permission>
@@ -2478,8 +2495,8 @@
   </UILockHolderList>
   <UILockNodeList>
   	<header>
-  		<name>Node Path</name>
-  		<hoderLock>User Lock</hoderLock>
+  		<name>Title</name>
+  		<hoderLock>Lock Owner</hoderLock>
   		<action>Action</action>
   	</header>
   	<tooltip>
@@ -2550,10 +2567,10 @@
       <UITemplateContent>SkinForm</UITemplateContent>
       <UIPopupWindow>Skin Permission</UIPopupWindow>
       <selectVersion>Versions</selectVersion>
-      <content>Content</content>
-      <name>Name</name>
+      <content>Content:</content>
+      <name>Name:</name>
       <isDocumentTemplate>is Document Template</isDocumentTemplate>
-      <viewPermission>Permission</viewPermission>
+      <viewPermission>Permission:</viewPermission>
       <enableVersion>is Enabled Version</enableVersion>
     </label>
     <title>Add/Edit Skin</title>
@@ -2709,7 +2726,7 @@
   </UIDriveForm>
 	<UIDriveForm>
 		<label>
-			<allowNodeTypesOnTree>Allowance nodetype on left tree</allowNodeTypesOnTree>
+			<allowNodeTypesOnTree>Allowance nodetype on left tree:</allowNodeTypesOnTree>
 		</label>
 	</UIDriveForm>
 	<DriveInputSet>

@@ -1,4 +1,4 @@
-﻿(function(gj, uiForm) {
+(function(gj, uiForm) {	
 	/**
 	 * Variable to check if some content has changed
 	 * - true if some content has changed
@@ -239,3 +239,4 @@
 	  } catch(e) {}  
 	};
 })(gj, uiForm);
+

@@ -40,11 +40,14 @@ import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserNodeFilterConfig;
 import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.mop.user.UserPortalImpl;
+import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.application.WebuiRequestContext;
+
 
 /**
  * Created by The eXo Platform SAS
@@ -98,7 +101,30 @@ public class NavigationUtils {
             userACL.hasEditPermission(userPortalCfg.getPortalConfig()));
   }
   
-  public static void removeNavigationAsJson (String portalName, String username) throws Exception {
+  /**
+   * @purpose Get UserNavigation of a specified element
+   * @param UserPortal
+   * @param Site Key
+   * @return UserNavigation of group  
+   */
+  public static UserNavigation getUserNavigation(UserPortal userPortal, SiteKey siteKey) throws Exception {
+      UIPortalApplication portalApp = Util.getUIPortalApplication();
+	    UserACL userACL = WCMCoreUtils.getService(UserACL.class);
+	    UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
+	    //userPortalConfigService.get
+	    NavigationContext portalNav = userPortalConfigService.getNavigationService().
+	                                                          loadNavigation(siteKey);
+	    if (portalNav == null) {
+	      return null;
+	    } else {
+	      return userNavigationCtor.newInstance(
+                userPortal, portalNav, 
+                userACL.hasEditPermission(portalApp.getUserPortalConfig().getPortalConfig()));
+	    }
+	  }
+  
+  public static void removeNavigationAsJson (String portalName, String username) throws Exception
+  {
     String key = portalName + " " + username;
     Map<String, String> navigations = gotNavigationKeeper.get();
     if (navigations != null) {

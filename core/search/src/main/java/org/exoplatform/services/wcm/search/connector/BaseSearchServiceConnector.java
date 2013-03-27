@@ -26,6 +26,7 @@ import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
+import org.exoplatform.services.cms.impl.Utils;
 
 import org.exoplatform.commons.api.search.SearchServiceConnector;
 import org.exoplatform.commons.api.search.data.SearchContext;
@@ -66,11 +67,6 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
   public static final String NONE_NAGVIGATION = "#";
   public static final String PORTLET_NAME = "FileExplorerPortlet";
   
-  
-  private static final long KB = 1024L;
-  private static final long MB = 1024L*KB;
-  private static final long GB = 1024L*MB;
-  
   public BaseSearchServiceConnector(InitParams initParams) throws Exception {
     super(initParams);
     siteSearch_ = WCMCoreUtils.getService(SiteSearchService.class);
@@ -90,7 +86,8 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
     QueryCriteria criteria = createQueryCriteria(query, offset, limit, sort, order);
     //query search result
     try {
-      if (sites == null || sites.size() == 0) {
+      if (sites == null || sites.size() == 0 || 
+          ConversationState.getCurrent().getIdentity().getUserId() != null) {
         criteria.setSiteName(null);
         ret = convertResult(searchNodes(criteria), limit, context);
       } else if (sites.size() == 1) {
@@ -159,29 +156,37 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
       if (pageList != null) {
         for (int i = 1; i <= pageList.getAvailablePage(); i++) {
           for (Object obj : pageList.getPage(i)) {
-            if (obj instanceof ResultNode) {
-              ResultNode retNode = filterNode((ResultNode)obj);
-              if (retNode == null) {
-                continue;
+            try {
+              if (obj instanceof ResultNode) {
+                ResultNode retNode = filterNode((ResultNode)obj);
+                if (retNode == null) {
+                  continue;
+                }
+                //generate SearchResult object
+                DriveData driveData = getDriveData(retNode);
+                Calendar date = getDate(retNode);
+                EcmsSearchResult result = 
+                //  new SearchResult(url, title, excerpt, detail, imageUrl, date, relevancy);
+                    new EcmsSearchResult(getPath(driveData, retNode, context), 
+                                         getTitleResult(retNode), 
+                                         retNode.getExcerpt(), 
+                                         (driveData == null ? "" : driveData.getName()) + fileSize(retNode) + formatDate(date), 
+                                         getImageUrl(), 
+                                         date.getTimeInMillis(), 
+                                         (long)retNode.getScore(),
+                                         getFileType(retNode));
+                if (result != null) {
+                  ret.add(result);
+                }
+                if (ret.size() >= limit) {
+                  return ret;
+                }
+              }//if
+            } catch (Exception e) {
+              if (LOG.isErrorEnabled()) {
+                LOG.error(e);
               }
-              //generate SearchResult object
-              DriveData driveData = getDriveData(retNode);
-              Calendar date = getDate(retNode);
-              EcmsSearchResult result = 
-              //  new SearchResult(url, title, excerpt, detail, imageUrl, date, relevancy);
-                  new EcmsSearchResult(getPath(driveData, retNode, context), 
-                                       retNode.getTitle(), 
-                                       retNode.getExcerpt(), 
-                                       driveData.getName() + fileSize(retNode) + formatDate(date), 
-                                       getImageUrl(), 
-                                       date.getTimeInMillis(), 
-                                       (long)retNode.getScore(),
-                                       getFileType(retNode));
-              ret.add(result);
-              if (ret.size() >= limit) {
-                return ret;
-              }
-            }//if
+            }
           }//for inner
         } //for outer
       }//if
@@ -202,44 +207,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
    * @throws Exception
    */
   protected String fileSize(Node node) throws Exception {
-    if (!node.isNodeType("nt:file")) {
-      return "";
-    }
-    StringBuffer ret = new StringBuffer();
-    ret.append(" - ");
-    long size = 0;
-    try {
-      size = node.getProperty("jcr:content/jcr:data").getLength();
-    } catch (Exception e) {
-      LOG.error("Can not get file size", e);
-    }
-    long byteSize = size % KB;
-    long kbSize = (size % MB) / KB;
-    long mbSize = (size % GB) / MB;
-    long gbSize = size / GB;
-    
-    if (gbSize >= 1) {
-      ret.append(gbSize).append(refine(mbSize)).append(" GB");
-    } else if (mbSize >= 1) {
-      ret.append(mbSize).append(refine(kbSize)).append(" MB");
-    } else if (kbSize > 1) {
-      ret.append(kbSize).append(refine(byteSize)).append(" KB");
-    } else {
-      ret.append("1 KB");
-    }
-    return ret.toString();
-  }
-  
-  /**
-   * refines the size up to 3 digits, add '0' in front if necessary.
-   * @param size the size
-   * @return the size in 3 digit format
-   */
-  private String refine(long size) {
-    if (size == 0) {
-      return "";
-    }
-    return "," + Math.round(Float.valueOf("0." + size));
+    return Utils.fileSize(node);
   }
   
   /**
@@ -317,5 +285,13 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
    * @throws Exception
    */
   protected abstract String getFileType(ResultNode node) throws Exception;
+  
+  /**
+   * gets the title of result, based on the result type
+   * @param node
+   * @return
+   * @throws Exception
+   */
+  protected abstract String getTitleResult(ResultNode node) throws Exception;
   
 }

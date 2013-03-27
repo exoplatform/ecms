@@ -35,7 +35,22 @@ import org.exoplatform.webui.event.EventListener;
 public class UIPopupWindow extends org.exoplatform.webui.core.UIPopupWindow {
   private int top_ = -1;
   private int left_ = -1;
+  private boolean isMiddle = false;
 
+  /**
+   * @return the isMiddle
+   */
+  public boolean isMiddle() {
+    return isMiddle;
+  }
+  
+  /**
+   * @param isMiddle the isMiddle to set
+   */
+  public void setMiddle(boolean isMiddle) {
+    this.isMiddle = isMiddle;
+  }
+  
   public int getWindowTop()
   {
      return top_;

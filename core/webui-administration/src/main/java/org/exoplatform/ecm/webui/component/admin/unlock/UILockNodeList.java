@@ -18,6 +18,7 @@ package org.exoplatform.ecm.webui.component.admin.unlock;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.jcr.AccessDeniedException;
@@ -34,6 +35,9 @@ import javax.jcr.version.VersionException;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.ComponentRequestLifecycle;
+import org.exoplatform.ecm.jcr.model.Preference;
+import org.exoplatform.ecm.webui.comparator.NodeOwnerComparator;
+import org.exoplatform.ecm.webui.comparator.NodeTitleComparator;
 import org.exoplatform.ecm.webui.core.UIPagingGridDecorator;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
@@ -66,14 +70,43 @@ import org.exoplatform.webui.event.EventListener;
 @ComponentConfig(
     template = "app:/groovy/webui/component/admin/unlock/UILockNodeList.gtmpl",
     events = {
-        @EventConfig(listeners = UILockNodeList.UnLockActionListener.class)
+        @EventConfig(listeners = UILockNodeList.UnLockActionListener.class),
+        @EventConfig(listeners = UILockNodeList.SortActionListener.class)
     }
 )
 public class UILockNodeList extends UIPagingGridDecorator {
   final static public String[] ACTIONS = {};
   final static public String ST_EDIT = "EditUnLockForm";
+  private Preference preferences_;
 
   private static final String LOCK_QUERY = "select * from mix:lockable where jcr:lockOwner IS NOT NULL order by exo:dateCreated DESC";
+  private String typeSort_ = Preference.SORT_BY_NODETYPE;
+  private String sortOrder_ = Preference.BLUE_UP_ARROW;
+  private String order_ = Preference.ASCENDING_ORDER;
+  
+  public static final String SORT_BY_NODENAME = "Alphabetic" ;
+  public static final String SORT_BY_NODEOWNER= "Owner" ;
+  
+  
+  public String getTypeSort() { return typeSort_; }
+
+  public void setTypeSort(String typeSort) {
+    typeSort_ = typeSort;
+  }
+
+  public String getSortOrder() { return sortOrder_; }
+
+  public void setSortOrder(String sortOrder) {
+    sortOrder_ = sortOrder;
+  }
+  
+  public String getOrder() { return order_; }
+
+  public void setOrder(String order) {
+    order_ = order;
+  }
+  
+  public void setPreferences(Preference preference) {this.preferences_ = preference; }
 
   public UILockNodeList() throws Exception {
     getUIPageIterator().setId("LockNodeListIterator");
@@ -95,7 +128,7 @@ public class UILockNodeList extends UIPagingGridDecorator {
   }
 
   public List getLockedNodeList() throws Exception {
-    return NodeLocation.getNodeListByLocationList(getUIPageIterator().getCurrentPageData());
+    return sort(NodeLocation.getNodeListByLocationList(getUIPageIterator().getCurrentPageData()));
   }
 
   public List<Node> getAllLockedNodes() throws Exception {
@@ -123,8 +156,45 @@ public class UILockNodeList extends UIPagingGridDecorator {
         }
       }
     }
-
     return listLockedNodes;
+  }
+  
+  private List<Node> sort(List<Node> childrenList) {
+  	if (SORT_BY_NODENAME.equals(this.getTypeSort()))
+      Collections.sort(childrenList, new NodeTitleComparator(this.getOrder())) ;
+  	else if(SORT_BY_NODEOWNER.equals(this.getTypeSort()))
+  		Collections.sort(childrenList, new NodeOwnerComparator(this.getOrder())) ;
+		return childrenList;
+   
+  }
+  
+  static public class SortActionListener extends EventListener<UILockNodeList> {
+    public void execute(Event<UILockNodeList> event) throws Exception {
+    	UILockNodeList uicomp = event.getSource();
+    	UIUnLockManager uiUnLockManager = event.getSource().getParent();
+      UIApplication uiApp = uiUnLockManager.getAncestorOfType(UIApplication.class);
+      
+      
+      try {
+        String sortParam = event.getRequestContext().getRequestParameter(OBJECTID) ;
+        String[] array = sortParam.split(";");
+        String order = Preference.ASCENDING_ORDER.equals(array[0].trim()) || !array[1].trim().equals(uicomp.getTypeSort()) ? 
+                       Preference.BLUE_DOWN_ARROW : Preference.BLUE_UP_ARROW;
+        
+        String prefOrder = Preference.ASCENDING_ORDER.equals(array[0].trim()) || !array[1].trim().equals(uicomp.getTypeSort())?
+                           Preference.ASCENDING_ORDER : Preference.DESCENDING_ORDER;                                                                                                     
+        uicomp.setSortOrder(order);
+        uicomp.setTypeSort(array[1]);
+        uicomp.setOrder(prefOrder);
+        uiUnLockManager.refresh();
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiUnLockManager);
+      } catch (Exception e) {
+        JCRExceptionManager.process(uiApp, e);
+        return;
+      }
+      
+      
+    }
   }
 
   static public class UnLockActionListener extends EventListener<UILockNodeList> {

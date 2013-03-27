@@ -277,12 +277,12 @@
       <UIMetadataForm>メタデータテンプレートの編集</UIMetadataForm>
     </title>
   </MetadataPopupEdit>
-  <PermissionPopup>
+  <MetataPermissionPopup>
     <title>
       <MetadataPermission>権限の選択</MetadataPermission>
       <QueriesPermissionBrowse>権限の追加</QueriesPermissionBrowse>
     </title>
-  </PermissionPopup>
+  </MetataPermissionPopup>
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataForm				 #
@@ -375,8 +375,8 @@
   </UIDriveList>
   <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>権限の追加</AddDrivePermissionSelector>
-      <UIPermissionSelector>権限の選択</UIPermissionSelector>
+      <AddDrivePermissionSelector>Add Permissions</AddDrivePermissionSelector>
+      <UIDrivePermissionSelector>Set Permissions</UIDrivePermissionSelector>
     </title>
   </PopupDrivePermission>
   <UIDriveForm>
@@ -722,7 +722,7 @@
         <nodeTypeDefinition>ノードタイプ</nodeTypeDefinition>
         <propertyDefinition>プロパティ</propertyDefinition>
         <childNodeDefinition>子ノード</childNodeDefinition>
-        <SuperTypeTab>Superタイプ</SuperTypeTab>
+        <superTypeTab>Superタイプ</superTypeTab>
         <DefaultTypeTab>デフォルトプライマリ</DefaultTypeTab>
         <RequiredTypeTab>必須プライマリ</RequiredTypeTab>
         <Contraints>制約</Contraints>
@@ -1706,6 +1706,11 @@
       <UIPermissionSelector>権限の選択</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
+  <TemplatePermission>
+    <title>
+      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+    </title>
+  </TemplatePermission>
   <TemplateContainerPopup>
     <title>
       <UITemplateForm>テンプレートフォーム</UITemplateForm>

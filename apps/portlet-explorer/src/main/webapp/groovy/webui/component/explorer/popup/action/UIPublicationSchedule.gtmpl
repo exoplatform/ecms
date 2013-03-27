@@ -15,6 +15,10 @@
         <button type="button" onclick="$saveLink" class="btn btn-primary">$saveLabel</a>
         <button type="button" onclick="$resetLink" class="btn">$resetLabel</a>
     </div>
-    <span class="help-block"><%=_ctx.appRes("UIPublicationSchedule.label.no-schedule-info")%></span>
+    <span class="help-block">
+    <% if (!uiform.hasPublicationSchedule()) { %>
+        <%=_ctx.appRes("UIPublicationSchedule.label.no-schedule-info")%>
+    <% }%>
+    </span>
 </div>
 <% uiform.end(); %>

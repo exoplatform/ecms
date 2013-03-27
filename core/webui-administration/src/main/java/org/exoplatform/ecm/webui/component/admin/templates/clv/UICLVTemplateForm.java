@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
@@ -118,7 +119,13 @@ public class UICLVTemplateForm extends UIForm {
     Node templateNode = templateManager.getTemplateByName(ApplicationTemplateManagerService.CLV_TEMPLATE_STORAGE_FOLDER, 
             category, name, WCMCoreUtils.getUserSessionProvider());
     Node content = templateNode.getNode(Utils.JCR_CONTENT);
-    getUIStringInput(FIELD_TITLE).setValue(content.getProperty(NodetypeConstant.DC_TITLE).getValues()[0].getString());
+    try {
+      getUIStringInput(FIELD_TITLE).setValue(content.getProperty(NodetypeConstant.DC_TITLE).getValues()[0].getString());
+    } catch(PathNotFoundException pne) {
+      getUIStringInput(FIELD_TITLE).setValue(templateNode.getName());
+    } catch(ArrayIndexOutOfBoundsException aoe) {
+      getUIStringInput(FIELD_TITLE).setValue(templateNode.getName());
+    }
     getUIStringInput(FIELD_TEMPLATE_NAME).setValue(templateNode.getName());
     getUIStringInput(FIELD_TEMPLATE_NAME).setDisabled(true);
     getUIFormTextAreaInput(FIELD_CONTENT).setValue(content.getProperty(Utils.JCR_DATA).getString());

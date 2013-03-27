@@ -178,6 +178,16 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
     return wsInitRootNodeType;
   }
 
+  /* (non-Javadoc)
+   * @see org.exoplatform.webui.form.UIForm#processRender(org.exoplatform.webui.application.WebuiRequestContext)
+   */
+  @Override
+  public void processRender(WebuiRequestContext context) throws Exception {
+    context.getJavascriptManager().require("SHARED/jquery", "gj")
+      .addScripts("gj(document).ready(function() { gj(\"*[rel='tooltip']\").tooltip();});");
+    super.processRender(context);
+  }
+  
   static public class SaveActionListener extends EventListener<UIDriveForm> {
     public void execute(Event<UIDriveForm> event) throws Exception {
       UIDriveForm uiDriveForm = event.getSource();

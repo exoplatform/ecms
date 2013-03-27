@@ -34,8 +34,8 @@
 	</tr>	 				 	
 </table>
 <%/* start render action*/%>
-<div class="UIAction"> 
-    <a href="javascript:void(0);" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("SiteMetadata.view.tooltip.add-edit")%>" onclick="<%=uicomponent.event("EditProperty", "metadata:siteMetadata")%>" class="ActionButton LightBlueStyle"><%=_ctx.appRes("SiteMetadata.view.action.add-edit")%></a>
-    <a href="javascript:void(0);" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("SiteMetadata.view.tooltip.cancel")%>" onclick="<%=uicomponent.event("Cancel")%>" class="ActionButton LightBlueStyle"><%=_ctx.appRes("SiteMetadata.view.action.cancel")%></a>
+<div class="uiAction"> 
+    <button type="button" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("SiteMetadata.view.tooltip.add-edit")%>" onclick="<%=uicomponent.event("EditProperty", "metadata:siteMetadata")%>" class="btn"><%=_ctx.appRes("SiteMetadata.view.action.add-edit")%></button>
+    <button type="button" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("SiteMetadata.view.tooltip.cancel")%>" onclick="<%=uicomponent.event("Cancel")%>" class="btn"><%=_ctx.appRes("SiteMetadata.view.action.cancel")%></button>
 </div>
 <%/* end render action*/%>

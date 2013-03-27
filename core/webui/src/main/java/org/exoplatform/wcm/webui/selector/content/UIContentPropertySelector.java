@@ -10,6 +10,7 @@ import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.nodetype.PropertyDefinition;
 
+import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -17,8 +18,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.wcm.webui.Utils;
-import org.exoplatform.wcm.webui.core.UIPopupWindow;
+import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
@@ -111,7 +111,10 @@ public class UIContentPropertySelector extends UIForm{
   static  public class CancelActionListener extends EventListener<UIContentPropertySelector> {
     public void execute(Event<UIContentPropertySelector> event) throws Exception {
       UIContentPropertySelector contentPropertySelector = event.getSource();
-      Utils.closePopupWindow(contentPropertySelector, WEB_CONTENT_METADATA_POPUP);
+      UIPopupWindow uiPopupWindow = contentPropertySelector.getParent();
+      uiPopupWindow.setRendered(false);
+      uiPopupWindow.setShow(false);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupWindow);
     }
   }
 
@@ -119,13 +122,16 @@ public class UIContentPropertySelector extends UIForm{
     public void execute(Event<UIContentPropertySelector> event) throws Exception {
       UIContentPropertySelector contentPropertySelector = event.getSource();
       String property = contentPropertySelector.<UIFormRadioBoxInput>getUIInput(PROPERTY_SELECT).getValue();
-      UIPopupWindow popupWindow = Utils.getPopupContainer(contentPropertySelector)
-                                       .getChildById(UIContentSelector.CORRECT_CONTENT_SELECTOR_POPUP_WINDOW);
-      UIContentSelector contentSelector = (UIContentSelector) popupWindow.getUIComponent();
-      UIContentSearchForm contentSearchForm =contentSelector.findFirstComponentOfType(UIContentSearchForm.class);
+      UIPopupWindow uiPopupWindow = contentPropertySelector.getParent();
+      UIContainer uiContainer = uiPopupWindow.getAncestorOfType(UIContainer.class);
+      UIContentSelector contentSelector = (UIContentSelector) uiContainer.findFirstComponentOfType(UIContentSelector.class);
+      UIContentSearchForm contentSearchForm = contentSelector.findFirstComponentOfType(UIContentSearchForm.class);
       contentSearchForm.getUIStringInput(contentPropertySelector.getFieldName()).setValue(property);
-      Utils.closePopupWindow(contentPropertySelector, WEB_CONTENT_METADATA_POPUP);
+      uiPopupWindow.setRendered(false);
+      uiPopupWindow.setShow(false);
       contentSelector.setSelectedTab(contentSearchForm.getId());
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupWindow);
+      event.getRequestContext().addUIComponentToUpdateByAjax(contentSearchForm);
     }
   }
 

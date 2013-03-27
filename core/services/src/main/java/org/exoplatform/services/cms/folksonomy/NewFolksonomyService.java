@@ -21,6 +21,8 @@ import java.util.List;
 import javax.jcr.Node;
 
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.ext.distribution.DataDistributionMode;
+import org.exoplatform.services.jcr.ext.distribution.DataDistributionType;
 
 /**
  * Created by The eXo Platform SARL Author : Nguyen Anh Vu anhvurz90@gmail.com
@@ -256,7 +258,19 @@ public interface NewFolksonomyService {
    * @throws Exception
    */
   public Node modifyTagName(String tagPath, String newTagName, String workspace) throws Exception;
-
+  
+  /**
+   * Modify tag name
+   *
+   * @param tagPath Path of tag
+   * @param newTagName New tag name
+   * @param workspace Workspace name
+   * @param treeTagPath Tree tag path
+   * @return
+   * @throws Exception
+   */
+  public Node modifyPublicTagName(String tagPath, String newTagName, String workspace, String treeTagPath) throws Exception;  
+  
   /**
    * Get all tags linked to given document
    *
@@ -331,4 +345,11 @@ public interface NewFolksonomyService {
    * @return true If it is possible
    */
   public List<String> getAllTagNames(String workspace, int scope, String value) throws Exception;
+  
+  /**
+   * Gets DataDistributionType object 
+   * @return the DataDistributionType object
+   */
+  public DataDistributionType getDataDistributionType();
+    
 }

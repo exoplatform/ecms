@@ -24,13 +24,15 @@ import java.util.List;
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 
-import org.exoplatform.ecm.permission.PermissionBean;
 import org.exoplatform.ecm.permission.info.UIPermissionInputSet;
 import org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyManagerTrees;
 import org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeContainer;
+import org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeList;
 import org.exoplatform.ecm.webui.component.admin.taxonomy.action.UIActionForm;
 import org.exoplatform.ecm.webui.component.admin.taxonomy.action.UIActionTaxonomyManager;
 import org.exoplatform.ecm.webui.component.admin.taxonomy.info.UIPermissionForm;
+import org.exoplatform.ecm.webui.core.UIPermissionFormBase;
+import org.exoplatform.ecm.webui.core.bean.PermissionBean;
 import org.exoplatform.ecm.webui.selector.UIAnyPermission;
 import org.exoplatform.ecm.webui.selector.UIGroupMemberSelector;
 import org.exoplatform.ecm.webui.selector.UISelectable;
@@ -52,12 +54,12 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIBreadcumbs;
 import org.exoplatform.webui.core.UIContainer;
+import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.UITree;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.form.UIForm;
+import org.exoplatform.webui.event.Event.Phase;
 
 /**
  * Created by The eXo Platform SARL
@@ -68,7 +70,7 @@ import org.exoplatform.webui.form.UIForm;
 
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    template = "system:/groovy/webui/form/UIFormWithTitle.gtmpl",
+    template = "app:/groovy/webui/component/admin/taxonomy/UIPermissionTreeForm.gtmpl",
     events = {
       @EventConfig(listeners = UIPermissionTreeForm.SaveActionListener.class),
       @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.NextAddActionActionListener.class),
@@ -77,10 +79,11 @@ import org.exoplatform.webui.form.UIForm;
       @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.SelectUserActionListener.class),
       @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.SelectMemberActionListener.class),
       @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.AddAnyActionListener.class),
-      @EventConfig(phase = Phase.DECODE, listeners = UIPermissionInputSet.OnChangeActionListener.class)
+      @EventConfig(phase = Phase.DECODE, listeners = UIPermissionInputSet.OnChangeActionListener.class),
+      @EventConfig(listeners = UIPermissionTreeForm.CancelActionListener.class)
     }
 )
-public class UIPermissionTreeForm extends UIForm implements UISelectable {
+public class UIPermissionTreeForm extends UIPermissionFormBase implements UISelectable {
 
   public static final String PERMISSION      = "permission";
 
@@ -96,24 +99,15 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
   private PermissionBean     permBean;
 
   public UIPermissionTreeForm() throws Exception {
-    addChild(new UIPermissionInputSet(PERMISSION));
-    setActions(new String[] { "Previous", "Save", "Reset", "NextAddAction" });
+    super();
+    setActions(new String[] { "Previous", "NextAddAction", "Cancel"});
   }
 
-  private void refresh() {
-    reset();
-    checkAll(false);
-  }
-
-  private void checkAll(boolean check) {
+  public void checkAll(boolean check) {
     UIPermissionInputSet uiInputSet = getChildById(PERMISSION) ;
     for (String perm : PermissionType.ALL) {
     	if(uiInputSet.getUICheckBoxInput(perm) != null) uiInputSet.getUICheckBoxInput(perm).setChecked(check);
     }
-  }
-
-  protected boolean isEditable(Node node) throws Exception {
-    return PermissionUtil.canChangePermission(node);
   }
 
   public void fillForm(String user, ExtendedNode node) throws Exception {
@@ -156,20 +150,16 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
   protected void lockForm(boolean isLock) {
     UIPermissionInputSet uiInputSet = getChildById(PERMISSION);
     if (isLock) {
-      setActions(new String[] { "Previous", "Reset", "NextAddAction" });
+      setActions(new String[] { "Previous", "NextAddAction", "Cancel" });
       uiInputSet.setActionInfo(UIPermissionInputSet.FIELD_USERORGROUP, null);
     } else {
-      setActions(new String[] { "Previous", "Save", "Reset", "NextAddAction" });
+      setActions(new String[] { "Previous", "NextAddAction", "Cancel" });
       uiInputSet.setActionInfo(UIPermissionInputSet.FIELD_USERORGROUP, new String[] { "SelectUser",
           "SelectMember", "AddAny" });
     }
     for (String perm : PERMISSIONS) {
       uiInputSet.getUICheckBoxInput(perm).setDisabled(isLock);
     }
-  }
-
-  private String getExoOwner(Node node) throws Exception {
-    return Utils.getNodeOwner(node);
   }
 
   public Node getCurrentNode() {
@@ -374,4 +364,20 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTaxonomyManagerTrees);
     }
   }
+  
+  public static class CancelActionListener extends EventListener<UIPermissionTreeForm> {
+    public void execute(Event<UIPermissionTreeForm> event) throws Exception {
+      UIPermissionTreeForm uiForm = event.getSource();
+      UITaxonomyTreeContainer uiTaxonomyTreeContainer = uiForm.getAncestorOfType(UITaxonomyTreeContainer.class);
+      UIPopupWindow uiPopup = uiTaxonomyTreeContainer.getParent();
+      UITaxonomyManagerTrees uiTaxonomyManagerTrees = uiTaxonomyTreeContainer.getAncestorOfType(UITaxonomyManagerTrees.class);
+      uiTaxonomyManagerTrees.removeChildById(UITaxonomyTreeList.ST_ADD);
+      uiTaxonomyManagerTrees.removeChildById(UITaxonomyTreeList.ST_EDIT);
+      uiTaxonomyManagerTrees.update();
+      uiPopup.setRendered(false);
+      uiPopup.setShow(false);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiTaxonomyManagerTrees);
+    }
+  }
+  
 }

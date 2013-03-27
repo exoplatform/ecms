@@ -47,8 +47,8 @@
 	
 	if (isShowCategories || isShowTags) {
 		%>
-			<div class="WebContentContainer">
-				<div class="WebContentInformation">
+			<div class="webContentContainer">
+				<div class="webContentInformation">
 					<% 
 						if(isShowCategories) {
 							TaxonomyService taxonomyService = uicomponent.getApplicationComponent(TaxonomyService.class);
@@ -60,7 +60,7 @@
 				       	}
 				    	 	categories.replace(categories.lastIndexOf(", "), categories.size(), "");
 								%>
-						  		<span class="Categories"><strong><%=_ctx.appRes("Category.view.label")%>:</strong> <%= categories.toString() %></span>
+						  		<span class="categories"><strong><%=_ctx.appRes("Category.view.label")%>:</strong> <%= categories.toString() %></span>
 								<%		
 			      	}
 						}
@@ -75,7 +75,7 @@
 								}
 								tagBuff.replace(tagBuff.lastIndexOf(", "), tagBuff.size(), "]");
 								%>
-									<span class="Tags"><strong><%=_ctx.appRes("Tag.view.label")%>:</strong> <%= tagBuff.toString() %></span>
+									<span class="tags"><strong><%=_ctx.appRes("Tag.view.label")%>:</strong> <%= tagBuff.toString() %></span>
 								<%	
 							}	
 						}

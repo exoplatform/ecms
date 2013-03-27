@@ -262,24 +262,23 @@
 }
 
 .uiListGrid { 
-	.Icon16x16 {
-		float: none;
-		margin: auto;
-		width: 20px;
-		line-height: 16px;
+	
+	[class^="uiIcon24x24"] {
+		position: relative;
 	}
 	
-	.LinkSmall {
-		background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/background/LinkSmall.gif') no-repeat right bottom;
-		width: 20px;
+	.LinkSmall,.IconLocked  {
+		background: url("/ecmexplorer/skin/images/Icons/IconMedLink.png") no-repeat right top;
+		width: 16px;
 		height: 16px;
+		bottom: 0px;
+		right: 0px;
+		position: absolute;
 	}
 	
 	.IconLocked {
-		background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/background/IconLocked.gif') no-repeat right top;
-		width: 20px;
-		height: 16px;
-		float: left;
+		background: url("/ecmexplorer/skin/images/Icons/IconMedLock.png") no-repeat right top;
+		top: 0px;
 	}
 }
 
@@ -366,7 +365,7 @@
 
 		.actionIconLabel {
 			line-height: 15px;
-			max-height: 32px;
+			max-height: 28px;
 			overflow: hidden;
 			margin: auto;
 			text-align: center;
@@ -384,22 +383,18 @@
 		position: relative;
 	}
 	
-	.Link {
-		background: url('/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/Link.gif') no-repeat right bottom;
+	.Link,.IconLocked {
+		background: url("/ecmexplorer/skin/images/Icons/IconBigLink.png") no-repeat right top;
 		position: absolute;
-		width: 16px;
-		height: 16px;
-		right: 0;
+		width: 32px;
+		height: 32px;
+		right: -5px;
 		bottom: 0;
 	}
 	
 	.IconLocked {
-		background: url('/ecmexplorer/skin/webui/component/explorer/UIJCRExplorer/DefaultSkin/background/IconLockedBig.gif') no-repeat right top;
-		position: absolute;
-		width: 16px;
-		height: 48px;
-		right: 0;
-		bottom: 0;
+		background: url("/ecmexplorer/skin/images/Icons/IconBigLock.png") no-repeat right top;
+		top: 0;
 	}
 }
 
@@ -458,7 +453,7 @@
 		display: block;
 		
 		&:hover {
-			color: blue;
+			color: @linkColorHover;
 		}
 	}
 
@@ -555,8 +550,6 @@
 	background: url('DefaultSkin/background/TagMapIcon19x16.gif') no-repeat; 
 }
 
-
-
 /******** UIDocumentFormController **************/
 .uiDocumentFormController {
 	min-width: 500px;
@@ -588,6 +581,27 @@
 					background-image: url("/eXoResources/skin/images/Icons/uiIconsBlue.png");
 				}
 			}
+			
+			textarea { 
+				font-size:11px;
+				height:175px;
+				width:450px;
+				vertical-align: top;
+			}
+			.uiSelectbox select.selectbox {
+				width: 295px;
+			}
+			
+			div > span {
+				width: 90% !important;
+				margin-right: 5px;
+			}
+			
+			.uiUploadInput {
+				width: 90%;
+				float: left;
+				margin-right: 5px;
+			}
 		}
 	}
 }
@@ -597,6 +611,21 @@
 .fileContent,
 .mediaContent {
 	padding: 15px;
+	
+	.textContent {
+		max-height: 300px;
+		overflow: auto;
+		
+		pre {
+			min-height: 150px;
+		}
+	}
+}
+
+.webContentContainer {
+	.webContentInformation {
+		padding: 10px;
+	}
 }
 
 /******** Dialog1 **************/
@@ -743,7 +772,7 @@
 .uiThumbnailForm {
 	.uploadButton {
 		margin-top: 5px;
-		text-align: left;
+		text-align: center;
 	}
 }
 
@@ -1179,7 +1208,8 @@
 		
 		.uiIconHelp {
 			background: url("/eXoResources/skin/images/Icons/uiIconColor.png") no-repeat -40px 0px;
-			margin-left: -20px;
+			margin: 3px 0px 0px -25px;
+			float: left;
 		}
 		.form-horizontal .textarea {
 			vertical-align: top;
@@ -1188,6 +1218,167 @@
 	.helpBlockTitle {
 		display: block;
 		width: auto;
+	}
+}
+
+/******** UISimpleSearch **************/
+
+.uiSimpleSearch {
+	.form-horizontal {
+		.control-label {
+			width: 170px;
+		}
+		.controls {
+			margin-left: 190px;
+		}
+	}
+	.constrainLink {
+		color: @grayDark;
+		font-weight: bold;
+		cursor: pointer;
+		
+		&:hover {
+			color: @linkColor;
+		}
+		
+		[class^="uiIcon"] {
+			margin-top: 2px;
+		}
+	}
+	.constraintsForm {
+		padding: 20px 0px 10px 0px;
+		
+		.constraintOption:first-child {
+			margin-left: 31px;
+		}
+		
+		.constraintOption {
+			margin-bottom: 15px;
+			input {
+				width: 120px;
+			}
+			.uiSelectbox {
+				width: 120px;
+				.selectbox {
+					width: 123px;
+				}
+			}
+			
+			.label-inline {
+				width: 100px;
+				text-align: right;
+				padding-right: 10px;
+			}
+			
+			.uiCheckbox input {
+				width: auto;
+			}
+			[class^="uiIcon"] {
+				cursor: pointer;
+			}
+		}
+	}
+}
+
+.UISaveQueryForm {
+	.control-label {
+		width: 120px;
+	}
+	
+	.controls {
+		margin-left: 140px;
+		
+		input, select {
+			width: 200px;
+		}
+	}
+}
+
+.permissionInfo {
+	.uiGrid .uiCheckbox {
+		width: 16px;
+	}
+}
+
+/******** uiAddActionForm **************/
+.uiAddActionForm {
+	margin: 0px -10px;
+	padding: 10px;
+	border-top: 1px solid #cfcfcf;
+	
+	.controls {
+		input, select, textarea {
+			vertical-align: top;
+		}
+	}
+	
+	.multiValueContainer {
+		display: inline-block;
+	}
+}
+
+/******** UINodeTypeSelector **************/
+.uiNodeTypeList {
+	.uiSearchBox {
+		border: 1px solid #CFCFCF;
+		.border-radius(4px);
+		margin: 0 0 14px;
+		padding: 8px;
+	}
+	
+	.allDocument {
+		text-align: right;
+		margin-bottom: 10px;
+	}
+}
+
+/******** Comments **************/
+
+.comments {
+	padding: 20px 0px;
+	color: @grayDark;
+	
+	.avatarBox .avatarMedium {
+		display: block;
+	}
+	
+	.uiBox {
+		padding: 10px;
+		
+		.arrowLeft {
+			background: url("/social-resources/skin/images/Activity/arrows.png") no-repeat scroll -21px 0;
+			display: block;
+			height: 16px;
+			left: -8px;
+			position: absolute;
+			top: 17px;
+			width: 8px;
+		}
+	}
+	
+	.commentBar {
+		.showComment {
+			margin-top: 10px;
+		}
+		
+		.viewLabel {
+			margin-right: 140px;
+			font-weight: bold;
+		}
+		
+		.LabelPostedComment {
+			margin-right: 140px;
+		}
+	}
+	
+	.commentBox {
+		margin-left: 85px;
+		padding: 10px 20px;
+		position: relative;
+		
+		.commentInfo {
+			margin-bottom: 5px;
+		}
 	}
 }
 
@@ -1252,3 +1443,50 @@
 	border: none;
 }
 
+/*==========Add Folder=============*/
+.uiAddFolder{
+	.actionLabel{
+		.controls{
+			margin: 0px;
+		}
+		.control-label{
+			width: 200px; 
+			text-align: left; 
+			padding: 0px; 
+			-webkit-margin-start: 18px;
+		}
+	}
+}
+
+/*==========Icon Small=============*/
+
+.iconLinkSmall{
+	background: url("/ecmexplorer/skin/images/Icons/IconSmallLink.png") no-repeat scroll right bottom transparent;
+    height: 16px;
+    width: 20px;
+	display: block;
+}
+
+.iconLockedsmall{
+	background: url("/ecmexplorer/skin/images/Icons/IconSmallLock.png") no-repeat scroll right top transparent;
+    float: left;
+    height: 16px;
+    width: 20px;
+}
+
+
+.UITaggingForm {
+	.dropdown-menu .active > a, .dropdown-menu .active > a:hover{
+		color: white;
+		background: #517abe;
+	}
+}
+
+
+/*========== UIDocumentWorkspace =============*/
+.UIJCRExplorerPortlet .UIJCRExplorer .UIDocumentWorkspace {
+	min-height: auto;
+	.UIDocumentInfo {
+		min-height: auto;
+	}
+}

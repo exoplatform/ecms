@@ -67,6 +67,9 @@
 	  	<depends>
 	  		<module>ecm-utils</module>
 	  	</depends>
+	  	<depends>
+	  		<module>wcm-webui-ext</module>	  		
+	  	</depends>
 	  </module>  
   </portlet>
   
@@ -76,6 +79,9 @@
 	  	<depends>
 	  		<module>ecm-utils</module>
 	  	</depends>
+	  	<depends>
+	  		<module>wcm-webui-ext</module>	  		
+	  	</depends>
 	  </module>  
   </portlet>
   
@@ -84,6 +90,9 @@
 	  <module>
 	  	<depends>
 	  		<module>ecm-utils</module>
+	  	</depends>
+	  	<depends>
+	  		<module>wcm-webui-ext</module>	  		
 	  	</depends>
 	  </module>  
   </portlet>

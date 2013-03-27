@@ -23,7 +23,6 @@ import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanAddNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsCheckedOutFilter;
@@ -35,7 +34,6 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHom
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentForm;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentFormController;
-import org.exoplatform.ecm.webui.component.explorer.popup.actions.UISelectDocumentForm;
 import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -43,7 +41,6 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
-import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
@@ -96,36 +93,26 @@ public class AddDocumentActionComponent extends UIAbstractManagerComponent {
     }
 //    uiExplorer.setPathBeforeEditing(uiExplorer.getCurrentPath());
     uiController.init();
-    if (uiExplorer.getAncestorOfType(UIJCRExplorerPortlet.class).isEditInNewWindow()) {
-      UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
-      UIPopupContainer.activate(uiController, 800, 600);
-      uiController.bindContentType();
-      UISelectDocumentForm uiSelectDoc = uiController.getChild(UISelectDocumentForm.class);
-      if (uiSelectDoc != null && uiSelectDoc.isRendered()) {
-        uiSelectDoc.updatePageListData();
-      }
-      context.addUIComponentToUpdateByAjax(UIPopupContainer);
-    } else {
-      UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
-      UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
-      if(!uiDocumentWorkspace.isRendered()) {
-        uiWorkingArea.getChild(UIDrivesArea.class).setRendered(false);
-        uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(true);
-      }
-      uiDocumentWorkspace.getChild(UIDocumentContainer.class).setRendered(false);
-      uiDocumentWorkspace.getChild(UISearchResult.class).setRendered(false);
-      UIDocumentFormController controller = uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
-      if (controller != null) {
-        controller.getChild(UIDocumentForm.class).releaseLock();
-        controller.getChild(UIDocumentForm.class).clearRemovedNode();
-      }
-      uiDocumentWorkspace.addChild(uiController);
-      uiController.bindContentType();
-      uiController.setRendered(true);
-      context.addUIComponentToUpdateByAjax(uiWorkingArea);
-      if (event != null)
-        uiExplorer.updateAjax(event);
+
+    UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
+    UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
+    if(!uiDocumentWorkspace.isRendered()) {
+      uiWorkingArea.getChild(UIDrivesArea.class).setRendered(false);
+      uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(true);
     }
+    uiDocumentWorkspace.getChild(UIDocumentContainer.class).setRendered(false);
+    uiDocumentWorkspace.getChild(UISearchResult.class).setRendered(false);
+    UIDocumentFormController controller = uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
+    if (controller != null) {
+      controller.getChild(UIDocumentForm.class).releaseLock();
+      controller.getChild(UIDocumentForm.class).clearRemovedNode();
+    }
+    uiDocumentWorkspace.addChild(uiController);
+    uiController.bindContentType();
+    uiController.setRendered(true);
+    context.addUIComponentToUpdateByAjax(uiWorkingArea);
+    if (event != null)
+      uiExplorer.updateAjax(event);
   }
 
   public static class AddDocumentActionListener extends UIActionBarActionListener<AddDocumentActionComponent> {

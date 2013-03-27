@@ -17,9 +17,9 @@
 package org.exoplatform.services.wcm.search.connector;
 
 import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.ResultNode;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
@@ -57,6 +57,9 @@ public abstract class BaseContentSearchServiceConnector extends BaseSearchServic
     criteria.setLimit(limit);
     criteria.setSortBy(sort);
     criteria.setOrderBy(order);
+    if (ConversationState.getCurrent().getIdentity().getUserId() != null) {
+      criteria.setSearchPath("");
+    }
     return criteria;
   }
   
@@ -81,6 +84,14 @@ public abstract class BaseContentSearchServiceConnector extends BaseSearchServic
    * @return searched doc types
    */
   protected abstract String[] getSearchedDocTypes();
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String getTitleResult(ResultNode node) throws Exception {
+    return node.getTitle();
+  }
 
 }
 

@@ -445,10 +445,10 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   public List<String> getDocumentTemplates() throws Exception {
     List<String> templates = getManagedDocumentTypesMap();
     if (templates != null)
-      return templates;
+      return new ArrayList<String>(templates);
     templates = getAllDocumentNodeTypes();
     setManagedDocumentTypesMap(templates);
-    return templates;
+    return templates == null ? templates : new ArrayList<String>(templates);
   }
 
   /**
@@ -942,7 +942,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       if (StringUtils.isEmpty(logData)) logData = nodeType;
       else if (logData.indexOf(nodeType) == -1) logData = logData + ";" + nodeType;
       serviceLogContentNode.setProperty(NodetypeConstant.JCR_DATA, logData);
-      serviceLogContentNode.save();
+      serviceLogContentNode.getSession().save();
     }
   }
 

@@ -3,7 +3,7 @@
   
     version: "1.0.4",
     clients: {}, // registered upload clients on page, indexed by id
-    moviePath: '/ecmexplorer/javascript/eXo/ecm/ZeroClipboard.swf', // URL to movie
+    moviePath: '/ecm-wcm-extension/javascript/eXo/ecm/ZeroClipboard.swf', // URL to movie
     nextId: 1, // ID of next movie
   
     $: function(thingy) {
@@ -122,18 +122,21 @@
       style.zIndex = zIndex;
       //style.backgroundColor = '#f00'; // debug
       style.overflow = 'auto'; 
-      var body = document.getElementsByTagName('body')[0];
-      //body.appendChild(this.div);
-      var parent = this.domElement.parentNode;
-      //this.domElement.appendChild(this.div);
-      parent.appendChild(this.div);
-      this.div.innerHTML = this.getHTML(size[5], height);
+      this.domElement.innerHTML = this.getHTML(size[5], height) + this.domElement.innerHTML;
+      this.domElement.removeAttribute("onclick");
+      this.domElement.style.position ="relative";
+      var embedElement = this.domElement.firstChild;
+      embedElement.style.width ="100%";
+      embedElement.style.left ="0px";
+      embedElement.style.top ="0px";
+      embedElement.style.position ="absolute";
+      
       this.clipText = box.getAttribute('path');
     },
     getElementSize: function(obj){
       var orginalDisplay = obj.style.display ;
       obj.style.display = "block";
-      var menuItem = gj(obj).find("div.MenuItem:first")[0];
+      var menuItem = gj(obj).find("li.menuItem:first")[0];
       var size = [];
       size.push(obj.offsetWidth);
       size.push(obj.offsetHeight);
@@ -233,7 +236,6 @@
     receiveEvent: function(eventName, args) {
       // receive event from flash
       eventName = eventName.toString().toLowerCase().replace(/^on/, '');
-        
       // special behavior for certain events
       switch (eventName) {
         case 'load':
@@ -255,33 +257,29 @@
             return;
           }
           this.ready = true;
-                  this.movie.setText( this.clipText );
-                  this.movie.setHandCursor( this.handCursorEnabled );
-                  var rightClickMenu = document.getElementById("ECMContextMenu");
-                  var divMovie = gj(this.movie).parents('div:first')[0];
-                  var style = divMovie.style;
-                  this.movie.width=rightClickMenu.offsetWidth;
-                  style.width = '' + this.movie.width + 'px';
-                  break;
+          this.movie.setText( this.clipText );
+          this.movie.setHandCursor( this.handCursorEnabled );
+          break;
         case 'mouseover':
           var item = document.getElementById(this.domElement.id);
-          item.className = 'ItemSelected';
+          item.className = 'itemSelected';
         break;
       
         case 'mouseout':
           var item = document.getElementById(this.domElement.id);
-          item.className = 'MenuItem';
+          item.className = 'menuItem';
           break;
       
         case 'mousedown':
           break;
-
+          
         case 'mouseup':
-          this.movie.setText(this.clipText);
+        this.movie.setText(this.clipText);
           var item = document.getElementById(this.domElement.id);
-          item.className = 'MenuItem';
+          item.className = 'menuItem';
             eXo.ecm.ECMUtils.closeContextMenu(this.domElement);
           break;
+          
       } // switch eventName
     
       if (this.handlers[eventName]) {

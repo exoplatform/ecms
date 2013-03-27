@@ -280,12 +280,12 @@
       <UIMetadataForm><![CDATA[Vorlage der Metadata &auml;ndern]]></UIMetadataForm>
     </title>
   </MetadataPopupEdit>
-  <PermissionPopup>
+  <MetataPermissionPopup>
     <title>
       <MetadataPermission><![CDATA[Genehmigung &auml;ndern]]></MetadataPermission>
       <QueriesPermissionBrowse><![CDATA[Genehmigung hinzuf&uuml;gen]]></QueriesPermissionBrowse>
     </title>
-  </PermissionPopup>
+  </MetataPermissionPopup>
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataForm				 #
@@ -378,8 +378,8 @@
   </UIDriveList>
   <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector><![CDATA[Genehmigung hinzuf&uuml;gen]]></AddDrivePermissionSelector>
-      <UIPermissionSelector><![CDATA[Genehmigung ausw&auml;hlen]]></UIPermissionSelector>
+      <AddDrivePermissionSelector>Add Permissions</AddDrivePermissionSelector>
+      <UIDrivePermissionSelector>Set Permissions</UIDrivePermissionSelector>
     </title>
   </PopupDrivePermission>
   <UIDriveForm>
@@ -725,7 +725,7 @@
         <nodeTypeDefinition>Knotentyp</nodeTypeDefinition>
         <propertyDefinition>Eigentum</propertyDefinition>
         <childNodeDefinition>Nachfolgeknoten</childNodeDefinition>
-        <SuperTypeTab>Super Typen</SuperTypeTab>
+        <superTypeTab>Super Typen</superTypeTab>
         <DefaultTypeTab>Standardvorwahl</DefaultTypeTab>
         <RequiredTypeTab><![CDATA[Ben&ouml;tigte Vorwahl]]></RequiredTypeTab>
         <Contraints><![CDATA[Einschr&auml;nkungen]]></Contraints>
@@ -1704,6 +1704,11 @@
       <UIPermissionSelector><![CDATA[Genehmigung ausw&auml;hlen]]></UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
+  <TemplatePermission>
+    <title>
+      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+    </title>
+  </TemplatePermission>
   <TemplateContainerPopup>
     <title>
       <UITemplateForm>Vorlagenform</UITemplateForm>

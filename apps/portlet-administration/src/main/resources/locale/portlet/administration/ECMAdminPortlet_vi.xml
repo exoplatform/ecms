@@ -282,12 +282,12 @@
       <UIMetadataForm>Sửa mẫu dữ liệu Metadata</UIMetadataForm>
     </title>
   </MetadataPopupEdit>
-  <PermissionPopup>
+  <MetataPermissionPopup>
     <title>
       <MetadataPermission>Chọn quyền</MetadataPermission>
       <QueriesPermissionBrowse>Quyền truy nhập</QueriesPermissionBrowse>
     </title>
-  </PermissionPopup>
+  </MetataPermissionPopup>
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataForm				 #
@@ -380,8 +380,8 @@
   </UIDriveList>
   <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>Thêm quyền truy nhập</AddDrivePermissionSelector>
-      <UIPermissionSelector>Chọn quyền truy nhập</UIPermissionSelector>
+      <AddDrivePermissionSelector>Add Permissions</AddDrivePermissionSelector>
+      <UIDrivePermissionSelector>Set Permissions</UIDrivePermissionSelector>
     </title>
   </PopupDrivePermission>
   <UIDriveForm>
@@ -727,7 +727,7 @@
         <nodeTypeDefinition>Kiểu của node</nodeTypeDefinition>
         <propertyDefinition>Thuộc tính</propertyDefinition>
         <childNodeDefinition>Node con</childNodeDefinition>
-        <SuperTypeTab>Siêu thuộc tính</SuperTypeTab>
+        <superTypeTab>Siêu thuộc tính</superTypeTab>
         <DefaultTypeTab>Kiểu mặc định chính</DefaultTypeTab>
         <RequiredTypeTab>Kiểu bắt buộc chính</RequiredTypeTab>
         <Contraints>Các hạn chế</Contraints>
@@ -1702,6 +1702,11 @@
       <UIPermissionSelector>Chọn quyền truy nhập</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
+  <TemplatePermission>
+    <title>
+      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+    </title>
+  </TemplatePermission>
   <TemplateContainerPopup>
     <title>
       <UITemplateForm>Kiểu mẫu</UITemplateForm>

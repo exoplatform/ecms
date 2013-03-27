@@ -149,8 +149,7 @@ public class UIPermissionInfo extends UIPermissionInfoBase {
       currentNode.getSession().save();
 
       uiJCRExplorer.setIsHidePopup(true) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup) ;
-      uiJCRExplorer.updateAjax(event) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uicomp) ;
     }
   }
 

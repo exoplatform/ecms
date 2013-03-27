@@ -160,12 +160,12 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
       Node node = uiExplorer.getCurrentNode() ;
       if(uiExplorer.nodeIsLocked(node)) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", null)) ;
-
         return ;
       }
+      symLinkName = org.exoplatform.services.cms.impl.Utils.cleanString(symLinkName);
+      
       if(!uiSymLinkForm.localizationMode && (symLinkName == null || symLinkName.length() ==0)) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.name-invalid", null)) ;
-
         return ;
       }
       if(pathNode == null || pathNode.length() ==0) {

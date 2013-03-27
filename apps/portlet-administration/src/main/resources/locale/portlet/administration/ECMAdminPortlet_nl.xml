@@ -284,12 +284,12 @@
       <UIMetadataForm>Metadata's Template wijzigen</UIMetadataForm>
     </title>
   </MetadataPopupEdit>
-  <PermissionPopup>
+  <MetataPermissionPopup>
     <title>
       <MetadataPermission>selecteer permission</MetadataPermission>
       <QueriesPermissionBrowse>rechten toevoegen</QueriesPermissionBrowse>
     </title>
-  </PermissionPopup>
+  </MetataPermissionPopup>
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataForm				 #
@@ -382,8 +382,8 @@
   </UIDriveList>
   <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>rechten toevoegen</AddDrivePermissionSelector>
-      <UIPermissionSelector>selecteer rechten</UIPermissionSelector>
+      <AddDrivePermissionSelector>Add Permissions</AddDrivePermissionSelector>
+      <UIDrivePermissionSelector>Set Permissions</UIDrivePermissionSelector>
     </title>
   </PopupDrivePermission>
   <UIDriveForm>
@@ -729,7 +729,7 @@
         <nodeTypeDefinition>Node type</nodeTypeDefinition>
         <propertyDefinition>eigenschap</propertyDefinition>
         <childNodeDefinition>Kind knoop</childNodeDefinition>
-        <SuperTypeTab>Super soorten</SuperTypeTab>
+        <superTypeTab>Super soorten</superTypeTab>
         <DefaultTypeTab>Standaard primaire</DefaultTypeTab>
         <RequiredTypeTab>Vereist primaire</RequiredTypeTab>
         <Contraints>Beperkingen</Contraints>
@@ -1709,6 +1709,11 @@
       <UIPermissionSelector>Selecteer rechten</UIPermissionSelector>
     </title>
   </AddNewTemplatePermission>
+  <TemplatePermission>
+    <title>
+      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+    </title>
+  </TemplatePermission>
   <TemplateContainerPopup>
     <title>
       <UITemplateForm>Sjabloon Vorm</UITemplateForm>

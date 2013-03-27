@@ -1,3 +1,10 @@
+<%  
+    def rcontext = _ctx.getRequestContext();
+    rcontext.getJavascriptManager()
+        .require("SHARED/jquery", "gj")
+        .addScripts("gj(document).ready(function() { gj(\"*[rel='tooltip']\").tooltip();});");
+    
+%>
 <div id="$uicomponent.id" class="uiECMAdminWorkingArea uiBox" exo:minwidth="300px" style="min-width: 300px;">
 	<h5 class="title">
 		<%=_ctx.appRes("UIECMAdminControlPanel.label." + uicomponent.getRenderedCompId())%>

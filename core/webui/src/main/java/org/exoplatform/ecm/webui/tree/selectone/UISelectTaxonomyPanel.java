@@ -97,11 +97,11 @@ public class UISelectTaxonomyPanel extends UISelectPathPanel {
       ((UISelectable)((UIBaseNodeTreeSelector)uiTreeSelector).getSourceComponent()).doSelect(returnField, value) ;
 
       if (uiTreeSelector instanceof UIOneNodePathSelector) {
-        UIComponent uiComponent = uiTreeSelector.getParent();
-        if (uiComponent instanceof UIPopupWindow) {
-          ((UIPopupWindow)uiComponent).setShow(false);
-          ((UIPopupWindow)uiComponent).setRendered(false);
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiComponent);
+        UIPopupWindow uiPopupWindow = uiTreeSelector.getAncestorOfType(UIPopupWindow.class);
+        if (uiPopupWindow != null) {
+          uiPopupWindow.setShow(false);
+          uiPopupWindow.setRendered(false);
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupWindow);
         }
         UIComponent component = ((UIOneNodePathSelector) uiTreeSelector).getSourceComponent().getParent();
         if (component != null) {
@@ -110,11 +110,11 @@ public class UISelectTaxonomyPanel extends UISelectPathPanel {
         }
       }
       if (uiTreeSelector instanceof UIOneTaxonomySelector) {
-        UIComponent uiComponent = uiTreeSelector.getParent();
-        if (uiComponent instanceof UIPopupWindow) {
-          ((UIPopupWindow)uiComponent).setShow(false);
-          ((UIPopupWindow)uiComponent).setRendered(false);
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiComponent);
+        UIPopupWindow uiPopupWindow = uiTreeSelector.getAncestorOfType(UIPopupWindow.class);
+        if (uiPopupWindow != null) {
+          uiPopupWindow.setShow(false);
+          uiPopupWindow.setRendered(false);
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupWindow);
         }
         UIComponent component = ((UIOneTaxonomySelector) uiTreeSelector).getSourceComponent().getParent();
         if (component != null) {

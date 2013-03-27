@@ -1,5 +1,8 @@
-<% String fieldName; %>
-<div class="uiForm $uicomponent.id">
+<%
+  import org.exoplatform.wcm.webui.Utils;
+  String fieldName; 
+%>
+<div class="uiForm <%=Utils.toLowerCase(uicomponent.id, 2)%>">
   <%uiform.begin()%>
       <div class="form-horizontal resizable">
         <div class="control-group">
