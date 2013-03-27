@@ -12,7 +12,7 @@
 		Self.MiniumRightContainerWidth = 351;
 		Self.waitInterval              = 25;
 		Self.UIBrokenCheckingInterval  = 150;
-		Self.UIBrokenCheckingHandler   = null;
+		window.UIBrokenCheckingHandler   = null;
 		var RightClick = eXo.webui.UIRightClickPopupMenu;
 		if (!RightClick) {
 		  RightClick = eXo.webui.UIRightClickPopupMenu;
@@ -542,10 +542,7 @@
 		  eXo.ecm.ECMUtils.currentWidth = Self.uiLeftContainer.offsetWidth;
 		  var title = gj(Self.uiLeftContainer).find("h5.title:first")[0];
 		  eXo.ecm.ECMUtils.currentTitleWidth = title.offsetWidth;
-		  if (Self.UIBrokenCheckingHandler) {
-		    clearInterval(Self.UIBrokenCheckingHandler);
-		    Self.UIBrokenCheckingHandler = null;
-		  }
+		  window.clearInterval(window.UIBrokenCheckingHandler);
 		  if (Self.uiLeftContainer.style.display == '' || Self.uiLeftContainer.style.display == 'block') {
 		    document.onmousemove = eXo.ecm.ECMUtils.resizeMouseMoveSideBar;
 		    document.onmouseup = eXo.ecm.ECMUtils.resizeMouseUpSideBar;
@@ -956,7 +953,7 @@
 		  var jcrExpPortlet = document.getElementById("UIJCRExplorer");
 		  gj(jcrExpPortlet).removeClass("UIJCRExplorerNoSelect");
 		  if (Self.uiResizeSideBar) gj(Self.uiResizeSideBar).removeClass("resizeBarDisplay");
-		  Self.UIBrokenCheckingHandler = window.setInterval("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
+		  window.UIBrokenCheckingHandler = window.setInterval("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
 		  delete eXo.ecm.ECMUtils.currentWidth;
 		  delete eXo.ecm.ECMUtils.currentMouseX;
 		  delete eXo.ecm.ECMUtils.resizableBlockWidth;
@@ -967,10 +964,7 @@
 		  var event = event || window.event;
 		  if (Self.initWithoutLeftContainer()) return;
 		  event.cancelBubble = true;
-		  if (Self.UIBrokenCheckingHandler) {
-        clearInterval(Self.UIBrokenCheckingHandler);
-        Self.UIBrokenCheckingHandler = null;
-      }
+      window.clearInterval(window.UIBrokenCheckingHandler);
 		  var leftContainer = document.getElementById("LeftContainer");
 		  var rightContainer = gj(Self.uiWorkingArea).find("div.rightContainer:first")[0];
 		  var resizeButton = gj(Self.uiWorkingArea).find("a.resizeButton:first")[0];
@@ -1140,7 +1134,6 @@
 		}
 
 		ECMUtils.prototype.loadEffectedItemsInSideBar = function () {
-			Self.UIBrokenCheckingHandler = window.setInterval("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
 			Self.waitContainerRetry = 0;
 			Self.waitForContainer();
 		}
@@ -1150,38 +1143,19 @@
 		  Self.uiLeftContainer = gj(Self.uiWorkingArea).find('div.leftContainer:first')[0];
 		  Self.uiRightContainer = gj(Self.uiWorkingArea).find("div.rightContainer:first")[0];
 		  Self.uiResizeSideBar = gj(Self.uiWorkingArea).find("div.resizeBar:first")[0];
+		  console.log("Checking");
 		  if (Self.uiLeftContainer.offsetHeight==0 || Self.uiLeftContainer.offsetWidth==0) return;
 		  if (Self.uiLeftContainer && Self.uiRightContainer && Self.uiWorkingArea) {
 				if (Self.uiLeftContainer.offsetWidth + Self.uiRightContainer.offsetWidth + Self.uiResizeSideBar.offsetWidth  > Self.uiWorkingArea) {
-					if (Self.UIBrokenCheckingHandler) {
-						clearInterval(Self.UIBrokenCheckingHandler);
-						Self.UIBrokenCheckingHandler = null;
-					}
 					Self.loadContainerWidth();
-					Self.UIBrokenCheckingHandler = window.setInterval("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
 				}else if (Self.uiLeftContainer.offsetWidth + Self.uiRightContainer.offsetWidth + Self.uiResizeSideBar.offsetWidth  < Self.uiWorkingArea -2) {
-					if (Self.UIBrokenCheckingHandler) {
-						clearInterval(Self.UIBrokenCheckingHandler);
-						Self.UIBrokenCheckingHandler = null;
-					}
 					Self.loadContainerWidth();
-					Self.UIBrokenCheckingHandler = window.setInterval("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
 				}else if (Self.uiLeftContainer.offsetTop < Self.uiRightContainer.offsetTop) {
-					if (Self.UIBrokenCheckingHandler) {
-						clearInterval(Self.UIBrokenCheckingHandler);
-						Self.UIBrokenCheckingHandler = null;
-					}
 					Self.loadContainerWidth();
-					Self.UIBrokenCheckingHandler = window.setInterval("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
 				} else if (Self.uiLeftContainer.offsetHeight > Self.uiRightContainer.offsetHeight) {
-					if (document.getElementById("FillOutElement")) {
-						if (Self.UIBrokenCheckingHandler) {
-							clearInterval(Self.UIBrokenCheckingHandler);
-							Self.UIBrokenCheckingHandler = null;
-						}
-						Self.loadContainerWidth();
-						Self.UIBrokenCheckingHandler = window.setInterval("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
-					}
+					var fillOutElement = gj("div#FillOutElement:visible");
+					if (!fillOutElement) return;
+					Self.loadContainerWidth();
 				}
 			}
 		}
@@ -1197,6 +1171,7 @@
 		    if (fixToolbar) gj(fixToolbar).css('z-index', 10);
 		    console.log("Load Container time out");
 		    Self.loadContainerWidth();
+		    window.UIBrokenCheckingHandler = window.setInterval("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
 		    return;
 		  }
 		  Self.uiWorkingArea = gj(document).find('div.uiWorkingArea:first')[0];
@@ -1224,6 +1199,8 @@
 		    return;
 		  }
 		  Self.loadContainerWidth();
+		  window.clearInterval(window.UIBrokenCheckingHandler);
+		  window.UIBrokenCheckingHandler = window.setInterval("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
 		  var fixToolbar = gj(document).find("div.UIToolbarContainer:first")[0];
 		  if (fixToolbar) gj(fixToolbar).css( 'z-index', 10 );
 		}
