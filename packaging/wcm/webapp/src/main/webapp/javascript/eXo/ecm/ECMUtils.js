@@ -11,7 +11,7 @@
 		Self.MiniumLeftContainerWidth = 250;
 		Self.MiniumRightContainerWidth = 351;
 		Self.waitInterval              = 25;
-		Self.UIBrokenCheckingInterval  = 50;
+		Self.UIBrokenCheckingInterval  = 150;
 		Self.UIBrokenCheckingHandler   = null;
 		var RightClick = eXo.webui.UIRightClickPopupMenu;
 		if (!RightClick) {
@@ -1104,6 +1104,7 @@
 			var arrowIcon = gj(midBox).find("i")[0];
 			var expandChild = gjTop.find("div.uiContentBox:last")[0];
 			var selectItemsBar = gjTop.find("div.uiSelectContent")[0];
+			Self.clearFillOutElement();
 			if (bottomBox.style.display == 'none') {
 				gj(expandChild).css("height", "");
 				if (gjTop.attr("savedHeight")) {
@@ -1121,7 +1122,7 @@
 				gj(expandChild).css("height", currentExpandChildHeight + deltaHeight + "px");
 				arrowIcon.className = "uiIconArrowUp";
 			}
-			console.log((selectItemsBar.offsetTop + selectItemsBar.offsetHeight) + " : " + topBox.offsetHeight);
+			Self.adjustFillOutElement();
 		}
 
 		//get SideBarContent for resizing
@@ -1172,7 +1173,7 @@
 					}
 					Self.loadContainerWidth();
 					Self.UIBrokenCheckingHandler = window.setInterval("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
-				} else if (Self.uiLeftContainer.offsetHeight != Self.uiRightContainer.offsetHeight) {
+				} else if (Self.uiLeftContainer.offsetHeight > Self.uiRightContainer.offsetHeight) {
 					if (document.getElementById("FillOutElement")) {
 						if (Self.UIBrokenCheckingHandler) {
 							clearInterval(Self.UIBrokenCheckingHandler);
