@@ -40,6 +40,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer.HistoryEntry;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
+import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -253,6 +254,7 @@ public class UIAddressBar extends UIForm {
       uiAddressBar.setSelectedViewName(viewName);
       UIActionBar uiActionBar = uiWorkingArea.getChild(UIActionBar.class);
       uiActionBar.setTabOptions(viewName) ;
+      uiWorkingArea.getChild(UISideBar.class).initComponents();
       uiExplorer.findFirstComponentOfType(UIDocumentInfo.class).getExpandedFolders().clear();
       uiExplorer.updateAjax(event);
     }

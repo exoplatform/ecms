@@ -29,6 +29,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
 import org.exoplatform.ecm.webui.component.explorer.UIJcrExplorerContainer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar;
+import org.exoplatform.ecm.webui.component.explorer.sidebar.action.ExplorerActionComponent;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -106,15 +107,17 @@ public class UISideBar extends UIContainer {
     selectedComp = componentName;
   }
 
-  private void initComponents() {
+  public void initComponents() throws Exception {
     lstVisibleComp = new ArrayList<UIAbstractManagerComponent>(VISIBLE_COMPONENT_SIZE);
     lstHiddenComp = new ArrayList<UIAbstractManagerComponent>();
     List<UIAbstractManagerComponent> managers = getManagers();
     for (int i = 0; i < managers.size(); i++) {
       UIAbstractManagerComponent component = managers.get(i);
 
-      if (i < VISIBLE_COMPONENT_SIZE) {
-        lstVisibleComp.add(component);
+      if (lstVisibleComp.size() < VISIBLE_COMPONENT_SIZE) {
+        if (!isHideExplorerPanel() || !(component instanceof ExplorerActionComponent)) {
+          lstVisibleComp.add(component);
+        }
       } else {
         lstHiddenComp.add(component);
       }
