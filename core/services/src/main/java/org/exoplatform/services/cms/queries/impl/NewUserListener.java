@@ -21,6 +21,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
@@ -29,6 +30,8 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.User;
 import org.exoplatform.services.organization.UserEventListener;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
@@ -38,7 +41,8 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * @author Benjamin Mestrallet benjamin.mestrallet@exoplatform.com
  */
 public class NewUserListener extends UserEventListener {
-  
+
+  private static final Log LOG  = ExoLogger.getLogger(UserEventListener.class.getName());
   private NewUserConfig config_;
   private NodeHierarchyCreator nodeHierarchyCreator_;
   private RepositoryService repositoryService_ ;
@@ -55,7 +59,11 @@ public class NewUserListener extends UserEventListener {
 
   public void preSave(User user, boolean isNew)
       throws Exception {
-    initSystemData(user.getUserName());
+    try{
+      initSystemData(user.getUserName());
+    }catch(PathNotFoundException e){
+      LOG.info("Exception when preSave user "+user.getUserName());
+    }
   }
 
   private void initSystemData(String userName) throws Exception{
