@@ -458,6 +458,15 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
   }
 
   /**
+  * remove Script From Cache
+  * @param scriptPath    String
+  *                      The Path of script
+  */
+  public void removeScriptFromCache(String scriptPath) throws Exception {
+    removeFromCache(scriptPath);
+  }
+
+  /**
    * remove From Cache
    * @param scriptName    String
    *                      The name of script

@@ -323,4 +323,11 @@ public interface ScriptService {
    * @return
    */
   public Set<String> getAllConfiguredScripts();
+
+  /**
+  * remove Script From Cache
+  * @param scriptPath    String
+  *                      The Path of script
+  */
+  public void removeScriptFromCache(String scriptPath) throws Exception;
 }

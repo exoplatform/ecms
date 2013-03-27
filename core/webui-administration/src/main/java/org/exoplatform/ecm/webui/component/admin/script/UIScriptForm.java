@@ -286,7 +286,10 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
           node.checkout() ;
           node.restore(vesion, true) ;
           uiScriptList.refresh(1) ;
-        }  
+        }
+        ScriptService scriptService = uiForm.getApplicationComponent(ScriptService.class) ;
+        String scriptpath = node.getPath().substring(scriptService.getBaseScriptPath().length()+1,node.getPath().length());
+        scriptService.removeScriptFromCache(scriptpath);
         if(uiForm.getId().equals(UIECMScripts.SCRIPTFORM_NAME))
           uiManager.getChild(UIECMScripts.class).removeChildById(UIScriptList.ECMScript_EDIT);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
