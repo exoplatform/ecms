@@ -135,7 +135,7 @@
           }
         }
       }
-      var scroller = gj(element).parents(".SideContent:first")[0];
+      var scroller = gj(element).parents(".uiContentBox:first")[0];
       scroller.onmousemove = eXo.ecm.UISimpleView.setScroll ;
     };
 
