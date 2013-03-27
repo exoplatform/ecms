@@ -893,7 +893,9 @@
 		      var resizeBarContent = gj(Self.uiResizeSideBar).find("div.resizeBarContent:first")[0];
 		      gj(resizeBarContent).css("height", Self.uiResizeSideBar.offsetHeight + "px");
 		    } else {
-		      Self.uiResizeSideBar.style.height = Self.uiRightContainer.offsetHeight + "px";
+		      gj(Self.uiResizeSideBar).css("height", "");
+		      var resizeBarContent = gj(Self.uiResizeSideBar).find("div.resizeBarContent:first")[0];
+		      gj(resizeBarContent).css("height", "");
 		      if (iArrow) iArrow.className = "uiIconArrowRight";    
 		      gj(Self.uiResizeSideBar).addClass("resizeNoneBorder");
 		    }
@@ -993,7 +995,7 @@
 		    leftContainer.style.display = 'none';
 		    gj(Self.uiResizeSideBar).addClass("resizeNoneBorder");
 		    showSideBar = false;
-			if (iArrow) iArrow.className = "uiIconArrowRight";
+				if (iArrow) iArrow.className = "uiIconArrowRight";
 		  }
 		  Self.setCookie(eXo.env.portal.userName + "_CEShowSideBar", showSideBar, 20);
 		  Self.loadContainerWidth();
