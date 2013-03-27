@@ -66,7 +66,7 @@
 	  formMarkup += '    <div class="popupContent">';
 	  formMarkup += '       <input name="renameField" type="text" id="renameField" value ="">';
 	  formMarkup += '         <button type="button" id = "renameLink" class="btn btn-primary" onclick="eXo.ecm.Rename.clickSave();">' + eXo.ecm.WCMUtils.getBundle('RenameConnector.label.rename', eXo.env.portal.language) + '</button>';
-	  formMarkup += '         <button type="button" class="btn" onclick="eXo.ecm.Rename.closePopup();">' + eXo.ecm.WCMUtils.getBundle('RenameConnector.label.cancel', eXo.env.portal.language) + '</button>';
+	  formMarkup += '         <button type="button" class="btn" onclick="eXo.ecm.Rename.closePopup();eXo.ecm.UIFileView.clearCheckboxes();">' + eXo.ecm.WCMUtils.getBundle('RenameConnector.label.cancel', eXo.env.portal.language) + '</button>';
 	  formMarkup += '    </div>';
 	  formMarkup += '</div>';
 

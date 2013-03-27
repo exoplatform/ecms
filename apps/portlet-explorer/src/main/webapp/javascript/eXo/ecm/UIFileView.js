@@ -710,6 +710,8 @@ UIFileView.prototype.clearCheckboxes = function(evt) {
 		Self.mouseUpItem(evt);
 	});
 	gj("#UIFileViewCheckBox").attr("checked", false);
+	gj("#UIDocumentInfo").find(".checkbox").attr("checked", false);
+	gj("#UIDocumentInfo").find(".rowView").css("backgroundColor","#FFF");
 };
 
 UIFileView.prototype.checkSelectedItemCount = function() {

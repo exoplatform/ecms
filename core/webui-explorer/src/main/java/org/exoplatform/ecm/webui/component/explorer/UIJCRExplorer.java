@@ -772,7 +772,9 @@ public class UIJCRExplorer extends UIContainer {
     WebuiRequestContext context = WebuiRequestContext.getCurrentInstance() ;
     UIPopupContainer popupAction = getChild(UIPopupContainer.class) ;
     popupAction.deActivate() ;
-    context.addUIComponentToUpdateByAjax(popupAction) ;
+    context.addUIComponentToUpdateByAjax(popupAction);
+    context.getJavascriptManager().require("SHARED/uiFileView", "uiFileView").
+    addScripts("uiFileView.UIFileView.clearCheckboxes();");
   }
 
   public void record(String str, String ws) {

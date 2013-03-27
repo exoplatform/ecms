@@ -100,6 +100,8 @@ public class UIConfirmMessage extends UIComponent implements UIPopupComponent {
       UIPopupWindow popupAction = uiConfirm.getAncestorOfType(UIPopupWindow.class) ;
       popupAction.setShow(false) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(popupAction);
+      event.getRequestContext().getJavascriptManager().require("SHARED/uiFileView", "uiFileView").
+      addScripts("uiFileView.UIFileView.clearCheckboxes();");
     }
   }
 
