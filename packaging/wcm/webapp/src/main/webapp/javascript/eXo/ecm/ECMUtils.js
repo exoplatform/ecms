@@ -636,7 +636,7 @@
 		  }
 		  if (!showSideBar) {
 		    container.style.display = 'none';
-		    var resizeButton = gj(Self.uiWorkingArea).find("div.resizeButton:first")[0];
+		    var resizeButton = gj(Self.uiWorkingArea).find("a.resizeButton:first")[0];
 		    if (resizeButton) resizeButton.className = "resizeButton";
 		  }
 		}
@@ -885,17 +885,18 @@
 		      actualLeftContainerWidth = 0;
 		    }
 		    Self.uiRightContainer.style.width = (Self.uiWorkingArea.offsetWidth - actualLeftContainerWidth - Self.uiResizeSideBar.offsetWidth) + "px";
+		    var resizeButton = gj(Self.uiResizeSideBar).find("a.resizeButton:first")[0];
+		    var iArrow = gj(resizeButton).children("i:first")[0];
 		    if (showSideBar) {
 		      Self.uiResizeSideBar.style.height = Self.uiLeftContainer.offsetHeight + "px";
+		      if (iArrow) iArrow.className = "uiIconArrowLeft";
+		      var resizeBarContent = gj(Self.uiResizeSideBar).find("div.resizeBarContent:first")[0];
+		      gj(resizeBarContent).css("height", Self.uiResizeSideBar.offsetHeight + "px");
 		    } else {
 		      Self.uiResizeSideBar.style.height = Self.uiRightContainer.offsetHeight + "px";
-		      var resizeButton = gj(Self.uiResizeSideBar).find("div.resizeButton:first")[0];
-			var iArrow = gj(resizeButton).children("i:first")[0];
-			if (iArrow) iArrow.className = "uiIconArrowRight";
+		      if (iArrow) iArrow.className = "uiIconArrowRight";    
 		      gj(Self.uiResizeSideBar).addClass("resizeNoneBorder");
 		    }
-			var resizeBarContent = gj(Self.uiResizeSideBar).find("div.resizeBarContent:first")[0];
-		    gj(resizeBarContent).css("height", Self.uiResizeSideBar.offsetHeight + "px");
 		  }
 		  if (Self.uiDocumentWorkspace) {
 		    Self.uiDocumentWorkspace.style.width = (Self.uiRightContainer.offsetWidth - 10) + "px";
@@ -1090,129 +1091,35 @@
 		}
 
 		ECMUtils.prototype.showHideItemsInSideBar = function (event) {
-			var itemArea = document.getElementById("SelectItemArea");
-
-			Self.clearFillOutElement();
-
-			if (itemArea.style.display == 'none') {
-			  Self.showSelectItemArea();
+			var borderSize = 2;
+			var sideBarContainer = gj("div.uiSideBar").find("div.uiResizableBlock")[0];
+			//Let say we have 3 item for this resize function
+			var topBox    = gj(sideBarContainer).find("div.uiBox:first")[0];
+			var midBox    = gj(sideBarContainer).find("div.resizeTreeExplorer:first")[0];
+			var bottomBox = gj(sideBarContainer).find("div.selectItem:first")[0];
+			var avaiableHeight = sideBarContainer.offsetHeight;
+			var gjTop = gj(topBox);
+			var arrowIcon = gj(midBox).find("i")[0];
+			var expandChild = gjTop.find("div.uiContentBox:last")[0];
+			var selectItemsBar = gjTop.find("div.uiSelectContent")[0];
+			if (bottomBox.style.display == 'none') {
+				gj(expandChild).css("height", "");
+				if (gjTop.attr("savedHeight")) {
+					gjTop.css("height", gjTop.attr("savedHeight") + "px");
+				}
+				gj(bottomBox).css("display", "block");
+				arrowIcon.className = "uiIconArrowDown";
 			} else {
-			  Self.hideSelectItemArea();
+				var currentTopBoxHeight = topBox.offsetHeight;
+				var currentExpandChildHeight = expandChild.offsetHeight;
+				gjTop.attr("savedHeight", topBox.offsetHeight -borderSize);
+				gj(bottomBox).css("display", "none");
+				gjTop.css("height", avaiableHeight - midBox.offsetHeight -borderSize + "px");
+				var deltaHeight = topBox.offsetHeight - currentTopBoxHeight - midBox.offsetHeight -borderSize;
+				gj(expandChild).css("height", currentExpandChildHeight + deltaHeight + "px");
+				arrowIcon.className = "uiIconArrowUp";
 			}
-
-			Self.adjustFillOutElement();
-		}
-
-		ECMUtils.prototype.showSelectItemArea = function () {
-			var treeExplorer = document.getElementById("UITreeExplorer");
-			var itemArea = document.getElementById("SelectItemArea");
-
-		  var workingArea = document.getElementById('UIWorkingArea');
-		  var resizableBlock = gj(workingArea).find("div.uiResizableBlock:first")[0];
-		  var resizeTreeButton = gj(resizableBlock).find("i.uiIconArrowDown:first")[0];
-
-			if (treeExplorer) {
-			  Self.collapseTreeExplorer()
-			} else {
-			  Self.collapseSideBarContent(); //collapse other tabs
-			}
-
-		  itemArea.style.display = "block";
-		  eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea = "block";
-		  resizeTreeButton.className = "uiIconArrowDown";
-		}
-
-		ECMUtils.prototype.hideSelectItemArea = function () {
-			var treeExplorer = document.getElementById("UITreeExplorer");
-			var itemArea = document.getElementById("SelectItemArea");
-
-		  var workingArea = document.getElementById('UIWorkingArea');
-		  var resizableBlock = gj(workingArea).find("div.uiResizableBlock:first")[0];
-		  var resizeTreeButton = gj(resizableBlock).find("i.uiIconArrowDown:first")[0];
-
-			if (treeExplorer) {
-			  Self.expandTreeExplorer();
-			} else {
-			  Self.expandSideBarContent();
-			}
-
-		  itemArea.style.display = "none";
-		  eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea = "none";
-		  resizeTreeButton.className = "uiIconArrowDown uiIconArrowUp";
-		}
-
-		ECMUtils.prototype.collapseTreeExplorer = function () {
-		  var treeExplorer = document.getElementById("UITreeExplorer");
-		  treeExplorer.style.height = treeExplorer.offsetHeight - eXo.ecm.ECMUtils.heightOfItemArea - 20 + "px";
-		}
-
-		ECMUtils.prototype.expandTreeExplorer = function () {
-		  var workingArea = document.getElementById('UIWorkingArea');
-		  var leftContainer = gj(workingArea).find("div.leftContainer:first")[0];
-		  var rightContainer = gj(workingArea).find("div.rightContainer:first")[0];
-
-		  var resizableBlock = gj(leftContainer).find("div.uiResizableBlock:first")[0];
-		  var selectContent = gj(resizableBlock).find("div.uiSelectContent:first")[0];
-		  var resizeTreeExplorer = gj(resizableBlock).find("div.resizeTreeExplorer:first")[0];
-
-		  var treeExplorer = document.getElementById("UITreeExplorer");
-		  var itemArea = document.getElementById("SelectItemArea");
-
-		  if (leftContainer.offsetHeight > rightContainer.offsetHeight) {
-		    treeExplorer.style.height = treeExplorer.offsetHeight + itemArea.offsetHeight - 20 + "px";
-		  } else {
-		    //expand the tree explorer to equal to the right container
-		    var treeExplorerHeight = rightContainer.offsetHeight;
-
-		    if (selectContent) {
-		      treeExplorerHeight -= selectContent.offsetHeight;
-		    }
-		    if (resizeTreeExplorer) {
-		      treeExplorerHeight -= resizeTreeExplorer.offsetHeight;
-		    }
-		    treeExplorer.style.height = treeExplorerHeight - 28 + 'px';
-		  }
-		}
-
-		ECMUtils.prototype.collapseSideBarContent = function () {
-			var container = eXo.ecm.ECMUtils.getContainerToResize();
-			container.style.height = eXo.ecm.ECMUtils.initialHeightOfOtherTab - 4 + "px";
-		}
-
-		ECMUtils.prototype.expandSideBarContent = function () {
-		  var workingArea = document.getElementById('UIWorkingArea');
-		  var leftContainer = gj(workingArea).find("div.leftContainer:first")[0];
-		  var rightContainer = gj(workingArea).find("div.rightContainer:first")[0];
-
-		  var resizableBlock = gj(workingArea).find("div.uiResizableBlock:first")[0];
-		  var selectContent = gj(resizableBlock).find("div.uiSelectContent:first")[0];
-		  var resizeTreeExplorer = gj(resizableBlock).find("div.resizeTreeExplorer:first")[0];
-
-			var itemArea = document.getElementById("SelectItemArea");
-
-			var container = eXo.ecm.ECMUtils.getContainerToResize();
-			eXo.ecm.ECMUtils.initialHeightOfOtherTab = (container) ? container.offsetHeight : 100;
-
-			if (leftContainer.offsetHeight > rightContainer.offsetHeight) {
-			  container.style.height = container.offsetHeight + itemArea.offsetHeight + "px";
-			} else {
-			  var previousElement = gj(container).prevAll("div:first")[0];
-			  var containerHeight = rightContainer.offsetHeight;
-
-			  if (selectContent) {
-			    containerHeight -= selectContent.offsetHeight;
-			  }
-
-			  if (resizeTreeExplorer) {
-			    containerHeight -= resizeTreeExplorer.offsetHeight;
-			  }
-
-			  if (previousElement) {
-			    containerHeight -= previousElement.offsetHeight;
-			  }
-
-			  container.style.height = containerHeight + "px";
-			}
+			console.log((selectItemsBar.offsetTop + selectItemsBar.offsetHeight) + " : " + topBox.offsetHeight);
 		}
 
 		//get SideBarContent for resizing
@@ -1230,7 +1137,6 @@
 		}
 
 		ECMUtils.prototype.loadEffectedItemsInSideBar = function () {
-			window.setTimeout("eXo.ecm.ECMUtils.adjustItemsInSideBar();", 50);
 			Self.UIBrokenCheckingHandler = window.setInterval("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
 			Self.waitContainerRetry = 0;
 			Self.waitForContainer();
@@ -1241,6 +1147,7 @@
 		  Self.uiLeftContainer = gj(Self.uiWorkingArea).find('div.leftContainer:first')[0];
 		  Self.uiRightContainer = gj(Self.uiWorkingArea).find("div.rightContainer:first")[0];
 		  Self.uiResizeSideBar = gj(Self.uiWorkingArea).find("div.resizeBar:first")[0];
+		  if (Self.uiLeftContainer.offsetHeight==0 || Self.uiLeftContainer.offsetWidth==0) return;
 		  if (Self.uiLeftContainer && Self.uiRightContainer && Self.uiWorkingArea) {
 				if (Self.uiLeftContainer.offsetWidth + Self.uiRightContainer.offsetWidth + Self.uiResizeSideBar.offsetWidth  > Self.uiWorkingArea) {
 					if (Self.UIBrokenCheckingHandler) {
@@ -1355,163 +1262,6 @@
 				noticeElem.style.marginLeft = "-" + noticeElem.offsetWidth/2 + "px";
 			      }
 		}
-		}
-
-		ECMUtils.prototype.adjustItemsInSideBar = function () {
-			//if LeftContainer doesn't exist, do nothing
-			var container = document.getElementById("LeftContainer");
-			if (!container) {
-			  return;
-			}
-
-			var treeExplorer = document.getElementById("UITreeExplorer");
-			var itemArea = document.getElementById("SelectItemArea");
-
-			if (typeof (eXo.ecm.ECMUtils.heightOfItemArea) == "undefined") {
-			  if (itemArea) {
-			    eXo.ecm.ECMUtils.heightOfItemArea = itemArea.offsetHeight;
-			  } else {
-			    eXo.ecm.ECMUtils.heightOfItemArea = 286;
-			  }
-			  if (eXo.ecm.ECMUtils.heightOfItemArea == 0) { //Still be invisible, set by default value^M
-			    eXo.ecm.ECMUtils.heightOfItemArea = 286;
-			  }
-			}
-
-			//adjust the height of items in side bar
-			if (treeExplorer) {
-			  eXo.ecm.ECMUtils.adjustTreeExplorer();
-			} else {
-			  eXo.ecm.ECMUtils.adjustAnotherTab();
-			}
-
-			eXo.ecm.ECMUtils.adjustFillOutElement();
-		}
-
-		ECMUtils.prototype.adjustTreeExplorer = function () {
-		  var workingArea = document.getElementById('UIWorkingArea');
-		  var leftContainer = gj(workingArea).find("div.leftContainer:first")[0];
-		  var rightContainer = gj(workingArea).find("div.rightContainer:first")[0];
-
-		  var resizableBlock = gj(leftContainer).find("div.uiResizableBlock:first")[0];
-		  var selectContent = gj(resizableBlock).find("div.uiSelectContent:first")[0];
-		  var resizeTreeExplorer = gj(resizableBlock).find("div.resizeTreeExplorer:first")[0];
-		  var resizeTreeButton = gj(resizeTreeExplorer).find("div.uiIconArrowDown:first")[0];
-
-			var treeExplorer = document.getElementById("UITreeExplorer");
-			var itemArea = document.getElementById("SelectItemArea");
-
-			//keep some parameters
-			if (typeof (eXo.ecm.ECMUtils.initialHeightOfTreeExplorer) == "undefined") {
-			  eXo.ecm.ECMUtils.initialHeightOfTreeExplorer = treeExplorer.offsetHeight;
-			}
-
-			if (typeof (eXo.ecm.ECMUtils.initialHeightOfLeftContainerTree) == "undefined") {
-			  eXo.ecm.ECMUtils.initialHeightOfLeftContainerTree = leftContainer.offsetHeight;
-			}
-
-			if (typeof (eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea) == "undefined") {
-			  eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea = "block";
-			}
-
-		  //show or hide the SelectItemArea
-		  if (itemArea) {
-		    itemArea.style.display = eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea;
-		    if (eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea == "none") {
-			gj(resizeTreeButton).addClass("uiIconArrowUp");
-		    } else {
-		      gj(resizeTreeButton).removeClass("uiIconArrowUp");
-		    }
-		  }
-
-			//adjust the height of tree explorer
-			if (!itemArea) {
-			  treeExplorer.style.height = eXo.ecm.ECMUtils.initialHeightOfTreeExplorer + eXo.ecm.ECMUtils.heightOfItemArea - 20 + 'px';
-			} else if (rightContainer.offsetHeight > eXo.ecm.ECMUtils.initialHeightOfLeftContainerTree) {
-			  var treeExplorerHeight = rightContainer.offsetHeight;
-
-			  if (itemArea) {
-			    treeExplorerHeight -= itemArea.offsetHeight;
-			  }
-
-			  if (selectContent) {
-			    treeExplorerHeight -= selectContent.offsetHeight;
-			  }
-
-		    if (resizeTreeExplorer) {
-		      treeExplorerHeight -= resizeTreeExplorer.offsetHeight;
-		    }
-		    var treeExplorerFull = gj(treeExplorer).children("div")[0];
-		    if (treeExplorerFull.offsetHeight > eXo.ecm.ECMUtils.initialHeightOfTreeExplorer && treeExplorerHeight > treeExplorerFull.offsetHeight) {
-		      treeExplorerHeight = treeExplorerFull.offsetHeight
-		    }
-
-		    treeExplorer.style.height = treeExplorerHeight - 28 + 'px';
-		  } else {
-		    if (itemArea.style.display == 'none') {
-		      treeExplorer.style.height = eXo.ecm.ECMUtils.initialHeightOfTreeExplorer + eXo.ecm.ECMUtils.heightOfItemArea - 20 + 'px';
-		    } else {
-		      treeExplorer.style.height = eXo.ecm.ECMUtils.initialHeightOfTreeExplorer - 20 + 'px';
-		    }
-		  }
-		}
-
-		ECMUtils.prototype.adjustAnotherTab = function () {
-		  var workingArea = document.getElementById('UIWorkingArea');
-		  var leftContainer = document.getElementById("LeftContainer");
-		  var rightContainer = gj(workingArea).find("div.rightContainer:first")[0];
-
-		  var resizableBlock = gj(workingArea).find("div.uiResizableBlock:first")[0];
-		  var selectContent = gj(resizableBlock).find("div.uiSelectContent:first")[0];
-		  var resizeTreeExplorer = gj(resizableBlock).find("div.resizeTreeExplorer:first")[0];
-		  var resizeTreeButton = gj(resizeTreeExplorer).find("div.uiIconArrowDown:first")[0];
-
-			var itemArea = document.getElementById("SelectItemArea");
-			var container = eXo.ecm.ECMUtils.getContainerToResize();
-
-			//keep some parameters
-			eXo.ecm.ECMUtils.initialHeightOfOtherTab = container.offsetHeight;
-			eXo.ecm.ECMUtils.initialHeightOfLeftContainerAnotherTab = leftContainer.offsetHeight;
-
-			if (typeof (eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea) == "undefined") {
-			  eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea = "block";
-			}
-
-		  //show or hide the SelectItemArea
-		  itemArea.style.display = eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea;
-		  if (eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea == "none") {
-		    gj(resizeTreeButton).addClass("uiIconArrowUp");
-		  } else {
-		    gj(resizeTreeButton).removeClass("uiIconArrowUp");
-		  }
-
-			//adjust the height of container
-			if (itemArea.style.display == 'none') {
-			  if (rightContainer.offsetHeight > eXo.ecm.ECMUtils.initialHeightOfLeftContainerAnotherTab) {
-			    var previousElement = gj(container).prevAll("div:first")[0];
-			    var containerHeight = rightContainer.offsetHeight;
-
-			    if (selectContent) {
-			      containerHeight -= selectContent.offsetHeight;
-			    }
-
-			    if (resizeTreeExplorer) {
-			      containerHeight -= resizeTreeExplorer.offsetHeight;
-			    }
-
-			    if (itemArea) {
-			      containerHeight -= itemArea.offsetHeight;
-			    }
-
-			    if (previousElement) {
-			      containerHeight -= previousElement.offsetHeight;
-			    }
-
-			    container.style.height = containerHeight + "px";
-			  } else {
-			    container.style.height = eXo.ecm.ECMUtils.initialHeightOfOtherTab + eXo.ecm.ECMUtils.heightOfItemArea + 'px';
-			  }
-			}
 		}
 
 		ECMUtils.prototype.clearFillOutElement = function () {
