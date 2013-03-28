@@ -970,14 +970,14 @@
   <UIActionTypeForm>
     <title>Add Action Type</title>
     <label>
-      <actionType>Extend Action Type</actionType>
-      <name>Name</name>
-      <isMove>is Action Move</isMove>
-      <variables>Variables</variables>
-      <exo_businessProcessAction>Business Processes</exo_businessProcessAction>
-      <exo_scriptAction>Groovy Scripts</exo_scriptAction>
-      <exo_ruleAction>Defined Rules</exo_ruleAction>
-      <script>Script</script>
+      <actionType>Extend Action Type:</actionType>
+      <name>Name:</name>
+      <isMove>is Action Move:</isMove>
+      <variables>Variables:</variables>
+      <exo_businessProcessAction>Business Processes:</exo_businessProcessAction>
+      <exo_scriptAction>Groovy Scripts:</exo_scriptAction>
+      <exo_ruleAction>Defined Rules:</exo_ruleAction>
+      <script>Script:</script>
     </label>
     <action>
       <Save>#{word.save}</Save>
