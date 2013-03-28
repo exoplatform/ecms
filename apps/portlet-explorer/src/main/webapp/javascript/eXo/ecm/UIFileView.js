@@ -680,7 +680,7 @@ UIFileView.prototype.initStickBreadcrumb = function() {
 
 UIFileView.prototype.toggleCheckboxes = function(checkbox, evt) {
 	resetArrayItemsSelected();
-	Self.allItems.each(function(index, elem){
+	gj(Self.allItems).each(function(index, elem){
 		Self.selectBoxType = checkbox.checked;
 		Self.clickedItem = elem;
 		Self.clickTotalCheckBox = true;
@@ -711,7 +711,7 @@ UIFileView.prototype.clearCheckboxes = function(evt) {
 		Self.clickTotalCheckBox = true;
 		Self.mouseUpItem(evt);
 	});
-	Self.clearItemsSelected();
+	resetArrayItemsSelected();
 	gj("#UIFileViewCheckBox").attr("checked", false);
 	gj("#UIDocumentInfo").find(".checkbox").attr("checked", false);
 	gj("#UIDocumentInfo").find(".rowView").css("backgroundColor","#FFF");
