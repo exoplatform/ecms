@@ -65,12 +65,10 @@
       actionArea.onmouseout = Self.mouseOutGround;
           actionArea.onfocus = Self.mouseOverGround;
           actionArea.onblur = Self.mouseOutGround;  
-      
-          var fillOutElement = document.createElement('div');
-      fillOutElement.id = "FillOutElement";
+      gj("div.FillOutElement").remove();
+      var fillOutElement = document.createElement('div');
+      fillOutElement.className = "FillOutElement";
       actionArea.appendChild(fillOutElement);  
-
-
       //remove context menu
       var contextMenu = document.getElementById(Self.contextMenuId);
       if (contextMenu) contextMenu.parentNode.removeChild(contextMenu);

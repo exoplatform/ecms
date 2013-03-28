@@ -542,7 +542,7 @@
 		  eXo.ecm.ECMUtils.currentWidth = Self.uiLeftContainer.offsetWidth;
 		  var title = gj(Self.uiLeftContainer).find("h5.title:first")[0];
 		  eXo.ecm.ECMUtils.currentTitleWidth = title.offsetWidth;
-		  window.clearInterval(window.UIBrokenCheckingHandler);
+		  window.clearTimeout(window.UIBrokenCheckingHandler);
 		  if (Self.uiLeftContainer.style.display == '' || Self.uiLeftContainer.style.display == 'block') {
 		    document.onmousemove = eXo.ecm.ECMUtils.resizeMouseMoveSideBar;
 		    document.onmouseup = eXo.ecm.ECMUtils.resizeMouseUpSideBar;
@@ -953,7 +953,7 @@
 		  var jcrExpPortlet = document.getElementById("UIJCRExplorer");
 		  gj(jcrExpPortlet).removeClass("UIJCRExplorerNoSelect");
 		  if (Self.uiResizeSideBar) gj(Self.uiResizeSideBar).removeClass("resizeBarDisplay");
-		  window.UIBrokenCheckingHandler = window.setInterval("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
+		  window.UIBrokenCheckingHandler = window.setTimeout("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
 		  delete eXo.ecm.ECMUtils.currentWidth;
 		  delete eXo.ecm.ECMUtils.currentMouseX;
 		  delete eXo.ecm.ECMUtils.resizableBlockWidth;
@@ -964,7 +964,7 @@
 		  var event = event || window.event;
 		  if (Self.initWithoutLeftContainer()) return;
 		  event.cancelBubble = true;
-      window.clearInterval(window.UIBrokenCheckingHandler);
+      window.clearTimeout(window.UIBrokenCheckingHandler);
 		  var leftContainer = document.getElementById("LeftContainer");
 		  var rightContainer = gj(Self.uiWorkingArea).find("div.rightContainer:first")[0];
 		  var resizeButton = gj(Self.uiWorkingArea).find("a.resizeButton:first")[0];
@@ -1143,8 +1143,7 @@
 		  Self.uiLeftContainer = gj(Self.uiWorkingArea).find('div.leftContainer:first')[0];
 		  Self.uiRightContainer = gj(Self.uiWorkingArea).find("div.rightContainer:first")[0];
 		  Self.uiResizeSideBar = gj(Self.uiWorkingArea).find("div.resizeBar:first")[0];
-		  console.log("Checking");
-		  if (Self.uiLeftContainer.offsetHeight==0 || Self.uiLeftContainer.offsetWidth==0) return;
+		  if (!Self.uiLeftContainer || Self.uiLeftContainer.offsetHeight==0 || Self.uiLeftContainer.offsetWidth==0) return;
 		  if (Self.uiLeftContainer && Self.uiRightContainer && Self.uiWorkingArea) {
 				if (Self.uiLeftContainer.offsetWidth + Self.uiRightContainer.offsetWidth + Self.uiResizeSideBar.offsetWidth  > Self.uiWorkingArea) {
 					Self.loadContainerWidth();
@@ -1153,11 +1152,13 @@
 				}else if (Self.uiLeftContainer.offsetTop < Self.uiRightContainer.offsetTop) {
 					Self.loadContainerWidth();
 				} else if (Self.uiLeftContainer.offsetHeight > Self.uiRightContainer.offsetHeight) {
-					var fillOutElement = gj("div#FillOutElement:visible");
-					if (!fillOutElement) return;
-					Self.loadContainerWidth();
+					var fillOutElement = gj("div.FillOutElement:visible");
+					if (fillOutElement &&testBreadCrumb) {
+						Self.loadContainerWidth();
+					}
 				}
 			}
+			window.UIBrokenCheckingHandler = window.setTimeout("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
 		}
 		/**
 		 * @fucntion   waitForContainer
@@ -1171,7 +1172,7 @@
 		    if (fixToolbar) gj(fixToolbar).css('z-index', 10);
 		    console.log("Load Container time out");
 		    Self.loadContainerWidth();
-		    window.UIBrokenCheckingHandler = window.setInterval("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
+		    window.UIBrokenCheckingHandler = window.setTimeout("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
 		    return;
 		  }
 		  Self.uiWorkingArea = gj(document).find('div.uiWorkingArea:first')[0];
@@ -1199,8 +1200,8 @@
 		    return;
 		  }
 		  Self.loadContainerWidth();
-		  window.clearInterval(window.UIBrokenCheckingHandler);
-		  window.UIBrokenCheckingHandler = window.setInterval("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
+		  window.clearTimeout(window.UIBrokenCheckingHandler);
+		  window.UIBrokenCheckingHandler = window.setTimeout("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
 		  var fixToolbar = gj(document).find("div.UIToolbarContainer:first")[0];
 		  if (fixToolbar) gj(fixToolbar).css( 'z-index', 10 );
 		}
@@ -1244,11 +1245,24 @@
 		}
 		}
 
+		ECMUtils.prototype.appendFillOutElement =function(parentID, tabClass) {
+			var divContainer = document.getElementById(parentID);
+			if (!divContainer) return;
+			var visibleTab = gj(divContainer).find("div." + tabClass + ":visible");
+			if (!visibleTab) return;
+			if ( visibleTab.length==0) return;
+			window.clearTimeout(window.UIBrokenCheckingHandler);
+			gj('div.FillOutElement').remove();
+			gj(visibleTab).append("<div class=\"FillOutElement\">&nbsp;</div>");
+			eXo.ecm.ECMUtils.clearFillOutElement();
+			eXo.ecm.ECMUtils.adjustFillOutElement();
+			window.UIBrokenCheckingHandler = window.setTimeout("eXo.ecm.ECMUtils.UIBrokenChecking();", eXo.ecm.ECMUtils.UIBrokenCheckingInterval);
+		}
 		ECMUtils.prototype.clearFillOutElement = function () {
-			var fillOutElement = document.getElementById('FillOutElement');
+			var fillOutElement = gj('div.FillOutElement');
 			if (fillOutElement) {
-			  fillOutElement.style.width = "0px";
-			  fillOutElement.style.height = "0px";
+			  fillOutElement.css("height", "0px");
+			  fillOutElement.css("width", "0px");
 			}
 		}
 
@@ -1256,15 +1270,15 @@
 		  if (eXo.ecm.ECMUtils.initWithoutLeftContainer()) return;
 		  var workingArea = document.getElementById('UIWorkingArea');
 		  var leftContainer = gj(workingArea).find("div.leftContainer:first")[0];
+		  if (!leftContainer) return;
 		  var rightContainer = gj(workingArea).find("div.rightContainer:first")[0];
 		  if (rightContainer.offsetHeight < leftContainer.offsetHeight) {
-		    var fillOutElement = document.getElementById('FillOutElement');
+		    var fillOutElement = gj('div.FillOutElement');
 		    if (fillOutElement) {
-		      fillOutElement.style.width = "0px";
 		      if (leftContainer.offsetHeight - rightContainer.offsetHeight>0){
-		        fillOutElement.style.height = leftContainer.offsetHeight - rightContainer.offsetHeight + "px";
+		      	fillOutElement.css("height", leftContainer.offsetHeight - rightContainer.offsetHeight + "px");
 		      } else {
-		      	fillOutElement.style.height = "0px";
+		      	fillOutElement.css("width", "0px");
 		      }
 		    }
 		  }

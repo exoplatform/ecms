@@ -57,14 +57,13 @@
       actionArea.onmousedown = Self.mouseDownGround;
       actionArea.onkeydown = Self.mouseDownGround;
       actionArea.onmouseup = Self.mouseUpGround;
-  
-      var fillOutElement = document.createElement('div');
-      fillOutElement.id = "FillOutElement";
-  
       var listGrid = gj(actionArea).find("div.uiListGrid:first")[0];
-      if (listGrid) {
-        listGrid.appendChild(fillOutElement);
-      }
+			if (listGrid) {
+				var fillOutElement = document.createElement('div');
+				fillOutElement.className = "FillOutElement";
+				gj("div.FillOutElement").remove();
+				listGrid.appendChild(fillOutElement);
+			}
   
       //remove context menu
       var contextMenu = document.getElementById(Self.contextMenuId);
