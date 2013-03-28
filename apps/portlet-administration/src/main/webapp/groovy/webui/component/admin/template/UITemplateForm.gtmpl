@@ -29,7 +29,7 @@
 					if(!uiChild.isRendered()) continue; 
 					String active = "";
 					if(uiChild.getId().equals(selTabId)) active="in active";				
-					println "<div class=\"tab-pane fade $active\" id=\"tab-" + uiChild.getId() + "\">";
+					println "<div class=\"tab-pane fade $active resizable\" id=\"tab-" + uiChild.getId() + "\">";
 					uicomponent.renderUIComponent(uiChild);
 					println "</div>";
 				}
