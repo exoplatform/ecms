@@ -8,7 +8,7 @@
 
 <div class="uiBox" id="$uicomponent.id">
 	<h5 class="title clearfix">
-		<a class="sideGeneratal" onclick="<%=uicomponent.event("DocumentFilter")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAllItemsByType.label.DocumentFilterConfiguration")%>"><i class="uiIconSetting uiIconLightGrey"></i></a>
+		<a class="sideGeneratal" onclick="<%=uicomponent.event("DocumentFilter")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAllItemsByType.label.DocumentFilterConfiguration")%>"><i class="uiIconSetting uiIconLightGray"></i></a>
 		<%=_ctx.appRes("UIAllItemsByType.label.ByType")%>
 	</h5>					
 	<div class="uiContentBox">
