@@ -1153,7 +1153,7 @@
 					Self.loadContainerWidth();
 				} else if (Self.uiLeftContainer.offsetHeight > Self.uiRightContainer.offsetHeight) {
 					var fillOutElement = gj("div.FillOutElement:visible");
-					if (fillOutElement &&testBreadCrumb) {
+					if (fillOutElement) {
 						Self.loadContainerWidth();
 					}
 				}
