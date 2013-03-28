@@ -581,7 +581,7 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 //	contextMenu.style.left = X + 5 + "px";
     var menubar = gj('div.uiFileViewActionBar');
     if (menubar) {
-    	menubar.width(gj("div#UIActionBar").width());
+    	menubar.width(gj("div#UIActionBar").width()-2);
     }	
     var moreButton = gj("#ShowMoreActionContainer");
     if (moreButton) {
@@ -801,7 +801,7 @@ UIFileView.prototype.clickRightMouse = function(event, elemt, menuId, objId, whi
     eXo.webui.UIPopup.show(contextMenu);
     var menubar = gj('div.uiFileViewActionBar');
     if (menubar) {
-    	menubar.width(gj("div#UIActionBar").width());
+    	menubar.width(gj("div#UIActionBar").width()-2);
     }    
     eXo.ecm.ECMUtils.loadContainerWidth();
     var moreButton = gj("#ShowMoreActionContainer");

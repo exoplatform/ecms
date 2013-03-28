@@ -1058,7 +1058,7 @@
       actionbar.width(actionbar.parent().width());
       var menubar = gj('div.uiFileViewActionBar');
       if (menubar) {
-          menubar.width(gj("div#UIActionBar").width()-1);
+          menubar.width(gj("div#UIActionBar").width()-2);
       }
       //update width of UIListGrid
       eXo.ecm.ECMUtils.updateListGridWidth();

@@ -701,7 +701,7 @@
 			
 			var actionbar= gj('#UIActionBar');
 			if (actionbar) { //VinhNT workaround for the un-expand width of ActionBar problem, should be improved later
-			  actionbar.width(actionbar.parent().width()-2);
+			  actionbar.width(actionbar.parent().width());
 			}
 			var viewbar = gj('#UIViewBarContainer')[0];
 			var uiMainActionContainer   = gj(divAction).find("ul.nav-pills")[0];
