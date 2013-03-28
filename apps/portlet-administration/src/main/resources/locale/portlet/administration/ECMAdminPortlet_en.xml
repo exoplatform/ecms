@@ -298,12 +298,12 @@
       <input>Action</input>
     </header>
     <label>
-      <dialogTemplate>Dialog Template</dialogTemplate>
-      <viewTemplate>View Template</viewTemplate>
-      <metadataName>Metadata Name</metadataName>
-      <viewPermission>Permission</viewPermission>
+      <dialogTemplate>Dialog Template:</dialogTemplate>
+      <viewTemplate>View Template:</viewTemplate>
+      <metadataName>Metadata Name:</metadataName>
+      <viewPermission>Permission:</viewPermission>
       <permission>UIMetadataForm</permission>
-						<metadataLabel>Label</metadataLabel>
+      <metadataLabel>Label:</metadataLabel>
     </label>
     <tab>
       <label>
