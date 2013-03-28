@@ -144,6 +144,7 @@ UIFileView.prototype.mouseOutItem = function(event) {
 UIFileView.prototype.mouseDownItem = function(evt) {
 	eval("var event = ''");
 	event = evt || window.event;
+	if (!event) return;
 	event.cancelBubble = true;
 	var element = Self.clickedItem || this;
 	removeMobileElement();
@@ -270,6 +271,7 @@ UIFileView.prototype.clickItem = function(event, element, callback) {
 UIFileView.prototype.mouseUpItem = function(evt) {
 	eval("var event=''");
 	event = evt || window.event;
+	if (!event) return;
 	var element = Self.clickedItem || this;
 	Self.enableDragDrop = null;
 	document.onmousemove = null;
@@ -698,7 +700,7 @@ UIFileView.prototype.toggleCheckboxes = function(checkbox, evt) {
 };
 
 UIFileView.prototype.clearCheckboxes = function(evt) {
-	Self.allItems.each(function(index, elem){
+	gj(Self.allItems).each(function(index, elem){
 		Self.selectBoxType = false;
 		Self.clickedItem = elem;
 		Self.clickTotalCheckBox = true;
@@ -709,6 +711,7 @@ UIFileView.prototype.clearCheckboxes = function(evt) {
 		Self.clickTotalCheckBox = true;
 		Self.mouseUpItem(evt);
 	});
+	Self.clearItemsSelected();
 	gj("#UIFileViewCheckBox").attr("checked", false);
 	gj("#UIDocumentInfo").find(".checkbox").attr("checked", false);
 	gj("#UIDocumentInfo").find(".rowView").css("backgroundColor","#FFF");
