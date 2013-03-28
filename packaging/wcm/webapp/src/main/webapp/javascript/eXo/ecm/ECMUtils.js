@@ -1152,8 +1152,7 @@
 				}else if (Self.uiLeftContainer.offsetTop < Self.uiRightContainer.offsetTop) {
 					Self.loadContainerWidth();
 				} else if (Self.uiLeftContainer.offsetHeight > Self.uiRightContainer.offsetHeight) {
-					var fillOutElement = gj("div.FillOutElement:visible");
-					if (fillOutElement) {
+					if (gj("div.FillOutElement:visible").length >0) {
 						Self.loadContainerWidth();
 					}
 				}
