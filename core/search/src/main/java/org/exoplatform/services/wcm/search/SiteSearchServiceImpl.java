@@ -73,13 +73,16 @@ import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 
 /**
- * Created by The eXo Platform SAS Author : Hoa Pham hoa.pham@exoplatform.com
- * Oct 8, 2008
+ * The SiteSearchService component is used in the Search portlet that allows users
+ * to find all information matching with your given keyword.
  */
 public class SiteSearchServiceImpl implements SiteSearchService {
 
+  /** Allow administrators to enable/disable the fuzzy search mechanism. */
   private static final String IS_ENABLED_FUZZY_SEARCH = "isEnabledFuzzySearch";
-  
+
+  /** Allow the approximate level between the input keyword and the found key results.
+   * In case of the invalid configuration, the default value is set to 0.8. */
   private static final String FUZZY_SEARCH_INDEX = "fuzzySearchIndex";
   
   /** The live portal manager service. */
@@ -105,7 +108,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
 
   /** The include mime types. */
   private CopyOnWriteArraySet<String> includeMimeTypes = new CopyOnWriteArraySet<String>();
-  
+
   private boolean isEnabledFuzzySearch = true;
   
   private double fuzzySearchIndex = 0.8;
