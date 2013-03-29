@@ -584,13 +584,13 @@
 			}
 			
 			textarea { 
-				font-size:11px;
-				height:175px;
-				width:450px;
+				font-size: 11px;
+				height: 175px;
+				width: 90%;
 				vertical-align: top;
 			}
 			
-			div > span {
+			> div > span {
 				width: 90% !important;
 				margin-right: 5px;
 			}
@@ -602,7 +602,32 @@
 			}
 		}
 	}
+	
+	.helpBlock {
+		display: inline-block;
+		background: #f0f0f0;
+		border: 1px solid #cccccc;
+		color: @grayDark;
+		padding: 15px 15px 15px 40px;
+		.border-radius(5px);
+		width: 155px;
+		margin-left: 10px;
+		
+		.uiIconHelp {
+			background: url("/eXoResources/skin/images/Icons/uiIconColor.png") no-repeat -40px 0px;
+			margin: 3px 0px 0px -25px;
+			float: left;
+		}
+		.form-horizontal .textarea {
+			vertical-align: top;
+		}
+	}
+	.helpBlockTitle {
+		display: block;
+		width: auto;
+	}
 }
+
 
 /******** View1 **************/
 
@@ -1190,33 +1215,6 @@
 		.size(20px,20px);
 		line-height: 20px !important;
 		font-size: 11px;
-	}
-}
-
-/******** uiTreeNodePageIterator **************/
-.uiDocumentFormController {
-	.helpBlock {
-		display: inline-block;
-		background: #f0f0f0;
-		border: 1px solid #cccccc;
-		color: @grayDark;
-		padding: 15px 15px 15px 40px;
-		.border-radius(5px);
-		width: 155px;
-		margin-left: 10px;
-		
-		.uiIconHelp {
-			background: url("/eXoResources/skin/images/Icons/uiIconColor.png") no-repeat -40px 0px;
-			margin: 3px 0px 0px -25px;
-			float: left;
-		}
-		.form-horizontal .textarea {
-			vertical-align: top;
-		}
-	}
-	.helpBlockTitle {
-		display: block;
-		width: auto;
 	}
 }
 
