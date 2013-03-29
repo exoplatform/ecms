@@ -577,9 +577,10 @@
 			
 			a [class^="uiIcon"] {
 				background-image: url("/eXoResources/skin/images/Icons/uiIconsLightGray.png");
-				&:hover {
-					background-image: url("/eXoResources/skin/images/Icons/uiIconsBlue.png");
-				}
+			}
+			
+			a:hover [class^="uiIcon"] {
+				background-image: url("/eXoResources/skin/images/Icons/uiIconsBlue.png");
 			}
 			
 			textarea { 
@@ -587,9 +588,6 @@
 				height:175px;
 				width:450px;
 				vertical-align: top;
-			}
-			.uiSelectbox select.selectbox {
-				width: 295px;
 			}
 			
 			div > span {
@@ -631,21 +629,24 @@
 	}
 }
 
-/******** Dialog1 **************/
+/******** uiDialogAction **************/
 
 .uiDialogAction {
-	padding: 4px 10px;
-	line-height: 28px;
-	
-	.dialogAction .btn {
-		margin-left: 10px;
+	.uiDialogTitle {
+		font-size: 13px;
 	}
 	
-	.MaximizeScreen20x20Icon,
-	.MinimizeScreen20x20Icon  {
-		margin-left: 10px;
-		display: inline-block;
-		vertical-align: middle;
+	.dialogAction {
+		margin: -4px 0px;
+		
+		.btn {
+			margin-left: 10px;
+		}
+		
+		.actionIcon {
+			margin: 0px 0px 0px 10px;
+			cursor: pointer;
+		}
 	}
 }
 
@@ -1099,21 +1100,6 @@
 	
 	.uiGrid .diffAdd {
 		background: #e7f9c8;
-	}
-}
-
-/******** uiDialogAction **************/
-.uiDialogAction {
-	.uiDialogTitle {
-		font-size: 13px;
-	}
-	
-	.dialogAction {
-		margin: -4px 0px;
-		
-		[class^="uiIconEcms"] {
-			margin: 2px 0px 0px 10px;
-		}
 	}
 }
 
