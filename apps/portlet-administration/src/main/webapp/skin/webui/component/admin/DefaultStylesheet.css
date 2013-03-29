@@ -318,22 +318,6 @@
   height: 350px;
 }
 
-/*############################## -- UIActionManager -- ########################*/
-
-.UIActionManager .UIActionTypeForm  {
-	padding: 10px; 
-}
-
-.UIActionManager .UIActionTypeForm .HorizontalLayout{
-	padding-top: 10px; 
-	background: #f7f7f7;
-}
-
-.UIActionManager .UIActionTypeForm .FormContainer  {
-	width: 500px;
-	margin: auto;
-}
-
 /*############################## -- UIScriptManager  -- ########################*/
 
 .UIECMAdminPortlet .UIECMScripts  {
