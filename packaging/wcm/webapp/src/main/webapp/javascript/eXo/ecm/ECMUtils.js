@@ -975,15 +975,6 @@
 		    gj(Self.uiResizeSideBar).removeClass("resizeNoneBorder");
 		    Self.uiResizeSideBar.style.height = leftContainer.offsetHeight + "px";
 		    showSideBar = true;
-		    if (typeof (eXo.ecm.ECMUtils.heightOfItemArea) == "undefined") {
-		      var itemArea = document.getElementById("SelectItemArea");
-		      if (itemArea && itemArea.style.display=="block") {
-		        eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea = "block";
-		        eXo.ecm.ECMUtils.heightOfItemArea = itemArea.offsetHeight;
-		      } else {
-		        eXo.ecm.ECMUtils.heightOfItemArea = 286;
-		      }
-		    }
 		    if (iArrow) iArrow.className = "uiIconArrowLeft";
 		  } else {
 		    leftContainer.style.display = 'none';
@@ -1265,22 +1256,36 @@
 			}
 		}
 
+		/**
+		 * function: adjustFillOutElement
+		 * purpose : adjust a invisible element which make the left container and right container 
+		 *           equal in height.
+		 */
 		ECMUtils.prototype.adjustFillOutElement = function () {
-		  if (eXo.ecm.ECMUtils.initWithoutLeftContainer()) return;
-		  var workingArea = document.getElementById('UIWorkingArea');
-		  var leftContainer = gj(workingArea).find("div.leftContainer:first")[0];
-		  if (!leftContainer) return;
-		  var rightContainer = gj(workingArea).find("div.rightContainer:first")[0];
-		  if (rightContainer.offsetHeight < leftContainer.offsetHeight) {
-		    var fillOutElement = gj('div.FillOutElement');
-		    if (fillOutElement) {
-		      if (leftContainer.offsetHeight - rightContainer.offsetHeight>0){
-		      	fillOutElement.css("height", leftContainer.offsetHeight - rightContainer.offsetHeight + "px");
-		      } else {
-		      	fillOutElement.css("width", "0px");
-		      }
-		    }
-		  }
+			var checkMinHeight = eXo.ecm.ECMUtils.initWithoutLeftContainer();
+			var workingArea = document.getElementById('UIWorkingArea');
+			var leftContainer = gj(workingArea).find("div.leftContainer:first")[0];
+			checkMinHeight = checkMinHeight || !leftContainer;
+			if (checkMinHeight) {
+				gj("div#UIDocumentWorkspace").css("min-height", "500px");
+			} else {
+				if (gj(leftContainer).css("display")=="none") {
+					gj("div#UIDocumentWorkspace").css("min-height", "500px");
+				}else { 
+					gj("div#UIDocumentWorkspace").css("min-height", "");
+					var rightContainer = gj(workingArea).find("div.rightContainer:first")[0];
+					if (rightContainer.offsetHeight < leftContainer.offsetHeight) {
+						var fillOutElement = gj('div.FillOutElement');
+						if (fillOutElement) {
+							if (leftContainer.offsetHeight - rightContainer.offsetHeight>0){
+								fillOutElement.css("height", leftContainer.offsetHeight - rightContainer.offsetHeight + "px");
+							} else {
+								fillOutElement.css("width", "0px");
+							}
+						}
+					}
+				}
+			}
 		}
 
 		ECMUtils.prototype.disableAutocomplete = function (id) {
