@@ -103,7 +103,8 @@
        if (!listNavigationNodeUris.isEmpty()) {
          itemUrl = uicomponent.getPublishedNodeURI(listNavigationNodeUris.get(0));
        }
-     }
+     }     
+     itemUrl = itemUrl.replace("+","%2b");
      def editor = resultNode.getEditor();
      def itemExcerpt = resultNode.getExcerpt();
      String description = resultNode.getDescription();
