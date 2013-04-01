@@ -102,7 +102,7 @@ public class ViewInfoActionComponent extends UIAbstractManagerComponent{
       //show popup
       UIViewInfoManager uiViewInfoManager = uiExplorer.createUIComponent(UIViewInfoManager.class, null, null);
       uiViewInfoManager.setSelectedNode(selectedNode);
-      objUIPopupContainer.activate(uiViewInfoManager, 600, 360);
+      objUIPopupContainer.activate(uiViewInfoManager, 600, 0);
       event.getRequestContext().addUIComponentToUpdateByAjax(objUIPopupContainer);
     }
   }
