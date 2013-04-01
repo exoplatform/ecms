@@ -161,16 +161,16 @@
 
 
 
-<div style="height:0px;width:0px">
+<div style="height:0px;width:0px;position:absolute;z-index:-1">
   <input  style="height:0px;width:0px" id="MultiUploadInputFiles" type="file" multiple="multiple" onchange="eXo.ecm.MultiUpload.handleFiles(this.files);eXo.ecm.MultiUpload.openMultiUploadBox();"/>
 </div>
 
-<div style="height:0px;width:0px">
+<div style="height:0px;width:0px;position:absolute;z-index:-1">
 <iframe id="iFrameUpload" name="iFrameUpload" class="iFrameUpload" frameborder="0px" border="0px" style="width: 0px; height:0px">
 </iframe>
 </div>
 
-<div style="height:0px;width:0px">
+<div style="height:0px;width:0px;position:absolute;z-index:-1">
 <xmp id="iContentUpLoad" style="display:none">
 <html style="padding: 0px; margin: 0px;">
   <head>
