@@ -18,7 +18,7 @@
 	}
 %>
 <div class="resizable">
-	<h5 class="header">dc:elementSet</h5>
+	<h5 class="header">Core Elements</h5>
 	<div class="row-fluid">
 		<ul class="span6">
 			<li class="contentBlock">

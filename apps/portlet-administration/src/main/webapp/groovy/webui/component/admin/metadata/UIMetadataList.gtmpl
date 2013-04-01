@@ -8,6 +8,10 @@
  */
 %>
 <% 
+  def rcontext = _ctx.getRequestContext();
+  def jsManager = rcontext.getJavascriptManager();
+  jsManager.require("SHARED/jquery", "gj").addScripts("gj(document).ready(function() { gj(\"*[rel='tooltip']\").tooltip();});");
+  
   int totalPages = uicomponent.getUIPageIterator().getAvailablePage();
   def metaDatas = uicomponent.getListMetadata() ; 
   int totalItems = uicomponent.getAllMetadatas().size();

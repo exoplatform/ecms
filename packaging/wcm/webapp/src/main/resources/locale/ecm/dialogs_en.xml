@@ -220,21 +220,21 @@
   <ElementSet>
     <dialog>
       <label>
-        <title>#{word.title}</title>
-        <creator>Creator</creator>
-        <subject>#{word.subject}</subject>
-        <source>Source</source>
-        <contributor>Contributor</contributor>
-        <resource-type>Resource Type</resource-type>
-        <date>#{word.date}</date>
-        <publisher>Publisher</publisher>
-        <description>#{word.description}</description>
-        <rights>Rights</rights>
-        <relation>Relation</relation>
-        <format>#{word.format}</format>
-        <coverage>Coverage</coverage>
-        <identifier>Identifier</identifier>
-        <language>Language</language>
+        <title>#{word.title}:</title>
+        <creator>Creator:</creator>
+        <subject>#{word.subject}:</subject>
+        <source>Source:</source>
+        <contributor>Contributor:</contributor>
+        <resource-type>Resource Type:</resource-type>
+        <date>#{word.date}:</date>
+        <publisher>Publisher:</publisher>
+        <description>#{word.description}:</description>
+        <rights>Rights:</rights>
+        <relation>Relation:</relation>
+        <format>#{word.format}:</format>
+        <coverage>Coverage:</coverage>
+        <identifier>Identifier:</identifier>
+        <language>Language:</language>
       </label>
     </dialog>
   </ElementSet>
