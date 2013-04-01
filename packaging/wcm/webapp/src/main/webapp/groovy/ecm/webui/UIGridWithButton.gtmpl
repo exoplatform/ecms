@@ -5,7 +5,10 @@
   String[] beanFields =  uicomponent.getBeanFields() ;
   String[] beanActions =  uicomponent.getBeanActions() ;
   UIComponent uiParent = uicomponent.getParent() ;
-  String name = uicomponent.getId() ; 
+  String name = uicomponent.getId() ;
+  def rcontext = _ctx.getRequestContext();
+  def jsManager = rcontext.getJavascriptManager();
+  jsManager.require("SHARED/jquery", "gj").addScripts("gj(document).ready(function() { gj(\"*[rel='tooltip']\").tooltip();});");
 %>
 
 <div id="$uicomponent.id">
@@ -39,7 +42,7 @@
 	  <tbody>
 	  <%if(uicomponent.getUIPageIterator().getAvailable() < 1) {%>
 	    <tr>
-	      <td style="font-style:italic; color: #FF5604" colspan="<%=beanFields.length+1%>">
+	      <td class="empty center" colspan="<%=beanFields.length+1%>">
 	      	<div class="actionContainer">
 		        <%=_ctx.appRes(uicomponent.id + ".grid.msg.empty")%>
 		      </div>
