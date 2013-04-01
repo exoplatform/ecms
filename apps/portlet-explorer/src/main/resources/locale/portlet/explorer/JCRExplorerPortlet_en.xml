@@ -2209,9 +2209,9 @@
   -->
   <UIWorkspaceList>
     <label>
-      <workspaceName>Workspace</workspaceName>
-      <rootNodeInfo>Root Path</rootNodeInfo>
-      <rootPath>Root Path</rootPath>
+      <workspaceName>Workspace:</workspaceName>
+      <rootNodeInfo>Root Path:</rootNodeInfo>
+      <rootPath>Root Path:</rootPath>
     </label>
   </UIWorkspaceList>
   <pathSelector>
