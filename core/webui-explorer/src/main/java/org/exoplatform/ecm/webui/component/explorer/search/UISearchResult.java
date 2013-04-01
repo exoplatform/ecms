@@ -126,7 +126,7 @@ public class UISearchResult extends UIContainer {
   }
 
   public UISearchResult() throws Exception {
-    uiPageIterator_ = addChild(UIPageIterator.class, null, null);
+    uiPageIterator_ = addChild(UIPageIterator.class, null, "UISearchResultPageIterator");
   }
 
   public void setQuery(String queryStatement, String workspaceName, String language, boolean isSystemSession, String keyword) {

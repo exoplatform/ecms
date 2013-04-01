@@ -100,7 +100,7 @@ public class UIDocumentNodeList extends UIContainer {
   public UIDocumentNodeList() throws Exception {
     linkManager_ = WCMCoreUtils.getService(LinkManager.class);
     addChild(ManageVersionsActionComponent.class, null, null);
-    pageIterator_ = addChild(UIPageIterator.class, null, null);
+    pageIterator_ = addChild(UIPageIterator.class, null, "UIDocumentNodeListPageIterator");
     padding_ = 0;
   }
   
