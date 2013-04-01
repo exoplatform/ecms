@@ -19,106 +19,92 @@
   else if(uicomponent.ELEMENT_VIEW.equals(selTabId)) elementCSS="class=\"active\"";
 %>
 
-<div class="UITabPane uiTabNormal" id="$uicomponent.id">
-  <ul class="nav nav-tabs" id="myTab">
-    <li $metadataCSS onclick="ajaxAsyncGetRequest('" + uicomponent.url("SelectTab", uicomponent.METADATA_VIEW) + "', true)">
-	    <a data-toggle="tab" href="#tab-<%=uicomponent.METADATA_VIEW%>"><%=_ctx.appRes("UIMetadataView.tab.metadataView")%></a>
-    </li>
-    <li elementCSS onclick="ajaxAsyncGetRequest('" + uicomponent.url("SelectTab", uicomponent.ELEMENT_VIEW) + "', true)">
-      <a data-toggle="tab" href="#tab-<%=uicomponent.ELEMENT_VIEW%>"><%=_ctx.appRes("UIMetadataView.tab.element")%></a>
-    </li>
-  </ul>
-  
-  <div class="tab-content" id="myTabContent">  
-  
-    <div class="tab-pane fade in active resizable" id="tab-<%=uicomponent.METADATA_VIEW%>">
-			    <div class="metadataInfoDetails">
-				  <table class="uiGrid table table-hover table-striped">
-					  <thead>
-					    <tr>
-						    <th><%=_ctx.appRes("UIMetadataList.header.name")%></th>
-						    <th><%=_ctx.appRes("UIMetadataView.header.isMixin")%></th>
-						    <th><%=_ctx.appRes("UIMetadataView.header.orderable")%></th>
-					    </tr>
-					  </thead>
-					  <tbody>
-				      <tr>
-				        <%
-				          String metaType = metadataType.getName() ;
-				          metaType = metaType.replace(":", "_") ;
-				        %>
-				        <td>
-				        	<div class="text">
-					          <span><i class="uiIconFile uiIcon${metaType}"></i> $metadataType.name</span>
-					        </div>
-				        </td>
-				        <td>
-				          <%
-				            String booleanText ;
-				            if(metadataType.isMixin()) {
-				              booleanText = _ctx.appRes("UIMetadataList.label.true") ;
-				            } else {
-				              booleanText = _ctx.appRes("UIMetadataList.label.false") ;
-				            }
-				          %>
-				          <div class="ActionContainer Text">
-					          $booleanText
-					        </div>
-				        </td>
-				        <td>
-				          <%
-				            if(metadataType.hasOrderableChildNodes()) {
-				              booleanText = _ctx.appRes("UIMetadataList.label.true") ;
-				            } else {
-				              booleanText = _ctx.appRes("UIMetadataList.label.false") ;
-				            }
-				          %>
-				          <div class="ActionContainer Text">
-					          $booleanText
-					        </div>
-				        </td>
-				      </tr>
-					  </tbody>
-				  </table>
-				</div>
-    </div>
-  
-	  <div class="tab-pane fade resizable" id="tab-<%=uicomponent.ELEMENT_VIEW%>">
-				<div class="metadataInfoDetails">
-				  <table class="uiGrid table table-hover table-striped">
-					  <thead>
-					    <tr>
-							<th class="span1 center">Icon</th>
-						    <th><%=_ctx.appRes("UIMetadataView.header.name")%></th>
-						    <th><%=_ctx.appRes("UIMetadataView.header.type")%></th>
-						    <th><%=_ctx.appRes("UIMetadataView.header.description")%></th>
-					    </tr>
-					  </thead>
-					  <tbody>
-				      <%
-						    boolean found = false ;
-						    for (meta in metadataType.getPropertyDefinitions()) {
-						      found = true  ;
-				      %>
-				        <tr>
-				          <%
-				            String nodeType = meta.getName() ;
-				            nodeType = nodeType.replace(":", "_") ;
-				          %>
-				          <td class="center">
-				            <i class="uiIconFile uiIcon${nodeType}"></i>                      
-				          </td>
-				          <td><div class="text">$meta.name</div></td>
-				          <td align="center"><%=uicomponent.resolveType(meta.getRequiredType())%></td>
-				          <td align="center"><%=_ctx.appRes("UIMetadataView.info.description")%></td>
-				        </tr>
-				      <%}%>  
-					  </tbody>
-				  </table>
-				</div>
-	  </div>
-  </div>
-  <div class="uiAction">  
-	  <button onclick="<%=uicomponent.event("Cancel")%>" class="btn" type="button"><%=_ctx.appRes("UIMetadataView.action.Cancel")%></button>
-  </div>	
+<div class="uiMetadataView resizable" id="$uicomponent.id">
+	<h5><%=_ctx.appRes("UIMetadataView.tab.metadataView")%></h5>
+	<div class="metadataInfoDetails">
+		<table class="uiGrid table table-hover table-striped">
+			<thead>
+				<tr>
+					<th><%=_ctx.appRes("UIMetadataList.header.name")%></th>
+					<th><%=_ctx.appRes("UIMetadataView.header.isMixin")%></th>
+					<th><%=_ctx.appRes("UIMetadataView.header.orderable")%></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<%
+						String metaType = metadataType.getName() ;
+						metaType = metaType.replace(":", "_") ;
+					%>
+					<td>
+						<div class="text">
+							<span><i class="uiIconFile uiIcon${metaType}"></i> $metadataType.name</span>
+						</div>
+					</td>
+					<td>
+						<%
+							String booleanText ;
+							if(metadataType.isMixin()) {
+								booleanText = _ctx.appRes("UIMetadataList.label.true") ;
+							} else {
+								booleanText = _ctx.appRes("UIMetadataList.label.false") ;
+							}
+						%>
+						<div class="ActionContainer Text">
+							$booleanText
+						</div>
+					</td>
+					<td>
+						<%
+							if(metadataType.hasOrderableChildNodes()) {
+								booleanText = _ctx.appRes("UIMetadataList.label.true") ;
+							} else {
+								booleanText = _ctx.appRes("UIMetadataList.label.false") ;
+							}
+						%>
+						<div class="ActionContainer Text">
+							$booleanText
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<h5><%=_ctx.appRes("UIMetadataView.tab.element")%></h5>
+	<div class="metadataElements">
+		<table class="uiGrid table table-hover table-striped">
+			<thead>
+				<tr>
+				<th class="span1 center">Icon</th>
+					<th><%=_ctx.appRes("UIMetadataView.header.name")%></th>
+					<th><%=_ctx.appRes("UIMetadataView.header.type")%></th>
+					<th><%=_ctx.appRes("UIMetadataView.header.description")%></th>
+				</tr>
+			</thead>
+			<tbody>
+				<%
+					boolean found = false ;
+					for (meta in metadataType.getPropertyDefinitions()) {
+						found = true  ;
+				%>
+					<tr>
+						<%
+							String nodeType = meta.getName() ;
+							nodeType = nodeType.replace(":", "_") ;
+						%>
+						<td class="center">
+							<i class="uiIconFile uiIcon${nodeType}"></i>                      
+						</td>
+						<td><div class="text">$meta.name</div></td>
+						<td align="center"><%=uicomponent.resolveType(meta.getRequiredType())%></td>
+						<td align="center"><%=_ctx.appRes("UIMetadataView.info.description")%></td>
+					</tr>
+				<%}%>  
+			</tbody>
+		</table>
+	</div>
 </div>
+<div class="uiAction uiActionBorder">  
+	<button onclick="<%=uicomponent.event("Cancel")%>" class="btn" type="button"><%=_ctx.appRes("UIMetadataView.action.Cancel")%></button>
+</div>	
