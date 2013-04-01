@@ -57,11 +57,9 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Return the latest edited documents. 
- * 
- * @author Hoang Van Hung <hunghvit@gmail.com>
- * @since      May 17, 2009
- * @copyright  eXo Platform SEA
- * 
+ *
+ * @LevelAPI Provisional
+ *
  * @anchor CONTref.Devref.PublicRestAPIs.GetEditedDocumentRESTService
  */
 

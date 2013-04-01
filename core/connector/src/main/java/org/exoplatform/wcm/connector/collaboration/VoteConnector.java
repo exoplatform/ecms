@@ -45,10 +45,8 @@ import org.w3c.dom.Element;
  *
  * {{{{portalname}}}}: The name of portal.
  * {{{{restcontextname}}}}: The context name of REST web application which is deployed to the "{{{{portalname}}}}" portal.
- * 
- * @author Benjamin Paillereau <benjamin.paillereau@exoplatform.com>
- * @since      July 10, 2009
- * @copyright  eXo Platform SEA
+ *
+ * @LevelAPI Provisional
  * 
  * @anchor CONTref.Devref.PublicRestAPIs.VoteConnector
  */
@@ -64,9 +62,8 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
    * Set a vote value for a given content.
    *
    * @param jcrPath The path of the content.
-   *
+   * @param vote The vote value.
    * @return http The code.
-   *
    * @throws Exception The exception
    * 
    * @anchor CONTref.Devref.PublicRestAPIs.VoteConnector.postStarVote
@@ -90,9 +87,7 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
    * @param repositoryName The name of repository.
    * @param workspaceName The name of workspace.
    * @param jcrPath The path of the content.
-   *
    * @return http The code.
-   *
    * @throws Exception The exception
    * 
    * @anchor CONTref.Devref.PublicRestAPIs.VoteConnector.getStarVote
@@ -117,9 +112,7 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
    * @param jcrPath The path of the content.
    * @param vote The vote value.
    * @param lang The language of the content.
-   *
    * @return http The code.
-   *
    * @throws Exception The exception
    * 
    * @anchor CONTref.Devref.PublicRestAPIs.VoteConnector.postVote
@@ -162,9 +155,7 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
    * @param repositoryName The name of repository.
    * @param workspaceName The name of workspace.
    * @param jcrPath The path of the content.
-   *
    * @return http The code
-   *
    * @throws Exception The exception
    * 
    * @anchor CONTref.Devref.PublicRestAPIs.VoteConnector.getVote

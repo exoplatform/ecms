@@ -41,11 +41,9 @@ import org.w3c.dom.Element;
 
 /**
  * Get the bundle that is based on the key and the locale.
- *     
- * @author Phan Le Thanh Chuong <chuong.phan@exoplatform.com>, <phan.le.thanh.chuong@gmail.com>
- * @since      Dec 21, 2009
- * @copyright  eXo Platform SEA
- * 
+ *
+ * @LevelAPI Provisional
+ *
  * @anchor CONTref.Devref.PublicRestAPIs.ResourceBundleConnector
  */
 @Path("/bundle/")
@@ -53,6 +51,7 @@ public class ResourceBundleConnector implements ResourceContainer {
 
   /**
   * Get the bundle that is based on the key and the locale.
+   *
   * @param key The key used to get the bundle.
   * @param locale  The locale used to get the bundle.
   * 
@@ -61,7 +60,7 @@ public class ResourceBundleConnector implements ResourceContainer {
   @GET
   @Path("/getBundle/")
   public Response getBundle (
-      @QueryParam("key") String multiKey,
+      @QueryParam("key") String key,
       @QueryParam("locale") String locale) {
     try {
       ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
@@ -69,7 +68,7 @@ public class ResourceBundleConnector implements ResourceContainer {
       Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
       Element bundles = document.createElement("bundles");
       bundles.setAttribute("locale", locale);
-      String keys[] = multiKey.split(",");
+      String keys[] = key.split(",");
       Set<String> remainingKeys = new LinkedHashSet<String>(keys.length + 1, 1f);
       Collections.addAll(remainingKeys, keys);
       loop : for (String resourceBundleName : resourceBundleNames) {
@@ -84,10 +83,10 @@ public class ResourceBundleConnector implements ResourceContainer {
         }
         
         for (Iterator<String> it = remainingKeys.iterator(); it.hasNext();) {
-          String key = it.next();
+          String oneKey = it.next();
           try {
-            String value = resourceBundle.getString(key);
-            Element element = document.createElement(key);
+            String value = resourceBundle.getString(oneKey);
+            Element element = document.createElement(oneKey);
             element.setAttribute("value", value);
             bundles.appendChild(element);
             it.remove();

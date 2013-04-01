@@ -45,12 +45,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
 import org.picocontainer.Startable;
-/**
- * Created by The eXo Platform SARL
- * Author : Nguyen Quang Hung
- *          nguyenkequanghung@yahoo.com
- * Feb 27, 2006
- */
+
 public class ManageViewServiceImpl implements ManageViewService, Startable {
 
   /**

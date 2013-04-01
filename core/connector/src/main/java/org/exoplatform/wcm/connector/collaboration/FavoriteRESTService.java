@@ -30,9 +30,7 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
 /**
  * Return a list of favorite documents of a given user. 
  *
- * @author lamphan
- * @since      AUG 01, 2010
- * @copyright  eXo Platform SEA
+ * @LevelAPI Provisional
  * 
  * @anchor CONTref.Devref.PublicRestAPIs.FavoriteRESTService
  */
@@ -65,7 +63,7 @@ public class FavoriteRESTService implements ResourceContainer {
    * Return a list of favorite documents of a given user.
    * 
    * @param repoName The name of repository.
-   * @param wsName The name of workspace.
+   * @param workspaceName The name of workspace.
    * @param userName The username.
    * @param showItems  Show the number of items per page.
    * @return Response inputstream.
@@ -76,7 +74,7 @@ public class FavoriteRESTService implements ResourceContainer {
   @GET
   @Path("/all/{repoName}/{workspaceName}/{userName}")
   public Response getFavoriteByUser(@PathParam("repoName") String repoName,
-      @PathParam("workspaceName") String wsName,
+      @PathParam("workspaceName") String workspaceName,
       @PathParam("userName") String userName, @QueryParam("showItems") String showItems) throws Exception {
     List<FavoriteNode> listFavorites = new ArrayList<FavoriteNode>();
     List<DriveData> listDrive = manageDriveService.getAllDrives();
@@ -84,7 +82,7 @@ public class FavoriteRESTService implements ResourceContainer {
       showItems = String.valueOf(NO_PER_PAGE);
     }
     try {
-      List<Node> listNodes = favoriteService.getAllFavoriteNodesByUser(wsName,
+      List<Node> listNodes = favoriteService.getAllFavoriteNodesByUser(workspaceName,
           repoName, userName);
       Collections.sort(listNodes, new PropertyValueComparator(DATE_MODIFIED, PropertyValueComparator.DESCENDING_ORDER));
       FavoriteNode favoriteNode;

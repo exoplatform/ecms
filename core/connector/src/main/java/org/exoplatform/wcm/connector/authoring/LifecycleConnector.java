@@ -25,7 +25,7 @@ import org.w3c.dom.Element;
 /**
  * Return a list of content during a given state range of the publication lifecycle.
  *
- * @copyright  eXo Platform SEA
+ * @LevelAPI Provisional
  *
  * @anchor CONTref.Devref.PublicRestAPIs.LifecycleConnector
  */
@@ -41,16 +41,18 @@ public class LifecycleConnector implements ResourceContainer {
   /**
    * Return a list of content from a given to the last state.
    *
+   * {@code
    * For example: http://localhost:8080/ecmdemo/rest-ecmdemo/authoring/bystate/?fromstate
    * =draft&user=root&lang=en&workspace=collaboration
+   * }
    *
    * @param fromstate The beginning state of the content.
    * @param user  The author of the content.
    * @param lang  The language of the content.
    * @param workspace The workspace name which contains the content.
    * @param json The format of the returned data.
-   * @return
-   * @throws Exception
+   * @return List of content.
+   * @throws Exception The exception
    *
    * @anchor CONTref.Devref.PublicRestAPIs.LifecycleConnector.byState
    */
@@ -67,8 +69,10 @@ public class LifecycleConnector implements ResourceContainer {
   /**
    * Return a list of content from the beginning to the last state.
    *
+   * {@code
    * For example: http://localhost:8080/ecmdemo/rest-ecmdemo/authoring/tostate/?fromstate
    * =draft&tostate=pending&user=root&lang=en&workspace=collaboration
+   * }
    *
    * @param fromstate  The beginning state of the content.
    * @param tostate The destination state of the content.
@@ -76,8 +80,8 @@ public class LifecycleConnector implements ResourceContainer {
    * @param lang The language of the content.
    * @param workspace The workspace name which contains the content.
    * @param json The format of the returned data.
-   * @return
-   * @throws Exception
+   * @return List of content.
+   * @throws Exception The exception
    *
    * @anchor CONTref.Devref.PublicRestAPIs.LifecycleConnector.toState
    */
@@ -95,16 +99,18 @@ public class LifecycleConnector implements ResourceContainer {
   /**
    * Return a list of content from the given beginning to published state and before the given date.
    *
+   * {@code
    * For example: http://localhost:8080/ecmdemo/rest-ecmdemo/authoring/bydate/?fromstate
    * =staged&date=2&lang=en&workspace=collaboration
+   * }
    *
    * @param fromstate  The beginning state of the content.
    * @param date The date before when the content is published.
    * @param workspace The workspace name which contains the content.
    * @param lang The language of the content.
    * @param json The format of the returned data.
-   * @return
-   * @throws Exception
+   * @return List of content.
+   * @throws Exception The exception
    *
    * @anchor CONTref.Devref.PublicRestAPIs.LifecycleConnector.byDate
    */

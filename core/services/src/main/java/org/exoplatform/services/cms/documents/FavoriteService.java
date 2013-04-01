@@ -21,11 +21,9 @@ import java.util.List;
 import javax.jcr.Node;
 
 /**
- * Created by The eXo Platform SARL
- * Author : Dang Van Minh
- *          minh.dang@exoplatform.com
- * Nov 16, 2009
- * 9:55:29 AM
+ * Manage Favorites for a user and the content.
+ *
+ * @LevelAPI Experimental
  */
 public interface FavoriteService {
 

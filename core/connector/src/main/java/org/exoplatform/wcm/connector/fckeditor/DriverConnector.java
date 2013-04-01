@@ -85,8 +85,8 @@ import org.w3c.dom.NodeList;
  *
  * {{{{portalname}}}}: The name of portal.
  * {{{{restcontextname}}}}: The context name of REST web application which is deployed to the "{{{{portalname}}}}" portal.
-
- * @since      Sep 7, 2009
+ *
+ * @LevelAPI Provisional
  * @anchor CONTref.Devref.PublicRestAPIs.DriverConnector
  */
 @Path("/wcmDriver/")
@@ -133,10 +133,10 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   private ResourceBundle sharedResourceBundle=null;
 
   private Locale lang = Locale.ENGLISH;
+
   /**
    * Instantiates a new driver connector.
    *
-   * @param container the container
    * @param params the params
    */
   public DriverConnector(InitParams params) {
@@ -260,7 +260,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
   
   /**
-   * checks if can upload a new file
+   * Checks if the drive can upload a new file.
+   *
    * @return Response containing the status indicating if upload is available 
    * @throws Exception
    */
@@ -288,8 +289,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    */
   @POST
   @Path("/uploadFile/upload/")
-//  @InputTransformer(PassthroughInputTransformer.class)
-//  @OutputTransformer(XMLOutputTransformer.class)
+
   public Response uploadFile(@Context HttpServletRequest servletRequest,
       @QueryParam("uploadId") String uploadId) throws Exception {
     //check if number of file uploading is greater than the limit
@@ -312,7 +312,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @param workspaceName The workspace name.
    * @param driverName The Drive name.
    * @param currentFolder The current folder.
-   * @param siteName The portal name.
+   * @param currentPortal The portal name.
    * @param language The language file.
    * @param fileName The file name.
    * @return The response
@@ -322,13 +322,12 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    */
   @GET
   @Path("/uploadFile/checkExistence/")
-//  @OutputTransformer(XMLOutputTransformer.class)
   public Response checkExistence(
       @QueryParam("repositoryName") String repositoryName,
       @QueryParam("workspaceName") String workspaceName,
       @QueryParam("driverName") String driverName,
       @QueryParam("currentFolder") String currentFolder,
-      @QueryParam("currentPortal") String siteName,
+      @QueryParam("currentPortal") String currentPortal,
       @QueryParam("language") String language,
       @QueryParam("fileName") String fileName) throws Exception {
     try {
@@ -353,15 +352,16 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    *
    * @param repositoryName The name of repository.
    * @param workspaceName The name of workspace.
+   * @param driverName The name of drive.
    * @param currentFolder The current folder.
+   * @param currentPortal The current portal.
+   * @param userId The user identity.
    * @param jcrPath The path of the file.
    * @param action The action.
    * @param language The language.
    * @param fileName The name of file.
    * @param uploadId The Id of upload.
-   * @param siteName The current portal.
-   * @param userId The user identity.
-   * @param driverName The name of drive.
+   * @param existenceAction Check if an action exist
    * @return The response.
    * @throws Exception The exception
    *
@@ -369,13 +369,12 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    */
   @GET
   @Path("/uploadFile/control/")
-//  @OutputTransformer(XMLOutputTransformer.class)
   public Response processUpload(
-    @QueryParam("repositoryName") String repositoryName,
+      @QueryParam("repositoryName") String repositoryName,
       @QueryParam("workspaceName") String workspaceName,
       @QueryParam("driverName") String driverName,
       @QueryParam("currentFolder") String currentFolder,
-      @QueryParam("currentPortal") String siteName,
+      @QueryParam("currentPortal") String currentPortal,
       @QueryParam("userId") String userId,
       @QueryParam("jcrPath") String jcrPath,
       @QueryParam("action") String action,
@@ -398,7 +397,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
                                                      Text.escapeIllegalJcrChars(currentFolder));
         return createProcessUploadResponse(workspaceName,
                                            currentFolderNode,
-                                           siteName,
+                                           currentPortal,
                                            userId,
                                            Text.escapeIllegalJcrChars(jcrPath),
                                            action,
@@ -709,8 +708,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   /**
    * Check if specific node has child which is type of nt:folder or nt:unstructured.
    * 
-   * @param checkNode
-   * @return
+   * @param checkNode The node to be checked
+   * @return True if the folder has some child.
    * @throws Exception
    */
   private boolean hasFolderChild(Node checkNode) throws Exception {
@@ -837,16 +836,16 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
   /**
    *
-   * @param workspaceName the workspace name
-   * @param currentFolderNode the current folder node
-   * @param siteName the portal name
-   * @param userId  The user id
-   * @param jcrPath The path of the file
-   * @param action the action
-   * @param language the language
-   * @param fileName the file name
-   * @param uploadId the upload id
-   * @param existenceAction
+   * @param workspaceName The workspace name.
+   * @param currentFolderNode The current folder.
+   * @param siteName The portal name.
+   * @param userId  The user id.
+   * @param jcrPath The path of the file.
+   * @param action The action.
+   * @param language The language.
+   * @param fileName Tthe file name.
+   * @param uploadId The Id of upload.
+   * @param existenceAction Check if an action exist.
    * @return the response
    * @throws Exception the exception
    */

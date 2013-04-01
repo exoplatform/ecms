@@ -46,10 +46,7 @@ import org.exoplatform.services.wcm.search.base.EcmsSearchResult;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
- * Created by The eXo Platform SAS
- * Author : eXoPlatform
- *          exo@exoplatform.com
- * Feb 5, 2013  
+ * This abstract class is extended by the SearchService connectors which provide search result for a specific content type
  */
 public abstract class BaseSearchServiceConnector extends SearchServiceConnector {
 
@@ -72,7 +69,19 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
     siteSearch_ = WCMCoreUtils.getService(SiteSearchService.class);
     driveService_ = WCMCoreUtils.getService(ManageDriveService.class);
   }
-  
+
+  /**
+   * The connectors must implement this search method, with the following parameters and return a collection of SearchResult
+   *
+   * @param context Search context
+   * @param query The user-input query to search for
+   * @param sites Search on these specified sites only (e.g acme, intranet...)
+   * @param offset Start offset of the result set
+   * @param limit Maximum size of the result set
+   * @param sort The field to sort the result set
+   * @param order Sort order (ASC, DESC)
+   * @return A collection of SearchResult
+   */
   @Override
   public Collection<SearchResult> search(SearchContext context,
                                          String query,

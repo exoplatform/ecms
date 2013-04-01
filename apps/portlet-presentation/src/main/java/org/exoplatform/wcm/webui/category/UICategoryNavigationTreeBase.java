@@ -339,7 +339,7 @@ public class UICategoryNavigationTreeBase extends UITree {
   /**
    * get content's title if exists (from exo:title property)
    *
-   * @param node
+   * @param node The node
    * @return the title
    * @throws Exception
    */

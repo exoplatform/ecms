@@ -23,14 +23,6 @@ import javax.jcr.Node;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
 /**
- * Created by The eXo Platform SARL
- * Author : Dang Van Minh
- *          minh.dang@exoplatform.com
- * Oct 6, 2009
- * 3:38:57 AM
- */
-
-/**
  * Get documents by mime types
  */
 public interface DocumentTypeService {
@@ -95,7 +87,8 @@ public interface DocumentTypeService {
                                           String userName) throws Exception;
 
   /**
-   * Check the document is content type or not
+   * Check the document is content type or not.
+   *
    * @param documentType
    * @return
    */

@@ -80,8 +80,6 @@ public class FCKMessage {
 
   /**
    * Instantiates a new fCK message.
-   *
-   * @param bundleService the bundle service
    */
   public FCKMessage() {
   }

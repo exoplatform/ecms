@@ -129,9 +129,8 @@ public abstract class BaseConnector {
    * Builds the xml response on expand.
    *
    * @param currentFolder the current folder
-   * @param runningPortal
+   * @param runningPortal The current portal instance
    * @param workspaceName the workspace name
-   * @param repositoryName the repository name
    * @param jcrPath the jcr path
    * @param command the command
    * @return the response
@@ -402,7 +401,6 @@ public abstract class BaseConnector {
   /**
    * Gets the web content.
    *
-   * @param repositoryName the repository name
    * @param workspaceName the workspace name
    * @param jcrPath the jcr path
    * @return the web content

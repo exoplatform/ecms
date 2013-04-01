@@ -20,8 +20,7 @@ import org.exoplatform.services.wcm.extensions.security.SHAMessageDigester;
 /**
  * Copy a file. 
  *
- * @author haikel.thamri@exoplatform.com
- * @copyright  eXo Platform SEA
+ * @LevelAPI Provisional
  * 
  * @anchor CONTref.Devref.PublicRestAPIs.CopyContentFile
  */
@@ -53,7 +52,7 @@ public class CopyContentFile implements ResourceContainer {
   * 
   * @param param The file path.
   * @return Response inputstream.
-  * @throws Exception
+  * @throws Exception The exception
   * 
   * @anchor CONTref.Devref.PublicRestAPIs.CopyContentFile.copyFile
   */

@@ -52,10 +52,7 @@ import org.exoplatform.services.wcm.search.ResultNode;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
- * Created by The eXo Platform SAS
- * Author : eXoPlatform
- *          exo@exoplatform.com
- * Feb 5, 2013  
+ * Documents are nodes whose nodetype was declared as a Document Type in ECM admin.
  */
 public class DocumentSearchServiceConnector extends BaseContentSearchServiceConnector {
 

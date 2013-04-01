@@ -21,10 +21,9 @@ import java.util.List;
 import javax.jcr.Node;
 
 /**
- * Created by The eXo Platform SAS
- * Author : Pham Xuan Hoa
- *          hoa.pham@exoplatform.com
- * Jan 22, 2007
+ * Manage Comments in the contents.
+ *
+ * @LevelAPI Experimental
  */
 public interface CommentsService {
 
@@ -54,7 +53,8 @@ public interface CommentsService {
                          String language) throws Exception;
 
   /**
-   * Update comment for document: set new comment for node
+   * Update comment for document: set new comment for node.
+   *
    * @param commentNode the node that need to update comment
    * @param newComment the new comment is set for node
    * @throws Exception
@@ -62,13 +62,16 @@ public interface CommentsService {
   public void updateComment(Node commentNode, String newComment) throws Exception;
 
   /**
-   * Delete comment of document by given comment node
+   * Delete comment of document by given comment node.
+   *
    * @param commentNode given comment node
    * @throws Exception
    */
   public void deleteComment(Node commentNode) throws Exception;
+
   /**
-   * Gets all comments from the specified node
+   * Gets all comments from the specified node.
+   *
    * @param document        The node document is commented
    * @param language        The language of this document is commented
    * @see                   Node

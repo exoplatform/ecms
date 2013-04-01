@@ -29,10 +29,7 @@ import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
- * Created by The eXo Platform SAS
- * Author : eXoPlatform
- *          exo@exoplatform.com
- * Feb 5, 2013  
+ * The search should be capable to search for site pages.
  */
 public class PageSearchServiceConnector extends BaseSearchServiceConnector {
 

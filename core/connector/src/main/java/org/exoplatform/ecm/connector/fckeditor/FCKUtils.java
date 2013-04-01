@@ -72,7 +72,6 @@ public class FCKUtils {
    * @param command the command
    * @param node the node
    * @param folderType the folder type
-   * @param url the url
    * @return the org.w3c.dom.Element element
    * @throws Exception the exception
    */

@@ -19,10 +19,9 @@ package org.exoplatform.services.cms.drives;
 import java.util.List;
 
 /**
- * Created by The eXo Platform SARL
- * Author : Nguyen Quang Hung
- *          nguyenkequanghung@yahoo.com
- * Feb 27, 2006
+ * Function to manage Drive to be able to add, remove or manage them.
+ *
+ * @LevelAPI Experimental
  */
 public interface ManageDriveService {
   
@@ -33,6 +32,7 @@ public interface ManageDriveService {
    * @return String Name of drive.
    */
   public String getDriveOfDefaultWorkspace() throws Exception;
+
   /**
    * Register a new drive to workspace or update if the drive is existing
    *
@@ -120,8 +120,8 @@ public interface ManageDriveService {
   public boolean isUsedView(String viewName) throws Exception;
 
   /**
-   * Register all drive plugins to repository
-   * @param repository the string contain repository name
+   * Register all drive plugins
+   *
    * @throws Exception
    */
   public void init() throws Exception;
@@ -136,7 +136,8 @@ public interface ManageDriveService {
   public List<DriveData> getDriveByUserRoles(String userId, List<String> roles) throws Exception;
 
   /**
-   * Get all main drives
+   * Get all main drives.
+   *
    * @param userId Name of user
    * @param userRoles Roles of user
    * @return List<DriveData>
@@ -145,9 +146,9 @@ public interface ManageDriveService {
   public List<DriveData> getMainDrives(String userId, List<String> userRoles) throws Exception;
 
   /**
-   * Get all personal drives
+   * Get all personal drives.
+   *
    * @param userId Name of user
-   * @param userRoles Roles of user
    * @return List<DriveData>
    * @throws Exception
    */

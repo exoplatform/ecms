@@ -65,13 +65,10 @@ import org.w3c.dom.Element;
 /**
  * Return a page URI for a given location.
  *
- * @author Anh Do Ngoc <anh.do@exoplatform.com>
- * @since      Jul 11, 2008
- * @copyright  eXo Platform SEA
+ * @LevelAPI Provisional
  *
  * @anchor CONTref.Devref.PublicRestAPIs.PortalLinkConnector
  */
-@SuppressWarnings("deprecation")
 @Path("/portalLinks/")
 public class PortalLinkConnector implements ResourceContainer {
 

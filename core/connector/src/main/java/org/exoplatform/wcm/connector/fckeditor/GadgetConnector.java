@@ -61,10 +61,8 @@ import org.w3c.dom.Element;
 
 /**
  * Instantiate a new gadget connector.  
- * 
- * @author <chuong_phan@exoplatform.com>
- * @since      Jan 21, 2009
- * @copyright  eXo Platform SEA
+ *
+ * @LevelAPI Provisional
  * 
  * @anchor CONTref.Devref.PublicRestAPIs.GadgetConnector
  */
@@ -92,7 +90,6 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
   /**
    * Instantiates a new gadget connector.
    *
-   * @param container the container.
    * @param initParams the init params.
    */
   public GadgetConnector(InitParams initParams) throws Exception {
@@ -104,7 +101,7 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
    * Get folders and files.
    *
    * @param currentFolder The current folder.
-   * @param language The language.
+   * @param lang The language.
    * @param host The server address on which the gadget is deployed.
    * @return The folders and files.
    * @throws Exception The exception
@@ -114,10 +111,10 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
   @GET
   @Path("/getFoldersAndFiles/")
   public Response getFoldersAndFiles(@QueryParam("currentFolder") String currentFolder,
-                                     @QueryParam("lang") String language,
+                                     @QueryParam("lang") String lang,
                                      @QueryParam("host") String host) throws Exception {
     try {
-      Response response = buildXMLResponse(currentFolder, language, host);
+      Response response = buildXMLResponse(currentFolder, lang, host);
       if (response != null)
         return response;
     } catch (Exception e) {

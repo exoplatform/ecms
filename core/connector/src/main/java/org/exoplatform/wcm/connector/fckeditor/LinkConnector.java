@@ -53,8 +53,6 @@ public class LinkConnector extends BaseConnector implements ResourceContainer {
 
   /**
    * Instantiates a new link connector.
-   *
-   * @param container the container
    */
   public LinkConnector() {
     linkFileHandler = new LinkFileHandler();

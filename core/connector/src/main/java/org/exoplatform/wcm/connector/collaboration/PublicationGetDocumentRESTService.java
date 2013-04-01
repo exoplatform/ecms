@@ -54,10 +54,8 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Return a list of published documents.
- * 
- * @author Ly Dinh Quang <quang.ly@exoplatform.com>
- * @since      May 17, 2009
- * @copyright  eXo Platform SEA
+ *
+ * @LevelAPI Provisional
  * 
  * @anchor CONTref.Devref.PublicRestAPIs.PublicationGetDocumentRESTService
  */
@@ -91,8 +89,8 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
    * Return a list of published documents by the default plugin.
    * For example: {{{/portal/rest/publication/presentation/{repository}/{workspace}/{state}?showItems={numberOfItem}}}}
    *
-   * @param repoName The name of repository.
-   * @param wsName The name of workspace.
+   * @param repository The name of repository.
+   * @param workspace The name of workspace.
    * @param state The state is specified to classify the process.
    * @param showItems Show the number of items per page.
    * @return
@@ -103,10 +101,10 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
   @Path("/{repository}/{workspace}/{state}/")
   @GET
 //  @OutputTransformer(Bean2JsonOutputTransformer.class)
-  public Response getPublishDocument(@PathParam("repository") String repoName, @PathParam("workspace")
-  String wsName, @PathParam("state") String state, @QueryParam("showItems")
+  public Response getPublishDocument(@PathParam("repository") String repository, @PathParam("workspace")
+  String workspace, @PathParam("state") String state, @QueryParam("showItems")
   String showItems) throws Exception {
-    return getPublishDocuments(wsName, state, null, showItems);
+    return getPublishDocuments(workspace, state, null, showItems);
   }
 
   /**
@@ -114,8 +112,8 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
    * For example: {{{/portal/rest/publication/presentation/{repository}/{workspace}/{publicationPluginName}/{state}?showItems={numberOfItem}}}}
    *
    * @param repoName The repository name.
-   * @param wsName The workspace name.
-   * @param pluginName The name of the plugin.
+   * @param workspace The workspace name.
+   * @param publicationPluginName The name of the plugin.
    * @param state The state is specified to classify the process.
    * @param showItems Show the number of items per page.
    * @return
@@ -127,10 +125,10 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
   @GET
 //  @OutputTransformer(Bean2JsonOutputTransformer.class)
   public Response getPublishedListDocument(@PathParam("repository") String repoName, @PathParam("workspace")
-  String wsName, @PathParam("publicationPluginName") String pluginName, @PathParam("state")
+  String workspace, @PathParam("publicationPluginName") String publicationPluginName, @PathParam("state")
   String state, @QueryParam("showItems")
   String showItems) throws Exception {
-    return getPublishDocuments(wsName, state, pluginName, showItems);
+    return getPublishDocuments(workspace, state, publicationPluginName, showItems);
   }
 
   @SuppressWarnings("unused")

@@ -606,7 +606,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
 
   /**
    *
-   * @return
+   * @return True if is a CLV by Query
    */
   public boolean isContentListByQuery() {
     return appType.equals(UICLVPortlet.APPLICATION_CLV_BY_QUERY);
@@ -669,8 +669,8 @@ public class UICLVConfig extends UIForm  implements UISelectable {
 
  /**
    *
-   * @param itemPath
-   * @return
+   * @param itemPath The path
+   * @return The title
    * @throws RepositoryException
    */
   private String getTitle(String itemPath) throws RepositoryException {
@@ -722,8 +722,6 @@ public class UICLVConfig extends UIForm  implements UISelectable {
    * component's <code>addSaveActionListener<code> method. When
    * the saveAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see SaveActionEvent
    */
   public static class SaveActionListener extends EventListener<UICLVConfig> {
 
@@ -862,8 +860,6 @@ public class UICLVConfig extends UIForm  implements UISelectable {
    * component's <code>addCancelActionListener<code> method. When
    * the cancelAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see CancelActionEvent
    */
   public static class CancelActionListener extends EventListener<UICLVConfig> {
 
@@ -891,8 +887,6 @@ public class UICLVConfig extends UIForm  implements UISelectable {
    * component's <code>addSelectFolderPathActionListener<code> method. When
    * the selectFolderPathAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see SelectFolderPathActionEvent
    */
   public static class SelectFolderPathActionListener extends EventListener<UICLVConfig> {
 
@@ -957,8 +951,6 @@ public class UICLVConfig extends UIForm  implements UISelectable {
    * component's <code>addIncreaseActionListener<code> method. When
    * the increaseAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see IncreaseActionEvent
    */
   public static class IncreaseActionListener extends EventListener<UICLVConfig> {
 
@@ -993,8 +985,6 @@ public class UICLVConfig extends UIForm  implements UISelectable {
    * component's <code>addDecreaseActionListener<code> method. When
    * the decreaseAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see DecreaseActionEvent
    */
   public static class DecreaseActionListener extends EventListener<UICLVConfig> {
 
@@ -1028,8 +1018,6 @@ public class UICLVConfig extends UIForm  implements UISelectable {
    * component's <code>addSelectTargetPageActionListener<code> method. When
    * the selectTargetPageAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see SelectTargetPageActionEvent
    */
   public static class SelectTargetPageActionListener extends EventListener<UICLVConfig> {
 

@@ -46,10 +46,7 @@ import org.w3c.dom.Element;
 /**
  * Get a list of files and folders, and create a folder and upload files.
  *
- * @author Hoa.Pham <hoa.pham@exoplatform.com>
- * @since      Jun 23, 2008
- * @copyright  eXo Platform SEA
- * 
+ * @LevelAPI Provisional
  * @anchor CONTref.Devref.PublicRestAPIs.FCKCoreRESTConnector
  */
 @Path("/fckconnector/jcr/")
