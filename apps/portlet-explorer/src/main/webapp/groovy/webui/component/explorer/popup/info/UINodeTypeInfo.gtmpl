@@ -34,7 +34,7 @@
 
 
 <div class="uiNodeTypeInfo" id="UINodeTypeInfoPopup">
-	<div class="uiTabNormal resizable" id="UINodeTypeInfoPopup">
+	<div class="uiTabNormal" id="UINodeTypeInfoPopup">
 		<ul class="nav nav-tabs">
 						<%
 						String style="active";
@@ -56,7 +56,7 @@
 			<%
 			style="display: block;" ;
 				for(nodeType in collect) {%>
-					<div class="UITabContent" style="$style">
+					<div class="UITabContent resizable" style="$style">
 						<table class="uiGrid table table-hover table-striped" cellspacing="0" borderspacing="0">
 							<thead>
 								<tr>
@@ -91,7 +91,7 @@
 							</tbody>
 						</table>
 						<div class="gridTitleBar">
-							<h5><%=_ctx.appRes("UINodeTypeInfo.label.property-def")%></h5>
+							<h6><%=_ctx.appRes("UINodeTypeInfo.label.property-def")%></h6>
 						</div>
 						<table class="uiGrid table table-hover table-striped" cellspacing="0" borderspacing="0">
 							<col><col><col width="50"><col width="50"><col width="50"><col width="50"><col><col>
@@ -135,7 +135,7 @@
 							</tbody>
 						</table>
 						<div class="gridTitleBar">
-							<h5><%=_ctx.appRes("UINodeTypeInfo.label.node-def")%></h5>
+							<h6><%=_ctx.appRes("UINodeTypeInfo.label.node-def")%></h6>
 						</div>
 						<table class="uiGrid table table-hover table-striped" cellspacing="0" borderspacing="0">
 							<col><col><col width="60"><col width="60"><col width="60"><col>
