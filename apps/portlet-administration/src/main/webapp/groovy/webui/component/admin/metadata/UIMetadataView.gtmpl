@@ -38,7 +38,7 @@
 					%>
 					<td>
 						<div class="text">
-							<span><i class="uiIconFile uiIcon${metaType}"></i> $metadataType.name</span>
+							<span>$metadataType.name</span>
 						</div>
 					</td>
 					<td>
@@ -50,7 +50,7 @@
 								booleanText = _ctx.appRes("UIMetadataList.label.false") ;
 							}
 						%>
-						<div class="ActionContainer Text">
+						<div class="text">
 							$booleanText
 						</div>
 					</td>
@@ -62,7 +62,7 @@
 								booleanText = _ctx.appRes("UIMetadataList.label.false") ;
 							}
 						%>
-						<div class="ActionContainer Text">
+						<div class="text">
 							$booleanText
 						</div>
 					</td>
@@ -76,9 +76,8 @@
 		<table class="uiGrid table table-hover table-striped">
 			<thead>
 				<tr>
-				<th class="span1 center">Icon</th>
 					<th><%=_ctx.appRes("UIMetadataView.header.name")%></th>
-					<th><%=_ctx.appRes("UIMetadataView.header.type")%></th>
+					<th class="center"><%=_ctx.appRes("UIMetadataView.header.type")%></th>
 					<th><%=_ctx.appRes("UIMetadataView.header.description")%></th>
 				</tr>
 			</thead>
@@ -93,12 +92,9 @@
 							String nodeType = meta.getName() ;
 							nodeType = nodeType.replace(":", "_") ;
 						%>
-						<td class="center">
-							<i class="uiIconFile uiIcon${nodeType}"></i>                      
-						</td>
 						<td><div class="text">$meta.name</div></td>
-						<td align="center"><%=uicomponent.resolveType(meta.getRequiredType())%></td>
-						<td align="center"><%=_ctx.appRes("UIMetadataView.info.description")%></td>
+						<td class="center"><%=uicomponent.resolveType(meta.getRequiredType())%></td>
+						<td><%=_ctx.appRes("UIMetadataView.info.description")%></td>
 					</tr>
 				<%}%>  
 			</tbody>
