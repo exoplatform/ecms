@@ -1267,12 +1267,12 @@
 			var leftContainer = gj(workingArea).find("div.leftContainer:first")[0];
 			checkMinHeight = checkMinHeight || !leftContainer;
 			if (checkMinHeight) {
-				gj("div#UIDocumentWorkspace").css("min-height", "500px");
+				gj("div.UIDocumentInfo").css("min-height", "500px");
 			} else {
 				if (gj(leftContainer).css("display")=="none") {
-					gj("div#UIDocumentWorkspace").css("min-height", "500px");
+					gj("div.UIDocumentInfo").css("min-height", "500px");
 				}else { 
-					gj("div#UIDocumentWorkspace").css("min-height", "");
+					gj("div.UIDocumentInfo").css("min-height", "");
 					var rightContainer = gj(workingArea).find("div.rightContainer:first")[0];
 					if (rightContainer.offsetHeight < leftContainer.offsetHeight) {
 						var fillOutElement = gj('div.FillOutElement');
