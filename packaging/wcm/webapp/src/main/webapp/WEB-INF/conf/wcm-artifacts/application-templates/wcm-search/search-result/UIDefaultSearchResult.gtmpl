@@ -111,7 +111,7 @@
      %>
       <div class="SearchItem">
        <div class="ItemTitle">
-        <a href="$itemUrl">$itemName</a>
+        <a href="$itemUrl&search=true">$itemName</a>
        </div>
        <%if(itemExcerpt != null && itemExcerpt.trim().length() > 0){%>
        		<div class="ItemExcerpt" style="font-weight:bold;"><%=_ctx.appRes("UIDefaultSearchResult.label.editor")%>: $editor</div>

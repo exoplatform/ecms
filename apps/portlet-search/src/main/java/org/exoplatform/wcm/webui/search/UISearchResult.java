@@ -28,6 +28,7 @@ import javax.jcr.Session;
 import javax.jcr.Value;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.exoplatform.commons.utils.ISO8601;
 import org.exoplatform.commons.utils.ObjectPageList;
@@ -148,6 +149,7 @@ public class UISearchResult extends UIContainer {
     PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
     String portal = portalRequestContext.getRequestParameter("portal");
     String keyword = portalRequestContext.getRequestParameter("keyword");
+    String nbrpage = portalRequestContext.getRequestParameter("nbrpage");
     if ((portal != null) && (keyword != null) && (keyword.length() > 0)) {
       UISearchPageLayout uiSearchPageContainer = getAncestorOfType(UISearchPageLayout.class);
       UISearchForm searchForm = uiSearchPageContainer.getChild(UISearchForm.class);
@@ -225,6 +227,13 @@ public class UISearchResult extends UIContainer {
                                                 ApplicationMessage.WARNING));
       }
     }
+    if (nbrpage != null) {
+    	uiPaginator.setCurrentPage(Integer.parseInt(nbrpage)) ;
+    }
+    String requestURL = portalRequestContext.getRequest().getRequestURL().toString();
+    String fullRequestURL = requestURL + "?portal=" + portalRequestContext.getSiteName() + "&keyword=" + getKeyword() + "&nbrpage=" + getCurrentPage(); 
+    HttpSession httpSession = portalRequestContext.getRequest().getSession();
+	httpSession.setAttribute("fullRequestURL", fullRequestURL);
     super.processRender(context);
   }
 

@@ -4,7 +4,14 @@
   	import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
   	import org.exoplatform.ecm.webui.utils.LockUtil;
   	import org.exoplatform.services.jcr.core.ManageableRepository;
-
+    import javax.servlet.http.HttpSession;
+	import org.exoplatform.portal.webui.util.Util;
+	import org.exoplatform.portal.application.PortalRequestContext;
+	PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
+	HttpSession httpSession = portalRequestContext.getRequest().getSession();
+	String fullRequestURL = httpSession.getAttribute("fullRequestURL");
+    String search = portalRequestContext.getRequestParameter("search");
+    
 		def rcontext = _ctx.getRequestContext();
     def jsManager = rcontext.getJavascriptManager();
     
@@ -119,7 +126,13 @@
 			if (!Utils.isPortalEditMode() && isShowOptionBar && !uicomponent.isPrinting()) { 
 				%>
 					<div class="UIOptionBar">
-	         <div class="BackButton" title="<%= _ctx.appRes("UISCVPreferences.label.Back") %>" onclick="history.go(-1)"><span></span></div>
+				<% if (fullRequestURL != null && search != null) { %>	
+					<a href="$fullRequestURL">
+						<div class="BackButton" title="<%= _ctx.appRes("UISCVPreferences.label.Back") %>" ><span></span></div>
+					</a>
+				<% } else {%>
+					<div class="BackButton" title="<%= _ctx.appRes("UISCVPreferences.label.Back") %>" onclick="history.go(-1)" ><span></span></div>
+				<% } %>
 						<a class="ActionIcon PrintIcon" href="javascript: void(0);" onclick="window.open('<%= uicomponent.getPrintUrl(node) %>')" title="<%= _ctx.appRes("UIPresentationContainer.label.print");%>"><%= _ctx.appRes("UIPresentationContainer.label.print") %></a>
 					</div>
 				<% 
