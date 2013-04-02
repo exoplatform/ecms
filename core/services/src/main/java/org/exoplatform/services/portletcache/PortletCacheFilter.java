@@ -82,7 +82,6 @@ public class PortletCacheFilter implements PortletFilter, ActionFilter, RenderFi
   }
   /**
    * @return true if current context is PortalEditMode
-   * @author vinh_nguyen
    */
   private boolean isPortalEditMode() {
     return Util.getUIPortalApplication().getModeState() != UIPortalApplication.NORMAL_MODE;

@@ -292,7 +292,7 @@ public interface TaxonomyService {
   /**
    * Get default user permission of Taxonomy tree.
    *
-   * @return Map<String, String[]>
+   * @return Map
    */
   public Map<String, String[]> getTaxonomyTreeDefaultUserPermission();
   

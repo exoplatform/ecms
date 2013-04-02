@@ -130,6 +130,7 @@ public class LifecycleConnector implements ResourceContainer {
    * @param user
    * @param lang
    * @param workspace
+   * @param asJSon
    * @return
    * @throws Exception
    */

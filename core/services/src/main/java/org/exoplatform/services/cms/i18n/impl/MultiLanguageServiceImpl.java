@@ -54,11 +54,6 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
-/**
- * @author Hung Nguyen Quang
- * @mail   nguyenkequanghung@yahoo.com
- */
-
 public class MultiLanguageServiceImpl implements MultiLanguageService {
 
   /**

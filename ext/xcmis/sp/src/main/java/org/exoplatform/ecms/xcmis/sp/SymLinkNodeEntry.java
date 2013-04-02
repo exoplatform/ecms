@@ -45,11 +45,6 @@ class SymLinkNodeEntry extends JcrNodeEntry
     * @param node target of symlink
     * @param storage CMIS storage
     * @throws RepositoryException if any JCR repository error occurs
-    * @throws NotSupportedNodeTypeException if specified <code>node</code> has
-    *         node-type which is unsupported by xCMIS
-    * @see Node#getPrimaryNodeType()
-    * @see Workspace#getNodeTypeManager()
-    * @see RepositoryException
     */
    public SymLinkNodeEntry(Node link, Node node, BaseJcrStorage storage) throws RepositoryException
    {

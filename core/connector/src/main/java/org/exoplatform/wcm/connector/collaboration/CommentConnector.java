@@ -42,11 +42,13 @@ import org.exoplatform.wcm.connector.BaseConnector;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-/*
- * Created by The eXo Platform SAS
- * Author : Benjamin Paillereau
- * benjamin.paillereau@exoplatform.com
- * March 25, 2011
+
+/**
+ * The CommentConnector aims to manage and use comment for the content commments.
+ *
+ * @LevelAPI Experimental
+ *
+ * @anchor CONTref.Devref.PublicRestAPIs.CommentConnector
  */
 @Path("/contents/comment/")
 public class CommentConnector extends BaseConnector implements ResourceContainer {
@@ -55,6 +57,8 @@ public class CommentConnector extends BaseConnector implements ResourceContainer
 
   /**
    * Instantiates a new tag connector.
+   *
+   * @param commentsService Service instanciation.
    */
   public CommentConnector(CommentsService commentsService) {
     this.commentsService = commentsService;
@@ -62,7 +66,15 @@ public class CommentConnector extends BaseConnector implements ResourceContainer
 
 
   /**
-   * to complete
+   *
+   * Add a new comment to the content.
+   *
+   * @param jcrPath The JCR path of the content.
+   * @param comment The comment to add.
+   * @return The last modified date as property to check the result
+   * @throws Exception The exception
+   *
+   * @anchor CONTref.Devref.PublicRestAPIs.CommentConnector.addComment
    */
   @POST
   @Path("/add")
@@ -87,7 +99,13 @@ public class CommentConnector extends BaseConnector implements ResourceContainer
   }
 
   /**
-   * to complete
+   * Get all comments for a specific content.
+   *
+   * @param jcrPath The JCR path of the content.
+   * @return All comments
+   * @throws Exception The exception
+   *
+   * @anchor CONTref.Devref.PublicRestAPIs.CommentConnector.getComments
    */
   @GET
   @Path("/all")

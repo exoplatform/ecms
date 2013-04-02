@@ -101,7 +101,6 @@ public class TestFavoriteService extends BaseWCMTestCase {
    * test method addFavourite. Input: /testAddFavourite1, /testAddFavorite2 nodes 
    * tested action: add favorite for users 'john' to the nodes
    * above. Expected value : 2 for favorite node list size
-   * @author vinh_nguyen
    * @throws Exception
    */
   public void testIsFavoriter() throws Exception {

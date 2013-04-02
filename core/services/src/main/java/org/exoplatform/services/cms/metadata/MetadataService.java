@@ -143,7 +143,6 @@ public interface MetadataService {
    * Get the metadata node based on its name
    * @param metaName Name of metadata
    * @return Node instance of give metadata
-   * @throws RepositoryException 
    * @throws Exception 
    */
   public Node getMetadata(String metaName) throws Exception;

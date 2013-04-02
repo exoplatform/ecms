@@ -788,7 +788,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   /**
    * Add new users or groups into tagPermissionPlugin_
    *
-   * @param usersOrGroups
+   * @param plugin
    */
   public void addTagPermissionPlugin(ComponentPlugin plugin) {
     if (plugin instanceof TagPermissionPlugin)
@@ -804,7 +804,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   }
 
   /**
-   * {@inhetirDoc}
+   * {@inheritDoc}
    */
   public void removeTagPermission(String usersOrGroups) {
     tagPermissionList.remove(usersOrGroups);

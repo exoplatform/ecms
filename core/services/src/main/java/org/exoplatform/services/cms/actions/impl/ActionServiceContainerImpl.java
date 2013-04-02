@@ -347,7 +347,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
 
   /**
    * Get SystemSession of specific workspace and repository
- * @param workspace
+   * @param workspace
    * @return
    * @throws RepositoryException
    * @throws RepositoryConfigurationException

@@ -769,7 +769,6 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
   /**
    * Method which returns true if the node has a history.
-   * @author CPop
    */
   public boolean hasAuditHistory(Node node) throws Exception{
     AuditService auServ = WCMCoreUtils.getService(AuditService.class);
@@ -779,7 +778,6 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
   /**
    * Method which returns the number of histories.
-   * @author CPop
    */
   public int getNumAuditHistory(Node node) throws Exception{
     AuditService auServ = WCMCoreUtils.getService(AuditService.class);

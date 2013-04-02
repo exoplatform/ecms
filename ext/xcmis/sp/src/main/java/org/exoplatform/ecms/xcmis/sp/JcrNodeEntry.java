@@ -197,11 +197,10 @@ class JcrNodeEntry
    protected String workspace;
 
    /**
-    * @param node back-end JCR node
+    * @param path back-end JCR path
+    * @param workspace The workspace
     * @param storage CMIS storage
     * @throws RepositoryException if any JCR repository error occurs
-    * @throws NotSupportedNodeTypeException if specified <code>node</code> has
-    *            node-type which is unsupported by xCMIS
     * @see Node#getPrimaryNodeType()
     * @see Workspace#getNodeTypeManager()
     * @see RepositoryException

@@ -38,9 +38,11 @@ import org.exoplatform.wcm.connector.BaseConnector;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-/*
- * Created by The eXo Platform SAS Author : Anh Do Ngoc anh.do@exoplatform.com
- * Jun 24, 2008
+/**
+ *
+ * @LevelAPI Experimental
+ *
+ * @anchor CONTref.Devref.PublicRestAPIs.LinkConnector
  */
 @Path("/wcmLink/")
 public class LinkConnector extends BaseConnector implements ResourceContainer {
@@ -51,9 +53,7 @@ public class LinkConnector extends BaseConnector implements ResourceContainer {
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(LinkConnector.class.getName());
 
-  /**
-   * Instantiates a new link connector.
-   */
+  /**  Instantiates a new link connector. */
   public LinkConnector() {
     linkFileHandler = new LinkFileHandler();
   }
@@ -61,17 +61,17 @@ public class LinkConnector extends BaseConnector implements ResourceContainer {
   /**
    * Gets the folders and files.
    *
-   * @param repositoryName the repository name
-   * @param workspaceName the workspace name
-   * @param jcrPath the jcr path
-   * @param currentFolder the current folder
-   * @param command the command
-   * @param type the type
-   * @param currentPortal the current portal
+   * @param repositoryName The repository name
+   * @param workspaceName The workspace name
+   * @param jcrPath The jcr path
+   * @param currentFolder The current folder
+   * @param command The command
+   * @param type The type
+   * @param currentPortal The current portal
+   * @return The folders and files
+   * @throws Exception The exception
    *
-   * @return the folders and files
-   *
-   * @throws Exception the exception
+   * @anchor CONTref.Devref.PublicRestAPIs.LinkConnector.getFoldersAndFiles
    */
   @GET
   @Path("/getFoldersAndFiles/")

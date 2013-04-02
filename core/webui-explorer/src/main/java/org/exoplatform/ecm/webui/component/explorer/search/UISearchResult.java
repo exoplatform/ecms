@@ -454,7 +454,6 @@ public class UISearchResult extends UIContainer {
      * @param linkPath
      * @param keyword
      * @return
-     * @Author Nguyen The Vinh from ExoPlatform
      */
     protected boolean checkTargetMatch(Node symlinkNode, String keyword) {
       String queryStatement = CHECK_LINK_MATCH_QUERY1;

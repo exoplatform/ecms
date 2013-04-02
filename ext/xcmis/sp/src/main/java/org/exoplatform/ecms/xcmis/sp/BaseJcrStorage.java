@@ -540,8 +540,6 @@ abstract class BaseJcrStorage implements TypeManager
     * @param includePropertyDefinition if true property definition should be
     *        included
     * @return CMIS type definition
-    * @throws NotSupportedNodeTypeException if specified node type is
-    *         unsupported by xCMIS
     */
    public TypeDefinition getTypeDefinition(NodeType nodeType, boolean includePropertyDefinition)
    {

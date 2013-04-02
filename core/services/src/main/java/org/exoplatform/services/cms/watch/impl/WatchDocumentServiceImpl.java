@@ -41,13 +41,6 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.picocontainer.Startable;
 
-
-/**
- * Created by eXo Platform
- * Author : Pham Xuan Hoa
- *          hoapham@exoplatform.com
- * Nov 30, 2006
- */
 public class WatchDocumentServiceImpl implements WatchDocumentService, Startable {
 
   final public static String EXO_WATCHABLE_MIXIN = "exo:watchable" ;

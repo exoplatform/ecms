@@ -200,7 +200,7 @@ public class NodeFinderImpl implements NodeFinder {
 
   /**
    * Get session of user in given workspace and repository
-   * @param repository
+   * @param manageableRepository
    * @param workspace
    * @throws RepositoryException
    */

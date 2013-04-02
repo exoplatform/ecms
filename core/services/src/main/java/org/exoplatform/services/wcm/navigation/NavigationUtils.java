@@ -102,9 +102,9 @@ public class NavigationUtils {
   }
   
   /**
-   * @purpose Get UserNavigation of a specified element
-   * @param UserPortal
-   * @param Site Key
+   * Get UserNavigation of a specified element
+   * @param userPortal
+   * @param siteKey Key
    * @return UserNavigation of group  
    */
   public static UserNavigation getUserNavigation(UserPortal userPortal, SiteKey siteKey) throws Exception {

@@ -343,13 +343,10 @@ public class UICLVPortlet extends UIPortletApplication {
   }
 
   /**
-   * @function activateMode
-   * @purpose Decide which element will be displayed for correspond
-   *          PortletMode/DisplayMode
+   * Decide which element will be displayed for correspond PortletMode/DisplayMode
    * @param npMode: View/Edit
    * @param nDisplayMode : FolderMode/ManualMode
    * @throws Exception : Exception will be throws if child addition action fails
-   * @Author Nguyen The Vinh from ExoPlatform
    */
   private void activateMode(PortletMode npMode, String nDisplayMode) throws Exception {
     PortletRequestContext pContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
@@ -409,10 +406,9 @@ public class UICLVPortlet extends UIPortletApplication {
       removeChild(UICLVManualMode.class);
   }
   /**
-   * @function changeToViewMode
-   * @purpose force porlet to change to ViewMode
+   * Force porlet to change to ViewMode
+   *
    * @throws Exception
-   * @Author Nguyen The Vinh from ExoPlatform
    */
   public void changeToViewMode() throws Exception {
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
@@ -421,10 +417,8 @@ public class UICLVPortlet extends UIPortletApplication {
   }
 
   /**
-   * @function updatePorlet
-   * @purpose Update the current portlet if config/data changed.
+   * Update the current portlet if config/data changed.
    * @throws Exception
-   * @Author Nguyen The Vinh from ExoPlatform
    */
   public void updatePortlet() throws Exception {
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();

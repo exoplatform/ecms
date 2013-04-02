@@ -45,19 +45,18 @@ import org.w3c.dom.Element;
  * Created by The eXo Platform SAS
  * Author : Nguyen The Vinh From ECM Of eXoPlatform
  *          vinh_nguyen@exoplatform.com
- * 29 May 2012  
+ * 29 May 2012
  */
 @Path("/content/")
 public class NavigationConnector implements ResourceContainer{
   private static ThreadLocal<Boolean> gotNavigationKeeper = new ThreadLocal<Boolean>();
+
   /**
+   * Return a JsonString include all navigation node
    * 
    * @param       portalName: Destination portal to get the navigation tree
    * @return
-   * @throws      Exception    
-   * @Objective : Return a JsonString include all navigation node
-   * @Author    : Nguyen The Vinh from ECM of eXoPlatform
-   *              vinh.nguyen@exoplatform.com
+   * @throws      Exception
    */
   @GET
   @Path("/getFullNavigation/")
@@ -92,14 +91,12 @@ public class NavigationConnector implements ResourceContainer{
     return createJsonTree(navigation, root);
   }
   /**
+   * Return a JsonString include all navigation node, serve for getNavigationAsJSON method
    * 
    * @param           navigation: Navigation information to create Json tree
    * @param           rootNode  : Root node of navigation
    * @return          A String as Json tree
    * @throws Exception
-   * @Objective : Return a JsonString include all navigation node, serve for getNavigationAsJSON method
-   * @Author    : Nguyen The Vinh from ECM of eXoPlatform
-   *              vinh.nguyen@exoplatform.com
    */
   private String createJsonTree(UserNavigation navigation, UserNode rootNode) throws Exception {
     StringBuffer sbJsonTree = new StringBuffer();
@@ -114,13 +111,10 @@ public class NavigationConnector implements ResourceContainer{
     return sbJsonTree.toString();
   }
   /**
+   * Build JsonTree for children nodes of navigation
    * 
    * @param           children
    * @return          StringBuffer contain Json tree of children
-   * @throws          Exception
-   * @Objective :     Build JsonTree for children nodes of navigation
-   * @Author    :     Nguyen The Vinh from ECM of eXoPlatform
-   *                  vinh.nguyen@exoplatform.com
    */
   private StringBuffer addJsonNodes(Iterator<UserNode> children) {
     StringBuffer sbJsonTree = new StringBuffer();

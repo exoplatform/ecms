@@ -246,7 +246,7 @@ public class TrashServiceImpl implements TrashService {
 
   /**
    *
-   * @param taxonomyNode
+   * @param path
    * @param targetNode
    * @return
    */

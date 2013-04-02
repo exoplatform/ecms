@@ -952,7 +952,6 @@ public class Utils {
    * @param strQuery
    * @param SQLLanguage
    * @return true as valid query, false as Invalid
-   * @author vinh_nguyen from ECMS
    */
   public static boolean checkQuery(String workspace, String strQuery, String SQLLanguage) {
     try {

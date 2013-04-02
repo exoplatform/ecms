@@ -281,10 +281,9 @@ public class UIPresentation extends UIBaseNodePresentation {
 
   /**
    * Gets the attachment nodes.
-   * @param node the node that contains Attachment
+   *
    * @return the attachment Nodes
    * @throws Exception the exception
-   * @author vinh_nguyen
    */
   public List<Node> getAttachments() throws Exception {
     List<Node> attachments = new ArrayList<Node>() ;

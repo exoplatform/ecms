@@ -36,13 +36,6 @@ import org.exoplatform.webui.form.UIFormDateTimeInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 
-/**
- * Created by The eXo Platform SARL
- * Author : Dang Van Minh
- *          minh.dang@exoplatform.com
- * May 6, 2007
- * 4:29:08 PM
- */
 @ComponentConfig(
     template =  "app:/groovy/webui/component/explorer/search/UIConstraintsForm.gtmpl"
 )
@@ -250,7 +243,7 @@ public class UIConstraintsForm extends UIFormInputSetWithAction implements UISel
 
   /**
    * Create query string for category
-   * @param category
+   * @param categoryPath
    * @return
    */
   private String getCategoryQueryString(String categoryPath) {
@@ -354,6 +347,7 @@ public class UIConstraintsForm extends UIFormInputSetWithAction implements UISel
    * Set category to text box and closeof choose category popup window
    * @param selectField: name of text field input
    * @param value: value of chosen category
+   * @throws Exception
    */
   public void doSelect(String selectField, Object value) throws Exception {
     /* Set value to textbox */

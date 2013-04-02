@@ -405,7 +405,6 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener {
   /**
    * Called on CmisRegistry start. It will initialize search service.
    *
-   * @param cmisRegistry
    * @param readOnlyIndexConfiguration
    * @throws RepositoryException
    * @throws SearchServiceException

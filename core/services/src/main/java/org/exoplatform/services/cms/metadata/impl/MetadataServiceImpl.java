@@ -44,11 +44,8 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
 
 /**
- * @author Hung Nguyen Quang
- * @mail   nguyenkequanghung@yahoo.com
  * Process with meta data for system
  */
-
 public class MetadataServiceImpl implements MetadataService, Startable{
 
   /**

@@ -296,7 +296,7 @@ public class CommentsServiceImpl implements CommentsService {
   /**
    * Check language of comment is supported in a document
    * @param  document    The document node is commented
-   * @Param  language    The language of comment node
+   * @param  language    The language of comment node
    * @throws Exception
    */
   private boolean isSupportedLocalize(Node document,String language)throws Exception {

@@ -98,7 +98,6 @@ public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
    * 
    * @param savedItems
    * @return
-   * @author vinh_nguyen
    */
   protected String getTargetPath(String savedItems) {
    int i, n;

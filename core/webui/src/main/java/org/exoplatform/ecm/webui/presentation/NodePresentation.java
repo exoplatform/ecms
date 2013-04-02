@@ -313,7 +313,6 @@ public interface NodePresentation {
   * @param arguments       Extra parameter for Input component (toolbar, width, height,.. for CKEditor/TextArea)
   * @return                String that can be put on groovy template
   * @throws                Exception
-  * @author                vinh_nguyen
   */
   public String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, String inputType, 
       String idGenerator, String cssClass, boolean isGenericProperty, String... arguments) throws Exception;

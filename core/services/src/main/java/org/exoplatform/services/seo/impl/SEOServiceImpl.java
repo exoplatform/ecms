@@ -778,10 +778,7 @@ public class SEOServiceImpl implements SEOService {
   /**
    * Returns hash
    *
-   * @param uri
-   *          The uri of page
-   * @param language
-   *          The language of page
+   * @param uri The uri of page
    * @return
    * @throws Exception
    */

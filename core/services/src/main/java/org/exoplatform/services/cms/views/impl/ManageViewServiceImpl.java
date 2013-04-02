@@ -318,7 +318,7 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
 
   /**
    * Get session by repository
-   * @param repository      : ManageableRepository object
+   *
    * @return
    * @throws Exception
    */

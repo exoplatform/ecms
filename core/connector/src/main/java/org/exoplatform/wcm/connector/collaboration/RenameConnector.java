@@ -50,9 +50,14 @@ import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
- * Created by The eXo Platform SAS
- * Author : Pham Duy Dong dongpd@exoplatform.com
- * Sep 18, 2012
+ * The RenameConnector aims to enhance the use of the rename action on the content explorer.
+ * The system allows to set two values : name and title.
+ * The title is a logical name that is used to display in the content explorer.
+ * The name is the technical name of the file at JCR level. It is notably exposed via the WEBDAV layer.
+ *
+ * @LevelAPI Experimental
+ *
+ * @anchor CONTref.Devref.PublicRestAPIs.RenameConnector
  */
 @Path("/contents/rename/")
 public class RenameConnector implements ResourceContainer {
@@ -70,9 +75,11 @@ public class RenameConnector implements ResourceContainer {
    * Basically <em>objectid</em> is a partern which is useful to find html tag of specific node <br>
    * <em>objectid</em> actually is node path encoded by URLEncoder. <br>
    *
-   * @param nodePath a node path
+   * @param nodePath The node path
    * @return <em>objectid</em>
-   * @throws Exception
+   * @throws Exception The exception
+   *
+   * @anchor CONTref.Devref.PublicRestAPIs.RenameConnector.getObjectId
    */
   @GET
   @Path("/getObjectId/")
@@ -83,10 +90,12 @@ public class RenameConnector implements ResourceContainer {
   /**
    * Call RenameConnector rest service to execute rename process.
    *
-   * @param oldPath old path of renamed node with syntax: [workspace:node path]
-   * @param newTitle new Title of node
+   * @param oldPath Old path of renamed node with syntax: [workspace:node path]
+   * @param newTitle New title of the node.
    * @return Httpstatus 400 if rename fail, otherwise uuid of renamed node is returned
-   * @throws Exception
+   * @throws Exception The exception
+   *
+   * @anchor CONTref.Devref.PublicRestAPIs.RenameConnector.rename
    */
   @GET
   @Path("/rename/")

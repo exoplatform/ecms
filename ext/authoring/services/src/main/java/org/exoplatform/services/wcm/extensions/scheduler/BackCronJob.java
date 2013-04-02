@@ -12,9 +12,6 @@ import org.quartz.JobDataMap;
  * haikel.thamri@exoplatform.com
  */
 public class BackCronJob extends CronJob {
-    /**
-     * @param args
-     */
 
     private static final Log LOG = ExoLogger.getLogger(BackCronJob.class.getName());
 
