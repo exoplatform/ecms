@@ -108,30 +108,42 @@
 								</tr>
 							</thead>
 							<tbody>
-								<%for(bean in nodeType.getPropertyDefinitions()) {%>
+								<%
+								def propertyDefinitions = nodeType.getPropertyDefinitions();
+								if (propertyDefinitions.length == 0) { %>
 								<tr>
-									<td><%repairName(bean.getName())%></td>
-									<td><%=uicomponent.resolveType(bean.getRequiredType())%></td>
-									<td><%repairName(bean.isMandatory())%></td>
-									<td><%repairName(bean.isProtected())%></td>
-									<td><%repairName(bean.isAutoCreated())%></td>
-									<td><%repairName(bean.isMultiple())%></td>
-									<td><%=uicomponent.getDefaultValue(bean)%></td>
-									<%
-										StringBuilder contraints = new StringBuilder() ;
-										String[] contraintValues = bean.getValueConstraints() ;
-										if(contraintValues != null && contraintValues.length > 0) {
-											for(value in contraintValues) {
-												if(value != null) {
-													if(contraints.length() > 0) contraints.append(",") ;
-													contraints.append(value) ;
+									<td class="empty center" colspan=8">
+										<%=_ctx.appRes("UIGrid.msg.empty")%>
+									</td>
+								</tr> 
+								<%
+								} else {
+									for(bean in propertyDefinitions) {%>
+									<tr>
+										<td><%repairName(bean.getName())%></td>
+										<td><%=uicomponent.resolveType(bean.getRequiredType())%></td>
+										<td><%repairName(bean.isMandatory())%></td>
+										<td><%repairName(bean.isProtected())%></td>
+										<td><%repairName(bean.isAutoCreated())%></td>
+										<td><%repairName(bean.isMultiple())%></td>
+										<td><%=uicomponent.getDefaultValue(bean)%></td>
+										<%
+											StringBuilder contraints = new StringBuilder() ;
+											String[] contraintValues = bean.getValueConstraints() ;
+											if(contraintValues != null && contraintValues.length > 0) {
+												for(value in contraintValues) {
+													if(value != null) {
+														if(contraints.length() > 0) contraints.append(",") ;
+														contraints.append(value) ;
+													}
 												}
 											}
-										}
-									%>
-									<td><%=contraints.toString()%></td>
-								</tr>
-								<%}%>
+										%>
+										<td><%=contraints.toString()%></td>
+									</tr>
+									<%}
+									}
+								%>
 							</tbody>
 						</table>
 						<div class="gridTitleBar">
@@ -150,16 +162,29 @@
 								</tr>
 							</thead>
 							<tbody>
-								<%for(bean in nodeType.getChildNodeDefinitions()) {%>
-								<tr>
-									<td><%repairName(bean.getName())%></td>
-									<td><%=uicomponent.resolveOnParentVersion(bean.getOnParentVersion())%></td>
-									<td><%repairName(bean.isMandatory())%></td>
-									<td><%repairName(bean.isProtected())%></td>
-									<td><%repairName(bean.isAutoCreated())%></td>
-									<td><%repairName(bean.getDeclaringNodeType().getName())%></td>
-								</tr>
-								<%}%>
+								<%
+								def childNodeDefinitions = nodeType.getChildNodeDefinitions();
+								if (childNodeDefinitions.length == 0) {
+								%>
+									<tr>
+										<td class="empty center" colspan=6">
+											<%=_ctx.appRes("UIGrid.msg.empty")%>
+										</td>
+									</tr> 
+								<%
+								} else {
+									for(bean in childNodeDefinitions) {%>
+									<tr>
+										<td><%repairName(bean.getName())%></td>
+										<td><%=uicomponent.resolveOnParentVersion(bean.getOnParentVersion())%></td>
+										<td><%repairName(bean.isMandatory())%></td>
+										<td><%repairName(bean.isProtected())%></td>
+										<td><%repairName(bean.isAutoCreated())%></td>
+										<td><%repairName(bean.getDeclaringNodeType().getName())%></td>
+									</tr>
+									<%}
+									}
+								%>
 							</tbody>
 						</table>
 					</div>
