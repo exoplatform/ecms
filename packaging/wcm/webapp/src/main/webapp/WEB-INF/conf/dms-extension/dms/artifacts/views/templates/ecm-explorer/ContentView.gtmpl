@@ -28,27 +28,6 @@
   import org.exoplatform.services.wcm.publication.WCMPublicationService;
   // Content view
   
-   /**
-    * Finds and returns the date information of the given node.
-    *
-    * @return DateFormat Live date if the current state is live. Otherwise, the
-    * lastest modified date.
-    */
-   public Date getDate(Node node, String status) {
-     Date date = null;
-     try {
-       if("live".equals(status)) {
-         date = node.getProperty("publication:liveDate").getDate().getTime();
-       } else if ("draft".equals(status) || "obsolete".equals(status)) {
-         date = uicomponent.getDateModified(node); 
-       } else {
-         date = uicomponent.getDateCreated(node);
-       }
-     } catch (Exception e) {
-       date = uicomponent.getDateCreated(node);
-     }
-     return date;
-   }
   def linkManager = WCMCoreUtils.getService(LinkManager.class);  
   def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
   def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
@@ -258,7 +237,7 @@
           def name = nodePath.substring(nodePath.lastIndexOf("/") + 1, nodePath.length()) ;
           name = ContentReader.getXSSCompatibilityContent(name);         
           //   Datetime
-          def date = getDate(data, status);
+          def date = uicomponent.getDateCreated(data);
           def datetime = dateFormat.format(date);
           
           //   Author
