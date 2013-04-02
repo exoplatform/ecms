@@ -106,7 +106,6 @@ public class UIViewMetadataTemplate extends UIContainer {
       }
       uiMetaManager.initMetadataFormPopup(nodeType) ;
       UIViewMetadataContainer uiContainer = uiViewTemplate.getParent() ;
-      uiContainer.setRenderedChild(nodeType) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer.getParent()) ;
     }
   }
