@@ -24,7 +24,7 @@
       <ContentSelectionBlock>Content Selection</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Mode</UICLVConfigDisplayModeFormRadioBoxInput>
       <UICLVConfigItemPathFormInputSet>Folder Path</UICLVConfigItemPathFormInputSet>
-	  <UICLVConfigItemPathFormStringInput>Folder Path</UICLVConfigItemPathFormStringInput>
+	    <UICLVConfigItemPathFormStringInput>Folder Path</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Order by</UICLVConfigOrderByFormSelectBox>
       <option>
         <exo:title>Title</exo:title>
@@ -88,6 +88,13 @@
       <not-valid-path>The Folder Path is invalid.</not-valid-path>
       <saving-success>The portlet's preferences are saved.</saving-success>
     </msg>
+    <tab>
+      <label>
+        <clvContentTab>Content Selection</clvContentTab>
+        <clvDisplayTab>Display Settings</clvDisplayTab>
+        <clvAdvancedTab>Advanced</clvAdvancedTab>
+      </label>
+    </tab>
   </UICLVConfig>
   <UICLVConfigDisplayModeFormRadioBoxInput>
     <label>

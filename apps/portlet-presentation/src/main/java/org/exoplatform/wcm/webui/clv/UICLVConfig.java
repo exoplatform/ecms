@@ -548,10 +548,7 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
     uiCLVContentTab.addUIFormInput(orderTypeRadioBoxInput);
     setSelectedTab(CONTENT_TAB);
     addUIComponentInput(uiCLVContentTab) ;
-    //addChild(displayModeRadioBoxInput);
-    //addChild(itemPathInputSet);
-    //addChild(orderBySelectBox);
-    //addChild(orderTypeRadioBoxInput);
+    
 
     UIFormInputSet uiCLVDisplayTab = new UIFormInputSet(DISPLAY_TAB) ;
     uiCLVDisplayTab.addUIFormInput(headerInput);
@@ -570,23 +567,7 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
     uiCLVDisplayTab.addUIFormInput(showLinkCheckbox);
     uiCLVDisplayTab.addUIFormInput(showRssLinkCheckbox);
     addUIComponentInput(uiCLVDisplayTab) ;
-    //addChild(headerInput);
-    //addChild(showAutomaticDetectionCheckBox);
-    //addChild(formViewTemplateSelector);
-    //addChild(paginatorTemplateSelector);
-   // addChild(itemsPerPageStringInput);
-
-    //addChild(showTitleCheckbox);
-    //addChild(showHeaderCheckBox);
-    //addChild(showRefreshCheckbox);
-
-    //addChild(showImageCheckbox);
-    //addChild(showDateCreatedCheckbox);
-    //addChild(showMoreLinkCheckbox);
-
-    //addChild(showSummaryCheckbox);
-    //addChild(showLinkCheckbox);
-    //addChild(showRssLinkCheckbox);
+    
     
     UIFormInputSet uiCLVAdvancedTab = new UIFormInputSet(ADVANCED_TAB) ;
     uiCLVAdvancedTab.addUIFormInput(contextualFolderRadioBoxInput);
@@ -595,17 +576,10 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
     uiCLVAdvancedTab.addUIFormInput(showScvWithInput);
     uiCLVAdvancedTab.addUIFormInput(cacheEnableRadioBoxInput);
 
-    //addChild(contextualFolderRadioBoxInput);
-    //addChild(showClvByInput);
-    //addChild(targetPageInputSet);
-    //addChild(showScvWithInput);
-    //addChild(cacheEnableRadioBoxInput);
-
+    
     if (this.isContentListByQuery()) {
     	uiCLVAdvancedTab.addUIFormInput(workspaceSelector);
-    	uiCLVAdvancedTab.addUIFormInput(queryTextAreaInput);
-      //addChild(workspaceSelector);
-      //addChild(queryTextAreaInput);
+    	uiCLVAdvancedTab.addUIFormInput(queryTextAreaInput);     
     }
     addUIComponentInput(uiCLVAdvancedTab) ;
 
