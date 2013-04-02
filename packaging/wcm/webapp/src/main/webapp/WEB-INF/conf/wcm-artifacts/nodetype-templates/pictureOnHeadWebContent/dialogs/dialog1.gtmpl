@@ -72,15 +72,6 @@
 									%>
 								</div>
 							</div>
-							<div class="control-group">
-								<label class="control-label" for="title"><%=_ctx.appRes("WebContent.dialog.label.title")%>:</label>
-							  	<div class="controls">
-								<%
-							        String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=empty", "editable=if-null"];
-							        uicomponent.addTextField("title", webContentFieldTitle) ;
-							    %>
-								</div>
-							</div>
 							<div class="control-group">		          					
 					      <label class="control-label" for="imagee"><%=_ctx.appRes("WebContent.dialog.label.image")%>:</label>
 					      <div class="controls">
