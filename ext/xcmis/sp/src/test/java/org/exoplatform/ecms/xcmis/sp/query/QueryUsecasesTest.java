@@ -42,8 +42,10 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -847,9 +849,12 @@ public class QueryUsecasesTest extends BaseQueryTest
    public void testNOTConstraint() throws Exception
    {
 
+      Map<String, String> parameters = new HashMap<String, String>();
+      parameters.put(CmisConstants.CHARSET, "ISO-8859-1");
+      
       DocumentData doc1 =
          createDocument(storageA, testRoot, "node1", nasaDocumentTypeDefinition, "hello world".getBytes(),
-            new MimeType("text", "plain"));
+            new MimeType("text", "plain", parameters));
 
       FolderData folder2 = createFolder(storageA, testRoot, "folder2", folderTypeDefinition);
       DocumentData doc2 =
