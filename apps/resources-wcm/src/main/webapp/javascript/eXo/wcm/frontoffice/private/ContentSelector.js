@@ -988,7 +988,7 @@
 		var actionCell = newRow.insertCell(1);
 		actionCell.innerHTML = '<a class="actionIcon" onclick="eXo.ecm.ECS.removeContent(this);"><i class="uiIconDelete uiIconLightGray""></i></a>';
 		actionCell.className = "center";
-		//this.insertMultiContent("SaveTemporary", path);	
+		this.insertMultiContent("SaveTemporary", path);	
 	};
 	
 	EcmContentSelector.prototype.addFileSearchListSearch = function() {
@@ -1027,7 +1027,7 @@
 		var objRow = gj(objNode).parents("tr:first")[0];
 		tblListFilesContent.deleteRow(objRow.rowIndex);	
 		eXo.ecm.ECS.pathContent = false;
-		//this.insertMultiContent("SaveTemporary", this.initPathExpanded);
+		this.insertMultiContent("SaveTemporary", this.initPathExpanded);
 	}
 	
 	EcmContentSelector.prototype.changeFilter = function() {
