@@ -103,9 +103,7 @@ public class JCRExceptionManager {
     } else {
       throw e;
     }
-    uiApp.addMessage(new ApplicationMessage(Utils.getResourceBundle(Utils.LOCALE_WEBUI_DMS,
-                                                                    messageKey,
-                                                                    JCRExceptionManager.class.getClassLoader()),
+    uiApp.addMessage(new ApplicationMessage(messageKey,
                                             null,
                                             ApplicationMessage.WARNING));
   }
