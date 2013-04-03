@@ -69,8 +69,7 @@
 													  </label>
 													  <a class="actionIcon pull-right"><i class="uiIconQuestion uiIconBlue" id="" title="<%= _ctx.appRes("UICLVConfig.help.FolderPathHelp") %>" data-placement="left" rel="tooltip"></i></a>
 													  <div class="controls" <% if (uicomponent.getSavedPath() != null) { %>title="<%=uicomponent.getSavedPath()%>" <% }%> >
-													    <input type="text" disabled="" id="UICLVConfigItemPathFormStringInput" name="UICLVConfigItemPathFormStringInput"> *
-														  <a class="actionIcon"><i alt="Add Path" class="uiIconAddPath uiIconLightGray" title="Add Path" data-placement="bottom" rel="tooltip" onclick="eXo.webui.UIForm.submitForm('UICLVConfig', 'AddPath', true)"></i></a>
+													    <% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %>
 													  </div>
 													</div>
 													<div class="control-group">                  
