@@ -28,12 +28,14 @@ import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.Property;
 import javax.jcr.PropertyType;
+import javax.jcr.RepositoryException;
 import javax.jcr.Value;
 import javax.jcr.ValueFactory;
 import javax.jcr.ValueFormatException;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.PropertyDefinition;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
@@ -595,14 +597,25 @@ public class UIPropertyForm extends UIForm {
           name = uiForm.getUIFormSelectBox(PROPERTY_SELECT).getValue();
         }else{
           String namespace = uiForm.getUIFormSelectBox(FIELD_NAMESPACE).getValue();
-            name = namespace + ":" + uiForm.getUIStringInput(FIELD_PROPERTY).getValue();
+            name = namespace + (StringUtils.isNotBlank(namespace) ? ":" : "") 
+                             + uiForm.getUIStringInput(FIELD_PROPERTY).getValue();
         }
         if(name != null && name.length() > 0) {
+          //test valid property name
+          try {
+            currentNode.hasProperty(name);
+          } catch (RepositoryException e) {
+            Object[] args = {name};
+            uiApp.addMessage(new ApplicationMessage("UIPropertyForm.msg.property-name-incorrect", args, 
+                                                    ApplicationMessage.WARNING));
+            UIPropertiesManager uiPropertiesManager = uiForm.getAncestorOfType(UIPropertiesManager.class);
+            uiPropertiesManager.setRenderedChild(UIPropertyForm.class);
+            return;
+          }
           if(currentNode.hasProperty(name)) {
             Object[] args = { name };
             uiApp.addMessage(new ApplicationMessage("UIPropertyForm.msg.propertyName-exist", args,
                 ApplicationMessage.WARNING));
-
             UIPropertiesManager uiPropertiesManager = uiForm.getAncestorOfType(UIPropertiesManager.class);
             uiPropertiesManager.setRenderedChild(UIPropertyForm.class);
             return;

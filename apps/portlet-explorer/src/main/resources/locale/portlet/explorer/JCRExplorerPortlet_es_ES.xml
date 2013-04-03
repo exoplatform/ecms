@@ -3114,4 +3114,9 @@
       <more>More</more>
     </label>
   </FileView>
+  <UIPropertyForm>
+  	<msg>
+	  	<property-name-incorrect>The property name is incorrect, please enter another value for it!</property-name-incorrect>
+    </msg>
+  </UIPropertyForm>
 </bundle>
