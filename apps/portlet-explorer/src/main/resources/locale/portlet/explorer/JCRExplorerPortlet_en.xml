@@ -127,6 +127,7 @@
       <selectView>Select View</selectView>
       <showSideBar>Show Sidebar</showSideBar>
       <more>More</more>
+      <backTo>Back</backTo>
     </label>
   </UIViewBar>
   <Views>
@@ -757,13 +758,13 @@
   <UIPropertyForm>
     <title>Add/Edit Property</title>
     <label>
-      <name>Name</name>
-      <type>Type</type>
-      <value>Value</value>
-      <upload>Upload</upload>
-      <namespace>Namespace</namespace>
-      <multiple>Multiple</multiple>
-      <property_select>Add new Property</property_select>
+      <name>Name:</name>
+      <type>Type:</type>
+      <value>Value:</value>
+      <upload>Upload:</upload>
+      <namespace>Namespace:</namespace>
+      <multiple>Multiple:</multiple>
+      <property_select>Add new Property:</property_select>
     </label>
     <action>
       <Save>#{word.save}</Save>

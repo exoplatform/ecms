@@ -132,7 +132,7 @@
   		<div class="uiViewBarContainer clearfix" id="UIViewBarContainer">
   		  <%
   		  if (uicomponent.hasBackButton()) {%>
-  		  <a class ="urlBackToButton actionIcon pull-right" href="<%=uicomponent.event("BackTo")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIViewBar.title.backTo")%>"><i class="uiIconEcmsReturn uiIconEcmsLightGrey"></i></a>
+  		  <a class ="urlBackToButton actionIcon pull-right" href="<%=uicomponent.event("BackTo")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIViewBar.label.backTo")%>"><i class="uiIconEcmsReturn uiIconEcmsLightGrey"></i></a>
   		  <%}%>  	      
   	    <a class="setupPreferencesButton actionIcon pull-right" href="<%=uicomponent.event("Preferences")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIViewBar.label.setUpBrowser")%>"><i class="uiIconSetting uiIconLightGray"></i></a>
 
