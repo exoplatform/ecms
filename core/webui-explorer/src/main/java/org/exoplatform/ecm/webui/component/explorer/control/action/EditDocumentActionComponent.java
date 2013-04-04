@@ -206,7 +206,7 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
       if (event != null) {
         uiExplorer.updateAjax(event);
       }
-      context.addUIComponentToUpdateByAjax(uiExplorer.getChild(UIControl.class));
+      context.addUIComponentToUpdateByAjax(uiExplorer);
     }
   }
 

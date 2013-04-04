@@ -16,10 +16,10 @@
  */
 package org.exoplatform.ecm.webui.component.explorer ;
 
+import org.exoplatform.ecm.webui.component.explorer.lifecycle.UIDocumentWorkspaceLifeCycle;
 import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIContainer;
-import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 
 /**
  * Created by The eXo Platform SARL
@@ -28,7 +28,7 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
  * July 3, 2006
  * 10:07:15 AM
  */
-@ComponentConfig(lifecycle = UIContainerLifecycle.class)
+@ComponentConfig(lifecycle = UIDocumentWorkspaceLifeCycle.class)
 public class UIDocumentWorkspace extends UIContainer {
 
   static public String SIMPLE_SEARCH_RESULT = "SimpleSearchResult" ;

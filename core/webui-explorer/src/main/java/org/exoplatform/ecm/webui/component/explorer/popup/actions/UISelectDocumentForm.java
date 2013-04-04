@@ -26,6 +26,7 @@ import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIContainer;
@@ -130,7 +131,7 @@ public class UISelectDocumentForm extends UIContainer {
       uiSelectForm.setRendered(false);
       documentForm.setRendered(true);
 
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiDCFormController) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiDCFormController.getAncestorOfType(UIWorkingArea.class));
     }
   }
 }
