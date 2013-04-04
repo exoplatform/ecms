@@ -756,9 +756,15 @@
 				var tBody = gj(table).children("tbody")[0];
 				len = tBody.childNodes.length;
 			} else {
+				var rows;
 				var tHead = gj(table).children("thead")[0];
-				var rowsTHead = gj(tHead).children("tr");
-				len = rowsTHead.length - 1;		
+				var tbody = gj(table).children("tbody")[0];
+				if (tbody) {
+					rows = gj(tbody).children("tr");
+				} else {
+					rows = gj(tHead).children("tr");
+				}
+				len = rows.length -1;
 			}
 		} else {
 			var icon_container = document.getElementById(eXo.ecm.Pager.tableName);    
@@ -776,29 +782,20 @@
 			var rows = null;
 			var table = document.getElementById(eXo.ecm.Pager.tableName);
 			var len = 0;
-			if(navigator.userAgent.indexOf("MSIE") >= 0) { //is IE
-				var tBody = gj(table).children("tbody")[0];
-				rows =tBody.childNodes;		
-				len = rows.length;
-			
-				for (var i = 0; i < len; i++) {
-					if (i < (from-1) || i > (to-1))  {
-						  rows[i].style.display = 'none';
-					} else {
-						  rows[i].style.display = '';
-					}
-				}
-			}	else {
 	//			var tHead = eXo.core.DOMUtil.getChildrenByTagName(table, "thead")[0];
-				var tHead = gj(table).children("thead")[0];
+			var tHead = gj(table).children("thead")[0];
+			var tbody = gj(table).children("tbody")[0];
+			if (tbody) {
+				rows = gj(tbody).children("tr");
+			} else {
 				rows = gj(tHead).children("tr");
-				len = rows.length - 1;		  
-				for (var i = 1; i < len + 1; i++) {  //starts from 1 to skip table header row
-					if (i < from || i > to)  {
-						  rows[i].style.display = 'none';
-					} else {
-						  rows[i].style.display = '';
-					}
+			}
+			len = rows.length - 1;		  
+			for (var i = 1; i < len + 1; i++) {  //starts from 1 to skip table header row
+				if (i < from || i > to)  {
+					  rows[i].style.display = 'none';
+				} else {
+					  gj(rows[i]).css("display", "");
 				}
 			}
 		} else {

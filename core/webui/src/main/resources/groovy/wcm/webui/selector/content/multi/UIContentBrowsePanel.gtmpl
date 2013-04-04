@@ -59,6 +59,9 @@
 		    			</tbody>
 		  			</table>
 				</div>
+				<div class="pageIteratorContainer clearfix" style="overflow:hidden">
+				  <div class="PageIterator" id="pageNavPosition"></div>
+				</div>
 				<div class="listFileContainer">
 		  			<table class="uiGrid table table-hover table-striped" id="ListFilesContent">
 		    			<thead>
@@ -72,13 +75,11 @@
 		    			</tr>
 		  			</table>
 				</div>
-				<div class="PageIterator" id="pageNavPosition"></div>
 			</div>
 		</div>
-		<div class="uiAction">
-			<button type="button" href="#" class="btn" onclick="eXo.ecm.ECS.insertMultiContent();"><%=uicomponent.getLocaleMsg("UIContentBrowsePanelMulti.action.Save")%></button>    
-			<button type="button" href="#" class="btn" onclick="<%= uicomponent.event("Close") %>"><%=uicomponent.getLocaleMsg("UIContentBrowsePanelMulti.action.Cancel")%></button>          
-		</div>
-		
 	</div>
+</div>
+<div class="uiAction">
+  <button type="button" href="#" class="btn" onclick="eXo.ecm.ECS.insertMultiContent();"><%=uicomponent.getLocaleMsg("UIContentBrowsePanelMulti.action.Save")%></button>
+  <button type="button" href="#" class="btn" onclick="<%= uicomponent.event("Close") %>"><%=uicomponent.getLocaleMsg("UIContentBrowsePanelMulti.action.Cancel")%></button>
 </div>
