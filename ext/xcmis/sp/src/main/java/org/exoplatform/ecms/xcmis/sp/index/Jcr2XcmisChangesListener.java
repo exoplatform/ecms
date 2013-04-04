@@ -33,6 +33,7 @@ import java.util.UUID;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
+import org.apache.tika.exception.TikaException;
 import org.exoplatform.ecms.xcmis.sp.JcrCMIS;
 import org.exoplatform.ecms.xcmis.sp.StorageClosableImpl;
 import org.exoplatform.ecms.xcmis.sp.StorageConfiguration;
@@ -408,9 +409,10 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener {
    * @param readOnlyIndexConfiguration
    * @throws RepositoryException
    * @throws SearchServiceException
+   * @throws TikaException 
    */
   public void onRegistryStart(IndexConfiguration readOnlyIndexConfiguration) throws RepositoryException,
-                                                                            SearchServiceException {
+                                                                            SearchServiceException, TikaException {
 
     if (readOnlyIndexConfiguration != null && rootStorage == null) {
 
