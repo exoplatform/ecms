@@ -665,7 +665,10 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       	if(contentType == GENERIC_TYPE)
       		message_key = "UIWorkingArea.msg.confirm-delete-has-relations";
       	else if(contentType == FILE_TYPE)
-      		message_key = "UIWorkingArea.msg.confirm-delete-file-has-relations";      	
+      		message_key = "UIWorkingArea.msg.confirm-delete-file-has-relations";
+      	else if (contentType == FOLDER_TYPE) {
+      	  message_key = "UIWorkingArea.msg.confirm-delete-folder-has-relations";
+      	}
         uiConfirmMessage.setMessageKey(message_key);
         uiConfirmMessage.setArguments(new String[] { nodeName });      
       } else { // in case: delete multiple node have relations
