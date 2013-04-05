@@ -12,7 +12,8 @@
 %>
 <div class="UIForm FormLayout FormScrollLayout">
   <% uiform.begin() %>
-	<div class="uiBox">
+
+	
   <%/* start render action*/%>
   <% if (uiform.isShowActionsOnTop()) {
             uiform.processRenderAction();
@@ -53,13 +54,13 @@
             </div>
         <%}%>
 				<div class="control-group">
-							<label class="control-label" for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%>:</label>
+					<label class="control-label" for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%></label>
 					<div class="controls">
-			<%
-			  String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().toString();
-			  String[] fieldLang = ["jcrPath=/node/exo:language", "script=ecm-explorer/widget/FillSelectBoxWithLanguage.groovy", lang] ;
-			  uicomponent.addSelectBoxField("content-lang", fieldLang) ;
-			%>
+						<%
+							String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().toString();
+							String[] fieldLang = ["jcrPath=/node/exo:language", "script=ecm-explorer/widget/FillSelectBoxWithLanguage.groovy", lang] ;
+							uicomponent.addSelectBoxField("content-lang", fieldLang) ;
+						%>
 					</div>
 				</div>
         <div class="control-group">
@@ -123,7 +124,7 @@
           </div>
         </div>     
           <div class="control-group">
-            <label class="control-label" for="title"><%=_ctx.appRes("ElementSet.dialog.label.title")%>:</label>
+            <label class="control-label" for="title"><%=_ctx.appRes("ElementSet.dialog.label.title")%></label>
             <div class="controls">
               <%
                 String[] fieldTitle = ["jcrPath=/node/jcr:content/dc:title", "multiValues=true"] ;
@@ -132,7 +133,7 @@
             </div>
           </div>
           <div class="control-group">
-            <label class="control-label" for="description"><%=_ctx.appRes("ElementSet.dialog.label.description")%>:</label>
+            <label class="control-label" for="description"><%=_ctx.appRes("ElementSet.dialog.label.description")%></label>
             <div class="controls">
               <%
                 String[] fieldDescription = ["jcrPath=/node/jcr:content/dc:description", "multiValues=true"] ;
@@ -141,7 +142,7 @@
             </div>
           </div>
           <div class="control-group">
-            <label class="control-label" for="creator"><%=_ctx.appRes("ElementSet.dialog.label.creator")%>:</label>
+            <label class="control-label" for="creator"><%=_ctx.appRes("ElementSet.dialog.label.creator")%></label>
             <div class="controls">
               <%
                 String[] fieldCreator = ["jcrPath=/node/jcr:content/dc:creator", "multiValues=true"] ;
@@ -150,7 +151,7 @@
             </div>
           </div>
           <div class="control-group">
-           <label class="control-label" for="source"><%=_ctx.appRes("ElementSet.dialog.label.source")%>:</label>
+           <label class="control-label" for="source"><%=_ctx.appRes("ElementSet.dialog.label.source")%></label>
             <div class="controls">
               <%
                 String[] fieldSource = ["jcrPath=/node/jcr:content/dc:source", "multiValues=true"] ;
@@ -160,7 +161,7 @@
           </div>
           
     </div>
-	</div>
+
   <% if (!uiform.isShowActionsOnTop()) {
             uiform.processRenderAction()
          }
