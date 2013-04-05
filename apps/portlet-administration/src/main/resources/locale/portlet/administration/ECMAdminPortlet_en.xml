@@ -2614,6 +2614,10 @@
 			<PreviousViewPermission>Previous</PreviousViewPermission>
 			<NextViewTree>Next</NextViewTree>
 		</action>
+  <msg>
+    <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
+				<xss-vulnerability-character-wo-label>Your field input may contains the XSS vulnerability characters</xss-vulnerability-character-wo-label>
+  </msg>		
 	</UIActionForm>
 
 	<UITaxonomyTreeWorkingArea>
