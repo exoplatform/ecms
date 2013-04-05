@@ -82,40 +82,34 @@
 						              List<String> contents = uiform.getItems();
 						              if (contents != null && !contents.isEmpty()) {
 						                %>
-						                  <table class="UIContentGrid">
+						                  <table class="uiGrid table table-hover table-striped">
 						                    <thead>
 						                      <tr>
 						                        <th><%=_ctx.appRes("UICLVConfig.label.ContentPath")%></th>
-						                        <th><%=_ctx.appRes("UICLVConfig.label.Down")%></th>
-						                        <th><%=_ctx.appRes("UICLVConfig.label.Up")%></th>
+						                        <th width="25px" class="center"><%=_ctx.appRes("UICLVConfig.label.Down")%></th>
+						                        <th width="25px" class="center"><%=_ctx.appRes("UICLVConfig.label.Up")%></th>
 						                      </tr>
 						                    </thead>
 						                    <% 
 						                      if (contents.size() == 1) {
 						                        String delLink = uicomponent.event("Delete", "0");
 						                        %>
-						                          <tr class="EvenRow">
+						                          <tr>
 						                            <td><%= URLDecoder.decode(contents.get(0)) %></td>
 						                            <td><span></span></td>
 						                            <td><span></span></td>
 						                          </tr>
 						                        <%
 						                      } else {
-						                        String rowClass = "";
 						                        for (int i = 0; i < contents.size(); i++) {
-						                          if ((i % 2) == 0) {
-						                            rowClass = "EvenRow";
-						                          } else {
-						                            rowClass = "OddRow";
-						                          }
 						                          String content = contents.get(i);                  
 						                          String upLink = uicomponent.event("Increase", Integer.toString(i));
 						                          String downLink = uicomponent.event("Decrease", Integer.toString(i));  
 						                          %>
-						                            <tr class="$rowClass">
+						                            <tr>
 						                              <td><%= URLDecoder.decode(content) %></td>
-						                              <td width="25px"><div class="DownRowIcon" onclick="$downLink"><span></span></div></td>
-						                              <td width="25px"><div class="UpRowIcon" onclick="$upLink"><span></span></div></td>
+						                              <td class="center"><a class="actionIcon" onclick="$downLink"><i class="uiIconSortDown"></i></a></td>
+						                              <td class="center"><a class="actionIcon" onclick="$upLink"><i class="uiIconSortUp"></i></a></td>
 						                            </tr>
 						                          <%
 						                        }
