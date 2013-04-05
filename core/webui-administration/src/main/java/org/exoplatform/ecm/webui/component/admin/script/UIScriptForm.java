@@ -26,6 +26,7 @@ import javax.jcr.version.VersionHistory;
 
 import org.exoplatform.ecm.jcr.model.VersionNode;
 import org.exoplatform.ecm.webui.component.admin.script.UIScriptList.ScriptData;
+import org.exoplatform.ecm.webui.form.validator.XSSValidator;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.scripts.ScriptService;
 import org.exoplatform.services.log.ExoLogger;
@@ -53,8 +54,7 @@ import org.exoplatform.webui.form.validator.NameValidator;
 
 /**
  * Created by The eXo Platform SARL
- * Author : pham tuan
- * phamtuanchip@yahoo.de September 27, 2006 10:27:15 AM
+ * September 27, 2006 10:27:15 AM
  */
 
 @ComponentConfig(
@@ -92,11 +92,10 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
       new UIFormTextAreaInput(FIELD_SCRIPT_CONTENT , FIELD_SCRIPT_CONTENT, null) ;
     contents.addValidator(MandatoryValidator.class) ;
     UICheckBoxInput isVersion = new UICheckBoxInput(FIELD_ENABLE_VERSION , FIELD_ENABLE_VERSION, null) ;
-    UIFormStringInput scriptLabel =
-            new UIFormStringInput(FIELD_SCRIPT_LABEL, FIELD_SCRIPT_LABEL, null) ;
-    UIFormStringInput scriptName =
-      new UIFormStringInput(FIELD_SCRIPT_NAME, FIELD_SCRIPT_NAME, null) ;
-    scriptName.addValidator(MandatoryValidator.class).addValidator(NameValidator.class) ;
+    UIFormStringInput scriptLabel = new UIFormStringInput(FIELD_SCRIPT_LABEL, FIELD_SCRIPT_LABEL, null) ;
+    scriptLabel.addValidator(XSSValidator.class);
+    UIFormStringInput scriptName = new UIFormStringInput(FIELD_SCRIPT_NAME, FIELD_SCRIPT_NAME, null) ;
+    scriptName.addValidator(MandatoryValidator.class).addValidator(NameValidator.class).addValidator(XSSValidator.class);
     versions.setOnChange("Change") ;
     versions.setRendered(false) ;
     isVersion.setRendered(false) ;
