@@ -16,6 +16,7 @@ import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.wcm.webui.Utils;
+import org.exoplatform.wcm.webui.reader.ContentReader;
 import org.exoplatform.wcm.webui.selector.content.UIContentSelector;
 import org.exoplatform.wcm.webui.selector.content.one.UIContentBrowsePanelOne;
 import org.exoplatform.wcm.webui.selector.content.one.UIContentSelectorOne;
@@ -31,11 +32,10 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormRadioBoxInput;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.ext.UIFormInputSetWithAction;
-import org.exoplatform.wcm.webui.reader.ContentReader;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 
 /**
  * Created by The eXo Platform SARL
@@ -93,9 +93,9 @@ public class UISCVPreferences extends UIForm implements UISelectable{
 
   private UIFormStringInput             txtContentPath, txtPrintPage, txtPrintPageParameter;
 
-  private UIFormCheckBoxInput<Boolean>  chkShowTitle;
-  private UIFormCheckBoxInput<Boolean>  chkShowDate;
-  private UIFormCheckBoxInput<Boolean>  chkShowOptionBar;
+  private UICheckBoxInput               chkShowTitle;
+  private UICheckBoxInput               chkShowDate;
+  private UICheckBoxInput               chkShowOptionBar;
   private UIFormRadioBoxInput           contextOptionsRadioInputBox;
   private UIFormRadioBoxInput           cacheOptionsRadioInputBox;
 
@@ -124,17 +124,17 @@ public class UISCVPreferences extends UIForm implements UISelectable{
     /** Option Show Title/Show Date/Show OptionBar **/
     boolean blnShowTitle = Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.SHOW_TITLE,
                                                                             null));
-    chkShowTitle = new UIFormCheckBoxInput<Boolean>(SHOW_TITLE_CHECK_BOX, SHOW_TITLE_CHECK_BOX, null);
+    chkShowTitle = new UICheckBoxInput(SHOW_TITLE_CHECK_BOX, SHOW_TITLE_CHECK_BOX, null);
     chkShowTitle.setChecked(blnShowTitle);
 
     boolean blnShowDate = Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.SHOW_DATE,
                                                                            null));
-    chkShowDate = new UIFormCheckBoxInput<Boolean>(SHOW_DATE_CHECK_BOX, SHOW_DATE_CHECK_BOX, null);
+    chkShowDate = new UICheckBoxInput(SHOW_DATE_CHECK_BOX, SHOW_DATE_CHECK_BOX, null);
     chkShowDate.setChecked(blnShowDate);
 
     boolean blnShowOptionBar = Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.SHOW_OPTIONBAR,
                                                                                 null));
-    chkShowOptionBar = new UIFormCheckBoxInput<Boolean>(SHOW_OPION_BAR_CHECK_BOX, SHOW_OPION_BAR_CHECK_BOX, null);
+    chkShowOptionBar = new UICheckBoxInput(SHOW_OPION_BAR_CHECK_BOX, SHOW_OPION_BAR_CHECK_BOX, null);
     chkShowOptionBar.setChecked(blnShowOptionBar);
 
 
@@ -200,12 +200,9 @@ public class UISCVPreferences extends UIForm implements UISelectable{
       UISCVPreferences uiSCVPref = event.getSource();
       PortletPreferences portletPreferences = ((PortletRequestContext) event.getRequestContext()).getRequest()
                                                                                                  .getPreferences();
-      String strShowTitle = uiSCVPref.getUIFormCheckBoxInput(SHOW_TITLE_CHECK_BOX).isChecked() ? "true"
-                                                                                              : "false";
-      String strShowDate = uiSCVPref.getUIFormCheckBoxInput(SHOW_DATE_CHECK_BOX).isChecked() ? "true"
-                                                                                            : "false";
-      String strShowOptionBar = uiSCVPref.getUIFormCheckBoxInput(SHOW_OPION_BAR_CHECK_BOX)
-                                         .isChecked() ? "true" : "false";
+      String strShowTitle = uiSCVPref.getUICheckBoxInput(SHOW_TITLE_CHECK_BOX).isChecked() ? "true" : "false";
+      String strShowDate = uiSCVPref.getUICheckBoxInput(SHOW_DATE_CHECK_BOX).isChecked() ? "true" : "false";
+      String strShowOptionBar = uiSCVPref.getUICheckBoxInput(SHOW_OPION_BAR_CHECK_BOX) .isChecked() ? "true" : "false";
 
       String strIsContextEnable = ((UIFormRadioBoxInput) uiSCVPref.getChildById(CONTEXTUAL_SELECT_RADIO_BOX)).getValue();
       strIsContextEnable = strIsContextEnable.equals(ENABLE_STRING) ? "true":"false";
