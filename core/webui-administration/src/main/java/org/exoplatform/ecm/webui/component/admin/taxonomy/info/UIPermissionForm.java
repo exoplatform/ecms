@@ -80,7 +80,7 @@ public class UIPermissionForm extends UIForm implements UISelectable {
 
   public UIPermissionForm() throws Exception {
     addChild(new UIPermissionInputSet(PERMISSION));
-    setActions(new String[] { "Save", "Reset", "Close" });
+    setActions(new String[] { "Close" });
   }
 
   private void refresh() {
@@ -125,31 +125,11 @@ public class UIPermissionForm extends UIForm implements UISelectable {
 
   }
 
-  protected void lockForm(boolean isLock) {
-    UIPermissionInputSet uiInputSet = getChildById(PERMISSION);
-    if (isLock) {
-      setActions(new String[] { "Reset", "Close" });
-      uiInputSet.setActionInfo(UIPermissionInputSet.FIELD_USERORGROUP, null);
-    } else {
-      setActions(new String[] { "Save", "Reset", "Close" });
-      uiInputSet.setActionInfo(UIPermissionInputSet.FIELD_USERORGROUP, new String[] { "SelectUser",
-          "SelectMember", "AddAny" });
-    }
-    for (String perm : PERMISSION_TYPES) {
-      uiInputSet.getUICheckBoxInput(perm).setDisabled(isLock);
-    }
-  }
-
-  private String  getExoOwner(Node node) throws Exception {
-    return Utils.getNodeOwner(node) ;
-  }
-
   public void doSelect(String selectField, Object value) {
     try {
       ExtendedNode node = (ExtendedNode)this.getCurrentNode();
       checkAll(false);
       fillForm(value.toString(), node) ;
-      lockForm(value.toString().equals(getExoOwner(node)));
       getUIStringInput(selectField).setValue(value.toString());
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
@@ -161,7 +141,6 @@ public class UIPermissionForm extends UIForm implements UISelectable {
   static public class ResetActionListener extends EventListener<UIPermissionForm> {
     public void execute(Event<UIPermissionForm> event) throws Exception {
       UIPermissionForm uiForm = event.getSource();
-      uiForm.lockForm(false) ;
       uiForm.refresh() ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
     }

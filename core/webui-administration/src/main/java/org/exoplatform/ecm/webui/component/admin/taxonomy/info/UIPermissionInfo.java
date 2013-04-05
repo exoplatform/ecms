@@ -30,6 +30,7 @@ import javax.jcr.Session;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.ecm.webui.core.UIPermissionInfoBase;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -44,7 +45,6 @@ import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
-import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIGrid;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
@@ -71,21 +71,12 @@ import org.exoplatform.webui.event.EventListener;
     }
 )
 
-public class UIPermissionInfo extends UIContainer {
-
-  public static String[] PERMISSION_BEAN_FIELD = {"usersOrGroups", "read", "addNode", "remove"} ;
-  private static String[] PERMISSION_ACTION = {"Edit", "Delete"} ;
-
+public class UIPermissionInfo extends UIPermissionInfoBase {
+  
   private NodeLocation currentNode = null;
   private int sizeOfListPermission = 0;
   public UIPermissionInfo() throws Exception {
-    UIGrid uiGrid = createUIComponent(UIGrid.class, null, "PermissionInfo") ;
-    addChild(uiGrid) ;
-    uiGrid.getUIPageIterator().setId("PermissionInfoIterator");
-    uiGrid.configure("usersOrGroups", PERMISSION_BEAN_FIELD, PERMISSION_ACTION) ;
-  }
-  private String  getExoOwner(Node node) throws Exception {
-    return Utils.getNodeOwner(node) ;
+    super();
   }
   public void updateGrid() throws Exception {
     List<PermissionBean> permBeans = new ArrayList<PermissionBean>();
@@ -156,7 +147,6 @@ public class UIPermissionInfo extends UIContainer {
       ExtendedNode node = (ExtendedNode)updateNode;
       UIPermissionForm uiForm = uicomp.getAncestorOfType(UIPermissionManager.class).getChild(UIPermissionForm.class) ;
       uiForm.fillForm(name, node) ;
-      uiForm.lockForm(name.equals(uicomp.getExoOwner(node)));
     }
   }
   static public class DeleteActionListener extends EventListener<UIPermissionInfo> {
