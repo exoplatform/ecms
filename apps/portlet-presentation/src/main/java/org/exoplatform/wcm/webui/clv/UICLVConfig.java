@@ -22,7 +22,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import javax.faces.component.UIInput;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
@@ -56,8 +55,6 @@ import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormInputSet;
 import org.exoplatform.webui.form.UIFormRadioBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
@@ -65,6 +62,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTabPane;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
 import org.exoplatform.webui.form.ext.UIFormInputSetWithAction;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
 import org.exoplatform.webui.form.validator.PositiveNumberFormatValidator;
 
@@ -343,7 +341,7 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
     /** ITEM PATH */
     UIFormStringInput itemPathInput =
       new UIFormStringInput(ITEM_PATH_FORM_STRING_INPUT, ITEM_PATH_FORM_STRING_INPUT, itemPath);
-    itemPathInput.setEditable(false);
+    itemPathInput.setReadOnly(true);
     itemPathInput.addValidator(MandatoryValidator.class);
     
     UIFormInputSetWithAction itemPathInputSet = new UIFormInputSetWithAction(ITEM_PATH_FORM_INPUT_SET);
@@ -374,10 +372,8 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
     UIFormStringInput headerInput = new UIFormStringInput(HEADER_FORM_STRING_INPUT, HEADER_FORM_STRING_INPUT, header);
 
     /** AUTOMATIC DETECTION */
-    UIFormCheckBoxInput<Boolean> showAutomaticDetectionCheckBox =
-      new UIFormCheckBoxInput<Boolean>(SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT,
-          SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT,
-          null);
+    UICheckBoxInput showAutomaticDetectionCheckBox = new UICheckBoxInput(SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT,
+                                                                         SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT, null);
     showAutomaticDetectionCheckBox.setChecked(showAutomaticDetection);
 
     List<SelectItemOption<String>> formViewerTemplateList = new ArrayList<SelectItemOption<String>>();
@@ -418,57 +414,48 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
     itemsPerPageStringInput.setMaxLength(3);
 
     /** SHOW TITLE */
-    UIFormCheckBoxInput<Boolean> showTitleCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_TITLE_FORM_CHECKBOX_INPUT,
-                                                                                      SHOW_TITLE_FORM_CHECKBOX_INPUT,
-                                                                                      null);
+    UICheckBoxInput showTitleCheckbox = new UICheckBoxInput(SHOW_TITLE_FORM_CHECKBOX_INPUT,
+                                                           SHOW_TITLE_FORM_CHECKBOX_INPUT, null);
     showTitleCheckbox.setChecked(showTitle);
 
     /** SHOW HEADER */
-    UIFormCheckBoxInput<Boolean> showHeaderCheckBox = new UIFormCheckBoxInput<Boolean>(SHOW_HEADER_FORM_CHECKBOX_INPUT,
-                                                                                       SHOW_HEADER_FORM_CHECKBOX_INPUT,
-                                                                                       null);
+    UICheckBoxInput showHeaderCheckBox = new UICheckBoxInput(SHOW_HEADER_FORM_CHECKBOX_INPUT,
+                                                             SHOW_HEADER_FORM_CHECKBOX_INPUT, null);
     showHeaderCheckBox.setChecked(showHeader);
 
     /** SHOW REFRESH */
-    UIFormCheckBoxInput<Boolean> showRefreshCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_REFRESH_FORM_CHECKBOX_INPUT,
-                                                                                        SHOW_REFRESH_FORM_CHECKBOX_INPUT,
-                                                                                        null);
+    UICheckBoxInput showRefreshCheckbox = new UICheckBoxInput(SHOW_REFRESH_FORM_CHECKBOX_INPUT,
+                                                              SHOW_REFRESH_FORM_CHECKBOX_INPUT, null);
     showRefreshCheckbox.setChecked(showRefresh);
 
     /** SHOW_IMAGE */
-    UIFormCheckBoxInput<Boolean> showImageCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT,
-                                                                                      SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT,
-                                                                                      null);
+    UICheckBoxInput showImageCheckbox = new UICheckBoxInput(SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT,
+                                                            SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT, null);
     showImageCheckbox.setChecked(showImage);
 
     /** SHOW DATE CREATED */
-    UIFormCheckBoxInput<Boolean> showDateCreatedCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT,
-                                                                                            SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT,
-                                                                                            null);
+    UICheckBoxInput showDateCreatedCheckbox = new UICheckBoxInput(SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT,
+                                                                  SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT, null);
     showDateCreatedCheckbox.setChecked(showDateCreated);
 
     /** SHOW MORE LINK */
-    UIFormCheckBoxInput<Boolean> showMoreLinkCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_READMORE_FORM_CHECKBOX_INPUT,
-                                                                                         SHOW_READMORE_FORM_CHECKBOX_INPUT,
-                                                                                         null);
+    UICheckBoxInput showMoreLinkCheckbox = new UICheckBoxInput(SHOW_READMORE_FORM_CHECKBOX_INPUT,
+                                                               SHOW_READMORE_FORM_CHECKBOX_INPUT, null);
     showMoreLinkCheckbox.setChecked(showReadmore);
 
     /** SHOW SUMMARY */
-    UIFormCheckBoxInput<Boolean> showSummaryCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_SUMMARY_FORM_CHECKBOX_INPUT,
-                                                                                        SHOW_SUMMARY_FORM_CHECKBOX_INPUT,
-                                                                                        null);
+    UICheckBoxInput showSummaryCheckbox = new UICheckBoxInput(SHOW_SUMMARY_FORM_CHECKBOX_INPUT,
+                                                              SHOW_SUMMARY_FORM_CHECKBOX_INPUT, null);
     showSummaryCheckbox.setChecked(showSummary);
 
     /** SHOW LINK */
-    UIFormCheckBoxInput<Boolean> showLinkCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_LINK_FORM_CHECKBOX_INPUT,
-                                                                                     SHOW_LINK_FORM_CHECKBOX_INPUT,
-                                                                                     null);
+    UICheckBoxInput showLinkCheckbox = new UICheckBoxInput(SHOW_LINK_FORM_CHECKBOX_INPUT,
+                                                           SHOW_LINK_FORM_CHECKBOX_INPUT, null);
     showLinkCheckbox.setChecked(showLink);
 
     /** SHOW RSS LINK */
-    UIFormCheckBoxInput<Boolean> showRssLinkCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_RSSLINK_FORM_CHECKBOX_INPUT,
-                                                                                        SHOW_RSSLINK_FORM_CHECKBOX_INPUT,
-                                                                                        null);
+    UICheckBoxInput showRssLinkCheckbox = new UICheckBoxInput(SHOW_RSSLINK_FORM_CHECKBOX_INPUT,
+                                                              SHOW_RSSLINK_FORM_CHECKBOX_INPUT, null);
     showRssLinkCheckbox.setChecked(showRssLink);
 
     /** CONTEXTUAL FOLDER */
@@ -491,7 +478,7 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
                                                             TARGET_PAGE_FORM_STRING_INPUT,
                                                             targetPage);
     basePathInput.setValue(targetPage);
-    basePathInput.setEditable(false);
+    basePathInput.setReadOnly(true);
     targetPageInputSet.setActionInfo(TARGET_PAGE_FORM_STRING_INPUT, new String[] {"SelectTargetPage"}) ;
     targetPageInputSet.addUIFormInput(basePathInput);
 
@@ -529,17 +516,16 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
                                                                showScvWith);
     if (appType.equals(CATOGORIES_NAVIGATION_TYPE)) {
       //Disable option
-      displayModeRadioBoxInput.setEnable(false);
-      showAutomaticDetectionCheckBox.setEnable(false);
-      showImageCheckbox.setEnable(false);
-      showSummaryCheckbox.setEnable(false);
-      showDateCreatedCheckbox.setEnable(false);
-      showLinkCheckbox.setEnable(false);
-      showRefreshCheckbox.setEnable(false);
-      showMoreLinkCheckbox.setEnable(false);
-      showRssLinkCheckbox.setEnable(false);
-      //contextualFolderRadioBoxInput.setEnable(false);
-      showScvWithInput.setEnable(false);
+      displayModeRadioBoxInput.setDisabled(true);
+      showAutomaticDetectionCheckBox.setDisabled(true);
+      showImageCheckbox.setDisabled(true);
+      showSummaryCheckbox.setDisabled(true);
+      showDateCreatedCheckbox.setDisabled(true);
+      showLinkCheckbox.setDisabled(true);
+      showRefreshCheckbox.setDisabled(true);
+      showMoreLinkCheckbox.setDisabled(true);
+      showRssLinkCheckbox.setDisabled(true);
+      showScvWithInput.setDisabled(true);
     }
     UIFormInputSet uiCLVContentTab = new UIFormInputSet(CONTENT_TAB) ;
     uiCLVContentTab.addUIFormInput(displayModeRadioBoxInput);
@@ -767,31 +753,31 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
 
       String header = clvConfig.getUIStringInput(UICLVConfig.HEADER_FORM_STRING_INPUT).getValue();
       if (header == null) header = "";
-      String showAutomaticDetection = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT)
+      String showAutomaticDetection = clvConfig.getUICheckBoxInput(UICLVConfig.SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT)
                                                .isChecked() ? "true" : "false";
       String displayTemplate = clvConfig.getUIFormSelectBox(UICLVConfig.DISPLAY_TEMPLATE_FORM_SELECT_BOX).getValue();
       String paginatorTemplate = clvConfig.getUIFormSelectBox(UICLVConfig.PAGINATOR_TEMPLATE_FORM_SELECT_BOX).getValue();
       String itemsPerPage = clvConfig.getUIStringInput(UICLVConfig.ITEMS_PER_PAGE_FORM_STRING_INPUT).getValue();
 
-      String showTitle = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_TITLE_FORM_CHECKBOX_INPUT)
+      String showTitle = clvConfig.getUICheckBoxInput(UICLVConfig.SHOW_TITLE_FORM_CHECKBOX_INPUT)
                                   .isChecked() ? "true" : "false";
-      String showHeader = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_HEADER_FORM_CHECKBOX_INPUT)
+      String showHeader = clvConfig.getUICheckBoxInput(UICLVConfig.SHOW_HEADER_FORM_CHECKBOX_INPUT)
                                    .isChecked() ? "true" : "false";
-      String showRefresh = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_REFRESH_FORM_CHECKBOX_INPUT)
+      String showRefresh = clvConfig.getUICheckBoxInput(UICLVConfig.SHOW_REFRESH_FORM_CHECKBOX_INPUT)
                                     .isChecked() ? "true" : "false";
 
-      String showImage = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT)
+      String showImage = clvConfig.getUICheckBoxInput(UICLVConfig.SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT)
                                   .isChecked() ? "true" : "false";
-      String showDateCreated = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT)
+      String showDateCreated = clvConfig.getUICheckBoxInput(UICLVConfig.SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT)
                                         .isChecked() ? "true" : "false";
-      String showMoreLink = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_READMORE_FORM_CHECKBOX_INPUT)
+      String showMoreLink = clvConfig.getUICheckBoxInput(UICLVConfig.SHOW_READMORE_FORM_CHECKBOX_INPUT)
                                      .isChecked() ? "true" : "false";
 
-      String showSummary = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_SUMMARY_FORM_CHECKBOX_INPUT)
+      String showSummary = clvConfig.getUICheckBoxInput(UICLVConfig.SHOW_SUMMARY_FORM_CHECKBOX_INPUT)
                                     .isChecked() ? "true" : "false";
-      String showLink = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_LINK_FORM_CHECKBOX_INPUT)
+      String showLink = clvConfig.getUICheckBoxInput(UICLVConfig.SHOW_LINK_FORM_CHECKBOX_INPUT)
                                  .isChecked() ? "true" : "false";
-      String showRssLink = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_RSSLINK_FORM_CHECKBOX_INPUT)
+      String showRssLink = clvConfig.getUICheckBoxInput(UICLVConfig.SHOW_RSSLINK_FORM_CHECKBOX_INPUT)
                                     .isChecked() ? "true" : "false";
 
       String contextualFolderMode = ((UIFormRadioBoxInput) clvConfig.findComponentById(UICLVConfig.CONTEXTUAL_FOLDER_RADIOBOX_INPUT)).getValue();
