@@ -78,6 +78,53 @@
 														<% uiform.renderField(uicomponent.ORDER_BY_FORM_SELECT_BOX) %>
 													  </div>
 													</div>
+													<% 
+						              List<String> contents = uiform.getItems();
+						              if (contents != null && !contents.isEmpty()) {
+						                %>
+						                  <table class="UIContentGrid">
+						                    <thead>
+						                      <tr>
+						                        <th><%=_ctx.appRes("UICLVConfig.label.ContentPath")%></th>
+						                        <th><%=_ctx.appRes("UICLVConfig.label.Down")%></th>
+						                        <th><%=_ctx.appRes("UICLVConfig.label.Up")%></th>
+						                      </tr>
+						                    </thead>
+						                    <% 
+						                      if (contents.size() == 1) {
+						                        String delLink = uicomponent.event("Delete", "0");
+						                        %>
+						                          <tr class="EvenRow">
+						                            <td><%= URLDecoder.decode(contents.get(0)) %></td>
+						                            <td><span></span></td>
+						                            <td><span></span></td>
+						                          </tr>
+						                        <%
+						                      } else {
+						                        String rowClass = "";
+						                        for (int i = 0; i < contents.size(); i++) {
+						                          if ((i % 2) == 0) {
+						                            rowClass = "EvenRow";
+						                          } else {
+						                            rowClass = "OddRow";
+						                          }
+						                          String content = contents.get(i);                  
+						                          String upLink = uicomponent.event("Increase", Integer.toString(i));
+						                          String downLink = uicomponent.event("Decrease", Integer.toString(i));  
+						                          %>
+						                            <tr class="$rowClass">
+						                              <td><%= URLDecoder.decode(content) %></td>
+						                              <td width="25px"><div class="DownRowIcon" onclick="$downLink"><span></span></div></td>
+						                              <td width="25px"><div class="UpRowIcon" onclick="$upLink"><span></span></div></td>
+						                            </tr>
+						                          <%
+						                        }
+						                      }
+						                    %>
+						                  </table>
+						                <%
+						              }
+						            %>
 												</div>
 										  <%
 										  } else if(formInput.getName().equals(uicomponent.DISPLAY_TAB)) {
