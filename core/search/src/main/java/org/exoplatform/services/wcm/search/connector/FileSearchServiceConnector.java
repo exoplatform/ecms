@@ -16,6 +16,9 @@
  */
 package org.exoplatform.services.wcm.search.connector;
 
+import java.net.URLEncoder;
+
+import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 import org.exoplatform.commons.api.search.data.SearchContext;
@@ -66,6 +69,32 @@ public class FileSearchServiceConnector extends BaseContentSearchServiceConnecto
         append(WCMCoreUtils.getRepository().getConfiguration().getName()).append('/'). 
         append(node.getSession().getWorkspace().getName()).append(node.getPath());
     return ret.toString();
+  }
+  
+  /**
+   * gets the image url
+   * @return
+   * @throws Exception
+   */
+  @Override
+  protected String getImageUrl(Node node) {
+    try {
+      String path = node.getPath().replaceAll("'", "\\\\'");
+      String encodedPath = URLEncoder.encode(path, "utf-8");
+      encodedPath = encodedPath.replaceAll ("%2F", "/");    //we won't encode the slash characters in the path
+      String portalName = WCMCoreUtils.getPortalName();
+      String restContextName = WCMCoreUtils.getRestContextName();
+      String preferenceWS = node.getSession().getWorkspace().getName();
+      String thumbnailImage = "/" + restContextName + "/thumbnailImage/medium/" + 
+                              WCMCoreUtils.getRepository().getConfiguration().getName() + 
+                              "/" + preferenceWS + encodedPath;
+      return thumbnailImage;
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Can not get image link", e);
+      }
+      return super.getImageUrl(node);
+    }
   }
 
 }

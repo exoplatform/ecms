@@ -180,7 +180,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
                                          getTitleResult(retNode), 
                                          retNode.getExcerpt(), 
                                          (driveData == null ? "" : driveData.getName()) + fileSize(retNode) + formatDate(date), 
-                                         getImageUrl(), 
+                                         getImageUrl(retNode), 
                                          date.getTimeInMillis(), 
                                          (long)retNode.getScore(),
                                          getFileType(retNode));
@@ -224,7 +224,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
    * @return
    * @throws Exception
    */
-  protected String getImageUrl() {
+  protected String getImageUrl(Node node) {
     return "/eXoResources/skin/images/Icons/FileTypeIcons/uiIconsFileType64x64.png";
   }
   

@@ -27,8 +27,6 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 public abstract class BaseContentSearchServiceConnector extends BaseSearchServiceConnector {
 
-  private static final Log LOG = ExoLogger.getLogger(BaseContentSearchServiceConnector.class.getName());
-  
   public BaseContentSearchServiceConnector(InitParams initParams) throws Exception {
     super(initParams);
   }
