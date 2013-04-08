@@ -13,11 +13,9 @@
 	def jsManager = rcontext.getJavascriptManager();
 	def advancedBlockDisplay = "block";
 	def advancedLinkDispplay = "none";
-	//jsManager.require("SHARED/clv", "clv").
-	//("clv.CLV.checkModeViewer();").
-	//addScripts("clv.CLV.checkContextualFolderInput();");
+	jsManager.require("SHARED/clv", "clv").addScripts("clv.CLV.checkModeViewer();").addScripts("clv.CLV.checkContextualFolderInput();");
 	def showFolderContexttual = "";
-	rcontext.getJavascriptManager().require("SHARED/portalControl").require("SHARED/uiForm").require("SHARED/bts_tab");
+	jsManager.require("SHARED/portalControl").require("SHARED/uiForm").require("SHARED/bts_tab").require("SHARED/bts_tooltip");
 %>
 
 <div class="uiFormTabPane uiTabNormal">
