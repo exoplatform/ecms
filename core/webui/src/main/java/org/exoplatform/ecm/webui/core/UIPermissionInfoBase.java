@@ -66,7 +66,7 @@ public abstract class UIPermissionInfoBase extends UIContainer {
   private int sizeOfListPermission = 0;
 
   public UIPermissionInfoBase() throws Exception {
-    UIGrid uiGrid = createUIComponent(UIGrid.class, null, "PermissionInfo") ;
+    UIGrid uiGrid = createUIComponent(UIPermissionInfoGrid.class, null, "PermissionInfo") ;
     addChild(uiGrid) ;
     uiGrid.getUIPageIterator().setId("PermissionInfoIterator");
     uiGrid.configure("usersOrGroups", PERMISSION_BEAN_FIELD, PERMISSION_ACTION) ;

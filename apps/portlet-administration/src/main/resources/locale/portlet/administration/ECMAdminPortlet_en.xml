@@ -391,7 +391,7 @@
       <drive-views-invalid>Please select one view.</drive-views-invalid>
       <icon-not-found>The icon not found.</icon-not-found>
       <permission-null>You must set permission for this drive.</permission-null>
-      <allowedCreateFolder>You must select the folder type.</allowedCreateFolder>
+      <allowCreateFolders>You must select the folder type.</allowCreateFolders>
       <name-null>Please enter the drive name.</name-null>
       <fileName-invalid>The drive name has some invalid characters.</fileName-invalid>
     </msg>

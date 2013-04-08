@@ -24,6 +24,7 @@ import org.exoplatform.ecm.webui.core.UIPermissionFormBase;
 import org.exoplatform.ecm.webui.core.UIPermissionManagerBase;
 import org.exoplatform.ecm.webui.selector.UIGroupMemberSelector;
 import org.exoplatform.ecm.webui.selector.UISelectable;
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -118,6 +119,14 @@ public class UIViewPermissionForm extends UIPermissionFormBase implements UISele
       UIViewPermissionList uiList = uiContainer.getChild(UIViewPermissionList.class);
       String permission = uiForm.getUIStringInput(UIPermissionInputSet.FIELD_USERORGROUP).getValue();
       String strPermission = uiViewForm.getPermission();
+      if (Utils.isNameEmpty(permission)) {
+        UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
+        uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.userOrGroup-required", null,
+            ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
+        uiTabPane.setSelectedTab(uiContainer.getId());
+        return;
+      }
       if(strPermission.contains(permission)) {
         UIApplication app = uiForm.getAncestorOfType(UIApplication.class);
         Object[] args = { permission };

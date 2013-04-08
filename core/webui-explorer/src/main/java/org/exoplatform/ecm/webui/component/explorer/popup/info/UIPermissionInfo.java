@@ -36,7 +36,6 @@ import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
-import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIGrid;
@@ -45,11 +44,9 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
-@ComponentConfigs({
-    @ComponentConfig(lifecycle = UIContainerLifecycle.class, events = {
-        @EventConfig(listeners = UIPermissionInfo.DeleteActionListener.class, confirm = "UIPermissionInfo.msg.confirm-delete-permission"),
-        @EventConfig(listeners = UIPermissionInfo.EditActionListener.class) }),
-    @ComponentConfig(type = UIGrid.class, id="PermissionInfo", template = "classpath:groovy/wcm/webui/core/UIPermissionInfoGrid.gtmpl") })
+@ComponentConfig(lifecycle = UIContainerLifecycle.class, events = {
+    @EventConfig(listeners = UIPermissionInfo.DeleteActionListener.class, confirm = "UIPermissionInfo.msg.confirm-delete-permission"),
+    @EventConfig(listeners = UIPermissionInfo.EditActionListener.class) })
 public class UIPermissionInfo extends UIPermissionInfoBase {
 
   public UIPermissionInfo() throws Exception {
@@ -57,7 +54,6 @@ public class UIPermissionInfo extends UIPermissionInfoBase {
   }
 
   private static final Log LOG = ExoLogger.getLogger(UIPermissionInfo.class.getName());
-  
 
   static public class DeleteActionListener extends EventListener<UIPermissionInfo> {
     public void execute(Event<UIPermissionInfo> event) throws Exception {
