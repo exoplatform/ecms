@@ -15,7 +15,8 @@
 	def advancedLinkDispplay = "none";
 	jsManager.require("SHARED/clv", "clv").addScripts("clv.CLV.checkModeViewer();").addScripts("clv.CLV.checkContextualFolderInput();");
 	def showFolderContexttual = "";
-	jsManager.require("SHARED/portalControl").require("SHARED/uiForm").require("SHARED/bts_tab").require("SHARED/bts_tooltip");
+	rcontext.getJavascriptManager().require("SHARED/portalControl").require("SHARED/uiForm").require("SHARED/bts_tab").require("SHARED/bts_tooltip");
+	jsManager.require("SHARED/jquery", "gj").addScripts("gj(document).ready(function() { gj(\"*[rel='tooltip']\").tooltip();});");
 %>
 
 <div class="uiFormTabPane uiTabNormal">
