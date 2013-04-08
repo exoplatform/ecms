@@ -700,21 +700,23 @@ UIFileView.prototype.toggleCheckboxes = function(checkbox, evt) {
 };
 
 UIFileView.prototype.clearCheckboxes = function(evt) {
-	gj(Self.allItems).each(function(index, elem){
-		Self.selectBoxType = false;
-		Self.clickedItem = elem;
-		Self.clickTotalCheckBox = true;
-		Self.mouseDownItem(evt);
-		//-------------------------
-		Self.selectBoxType = false;
-		Self.clickedItem = elem;
-		Self.clickTotalCheckBox = true;
-		Self.mouseUpItem(evt);
+	gj(".uiFileView").each(function(ind) {
+		gj(Self.allItems).each(function(index, elem){
+			Self.selectBoxType = false;
+			Self.clickedItem = elem;
+			Self.clickTotalCheckBox = true;
+			Self.mouseDownItem(evt);
+			//-------------------------
+			Self.selectBoxType = false;
+			Self.clickedItem = elem;
+			Self.clickTotalCheckBox = true;
+			Self.mouseUpItem(evt);
+		});
+		resetArrayItemsSelected();
+		gj("#UIFileViewCheckBox").attr("checked", false);
+		gj("#UIDocumentInfo").find(".checkbox").attr("checked", false);
+		gj("#UIDocumentInfo").find(".rowView").css("backgroundColor","#FFF");
 	});
-	resetArrayItemsSelected();
-	gj("#UIFileViewCheckBox").attr("checked", false);
-	gj("#UIDocumentInfo").find(".checkbox").attr("checked", false);
-	gj("#UIDocumentInfo").find(".rowView").css("backgroundColor","#FFF");
 };
 
 UIFileView.prototype.checkSelectedItemCount = function() {
