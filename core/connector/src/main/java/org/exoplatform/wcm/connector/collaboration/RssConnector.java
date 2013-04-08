@@ -57,7 +57,7 @@ import com.sun.syndication.io.SyndFeedOutput;
  * Generate an RSS feed.
  *
  * @LevelAPI Provisional
- * @anchor CONTref.Devref.PublicRestAPIs.RssConnector
+ * @anchor RssConnector
  */
 
 @Path("/feed/")
@@ -128,7 +128,7 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
    * @return The response.
    * @throws Exception The exception
    * 
-   * @anchor CONTref.Devref.PublicRestAPIs.RssConnector.generate
+   * @anchor RssConnector.generate
    */
   @GET
   @Path("/rss/")

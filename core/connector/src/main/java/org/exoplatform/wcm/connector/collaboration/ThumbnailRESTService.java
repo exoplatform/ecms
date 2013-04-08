@@ -57,7 +57,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * {{{{restcontextname}}}}: The context name of REST web application which is deployed to the "{{{{portalname}}}}" portal.
  *
  * @LevelAPI Provisional
- * @anchor CONTref.Devref.PublicRestAPIs.ThumbnailRESTService
+ * @anchor ThumbnailRESTService
  */
 @Path("/thumbnailImage/")
 public class ThumbnailRESTService implements ResourceContainer {
@@ -93,7 +93,7 @@ public class ThumbnailRESTService implements ResourceContainer {
  * @return Response inputstream.
  * @throws Exception
  *
- * @anchor CONTref.Devref.PublicRestAPIs.ThumbnailRESTService.getThumbnailImage
+ * @anchor ThumbnailRESTService.getThumbnailImage
  */
   @Path("/medium/{repoName}/{workspaceName}/{nodePath:.*}/")
   @GET
@@ -116,7 +116,7 @@ public class ThumbnailRESTService implements ResourceContainer {
  * @return Response inputstream.
  * @throws Exception
  *
- * @anchor CONTref.Devref.PublicRestAPIs.ThumbnailRESTService.getCoverImage
+ * @anchor ThumbnailRESTService.getCoverImage
  */
   @Path("/big/{repoName}/{workspaceName}/{nodePath:.*}/")
   @GET
@@ -136,7 +136,7 @@ public class ThumbnailRESTService implements ResourceContainer {
  * @return Response inputstream.
  * @throws Exception
  *
- * @anchor CONTref.Devref.PublicRestAPIs.ThumbnailRESTService.getLargeImage
+ * @anchor ThumbnailRESTService.getLargeImage
  */
   @Path("/large/{repoName}/{workspaceName}/{nodePath:.*}/")
   @GET
@@ -156,7 +156,7 @@ public class ThumbnailRESTService implements ResourceContainer {
  * @return Response inputstream.
  * @throws Exception
  *
- * @anchor CONTref.Devref.PublicRestAPIs.ThumbnailRESTService.getSmallImage
+ * @anchor ThumbnailRESTService.getSmallImage
  */
   @Path("/small/{repoName}/{workspaceName}/{nodePath:.*}/")
   @GET
@@ -177,7 +177,7 @@ public class ThumbnailRESTService implements ResourceContainer {
  * @return Response inputstream.
  * @throws Exception
  *
- * @anchor CONTref.Devref.PublicRestAPIs.ThumbnailRESTService.getCustomImage
+ * @anchor ThumbnailRESTService.getCustomImage
  */
   @Path("/custom/{size}/{repoName}/{workspaceName}/{nodePath:.*}/")
   @GET
@@ -198,7 +198,7 @@ public class ThumbnailRESTService implements ResourceContainer {
    * @return Response data stream.
    * @throws Exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.ThumbnailRESTService.getOriginImage
+   * @anchor ThumbnailRESTService.getOriginImage
    */
   @Path("/origin/{repoName}/{workspaceName}/{nodePath:.*}/")
   @GET

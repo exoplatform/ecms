@@ -48,7 +48,7 @@ import org.w3c.dom.Element;
  *
  * @LevelAPI Provisional
  * 
- * @anchor CONTref.Devref.PublicRestAPIs.VoteConnector
+ * @anchor VoteConnector
  */
 @Path("/contents/vote/")
 public class VoteConnector extends BaseConnector implements ResourceContainer {
@@ -66,7 +66,7 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
    * @return http The code.
    * @throws Exception The exception
    * 
-   * @anchor CONTref.Devref.PublicRestAPIs.VoteConnector.postStarVote
+   * @anchor VoteConnector.postStarVote
    */
   @POST
   @Path("/star/")
@@ -90,7 +90,7 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
    * @return http The code.
    * @throws Exception The exception
    * 
-   * @anchor CONTref.Devref.PublicRestAPIs.VoteConnector.getStarVote
+   * @anchor VoteConnector.getStarVote
    */
   @GET
   @Path("/star/")
@@ -115,7 +115,7 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
    * @return http The code.
    * @throws Exception The exception
    * 
-   * @anchor CONTref.Devref.PublicRestAPIs.VoteConnector.postVote
+   * @anchor VoteConnector.postVote
    */
   @GET
   @Path("/postVote/")
@@ -158,7 +158,7 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
    * @return http The code
    * @throws Exception The exception
    * 
-   * @anchor CONTref.Devref.PublicRestAPIs.VoteConnector.getVote
+   * @anchor VoteConnector.getVote
    */
   @GET
   @Path("/getVote/")

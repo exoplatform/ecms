@@ -65,7 +65,7 @@ import org.icepdf.core.util.GraphicsRenderingHints;
  *
  * @LevelAPI Provisional
  *
- * @anchor CONTref.Devref.PublicRestAPIs.PDFViewerRESTService
+ * @anchor PDFViewerRESTService
  */
 @Path("/pdfviewer/{repoName}/{workspaceName}/{pageNumber}/{rotation}/{scale}/{uuid}/")
 public class PDFViewerRESTService implements ResourceContainer {
@@ -96,7 +96,7 @@ public class PDFViewerRESTService implements ResourceContainer {
    * @return Response inputstream.
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.PDFViewerRESTService.getCoverImage
+   * @anchor PDFViewerRESTService.getCoverImage
    */
   @GET
   public Response getCoverImage(@PathParam("repoName") String repoName,

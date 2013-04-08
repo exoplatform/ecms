@@ -32,7 +32,7 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
  *
  * @LevelAPI Provisional
  * 
- * @anchor CONTref.Devref.PublicRestAPIs.FavoriteRESTService
+ * @anchor FavoriteRESTService
  */
 @Path("/favorite/")
 public class FavoriteRESTService implements ResourceContainer {
@@ -69,7 +69,7 @@ public class FavoriteRESTService implements ResourceContainer {
    * @return Response inputstream.
    * @throws Exception
    * 
-   * @anchor CONTref.Devref.PublicRestAPIs.FavoriteRESTService.getFavoriteByUser
+   * @anchor FavoriteRESTService.getFavoriteByUser
    */
   @GET
   @Path("/all/{repoName}/{workspaceName}/{userName}")

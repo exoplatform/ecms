@@ -57,7 +57,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  *
  * @LevelAPI Experimental
  *
- * @anchor CONTref.Devref.PublicRestAPIs.RenameConnector
+ * @anchor RenameConnector
  */
 @Path("/contents/rename/")
 public class RenameConnector implements ResourceContainer {
@@ -79,7 +79,7 @@ public class RenameConnector implements ResourceContainer {
    * @return <em>objectid</em>
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.RenameConnector.getObjectId
+   * @anchor RenameConnector.getObjectId
    */
   @GET
   @Path("/getObjectId/")
@@ -95,7 +95,7 @@ public class RenameConnector implements ResourceContainer {
    * @return Httpstatus 400 if rename fail, otherwise uuid of renamed node is returned
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.RenameConnector.rename
+   * @anchor RenameConnector.rename
    */
   @GET
   @Path("/rename/")

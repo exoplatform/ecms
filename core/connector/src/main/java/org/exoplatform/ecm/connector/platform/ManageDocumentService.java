@@ -75,7 +75,7 @@ import org.w3c.dom.Element;
  *
  * @LevelAPI Provisional
  *
- * @anchor CONTref.Devref.PublicRestAPIs.ManageDocumentService
+ * @anchor ManageDocumentService
  */
 @Path("/managedocument/")
 public class ManageDocumentService implements ResourceContainer {
@@ -152,7 +152,7 @@ public class ManageDocumentService implements ResourceContainer {
    * @return {@link Document} Contain the drives.
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.ManageDocumentService.getDrives
+   * @anchor ManageDocumentService.getDrives
    */
   @GET
   @Path("/getDrives/")
@@ -210,7 +210,7 @@ public class ManageDocumentService implements ResourceContainer {
    * @return {@link Document} Contain the folders and files.
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.ManageDocumentService.getFoldersAndFiles
+   * @anchor ManageDocumentService.getFoldersAndFiles
    */
   @GET
   @Path("/getFoldersAndFiles/")
@@ -256,7 +256,7 @@ public class ManageDocumentService implements ResourceContainer {
    * @return {@link Response} Return the status of an item which has been deleted.
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.ManageDocumentService.deleteFolderOrFile
+   * @anchor ManageDocumentService.deleteFolderOrFile
    */
   @GET
   @Path("/deleteFolderOrFile/")
@@ -305,7 +305,7 @@ public class ManageDocumentService implements ResourceContainer {
    * @return {@link Document} Contain the created folder.
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.ManageDocumentService.createFolder
+   * @anchor ManageDocumentService.createFolder
    */
   @GET
   @Path("/createFolder/")
@@ -362,7 +362,7 @@ public class ManageDocumentService implements ResourceContainer {
    *
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.ManageDocumentService.uploadFile
+   * @anchor ManageDocumentService.uploadFile
    */
   @POST
   @Path("/uploadFile/upload/")
@@ -388,7 +388,7 @@ public class ManageDocumentService implements ResourceContainer {
    * @return The response.
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.ManageDocumentService.processUpload
+   * @anchor ManageDocumentService.processUpload
    */
   @GET
   @Path("/uploadFile/control/")

@@ -64,7 +64,7 @@ import org.w3c.dom.Element;
  *
  * @LevelAPI Provisional
  * 
- * @anchor CONTref.Devref.PublicRestAPIs.GadgetConnector
+ * @anchor GadgetConnector
  */
 @Path("/wcmGadget/")
 public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements ResourceContainer {
@@ -106,7 +106,7 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
    * @return The folders and files.
    * @throws Exception The exception
    * 
-   * @anchor CONTref.Devref.PublicRestAPIs.GadgetConnector.getFoldersAndFiles
+   * @anchor GadgetConnector.getFoldersAndFiles
    */
   @GET
   @Path("/getFoldersAndFiles/")

@@ -67,7 +67,7 @@ import org.w3c.dom.Element;
  *
  * @LevelAPI Provisional
  *
- * @anchor CONTref.Devref.PublicRestAPIs.PortalLinkConnector
+ * @anchor PortalLinkConnector
  */
 @Path("/portalLinks/")
 public class PortalLinkConnector implements ResourceContainer {
@@ -121,7 +121,7 @@ public class PortalLinkConnector implements ResourceContainer {
    * @return The page URI.
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.PortalLinkConnector.getFoldersAndFiles
+   * @anchor PortalLinkConnector.getFoldersAndFiles
    */
   @GET
   @Path("/getFoldersAndFiles/")

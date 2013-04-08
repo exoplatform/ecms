@@ -49,7 +49,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  *
  * @LevelAPI Provisional
  * 
- * @anchor CONTref.Devref.PublicRestAPIs.RESTImagesRendererService
+ * @anchor RESTImagesRendererService
  */
 @Path("/images/")
 public class RESTImagesRendererService implements ResourceContainer{
@@ -95,7 +95,7 @@ public class RESTImagesRendererService implements ResourceContainer{
    * @param ifModifiedSince Check the modify date.
    * @return The response
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.RESTImagesRendererService.serveImage
+   * @anchor RESTImagesRendererService.serveImage
    */
   @GET
   @Path("/{repositoryName}/{workspaceName}/{nodeIdentifier}")

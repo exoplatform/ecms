@@ -87,7 +87,7 @@ import org.w3c.dom.NodeList;
  * {{{{restcontextname}}}}: The context name of REST web application which is deployed to the "{{{{portalname}}}}" portal.
  *
  * @LevelAPI Provisional
- * @anchor CONTref.Devref.PublicRestAPIs.DriverConnector
+ * @anchor DriverConnector
  */
 @Path("/wcmDriver/")
 public class DriverConnector extends BaseConnector implements ResourceContainer {
@@ -168,7 +168,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @return The drives.
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.DriverConnector.getDrivers
+   * @anchor DriverConnector.getDrivers
    */
   @GET
   @Path("/getDrivers/")
@@ -211,7 +211,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @return The folders and files.
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.DriverConnector.getFoldersAndFiles
+   * @anchor DriverConnector.getFoldersAndFiles
    */
   @GET
   @Path("/getFoldersAndFiles/")
@@ -264,6 +264,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    *
    * @return Response containing the status indicating if upload is available 
    * @throws Exception
+   * @anchor DriverConnector.checkUploadAvailable
    */
   @GET
   @Path("/uploadFile/checkUploadAvailable/")
@@ -285,7 +286,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @return The response.
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.DriverConnector.uploadFile
+   * @anchor DriverConnector.uploadFile
    */
   @POST
   @Path("/uploadFile/upload/")
@@ -318,7 +319,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @return The response
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.DriverConnector.checkExistence
+   * @anchor DriverConnector.checkExistence
    */
   @GET
   @Path("/uploadFile/checkExistence/")
@@ -365,7 +366,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @return The response.
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.DriverConnector.processUpload
+   * @anchor DriverConnector.processUpload
    */
   @GET
   @Path("/uploadFile/control/")

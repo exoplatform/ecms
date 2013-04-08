@@ -47,7 +47,7 @@ import org.w3c.dom.Element;
  * Get a list of files and folders, and create a folder and upload files.
  *
  * @LevelAPI Provisional
- * @anchor CONTref.Devref.PublicRestAPIs.FCKCoreRESTConnector
+ * @anchor FCKCoreRESTConnector
  */
 @Path("/fckconnector/jcr/")
 public class FCKCoreRESTConnector implements ResourceContainer {
@@ -83,7 +83,7 @@ public class FCKCoreRESTConnector implements ResourceContainer {
    * @return The folders and files.
    * @throws Exception The exception
    * 
-   * @anchor CONTref.Devref.PublicRestAPIs.FCKCoreRESTConnector.getFoldersAndFiles
+   * @anchor FCKCoreRESTConnector.getFoldersAndFiles
    */
   @GET
   @Path("/getFoldersAndFiles/")
@@ -141,7 +141,7 @@ public class FCKCoreRESTConnector implements ResourceContainer {
    * @return The response.
    * @throws Exception The exception
    * 
-   * @anchor CONTref.Devref.PublicRestAPIs.FCKCoreRESTConnector.createFolder
+   * @anchor FCKCoreRESTConnector.createFolder
    */
   @GET
   @Path("/createFolder/")
@@ -162,7 +162,7 @@ public class FCKCoreRESTConnector implements ResourceContainer {
    *
    * @return The response
    * 
-   * @anchor CONTref.Devref.PublicRestAPIs.FCKCoreRESTConnector.uploadFile
+   * @anchor FCKCoreRESTConnector.uploadFile
    */
   @POST
   @Path("/uploadFile/upload/")
@@ -180,7 +180,7 @@ public class FCKCoreRESTConnector implements ResourceContainer {
    * @param language The language.
    * @return The response
    * 
-   * @anchor CONTref.Devref.PublicRestAPIs.FCKCoreRESTConnector.processUpload
+   * @anchor FCKCoreRESTConnector.processUpload
    */
   @GET
   @Path("/uploadFile/control/")

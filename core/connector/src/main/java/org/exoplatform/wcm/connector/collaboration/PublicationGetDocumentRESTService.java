@@ -57,7 +57,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  *
  * @LevelAPI Provisional
  * 
- * @anchor CONTref.Devref.PublicRestAPIs.PublicationGetDocumentRESTService
+ * @anchor PublicationGetDocumentRESTService
  */
 @Path("/publication/presentation/")
 public class PublicationGetDocumentRESTService implements ResourceContainer {
@@ -96,7 +96,7 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
    * @return
    * @throws Exception
    * 
-   * @anchor CONTref.Devref.PublicRestAPIs.PublicationGetDocumentRESTService.getPublishDocument
+   * @anchor PublicationGetDocumentRESTService.getPublishDocument
    */
   @Path("/{repository}/{workspace}/{state}/")
   @GET
@@ -119,7 +119,7 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
    * @return
    * @throws Exception
    * 
-   * @anchor CONTref.Devref.PublicRestAPIs.PublicationGetDocumentRESTService.getPublishedListDocument
+   * @anchor PublicationGetDocumentRESTService.getPublishedListDocument
    */
   @Path("/{repository}/{workspace}/{publicationPluginName}/{state}/")
   @GET

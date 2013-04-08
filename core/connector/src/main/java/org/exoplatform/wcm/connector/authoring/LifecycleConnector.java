@@ -27,7 +27,7 @@ import org.w3c.dom.Element;
  *
  * @LevelAPI Provisional
  *
- * @anchor CONTref.Devref.PublicRestAPIs.LifecycleConnector
+ * @anchor LifecycleConnector
  */
 @Path("/authoring/")
 public class LifecycleConnector implements ResourceContainer {
@@ -54,7 +54,7 @@ public class LifecycleConnector implements ResourceContainer {
    * @return List of content.
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.LifecycleConnector.byState
+   * @anchor LifecycleConnector.byState
    */
   @GET
   @Path("/bystate/")
@@ -83,7 +83,7 @@ public class LifecycleConnector implements ResourceContainer {
    * @return List of content.
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.LifecycleConnector.toState
+   * @anchor LifecycleConnector.toState
    */
   @GET
   @Path("/tostate/")
@@ -112,7 +112,7 @@ public class LifecycleConnector implements ResourceContainer {
    * @return List of content.
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.LifecycleConnector.byDate
+   * @anchor LifecycleConnector.byDate
    */
   @GET
   @Path("/bydate/")

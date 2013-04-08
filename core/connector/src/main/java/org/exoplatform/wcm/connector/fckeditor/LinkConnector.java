@@ -42,7 +42,7 @@ import org.w3c.dom.Element;
  *
  * @LevelAPI Experimental
  *
- * @anchor CONTref.Devref.PublicRestAPIs.LinkConnector
+ * @anchor LinkConnector
  */
 @Path("/wcmLink/")
 public class LinkConnector extends BaseConnector implements ResourceContainer {
@@ -71,7 +71,7 @@ public class LinkConnector extends BaseConnector implements ResourceContainer {
    * @return The folders and files
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.LinkConnector.getFoldersAndFiles
+   * @anchor LinkConnector.getFoldersAndFiles
    */
   @GET
   @Path("/getFoldersAndFiles/")

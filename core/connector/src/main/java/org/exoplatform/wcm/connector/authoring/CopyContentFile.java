@@ -22,7 +22,7 @@ import org.exoplatform.services.wcm.extensions.security.SHAMessageDigester;
  *
  * @LevelAPI Provisional
  * 
- * @anchor CONTref.Devref.PublicRestAPIs.CopyContentFile
+ * @anchor CopyContentFile
  */
 @Path("/copyfile/")
 public class CopyContentFile implements ResourceContainer {
@@ -54,7 +54,7 @@ public class CopyContentFile implements ResourceContainer {
   * @return Response inputstream.
   * @throws Exception The exception
   * 
-  * @anchor CONTref.Devref.PublicRestAPIs.CopyContentFile.copyFile
+  * @anchor CopyContentFile.copyFile
   */
   @POST
   @Path("/copy/")

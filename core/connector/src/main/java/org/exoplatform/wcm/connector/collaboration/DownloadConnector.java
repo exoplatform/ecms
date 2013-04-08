@@ -25,7 +25,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  *
  * @LevelAPI Provisional
  *
- * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.DownloadConnector
+ * @anchor DownloadConnector
  */
 @Path("/contents/")
 public class DownloadConnector implements ResourceContainer{
@@ -39,7 +39,7 @@ public class DownloadConnector implements ResourceContainer{
    * @return the instance of javax.ws.rs.core.Response.
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.DownloadConnector.download
+   * @anchor DownloadConnector.download
    */
   @GET
   @Path("/download/{workspace}/{path:.*}/")

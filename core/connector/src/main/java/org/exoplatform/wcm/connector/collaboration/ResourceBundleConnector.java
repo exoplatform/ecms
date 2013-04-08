@@ -44,7 +44,7 @@ import org.w3c.dom.Element;
  *
  * @LevelAPI Provisional
  *
- * @anchor CONTref.Devref.PublicRestAPIs.ResourceBundleConnector
+ * @anchor ResourceBundleConnector
  */
 @Path("/bundle/")
 public class ResourceBundleConnector implements ResourceContainer {
@@ -55,7 +55,7 @@ public class ResourceBundleConnector implements ResourceContainer {
   * @param key The key used to get the bundle.
   * @param locale  The locale used to get the bundle.
   * 
-  * @anchor CONTref.Devref.PublicRestAPIs.ResourceBundleConnector.getBundle
+  * @anchor ResourceBundleConnector.getBundle
   */
   @GET
   @Path("/getBundle/")

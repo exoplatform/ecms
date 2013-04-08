@@ -60,7 +60,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  *
  * @LevelAPI Provisional
  *
- * @anchor CONTref.Devref.PublicRestAPIs.GetEditedDocumentRESTService
+ * @anchor GetEditedDocumentRESTService
  */
 
 @Path("/presentation/document/edit/")
@@ -116,7 +116,7 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
    * @return Response inputstream.
    * @throws Exception
    * 
-   * @anchor CONTref.Devref.PublicRestAPIs.GetEditedDocumentRESTService.getLastEditedDoc
+   * @anchor GetEditedDocumentRESTService.getLastEditedDoc
    */
   @Path("/{repository}/")
   @GET

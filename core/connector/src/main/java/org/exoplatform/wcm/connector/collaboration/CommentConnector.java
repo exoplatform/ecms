@@ -48,7 +48,7 @@ import org.w3c.dom.Element;
  *
  * @LevelAPI Experimental
  *
- * @anchor CONTref.Devref.PublicRestAPIs.CommentConnector
+ * @anchor CommentConnector
  */
 @Path("/contents/comment/")
 public class CommentConnector extends BaseConnector implements ResourceContainer {
@@ -74,7 +74,7 @@ public class CommentConnector extends BaseConnector implements ResourceContainer
    * @return The last modified date as property to check the result
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.CommentConnector.addComment
+   * @anchor CommentConnector.addComment
    */
   @POST
   @Path("/add")
@@ -105,7 +105,7 @@ public class CommentConnector extends BaseConnector implements ResourceContainer
    * @return All comments
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.CommentConnector.getComments
+   * @anchor CommentConnector.getComments
    */
   @GET
   @Path("/all")
