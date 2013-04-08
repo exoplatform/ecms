@@ -1223,12 +1223,6 @@
 
 /*================================UIPermissionManager=================================*/
 
-.UIJCRExplorerPortlet .UIPermissionManager {
-  width: 95%;
-  margin: auto;
-  padding-top: 10px;
-}
-
 .UIJCRExplorerPortlet .UIPermissionManager .UIFormWithTitle .HorizontalLayout .FormContainer {
   padding: 0px;
 }
