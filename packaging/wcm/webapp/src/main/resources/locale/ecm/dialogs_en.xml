@@ -327,7 +327,7 @@
     <dialog>
       <label>
         <lock-owner>Lock Owner</lock-owner>
-        <lock-is-deep>Lock Is Deep</lock-is-deep>
+        <lock-is-deep>Lock is Deep</lock-is-deep>
       </label>
     </dialog>
   </Lockable>
@@ -500,7 +500,7 @@
   </ScriptAction>
   <UIDialogForm>
    <form>
-   	<DialogFormException>Cannot save this document. Maybe, there is a problem with pre-save interceptor.</DialogFormException>
+   <DialogFormException>Cannot save this document. There may be a problem with the pre-save interceptor.</DialogFormException>
    </form>
   </UIDialogForm>
 
@@ -660,7 +660,7 @@
 		<help>
 			<CaptionsHelp>Captions should provide text of dialog and important sounds</CaptionsHelp>
 			<AudioDescriptionHelp>An audio description is a narrated track of the video</AudioDescriptionHelp>
-			<AlternativeTextHelp>Provide an accessible alternative way of presenting the information</AlternativeTextHelp>
+<AlternativeTextHelp>Provide an accessible, alternative way of presenting the information</AlternativeTextHelp>
 		</help>
 	</AccessibleMedia>
   

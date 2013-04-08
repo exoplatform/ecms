@@ -2,7 +2,7 @@
 <bundle>
   <ContentSelector>
     <msg>
-      <no-file-selected>There are no content for now. You have to select at least one.</no-file-selected>
+      <no-file-selected>There is no content selected. Please select at least one.</no-file-selected>
     </msg>
   </ContentSelector>
   <RenameConnector>

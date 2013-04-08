@@ -43,15 +43,15 @@
     <msg>
       <referential-integrity>Cannot read from the source file, or the destination category is a sub-category.</referential-integrity>
       <no-taxonomy-selected>You must copy or cut at least one category.</no-taxonomy-selected>
-      <node-is-cutting>You cannot paste here. The category node '{0}' might be being cut.</node-is-cutting>
+      <node-is-cutting>You cannot paste here. The category node '{0}' might be cut.</node-is-cutting>
       <can-not-paste>There is no data in the clipboard to paste.</can-not-paste>
-      <reference-exception>Cannot delete this category node because it is currently the target of a REFERENCE property.</reference-exception>
+      <reference-exception>Cannot delete this category node, because it is currently the target of a REFERENCE property.</reference-exception>
       <path-error>An error occurred while removing this category node.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
   <UITaxonomyManager>
     <msg>
-      <confirm-delete>Are you sure to delete this category?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this category?</confirm-delete>
     </msg>
     <title>
       <add>Add</add>
@@ -141,16 +141,16 @@
 	##########################################################################################
 	-->
   <UIPermissionTreeForm>
-    <title>Add permissions to this node</title>
+    <title>Add a permission to that node</title>
     <label>
       <userOrGroup>User or Group</userOrGroup>
-      <read>Read</read>
-      <add_node>Add Node</add_node>
-      <set_property>Set Property</set_property>
-      <remove>Remove</remove>
+      <read>Read Right</read>
+      <add_node>Add Node Right</add_node>
+      <set_property>Set Property Right</set_property>
+      <remove>Remove Right</remove>
     </label>
     <msg>
-      <have-not-any-permission>Please specify at least one permission to this node.</have-not-any-permission>
+      <have-not-any-permission>Please specify at least one permission for this node.</have-not-any-permission>
     </msg>
   </UIPermissionTreeForm>
 	
@@ -170,8 +170,8 @@
       <path-invalid>The path is invalid.</path-invalid>
       <taxonomy-existed>The category tree already exists.</taxonomy-existed>
       <taxonomy-node-existed>The category node already exists.</taxonomy-node-existed>
-      <no-permission-add>You don not have the Add right.</no-permission-add>
-      <not-created-tree>The category tree has not been created yet.</not-created-tree>
+      <no-permission-add>You do not have the right to add.</no-permission-add>
+      <not-created-tree>The category tree has not yet been created.</not-created-tree>
     </msg>
   </UIActionForm>
 	
@@ -257,7 +257,7 @@
       <action>Actions</action>
     </header>
     <msg>
-      <confirm-delete>Are you sure to delete this metadata?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this metadata?</confirm-delete>
       <delete-successful>The templates of '{0}' were deleted successfully.</delete-successful>
     </msg>
     <action>
@@ -363,7 +363,7 @@
       <EditInfo>Edit</EditInfo>
     </tooltip>
     <msg>
-      <confirm-delete>Are you sure to delete this drive?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this drive?</confirm-delete>
     </msg>
     <action>
       <AddDrive>Add Drive</AddDrive>
@@ -374,7 +374,7 @@
   </UIDriveList>
   <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>Add Permissions</AddDrivePermissionSelector>
+      <AddDrivePermissionSelector>Add Permission</AddDrivePermissionSelector>
       <UIDrivePermissionSelector>Set Permissions</UIDrivePermissionSelector>
     </title>
   </PopupDrivePermission>
@@ -388,9 +388,9 @@
     <msg>
       <drive-exists>The drive already exists.</drive-exists>
       <workspace-path-invalid>The workspace path is invalid.</workspace-path-invalid>
-      <drive-views-invalid>Please select one view.</drive-views-invalid>
-      <icon-not-found>The icon not found.</icon-not-found>
-      <permission-null>You must set permission for this drive.</permission-null>
+      <drive-views-invalid>Please select a view.</drive-views-invalid>
+      <icon-not-found>Icon not found.</icon-not-found>
+      <permission-null>You must set the permission for this drive.</permission-null>
       <allowCreateFolders>You must select the folder type.</allowCreateFolders>
       <name-null>Please enter the drive name.</name-null>
       <fileName-invalid>The drive name has some invalid characters.</fileName-invalid>
@@ -454,7 +454,7 @@
       <repoDelete>Remove Repository</repoDelete>
     </title>
     <msg>
-      <cannot-deleteRepo>You cannot delete {0} because it is the default one.</cannot-deleteRepo>
+      <cannot-deleteRepo>You cannot delete {0} because it is the default.</cannot-deleteRepo>
     </msg>
   </UIRepositoryControl>
   <UIECMAdminUIPopupWindow>
@@ -488,7 +488,7 @@
   </UIRepositoryValueSelect>
   <UIRepositorySelectForm>
     <msg-editError>Some errors occurred with the '{0}'  repository. Please check the settings or create a new one.</msg-editError>
-    <msg-accessdenied>You have no permission to edit the '{0}' repository.</msg-accessdenied>
+    <msg-accessdenied>You do not have permission to edit the '{0}' repository.</msg-accessdenied>
   </UIRepositorySelectForm>
   <UIRepositoryForm>
     <label>
@@ -501,7 +501,7 @@
       <authenticationPolicy>Authentication Policy</authenticationPolicy>
       <securityDomain>Security Domain</securityDomain>
       <sessionTime>Session Timeout</sessionTime>
-      <channelConfig>Channel Config</channelConfig>
+      <channelConfig>Channel Configuration</channelConfig>
       <enableReplication>Enable Replication</enableReplication>
       <repMode>Replication Mode</repMode>
       <repTestMode>Is Test Replication</repTestMode>
@@ -524,7 +524,7 @@
       <sessionTime-required>Session timeout is required.</sessionTime-required>
       <workspace-bseBuffer>Max Buffer is required.</workspace-bseBuffer>
       <authen-isrequire>Authentication policy is required.</authen-isrequire>
-      <confirm-workspace-delete>Are you sure to delete this workspace?</confirm-workspace-delete>
+      <confirm-workspace-delete>Are you sure you want to delete this workspace?</confirm-workspace-delete>
     </msg>
     <action>
       <Close>#{word.close}</Close>
@@ -550,7 +550,7 @@
     </action>
     <msg>
       <cannot-delete>You cannot delete '{0}' because it may be in use.</cannot-delete>
-      <confirm-delete>Are you sure to delete this repository?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this repository?</confirm-delete>
     </msg>
   </UIRepositoryList>
   <UIWorkspacePermissionForm>
@@ -582,22 +582,22 @@
     <msg>
       <wsname-exist>The '{0}' workspace already exists in this database.</wsname-exist>
       <name-require>The workspace name is required.</name-require>
-      <permission-require>You must select permission.</permission-require>
+      <permission-require>You must select a permission.</permission-require>
       <nodeType-invalid>The  auto-initialized node type in the default workspace must be nt:unstructured.</nodeType-invalid>
       <!--DMS 2.4.x ECM-3611-->
       <nodeType-invalidSystemWs>The  auto-initialized node type in the DMS system workspace must be nt:unstructured.</nodeType-invalidSystemWs>
       <lockTimeOut-required>The lock timeout is required.</lockTimeOut-required>
-      <lockTimeOut-invalid>The lock timeout must be in the numeric format.</lockTimeOut-invalid>
-      <buffer-invalid>The buffer size must be in the numeric format.</buffer-invalid>
+      <lockTimeOut-invalid>The lock timeout must be in numerical format.</lockTimeOut-invalid>
+      <buffer-invalid>The buffer size must be in numerical format.</buffer-invalid>
       <buffer-require>The buffer size is required.</buffer-require>
       <buffer-zero>The buffer size must be greater than zero.</buffer-zero>
       <buffer-small>The buffer size is too small.</buffer-small>
       <containerName-invalid>The container name is required.</containerName-invalid>
       <maxSize-require>The max cache size is required.</maxSize-require>
-      <maxSize-invalid>The max cache size must be in the numeric format.</maxSize-invalid>
+      <maxSize-invalid>The max cache size must be in numerical format.</maxSize-invalid>
       <maxSize-rezo>The max cache size must be greater than zero.</maxSize-rezo>
       <liveTime-require>The cache live time is required.</liveTime-require>
-      <liveTime-invalid>The cache live time must be in the numeric format.</liveTime-invalid>
+      <liveTime-invalid>The cache live time must be in numerical format.</liveTime-invalid>
       <liveTime-rezo>The cache live time must be greater than zero.</liveTime-rezo>
       <sourceName-invalid> The source name is required.</sourceName-invalid>
       <storePath-invalid>The store path is required.</storePath-invalid>
@@ -606,7 +606,7 @@
       <indexPath-invalid>The query index path is required.</indexPath-invalid>
       <storeType-invalid>The store type is required.</storeType-invalid>
       <queryHandlerType-invalid>The query handler is required.</queryHandlerType-invalid>
-      <permission-invalid>You have to select at least one right.</permission-invalid>
+      <permission-invalid>You must select at least one right.</permission-invalid>
     </msg>
     <label>
       Workspace Wizard
@@ -637,9 +637,9 @@
     </label>
     <tab>
       <info>
-        <step1>Enter workspace name, nodetype, and more.</step1>
-        <step2>Configure for containers, storages, and more.</step2>
-        <step3>Configure for cache, query handler, and more.</step3>
+        <step1>Enter workspace name, node type and more.</step1>
+        <step2>Configure for containers, storage and more.</step2>
+        <step3>Configure for cache, query handler and more.</step3>
       </info>
     </tab>
     <action>
@@ -683,7 +683,7 @@
       <action>Action</action>
     </header>
     <info>
-      <description>nothing</description>
+      <description>Nothing</description>
     </info>
     <action>
       <Export>Export</Export>
@@ -696,7 +696,7 @@
       <Delete>Delete</Delete>
     </tooltip>
     <msg>
-      <confirm-delete>Are you sure to delete this node type?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this node type?</confirm-delete>
     </msg>
   </UINodeTypeList>
   <!--
@@ -746,17 +746,17 @@
       <requiredType>Required Type</requiredType>
       <multiple>Is Multiple</multiple>
       <mandatory>Is Mandatory</mandatory>
-      <autoCreated>Is auto-created</autoCreated>
+      <autoCreated>Is Auto-created</autoCreated>
       <parentversion>On parent version</parentversion>
-      <protected>Is protected</protected>
+      <protected>Is Protected</protected>
       <constraints>Values</constraints>
       <UIFormTableInputSet>UIFormTableInputSet</UIFormTableInputSet>
       <sameNameSiblings>Is same name sibling</sameNameSiblings>
       <childNamespace>Name Space</childNamespace>
-      <childMandatory>Is mandatory</childMandatory>
-      <childAutocreated>Is auto-created</childAutocreated>
+      <childMandatory>Is Mandatory</childMandatory>
+      <childAutocreated>Is Auto-created</childAutocreated>
       <childParentversion>On parent version</childParentversion>
-      <childProtected>Is protected</childProtected>
+      <childProtected>Is Protected</childProtected>
       <childNodename>Definition Name</childNodename>
       <requiredPrimaryType>Required Primary Type</requiredPrimaryType>
       <defaultPrimaryType>Default Primary Type</defaultPrimaryType>
@@ -783,14 +783,14 @@
     <msg>
       <register-successfully>The '{0}' node type was registered successfully.</register-successfully>
       <supertype-is-madatory>The super type is mandatory when you register a new node type. Please select at least one super type.</supertype-is-madatory>
-      <register-failed>The node type registration is unsuccessful. It already exists or the super type is invalid.</register-failed>
+      <register-failed>The node type registration was unsuccessful. It either already exists or the super type is invalid.</register-failed>
       <nodeType-name>The node type name is required.</nodeType-name>
       <fileName-invalid>The file name has some invalid characters.</fileName-invalid>
       <node-type-exists>The '{0}' node type already exists.</node-type-exists>
       <node-type-name>The node type name is invalid.</node-type-name>
       <values-error>Please select only one node type for the default primary type.</values-error>
-      <confirm-delete-child>Are you sure to delete this child node?</confirm-delete-child>
-      <confirm-delete-property>Are you sure to delete this property?</confirm-delete-property>
+      <confirm-delete-child>Are you sure you want to delete this child node?</confirm-delete-child>
+      <confirm-delete-property>Are you sure you want to delete this property?</confirm-delete-property>
     </msg>
   </UINodeTypeForm>
   <UIPropertyDefinitionForm>
@@ -886,8 +886,8 @@
     </action>
     <title>Import Node Type From XML File</title>
     <msg>
-      <filename-error>Browse a node type file that you want to import.</filename-error>
-      <data-file-error>Only .xml or .zip files are supported to import.</data-file-error>
+      <filename-error>Browse a node type file to import.</filename-error>
+      <data-file-error>Only .xml or .zip files can be imported.</data-file-error>
       <data-invalid>The data is invalid. Please check your file type and try again.</data-invalid>
       <nodetype-exist>The '{0}' node type already exists.</nodetype-exist>
       <namespace-invalid>The '{0}' namespace is invalid.</namespace-invalid>
@@ -954,7 +954,7 @@
     </action>
 				<msg>
 					 <confirm-delete>Are you sure you want to delete this action type?</confirm-delete>
-						<cannot-delete>You cannot remove this action type because it is still using in the system.</cannot-delete>
+<cannot-delete>You cannot remove this action type because the system is still using it.</cannot-delete>
 				</msg>
   </UIActionTypeList>
   <!--
@@ -1042,7 +1042,7 @@
     <msg>
       <access-denied>Access denied. You do not have permission to use this function.</access-denied>
       <template-in-use>Cannot delete {0}. It is currently in use.</template-in-use>
-      <confirm-delete>Are you sure to delete this view?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this view?</confirm-delete>
     </msg>
   </UIViewList>
   <ViewPopup>
@@ -1072,7 +1072,7 @@
 					 <AddTab>Add</AddTab>
 				</action>
 				<msg>
-					 <confirm-delete>Are you sure want to delete this tab?</confirm-delete>
+ <confirm-delete>Are you sure you want to delete this tab?</confirm-delete>
 				</msg>
 				<grid>
 					 <msg>
@@ -1087,8 +1087,8 @@
 					 <permission>{0} in {1}</permission>
 				</label>
 				<msg>
-					 <confirm-delete>Are you sure want to delete this permission?</confirm-delete>
-				  <permission-cannot-empty>The view permission is required and cannot be empty.</permission-cannot-empty>
+ <confirm-delete>Are you sure you want to delete this permission?</confirm-delete>
+  <permission-cannot-empty>View permission is required and cannot be empty.</permission-cannot-empty>
 				</msg>
 		</UIViewPermissionList>
 		
@@ -1117,7 +1117,7 @@
 					 <userOrGroup>User or Group</userOrGroup>
 				</label>
 				<msg>
-					 <permission-exist>The permission '{0}' already exist in the list.</permission-exist>
+ <permission-exist>The permission '{0}' already exists in the list.</permission-exist>
 				</msg>				
 		</UIViewPermissionForm>
 	
@@ -1150,7 +1150,7 @@
   </UIViewForm>
   <UITabForm>
     <msg>
-      <button-select-error>Please select at least one function in the list.</button-select-error>
+      <button-select-error>Please select at least one function from the list.</button-select-error>
       <tab-name-error>The tab name is required.</tab-name-error>
       <fileName-invalid>The tab name contains some invalid characters.</fileName-invalid>
     </msg>
@@ -1208,7 +1208,7 @@
   </UITabForm>
   <UIPermissionForm>
     <label>
-      <permission>Permission</permission>
+      <permission>UI Permission Form</permission>
     </label>
   </UIPermissionForm>
   <UIViewFormTabPane>
@@ -1276,7 +1276,7 @@
     </action>
     <msg>
       <template-in-use>Cannot delete {0}. It is currently in use.</template-in-use>
-      <confirm-delete>Are you sure to delete this template?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this template?</confirm-delete>
       <access-denied>Access denied. You do not have permission to use this function.</access-denied>
       <delete-permission-denied>You do not have permission to delete '{0}' template.</delete-permission-denied>
     </msg>
@@ -1295,10 +1295,10 @@
       <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
-      <version-restored>The version {0} was restored successfully.</version-restored>
+      <version-restored>Version {0} was restored successfully.</version-restored>
       <role-require>Please select a permission.</role-require>
       <template-name-exist>The template name '{0}' already exists.</template-name-exist>
-      <add-permission-denied>You do not have permission to add new template.</add-permission-denied>
+      <add-permission-denied>You do not have permission to add a new template.</add-permission-denied>
       <edit-permission-denied>You do not have permission to modify '{0}' template.</edit-permission-denied>
     </msg>
     <tab>
@@ -1376,7 +1376,7 @@
       <AddNew>Add Script</AddNew>
     </action>
     <msg>
-      <confirm-delete>Are you sure to delete this script?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this script?</confirm-delete>
     </msg>
     <header>
       <scriptName>Name</scriptName>
@@ -1409,7 +1409,7 @@
       <Change>Change</Change>
     </action>
     <msg>
-      <version-restored>The version {0} was restored successfully.</version-restored>
+      <version-restored>Version {0} was restored successfully.</version-restored>
       <name-null>Please enter the script name.</name-null>
       <name-exist>The script name '{0}' already exists.</name-exist>
       <fileName-invalid>The script name has some invalid characters.</fileName-invalid>
@@ -1502,7 +1502,7 @@
     <msg>
       <name-null>The category name is empty.</name-null>
       <name-invalid>The category name is invalid.</name-invalid>
-      <name-too-long>Category name must not have more than {0} characters.</name-too-long>
+      <name-too-long>The category name must not have more than {0} characters.</name-too-long>
       <exist>The category name already exists.</exist>
     </msg>
 	</UITaxonomyTreeCreateChildForm>
@@ -1562,8 +1562,8 @@
     <title>Browse Category Tree</title>
     <msg>
       <no-list>No category trees have been created.</no-list>
-      <confirm-delete>Are you sure to delete the category tree?</confirm-delete>
-      <is-in-trash>This category tree had been moved to the Trash.</is-in-trash>
+      <confirm-delete>Are you sure you want to delete the category tree?</confirm-delete>
+      <is-in-trash>This category tree has been moved to the Trash.</is-in-trash>
     </msg>
   </UITaxonomyTreeList>
   
@@ -1597,13 +1597,13 @@
     <title>Add a permission to that node</title>
     <action>
       <Close>#{word.close}</Close>
-      <Save>#{word.save}</Save>
+      <Save>Save</Save>
       <Reset>Reset</Reset>
     </action>
     <msg>
       <checkbox-require>Please select at least one permission.</checkbox-require>
-      <userOrGroup-required>Please select a user or a group before saving the permission.</userOrGroup-required>
-      <not-change-permission>You have no right to add a permission.</not-change-permission>
+      <userOrGroup-required>Please select a user or group before saving the permission.</userOrGroup-required>
+      <not-change-permission>You do not have the right to add a permission.</not-change-permission>
       <access-denied>Access denied. You cannot remove this permission.</access-denied>
     </msg>
   </UIPermissionTreeForm>
@@ -1647,15 +1647,15 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>User Or Group</usersOrGroups>
+      <usersOrGroups>User or Group</usersOrGroups>
       <read>Read</read>
       <addNode>Modify Node</addNode>
       <remove>Remove</remove>
       <action>Action</action>
     </header>
     <msg>
-      <confirm-delete-permission>Are you sure to remove this permission?</confirm-delete-permission>
-      <no-permission-tochange>You have no right to remove permission.</no-permission-tochange>
+      <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
+      <no-permission-tochange>You do not have the right to remove this permission.</no-permission-tochange>
       <no-permission-remove>You cannot remove the owner or the system user.</no-permission-remove>
       <access-denied>Access denied. You cannot remove this permission.</access-denied>
     </msg>
@@ -1685,14 +1685,14 @@
       <selectUser>Select User</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' is the owner of this node and have full of the control permission.</not-change-owner>
+      <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
       <UIPopupWindow>Select</UIPopupWindow>
       <permission>UIPermissionForm</permission>
-      <userOrGroup>User Or Group</userOrGroup>
+      <userOrGroup>User or Group</userOrGroup>
       <read>Read</read>
       <add_node>Modify</add_node>
       <remove>Remove</remove>
@@ -1705,8 +1705,8 @@
     </action>
     <msg>
       <checkbox-require>Please select at least one permission.</checkbox-require>
-      <userOrGroup-required>Please select a user or a group before saving the permission.</userOrGroup-required>
-      <not-change-permission>You have no right to add a permission.</not-change-permission>
+      <userOrGroup-required>Please select a user or group before saving the permission.</userOrGroup-required>
+      <not-change-permission>You do not have the right to add a permission.</not-change-permission>
       <access-denied>Access denied. You cannot remove this permission.</access-denied>
     </msg>
   </UIPermissionForm>
@@ -1739,9 +1739,9 @@
     </action>
     <msg>
       <confirm-delete>Do you really want to delete?</confirm-delete>
-      <access-denied>Access denied! You haven't got permission to use this function.</access-denied>
-      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
-      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
+      <editing-template>Access denied. You cannot delete and edit the template simultaneously.</editing-template>
+      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
     </msg>
   </UITemplateList>
   
@@ -1757,9 +1757,9 @@
     </action>
     <msg>
       <confirm-delete>Do you really want to delete?</confirm-delete>
-      <access-denied>Access denied! You haven't got permission to use this function.</access-denied>
-      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
-      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
+      <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
+      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
     </msg>
   </UIActionsTemplateList>
   
@@ -1775,9 +1775,9 @@
     </action>
     <msg>
       <confirm-delete>Do you really want to delete?</confirm-delete>
-      <access-denied>Access denied! You haven't got permission to use this function.</access-denied>
-      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
-      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
+      <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
+      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
     </msg>
   </UIOthersTemplateList>
 		
@@ -1808,9 +1808,9 @@
     </action>
     <msg>
       <confirm-delete>Are you sure you want to delete this template?</confirm-delete>
-      <access-denied>Access denied! You haven't got permission to use this function.</access-denied>
-      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
-      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+      <access-denied>Access denied. You do not have permission to use this function.</access-denied>
+      <editing-template>Access denied. You cannot delete and edit this template simultaneously.</editing-template>
+      <template-not-exist>The template that you are trying to delete doesn't exist.</template-not-exist>
     </msg>
   </UICLVTemplateList>
 		
@@ -2030,7 +2030,7 @@
     </header>
     <msg>
       <undeletable> You cannot delete '{0}' because it is the default one.</undeletable>
-      <confirm-delete>Are you sure to delete this dialog?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this dialog?</confirm-delete>
     </msg>
     <action>
       <title>
@@ -2052,7 +2052,7 @@
       <action>Actions</action>
     </header>
     <msg>
-      <undeletable>'{0}' can not be deleted, it is the default one!</undeletable>
+      <undeletable>'{0}' cannot be deleted, it is the default one.</undeletable>
       <confirm-delete>Do you really want to delete?</confirm-delete>
     </msg>
     <action>
@@ -2077,7 +2077,7 @@
     <msg>
       <name-invalid>The field name must not contain special characters.</name-invalid>
       <roles-invalid>The Permission field is required.</roles-invalid>
-      <version-restored>The version {0} was restored successfully.</version-restored>
+      <version-restored>Version {0} was restored successfully.</version-restored>
       <name-exist>The name '{0}' already exists.</name-exist>
     </msg>
     <title>
@@ -2131,7 +2131,7 @@
       <Delete>Delete this Query</Delete>
     </tooltip>
     <msg>
-      <confirm-delete>Are you sure to delete this query?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this query?</confirm-delete>
       <query-not-existed>The query does not exist anymore.</query-not-existed>
       <can-not-remove>An error occurred while deleting the query. Please contact the administrator for information.</can-not-remove>
     </msg>
@@ -2154,7 +2154,7 @@
       <name-invalid>The Name field cannot contain special characters.</name-invalid>
       <name-existing>This query name already exists. Please select another one.</name-existing>
       <invalid-query>The query is invalid. Please check your query statement.</invalid-query>
-      <access-denied>Access denied. You do not have the permission to perform this operation.</access-denied>
+      <access-denied>Access denied. You do not have permission to perform this operation.</access-denied>
     </msg>
   </UIQueriesForm>
   <AddQueryForm>
@@ -2205,9 +2205,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>The range is invalid. The format must be: a..b, among which a, b are positive integers. You can use * instead of b to indicate the range is unlimited.</range-validator>
+      <range-validator>The range is invalid. The format must be: a..b, among which a, b are positive integers. You can use * instead of b to indicate that the range is unlimited.</range-validator>
       <error-update>Update failed. Your information is invalid.</error-update>
-      <item-not-existing>You cannot save changes to this tag that no longer exists in the database.</item-not-existing>
+      <item-not-existing>You cannot save changes to this tag since it no longer exists in the database.</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
@@ -2260,7 +2260,7 @@
   -->
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Are you sure to delete?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
   <template>
@@ -2450,7 +2450,7 @@
   </DriveInputSet>
   <UIPermissionTreeInfo>
   	<msg>
-      <confirm-delete-permission>Are you sure to delete this permission?</confirm-delete-permission>
+      <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
       <no-permission-remove>You cannot remove the owner or the system user.</no-permission-remove>  		
   	</msg>
   </UIPermissionTreeInfo>  
@@ -2471,7 +2471,7 @@
     <label>
       <name>Path Node</name>      
       <permissions>Permissions</permissions>
-      <PermissionButton>UIUnLockForm</PermissionButton>
+      <PermissionButton>UI Unlock Form</PermissionButton>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -2483,7 +2483,7 @@
   </UIUnLockForm>
   <UILockHolderList>
   	<header>
-  		<name>Groups Or Users</name>
+  <name>Groups or Users</name>
   		<action>Action</action>
   	</header>
   	<tooltip>
@@ -2552,7 +2552,7 @@
     </header>
     <msg>
       <undeletable>You cannot delete '{0}' because it is the default one.</undeletable>
-      <confirm-delete>Are you sure to delete this skin?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this skin?</confirm-delete>
     </msg>
     <action>
       <title>
@@ -2584,7 +2584,7 @@
 	     </title>
 	   </action>
 	   <msg>
-	     <confirm-delete>Are you sure to delete this tag style?</confirm-delete>
+     <confirm-delete>Are you sure you want to delete this tag style?</confirm-delete>
 	   </msg>
 	 </UITagManager>
 
@@ -2644,7 +2644,7 @@
       </title>
     </action>
     <msg>
-      <confirm-delete-permission>Are you sure to delete this permission?</confirm-delete-permission>
+      <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
     </msg>   
   </UITagPermissionInfo>
   <UITagPermissionForm>
@@ -2654,10 +2654,10 @@
     </action>
     <label>
       <userOrGroup>Memberships: </userOrGroup>
-      <permission></permission>
+      <permission/>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>The membership already exists. Please select another one.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>This membership already exists. Please select another one.</userOrGroup-alreadyExists>
     </msg>    
   </UITagPermissionForm>
   
@@ -2670,7 +2670,7 @@
   
   <UIFolksonomyManager>
   	<msg>
-      <confirm-delete>Are you sure to delete this style?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this style?</confirm-delete>
   	</msg>
     <action>
       <title>
@@ -2703,7 +2703,7 @@
   </UIWorkspaceWizard>
   <UIRepositoryForm>
     <msg>
-      <not-complete-repository>The repository is being created. You need to wait some minutes to create another one.</not-complete-repository>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
     </msg>
   </UIRepositoryForm>
   
@@ -2717,7 +2717,7 @@
 			<label>
   		<taxonomy-list>Taxonomy List</taxonomy-list>
   		<admin-view>Admin View</admin-view>
-  		<authoring-view>Authoring View</authoring-view>
+  <authoring-view>Author View</authoring-view>
   		<taxonomy-icons>Taxonomy Icons</taxonomy-icons>
   		<anonymous-view>Anonymous View</anonymous-view>
   		<icon-view>Icon View</icon-view>
@@ -2730,7 +2730,7 @@
   </UIDriveForm>
 	<UIDriveForm>
 		<label>
-			<allowNodeTypesOnTree>Allowance nodetype on left tree:</allowNodeTypesOnTree>
+<allowNodeTypesOnTree>Allowance nodetype on left tree:</allowNodeTypesOnTree>
 		</label>
 	</UIDriveForm>
 	<DriveInputSet>
@@ -2763,7 +2763,7 @@
  </UINodeTypeList>
   <UIActionForm>
     <msg>
-      <canotChangeActionId>You cannot change the Action Id.</canotChangeActionId>
+      <canotChangeActionId>You cannot change the Action ID.</canotChangeActionId>
     </msg>
   </UIActionForm>
   <PopupComponent>

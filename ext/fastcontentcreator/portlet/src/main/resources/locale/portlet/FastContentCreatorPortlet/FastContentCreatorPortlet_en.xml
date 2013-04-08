@@ -3,15 +3,15 @@
   <UIFCCForm>
     <msg>
       <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <in-versioning>Please check out the current node before adding a new node.</in-versioning>
+      <in-versioning>Please check the current node before adding a new node.</in-versioning>
       <cannot-save>An error occurred while saving the node.</cannot-save>
       <saved-successfully>{0}</saved-successfully>
       <not-support>Cannot load the template of '{0}'.</not-support>
       <not-add-folder>Only nt:file can be added to this folder.</not-add-folder>
-      <access-denied>Access denied. You do not have the add permission at '{0}'.</access-denied>
+      <access-denied>Access denied. You do not have add permission at '{0}'.</access-denied>
       <path-not-found>The path '{0}' was deleted or invalid.</path-not-found>
-      <node-locked>The node '{0}' is locked. Please unlock this node before creating documents.</node-locked>
-      <node-isExist>This node already exists in '{0}' and it is not allowed to be the same name as its sibling.</node-isExist>
+      <node-locked>Node '{0}' is locked. Please unlock this node before creating documents.</node-locked>
+      <node-isExist>This node already exists in '{0}' and is not allowed to be the same name as its sibling.</node-isExist>
       <get-dialog-path>An error occurred while getting the dialog path.</get-dialog-path>
       <new-jcr-template>An error occurred while creating a new template.</new-jcr-template>
     </msg>
@@ -29,14 +29,14 @@
       <UIFCCWorkspaceFormSelectBox>Select Workspace</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>Template Options</UIFCCTemplateField>
       <UIFCCLocationFormInputAction>Location to Save</UIFCCLocationFormInputAction>
-      <UIFCCLocationFormStringInput></UIFCCLocationFormStringInput>
+      <UIFCCLocationFormStringInput/>
       <UIFCCTemplateFormSelectBox>Select Template</UIFCCTemplateFormSelectBox>
       <UIFCCSaveFormStringInput>Custom Save Button</UIFCCSaveFormStringInput>
       <UIFCCMessageFormTextareaInput>Custom Save Message</UIFCCMessageFormTextareaInput>
       <UIFCCRedirectFormCheckboxInput>Redirect</UIFCCRedirectFormCheckboxInput>
       <UIFCCRedirectPathFormStringInput>Redirect Path</UIFCCRedirectPathFormStringInput>
       <UIFCCActionField>Actions</UIFCCActionField>
-      <UIFCCActionList></UIFCCActionList>
+      <UIFCCActionList/>
     </label>
     <msg>
       <save-successfully>Saved to portlet preferences successfully.</save-successfully>
@@ -44,8 +44,8 @@
       <fileType-empty>Please select a file type before saving this configuration.</fileType-empty>
       <ws-empty>Please select one workspace.</ws-empty>
       <action-empty>Please select a folder with an action.</action-empty>
-      <message-empty>The "Custom Save Message" field is required in case that you do not choose the Redirect option, or the path is empty.</message-empty>
-      <get-template>An error occurred while getting the template.</get-template>
+      <message-empty>The "Custom Save Message" field is required in case you do not choose the redirect option, or the path is empty.</message-empty>
+      <get-template>An error occurred while accessing the template.</get-template>
       <set-template-option>An error occurred while setting the template option.</set-template-option>
       <do-select>An error occurred while selecting the location.</do-select>
       </msg>
@@ -73,10 +73,10 @@
     <msg>
       <empty>No actions</empty>
       <remove-popup-first>You must close the edit pop-up before deleting this node.</remove-popup-first>
-      <confirm-delete-action>Are you sure to delete this action?</confirm-delete-action>
+      <confirm-delete-action>Are you sure you want to delete this action?</confirm-delete-action>
       <template-empty>The template of '{0}' is null or empty.</template-empty>
-      <template-null>The template is null or tempty; Or you do not have permission to access this template.</template-null>
-      <access-denied>Access denied. You do not have permission to do this action.</access-denied>
+      <template-null>The template is null or empty, or you do not have permission to access this template.</template-null>
+      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
     </msg>
   </UIFCCActionList>
 
@@ -90,7 +90,7 @@
     <label>
       <workspaceName>Workspace</workspaceName>
       <rootNodePath>Root Path</rootNodePath>
-      <rootNodeInfo></rootNodeInfo>
+      <rootNodeInfo/>
     </label>
   </UIWorkspaceList>
 
@@ -123,13 +123,13 @@
       <Close>Close</Close>
     </action>
     <msg>
-      <repository-exception>Cannot save this action. The name provided must not have an index at its final element.</repository-exception>
+      <repository-exception>Cannot save this action. The name provided must not have an index as its final element.</repository-exception>
       <numberformat-exception>Cannot save this action. The name provided must not have '[' or ']'.</numberformat-exception>
-      <existed-action>The action name '{0}' already exists. Please select another name please.</existed-action>
+      <existed-action>The action name '{0}' already exists. Please select another name.</existed-action>
       <unable-add-action>Unable to add this action.</unable-add-action>
       <unable-add>Unable to add this action. This node is root or you do not have permision.</unable-add>
       <not-support>The dialog '{0}' is not supported.</not-support>
-      <no-permission-add>Access denied. You do not have right to add an action here.</no-permission-add>
+      <no-permission-add>Access denied. You do not have the right to add an action here.</no-permission-add>
       <access-denied>Access denied. You do not have permission to access this template.</access-denied>
     </msg>
     <validator>

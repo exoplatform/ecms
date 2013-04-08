@@ -70,10 +70,10 @@
       <UISCVCacheRadioBox>Share Content</UISCVCacheRadioBox>
     </label>
     <help>
-      <ContentPathBlock>Select the content you want to show. This default content will be replaced dynamically if you activate the dynamic navigation (See the Advanced mode below).</ContentPathBlock>
-      <DisplaySettingBlock>You can show or hide the Option bar used to show the print link. Title and Date display is also optional.</DisplaySettingBlock>
-      <ContextualHelp>Activates the dynamic navigation. The content can be changed dynamically by another URL-based parameter.</ContextualHelp>
-      <ParameterHelp>This parameter will be used to get the content if the dynamic navigation is activated.</ParameterHelp>
+      <ContentPathBlock>Select the content you want to show. This default content will be replaced dynamically if you activate the Dynamic Navigation option (see the Advanced mode below).</ContentPathBlock>
+      <DisplaySettingBlock>You can show or hide the Option bar used to show the print link. Title and Date displays are also optional.</DisplaySettingBlock>
+      <ContextualHelp>Activates Dynamic Navigation. The content can be changed dynamically by another URL-based parameter.</ContextualHelp>
+      <ParameterHelp>This parameter will be used to get the content if the Dynamic Navigation is activated.</ParameterHelp>
     </help>
     <msg>
       <not-valid-path>The item path is invalid.</not-valid-path>
@@ -97,7 +97,7 @@
     <draft>Draft</draft>
     <pending>Pending</pending>
     <approved>Approved</approved>
-    <inreview>In Review</inreview>
+    <inreview>Under Review</inreview>
     <staged>Staged</staged>
     <published>Published</published>
   </PublicationStates>

@@ -2,10 +2,9 @@
 <bundle>
   <UIViewFormTabPane>
   		<label>
-          <publicationRequestApproval>Publication > Request Approval</publicationRequestApproval>
-          <publicationApproveContent>Publication > Approve Content</publicationApproveContent>
-          <publicationPublish>Publication > Publish</publicationPublish>
+          <publicationRequestApproval>Publication &gt; Request Approval</publicationRequestApproval>
+          <publicationApproveContent>Publication &gt; Approve Content</publicationApproveContent>
+          <publicationPublish>Publication &gt; Publish</publicationPublish>
   		</label>
   </UIViewFormTabPane>
 </bundle>
-
