@@ -63,7 +63,7 @@
               <property name="jgroups-multiplexer-stack" value="false" />
               <property name="jbosscache-cluster-name" value="jcrlock${container.name.suffix}" />
               <property name="jbosscache-shareable" value="true" />
-              <property name="jbosscache-cl-cache.jdbc.table.name" value="jcrlock" />
+              <property name="jbosscache-cl-cache.jdbc.table.name" value="jcrlocks" />
               <property name="jbosscache-cl-cache.jdbc.table.create" value="true" />
               <property name="jbosscache-cl-cache.jdbc.table.drop" value="false" />
               <property name="jbosscache-cl-cache.jdbc.table.primarykey" value="pk" />
@@ -135,7 +135,7 @@
               <property name="jgroups-multiplexer-stack" value="false" />
               <property name="jbosscache-cluster-name" value="jcrlock${container.name.suffix}" />
               <property name="jbosscache-shareable" value="true" />
-              <property name="jbosscache-cl-cache.jdbc.table.name" value="jcrlock" />
+              <property name="jbosscache-cl-cache.jdbc.table.name" value="jcrlocks" />
               <property name="jbosscache-cl-cache.jdbc.table.create" value="true" />
               <property name="jbosscache-cl-cache.jdbc.table.drop" value="false" />
               <property name="jbosscache-cl-cache.jdbc.table.primarykey" value="pk" />
