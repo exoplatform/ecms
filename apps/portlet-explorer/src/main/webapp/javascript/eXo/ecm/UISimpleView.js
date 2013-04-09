@@ -835,6 +835,13 @@
     SimpleView.prototype.hideContextMenu = function() {
       var contextMenu = document.getElementById(Self.contextMenuId);
       if (contextMenu) contextMenu.style.display = "none";
+      
+      // Hide menu from action bar
+      var listHideContainer = document.getElementById('ListHideContainer');
+      if (listHideContainer) {
+        var dropdown = gj(listHideContainer).parents("li.dropdown:first")[0];
+        gj(dropdown).removeClass("open");
+      }
 
       //remove default context menu;
       eval(eXo.core.MouseEventManager.onMouseDownHandlers);
