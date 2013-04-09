@@ -40,4 +40,13 @@ public class PermissionBean {
 
   public boolean isRemove() { return remove ; }
   public void setRemove(boolean b) { remove = b ; }
+  
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
+  @Override
+  public boolean equals(Object obj) {
+    // TODO Auto-generated method stub
+    return this.usersOrGroups.equals(((PermissionBean)obj).usersOrGroups);
+  }
 }
