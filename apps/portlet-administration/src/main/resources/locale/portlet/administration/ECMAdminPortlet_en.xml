@@ -2334,6 +2334,14 @@
       <SelectQueryHandler>Select Query Handler</SelectQueryHandler>
     </title>
   </step3>
+  <UIDrivePermissionSelector>
+    <label>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Membership</selectMembership>
+    </label>
+  </UIDrivePermissionSelector>
+  
   <UIPermissionSelector>
     <label>
       <selectGroup>Select Group</selectGroup>
@@ -2341,11 +2349,18 @@
       <selectMembership>Select Membership</selectMembership>
     </label>
   </UIPermissionSelector>
+  
   <UIAnyPermission>
     <label>
       <anyPermission>Any Permission</anyPermission>
     </label>
   </UIAnyPermission>
+  
+  <UIMDriveAnyPermission>
+    <label>
+      <anyPermission>Any Permission</anyPermission>
+    </label>
+  </UIMDriveAnyPermission>
   
   <UIQueriesAnyPermission>
     <label>

@@ -24,6 +24,7 @@ import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 
 import org.exoplatform.ecm.permission.info.UIPermissionInputSet;
+import org.exoplatform.ecm.webui.core.UIPermissionFormBase;
 import org.exoplatform.ecm.webui.selector.UIGroupMemberSelector;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.utils.LockUtil;
@@ -45,7 +46,6 @@ import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.form.UIForm;
 
 /**
  * Created by The eXo Platform SARL Author : nqhungvn
@@ -54,7 +54,7 @@ import org.exoplatform.webui.form.UIForm;
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    template = "system:/groovy/webui/form/UIFormWithTitle.gtmpl",
+    template = "classpath:groovy/wcm/webui/core/UIPermissionForm.gtmpl",
     events = {
       @EventConfig(listeners = UIPermissionForm.SaveActionListener.class),
       @EventConfig(phase = Phase.DECODE, listeners = UIPermissionForm.CloseActionListener.class),
@@ -66,7 +66,7 @@ import org.exoplatform.webui.form.UIForm;
     }
 )
 
-public class UIPermissionForm extends UIForm implements UISelectable {
+public class UIPermissionForm extends UIPermissionFormBase implements UISelectable {
 
   public static final String PERMISSION   = "permission";
 
@@ -81,18 +81,6 @@ public class UIPermissionForm extends UIForm implements UISelectable {
   public UIPermissionForm() throws Exception {
     addChild(new UIPermissionInputSet(PERMISSION));
     setActions(new String[] { "Close" });
-  }
-
-  private void refresh() {
-    reset();
-    checkAll(false);
-  }
-
-  private void checkAll(boolean check) {
-    UIPermissionInputSet uiInputSet = getChildById(PERMISSION) ;
-    for (String perm : PERMISSION_TYPES) {
-      uiInputSet.getUICheckBoxInput(perm).setChecked(check);
-    }
   }
 
   protected boolean isEditable(Node node) throws Exception {

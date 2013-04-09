@@ -139,16 +139,7 @@ public class UIPermissionInfo extends UIPermissionInfoBase {
     Session session = WCMCoreUtils.getSystemSessionProvider().getSession(systemWorkspace, manageableRepository);
     return session;
   }
-  static public class EditActionListener extends EventListener<UIPermissionInfo> {
-    public void execute(Event<UIPermissionInfo> event) throws Exception {
-      UIPermissionInfo uicomp = event.getSource() ;
-      String name = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      Node updateNode = uicomp.getCurrentNode();
-      ExtendedNode node = (ExtendedNode)updateNode;
-      UIPermissionForm uiForm = uicomp.getAncestorOfType(UIPermissionManager.class).getChild(UIPermissionForm.class) ;
-      uiForm.fillForm(name, node) ;
-    }
-  }
+
   static public class DeleteActionListener extends EventListener<UIPermissionInfo> {
     public void execute(Event<UIPermissionInfo> event) throws Exception {
       UIPermissionInfo uicomp = event.getSource() ;

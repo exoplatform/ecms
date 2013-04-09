@@ -19,18 +19,18 @@ package org.exoplatform.ecm.webui.component.admin.taxonomy.info;
 import javax.jcr.Node;
 
 import org.exoplatform.ecm.permission.info.UIPermissionInputSet;
+import org.exoplatform.ecm.webui.core.UIPermissionManagerBase;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
-import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIGrid;
 import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.UIPopupWindow;
-import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.organization.account.UIUserSelector;
@@ -45,9 +45,9 @@ import org.exoplatform.webui.organization.account.UIUserSelector;
  * Oct 13, 2006
  */
 
-@ComponentConfig(lifecycle = UIContainerLifecycle.class)
-
-public class UIPermissionManager extends UIContainer implements UIPopupComponent{
+@ComponentConfig(template = "classpath:groovy/wcm/webui/core/UIPermissionManager.gtmpl", 
+events = { @EventConfig(listeners = UIPermissionManager.CloseActionListener.class) })
+public class UIPermissionManager extends UIPermissionManagerBase implements UIPopupComponent{
   private static final Log LOG = ExoLogger.getLogger(UIPermissionManager.class.getName());
 
   public UIPermissionManager() throws Exception {
@@ -122,6 +122,15 @@ public class UIPermissionManager extends UIContainer implements UIPopupComponent
       uiPopup.setUIComponent(null);
       uiPopup.setShow(false);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiParent);
+    }
+  }
+  
+  static public class CloseActionListener extends EventListener<UIPermissionManager> {
+    public void execute(Event<UIPermissionManager> event) throws Exception {
+      UIPopupWindow popupAction = event.getSource().getAncestorOfType(UIPopupWindow.class);
+      popupAction.setRendered(false);
+      popupAction.setShow(false);
+      event.getRequestContext().addUIComponentToUpdateByAjax(popupAction);
     }
   }
 }
