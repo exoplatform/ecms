@@ -35,12 +35,12 @@
 										strHTML += "<option value=\"DMS Documents\" userLanguage=\"UserLanguage.DMSDocuments\">DMS Documents</option>";
 										strHTML += "<option value=\"Medias\" userLanguage=\"UserLanguage.Medias\">Medias</option>";
 										strHTML += "</select></div><a class=\"actionIcon pull-left\" id=\"UploadItem\" style=\"display:none;\" href=\"javascript:void(0);\" onclick=\"eXo.ecm.UploadForm.showUploadForm();\" > <i class=\"uiIconUpload\"></i>  Upload </a>"; <!--userLanguage=\"UserLanguage.UploadFile\" -->
-										strHTML += "<div class=\"btn-group pull-right\"><button onclick=\"\" data-placement=\"bottom\" rel=\"tooltip\" class=\"btn active\" type=\"button\" title=\"Thumbnail View\"><i class=\"uiIconEcmsViewIcons\"></i></button><button onclick=\"\" data-placement=\"bottom\" rel=\"tooltip\" class=\"btn \" type=\"button\" title=\"List View\"><i class=\"uiIconEcmsViewList\"></i></button></div>";
+										strHTML += "<div class=\"btn-group pull-right\"><button id=\"enableThumbnailViewBtn\" onclick=\"eXo.ecm.ECS.changeViewType('thumbnail');gj(this).attr('class', 'btn active'); gj('#enableListViewBtn').attr('class', 'btn');\" data-placement=\"bottom\" rel=\"tooltip\" class=\"btn\" type=\"button\" title=\"Thumbnail View\"><i class=\"uiIconEcmsViewIcons\"></i></button><button id=\"enableListViewBtn\" onclick=\"eXo.ecm.ECS.changeViewType('list');gj('#enableThumbnailViewBtn').attr('class', 'btn');gj(this).attr('class', 'btn active');\" data-placement=\"bottom\" rel=\"tooltip\" class=\"btn active\" type=\"button\" title=\"List View\"><i class=\"uiIconEcmsViewList\"></i></button></div>";
 									}
 									document.getElementById("filterAreaID").innerHTML = strHTML;
 
 									if(eXo.ecm.ECS.viewType=="list") {
-										strView = "<div id=\"view\" class=\"ViewType\"><a onClick=\"eXo.ecm.ECS.changeViewType('thumbnail');\" title=\"Thumbnail View\" class=\"thumbnail-view\" ><span></span></a><a class=\"list-view-selected\" title=\"List View\"><span></span></a><input type=\"hidden\" id=\"viewTypeID\" value=\"list\"><div style=\"clear:both\"></div></div>";
+										strView = "<div id=\"view\" class=\"ViewType\"><input type=\"hidden\" id=\"viewTypeID\" value=\"list\"><div style=\"clear:both\"></div></div>";
 										strViewPresent = "<div class=\"listView\"><table class=\"uiGrid table table-hover table-striped\" id=\"ListRecords\">";
 										strViewPresent += "<thead><tr><th userLanguage=\"UserLanguage.FileName\"> Name </th>";
 										strViewPresent += "<th class=\"span2\" userLanguage=\"UserLanguage.CreateDate\"> Date </th>";
@@ -72,7 +72,7 @@
 </head>
 <body>
 	<div class="uiHomePagePortlet">
-		<div class="uiBox" >
+		<div class="UIHomePageDT uiBox" >
 
 			<h6 class="title">
 				Content Selector
@@ -181,24 +181,10 @@
 					<div class="SeparatorLineR"><span></span></div>
 					<div id="viewTypeAreaID"></div>
 				</div>
-				<div class="breadcumbsPortlet">
-					<!--<div class="HomeIcon"><span></span></div>
+				<div class="breadcumbsPortlet ">
+					<div class=""><i class="uiIconHome uiIconLightGray"></i></div>
 					<div class="BreadcumbsContainer" id="BreadcumbsContainer">
-						<a class="nomal" title="Home" href="#" userLanguage="UserLanguage.Home">Home</a>
-					</div>-->
-					
-					
-					
-					<ul class="breadcrumb clearfix">
-						 <li>
-						 <i class="uiIconHome uiIconLightGray"></i>
-						</li>
-						<li class="">
-						 <a href="#">General Drives</a>
-						</li>
-						<li class="active"><span class="uiIconMiniArrowRight">&nbsp;</span>Acme-category</li>
-					</ul>
-
+					</div>
 				</div>
 				<div class="listContainer">
 					<div class="leftWorkspace uiTreeExplorer" id="LeftWorkspace">

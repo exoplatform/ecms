@@ -535,7 +535,7 @@
 				} 
 				var tdNoContent = tblRWS.tBodies[0].insertRow(0).insertCell(0);
 				tdNoContent.innerHTML = "There is no content";
-				tdNoContent.className = "item noContent";
+				tdNoContent.className = "item noContent empty center";
 				tdNoContent.setAttribute("colspan",3);
 				tdNoContent.userLanguage = "UserLanguage.NoContent";	
 				document.getElementById("pageNavPosition").innerHTML = "";
@@ -622,11 +622,12 @@
 	EcmContentSelector.prototype.updateHTML = function(viewType) {
 	  var strViewPresent = "";
 		if(viewType=="list") {
-			strViewPresent = "<div class=\"ListView\"><table cellspacing=\"0\" style=\"table-layout: fixed; width: 100%;\" id=\"ListRecords\">";
-			strViewPresent += "<thead><tr><th class=\"THBar\" userLanguage=\"UserLanguage.FileName\"> Name </th>";
-			strViewPresent += "<th class=\"THBar\" style=\"width: 120px;\" userLanguage=\"UserLanguage.CreateDate\"> Date </th>";
-			strViewPresent += "<th class=\"THBar\" style=\"width: 80px;\" userLanguage=\"UserLanguage.FileSize\"> Size </th></tr></thead>";
+			strViewPresent = "<div class=\"listView\"><table class=\"uiGrid table table-hover table-striped\" id=\"ListRecords\">";
+			strViewPresent += "<thead><tr><th userLanguage=\"UserLanguage.FileName\"> Name </th>";
+			strViewPresent += "<th class=\"span2\" userLanguage=\"UserLanguage.CreateDate\"> Date </th>";
+			strViewPresent += "<th class=\"span1\" userLanguage=\"UserLanguage.FileSize\"> Size </th></tr></thead><tbody></tbody>";
 			strViewPresent += "</table></div>";
+
 		} else {
 			strViewPresent = "<div class=\"uiThumbnailsView\" style=\"overflow-y: auto; overflow-x: hidden;\"><div class=\"ActionIconsContainer\" id=\"ActionIconsContainer\"></div></div>";
 		}
@@ -650,7 +651,7 @@
 		if(!list || list.length <= 0) {
 			var tdNoContent = tblRWS.tBodies[0].insertRow(0).insertCell(0);
 			tdNoContent.innerHTML = "There is no content";
-			tdNoContent.className = "item noContent";
+			tdNoContent.className = "item noContent empty center";
 			tdNoContent.userLanguage = "UserLanguage.NoContent";
 			document.getElementById("pageNavPosition").innerHTML = "";
 			return;
@@ -693,7 +694,7 @@
 			var rowTmp = tblRWS.tBodies[0].insertRow(0);
 			var tdNoContent = rowTmp.insertCell(0);
 			tdNoContent.innerHTML = "There is no content";
-			tdNoContent.className = "item noContent";
+			tdNoContent.className = "item noContent empty center";
 			tdNoContent.userLanguage = "UserLanguage.NoContent";
 			document.getElementById("pageNavPosition").innerHTML = "";
 			return;
@@ -1050,21 +1051,23 @@
 	  eXo.ecm.ECS.viewType = viewType;  
 	  var view = document.getElementById("view");
 		view.innerHTML = "";  
-	  if(viewType=="list") 
-			view.innerHTML = "<a onClick=\"eXo.ecm.ECS.changeViewType('thumbnail');\" title=\"Thumbnail View\" class=\"thumbnail-view\" ><span></span></a><a class=\"list-view-selected\" title=\"List View\"><span></span></a><input type=\"hidden\" id=\"viewTypeID\" value=\"list\">";
-	  else
-			view.innerHTML = "<a class=\"thumbnail-view-selected\" title=\"Thumbnail View\"><span></span></a><a onClick=\"eXo.ecm.ECS.changeViewType('list');\" class=\"list-view\" title=\"List View\"><span></span></a><input type=\"hidden\" id=\"viewTypeID\" value=\"thumbnail\">";
+	  if(viewType=="list") {
+		  gj("#enableListViewBtn").attr('class', 'btn active'); gj('#enableThumbnailViewBtn').attr('class', 'btn');
+	  }
+	  else {
+		  gj("#enableThumbnailViewBtn").attr('class', 'btn active'); gj('#enableListViewBtn').attr('class', 'btn');
+	  }
+
 	  eXo.ecm.ECS.switchView = true;	   
 		if(eXo.ecm.ECS.currentNode) eXo.ecm.ECS.getDir(eXo.ecm.ECS.currentNode, eXo.ecm.ECS.eventNode);
 	  else {
 			var strViewPresent = "";
 			if(viewType=="list") {
-				strViewPresent = "<div class=\"ListView\"><table cellspacing=\"0\" style=\"table-layout: fixed; width: 100%;\" id=\"ListRecords\">";
-				strViewPresent += "<thead><tr><th class=\"THBar\" userLanguage=\"UserLanguage.FileName\"> Name </th>";
-				strViewPresent += "<th class=\"THBar\" style=\"width: 120px;\" userLanguage=\"UserLanguage.CreateDate\"> Date </th>";
-				strViewPresent += "<th class=\"THBar\" style=\"width: 80px;\" userLanguage=\"UserLanguage.FileSize\"> Size </th></tr></thead>";
-	      strViewPresent += "<tr><td class=\"Item TRNoContent\" colspan=\"3\" userLanguage=\"UserLanguage.NoContent\">There is no content</td></tr>";
-				strViewPresent += "</table></div>";
+				strViewPresent = "<div class=\"listView\"><table class=\"uiGrid table table-hover table-striped\" id=\"ListRecords\">";
+				strViewPresent += "<thead><tr><th userLanguage=\"UserLanguage.FileName\"> Name </th>";
+				strViewPresent += "<th class=\"span2\" userLanguage=\"UserLanguage.CreateDate\"> Date </th>";
+				strViewPresent += "<th class=\"span1\" userLanguage=\"UserLanguage.FileSize\"> Size </th></tr></thead>";
+				strViewPresent += "<tr><td class=\"center empty\" colspan=\"3\" userLanguage=\"UserLanguage.NoContent\">There is no content</td></tr></table></div>";
 			} else {
 				strViewPresent = "<div class=\"uiThumbnailsView\" style=\"overflow-y: auto; overflow-x: hidden;\"><div class=\"ActionIconsContainer\" id=\"ActionIconsContainer\"><div class=\"NoContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div></div></div>";
 			}
