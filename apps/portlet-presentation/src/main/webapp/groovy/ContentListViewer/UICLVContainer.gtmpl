@@ -11,14 +11,12 @@
 %>
 <div class="$className" id="$uicomponent.id">
 	<%
-	  jsManager.loadScriptResource("quick-edit");
 
-    jsManager.require("SHARED/wcm-utils", "wcmutil").
-    addScripts("wcmutil.WCMUtils.addEvent('${uicomponent.id}','mouseenter',function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','$className $hoverClass')});").
-    addScripts("wcmutil.WCMUtils.addEvent('${uicomponent.id}','mouseleave',function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','$className')});").
-    addScripts("wcmutil.WCMUtils.setZIndex(10);");
-    jsManager.require("SHARED/jquery", "gj").addScripts("gj('#"+uicomponent.id+"').mouseenter( function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','$className $hoverClass')});});");
-    jsManager.require("SHARED/jquery", "gj").addScripts("gj('#"+uicomponent.id+"').mouseleave( function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','$className')});});");
+		jsManager.loadScriptResource("quick-edit");
+	  jsManager.require("SHARED/wcm-utils", "wcmutil");      
+	  jsManager.require("SHARED/jquery", "gj").addScripts("gj('#"+uicomponent.id+"').mouseenter( function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','$className $hoverClass');});").
+	  addScripts("gj('#"+uicomponent.id+"').mouseleave( function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','$className');});").
+	  addScripts("wcmutil.WCMUtils.setZIndex(10);");
     
 		String portletId = Utils.getRealPortletId(rcontext);
 		def quickEditingBlockId = portletId + "-QuickEditingBlock";
