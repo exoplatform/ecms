@@ -6,9 +6,10 @@
 		<meta http-equiv="cache-control" content="no-cache"/>
 		<meta http-equiv="pragma" content="no-cache"/>
 		<meta http-equiv="eXpires" content="0"/>
-		<link type="text/css" rel="stylesheet" href="../../../eXoWCMResources/skin/css/ecms-resources-wcmskin.css"/>
+
 		<link type="text/css" rel="stylesheet" href="../../../eXoResources/skin/css/Core.css"/>
 		<link type="text/css" rel="stylesheet" href="../../../eXoResources/skin/bootstrap/css/bootstrap.css"/>
+		<link type="text/css" rel="stylesheet" href="../../../eXoWCMResources/skin/css/ecms-resources-wcmskin.css"/>
 		<link type="text/css" rel="stylesheet" href="../../../ecmexplorer/skin/css/ecms-explorer.css"/>
 		<link type="text/css" rel="stylesheet" href="css/content.css"/>
 		<script type="text/javascript" src="../../../eXoResources/javascript/jquery-1.7.1.js"></script>
@@ -27,26 +28,27 @@
 									if(eXo.ecm.ECS.insertContentType=="Image") {
 										strHTML = "<input type=\"hidden\" name=\"Filter\" id=\"Filter\" value=\"Image\">";
 									} else {
-										strHTML = "<div class=\"FinterTitle\" userLanguage=\"UserLanguage.Filter\"><label for=\"Filter\">Filter</label></div>";
-										strHTML += "<div class=\"FinterInput\"><select class=\"Pinter\" id=\"Filter\" onchange=\"eXo.ecm.ECS.changeFilter();\">";
+										strHTML = "<div class=\"finterTitle pull-left\" userLanguage=\"UserLanguage.Filter\"><label for=\"Filter\"> Filter: </label></div>";
+										strHTML += "<div class=\"uiSelectbox pull-left\"><select class=\"selectbox\" id=\"Filter\" onchange=\"eXo.ecm.ECS.changeFilter();\">";
 										strHTML += "<option value=\"All\" selected=\"selected\" userLanguage=\"UserLanguage.All\">All</option>";
 										strHTML += "<option value=\"Web Contents\" userLanguage=\"UserLanguage.WebContents\">Web Contents</option>";
 										strHTML += "<option value=\"DMS Documents\" userLanguage=\"UserLanguage.DMSDocuments\">DMS Documents</option>";
 										strHTML += "<option value=\"Medias\" userLanguage=\"UserLanguage.Medias\">Medias</option>";
-										strHTML += "</select></div><div class=\"SeparatorLineL\"><span></span></div>";
+										strHTML += "</select></div><a class=\"actionIcon pull-left\" id=\"UploadItem\" style=\"display:none;\" href=\"javascript:void(0);\" onclick=\"eXo.ecm.UploadForm.showUploadForm();\" > <i class=\"uiIconUpload\"></i>  Upload </a>"; <!--userLanguage=\"UserLanguage.UploadFile\" -->
+										strHTML += "<div class=\"btn-group pull-right\"><button onclick=\"\" data-placement=\"bottom\" rel=\"tooltip\" class=\"btn active\" type=\"button\" title=\"Thumbnail View\"><i class=\"uiIconEcmsViewIcons\"></i></button><button onclick=\"\" data-placement=\"bottom\" rel=\"tooltip\" class=\"btn \" type=\"button\" title=\"List View\"><i class=\"uiIconEcmsViewList\"></i></button></div>";
 									}
 									document.getElementById("filterAreaID").innerHTML = strHTML;
 
 									if(eXo.ecm.ECS.viewType=="list") {
 										strView = "<div id=\"view\" class=\"ViewType\"><a onClick=\"eXo.ecm.ECS.changeViewType('thumbnail');\" title=\"Thumbnail View\" class=\"thumbnail-view\" ><span></span></a><a class=\"list-view-selected\" title=\"List View\"><span></span></a><input type=\"hidden\" id=\"viewTypeID\" value=\"list\"><div style=\"clear:both\"></div></div>";
-										strViewPresent = "<div class=\"ListView\"><table cellspacing=\"0\" style=\"table-layout: fixed; width: 100%;\" id=\"ListRecords\">";
-										strViewPresent += "<thead><tr><th class=\"THBar\" userLanguage=\"UserLanguage.FileName\"> Name </th>";
-										strViewPresent += "<th class=\"THBar\" style=\"width: 120px;\" userLanguage=\"UserLanguage.CreateDate\"> Date </th>";
-										strViewPresent += "<th class=\"THBar\" style=\"width: 80px;\" userLanguage=\"UserLanguage.FileSize\"> Size </th></tr></thead>";
-										strViewPresent += "<tr><td class=\"Item TRNoContent\" colspan=\"3\" userLanguage=\"UserLanguage.NoContent\">There is no content</td></tr></table></div>";
+										strViewPresent = "<div class=\"listView\"><table class=\"uiGrid table table-hover table-striped\" id=\"ListRecords\">";
+										strViewPresent += "<thead><tr><th userLanguage=\"UserLanguage.FileName\"> Name </th>";
+										strViewPresent += "<th class=\"span2\" userLanguage=\"UserLanguage.CreateDate\"> Date </th>";
+										strViewPresent += "<th class=\"span1\" userLanguage=\"UserLanguage.FileSize\"> Size </th></tr></thead>";
+										strViewPresent += "<tr><td class=\"center empty\" colspan=\"3\" userLanguage=\"UserLanguage.NoContent\">There is no content</td></tr></table></div>";
 									} else {
-										strView = "<div id=\"view\" class=\"ViewType\"><a class=\"thumbnail-view-selected\" title=\"Thumbnail View\"><span></span></a><a onClick=\"eXo.ecm.ECS.changeViewType('list');\" class=\"list-view\" title=\"List View\"><span></span></a><input type=\"hidden\" id=\"viewTypeID\" value=\"thumbnail\"><div style=\"clear:both\"></div></div>";
-										strViewPresent = "<div class=\"UIThumbnailsView\" style=\"overflow-y: auto; overflow-x: hidden;\"><div class=\"ActionIconsContainer\" id=\"ActionIconsContainer\"><div class=\"NoContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div></div></div>";
+										strView = "<div id=\"view\" class=\"viewType\"><a class=\"thumbnail-view-selected\" title=\"Thumbnail View\"><span></span></a><a onClick=\"eXo.ecm.ECS.changeViewType('list');\" class=\"list-view\" title=\"List View\"><span></span></a><input type=\"hidden\" id=\"viewTypeID\" value=\"thumbnail\"><div style=\"clear:both\"></div></div>";
+										strViewPresent = "<div class=\"UIThumbnailsView\" ><div class=\"actionIconsContainer\" id=\"ActionIconsContainer\"><div class=\"noContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div></div></div>";
 									}
 									document.getElementById("viewTypeAreaID").innerHTML = strView;
 									document.getElementById("viewPresentAreaID").innerHTML = strViewPresent;
@@ -69,26 +71,22 @@
 		<script type="text/javascript" src="js/UploadForm.js"></script>
 </head>
 <body>
-	<div class="UIHomePagePortlet">
-		<div class="UIHomePageDT" >
+	<div class="uiHomePagePortlet">
+		<div class="uiBox" >
 
-			<div class="TitleBar">
-				CONTENT SELECTOR
-			</div>
-			<div class="UIWorkingWorkspace uiWCMSearchContainer">
+			<h6 class="title">
+				Content Selector
+			</h6>
+			<div class="uiWorkingWorkspace uiWCMSearchContainer">
 				<div class="actionBar">
-					<div id="filterAreaID">
+					<div id="filterAreaID" class="uiGrayLightBox clearfix">
 					</div>
 					<!--
 					<div class="ControlButton InsertLinksIcon">
 						<a href="javascript: void(0);" class="InseartButton">Insert a links</a>
 					</div>
 					-->
-					<!--====================================== UPLOAD ============================================-->
-					<div class="ControlButton UploadIcon" id="UploadItem" style="display:none;">
-							<a class="Item IconUpload" href="javascript:void(0);" onclick="eXo.ecm.UploadForm.showUploadForm();" userLanguage="UserLanguage.UploadFile">Upload File</a>
-					</div>
-					<!-- ====================================== UPLOAD ============================================-->
+
 					<!-- ====================================== SETTING ============================================-->
 					<div class="SettingIcon" onmouseover="" style="position:relative;">
 						<a href="#" userLanguage="UserLanguage.SettingTitle" style="display:none;">Setting</a>
@@ -184,10 +182,23 @@
 					<div id="viewTypeAreaID"></div>
 				</div>
 				<div class="breadcumbsPortlet">
-					<div class="HomeIcon"><span></span></div>
+					<!--<div class="HomeIcon"><span></span></div>
 					<div class="BreadcumbsContainer" id="BreadcumbsContainer">
 						<a class="nomal" title="Home" href="#" userLanguage="UserLanguage.Home">Home</a>
-					</div>
+					</div>-->
+					
+					
+					
+					<ul class="breadcrumb clearfix">
+						 <li>
+						 <i class="uiIconHome uiIconLightGray"></i>
+						</li>
+						<li class="">
+						 <a href="#">General Drives</a>
+						</li>
+						<li class="active"><span class="uiIconMiniArrowRight">&nbsp;</span>Acme-category</li>
+					</ul>
+
 				</div>
 				<div class="listContainer">
 					<div class="leftWorkspace uiTreeExplorer" id="LeftWorkspace">
