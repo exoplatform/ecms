@@ -29,11 +29,11 @@
   -->
   <UIVoteForm>
     <title>
-      <normal>Normal/Click to vote</normal>
-      <good>Good/Click to vote</good>
-      <verygood>Very Good/Click to vote</verygood>
-      <excellent>Excellent/Click to vote</excellent>
-      <best>Best/Click to vote</best>
+      <normal>Poor</normal>
+      <good>Below average</good>
+      <verygood>Average</verygood>
+      <excellent>Above average</excellent>
+      <best>Good</best>
       <no-value>no value yet</no-value>
     </title>
     <label>
@@ -41,7 +41,7 @@
     </label>
     <button>
       <label>
-        <cancel>Cancel</cancel>
+        <cancel>Close</cancel>
       </label>
     </button>
     <msg>
