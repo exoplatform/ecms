@@ -25,19 +25,36 @@
   xmlns="http://www.gatein.org/xml/ns/gatein_resources_1_2">
 
   <!-- Javascript for Cloud Drive UI support in WCM -->
-  <javascript>
+  <module>
+    <name>uiCloudDrive</name>
+    <load-group>baseGRP</load-group>
+    <script>
+      <path>/js/loader.js</path>
+    </script>
+    <depends>
+      <module>jquery</module>
+    </depends>
+    <depends>
+      <module>base</module>
+    </depends>
+    <!-- depends>
+      <module>uiJCRExplorer</module>
+    </depends -->
+  </module>
+  
+  <!-- javascript>
     <param>
       <js-module>jquery.core</js-module>
       <js-path>http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js</js-path>
       <js-priority>1</js-priority>
     </param>
-  </javascript>
-  <javascript>
+  </javascript -->
+  <!-- javascript>
     <param>
       <js-module>cloud.utils</js-module>
       <js-path>/js/loader.js</js-path>
       <js-priority>900</js-priority>
     </param>
-  </javascript>
-  
+  </javascript -->
+
 </gatein-resources>
