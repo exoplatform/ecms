@@ -24,7 +24,7 @@
   <parent>
     <groupId>org.exoplatform.addons</groupId>
     <artifactId>exo-clouddrive-services</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>exo-clouddrive-services-ecms</artifactId>
@@ -43,7 +43,7 @@
     <!-- WebUI -->
     <dependency>
       <groupId>org.exoplatform.commons</groupId>
-      <artifactId>exo.platform.commons.webui.ext</artifactId>
+      <artifactId>commons-webui-ext</artifactId>
       <scope>provided</scope>
     </dependency>
 
@@ -51,31 +51,20 @@
     <!-- ECMS's NodeFinder here -->
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-services</artifactId>
+      <artifactId>ecms-core-services</artifactId>
       <scope>provided</scope>
       <type>jar</type>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-webui-explorer</artifactId>
+      <artifactId>ecms-core-webui-explorer</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-webui</artifactId>
+      <artifactId>ecms-core-webui</artifactId>
       <scope>provided</scope>
     </dependency>
-    <!-- dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>exo-ecms-core-services</artifactId>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>org.exoplatform.portal</groupId>
-          <artifactId>exo.portal.webui.portal</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency -->
   </dependencies>
 
   <build>

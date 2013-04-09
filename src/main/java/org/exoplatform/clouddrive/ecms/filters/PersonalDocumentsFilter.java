@@ -18,7 +18,6 @@
  */
 package org.exoplatform.clouddrive.ecms.filters;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -43,13 +42,12 @@ public class PersonalDocumentsFilter implements UIExtensionFilter {
     String userId = Util.getPortalRequestContext().getRemoteUser();
     UIJCRExplorer uiExplorer = (UIJCRExplorer) context.get(UIJCRExplorer.class.getName());
     ManageDriveServiceImpl driveService = uiExplorer.getApplicationComponent(ManageDriveServiceImpl.class);
-    List<DriveData> driveData = driveService.getPersonalDrives(userId, new ArrayList<String>());
+    List<DriveData> driveData = driveService.getPersonalDrives(userId);
     Node currentNode = (Node) context.get(Node.class.getName());
     for (DriveData drive : driveData) {
       // XXX only show in Personal Doc's root!
       if (uiExplorer.getDriveData().getHomePath().equals(drive.getHomePath())
-          && currentNode.getPath().endsWith(uiExplorer.getSession().getUserID() + "/"
-              + drive.getName())) {
+          && currentNode.getPath().endsWith(uiExplorer.getSession().getUserID() + "/" + drive.getName())) {
         return true;
       }
     }

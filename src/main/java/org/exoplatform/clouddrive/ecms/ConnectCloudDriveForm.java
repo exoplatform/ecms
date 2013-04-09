@@ -46,10 +46,14 @@ public class ConnectCloudDriveForm extends UIForm implements UIPopupComponent {
     CloudDriveContext.addScript(WebuiRequestContext.getCurrentInstance());
   }
 
-  public void activate() throws Exception {
+  @Override
+  public void activate() {
+    // nothing
+    
   }
 
-  public void deActivate() throws Exception {
+  @Override
+  public void deActivate() {
+    // nothing
   }
-
 }

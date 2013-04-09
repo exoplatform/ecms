@@ -20,16 +20,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.jcr.AccessDeniedException;
-import javax.jcr.InvalidItemStateException;
-import javax.jcr.ItemExistsException;
 import javax.jcr.Node;
-import javax.jcr.RepositoryException;
 import javax.jcr.Session;
-import javax.jcr.lock.LockException;
-import javax.jcr.nodetype.ConstraintViolationException;
-import javax.jcr.nodetype.NoSuchNodeTypeException;
-import javax.jcr.version.VersionException;
 
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.services.cms.views.ManageViewService;
@@ -43,7 +35,8 @@ import org.exoplatform.webui.ext.UIExtensionManager;
 import org.picocontainer.Startable;
 
 /**
- * Add ImportCloudDocument button in ListView. We're doing this by hack of already stored DMS navigation.
+ * Add ImportCloudDocument button in ListView. We're doing this by hack of already stored DMS
+ * navigation.
  */
 public class CloudDriveUIService implements Startable {
 
@@ -61,9 +54,11 @@ public class CloudDriveUIService implements Startable {
 
   private final UIExtensionManager uiExtensions;
 
-  private final List<String>       VIEWS                      = Arrays.asList("b_list-view/List",
-                                                                              "e_admin-view/Admin",
-                                                                              "c_icon-view/Icons");
+  private final List<String>       VIEWS                      = Arrays.asList("List/List",
+                                                                              "Admin/Admin",
+                                                                              "Web/Authoring",
+                                                                              "Icons/Icons",
+                                                                              "Categories/Collaboration");
 
   public CloudDriveUIService(RepositoryService repoService,
                              CloudDriveService driveService,
@@ -88,7 +83,7 @@ public class CloudDriveUIService implements Startable {
     try {
       Session session = jcrSessions.getSession("dms-system", jcrService.getCurrentRepository());
       for (String view : VIEWS) {
-        Node listNode = (Node) session.getItem(manageView.getViewByName(view, jcrSessions).getPath());
+        Node listNode = manageView.getViewByName(view, jcrSessions); 
         StringBuilder newActions = new StringBuilder();
         if (listNode.hasProperty(EXO_BUTTONS)) {
           String[] actions = listNode.getProperty(EXO_BUTTONS).getString().split(";");
