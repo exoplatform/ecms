@@ -12,11 +12,6 @@
   <description>eXo Entreprise Content Management Suite :: Extensions :: xCMIS</description>
   <dependencies>
     <dependency>
-      <groupId>org.apache.tika</groupId>
-      <artifactId>tika-core</artifactId>
-      <scope>runtime</scope>      
-    </dependency>  
-    <dependency>
       <groupId>org.xcmis</groupId>
       <artifactId>xcmis-search-model</artifactId>
       <scope>runtime</scope>      
