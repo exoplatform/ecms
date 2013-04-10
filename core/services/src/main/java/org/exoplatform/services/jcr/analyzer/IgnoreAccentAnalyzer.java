@@ -23,8 +23,8 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.ISOLatin1AccentFilter;
 import org.apache.lucene.analysis.LowerCaseFilter;
 import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.WhitespaceTokenizer;
 import org.apache.lucene.analysis.standard.StandardFilter;
+import org.apache.lucene.util.Version;
 
 /**
  * Created by The eXo Platform SARL
@@ -35,7 +35,7 @@ import org.apache.lucene.analysis.standard.StandardFilter;
 public class IgnoreAccentAnalyzer extends Analyzer {
 
   public TokenStream tokenStream(String fieldName, Reader reader) {
-    TokenStream result = new WhitespaceTokenizer(reader);
+    TokenStream result = new WhitespaceTokenizerWithDot(Version.LUCENE_35, reader);
     result = new StandardFilter(result);
     result = new UnescapeHTMLFilter(result);
     result = new IgnoreSentencesEndFilter(result);
