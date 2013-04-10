@@ -68,13 +68,16 @@
 						  <%
 						  } else if(formInput.getName().equals(uicomponent.PRINT_FORM_INPUT_SET)) {
 						  %>
-							  <div class="form-horizontal" >
-							    <div class="control-group">                  
-							      <label class="control-label" for="<%=uicomponent.PRINT_PAGE_FORM_INPUT_SET%>"><%=uicomponent.getLabel(uicomponent.PRINT_PAGE_FORM_INPUT_SET) %>: </label>
-							      <a class="actionIcon pull-right"><i class="uiIconQuestion uiIconLightGray" id="" title="<%= _ctx.appRes("UISCVPreferences.help.ContentPathBlock") %>" data-placement="left" rel="tooltip"></i></a>
-							      <div class="controls uiSearchInput" ><% uiform.renderField(uicomponent.PRINT_PAGE_PARAMETER_INPUT) %></div>
-							    </div>
-							    <div class="control-group">                  
+							  <div class="form-horizontal" >						    
+							  
+						    
+						    <div class="control-group">                  
+						      <label class="control-label" for="<%=uicomponent.PRINT_PAGE_FORM_INPUT_SET%>"><%=uicomponent.getLabel(uicomponent.PRINT_PAGE_FORM_INPUT_SET) %>: </label>
+						      <a class="actionIcon pull-right"><i class="uiIconQuestion uiIconLightGray" id="" title="<%= _ctx.appRes("UISCVPreferences.help.ContentPathBlock") %>" data-placement="left" rel="tooltip"></i></a>
+						      <div class="controls" ><% uiform.renderField(uicomponent.PRINT_PAGE_FORM_INPUT_SET) %></div>
+						    </div>
+						    
+						    <div class="control-group">                  
 							      <label class="control-label" for="<%=uicomponent.PRINT_PAGE_PARAMETER_INPUT%>"><%=uicomponent.getLabel(uicomponent.PRINT_PAGE_PARAMETER_INPUT) %>: </label>
 							      <div class="controls" ><% uiform.renderField(uicomponent.PRINT_PAGE_PARAMETER_INPUT) %></div>
 							    </div>

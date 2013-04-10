@@ -52,7 +52,7 @@ import com.google.common.util.concurrent.SettableFuture;
     template = "app:/groovy/SingleContentViewer/UISCVPreferences.gtmpl",
     events = {
       @EventConfig(listeners = UISCVPreferences.SaveActionListener.class),
-      @EventConfig(listeners = UISCVPreferences.SelectFolderPathActionListener.class, phase = Phase.DECODE),
+      @EventConfig(listeners = UISCVPreferences.AddPathActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UISCVPreferences.CancelActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UISCVPreferences.SelectTargetPageActionListener.class, phase = Phase.DECODE)
     }
@@ -128,7 +128,7 @@ public class UISCVPreferences extends UIFormTabPane implements UISelectable{
     txtContentPath.setReadOnly(true);
 
     UIFormInputSetWithAction itemPathInputSet = new UIFormInputSetWithAction(ITEM_PATH_FORM_INPUT_SET);
-    itemPathInputSet.setActionInfo(CONTENT_PATH_INPUT, new String[] { "SelectFolderPath" }) ;
+    itemPathInputSet.setActionInfo(CONTENT_PATH_INPUT, new String[] { "AddPath" }) ;
     itemPathInputSet.addUIFormInput(txtContentPath);
     UIFormInputSetWithAction contentInputSet = new UIFormInputSetWithAction(CONTENT_FORM_INPUT_SET);
     contentInputSet.addUIFormInput((UIFormInputSet)itemPathInputSet);
@@ -346,7 +346,7 @@ public class UISCVPreferences extends UIFormTabPane implements UISelectable{
     return this.selectedNodeDrive;
   }
 
-  public static class SelectFolderPathActionListener extends EventListener<UISCVPreferences> {
+  public static class AddPathActionListener extends EventListener<UISCVPreferences> {
     public void execute(Event<UISCVPreferences> event) throws Exception {
       UISCVPreferences uiSCVPref = event.getSource();
       UIContentSelectorOne contentSelector = uiSCVPref.createUIComponent(UIContentSelectorOne.class,
