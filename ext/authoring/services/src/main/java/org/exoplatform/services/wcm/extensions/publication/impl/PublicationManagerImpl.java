@@ -28,7 +28,7 @@ import org.joda.time.format.ISODateTimeFormat;
 import org.picocontainer.Startable;
 
 /**
- * Created by The eXo Platform MEA Author : haikel.thamri@exoplatform.com
+ * PublicationManager is to manage the publication.
  */
 public class PublicationManagerImpl implements PublicationManager, Startable {
 

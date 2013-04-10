@@ -60,7 +60,7 @@ import org.exoplatform.webui.event.EventListener;
                  events = {
     @EventConfig(listeners = UITagExplorer.ViewTagActionListener.class),
     @EventConfig(listeners = UITagExplorer.EditTagsActionListener.class) }),
-@ComponentConfig(type = UIPageIterator.class,
+@ComponentConfig(type = UIPageIterator.class, id = "PublicTagPageIterator",
                  template = "app:/groovy/webui/component/explorer/sidebar/UITagPageIterator.gtmpl",
                  events = {@EventConfig(listeners = UIPageIterator.ShowPageActionListener.class)})
 })

@@ -47,8 +47,6 @@ public class DocumentLinkHandler extends FCKFileHandler {
 
   /**
    * Instantiates a new document link handler.
-   *
-   * @param container the container
    */
   public DocumentLinkHandler() {
     super(ExoContainerContext.getCurrentContainer());

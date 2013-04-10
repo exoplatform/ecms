@@ -23,26 +23,38 @@ import javax.jcr.Node;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
 /**
- * Created by The eXo Platform SARL
- * Author : Dang Van Minh
- *          minh.dang@exoplatform.com
- * Oct 22, 2009
- * 8:19:26 AM
- */
-/**
- * Support to get all documents by time frame
+ * The TimelineService component allows documents to be displayed by days, months and years.
+ * The configuration of this component is found in /core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-services-configuration.xml.
+ *
+ * {@code
+ * <component>
+ *     <key>org.exoplatform.services.cms.timeline.TimelineService</key>
+ *     <type>org.exoplatform.services.cms.timeline.impl.TimelineServiceImpl</type>
+ *     <init-params>
+ *         <value-param>
+ *             <name>itemPerTimeline</name>
+ *             <value>5</value>
+ *         </value-param>
+ *     </init-params>
+ * </component>
+ * }
+ *
+ * Support to get all documents by time frame.
+ *
+ * @LevelAPI Experimental
  */
 public interface TimelineService {
 
   /**
    * Get all documents of Today
-   * 
-   * @param nodePath Path of current node
-   * @param workspace Workspace name
-   * @param sessionProvider SessionProvider
-   * @param userName Logged in user
-   * @param byUser show documents by current user or by all users
+   *
+   * @param nodePath The Path of current node
+   * @param workspace The Workspace name.
+   * @param sessionProvider The Session Provider.
+   * @param userName Logged in user.
+   * @param byUser Show documents by current user or by all users
    * @return List<Node>
+   * @throws Exception The exception
    */
   public List<Node> getDocumentsOfToday(String nodePath,
                                         String workspace,
@@ -52,14 +64,15 @@ public interface TimelineService {
   
   /**
    * Get all documents of Today
-   * 
-   * @param nodePath Path of current node
-   * @param workspace Workspace name
-   * @param sessionProvider SessionProvider
-   * @param userName Logged in user
-   * @param byUser show documents by current user or by all users
-   * @param isLimit indicate that the limitation of query is enabled or not
+   *
+   * @param nodePath The Path of current node
+   * @param workspace The Workspace name.
+   * @param sessionProvider The Session Provider.
+   * @param userName Logged in user.
+   * @param byUser Show documents by current user or by all users
+   * @param isLimit Indicate that the limitation of query is enabled or not
    * @return List<Node>
+   * @throws Exception The exception
    */
   public List<Node> getDocumentsOfToday(String nodePath,
                                         String workspace,
@@ -69,14 +82,15 @@ public interface TimelineService {
                                         boolean isLimit) throws Exception;  
 
   /**
-   * Get all documents of Yesterday
+   * Get all documents of Yesterday.
    * 
-   * @param nodePath Path of current node
-   * @param workspace Workspace name
-   * @param sessionProvider SessionProvider
-   * @param userName Logged in user
-   * @param byUser show documents by current user or by all users
+   * @param nodePath The Path of current node
+   * @param workspace The Workspace name.
+   * @param sessionProvider The Session Provider.
+   * @param userName Logged in user.
+   * @param byUser Show documents by current user or by all users.
    * @return List<Node>
+   * @throws Exception The exception
    */
   public List<Node> getDocumentsOfYesterday(String nodePath,
                                             String workspace,
@@ -85,15 +99,16 @@ public interface TimelineService {
                                             boolean byUser) throws Exception;
   
   /**
-   * Get all documents of Yesterday
-   * 
-   * @param nodePath Path of current node
-   * @param workspace Workspace name
-   * @param sessionProvider SessionProvider
-   * @param userName Logged in user
-   * @param byUser show documents by current user or by all users
-   * @param isLimit indicate that the limitation of query is enabled or not
+   * Get all documents of Yesterday.
+   *
+   * @param nodePath The Path of current node
+   * @param workspace The Workspace name.
+   * @param sessionProvider The Session Provider.
+   * @param userName Logged in user.
+   * @param byUser Show documents by current user or by all users
+   * @param isLimit Indicate that the limitation of query is enabled or not.
    * @return List<Node>
+   * @throws Exception The exception
    */
   public List<Node> getDocumentsOfYesterday(String nodePath,
                                             String workspace,
@@ -103,14 +118,15 @@ public interface TimelineService {
                                             boolean isLimit) throws Exception;   
 
   /**
-   * Get all documents earlier this week
-   * 
-   * @param nodePath Path of current node
-   * @param workspace Workspace name
-   * @param sessionProvider SessionProvider
-   * @param userName Logged in user
-   * @param byUser show documents by current user or by all users
+   * Get all documents earlier this week.
+   *
+   * @param nodePath The Path of current node
+   * @param workspace The Workspace name.
+   * @param sessionProvider The Session Provider.
+   * @param userName Logged in user.
+   * @param byUser Show documents by current user or by all users.
    * @return List<Node>
+   * @throws Exception The exception
    */
   public List<Node> getDocumentsOfEarlierThisWeek(String nodePath,
                                                   String workspace,
@@ -119,15 +135,16 @@ public interface TimelineService {
                                                   boolean byUser) throws Exception;
   
   /**
-   * Get all documents earlier this week
-   * 
-   * @param nodePath Path of current node
-   * @param workspace Workspace name
-   * @param sessionProvider SessionProvider
-   * @param userName Logged in user
-   * @param byUser show documents by current user or by all users
-   * @param isLimit indicate that the limitation of query is enabled or not
+   * Get all documents earlier this week.
+   *
+   * @param nodePath The Path of current node
+   * @param workspace The Workspace name.
+   * @param sessionProvider The Session Provider.
+   * @param userName Logged in user.
+   * @param byUser Show documents by current user or by all users
+   * @param isLimit Indicate that the limitation of query is enabled or not.
    * @return List<Node>
+   * @throws Exception The exception
    */
   public List<Node> getDocumentsOfEarlierThisWeek(String nodePath,
                                                   String workspace,
@@ -137,14 +154,15 @@ public interface TimelineService {
                                                   boolean isLimit) throws Exception;
 
   /**
-   * Get all documents earlier this month
-   * 
-   * @param nodePath Path of current node
-   * @param workspace Workspace name
-   * @param sessionProvider SessionProvider
-   * @param userName Logged in user
-   * @param byUser show documents by current user or by all users
+   * Get all documents earlier this month.
+   *
+   * @param nodePath The Path of current node
+   * @param workspace The Workspace name.
+   * @param sessionProvider The Session Provider.
+   * @param userName Logged in user.
+   * @param byUser Show documents by current user or by all users.
    * @return List<Node>
+   * @throws Exception The exception
    */
   public List<Node> getDocumentsOfEarlierThisMonth(String nodePath,
                                                    String workspace,
@@ -153,15 +171,16 @@ public interface TimelineService {
                                                    boolean byUser) throws Exception;
   
   /**
-   * Get all documents earlier this month
-   * 
-   * @param nodePath Path of current node
-   * @param workspace Workspace name
-   * @param sessionProvider SessionProvider
-   * @param userName Logged in user
-   * @param byUser show documents by current user or by all users
-   * @param isLimit indicate that the limitation of query is enabled or not
+   * Get all documents earlier this month.
+   *
+   * @param nodePath The Path of current node
+   * @param workspace The Workspace name.
+   * @param sessionProvider The Session Provider.
+   * @param userName Logged in user.
+   * @param byUser Show documents by current user or by all users
+   * @param isLimit Indicate that the limitation of query is enabled or not.
    * @return List<Node>
+   * @throws Exception The exception
    */
   public List<Node> getDocumentsOfEarlierThisMonth(String nodePath,
                                                    String workspace,
@@ -171,14 +190,15 @@ public interface TimelineService {
                                                    boolean isLimit) throws Exception;  
 
   /**
-   * Get all documents earlier this year
-   * 
-   * @param nodePath Path of current node
-   * @param workspace Workspace name
-   * @param sessionProvider SessionProvider
-   * @param userName Logged in user
-   * @param byUser show documents by current user or by all users
+   * Get all documents earlier this year.
+   *
+   * @param nodePath The Path of current node
+   * @param workspace The Workspace name.
+   * @param sessionProvider The Session Provider.
+   * @param userName Logged in user.
+   * @param byUser Show documents by current user or by all users
    * @return List<Node>
+   * @throws Exception The exception
    */
   public List<Node> getDocumentsOfEarlierThisYear(String nodePath,
                                                   String workspace,
@@ -187,15 +207,16 @@ public interface TimelineService {
                                                   boolean byUser) throws Exception;
   
   /**
-   * Get all documents earlier this year
-   * 
-   * @param nodePath Path of current node
-   * @param workspace Workspace name
-   * @param sessionProvider SessionProvider
-   * @param userName Logged in user
-   * @param byUser show documents by current user or by all users
-   * @param isLimit indicate that the limitation of query is enabled or not
+   * Get all documents earlier this year.
+   *
+   * @param nodePath The Path of current node
+   * @param workspace The Workspace name.
+   * @param sessionProvider The Session Provider.
+   * @param userName Logged in user.
+   * @param byUser Show documents by current user or by all users
+   * @param isLimit Indicate that the limitation of query is enabled or not
    * @return List<Node>
+   * @throws Exception The exception
    */
   public List<Node> getDocumentsOfEarlierThisYear(String nodePath,
                                                   String workspace,
@@ -205,11 +226,11 @@ public interface TimelineService {
                                                   boolean isLimit) throws Exception;
   
   /**
-   * Get the number of items per category displayed in Timeline view. this is
+   * Get the number of items per category displayed in Timeline view. This is
    * get from initialize parameter of Timeline Service class If less than or
    * equal zero then use default value 5 items per category.
    * 
-   * @return
+   * @return ItemPerTimeline as int
    */
   public int getItemPerTimeline();
 }

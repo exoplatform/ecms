@@ -22,14 +22,6 @@ import javax.jcr.Node;
 
 import org.exoplatform.services.ecm.publication.NotInPublicationLifecycleException;
 
-/**
- * Created by The eXo Platform SAS
- * Author : Hoa Pham (hoa.pham@exoplatform.com)
- * Sep 29, 2008
- * Modified : Jul 29, 2009 - Benjamin Paillereau (benjamin.paillereau@exoplatform.com)
- *    - added enrollNodeInLifecycle by context
- *    - added updateLifecyleOnChangeContent by context
- */
 public interface WCMPublicationService {
 
   public static final String UPDATE_EVENT = "WCMPublicationService.event.updateState";
@@ -83,7 +75,7 @@ public interface WCMPublicationService {
   *
   * @param node
   * @param siteName
-  * @param author
+  * @param remoteUser
   * @throws Exception
   */
   public void enrollNodeInLifecycle(Node node, String siteName, String remoteUser) throws Exception;
@@ -105,7 +97,7 @@ public interface WCMPublicationService {
    * @see org.exoplatform.services.wcm.publication.listener.post.PostCreateContentEventListener
    * @see org.exoplatform.services.wcm.publication.listener.post.PostEditContentEventListener
    * @param node
-   * @param currentSite
+   * @param siteName
    * @param remoteUser
    * @throws Exception
    */
@@ -115,7 +107,7 @@ public interface WCMPublicationService {
    * It allows to update the lifecycle of the content with a new state.
    *
    * @param node
-   * @param currentSite
+   * @param siteName
    * @param remoteUser
    * @param newState
    * @throws Exception

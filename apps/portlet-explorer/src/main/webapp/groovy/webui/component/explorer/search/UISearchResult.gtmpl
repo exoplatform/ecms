@@ -8,6 +8,7 @@
 %>
 <%
   import org.exoplatform.ecm.webui.utils.Utils;
+  import org.exoplatform.ecm.jcr.model.Preference;
   import org.exoplatform.services.jcr.impl.core.JCRPath;
   import org.exoplatform.services.jcr.impl.core.SessionImpl;
   import javax.jcr.Node;
@@ -28,44 +29,40 @@
   <table class="uiGrid table table-hover table-striped" >
     <thead>
       <tr>
-        <th>
+        <th class="center actionContainer">
           <%
-            if (uicomponent.iconType.equals("BlueUpArrow")) {
+            if (uicomponent.iconType.equals(Preference.BLUE_UP_ARROW)) {
           %>
-            <div onclick="<%=uicomponent.event("SortASC", Utils.formatNodeName("type"))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISearchResult.title.typeASC")%>">
-              <%=_ctx.appRes("UISearchResult.header.type")%>
-              <img src="/eXoResources/skin/sharedImages/Blank.gif" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISearchResult.title.typeASC")%>" alt="<%=_ctx.appRes("UISearchResult.title.typeASC")%>" class="BlueUpArrow16x16Icon" />
-            </div>
+            <a href="<%=uicomponent.event("SortASC", Utils.formatNodeName("type"))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISearchResult.title.typeASC")%>">
+              <%=_ctx.appRes("UISearchResult.header.type")%> <i class="uiIconArrowUpMini uiIconLightGray"></i>
+            </a>
           <%
-            } else if (uicomponent.iconType.equals("BlueDownArrow")) {
+            } else if (uicomponent.iconType.equals(Preference.BLUE_DOWN_ARROW)) {
           %>
-          <div onclick="<%=uicomponent.event("SortDESC", Utils.formatNodeName("type"))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISearchResult.title.typeDESC")%>">
-            <%=_ctx.appRes("UISearchResult.header.type")%>
-            <img src="/eXoResources/skin/sharedImages/Blank.gif" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISearchResult.title.typeDESC")%>" alt="<%=_ctx.appRes("UISearchResult.title.typeDESC")%>" class="BlueDownArrow16x16Icon" />
-          </div>
+          <a href="<%=uicomponent.event("SortDESC", Utils.formatNodeName("type"))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISearchResult.title.typeDESC")%>">
+            <%=_ctx.appRes("UISearchResult.header.type")%> <i class="uiIconArrowDownMini uiIconLightGray"></i>
+          </a>
           <%
             } else {
           %>
-            <div onclick="<%=uicomponent.event("SortASC", Utils.formatNodeName("type"))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISearchResult.title.typeASC")%>">
+            <a href="<%=uicomponent.event("SortASC", Utils.formatNodeName("type"))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISearchResult.title.typeASC")%>">
               <%=_ctx.appRes("UISearchResult.header.type")%>
-            </div>
+            </a>
           <% } %>
         </th>
         <th><%=_ctx.appRes("UISearchResult.header.name")%></th>
-        <th>
+        <th class="center actionContainer">
           <%
-            if (uicomponent.iconScore.equals("BlueUpArrow")) {
+            if (uicomponent.iconScore.equals(Preference.BLUE_UP_ARROW)) {
           %>
             <a href="<%=uicomponent.event("SortASC", Utils.formatNodeName("score"))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISearchResult.title.scoreASC")%>">
-              <%=_ctx.appRes("UISearchResult.header.score")%>
-              <img src="/eXoResources/skin/sharedImages/Blank.gif" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISearchResult.title.scoreASC")%>" alt="<%=_ctx.appRes("UISearchResult.title.scoreASC")%>" class="BlueUpArrow16x16Icon"/>
+              <%=_ctx.appRes("UISearchResult.header.score")%> <i class="uiIconArrowUpMini uiIconLightGray"></i>
             </a>
           <%
-            } else if (uicomponent.iconScore.equals("BlueDownArrow")) {
+            } else if (uicomponent.iconScore.equals(Preference.BLUE_DOWN_ARROW)) {
           %>
           <a href="<%=uicomponent.event("SortDESC", Utils.formatNodeName("score"))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISearchResult.title.scoreDESC")%>">
-            <%=_ctx.appRes("UISearchResult.header.score")%>
-            <img src="/eXoResources/skin/sharedImages/Blank.gif" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISearchResult.title.scoreDESC")%>" alt="<%=_ctx.appRes("UISearchResult.title.scoreDESC")%>" class="BlueDownArrow16x16Icon"/>
+            <%=_ctx.appRes("UISearchResult.header.score")%> <i class="uiIconArrowDownMini uiIconLightGray"></i>
           </a>
           <%
             } else {
@@ -74,7 +71,7 @@
               <%=_ctx.appRes("UISearchResult.header.score")%>
             </a>
           <% } %>
-		 </th>
+         </th>
         <th class="center"><%=_ctx.appRes("UISearchResult.header.action")%></th>
       </tr>
     </thead>
@@ -85,9 +82,9 @@
       boolean even = true ;
       boolean found = false ;
       Node node = null;
-	  def listAddedResult = new ArrayList<Node>();
+      def listAddedResult = new ArrayList<Node>();
       if (resultList != null && resultList.size() > 0) {
-	    def count = 0;
+        def count = 0;
         for (row in resultList) {
 
           String nodePath = row.getJcrPath();
@@ -116,7 +113,7 @@
         String excerpt = row.getRepExcerpt();
         excerpt = StringEscapeUtils.unescapeHtml(excerpt);
         String score = row.getJcrScore();
-			if (node != null) {
+            if (node != null) {
       %>
           <tr>
             <td class="center">
@@ -132,12 +129,12 @@
             </td>
             <td class="center">$score</td>
             <td class="center actionContainer">
-							<a class="actionIcon" onclick="<%=uicomponent.event("View", Utils.formatNodeName(node.getPath()))%>" alt="<%=_ctx.appRes("UISearchResult.tooltip.View")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISearchResult.tooltip.View")%>"><i class="uiIconPreview"></i></a>
-							<a class="actionIcon" onclick="<%=uicomponent.event("OpenFolder", Utils.formatNodeName(node.getPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISearchResult.tooltip.OpenFolder")%>" alt="<%=_ctx.appRes("UISearchResult.tooltip.OpenFolder")%>"><i class="uiIconEcmsGotoFolder"></i></a>
-						</td>
+                            <a class="actionIcon" onclick="<%=uicomponent.event("View", Utils.formatNodeName(node.getPath()))%>" alt="<%=_ctx.appRes("UISearchResult.tooltip.View")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISearchResult.tooltip.View")%>"><i class="uiIconPreview"></i></a>
+                            <a class="actionIcon" onclick="<%=uicomponent.event("OpenFolder", Utils.formatNodeName(node.getPath()))%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UISearchResult.tooltip.OpenFolder")%>" alt="<%=_ctx.appRes("UISearchResult.tooltip.OpenFolder")%>"><i class="uiIconEcmsGotoFolder"></i></a>
+                        </td>
           </tr>
     <%
-		  }
+          }
         }
       } else {
     %>

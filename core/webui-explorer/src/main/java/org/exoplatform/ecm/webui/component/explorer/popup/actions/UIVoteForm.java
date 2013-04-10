@@ -18,6 +18,7 @@ package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 
 import javax.jcr.Node;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.portal.webui.util.Util;
@@ -60,6 +61,32 @@ public class UIVoteForm extends UIComponent implements UIPopupComponent {
     return votingService.getVoteValueOfUser(uiExplorer.getCurrentNode(),
                                             currentUser,
                                             uiDocInfo.getLanguage());
+  }
+  
+  public String getCurrentRatingResourceKey() throws Exception {
+    String voteKey = StringUtils.EMPTY;
+    int voteValue = (int)getRating();
+    switch (voteValue) {
+    case 1:
+      voteKey = "UIVoteForm.title.normal";
+      break;
+    case 2:
+      voteKey = "UIVoteForm.title.good";
+      break;
+    case 3:
+      voteKey = "UIVoteForm.title.verygood";
+      break;
+    case 4:
+      voteKey = "UIVoteForm.title.excellent";
+      break;
+    case 5:
+      voteKey = "UIVoteForm.title.best";
+      break;
+    default:
+      voteKey = "UIVoteForm.title.no-value";
+      break;
+    }
+    return voteKey;
   }
 
   static  public class VoteActionListener extends EventListener<UIVoteForm> {

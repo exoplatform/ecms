@@ -86,11 +86,8 @@ import org.w3c.dom.NodeList;
  * {{{{portalname}}}}: The name of portal.
  * {{{{restcontextname}}}}: The context name of REST web application which is deployed to the "{{{{portalname}}}}" portal.
  *
- * @author Do Dang Thang <thang.do@exoplatform.com>
- * @since      Sep 7, 2009
- * @copyright  eXo Platform SEA
- *
- * @anchor CONTref.Devref.PublicRestAPIs.DriverConnector
+ * @LevelAPI Provisional
+ * @anchor DriverConnector
  */
 @Path("/wcmDriver/")
 public class DriverConnector extends BaseConnector implements ResourceContainer {
@@ -136,10 +133,10 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   private ResourceBundle sharedResourceBundle=null;
 
   private Locale lang = Locale.ENGLISH;
+
   /**
    * Instantiates a new driver connector.
    *
-   * @param container the container
    * @param params the params
    */
   public DriverConnector(InitParams params) {
@@ -168,13 +165,10 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * Return a list of drives for the current user.
    *
    * @param lang The language of the drive name.
-   * @param repositoryName The name of repository.
-   * @param workspaceName The name of workspace.
-   * @param userId The Id of user.
    * @return The drives.
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.DriverConnector.getDrivers
+   * @anchor DriverConnector.getDrivers
    */
   @GET
   @Path("/getDrivers/")
@@ -214,11 +208,10 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @param repositoryName The name of repository.
    * @param workspaceName The name of workspace.
    * @param filterBy The type of filter.
-   * @param userId The Id of user.
    * @return The folders and files.
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.DriverConnector.getFoldersAndFiles
+   * @anchor DriverConnector.getFoldersAndFiles
    */
   @GET
   @Path("/getFoldersAndFiles/")
@@ -267,9 +260,11 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
   
   /**
-   * checks if can upload a new file
+   * Checks if the drive can upload a new file.
+   *
    * @return Response containing the status indicating if upload is available 
    * @throws Exception
+   * @anchor DriverConnector.checkUploadAvailable
    */
   @GET
   @Path("/uploadFile/checkUploadAvailable/")
@@ -287,26 +282,15 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   /**
    * Upload a file.
    *
-   * @param inputStream The input stream.
-   * @param repositoryName The name of repository.
-   * @param workspaceName The name of workspace.
-   * @param currentFolder The current folder.
-   * @param jcrPath The path of the file.
    * @param uploadId The Id of upload.
-   * @param language The language.
-   * @param contentType The type of content.
-   * @param contentLength The length of content.
-   * @param currentPortal The current portal.
-   * @param driverName The name of drive.
    * @return The response.
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.DriverConnector.uploadFile
+   * @anchor DriverConnector.uploadFile
    */
   @POST
   @Path("/uploadFile/upload/")
-//  @InputTransformer(PassthroughInputTransformer.class)
-//  @OutputTransformer(XMLOutputTransformer.class)
+
   public Response uploadFile(@Context HttpServletRequest servletRequest,
       @QueryParam("uploadId") String uploadId) throws Exception {
     //check if number of file uploading is greater than the limit
@@ -321,23 +305,30 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 //    }
     return fileUploadHandler.upload(servletRequest, uploadId, limit);
   }
-  
+
   /**
    * Control the process of uploading a file, such as aborting, deleting or progressing the file.
    *
-   * @TODO
-   * 
-   * @anchor CONTref.Devref.PublicRestAPIs.DriverConnector.checkExistence
+   * @param repositoryName The repository name.
+   * @param workspaceName The workspace name.
+   * @param driverName The Drive name.
+   * @param currentFolder The current folder.
+   * @param currentPortal The portal name.
+   * @param language The language file.
+   * @param fileName The file name.
+   * @return The response
+   * @throws Exception The exception
+   *
+   * @anchor DriverConnector.checkExistence
    */
   @GET
   @Path("/uploadFile/checkExistence/")
-//  @OutputTransformer(XMLOutputTransformer.class)
   public Response checkExistence(
       @QueryParam("repositoryName") String repositoryName,
       @QueryParam("workspaceName") String workspaceName,
       @QueryParam("driverName") String driverName,
       @QueryParam("currentFolder") String currentFolder,
-      @QueryParam("currentPortal") String siteName,
+      @QueryParam("currentPortal") String currentPortal,
       @QueryParam("language") String language,
       @QueryParam("fileName") String fileName) throws Exception {
     try {
@@ -362,29 +353,29 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    *
    * @param repositoryName The name of repository.
    * @param workspaceName The name of workspace.
+   * @param driverName The name of drive.
    * @param currentFolder The current folder.
+   * @param currentPortal The current portal.
+   * @param userId The user identity.
    * @param jcrPath The path of the file.
    * @param action The action.
    * @param language The language.
    * @param fileName The name of file.
    * @param uploadId The Id of upload.
-   * @param siteName The current portal.
-   * @param userId The user identity.
-   * @param driverName The name of drive.
+   * @param existenceAction Check if an action exist
    * @return The response.
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.DriverConnector.processUpload
+   * @anchor DriverConnector.processUpload
    */
   @GET
   @Path("/uploadFile/control/")
-//  @OutputTransformer(XMLOutputTransformer.class)
   public Response processUpload(
-    @QueryParam("repositoryName") String repositoryName,
+      @QueryParam("repositoryName") String repositoryName,
       @QueryParam("workspaceName") String workspaceName,
       @QueryParam("driverName") String driverName,
       @QueryParam("currentFolder") String currentFolder,
-      @QueryParam("currentPortal") String siteName,
+      @QueryParam("currentPortal") String currentPortal,
       @QueryParam("userId") String userId,
       @QueryParam("jcrPath") String jcrPath,
       @QueryParam("action") String action,
@@ -407,7 +398,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
                                                      Text.escapeIllegalJcrChars(currentFolder));
         return createProcessUploadResponse(workspaceName,
                                            currentFolderNode,
-                                           siteName,
+                                           currentPortal,
                                            userId,
                                            Text.escapeIllegalJcrChars(jcrPath),
                                            action,
@@ -530,10 +521,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * Group drivers.
    *
    * @param driverList the driver list
-   * @param userId the user id
-   *
    * @return the list< drive data>
-   *
    * @throws Exception the exception
    */
   private List<DriveData> groupDrivers(List<DriveData> driverList) throws Exception {
@@ -721,8 +709,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   /**
    * Check if specific node has child which is type of nt:folder or nt:unstructured.
    * 
-   * @param checkNode
-   * @return
+   * @param checkNode The node to be checked
+   * @return True if the folder has some child.
    * @throws Exception
    */
   private boolean hasFolderChild(Node checkNode) throws Exception {
@@ -759,7 +747,6 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * Checks if specific node is document
    *
    * @param node specific Node
-   * @param repositoryName repository Name
    * @return true: is document, false: not document
    * @throws Exception
    */
@@ -848,21 +835,19 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     }
   }
 
-
   /**
-   * Creates the process upload response.
    *
-   * @param workspaceName the workspace name
-   * @param jcrPath The path of the file
-   * @param action the action
-   * @param language the language
-   * @param fileName the file name
-   * @param uploadId the upload id
-   * @param siteName the portal name
-   * @param currentFolderNode the current folder node
-   *
+   * @param workspaceName The workspace name.
+   * @param currentFolderNode The current folder.
+   * @param siteName The portal name.
+   * @param userId  The user id.
+   * @param jcrPath The path of the file.
+   * @param action The action.
+   * @param language The language.
+   * @param fileName Tthe file name.
+   * @param uploadId The Id of upload.
+   * @param existenceAction Check if an action exist.
    * @return the response
-   *
    * @throws Exception the exception
    */
   protected Response createProcessUploadResponse(String workspaceName,
@@ -886,7 +871,6 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   /**
    * Gets the parent folder node.
    *
-   * @param repositoryName the repository name
    * @param workspaceName the workspace name
    * @param driverName the driver name
    * @param currentFolder the current folder

@@ -26,63 +26,68 @@ import javax.jcr.RepositoryException;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
 /**
- * Created by The eXo Platform SARL Author : Ly Dinh Quang
- * quang.ly@exoplatform.com Mar 13, 2009
+ * Supply API to work with the linked node or the link included in a node.
+ *
+ * @LevelAPI Platform
  */
 public interface LinkManager {
 
   /**
-   * Creates a new link, add it to the parent node and returns the link
+   * Create a new link that is added to the parent node and return the link.
    *
    * @param parent The parent node of the link
    * @param linkType The primary node type of the link must be a sub-type of
    *          exo:symlink, the default value is "exo:symlink"
    * @param target The target of the link
+   * @return Node
    * @throws RepositoryException if the link cannot be created for any reason
    */
   public Node createLink(Node parent, String linkType, Node target) throws RepositoryException;
 
   /**
-   * Creates a new node of type exo:symlink, add it to the parent node and
-   * returns the link node
+   * Creates a new node of type exo:symlink, then add it to the parent node and
+   * return the link node.
    *
    * @param parent The parent node of the link to create
    * @param target The target of the link
+   * @return Node
    * @throws RepositoryException if the link cannot be created for any reason
    */
   public Node createLink(Node parent, Node target) throws RepositoryException;
 
   /**
-   * Creates a new link, add it to the parent node and returns the link
+   * Create a new link that is added to the parent node and return the link.
    *
    * @param parent The parent node of the link
    * @param linkType The primary node type of the link must be a sub-type of
    *          exo:symlink, the default value is "exo:symlink"
    * @param target The target of the link
    * @param linkName The name of the link
-   * @return
+   * @return Node
    * @throws RepositoryException if the link cannot be created for any reason
    */
   public Node createLink(Node parent, String linkType, Node target, String linkName)
       throws RepositoryException;
 
   /**
-   * Updates the target node of the given link
+   * Update the target node of the given link.
    *
    * @param link The link node to update
    * @param target The new target of the link
+   * @return Node
    * @throws RepositoryException if the link cannot be updated for any reason
    */
   public Node updateLink(Node link, Node target) throws RepositoryException;
 
   /**
-   * Gets the target node of the given link
+   * Get the target node of the given link.
    *
    * @param link The node of type exo:symlink
-   * @param system Indicates whether the target node must be retrieved using a
-   *          session system or user session in case we cannot use the same
-   *          session as the node link because the target and the link are not
-   *          in the same workspace
+   * @param system Indicate whether the target node must be retrieved using a
+   *               session system or user session in case we cannot use the
+   *               same session as the node link because the target and the
+   *               link are not in the same workspace.
+   * @return Node
    * @throws ItemNotFoundException if the target node cannot be found
    * @throws RepositoryException if an unexpected error occurs while retrieving
    *           the target node
@@ -91,9 +96,10 @@ public interface LinkManager {
       RepositoryException;
 
   /**
-   * Gets the target node of the given link using the user session
+   * Get the target node of the given link using the user session.
    *
    * @param link The node of type exo:symlink
+   * @return Node
    * @throws ItemNotFoundException if the target node cannot be found
    * @throws RepositoryException if an unexpected error occurs while retrieving
    *           the target node
@@ -101,36 +107,36 @@ public interface LinkManager {
   public Node getTarget(Node link) throws ItemNotFoundException, RepositoryException;
 
   /**
-   * Checks if the target node of the given link can be reached using the user
-   * session
+   * Check if the target node of the given link can be reached using the user session.
    *
    * @param link The node of type exo:symlink
+   * @return True if the Target is reachable or False if not
    * @throws RepositoryException if an unexpected error occurs
    */
   public boolean isTargetReachable(Node link) throws RepositoryException;
 
   /**
-   * Checks if the target node of the given link can be reached using the user
-   * session
+   * Check if the target node of the given link can be reached using the user session.
    *
    * @param link The node of type exo:symlink
    * @param system
+   * @return True if the Target is reachable or False if not
    * @throws RepositoryException if an unexpected error occurs
    */
   public boolean isTargetReachable(Node link, boolean system) throws RepositoryException;
 
   /**
-   * Indicates whether the given item is a link
+   * Indicates whether the given item is a link.
    *
-   * @param item the item to test
-   * @return <code>true</code> if the node is a link, <code>false</code>
-   *         otherwise
+   * @param item The item to test
+   * @return True if the node is a link or False otherwise
+   *
    * @throws RepositoryException if an unexpected error occurs
    */
   public boolean isLink(Item item) throws RepositoryException;
 
   /**
-   * Gives the primary node type of the target
+   * Return the primary node type of the target.
    *
    * @param link The node of type exo:symlink
    * @return the primary node type of the target
@@ -139,7 +145,7 @@ public interface LinkManager {
   public String getTargetPrimaryNodeType(Node link) throws RepositoryException;
   
   /**
-   * Gives all links of the given node
+   * Return all links of the given node.
    *
    * @param targetNode The target node to get links
    * @param linkType The type of link to get
@@ -149,7 +155,7 @@ public interface LinkManager {
   public List<Node> getAllLinks(Node targetNode, String linkType) throws Exception;
   
   /**
-   * Gives all links of the given node
+   * Return all links of the given node
    *
    * @param targetNode The target node to get links
    * @param linkType The type of link to get

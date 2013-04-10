@@ -22,13 +22,14 @@ import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.groovyscript.text.TemplateService;
 import org.exoplatform.services.cms.metadata.MetadataService;
+import org.exoplatform.wcm.webui.Utils;
+import org.exoplatform.wcm.webui.form.UIFormInputSetWithNoLabel;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
-import org.exoplatform.webui.form.UIFormInputSet;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTabPane;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
@@ -69,7 +70,6 @@ public class UIMetadataForm extends UIFormTabPane implements UISelectable {
 
   private boolean isAddNew_ = false ;
   private String metadataName_ ;
-  private String repository_ ;
   private String workspaceName_ ;
 
   public UIMetadataForm() throws Exception {
@@ -77,15 +77,15 @@ public class UIMetadataForm extends UIFormTabPane implements UISelectable {
     UIFormInputSetWithAction uiMetadataType = new UIFormInputSetWithAction(METADATA_TAB) ;
     uiMetadataType.addUIFormInput(new UIFormStringInput(METADATA_NAME,METADATA_NAME, null)) ;
     uiMetadataType.addUIFormInput(new UIFormStringInput(VIEW_PERMISSION, VIEW_PERMISSION, null).
-                                  addValidator(MandatoryValidator.class).setEditable(false)) ;
-    uiMetadataType.addUIFormInput(new UIFormStringInput(METADATA_LABEL,METADATA_LABEL, null)) ;
+                                  addValidator(MandatoryValidator.class).setDisabled(true)) ;
+    uiMetadataType.addUIFormInput(new UIFormStringInput(METADATA_LABEL,METADATA_LABEL, null));
     uiMetadataType.setActionInfo(VIEW_PERMISSION, new String[] {"AddPermission"}) ;
     addUIComponentInput(uiMetadataType) ;
     setSelectedTab(uiMetadataType.getId()) ;
-    UIFormInputSet uiDialogTab = new UIFormInputSet(DIALOG_TAB) ;
+    UIFormInputSetWithNoLabel uiDialogTab = new UIFormInputSetWithNoLabel(DIALOG_TAB) ;
     uiDialogTab.addUIFormInput(new UIFormTextAreaInput(DIALOG_TEMPLATE, DIALOG_TEMPLATE, null)) ;
     addUIComponentInput(uiDialogTab) ;
-    UIFormInputSet uiViewTab = new UIFormInputSet(VIEW_TAB) ;
+    UIFormInputSetWithNoLabel uiViewTab = new UIFormInputSetWithNoLabel(VIEW_TAB) ;
     uiViewTab.addUIFormInput(new UIFormTextAreaInput(VIEW_TEMPLATE, VIEW_TEMPLATE, null)) ;
     addUIComponentInput(uiViewTab) ;
     setActions(new String[] {"Save", "Cancel"}) ;
@@ -100,7 +100,6 @@ public class UIMetadataForm extends UIFormTabPane implements UISelectable {
   public void update(String metadata)throws Exception{
     metadataName_ = metadata ;
     MetadataService metadataService = getApplicationComponent(MetadataService.class) ;
-    repository_ = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
     workspaceName_ = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceWorkspace() ;
     getUIStringInput(METADATA_NAME).setValue(metadata) ;
     getUIStringInput(METADATA_LABEL).setValue(metadataService.getMetadataLabel(metadata)) ;
@@ -125,7 +124,7 @@ public class UIMetadataForm extends UIFormTabPane implements UISelectable {
       if(viewTemplate == null) viewTemplate = "" ;
       if(!metadataService.hasMetadata(uiForm.metadataName_)) uiForm.isAddNew_ = true ;
       else uiForm.isAddNew_ = false ;
-      String metaLabel = uiForm.getUIStringInput(METADATA_LABEL).getValue();
+      String metaLabel = Utils.sanitize(uiForm.getUIStringInput(METADATA_LABEL).getValue());
       JCRResourceResolver resourceResolver = new JCRResourceResolver(uiForm.workspaceName_);
       TemplateService templateService = uiForm.getApplicationComponent(TemplateService.class) ;
       String path = metadataService.addMetadata(uiForm.metadataName_,

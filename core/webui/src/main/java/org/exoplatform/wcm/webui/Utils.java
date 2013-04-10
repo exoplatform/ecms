@@ -33,6 +33,7 @@ import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.container.PortalContainer;
+import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.portal.application.PortalRequestContext;
@@ -918,7 +919,8 @@ public class Utils {
 
   public static String sanitize(String value) {
     try {
-      Policy policy = Policy.getInstance(POLICY_FILE_LOCATION);
+      ConfigurationManager configMan = WCMCoreUtils.getService(ConfigurationManager.class);
+      Policy policy = Policy.getInstance(configMan.getResource(POLICY_FILE_LOCATION));
       AntiSamy as = new AntiSamy();
       CleanResults cr = as.scan(value, policy);
       value = cr.getCleanHTML();
@@ -952,7 +954,6 @@ public class Utils {
    * @param strQuery
    * @param SQLLanguage
    * @return true as valid query, false as Invalid
-   * @author vinh_nguyen from ECMS
    */
   public static boolean checkQuery(String workspace, String strQuery, String SQLLanguage) {
     try {

@@ -28,27 +28,6 @@
   import org.exoplatform.services.wcm.publication.WCMPublicationService;
   // Content view
   
-   /**
-    * Finds and returns the date information of the given node.
-    *
-    * @return DateFormat Live date if the current state is live. Otherwise, the
-    * lastest modified date.
-    */
-   public Date getDate(Node node, String status) {
-     Date date = null;
-     try {
-       if("live".equals(status)) {
-         date = node.getProperty("publication:liveDate").getDate().getTime();
-       } else if ("draft".equals(status) || "obsolete".equals(status)) {
-         date = uicomponent.getDateModified(node); 
-       } else {
-         date = uicomponent.getDateCreated(node);
-       }
-     } catch (Exception e) {
-       date = uicomponent.getDateCreated(node);
-     }
-     return date;
-   }
   def linkManager = WCMCoreUtils.getService(LinkManager.class);  
   def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
   def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
@@ -258,7 +237,7 @@
           def name = nodePath.substring(nodePath.lastIndexOf("/") + 1, nodePath.length()) ;
           name = ContentReader.getXSSCompatibilityContent(name);         
           //   Datetime
-          def date = getDate(data, status);
+          def date = uicomponent.getDateCreated(data);
           def datetime = dateFormat.format(date);
           
           //   Author
@@ -283,8 +262,8 @@
             permlink = permLinkComponent.getUIExtensionName();
             strActs +=  "<li class='menuItem'>";
             strActs +=  "<a exo:attr='ViewDocument' style='display: block;' href=\"" + permLinkComponent.getPermlink(data) + "\" target='_new' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\">" ;
-            strActs +=  " <i class='uiIconEcmsViewDocument'>" ;
-            strActs +=  " </i>";            
+            strActs +=  " <i class='uiIconEcmsViewDocument uiIconEcmsLightGrey'>" ;
+            strActs +=  " </i> ";            
             strActs +=    _ctx.appRes("ECMContextMenu.event." + permlink);
             strActs +=  "</a>";
             strActs += "</li>";
@@ -303,7 +282,7 @@
               String link ="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('','"+ portalName +"','"+ restContextName +"','"+repository+"','"+ preferenceWS+ "','" + webDavPath +"','"+mimeType+"')";
               strActs +=  "<li class='menuItem'>";
               strActs +=    "<a exo:attr='Download' style='display: block;' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\" href=\"" + link + "\" >" ;          
-              strActs +=    "  <i class=\"uiIconDownload\"></i>" + _ctx.appRes("UITreeExplorer.label.webDavView");
+              strActs +=    "  <i class=\"uiIconDownload uiIconLightGray\"></i> " + _ctx.appRes("UITreeExplorer.label.webDavView");
               strActs +=    "</a>" ;            
               strActs += "</li>";
             } else {
@@ -313,7 +292,7 @@
                 String link = "/" + restContextName + "/private/jcr/" + repository+ "/" + preferenceWS + Utils.formatNodeName(dataTarget.getPath());
                 strActs +=  "<li class='menuItem'>";
                 strActs +=    "<a exo:attr='Download' style='display: block; {behavior: url(#default#AnchorClick);}' onclick=\"eXo.ecm.WCMUtils.hideContextMenu(this);window.open('" +link + "');\" target='_new' folder=\"" + link +"\">" ;          
-                strActs +=    "  <i class=\"uiIconDownload\"></i>" + _ctx.appRes("UITreeExplorer.label.webDavView");
+                strActs +=    "  <i class=\"uiIconDownload uiIconLightGray\"></i> " + _ctx.appRes("UITreeExplorer.label.webDavView");
                 strActs +=    "</a>" ;
                 strActs += "</li>";
               }
@@ -328,7 +307,7 @@
               params = [new Parameter("workspaceName", preferenceWS), new Parameter("actionName",Utils.formatNodeName(act.getName()))] ;
               strActs +=  "<li class='menuItem'>";
               strActs += "<a exo:attr=\"" +  Utils.getNodeTypeIcon(act,"") + "\" style='display: block;' onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + uiCustomActionComponent.event("Custom",Utils.formatNodeName(nodePath),params) + "\">" ;
-              strActs += "  <i class=\"" + Utils.getNodeTypeIcon(act, "uiIconEcms") + "\"></i>$actName" ;
+              strActs += "  <i class=\"" + Utils.getNodeTypeIcon(act, "uiIconEcms") + "\"></i> $actName" ;
               strActs += "</a>" ;
               strActs += "</li>";
             }            
@@ -338,8 +317,8 @@
           	String clipboardLink = serverUrl + "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + data.getPath();
           	strActs +=  "<li class='menuItem'>";
           	strActs +=  "<a exo:attr='CopyUrlToClipboard' style='display: block;' id='clip_button1$i' data-clipboard-text='$clipboardLink' path='$clipboardLink' onclick=\"eXo.ecm.ECMUtils.pushToClipboard(event,'$clipboardLink');\">" ;
-          	strActs +=  " <i class='uiIconEcmsCopyUrlToClipboard'>" ;
-          	strActs +=  " </i>" ;
+          	strActs +=  " <i class='uiIconEcmsCopyUrlToClipboard uiIconEcmsLightGrey'>" ;
+          	strActs +=  " </i> " ;
             strActs +=    _ctx.appRes("ECMContextMenu.event.GetURL");
             strActs +=  "</a>";
             strActs += "</li>";

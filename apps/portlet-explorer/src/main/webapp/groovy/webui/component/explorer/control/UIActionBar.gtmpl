@@ -19,6 +19,7 @@
   
   def uiPortlet = uicomponent.getAncestorOfType(UIJCRExplorerPortlet.class);
   def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
+  def uiDriveArea = uiExplorer.getChild(UIWorkingArea.class).getChild(UIDrivesArea.class);
   def uniqueId  = new Date().getTime();
   def rcontext = _ctx.getRequestContext() ;
   def uiFormId = uicomponent.id;
@@ -132,14 +133,26 @@
   		<div class="uiViewBarContainer clearfix" id="UIViewBarContainer">
   		  <%
   		  if (uicomponent.hasBackButton()) {%>
-  		  <a class ="URLBackToButton" href="<%=uicomponent.event("BackTo")%>"></a>
+  		  <a class ="urlBackToButton actionIcon pull-right" href="<%=uicomponent.event("BackTo")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIViewBar.label.backTo")%>"><i class="uiIconEcmsReturn uiIconEcmsLightGrey"></i></a>
   		  <%}%>  	      
   	    <a class="setupPreferencesButton actionIcon pull-right" href="<%=uicomponent.event("Preferences")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIViewBar.label.setUpBrowser")%>"><i class="uiIconSetting uiIconLightGray"></i></a>
 
-			 <%if (!uicomponent.isDirectlyDrive()) {%>
-  	     <a class="<%=getCSSClassOfDrivesButton()%> actionIcon pull-right" href="<%=uicomponent.event("ShowDrives")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDrivesArea.DrivesArea.ShowDrives")%>"><i class="uiIconEcmsGeneralDrive"></i> <%=uicomponent.getDriveLabel();%> <i class="uiIconArrowDown"></i></a>
+		   <%if (!uicomponent.isDirectlyDrive()) {
+				   def styleDrive = "";
+				   def currentDrive = uiExplorer.getDriveData();
+				   def groupDrives = uiDriveArea.groupDrives();
+				   def personalDrives = uiDriveArea.personalDrives();
+				   if (groupDrives.contains(currentDrive)) {
+				     styleDrive = "Group";
+				   } else if (personalDrives.contains(currentDrive)) {
+				     styleDrive = "Personal";
+				   } else {
+				     styleDrive = currentDrive.getName();
+				   }
+				   styleDrive = styleDrive.replace(" ","");
+			 %>
+	  	     <a class="<%=getCSSClassOfDrivesButton()%> actionIcon pull-right" href="<%=uicomponent.event("ShowDrives")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDrivesArea.DrivesArea.ShowDrives")%>"><i class="uiIconEcmsGeneralDrive uiIconEcms16x16Drive${styleDrive}"></i> <%=uicomponent.getDriveLabel();%> <i class="uiIconArrowDown"></i></a>
   	   <%}%>
-  			
   		</div>
 		</div>
 	</div>
@@ -148,8 +161,8 @@
 <% } else if (uicomponent.hasBackButton()) {%>
   <% uiform.begin() %>
     <div class="uiActionBar" id="$uicomponent.id">
-      <div class="UIViewBarContainer" id="UIViewBarContainer">
-        <a class ="URLBackToButton" href="<%=uicomponent.event("BackTo")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIViewBar.title.backTo")%>"></a>
+      <div class="uiViewBarContainer clearfix" id="UIViewBarContainer">
+        <a class ="urlBackToButton actionIcon pull-right" href="<%=uicomponent.event("BackTo")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIViewBar.title.backTo")%>"><i class="uiIconSetting uiIconLightGray"></i></a>
       </div>
     </div>
   <% uiform.end() %>
@@ -161,16 +174,16 @@
 
 
 
-<div style="height:0px;width:0px">
+<div style="height:0px;width:0px;position:absolute;z-index:-1">
   <input  style="height:0px;width:0px" id="MultiUploadInputFiles" type="file" multiple="multiple" onchange="eXo.ecm.MultiUpload.handleFiles(this.files);eXo.ecm.MultiUpload.openMultiUploadBox();"/>
 </div>
 
-<div style="height:0px;width:0px">
+<div style="height:0px;width:0px;position:absolute;z-index:-1">
 <iframe id="iFrameUpload" name="iFrameUpload" class="iFrameUpload" frameborder="0px" border="0px" style="width: 0px; height:0px">
 </iframe>
 </div>
 
-<div style="height:0px;width:0px">
+<div style="height:0px;width:0px;position:absolute;z-index:-1">
 <xmp id="iContentUpLoad" style="display:none">
 <html style="padding: 0px; margin: 0px;">
   <head>
@@ -195,4 +208,5 @@
 </xmp>
 
 </div>
+
 

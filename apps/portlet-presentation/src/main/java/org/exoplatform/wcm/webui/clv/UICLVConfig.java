@@ -55,13 +55,14 @@ import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
+import org.exoplatform.webui.form.UIFormInputSet;
 import org.exoplatform.webui.form.UIFormRadioBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
+import org.exoplatform.webui.form.UIFormTabPane;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
 import org.exoplatform.webui.form.ext.UIFormInputSetWithAction;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
 import org.exoplatform.webui.form.validator.PositiveNumberFormatValidator;
 
@@ -74,20 +75,23 @@ import org.exoplatform.webui.form.validator.PositiveNumberFormatValidator;
  */
 @ComponentConfig(
   lifecycle = UIFormLifecycle.class,
-  template = "app:/groovy/ContentListViewer/UICLVConfig.gtmpl",
+  template = "app:/groovy/ContentListViewer/UICLVConfig.gtmpl",  
   events = {
     @EventConfig(listeners = UICLVConfig.SaveActionListener.class),
     @EventConfig(listeners = UICLVConfig.CancelActionListener.class, phase = Phase.DECODE),
-    @EventConfig(listeners = UICLVConfig.SelectFolderPathActionListener.class, phase = Phase.DECODE),
+    @EventConfig(listeners = UICLVConfig.AddPathActionListener.class, phase = Phase.DECODE),
     @EventConfig(listeners = UICLVConfig.IncreaseActionListener.class, phase = Phase.DECODE),
     @EventConfig(listeners = UICLVConfig.DecreaseActionListener.class, phase = Phase.DECODE),
     @EventConfig(listeners = UICLVConfig.SelectTargetPageActionListener.class, phase = Phase.DECODE),
     @EventConfig(listeners = UICLVConfig.ShowAdvancedBlockActionListener.class, phase = Phase.DECODE)
   }
 )
-public class UICLVConfig extends UIForm  implements UISelectable {
+public class UICLVConfig extends UIFormTabPane  implements UISelectable {
 
   private static final Log LOG  = ExoLogger.getLogger(UICLVConfig.class.getName());
+  final static public String CONTENT_TAB = "clvContentTab" ;
+  final static public String DISPLAY_TAB = "clvDisplayTab" ;
+  final static public String ADVANCED_TAB = "clvAdvancedTab" ;
 
   /** The Constant DISPLAY_MODE_FORM_RADIO_BOX_INPUT. */
   public static final String DISPLAY_MODE_FORM_RADIO_BOX_INPUT       = "UICLVConfigDisplayModeFormRadioBoxInput";
@@ -253,7 +257,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
    * @return the items
    */
   public List<String> getItems() {
-    String displayMode = ((UIFormRadioBoxInput) getChildById(UICLVConfig.DISPLAY_MODE_FORM_RADIO_BOX_INPUT)).getValue();
+    String displayMode = ((UIFormRadioBoxInput) findComponentById(UICLVConfig.DISPLAY_MODE_FORM_RADIO_BOX_INPUT)).getValue();
     String itemPath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);
     if (items == null && UICLVPortlet.DISPLAY_MODE_MANUAL.equals(displayMode) && itemPath != null) {
       if(itemPath.contains(";")) {
@@ -282,6 +286,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
    * @throws Exception the exception
    */
   public UICLVConfig() throws Exception {
+  	super("UICLVConfig");
     PortletPreferences portletPreferences = ((PortletRequestContext) WebuiRequestContext.getCurrentInstance()).getRequest()
                                                                                                               .getPreferences();
     appType = portletPreferences.getValue(UICLVPortlet.PREFERENCE_APPLICATION_TYPE, null);
@@ -336,10 +341,11 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     /** ITEM PATH */
     UIFormStringInput itemPathInput =
       new UIFormStringInput(ITEM_PATH_FORM_STRING_INPUT, ITEM_PATH_FORM_STRING_INPUT, itemPath);
-    itemPathInput.setEditable(false);
+    itemPathInput.setReadOnly(true);
     itemPathInput.addValidator(MandatoryValidator.class);
+    
     UIFormInputSetWithAction itemPathInputSet = new UIFormInputSetWithAction(ITEM_PATH_FORM_INPUT_SET);
-    itemPathInputSet.setActionInfo(ITEM_PATH_FORM_STRING_INPUT, new String[] { "SelectFolderPath" }) ;
+    itemPathInputSet.setActionInfo(ITEM_PATH_FORM_STRING_INPUT, new String[] { "AddPath" }) ;
     itemPathInputSet.addUIFormInput(itemPathInput);
 
     /** ORDER BY */
@@ -366,10 +372,8 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     UIFormStringInput headerInput = new UIFormStringInput(HEADER_FORM_STRING_INPUT, HEADER_FORM_STRING_INPUT, header);
 
     /** AUTOMATIC DETECTION */
-    UIFormCheckBoxInput<Boolean> showAutomaticDetectionCheckBox =
-      new UIFormCheckBoxInput<Boolean>(SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT,
-          SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT,
-          null);
+    UICheckBoxInput showAutomaticDetectionCheckBox = new UICheckBoxInput(SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT,
+                                                                         SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT, null);
     showAutomaticDetectionCheckBox.setChecked(showAutomaticDetection);
 
     List<SelectItemOption<String>> formViewerTemplateList = new ArrayList<SelectItemOption<String>>();
@@ -410,57 +414,48 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     itemsPerPageStringInput.setMaxLength(3);
 
     /** SHOW TITLE */
-    UIFormCheckBoxInput<Boolean> showTitleCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_TITLE_FORM_CHECKBOX_INPUT,
-                                                                                      SHOW_TITLE_FORM_CHECKBOX_INPUT,
-                                                                                      null);
+    UICheckBoxInput showTitleCheckbox = new UICheckBoxInput(SHOW_TITLE_FORM_CHECKBOX_INPUT,
+                                                           SHOW_TITLE_FORM_CHECKBOX_INPUT, null);
     showTitleCheckbox.setChecked(showTitle);
 
     /** SHOW HEADER */
-    UIFormCheckBoxInput<Boolean> showHeaderCheckBox = new UIFormCheckBoxInput<Boolean>(SHOW_HEADER_FORM_CHECKBOX_INPUT,
-                                                                                       SHOW_HEADER_FORM_CHECKBOX_INPUT,
-                                                                                       null);
+    UICheckBoxInput showHeaderCheckBox = new UICheckBoxInput(SHOW_HEADER_FORM_CHECKBOX_INPUT,
+                                                             SHOW_HEADER_FORM_CHECKBOX_INPUT, null);
     showHeaderCheckBox.setChecked(showHeader);
 
     /** SHOW REFRESH */
-    UIFormCheckBoxInput<Boolean> showRefreshCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_REFRESH_FORM_CHECKBOX_INPUT,
-                                                                                        SHOW_REFRESH_FORM_CHECKBOX_INPUT,
-                                                                                        null);
+    UICheckBoxInput showRefreshCheckbox = new UICheckBoxInput(SHOW_REFRESH_FORM_CHECKBOX_INPUT,
+                                                              SHOW_REFRESH_FORM_CHECKBOX_INPUT, null);
     showRefreshCheckbox.setChecked(showRefresh);
 
     /** SHOW_IMAGE */
-    UIFormCheckBoxInput<Boolean> showImageCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT,
-                                                                                      SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT,
-                                                                                      null);
+    UICheckBoxInput showImageCheckbox = new UICheckBoxInput(SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT,
+                                                            SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT, null);
     showImageCheckbox.setChecked(showImage);
 
     /** SHOW DATE CREATED */
-    UIFormCheckBoxInput<Boolean> showDateCreatedCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT,
-                                                                                            SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT,
-                                                                                            null);
+    UICheckBoxInput showDateCreatedCheckbox = new UICheckBoxInput(SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT,
+                                                                  SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT, null);
     showDateCreatedCheckbox.setChecked(showDateCreated);
 
     /** SHOW MORE LINK */
-    UIFormCheckBoxInput<Boolean> showMoreLinkCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_READMORE_FORM_CHECKBOX_INPUT,
-                                                                                         SHOW_READMORE_FORM_CHECKBOX_INPUT,
-                                                                                         null);
+    UICheckBoxInput showMoreLinkCheckbox = new UICheckBoxInput(SHOW_READMORE_FORM_CHECKBOX_INPUT,
+                                                               SHOW_READMORE_FORM_CHECKBOX_INPUT, null);
     showMoreLinkCheckbox.setChecked(showReadmore);
 
     /** SHOW SUMMARY */
-    UIFormCheckBoxInput<Boolean> showSummaryCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_SUMMARY_FORM_CHECKBOX_INPUT,
-                                                                                        SHOW_SUMMARY_FORM_CHECKBOX_INPUT,
-                                                                                        null);
+    UICheckBoxInput showSummaryCheckbox = new UICheckBoxInput(SHOW_SUMMARY_FORM_CHECKBOX_INPUT,
+                                                              SHOW_SUMMARY_FORM_CHECKBOX_INPUT, null);
     showSummaryCheckbox.setChecked(showSummary);
 
     /** SHOW LINK */
-    UIFormCheckBoxInput<Boolean> showLinkCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_LINK_FORM_CHECKBOX_INPUT,
-                                                                                     SHOW_LINK_FORM_CHECKBOX_INPUT,
-                                                                                     null);
+    UICheckBoxInput showLinkCheckbox = new UICheckBoxInput(SHOW_LINK_FORM_CHECKBOX_INPUT,
+                                                           SHOW_LINK_FORM_CHECKBOX_INPUT, null);
     showLinkCheckbox.setChecked(showLink);
 
     /** SHOW RSS LINK */
-    UIFormCheckBoxInput<Boolean> showRssLinkCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_RSSLINK_FORM_CHECKBOX_INPUT,
-                                                                                        SHOW_RSSLINK_FORM_CHECKBOX_INPUT,
-                                                                                        null);
+    UICheckBoxInput showRssLinkCheckbox = new UICheckBoxInput(SHOW_RSSLINK_FORM_CHECKBOX_INPUT,
+                                                              SHOW_RSSLINK_FORM_CHECKBOX_INPUT, null);
     showRssLinkCheckbox.setChecked(showRssLink);
 
     /** CONTEXTUAL FOLDER */
@@ -483,7 +478,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
                                                             TARGET_PAGE_FORM_STRING_INPUT,
                                                             targetPage);
     basePathInput.setValue(targetPage);
-    basePathInput.setEditable(false);
+    basePathInput.setReadOnly(true);
     targetPageInputSet.setActionInfo(TARGET_PAGE_FORM_STRING_INPUT, new String[] {"SelectTargetPage"}) ;
     targetPageInputSet.addUIFormInput(basePathInput);
 
@@ -521,51 +516,58 @@ public class UICLVConfig extends UIForm  implements UISelectable {
                                                                showScvWith);
     if (appType.equals(CATOGORIES_NAVIGATION_TYPE)) {
       //Disable option
-      displayModeRadioBoxInput.setEnable(false);
-      showAutomaticDetectionCheckBox.setEnable(false);
-      showImageCheckbox.setEnable(false);
-      showSummaryCheckbox.setEnable(false);
-      showDateCreatedCheckbox.setEnable(false);
-      showLinkCheckbox.setEnable(false);
-      showRefreshCheckbox.setEnable(false);
-      showMoreLinkCheckbox.setEnable(false);
-      showRssLinkCheckbox.setEnable(false);
-      //contextualFolderRadioBoxInput.setEnable(false);
-      showScvWithInput.setEnable(false);
+      displayModeRadioBoxInput.setDisabled(true);
+      showAutomaticDetectionCheckBox.setDisabled(true);
+      showImageCheckbox.setDisabled(true);
+      showSummaryCheckbox.setDisabled(true);
+      showDateCreatedCheckbox.setDisabled(true);
+      showLinkCheckbox.setDisabled(true);
+      showRefreshCheckbox.setDisabled(true);
+      showMoreLinkCheckbox.setDisabled(true);
+      showRssLinkCheckbox.setDisabled(true);
+      showScvWithInput.setDisabled(true);
     }
-    addChild(displayModeRadioBoxInput);
-    addChild(itemPathInputSet);
-    addChild(orderBySelectBox);
-    addChild(orderTypeRadioBoxInput);
+    UIFormInputSet uiCLVContentTab = new UIFormInputSet(CONTENT_TAB) ;
+    uiCLVContentTab.addUIFormInput(displayModeRadioBoxInput);
+    uiCLVContentTab.addUIFormInput((UIFormInputSet)itemPathInputSet);
+    uiCLVContentTab.addUIFormInput(orderBySelectBox);
+    uiCLVContentTab.addUIFormInput(orderTypeRadioBoxInput);
+    setSelectedTab(CONTENT_TAB);
+    addUIComponentInput(uiCLVContentTab) ;
+    
 
-    addChild(headerInput);
-    addChild(showAutomaticDetectionCheckBox);
-    addChild(formViewTemplateSelector);
-    addChild(paginatorTemplateSelector);
-    addChild(itemsPerPageStringInput);
+    UIFormInputSet uiCLVDisplayTab = new UIFormInputSet(DISPLAY_TAB) ;
+    uiCLVDisplayTab.addUIFormInput(headerInput);
+    uiCLVDisplayTab.addUIFormInput(showAutomaticDetectionCheckBox);
+    uiCLVDisplayTab.addUIFormInput(formViewTemplateSelector);
+    uiCLVDisplayTab.addUIFormInput(paginatorTemplateSelector);
+    uiCLVDisplayTab.addUIFormInput(itemsPerPageStringInput);
+    
+    uiCLVDisplayTab.addUIFormInput(showTitleCheckbox);
+    uiCLVDisplayTab.addUIFormInput(showHeaderCheckBox);
+    uiCLVDisplayTab.addUIFormInput(showRefreshCheckbox);
+    uiCLVDisplayTab.addUIFormInput(showImageCheckbox);
+    uiCLVDisplayTab.addUIFormInput(showDateCreatedCheckbox);
+    uiCLVDisplayTab.addUIFormInput(showMoreLinkCheckbox);
+    uiCLVDisplayTab.addUIFormInput(showSummaryCheckbox);
+    uiCLVDisplayTab.addUIFormInput(showLinkCheckbox);
+    uiCLVDisplayTab.addUIFormInput(showRssLinkCheckbox);
+    addUIComponentInput(uiCLVDisplayTab) ;
+    
+    
+    UIFormInputSet uiCLVAdvancedTab = new UIFormInputSet(ADVANCED_TAB) ;
+    uiCLVAdvancedTab.addUIFormInput(contextualFolderRadioBoxInput);
+    uiCLVAdvancedTab.addUIFormInput(showClvByInput);
+    uiCLVAdvancedTab.addUIFormInput((UIFormInputSet)targetPageInputSet);
+    uiCLVAdvancedTab.addUIFormInput(showScvWithInput);
+    uiCLVAdvancedTab.addUIFormInput(cacheEnableRadioBoxInput);
 
-    addChild(showTitleCheckbox);
-    addChild(showHeaderCheckBox);
-    addChild(showRefreshCheckbox);
-
-    addChild(showImageCheckbox);
-    addChild(showDateCreatedCheckbox);
-    addChild(showMoreLinkCheckbox);
-
-    addChild(showSummaryCheckbox);
-    addChild(showLinkCheckbox);
-    addChild(showRssLinkCheckbox);
-
-    addChild(contextualFolderRadioBoxInput);
-    addChild(showClvByInput);
-    addChild(targetPageInputSet);
-    addChild(showScvWithInput);
-    addChild(cacheEnableRadioBoxInput);
-
+    
     if (this.isContentListByQuery()) {
-      addChild(workspaceSelector);
-      addChild(queryTextAreaInput);
+    	uiCLVAdvancedTab.addUIFormInput(workspaceSelector);
+    	uiCLVAdvancedTab.addUIFormInput(queryTextAreaInput);     
     }
+    addUIComponentInput(uiCLVAdvancedTab) ;
 
     if ((contextualFolderMode != null && contextualFolderMode.equals(UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER_ENABLE))
         || this.isContentListByQuery()) {
@@ -606,7 +608,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
 
   /**
    *
-   * @return
+   * @return True if is a CLV by Query
    */
   public boolean isContentListByQuery() {
     return appType.equals(UICLVPortlet.APPLICATION_CLV_BY_QUERY);
@@ -618,7 +620,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     if (selectField != null && value != null) {
       String sValue = (String) value;
       String titles="";
-      String displayMode = ((UIFormRadioBoxInput) getChildById(UICLVConfig.DISPLAY_MODE_FORM_RADIO_BOX_INPUT)).getValue();
+      String displayMode = ((UIFormRadioBoxInput) findComponentById(UICLVConfig.DISPLAY_MODE_FORM_RADIO_BOX_INPUT)).getValue();
       if (ITEM_PATH_FORM_STRING_INPUT.equals(selectField) && UICLVPortlet.DISPLAY_MODE_MANUAL.equals(displayMode)) {
         items = Arrays.asList(sValue.split(";"));
         titles = getTitles(sValue);
@@ -669,8 +671,8 @@ public class UICLVConfig extends UIForm  implements UISelectable {
 
  /**
    *
-   * @param itemPath
-   * @return
+   * @param itemPath The path
+   * @return The title
    * @throws RepositoryException
    */
   private String getTitle(String itemPath) throws RepositoryException {
@@ -722,8 +724,6 @@ public class UICLVConfig extends UIForm  implements UISelectable {
    * component's <code>addSaveActionListener<code> method. When
    * the saveAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see SaveActionEvent
    */
   public static class SaveActionListener extends EventListener<UICLVConfig> {
 
@@ -734,8 +734,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       UICLVConfig clvConfig = event.getSource();
 
       /** GET VALUES FROM UIFORM */
-      String displayMode = ((UIFormRadioBoxInput) clvConfig.
-          getChildById(UICLVConfig.DISPLAY_MODE_FORM_RADIO_BOX_INPUT)).getValue();
+      String displayMode = ((UIFormRadioBoxInput) clvConfig.findComponentById(UICLVConfig.DISPLAY_MODE_FORM_RADIO_BOX_INPUT)).getValue();
       String itemPath = clvConfig.getSavedPath();
 
       if (itemPath == null || itemPath.length() == 0
@@ -750,39 +749,38 @@ public class UICLVConfig extends UIForm  implements UISelectable {
         return;
       }
       String orderBy = clvConfig.getUIFormSelectBox(ORDER_BY_FORM_SELECT_BOX).getValue();
-      String orderType = ((UIFormRadioBoxInput) clvConfig.getChildById(UICLVConfig.ORDER_TYPE_FORM_RADIO_BOX_INPUT)).getValue();
+      String orderType = ((UIFormRadioBoxInput) clvConfig.findComponentById(UICLVConfig.ORDER_TYPE_FORM_RADIO_BOX_INPUT)).getValue();
 
       String header = clvConfig.getUIStringInput(UICLVConfig.HEADER_FORM_STRING_INPUT).getValue();
       if (header == null) header = "";
-      String showAutomaticDetection = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT)
+      String showAutomaticDetection = clvConfig.getUICheckBoxInput(UICLVConfig.SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT)
                                                .isChecked() ? "true" : "false";
       String displayTemplate = clvConfig.getUIFormSelectBox(UICLVConfig.DISPLAY_TEMPLATE_FORM_SELECT_BOX).getValue();
       String paginatorTemplate = clvConfig.getUIFormSelectBox(UICLVConfig.PAGINATOR_TEMPLATE_FORM_SELECT_BOX).getValue();
       String itemsPerPage = clvConfig.getUIStringInput(UICLVConfig.ITEMS_PER_PAGE_FORM_STRING_INPUT).getValue();
 
-      String showTitle = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_TITLE_FORM_CHECKBOX_INPUT)
+      String showTitle = clvConfig.getUICheckBoxInput(UICLVConfig.SHOW_TITLE_FORM_CHECKBOX_INPUT)
                                   .isChecked() ? "true" : "false";
-      String showHeader = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_HEADER_FORM_CHECKBOX_INPUT)
+      String showHeader = clvConfig.getUICheckBoxInput(UICLVConfig.SHOW_HEADER_FORM_CHECKBOX_INPUT)
                                    .isChecked() ? "true" : "false";
-      String showRefresh = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_REFRESH_FORM_CHECKBOX_INPUT)
+      String showRefresh = clvConfig.getUICheckBoxInput(UICLVConfig.SHOW_REFRESH_FORM_CHECKBOX_INPUT)
                                     .isChecked() ? "true" : "false";
 
-      String showImage = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT)
+      String showImage = clvConfig.getUICheckBoxInput(UICLVConfig.SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT)
                                   .isChecked() ? "true" : "false";
-      String showDateCreated = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT)
+      String showDateCreated = clvConfig.getUICheckBoxInput(UICLVConfig.SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT)
                                         .isChecked() ? "true" : "false";
-      String showMoreLink = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_READMORE_FORM_CHECKBOX_INPUT)
+      String showMoreLink = clvConfig.getUICheckBoxInput(UICLVConfig.SHOW_READMORE_FORM_CHECKBOX_INPUT)
                                      .isChecked() ? "true" : "false";
 
-      String showSummary = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_SUMMARY_FORM_CHECKBOX_INPUT)
+      String showSummary = clvConfig.getUICheckBoxInput(UICLVConfig.SHOW_SUMMARY_FORM_CHECKBOX_INPUT)
                                     .isChecked() ? "true" : "false";
-      String showLink = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_LINK_FORM_CHECKBOX_INPUT)
+      String showLink = clvConfig.getUICheckBoxInput(UICLVConfig.SHOW_LINK_FORM_CHECKBOX_INPUT)
                                  .isChecked() ? "true" : "false";
-      String showRssLink = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_RSSLINK_FORM_CHECKBOX_INPUT)
+      String showRssLink = clvConfig.getUICheckBoxInput(UICLVConfig.SHOW_RSSLINK_FORM_CHECKBOX_INPUT)
                                     .isChecked() ? "true" : "false";
 
-      String contextualFolderMode = ((UIFormRadioBoxInput) clvConfig.
-          getChildById(UICLVConfig.CONTEXTUAL_FOLDER_RADIOBOX_INPUT)).getValue();
+      String contextualFolderMode = ((UIFormRadioBoxInput) clvConfig.findComponentById(UICLVConfig.CONTEXTUAL_FOLDER_RADIOBOX_INPUT)).getValue();
       String showClvBy = clvConfig.getUIStringInput(UICLVConfig.SHOW_CLV_BY_STRING_INPUT).getValue();
       if (showClvBy == null || showClvBy.length() == 0)
         showClvBy = UICLVPortlet.DEFAULT_SHOW_CLV_BY;
@@ -792,7 +790,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
         showScvWith = UICLVPortlet.DEFAULT_SHOW_SCV_WITH;
 
       String cacheEnabled = ((UIFormRadioBoxInput) clvConfig.
-          getChildById(UICLVConfig.CACHE_ENABLE_RADIOBOX_INPUT)).getValue();
+      		findComponentById(UICLVConfig.CACHE_ENABLE_RADIOBOX_INPUT)).getValue();
 
       /** SET VALUES TO PREFERENCES */
       PortletRequestContext portletRequestContext = (PortletRequestContext) event.getRequestContext();
@@ -829,8 +827,8 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_CACHE_ENABLED, ENABLE_CACHE.equals(cacheEnabled)?"true":"false");
       String appType = portletPreferences.getValue(UICLVPortlet.PREFERENCE_APPLICATION_TYPE, null);
       if (UICLVPortlet.APPLICATION_CLV_BY_QUERY.equals(appType)) {
-        String workspace = ((UIFormSelectBox)clvConfig.getChildById(UICLVConfig.WORKSPACE_FORM_SELECT_BOX)).getValue();
-        String query = ((UIFormTextAreaInput) clvConfig.getChildById(UICLVConfig.CONTENT_BY_QUERY_TEXT_AREA)).getValue();
+        String workspace = ((UIFormSelectBox)clvConfig.findComponentById(UICLVConfig.WORKSPACE_FORM_SELECT_BOX)).getValue();
+        String query = ((UIFormTextAreaInput) clvConfig.findComponentById(UICLVConfig.CONTENT_BY_QUERY_TEXT_AREA)).getValue();
         if (query == null) {
           query = "";
         }
@@ -862,8 +860,6 @@ public class UICLVConfig extends UIForm  implements UISelectable {
    * component's <code>addCancelActionListener<code> method. When
    * the cancelAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see CancelActionEvent
    */
   public static class CancelActionListener extends EventListener<UICLVConfig> {
 
@@ -891,18 +887,15 @@ public class UICLVConfig extends UIForm  implements UISelectable {
    * component's <code>addSelectFolderPathActionListener<code> method. When
    * the selectFolderPathAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see SelectFolderPathActionEvent
    */
-  public static class SelectFolderPathActionListener extends EventListener<UICLVConfig> {
+  public static class AddPathActionListener extends EventListener<UICLVConfig> {
 
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
     public void execute(Event<UICLVConfig> event) throws Exception {
       UICLVConfig clvConfig = event.getSource();
-      UIFormRadioBoxInput modeBoxInput = (UIFormRadioBoxInput) clvConfig.
-          getChildById(UICLVConfig.DISPLAY_MODE_FORM_RADIO_BOX_INPUT);
+      UIFormRadioBoxInput modeBoxInput = (UIFormRadioBoxInput) clvConfig.findComponentById(UICLVConfig.DISPLAY_MODE_FORM_RADIO_BOX_INPUT);
       String mode = modeBoxInput.getValue();
       if (mode.equals(UICLVPortlet.DISPLAY_MODE_AUTOMATIC)) {
         UIContentSelectorFolder contentSelector = clvConfig.createUIComponent(UIContentSelectorFolder.class, null, null);
@@ -957,8 +950,6 @@ public class UICLVConfig extends UIForm  implements UISelectable {
    * component's <code>addIncreaseActionListener<code> method. When
    * the increaseAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see IncreaseActionEvent
    */
   public static class IncreaseActionListener extends EventListener<UICLVConfig> {
 
@@ -993,8 +984,6 @@ public class UICLVConfig extends UIForm  implements UISelectable {
    * component's <code>addDecreaseActionListener<code> method. When
    * the decreaseAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see DecreaseActionEvent
    */
   public static class DecreaseActionListener extends EventListener<UICLVConfig> {
 
@@ -1028,8 +1017,6 @@ public class UICLVConfig extends UIForm  implements UISelectable {
    * component's <code>addSelectTargetPageActionListener<code> method. When
    * the selectTargetPageAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see SelectTargetPageActionEvent
    */
   public static class SelectTargetPageActionListener extends EventListener<UICLVConfig> {
 

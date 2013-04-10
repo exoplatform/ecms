@@ -12,6 +12,9 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.picocontainer.Startable;
 
+/**
+ * {@inheritDoc}
+ */
 public class JodConverterServiceImpl implements JodConverterService, Startable {
 
   private OfficeManager officeManager = null;

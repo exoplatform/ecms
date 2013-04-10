@@ -94,11 +94,11 @@ UIFileView.prototype.initAllEvent = function(actionAreaId, enableDragAndDrop) {
 	actionArea.onkeydown = Self.mouseDownGround;
 	actionArea.onmouseup = Self.mouseUpGround;
 	
-	var fillOutElement = document.createElement('div');
-	fillOutElement.id = "FillOutElement";
-	
 	var listGrid = gj(actionArea).find("div.uiListGrid:first")[0];
 	if (listGrid) {
+		var fillOutElement = document.createElement('div');
+		fillOutElement.className = "FillOutElement";
+		gj("div.FillOutElement").remove();
 		listGrid.appendChild(fillOutElement);
 	}
 	
@@ -144,6 +144,7 @@ UIFileView.prototype.mouseOutItem = function(event) {
 UIFileView.prototype.mouseDownItem = function(evt) {
 	eval("var event = ''");
 	event = evt || window.event;
+	if (!event) return;
 	event.cancelBubble = true;
 	var element = Self.clickedItem || this;
 	removeMobileElement();
@@ -270,6 +271,7 @@ UIFileView.prototype.clickItem = function(event, element, callback) {
 UIFileView.prototype.mouseUpItem = function(evt) {
 	eval("var event=''");
 	event = evt || window.event;
+	if (!event) return;
 	var element = Self.clickedItem || this;
 	Self.enableDragDrop = null;
 	document.onmousemove = null;
@@ -581,7 +583,7 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 //	contextMenu.style.left = X + 5 + "px";
     var menubar = gj('div.uiFileViewActionBar');
     if (menubar) {
-    	menubar.width(gj("div#UIActionBar").width());
+    	menubar.width(gj("div#UIActionBar").width()-2);
     }	
     var moreButton = gj("#ShowMoreActionContainer");
     if (moreButton) {
@@ -659,7 +661,7 @@ UIFileView.prototype.initStickBreadcrumb = function() {
 		var scroll_top = gj(window).scrollTop(); // our current vertical position from the top
 		
 		if (scroll_top >= eXo.ecm.UIFileView.minActionbarTop) {
-			actionbar.css({ 'position': 'fixed','z-index': '1', 'top':0});
+			actionbar.css({ 'position': 'fixed','z-index': '2', 'top':0});
 			actionbar.width(actionbar.parent().width());
 			breadcrumb.css({ 'position': 'fixed', 'top':actionbar.height(), zIndex:1});
 			breadcrumb.width(breadcrumb.parent().width());
@@ -678,7 +680,7 @@ UIFileView.prototype.initStickBreadcrumb = function() {
 
 UIFileView.prototype.toggleCheckboxes = function(checkbox, evt) {
 	resetArrayItemsSelected();
-	Self.allItems.each(function(index, elem){
+	gj(Self.allItems).each(function(index, elem){
 		Self.selectBoxType = checkbox.checked;
 		Self.clickedItem = elem;
 		Self.clickTotalCheckBox = true;
@@ -698,18 +700,23 @@ UIFileView.prototype.toggleCheckboxes = function(checkbox, evt) {
 };
 
 UIFileView.prototype.clearCheckboxes = function(evt) {
-	Self.allItems.each(function(index, elem){
-		Self.selectBoxType = false;
-		Self.clickedItem = elem;
-		Self.clickTotalCheckBox = true;
-		Self.mouseDownItem(evt);
-		//-------------------------
-		Self.selectBoxType = false;
-		Self.clickedItem = elem;
-		Self.clickTotalCheckBox = true;
-		Self.mouseUpItem(evt);
+	gj(".uiFileView").each(function(ind) {
+		gj(Self.allItems).each(function(index, elem){
+			Self.selectBoxType = false;
+			Self.clickedItem = elem;
+			Self.clickTotalCheckBox = true;
+			Self.mouseDownItem(evt);
+			//-------------------------
+			Self.selectBoxType = false;
+			Self.clickedItem = elem;
+			Self.clickTotalCheckBox = true;
+			Self.mouseUpItem(evt);
+		});
+		resetArrayItemsSelected();
+		gj("#UIFileViewCheckBox").attr("checked", false);
+		gj("#UIDocumentInfo").find(".checkbox").attr("checked", false);
+		gj("#UIDocumentInfo").find(".rowView").css("backgroundColor","#FFF");
 	});
-	gj("#UIFileViewCheckBox").attr("checked", false);
 };
 
 UIFileView.prototype.checkSelectedItemCount = function() {
@@ -799,7 +806,7 @@ UIFileView.prototype.clickRightMouse = function(event, elemt, menuId, objId, whi
     eXo.webui.UIPopup.show(contextMenu);
     var menubar = gj('div.uiFileViewActionBar');
     if (menubar) {
-    	menubar.width(gj("div#UIActionBar").width());
+    	menubar.width(gj("div#UIActionBar").width()-2);
     }    
     eXo.ecm.ECMUtils.loadContainerWidth();
     var moreButton = gj("#ShowMoreActionContainer");

@@ -497,6 +497,7 @@
       <!-- Delte one node is not in trash and have relations -->
       <confirm-delete-has-relations>Are you sure you want to delete the item '{0}' and its references?</confirm-delete-has-relations>
       <confirm-delete-file-has-relations>Are you sure you want to delete the file '{0}' and its references?</confirm-delete-file-has-relations>
+      <confirm-delete-folder-has-relations>Are you sure you want to delete the folder '{0}' and its references?</confirm-delete-folder-has-relations>
       
       <!-- Delte multiple nodes, not in Trash, have no relations -->
       <confirm-delete-multi-nodes-generic>Are you sure you want to delete the {0} selected items?</confirm-delete-multi-nodes-generic>  
@@ -3602,21 +3603,26 @@
   </UIMultiUpload>
   <UIDocumentNodeList>
   	<label>
-  		<CreatedOn>Created on</CreatedOn>
-  		<Updated>Updated </Updated>
-  		<by>by</by>
-  		<you>you</you>
+  		<CreatedOn>Thời điểm tạo</CreatedOn>
+  		<Updated>Sửa đổi</Updated>
+  		<by>bởi</by>
+  		<you>bạn</you>
   	</label>
   </UIDocumentNodeList>
   <FileView>
     <label>
-      <name>Name</name>
-      <date>Date</date>
-      <size>Size</size>
-      <sortBy>Sort by:</sortBy>
-      <filesAreSelected>files are selected.</filesAreSelected>
-      <ClearSelection>Clear selection</ClearSelection>
-      <more>More</more>
+      <name>Tên</name>
+      <date>Thời gian</date>
+      <size>Kích cỡ</size>
+      <sortBy>Sắp xếp theo:</sortBy>
+      <filesAreSelected>file được chọn.</filesAreSelected>
+      <ClearSelection>Bỏ lựa chọn</ClearSelection>
+      <more>Thêm</more>
     </label>
   </FileView>
+  <UIPropertyForm>
+  	<msg>
+	  	<property-name-incorrect>Tên property không hợp lệ, hãy điền vào giá trị khác!</property-name-incorrect>
+    </msg>
+  </UIPropertyForm>
 </bundle>

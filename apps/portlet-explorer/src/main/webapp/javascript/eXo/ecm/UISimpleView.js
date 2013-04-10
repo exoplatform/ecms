@@ -65,12 +65,10 @@
       actionArea.onmouseout = Self.mouseOutGround;
           actionArea.onfocus = Self.mouseOverGround;
           actionArea.onblur = Self.mouseOutGround;  
-      
-          var fillOutElement = document.createElement('div');
-      fillOutElement.id = "FillOutElement";
+      gj("div.FillOutElement").remove();
+      var fillOutElement = document.createElement('div');
+      fillOutElement.className = "FillOutElement";
       actionArea.appendChild(fillOutElement);  
-
-
       //remove context menu
       var contextMenu = document.getElementById(Self.contextMenuId);
       if (contextMenu) contextMenu.parentNode.removeChild(contextMenu);
@@ -838,6 +836,13 @@
     SimpleView.prototype.hideContextMenu = function() {
       var contextMenu = document.getElementById(Self.contextMenuId);
       if (contextMenu) contextMenu.style.display = "none";
+      
+      // Hide menu from action bar
+      var listHideContainer = document.getElementById('ListHideContainer');
+      if (listHideContainer) {
+        var dropdown = gj(listHideContainer).parents("li.dropdown:first")[0];
+        gj(dropdown).removeClass("open");
+      }
 
       //remove default context menu;
       eval(eXo.core.MouseEventManager.onMouseDownHandlers);

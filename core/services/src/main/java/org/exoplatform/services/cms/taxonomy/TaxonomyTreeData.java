@@ -140,7 +140,7 @@ public class TaxonomyTreeData implements Comparable<TaxonomyTreeData> {
 
   /**
    * Register permission to taxonomy tree
-   * @param taxoTreePermissions
+   * @param permission
    */
   public void setTaxoTreePermissions(String permission) {
     this.taxoTreePermissions = permission;

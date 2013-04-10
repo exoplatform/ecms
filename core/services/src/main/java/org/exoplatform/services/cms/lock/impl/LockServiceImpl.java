@@ -73,7 +73,7 @@ public class LockServiceImpl implements LockService, Startable {
 
   /**
    * Add new users or groups into lockGroupsOrUsersPlugin_
-   * @param usersOrGroups
+   * @param plugin
    */
   public void addLockGroupsOrUsersPlugin(ComponentPlugin plugin) {
     if (plugin instanceof LockGroupsOrUsersPlugin)

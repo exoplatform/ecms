@@ -28,17 +28,11 @@ import org.exoplatform.services.organization.User;
 import org.exoplatform.services.organization.UserEventListener;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
-/**
- * @Created by The eXo Platform SARL
- * @Author : Nguyen The Vinh
- *          nguyenthevinhbk@gmail.com
- * 
- */
 public class AdjustDrivePermissionNewUserListener extends UserEventListener {
   private NodeHierarchyCreator  nodeHierarchyCreator_ ;
   /**
    *
-   * @param nodeHierarchyCreatorService
+   * @param nodeHierarchyCreator
    * @param params
    * @throws Exception
    */

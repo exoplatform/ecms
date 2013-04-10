@@ -9,16 +9,19 @@
 }
 .uiPublicationPanel {
 	.statusAction {
-		background: url(/eXoWCMResources/skin/images/Publication/bgPublication.png) no-repeat 28px top;
 		padding: 0px;
-		margin: 0px 0px 15px 60px;
+		margin: 0px 0px 15px 30px;
+		white-space: nowrap;
 		
 		.activeStatus,
 		.disableStatus,
 		.currentStatus {
-			float: left; 
+			background: url(/eXoWCMResources/skin/images/Publication/bgGray.png) no-repeat left top; 
+			display: inline-block;
 			width: 101px;
 			text-align: center;
+			position: relative;
+			margin-right: -4px;
 			
 			p {
 				color: @grayDark;
@@ -29,12 +32,26 @@
 
 			.node {
 				background: url(/eXoWCMResources/skin/images/Publication/normalNode.png) no-repeat left top; 
-				width: 48px; 
-				height: 48px; 
+				width: 49px; 
+				height: 49px; 
 				display: block; 
 				margin: 0px auto; 
 				cursor: pointer;
 			}
+		}
+
+		li:before {
+			background: url(/eXoWCMResources/skin/images/Publication/lineGray.png) no-repeat left top;
+			content: "";
+			height: 13px;
+			left: -31px;
+			position: absolute;
+			top: 17px;
+			width: 60px;
+		}
+
+		li:first-child:before {
+			background: none;
 		}
 		
 		.disableStatus p {

@@ -113,8 +113,6 @@ public class FileUploadHandler {
 
   /**
    * Instantiates a new file upload handler.
-   *
-   * @param container the container
    */
   public FileUploadHandler() {
     uploadService = WCMCoreUtils.getService(UploadService.class);

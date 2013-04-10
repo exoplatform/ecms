@@ -19,7 +19,6 @@
     02110-1301 USA, or see the FSF site: http://www.fsf.org.
 
 -->
-
 <bundle>
   <UIExoStart>
     <tooltip>
@@ -29,7 +28,7 @@
 
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Are you sure to delete this item?</confirm-delete>
+      <confirm-delete>Are you sure you want to delete this item?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
 
@@ -75,7 +74,7 @@
 
   <UIContentDialogFormPopupWindow>
     <title>
-      <UIContentDialogPreference>Webcontent Preference</UIContentDialogPreference>
+      <UIContentDialogPreference>Web Content Preference</UIContentDialogPreference>
     </title>
   </UIContentDialogFormPopupWindow>
 
@@ -101,7 +100,7 @@
       <Media>Media</Media>
     </selectBoxValues>
     <msg>
-      <node-checkout>The node is checked out. Please check in the node before performing this function.</node-checkout>
+      <node-checkout>The node is checked out. Please check the node before performing this function.</node-checkout>
     </msg>
   </UIContentBrowsePanelOne>
 
@@ -161,18 +160,18 @@
       <action>Action</action>
     </header>
     <msg>
-      <child-not-found>No content found</child-not-found>
+      <child-not-found>No Content Found</child-not-found>
     </msg>
   </UIContentBrowsePathSelector>
 
   <UIContentBrowsePathSelectorFolder>
     <header>
       <name>Name</name>
-      <publicationstate>Publication state</publicationstate>
+      <publicationstate>Publication State</publicationstate>
       <action>Action</action>
     </header>
     <msg>
-      <child-not-found>No folder found.</child-not-found>
+      <child-not-found>No Folder Found</child-not-found>
     </msg>
   </UIContentBrowsePathSelectorFolder>
 
@@ -188,8 +187,8 @@
       <DocumentType>Document Type</DocumentType>
     </title>
     <tooltip>
-      <AddMetadataType>Add property</AddMetadataType>
-      <AddNodeType>Add node type</AddNodeType>
+      <AddMetadataType>Add Property</AddMetadataType>
+      <AddNodeType>Add Node Type</AddNodeType>
     </tooltip>    
     <label>
       <option>
@@ -203,8 +202,8 @@
     <msg>
       <time-to-late>The searching time is too late.</time-to-late>
       <empty-field>Please input a valid keyword for search.</empty-field>
-      <invalid-format>Invalid format datetime in field '{0}'.</invalid-format>
-      <invalid-date>"To Date" must be greater than "From Date"</invalid-date>
+      <invalid-format>Invalid date/time format in field '{0}'.</invalid-format>
+      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
       <invalid-nodeType>The node type "{0}" is invalid. Please check again.</invalid-nodeType>
       <invalid-keyword>The keyword is invalid. Some characters are not supported.</invalid-keyword>
     </msg>
@@ -264,12 +263,8 @@
       <Close>Close</Close>
     </action>
     <msg>
-      <access-denied>
-        You do not have permission to add categories to this document.
-   	  </access-denied>
-      <exception>
-        An error occurred while adding categories to this document.
-   	  </exception>
+      <access-denied>You do not have permission to add categories to this document.</access-denied>
+      <exception>An error occurred while adding categories to this document.</exception>
       <non-categories>Categories are wrong. Please select appropriate categories.</non-categories>
     </msg>
   </UIContentDialogForm>
@@ -277,7 +272,7 @@
   <UIPermissionManager>
     <label>
       <UIPermissionInputSetWithAction>Permission</UIPermissionInputSetWithAction>
-      <UIPermissionStringInput></UIPermissionStringInput>
+      <UIPermissionStringInput/>
       <UIAccessibleCheckboxInput>Access Right</UIAccessibleCheckboxInput>
       <UIEditableCheckboxInput>Edit Right</UIEditableCheckboxInput>
     </label>
@@ -299,11 +294,11 @@
       <action>Action</action>
     </header>
     <msg>
-      <confirm-delete-permission>Are you sure to delete this permission?</confirm-delete-permission>
+      <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
       <no-permission-remove>You do not have permission.</no-permission-remove>
       <access-denied>Access denied.</access-denied>
       <node-locked>The path element {0} or one of its parents is locked.</node-locked>
-      <userOrGroup-required>You must select a user or a group.</userOrGroup-required>
+      <userOrGroup-required>You must select a user or group.</userOrGroup-required>
       <checkbox-require>You must set rights.</checkbox-require>
       <node-checkedin>You must check out first.</node-checkedin>
     </msg>
@@ -350,11 +345,11 @@
 
   <UIDropDownPageTemp>
     <item>
-      <WCMPageConfigs>WCM Page Configs</WCMPageConfigs>
-      <ColumnPageConfigs>Column Page Configs</ColumnPageConfigs>
-      <RowPageConfigs>Row Page Configs</RowPageConfigs>
-      <TabsPageConfigs>Tabs Page Configs</TabsPageConfigs>
-      <MixPageConfigs>Mix Page Configs</MixPageConfigs>
+      <WCMPageConfigs>WCM Page Configurations</WCMPageConfigs>
+      <ColumnPageConfigs>Column Page Configurations</ColumnPageConfigs>
+      <RowPageConfigs>Row Page Configurations</RowPageConfigs>
+      <TabsPageConfigs>Tabs Page Configurations</TabsPageConfigs>
+      <MixPageConfigs>Mix Page Configurations</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
@@ -363,16 +358,16 @@
       <SingleContentViewer>Single Content Viewer</SingleContentViewer>
       <ContentListViewer>Content List Viewer</ContentListViewer>
       <Search>Search</Search>
-      <Sitemap>Sitemap</Sitemap>
-      <TwoColumnsLayout>Two-olumn Layout</TwoColumnsLayout>
+      <Sitemap>Site Map</Sitemap>
+      <TwoColumnsLayout>Two-column Layout</TwoColumnsLayout>
       <ThreeColumnsLayout>Three-column Layout</ThreeColumnsLayout>
       <TwoRowsLayout>Two-row Layout</TwoRowsLayout>
       <ThreeRowsLayout>Three-row Layout</ThreeRowsLayout>
-      <TwoTabsLayout>Two-tabs layout</TwoTabsLayout>
+      <TwoTabsLayout>Two-tab layout</TwoTabsLayout>
       <ThreeTabsLayout>Three-tab Layout</ThreeTabsLayout>
       <TwoColumnsOneRowLayout>Two-column &amp; One-row Layout</TwoColumnsOneRowLayout>
       <OneRowTwoColumnsLayout>One-row &amp; Two-column Layout</OneRowTwoColumnsLayout>
-      <ThreeRowsTwoColumnsLayout>Three-rows &amp; Two-column Layout </ThreeRowsTwoColumnsLayout>
+      <ThreeRowsTwoColumnsLayout>Three-row &amp; Two-column Layout</ThreeRowsTwoColumnsLayout>
     </label>
   </UIWizardPageSelectLayoutForm>
 
@@ -422,7 +417,7 @@
   
   <UIDocumentInfo>
     <msg>
-      <access-denied-exception>Access denied. Maybe, you do not have the read permission; Or the node was removed or changed.</access-denied-exception>
+      <access-denied-exception>Access denied. You maybe not have read permission, or the node may have been removed or changed.</access-denied-exception>
     </msg>
   </UIDocumentInfo>
   <UIPortalApplication>

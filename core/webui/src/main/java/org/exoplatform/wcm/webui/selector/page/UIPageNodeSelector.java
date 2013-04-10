@@ -52,14 +52,13 @@ import org.exoplatform.webui.event.EventListener;
   @ComponentConfig(
       template = "classpath:groovy/wcm/webui/selector/page/UIPageNodeSelector.gtmpl" ,
       events = {
-//        @EventConfig(listeners = CreateNavigationActionListener.class),
         @EventConfig(listeners = UIPageNodeSelector.SelectNavigationActionListener.class, phase=Phase.DECODE)
       }
   ),
   @ComponentConfig (
       type = UIDropDownControl.class ,
       id = "UIDropDown",
-      template = "system:/groovy/portal/webui/navigation/UINavigationSelector.gtmpl",
+      template = "classpath:groovy/wcm/webui/selector/page/UINavigationSelector.gtmpl",
       events = {
         @EventConfig(listeners = UIPageNodeSelector.SelectNavigationActionListener.class)
       }

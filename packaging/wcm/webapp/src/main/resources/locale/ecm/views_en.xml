@@ -484,7 +484,7 @@
       <label>
         <not-available>N/A</not-available>
         <is-vital-record>Is Vital Record</is-vital-record>
-        <prev-review-date>Prev Review Date</prev-review-date>
+        <prev-review-date>Previous Review Date</prev-review-date>
         <next-review-date>Next Review Date</next-review-date>
       </label>
       <action>
@@ -630,7 +630,7 @@
       	<Switch-back-to-original-video>Original video</Switch-back-to-original-video>
       </label>
       <tooltip>
-      	<A-second-media-file-is-available-as-audio-description>A second media file is available as audio description</A-second-media-file-is-available-as-audio-description>
+      <A-second-media-file-is-available-as-audio-description>A second media file is available as an audio description</A-second-media-file-is-available-as-audio-description>
       </tooltip>
     </view>
   </AccessibleMedia>

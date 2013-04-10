@@ -34,7 +34,7 @@
 			  <tbody>
 			  <%if (uicomponent.getClipboardData().isEmpty()) { %>
 			    <tr>
-			      <td colspan="2">
+			      <td class="empty" colspan="2">
 							<%=_ctx.appRes(name+".label.nocommand")%>
 			      </td>
 			    </tr>  
@@ -59,11 +59,13 @@
 			  <%}%>
 			  </tbody>
 			</table> <!--End UIGrid-->
-			<div class="center">
-				<button type="button" class="btn" onclick="<%=uicomponent.event('ClearAll', 'All')%>">
-					<%=_ctx.appRes(name+".action.clearall")%>
-				</button>
-			</div>
+		  <%if (!uicomponent.getClipboardData().isEmpty()) { %>
+				<div class="center">
+					<button type="button" class="btn" onclick="<%=uicomponent.event('ClearAll', 'All')%>">
+						<%=_ctx.appRes(name+".action.clearall")%>
+					</button>
+				</div>
+				<%} %>
 		</div>
   </div>
 

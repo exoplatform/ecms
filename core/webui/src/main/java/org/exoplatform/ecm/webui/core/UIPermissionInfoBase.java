@@ -66,7 +66,7 @@ public abstract class UIPermissionInfoBase extends UIContainer {
   private int sizeOfListPermission = 0;
 
   public UIPermissionInfoBase() throws Exception {
-    UIGrid uiGrid = createUIComponent(UIGrid.class, null, "PermissionInfo") ;
+    UIGrid uiGrid = createUIComponent(UIPermissionInfoGrid.class, null, "PermissionInfo") ;
     addChild(uiGrid) ;
     uiGrid.getUIPageIterator().setId("PermissionInfoIterator");
     uiGrid.configure("usersOrGroups", PERMISSION_BEAN_FIELD, PERMISSION_ACTION) ;
@@ -194,13 +194,20 @@ public abstract class UIPermissionInfoBase extends UIContainer {
         List<PermissionBean> perBeans = uiPermissionInfo.getPermBeans();
         for (PermissionBean perm : perBeans) {
           if (perm.getUsersOrGroups().equals(userOrGroupId)) {
-            if (PermissionType.READ.equals(selectedPermission)) {
+            if (PermissionType.READ.equals(selectedPermission) && !perm.isAddNode() && !perm.isRemove()) {
+              if (Boolean.FALSE.toString().equals(selectedPermissionValue)) {
+                  uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.checkbox-require", null,
+                                                          ApplicationMessage.WARNING));
+                  return;
+              }
               perm.setRead("true".equals(selectedPermissionValue));
             } else if (PERMISSION_ADD_NODE_ACTION.equals(selectedPermission) || 
                         PermissionType.SET_PROPERTY.equals(selectedPermission)) {
               perm.setAddNode("true".equals(selectedPermissionValue));
+              if (perm.isAddNode()) perm.setRead(true); 
             } else if (PermissionType.REMOVE.equals(selectedPermission)) {
               perm.setRemove("true".equals(selectedPermissionValue));
+              if (perm.isRemove()) perm.setRead(true);
             }
           }
         }

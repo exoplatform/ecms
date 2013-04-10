@@ -40,8 +40,10 @@ public class XSSValidator implements Validator {
     
     inputValue = Utils.sanitize(inputValue);
     if (StringUtils.isEmpty(inputValue)) {
+      String message = "UIActionForm.msg.xss-vulnerability-character";
+      if(uiInput.getLabel() == null) message = "UIActionForm.msg.xss-vulnerability-character-wo-label";
       Object[] args = { uiInput.getLabel() };
-      throw new MessageException(new ApplicationMessage("UIActionForm.msg.xss-vulnerability-character", args, ApplicationMessage.WARNING));
+      throw new MessageException(new ApplicationMessage(message, args, ApplicationMessage.WARNING));
     }
   }
 }

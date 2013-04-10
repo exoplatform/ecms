@@ -18,7 +18,7 @@
 	}
 %>
 <div class="resizable">
-	<h5 class="header">dc:elementSet</h5>
+	<h5 class="header">Core Elements</h5>
 	<div class="row-fluid">
 		<ul class="span6">
 			<li class="contentBlock">
@@ -102,9 +102,9 @@
 	</div>
 </div>
 <%/* start render action*/%>
-<div class="uiAction"> 
- <button href="javascript:void(0);" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("ElementSet.view.tooltip.add-edit")%>" onclick="<%=uicomponent.event("EditProperty", "dc:elementSet")%>" class="btn"><%=_ctx.appRes("ElementSet.view.action.add-edit")%></button>
- <button href="javascript:void(0);" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("ElementSet.view.tooltip.cancel")%>" onclick="<%=uicomponent.event("Cancel")%>" class="btn"><%=_ctx.appRes("ElementSet.view.action.cancel")%></button>
+<div class="uiAction uiActionBorder"> 
+ <button type="button" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("ElementSet.view.tooltip.add-edit")%>" onclick="<%=uicomponent.event("EditProperty", "dc:elementSet")%>" class="btn"><%=_ctx.appRes("ElementSet.view.action.add-edit")%></button>
+ <button type="button" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("ElementSet.view.tooltip.cancel")%>" onclick="<%=uicomponent.event("Cancel")%>" class="btn"><%=_ctx.appRes("ElementSet.view.action.cancel")%></button>
 </div>
 <%/* end render action*/%>
  

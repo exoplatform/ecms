@@ -91,6 +91,6 @@
 	     
 			</div>  
 		<%}%>
-		<div id="FillOutElement"></div>
+		<div class="FillOutElement"></div>
 	</div>
 </div>

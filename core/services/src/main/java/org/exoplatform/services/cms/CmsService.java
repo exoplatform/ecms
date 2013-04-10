@@ -22,7 +22,9 @@ import java.util.Map;
 import javax.jcr.Node;
 
 /**
- * @author benjaminmestrallet
+ * This is the CMS Services management to be able to Store and move node based on different criteria.
+ *
+ * @LevelAPI Experimental
  */
 public interface CmsService {
 
@@ -41,13 +43,13 @@ public interface CmsService {
 
   /**
    * Store node in given workspace and repository with given properties
-   * @param workspace       name of workspace
-   * @param nodetypeName    NodeType's name
-   * @param storePath       Path to store node
+   *
+   * @param workspace Name of workspace
+   * @param nodetypeName NodeType's name
+   * @param storePath Path to store node
    * @param inputProperties Map of node's property including (property name, value)
-   * @throws Exception      Throwing exception
+   * @throws Exception The exception
    * @return path to saved node
-   * @see #storeNode(String nodetypeName, Node storeNode, Map inputProperties, boolean isAddNew) throws Exception
    */
   public String storeNode(String workspace,
                           String nodetypeName,
@@ -59,9 +61,9 @@ public interface CmsService {
    * @param nodetypeName    NodeType's name
    * @param storeHomeNode   Parent node, where node is stored
    * @param inputProperties Map of node's property including (property name, value)
-   * @param isAddNew        flag to decide whether this situation is adding node or updating node
-   * @return                return path to saved node
-   * @throws Exception
+   * @param isAddNew        Flag to decide whether this situation is adding node or updating node
+   * @return                Return path to saved node
+   * @throws Exception The exception
    */
   public String storeNode(String nodetypeName,
                           Node storeHomeNode,
@@ -75,9 +77,9 @@ public interface CmsService {
    * @param nodetypeName    NodeType's name
    * @param storeNode       Node is stored
    * @param inputProperties Map of node's property including (property name, value)
-   * @param isAddNew        flag to decide whether this situation is adding node or updating node
-   * @return                return path to saved node
-   * @throws Exception
+   * @param isAddNew        Flag to decide whether this situation is adding node or updating node
+   * @return                Return path to saved node
+   * @throws Exception The exception
    */
   public String storeEditedNode(String nodetypeName,
                                 Node storeNode,
@@ -86,15 +88,14 @@ public interface CmsService {
   
 
   /**
-   * Store node in given repository with given properties and return UUID of saved node
+   * Store node in given repository with given properties and return UUID of saved node.
+   *
    * @param nodetypeName    NodeType's name
    * @param storeNode       Node is stored
    * @param inputProperties Map of node's property including (property name, value)
-   * @param isAddNew        flag to decide whether this situation is adding node or updating node
-   * @return                return UUID of saved node
-   * @throws Exception
-   * @see #storeNode(String nodetypeName, Node storeNode, Map inputProperties, boolean isAddNew) throws Exception
-   * @see #storeNode(String workspace, String nodetypeName, String storePath, Map inputProperties) throws Exception
+   * @param isAddNew        Flag to decide whether this situation is adding node or updating node
+   * @return                Return UUID of saved node
+   * @throws Exception The exception
    */
   public String storeNodeByUUID(String nodetypeName,
                                 Node storeNode,
@@ -102,14 +103,20 @@ public interface CmsService {
                                 boolean isAddNew) throws Exception;
   
   /**
-   * Move node from one workspace to the other, with the same repository
+   * Move node from one workspace to the other, with the same repository.
+   *
    * @param nodePath      Path to node in source workspace
    * @param srcWorkspace  Source workspace name
    * @param destWorkspace Destination of workspace name
    * @param destPath      Destination of node path
    */
   public void moveNode(String nodePath, String srcWorkspace, String destWorkspace, String destPath);
-  
+
+  /**
+   * Get all properties of a node.
+   *
+   * @return Map of properties.
+   */
   public Map<String, Object> getPreProperties();  
   
 }

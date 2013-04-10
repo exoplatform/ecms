@@ -41,7 +41,6 @@ import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
-import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIContainer;
@@ -58,17 +57,14 @@ import org.exoplatform.webui.event.EventListener;
  * Apr 17, 2009
  */
 
-@ComponentConfigs({
-  @ComponentConfig(
-      lifecycle = UIContainerLifecycle.class,
-      events = {
-        @EventConfig (listeners = UIPermissionTreeInfo.DeleteActionListener.class, 
-                      confirm = "UIPermissionTreeInfo.msg.confirm-delete-permission"),
-        @EventConfig (listeners = UIPermissionTreeInfo.EditActionListener.class)
-      }
-  ),
-  @ComponentConfig(type = UIGrid.class, template = "classpath:groovy/wcm/webui/core/UIPermissionInfoGrid.gtmpl") 
-})
+@ComponentConfig(
+    lifecycle = UIContainerLifecycle.class,
+    events = {
+      @EventConfig (listeners = UIPermissionTreeInfo.DeleteActionListener.class, 
+                    confirm = "UIPermissionTreeInfo.msg.confirm-delete-permission"),
+      @EventConfig (listeners = UIPermissionTreeInfo.EditActionListener.class)
+    }
+)
 public class UIPermissionTreeInfo extends UIPermissionInfoBase {
 
   public static String[]  PERMISSION_BEAN_FIELD = { "usersOrGroups", "read", "addNode", "remove"};
@@ -161,19 +157,6 @@ public class UIPermissionTreeInfo extends UIPermissionInfoBase {
     LazyPageList<PermissionBean> dataPageList = new LazyPageList<PermissionBean>(permList, 10);
     uiGrid.getUIPageIterator().setPageList(dataPageList);
   }
-
-//  public static class EditActionListener extends EventListener<UIPermissionTreeInfo> {
-//    public void execute(Event<UIPermissionTreeInfo> event) throws Exception {
-//      UIPermissionTreeInfo uicomp = event.getSource() ;
-//      String name = event.getRequestContext().getRequestParameter(OBJECTID) ;
-//      Node updateNode = uicomp.getCurrentNode();
-//      ExtendedNode node = (ExtendedNode)updateNode;
-//      UIPermissionTreeForm uiForm = uicomp.getAncestorOfType(UIPermissionTreeManager.class)
-//          .getChild(UIPermissionTreeForm.class);
-//      uiForm.fillForm(name, node) ;
-//      uiForm.lockForm(name.equals(uicomp.getExoOwner(node)));
-//    }
-//  }
 
   public static class DeleteActionListener extends EventListener<UIPermissionTreeInfo> {
     public void execute(Event<UIPermissionTreeInfo> event) throws Exception {

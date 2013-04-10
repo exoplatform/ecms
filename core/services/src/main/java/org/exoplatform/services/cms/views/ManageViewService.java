@@ -26,181 +26,155 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 
 /**
- * Created by The eXo Platform SARL
- * Author : Nguyen Quang Hung
- *          nguyenkequanghung@yahoo.com
- * Feb 27, 2006
+ * ManageViewService is used to work with views. This service has many functions which
+ * allow you to add, edit, delete, and get views.
+ *
+ * @LevelAPI Experimental
  */
 public interface ManageViewService {
 
-  /**
-   * The type of extension related to this service
-   */
+  /** The type of extension related to this service */
   public static final String EXTENSION_TYPE = "org.exoplatform.ecm.dms.UIActionBar";
 
   /**
-   * Inserts a new view by giving the following params
+   * Insert a new view to the system by giving the following params.
    * 
-   * @param name String The name of view
-   * @param permissions String who can access the view
-   * @param template String The name of template
-   * @param tabs List tabs list
-   * @see Node
-   * @throws Exception
+   * @param name The name of the view.
+   * @param permissions Who can access to the view .
+   * @param template The template name.
+   * @param tabs list of tabs.
+   * @throws Exception The exception
    */
   public void addView(String name, String permissions, String template, List<?> tabs) throws Exception;
   
   /**
-   * Inserts a new view by giving the following params
-   * 
-   * @param name String The name of view
-   * @param permissions String who can access the view
-   * @param hideExplorerPanel Boolean if the explorer panel is hidden
-   * @param template String The name of template
-   * @param tabs List tabs list
-   * @see Node
-   * @throws Exception
+   * Insert a new view to the system by giving the following params.
+   *
+   * @param name The name of the view.
+   * @param permissions Who can access to the view .
+   * @param hideExplorerPanel If the explorer panel is hidden.
+   * @param template The template name.
+   * @param tabs list of tabs.
+   * @throws Exception The exception
    */
   public void addView(String name, String permissions, boolean hideExplorerPanel, String template, List<?> tabs) throws Exception;
 
   /**
-   * Return specify view depend on Name by giving the following params
-   * @param viewName      String
-   *                      The name of view
-   * @param provider      SessionProvider
-   *                      The SessionProvider object is used to managed Sessions
-   * @see                 Node
-   * @see                 SessionProvider
-   * @throws Exception
+   * Specify a new view depending on the view name.
+   *
+   * @param viewName The name of the view.
+   * @param provider The SessionProvider object is used to managed Sessions.
+   * @return Get the View
+   * @throws Exception The exception
    */
   public Node getViewByName(String viewName, SessionProvider provider) throws Exception;  
 
   /**
-   * Return all string of buttons
-   * @throws Exception
+   * Return all strings of buttons.
+   *
+   * @return List of buttons.
+   * @throws Exception The exception
    */
   public List<?> getButtons() throws Exception;
 
   /**
-   * Removes the view by giving the following params
-   * @param viewName      String
-   *                      The name of view
-   * @see                 Node
-   * @see                 Session
-   * @throws Exception
+   * Remove a view from the views list in the system.
+   *
+   * @param viewName The name of the view.
+   * @throws Exception The exception
    */
   public void removeView(String viewName) throws Exception;  
 
   /**
-   * Return all views of the repository is configed in XML file by giving the following params
-   * @see                 ViewConfig
-   * @see                 Node
-   * @see                 Session
-   * @throws Exception
+   * Return all views of the repository configured in the XML file.
+   *
+   * @return List<ViewConfig>
+   * @throws Exception The exception
    */
   public List<ViewConfig> getAllViews() throws Exception;  
 
   /**
-   * Returns true is the given repository has view by giving the following params
-   * @param name          String
-   *                      The name of repository
-   * @see                 Node
-   * @see                 Session
-   * @throws Exception
+   * Return true if the given repository has a view.
+   *
+   * @param name The repository name.
+   * @return True if the repository has the view
+   * @throws Exception The exception
    */
   public boolean hasView(String name) throws Exception;  
 
   /**
-   * Get template Node that has path by giving the following params
-   * @param homeAlias     String
-   * @param provider      SessionProvider
-   *                      The SessionProvider object is used to managed Sessions
-   * @see                 SessionProvider
-   * @see                 NodeHierarchyCreator
-   * @see                 Node
-   * @throws Exception
+   * Get a template node that has the path.
+   *
+   * @param homeAlias Alias of template home.
+   * @param provider The SessionProvider object is used to managed Sessions.
+   * @return The template home
+   * @throws Exception The exception
    */
   public Node getTemplateHome(String homeAlias, SessionProvider provider) throws Exception;  
 
   /**
-   * Gets all node that has template path to the given node
-   * @param homeAlias     String
-   *                      Alias of template home
-   * @param provider      SessionProvider
-   *                      The SessionProvider object is used to managed Sessions
-   * @see                 SessionProvider
-   * @see                 NodeHierarchyCreator
-   * @see                 Node
-   * @throws Exception
+   * Get all template nodes that have the path.
+   *
+   * @param homeAlias Alias of template home.
+   * @param provider The SessionProvider object is used to managed Sessions.
+   * @return The List of templates
+   * @throws Exception The exception
    */
   public List<Node> getAllTemplates(String homeAlias,SessionProvider provider) throws Exception;  
   
   /**
-   * Return node that has path of the repository
-   * @param path          String
-   *                      The path of template
-   * @param provider      SessionProvider
-   *                      The SessionProvider object is used to managed Sessions
-   * @see                 SessionProvider
-   * @see                 NodeHierarchyCreator
-   * @see                 Node
-   * @throws Exception
+   * Return a node that has the path of the repository.
+   *
+   * @param path The template path.
+   * @param provider The SessionProvider object is used to managed Sessions.
+   * @return The template
+   * @throws Exception The exception
    */
   public Node getTemplate(String path, SessionProvider provider) throws Exception;  
 
   /**
-   * Inserts a new template for node by specified path
-   * @param name            String
-   *                        The name of new template
-   * @param content         String
-   *                        The property of template
-   * @param homePath       String
-   *                        The path of specified node
-   * @see                   Session
-   * @see                   Node
-   * @throws Exception
+   * Insert a new template to a node by specifying its path.
+   *
+   * @param name The name of the new template.
+   * @param content The template property.
+   * @param homePath The path of the specified node.
+   * @return The template name
+   * @throws Exception The exception
    */
   public String addTemplate(String name, String content, String homePath) throws Exception;
   
   /**
-   * Inserts a new template for node by specified path
-   * 
-   * @param name String The name of new template
-   * @param content String The property of template
-   * @param homePath String The path of specified node
-   * @param provider SessionProvider The SessionProvider object is used to
-   *          managed Sessions
-   * @see Session
-   * @see Node
-   * @throws Exception
+   * Insert a new template to a node by specifying its path.
+   *
+   * @param name The name of the new template.
+   * @param content The template property.
+   * @param homePath The path of the specified node.
+   * @param provider The SessionProvider object is used to managed Sessions.
+   * @return The template name
+   * @throws Exception The exception
    */
   public String addTemplate(String name, String content, String homePath, SessionProvider provider) throws Exception;
   
   /**
-   * Update a template for node by specified path
-   * @param name            String
-   *                        The name of current template
-   * @param content         String
-   *                        The property of current template
-   * @param homePath       String
-   *                        The path of specified node
-   * @see                   Session
-   * @see                   Node
-   * @throws Exception
+   * Update a template for a node by specifying its path.
+   *
+   * @param name The name of the new template.
+   * @param content The template property.
+   * @param homePath The path of the specified node.
+   * @return The template name
+   * @throws Exception The exception
    */
   public String updateTemplate(String name, String content, String homePath) throws Exception;
   
   /**
-   * Update a template for node by specified path
-   * 
-   * @param name String The name of current template
-   * @param content String The property of current template
-   * @param homePath String The path of specified node
-   * @param provider SessionProvider The SessionProvider object is used to
-   *          managed Sessions
-   * @see Session
-   * @see Node
-   * @throws Exception
+   * Update a template for a node by specifying its path.
+   *
+   * @param name The name of the new template.
+   * @param content The template property.
+   * @param homePath The path of the specified node.
+   * @param provider The SessionProvider object is used to managed Sessions
+   * @return The template name
+   * @throws Exception The exception
    */
   public String updateTemplate(String name,
                                String content,
@@ -208,56 +182,50 @@ public interface ManageViewService {
                                SessionProvider provider) throws Exception;
 
   /**
-   * Removes the template to the given node by specified the templatePath params
-   * @param templatePath    String
-   *                        The path of template
-   * @see                   Node
-   * @see                   Session
-   * @throws Exception
+   * Remove the template from the given node by specifying its path.
+   *
+   * @param templatePath The template path.
+   * @throws Exception The exception
    */
   public void removeTemplate(String templatePath) throws Exception;  
   
   /**
    * Removes the template to the given node by specified the templatePath params
    * 
-   * @param templatePath String The path of template
-   * @param provider SessionProvider The SessionProvider object is used to
-   *          managed Sessions
-   * @see Node
-   * @see Session
-   * @throws Exception
+   * @param templatePath The template path.
+   * @param provider The SessionProvider object is used to managed Sessions.
+   * @throws Exception The exception
    */
   public void removeTemplate(String templatePath, SessionProvider provider) throws Exception;
 
   /**
-   * Insert new tab to the giving view node by specified the following params
-   * @param view            Node
-   *                        Specify the node wants to add a tab
-   * @param name            String
-   *                        The name of tab
-   * @param buttons         String
-   *                        The buttons of tab
-   * @see                   Node
-   * @throws Exception
+   * Insert a new tab to the given view node.
+   *
+   * @param view Specify the node wants to add in a tab.
+   * @param name The tab's name.
+   * @param buttons The buttons of tab.
+   * @throws Exception The exception
    */
   public void addTab(Node view, String name, String buttons) throws Exception ;
 
   /**
-   * Get all template that is configed in XML file of current repository
-   * @see                   ManageViewPlugin
-   * @throws Exception
+   * Get all templates that are configured in the XML file of a specified repository.
+   *
+   * @throws Exception The exception
    */
   public void init() throws Exception ;
   
   /**
-   * gets all configured templates
-   * @return
+   * Get all configured templates.
+   *
+   * @return Set of template s
    */
   public Set<String> getConfiguredTemplates();
   
   /**
-   * gets all configured views
-   * @return
+   * Get all configured views.
+   *
+   * @return Set of Views
    */
   public Set<String> getConfiguredViews();
 

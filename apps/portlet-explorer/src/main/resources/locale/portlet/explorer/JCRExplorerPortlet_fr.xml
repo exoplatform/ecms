@@ -483,6 +483,7 @@
       <!-- Delte one node is not in trash and have relations -->
       <confirm-delete-has-relations>Êtes-vous sûr de vouloir supprimer l'objet '{0}' et ses références?</confirm-delete-has-relations>
       <confirm-delete-file-has-relations>Êtes-vous sûr de vouloir supprimer le fichier '{0}' et ses références?</confirm-delete-file-has-relations>
+      <confirm-delete-folder-has-relations>Êtes-vous sûr de vouloir supprimer le dossier '{0}' et ses références?</confirm-delete-folder-has-relations>
       
       <!-- Delte multiple nodes, not in Trash, have no relations -->
       <confirm-delete-multi-nodes-generic>Êtes-vous sûr de vouloir supprimer les {0} objets sélectionnés?</confirm-delete-multi-nodes-generic>  
@@ -3608,4 +3609,9 @@
       <more>Plus</more>
     </label>
   </FileView>
+  <UIPropertyForm>
+  	<msg>
+	  	<property-name-incorrect>The property name is incorrect, please enter another value for it!</property-name-incorrect>
+    </msg>
+  </UIPropertyForm>
 </bundle>

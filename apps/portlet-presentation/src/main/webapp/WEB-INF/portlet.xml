@@ -209,7 +209,7 @@
       </preference>      
 			<preference>
 				<name>formViewTemplatePath</name>
-				<value>/exo:ecm/views/templates/content-list-viewer/list/UIContentListPresentationDefault.gtmpl</value>
+				<value>/exo:ecm/views/templates/content-list-viewer/list/TwoColumns.gtmpl</value>
 				<read-only>false</read-only>
 			</preference>
 			<preference>
@@ -358,7 +358,7 @@
       </preference>      
       <preference>
         <name>formViewTemplatePath</name>
-        <value>/exo:ecm/views/templates/content-list-viewer/list/UIContentListPresentationDefault.gtmpl</value>
+        <value>/exo:ecm/views/templates/content-list-viewer/list/TwoColumns.gtmpl</value>
         <read-only>false</read-only>
       </preference>
       <preference>

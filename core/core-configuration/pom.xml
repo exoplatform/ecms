@@ -57,11 +57,6 @@
       <scope>runtime</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.ecms</groupId>
-      <artifactId>ecms-ext-xcmis-sp</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
       <groupId>org.exoplatform.jcr</groupId>
       <artifactId>exo.jcr.component.core</artifactId>
       <scope>runtime</scope>
@@ -100,35 +95,6 @@
       <groupId>org.gatein.portal</groupId>
       <artifactId>exo.portal.component.web.server</artifactId>
       <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.xcmis</groupId>
-      <artifactId>xcmis-renditions</artifactId>
-      <scope>runtime</scope>
-      <exclusions>
-        <exclusion>
-          <!-- To be fixed in the original project -->
-          <artifactId>commons-logging</artifactId>
-          <groupId>commons-logging</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.xcmis</groupId>
-      <artifactId>xcmis-restatom</artifactId>
-      <scope>runtime</scope>
-      <exclusions>
-        <exclusion>
-          <!-- To remove from org.xcmis:xcmis-restatom:jar (Issue to open) which is using org.apache.abdera:abdera-server:jar -->
-          <artifactId>servlet-api</artifactId>
-          <groupId>javax.servlet</groupId>
-        </exclusion>
-        <exclusion>
-          <!-- To be fixed in the original project -->
-          <artifactId>commons-logging</artifactId>
-          <groupId>commons-logging</groupId>
-        </exclusion>
-      </exclusions>
     </dependency>
   </dependencies>
   <build>

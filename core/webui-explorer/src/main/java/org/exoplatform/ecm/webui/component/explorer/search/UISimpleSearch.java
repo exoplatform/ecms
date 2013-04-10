@@ -455,7 +455,7 @@ public class UISimpleSearch extends UIForm {
         }
         Calendar bfDate = uiForm.getUIFormDateTimeInput(UIConstraintsForm.START_TIME).getCalendar() ;
         if(toDate != null && toDate.trim().length() >0) {
-          Calendar afDate = uiForm.getUIFormDateTimeInput(UIConstraintsForm.END_TIME).getCalendar() ;
+          Calendar afDate = uiForm.getUIFormDateTimeInput(UIConstraintsForm.END_TIME).getCalendar();
           if(!toDate.matches(UIConstraintsForm.DATETIME_REGEX) || !uiForm.isValidDateTime(toDate)) {
             uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.toDate-invalid", null,
                                                     ApplicationMessage.WARNING)) ;

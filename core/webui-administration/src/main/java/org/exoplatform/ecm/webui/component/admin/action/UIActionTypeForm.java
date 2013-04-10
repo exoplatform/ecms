@@ -17,15 +17,14 @@
 package org.exoplatform.ecm.webui.component.admin.action;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
+import javax.jcr.Node;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.nodetype.PropertyDefinition;
 import javax.jcr.version.OnParentVersionAction;
 
-import org.apache.commons.lang.StringUtils;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.scripts.impl.ScriptServiceImpl;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -100,15 +99,10 @@ public class UIActionTypeForm extends UIForm {
 
   private List<SelectItemOption<String>> getScriptOptions() throws Exception {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>() ;
-    ActionServiceContainer actionServiceContainer =
-      getApplicationComponent(ActionServiceContainer.class) ;
-    Collection<NodeType> actionList = 
-            actionServiceContainer.getCreatedActionTypes(WCMCoreUtils.getRepository().getConfiguration().getName()) ;
     ScriptServiceImpl scriptService = WCMCoreUtils.getService(ScriptServiceImpl.class);
-    for(NodeType nodeType : actionList) {
-      String resourceName = scriptService.getResourceNameByNodeType(nodeType);
-      if(StringUtils.isEmpty(resourceName)) continue;
-      options.add(new SelectItemOption<String>(StringUtils.substringAfterLast(resourceName, "/"), resourceName)) ;
+    List<Node> scriptOptions = scriptService.getECMActionScripts(WCMCoreUtils.getUserSessionProvider());
+    for(Node script : scriptOptions) {
+      options.add(new SelectItemOption<String>(script.getName(), script.getPath())) ;
     }
     return options ;
   }

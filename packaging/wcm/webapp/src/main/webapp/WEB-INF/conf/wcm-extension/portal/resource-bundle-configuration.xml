@@ -36,6 +36,8 @@
           <name>classpath.resources</name>
           <description>The resources that start with the following package name should be load from file system</description>
           <value>locale.portlet</value>
+          <value>locale.portlet.i18n</value>
+          <value>locale.portlet.i18n.WebUIDms</value>
         </values-param>
         <values-param>
           <name>init.resources</name>

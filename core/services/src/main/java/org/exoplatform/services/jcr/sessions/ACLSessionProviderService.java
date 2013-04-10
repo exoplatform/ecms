@@ -38,7 +38,7 @@ public interface ACLSessionProviderService {
   
   /**
    * Gets the session provider by access control entry list
-   * @param accessEntry
+   * @param accessList
    * @return the SessionProvider
    */
   public SessionProvider getACLSessionProvider(List<AccessControlEntry> accessList);

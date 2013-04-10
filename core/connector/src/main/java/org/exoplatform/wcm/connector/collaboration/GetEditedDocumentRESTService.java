@@ -57,12 +57,10 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Return the latest edited documents. 
- * 
- * @author Hoang Van Hung <hunghvit@gmail.com>
- * @since      May 17, 2009
- * @copyright  eXo Platform SEA
- * 
- * @anchor CONTref.Devref.PublicRestAPIs.GetEditedDocumentRESTService
+ *
+ * @LevelAPI Provisional
+ *
+ * @anchor GetEditedDocumentRESTService
  */
 
 @Path("/presentation/document/edit/")
@@ -118,7 +116,7 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
    * @return Response inputstream.
    * @throws Exception
    * 
-   * @anchor CONTref.Devref.PublicRestAPIs.GetEditedDocumentRESTService.getLastEditedDoc
+   * @anchor GetEditedDocumentRESTService.getLastEditedDoc
    */
   @Path("/{repository}/")
   @GET

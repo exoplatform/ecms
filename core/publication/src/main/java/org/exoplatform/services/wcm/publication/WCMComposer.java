@@ -25,13 +25,12 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.core.NodeLocation;
 
 /**
- * This class is responsible of getting contents inside the WCM product.
- * We shouldn't access directly contents from the jcr on front side.
+ * This class is used to get content inside the WCM product.
+ * We should not access contents directly from the jcr on front side.
  *
- * In a general manner, this service stands between publication and cache.
+ * In general, this service stands between publication and cache.
  *
- * @author Benjamin Paillereau - benjamin.paillereau@exoplatform.com
- * @version 1.0
+ * @LevelAPI Experimental
  */
 public interface WCMComposer {
 
@@ -83,7 +82,7 @@ public interface WCMComposer {
   /** Filter parameter to filter results by visibility. ex: public, user*/
   public final static String FILTER_VISIBILITY = "filter-visibility";
 
-  /** mode of portlet **/
+  /** Mode of portlet **/
   public final static String PORTLET_MODE = "portlet-mode";
 
   /** The Constant MODE_EDIT. */
@@ -105,16 +104,14 @@ public interface WCMComposer {
   public final static String VISIBILITY_USER = "user";
 
   /**
-   * returns content at the specified path based on filters.
+   * Return content at the specified path based on filters.
    *
-   * @param workspace the workspace
-   * @param path the path
-   * @param filters the filters
-   * @param sessionProvider the session provider
-   *
-   * @return a jcr node
-   *
-   * @throws Exception the exception
+   * @param workspace The workspace
+   * @param nodeIdentifier The path
+   * @param filters The filters
+   * @param sessionProvider The session provider
+   * @return A jcr node
+   * @throws Exception The exception
    */
   public Node getContent(String workspace,
                          String nodeIdentifier,
@@ -122,14 +119,14 @@ public interface WCMComposer {
                          SessionProvider sessionProvider) throws Exception;  
 
   /**
-   * returns contents at the specified path based on filters.
+   * Return content at the specified path based on filters.
    * 
-   * @param workspace the workspace
-   * @param path the path
-   * @param filters the filters
-   * @param sessionProvider the session provider
-   * @return a jcr node
-   * @throws Exception the exception
+   * @param workspace The workspace
+   * @param path The path
+   * @param filters The filters
+   * @param sessionProvider The session provider
+   * @return A List of jcr nodes
+   * @throws Exception The exception
    */
   public List<Node> getContents(String workspace,
                                 String path,
@@ -137,15 +134,13 @@ public interface WCMComposer {
                                 SessionProvider sessionProvider) throws Exception;
   
  /**
-  * returns contents at the specified path based on filters.
+  * Return content at the specified path based on filters.
   *
-  * @param nodeLocation the content location
-  * @param filters the filters
-  * @param sessionProvider the session provider
-  *
-  * @return a jcr node
-  *
-  * @throws Exception the exception
+  * @param nodeLocation The content location
+  * @param filters The filters
+  * @param sessionProvider The session provider
+  * @return A jcr node
+  * @throws Exception The exception
   */
  public Result getPaginatedContents(NodeLocation nodeLocation, 
                                                              HashMap<String, String> filters, 
@@ -153,12 +148,13 @@ public interface WCMComposer {
   
   /**
    * Update content.
+   * Deprecated since version 4.0.
    * 
-   * @param workspace the workspace
-   * @param path the path
-   * @param filters the filters
+   * @param workspace The workspace
+   * @param nodeIdentifier The path
+   * @param filters The filters
    * @return true, if successful
-   * Since version 4.0 this method will be deprecated.
+   * @throws Exception The exception
    */
  @Deprecated 
  public boolean updateContent(String workspace,
@@ -166,46 +162,48 @@ public interface WCMComposer {
                                HashMap<String, String> filters) throws Exception;
 
   /**
-   * Update contents.
-   * 
-   * @param workspace the workspace
-   * @param path the path
-   * @param filters the filters
+   * Update content.
+   * Deprecated since version 4.0.
+   *
+   * @param workspace The workspace
+   * @param path The path
+   * @param filters The filters
    * @return true, if successful
-   * * Since version 4.0 this method will be deprecated.
+   * @throws Exception The exception
    */
  @Deprecated
  public boolean updateContents(String workspace, String path, HashMap<String, String> filters) throws Exception;
 
   /**
-   * returns allowed states for a specified mode.
+   *  Return the allowed states for a specified mode.
    *
-   * @param mode the mode
-   *
-   * @return a jcr node
-   *
-   * @throws Exception the exception
+   * @param mode The mode
+   * @return A list of String
+   * @throws Exception The exception
    */
   public List<String> getAllowedStates(String mode) throws Exception ;
 
   /**
-   * initialize the templates hashmap
+   * Initialize the template hashmap.
    *
    * @throws Exception the exception
    */
   public void cleanTemplates() throws Exception ;
 
   /**
-   * Check isCache or not
-   * @return 
+   * Check isCache or not.
+   * Deprecated since version 4.0.
+   *
+   * @return True if is in cache or False otherwise
    * @throws Exception the exception
-   * Since version 4.0 this method will be deprecated.
    */
   @Deprecated
   public boolean isCached() throws Exception;
+
   /**
-   * Update all document nodetypes and write a query statement   
-   * @return a part of the query allow search all document node and taxonomy link also. Return null if there is any exception.
+   * Update all document nodetypes and write a query cause.
+   *
+   * @return It returns a part of the query that allows to search all document nodes and taxonomy links. Return null if there is any exception.
    * @throws Exception the exception
    */
   public String updateTemplatesSQLFilter() throws Exception; 

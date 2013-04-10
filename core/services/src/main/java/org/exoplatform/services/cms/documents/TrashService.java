@@ -56,8 +56,8 @@ public interface TrashService {
   /**
    * Restore node from trash
    * 
-   * @param trashNodePath
-   * @param repository The repository name
+   * @param trashNodePath The path.
+   * @param sessionProvider The session provider.
    * @throws Exception
    */
   public void restoreFromTrash(String trashNodePath, SessionProvider sessionProvider) throws Exception;

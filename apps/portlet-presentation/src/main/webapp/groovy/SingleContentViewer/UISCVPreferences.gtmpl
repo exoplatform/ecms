@@ -5,114 +5,124 @@
   def jsManager = rcontext.getJavascriptManager();
   String portletId = Utils.getRealPortletId(rcontext);
   
-  jsManager.require("SHARED/clv", "clv").
-  addScripts("clv.CLV.contextualProcessing(document.getElementById('ContexttualContainer" + portletId + "'));");
+  //jsManager.require("SHARED/clv", "clv").
+  //addScripts("clv.CLV.contextualProcessing(document.getElementById('ContexttualContainer" + portletId + "'));");
+  rcontext.getJavascriptManager().require("SHARED/portalControl").require("SHARED/uiForm").require("SHARED/bts_tab").require("SHARED/bts_tooltip");
+	jsManager.require("SHARED/jquery", "gj").addScripts("gj(document).ready(function() { gj(\"*[rel='tooltip']\").tooltip();});");
 %>
 
-
-
-<!--
-<div id="" class="uiTabNormal">
-	<ul id="myTab" class="nav nav-tabs">							
-			<li onclick="" class="active">
-				<a href="#tab-UITemplateEditForm" data-toggle="tab"><%= _ctx.appRes("UISCVPreferences.label.ContentPathBlock") %></a>
-			</li>							
-			<li onclick=")" class="">
-				<a href="#tab-UIDialogTab" data-toggle="tab"><%= _ctx.appRes("UISCVPreferences.label.DisplaySettingBlock") %></a>
-			</li>							
-			<li onclick=")" class="">
-				<a href="#tab-UIViewTab" data-toggle="tab"><%= _ctx.appRes("UISCVPreferences.label.PrintSettingBlock") %></a>
-			</li>							
-			<li onclick=")" class="">
-				<a href="#tab-UISkinTab" data-toggle="tab"><%=_ctx.appRes("UISCVPreferences.label.Advance")%></a>
-			</li>
+<div class="uiFormTabPane uiTabNormal">
+	<ul class="nav nav-tabs">
+		<%
+			String selTabId = uicomponent.getSelectedTabId();
+			for(inputSet in uicomponent.getChildren()) {
+				if(!inputSet.isRendered()) continue;
+				String className="";
+				if(inputSet.getId().equals(selTabId)) className="active";
+				tabName = _ctx.appRes(uicomponent.getName() + ".tab.label." + inputSet.name);
+				String actionLink = "" + uicomponent.event("SelectTab",inputSet.getId()) + "";
+				def tabId = inputSet.getId() + "-tab"
+		%>
+		<li class="$className" onclick="eXo.webui.UIHorizontalTabs.changeTabForUIFormTabpane(this, '$uiform.id', '$inputSet.id');$actionLink">
+					<a data-toggle="tab" data-target="#$tabId">$tabName</a>		
+		</li>
+		<% }%>
 	</ul>
-	<div id="myTabContent" class="tab-content">
-		<div id="tab-UITemplateEditForm" class="tab-pane fade in active">
-			<%
-				uiform.begin()
-			%>
-
-			<fieldset class="fieldsetPreferences" style="height: 150px; display: block;" >
-			  <div class="form-horizontal" >    
-				<div class="control-group">                  
-				  <label class="control-label" for="<%=uicomponent.ITEM_PATH_FORM_INPUT_SET%>"><%=uicomponent.getLabel(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></label>
-				  <a class="actionIcon pull-right"><i class="uiIconQuestion uiIconBlue" id="" title="<%= _ctx.appRes("UISCVPreferences.help.ContentPathBlock") %>" data-placement="left" rel="tooltip"></i></a>
-				  <div class="controls controls-nowrap" <% if (uicomponent.getSelectedNodePath() != null) { %> title="<%=uicomponent.getSelectedNodePath()%>" <% }%> >
-					<input type="text" disabled="" id="viewPermission" name="viewPermission"> *
-					<a class="actionIcon"><i alt="Add Permission" class="uiIconAddPermission uiIconLightGray" title="Add Permission" data-placement="bottom" rel="tooltip" onclick="javascript:eXo.webui.UIForm.submitForm('DialogForm', 'AddPermission', true)"></i></a>
-				  </div>
+	
+	<%uiform.begin()%>
+	<div><input type="hidden" id="<%=uicomponent.RENDER_TAB%>" name="<%=uicomponent.RENDER_TAB%>" value="$uicomponent.selectedTabId"/></div>
+		<div class="tab-content">
+				<%
+					for(formInput in uicomponent.getChildren()) {
+						if(!formInput.isRendered()) continue;
+						def active = "";
+						if(formInput.getId().equals(selTabId)) {
+							active = "in active";
+						}
+				%>
+				<div id="$formInput.id-tab" class="tab-pane fade $active">
+					<div class="uiTabContent">
+						<%
+						  if(formInput.getName().equals(uicomponent.CONTENT_FORM_INPUT_SET)) {
+						  %>
+							  <div class="form-horizontal" >
+								  <div class="control-group">                  
+								    <label class="control-label" for="<%=uicomponent.ITEM_PATH_FORM_INPUT_SET%>"><%=uicomponent.getLabel(uicomponent.ITEM_PATH_FORM_INPUT_SET) %>: </label>
+								    <a class="actionIcon pull-right"><i class="uiIconQuestion uiIconLightGray" id="" title="<%= _ctx.appRes("UISCVPreferences.help.ContentPathBlock") %>" data-placement="left" rel="tooltip"></i></a>
+								    <div class="controls controls-nowrap" <% if (uicomponent.getSelectedNodePath() != null) { %> title="<%=uicomponent.getSelectedNodePath()%>" <% }%> >
+								      <% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %>
+								    </div>
+								  </div>
+								</div>
+						  <%
+						  } else if(formInput.getName().equals(uicomponent.DISPLAY_FORM_INPUT_SET)) {
+						  %>
+						    <div class="form-horizontal" >
+								  <ul class="control-group">                  
+									  <li class="pull-left" ><% uiform.renderField(uicomponent.SHOW_TITLE_CHECK_BOX) %> <%=uicomponent.getLabel(uicomponent.SHOW_TITLE_CHECK_BOX) %></li>    
+	                  <li class="pull-left" ><% uiform.renderField(uicomponent.SHOW_DATE_CHECK_BOX) %> <%=uicomponent.getLabel(uicomponent.SHOW_DATE_CHECK_BOX) %></li>                
+	                  <li class="pull-left" ><% uiform.renderField(uicomponent.SHOW_OPION_BAR_CHECK_BOX) %> <%=uicomponent.getLabel(uicomponent.SHOW_OPION_BAR_CHECK_BOX) %></li>
+									  <li class="pull-right"><a class="actionIcon"><i class="uiIconQuestion uiIconLightGray" id="" title="<%= _ctx.appRes("UISCVPreferences.help.DisplaySettingBlock") %> " data-placement="left" rel="tooltip"></i></a></li>
+								  </ul>
+							  </div>
+						  <%
+						  } else if(formInput.getName().equals(uicomponent.PRINT_FORM_INPUT_SET)) {
+						  %>
+							  <div class="form-horizontal" >						    
+							  
+						    
+						    <div class="control-group">                  
+						      <label class="control-label" for="<%=uicomponent.PRINT_PAGE_FORM_INPUT_SET%>"><%=uicomponent.getLabel(uicomponent.PRINT_PAGE_FORM_INPUT_SET) %>: </label>
+						      <a class="actionIcon pull-right"><i class="uiIconQuestion uiIconLightGray" id="" title="<%= _ctx.appRes("UISCVPreferences.help.ContentPathBlock") %>" data-placement="left" rel="tooltip"></i></a>
+						      <div class="controls" ><% uiform.renderField(uicomponent.PRINT_PAGE_FORM_INPUT_SET) %></div>
+						    </div>
+						    
+						    <div class="control-group">                  
+							      <label class="control-label" for="<%=uicomponent.PRINT_PAGE_PARAMETER_INPUT%>"><%=uicomponent.getLabel(uicomponent.PRINT_PAGE_PARAMETER_INPUT) %>: </label>
+							      <div class="controls" ><% uiform.renderField(uicomponent.PRINT_PAGE_PARAMETER_INPUT) %></div>
+							    </div>
+						    </div>
+						  <%
+						  } else if(formInput.getName().equals(uicomponent.ADVANCED_FORM_INPUT_SET)) { 
+						  %>
+							  <div class="form-horizontal" >   
+								  <label class="clearfix"> <a class="actionIcon pull-right"><i class="uiIconQuestion uiIconLightGray" id="" title="<%= _ctx.appRes("UISCVPreferences.help.ContextualHelp") %>" data-placement="left" rel="tooltip"></i></a><%=_ctx.appRes("UISCVPreferences.label.ContextCaption") %>: </label>
+								  <div class="control-group">                  
+								    <div class="controls_full">
+									    <%uiform.renderField(uicomponent.CONTEXTUAL_SELECT_RADIO_BOX) %> 
+								    </div>
+								  </div>
+								  
+								  <label class="clearfix"><a class="actionIcon pull-right"><i class="uiIconQuestion uiIconLightGray" id="" title="<%= _ctx.appRes("UISCVPreferences.help.ContentPathBlock") %>" data-placement="left" rel="tooltip"></i></a><%=_ctx.appRes("UISCVPreferences.label.CacheManagement") %>: </label>
+								  <div class="control-group">                  
+								    <div class="controls_full">
+									    <%uiform.renderField(uicomponent.CACHE_ENABLE_SELECT_RADIO_BOX) %>
+								    </div>
+								  </div>
+								</div>
+						  <%
+						  } else uicomponent.renderUIComponent(formInput);
+						%>
+					</div>
 				</div>
-			  </div>
-			</fieldset>  
-			
-			
-			<fieldset class="fieldsetPreferences" style="height: 150px; display: none;" >
-			  <div class="form-horizontal" >    
-				<ul class="control-group">                  
-				  <li class="pull-left" ><% uiform.renderField(uicomponent.SHOW_TITLE_CHECK_BOX) %></li>
-                  <li class="pull-left"><%=uicomponent.getLabel(uicomponent.SHOW_TITLE_CHECK_BOX) %></li>     
-                  <li class="pull-left" ><% uiform.renderField(uicomponent.SHOW_DATE_CHECK_BOX) %></li>
-                  <li class="pull-left"><%=uicomponent.getLabel(uicomponent.SHOW_DATE_CHECK_BOX) %></li>                  
-                  <li class="pull-left" ><% uiform.renderField(uicomponent.SHOW_OPION_BAR_CHECK_BOX) %></li>
-                  <li class="pull-left"><%=uicomponent.getLabel(uicomponent.SHOW_OPION_BAR_CHECK_BOX) %></li>
-				  <li class="pull-right"><a class="actionIcon"><i class="uiIconQuestion uiIconBlue" id="" title="<%= _ctx.appRes("UISCVPreferences.help.DisplaySettingBlock") %> " data-placement="left" rel="tooltip"></i></a></li>
-			  </ul>
-			</fieldset>  
-			
-			
-			<fieldset class="fieldsetPreferences" style="height: 150px; display: none;" >
-			  <div class="form-horizontal" >   
-				<div class="control-group">                  
-				  <label class="control-label" for="<%=uicomponent.PRINT_PAGE_FORM_INPUT_SET%>"><%=uicomponent.getLabel(uicomponent.PRINT_PAGE_FORM_INPUT_SET) %></label>
-				  <a class="actionIcon pull-right"><i class="uiIconQuestion uiIconBlue" id="" title="<%= _ctx.appRes("UISCVPreferences.help.ContentPathBlock") %>" data-placement="left" rel="tooltip"></i></a>
-				  <div class="controls uiSearchInput" ><% uiform.renderField(uicomponent.PRINT_PAGE_PARAMETER_INPUT) %></div>
-				</div>
-				<div class="control-group">                  
-				  <label class="control-label" for="<%=uicomponent.PRINT_PAGE_PARAMETER_INPUT%>"><%=uicomponent.getLabel(uicomponent.PRINT_PAGE_PARAMETER_INPUT) %></label>
-				  <div class="controls" ><% uiform.renderField(uicomponent.PRINT_PAGE_PARAMETER_INPUT) %></div>
-				</div>
-			</fieldset>  
-			
-			
-			
-			<fieldset class="fieldsetPreferences" style="height: 150px; display: none;" >
-			  <div class="form-horizontal" >   
-				<label class="clearfix"> <a class="actionIcon pull-right"><i class="uiIconQuestion uiIconBlue" id="" title="<%= _ctx.appRes("UISCVPreferences.help.ContextualHelp") %>" data-placement="left" rel="tooltip"></i></a><%=_ctx.appRes("UISCVPreferences.label.ContextCaption") %></label>
-				<div class="control-group">                  
-				  <div class="controls_full">
-					<%uiform.renderField(uicomponent.CONTEXTUAL_SELECT_RADIO_BOX) %> 
-				  </div>
-				</div>
-				<label class="clearfix"><a class="actionIcon pull-right"><i class="uiIconQuestion uiIconBlue" id="" title="<%= _ctx.appRes("UISCVPreferences.help.ContentPathBlock") %>" data-placement="left" rel="tooltip"></i></a><%=_ctx.appRes("UISCVPreferences.label.CacheManagement") %></label>
-				<div class="control-group">                  
-				  <div class="controls_full">
-					 <%uiform.renderField(uicomponent.CACHE_ENABLE_SELECT_RADIO_BOX) %>
-				  </div>
-				</div>
-			</fieldset>  
-			
-	        <%
-				uiform.end()
-			%>
+				<%}%>
 		</div>
-	</div>
+		<div class="uiAction">
+			<%for(action in uicomponent.getActions()) { 
+				String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action);
+				String link = uicomponent.event(action);
+			%>
+					<a href="javascript:void(0);" onclick="$link" class="btn">$actionLabel</a>
+			<%}%>
+		</div>
+	<%uiform.end()%>
+	
 </div>
 
-<div class="uiAction"> 
-	 <% for(action in uicomponent.getActions()) { 
-		   String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
-		   String link = uicomponent.event(action) ;
-	  %>
-			<button class="btn" onclick="$link" type="button" href="javascript:void(0);">$actionLabel</button>
-	 <%}%>        
-</div>
 
 
 
--->
-
-<div class="UIForm $uicomponent.id" >
+<!--<div class="UIForm $uicomponent.id" >
    <%
     uiform.begin()
       %>
@@ -271,4 +281,4 @@
       <%
     uiform.end()
   %>
-</div>
+</div>-->

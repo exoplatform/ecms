@@ -126,7 +126,7 @@ public class UISearchResult extends UIContainer {
   }
 
   public UISearchResult() throws Exception {
-    uiPageIterator_ = addChild(UIPageIterator.class, null, null);
+    uiPageIterator_ = addChild(UIPageIterator.class, null, "UISearchResultPageIterator");
   }
 
   public void setQuery(String queryStatement, String workspaceName, String language, boolean isSystemSession, String keyword) {
@@ -454,7 +454,6 @@ public class UISearchResult extends UIContainer {
      * @param linkPath
      * @param keyword
      * @return
-     * @Author Nguyen The Vinh from ExoPlatform
      */
     protected boolean checkTargetMatch(Node symlinkNode, String keyword) {
       String queryStatement = CHECK_LINK_MATCH_QUERY1;

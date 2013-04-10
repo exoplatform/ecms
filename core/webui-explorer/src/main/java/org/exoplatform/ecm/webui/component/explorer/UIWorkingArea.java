@@ -427,14 +427,19 @@ public class UIWorkingArea extends UIContainer {
     UIActionBar uiActionBar = findFirstComponentOfType(UIActionBar.class);
     uiActionBar.setRendered(uiPortlet.isShowActionBar());
     UISelectDocumentTemplateTitle uiTemplateTitle = findFirstComponentOfType(UISelectDocumentTemplateTitle.class);
+    boolean isUITemplateTitleRendered = isUISelectDocumentTemplateTitleRendered();
+    uiTemplateTitle.setRendered(isUITemplateTitleRendered);
+    
+    super.processRender(context);
+  }
+  
+  public boolean isUISelectDocumentTemplateTitleRendered()  {
     UIDocumentFormController uiDocumentController = findFirstComponentOfType(UIDocumentFormController.class);
     boolean isUITemplateTitleRendered = 
         (uiDocumentController != null
         && uiDocumentController.isRendered()
         && uiDocumentController.getChild(UISelectDocumentForm.class).isRendered());
-    uiTemplateTitle.setRendered(isUITemplateTitleRendered);
-    
-    super.processRender(context);
+    return isUITemplateTitleRendered;
   }
 
   /**

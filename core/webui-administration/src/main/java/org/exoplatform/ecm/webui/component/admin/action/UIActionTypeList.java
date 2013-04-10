@@ -36,6 +36,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -71,6 +72,18 @@ public class UIActionTypeList extends UIPagingGrid {
 
   public String[] getActions() { return new String[] {"AddAction"} ;}
 
+  /* (non-Javadoc)
+   * @see org.exoplatform.webui.core.UIComponent#processRender(org.exoplatform.webui.application.WebuiRequestContext)
+   */
+  @Override
+  public void processRender(WebuiRequestContext context) throws Exception {
+    context.getJavascriptManager()
+      .require("SHARED/jquery", "gj")
+      .addScripts("gj(document).ready(function() { gj(\"*[rel='tooltip']\").tooltip();});");
+
+    super.processRender(context);
+  }
+  
   @Override
   public void refresh(int currentPage) throws Exception {
     ActionServiceContainer actionsServiceContainer =

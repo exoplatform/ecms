@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 
 import javax.jcr.RepositoryException;
 
+import org.apache.tika.exception.TikaException;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.container.xml.ValuesParam;
@@ -167,6 +168,8 @@ public class JcrCmisRegistry extends CmisRegistry implements Startable, CmisRegi
          catch (java.io.IOException e)
          {
             throw new CmisRuntimeException(e.getLocalizedMessage(), e);
+         } catch (TikaException e) {
+           throw new CmisRuntimeException(e.getLocalizedMessage(), e);
          }
       }
    }

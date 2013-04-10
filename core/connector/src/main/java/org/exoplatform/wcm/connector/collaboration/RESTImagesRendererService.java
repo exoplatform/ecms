@@ -47,11 +47,9 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 /**
  * Get the image binary data of a given image node. 
  *
- * @author Hoa Pham <hoa.phamvu@exoplatform.com>
- * @since      Mar 31, 2009
- * @copyright  eXo Platform SEA
+ * @LevelAPI Provisional
  * 
- * @anchor CONTref.Devref.PublicRestAPIs.RESTImagesRendererService
+ * @anchor RESTImagesRendererService
  */
 @Path("/images/")
 public class RESTImagesRendererService implements ResourceContainer{
@@ -90,26 +88,26 @@ public class RESTImagesRendererService implements ResourceContainer{
 
   /**
    * Get the image binary data of a given image node.
-   *
-   * @param repository The repository.
-   * @param workspace The workspace.
+   * @param repositoryName The repository.
+   * @param workspaceName The workspace.
    * @param nodeIdentifier The node identifier.
-   *
+   * @param param Check if the document is a file or not. Default value is "file".
+   * @param ifModifiedSince Check the modify date.
    * @return The response
-   * 
-   * @anchor CONTref.Devref.PublicRestAPIs.RESTImagesRendererService.serveImage
+   *
+   * @anchor RESTImagesRendererService.serveImage
    */
   @GET
   @Path("/{repositoryName}/{workspaceName}/{nodeIdentifier}")
-  public Response serveImage(@PathParam("repositoryName") String repository,
-                                     @PathParam("workspaceName") String workspace,
+  public Response serveImage(@PathParam("repositoryName") String repositoryName,
+                                     @PathParam("workspaceName") String workspaceName,
                                      @PathParam("nodeIdentifier") String nodeIdentifier,
                                      @QueryParam("param") @DefaultValue("file") String param,
                                      @HeaderParam("If-Modified-Since") String ifModifiedSince) {
     try {
       SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
       WCMService wcmService = WCMCoreUtils.getService(WCMService.class);
-      Node node = wcmService.getReferencedContent(sessionProvider, workspace, nodeIdentifier);
+      Node node = wcmService.getReferencedContent(sessionProvider, workspaceName, nodeIdentifier);
       if (node == null) return Response.status(HTTPStatus.NOT_FOUND).build();
 
       if ("file".equals(param)) {
@@ -119,7 +117,7 @@ public class RESTImagesRendererService implements ResourceContainer{
         }else if(node.isNodeType("nt:versionedChild")) {
           VersionHistory versionHistory = (VersionHistory)node.getProperty("jcr:childVersionHistory").getNode();
           String versionableUUID = versionHistory.getVersionableUUID();
-          dataNode = sessionProvider.getSession(workspace,
+          dataNode = sessionProvider.getSession(workspaceName,
                                                 repositoryService.getCurrentRepository())
                                     .getNodeByUUID(versionableUUID);
         }else {

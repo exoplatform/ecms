@@ -91,8 +91,8 @@
         if (permLinkComponent != null) {
           strActs +=  "<li class='menuItem'>";
           strActs +=  "<a exo:attr='ViewDocument' style='display: block;' href=\"" + permLinkComponent.getPermlink(node) + "\" target='_new' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\">";
-          strActs +=  " <i class='uiIconEcmsViewDocument'>" ;
-          strActs +=  " </i>&nbsp;";    
+          strActs +=  " <i class='uiIconEcmsViewDocument uiIconEcmsLightGrey'>" ;
+          strActs +=  " </i> ";    
           strActs +=    _ctx.appRes("ECMContextMenu.event." + permLinkComponent.getUIExtensionName());
           strActs +=  "</a>";
           strActs +=  "</li>";
@@ -109,7 +109,7 @@
 	    		  String link ="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('','"+ portalName +"','"+ restContextName +"','"+repository+"','"+ preferenceWS+ "','" + webDavPath +"','"+mimeType+"')";
             strActs +=  "<li class='menuItem'>";
             strActs +=    "<a class='itemDownload' exo:attr='Download' style='display: block;' onclick=\"return eXo.ecm.WCMUtils.hideContextMenu(this);\" href=\"" + link + "\" >" ;          
-            strActs +=    "  <i class=\"uiIconDownload\"></i>&nbsp;" + _ctx.appRes("UITreeExplorer.label.webDavView");
+            strActs +=    "  <i class=\"uiIconDownload uiIconLightGray\"></i> " + _ctx.appRes("UITreeExplorer.label.webDavView");
             strActs +=    "</a>" ;            
             strActs += "</li>";
 	  		  } else {
@@ -119,7 +119,7 @@
 						  String link = "/" + restContextName + "/private/jcr/" + repository+ "/" + preferenceWS + Utils.formatNodeName(nodeTarget.getPath());
               strActs +=  "<li class='menuItem'>";
               strActs +=    "<a  class='itemDownload' exo:attr='Download' style='display: block; {behavior: url(#default#AnchorClick);}' onclick=\"eXo.ecm.WCMUtils.hideContextMenu(this);window.open('" +link + "');\" target='_new' folder=\"" + link +"\">" ;          
-              strActs +=    "  <i class=\"uiIconDownload\"></i>&nbsp;" + _ctx.appRes("UITreeExplorer.label.webDavView");
+              strActs +=    "  <i class=\"uiIconDownload uiIconLightGray\"></i> " + _ctx.appRes("UITreeExplorer.label.webDavView");
               strActs +=    "</a>" ;
               strActs += "</li>";
 						}
@@ -148,8 +148,8 @@
         if (!node.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(node)) {
           strActs +=  "<li class='menuItem'>";
           strActs +=  "<a exo:attr='CopyUrlToClipboard' style='display: block;' id='${drive}_treeclip_button$depthChild$counter' path='$clipboardLink' onclick=\"eXo.ecm.ECMUtils.pushToClipboard(event,'$clipboardLink');\">" ;
-          strActs +=  " <i class='uiIconEcmsCopyUrlToClipboard'>" ;
-          strActs +=  " </i>&nbsp;";
+          strActs +=  " <i class='uiIconEcmsCopyUrlToClipboard uiIconEcmsLightGrey'>" ;
+          strActs +=  " </i> ";
 	  			strActs +=	  _ctx.appRes("ECMContextMenu.event.GetURL");
 	  			strActs +=  "</a>";
           strActs += "</li>";

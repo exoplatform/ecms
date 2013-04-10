@@ -751,9 +751,8 @@ public class Utils {
   /**
    *
    * @param name
-   * @param width
-   * @param height
    * @param value_
+   * @param arguments
    * @return
    */
   private static String createCKEditorField(String name, String value_, HashMap<String,String> arguments) {
@@ -870,7 +869,6 @@ public class Utils {
    * @param node
    * @return
    * @throws Exception
-   * @Author Nguyen The Vinh from ExoPlatform
    */
   public static String getTitleWithSymlink(Node node) throws Exception {
     String title = null;
@@ -961,12 +959,10 @@ public class Utils {
   }
 
   /**
-   * @param       cookieName
-   * @param       cookies cookies
+   * Get a cookie value with given name
+   *
+   * @param       cookieName cookies
    * @return      a cookies value
-   * @Objective : Get a cookie value with given name
-   * @Author    : Nguyen The Vinh from ECM of eXoPlatform
-   *              vinh.nguyen@exoplatform.com
    */
   public static String getCookieByCookieName(String cookieName) {
     HttpServletRequest request = Util.getPortalRequestContext().getRequest();
@@ -987,8 +983,6 @@ public class Utils {
    * @param     :  node: nt:file node with have the data stream
    * @return    :  Link to download the jcr:data of the given node
    * @throws       Exception
-   * @Author    :  Nguyen The Vinh from ECM of eXoPlatform
-   *               vinh.nguyen@exoplatform.com
    */
   public static String getDownloadRestServiceLink(Node node) throws Exception{
     ExoContainer container = ExoContainerContext.getCurrentContainer() ;

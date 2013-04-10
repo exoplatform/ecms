@@ -25,16 +25,8 @@ import org.exoplatform.services.wcm.search.ResultNode;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
-/**
- * Created by The eXo Platform SAS
- * Author : eXoPlatform
- *          exo@exoplatform.com
- * Feb 5, 2013  
- */
 public abstract class BaseContentSearchServiceConnector extends BaseSearchServiceConnector {
 
-  private static final Log LOG = ExoLogger.getLogger(BaseContentSearchServiceConnector.class.getName());
-  
   public BaseContentSearchServiceConnector(InitParams initParams) throws Exception {
     super(initParams);
   }

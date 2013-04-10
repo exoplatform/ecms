@@ -61,15 +61,6 @@
 				<div id="tab4" class="tab-pane fade in active">
 					<div class="form-horizontal">
 						<div class="control-group">
-							<label class="control-label" for="title"><%=_ctx.appRes("WebContent.dialog.label.title")%>:</label>
-							<div class="controls">
-								<%
-											String[] webContentFieldTitle = ["jcrPath=/node/exo:title", "validate=empty", "editable=if-null"];
-											uicomponent.addTextField("title", webContentFieldTitle) ;
-									%>
-							</div>
-						</div>
-						<div class="control-group">
 							<label class="control-label" for="name"><%=_ctx.appRes("WebContent.dialog.label.name")%>:</label>
 							<div class="controls">
 									<%
@@ -90,14 +81,10 @@
 											uicomponent.addHiddenField("videoFolder", videoFolder);
 											uicomponent.addHiddenField("audioFolder", audioFolder);
 										%>
-								<script type="text/javascript">
-								titleField = document.getElementById("title");
-								titleField.onchange = function() { eXo.ecm.SELocalization.cleanName(this.value, "name"); } ;
-								</script>
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label" for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%>:</label>
+							<label class="control-label" for="content-lang"><%=_ctx.appRes("ElementSet.dialog.label.language")%></label>
 							<div class="controls">
 								<%
 									String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().toString();
@@ -144,7 +131,7 @@
 							<div class="controls-full"><span class="helpBlock helpBlockTitle"><i class="uiIconHelp"></i> <%=_ctx.appRes("WebContent.dialog.label.hintIllustration")%></span></div>
 						</div>
 						<div class="control-group">
-							<label class="control-label"><%=_ctx.appRes("WebContent.dialog.label.illustrationImage")%></label>
+							<label class="control-label"><%=_ctx.appRes("WebContent.dialog.label.illustrationImage")%>:</label>
 							<div class="controls">
 								<%					
 									String illustration = "illustration";
@@ -172,7 +159,7 @@
 							</div>
 						</div>												
 						<div class="control-group">
-							<label class="control-label"><%=_ctx.appRes("WebContent.dialog.label.Summary")%></label>
+							<label class="control-label"><%=_ctx.appRes("WebContent.dialog.label.Summary")%>:</label>
 							<div class="controls">
 								<%
 									String summaryContent = "";

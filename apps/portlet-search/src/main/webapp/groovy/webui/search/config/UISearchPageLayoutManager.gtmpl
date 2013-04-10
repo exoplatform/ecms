@@ -4,59 +4,58 @@
 	import org.exoplatform.wcm.webui.Utils;
 	
 %>
-<div class="UIForm $uicomponent.id">
+<div class="uiForm $uicomponent.id">
   <%uiform.begin()%>
-  <div class="HorizontalLayout">
-    <div class="FormContainer">
-      <table class="UIFormGrid">
-	      	<tr>
-			      <td class="FieldLabel"><label for="<%=uicomponent.ITEMS_PER_PAGE_SELECTOR%>">
-				      <%=uicomponent.getLabel(uiform.getChildById(uicomponent.ITEMS_PER_PAGE_SELECTOR).getName()) %>
-			      </label></td>
-						<td class="FieldComponent" colspan="2"><% uiform.renderField(uiform.getChildById(uicomponent.ITEMS_PER_PAGE_SELECTOR)); %></td>
-					</tr>
-	      	<tr>
-			      <td class="FieldLabel"><label for="<%=uicomponent.PAGE_MODE_SELECTOR%>">
-				      <%=uicomponent.getLabel(uiform.getChildById(uicomponent.PAGE_MODE_SELECTOR).getName()) %>
-			      </label></td>
-						<td class="FieldComponent" colspan="2"><% uiform.renderField(uiform.getChildById(uicomponent.PAGE_MODE_SELECTOR)); %></td>
-					</tr>
-					<tr>
-			      <td class="FieldLabel"><label for="<%=uicomponent.SEARCH_FORM_TEMPLATE_SELECTOR%>">
-				      <%=uicomponent.getLabel(uiform.getChildById(uicomponent.SEARCH_FORM_TEMPLATE_SELECTOR).getName()) %>
-			      </label></td>
-						<td class="FieldComponent" colspan="2"><% uiform.renderField(uiform.getChildById(uicomponent.SEARCH_FORM_TEMPLATE_SELECTOR)); %></td>				
-					</tr>
-					<tr>
-			      <td class="FieldLabel"><label for="<%=uicomponent.SEARCH_RESULT_TEMPLATE_SELECTOR%>">
-				      <%=uicomponent.getLabel(uiform.getChildById(uicomponent.SEARCH_RESULT_TEMPLATE_SELECTOR).getName()) %>
-			      </label></td>
-						<td class="FieldComponent" colspan="2"><% uiform.renderField(uiform.getChildById(uicomponent.SEARCH_RESULT_TEMPLATE_SELECTOR)) ;%></td>								
-					</tr>					
 
-					<tr>
-			      <td class="FieldLabel"><label for="<%=uicomponent.SEARCH_PAGE_LAYOUT_SELECTOR%>">
-				      <%=uicomponent.getLabel(uiform.getChildById(uicomponent.SEARCH_PAGE_LAYOUT_SELECTOR).getName()) %>
-			      </label></td>
-						<td class="FieldComponent" colspan="2"><% uiform.renderField(uiform.getChildById(uicomponent.SEARCH_PAGE_LAYOUT_SELECTOR)); %></td>								
-					</tr>											
-					<tr>
-				      <td class="FieldLabel"><label for="<%=uicomponent.BASE_PATH_INPUT_SET_ACTION%>">
-					      <%=uicomponent.getLabel(uiform.getChildById(uicomponent.BASE_PATH_INPUT_SET_ACTION).getName()) %>
-				      </label></td>
-					  <td class="FieldComponent" style="padding:0px"><% uiform.renderField(uiform.getChildById(uicomponent.BASE_PATH_INPUT_SET_ACTION)); %></td>
-					  <td ><span class="SelectTargetPageIcon" onclick="<%=uicomponent.event("SelectBasePath")%>"></span></td>													
-					</tr>		
-	      </table>  
-      <div class="UIAction"> 
+			<div class="form-horizontal">
+				<div class="control-group">
+					<label class="control-label" for="<%=uicomponent.ITEMS_PER_PAGE_SELECTOR%>">
+						<%=uicomponent.getLabel(uiform.getChildById(uicomponent.ITEMS_PER_PAGE_SELECTOR).getName()) %>:
+					</label>
+					<div class="controls"><% uiform.renderField(uiform.getChildById(uicomponent.ITEMS_PER_PAGE_SELECTOR)); %></div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="<%=uicomponent.PAGE_MODE_SELECTOR%>">
+						<%=uicomponent.getLabel(uiform.getChildById(uicomponent.PAGE_MODE_SELECTOR).getName()) %>:
+					</label>
+					<div class="controls"><% uiform.renderField(uiform.getChildById(uicomponent.PAGE_MODE_SELECTOR)); %></div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="<%=uicomponent.SEARCH_FORM_TEMPLATE_SELECTOR%>">
+						<%=uicomponent.getLabel(uiform.getChildById(uicomponent.SEARCH_FORM_TEMPLATE_SELECTOR).getName()) %>:
+					</label>
+					<div class="controls"><% uiform.renderField(uiform.getChildById(uicomponent.SEARCH_FORM_TEMPLATE_SELECTOR)); %></div>				
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="<%=uicomponent.SEARCH_RESULT_TEMPLATE_SELECTOR%>">
+						<%=uicomponent.getLabel(uiform.getChildById(uicomponent.SEARCH_RESULT_TEMPLATE_SELECTOR).getName()) %>:
+					</label>
+					<div class="controls"><% uiform.renderField(uiform.getChildById(uicomponent.SEARCH_RESULT_TEMPLATE_SELECTOR)) ;%></div>
+				</div>					
+
+				<div class="control-group">
+					<label class="control-label" for="<%=uicomponent.SEARCH_PAGE_LAYOUT_SELECTOR%>">
+						<%=uicomponent.getLabel(uiform.getChildById(uicomponent.SEARCH_PAGE_LAYOUT_SELECTOR).getName()) %>:
+					</label>
+					<div class="controls"><% uiform.renderField(uiform.getChildById(uicomponent.SEARCH_PAGE_LAYOUT_SELECTOR)); %></div>
+				</div>			
+				<div class="control-group">
+					<label class="control-label" for="<%=uicomponent.BASE_PATH_INPUT_SET_ACTION%>">
+						<%=uicomponent.getLabel(uiform.getChildById(uicomponent.BASE_PATH_INPUT_SET_ACTION).getName()) %>:
+					</label>
+					<div class="controls">
+						<% uiform.renderField(uiform.getChildById(uicomponent.BASE_PATH_INPUT_SET_ACTION)); %>
+					</div>					
+				</div>		
+			</div>  
+      <div class="uiAction"> 
 			  <% for(action in uicomponent.getActions()) { 
 				 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
 			   String link = uicomponent.event(action) ;
 				%>
-					  <a onclick="$link" class="ActionButton LightBlueStyle" href="javascript:void(0);">$actionLabel</a>
+					  <button type="button" onclick="$link" class="btn" href="javascript:void(0);">$actionLabel</button>
 			   <%}%>        
 			</div>
-    </div>
-  </div>
+
   <%uiform.end()%>
 </div>

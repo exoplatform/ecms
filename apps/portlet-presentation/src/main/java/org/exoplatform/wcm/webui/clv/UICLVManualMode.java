@@ -17,6 +17,7 @@
 package org.exoplatform.wcm.webui.clv;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,10 +26,12 @@ import javax.jcr.query.Query;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.ecm.webui.comparator.PropertyValueComparator;
 import org.exoplatform.portal.webui.application.UIPortlet;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.publication.PaginatedResultIterator;
 import org.exoplatform.services.wcm.publication.Result;
 import org.exoplatform.services.wcm.publication.WCMComposer;
@@ -108,16 +111,26 @@ public class UICLVManualMode extends UICLVContainer {
       return;
     } else {
       String[] listContent = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null).split(";");
+      //get node to sort
+      List<Node> originalList = new ArrayList<Node>();
       if (listContent != null && listContent.length != 0) {
         for (String itemPath : listContent) {
-          NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(itemPath);
-          Node viewNode = Utils.getViewableNodeByComposer(nodeLocation.getRepository(),
-                                                          Text.escapeIllegalJcrChars(nodeLocation.getWorkspace()), 
-                                                          Text.escapeIllegalJcrChars(nodeLocation.getPath()),
-                                                          null,
-                                                          sharedCache);
-          if (viewNode != null) nodes.add(viewNode);
+          originalList.add(NodeLocation.getNodeByExpression(itemPath));
         }
+      }
+      //sort nodes
+      String orderBy = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ORDER_BY, NodetypeConstant.EXO_TITLE);
+      String orderType = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ORDER_TYPE, "ASC");
+      
+      Collections.sort(originalList, new PropertyValueComparator(orderBy, "ASC".equals(orderType) ? "Ascending" : "Descending"));
+      //get real node by portlet mode
+      for (Node node : originalList) {
+        Node viewNode = Utils.getViewableNodeByComposer(WCMCoreUtils.getRepository().getConfiguration().getName(),
+                                                        Text.escapeIllegalJcrChars(node.getSession().getWorkspace().getName()), 
+                                                        Text.escapeIllegalJcrChars(node.getPath()),
+                                                        null,
+                                                        sharedCache);
+        if (viewNode != null) nodes.add(viewNode);
       }
     }
     if (nodes.size() == 0) {

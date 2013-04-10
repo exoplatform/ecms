@@ -70,13 +70,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * This is a service which is used to perform some actions on a folder or on a file, such as creating, or deleting a folder/file, or uploading a file.
+ * This is a service which is used to perform some actions on a folder or on a file, such as creating,
+ * or deleting a folder/file, or uploading a file.
  *
- * @author Lai Trung Hieu <hieu.lai@exoplatform.com>
- * @since      6 Apr 2011
- * @copyright  eXo Platform SEA
+ * @LevelAPI Provisional
  *
- * @anchor CONTref.Devref.PublicRestAPIs.ManageDocumentService
+ * @anchor ManageDocumentService
  */
 @Path("/managedocument/")
 public class ManageDocumentService implements ResourceContainer {
@@ -151,10 +150,9 @@ public class ManageDocumentService implements ResourceContainer {
    * @param showPrivate Show the Private drive or not. The default value is false.
    * @param showPersonal Show the Personal drive or not. The default value is false.
    * @return {@link Document} Contain the drives.
-   *
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.ManageDocumentService.getDrives
+   * @anchor ManageDocumentService.getDrives
    */
   @GET
   @Path("/getDrives/")
@@ -209,12 +207,10 @@ public class ManageDocumentService implements ResourceContainer {
    * @param workspaceName The name of workspace.
    * @param currentFolder The path to the folder to achieve its folders and files.
    * @param showHidden Show the hidden items or not. The default value is false.
-   *
    * @return {@link Document} Contain the folders and files.
-   *
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.ManageDocumentService.getFoldersAndFiles
+   * @anchor ManageDocumentService.getFoldersAndFiles
    */
   @GET
   @Path("/getFoldersAndFiles/")
@@ -257,12 +253,10 @@ public class ManageDocumentService implements ResourceContainer {
    * @param driveName The name of drive.
    * @param workspaceName The name of workspace.
    * @param itemPath The path to the folder/file.
-   *
    * @return {@link Response} Return the status of an item which has been deleted.
-   *
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.ManageDocumentService.deleteFolderOrFile
+   * @anchor ManageDocumentService.deleteFolderOrFile
    */
   @GET
   @Path("/deleteFolderOrFile/")
@@ -308,12 +302,10 @@ public class ManageDocumentService implements ResourceContainer {
    * @param workspaceName The name of workspace.
    * @param currentFolder The path to the folder where a child folder is added.
    * @param folderName The name of folder.
-   *
    * @return {@link Document} Contain the created folder.
-   *
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.ManageDocumentService.createFolder
+   * @anchor ManageDocumentService.createFolder
    */
   @GET
   @Path("/createFolder/")
@@ -370,7 +362,7 @@ public class ManageDocumentService implements ResourceContainer {
    *
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.ManageDocumentService.uploadFile
+   * @anchor ManageDocumentService.uploadFile
    */
   @POST
   @Path("/uploadFile/upload/")
@@ -393,12 +385,10 @@ public class ManageDocumentService implements ResourceContainer {
    * @param language The language of user.
    * @param fileName The name of file.
    * @param uploadId The Id of the uploaded resource .
-   *
    * @return The response.
-   *
    * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.ManageDocumentService.processUpload
+   * @anchor ManageDocumentService.processUpload
    */
   @GET
   @Path("/uploadFile/control/")
@@ -407,7 +397,7 @@ public class ManageDocumentService implements ResourceContainer {
       @QueryParam("workspaceName") String workspaceName,
       @QueryParam("driveName") String driveName,
       @QueryParam("currentFolder") String currentFolder,
-      @QueryParam("currentPortal") String siteName,
+      @QueryParam("currentPortal") String currentPortal,
       @QueryParam("action") String action,
       @QueryParam("language") String language,
       @QueryParam("fileName") String fileName,
@@ -420,7 +410,7 @@ public class ManageDocumentService implements ResourceContainer {
         String userId = ConversationState.getCurrent().getIdentity().getUserId();
         return createProcessUploadResponse(Text.escapeIllegalJcrChars(workspaceName),
                                            currentFolderNode,
-                                           siteName,
+                                           currentPortal,
                                            userId,
                                            action,
                                            language,
@@ -652,8 +642,6 @@ public class ManageDocumentService implements ResourceContainer {
   /**
    * Gets the memberships.
    *
-   * @param userId the user id.
-   *
    * @return the memberships
    *
    * @throws Exception the exception
@@ -711,7 +699,7 @@ public class ManageDocumentService implements ResourceContainer {
    * Creates the process upload response.
    *
    * @param workspaceName the workspace name
-   * @param jcrPath the jcr path
+   * @param userId the user id
    * @param action the action
    * @param language the language
    * @param fileName the file name

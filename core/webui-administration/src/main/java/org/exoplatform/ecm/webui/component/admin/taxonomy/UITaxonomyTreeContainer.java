@@ -44,7 +44,6 @@ import org.exoplatform.services.cms.taxonomy.impl.TaxonomyAlreadyExistsException
 import org.exoplatform.services.cms.taxonomy.impl.TaxonomyNodeAlreadyExistsException;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -196,7 +195,7 @@ public class UITaxonomyTreeContainer extends UIContainer implements UISelectable
     return (UIFormStringInput)findComponentById(id);
   }
 
-  public Session getSession(String workspace) throws RepositoryException, RepositoryConfigurationException  {
+  public Session getSession(String workspace) throws RepositoryException {
     return WCMCoreUtils.getSystemSessionProvider().getSession(workspace, 
                                                               WCMCoreUtils.getRepository());
   }
@@ -301,7 +300,6 @@ public class UITaxonomyTreeContainer extends UIContainer implements UISelectable
     session.save();
     //Update taxonomy tree
     taxonomyTreeNode = (Node)session.getItem(destPath);
-    session.logout();
     taxonomyService.updateTaxonomyTree(name, taxonomyTreeNode);
     return true;
   }

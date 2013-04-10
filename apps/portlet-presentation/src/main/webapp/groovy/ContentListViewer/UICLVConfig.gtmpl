@@ -1,586 +1,279 @@
-<%
-  import org.exoplatform.wcm.webui.Utils;
-  import java.net.URLDecoder;
-  import org.exoplatform.ecm.utils.text.Text;
-  import org.apache.commons.lang.StringEscapeUtils;
-  import org.exoplatform.wcm.webui.reader.ContentReader;
-  
-  
-  def rcontext = _ctx.getRequestContext();
-  String portletId = Utils.getRealPortletId(rcontext);
-  def quickEditingBlockId = portletId + "-QuickEditingBlock";
-  def jsManager = rcontext.getJavascriptManager();
-  def advancedBlockDisplay = "block";
-  def advancedLinkDispplay = "none";
-  jsManager.require("SHARED/clv", "clv").
-  addScripts("clv.CLV.checkModeViewer();").
-  addScripts("clv.CLV.checkContextualFolderInput();");
-  def showFolderContexttual = "";
+
+<%		
+	import org.exoplatform.wcm.webui.Utils;
+	import java.net.URLDecoder;
+	import org.exoplatform.ecm.utils.text.Text;
+	import org.apache.commons.lang.StringEscapeUtils;
+	import org.exoplatform.wcm.webui.reader.ContentReader;
+	
+	
+	def rcontext = _ctx.getRequestContext();
+	String portletId = Utils.getRealPortletId(rcontext);
+	def quickEditingBlockId = portletId + "-QuickEditingBlock";
+	def jsManager = rcontext.getJavascriptManager();
+	def advancedBlockDisplay = "block";
+	def advancedLinkDispplay = "none";
+	//jsManager.require("SHARED/clv", "clv").addScripts("clv.CLV.checkModeViewer();").addScripts("clv.CLV.checkContextualFolderInput();");
+	jsManager.require("SHARED/clv", "clv").addScripts("clv.CLV.checkContextualFolderInput();");
+	def showFolderContexttual = "";
+	rcontext.getJavascriptManager().require("SHARED/portalControl").require("SHARED/uiForm").require("SHARED/bts_tab").require("SHARED/bts_tooltip");
+	jsManager.require("SHARED/jquery", "gj").addScripts("gj(document).ready(function() { gj(\"*[rel='tooltip']\").tooltip();});");
 %>
 
-<!--
-<div id="UIViewTemplate_UITemplateContainer" class="UITabPane uiTabNormal">
-	<ul id="myTab" class="nav nav-tabs">							
-			<li onclick="" class="active">
-				<a href="#tab-UITemplateEditForm" data-toggle="tab"><%= _ctx.appRes("UICLVConfig.label.ContentSelectionBlock") %></a>
-			</li>							
-			<li onclick=")" class="">
-				<a href="#tab-UIDialogTab" data-toggle="tab"><%= _ctx.appRes("UICLVConfig.label.DisplaySettingBlock") %></a>
-			</li>							
-			<li onclick=")" class="">
-				<a href="#tab-UIViewTab" data-toggle="tab"><%=_ctx.appRes("UICLVConfig.label.AdvancedBlock")%></a>
-			</li>							
-	</ul>
-	<div id="myTabContent" class="tab-content">
-		<div id="tab-UITemplateEditForm" class="tab-pane fade in active">
-			
-			  <%
-				uiform.begin()
-			  %>
-			<fieldset class="fieldsetPreferences" style="height: 250px; display: block;" >
-			  <div class="form-horizontal" >  
-				<div class="control-group">  
-				  <label class="control-label"><%=uicomponent.getLabel(uicomponent.DISPLAY_MODE_FORM_RADIO_BOX_INPUT) %></label>
-				  <a class="actionIcon pull-right"><i class="uiIconQuestion uiIconBlue" id="" title="<%= _ctx.appRes("UICLVConfig.help.ModeSelectionHelp") %>" data-placement="left" rel="tooltip"></i></a>
-				  <div class="controls">
-					<% uiform.renderField(uicomponent.DISPLAY_MODE_FORM_RADIO_BOX_INPUT) %>
-				  </div>
-				</div>
-				<div class="control-group">                  
-				  <label class="control-label" for="<%=uicomponent.ITEM_PATH_FORM_INPUT_SET%>"><%=uicomponent.getLabel(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></label>
-				  <a class="actionIcon pull-right"><i class="uiIconQuestion uiIconBlue" id="" title="<%= _ctx.appRes("UICLVConfig.help.FolderPathHelp") %>" data-placement="left" rel="tooltip"></i></a>
-				  <div class="controls" <% if (uicomponent.getSavedPath() != null) { %>title="<%=uicomponent.getSavedPath()%>" <% }%> >
-					<input type="text" disabled="" id="viewPermission" name="viewPermission"> *
-					<a class="actionIcon"><i alt="Add Permission" class="uiIconAddPermission uiIconLightGray" title="Add Permission" data-placement="bottom" rel="tooltip" onclick="javascript:eXo.webui.UIForm.submitForm('DialogForm', 'AddPermission', true)"></i></a>
-				  </div>
-				</div>
-				<div class="control-group">                  
-				  <label class="control-label" for="<%=uicomponent.ORDER_BY_FORM_SELECT_BOX%>"><%=uicomponent.getLabel(uicomponent.ORDER_BY_FORM_SELECT_BOX) %></label>
-				  <div class="controls" <% if (uicomponent.getSavedPath() != null) { %>title="<%=uicomponent.getSavedPath()%>" <% }%> >
-					<% uiform.renderField(uicomponent.ORDER_BY_FORM_SELECT_BOX) %>
-				  </div>
-				</div>
-			</fieldset> 
+<div class="uiFormTabPane uiTabNormal">
 
+			 	<ul class="nav nav-tabs">
+					<%
+						String selTabId = uicomponent.getSelectedTabId();
+						for(inputSet in uicomponent.getChildren()) {
+							if(!inputSet.isRendered()) continue;
+							String className="";
+							if(inputSet.getId().equals(selTabId)) className="active";
+							//String tabName = inputSet.getName(); 
+							tabName = _ctx.appRes(uicomponent.getName() + ".tab.label." + inputSet.name);
+							String actionLink = "" + uicomponent.event("SelectTab",inputSet.getId()) + "";
+							def tabId = inputSet.getId() + "-tab"
+					%>
+						<li class="$className" onclick="eXo.webui.UIHorizontalTabs.changeTabForUIFormTabpane(this, '$uiform.id', '$inputSet.id');$actionLink">
+									<a data-toggle="tab" data-target="#$tabId">$tabName</a>		
+						</li>
+					<% }%>
+				</ul>
+				<%uiform.begin()%>
+				<div><input type="hidden" id="<%=uicomponent.RENDER_TAB%>" name="<%=uicomponent.RENDER_TAB%>" value="$uicomponent.selectedTabId"/></div>
+				<div class="tab-content">
+						<%
+							for(formInput in uicomponent.getChildren()) {
+								if(!formInput.isRendered()) continue;
+								def active = "";
+								if(formInput.getId().equals(selTabId)) {
+									active = "in active";
+								}
+								%>
+								<div id="$formInput.id-tab" class="tab-pane fade $active">
+									<div class="uiTabContent">
+										<%
+										  if(formInput.getName().equals(uicomponent.CONTENT_TAB)) {
+										  %>
+												<div class="form-horizontal" >  
+													<div class="control-group">  
+													  <label class="control-label"><%=uicomponent.getLabel(uicomponent.DISPLAY_MODE_FORM_RADIO_BOX_INPUT) %>: </label>
+													  <a class="actionIcon pull-right" title="<%= _ctx.appRes("UICLVConfig.help.ModeSelectionHelp") %>" data-placement="left" rel="tooltip"><i class="uiIconQuestion uiIconLightGray" id="" ></i></a>
+													  <div class="controls">
+														<% uiform.renderField(uicomponent.DISPLAY_MODE_FORM_RADIO_BOX_INPUT) %>
+													  </div>
+													</div>
+													<div class="control-group">                  
+													  <label class="control-label" for="<%=uicomponent.ITEM_PATH_FORM_INPUT_SET%>">											  
+													    <%=uicomponent.getLabel(uicomponent.ITEM_PATH_FORM_INPUT_SET) %>: 
+													  </label>
+													  <a class="actionIcon pull-right"  title="<%= _ctx.appRes("UICLVConfig.help.FolderPathHelp") %>" data-placement="left" rel="tooltip"><i class="uiIconQuestion uiIconLightGray" id=""></i></a>
+													  <div class="controls" <% if (uicomponent.getSavedPath() != null) { %>title="<%=uicomponent.getSavedPath()%>" <% }%> >
+													    <% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %>
+													  </div>
+													</div>
+													<div class="control-group">                  
+													  <label class="control-label" for="<%=uicomponent.ORDER_BY_FORM_SELECT_BOX%>"><%=uicomponent.getLabel(uicomponent.ORDER_BY_FORM_SELECT_BOX) %>: </label>
+													  <div class="controls" <% if (uicomponent.getSavedPath() != null) { %>title="<%=uicomponent.getSavedPath()%>" <% }%> >
+														<% uiform.renderField(uicomponent.ORDER_BY_FORM_SELECT_BOX) %>
+													  </div>
+													</div>
+													<% 
+						              List<String> contents = uiform.getItems();
+						              if (contents != null && !contents.isEmpty()) {
+						                %>
+						                  <table class="uiGrid table table-hover table-striped">
+						                    <thead>
+						                      <tr>
+						                        <th><%=_ctx.appRes("UICLVConfig.label.ContentPath")%></th>
+						                        <th width="25px" class="center"><%=_ctx.appRes("UICLVConfig.label.Down")%></th>
+						                        <th width="25px" class="center"><%=_ctx.appRes("UICLVConfig.label.Up")%></th>
+						                      </tr>
+						                    </thead>
+						                    <% 
+						                      if (contents.size() == 1) {
+						                        String delLink = uicomponent.event("Delete", "0");
+						                        %>
+						                          <tr>
+						                            <td><%= URLDecoder.decode(contents.get(0)) %></td>
+						                            <td><span></span></td>
+						                            <td><span></span></td>
+						                          </tr>
+						                        <%
+						                      } else {
+						                        for (int i = 0; i < contents.size(); i++) {
+						                          String content = contents.get(i);                  
+						                          String upLink = uicomponent.event("Increase", Integer.toString(i));
+						                          String downLink = uicomponent.event("Decrease", Integer.toString(i));  
+						                          %>
+						                            <tr>
+						                              <td><%= URLDecoder.decode(content) %></td>
+						                              <td class="center"><a class="actionIcon" onclick="$downLink"><i class="uiIconSortDown"></i></a></td>
+						                              <td class="center"><a class="actionIcon" onclick="$upLink"><i class="uiIconSortUp"></i></a></td>
+						                            </tr>
+						                          <%
+						                        }
+						                      }
+						                    %>
+						                  </table>
+						                <%
+						              }
+						            %>
+												</div>
+										  <%
+										  } else if(formInput.getName().equals(uicomponent.DISPLAY_TAB)) {
+										  %>
+											  <div class="form-horizontal" >  
+													<div class="control-group">  
+													  <label class="control-label" for="<%=uicomponent.HEADER_FORM_STRING_INPUT%>"><%=uicomponent.getLabel(uicomponent.HEADER_FORM_STRING_INPUT) %>: </label>
+													  <a class="actionIcon pull-right" title="<%= _ctx.appRes("UICLVConfig.help.HeaderOptionHelp") %>" data-placement="left" rel="tooltip"><i class="uiIconQuestion uiIconLightGray" id="" ></i></a>
+													  <div class="controls clearfix">
+														<div class="pull-left"> <% uiform.renderField(uicomponent.HEADER_FORM_STRING_INPUT) %></div>
+														<label class="checkbox pull-left">
+														  <% uiform.renderField(uicomponent.SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT) %>  
+														  <%=uicomponent.getLabel(uicomponent.SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT) %> 
+														</label>
+													  </div>
+													</div>
+												
+													<div class="control-group">  
+													  <label class="control-label" for="<%=uicomponent.DISPLAY_TEMPLATE_FORM_SELECT_BOX%>"><%=uicomponent.getLabel(uicomponent.DISPLAY_TEMPLATE_FORM_SELECT_BOX) %>: </label>
+													  <div class="controls"><% uiform.renderField(uicomponent.DISPLAY_TEMPLATE_FORM_SELECT_BOX) %></div>
+													</div>
+												
+													<div class="control-group">  
+													  <label class="control-label" for="<%=uicomponent.PAGINATOR_TEMPLATE_FORM_SELECT_BOX%>"><%=uicomponent.getLabel(uicomponent.PAGINATOR_TEMPLATE_FORM_SELECT_BOX) %>: </label>
+													  <div class="controls"><% uiform.renderField(uicomponent.PAGINATOR_TEMPLATE_FORM_SELECT_BOX) %></div>
+													</div>
+												
+													<div class="control-group">  
+													  <label class="control-label" for="<%=uicomponent.ITEMS_PER_PAGE_FORM_STRING_INPUT%>"><%=uicomponent.getLabel(uicomponent.ITEMS_PER_PAGE_FORM_STRING_INPUT) %>: </label>
+													  <div class="controls"><% uiform.renderField(uicomponent.ITEMS_PER_PAGE_FORM_STRING_INPUT) %></div>
+													</div>
+												
+													<ul class="clearfix checkListSetting">
+														<li class="pull-left">
+															<div class="control-group"> 
+																<label class="checkbox">
+																  <% uiform.renderField(uicomponent.SHOW_TITLE_FORM_CHECKBOX_INPUT) %> 
+																  <%=uicomponent.getLabel(uicomponent.SHOW_TITLE_FORM_CHECKBOX_INPUT) %>
+																</label>
+															</div> 
+															<div class="control-group"> 
+																<label class="checkbox">
+																  <% uiform.renderField(uicomponent.SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT) %> 
+																  <%=uicomponent.getLabel(uicomponent.SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT) %>
+																</label>
+															</div>
+															<div class="control-group"> 
+																<label class="checkbox">
+																	<% uiform.renderField(uicomponent.SHOW_SUMMARY_FORM_CHECKBOX_INPUT) %>
+																	<%=uicomponent.getLabel(uicomponent.SHOW_SUMMARY_FORM_CHECKBOX_INPUT) %>
+																</label>
+															</div>
+														</li>
+														<li class="pull-left">
+															<div class="control-group"> 
+																<label class="checkbox"><% uiform.renderField(uicomponent.SHOW_HEADER_FORM_CHECKBOX_INPUT) %>
+																<%=uicomponent.getLabel(uicomponent.SHOW_HEADER_FORM_CHECKBOX_INPUT) %></label>
+															</div> 
+															<div class="control-group">
+																<label class="checkbox"><% uiform.renderField(uicomponent.SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT) %>
+																<%=uicomponent.getLabel(uicomponent.SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT) %></label>
+															</div> 
+															<div class="control-group"> 
+															  <label class="checkbox"><% uiform.renderField(uicomponent.SHOW_LINK_FORM_CHECKBOX_INPUT) %>
+															  <%=uicomponent.getLabel(uicomponent.SHOW_LINK_FORM_CHECKBOX_INPUT) %></label>
+															</div>
+														</li>
+														<li class="pull-left">
+															<div class="control-group">
+															  <label class="checkbox"><% uiform.renderField(uicomponent.SHOW_REFRESH_FORM_CHECKBOX_INPUT) %>
+															  <%=uicomponent.getLabel(uicomponent.SHOW_REFRESH_FORM_CHECKBOX_INPUT) %></label>
+															</div> 
+															<div class="control-group">
+															  <label class="checkbox"><% uiform.renderField(uicomponent.SHOW_READMORE_FORM_CHECKBOX_INPUT) %>
+															  <%=uicomponent.getLabel(uicomponent.SHOW_READMORE_FORM_CHECKBOX_INPUT) %></label>
+															</div> 
+															<div class="control-group">
+															  <label class="checkbox">
+																<% uiform.renderField(uicomponent.SHOW_RSSLINK_FORM_CHECKBOX_INPUT) %>
+																<%=uicomponent.getLabel(uicomponent.SHOW_RSSLINK_FORM_CHECKBOX_INPUT) %>
+															  </label>
+															</div>
+														</li>
+													  </ul>				
+											  </div>
+	
+											  <%
+											  } else if(formInput.getName().equals(uicomponent.ADVANCED_TAB)) {
+											  %>
+												<div class="form-horizontal" >  
+													<h6 class="clearfix"> <a class="actionIcon pull-right" title="<%= _ctx.appRes("UICLVConfig.help.ContextualHelp") %> <%= _ctx.appRes("UICLVConfig.help.ParameterHelp") %> <%= _ctx.appRes("UICLVConfig.help.ContentByQueryHelp") %> <%= _ctx.appRes("UICLVConfig.help.ShowDetailInPageHelp") %>" data-placement="left" rel="tooltip"><i class="uiIconQuestion uiIconLightGray" id="" ></i></a><%=uicomponent.getLabel(uicomponent.DYNAMIC_NAVIGATION_LABEL) %></h6>
+													<div class="control-group">  
+													  <label class="control-label"><%=uicomponent.getLabel(uicomponent.CONTEXTUAL_FOLDER_RADIOBOX_INPUT) %>: </label>
+													  <div class="controls">
+														<% uiform.renderField(uicomponent.CONTEXTUAL_FOLDER_RADIOBOX_INPUT) %>
+													  </div>
+													</div>
+													
+													<% if (uicomponent.isContentListByQuery()) {
+													  showFolderContexttual = "none"; 
+													} %>
+													<div class="control-group">                  
+													  <label class="control-label" for="<%=uicomponent.SHOW_CLV_BY_STRING_INPUT%>"><%=uicomponent.getLabel(uicomponent.SHOW_CLV_BY_STRING_INPUT) %>: </label>
+													  <div class="controls">
+														<% uiform.renderField(uicomponent.SHOW_CLV_BY_STRING_INPUT) %>
+													  </div>
+													</div>
+													
+													<% if (uicomponent.isContentListByQuery()) {  %>  
+														<div class="control-group">                  
+														  <label class="control-label" for="<%=uicomponent.CONTENT_BY_QUERY_TEXT_AREA%>"><%=uicomponent.getLabel(uicomponent.CONTENT_BY_QUERY_TEXT_AREA) %>: </label>
+														  <div class="controls">
+															<% uiform.renderField(uicomponent.CONTENT_BY_QUERY_TEXT_AREA) %>
+														  </div>
+														</div>
+														<div class="control-group">                  
+														  <label class="control-label" for="<%=uicomponent.WORKSPACE_FORM_SELECT_BOX%>"><%=uicomponent.getLabel(uicomponent.WORKSPACE_FORM_SELECT_BOX) %>: </label>
+														  <div class="controls">
+															<% uiform.renderField(uicomponent.WORKSPACE_FORM_SELECT_BOX) %>
+														  </div>
+														</div>
+													<% } %> 
+													<div class="control-group">
+													  <label class="control-label" for="<%=uicomponent.TARGET_PAGE_FORM_INPUT_SET%>"><%=uicomponent.getLabel(uicomponent.TARGET_PAGE_FORM_INPUT_SET) %>: </label>
+													  <div class="controls">
+														<% uiform.renderField(uicomponent.TARGET_PAGE_FORM_INPUT_SET) %>
+													  </div>
+													</div>
+													<div class="control-group">                  
+													  <label class="control-label" for="<%=uicomponent.SHOW_SCV_WITH_STRING_INPUT%>"><%=uicomponent.getLabel(uicomponent.SHOW_SCV_WITH_STRING_INPUT) %>: </label>
+													  <div class="controls">
+														<% uiform.renderField(uicomponent.SHOW_SCV_WITH_STRING_INPUT) %>
+													  </div>
+													</div>
+													<h6 class="clearfix"> <a class="actionIcon pull-right" title="<%= _ctx.appRes("UICLVConfig.help.ContentsVisibilityHelp") %>" data-placement="left" rel="tooltip"><i class="uiIconQuestion uiIconLightGray" id="" ></i></a><%=uicomponent.getLabel(uicomponent.CACHE_MANAGEMENT_LABEL)%></h6>
+													<div class="control-group">                  
+													  <% uiform.renderField(uicomponent.CACHE_ENABLE_RADIOBOX_INPUT) %>
+													</div>
+												</div>
 
-			
-			
-			<fieldset class="fieldsetPreferences" style="height: 250px; display: none;" >
-			  <div class="form-horizontal" >  
-				<div class="control-group">  
-				  <label class="control-label" for="<%=uicomponent.HEADER_FORM_STRING_INPUT%>"><%=uicomponent.getLabel(uicomponent.HEADER_FORM_STRING_INPUT) %></label>
-				  <a class="actionIcon pull-right"><i class="uiIconQuestion uiIconBlue" id="" title="<%= _ctx.appRes("UICLVConfig.help.HeaderOptionHelp") %>" data-placement="left" rel="tooltip"></i></a>
-				  <div class="controls clearfix">
-					<div class="pull-left"> <% uiform.renderField(uicomponent.HEADER_FORM_STRING_INPUT) %></div>
-					<label class="checkbox pull-left">
-					  <% uiform.renderField(uicomponent.SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT) %>  
-					  <%=uicomponent.getLabel(uicomponent.SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT) %> 
-					</label>
-				  </div>
+											  <%
+											  } else uicomponent.renderUIComponent(formInput);
+											%>
+										</div>
+									</div>
+						<%}%>
 				</div>
-				<div class="control-group">  
-				  <label class="control-label" for="<%=uicomponent.DISPLAY_TEMPLATE_FORM_SELECT_BOX%>"><%=uicomponent.getLabel(uicomponent.DISPLAY_TEMPLATE_FORM_SELECT_BOX) %></label>
-				  <div class="controls"><% uiform.renderField(uicomponent.DISPLAY_TEMPLATE_FORM_SELECT_BOX) %></div>
+				<div class="uiAction">
+					<%for(action in uicomponent.getActions()) { 
+						String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action);
+						String link = uicomponent.event(action);
+					%>
+							<a href="javascript:void(0);" onclick="$link" class="btn">$actionLabel</a>
+					<%}%>
 				</div>
-				<div class="control-group">  
-				  <label class="control-label" for="<%=uicomponent.PAGINATOR_TEMPLATE_FORM_SELECT_BOX%>"><%=uicomponent.getLabel(uicomponent.PAGINATOR_TEMPLATE_FORM_SELECT_BOX) %></label>
-				  <div class="controls"><% uiform.renderField(uicomponent.PAGINATOR_TEMPLATE_FORM_SELECT_BOX) %></div>
-				</div>
-				<div class="control-group">  
-				  <label class="control-label" for="<%=uicomponent.ITEMS_PER_PAGE_FORM_STRING_INPUT%>"><%=uicomponent.getLabel(uicomponent.ITEMS_PER_PAGE_FORM_STRING_INPUT) %></label>
-				  <div class="controls"><% uiform.renderField(uicomponent.ITEMS_PER_PAGE_FORM_STRING_INPUT) %></div>
-				</div>
-				
-				<ul class="clearfix checkListSetting">
-					<li class="pull-left">
-						<div class="control-group"> 
-							<label class="checkbox">
-							  <% uiform.renderField(uicomponent.SHOW_TITLE_FORM_CHECKBOX_INPUT) %> 
-							  <%=uicomponent.getLabel(uicomponent.SHOW_TITLE_FORM_CHECKBOX_INPUT) %>
-							</label>
-						</div> 
-						<div class="control-group"> 
-							<label class="checkbox">
-							  <% uiform.renderField(uicomponent.SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT) %> 
-							  <%=uicomponent.getLabel(uicomponent.SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT) %>
-							</label>
-						</div>
-						<div class="control-group"> 
-							<label class="checkbox">
-								<% uiform.renderField(uicomponent.SHOW_SUMMARY_FORM_CHECKBOX_INPUT) %>
-								<%=uicomponent.getLabel(uicomponent.SHOW_SUMMARY_FORM_CHECKBOX_INPUT) %>
-							</label>
-						</div>
-					</li>
-					<li class="pull-left">
-						<div class="control-group"> 
-							<label class="checkbox"><% uiform.renderField(uicomponent.SHOW_HEADER_FORM_CHECKBOX_INPUT) %>
-							<%=uicomponent.getLabel(uicomponent.SHOW_HEADER_FORM_CHECKBOX_INPUT) %></label>
-						</div> 
-						<div class="control-group">
-							<label class="checkbox"><% uiform.renderField(uicomponent.SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT) %>
-							<%=uicomponent.getLabel(uicomponent.SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT) %></label>
-						</div> 
-						<div class="control-group"> 
-						  <label class="checkbox"><% uiform.renderField(uicomponent.SHOW_LINK_FORM_CHECKBOX_INPUT) %>
-						  <%=uicomponent.getLabel(uicomponent.SHOW_LINK_FORM_CHECKBOX_INPUT) %></label>
-						</div>
-					</li>
-					<li class="pull-left">
-						<div class="control-group">
-						  <label class="checkbox"><% uiform.renderField(uicomponent.SHOW_REFRESH_FORM_CHECKBOX_INPUT) %>
-						  <%=uicomponent.getLabel(uicomponent.SHOW_REFRESH_FORM_CHECKBOX_INPUT) %></label>
-						</div> 
-						<div class="control-group">
-						  <label class="checkbox"><% uiform.renderField(uicomponent.SHOW_READMORE_FORM_CHECKBOX_INPUT) %>
-						  <%=uicomponent.getLabel(uicomponent.SHOW_READMORE_FORM_CHECKBOX_INPUT) %></label>
-						</div> 
-						<div class="control-group">
-						  <label class="checkbox">
-							<% uiform.renderField(uicomponent.SHOW_RSSLINK_FORM_CHECKBOX_INPUT) %>
-							<%=uicomponent.getLabel(uicomponent.SHOW_RSSLINK_FORM_CHECKBOX_INPUT) %>
-						  </label>
-						</div>
-					</li>
-				  </ul>
-				
-				
-			  </div>
-			</fieldset> 
-			
-			
-			
-			<% advancedBlockDisplay = uicomponent.isShowAdvancedBlock() ? "block" : "none"
-			   advancedLinkDisplay = uicomponent.isShowAdvancedBlock()? "none" : "block";
-			%>
-			<fieldset class="fieldsetPreferences" style="height: 250px; display: none;" >
-			  <div class="form-horizontal" >  
-				<h6 class="clearfix"> <a class="actionIcon pull-right"><i class="uiIconQuestion uiIconBlue" id="" title="<%= _ctx.appRes("UICLVConfig.help.ContextualHelp") %> <%= _ctx.appRes("UICLVConfig.help.ParameterHelp") %> <%= _ctx.appRes("UICLVConfig.help.ContentByQueryHelp") %> <%= _ctx.appRes("UICLVConfig.help.ShowDetailInPageHelp") %>" data-placement="left" rel="tooltip"></i></a><%=uicomponent.getLabel(uicomponent.DYNAMIC_NAVIGATION_LABEL) %></h6>
-				<div class="control-group">  
-				  <label class="control-label"><%=uicomponent.getLabel(uicomponent.CONTEXTUAL_FOLDER_RADIOBOX_INPUT) %></label>
-				  <div class="controls">
-					<% uiform.renderField(uicomponent.CONTEXTUAL_FOLDER_RADIOBOX_INPUT) %>
-				  </div>
-				</div>
-				<% if (uicomponent.isContentListByQuery()) {
-					  showFolderContexttual = "none"; 
-					 }
-				  %>
-				<div class="control-group">                  
-				  <label class="control-label" for="<%=uicomponent.SHOW_CLV_BY_STRING_INPUT%>"><%=uicomponent.getLabel(uicomponent.SHOW_CLV_BY_STRING_INPUT) %></label>
-				  <div class="controls">
-					<% uiform.renderField(uicomponent.SHOW_CLV_BY_STRING_INPUT) %>
-				  </div>
-				</div>
-				<% if (uicomponent.isContentListByQuery()) {  %>  
-				<div class="control-group">                  
-				  <label class="control-label" for="<%=uicomponent.CONTENT_BY_QUERY_TEXT_AREA%>"><%=uicomponent.getLabel(uicomponent.CONTENT_BY_QUERY_TEXT_AREA) %></label>
-				  <div class="controls">
-					<% uiform.renderField(uicomponent.CONTENT_BY_QUERY_TEXT_AREA) %>
-				  </div>
-				</div>
-				<div class="control-group">                  
-				  <label class="control-label" for="<%=uicomponent.WORKSPACE_FORM_SELECT_BOX%>"><%=uicomponent.getLabel(uicomponent.WORKSPACE_FORM_SELECT_BOX) %></label>
-				  <div class="controls">
-					<% uiform.renderField(uicomponent.WORKSPACE_FORM_SELECT_BOX) %>
-				  </div>
-				</div>
-				<% } %> 
-				<div class="control-group">
-				  <label class="control-label" for="<%=uicomponent.TARGET_PAGE_FORM_INPUT_SET%>"><%=uicomponent.getLabel(uicomponent.TARGET_PAGE_FORM_INPUT_SET) %></label>
-				  <div class="controls uiSearchInput">
-					<% uiform.renderField(uicomponent.TARGET_PAGE_FORM_INPUT_SET) %>
-				  </div>
-				</div>
-				<div class="control-group">                  
-				  <label class="control-label" for="<%=uicomponent.SHOW_SCV_WITH_STRING_INPUT%>"><%=uicomponent.getLabel(uicomponent.SHOW_SCV_WITH_STRING_INPUT) %></label>
-				  <div class="controls">
-					<% uiform.renderField(uicomponent.SHOW_SCV_WITH_STRING_INPUT) %>
-				  </div>
-				</div>
-				<h6 class="clearfix"> <a class="actionIcon pull-right"><i class="uiIconQuestion uiIconBlue" id="" title="<%= _ctx.appRes("UICLVConfig.help.ContentsVisibilityHelp") %>" data-placement="left" rel="tooltip"></i></a><%=uicomponent.getLabel(uicomponent.CACHE_MANAGEMENT_LABEL)%></h6>
-				<div class="control-group">                  
-				  <% uiform.renderField(uicomponent.CACHE_ENABLE_RADIOBOX_INPUT) %>
-				</div>
-			</fieldset> 
+				<%uiform.end()%>
 
-
-			
-			   <%
-				uiform.end()
-			  %>
-
-		</div>
-	</div>
-</div>
-
-<div class="uiAction"> 
-	<% 
-	  for(action in uicomponent.getActions()) { 
-	  String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
-	  String link = uicomponent.event(action) ;
-	  %>
-	  <button onclick="$link" type="button" class="btn" href="javascript:void(0);">$actionLabel</button>
-	<%}%>
-</div>
-
-  
---> 
-<div class="UIForm $uicomponent.id">
-  <%
-    uiform.begin()
-      %>
-      <div class="FormContainer">
-        <fieldset class="fieldsetPreferences">
-          <legend class="StyleLegend"><%= _ctx.appRes("UICLVConfig.label.ContentSelectionBlock") %></legend>
-          <table class="UIFormGrid">
-            <tr>
-              <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.DISPLAY_MODE_FORM_RADIO_BOX_INPUT) %></td>
-              <td class="FieldComponent" colspan="3"><% uiform.renderField(uicomponent.DISPLAY_MODE_FORM_RADIO_BOX_INPUT) %></td>
-              
-              <td class="tdShowHelp">
-                <div class="IconInContextHelp ShowHelpIcon" id="ModeSelectionHelp" 
-                onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ModeSelectionHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ModeSelectionHelp', 'false')"
-                onfocus="eXo.ecm.WCMUtils.showInContextHelp('ModeSelectionHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('ModeSelectionHelp', 'false')">
-                    <div style="position: relative;">
-                      <div class="InContextHelpContent">                    
-                        <div class="InContextHelpPopup">
-                          <div id="ModeSelectionHelpID" class="LeftInContextHelpPopup">
-                <%= _ctx.appRes("UICLVConfig.help.ModeSelectionHelp") %> 
-                          </div>
-                        </div>                      
-                      </div>
-                   </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="FieldLabel"><label for="<%=uicomponent.ITEM_PATH_FORM_INPUT_SET%>"><%=uicomponent.getLabel(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></label></td>
-              <td class="FieldComponent" <% if (uicomponent.getSavedPath() != null) { %>title="<%=uicomponent.getSavedPath()%>" <% }%> colspan="3"><% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
-              <td class="tdShowHelp">
-                <div class="IconInContextHelp ShowHelpIcon" id="FolderPathHelp" 
-                onmouseover="eXo.ecm.WCMUtils.showInContextHelp('FolderPathHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('FolderPathHelp', 'false')"
-                onfocus="eXo.ecm.WCMUtils.showInContextHelp('FolderPathHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('FolderPathHelp', 'false')">
-          <div style="position: relative;">
-            <div class="InContextHelpContent">                    
-                        <div class="InContextHelpPopup">
-                          <div id="FolderPathHelpID" class="LeftInContextHelpPopup">
-                <%= _ctx.appRes("UICLVConfig.help.FolderPathHelp") %> 
-                          </div>
-                        </div>                      
-                      </div>
-                   </div>
-                </div>
-              </td>
-            </tr>
-            <tr class="OrderBlock">
-              <td class="FieldLabel"><label for="<%=uicomponent.ORDER_BY_FORM_SELECT_BOX%>"><%=uicomponent.getLabel(uicomponent.ORDER_BY_FORM_SELECT_BOX) %></label></td>
-              <td class="FieldComponent" colspan="4"><% uiform.renderField(uicomponent.ORDER_BY_FORM_SELECT_BOX) %></td>
-            </tr>
-            <tr class="OrderBlock">
-              <td class="FieldLabel">&nbsp;</td>
-              <td class="FieldComponent" colspan="4"><% uiform.renderField(uicomponent.ORDER_TYPE_FORM_RADIO_BOX_INPUT) %></td>
-            </tr>
-            <% 
-              List<String> contents = uiform.getItems();
-              if (contents != null && !contents.isEmpty()) {
-                %>
-                  <table class="UIContentGrid">
-                    <thead>
-                      <tr>
-                        <th><%=_ctx.appRes("UICLVConfig.label.ContentPath")%></th>
-                        <th><%=_ctx.appRes("UICLVConfig.label.Down")%></th>
-                        <th><%=_ctx.appRes("UICLVConfig.label.Up")%></th>
-                      </tr>
-                    </thead>
-                    <% 
-                      if (contents.size() == 1) {
-                        String delLink = uicomponent.event("Delete", "0");
-                        %>
-                          <tr class="EvenRow">
-                            <td><%= ContentReader.getXSSCompatibilityContent(URLDecoder.decode(contents.get(0))) %></td>
-                            <td><span></span></td>
-                            <td><span></span></td>
-                          </tr>
-                        <%
-                      } else {
-                        String rowClass = "";
-                        for (int i = 0; i < contents.size(); i++) {
-                          if ((i % 2) == 0) {
-                            rowClass = "EvenRow";
-                          } else {
-                            rowClass = "OddRow";
-                          }
-                          String content = contents.get(i);                  
-                          String upLink = uicomponent.event("Increase", Integer.toString(i));
-                          String downLink = uicomponent.event("Decrease", Integer.toString(i));  
-                          %>
-                            <tr class="$rowClass">
-                              <td><%= ContentReader.getXSSCompatibilityContent(URLDecoder.decode(content)) %></td>
-                              <td width="25px"><div class="DownRowIcon" onclick="$downLink"><span></span></div></td>
-                              <td width="25px"><div class="UpRowIcon" onclick="$upLink"><span></span></div></td>
-                            </tr>
-                          <%
-                        }
-                      }
-                    %>
-                  </table>
-                <%
-              }
-            %>
-          </table>
-        </fieldset>   
-        <fieldset class="fieldsetPreferences">
-          <legend class="StyleLegend"><%= _ctx.appRes("UICLVConfig.label.DisplaySettingBlock") %></legend>
-          <table class="UIFormGrid">
-            <tr>
-              <td class="FieldLabel"><label for="<%=uicomponent.HEADER_FORM_STRING_INPUT%>"><%=uicomponent.getLabel(uicomponent.HEADER_FORM_STRING_INPUT) %></label></td>
-              <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.HEADER_FORM_STRING_INPUT) %></td>
-              
-              <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT) %></td>
-              <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT) %></td>
-              <td class="tdShowHelp">
-                <div class="IconInContextHelp ShowHelpIcon" id="HeaderOptionHelp" 
-                onmouseover="eXo.ecm.WCMUtils.showInContextHelp('HeaderOptionHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('HeaderOptionHelp', 'false')"
-                onfocus="eXo.ecm.WCMUtils.showInContextHelp('HeaderOptionHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('HeaderOptionHelp', 'false')">
-          <div style="position: relative;">
-            <div class="InContextHelpContent">                    
-                        <div class="InContextHelpPopup">
-                          <div id="HeaderOptionHelpID" class="LeftInContextHelpPopup">
-                <%= _ctx.appRes("UICLVConfig.help.HeaderOptionHelp") %>
-                          </div>
-                        </div>                      
-                      </div>
-                   </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="FieldLabel"><label for="<%=uicomponent.DISPLAY_TEMPLATE_FORM_SELECT_BOX%>"><%=uicomponent.getLabel(uicomponent.DISPLAY_TEMPLATE_FORM_SELECT_BOX) %></label></td>
-              <td class="FieldComponent" colspan="6"><% uiform.renderField(uicomponent.DISPLAY_TEMPLATE_FORM_SELECT_BOX) %></td>
-            </tr>
-            <tr>
-              <td class="FieldLabel"><label for="<%=uicomponent.PAGINATOR_TEMPLATE_FORM_SELECT_BOX%>"><%=uicomponent.getLabel(uicomponent.PAGINATOR_TEMPLATE_FORM_SELECT_BOX) %></label></td>
-              <td class="FieldComponent" colspan="6"><% uiform.renderField(uicomponent.PAGINATOR_TEMPLATE_FORM_SELECT_BOX) %></td>
-            </tr>
-            <tr>
-              <td class="FieldLabel"><label for="<%=uicomponent.ITEMS_PER_PAGE_FORM_STRING_INPUT%>"><%=uicomponent.getLabel(uicomponent.ITEMS_PER_PAGE_FORM_STRING_INPUT) %></label></td>
-              <td class="FieldComponent" colspan="6"><% uiform.renderField(uicomponent.ITEMS_PER_PAGE_FORM_STRING_INPUT) %></td>
-            </tr>
-          </table>
-          <table class="UIFormGrid">
-            <tr>
-              <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_TITLE_FORM_CHECKBOX_INPUT) %></td>
-              <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_TITLE_FORM_CHECKBOX_INPUT) %></td>
-              
-              <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT) %></td>
-              <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT) %></td>
-              
-              <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_SUMMARY_FORM_CHECKBOX_INPUT) %></td>
-              <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_SUMMARY_FORM_CHECKBOX_INPUT) %></td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr>
-              <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_HEADER_FORM_CHECKBOX_INPUT) %></td>
-              <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_HEADER_FORM_CHECKBOX_INPUT) %></td>
-
-              <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT) %></td>
-              <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT) %></td>
-              
-              <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_LINK_FORM_CHECKBOX_INPUT) %></td>
-              <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_LINK_FORM_CHECKBOX_INPUT) %></td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr>
-              <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_REFRESH_FORM_CHECKBOX_INPUT) %></td>
-              <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_REFRESH_FORM_CHECKBOX_INPUT) %></td>
-              
-              <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_READMORE_FORM_CHECKBOX_INPUT) %></td>
-              <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_READMORE_FORM_CHECKBOX_INPUT) %></td>
-              
-              <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_RSSLINK_FORM_CHECKBOX_INPUT) %></td>
-              <td class="FieldComponent"><% uiform.renderField(uicomponent.SHOW_RSSLINK_FORM_CHECKBOX_INPUT) %></td>
-              
-              <td class="tdShowHelp">
-                <div class="IconInContextHelp ShowHelpIcon" id="GeneralOptionHelp" 
-                onmouseover="eXo.ecm.WCMUtils.showInContextHelp('GeneralOptionHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('GeneralOptionHelp', 'false')"
-                onfocus="eXo.ecm.WCMUtils.showInContextHelp('GeneralOptionHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('GeneralOptionHelp', 'false')">
-                  <div style="position: relative;">
-                    <div class="InContextHelpContent">                    
-                        <div class="InContextHelpPopup">
-                          <div id="GeneralOptionHelpID" class="LeftInContextHelpPopup">
-                <%= _ctx.appRes("UICLVConfig.help.GeneralOptionHelp") %>
-                          </div>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </fieldset>
-        <% advancedBlockDisplay = uicomponent.isShowAdvancedBlock() ? "block" : "none"
-           advancedLinkDisplay = uicomponent.isShowAdvancedBlock()? "none" : "block";
-        %>
-        <fieldset class="fieldsetPreferences" style="display: $advancedBlockDisplay;">
-          <legend class="StyleLegend"><a style="text-align:center; color: #0000FF; text-decoration:underline;" href="<%=uicomponent.event("ShowAdvancedBlock", "false")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UICLVConfig.label.AdvancedBlock")%>"><%=_ctx.appRes("UICLVConfig.label.AdvancedBlock")%></a></legend>
-          <div class="FieldLabel"><%=uicomponent.getLabel(uicomponent.DYNAMIC_NAVIGATION_LABEL) %></div>
-          <table class="UIFormGrid">
-            <tr>
-              <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.CONTEXTUAL_FOLDER_RADIOBOX_INPUT) %></td>
-              <td class="FieldComponent ContextualRadio" colspan="2">
-                <% uiform.renderField(uicomponent.CONTEXTUAL_FOLDER_RADIOBOX_INPUT) %>
-              </td>
-              <td class="tdShowHelp">
-                <div class="IconInContextHelp ShowHelpIcon" id="ContextualHelp" 
-                onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ContextualHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ContextualHelp', 'false')"
-                onfocus="eXo.ecm.WCMUtils.showInContextHelp('ContextualHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('ContextualHelp', 'false')">
-                  <div style="position: relative;">
-                    <div class="InContextHelpContent">                    
-                        <div class="InContextHelpPopup">
-                          <div id="ContextualHelpID" class="LeftInContextHelpPopup">
-                <%= _ctx.appRes("UICLVConfig.help.ContextualHelp") %>
-                          </div>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-          <% if (uicomponent.isContentListByQuery()) {
-              showFolderContexttual = "none"; 
-             }
-          %>
-          <tr style="display: $showFolderContexttual;">
-              <td class="FieldLabel"><label for="<%=uicomponent.SHOW_CLV_BY_STRING_INPUT%>"><%=uicomponent.getLabel(uicomponent.SHOW_CLV_BY_STRING_INPUT) %></label></td>
-              <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.SHOW_CLV_BY_STRING_INPUT) %></td>
-              <td class="tdShowHelp">
-                <div class="IconInContextHelp ShowHelpIcon" id="ParameterHelp" 
-                onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'false')"
-                onfocus="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'false')">
-                  <div style="position: relative;">
-                    <div class="InContextHelpContent">                    
-                      <div class="InContextHelpPopup">
-                        <div id="ParameterHelpID" class="LeftInContextHelpPopup">
-                          <%= _ctx.appRes("UICLVConfig.help.ParameterHelp") %>
-                        </div>
-                      </div>                      
-                    </div>
-                  </div>
-                 </div>
-              </td>
-            </tr>
-        <% if (uicomponent.isContentListByQuery()) {  %>        
-          <tr>
-            <td class="FieldLabel"><label for="<%=uicomponent.CONTENT_BY_QUERY_TEXT_AREA%>"><%=uicomponent.getLabel(uicomponent.CONTENT_BY_QUERY_TEXT_AREA) %></td>         
-            <td class="FieldComponent" colspan="2">
-              <% uiform.renderField(uicomponent.CONTENT_BY_QUERY_TEXT_AREA) %>
-            </td>
-            <td class="tdShowHelp">
-              <div class="IconInContextHelp ShowHelpIcon" id="ContentByQueryHelp" 
-              onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ContentByQueryHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ContentByQueryHelp', 'false')"
-              onfocus="eXo.ecm.WCMUtils.showInContextHelp('ContentByQueryHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('ContentByQueryHelp', 'false')">
-                <div style="position: relative;">
-                  <div class="InContextHelpContent">
-                      <div class="InContextHelpPopup">
-                        <div id="ContentByQueryHelpID" class="LeftInContextHelpPopup">
-                          <%= _ctx.appRes("UICLVConfig.help.ContentByQueryHelp") %>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-               </div>
-            </td>
-          </tr>
-          <tr>
-            <td class="FieldLabel" colspan="2"><label for="<%=uicomponent.WORKSPACE_FORM_SELECT_BOX%>"><%=uicomponent.getLabel(uicomponent.WORKSPACE_FORM_SELECT_BOX) %></label></td>
-            <td class="FieldComponent"><% uiform.renderField(uicomponent.WORKSPACE_FORM_SELECT_BOX) %></td>
-          </tr>
-        <% } %> 
-            
-            <tr>
-              <td class="FieldLabel"><label for="<%=uicomponent.TARGET_PAGE_FORM_INPUT_SET%>"><%=uicomponent.getLabel(uicomponent.TARGET_PAGE_FORM_INPUT_SET) %></label></td>
-              <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.TARGET_PAGE_FORM_INPUT_SET) %></td>
-              <td class="tdShowHelp">
-                <div class="IconInContextHelp ShowHelpIcon" id="ShowDetailInPageHelp" 
-                onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ShowDetailInPageHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ShowDetailInPageHelp', 'false')"
-                onfocus="eXo.ecm.WCMUtils.showInContextHelp('ShowDetailInPageHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('ShowDetailInPageHelp', 'false')">
-          <div style="position: relative;">
-                <div class="InContextHelpContent">                    
-                        <div class="InContextHelpPopup">
-                          <div id="ShowDetailInPageHelpID" class="LeftInContextHelpPopup">
-                <%= _ctx.appRes("UICLVConfig.help.ShowDetailInPageHelp") %>
-                          </div>
-                        </div>                      
-                      </div>
-                  </div>
-                 </div>
-              </td>
-              
-            </tr>
-            <tr>
-              <td class="FieldLabel"><label for="<%=uicomponent.SHOW_SCV_WITH_STRING_INPUT%>"><%=uicomponent.getLabel(uicomponent.SHOW_SCV_WITH_STRING_INPUT) %></label></td>
-              <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.SHOW_SCV_WITH_STRING_INPUT) %></td>
-              <td class="tdShowHelp">
-                <div class="IconInContextHelp ShowHelpIcon" id="DetailParameterHelp" 
-                onmouseover="eXo.ecm.WCMUtils.showInContextHelp('DetailParameterHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('DetailParameterHelp', 'false')"
-                onfocus="eXo.ecm.WCMUtils.showInContextHelp('DetailParameterHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('DetailParameterHelp', 'false')">
-                  <div style="position: relative;">
-                    <div class="InContextHelpContent">                    
-                        <div class="InContextHelpPopup">
-                          <div id="DetailParameterHelpID" class="LeftInContextHelpPopup">
-                      <%= _ctx.appRes("UICLVConfig.help.DetailParameterHelp") %>
-                          </div>
-                        </div>
-                    </div>
-                  </div>
-                 </div>
-              </td>
-            </tr>
-          </table>
-          <table class="UIFormGrid" style="width:100%;">
-          <tr>
-            <td class="FieldLabel" colspan="2" style="text-align:left;"><%=uicomponent.getLabel(uicomponent.CACHE_MANAGEMENT_LABEL)%></td>
-            <td class="tdShowHelp">
-              <div class="IconInContextHelp ShowHelpIcon" id="ContentsVisibilityHelp" 
-              onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ContentsVisibilityHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ContentsVisibilityHelp', 'false')"
-              onfocus="eXo.ecm.WCMUtils.showInContextHelp('ContentsVisibilityHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('ContentsVisibilityHelp', 'false')">
-                <div style="position: relative;">
-                  <div class="InContextHelpContent">                    
-                      <div class="InContextHelpPopup">
-                        <div id="ContentsVisibilityHelpID" class="LeftInContextHelpPopup">
-                          <%= _ctx.appRes("UICLVConfig.help.ContentsVisibilityHelp") %>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-               </div>
-            </td>
-          </tr>
-          </table>
-          <table class="UIFormGrid" style="width:100%;">
-            <tr>
-              <td class="FieldComponent ContextualRadio" colspan="2">
-                <% uiform.renderField(uicomponent.CACHE_ENABLE_RADIOBOX_INPUT) %>
-              </td>
-            </tr>
-          </table>
-          
-        </fieldset>
-        <a style="display: $advancedLinkDisplay; text-align:left; color: #0000FF; text-decoration:underline;" href="<%=uicomponent.event("ShowAdvancedBlock", "true")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UICLVConfig.label.AdvancedBlock")%>">
-          <%=_ctx.appRes("UICLVConfig.label.AdvancedBlock")%>
-        </a>
-        <div class="UIAction">
-        <% 
-          for(action in uicomponent.getActions()) { 
-          String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
-          String link = uicomponent.event(action) ;
-          %>
-          <a onclick="$link" class="ActionButton LightBlueStyle" href="javascript:void(0);">$actionLabel</a>
-          <%}%>
-        </div>
-      </div>
-      <%
-    uiform.end()
-  %>
 </div>

@@ -214,7 +214,9 @@ public class NodetypeConstant {
 					      
   public static final String JCR_MIMETYPE = "jcr:mimeType";
 
-  public static final String GTN_NAME ="gtn:name"; 
+  public static final String GTN_NAME ="gtn:name";
+  
+  public static final String EXO_SYMLINK = "exo:symlink";
   
   // public static final String PUBLICATION_STATE_AND_VERSION_BASED_PUBLICATION
   // = "publication:stateAndVersionBasedPublication";

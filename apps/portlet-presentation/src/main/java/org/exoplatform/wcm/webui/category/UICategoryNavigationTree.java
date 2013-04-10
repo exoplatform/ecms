@@ -361,8 +361,6 @@ public class UICategoryNavigationTree extends UIContainer {
    * <code>addChangeNodeActionListener<code> method. When
    * the changeNodeAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see ChangeNodeActionEvent
    */
   static public class ChangeNodeActionListener extends EventListener<UITree> {
 
@@ -385,8 +383,6 @@ public class UICategoryNavigationTree extends UIContainer {
    * <code>addQuickEditActionListener<code> method. When
    * the quickEditAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see QuickEditActionEvent
    */
   public static class QuickEditActionListener extends EventListener<UICategoryNavigationTree> {
     /*

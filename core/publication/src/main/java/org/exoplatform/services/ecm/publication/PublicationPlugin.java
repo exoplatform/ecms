@@ -196,9 +196,7 @@ public abstract class PublicationPlugin extends BaseComponentPlugin {
    * @param key : the key to translate
    * @param values : array of string to susbtitute in the string
    *
-   * @return the localized and substitute log
-   *
-   * @result a string localized and where values are substitute
+   * @return a string localized and where values are substitute
    */
   public abstract String getLocalizedAndSubstituteMessage(Locale locale, String key, String[] values) throws Exception;
 }

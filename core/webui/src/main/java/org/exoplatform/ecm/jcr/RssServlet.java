@@ -37,11 +37,7 @@ import org.exoplatform.container.RootContainer;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
-/**
- * Created by The eXo Platform SARL        .
- * @author: Nguyen Quang Hung
- * @email: nguyenkequanghung@yahoo.com
- */
+
 @SuppressWarnings({"serial","unused"})
 public class RssServlet extends HttpServlet {
   private static final Log LOG  = ExoLogger.getLogger(RssServlet.class.getName());

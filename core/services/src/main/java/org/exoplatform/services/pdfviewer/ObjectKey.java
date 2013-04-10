@@ -20,14 +20,7 @@ package org.exoplatform.services.pdfviewer;
 import java.io.Serializable;
 
 /**
- * Created by The eXo Platform SAS
- * Author : Nguyen The Vinh From ECM Of eXoPlatform
- *          vinh_nguyen@exoplatform.com
- * 26 Jun 2012  
  * Create key for cache. When key object is collected by GC, value (if is file) will be delete.
- * @param key
- * @return
- * @throws IOException
  */
 public class ObjectKey implements Serializable{
   private static final long serialVersionUID = -1075842770773918554L;

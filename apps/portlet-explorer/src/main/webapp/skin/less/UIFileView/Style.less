@@ -85,6 +85,22 @@
 			white-space: nowrap;
 			line-height: 28px;	
 			padding-left: 15px;
+			text-overflow: ellipsis;
+			
+			.uiIconTree {
+				margin: 0px;
+			}
+		
+			.nodeLabel {
+				color: @grayDark;
+				&:hover {
+					color: @linkColor;
+				}
+			}
+		
+			.nodeLabel:last-child {
+				color: @linkColor;
+			}
 		}
 		
 		.btn-group .btn,.btn-group .dropdown-menu a {
@@ -97,7 +113,7 @@
 			
 			i {
 				background-image: url("/eXoResources/skin/images/Icons/uiIconsWhite.png");
-				margin: 0px;
+				margin: 0px 0px 0px 7px;
 			}
 		}
 	}
@@ -184,6 +200,13 @@
 				border: 1px solid #c7c7c7;
 				.border-radius(@borderRadiusSmall);
 				color: @grayDark;
+			}
+			
+			.RightClickCustomItem {
+				padding: 0px;
+				a:hover .uiIconDownload {
+					background-image: url("/eXoResources/skin/images/Icons/uiIconsBlue.png");
+				}
 			}
 			
 			.dropdown-menu {

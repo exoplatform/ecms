@@ -56,11 +56,8 @@ import com.sun.syndication.io.SyndFeedOutput;
 /**
  * Generate an RSS feed.
  *
- * @author chuong_phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
- * @since      29-08-2009
- * @copyright  eXo Platform SEA
- * 
- * @anchor CONTref.Devref.PublicRestAPIs.RssConnector
+ * @LevelAPI Provisional
+ * @anchor RssConnector
  */
 
 @Path("/feed/")
@@ -106,8 +103,6 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
 
   /**
    * Instantiates a new rss connector.
-   *
-   * @param container the container
    */
   public RssConnector() {
     this.wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);    
@@ -117,8 +112,8 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
   /**
    * Generate an RSS feed.
    *
-   * @param repositoryName The name of repository.
-   * @param workspaceName The name of workspace.
+   * @param repository The name of repository.
+   * @param workspace The name of workspace.
    * @param server The server.
    * @param siteName The name of site.
    * @param title The title of the feed.
@@ -130,18 +125,15 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
    * @param detailPage The page used to open the content.
    * @param detailParam The parameters is the key in the URL to let CLV know which really is the path in the current URL.
    * @param recursive This param is deprecated and will be moved soon.
-   * @param categoryPath The path of the category.
-   *
    * @return The response.
-   *
    * @throws Exception The exception
    * 
-   * @anchor CONTref.Devref.PublicRestAPIs.RssConnector.generate
+   * @anchor RssConnector.generate
    */
   @GET
   @Path("/rss/")
-  public Response generate(@QueryParam("repository") String repositoryName,
-                           @QueryParam("workspace") String workspaceName,
+  public Response generate(@QueryParam("repository") String repository,
+                           @QueryParam("workspace") String workspace,
                            @QueryParam("server") String server,
                            @QueryParam("siteName") String siteName,
                            @QueryParam("title") String title,
@@ -153,10 +145,9 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
                            @QueryParam("detailPage") String detailPage,
                            @QueryParam("detailParam") String detailParam,
                            @QueryParam("recursive") String recursive) throws Exception {
-
     Map<String, String> contextRss = new HashMap<String, String>();
-    contextRss.put(REPOSITORY, repositoryName);
-    contextRss.put(WORKSPACE, workspaceName);
+    contextRss.put(REPOSITORY, repository);
+    contextRss.put(WORKSPACE, workspace);
     contextRss.put(RSS_VERSION, "rss_2.0");
     contextRss.put(FEED_TITLE, title);
     if (desc == null)
@@ -187,8 +178,7 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
       path = folderPath;
     }
 
-
-    List<Node> nodes = wcmComposer.getContents(workspaceName,
+    List<Node> nodes = wcmComposer.getContents(workspace,
                                                path,
                                                filters,
                                                WCMCoreUtils.getUserSessionProvider());
@@ -205,14 +195,11 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
                                 .build();
     return response;
   }
-  
-  
 
   /**
    * Generate rss.
    *
    * @param context The context.
-   *
    * @return the string
    */
   private String generateRSS(List<Node> nodes , Map<String, String> context) {

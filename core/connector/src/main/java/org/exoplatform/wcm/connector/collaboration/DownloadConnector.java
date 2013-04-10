@@ -23,9 +23,9 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 /**
  * Enable downloading the content of _nt\:file_.
  *
- * @copyright  eXo Platform SEA
+ * @LevelAPI Provisional
  *
- * @anchor ECMSref.DevelopersReferences.RestService_APIs_v1alpha1.DownloadConnector
+ * @anchor DownloadConnector
  */
 @Path("/contents/")
 public class DownloadConnector implements ResourceContainer{
@@ -37,12 +37,9 @@ public class DownloadConnector implements ResourceContainer{
    * @param path The path to the document node.
    * @param version The version name.
    * @return the instance of javax.ws.rs.core.Response.
-   * @throws Exception
-   * @Objective Return to browser a stream for downloading content of a node. The stream is got from _jcr\:content_/_jcr\:data_
-   * @Author Nguyen The Vinh from ECM of eXoPlatform
-   *              nguyenthevinhbk@gmail.com
+   * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.DownloadConnector.download
+   * @anchor DownloadConnector.download
    */
   @GET
   @Path("/download/{workspace}/{path:.*}/")

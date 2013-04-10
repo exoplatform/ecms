@@ -30,6 +30,7 @@ import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBar
 import org.exoplatform.ecm.webui.component.explorer.popup.info.UIViewMetadataContainer;
 import org.exoplatform.ecm.webui.component.explorer.popup.info.UIViewMetadataManager;
 import org.exoplatform.ecm.webui.component.explorer.popup.info.UIViewMetadataTemplate;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -79,13 +80,15 @@ public class ViewMetadatasActionComponent extends UIComponent {
         String template = metaDataTemp.get(key);
         if(template != null && template.length() > 0) {
           UIViewMetadataTemplate uiMetaView =
-            uiMetadataContainer.createUIComponent(UIViewMetadataTemplate.class, null, key) ;
+            uiMetadataContainer.createUIComponent(UIViewMetadataTemplate.class, null, Utils.cleanString(key)) ;
           uiMetaView.setTemplateType(key) ;
           uiMetadataContainer.addChild(uiMetaView) ;
-          if(i != 0) uiMetaView.setRendered(false) ;
+          uiMetaView.setRendered(true);
           i++ ;
         }
       }
+      uiMetadataContainer.setSelectedTab(1);
+      uiMetadataContainer.setHasMoreOneMetaData(i > 1);
       event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
     }
   }

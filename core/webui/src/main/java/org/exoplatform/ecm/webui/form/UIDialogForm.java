@@ -1698,9 +1698,9 @@ public class UIDialogForm extends UIForm {
   public void setDataRemoved(boolean dataRemoved) { dataRemoved_ = dataRemoved; }
 
   /**
-   * @param       path: of property content binarydata for uploading 
-   * @Objective : Mark a uploaded field as removed.
-   * @Author    : Nguyen The Vinh from ECM of eXoPlatform
+   * Mark a uploaded field as removed.
+   *
+   * @param       path: of property content binarydata for uploading
    */
   public void removeData(String path) {
     if (!removedBinary.contains(path)) {
@@ -1708,10 +1708,10 @@ public class UIDialogForm extends UIForm {
     }
   }
   /**
+   * Checking the binary field is removed or not
+   *
    * @param       path: of property content binarydata for uploading
    * @return    : True if the uploaded field is removed from UI
-   * @Objective : Checking the binary field is removed or not
-   * @Author    : Nguyen The Vinh from ECM of eXoPlatform
    */
   public boolean isDataRemoved(String path) {
     return removedBinary.contains(path);

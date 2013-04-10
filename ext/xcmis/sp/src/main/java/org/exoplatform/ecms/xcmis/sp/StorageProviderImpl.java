@@ -216,7 +216,7 @@ public class StorageProviderImpl implements StorageProvider, Startable
     * Set storage configuration.
     *
     * @param storageConfig storage configuration
-    * @throw IllegalStateException if configuration for storage already set
+    * @throws IllegalStateException if configuration for storage already set
     */
    void setConfiguration(StorageConfiguration storageConfig)
    {

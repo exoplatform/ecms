@@ -34,6 +34,7 @@ import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -90,7 +91,7 @@ public class FavoriteServiceImpl implements FavoriteService {
       }
     }
     // add favorite symlink
-    linkManager.createLink(userFavoriteNode, node);
+    linkManager.createLink(userFavoriteNode, NodetypeConstant.EXO_SYMLINK, node, node.getName() + ".lnk");
     userFavoriteNode.getSession().save();
   }
 

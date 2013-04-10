@@ -219,8 +219,6 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
    * component's <code>addSaveActionListener<code> method. When
    * the saveAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see SaveActionEvent
    */
   public static class SaveActionListener extends EventListener<UICategoryNavigationConfig> {
 
@@ -283,8 +281,6 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
    * component's <code>addCancelActionListener<code> method. When
    * the cancelAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see CancelActionEvent
    */
   public static class CancelActionListener extends EventListener<UICategoryNavigationConfig> {
 
@@ -307,8 +303,6 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
    * component's <code>addChangeRepositoryActionListener<code> method. When
    * the changeRepositoryAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see ChangeRepositoryActionEvent
    */
   public static class ChangeRepositoryActionListener extends EventListener<UICategoryNavigationConfig> {
 
@@ -327,8 +321,6 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
    * component's <code>addSelectTargetPathActionListener<code> method. When
    * the selectTargetPathAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see SelectTargetPathActionEvent
    */
   public static class SelectTargetPathActionListener extends EventListener<UICategoryNavigationConfig> {
 

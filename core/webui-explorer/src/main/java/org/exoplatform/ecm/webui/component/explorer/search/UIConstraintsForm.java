@@ -36,13 +36,6 @@ import org.exoplatform.webui.form.UIFormDateTimeInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 
-/**
- * Created by The eXo Platform SARL
- * Author : Dang Van Minh
- *          minh.dang@exoplatform.com
- * May 6, 2007
- * 4:29:08 PM
- */
 @ComponentConfig(
     template =  "app:/groovy/webui/component/explorer/search/UIConstraintsForm.gtmpl"
 )
@@ -117,10 +110,10 @@ public class UIConstraintsForm extends UIFormInputSetWithAction implements UISel
     dateOperation.add(new SelectItemOption<String>(_MODIFIED_DATE, MODIFIED_DATE));
     addUIFormInput(new UIFormSelectBox(TIME_OPTION, TIME_OPTION, dateOperation)) ;
     UIFormDateTimeInput uiFromDate = new UIFormDateTimeInput(START_TIME, START_TIME, null) ;
-    uiFromDate.setDisplayTime(false) ;
+    uiFromDate.setDisplayTime(true) ;
     addUIFormInput(uiFromDate) ;
     UIFormDateTimeInput uiToDate = new UIFormDateTimeInput(END_TIME, END_TIME, null) ;
-    uiToDate.setDisplayTime(false) ;
+    uiToDate.setDisplayTime(true) ;
     addUIFormInput(uiToDate) ;
     addUIFormInput(new UIFormCheckBoxInput<Boolean>(NODETYPE_PROPERTY, NODETYPE_PROPERTY, null)) ;
     addUIFormInput(new UIFormStringInput(DOC_TYPE, DOC_TYPE, null)) ;
@@ -156,12 +149,12 @@ public class UIConstraintsForm extends UIFormInputSetWithAction implements UISel
         virtualDateQuery_ = "(documents created from '" + beforeDate
             + "') and (documents created to '" + afterDate + "')";
         return "@exo:dateCreated >= xs:dateTime('" + ISO8601.format(bfDate)
-            + "') and @exo:dateCreated < xs:dateTime('" + ISO8601.format(afDate) + "')";
+            + "') and @exo:dateCreated <= xs:dateTime('" + ISO8601.format(afDate) + "')";
       } else if (type.equals(MODIFIED_DATE)) {
         virtualDateQuery_ = "(documents modified from '" + beforeDate
             + "') and (documents modified to '" + afterDate + "')";
         return "@exo:dateModified >= xs:dateTime('" + ISO8601.format(bfDate)
-            + "') and @exo:dateModified < xs:dateTime('" + ISO8601.format(afDate) + "')";
+            + "') and @exo:dateModified <= xs:dateTime('" + ISO8601.format(afDate) + "')";
       }
     } else {
       if(type.equals(CREATED_DATE)) {
@@ -183,12 +176,12 @@ public class UIConstraintsForm extends UIFormInputSetWithAction implements UISel
         virtualDateQuery_ = "(documents created from '" + beforeDate
             + "') and (documents created to '" + afterDate + "')";
         return "exo:dateCreated >= TIMESTAMP '" + ISO8601.format(bfDate)
-            + "' and exo:dateCreated < TIMESTAMP '" + ISO8601.format(afDate) + "'";
+            + "' and exo:dateCreated <= TIMESTAMP '" + ISO8601.format(afDate) + "'";
       } else if (type.equals(MODIFIED_DATE)) {
         virtualDateQuery_ = "(documents modified from '" + beforeDate
             + "') and (documents modified to '" + afterDate + "')";
         return "exo:dateModified >= TIMESTAMP '" + ISO8601.format(bfDate)
-            + "' and exo:dateModified < TIMESTAMP '" + ISO8601.format(afDate) + "'";
+            + "' and exo:dateModified <= TIMESTAMP '" + ISO8601.format(afDate) + "'";
       }
     } else {
       if(type.equals(CREATED_DATE)) {
@@ -250,7 +243,7 @@ public class UIConstraintsForm extends UIFormInputSetWithAction implements UISel
 
   /**
    * Create query string for category
-   * @param category
+   * @param categoryPath
    * @return
    */
   private String getCategoryQueryString(String categoryPath) {
@@ -354,6 +347,7 @@ public class UIConstraintsForm extends UIFormInputSetWithAction implements UISel
    * Set category to text box and closeof choose category popup window
    * @param selectField: name of text field input
    * @param value: value of chosen category
+   * @throws Exception
    */
   public void doSelect(String selectField, Object value) throws Exception {
     /* Set value to textbox */

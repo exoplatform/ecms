@@ -55,13 +55,13 @@
 		right: 10px;
 		top: 4px;
 		
-		.setupPreferencesButton {
-			margin: 0px 0px 0px 3px;
-		}
-		
 		.noneDrivesButton {
 			padding: 3px 6px;
 			color: @grayDark;
+		}
+		
+		.actionIcon {
+			margin-left: 2px;
 		}
 		
 		.showDrivesButton {
@@ -138,6 +138,22 @@
 		border-top: none;
 		.border-bottom-radius(4px);
 		padding: 4px;
+	}
+	
+	.uiDocumentWorkspaceBox {
+		border: 1px solid #cfcfcf;
+		.border-radius(4px);
+		overflow: hidden;
+		
+		.uiDialogAction {
+			background-color: #F0F0F0;
+			border-bottom: 1px solid #CFCFCF;
+			border-radius: 4px 4px 0 0;
+			line-height: 20px;
+			padding: 8px 20px;
+			word-wrap: break-word;
+			margin: -20px -20px 20px -20px;
+		}
 	}
 }
 
@@ -577,22 +593,20 @@
 			
 			a [class^="uiIcon"] {
 				background-image: url("/eXoResources/skin/images/Icons/uiIconsLightGray.png");
-				&:hover {
-					background-image: url("/eXoResources/skin/images/Icons/uiIconsBlue.png");
-				}
+			}
+			
+			a:hover [class^="uiIcon"] {
+				background-image: url("/eXoResources/skin/images/Icons/uiIconsBlue.png");
 			}
 			
 			textarea { 
-				font-size:11px;
-				height:175px;
-				width:450px;
+				font-size: 11px;
+				height: 175px;
+				width: 90%;
 				vertical-align: top;
 			}
-			.uiSelectbox select.selectbox {
-				width: 295px;
-			}
 			
-			div > span {
+			> div > span {
 				width: 90% !important;
 				margin-right: 5px;
 			}
@@ -604,7 +618,32 @@
 			}
 		}
 	}
+	
+	.helpBlock {
+		display: inline-block;
+		background: #f0f0f0;
+		border: 1px solid #cccccc;
+		color: @grayDark;
+		padding: 15px 15px 15px 40px;
+		.border-radius(5px);
+		width: 155px;
+		margin-left: 10px;
+		
+		.uiIconHelp {
+			background: url("/eXoResources/skin/images/Icons/uiIconColor.png") no-repeat -40px 0px;
+			margin: 3px 0px 0px -25px;
+			float: left;
+		}
+		.form-horizontal .textarea {
+			vertical-align: top;
+		}
+	}
+	.helpBlockTitle {
+		display: block;
+		width: auto;
+	}
 }
+
 
 /******** View1 **************/
 
@@ -613,11 +652,14 @@
 	padding: 15px;
 	
 	.textContent {
-		max-height: 300px;
 		overflow: auto;
 		
 		pre {
 			min-height: 150px;
+		}
+		
+		.ECMIframe {
+			width: 100%;
 		}
 	}
 }
@@ -628,21 +670,24 @@
 	}
 }
 
-/******** Dialog1 **************/
+/******** uiDialogAction **************/
 
 .uiDialogAction {
-	padding: 4px 10px;
-	line-height: 28px;
-	
-	.dialogAction .btn {
-		margin-left: 10px;
+	.uiDialogTitle {
+		font-size: 13px;
 	}
 	
-	.MaximizeScreen20x20Icon,
-	.MinimizeScreen20x20Icon  {
-		margin-left: 10px;
-		display: inline-block;
-		vertical-align: middle;
+	.dialogAction {
+		margin: -4px 0px;
+		
+		.btn {
+			margin-left: 10px;
+		}
+		
+		.actionIcon {
+			margin: 0px 0px 0px 10px;
+			cursor: pointer;
+		}
 	}
 }
 
@@ -677,15 +722,19 @@
 	
 	.control-group {
 		margin-bottom: 15px;
+		padding-left: 10px;
 	}
 	
-	.sortByContent .uiSelectbox {
-		width: 160px;
-		margin-left: 15px;
-		vertical-align: middle;
-		
-		.selectbox {
-			width: 185px;
+	.sortByContent {
+		margin-top: 10px;
+		.uiSelectbox {
+			width: 160px;
+			margin-left: 15px;
+			vertical-align: middle;
+			
+			.selectbox {
+				width: 160px;
+			}
 		}
 	}
 	
@@ -711,7 +760,7 @@
 			vertical-align: middle;
 			
 			.selectbox {
-				width: 85px;
+				width: 60px;
 			}
 		}
 	}
@@ -721,20 +770,22 @@
 		color: @textColor;
 	}
 	
-	.advanceContent .row-fluid {
-		margin-bottom: 10px;
-		
-		.span6 .control-label {
-			width: 200px;
-		}
-		
-		.span12 .uiSelectbox {
-			width: 80px;
-			margin-left: 10px;
-			vertical-align: middle;
+	.advanceContent {
+		.row-fluid {
+			margin: 0px 0px 10px 10px;
 			
-			.selectbox {
-				width: 105px;
+			.span6 .control-label {
+				width: 200px;
+			}
+			
+			.span12 .uiSelectbox {
+				width: 80px;
+				margin-left: 10px;
+				vertical-align: middle;
+				
+				.selectbox {
+					width: 80px;
+				}
 			}
 		}
 	}
@@ -781,6 +832,10 @@
 .uiPropertyTab {
 	table th {
 		white-space: nowrap;
+	}
+	
+	.text {
+		word-break: break-all;
 	}
 }
 
@@ -867,8 +922,17 @@
 			float: right;
 			
 			.selectbox {
-				width: 165px;
+				width: 143px;
 			}
+		}
+		.controls{
+			margin: 0px;
+			width: 28px;
+		}
+		.control-label{
+			width: 200px; 
+			text-align: left; 
+			padding: 0px; 
 		}
 	}
 }
@@ -893,10 +957,7 @@
 }
 
 /******** UIPermissionManager **************/
-.UIJCRExplorerPortlet .UIPermissionManager {
-	width: auto;
-	padding: 0px;
-}
+
 .uiPermissionForm {
 	h5 {
 		font-size: 13px;
@@ -1089,21 +1150,6 @@
 	}
 }
 
-/******** uiDialogAction **************/
-.uiDialogAction {
-	.uiDialogTitle {
-		font-size: 13px;
-	}
-	
-	.dialogAction {
-		margin: -4px 0px;
-		
-		[class^="uiIconEcms"] {
-			margin: 2px 0px 0px 10px;
-		}
-	}
-}
-
 /******** uiUnEditable **************/
 .uiUnEditable {
 	width: 380px;
@@ -1156,6 +1202,10 @@
 		margin: 0px;
 	}
 	
+	.uiGrid th a {
+		color: @grayDark;
+	}
+	
 	.uiGrid td {
 		vertical-align: top;
 	}
@@ -1191,33 +1241,6 @@
 		.size(20px,20px);
 		line-height: 20px !important;
 		font-size: 11px;
-	}
-}
-
-/******** uiTreeNodePageIterator **************/
-.uiDocumentFormController {
-	.helpBlock {
-		display: inline-block;
-		background: #f0f0f0;
-		border: 1px solid #cccccc;
-		color: @grayDark;
-		padding: 15px 15px 15px 40px;
-		.border-radius(5px);
-		width: 155px;
-		margin-left: 10px;
-		
-		.uiIconHelp {
-			background: url("/eXoResources/skin/images/Icons/uiIconColor.png") no-repeat -40px 0px;
-			margin: 3px 0px 0px -25px;
-			float: left;
-		}
-		.form-horizontal .textarea {
-			vertical-align: top;
-		}
-	}
-	.helpBlockTitle {
-		display: block;
-		width: auto;
 	}
 }
 
@@ -1438,24 +1461,18 @@
 	}
 }
 
+.RightClickCustomItem {
+	.menuItem a:hover [class^="uiIcon"] {
+		background-image: url("/eXoResources/skin/images/Icons/uiIconsWhite.png");
+	}
+	.menuItem a:hover [class^="uiIconEcms"] {
+		background-image: url("/eXoWCMResources/skin/images/Icons/uiIconsEcmsWhite.png");
+	}
+}
+
 /******** iFrameUpload **************/
 .iFrameUpload {
 	border: none;
-}
-
-/*==========Add Folder=============*/
-.uiAddFolder{
-	.actionLabel{
-		.controls{
-			margin: 0px;
-		}
-		.control-label{
-			width: 200px; 
-			text-align: left; 
-			padding: 0px; 
-			-webkit-margin-start: 18px;
-		}
-	}
 }
 
 /*==========Icon Small=============*/

@@ -90,6 +90,20 @@ public class AutoVersioningScript implements CmsScript{
         currentNode.checkout() ;
         session.save() ;
         session.logout();
+      }else if (lifeCycleList.contains("read")) {
+        if(srcNode.canAddMixin("mix:versionable")) {	
+          srcNode.addMixin("mix:versionable") ;
+        }
+        if(srcNode.isNodeType("mix:versionable")) {	
+          srcNode.save() ;
+          srcNode.checkin() ;
+          srcNode.checkout() ;
+          session.save() ;
+          session.logout();
+          return;
+        }
+        session.logout();
+        return ;
       }
     } catch (Exception e) {
       if(session !=null) {
@@ -97,7 +111,6 @@ public class AutoVersioningScript implements CmsScript{
       }
     }       
   }
-
   public void setParams(String[] arg0) {
   }
 }

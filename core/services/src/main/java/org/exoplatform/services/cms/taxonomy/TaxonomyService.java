@@ -28,52 +28,58 @@ import org.exoplatform.services.cms.taxonomy.impl.TaxonomyNodeAlreadyExistsExcep
 import org.exoplatform.services.cms.taxonomy.impl.TaxonomyPlugin;
 
 /**
- * Created by The eXo Platform SARL Author : Ly Dinh Quang
- * quang.ly@exoplatform.com xxx5669@gmail.com Mar 31, 2009
+ * Taxonomy service is used to work with taxonomies. In this service,
+ * there are many functions which enable you to add, find, or delete taxonomies from a node.
+ *
+ * @LevelAPI Experimental
  */
 public interface TaxonomyService {
   
   /**
-   * Returns the root node of the given taxonomy tree
+   * Returns the root node of the given taxonomy tree.
+   *
    * @param taxonomyName The name of the taxonomy
    * @param system Indicates whether the nodes must be retrieved using a session
    *          system or user session
-   *
+   * @return Node
    * @throws RepositoryException if the taxonomy tree could not be found
    */
   public Node getTaxonomyTree(String taxonomyName, boolean system)
       throws RepositoryException;
   
   /**
-   * Returns the root node of the given taxonomy tree with the user session
+   * Returns the root node of the given taxonomy tree with the user session.
    *
    * @param taxonomyName The name of the taxonomy
+   * @return Node
    * @throws RepositoryException if the taxonomy tree could not be found
    */
   public Node getTaxonomyTree(String taxonomyName) throws RepositoryException;  
 
   /**
-   * Returns the list of all the root nodes of the taxonomy tree available
+   * Returns the list of all the root nodes of the taxonomy tree available.
+   *
    * @param system Indicates whether the nodes must be retrieved using a session
    *          system or user session
-   *
+   * @return List of Node
    * @throws RepositoryException if the taxonomy trees could not be found
    */
   public List<Node> getAllTaxonomyTrees(boolean system)
       throws RepositoryException;  
 
   /**
-   * Returns the list of all the root nodes of the taxonomy tree available with
-   * the user session
+   * Returns the list of all the root nodes of the taxonomy tree available with the user session.
    *
+   * @return List of Node
    * @throws RepositoryException if the taxonomies could not be found
    */
   public List<Node> getAllTaxonomyTrees() throws RepositoryException;  
 
   /**
-   * Checks if a taxonomy tree with the given name has already been defined
-   * @param taxonomyName The name of the taxonomy
+   * Checks if a taxonomy tree with the given name has already been defined.
    *
+   * @param taxonomyName The name of the taxonomy
+   * @return True if a Taxonomy Tree exist or False if not
    * @throws RepositoryException if the taxonomy name could not be checked
    */
   public boolean hasTaxonomyTree(String taxonomyName) throws RepositoryException;
@@ -90,7 +96,7 @@ public interface TaxonomyService {
       TaxonomyAlreadyExistsException;
 
   /**
-   * Re-defines a node as a taxonomy tree
+   * Re-defines a node as a taxonomy tree.
    *
    * @param taxonomyName The name of the taxonomy to update
    * @param taxonomyTree The taxonomy tree to define
@@ -99,7 +105,7 @@ public interface TaxonomyService {
   public void updateTaxonomyTree(String taxonomyName, Node taxonomyTree) throws RepositoryException;
 
   /**
-   * Remove the taxonomy tree definition
+   * Remove the taxonomy tree definition.
    *
    * @param taxonomyName The name of the taxonomy to remove
    * @throws RepositoryException if the taxonomy tree could not be removed
@@ -107,12 +113,12 @@ public interface TaxonomyService {
   public void removeTaxonomyTree(String taxonomyName) throws RepositoryException;
 
   /**
-   * Adds a new taxonomy node at the given location
+   * Adds a new taxonomy node at the given location.
+   *
    * @param workspace The name of the workspace
    * @param parentPath The place where the taxonomy node will be added
    * @param taxoNodeName The name of taxonomy node
    * @param creator The name of the user creating this node
-   *
    * @throws TaxonomyNodeAlreadyExistsException if a taxonomy node with the same
    *           name has already been added
    * @throws RepositoryException if the taxonomy node could not be added
@@ -124,7 +130,7 @@ public interface TaxonomyService {
                                              TaxonomyNodeAlreadyExistsException;
   
   /**
-   * Removes the taxonomy node located at the given absolute path
+   * Removes the taxonomy node located at the given absolute path.
    *
    * @param workspace The name of the workspace
    * @param absPath The absolute path of the taxonomy node to remove
@@ -134,9 +140,8 @@ public interface TaxonomyService {
       throws RepositoryException;  
 
   /**
-   * Copies or cuts the taxonomy node from source path to destination path
-   * <p>
-   * The parameter type indicates if the node must be cut or copied
+   * Copies or cuts the taxonomy node from source path to destination path.
+   * The parameter type indicates if the node must be cut or copied.
    * 
    * @param workspace The name of the workspace
    * @param srcPath The source path of this taxonomy
@@ -148,7 +153,7 @@ public interface TaxonomyService {
   public void moveTaxonomyNode(String workspace, String srcPath, String destPath, String type) throws RepositoryException;
 
   /**
-   * Returns true if the given node has categories in the given taxonomy
+   * Returns true if the given node has categories in the given taxonomy.
    *
    * @param node The node to check
    * @param taxonomyName The name of the taxonomy
@@ -157,11 +162,12 @@ public interface TaxonomyService {
   public boolean hasCategories(Node node, String taxonomyName) throws RepositoryException;
 
   /**
-   * Returns true if the given node has categories in the given taxonomy
+   * Returns true if the given node has categories in the given taxonomy.
    *
    * @param node The node to check
    * @param taxonomyName The name of the taxonomy
    * @param system check system provider or not
+   * @return True if Categories exists or False if not
    * @throws RepositoryException if categories cannot be checked
    */
   public boolean hasCategories(Node node, String taxonomyName, boolean system) throws RepositoryException;
@@ -169,10 +175,11 @@ public interface TaxonomyService {
   /**
    * Returns all the paths of the categories (relative to the root node of the
    * given taxonomy) which have been associated to the given node for the given
-   * taxonomy
+   * taxonomy.
    *
    * @param node The node for which we seek the categories
    * @param taxonomyName The name of the taxonomy
+   * @return List of Node
    * @throws RepositoryException if the categories cannot be retrieved
    */
   public List<Node> getCategories(Node node, String taxonomyName) throws RepositoryException;
@@ -185,27 +192,32 @@ public interface TaxonomyService {
    * @param node The node for which we seek the categories
    * @param taxonomyName The name of the taxonomy
    * @param system
+   * @return List of Node
    * @throws RepositoryException if the categories cannot be retrieved
    */
   public List<Node> getCategories(Node node, String taxonomyName, boolean system) throws RepositoryException;
 
   /**
-   * Returns all the paths of the categories which have been associated to the given node
+   * Returns all the paths of the categories which have been associated to the given node.
+   *
    * @param node  The node for which we seek the categories
+   * @return List of Node
    * @throws RepositoryException
    */
   public List<Node> getAllCategories(Node node) throws RepositoryException;
 
   /**
-   * Returns all the paths of the categories which have been associated to the given node
+   * Returns all the paths of the categories which have been associated to the given node.
+   *
    * @param node  The node for which we seek the categories
    * @param system check system provider or not
+   * @return List of Node
    * @throws RepositoryException
    */
   public List<Node> getAllCategories(Node node, boolean system) throws RepositoryException;
 
   /**
-   * Removes a category to the given node
+   * Removes a category to the given node.
    *
    * @param node The node for which we remove the category
    * @param taxonomyName The name of the taxonomy
@@ -217,7 +229,7 @@ public interface TaxonomyService {
       throws RepositoryException;
 
   /**
-   * Removes a category to the given node
+   * Removes a category to the given node.
    *
    * @param node The node for which we remove the category
    * @param taxonomyName The name of the taxonomy
@@ -230,7 +242,7 @@ public interface TaxonomyService {
       throws RepositoryException;
 
   /**
-   * Adds several categories to the given node
+   * Adds several categories to the given node.
    *
    * @param node The node for which we add the categories
    * @param taxonomyName The name of the taxonomy
@@ -242,7 +254,7 @@ public interface TaxonomyService {
       throws RepositoryException;
 
   /**
-   * Adds several categories to the given node
+   * Adds several categories to the given node.
    *
    * @param node The node for which we add the categories
    * @param taxonomyName The name of the taxonomy
@@ -255,7 +267,7 @@ public interface TaxonomyService {
       throws RepositoryException;
 
   /**
-   * Adds a new category path to the given node
+   * Adds a new category path to the given node.
    *
    * @param node the node for which we add the category
    * @param taxonomyName The name of the taxonomy
@@ -266,7 +278,7 @@ public interface TaxonomyService {
       throws RepositoryException;
 
   /**
-   * Adds a new category path to the given node
+   * Adds a new category path to the given node.
    *
    * @param node the node for which we add the category
    * @param taxonomyName The name of the taxonomy
@@ -278,27 +290,28 @@ public interface TaxonomyService {
       throws RepositoryException;
 
   /**
-   * Get default user permission of Taxonomy tree
-   * @return Map<String, String[]>
+   * Get default user permission of Taxonomy tree.
+   *
+   * @return Map
    */
   public Map<String, String[]> getTaxonomyTreeDefaultUserPermission();
   
   /**
-  * Get limited length of category name  
+  * Get the limited length of the category name.
   */
   public String getCategoryNameLength();
 
   /**
-   * Add a new taxonomy plugin to the service
+   * Add a new taxonomy plugin to the service.
    *
    * @param plugin The plugin to add
    */
   public void addTaxonomyPlugin(ComponentPlugin plugin);
   
   /**
-   * Initial all taxonomy plugins that have been already configured in xml files
+   * Initialize all taxonomy plugins that have been already configured in .xml files.
    *
-   * @see TaxonomyPlugin
+   * @see {@link TaxonomyPlugin}
    * @throws Exception
    */
   public void init() throws Exception;  

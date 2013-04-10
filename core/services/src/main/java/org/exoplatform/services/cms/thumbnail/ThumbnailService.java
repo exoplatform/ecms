@@ -59,14 +59,14 @@ public interface ThumbnailService {
    * @param node Current node
    * @param jcrMimeType Mime type of node will be retrieve
    * @return List<Node>
-   * @throws RepositoryException
+   * @throws Exception
    */
   public List<Node> getFileNodesByType(Node node, String jcrMimeType) throws Exception;
   /**
    * Return a list image in node
    * @param node Current node
    * @return List<Node>
-   * @throws RepositoryException
+   * @throws Exception
    */
   public List<Node> getFlowImages(Node node) throws Exception;
   /**

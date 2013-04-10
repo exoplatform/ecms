@@ -317,6 +317,12 @@ public class StorageImpl extends BaseJcrStorage implements Storage
       document.save();
       return document;
    }
+   
+   private void saveFolder(JcrNodeEntry nodeEntry) throws StorageException 
+   {
+       FolderDataImpl folder = new FolderDataImpl(nodeEntry);
+       folder.save();
+   }
 
    /**
     * {@inheritDoc}
@@ -341,7 +347,13 @@ public class StorageImpl extends BaseJcrStorage implements Storage
          throw new NameConstraintViolationException("Name for new folder must be provided.");
       }
 
+      JcrNodeEntry rootEntry = ((FolderDataImpl)parent).getNodeEntry();
+      if(rootEntry.getType().getId().equals("exo:drive")) 
+      {
+          saveFolder(rootEntry);
+      }
       JcrNodeEntry folderEntry = createFolderEntry(((FolderDataImpl)parent).getNodeEntry(), name, typeDefinition);
+      
       try {
         folderEntry.setValue(CmisConstants.OBJECT_TYPE_ID, typeDefinition.getId());
         folderEntry.setValue(CmisConstants.BASE_TYPE_ID, typeDefinition.getBaseId().value());

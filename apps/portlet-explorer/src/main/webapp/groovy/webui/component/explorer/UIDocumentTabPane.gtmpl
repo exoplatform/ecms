@@ -1,6 +1,7 @@
 <%
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
   def rcontext = _ctx.getRequestContext();
+  def jsManager = rcontext.getJavascriptManager();
   if(uicomponent.isShowViewFile() && !uicomponent.isJcrEnable()) {
 %>
 <div class="UIResizableBlock">
@@ -64,7 +65,7 @@
         if(uiChild.getId() != "UIDocumentInfo") {
           width = "30%";
         }
-        String display = "none" ;		   		
+        String display = "none" ;
         if(uiChild.isRendered() || uiChild.getId().indexOf("OptionBlock")>=0) display="block" ;		     	
         println "<div style=\"display: $display;float:left; width: $width;\">" ;
         uicomponent.renderUIComponent(uiChild) ;
@@ -77,4 +78,6 @@
       print "</div>";
     }
   }
+  
+  jsManager.require("SHARED/ecm-utils", "ecmutil").addScripts("ecmutil.ECMUtils.appendFillOutElement('$uicomponent.id', 'UITabContent');"); 
 %>	

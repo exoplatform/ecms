@@ -16,8 +16,13 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.popup.info;
 
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
-import org.exoplatform.webui.core.UIContainer;
+import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIComponent;
+import org.exoplatform.webui.core.UITabPane;
+import org.exoplatform.webui.event.Event;
+import org.exoplatform.webui.event.EventListener;
 
 /**
  * Created by The eXo Platform SARL
@@ -26,10 +31,46 @@ import org.exoplatform.webui.core.UIContainer;
  * Jan 25, 2007
  * 1:59:57 PM
  */
-@ComponentConfig(template = "system:/groovy/webui/core/UITabPane.gtmpl")
-public class UIViewMetadataContainer extends UIContainer {
+@ComponentConfig(
+                 template = "app:/groovy/webui/component/explorer/UIViewMetadataContainer.gtmpl",
+                 events = { @EventConfig(listeners = UIViewMetadataContainer.SelectTabActionListener.class)
+})
+public class UIViewMetadataContainer extends UITabPane {
 
+  private boolean hasMoreOneMetaData;
+  
   public UIViewMetadataContainer() throws Exception {
   }
+  
+  /**
+   * @return the hasMoreOneMetaData
+   */
+  public boolean isHasMoreOneMetaData() {
+    return hasMoreOneMetaData;
+  }
 
+  /**
+   * @param hasMoreOneMetaData the hasMoreOneMetaData to set
+   */
+  public void setHasMoreOneMetaData(boolean hasMoreOneMetaData) {
+    this.hasMoreOneMetaData = hasMoreOneMetaData;
+  }
+  
+  public static class SelectTabActionListener extends EventListener<UITabPane> {
+    public void execute(Event<UITabPane> event) throws Exception {
+      WebuiRequestContext context = event.getRequestContext();
+      String renderTab = context.getRequestParameter(UIComponent.OBJECTID);
+      if (renderTab == null)
+          return;
+      event.getSource().setSelectedTab(renderTab);
+      WebuiRequestContext parentContext = (WebuiRequestContext) context.getParentAppRequestContext();
+      if (parentContext != null) {
+          parentContext.setResponseComplete(true);
+      } else {
+          context.setResponseComplete(true);
+      }
+      
+      event.getRequestContext().addUIComponentToUpdateByAjax(event.getSource());
+    }
+  }
 }

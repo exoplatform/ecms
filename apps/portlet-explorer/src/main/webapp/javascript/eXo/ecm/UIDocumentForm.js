@@ -74,6 +74,8 @@
 			eXo.webui.UIDocForm.horizontalForm = gj(uiDocumentForm).find("div.form-horizontal:first")[0];
 		}
 
+		element = gj(element).find("i")[0];
+		
 		if (element.className == "uiIconEcmsExpand uiIconEcmsLightGrey") {
 			element.className = "uiIconEcmsCollapse uiIconEcmsLightGrey";
 			eXo.ecm.ECMUtils.editFullScreen = true;

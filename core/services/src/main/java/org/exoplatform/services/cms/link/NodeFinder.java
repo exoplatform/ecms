@@ -24,90 +24,87 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
 /**
- * Created by The eXo Platform SARL
- * Author : Hoang Van Hung
- *          hunghvit@gmail.com
- * Mar 14, 2009
+ * NodeFinder is used to find a node with a given path.
+ * If the path to the node contains sub-paths to exo:symlink nodes,
+ * find the real link node.
+ *
+ * @LevelAPI Experimental
  */
 public interface NodeFinder {
 
   /**
-   * Returns the node at relPath relative to ancestor node.
+   * R Return the node at relPath related to the ancestor node.
    *
-   * @param ancestorNode The ancestor of the node to retrieve from which we
-   *          start.
+   * @param ancestorNode The ancestor of the node to retrieve from which we start.
    * @param relativePath The relative path of the node to retrieve.
    * @throws PathNotFoundException If no node exists at the specified path.
-   * @throws RepositoryException if another error occurs.
+   * @throws RepositoryException If another error occurs.
    */
   public Node getNode(Node ancestorNode, String relativePath) throws PathNotFoundException,
                                                              RepositoryException;
 
   /**
-   * Returns the node at relPath relative to ancestor node. If the node is a
-   * link and giveTarget has been set to <code>true</code>, the target node will
-   * be returned
+   * Return the node at relPath related to the ancestor node.
+   * If the node is a link and giveTarget has been set to true,
+   * the target node will be returned.
    *
-   * @param ancestorNode The ancestor of the node to retrieve from which we
-   *          start.
+   * @param ancestorNode The ancestor of the node to retrieve from which we start.
    * @param relativePath The relative path of the node to retrieve.
-   * @param giveTarget Indicates if the target must be returned in case the item
-   *          is a link
+   * @param giveTarget Indicate if the target must be returned in case the item is a link.
    * @throws PathNotFoundException If no node exists at the specified path.
-   * @throws RepositoryException if another error occurs.
+   * @throws RepositoryException If another error occurs.
    */
   public Node getNode(Node ancestorNode, String relativePath, boolean giveTarget) throws PathNotFoundException,
                                                                                  RepositoryException;
 
   /**
-   * Returns the item at the specified absolute path.
+   *  Return the item at the specified absolute path.
    *
-   * @param workspace The name of workspace
+   * @param workspace The workspace name.
    * @param absPath An absolute path.
-   * @throws PathNotFoundException if the specified path cannot be found.
-   * @throws RepositoryException if another error occurs.
+   * @throws PathNotFoundException If the specified path cannot be found.
+   * @throws RepositoryException If another error occurs.
    */
   public Item getItem(String workspace, String absPath) throws PathNotFoundException,
                                                                           RepositoryException;  
   
   /**
-   * Returns the item at the specified absolute path.
+   * Return the item at the specified absolute path.
    *
-   * @param workspace The name of workspace
+   * @param workspace The workspace name.
    * @param absPath An absolute path.
-   * @throws PathNotFoundException if the specified path cannot be found.
-   * @throws RepositoryException if another error occurs.
+   * @param system True to use the system session.
+   * @throws PathNotFoundException If the specified path cannot be found.
+   * @throws RepositoryException If another error occurs.
    */
   public Item getItemSys(String workspace, String absPath, boolean system) throws PathNotFoundException,
                                                                                              RepositoryException;  
 
   /**
-   * Returns the item at the specified absolute path. If the item is a link and
-   * giveTarget has been set to <code>true</code>, the target node will be
-   * returned
+   * Return the item at the specified absolute path.
+   * If the item is a link and giveTarget has been
+   * set to true, the target node will be returned.
    *
-   * @param workspace The name of workspace
+   * @param workspace The workspace name.
    * @param absPath An absolute path.
-   * @param giveTarget Indicates if the target must be returned in case the item
-   *          is a link
-   * @throws PathNotFoundException if the specified path cannot be found.
-   * @throws RepositoryException if another error occurs.
+   * @param giveTarget Indicate if the target must be returned in case the item is a link.
+   * @throws PathNotFoundException If the specified path cannot be found.
+   * @throws RepositoryException If another error occurs.
    */
   public Item getItem(String workspace, String absPath, boolean giveTarget) throws PathNotFoundException,
                                                                                               RepositoryException;
   
   /**
-   * Returns the item at the specified absolute path. If the item is a link and
-   * giveTarget has been set to <code>true</code>, the target node will be
-   * returned
+   * Return the item at the specified absolute path.
+   * If the item is a link and giveTarget has been set to true,
+   * the target node will be returned.
    * 
-   * @param workspace The name of workspace
+   * @param workspace The workspace name.
    * @param absPath An absolute path.
-   * @param giveTarget Indicates if the target must be returned in case the item
-   *          is a link
-   * @param system system provider
-   * @throws PathNotFoundException if the specified path cannot be found.
-   * @throws RepositoryException if another error occurs.
+   * @param giveTarget Indicate if the target must be returned in case the item is a link.
+   * @param system The system provider.
+   * @throws PathNotFoundException If the specified path cannot be found.
+   * @throws RepositoryException If another error occurs.
    */
   public Item getItemGiveTargetSys(String workspace,
                                    String absPath,
@@ -116,57 +113,54 @@ public interface NodeFinder {
                                                   RepositoryException;
 
   /**
-   * Returns the item at the specified absolute path.
+   * Return the item at the specified absolute path.
    *
-   * @param session The session to use in order to get the item
+   * @param session  The session is used to get the item.
    * @param absPath An absolute path.
-   * @throws PathNotFoundException if the specified path cannot be found.
-   * @throws RepositoryException if another error occurs.
+   * @throws PathNotFoundException If the specified path cannot be found.
+   * @throws RepositoryException If another error occurs.
    */
   public Item getItem(Session session, String absPath) throws PathNotFoundException,
                                                       RepositoryException;
 
   /**
-   * Returns the item at the specified absolute path. If the item is a link and
-   * giveTarget has been set to <code>true</code>, the target node will be
-   * returned
+   * Return the item at the specified absolute path.
+   * If the item is a link and giveTarget has been set to true,
+   * the target node will be returned.
    *
-   * @param session The session to use in order to get the item
+   * @param session The session is used to get the item.
    * @param absPath An absolute path.
-   * @param giveTarget Indicates if the target must be returned in case the item
-   *          is a link
-   * @throws PathNotFoundException if the specified path cannot be found.
-   * @throws RepositoryException if another error occurs.
+   * @param giveTarget Indicate if the target must be returned in case the item is a link.
+   * @throws PathNotFoundException If the specified path cannot be found.
+   * @throws RepositoryException If another error occurs.
    */
   public Item getItem(Session session, String absPath, boolean giveTarget) throws PathNotFoundException,
                                                                           RepositoryException;
 
   /**
-   * Returns the item at the specified absolute path. If the item is a link and
-   * giveTarget has been set to <code>true</code>, the target node will be
-   * returned
+   * Return the item at the specified absolute path.
+   * If the item is a link and giveTarget has been set to true,
+   * the target node will be returned.
    *
    * @param session The session to use in order to get the item
    * @param absPath An absolute path.
    * @param giveTarget Indicates if the target must be returned in case the item
    *          is a link
-   * @param system system provider
-   * @throws PathNotFoundException if the specified path cannot be found.
-   * @throws RepositoryException if another error occurs.
+   * @param system The system provider.
+   * @throws PathNotFoundException If the specified path cannot be found.
+   * @throws RepositoryException If another error occurs.
    */
   public Item getItemTarget(Session session, String absPath, boolean giveTarget, boolean system) throws PathNotFoundException,
                                                                                                 RepositoryException;
 
   /**
-   * Returns <code>true</code> if an item exists at absPath; otherwise returns
-   * <code>false</code>. Also returns <code>false</code> if the specified
-   * absPath is malformed.
+   * Return true if an item exists at absPath; otherwise returns false.
+   * Also returns false if the specified absPath is malformed.
    *
-   * @param session The session to use in order to get the item
+   * @param session The session is used to get the item.
    * @param absPath An absolute path.
-   * @return <code>true</code> if an item exists at absPath; otherwise returns
-   *         <code>false</code>.
-   * @throws RepositoryException if an error occurs.
+   * @return True if an item exists at absPath; otherwise return false.
+   * @throws RepositoryException If an error occurs.
    */
   public boolean itemExists(Session session, String absPath) throws RepositoryException;
 }

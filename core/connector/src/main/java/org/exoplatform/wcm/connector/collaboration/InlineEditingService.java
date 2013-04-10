@@ -111,7 +111,7 @@ public class InlineEditingService implements ResourceContainer{
   /**
    * SERVICE: Edit summary of document.
    *
-   * @param newSummary the new summary of document
+   * @param newValue the new summary of document
    * @param repositoryName the repository name
    * @param workspaceName the workspace name
    * @param nodeUIID the UIID of node
@@ -123,26 +123,26 @@ public class InlineEditingService implements ResourceContainer{
    */
   @POST
   @Path("/text/")
-  public Response editText( @FormParam("newValue") String newText,
+  public Response editText( @FormParam("newValue") String newValue,
                             @QueryParam("repositoryName") String repositoryName,
                             @QueryParam("workspaceName") String workspaceName,
                             @QueryParam("nodeUIID") String  nodeUIID,
                             @QueryParam("siteName") String  siteName,
                             @QueryParam("language") String  language){
-    return modifyProperty(EXO_TEXT, newText, repositoryName, workspaceName, nodeUIID, siteName, language);
+    return modifyProperty(EXO_TEXT, newValue, repositoryName, workspaceName, nodeUIID, siteName, language);
   }
+
   /**
    * SERVICE: Edit value of any property
    *
-   * @param newSummary the new summary of document
+   * @param propertyName
+   * @param newValue
    * @param repositoryName the repository name
    * @param workspaceName the workspace name
    * @param nodeUIID the UIID of node
    * @param siteName the site name
-   *
+   * @param language
    * @return the response
-   *
-   * @throws Exception the exception
    */
   @POST
   @Path("/property/")

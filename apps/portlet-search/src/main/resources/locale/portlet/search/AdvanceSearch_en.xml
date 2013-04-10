@@ -17,7 +17,7 @@
       <Page>Page</Page>
       <Document>Document</Document>
       <DocumentAndPage>Document and Page</DocumentAndPage>
-      <documentandpage>document and page</documentandpage>
+      <documentandpage>Document and Page</documentandpage>
       <resutlsCaption>Results</resutlsCaption>
       <ofAboutCaption>of about</ofAboutCaption>
       <forCaption>for</forCaption>
@@ -61,9 +61,9 @@
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
   	 <message>
-  	   <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
+     <keyword-not-support>The keyword is invalid. Some characters are not recognized.</keyword-not-support>
   	   <not-checked>Please select a search type.</not-checked>
-  	   <keyword-not-empty>The value of keyword should be not empty.</keyword-not-empty>
+     <keyword-not-empty>Please enter a keyword.</keyword-not-empty>
   	 </message>
   </UISearchForm>
   <UIPaginatorDefault>

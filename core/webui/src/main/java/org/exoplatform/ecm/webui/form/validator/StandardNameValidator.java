@@ -51,7 +51,7 @@ public class StandardNameValidator implements Validator {
   /**
    *
    * @param s
-   * @param array
+   * @param arrFilterChars
    * @return
    */
   private boolean checkArr(String s, String[] arrFilterChars) {

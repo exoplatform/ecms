@@ -73,7 +73,6 @@ public class FCKFolderHandler {
    * @param document the document
    * @param child the child
    * @param folderType the folder type
-   * @param url the url
    * @return the org.w3c.dom.Element element
    * @throws Exception the exception
    */

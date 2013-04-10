@@ -31,8 +31,6 @@ public class LinkFileHandler extends FCKFileHandler {
 
   /**
    * Instantiates a new link file handler.
-   *
-   * @param container the container
    */
   public LinkFileHandler() {
     super(ExoContainerContext.getCurrentContainer());

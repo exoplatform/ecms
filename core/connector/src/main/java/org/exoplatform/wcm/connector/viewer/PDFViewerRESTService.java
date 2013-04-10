@@ -63,19 +63,9 @@ import org.icepdf.core.util.GraphicsRenderingHints;
 /**
  * Return a PDF content to be displayed on the webpage.
  *
- * {{{{repoName}}}}: The name of repository.
- * {{{{workspaceName}}}}: The name of workspace.
- * {{{{nodePath}}}}: The node path.
- * {{{pageNumber}}}}: The page number.
- * {{{{rotation}}}}: The Page rotation. The valid values are: 0.0f, 90.0f, 180.0f, 270.0f.
- * {{{{scale}}}}: The Zoom factor which is applied to the rendered page.
+ * @LevelAPI Provisional
  *
- *
- * @author Dang Van Minh <minh.dang@exoplatform.com>
- * @since Sep 3, 2009 7:33:30 AM
- * @copyright  eXo Platform SEA
- *
- * @anchor CONTref.Devref.PublicRestAPIs.PDFViewerRESTService
+ * @anchor PDFViewerRESTService
  */
 @Path("/pdfviewer/{repoName}/{workspaceName}/{pageNumber}/{rotation}/{scale}/{uuid}/")
 public class PDFViewerRESTService implements ResourceContainer {
@@ -104,9 +94,9 @@ public class PDFViewerRESTService implements ResourceContainer {
    * @param rotation The page rotation. The valid values are: 0.0f, 90.0f, 180.0f, 270.0f.
    * @param scale The Zoom factor which is applied to the rendered page.
    * @return Response inputstream.
-   * @throws Exception
+   * @throws Exception The exception
    *
-   * @anchor CONTref.Devref.PublicRestAPIs.PDFViewerRESTService.getCoverImage
+   * @anchor PDFViewerRESTService.getCoverImage
    */
   @GET
   public Response getCoverImage(@PathParam("repoName") String repoName,
@@ -363,9 +353,6 @@ public class PDFViewerRESTService implements ResourceContainer {
 
   /**
    * Create key for cache. When key object is collected by GC, value (if is file) will be delete.
-   * @param key
-   * @return
-   * @throws IOException
    */
   private class ObjectKey implements Serializable {
     private static final long serialVersionUID = 1L;

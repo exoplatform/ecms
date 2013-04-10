@@ -183,7 +183,7 @@
               <a class="nodeLabel" data-placement="bottom" rel="tooltip"
                  onclick="<%=uicomponent.event("ChangeNode", drivePath.toString(), new Parameter("workspaceName", uiExplorer.getDriveData().getWorkspace()))%>"
                  title="<%=uiExplorer.findFirstComponentOfType(UITreeExplorer.class).getLabel()%>">
-                <strong><%=uiExplorer.findFirstComponentOfType(UITreeExplorer.class).getLabel()%></strong>
+                <%=uiExplorer.findFirstComponentOfType(UITreeExplorer.class).getLabel()%>
               </a>
               <%
               for (String nodeName : relNodePath.split("/")) {
@@ -196,11 +196,11 @@
                   def curNode = (javax.jcr.Node)nodeFinder.getItem(nodeWs, drivePath.toString());
                   def curTitle = org.exoplatform.services.cms.impl.Utils.getTitle(curNode);
                   %>
-                    <i class="uiIconArrowRightMini"></i>
+                    <i class="uiIconArrowRightMini uiIconLightGray"></i>
                     <a class="nodeLabel" data-placement="bottom" rel="tooltip"
                       onclick="<%=uicomponent.event("ChangeNode", drivePath.toString(), new Parameter("workspaceName", nodeWs))%>"
                       title="<%=curTitle%>">
-                     <strong><%=curTitle%></strong>
+											<%=curTitle%>
                     </a>
                   <%
                 }

@@ -12,7 +12,7 @@
 		Self.MiniumRightContainerWidth = 351;
 		Self.waitInterval              = 25;
 		Self.UIBrokenCheckingInterval  = 150;
-		Self.UIBrokenCheckingHandler   = null;
+		window.UIBrokenCheckingHandler   = null;
 		var RightClick = eXo.webui.UIRightClickPopupMenu;
 		if (!RightClick) {
 		  RightClick = eXo.webui.UIRightClickPopupMenu;
@@ -542,10 +542,7 @@
 		  eXo.ecm.ECMUtils.currentWidth = Self.uiLeftContainer.offsetWidth;
 		  var title = gj(Self.uiLeftContainer).find("h5.title:first")[0];
 		  eXo.ecm.ECMUtils.currentTitleWidth = title.offsetWidth;
-		  if (Self.UIBrokenCheckingHandler) {
-		    clearInterval(Self.UIBrokenCheckingHandler);
-		    Self.UIBrokenCheckingHandler = null;
-		  }
+		  window.clearTimeout(window.UIBrokenCheckingHandler);
 		  if (Self.uiLeftContainer.style.display == '' || Self.uiLeftContainer.style.display == 'block') {
 		    document.onmousemove = eXo.ecm.ECMUtils.resizeMouseMoveSideBar;
 		    document.onmouseup = eXo.ecm.ECMUtils.resizeMouseUpSideBar;
@@ -704,7 +701,7 @@
 			
 			var actionbar= gj('#UIActionBar');
 			if (actionbar) { //VinhNT workaround for the un-expand width of ActionBar problem, should be improved later
-			  actionbar.width(actionbar.parent().width()-2);
+			  actionbar.width(actionbar.parent().width());
 			}
 			var viewbar = gj('#UIViewBarContainer')[0];
 			var uiMainActionContainer   = gj(divAction).find("ul.nav-pills")[0];
@@ -956,7 +953,7 @@
 		  var jcrExpPortlet = document.getElementById("UIJCRExplorer");
 		  gj(jcrExpPortlet).removeClass("UIJCRExplorerNoSelect");
 		  if (Self.uiResizeSideBar) gj(Self.uiResizeSideBar).removeClass("resizeBarDisplay");
-		  Self.UIBrokenCheckingHandler = window.setInterval("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
+		  window.UIBrokenCheckingHandler = window.setTimeout("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
 		  delete eXo.ecm.ECMUtils.currentWidth;
 		  delete eXo.ecm.ECMUtils.currentMouseX;
 		  delete eXo.ecm.ECMUtils.resizableBlockWidth;
@@ -967,10 +964,7 @@
 		  var event = event || window.event;
 		  if (Self.initWithoutLeftContainer()) return;
 		  event.cancelBubble = true;
-		  if (Self.UIBrokenCheckingHandler) {
-        clearInterval(Self.UIBrokenCheckingHandler);
-        Self.UIBrokenCheckingHandler = null;
-      }
+      window.clearTimeout(window.UIBrokenCheckingHandler);
 		  var leftContainer = document.getElementById("LeftContainer");
 		  var rightContainer = gj(Self.uiWorkingArea).find("div.rightContainer:first")[0];
 		  var resizeButton = gj(Self.uiWorkingArea).find("a.resizeButton:first")[0];
@@ -981,15 +975,6 @@
 		    gj(Self.uiResizeSideBar).removeClass("resizeNoneBorder");
 		    Self.uiResizeSideBar.style.height = leftContainer.offsetHeight + "px";
 		    showSideBar = true;
-		    if (typeof (eXo.ecm.ECMUtils.heightOfItemArea) == "undefined") {
-		      var itemArea = document.getElementById("SelectItemArea");
-		      if (itemArea && itemArea.style.display=="block") {
-		        eXo.ecm.ECMUtils.savedDisplayStatusOfItemArea = "block";
-		        eXo.ecm.ECMUtils.heightOfItemArea = itemArea.offsetHeight;
-		      } else {
-		        eXo.ecm.ECMUtils.heightOfItemArea = 286;
-		      }
-		    }
 		    if (iArrow) iArrow.className = "uiIconArrowLeft";
 		  } else {
 		    leftContainer.style.display = 'none';
@@ -1140,7 +1125,6 @@
 		}
 
 		ECMUtils.prototype.loadEffectedItemsInSideBar = function () {
-			Self.UIBrokenCheckingHandler = window.setInterval("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
 			Self.waitContainerRetry = 0;
 			Self.waitForContainer();
 		}
@@ -1150,40 +1134,21 @@
 		  Self.uiLeftContainer = gj(Self.uiWorkingArea).find('div.leftContainer:first')[0];
 		  Self.uiRightContainer = gj(Self.uiWorkingArea).find("div.rightContainer:first")[0];
 		  Self.uiResizeSideBar = gj(Self.uiWorkingArea).find("div.resizeBar:first")[0];
-		  if (Self.uiLeftContainer.offsetHeight==0 || Self.uiLeftContainer.offsetWidth==0) return;
+		  if (!Self.uiLeftContainer || Self.uiLeftContainer.offsetHeight==0 || Self.uiLeftContainer.offsetWidth==0) return;
 		  if (Self.uiLeftContainer && Self.uiRightContainer && Self.uiWorkingArea) {
 				if (Self.uiLeftContainer.offsetWidth + Self.uiRightContainer.offsetWidth + Self.uiResizeSideBar.offsetWidth  > Self.uiWorkingArea) {
-					if (Self.UIBrokenCheckingHandler) {
-						clearInterval(Self.UIBrokenCheckingHandler);
-						Self.UIBrokenCheckingHandler = null;
-					}
 					Self.loadContainerWidth();
-					Self.UIBrokenCheckingHandler = window.setInterval("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
 				}else if (Self.uiLeftContainer.offsetWidth + Self.uiRightContainer.offsetWidth + Self.uiResizeSideBar.offsetWidth  < Self.uiWorkingArea -2) {
-					if (Self.UIBrokenCheckingHandler) {
-						clearInterval(Self.UIBrokenCheckingHandler);
-						Self.UIBrokenCheckingHandler = null;
-					}
 					Self.loadContainerWidth();
-					Self.UIBrokenCheckingHandler = window.setInterval("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
 				}else if (Self.uiLeftContainer.offsetTop < Self.uiRightContainer.offsetTop) {
-					if (Self.UIBrokenCheckingHandler) {
-						clearInterval(Self.UIBrokenCheckingHandler);
-						Self.UIBrokenCheckingHandler = null;
-					}
 					Self.loadContainerWidth();
-					Self.UIBrokenCheckingHandler = window.setInterval("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
 				} else if (Self.uiLeftContainer.offsetHeight > Self.uiRightContainer.offsetHeight) {
-					if (document.getElementById("FillOutElement")) {
-						if (Self.UIBrokenCheckingHandler) {
-							clearInterval(Self.UIBrokenCheckingHandler);
-							Self.UIBrokenCheckingHandler = null;
-						}
+					if (gj("div.FillOutElement:visible").length >0) {
 						Self.loadContainerWidth();
-						Self.UIBrokenCheckingHandler = window.setInterval("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
 					}
 				}
 			}
+			window.UIBrokenCheckingHandler = window.setTimeout("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
 		}
 		/**
 		 * @fucntion   waitForContainer
@@ -1197,6 +1162,7 @@
 		    if (fixToolbar) gj(fixToolbar).css('z-index', 10);
 		    console.log("Load Container time out");
 		    Self.loadContainerWidth();
+		    window.UIBrokenCheckingHandler = window.setTimeout("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
 		    return;
 		  }
 		  Self.uiWorkingArea = gj(document).find('div.uiWorkingArea:first')[0];
@@ -1224,6 +1190,8 @@
 		    return;
 		  }
 		  Self.loadContainerWidth();
+		  window.clearTimeout(window.UIBrokenCheckingHandler);
+		  window.UIBrokenCheckingHandler = window.setTimeout("eXo.ecm.ECMUtils.UIBrokenChecking();", Self.UIBrokenCheckingInterval);
 		  var fixToolbar = gj(document).find("div.UIToolbarContainer:first")[0];
 		  if (fixToolbar) gj(fixToolbar).css( 'z-index', 10 );
 		}
@@ -1267,30 +1235,57 @@
 		}
 		}
 
+		ECMUtils.prototype.appendFillOutElement =function(parentID, tabClass) {
+			var divContainer = document.getElementById(parentID);
+			if (!divContainer) return;
+			var visibleTab = gj(divContainer).find("div." + tabClass + ":visible");
+			if (!visibleTab) return;
+			if ( visibleTab.length==0) return;
+			window.clearTimeout(window.UIBrokenCheckingHandler);
+			gj('div.FillOutElement').remove();
+			gj(visibleTab).append("<div class=\"FillOutElement\">&nbsp;</div>");
+			eXo.ecm.ECMUtils.clearFillOutElement();
+			eXo.ecm.ECMUtils.adjustFillOutElement();
+			window.UIBrokenCheckingHandler = window.setTimeout("eXo.ecm.ECMUtils.UIBrokenChecking();", eXo.ecm.ECMUtils.UIBrokenCheckingInterval);
+		}
 		ECMUtils.prototype.clearFillOutElement = function () {
-			var fillOutElement = document.getElementById('FillOutElement');
+			var fillOutElement = gj('div.FillOutElement');
 			if (fillOutElement) {
-			  fillOutElement.style.width = "0px";
-			  fillOutElement.style.height = "0px";
+			  fillOutElement.css("height", "0px");
+			  fillOutElement.css("width", "0px");
 			}
 		}
 
+		/**
+		 * function: adjustFillOutElement
+		 * purpose : adjust a invisible element which make the left container and right container 
+		 *           equal in height.
+		 */
 		ECMUtils.prototype.adjustFillOutElement = function () {
-		  if (eXo.ecm.ECMUtils.initWithoutLeftContainer()) return;
-		  var workingArea = document.getElementById('UIWorkingArea');
-		  var leftContainer = gj(workingArea).find("div.leftContainer:first")[0];
-		  var rightContainer = gj(workingArea).find("div.rightContainer:first")[0];
-		  if (rightContainer.offsetHeight < leftContainer.offsetHeight) {
-		    var fillOutElement = document.getElementById('FillOutElement');
-		    if (fillOutElement) {
-		      fillOutElement.style.width = "0px";
-		      if (leftContainer.offsetHeight - rightContainer.offsetHeight>0){
-		        fillOutElement.style.height = leftContainer.offsetHeight - rightContainer.offsetHeight + "px";
-		      } else {
-		      	fillOutElement.style.height = "0px";
-		      }
-		    }
-		  }
+			var checkMinHeight = eXo.ecm.ECMUtils.initWithoutLeftContainer();
+			var workingArea = document.getElementById('UIWorkingArea');
+			var leftContainer = gj(workingArea).find("div.leftContainer:first")[0];
+			checkMinHeight = checkMinHeight || !leftContainer;
+			if (checkMinHeight) {
+				gj("div.UIDocumentInfo").css("min-height", "500px");
+			} else {
+				if (gj(leftContainer).css("display")=="none") {
+					gj("div.UIDocumentInfo").css("min-height", "500px");
+				}else { 
+					gj("div.UIDocumentInfo").css("min-height", "");
+					var rightContainer = gj(workingArea).find("div.rightContainer:first")[0];
+					if (rightContainer.offsetHeight < leftContainer.offsetHeight) {
+						var fillOutElement = gj('div.FillOutElement');
+						if (fillOutElement) {
+							if (leftContainer.offsetHeight - rightContainer.offsetHeight>0){
+								fillOutElement.css("height", leftContainer.offsetHeight - rightContainer.offsetHeight + "px");
+							} else {
+								fillOutElement.css("width", "0px");
+							}
+						}
+					}
+				}
+			}
 		}
 
 		ECMUtils.prototype.disableAutocomplete = function (id) {

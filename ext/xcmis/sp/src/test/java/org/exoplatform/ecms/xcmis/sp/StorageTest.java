@@ -537,8 +537,8 @@ public class StorageTest extends BaseTest
       Map<String, Property<?>> properties = new HashMap<String, Property<?>>();
       properties.put(CmisConstants.NAME, new StringProperty(CmisConstants.NAME, CmisConstants.NAME, CmisConstants.NAME,
          CmisConstants.NAME, "checkinTestRename_NewName"));
-      pwc.checkin(true, "my comment", properties, cs, null, null);
-
+      document = pwc.checkin(true, "my comment", properties, cs, null, null);
+      
       try
       {
          storageA.getObjectById(pwcId);
@@ -1604,8 +1604,7 @@ public class StorageTest extends BaseTest
       // remove from three folders and check parents again
       folder1.removeObject(document);
       folder3.removeObject(document);
-      rootFolder.removeObject(document);
-      expectedParents = new HashSet<String>(Arrays.asList(folder2.getObjectId(), folder4.getObjectId()));
+      expectedParents = new HashSet<String>(Arrays.asList(rootFolder.getObjectId(), folder2.getObjectId(), folder4.getObjectId()));
 
       parents = document.getParents();
 
@@ -1674,104 +1673,6 @@ public class StorageTest extends BaseTest
       assertEquals("text/plain", documentNode.getProperty("jcr:content/jcr:mimeType").getString());
    }
    
-   
-   
-   
-   
-   
-   
-   /*
-      public void testUnfileAll() throws Exception
-      {
-         DocumentData document = createDocument(rootFolder, "unfilingDocumentAllTest", "cmis:document", null, null);
-   
-         FolderData folder1 = createFolder(rootFolder, "unfilingFolderAllTest01", "cmis:folder");
-         FolderData folder2 = createFolder(rootFolder, "unfilingFolderAllTest02", "cmis:folder");
-         FolderData folder3 = createFolder(rootFolder, "unfilingFolderAllTest03", "cmis:folder");
-         folder1.addObject(document);
-         folder2.addObject(document);
-         folder3.addObject(document);
-   
-         assertEquals(4, document.getParents().size());
-         storageA.unfileObject(document);
-         assertNull(document.getParent());
-         assertEquals(0, document.getParents().size());
-      }
-
-      public void testUnfiling() throws Exception
-      {
-         assertEquals(0, getSize(storageA.getUnfiledObjectsId()));
-         DocumentData document = createDocument(rootFolder, "unfilingDocumentTest", "cmis:document", null, null);
-         assertTrue(rootFolder.getChildren(null).hasNext());
-         rootFolder.removeObject(document);
-         assertFalse(rootFolder.getChildren(null).hasNext());
-   
-         assertFalse(itemExistsInCurrentDrive(storageA,"/unfilingDocumentTest"));
-   
-         Collection<FolderData> parents = document.getParents();
-         assertEquals(0, parents.size());
-         storageA.getObjectById(document.getObjectId());
-   
-         assertEquals(1, getSize(storageA.getUnfiledObjectsId()));
-      }
-
-   private int getSize(Iterator<String> iterator)
-   {
-      int result = 0;
-
-      while (iterator.hasNext())
-      {
-         iterator.next();
-         result++;
-      }
-      return result;
-   }
-
-   private void printTree(FolderData folder) throws Exception
-   {
-      System.out.println("--------- TREE --------");
-      System.out.println(folder.getPath());
-      ((FolderDataImpl)folder).entry.node.accept(new ItemVisitor()
-      {
-         int l = 0;
-
-         public void visit(javax.jcr.Property property) throws RepositoryException
-         {
-         }
-
-         public void visit(Node node) throws RepositoryException
-         {
-            l++;
-            for (int i = 0; i < l; i++)
-            {
-               System.out.print("  ");
-            }
-            System.out.println(node.getName() + " <" + node.getPrimaryNodeType().getName() + ">");
-            for (NodeIterator children = node.getNodes(); children.hasNext();)
-            {
-               children.nextNode().accept(this);
-            }
-            l--;
-         }
-      });
-
-      // Unfiled storage
-      System.out.println("------- UNFILED -------");
-      for (NodeIterator iter =
-         (getNodeFromCurrentDrive(storageA,StorageImpl.XCMIS_SYSTEM_PATH + "/" + StorageImpl.XCMIS_UNFILED)).getNodes(); iter
-         .hasNext();)
-      {
-         for (NodeIterator iterator = iter.nextNode().getNodes(); iterator.hasNext();)
-         {
-            System.out.println(iterator.nextNode().getPath());
-         }
-      }
-      System.out.println("-----------------------");
-   }
-   */
-
-
-
    protected PolicyDataImpl createPolicy(FolderData folder, String name, String policyText, String typeId)
       throws Exception
    {
@@ -1791,28 +1692,6 @@ public class StorageTest extends BaseTest
       return (PolicyDataImpl)policy;
    }
 
-   //   public void testCreateAiim() throws Exception
-   //   {
-   //      createAiimDocument(rootFolder, "aiim01", null);
-   //   }
-   //
-   //   protected DocumentData createAiimDocument(FolderData folder, String name, ContentStream content) throws Exception
-   //   {
-   //      DocumentData document = storageA.createDocument(folder, "aiim_2010demo", VersioningState.MAJOR);
-   //      document.setName(name);
-   //      document.setProperty(new StringProperty("aiim_Ioinc", "aiim_Ioinc", "aiim_Ioinc", "aiim_Ioinc",
-   //         "Consultation Note 11488-4"));
-   //      document.setProperty(new StringProperty("aiim_procedure", "aiim_procedure", "aiim_procedure", "aiim_procedure",
-   //         "Cystoscopy 24139008"));
-   //
-   //      document.setContentStream(content);
-   //      for (Map.Entry<String, Property<?>> p : document.getProperties().entrySet())
-   //      {
-   //         System.out.println(p.getKey()+ ": " + p.getValue().getValues());
-   //      }
-   //      return document;
-   //   }
-   
    private boolean itemExistsInStorage(StorageImpl storage, String nodePath, boolean isSystem)
       throws RepositoryException, RepositoryConfigurationException
    {
@@ -1834,7 +1713,7 @@ public class StorageTest extends BaseTest
       RepositoryException, RepositoryConfigurationException
    {
 
-      return (Node)getJcrSession(storage.getStorageConfiguration().getRepository(),
+      return getJcrSession(storage.getStorageConfiguration().getRepository(),
          storage.getStorageConfiguration().getWorkspace()).getNodeByUUID(nodeId);
    }
    

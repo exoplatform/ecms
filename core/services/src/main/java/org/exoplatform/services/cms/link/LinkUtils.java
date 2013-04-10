@@ -177,8 +177,8 @@ public final class LinkUtils {
   }
 
   /**
-   * The procedure which return the path existed in tree.<br>
-   * @author Phan Trong Lam.
+   * The procedure which return the path existed in tree.
+   *
    * @param node is a Node type which represents current node.
    * @param path a current path
    * @return the path existed in tree

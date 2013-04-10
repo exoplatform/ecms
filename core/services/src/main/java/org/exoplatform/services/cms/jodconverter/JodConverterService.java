@@ -4,16 +4,21 @@ import java.io.File;
 
 import org.artofsolving.jodconverter.office.OfficeException;
 
+/**
+ * JodConverter is used to convert documents into different office formats.
+ *
+ * @LevelAPI Experimental
+ */
 public interface JodConverterService {
 
   /**
-   * Convert input File to output File with outputFormat
+   * Convert input File to output File with the outputFormat.
    *
-   * @param input the input file
-   * @param output the output file
-   * @param outputFormat the extension of output file
+   * @param input The input file
+   * @param output The output file
+   * @param outputFormat The extension of the output file.
+   * @return True if convert successfully; otherwise, return false.
    * @throws OfficeException
-   * @return true if convert successfully; otherwise, return false.
    */
   public boolean convert(File input, File output, String outputFormat) throws OfficeException;
 

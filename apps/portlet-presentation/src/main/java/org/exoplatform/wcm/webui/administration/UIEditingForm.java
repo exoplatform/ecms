@@ -73,8 +73,6 @@ public class UIEditingForm extends UIForm {
    * component's <code>addChangeRepositoryActionListener<code> method. When
    * the changeRepositoryAction event occurs, that object's appropriate
    * method is invoked.
-   *
-   * @see ChangeRepositoryActionEvent
    */
   public static class ChangeEditingActionListener extends EventListener<UIEditingForm> {
 

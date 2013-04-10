@@ -45,12 +45,10 @@ import org.w3c.dom.Element;
  *
  * {{{{portalname}}}}: The name of portal.
  * {{{{restcontextname}}}}: The context name of REST web application which is deployed to the "{{{{portalname}}}}" portal.
+ *
+ * @LevelAPI Provisional
  * 
- * @author Benjamin Paillereau <benjamin.paillereau@exoplatform.com>
- * @since      July 10, 2009
- * @copyright  eXo Platform SEA
- * 
- * @anchor CONTref.Devref.PublicRestAPIs.VoteConnector
+ * @anchor VoteConnector
  */
 @Path("/contents/vote/")
 public class VoteConnector extends BaseConnector implements ResourceContainer {
@@ -64,12 +62,11 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
    * Set a vote value for a given content.
    *
    * @param jcrPath The path of the content.
-   *
+   * @param vote The vote value.
    * @return http The code.
-   *
    * @throws Exception The exception
    * 
-   * @anchor CONTref.Devref.PublicRestAPIs.VoteConnector.postStarVote
+   * @anchor VoteConnector.postStarVote
    */
   @POST
   @Path("/star/")
@@ -90,12 +87,10 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
    * @param repositoryName The name of repository.
    * @param workspaceName The name of workspace.
    * @param jcrPath The path of the content.
-   *
    * @return http The code.
-   *
    * @throws Exception The exception
    * 
-   * @anchor CONTref.Devref.PublicRestAPIs.VoteConnector.getStarVote
+   * @anchor VoteConnector.getStarVote
    */
   @GET
   @Path("/star/")
@@ -117,12 +112,10 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
    * @param jcrPath The path of the content.
    * @param vote The vote value.
    * @param lang The language of the content.
-   *
    * @return http The code.
-   *
    * @throws Exception The exception
    * 
-   * @anchor CONTref.Devref.PublicRestAPIs.VoteConnector.postVote
+   * @anchor VoteConnector.postVote
    */
   @GET
   @Path("/postVote/")
@@ -162,12 +155,10 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
    * @param repositoryName The name of repository.
    * @param workspaceName The name of workspace.
    * @param jcrPath The path of the content.
-   *
    * @return http The code
-   *
    * @throws Exception The exception
    * 
-   * @anchor CONTref.Devref.PublicRestAPIs.VoteConnector.getVote
+   * @anchor VoteConnector.getVote
    */
   @GET
   @Path("/getVote/")

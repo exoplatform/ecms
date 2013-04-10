@@ -129,7 +129,6 @@ public class TestSEOService extends BaseWCMTestCase{
   
   /**
    * test remove page metedate
-   * @return void
    */
   public void tesRemovePageMetadata() throws Exception{
     PageMetadataModel metaModel = new PageMetadataModel();    
@@ -145,7 +144,6 @@ public class TestSEOService extends BaseWCMTestCase{
   
   /**
    * test remove content metedate
-   * @return void
    */
   public void tesRemoveContentMetadata() throws Exception{
     PageMetadataModel metaModel = new PageMetadataModel();    

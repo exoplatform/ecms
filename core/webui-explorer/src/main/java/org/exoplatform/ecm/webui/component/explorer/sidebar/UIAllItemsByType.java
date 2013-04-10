@@ -88,7 +88,7 @@ public class UIAllItemsByType extends UIComponent {
       UIAllItemsByType uiSideBar = event.getSource();
       UIJCRExplorer uiJCRExplorer = uiSideBar.getAncestorOfType(UIJCRExplorer.class);
       UIPopupContainer popupAction = uiJCRExplorer.getChild(UIPopupContainer.class);
-      UIDocumentFilterForm uiDocumentFilter = popupAction.activate(UIDocumentFilterForm.class,300);
+      UIDocumentFilterForm uiDocumentFilter = popupAction.activate(UIDocumentFilterForm.class, 350);
       uiDocumentFilter.invoke(uiSideBar.getAllSupportedType());
 
 //      UIWorkingArea uiWorkingArea = uiJCRExplorer.getChild(UIWorkingArea.class);

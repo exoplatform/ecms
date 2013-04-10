@@ -23,6 +23,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.MissingResourceException;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -34,6 +35,7 @@ import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
+import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
@@ -46,10 +48,7 @@ import org.exoplatform.services.wcm.search.base.EcmsSearchResult;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
- * Created by The eXo Platform SAS
- * Author : eXoPlatform
- *          exo@exoplatform.com
- * Feb 5, 2013  
+ * This abstract class is extended by the SearchService connectors which provide search result for a specific content type
  */
 public abstract class BaseSearchServiceConnector extends SearchServiceConnector {
 
@@ -72,7 +71,19 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
     siteSearch_ = WCMCoreUtils.getService(SiteSearchService.class);
     driveService_ = WCMCoreUtils.getService(ManageDriveService.class);
   }
-  
+
+  /**
+   * The connectors must implement this search method, with the following parameters and return a collection of SearchResult
+   *
+   * @param context Search context
+   * @param query The user-input query to search for
+   * @param sites Search on these specified sites only (e.g acme, intranet...)
+   * @param offset Start offset of the result set
+   * @param limit Maximum size of the result set
+   * @param sort The field to sort the result set
+   * @param order Sort order (ASC, DESC)
+   * @return A collection of SearchResult
+   */
   @Override
   public Collection<SearchResult> search(SearchContext context,
                                          String query,
@@ -170,8 +181,8 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
                     new EcmsSearchResult(getPath(driveData, retNode, context), 
                                          getTitleResult(retNode), 
                                          retNode.getExcerpt(), 
-                                         (driveData == null ? "" : driveData.getName()) + fileSize(retNode) + formatDate(date), 
-                                         getImageUrl(), 
+                                         getDriveTitle(driveData) + fileSize(retNode) + formatDate(date), 
+                                         getImageUrl(retNode), 
                                          date.getTimeInMillis(), 
                                          (long)retNode.getScore(),
                                          getFileType(retNode));
@@ -215,7 +226,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
    * @return
    * @throws Exception
    */
-  protected String getImageUrl() {
+  protected String getImageUrl(Node node) {
     return "/eXoResources/skin/images/Icons/FileTypeIcons/uiIconsFileType64x64.png";
   }
   
@@ -268,6 +279,28 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
   protected String formatDate(Calendar date) {
     DateFormat format = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.FULL, SimpleDateFormat.SHORT);
     return " - " + format.format(date.getTime());
+  }
+  
+  protected String getDriveTitle(DriveData driveData) {
+    if (driveData == null) {
+      return "";
+    }
+    String id = driveData.getName();
+    String path = driveData.getHomePath();
+    try {
+      RepositoryService repoService = WCMCoreUtils.getService(RepositoryService.class);
+      Node groupNode = (Node)WCMCoreUtils.getSystemSessionProvider().getSession(
+                                    repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName(),
+                                    repoService.getCurrentRepository()).getItem(path);
+      while (groupNode.getParent() != null) {
+        if (groupNode.hasProperty(NodetypeConstant.EXO_LABEL)) {
+          return groupNode.getProperty(NodetypeConstant.EXO_LABEL).getString();
+        } else groupNode = groupNode.getParent();
+      }
+      return id.replace(".", " / ");
+    } catch(Exception e) {
+      return id.replace(".", " / ");
+    }
   }
   
   /**

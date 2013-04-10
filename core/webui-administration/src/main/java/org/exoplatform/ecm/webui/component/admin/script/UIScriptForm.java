@@ -26,6 +26,7 @@ import javax.jcr.version.VersionHistory;
 
 import org.exoplatform.ecm.jcr.model.VersionNode;
 import org.exoplatform.ecm.webui.component.admin.script.UIScriptList.ScriptData;
+import org.exoplatform.ecm.webui.form.validator.XSSValidator;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.scripts.ScriptService;
 import org.exoplatform.services.log.ExoLogger;
@@ -44,17 +45,16 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
 import org.exoplatform.webui.form.validator.NameValidator;
 
 /**
  * Created by The eXo Platform SARL
- * Author : pham tuan
- * phamtuanchip@yahoo.de September 27, 2006 10:27:15 AM
+ * September 27, 2006 10:27:15 AM
  */
 
 @ComponentConfig(
@@ -91,13 +91,11 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
     UIFormTextAreaInput contents =
       new UIFormTextAreaInput(FIELD_SCRIPT_CONTENT , FIELD_SCRIPT_CONTENT, null) ;
     contents.addValidator(MandatoryValidator.class) ;
-    UIFormCheckBoxInput isVersion =
-      new UIFormCheckBoxInput<Boolean>(FIELD_ENABLE_VERSION , FIELD_ENABLE_VERSION, null) ;
-    UIFormStringInput scriptLabel =
-            new UIFormStringInput(FIELD_SCRIPT_LABEL, FIELD_SCRIPT_LABEL, null) ;
-    UIFormStringInput scriptName =
-      new UIFormStringInput(FIELD_SCRIPT_NAME, FIELD_SCRIPT_NAME, null) ;
-    scriptName.addValidator(MandatoryValidator.class).addValidator(NameValidator.class) ;
+    UICheckBoxInput isVersion = new UICheckBoxInput(FIELD_ENABLE_VERSION , FIELD_ENABLE_VERSION, null) ;
+    UIFormStringInput scriptLabel = new UIFormStringInput(FIELD_SCRIPT_LABEL, FIELD_SCRIPT_LABEL, null) ;
+    scriptLabel.addValidator(XSSValidator.class);
+    UIFormStringInput scriptName = new UIFormStringInput(FIELD_SCRIPT_NAME, FIELD_SCRIPT_NAME, null) ;
+    scriptName.addValidator(MandatoryValidator.class).addValidator(NameValidator.class).addValidator(XSSValidator.class);
     versions.setOnChange("Change") ;
     versions.setRendered(false) ;
     isVersion.setRendered(false) ;
@@ -145,19 +143,19 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
     isAddNew_ = isAddNew ;
     if(script != null) {
       String scriptContent = scriptService.getScriptAsText(script);
-      getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setRendered(true) ;
+      getUICheckBoxInput(FIELD_ENABLE_VERSION).setRendered(true) ;
       boolean isVersioned = script.isNodeType(Utils.MIX_VERSIONABLE) ;
       if(isVersioned) {
         getUIFormSelectBox(FIELD_SELECT_VERSION).setRendered(true) ;
         getUIFormSelectBox(FIELD_SELECT_VERSION).setOptions(getVersionValues(script)) ;
         getUIFormSelectBox(FIELD_SELECT_VERSION).setValue(script.getBaseVersion().getName()) ;
-        getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setDisabled(true);
-        getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setChecked(true) ;
+        getUICheckBoxInput(FIELD_ENABLE_VERSION).setDisabled(true);
+        getUICheckBoxInput(FIELD_ENABLE_VERSION).setChecked(true) ;
         setActions(new String[]{"Save", "Restore", "Refresh", "Cancel"})  ;
       } else {
         getUIFormSelectBox(FIELD_SELECT_VERSION).setRendered(false) ;
-        getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setDisabled(false) ;
-        getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setChecked(false) ;
+        getUICheckBoxInput(FIELD_ENABLE_VERSION).setDisabled(false) ;
+        getUICheckBoxInput(FIELD_ENABLE_VERSION).setChecked(false) ;
         setActions( new String[]{"Save", "Refresh", "Cancel"}) ;
       }
       getUIFormTextAreaInput(FIELD_SCRIPT_CONTENT).setValue(scriptContent) ;
@@ -173,8 +171,8 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
       return ;
     }
     getUIFormSelectBox(FIELD_SELECT_VERSION).setRendered(false) ;
-    getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setRendered(false) ;
-    getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setChecked(false) ;
+    getUICheckBoxInput(FIELD_ENABLE_VERSION).setRendered(false) ;
+    getUICheckBoxInput(FIELD_ENABLE_VERSION).setChecked(false) ;
     getUIStringInput(FIELD_SCRIPT_LABEL).setValue(null) ;
     getUIStringInput(FIELD_SCRIPT_NAME).setDisabled(false);
     getUIStringInput(FIELD_SCRIPT_NAME).setValue(null) ;
@@ -239,8 +237,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
         uiApp.addMessage(appMessage) ;        
         return ;
       }
-      boolean isEnableVersioning =
-        uiForm.getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).isChecked() ;
+      boolean isEnableVersioning = uiForm.getUICheckBoxInput(FIELD_ENABLE_VERSION).isChecked() ;
       if(uiForm.isAddNew_ || !isEnableVersioning) {
         try {
           scriptService.addScript(namePrefix + "/" + name, label, content, WCMCoreUtils.getUserSessionProvider());
