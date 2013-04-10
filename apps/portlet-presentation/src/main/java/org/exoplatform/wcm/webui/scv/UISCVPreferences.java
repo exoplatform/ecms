@@ -32,10 +32,14 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
+import org.exoplatform.webui.form.UIFormInputSet;
 import org.exoplatform.webui.form.UIFormRadioBoxInput;
 import org.exoplatform.webui.form.UIFormStringInput;
+import org.exoplatform.webui.form.UIFormTabPane;
 import org.exoplatform.webui.form.ext.UIFormInputSetWithAction;
 import org.exoplatform.webui.form.input.UICheckBoxInput;
+
+import com.google.common.util.concurrent.SettableFuture;
 
 /**
  * Created by The eXo Platform SARL
@@ -53,10 +57,15 @@ import org.exoplatform.webui.form.input.UICheckBoxInput;
       @EventConfig(listeners = UISCVPreferences.SelectTargetPageActionListener.class, phase = Phase.DECODE)
     }
 )
-public class UISCVPreferences extends UIForm implements UISelectable{
+public class UISCVPreferences extends UIFormTabPane implements UISelectable{
 
   /** The Constant ITEM_PATH_FORM_INPUT_SET. */
   public final static String ITEM_PATH_FORM_INPUT_SET     = "UISCVConfigItemPathFormInputSet";
+  
+  public final static String CONTENT_FORM_INPUT_SET       = "UISCVConfigContentFormInputSet";
+  public final static String DISPLAY_FORM_INPUT_SET       = "UISCVConfigDisplayFormInputSet";
+  public final static String PRINT_FORM_INPUT_SET         = "UISCVConfigPrintFormInputSet";
+  public final static String ADVANCED_FORM_INPUT_SET      = "UISCVConfigAdvancedFormInputSet";
 
   public static final String CONTENT_PATH_INPUT           = "UISCVContentPathConfigurationInputBox";
 
@@ -100,6 +109,7 @@ public class UISCVPreferences extends UIForm implements UISelectable{
   private UIFormRadioBoxInput           cacheOptionsRadioInputBox;
 
   public UISCVPreferences() throws Exception{
+  	super("UISCVPreferences");
     portletPreferences = ((PortletRequestContext) WebuiRequestContext.getCurrentInstance()).getRequest().getPreferences();
     initComponent();
     setActions(new String[] { "Save", "Cancel" });
@@ -120,7 +130,10 @@ public class UISCVPreferences extends UIForm implements UISelectable{
     UIFormInputSetWithAction itemPathInputSet = new UIFormInputSetWithAction(ITEM_PATH_FORM_INPUT_SET);
     itemPathInputSet.setActionInfo(CONTENT_PATH_INPUT, new String[] { "SelectFolderPath" }) ;
     itemPathInputSet.addUIFormInput(txtContentPath);
-
+    UIFormInputSetWithAction contentInputSet = new UIFormInputSetWithAction(CONTENT_FORM_INPUT_SET);
+    contentInputSet.addUIFormInput((UIFormInputSet)itemPathInputSet);
+    setSelectedTab(CONTENT_FORM_INPUT_SET);
+    
     /** Option Show Title/Show Date/Show OptionBar **/
     boolean blnShowTitle = Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.SHOW_TITLE,
                                                                             null));
@@ -136,6 +149,11 @@ public class UISCVPreferences extends UIForm implements UISelectable{
                                                                                 null));
     chkShowOptionBar = new UICheckBoxInput(SHOW_OPION_BAR_CHECK_BOX, SHOW_OPION_BAR_CHECK_BOX, null);
     chkShowOptionBar.setChecked(blnShowOptionBar);
+    
+    UIFormInputSetWithAction displayInputSet = new UIFormInputSetWithAction(DISPLAY_FORM_INPUT_SET);
+    displayInputSet.addChild(chkShowTitle);
+    displayInputSet.addChild(chkShowDate);
+    displayInputSet.addChild(chkShowOptionBar);
 
 
     /** CONTEXTUAL MODE */
@@ -163,6 +181,12 @@ public class UISCVPreferences extends UIForm implements UISelectable{
                                                         CACHE_ENABLE_SELECT_RADIO_BOX,
                                                         cacheOptions);
     cacheOptionsRadioInputBox.setValue(isCacheEnabled ? ENABLE_STRING : DISABLE_STRING);
+    
+    UIFormInputSetWithAction advancedInputSet = new UIFormInputSetWithAction(ADVANCED_FORM_INPUT_SET);
+    advancedInputSet.addChild(txtParameterName);
+    advancedInputSet.addChild(cacheOptionsRadioInputBox);
+    advancedInputSet.addChild(contextOptionsRadioInputBox);
+    advancedInputSet.addChild(txtParameterName);
 
     /** PRINT PAGE */
     String strPrintParameterName = portletPreferences.getValue(UISingleContentViewerPortlet.PRINT_PARAMETER, null);
@@ -177,16 +201,16 @@ public class UISCVPreferences extends UIForm implements UISelectable{
     txtPrintPage.setReadOnly(true);
     targetPageInputSet.setActionInfo(PRINT_VIEW_PAGE_INPUT, new String[] {"SelectTargetPage"}) ;
     targetPageInputSet.addUIFormInput(txtPrintPage);
-
-    addChild(itemPathInputSet);
-    addChild(chkShowTitle);
-    addChild(chkShowDate);
-    addChild(chkShowOptionBar);
-    addChild(contextOptionsRadioInputBox);
-    addChild(txtParameterName);
-    addChild(targetPageInputSet);
-    addChild(txtPrintPageParameter);
-    addChild(cacheOptionsRadioInputBox);
+    
+    UIFormInputSetWithAction printInputSet = new UIFormInputSetWithAction(PRINT_FORM_INPUT_SET);
+    printInputSet.addChild(txtPrintPageParameter);
+    printInputSet.addChild(targetPageInputSet);
+  
+    
+    addChild(contentInputSet);
+    addChild(displayInputSet);
+    addChild(printInputSet);
+    addChild(advancedInputSet);
   }
 
   /**
@@ -200,17 +224,24 @@ public class UISCVPreferences extends UIForm implements UISelectable{
       UISCVPreferences uiSCVPref = event.getSource();
       PortletPreferences portletPreferences = ((PortletRequestContext) event.getRequestContext()).getRequest()
                                                                                                  .getPreferences();
-      String strShowTitle = uiSCVPref.getUICheckBoxInput(SHOW_TITLE_CHECK_BOX).isChecked() ? "true" : "false";
-      String strShowDate = uiSCVPref.getUICheckBoxInput(SHOW_DATE_CHECK_BOX).isChecked() ? "true" : "false";
-      String strShowOptionBar = uiSCVPref.getUICheckBoxInput(SHOW_OPION_BAR_CHECK_BOX) .isChecked() ? "true" : "false";
+      UIFormInputSetWithAction displayInputSet = uiSCVPref.findComponentById(DISPLAY_FORM_INPUT_SET);
+      String strShowTitle = displayInputSet.getUICheckBoxInput(SHOW_TITLE_CHECK_BOX).isChecked() ? "true" : "false";
+      String strShowDate = displayInputSet.getUICheckBoxInput(SHOW_DATE_CHECK_BOX).isChecked() ? "true" : "false";
+      String strShowOptionBar = displayInputSet.getUICheckBoxInput(SHOW_OPION_BAR_CHECK_BOX) .isChecked() ? "true" : "false";
 
-      String strIsContextEnable = ((UIFormRadioBoxInput) uiSCVPref.getChildById(CONTEXTUAL_SELECT_RADIO_BOX)).getValue();
+      String strIsContextEnable = ((UIFormRadioBoxInput) uiSCVPref.findComponentById(CONTEXTUAL_SELECT_RADIO_BOX)).getValue();
+      UIFormInputSetWithAction advancedInputSet = uiSCVPref.findComponentById(ADVANCED_FORM_INPUT_SET);      
       strIsContextEnable = strIsContextEnable.equals(ENABLE_STRING) ? "true":"false";
-      String strParameterName = uiSCVPref.getUIStringInput(PARAMETER_INPUT_BOX).getValue();
-      String strPrintPageName = uiSCVPref.getUIStringInput(PRINT_VIEW_PAGE_INPUT).getValue();
-      String strPrintParameterName  = uiSCVPref.getUIStringInput(PRINT_PAGE_PARAMETER_INPUT).getValue();
-      String strIsCacheEnabled = ((UIFormRadioBoxInput) uiSCVPref.getChildById(CACHE_ENABLE_SELECT_RADIO_BOX)).getValue();
+      String strParameterName = advancedInputSet.getUIStringInput(PARAMETER_INPUT_BOX).getValue();
+      String strIsCacheEnabled = ((UIFormRadioBoxInput) advancedInputSet.getChildById(CACHE_ENABLE_SELECT_RADIO_BOX)).getValue();
       strIsCacheEnabled = ENABLE_STRING.equals(strIsCacheEnabled) ? "true" : "false";
+      
+      
+      UIFormInputSetWithAction printInputSet = uiSCVPref.findComponentById(PRINT_FORM_INPUT_SET);
+      String strPrintPageName = printInputSet.getUIStringInput(PRINT_VIEW_PAGE_INPUT).getValue();
+      String strPrintParameterName  = printInputSet.getUIStringInput(PRINT_PAGE_PARAMETER_INPUT).getValue();
+      
+      
 
       if (!Boolean.parseBoolean(strIsContextEnable)) {
         if (uiSCVPref.getSelectedNodeUUID() != null) {

@@ -57,7 +57,7 @@
       <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
       <ContentPathBlock>Content Selection</ContentPathBlock>
       <UISCVConfigItemPathFormInputSet>Content Path</UISCVConfigItemPathFormInputSet>
-	  <UISCVContentPathConfigurationInputBox>Content Path</UISCVContentPathConfigurationInputBox>
+	    <UISCVContentPathConfigurationInputBox>Content Path</UISCVContentPathConfigurationInputBox>
       <Advance>Advanced</Advance>
       <ContextCaption>Dynamic Navigation</ContextCaption>
       <UISCVContextualRadioBox>Contextual Content</UISCVContextualRadioBox>
@@ -78,6 +78,14 @@
     <msg>
       <not-valid-path>The item path is invalid.</not-valid-path>
     </msg>
+    <tab>
+      <label>
+        <UISCVConfigContentFormInputSet>Content Selection</UISCVConfigContentFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Display Settings</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>Print Settings</UISCVConfigPrintFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Advanced</UISCVConfigAdvancedFormInputSet>
+      </label>
+    </tab>
   </UISCVPreferences>
   <UISCVConfigItemPathFormInputSet>
     <title>
