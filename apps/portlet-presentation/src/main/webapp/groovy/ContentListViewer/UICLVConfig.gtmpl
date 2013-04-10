@@ -56,7 +56,7 @@
 										  %>
 												<div class="form-horizontal" >  
 													<div class="control-group">  
-													  <label class="control-label"><%=uicomponent.getLabel(uicomponent.DISPLAY_MODE_FORM_RADIO_BOX_INPUT) %></label>
+													  <label class="control-label"><%=uicomponent.getLabel(uicomponent.DISPLAY_MODE_FORM_RADIO_BOX_INPUT) %>: </label>
 													  <a class="actionIcon pull-right" title="<%= _ctx.appRes("UICLVConfig.help.ModeSelectionHelp") %>" data-placement="left" rel="tooltip"><i class="uiIconQuestion uiIconLightGray" id="" ></i></a>
 													  <div class="controls">
 														<% uiform.renderField(uicomponent.DISPLAY_MODE_FORM_RADIO_BOX_INPUT) %>
@@ -64,7 +64,7 @@
 													</div>
 													<div class="control-group">                  
 													  <label class="control-label" for="<%=uicomponent.ITEM_PATH_FORM_INPUT_SET%>">											  
-													    <%=uicomponent.getLabel(uicomponent.ITEM_PATH_FORM_INPUT_SET) %>
+													    <%=uicomponent.getLabel(uicomponent.ITEM_PATH_FORM_INPUT_SET) %>: 
 													  </label>
 													  <a class="actionIcon pull-right"  title="<%= _ctx.appRes("UICLVConfig.help.FolderPathHelp") %>" data-placement="left" rel="tooltip"><i class="uiIconQuestion uiIconLightGray" id=""></i></a>
 													  <div class="controls" <% if (uicomponent.getSavedPath() != null) { %>title="<%=uicomponent.getSavedPath()%>" <% }%> >
@@ -72,7 +72,7 @@
 													  </div>
 													</div>
 													<div class="control-group">                  
-													  <label class="control-label" for="<%=uicomponent.ORDER_BY_FORM_SELECT_BOX%>"><%=uicomponent.getLabel(uicomponent.ORDER_BY_FORM_SELECT_BOX) %></label>
+													  <label class="control-label" for="<%=uicomponent.ORDER_BY_FORM_SELECT_BOX%>"><%=uicomponent.getLabel(uicomponent.ORDER_BY_FORM_SELECT_BOX) %>: </label>
 													  <div class="controls" <% if (uicomponent.getSavedPath() != null) { %>title="<%=uicomponent.getSavedPath()%>" <% }%> >
 														<% uiform.renderField(uicomponent.ORDER_BY_FORM_SELECT_BOX) %>
 													  </div>
@@ -124,7 +124,7 @@
 										  %>
 											  <div class="form-horizontal" >  
 													<div class="control-group">  
-													  <label class="control-label" for="<%=uicomponent.HEADER_FORM_STRING_INPUT%>"><%=uicomponent.getLabel(uicomponent.HEADER_FORM_STRING_INPUT) %></label>
+													  <label class="control-label" for="<%=uicomponent.HEADER_FORM_STRING_INPUT%>"><%=uicomponent.getLabel(uicomponent.HEADER_FORM_STRING_INPUT) %>: </label>
 													  <a class="actionIcon pull-right" title="<%= _ctx.appRes("UICLVConfig.help.HeaderOptionHelp") %>" data-placement="left" rel="tooltip"><i class="uiIconQuestion uiIconLightGray" id="" ></i></a>
 													  <div class="controls clearfix">
 														<div class="pull-left"> <% uiform.renderField(uicomponent.HEADER_FORM_STRING_INPUT) %></div>
@@ -136,17 +136,17 @@
 													</div>
 												
 													<div class="control-group">  
-													  <label class="control-label" for="<%=uicomponent.DISPLAY_TEMPLATE_FORM_SELECT_BOX%>"><%=uicomponent.getLabel(uicomponent.DISPLAY_TEMPLATE_FORM_SELECT_BOX) %></label>
+													  <label class="control-label" for="<%=uicomponent.DISPLAY_TEMPLATE_FORM_SELECT_BOX%>"><%=uicomponent.getLabel(uicomponent.DISPLAY_TEMPLATE_FORM_SELECT_BOX) %>: </label>
 													  <div class="controls"><% uiform.renderField(uicomponent.DISPLAY_TEMPLATE_FORM_SELECT_BOX) %></div>
 													</div>
 												
 													<div class="control-group">  
-													  <label class="control-label" for="<%=uicomponent.PAGINATOR_TEMPLATE_FORM_SELECT_BOX%>"><%=uicomponent.getLabel(uicomponent.PAGINATOR_TEMPLATE_FORM_SELECT_BOX) %></label>
+													  <label class="control-label" for="<%=uicomponent.PAGINATOR_TEMPLATE_FORM_SELECT_BOX%>"><%=uicomponent.getLabel(uicomponent.PAGINATOR_TEMPLATE_FORM_SELECT_BOX) %>: </label>
 													  <div class="controls"><% uiform.renderField(uicomponent.PAGINATOR_TEMPLATE_FORM_SELECT_BOX) %></div>
 													</div>
 												
 													<div class="control-group">  
-													  <label class="control-label" for="<%=uicomponent.ITEMS_PER_PAGE_FORM_STRING_INPUT%>"><%=uicomponent.getLabel(uicomponent.ITEMS_PER_PAGE_FORM_STRING_INPUT) %></label>
+													  <label class="control-label" for="<%=uicomponent.ITEMS_PER_PAGE_FORM_STRING_INPUT%>"><%=uicomponent.getLabel(uicomponent.ITEMS_PER_PAGE_FORM_STRING_INPUT) %>: </label>
 													  <div class="controls"><% uiform.renderField(uicomponent.ITEMS_PER_PAGE_FORM_STRING_INPUT) %></div>
 													</div>
 												
@@ -210,7 +210,7 @@
 												<div class="form-horizontal" >  
 													<h6 class="clearfix"> <a class="actionIcon pull-right" title="<%= _ctx.appRes("UICLVConfig.help.ContextualHelp") %> <%= _ctx.appRes("UICLVConfig.help.ParameterHelp") %> <%= _ctx.appRes("UICLVConfig.help.ContentByQueryHelp") %> <%= _ctx.appRes("UICLVConfig.help.ShowDetailInPageHelp") %>" data-placement="left" rel="tooltip"><i class="uiIconQuestion uiIconLightGray" id="" ></i></a><%=uicomponent.getLabel(uicomponent.DYNAMIC_NAVIGATION_LABEL) %></h6>
 													<div class="control-group">  
-													  <label class="control-label"><%=uicomponent.getLabel(uicomponent.CONTEXTUAL_FOLDER_RADIOBOX_INPUT) %></label>
+													  <label class="control-label"><%=uicomponent.getLabel(uicomponent.CONTEXTUAL_FOLDER_RADIOBOX_INPUT) %>: </label>
 													  <div class="controls">
 														<% uiform.renderField(uicomponent.CONTEXTUAL_FOLDER_RADIOBOX_INPUT) %>
 													  </div>
@@ -220,7 +220,7 @@
 													  showFolderContexttual = "none"; 
 													} %>
 													<div class="control-group">                  
-													  <label class="control-label" for="<%=uicomponent.SHOW_CLV_BY_STRING_INPUT%>"><%=uicomponent.getLabel(uicomponent.SHOW_CLV_BY_STRING_INPUT) %></label>
+													  <label class="control-label" for="<%=uicomponent.SHOW_CLV_BY_STRING_INPUT%>"><%=uicomponent.getLabel(uicomponent.SHOW_CLV_BY_STRING_INPUT) %>: </label>
 													  <div class="controls">
 														<% uiform.renderField(uicomponent.SHOW_CLV_BY_STRING_INPUT) %>
 													  </div>
@@ -228,26 +228,26 @@
 													
 													<% if (uicomponent.isContentListByQuery()) {  %>  
 														<div class="control-group">                  
-														  <label class="control-label" for="<%=uicomponent.CONTENT_BY_QUERY_TEXT_AREA%>"><%=uicomponent.getLabel(uicomponent.CONTENT_BY_QUERY_TEXT_AREA) %></label>
+														  <label class="control-label" for="<%=uicomponent.CONTENT_BY_QUERY_TEXT_AREA%>"><%=uicomponent.getLabel(uicomponent.CONTENT_BY_QUERY_TEXT_AREA) %>: </label>
 														  <div class="controls">
 															<% uiform.renderField(uicomponent.CONTENT_BY_QUERY_TEXT_AREA) %>
 														  </div>
 														</div>
 														<div class="control-group">                  
-														  <label class="control-label" for="<%=uicomponent.WORKSPACE_FORM_SELECT_BOX%>"><%=uicomponent.getLabel(uicomponent.WORKSPACE_FORM_SELECT_BOX) %></label>
+														  <label class="control-label" for="<%=uicomponent.WORKSPACE_FORM_SELECT_BOX%>"><%=uicomponent.getLabel(uicomponent.WORKSPACE_FORM_SELECT_BOX) %>: </label>
 														  <div class="controls">
 															<% uiform.renderField(uicomponent.WORKSPACE_FORM_SELECT_BOX) %>
 														  </div>
 														</div>
 													<% } %> 
 													<div class="control-group">
-													  <label class="control-label" for="<%=uicomponent.TARGET_PAGE_FORM_INPUT_SET%>"><%=uicomponent.getLabel(uicomponent.TARGET_PAGE_FORM_INPUT_SET) %></label>
+													  <label class="control-label" for="<%=uicomponent.TARGET_PAGE_FORM_INPUT_SET%>"><%=uicomponent.getLabel(uicomponent.TARGET_PAGE_FORM_INPUT_SET) %>: </label>
 													  <div class="controls uiSearchInput">
 														<% uiform.renderField(uicomponent.TARGET_PAGE_FORM_INPUT_SET) %>
 													  </div>
 													</div>
 													<div class="control-group">                  
-													  <label class="control-label" for="<%=uicomponent.SHOW_SCV_WITH_STRING_INPUT%>"><%=uicomponent.getLabel(uicomponent.SHOW_SCV_WITH_STRING_INPUT) %></label>
+													  <label class="control-label" for="<%=uicomponent.SHOW_SCV_WITH_STRING_INPUT%>"><%=uicomponent.getLabel(uicomponent.SHOW_SCV_WITH_STRING_INPUT) %>: </label>
 													  <div class="controls">
 														<% uiform.renderField(uicomponent.SHOW_SCV_WITH_STRING_INPUT) %>
 													  </div>
