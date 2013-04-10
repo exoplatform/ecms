@@ -17,6 +17,7 @@
 package org.exoplatform.wcm.webui.clv;
 
 import javax.jcr.Node;
+import javax.jcr.Session;
 import javax.jcr.query.Row;
 import javax.portlet.PortletPreferences;
 
@@ -26,13 +27,14 @@ import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.search.base.SearchDataCreator;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.services.wcm.search.base.SearchDataCreator;
 
 /**
  * Created by The eXo Platform SAS
@@ -90,10 +92,10 @@ public abstract class UICLVContainer extends UIContainer {
     super.processRender(context);
   }
 
-  public String getEditLink(boolean isEditable, boolean isNew) {
+  public String getEditLink(boolean isEditable, boolean isNew) throws Exception {
     String folderPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
     if (folderPath==null) folderPath="";
-    return Utils.getEditLink(correctPath(folderPath), isEditable, isNew);
+    return Utils.getEditLink(getFolderNode(folderPath), isEditable, isNew);
   }
 
   public Node getFolderNode() {
@@ -101,13 +103,14 @@ public abstract class UICLVContainer extends UIContainer {
           Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH));
   }
 
-  private String correctPath(String oldPath) {
-      if ((oldPath==null) || ((oldPath!=null) && (oldPath.length()==0))) return "";
+  private Node getFolderNode(String oldPath) throws Exception {
+      if ((oldPath==null) || ((oldPath!=null) && (oldPath.length()==0))) return null;
       int slashIndex = oldPath.indexOf("/");
-      String path = oldPath.substring(slashIndex + 1);
+      String path = oldPath.substring(slashIndex);
       String[] repoWorkspace = oldPath.substring(0, slashIndex).split(":");
       String strWorkspace = repoWorkspace[1];
-      return strWorkspace + '/' + path;
+      Session session = WCMCoreUtils.getUserSessionProvider().getSession(strWorkspace, WCMCoreUtils.getRepository());
+      return (Node)session.getItem(path);
   }
 
 
