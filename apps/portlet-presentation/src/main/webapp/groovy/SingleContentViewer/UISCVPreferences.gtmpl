@@ -41,7 +41,7 @@
 						}
 				%>
 				<div id="$formInput.id-tab" class="tab-pane fade $active">
-					<div class="uiTabContent resizable">
+					<div class="uiTabContent">
 						<%
 						  if(formInput.getName().equals(uicomponent.CONTENT_FORM_INPUT_SET)) {
 						  %>

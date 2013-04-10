@@ -7,7 +7,7 @@
 	addScripts("eXo.webui.UIDropDownControl.init('$uicomponent.id');");
 	def options = uicomponent.getOptions();
 %>
-	<div class="UIDropDownControl" id="$uicomponent.id">
+	<!--<div class="UIDropDownControl" id="$uicomponent.id">
 		<div class="UIDropDownTitle" onclick="eXo.webui.UIDropDownControl.show(this, event);">
 			<div class="UIDropDownLeftTitle">
 				<div class="UIDropDownRightTitle">
@@ -75,4 +75,4 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>-->

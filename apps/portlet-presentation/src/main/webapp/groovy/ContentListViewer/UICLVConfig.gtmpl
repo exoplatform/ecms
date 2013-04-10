@@ -13,7 +13,8 @@
 	def jsManager = rcontext.getJavascriptManager();
 	def advancedBlockDisplay = "block";
 	def advancedLinkDispplay = "none";
-	jsManager.require("SHARED/clv", "clv").addScripts("clv.CLV.checkModeViewer();").addScripts("clv.CLV.checkContextualFolderInput();");
+	//jsManager.require("SHARED/clv", "clv").addScripts("clv.CLV.checkModeViewer();").addScripts("clv.CLV.checkContextualFolderInput();");
+	jsManager.require("SHARED/clv", "clv").addScripts("clv.CLV.checkContextualFolderInput();");
 	def showFolderContexttual = "";
 	rcontext.getJavascriptManager().require("SHARED/portalControl").require("SHARED/uiForm").require("SHARED/bts_tab").require("SHARED/bts_tooltip");
 	jsManager.require("SHARED/jquery", "gj").addScripts("gj(document).ready(function() { gj(\"*[rel='tooltip']\").tooltip();});");
@@ -242,7 +243,7 @@
 													<% } %> 
 													<div class="control-group">
 													  <label class="control-label" for="<%=uicomponent.TARGET_PAGE_FORM_INPUT_SET%>"><%=uicomponent.getLabel(uicomponent.TARGET_PAGE_FORM_INPUT_SET) %>: </label>
-													  <div class="controls uiSearchInput">
+													  <div class="controls">
 														<% uiform.renderField(uicomponent.TARGET_PAGE_FORM_INPUT_SET) %>
 													  </div>
 													</div>
