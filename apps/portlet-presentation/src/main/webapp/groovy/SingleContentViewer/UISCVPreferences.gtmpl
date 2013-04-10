@@ -48,7 +48,7 @@
 							  <div class="form-horizontal" >
 								  <div class="control-group">                  
 								    <label class="control-label" for="<%=uicomponent.ITEM_PATH_FORM_INPUT_SET%>"><%=uicomponent.getLabel(uicomponent.ITEM_PATH_FORM_INPUT_SET) %>: </label>
-								    <a class="actionIcon pull-right"><i class="uiIconQuestion uiIconBlue" id="" title="<%= _ctx.appRes("UISCVPreferences.help.ContentPathBlock") %>" data-placement="left" rel="tooltip"></i></a>
+								    <a class="actionIcon pull-right"><i class="uiIconQuestion uiIconLightGray" id="" title="<%= _ctx.appRes("UISCVPreferences.help.ContentPathBlock") %>" data-placement="left" rel="tooltip"></i></a>
 								    <div class="controls controls-nowrap" <% if (uicomponent.getSelectedNodePath() != null) { %> title="<%=uicomponent.getSelectedNodePath()%>" <% }%> >
 								      <% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %>
 								    </div>
@@ -59,13 +59,10 @@
 						  %>
 						    <div class="form-horizontal" >
 								  <ul class="control-group">                  
-									  <li class="pull-left" ><% uiform.renderField(uicomponent.SHOW_TITLE_CHECK_BOX) %></li>
-	                  <li class="pull-left"><%=uicomponent.getLabel(uicomponent.SHOW_TITLE_CHECK_BOX) %></li>     
-	                  <li class="pull-left" ><% uiform.renderField(uicomponent.SHOW_DATE_CHECK_BOX) %></li>
-	                  <li class="pull-left"><%=uicomponent.getLabel(uicomponent.SHOW_DATE_CHECK_BOX) %></li>                  
-	                  <li class="pull-left" ><% uiform.renderField(uicomponent.SHOW_OPION_BAR_CHECK_BOX) %></li>
-	                  <li class="pull-left"><%=uicomponent.getLabel(uicomponent.SHOW_OPION_BAR_CHECK_BOX) %></li>
-									  <li class="pull-right"><a class="actionIcon"><i class="uiIconQuestion uiIconBlue" id="" title="<%= _ctx.appRes("UISCVPreferences.help.DisplaySettingBlock") %> " data-placement="left" rel="tooltip"></i></a></li>
+									  <li class="pull-left" ><% uiform.renderField(uicomponent.SHOW_TITLE_CHECK_BOX) %> <%=uicomponent.getLabel(uicomponent.SHOW_TITLE_CHECK_BOX) %></li>    
+	                  <li class="pull-left" ><% uiform.renderField(uicomponent.SHOW_DATE_CHECK_BOX) %> <%=uicomponent.getLabel(uicomponent.SHOW_DATE_CHECK_BOX) %></li>                
+	                  <li class="pull-left" ><% uiform.renderField(uicomponent.SHOW_OPION_BAR_CHECK_BOX) %> <%=uicomponent.getLabel(uicomponent.SHOW_OPION_BAR_CHECK_BOX) %></li>
+									  <li class="pull-right"><a class="actionIcon"><i class="uiIconQuestion uiIconLightGray" id="" title="<%= _ctx.appRes("UISCVPreferences.help.DisplaySettingBlock") %> " data-placement="left" rel="tooltip"></i></a></li>
 								  </ul>
 							  </div>
 						  <%
@@ -74,7 +71,7 @@
 							  <div class="form-horizontal" >
 							    <div class="control-group">                  
 							      <label class="control-label" for="<%=uicomponent.PRINT_PAGE_FORM_INPUT_SET%>"><%=uicomponent.getLabel(uicomponent.PRINT_PAGE_FORM_INPUT_SET) %>: </label>
-							      <a class="actionIcon pull-right"><i class="uiIconQuestion uiIconBlue" id="" title="<%= _ctx.appRes("UISCVPreferences.help.ContentPathBlock") %>" data-placement="left" rel="tooltip"></i></a>
+							      <a class="actionIcon pull-right"><i class="uiIconQuestion uiIconLightGray" id="" title="<%= _ctx.appRes("UISCVPreferences.help.ContentPathBlock") %>" data-placement="left" rel="tooltip"></i></a>
 							      <div class="controls uiSearchInput" ><% uiform.renderField(uicomponent.PRINT_PAGE_PARAMETER_INPUT) %></div>
 							    </div>
 							    <div class="control-group">                  
@@ -83,17 +80,17 @@
 							    </div>
 						    </div>
 						  <%
-						  } else if(formInput.getName().equals(uicomponent.PRINT_FORM_INPUT_SET)) { 
+						  } else if(formInput.getName().equals(uicomponent.ADVANCED_FORM_INPUT_SET)) { 
 						  %>
 							  <div class="form-horizontal" >   
-								  <label class="clearfix"> <a class="actionIcon pull-right"><i class="uiIconQuestion uiIconBlue" id="" title="<%= _ctx.appRes("UISCVPreferences.help.ContextualHelp") %>" data-placement="left" rel="tooltip"></i></a><%=_ctx.appRes("UISCVPreferences.label.ContextCaption") %>: </label>
+								  <label class="clearfix"> <a class="actionIcon pull-right"><i class="uiIconQuestion uiIconLightGray" id="" title="<%= _ctx.appRes("UISCVPreferences.help.ContextualHelp") %>" data-placement="left" rel="tooltip"></i></a><%=_ctx.appRes("UISCVPreferences.label.ContextCaption") %>: </label>
 								  <div class="control-group">                  
 								    <div class="controls_full">
 									    <%uiform.renderField(uicomponent.CONTEXTUAL_SELECT_RADIO_BOX) %> 
 								    </div>
 								  </div>
 								  
-								  <label class="clearfix"><a class="actionIcon pull-right"><i class="uiIconQuestion uiIconBlue" id="" title="<%= _ctx.appRes("UISCVPreferences.help.ContentPathBlock") %>" data-placement="left" rel="tooltip"></i></a><%=_ctx.appRes("UISCVPreferences.label.CacheManagement") %>: </label>
+								  <label class="clearfix"><a class="actionIcon pull-right"><i class="uiIconQuestion uiIconLightGray" id="" title="<%= _ctx.appRes("UISCVPreferences.help.ContentPathBlock") %>" data-placement="left" rel="tooltip"></i></a><%=_ctx.appRes("UISCVPreferences.label.CacheManagement") %>: </label>
 								  <div class="control-group">                  
 								    <div class="controls_full">
 									    <%uiform.renderField(uicomponent.CACHE_ENABLE_SELECT_RADIO_BOX) %>
