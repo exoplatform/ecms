@@ -359,9 +359,16 @@ public class Utils {
     }
     return ret;
   }
-
-
-  public static void removeDeadSymlinks(Node node) throws Exception {
+  /**
+   * 
+   * @param     : node
+   * @param     : keepInTrash true if the link will be move to trash, otherwise set by false
+   * @throws    : Exception
+   * @Objective : Remove all the link of a deleted node
+   * @Author    : Nguyen The Vinh from ECM of eXoPlatform
+   *              vinh.nguyen@exoplatform.com
+   */
+  public static void removeDeadSymlinks(Node node, boolean keepInTrash) throws Exception {
     if (isInTrash(node)) {
       return;
     }
@@ -402,7 +409,11 @@ public class Utils {
 
             for (Node symlink : symlinks) {
               synchronized (symlink) {
-                trashService.moveToTrash(symlink, sessionProvider, 1);
+                if (keepInTrash) {
+                  trashService.moveToTrash(symlink, sessionProvider, 1);
+                }else {
+                  symlink.remove();
+                }
               }
             }
           } catch (Exception e) {
@@ -422,6 +433,9 @@ public class Utils {
     } finally {
       sessionProvider.close();
     }
+  }
+  public static void removeDeadSymlinks(Node node) throws Exception {
+    removeDeadSymlinks(node, true);
   }
 
   public static Node getChildOfType(Node node, String childType) throws Exception {

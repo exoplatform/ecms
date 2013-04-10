@@ -47,7 +47,7 @@ public class RemoveNodeAction implements Action {
       }
     }
     //remove dead symlinks
-    Utils.removeDeadSymlinks(node);    
+    Utils.removeDeadSymlinks(node, false);
     return false;
   }
 
