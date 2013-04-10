@@ -131,7 +131,7 @@
 							<div class="controls-full"><span class="helpBlock helpBlockTitle"><i class="uiIconHelp"></i> <%=_ctx.appRes("WebContent.dialog.label.hintIllustration")%></span></div>
 						</div>
 						<div class="control-group">
-							<label class="control-label"><%=_ctx.appRes("WebContent.dialog.label.illustrationImage")%></label>
+							<label class="control-label"><%=_ctx.appRes("WebContent.dialog.label.illustrationImage")%>:</label>
 							<div class="controls">
 								<%					
 									String illustration = "illustration";
@@ -159,7 +159,7 @@
 							</div>
 						</div>												
 						<div class="control-group">
-							<label class="control-label"><%=_ctx.appRes("WebContent.dialog.label.Summary")%></label>
+							<label class="control-label"><%=_ctx.appRes("WebContent.dialog.label.Summary")%>:</label>
 							<div class="controls">
 								<%
 									String summaryContent = "";
