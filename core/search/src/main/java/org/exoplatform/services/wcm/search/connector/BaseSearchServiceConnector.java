@@ -23,6 +23,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.MissingResourceException;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -34,6 +35,7 @@ import org.exoplatform.commons.api.search.data.SearchResult;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
+import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
@@ -179,7 +181,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
                     new EcmsSearchResult(getPath(driveData, retNode, context), 
                                          getTitleResult(retNode), 
                                          retNode.getExcerpt(), 
-                                         (driveData == null ? "" : driveData.getName()) + fileSize(retNode) + formatDate(date), 
+                                         getDriveTitle(driveData) + fileSize(retNode) + formatDate(date), 
                                          getImageUrl(retNode), 
                                          date.getTimeInMillis(), 
                                          (long)retNode.getScore(),
@@ -277,6 +279,28 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
   protected String formatDate(Calendar date) {
     DateFormat format = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.FULL, SimpleDateFormat.SHORT);
     return " - " + format.format(date.getTime());
+  }
+  
+  protected String getDriveTitle(DriveData driveData) {
+    if (driveData == null) {
+      return "";
+    }
+    String id = driveData.getName();
+    String path = driveData.getHomePath();
+    try {
+      RepositoryService repoService = WCMCoreUtils.getService(RepositoryService.class);
+      Node groupNode = (Node)WCMCoreUtils.getSystemSessionProvider().getSession(
+                                    repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName(),
+                                    repoService.getCurrentRepository()).getItem(path);
+      while (groupNode.getParent() != null) {
+        if (groupNode.hasProperty(NodetypeConstant.EXO_LABEL)) {
+          return groupNode.getProperty(NodetypeConstant.EXO_LABEL).getString();
+        } else groupNode = groupNode.getParent();
+      }
+      return id.replace(".", " / ");
+    } catch(Exception e) {
+      return id.replace(".", " / ");
+    }
   }
   
   /**
