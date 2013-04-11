@@ -434,14 +434,13 @@
 		if(typeof(currentNode) == 'string') currentNode = document.getElementById(currentNode);
 		eXo.ecm.ECS.currentNode = currentNode;
 		var breadcrumbContainer = document.getElementById("BreadcumbsContainer");
-		breadcrumbContainer.innerHTML = '';
+		breadcrumbContainer.innerHTML = '<li><i class="uiIconHome uiIconLightGray"></i></li>';
 		var beforeNode = null;
 		while(currentNode != null && currentNode.className != "leftWorkspace") {
 			var curName = gj(currentNode).attr('name');
 			var label = gj(currentNode).attr('title');
 			if(curName) {
-				var tmpNode = document.createElement("div");	
-				tmpNode.className = 'breadcumbTab';
+				var tmpNode = document.createElement("li");	
 				var strHTML = '';
 				var strOnclick = '';
 				var node = document.getElementById(currentNode.id);
@@ -450,13 +449,13 @@
 				} else {
 					strOnclick = "eXo.ecm.ECS.actionBreadcrumbs('"+node.id+"');";		
 				}
+				strHTML += '<i class="uiIconMiniArrowRight"></i>';
 				if(beforeNode == null) {
 					strHTML += '<a class="active" href="javascript:void(0);" onclick="'+strOnclick+'">'+decodeURIComponent(label)+'</a>';
 					tmpNode.innerHTML = strHTML;
 					breadcrumbContainer.appendChild(tmpNode);
 				} else {
-					strHTML += '<a class="normal" href="javascript:void(0);" onclick="'+strOnclick+'">'+decodeURIComponent(label)+'</a>';
-					strHTML += '<i class="uiIconArrowRightMini"></i>';
+					strHTML += '<a class="" href="javascript:void(0);" onclick="'+strOnclick+'">'+decodeURIComponent(label)+'</a>';
 					tmpNode.innerHTML = strHTML;
 					breadcrumbContainer.insertBefore(tmpNode, beforeNode);
 				}
@@ -1117,7 +1116,7 @@
 		var windowHeight = gj(window).height();
 		var root = gj(leftWS).parents(".UIHomePageDT:first")[0];
 		var titleBar = gj(root).find("div.TitleBar:first")[0];
-		var uiWorkingWorkspace = gj(root).find("div.UIWorkingWorkspace:first")[0];
+		var uiWorkingWorkspace = gj(root).find("div.uiWorkingWorkspace:first")[0];
 		var actionBar = gj(uiWorkingWorkspace).find("div.actionBar:first")[0];
 		var actionBaroffsetHeight = 0;
 		if(actionBar)
