@@ -11,7 +11,7 @@
     
     String portletId = Utils.getRealPortletId(rcontext);
 		def quickEditingBlockId = portletId + "-QuickEditingBlock";
-		def hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClass" : "";
+		def hoverClass = Utils.isShowQuickEdit() ? " containerHoverClass" : "";
 		def node = uicomponent.getNodeView();
 		def currentState = uicomponent.getCurrentState();
 		if (node != null) {
@@ -42,66 +42,49 @@
 		    addScripts("wcmutil.WCMUtils.setZIndex(10);");
         
 			  if (Utils.isShowQuickEdit() && !LockUtil.isLocked(node)) {	%>	
-				 <div class="EdittingToolBarContainer" style="$edittingStyle">
-					 <div class="EdittingToolBar " >
-						<div class="EdittingToolBarL">
-							<div class="EdittingToolBarR">
-								<div class="EdittingToolBarC ClearFix">
-								<%								
-								if((!Utils.isPortalEditMode()) && rcontext.getRemoteUser() && Utils.hasEditPermissionOnPage()) {
-									%>
-									<div style="float: right">
-										<a href="<%= uicomponent.event("Preferences")%>" rel="tooltip" data-placement="bottom" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UISCVPreferences.label.Preferences")%>" class="PreferencesIcon" >
-										  &nbsp;
-										</a>         
-									</div>
-									<%}%>
-									<div style="float: right">
-									<a onclick = "eXo.ecm.CLV.addURL(this)" href="<%= uicomponent.getQuickEditLink(node) %>" class="EditContentIcon" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIPresentationContainer.title.QuickEdit")%>">
-										  &nbsp;
-										</a>           
-									</div>
-									<%
-									  if (org.exoplatform.wcm.webui.utils.Utils.isShowFastPublish(node)) {
-									%>
-									<div style="float: right">
-                    <a href="<%= uicomponent.event("FastPublish")%>" title="<%= _ctx.appRes("UIPresentationContainer.title.FastPublish")%>" class="FastPublishIcon" >
-                      &nbsp;
-                    </a>
-									</div>
-									<%}%>
-									<div class="EdittingCurrentState" style="float: right">
-                    ${currentState}
-                  </div>
-								</div>
-							</div>
+				 <div class="edittingToolBarContainer" style="$edittingStyle">
+					 <div class="edittingToolBar clearfix">
+						<div class="edittingCurrentState draft pull-left"><i class="uiIconTick"></i>${currentState}</div>
+						<div class="btn-group pull-right">
+								<a class="btn" onclick = "eXo.ecm.CLV.addURL(this)" href="<%= uicomponent.getQuickEditLink(node) %>">
+									<i class="uiIconEdit" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIPresentationContainer.title.QuickEdit")%>"></i>
+								</a>           
+
+								<%
+									if (org.exoplatform.wcm.webui.utils.Utils.isShowFastPublish(node)) {
+								%>
+
+								<a class="btn" href="<%= uicomponent.event("FastPublish")%>">
+									<i class="uiIconEcmsPublish" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIPresentationContainer.title.FastPublish")%>"></i>
+								</a>
+
+								<%}							
+							  if((!Utils.isPortalEditMode()) && rcontext.getRemoteUser() && Utils.hasEditPermissionOnPage()) {
+								%>
+								<a class="btn" href="<%= uicomponent.event("Preferences")%>">
+									<i class="uiIconSetting" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UISCVPreferences.label.Preferences")%>"></i>
+								</a>
+								<%}%>
 						</div>
 					</div>
 				</div>
 				<%} else {%>
 								
-				<div class="EdittingToolBarContainer" style="$edittingStyle">
-				 <div class="EdittingToolBar " >
-					<div class="EdittingToolBarL">
-						<div class="EdittingToolBarR">
-							<div class="EdittingToolBarC ClearFix">
+				<div class="edittingToolBarContainer" style="$edittingStyle">
+				 <div class="edittingToolBar">
+						<div class="btn-group">
 							<%								
 							if((!Utils.isPortalEditMode()) && rcontext.getRemoteUser() && Utils.hasEditPermissionOnPage()) {
 								%>
-								<div style="float: right">
-									<a href="<%= uicomponent.event("Preferences")%>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UISCVPreferences.label.Preferences")%>" class="PreferencesIcon" >
-									  &nbsp;
-									</a>         
-								</div>
+								<a class="btn" href="<%= uicomponent.event("Preferences")%>">
+									<i rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UISCVPreferences.label.Preferences")%>" class="uiIconSetting"></i>
+								</a>         
 								<%}%>
-								<div style="float: right">
-									<div class="IconLocked" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UISCVPreferences.label.LockStatus")%>">
-									  &nbsp;
-									</div>           
-								</div>
-							</div>
+								<a class="btn">
+									<i rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UISCVPreferences.label.LockStatus")%>" class="uiIconEcmsLock"></i>
+								</a>
 						</div>
-					</div>
+
 				</div>
 			</div>
 			
@@ -151,25 +134,19 @@
 	      <div class="UIPresentationContainer" id="$uicomponent.id" 
 	      	onmouseover="this.className = 'UIPresentationContainer $hoverClass'" onmouseout="this.className = 'UIPresentationContainer' "
 	      	onfocus="this.className = 'UIPresentationContainer $hoverClass'" onblur="this.className = 'UIPresentationContainer' ">
-  				<div class="EdittingToolBarContainer" style=" z-index: 5">
-          <div class="EdittingToolBar " >
-           <div class="EdittingToolBarL">
-             <div class="EdittingToolBarR">
-               <div class="EdittingToolBarC ClearFix">
-                 <div style="float: right">
-                   <a href="<%= uicomponent.event("Preferences")%>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UISCVPreferences.label.Preferences")%>" class="PreferencesIcon" >
-                     &nbsp;
-                   </a>         
-                 </div>            
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-       <div class="SCVNoContent">
-            <span><%= _ctx.appRes("UIPresentationContainer.msg.no-content") %></span>
-       </div>
-     </div>			
+  				<div class="edittingToolBarContainer" style=" z-index: 5">
+						<div class="edittingToolBar" >
+							<div class="btn-group">
+								<a class="btn" href="<%= uicomponent.event("Preferences")%>">
+									<i rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UISCVPreferences.label.Preferences")%>" class="uiIconSetting"></i>
+								</a>         
+							</div>            
+						</div>
+					</div>
+					<div class="SCVNoContent">
+						<span><%= _ctx.appRes("UIPresentationContainer.msg.no-content") %></span>
+					</div>
+			  </div>			
 		<%
 		}
 	}
