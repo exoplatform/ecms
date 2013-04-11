@@ -47,9 +47,9 @@
 					 <div class="edittingToolBar clearfix">
 						<div class="edittingCurrentState pull-left">
 							 <% if (UIEditingForm.PUBLISHED.equals(currentState)) {%>
-									<span class="publish"><i class="uiIconTick"></i> ${currentState}</span>
+									<span class="publishText"><i class="uiIconTick"></i> ${currentState}</span>
 							 <% } else if (UIEditingForm.DRAFT.equals(currentState)) {%>
-									<span class="draft">${currentState}</span>
+									<span class="draftText">${currentState}</span>
 							 <% } else { %>
 									<span>${currentState}</span>
 							 <% } %>
