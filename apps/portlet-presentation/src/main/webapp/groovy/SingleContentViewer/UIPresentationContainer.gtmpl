@@ -4,6 +4,7 @@
   	import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
   	import org.exoplatform.ecm.webui.utils.LockUtil;
   	import org.exoplatform.services.jcr.core.ManageableRepository;
+  	import org.exoplatform.wcm.webui.administration.UIEditingForm;
 
 		def rcontext = _ctx.getRequestContext();
     def jsManager = rcontext.getJavascriptManager();
@@ -44,7 +45,15 @@
 			  if (Utils.isShowQuickEdit() && !LockUtil.isLocked(node)) {	%>	
 				 <div class="edittingToolBarContainer" style="$edittingStyle">
 					 <div class="edittingToolBar clearfix">
-						<div class="edittingCurrentState draft pull-left"><i class="uiIconTick"></i>${currentState}</div>
+						<div class="edittingCurrentState pull-left">
+							 <% if (UIEditingForm.PUBLISHED.equals(currentState)) {%>
+									<span class="publish"><i class="uiIconTick"></i> ${currentState}</span>
+							 <% } else if (UIEditingForm.DRAFT.equals(currentState)) {%>
+									<span class="draft">${currentState}</span>
+							 <% } else { %>
+									<span>${currentState}</span>
+							 <% } %>
+						</div>
 						<div class="btn-group pull-right">
 								<a class="btn" onclick = "eXo.ecm.CLV.addURL(this)" href="<%= uicomponent.getQuickEditLink(node) %>">
 									<i class="uiIconEdit" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIPresentationContainer.title.QuickEdit")%>"></i>
