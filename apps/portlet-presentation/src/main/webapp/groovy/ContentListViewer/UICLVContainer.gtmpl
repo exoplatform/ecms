@@ -4,7 +4,7 @@
 		import org.exoplatform.wcm.webui.clv.UICLVFolderMode;
 		import org.exoplatform.wcm.webui.Utils;
 		
-		def hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClass" : "";
+		def hoverClass = Utils.isShowQuickEdit() ? " containerHoverClass" : "";
 		def rcontext = _ctx.getRequestContext() ;
     def jsManager = rcontext.getJavascriptManager();
 		def className = uicomponent.getPortletName();
@@ -31,43 +31,24 @@
         edittingStyle = "z-index: 10; top:20px";
     if (Utils.isShowQuickEdit()) {
     %>
-	 <div class="EdittingToolBarContainer" style="$edittingStyle">
-		 <div class="EdittingToolBar " >
-			<div class="EdittingToolBarL">
-				<div class="EdittingToolBarR">
-					<div class="EdittingToolBarC ClearFix">
+	 <div class="edittingToolBarContainer" style="$edittingStyle">
+		 <div class="edittingToolBar" >
+			<div class="btn-group"> 				
+        <%
+				if (uicomponent.isShowAddContent()) {          
+				%>
+					<a id="<%=addContentBlockId%>" class="btn" onclick = "eXo.ecm.CLV.addURL(this)" href="<%=addContentLink%>"><i class="uiIconPlus" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVContainer.label.AddContent");%>"></i></a>
+				<% }
 				
-					<%		
-						if (uicomponent.isShowPreferences()) {					
-					%>
-							<div style="float: right" id="<%=quickEditingBlockId%>">
-									<a class="PreferencesIcon" href="<%=uicomponent.event("Preferences")%>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVContainer.label.Preferences");%>">
-			<!--					  <div class="QuickEdit"><span></span></div>-->
-							&nbsp;
-									</a>					 
-							</div>
-					<% } 	
-					
-					if (uicomponent.isShowManageContent()) {
-					  %>
-						<div style="float: right"  id="<%=manageContentBlockId%>">
-							<a class="ManageContentIcon" onclick = "eXo.ecm.CLV.addURL(this)" href="<%=manageContentsLink%>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVContainer.label.ManageContent");%>">
-							  &nbsp;
-							</a>           
-						</div>
-						  
-					 <% 
-					}
-					if (uicomponent.isShowAddContent()) {          
-					  %>
-						<div style="float: right" id="<%=addContentBlockId%>">
-							<a class="AddContentIcon" onclick = "eXo.ecm.CLV.addURL(this)" href="<%=addContentLink%>" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVContainer.label.AddContent");%>">
-							  &nbsp;
-							</a>           
-						</div>
-					  <% }%>		
-					</div>
-				</div>
+				if (uicomponent.isShowManageContent()) {
+				%>
+					<a id="<%=manageContentBlockId%>" class="btn" onclick = "eXo.ecm.CLV.addURL(this)" href="<%=manageContentsLink%>"><i class="uiIconEcmsManageContent" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVContainer.label.ManageContent");%>"></i></a>
+				<% }
+				
+				if (uicomponent.isShowPreferences()) {					
+				%>
+					<a id="<%=quickEditingBlockId%>" class="btn" onclick="<%=uicomponent.event("Preferences")%>"><i class="uiIconSetting" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVContainer.label.Preferences");%>"></i></a>
+				<% } %>
 			</div>
 		</div>
 	</div>
