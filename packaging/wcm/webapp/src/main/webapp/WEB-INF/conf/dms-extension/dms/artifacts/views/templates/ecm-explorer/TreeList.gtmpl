@@ -54,9 +54,8 @@
             require("SHARED/uiFileView", "uiFileView").
             require("SHARED/multiUpload", "multiUpload").
   addScripts("uiFileView.UIFileView.initStickBreadcrumb();").
-  addScripts("ecmutil.ECMUtils.initClipboard('clip_button','1','$size');").
 	addScripts('uiListView.UIListView.loadEffectedWidthColumn();').
-	addScripts('uiFileView.UIFileView.clearItemsSelected();').
+	addScripts('uiFileView.UIFileView.clearCheckboxes();').
   addScripts('uiFileView.UIFileView.clearOpenDivs();');
   
   

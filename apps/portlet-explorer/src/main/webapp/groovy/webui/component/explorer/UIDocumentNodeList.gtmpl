@@ -41,9 +41,9 @@
   def size = uicomponent.getNodeChildrenList().size();
   def jsManager = rcontext.getJavascriptManager();
 
-  jsManager.require("SHARED/uiFileView", "uiFileView").
-  addScripts("uiFileView.UIFileView.initAllEvent('UIDocumentInfo', '$enableDragAndDrop');");
-  
+  jsManager.require("SHARED/ecm-utils", "ecmutil").require("SHARED/uiFileView", "uiFileView").
+  addScripts("uiFileView.UIFileView.initAllEvent('UIDocumentInfo', '$enableDragAndDrop');").
+  addScripts("ecmutil.ECMUtils.initClipboard('clip_button','" + componentId + "','$size');");
   //Config to display columns with format: ["${column};${width}"]
   //Default 
   String[] arrColumns = ["exo:owner;95px","exo:dateModified;123px","exo:dateCreated;121px"];
@@ -59,7 +59,8 @@
         def permlink;
         int i = 0;
         for (data in uicomponent.getNodeChildrenList()) {
-          writeNodes(0, i, data, uiWorkingArea, linkManager, restContextName, repository, permlink, contextMenu, arrColumns, uiDocumentInfo, portalName, uiCustomActionComponent);
+          writeNodes(0, i++, data, uiWorkingArea, linkManager, restContextName, repository, permlink, contextMenu, 
+                     arrColumns, uiDocumentInfo, portalName, uiCustomActionComponent, componentId);
           if (data.isNodeType(NodetypeConstant.NT_FOLDER) || data.isNodeType(NodetypeConstant.NT_UNSTRUCTURED)) {
             if (data instanceof NodeLinkAware) {
               data = ((NodeLinkAware)data).getRealNode();
@@ -91,7 +92,8 @@
 </div>  
 
 <%
-public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextName, repository, permlink, contextMenu, arrColumns, uiDocumentInfo, portalName, uiCustomActionComponent) {
+public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextName, repository, permlink, contextMenu, 
+                         arrColumns, uiDocumentInfo, portalName, uiCustomActionComponent, componentId) {
   try {
     data.getSession().getItem(data.getPath());
   } catch(PathNotFoundException pne) {
@@ -172,8 +174,8 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
   
   if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {
     String clipboardLink = "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + data.getPath();
-    strActs +=  "<li class='menuItem'>";
-    strActs +=  "<a exo:attr='CopyUrlToClipboard' style='display: block;' id='clip_button1$i' path='$clipboardLink' onclick=\"eXo.ecm.ECMUtils.pushToClipboard(event,'$clipboardLink');eXo.ecm.UIFileView.clearCheckboxes();\">" ;
+    strActs +=  "<li class='menuItem' onclick='eXo.ecm.UIFileView.clearCheckboxes();'>";
+    strActs +=  "<a exo:attr='CopyUrlToClipboard' style='display: block;' id='clip_button$componentId$i' path='$clipboardLink' onclick=\"eXo.ecm.ECMUtils.pushToClipboard(event,'$clipboardLink');\">" ;
     strActs +=  " <i class='uiIconEcmsCopyUrlToClipboard'>" ;
     strActs +=  " </i>&nbsp;" ;
     strActs +=    _ctx.appRes("ECMContextMenu.event.GetURL");
