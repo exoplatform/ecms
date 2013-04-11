@@ -40,7 +40,7 @@
 				      <tr class="$rowClass">
 				        <td>
 				        <%
-                  String nodeTitle = ContentReader.getXSSCompatibilityContent(Utils.getTitle(node));
+                  String nodeTitle = ContentReader.getUnescapeIllegalJcrContent(Utils.getTitle(node));
                   String nodeTypeIcon = Utils.getNodeTypeIcon(node,"16x16Icon");
 				          def clazz = "Text"
 						  						
