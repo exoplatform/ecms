@@ -43,13 +43,6 @@ import org.exoplatform.services.organization.User;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
-
-/**
- * Created by The eXo Platform SAS
- * Author : Pham Xuan Hoa
- *          hoa.pham@exoplatform.com
- * Jan 28, 2007
- */
 public class CommentsServiceImpl implements CommentsService {
 
   private static final Log LOG = ExoLogger.getLogger(CommentsServiceImpl.class.getName());
@@ -279,8 +272,8 @@ public class CommentsServiceImpl implements CommentsService {
 
     /**
      * Compare the created date of nodes
-     * @param Node1     node is used to compare
-     * @param Node2     node is used to compare
+     * @param node1     node is used to compare
+     * @param node2     node is used to compare
      */
     public int compare(Node node1, Node node2) {
       try{
