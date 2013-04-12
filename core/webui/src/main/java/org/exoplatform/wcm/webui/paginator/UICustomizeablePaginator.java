@@ -16,8 +16,6 @@
  */
 package org.exoplatform.wcm.webui.paginator;
 
-import javax.faces.lifecycle.Lifecycle;
-
 import org.exoplatform.commons.exception.ExoMessageException;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.log.ExoLogger;
@@ -27,6 +25,7 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPageIterator;
+import org.exoplatform.webui.core.lifecycle.Lifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
