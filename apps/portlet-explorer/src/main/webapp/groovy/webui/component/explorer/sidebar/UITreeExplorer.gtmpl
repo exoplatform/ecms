@@ -84,8 +84,8 @@
 	    }
 	    String strActs = "";
 	    if(!uicomponent.isSystemWorkspace()) {
-  	    strActs = "<li class=\"RightClickCustomItem\" style=\"display: none;\">" ;
-  	    strActs += "<ul>";
+  	    strActs = "<ul class=\"RightClickCustomItem\" style=\"display: none;\">" ;
+
         //Begin permlink
   	    def permLinkComponent =  uicomponent.getWorkingArea().getPermlink(node);
         if (permLinkComponent != null) {
@@ -154,7 +154,7 @@
 	  			strActs +=  "</a>";
           strActs += "</li>";
         }	  			
-        strActs += "</ul></li>";	    
+        strActs += "</ul>";	    
 	    }
 	    def ctMenu = "" ;
 	    def isLocked = false;
@@ -176,7 +176,7 @@
 	    def hiddenStyle = "";
 	    if (node.isNodeType("exo:hiddenable")) hiddenStyle = "color: #A0A0A0;";
 	    if(!uicomponent.isSystemWorkspace()) ctMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(node.getPath()), uicomponent.getActionsList(node)) ;
-	    println "<div  class=\"node\" >" ;
+	    println "<li class=\"node\" >" ;
 	    println "  <div class=\"${iconType}Icon\" id=\"" + uicomponent.encodeBase64(treeNode.getPath()) + "\" onclick=\"event.cancelBubble=true; if(eXo.ecm.ECMUtils.collapseExpand(this)) return; " + actionLink + "\">" ;
 	    println "    <div id=\"iconTreeExplorer" + treeNode.getNodePath4ID() + "\" isFile=\"" + node.isNodeType("nt:file") + "\" onclick=\"event.cancelBubble=true;" + expandLink + "\" objectId=\"" + org.exoplatform.services.cms.impl.Utils.getObjectId(treeNode.getPath()) + "\" workspacename=\"" + preferenceWS + "\" " + ctMenu + ">" + strActs ;
 	    println "		<a  onclick=\"event.cancelBubble=true;" + expandLink + "\" style='cursor: pointer;$hiddenStyle' rel=\"tooltip\" data-placement=\"bottom\" title=\"$treeNodeName $lockedLabel\"><i title=\"$treeNodeName\" class=\"" + Utils.getNodeTypeIcon(node, "uiIcon16x16") + "\">";
@@ -190,16 +190,16 @@
 	    println "    </div>" ; 
 	    println "  </div>" ; 
 	    if(treeNode.getChildrenSize() > 0) {
-	      println "<div class=\"nodeGroup\">" ;
+	      println "<ul class=\"nodeGroup\">" ;
 	      writeNodes(treeNode) ;
 	      if(uicomponent.isPaginated(treeNode)) {
-			      println "<div class=\"node PageIterator\">"	    	
+			      println "<div class=\"node pageIterator\">"	    	
 		    		_ctx.renderUIComponent(uicomponent.getUIPageIterator(treeNode.getPath())); 				
 		    		println "</div>" ;
 		    }		    	
-	      println "</div>" ;
+	      println "</ul>" ;
 	    }	    
-	    println "</div>" ;	    	    	 			           	   
+	    println "</li>" ;	    	    	 			           	   
 			counter ++ ;
 		}			
   }  
@@ -223,20 +223,18 @@
 
   <div class="uiContentBox">
 	  <div class="uiTreeExplorer" id="UITreeExplorer">
-		  <div style="white-space: nowrap; -moz-user-select: none;">
-		    <div class="nodeGroup">
+		    <ul class="nodeGroup">
 		      <%
 		        //re-initialize action
 		       writeNodes(treeNodeRoot);
     	     uicomponent.getWorkingArea().initialize();
 		       if(uicomponent.isPaginated(treeNodeRoot)) {%>
-		       			<div class="node PageIterator">
+		       			<li class="node pageIterator">
 		       				<% _ctx.renderUIComponent(uicomponent.getUIPageIterator(treeNodeRoot.getPath())); %>
-		       			</div>       	
+		       			</li>       	
 						<%}
 					%>
-		    </div>
-		  </div>   	    
+		    </ul> 	    
 		</div>
   </div>
 
