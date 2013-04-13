@@ -14,6 +14,7 @@
 		<link type="text/css" rel="stylesheet" href="css/content.css"/>
 		<script type="text/javascript" src="../../../eXoResources/javascript/jquery-1.7.1.js"></script>
 		<script type="text/javascript" src="../../../eXoResources/javascript/eXo/core/require.js"></script>
+		<script type="text/javascript" src="../../../eXoResources/skin/bootstrap/js/bootstrap-tooltip.js"></script>
 		<script type="text/javascript" src="../../../eXoResources/javascript/eXo.js"></script>
 		<script type="text/javascript">
 			var CKEDITOR = window.opener.CKEDITOR || {};
@@ -37,7 +38,7 @@
 										strHTML += "</select></div><a class=\"actionIcon pull-left\" id=\"UploadItem\" style=\"display:none;\" href=\"javascript:void(0);\" onclick=\"eXo.ecm.UploadForm.showUploadForm();\" > <i class=\"uiIconUpload\"></i>  Upload </a>"; <!--userLanguage=\"UserLanguage.UploadFile\" -->
 										strHTML += "<div class=\"btn-group pull-right\"><button id=\"enableThumbnailViewBtn\" onclick=\"eXo.ecm.ECS.changeViewType('thumbnail');gj(this).attr('class', 'btn active'); gj('#enableListViewBtn').attr('class', 'btn');\" data-placement=\"bottom\" rel=\"tooltip\" class=\"btn\" type=\"button\" title=\"Thumbnail View\"><i class=\"uiIconEcmsViewIcons\"></i></button><button id=\"enableListViewBtn\" onclick=\"eXo.ecm.ECS.changeViewType('list');gj('#enableThumbnailViewBtn').attr('class', 'btn');gj(this).attr('class', 'btn active');\" data-placement=\"bottom\" rel=\"tooltip\" class=\"btn active\" type=\"button\" title=\"List View\"><i class=\"uiIconEcmsViewList\"></i></button></div>";
 									}
-									document.getElementById("filterAreaID").innerHTML = strHTML;
+									gj("#filterAreaID").html(strHTML);
 
 									if(eXo.ecm.ECS.viewType=="list") {
 										strView = "<div id=\"view\" class=\"ViewType\"><input type=\"hidden\" id=\"viewTypeID\" value=\"list\"><div style=\"clear:both\"></div></div>";
@@ -50,13 +51,13 @@
 										strView = "<div id=\"view\" class=\"viewType\"><a class=\"thumbnail-view-selected\" title=\"Thumbnail View\"><span></span></a><a onClick=\"eXo.ecm.ECS.changeViewType('list');\" class=\"list-view\" title=\"List View\"><span></span></a><input type=\"hidden\" id=\"viewTypeID\" value=\"thumbnail\"><div style=\"clear:both\"></div></div>";
 										strViewPresent = "<div class=\"UIThumbnailsView\" ><div class=\"actionIconsContainer\" id=\"ActionIconsContainer\"><div class=\"noContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div></div></div>";
 									}
-									document.getElementById("viewTypeAreaID").innerHTML = strView;
-									document.getElementById("viewPresentAreaID").innerHTML = strViewPresent;
+									gj("#viewTypeAreaID").html(strView);
+									gj("#viewPresentAreaID").html(strViewPresent);
 
 									require(["lang/" + eXp.userLanguage + ".js"], function() {
 										eXo.ecm.ECS.initRequestXmlTree('editor');
 										eXo.ecm.ECS.languageInit();
-										eXo.ecm.ECS.fixHeightTrees();
+										//eXo.ecm.ECS.fixHeightTrees();
 									});
 								});
 							});
