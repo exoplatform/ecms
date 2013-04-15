@@ -49,7 +49,7 @@
 										strViewPresent += "<tr><td class=\"center empty\" colspan=\"3\" userLanguage=\"UserLanguage.NoContent\">There is no content</td></tr></table></div>";
 									} else {
 										strView = "<div id=\"view\" class=\"viewType\"><a class=\"thumbnail-view-selected\" title=\"Thumbnail View\"><span></span></a><a onClick=\"eXo.ecm.ECS.changeViewType('list');\" class=\"list-view\" title=\"List View\"><span></span></a><input type=\"hidden\" id=\"viewTypeID\" value=\"thumbnail\"><div style=\"clear:both\"></div></div>";
-										strViewPresent = "<div class=\"UIThumbnailsView\" ><div class=\"actionIconsContainer\" id=\"ActionIconsContainer\"><div class=\"noContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div></div></div>";
+										strViewPresent = "<div class=\"uiThumbnailsView\" ><div class=\"actionIconsContainer\" id=\"ActionIconsContainer\"><div class=\"noContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div></div></div>";
 									}
 									gj("#viewTypeAreaID").html(strView);
 									gj("#viewPresentAreaID").html(strViewPresent);
@@ -72,7 +72,7 @@
 		<script type="text/javascript" src="js/UploadForm.js"></script>
 </head>
 <body>
-	<div class="uiHomePagePortlet">
+	<div class="uiHomePagePortlet uiHomeContentSelector">
 		<div class="UIHomePageDT uiBox" >
 
 			<h6 class="title TitleBar">
@@ -88,98 +88,7 @@
 					</div>
 					-->
 
-					<!-- ====================================== SETTING ============================================-->
-					<div class="SettingIcon" onmouseover="" style="position:relative;">
-						<a href="#" userLanguage="UserLanguage.SettingTitle" style="display:none;">Setting</a>
-						<div class="SettingContainer">
-				      <div style="display: none; position: absolute;" class="UIRightClickPopupMenu">
-				      	<div class="UIContextMenuContainer">
-					        <div class="TopLeftRightClickPopupMenu">
-					          <div class="TopRightRightClickPopupMenu">
-					            <div class="TopCenterRightClickPopupMenu"><span/></div>
-					          </div>
-					        </div>
-					        <div class="MiddleLeftRightClickPopupMenu">
-					          <div class="MiddleRightRightClickPopupMenu">
-					            <div class="UIRightPopupMenuContainer">
-					              <div class="MenuItem" style="white-space:nowrap;" onmouseover="eXo.ecm.PluginUtils.showSubMenuSettings(this);">
-					                <a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.SetView">View</a>
-				                	<div class="ChildrenContainer" style="position: relative;">
-														<div style="display: none; position: absolute;" class="UIRightClickPopupMenu">
-															<div class="UIContextMenuContainer">
-																<div class="TopLeftRightClickPopupMenu">
-																	<div class="TopRightRightClickPopupMenu">
-																		<div class="TopCenterRightClickPopupMenu"><span/></div>
-																	</div>
-																</div>
-																<div class="MiddleLeftRightClickPopupMenu">
-																	<div class="MiddleRightRightClickPopupMenu">
-																		<div class="UIRightPopupMenuContainer">
-																			<div class="MenuItem" style="white-space:nowrap;">
-																				<a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.ViewList">List</a>
-																			</div>
-																			<div class="MenuItem">
-																				<a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.ViewThumbnail">Thumbnails</a>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-																<div class="BottomLeftRightClickPopupMenu">
-																<div class="BottomRightRightClickPopupMenu">
-																	<div class="BottomCenterRightClickPopupMenu"><span/></div>
-																</div>
-															</div>
-															</div>
-														</div>
-													</div>
-					              </div>
-					              <div class="MenuItem">
-					                <a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.SetSort">Sort</a>
-					                	<div class="ChildrenContainer" style="position: relative;">
-															<div style="display: none; position: absolute;" class="UIRightClickPopupMenu">
-																<div class="UIContextMenuContainer">
-																	<div class="TopLeftRightClickPopupMenu">
-																		<div class="TopRightRightClickPopupMenu">
-																			<div class="TopCenterRightClickPopupMenu"><span/></div>
-																		</div>
-																	</div>
-																	<div class="MiddleLeftRightClickPopupMenu">
-																		<div class="MiddleRightRightClickPopupMenu">
-																			<div class="UIRightPopupMenuContainer">
-																				<div class="MenuItem" style="white-space:nowrap;">
-																					<a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.SortName">By Name</a>
-																				</div>
-																				<div class="MenuItem">
-																					<a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.SortDate">By Date</a>
-																				</div>
-																				<div class="MenuItem">
-																					<a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.SortSize">By Size</a>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																	<div class="BottomLeftRightClickPopupMenu">
-																	<div class="BottomRightRightClickPopupMenu">
-																		<div class="BottomCenterRightClickPopupMenu"><span/></div>
-																	</div>
-																</div>
-																</div>
-															</div>
-														</div>
-					              </div>
-					            </div>
-					          </div>
-					        </div>
-					        <div class="BottomLeftRightClickPopupMenu">
-				          <div class="BottomRightRightClickPopupMenu">
-				            <div class="BottomCenterRightClickPopupMenu"><span/></div>
-				          </div>
-				        </div>
-				        </div>
-				      </div>
-				    </div>
-					</div>
-					<div class="SeparatorLineR"><span></span></div>
+					
 					<div id="viewTypeAreaID"></div>
 				</div>
 				<div class="breadcumbsPortlet ">

@@ -544,7 +544,7 @@
 				tdNoContent.userLanguage = "UserLanguage.NoContent";	
 				gj("#pageNavPosition").html("");
 			} else {
-				var container = gj(rightWS).find('div.ActionIconsContainer:first')[0];
+				var container = gj(rightWS).find('div.actionIconsContainer:first')[0];
 				gj(container).html("<div class=\"noContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div>");
 				gj("#pageNavPosition").html("");
 			}
@@ -562,11 +562,11 @@
 					} 
 				} else eXo.ecm.ECS.updateHTML(viewType);			
 			} else {
-				var container = gj(rightWS).find('div.ActionIconsContainer:first')[0];
+				var container = gj(rightWS).find('div.actionIconsContainer:first')[0];
 				if(container) gj(container).html("");
 	      else eXo.ecm.ECS.updateHTML(viewType);
 			}
-			var container = gj(rightWS).find('div.ActionIconsContainer:first')[0];
+			var container = gj(rightWS).find('div.actionIconsContainer:first')[0];
 			if(container) {
 				container.style.display = "none";
 			}			
@@ -602,7 +602,7 @@
 				} else {				  
 					var randomId = Math.random();
 					var command = ECS.connector + "/thumbnailImage/medium/" + ECS.repositoryName + "/" + ECS.workspaceName + path + "/?reloadnum=" + randomId;        
-					strViewContent += '<div id="'+randomId+'" class="actionIconBox" onclick="eXo.ecm.ECS.insertContent(this);" url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(node)+'"><div class="NodeLabel"><div class="ThumbnailImage"><div style="display: block;" class="LoadingProgressIcon"><img alt="Loading Process" id="thumbnail'+randomId+'" '+imageAttribute+'="'+command+'" onerror="var img = gj(this.parentNode).next(\'i:first\')[0]; img.style.display = \'block\'; this.parentNode.style.display = \'none\';" onload="this.parentNode.style.backgroundImage=\'none\'" /></div><i style="display: none;" class="uiIcon64x64FileDefault uiIcon64x64nt_file  '+nodeTypeIcon+'"></i></div><div class="ActionIconLabel" style="width: auto;"><a class="ActionLabel" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(node)+'">'+decodeURIComponent(node)+'</a></div></div></div>';
+					strViewContent += '<div id="'+randomId+'" class="actionIconBox" onclick="eXo.ecm.ECS.insertContent(this);" url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(node)+'"><div class="nodeLabel"><div class="thumbnailImage"><div style="display: block;" class="LoadingProgressIcon"><img alt="Loading Process" id="thumbnail'+randomId+'" '+imageAttribute+'="'+command+'" onerror="var img = gj(this.parentNode).next(\'i:first\')[0]; img.style.display = \'block\'; this.parentNode.style.display = \'none\';" onload="this.parentNode.style.backgroundImage=\'none\'" /></div><i style="display: none;" class="uiIcon64x64FileDefault uiIcon64x64nt_file  '+nodeTypeIcon+'"></i></div><div class="actionIconLabel" style="width: auto;"><a class="actionLabel" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(node)+'">'+decodeURIComponent(node)+'</a></div></div></div>';
 				}
 			}
 			if(container) {
@@ -633,7 +633,7 @@
 			strViewPresent += "</table></div>";
 
 		} else {
-			strViewPresent = "<div class=\"uiThumbnailsView\" style=\"overflow-y: auto; overflow-x: hidden;\"><div class=\"ActionIconsContainer\" id=\"ActionIconsContainer\"></div></div>";
+			strViewPresent = "<div class=\"uiThumbnailsView\" style=\"overflow-y: auto; overflow-x: hidden;\"><div class=\"actionIconsContainer\" id=\"ActionIconsContainer\"></div></div>";
 		}
 		var rightWS = document.getElementById('RightWorkspace');  
 	  if(rightWS) {
@@ -1044,7 +1044,7 @@
 				}
 			} 
 		} else {
-			var container = gj(rightWS).find('div.ActionIconsContainer:first')[0];
+			var container = gj(rightWS).find('div.actionIconsContainer:first')[0];
 				gj(container).html("");
 		}
 		
@@ -1074,7 +1074,7 @@
 				strViewPresent += "<th class=\"span1\" userLanguage=\"UserLanguage.FileSize\"> Size </th></tr></thead>";
 				strViewPresent += "<tr><td class=\"center empty\" colspan=\"3\" userLanguage=\"UserLanguage.NoContent\">There is no content</td></tr></table></div>";
 			} else {
-				strViewPresent = "<div class=\"uiThumbnailsView\" style=\"overflow-y: auto; overflow-x: hidden;\"><div class=\"ActionIconsContainer\" id=\"ActionIconsContainer\"><div class=\"NoContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div></div></div>";
+				strViewPresent = "<div class=\"uiThumbnailsView\" style=\"overflow-y: auto; overflow-x: hidden;\"><div class=\"actionIconsContainer\" id=\"ActionIconsContainer\"><div class=\"NoContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div></div></div>";
 			}
 			var rightWS = document.getElementById('RightWorkspace');  
 			if(rightWS) {
