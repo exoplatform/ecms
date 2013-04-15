@@ -34,7 +34,6 @@ import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
-import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
@@ -117,8 +116,8 @@ public class LinkManagerImpl implements LinkManager {
       linkNode.getSession().save();
       ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
       try {
-        String remoteUser = Util.getPortalRequestContext().getRemoteUser();
-        if (remoteUser!=null) {
+        String remoteUser = WCMCoreUtils.getRemoteUser();
+        if (remoteUser != null) {
           if (Utils.isDocument(target)) {
             listenerService.broadcast(CmsService.POST_EDIT_CONTENT_EVENT, null, target);
           }

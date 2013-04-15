@@ -65,6 +65,7 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.Membership;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.quartz.JobExecutionContext;
@@ -602,5 +603,13 @@ public class WCMCoreUtils {
   public static String getPortalName() {
     PortalContainerInfo containerInfo = WCMCoreUtils.getService(PortalContainerInfo.class) ;
     return containerInfo.getContainerName() ;
+  }
+  
+  public static String getRemoteUser() {
+    try {
+      return ConversationState.getCurrent().getIdentity().getUserId();
+    } catch(NullPointerException npe) {
+      return null;
+    }
   }
 }
