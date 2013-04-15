@@ -33,6 +33,8 @@
         <publication:liveDate>Published Date</publication:liveDate>
         <exo:startEvent>Event Date</exo:startEvent>
         <exo:index>Index</exo:index>
+        <DESC>Descendant</DESC>
+        <ASC>Ascendant</ASC>
       </option>
       <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
       <UICLVConfigHeaderFormStringInput>Header</UICLVConfigHeaderFormStringInput>
@@ -112,12 +114,14 @@
       <UIContentSelectorFolder>Folder Browser</UIContentSelectorFolder>
     </title>
   </FolderPathSelectorPopupWindow>
-  <UICLVConfigOrderTypeFormRadioBoxInput>
+  <UICLVConfigOrderTypeFormSelectBox>
     <label>
-      <OrderDesc>Descendant</OrderDesc>
-      <OrderAsc>Ascendant</OrderAsc>
+      <option>
+        <OrderDesc>Descendant</OrderDesc>
+        <OrderAsc>Ascendant</OrderAsc>
+      </option>
     </label>
-  </UICLVConfigOrderTypeFormRadioBoxInput>
+  </UICLVConfigOrderTypeFormSelectBox>
   <UICLVConfigTargetPageFormInputSet>
     <title>
       <SelectBasePath>Select Base Path</SelectBasePath>
