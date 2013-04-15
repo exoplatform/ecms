@@ -574,7 +574,7 @@
 			var strViewContent = "";
 			// Depends on Paginators will be used or not. 'longDesc' if paginator, 'src' else.
 			var imageAttribute = "src";
-			if(list.length > 12) {
+			if(list.length > 6) {
 				// Paginator will be used
 				imageAttribute = "longDesc";
 			}			
@@ -610,8 +610,8 @@
 				container.style.display = "";
 			}			
 		}	
-		if(i > 12) {
-			var numberRecords = 12;		
+		if(i > 9) {
+			var numberRecords = 9;		
 			var viewType = eXo.ecm.ECS.viewType; 
 	    if(viewType=='list') eXo.ecm.Pager = new Pager("ListRecords", numberRecords);
 	    else eXo.ecm.Pager = new Pager("ActionIconsContainer", numberRecords);
@@ -674,8 +674,8 @@
 					
 		}
 		
-		if(i > 12) {
-			var numberRecords = 12;
+		if(i > 9) {
+			var numberRecords = 9;
 			eXo.ecm.Pager = new Pager("ListRecords", numberRecords);
 			eXo.ecm.Pager.init(); 
 			eXo.ecm.Pager.showPageNav('pageNavPosition');
@@ -716,8 +716,8 @@
 					
 		}
 		
-		if(i > 12) {
-			var numberRecords = 12;
+		if(i > 6) {
+			var numberRecords = 6;
 	    eXo.ecm.Pager = new Pager("ListRecords", numberRecords);
 			eXo.ecm.Pager.init(); 
 			eXo.ecm.Pager.showPageNav('pageNavPosition');
@@ -749,10 +749,10 @@
 	Pager.prototype.setHeightRightWS = function(list) {
 		var leftWorkSpace = document.getElementById("LeftWorkspace");
 		var rightWorkSpace = document.getElementById("RightWorkspace");
-		if(leftWorkSpace) rightWorkSpace.style.height = leftWorkSpace.offsetHeight + "px";
+		if(leftWorkSpace) rightWorkSpace.style.height = leftWorkSpace.offsetHeight - 30 + "px";
 	};
 	
-	Pager.prototype.init = function() {
+	Pager.prototype.init = function() { 
 		this.setHeightRightWS();
 		var len = 0;
 	  if(eXo.ecm.ECS.viewType=="list") {
@@ -1121,7 +1121,7 @@
 		var rightWS = document.getElementById('RightWorkspace'); 
 		var windowHeight = gj(window).height();
 		var root = gj(leftWS).parents(".UIHomePageDT:first")[0];
-		var titleBar = gj(root).find("div.TitleBar:first")[0];
+		var titleBar = gj(root).find("h6.TitleBar:first")[0];
 		var uiWorkingWorkspace = gj(root).find("div.uiWorkingWorkspace:first")[0];
 		var actionBar = gj(uiWorkingWorkspace).find("div.actionBar:first")[0];
 		var actionBaroffsetHeight = 0;
@@ -1264,3 +1264,4 @@
 		ECS : eXo.ecm.ECS
 	};
 })(gj, wcm_utils);
+
