@@ -173,7 +173,8 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
   }
   
   if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {
-    String clipboardLink = "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + data.getPath();
+    String serverUrl= uiDocumentInfo.getWebDAVServerPrefix();
+    String clipboardLink =serverUrl + "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + data.getPath();
     strActs +=  "<li class='menuItem' onclick='eXo.ecm.UIFileView.clearCheckboxes();'>";
     strActs +=  "<a exo:attr='CopyUrlToClipboard' style='display: block;' id='clip_button$componentId$i' path='$clipboardLink' onclick=\"eXo.ecm.ECMUtils.pushToClipboard(event,'$clipboardLink');\">" ;
     strActs +=  " <i class='uiIconEcmsCopyUrlToClipboard'>" ;
