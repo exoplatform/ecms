@@ -33,7 +33,7 @@
    // Get owner of current node
    Node currentNode = uicomponent.getParent().getCurrentNode();
    String ownerId = Utils.getNodeOwner(currentNode);
-   boolean canChangePermission = (currentNode == null) || PermissionUtil.canChangePermission(currentNode);
+   boolean canChangePermission = (currentNode == null) || (!currentNode.isLocked() && PermissionUtil.canChangePermission(currentNode)) || (currentNode.isLocked() && Utils.isLockTokenHolder(currentNode));
    def beanIdField = uicomponent.getBeanIdField();
 %>
 <div id="$uicomponent.id" class="permissionInfo">
