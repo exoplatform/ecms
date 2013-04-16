@@ -600,7 +600,7 @@
 			}
 
 			var resizableBlockWidth = resizableBlock.offsetWidth;
-			var componentWidth = selectedItem.offsetWidth;
+			var componentWidth = selectedItem ? selectedItem.offsetWidth : lstNormalItem[0].offsetWidth;
 			var newVisibleItemCount = Math.floor(resizableBlockWidth / componentWidth);
 			if (newVisibleItemCount < visibleItemsCount) {
 			  //display 'More' button
