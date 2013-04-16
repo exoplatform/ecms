@@ -317,6 +317,7 @@
 			fileList = currentNode.getElementsByTagName('File');
 			treeHTML += '<div class="ChildrenContainer" style="display:none;">'	;
 			for(var i = 0; i < nodeList.length; i++) {
+				console.log(nodeList[i]);
 				var id = eXo.ecm.ECS.generateIdNodes(nodeList[i], currentNode.id);
 				var strTitle = nodeList[i].getAttribute("title");
 				if (!strTitle) strTitle = nodeList[i].getAttribute("data-original-title");
@@ -716,8 +717,8 @@
 					
 		}
 		
-		if(i > 6) {
-			var numberRecords = 6;
+		if(i > 9) {
+			var numberRecords = 9;
 	    eXo.ecm.Pager = new Pager("ListRecords", numberRecords);
 			eXo.ecm.Pager.init(); 
 			eXo.ecm.Pager.showPageNav('pageNavPosition');
@@ -820,7 +821,7 @@
 				}
 			}    
 		}
-		if(len <= 12) { gj("#pageNavPosition").html("");	return;}
+		if(len <= 9) { gj("#pageNavPosition").html("");	return;}
 	};
 	
 	Pager.prototype.showPage = function(pageNumber) {
@@ -828,13 +829,28 @@
 			alert("not inited");
 			return;
 	    }
-	
-	    var oldPageAnchor = document.getElementById('pg'+eXo.ecm.Pager.currentPage);
-	    if(oldPageAnchor) oldPageAnchor.className = 'pg-normal';
+	    var pageNavPosition = gj("#pageNavPosition");
+	    var prev = gj(pageNavPosition).find('.Previous:first')[0];
+	    var next = gj(pageNavPosition).find('.Next:first')[0];
+	    if(pageNumber == 1) { 
+			prev.parentNode.className = 'disabled';
+			next.parentNode.className = '';
+		} else if(pageNumber == this.pages) {
+			next.parentNode.className = 'disabled';
+			prev.parentNode.className = '';
+		}
+	    else {
+			prev.parentNode.className = '';
+			next.parentNode.className = '';
+		}
+	    
+	    var oldPageAnchor = document.getElementById('pg'+eXo.ecm.Pager.currentPage).parentNode;
+	    if(oldPageAnchor) oldPageAnchor.className = '';
 	    
 	    this.currentPage = pageNumber;
-	    var newPageAnchor = document.getElementById('pg'+eXo.ecm.Pager.currentPage);
-		if(newPageAnchor)  newPageAnchor.className = 'pg-selected';
+	    var newPageAnchor = document.getElementById('pg'+eXo.ecm.Pager.currentPage).parentNode;
+	    console.log(newPageAnchor);
+		if(newPageAnchor)  newPageAnchor.className = 'active';
 	    
 	    var from = (pageNumber - 1) * eXo.ecm.Pager.itemsPerPage + 1;
 	    var to = from +  eXo.ecm.Pager.itemsPerPage - 1;
@@ -855,12 +871,49 @@
 			return;
 		}
 		var element = document.getElementById(positionId);
-		var pagerHtml = '<span>Total page(s) : '+this.pages+'</span> ';
-		pagerHtml += '<span onclick="eXo.ecm.Pager.previousPage();" class="pg-normal"> &#171 Prev </span> | ';
-	    for (var page = 1; page <= this.pages; page++) {
-	    	pagerHtml += '<span id="pg' + page + '" class="pg-normal" rel="tooltip" data-placement="bottom" title="'+page+'" onclick="eXo.ecm.Pager.showPage(' + page + ');">' + page + '</span> | ';
+		var pagerHtml = '';
+		
+		var min = 1;
+	    var max = this.pages;
+	    var dot1 = dot2 = -1;
+	    
+	    if (this.pages > 5) {
+			if (this.currentPage < 4) {
+			   max = 3;
+			   dot1 = 4;
+			} else if (this.currentPage >= this.pages - 2) {
+			   min = this.pages - 2;
+			   dot1 = min - 1;
+			} else {
+			   min = this.currentPage - 1;
+			   max = this.currentPage + 1;
+			   dot1 = 2;
+			   dot2 = this.pages - 1;
+			}		
+		}
+		
+		pagerHtml += '<div class="pagination uiPageIterator clearfix"><ul class="pull-right">';		
+		pagerHtml += '<li><a onclick="eXo.ecm.Pager.previousPage();" class="Previous Page" rel="tooltip" data-placement="bottom" data-original-title="Previous Page"><i class="uiIconArrowLeftMini"></i></a></li>';
+		
+		for(var i = 1 ; i <= this.pages; i++) { 		
+			if (i == 1 && min > 1) 
+			  pagerHtml += '<li><a onclick="eXo.ecm.Pager.showPage(' + i + ');" id="pg' + i + '"  rel="tooltip" data-placement="bottom" title="'+i+'">' + i + '</a></li>';
+			else if (i == min) {
+			   for (j = min; j <= max; j++) {
+				 pagerHtml += '<li><a onclick="eXo.ecm.Pager.showPage(' + j + ');" id="pg' + j + '" rel="tooltip" data-placement="bottom" title="'+j+'">' + j + '</a></li>';      
+			   }
+			} else if (i == dot1 || i == dot2) {
+					pagerHtml += '<li class="disabled"><a href="#">...</a></li>';	   
+			} else if (i == this.pages && max < this.pages) 
+			  pagerHtml += '<li><a onclick="eXo.ecm.Pager.showPage(' + this.pages + ');" id="pg' + this.pages + '" rel="tooltip" data-placement="bottom" title="'+this.pages+'">' + this.pages + '</a></li>';      
 	    }
-		pagerHtml += '<span onclick="eXo.ecm.Pager.nextPage();" class="pg-normal"> Next &#187;</span>';            
+		
+		
+		pagerHtml += '<li><a onclick="eXo.ecm.Pager.nextPage();" class="Next Page" rel="tooltip" data-placement="bottom" data-original-title="Next Page"><i class="uiIconArrowRightMini"></i></a></li>';		
+		pagerHtml += '</ul><p class="pull-right"><span>Total pages:</span><span class="pagesTotalNumber">'+this.pages+'</span></p></div>';
+		
+			 
+		          
 	    gj(element).html(pagerHtml);
 	};
 	

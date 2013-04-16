@@ -753,6 +753,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   private boolean isDocument(Node node) throws Exception {
     TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
     List<String> documentTypeList = templateService.getDocumentTemplates();
+    documentTypeList.remove(NodetypeConstant.EXO_WEBCONTENT);
     for (String documentType : documentTypeList) {
       if (node.getPrimaryNodeType().isNodeType(documentType)) {
         return true;
