@@ -893,24 +893,24 @@
 		}
 		
 		pagerHtml += '<div class="pagination uiPageIterator clearfix"><ul class="pull-right">';		
-		pagerHtml += '<li><a onclick="eXo.ecm.Pager.previousPage();" class="Previous Page" rel="tooltip" data-placement="bottom" data-original-title="Previous Page"><i class="uiIconArrowLeftMini"></i></a></li>';
+		pagerHtml += '<li><a onclick="eXo.ecm.Pager.previousPage();" class="Previous Page" rel="tooltip" data-placement="bottom" data-original-title="Previous Page"><i class="uiIconPrevArrow"></i></a></li>';
 		
 		for(var i = 1 ; i <= this.pages; i++) { 		
 			if (i == 1 && min > 1) 
-			  pagerHtml += '<li><a onclick="eXo.ecm.Pager.showPage(' + i + ');" id="pg' + i + '"  rel="tooltip" data-placement="bottom" title="'+i+'">' + i + '</a></li>';
+			  pagerHtml += '<li><a onclick="eXo.ecm.Pager.showPage(' + i + ');" id="pg' + i + '" >' + i + '</a></li>';
 			else if (i == min) {
 			   for (j = min; j <= max; j++) {
-				 pagerHtml += '<li><a onclick="eXo.ecm.Pager.showPage(' + j + ');" id="pg' + j + '" rel="tooltip" data-placement="bottom" title="'+j+'">' + j + '</a></li>';      
+				 pagerHtml += '<li><a onclick="eXo.ecm.Pager.showPage(' + j + ');" id="pg' + j + '" >' + j + '</a></li>';      
 			   }
 			} else if (i == dot1 || i == dot2) {
 					pagerHtml += '<li class="disabled"><a href="#">...</a></li>';	   
 			} else if (i == this.pages && max < this.pages) 
-			  pagerHtml += '<li><a onclick="eXo.ecm.Pager.showPage(' + this.pages + ');" id="pg' + this.pages + '" rel="tooltip" data-placement="bottom" title="'+this.pages+'">' + this.pages + '</a></li>';      
+			  pagerHtml += '<li><a onclick="eXo.ecm.Pager.showPage(' + this.pages + ');" id="pg' + this.pages + '">' + this.pages + '</a></li>';      
 	    }
 		
 		
-		pagerHtml += '<li><a onclick="eXo.ecm.Pager.nextPage();" class="Next Page" rel="tooltip" data-placement="bottom" data-original-title="Next Page"><i class="uiIconArrowRightMini"></i></a></li>';		
-		pagerHtml += '</ul><p class="pull-right"><span>Total pages:</span><span class="pagesTotalNumber">'+this.pages+'</span></p></div>';
+		pagerHtml += '<li><a onclick="eXo.ecm.Pager.nextPage();" class="Next Page" rel="tooltip" data-placement="bottom" data-original-title="Next Page"><i class="uiIconNextArrow"></i></a></li>';		
+		pagerHtml += '</ul><p class="pull-right"><span>Total pages:</span> <span class="pagesTotalNumber">'+this.pages+'</span></p></div>';
 		
 			 
 		          
