@@ -33,7 +33,7 @@
 				      <tr>
 				        <td>
 				        <%
-                  String nodeTitle = ContentReader.getXSSCompatibilityContent(Utils.getTitle(node));
+                  String nodeTitle = ContentReader.getUnescapeIllegalJcrContent(Utils.getTitle(node));
                   String nodeTypeIcon = Utils.getNodeTypeIcon(node,"16x16Icon");
 				          def clazz = "Text"
 				          if(Utils.isSymLink(node)) clazz = "TextSymLink";
