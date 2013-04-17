@@ -3,54 +3,54 @@
   <UIFCCForm>
     <msg>
       <name-not-allowed>Ce nom n'est pas autorisé.</name-not-allowed>
-      <in-versioning>Le répertoire est bloqué</in-versioning>
-      <cannot-save>Impossible de sauver</cannot-save>
+      <in-versioning>Le répertoire est bloqué.</in-versioning>
+      <cannot-save>Une erreur est survenue à l'enregistrement.</cannot-save>
       <saved-successfully>{0}</saved-successfully>
       <not-support>Impossible de charger le modèle de '{0}'.</not-support>
-      <not-add-folder>Seuls les fichiers sont autorisés dans ce dossier</not-add-folder>
-      <access-denied>Accès refusé! Vous n'avez pas la permission d'ajouter à '{0}'</access-denied>
+      <not-add-folder>Seuls les fichiers sont autorisés dans ce dossier.</not-add-folder>
+      <access-denied>Accès refusé. Vous n'avez pas la permission d'ajouter dans'{0}'</access-denied>
       <path-not-found>Le chemin '{0}' a été supprimé</path-not-found>
-      <node-locked>Le chemin '{0}' est verrouillé. Déverrouiller ce chemin avant de créer des documents.</node-locked>
-      <node-isExist>Ce nœud existe déjà dans '{0}'</node-isExist>
-      <get-dialog-path>Impossible de trouver le chemin demandé</get-dialog-path>
-      <new-jcr-template>Impossible de trouver un gabarit d'affichage</new-jcr-template>
+      <node-locked>Le chemin '{0}' est verrouillé. Déverrouillez cet élément avant de créer des documents.</node-locked>
+      <node-isExist>Ce nœud existe déjà dans '{0}'.</node-isExist>
+      <get-dialog-path>Une erreur est survenue au chargement du formulaire.</get-dialog-path>
+      <new-jcr-template>Une erreur est survenue lors de la création d'un nouveau modèle.</new-jcr-template>
     </msg>
     <action>
-      <Save>Sauver</Save>
+      <Save>Enregistrer</Save>
       <Cancel>Annuler</Cancel>
     </action>
   </UIFCCForm>
 
   <UIFCCConfig>
     <label>
-      <select-repository>Sélectionner référentiel</select-repository>
-      <UIFCCSaveLocationField>Où sauver ?</UIFCCSaveLocationField>
+      <select-repository>Sélectionnez le Référentiel</select-repository>
+      <UIFCCSaveLocationField>Destination</UIFCCSaveLocationField>
       <UIFCCRepositoryFormSelectBox>Sélectionner référentiel</UIFCCRepositoryFormSelectBox>
       <UIFCCWorkspaceFormSelectBox>Sélectionner espace de travail</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>Options</UIFCCTemplateField>
       <UIFCCLocationFormInputAction>Répertoire de stockage</UIFCCLocationFormInputAction>
-      <UIFCCLocationFormStringInput></UIFCCLocationFormStringInput>
+      <UIFCCLocationFormStringInput/>
       <UIFCCTemplateFormSelectBox>Sélectionner un modèle</UIFCCTemplateFormSelectBox>
-      <UIFCCSaveFormStringInput>Personnaliser le bouton Sauver</UIFCCSaveFormStringInput>
+      <UIFCCSaveFormStringInput>Personnaliser le bouton Enregistrer</UIFCCSaveFormStringInput>
       <UIFCCMessageFormTextareaInput>Message de remerciement</UIFCCMessageFormTextareaInput>
       <UIFCCRedirectFormCheckboxInput>Redirection</UIFCCRedirectFormCheckboxInput>
       <UIFCCRedirectPathFormStringInput>URL de redirection</UIFCCRedirectPathFormStringInput>
       <UIFCCActionField>Actions</UIFCCActionField>
-      <UIFCCActionList></UIFCCActionList>
+      <UIFCCActionList/>
     </label>
     <msg>
       <save-successfully>Enregistré avec succès</save-successfully>
-      <item-not-found>Ce chemin n'est pas valide!</item-not-found>
-      <fileType-empty>Vous devez choisir le type de fichier avant de sauver</fileType-empty>
+      <item-not-found>Ce chemin n'est pas valide.</item-not-found>
+      <fileType-empty>Vous devez choisir le type de fichier avant d'enregistrer les paramètres.</fileType-empty>
       <ws-empty>Vous devez choisir l'espace de travail.</ws-empty>
-      <action-empty>Vous devez choisir un dossier avec une action</action-empty>
+      <action-empty>Vous devez choisir un dossier avec une action.</action-empty>
       <message-empty>Le message ne peut pas être vide lorsque vous n'avez pas choisi l'option de redirection, ou le chemin est vide</message-empty>
-      <get-template>Modèle non disponible</get-template>
+      <get-template>Une erreur est survenue lors de l'accès au modèle.</get-template>
       <set-template-option>Erreur sur le modèle</set-template-option>
       <do-select>Erreur de sélection</do-select>
     </msg>
     <action>
-      <Save>Sauver</Save>
+      <Save>Enregistrer</Save>
     </action>
   </UIFCCConfig>
 
@@ -74,9 +74,9 @@
       <empty>Aucune action</empty>
       <remove-popup-first>Vous devez fermer la fenêtre avant de supprimer ce noeud.</remove-popup-first>
       <confirm-delete-action>Voulez-vous vraiment supprimer cette action?</confirm-delete-action>
-      <template-empty>Modèle de '{0}' n'existe pas</template-empty>
-      <template-null>Modèle est nul ou vous n'avez pas la permission d'accéder à ce modèle.</template-null>
-      <access-denied>Accès refusé! Vous n'avez pas la permission de faire cette action.</access-denied>
+      <template-empty>Le modèle de '{0}' n'existe pas</template-empty>
+      <template-null>Le modèle n'existe pas ou vous n'avez pas la permission d'accéder à ce modèle.</template-null>
+      <access-denied>Accès refusé. Vous n'avez pas la permission de faire cette action.</access-denied>
     </msg>
   </UIFCCActionList>
 
@@ -90,7 +90,7 @@
     <label>
       <workspaceName>Espace de travail</workspaceName>
       <rootNodePath>Chemin d'accès racine</rootNodePath>
-      <rootNodeInfo></rootNodeInfo>
+      <rootNodeInfo/>
     </label>
   </UIWorkspaceList>
 
@@ -133,7 +133,7 @@
       <access-denied>Accès refusé! Vous n'avez pas la permission d'accéder à ce modèle.</access-denied>
     </msg>
     <validator>
-      <validator>Validator</validator>
+      <validator>Validateur</validator>
       <destPath>En chemin</destPath>
     </validator>
   </UIFCCActionForm>
@@ -151,8 +151,8 @@
   <PopupComponent>
     <title>
       <UIOneNodePathSelector>Sélectionnez l'emplacement</UIOneNodePathSelector>
-      <UIPermissionSelector>Permission Browser</UIPermissionSelector>
-      <UICategoriesSelector>Ajouter Catégories</UICategoriesSelector>
+      <UIPermissionSelector>Sélecteur de permissions</UIPermissionSelector>
+      <UICategoriesSelector>Ajouter des Catégories</UICategoriesSelector>
     </title>
   </PopupComponent>
 
@@ -165,7 +165,7 @@
   <UITabPane>
     <title>
       <UICategoriesSelectPanel>Sélectionner les catégories</UICategoriesSelectPanel>
-      <UISelectedCategoriesGrid>Referenced catégories</UISelectedCategoriesGrid>
+      <UISelectedCategoriesGrid>Catégories Référencées</UISelectedCategoriesGrid>
     </title>
   </UITabPane>
 
@@ -189,13 +189,13 @@
 
   <UITreeTaxonomyList>
     <label>
-      <taxonomyTree>Taxonomie Tree</taxonomyTree>
+      <taxonomyTree>Arbre de Catégories</taxonomyTree>
     </label>
   </UITreeTaxonomyList>
 
   <UIFCCTaxonomyPopupWindow>
     <title>
-      <UIOneTaxonomySelector>Taxonomie sélecteur</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Sélecteur de Catégories</UIOneTaxonomySelector>
     </title>
   </UIFCCTaxonomyPopupWindow>
 </bundle>

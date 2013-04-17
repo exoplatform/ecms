@@ -16,14 +16,14 @@
     <label>
       <Page>Page</Page>
       <Document>Document</Document>
-      <DocumentAndPage>Document et page</DocumentAndPage>
-      <documentandpage>document et page</documentandpage>
+      <DocumentAndPage>Document et Page</DocumentAndPage>
+      <documentandpage>Document et Page</documentandpage>
       <resutlsCaption>Résultats</resutlsCaption>
       <ofAboutCaption>sur</ofAboutCaption>
       <forCaption>pour</forCaption>
-      <timeUnitCaption>seconde</timeUnitCaption>
-      <similar>Pages où apparaît le même contenu</similar>
-      <editor>Sous la direction de</editor>
+      <timeUnitCaption>secondes</timeUnitCaption>
+      <similar>Pages où ce contenu apparaît</similar>
+      <editor>Editeur</editor>
     </label>
     <action>
       <edit>Modifier</edit>
@@ -37,12 +37,12 @@
   <UISearchPageLayoutManager>
     <label>
       <itemsPerPageSelector>Articles par page</itemsPerPageSelector>
-      <searchFormSelector>Formulaire de recherche de modèle</searchFormSelector>
-      <searchResultSelector>Résultat de la recherche de modèle</searchResultSelector>
-      <searchPaginatorSelector>Paginator modèle de recherche</searchPaginatorSelector>
-      <searchPageLayoutSelector>Mise en page modèle de recherche</searchPageLayoutSelector>
-      <searchResultBasePathInputSetAction>Base de chemin</searchResultBasePathInputSetAction>
-      <pageMode>Mode de page</pageMode>
+      <searchFormSelector>Page de Recherche</searchFormSelector>
+      <searchResultSelector>Modèle de Résultats de Recherche</searchResultSelector>
+      <searchPaginatorSelector>Pagination de Recherche</searchPaginatorSelector>
+      <searchPageLayoutSelector>Modèle de Page de Recherche</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Chemin de Base</searchResultBasePathInputSetAction>
+      <pageMode>Mode de Page</pageMode>
       <option>
         <none>Aucun</none>
         <more>Plus</more>
@@ -56,14 +56,14 @@
   </UISearchPageLayoutManager>
   <searchResultBasePathInputSetAction>
     <title>
-      <SelectBasePath>Sélectionnez le chemin de base</SelectBasePath>
+      <SelectBasePath>Sélectionnez le Chemin de Base</SelectBasePath>
     </title>
   </searchResultBasePathInputSetAction>
   <UISearchForm>
   	 <message>
   	    <keyword-not-support>Le mot clé est invalide. Certains caractères ne sont pas autorisés.</keyword-not-support>
-        <keyword-not-empty>La valeur de ce mot clé ne peut pas être nul ou vide</keyword-not-empty>
         <not-checked>Le type de recherche n'est pas sélectionné. Veuillez en choisir un.</not-checked>
+     <keyword-not-empty>Veuillez saisir un mot clé.</keyword-not-empty>
   	 </message>
   </UISearchForm>
   <UIPaginatorDefault>
@@ -80,14 +80,14 @@
   </UISearchPageLayoutDefault>  
   <searchOption>
     <label>
-      <pageCheckBox>dans les pages</pageCheckBox>
-      <documentCheckBox>dans les contenus</documentCheckBox>
+      <pageCheckBox>dans les Pages</pageCheckBox>
+      <documentCheckBox>dans les Contenus</documentCheckBox>
     </label>
   </searchOption>
   <ViewMode>
     <label>
       <option>
-        <all>rechechez tous les sites</all>
+        <all>recherchez dans tous les sites</all>
       </option>  
     </label>  
   </ViewMode>  

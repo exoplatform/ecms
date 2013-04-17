@@ -19,7 +19,6 @@
     02110-1301 USA, or see the FSF site: http://www.fsf.org.
 
 -->
-
 <bundle>
   <WebLink>
     <view>
@@ -34,16 +33,16 @@
     <view>
       <label>
         <title>Titre du site</title>
-        <description>Description du site</description>
-        <keywords>Mots clés du site</keywords>
+        <description>Description du Site</description>
+        <keywords>Mots Clés du Site</keywords>
         <robots>Comportement des moteurs de recherche</robots>
       </label>
       <tooltip>
-        <add-edit>Ajouter/Editer une métadonnée</add-edit>
+        <add-edit>Ajouter/Editer une Métadonnée</add-edit>
         <cancel>Annuler</cancel>
       </tooltip>
       <action>
-        <add-edit>Ajouter/Editer</add-edit>
+        <add-edit>Ajouter/Modifier</add-edit>
         <cancel>Annuler</cancel>
       </action>
     </view>

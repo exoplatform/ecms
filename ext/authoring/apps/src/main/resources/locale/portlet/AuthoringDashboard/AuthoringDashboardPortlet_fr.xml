@@ -2,12 +2,12 @@
 <bundle>
   <UIDashboardForm>
     <label>
-      <title>Tableau de bord</title>
+      <title>Etat des Publications</title>
       <nocontent>Aucun contenu</nocontent>
-      <mydraft>Mes brouillons</mydraft>
-      <waitingapproval>En attente d'approbation</waitingapproval>
+      <mydraft>Mes Brouillons</mydraft>
+      <waitingapproval>A Approuver</waitingapproval>
       <approve>Approuver</approve>
-      <publishedtomorrow>Publiés demain</publishedtomorrow>
+      <publishedtomorrow>Publiés Demain</publishedtomorrow>
     </label>
   </UIDashboardForm>
 </bundle>

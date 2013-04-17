@@ -2,12 +2,12 @@
 <bundle>
  <UIPresentationContainer>
   <title>
-   <QuickEdit>Modifier dans l'explorateur de contenu</QuickEdit>
-   <print>Imprimer cette page</print>
+      <QuickEdit>Modifier dans l'Explorateur de Contenus</QuickEdit>
+      <print>Imprimer cette Page</print>
    <FastPublish>Publier</FastPublish>
   </title>
   <label>
-   <draft>brouillon</draft>
+      <draft>Brouillon</draft>
    <print>Imprimer</print>
   </label>
   <msg>
@@ -18,7 +18,7 @@
  </UIPresentationContainer>
   <CorrectContentSelectorPopupWindow>
    <title>
-    <UIContentSelectorOne>Choisissez un dossier</UIContentSelectorOne>
+      <UIContentSelectorOne>Choisissez un Contenu</UIContentSelectorOne>
    </title>
   </CorrectContentSelectorPopupWindow>
   <UISingleContentViewerPortlet>
@@ -32,10 +32,9 @@
 		<Disable>Désactivé</Disable>
   	</label>
   </UISCVContextualRadioBox>  
-  
   <UIPreferencesPopupWindows>
 	<title>
-		<UISCVPreferences>Préférences du contenu</UISCVPreferences>
+      <UISCVPreferences>Paramètres</UISCVPreferences>
 	</title>
   </UIPreferencesPopupWindows>
   <UISCVPreferences>
@@ -49,21 +48,21 @@
     <title>Préférences du contenu</title>
     <label>
       <Back>Retour à la page précédente</Back>
-      <Edit>Editer</Edit>
-      <Preferences>Préférences</Preferences>
-   	  <Title>Préférences du contenu</Title>
-   	  <UISCVShowTitleConfigurationCheckBox>Afficher le titre</UISCVShowTitleConfigurationCheckBox>
-   	  <UISCVShowDateConfigurationCheckBox>Afficher la date</UISCVShowDateConfigurationCheckBox>
-   	  <UISCVShowOptionBarConfigurationCheckBox>Afficher la barre d'options</UISCVShowOptionBarConfigurationCheckBox>
-   	  <DisplaySettingBlock>Paramètres d'affichage</DisplaySettingBlock>
+      <Edit>Modifier</Edit>
+      <Preferences>Paramètres</Preferences>
+      <Title>Paramètres</Title>
+      <UISCVShowTitleConfigurationCheckBox>Afficher le Titre</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>Afficher la Date</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowOptionBarConfigurationCheckBox>Afficher la Barre d'Options</UISCVShowOptionBarConfigurationCheckBox>
+      <DisplaySettingBlock>Contenu</DisplaySettingBlock>
    	  <ContentPathBlock>Sélection de contenu</ContentPathBlock>
    	  <UISCVConfigItemPathFormInputSet>Chemin du contenu</UISCVConfigItemPathFormInputSet>
 	  <UISCVContentPathConfigurationInputBox>Chemin du contenu</UISCVContentPathConfigurationInputBox>
-   	  <Advance>Avancé</Advance>
+      <Advance>Paramètres Avancés</Advance>
    	  <ContextCaption>Navigation Dynamique</ContextCaption>
    	  <UISCVContextualRadioBox>Contenu Contextuel</UISCVContextualRadioBox>
    	  <UISCVParameterInputBox>par</UISCVParameterInputBox>
-   	  <PrintSettingBlock>Configuration d'impression</PrintSettingBlock>
+      <PrintSettingBlock>Visibilité</PrintSettingBlock>
    	  <UISCVPrintPageParameter>Avec</UISCVPrintPageParameter>
    	  <UISCVConfigPrintPageFormInputSet>Afficher dans la page</UISCVConfigPrintPageFormInputSet>
 	  <LockStatus>Verrouillage</LockStatus>
@@ -71,7 +70,7 @@
 	  <UISCVCacheRadioBox>Partager les contenus entre les utilisateurs</UISCVCacheRadioBox>
     </label>
     <help>
-      <ContentPathBlock>Choisissez le contenu que vous souhaitez afficher. Ce contenu par défaut sera remplacé dynamiquement si vous activez la Navigation Dynamique (mode Avancé, voir ci-dessous)</ContentPathBlock>
+      <ContentPathBlock>Choisissez le contenu que vous souhaitez afficher. Ce contenu par défaut sera remplacé dynamiquement si vous activez la Navigation Dynamique (Paramètres Avancés, voir ci-dessous)</ContentPathBlock>
       <DisplaySettingBlock>Vous pouvez afficher ou cacher la barre d'options avec le lien "Imprimer". L'affichage du titre et de la date sont également optionnels.</DisplaySettingBlock>
       <ContextualHelp>Active la navigation dynamique. Le contenu peut être changé dynamiquement par un chemin fourni dans un paramètre de l'URL.</ContextualHelp>
       <ParameterHelp>Ce paramètre sera utilisé pour récupérer le contenu si la Navigation Dynamique est activée.</ParameterHelp>
@@ -79,13 +78,25 @@
 	<msg>
       <not-valid-path>Ce chemin de contenu est invalide</not-valid-path>
     </msg>
+    <tab>
+      <label>
+        <UISCVConfigContentFormInputSet>Contenu</UISCVConfigContentFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Paramètres d'Affichage</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>Paramètres d'Impression</UISCVConfigPrintFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Paramètres Avancés</UISCVConfigAdvancedFormInputSet>
+      </label>
+    </tab>
   </UISCVPreferences>
   <UISCVConfigItemPathFormInputSet>
   	<title>
   		<SelectFolderPath>Choisissez un dossier</SelectFolderPath>
   	</title>  	
   </UISCVConfigItemPathFormInputSet>
-  
+  <UISCVConfigPrintPageFormInputSet>
+    <title>
+      <SelectTargetPage>Afficher dans la page</SelectTargetPage>
+    </title>
+  </UISCVConfigPrintPageFormInputSet>
   <PublicationStates>
     <archived>Archivé</archived>
     <obsolete>Obsolète</obsolete>
@@ -98,7 +109,6 @@
     <staged>Prêt à publier</staged>
     <published>Publié</published>
   </PublicationStates>
-  
   <UISCVCacheRadioBox>
   	<label>
 	  <Enable>Limité par l'authentification</Enable>
