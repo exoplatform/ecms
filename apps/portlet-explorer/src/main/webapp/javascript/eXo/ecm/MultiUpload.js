@@ -48,6 +48,9 @@
 	MultiUpload.prototype.MAX_SIZE_ALERT = "MaxSizeAlert";
 	MultiUpload.prototype.SUPPORT_FILE_API = window.FileReader;
 	MultiUpload.prototype.MAX_CONNECTION = 10;
+	MultiUpload.prototype.ABORT_POPUP_ID = "uiMultiUploadAbortAllPopup";
+	MultiUpload.prototype.ABORT_POPUP_OK_ID = "uiMultiUploadAbortAllPopupOK";
+	MultiUpload.prototype.ABORT_POPUP_CANCEL_ID = "uiMultiUploadAbortAllPopupCancel";
 
 	MultiUpload.prototype.getMsg = function(msg) {
 		return eXo.ecm.WCMUtils.getBundle("UIMultiUpload.label." + msg, eXo.env.portal.language);
@@ -203,6 +206,7 @@
 		eXo.ecm.MultiUpload.driveTitle = driveTitle;
 	};
 
+	//init all event handlers for the drop box
 	MultiUpload.prototype.initDropBox = function(divid) {
 		var dropbox = eXo.ecm.MultiUpload.document.getElementById(divid);
 		if (dropbox.addEventListener) {//only for FF,Chrome and IE>=9
@@ -214,13 +218,12 @@
 		//  dropbox.addEventListener("mouseup", eXo.ecm.MultiUpload.dragExitHandler, false);
 			dropbox.addEventListener("drop", eXo.ecm.MultiUpload.drop, false);
 		}
-		
-		var abortAll = eXo.ecm.MultiUpload.document.getElementById("MultiUploadAbortAll");
-		if (abortAll.addEventListener) {//only for FF,Chrome and IE>=9
-			abortAll.addEventListener("click", eXo.ecm.MultiUpload.abortAll, false);
-		} else {
-			abortAll.attachEvent("onclick", eXo.ecm.MultiUpload.abortAll);
-		}
+		//the abort all button and popup
+		gj("#MultiUploadAbortAll").click(eXo.ecm.MultiUpload.abortAll);
+		gj("#uiMultiUploadAbortAllPopupClosePopup").click(eXo.ecm.MultiUpload.abortAllCancel);
+		gj("#" + eXo.ecm.MultiUpload.ABORT_POPUP_ID).hide();
+		gj("#" + eXo.ecm.MultiUpload.ABORT_POPUP_OK_ID).click(eXo.ecm.MultiUpload.abortAllOK);
+		gj("#" + eXo.ecm.MultiUpload.ABORT_POPUP_CANCEL_ID).click(eXo.ecm.MultiUpload.abortAllCancel);
 	};
 
 	MultiUpload.prototype.dragEnterHandler = function(event) {
@@ -819,8 +822,8 @@
 			}
 		  });
 	};
-
 	MultiUpload.prototype.handleReaderLoad = function(progressID, evt) {
+
 		  // use lengthComputable, loaded, and total on ProgressEvent
 		  return function(evt) {
 		    //send save request
@@ -874,7 +877,7 @@
 				    	  }
 		  		  }
 		  	  }
-		  	  delete eXo.ecm.MultiUpload.uploadingFileIds[progressID];      
+		  	  delete eXo.ecm.MultiUpload.uploadingFileIds[progressID];
 		  	  //change uploading files value
 		  	  eXo.ecm.MultiUpload.changeStatusValue(eXo.ecm.MultiUpload.UPLOADING, -1);
 		  	  //change uploaded files value
@@ -898,6 +901,7 @@
 		  	  if (eXo.ecm.MultiUpload.processFiles() == 0) {
 		  		  var uiExplorer = eXo.ecm.MultiUpload.document.getElementById("MultiUploadRefreshExplorer");
 		  		  eval(decodeURIComponent(uiExplorer.innerHTML));
+		  		  eXo.ecm.MultiUpload.abortAllCancel();
 		  	  }
 		  	  //process next upload request
 		  	  eXo.ecm.MultiUpload.processNextUploadRequestInQueue();
@@ -967,22 +971,31 @@
 		}
 	};
 
+	// handler of abort all event, just open the AbortAll popup 
 	MultiUpload.prototype.abortAll = function(event) {
-		  uploadingBox = eXo.ecm.MultiUpload.document.getElementById("MultiUploadFilesUploading");
-		  awaitingBox = eXo.ecm.MultiUpload.document.getElementById("MultiUploadFilesAwaiting");
-		var number = parseInt(uploadingBox.innerHTML) + parseInt(awaitingBox.innerHTML);
-		if (number < 1) {
+		if (eXo.ecm.MultiUpload.processFiles() < 1) {
 			return;
 		}
-		var ret = confirm(eXo.ecm.MultiUpload.ABORT_ALL);
-		if (ret == true) {
-			for (var i in eXo.ecm.MultiUpload.uploadingFileIds) {
-				eXo.ecm.MultiUpload.cancelRequestMap[i] = true;
-				e = eXo.ecm.MultiUpload.handleReaderAbort(i, eXo.ecm.MultiUpload.CANCEL_TXT, event);
-				e(event);
-			}
-		}
+		uiPopupWindow.show(eXo.ecm.MultiUpload.ABORT_POPUP_ID, false, null, null);
+//		gj("#" + eXo.ecm.MultiUpload.ABORT_POPUP_ID).show();
+//		var ret = confirm(eXo.ecm.MultiUpload.ABORT_ALL);
 	};
+	
+	// handler of abort all - OK event, abort all files in progress and awaiting
+	MultiUpload.prototype.abortAllOK = function(event) {
+		for (var i in eXo.ecm.MultiUpload.uploadingFileIds) {
+			eXo.ecm.MultiUpload.cancelRequestMap[i] = true;
+			e = eXo.ecm.MultiUpload.handleReaderAbort(i, eXo.ecm.MultiUpload.CANCEL_TXT, event);
+			e(event);
+		};
+		gj("#" + eXo.ecm.MultiUpload.ABORT_POPUP_ID).hide();
+	};
+	
+	// close the AbortAll popup
+	MultiUpload.prototype.abortAllCancel = function(event) {
+		gj("#" + eXo.ecm.MultiUpload.ABORT_POPUP_ID).hide();
+	};
+	
 	//-------------------------------------------------------------
 	//-------------------------------------------------------------
 	//-----------------------handleForIE---------------------------

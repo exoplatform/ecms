@@ -234,6 +234,9 @@
       <as>gj</as>
     </depends>
     <depends>
+      <module>uiPopupWindow</module>
+    </depends>    
+    <depends>
       <module>wcm-utils</module>
     </depends>
   </module>

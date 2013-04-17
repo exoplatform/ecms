@@ -63,3 +63,29 @@
 		</div>
   </div>
 </div>
+
+<!-- abort all popup-->
+<div id="uiMultiUploadAbortAllPopup" class="UIPopupWindow uiPopup UIDragObject NormalStyle" 
+  exo:minwidth="200" exo:minheight="200" style="display: node; z-index: 9; visibility: visible; top: 538px; left: 408px;">
+  <div class="popupHeader ClearFix">
+    <a id="uiMultiUploadAbortAllPopupClosePopup" class="uiIconClose pull-right" title="Close Window"></a>
+    <span class="PopupTitle popupTitle"><%=getMsg("AbortAll")%><br/></span>
+  </div><!-- of popupHeader -->
+  <div class="PopupContent popupContent">
+    <div class="UIForm UIDeleteFileConfirmMessage">
+      <ul class="singleMessage popupMessage resizable">
+        <li><span class="confirmationIcon"><%=getMsg("AbortAllConfirmation")%></span></li>
+      </ul>
+      <div class="uiAction uiActionBorder">
+        <button id="uiMultiUploadAbortAllPopupOK" type="button" tabindex="1" class="btn" href="javascript:void(0);"
+                onclick="eXo.ecm.MultiUpload.abortAllOK()">
+          <%=getMsg("OK")%>
+        </button>
+        <button id="uiMultiUploadAbortAllPopupCancel" type="button" tabindex="2" class="btn" href="javascript:void(0);"
+                onclick="eXo.ecm.MultiUpload.abortAllCancel()">
+          <%=getMsg("Cancel")%>
+        </button>
+      </div>
+    </div>
+  </div>
+</div><!-- of popup -->
