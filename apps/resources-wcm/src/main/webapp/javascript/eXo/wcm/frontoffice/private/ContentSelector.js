@@ -317,7 +317,6 @@
 			fileList = currentNode.getElementsByTagName('File');
 			treeHTML += '<div class="ChildrenContainer" style="display:none;">'	;
 			for(var i = 0; i < nodeList.length; i++) {
-				console.log(nodeList[i]);
 				var id = eXo.ecm.ECS.generateIdNodes(nodeList[i], currentNode.id);
 				var strTitle = nodeList[i].getAttribute("title");
 				if (!strTitle) strTitle = nodeList[i].getAttribute("data-original-title");
@@ -829,6 +828,8 @@
 			alert("not inited");
 			return;
 	    }
+	    this.currentPage = pageNumber;
+	    eXo.ecm.Pager.showPageNav('pageNavPosition');
 	    var pageNavPosition = gj("#pageNavPosition");
 	    var prev = gj(pageNavPosition).find('.Previous:first')[0];
 	    var next = gj(pageNavPosition).find('.Next:first')[0];
@@ -843,18 +844,22 @@
 			prev.parentNode.className = '';
 			next.parentNode.className = '';
 		}
+	    if(document.getElementById('pg'+eXo.ecm.Pager.currentPage)) {
+			var oldPageAnchor = document.getElementById('pg'+eXo.ecm.Pager.currentPage).parentNode;
+			if(oldPageAnchor) oldPageAnchor.className = '';
+		}
 	    
-	    var oldPageAnchor = document.getElementById('pg'+eXo.ecm.Pager.currentPage).parentNode;
-	    if(oldPageAnchor) oldPageAnchor.className = '';
 	    
-	    this.currentPage = pageNumber;
-	    var newPageAnchor = document.getElementById('pg'+eXo.ecm.Pager.currentPage).parentNode;
-	    console.log(newPageAnchor);
-		if(newPageAnchor)  newPageAnchor.className = 'active';
+	    if(document.getElementById('pg'+eXo.ecm.Pager.currentPage)) {
+			var newPageAnchor = document.getElementById('pg'+eXo.ecm.Pager.currentPage).parentNode;
+			if(newPageAnchor)  newPageAnchor.className = 'active';
+		}
 	    
 	    var from = (pageNumber - 1) * eXo.ecm.Pager.itemsPerPage + 1;
 	    var to = from +  eXo.ecm.Pager.itemsPerPage - 1;
 	    eXo.ecm.Pager.showRecords(from, to);
+	     
+	    
 	};
 	
 	Pager.prototype.previousPage = function() {
@@ -1317,4 +1322,5 @@
 		ECS : eXo.ecm.ECS
 	};
 })(gj, wcm_utils);
+
 
