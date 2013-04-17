@@ -7,10 +7,10 @@
 	def queryListData = uicomponent.queryList();
 %>
 
-	<h5 class="title clearfix">
+	<h6 class="title clearfix">
 		<a class="actionIcon advancedSearchIcon pull-right" onclick="<%=uicomponent.event("AdvanceSearch")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIActionBar.title.AdvanceSearch")%>"><i class="uiIconSearch uiIconLightGray"></i></a>
 		<%=_ctx.appRes("UISavedSearches.title.savedSearches")%>
-	</h5>
+	</h6>
 
   <div class="uiContentBox">
 		<ul class="uiItemList">

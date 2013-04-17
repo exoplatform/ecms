@@ -15,7 +15,7 @@
   String name = uicomponent.getName() ;
   def rcontext = _ctx.getRequestContext();
 %> 
-	<h5 class="title">Clipboard</h5>
+	<h6 class="title">Clipboard</h6>
   <div class="uiContentBox">
 		<div class="uiClipboard" id="$uicomponent.id">
 			<table class="uiGrid table table-hover table-striped">
