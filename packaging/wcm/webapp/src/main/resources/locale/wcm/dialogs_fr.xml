@@ -19,27 +19,26 @@
     02110-1301 USA, or see the FSF site: http://www.fsf.org.
 
 -->
-
 <bundle>
   <WebContent>
     <dialog>
       <label>
-        <MainContent>Contenu principal</MainContent>
+        <MainContent>Contenu Principal</MainContent>
         <cssFile>default.css</cssFile>
         <jsFile>default.js</jsFile>
         <Advanced>Avancé</Advanced>
         <Summary>Résumé</Summary>
         <name>Nom</name>
         <title>Titre</title>
-        <ContentCSS>CSS données</ContentCSS>
+        <ContentCSS>CSS</ContentCSS>
         <hintCSS>Dans ce panneau, vous pouvez spécifier la feuille de style principale pour votre contenu web. Ce style surchargera celui défini au niveau du site et au niveau partagé.</hintCSS>
-        <ContentJS>JS données</ContentJS>
+        <ContentJS>Javascript</ContentJS>
         <hintJS>Dans ce panneau, vous pouvez spécifier du code JavaScript qui sera exécuté avant que votre contenu web est affiché sur la page.</hintJS>
         <WebContentHtml>Contenu principal</WebContentHtml>
         <Illustration>Illustration</Illustration>
         <hintIllustration>Dans ce panneau, vous pouvez spécifier une image qui sera affichée lorsque votre contenu web sera affiché dans les listes. En plus, vous pouvez spécifier un résumé accompagnant cette image.</hintIllustration>
-        <illustrationImage>Illustration Vignette</illustrationImage>
-        <confirm-delete>Confirmez-vous la suppression ?</confirm-delete>
+        <confirm-delete>Confirmez-vous la suppression de cette illustration?</confirm-delete>
+        <illustrationImage>Vignette Illustrative</illustrationImage>
         <imageMimeType>Type d'image</imageMimeType>
         <image>Transférer l'image</image>
         <imageWidth>Largeur de l'image</imageWidth>
@@ -55,7 +54,7 @@
         <name>Nom</name>
         <active>Actif</active>
         <priority>Priorité</priority>
-        <content>Contenu CSS</content>
+        <content>CSS</content>
       </label>
     </dialog>
   </CSSFile>
@@ -66,7 +65,7 @@
         <name>Nom</name>
         <active>Actif</active>
         <priority>Priorité</priority>
-        <content>Contenu JavaScript</content>
+        <content>JavaScript</content>
       </label>
     </dialog>
   </JSFile>

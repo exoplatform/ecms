@@ -199,7 +199,7 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Note Moyen</avg-rating>
+        <avg-rating>Note Moyenne</avg-rating>
         <subscription>Votes</subscription>
       </label>
     </view>
@@ -211,11 +211,11 @@
     <view>
       <label>
         <name>Nom</name>
-        <versionable>Versionable</versionable>
+        <versionable>Versionnable</versionable>
         <exo_owner>Propriétaire</exo_owner>
         <exo_dateCreated>Date de Création</exo_dateCreated>
         <exo_dateModified>Date de Modif.</exo_dateModified>
-        <auditing>Traçabilité</auditing>
+        <auditing>Audit</auditing>
       </label>
     </view>
   </ListView>
@@ -327,12 +327,12 @@
         <languages>Langues</languages>
       </label>
       <action>
-        <add-edit>Ajouter/Editer</add-edit>
+        <add-edit>Ajouter/Modifier</add-edit>
         <cancel>Annuler</cancel>
       </action>
       <tooltip>
         <cancel>Annuler</cancel>
-        <add-edit>Ajouter/Editer les propriétés</add-edit>
+        <add-edit>Ajouter/Modifier les propriétés</add-edit>
       </tooltip>
     </view>
   </ElementSet>
@@ -351,12 +351,12 @@
         <cutoff-superseded>Extraction remplacée</cutoff-superseded>
       </label>
       <action>
-        <add-edit>Ajouter/Editer</add-edit>
+        <add-edit>Ajouter/Modifier</add-edit>
         <cancel>Annuler</cancel>
       </action>
       <tooltip>
         <cancel>Annuler</cancel>
-        <add-edit>Ajouter/Editer les propriétés</add-edit>
+        <add-edit>Ajouter/Modifier les propriétés</add-edit>
       </tooltip>
     </view>
   </Cutoffable>
@@ -370,12 +370,12 @@
         <destruction-date>Date de destruction</destruction-date>
       </label>
       <action>
-        <add-edit>Ajouter/Editer</add-edit>
+        <add-edit>Ajouter/Modifier</add-edit>
         <cancel>Annuler</cancel>
       </action>
       <tooltip>
         <cancel>Annuler</cancel>
-        <add-edit>Ajouter/Editer les propriétés</add-edit>
+        <add-edit>Ajouter/Modifier les propriétés</add-edit>
       </tooltip>
     </view>
   </Destroyable>
@@ -390,7 +390,7 @@
         <accession-date>Planification de l'extraction</accession-date>
       </label>
       <action>
-        <add-edit>Ajouter/Editer</add-edit>
+        <add-edit>Ajouter/Modification</add-edit>
         <cancel>Annuler</cancel>
       </action>
       <tooltip>
@@ -412,12 +412,12 @@
         <freeze>Geler</freeze>
       </label>
       <action>
-        <add-edit>Ajouter/Editer</add-edit>
+        <add-edit>Ajouter/Modifier</add-edit>
         <cancel>Annuler</cancel>
       </action>
       <tooltip>
         <cancel>Annuler</cancel>
-        <add-edit>Ajouter/Editer les propriétés</add-edit>
+        <add-edit>Ajouter/Modifier les propriétés</add-edit>
       </tooltip>
     </view>
   </Holdable>
@@ -437,7 +437,7 @@
         <originating-organization>Organisme d'origine</originating-organization>
         <other-addresses>Autres adresses</other-addresses>
         <publication-date>Date de publication</publication-date>
-        <record-note>Note du Record</record-note>
+        <record-note>Note de l'Enregistrement</record-note>
         <date-received>Date de réception</date-received>
         <media-format>Format du media</media-format>
         <is-obsolete>Est obsolète</is-obsolete>
@@ -446,12 +446,12 @@
         <uuid>UUID</uuid>
       </label>
       <action>
-        <add-edit>Ajouter/Editer</add-edit>
+        <add-edit>Ajouter/Modifier</add-edit>
         <cancel>Annuler</cancel>
       </action>
       <tooltip>
         <cancel>Annuler</cancel>
-        <add-edit>Ajouter/Editer les propriétés</add-edit>
+        <add-edit>Ajouter/Modifier les propriétés</add-edit>
       </tooltip>
     </view>
   </Record>
@@ -467,12 +467,12 @@
         <transfer-location>Emplacement du Transfert</transfer-location>
       </label>
       <action>
-        <add-edit>Ajouter/Editer</add-edit>
+        <add-edit>Ajouter/Modifier</add-edit>
         <cancel>Annuler</cancel>
       </action>
       <tooltip>
         <cancel>Annuler</cancel>
-        <add-edit>Ajouter/Editer les propriétés</add-edit>
+        <add-edit>Ajouter/Modifier les propriétés</add-edit>
       </tooltip>
     </view>
   </Transferable>
@@ -488,12 +488,12 @@
         <next-review-date>Date de revue suivante</next-review-date>
       </label>
       <action>
-        <add-edit>Ajouter/Editer</add-edit>
+        <add-edit>Ajouter/Modifier</add-edit>
         <cancel>Annuler</cancel>
       </action>
       <tooltip>
         <cancel>Annuler</cancel>
-        <add-edit>Ajouter/Editer les propriétés</add-edit>
+        <add-edit>Ajouter/Modifier les propriétés</add-edit>
       </tooltip>
     </view>
   </VitalRecord>
@@ -609,6 +609,7 @@
      </label> 
    </view>
   </EnableVersioning>
+  
   <AutoVersioning>
    <view>
      <label>

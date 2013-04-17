@@ -11,7 +11,7 @@
       <cancel>Annuler</cancel>
     </label>
     <msg>
-      <renaming>Renommer en cours...</renaming>
+      <renaming>Renommage en cours...</renaming>
     </msg>
   </RenameConnector>
 </bundle>

@@ -31,10 +31,10 @@
       <Cancel>Annuler</Cancel>
     </action>
     <msg>
-      <cannot-save>Les catégories ne sont pas sauvegardées.</cannot-save>
-      <have-saved>Les catégories ont été sauvegardées avec succès.</have-saved>
-      <non-categories>Les catégories sont mauvaises. Veuillez sélectionner une bonne catégorie.</non-categories>
-      <confirm-delete>Etes vous sûr de vouloir supprimer cette catégorie ?</confirm-delete>
+      <cannot-save>Les catégories n'ont pas été enregistrées.</cannot-save>
+      <have-saved>Les catégories ont été enregistrées avec succès.</have-saved>
+      <non-categories>Veuillez sélectionner des catégories valides.</non-categories>
+      <confirm-delete>Etes-vous sûr de vouloir supprimer cette catégorie ?</confirm-delete>
     </msg>
   </UISelectedCategoriesGrid>
   <!--
@@ -44,20 +44,20 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIPermissionUser>Sélectionner un utilisateur</UIPermissionUser>
-      <UIPermissionMembership>Sélectionner un membership</UIPermissionMembership>
+      <UIPermissionUser>Sélectionner un Utilisateur</UIPermissionUser>
+      <UIPermissionMembership>Sélectionner un Rôle</UIPermissionMembership>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
     <label>
-      <selectUser>Sélectionner un utilisateur</selectUser>
-      <selectGroup>Parcourir et Sélectionner un groupe</selectGroup>
+      <selectUser>Sélectionner un Utilisateur</selectUser>
+      <selectGroup>Parcourir et Sélectionner un Groupe</selectGroup>
     </label>
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>Sélectionner un Membership</selectUser>
-      <selectGroup>Parcourir et sélectionner un groupe</selectGroup>
+      <selectUser>Sélectionner un Rôle</selectUser>
+      <selectGroup>Parcourir et Sélectionner un Groupe</selectGroup>
     </label>
   </UIPermissionMembership>
 </bundle>

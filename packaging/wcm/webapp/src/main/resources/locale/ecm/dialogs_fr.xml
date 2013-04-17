@@ -16,7 +16,7 @@
         <schedule-type>Type de planification</schedule-type>
         <remove>Supprimer</remove>
         <add>Ajouter</add>
-        <expand>Développer</expand>
+        <expand>Étendre</expand>
       </label>
     </dialog>
   </Ecm>
@@ -31,7 +31,7 @@
       <name>Nom</name>
 	    <categories>Catégories</categories>
 	    <recordCategoryIdentifier>Identification de la catégorie de l'Enregistrement</recordCategoryIdentifier>
-	    <dispositionAuthority>Auteur de la disposition</dispositionAuthority>
+    <dispositionAuthority>Autorité de Disposition</dispositionAuthority>
 	    <permanentRecordIndicator>Indicateur d'enregistrement permanent</permanentRecordIndicator>
 	    <containsRecordFolders>Dossier contenant l'Enregistrement</containsRecordFolders>
 	    <defaultMediaType>Type de média par défaut</defaultMediaType>
@@ -135,11 +135,11 @@
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <protocol>Protocole</protocol>
-        <host>Nom de l'hôte</host>
+        <host>Hôte</host>
         <port>Port</port>
-        <folder>Répertoire</folder>
+        <folder>Dossier</folder>
         <username>#{word.userName}</username>
-        <password>#{word.password}</password>
+        <password>Mot de Passe</password>
         <description>#{word.description}</description>
         <stote-path>Emplacement de sauvegarde</stote-path>
       </label>
@@ -225,9 +225,9 @@
         <subject>#{word.subject}</subject>
         <source>Source</source>
         <contributor>Contributeur</contributor>
-        <resource-type>Type Ressource</resource-type>
+        <resource-type>Type de Ressource</resource-type>
         <date>#{word.date}</date>
-        <publisher>Editeur</publisher>
+        <publisher>Publieur</publisher>
         <description>#{word.description}</description>
         <rights>Droits</rights>
         <relation>Relation</relation>
@@ -291,7 +291,7 @@
   <Actionable>
     <dialog>
       <label>
-        <primary-type>Type primaire</primary-type>
+        <primary-type>Type Primaire</primary-type>
         <mixin-types>Types Mixin</mixin-types>
       </label>
     </dialog>
@@ -337,9 +337,9 @@
   <Move>
     <dialog>
       <label>
-        <destination-workpsace>Espace de travail</destination-workpsace>
+        <destination-workpsace>Espace de Travail Cible</destination-workpsace>
         <destination-path>Emplacement</destination-path>
-        <primary-type>Type primaires</primary-type>
+        <primary-type>Type Primaire</primary-type>
         <mixin-types>Types Mixin</mixin-types>
       </label>
     </dialog>
@@ -369,8 +369,8 @@
         <addresses>Adresses</addresses>
         <originating-organization>Organisme d'origine</originating-organization>
         <other-addresses>Autres adresses</other-addresses>
-        <publication-date>Date de publication</publication-date>
-        <record-note>Note du record</record-note>
+        <publication-date>Date de Publication</publication-date>
+        <record-note>Note de l'enregistrement</record-note>
         <date-received>Date de réception</date-received>
         <media-format>Format du media</media-format>
         <is-obsolete>Est obsolète</is-obsolete>
@@ -456,7 +456,7 @@
   <ResouceContainer>
     <dialog>
       <label>
-        <name>#{word.name}</name>
+        <name>Nom</name>
         <autoload>Chargement automatique</autoload>
         <minetype>Type Mime</minetype>
         <content>Contenu</content>
@@ -468,12 +468,12 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>L'adresse Email est invalide !</Invalid-input>
+      <Invalid-input>L'adresse Email est invalide.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>Le champs '{0}' est requis. Veuillez saisir une valeur.</empty-input>
+      <empty-input>Le champ '{0}' est requis. Veuillez saisir une valeur.</empty-input>
     </msg>
   </EmptyFieldValidator>
   <NumberFormatValidator>
@@ -493,14 +493,14 @@
         <name>Nom</name>
         <lifecycle>Cycle de Vie</lifecycle>
         <homePath>Chemin Racine</homePath>
-        <targetWorkspace>Espace de travail Cible</targetWorkspace>
+        <targetWorkspace>Espace de Travail Cible</targetWorkspace>
         <targetPath>Chemin Cible</targetPath>
       </label>
     </dialog>
   </ScriptAction>
   <UIDialogForm>
    <form>
-   	<DialogFormException>Can not save this document. Maybe there is a problem with pre save interceptor</DialogFormException>
+   <DialogFormException>Can not save this document. Maybe there is a problem with pre save interceptor.</DialogFormException>
    </form>
   </UIDialogForm>
 
@@ -523,23 +523,23 @@
 	<false>Faux</false>
 	<one-minute>Une fois par Minute</one-minute>
 	<hourly>Une fois par heure</hourly>
-	<daily>Journalier</daily>
+<daily>Quotidien</daily>
 	<quarterly>Trimestriel</quarterly>
 	<yearly>Annuel</yearly>
 	<ten-years>Tous les 10 ans</ten-years>
 	<read>Action Utilisateur</read>
 	    <schedule>Planificateur</schedule>
-        <node_added>Content Addition</node_added>
-        <node_removed>Ajout de contenu</node_removed>
-        <property_added>Ajout de la propriété</property_added>
-        <property_removed>Enlèvement de la propriété</property_removed>
-        <property_changed>Modification de la propriété</property_changed>
+  <node_added>Ajout de Contenu</node_added>
+  <node_removed>Suppression de Contenu</node_removed>
+  <property_added>Ajout de Propriété</property_added>
+  <property_removed>Suppression de Propriété</property_removed>
+  <property_changed>Modification de Propriété</property_changed>
     <SendMail>
    <dialog>
      <label>
 							<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+        <nodetypes>Types de Noeud</nodetypes>
+        <affectedNodeTypeNames>Types de Noeud Affectés</affectedNodeTypeNames>
      </label>
    </dialog>
   </SendMail>
@@ -569,7 +569,7 @@
      <label>
 							<isDeep>Récursif</isDeep>
 							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Types de Noeud Affectés</affectedNodeTypeNames>
      </label>
    </dialog>
   </Rss>
@@ -588,8 +588,8 @@
    <dialog>
      <label>
      		<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+        <nodetypes>Types de Noeud</nodetypes>
+        <affectedNodeTypeNames>Types de Noeud Affectés</affectedNodeTypeNames>
      </label>
    </dialog>
   </ReloadAction>
@@ -598,8 +598,8 @@
    <dialog>
      <label>
 							<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+        <nodetypes>Types de Noeud</nodetypes>
+        <affectedNodeTypeNames>Types de Noeud Affectés</affectedNodeTypeNames>
      </label>
    </dialog>
   </Transform>
@@ -608,17 +608,18 @@
    <dialog>
      <label>
      		<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+        <nodetypes>Types de Noeud</nodetypes>
+        <affectedNodeTypeNames>Types de Noeud Affectés</affectedNodeTypeNames>
      </label>
    </dialog>
   </EnableVersioning>
+  
   <AutoVersioning>
    <dialog>
      <label>
      		<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+        <nodetypes>Types de Noeud</nodetypes>
+        <affectedNodeTypeNames>Types de Noeud Affectés</affectedNodeTypeNames>
      </label>
    </dialog>
   </AutoVersioning>

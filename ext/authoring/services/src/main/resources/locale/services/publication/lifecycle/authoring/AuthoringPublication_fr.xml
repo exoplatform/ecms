@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <bundle>
   <PublicationService>
     <AuthoringPublicationPlugin>
@@ -10,7 +9,7 @@
 				<archived>Le contenu est archivé</archived>
 				<staged>Le contenu est prêt à publier</staged>
 				<approved>Le contenu est approuvé</approved>
-				<pending>Le contenu est suspendu</pending>
+<pending>Le contenu est en attente d'approbation</pending>
 				<draft>Le contenu est brouillon</draft>
       </changeState>
     </AuthoringPublicationPlugin>
