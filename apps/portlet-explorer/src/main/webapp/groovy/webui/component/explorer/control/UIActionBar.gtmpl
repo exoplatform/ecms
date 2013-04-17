@@ -84,7 +84,7 @@
 						displayTabName = fullTabName.substring(0, 10) + "..."
 					}                                                                                                 %>
 					<li $tabStyle onclick="<%=uicomponent.event('ChangeTab', tab); %>;">
-						<a rel="tooltip" data-placement="bottom" title="$fullTabName" data-toggle="tab" href="#tab1_4">$displayTabName</a>
+						<a data-toggle="tab" href="#tab1_4">$displayTabName</a>
 					</li>                                                                                           <%
 				}/*for tabs loops*/                                                                                   %>
 					<li class="dropdown pull-right listHiddenTabsContainer">
