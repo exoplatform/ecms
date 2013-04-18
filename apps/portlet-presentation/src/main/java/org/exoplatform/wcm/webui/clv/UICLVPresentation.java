@@ -682,74 +682,67 @@ public class UICLVPresentation extends UIContainer {
     String contentEditLink = getEditLink(viewNode, true, false);
     String contentDeleteLink = event("DeleteContent", NodeLocation.getExpressionByNode(viewNode));
     String fastPublishLink = event("FastPublish", NodeLocation.getExpressionByNode(viewNode));
-    String hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClassInner" : "";
+    String hoverClass = Utils.isShowQuickEdit() ? " containerHoverClassInner" : "";
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
     sb.append("<div class=\"" + cssClass + "\" onmouseover=\"this.className  = '" + cssClass + " "
         + hoverClass + "' \" onmouseout=\"this.className = '" + cssClass + "'\" onfocus=\"this.className  = '" + cssClass + " "
         + hoverClass + "' \" onblur=\"this.className = '" + cssClass + "' \">");
     if (Utils.isShowQuickEdit()) {
-      sb.append("  <div class=\"EdittingContent\" style=\" z-index: 1\">");
-      sb.append("    <div class=\"EdittingToolBar \" >");
-      sb.append("      <div class=\"EdittingToolBarL\">");
-      sb.append("        <div class=\"EdittingToolBarC ClearFix\">");
-      if (Utils.isShowDelete(viewNode)) {
-        String strDeleteBundle = "Delete";
-        try {
-          strDeleteBundle = portletRequestContext.getApplicationResourceBundle()
-                                                 .getString("UICLVPresentation.action.delete");
-        } catch (MissingResourceException e) {
-          if (LOG.isWarnEnabled()) {
-            LOG.warn(e.getMessage());
-          }
-        }
-        sb.append("          <div style=\"float: right\">");
-        sb.append("            <a href=\"" + contentDeleteLink + "\" title=\""
-            + strDeleteBundle + "\"class=\"CloseContentIcon\" >");
-        sb.append("              &nbsp;");
-        sb.append("            </a>");
-        sb.append("          </div>");
-      }
+      sb.append("  <div class=\"edittingContent\" style=\" z-index: 5\">");
+      sb.append("    <div class=\"edittingToolBar clearfix\" >");
+			
+      sb.append("    <div class=\"btn-group\" >");
+			
+				if (Utils.isShowDelete(viewNode)) {
+					String strDeleteBundle = "Delete";
+					try {
+						strDeleteBundle = portletRequestContext.getApplicationResourceBundle()
+																									 .getString("UICLVPresentation.action.delete");
+					} catch (MissingResourceException e) {
+						if (LOG.isWarnEnabled()) {
+							LOG.warn(e.getMessage());
+						}
+					}
+					sb.append("          <a class=\"btn\" href=\"" + contentDeleteLink + "\">");
+					sb.append("            <i class=\"uiIconRemove\" ></i>");
+					sb.append("          </a>");
+				}
 
-      if (isShowEdit(viewNode) && !LockUtil.isLocked(viewNode)) {
-        String strEditBundle = "Edit in the Content Explorer";
-        try {
-          strEditBundle = portletRequestContext.getApplicationResourceBundle()
-                                               .getString("UICLVPresentation.action.edit");
-        } catch (MissingResourceException e) {
-          if (LOG.isWarnEnabled()) {
-            LOG.warn(e.getMessage());
-          }
-        }
-        sb.append("          <div style=\"float: right\">");
-        sb.append("            <a onclick = 'eXo.ecm.CLV.addURL(this)' href=\"" + contentEditLink
-            + "\" title=\"" + strEditBundle + "\" class=\"EditContentIcon\" >");
-        sb.append("            &nbsp;");
-        sb.append("            </a>");
-        sb.append("          </div>");
-        if (org.exoplatform.wcm.webui.utils.Utils.isShowFastPublish(viewNode)) {
-          String strFastPublishBundle = "Publish";
-          try {
-            strFastPublishBundle = portletRequestContext.getApplicationResourceBundle()
-                                                 .getString("UICLVPresentation.action.publish");
-          } catch (MissingResourceException e) {
-            if (LOG.isWarnEnabled()) {
-              LOG.warn(e.getMessage());
-            }
-          }
-          sb.append("          <div style=\"float: right\">");
-          sb.append("            <a href=\"" + fastPublishLink + "\" title=\""
-              + strFastPublishBundle + "\"class=\"FastPublishIcon\" >");
-          sb.append("              &nbsp;");
-          sb.append("            </a>");
-          sb.append("          </div>");
-        }
-      } else {
-        sb.append("          <div style=\"float: right\">");
-        sb.append("            <div title=\"lock\" class=\"IconLocked\" >");
-        sb.append("              &nbsp;");
-        sb.append("            </div>");
-        sb.append("          </div>");
-      }
+				if (isShowEdit(viewNode) && !LockUtil.isLocked(viewNode)) {
+					String strEditBundle = "Edit in the Content Explorer";
+					try {
+						strEditBundle = portletRequestContext.getApplicationResourceBundle()
+																								 .getString("UICLVPresentation.action.edit");
+					} catch (MissingResourceException e) {
+						if (LOG.isWarnEnabled()) {
+							LOG.warn(e.getMessage());
+						}
+					}
+					sb.append("          <a class=\"btn\" onclick = 'eXo.ecm.CLV.addURL(this)' href=\"" + contentEditLink + "\">");
+					sb.append("            <i class=\"uiIconEdit\" ></i>");
+					sb.append("          </a>");
+					if (org.exoplatform.wcm.webui.utils.Utils.isShowFastPublish(viewNode)) {
+						String strFastPublishBundle = "Publish";
+						try {
+							strFastPublishBundle = portletRequestContext.getApplicationResourceBundle()
+																									 .getString("UICLVPresentation.action.publish");
+						} catch (MissingResourceException e) {
+							if (LOG.isWarnEnabled()) {
+								LOG.warn(e.getMessage());
+							}
+						}
+						sb.append("          <a class=\"btn\" href=\"" + fastPublishLink + "\">");
+						sb.append("            <i class=\"uiIconEcmsPublish\" ></i>");
+						sb.append("          </a>");
+					}
+				} else {
+					sb.append("          <a class=\"btn\" >");
+					sb.append("            <i class=\"uiIconEcmsLock\" ></i>");
+					sb.append("          </a>");
+				}
+			
+      sb.append("    </div>");
+			
       if (viewNode.hasProperty("publication:currentState")) {
         String state = viewNode.getProperty("publication:currentState").getValue().getString();
         try {
@@ -760,12 +753,11 @@ public class UICLVPresentation extends UIContainer {
             LOG.warn(e.getMessage());
           }
         }
-        sb.append("          <div class=\"EdittingCurrentState\" style=\"float: right\">");
+        sb.append("          <div class=\"edittingCurrentState pull-left\">");
         sb.append("" + state);
         sb.append("          </div>");
       }
-      sb.append("          </div>");
-      sb.append("        </div>");
+
       sb.append("      </div>");
       sb.append("    </div>");
     }
