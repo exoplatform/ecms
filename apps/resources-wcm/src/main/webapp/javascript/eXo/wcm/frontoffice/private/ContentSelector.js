@@ -551,7 +551,7 @@
 			return;
 		} else {		
 	    
-	    if(viewType=="list") {
+			if(viewType=="list") {
 				var tblRWS  = gj(rightWS).find("table")[0];
 				if(tblRWS) {
 					var rowsRWS = gj(tblRWS).find("tr");
@@ -564,7 +564,7 @@
 			} else {
 				var container = gj(rightWS).find('div.actionIconsContainer:first')[0];
 				if(container) gj(container).html("");
-	      else eXo.ecm.ECS.updateHTML(viewType);
+				else eXo.ecm.ECS.updateHTML(viewType);
 			}
 			var container = gj(rightWS).find('div.actionIconsContainer:first')[0];
 			if(container) {
@@ -590,7 +590,7 @@
 				if(size == 0) size = "";
 				else size += '&nbsp;kb';
 	      
-	      if(viewType=="list") {	        
+				if(viewType=="list") {	        
 					var clazz = 'OddItem';
 					var tblRWS  = gj(rightWS).find("table")[0];
 					var clazzItem = eXo.ecm.ECS.getClazzIcon(list[i].getAttribute("nodeType"));
@@ -610,16 +610,29 @@
 				container.style.display = "";
 			}			
 		}	
-		if(i > 9) {
-			var numberRecords = 9;		
-			var viewType = eXo.ecm.ECS.viewType; 
-	    if(viewType=='list') eXo.ecm.Pager = new Pager("ListRecords", numberRecords);
-	    else eXo.ecm.Pager = new Pager("ActionIconsContainer", numberRecords);
-			eXo.ecm.Pager.init(); 
-			eXo.ecm.Pager.showPageNav('pageNavPosition');
-			eXo.ecm.Pager.showPage(1);	
-		} else {
-			gj("#pageNavPosition").html("");
+		if(viewType=="list") {
+			if(i > 9) {
+				var numberRecords = 9;		
+				var viewType = eXo.ecm.ECS.viewType; 
+				eXo.ecm.Pager = new Pager("ListRecords", numberRecords);
+				eXo.ecm.Pager.init(); 
+				eXo.ecm.Pager.showPageNav('pageNavPosition');
+				eXo.ecm.Pager.showPage(1);	
+			} else {
+				gj("#pageNavPosition").html("");
+			}
+		}
+		else {
+			if(i > 8) {
+				var numberRecords = 8;		
+				var viewType = eXo.ecm.ECS.viewType; 
+				eXo.ecm.Pager = new Pager("ActionIconsContainer", numberRecords);
+				eXo.ecm.Pager.init(); 
+				eXo.ecm.Pager.showPageNav('pageNavPosition');
+				eXo.ecm.Pager.showPage(1);	
+			} else {
+				gj("#pageNavPosition").html("");
+			}
 		}	
 	};
 	
@@ -1322,5 +1335,6 @@
 		ECS : eXo.ecm.ECS
 	};
 })(gj, wcm_utils);
+
 
 
