@@ -51,6 +51,8 @@ import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.pdfviewer.ObjectKey;
+import org.exoplatform.services.pdfviewer.PDFViewerService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.icepdf.core.exceptions.PDFException;
@@ -82,7 +84,12 @@ public class PDFViewerRESTService implements ResourceContainer {
                               JodConverterService jodConverter) throws Exception {
     repositoryService_ = repositoryService;
     jodConverter_ = jodConverter;
-    pdfCache = caService.getCacheInstance(PDFViewerRESTService.class.getName());
+    PDFViewerService pdfViewerService = WCMCoreUtils.getService(PDFViewerService.class);
+    if(pdfViewerService != null){
+      pdfCache = pdfViewerService.getCache();
+    }else{
+      pdfCache = caService.getCacheInstance(PDFViewerRESTService.class.getName());
+    }
   }
 
   /**
@@ -365,50 +372,5 @@ public class PDFViewerRESTService implements ResourceContainer {
     return (name != null && name.length() > MAX_NAME_LENGTH) ? name.substring(0, MAX_NAME_LENGTH) : name;
   }
 
-  /**
-   * Create key for cache. When key object is collected by GC, value (if is file) will be delete.
-   */
-  private class ObjectKey implements Serializable {
-    private static final long serialVersionUID = 1L;
-    String key;
-    private ObjectKey(String key) {
-      this.key = key;
-    }
-    @Override
-    public String toString() {
-      return key;
-    }
-
-/*
-    @Override
-    public void finalize() {
-      String path = (String) pdfCache.get(new ObjectKey(key));
-      File f = new File(path);
-      if (f.exists()) {
-        f.delete();
-      }
-    }
-      PM Comment : I removed this method because it removes the file from the FS too fast
-      Because the ObjectKey has no real reference in the Exo Cache and is then removed by the GC just after creation.
-*/
-
-    public String getKey() {
-      return key;
-    }
-
-    @Override
-    public int hashCode() {
-      return key == null ? -1 : key.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object otherKey) {
-      if (otherKey != null && ObjectKey.class.isInstance(otherKey)
-          && (key != null) && (key.equals(((ObjectKey) (otherKey)).getKey()))) {
-        return true;
-      }
-      return false;
-    }
-  }
 
 }
