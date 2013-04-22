@@ -684,7 +684,7 @@ public class Utils {
     String strAction = actionsb.toString();
 
     sb.append("<div class=\"InlineEditing\">\n");
-    sb.append("\n<div id=\"").append(showBlockId).append("\" Class=\"").append(cssClass).append("\"");
+    sb.append("\n<div rel=\"tooltip\" data-placement=\"bottom\" id=\"").append(showBlockId).append("\" Class=\"").append(cssClass).append("\"");
     sb.append("title=\"").append(strSuggestion).append("\"");
     sb.append(" onDblClick=\"InlineEditor.presentationSwitchBlock('").append(showBlockId).
        append("', '").append(editBlockEditorID).append("');\"");
@@ -702,23 +702,23 @@ public class Utils {
        append("\" name=\"").append(currentValueID).append("\">").append(currentValue).append("</DIV>");
 
     if (bDirection!=null && bDirection.equals(LEFT2RIGHT)) {
-      sb.append("\t\t<a href=\"#\" class =\"AcceptButton\" style=\"float:left\" onclick=\"")
+      sb.append("\t\t<a href=\"#\" rel=\"tooltip\" data-placement=\"bottom\" class =\"AcceptButton\" style=\"float:left\" onclick=\"")
         .append(strAction)
         .append("\" title=\"" + acceptButton + "\">&nbsp;</a>\n");
-      sb.append("\t\t<a href=\"#\" class =\"CancelButton\" style=\"float:left\" ").
+      sb.append("\t\t<a href=\"#\" rel=\"tooltip\" data-placement=\"bottom\" class =\"CancelButton\" style=\"float:left\" ").
          append("onClick=\"InlineEditor.presentationSwitchBlock('");
       sb.append(editBlockEditorID)
         .append("', '")
         .append(showBlockId)
         .append("');\" title=\"" + cancelButton + "\">&nbsp;</a>\n");
     } else {
-      sb.append("\t\t<a href=\"#\" class =\"CancelButton\" ")
+      sb.append("\t\t<a href=\"#\" rel=\"tooltip\" data-placement=\"bottom\" class =\"CancelButton\" ")
         .append("onClick=\"InlineEditor.presentationSwitchBlock('");
       sb.append(editBlockEditorID)
         .append("', '")
         .append(showBlockId)
         .append("');\" title=\"" + cancelButton + "\">&nbsp;</a>\n");
-      sb.append("\t\t<a href=\"#\" class =\"AcceptButton\" onclick=\"")
+      sb.append("\t\t<a href=\"#\" rel=\"tooltip\" data-placement=\"bottom\" class =\"AcceptButton\" onclick=\"")
         .append(strAction)
         .append("\" title=\"" + acceptButton + "\">&nbsp;</a>\n");
     }
