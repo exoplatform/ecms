@@ -29,6 +29,7 @@ import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.extensions.publication.PublicationManager;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -80,7 +81,8 @@ public class UIDashboardForm extends UIContainer {
     List<Node> nodes = new ArrayList<Node>();
     List<Node> temp = new ArrayList<Node>();
     try {
-      nodes = manager.getContents(fromstate, tostate, date, user, lang, "collaboration");
+      nodes = manager.getContents(fromstate, tostate, date, user, lang, 
+              WCMCoreUtils.getRepository().getConfiguration().getDefaultWorkspaceName());
       Set<String> uuidList = new HashSet<String>();
       for(Node node : nodes) {
         String currentState = null;
@@ -151,8 +153,9 @@ public class UIDashboardForm extends UIContainer {
       PortalRequestContext context = Util.getPortalRequestContext();
       String path = event.getRequestContext().getRequestParameter(OBJECTID);
       HashMap<String, String> map = new HashMap<String, String>();
+      ManageDriveService driveService = WCMCoreUtils.getService(ManageDriveService.class);
       map.put("repository", "repository");
-      map.put("drive", "collaboration");
+      map.put("drive", driveService.getDriveOfDefaultWorkspace());
       map.put("path", path);
       context.setAttribute("jcrexplorer-show-document", map);
       Utils.updatePortal((PortletRequestContext) event.getRequestContext());
