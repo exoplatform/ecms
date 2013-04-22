@@ -156,18 +156,22 @@
               strFirstInput = strFirstInput.substr(0, strFirstInput.lastIndexOf(">") + 1);
               strFirstInput = strFirstInput.trim();
               if (rdoContexttual.checked) {
-                document.getElementById('UISCVPreferences').UISCVParameterInputBox.removeAttribute('readonly',0);
+                document.getElementById('UISCVPreferences').UISCVParameterInputBox.removeAttribute('readonly');
+                document.getElementById('UISCVPreferences').UISCVParameterInputBox.removeAttribute('disabled');
                 inputSet.innerHTML =  strFirstInput + strLastImgInput;
               }else  {
                 document.getElementById('UISCVParameterInputBox').setAttribute('readonly',true);
+                document.getElementById('UISCVParameterInputBox').setAttribute('disabled',true);
                 inputSet.innerHTML =  strFirstInput + "*"  + strLastImgInput;
               }
             }
             if (document.getElementById('<%=uicomponent.id%>').<%=uicomponent.CONTEXTUAL_SELECT_RADIO_BOX%>[0].checked) {
-              document.getElementById('<%=uicomponent.id%>').<%=uicomponent.PARAMETER_INPUT_BOX%>.removeAttribute('readonly',0);
+              document.getElementById('<%=uicomponent.PARAMETER_INPUT_BOX%>').removeAttribute('readonly');
+              document.getElementById('<%=uicomponent.PARAMETER_INPUT_BOX%>').removeAttribute('disabled');
               document.getElementById('UISCVShowAdvanceOption').style.display='none';
             }else {
               document.getElementById('<%=uicomponent.PARAMETER_INPUT_BOX%>').setAttribute('readonly',true);
+              document.getElementById('<%=uicomponent.PARAMETER_INPUT_BOX%>').setAttribute('disabled',true);
               document.getElementById('UISCVContextualSelectionAdvance').style.display='none';
             }
             contextualProcessing(document.getElementById('ContexttualContainer$portletId'));

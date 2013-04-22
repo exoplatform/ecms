@@ -116,6 +116,7 @@ public class UISCVPreferences extends UIForm implements UISelectable{
     String strNodeName = getNodeNameByPreferences();
     txtContentPath = new UIFormStringInput(CONTENT_PATH_INPUT, CONTENT_PATH_INPUT, strNodeName);
     txtContentPath.setReadOnly(true);
+    txtContentPath.setDisabled(true);
 
     UIFormInputSetWithAction itemPathInputSet = new UIFormInputSetWithAction(ITEM_PATH_FORM_INPUT_SET);
     itemPathInputSet.setActionInfo(CONTENT_PATH_INPUT, new String[] { "SelectFolderPath" }) ;
@@ -175,6 +176,7 @@ public class UISCVPreferences extends UIForm implements UISelectable{
     txtPrintPage = new UIFormStringInput(PRINT_VIEW_PAGE_INPUT, PRINT_VIEW_PAGE_INPUT, strPrintPageName);
     txtPrintPage.setValue(strPrintPageName);
     txtPrintPage.setReadOnly(true);
+    txtPrintPage.setDisabled(true);
     targetPageInputSet.setActionInfo(PRINT_VIEW_PAGE_INPUT, new String[] {"SelectTargetPage"}) ;
     targetPageInputSet.addUIFormInput(txtPrintPage);
 

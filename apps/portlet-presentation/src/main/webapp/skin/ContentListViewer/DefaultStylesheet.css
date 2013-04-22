@@ -73,6 +73,13 @@
 	width:220px;
 }
 
+.UICLVPortlet .UIFormInputSetWithAction input.disabled,.HorizontalLayout .UICLVPortlet .UIFormInputSetWithAction input.disabled,
+.UICLVPortlet .UIFormInputSetWithAction input[disabled],.HorizontalLayout .UICLVPortlet .UIFormInputSetWithAction input[disabled]
+{
+    cursor: default;
+    background: #ECEAE9;
+}
+
 .UICLVPortlet .UICLVConfig .FieldLabel {
   width: 125px;
 }
@@ -96,6 +103,11 @@
 .UICLVPortlet .UICLVConfig .fieldsetPreferences{
 	margin: 10px;
 	border: 1px solid #b7b7b7;
+}
+
+.UICLVPortlet .UICLVConfig .fieldsetPreferences input.disabled , .UICLVPortlet .UICLVConfig .fieldsetPreferences input[disabled] {
+    cursor: default;
+    background: #ECEAE9;
 }
 
 .UICLVPortlet .UICLVConfig .UIFormGrid {

@@ -124,8 +124,10 @@ ContentListViewer.prototype.checkContextualFolderInput = function() {
 	disableInput.setAttribute("onmouseup", "eXo.ecm.CLV.disableClvInput(this)");
 	if (enableInput.checked) {
 		clvInput.removeAttribute('readonly');
+    clvInput.removeAttribute('disabled');
 	} else {
 		clvInput.setAttribute('readonly', '');
+    clvInput.setAttribute('disabled','');
 	}
 };
 
@@ -134,6 +136,7 @@ ContentListViewer.prototype.enableClvInput = function(obj){
 	var trClv = eXo.core.DOMUtil.findNextElementByTagName(trContextual, "tr");
 	var clvInput = eXo.core.DOMUtil.findDescendantsByTagName(trClv, "input")[0];
 	clvInput.removeAttribute('readonly');
+  clvInput.removeAttribute('disabled');
 };
 
 ContentListViewer.prototype.disableClvInput = function(obj){
@@ -141,6 +144,7 @@ ContentListViewer.prototype.disableClvInput = function(obj){
 	var trClv = eXo.core.DOMUtil.findNextElementByTagName(trContextual, "tr");
 	var clvInput = eXo.core.DOMUtil.findDescendantsByTagName(trClv, "input")[0];
 	clvInput.setAttribute('readonly', '');
+  clvInput.setAttribute('disabled','');
 };
 
 ContentListViewer.prototype.addURL = function(aDiv) {
