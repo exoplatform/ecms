@@ -63,7 +63,7 @@
         <december>Décembre</december>
         <event>Rendez-vous</event>
         <subject>Objet</subject>
-        <location>Emplacement</location>
+        <location>Dans</location>
         <comment>Commentaire</comment>
         <description>Description</description>
       </label>
@@ -167,7 +167,7 @@
         <explicit>Explicite</explicit>
         <category>Catégorie</category>
         <keyword>Mots clés</keyword>
-        <publish-date>Date de publication</publish-date>
+        <publish-date>Date de Publication</publish-date>
         <mime-type>Type Mime</mime-type>
         <length>Longueur</length>
         <description>Description</description>
@@ -229,7 +229,7 @@
         <lifecycle>Cycle de vie</lifecycle>
         <description>Description</description>
         <validator>Validateur</validator>
-        <to-workspace>Espace de travail</to-workspace>
+        <to-workspace>Espace de stockage</to-workspace>
         <at-location>Emplacement</at-location>
       </label>
     </view>
@@ -243,7 +243,7 @@
         <name>Nom</name>
         <lifecycle>Cycle de vie</lifecycle>
         <description>Description</description>
-        <to-workspace>Espace de travail</to-workspace>
+        <to-workspace>Espace de stockage</to-workspace>
         <at-location>Emplacement</at-location>
       </label>
     </view>
@@ -260,7 +260,7 @@
         <calendar-path>Emplacement du calendrier</calendar-path>
         <description>Description</description>
         <query>Requête</query>
-        <repository>Dépôt de données</repository>
+        <repository>Entrepôt</repository>
       </label>
     </view>
   </Icalendar>
@@ -309,7 +309,7 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>ND</not-avaliable>
+        <not-avaliable/>
         <title>Titre</title>
         <creator>Créateur</creator>
         <subject>Sujet</subject>
@@ -327,7 +327,7 @@
         <languages>Langues</languages>
       </label>
       <action>
-        <add-edit>Ajouter/Modifier</add-edit>
+        <add-edit>Modifier</add-edit>
         <cancel>Annuler</cancel>
       </action>
       <tooltip>
@@ -517,7 +517,7 @@
         <backup-path>Emplacement de la sauvegarde</backup-path>
         <trash-workspace>Espace de la corbeille</trash-workspace>
         <trash-path>Emplacement de la corbeille</trash-path>
-								<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+<affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
       </label>
     </view>
   </ContentPublishing>
@@ -526,8 +526,8 @@
    <view>
      <label> 
 							<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+        <nodetypes>Types de noeud</nodetypes>
+        <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
               <nodeTypeName>Types de noeuds</nodeTypeName>							
      </label> 
    </view>
@@ -537,9 +537,9 @@
    <view>
      <label> 
 							<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-              <nodeTypeName>Types de noeuds</nodeTypeName>							
+        <nodetypes>Types de noeud</nodetypes>
+        <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
+        <nodeTypeName>Types de noeud</nodeTypeName>
      </label> 
    </view>
   </ScriptAction>
@@ -548,9 +548,9 @@
    <view>
      <label>
 							<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-              <nodeTypeName>Types de noeuds</nodeTypeName>							
+        <nodetypes>Types de noeud</nodetypes>
+        <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
+        <nodeTypeName>Types de noeud</nodeTypeName>
      </label> 
    </view>
   </Getmail>
@@ -559,9 +559,9 @@
    <view>
      <label> 
 							<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-              <nodeTypeName>Types de noeuds</nodeTypeName>							
+        <nodetypes>Types de noeud</nodetypes>
+        <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
+        <nodeTypeName>Types de noeud</nodeTypeName>
      </label> 
    </view>
   </Rss>
@@ -570,9 +570,9 @@
    <view>
      <label>
 							<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-              <nodeTypeName>Types de noeuds</nodeTypeName>							
+        <nodetypes>Types de noeud</nodetypes>
+        <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
+        <nodeTypeName>Types de noeud</nodeTypeName>
      </label> 
    </view>
   </AddMetadata>
@@ -581,9 +581,9 @@
    <view>
      <label>
 							<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-              <nodeTypeName>Types de noeuds</nodeTypeName>							
+        <nodetypes>Types de noeud</nodetypes>
+        <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
+        <nodeTypeName>Types de noeud</nodeTypeName>
      </label> 
    </view>
   </ReloadAction>
@@ -592,9 +592,9 @@
    <view>
      <label> 
 							<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-              <nodeTypeName>Types de noeuds</nodeTypeName>							
+        <nodetypes>Types de noeud</nodetypes>
+        <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
+        <nodeTypeName>Types de noeud</nodeTypeName>
      </label> 
    </view>
   </Transform>
@@ -603,9 +603,9 @@
    <view>
      <label>
 							<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-              <nodeTypeName>Types de noeuds</nodeTypeName>							
+        <nodetypes>Types de noeud</nodetypes> 
+        <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
+        <nodeTypeName>Types de noeud</nodeTypeName>
      </label> 
    </view>
   </EnableVersioning>
@@ -614,9 +614,9 @@
    <view>
      <label>
      		<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-              <nodeTypeName>Types de noeuds</nodeTypeName>
+        <nodetypes>Types de noeud</nodetypes>
+        <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
+        <nodeTypeName>Types de noeud</nodeTypeName>
      </label> 
    </view>
   </AutoVersioning>

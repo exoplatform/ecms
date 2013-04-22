@@ -12,7 +12,7 @@
     </header>
     <action />
     <info>
-      <child-not-found>Fils non trouvé!</child-not-found>
+      <child-not-found>Pas de sous-noeud.</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -45,19 +45,19 @@
   <SelectUserOrGroup>
     <title>
       <UIPermissionUser>Sélectionner un Utilisateur</UIPermissionUser>
-      <UIPermissionMembership>Sélectionner un Rôle</UIPermissionMembership>
+      <UIPermissionMembership>Rôle</UIPermissionMembership>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>
     <label>
       <selectUser>Sélectionner un Utilisateur</selectUser>
-      <selectGroup>Parcourir et Sélectionner un Groupe</selectGroup>
+      <selectGroup>Groupe</selectGroup>
     </label>
   </UIPermissionUser>
   <UIPermissionMembership>
     <label>
-      <selectUser>Sélectionner un Rôle</selectUser>
-      <selectGroup>Parcourir et Sélectionner un Groupe</selectGroup>
+      <selectUser>Rôle</selectUser>
+      <selectGroup>Groupe</selectGroup>
     </label>
   </UIPermissionMembership>
 </bundle>

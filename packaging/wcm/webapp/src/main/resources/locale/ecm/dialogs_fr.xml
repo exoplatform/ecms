@@ -46,7 +46,7 @@
 	    <processAccession>Processus d'acquisition</processAccession>
 	    <accessionBlockSize>Taille du bloc d'acquisition</accessionBlockSize>
 	    <processDestruction>Processus de destruction</processDestruction>
-	    <location>Emplacement</location>
+    <location>Dans</location>
 	    <LinkURL>URL</LinkURL>
     </label>
   </UIDocumentForm>
@@ -83,7 +83,7 @@
         <categories>Catégories</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
         <content>#{word.content}</content>
-        <re-upload>Un fichier existe déjà. Vous pouvez le supprimer et télécharger un autre fichier à partir d'ici.</re-upload>
+        <re-upload>Un fichier existe déjà. Vous pouvez le supprimer et envoyer un autre fichier à partir d'ici.</re-upload>
       </label>
     </dialog>
   </File>
@@ -120,7 +120,7 @@
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <description>#{word.description}</description>
-        <to-workspace>Espace de travail</to-workspace>
+        <to-workspace>Espace de stockage</to-workspace>
         <with-path>Emplacement</with-path>
       </label>
     </dialog>
@@ -220,7 +220,7 @@
   <ElementSet>
     <dialog>
       <label>
-        <title>#{word.title}</title>
+        <title>Titre</title>
         <creator>Créateur</creator>
         <subject>#{word.subject}</subject>
         <source>Source</source>
@@ -337,7 +337,7 @@
   <Move>
     <dialog>
       <label>
-        <destination-workpsace>Espace de Travail Cible</destination-workpsace>
+        <destination-workpsace>Espace de stockage cible</destination-workpsace>
         <destination-path>Emplacement</destination-path>
         <primary-type>Type Primaire</primary-type>
         <mixin-types>Types Mixin</mixin-types>
@@ -493,7 +493,7 @@
         <name>Nom</name>
         <lifecycle>Cycle de Vie</lifecycle>
         <homePath>Chemin Racine</homePath>
-        <targetWorkspace>Espace de Travail Cible</targetWorkspace>
+        <targetWorkspace>Espace de stockage cible</targetWorkspace>
         <targetPath>Chemin Cible</targetPath>
       </label>
     </dialog>
@@ -548,8 +548,8 @@
    <dialog>
      <label>
 							<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+        <nodetypes>Types de noeud</nodetypes>
+        <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
      </label>
    </dialog>
   </ScriptAction>
@@ -558,8 +558,8 @@
    <dialog>
      <label>
      		<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+        <nodetypes>Types de noeud</nodetypes>
+        <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
      </label>
    </dialog>
   </Getmail>
@@ -568,7 +568,7 @@
    <dialog>
      <label>
 							<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
+        <nodetypes>Types de noeud</nodetypes>
         <affectedNodeTypeNames>Types de Noeud Affectés</affectedNodeTypeNames>
      </label>
    </dialog>
@@ -578,8 +578,8 @@
    <dialog>
      <label>
      		<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes>
-							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+        <nodetypes>Types de noeud</nodetypes>
+        <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
      </label>
    </dialog>
   </AddMetadata>
@@ -644,7 +644,7 @@
         <backup-path>Emplacement de la sauvegarde</backup-path>
         <trash-workspace>Espace de la corbeille</trash-workspace>
         <trash-path>Emplacement de la corbeille</trash-path>
-								<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+<affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
       </label>
     </dialog>
   </ContentPublishing>

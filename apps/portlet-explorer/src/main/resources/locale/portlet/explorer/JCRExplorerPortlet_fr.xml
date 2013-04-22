@@ -29,11 +29,11 @@
   -->
   <UIVoteForm>
     <title>
-      <normal>Normal/Cliquez pour voter</normal>
-      <good>Bon/Cliquez pour voter</good>
-      <verygood>Très Bon/Cliquez pour voter</verygood>
-      <excellent>Excellent/Cliquez pour voter</excellent>
-      <best>Meilleur/Cliquez pour voter</best>
+      <normal>Mauvais</normal>
+      <good>Pas Bon</good>
+      <verygood>Moyen</verygood>
+      <excellent>Bon</excellent>
+      <best>Excellent</best>
       <no-value>pas encore de valeur</no-value>
     </title>
     <label>
@@ -58,11 +58,11 @@
   <UIDrivesBrowser>
     <title>
       File Explorer Main Drives
-      <repository>Lecteurs de l'espace de travail</repository>
-      <repositoryList>Dépôts de données</repositoryList>
+      <repository>Lecteurs de l'entrepôt</repository>
+      <repositoryList>Entrepôt</repositoryList>
       <PersonalDrives>Lecteurs Personnels</PersonalDrives>
       <GroupDrives>Lecteurs de Groupe</GroupDrives>
-      <GeneralDrives>Lecteurs principaux</GeneralDrives>
+      <GeneralDrives>Lecteurs Principaux</GeneralDrives>
     </title>
     <icon>
       <workspace>
@@ -75,7 +75,7 @@
     <msg>
       <no-view-found>Il n'y a pas de vue disponible par rapport à vos droits d'accès sur le lecteur '{0}'</no-view-found>
       <access-denied>Accès interdit. Vous n'avez peut-être pas les droits suffisants pour accéder à l'espace de stockage du lecteur '{0}'.</access-denied>
-      <empty-drives>Il n'y a pas de lecteur dans ce dépôt de données ou vous n'avez pas les droits requis pour accéder à au moins un lecteur de ce dépôt de données</empty-drives>
+      <empty-drives>Entrepôt</empty-drives>
       <workspace-not-exist>Le lecteur '{0}' a été sauvegardé dans un espace de stockage inconnu. Veuillez reconfigurer le lecteur.</workspace-not-exist>
     </msg>
   </UIDrivesBrowser>
@@ -104,11 +104,11 @@
       <Close>Fermer</Close>
       <TagExplorer>Nuage de Tags</TagExplorer>
       <Clipboard>Presse-Papier</Clipboard>
-      <SavedSearches>Recherches Sauvées</SavedSearches>
+      <SavedSearches>Recherches Enregistrées</SavedSearches>
     </label>
     <title>
-      <Control>Barre latérale</Control>
-      <Close>Fermer la barre latérale</Close>
+      <Control>Barre Latérale</Control>
+      <Close>Fermer la Barre</Close>
     </title>
   </UISideBar>
   <!--
@@ -120,9 +120,9 @@
     <label>
       <driveWorkspace>Espace de Stockage:</driveWorkspace>
       <backToJCR>Retour aux Lecteurs</backToJCR>
-      <setUpBrowser>Définissez vos préférences de navigation</setUpBrowser>
+      <setUpBrowser>Préférences d'Affichage</setUpBrowser>
       <refesh>Actualiser</refesh>
-      <saveSession>Enregistrer la Session</saveSession>
+      <saveSession>Enregistrer</saveSession>
       <currentDrive>Lecteur Courant</currentDrive>
       <selectView>Choisir une vue</selectView>
       <showSideBar>Afficher la barre latérale</showSideBar>
@@ -168,7 +168,7 @@
       <languages-list>Langues</languages-list>
       <relation-list>Relations</relation-list>
       <references-list>Références</references-list>
-      <no-related-document>Aucun document connexe</no-related-document>
+      <no-related-document>Aucun document</no-related-document>
       <related-document>Documents liés</related-document>
     </label>
   </UIViewRelationList>
@@ -180,13 +180,13 @@
   <UIPreferencesForm>
     <title>Préférences</title>
     <label>
-      <enableStructure>Activer le mode Structure:</enableStructure>
-      <showSideBar>Afficher le panneau latéral:</showSideBar>
-      <showHiddenNode>Afficher les éléments cachés:</showHiddenNode>
-      <showNonDocument>Afficher les Noeuds autres que les Documents</showNonDocument>
-      <showRefDocuments>Afficher les documents référencés:</showRefDocuments>
+      <enableStructure>Mode Structure:</enableStructure>
+      <showSideBar>Panneau latéral:</showSideBar>
+      <showHiddenNode>Montrer les noeuds cachés</showHiddenNode>
+      <showNonDocument>Montrer tout type de noeud</showNonDocument>
+      <showRefDocuments>Montrer les documents référencés</showRefDocuments>
       <showItemsByUserInTimeline>Afficher les éléments chronologiquement par utilisateur</showItemsByUserInTimeline>
-      <enableDragAndDrop>Activer le glisser-déposer:</enableDragAndDrop>
+      <enableDragAndDrop>Glisser-déposer:</enableDragAndDrop>
       <sortBy>Trier par:</sortBy>
       <order>Ordre</order>
       <nodesPerPage>Noeuds par page:</nodesPerPage>
@@ -239,9 +239,9 @@
   <UIPopupWindow>
     <title>
       <UIRenameForm>Renommer</UIRenameForm>
-      <UIActionContainer>Editer</UIActionContainer>
-      <UIFolderForm>Nouveau répertoire</UIFolderForm>
-      <UIUploadManager>Uploader un fichier</UIUploadManager>
+      <UIActionContainer>Modifier</UIActionContainer>
+      <UIFolderForm>Nouveau Dossier</UIFolderForm>
+      <UIUploadManager>Transférer un fichier</UIUploadManager>
       <UITicketForm>Créer un ticket</UITicketForm>
       <UIReferencesList>Liste des références</UIReferencesList>
       <UIExportNode>Exporter</UIExportNode>
@@ -254,12 +254,12 @@
       <UIPropertiesManager>Gestion des Propriétés</UIPropertiesManager>
       <UIECMSearch>Recherche Avancée</UIECMSearch>
       <UISavedQuery>Liste des Requêtes Enregistrées</UISavedQuery>
-      <UIWatchDocumentForm>Surveiller un Document</UIWatchDocumentForm>
+      <UIWatchDocumentForm>Suivre un Document</UIWatchDocumentForm>
       <UIActionManager>Gestion des Actions</UIActionManager>
       <UIDocumentForm>Modification d'un Document</UIDocumentForm>
       <UIDocumentFormController>Nouveau document</UIDocumentFormController>
       <EditFormController>Modifier le Document</EditFormController>
-      <UIRelationManager>Ajouter une Relation</UIRelationManager>
+      <UIRelationManager>Relations</UIRelationManager>
       <UICategoryManager>Ajouter une Catégorie</UICategoryManager>
       <UIImportNode>Importer</UIImportNode>
       <UIViewMetadataManager>Métadonnées</UIViewMetadataManager>
@@ -278,7 +278,7 @@
       <UIMultiLanguageManager>Contenu Multilingue</UIMultiLanguageManager>
       <UIThumbnailForm>Ajouter une Vignette</UIThumbnailForm>
       <UIAllItemsPreferenceForm>Préférences</UIAllItemsPreferenceForm>
-      <UISelectRestorePath>Choisir le Chemin de rRstauration</UISelectRestorePath>
+      <UISelectRestorePath>Choisir le Chemin de Restauration</UISelectRestorePath>
       <UISEOForm>Gérer SEO</UISEOForm>
       <UISEOToolbarForm>Gérer SEO</UISEOToolbarForm>
     </title>
@@ -293,11 +293,11 @@
   #########################################################################################
   -->
   <UIResourceForm>
-    <title>Editer le Contenu du Fichier</title>
+    <title>Modifier l'Entrepôt</title>
     <label>
       <name>Nom</name>
       <textToModify>Texte à modifier</textToModify>
-      <fileToUpload>Uploader un nouveau contenu pour ce document (doit avoir le même mime-type)</fileToUpload>
+      <fileToUpload>Envoyer un nouveau contenu pour ce document (doit avoir le même mime-type)</fileToUpload>
     </label>
   </UIResourceForm>
   <!--
@@ -307,14 +307,14 @@
   -->
   <UIActionBar>
     <tooltip>
-      <AddFolder>Nouveau Répertoire</AddFolder>
+      <AddFolder>Nouveau Dossier</AddFolder>
       <AddDocument>Nouveau Contenu</AddDocument>
       <EditDocument>Modifier</EditDocument>
-      <Upload>Uploader</Upload>
+      <Upload>Ajouter des fichiers</Upload>
       <Paste>Coller</Paste>
       <Search>Chercher</Search>
       <CreateTicket>Nouveau Ticket</CreateTicket>
-      <WatchDocument>S'abonner/Se désabonner</WatchDocument>
+      <WatchDocument>Suivre</WatchDocument>
       <TaggingDocument>Tagguer</TaggingDocument>
       <Vote>Voter</Vote>
       <Comment>Commenter</Comment>
@@ -335,7 +335,7 @@
       <ViewProperties>Propriétés</ViewProperties>
       <ViewMetadatas>Métadonnées</ViewMetadatas>
       <ViewRelations>Montrer/Cacher les Relations</ViewRelations>
-      <ShowJCRStructure>Monter/Cacher la Ctructure</ShowJCRStructure>
+      <ShowJCRStructure>Monter/Cacher la Structure</ShowJCRStructure>
     </tooltip>
     <msg>
       <cannot-action-in-rootnode>Action interdite sur le noeud racine.</cannot-action-in-rootnode>
@@ -382,7 +382,7 @@
       <SavedQueries>Requêtes Sauvegardées</SavedQueries>
       <ShowAllOwnedByUser>Afficher tous les éléments</ShowAllOwnedByUser>
       <ShowAllFavourite>Afficher tous les éléments favoris</ShowAllFavourite>
-			<ShowAllHidden>Afficher tous les objets cachés</ShowAllHidden>
+      <ShowAllHidden>Afficher tous les éléments cachés</ShowAllHidden>
       <ShowAllFromTrash>Afficher tous les éléments de la corbeille</ShowAllFromTrash>
     </title>
   </UIActionBar>
@@ -414,14 +414,14 @@
       <is-checked-in>Vous devez effectuer un check out sur ce noeud avant de pouvoir le renommer.</is-checked-in>
       <is-checked-in-lock>Vous devez effectuer un check out sur ce noeud avant de pouvoir le vérrouiller.</is-checked-in-lock>
       <cant-lock>Vous devez déverrouiller les fils avant de pouvoir verrouiller le parent!</cant-lock>
-      <node-locked>Le document {0} (ou le répertoire parent) est verrouillé.</node-locked>
+      <node-locked>Le document {0} (ou le dossier parent) est verrouillé.</node-locked>
       <can-not-delete>Vous devez fermer le document avant de pouvoir le supprimer.</can-not-delete>
       <can-not-delete-version>Suppression de ce noeud impossible, il est versioné.</can-not-delete-version>
       <not-support>Vous ne pouvez pas supprimer le noeud sélectionné.</not-support>
       <current-node-not-allow-paste>Impossible de coller un noeud de ce type ici.</current-node-not-allow-paste>
       <copied-node-in-versioning>Impossible de copier ce noeud (il est versionné)</copied-node-in-versioning>
-      <parent-node-locked>Impossible de déverrouiller ce noeud '{0}', le répertoire parent est verrouillé.</parent-node-locked>
-      <this-node-locked-by-parent>Ce noeud est verrouillé par son répertoire parent.</this-node-locked-by-parent>
+      <parent-node-locked>Impossible de déverrouiller ce noeud '{0}', le dossier parent est verrouillé.</parent-node-locked>
+      <this-node-locked-by-parent>Ce noeud est verrouillé par son dossier parent.</this-node-locked-by-parent>
       <paste-node-same-name>Copie impossible, un document du même nom existe déjà.</paste-node-same-name>
       <has-not-add-permission>Vous n'avez pas les droits suffisants pour ajouter un noeud.</has-not-add-permission>
       <node-cutting>Le noeud a été coupé. Impossible de coller ici.</node-cutting>
@@ -441,25 +441,25 @@
   <UIFolderForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>Créer dossier</Save>
+      <Save>Créer le Dossier</Save>
     </action>
     <label>
       <titleTextBox>Nom du dossier:</titleTextBox>
-      <customTypeCheckBox>Utiliser un type de dossier personalisé</customTypeCheckBox>
+      <customTypeCheckBox>Dossier spécialisé</customTypeCheckBox>
     </label>
-    <title>Ajouter/Editer un répertoire</title>
+    <title>Ajouter/Modifier un Dossier</title>
     <msg>
       <addFolder-successful>'{0}' ajouté avec succès</addFolder-successful>
-      <name-invalid>Entrez un nom de répertoire!</name-invalid>
+      <name-invalid>Entrez un nom de dossier.</name-invalid>
       <title-invalid>Veuillez entrer le titre du dossier!</title-invalid>
       <name-not-allowed>Ce nom n'est pas autorisé.</name-not-allowed>
       <fileName-error>Nom de fichier invalide</fileName-error>
       <constraint-violation>Le noeud courant n'autorise pas l'ajout d'un noeud du type '{0}'</constraint-violation>
       <repository-exception>Une erreur s'est produite. Veuillez contacter votre administrateur pour plus de détails.</repository-exception>
-      <repository-exception-permission>Vous n'avez pas le droit d'ajouter un répertoire à ce noeud</repository-exception-permission>
-      <numberformat-exception>Ce répertoire ne peut être sauvegardé. Vous devez saisir un format numérique</numberformat-exception>
+      <repository-exception-permission>Vous n'avez pas le droit d'ajouter un dossier à ce noeud.</repository-exception-permission>
+      <numberformat-exception>Ce dossier ne peut être sauvegardé. Vous devez saisir un format numérique</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>Impossible de sauvegarder car un autre noeud du même nom existe déjà</not-allow-sameNameSibling>
+      <not-allow-sameNameSibling>Impossible d'enregistrer car un autre noeud du même nom existe déjà</not-allow-sameNameSibling>
       <ntFolder-not-avaiable>Vous devez sélectionner un type de dossier personnalisé</ntFolder-not-avaiable>
     </msg>
     <help>
@@ -597,7 +597,7 @@
     <event>
       <Lock>Verrouiller</Lock>
       <Unlock>Déverrouiller</Unlock>
-      <EditDocument>Editer</EditDocument>
+      <EditDocument>Modifier</EditDocument>
       <Copy>Copier</Copy>
       <Rename>Renommer</Rename>
       <Delete>Supprimer</Delete>
@@ -616,9 +616,9 @@
       <getmail>Vérifier les emails</getmail>
       <autoversion>Versioning automatique</autoversion>
       <Custom>Personnaliser</Custom>
-      <AddFolder>Nouveau répertoire</AddFolder>
+      <AddFolder>Nouveau Dossier</AddFolder>
       <AddDocument>Nouveau contenu</AddDocument>
-      <Upload>Uploader des fichiers</Upload>
+      <Upload>Ajouter des fichiers</Upload>
       <MoveNode>Déplacer</MoveNode>
       <UnLock>Déverrouiller</UnLock>
       <ViewProperties>Visualiser les propriétés du noeud</ViewProperties>
@@ -692,7 +692,7 @@
       <UIPropertyTab>Propriétés</UIPropertyTab>
       <UIMetadataTab>Metadonnées</UIMetadataTab>
       <UIPropertyForm>Ajouter une Propriété</UIPropertyForm>
-      <UIUploadContent>Information sur le fichier uploadé</UIUploadContent>
+      <UIUploadContent>Information sur le fichier transféré</UIUploadContent>
       <UIJCRAdvancedSearch>Requêtes Enregistrées</UIJCRAdvancedSearch>
       <UISavedQuery>Voir le Contenu</UISavedQuery>
       <AdvancedSearchResult>Résultats</AdvancedSearchResult>
@@ -701,7 +701,7 @@
       <UICategoryManagerSearch>Ajouter une catégorie à la recherche</UICategoryManagerSearch>
       <UIConstraintsForm>Formulaire de filtre</UIConstraintsForm>
       <UIViewSearchResult>Voir le Contenu</UIViewSearchResult>
-      <UIContentNameSearch>Recherche par Nom</UIContentNameSearch>
+      <UIContentNameSearch>Recherche par nom</UIContentNameSearch>
       <UINodeInfo>Informations de Version</UINodeInfo>
       <UINodeProperty>Propriété</UINodeProperty>
       <UIActionListContainer>Actions configurées</UIActionListContainer>
@@ -733,7 +733,7 @@
     <header>
       <icon />
       <name>Nom</name>
-      <multiValue>Saisissez des valeurs pour les métadonnées</multiValue>
+      <multiValue>Multi-valuée</multiValue>
       <value>Valeur</value>
       <action>Action</action>
     </header>
@@ -762,15 +762,15 @@
       <name>Nom:</name>
       <type>Type:</type>
       <value>Valeur:</value>
-      <upload>Uploader:</upload>
+      <upload>Fichier:</upload>
       <namespace>Espace de nommage:</namespace>
-      <multiple>Multiple:</multiple>
+      <multiple>Multi-valué:</multiple>
       <property_select>Ajouter une Nouvelle Propriété</property_select>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>Annuler</Cancel>
-      <Reset>Rétablir</Reset>
+      <Reset>Nouvelle Propriété</Reset>
     </action>
     <msg>
       <name-invalid>Vous devez entrer un nom.</name-invalid>
@@ -830,7 +830,7 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>Utilisateurs ou groupes</usersOrGroups>
+      <usersOrGroups>Utilisateurs / Groupes</usersOrGroups>
       <read>Lire</read>
       <addNode>Modifier</addNode>
       <remove>Supprimer</remove>
@@ -846,7 +846,7 @@
   <permission>
     <title>
       <SelectUser>Sélectionner un utilisateur</SelectUser>
-      <SelectMember>Sélectionner un rôle</SelectMember>
+      <SelectMember>Rôle</SelectMember>
       <AddAny>Toute Personne</AddAny>
     </title>
   </permission>
@@ -859,7 +859,7 @@
     <title>
       <UIGroupSelector>Sélectionner un utilisateur ou un groupe</UIGroupSelector>
       <UIPermissionSelector>Selection d'un membre</UIPermissionSelector>
-      <UIGroupMemberSelector>Sélectionner un rôle</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Rôle</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
@@ -875,12 +875,12 @@
     <label>
       <UIPopupWindow>Sélectionner</UIPopupWindow>
       <permission>UIPermissionForm</permission>
-      <userOrGroup>Modification</userOrGroup>
+      <userOrGroup>Utilisateur / Groupe</userOrGroup>
       <read>Lecture</read>
       <add_node>Modification</add_node>
-      <remove>Modification</remove>
+      <remove>Suppression</remove>
     </label>
-    <title>Ajouter une permission sur ce noeud</title>
+    <title>Ajouter une permission</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -912,7 +912,7 @@
   ################################################################################
   -->
   <UIUploadForm>
-    <title>Uploader un fichier</title>
+    <title>Envoyer un fichier</title>
     <label>
       <upload>Sélectionner un fichier</upload>
       <name>Nom</name>
@@ -923,10 +923,10 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <fileName-error>Veuillez sélectionner un fichier à uploader.</fileName-error>
+      <fileName-error>Veuillez sélectionner un fichier à envoyer.</fileName-error>
       <taxonomyPath-error>Choisissez une catégorie.</taxonomyPath-error>
-      <fileName-invalid>Caractères invalides détectés dans le nom du fichier uploadé.</fileName-invalid>
-      <fileName-invalid-with-name>Caractères invalides détectés dans le nom du fichier uploadé '{0}'.</fileName-invalid-with-name>
+      <fileName-invalid>Caractères invalides détectés dans le nom du fichier transféré.</fileName-invalid>
+      <fileName-invalid-with-name>Caractères invalides détectés dans le nom du fichier transféré '{0}'.</fileName-invalid-with-name>
       <fileSize-too-big>Le fichier est trop volumineux. Veuillez le découper en plusieurs petits fichiers ou le charger en utilisant WebDav.</fileSize-too-big>
       <name-is-exist>Le document '{0}' existe déjà.</name-is-exist>
       <contraint-violation>Ajout du noeud '{0}' impossible. Le type de noeud fils dans le parent l'interdit.</contraint-violation>
@@ -942,7 +942,7 @@
       <mimeType>Type Mime</mimeType>
     </label>
     <title>
-      <uploaded-file>Fichier uploadé</uploaded-file>
+      <uploaded-file>Fichier Envoyé</uploaded-file>
       <external-metadata>Métadonnées Externes</external-metadata>
       <metadata-name>Nom du jeu de Métadonnées</metadata-name>
       <action>Action</action>
@@ -1041,12 +1041,12 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <keyword-not-allowed>Emplacement Courant:</keyword-not-allowed>
+      <keyword-not-allowed>Légende</keyword-not-allowed>
     </msg>
   </UIContentNameSearch>
   <UISimpleSearch>
     <action>
-      <MoreConstraints>Afficher / Masquer le formulaire de filtre</MoreConstraints>
+      <MoreConstraints>Critères Avancés</MoreConstraints>
       <Search>Rechercher</Search>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -1055,7 +1055,7 @@
       <moreConstraints>UISimpleSearch</moreConstraints>
       <firstOperator>Opérateur:</firstOperator>
       <input>Mots à rechercher:</input>
-      <constraints>Plus de contraintes:</constraints>
+      <constraints>Plus de critères:</constraints>
       <nodePath>Emplacement Actuel:</nodePath>
     </label>
     <msg>
@@ -1063,14 +1063,14 @@
       <not-found>Aucun résultat trouvé.</not-found>
       <keyword-not-allow>Ce mot-clé n'est pas autorisé.</keyword-not-allow>
       <value-null>Veuillez entrer un mot-clé ou des contraintes.</value-null>
-      <value-save-null>Veuillez entrer un mot-clé ou des contraintes avant de sauvegarder cette recherche.</value-save-null>
+      <value-save-null>Veuillez entrer un mot-clé ou des contraintes avant d'enregistrer cette recherche.</value-save-null>
       <inputSearch-invalid>Veuillez saisir des caractères valides au niveau du champ de recherche</inputSearch-invalid>
-      <query-invalid>Gabarit de Restitution</query-invalid>
+      <query-invalid>La requête est invalide. Vérifiez votre contrainte.</query-invalid>
     </msg>
   </UISimpleSearch>
   <ViewSearch>
     <title>
-      <UIViewSearchResult>Gabarit de Restitution</UIViewSearchResult>
+      <UIViewSearchResult>Gabarit d'Affichage</UIViewSearchResult>
     </title>
   </ViewSearch>
   <UISearchResult>
@@ -1084,7 +1084,7 @@
       <name>#{word.name}</name>
       <path>Chemin</path>
       <action>Action</action>
-      <shortcutPath>Répertoire</shortcutPath>
+      <shortcutPath>Dossier</shortcutPath>
       <type>Type</type>
       <dateCreated>Date de création</dateCreated>
       <score>Score</score>
@@ -1113,9 +1113,9 @@
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Répertoire</path>
+      <path>Dossier</path>
       <action>Action</action>
-      <shortcutPath>Répertoire</shortcutPath>
+      <shortcutPath>Dossier</shortcutPath>
       <type>Type</type>
       <dateCreated>Date de création</dateCreated>
       <score>Score</score>
@@ -1144,9 +1144,9 @@
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Répertoire</path>
+      <path>Dossier</path>
       <action>Action</action>
-      <shortcutPath>Répertoire</shortcutPath>
+      <shortcutPath>Dossier</shortcutPath>
       <type>Type</type>
       <dateCreated>Date de création</dateCreated>
       <score>Score</score>
@@ -1175,9 +1175,9 @@
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Répertoire</path>
+      <path>Dossier</path>
       <action>Action</action>
-      <shortcutPath>Répertoire</shortcutPath>
+      <shortcutPath>Dossier</shortcutPath>
       <type>Type</type>
       <dateCreated>Date de création</dateCreated>
       <score>Score</score>
@@ -1202,15 +1202,15 @@
   <UIShowAllTrashResult>
     <msg>
       <not-support>Le formulaire de visualisation de ce noeud n'est pas supporté</not-support>
-      <empty>Aucun résultat trouvé!</empty>
-      <access-denied>Vous ne pouvez pas consulter ce noeud car le formulaire de consultation n'est pas supporté ou vous n'avez pas les droits requis!</access-denied>
-      <query-invalid>La requête est invalide</query-invalid>
+      <empty>Aucun résultat trouvé.</empty>
+      <access-denied>Vous ne pouvez pas consulter ce noeud car le formulaire de consultation n'est pas supporté ou vous n'avez pas les droits requis.</access-denied>
+      <query-invalid>Annuler</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
-      <path>Répertoire</path>
+      <path>Annuler</path>
       <action>Action</action>
-      <shortcutPath>Répertoire</shortcutPath>
+      <shortcutPath>Dossier</shortcutPath>
       <type>Type</type>
       <dateCreated>Date de création</dateCreated>
       <score>Score</score>
@@ -1251,7 +1251,7 @@
       <fromDate-required>La date "A partir de" est manquante</fromDate-required>
       <must-choose-one>Vous devez choisir au moins un type.</must-choose-one>
       <properties-null>Vous devez sélectionner les propriétés avant le filtre</properties-null>
-      <exactly-require>Veuillez taper une valeur avant de sauvegarder le filtre</exactly-require>
+      <exactly-require>Veuillez taper une valeur avant d'enregistrer cette condition.</exactly-require>
       <fromDate-invalid>La date "A partir de" est invalide.</fromDate-invalid>
       <toDate-invalid>La date "Jusqu'au" est invalide.</toDate-invalid>
     </msg>
@@ -1278,7 +1278,7 @@
       <notContainPro-notContain>Ne contient pas</notContainPro-notContain>
       <ConstraintOption-From>De</ConstraintOption-From>
       <ConstraintOption-To>à</ConstraintOption-To>
-      <DocumentType-label>Marqué comme Document</DocumentType-label>
+      <DocumentType-label>Type</DocumentType-label>
       <Category-label>Catégorie</Category-label>
       <created>Créé</created>
       <modified>Mis à jour</modified>
@@ -1387,9 +1387,9 @@
   </property3MetadataPopup>
   <UISelectPropertyForm>
     <label>
-      <metadataType>Type de métadonnée</metadataType>
+      <metadataType>Entrez un nom de requête.</metadataType>
     </label>
-    <pLabel>Propriété:</pLabel>
+    <pLabel>Propriétés:</pLabel>
     <action>
       <Add>Ajouter</Add>
       <Cancel>Annuler</Cancel>
@@ -1397,7 +1397,7 @@
   </UISelectPropertyForm>
   <ExactlyFormPopup>
     <title>
-      <UICompareExactlyForm>Formulaire de filtre</UICompareExactlyForm>
+      <UICompareExactlyForm>Filtre</UICompareExactlyForm>
     </title>
   </ExactlyFormPopup>
   <UIECMSearch>
@@ -1406,12 +1406,12 @@
       <language>Langue</language>
       <query>Requête</query>
       <action>Actions</action>
-      <path>Répertoire</path>
+      <path>Dossier</path>
     </header>
   </UIECMSearch>
   <UIResult>
     <msg>
-      <not-found>Donnée non trouvée</not-found>
+      <not-found>Donnée non trouvée.</not-found>
     </msg>
     <header>
       <action>Action</action>
@@ -1419,9 +1419,9 @@
   </UIResult>
   <UISaveQueryForm>
     <msg>
-      <query-name-null>Nom de la requête manquant!</query-name-null>
-      <access-denied>Accès interdit! Vous ne pouvez pas sauvegarder cette requête parce que vous n'avez pas les droits suffisants.</access-denied>
-      <save-failed>Sauvegarde impossible: la requête est invalide ou une requête du même nom existe déjà</save-failed>
+      <query-name-null>Veuillez entrer un nom de requête pour l'enregistrer.</query-name-null>
+      <access-denied>Accès interdit. Vous ne pouvez pas enregistrer cette requête parce que vous n'avez pas les droits suffisants.</access-denied>
+      <save-failed>Sauvegarde impossible, la requête est invalide ou une requête du même nom existe déjà</save-failed>
     </msg>
     <label>
       <queryName>Nom de la requête</queryName>
@@ -1441,15 +1441,15 @@
     </header>
     <tooltip>
       <Execute>Lancer</Execute>
-      <Edit>Editer</Edit>
-      <Delete>Supprimer</Delete>
+      <Edit>Modifier.</Edit>
+      <Delete>Pas de requête enregistrée.</Delete>
     </tooltip>
     <label>
-      <no-children>Aucune requête sauvegardée</no-children>
+      <no-children>Pas de requête enregistrée.</no-children>
     </label>
     <msg>
       <confirm-delete-query>Confirmez-vous la suppression de cette requête?</confirm-delete-query>
-      <not-result-found>Aucun résultat trouvé!</not-result-found>
+      <not-result-found>Aucun résultat trouvé.</not-result-found>
     </msg>
   </UISavedQuery>
   <UIQueryResultPageIterator>
@@ -1467,9 +1467,9 @@
   <UIExportNode>
     <label>
       <format>Format</format>
-      <nodePath>Répertoire à exporter</nodePath>
+      <nodePath>Dossier à exporter</nodePath>
       <zip>Compresser</zip>
-      <systemView>Vue System</systemView>
+      <systemView>Vue Système</systemView>
       <documentView>Vue Document</documentView>
     </label>
     <action>
@@ -1485,7 +1485,7 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Sélectionner des permissions utilisateur</UIUserContainer>
+      <UIUserContainer>Sélectionner un Utilisateur</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
@@ -1501,9 +1501,9 @@
   -->
   <UIVersionInfo>
     <tooltip>
-      <addLabel>Ajouter un label</addLabel>
-      <removeLable>Supprimer le label</removeLable>
-      <restoreVersion>Restaurer cette version</restoreVersion>
+      <addLabel>Ajouter un Libellé</addLabel>
+      <removeLable>Supprimer le Libellé</removeLable>
+      <restoreVersion>Restaurer cette Version</restoreVersion>
       <viewVersion>Voir les infos de version</viewVersion>
       <deleteVersion>Supprimer cette version</deleteVersion>
       <compareVersion>Comparer avec la version de base</compareVersion>
@@ -1512,7 +1512,7 @@
       <have-no-view-template>Le formulaire de consultation n'est pas supporté</have-no-view-template>
       <cannot-remove-version>Suppression de la version de base impossible</cannot-remove-version>
       <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
-      <not-checked-out>Vous devez faire un check out du noeud avant de restorer.</not-checked-out>
+      <not-checked-out>Vous devez faire un check out du noeud avant de restaurer.</not-checked-out>
       <invalid-item-state>Vous ne pouvez pas restaurer cette version. Probablement un ou plusieurs éléments ont été déplacés ou supprimés par une autre session.</invalid-item-state>
     </msg>
     <action>
@@ -1643,21 +1643,21 @@
       <format>Format</format>
       <systemView>Vue Système</systemView>
       <documentView>Vue Document</documentView>
-      <upload>Uploader un fichier</upload>
+      <upload>Envoyer un fichier</upload>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Import>Importer</Import>
     </action>
-    <title>Importer un noeud</title>
+    <title>Import</title>
     <msg>
       <import-successful>Import effectué avec succès.</import-successful>
       <filename-invalid>Veuillez sélectionner un fichier xml pour l'importer.</filename-invalid>
-      <filetype-error>Import impossible. Le fichier uploadé est probablement corrompu.</filetype-error>
+      <filetype-error>Import impossible. Le fichier envoyé est probablement corrompu.</filetype-error>
       <mimetype-invalid>Seuls les fichier xml ou zip sont supportés pour l'import.</mimetype-invalid>
-      <access-denied>Accès interdit! Vous n'avez pas les droits suffisants pour importer à cet endroit.</access-denied>
+      <access-denied>Accès interdit. Vous n'avez pas les droits suffisants pour importer à cet endroit.</access-denied>
       <constraint-violation-exception>Impossible d'importer. Le type de noeud '{0}' n'est pas autorisé</constraint-violation-exception>
-      <item-exists-exception>Un noeud entrant référençable a le même UUID qu'un noeud existant dans l'espace de travail! UUID: '{0}'</item-exists-exception>
+      <item-exists-exception>Un noeud entrant référençable a le même UUID qu'un noeud existant dans l'espace de stockage.</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--
@@ -1673,10 +1673,10 @@
       <Save>#{word.save}</Save>
       <Cancel>Annuler</Cancel>
     </action>
-    <title>Ajout d'un libellé</title>
+    <title>Ajout d'un Libellé</title>
     <msg>
-      <label-invalid>The label contains some invalid characters.</label-invalid>
-      <label-exist>'{0}' already exists.</label-exist>
+      <label-invalid>Le libellé comporte des caractères interdits</label-invalid>
+      <label-exist>'{0}' existe déjà.</label-exist>
     </msg>
   </UILabelForm>
   <!--
@@ -1687,7 +1687,7 @@
   <UIRemoveLabelForm>
     <title>Suppression d'un libellé</title>
     <label>
-      <label>Sélectionner un libellé</label>
+      <label>Sélectionner un Libellé</label>
     </label>
     <action>
       <Remove>Supprimer</Remove>
@@ -1700,24 +1700,24 @@
   ###############################################################################
   -->
   <UIVersionTree>
-    <title>Arbre des noeuds fils</title>
+    <title>Arbre des sous-noeuds</title>
   </UIVersionTree>
   <UIViewVersion>
     <label>
       <nodeType>Type de noeud</nodeType>
       <nodeName>Nom du noeud</nodeName>
       <VersionNumber>Numéro de version</VersionNumber>
-      <VersionLabels>Labels de version</VersionLabels>
+      <VersionLabels>Libellés de version</VersionLabels>
       <VersionDate>Date de version</VersionDate>
-      <PropertyName>Nom de propriétés</PropertyName>
+      <PropertyName>Nom de Propriété</PropertyName>
       <PropertyValue>Valeur</PropertyValue>
     </label>
     <msg>
-      <not-supported>Cette fonction ne supporte pas le versionning</not-supported>
+      <not-supported>Cette fonction n'est pas supportée pour le versionnage.</not-supported>
     </msg>
   </UIViewVersion>
   <UIVersionList>
-    <title>Nom fils</title>
+    <title>Fils</title>
   </UIVersionList>
   <!--
   ################################################################################
@@ -1730,8 +1730,8 @@
     </action>
     <tab>
       <label>
-        <UICategoriesAddedList>Catégories référencées</UICategoriesAddedList>
-        <UIOneNodePathSelector>Sélectionner une catégorie</UIOneNodePathSelector>
+        <UICategoriesAddedList>Catégories Référencées</UICategoriesAddedList>
+        <UIOneNodePathSelector>Sélectionner une Catégorie</UIOneNodePathSelector>
       </label>
     </tab>
   </UICategoryManager>
@@ -1741,7 +1741,7 @@
       <action>Actions</action>
     </header>
     <msg>
-      <access-denied>Accès interdit! Vous n'avez pas les droits suffisants.</access-denied>
+      <access-denied>Accès refusé. Vous n'avez pas les droits suffisants.</access-denied>
       <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
     </msg>
     <action>
@@ -1761,7 +1761,7 @@
       <action>Action</action>
     </header>
     <info>
-      <child-not-found>Ce noeud n'a pas de fils</child-not-found>
+      <child-not-found>Ce noeud n'a pas de sous-noeud.</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -1775,7 +1775,7 @@
     </action>
     <tab>
       <label>
-        <UIOneNodePathSelector>Sélectionner une relation</UIOneNodePathSelector>
+        <UIOneNodePathSelector>Sélectionner une Relation</UIOneNodePathSelector>
       </label>
     </tab>
     <tab>
@@ -1806,19 +1806,19 @@
   -->
   <UIClipboard>
     <header>
-      <path>Répertoire</path>
-      <command>Cm</command>
+      <path>Dossier</path>
+      <command/>
       <action>Act</action>
     </header>
     <label>
-      <nocommand>Aucun objet dans le presse papier!</nocommand>
+      <nocommand>Aucun objet dans le presse papier.</nocommand>
     </label>
     <action>
-      <clearall>Supprimer tout</clearall>
+      <clearall>Tout Effacer</clearall>
     </action>
     <msg>
-      <unable-pasted>Erreur de coller (Invalid Item State Exception)</unable-pasted>
-      <node-pasted>Le noeud {0} a été collé dans {1}. Cette opération a déjà été enregistrée et vous n'avez pas besoin de sauvegarder la session.</node-pasted>
+      <unable-pasted>Impossible de coller ce noeud.</unable-pasted>
+      <node-pasted>Le noeud {0} a été collé dans {1}.</node-pasted>
     </msg>
   </UIClipboard>
   <!--
@@ -1833,9 +1833,9 @@
   -->
   <UISelectDocumentForm>
     <label>
-      <selectTemplate>Sélectionner votre template dans la liste en dessous</selectTemplate>
+      <selectTemplate>Sélectionnez le type de document à créer</selectTemplate>
       <ThumbnailView>Vignettes</ThumbnailView>
-      <ListView>Liste de visualisation</ListView>
+      <ListView>Vue Liste</ListView>
       <Cancel>#{word.cancel}</Cancel>
     </label>
   </UISelectDocumentForm>
@@ -1845,11 +1845,11 @@
   #######################################################################
   -->
   <UIDocumentForm>
-    <title>Ajout d'un document</title>
+    <title>Ajouter un Document</title>
     <action>
 	  <Save>Enregistrer</Save>
 	  <SaveAndClose>Enregistrer &amp; Fermer</SaveAndClose>
-	  <ChangeType>changer le type de contenu</ChangeType>
+      <ChangeType>Changer le Type de Contenu</ChangeType>
 	  <Fullscreen>Plein écran</Fullscreen>
       <Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
@@ -1860,14 +1860,14 @@
     <msg>
       <cannot-save>Enregistrement impossible. Des contraintes ne sont pas respectées.</cannot-save>
       <in-versioning>Vous devez effectuer un checkout sur ce noeud avant de pouvoir lui en ajouter un autre</in-versioning>
-      <not-support>Impossible de charge le formulaire de '{0}'.</not-support>
-      <value-invalid>Valeur requise dans '{0}'</value-invalid>
-      <repository-exception>Sauvegarde du document impossible. Le nom du noeud existe déjà.</repository-exception>
+      <not-support>Impossible de charger le template '{0}'.</not-support>
+      <value-invalid>Valeur requise dans '{0}'.</value-invalid>
+      <repository-exception>Une erreur est survenue lors de l'enregistrement du document.</repository-exception>
       <!--DMS 2.4.x; ECM-3543-->
-      <repository-exception-permission>Vous n'avez pas le droit d'ajouter un document à ce noeud</repository-exception-permission>
-      <not-allowed-same-name-sibling>Impossible de sauvegarder ce document! Le nom du noeud existe déjà</not-allowed-same-name-sibling>
-      <numberformat-exception>Sauvegarde du document impossible! Vous devez saisir un format numérique.</numberformat-exception>
-      <item-not-found>L'élément n'a pas été trouvé! Peut être que ce noeud ou un de ses ancètres a été supprimé. Veuillez cliquer sur le bouton "Actualiser".</item-not-found>
+      <repository-exception-permission>Vous n'avez pas le droit d'ajouter un document à ce noeud.</repository-exception-permission>
+      <not-allowed-same-name-sibling>Impossible d'enregistrer ce document. Un élément du même nom existe déjà.</not-allowed-same-name-sibling>
+      <numberformat-exception>Enregistrement du document impossible. Vous devez saisir un format numérique.</numberformat-exception>
+      <item-not-found>L'élément n'a pas été trouvé. Peut être que ce noeud ou un de ses ancêtres a été supprimé. Veuillez cliquer sur le bouton "Actualiser".</item-not-found>
     </msg>
   </UIDocumentForm>
   <!--
@@ -1896,7 +1896,7 @@
   #############################################################################
   -->
   <UIQuerySaveForm>
-    <title>Sauvegarde d'une requête</title>
+    <title>Enregistrement d'une Requête</title>
     <label>
       <query>Requête</query>
       <name>Nom de la requête</name>
@@ -1913,8 +1913,8 @@
   -->
   <editActionPopup>
     <title>
-      <UIActionForm>Editer une action</UIActionForm>
-      <EditFormAction>Edition d'une action</EditFormAction>
+      <UIActionForm>Modifier une Action</UIActionForm>
+      <EditFormAction>Modifier l'Action</EditFormAction>
     </title>
   </editActionPopup>
   <UIActionViewContainer>
@@ -1928,20 +1928,20 @@
       <description>Description</description>
   <lifecycle>Evénement</lifecycle>
   <triggeredaction>Action déclenchée</triggeredaction>
-      <instanceOf>Instance of Action Type</instanceOf>
+      <instanceOf>Instances de cette Action</instanceOf>
       <action>Action</action>
     </header>
     <msg>
       <remove-popup-first>Vous devez d'abord fermer la fenêtre d'édition avant de pouvoir supprimer ce noeud.</remove-popup-first>
       <confirm-delete-action>Confirmez-vous la suppression?</confirm-delete-action>
       <template-empty>Le formulaire de '{0}' est vide ou inexistant</template-empty>
-      <template-null>Le formulaire est inexistant, ou vous n'avez pas les droits d'Accès suffisants.</template-null>
-      <access-denied>Accès interdit! Vous n'avez pas les droits suffisants pour faire cette action.</access-denied>
+      <template-null>Le formulaire est inexistant, ou vous n'avez pas les droits d'accès suffisants.</template-null>
+      <access-denied>Accès interdit. Vous n'avez pas les droits suffisants pour faire cette action.</access-denied>
     </msg>
     <action>
       <Close>#{word.close}</Close>
       <View>Voir</View>
-      <Edit>Editer</Edit>
+      <Edit>Modifier</Edit>
       <Delete>Supprimer</Delete>
     </action>
   </UIActionList>
@@ -1951,27 +1951,23 @@
       <Back>#{word.back}</Back>
     </action>
     <label>
-      <name>Formulaire d'action</name>
+      <name>Formulaire d'Action</name>
     </label>
     <msg>
-      <!--
-        Deeper test on DMS 2.4 RC1
-        ECM-3873 Error content of message when type name of action by special character
-	    -->
-      <repository-exception>Impossible de sauver cette action. Le nom fourni contient des caractères invalides.</repository-exception>
-      <numberformat-exception>Sauvegarde de cette action impossible. Input must be a number format.</numberformat-exception>
+      <repository-exception>Impossible d'enregistrer cette action. Le nom fourni contient des caractères invalides.</repository-exception>
+      <numberformat-exception>Enregistrement de cette action impossible. Le nom fourni doit être au format numérique.</numberformat-exception>
       <existed-action>Ce nom existe déjà, veuillez en choisir un autre!</existed-action>
       <unable-add-action>Impossible d'ajouter cette action</unable-add-action>
       <unable-add>Ajout impossible! Veuillez vérifier les champs requis</unable-add>
       <not-support>Le formulaire d'édition '{0}' n'est pas supporté</not-support>
       <no-permission-add>Accès interdit! Vous n'avez pas les droits suffisants pou ajouter une action ici</no-permission-add>
-      <access-denied>Accès interdit! Vous n'avez pas les droits suffisants pour ouvrir ce formulaire.</access-denied>
+      <access-denied>Accès interdit. Vous n'avez pas les droits suffisants pour ouvrir ce formulaire.</access-denied>
 	  <lifecycle-invalid>Impossible d'ajouter cette action. La phase du cycle de vie de l'action est invalide.</lifecycle-invalid>
     </msg>
-    <title>Ajouter/Editer une action</title>
+    <title>Détail de l'Action</title>
     <validator>
       <validator>Validateur</validator>
-      <destPath>Répertoire de destination</destPath>
+      <destPath>Dossier Cible</destPath>
     </validator>
   </UIActionForm>
   <UIActionTypeForm>
@@ -2000,8 +1996,8 @@
   -->
   <UIAddressBar>
     <msg>
-      <path-not-found>Répertoire introuvable</path-not-found>
-      <access-denied>Accès interdit! Vous n'avez pas les droits suffisants pour consulter ce noeud.</access-denied>
+      <path-not-found>Dossier introuvable.</path-not-found>
+      <access-denied>Accès interdit. Vous n'avez pas les droits suffisants pour consulter ce noeud.</access-denied>
       <keyword-not-support>Le mot clé est invalide. Certains caractères ne sont pas autorisés.</keyword-not-support>
     </msg>
     <label>
@@ -2022,7 +2018,7 @@
   -->
   <UIWatchDocumentForm>
     <action>
-      <Watch>S'abonner</Watch>
+      <Watch>Suivre</Watch>
       <Cancel>#{word.cancel}</Cancel>
       <Continue>Poursuivre</Continue>
       <Unwatch>Se désabonner</Unwatch>
@@ -2031,10 +2027,10 @@
       <notificationType>Type de notification:</notificationType>
     </label>
     <msg>
-      <not-support>Nous ne supportons pas cette notification. Veuillez en choisir une des notres.</not-support>
-      <watching-successfully>Abonnement enregistré.</watching-successfully>
-      <unwatching-successfully>Désabonnement enregistré.</unwatching-successfully>
-      <node-iswatching>Ce document est suivi par abonnement</node-iswatching>
+      <not-support>Nous ne supportons pas cette notification. Veuillez en choisir une autre.</not-support>
+      <watching-successfully>Vous suivez désormais ce document.</watching-successfully>
+      <unwatching-successfully>Vous ne suivez plus ce document.</unwatching-successfully>
+      <node-iswatching>Vous suivez ce document.</node-iswatching>
     </msg>
   </UIWatchDocumentForm>
   <!--
@@ -2044,8 +2040,8 @@
   -->
   <UITaggingForm>
     <label>
-      <names>Noms:</names>
-      <linked>Tags liés:</linked>
+      <names>Tags:</names>
+      <linked>Ajouter</linked>
       <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
@@ -2081,7 +2077,7 @@
       <View>Voir</View>
     </action>
     <msg>
-      <access-denied>Accès interdit! Vous n'avez pas les droits suffisants pour ajouter un noeud</access-denied>
+      <access-denied>Accès interdit. Vous n'avez pas les droits suffisants pour ajouter un noeud</access-denied>
     </msg>
   </UIMultiLanguageForm>
   <UILanguageTypeForm>
@@ -2094,7 +2090,7 @@
   <UILanguageDialogForm>
     <msg>
       <select-lang>Veuillez d'abord sélectionner une langue</select-lang>
-      <access-denied>Accès interdit! Vous n'avez pas les droits suffisants pour ajouter un noeud.</access-denied>
+      <access-denied>Accès refusé. Vous n'avez pas les droits suffisants pour ajouter un noeud.</access-denied>
     </msg>
     <action>
       <Save>#{word.save}</Save>
@@ -2124,12 +2120,12 @@
   </UIViewMetadataForm>
   <metadataForm>
     <title>
-      <UIViewMetadataForm>Ajouter/Editer les propriétés</UIViewMetadataForm>
+      <UIViewMetadataForm>Ajouter/Modifier les Propriétés</UIViewMetadataForm>
     </title>
   </metadataForm>
   <UIViewMetadataTemplate>
     <msg>
-      <access-denied>Accès interdit! Vous n'avez pas les droits suffisants pour éditer ce noeud</access-denied>
+      <access-denied>Accès refusé. Vous n'avez pas les droits suffisants pour éditer ce noeud</access-denied>
     </msg>
   </UIViewMetadataTemplate>
   <!--
@@ -2140,12 +2136,12 @@
   <ECMNameValidator>
     <msg>
       <Invalid-char>Caractères invalides détectés dans le champ '{0}'.</Invalid-char>
-      <empty-input>Valeur requise dans le champ '{0}'</empty-input>
+      <empty-input>Valeur requise dans le champ '{0}'.</empty-input>
     </msg>
   </ECMNameValidator>
   <DateTimeValidator>
     <msg>
-      <Invalid-input>La valeur '{1}' n'est pas valide dans le champ '{0}'</Invalid-input>
+      <Invalid-input>La valeur '{1}' n'est pas valide dans le champ '{0}'.</Invalid-input>
     </msg>
   </DateTimeValidator>
   <CronExpressionValidator>
@@ -2153,7 +2149,7 @@
   </CronExpressionValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>Veuillez taper une valeur dans le champ '{0}'</empty-input>
+      <empty-input>Veuillez entrer une valeur dans le champ '{0}'.</empty-input>
     </msg>
   </EmptyFieldValidator>
   <CategoryValidator>
@@ -2170,19 +2166,19 @@
     <msg>Action impossible. Ce noeud est référencé par un autre dans l'espace de stockage.</msg>
   </ReferentialIntegrityException>
   <ItemExistsException>
-    <msg>Cet objet existe déjà!</msg>
+    <msg>Cet élément existe déjà.</msg>
   </ItemExistsException>
   <AccessControlException>
-    <msg>Accès interdit! Vous n'avez pas les droits suffisants pour effectuer cette action</msg>
+    <msg>Accès refusé. Vous n'avez pas les droits suffisants pour effectuer cette action</msg>
   </AccessControlException>
   <AccessDeniedException>
-    <msg>Accès interdit!</msg>
+    <msg>Accès refusé.</msg>
   </AccessDeniedException>
   <ItemNotFoundException>
-    <msg>Objet introuvable!</msg>
+    <msg>Objet introuvable. Il peut avoir été supprimé ou modifié.</msg>
   </ItemNotFoundException>
   <PathNotFoundException>
-    <msg>Répertoire introuvable</msg>
+    <msg>Dossier introuvable. Il peut avoir été supprimé ou modifié.</msg>
   </PathNotFoundException>
   <ConstraintViolationException>
     <msg>Impossible d'exécuter l'action à cause d'une violation de contraintes</msg>
@@ -2200,13 +2196,13 @@
       <private>Privé</private>
       <state>Etat</state>
       <visibility>Visibilité</visibility>
-      <nodeName>Nom Noeud:</nodeName>
-      <lifecycleName>Nom Cycle de Vie</lifecycleName>
-      <stateName>Nom Etat</stateName>
+      <nodeName>Noeud:</nodeName>
+      <lifecycleName>Cycle de Vie</lifecycleName>
+      <stateName>Etat</stateName>
     </label>
     <action>
       <Save>Enregistrer</Save>
-      <UnsubcriberLifeCycle>Annuler l'inscription</UnsubcriberLifeCycle>
+      <UnsubcriberLifeCycle>Sortir du Cycle</UnsubcriberLifeCycle>
       <Cancel>Annuler</Cancel>
     </action>
   </UIPublicationForm>
@@ -2217,7 +2213,7 @@
   -->
   <UIWorkspaceList>
     <label>
-      <workspaceName>Espace de Stockage:</workspaceName>
+      <workspaceName>Espace de Stockage</workspaceName>
       <rootNodeInfo>Racine de l'arborescence</rootNodeInfo>
       <rootPath>Racine de l'arborescence</rootPath>
     </label>
@@ -2234,7 +2230,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>L'adresse email est invalide!</Invalid-input>
+      <Invalid-input>L'adresse email est invalide.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <UIFormInputSetWithAction>
@@ -2244,19 +2240,19 @@
   </UIFormInputSetWithAction>
   <RepeatCountValidator>
     <msg>
-      <invalid-value>Valeur invalide dans le champ 'Nombre de répétitions' (veuillez taper un nombre entier supérieur à 0, ou -1 pour un nombre infini)</invalid-value>
+      <invalid-value>Valeur invalide dans le champ 'Nombre de répétitions' (veuillez taper un nombre entier supérieur à 0, ou -1 pour un nombre infini).</invalid-value>
     </msg>
   </RepeatCountValidator>
   <RepeatIntervalValidator>
     <msg>
-      <invalid-value>Valeur invalide dans le champ 'Intervalle de temps' (veuillez taper un nombre entier)</invalid-value>
+      <invalid-value>Valeur invalide dans le champ 'Intervalle de temps' (veuillez taper un nombre entier).</invalid-value>
     </msg>
   </RepeatIntervalValidator>
   <UIPermissionSelector>
     <label>
-      <selectGroup>Sélectionner un groupe</selectGroup>
+      <selectGroup>Groupe</selectGroup>
       <selectUser>Sélectionner un utilisateur</selectUser>
-      <selectMembership>Sélectionner un membership</selectMembership>
+      <selectMembership>Rôle</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2266,8 +2262,8 @@
   -->
   <ECMStandardPropertyNameValidator>
     <msg>
-      <empty-input>La valeur du champ '{0}' est vide!</empty-input>
-      <Invalid-char>Le champ '{0}' contient des caractères invalides. Veuillez saisir une autre valeur!</Invalid-char>
+      <empty-input>La valeur du champ '{0}' est vide.</empty-input>
+      <Invalid-char>Le champ '{0}' contient des caractères invalides. Veuillez saisir une autre valeur.</Invalid-char>
     </msg>
   </ECMStandardPropertyNameValidator>
   <!--
@@ -2277,9 +2273,9 @@
   -->
   <SearchValidator>
     <msg>
-      <empty-input>La valeur de ce champ est nulle ou vide!</empty-input>
-      <Invalid-char>Il y a des caractères invalides dans ce champ. Insérez une autre valeur!</Invalid-char>
-      <Invalid-char2>un nombre doit suivre le caractère '~'</Invalid-char2>
+      <empty-input>La valeur de ce champ est nulle ou vide.</empty-input>
+      <Invalid-char>Il y a des caractères invalides dans ce champ. Insérez une autre valeur.</Invalid-char>
+      <Invalid-char2>Un nombre doit suivre le caractère '~'.</Invalid-char2>
       <Invalid-char1>Le nombre suivant le caractère '~' doit être 0 ou 1</Invalid-char1>
       <Invalid-char3>Un nombre doit suivre le caractère '^'</Invalid-char3>
       <Invalid-char4>Aucun espace n'est autorisé près du caractère '~'</Invalid-char4>
@@ -2294,7 +2290,7 @@
   <UIPublicationLogList>
     <header>
       <date>Date</date>
-      <newState>Nouvel état</newState>
+      <newState>Nouvel Etat</newState>
       <user>Utilisateur</user>
       <description>Description</description>
       <version>Version</version>
@@ -2324,11 +2320,11 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <RemoveThumbnail>Supprimer miniature</RemoveThumbnail>
+      <RemoveThumbnail>Supprimer la Vignette</RemoveThumbnail>
     </action>
     <label>
       <mediumSize>Vignette</mediumSize>
-      <SelectFile>Sélectionner image miniature</SelectFile>
+      <SelectFile>Sélectionnez une Image</SelectFile>
     </label>
     <msg>
       <mimetype-incorrect>Type de fichier incorrect. Sélectionner une image de type JPG, PNG ou GIF.</mimetype-incorrect>
@@ -2347,13 +2343,13 @@
   -->
   <UIAnyPermission>
     <label>
-      <anyPermission>Toute permission</anyPermission>
+      <anyPermission>Toute Personne</anyPermission>
     </label>
   </UIAnyPermission>
 
   <anyPermission>
     <title>
-      <AddAnyPermission>Ajouter une permission quelconque</AddAnyPermission>
+      <AddAnyPermission>Ajouter Toute Permission</AddAnyPermission>
     </title>
   </anyPermission>
   <!--
@@ -2375,7 +2371,7 @@
     <label>
       <selectGroup>Sélectionner un groupe</selectGroup>
       <selectUser>Sélectionner un utilisateur</selectUser>
-      <selectMembership>Sélectionner un rôle</selectMembership>
+      <selectMembership>Rôle</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--
@@ -2403,7 +2399,7 @@
   </workflow_destpath>
   <PublicationService>
     <WorkflowPublicationPlugin>
-      <nodeValidationRequest>Ce noeud a été soumis à une validation</nodeValidationRequest>
+      <nodeValidationRequest>Ce noeud a été soumis à validation.</nodeValidationRequest>
     </WorkflowPublicationPlugin>
   </PublicationService>
 
@@ -2416,21 +2412,26 @@
   </UIJCRExplorerPortlet>
 
   <UIJcrExplorerEditForm>
-    <title>Panneau de personnalisation de l'explorateur de fichiers</title>
+    <title>Modifier l'Explorateur</title>
     <action>
-      <Edit>Editer</Edit>
+      <Edit>Modifier</Edit>
       <Save>Enregistrer</Save>
       <Cancel>Annuler</Cancel>
     </action>
     <label>
-      <repository>Dépôt de données</repository>
-      <categoryMandatoryWhenFileUpload>Nécessité de spécifier une catégorie quand un fichier est uploadé dans la base</categoryMandatoryWhenFileUpload>
-      <uploadFileSizeLimitMB>Limite de la taille d'upload (MB)</uploadFileSizeLimitMB>
+      <repository>Entrepôt</repository>
+      <categoryMandatoryWhenFileUpload>Spécifier une catégorie quand un fichier est ajouté.</categoryMandatoryWhenFileUpload>
+      <uploadFileSizeLimitMB>Limiter la tailler des fichiers ajoutés (Mo)</uploadFileSizeLimitMB>
       <isDirectlyDrive>Accès direct aux lecteurs</isDirectlyDrive>
-      <driveName>Nom du lecteur</driveName>
+      <driveName>Nom du Lecteur</driveName>
       <usecase>Type d'accès</usecase>
-      <SelectNodePath>Sélectionner un répertoire</SelectNodePath>
-    <nodePath>Sélectionner un répertoire</nodePath>
+      <SelectNodePath>Sélectionner un dossier</SelectNodePath>
+      <editInNewWindow>Modifier dans une nouvelle fenêtre</editInNewWindow>
+      <showTopBar>Afficher la Barre du Haut</showTopBar>
+      <showActionBar>Afficher la Barre d'Actions</showActionBar>
+      <showSideBar>Afficher le Panneau de Gauche</showSideBar>
+      <showFilterBar>Afficher le Bloc des Filtres</showFilterBar>
+      <nodePath>Sélectionner un dossier</nodePath>
     </label>
   </UIJcrExplorerEditForm>
 
@@ -2438,7 +2439,7 @@
     <label>
       <driveName>Nom du Lecteur</driveName>
       <action>Action</action>
-      <adddrives>Ajouter lecteurs</adddrives>
+      <adddrives>Ajouter des Lecteurs</adddrives>
     </label>
   </UIDriveSelector>
   <UIJcrExplorerEditForm>
@@ -2448,9 +2449,9 @@
     </label>
     <msg>
       <not-have-social>Le type Social n'est pas disponible, le type Sélection sera utilisé.</not-have-social>
-      <personal-usecase>Le lecteur privé de l'utilisateur courant sera utilisé quand vous choisissez le cas d'utilisation personnel.</personal-usecase>
-						<drive-edit-permission>Impossible d'éditer le nom du lecteur. Veuillez cliquer sur le bouton d'édition</drive-edit-permission>
-						<path-edit-permission>Impossible d'éditer le chemin. Veuillez cliquer sur le bouton d'édition</path-edit-permission>
+      <personal-usecase>Le lecteur privé de l'utilisateur courant sera utilisé quand vous choisissez le cas d'utilisation Personnel.</personal-usecase>
+      <drive-edit-permission>Impossible de modifier le nom du lecteur. Veuillez cliquer sur le bouton Modifier.</drive-edit-permission>
+      <path-edit-permission>Impossible de changer le chemin. Veuillez cliquer sur le bouton Modifier</path-edit-permission>
     </msg>
   </UIJcrExplorerEditForm>
 
@@ -2499,20 +2500,20 @@
       <Cancel>#{word.cancel}</Cancel>
 		</action>
 		<msg>
-      <addFolder-successful>Le raccourci '{0}' a été ajouté avec succès</addFolder-successful>
-			<name-invalid>Veuillez saisir un nom de raccourci!</name-invalid>
+      <addFolder-successful>Le raccourci '{0}' a été ajouté avec succès.</addFolder-successful>
+      <name-invalid>Veuillez saisir un nom de raccourci.</name-invalid>
       <name-not-allowed>Ce nom n'est pas autorisé.</name-not-allowed>
       <fileName-error>Nom de fichier invalide</fileName-error>
       <constraint-violation>Le noeud courant ne permet pas d'ajouter le type de noeud '{0}'</constraint-violation>
-      <repository-exception>Accès refusé! Vous n'avez pas la permission d'ajouter un lien symbolique vers ce noeud.</repository-exception>
-      <numberformat-exception>Impossible de sauvegarder ce répertoire. Vous devez saisir un format numérique.</numberformat-exception>
-			<path-node-invalid>Veuillez saisir le chemin du noeud!</path-node-invalid>
+      <repository-exception>Accès refusé. Vous n'avez pas la permission d'ajouter un lien symbolique vers ce noeud.</repository-exception>
+      <numberformat-exception>Impossible d'enregistrer ce dossier. Vous devez saisir un format numérique.</numberformat-exception>
+      <path-node-invalid>Veuillez saisir le chemin du noeud.</path-node-invalid>
 			<path-node-not-allowed>Ce nom n'est pas autorisé.</path-node-not-allowed>
-			<non-node>Vous n'avez pas les droits d'accès au noeud cible</non-node>
-			<cannot-save>Impossible d'ajouter un lien symbolique pour ce type de noeud</cannot-save>
-			<item-exists-exception>Un noeud du même nom existe déjà</item-exists-exception>
+      <non-node>Vous n'avez pas les droits d'accès au noeud cible.</non-node>
+      <cannot-save>Impossible d'ajouter un lien symbolique pour ce type de noeud.</cannot-save>
+      <item-exists-exception>Un noeud du même nom existe déjà.</item-exists-exception>
       <translation-node-same-language-default>Cette traduction possède la même langue que le contenu courant.</translation-node-same-language-default>
-			<UnsupportedRepositoryOperationException>Cette cible ne peut pas être référencée</UnsupportedRepositoryOperationException>
+      <UnsupportedRepositoryOperationException>Cette cible ne peut pas être référencée.</UnsupportedRepositoryOperationException>
     </msg>
 	</UISymLinkForm>
 
@@ -2528,18 +2529,18 @@
       <SelectDocument>Sélectionnez Document</SelectDocument>
     </action>
     <msg>
-      <addFolder-successful>Le raccourci '{0}' a été ajouté avec succès</addFolder-successful>
-			<name-invalid>Veuillez saisir un nom de raccourci!</name-invalid>
+      <addFolder-successful>Le raccourci '{0}' a été ajouté avec succès.</addFolder-successful>
+      <name-invalid>Veuillez saisir un nom de raccourci.</name-invalid>
       <name-not-allowed>Ce nom n'est pas autorisé.</name-not-allowed>
-      <fileName-error>Nom de fichier invalide</fileName-error>
-      <constraint-violation>Le noeud courant ne permet pas d'ajouter le type de noeud '{0}'</constraint-violation>
-      <repository-exception>Accès refusé! Vous n'avez pas la permission d'ajouter un lien symbolique vers ce noeud.</repository-exception>
-      <numberformat-exception>Impossible de sauvegarder ce répertoire. Vous devez saisir un format numérique.</numberformat-exception>
-			<path-node-invalid>Veuillez saisir le chemin du noeud!</path-node-invalid>
+      <fileName-error>Nom de fichier invalide.</fileName-error>
+      <constraint-violation>Le noeud courant ne permet pas d'ajouter le type de noeud '{0}'.</constraint-violation>
+      <repository-exception>Accès refusé. Vous n'avez pas la permission d'ajouter un lien symbolique vers ce noeud.</repository-exception>
+      <numberformat-exception>Impossible d'enregistrer ce dossier. Vous devez saisir un format numérique.</numberformat-exception>
+      <path-node-invalid>Veuillez saisir le chemin du noeud.</path-node-invalid>
 			<path-node-not-allowed>Ce nom n'est pas autorisé.</path-node-not-allowed>
 			<non-node>Vous n'avez pas les droits d'accès au noeud cible</non-node>
 			<cannot-save>Certaines contraintes ont été violées durant cette opération.</cannot-save>
-			<item-exists-exception>Un noeud du même nom existe déjà</item-exists-exception>
+      <item-exists-exception>Un noeud du même nom existe déjà.</item-exists-exception>
       <translation-node-same-language-default>Cette traduction possède la même langue que le contenu courant.</translation-node-same-language-default>
 			<UnsupportedRepositoryOperationException>Cette cible ne peut pas être référencée</UnsupportedRepositoryOperationException>
     </msg>
@@ -2552,7 +2553,7 @@
 	</UIPopupSymLink>
     <UIPopupSymLink>
       <title>
-        <UIContentSelectorOne>Sélectionnez Document</UIContentSelectorOne>
+      <UIContentSelectorOne>Sélectionnez un Document</UIContentSelectorOne>
       </title>
     </UIPopupSymLink>
 
@@ -2565,16 +2566,16 @@
 
   <UIWorkingArea>
     <msg>
-      <create-link-problem>Vous ne pouvez pas créer de lien entre les noeuds '{0}' et '{1}'</create-link-problem>
-      <dest-node-is-link>Le noeud cible '{0}' est déjà un raccourci. Il est donc impossible de créer le raccourci</dest-node-is-link>
-      <selected-is-link>Le noeud sélectionné '{0}' est un raccourci, vous ne pouvez pas créer un lien qui pointe sur un autre lien</selected-is-link>
+      <create-link-problem>;Vous ne pouvez pas créer de lien entre les noeuds '{0}' et '{1}'</create-link-problem>
+      <dest-node-is-link>Le noeud cible '{0}' est déjà un raccourci. Il est donc impossible de créer le raccourci.</dest-node-is-link>
+      <selected-is-link>Le noeud sélectionné '{0}' est un raccourci, vous ne pouvez pas créer un lien qui pointe sur un autre lien.</selected-is-link>
       <confirm-create-link>Souhaitez-vous réellement créer un raccourci à cet endroit?</confirm-create-link>
     </msg>
   </UIWorkingArea>
 
   <ECMContextMenu>
     <event>
-      <CreateLink>Créer un raccourci</CreateLink>
+      <CreateLink>Créer un Raccourci</CreateLink>
     </event>
   </ECMContextMenu>
 
@@ -2589,13 +2590,15 @@
 
   <UIPopupTaxonomy>
     <title>
-			<UIOneTaxonomySelector>Ajouter des catégories</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Ajouter des Catégories</UIOneTaxonomySelector>
     </title>
   </UIPopupTaxonomy>
 
   <UITreeTaxonomyList>
   	<label>
-      <taxonomyTree>Arbre de Taxonomies:</taxonomyTree>
+      <taxonomyTree>Arbre de Catégories:</taxonomyTree>
+      <rootNodePath>Arbre Racine:</rootNodePath>
+      <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>
 
@@ -2634,7 +2637,7 @@
   </UIPopupWindow>
   <UICategoriesAddedList>
   	<msg>
-  		<ItemExistsException>Une catégorie du même nom existe déjà</ItemExistsException>
+      <ItemExistsException>Une catégorie du même nom existe déjà.</ItemExistsException>
   	</msg>
 	</UICategoriesAddedList>
 
@@ -2643,7 +2646,7 @@
 	    <Close>#{word.cancel}</Close>
 	    <OK>OK</OK>
 	    <ReplaceData>Remplacer les données</ReplaceData>
-	    <Back>Retour à renommer</Back>
+      <Back>Retour à Renommer</Back>
 	    <Keepfile>Gardez les deux fichiers</Keepfile>
     </label>
 	</UIConfirmMessage>
@@ -2651,9 +2654,9 @@
   <UIRestoreConfirmMessage>
     <label>
       <Close>#{word.close}</Close>
-      <OK>OK</OK>
+      <OK>Valider</OK>
 	    <ReplaceData>Remplacer les données</ReplaceData>
-	    <Back>Retour à renommer</Back>
+      <Back>Retour à Renommer</Back>
 	    <Keepfile>Gardez les deux fichiers</Keepfile>
     </label>
   </UIRestoreConfirmMessage>
@@ -2667,27 +2670,27 @@
 
   <UIWorkingArea>
     <msg>
-      <can-not-move-to-itself>Impossible de déplacer: La destination et la source sont identiques</can-not-move-to-itself>
-      <is-editing>Vous ne pouvez pas déplacer un document en cours d'édition.</is-editing>
+      <can-not-move-to-itself>Impossible de déplacer: La destination et la source sont identiques.</can-not-move-to-itself>
+      <is-editing>Vous ne pouvez pas déplacer un document en cours de modification.</is-editing>
     </msg>
   </UIWorkingArea>
 
   <UIImportNode>
     <label>
-      <behavior>Gestion de l'UUID</behavior>
+      <behavior>Conflit UUID</behavior>
       <versionHistory>Historique</versionHistory>
     </label>
     <msg>
-      <history-invalid-type>Le type de fichier de l'historique est invalide, un fichier zip est attendu</history-invalid-type>
+      <history-invalid-type>Le type de fichier de l'historique est invalide, un fichier zip est attendu.</history-invalid-type>
       <history-invalid-content>Le contenu de l'historique est invalide, veuillez sélectionner le bon fichier.</history-invalid-content>
     </msg>
   </UIImportNode>
 
   <Import>
     <Behavior>
-      <type0>Créer un nouveau</type0>
-      <type1>Supprimer l'existant</type1>
-      <type2>Remplacer l'existant</type2>
+      <type0>Créer un nouveau noeud</type0>
+      <type1>Supprimer le noeud existant</type1>
+      <type2>Remplacer le noeud existant</type2>
       <type3>Lever une exception</type3>
     </Behavior>
   </Import>
@@ -2700,14 +2703,14 @@
 
   <UIPopupMenu>
   	<msg>
-  		<node-locked-other-person>Ce noeud ou un de ses ancètres est actuellement verrouillé par un autre utilisateur, vous ne pouvez donc pas le supprimer!</node-locked-other-person>
+      <node-locked-other-person>Ce noeud ou un de ses ancètres est actuellement verrouillé par un autre utilisateur, vous ne pouvez donc pas le supprimer.</node-locked-other-person>
     </msg>
   </UIPopupMenu>
 
   <Import>
     <label>
       <docview>Vue Document</docview>
-      <sysview>Vue System</sysview>
+      <sysview>Vue Système</sysview>
     </label>
   </Import>
 
@@ -2736,7 +2739,7 @@
 
   <UIPopupMenu>
   	<msg>
-			<can-not-unlock-node-is-checked-in>Impossible de déverouiller car le noeud '{0}' ou un ancètre de '{0}' est à l'état checked-in</can-not-unlock-node-is-checked-in>
+      <can-not-unlock-node-is-checked-in>Impossible de déverrouiller car le noeud '{0}' ou un ancêtre de '{0}' est à l'état checked-in.</can-not-unlock-node-is-checked-in>
 		</msg>
   </UIPopupMenu>
 
@@ -2745,22 +2748,22 @@
   -->
   <UIActionBar>
   	<msg>
-				<cannot-enable-version>Impossible d'activer le contrôle de version</cannot-enable-version>
+      <cannot-enable-version>Impossible d'activer le versionnage sur ce noeud.</cannot-enable-version>
 			</msg>
   </UIActionBar>
   <UIPopupMenu>
   	<msg>
-				<cannot-readsource>Impossible de lire des données du noeud source</cannot-readsource>
+        <cannot-readsource>Impossible de lire des données du noeud source.</cannot-readsource>
 	 	</msg>
   </UIPopupMenu>
   <UIUploadForm>
     <msg>
-      <upload-not-null>Vous devez ajouter un fichier avec d'ajouter une catégorie</upload-not-null>
+      <upload-not-null>Veuillez ajouter un fichier avant d'ajouter une catégorie.</upload-not-null>
     </msg>
   </UIUploadForm>
   <UIActionBar>
     <msg>
-      <allow-setProperty>Vous devez sélectionner la permission "set property" pour ce groupe</allow-setProperty>
+      <allow-setProperty>Vous devez positionner une propriété pour ce groupe.</allow-setProperty>
     </msg>
   </UIActionBar>
 
@@ -2777,24 +2780,24 @@
 	</UISaveQueryForm>
 	<UISimpleSearch>
 		<msg>
-			<name-not-allowed>Un mot ou un phrase dans le contenu est interdit.</name-not-allowed>
+      <name-not-allowed>Un mot ou une phrase dans le contenu est interdit.</name-not-allowed>
 		</msg>
 	</UISimpleSearch>
 	<Drives>
 		<label>
 			<Private>Privé</Private>
 			<Public>Public</Public>
-			<BackupCenter>Centre de sauvegarde</BackupCenter>
+      <BackupCenter>Centre de Sauvegarde</BackupCenter>
 			<CategorizedDocumentsCenter>Centre Document des Catégories </CategorizedDocumentsCenter>
 			<CollaborationCenter>Centre de Collaboration</CollaborationCenter>
-			<DigitalAssetsManagementCenter>Centre de Management des Matétiels Digitaux</DigitalAssetsManagementCenter>
-			<DMSAdministration>Administrateur de DMS</DMSAdministration>
-			<DocumentsManagementCenter>Centre de Management des Documents</DocumentsManagementCenter>
-			<LiveDocumentsCenter>Centre des Document Live</LiveDocumentsCenter>
+      <DigitalAssetsManagementCenter>Centre de Gestion des Contenus Numériques</DigitalAssetsManagementCenter>
+      <DMSAdministration>Administration DMS</DMSAdministration>
+      <DocumentsManagementCenter>Centre de Gestion des Documents</DocumentsManagementCenter>
+      <LiveDocumentsCenter>Centre des Document Actifs</LiveDocumentsCenter>
 			<PendingDocumentsCenter>Centre des Documents en Attente</PendingDocumentsCenter>
 			<RecordsManagementCenter>Centre de Management Des Enregistrements</RecordsManagementCenter>
-			<SharedUsersSpace>Espace partagé des utilisateurs</SharedUsersSpace>
-			<Systemfiles>Fichiers système</Systemfiles>
+      <SharedUsersSpace>Espace Partagé des Utilisateurs</SharedUsersSpace>
+      <Systemfiles>Fichiers Système</Systemfiles>
 			<ValidationRequestsDocumentsCenter>Centre des Documents en Attente de Validation</ValidationRequestsDocumentsCenter>
 		</label>
 	</Drives>
@@ -2813,8 +2816,8 @@
 	</UIUploadContent>
 	<UIUploadForm>
 		<action>
-			<AddUpload>Ajouter Upload</AddUpload>
-			<RemoveUpload>Supprimer Upload</RemoveUpload>
+      <AddUpload>Ajouter un Fichier</AddUpload>
+      <RemoveUpload>Ajout de fichier</RemoveUpload>
 		</action>
 	</UIUploadForm>
 	<UIExternalMetadataForm>
@@ -2844,19 +2847,19 @@
    -->
   <UIFolderForm>
     <label>
-      <nt_folder>Répertoire de documents</nt_folder>
-      <nt_unstructured>Répertoire de contenu</nt_unstructured>
-      <exo_cssFolder>Répertoire CSS</exo_cssFolder>
-      <exo_jsFolder>Répertoire Javascript</exo_jsFolder>
-      <exo_linkFolder>Répertoire de Liens</exo_linkFolder>
-      <exo_webFolder>Répertoire de contenu Web</exo_webFolder>
+      <nt_folder>Documents</nt_folder>
+      <nt_unstructured>Contenus</nt_unstructured>
+      <exo_cssFolder>CSS</exo_cssFolder>
+      <exo_jsFolder>Javascript</exo_jsFolder>
+      <exo_linkFolder>Liens</exo_linkFolder>
+      <exo_webFolder>Web</exo_webFolder>
     </label>
   </UIFolderForm>
 
   	<Comments>
 		  <tooltip>
 		    <remove-comment>Supprimer ce commentaire</remove-comment>
-		    <edit-comment>Editer ce commentaire</edit-comment>
+      <edit-comment>Modifier ce commentaire</edit-comment>
 		  </tooltip>
 			</Comments>
 			<UIDocumentInfo>
@@ -2866,25 +2869,25 @@
 			</UIDocumentInfo>
 		 <UIDrivesBrowser>
 		  <msg>
-		    <drive-not-exist>Le lecteur '{0}' est introuvable ou vous n'avez pas le droit d'accéder à ce dépôt de données</drive-not-exist>
+    <drive-not-exist>Le lecteur '{0}' est introuvable ou vous n'avez pas le droit d'accéder à cet entrepôt.</drive-not-exist>
 		  </msg>
 		 </UIDrivesBrowser>
 
 	 <UIExportNode>
 	  <msg>
-	    <OutOfMemoryError>Veuillez sélectionner la vue système pour exporter une grosse quantité de données</OutOfMemoryError>
+    <OutOfMemoryError>Vous devriez sélectionner la vue système pour exporter une grande quantité de données.</OutOfMemoryError>
 	  </msg>
 	 </UIExportNode>
  	 <Taxonomy>
 		<msg>
-			<AccessDeniedException>Vous n'avez pas le droit d'accéder à ces taxonomies</AccessDeniedException>
+      <AccessDeniedException>Vous n'avez pas le droit d'accéder à ces arbres de catégories.</AccessDeniedException>
 		</msg>
 	 </Taxonomy>
 
 	 <UIJcrExplorerEditForm>
 		<msg>
-			<notNullDriveName>Le nom du lecteur est vide. Veuillez saisir une valeur</notNullDriveName>
-			<notNullPath>Le chemin est vide. Veuillez saisir une valeur</notNullPath>
+      <notNullDriveName>Le nom du lecteur est vide. Veuillez saisir une valeur.</notNullDriveName>
+      <notNullPath>Le chemin est vide. Veuillez saisir une valeur.</notNullPath>
 		</msg>
 	</UIJcrExplorerEditForm>
 
@@ -2896,28 +2899,28 @@
 
 	<SameNamePopup>
 	  <title>
-		  <UIUploadBehaviorWithSameName>Chargement de fichier</UIUploadBehaviorWithSameName>
+      <UIUploadBehaviorWithSameName>Ajouter un fichier</UIUploadBehaviorWithSameName>
 	  </title>
 	</SameNamePopup>
 
 	<UISingleUploadForm>
-    <title>Charger un fichier</title>
+    <title>Ajouter un fichier</title>
     <label>
       <upload>Sélectionner un fichier</upload>
       <name>Nom</name>
-      <fieldListTaxonomy>Liste des Taxonomies</fieldListTaxonomy>
+      <fieldListTaxonomy>Liste des Catégories</fieldListTaxonomy>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <fileName-error>Veuillez vous assurer que vous avez chargé le fichier en cliquant sur l'icône de chargement.</fileName-error>
-      <taxonomyPath-error>Veuillez choisir une taxonomie!</taxonomyPath-error>
-      <fileName-invalid>Le nom du fichier contient des caractères invalides. Veuillez changer le nom fichier avant de le charger.</fileName-invalid>
-      <fileSize-too-big>La taille du fichier est trop grande. Veuillez découper votre fichier en plusieurs parties ou utiliser l'accès webdav.</fileSize-too-big>
-      <name-is-exist>Le nom '{0}' existe déjà. Vous ne pouvez pas charger plusieurs fichiers du même nom</name-is-exist>
-      <contraint-violation>Impossible d'ajouter le noeud '{0}' car son type ne convient pas aux contraintes imposées par le noeud parent</contraint-violation>
+      <fileName-error>Veuillez vous assurer que vous avez transféré le fichier en cliquant sur l'icône de chargement.</fileName-error>
+      <taxonomyPath-error>Veuillez choisir une catégorie.</taxonomyPath-error>
+      <fileName-invalid>Le nom du fichier contient des caractères invalides. Veuillez changer le nom fichier avant de l'envoyer.</fileName-invalid>
+      <fileSize-too-big>La taille du fichier est trop importante. Essayez de découper votre fichier en plusieurs parties ou utiliser l'accès webdav.</fileSize-too-big>
+      <name-is-exist>Le nom '{0}' existe déjà. Vous ne pouvez pas ajouter plusieurs fichiers du même nom.</name-is-exist>
+      <contraint-violation>Impossible d'ajouter le noeud '{0}' car son type ne convient pas aux contraintes imposées par le noeud parent.</contraint-violation>
       <lock-exception>Ce noeud est verrouillé. Certaines actions ne marcheront pas correctement.</lock-exception>
     </msg>
   </UISingleUploadForm>
@@ -2926,16 +2929,16 @@
       <fileName>Nom du fichier</fileName>
       <nodeName>Nom du noeud</nodeName>
       <fileSize>Taille du fichier</fileSize>
-      <mimeType>Mime Type</mimeType>
+      <mimeType>Type Mime</mimeType>
     </label>
     <title>
-      <uploaded-file>Fichier chargé</uploaded-file>
+      <uploaded-file>Fichier Ajouté</uploaded-file>
       <external-metadata>Metadonnées externes</external-metadata>
       <metadata-name>Nom de la métadonnée</metadata-name>
       <action>Action</action>
     </title>
     <tooltip>
-      <Edit>Editer</Edit>
+      <Edit>Modifier</Edit>
     </tooltip>
     <msg>
       <has-not-template>Le template de '{0}' est vide.</has-not-template>
@@ -2988,17 +2991,17 @@
       <OwnedByMe>Créés par moi</OwnedByMe>
       <Favourites>Favoris</Favourites>
       <Hidden>Cachés</Hidden>
-      <Trash>Poubelle</Trash>
-      <Configuration>Configurer les préférences</Configuration>
+      <Trash>Corbeille</Trash>
+      <Configuration>Paramètres</Configuration>
     </label>
     <title>
-      <allItems>Tous les éléments</allItems>
+      <allItems>Afficher les éléments</allItems>
     </title>
   </UIAllItems>
 
   <UIPreferencesForm>
       <label>
-          <Alphabetic>Alphabétique</Alphabetic>
+          <Alphabetic>Nom</Alphabetic>
           <Type>Type</Type>
           <CreatedDate>Date de Création</CreatedDate>
           <ModifiedDate>Date de Modification</ModifiedDate>
@@ -3039,7 +3042,7 @@
 
   <UISavedSearches>
     <title>
-      <savedSearches>Recherches Sauvegardées</savedSearches>
+      <savedSearches>Recherches Enregistrées</savedSearches>
     </title>
   </UISavedSearches>
   <DocumentType>
@@ -3060,7 +3063,7 @@
     	<Documents>Document</Documents>
     	<Contents>Contenu</Contents>
     </label>
-    <title>Configurer les filtres</title>
+    <title>Configurer les Filtres</title>
     <action>
   		<Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -3070,7 +3073,7 @@
   <UIAllItemsByType>
   	<label>
   		<ByType>Filtrer Par Type</ByType>
-  		<DocumentFilterConfiguration>Configurer les filtres</DocumentFilterConfiguration>
+      <DocumentFilterConfiguration>Configurer les Filtres</DocumentFilterConfiguration>
   	</label>
    	<title>
   	  <ShowVideo>Afficher les vidéos</ShowVideo>
@@ -3103,7 +3106,7 @@
       <showOwnedByUser>Créés par moi</showOwnedByUser>
       <showFavourites>Favoris</showFavourites>
       <showHiddens>Cachés</showHiddens>
-      <showTrash>Poubelle</showTrash>
+      <showTrash>Corbeille</showTrash>
     </label>
     <title>Configurer les préférences</title>
     <action>
@@ -3112,23 +3115,9 @@
     </action>
   </UIAllItemsPreferenceForm>
 
-  <UIAllItemsPreferenceForm>
-    <label>
-      <OwnedByMe>A moi</OwnedByMe>
-      <Favourites>Favoris</Favourites>
-      <Hidden>Caché</Hidden>
-      <Trash>Poubelle</Trash>
-    </label>
-    <title>Configurer les filtres</title>
-    <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
-    </action>
-  </UIAllItemsPreferenceForm>
-
    <EmptyTrashManageComponent>
     <msg>
-      <confirm-delete>Vider la poubelle?</confirm-delete>
+      <confirm-delete>Vider la Corbeille?</confirm-delete>
     </msg>
   </EmptyTrashManageComponent>
   <UICategoryForm>
@@ -3157,16 +3146,16 @@
       <Group>Groupe</Group>
       <Site>Site</Site>
       <Private>Privé</Private>
-      <tagScopes>Portées du Tag</tagScopes>
+      <tagScopes>Portée des Tags</tagScopes>
     </label>
    </UITaggingForm>
 
    <UITagExplorer>
     <title>
-      <EditPrivateTags>Editer les tags privés</EditPrivateTags>
+      <EditPrivateTags>Modifier les Tags Privés</EditPrivateTags>
       <PublicTags>Tags</PublicTags>
-      <EditPublicTags>Editer les tags</EditPublicTags>
-      <PrivateTags>Tags privés</PrivateTags>
+      <EditPublicTags>Modifier les Tags</EditPublicTags>
+      <PrivateTags>Tags</PrivateTags>
      </title>
    </UITagExplorer>
 
@@ -3178,9 +3167,9 @@
     </header>
   <action>
     <title>
-      <EditTag>Editer le tag</EditTag>
-      <RemoveTag>Supprimer le tag</RemoveTag>
-      <AddTag>Ajouter le tag</AddTag>
+        <EditTag>Modifier le Tag</EditTag>
+        <RemoveTag>Supprimer le Tag</RemoveTag>
+        <AddTag>Ajouter le Tag</AddTag>
     </title>
   </action>
     <msg>
@@ -3191,7 +3180,7 @@
 
   <UIPopupWindow>
     <title>
-      <UIEditingTagsForm>Edition du tag</UIEditingTagsForm>
+      <UIEditingTagsForm>Modifier le Tag</UIEditingTagsForm>
     </title>
   </UIPopupWindow>
 
@@ -3201,31 +3190,31 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <tagName>Nom du tag:</tagName>
+      <tagName>Nom du Tag:</tagName>
       <relatedDocuments>Documents relatifs</relatedDocuments>
     </label>
   </UITagForm>
 
   <TagPopup>
     <title>
-      <UITagForm>Edition du tag</UITagForm>
+      <UITagForm>Modification du Tag</UITagForm>
     </title>
   </TagPopup>
 
 		<UIPopupMenu>
   	<msg>
-  		<node-locked-editing>Le noeud {0} est verouillé par un autre utilisateur!</node-locked-editing>
+      <node-locked-editing>Le noeud {0} est verouillé par un autre utilisateur.</node-locked-editing>
     </msg>
   </UIPopupMenu>
   <UITagStyleForm>
     <msg>
-      <error-update>Erreur lors de la mise à jour</error-update>
+      <error-update>Erreur lors de la mise à jour.</error-update>
     </msg>
   </UITagStyleForm>
 
   <UIPopupMenu>
     <msg>
-      <editTagAccessDenied>Accès refusé!</editTagAccessDenied>
+      <editTagAccessDenied>Accès refusé.</editTagAccessDenied>
     </msg>
   </UIPopupMenu>
 
@@ -3257,8 +3246,8 @@
 
   <NodeTypeNameValidator>
     <msg>
-      <Invalid-char>Il existe des caractères invalides dans la saisie. Veuillez saisir une autre valeur</Invalid-char>
-      <empty-input>La valeur du champ est vide</empty-input>
+      <Invalid-char>Il existe des caractères invalides dans la saisie. Veuillez saisir une autre valeur.</Invalid-char>
+      <empty-input>La valeur du champ est vide.</empty-input>
     </msg>
   </NodeTypeNameValidator>
 
@@ -3272,23 +3261,23 @@
 
   <UIDocumentInfo>
     <msg>
-      <repository-error>Erreur, l'information concernant le dépôt de données est perdue</repository-error>
+      <repository-error>Une erreur est survenue. L'information de l'entrepôt a été perdue.</repository-error>
     </msg>
   </UIDocumentInfo>
 
   <UITreeExplorer>
     <msg>
-      <repository-error>Erreur, l'information concernant le dépôt de données est perdue</repository-error>
+      <repository-error>Une erreur est survenue. L'information de l'entrepôt a été perdue.</repository-error>
     </msg>
   </UITreeExplorer>
   <UIDocumentForm>
   	<msg>
-  		<constraintviolation-exception>Impossible de sauvegarder le document. Les données saisies sont invalides ou vides</constraintviolation-exception>
+      <constraintviolation-exception>Impossible d'enregistrer le document. Les données saisies sont invalides ou vides.</constraintviolation-exception>
   	</msg>
   </UIDocumentForm>
   <UIActionForm>
   	<msg>
-  		<constraintviolation-exception>Impossible de sauvegarder le document. Les données saisies sont invalides ou vides</constraintviolation-exception>
+      <constraintviolation-exception>Impossible d'enregistrer le document. Les données saisies sont invalides ou vides.</constraintviolation-exception>
   	</msg>
   </UIActionForm>
 
@@ -3298,7 +3287,7 @@
       <Cancel>Annuler</Cancel>
     </action>
     <label>
-      <formInput>Ancien chemin perdu, veuillez en choisir un autre</formInput>
+      <formInput>Ancien chemin perdu, veuillez en choisir un autre.</formInput>
     </label>
   </UISelectRestorePath>
   <PathNode>
@@ -3308,29 +3297,29 @@
   </PathNode>
   <UIPopupPathFoRestore>
     <title>
-      <UIOneNodePathSelector>Choisir le noeud parent</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Choisir le Noeud Parent</UIOneNodePathSelector>
     </title>
   </UIPopupPathFoRestore>
   <rootNodeInfo>
     <title>
-      <AddRootNode>Ajouter le noeud racine</AddRootNode>
+      <AddRootNode>Ajouter le Noeud Racine</AddRootNode>
     </title>
   </rootNodeInfo>
 
   <UIPopupWindow>
     <title>
-      <UISelectRestorePath>Choisir le répertoire de restauration</UISelectRestorePath>
+      <UISelectRestorePath>Choisir le Chemin de Restauration</UISelectRestorePath>
     </title>
   </UIPopupWindow>
   <UIActionForm>
     <msg>
-      <homePath-emty>Le chemin d'accueil est vide</homePath-emty>
-      <targetPath-emty>Le chemin cible est vide</targetPath-emty>
+      <homePath-emty>Le chemin d'accueil est vide.</homePath-emty>
+      <targetPath-emty>Le chemin cible est vide.</targetPath-emty>
     </msg>
 		</UIActionForm>
 		<UIActionBar>
 				<msg>
-				  <not-exist-categories>Il n'y a pas de catégories</not-exist-categories>
+        <not-exist-categories>Il n'y a pas de catégories.</not-exist-categories>
 				</msg>
 		</UIActionBar>
 
@@ -3361,38 +3350,38 @@
       <pending>Rédigé</pending>
       <approved>Validé</approved>
       <inreview>En revue</inreview>
-      <staged>Prêt à publier</staged>
+      <staged>Prêt à Publier</staged>
       <published>Publié</published>
       <live>Publié</live>
     </status>
     <scheduled>
-      <title>Planifier</title>
+      <title>Planifié</title>
       <from>de</from>
       <to>à</to>
     </scheduled>
     <title>
-      <preview>Prévisualiser</preview>
+      <preview>Aperçu</preview>
       <restore>Restaurer</restore>
     </title>
     <msg>
-      <have-no-view-template>Le formulaire de consultation n'est pas supporté</have-no-view-template>
-      <restore-complete>Restauration complète</restore-complete>
+      <have-no-view-template>Le gabarit d'affichage n'est pas supporté.</have-no-view-template>
+      <restore-complete>Restauration complète.</restore-complete>
     </msg>
   </UIPublicationPanel>
   <UIPublicationHistory>
     <header>
       <date>La date</date>
-      <versionName>Le nom de version</versionName>
-      <currentState>L'état courant</currentState>
-      <user>L'auteur</user>
-      <description>La description</description>
+      <versionName>Nom de Version</versionName>
+      <currentState>Etat</currentState>
+      <user>Auteur</user>
+      <description>Libellé</description>
     </header>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
       <introduction>Vous pouvez programmer la publication de votre document. Choisissez la date que vous souhaitez voir votre document publié</introduction>
-      <no-schedule-info>Aucun calendrier de publication de votre document</no-schedule-info>
+      <no-schedule-info>Il n'y a pas de calendrier de publication pour votre document</no-schedule-info>
     </label>
     <scheduled>
       <title>Planifier</title>
@@ -3400,34 +3389,33 @@
       <to>à</to>
     </scheduled>
     <msg>
-      <save-finished>Nouveau calendrier de publication est sauvegardé avec succès.</save-finished>
+      <save-finished>Votre nouveau calendrier de publication a été enregistré avec succès.</save-finished>
     </msg>
   </UIPublicationSchedule>
 
   <UIPublicationPanel>
     <label>
-      <header>Le temps de publication</header>
-      <start>Début de la publication</start>
-      <end>Fin de la publication</end>
+      <header>Date de Publication</header>
+      <start>Début</start>
+      <end>Fin</end>
     </label>
     <action>
       <Save>Enregistrer</Save>
-      <Close>Fermer</Close>
     </action>
     <msg>
-      <invalid-format>Format incorrect. S'il vous plaît vérifier à nouveau</invalid-format>
-      <fromDate-after-toDate>Les dates ne sont pas cohérentes.</fromDate-after-toDate>
+      <invalid-format>Format de date incorrect. Veuillez vérifier à nouveau.</invalid-format>
+      <fromDate-after-toDate>La date de début doit être avant la date de fin.</fromDate-after-toDate>
     </msg>
   </UIPublicationPanel>
   <UIPopupWindow>
     <title>
-      <UIPublicationContainer>Gérer la publication</UIPublicationContainer>
-      <UIPublishingPanel>Gérer la publication</UIPublishingPanel>
+      <UIPublicationContainer>Gérer la Publication</UIPublicationContainer>
+      <UIPublishingPanel>Gérer la Publication</UIPublishingPanel>
     </title>
   </UIPopupWindow>
   <WCMContentView>
    <header>
-     <status>L'état</status>
+      <status>Etat</status>
      <author>L'auteur</author>
      <date>La date de création</date>
      <title>Le titre du document</title>
@@ -3436,7 +3424,7 @@
   </WCMContentView>
   <UITagForm>
   		<msg>
-  			 <NameAlreadyExist>Ce nom du tag existe déjà</NameAlreadyExist>
+      <NameAlreadyExist>Ce nom du tag existe déjà.</NameAlreadyExist>
   		</msg>
   </UITagForm>
 
@@ -3446,7 +3434,7 @@
   <UICategoryManagerSearch>
     <tab>
       <label>
-        <UIOneTaxonomySelector>Choisir une catégorie</UIOneTaxonomySelector>
+        <UIOneTaxonomySelector>Choisir une Catégorie</UIOneTaxonomySelector>
       </label>
     </tab>
     <action>
@@ -3456,29 +3444,30 @@
 
   <UIPreferencesForm>
   	 <action>
-    	 <HideAdvance>Cacher les préférence avancée</HideAdvance>
-    	 <ShowAdvance>Afficher les référence avancée</ShowAdvance>
+     <HideAdvance>Masquer les Paramètres Avancés</HideAdvance>
+     <ShowAdvance>Afficher les Paramètres Avancés</ShowAdvance>
     </action>
     <label>
-    	<Advance>Avancée</Advance>
+    <Advance>Avancé</Advance>
     </label>
   </UIPreferencesForm>
 
   <UIJCRExplorerPortlet>
 	<msg>
-	  <file-access-denied>L'accès au fichier est interdit.</file-access-denied>
-	  <anonymous-access-denied>Utilisateur anonyme n'a pas la permission d'utiliser cette fonction.</anonymous-access-denied>
+  <file-access-denied>Accès au fichier refusé.</file-access-denied>
+  <anonymous-access-denied>Un utilisateur anonyme n'a pas la permission d'utiliser cette fonction.</anonymous-access-denied>
 	</msg>
   </UIJCRExplorerPortlet>
   <UIDrivesArea>
     <DrivesArea>
-      <allDrives>Cliquez sur le bouton "Afficher les lecteurs" sur la barre d'action pour afficher / cacher la liste des lecteurs.</allDrives>
+      <allDrives>Cliquez sur le bouton "Afficher les Lecteurs" sur la barre d'action pour afficher / cacher la liste des lecteurs.</allDrives>
+      <ShowDrives>Afficher les Lecteurs</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
     <msg>
-      <fields-saved>Toutes les valeurs de champ sont enregistrées.</fields-saved>
-      <fields-cancelled>Toutes les valeurs de champ sont annulées.</fields-cancelled>
+      <fields-saved>Toutes les valeurs ont été enregistrées.</fields-saved>
+      <fields-cancelled>Toutes les valeurs ont été annulées.</fields-cancelled>
     </msg>
   </UIJcrExplorerEditForm>
   <UIDocumentForm>
@@ -3507,64 +3496,63 @@
 	  <NOCONTRACT>Aucun contrat</NOCONTRACT>
 	  <true>Vrai</true>
 	  <false>Faux</false>
-	  <one-minute>Une fois par Minute</one-minute>
+	  <one-minute>Une fois par minute</one-minute>
 	  <hourly>Une fois par heure</hourly>
-	  <daily>Journalier</daily>
+	  <daily>Quotidien</daily>
 	  <quarterly>Trimestriel</quarterly>
 	  <yearly>Annuel</yearly>
 	  <ten-years>Tous les 10 ans</ten-years>
 	  <read>Action Utilisateur</read>
 	  <schedule>Planificateur</schedule>
-	  <node_added>Ajout de contenu</node_added>
-	  <node_removed>Contenu supprimé</node_removed>
-	  <property_added>Ajout de la propriété</property_added>
-	  <property_removed>Suppression de la propriété</property_removed>
-	  <property_changed>Modification de la propriété</property_changed>
+  <node_added>Ajout de Contenu</node_added>
+  <node_removed>Suppression de Contenu</node_removed>
+  <property_added>Ajout de Propriété</property_added>
+  <property_removed>Suppression de Propriété</property_removed>
+  <property_changed>Modification de Propriété</property_changed>
 	</label>
   </lifecyclePhase>
   <UIPopupMenu>
   	<msg>
-		<can-not-remove-locked-node>Le noeud {0} est verrouillé! vous ne pouvez pas le supprimer!</can-not-remove-locked-node>
-		<can-not-remove-checked-in-node>Node {0} ou son parent est cochée, vous ne pouvez pas le déplacer à la corbeille!</can-not-remove-checked-in-node>
-		<access-denied-to-delete>Accès refusé! Vous ne pouvez pas supprimer le noeud {0}!</access-denied-to-delete>
-		<can-not-lock-node>Vous n'avez pas les droits suffisants pour verrouiller le noeud {0}. Contactez votre administateur</can-not-lock-node>
+<can-not-remove-locked-node>Le noeud {0} est verrouillé. vous ne pouvez pas le supprimer.</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>Le noeud {0} ou son parent est checked in, vous ne pouvez pas le déplacer dans la corbeille.</can-not-remove-checked-in-node>
+<access-denied-to-delete>Accès refusé. Vous ne pouvez pas supprimer le noeud {0}.</access-denied-to-delete>
   	</msg>
   </UIPopupMenu>
   <UIPropertyForm>
   	<msg>
-	  <unknown-error>Erreur iconnue, vous ne pouvez pas modifier cette propriété</unknown-error>
+  <unknown-error>Erreur iconnue, vous ne pouvez pas modifier cette propriété.</unknown-error>
     </msg>
   </UIPropertyForm>
   <UIWatchDocumentForm>
     <msg>
-      <node-is-locked>Ce noeud est bloqué, vous ne pouvez pas le suivre!</node-is-locked>
-      <unknown-error>Des erreurs sont survenus, vous ne pouvez pas suivre ce noeud!</unknown-error>
+      <node-is-locked>Ce noeud est bloqué, vous ne pouvez pas le suivre.</node-is-locked>
+      <unknown-error>Des erreurs sont survenues, vous ne pouvez pas suivre ce noeud.</unknown-error>
     </msg>
   </UIWatchDocumentForm>
   <UIActionForm>
     <msg>
-      <xss-vulnerability-character>Le champ '{0}' contient des caractères vulnérables aux attaques XSS</xss-vulnerability-character>
+      <xss-vulnerability-character>Le champ '{0}' contient des caractères vulnérables aux attaques XSS.</xss-vulnerability-character>
     </msg>
   </UIActionForm>
   <UIMultiUpload>
   	<label>
 	  	<AbortAll>Tout annuler</AbortAll>
-      <AbortAllFiles>Annuler tous les fichiers</AbortAllFiles>
-      <MaxFileSize>La taille maximale des fichiers est </MaxFileSize>
-      <InvalidCharacters>Les caractères invalides seront remplacés par un '-'</InvalidCharacters>
-      <DropFileMessage>Déposer vos fichiers dans le répertoire courant</DropFileMessage>
+    <AbortAllFiles>Annuler tous les transferts</AbortAllFiles>
+    <MaxFileSize>La taille maximale des fichiers est</MaxFileSize>
+    <InvalidCharacters>Les caractères invalides seront remplacés par un '-'</InvalidCharacters>
+    <DropFileMessage>Déposez vos fichiers dans le dossier courant</DropFileMessage>
       <Close>Fermer</Close>
-      <AbortAllConfirmation>Voulez vous annuler tous les fichiers en cours de téléchargement?</AbortAllConfirmation>
-      <MaxFileSizeAlert>La taille du fichier excède la taille limite accordée de </MaxFileSizeAlert>
       <in>dans</in>
-      <Canceled>Annulé</Canceled>
-      <Cancel>annuler</Cancel>
-      <Error>erreur</Error>
-      <Keep>Garder tous</Keep>
-      <Replace>remplacer</Replace>
+    <MaxFileSizeAlert>La taille du fichier excède la taille limite accordée de</MaxFileSizeAlert>
       <Waiting>En attente</Waiting>
-      <AlreadyInUse>Déjà utilisé</AlreadyInUse>
+    <Error>Erreur</Error>
       <or>ou</or>
+    <AlreadyInUse>Déjà utilisé</AlreadyInUse>
+    <Keep>Garder les deux</Keep>
+    <Replace>Remplacer</Replace>
+    <Canceled>Annulé</Canceled>
+    <Cancel>Annuler</Cancel>
+    <AbortAllConfirmation>Voulez vous annuler tous les fichiers en cours de transfert?</AbortAllConfirmation>
   	</label>
   </UIMultiUpload>    
   <UIDocumentNodeList>
@@ -3581,7 +3569,7 @@
       <date>Date</date>
       <size>Taille</size>
       <sortBy>Trier par:</sortBy>
-      <filesAreSelected>fichier sont selectionnés.</filesAreSelected>
+      <filesAreSelected>fichiers sont selectionnés.</filesAreSelected>
       <ClearSelection>Annuler la sélection</ClearSelection>
       <more>Plus</more>
     </label>

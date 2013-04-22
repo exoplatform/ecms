@@ -64,15 +64,15 @@
    	  <UISCVParameterInputBox>par</UISCVParameterInputBox>
       <PrintSettingBlock>Visibilité</PrintSettingBlock>
    	  <UISCVPrintPageParameter>Avec</UISCVPrintPageParameter>
-   	  <UISCVConfigPrintPageFormInputSet>Afficher dans la page</UISCVConfigPrintPageFormInputSet>
+      <UISCVConfigPrintPageFormInputSet>Page de Détail</UISCVConfigPrintPageFormInputSet>
 	  <LockStatus>Verrouillage</LockStatus>
-	  <CacheManagement>Contenu visibilité</CacheManagement>
+      <CacheManagement>Filtrage des Contenus</CacheManagement>
 	  <UISCVCacheRadioBox>Partager les contenus entre les utilisateurs</UISCVCacheRadioBox>
     </label>
     <help>
-      <ContentPathBlock>Choisissez le contenu que vous souhaitez afficher. Ce contenu par défaut sera remplacé dynamiquement si vous activez la Navigation Dynamique (Paramètres Avancés, voir ci-dessous)</ContentPathBlock>
+      <ContentPathBlock>Choisissez le contenu que vous souhaitez afficher. Ce contenu par défaut sera remplacé dynamiquement si vous activez la Navigation Dynamique  dans les Paramètres Avancés</ContentPathBlock>
       <DisplaySettingBlock>Vous pouvez afficher ou cacher la barre d'options avec le lien "Imprimer". L'affichage du titre et de la date sont également optionnels.</DisplaySettingBlock>
-      <ContextualHelp>Active la navigation dynamique. Le contenu peut être changé dynamiquement par un chemin fourni dans un paramètre de l'URL.</ContextualHelp>
+      <ContextualHelp>Avec la Navigation dynamique, le chemin du contenu à afficher peut être indiqué via un paramètre de l'URL.</ContextualHelp>
       <ParameterHelp>Ce paramètre sera utilisé pour récupérer le contenu si la Navigation Dynamique est activée.</ParameterHelp>
     </help>
 	<msg>
@@ -81,8 +81,8 @@
     <tab>
       <label>
         <UISCVConfigContentFormInputSet>Contenu</UISCVConfigContentFormInputSet>
-        <UISCVConfigDisplayFormInputSet>Paramètres d'Affichage</UISCVConfigDisplayFormInputSet>
-        <UISCVConfigPrintFormInputSet>Paramètres d'Impression</UISCVConfigPrintFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Affichage</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>Impression</UISCVConfigPrintFormInputSet>
         <UISCVConfigAdvancedFormInputSet>Paramètres Avancés</UISCVConfigAdvancedFormInputSet>
       </label>
     </tab>
@@ -94,7 +94,7 @@
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
     <title>
-      <SelectTargetPage>Afficher dans la page</SelectTargetPage>
+      <SelectTargetPage>Page de Détail</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
   <PublicationStates>
@@ -103,16 +103,16 @@
     <unpublished>Non publié</unpublished>
     <enrolled>Créé</enrolled>
     <draft>Brouillon</draft>
-    <pending>Rédigé</pending>
+    <pending>En attente</pending>
     <approved>Validé</approved>
     <inreview>En revue</inreview>
-    <staged>Prêt à publier</staged>
+    <staged>Prêt à Publier</staged>
     <published>Publié</published>
   </PublicationStates>
   <UISCVCacheRadioBox>
   	<label>
-	  <Enable>Limité par l'authentification</Enable>
-	  <Disable>Limité par le rôle d'utilisateur</Disable>
+      <Enable>Par Authentification</Enable>
+      <Disable>Par Rôle</Disable>
   	</label>
   </UISCVCacheRadioBox>
 </bundle>

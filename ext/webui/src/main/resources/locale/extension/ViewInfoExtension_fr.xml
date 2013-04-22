@@ -2,13 +2,13 @@
 <bundle>
 	<UIPopupWindow>
 		<title>
-			<UIViewInfoManager>Voir l'information</UIViewInfoManager>
+<UIViewInfoManager>Informations</UIViewInfoManager>
 		</title>	
 	</UIPopupWindow>
     
 	<ECMContextMenu>
 		<event>
-			<ViewInfo>Voir l'information</ViewInfo>
+<ViewInfo>Informations</ViewInfo>
 		</event>
 	</ECMContextMenu>
 	<UIViewInfoContainer>
@@ -18,9 +18,9 @@
 			<type>Type</type>
 			<size>Taille</size>
 			<owner>Propriétaire</owner>
-			<lastModifier>Dernière modification</lastModifier>
+      <lastModifier>Dernière modification par</lastModifier>
 			<created>Date de création</created>
-			<lastModified>Dernière date de modification</lastModified>
+      <lastModified>Dernière modification</lastModified>
 			<publicationState>Etat de publication</publicationState>
 		</label>
 		<value>

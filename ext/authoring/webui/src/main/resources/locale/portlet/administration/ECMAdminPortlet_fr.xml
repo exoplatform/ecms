@@ -2,8 +2,8 @@
 <bundle>
   <UIViewFormTabPane>
   		<label>
-          <publicationRequestApproval>Demande d'Approbation</publicationRequestApproval>
-          <publicationApproveContent>Approuver</publicationApproveContent>
+          <publicationRequestApproval>Demander Validation</publicationRequestApproval>
+          <publicationApproveContent>Valider</publicationApproveContent>
           <publicationPublish>Publier</publicationPublish>
   		</label>
   </UIViewFormTabPane>

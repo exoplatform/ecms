@@ -7,8 +7,8 @@
   -->
   <UIActionBar>
     <tooltip>
-      <PublicationRequestApproval>Demander Approbation</PublicationRequestApproval>
-      <PublicationApproveContent>Approuver</PublicationApproveContent>
+      <PublicationRequestApproval>Demander Validation</PublicationRequestApproval>
+      <PublicationApproveContent>Valider</PublicationApproveContent>
       <PublicationPublish>Publier</PublicationPublish>
     </tooltip>
   </UIActionBar>

@@ -83,7 +83,7 @@
       <UIContentBrowsePanelOne>Navigateur de Contenus</UIContentBrowsePanelOne>
       <UIContentBrowsePanelMulti>Navigateur de Contenus</UIContentBrowsePanelMulti>
       <UIContentBrowsePanelFolder>Navigateur de Dossiers</UIContentBrowsePanelFolder>
-      <UIContentSearchForm>Formulaire de Recherche de Contenu</UIContentSearchForm>
+      <UIContentSearchForm>Rechercher</UIContentSearchForm>
       <UIContentSearchResult>Résultat de Recherche</UIContentSearchResult>
       <UIContentViewer>Aperçu du Contenu</UIContentViewer>
       <WebContentMetadataPopup>Sélecteur de Propriété</WebContentMetadataPopup>
@@ -156,7 +156,7 @@
   <UIContentBrowsePathSelector>
     <header>
       <name>Nom</name>
-      <publicationstate>L'état de parution</publicationstate>
+      <publicationstate>Etat de Publication</publicationstate>
       <action>Action</action>
     </header>
     <msg>
@@ -187,7 +187,7 @@
       <DocumentType>Type de document</DocumentType>
     </title>
     <tooltip>
-      <AddMetadataType>Ajouter une propriété</AddMetadataType>
+      <AddMetadataType>Détail Propriété</AddMetadataType>
       <AddNodeType>Ajouter un type de noeud</AddNodeType>
     </tooltip>    
     <label>
@@ -243,7 +243,7 @@
     <header>
       <title>Titre</title>
       <score>Score</score>
-      <publicationstate>L'état de parution</publicationstate>
+      <publicationstate>Etat de Publication</publicationstate>
       <action>Action</action>
     </header>
     <title>
@@ -258,7 +258,7 @@
   <UIContentDialogForm>
     <action>
       <SaveDraft>Enregistrer le brouillon</SaveDraft>
-      <FastPublish>Publication rapide</FastPublish>
+      <FastPublish>Publication Rapide</FastPublish>
       <Preferences>Préférences</Preferences>
       <Close>Fermer</Close>
     </action>
@@ -308,7 +308,7 @@
     <title>
       <SelectUser>Sélectionner l'utilisateur</SelectUser>
       <SelectMember>Sélectionner le membre</SelectMember>
-      <AddAny>Ajouter la Permission à Tous</AddAny>
+      <AddAny>Toutes</AddAny>
     </title>
   </UIPermissionInputSetWithAction>
 
@@ -327,7 +327,7 @@
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Sélectionner le Groupe</selectGroup>
-      <selectMembership>Sélectionner le Rôle</selectMembership>
+      <selectMembership>Rôle</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
