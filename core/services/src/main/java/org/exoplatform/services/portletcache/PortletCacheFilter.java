@@ -103,6 +103,11 @@ public class PortletCacheFilter implements PortletFilter, ActionFilter, RenderFi
       query.putAll((Map<String, String[]>)ctx.getRequest().getParameterMap());
       
       query.put("VISIBILITY", new String[] {(req.getRemoteUser()!=null)?"PRIVATE":"PUBLIC"} );
+      String referer = ctx.getRequest().getHeader("referer");
+      if(referer != null){
+        query.put("REFERER", new String[] {referer} );
+      }
+      query.put("PATH", new String[] {ctx.getRequestURI()} );
       //
       Locale locale = ctx.getLocale();
       //
