@@ -470,7 +470,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         Node node = this.getNodeByPath(nodePath);
         if(checkToMoveToTrash) deleteNotice = "UIWorkingArea.msg.feedback-delete";
         else deleteNotice = "UIWorkingArea.msg.feedback-delete-permanently";
-        deleteNoticeParam = node.getName();
+        deleteNoticeParam = Utils.getTitle(node);
         if (node != null) {
           processRemoveOrMoveToTrash(node.getPath(), node, event, false, checkToMoveToTrash);
         }        
@@ -642,7 +642,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     } else {    	
     	Node node = deleteManageComponent.getNodeByPath(nodePath);
       if(node != null)
-      	nodeName = node.getName();
+      	nodeName = Utils.getTitle(node);
       contentType = deleteManageComponent.getContentType(nodePath);
     	if(contentType == FILE_TYPE)
     		uiConfirmMessage.setId(DELETE_FILE_CONFIRM_TITLE);
