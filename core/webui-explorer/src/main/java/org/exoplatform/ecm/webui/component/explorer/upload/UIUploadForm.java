@@ -312,6 +312,17 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
           name = name.trim();
         }
         name = Text.escapeIllegalJcrChars(name);
+        
+     // Append extension if necessary
+        DMSMimeTypeResolver mimeTypeSolver = DMSMimeTypeResolver.getInstance();
+        String mimeType = mimeTypeSolver.getMimeType(fileName);
+        String ext = "." + fileName.substring(fileName.lastIndexOf(".") + 1);
+        if (name.lastIndexOf(ext) < 0 && !mimeTypeSolver.getMimeType(name).equals(mimeType)) {
+          StringBuffer sb = new StringBuffer();
+          sb.append(name).append(ext);
+          name = sb.toString();
+        }
+        
         if (!passNameValidation(name)) {
           return new ArrayList<String>();
         }
@@ -613,9 +624,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
                     }
                     taxonomyService.addCategory(node, taxonomyTree, taxonomyPath);
                   } catch (ItemExistsException e) {
-                    uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.ItemExistsException",
-                        null, ApplicationMessage.WARNING));
-                    return;
+                	  LOG.info("The file's name of the selected category has existed");
                   } catch (RepositoryException e) {
                     if (LOG.isErrorEnabled()) {
                       LOG.error("Unexpected error", e);
