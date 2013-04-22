@@ -163,7 +163,8 @@ public class TrashServiceImpl implements TrashService {
           + fixRestorePath(nodeName);
       ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
       ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
-      if (trashWorkspace_.equals(nodeWorkspaceName)) {
+      if (trashSession.getWorkspace().getName().equals(
+          nodeSession.getWorkspace().getName())) {
         if (node.getPrimaryNodeType().getName().equals((NodetypeConstant.NT_FILE))) {
           Node parent = node.getParent();
           

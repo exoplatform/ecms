@@ -21,6 +21,7 @@ import java.util.Map;
 
 import javax.jcr.Node;
 
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.extensions.publication.PublicationManager;
@@ -49,7 +50,12 @@ public class CanPublishFilter implements UIExtensionFilter {
 
         if (!"published".equals(currentState)) {
 
-          String userId = WCMCoreUtils.getRemoteUser();
+          String userId;
+          try {
+            userId = Util.getPortalRequestContext().getRemoteUser();
+          } catch (Exception e) {
+            userId = currentNode.getSession().getUserID();
+          }
 
           String nodeLifecycle = currentNode.getProperty("publication:lifecycle").getString();
 

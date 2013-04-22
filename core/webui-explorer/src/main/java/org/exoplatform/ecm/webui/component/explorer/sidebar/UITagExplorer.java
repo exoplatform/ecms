@@ -37,7 +37,6 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.wcm.core.NodeLocation;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
@@ -166,7 +165,11 @@ public class UITagExplorer extends UIContainer {
   public String getRepository() { return getAncestorOfType(UIJCRExplorer.class).getRepositoryName();}
   public String getWorkspace() { return getAncestorOfType(UIJCRExplorer.class).getCurrentWorkspace();}
   public String getUserName() {
-    return WCMCoreUtils.getRemoteUser();
+    try {
+      return getAncestorOfType(UIJCRExplorer.class).getSession().getUserID();
+    } catch (Exception ex) {
+      return "";
+    }
   }
 
   static public class ViewTagActionListener extends EventListener<UITagExplorer> {

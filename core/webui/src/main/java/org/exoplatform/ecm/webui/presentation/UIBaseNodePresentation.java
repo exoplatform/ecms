@@ -300,7 +300,7 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
   public List<Node> getTags(Node node) throws Exception {
     NewFolksonomyService folksonomyService = getApplicationComponent(NewFolksonomyService.class);
     return folksonomyService.getLinkedTagsOfDocumentByScope(NewFolksonomyService.PRIVATE,
-                                                            getStrValue(Utils.PRIVATE),
+                                                            getStrValue(Utils.PRIVATE, node),
                                                             node,
                                                             getWorkspaceName());
   }
@@ -378,10 +378,10 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
     return tempServ.getSkinPath(nodeTypeName, skinName, getLanguage()) ;
   }
 
-  private String getStrValue(String scope) throws Exception {
+  private String getStrValue(String scope, Node node) throws Exception {
     StringBuilder ret = new StringBuilder();
     if (Utils.PRIVATE.equals(scope))
-      ret.append(WCMCoreUtils.getRemoteUser());
+      ret.append(node.getSession().getUserID());
     else if (Utils.GROUP.equals(scope)) {
       for (String group : Utils.getGroups())
         ret.append(group).append(';');

@@ -555,8 +555,12 @@ public class UIPublicationPanel extends UIForm {
       String versionUUID = event.getRequestContext().getRequestParameter(OBJECTID);
       Version version = (Version)publicationPanel.getRevisionByUUID(versionUUID);
 
-      String userId = WCMCoreUtils.getRemoteUser();
-
+      String userId = "";
+      try {
+        userId = Util.getPortalRequestContext().getRemoteUser();
+      } catch (Exception ex) {
+        userId = currentNode.getSession().getUserID();
+      }
       //restore the version
       try {
         currentNode.restore(version,true);
@@ -574,8 +578,9 @@ public class UIPublicationPanel extends UIForm {
           if(revisionData.indexOf(PublicationDefaultStates.PUBLISHED) > 0) {
             currentState = PublicationDefaultStates.PUBLISHED;
             break;
+          } else {
+            currentState = PublicationDefaultStates.OBSOLETE;
           }
-          currentState = PublicationDefaultStates.OBSOLETE;
         }
         //set current state
         currentNode.setProperty("publication:currentState", currentState);

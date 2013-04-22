@@ -1631,7 +1631,7 @@ class JcrNodeEntry
          if (updateLastModifiedAttributes)
          {
             getNode().setProperty(CmisConstants.LAST_MODIFICATION_DATE, Calendar.getInstance());
-            getNode().setProperty(CmisConstants.LAST_MODIFIED_BY, WCMCoreUtils.getRemoteUser());
+            getNode().setProperty(CmisConstants.LAST_MODIFIED_BY, getNode().getSession().getUserID());
             getNode().setProperty(CmisConstants.CHANGE_TOKEN, IdGenerator.generate());
          }
          session.save();

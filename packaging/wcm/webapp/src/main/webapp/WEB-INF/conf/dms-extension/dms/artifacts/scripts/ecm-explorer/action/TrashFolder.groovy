@@ -63,7 +63,9 @@ public class TrashFolderScript implements CmsScript {
       session = seProviderService_.getSystemSessionProvider(null).getSession(workspace, manageableRepository);
       node = (Node)session.getItem(nodePath);
     } catch(Exception e) {
-      return;
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Exception when try to get node:" + nodePath);
+      }
     }
     if ((eventType & Event.NODE_ADDED) > 0) {
     	if (!node.isNodeType(EXO_RESTORELOCATION)) {

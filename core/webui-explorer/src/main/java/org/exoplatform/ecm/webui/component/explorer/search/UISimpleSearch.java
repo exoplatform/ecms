@@ -35,7 +35,6 @@ import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -336,7 +335,7 @@ public class UISimpleSearch extends UIForm {
       try {
         uiSearchResult.setQuery(statement, currentNode.getSession().getWorkspace().getName(), 
                                 queryType.equals(Preference.XPATH_QUERY) ? Query.XPATH : Query.SQL, 
-                                IdentityConstants.SYSTEM.equals(WCMCoreUtils.getRemoteUser()), text);
+                                IdentityConstants.SYSTEM.equals(currentNode.getSession().getUserID()), text);
         uiSearchResult.updateGrid();
       } catch (RepositoryException reEx) {
         uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.inputSearch-invalid", null, ApplicationMessage.WARNING));
@@ -372,12 +371,12 @@ public class UISimpleSearch extends UIForm {
   static public class AddActionListener extends EventListener<UISimpleSearch> {
     public void execute(Event<UISimpleSearch> event) throws Exception {
       UIConstraintsForm uiForm = event.getSource().getChild(UIConstraintsForm.class);
-      boolean isExactly = uiForm.getUICheckBoxInput(UIConstraintsForm.EXACTLY_PROPERTY).isChecked() ;
-      boolean isContain = uiForm.getUICheckBoxInput(UIConstraintsForm.CONTAIN_PROPERTY).isChecked() ;
-      boolean isNotContain = uiForm.getUICheckBoxInput(UIConstraintsForm.NOT_CONTAIN_PROPERTY).isChecked() ;
-      boolean isDateTime = uiForm.getUICheckBoxInput(UIConstraintsForm.DATE_PROPERTY).isChecked() ;
-      boolean isNodeType = uiForm.getUICheckBoxInput(UIConstraintsForm.NODETYPE_PROPERTY).isChecked() ;
-      boolean isCategory = uiForm.getUICheckBoxInput(UIConstraintsForm.CATEGORY_PROPERTY).isChecked() ;
+      boolean isExactly = uiForm.getUIFormCheckBoxInput(UIConstraintsForm.EXACTLY_PROPERTY).isChecked() ;
+      boolean isContain = uiForm.getUIFormCheckBoxInput(UIConstraintsForm.CONTAIN_PROPERTY).isChecked() ;
+      boolean isNotContain = uiForm.getUIFormCheckBoxInput(UIConstraintsForm.NOT_CONTAIN_PROPERTY).isChecked() ;
+      boolean isDateTime = uiForm.getUIFormCheckBoxInput(UIConstraintsForm.DATE_PROPERTY).isChecked() ;
+      boolean isNodeType = uiForm.getUIFormCheckBoxInput(UIConstraintsForm.NODETYPE_PROPERTY).isChecked() ;
+      boolean isCategory = uiForm.getUIFormCheckBoxInput(UIConstraintsForm.CATEGORY_PROPERTY).isChecked() ;
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
       if (!isExactly && !isContain && !isNotContain && !isDateTime && !isNodeType && !isCategory) {
         uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.must-choose-one",

@@ -22,6 +22,7 @@ import javax.jcr.Node;
 
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UITagExplorer;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
@@ -58,6 +59,7 @@ public class UIEditingTagsForm extends UIContainer implements UIPopupComponent {
   private static final Log LOG = ExoLogger.getLogger(UIEditingTagsForm.class.getName());
 
   private static final String PUBLIC_TAG_NODE_PATH = "exoPublicTagNode";
+  private static final String USER_FOLKSONOMY_ALIAS = "userPrivateFolksonomy";
 
   public void activate() {
     try {
@@ -98,8 +100,14 @@ public class UIEditingTagsForm extends UIContainer implements UIPopupComponent {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
 
     String workspace = uiExplorer.getRepository().getConfiguration().getDefaultWorkspaceName();
+    String userName = uiExplorer.getSession().getUserID();
+    int scope = uiExplorer.getTagScope();
+
     String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
-    List<Node> tagList = newFolksonomyService.getAllPublicTags(publicTagNodePath, workspace);
+
+    List<Node> tagList = (scope == NewFolksonomyService.PUBLIC) ?
+            newFolksonomyService.getAllPublicTags(publicTagNodePath, workspace) :
+            newFolksonomyService.getAllPrivateTags(userName);
 
     for (Node tag : tagList)
       if (tag.getName().equals(tagName)) return tag;
@@ -128,7 +136,7 @@ public class UIEditingTagsForm extends UIContainer implements UIPopupComponent {
       UIEditingTagsForm uiEdit = event.getSource();
       UIJCRExplorer uiExplorer = uiEdit.getAncestorOfType(UIJCRExplorer.class);
       String selectedName = event.getRequestContext().getRequestParameter(OBJECTID);
-      removeTagFromNode(selectedName, uiEdit);
+      removeTagFromNode(uiExplorer.getSession().getUserID(), uiExplorer.getTagScope(), selectedName, uiEdit);
       uiEdit.getChild(UIEditingTagList.class).updateGrid();
       uiExplorer.setTagPath(uiExplorer.getCurrentPath());
       Preference preferences = uiExplorer.getPreference();
@@ -139,19 +147,32 @@ public class UIEditingTagsForm extends UIContainer implements UIPopupComponent {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiEdit);
     }
 
-    public void removeTagFromNode(String tagName, UIEditingTagsForm uiForm) throws Exception {
+    public void removeTagFromNode(String userID, int scope, String tagName, UIEditingTagsForm uiForm) throws Exception {
 
       NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class);
       NodeHierarchyCreator nodeHierarchyCreator = uiForm.getApplicationComponent(NodeHierarchyCreator.class);
       String workspace = WCMCoreUtils.getRepository().getConfiguration().getDefaultWorkspaceName();
 
-      String tagPath = newFolksonomyService.getDataDistributionType().getDataNode(
+      String tagPath = "";
+      if (NewFolksonomyService.PUBLIC == scope) {
+        tagPath = newFolksonomyService.getDataDistributionType().getDataNode(
                      (Node)(WCMCoreUtils.getUserSessionProvider().getSession(workspace, WCMCoreUtils.getRepository()).getItem(
                              nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH))),
                      tagName).getPath();
         newFolksonomyService.removeTag(tagPath, workspace);
-      
+      } else if (NewFolksonomyService.PRIVATE == scope) {
+        Node userFolksonomyNode = getUserFolksonomyFolder(userID, uiForm);
+        tagPath = newFolksonomyService.getDataDistributionType().getDataNode(userFolksonomyNode, tagName).getPath();
+        newFolksonomyService.removeTag(tagPath, workspace);
+      }
       uiForm.getAncestorOfType(UIJCRExplorer.class).findFirstComponentOfType(UITagExplorer.class).updateTagList();
+    }
+
+    private Node getUserFolksonomyFolder(String userName, UIEditingTagsForm uiForm) throws Exception {
+      NodeHierarchyCreator nodeHierarchyCreator = uiForm.getApplicationComponent(NodeHierarchyCreator.class);
+      Node userNode = nodeHierarchyCreator.getUserNode(WCMCoreUtils.getUserSessionProvider(), userName);
+      String folksonomyPath = nodeHierarchyCreator.getJcrPath(USER_FOLKSONOMY_ALIAS);
+      return userNode.getNode(folksonomyPath);
     }
   }
 
