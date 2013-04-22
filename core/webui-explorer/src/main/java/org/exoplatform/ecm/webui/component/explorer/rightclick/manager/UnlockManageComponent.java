@@ -117,7 +117,7 @@ public class UnlockManageComponent extends UIAbstractManagerComponent {
       return;
     }
     String superUser = WCMCoreUtils.getService(UserACL.class).getSuperUser();
-    String remoteUser = node.getSession().getUserID();
+    String remoteUser = WCMCoreUtils.getRemoteUser();
     if (remoteUser.equalsIgnoreCase(superUser)) {
       session = WCMCoreUtils.getSystemSessionProvider()
                             .getSession(node.getSession().getWorkspace().getName(),

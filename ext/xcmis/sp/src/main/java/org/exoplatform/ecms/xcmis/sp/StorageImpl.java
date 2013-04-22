@@ -46,6 +46,7 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.xcmis.search.InvalidQueryException;
 import org.xcmis.search.SearchService;
 import org.xcmis.search.Visitors;
@@ -260,23 +261,19 @@ public class StorageImpl extends BaseJcrStorage implements Storage
       
       JcrNodeEntry documentEntry =
          createDocumentEntry(parent != null ? ((FolderDataImpl)parent).getNodeEntry() : null, name, typeDefinition,
-            versioningState);
-      try {
+                 versioningState);
 
-        documentEntry.setValue(CmisConstants.OBJECT_TYPE_ID, typeDefinition.getId());
-        documentEntry.setValue(CmisConstants.BASE_TYPE_ID, typeDefinition.getBaseId().value());
-        documentEntry.setValue(CmisConstants.CREATED_BY, getSession().getUserID());
-        documentEntry.setValue(CmisConstants.CREATION_DATE, Calendar.getInstance());
-        documentEntry.setValue(CmisConstants.VERSION_SERIES_ID, documentEntry.getString(JcrCMIS.JCR_VERSION_HISTORY));
-        documentEntry.setValue(CmisConstants.OBJECT_ID, 
-                documentEntry.getString(JcrCMIS.JCR_VERSION_HISTORY) + JcrCMIS.ID_SEPARATOR + "1");
-        documentEntry.setValue(CmisConstants.IS_LATEST_VERSION, true);
-        documentEntry.setValue(CmisConstants.IS_MAJOR_VERSION, versioningState == VersioningState.MAJOR);
-        // TODO : support for checked-out initial state
-        documentEntry.setValue(CmisConstants.VERSION_LABEL, LATEST_LABEL);
-      } catch(RepositoryException re) {
-        throw new CmisRuntimeException(re.getMessage(), re);
-      }
+      documentEntry.setValue(CmisConstants.OBJECT_TYPE_ID, typeDefinition.getId());
+      documentEntry.setValue(CmisConstants.BASE_TYPE_ID, typeDefinition.getBaseId().value());
+      documentEntry.setValue(CmisConstants.CREATED_BY, WCMCoreUtils.getRemoteUser());
+      documentEntry.setValue(CmisConstants.CREATION_DATE, Calendar.getInstance());
+      documentEntry.setValue(CmisConstants.VERSION_SERIES_ID, documentEntry.getString(JcrCMIS.JCR_VERSION_HISTORY));
+      documentEntry.setValue(CmisConstants.OBJECT_ID, 
+              documentEntry.getString(JcrCMIS.JCR_VERSION_HISTORY) + JcrCMIS.ID_SEPARATOR + "1");
+      documentEntry.setValue(CmisConstants.IS_LATEST_VERSION, true);
+      documentEntry.setValue(CmisConstants.IS_MAJOR_VERSION, versioningState == VersioningState.MAJOR);
+      // TODO : support for checked-out initial state
+      documentEntry.setValue(CmisConstants.VERSION_LABEL, LATEST_LABEL);
 
       Property<?> contentFileNameProperty = properties.get(CmisConstants.CONTENT_STREAM_FILE_NAME);
       if (content != null && (contentFileNameProperty == null || contentFileNameProperty.getValues().isEmpty()))
@@ -353,15 +350,12 @@ public class StorageImpl extends BaseJcrStorage implements Storage
           saveFolder(rootEntry);
       }
       JcrNodeEntry folderEntry = createFolderEntry(((FolderDataImpl)parent).getNodeEntry(), name, typeDefinition);
+
+      folderEntry.setValue(CmisConstants.OBJECT_TYPE_ID, typeDefinition.getId());
+      folderEntry.setValue(CmisConstants.BASE_TYPE_ID, typeDefinition.getBaseId().value());
+      folderEntry.setValue(CmisConstants.CREATED_BY, WCMCoreUtils.getRemoteUser());
+      folderEntry.setValue(CmisConstants.CREATION_DATE, Calendar.getInstance());
       
-      try {
-        folderEntry.setValue(CmisConstants.OBJECT_TYPE_ID, typeDefinition.getId());
-        folderEntry.setValue(CmisConstants.BASE_TYPE_ID, typeDefinition.getBaseId().value());
-        folderEntry.setValue(CmisConstants.CREATED_BY, getSession().getUserID());
-        folderEntry.setValue(CmisConstants.CREATION_DATE, Calendar.getInstance());
-      } catch(RepositoryException re) {
-        throw new CmisRuntimeException(re.getMessage(), re);
-      }
       for (Property<?> property : properties.values())
       {
          PropertyDefinition<?> definition = typeDefinition.getPropertyDefinition(property.getId());
@@ -411,14 +405,10 @@ public class StorageImpl extends BaseJcrStorage implements Storage
       }
 
       JcrNodeEntry policyEntry = createPolicyEntry(name, typeDefinition);
-      try {
-        policyEntry.setValue(CmisConstants.OBJECT_TYPE_ID, typeDefinition.getId());
-        policyEntry.setValue(CmisConstants.BASE_TYPE_ID, typeDefinition.getBaseId().value());
-        policyEntry.setValue(CmisConstants.CREATED_BY, getSession().getUserID());
-        policyEntry.setValue(CmisConstants.CREATION_DATE, Calendar.getInstance());
-      } catch(RepositoryException re) {
-        throw new CmisRuntimeException(re.getMessage(), re); 
-      }
+      policyEntry.setValue(CmisConstants.OBJECT_TYPE_ID, typeDefinition.getId());
+      policyEntry.setValue(CmisConstants.BASE_TYPE_ID, typeDefinition.getBaseId().value());
+      policyEntry.setValue(CmisConstants.CREATED_BY, WCMCoreUtils.getRemoteUser());
+      policyEntry.setValue(CmisConstants.CREATION_DATE, Calendar.getInstance());
       for (Property<?> property : properties.values())
       {
          PropertyDefinition<?> definition = typeDefinition.getPropertyDefinition(property.getId());
@@ -468,15 +458,10 @@ public class StorageImpl extends BaseJcrStorage implements Storage
       JcrNodeEntry relationshipEntry =
          createRelationshipEntry(name, typeDefinition, ((BaseObjectData)source).getNodeEntry(),
             ((BaseObjectData)target).getNodeEntry());
-      try {
-
-        relationshipEntry.setValue(CmisConstants.OBJECT_TYPE_ID, typeDefinition.getId());
-        relationshipEntry.setValue(CmisConstants.BASE_TYPE_ID, typeDefinition.getBaseId().value());
-        relationshipEntry.setValue(CmisConstants.CREATED_BY, getSession().getUserID());
-        relationshipEntry.setValue(CmisConstants.CREATION_DATE, Calendar.getInstance());
-      } catch(RepositoryException re) {
-        throw new CmisRuntimeException(re.getMessage(), re);  
-      }
+      relationshipEntry.setValue(CmisConstants.OBJECT_TYPE_ID, typeDefinition.getId());
+      relationshipEntry.setValue(CmisConstants.BASE_TYPE_ID, typeDefinition.getBaseId().value());
+      relationshipEntry.setValue(CmisConstants.CREATED_BY, WCMCoreUtils.getRemoteUser());
+      relationshipEntry.setValue(CmisConstants.CREATION_DATE, Calendar.getInstance());
 
       for (Property<?> property : properties.values())
       {

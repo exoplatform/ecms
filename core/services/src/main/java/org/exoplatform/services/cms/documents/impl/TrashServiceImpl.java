@@ -17,7 +17,9 @@
 package org.exoplatform.services.cms.documents.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.jcr.Node;
@@ -40,6 +42,8 @@ import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.access.AccessControlEntry;
+import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.listener.ListenerService;
@@ -163,8 +167,7 @@ public class TrashServiceImpl implements TrashService {
           + fixRestorePath(nodeName);
       ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
       ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
-      if (trashSession.getWorkspace().getName().equals(
-          nodeSession.getWorkspace().getName())) {
+      if (trashWorkspace_.equals(nodeWorkspaceName)) {
         if (node.getPrimaryNodeType().getName().equals((NodetypeConstant.NT_FILE))) {
           Node parent = node.getParent();
           
@@ -210,6 +213,42 @@ public class TrashServiceImpl implements TrashService {
           listenerService.broadcast(ActivityCommonService.NODE_REMOVED_ACTIVITY, node, null);
         }
         node.remove();
+        // Convert permission entries to map
+        Map<String, List<String>> permissionMap = new HashMap<String, List<String>>();
+        List<AccessControlEntry> accessControlEntries = ((ExtendedNode)node).getACL().getPermissionEntries();
+        for (AccessControlEntry accessControlEntry : accessControlEntries) {
+          String identity = accessControlEntry.getIdentity();
+          String permission = accessControlEntry.getPermission();
+          List<String> currentPermissions = permissionMap.get(identity);
+          if (!permissionMap.containsKey(identity)) {
+            permissionMap.put(identity, null);
+          }
+          if (currentPermissions == null)
+            currentPermissions = new ArrayList<String>();
+          if (!currentPermissions.contains(permission)) {
+            currentPermissions.add(permission);
+          }
+          permissionMap.put(identity, currentPermissions);
+        }
+        ExtendedNode trashNode = (ExtendedNode) trashSession.getItem(actualTrashPath);
+        //Copy the permission to the deleted node
+        Map<String, String[]> permissionTrash = new HashMap<String, String[]>();
+        Set<String> keys = permissionMap.keySet();
+        for (String key:keys) {
+          Object[] value = permissionMap.get(key).toArray();
+          String[] permission = new String[value.length];
+          for (int i=0; i<value.length; i++) {
+            permission[i] =value[i].toString();
+          }
+          permissionTrash.put(key, permission);
+        }
+        if (trashNode.canAddMixin("exo:privilegeable")) {
+          trashNode.addMixin("exo:privilegeable");
+        }
+        if (trashNode.isNodeType("exo:privilegeable")) {
+          trashNode.clearACL();
+          trashNode.setPermissions(permissionTrash);
+        }
       }
 
       nodeSession.save();

@@ -126,7 +126,7 @@ public class SimplePublicationPlugin extends WebpagePublicationPlugin{
    * @see org.exoplatform.services.ecm.publication.PublicationPlugin#canAddMixin(javax.jcr.Node)
    */
   public boolean canAddMixin(Node node) throws Exception {
-    List<String> runningPortals = getRunningPortals(node.getSession().getUserID());
+    List<String> runningPortals = getRunningPortals(WCMCoreUtils.getRemoteUser());
     if(runningPortals.size() == 0) {
       throw new AccessControlException("Current user doesn't have access permission to any portal");
     }
@@ -246,7 +246,7 @@ public class SimplePublicationPlugin extends WebpagePublicationPlugin{
    */
   public UIForm getStateUI(Node node, UIComponent component) throws Exception {
     UIPublishingPanel form = component.createUIComponent(UIPublishingPanel.class,null,null);
-    List<String> runningPortals = getRunningPortals(node.getSession().getUserID());
+    List<String> runningPortals = getRunningPortals(WCMCoreUtils.getRemoteUser());
     String portalName = getPortalForContent(node);
     form.initPanel(node,portalName, runningPortals);
     return form;

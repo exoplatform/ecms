@@ -54,7 +54,7 @@ public class UIPublicationPagesContainer extends UIContainer {
    */
   public void init(Node node) throws Exception {
     UIPublicationPages publicationPages = addChild(UIPublicationPages.class, null, null);
-    List<String> runningPortals = getRunningPortals(node.getSession().getUserID());
+    List<String> runningPortals = getRunningPortals(WCMCoreUtils.getRemoteUser());
     String portalName = Util.getPortalRequestContext().getPortalOwner();
     publicationPages.init(node, portalName, runningPortals);
     UIPopupWindow popupWindow = null;

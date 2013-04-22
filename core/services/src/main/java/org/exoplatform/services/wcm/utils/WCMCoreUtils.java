@@ -51,6 +51,7 @@ import org.exoplatform.container.definition.PortalContainerConfig;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
 import org.exoplatform.container.xml.PortalContainerInfo;
+import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.link.LinkManager;
@@ -105,8 +106,7 @@ public class WCMCoreUtils {
    */
   public static SessionProvider getSystemSessionProvider() {
     SessionProviderService sessionProviderService = getService(SessionProviderService.class);
-    SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
-    return sessionProvider;
+    return sessionProviderService.getSystemSessionProvider(null);
   }
 
   /**
@@ -116,8 +116,10 @@ public class WCMCoreUtils {
    */
   public static SessionProvider getUserSessionProvider() {
     SessionProviderService sessionProviderService = getService(SessionProviderService.class);
-    SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
-    return sessionProvider;
+    if(getRemoteUser() != null && getRemoteUser().equals(getSuperUser())) {
+      return sessionProviderService.getSystemSessionProvider(null);
+    }
+    return sessionProviderService.getSessionProvider(null);
   }
 
   public static boolean isAnonim()
@@ -611,5 +613,9 @@ public class WCMCoreUtils {
     } catch(NullPointerException npe) {
       return null;
     }
+  }
+  
+  public static String getSuperUser() {
+    return getService(UserACL.class).getSuperUser();
   }
 }

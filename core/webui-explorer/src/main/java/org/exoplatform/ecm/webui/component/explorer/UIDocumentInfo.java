@@ -886,7 +886,6 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     return false;
   }
   
-  @SuppressWarnings("unchecked")
   public void updatePageListData() throws Exception {
     UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
     String currentPath = uiExplorer.getCurrentPath();
@@ -997,7 +996,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   }
 
   public boolean isFavouriter(Node data) throws Exception {
-    return isFavouriteNode(this.getAncestorOfType(UIJCRExplorer.class).getSession().getUserID(), data);
+    return isFavouriteNode(WCMCoreUtils.getRemoteUser(), data);
   }
 
   public boolean isFavouriteNode(String userName, Node node) throws Exception {
@@ -1087,7 +1086,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     Set<String> allItemsFilterSet = uiExplorer.getAllItemFilterMap();
     Set<String> allItemsByTypeFilterSet = uiExplorer.getAllItemByTypeFilterMap();
 
-    String userId = uiExplorer.getSession().getUserID();
+    String userId = WCMCoreUtils.getRemoteUser();
 
     //Owned by me
     if (allItemsFilterSet.contains(UIAllItems.OWNED_BY_ME) &&
@@ -1395,16 +1394,16 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         return;
       }
       try {
-        if (favoriteService.isFavoriter(node.getSession().getUserID(), node)) {
+        if (favoriteService.isFavoriter(WCMCoreUtils.getRemoteUser(), node)) {
           if (PermissionUtil.canRemoveNode(node)) {
-            favoriteService.removeFavorite(node, node.getSession().getUserID());
+            favoriteService.removeFavorite(node, WCMCoreUtils.getRemoteUser());
           }
           else {
             throw new AccessDeniedException();
           }
         } else {
           if (PermissionUtil.canSetProperty(node)) {
-            favoriteService.addFavorite(node, node.getSession().getUserID());
+            favoriteService.addFavorite(node, WCMCoreUtils.getRemoteUser());
           }
           else {
             throw new AccessDeniedException();
@@ -1745,9 +1744,8 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
       dragEvents.append("ondrop='eXo.ecm.MultiUpload.doDropItemArea(event, this,\"").
                  append(node.getPath()).append("\")' ");
       return dragEvents.toString();
-    } else {
-      return "";
-    }
+    } 
+    return "";
   }
   
   @Override

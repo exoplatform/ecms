@@ -70,12 +70,9 @@ import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
-import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -176,38 +173,12 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
                                           Node node,
                                           Event<?> event,
                                           boolean isMultiSelect,
-                                          boolean checkToMoveToTrash)
-  throws Exception {
-  if (!checkToMoveToTrash || Utils.isInTrash(node))
-    processRemoveNode(nodePath, node, event, isMultiSelect);
-  else {
-      WCMComposer wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
-      List<Node> categories = WCMCoreUtils.getService(TaxonomyService.class).getAllCategories(node);
-
-      String parentPath = node.getParent().getPath();
-      String parentWSpace = node.getSession().getWorkspace().getName();
-
-      wcmComposer.updateContent(parentWSpace, node.getPath(), new HashMap<String, String>());
-      boolean isNodeReferenceable = Utils.isReferenceable(node);
-      String nodeUUID = null;
-      if(isNodeReferenceable)
-        nodeUUID = node.getUUID();
+                                          boolean checkToMoveToTrash) throws Exception {
+    if (!checkToMoveToTrash || Utils.isInTrash(node))
+      processRemoveNode(nodePath, node, event, isMultiSelect);
+    else {
       boolean moveOK = moveToTrash(nodePath, node, event, isMultiSelect);
       if (moveOK) {
-        for(Node categoryNode : categories){
-          wcmComposer.updateContents(categoryNode.getSession().getWorkspace().getName(),
-                                     categoryNode.getPath(),
-                                     new HashMap<String, String>());
-        }
-        PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
-
-        PortletPreferences portletPref = pcontext.getRequest().getPreferences();
-
-        String trashWorkspace = portletPref.getValue(Utils.TRASH_WORKSPACE, "");
-        if(isNodeReferenceable) {
-          wcmComposer.updateContent(trashWorkspace, nodeUUID, new HashMap<String, String>());
-        }
-        wcmComposer.updateContents(parentWSpace, parentPath, new HashMap<String, String>());
         //Broadcast the event when user move node to Trash
         ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
         ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
@@ -218,7 +189,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
           }
         }
       }
-  }
+    }
   }
 
   private boolean moveToTrash(String srcPath, Node node, Event<?> event, boolean isMultiSelect) throws Exception {
@@ -358,7 +329,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
                                                        uiExplorer.getRepository()
                                                                  .getConfiguration()
                                                                  .getDefaultWorkspaceName(),
-                                                       node.getSession().getUserID(),
+                                                       WCMCoreUtils.getRemoteUser(),
                                                        getGroups());
       //trashService.removeRelations(node, uiExplorer.getSystemProvider(), uiExplorer.getRepositoryName());
       if (PermissionUtil.canRemoveNode(node) && node.isNodeType(Utils.EXO_AUDITABLE)) {

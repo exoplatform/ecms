@@ -27,6 +27,7 @@ import org.exoplatform.ecm.webui.component.explorer.sidebar.UITagExplorer;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -91,7 +92,7 @@ public class UITagForm extends UIForm {
                                .getRepository()
                                .getConfiguration()
                                .getDefaultWorkspaceName();
-      String userName = uiExplorer.getSession().getUserID();
+      String userName = WCMCoreUtils.getRemoteUser();
       int scope = uiExplorer.getTagScope();
 
       NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class) ;
@@ -133,15 +134,9 @@ public class UITagForm extends UIForm {
         else {
           if (!existTag(tagName, workspace, scope, uiForm, userName)) {
             NodeHierarchyCreator nodeHierarchyCreator = uiForm.getApplicationComponent(NodeHierarchyCreator.class);
-//            if (scope == NewFolksonomyService.PRIVATE) { 
-//              Node newTagNode = newFolksonomyService.modifyPrivateTagName(uiForm.oldTagPath_, tagName, workspace, userName);
-//              uiExplorer.setTagPath(newTagNode.getPath());
-//            } else {
-            //always public tags
             String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
             Node newTagNode = newFolksonomyService.modifyPublicTagName(uiForm.oldTagPath_, tagName, workspace, publicTagNodePath);
             uiExplorer.setTagPath(newTagNode.getPath());
-//            }            
           } else if (!tagName.equals(uiForm.oldName_)) {
             uiApp.addMessage(new ApplicationMessage("UITagForm.msg.NameAlreadyExist", null,
                           ApplicationMessage.WARNING));

@@ -31,6 +31,7 @@ import org.exoplatform.services.cms.queries.QueryService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -100,7 +101,7 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
       String queryText = StringUtils.replace(SQL_QUERY, "$0", path) ;
       if ("/".equals(path)) queryText = ROOT_SQL_QUERY  ;
       getUIStringInput(FIELD_NAME).setValue(null) ;
-      getUIStringInput(FIELD_NAME).setEditable(true) ;
+      getUIStringInput(FIELD_NAME).setDisabled(false);
       getUIFormSelectBox(FIELD_SELECT_BOX).setOnChange(CHANGE_OPTION) ;
       getUIFormSelectBox(FIELD_SELECT_BOX).setValue("sql") ;
       getUIFormTextAreaInput(FIELD_QUERY).setValue(queryText) ;
@@ -109,7 +110,7 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
       queryPath_ = storedPath ;
       storedPath = storedPath.substring(storedPath.lastIndexOf("/") + 1, storedPath.length()) ;
       getUIStringInput(FIELD_NAME).setValue(storedPath) ;
-      getUIStringInput(FIELD_NAME).setEditable(false) ;
+      getUIStringInput(FIELD_NAME).setDisabled(true);
       getUIFormSelectBox(FIELD_SELECT_BOX).setOnChange(CHANGE_OPTION) ;
       getUIFormSelectBox(FIELD_SELECT_BOX).setValue(query.getLanguage()) ;
       getUIFormTextAreaInput(FIELD_QUERY).setValue(query.getStatement()) ;
@@ -166,7 +167,7 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
         }
         UISearchResult uiSearchResult = uiSearch.getChild(UISearchResult.class) ;
         uiSearchResult.setQuery(queryS.toString(), uiExplorer.getTargetSession().getWorkspace().getName(), searchType, 
-                                IdentityConstants.SYSTEM.equals(uiExplorer.getTargetSession().getUserID()), null);
+                                IdentityConstants.SYSTEM.equals(WCMCoreUtils.getRemoteUser()), null);
         uiSearchResult.updateGrid() ;
         long time = System.currentTimeMillis() - startTime;
         uiSearchResult.setSearchTime(time);

@@ -141,7 +141,7 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
     if (PublicationDefaultStates.ENROLLED.equalsIgnoreCase(newState)) {
       versionLog = new VersionLog(logItemName,
                                   newState,
-                                  node.getSession().getUserID(),
+                                  WCMCoreUtils.getRemoteUser(),
                                   GregorianCalendar.getInstance(),
                                   StageAndVersionPublicationConstant.PUBLICATION_LOG_LIFECYCLE);
       node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE,newState);
@@ -153,7 +153,7 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
       node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE,newState);
       versionLog = new VersionLog(logItemName,
                                   newState,
-                                  node.getSession().getUserID(),
+                                  WCMCoreUtils.getRemoteUser(),
                                   GregorianCalendar.getInstance(),
                                   StageAndVersionPublicationConstant.PUBLICATION_LOG_DRAFT);
       addLog(node,versionLog);

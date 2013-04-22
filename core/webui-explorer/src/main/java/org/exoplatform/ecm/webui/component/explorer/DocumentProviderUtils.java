@@ -91,7 +91,7 @@ public class DocumentProviderUtils {
     if (!byUser) {
       ret = WCMCoreUtils.getService(TrashService.class).getAllNodeInTrash(sessionProvider);
     } else {
-      ret = WCMCoreUtils.getService(TrashService.class).getAllNodeInTrashByUser(sessionProvider, uiExplorer.getSession().getUserID());
+      ret = WCMCoreUtils.getService(TrashService.class).getAllNodeInTrashByUser(sessionProvider, WCMCoreUtils.getRemoteUser());
     }
     return ret;
   }
@@ -106,7 +106,7 @@ public class DocumentProviderUtils {
       queryString.append(" WHERE CONTAINS(").
                   append(Utils.EXO_OWNER).
                   append(",'").
-                  append(uiExplorer.getSession().getUserID()).
+                  append(WCMCoreUtils.getRemoteUser()).
                   append("')");
     }
     Session session = uiExplorer.getSession();
@@ -129,7 +129,7 @@ public class DocumentProviderUtils {
     List<Node> favoriteList = null;
 
     favoriteList = WCMCoreUtils.getService(FavoriteService.class).getAllFavoriteNodesByUser(uiExplorer.getCurrentWorkspace(),
-          uiExplorer.getRepositoryName(), uiExplorer.getSession().getUserID());
+          uiExplorer.getRepositoryName(), WCMCoreUtils.getRemoteUser());
 
     for (Node node : favoriteList) {
       if (!Utils.isInTrash(node))
@@ -148,7 +148,7 @@ public class DocumentProviderUtils {
     queryString.append(" WHERE CONTAINS(")
                .append(Utils.EXO_OWNER)
                .append(",'")
-               .append(uiExplorer.getSession().getUserID())
+               .append(WCMCoreUtils.getRemoteUser())
                .append("')");
 
     QueryManager queryManager = session.getWorkspace().getQueryManager();

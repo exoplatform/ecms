@@ -45,8 +45,7 @@ public class IsFavouriteFilter extends UIExtensionAbstractFilter {
 
   public static boolean isFavourite(Node node, UIJCRExplorer uiExplorer) throws Exception {
     FavoriteService favoriteService = WCMCoreUtils.getService(FavoriteService.class);
-
-    return favoriteService.isFavoriter(uiExplorer.getSession().getUserID(), node);
+    return favoriteService.isFavoriter(WCMCoreUtils.getRemoteUser(), node);
   }
   public boolean accept(Map<String, Object> context) throws Exception {
       if (context == null) return true;

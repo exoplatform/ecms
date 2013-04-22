@@ -78,7 +78,7 @@ public class EmptyTrashManageComponent extends UIAbstractManagerComponent {
       return;
     }
 
-    String currentUser = uiExplorer.getSession().getUserID();
+    String currentUser = WCMCoreUtils.getRemoteUser();
     boolean error = false;
     while (nodeIter.hasNext()) {
       try {

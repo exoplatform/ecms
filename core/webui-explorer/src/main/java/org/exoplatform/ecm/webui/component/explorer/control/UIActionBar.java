@@ -278,7 +278,7 @@ public class UIActionBar extends UIForm {
       
       long startTime = System.currentTimeMillis();
       uiSearchResult.setQuery(queryStatement, currentNode.getSession().getWorkspace().getName(), Query.SQL, 
-                              IdentityConstants.SYSTEM.equals(currentNode.getSession().getUserID()), null);
+                              IdentityConstants.SYSTEM.equals(WCMCoreUtils.getRemoteUser()), null);
       uiSearchResult.updateGrid();
       long time = System.currentTimeMillis() - startTime;
       
