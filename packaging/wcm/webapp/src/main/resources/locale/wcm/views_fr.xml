@@ -38,7 +38,7 @@
         <robots>Comportement des moteurs de recherche</robots>
       </label>
       <tooltip>
-        <add-edit>Ajouter/Editer une Métadonnée</add-edit>
+        <add-edit>Métadonnées</add-edit>
         <cancel>Annuler</cancel>
       </tooltip>
       <action>

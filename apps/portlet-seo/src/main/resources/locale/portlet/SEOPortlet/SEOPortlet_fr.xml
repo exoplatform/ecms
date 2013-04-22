@@ -27,7 +27,7 @@
         <priority>Valeurs valides de 0.0 à 1.0.</priority>
     </tip>  
     <action>
-      <Save>Sauvegarder</Save>
+      <Save>Enregistrer</Save>
       <Cancel>Annuler</Cancel>
     </action>
     <msg>

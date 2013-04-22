@@ -3,8 +3,8 @@
   <UIFCCForm>
     <msg>
       <name-not-allowed>Ce nom n'est pas autorisé.</name-not-allowed>
-      <in-versioning>Le répertoire est bloqué.</in-versioning>
-      <cannot-save>Une erreur est survenue à l'enregistrement.</cannot-save>
+      <in-versioning>Veuillez vérifier le dossier courant avant d'ajouter un contenu.</in-versioning>
+      <cannot-save>Impossible d'enregistrer cette action. Le nom fourni ne doit pas avoir un indice sur son dernier élément.</cannot-save>
       <saved-successfully>{0}</saved-successfully>
       <not-support>Impossible de charger le modèle de '{0}'.</not-support>
       <not-add-folder>Seuls les fichiers sont autorisés dans ce dossier.</not-add-folder>
@@ -26,9 +26,9 @@
       <select-repository>Sélectionnez le Référentiel</select-repository>
       <UIFCCSaveLocationField>Destination</UIFCCSaveLocationField>
       <UIFCCRepositoryFormSelectBox>Sélectionner référentiel</UIFCCRepositoryFormSelectBox>
-      <UIFCCWorkspaceFormSelectBox>Sélectionner espace de travail</UIFCCWorkspaceFormSelectBox>
+      <UIFCCWorkspaceFormSelectBox>Sélectionner espace de stockage</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>Options</UIFCCTemplateField>
-      <UIFCCLocationFormInputAction>Répertoire de stockage</UIFCCLocationFormInputAction>
+      <UIFCCLocationFormInputAction>Dossier de Stockage</UIFCCLocationFormInputAction>
       <UIFCCLocationFormStringInput/>
       <UIFCCTemplateFormSelectBox>Sélectionner un modèle</UIFCCTemplateFormSelectBox>
       <UIFCCSaveFormStringInput>Personnaliser le bouton Enregistrer</UIFCCSaveFormStringInput>
@@ -42,7 +42,7 @@
       <save-successfully>Enregistré avec succès</save-successfully>
       <item-not-found>Ce chemin n'est pas valide.</item-not-found>
       <fileType-empty>Vous devez choisir le type de fichier avant d'enregistrer les paramètres.</fileType-empty>
-      <ws-empty>Vous devez choisir l'espace de travail.</ws-empty>
+      <ws-empty>Vous devez choisir un espace de stockage.</ws-empty>
       <action-empty>Vous devez choisir un dossier avec une action.</action-empty>
       <message-empty>Le message ne peut pas être vide lorsque vous n'avez pas choisi l'option de redirection, ou le chemin est vide</message-empty>
       <get-template>Une erreur est survenue lors de l'accès au modèle.</get-template>
@@ -88,7 +88,7 @@
 
   <UIWorkspaceList>
     <label>
-      <workspaceName>Espace de travail</workspaceName>
+      <workspaceName>Espace de stockage</workspaceName>
       <rootNodePath>Chemin d'accès racine</rootNodePath>
       <rootNodeInfo/>
     </label>
@@ -119,12 +119,12 @@
   <UIFCCActionForm>
     <title>Ajouter / Éditer une action</title>
     <action>
-      <Save>Sauver</Save>
+      <Save>Enregistrer</Save>
       <Close>Fermer</Close>
     </action>
     <msg>
-      <repository-exception>Ne peut pas sauver cette action. Le nom fourni ne doit pas avoir un indice sur son dernier élément.</repository-exception>
-      <numberformat-exception>Ne peut pas sauver cette action. Le nom ne doit pas avoir fourni '[' ou ']'.</numberformat-exception>
+      <repository-exception>Impossible d'enregistrer cette action. Le nom fourni ne doit pas avoir un indice sur son dernier élément.</repository-exception>
+      <numberformat-exception>Impossible d'enregistrer cette action.  Le nom ne doit pas contenir '[' ou ']'.</numberformat-exception>
       <existed-action>Le nom de l'action '{0}' est en vigueur, afin de choisir un autre nom, s'il vous plaît!</existed-action>
       <unable-add-action>Impossible d'ajouter cette action</unable-add-action>
       <unable-add>Impossible d'ajouter cette action! Ce nœud est la racine ou vous n'avez pas assez de permission</unable-add>
@@ -171,7 +171,7 @@
 
   <PopupComponent>
     <title>
-      <UICategoriesSelector>Ajouter Catégories</UICategoriesSelector>
+      <UICategoriesSelector>Ajouter des Catégories</UICategoriesSelector>
     </title>
   </PopupComponent>
 

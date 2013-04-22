@@ -3,7 +3,7 @@
   <UIDefaultSearchForm>
     <label>
       <keyword>Mot-clé</keyword>
-      <portal>Portail</portal>
+      <portal>Site</portal>
       <Page>Page</Page>
       <Document>Document</Document>
     </label>
@@ -75,7 +75,7 @@
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>
     <label>
-      <quickEditTitle>Edition rapide</quickEditTitle>
+      <quickEditTitle>Modification Rapide</quickEditTitle>
     </label>
   </UISearchPageLayoutDefault>  
   <searchOption>

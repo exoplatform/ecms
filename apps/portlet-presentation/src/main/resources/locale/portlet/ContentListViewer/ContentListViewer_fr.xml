@@ -7,7 +7,7 @@
       <ManageContent>Gérer les contenus</ManageContent>
     </label>
     <msg>
-      <non-contents>Excusez-nous, aucun article n'est disponible.</non-contents>
+      <non-contents>Pas de contenu.</non-contents>
       <item-not-found>Le contenu n'a pas été trouvé</item-not-found>
       <no-permission>Vous n'avez pas la permission d'accéder à ce contenu</no-permission>
       <category-back>Aller à la catégorie précédente</category-back>
@@ -23,8 +23,8 @@
       <Title>Paramètres</Title>
       <ContentSelectionBlock>Contenus</ContentSelectionBlock>
       <UICLVConfigDisplayModeFormRadioBoxInput>Mode</UICLVConfigDisplayModeFormRadioBoxInput>
-      <UICLVConfigItemPathFormInputSet>Chemin du Répertoire</UICLVConfigItemPathFormInputSet>
-    <UICLVConfigItemPathFormStringInput>Paramètres d'Affichage</UICLVConfigItemPathFormStringInput>
+      <UICLVConfigItemPathFormInputSet>Chemin du Dossier</UICLVConfigItemPathFormInputSet>
+    <UICLVConfigItemPathFormStringInput>Affichage</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Classement par</UICLVConfigOrderByFormSelectBox>
       <option>
         <exo:title>Titre</exo:title>
@@ -53,28 +53,28 @@
       <UICLVConfigAllowDynamicUrlStringInput>Autoriser une URL dynamique</UICLVConfigAllowDynamicUrlStringInput>
       <UICLVConfigShowRssLinkFormCheckboxInput>Afficher les flux RSS</UICLVConfigShowRssLinkFormCheckboxInput>
       <UICLVConfigShowAutomaticDetectionCheckboxInput>Détection Automatique</UICLVConfigShowAutomaticDetectionCheckboxInput>
-      <AdvancedBlock>Paramètres Avancés</AdvancedBlock>
+      <AdvancedBlock>Préférences Avancées</AdvancedBlock>
       <UICLVConfigDynamicNavigationLabel>Navigation Dynamique</UICLVConfigDynamicNavigationLabel>
-      <UICLVConfigContextualFolderRadioBoxInput>Répertoire Contextuel</UICLVConfigContextualFolderRadioBoxInput>
+      <UICLVConfigContextualFolderRadioBoxInput>Dossier Contextuel</UICLVConfigContextualFolderRadioBoxInput>
       <UICLVConfigShowCLVByStringInput>par</UICLVConfigShowCLVByStringInput>
       <UICLVConfigshowSCVWithStringInput>avec</UICLVConfigshowSCVWithStringInput>
-      <UICLVConfigTargetPageFormInputSet>Afficher dans la page</UICLVConfigTargetPageFormInputSet>
+      <UICLVConfigTargetPageFormInputSet>Page de Détail</UICLVConfigTargetPageFormInputSet>
       <content-not-found>Visibilité</content-not-found>
       <ContentPath>Chemin de contenu</ContentPath>
       <Up>Monter</Up>
-      <Down>Dessendre</Down>      
-      <UICLVConfigCacheManagementLabel>Contenu visibilité</UICLVConfigCacheManagementLabel>
+      <Down>Descendre</Down>
+      <UICLVConfigCacheManagementLabel>Filtrage de Contenus</UICLVConfigCacheManagementLabel>
       <UICLVContentByQueryLabel>Contenus par Requête</UICLVContentByQueryLabel>
-      <UICLVConfigWorkspaceFormSelectBox>Espace de travail</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigWorkspaceFormSelectBox>Espace de stockage</UICLVConfigWorkspaceFormSelectBox>
       <UICLVConfigContentByQueryTextArea>par requête</UICLVConfigContentByQueryTextArea>
       <UICLVConfigCacheEnableRadioBoxInput>Partager les contenus entre les utilisateurs</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
-      <ModeSelectionHelp>Deux modes sont disponibles pour affichers les contenus. "Par répertoire" affichage de tous les contenus présents dans le répertoire (ou catégorie) sélectionné ; "Par contenus" vous permet de choisir manuellement les contenus à afficher.</ModeSelectionHelp>
-      <FolderPathHelp>Sélectionnez les contenus qui vous souhaitez afficher. La sélection par défaut sera remplacée dynamiquement si vous activez la Navigation Dynamique (voir Avancé, ci-dessous)</FolderPathHelp>
+      <ModeSelectionHelp>"Dossier" affiche de tous les contenus présents dans le dossier (ou catégorie) sélectionné ; "Manuel" vous permet de choisir manuellement les contenus à afficher.</ModeSelectionHelp>
+      <FolderPathHelp>Sélectionnez les contenus qui vous souhaitez afficher. La sélection par défaut sera remplacée dynamiquement si vous activez la Navigation Dynamique dans les Paramètres Avancés</FolderPathHelp>
       <HeaderOptionHelp>Afficher un entête sur la liste des contenus. Si la "Détection automatique" est activée, l'application tentera d'afficher un entête basé sur la sélection courante.</HeaderOptionHelp>
       <GeneralOptionHelp>Choisissez les éléments graphiques que vous souhaitez voir. Suivant le modèle de vue choisi, certains éléments ne seront pas disponibles.</GeneralOptionHelp>
-      <ContextualHelp>Active la navigation dynamique. Les contenus peuvent être changés dynamiquement par un chemin fourni dans un paramètre de l'URL.</ContextualHelp>
+      <ContextualHelp>Avec la Navigation dynamique, le chemin du contenu à afficher peut être indiqué via un paramètre de l'URL.</ContextualHelp>
       <ParameterHelp>Ce paramètre sera utilisé pour récupérer le contenu si la Navigation Dynamique est activée.</ParameterHelp>
       <ShowDetailInPageHelp>Cliquer sur un contenu redirige sur une page de détail. Vous devez avoir une portlet "Contenu par URL" configurée en "Navigation dynamique" sur la page cible pour afficher le contenu.</ShowDetailInPageHelp>
       <DetailParameterHelp>Ce paramètre contiendra le chemin vers le contenu à afficher dans la page de détail. Il doit être identique au paramètre utilisé dans la portlet "Contenu par URL" de la page.</DetailParameterHelp>
@@ -92,26 +92,26 @@
     </msg>
     <tab>
       <label>
-        <clvContentTab>Sélection du Contenu</clvContentTab>
-        <clvDisplayTab>Paramètres d'Affichage</clvDisplayTab>
-        <clvAdvancedTab>Avancé</clvAdvancedTab>
+        <clvContentTab>Contenus</clvContentTab>
+        <clvDisplayTab>Affichage</clvDisplayTab>
+        <clvAdvancedTab>Paramètres Avancés</clvAdvancedTab>
       </label>
     </tab>
   </UICLVConfig>
   <UICLVConfigDisplayModeFormRadioBoxInput>
     <label>
-      <AutoViewerMode>Par Répertoire</AutoViewerMode>
-      <ManualViewerMode>Par Contenus</ManualViewerMode>
+      <AutoViewerMode>Dossier</AutoViewerMode>
+      <ManualViewerMode>Manuel</ManualViewerMode>
     </label>
   </UICLVConfigDisplayModeFormRadioBoxInput>
   <UICLVConfigItemPathFormInputSet>
     <title>
-      <SelectFolderPath>Sélectionner le Répertoire</SelectFolderPath>
+      <SelectFolderPath>Sélectionner le Dossier</SelectFolderPath>
     </title>
   </UICLVConfigItemPathFormInputSet>
   <FolderPathSelectorPopupWindow>
     <title>
-      <UIContentSelectorFolder>Navigateur de Répertoires</UIContentSelectorFolder>
+      <UIContentSelectorFolder>Navigateur de Dossiers</UIContentSelectorFolder>
     </title>
   </FolderPathSelectorPopupWindow>
   <UICLVConfigOrderTypeFormSelectBox>
@@ -124,8 +124,8 @@
   </UICLVConfigOrderTypeFormSelectBox>
   <UICLVConfigTargetPageFormInputSet>
     <title>
-      <SelectBasePath>Afficher dans la page</SelectBasePath>
-      <SelectTargetPage>Afficher dans la page</SelectTargetPage>
+      <SelectBasePath>Page de Détail</SelectBasePath>
+      <SelectTargetPage>Page de Détail</SelectTargetPage>
     </title>
   </UICLVConfigTargetPageFormInputSet>
   <UICLVBasePathPopupWindow>
@@ -173,7 +173,7 @@
     <pending>Rédigé</pending>
     <approved>Validé</approved>
     <inreview>En revue</inreview>
-    <staged>Prêt à publier</staged>
+    <staged>Prêt à Publier</staged>
     <published>Publié</published>
   </PublicationStates>
   <UICLVConfigCacheEnableRadioBoxInput>
