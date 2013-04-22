@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <bundle>
   <!--
   #############################################################################
@@ -100,14 +100,11 @@
       <in-versioning>Por favor revise el nodo actual antes de agregar un nuevo nodo.</in-versioning>
       <not-support>No se puede cargar la plantilla de '{0}'.</not-support>
       <value-invalid>'{0}' es requerido.</value-invalid>
-      <confirm-close>Los cambios hechos serán perdidos al cerrar esta forma.</confirm-close>
-      <confirm-navigate>Los cambios hechos serán perdidos si sale de esta página.</confirm-navigate>
     </msg>
   </UIDocumentForm>
   <PopupComponent>
     <title>
       <UIOneTaxonomySelector>Añadir Categorías</UIOneTaxonomySelector>
-      <UIOneNodePathSelector>Seleccione la ruta</UIOneNodePathSelector>
     </title>
   </PopupComponent>
   <UITreeTaxonomyList>
@@ -129,6 +126,17 @@
       <AddRootNode>Añadir el nodo de la raíz</AddRootNode>
     </title>
   </rootNodeInfo>
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>Seleccione la ruta</UIOneNodePathSelector>
+    </title>
+  </PopupComponent>
+  <UIDocumentForm>
+   <msg>
+     <confirm-close>Los cambios hechos serán perdidos al cerrar esta forma.</confirm-close>
+     <confirm-navigate>Los cambios hechos serán perdidos si sale de esta página.</confirm-navigate>
+   </msg>
+  </UIDocumentForm>
   <PositiveNumberValidator>
     <msg>
       <invalid-input>El campo '{0}' con el valor '{1}' no es válido. Este campo requiere un número positivo.</invalid-input>

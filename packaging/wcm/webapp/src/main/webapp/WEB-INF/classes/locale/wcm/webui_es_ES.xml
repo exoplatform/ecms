@@ -1,21 +1,44 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
 <bundle>
   <UIExoStart>
     <tooltip>
       <homepage>Página de Inicio</homepage>
     </tooltip>
   </UIExoStart>
+
   <UIFormInputSetWithAction>
     <msg>
       <confirm-delete>¿Estás seguro de eliminar este elemento?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
+
   <Drives>
     <label>
       <ManagedSites>Gestión de Sitios</ManagedSites>
       <SharedSite>Sitio Compartido</SharedSite>
     </label>
   </Drives>
+
   <Views>
     <label>
       <wcm-view>Vista WCM</wcm-view>
@@ -35,12 +58,14 @@
       <wcm-category-view>Vista de categoría WCM</wcm-category-view>
     </label>
   </Views>
+
   <UIActionBar>
     <obtion>
       <Publication>Publicación</Publication>
       <System>Sistema</System>
     </obtion>
   </UIActionBar>
+
   <UIPageSelectorPanel>
     <header>
       <path>Ruta</path>
@@ -53,11 +78,13 @@
       <select>Seleccionar</select>
     </title>
   </UIPageSelectorPanel>
+
   <UIContentDialogFormPopupWindow>
     <title>
       <UIContentDialogPreference>Preferencia de contenido web</UIContentDialogPreference>
     </title>
   </UIContentDialogFormPopupWindow>
+
   <UITabPane>
     <title>
       <UIContentBrowsePanelOne>Navegador de Contenido</UIContentBrowsePanelOne>
@@ -71,6 +98,7 @@
       <UIPermissionManager>Administrador de autorización</UIPermissionManager>
     </title>
   </UITabPane>
+
   <UIContentBrowsePanelOne>
     <selectBoxValues>
       <FilterBy>Filtrar por</FilterBy>
@@ -81,11 +109,8 @@
     <msg>
       <node-checkout>El nodo está desmarcado. Por favor seleccione el nodo antes de realizar esta función.</node-checkout>
     </msg>
-    <label>
-      <LeftColumn>Seleccionar un archivo para mostrar a sus hijos como contenido.</LeftColumn>
-      <RightColumn>Puede seleccionar el contenido a continuación.</RightColumn>
-    </label>
   </UIContentBrowsePanelOne>
+
   <UIContentBrowsePanelMulti>
     <selectBoxValues>
       <FilterBy>Filtrar por</FilterBy>
@@ -93,17 +118,29 @@
       <DMSDocument>Documento</DMSDocument>
       <Media>Medios de comunicación</Media>
     </selectBoxValues>
+  </UIContentBrowsePanelMulti>
+
+  <UIContentBrowsePanelOne>
+    <label>
+      <LeftColumn>Seleccionar un archivo para mostrar a sus hijos como contenido.</LeftColumn>
+      <RightColumn>Puede seleccionar el contenido a continuación.</RightColumn>
+    </label>
+  </UIContentBrowsePanelOne>
+
+  <UIContentBrowsePanelMulti>
     <label>
       <LeftColumn>Seleccionar un archivo para mostrar a sus hijos como contenido.</LeftColumn>
       <RightColumn>Puede seleccionar el contenido a continuación.</RightColumn>
     </label>
   </UIContentBrowsePanelMulti>
+
   <UIContentBrowsePanelFolder>
     <label>
       <LeftColumn>Seleccionar un archivo para mostrar a sus hijos como contenido.</LeftColumn>
       <RightColumn>Se puede seleccionar la carpeta a continuación.</RightColumn>
     </label>
   </UIContentBrowsePanelFolder>
+
   <UISelectedContentGrid>
     <label>
       <name>Nombre</name>
@@ -115,12 +152,14 @@
       <non-content>No ha seleccionado ningún contenido.</non-content>
     </msg>
   </UISelectedContentGrid>
+
   <UICLVContentSelectedGrid>
     <action>
       <SaveCategories>Guardar</SaveCategories>
       <Cancel>Cancelar</Cancel>
     </action>
   </UICLVContentSelectedGrid>
+
   <UIContentBrowsePathSelector>
     <header>
       <name>Nombre</name>
@@ -131,6 +170,7 @@
       <child-not-found>No se encontró contenido</child-not-found>
     </msg>
   </UIContentBrowsePathSelector>
+
   <UIContentBrowsePathSelectorFolder>
     <header>
       <name>Nombre</name>
@@ -141,6 +181,7 @@
       <child-not-found>No se encontró el archivo.</child-not-found>
     </msg>
   </UIContentBrowsePathSelectorFolder>
+
   <UIContentSearchForm>
     <title>
       <Location>Nombre del Sitio</Location>
@@ -174,11 +215,13 @@
       <invalid-keyword>La palabra clave no es válida. Algunos caracteres no son compatibles.</invalid-keyword>
     </msg>
   </UIContentSearchForm>
+
   <WebContentMetadataPopup>
     <title>
       <UIContentPropertySelector>Selector de la Propiedad</UIContentPropertySelector>
     </title>
   </WebContentMetadataPopup>
+
   <UIContentPropertySelector>
     <action>
       <Add>Añadir</Add>
@@ -189,17 +232,20 @@
       <property_select>Propiedad</property_select>
     </label>
   </UIContentPropertySelector>
+
   <WebContentNodeTypePopup>
     <title>
       <UIContentNodeTypeSelector>Selector del Tipo de Nodo</UIContentNodeTypeSelector>
     </title>
   </WebContentNodeTypePopup>
+
   <UIContentNodeTypeSelector>
     <action>
       <Save>Guardar</Save>
       <Cancel>Cancelar</Cancel>
     </action>
   </UIContentNodeTypeSelector>
+
   <UIContentSearchResult>
     <header>
       <title>Título</title>
@@ -215,6 +261,7 @@
       <template-not-support>No puede ver este contenido. La plantilla no es compatible</template-not-support>
     </msg>
   </UIContentSearchResult>
+
   <UIContentDialogForm>
     <action>
       <SaveDraft>Guardar borrador</SaveDraft>
@@ -223,11 +270,12 @@
       <Close>Cerrar</Close>
     </action>
     <msg>
-      <access-denied>No tienes permiso para agregar categorías a este documento.</access-denied>
+      <access-denied>No cuenta con permiso para agregar categorías a este documento.</access-denied>
       <exception>Error al agregar categorías a este documento.</exception>
       <non-categories>Las categorías están equivocadas. Por favor, seleccione las categorías apropiadas.</non-categories>
     </msg>
   </UIContentDialogForm>
+
   <UIPermissionManager>
     <label>
       <UIPermissionInputSetWithAction>Permiso</UIPermissionInputSetWithAction>
@@ -243,6 +291,7 @@
       </title>
     </action>
   </UIPermissionManager>
+
   <UIPermissionManagerGrid>
     <header>
       <owner>Permiso</owner>
@@ -260,6 +309,7 @@
       <node-checkedin>Debe salir primero.</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
+
   <UIPermissionInputSetWithAction>
     <title>
       <SelectUser>Seleccionar Usuario</SelectUser>
@@ -267,32 +317,38 @@
       <AddAny>Agregar cualquier permiso</AddAny>
     </title>
   </UIPermissionInputSetWithAction>
+
   <UIUserSelectorPopupWindow>
     <title>
       <UIUserContainer>Selector del Usuario</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
+
   <UIGroupSelectorPopupWindow>
     <title>
       <UIGroupMemberSelector>Selector de Grupo</UIGroupMemberSelector>
     </title>
   </UIGroupSelectorPopupWindow>
+
   <UIGroupMemberSelector>
     <label>
       <selectGroup>Seleccionar grupo</selectGroup>
       <selectMembership>Seleccione la membresía</selectMembership>
     </label>
   </UIGroupMemberSelector>
+
   <UIContentDialogPreference>
     <action>
       <Back>Atrás</Back>
     </action>
   </UIContentDialogPreference>
+
   <ZeroValidator>
     <msg>
       <Invalid-number>Cero no es aceptado en el campo '{0}'.</Invalid-number>
     </msg>
   </ZeroValidator>
+
   <UIDropDownPageTemp>
     <item>
       <WCMPageConfigs>Configuraciones de la página WCM</WCMPageConfigs>
@@ -302,6 +358,7 @@
       <MixPageConfigs>Configuraciones de la Página Mezcladas</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
+
   <UIWizardPageSelectLayoutForm>
     <label>
       <SingleContentViewer>Visor de contenido único</SingleContentViewer>
@@ -319,6 +376,7 @@
       <ThreeRowsTwoColumnsLayout>Diseño de tres filas y dos columnas</ThreeRowsTwoColumnsLayout>
     </label>
   </UIWizardPageSelectLayoutForm>
+
   <Signin>
     <welcome>Bienvenido</welcome>
     <login>Ingresar</login>
@@ -332,6 +390,7 @@
       <wcm-view>Vista del contenido de WCM</wcm-view>
     </label>
   </UIDriveForm>
+  
   <ContentSelector>
     <title>
       <PersonalDrives>Unidades personales</PersonalDrives>
@@ -355,11 +414,13 @@
       <SharedSite>Sitio Compartido</SharedSite>
     </title>
   </ContentSelector>
+  
   <UICategoryNavigationTargetPathPopupWindow>
     <title>
       <UIPageSelector>Selector de página</UIPageSelector>
     </title>
   </UICategoryNavigationTargetPathPopupWindow>
+  
   <UIDocumentInfo>
     <msg>
       <access-denied-exception>Acceso denegado. Tal vez, no tiene el permiso de lectura; o el nodo fué eliminado o cambiado.</access-denied-exception>
@@ -370,11 +431,13 @@
       <abort>Abortar</abort>
     </title>
   </UIPortalApplication>
+  
   <CategoryNavigationTemplate>
     <label>
       <home>Inicio</home>
     </label>
   </CategoryNavigationTemplate>
+  
   <Breadcrumb>
     <label>
       <home>Inicio</home>
@@ -382,7 +445,7 @@
   </Breadcrumb>
   <UIActionForm>
     <msg>
-      <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
+      <xss-vulnerability-character>El campo '{0}' contiene caracteres de vulnerabilidad XSS</xss-vulnerability-character>
     </msg>
   </UIActionForm>
 </bundle>

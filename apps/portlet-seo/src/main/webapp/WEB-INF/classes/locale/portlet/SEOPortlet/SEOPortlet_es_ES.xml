@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <bundle>
   <UISEOForm>
     <label>
@@ -32,7 +32,7 @@
       <repository-exception>Ocurrió un error inesperado al guardar los metadatos de la página.</repository-exception>
     </msg>
     <help>
-      <priority>La prioridad de esta URL en relación con otras URLs en su sitio. El intérvalo de valores válidos van de 0.0 a 1.0. Este valor no afecta a cómo se comparan sus páginas a páginas de otros sitios, sólo permite a los motores de búsqueda saber las páginas que usted considere más importantes para los rastreadores. La prioridad predeterminada de una página es 0.5.</priority>
+      <priority>La prioridad de esta URL está relacionada con otras URLs en su sitio. El intervalo de valores válidos es de 0.0 a 1.0. Este valor no afecta la forma en que sus páginas son comparadas con páginas de otros sitios, sólo permite que los motores de búsqueda sepan cuáles son las páginas que considera más importantes para los crawlers. La prioridad por defecto de una página es 0.5.</priority>
     </help>
   </UISEOForm>
   <UISEOPopupWindow>
