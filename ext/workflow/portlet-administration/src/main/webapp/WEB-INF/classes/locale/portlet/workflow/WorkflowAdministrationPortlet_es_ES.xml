@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <bundle>
   <!--
   #############################################################################
@@ -105,17 +105,7 @@
   <UIProcessDetail>
     <msg>
       <confirm-delete-process>¿Estás seguro de eliminar la instancia de este proceso?</confirm-delete-process>
-      <confirm-delete-completed-process>¿Estás seguro de eliminar estos procesos terminados?</confirm-delete-completed-process>
-      <result-delete-completed-process>No hay ningún proceso completado para eliminar.</result-delete-completed-process>
     </msg>
-    <action>
-      <FlushAll>Borrar Todo</FlushAll>
-      <Cancel>Cancelar</Cancel>
-      <title>
-        <View>Ver</View>
-        <Delete>Borrar</Delete>
-      </title>
-    </action>
   </UIProcessDetail>
   <UITasksGrid>
     <header>
@@ -125,6 +115,16 @@
       <end>Final</end>
     </header>
   </UITasksGrid>
+  <UIProcessDetail>
+    <msg>
+      <confirm-delete-completed-process>¿Estás seguro de eliminar estos procesos terminados?</confirm-delete-completed-process>
+      <result-delete-completed-process>No hay ningún proceso completado para eliminar.</result-delete-completed-process>
+    </msg>
+    <action>
+      <FlushAll>Borrar Todo</FlushAll>
+      <Cancel>Cancelar</Cancel>
+    </action>  
+  </UIProcessDetail>
   <TaskListOfProcessPopup>
     <title>
       <UITaskListOfProcess>Listar tareas de Instancia</UITaskListOfProcess>
@@ -178,4 +178,12 @@
       <Cancel>Cancelar</Cancel>
     </action>
   </UITaskListOfProcess>
+<UIProcessDetail>
+    <action>
+    <title>
+    <View>Ver</View>
+	<Delete>Borrar</Delete>
+    </title>
+    </action>  
+  </UIProcessDetail>
 </bundle>

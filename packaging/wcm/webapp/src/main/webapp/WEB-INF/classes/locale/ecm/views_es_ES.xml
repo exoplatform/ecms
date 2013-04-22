@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <bundle>
   <!--
   ################resoucebundle FOR EXO:ARTICLE VIEW TEMPLATE############
@@ -277,10 +277,6 @@
         <username>Nombre de Usuario</username>
         <description>Descripción</description>
         <stote-path>Ruta de almacenamiento</stote-path>
-        <isDeep>Es profundo</isDeep>
-        <nodetypes>Tipos de nodo</nodetypes>
-        <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
-        <nodeTypeName>Nombres de tipo de nodo</nodeTypeName>
       </label>
     </view>
   </Getmail>
@@ -332,10 +328,6 @@
         <category>Categoría</category>
         <keywords>Palabras claves</keywords>
         <query-path>Ruta de Consulta</query-path>
-        <isDeep>Es profundo</isDeep>
-        <nodetypes>Tipos de nodo</nodetypes>
-        <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
-        <nodeTypeName>Nombres de tipo de nodo</nodeTypeName>
       </label>
     </view>
   </Rss>
@@ -349,10 +341,6 @@
         <lifecycle>Ciclo de vida</lifecycle>
         <metadata>Metadato</metadata>
         <description>Descripción</description>
-        <isDeep>Es profundo</isDeep>
-        <nodetypes>Tipos de nodo</nodetypes>
-        <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
-        <nodeTypeName>Nombres de tipo de nodo</nodeTypeName>
       </label>
     </view>
   </AddMetadata>
@@ -365,10 +353,6 @@
         <action-name>Nombre de la acción</action-name>
         <lifecycle>Ciclo de vida</lifecycle>
         <description>Descripción</description>
-        <isDeep>Es profundo</isDeep>
-        <nodetypes>Tipos de nodo</nodetypes>
-        <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
-        <nodeTypeName>Nombres de tipo de nodo</nodeTypeName>
       </label>
     </view>
   </ReloadAction>
@@ -382,10 +366,6 @@
         <lifecycle>Ciclo de vida</lifecycle>
         <description>Descripción</description>
         <mail-to>Enviar correo a</mail-to>
-        <isDeep>Es profundo</isDeep>
-        <nodetypes>Tipos de nodo</nodetypes>
-        <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
-        <nodeTypeName>Nombres de tipo de nodo</nodeTypeName>
       </label>
     </view>
   </SendMail>
@@ -398,10 +378,6 @@
         <action-name>Nombre</action-name>
         <lifecycle>Ciclo de vida</lifecycle>
         <description>Descripción</description>
-        <isDeep>Es profundo</isDeep>
-        <nodetypes>Tipos de nodo</nodetypes>
-        <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
-        <nodeTypeName>Nombres de tipo de nodo</nodeTypeName>
       </label>
     </view>
   </Transform>
@@ -414,10 +390,6 @@
         <action-name>Nombre de la acción</action-name>
         <lifecycle>Ciclo de vida</lifecycle>
         <description>Descripción</description>
-        <isDeep>Es profundo</isDeep>
-        <nodetypes>Tipos de nodo</nodetypes>
-        <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
-        <nodeTypeName>Nombres de tipo de nodo</nodeTypeName>
       </label>
     </view>
   </AutoVersioning>
@@ -430,10 +402,6 @@
         <action-name>Nombre</action-name>
         <lifecycle>Ciclo de vida</lifecycle>
         <description>Descripción</description>
-        <isDeep>Es profundo</isDeep>
-        <nodetypes>Tipos de nodo</nodetypes>
-        <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
-        <nodeTypeName>Nombres de tipo de nodo</nodeTypeName>
       </label>
     </view>
   </EnableVersioning>
@@ -655,6 +623,18 @@
       </label>
     </view>
   </ContentPublishing>
+
+  <SendMail>
+    <view>
+      <label> 
+        <isDeep>Es profundo</isDeep>
+        <nodetypes>Tipos de nodo</nodetypes>
+        <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
+        <nodeTypeName>Nombres de tipo de nodo</nodeTypeName>
+      </label> 
+  </view>
+  </SendMail>
+
   <ScriptAction>
     <view>
       <label>
@@ -665,6 +645,84 @@
       </label>
     </view>
   </ScriptAction>
+  
+  <Getmail>
+    <view>
+      <label>
+        <isDeep>Es profundo</isDeep>
+        <nodetypes>Tipos de nodo</nodetypes>
+        <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
+        <nodeTypeName>Nombres de tipo de nodo</nodeTypeName>
+      </label> 
+    </view>
+  </Getmail>
+  
+  <Rss>
+    <view>
+      <label> 
+        <isDeep>Es profundo</isDeep>
+        <nodetypes>Tipos de nodo</nodetypes>
+        <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
+        <nodeTypeName>Nombres de tipo de nodo</nodeTypeName>
+      </label> 
+    </view>
+  </Rss>
+  
+  <AddMetadata>
+    <view>
+      <label>
+        <isDeep>Es profundo</isDeep>
+        <nodetypes>Tipos de nodo</nodetypes>
+        <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
+        <nodeTypeName>Nombres de tipo de nodo</nodeTypeName>
+      </label> 
+    </view>
+  </AddMetadata>
+
+  <ReloadAction>
+    <view>
+      <label>
+        <isDeep>Es profundo</isDeep>
+        <nodetypes>Tipos de nodo</nodetypes>
+        <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
+        <nodeTypeName>Nombres de tipo de nodo</nodeTypeName>
+      </label> 
+    </view>
+  </ReloadAction>
+
+  <Transform>
+    <view>
+      <label> 
+        <isDeep>Es profundo</isDeep>
+        <nodetypes>Tipos de nodo</nodetypes>
+        <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
+        <nodeTypeName>Nombres de tipo de nodo</nodeTypeName>
+      </label> 
+    </view>
+  </Transform>
+
+  <EnableVersioning>
+    <view>
+      <label>
+        <isDeep>Es profundo</isDeep>
+        <nodetypes>Tipos de nodo</nodetypes> 
+        <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
+        <nodeTypeName>Nombres de tipo de nodo</nodeTypeName>
+      </label> 
+    </view>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <view>
+      <label>
+        <isDeep>Es profundo</isDeep>
+        <nodetypes>Tipos de nodo</nodetypes>
+        <affectedNodeTypeNames>Tipos de Nodo Afectados</affectedNodeTypeNames>
+        <nodeTypeName>Nombres de tipo de nodo</nodeTypeName>
+      </label> 
+    </view>
+  </AutoVersioning>
+  
   <AccessibleMedia>
     <view>
       <label>
@@ -678,4 +736,5 @@
       </tooltip>
     </view>
   </AccessibleMedia>
+ 
 </bundle>

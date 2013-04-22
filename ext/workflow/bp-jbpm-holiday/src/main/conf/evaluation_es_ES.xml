@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <bundle>
   <task-name>Evaluar vacaciones</task-name>
   <title>Evaluar vacaciones</title>
@@ -18,7 +18,7 @@
   #variable title and label
   -->
   <initiator>
-    <title>Quien pidi\u00f3 vacaciones</title>
+    <title>Quien pidió vacaciones</title>
     <label>Iniciador:</label>
   </initiator>
   <start>
@@ -29,8 +29,9 @@
     <title>Fin de vacaciones:</title>
     <label>Fin (dd/mm/aaaa):</label>
   </end>
+  
   <grant>
-    <submit>Concesi\u00f3n</submit>
+    <submit>Concesión</submit>
     <value>Conceder Aumento de Sueldo</value>
   </grant>
   <deny>
@@ -38,8 +39,8 @@
     <value>Negar Aumento Salarial</value>
   </deny>
   <reason>
-    <title>Raz\u00f3n dada por el iniciador</title>
-    <label>Raz\u00f3n:</label>
+    <title>Razón dada por el iniciador</title>
+    <label>Razón:</label>
   </reason>
   <amount-asked>
     <title>Monto solicitado:</title>
@@ -47,7 +48,7 @@
   </amount-asked>
   <amount-granted>
     <title>Cantidad Concedida:</title>
-    <label>Concesi\u00f3n:</label>
+    <label>Concesión:</label>
   </amount-granted>
   <priority>
     <title>Establecer la prioridad</title>
@@ -56,7 +57,8 @@
   <rewarded>
     <title>Fue recompensado el iniciador</title>
     <label>Recompensado:</label>
-    <checkbox>\u00a1S\u00ed el iniciador ha sido recompensado!</checkbox>
+    <checkbox>¡Sí el iniciador ha sido recompensado!</checkbox>
   </rewarded>
+  
   <cancel>Cancelar</cancel>
 </bundle>

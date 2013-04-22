@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <bundle>
   <UICLVContainer>
     <label>
@@ -27,8 +27,12 @@
       <UICLVConfigItemPathFormStringInput>Ruta de la carpeta</UICLVConfigItemPathFormStringInput>
       <UICLVConfigOrderByFormSelectBox>Ordenar por</UICLVConfigOrderByFormSelectBox>
       <option>
-        <exo>índice \= índice</exo>
-        <publication>liveDate \= fecha de publicación</publication>
+        <exo:title>Título</exo:title>
+        <exo:dateCreated>Fecha de creación</exo:dateCreated>
+        <exo:dateModified>Fecha de modificación</exo:dateModified>
+        <publication:liveDate>Fecha de publicación</publication:liveDate>
+        <exo:startEvent>Fecha del evento</exo:startEvent>
+        <exo:index>Índice</exo:index>
       </option>
       <DisplaySettingBlock>Configuración de pantalla</DisplaySettingBlock>
       <UICLVConfigHeaderFormStringInput>Encabezamiento</UICLVConfigHeaderFormStringInput>
@@ -121,7 +125,6 @@
     <label>
       <readmore>Leer más</readmore>
       <rssFeed>Flujo de RSS</rssFeed>
-      <draft>Borrador</draft>
     </label>
     <action>
       <refresh>Refrescar</refresh>
@@ -129,6 +132,9 @@
       <delete>Borrar</delete>
       <publish>Publicar</publish>
     </action>
+    <label>
+      <draft>Borrador</draft>
+    </label>
   </UICLVPresentation>
   <CorrectContentSelectorPopupWindow>
     <title>

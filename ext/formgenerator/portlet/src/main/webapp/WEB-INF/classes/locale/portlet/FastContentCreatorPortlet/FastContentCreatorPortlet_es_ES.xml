@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <bundle>
   <UIFCCForm>
     <msg>
@@ -20,6 +20,7 @@
       <Cancel>Cancelar</Cancel>
     </action>
   </UIFCCForm>
+
   <UIFCCConfig>
     <label>
       <select-repository>Seleccione el repositorio</select-repository>
@@ -27,7 +28,7 @@
       <UIFCCRepositoryFormSelectBox>Seleccione el repositorio</UIFCCRepositoryFormSelectBox>
       <UIFCCWorkspaceFormSelectBox>Seleccione el espacio de trabajo</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>Opciones de Plantilla</UIFCCTemplateField>
-      <UIFCCLocationFormInputAction>Location to Save</UIFCCLocationFormInputAction>
+      <UIFCCLocationFormInputAction>Localización a guardar</UIFCCLocationFormInputAction>
       <UIFCCTemplateFormSelectBox>Seleccionar Plantilla</UIFCCTemplateFormSelectBox>
       <UIFCCSaveFormStringInput>Personalizar el botón de guardar</UIFCCSaveFormStringInput>
       <UIFCCMessageFormTextareaInput>Personalizar Mensaje de Guardar</UIFCCMessageFormTextareaInput>
@@ -50,11 +51,13 @@
       <Save>Guardar</Save>
     </action>
   </UIFCCConfig>
+
   <UIFCCLocationFormInputAction>
     <title>
       <SelectPath>Seleccione la ruta</SelectPath>
     </title>
   </UIFCCLocationFormInputAction>
+
   <UIFCCActionList>
     <header>
       <name>Nombre</name>
@@ -74,22 +77,27 @@
       <access-denied>Acceso denegado. No tienes permiso para realizar esta acción.</access-denied>
     </msg>
   </UIFCCActionList>
+
   <UIFCCSelectorPopupWindow>
     <title>
       <UIOneNodePathSelector>Seleccione ubicación</UIOneNodePathSelector>
     </title>
   </UIFCCSelectorPopupWindow>
+
   <UIWorkspaceList>
     <label>
       <workspaceName>Espacio de Trabajo</workspaceName>
       <rootNodePath>Ruta de Raíz</rootNodePath>
+      <rootNodeInfo/>
     </label>
   </UIWorkspaceList>
+
   <rootNodeInfo>
     <title>
       <AddRootNode>Añadir el nodo de la raíz</AddRootNode>
     </title>
   </rootNodeInfo>
+
   <UITreeList>
     <info>
       <child-not-found>Este nodo no tiene otros nodos.</child-not-found>
@@ -99,11 +107,13 @@
       <action>Acción</action>
     </header>
   </UITreeList>
+
   <UIFCCActionPopupWindow>
     <title>
       <UIFCCActionContainer>Añadir Acción</UIFCCActionContainer>
     </title>
   </UIFCCActionPopupWindow>
+
   <UIFCCActionForm>
     <title>Agregar/ Editar la Acción</title>
     <action>
@@ -125,6 +135,7 @@
       <destPath>Con Ruta</destPath>
     </validator>
   </UIFCCActionForm>
+
   <UIFCCActionTypeForm>
     <label>
       <actionType>Crear una acción de tipo</actionType>
@@ -134,35 +145,52 @@
       <do-not-permission>No tienes permiso para cargar la plantilla de '{0}'.</do-not-permission>
     </msg>
   </UIFCCActionTypeForm>
+
   <PopupComponent>
     <title>
       <UIOneNodePathSelector>Seleccione ubicación</UIOneNodePathSelector>
       <UIPermissionSelector>Navegador de permiso</UIPermissionSelector>
       <UICategoriesSelector>Añadir Categorías</UICategoriesSelector>
-      <UIOneTaxonomySelector>Añadir Categorías</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
+
   <DateTimeValidator>
     <msg>
       <Invalid-input>El campo '{0}' con el valor '{1}' no es válido.</Invalid-input>
     </msg>
   </DateTimeValidator>
+
   <UITabPane>
     <title>
       <UICategoriesSelectPanel>Seleccionar categorías</UICategoriesSelectPanel>
       <UISelectedCategoriesGrid>Categorías referenciadas</UISelectedCategoriesGrid>
     </title>
   </UITabPane>
+
+  <PopupComponent>
+    <title>
+      <UICategoriesSelector>Añadir Categorías</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
   <UICategoriesSelector>
     <action>
       <close>Cerrar</close>
     </action>
   </UICategoriesSelector>
+
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>Añadir Categorías</UIOneTaxonomySelector>
+    </title>
+  </PopupComponent>
+
   <UITreeTaxonomyList>
     <label>
       <taxonomyTree>Árbol de categorías</taxonomyTree>
     </label>
   </UITreeTaxonomyList>
+
   <UIFCCTaxonomyPopupWindow>
     <title>
       <UIOneTaxonomySelector>Selector de categorías</UIOneTaxonomySelector>

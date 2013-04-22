@@ -1,23 +1,28 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <bundle>
   <UIPCLVContainer>
     <title>
       <QuickEdit>Edición rápida</QuickEdit>
     </title>
   </UIPCLVContainer>
+
   <UIParameterizedManagerPopupWindow>
     <title>
       <UIPCLVConfig>Configuración del visor del listado de contenido parametrizado</UIPCLVConfig>
     </title>
   </UIParameterizedManagerPopupWindow>
+
   <UIPCLVConfig>
     <label>
       <Title>Configuración del visor del listado de contenido parametrizado</Title>
       <ContentSelectionBlock>Selección de contenido</ContentSelectionBlock>
       <OrderBy>Ordenar por</OrderBy>
       <option>
-        <exo>startEvent \= fecha de evento</exo>
-        <publication>liveDate \= fecha de publicación</publication>
+        <exo:title>Título</exo:title>
+        <exo:dateCreated>Fecha de creación</exo:dateCreated>
+        <exo:dateModified>Fecha de modificación</exo:dateModified>
+        <publication:liveDate>Fecha de publicación</publication:liveDate>
+        <exo:startEvent>Fecha del evento</exo:startEvent>
       </option>
       <DisplaySettingBlock>Configuración de pantalla</DisplaySettingBlock>
       <Header>Encabezado</Header>
@@ -44,12 +49,14 @@
       <Cancel>Cancelar</Cancel>
     </action>
   </UIPCLVConfig>
+
   <OrderTypes>
     <label>
       <OrderDesc>Descendiente</OrderDesc>
       <OrderAsc>Ascendente</OrderAsc>
     </label>
   </OrderTypes>
+
   <UIParameterizedTagetPageInputSetAction>
     <title>
       <SelectTargetPage>Seleccione la página de destino</SelectTargetPage>
