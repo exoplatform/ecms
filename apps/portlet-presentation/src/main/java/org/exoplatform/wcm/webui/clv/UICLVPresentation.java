@@ -55,6 +55,7 @@ import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 import org.exoplatform.wcm.webui.Utils;
+import org.exoplatform.wcm.webui.administration.UIEditingForm;
 import org.exoplatform.wcm.webui.paginator.UICustomizeablePaginator;
 import org.exoplatform.wcm.webui.reader.ContentReader;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -690,59 +691,59 @@ public class UICLVPresentation extends UIContainer {
     if (Utils.isShowQuickEdit()) {
       sb.append("  <div class=\"edittingContent\" style=\" z-index: 5\">");
       sb.append("    <div class=\"edittingToolBar clearfix\" >");
-			
+      
       sb.append("    <div class=\"btn-group\" >");
-			
-				if (Utils.isShowDelete(viewNode)) {
-					String strDeleteBundle = "Delete";
-					try {
-						strDeleteBundle = portletRequestContext.getApplicationResourceBundle()
-																									 .getString("UICLVPresentation.action.delete");
-					} catch (MissingResourceException e) {
-						if (LOG.isWarnEnabled()) {
-							LOG.warn(e.getMessage());
-						}
-					}
-					sb.append("          <a class=\"btn\" href=\"" + contentDeleteLink + "\">");
-					sb.append("            <i class=\"uiIconRemove\" ></i>");
-					sb.append("          </a>");
-				}
+      
+      if (isShowEdit(viewNode) && !LockUtil.isLocked(viewNode)) {
+        String strEditBundle = "Edit in the Content Explorer";
+        try {
+          strEditBundle = portletRequestContext.getApplicationResourceBundle()
+                                               .getString("UICLVPresentation.action.edit");
+        } catch (MissingResourceException e) {
+          if (LOG.isWarnEnabled()) {
+            LOG.warn(e.getMessage());
+          }
+        }
+        if (org.exoplatform.wcm.webui.utils.Utils.isShowFastPublish(viewNode)) {
+          String strFastPublishBundle = "Publish";
+          try {
+            strFastPublishBundle = portletRequestContext.getApplicationResourceBundle()
+                                                 .getString("UICLVPresentation.action.publish");
+          } catch (MissingResourceException e) {
+            if (LOG.isWarnEnabled()) {
+              LOG.warn(e.getMessage());
+            }
+          }
+          sb.append("          <a class=\"btn\" href=\"" + fastPublishLink + "\" title=\"" + strFastPublishBundle + "\">");
+          sb.append("            <i class=\"uiIconEcmsPublish\" ></i>");
+          sb.append("          </a>");
+        }
+        sb.append("          <a class=\"btn\" onclick = 'eXo.ecm.CLV.addURL(this)' href=\"" + contentEditLink + "\" title=\"" + strEditBundle + "\">");
+        sb.append("            <i class=\"uiIconEdit\" ></i>");
+        sb.append("          </a>");
+      } else {
+        sb.append("          <a class=\"btn\" >");
+        sb.append("            <i class=\"uiIconEcmsLock\" ></i>");
+        sb.append("          </a>");
+      }
+      
+      if (Utils.isShowDelete(viewNode)) {
+        String strDeleteBundle = "Delete";
+        try {
+          strDeleteBundle = portletRequestContext.getApplicationResourceBundle()
+                                                 .getString("UICLVPresentation.action.delete");
+        } catch (MissingResourceException e) {
+          if (LOG.isWarnEnabled()) {
+            LOG.warn(e.getMessage());
+          }
+        }
+        sb.append("          <a class=\"btn\" href=\"" + contentDeleteLink + "\" title=\"" + strDeleteBundle + "\">");
+        sb.append("            <i class=\"uiIconRemove\"></i>");
+        sb.append("          </a>");
+      }
 
-				if (isShowEdit(viewNode) && !LockUtil.isLocked(viewNode)) {
-					String strEditBundle = "Edit in the Content Explorer";
-					try {
-						strEditBundle = portletRequestContext.getApplicationResourceBundle()
-																								 .getString("UICLVPresentation.action.edit");
-					} catch (MissingResourceException e) {
-						if (LOG.isWarnEnabled()) {
-							LOG.warn(e.getMessage());
-						}
-					}
-					sb.append("          <a class=\"btn\" onclick = 'eXo.ecm.CLV.addURL(this)' href=\"" + contentEditLink + "\">");
-					sb.append("            <i class=\"uiIconEdit\" ></i>");
-					sb.append("          </a>");
-					if (org.exoplatform.wcm.webui.utils.Utils.isShowFastPublish(viewNode)) {
-						String strFastPublishBundle = "Publish";
-						try {
-							strFastPublishBundle = portletRequestContext.getApplicationResourceBundle()
-																									 .getString("UICLVPresentation.action.publish");
-						} catch (MissingResourceException e) {
-							if (LOG.isWarnEnabled()) {
-								LOG.warn(e.getMessage());
-							}
-						}
-						sb.append("          <a class=\"btn\" href=\"" + fastPublishLink + "\">");
-						sb.append("            <i class=\"uiIconEcmsPublish\" ></i>");
-						sb.append("          </a>");
-					}
-				} else {
-					sb.append("          <a class=\"btn\" >");
-					sb.append("            <i class=\"uiIconEcmsLock\" ></i>");
-					sb.append("          </a>");
-				}
-			
       sb.append("    </div>");
-			
+      
       if (viewNode.hasProperty("publication:currentState")) {
         String state = viewNode.getProperty("publication:currentState").getValue().getString();
         try {
@@ -753,9 +754,15 @@ public class UICLVPresentation extends UIContainer {
             LOG.warn(e.getMessage());
           }
         }
-        sb.append("          <div class=\"edittingCurrentState pull-left\">");
-        sb.append("" + state);
-        sb.append("          </div>");
+        sb.append("<div class=\"edittingCurrentState pull-left\">");
+        if (UIEditingForm.PUBLISHED.equals(state)) {
+          sb.append("<span class=\"publishText\"><i class=\"uiIconTick\"></i>" + state + "</span>");
+        } else if (UIEditingForm.DRAFT.equals(state)) {
+          sb.append("<span class=\"draftText\">" + state + "</span>");
+        } else {
+          sb.append("<span>" + state + "</span>");
+        }
+        sb.append(" </div>");
       }
 
       sb.append("      </div>");
