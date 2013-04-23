@@ -3625,4 +3625,12 @@
 	  	<property-name-incorrect>Tên property không hợp lệ, hãy điền vào giá trị khác!</property-name-incorrect>
     </msg>
   </UIPropertyForm>
+  <!--
+  ###################################################################################
+  # JCR Exceptions manager                                                              #
+  ###################################################################################
+  -->
+  <VersionException>
+  	<msg>Không thể sửa item(s) đang check-in</msg>  
+  </VersionException>
 </bundle>
