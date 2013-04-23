@@ -5,6 +5,12 @@
  *          hunghvit@gmail.com
  * Apr 3, 2009
  */
+ 
+ // Bootstrap tooltip style
+_ctx.getRequestContext()
+    .getJavascriptManager()
+    .require("SHARED/jquery", "gj").addScripts("gj(document).ready(function() { gj(\"*[rel='tooltip']\").tooltip();});");
+    
 %>
 
 <%

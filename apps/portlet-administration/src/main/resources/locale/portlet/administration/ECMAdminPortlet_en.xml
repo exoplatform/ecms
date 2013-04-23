@@ -2440,7 +2440,7 @@
         <email>#{word.email}</email>
       </option>
       <group>Group</group>
-      <searchUser>#{word.searchUser}</searchUser>
+      <searchUser>User</searchUser>
       <userName>#{word.userName}</userName>
       <lastName>#{word.lastName}</lastName>
       <firstName>#{word.firstName}</firstName>
