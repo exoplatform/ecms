@@ -3173,7 +3173,7 @@
       </title>
     </action>
     <msg>
-      <confirm-remove>You cannot edit this node with the path {0}. It has been locked by another user.</confirm-remove>
+      <confirm-remove>Are you sure to delete this tag?</confirm-remove>
     </msg>
   </UIEditingTagsForm>
 
