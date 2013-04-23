@@ -108,14 +108,14 @@
 											if(actionField != null && actionField.length > 0) {
 												for(i in 0..actionField.length -1) {
 										%>			
-														<img onclick="eXo.webui.UIForm.submitForm('<%=formName%>', '<%=actionField[i]%>', true)" class="uiIcon<%=actionField[i]%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".title." + actionField[i])%>" alt="<%=_ctx.appRes(uicomponent.getId() + ".title." + actionField[i])%>" src="/eXoResources/skin/DefaultSkin/background/Blank.gif"/>
+														<a class="actionIcon" onclick="eXo.webui.UIForm.submitForm('<%=formName%>', '<%=actionField[i]%>', true)" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".title." + actionField[i])%>"><i class="uiIcon<%=actionField[i]%> uiIconLightGray"></i></a>
 										<%
 												}
 											}
 										} else if(isShowAction) {											 
 											for(String action : uicomponent.getFieldActions(inputEntry.getName())) {
 										%>			
-												<img onclick="eXo.webui.UIForm.submitForm('<%=formName%>', '<%=action%>', true)" class="uiIcon<%=action%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".title." + action)%>" alt="<%=_ctx.appRes(uicomponent.getId() + ".title." + action)%>" src="/eXoResources/skin/DefaultSkin/background/Blank.gif"/>
+												<a class="actionIcon" onclick="eXo.webui.UIForm.submitForm('<%=formName%>', '<%=action%>', true)" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".title." + action)%>"><i class="uiIcon<%=action%> uiIconLightGray"></i></a>
 										<%
 											}
 										}
