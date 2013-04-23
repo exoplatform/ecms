@@ -1,7 +1,7 @@
 <div class="uiPermissionForm" onkeypress="javascript:SubmitAction.call(this, event);">
 	<% uiform.begin() %>
 			<div>
-				<h5><%=_ctx.appRes(uicomponent.getName() + ".title"); %></h5>
+				<h6><%=_ctx.appRes(uicomponent.getName() + ".title"); %></h6>
 		
 				<% uiform.renderField(uiform.PERMISSION) %>
 			</div>

@@ -155,7 +155,7 @@
                     }
            %>
               <a class="actionIcon" href="javascript:void(0)" onclick="$actionLink" rel="tooltip" data-placement="bottom" title="$title" >
-                 <i class="uiIcon${action}"></i>
+                 <i class="uiIcon${action} uiIconLightGray"></i>
               </a>
            <%   }
               } %>

@@ -17,7 +17,7 @@ def primaryButton = uicomponent.getPrimaryButtonAction();
 			if(actionField != null && actionField.length > 0) {
 				for(i in 0..actionField.length -1) {
 				%>
-					<i onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>', '<%=actionField[i]%>', true)" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".title." + actionField[i])%>" class="uiIcon<%=actionField[i]%> uiIconLightGray"></i>
+					<a class="actionIcon" onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>', '<%=actionField[i]%>', true)" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".title." + actionField[i])%>"><i class="uiIcon<%=actionField[i]%> uiIconLightGray"></i></a>
 				<%
 				}
 			}
