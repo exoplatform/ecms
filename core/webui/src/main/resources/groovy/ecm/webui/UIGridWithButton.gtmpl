@@ -78,7 +78,7 @@
 	<%_ctx.renderUIComponent(uicomponent.getUIPageIterator())%>
 	<% } %>
 </div>
-<% if (uicomponent.getActions() != null) { %>
+<% if (uicomponent.getActions() != null && uicomponent.getActions().length > 0) { %>
   <div class="$uicomponent.id">
     <div class="uiAction uiActionBorder"> 
       <% for(action in uicomponent.getActions()) { %>

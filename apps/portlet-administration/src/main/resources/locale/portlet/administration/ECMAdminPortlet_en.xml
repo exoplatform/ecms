@@ -1096,7 +1096,7 @@
 		<UIViewPermissionList>
 			 <header>
 						<friendlyPermission>Permissions</friendlyPermission>
-			 	 <action>Actions</action>
+			 	    <action>Action</action>
 			 </header>
 				<action>
 					 <title>
