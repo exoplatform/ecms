@@ -68,6 +68,22 @@ public interface LinkManager {
    */
   public Node createLink(Node parent, String linkType, Node target, String linkName)
       throws RepositoryException;
+  
+  
+  /**
+   * Create a new link that is added to the parent node and return the link.
+   *
+   * @param parent The parent node of the link
+   * @param linkType The primary node type of the link must be a sub-type of
+   *          exo:symlink, the default value is "exo:symlink"
+   * @param target The target of the link
+   * @param linkName The name of the link
+   * @param linkTitle The title of the link
+   * @return Node
+   * @throws RepositoryException if the link cannot be created for any reason
+   */
+  public Node createLink(Node parent, String linkType, Node target, String linkName, String linkTitle)
+      throws RepositoryException;
 
   /**
    * Update the target node of the given link.

@@ -58,13 +58,17 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  */
 public class LinkManagerImpl implements LinkManager {
 
-  private final static String    SYMLINK      = "exo:symlink";
+  private final static String    SYMLINK       = "exo:symlink";
 
-  private final static String    WORKSPACE    = "exo:workspace";
+  private final static String    WORKSPACE     = "exo:workspace";
 
-  private final static String    UUID         = "exo:uuid";
+  private final static String    UUID          = "exo:uuid";
 
-  private final static String    PRIMARY_TYPE = "exo:primaryType";
+  private final static String    PRIMARY_TYPE  = "exo:primaryType";
+  
+  private final static String    SYMLINK_NAME  = "exo:name";
+  
+  private final static String    SYMLINK_TITLE = "exo:title";
 
   private final static Log       LOG  = ExoLogger.getLogger(LinkManagerImpl.class.getName());
 
@@ -87,11 +91,18 @@ public class LinkManagerImpl implements LinkManager {
   public Node createLink(Node parent, Node target) throws RepositoryException {
     return createLink(parent, null, target, null);
   }
+  
+  /**
+   * {@inheritDoc}
+  */  
+  public Node createLink(Node parent, String linkType, Node target, String linkName) throws RepositoryException {
+  	return createLink(parent, linkType, target, linkName, linkName);
+  }
 
   /**
    * {@inheritDoc}
-   */
-  public Node createLink(Node parent, String linkType, Node target, String linkName)
+  */
+  public Node createLink(Node parent, String linkType, Node target, String linkName, String linkTitle)
       throws RepositoryException {
     if (!target.isNodeType(SYMLINK)) {
       if (target.canAddMixin("mix:referenceable")) {
@@ -113,6 +124,11 @@ public class LinkManagerImpl implements LinkManager {
       linkNode.setProperty(WORKSPACE, target.getSession().getWorkspace().getName());
       linkNode.setProperty(PRIMARY_TYPE, target.getPrimaryNodeType().getName());
       linkNode.setProperty(UUID, target.getUUID());
+      if(linkNode.canAddMixin("exo:sortable")) {
+        linkNode.addMixin("exo:sortable");
+      }
+      linkNode.setProperty(SYMLINK_TITLE, linkTitle);
+      linkNode.setProperty(SYMLINK_NAME, linkName);
       linkNode.getSession().save();
       ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
       try {
