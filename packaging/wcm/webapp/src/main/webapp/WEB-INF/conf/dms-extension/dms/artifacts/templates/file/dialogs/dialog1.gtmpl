@@ -13,7 +13,7 @@
 <div class="UIForm FormLayout FormScrollLayout">
   <% uiform.begin() %>
 
-	
+	<div class="uiBox">
   <%/* start render action*/%>
   <% if (uiform.isShowActionsOnTop()) {
             uiform.processRenderAction();
@@ -22,7 +22,7 @@
   <%/* end render action*/%>
     <div class="form-horizontal uiContentBox">
         <div class="control-group">
-          <label class="control-label" for="name"><%=_ctx.appRes("File.dialog.label.name")%></label>
+          <label class="control-label" for="name"><%=_ctx.appRes("File.dialog.label.name")%>:</label>
           <div class="controls">
             <%
               String[] fieldName = ["jcrPath=/node", "mixintype=mix:votable,mix:commentable,mix:i18n,dc:elementSet", "editable=if-null", "validate=empty,name"];
@@ -90,8 +90,8 @@
 											<a class="nameInfo" rel="tooltip" data-placement="bottom" title="$fileName">
 												 $fileName
 											</a>
-											<a href="$actionLink">
-												<i class="uiIconDelete" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("Ecm.dialog.label.remove")%>" alt="<%=_ctx.appRes("Ecm.dialog.label.remove")%>"></i>
+											<a class="actionIcon" href="$actionLink">
+												<i class="uiIconDelete uiIconLightGray" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("Ecm.dialog.label.remove")%>" alt="<%=_ctx.appRes("Ecm.dialog.label.remove")%>"></i>
 											</a>
 										
                        <%
@@ -166,5 +166,6 @@
             uiform.processRenderAction()
          }
   %>
+  </div>
   <%uiform.end()%>
 </div>
