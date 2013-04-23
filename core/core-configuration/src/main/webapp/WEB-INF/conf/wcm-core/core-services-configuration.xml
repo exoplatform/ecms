@@ -7,6 +7,14 @@
 
 
   <component>
+    <type>org.exoplatform.services.deployment.WCMContentInitializerService</type>
+  </component>
+
+  <component>
+    <type>org.exoplatform.services.wcm.webcontent.WebcontentChildUpgradeService</type>
+  </component>
+
+  <component>
     <key>org.exoplatform.webui.ext.UIExtensionManager</key>
     <type>org.exoplatform.webui.ext.impl.UIExtensionManagerImpl</type>
   </component>

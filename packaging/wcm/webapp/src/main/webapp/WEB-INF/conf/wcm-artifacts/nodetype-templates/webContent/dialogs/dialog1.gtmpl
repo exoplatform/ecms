@@ -101,7 +101,7 @@
 							<div class="controls">
 								<%
 									String[] htmlHiddenField1 = ["jcrPath=/node/default.html", "nodetype=nt:file", "defaultValues=default.html", "mixintype=exo:htmlFile"];
-									String[] htmlHiddenField2 = ["jcrPath=/node/default.html/jcr:content", "nodetype=nt:resource", "mixintype=dc:elementSet", "visible=false"]; 
+									String[] htmlHiddenField2 = ["jcrPath=/node/default.html/jcr:content", "nodetype=nt:resource", "mixintype=dc:elementSet,exo:webContentChild", "visible=false"]; 
 									String[] htmlHiddenField3 = ["jcrPath=/node/default.html/jcr:content/jcr:encoding", "visible=false", "UTF-8"];
 									String[] htmlHiddenField4 = ["jcrPath=/node/default.html/jcr:content/jcr:lastModified", "visible=false"];
 									String[] htmlHiddenField5 = ["jcrPath=/node/default.html/jcr:content/dc:date", "visible=false"];
@@ -180,7 +180,7 @@
 							<div class="controls">
 								<%
 									String[] cssHiddenField1 = ["jcrPath=/node/css/default.css", "nodetype=nt:file", "defaultValues=default.css"] ;
-									String[] cssHiddenField2 = ["jcrPath=/node/css/default.css/jcr:content", "nodetype=nt:resource", "mixintype=dc:elementSet", "visible=false"] ; 
+									String[] cssHiddenField2 = ["jcrPath=/node/css/default.css/jcr:content", "nodetype=nt:resource", "mixintype=dc:elementSet,exo:webContentChild", "visible=false"] ; 
 									String[] cssHiddenField3 = ["jcrPath=/node/css/default.css/jcr:content/jcr:encoding", "visible=false", "UTF-8"] ;  
 									String[] cssHiddenField4 = ["jcrPath=/node/css/default.css/jcr:content/jcr:lastModified", "visible=false"] ;
 									String[] cssHiddenField5 = ["jcrPath=/node/css/default.css/jcr:content/dc:date", "visible=false"] ;
@@ -221,7 +221,7 @@
 							<div class="controls">
 								<%
 									String[] jsHiddenField1 = ["jcrPath=/node/js/default.js", "nodetype=nt:file", "defaultValues=default.js"];
-									String[] jsHiddenField2 = ["jcrPath=/node/js/default.js/jcr:content", "nodetype=nt:resource", "mixintype=dc:elementSet", "visible=false"]; 
+									String[] jsHiddenField2 = ["jcrPath=/node/js/default.js/jcr:content", "nodetype=nt:resource", "mixintype=dc:elementSet,exo:webContentChild", "visible=false"]; 
 									String[] jsHiddenField3 = ["jcrPath=/node/js/default.js/jcr:content/jcr:encoding", "visible=false", "UTF-8"];  
 									String[] jsHiddenField4 = ["jcrPath=/node/js/default.js/jcr:content/jcr:lastModified", "visible=false"];
 									String[] jsHiddenField5 = ["jcrPath=/node/js/default.js/jcr:content/dc:date", "visible=false"];

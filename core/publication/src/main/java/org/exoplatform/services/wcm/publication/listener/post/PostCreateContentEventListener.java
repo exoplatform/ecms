@@ -86,6 +86,53 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
       listenerService = WCMCoreUtils.getService(ListenerService.class);
     }
     Node currentNode = event.getData();
+    //add mixin exo:webContentChild for default.html/jcr:content of webContent
+    try {
+      if (currentNode.canAddMixin(NodetypeConstant.EXO_WEBCONTENT_CHILD) && 
+          currentNode.isNodeType(NodetypeConstant.NT_RESOURCE) &&
+          currentNode.getParent().isNodeType(NodetypeConstant.NT_FILE) && 
+          "default.html".equals(currentNode.getParent().getName()) &&
+          currentNode.getParent().getParent().isNodeType(NodetypeConstant.EXO_WEBCONTENT)) {
+        currentNode.addMixin(NodetypeConstant.EXO_WEBCONTENT_CHILD);
+      }
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Error, can not add mixin '" + NodetypeConstant.EXO_WEBCONTENT_CHILD + "' to node: " + currentNode.getPath());
+      }
+    }
+    //add mixin exo:webContentChild for css/default.css/jcr:content of webContent
+    try {
+      if (currentNode.canAddMixin(NodetypeConstant.EXO_WEBCONTENT_CHILD) && 
+          currentNode.isNodeType(NodetypeConstant.NT_RESOURCE) &&
+          currentNode.getParent().isNodeType(NodetypeConstant.NT_FILE) && 
+          "default.css".equals(currentNode.getParent().getName()) &&
+          currentNode.getParent().getParent().isNodeType(NodetypeConstant.EXO_CSS_FOLDER) &&
+          "css".equals(currentNode.getParent().getParent().getName()) &&
+          currentNode.getParent().getParent().getParent().isNodeType(NodetypeConstant.EXO_WEBCONTENT)) {
+        currentNode.addMixin(NodetypeConstant.EXO_WEBCONTENT_CHILD);
+      }
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Error, can not add mixin '" + NodetypeConstant.EXO_WEBCONTENT_CHILD + "' to node: " + currentNode.getPath());
+      }
+    }
+    //add mixin exo:webContentChild for js/default.js/jcr:content of webContent
+    try {
+      if (currentNode.canAddMixin(NodetypeConstant.EXO_WEBCONTENT_CHILD) && 
+          currentNode.isNodeType(NodetypeConstant.NT_RESOURCE) &&
+          currentNode.getParent().isNodeType(NodetypeConstant.NT_FILE) && 
+          "default.js".equals(currentNode.getParent().getName()) &&
+          currentNode.getParent().getParent().isNodeType(NodetypeConstant.EXO_JS_FOLDER) &&
+          "js".equals(currentNode.getParent().getParent().getName()) &&
+          currentNode.getParent().getParent().getParent().isNodeType(NodetypeConstant.EXO_WEBCONTENT)) {
+        currentNode.addMixin(NodetypeConstant.EXO_WEBCONTENT_CHILD);
+      }
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Error, can not add mixin '" + NodetypeConstant.EXO_WEBCONTENT_CHILD + "' to node: " + currentNode.getPath());
+      }
+    }
+    //---------------------------------------------------------------------------------------------------------------------------
     if(currentNode.canAddMixin("exo:rss-enable")) {
       currentNode.addMixin("exo:rss-enable");
     }

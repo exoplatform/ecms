@@ -97,33 +97,8 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
     QueryCriteria criteria = createQueryCriteria(query, offset, limit, sort, order);
     //query search result
     try {
-      if (sites == null || sites.size() == 0 || 
-          ConversationState.getCurrent().getIdentity().getUserId() != null) {
         criteria.setSiteName(null);
         ret = convertResult(searchNodes(criteria), limit, context);
-      } else if (sites.size() == 1) {
-        criteria.setSiteName(sites.iterator().next());
-        ret = convertResult(searchNodes(criteria), limit, context);
-      } else {//search in many sites
-        Iterator<String> iter = sites.iterator();
-        criteria.setOffset(0);
-        while (iter.hasNext() && limit > 0) {
-          criteria.setSiteName(iter.next());
-          List<SearchResult> ret1 = convertResult(searchNodes(criteria), limit, context);
-          //0 ----- offset ------ offset + limit
-          if (ret1.size() <= offset) {
-            offset-= ret1.size();
-          } else if (ret1.size() < offset + limit) {
-            ret.addAll(ret1.subList(offset, ret1.size() - offset));
-            limit -= (ret1.size() - offset);
-            offset = 0;
-          } else {//ret1.size() >= offset + limit
-            ret.addAll(ret1.subList(offset, limit - offset));
-            offset = 0;
-            limit = 0;
-          }
-        }
-      }
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error(e);

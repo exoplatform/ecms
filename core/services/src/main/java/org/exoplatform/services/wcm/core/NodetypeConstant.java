@@ -218,6 +218,8 @@ public class NodetypeConstant {
   
   public static final String EXO_SYMLINK = "exo:symlink";
   
+  public static final String EXO_WEBCONTENT_CHILD = "exo:webContentChild";
+  
   // public static final String PUBLICATION_STATE_AND_VERSION_BASED_PUBLICATION
   // = "publication:stateAndVersionBasedPublication";
 
