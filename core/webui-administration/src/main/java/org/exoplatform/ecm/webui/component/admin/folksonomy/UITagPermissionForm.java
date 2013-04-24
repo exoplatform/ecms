@@ -57,7 +57,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
     }
 )
 public class UITagPermissionForm extends UIPermissionFormBase implements UISelectable{
-  final static public String TAGS_PERMISSION   = "tags_permission";
+  final static public String TAGS_PERMISSION   = "permission";
 
   final static public String POPUP_SELECT = "SelectUserOrGroup";
   private static final Log LOG  = ExoLogger.getLogger(UITagPermissionForm.class.getName());
