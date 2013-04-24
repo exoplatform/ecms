@@ -90,9 +90,6 @@ UIFileView.prototype.initAllEvent = function(actionAreaId, enableDragAndDrop) {
 			gj(elem).find("input:checkbox").each(function(ii, ee){ee.onmousedown=Self.checkBoxItem;});
 		}
 	});
-	actionArea.onmousedown = Self.mouseDownGround;
-	actionArea.onkeydown = Self.mouseDownGround;
-	actionArea.onmouseup = Self.mouseUpGround;
 	
 	var listGrid = gj(actionArea).find("div.uiListGrid:first")[0];
 	if (listGrid) {
