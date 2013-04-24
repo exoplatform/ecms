@@ -45,9 +45,11 @@ import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
 import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.templates.ContentTypeFilterPlugin;
 import org.exoplatform.services.cms.templates.ContentTypeFilterPlugin.FolderFilterConfig;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.context.DocumentContext;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.DynamicIdentity;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -770,9 +772,11 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     try {
       templatePath = templatesHome.getPath() + "/" + nodeTypeName + "/" + templateType + "/" + templateName;
       Node templateNode = (Node)session.getItem(templatePath);
+      DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, true);
       updateTemplate(templateNode,templateFile, roles);
       session.save();
     } catch(PathNotFoundException e) {
+    	DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, true);
       templatePath = getContentNode(templateType, templatesHome, nodeTypeName, label,
           isDocumentTemplate, templateName, roles, templateFile);
     }
