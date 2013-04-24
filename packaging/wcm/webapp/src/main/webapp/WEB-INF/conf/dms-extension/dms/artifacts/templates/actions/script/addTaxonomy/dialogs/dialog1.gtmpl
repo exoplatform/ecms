@@ -6,7 +6,7 @@
 	String[] repositoryField = ["jcrPath=/node/exo:repository", "visible=false", repository] ;
 	uicomponent.addHiddenField("repository", repositoryField) ;
 %>
-<div class="uiAddActionForm">
+<div class="uiAddActionForm resizable">
   <h6 class="titleBar"><%=_ctx.appRes(uicomponent.getId() + ".title")%></h6>
 	<% uiform.begin() %>  
 	<div class="form-horizontal">
@@ -27,7 +27,7 @@
 					uicomponent.addTextField("actionName", _ctx.appRes("ScriptAction.dialog.label.name"), fieldName);
 				%>
 			</div>
-		</div>		          					
+		</div>
 		<div class="control-group">
 			<label class="control-label" for="lifecycle"><%=_ctx.appRes("ScriptAction.dialog.label.lifecycle")%>:</label>
 			<div class="controls">
@@ -39,7 +39,7 @@
 			%>  
 			</div>
 		</div>
-		<div class="control-group">                        
+		<div class="control-group">
 			<label class="control-label" for="isDeep"><%=_ctx.appRes("ScriptAction.dialog.label.isDeep")%>:</label>
 			<div class="controls"> 
 				<% 
@@ -48,7 +48,7 @@
 				%>
 			</div>
 		</div>
-		<div class="control-group">                        
+		<div class="control-group">
 			<label class="control-label" for="nodetypes"><%=_ctx.appRes("ScriptAction.dialog.label.nodetypes")%>:</label>
 			<div class="controls"> 
 				<% 
@@ -95,8 +95,8 @@
 		</div>
 	</div>
   <%uiform.end()%>
-	
-	<%/* start render action*/%>
-		<%uiform.processRenderAction()%>
-	<%/* end render action*/%>
 </div>
+	
+<%/* start render action*/%>
+  <%uiform.processRenderAction()%>
+<%/* end render action*/%>
