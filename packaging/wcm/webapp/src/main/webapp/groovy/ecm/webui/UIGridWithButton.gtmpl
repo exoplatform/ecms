@@ -75,12 +75,13 @@
 	            <%for(action in beanActions) { %>
 	            <%  def beanId = uicomponent.getFieldValue(bean,beanIdField)  ; %>               
 	              <% 
-	                if(action != null) { 
+	                if(action != null) {
+	                  String title = _ctx.appRes(uicomponent.getName() + ".title." + action);
 	                  if(uicomponent.isUseAjax()){
 	             %>             
-	                <a class="actionIcon" onclick="<%=uicomponent.event(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "$action" ><i class="uiIcon${action}"></i></a>
+	                <a class="actionIcon" onclick="<%=uicomponent.event(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "$title" ><i class="uiIcon${action}"></i></a>
 	              <%  }else{ %>
-	                <a class="actionIcon" onclick="<%=uicomponent.url(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "$action" ><i class="uiIcon${action}"></i></a>
+	                <a class="actionIcon" onclick="<%=uicomponent.url(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "$title" ><i class="uiIcon${action}"></i></a>
 	              <%  } %> 
 	              <%} %> 
 	            <%}%>      

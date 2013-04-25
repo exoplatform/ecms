@@ -1030,6 +1030,11 @@
   ######################################################################################
   -->
   <UIViewList>
+   <title>
+     <View>View</View>
+     <EditInfo>Edit</EditInfo>
+     <Delete>Delete</Delete>
+   </title>
     <header>
       <name>Name</name>
       <permissions>Permissions</permissions>
@@ -1266,6 +1271,11 @@
   ######################################################################################
   -->
   <UIECMTemplateList>
+    <title>
+      <View>View</View>
+      <EditInfo>Edit</EditInfo>
+      <Delete>Delete</Delete>
+    </title>
     <header>
       <name>Name</name>
       <path>Value</path>
