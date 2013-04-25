@@ -1649,14 +1649,14 @@ public class UIDialogForm extends UIForm {
       String showComponent = getResourceBundle(context, getId().concat(".title.ShowComponent"));
       String removeReference = getResourceBundle(context, getId().concat(".title.removeReference"));
       if (name.equals(fieldName)) {
-        w.write("<a class=\"actionIcon\" title=\"" + showComponent + "\""
+        w.write("<a rel=\"tooltip\" data-placement=\"bottom\" class=\"actionIcon\" title=\"" + showComponent + "\""
             + "onclick=\"javascript:eXo.webui.UIForm.submitEvent('" + "" + getId()
             + "','ShowComponent','&objectId=" + fieldName + "' )\"><i"
             + " class='"
             + iconClass + "'></i></a>");
         /* No need Remove action if uiInput is UIFormMultiValueInputSet */
         if (!UIFormMultiValueInputSet.class.isInstance(uiInput))
-          w.write("<a class=\"actionIcon\" title=\""
+          w.write("<a rel=\"tooltip\" data-placement=\"bottom\" class=\"actionIcon\" title=\""
               + removeReference
               + "\""
               + "onclick=\"javascript:eXo.webui.UIForm.submitEvent('"
