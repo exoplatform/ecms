@@ -42,7 +42,7 @@ import org.exoplatform.wcm.webui.reader.ContentReader;
 					value = ContentReader.getXSSCompatibilityContent(uicomponent.getPropertyValue(bean));
 				%>
 					<tr>
-						<td style="overflow: hidden;" title="$bean.name">$bean.name</td>
+						<td style="overflow: hidden;">$bean.name</td>
 						<td class="center">
 							<div class="multiValue">
 								<%
