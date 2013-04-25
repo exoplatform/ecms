@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>ecms</artifactId>
-    <version>4.0.0-SNAPSHOT</version>
+    <version>4.0.0</version>
     <groupId>org.exoplatform.ecms</groupId>
   </parent>
   <artifactId>ecms-upgrade-plugins</artifactId>
