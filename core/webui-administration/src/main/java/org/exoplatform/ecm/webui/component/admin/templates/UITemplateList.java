@@ -33,6 +33,7 @@ import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.core.UIPagingGrid;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.context.DocumentContext;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -143,6 +144,7 @@ public class UITemplateList extends UIPagingGrid {
       String nodeType = event.getRequestContext().getRequestParameter(OBJECTID);
       TemplateService templateService = uiTemplateList.getApplicationComponent(TemplateService.class);
       try {
+      	DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, true);
         templateService.removeManagedNodeType(nodeType);
       } catch (PathNotFoundException ex) {
         UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class) ;

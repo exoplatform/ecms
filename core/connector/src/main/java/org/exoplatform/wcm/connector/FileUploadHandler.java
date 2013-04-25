@@ -340,8 +340,11 @@ public class FileUploadHandler {
 //                     .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
 //                     .build();
       if (REPLACE.equals(existenceAction)) {
+        //Broadcast the event when user move node to Trash
+        ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
+        listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, parent, parent.getNode(fileName));
         parent.getNode(fileName).remove();
-        parent.save();
+        parent.save();        
       }
     }
     String location = resource.getStoreLocation();
