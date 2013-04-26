@@ -14,13 +14,7 @@
         </value-param>
     </init-params>
   </component>	
-	
-  
-  <component>
-    <key>org.exoplatform.services.jdbc.DataSourceProvider</key>
-    <type>org.exoplatform.services.jdbc.impl.DataSourceProviderImpl</type>
-  </component>
-   
+
   <external-component-plugins>
     <!-- The full qualified name of the RepositoryServiceConfiguration -->
     <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
