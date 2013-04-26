@@ -1,4 +1,4 @@
-<div class="uiAddActionForm resizable">
+<div class="uiAddActionForm">
   <h6 class="titleBar"><%=_ctx.appRes(uicomponent.getId() + ".title")%></h6>
 	<% uiform.begin() %>  
 		<div class="form-horizontal">
@@ -69,7 +69,7 @@
 			</div>
 			<div class="control-group">                       
         <label class="control-label" for="affectedNodetypes"><%=_ctx.appRes("AddMetadata.dialog.label.affectedNodeTypeNames")%>:</label>
-        <div class="controls">
+        <div class="controls clearfix">
 					<% 
 						String[] fieldAffectedNodetypes = ["jcrPath=/node/exo:affectedNodeTypeNames", "selectorAction=selectAffectedNodeTypes", "multiValues=true", "selectorClass=org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSelector", "selectorIcon=uiIconSearch", "validate=empty", "editable=false"];
 						uicomponent.addActionField("affectedNodetypes", fieldAffectedNodetypes);
