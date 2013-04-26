@@ -74,9 +74,9 @@
 
 <div class="uiVersionInfo resizable" id="$uicomponent.id">
 	<div class="uiBox noRounded">
-		<h5 class="title">
-			<i class="uiIconFile uiIconLightGray"></i> <%=uicomponent.getCurrentNode().getName()%>
-		</h5>
+		<h6 class="title">
+			<i class="uiIconFile"></i> <%=uicomponent.getCurrentNode().getName()%>
+		</h6>
 		<table class="uiGrid table no-border-cell table-hover table-striped">
 			<%
 				String clazz = "" ;

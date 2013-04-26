@@ -4,7 +4,7 @@
 	def jm = rcontext.getJavascriptManager();
 %>
 <div class="uiDiff uiBox noRounded">	
-			<h5 class="title"><%=_ctx.appRes("UIDiff.label.diffTitle")%></h5>
+			<h6 class="title"><%=_ctx.appRes("UIDiff.label.diffTitle")%></h6>
 			<div class="uiContentBox">
 				<%
 					def arr = uicomponent.getDeltas() ;					
