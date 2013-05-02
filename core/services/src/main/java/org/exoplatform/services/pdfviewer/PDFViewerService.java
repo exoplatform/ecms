@@ -50,9 +50,11 @@ import org.icepdf.core.pobjects.Document;
  */
 
 public class PDFViewerService {
+  private static final int MAX_NAME_LENGTH= 150;
   private static final Log LOG  = ExoLogger.getLogger(PDFViewerService.class.getName());
   private JodConverterService jodConverter_;
   private ExoCache<Serializable, Object> pdfCache;
+  
   public PDFViewerService(RepositoryService repositoryService,
                           CacheService caService,
                           JodConverterService jodConverter) throws Exception {
@@ -83,6 +85,8 @@ public class PDFViewerService {
 
     // Capture the page image to file
     try {
+      // cut the file name if name is too long, because OS allows only file with name < 250 characters
+      name = reduceFileNameSize(name);
       document.setInputStream(new BufferedInputStream(new FileInputStream(input)), name);
     } catch (PDFException ex) {
       if (LOG.isDebugEnabled()) {
@@ -129,6 +133,8 @@ public class PDFViewerService {
       InputStream input = new BufferedInputStream(contentNode.getProperty("jcr:data").getStream());
       // Create temp file to store converted data of nt:file node
       if (name.indexOf(".") > 0) name = name.substring(0, name.lastIndexOf("."));
+      // cut the file name if name is too long, because OS allows only file with name < 250 characters
+      name = reduceFileNameSize(name);
       content = File.createTempFile(name + "_tmp", ".pdf");
       /*
       file.deleteOnExit();
@@ -169,6 +175,15 @@ public class PDFViewerService {
       }
     }
     return content;
+  }
+  
+  /**
+   * reduces the file name size. If the length is > 150, return the first 150 characters, else, return the original value
+   * @param name the name
+   * @return the reduced name 
+   */
+  private String reduceFileNameSize(String name) {
+    return (name != null && name.length() > MAX_NAME_LENGTH) ? name.substring(0, MAX_NAME_LENGTH) : name;
   }
 
   private void read(InputStream is, OutputStream os) throws Exception {

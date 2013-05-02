@@ -70,6 +70,7 @@ import org.icepdf.core.util.GraphicsRenderingHints;
 @Path("/pdfviewer/{repoName}/{workspaceName}/{pageNumber}/{rotation}/{scale}/{uuid}/")
 public class PDFViewerRESTService implements ResourceContainer {
 
+  private static final int MAX_NAME_LENGTH= 150;
   private static final String LASTMODIFIED = "Last-Modified";
   private RepositoryService repositoryService_;
   private ExoCache<Serializable, Object> pdfCache;
@@ -174,6 +175,8 @@ public class PDFViewerRESTService implements ResourceContainer {
 
     // Capture the page image to file
     try {
+      // cut the file name if name is too long, because OS allows only file with name < 250 characters
+      name = reduceFileNameSize(name);
       document.setInputStream(new BufferedInputStream(new FileInputStream(input)), name);
     } catch (PDFException ex) {
       if (LOG.isDebugEnabled()) {
@@ -292,6 +295,8 @@ public class PDFViewerRESTService implements ResourceContainer {
       InputStream input = new BufferedInputStream(contentNode.getProperty("jcr:data").getStream());
       // Create temp file to store converted data of nt:file node
       if (name.indexOf(".") > 0) name = name.substring(0, name.lastIndexOf("."));
+      // cut the file name if name is too long, because OS allows only file with name < 250 characters
+      name = reduceFileNameSize(name);
       content = File.createTempFile(name + "_tmp", ".pdf");
       /*
       file.deleteOnExit();
@@ -349,6 +354,15 @@ public class PDFViewerRESTService implements ResourceContainer {
     }
     os.flush();
     os.close();
+  }
+  
+  /**
+   * reduces the file name size. If the length is > 150, return the first 150 characters, else, return the original value
+   * @param name the name
+   * @return the reduced name 
+   */
+  private String reduceFileNameSize(String name) {
+    return (name != null && name.length() > MAX_NAME_LENGTH) ? name.substring(0, MAX_NAME_LENGTH) : name;
   }
 
   /**
