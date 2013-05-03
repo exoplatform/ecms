@@ -85,15 +85,26 @@
 						  <%
 						  } else if(formInput.getName().equals(uicomponent.ADVANCED_FORM_INPUT_SET)) { 
 						  %>
-							  <div class="form-horizontal" >   
+							  <div class="form-horizontal" >
+							    <!--Dynamic Navigation-->
 								  <label class="clearfix"> <a class="actionIcon pull-right"><i class="uiIconQuestion uiIconLightGray" id="" title="<%= _ctx.appRes("UISCVPreferences.help.ContextualHelp") %>" data-placement="left" rel="tooltip"></i></a><%=_ctx.appRes("UISCVPreferences.label.ContextCaption") %>: </label>
 								  <div class="control-group">                  
-								    <div class="controls_full">
+								    <div class="controls-full">
 									    <%uiform.renderField(uicomponent.CONTEXTUAL_SELECT_RADIO_BOX) %> 
 								    </div>
 								  </div>
 								  
-								  <label class="clearfix"><a class="actionIcon pull-right"><i class="uiIconQuestion uiIconLightGray" id="" title="<%= _ctx.appRes("UISCVPreferences.help.ContentPathBlock") %>" data-placement="left" rel="tooltip"></i></a><%=_ctx.appRes("UISCVPreferences.label.CacheManagement") %>: </label>
+								  <!--by-->
+	                <div class="control-group">                  
+                    <a class="actionIcon pull-right"><i class="uiIconQuestion uiIconLightGray" id="" title="<%= _ctx.appRes("UISCVPreferences.help.ParameterHelp") %>" data-placement="left" rel="tooltip"></i></a>
+                    <div class="controls-full" >
+                      <span class="scv-by" for="<%=uicomponent.PARAMETER_INPUT_BOX%>"><%=uicomponent.getLabel(uicomponent.PARAMETER_INPUT_BOX) %>: </span>
+                      <% uiform.renderField(uicomponent.PARAMETER_INPUT_BOX) %>
+                    </div>
+                  </div>
+                  
+								  <!--Content visibility-->
+								  <label class="clearfix"><a class="actionIcon pull-right"><i class="uiIconQuestion uiIconLightGray" id="" title="<%= _ctx.appRes("UISCVPreferences.label.CacheManagement") %>" data-placement="left" rel="tooltip"></i></a><%=_ctx.appRes("UISCVPreferences.label.CacheManagement") %>: </label>
 								  <div class="control-group">                  
 								    <div class="controls_full">
 									    <%uiform.renderField(uicomponent.CACHE_ENABLE_SELECT_RADIO_BOX) %>
