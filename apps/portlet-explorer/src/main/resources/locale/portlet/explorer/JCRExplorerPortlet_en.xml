@@ -1860,7 +1860,7 @@
     <msg>
       <cannot-save>An error occurred while saving the document.</cannot-save>
       <in-versioning>Please check out the current node before adding a new node.</in-versioning>
-      <not-support>Cannot load the '{0}' template.</not-support>
+      <not-support>Cannot load the template of '{0}'.</not-support>
       <value-invalid>'{0}' is a needed value.</value-invalid>
       <repository-exception>An error occurred while saving the document.</repository-exception>
       <!--DMS 2.4.x; ECM-3543-->
@@ -3187,7 +3187,7 @@
   <UITagForm>
     <action>
       <UpdateTag>#{word.save}</UpdateTag>
-      <Cancel>#{word.cancel}</Cancel>
+      <Cancel>#{word.close}</Cancel>
     </action>
     <label>
       <tagName>Tag Name:</tagName>

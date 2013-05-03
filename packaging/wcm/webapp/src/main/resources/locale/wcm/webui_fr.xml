@@ -417,7 +417,7 @@
  
   <UIDocumentInfo>
     <msg>
-      <access-denied-exception>Accès interdit. Veuillez vérifier vos droits d'accès à ce noeud</access-denied-exception>
+      <access-denied-exception>Accès refusé. Veuillez vérifier vos droits d'accès à ce noeud.</access-denied-exception>
     </msg>
   </UIDocumentInfo>
   <UIPortalApplication>

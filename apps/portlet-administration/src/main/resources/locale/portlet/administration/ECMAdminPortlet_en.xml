@@ -143,7 +143,7 @@
   <UIPermissionTreeForm>
     <title>Add a permission to that node</title>
     <label>
-      <userOrGroup>User or Group</userOrGroup>
+      <userOrGroup>User Or Group</userOrGroup>
       <read>Read Right</read>
       <add_node>Add Node Right</add_node>
       <set_property>Set Property Right</set_property>
