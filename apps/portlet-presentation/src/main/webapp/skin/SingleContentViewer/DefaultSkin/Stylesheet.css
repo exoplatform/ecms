@@ -309,6 +309,10 @@
   width: 16px;
 }
 
+.UIPresentationContainer {
+  padding: 20px;
+}
+
 .UIPresentationContainer .Title {
     font-size: 24px;
     width:100%;
@@ -364,7 +368,7 @@
   height: 20px;
   cursor: pointer;
   float: left;
-  padding-left: 20px;
+  margin-right: 20px;
 }
 
 .UIPresentationContainer .DateAndMail {
@@ -423,7 +427,9 @@ width: 95%;
 
 .UIOptionBar .PrintIcon {
   background: url('icons/16x16/ActionIcon.gif') no-repeat bottom left;
-  padding-left: 25px;
+  padding-left: 20px;
+  display: block;
+  float: left;
 }
 
 .UIOptionBar .EmailIcon {
