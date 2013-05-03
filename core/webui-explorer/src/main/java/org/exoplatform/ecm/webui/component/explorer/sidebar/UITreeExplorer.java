@@ -499,7 +499,6 @@ public class UITreeExplorer extends UIContainer {
       if (uiExplorer.getPreference().isShowSideBar()
           && uiExplorer.getAncestorOfType(UIJCRExplorerPortlet.class).isShowSideBar()) {
         uiTreeExplorer.buildTree(path);
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiTreeExplorer);
       }
     }
   }
