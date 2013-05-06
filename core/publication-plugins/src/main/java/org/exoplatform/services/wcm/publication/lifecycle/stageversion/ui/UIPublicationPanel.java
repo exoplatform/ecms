@@ -233,7 +233,11 @@ public class UIPublicationPanel extends UIForm {
     if(revision instanceof Version) {
       calendar= ((Version)revision).getCreated();
     }else {
-      calendar = revision.getProperty("exo:dateCreated").getDate();
+    	if(revision.hasProperty("exo:dateCreated")){
+        calendar = revision.getProperty("exo:dateCreated").getDate();
+      }else{
+        calendar = revision.getProperty("jcr:created").getDate();
+      }
     }
     return dateFormater.format(calendar.getTime());
   }
