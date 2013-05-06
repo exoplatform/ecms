@@ -40,7 +40,7 @@ public abstract class UIPermissionManagerBase extends UIContainer implements UIP
     UIPopupWindow uiPopup = getChildById(UIPermissionFormBase.POPUP_SELECT);
     if(uiPopup == null) {
       uiPopup = addChild(UIPopupWindow.class, null, UIPermissionFormBase.POPUP_SELECT);
-      uiPopup.setWindowSize(560, 300);
+      uiPopup.setWindowSize(560, 345);
       uiPopup.setShowMask(true);
     } else {
       uiPopup.setShowMask(true);

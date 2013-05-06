@@ -33,7 +33,7 @@
    // Get owner of current node
    Node currentNode = uicomponent.getParent().getCurrentNode();
    String ownerId = Utils.getNodeOwner(currentNode);
-   boolean canChangePermission = (currentNode == null) || PermissionUtil.canChangePermission(currentNode);
+   boolean canChangePermission = (currentNode == null) || (!currentNode.isLocked() && PermissionUtil.canChangePermission(currentNode)) || (currentNode.isLocked() && Utils.isLockTokenHolder(currentNode));
    def beanIdField = uicomponent.getBeanIdField();
 %>
 <div id="$uicomponent.id" class="permissionInfo">
@@ -90,7 +90,7 @@
                
                EntityEncoder encoder = HTMLEntityEncoder.getInstance();
                def usersOrGroupsId = uicomponent.getFieldValue(bean, "usersOrGroups");
-							 int fieldCount = 0;
+               int fieldCount = 0;
                for (field in beanFields)
                {
                   def fieldValue = uicomponent.getFieldValue(bean, field);
@@ -110,7 +110,7 @@
                   
                   String value = encoder.encode(fieldValue.toString());
                   if (fieldValue.getClass() != Boolean.class) {
-                    println "<td><div class=\""+cssClass+"\" title='$value'>"+value+"</div></td>";
+                    println "<td><div class=\""+cssClass+"\" rel='tooltip' data-placement='bottom' title='$value'>"+value+"</div></td>";
                   } else {
                     def checkBoxId = usersOrGroupsId + field
                     String checked = (fieldValue)? "checked" : "";
@@ -133,7 +133,7 @@
                     </td>
                     <%
                   }
-									fieldCount++;
+                  fieldCount++;
                }
                if (beanActions != null && beanActions.length > 0)
                {
@@ -155,7 +155,7 @@
                     }
            %>
               <a class="actionIcon" href="javascript:void(0)" onclick="$actionLink" rel="tooltip" data-placement="bottom" title="$title" >
-                 <i class="uiIcon${action}"></i>
+                 <i class="uiIcon${action} uiIconLightGray"></i>
               </a>
            <%   }
               } %>

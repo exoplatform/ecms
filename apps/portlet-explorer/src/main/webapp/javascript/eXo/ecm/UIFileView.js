@@ -90,9 +90,6 @@ UIFileView.prototype.initAllEvent = function(actionAreaId, enableDragAndDrop) {
 			gj(elem).find("input:checkbox").each(function(ii, ee){ee.onmousedown=Self.checkBoxItem;});
 		}
 	});
-	actionArea.onmousedown = Self.mouseDownGround;
-	actionArea.onkeydown = Self.mouseDownGround;
-	actionArea.onmouseup = Self.mouseUpGround;
 	
 	var listGrid = gj(actionArea).find("div.uiListGrid:first")[0];
 	if (listGrid) {
@@ -692,7 +689,7 @@ UIFileView.prototype.toggleCheckboxes = function(checkbox, evt) {
 		Self.mouseUpItem(evt);
 	});
 	//---------------------------
-	if (checkbox.checked) {
+	if (checkbox && checkbox.checked) {
 		Self.showItemContextMenu(evt);
 	} else {
 		Self.hideContextMenu();
@@ -701,6 +698,7 @@ UIFileView.prototype.toggleCheckboxes = function(checkbox, evt) {
 
 UIFileView.prototype.clearCheckboxes = function(evt) {
 	gj(".uiFileView").each(function(ind) {
+		resetArrayItemsSelected();
 		gj(Self.allItems).each(function(index, elem){
 			Self.selectBoxType = false;
 			Self.clickedItem = elem;
@@ -712,7 +710,6 @@ UIFileView.prototype.clearCheckboxes = function(evt) {
 			Self.clickTotalCheckBox = true;
 			Self.mouseUpItem(evt);
 		});
-		resetArrayItemsSelected();
 		gj("#UIFileViewCheckBox").attr("checked", false);
 		gj("#UIDocumentInfo").find(".checkbox").attr("checked", false);
 		gj("#UIDocumentInfo").find(".rowView").css("backgroundColor","#FFF");

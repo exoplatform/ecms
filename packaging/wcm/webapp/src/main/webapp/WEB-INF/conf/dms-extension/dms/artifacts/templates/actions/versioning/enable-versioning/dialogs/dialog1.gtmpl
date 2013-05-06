@@ -1,4 +1,4 @@
-<div class="uiAddActionForm">
+<div class="uiAddActionForm resizable">
   <h6 class="titleBar"><%=_ctx.appRes(uicomponent.getId() + ".title")%></h6>
 	<% uiform.begin() %>
   	<div class="form-horizontal">
@@ -11,7 +11,7 @@
 				  %>
 				</div>
 			</div>
-			<div class="control-group">		          					
+			<div class="control-group">
 			  <label class="control-label" for="actionName"><%=_ctx.appRes("EnableVersioning.dialog.label.name")%>:</label>
 			  <div class="controls">
 				  <% 
@@ -20,7 +20,7 @@
 				  %>
 				</div>
 			</div>
-			<div class="control-group">		          					
+			<div class="control-group">
 			  <label class="control-label" for="lifecycle"><%=_ctx.appRes("EnableVersioning.dialog.label.lifecycle")%>:</label>
 			  <div class="controls">
 					<% 
@@ -34,7 +34,7 @@
 			<%
 				String selectValue = uicomponent.getSelectBoxFieldValue("lifecycle") ;
 			%>
-			<div class="control-group">                        
+			<div class="control-group">
         <label class="control-label" for="isDeep"><%=_ctx.appRes("EnableVersioning.dialog.label.isDeep")%>:</label>
         <div class="controls"> 
 					<% 
@@ -43,7 +43,7 @@
 					%>
         </div>
       </div>
-      <div class="control-group">                        
+      <div class="control-group">
         <label class="control-label" for="nodetypes"><%=_ctx.appRes("EnableVersioning.dialog.label.nodetypes")%>:</label>
         <div class="controls"> 
 					<% 
@@ -52,7 +52,7 @@
 					%>
         </div>
       </div>
-			<div class="control-group">		          					
+			<div class="control-group">
 			  <label class="control-label" for="description"><%=_ctx.appRes("EnableVersioning.dialog.label.description")%>:</label>
 			  <div class="controls">
 				  <% 
@@ -61,7 +61,7 @@
 				  %>
 				</div>
 			</div>	
-			<div class="control-group">                       
+			<div class="control-group">
         <label class="control-label" for="affectedNodetypes"><%=_ctx.appRes("EnableVersioning.dialog.label.affectedNodeTypeNames")%>:</label>
         <div class="controls">
 					<% 
@@ -72,8 +72,8 @@
       </div>
 		</div>
   <%uiform.end()%>
-	
-	<%/* start render action*/%>
-	<%uiform.processRenderAction()%>
-	<%/* end render action*/%>
 </div>
+	
+<%/* start render action*/%>
+  <%uiform.processRenderAction()%>
+<%/* end render action*/%>

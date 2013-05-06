@@ -127,7 +127,7 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
   private static void confirmToRestore(Node node, String srcPath, Event<RestoreFromTrashManageComponent> event) throws Exception {
     UIWorkingArea uiWorkingArea = event.getSource().getParent();
     UIJCRExplorer uiExplorer = uiWorkingArea.getAncestorOfType(UIJCRExplorer.class);
-    itemName = node.getName();
+    itemName = Utils.getTitle(node);
     String restorePath = node.getProperty(Utils.EXO_RESTOREPATH).getString();
     String restoreWs = node.getProperty(Utils.EXO_RESTORE_WORKSPACE).getString();
     Session session = uiExplorer.getSessionByWorkspace(restoreWs);

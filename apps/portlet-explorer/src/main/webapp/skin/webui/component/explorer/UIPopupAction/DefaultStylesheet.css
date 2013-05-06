@@ -372,18 +372,6 @@
  	margin: 5px 0px 0px 3px; /* orientation=rt */
 }
 
-.UIJCRExplorerPortlet .UISearchContainer .UICompareExactlyForm {
-	background: #F7F7F7;
-	border: 1px solid #AEAEAE;
-	margin: 10px;
-}
-
-.UIJCRExplorerPortlet .UISearchContainer .UICompareExactlyForm select {
-  width: 415px;
-  height: 170px;
-  vertical-align: baseline;
-}
-
 .UIJCRExplorerPortlet .UISelectPropertyForm .UIFormWithTitle .HorizontalLayout {
   margin: auto;
 }

@@ -19,6 +19,7 @@ package org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -34,11 +35,13 @@ import org.exoplatform.ecm.webui.core.UIPermissionInfoBase;
 import org.exoplatform.ecm.webui.core.bean.PermissionBean;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -79,6 +82,9 @@ public class UIPermissionTreeInfo extends UIPermissionInfoBase {
 
   public UIPermissionTreeInfo() throws Exception {
     super();
+    
+    // Set default permission tree
+    permBeans = this.getDefaultPermissions();
   }
 
   public void updateGrid() throws Exception {
@@ -157,7 +163,27 @@ public class UIPermissionTreeInfo extends UIPermissionInfoBase {
     LazyPageList<PermissionBean> dataPageList = new LazyPageList<PermissionBean>(permList, 10);
     uiGrid.getUIPageIterator().setPageList(dataPageList);
   }
+  
+  /**
+   * Get default permissions for taxonomy node
+   */
+  private List<PermissionBean> getDefaultPermissions() {
+    Set<PermissionBean> defaultPermissionList = new HashSet<PermissionBean>();
+    
+    // From taxonomy tree default permissions
+    TaxonomyService taxonomyService = WCMCoreUtils.getService(TaxonomyService.class);
+    Map<String, String[]> defaultTaxonomyTreePerms =  taxonomyService.getTaxonomyTreeDefaultUserPermission();
+    PermissionBean bean;
+    for(Map.Entry<String, String[]> entry : defaultTaxonomyTreePerms.entrySet()) {
+      bean = new PermissionBean();
+      bean.setUsersOrGroups(entry.getKey());
+      bean.setPermissions(entry.getValue());
+      defaultPermissionList.add(bean);
+    }
 
+    return new ArrayList<PermissionBean>(defaultPermissionList);
+  }
+  
   public static class DeleteActionListener extends EventListener<UIPermissionTreeInfo> {
     public void execute(Event<UIPermissionTreeInfo> event) throws Exception {
       UIPermissionTreeInfo uicomp = event.getSource();

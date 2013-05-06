@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.jcr.PathNotFoundException;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.PropertyDefinition;
 
@@ -128,10 +129,15 @@ public class UIMetadataList extends UIPagingGridDecorator {
       String metadataName = event.getRequestContext().getRequestParameter(OBJECTID) ;
       UIMetadataManager uiManager = uiMetaList.getParent() ;
       MetadataService metadataService = uiMetaList.getApplicationComponent(MetadataService.class) ;
-      metadataService.removeMetadata(metadataName);
+      UIApplication uiApp = uiMetaList.getAncestorOfType(UIApplication.class);
+      try {
+        metadataService.removeMetadata(metadataName);
+      } catch(PathNotFoundException ex) {
+      	uiApp.addMessage(new ApplicationMessage("UIMetadataList.msg.path-not-found-exception", null, ApplicationMessage.WARNING));
+        return;
+      }
       uiMetaList.refresh(uiMetaList.getUIPageIterator().getCurrentPage());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
-      UIApplication uiApp = uiMetaList.getAncestorOfType(UIApplication.class) ;
       Object[] args = {metadataName} ;
       uiApp.addMessage(new ApplicationMessage("UIMetadataList.msg.delete-successful", args)) ;
     }

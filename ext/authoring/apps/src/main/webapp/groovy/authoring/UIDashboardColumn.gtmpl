@@ -8,12 +8,12 @@
    <%
       def nodes = uicomponent.getNodes();
     %>
-  <h5 class="title clearfix">
+  <h6 class="title clearfix">
 		<%=uicomponent.getLabel()%>
     <% if (nodes.size()>0) { %>
       <div class="total"><%=uicomponent.getUIPageIterator().getAvailable()%></div>
     <% } %>
-  </h5>
+  </h6>
 
   <div class="elements uiContentBox">
   <%

@@ -74,8 +74,8 @@
     </icon>
     <msg>
       <no-view-found>Il n'y a pas de vue disponible par rapport à vos droits d'accès sur le lecteur '{0}'</no-view-found>
-      <access-denied>Accès interdit. Vous n'avez peut-être pas les droits suffisants pour accéder à l'espace de stockage du lecteur '{0}'.</access-denied>
-      <empty-drives>Entrepôt</empty-drives>
+      <access-denied>Accès refusé. Vous n'avez peut-être pas les droits suffisants pour accéder à l'espace de stockage du lecteur '{0}'.</access-denied>
+      <empty-drives>Accès refusé. Soit aucun lecteur n'est configuré pour cet entrepôt, soit vous n'avez pas les droits d'y accéder.</empty-drives>
       <workspace-not-exist>Le lecteur '{0}' a été sauvegardé dans un espace de stockage inconnu. Veuillez reconfigurer le lecteur.</workspace-not-exist>
     </msg>
   </UIDrivesBrowser>
@@ -152,7 +152,7 @@
     <title>Explorateur</title>
     <label>
       <Root>Racine</Root>
-      <webDavView>Télécharger pour modifier</webDavView>
+      <webDavView>Ouvrir à distance</webDavView>
     </label>
     <msg>
       <path-not-found>Cet élément a été modifié ou supprimé. Veuillez cliquer sur le bouton "Actualiser".</path-not-found>
@@ -226,12 +226,12 @@
     </action>
     <msg>
       <rename-successfull>Le noeud '{0}' a été renommé en '{1}' avec succès.</rename-successfull>
-      <rename-denied>Accès interdit. Vous n'avez pas les droits suffisants pour renommer ce noeud.</rename-denied>
+      <rename-denied>Accès refusé. Vous n'avez pas les droits suffisants pour renommer ce noeud.</rename-denied>
       <fileName-invalid>Caractères invalides détectés dans le nouveau nom.</fileName-invalid>
       <newName-same-oldName>Le nouveau nom est identique à l'ancien. Veuillez saisir un autre nom.</newName-same-oldName>
       <version-exception>Vous devez d'abord effectuer un check out.</version-exception>
       <lock-exception>Ce noeud est verrouillé. Veuillez le déverrouiller avant de le renommer.</lock-exception>
-      <constraintViolation-exception>'{0}' n'est pas autorisé en tant que type noeud fils</constraintViolation-exception>
+      <constraintViolation-exception>Une erreur est survenue au renommage de '{0}'. Veuillez vérifier.</constraintViolation-exception>
       <unknown-prefix>Préfixe '{0}' n'a pas encore été enregistrée.</unknown-prefix>
       <rename-error>Une erreur s'est produite au moment de renommer ce noeud. S'il vous plaît vérifier à nouveau.</rename-error>
     </msg>
@@ -361,8 +361,8 @@
       <not-found>Aucun résultat trouvé.</not-found>
       <keyword-not-allow>L'un des mots à chercher n'est pas autorisé.</keyword-not-allow>
       <is-not-referenable>Le noeud '{0}' ne supporte pas les références</is-not-referenable>
-      <access-denied>Accès interdit. Vous n'avez pas les droits d'accès sur ce noeud.</access-denied>
-      <access-add-denied>Vous n'avez pas les droits suffisants pour ajouter un document.</access-add-denied>
+      <access-denied>Accès refusé. Vous n'avez pas les droits de modifier sur ce noeud.</access-denied>
+      <access-add-denied>Accès refusé. Vous n'avez pas les droits suffisants pour ajouter un document.</access-add-denied>
       <item-existed>Il existe déjà un noeud associé à ce nom.</item-existed>
       <removed-hidden-mixin>Le noeud a été rendu visible.</removed-hidden-mixin>
       <added-hidden-mixin>Le noeud a été caché.</added-hidden-mixin>
@@ -388,8 +388,8 @@
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-      <has-not-permission>Accès interdit. Vous n'avez pas les droits d'ajout sur ce noeud.</has-not-permission>
-      <has-not-edit-permission>Accès interdit. Vous n'avez pas les droits d'édition sur ce noeud.</has-not-edit-permission>
+      <has-not-permission>Accès refusé. Vous n'avez pas les droits d'ajout sur ce noeud.</has-not-permission>
+      <has-not-edit-permission>Accès refusé. Vous n'avez pas les droits d'édition sur ce noeud.</has-not-edit-permission>
       <cannot-login-node>Impossible d'accéder et de coller un noeud ici.</cannot-login-node>
       <cannot-paste-nodetype>Impossible de coller le noeud ici.</cannot-paste-nodetype>
       <has-not-permission-unlok>Vous n'avez pas les droits suffisants pour déverrouiller ce noeud.</has-not-permission-unlok>
@@ -413,7 +413,7 @@
       <not-lock-owner>Vous ne pouvez pas déverrouiller ce noeud car vous n'êtes pas le propriétaire du verrou.</not-lock-owner>
       <is-checked-in>Vous devez effectuer un check out sur ce noeud avant de pouvoir le renommer.</is-checked-in>
       <is-checked-in-lock>Vous devez effectuer un check out sur ce noeud avant de pouvoir le vérrouiller.</is-checked-in-lock>
-      <cant-lock>Vous devez déverrouiller les fils avant de pouvoir verrouiller le parent!</cant-lock>
+      <cant-lock>Vous ne pouvez pas verrouiller ce noeud.</cant-lock>
       <node-locked>Le document {0} (ou le dossier parent) est verrouillé.</node-locked>
       <can-not-delete>Vous devez fermer le document avant de pouvoir le supprimer.</can-not-delete>
       <can-not-delete-version>Suppression de ce noeud impossible, il est versioné.</can-not-delete-version>
@@ -425,7 +425,7 @@
       <paste-node-same-name>Copie impossible, un document du même nom existe déjà.</paste-node-same-name>
       <has-not-add-permission>Vous n'avez pas les droits suffisants pour ajouter un noeud.</has-not-add-permission>
       <node-cutting>Le noeud a été coupé. Impossible de coller ici.</node-cutting>
-      <access-denied>Accès interdit. Vous n'avez pas les droits suffisants.</access-denied>
+      <access-denied>Accès refusé. Vous n'avez pas les droits suffisants sur ce noeud.</access-denied>
       <remove-verion-exception>Impossible de supprimer ce noeud car lui même ou un de ses ancètres a le statut "check in"</remove-verion-exception>
       <remove-referentialIntegrityException>Impossible de le supprimer car il est référencé ailleurs</remove-referentialIntegrityException>
       <constraintviolation-exception>Le jcr:uuid n'a pas été trouvé. Le noeud a peut être été modifié ou supprimé. Veuillez cliquer sur le bouton "Actualiser".</constraintviolation-exception>
@@ -536,7 +536,7 @@
   </UIWorkingArea>
   <UIDocumentWorkspace>
     <label>
-      <no-children>Ce noeud n'a pas de fils.</no-children>
+      <no-children>Ce noeud n'a pas de sous-noeud.</no-children>
       <no-children-but-has-hidden>Ce noeud n'a pas de fils mais contient des fichiers cachés.</no-children-but-has-hidden>
     </label>
     <msg>
@@ -564,11 +564,11 @@
   </UIDocumentWorkspace>
   <UIDocumentInfo>
     <msg>
-      <access-denied>Accès interdit</access-denied>
+      <access-denied>Accès refusé. Vous ne pouvez pas accéder au noeud '{0}'.</access-denied>
       <null-exception>Elément non trouvé. Il a été supprimé ou modifié, ou vous n'avez pas le droit d'accéder à ce noeud.</null-exception>
       <confirm-deleteattachment>Confirmez-vous la suppression du fichier attaché?</confirm-deleteattachment>
       <confirm-deleteattcomment>Êtes-vous sûr de que vouloir supprimer ce commentaire ?</confirm-deleteattcomment>
-      <access-denied-exception>Accès interdit. Veuillez vérifier vos droits d'accès à ce noeud.</access-denied-exception>
+      <access-denied-exception>Accès refusé. Veuillez vérifier vos droits d'accès à ce noeud.</access-denied-exception>
       <path-not-found>Cet élément a été modifié ou supprimé. Veuillez cliquer sur le bouton "Actualiser".</path-not-found>
     </msg>
     <tooltip>
@@ -622,7 +622,7 @@
       <MoveNode>Déplacer</MoveNode>
       <UnLock>Déverrouiller</UnLock>
       <ViewProperties>Visualiser les propriétés du noeud</ViewProperties>
-      <GetURL>Copier l'URL dans le presse-papier</GetURL>
+      <GetURL>Copier l'URL</GetURL>
       <AddThumbnail>Ajouter/Supprimer une Vignette</AddThumbnail>
       <AddToFavourite>Ajouter aux Favoris</AddToFavourite>
       <RemoveFromFavourite>Supprimer</RemoveFromFavourite>
@@ -830,17 +830,17 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>Utilisateurs / Groupes</usersOrGroups>
-      <read>Lire</read>
-      <addNode>Modifier</addNode>
-      <remove>Supprimer</remove>
+      <usersOrGroups>Utilisateur ou Groupe</usersOrGroups>
+      <read>Lecture</read>
+      <addNode>Modification</addNode>
+      <remove>Suppression</remove>
       <action>Action</action>
     </header>
     <msg>
       <confirm-delete-permission>Confirmez-vous la suppression de cette permission?</confirm-delete-permission>
       <no-permission-tochange>Vous n'avez pas le droit de modifier les permissions</no-permission-tochange>
       <no-permission-remove>Vous ne pouvez pas supprimer le propriétaire</no-permission-remove>
-      <access-denied>Accès interdit. Vous ne pouvez pas supprimer cette permission.</access-denied>
+      <access-denied>Accès refusé. Vous ne pouvez pas supprimer cette permission.</access-denied>
     </msg>
   </UIPermissionInfo>
   <permission>
@@ -890,7 +890,7 @@
       <checkbox-require>Vous devez sélectionner au moins une permission.</checkbox-require>
       <userOrGroup-required>Vous devez sélectionner un utilisateur ou un groupe avant d'enregistrer cette permission.</userOrGroup-required>
       <not-change-permission>Vous n'avez pas le droit d'ajouter une permission.</not-change-permission>
-      <access-denied>Accès interdit. Vous ne pouvez pas supprimer cette permission.</access-denied>
+      <access-denied>Accès refusé. Vous ne pouvez pas supprimer cette permission.</access-denied>
     </msg>
   </UIPermissionForm>
   <!--
@@ -929,7 +929,7 @@
       <fileName-invalid-with-name>Caractères invalides détectés dans le nom du fichier transféré '{0}'.</fileName-invalid-with-name>
       <fileSize-too-big>Le fichier est trop volumineux. Veuillez le découper en plusieurs petits fichiers ou le charger en utilisant WebDav.</fileSize-too-big>
       <name-is-exist>Le document '{0}' existe déjà.</name-is-exist>
-      <contraint-violation>Ajout du noeud '{0}' impossible. Le type de noeud fils dans le parent l'interdit.</contraint-violation>
+      <contraint-violation>Ajout du noeud '{0}' impossible en tant que sous-noeud.</contraint-violation>
       <lock-exception>Ce noeud est verrouillé. Certaines actions ne pourront être lancées.</lock-exception>
       <confirm-behavior>Il existe déjà un fichier portant le même nom '{0}' dans cet emplacement. Veuillez choisir l'action souhaitée sur ce fichier.</confirm-behavior>
     </msg>
@@ -994,7 +994,7 @@
       <item>Nom de l'Element Primaire</item>
       <super-types>Types du parent</super-types>
       <mixin>Type Mixin</mixin>
-      <orderable-children>Tri des sous-noeuds</orderable-children>
+      <orderable-children>Sous-Noeuds Ordonnables</orderable-children>
       <property-def>Définition de la Propriété</property-def>
       <prop-name>Nom</prop-name>
       <prop-type>Type</prop-type>
@@ -1004,7 +1004,7 @@
       <prop-auto-create>AC</prop-auto-create>
       <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
       <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
-      <node-def>Définition de sous-noeud</node-def>
+      <node-def>Définition de Sous-Noeud</node-def>
       <node-def-name>Nom</node-def-name>
       <node-def-opv>OPV</node-def-opv>
       <node-def-ac>AC</node-def-ac>
@@ -1420,7 +1420,7 @@
   <UISaveQueryForm>
     <msg>
       <query-name-null>Veuillez entrer un nom de requête pour l'enregistrer.</query-name-null>
-      <access-denied>Accès interdit. Vous ne pouvez pas enregistrer cette requête parce que vous n'avez pas les droits suffisants.</access-denied>
+      <access-denied>Accès refusé. Vous ne pouvez pas enregistrer cette requête parce que vous n'avez pas les droits suffisants.</access-denied>
       <save-failed>Sauvegarde impossible, la requête est invalide ou une requête du même nom existe déjà</save-failed>
     </msg>
     <label>
@@ -1554,7 +1554,7 @@
       <e_2097152>Supprimer une version</e_2097152>
       <e_4194304>Verrouiller</e_4194304>
       <e_8388608>Déverrouiller</e_8388608>
-      <e_16777216>Lire</e_16777216>
+      <e_16777216>Lecture</e_16777216>
     </eventName>
     <label>
       <operation>Opération</operation>
@@ -1655,7 +1655,7 @@
       <filename-invalid>Veuillez sélectionner un fichier xml pour l'importer.</filename-invalid>
       <filetype-error>Import impossible. Le fichier envoyé est probablement corrompu.</filetype-error>
       <mimetype-invalid>Seuls les fichier xml ou zip sont supportés pour l'import.</mimetype-invalid>
-      <access-denied>Accès interdit. Vous n'avez pas les droits suffisants pour importer à cet endroit.</access-denied>
+      <access-denied>Accès refusé. Vous n'avez pas les droits suffisants pour importer à cet endroit.</access-denied>
       <constraint-violation-exception>Impossible d'importer. Le type de noeud '{0}' n'est pas autorisé</constraint-violation-exception>
       <item-exists-exception>Un noeud entrant référençable a le même UUID qu'un noeud existant dans l'espace de stockage.</item-exists-exception>
     </msg>
@@ -1717,7 +1717,7 @@
     </msg>
   </UIViewVersion>
   <UIVersionList>
-    <title>Fils</title>
+    <title>Nom Enfants</title>
   </UIVersionList>
   <!--
   ################################################################################
@@ -1936,7 +1936,7 @@
       <confirm-delete-action>Confirmez-vous la suppression?</confirm-delete-action>
       <template-empty>Le formulaire de '{0}' est vide ou inexistant</template-empty>
       <template-null>Le formulaire est inexistant, ou vous n'avez pas les droits d'accès suffisants.</template-null>
-      <access-denied>Accès interdit. Vous n'avez pas les droits suffisants pour faire cette action.</access-denied>
+      <access-denied>Accès refusé. Vous n'avez pas les droits suffisants pour faire cette action.</access-denied>
     </msg>
     <action>
       <Close>#{word.close}</Close>
@@ -1960,8 +1960,8 @@
       <unable-add-action>Impossible d'ajouter cette action</unable-add-action>
       <unable-add>Ajout impossible! Veuillez vérifier les champs requis</unable-add>
       <not-support>Le formulaire d'édition '{0}' n'est pas supporté</not-support>
-      <no-permission-add>Accès interdit! Vous n'avez pas les droits suffisants pou ajouter une action ici</no-permission-add>
-      <access-denied>Accès interdit. Vous n'avez pas les droits suffisants pour ouvrir ce formulaire.</access-denied>
+      <no-permission-add>Accès refusé. Vous n'avez pas les droits suffisants pour ajouter une action ici.</no-permission-add>
+      <access-denied>Accès refusé. Vous n'avez pas les droits suffisants pour accéder à ce formulaire.</access-denied>
 	  <lifecycle-invalid>Impossible d'ajouter cette action. La phase du cycle de vie de l'action est invalide.</lifecycle-invalid>
     </msg>
     <title>Détail de l'Action</title>
@@ -1997,7 +1997,7 @@
   <UIAddressBar>
     <msg>
       <path-not-found>Dossier introuvable.</path-not-found>
-      <access-denied>Accès interdit. Vous n'avez pas les droits suffisants pour consulter ce noeud.</access-denied>
+      <access-denied>Accès refusé. Vous n'avez pas les droits suffisants pour consulter ce noeud.</access-denied>
       <keyword-not-support>Le mot clé est invalide. Certains caractères ne sont pas autorisés.</keyword-not-support>
     </msg>
     <label>
@@ -2006,7 +2006,7 @@
     </label>
     <title>
       <exeButton>Atteindre l'emplacement</exeButton>
-      <backButton>Retour au noeud précédent</backButton>
+      <backButton>Retour</backButton>
       <showHistory>Afficher l'historique des adresses</showHistory>
       <changeNode>Changer le noeud</changeNode>
     </title>
@@ -2046,7 +2046,7 @@
     </label>
     <action>
       <AddTag>Ajouter</AddTag>
-      <Cancel>#{word.cancel}</Cancel>
+      <Cancel>#{word.close}</Cancel>
     </action>
     <msg>
       <name-exist>Le tag existe déjà ou est invalide</name-exist>
@@ -2077,7 +2077,7 @@
       <View>Voir</View>
     </action>
     <msg>
-      <access-denied>Accès interdit. Vous n'avez pas les droits suffisants pour ajouter un noeud</access-denied>
+      <access-denied>Accès refusé. Vous n'avez pas les droits suffisants pour ajouter un noeud.</access-denied>
     </msg>
   </UIMultiLanguageForm>
   <UILanguageTypeForm>
@@ -2125,7 +2125,7 @@
   </metadataForm>
   <UIViewMetadataTemplate>
     <msg>
-      <access-denied>Accès refusé. Vous n'avez pas les droits suffisants pour éditer ce noeud</access-denied>
+      <access-denied>Accès refusé. Vous n'avez pas les droits suffisants pour éditer ce noeud.</access-denied>
     </msg>
   </UIViewMetadataTemplate>
   <!--
@@ -2169,7 +2169,7 @@
     <msg>Cet élément existe déjà.</msg>
   </ItemExistsException>
   <AccessControlException>
-    <msg>Accès refusé. Vous n'avez pas les droits suffisants pour effectuer cette action</msg>
+    <msg>Accès refusé. Vous n'avez pas les droits suffisants pour effectuer cette action.</msg>
   </AccessControlException>
   <AccessDeniedException>
     <msg>Accès refusé.</msg>
@@ -2408,7 +2408,7 @@
   Access directly a JCR FE drive
   -->
   <UIJCRExplorerPortlet>
-    <nopermission>Impossible d'accéder au lecteur. Peut-être a-t-il été supprimé ou vous n'avez pas les permissions suffisantes.</nopermission>
+    <nopermission>Impossible d'accéder au lecteur. Il a peut-être été supprimé ou vous n'avez pas les droits d'y accéder.</nopermission>
   </UIJCRExplorerPortlet>
 
   <UIJcrExplorerEditForm>
@@ -2548,7 +2548,7 @@
   
 	<UIPopupSymLink>
 		<title>
-			<UIOneNodePathSelector>Choisir un noeud cible</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Cible du Raccourci</UIOneNodePathSelector>
 		</title>
 	</UIPopupSymLink>
     <UIPopupSymLink>
@@ -2559,7 +2559,7 @@
 
 	<ECMContextMenu>
 		<event>
-			<AddSymLink>Ajouter un Raccourci</AddSymLink>
+      		<AddSymLink>Créer un Raccourci</AddSymLink>
 			<AddLocalizationLink>Ajouter une Traduction</AddLocalizationLink>
     </event>
   </ECMContextMenu>
@@ -3173,7 +3173,7 @@
     </title>
   </action>
     <msg>
-      <confirm-remove>Etes-vous sûr de vouloir supprimer?</confirm-remove>
+      <confirm-remove>Confirmez-vous la supression de ce tag?</confirm-remove>
     </msg>
   </UIEditingTagsForm>
 
@@ -3203,7 +3203,7 @@
 
 		<UIPopupMenu>
   	<msg>
-      <node-locked-editing>Le noeud {0} est verouillé par un autre utilisateur.</node-locked-editing>
+      <node-locked-editing>Le noeud {0} est verrouillé par un autre utilisateur.</node-locked-editing>
     </msg>
   </UIPopupMenu>
   <UITagStyleForm>
@@ -3579,4 +3579,12 @@
   <property-name-incorrect>Le nom de propriété est incorrect, veuillez entrer une autre valeur.</property-name-incorrect>
     </msg>
   </UIPropertyForm>
+  <!--
+  ###################################################################################
+  # JCR Exceptions manager                                                              #
+  ###################################################################################
+  -->
+  <VersionException>
+  	<msg>Impossible de modifier les documents qui en check-in.</msg>  
+  </VersionException>
 </bundle>

@@ -8,7 +8,7 @@
   <UIECMAdminControlPanel>
     <tab>
       <label>
-        <Templates>Type</Templates>
+        <Templates>Modèles</Templates>
         <Explorer>Explorateur</Explorer>
         <Repository>Entrepôt</Repository>
         <Advanced>Avancé</Advanced>
@@ -31,7 +31,7 @@
       <UIFolksonomyManager>Tags</UIFolksonomyManager>      
     </label>
     <msg>
-      <access-denied>Accès interdit. Vous n'avez pas les droits suffisants.</access-denied>
+      <access-denied>Accès refusé. Vous n'avez pas les droits suffisants.</access-denied>
     </msg>
   </UIECMAdminControlPanel>
   <!--
@@ -122,14 +122,14 @@
 		<action>
 			<title>
 				<Delete>Supprimer</Delete>
-<Edit>Modifier</Edit>
+				<Edit>Modifier</Edit>
 			</title>
 		</action>
 		<header>
 			<usersOrGroups>Utilisateur ou Groupe</usersOrGroups>
 			<read>Lecture</read>
-			<addNode>Ajout de Noeud</addNode>
-<setProperty>Modifier la Propriété</setProperty>
+			<addNode>Ajout</addNode>
+			<setProperty>Modifier la Propriété</setProperty>
 			<remove>Suppression</remove>
 			<action>Action</action>
 		</header>
@@ -144,10 +144,10 @@
 		<title>Ajouter une permission à ce noeud</title>
 		<label>
 			<userOrGroup>Utilisateur ou Groupe</userOrGroup>
-      <read>Droit de Lecture</read>
-      <add_node>Droit d'ajout de noeud</add_node>
-      <set_property>Droit de MAJ des propriétés</set_property>
-      <remove>Droit de suppression</remove>
+      		<read>Lecture</read>
+      		<add_node>Ajout</add_node>
+      		<set_property>Droit de MAJ des propriétés</set_property>
+      		<remove>Suppression</remove>
 		</label>
 		<msg>
       <have-not-any-permission>Ajoutez au moins une permission à ce nœud.</have-not-any-permission>
@@ -259,7 +259,7 @@
     <msg>
       <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
       <delete-successful>Les formulaires de '{0}' ont été supprimés avec succès.</delete-successful>
-      <path-not-found-exception>This metadata was deleted or changed. Please click the Refresh button.</path-not-found-exception>
+      <path-not-found-exception>Ces métadonnées ont été supprimées ou modifiées. S'il vous plaît cliquez sur le bouton Actualiser.</path-not-found-exception>
     </msg>
     <action>
       <Add>Ajouter une Métadonnée</Add>
@@ -325,7 +325,7 @@
       <type>Type</type>
       <description>Description</description>
       <isMixin>Mixin</isMixin>
-      <orderable>Fils ordonnés</orderable>
+      <orderable>Sous-Noeuds Ordonnables</orderable>
     </header>
     <info>
       <description>Description</description>
@@ -409,7 +409,7 @@
       <homePath>Dossier Racine:</homePath>
       <icon>Icône:</icon>
       <viewPreferences>Montrer les documents référencés</viewPreferences>
-      <viewNonDocument>Afficher les "non documents"</viewNonDocument>
+      <viewNonDocument>Montrer tout type de noeud</viewNonDocument>
       <viewSideBar>Panneau latéral:</viewSideBar>
       <permissions>Permissions</permissions>
       <showHiddenNode>Montrer les noeuds cachés</showHiddenNode>
@@ -433,7 +433,7 @@
   </EditDriveManagerPopup>
   <UITreeList>
     <info>
-      <child-not-found>Document fils introuvable.</child-not-found>
+      <child-not-found>Sous-noeud introuvable.</child-not-found>
     </info>
     <header>
       <name>Nom</name>
@@ -489,7 +489,7 @@
   </UIRepositoryValueSelect>
   <UIRepositorySelectForm>
     <msg-editError>Une erreur est survenue avec l'entrepôt "{0}", veuillez vérifier ou en créer un nouveau</msg-editError>
-    <msg-accessdenied>Espace de stockage</msg-accessdenied>
+    <msg-accessdenied>Vous n'avez pas la permission de modifier l'entrepôt '{0}'.</msg-accessdenied>
   </UIRepositorySelectForm>
   <UIRepositoryForm>
     <label>
@@ -557,10 +557,10 @@
   <UIWorkspacePermissionForm>
     <label>
       <permission>Permission</permission>
-      <read>Droit de lecture</read>
+      <read>Lecture</read>
       <add_node>Droit d'ajout de document</add_node>
       <set_property>Droit d'ajout/modification de propriété</set_property>
-      <remove>Droit de suppression</remove>
+      <remove>Suppression</remove>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -672,19 +672,19 @@
   -->
   <UINodeTypeList>
     <label>
-      <true>vrai</true>
-      <false>faux</false>
+      <true>Oui</true>
+      <false>Non</false>
     </label>
     <header>
       <icon>Icône</icon>
       <nodeType>Type de noeud</nodeType>
       <mixinType>Mixin</mixinType>
-      <orderable>Fils ordonnés</orderable>
+      <orderable>Sous-Noeuds Ordonnables</orderable>
       <description>Description</description>
       <action>Action</action>
     </header>
     <info>
-      <description>Vide</description>
+      <description/>
     </info>
     <action>
       <Export>Exporter</Export>
@@ -726,7 +726,7 @@
       <label>
         <nodeTypeDefinition>Type de noeud</nodeTypeDefinition>
         <propertyDefinition>Propriété</propertyDefinition>
-        <childNodeDefinition>Fils</childNodeDefinition>
+        <childNodeDefinition>Sous-Noeuds</childNodeDefinition>
         <superTypeTab>Super types</superTypeTab>
         <DefaultTypeTab>Type primaire par défaut</DefaultTypeTab>
         <RequiredTypeTab>Type primaire obligatoire</RequiredTypeTab>
@@ -735,12 +735,12 @@
     </tab>
     <label>
       <propertiesDefinitions>Définitions des propriétés</propertiesDefinitions>
-      <childDefinitions>Définitions des noeuds fils</childDefinitions>
+      <childDefinitions>Sous-Noeuds</childDefinitions>
       <namespace>Espace de nommage</namespace>
       <propertyNamespace>Espace de nommage</propertyNamespace>
       <nodeTypeName>Nom</nodeTypeName>
       <mixinType>Mixin</mixinType>
-      <hasOrderableChildNodes>Fils ordonnés</hasOrderableChildNodes>
+      <hasOrderableChildNodes>Sous-Noeuds Ordonnables</hasOrderableChildNodes>
       <primaryItemName>Nom de l'Element Primaire</primaryItemName>
       <superTypes>Super Types</superTypes>
       <propertyname>Nom</propertyname>
@@ -752,7 +752,7 @@
       <protected>Lecture seule</protected>
       <constraints>Valeurs</constraints>
       <UIFormTableInputSet>UIFormTableInputSet</UIFormTableInputSet>
-      <sameNameSiblings>Nom unique pour les fils</sameNameSiblings>
+      <sameNameSiblings>Nom unique pour les sous-noeuds</sameNameSiblings>
       <childNamespace>Espace de nommage</childNamespace>
       <childMandatory>Obligatoire</childMandatory>
       <childAutocreated>Auto-créé</childAutocreated>
@@ -768,7 +768,7 @@
       <Save>#{word.save}</Save>
       <SaveDraft>Enregistrer comme Brouillon</SaveDraft>
       <AddProperty>Ajouter une propriété</AddProperty>
-      <AddChild>Ajouter un fils</AddChild>
+      <AddChild>Ajouter un sous-noeud</AddChild>
       <AddConstraints>Ajouter des contraintes</AddConstraints>
       <Back>#{word.back}</Back>
       <AddType>Ajouter un type</AddType>
@@ -790,7 +790,7 @@
       <node-type-exists>Le type de noeud '{0}' existe déjà.</node-type-exists>
       <node-type-name>Nom du type de noeud invalide.</node-type-name>
       <values-error>Veuillez sélectionner un seul type de noeud pour le type primaire par défaut</values-error>
-      <confirm-delete-child>Confirmez-vous la suppression de ce noeud fils?</confirm-delete-child>
+      <confirm-delete-child>Confirmez-vous la suppression de ce sous-noeud?</confirm-delete-child>
       <confirm-delete-property>Confirmez-vous la suppression de cette propriété?</confirm-delete-property>
     </msg>
   </UINodeTypeForm>
@@ -808,8 +808,8 @@
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
     <msg>
-      <child-name>Nom du noeud fils manquant.</child-name>
-      <child-invalid>Le nom du noeud fils contient des caractères invalides.</child-invalid>
+      <child-name>Nom du sous-noeud manquant.</child-name>
+      <child-invalid>Le nom du sous-noeud contient des caractères invalides.</child-invalid>
       <default-node-type-not-found>Type de noeud par défaut non trouvé.</default-node-type-not-found>
       <requiredPrimaryType>Type primaire requis manquant</requiredPrimaryType>
       <defaultPrimaryType>Type primaire par défaut manquant.</defaultPrimaryType>
@@ -951,7 +951,7 @@
 <action>Actions</action>
     </header>
     <action>
-      <AddAction>Ajouter Type d'Action</AddAction>
+      <AddAction>Ajouter</AddAction>
     </action>
 				<msg>
 					 <confirm-delete>Êtes-vous sûr de vouloir supprimer ce type d'action?</confirm-delete>
@@ -1017,7 +1017,7 @@
 			
 <nodeTypeDefinition>Type de nœud</nodeTypeDefinition>
       <propertyDefinition>Propriété</propertyDefinition>
-      <childNodeDefinition>Fils</childNodeDefinition>
+      <childNodeDefinition>Sous-Noeud</childNodeDefinition>
       <SuperTypeTab>Super Types</SuperTypeTab>
       <DefaultTypeTab>Type primaire par défaut</DefaultTypeTab>
       <RequiredTypeTab>Type primaire obligatoire</RequiredTypeTab>
@@ -1030,6 +1030,11 @@
   ######################################################################################
   -->
   <UIViewList>
+   <title>
+     <View>View</View>
+     <EditInfo>Edit</EditInfo>
+     <Delete>Delete</Delete>
+   </title>
     <header>
       <name>Nom</name>
       <permissions>Permissions</permissions>
@@ -1041,7 +1046,7 @@
       <AddView>Ajouter une vue</AddView>
     </action>
     <msg>
-      <access-denied>Accès interdit! Vous n'avez pas les droits requis pour utiliser cette fonction.</access-denied>
+      <access-denied>Accès refusé. Vous n'avez pas les droits requis pour utiliser cette fonction.</access-denied>
       <template-in-use>Suppression impossible de la vue '{0}' (probablement en cours d'utilisation)</template-in-use>
       <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
     </msg>
@@ -1096,7 +1101,7 @@
 		<UIViewPermissionList>
 			 <header>
 			 	 <friendlyPermission>Permissions</friendlyPermission>
-			 	 <action>Actions</action>
+			 	 <action>Action</action>
 			 </header>
 				<action>
 					 <title>
@@ -1199,8 +1204,8 @@
       <publicationRequestApproval>Demander Validation</publicationRequestApproval>
       <publicationApproveContent>Valider</publicationApproveContent>
       <publicationPublish>Publier</publicationPublish>
-<contentNavigation>Navigation par Contenu</contentNavigation>
-<addSymLink>Ajouter un Racourci</addSymLink>
+      <contentNavigation>Navigation par Contenu</contentNavigation>
+      <addSymLink>Ajouter un Raccourci</addSymLink>
     </label>			
     <action>
       <Save>#{word.save}</Save>      
@@ -1266,6 +1271,11 @@
   ######################################################################################
   -->
   <UIECMTemplateList>
+    <title>
+      <View>View</View>
+      <EditInfo>Edit</EditInfo>
+      <Delete>Delete</Delete>
+    </title>
     <header>
       <name>Nom</name>
       <path>Dossier</path>
@@ -1278,7 +1288,7 @@
     <msg>
       <template-in-use>Suppresion impossible du formulaire '{0}' (probablement en cours d'utilisation)</template-in-use>
       <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
-      <access-denied>Accès interdit. Vous n'avez pas les droits requis pour utiliser cette fonction.</access-denied>
+      <access-denied>Accès refusé. Vous n'avez pas les droits suffisants pour utiliser cette fonction.</access-denied>
       <delete-permission-denied>Vous n'avez pas les droits pour supprimer le gabarit '{0}'.</delete-permission-denied>
     </msg>
   </UIECMTemplateList>
@@ -1498,7 +1508,7 @@
     </action>
     <label>
       <parentPath>Parent</parentPath>
-      <taxonomyName>Nom de l'Arbre</taxonomyName>
+      <taxonomyName>Catégorie</taxonomyName>
     </label>
     <msg>
       <name-null>Le nom est vide.</name-null>
@@ -1650,7 +1660,7 @@
     <header>
       <usersOrGroups>Uilisateur ou Groupe</usersOrGroups>
       <read>Lecture</read>
-      <addNode>Modifier</addNode>
+      <addNode>Modification</addNode>
       <remove>Suppression</remove>
       <action>Action</action>
     </header>
@@ -1732,7 +1742,7 @@
     <header>
       <name>Nom</name>
       <action>Action</action>
-      <label>Gabarit</label>
+      <label>Nom</label>
       <icon>Icône</icon>
     </header>
     <action>
@@ -1740,8 +1750,8 @@
     </action>
     <msg>
       <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
-      <access-denied>Accès interdit. Vous n'avez pas les droits requis pour utiliser cette fonction.</access-denied>
-      <editing-template>Accès interdit. Vous ne pouvez pas supprimer et modifier le gabarit en même temps.</editing-template>
+      <access-denied>Accès refusé. Vous n'avez pas les droits suffisants pour utiliser cette fonction.</access-denied>
+      <editing-template>Accès refusé. Vous ne pouvez pas supprimer et modifier le gabarit en même temps.</editing-template>
       <template-not-exist>Le gabarit que vous tentez de supprimer n'existe pas.</template-not-exist>
     </msg>
   </UITemplateList>
@@ -1750,11 +1760,11 @@
     <header>
       <name>Type</name>
       <action>Action</action>
-      <label>Gabarit</label>
+      <label>Nom</label>
       <icon>Icône</icon>
     </header>
     <action>
-      <AddNew>Ajouter un Gabarit</AddNew>
+      <AddNew>Ajouter</AddNew>
     </action>
     <msg>
       <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
@@ -1767,12 +1777,12 @@
   <UIOthersTemplateList>
     <header>
       <name>Type</name>
-      <label>Gabarit</label>
+      <label>Nom</label>
       <icon>Icône</icon>
       <action>Action</action>
     </header>
     <action>
-      <AddNew>Ajouter un Gabarit</AddNew>
+      <AddNew>Ajouter</AddNew>
     </action>
     <msg>
       <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
@@ -2155,7 +2165,7 @@
       <name-invalid>Caractères invalides détectés dans le nom de la requête.</name-invalid>
       <name-existing>Une requête du même nom existe déjà.</name-existing>
       <invalid-query>Requête invalide. Veuillez vérifier le code de votre requête.</invalid-query>
-      <access-denied>Accès interdit. Vous n'avez pas les droits suffisants.</access-denied>
+      <access-denied>Accès refusé. Vous n'avez pas les droits suffisants.</access-denied>
     </msg>
   </UIQueriesForm>
   <AddQueryForm>
@@ -2399,7 +2409,7 @@
   -->  
   <UIViewFormTabPane>
     <label>
-      <addSymLink>Ajouter un raccourci</addSymLink>
+      <addSymLink>Ajouter un Raccourci</addSymLink>
     </label>
   </UIViewFormTabPane>
   <!--
@@ -2440,7 +2450,7 @@
         <email>#{word.email}</email>
       </option>
       <group>Groupe</group>
-      <searchUser>#{word.searchUser}</searchUser>
+      <searchUser>Utilisateur</searchUser>
       <userName>#{word.userName}</userName>
       <lastName>#{word.lastName}</lastName>
       <firstName>#{word.firstName}</firstName>
@@ -2533,7 +2543,7 @@
     </action>
     <title>
     		<UILockHolderContainer>Gestion des verrous</UILockHolderContainer>
-    		<UILockNodeList>Noeud verouillé</UILockNodeList>
+    		<UILockNodeList>Noeuds Verrouillés</UILockNodeList>
     </title>
   </UITabPane> 
   
@@ -2774,7 +2784,7 @@
  </UIScriptForm>
  <UINodeTypeList>
    <msg>
-   <no-list>Il n'y a pas de type de noeud comme condition de recherche.</no-list>
+   <no-list>Aucun type de noeud correspondant à cette recherche.</no-list>
    </msg>
  </UINodeTypeList>
  <UIActionForm>

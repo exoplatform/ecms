@@ -130,6 +130,8 @@ public class UISideBar extends UIContainer {
     }
     if (isHideExplorerPanel() && getChild(UITreeExplorer.class).getId().equals(currentComp)) {
       currentComp = getChild(UITagExplorer.class).getId();
+      this.getAncestorOfType(UIJCRExplorer.class).setCurrentState();
+      this.getChild(UITagExplorer.class).updateTagList();
     }
     return currentComp;
   }

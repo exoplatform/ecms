@@ -16,6 +16,8 @@
  */
 package org.exoplatform.ecm.webui.core.bean;
 
+import org.exoplatform.services.jcr.access.PermissionType;
+
 /**
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
@@ -48,5 +50,19 @@ public class PermissionBean {
   public boolean equals(Object obj) {
     // TODO Auto-generated method stub
     return this.usersOrGroups.equals(((PermissionBean)obj).usersOrGroups);
+  }
+  
+  public void setPermissions(String[] permArray) {
+    if (permArray == null) return;
+    for (String entry : permArray) {
+      if (PermissionType.READ.equals(entry)) this.setRead(true);
+      if (PermissionType.REMOVE.equals(entry)) this.setRemove(true);
+      if (PermissionType.ADD_NODE.equals(entry)) this.setAddNode(true);
+    }
+  }
+  
+  @Override
+  public int hashCode() {
+    return this.usersOrGroups.hashCode();
   }
 }

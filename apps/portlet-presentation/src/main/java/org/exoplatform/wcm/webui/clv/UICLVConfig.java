@@ -104,6 +104,9 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
 
   /** The Constant ORDER_BY_FORM_SELECT_BOX. */
   public static final String ORDER_BY_FORM_SELECT_BOX                = "UICLVConfigOrderByFormSelectBox";
+  
+  /** The Constant ORDER_BY_FORM_SELECT_BOX. */
+  public static final String ORDER_TYPE_FORM_SELECT_BOX              = "UICLVConfigOrderTypeFormSelectBox";
 
   /** The Constant ORDER_TYPE_FORM_RADIO_BOX_INPUT. */
   public static final String ORDER_TYPE_FORM_RADIO_BOX_INPUT         = "UICLVConfigOrderTypeFormRadioBoxInput";
@@ -361,12 +364,15 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
 
     /** ORDER TYPE */
     List<SelectItemOption<String>> orderTypeOptions = new ArrayList<SelectItemOption<String>>();
-    orderTypeOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_TYPE_DESCENDENT, "DESC"));
+    orderTypeOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_TYPE_DESCENDENT, "DESC"));    
     orderTypeOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_TYPE_ASCENDENT, "ASC"));
     UIFormRadioBoxInput orderTypeRadioBoxInput = new UIFormRadioBoxInput(ORDER_TYPE_FORM_RADIO_BOX_INPUT,
                                                                          ORDER_TYPE_FORM_RADIO_BOX_INPUT,
                                                                          orderTypeOptions);
-    orderTypeRadioBoxInput.setValue(orderType);
+    
+    UIFormSelectBox orderTypeSelectBox = new UIFormSelectBox(ORDER_TYPE_FORM_SELECT_BOX, ORDER_TYPE_FORM_SELECT_BOX, orderTypeOptions);
+    orderTypeSelectBox.setValue(orderType);
+    //orderTypeRadioBoxInput.setValue(orderType);
 
     /** HEADER */
     UIFormStringInput headerInput = new UIFormStringInput(HEADER_FORM_STRING_INPUT, HEADER_FORM_STRING_INPUT, header);
@@ -531,6 +537,7 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
     uiCLVContentTab.addUIFormInput(displayModeRadioBoxInput);
     uiCLVContentTab.addUIFormInput((UIFormInputSet)itemPathInputSet);
     uiCLVContentTab.addUIFormInput(orderBySelectBox);
+    uiCLVContentTab.addUIFormInput(orderTypeSelectBox);
     uiCLVContentTab.addUIFormInput(orderTypeRadioBoxInput);
     setSelectedTab(CONTENT_TAB);
     addUIComponentInput(uiCLVContentTab) ;
@@ -749,7 +756,8 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
         return;
       }
       String orderBy = clvConfig.getUIFormSelectBox(ORDER_BY_FORM_SELECT_BOX).getValue();
-      String orderType = ((UIFormRadioBoxInput) clvConfig.findComponentById(UICLVConfig.ORDER_TYPE_FORM_RADIO_BOX_INPUT)).getValue();
+      String orderType = clvConfig.getUIFormSelectBox(ORDER_TYPE_FORM_SELECT_BOX).getValue();
+      //String orderType = ((UIFormRadioBoxInput) clvConfig.findComponentById(UICLVConfig.ORDER_TYPE_FORM_RADIO_BOX_INPUT)).getValue();
 
       String header = clvConfig.getUIStringInput(UICLVConfig.HEADER_FORM_STRING_INPUT).getValue();
       if (header == null) header = "";

@@ -3461,4 +3461,12 @@
 	  	<property-name-incorrect>The property name is incorrect, please enter another value for it!</property-name-incorrect>
     </msg>
   </UIPropertyForm>
+  <!--
+  ###################################################################################
+  # JCR Exceptions manager                                                              #
+  ###################################################################################
+  -->
+  <VersionException>
+  	<msg>Cannot modify documents that are being checked in.</msg>  
+  </VersionException>
 </bundle>

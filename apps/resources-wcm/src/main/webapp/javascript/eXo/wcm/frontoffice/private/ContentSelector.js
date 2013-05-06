@@ -142,8 +142,8 @@
 				treeHTML += '<div class="node" onclick="eXo.ecm.ECS.actionColExp(this, event);">';
 				treeHTML += 	'<div class="expandIcon">';
 			}
-			treeHTML += 		'<a title="'+decodeURIComponent(strName)+'"href="javascript:void(0);" class="nodeIcon" onclick="eXo.ecm.ECS.renderBreadcrumbs(this);eXo.ecm.ECS.listRootFolder(this);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
-			treeHTML +=				'<i class="uiIcon16x16FolderDefault" title="acme"></i>';
+			treeHTML += 		'<a rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(strName)+'"href="javascript:void(0);" class="nodeIcon" onclick="eXo.ecm.ECS.renderBreadcrumbs(this);eXo.ecm.ECS.listRootFolder(this);" name="'+decodeURIComponent(strName)+'" id="'+id+'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
+			treeHTML +=				'<i class="uiIcon16x16FolderDefault"></i>';
 			treeHTML += 			'<span class="nodeName"> ';
 			treeHTML += 				decodeURIComponent(strName);
 			treeHTML +=				'</span>';	
@@ -154,12 +154,13 @@
 			if(tmp != '') treeHTML += tmp;
 		}
 		var uiLeftWorkspace = document.getElementById('LeftWorkspace');	
-		if(uiLeftWorkspace) uiLeftWorkspace.innerHTML = treeHTML;
+		if(uiLeftWorkspace) gj(uiLeftWorkspace).html(treeHTML);
 		var contentSelectorPop = document.getElementById('CorrectContentSelectorPopupWindow');
 	  if(contentSelectorPop) {
 			var contentBlock = gj(contentSelectorPop).find('div.PopupContent:first')[0];
 			if(contentBlock) contentBlock.style.height="";
 		}
+		gj(document).ready(function() { gj("*[rel='tooltip']").tooltip();});
 	};
 	
 	EcmContentSelector.prototype.getDir = function(currentNode, event) {  
@@ -224,6 +225,7 @@
 		eXo.ecm.ECS.strConnection = url;
 		eXo.ecm.ECS.renderSubTrees(currentNode, event, url);
 		eXo.ecm.ECS.renderBreadcrumbs(currentNode);
+		gj(document).ready(function() { gj("*[rel='tooltip']").tooltip();});
 	};
 	
 	EcmContentSelector.prototype.renderSubTree = function(currentNode) {  
@@ -248,10 +250,10 @@
 				treeHTML += '<div class="node" onclick="eXo.ecm.ECS.actionColExp(this, event);">';
 				if (hasFolderChild == "true") {
 					treeHTML += 	'<div class="expandIcon">';
-					treeHTML +=			'<a title="'+decodeURIComponent(label)+'" href="javascript:void(0);" class="nodeIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'"  driverPath="'+driverPath+ '" hasFolderChild="' + hasFolderChild + '" repository="'+repository+'" workspace="'+workspace+'">';
+					treeHTML +=			'<a rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(label)+'" href="javascript:void(0);" class="nodeIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+'"  driverPath="'+driverPath+ '" hasFolderChild="' + hasFolderChild + '" repository="'+repository+'" workspace="'+workspace+'">';
 				} else {
 					treeHTML += 	'<div class="emptyIcon">';
-					treeHTML +=			'<a title="'+decodeURIComponent(label)+'" href="javascript:void(0);" class="nodeIcon" name="'+decodeURIComponent(strName)+'" id="'+id+'"  driverPath="'+driverPath+'" repository="'+repository+'" workspace="'+workspace+'">';
+					treeHTML +=			'<a rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(label)+'" href="javascript:void(0);" class="nodeIcon" name="'+decodeURIComponent(strName)+'" id="'+id+'"  driverPath="'+driverPath+'" repository="'+repository+'" workspace="'+workspace+'">';
 				}
 				treeHTML +=				'<i class="uiIconEcms16x16DriveGeneral"></i>';
 				treeHTML += 			'<span class="nodeName"> ';
@@ -317,6 +319,7 @@
 			for(var i = 0; i < nodeList.length; i++) {
 				var id = eXo.ecm.ECS.generateIdNodes(nodeList[i], currentNode.id);
 				var strTitle = nodeList[i].getAttribute("title");
+				if (!strTitle) strTitle = nodeList[i].getAttribute("data-original-title");
 				var strName = nodeList[i].getAttribute("name");
 				var isUpload = nodeList[i].getAttribute("isUpload");
 				var nodeDriveName = nodeList[i].getAttribute("nodeDriveName");
@@ -326,10 +329,10 @@
 				treeHTML += '<div class="node" onclick="eXo.ecm.ECS.actionColExp(this, event);">';
 				if (hasFolderChild == true) {
 					treeHTML += 	'<div class="expandIcon">';
-					treeHTML +=			'<a  title="'+ decodeURIComponent(strTitle) +'" href="javascript:void(0);" class="nodeIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+ '" hasFolderChild="' + hasFolderChild + '" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
+					treeHTML +=			'<a rel="tooltip" data-placement="bottom" title="'+ decodeURIComponent(strTitle) +'" href="javascript:void(0);" class="nodeIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+ '" hasFolderChild="' + hasFolderChild + '" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
 				} else {
 					treeHTML += 	'<div class="emptyIcon">';
-					treeHTML +=			'<a  title="'+ decodeURIComponent(strTitle) +'" href="javascript:void(0);" class="nodeIcon" name="'+decodeURIComponent(strName)+'" id="'+id +'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
+					treeHTML +=			'<a rel="tooltip" data-placement="bottom" title="'+ decodeURIComponent(strTitle) +'" href="javascript:void(0);" class="nodeIcon" name="'+decodeURIComponent(strName)+'" id="'+id +'" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
 				}
 				treeHTML +=				'<i class="' + nodeTypeCssClass + '"></i>';
 				treeHTML += 			'<span class="nodeName"> ';
@@ -349,6 +352,7 @@
 				for(var i = 0; i < currentNodeList.length; i++) {
 					var id = eXo.ecm.ECS.generateIdNodes(currentNodeList[i], currentNode.id);
 					var strTitle = currentNodeList[i].getAttribute("title");
+					if (!strTitle) strTitle = currentNodeList[i].getAttribute("data-original-title");
 					var	strName	= currentNodeList[i].getAttribute("name");
 					var isUpload = currentNodeList[i].getAttribute("isUpload");
 					var nodeDriveName = currentNodeList[i].getAttribute("nodeDriveName");
@@ -358,10 +362,10 @@
 					treeHTML += '<div class="node" onclick="eXo.ecm.ECS.actionColExp(this, event);">';
 					if (hasFolderChild == "true") {
 						treeHTML += 	'<div class="expandIcon">';
-						treeHTML +=			'<a  title="'+decodeURIComponent(strTitle)+'" href="javascript:void(0);" class="nodeIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+ '" hasFolderChild="' + hasFolderChild + '" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
+						treeHTML +=			'<a rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(strTitle)+'" href="javascript:void(0);" class="nodeIcon" onclick="eXo.ecm.ECS.getDir(this, event);" name="'+decodeURIComponent(strName)+'" id="'+id+ '" hasFolderChild="' + hasFolderChild + '" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
 					} else {
 						treeHTML += 	'<div class="emptyIcon">';
-						treeHTML +=			'<a  title="'+decodeURIComponent(strTitle)+'" href="javascript:void(0);" class="nodeIcon" name="'+decodeURIComponent(strName)+'" id="'+id + '" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
+						treeHTML +=			'<a rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(strTitle)+'" href="javascript:void(0);" class="nodeIcon" name="'+decodeURIComponent(strName)+'" id="'+id + '" isUpload="'+isUpload +'" nodeDriveName="' + nodeDriveName +'">';
 					}
 					treeHTML +=				'<i class="' + nodeTypeCssClass + '"></i>';
 					treeHTML += 			'<span class="nodeName"> ';
@@ -376,7 +380,7 @@
 				var nextElementNode = gj(parentNode).nextAll("div:first")[0];
 				var tmpNode = document.createElement("div");
 				tmpNode.className = "ChildrenContainer" ;      
-				tmpNode.innerHTML = treeHTML;
+				gj(tmpNode).html(treeHTML);
 				if(nextElementNode && nextElementNode.className == "node") {        
 					nextElementNode.parentNode.insertBefore(tmpNode, nextElementNode) ;
 					nodeIcon.className = 'collapseIcon';				
@@ -398,10 +402,10 @@
 		} else {		    
 			eXo.ecm.ECS.listFiles(fileList);
 		}
+		
 	};
 	
 	EcmContentSelector.prototype.actionColExp = function(objNode, event) {
-	 
 		if(!objNode) return;
 		var nextElt = gj(objNode).nextAll("div:first")[0];
 		var iconElt = gj(objNode).children("div")[0];
@@ -434,14 +438,14 @@
 		if(typeof(currentNode) == 'string') currentNode = document.getElementById(currentNode);
 		eXo.ecm.ECS.currentNode = currentNode;
 		var breadcrumbContainer = document.getElementById("BreadcumbsContainer");
-		breadcrumbContainer.innerHTML = '';
+		gj(breadcrumbContainer).html('<li><i class="uiIconHome uiIconLightGray"></i></li>');
 		var beforeNode = null;
 		while(currentNode != null && currentNode.className != "leftWorkspace") {
 			var curName = gj(currentNode).attr('name');
 			var label = gj(currentNode).attr('title');
+			if (!label) label = gj(currentNode).attr('data-original-title');
 			if(curName) {
-				var tmpNode = document.createElement("div");	
-				tmpNode.className = 'breadcumbTab';
+				var tmpNode = document.createElement("li");	
 				var strHTML = '';
 				var strOnclick = '';
 				var node = document.getElementById(currentNode.id);
@@ -450,14 +454,14 @@
 				} else {
 					strOnclick = "eXo.ecm.ECS.actionBreadcrumbs('"+node.id+"');";		
 				}
+				strHTML += '<i class="uiIconMiniArrowRight"></i>';
 				if(beforeNode == null) {
 					strHTML += '<a class="active" href="javascript:void(0);" onclick="'+strOnclick+'">'+decodeURIComponent(label)+'</a>';
-					tmpNode.innerHTML = strHTML;
+					gj(tmpNode).html(strHTML);
 					breadcrumbContainer.appendChild(tmpNode);
 				} else {
-					strHTML += '<a class="normal" href="javascript:void(0);" onclick="'+strOnclick+'">'+decodeURIComponent(label)+'</a>';
-					strHTML += '<i class="uiIconArrowRightMini"></i>';
-					tmpNode.innerHTML = strHTML;
+					strHTML += '<a class="" href="javascript:void(0);" onclick="'+strOnclick+'">'+decodeURIComponent(label)+'</a>';
+					gj(tmpNode).html(strHTML);
 					breadcrumbContainer.insertBefore(tmpNode, beforeNode);
 				}
 				beforeNode = tmpNode;
@@ -515,7 +519,7 @@
 		} else {
 			var fileList = xmlDoc.getElementsByTagName("File");
 			eXo.ecm.ECS.listFiles(fileList);
-		} 
+		}
 	};
 	
 	EcmContentSelector.prototype.listFiles = function(list) {	
@@ -534,20 +538,20 @@
 					}
 				} 
 				var tdNoContent = tblRWS.tBodies[0].insertRow(0).insertCell(0);
-				tdNoContent.innerHTML = "There is no content";
+				gj(tdNoContent).html("There is no content");
 				tdNoContent.className = "item noContent empty center";
 				tdNoContent.setAttribute("colspan",3);
 				tdNoContent.userLanguage = "UserLanguage.NoContent";	
-				document.getElementById("pageNavPosition").innerHTML = "";
+				gj("#pageNavPosition").html("");
 			} else {
-				var container = gj(rightWS).find('div.ActionIconsContainer:first')[0];
-				container.innerHTML = "<div class=\"noContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div>";
-				document.getElementById("pageNavPosition").innerHTML = "";
+				var container = gj(rightWS).find('div.actionIconsContainer:first')[0];
+				gj(container).html("<div class=\"noContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div>");
+				gj("#pageNavPosition").html("");
 			}
 			return;
 		} else {		
 	    
-	    if(viewType=="list") {
+			if(viewType=="list") {
 				var tblRWS  = gj(rightWS).find("table")[0];
 				if(tblRWS) {
 					var rowsRWS = gj(tblRWS).find("tr");
@@ -558,11 +562,11 @@
 					} 
 				} else eXo.ecm.ECS.updateHTML(viewType);			
 			} else {
-				var container = gj(rightWS).find('div.ActionIconsContainer:first')[0];
-				if(container) container.innerHTML = "";
-	      else eXo.ecm.ECS.updateHTML(viewType);
+				var container = gj(rightWS).find('div.actionIconsContainer:first')[0];
+				if(container) gj(container).html("");
+				else eXo.ecm.ECS.updateHTML(viewType);
 			}
-			var container = gj(rightWS).find('div.ActionIconsContainer:first')[0];
+			var container = gj(rightWS).find('div.actionIconsContainer:first')[0];
 			if(container) {
 				container.style.display = "none";
 			}			
@@ -570,7 +574,7 @@
 			var strViewContent = "";
 			// Depends on Paginators will be used or not. 'longDesc' if paginator, 'src' else.
 			var imageAttribute = "src";
-			if(list.length > 12) {
+			if(list.length > 6) {
 				// Paginator will be used
 				imageAttribute = "longDesc";
 			}			
@@ -586,36 +590,49 @@
 				if(size == 0) size = "";
 				else size += '&nbsp;kb';
 	      
-	      if(viewType=="list") {	        
+				if(viewType=="list") {	        
 					var clazz = 'OddItem';
 					var tblRWS  = gj(rightWS).find("table")[0];
 					var clazzItem = eXo.ecm.ECS.getClazzIcon(list[i].getAttribute("nodeType"));
 					var newRow = tblRWS.tBodies[0].insertRow(i);
 					newRow.className = clazz;
-					newRow.insertCell(0).innerHTML = '<a url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.insertContent(this);">'+decodeURIComponent(node)+'</a>';
-					newRow.insertCell(1).innerHTML = '<div class="Item">'+ list[i].getAttribute("dateCreated") +'</div>';
-					newRow.insertCell(2).innerHTML = '<div class="Item">'+ size +'</div>';
+					gj(newRow.insertCell(0)).html('<a url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.insertContent(this);">'+decodeURIComponent(node)+'</a>');
+					gj(newRow.insertCell(1)).html('<div class="Item">'+ list[i].getAttribute("dateCreated") +'</div>');
+					gj(newRow.insertCell(2)).html('<div class="Item">'+ size +'</div>');
 				} else {				  
 					var randomId = Math.random();
 					var command = ECS.connector + "/thumbnailImage/medium/" + ECS.repositoryName + "/" + ECS.workspaceName + path + "/?reloadnum=" + randomId;        
-					strViewContent += '<div id="'+randomId+'" class="actionIconBox" onclick="eXo.ecm.ECS.insertContent(this);" url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" title="'+decodeURIComponent(node)+'"><div class="NodeLabel"><div class="ThumbnailImage"><div style="display: block;" class="LoadingProgressIcon"><img alt="Loading Process" id="thumbnail'+randomId+'" '+imageAttribute+'="'+command+'" onerror="var img = gj(this.parentNode).next(\'i:first\')[0]; img.style.display = \'block\'; this.parentNode.style.display = \'none\';" onload="this.parentNode.style.backgroundImage=\'none\'" /></div><i style="display: none;" class="uiIcon64x64FileDefault uiIcon64x64nt_file  '+nodeTypeIcon+'"></i></div><div class="ActionIconLabel" style="width: auto;"><a class="ActionLabel" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" title="'+decodeURIComponent(node)+'">'+decodeURIComponent(node)+'</a></div></div></div>';
+					strViewContent += '<div id="'+randomId+'" class="actionIconBox" onclick="eXo.ecm.ECS.insertContent(this);" url="'+decodeURIComponent(url)+'" path="'+path+'" nodeType="'+nodeType+'" rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(node)+'"><div class="nodeLabel"><div class="thumbnailImage"><div style="display: block;" class="LoadingProgressIcon"><img alt="Loading Process" id="thumbnail'+randomId+'" '+imageAttribute+'="'+command+'" onerror="var img = gj(this.parentNode).next(\'i:first\')[0]; img.style.display = \'block\'; this.parentNode.style.display = \'none\';" onload="this.parentNode.style.backgroundImage=\'none\'" /></div><i style="display: none;" class="uiIcon64x64FileDefault uiIcon64x64nt_file  '+nodeTypeIcon+'"></i></div><div class="actionIconLabel" style="width: auto;"><a class="actionLabel" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(node)+'">'+decodeURIComponent(node)+'</a></div></div></div>';
 				}
 			}
 			if(container) {
-				container.innerHTML = strViewContent;
+				gj(container).html(strViewContent);
 				container.style.display = "";
 			}			
 		}	
-		if(i > 12) {
-			var numberRecords = 12;		
-			var viewType = eXo.ecm.ECS.viewType; 
-	    if(viewType=='list') eXo.ecm.Pager = new Pager("ListRecords", numberRecords);
-	    else eXo.ecm.Pager = new Pager("ActionIconsContainer", numberRecords);
-			eXo.ecm.Pager.init(); 
-			eXo.ecm.Pager.showPageNav('pageNavPosition');
-			eXo.ecm.Pager.showPage(1);	
-		} else {
-			document.getElementById("pageNavPosition").innerHTML = "";
+		if(viewType=="list") {
+			if(i > 9) {
+				var numberRecords = 9;		
+				var viewType = eXo.ecm.ECS.viewType; 
+				eXo.ecm.Pager = new Pager("ListRecords", numberRecords);
+				eXo.ecm.Pager.init(); 
+				eXo.ecm.Pager.showPageNav('pageNavPosition');
+				eXo.ecm.Pager.showPage(1);	
+			} else {
+				gj("#pageNavPosition").html("");
+			}
+		}
+		else {
+			if(i > 8) {
+				var numberRecords = 8;		
+				var viewType = eXo.ecm.ECS.viewType; 
+				eXo.ecm.Pager = new Pager("ActionIconsContainer", numberRecords);
+				eXo.ecm.Pager.init(); 
+				eXo.ecm.Pager.showPageNav('pageNavPosition');
+				eXo.ecm.Pager.showPage(1);	
+			} else {
+				gj("#pageNavPosition").html("");
+			}
 		}	
 	};
 	
@@ -629,13 +646,13 @@
 			strViewPresent += "</table></div>";
 
 		} else {
-			strViewPresent = "<div class=\"uiThumbnailsView\" style=\"overflow-y: auto; overflow-x: hidden;\"><div class=\"ActionIconsContainer\" id=\"ActionIconsContainer\"></div></div>";
+			strViewPresent = "<div class=\"uiThumbnailsView\" style=\"overflow-y: auto; overflow-x: hidden;\"><div class=\"actionIconsContainer\" id=\"ActionIconsContainer\"></div></div>";
 		}
 		var rightWS = document.getElementById('RightWorkspace');  
 	  if(rightWS) {
-			rightWS.innerHTML = "";
+			gj(rightWS).html("");
 			strViewPresent += "<div class=\"PageIterator\" id=\"pageNavPosition\"></div><div style=\"clear: left;\"><span></span></div>";
-			rightWS.innerHTML = strViewPresent;
+			gj(rightWS).html(strViewPresent);
 		}
 	}
 	
@@ -650,10 +667,10 @@
 		} 
 		if(!list || list.length <= 0) {
 			var tdNoContent = tblRWS.tBodies[0].insertRow(0).insertCell(0);
-			tdNoContent.innerHTML = "There is no content";
+			gj(tdNoContent).html("There is no content");
 			tdNoContent.className = "item noContent empty center";
 			tdNoContent.userLanguage = "UserLanguage.NoContent";
-			document.getElementById("pageNavPosition").innerHTML = "";
+			gj("#pageNavPosition").html("");
 			return;
 		}
 		var listItem = '';
@@ -666,18 +683,18 @@
 			var label = list[i].getAttribute("label");
 			if (!label) label = node;
 			var newRow = tblRWS.tBodies[0].insertRow(i);
-			newRow.insertCell(0).innerHTML = '<a class="Item" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.insertContent(this);">'+decodeURIComponent(label)+'</a>';
+			gj(newRow.insertCell(0)).html('<a class="Item" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.insertContent(this);">'+decodeURIComponent(label)+'</a>');
 					
 		}
 		
-		if(i > 12) {
-			var numberRecords = 12;
+		if(i > 9) {
+			var numberRecords = 9;
 			eXo.ecm.Pager = new Pager("ListRecords", numberRecords);
 			eXo.ecm.Pager.init(); 
 			eXo.ecm.Pager.showPageNav('pageNavPosition');
 			eXo.ecm.Pager.showPage(1);	
 		} else {
-			document.getElementById("pageNavPosition").innerHTML = "";
+			gj("#pageNavPosition").html("");
 		}
 	};
 	
@@ -693,10 +710,10 @@
 		if(!list || list.length <= 0) {
 			var rowTmp = tblRWS.tBodies[0].insertRow(0);
 			var tdNoContent = rowTmp.insertCell(0);
-			tdNoContent.innerHTML = "There is no content";
+			gj(tdNoContent).html("There is no content");
 			tdNoContent.className = "item noContent empty center";
 			tdNoContent.userLanguage = "UserLanguage.NoContent";
-			document.getElementById("pageNavPosition").innerHTML = "";
+			gj("#pageNavPosition").html("");
 			return;
 		}
 		var listItem = '';
@@ -708,18 +725,18 @@
 			var nodeType	= list[i].getAttribute("nodeType");
 			var node = list[i].getAttribute("name");
 			var newRow = tblRWS.tBodies[0].insertRow(i);
-			newRow.insertCell(0).innerHTML = '<a class="Item" url="'+url+'" linkTarget ="' + linkTarget + '" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.addFile2ListContent(this);">'+decodeURIComponent(node)+'</a>';
+			gj(newRow.insertCell(0)).html('<a class="Item" url="'+url+'" linkTarget ="' + linkTarget + '" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.addFile2ListContent(this);">'+decodeURIComponent(node)+'</a>');
 					
 		}
 		
-		if(i > 12) {
-			var numberRecords = 12;
+		if(i > 9) {
+			var numberRecords = 9;
 	    eXo.ecm.Pager = new Pager("ListRecords", numberRecords);
 			eXo.ecm.Pager.init(); 
 			eXo.ecm.Pager.showPageNav('pageNavPosition');
 			eXo.ecm.Pager.showPage(1);	
 		} else {
-			document.getElementById("pageNavPosition").innerHTML = "";
+			gj("#pageNavPosition").html("");
 		}
 	};
 	
@@ -745,10 +762,10 @@
 	Pager.prototype.setHeightRightWS = function(list) {
 		var leftWorkSpace = document.getElementById("LeftWorkspace");
 		var rightWorkSpace = document.getElementById("RightWorkspace");
-		if(leftWorkSpace) rightWorkSpace.style.height = leftWorkSpace.offsetHeight + "px";
+		if(leftWorkSpace) rightWorkSpace.style.height = leftWorkSpace.offsetHeight - 30 + "px";
 	};
 	
-	Pager.prototype.init = function() {
+	Pager.prototype.init = function() { 
 		this.setHeightRightWS();
 		var len = 0;
 	  if(eXo.ecm.ECS.viewType=="list") {
@@ -816,7 +833,7 @@
 				}
 			}    
 		}
-		if(len <= 12) { document.getElementById("pageNavPosition").innerHTML = "";	return;}
+		if(len <= 9) { gj("#pageNavPosition").html("");	return;}
 	};
 	
 	Pager.prototype.showPage = function(pageNumber) {
@@ -824,17 +841,38 @@
 			alert("not inited");
 			return;
 	    }
-	
-	    var oldPageAnchor = document.getElementById('pg'+eXo.ecm.Pager.currentPage);
-	    if(oldPageAnchor) oldPageAnchor.className = 'pg-normal';
-	    
 	    this.currentPage = pageNumber;
-	    var newPageAnchor = document.getElementById('pg'+eXo.ecm.Pager.currentPage);
-		if(newPageAnchor)  newPageAnchor.className = 'pg-selected';
+	    eXo.ecm.Pager.showPageNav('pageNavPosition');
+	    var pageNavPosition = gj("#pageNavPosition");
+	    var prev = gj(pageNavPosition).find('.Previous:first')[0];
+	    var next = gj(pageNavPosition).find('.Next:first')[0];
+	    if(pageNumber == 1) { 
+			prev.parentNode.className = 'disabled';
+			next.parentNode.className = '';
+		} else if(pageNumber == this.pages) {
+			next.parentNode.className = 'disabled';
+			prev.parentNode.className = '';
+		}
+	    else {
+			prev.parentNode.className = '';
+			next.parentNode.className = '';
+		}
+	    if(document.getElementById('pg'+eXo.ecm.Pager.currentPage)) {
+			var oldPageAnchor = document.getElementById('pg'+eXo.ecm.Pager.currentPage).parentNode;
+			if(oldPageAnchor) oldPageAnchor.className = '';
+		}
+	    
+	    
+	    if(document.getElementById('pg'+eXo.ecm.Pager.currentPage)) {
+			var newPageAnchor = document.getElementById('pg'+eXo.ecm.Pager.currentPage).parentNode;
+			if(newPageAnchor)  newPageAnchor.className = 'active';
+		}
 	    
 	    var from = (pageNumber - 1) * eXo.ecm.Pager.itemsPerPage + 1;
 	    var to = from +  eXo.ecm.Pager.itemsPerPage - 1;
 	    eXo.ecm.Pager.showRecords(from, to);
+	     
+	    
 	};
 	
 	Pager.prototype.previousPage = function() {
@@ -851,13 +889,50 @@
 			return;
 		}
 		var element = document.getElementById(positionId);
-		var pagerHtml = '<span>Total page(s) : '+this.pages+'</span> ';
-		pagerHtml += '<span onclick="eXo.ecm.Pager.previousPage();" class="pg-normal"> &#171 Prev </span> | ';
-	    for (var page = 1; page <= this.pages; page++) {
-	    	pagerHtml += '<span id="pg' + page + '" class="pg-normal" title="'+page+'" onclick="eXo.ecm.Pager.showPage(' + page + ');">' + page + '</span> | ';
+		var pagerHtml = '';
+		
+		var min = 1;
+	    var max = this.pages;
+	    var dot1 = dot2 = -1;
+	    
+	    if (this.pages > 5) {
+			if (this.currentPage < 4) {
+			   max = 3;
+			   dot1 = 4;
+			} else if (this.currentPage >= this.pages - 2) {
+			   min = this.pages - 2;
+			   dot1 = min - 1;
+			} else {
+			   min = this.currentPage - 1;
+			   max = this.currentPage + 1;
+			   dot1 = 2;
+			   dot2 = this.pages - 1;
+			}		
+		}
+		
+		pagerHtml += '<div class="pagination uiPageIterator clearfix"><ul class="pull-right">';		
+		pagerHtml += '<li><a onclick="eXo.ecm.Pager.previousPage();" class="Previous Page" rel="tooltip" data-placement="bottom" data-original-title="Previous Page"><i class="uiIconPrevArrow"></i></a></li>';
+		
+		for(var i = 1 ; i <= this.pages; i++) { 		
+			if (i == 1 && min > 1) 
+			  pagerHtml += '<li><a onclick="eXo.ecm.Pager.showPage(' + i + ');" id="pg' + i + '" >' + i + '</a></li>';
+			else if (i == min) {
+			   for (j = min; j <= max; j++) {
+				 pagerHtml += '<li><a onclick="eXo.ecm.Pager.showPage(' + j + ');" id="pg' + j + '" >' + j + '</a></li>';      
+			   }
+			} else if (i == dot1 || i == dot2) {
+					pagerHtml += '<li class="disabled"><a href="#">...</a></li>';	   
+			} else if (i == this.pages && max < this.pages) 
+			  pagerHtml += '<li><a onclick="eXo.ecm.Pager.showPage(' + this.pages + ');" id="pg' + this.pages + '">' + this.pages + '</a></li>';      
 	    }
-		pagerHtml += '<span onclick="eXo.ecm.Pager.nextPage();" class="pg-normal"> Next &#187;</span>';            
-	    element.innerHTML = pagerHtml;
+		
+		
+		pagerHtml += '<li><a onclick="eXo.ecm.Pager.nextPage();" class="Next Page" rel="tooltip" data-placement="bottom" data-original-title="Next Page"><i class="uiIconNextArrow"></i></a></li>';		
+		pagerHtml += '</ul><p class="pull-right"><span>Total pages:</span> <span class="pagesTotalNumber">'+this.pages+'</span></p></div>';
+		
+			 
+		          
+	    gj(element).html(pagerHtml);
 	};
 	
 	EcmContentSelector.prototype.insertContent = function(objNode) {  
@@ -969,7 +1044,8 @@
 		var url = objNode.getAttribute("url");  
 		var nodeType	= objNode.getAttribute("nodeType");
 		var path = objNode.getAttribute("path");
-		var title = objNode.getAttribute("title");	
+		var title = objNode.getAttribute("title");
+		if (!title) title = objNode.getAttribute("data-original-title");
 		var linkTarget = objNode.getAttribute("linkTarget");
 		var selectedNodeList = gj(tblListFilesContent).find("a.Item");
 		for(var i = 0; i < selectedNodeList.length; i++) {
@@ -982,9 +1058,9 @@
 		var	clazzItem = objNode.className;
 		var newRow = tblListFilesContent.tBodies[0].insertRow(tblListFilesContent.children[0].children.length - 1);
 		newRow.className = "Item";
-		newRow.insertCell(0).innerHTML = '<a class="Item" url="'+url+'" linkTarget ="' + linkTarget +'" path="'+path+'" nodeType="'+nodeType+' style = "overflow:hidden" title="'+decodeURIComponent(title)+'">'+eXo.ecm.ECS.safe_tags_regex(title)+'</a>';
+		gj(newRow.insertCell(0)).html('<a class="Item" url="'+url+'" linkTarget ="' + linkTarget +'" path="'+path+'" nodeType="'+nodeType+' style = "overflow:hidden" rel="tooltip" data-placement="bottom" title="'+decodeURIComponent(title)+'">'+eXo.ecm.ECS.safe_tags_regex(title)+'</a>');
 		var actionCell = newRow.insertCell(1);
-		actionCell.innerHTML = '<a class="actionIcon" onclick="eXo.ecm.ECS.removeContent(this);"><i class="uiIconDelete uiIconLightGray""></i></a>';
+		gj(actionCell).html('<a class="actionIcon" onclick="eXo.ecm.ECS.removeContent(this);"><i class="uiIconDelete uiIconLightGray""></i></a>');
 		actionCell.className = "center";
 		this.insertMultiContent("SaveTemporary", path);	
 	};
@@ -1008,9 +1084,9 @@
 				var newRow = tblListFilesContent.tBodies[0].insertRow(tblListFilesContent.children[0].children.length - 1);
 				var strTmpArr = arrContent[i].split('/');
 				var nodeName = strTmpArr[strTmpArr.length-1];
-				newRow.insertCell(0).innerHTML = '<a class="Item" linkTarget ="'+ target+ '" path="'+path+'">'+eXo.ecm.ECS.safe_tags_regex(decodeURIComponent(nodeName))+'</a>';
+				gj(newRow.insertCell(0)).html('<a class="Item" linkTarget ="'+ target+ '" path="'+path+'">'+eXo.ecm.ECS.safe_tags_regex(decodeURIComponent(nodeName))+'</a>');
 				var actionCell = newRow.insertCell(1);
-				actionCell.innerHTML = '<a class="actionIcon" onclick="eXo.ecm.ECS.removeContent(this);"><i class="uiIconDelete uiIconLightGray""></i></a>';
+				gj(actionCell).html('<a class="actionIcon" onclick="eXo.ecm.ECS.removeContent(this);"><i class="uiIconDelete uiIconLightGray""></i></a>');
 				actionCell.className = "center";
 			}
 		}
@@ -1039,8 +1115,8 @@
 				}
 			} 
 		} else {
-			var container = gj(rightWS).find('div.ActionIconsContainer:first')[0];
-				container.innerHTML = "";
+			var container = gj(rightWS).find('div.actionIconsContainer:first')[0];
+				gj(container).html("");
 		}
 		
 		
@@ -1050,7 +1126,7 @@
 	EcmContentSelector.prototype.changeViewType = function(viewType) {  
 	  eXo.ecm.ECS.viewType = viewType;  
 	  var view = document.getElementById("view");
-		view.innerHTML = "";  
+		gj(view).html("");  
 	  if(viewType=="list") {
 		  gj("#enableListViewBtn").attr('class', 'btn active'); gj('#enableThumbnailViewBtn').attr('class', 'btn');
 	  }
@@ -1069,13 +1145,13 @@
 				strViewPresent += "<th class=\"span1\" userLanguage=\"UserLanguage.FileSize\"> Size </th></tr></thead>";
 				strViewPresent += "<tr><td class=\"center empty\" colspan=\"3\" userLanguage=\"UserLanguage.NoContent\">There is no content</td></tr></table></div>";
 			} else {
-				strViewPresent = "<div class=\"uiThumbnailsView\" style=\"overflow-y: auto; overflow-x: hidden;\"><div class=\"ActionIconsContainer\" id=\"ActionIconsContainer\"><div class=\"NoContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div></div></div>";
+				strViewPresent = "<div class=\"uiThumbnailsView\" style=\"overflow-y: auto; overflow-x: hidden;\"><div class=\"actionIconsContainer\" id=\"ActionIconsContainer\"><div class=\"NoContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div></div></div>";
 			}
 			var rightWS = document.getElementById('RightWorkspace');  
 			if(rightWS) {
-				rightWS.innerHTML = "";
+				gj(rightWS).html("");
 				strViewPresent += "<div class=\"PageIterator\" id=\"pageNavPosition\"></div><div style=\"clear: left;\"><span></span></div>";
-				rightWS.innerHTML = strViewPresent;
+				gj(rightWS).html(strViewPresent);
 			}
 		}
 	  eXo.ecm.ECS.switchView = false;
@@ -1116,8 +1192,8 @@
 		var rightWS = document.getElementById('RightWorkspace'); 
 		var windowHeight = gj(window).height();
 		var root = gj(leftWS).parents(".UIHomePageDT:first")[0];
-		var titleBar = gj(root).find("div.TitleBar:first")[0];
-		var uiWorkingWorkspace = gj(root).find("div.UIWorkingWorkspace:first")[0];
+		var titleBar = gj(root).find("h6.TitleBar:first")[0];
+		var uiWorkingWorkspace = gj(root).find("div.uiWorkingWorkspace:first")[0];
 		var actionBar = gj(uiWorkingWorkspace).find("div.actionBar:first")[0];
 		var actionBaroffsetHeight = 0;
 		if(actionBar)
@@ -1156,7 +1232,7 @@
 					var userLanguage = eval(aElements[i].getAttribute("userLanguage"));
 					if (userLanguage) {
 						var textNode = document.createTextNode(userLanguage);
-						aElements[i].innerHTML = "";
+						gj(aElements[i]).html("");
 						aElements[i].appendChild(textNode);
 					}
 				}
@@ -1259,3 +1335,6 @@
 		ECS : eXo.ecm.ECS
 	};
 })(gj, wcm_utils);
+
+
+

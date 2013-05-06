@@ -20,7 +20,7 @@
 	 		    <th class="center"> 
 	 		    	<%=_ctx.appRes("UIFCCActionList.header.action")%>
 	<% if (!"basic".equals(uicomponent.getMode())) { %>
- 		    		<img class="Add16x16Icon" src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UIFCCActionList.action.Add")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIFCCActionList.action.Add")%>" onclick="<%=uicomponent.event("Add")%>"/>
+ 		    		<a class="actionIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIFCCActionList.action.Add")%>" onclick="<%=uicomponent.event("Add")%>"><i class="uiIconAddPath uiIconLightGray" ></i></a>
   	<% } %>
 	 		    </th>
 	    	</tr>
@@ -29,22 +29,19 @@
       		<%
       			if(uiIterator.getAvailable() < 1) {
       				%>
-	    				<tr>
-	      					<td style="font-style:italic; color: #FF5604; text-align: center;" colspan="4">
+	    				<tr >
+	      					<td colspan="4" class="center empty">
 	        					<%=_ctx.appRes("UIFCCActionList.msg.empty")%>
 	      					</td>
 	    				</tr>  
 	  				<%
 	  			} else { 
-	        		def rowClass = "OddRow" ;
 			    	boolean even = true ;
 // if(uicomponent.hasActions()) {
 				    	for(action in uicomponent.getListActions()) {
-		      			if(even) rowClass = "EvenRow" ;  
-		      			else rowClass =  "OddRow" ; 
 			      		even = !even ;
 	  					%>
-		      				<tr class="$rowClass">
+		      				<tr >
 	    	    				<td>
 	        	  					<div class="text">
 	          							<%
@@ -70,7 +67,7 @@
 			        					<%
 			          						for(act in uicomponent.getActions()) { 
 			        							%>
-	            									<img class="${act}16x16Icon" src="/eXoResources/skin/sharedImages/Blank.gif" alt="<%=_ctx.appRes("UIFCCActionList.action." + act)%>" onclick="<%=uicomponent.event(act, action.getName())%>" rel="tooltip" data-placement="bottom"  title="$act"/>
+	            									<a class="actionIcon" onclick="<%=uicomponent.event(act, action.getName())%>" rel="tooltip" data-placement="bottom"  title="$act"><i class="uiIcon${act}" ></i></a>
 	            								<%
 	            							} 
 	            						%>
@@ -89,8 +86,8 @@
 		} 
 	%>
 	<% if (!"basic".equals(uicomponent.getMode())) { %>
-  	<div class="UIAction"> 
-		<a href="javascript:void(0);" onclick="<%=uicomponent.event("Add")%>" class="ActionButton LightBlueStyle"><%=_ctx.appRes("UIFCCActionList.action.Add")%></a>
+  	<div class="uiAction"> 
+		<button onclick="<%=uicomponent.event("Add")%>" class="btn"><%=_ctx.appRes("UIFCCActionList.action.Add")%></button>
   	</div>
   	<% } %>
 </div>

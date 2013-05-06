@@ -20,7 +20,9 @@ import javax.jcr.Node;
 import javax.jcr.Property;
 
 import org.apache.commons.chain.Context;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.command.action.Action;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 
 /**
  * Created by The eXo Platform SARL
@@ -47,6 +49,12 @@ public class AddNodeNameAction implements Action {
 
    if (!node.hasProperty("exo:name")) {
        node.setProperty("exo:name", node.getName());
+   }
+   
+   if(node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
+  	 if (!node.hasProperty("exo:title")) {
+       node.setProperty("exo:title", Utils.getTitle(node));
+     }
    }
 
    return false;

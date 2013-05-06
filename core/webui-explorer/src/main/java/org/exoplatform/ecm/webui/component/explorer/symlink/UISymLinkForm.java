@@ -145,6 +145,7 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
       UIJCRExplorer uiExplorer = uiSymLinkForm.getAncestorOfType(UIJCRExplorer.class);
       UIApplication uiApp = uiSymLinkForm.getAncestorOfType(UIApplication.class);
       String symLinkName = "";
+      String symLinkTitle = "";
       if (!uiSymLinkForm.localizationMode) symLinkName = uiSymLinkForm.getUIStringInput(FIELD_NAME).getValue();
 
       String pathNode = "";
@@ -161,7 +162,8 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
       if(uiExplorer.nodeIsLocked(node)) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", null)) ;
         return ;
-      }
+      } 
+      symLinkTitle = symLinkName;
       symLinkName = org.exoplatform.services.cms.impl.Utils.cleanString(symLinkName);
       
       if(!uiSymLinkForm.localizationMode && (symLinkName == null || symLinkName.length() ==0)) {
@@ -218,7 +220,7 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
           langService.addSynchronizedLinkedLanguage(node, targetNode);
         } else {
           LinkManager linkManager = uiSymLinkForm.getApplicationComponent(LinkManager.class);
-          linkManager.createLink(node, Utils.EXO_SYMLINK, targetNode, symLinkName);
+          linkManager.createLink(node, Utils.EXO_SYMLINK, targetNode, symLinkName, symLinkTitle);
         }
         uiExplorer.updateAjax(event);
       } catch (AccessControlException ace) {

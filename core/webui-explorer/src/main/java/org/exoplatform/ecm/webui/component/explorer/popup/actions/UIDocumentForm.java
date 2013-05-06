@@ -59,8 +59,10 @@ import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -433,6 +435,14 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       String addedPath = cmsService.storeNode(nodeType, homeNode, inputProperties, documentForm.isAddNew());
       try {
         newNode = (Node)homeNode.getSession().getItem(addedPath);
+        //Broadcast the add file activity
+        ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
+        ActivityCommonService   activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+        if (activityService.isBroadcastNTFileEvents(newNode)) {
+          listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, newNode);
+          newNode.getSession().save();
+        }  
+       
         if(newNode.isLocked()) {
           newNode.getSession().addLockToken(LockUtil.getLockToken(newNode));
         }

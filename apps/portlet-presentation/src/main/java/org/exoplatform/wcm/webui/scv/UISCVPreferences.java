@@ -183,10 +183,9 @@ public class UISCVPreferences extends UIFormTabPane implements UISelectable{
     cacheOptionsRadioInputBox.setValue(isCacheEnabled ? ENABLE_STRING : DISABLE_STRING);
     
     UIFormInputSetWithAction advancedInputSet = new UIFormInputSetWithAction(ADVANCED_FORM_INPUT_SET);
-    advancedInputSet.addChild(txtParameterName);
     advancedInputSet.addChild(cacheOptionsRadioInputBox);
-    advancedInputSet.addChild(contextOptionsRadioInputBox);
     advancedInputSet.addChild(txtParameterName);
+    advancedInputSet.addChild(contextOptionsRadioInputBox);
 
     /** PRINT PAGE */
     String strPrintParameterName = portletPreferences.getValue(UISingleContentViewerPortlet.PRINT_PARAMETER, null);

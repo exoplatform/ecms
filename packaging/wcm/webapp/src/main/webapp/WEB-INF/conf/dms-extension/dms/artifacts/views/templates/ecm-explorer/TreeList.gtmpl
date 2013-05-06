@@ -8,26 +8,15 @@
    */
 %>
 <%
-  import java.util.ArrayList;
-	import java.net.URLEncoder;
   import org.exoplatform.ecm.webui.utils.Utils ;
   import org.exoplatform.web.application.Parameter ;
   import org.exoplatform.webui.core.UIRightClickPopupMenu ;
   import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
   import org.exoplatform.ecm.webui.component.explorer.UIDocumentNodeList;
-  import org.exoplatform.ecm.utils.text.Text;
   import org.exoplatform.services.cms.link.LinkManager;
-  import org.exoplatform.ecm.webui.component.explorer.DocumentProviderUtils;
-  import org.exoplatform.ecm.jcr.model.Preference;
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
   import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
-  import javax.jcr.Value;
-  import javax.jcr.PathNotFoundException;
   import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-  import org.exoplatform.services.jcr.RepositoryService;
-  import org.exoplatform.services.wcm.core.NodetypeConstant;
-  import java.net.URLEncoder;
-  import org.exoplatform.services.wcm.core.NodeLocation;
   import org.apache.commons.lang.StringUtils;
   import org.exoplatform.services.cms.link.NodeFinder;
   
@@ -54,9 +43,8 @@
             require("SHARED/uiFileView", "uiFileView").
             require("SHARED/multiUpload", "multiUpload").
   addScripts("uiFileView.UIFileView.initStickBreadcrumb();").
-  addScripts("ecmutil.ECMUtils.initClipboard('clip_button','1','$size');").
 	addScripts('uiListView.UIListView.loadEffectedWidthColumn();').
-	addScripts('uiFileView.UIFileView.clearItemsSelected();').
+	addScripts('uiFileView.UIFileView.clearCheckboxes();').
   addScripts('uiFileView.UIFileView.clearOpenDivs();');
   
   

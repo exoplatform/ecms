@@ -22,8 +22,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 
@@ -63,6 +65,7 @@ import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.relations.RelationsService;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
+import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -216,6 +219,32 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
           if (activityService.isBroadcastNTFileEvents(node)) {
             listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, parent, node);
           }
+        } else if(!isDocumentNodeType(node)){
+        	Queue<Node> queue = new LinkedList<Node>();
+          queue.add(node);
+          
+          //Broadcast event to remove file activities
+          Node tempNode = null;
+          try {
+          	while (!queue.isEmpty()) {
+          		tempNode = queue.poll();
+          		if (isDocumentNodeType(tempNode) || tempNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
+          			listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, tempNode.getParent(), tempNode);
+          		} else {
+	            	for (NodeIterator iter = tempNode.getNodes(); iter.hasNext(); ) {
+	            		Node childNode = iter.nextNode();
+	            		if(isDocumentNodeType(childNode) || childNode.isNodeType(NodetypeConstant.NT_UNSTRUCTURED) || childNode.isNodeType(NodetypeConstant.NT_FOLDER))
+	                  queue.add(childNode);
+	              }
+          		}
+          	}
+          } catch (Exception e) {
+            if (LOG.isWarnEnabled()) {
+              LOG.warn(e.getMessage());
+            }
+          }
+          
+          
         }
       }
   }
@@ -470,7 +499,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         Node node = this.getNodeByPath(nodePath);
         if(checkToMoveToTrash) deleteNotice = "UIWorkingArea.msg.feedback-delete";
         else deleteNotice = "UIWorkingArea.msg.feedback-delete-permanently";
-        deleteNoticeParam = node.getName();
+        deleteNoticeParam = Utils.getTitle(node);
         if (node != null) {
           processRemoveOrMoveToTrash(node.getPath(), node, event, false, checkToMoveToTrash);
         }        
@@ -562,6 +591,13 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     }
     return false;
   }
+  
+  private boolean isDocumentNodeType(Node node) throws Exception {
+  	boolean isDocument = true;
+    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
+    isDocument = templateService.getAllDocumentNodeTypes().contains(node.getPrimaryNodeType().getName()); 
+    return isDocument;
+  }
   /**
    * Get the content type of one node
    *
@@ -642,7 +678,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     } else {    	
     	Node node = deleteManageComponent.getNodeByPath(nodePath);
       if(node != null)
-      	nodeName = node.getName();
+      	nodeName = Utils.getTitle(node);
       contentType = deleteManageComponent.getContentType(nodePath);
     	if(contentType == FILE_TYPE)
     		uiConfirmMessage.setId(DELETE_FILE_CONFIRM_TITLE);

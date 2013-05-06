@@ -143,7 +143,7 @@
   <UIPermissionTreeForm>
     <title>Add a permission to that node</title>
     <label>
-      <userOrGroup>User or Group</userOrGroup>
+      <userOrGroup>User Or Group</userOrGroup>
       <read>Read Right</read>
       <add_node>Add Node Right</add_node>
       <set_property>Set Property Right</set_property>
@@ -259,6 +259,7 @@
     <msg>
       <confirm-delete>Are you sure you want to delete this metadata?</confirm-delete>
       <delete-successful>The templates of '{0}' were deleted successfully.</delete-successful>
+      <path-not-found-exception>This metadata was deleted or changed. Please click the Refresh button.</path-not-found-exception>
     </msg>
     <action>
       <Add>Add Metadata</Add>
@@ -1029,6 +1030,11 @@
   ######################################################################################
   -->
   <UIViewList>
+   <title>
+     <View>View</View>
+     <EditInfo>Edit</EditInfo>
+     <Delete>Delete</Delete>
+   </title>
     <header>
       <name>Name</name>
       <permissions>Permissions</permissions>
@@ -1095,7 +1101,7 @@
 		<UIViewPermissionList>
 			 <header>
 						<friendlyPermission>Permissions</friendlyPermission>
-			 	 <action>Actions</action>
+			 	    <action>Action</action>
 			 </header>
 				<action>
 					 <title>
@@ -1265,6 +1271,11 @@
   ######################################################################################
   -->
   <UIECMTemplateList>
+    <title>
+      <View>View</View>
+      <EditInfo>Edit</EditInfo>
+      <Delete>Delete</Delete>
+    </title>
     <header>
       <name>Name</name>
       <path>Value</path>
@@ -2439,7 +2450,7 @@
         <email>#{word.email}</email>
       </option>
       <group>Group</group>
-      <searchUser>#{word.searchUser}</searchUser>
+      <searchUser>User</searchUser>
       <userName>#{word.userName}</userName>
       <lastName>#{word.lastName}</lastName>
       <firstName>#{word.firstName}</firstName>

@@ -71,7 +71,7 @@ public class QueryResultPageList<E> extends AbstractPageList<E> {
     this.filter = filter;
     this.searchDataCreator = creator;
     this.setAvailablePage(total);
-    removeRedundantPages(bufferSize_ / pageSize);
+    removeRedundantPages(Math.min(bufferSize_ / pageSize, 5));
     dataSet = new HashSet<E>();
   }
   

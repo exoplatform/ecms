@@ -7,13 +7,14 @@
 		<meta http-equiv="pragma" content="no-cache"/>
 		<meta http-equiv="eXpires" content="0"/>
 
-		<link type="text/css" rel="stylesheet" href="../../../eXoResources/skin/css/Core.css"/>
 		<link type="text/css" rel="stylesheet" href="../../../eXoResources/skin/bootstrap/css/bootstrap.css"/>
+		<link type="text/css" rel="stylesheet" href="../../../eXoResources/skin/css/Core.css"/>
 		<link type="text/css" rel="stylesheet" href="../../../eXoWCMResources/skin/css/ecms-resources-wcmskin.css"/>
 		<link type="text/css" rel="stylesheet" href="../../../ecmexplorer/skin/css/ecms-explorer.css"/>
 		<link type="text/css" rel="stylesheet" href="css/content.css"/>
 		<script type="text/javascript" src="../../../eXoResources/javascript/jquery-1.7.1.js"></script>
 		<script type="text/javascript" src="../../../eXoResources/javascript/eXo/core/require.js"></script>
+		<script type="text/javascript" src="../../../eXoResources/skin/bootstrap/js/bootstrap-tooltip.js"></script>
 		<script type="text/javascript" src="../../../eXoResources/javascript/eXo.js"></script>
 		<script type="text/javascript">
 			var CKEDITOR = window.opener.CKEDITOR || {};
@@ -37,7 +38,7 @@
 										strHTML += "</select></div><a class=\"actionIcon pull-left\" id=\"UploadItem\" style=\"display:none;\" href=\"javascript:void(0);\" onclick=\"eXo.ecm.UploadForm.showUploadForm();\" > <i class=\"uiIconUpload\"></i>  Upload </a>"; <!--userLanguage=\"UserLanguage.UploadFile\" -->
 										strHTML += "<div class=\"btn-group pull-right\"><button id=\"enableThumbnailViewBtn\" onclick=\"eXo.ecm.ECS.changeViewType('thumbnail');gj(this).attr('class', 'btn active'); gj('#enableListViewBtn').attr('class', 'btn');\" data-placement=\"bottom\" rel=\"tooltip\" class=\"btn\" type=\"button\" title=\"Thumbnail View\"><i class=\"uiIconEcmsViewIcons\"></i></button><button id=\"enableListViewBtn\" onclick=\"eXo.ecm.ECS.changeViewType('list');gj('#enableThumbnailViewBtn').attr('class', 'btn');gj(this).attr('class', 'btn active');\" data-placement=\"bottom\" rel=\"tooltip\" class=\"btn active\" type=\"button\" title=\"List View\"><i class=\"uiIconEcmsViewList\"></i></button></div>";
 									}
-									document.getElementById("filterAreaID").innerHTML = strHTML;
+									gj("#filterAreaID").html(strHTML);
 
 									if(eXo.ecm.ECS.viewType=="list") {
 										strView = "<div id=\"view\" class=\"ViewType\"><input type=\"hidden\" id=\"viewTypeID\" value=\"list\"><div style=\"clear:both\"></div></div>";
@@ -48,15 +49,15 @@
 										strViewPresent += "<tr><td class=\"center empty\" colspan=\"3\" userLanguage=\"UserLanguage.NoContent\">There is no content</td></tr></table></div>";
 									} else {
 										strView = "<div id=\"view\" class=\"viewType\"><a class=\"thumbnail-view-selected\" title=\"Thumbnail View\"><span></span></a><a onClick=\"eXo.ecm.ECS.changeViewType('list');\" class=\"list-view\" title=\"List View\"><span></span></a><input type=\"hidden\" id=\"viewTypeID\" value=\"thumbnail\"><div style=\"clear:both\"></div></div>";
-										strViewPresent = "<div class=\"UIThumbnailsView\" ><div class=\"actionIconsContainer\" id=\"ActionIconsContainer\"><div class=\"noContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div></div></div>";
+										strViewPresent = "<div class=\"uiThumbnailsView\" ><div class=\"actionIconsContainer\" id=\"ActionIconsContainer\"><div class=\"noContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div></div></div>";
 									}
-									document.getElementById("viewTypeAreaID").innerHTML = strView;
-									document.getElementById("viewPresentAreaID").innerHTML = strViewPresent;
+									gj("#viewTypeAreaID").html(strView);
+									gj("#viewPresentAreaID").html(strViewPresent);
 
 									require(["lang/" + eXp.userLanguage + ".js"], function() {
 										eXo.ecm.ECS.initRequestXmlTree('editor');
 										eXo.ecm.ECS.languageInit();
-										eXo.ecm.ECS.fixHeightTrees();
+										//eXo.ecm.ECS.fixHeightTrees();
 									});
 								});
 							});
@@ -71,131 +72,30 @@
 		<script type="text/javascript" src="js/UploadForm.js"></script>
 </head>
 <body>
-	<div class="uiHomePagePortlet">
+	<div class="uiHomePagePortlet uiHomeContentSelector">
 		<div class="UIHomePageDT uiBox" >
 
-			<h6 class="title">
-				Content Selector
-			</h6>
+			<h6 class="title TitleBar">Content Selector</h6>
 			<div class="uiWorkingWorkspace uiWCMSearchContainer">
 				<div class="actionBar">
 					<div id="filterAreaID" class="uiGrayLightBox clearfix">
 					</div>
-					<!--
-					<div class="ControlButton InsertLinksIcon">
-						<a href="javascript: void(0);" class="InseartButton">Insert a links</a>
-					</div>
-					-->
-
-					<!-- ====================================== SETTING ============================================-->
-					<div class="SettingIcon" onmouseover="" style="position:relative;">
-						<a href="#" userLanguage="UserLanguage.SettingTitle" style="display:none;">Setting</a>
-						<div class="SettingContainer">
-				      <div style="display: none; position: absolute;" class="UIRightClickPopupMenu">
-				      	<div class="UIContextMenuContainer">
-					        <div class="TopLeftRightClickPopupMenu">
-					          <div class="TopRightRightClickPopupMenu">
-					            <div class="TopCenterRightClickPopupMenu"><span/></div>
-					          </div>
-					        </div>
-					        <div class="MiddleLeftRightClickPopupMenu">
-					          <div class="MiddleRightRightClickPopupMenu">
-					            <div class="UIRightPopupMenuContainer">
-					              <div class="MenuItem" style="white-space:nowrap;" onmouseover="eXo.ecm.PluginUtils.showSubMenuSettings(this);">
-					                <a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.SetView">View</a>
-				                	<div class="ChildrenContainer" style="position: relative;">
-														<div style="display: none; position: absolute;" class="UIRightClickPopupMenu">
-															<div class="UIContextMenuContainer">
-																<div class="TopLeftRightClickPopupMenu">
-																	<div class="TopRightRightClickPopupMenu">
-																		<div class="TopCenterRightClickPopupMenu"><span/></div>
-																	</div>
-																</div>
-																<div class="MiddleLeftRightClickPopupMenu">
-																	<div class="MiddleRightRightClickPopupMenu">
-																		<div class="UIRightPopupMenuContainer">
-																			<div class="MenuItem" style="white-space:nowrap;">
-																				<a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.ViewList">List</a>
-																			</div>
-																			<div class="MenuItem">
-																				<a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.ViewThumbnail">Thumbnails</a>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-																<div class="BottomLeftRightClickPopupMenu">
-																<div class="BottomRightRightClickPopupMenu">
-																	<div class="BottomCenterRightClickPopupMenu"><span/></div>
-																</div>
-															</div>
-															</div>
-														</div>
-													</div>
-					              </div>
-					              <div class="MenuItem">
-					                <a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.SetSort">Sort</a>
-					                	<div class="ChildrenContainer" style="position: relative;">
-															<div style="display: none; position: absolute;" class="UIRightClickPopupMenu">
-																<div class="UIContextMenuContainer">
-																	<div class="TopLeftRightClickPopupMenu">
-																		<div class="TopRightRightClickPopupMenu">
-																			<div class="TopCenterRightClickPopupMenu"><span/></div>
-																		</div>
-																	</div>
-																	<div class="MiddleLeftRightClickPopupMenu">
-																		<div class="MiddleRightRightClickPopupMenu">
-																			<div class="UIRightPopupMenuContainer">
-																				<div class="MenuItem" style="white-space:nowrap;">
-																					<a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.SortName">By Name</a>
-																				</div>
-																				<div class="MenuItem">
-																					<a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.SortDate">By Date</a>
-																				</div>
-																				<div class="MenuItem">
-																					<a href="#" class="DefaultPageIcon ItemIcon MarkReadIcon" userLanguage="UserLanguage.SortSize">By Size</a>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																	<div class="BottomLeftRightClickPopupMenu">
-																	<div class="BottomRightRightClickPopupMenu">
-																		<div class="BottomCenterRightClickPopupMenu"><span/></div>
-																	</div>
-																</div>
-																</div>
-															</div>
-														</div>
-					              </div>
-					            </div>
-					          </div>
-					        </div>
-					        <div class="BottomLeftRightClickPopupMenu">
-				          <div class="BottomRightRightClickPopupMenu">
-				            <div class="BottomCenterRightClickPopupMenu"><span/></div>
-				          </div>
-				        </div>
-				        </div>
-				      </div>
-				    </div>
-					</div>
-					<div class="SeparatorLineR"><span></span></div>
 					<div id="viewTypeAreaID"></div>
 				</div>
 				<div class="breadcumbsPortlet ">
-					<div class=""><i class="uiIconHome uiIconLightGray"></i></div>
-					<div class="BreadcumbsContainer" id="BreadcumbsContainer">
-					</div>
+					<ul class="breadcrumb clearfix" id="BreadcumbsContainer">
+						<li><i class="uiIconHome uiIconLightGray"></i></li>
+					</ul>
 				</div>
-				<div class="listContainer">
+				<div class="listContainer clearfix">
 					<div class="leftWorkspace uiTreeExplorer" id="LeftWorkspace">
 
 					</div>
 					<div class="rightWorkspace" id="RightWorkspace">
 						<div id = "viewPresentAreaID"></div>
-						<div class="PageIterator" id="pageNavPosition"></div>
-					<div style="clear: left;"><span></span></div>
+						<div class="pageIterator" id="pageNavPosition"></div>
+					</div>
 				</div>
-			</div>
 		</div>
 	</div>
 

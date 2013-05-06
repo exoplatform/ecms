@@ -630,9 +630,12 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
   public String getWebDAVServerPrefix() throws Exception {
     PortletRequestContext portletRequestContext = PortletRequestContext.getCurrentInstance() ;
-    String prefixWebDAV = portletRequestContext.getRequest().getScheme() + "://" +
-    portletRequestContext.getRequest().getServerName() + ":" +
-    String.format("%s",portletRequestContext.getRequest().getServerPort()) ;
+    String prefixWebDAV = portletRequestContext.getRequest().getScheme() + "://" 
+            + portletRequestContext.getRequest().getServerName() ;
+    int serverPort = portletRequestContext.getRequest().getServerPort();
+    if (serverPort!=80) {
+      prefixWebDAV += ":" + String.format("%s",serverPort);
+    }
     return prefixWebDAV ;
   }
 

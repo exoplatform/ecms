@@ -1150,27 +1150,6 @@
 	margin: 10px auto;
 }
 
-/*================================UINodeTypeSelectForm=================================*/
-
-.UIJCRExplorerPortlet .UISearchContainer .UINodeTypeSelectForm {
-	margin: 10px;
-	border: 1px solid #AEAEAE;
-	background: #F7F7F7;
-	padding: 10px;
-}
-
-.UIJCRExplorerPortlet .UISearchContainer .UISelectPropertyForm {
-	padding: 10px;
-	margin: 10px;
-	border: 1px solid #AEAEAE;
-	background: #F7F7F7;
-	padding: 10px;
-}
-
-.UIJCRExplorerPortlet .UISearchContainer .UISelectPropertyForm td.FieldLabel {
-  text-transform: capitalize;
-}
-
 /*================================UIPropertyForm=================================*/
 
 .UIJCRExplorerPortlet .UIPropertyForm .HorizontalLayout .UIFormGrid {

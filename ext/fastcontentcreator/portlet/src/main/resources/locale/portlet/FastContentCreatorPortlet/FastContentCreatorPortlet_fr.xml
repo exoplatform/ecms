@@ -129,8 +129,8 @@
       <unable-add-action>Impossible d'ajouter cette action</unable-add-action>
       <unable-add>Impossible d'ajouter cette action! Ce nœud est la racine ou vous n'avez pas assez de permission</unable-add>
       <not-support>La boîte de dialogue '{0}' n'est pas supporté</not-support>
-      <no-permission-add>Accès refusé! Vous n'avez pas le droit d'ajouter des mesures ici</no-permission-add>
-      <access-denied>Accès refusé! Vous n'avez pas la permission d'accéder à ce modèle.</access-denied>
+      <no-permission-add>Accès refusé. Vous n'avez pas le droit d'ajouter des une action ici.</no-permission-add>
+      <access-denied>Accès refusé. Vous n'avez pas la permission d'accéder à ce modèle.</access-denied>
     </msg>
     <validator>
       <validator>Validateur</validator>

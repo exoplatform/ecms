@@ -45,7 +45,9 @@ public class UIFCCPortlet extends UIPortletApplication {
    *
    * @throws Exception the exception
    */
-  public UIFCCPortlet() throws Exception {}
+  public UIFCCPortlet() throws Exception {
+    addChild(UIPopupContainer.class, null, null);
+  }
 
   /*
    * (non-Javadoc)
@@ -60,7 +62,6 @@ public class UIFCCPortlet extends UIPortletApplication {
     context.getJavascriptManager().require("SHARED/ecm-utils", "ecmutil").
             addScripts("ecmutil.ECMUtils.init('UIFastContentCreatorPortlet');");
     PortletRequestContext portletRequestContext = (PortletRequestContext) context;
-    addChild(UIPopupContainer.class, null, null);
     if (portletRequestContext.getApplicationMode() == PortletMode.VIEW) {
       if (getChild(UIFCCConfig.class) != null) {
         removeChild(UIFCCConfig.class);

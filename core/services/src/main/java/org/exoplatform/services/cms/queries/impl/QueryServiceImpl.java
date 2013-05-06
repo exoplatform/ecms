@@ -16,24 +16,6 @@
  */
 package org.exoplatform.services.cms.queries.impl;
 
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.Session;
-import javax.jcr.Value;
-import javax.jcr.ValueFactory;
-import javax.jcr.query.Query;
-import javax.jcr.query.QueryManager;
-import javax.jcr.query.QueryResult;
-
 import org.exoplatform.commons.utils.ISO8601;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.PortalContainerInfo;
@@ -53,8 +35,15 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.MembershipHandler;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
+
+import javax.jcr.*;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import javax.jcr.query.QueryResult;
+import java.util.*;
 
 public class QueryServiceImpl implements QueryService, Startable{
   private static final String[] perms = {PermissionType.READ, PermissionType.ADD_NODE,
@@ -482,7 +471,6 @@ public class QueryServiceImpl implements QueryService, Startable{
    * useful when querying for documents made by the current user, or documents
    * in publication state.
    *
-   * @param session reference to the JCR Session
    * @return the processed String, with replaced tokens
    */
   private String computeStatement(String statement, String userId) {
@@ -579,7 +567,7 @@ public class QueryServiceImpl implements QueryService, Startable{
    * @return
    */
   private boolean hasMembership(String userId, String roleExpression) {
-    if("*".equals(roleExpression))
+    if(roleExpression.equals("*") || roleExpression.equals(IdentityConstants.ANY))
       return true;
     String membershipType = roleExpression.substring(0, roleExpression.indexOf(":"));
     String groupName = roleExpression.substring(roleExpression.indexOf(":") + 1);

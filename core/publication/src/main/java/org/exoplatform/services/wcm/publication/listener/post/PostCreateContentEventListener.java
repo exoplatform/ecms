@@ -86,6 +86,53 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
       listenerService = WCMCoreUtils.getService(ListenerService.class);
     }
     Node currentNode = event.getData();
+    //add mixin exo:webContentChild for default.html/jcr:content of webContent
+    try {
+      if (currentNode.canAddMixin(NodetypeConstant.EXO_WEBCONTENT_CHILD) && 
+          currentNode.isNodeType(NodetypeConstant.NT_RESOURCE) &&
+          currentNode.getParent().isNodeType(NodetypeConstant.NT_FILE) && 
+          "default.html".equals(currentNode.getParent().getName()) &&
+          currentNode.getParent().getParent().isNodeType(NodetypeConstant.EXO_WEBCONTENT)) {
+        currentNode.addMixin(NodetypeConstant.EXO_WEBCONTENT_CHILD);
+      }
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Error, can not add mixin '" + NodetypeConstant.EXO_WEBCONTENT_CHILD + "' to node: " + currentNode.getPath());
+      }
+    }
+    //add mixin exo:webContentChild for css/default.css/jcr:content of webContent
+    try {
+      if (currentNode.canAddMixin(NodetypeConstant.EXO_WEBCONTENT_CHILD) && 
+          currentNode.isNodeType(NodetypeConstant.NT_RESOURCE) &&
+          currentNode.getParent().isNodeType(NodetypeConstant.NT_FILE) && 
+          "default.css".equals(currentNode.getParent().getName()) &&
+          currentNode.getParent().getParent().isNodeType(NodetypeConstant.EXO_CSS_FOLDER) &&
+          "css".equals(currentNode.getParent().getParent().getName()) &&
+          currentNode.getParent().getParent().getParent().isNodeType(NodetypeConstant.EXO_WEBCONTENT)) {
+        currentNode.addMixin(NodetypeConstant.EXO_WEBCONTENT_CHILD);
+      }
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Error, can not add mixin '" + NodetypeConstant.EXO_WEBCONTENT_CHILD + "' to node: " + currentNode.getPath());
+      }
+    }
+    //add mixin exo:webContentChild for js/default.js/jcr:content of webContent
+    try {
+      if (currentNode.canAddMixin(NodetypeConstant.EXO_WEBCONTENT_CHILD) && 
+          currentNode.isNodeType(NodetypeConstant.NT_RESOURCE) &&
+          currentNode.getParent().isNodeType(NodetypeConstant.NT_FILE) && 
+          "default.js".equals(currentNode.getParent().getName()) &&
+          currentNode.getParent().getParent().isNodeType(NodetypeConstant.EXO_JS_FOLDER) &&
+          "js".equals(currentNode.getParent().getParent().getName()) &&
+          currentNode.getParent().getParent().getParent().isNodeType(NodetypeConstant.EXO_WEBCONTENT)) {
+        currentNode.addMixin(NodetypeConstant.EXO_WEBCONTENT_CHILD);
+      }
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Error, can not add mixin '" + NodetypeConstant.EXO_WEBCONTENT_CHILD + "' to node: " + currentNode.getPath());
+      }
+    }
+    //---------------------------------------------------------------------------------------------------------------------------
     if(currentNode.canAddMixin("exo:rss-enable")) {
       currentNode.addMixin("exo:rss-enable");
     }
@@ -129,11 +176,10 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
     if (LOG.isInfoEnabled()) LOG.info(currentNode.getPath() + "::" + siteName + "::"+remoteUser);
     if (remoteUser != null) { 
       publicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser);
-    //Broadcast event to activity only for this condition
+      //Broadcast event to activity only for this condition
       if (activityService.isAcceptedNode(currentNode)) {
         listenerService.broadcast(ActivityCommonService.NODE_CREATED_ACTIVITY, null, currentNode);
-      } else if(currentNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE))
-      	listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, currentNode);
+      } 
     }
   }
 }

@@ -664,30 +664,32 @@ public class SiteSearchServiceImpl implements SiteSearchService {
       (contentTypes != null && contentTypes.length > 0) ? Arrays.asList(contentTypes) :
                                                           templateService.getDocumentTemplates();
     queryBuilder.openGroup(LOGICAL.AND);
-    queryBuilder.equal("jcr:primaryType", "nt:resource", LOGICAL.NULL);
+    if (selectedNodeTypes.contains("nt:file")) {
+      queryBuilder.equal("jcr:primaryType", "nt:resource", LOGICAL.NULL);
+    } else {
+      //searching only document, not file. In this case, search nt:resource with exo:webContentChild mixin
+      queryBuilder.openGroup(null);
+      queryBuilder.equal(NodetypeConstant.JCR_PRIMARY_TYPE, NodetypeConstant.NT_RESOURCE, LOGICAL.NULL);
+      queryBuilder.equal(NodetypeConstant.JCR_MIXIN_TYPES, NodetypeConstant.EXO_WEBCONTENT_CHILD, LOGICAL.AND);
+      queryBuilder.closeGroup();
+    }
     // query on exo:rss-enable nodetypes for title, summary field
     queryBuilder.equal("jcr:mixinTypes", "exo:rss-enable", LOGICAL.OR);
-    // query on metadata nodetype
-    List<String> publicatioTypes = new ArrayList<String>(4);
-    for (NodeTypeIterator iterator = manager.getAllNodeTypes(); iterator
-    .hasNext();) {
-      NodeType nodeType = iterator.nextNodeType();
-      if (nodeType.isNodeType("publication:webpagesPublication")) {
-        publicatioTypes.add(nodeType.getName());
-        continue;
-      }
-      if (!nodeType.isNodeType("exo:metadata"))
-        continue;
-      if (nodeType.isMixin()) {
-        queryBuilder.equal("jcr:mixinTypes", nodeType.getName(), LOGICAL.OR);
-      } else {
-        queryBuilder.equal("jcr:primaryType", nodeType.getName(), LOGICAL.OR);
-      }
-    }
     for (String type : selectedNodeTypes) {
       NodeType nodetype = manager.getNodeType(type);
       if (nodetype.isMixin()) {
-        queryBuilder.like("jcr:mixinTypes", type, LOGICAL.OR);
+        if (selectedNodeTypes.contains("nt:file") || 
+            !NodetypeConstant.EXO_CSS_FILE.equals(type) &&
+            !NodetypeConstant.EXO_JS_FILE.equals(type) &&
+            !NodetypeConstant.EXO_HTML_FILE.equals(type)) {
+          queryBuilder.like("jcr:mixinTypes", type, LOGICAL.OR);
+        } else {
+          //searching only document, not file. In this case, search nt:resource with exo:webContentChild mixin
+          queryBuilder.openGroup(LOGICAL.OR);
+          queryBuilder.equal(NodetypeConstant.JCR_MIXIN_TYPES, type, LOGICAL.NULL);
+          queryBuilder.equal(NodetypeConstant.JCR_MIXIN_TYPES, NodetypeConstant.EXO_WEBCONTENT_CHILD, LOGICAL.AND);
+          queryBuilder.closeGroup();
+        }
       } else {
         queryBuilder.equal("jcr:primaryType", type, LOGICAL.OR);
       }
@@ -762,17 +764,16 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     
     protected Node getNodeToCheckState(Node node)throws Exception{
       Node displayNode = node;
-      if (node.getPath().contains("web contents/site artifacts")) {
-        return null;
-      }
       if (displayNode.isNodeType("nt:resource")) {
         displayNode = node.getParent();
       }
+      //return exo:webContent when exo:htmlFile found
       if (displayNode.isNodeType("exo:htmlFile")) {
         Node parent = displayNode.getParent();
         if (parent.isNodeType("exo:webContent")) return parent;
         return displayNode;
       }
+      //
       String[] contentTypes = queryCriteria.getContentTypes();
       if(contentTypes != null && contentTypes.length>0) {
         String primaryNodeType = displayNode.getPrimaryNodeType().getName();

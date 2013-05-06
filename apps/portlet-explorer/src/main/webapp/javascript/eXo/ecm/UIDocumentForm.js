@@ -84,7 +84,7 @@
 			eXo.ecm.ECMUtils.editFullScreen = false;
 		}
 		
-		if (uiWorkingWorkspace.clientWidth != uiDocumentWorkspace.clientWidth) {
+		if (element.className == "uiIconEcmsCollapse uiIconEcmsLightGrey") {
 			if (changeTypeLink) {
 				changeTypeLink.style.display = "none";
 			}
@@ -181,13 +181,12 @@
 	      uiDocumentForm.elements[i].focus();
 	    } catch(err){}
 	  }, 200);
-	  
 	};
 	UIDocumentForm.prototype.initFullScreenStatus = function(elementId) {
 		var aElement = document.getElementById(elementId);
 		if (!aElement ) return;
 		if (eXo.ecm.ECMUtils.editFullScreen) {
-			this.FullScreenToggle(aElement);
+			this.FullScreenToggle(aElement.parentNode);
 		}
 	}
 	eXo.webui.UIDocForm = new UIDocumentForm();

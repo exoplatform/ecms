@@ -600,7 +600,7 @@
 			}
 			
 			textarea { 
-				font-size: 11px;
+				font-size: 13px;
 				height: 175px;
 				width: 90%;
 				vertical-align: top;
@@ -685,7 +685,7 @@
 		}
 		
 		.actionIcon {
-			margin: 0px 0px 0px 10px;
+			margin: 0px 0px 0px 10px !important;
 			cursor: pointer;
 		}
 	}
@@ -895,6 +895,8 @@
 		background: @tableBackgroundAccent;
 		padding: 5px 15px;
 		.border-radius(0px);
+		margin-bottom: 20px;
+    border: 1px solid #CFCFCF;
 	}
 }
 
@@ -959,11 +961,7 @@
 /******** UIPermissionManager **************/
 
 .uiPermissionForm {
-	h5 {
-		font-size: 13px;
-	}
 	.permission {
-		
 		.form-inline .checkbox {
 			margin-right: 15px;
 		}
@@ -976,9 +974,8 @@
 				margin: 0px;
 			}
 			
-			[class^="uiIcon"] {
-				margin-left: 13px;
-				cursor: pointer;
+			.actionIcon {
+				margin-left: 5px;
 			}
 			
 			.btn {
@@ -992,10 +989,6 @@
 .uiViewMetadataForm {
 	#UIViewMetadataForm {
 		border: none !important;
-	}
-	
-	.form-horizontal [class^="uiIcon"] {
-		margin-left: 5px;
 	}
 }
 
@@ -1135,6 +1128,7 @@
 .uiDiff {
 	.contentEmpty {
 		text-align: center;
+    color: @grayLight;
 	}
 	
 	.uiGrid .diffDelete {
@@ -1229,10 +1223,6 @@
 }
 
 /******** uiTreeNodePageIterator **************/
-.uiTreeExplorer .PageIterator {
-	float: none;
-	padding-left: 0px;
-}
 
 .uiTreeNodePageIterator {
 	margin: 0px;
@@ -1280,6 +1270,7 @@
 			input {
 				width: 120px;
 			}
+      
 			.uiSelectbox {
 				width: 120px;
 				.selectbox {
@@ -1296,9 +1287,11 @@
 			.uiCheckbox input {
 				width: auto;
 			}
-			[class^="uiIcon"] {
-				cursor: pointer;
-			}
+      
+			.help-inline {
+        line-height: 26px;
+        color: @grayDark;
+      }
 		}
 	}
 }
@@ -1321,6 +1314,10 @@
 	.uiGrid .uiCheckbox {
 		width: 16px;
 	}
+}
+
+.anyPermission .form-horizontal .control-group .controls-nowrap {
+	margin: 0px;
 }
 
 /******** uiAddActionForm **************/
@@ -1403,6 +1400,16 @@
 			margin-bottom: 5px;
 		}
 	}
+}
+
+/******** UINodeTypeSelectForm **************/
+.UINodeTypeSelectForm {
+  .control-label {
+    width: 200px;
+  }
+  .controls {
+    margin-left: 220px;
+  }
 }
 
 /******** UIRightClickPopupMenu **************/

@@ -76,6 +76,7 @@
 													  <label class="control-label" for="<%=uicomponent.ORDER_BY_FORM_SELECT_BOX%>"><%=uicomponent.getLabel(uicomponent.ORDER_BY_FORM_SELECT_BOX) %>: </label>
 													  <div class="controls" <% if (uicomponent.getSavedPath() != null) { %>title="<%=uicomponent.getSavedPath()%>" <% }%> >
 														<% uiform.renderField(uicomponent.ORDER_BY_FORM_SELECT_BOX) %>
+													  <% uiform.renderField(uicomponent.ORDER_TYPE_FORM_SELECT_BOX) %>
 													  </div>
 													</div>
 													<% 

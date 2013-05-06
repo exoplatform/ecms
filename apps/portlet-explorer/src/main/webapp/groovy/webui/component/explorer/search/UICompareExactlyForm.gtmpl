@@ -9,34 +9,29 @@
 %>
 <div class="UIForm $uicomponent.id">
 <% uiform.begin() %>
-	<div class="HorizontalLayout">
-		<div class="FormContainer">
-  		<table class="UIFormGrid">
-        <tbody>
-        	<tr>
-	  	      <td class="FieldLabel"><label for="<%=uicomponent.getChild(0).getId()%>"><%=_ctx.appRes("UICompareExactlyForm.label.filter")%></label></td>
-	  	      <td class="FieldComponent"><%uiform.renderField(uicomponent.getChild(0))%>
-	          	<img class="AddMetadataTypeIcon" onclick="javascript:eXo.ecm.ECMUtils.filterValue('$uicomponent.id')" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="<%=_ctx.appRes("UICompareExactlyForm.title.result")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UICompareExactlyForm.title.result")%>" />
-	          </td>
-	        </tr>
-	        <tr>
-	  	      <td class="FieldLabel"><label for="<%=uicomponent.getChild(1).getId()%>"><%=_ctx.appRes("UICompareExactlyForm.label.result")%></label></td>
-	  	      <td class="FieldComponent"><%uiform.renderField(uicomponent.getChild(1))%>
-	      			<span style="display: none;"><%uiform.renderField(uicomponent.getChild(2))%></span>
-	      		</td>
-	        </tr>
-	      </tbody>
-	    </table>
-	  </div>
+	<div class="form-horizontal resizable">
+    <div class="control-group">
+      <label class="control-label" for="<%=uicomponent.getChild(0).getId()%>"><%=_ctx.appRes("UICompareExactlyForm.label.filter")%></label>
+      <div class="controls">
+        <%uiform.renderField(uicomponent.getChild(0))%>
+        <a class="actionIcon" onclick="javascript:eXo.ecm.ECMUtils.filterValue('$uicomponent.id')" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UICompareExactlyForm.title.result")%>"><i class="uiIconPlus"></i></a>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="<%=uicomponent.getChild(1).getId()%>"><%=_ctx.appRes("UICompareExactlyForm.label.result")%></label>
+      <div class="controls"><%uiform.renderField(uicomponent.getChild(1))%>
+        <span style="display: none;"><%uiform.renderField(uicomponent.getChild(2))%></span>
+      </div>
+    </div>
 	</div>
-  <div class="UIAction">
-	<% for(action in uicomponent.getActions()) {
-	String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
-	String link = uicomponent.event(action) ;
-	//System.out.println("\n\n" + uicomponent.getName()+ ".button.label-" + actionLabel + "\n\n");
-	%>
-		<a onclick="$link" class="ActionButton LightBlueStyle" href="javascript:void(0);">$actionLabel</a>
-	<%}%>   
+  <div class="uiAction uiActionBorder">
+    <% for(action in uicomponent.getActions()) {
+    String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
+    String link = uicomponent.event(action) ;
+    //System.out.println("\n\n" + uicomponent.getName()+ ".button.label-" + actionLabel + "\n\n");
+    %>
+      <button type="button" onclick="$link" class="btn">$actionLabel</button>
+    <%}%>   
 	</div>
   <%/* end render action */%>
 <%uiform.end()%>

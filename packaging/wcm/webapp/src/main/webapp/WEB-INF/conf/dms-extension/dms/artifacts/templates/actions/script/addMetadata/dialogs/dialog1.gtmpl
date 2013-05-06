@@ -19,7 +19,7 @@
 					uicomponent.addTextField("actionName", _ctx.appRes("AddMetadata.dialog.label.name"), fieldName);
 				  %>
 				</div>
-			</div>		          					
+			</div>
 			<div class="control-group">
 			  <label class="control-label" for="lifecycle"><%=_ctx.appRes("AddMetadata.dialog.label.lifecycle")%>:</label>
 			  <div class="controls">
@@ -31,7 +31,7 @@
 					%>
 				</div>
 			</div>	
-			<div class="control-group">		          					
+			<div class="control-group">
 			  <label class="control-label" for="metadata"><%=_ctx.appRes("AddMetadata.dialog.label.metadata")%>:</label>
 			  <div class="controls">
 				  <% 
@@ -40,7 +40,7 @@
 				  %>
 				</div>
 			</div>
-			<div class="control-group">                        
+			<div class="control-group">
         <label class="control-label" for="isDeep"><%=_ctx.appRes("AddMetadata.dialog.label.isDeep")%>:</label>
         <div class="controls"> 
 					<% 
@@ -49,7 +49,7 @@
 					%>
         </div>
       </div>
-      <div class="control-group">                        
+      <div class="control-group">
         <label class="control-label" for="nodetypes"><%=_ctx.appRes("AddMetadata.dialog.label.nodetypes")%>:</label>
         <div class="controls"> 
 					<% 
@@ -58,7 +58,7 @@
 					%>
         </div>
       </div>
-			<div class="control-group">		          					
+			<div class="control-group">
 			  <label class="control-label" for="description"><%=_ctx.appRes("AddMetadata.dialog.label.description")%>:</label>
 			  <div class="controls">
 				  <% 
@@ -69,7 +69,7 @@
 			</div>
 			<div class="control-group">                       
         <label class="control-label" for="affectedNodetypes"><%=_ctx.appRes("AddMetadata.dialog.label.affectedNodeTypeNames")%>:</label>
-        <div class="controls">
+        <div class="controls clearfix">
 					<% 
 						String[] fieldAffectedNodetypes = ["jcrPath=/node/exo:affectedNodeTypeNames", "selectorAction=selectAffectedNodeTypes", "multiValues=true", "selectorClass=org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSelector", "selectorIcon=uiIconSearch", "validate=empty", "editable=false"];
 						uicomponent.addActionField("affectedNodetypes", fieldAffectedNodetypes);
@@ -78,8 +78,8 @@
       </div>
  		</div>
   <%uiform.end()%>
-	
-	<%/* start render action*/%>
-		<%uiform.processRenderAction()%>
-	<%/* end render action*/%>
 </div>
+
+<%/* start render action*/%>
+  <%uiform.processRenderAction()%>
+<%/* end render action*/%>

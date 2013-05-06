@@ -51,11 +51,14 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.cms.thumbnail.ThumbnailPlugin;
+import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -702,6 +705,17 @@ public class Utils {
     return ret.toString();
   }
   
+  public static boolean isSupportThumbnailView(String mimeType) {
+    List<String> thumbnailMimeTypes = new ArrayList<String>();
+    List<ComponentPlugin> componentPlugins = WCMCoreUtils.getService(ThumbnailService.class).getComponentPlugins();
+    for (ComponentPlugin plugin : componentPlugins) {
+      if (plugin instanceof ThumbnailPlugin) {
+        thumbnailMimeTypes.addAll(((ThumbnailPlugin) plugin).getMimeTypes());
+      }
+    }
+    return thumbnailMimeTypes.contains(mimeType);
+  }
+  
   /**
    * refines the size up to 3 digits, add '0' in front if necessary.
    * @param size the size
@@ -717,5 +731,4 @@ public class Utils {
     }
     return "," + Math.round(Double.valueOf(Integer.valueOf(strSize) / 100.0));
   }
-  
 }
