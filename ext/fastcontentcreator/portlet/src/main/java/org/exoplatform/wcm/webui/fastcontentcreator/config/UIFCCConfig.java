@@ -54,12 +54,13 @@ import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
+import org.exoplatform.webui.form.UIFormInputSet;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
+import org.exoplatform.webui.form.UIFormTabPane;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
 import org.exoplatform.webui.form.ext.UIFormInputSetWithAction;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 
 
 /**
@@ -77,7 +78,7 @@ import org.exoplatform.webui.form.ext.UIFormInputSetWithAction;
       @EventConfig(listeners = UIFCCConfig.ChangeWorkspaceActionListener.class, phase=Phase.DECODE)
     }
 )
-public class UIFCCConfig extends UIForm implements UISelectable {
+public class UIFCCConfig extends UIFormTabPane implements UISelectable {
 
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(UIFCCConfig.class.getName());
@@ -91,6 +92,7 @@ public class UIFCCConfig extends UIForm implements UISelectable {
    * @throws Exception the exception
    */
   public UIFCCConfig() throws Exception {
+    super("UIFCCConfig");
     PortletPreferences portletPreferences = UIFCCUtils.getPortletPreferences();
     String preferenceMode = portletPreferences.getValue(UIFCCConstant.PREFERENCE_MODE, "");
     String preferenceWorkspace = portletPreferences.getValue(UIFCCConstant.PREFERENCE_WORKSPACE, "");
@@ -98,7 +100,7 @@ public class UIFCCConfig extends UIForm implements UISelectable {
 
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>() ;
 
-    UIFormFieldSet saveLocationField = new UIFormFieldSet(UIFCCConstant.SAVE_LOCATION_FIELD);
+    UIFormInputSetWithAction saveLocationField = new UIFormInputSetWithAction(UIFCCConstant.SAVE_LOCATION_FIELD);
 
     if (!"basic".equals(preferenceMode)) {
       UIFormSelectBox repositorySelectBox = new UIFormSelectBox(UIFCCConstant.REPOSITORY_FORM_SELECTBOX,
@@ -116,13 +118,14 @@ public class UIFCCConfig extends UIForm implements UISelectable {
     UIFormInputSetWithAction folderSelectorInput = new UIFormInputSetWithAction(UIFCCConstant.LOCATION_FORM_INPUT_ACTION);
     folderSelectorInput.addUIFormInput(new UIFormStringInput(UIFCCConstant.LOCATION_FORM_STRING_INPUT,
                                                              UIFCCConstant.LOCATION_FORM_STRING_INPUT,
-                                                             null).setEditable(false));
+                                                             null).setReadOnly(true));
     folderSelectorInput.setActionInfo(UIFCCConstant.LOCATION_FORM_STRING_INPUT, new String[] {"SelectPath"}) ;
-    saveLocationField.addChild(folderSelectorInput) ;
+    saveLocationField.addUIFormInput((UIFormInputSet)folderSelectorInput);
 
     addChild(saveLocationField);
+    setSelectedTab(UIFCCConstant.SAVE_LOCATION_FIELD);
 
-    UIFormFieldSet templateField = new UIFormFieldSet(UIFCCConstant.TEMPLATE_FIELD);
+    UIFormInputSetWithAction templateField = new UIFormInputSetWithAction(UIFCCConstant.TEMPLATE_FIELD);
     templateField.addChild(new UIFormSelectBox(UIFCCConstant.TEMPLATE_FORM_SELECTBOX,
                                                UIFCCConstant.TEMPLATE_FORM_SELECTBOX,
                                                options));
@@ -132,7 +135,7 @@ public class UIFCCConfig extends UIForm implements UISelectable {
     templateField.addChild(new UIFormTextAreaInput(UIFCCConstant.MESSAGE_FORM_TEXTAREA_INPUT,
                                                    UIFCCConstant.MESSAGE_FORM_TEXTAREA_INPUT,
                                                    null));
-    templateField.addChild(new UIFormCheckBoxInput<Boolean>(UIFCCConstant.REDIRECT_FORM_CHECKBOX_INPUT,
+    templateField.addChild(new UICheckBoxInput(UIFCCConstant.REDIRECT_FORM_CHECKBOX_INPUT,
                                                             UIFCCConstant.REDIRECT_FORM_CHECKBOX_INPUT,
                                                             false));
     templateField.addChild(new UIFormStringInput(UIFCCConstant.REDIRECT_PATH_FORM_STRING_INPUT,
@@ -141,18 +144,18 @@ public class UIFCCConfig extends UIForm implements UISelectable {
 
     addChild(templateField);
     if (!"basic".equals(preferenceMode)) {
-    UIFormFieldSet actionField = new UIFormFieldSet(UIFCCConstant.ACTION_FIELD);
-    UIFCCActionList fastContentCreatorActionList = actionField.addChild(UIFCCActionList.class, null, null);
-    fastContentCreatorActionList.init(preferenceMode);
-    RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    ManageableRepository repository = repositoryService.getCurrentRepository();
-    Session session = WCMCoreUtils.getUserSessionProvider().getSession(preferenceWorkspace, repository);
-      fastContentCreatorActionList.updateGrid((Node) session.getItem(preferencePath),
-                                              fastContentCreatorActionList.getChild(UIGrid.class)
-                                                                          .getUIPageIterator()
-                                                                          .getCurrentPage());
-
-    addChild(actionField);
+      UIFormInputSetWithAction actionField = new UIFormInputSetWithAction(UIFCCConstant.ACTION_FIELD);
+      UIFCCActionList fastContentCreatorActionList = actionField.addChild(UIFCCActionList.class, null, "UIFCCActionList");
+      fastContentCreatorActionList.init(preferenceMode);
+      RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
+      ManageableRepository repository = repositoryService.getCurrentRepository();
+      Session session = WCMCoreUtils.getUserSessionProvider().getSession(preferenceWorkspace, repository);
+        fastContentCreatorActionList.updateGrid((Node) session.getItem(preferencePath),
+                                                fastContentCreatorActionList.getChild(UIGrid.class)
+                                                                            .getUIPageIterator()
+                                                                            .getCurrentPage());
+  
+        addChild(actionField);
     }
 
     setActions(new String[] {"Save"}) ;
@@ -213,7 +216,7 @@ public class UIFCCConfig extends UIForm implements UISelectable {
     getUIFormTextAreaInput(UIFCCConstant.MESSAGE_FORM_TEXTAREA_INPUT).setValue(preferences.
                                                                                  getValue(UIFCCConstant.PREFERENCE_SAVE_MESSAGE,
                                                                                ""));
-    getUIFormCheckBoxInput(UIFCCConstant.REDIRECT_FORM_CHECKBOX_INPUT).
+    getUICheckBoxInput(UIFCCConstant.REDIRECT_FORM_CHECKBOX_INPUT).
         setChecked(Boolean.parseBoolean(preferences.getValue(UIFCCConstant.PREFERENCE_IS_REDIRECT, "")));
     getUIStringInput(UIFCCConstant.REDIRECT_PATH_FORM_STRING_INPUT).setValue(preferences.
                                                                                getValue(UIFCCConstant.PREFERENCE_REDIRECT_PATH,
@@ -417,6 +420,7 @@ public class UIFCCConfig extends UIForm implements UISelectable {
       uiOneNodePathSelector.setSourceComponent(fastContentCreatorConfig,
                                                new String[] { UIFCCConstant.LOCATION_FORM_STRING_INPUT });
       Utils.createPopupWindow(fastContentCreatorConfig, uiOneNodePathSelector, UIFCCConstant.SELECTOR_POPUP_WINDOW, 610);
+      fastContentCreatorConfig.setSelectedTab(UIFCCConstant.SAVE_LOCATION_FIELD);
     }
   }
 
@@ -480,7 +484,7 @@ public class UIFCCConfig extends UIForm implements UISelectable {
       String saveMessage = fastContentCreatorConfig.getUIFormTextAreaInput(UIFCCConstant.MESSAGE_FORM_TEXTAREA_INPUT)
                                                    .getValue();
       String isRedirect = String.valueOf(fastContentCreatorConfig.
-                                         getUIFormCheckBoxInput(UIFCCConstant.REDIRECT_FORM_CHECKBOX_INPUT)
+                                         getUICheckBoxInput(UIFCCConstant.REDIRECT_FORM_CHECKBOX_INPUT)
                                                                  .isChecked());
       String redirectPath = fastContentCreatorConfig.getUIStringInput(UIFCCConstant.REDIRECT_PATH_FORM_STRING_INPUT)
                                                     .getValue();
