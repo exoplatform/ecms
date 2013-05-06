@@ -1,13 +1,4 @@
 <%
-/**
- * Created by The eXo Platform SARL
- * Author : Dang Van Minh
- *          minhdv@exoplatform.com
- * Sep 20, 2006
- * 3:28:26 PM 
- */
-%>
-<%
   import javax.jcr.Node;
 
   def nodeTypes = uicomponent.getNodeTypeList();
@@ -30,7 +21,6 @@
   	    <th><%=_ctx.appRes("UINodeTypeList.header.nodeType")%></th>
   	    <th><%=_ctx.appRes("UINodeTypeList.header.mixinType")%></th>
   	    <th><%=_ctx.appRes("UINodeTypeList.header.orderable")%></th>
-  	    <th><%=_ctx.appRes("UINodeTypeList.header.description")%></th>
   	    <th class="center span1"><%=_ctx.appRes("UINodeTypeList.header.action")%></th>
       </tr>
     </thead>
@@ -83,8 +73,7 @@
 	                <div class="text">$booleanText</div>
 	              </div>
               </td>
-              <td align="center"><div class="text"><%=_ctx.appRes("UINodeTypeList.info.description")%></div></td>
-              <td class="center">                
+              <td class="center">
                 <i onclick="<%=uicomponent.event("View", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UINodeTypeList.tooltip.View")%>" class="uiIconPreview"></i>
               </td>
             <% } else {%>

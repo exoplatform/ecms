@@ -680,12 +680,8 @@
       <nodeType>Node Type</nodeType>
       <mixinType>Mixin Type</mixinType>
       <orderable>Orderable Child Nodes</orderable>
-      <description>Description</description>
       <action>Action</action>
     </header>
-    <info>
-      <description>Nothing</description>
-    </info>
     <action>
       <Export>Export</Export>
       <Import>Import</Import>
