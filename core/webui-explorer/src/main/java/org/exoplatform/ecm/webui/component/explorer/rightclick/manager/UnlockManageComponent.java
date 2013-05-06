@@ -17,24 +17,9 @@
  **************************************************************************/
 package org.exoplatform.ecm.webui.component.explorer.rightclick.manager;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.regex.Matcher;
-
-import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.Session;
-import javax.jcr.lock.LockException;
-import javax.jcr.version.VersionException;
-
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.CanSetPropertyFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsCheckedOutFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsHoldsLockFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.*;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
@@ -53,6 +38,15 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 import org.exoplatform.webui.ext.manager.UIAbstractManager;
 import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
+
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.Session;
+import javax.jcr.lock.LockException;
+import javax.jcr.version.VersionException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Matcher;
 
 /**
  * Created by The eXo Platform SARL
@@ -117,7 +111,7 @@ public class UnlockManageComponent extends UIAbstractManagerComponent {
       return;
     }
     String superUser = WCMCoreUtils.getService(UserACL.class).getSuperUser();
-    String remoteUser = node.getSession().getUserID();
+    String remoteUser = WCMCoreUtils.getRemoteUser();
     if (remoteUser.equalsIgnoreCase(superUser)) {
       session = WCMCoreUtils.getSystemSessionProvider()
                             .getSession(node.getSession().getWorkspace().getName(),

@@ -16,10 +16,6 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 
-import java.util.List;
-
-import javax.jcr.Node;
-
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
@@ -27,6 +23,7 @@ import org.exoplatform.ecm.webui.component.explorer.sidebar.UITagExplorer;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -39,6 +36,9 @@ import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
+
+import javax.jcr.Node;
+import java.util.List;
 
 /**
  * Created by The eXo Platform SARL
@@ -91,7 +91,7 @@ public class UITagForm extends UIForm {
                                .getRepository()
                                .getConfiguration()
                                .getDefaultWorkspaceName();
-      String userName = uiExplorer.getSession().getUserID();
+      String userName = WCMCoreUtils.getRemoteUser();
       int scope = uiExplorer.getTagScope();
 
       NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class) ;

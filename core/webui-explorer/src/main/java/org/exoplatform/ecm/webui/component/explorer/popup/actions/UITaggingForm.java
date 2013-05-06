@@ -16,14 +16,6 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Set;
-
-import javax.jcr.Node;
-
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
@@ -45,11 +37,10 @@ import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormInputInfo;
-import org.exoplatform.webui.form.UIFormSelectBox;
-import org.exoplatform.webui.form.UIFormStringInput;
-import org.exoplatform.webui.form.UIFormTextAreaInput;
+import org.exoplatform.webui.form.*;
+
+import javax.jcr.Node;
+import java.util.*;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh
@@ -70,17 +61,9 @@ public class UITaggingForm extends UIForm {
 
   final static public String  TAG_SCOPES             = "tagScopes";
 
-  final static public String  SCOPE_VALUES           = "scopeValues";
-
   final static public String  LINKED_TAGS            = "linked";
 
   final static public String  LINKED_TAGS_SET        = "tagSet";
-
-  final static public String  TAG_STATUS_PROP        = "exo:tagStatus";
-
-  final static public String  TAG_NAME_ACTION        = "tagNameAct";
-
-  final static public String  ASCENDING_ORDER        = "Ascending";
 
   private static final String USER_FOLKSONOMY_ALIAS  = "userPrivateFolksonomy";
 
@@ -89,10 +72,6 @@ public class UITaggingForm extends UIForm {
   private static final String GROUPS_ALIAS           = "groupsPath";
 
   final static public String  PUBLIC_TAG_NODE_PATH   = "exoPublicTagNode";
-
-  String[]                    groups;
-
-  String[]                    users;
 
   public UITaggingForm() throws Exception {
     UIFormInputSetWithActionForTaggingForm uiInputSet = new UIFormInputSetWithActionForTaggingForm(LINKED_TAGS_SET);
@@ -234,47 +213,43 @@ public class UITaggingForm extends UIForm {
 
         return;
       }
-      String[] tagNames = null;
+      String[] tagNames;
       tagNames = tagName.split(",");
       List<String> listTagNames = new ArrayList<String>(tagNames.length);
       List<String> listTagNamesClone = new ArrayList<String>(tagNames.length);
       
-      if (tagName.indexOf(",") > -1) {        
+      if (tagName.contains(",")) {
         for (String tName : tagNames) {
           listTagNames.add(tName.trim());
           listTagNamesClone.add(tName.trim());
         }
-        for (int i = 0; i < listTagNames.size(); i++) {
-          String tag = listTagNames.get(i);
-          listTagNamesClone.remove(tag);
-          if (listTagNamesClone.contains(tag)) {
-            continue;
+          for (String tag : listTagNames) {
+              listTagNamesClone.remove(tag);
+              if (listTagNamesClone.contains(tag)) {
+                  continue;
+              }
+              listTagNamesClone.add(tag);
           }
-          listTagNamesClone.add(tag);
-        }
       } else {
-        tagNames = new String[] { tagName };
         listTagNames.add(tagName.trim());
         listTagNamesClone.add(tagName.trim());
       }
-      for (int i = 0; i < listTagNames.size(); i++) {
-      	String t = listTagNames.get(i);
-        if (t.trim().length() == 0) {
-          listTagNamesClone.remove(t);
-          continue;
+        for (String t : listTagNames) {
+            if (t.trim().length() == 0) {
+                listTagNamesClone.remove(t);
+                continue;
+            }
+            if (t.trim().length() > 30) {
+                listTagNamesClone.remove(t);
+                continue;
+            }
+            String[] arrFilterChar = {"&", "'", "$", "@", ":", "]", "[", "*", "%", "!", "/", "\\"};
+            for (String filterChar : arrFilterChar) {
+                if (t.contains(filterChar)) {
+                    listTagNamesClone.remove(t);
+                }
+            }
         }
-        if (t.trim().length() > 30) {
-        	listTagNamesClone.remove(t);
-          continue;
-        }
-        String[] arrFilterChar = { "&", "'", "$", "@", ":", "]", "[", "*", "%", "!", "/", "\\" };
-        for (String filterChar : arrFilterChar) {
-          if (t.indexOf(filterChar) > -1) {
-          	listTagNamesClone.remove(t);
-            continue;
-          }
-        }
-      }
       String tagScope = uiForm.getUIFormSelectBox(TAG_SCOPES).getValue();
       List<Node> tagList = newFolksonomyService.getLinkedTagsOfDocumentByScope(uiForm.getIntValue(tagScope),
                                                                                uiForm.getStrValue(tagScope,
@@ -282,13 +257,11 @@ public class UITaggingForm extends UIForm {
                                                                                uiExplorer.getCurrentNode(),
                                                                                workspace);
       for (Node tag : tagList) {
-      	for (int i = 0; i < listTagNames.size(); i++) {
-      		String t = listTagNames.get(i);
-          if (t.equals(tag.getName())) {           
-            listTagNamesClone.remove(t);
-            continue;
+          for (String t : listTagNames) {
+              if (t.equals(tag.getName())) {
+                  listTagNamesClone.remove(t);
+              }
           }
-        }
       }
       if(listTagNamesClone.size() > 0)
       	addTagToNode(tagScope, currentNode, listTagNamesClone.toArray(new String[listTagNamesClone.size()]), uiForm);
@@ -308,26 +281,27 @@ public class UITaggingForm extends UIForm {
                               String[] tagNames,
                               UITaggingForm uiForm) throws Exception {
 
-      NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class);
-      ManageableRepository manageableRepo = WCMCoreUtils.getRepository();
-      NodeHierarchyCreator nodeHierarchyCreator = uiForm.getApplicationComponent(NodeHierarchyCreator.class);
-      String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
-      String[] roles = Utils.getGroups().toArray(new String[] {});
-      String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
+        NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class);
+        ManageableRepository manageableRepo = WCMCoreUtils.getRepository();
+        NodeHierarchyCreator nodeHierarchyCreator = uiForm.getApplicationComponent(NodeHierarchyCreator.class);
+        String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
+        List<String> groups = Utils.getGroups();
+        String[] roles = groups.toArray(new String[groups.size()]);
+        String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
 
-      if (Utils.PUBLIC.equals(scope))
-        newFolksonomyService.addPublicTag(publicTagNodePath,
-                                          tagNames,
-                                          currentNode,
-                                          workspace);
-      // else if (SITE.equals(scope))
-      // newFolksonomyService.addSiteTag(siteName, treePath, tagNames,
-      // currentNode, repository, workspace);
-      else if (Utils.GROUP.equals(scope))
-        newFolksonomyService.addGroupsTag(tagNames, currentNode, workspace, roles);
-      else if (Utils.PRIVATE.equals(scope)) {
-        String userName = currentNode.getSession().getUserID();
-        newFolksonomyService.addPrivateTag(tagNames, currentNode, workspace, userName);
+        if (Utils.PUBLIC.equals(scope))
+            newFolksonomyService.addPublicTag(publicTagNodePath,
+                    tagNames,
+                    currentNode,
+                    workspace);
+            // else if (SITE.equals(scope))
+            // newFolksonomyService.addSiteTag(siteName, treePath, tagNames,
+            // currentNode, repository, workspace);
+        else if (Utils.GROUP.equals(scope))
+            newFolksonomyService.addGroupsTag(tagNames, currentNode, workspace, roles);
+        else if (Utils.PRIVATE.equals(scope)) {
+            String userName = currentNode.getSession().getUserID();
+            newFolksonomyService.addPrivateTag(tagNames, currentNode, workspace, userName);
       }
     }
   }
@@ -387,7 +361,7 @@ public class UITaggingForm extends UIForm {
       String userName = currentNode.getSession().getUserID();
       String workspace = WCMCoreUtils.getRepository().getConfiguration().getDefaultWorkspaceName();
 
-      String tagPath = "";
+      String tagPath;
       if (Utils.PUBLIC.equals(scope)) {
         tagPath = newFolksonomyService.getDataDistributionType().getDataNode(
                      (Node)(WCMCoreUtils.getUserSessionProvider().getSession(workspace, WCMCoreUtils.getRepository()).getItem(

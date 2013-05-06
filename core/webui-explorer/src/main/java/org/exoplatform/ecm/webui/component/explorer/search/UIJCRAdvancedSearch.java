@@ -16,14 +16,6 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.search;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.jcr.Node;
-import javax.jcr.Session;
-import javax.jcr.query.Query;
-import javax.jcr.query.QueryManager;
-
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.portal.webui.util.Util;
@@ -31,6 +23,7 @@ import org.exoplatform.services.cms.queries.QueryService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -47,6 +40,13 @@ import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
+
+import javax.jcr.Node;
+import javax.jcr.Session;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by The eXo Platform SARL
@@ -166,7 +166,7 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
         }
         UISearchResult uiSearchResult = uiSearch.getChild(UISearchResult.class) ;
         uiSearchResult.setQuery(queryS.toString(), uiExplorer.getTargetSession().getWorkspace().getName(), searchType, 
-                                IdentityConstants.SYSTEM.equals(uiExplorer.getTargetSession().getUserID()), null);
+                                IdentityConstants.SYSTEM.equals(WCMCoreUtils.getRemoteUser()), null);
         uiSearchResult.updateGrid() ;
         long time = System.currentTimeMillis() - startTime;
         uiSearchResult.setSearchTime(time);

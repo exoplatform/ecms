@@ -16,36 +16,12 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.control;
 
-import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
-
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.RepositoryException;
-import javax.jcr.query.Query;
-import javax.portlet.PortletPreferences;
-
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.jcr.SearchValidator;
-import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
-import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
-import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
-import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
-import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
+import org.exoplatform.ecm.webui.component.explorer.*;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentForm;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentFormController;
-import org.exoplatform.ecm.webui.component.explorer.search.UIContentNameSearch;
-import org.exoplatform.ecm.webui.component.explorer.search.UIECMSearch;
-import org.exoplatform.ecm.webui.component.explorer.search.UISavedQuery;
-import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
-import org.exoplatform.ecm.webui.component.explorer.search.UISimpleSearch;
+import org.exoplatform.ecm.webui.component.explorer.search.*;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -74,6 +50,15 @@ import org.exoplatform.webui.ext.UIExtensionManager;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
+
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
+import javax.jcr.query.Query;
+import javax.portlet.PortletPreferences;
+import java.net.URLDecoder;
+import java.util.*;
 
 /**
  * Created by The eXo Platform SARL
@@ -278,7 +263,7 @@ public class UIActionBar extends UIForm {
       
       long startTime = System.currentTimeMillis();
       uiSearchResult.setQuery(queryStatement, currentNode.getSession().getWorkspace().getName(), Query.SQL, 
-                              IdentityConstants.SYSTEM.equals(currentNode.getSession().getUserID()), null);
+                              IdentityConstants.SYSTEM.equals(WCMCoreUtils.getRemoteUser()), null);
       uiSearchResult.updateGrid();
       long time = System.currentTimeMillis() - startTime;
       

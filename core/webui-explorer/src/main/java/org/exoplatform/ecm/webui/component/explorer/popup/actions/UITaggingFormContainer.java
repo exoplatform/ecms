@@ -16,10 +16,6 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 
-import java.util.List;
-
-import javax.jcr.Node;
-
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
@@ -27,6 +23,7 @@ import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
@@ -36,6 +33,9 @@ import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+
+import javax.jcr.Node;
+import java.util.List;
 
 /**
  * Created by The eXo Platform SARL
@@ -92,7 +92,7 @@ public class UITaggingFormContainer extends UIContainer implements UIPopupCompon
     UITaggingForm uiTaggingForm = getChild(UITaggingForm.class);
 
     String workspace = uiExplorer.getRepository().getConfiguration().getDefaultWorkspaceName();
-    String userName = uiExplorer.getSession().getUserID();
+    String userName = WCMCoreUtils.getRemoteUser();
     String tagScope = uiTaggingForm.getUIFormSelectBox(UITaggingForm.TAG_SCOPES).getValue();
     int scope = uiTaggingForm.getIntValue(tagScope);
     uiExplorer.setTagScope(scope);

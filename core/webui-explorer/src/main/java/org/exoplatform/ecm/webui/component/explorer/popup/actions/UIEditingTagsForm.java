@@ -16,13 +16,8 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 
-import java.util.List;
-
-import javax.jcr.Node;
-
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UITagExplorer;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
@@ -39,6 +34,9 @@ import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+
+import javax.jcr.Node;
+import java.util.List;
 
 /**
  * Created by The eXo Platform SARL
@@ -100,7 +98,7 @@ public class UIEditingTagsForm extends UIContainer implements UIPopupComponent {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
 
     String workspace = uiExplorer.getRepository().getConfiguration().getDefaultWorkspaceName();
-    String userName = uiExplorer.getSession().getUserID();
+    String userName = WCMCoreUtils.getRemoteUser();
     int scope = uiExplorer.getTagScope();
 
     String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
@@ -136,7 +134,7 @@ public class UIEditingTagsForm extends UIContainer implements UIPopupComponent {
       UIEditingTagsForm uiEdit = event.getSource();
       UIJCRExplorer uiExplorer = uiEdit.getAncestorOfType(UIJCRExplorer.class);
       String selectedName = event.getRequestContext().getRequestParameter(OBJECTID);
-      removeTagFromNode(uiExplorer.getSession().getUserID(), uiExplorer.getTagScope(), selectedName, uiEdit);
+      removeTagFromNode(WCMCoreUtils.getRemoteUser(), uiExplorer.getTagScope(), selectedName, uiEdit);
       uiEdit.getChild(UIEditingTagList.class).updateGrid();
       uiExplorer.setTagPath(uiExplorer.getCurrentPath());
       Preference preferences = uiExplorer.getPreference();

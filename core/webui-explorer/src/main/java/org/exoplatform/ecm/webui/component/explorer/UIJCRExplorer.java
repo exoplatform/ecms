@@ -16,43 +16,12 @@
  */
 package org.exoplatform.ecm.webui.component.explorer ;
 
-import java.security.AccessControlException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-
-import javax.jcr.Item;
-import javax.jcr.ItemNotFoundException;
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.Property;
-import javax.jcr.PropertyIterator;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-import javax.jcr.Value;
-import javax.jcr.nodetype.NodeType;
-import javax.portlet.PortletPreferences;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-
 import org.exoplatform.ecm.jcr.TypeNodeComparator;
 import org.exoplatform.ecm.jcr.model.ClipboardCommand;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
 import org.exoplatform.ecm.utils.text.Text;
-import org.exoplatform.ecm.webui.comparator.DateComparator;
-import org.exoplatform.ecm.webui.comparator.NodeSizeComparator;
-import org.exoplatform.ecm.webui.comparator.NodeTitleComparator;
-import org.exoplatform.ecm.webui.comparator.PropertyValueComparator;
-import org.exoplatform.ecm.webui.comparator.StringComparator;
+import org.exoplatform.ecm.webui.comparator.*;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
 import org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar;
 import org.exoplatform.ecm.webui.component.explorer.control.UIControl;
@@ -88,14 +57,17 @@ import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
-import org.exoplatform.webui.core.UIApplication;
-import org.exoplatform.webui.core.UIComponent;
-import org.exoplatform.webui.core.UIContainer;
-import org.exoplatform.webui.core.UIPageIterator;
-import org.exoplatform.webui.core.UIPopupContainer;
-import org.exoplatform.webui.core.UIPopupWindow;
+import org.exoplatform.webui.core.*;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.event.Event;
+
+import javax.jcr.*;
+import javax.jcr.nodetype.NodeType;
+import javax.portlet.PortletPreferences;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import java.security.AccessControlException;
+import java.util.*;
 
 /**
  * Created by The eXo Platform SARL
@@ -376,7 +348,12 @@ public class UIJCRExplorer extends UIContainer {
 
   public Collection<HistoryEntry> getHistory() { return addressPath_.values() ; }
 
-  public SessionProvider getSessionProvider() { return WCMCoreUtils.getUserSessionProvider(); }
+  public SessionProvider getSessionProvider() {
+      if(WCMCoreUtils.getRemoteUser().equals(WCMCoreUtils.getSuperUser())) {
+          return getSystemProvider();
+      }
+      return WCMCoreUtils.getUserSessionProvider();
+  }
 
   public SessionProvider getSystemProvider() { return WCMCoreUtils.getSystemSessionProvider(); }
 

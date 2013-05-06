@@ -16,39 +16,18 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.rightclick.manager;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-
-import javax.jcr.AccessDeniedException;
-import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.Session;
-import javax.jcr.lock.LockException;
-import javax.jcr.nodetype.ConstraintViolationException;
-import javax.jcr.version.VersionException;
-import javax.portlet.PortletPreferences;
-
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.HasRemovePermissionFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsCheckedOutFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsInTrashFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.*;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UISelectRestorePath;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.link.NodeFinder;
-import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
@@ -62,6 +41,19 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 import org.exoplatform.webui.ext.manager.UIAbstractManager;
 import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
+
+import javax.jcr.AccessDeniedException;
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.Session;
+import javax.jcr.lock.LockException;
+import javax.jcr.nodetype.ConstraintViolationException;
+import javax.jcr.version.VersionException;
+import javax.portlet.PortletPreferences;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.regex.Matcher;
 
 /**
  * Created by The eXo Platform SARL
@@ -83,6 +75,7 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
                                                    new IsNotLockedFilter(),
                                                    new IsCheckedOutFilter(),
                                                    new HasRemovePermissionFilter(),
+                                                   new IsAbleToRestoreFilter(),
                                                    new IsNotTrashHomeNodeFilter() });
 
   private final static Log                     LOG     = ExoLogger.getLogger(RestoreFromTrashManageComponent.class.getName());
@@ -101,8 +94,8 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
 
     UIApplication uiApp = uiWorkingArea.getAncestorOfType(UIApplication.class);
     Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(srcPath);
-    String wsName = null;
-    Node node = null;
+    String wsName;
+    Node node;
     if (matcher.find()) {
       wsName = matcher.group(1);
       srcPath = matcher.group(2);
@@ -150,9 +143,6 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
     TrashService trashService = WCMCoreUtils.getService(TrashService.class);
     UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class);
 
-    String restorePath = node.getProperty(Utils.EXO_RESTOREPATH).getString();
-    String restoreWs = node.getProperty(Utils.EXO_RESTORE_WORKSPACE).getString();
-
     try {
       uiExplorer.addLockToken(node);
     } catch (Exception e) {
@@ -182,30 +172,6 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
         uiPopupContainer.activate(uiSelectRestorePath, 600, 300);
 
         event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupContainer);
-      }
-      //restore categories for node
-      try {
-        Session session = uiExplorer.getSessionByWorkspace(restoreWs);
-        NodeFinder nodeFinder = uiExplorer.getApplicationComponent(NodeFinder.class);
-        Node restoredNode = (Node)nodeFinder.getItem(session, restorePath);
-        WCMComposer wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
-        List<Node> categories = WCMCoreUtils.getService(TaxonomyService.class).getAllCategories(restoredNode);
-
-        for(Node categoryNode : categories){
-          wcmComposer.updateContents(categoryNode.getSession().getWorkspace().getName(),
-                                     categoryNode.getPath(),
-                                     new HashMap<String, String>());
-        }
-
-        String parentPath = restoredNode.getParent().getPath();
-        String parentWSpace = restoredNode.getSession().getWorkspace().getName();
-
-        wcmComposer.updateContents(parentWSpace, parentPath, new HashMap<String, String>());
-
-      } catch (Exception e) {
-        if (LOG.isWarnEnabled()) {
-          LOG.warn(e.getMessage());
-        }
       }
     } catch (PathNotFoundException e) {
       if (LOG.isErrorEnabled()) {
@@ -264,7 +230,7 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
       RequestContext context = RequestContext.getCurrentInstance();
       ResourceBundle res = context.getApplicationResourceBundle();
       String restoreNotice = "";
-      if(srcPath.indexOf(";") < 0 && numberItemsRestored == 1) {
+      if(!srcPath.contains(";") && numberItemsRestored == 1) {
       	restoreNotice = "UIWorkingArea.msg.feedback-restore";
       	restoreNotice = res.getString(restoreNotice);
       	restoreNotice = restoreNotice.replaceAll("\\{" + 0 + "\\}", itemName);

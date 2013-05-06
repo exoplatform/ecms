@@ -16,29 +16,6 @@
  */
 package org.exoplatform.services.wcm.utils;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Properties;
-
-import javax.jcr.Item;
-import javax.jcr.ItemNotFoundException;
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.Session;
-import javax.jcr.nodetype.NodeType;
-import javax.jcr.query.Query;
-import javax.jcr.query.QueryManager;
-import javax.jcr.query.QueryResult;
-
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.container.ExoContainer;
@@ -51,6 +28,7 @@ import org.exoplatform.container.definition.PortalContainerConfig;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
 import org.exoplatform.container.xml.PortalContainerInfo;
+import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.link.LinkManager;
@@ -70,6 +48,15 @@ import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.quartz.JobExecutionContext;
 import org.quartz.impl.JobDetailImpl;
+
+import javax.jcr.*;
+import javax.jcr.nodetype.NodeType;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import javax.jcr.query.QueryResult;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.*;
 
 /**
  * Created by The eXo Platform SAS
@@ -105,8 +92,7 @@ public class WCMCoreUtils {
    */
   public static SessionProvider getSystemSessionProvider() {
     SessionProviderService sessionProviderService = getService(SessionProviderService.class);
-    SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
-    return sessionProvider;
+    return sessionProviderService.getSystemSessionProvider(null);
   }
 
   /**
@@ -116,8 +102,7 @@ public class WCMCoreUtils {
    */
   public static SessionProvider getUserSessionProvider() {
     SessionProviderService sessionProviderService = getService(SessionProviderService.class);
-    SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
-    return sessionProvider;
+    return sessionProviderService.getSessionProvider(null);
   }
 
   public static boolean isAnonim()
@@ -174,8 +159,8 @@ public class WCMCoreUtils {
       OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
       startRequest(organizationService);
       Collection<?> memberships = organizationService.getMembershipHandler().findMembershipsByUser(userId);
-      String userMembershipTmp = null;
-      Membership userMembership = null;
+      String userMembershipTmp;
+      Membership userMembership;
       int count = 0;
       String permissionTmp = "";
       for (String permission : permissions) {
@@ -284,13 +269,13 @@ public class WCMCoreUtils {
   }
 
   public static String getActiveStylesheet(Node webcontent) throws Exception {
-    StringBuffer buffer = new StringBuffer();
+    StringBuilder buffer = new StringBuilder();
     String cssQuery = StringUtils.replaceOnce(WEBCONTENT_CSS_QUERY, "{path}", webcontent.getPath());
     // Need re-login to get session because this node is get from template and the session is not live anymore.
     // If node is version (which is stored in system workspace) we have to login to system workspace to get data
     NodeLocation webcontentLocation = NodeLocation.getNodeLocationByNode(webcontent);
     ManageableRepository repository = (ManageableRepository)webcontent.getSession().getRepository();
-    Session session = null;
+    Session session;
     try {
       if (webcontentLocation.getPath().startsWith("/jcr:system"))
         session =
@@ -325,7 +310,7 @@ public class WCMCoreUtils {
    * @throws Exception
    */
   public static String getSiteGlobalActiveStylesheet(Node siteNode) throws Exception {
-    StringBuffer buffer = new StringBuffer();
+    StringBuilder buffer = new StringBuilder();
     try {
       List<Node> cssNodeList = new ArrayList<Node>();
       NodeIterator iterator = siteNode.getNodes();
@@ -352,11 +337,7 @@ public class WCMCoreUtils {
                                          .getProperty(NodetypeConstant.JCR_DATA)
                                          .getString());
         } catch (Exception e) {
-          if (LOG.isErrorEnabled()) {
-            LOG.error("Unexpected problem happens when get css " + registeredCSSFile.getPath() +
-                      " for site '" + siteNode.getName() + "':", e);
-          }
-          continue;
+            continue;
         }
       }
     } catch(Exception e) {
@@ -375,7 +356,7 @@ public class WCMCoreUtils {
    * @throws Exception
    */
   public static String getSiteGlobalActiveJs(Node siteNode) throws Exception {
-    StringBuffer buffer = new StringBuffer();
+    StringBuilder buffer = new StringBuilder();
     try {
       List<Node> jsNodeList = new ArrayList<Node>();
       NodeIterator iterator = siteNode.getNodes();
@@ -402,10 +383,6 @@ public class WCMCoreUtils {
                                          .getProperty(NodetypeConstant.JCR_DATA)
                                          .getString());
         } catch (Exception e) {
-          if (LOG.isErrorEnabled()) {
-            LOG.error("Unexpected problem happens when get javascript " + registeredJSFile.getPath() +
-                      " for site '" + siteNode.getName() + "':", e);
-          }
           continue;
         }
       }
@@ -428,7 +405,7 @@ public class WCMCoreUtils {
         templates.put(nt.getName(), metadataService.getMetadataPath(nt.getName(), false));
       }
     }
-    Item primaryItem = null;
+    Item primaryItem;
     try {
       primaryItem = node.getPrimaryItem();
     } catch (ItemNotFoundException e) {
@@ -611,5 +588,9 @@ public class WCMCoreUtils {
     } catch(NullPointerException npe) {
       return null;
     }
+  }
+
+  public static String getSuperUser() {
+      return getService(UserACL.class).getSuperUser();
   }
 }

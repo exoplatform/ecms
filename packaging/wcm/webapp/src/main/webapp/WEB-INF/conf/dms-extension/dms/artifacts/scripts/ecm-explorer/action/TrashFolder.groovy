@@ -15,8 +15,6 @@
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
 
-import java.util.Map;
-
 import javax.jcr.Node;
 import javax.jcr.Session;
 import javax.jcr.observation.Event;
@@ -25,15 +23,11 @@ import org.exoplatform.services.cms.scripts.CmsScript;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.log.ExoLogger;
 
 /*
 * 
 */
 public class TrashFolderScript implements CmsScript {
-  
-  private static final Log LOG  = ExoLogger.getLogger("TrashFolderScript");
   
   final static public String EXO_RESTOREPATH = "exo:restorePath";
   final static public String EXO_RESTORELOCATION = "exo:restoreLocation";
@@ -57,15 +51,13 @@ public class TrashFolderScript implements CmsScript {
     	nodePath = nodePath.substring(index + 1);
 
     ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
-    Session session = null;
-    Node node = null;
+    Session session;
+    Node node;
     try{
       session = seProviderService_.getSystemSessionProvider(null).getSession(workspace, manageableRepository);
       node = (Node)session.getItem(nodePath);
     } catch(Exception e) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn("Exception when try to get node:" + nodePath);
-      }
+      return;
     }
     if ((eventType & Event.NODE_ADDED) > 0) {
     	if (!node.isNodeType(EXO_RESTORELOCATION)) {
@@ -75,9 +67,6 @@ public class TrashFolderScript implements CmsScript {
     		session.save();
     	}
     } 
-    
-  	String nodeName = nodePath.substring(nodePath.lastIndexOf("/") + 1);
-    session.save();
   }
   
 	private String fixRestorePath(String path) {

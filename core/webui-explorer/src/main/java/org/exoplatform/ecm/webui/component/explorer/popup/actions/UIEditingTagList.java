@@ -16,19 +16,19 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.jcr.Node;
-
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIGrid;
+
+import javax.jcr.Node;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by The eXo Platform SARL
@@ -63,7 +63,7 @@ public class UIEditingTagList extends UIGrid {
     String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
 
     List<Node> tags = (scope == NewFolksonomyService.PRIVATE) ?
-                      newFolksonomyService.getAllPrivateTags(uiExplorer.getSession().getUserID()) :
+                      newFolksonomyService.getAllPrivateTags(WCMCoreUtils.getRemoteUser()) :
                       newFolksonomyService.getAllPublicTags(publicTagNodePath, workspace);
     List<TagData> tagDataList = new ArrayList<TagData>();
     for (Node tag : tags) {

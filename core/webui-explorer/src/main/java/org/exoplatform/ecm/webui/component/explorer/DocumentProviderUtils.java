@@ -16,11 +16,12 @@
  */
 package org.exoplatform.ecm.webui.component.explorer;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import org.exoplatform.ecm.jcr.model.Preference;
+import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.services.cms.documents.FavoriteService;
+import org.exoplatform.services.cms.documents.TrashService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -29,13 +30,7 @@ import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
-
-import org.exoplatform.ecm.jcr.model.Preference;
-import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.services.cms.documents.FavoriteService;
-import org.exoplatform.services.cms.documents.TrashService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import java.util.*;
 
 /**
  * Created by The eXo Platform SARL
@@ -91,7 +86,7 @@ public class DocumentProviderUtils {
     if (!byUser) {
       ret = WCMCoreUtils.getService(TrashService.class).getAllNodeInTrash(sessionProvider);
     } else {
-      ret = WCMCoreUtils.getService(TrashService.class).getAllNodeInTrashByUser(sessionProvider, uiExplorer.getSession().getUserID());
+      ret = WCMCoreUtils.getService(TrashService.class).getAllNodeInTrashByUser(sessionProvider, WCMCoreUtils.getRemoteUser());
     }
     return ret;
   }
@@ -106,7 +101,7 @@ public class DocumentProviderUtils {
       queryString.append(" WHERE CONTAINS(").
                   append(Utils.EXO_OWNER).
                   append(",'").
-                  append(uiExplorer.getSession().getUserID()).
+                  append(WCMCoreUtils.getRemoteUser()).
                   append("')");
     }
     Session session = uiExplorer.getSession();
@@ -129,7 +124,7 @@ public class DocumentProviderUtils {
     List<Node> favoriteList = null;
 
     favoriteList = WCMCoreUtils.getService(FavoriteService.class).getAllFavoriteNodesByUser(uiExplorer.getCurrentWorkspace(),
-          uiExplorer.getRepositoryName(), uiExplorer.getSession().getUserID());
+          uiExplorer.getRepositoryName(), WCMCoreUtils.getRemoteUser());
 
     for (Node node : favoriteList) {
       if (!Utils.isInTrash(node))
@@ -148,7 +143,7 @@ public class DocumentProviderUtils {
     queryString.append(" WHERE CONTAINS(")
                .append(Utils.EXO_OWNER)
                .append(",'")
-               .append(uiExplorer.getSession().getUserID())
+               .append(WCMCoreUtils.getRemoteUser())
                .append("')");
 
     QueryManager queryManager = session.getWorkspace().getQueryManager();

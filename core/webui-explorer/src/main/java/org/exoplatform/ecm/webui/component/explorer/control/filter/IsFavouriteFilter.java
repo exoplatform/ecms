@@ -16,15 +16,14 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.control.filter;
 
-import java.util.Map;
-
-import javax.jcr.Node;
-
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.services.cms.documents.FavoriteService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.ext.filter.UIExtensionAbstractFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
+
+import javax.jcr.Node;
+import java.util.Map;
 
 /**
  * Created by The eXo Platform SARL
@@ -46,7 +45,7 @@ public class IsFavouriteFilter extends UIExtensionAbstractFilter {
   public static boolean isFavourite(Node node, UIJCRExplorer uiExplorer) throws Exception {
     FavoriteService favoriteService = WCMCoreUtils.getService(FavoriteService.class);
 
-    return favoriteService.isFavoriter(uiExplorer.getSession().getUserID(), node);
+    return favoriteService.isFavoriter(WCMCoreUtils.getRemoteUser(), node);
   }
   public boolean accept(Map<String, Object> context) throws Exception {
       if (context == null) return true;

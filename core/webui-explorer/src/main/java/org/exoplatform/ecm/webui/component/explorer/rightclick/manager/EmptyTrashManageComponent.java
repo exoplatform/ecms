@@ -16,15 +16,6 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.rightclick.manager;
 
-import java.util.Arrays;
-import java.util.List;
-
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.Session;
-import javax.jcr.nodetype.NodeType;
-import javax.portlet.PortletPreferences;
-
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsTrashHomeNodeFilter;
@@ -48,6 +39,14 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 import org.exoplatform.webui.ext.manager.UIAbstractManager;
 import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
+
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.Session;
+import javax.jcr.nodetype.NodeType;
+import javax.portlet.PortletPreferences;
+import java.util.Arrays;
+import java.util.List;
 /**
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
@@ -78,7 +77,7 @@ public class EmptyTrashManageComponent extends UIAbstractManagerComponent {
       return;
     }
 
-    String currentUser = uiExplorer.getSession().getUserID();
+    String currentUser = WCMCoreUtils.getRemoteUser();
     boolean error = false;
     while (nodeIter.hasNext()) {
       try {
