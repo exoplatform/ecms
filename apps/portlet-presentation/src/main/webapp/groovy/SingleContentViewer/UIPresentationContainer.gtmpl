@@ -120,7 +120,7 @@
 				
 			if (!Utils.isPortalEditMode() && isShowOptionBar && !uicomponent.isPrinting()) { 
 				%>
-					<div class="UIOptionBar">
+					<div class="UIOptionBar clearfix">
 	         <div class="BackButton" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UISCVPreferences.label.Back") %>" onclick="history.go(-1)"><span></span></div>
 						<a class="ActionIcon PrintIcon" href="javascript: void(0);" onclick="window.open('<%= uicomponent.getPrintUrl(node) %>')" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIPresentationContainer.label.print");%>"><%= _ctx.appRes("UIPresentationContainer.label.print") %></a>
 					</div>
