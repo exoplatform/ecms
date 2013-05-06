@@ -87,7 +87,7 @@
 	%>
 	<% if (!"basic".equals(uicomponent.getMode())) { %>
   	<div class="uiAction"> 
-		<button onclick="<%=uicomponent.event("Add")%>" class="btn"><%=_ctx.appRes("UIFCCActionList.action.Add")%></button>
+		<button type="button" onclick="<%=uicomponent.event("Add")%>" class="btn"><%=_ctx.appRes("UIFCCActionList.action.Add")%></button>
   	</div>
   	<% } %>
 </div>

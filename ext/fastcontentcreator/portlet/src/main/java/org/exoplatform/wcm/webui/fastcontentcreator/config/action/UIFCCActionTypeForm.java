@@ -111,7 +111,7 @@ public class UIFCCActionTypeForm extends UIForm {
     UIFCCActionContainer fastContentCreatorActionContainer = getParent() ;
     UIFCCActionForm fastContentCreatorActionForm = fastContentCreatorActionContainer.getChild(UIFCCActionForm.class);
     if(defaultActionType_ == null) {
-      defaultActionType_ = "exo:sendMailAction" ;
+      defaultActionType_ = "exo:addMetadataAction";
       isNews = true;
     }else{
       isNews = false;
@@ -187,7 +187,7 @@ public class UIFCCActionTypeForm extends UIForm {
                                                   arg,
                                                   ApplicationMessage.WARNING));
           
-          actionType = "exo:sendMailAction" ;
+          actionType = "exo:addMetadataAction" ;
           fastContentCreatorActionTypeForm.getUIFormSelectBox(UIFCCActionTypeForm.ACTION_TYPE).setValue(actionType) ;
           UIFCCActionContainer fastContentCreatorActionContainer = fastContentCreatorActionTypeForm.
               getAncestorOfType(UIFCCActionContainer.class);
@@ -202,7 +202,7 @@ public class UIFCCActionTypeForm extends UIForm {
                                                 arg,
                                                 ApplicationMessage.WARNING));
         
-        actionType = "exo:sendMailAction" ;
+        actionType = "exo:addMetadataAction" ;
         fastContentCreatorActionTypeForm.getUIFormSelectBox(UIFCCActionTypeForm.ACTION_TYPE).setValue(actionType) ;
         UIFCCActionContainer fastContentCreatorActionContainer = fastContentCreatorActionTypeForm.
             getAncestorOfType(UIFCCActionContainer.class);
