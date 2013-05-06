@@ -1440,7 +1440,7 @@
 	};
 
         ECMUtils.prototype.initTagsTypeAhead = function(tags) {
-          gj("#UITaggingForm").find('#names').typeahead({source: tags.split(",")});          
+          gj("#UITaggingForm").find('#names').typeahead({minLength: 0, source: tags.split(",")}); 
         };
 	
 	ECMUtils.prototype.onLoadUIThumbnailForm = function(previewAction) {

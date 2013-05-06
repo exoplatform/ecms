@@ -24,15 +24,12 @@ import java.util.Set;
 
 import javax.jcr.Node;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
-import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
@@ -238,10 +235,11 @@ public class UITaggingForm extends UIForm {
         return;
       }
       String[] tagNames = null;
-      if (tagName.indexOf(",") > -1) {
-        tagNames = tagName.split(",");
-        List<String> listTagNames = new ArrayList<String>(tagNames.length);
-        List<String> listTagNamesClone = new ArrayList<String>(tagNames.length);
+      tagNames = tagName.split(",");
+      List<String> listTagNames = new ArrayList<String>(tagNames.length);
+      List<String> listTagNamesClone = new ArrayList<String>(tagNames.length);
+      
+      if (tagName.indexOf(",") > -1) {        
         for (String tName : tagNames) {
           listTagNames.add(tName.trim());
           listTagNamesClone.add(tName.trim());
@@ -250,43 +248,30 @@ public class UITaggingForm extends UIForm {
           String tag = listTagNames.get(i);
           listTagNamesClone.remove(tag);
           if (listTagNamesClone.contains(tag)) {
-            uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tag-name-duplicate",
-                                                    null,
-                                                    ApplicationMessage.WARNING));
-
-            return;
+            continue;
           }
           listTagNamesClone.add(tag);
         }
-      } else
+      } else {
         tagNames = new String[] { tagName };
-      String[] fitlerTagNames = new String[tagNames.length];
-      int i = 0;
-      for (String t : tagNames) {
-        fitlerTagNames[i] = tagNames[i].trim();
-        i++;
+        listTagNames.add(tagName.trim());
+        listTagNamesClone.add(tagName.trim());
+      }
+      for (int i = 0; i < listTagNames.size(); i++) {
+      	String t = listTagNames.get(i);
         if (t.trim().length() == 0) {
-          uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tag-name-empty",
-                                                  null,
-                                                  ApplicationMessage.WARNING));
-
-          return;
+          listTagNamesClone.remove(t);
+          continue;
         }
         if (t.trim().length() > 30) {
-          uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tagName-too-long",
-                                                  null,
-                                                  ApplicationMessage.WARNING));
-
-          return;
+        	listTagNamesClone.remove(t);
+          continue;
         }
         String[] arrFilterChar = { "&", "'", "$", "@", ":", "]", "[", "*", "%", "!", "/", "\\" };
         for (String filterChar : arrFilterChar) {
           if (t.indexOf(filterChar) > -1) {
-            uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tagName-invalid",
-                                                    null,
-                                                    ApplicationMessage.WARNING));
-
-            return;
+          	listTagNamesClone.remove(t);
+            continue;
           }
         }
       }
@@ -297,18 +282,16 @@ public class UITaggingForm extends UIForm {
                                                                                uiExplorer.getCurrentNode(),
                                                                                workspace);
       for (Node tag : tagList) {
-        for (String t : fitlerTagNames) {
-          if (t.equals(tag.getName())) {
-            Object[] args = { t };
-            uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.name-exist",
-                                                    args,
-                                                    ApplicationMessage.WARNING));
-
-            return;
+      	for (int i = 0; i < listTagNames.size(); i++) {
+      		String t = listTagNames.get(i);
+          if (t.equals(tag.getName())) {           
+            listTagNamesClone.remove(t);
+            continue;
           }
         }
       }
-      addTagToNode(tagScope, currentNode, fitlerTagNames, uiForm);
+      if(listTagNamesClone.size() > 0)
+      	addTagToNode(tagScope, currentNode, listTagNamesClone.toArray(new String[listTagNamesClone.size()]), uiForm);
       uiForm.activate();
 
       Preference preferences = uiExplorer.getPreference();

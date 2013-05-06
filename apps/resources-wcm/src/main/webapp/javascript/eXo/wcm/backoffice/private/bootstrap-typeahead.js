@@ -45,9 +45,13 @@
 
   , select: function () {
       var val = this.$menu.find('.active').attr('data-value')
-      this.$element
-        .val(this.updater(val))
-        .change()
+      var existingTags = this.$element.val()
+      var newTags = val;
+      if(existingTags.lastIndexOf(",") > 0)
+      {
+		  newTags = existingTags.substring(0, existingTags.lastIndexOf(",") + 1) + " " + val
+	  }
+      this.$element.val(this.updater(newTags)).change()
       return this.hide()
     }
 
@@ -80,10 +84,12 @@
 
   , lookup: function (event) {
       var items
-
-      this.query = this.$element.val()
-
-      if (!this.query || this.query.length < this.options.minLength) {
+      var tagName = this.$element.val() || ''
+      if(tagName.lastIndexOf(",") >= 0) tagName = tagName.substring(tagName.lastIndexOf(",") + 1, tagName.length);  
+      tagName = tagName.trim();                
+      this.query = tagName;
+      
+      if (this.query.length < this.options.minLength) {
         return this.shown ? this.hide() : this
       }
 
@@ -232,7 +238,7 @@
 
   , keyup: function (e) {
       switch(e.keyCode) {
-        case 40: // down arrow
+        case 40: if (!this.shown) this.lookup(e)
         case 38: // up arrow
         case 16: // shift
         case 17: // ctrl
@@ -333,3 +339,5 @@
   })
 
 }(window.jQuery);
+
+
