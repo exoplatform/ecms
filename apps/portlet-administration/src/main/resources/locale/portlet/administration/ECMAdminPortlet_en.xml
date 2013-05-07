@@ -1930,6 +1930,9 @@
 								<list>Content</list>
 								<navigation>Navigation</navigation>
 			  </label>
+			  <msg>
+			  	<template-existing>This template name already exists. Please select another one.</template-existing>
+			  </msg>
 		</UICLVTemplateForm>	
 			
   <!--

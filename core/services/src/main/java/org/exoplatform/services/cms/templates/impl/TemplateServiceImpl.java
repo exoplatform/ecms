@@ -45,7 +45,6 @@ import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
 import org.exoplatform.services.cms.impl.Utils;
-import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.templates.ContentTypeFilterPlugin;
 import org.exoplatform.services.cms.templates.ContentTypeFilterPlugin.FolderFilterConfig;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -834,6 +833,9 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       resourceNode.setProperty(NodetypeConstant.JCR_LAST_MODIFIED, new GregorianCalendar());
       resourceNode.setProperty(NodetypeConstant.JCR_DATA, data);
       resourceNode.setProperty(NodetypeConstant.EXO_ROLES, roles);
+      if(!resourceNode.isNodeType(NodetypeConstant.DC_ELEMENT_SET)) {
+        resourceNode.addMixin(NodetypeConstant.DC_ELEMENT_SET);
+      }
       resourceNode.setProperty(NodetypeConstant.DC_TITLE, new String[] {title});
       resourceNode.getSession().save();
       return contentNode.getPath();

@@ -32,7 +32,6 @@ import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.views.ApplicationTemplateManagerService;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.wcm.webui.validator.MandatoryValidator;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -48,6 +47,7 @@ import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
+import org.exoplatform.webui.form.validator.MandatoryValidator;
 
 /**
  * Created by The eXo Platform SARL
@@ -135,6 +135,7 @@ public class UICLVTemplateForm extends UIForm {
   private void addTemplate(String category, String title, String template, String content) throws Exception {
     TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
     ApplicationTemplateManagerService appTemplateManager = WCMCoreUtils.getService(ApplicationTemplateManagerService.class);
+    if(content == null) content = StringUtils.EMPTY;
     if(isAddNew) {
       if(!template.contains(".gtmpl")) template = template + ".gtmpl";
       if(title == null || title.length() == 0) title = template;
@@ -144,7 +145,6 @@ public class UICLVTemplateForm extends UIForm {
       if(hasTemplate(category, template)) {
         Node templateNode = getCategoryByName(category).getNode(template);
         Node contentNode = templateNode.getNode(NodetypeConstant.JCR_CONTENT);
-        if(content == null) content = StringUtils.EMPTY;
         contentNode.setProperty(NodetypeConstant.JCR_DATA, new ByteArrayInputStream(content.getBytes()));
         if(title == null || title.length() == 0) title = templateNode.getName();
         contentNode.setProperty(NodetypeConstant.DC_TITLE, new String[] { title });
@@ -160,6 +160,7 @@ public class UICLVTemplateForm extends UIForm {
   }
   
   private boolean hasTemplate(String category, String template) throws Exception {
+    if(!template.contains(".gtmpl")) template = template + ".gtmpl";
     return getCategoryByName(category).hasNode(template);
   }
   
