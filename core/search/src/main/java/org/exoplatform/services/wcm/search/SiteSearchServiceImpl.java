@@ -41,6 +41,7 @@ import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -897,7 +898,17 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     @Override
     public String createData(Node node, Row row) {
       try {
-        return node.getPath();
+        UserACL userACL = WCMCoreUtils.getService(UserACL.class);
+        if (node.hasProperty("gtn:access-permissions")) {
+          for (Value v : node.getProperty("gtn:access-permissions").getValues()) {
+            if (userACL.hasPermission(v.getString())) {
+              return node.getPath();
+            }
+          }
+          return null;
+        } else {
+          return node.getPath();
+        }
       } catch (RepositoryException e) {
         return null;
       }
