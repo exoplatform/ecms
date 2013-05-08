@@ -9,7 +9,7 @@
     <init-params>
       <value-param>
         <name>acceptedNodeTypes</name>
-        <value>{exo:accessibleMedia}{exo:article}{exo:contact_us}{exo:event}{exo:htmlFile}{rma:filePlan}{exo:webContent}{kfx:document}{exo:pictureOnHeadWebcontent}{exo:podcast}{exo:sample}{exo:link}{exo:product}</value>
+        <value>{exo:accessibleMedia}{acme:contact_us}{exo:webContent}{exo:pictureOnHeadWebcontent}{exo:link}{acme:product}</value>
       </value-param>
       <value-param>
         <name>acceptedProperties</name>
