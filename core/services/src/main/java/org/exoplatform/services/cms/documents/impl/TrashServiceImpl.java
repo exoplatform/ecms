@@ -39,6 +39,7 @@ import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
@@ -166,7 +167,9 @@ public class TrashServiceImpl implements TrashService {
   public void moveToTrash(Node node,
                           SessionProvider sessionProvider,
                           int deep) throws Exception {
-
+    String nodeName = node.getName();
+    Session nodeSession = node.getSession();
+    nodeSession.checkPermission(node.getPath(), PermissionType.REMOVE);  
     if (deep == 0 && !node.isNodeType(SYMLINK)) {
       try {
         Utils.removeDeadSymlinks(node);
@@ -176,8 +179,6 @@ public class TrashServiceImpl implements TrashService {
         }
       }
     }
-    String nodeName = node.getName();
-    Session nodeSession = node.getSession();
     String nodeWorkspaceName = nodeSession.getWorkspace().getName();
     ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
     //List<Node> categories = taxonomyService_.getAllCategories(node, true);
@@ -190,13 +191,10 @@ public class TrashServiceImpl implements TrashService {
       cache.remove(seoService.getHash(nodeUUID));
     }
     if (!node.isNodeType(EXO_RESTORE_LOCATION)) {
-      node.addMixin(EXO_RESTORE_LOCATION);
-      node.setProperty(RESTORE_PATH, fixRestorePath(node.getPath()));
-      node.setProperty(RESTORE_WORKSPACE, nodeWorkspaceName);
-      nodeSession.save();
-
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session trashSession = WCMCoreUtils.getSystemSessionProvider().getSession(this.trashWorkspace_, manageableRepository);
+      String restorePath = node.getPath();
+  
       String actualTrashPath = this.trashHome_ + (this.trashHome_.endsWith("/") ? "" : "/")
           + fixRestorePath(nodeName);
       if (trashSession.getWorkspace().getName().equals(
@@ -227,8 +225,7 @@ public class TrashServiceImpl implements TrashService {
         }
         node.remove();
       }
-
-      nodeSession.save();
+      
       trashSession.save();
 
       //check and delete target node when there is no its symlink
@@ -255,9 +252,13 @@ public class TrashServiceImpl implements TrashService {
           }
         }
       }
+      Node nodeInTrash =  trashSession.getRootNode().getNode(actualTrashPath.substring(1));
+      nodeInTrash.addMixin(EXO_RESTORE_LOCATION);
+      nodeInTrash.setProperty(RESTORE_PATH, fixRestorePath(restorePath));
+      nodeInTrash.setProperty(RESTORE_WORKSPACE, nodeWorkspaceName);
+  
       trashSession.save();
     }
-    nodeSession.save();
   }
 
   /**
