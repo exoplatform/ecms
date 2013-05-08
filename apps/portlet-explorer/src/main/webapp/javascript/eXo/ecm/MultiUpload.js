@@ -866,6 +866,7 @@
 		  		  var result = ret.getElementsByTagName("Result");
 		  		  if (result && result.length > 0) {
 		  			  var filetype = result[0].getAttribute("mimetype");
+		  			  eXo.ecm.MultiUpload.fileType[progressID] = filetype;
 				  	  var icon = gj("#icon" + progressID, eXo.ecm.MultiUpload.document)[0];
 							var iDiv = gj("i", icon);
 				  	  if (filetype && iDiv && (filetype.indexOf("image") == -1)) {
@@ -888,10 +889,21 @@
 		  	  "/" + cleanName(file.name);
 				var icon = gj("#icon" + progressID, eXo.ecm.MultiUpload.document)[0];
 		  	  if (icon && eXo.ecm.MultiUpload.fileType[progressID].indexOf("image") != -1) {
+		  		  var iconHTMLForImageLoadFail = gj(icon).html();
 		  		  icon.className="uploadIconContainer";
 		  		  icon.innerHTML="<img src='" +
-		  		  eXo.ecm.MultiUpload.restContext + "/thumbnailImage/small/repository/" +
-		  		  eXo.ecm.MultiUpload.ws + nodePath + "'>";
+		  		  	eXo.ecm.MultiUpload.restContext + "/thumbnailImage/small/repository/" +
+		  		  	eXo.ecm.MultiUpload.ws + nodePath + "'>";
+		  		  // If can not preview image, set back to default icon
+		  		  gj(gj(icon).find("img:first")[0]).error(function() {
+							gj(icon).html(iconHTMLForImageLoadFail);
+							var iDiv = gj("i", icon);
+							var className = iDiv.attr('class');
+							var typeFormatted = filetype.replace(/\./g, "").replace("/", "").replace("\\","");
+							if (className && (className.indexOf(typeFormatted) == -1)) {
+								iDiv.attr("class", className + " uiIcon16x16" + typeFormatted);
+							}
+		  		  });
 		  	  }
 		  	  //add link to open file
 		  	  var fileDiv = gj("#file" + progressID, eXo.ecm.MultiUpload.document)[0];
