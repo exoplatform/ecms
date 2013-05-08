@@ -81,6 +81,7 @@ This extended publication has new states and new profiles that are enabled in Co
 ** Approver: This profile approves a pending content (marked by the Author).
 ** Publisher: This profile publishes contents or marks them as "Ready for publication" in multi-server mode.
 ** Archiver: An administrative profile which moves contents to an archive storage.
+** Automatic: An administrative profile in which the content will be only managed by the system such as cron job.  
 * States
 ** enrolled: It is a pure technical state, generally used for content creation.
 ** draft (Author): Content is in editing phase.
@@ -184,6 +185,56 @@ In which:
 h2. Lifecycle {anchor:id=CONTref.Extensions.AuthoringExtension.PublicationManager.Lifecycle}
 
 A lifecycle is defined by a simple vertical workflow with steps (states) and profiles (membership). Each lifecycle is related to a *Publication* plugin (compliant with the JBPM or Bonita business processes).
+
+A lifecycle in eXo Platform is defined basing on:
+* _Publication plugin_: eXo Platform 3.5 provides 2 publication plugin types:  _[AuthoringPublicationPlugin|#CONTref.Configuration.Plugins.AuthoringPublicationPlugin]_ and _[StatesAndVersionsPublicationPlugin|#CONTref.Configuration.Plugins.StageAndVersionPublicationPlugin]_.
+* _State_: States list in lifecycle. You can use several states among [available states|#CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.States].
+* _Membership_: User having specific membership can reach a state. There are two possible types: specific membership or _automatic_ (Only system job can reach state).
+
+Note: eXo Platform allows defining more than one membership which can reach each state by using *memberships* field.
+
+Lifecycle prototype:
+
+{code:xml}<external-component-plugins>
+<target-component>org.exoplatform.services.wcm.extensions.publication.PublicationManager</target-component>
+ <component-plugin>
+   <name>AddLifecycle</name>
+   <set-method>addLifecycle</set-method>
+   <type>org.exoplatform.services.wcm.extensions.publication.lifecycle.StatesLifecyclePlugin</type>
+   <description>Configures</description>
+   <priority>1</priority>
+    <init-params>
+     <object-param>
+       <name>lifecycles</name>
+       <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig">
+         <field  name="lifecycles">
+           <collection type="java.util.ArrayList">
+             <value>
+               <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$Lifecycle">
+                 <field name="name"><string>$Lifecycle_name</string></field>
+                 <field name="publicationPlugin"><string>$Publication_plugin</string></field>
+                 <field  name="states">
+                   <collection type="java.util.ArrayList">
+                     <!-- list of states -->
+                     <value>
+                       <object type="org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State">
+                         <field name="state"><string>$State</string></field>
+                         <field name="membership"><string>$Membership</string></field>
+                         <!-- <field name="memberships">Memberships collection</field> -->
+                       </object>
+                     </value>
+                   </collection>
+                 </field>
+               </object>
+             </value>
+           </collection>
+         </field>
+       </object>
+     </object-param>
+   </init-params>
+ </component-plugin>
+</external-component-plugins>{code}
+
 
 For example: _Two lifecycles with/without states_
 
@@ -343,7 +394,7 @@ In the last example, there are three lifecycles:
 
 * Lifecycle 2: Based on _[AuthoringPublicationPlugin|#CONTref.Configuration.Plugins.AuthoringPublicationPlugin]_.
 ** Visibility: Define only the "visible" steps. In this example, there is no step for "enrolled". Even if this step exists, it will not be displayed in the UI.
-** Automatic: Set a step as "automatic". In this mode, the step will be visible in the UI but it will be managed by the system (e.g. a cron job).
+** Automatic: Set a step as "automatic". In this mode, the step will be visible in the UI but it will be managed by the system (e.g. a cron job).No user is allowed to reach this step.
 * Lifecycle 3: Simulates the _StatesAndVersionsPublicationPlugin_ plugin. Note that this simple lifecycle will work in a single server configuration.
 
 h3. Listen to a lifecycle {anchor:id=CONTref.Extensions.AuthoringExtension.PublicationManager.ListenToLifecycle}
@@ -410,6 +461,40 @@ From these parameters, you can easily connect and define contexts based on:
 Because each site has a content storage (categories + physical storage), you can select the right lifecycle for the right storage/site.
 To avoid conflicts on contexts, you can set a priority (the less is the best).
 
+
+Context prototype
+{code:xml}<external-component-plugins>
+ <target-component>org.exoplatform.services.wcm.extensions.publication.PublicationManager</target-component>
+   <component-plugin>
+   <name>AddContext</name>
+   <set-method>addContext</set-method>
+   <type>org.exoplatform.services.wcm.extensions.publication.context.ContextPlugin</type>
+   <init-params>
+     <object-param>
+       <name>contexts</name>
+       <object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig">
+         <field  name="contexts">
+           <collection type="java.util.ArrayList">
+             <value>
+               <object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig$Context">
+                 <field name="name"><string>$Context_name</string></field>
+                 <field name="priority"><string>$Priority</string></field>
+                 <field name="lifecycle"><string>$Lifecycle_in_use</string></field>
+                 <field name="memberships"><!-- List of role which is in context -></field>
+                 <field name="site"><string>$Site</string></field>
+                 <field name="path"><string>$Path</string></field>
+                 <field name="nodetype"><string>$Type of Content</string></field>
+               </object>
+             </value>
+           </collection>
+         </field>
+       </object>
+     </object-param>
+   </init-params>
+ </component-plugin>
+</external-component-plugins>
+{code}
+
 For example, *Different Contexts*:
 
 {code:xml}<external-component-plugins>
@@ -467,7 +552,7 @@ For example, *Different Contexts*:
 										<string>lifecycle1</string>
 									</field>
 									<field name="site">
-										<string>classic</string>
+										<string>default</string>
 									</field>
 								</object>
 								<object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig$Context">
