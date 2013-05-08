@@ -18,7 +18,7 @@ def escapeChar = '%' as char
 }
 
 .uiAuthoringDashboard .element a:hover {
-  color: blue;
+  color: #2f5e92;
 }
 
 .uiAuthoringDashboard .alignLeft {
@@ -35,7 +35,7 @@ def escapeChar = '%' as char
 }
 
 .uiAuthoringDashboard .element {
-  background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/ArrowSideBar.gif') no-repeat left center;
+  background: url('/ecmexplorer/skin/webui/component/explorer/sidebar/DefaultSkin/icons/ArrowSideBar.gif') no-repeat left 8px;
   padding-left: 15px;
 }
 
@@ -53,7 +53,7 @@ def escapeChar = '%' as char
 }
 
 .uiAuthoringDashboard .noContent {
-	color: #bbb;
+	color: #f9f9f9;
 }
 
 .uiAuthoringDashboard .uiPageIterator {

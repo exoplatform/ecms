@@ -8,7 +8,7 @@
 
 <div class="uiBox" id="$uicomponent.id">
 	<h6 class="title clearfix">
-		<a class="sideGeneratal" onclick="<%=uicomponent.event("DocumentFilter")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAllItemsByType.label.DocumentFilterConfiguration")%>"><i class="uiIconSetting uiIconLightGray"></i></a>
+		<a class="actionIcon pull-right" onclick="<%=uicomponent.event("DocumentFilter")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAllItemsByType.label.DocumentFilterConfiguration")%>"><i class="uiIconSetting uiIconLightGray"></i></a>
 		<%=_ctx.appRes("UIAllItemsByType.label.ByType")%>
 	</h6>					
 	<div class="uiContentBox">
@@ -18,7 +18,7 @@
 				for (type in supportedTypes) {                                  
 					String supportedLink = uicomponent.event("ShowDocumentType", type) ;
 					String classValue = (allItemByTypeFilterMap.contains(type) ?
-							"uiIconTick" : "uiIconEcmsDottedArrow");
+							"uiIconEcmsTickMini" : "uiIconEcmsDottedArrow");
 			%>
 			<li>
 				<i class="$classValue"></i>

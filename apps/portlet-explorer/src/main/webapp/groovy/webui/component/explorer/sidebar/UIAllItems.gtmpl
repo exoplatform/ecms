@@ -14,7 +14,7 @@
 %>
 <div class="uiBox" id="$uicomponent.id">
 	<h6 class="title clearfix">
-		<a class="sideGeneratal" onclick="<%=uicomponent.event("Preferences")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAllItems.label.Configuration")%>"><i class="uiIconSetting uiIconLightGray"></i></a>
+		<a class="actionIcon pull-right" onclick="<%=uicomponent.event("Preferences")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIAllItems.label.Configuration")%>"><i class="uiIconSetting uiIconLightGray"></i></a>
 		<%=_ctx.appRes("UIAllItems.title.allItems")%> 
 	</h6>
 
@@ -22,7 +22,7 @@
 		<ul class="uiItemList">
 			<% if (pref.isShowOwnedByUserDoc()) { 
 					String classValue = (allItemFilterMap.contains(ownedByMe) ?
-							"uiIconTick" : "uiIconEcmsDottedArrow");
+							"uiIconEcmsTickMini" : "uiIconEcmsDottedArrow");
 				%>
 				<li>
 					<i class="$classValue"></i>
@@ -34,7 +34,7 @@
 			
 			<% if (pref.isShowFavouriteDoc()) { 
 					String classValue = (allItemFilterMap.contains(favorite) ?
-							"uiIconTick" : "uiIconEcmsDottedArrow");
+							"uiIconEcmsTickMini" : "uiIconEcmsDottedArrow");
 				%>
 				<li>
 					<i class="$classValue"></i>
@@ -46,7 +46,7 @@
 					
 			<% if (pref.isShowHiddenDoc()) {
 				String classValue = (allItemFilterMap.contains(hidden) ?
-						"uiIconTick" : "uiIconEcmsDottedArrow");
+						"uiIconEcmsTickMini" : "uiIconEcmsDottedArrow");
 				%>
 				<li>
 					<i class="$classValue"></i>
