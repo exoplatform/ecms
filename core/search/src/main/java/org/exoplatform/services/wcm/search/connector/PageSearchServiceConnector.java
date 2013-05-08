@@ -54,7 +54,6 @@ public class PageSearchServiceConnector extends BaseSearchServiceConnector {
     criteria.setSearchWebpage(true);
     criteria.setSearchDocument(false);
     criteria.setSearchWebContent(false);
-    criteria.setMultiplePhaseSearch(true);
     criteria.setLiveMode(true);
     criteria.setOffset(offset);
     criteria.setLimit(limit);

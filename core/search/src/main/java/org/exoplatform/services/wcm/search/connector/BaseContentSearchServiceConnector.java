@@ -43,7 +43,6 @@ public abstract class BaseContentSearchServiceConnector extends BaseSearchServic
     criteria.setSearchWebpage(false);
     criteria.setSearchDocument(true);
     criteria.setSearchWebContent(true);
-    criteria.setMultiplePhaseSearch(true);
     criteria.setLiveMode(true);
     criteria.setOffset(offset);
     criteria.setLimit(limit);

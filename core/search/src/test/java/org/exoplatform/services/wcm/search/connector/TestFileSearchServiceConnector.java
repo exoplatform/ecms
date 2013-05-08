@@ -140,30 +140,30 @@ public class TestFileSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = fileSearch_.search(null, "anthony john", 
+          = fileSearch_.search(null, "anthony cjohn", 
                                    sites, 
                                    0, 20, "title", "asc");
-    assertEquals(6, ret.size());//3
+    assertEquals(2, ret.size());//3
   }
   
   public void testSearchMultipleWithOffset() throws Exception {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = fileSearch_.search(null, "anthony john", 
+          = fileSearch_.search(null, "anthony cjohn", 
                                    sites, 
                                    1, 20, "title", "asc");
-    assertEquals(5, ret.size());//2
+    assertEquals(1, ret.size());//2
   }
   
   public void testSearchMultipleWithLimit() throws Exception {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = fileSearch_.search(null, "anthony john", 
+          = fileSearch_.search(null, "anthony cjohn", 
                                    sites, 
-                                   0, 2, "title", "asc");
-    assertEquals(2, ret.size());
+                                   0, 1, "title", "asc");
+    assertEquals(1, ret.size());
   }  
 
   public void testSearchPhrase() throws Exception {

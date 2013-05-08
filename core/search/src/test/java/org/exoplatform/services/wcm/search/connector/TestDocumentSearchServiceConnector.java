@@ -123,30 +123,30 @@ public class TestDocumentSearchServiceConnector extends BaseSearchTest {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "anthony john", 
+          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "anthony Felix", 
                                    sites, 
                                    0, 20, "title", "asc");
-    assertEquals(6, ret.size());//3
+    assertEquals(2, ret.size());//3
   }
   
   public void testSearchMultipleWithOffset() throws Exception {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "anthony john", 
+          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "anthony Felix", 
                                    sites, 
                                    1, 20, "title", "asc");
-    assertEquals(5, ret.size());//2
+    assertEquals(1, ret.size());//2
   }
   
   public void testSearchMultipleWithLimit() throws Exception {
     Collection<String> sites = new ArrayList<String>();
     sites.add("classic");
     Collection<SearchResult> ret 
-          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "anthony john", 
+          = documentSearch_.search(new SearchContext(new Router(new ControllerDescriptor()), "intranet"), "anthony Felix", 
                                    sites, 
-                                   0, 2, "title", "asc");
-    assertEquals(2, ret.size());
+                                   0, 1, "title", "asc");
+    assertEquals(1, ret.size());
   }  
   
 

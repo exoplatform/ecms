@@ -446,35 +446,30 @@ public class SiteSearchServiceImpl implements SiteSearchService {
    */
   private void mapFulltextQueryTearm(final QueryCriteria queryCriteria,
                                      final SQLQueryBuilder queryBuilder, LOGICAL condition) {
-    String queryString = queryCriteria.getKeyword();
-    if (queryString == null || queryString.length() == 0)
+    String keyword = queryCriteria.getKeyword();
+    if (keyword == null || keyword.length() == 0)
       return;
-    int count = 0;
-    for (String keyword : getKeywords(queryString, queryCriteria.isMultiplePhaseSearch())) {
-      keyword = keyword.trim();
-      if (StringUtils.isBlank(keyword)) continue;
-      QueryTermHelper queryTermHelper = new QueryTermHelper();
-      String queryTerm = null;
-      if (isEnabledFuzzySearch) {
-        if (keyword.contains("*") || keyword.contains("?") || keyword.contains("~")) {
-          queryTerm = queryTermHelper.contains(keyword).buildTerm();
-        } else {
-          queryTerm = queryTermHelper.contains(keyword).allowFuzzySearch(fuzzySearchIndex).buildTerm();
-        }      
-      } else {
-        keyword = keyword.replace("~", "\\~");
-        keyword = keyword.replace("*", "\\*");
-        keyword = keyword.replace("?", "\\?");
+    QueryTermHelper queryTermHelper = new QueryTermHelper();
+    String queryTerm = null;
+    if (isEnabledFuzzySearch) {
+      if (keyword.contains("*") || keyword.contains("?") || keyword.contains("~") || keyword.contains("\"")) {
         queryTerm = queryTermHelper.contains(keyword).buildTerm();
-      }
-      String[] props = queryCriteria.getFulltextSearchProperty();
-      if (props == null || props.length == 0 || QueryCriteria.ALL_PROPERTY_SCOPE.equals(props[0])) {
-        queryBuilder.contains(null, queryTerm, (count++ == 0 ? LOGICAL.NULL : LOGICAL.OR));
       } else {
-        queryBuilder.contains(props[0], queryTerm, (count++ == 0 ? LOGICAL.NULL : LOGICAL.OR));
-        for (int i = 1; i < props.length; i++) {
-          queryBuilder.contains(props[i], queryTerm, condition);
-        }
+        queryTerm = queryTermHelper.contains(keyword).allowFuzzySearch(fuzzySearchIndex).buildTerm();
+      }      
+    } else {
+      keyword = keyword.replace("~", "\\~");
+      keyword = keyword.replace("*", "\\*");
+      keyword = keyword.replace("?", "\\?");
+      queryTerm = queryTermHelper.contains(keyword).buildTerm();
+    }
+    String[] props = queryCriteria.getFulltextSearchProperty();
+    if (props == null || props.length == 0 || QueryCriteria.ALL_PROPERTY_SCOPE.equals(props[0])) {
+      queryBuilder.contains(null, queryTerm, LOGICAL.NULL);
+    } else {
+      queryBuilder.contains(props[0], queryTerm, LOGICAL.NULL);
+      for (int i = 1; i < props.length; i++) {
+        queryBuilder.contains(props[i], queryTerm, condition);
       }
     }
   }

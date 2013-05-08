@@ -98,9 +98,6 @@ public class QueryCriteria {
   /** order by */
   private String orderBy_ = null;
   
-  /** multiple search enable/disable */
-  private boolean multipleSearch_ = false;
-  
   private String searchPath_ = null;
 
   /** Pagination mode :
@@ -132,10 +129,6 @@ public class QueryCriteria {
   public String getOrderBy() { return orderBy_; }
   
   public void setOrderBy(String value) { orderBy_ = value; }
-  
-  public boolean isMultiplePhaseSearch() { return multipleSearch_; }
-  
-  public void setMultiplePhaseSearch(boolean value) { multipleSearch_ = value; }
   
   public String getSearchPath() { return searchPath_; }
   
