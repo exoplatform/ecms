@@ -32,6 +32,7 @@ import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.commons.api.search.SearchServiceConnector;
 import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.commons.api.search.data.SearchResult;
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
@@ -262,6 +263,20 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
     }
     String id = driveData.getName();
     String path = driveData.getHomePath();
+    //get space name (in case drive is space drive)
+    try {
+      Class spaceServiceClass = Class.forName("org.exoplatform.social.core.space.spi.SpaceService");
+      Object spaceService = ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(spaceServiceClass);
+      
+      Class spaceClass = Class.forName("org.exoplatform.social.core.space.model.Space");
+      Object space = spaceServiceClass.getDeclaredMethod("getSpaceByGroupId", String.class).invoke(spaceService, id.replace(".", "/"));
+      if (space != null) {
+        return String.valueOf(spaceClass.getDeclaredMethod("getDisplayName").invoke(space));
+      }
+    } catch (Exception e) {
+      //can not get space, do nothing, will return the drive label
+    }
+    //get drive label
     try {
       RepositoryService repoService = WCMCoreUtils.getService(RepositoryService.class);
       Node groupNode = (Node)WCMCoreUtils.getSystemSessionProvider().getSession(
