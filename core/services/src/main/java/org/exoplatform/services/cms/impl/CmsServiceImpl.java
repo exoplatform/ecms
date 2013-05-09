@@ -183,11 +183,8 @@ public class CmsServiceImpl implements CmsService {
       //all document node should be mix:referenceable that allow retrieve UUID by method Node.getUUID()
       if(!currentNode.isNodeType(MIX_REFERENCEABLE)) {
         currentNode.addMixin(MIX_REFERENCEABLE);
-      }
-      if (currentNode.isNodeType(ActivityCommonService.MIX_COMMENT)) {
-        currentNode.removeMixin(ActivityCommonService.MIX_COMMENT);
-      }
-    //Broadcast CmsService.event.postCreate event
+      }      
+      //Broadcast CmsService.event.postCreate event
       listenerService.broadcast(POST_CREATE_CONTENT_EVENT,this,currentNode);
     } else {
       currentNode = storeHomeNode.getNode(nodeName);
@@ -202,11 +199,12 @@ public class CmsServiceImpl implements CmsService {
         currentNode.setProperty("exo:dateModified", new GregorianCalendar());
       }
       listenerService.broadcast(POST_EDIT_CONTENT_EVENT, this, currentNode);
-      if (currentNode.isNodeType(ActivityCommonService.MIX_COMMENT)) {
-        currentNode.removeMixin(ActivityCommonService.MIX_COMMENT);
-      }
+     
     }
     //add lastModified property to jcr:content
+    if (currentNode.isNodeType(ActivityCommonService.MIX_COMMENT)) {
+      currentNode.removeMixin(ActivityCommonService.MIX_COMMENT);
+    }
     session.save();
     return currentNode.getPath();
   }

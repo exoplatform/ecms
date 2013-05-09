@@ -436,12 +436,17 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       try {
         newNode = (Node)homeNode.getSession().getItem(addedPath);
         //Broadcast the add file activity
-        ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
-        ActivityCommonService   activityService = WCMCoreUtils.getService(ActivityCommonService.class);
-        if (activityService.isBroadcastNTFileEvents(newNode)) {
-          listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, newNode);
-          newNode.getSession().save();
-        }  
+        if(documentForm.isAddNew()) {
+	        ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
+	        ActivityCommonService   activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+	        if (newNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) && activityService.isBroadcastNTFileEvents(newNode)) {
+	          listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, newNode);
+	          newNode.getSession().save();
+	        } else if(activityService.isAcceptedNode(newNode)) {
+	          listenerService.broadcast(ActivityCommonService.NODE_CREATED_ACTIVITY, null, newNode);
+	          newNode.getSession().save();
+	        } 
+        }
        
         if(newNode.isLocked()) {
           newNode.getSession().addLockToken(LockUtil.getLockToken(newNode));

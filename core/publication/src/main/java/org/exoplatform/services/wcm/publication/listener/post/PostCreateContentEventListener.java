@@ -175,11 +175,7 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
     }
     if (LOG.isInfoEnabled()) LOG.info(currentNode.getPath() + "::" + siteName + "::"+remoteUser);
     if (remoteUser != null) { 
-      publicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser);
-      //Broadcast event to activity only for this condition
-      if (activityService.isAcceptedNode(currentNode)) {
-        listenerService.broadcast(ActivityCommonService.NODE_CREATED_ACTIVITY, null, currentNode);
-      } 
+      publicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser);     
     }
   }
 }
