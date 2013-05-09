@@ -1,5 +1,4 @@
 <%
-  import org.exoplatform.ecm.utils.text.Text;
   import org.exoplatform.wcm.webui.reader.ContentReader;
   def escapeChar = '%' as char
 %>
@@ -18,7 +17,7 @@
   <div class="elements uiContentBox">
   <%
     for (Node node:nodes) {
-      def path = Text.escape(node.getPath(),escapeChar, true);
+      def path = node.getPath();
       def name = node.getName();            
       if (node.hasProperty("exo:title")) name = node.getProperty("exo:title").getString();
       name = ContentReader.getEscapeHtmlContent(name);
