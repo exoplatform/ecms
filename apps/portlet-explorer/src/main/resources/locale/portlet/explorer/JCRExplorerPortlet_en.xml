@@ -2652,7 +2652,7 @@
        <Video>Video</Video>
        <Music>Music</Music>
        <Documents>Document</Documents>
-       <Contents>Content</Contents>
+       <Content>Content</Content>
     </label>
   </DocumentType>
 
@@ -2662,7 +2662,7 @@
       <Video>Video</Video>
       <Music>Music</Music>
       <Documents>Document</Documents>
-      <Contents>Content</Contents>
+      <Content>Content</Content>
     </label>
     <title>Set Up Filter Preferences</title>
     <action>
@@ -2681,7 +2681,7 @@
       <ShowMusic>Show all music files</ShowMusic>
       <ShowImages>Show all image files</ShowImages>
       <ShowDocuments>Show all document files</ShowDocuments>
-      <ShowContents>Show all document types</ShowContents>
+      <ShowContent>Show all document types</ShowContent>
     </title>
   </UIAllItemsByType>
 
