@@ -2161,7 +2161,7 @@
   ###################################################################################
   # JCR Exceptions manager                                                              #
   ###################################################################################
-  -->VersionException.msg=Cannot delete documents that are being checked in.
+  -->
   <ReferentialIntegrityException>
     <msg>Action failed. There are still some reference items in the workspace.</msg>
   </ReferentialIntegrityException>

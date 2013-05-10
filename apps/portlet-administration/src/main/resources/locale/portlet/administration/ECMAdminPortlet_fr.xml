@@ -680,12 +680,8 @@
       <nodeType>Type de noeud</nodeType>
       <mixinType>Mixin</mixinType>
       <orderable>Sous-Noeuds Ordonnables</orderable>
-      <description>Description</description>
       <action>Action</action>
     </header>
-    <info>
-      <description/>
-    </info>
     <action>
       <Export>Exporter</Export>
       <Import>Importer</Import>
@@ -1031,9 +1027,9 @@
   -->
   <UIViewList>
    <title>
-     <View>View</View>
-     <EditInfo>Edit</EditInfo>
-     <Delete>Delete</Delete>
+     <View>Aperçu</View>
+     <EditInfo>Modifier</EditInfo>
+     <Delete>Supprimer</Delete>
    </title>
     <header>
       <name>Nom</name>
@@ -1272,9 +1268,9 @@
   -->
   <UIECMTemplateList>
     <title>
-      <View>View</View>
-      <EditInfo>Edit</EditInfo>
-      <Delete>Delete</Delete>
+      <View>Aperçu</View>
+      <EditInfo>Modifier</EditInfo>
+      <Delete>Supprimer</Delete>
     </title>
     <header>
       <name>Nom</name>
@@ -1934,6 +1930,9 @@
 <list>Contenu</list>
 <navigation>Navigation</navigation>
   </label>
+  <msg>
+  <template-existing>This template name already exists. Please select another one.</template-existing>
+  </msg>
 </UICLVTemplateForm>
 
   <!--

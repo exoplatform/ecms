@@ -3187,7 +3187,7 @@
   <UITagForm>
     <action>
       <UpdateTag>#{word.save}</UpdateTag>
-      <Cancel>#{word.cancel}</Cancel>
+      <Cancel>#{word.close}</Cancel>
     </action>
     <label>
       <tagName>Nom du Tag:</tagName>
