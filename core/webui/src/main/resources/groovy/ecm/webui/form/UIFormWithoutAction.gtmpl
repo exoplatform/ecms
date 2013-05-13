@@ -19,21 +19,20 @@ import org.apache.commons.lang.StringUtils;
           if(field.isRendered()) {
             String fieldLabel = uicomponent.getLabel(field.getName());
       %>
-			<div class="control-group">
-				<%if(!uicomponent.getId().equals(fieldLabel)) { 
-					if(StringUtils.isNotEmpty(fieldLabel)) {%>
-					<label class="control-label" for="<%=field.getId()%>"><%=fieldLabel%></label>
-					<% }%>
-					 <div class="controls"><% uiform.renderField(field) %></div>
-				<%} else {%>
-					 <div class="controls-full"><% uiform.renderField(field) %></div>
-				<%}%>
-			</div>
+            <div class="control-group">
+                <%if(!uicomponent.getId().equals(fieldLabel)) { 
+                    if(StringUtils.isNotEmpty(fieldLabel)) {%>
+                      <label class="control-label" for="<%=field.getId()%>"><%=fieldLabel%></label>
+                    <% }%>
+                    <div class="controls"><% uiform.renderField(field) %></div>
+                <%} else {%>
+                     <div class="controls-full"><% uiform.renderField(field) %></div>
+                <%}%>
+            </div>
       <%
           }
         }
       %>
-			
   </div>
     <%uiform.end()%>
 </div>

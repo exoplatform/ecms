@@ -885,7 +885,8 @@
 		    showSideBar = Self.getCookie(eXo.env.portal.userName + "_CEShowSideBar") != "false";
 		  }
 		  if (Self.initWithoutLeftContainer()) {
-		    Self.uiRightContainer.style.width = Self.uiWorkingArea.offsetWidth + "px";
+		    if (Self.uiWorkingArea)
+		      Self.uiRightContainer.style.width = Self.uiWorkingArea.offsetWidth + "px";
 		  } else {
 		    if (leftContainerWidth) {
 		      if (Self.uiWorkingArea.offsetWidth - leftContainerWidth < Self.MiniumRightContainerWidth) {

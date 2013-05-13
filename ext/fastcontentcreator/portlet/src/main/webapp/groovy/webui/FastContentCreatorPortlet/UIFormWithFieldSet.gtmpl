@@ -1,12 +1,4 @@
 <%
-    /**
-     * Created by The eXo Platform SAS
-     * Author : eXoPlatform
-     *          chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
-     * Comment: Extends UIForm, add more condition to display fieldset better
-     * Jun 26, 2009  
-     */
-     
 import org.exoplatform.wcm.webui.fastcontentcreator.UIFCCConstant;
 
 %>
@@ -46,49 +38,51 @@ import org.exoplatform.wcm.webui.fastcontentcreator.UIFCCConstant;
                           if(formInput.getName().equals(UIFCCConstant.SAVE_LOCATION_FIELD)) {
                           %>
                               <div class="form-horizontal" >
-                                  <div class="control-group">                  
-										<div class="control-label"><%=uicomponent.getLabel(UIFCCConstant.REPOSITORY_FORM_SELECTBOX) %></div>
-										<div class="controls"><%uiform.renderField(UIFCCConstant.REPOSITORY_FORM_SELECTBOX) %></div>
-									</div>
-									<div class="control-group">
-										<div class="control-label"> <%=uicomponent.getLabel(UIFCCConstant.WORKSPACE_FORM_SELECTBOX) %></div>
-										<div class="controls"><%uiform.renderField(UIFCCConstant.WORKSPACE_FORM_SELECTBOX) %></div>
-									</div>
-									<div class="control-group">
-										<div class="control-label"><%=uicomponent.getLabel(UIFCCConstant.LOCATION_FORM_INPUT_ACTION) %></div>
-										<div class="controls"><%uiform.renderField(UIFCCConstant.LOCATION_FORM_INPUT_ACTION) %></div>
+                              <%
+                                  if (!uicomponent.BASIC_MODE.equals(uicomponent.preferenceMode)) {
+                              %>
+                                    <div class="control-group">
+                                        <div class="control-label"> <%=uicomponent.getLabel(UIFCCConstant.WORKSPACE_FORM_SELECTBOX) %></div>
+                                        <div class="controls"><%uiform.renderField(UIFCCConstant.WORKSPACE_FORM_SELECTBOX) %></div>
+                                    </div>
+                               <%
+                                  }
+                               %>
+                                    <div class="control-group">
+                                        <div class="control-label"><%=uicomponent.getLabel(UIFCCConstant.LOCATION_FORM_INPUT_ACTION) %></div>
+                                        <div class="controls"><%uiform.renderField(UIFCCConstant.LOCATION_FORM_INPUT_ACTION) %></div>
                                   </div>
                               </div>
                           <%
                           } else if(formInput.getName().equals(UIFCCConstant.TEMPLATE_FIELD)) {
                           %>
                               <div class="form-horizontal" >
-                                  <div class="control-group">                  
+                                  <div class="control-group">
                                       <div class="control-label"><%=uicomponent.getLabel(UIFCCConstant.TEMPLATE_FORM_SELECTBOX) %></div>
-									  <div class="controls"><%uiform.renderField(UIFCCConstant.TEMPLATE_FORM_SELECTBOX) %></div>
-									</div>
-									<div class="control-group">
+                                      <div class="controls"><%uiform.renderField(UIFCCConstant.TEMPLATE_FORM_SELECTBOX) %></div>
+                                    </div>
+                                    <div class="control-group">
                                       <div class="control-label"><%=uicomponent.getLabel(UIFCCConstant.SAVE_FORM_STRING_INPUT) %></div>
-									  <div class="controls"><%uiform.renderField(UIFCCConstant.SAVE_FORM_STRING_INPUT) %></div>
-									 </div>
-									<div class="control-group">
+                                      <div class="controls"><%uiform.renderField(UIFCCConstant.SAVE_FORM_STRING_INPUT) %></div>
+                                     </div>
+                                    <div class="control-group">
                                       <div class="control-label"><%=uicomponent.getLabel(UIFCCConstant.MESSAGE_FORM_TEXTAREA_INPUT) %></div>
-									  <div class="controls"><%uiform.renderField(UIFCCConstant.MESSAGE_FORM_TEXTAREA_INPUT) %></div>
-									 </div>
-									<div class="control-group">
+                                      <div class="controls"><%uiform.renderField(UIFCCConstant.MESSAGE_FORM_TEXTAREA_INPUT) %></div>
+                                     </div>
+                                    <div class="control-group">
                                       <div class="control-label"><%=uicomponent.getLabel(UIFCCConstant.REDIRECT_FORM_CHECKBOX_INPUT) %></div>
-									  <div class="controls"><%uiform.renderField(UIFCCConstant.REDIRECT_FORM_CHECKBOX_INPUT) %></div>
-									 </div>
-									<div class="control-group">
+                                      <div class="controls"><%uiform.renderField(UIFCCConstant.REDIRECT_FORM_CHECKBOX_INPUT) %></div>
+                                     </div>
+                                    <div class="control-group">
                                       <div class="control-label"><%=uicomponent.getLabel(UIFCCConstant.REDIRECT_PATH_FORM_STRING_INPUT) %></div>
-									  <div class="controls"><%uiform.renderField(UIFCCConstant.REDIRECT_PATH_FORM_STRING_INPUT) %></div>
+                                      <div class="controls"><%uiform.renderField(UIFCCConstant.REDIRECT_PATH_FORM_STRING_INPUT) %></div>
                                   </div>
                               </div>
                           <%
                           } else if(formInput.getName().equals(UIFCCConstant.ACTION_FIELD)) {
                           %>
                               <div class="form-horizontal" >
-                                  <div class="control-group">                  
+                                  <div class="control-group">
                                       <%uiform.renderField(UIFCCConstant.ACTION_FIELD) %>
                                   </div>
                               </div>

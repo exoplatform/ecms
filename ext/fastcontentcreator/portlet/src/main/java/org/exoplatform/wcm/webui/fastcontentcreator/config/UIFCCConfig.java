@@ -31,9 +31,7 @@ import javax.portlet.PortletPreferences;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector;
 import org.exoplatform.services.cms.templates.TemplateService;
-import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
-import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -82,6 +80,9 @@ public class UIFCCConfig extends UIFormTabPane implements UISelectable {
 
   /** The log. */
   private static final Log LOG = ExoLogger.getLogger(UIFCCConfig.class.getName());
+  
+  /** Basic Mode */
+  private static final String BASIC_MODE = "basic";
 
   /** The saved location node. */
   private NodeLocation savedLocationNode;
@@ -102,18 +103,12 @@ public class UIFCCConfig extends UIFormTabPane implements UISelectable {
 
     UIFormInputSetWithAction saveLocationField = new UIFormInputSetWithAction(UIFCCConstant.SAVE_LOCATION_FIELD);
 
-    if (!"basic".equals(preferenceMode)) {
-      UIFormSelectBox repositorySelectBox = new UIFormSelectBox(UIFCCConstant.REPOSITORY_FORM_SELECTBOX,
-                                                                UIFCCConstant.REPOSITORY_FORM_SELECTBOX,
-                                                                options);
-    repositorySelectBox.setOnChange("ChangeRepository") ;
-    saveLocationField.addChild(repositorySelectBox) ;
-
+    if (!BASIC_MODE.equals(preferenceMode)) {
       UIFormSelectBox workspaceSelectBox = new UIFormSelectBox(UIFCCConstant.WORKSPACE_FORM_SELECTBOX,
                                                                UIFCCConstant.WORKSPACE_FORM_SELECTBOX,
                                                                options);
-    workspaceSelectBox.setOnChange("ChangeWorkspace") ;
-    saveLocationField.addChild(workspaceSelectBox) ;
+      workspaceSelectBox.setOnChange("ChangeWorkspace") ;
+      saveLocationField.addChild(workspaceSelectBox) ;
     }
     UIFormInputSetWithAction folderSelectorInput = new UIFormInputSetWithAction(UIFCCConstant.LOCATION_FORM_INPUT_ACTION);
     folderSelectorInput.addUIFormInput(new UIFormStringInput(UIFCCConstant.LOCATION_FORM_STRING_INPUT,
@@ -143,13 +138,11 @@ public class UIFCCConfig extends UIFormTabPane implements UISelectable {
                                                  null));
 
     addChild(templateField);
-    if (!"basic".equals(preferenceMode)) {
+    if (!BASIC_MODE.equals(preferenceMode)) {
       UIFormInputSetWithAction actionField = new UIFormInputSetWithAction(UIFCCConstant.ACTION_FIELD);
       UIFCCActionList fastContentCreatorActionList = actionField.addChild(UIFCCActionList.class, null, "UIFCCActionList");
       fastContentCreatorActionList.init(preferenceMode);
-      RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-      ManageableRepository repository = repositoryService.getCurrentRepository();
-      Session session = WCMCoreUtils.getUserSessionProvider().getSession(preferenceWorkspace, repository);
+      Session session = WCMCoreUtils.getUserSessionProvider().getSession(preferenceWorkspace, WCMCoreUtils.getRepository());
         fastContentCreatorActionList.updateGrid((Node) session.getItem(preferencePath),
                                                 fastContentCreatorActionList.getChild(UIGrid.class)
                                                                             .getUIPageIterator()
@@ -169,41 +162,28 @@ public class UIFCCConfig extends UIFormTabPane implements UISelectable {
   public void initEditMode() throws Exception {
     PortletPreferences preferences = UIFCCUtils.getPortletPreferences();
     String preferenceMode = preferences.getValue(UIFCCConstant.PREFERENCE_MODE, "");
-    String preferenceRepository = preferences.getValue(UIFCCConstant.PREFERENCE_REPOSITORY, "") ;
     String preferenceWorkspace = preferences.getValue(UIFCCConstant.PREFERENCE_WORKSPACE, "") ;
     String preferencePath = preferences.getValue(UIFCCConstant.PREFERENCE_PATH, "") ;
 
     boolean isDefaultWorkspace = false ;
-    if (!"basic".equals(preferenceMode)) {
-    RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;
-    List<SelectItemOption<String>> repositories = new ArrayList<SelectItemOption<String>>() ;
-    RepositoryEntry repositoryEntry = repositoryService.getCurrentRepository().getConfiguration();
-    repositories.add(new SelectItemOption<String>(repositoryEntry.getName())) ;
-    UIFormSelectBox uiRepositoryList = getUIFormSelectBox(UIFCCConstant.REPOSITORY_FORM_SELECTBOX) ;
-    uiRepositoryList.setOptions(repositories) ;
-    uiRepositoryList.setValue(preferenceRepository) ;
-      try {
-        ManageableRepository repository = getApplicationComponent(RepositoryService.class).getCurrentRepository();
-        String[] workspaceNames = repository.getWorkspaceNames();
-        String systemWsName = repository.getConfiguration().getSystemWorkspaceName();
-        List<SelectItemOption<String>> workspace = new ArrayList<SelectItemOption<String>>();
-        for (String workspaceName : workspaceNames) {
-          if (!workspaceName.equals(systemWsName)) {
-            if (workspaceName.equals(preferenceWorkspace))
-              isDefaultWorkspace = true;
-            workspace.add(new SelectItemOption<String>(workspaceName));
-          }
+    if (!BASIC_MODE.equals(preferenceMode)) {
+      ManageableRepository repository = WCMCoreUtils.getRepository();
+      String[] workspaceNames = repository.getWorkspaceNames();
+      String systemWsName = repository.getConfiguration().getSystemWorkspaceName();
+      List<SelectItemOption<String>> workspace = new ArrayList<SelectItemOption<String>>();
+      for (String workspaceName : workspaceNames) {
+        if (!workspaceName.equals(systemWsName)) {
+          if (workspaceName.equals(preferenceWorkspace))
+            isDefaultWorkspace = true;
+          workspace.add(new SelectItemOption<String>(workspaceName));
         }
-        UIFormSelectBox uiWorkspaceList = getUIFormSelectBox(UIFCCConstant.WORKSPACE_FORM_SELECTBOX);
-        uiWorkspaceList.setOptions(workspace);
-        if (isDefaultWorkspace) {
-          uiWorkspaceList.setValue(preferenceWorkspace);
-        } else if (workspace.size() > 0) {
-          uiWorkspaceList.setValue(workspace.get(0).getValue());
-        }
-      } catch (RepositoryException repo) {
-        repositories.add(new SelectItemOption<String>("select-repository", ""));
-        uiRepositoryList.setValue("");
+      }
+      UIFormSelectBox uiWorkspaceList = getUIFormSelectBox(UIFCCConstant.WORKSPACE_FORM_SELECTBOX);
+      uiWorkspaceList.setOptions(workspace);
+      if (isDefaultWorkspace) {
+        uiWorkspaceList.setValue(preferenceWorkspace);
+      } else if (workspace.size() > 0) {
+        uiWorkspaceList.setValue(workspace.get(0).getValue());
       }
     }
     getUIStringInput(UIFCCConstant.LOCATION_FORM_STRING_INPUT).setValue(preferencePath) ;
@@ -227,16 +207,13 @@ public class UIFCCConfig extends UIFormTabPane implements UISelectable {
    * Sets the template options.
    *
    * @param nodePath the node path
-   * @param repositoryName the repository name
    * @param workspaceName the workspace name
    *
    * @throws Exception the exception
    */
   private void setTemplateOptions(String nodePath, String workspaceName) throws Exception {
     try {
-      RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-      ManageableRepository repository = repositoryService.getCurrentRepository();
-      Session session = WCMCoreUtils.getUserSessionProvider().getSession(workspaceName, repository);
+      Session session = WCMCoreUtils.getUserSessionProvider().getSession(workspaceName, WCMCoreUtils.getRepository());
       Node currentNode = null ;
       UIFormSelectBox uiSelectTemplate = getUIFormSelectBox(UIFCCConstant.TEMPLATE_FORM_SELECTBOX);
       List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
@@ -328,7 +305,7 @@ public class UIFCCConfig extends UIFormTabPane implements UISelectable {
     PortletPreferences preferences = UIFCCUtils.getPortletPreferences();
     String preferenceMode = preferences.getValue(UIFCCConstant.PREFERENCE_MODE, "");
     String preferenceWorkspace = preferences.getValue(UIFCCConstant.PREFERENCE_WORKSPACE, "") ;
-    if (!"basic".equals(preferenceMode)) {
+    if (!BASIC_MODE.equals(preferenceMode)) {
       preferenceWorkspace = getUIFormSelectBox(UIFCCConstant.WORKSPACE_FORM_SELECTBOX).getValue() ;
     }
     String savedLocationPath = value.toString();
@@ -339,9 +316,7 @@ public class UIFCCConfig extends UIFormTabPane implements UISelectable {
     }
 
     try {
-      RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-      ManageableRepository repository = repositoryService.getCurrentRepository();
-      Session session = WCMCoreUtils.getUserSessionProvider().getSession(preferenceWorkspace, repository);
+      Session session = WCMCoreUtils.getUserSessionProvider().getSession(preferenceWorkspace, WCMCoreUtils.getRepository());
       UIFCCActionList uiFCCActionList = ((UIFormFieldSet) getChildById("UIFCCActionField")).getChild(UIFCCActionList.class);
       uiFCCActionList.updateGrid((Node) session.getItem(savedLocationPath),
                                  uiFCCActionList.getChild(UIGrid.class)
@@ -383,6 +358,16 @@ public class UIFCCConfig extends UIFormTabPane implements UISelectable {
   }
 
   /**
+   * Get PREFERENCE_MODE.
+   * 
+   * @return
+   */
+  public String getPreferenceMode() {
+    PortletPreferences portletPreferences = UIFCCUtils.getPortletPreferences();
+    return portletPreferences.getValue(UIFCCConstant.PREFERENCE_MODE, "");
+  }
+
+  /**
    * The listener interface for receiving selectPathAction events.
    * The class that is interested in processing a selectPathAction
    * event implements this interface, and the object created
@@ -402,11 +387,9 @@ public class UIFCCConfig extends UIFormTabPane implements UISelectable {
       UIFCCConfig fastContentCreatorConfig = event.getSource() ;
       PortletPreferences preferences = UIFCCUtils.getPortletPreferences();
       String preferenceMode = preferences.getValue(UIFCCConstant.PREFERENCE_MODE, "");
-      String preferenceRepository = preferences.getValue(UIFCCConstant.PREFERENCE_REPOSITORY, "") ;
+      String preferenceRepository = WCMCoreUtils.getRepository().getConfiguration().getName();
       String preferenceWorkspace = preferences.getValue(UIFCCConstant.PREFERENCE_WORKSPACE, "") ;
-      if (!"basic".equals(preferenceMode)) {
-        preferenceRepository = fastContentCreatorConfig.getUIFormSelectBox(UIFCCConstant.REPOSITORY_FORM_SELECTBOX)
-                                                       .getValue();
+      if (!BASIC_MODE.equals(preferenceMode)) {
         preferenceWorkspace = fastContentCreatorConfig.getUIFormSelectBox(UIFCCConstant.WORKSPACE_FORM_SELECTBOX)
                                                       .getValue();
       }
@@ -496,7 +479,7 @@ public class UIFCCConfig extends UIFormTabPane implements UISelectable {
       }
 
       String workspaceName = null;
-      if ("basic".equals(preferenceMode) && preferenceIsActionNeeded)
+      if (BASIC_MODE.equals(preferenceMode) && preferenceIsActionNeeded)
         workspaceName = portletPreferences.getValue(UIFCCConstant.PREFERENCE_WORKSPACE, "");
       else
         workspaceName = fastContentCreatorConfig.getUIFormSelectBox(UIFCCConstant.WORKSPACE_FORM_SELECTBOX)
@@ -508,12 +491,6 @@ public class UIFCCConfig extends UIFormTabPane implements UISelectable {
 
         return;
       }
-      String repositoryName = null;
-      if ("basic".equals(preferenceMode) && preferenceIsActionNeeded)
-        repositoryName = portletPreferences.getValue(UIFCCConstant.PREFERENCE_REPOSITORY, "");
-      else
-        repositoryName = fastContentCreatorConfig.getUIFormSelectBox(UIFCCConstant.REPOSITORY_FORM_SELECTBOX)
-                                                 .getValue();
       if (type == null || type.trim().length() == 0) {
         uiApp.addMessage(new ApplicationMessage("UIFCCConfig.msg.fileType-empty",
                                                 null,
@@ -521,7 +498,6 @@ public class UIFCCConfig extends UIFormTabPane implements UISelectable {
 
         return;
       }
-      portletPreferences.setValue(UIFCCConstant.PREFERENCE_REPOSITORY, repositoryName);
       portletPreferences.setValue(UIFCCConstant.PREFERENCE_WORKSPACE, workspaceName);
 
       portletPreferences.setValue(UIFCCConstant.PREFERENCE_PATH, path);
