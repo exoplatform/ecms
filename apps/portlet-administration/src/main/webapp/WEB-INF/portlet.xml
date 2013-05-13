@@ -25,7 +25,7 @@
     <portlet-info>
       <title>ECM Admin</title>
       <short-title>ECM Admin</short-title>
-      <keywords>Admin</keywords>
+      <keywords>Administration</keywords>
     </portlet-info>
     <portlet-preferences>
     	<!-- Setup the default repository name of this portlet -->
