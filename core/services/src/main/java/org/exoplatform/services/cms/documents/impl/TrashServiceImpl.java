@@ -24,13 +24,9 @@ import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
-import javax.jcr.lock.LockException;
-import javax.jcr.nodetype.ConstraintViolationException;
-import javax.jcr.nodetype.NoSuchNodeTypeException;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
-import javax.jcr.version.VersionException;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
@@ -44,6 +40,7 @@ import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.listener.ListenerService;
@@ -133,6 +130,9 @@ public class TrashServiceImpl implements TrashService {
                           SessionProvider sessionProvider,
                           int deep) throws Exception {
 
+    String nodeName = node.getName();
+    Session nodeSession = node.getSession();
+    nodeSession.checkPermission(node.getPath(), PermissionType.REMOVE);  
     if (deep == 0 && !node.isNodeType(SYMLINK)) {
       try {
         Utils.removeDeadSymlinks(node);
@@ -143,8 +143,6 @@ public class TrashServiceImpl implements TrashService {
       }
     }
     String originalPath = node.getPath();
-    String nodeName = node.getName();
-    Session nodeSession = node.getSession();
     String nodeWorkspaceName = nodeSession.getWorkspace().getName();
     //List<Node> categories = taxonomyService_.getAllCategories(node, true);
     String nodeUUID = node.isNodeType(MIX_REFERENCEABLE) ? node.getUUID() : null;
@@ -156,11 +154,9 @@ public class TrashServiceImpl implements TrashService {
       cache.remove(seoService.getHash(nodeUUID));
     }
     if (!node.isNodeType(EXO_RESTORE_LOCATION)) {
-      // Store origin path for the purpose of restoring later
-      this.addRestorePathInfo(node);
-
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session trashSession = WCMCoreUtils.getSystemSessionProvider().getSession(this.trashWorkspace_, manageableRepository);
+      String restorePath = node.getPath();
       String actualTrashPath = this.trashHome_ + (this.trashHome_.endsWith("/") ? "" : "/")
           + fixRestorePath(nodeName);
       ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
@@ -214,7 +210,6 @@ public class TrashServiceImpl implements TrashService {
         node.remove();
       }
 
-      nodeSession.save();
       trashSession.save();
 
       //check and delete target node when there is no its symlink
@@ -241,31 +236,16 @@ public class TrashServiceImpl implements TrashService {
           }
         }
       }
+      
+      Node nodeInTrash =  trashSession.getRootNode().getNode(actualTrashPath.substring(1));
+      nodeInTrash.addMixin(EXO_RESTORE_LOCATION);
+      nodeInTrash.setProperty(RESTORE_PATH, fixRestorePath(restorePath));
+      nodeInTrash.setProperty(RESTORE_WORKSPACE, nodeWorkspaceName);
+      
       trashSession.save();
     }
-    nodeSession.save();
   }
-
-  /**
-   * Store original path of deleted node.
-   * 
-   * @param node
-   * @throws RepositoryException 
-   * @throws LockException 
-   * @throws ConstraintViolationException 
-   * @throws VersionException 
-   * @throws NoSuchNodeTypeException 
-   */
-  private void addRestorePathInfo(Node node) throws Exception {
-    String originWorkspace = node.getSession().getWorkspace().getName();
-    Session sysSession = WCMCoreUtils.getSystemSessionProvider().getSession(originWorkspace, WCMCoreUtils.getRepository());
-    Node sysSessionNode = (Node)sysSession.getItem(node.getPath());
-    sysSessionNode.addMixin(EXO_RESTORE_LOCATION);
-    sysSessionNode.setProperty(RESTORE_PATH, fixRestorePath(node.getPath()));
-    sysSessionNode.setProperty(RESTORE_WORKSPACE, originWorkspace);
-    sysSession.save();
-  }
-  
+ 
   /**
    *
    * @param path
