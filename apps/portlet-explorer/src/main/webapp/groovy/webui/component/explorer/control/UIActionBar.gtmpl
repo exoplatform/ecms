@@ -151,7 +151,7 @@
 				   }
 				   styleDrive = styleDrive.replace(" ","");
 			 %>
-	  	     <a class="<%=getCSSClassOfDrivesButton()%> actionIcon pull-right" href="<%=uicomponent.event("ShowDrives")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDrivesArea.DrivesArea.ShowDrives")%>"><i class="uiIconEcmsGeneralDrive uiIconEcms16x16Drive${styleDrive}"></i> <%=uicomponent.getDriveLabel();%> <i class="uiIconArrowDown"></i></a>
+	  	     <a id="driveAction" class="<%=getCSSClassOfDrivesButton()%> actionIcon pull-right" href="<%=uicomponent.event("ShowDrives")%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIDrivesArea.DrivesArea.ShowDrives")%>"><i class="uiIconEcmsGeneralDrive uiIconEcms16x16Drive${styleDrive}"></i> <%=uicomponent.getDriveLabel();%> <i class="uiIconArrowDown"></i></a>
   	   <%}%>
   		</div>
 		</div>

@@ -9,9 +9,10 @@
 		Self.waitContainerRetry = 0;
 		Self.waitContainerRetryMax = 200;
 		Self.MiniumLeftContainerWidth = 250;
-		Self.MiniumRightContainerWidth = 351;
+		Self.MiniumRightContainerWidth = 251;
 		Self.waitInterval              = 25;
 		Self.UIBrokenCheckingInterval  = 150;
+		Self.driveActionSize 			= 0;
 		window.UIBrokenCheckingHandler   = null;
 		var RightClick = eXo.webui.UIRightClickPopupMenu;
 		if (!RightClick) {
@@ -711,6 +712,23 @@
 			var uiDropdownContainer   = gj(listHiddenActionContainer).find("ul.dropdown-menu:first")[0];
 			var allowedSpace  = uiMainActionContainer.offsetWidth - viewbar.offsetWidth - 20 ; //left&right padding
 			Self.containerWithDropDownItem_OnResize(uiMainActionContainer, allowedSpace, listHiddenActionContainer, uiDropdownContainer, "active");
+			// show/hide more button if right container is too narrow.
+			var moreButton = gj(uiMainActionContainer).find("a.dropdown-toggle:first")[0];
+			if (moreButton) {
+				var driveActionSize = gj(viewbar).find("#driveAction")[0].offsetWidth;
+				var backButton = gj(viewbar).find(".urlBackToButton:first")[0];
+				var backButtonSize = backButton ? backButton.offsetWidth : 0;
+				var prefButtonSize = gj(viewbar).find(".setupPreferencesButton:first")[0].offsetWidth;
+				if (driveActionSize > 0) { //== 0 when driveAction is hidden 
+					Self.driveActionSize = driveActionSize; 
+				}
+				//real processing
+				if (backButtonSize + prefButtonSize + Self.driveActionSize + 60 > actionbar.width()) {
+					gj(viewbar).find("#driveAction").hide();
+				} else {
+					gj(viewbar).find("#driveAction").show();
+				}
+			}
 		};
 
 		/**
