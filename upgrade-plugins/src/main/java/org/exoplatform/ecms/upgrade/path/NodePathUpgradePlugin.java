@@ -1,16 +1,16 @@
 package org.exoplatform.ecms.upgrade.path;
 
-import javax.jcr.Node;
-import javax.jcr.Session;
-import javax.jcr.NodeIterator;
-
 import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
 import org.exoplatform.commons.version.util.VersionComparator;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 
 /**
  * 
@@ -47,7 +47,7 @@ public class NodePathUpgradePlugin extends UpgradeProductPlugin {
     String nodePath = srcNode.split(":")[1];
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     try{
-      Session session = sessionProvider.getSession(workspace, repositoryService_.getCurrentRepository());
+      ExtendedSession session = (ExtendedSession)sessionProvider.getSession(workspace, repositoryService_.getCurrentRepository());
       Node sourceNode = session.getRootNode().getNode(nodePath.substring(1));
       Node targetNode = session.getRootNode().getNode(destNode.substring(1));
       if (sourceNode.hasNodes()){
@@ -59,7 +59,7 @@ public class NodePathUpgradePlugin extends UpgradeProductPlugin {
         	session.save();
           }
           log.info("Move " + nodePath + "/" + child.getName() + " to " + destNode + "/" + child.getName());
-          session.move(nodePath + "/" + child.getName(), destNode + "/" + child.getName());
+          session.move(nodePath + "/" + child.getName(), destNode + "/" + child.getName(), false);
           session.save();
         }
         //Remove source node
