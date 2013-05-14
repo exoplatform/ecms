@@ -43,6 +43,10 @@
       <artifactId>exo.kernel.commons</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.exoplatform.platform-ui</groupId>
+      <artifactId>platform-ui-webui-core</artifactId>
+    </dependency> 
+    <dependency>
       <groupId>org.gatein.portal</groupId>
       <artifactId>exo.portal.component.common</artifactId>
     </dependency>
@@ -53,10 +57,6 @@
     <dependency>
       <groupId>org.gatein.portal</groupId>
       <artifactId>exo.portal.component.web.controller</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.gatein.portal</groupId>
-      <artifactId>exo.portal.webui.core</artifactId>
     </dependency>
     <dependency>
       <groupId>org.gatein.portal</groupId>
