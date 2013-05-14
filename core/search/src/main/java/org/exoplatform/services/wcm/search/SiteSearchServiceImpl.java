@@ -203,7 +203,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
                                               new NodeFilter(isSearchContent, queryCriteria),
                                               new DataCreator(),
                                               pageSize,
-                                              0, queryCriteria);
+                                              (int)queryCriteria.getLimit(), queryCriteria);
     
     long queryTime = System.currentTimeMillis() - startTime;
     pageList.setQueryTime(queryTime);
