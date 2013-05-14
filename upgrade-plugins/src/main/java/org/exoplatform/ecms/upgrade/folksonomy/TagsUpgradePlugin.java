@@ -97,6 +97,7 @@ public class TagsUpgradePlugin extends UpgradeProductPlugin {
         }
       }
       tempFolder.remove();
+      session.save();
     } catch (Exception e) {
       if (log.isErrorEnabled()) {
         log.error("An unexpected error occurs when migrating tags: ", e);        
