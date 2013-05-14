@@ -24,9 +24,13 @@ import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.jcr.lock.LockException;
+import javax.jcr.nodetype.ConstraintViolationException;
+import javax.jcr.nodetype.NoSuchNodeTypeException;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
+import javax.jcr.version.VersionException;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
@@ -152,10 +156,8 @@ public class TrashServiceImpl implements TrashService {
       cache.remove(seoService.getHash(nodeUUID));
     }
     if (!node.isNodeType(EXO_RESTORE_LOCATION)) {
-      node.addMixin(EXO_RESTORE_LOCATION);
-      node.setProperty(RESTORE_PATH, fixRestorePath(node.getPath()));
-      node.setProperty(RESTORE_WORKSPACE, nodeWorkspaceName);
-      nodeSession.save();
+      // Store origin path for the purpose of restoring later
+      this.addRestorePathInfo(node);
 
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session trashSession = WCMCoreUtils.getSystemSessionProvider().getSession(this.trashWorkspace_, manageableRepository);
@@ -244,6 +246,26 @@ public class TrashServiceImpl implements TrashService {
     nodeSession.save();
   }
 
+  /**
+   * Store original path of deleted node.
+   * 
+   * @param node
+   * @throws RepositoryException 
+   * @throws LockException 
+   * @throws ConstraintViolationException 
+   * @throws VersionException 
+   * @throws NoSuchNodeTypeException 
+   */
+  private void addRestorePathInfo(Node node) throws Exception {
+    String originWorkspace = node.getSession().getWorkspace().getName();
+    Session sysSession = WCMCoreUtils.getSystemSessionProvider().getSession(originWorkspace, WCMCoreUtils.getRepository());
+    Node sysSessionNode = (Node)sysSession.getItem(node.getPath());
+    sysSessionNode.addMixin(EXO_RESTORE_LOCATION);
+    sysSessionNode.setProperty(RESTORE_PATH, fixRestorePath(node.getPath()));
+    sysSessionNode.setProperty(RESTORE_WORKSPACE, originWorkspace);
+    sysSession.save();
+  }
+  
   /**
    *
    * @param path
