@@ -293,7 +293,7 @@ public class PDFViewerRESTService implements ResourceContainer {
     String path = (String) pdfCache.get(new ObjectKey(bd.toString()));
     String lastModifiedTime = (String)pdfCache.get(new ObjectKey(bd1.toString()));
     File content = null;
-    String name = currentNode.getName();
+    String name = currentNode.getName().replaceAll(":","_");
     Node contentNode = currentNode.getNode("jcr:content");
     String lastModified = getJcrLastModified(currentNode);
 
