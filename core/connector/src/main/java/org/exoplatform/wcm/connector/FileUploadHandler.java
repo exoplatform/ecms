@@ -28,6 +28,7 @@ import java.util.Hashtable;
 import java.util.Map;
 import java.util.Set;
 
+import javax.jcr.ItemExistsException;
 import javax.jcr.Node;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.CacheControl;
@@ -348,7 +349,20 @@ public class FileUploadHandler {
       }
     }
     String location = resource.getStoreLocation();
-    Node file = parent.addNode(fileName,FCKUtils.NT_FILE);
+    //save node with name=fileName
+    Node file = null;
+    boolean fileCreated = false;
+    String nodeName = fileName;
+    int count = 0;
+    do {
+      try {
+        file = parent.addNode(nodeName,FCKUtils.NT_FILE);
+        fileCreated = true;
+      } catch (ItemExistsException e) {//sameNameSibling is not allowed
+        nodeName = increaseName(fileName, ++count);
+      }      
+    } while (!fileCreated);
+    //--------------------------------------------------------
     if(!file.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
     	file.addMixin(NodetypeConstant.MIX_REFERENCEABLE);
     }
@@ -392,6 +406,18 @@ public class FileUploadHandler {
   public boolean isDocumentNodeType(Node node) throws Exception {
     TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
     return templateService.isManagedNodeType(node.getPrimaryNodeType().getName());
+  }
+  
+  /**
+   * increase the file name (not extension).
+   * @param origin the original name
+   * @param count the number add to file name
+   * @return the new increased file name 
+   */
+  private String increaseName(String origin, int count) {
+    int index = origin.indexOf('.');
+    if (index == -1) return origin + count;
+    return origin.substring(0, index) + count + origin.substring(index);
   }
   
   /**
