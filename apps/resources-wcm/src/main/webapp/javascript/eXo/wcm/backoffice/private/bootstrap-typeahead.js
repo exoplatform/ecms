@@ -45,12 +45,13 @@
 
   , select: function () {
       var val = this.$menu.find('.active').attr('data-value')
+      //This block code used for select tag from suggestion popup multi times
       var existingTags = this.$element.val()
       var newTags = val;
       if(existingTags.lastIndexOf(",") > 0)
       {
-		  newTags = existingTags.substring(0, existingTags.lastIndexOf(",") + 1) + " " + val
-	  }
+	  newTags = existingTags.substring(0, existingTags.lastIndexOf(",") + 1) + " " + val
+      }
       this.$element.val(this.updater(newTags)).change()
       return this.hide()
     }
@@ -84,11 +85,13 @@
 
   , lookup: function (event) {
       var items
+      //This lie to get tag name and support empty tag to show all sugesstions
       var tagName = this.$element.val() || ''
+      //This line used for separating the keywords for lookup in case user want to add multi tags
       if(tagName.lastIndexOf(",") >= 0) tagName = tagName.substring(tagName.lastIndexOf(",") + 1, tagName.length);  
       tagName = tagName.trim();                
       this.query = tagName;
-      
+      //Remove condition 
       if (this.query.length < this.options.minLength) {
         return this.shown ? this.hide() : this
       }
@@ -238,7 +241,7 @@
 
   , keyup: function (e) {
       switch(e.keyCode) {
-        case 40: if (!this.shown) this.lookup(e)
+        case 40: if (!this.shown) this.lookup(e) // down arrow: Support behavior when press down key to have suggestion for all available
         case 38: // up arrow
         case 16: // shift
         case 17: // ctrl
