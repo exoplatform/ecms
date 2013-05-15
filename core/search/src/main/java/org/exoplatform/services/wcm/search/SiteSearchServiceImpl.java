@@ -59,6 +59,7 @@ import org.exoplatform.services.wcm.search.QueryCriteria.DATE_RANGE_SELECTED;
 import org.exoplatform.services.wcm.search.QueryCriteria.DatetimeRange;
 import org.exoplatform.services.wcm.search.QueryCriteria.QueryProperty;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
+import org.exoplatform.services.wcm.search.base.ArrayNodePageList;
 import org.exoplatform.services.wcm.search.base.NodeSearchFilter;
 import org.exoplatform.services.wcm.search.base.PageListFactory;
 import org.exoplatform.services.wcm.search.base.SearchDataCreator;
@@ -223,6 +224,9 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     long startTime = System.currentTimeMillis();
     Query query = createSearchPageQuery(queryCriteria, queryManager);
+    if (query == null) {
+      return new ArrayNodePageList<ResultNode>(pageSize);
+    }
     String suggestion = getSpellSuggestion(queryCriteria.getKeyword(), currentRepository);
     if (LOG.isDebugEnabled()) {
       LOG.debug("execute query: " + query.getStatement().toLowerCase());
@@ -247,6 +251,9 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     SQLQueryBuilder queryBuilder = new SQLQueryBuilder();
     List<String> mopPages = this.searchPageByTitle(queryCriteria.getSiteName(),
                                                    queryCriteria.getKeyword());
+    if (mopPages.size() == 0) {
+      return null;
+    }
     List<QueryProperty> queryProps = new ArrayList<QueryCriteria.QueryProperty>();
     for (String page : mopPages) {
       QueryProperty prop = queryCriteria.new QueryProperty();
@@ -258,7 +265,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     QueryProperty prop = queryCriteria.new QueryProperty();
     prop.setName("exo:name");
     prop.setValue("mop:" + queryCriteria.getKeyword().toLowerCase());
-    queryProps.add(prop);
+    queryProps.add(prop);    
     queryCriteria.setQueryMetadatas(queryProps.toArray(new QueryProperty[queryProps.size()]));
     mapQueryTypes(queryCriteria, queryBuilder);
     if (queryCriteria.isFulltextSearch()) {

@@ -95,6 +95,9 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
                                          String order) {
     Collection<SearchResult> ret = new ArrayList<SearchResult>();
     //prepare input parameters for search
+    if (query != null) {
+      query = query.trim();
+    }
     QueryCriteria criteria = createQueryCriteria(query, offset, limit, sort, order);
     //query search result
     try {
