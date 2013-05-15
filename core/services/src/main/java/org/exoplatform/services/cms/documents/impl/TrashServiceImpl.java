@@ -212,6 +212,11 @@ public class TrashServiceImpl implements TrashService {
 
       trashSession.save();
 
+      Node nodeInTrash =  trashSession.getRootNode().getNode(actualTrashPath.substring(1));
+      nodeInTrash.addMixin(EXO_RESTORE_LOCATION);
+      nodeInTrash.setProperty(RESTORE_PATH, fixRestorePath(restorePath));
+      nodeInTrash.setProperty(RESTORE_WORKSPACE, nodeWorkspaceName);
+      
       //check and delete target node when there is no its symlink
       if (deep == 0 && taxonomyLinkUUID != null && taxonomyLinkWS != null) {
         Session targetNodeSession = sessionProvider.getSession(taxonomyLinkWS, manageableRepository);
@@ -236,11 +241,6 @@ public class TrashServiceImpl implements TrashService {
           }
         }
       }
-      
-      Node nodeInTrash =  trashSession.getRootNode().getNode(actualTrashPath.substring(1));
-      nodeInTrash.addMixin(EXO_RESTORE_LOCATION);
-      nodeInTrash.setProperty(RESTORE_PATH, fixRestorePath(restorePath));
-      nodeInTrash.setProperty(RESTORE_WORKSPACE, nodeWorkspaceName);
       
       trashSession.save();
     }
