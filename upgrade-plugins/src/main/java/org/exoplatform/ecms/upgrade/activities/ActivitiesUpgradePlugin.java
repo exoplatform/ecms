@@ -42,9 +42,10 @@ public class ActivitiesUpgradePlugin extends UpgradeProductPlugin {
 		if (log.isInfoEnabled()) {
       log.info("Start " + this.getClass().getName() + ".............");
     }
+		SessionProvider p = WCMCoreUtils.getSystemSessionProvider();
 		Session session = null;
 		try {
-			session = WCMCoreUtils.getSystemSessionProvider().getSession("social",
+			session = p.getSession("social",
           repoService_.getCurrentRepository());
 			if (log.isInfoEnabled()) {
         log.info("=====Start migrate data for all activities=====");
@@ -57,7 +58,7 @@ public class ActivitiesUpgradePlugin extends UpgradeProductPlugin {
         Node paramsNode = viewNode.getNode("soc:params");
         String workspace = paramsNode.getProperty("workspace").getString();        
         String nodeUrl = viewNode.getProperty("soc:url").getString();
-        Session session2 = WCMCoreUtils.getSystemSessionProvider().getSession(workspace,
+        Session session2 = p.getSession(workspace,
             repoService_.getCurrentRepository());
         try{
 	        Node node = (Node)session2.getItem(nodeUrl);
@@ -77,7 +78,9 @@ public class ActivitiesUpgradePlugin extends UpgradeProductPlugin {
       if (log.isErrorEnabled()) {
         log.error("An unexpected error occurs when migrating activities: ", e);        
       }
-    } 
+    } finally {
+    	if(p!=null) p.close();
+    }
 		
 	}
 
