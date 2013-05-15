@@ -23,10 +23,10 @@
 		<% println "<pre>" + uicomponent.encodeHTML(contentNode.getProperty("jcr:data").getString()) + "</pre>"; %>     
 	</div>
   <div class="uiAction">                                          
-		<button type="button" class="btn" onclick="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('','<%=uicomponent.getPortalName()%>','<%=restContextName%>','${repository}','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(originalNode.getPath())%>','<%=mimeType%>')" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("File.view.label.webDAV")%>">
+		<button type="button" class="btn" onclick="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('','<%=uicomponent.getPortalName()%>','<%=restContextName%>','${repository}','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(originalNode.getPath())%>','<%=mimeType%>')">
 			<%=_ctx.appRes("File.view.label.webDAV")%>
 		</button>
-		<button type="button" class="btn" onclick="javascript:window.location='<%=uicomponent.getDownloadLink(currentNode)%>'" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("File.view.label.download")%>">
+		<button type="button" class="btn" onclick="javascript:window.location='<%=uicomponent.getDownloadLink(currentNode)%>'">
 						<%=_ctx.appRes("File.view.label.download")%>
 		</button>
 	</div>  
