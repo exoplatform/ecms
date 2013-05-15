@@ -72,9 +72,6 @@
         <module>uiSimpleView</module>
       </depends>
       <depends>
-        <module>uiTimelineView</module>
-      </depends>
-      <depends>
         <module>zeroClipboard</module>
       </depends>
       <depends>
@@ -89,26 +86,6 @@
     </module>
   </portlet>
 
-  <module>
-    <name>uiTimelineView</name>
-    <script>
-      <path>/javascript/eXo/ecm/UITimelineView.js</path>
-    </script>
-    <depends>
-      <module>jquery</module>
-      <as>gj</as>
-    </depends>
-    <depends>
-      <module>base</module>
-    </depends>
-    <depends>
-     <module>wcm-utils</module>
-    </depends>
-    <depends>
-      <module>ecm-utils</module>
-    </depends>
-  </module>
-  
   <module>
     <name>uiSimpleView</name>
     <script>

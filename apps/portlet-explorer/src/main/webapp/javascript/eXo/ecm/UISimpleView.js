@@ -328,8 +328,8 @@
         var mobileElement = document.getElementById(Self.mobileId);
         if (Self.enableDragDrop && mobileElement && (!event.ctrlKey || (event.shiftKey && event.ctrlKey))) {
           mobileElement.style.display = "block";
-          var X = event.pageX;
-          var Y = event.pageY;
+          var X = event.pageX || event.clientX;
+          var Y = event.pageY || event.clientY;
           mobileElement.style.top = Y + 5 + "px";
           mobileElement.style.left = X + 5 + "px";
           mobileElement.move = true;
@@ -777,8 +777,8 @@
         pasteAction.parentNode.parentNode.style.display = "none";
       }
       //check position popup
-      var X = event.pageX;
-      var Y = event.pageY;
+      var X = event.pageX || event.clientX;
+      var Y = event.pageY || event.clientY;
       var portWidth = gj(window).width();
       var portHeight = gj(window).height();
       var contentMenu = gj(contextMenu).children("div.uiRightClickPopupMenu:first")[0];
@@ -817,8 +817,8 @@
       document.body.appendChild(contextMenu);
 
       //check position popup
-      var X = event.pageX;
-      var Y = event.pageY;
+      var X = event.pageX || event.clientX;
+      var Y = event.pageY || event.clientY;
       var portWidth = gj(window).width();
       var portHeight = gj(window).height();
       var contentMenu = gj(contextMenu).children("div.uiRightClickPopupMenu:first")[0];
