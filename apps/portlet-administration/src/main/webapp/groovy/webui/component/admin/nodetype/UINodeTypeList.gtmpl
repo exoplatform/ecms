@@ -6,15 +6,11 @@
   if(nodeTypes == null) return;
   int totalPages = uicomponent.getUIPageIterator().getAvailablePage();
 %>
-<div class="UINodeTypeList" id="$uicomponent.id">
-  <% if (allNodeTypes.size() > 5) {%>
-  <div style="margin:1px 0px 20px 0px;">
-    <%
+<div class="uiNodeTypeList" id="$uicomponent.id">
+  <% if (allNodeTypes.size() > 5) {
       uicomponent.getUIPageIterator().setUseMaxSizeSetting(true);
       _ctx.renderUIComponent(uicomponent.getUIPageIterator());
-    %>
-  </div>
-  <%}%>
+    }%>
   <table class="uiGrid table table-hover table-striped">
     <thead>
       <tr>
@@ -27,16 +23,11 @@
     <tbody>
       <%
       if (nodeTypes.size() > 0) {
-        def rowClass = null ;
-  	    boolean even = true ;
   	    boolean found = false ;
   	    for (node in nodeTypes) {
   	      found = true  ;
-  	      if(even) rowClass = "EvenRow" ;  
-  	      else rowClass =  "OddRow" ; 
-  	      even = !even ;
       %>
-          <tr class="$rowClass">
+          <tr>
             <%
               String nodeType = node.getName() ;
               nodeType = nodeType.replace(":", "_") ;
@@ -55,7 +46,7 @@
                     iconType = "False" ;
                   }
                 %>
-                <div class="TrueFalseContainer">
+                <div >
 	                <div class="text">$booleanText</div>
 	              </div>
               </td>
@@ -69,12 +60,12 @@
                     iconType = "False" ;
                   }
                 %>
-                <div class="TrueFalseContainer">
+                <div >
 	                <div class="text">$booleanText</div>
 	              </div>
               </td>
               <td class="center">
-                <i onclick="<%=uicomponent.event("View", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UINodeTypeList.tooltip.View")%>" class="uiIconPreview"></i>
+                <a class="actionIcon"  onclick="<%=uicomponent.event("View", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UINodeTypeList.tooltip.View")%>"><i class="uiIconPreview"></i></a>
               </td>
             <% } else {%>
               <td>
@@ -89,7 +80,7 @@
                     iconType = "False" ;
                   }
                 %>
-                <div class="TrueFalseContainer">
+                <div >
 	                <div class="text">$booleanText</div>
 	              </div>
               </td>
@@ -103,33 +94,29 @@
                     iconType = "False" ;
                   }
                 %>
-                <div class="TrueFalseContainer">
+                <div >
                 	<div class="text">$booleanText</div>
                 </div>
               </td>
               <td align="center"><div class="text"><%=_ctx.appRes("UINodeTypeList.info.description")%></div></td>
               <td class="center">                                
-                <i onclick="<%=uicomponent.event("Edit", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UINodeTypeList.tooltip.Edit")%>" class="uiIconEdit"></i>
-                <i onclick="<%=uicomponent.event("Delete", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UINodeTypeList.tooltip.Delete")%>" class="uiIconDelete"></i>
+                <a class="actionIcon" onclick="<%=uicomponent.event("Edit", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UINodeTypeList.tooltip.Edit")%>" ><i class="uiIconEdit"></i></a>
+                <a class="actionIcon"  onclick="<%=uicomponent.event("Delete", node.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UINodeTypeList.tooltip.Delete")%>"><i class="uiIconDelete"></i></a>
               </td>	                    
             <% } %>
           </tr>
       <%  }
   	    } else {%>
-      <tr class="OddRow"> 
-        <td colspan="6" style="text-align:center;font-style:italic; color: #EF5604;"><%=_ctx.appRes("UINodeTypeList.msg.no-list")%></td>
+      <tr > 
+        <td colspan="6" class="center empty"><%=_ctx.appRes("UINodeTypeList.msg.no-list")%></td>
       </tr>
       <%}%>
     </tbody>
   </table>
-  <% if (allNodeTypes.size() > 5) {%>
-  <div style="margin:1px 0px 20px 0px;">
-    <%
+  <% if (allNodeTypes.size() > 5) {
       uicomponent.getUIPageIterator().setUseMaxSizeSetting(true);
       _ctx.renderUIComponent(uicomponent.getUIPageIterator());
-    %>
-  </div>
-  <%}%>
+    }%>
 	<div class="uiAction uiActionBorder">
 	  <% for(action in uicomponent.getActions()) { %>
 		  <button onclick="<%=uicomponent.event(action)%>" class="btn" type="button"><%=_ctx.appRes("UINodeTypeList.action." + action)%></button>		  
