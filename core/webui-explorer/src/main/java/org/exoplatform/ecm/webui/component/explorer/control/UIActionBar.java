@@ -322,7 +322,7 @@ public class UIActionBar extends UIForm {
       UIActionBar uiActionBar = event.getSource();
       String selectedTabName = event.getRequestContext().getRequestParameter(OBJECTID);
       uiActionBar.setSelectedTab(selectedTabName);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiActionBar);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiActionBar.getAncestorOfType(UIJCRExplorer.class));
     }
   }
 

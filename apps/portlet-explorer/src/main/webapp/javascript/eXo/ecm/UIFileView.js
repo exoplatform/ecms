@@ -694,6 +694,7 @@ UIFileView.prototype.toggleCheckboxes = function(checkbox, evt) {
 	} else {
 		Self.hideContextMenu();
 	}
+	Self.checkSelectedItemCount();
 };
 
 UIFileView.prototype.clearCheckboxes = function(evt) {

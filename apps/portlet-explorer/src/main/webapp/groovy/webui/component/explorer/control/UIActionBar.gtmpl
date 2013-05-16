@@ -58,7 +58,6 @@
 <%if (uiPortlet.isShowActionBar() && !uiExplorer.isAddingDocument()) {%>
 <% uiform.begin() %>
 <div class="uiActionBar $actionBarStyle" id="$uicomponent.id" style="position: relative;">
-  <div id="ActionMenuPlaceHolder" class="ActionMenuPlaceHolder"><span></span></div>
   <div class="uiTabNormal uiTabGrayInPage">
     <ul class="nav nav-tabs uiTabsContainer" $displayTabContainer>
 			<%
@@ -94,6 +93,7 @@
 							</ul>
 					</li>
 		 </ul>
+		 <div id="ActionMenuPlaceHolder" class="ActionMenuPlaceHolder"><span></span></div>
 		 <%if(isSelected) {                                                               %>
 		 <div id="uiActionsBarContainer" class="tab-content">
 			 <div id="tab1_4" class="tab-pane fade in active">
