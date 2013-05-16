@@ -697,31 +697,23 @@ UIFileView.prototype.toggleCheckboxes = function(checkbox, evt) {
 };
 
 UIFileView.prototype.clearCheckboxes = function(evt) {
-	gj(".uiFileView").each(function(ind) {
+	var uiFileView = gj(".uiFileView")[0];
+	if (uiFileView) {
 		resetArrayItemsSelected();
-		gj(Self.allItems).each(function(index, elem){
-			Self.selectBoxType = false;
-			Self.clickedItem = elem;
-			Self.clickTotalCheckBox = true;
-			Self.mouseDownItem(evt);
-			//-------------------------
-			Self.selectBoxType = false;
-			Self.clickedItem = elem;
-			Self.clickTotalCheckBox = true;
-			Self.mouseUpItem(evt);
-		});
 		gj("#UIFileViewCheckBox").attr("checked", false);
 		gj("#UIDocumentInfo").find(".checkbox").attr("checked", false);
 		gj("#UIDocumentInfo").find(".rowView").css("backgroundColor","#FFF");
-	});
+		Self.checkSelectedItemCount();
+		Self.hideContextMenu();
+	}
 };
 
 UIFileView.prototype.checkSelectedItemCount = function() {
 	if (Self.itemsSelected.length > 1) {
 		gj("#FileViewItemCount").html(Self.itemsSelected.length);
+		gj("#FileViewStatus").removeClass("NoShow");
 	} else {
 		gj("#FileViewStatus").addClass("NoShow");
-		gj("#FileViewStatus").removeClass("NoShow");
 	}
 	//---------------------------------------------
 	if (Self.itemsSelected.length == 0) {
