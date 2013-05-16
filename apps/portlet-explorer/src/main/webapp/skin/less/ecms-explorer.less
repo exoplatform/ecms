@@ -995,18 +995,25 @@
 		.btn {
 			padding: 5px 8px 4px 8px;
 		}
+		
 		.active [class^="uiIconEcms"] {
 			background-image: url("/eXoWCMResources/skin/images/Icons/uiIconsEcmsBlue.png");
 		}
 	}
 	
+	.btn-group:nth-child(2n+2) .btn{
+		border-bottom-right-radius: 3px;
+		border-top-right-radius: 3px;
+	}
+	
+	.btn-group > .btn:first-child:hover{
+		border-radius: 3px 0 0 3px;
+		margin-right: -1px;
+	}
+	
 	.uiIconClose {
 		margin: 7px 0px 0px 10px;
 		cursor: pointer;
-		
-		&:hover {
-			background-image: url("/eXoResources/skin/images/Icons/uiIconsDarkGray.png");
-		}
 	}
 }
 
