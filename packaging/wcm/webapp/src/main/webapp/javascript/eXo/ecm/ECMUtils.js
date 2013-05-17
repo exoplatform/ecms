@@ -714,8 +714,9 @@
 			Self.containerWithDropDownItem_OnResize(uiMainActionContainer, allowedSpace, listHiddenActionContainer, uiDropdownContainer, "active");
 			// show/hide more button if right container is too narrow.
 			var moreButton = gj(uiMainActionContainer).find("a.dropdown-toggle:first")[0];
-			if (moreButton) {
-				var driveActionSize = gj(viewbar).find("#driveAction")[0].offsetWidth;
+			var driveAction = gj(viewbar).find("#driveAction:first")[0];
+			if (moreButton && driveAction) {
+				var driveActionSize = driveAction.offsetWidth;
 				var backButton = gj(viewbar).find(".urlBackToButton:first")[0];
 				var backButtonSize = backButton ? backButton.offsetWidth : 0;
 				var prefButtonSize = gj(viewbar).find(".setupPreferencesButton:first")[0].offsetWidth;
