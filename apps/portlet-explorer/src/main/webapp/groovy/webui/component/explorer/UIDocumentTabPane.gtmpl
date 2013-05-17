@@ -21,7 +21,7 @@
 					          %>
 					           
 					                  <li class="$style" onClick="<%=uicomponent.event("ChangeTab"  ,tabId)%>">                
-															<a id="$tabId" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITabPane.title." + uiChild.getId());%>"><%=_ctx.appRes("UITabPane.title." + uiChild.getId());%></a>
+															<a rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UITabPane.title." + uiChild.getId());%>"><%=_ctx.appRes("UITabPane.title." + uiChild.getId());%></a>
 					                  </li>
 					          <%}%>
 					</ul>

@@ -254,7 +254,7 @@ UIFileView.prototype.clickItem = function(event, element, callback) {
 	Self.itemsSelected = new Array(element);
 	element.style.background = Self.colorSelected;
 	//uncheck all checkboxes
-	var uiDocInfo = gj("#UIDocumentInfo");
+	var uiDocInfo = gj("#UIDocumentInfo")[0] || gj("#UIDocumentWithTree")[0];
 	gj("input", uiDocInfo).each(function(index, elem) {
 		gj(elem).attr("checked", false);
 	});
@@ -704,6 +704,10 @@ UIFileView.prototype.clearCheckboxes = function(evt) {
 		gj("#UIFileViewCheckBox").attr("checked", false);
 		gj("#UIDocumentInfo").find(".checkbox").attr("checked", false);
 		gj("#UIDocumentInfo").find(".rowView").css("backgroundColor","#FFF");
+		//case with tree
+		gj("#UIDocumentWithTree").find(".checkbox").attr("checked", false);
+		gj("#UIDocumentWithTree").find(".rowView").css("backgroundColor","#FFF");
+		
 		Self.checkSelectedItemCount();
 		Self.hideContextMenu();
 	}

@@ -40,9 +40,10 @@
   def rcontext = _ctx.getRequestContext() ;
   def size = uicomponent.getNodeChildrenList().size();
   def jsManager = rcontext.getJavascriptManager();
+  def areaId = uiDocumentInfo.getId();
 
   jsManager.require("SHARED/ecm-utils", "ecmutil").require("SHARED/uiFileView", "uiFileView").
-  addScripts("uiFileView.UIFileView.initAllEvent('UIDocumentInfo', '$enableDragAndDrop');").
+  addScripts("uiFileView.UIFileView.initAllEvent('$areaId', '$enableDragAndDrop');").
   addScripts("ecmutil.ECMUtils.initClipboard('clip_button','" + componentId + "','$size');");
   //Config to display columns with format: ["${column};${width}"]
   //Default 

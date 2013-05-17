@@ -162,7 +162,8 @@ public class UIDocumentNodeList extends UIContainer {
   }
   
   public String getID(Node node) throws Exception {
-    return this.getClass().getSimpleName() + String.valueOf(Math.abs(node.getPath().hashCode())); 
+    return this.getAncestorOfType(UIDocumentInfo.class).getClass().getSimpleName() + 
+           this.getClass().getSimpleName() + String.valueOf(Math.abs(node.getPath().hashCode())); 
   }
   
   public UIComponent addUIDocList(String id) throws Exception {

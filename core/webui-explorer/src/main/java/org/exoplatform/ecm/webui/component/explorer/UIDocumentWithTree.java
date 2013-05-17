@@ -46,8 +46,7 @@ public class UIDocumentWithTree extends UIDocumentInfo {
     getChildById(CONTENT_WEEK_PAGE_ITERATOR_ID).setId("WeekPageIteratorWithTreeView");
     getChildById(CONTENT_MONTH_PAGE_ITERATOR_ID).setId("MonthPageIteratorWithTreeView");
     getChildById(CONTENT_YEAR_PAGE_ITERATOR_ID).setId("YearPageIteratorWithTreeView");
-    removeChild(UIDocumentNodeList.class);
-    documentNodeList_ = null;
+    getChild(UIDocumentNodeList.class).setId("UIDocumentNodeListWithTreeView");
   }
 
   public String getTemplate() {

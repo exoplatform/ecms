@@ -97,7 +97,8 @@
 	MultiUpload.prototype.openMultiUploadBox = function() {
 		gj("#UIMultiUpload", eXo.ecm.MultiUpload.document).removeClass("noShow");
 		//focus UIDocumentInfo
-		div=eXo.ecm.MultiUpload.document.getElementById("UIDocumentInfo");
+		div=eXo.ecm.MultiUpload.document.getElementById("UIDocumentInfo") || 
+			eXo.ecm.MultiUpload.document.getElementById("UIDocumentWithTree");
 		try {
 			if (div.addEventListener) {//only for FF,Chrome and IE >=9
 				div.addEventListener("dragover", eXo.ecm.MultiUpload.focus, false);
@@ -124,7 +125,8 @@
 	}
 
 	MultiUpload.prototype.outFocus = function() {
-		var div = eXo.ecm.MultiUpload.document.getElementById("UIDocumentInfo");
+		var div = eXo.ecm.MultiUpload.document.getElementById("UIDocumentInfo") ||
+				  eXo.ecm.MultiUpload.document.getElementById("UIDocumentWithTree");
 		div.style.background="";
 	};
 
@@ -133,7 +135,8 @@
 		evt.stopPropagation();
 		evt.preventDefault();
 	
-		var div = eXo.ecm.MultiUpload.document.getElementById("UIDocumentInfo");
+		var div = eXo.ecm.MultiUpload.document.getElementById("UIDocumentInfo") || 
+				  eXo.ecm.MultiUpload.document.getElementById("UIDocumentWithTree");
 		div.style.background="#F5F5FF";
 		//enable drop zone;
 		eXo.ecm.MultiUpload.document.getElementById("MultiUploadDragFile").style.display="block";
@@ -176,7 +179,8 @@
 			dropbox.removeEventListener("mouseup", eXo.ecm.MultiUpload.dragExitHandler, false);
 			dropbox.removeEventListener("drop", eXo.ecm.MultiUpload.drop, false);
 		}
-		var div = eXo.ecm.MultiUpload.document.getElementById("UIDocumentInfo");
+		var div = eXo.ecm.MultiUpload.document.getElementById("UIDocumentInfo") ||
+				  eXo.ecm.MultiUpload.document.getElementById("UIDocumentWithTree");
 		if (!div) return;
 		if (div.removeEventListener) {
 			div.removeEventListener("drop", eXo.ecm.MultiUpload.drop, false);
