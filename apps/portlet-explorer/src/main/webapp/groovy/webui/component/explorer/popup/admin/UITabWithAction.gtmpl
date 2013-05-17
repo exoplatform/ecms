@@ -10,9 +10,9 @@
 
 <div class="$uicomponent.id">  
   <% uicomponent.renderChildren() %>
-  <div class="UIAction"> 
+  <div class="uiAction"> 
 	  <%for (action in uicomponent.getActions()) {%>
-				<a onclick="<%=uicomponent.event(action)%>" class="ActionButton LightBlueStyle"  href="javascript:void(0);"><%=_ctx.appRes(uicomponent.getId() + ".action." + action)%></a>
+				<button onclick="<%=uicomponent.event(action)%>" class="btn"  href="javascript:void(0);"><%=_ctx.appRes(uicomponent.getId() + ".action." + action)%></button>
 			<%}%>
     </div>
 </div>
