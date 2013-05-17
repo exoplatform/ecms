@@ -1,3 +1,4 @@
+
 /***************************************************************************
  * Copyright (C) 2003-2009 eXo Platform SAS.
  *
@@ -17,14 +18,6 @@
  **************************************************************************/
 package org.exoplatform.ecms.upgrade.sanitization;
 
-import java.util.List;
-
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.Session;
-import javax.jcr.query.Query;
-import javax.jcr.query.QueryResult;
-
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
 import org.exoplatform.commons.version.util.VersionComparator;
@@ -36,6 +29,13 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.Session;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryResult;
+import java.util.List;
 
 /**
  * Created by The eXo Platform SARL
@@ -72,6 +72,12 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
     
     //Migrate data for all drives
     migrateDrives();
+
+    /**
+     * Migrate portlet preferences which contains the "/sites content/live" path to "/sites"
+     */
+    migratePortletPreferences();
+
   }
   
   @Override
@@ -262,6 +268,44 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
         LOG.error("An unexpected error occurs when migrate drives", e);
       }
     } 
+  }
+
+  /**
+   * Migrate portlet preferences which contains the "/sites content/live" path to "/sites"
+   */
+  private void migratePortletPreferences() {
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Start " + this.getClass().getName() + ".............");
+    }
+    Session session;
+    try {
+      session = WCMCoreUtils.getSystemSessionProvider().getSession("portal-system",
+          repoService_.getCurrentRepository());
+      if (LOG.isInfoEnabled()) {
+        LOG.info("=====Start migrate old preferences=====");
+      }
+      String statement = "select * from mop:portletpreference  where mop:value like '%/sites content/live/%'";
+      QueryResult result = session.getWorkspace().getQueryManager().createQuery(statement, Query.SQL).execute();
+      NodeIterator nodeIter = result.getNodes();
+      while(nodeIter.hasNext()) {
+        Node preferenceNode = nodeIter.nextNode();
+        String oldPath =preferenceNode.getProperty("mop:value").getValues()[0].getString();
+        String newPath= StringUtils.replace(oldPath, "/sites content/live/", "/sites/");
+
+        preferenceNode.setProperty("mop:value", new String[]{newPath});
+        session.save();
+      }
+
+      if (LOG.isInfoEnabled()) {
+        LOG.info("===== Portlet preference upgrade completed =====");
+      }
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An unexpected error occurs when migrating old preferences: ", e);
+      }
+    }
+
+
   }
 
 }
