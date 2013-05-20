@@ -51,8 +51,6 @@
       def rcontext = _ctx.getRequestContext();
       int depth = rootTree.getNode().getDepth() + 1;
       def jsManager = rcontext.getJavascriptManager();
-      jsManager.require("SHARED/ecm-utils", "ecmutil").
-  		addScripts("ecmutil.ECMUtils.initClipboard('${drive}_treeclip_button','$depth','$childrenSize');");
     }
 
     for(treeNode in realChildrenTrees) {	    
@@ -147,7 +145,7 @@
   			int depthChild = node.getDepth();
         if (!node.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(node)) {
           strActs +=  "<li class='menuItem'>";
-          strActs +=  "<a exo:attr='CopyUrlToClipboard' style='display: block;' id='${drive}_treeclip_button$depthChild$counter' path='$clipboardLink' onclick=\"eXo.ecm.ECMUtils.pushToClipboard(event,'$clipboardLink');\">" ;
+          strActs +=  "<a exo:attr='CopyUrlToClipboard' style='display: block;' id='${drive}_treeclip_button$depthChild$counter' path='$clipboardLink'>" ;
           strActs +=  " <i class='uiIconEcmsCopyUrlToClipboard uiIconEcmsLightGrey'>" ;
           strActs +=  " </i> ";
 	  			strActs +=	  _ctx.appRes("ECMContextMenu.event.GetURL");

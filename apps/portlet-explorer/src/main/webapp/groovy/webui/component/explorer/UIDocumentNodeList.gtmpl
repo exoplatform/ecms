@@ -43,8 +43,7 @@
   def areaId = uiDocumentInfo.getId();
 
   jsManager.require("SHARED/ecm-utils", "ecmutil").require("SHARED/uiFileView", "uiFileView").
-  addScripts("uiFileView.UIFileView.initAllEvent('$areaId', '$enableDragAndDrop');").
-  addScripts("ecmutil.ECMUtils.initClipboard('clip_button','" + componentId + "','$size');");
+  addScripts("uiFileView.UIFileView.initAllEvent('$areaId', '$enableDragAndDrop');");
   //Config to display columns with format: ["${column};${width}"]
   //Default 
   String[] arrColumns = ["exo:owner;95px","exo:dateModified;123px","exo:dateCreated;121px"];
@@ -177,7 +176,7 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
     String serverUrl= uiDocumentInfo.getWebDAVServerPrefix();
     String clipboardLink =serverUrl + "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + data.getPath();
     strActs +=  "<li class='menuItem' onclick='eXo.ecm.UIFileView.clearCheckboxes();'>";
-    strActs +=  "<a exo:attr='CopyUrlToClipboard' style='display: block;' id='clip_button$componentId$i' path='$clipboardLink' onclick=\"eXo.ecm.ECMUtils.pushToClipboard(event,'$clipboardLink');\">" ;
+    strActs +=  "<a exo:attr='CopyUrlToClipboard' style='display: block;' id='clip_button$componentId$i' path='$clipboardLink'>" ;
     strActs +=  " <i class='uiIconEcmsCopyUrlToClipboard'>" ;
     strActs +=  " </i>&nbsp;" ;
     strActs +=    _ctx.appRes("ECMContextMenu.event.GetURL");

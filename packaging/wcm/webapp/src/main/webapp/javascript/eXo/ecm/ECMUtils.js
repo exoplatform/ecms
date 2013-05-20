@@ -439,37 +439,27 @@
 			my_window.document.write('<script> window.location.href = "' + downloadLink + '"; </script>');
 		};
 
-		var clip = null;
-		ECMUtils.prototype.initClipboard = function (id, level, size) {
-			try {
-			  if (!eXo.core.Browser.isIE()) {
-			    if (size > 0) {
-			      for (var i = 1; i <= size; i++) {
-			        clip = new ZeroClipboard.Client();
-			        clip.setHandCursor(true);
-			        try {
-			          clip.glue(id + level + i);
-			        } catch (err) {}
-			      }
-			    }
-			  }
-			}catch (err) {}
-		}
+    ECMUtils.prototype.initClipboard = function () {
+      // Clear clipboard first
+      gj(".zeroClipboard").remove();
 
-		ECMUtils.prototype.closeContextMenu = function (element) {
-			var contextMenu = document.getElementById("ECMContextMenu");
-			if (contextMenu) contextMenu.style.display = "none";
-		}
+      // Init clipboard for copying url
+      var contextMenu = document.getElementById('ECMContextMenu');
+      gj(contextMenu).find("i.uiIconEcmsCopyUrlToClipboard").each(function() {
+        var parent = gj(this).closest('a');
+        var clip = new ZeroClipboard.Client();
+        clip.glue(gj(parent).attr('id'));
+        clip.setText(gj(parent).attr('path'));
+      });
+    };
 
-		ECMUtils.prototype.pushToClipboard = function (event, url) {
-			if (window.clipboardData && clipboardData.setData) {
-			  clipboardData.setData("Text", url);
-			} else {
-			  alert("Internet Explorer required");
-			}
-			eXo.core.MouseEventManager.docMouseDownEvt(event);
-			return false;
-		}
+    ECMUtils.prototype.closeContextMenu = function (element) {
+        var contextMenu = document.getElementById("ECMContextMenu");
+        if (contextMenu) {
+            contextMenu.style.display = "none";
+            gj(".zeroClipboard").remove();
+        }
+    };
 
 		ECMUtils.prototype.concatMethod = function () {
 			var oArg = arguments;

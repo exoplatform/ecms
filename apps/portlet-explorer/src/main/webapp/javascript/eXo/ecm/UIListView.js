@@ -174,6 +174,9 @@
         mobileElement.appendChild(coverElement);
         document.body.appendChild(mobileElement);
       }
+      
+      // Init feature Copy URL to Clipboard
+      eXo.ecm.ECMUtils.initClipboard();
     };
 
     ListView.prototype.mouseUpTree = function(evt) {
@@ -427,6 +430,9 @@
           eval(element.getAttribute("mousedown"));
         }
       }
+      
+      // Init feature Copy URL to Clipboard
+      eXo.ecm.ECMUtils.initClipboard();
     };
 
     //event in ground

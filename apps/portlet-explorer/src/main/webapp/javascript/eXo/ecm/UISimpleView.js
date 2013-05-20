@@ -202,6 +202,9 @@
         mobileElement.appendChild(coverElement);
         document.body.appendChild(mobileElement);
       }
+      
+      // Init feature Copy URL to Clipboard
+      eXo.ecm.ECMUtils.initClipboard();
     };
 
     SimpleView.prototype.mouseUpTree = function(evt) {
@@ -441,6 +444,9 @@
           eval(element.getAttribute("mousedown"));
         }
       }
+      
+      // Init feature Copy URL to Clipboard
+      eXo.ecm.ECMUtils.initClipboard();
     };
 
     //event in ground
