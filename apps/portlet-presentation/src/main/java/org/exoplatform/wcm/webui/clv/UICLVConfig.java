@@ -720,7 +720,7 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
     }
     if (title==null) title = selectedNode.getName();
 
-    return ContentReader.getXSSCompatibilityContent(title);
+    return Text.unescapeIllegalJcrChars(title);
   }
 
   /**
