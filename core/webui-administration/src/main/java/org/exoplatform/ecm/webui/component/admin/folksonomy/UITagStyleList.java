@@ -50,7 +50,7 @@ public class UITagStyleList extends UIPagingGrid {
   final static String HTML_STYLE_PROP = "exo:htmlStyle" ;
 
   private static String[] BEAN_FIELD = {"name", "documentRange", "tagHTML"} ;
-  private static String[] ACTIONS = {"Edit", "Delete"} ;
+  private static String[] ACTIONS = {"EditStyle", "RemoveStyle"} ;
 
   public UITagStyleList() throws Exception {
     getUIPageIterator().setId("TagStyleIterator") ;
