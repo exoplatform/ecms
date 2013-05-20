@@ -457,7 +457,6 @@
         var contextMenu = document.getElementById("ECMContextMenu");
         if (contextMenu) {
             contextMenu.style.display = "none";
-            gj(".zeroClipboard").remove();
         }
     };
 

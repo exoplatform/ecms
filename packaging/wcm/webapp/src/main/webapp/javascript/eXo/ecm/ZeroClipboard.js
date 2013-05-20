@@ -118,6 +118,8 @@
             body.appendChild(this.div);
         
             this.div.innerHTML = this.getHTML( box.width, box.height );
+            
+            // Mark with class zeroClipboard for the purpose of cleaning clipboard afterwards
             gj(this.div).addClass('zeroClipboard');
 
         },
@@ -253,7 +255,6 @@
                 case 'mouseup':
                   var item = document.getElementById(this.domElement.id);
                   item.className = 'menuItemNormal';
-                  eXo.ecm.ECMUtils.closeContextMenu(this.domElement);
                   break;
             } // switch eventName
         
