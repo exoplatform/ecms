@@ -19,6 +19,7 @@ package org.exoplatform.services.wcm.webcontent;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Map;
 
 import javax.jcr.ImportUUIDBehavior;
 import javax.jcr.Node;
@@ -35,6 +36,7 @@ import org.exoplatform.container.xml.ObjectParameter;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.deployment.DeploymentDescriptor;
+import org.exoplatform.services.deployment.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -51,7 +53,6 @@ import org.exoplatform.services.wcm.portal.artifacts.CreatePortalPlugin;
  */
 public class InitialWebContentPlugin extends CreatePortalPlugin {
 
-  @SuppressWarnings("unused")
   private static final Log LOG = ExoLogger.getLogger(InitialWebContentPlugin.class.getName());
   private InitParams initParams;
   private ConfigurationManager configurationManager;
@@ -85,7 +86,6 @@ public class InitialWebContentPlugin extends CreatePortalPlugin {
    * #deployToPortal(java.lang.String,
    * org.exoplatform.services.jcr.ext.common.SessionProvider)
    */
-  @SuppressWarnings("unchecked")
   public void deployToPortal(SessionProvider sessionProvider, String portalName) throws Exception {
     Iterator iterator = initParams.getObjectParamIterator();
     DeploymentDescriptor deploymentDescriptor = null;
@@ -93,7 +93,9 @@ public class InitialWebContentPlugin extends CreatePortalPlugin {
       while (iterator.hasNext()) {
         ObjectParameter objectParameter = (ObjectParameter) iterator.next();
         deploymentDescriptor = (DeploymentDescriptor) objectParameter.getObject();
+        Boolean cleanupPublication = deploymentDescriptor.getCleanupPublication();
         String sourcePath = deploymentDescriptor.getSourcePath();
+        String versionHistoryPath = deploymentDescriptor.getVersionHistoryPath();
         // sourcePath should start with: war:/, jar:/, classpath:/, file:/
         String xmlData = (String) artifactsCache.get(sourcePath);
         if (xmlData == null) {
@@ -109,6 +111,43 @@ public class InitialWebContentPlugin extends CreatePortalPlugin {
         String realTargetFolder = StringUtils.replace(targetPath, "{portalName}", portalName);
         InputStream inputStream = configurationManager.getInputStream(sourcePath);
         session.importXML(realTargetFolder, inputStream, ImportUUIDBehavior.IMPORT_UUID_CREATE_NEW);
+        if (cleanupPublication) {
+            /**
+             * This code allows to cleanup the publication lifecycle in the target
+             * folder after importing the data. By using this, the publication
+             * live revision property will be re-initialized and the content will
+             * be set as published directly. Thus, the content will be visible in
+             * front side.
+             */
+            QueryManager manager = session.getWorkspace().getQueryManager();
+            String statement = "select * from nt:base where jcr:path LIKE '"+ realTargetFolder +"/%'";
+            Query query = manager.createQuery(statement.toString(), Query.SQL);
+            NodeIterator iter = query.execute().getNodes();
+            while (iter.hasNext()) {
+              Node node = iter.nextNode();
+              if (node.hasProperty("publication:liveRevision")
+                  && node.hasProperty("publication:currentState")) {
+                if (LOG.isInfoEnabled()) {
+                  LOG.info("\"" + node.getName() + "\" publication lifecycle has been cleaned up");
+                }
+                node.setProperty("publication:liveRevision", "");
+                node.setProperty("publication:currentState", "published");
+              }
+
+            }
+
+          }
+
+          if (versionHistoryPath != null && versionHistoryPath.length() > 0) {
+            // process import version history
+            Node currentNode = (Node) session.getItem(deploymentDescriptor.getTarget().getNodePath());
+
+            Map<String, String> mapHistoryValue =
+              Utils.getMapImportHistory(configurationManager.getInputStream(versionHistoryPath));
+            Utils.processImportHistory(currentNode,
+                                       configurationManager.getInputStream(versionHistoryPath),
+                                       mapHistoryValue);
+          }       
         session.save();
       }
       Node portalNode = livePortalManagerService.getLivePortal(sessionProvider, portalName);
