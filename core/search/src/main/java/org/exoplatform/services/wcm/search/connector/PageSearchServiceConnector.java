@@ -16,16 +16,21 @@
  */
 package org.exoplatform.services.wcm.search.connector;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.drives.DriveData;
-import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.ResultNode;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
+import org.exoplatform.services.wcm.search.base.ArrayNodePageList;
+import org.exoplatform.services.wcm.search.base.PageListFactory;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -64,8 +69,41 @@ public class PageSearchServiceConnector extends BaseSearchServiceConnector {
 
   @Override
   protected AbstractPageList<ResultNode> searchNodes(QueryCriteria criteria) throws Exception {
-    return siteSearch_.searchPageContents(WCMCoreUtils.getUserSessionProvider(),
-                                           criteria, (int)criteria.getLimit(), false);
+    if (StringUtils.isBlank(criteria.getSiteName())) {//return empty list of result
+      return new ArrayNodePageList<ResultNode>(
+          new ArrayList<ResultNode>(), (int)criteria.getLimit());
+    } else {
+      String[] siteNames = criteria.getSiteName().split(",");
+      if (siteNames.length == 1) {//just search for 1 site
+        return siteSearch_.searchPageContents(WCMCoreUtils.getUserSessionProvider(),
+                                              criteria, (int)criteria.getLimit(), false); 
+      } else {//search for many sites
+        int limit = (int)criteria.getLimit();
+        int offset = (int)criteria.getOffset();
+        criteria.setOffset(0);
+        List<ResultNode> ret = new ArrayList<ResultNode>();
+
+        for (String site : siteNames) {
+          criteria.setSiteName(site);
+          AbstractPageList<ResultNode> resultList = 
+              siteSearch_.searchPageContents(WCMCoreUtils.getUserSessionProvider(),
+                                                criteria, (int)criteria.getLimit(), false);
+          if (resultList.getAvailable() <= offset) {
+            offset -= resultList.getAvailable();
+          } else if (resultList.getAvailable() > offset) {
+            for (int i = 0; i < limit; i++)
+              if (offset + i < resultList.getAvailable()) {
+                ResultNode resNode = resultList.getPage( ( offset + i) / resultList.getPageSize() + 1).
+                                                get((offset + i) % resultList.getPageSize());
+                ret.add(resNode);
+                if (limit == 0) break;
+              }
+          }
+          if (limit == 0) break;
+        }
+        return new ArrayNodePageList<ResultNode>(ret, (int)criteria.getLimit());
+      }
+    }
   }
 
   @Override

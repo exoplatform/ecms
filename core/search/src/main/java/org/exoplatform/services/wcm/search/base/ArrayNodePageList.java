@@ -52,6 +52,16 @@ public class ArrayNodePageList<E> extends AbstractPageList<E> {
   }
 
   /** Constructor */
+  public ArrayNodePageList(List<E> nodes, int pageSize) {
+    super(pageSize);
+    setTotalNodes(nodes.size());
+    dataList = nodes;
+    setAvailablePage(dataList.size());
+    removeRedundantPages(dataList.size() / pageSize);
+    currentListPage_ = null;
+  }
+  
+  /** Constructor */
   public ArrayNodePageList(List<Node> nodes, int pageSize, 
                            NodeSearchFilter filter, SearchDataCreator<E> dataCreator) {
     super(pageSize, filter, dataCreator);

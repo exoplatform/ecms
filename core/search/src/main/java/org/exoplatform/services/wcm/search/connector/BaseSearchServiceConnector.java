@@ -99,7 +99,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
     QueryCriteria criteria = createQueryCriteria(query, offset, limit, sort, order);
     //query search result
     try {
-        criteria.setSiteName(null);
+        criteria.setSiteName(getSitesStr(sites));
         ret = convertResult(searchNodes(criteria), limit, context);
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
@@ -107,6 +107,20 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
       }
     }
     return ret;
+  }
+  
+  /**
+   * convert Collections<String> to string, elements are seperated by commas
+   * @param sites the collection
+   * @return the string
+   */
+  private String getSitesStr(Collection<String> sites) {
+    if (sites == null) return null;
+    StringBuffer s = new StringBuffer();
+    for (String site : sites) {
+      s.append(site).append(',');
+    }
+    return s.substring(0, s.length() - 1);
   }
 
   /**
