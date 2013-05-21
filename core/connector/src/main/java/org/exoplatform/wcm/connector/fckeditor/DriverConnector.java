@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -525,22 +524,10 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @throws Exception the exception
    */
   private List<DriveData> groupDrivers(List<DriveData> driverList) throws Exception {
-    NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
-    List<DriveData> groupDrivers = new ArrayList<DriveData>();
-    String groupPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_GROUPS_PATH);
-    Set<String> groups = ConversationState.getCurrent().getIdentity().getGroups();
-    for(DriveData drive : driverList) {
-      if(drive.getHomePath().startsWith(groupPath)) {
-        for(String group : groups) {
-          if(drive.getHomePath().equals(groupPath + group)) {
-            groupDrivers.add(drive);
-            break;
-          }
-        }
-      }
-    }
-    Collections.sort(groupDrivers);
-    return groupDrivers;
+    ManageDriveService driveService = WCMCoreUtils.getService(ManageDriveService.class);
+    String currentUserId = ConversationState.getCurrent().getIdentity().getUserId();
+    List<String> userRoles = this.getMemberships(currentUserId);
+    return driveService.getGroupDrives(currentUserId, userRoles);
   }
 
   /**
