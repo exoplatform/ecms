@@ -440,7 +440,7 @@ public class UICLVPresentation extends UIContainer {
       sb.append(node.getPath());
     }
     String param = sb.toString();
-    param = Text.escape(param, '%', true, " ");
+    param = Text.escapeIllegalJcrChars(param);
     NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
     NavigationResource resource = new NavigationResource(SiteType.PORTAL,
                                                          Util.getPortalRequestContext()
