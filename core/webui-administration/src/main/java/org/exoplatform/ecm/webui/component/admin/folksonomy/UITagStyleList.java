@@ -41,8 +41,8 @@ import org.exoplatform.webui.event.EventListener;
  */
 @ComponentConfig(template = "system:/groovy/ecm/webui/UIGridWithButton.gtmpl", 
                  events = {
-    @EventConfig(listeners = UITagStyleList.EditStyleActionListener.class),
-    @EventConfig(listeners = UITagStyleList.RemoveStyleActionListener.class, confirm = "UIFolksonomyManager.msg.confirm-delete"),
+    @EventConfig(listeners = UITagStyleList.EditActionListener.class),
+    @EventConfig(listeners = UITagStyleList.RemoveActionListener.class, confirm = "UIFolksonomyManager.msg.confirm-delete"),
     @EventConfig(listeners = UITagStyleList.AddStyleActionListener.class) })
 public class UITagStyleList extends UIPagingGrid {
 
@@ -50,7 +50,7 @@ public class UITagStyleList extends UIPagingGrid {
   final static String HTML_STYLE_PROP = "exo:htmlStyle" ;
 
   private static String[] BEAN_FIELD = {"name", "documentRange", "tagHTML"} ;
-  private static String[] ACTIONS = {"EditStyle", "RemoveStyle"} ;
+  private static String[] ACTIONS = {"Edit", "Remove"} ;
 
   public UITagStyleList() throws Exception {
     getUIPageIterator().setId("TagStyleIterator") ;
@@ -109,7 +109,7 @@ public class UITagStyleList extends UIPagingGrid {
     public String getTagHTML() { return tagHTML_ ; }
   }
   
-  static public class EditStyleActionListener extends EventListener<UITagStyleList> {
+  static public class EditActionListener extends EventListener<UITagStyleList> {
     public void execute(Event<UITagStyleList> event) throws Exception {
       UITagStyleList uiTagStyleList = event.getSource();
       UITagManager uiManager = uiTagStyleList.getParent();
@@ -129,7 +129,7 @@ public class UITagStyleList extends UIPagingGrid {
     }
   }
   
-  static public class RemoveStyleActionListener extends EventListener<UITagStyleList> {
+  static public class RemoveActionListener extends EventListener<UITagStyleList> {
     public void execute(Event<UITagStyleList> event) throws Exception {
       UITagStyleList uiTagStyleList = event.getSource();
       UITagManager uiManager = uiTagStyleList.getParent();

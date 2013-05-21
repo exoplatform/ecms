@@ -685,9 +685,7 @@ public class UICLVPresentation extends UIContainer {
     String fastPublishLink = event("FastPublish", NodeLocation.getExpressionByNode(viewNode));
     String hoverClass = Utils.isShowQuickEdit() ? " containerHoverClassInner" : "";
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-    sb.append("<div class=\"" + cssClass + "\" onmouseover=\"this.className  = '" + cssClass + " "
-        + hoverClass + "' \" onmouseout=\"this.className = '" + cssClass + "'\" onfocus=\"this.className  = '" + cssClass + " "
-        + hoverClass + "' \" onblur=\"this.className = '" + cssClass + "' \">");
+    sb.append("<div class=\"" + cssClass + " " + hoverClass + " \">");
     if (Utils.isShowQuickEdit()) {
       sb.append("  <div class=\"edittingContent\" style=\" z-index: 5\">");
       sb.append("    <div class=\"edittingToolBar clearfix\" >");
@@ -718,8 +716,8 @@ public class UICLVPresentation extends UIContainer {
           sb.append("            <i class=\"uiIconEcmsPublish\" ></i>");
           sb.append("          </a>");
         }
-        sb.append("          <a class=\"btn\" onclick = 'eXo.ecm.CLV.addURL(this)' href=\"" + contentEditLink + "\" title=\"" + strEditBundle + "\">");
-        sb.append("            <i class=\"uiIconEdit\" ></i>");
+        sb.append("          <a class=\"btn\" onclick = 'eXo.ecm.CLV.addURL(this)' href=\"" + contentEditLink + "\" >");
+        sb.append("            <i class=\"uiIconEdit\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + strEditBundle + "\"></i>");
         sb.append("          </a>");
       } else {
         sb.append("          <a class=\"btn\" >");
@@ -737,8 +735,8 @@ public class UICLVPresentation extends UIContainer {
             LOG.warn(e.getMessage());
           }
         }
-        sb.append("          <a class=\"btn\" href=\"" + contentDeleteLink + "\" title=\"" + strDeleteBundle + "\">");
-        sb.append("            <i class=\"uiIconRemove\"></i>");
+        sb.append("          <a class=\"btn\" href=\"" + contentDeleteLink + "\">");
+        sb.append("            <i class=\"uiIconRemove\"  rel=\"tooltip\" data-placement=\"bottom\" title=\"" + strDeleteBundle + "\"></i>");
         sb.append("          </a>");
       }
 
