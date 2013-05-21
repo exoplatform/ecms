@@ -78,7 +78,7 @@ public class DownloadConnector implements ResourceContainer{
       mimeType = node.getNode("jcr:content").getProperty("jcr:mimeType").getString();
     }
     return Response.ok(is, mimeType)
-          .header("Content-Disposition","attachment; filename=" + fileName)
+          .header("Content-Disposition","attachment; filename=\"" + fileName+"\"")
             .build();
   }
 }
