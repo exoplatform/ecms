@@ -42,6 +42,7 @@ import org.apache.commons.lang.StringUtils;
 import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.ecm.connector.fckeditor.FCKMessage;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
@@ -352,6 +353,7 @@ public class FileUploadHandler {
     //save node with name=fileName
     Node file = null;
     boolean fileCreated = false;
+    fileName = Text.escapeIllegalJcrChars(fileName);
     String nodeName = fileName;
     int count = 0;
     do {

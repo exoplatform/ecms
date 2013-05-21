@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
@@ -34,6 +36,7 @@ import org.exoplatform.services.seo.PageMetadataModel;
 import org.exoplatform.services.seo.SEOService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
+import org.exoplatform.wcm.webui.reader.ContentReader;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -143,7 +146,7 @@ public class UISEOToolbarForm extends UIForm {
             } catch(Exception ex) {
               contentValue = pcontext.getRequestParameter(contentParam);
             }
-            contentValue = org.exoplatform.ecm.utils.text.Text.escapeIllegalJcrChars(contentValue);
+            contentValue = ContentReader.getXSSCompatibilityContent(contentValue);
             paramsArray.add(contentValue);
           }
         }
@@ -157,17 +160,28 @@ public class UISEOToolbarForm extends UIForm {
       if(siteKey != null && siteKey.equals(portalKey)) {
         metaModel = seoService.getPageMetadata(pageReference, lang);
         //pageParent = Util.getUIPortal().getSelectedUserNode().getParent().getPageRef();
-        if(paramsArray != null) {
-          PageMetadataModel tmpModel = seoService.getContentMetadata(paramsArray,lang);
+        if(paramsArray != null) {        
+        	PageMetadataModel tmpModel = null;
+        	try{
+        		tmpModel = seoService.getContentMetadata(paramsArray,lang);
+        	}catch(PathNotFoundException ex) {
+        		//do nothing
+        	}
           if(tmpModel != null) {
             metaModel = tmpModel;
           } else {
-            for(int i = 0;i < paramsArray.size();i++) {
-              if(seoService.getContentNode(paramsArray.get(i).toString()) != null ) {
-                metaModel = null;
-                break;
-              }
-            }
+          	try {
+	            for(int i = 0;i < paramsArray.size();i++) {
+	            	Node contentNode = seoService.getContentNode(paramsArray.get(i).toString());
+	            	
+	              if(contentNode != null ) {
+	                metaModel = null;
+	                break;
+	              }
+	            }
+          	}catch(PathNotFoundException ex) {
+          		metaModel = null;
+          	}
           }
         }
       }

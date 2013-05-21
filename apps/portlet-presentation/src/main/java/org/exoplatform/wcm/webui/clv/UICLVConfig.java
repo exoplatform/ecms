@@ -720,7 +720,7 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
     }
     if (title==null) title = selectedNode.getName();
 
-    return ContentReader.getXSSCompatibilityContent(title);
+    return ContentReader.getUnescapeIllegalJcrContent(title);
   }
 
   /**
@@ -978,7 +978,7 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
         sb.append(item).append(";");
       }
       String itemPath = sb.toString();
-      clvConfig.getUIStringInput(UICLVConfig.ITEM_PATH_FORM_STRING_INPUT).setValue(clvConfig.getTitles(itemPath));
+      clvConfig.getUIStringInput(UICLVConfig.ITEM_PATH_FORM_STRING_INPUT).setValue(clvConfig.getTitle(itemPath));
       clvConfig.setSavedPath(itemPath);
 
     }
@@ -1012,7 +1012,7 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
         sb.append(item).append(";");
       }
       String itemPath = sb.toString();
-      clvConfig.getUIStringInput(UICLVConfig.ITEM_PATH_FORM_STRING_INPUT).setValue(clvConfig.getTitles(itemPath));
+      clvConfig.getUIStringInput(UICLVConfig.ITEM_PATH_FORM_STRING_INPUT).setValue(clvConfig.getTitle(itemPath));
       clvConfig.setSavedPath(itemPath);
     }
   }
