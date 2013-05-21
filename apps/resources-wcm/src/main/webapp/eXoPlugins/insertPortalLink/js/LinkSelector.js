@@ -1,3 +1,5 @@
+(function(gj, wcm_utils) {
+
 var LinkSelector = {
 	init : function() {
 		with (window.opener.eXo.env.portal) {
@@ -72,7 +74,7 @@ LinkSelector.loadLinks = function() {
 		var nameFolder = nodeList[i].getAttribute("name");
 		treeHTML 		+= 		'<div class="Node" onclick="">';
 		treeHTML		+=			'<div class="Expand">';
-		treeHTML 		+= 				'<div name="/'+nameFolder+'/" class="IconNode nt_unstructured16x16Icon 16x16Icon" onclick="LinkSelector.listPortalLinks(this);">'	;
+		treeHTML 		+= 				'<div name="/'+nameFolder+'/" class="IconNode nt_unstructured16x16Icon 16x16Icon" onclick="eXo.ecm.LinkSelector.listPortalLinks(this);">'	;
 		treeHTML		+= 					'<a href="javascript: void(0);">'+nameFolder+'</a>';
 		treeHTML		+=				'</div>';
 		treeHTML		+=			'</div>';
@@ -99,7 +101,7 @@ LinkSelector.listPortalLinks = function(oPortalLink) {
 		var currentFolder = namePortalLink + folderLink;
 		treeHTML += '<div class="Node">';
 		treeHTML += 	'<div class="Expand">';	
-		treeHTML +=			'<div name="'+currentFolder+'/" class="IconNode nt_unstructured16x16Icon 16x16Icon" onclick="LinkSelector.listPortalLinks(this);">';
+		treeHTML +=			'<div name="'+currentFolder+'/" class="IconNode nt_unstructured16x16Icon 16x16Icon" onclick="eXo.ecm.LinkSelector.listPortalLinks(this);">';
 		treeHTML +=				'<a href="javascript:void(0);">'+folderLink+'</a>';
 		treeHTML +=			'</div>';
 		treeHTML +=		'</div>';
@@ -154,7 +156,7 @@ LinkSelector.listFileLinks = function(fileLinks) {
 		var dateCreated = fileLinks[i].getAttribute('dateCreated');
 		var newRow = tblRWS.insertRow(i+1);
 		newRow.className = clazz;
-		newRow.insertCell(0).innerHTML = '<div class="Item default16x16Icon" url="'+urlLink+'" onclick="LinkSelector.insertLink(this);">'+nameLink+'</div>';
+		newRow.insertCell(0).innerHTML = '<div class="Item default16x16Icon" url="'+urlLink+'" onclick="eXo.ecm.LinkSelector.insertLink(this);">'+nameLink+'</div>';
 		newRow.insertCell(1).innerHTML = '<div class="Item">'+ dateCreated +'</div>';
 	}
 };
@@ -166,3 +168,12 @@ LinkSelector.insertLink = function(portalLink) {
 	}
 	window.close();
 };
+
+eXo.ecm.LinkSelector = LinkSelector;
+
+	return {
+		LinkSelector : eXo.ecm.LinkSelector
+	};
+
+})(gj, wcm_utils);
+
