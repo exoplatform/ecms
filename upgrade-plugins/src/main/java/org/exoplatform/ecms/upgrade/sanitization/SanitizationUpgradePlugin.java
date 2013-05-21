@@ -26,6 +26,7 @@ import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -33,16 +34,15 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.Session;
+import javax.jcr.Value;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryResult;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by The eXo Platform SARL
- * Author : Dang Van Minh
- *          minh.dang@exoplatform.com
- * Mar 9, 2013
- * 8:46:00 AM  
+ * This upgrade plugin will be used to migrate all the old data to the new one which related to
+ * the changing of Sanitization in PLF4
  */
 public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
 
@@ -64,13 +64,14 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
     if (LOG.isInfoEnabled()) {
       LOG.info("Start " + this.getClass().getName() + ".............");
     }
-    //Migrate data for all user views
+
+    /* Migrate data for all user views */
     migrateViews();
     
-    //Migrate data for view templates
+    /* Migrate data for view templates */
     migrateViewTemplates();
     
-    //Migrate data for all drives
+    /* Migrate data for all drives */
     migrateDrives();
 
     /**
@@ -78,14 +79,25 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
      */
     migratePortletPreferences();
 
+    /**
+     * Migrate exo:links which still contains "/sites content/live" in its properties
+     */
+    migrateLinkInContents();
+
+    /**
+     * Migrate activities which contains "/sites content/live" in the url
+     */
+    migrateSocialActivities();
+
   }
   
   @Override
   public boolean shouldProceedToUpgrade(String newVersion, String previousVersion) {
     //return true anly for the first version of platform
     return VersionComparator.isAfter(newVersion,previousVersion);
-  }  
+  }
 
+  /* Migrate data for all user views */
   private void migrateViews() {
     try {
       Session session = WCMCoreUtils.getSystemSessionProvider().getSession(dmsConfiguration_.getConfig().getSystemWorkspace(),
@@ -146,8 +158,8 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
     }
     return false;
   }
-    
-  
+
+  /* Migrate data for view templates */
   private void migrateViewTemplates() {
     try {
       if (LOG.isInfoEnabled()) {
@@ -178,7 +190,8 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
       }
     }
   }
-  
+
+  /* Migrate data for all drives */
   private void migrateDrives() {
     if (LOG.isInfoEnabled()) {
       LOG.info("=====Start migrate data for drives=====");
@@ -214,8 +227,8 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
           drive.remove();
         } else {
           String views = drive.getProperty("exo:views").getString();
-          String[] arrView = {};
-          if(views.indexOf(",") > -1) {
+          String[] arrView;
+          if(views.contains(",")) {
             arrView = views.split(","); 
           } else {
             arrView = new String[] {views};
@@ -277,14 +290,13 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
     if (LOG.isInfoEnabled()) {
       LOG.info("Start " + this.getClass().getName() + ".............");
     }
-    Session session;
     try {
-      session = WCMCoreUtils.getSystemSessionProvider().getSession("portal-system",
+      Session session = WCMCoreUtils.getSystemSessionProvider().getSession("portal-system",
           repoService_.getCurrentRepository());
       if (LOG.isInfoEnabled()) {
         LOG.info("=====Start migrate old preferences=====");
       }
-      String statement = "select * from mop:portletpreference  where mop:value like '%/sites content/live/%'";
+      String statement = "select * from mop:portletpreference where mop:value like '%/sites content/live/%'";
       QueryResult result = session.getWorkspace().getQueryManager().createQuery(statement, Query.SQL).execute();
       NodeIterator nodeIter = result.getNodes();
       while(nodeIter.hasNext()) {
@@ -293,9 +305,8 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
         String newPath= StringUtils.replace(oldPath, "/sites content/live/", "/sites/");
 
         preferenceNode.setProperty("mop:value", new String[]{newPath});
-        session.save();
       }
-
+      session.save();
       if (LOG.isInfoEnabled()) {
         LOG.info("===== Portlet preference upgrade completed =====");
       }
@@ -304,8 +315,81 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
         LOG.error("An unexpected error occurs when migrating old preferences: ", e);
       }
     }
-
-
   }
 
+  /**
+   * Migrate exo:links which still contains "/sites content/live" in its properties
+   */
+  private void migrateLinkInContents() {
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Start " + this.getClass().getName() + ".............");
+    }
+    try {
+      Session session = WCMCoreUtils.getSystemSessionProvider().getSession("collaboration", repoService_.getCurrentRepository());
+      if (LOG.isInfoEnabled()) {
+        LOG.info("=====Start migrate old link in contents=====");
+      }
+      String statement = "select * from exo:linkable where exo:links like '%/sites content/live/%'";
+      QueryResult result = session.getWorkspace().getQueryManager().createQuery(statement, Query.SQL).execute();
+      NodeIterator nodeIter = result.getNodes();
+      while(nodeIter.hasNext()) {
+        Node contentNode = nodeIter.nextNode();
+        if (LOG.isInfoEnabled()) {
+          LOG.info("=====Migrating content '"+contentNode.getPath()+"' =====");
+        }
+        Value[] oldLinks = contentNode.getProperty("exo:links").getValues();
+        List<String> newLinks = new ArrayList<String>();
+        for(Value linkValue : oldLinks) {
+          newLinks.add(StringUtils.replace(linkValue.getString(), "/sites content/live/", "/sites/"));
+        }
+        contentNode.setProperty("exo:links", newLinks.toArray(new String[newLinks.size()]));
+      }
+      session.save();
+      if (LOG.isInfoEnabled()) {
+        LOG.info("===== Migrate content links completed =====");
+      }
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An unexpected error occurs when migrating content links: ", e);
+      }
+    }
+  }
+
+  /**
+   * Migrate activities which contains "/sites content/live" in the url
+   */
+  private void migrateSocialActivities() {
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Start " + this.getClass().getName() + ".............");
+    }
+    SessionProvider sessionProvider = null;
+    try {
+      sessionProvider = SessionProvider.createSystemProvider();
+      Session session = sessionProvider.getSession("social", repoService_.getCurrentRepository());
+
+      if (LOG.isInfoEnabled()) {
+        LOG.info("=====Start migrate soc:url for all activities=====");
+      }
+      String statement = "SELECT * FROM soc:activity WHERE soc:url like '%/sites content/live/%'";
+      QueryResult result = session.getWorkspace().getQueryManager().createQuery(statement, Query.SQL).execute();
+      NodeIterator nodeIter = result.getNodes();
+      while(nodeIter.hasNext()) {
+        Node activity = nodeIter.nextNode();
+        String nodeUrl = activity.getProperty("soc:url").getString();
+        activity.setProperty("soc:url", StringUtils.replace(nodeUrl, "/sites content/live/", "/sites/"));
+      }
+      session.save();
+      if (LOG.isInfoEnabled()) {
+        LOG.info("=====Completed the migration for soc:url=====");
+      }
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An unexpected error occurs when migrating activities: ", e);
+      }
+    } finally {
+      if (sessionProvider != null) {
+        sessionProvider.close();
+      }
+    }
+  }
 }

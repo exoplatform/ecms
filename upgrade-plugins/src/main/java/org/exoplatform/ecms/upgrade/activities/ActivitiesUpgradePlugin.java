@@ -1,5 +1,14 @@
 package org.exoplatform.ecms.upgrade.activities;
 
+import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
+import org.exoplatform.commons.version.util.VersionComparator;
+import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
+
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
@@ -7,34 +16,14 @@ import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryResult;
 
-import org.apache.commons.lang.StringUtils;
-import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
-import org.exoplatform.commons.version.util.VersionComparator;
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.services.cms.impl.DMSConfiguration;
-import org.exoplatform.services.cms.views.ManageViewService;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-
 public class ActivitiesUpgradePlugin extends UpgradeProductPlugin {
 	
 	private Log log = ExoLogger.getLogger(this.getClass());
-	private DMSConfiguration dmsConfiguration_;
   private RepositoryService repoService_;
-  private ManageViewService viewService_;
 
-	public ActivitiesUpgradePlugin(RepositoryService repoService, DMSConfiguration dmsConfiguration, 
-      ManageViewService viewService, InitParams initParams) {
+	public ActivitiesUpgradePlugin(RepositoryService repoService, InitParams initParams) {
     super(initParams);
     repoService_ = repoService;
-    dmsConfiguration_ = dmsConfiguration;
-    viewService_ = viewService;
   }
 
 	@Override
@@ -71,7 +60,7 @@ public class ActivitiesUpgradePlugin extends UpgradeProductPlugin {
       }
       session.save();
       if (log.isInfoEnabled()) {
-        log.info("=====Completed the migration data for user views=====");
+        log.info("=====Completed the migration data for all activities=====");
       }
 		} catch (Exception e) {
       if (log.isErrorEnabled()) {
