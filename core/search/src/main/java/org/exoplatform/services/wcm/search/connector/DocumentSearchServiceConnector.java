@@ -98,6 +98,7 @@ public class DocumentSearchServiceConnector extends BaseContentSearchServiceConn
     String url = BaseSearchServiceConnector.NONE_NAGVIGATION;
     String handler = WCMCoreUtils.getPortalName();
     UserPortalConfig prc = getUserPortalConfig();
+    if (prc == null) return null;
     SiteKey siteKey = SiteKey.portal(prc.getPortalConfig().getName());
     if(siteKey != null) {
       if(StringUtils.isNotBlank(siteKey.getName())) {

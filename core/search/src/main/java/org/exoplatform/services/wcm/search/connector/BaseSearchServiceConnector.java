@@ -38,6 +38,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.ResultNode;
@@ -237,8 +238,10 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
    * @throws Exception
    */
   protected List<DriveData> getDriveDataList() throws Exception {
-    return driveService_.getDriveByUserRoles(ConversationState.getCurrent().getIdentity().getUserId(), 
-                                             org.exoplatform.services.cms.impl.Utils.getMemberships());
+    String user = ConversationState.getCurrent().getIdentity().getUserId();
+    List<String> memberships = IdentityConstants.ANONIM.equals(user) ? 
+                     new ArrayList<String>() : org.exoplatform.services.cms.impl.Utils.getMemberships();
+    return driveService_.getDriveByUserRoles(user, memberships);
   }
   
   /**
