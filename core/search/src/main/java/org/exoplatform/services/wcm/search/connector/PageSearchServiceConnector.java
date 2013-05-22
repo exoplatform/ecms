@@ -30,7 +30,6 @@ import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.ResultNode;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.search.base.ArrayNodePageList;
-import org.exoplatform.services.wcm.search.base.PageListFactory;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -133,5 +132,20 @@ public class PageSearchServiceConnector extends BaseSearchServiceConnector {
     }
   }
   
-
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected String getImageUrl(Node node) {
+    return "/eXoWCMResources/skin/images/search/page.png";
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  protected String getDetails(ResultNode retNode, SearchContext context) throws Exception {
+    DriveData driveData = getDriveData(retNode);
+    return getDriveTitle(driveData);
+  }
+  
 }

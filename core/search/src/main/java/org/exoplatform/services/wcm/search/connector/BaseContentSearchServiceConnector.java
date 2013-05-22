@@ -16,9 +16,13 @@
  */
 package org.exoplatform.services.wcm.search.connector;
 
+import java.util.Calendar;
+
+import javax.jcr.Node;
+
+import org.exoplatform.commons.api.search.data.SearchContext;
 import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
+import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.ResultNode;
@@ -83,6 +87,22 @@ public abstract class BaseContentSearchServiceConnector extends BaseSearchServic
   protected String getTitleResult(ResultNode node) throws Exception {
     return node.getTitle();
   }
-
+  
+  /**
+   * {@inheritDoc}
+   */
+  protected String getImageUrl(Node node) {
+    return "/eXoResources/skin/images/Icons/FileTypeIcons/uiIconsFileType64x64.png";
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  protected String getDetails(ResultNode retNode, SearchContext context) throws Exception {
+    DriveData driveData = getDriveData(retNode);
+    Calendar date = getDate(retNode);
+    return getDriveTitle(driveData) + fileSize(retNode) + formatDate(date);
+  }
+  
 }
 

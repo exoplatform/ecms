@@ -172,7 +172,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
                     new EcmsSearchResult(getPath(driveData, retNode, context), 
                                          getTitleResult(retNode), 
                                          retNode.getExcerpt(), 
-                                         getDriveTitle(driveData) + fileSize(retNode) + formatDate(date), 
+                                         getDetails(retNode, context),
                                          getImageUrl(retNode), 
                                          date.getTimeInMillis(), 
                                          (long)retNode.getScore(),
@@ -210,15 +210,6 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
    */
   protected String fileSize(Node node) throws Exception {
     return Utils.fileSize(node);
-  }
-  
-  /**
-   * gets the image url
-   * @return
-   * @throws Exception
-   */
-  protected String getImageUrl(Node node) {
-    return "/eXoResources/skin/images/Icons/FileTypeIcons/uiIconsFileType64x64.png";
   }
   
   /**
@@ -331,5 +322,19 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
    * @throws Exception
    */
   protected abstract String getTitleResult(ResultNode node) throws Exception;
+  
+  /**
+   * gets the image url
+   * @return
+   * @throws Exception
+   */
+  protected abstract String getImageUrl(Node node);
+  
+  /**
+   * gets the detail about result node
+   * @param node the node
+   * @throws Exception
+   */
+  protected abstract String getDetails(ResultNode node, SearchContext context) throws Exception;
   
 }
