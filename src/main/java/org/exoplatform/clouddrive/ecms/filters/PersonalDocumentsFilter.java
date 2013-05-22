@@ -18,15 +18,12 @@
  */
 package org.exoplatform.clouddrive.ecms.filters;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.jcr.Node;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.services.cms.drives.DriveData;
-import org.exoplatform.services.cms.drives.impl.ManageDriveServiceImpl;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
 
@@ -39,19 +36,14 @@ public class PersonalDocumentsFilter implements UIExtensionFilter {
    * {@inheritDoc}
    */
   public boolean accept(Map<String, Object> context) throws Exception {
+    // XXX only show in Personal Doc's root!
     String userId = Util.getPortalRequestContext().getRemoteUser();
     UIJCRExplorer uiExplorer = (UIJCRExplorer) context.get(UIJCRExplorer.class.getName());
-    ManageDriveServiceImpl driveService = uiExplorer.getApplicationComponent(ManageDriveServiceImpl.class);
-    List<DriveData> driveData = driveService.getPersonalDrives(userId);
+    String personalDrivePath = org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(uiExplorer.getDriveData()
+                                                                                                      .getHomePath(),
+                                                                                            userId);
     Node currentNode = (Node) context.get(Node.class.getName());
-    for (DriveData drive : driveData) {
-      // XXX only show in Personal Doc's root!
-      if (uiExplorer.getDriveData().getHomePath().equals(drive.getHomePath())
-          && currentNode.getPath().endsWith(uiExplorer.getSession().getUserID() + "/" + drive.getName())) {
-        return true;
-      }
-    }
-    return false;
+    return currentNode.getPath().equals(personalDrivePath);
   }
 
   /**

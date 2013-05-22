@@ -110,7 +110,11 @@ public class CloudDriveUIService implements Startable {
           }
         }
 
-        listNode.setProperty(EXO_BUTTONS, newActions.toString());
+        String actions = newActions.toString();
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("New buttons: " + actions);
+        }
+        listNode.setProperty(EXO_BUTTONS, actions);
       }
       session.save();
     } finally {
