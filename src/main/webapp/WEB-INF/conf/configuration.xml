@@ -46,6 +46,10 @@
     <type>org.exoplatform.clouddrive.rest.DriveService</type>
   </component>
   
+  <component>
+    <type>org.exoplatform.clouddrive.rest.DriveServiceLocator</type>
+  </component>
+
   <!-- component>
     <key>org.exoplatform.clouddrive.exodrive.service.ExoDriveService</key>
     <type>org.exoplatform.clouddrive.exodrive.service.ExoDriveService</type>
