@@ -13,7 +13,6 @@
 	def jsManager = rcontext.getJavascriptManager();
 	def advancedBlockDisplay = "block";
 	def advancedLinkDispplay = "none";
-	//jsManager.require("SHARED/clv", "clv").addScripts("clv.CLV.checkModeViewer();").addScripts("clv.CLV.checkContextualFolderInput();");
 	jsManager.require("SHARED/clv", "clv").addScripts("clv.CLV.checkContextualFolderInput();");
 	def showFolderContexttual = "";
 	rcontext.getJavascriptManager().require("SHARED/portalControl").require("SHARED/uiForm").require("SHARED/bts_tab").require("SHARED/bts_tooltip");
@@ -96,7 +95,7 @@
 						                        String delLink = uicomponent.event("Delete", "0");
 						                        %>
 						                          <tr>
-						                            <td><%= URLDecoder.decode(contents.get(0)) %></td>
+						                            <td><%= ContentReader.getXSSCompatibilityContent(URLDecoder.decode(contents.get(0))) %></td>
 						                            <td><span></span></td>
 						                            <td><span></span></td>
 						                          </tr>
@@ -108,7 +107,7 @@
 						                          String downLink = uicomponent.event("Decrease", Integer.toString(i));  
 						                          %>
 						                            <tr>
-						                              <td><%= URLDecoder.decode(content) %></td>
+						                              <td><%= ContentReader.getXSSCompatibilityContent(URLDecoder.decode(contents.get(0))) %></td>
 						                              <td class="center"><a class="actionIcon" onclick="$downLink"><i class="uiIconSortDown"></i></a></td>
 						                              <td class="center"><a class="actionIcon" onclick="$upLink"><i class="uiIconSortUp"></i></a></td>
 						                            </tr>
