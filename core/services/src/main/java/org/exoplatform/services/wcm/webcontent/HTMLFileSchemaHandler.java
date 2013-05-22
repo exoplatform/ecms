@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.wcm.webcontent;
 
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.jcr.Node;
@@ -167,6 +168,13 @@ public class HTMLFileSchemaHandler extends BaseWebSchemaHandler {
    * .jcr.Node, org.exoplatform.services.jcr.ext.common.SessionProvider)
    */
   public void onModifyNode(final SessionProvider sessionProvider, final Node node) throws Exception {
+  	if(node.hasNode("jcr:content")) {
+  		Node contentNode = node.getNode("jcr:content");
+  		contentNode.setProperty("jcr:lastModified",new GregorianCalendar());
+  		contentNode.setProperty("jcr:mimeType", "text/html");
+  		contentNode.getSession().save();
+  	} 	
+  	
     Node parent = node.getParent();
     if(!parent.isNodeType("exo:webContent"))
       return;
