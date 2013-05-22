@@ -18,7 +18,6 @@
  */
 package org.exoplatform.clouddrive.rest;
 
-import javax.ws.rs.core.Response.Status;
 
 /**
  * Host management for Cloud Drive connections.<br>   
@@ -36,8 +35,8 @@ public class DriveServiceLocator {
    * 
    * @return {@link String}
    */
-  String getBaseHost() {
-    return "";
+  public String getBaseHost() {
+    return null;
   }
   
   /**
@@ -47,15 +46,9 @@ public class DriveServiceLocator {
    * @param requestHost {@link String}
    * @return {@link String}
    */
-  String getServiceHost(String context, String requestHost) {
+  public String getServiceHost(String context, String requestHost) {
     // ignore context 
     return requestHost;
-    
-//    if (requestHost.equals(requestHost)) {
-//      // need redirect to actual tenant URL, TODO remove state query parameter
-//      resp.location(uriInfo.getRequestUri().toString().replace(masterHost, repoName + "." + masterHost));
-//      return resp.status(Status.MOVED_PERMANENTLY).build(); // redirect
-//    }
   }
 
 }
