@@ -52,7 +52,7 @@ public abstract class CloudProvider {
    * String with authentication URL.
    * 
    * @return String with valid authentication URL.
-   * @throws CloudDriveException when cannot build the auth url (e.g. cannot obtain current tenant name)
+   * @throws CloudDriveException when cannot build the auth url (e.g. cannot obtain current repository name)
    */
   public abstract String getAuthUrl() throws CloudDriveException;
 

@@ -67,7 +67,7 @@ public class ExoDriveConnector extends CloudDriveConnector {
         authUrl.append(jcrService.getCurrentRepository().getConfiguration().getName());
         error = null;
       } catch (RepositoryException e) {
-        LOG.warn("Error getting Current Repository for tenant based auth url of eXo Drive: " + e.getMessage(),
+        LOG.warn("Error getting Current Repository for repository based auth url of eXo Drive: " + e.getMessage(),
                  e);
         error = "Current Repository not set.";
       }

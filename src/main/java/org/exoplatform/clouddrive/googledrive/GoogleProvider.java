@@ -70,8 +70,8 @@ public class GoogleProvider extends CloudProvider {
   public String getAuthUrl() throws CloudDriveException {
     if (jcrService != null) {
       try {
-        String currentTenant = jcrService.getCurrentRepository().getConfiguration().getName();
-        return authUrl.replace(GoogleDriveAPI.NO_STATE, currentTenant);
+        String currentRepo = jcrService.getCurrentRepository().getConfiguration().getName();
+        return authUrl.replace(GoogleDriveAPI.NO_STATE, currentRepo);
       } catch (RepositoryException e) {
         throw new CloudDriveException(e);
       }

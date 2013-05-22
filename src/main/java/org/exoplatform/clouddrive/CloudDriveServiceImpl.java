@@ -264,12 +264,12 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
         } catch (DriveRemovedException e) {
           // removed, so can create new one
         } catch (AccessDeniedException e) {
-          // this email already connected in current tenant
+          // this email already connected in current repository
           throw new UserAlreadyConnectedException("User " + user.getEmail()
               + " already connected to another node " + local);
         }
       } // else, no drive cached
-    } // else, no drives in this tenant
+    } // else, no drives in this repository
 
     // create new
     CloudDriveConnector conn = connectors.get(user.getProvider());
@@ -402,12 +402,12 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     }
   }
 
-  protected void registerDrive(CloudUser user, CloudDrive drive, String tenantName) {
+  protected void registerDrive(CloudUser user, CloudDrive drive, String repoName) {
     // register in caches
-    Map<CloudUser, CloudDrive> drives = repositoryDrives.get(tenantName);
+    Map<CloudUser, CloudDrive> drives = repositoryDrives.get(repoName);
     if (drives == null) {
       drives = new ConcurrentHashMap<CloudUser, CloudDrive>();
-      repositoryDrives.put(tenantName, drives);
+      repositoryDrives.put(repoName, drives);
       userDrives.put(user, drives);
     }
     drives.put(user, drive);
