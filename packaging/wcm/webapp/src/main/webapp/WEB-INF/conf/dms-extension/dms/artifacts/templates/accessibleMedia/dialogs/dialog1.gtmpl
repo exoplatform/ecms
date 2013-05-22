@@ -153,7 +153,7 @@
                   //params = [new Parameter("removeNode", captionsName)];
                   def captionsActionLink = uicomponent.event("RemoveData", objectID);
                   %>    
-                    <div>
+                    <div class="uiUploadInput">
                       <span><%=captionsName%></span>
                       <a class="actionIcon" onclick="$captionsActionLink">
                         <i class="uiIconTrash"></i>
@@ -168,19 +168,7 @@
               }
             %>
           
-            <i class="uiIconQuestion" id="CaptionsHelp" 
-                  onmouseover="eXo.ecm.WCMUtils.showInContextHelp('CaptionsHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('CaptionsHelp', 'false')"
-                  onfocus="eXo.ecm.WCMUtils.showInContextHelp('CaptionsHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('CaptionsHelp', 'false')">
-              <div style="position: relative;">
-                <div class="InContextHelpContent" >                    
-                  <div class="InContextHelpPopup">
-                   <div id="ContentPathHelpID" class="LeftInContextHelpPopup">
-                     <%= _ctx.appRes("AccessibleMedia.help.CaptionsHelp") %>
-                    </div>
-                  </div>                      
-                </div>
-              </div>
-            </i>
+            <i class="uiIconQuestion uiIconLightGray" id="CaptionsHelp" rel="tooltip" data-placement="left" title=" <%= _ctx.appRes("AccessibleMedia.help.CaptionsHelp") %>" > </i>
           </div>
           
         </div>
@@ -202,7 +190,7 @@
                 //params = [new Parameter("removeNode", audioDescriptionName)];
                 def audioActionLink = uicomponent.event("RemoveData", objectID);
                 %>    
-                  <div>
+                  <div class="uiUploadInput">
                     <span><%=audioDescriptionName%></span>
                     <a class="actionIcon" onclick="$audioActionLink">
                       <i class="uiIconTrash"></i>
@@ -217,19 +205,7 @@
             }
           %>
         
-					<i class="uiIconQuestion" id="AudioDescriptionHelp" 
-								onmouseover="eXo.ecm.WCMUtils.showInContextHelp('AudioDescriptionHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('AudioDescriptionHelp', 'false')"
-								onfocus="eXo.ecm.WCMUtils.showInContextHelp('AudioDescriptionHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('AudioDescriptionHelp', 'false')">
-						<div style="position: relative;">
-							<div class="InContextHelpContent" >                    
-								<div class="InContextHelpPopup">
-								 <div id="ContentPathHelpID" class="LeftInContextHelpPopup">
-									 <%= _ctx.appRes("AccessibleMedia.help.AudioDescriptionHelp") %>
-									</div>
-								</div>                      
-							</div>
-						</div>
-					</i>
+					<i class="uiIconQuestion uiIconLightGray" id="AudioDescriptionHelp"  rel="tooltip" data-placement="left" title="<%= _ctx.appRes("AccessibleMedia.help.AudioDescriptionHelp") %>" ></i>
         </div>
         
       </div>
@@ -242,19 +218,7 @@
           <% String[] fieldAltText = ["jcrPath=/node/exo:alternativeText", "fillJcrDataOfFile=false"] ;
              uicomponent.addRichtextField("alternativeText", fieldAltText) ;            
           %>
-					<i class="uiIconQuestion" id="AlternativeTextHelp" 
-								onmouseover="eXo.ecm.WCMUtils.showInContextHelp('AlternativeTextHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('AlternativeTextHelp', 'false')"
-								onfocus="eXo.ecm.WCMUtils.showInContextHelp('AlternativeTextHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('AlternativeTextHelp', 'false')">
-						<div style="position: relative;">
-							<div class="InContextHelpContent" >                    
-								<div class="InContextHelpPopup">
-								 <div id="ContentPathHelpID" class="LeftInContextHelpPopup">
-									 <%= _ctx.appRes("AccessibleMedia.help.AlternativeTextHelp") %>
-								 </div>
-								</div>                      
-							</div>
-						</div>
-					</i>
+					<i class="uiIconQuestion uiIconLightGray" id="AlternativeTextHelp" rel="tooltip" data-placement="left" title=" <%= _ctx.appRes("AccessibleMedia.help.AlternativeTextHelp") %>"></i>
         </div>
 
       </div>
