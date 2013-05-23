@@ -11,7 +11,7 @@ These following parameters are common and can be used for all input fields.
 |*editable*| {{string}} |!images/error.gif!| {{editable=if-null}} | The input will be editable only if the value of this parameter is {{if-null}} and the value of this input is null or blank.|
 |*multiValues*| {{boolean}} |!images/error.gif!| {{multiValues=true}} | Show a multi-valued component if true and must be used only with corresponding multi-valued properties. The default value of this parameter is false.|
 |*visible*| {{boolean}} |!images/error.gif!| {{visible=true}} |The input is visible if this value is true.|
-|*options*| {{String}} separated by the commas (,) character.}}|!images/error.gif!|A list of parameters which are input while the content templates are initialized.|{{"options=toolbar:CompleteWCM,height:'410px',noSanitization"}} |
+|*options*| {{String}} separated by the commas (,) character.}}|!images/error.gif!|{{"options=toolbar:CompleteWCM,height:'410px',noSanitization"}} |A list of parameters which are input while the content templates are initialized.|
 
 {docbook}
 <citetitle>
