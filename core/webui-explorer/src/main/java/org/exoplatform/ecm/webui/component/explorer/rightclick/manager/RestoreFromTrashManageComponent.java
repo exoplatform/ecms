@@ -25,6 +25,8 @@ import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.link.NodeFinder;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -149,15 +151,19 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
       JCRExceptionManager.process(uiApp, e);
       return;
     }
-
+    SessionProvider sessionProvider = null;
     try {
       PortletPreferences portletPrefs = uiExplorer.getPortletPreferences();
       String repository = uiExplorer.getRepositoryName();
       String trashWorkspace = portletPrefs.getValue(Utils.TRASH_WORKSPACE, "");
       String trashHomeNodePath = portletPrefs.getValue(Utils.TRASH_HOME_NODE_PATH, "");
-      Session trashSession = uiExplorer.getSessionByWorkspace(trashWorkspace);
+      //Have to create session from System Provider to allow normal user to restore the contet that deleted before
+      RepositoryService repositoryService = uiExplorer.getApplicationComponent(RepositoryService.class);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
+      sessionProvider = SessionProvider.createSystemProvider();
+      Session trashSession = sessionProvider.getSession(trashWorkspace, manageableRepository);
+      
       Node trashHomeNode = (Node) trashSession.getItem(trashHomeNodePath);
-      SessionProvider sessionProvider = uiExplorer.getSessionProvider();
       try {
         trashService.restoreFromTrash(srcPath, sessionProvider);
         uiExplorer.updateAjax(event);
@@ -215,6 +221,10 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
       JCRExceptionManager.process(uiApp, e);
 
       uiExplorer.updateAjax(event);
+    } finally {
+    	if (sessionProvider != null) {
+        sessionProvider.close();
+      }
     }
   }
 
