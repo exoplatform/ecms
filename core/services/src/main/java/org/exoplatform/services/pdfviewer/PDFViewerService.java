@@ -125,7 +125,7 @@ public class PDFViewerService {
     String path = (String) pdfCache.get(new ObjectKey(bd.toString()));
     String lastModifiedTime = (String)pdfCache.get(new ObjectKey(bd1.toString()));
     File content = null;
-    String name = currentNode.getName();
+    String name = currentNode.getName().replaceAll(":","_");
     Node contentNode = currentNode.getNode("jcr:content");
     String lastModified = contentNode.getProperty("jcr:lastModified").getString();
     if (path == null || !(content = new File(path)).exists() || !lastModified.equals(lastModifiedTime)) {
@@ -146,7 +146,6 @@ public class PDFViewerService {
       if ("pdf".equals(extension)) {
         read(input, new BufferedOutputStream(new FileOutputStream(content)));
       } else {
-        OutputStream out = new BufferedOutputStream((new FileOutputStream(content)));
         // create temp file to store original data of nt:file node
         File in = File.createTempFile(name + "_tmp", null);
         read(input, new BufferedOutputStream(new FileOutputStream(in)));
@@ -163,8 +162,6 @@ public class PDFViewerService {
           }
         } finally {
           in.delete();
-          out.flush();
-          out.close();
         }
       }
       if (content.exists()) {
