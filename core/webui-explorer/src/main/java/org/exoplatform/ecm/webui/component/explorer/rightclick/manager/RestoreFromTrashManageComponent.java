@@ -157,10 +157,10 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
       String repository = uiExplorer.getRepositoryName();
       String trashWorkspace = portletPrefs.getValue(Utils.TRASH_WORKSPACE, "");
       String trashHomeNodePath = portletPrefs.getValue(Utils.TRASH_HOME_NODE_PATH, "");
-      //Have to create session from System Provider to allow normal user to restore the contet that deleted before
+      //Have to create session from System Provider to allow normal user to restore the content that deleted before
+      sessionProvider = WCMCoreUtils.getSystemSessionProvider();
       RepositoryService repositoryService = uiExplorer.getApplicationComponent(RepositoryService.class);
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-      sessionProvider = SessionProvider.createSystemProvider();
       Session trashSession = sessionProvider.getSession(trashWorkspace, manageableRepository);
       
       Node trashHomeNode = (Node) trashSession.getItem(trashHomeNodePath);
@@ -221,11 +221,7 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
       JCRExceptionManager.process(uiApp, e);
 
       uiExplorer.updateAjax(event);
-    } finally {
-    	if (sessionProvider != null) {
-        sessionProvider.close();
-      }
-    }
+    } 
   }
 
   public static class RestoreFromTrashActionListener extends UIWorkingAreaActionListener<RestoreFromTrashManageComponent> {
