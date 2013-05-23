@@ -95,7 +95,7 @@
 													<div class="ClearFix">
 													<%
 													if (isShowTitle) {
-														%><div title="$itemName" class="FL $itemIcon"></div><%
+														%><div title="$itemName" class="$itemIcon FL"></div><%
 														if (isShowLink) {
 															%><div class="Title"><a onclick="javascript:window.open('$itemWebdavLink');" style="cursor:pointer" rel="tooltip" data-placement="bottom" title="$itemName">$itemName</a></div><%
 														} else {

@@ -547,10 +547,9 @@ public class UICLVPresentation extends UIContainer {
       if (node.isNodeType("nt:frozenNode")) {
         String uuid = node.getProperty("jcr:frozenUuid").getString();
         Node originalNode = node.getSession().getNodeByUUID(uuid);
-        return "Icon16x16 default16x16Icon "
-            + org.exoplatform.ecm.webui.utils.Utils.getNodeTypeIcon(originalNode, "16x16Icon");
+        return org.exoplatform.ecm.webui.utils.Utils.getNodeTypeIcon(originalNode, "uiIcon16x16");
       }
-      return "Icon16x16 default16x16Icon " + org.exoplatform.ecm.webui.utils.Utils.getNodeTypeIcon(node, "16x16Icon");
+      return org.exoplatform.ecm.webui.utils.Utils.getNodeTypeIcon(node, "uiIcon16x16");
     } catch (RepositoryException e) {
       Utils.createPopupMessage(this,
                                "UIMessageBoard.msg.get-content-icon",
