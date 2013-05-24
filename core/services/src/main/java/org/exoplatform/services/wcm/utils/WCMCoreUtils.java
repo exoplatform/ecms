@@ -33,6 +33,7 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.metadata.MetadataService;
+import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -592,5 +593,12 @@ public class WCMCoreUtils {
 
   public static String getSuperUser() {
       return getService(UserACL.class).getSuperUser();
+  }
+  
+  public static boolean isDocumentNodeType(Node node) throws Exception {
+  	boolean isDocument = true;
+    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
+    isDocument = templateService.getAllDocumentNodeTypes().contains(node.getPrimaryNodeType().getName()); 
+    return isDocument;
   }
 }
