@@ -979,7 +979,24 @@
           if (view) view.style.height = workingAreaHeight - actionBaroffsetHeight + 'px';
       }
     };
+    
+    SimpleView.prototype.loadImageOnSuccess = function() {
+       gj("#UIDocumentWorkspace .bgThumbnailImage img").one('load', function() {
+           if (this.parentNode.parentNode) {
+             this.parentNode.parentNode.parentNode.style.backgroundImage = 'none';
+             this.parentNode.parentNode.parentNode.style.width = 'auto';
+             this.parentNode.parentNode.parentNode.style.height = 'auto';
+           }
+           this.style.display = 'none';
+           gj(this.parentNode).width(gj(this).width());
+           gj(this.parentNode).height(gj(this).height());
+        }).each(function() {
+          if(this.complete) gj(this).load();
+        });
+    };
   };
+  
+
 
   eXo.ecm.UISimpleView = new SimpleView();
   return {

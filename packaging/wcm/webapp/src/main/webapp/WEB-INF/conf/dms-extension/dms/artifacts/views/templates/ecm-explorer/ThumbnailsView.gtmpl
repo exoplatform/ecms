@@ -40,7 +40,8 @@
   jsManager.require("SHARED/ecm-utils", "ecmutil").
             require("SHARED/uiSimpleView", "uiSimpleView").
             require("SHARED/multiUpload", "multiUpload").
-  addScripts("uiSimpleView.UISimpleView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');");
+  addScripts("uiSimpleView.UISimpleView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');").
+  addScripts("uiSimpleView.UISimpleView.loadImageOnSuccess();");
   
 %>
 <div id="$componentId">
@@ -52,13 +53,14 @@
     if (tryCount>15) return;
     tryCount++;
     if (eXo.ecm.UISimpleView != null && objImage != null) {
-      if (objImage.parentNode != null)
-        eXo.ecm.UISimpleView.errorCallback(objImage.parentNode);
+      if (objImage.parentNode != null && objImage.parentNode.parentNode != null)
+        eXo.ecm.UISimpleView.errorCallback(objImage.parentNode.parentNode);
     }else {
       objImage.setAttribute("retryCount", tryCount);
       setTimeout(function(){loadImageOnError(objImage)},300);
     }
   }
+  
 </script>
 	<div id="${componentId}-$viewComponentId">
 		<div style="position: relative; top: 0px; left: 0px; width: 0px; height: 0px">
@@ -229,7 +231,11 @@
 											<%if(uicomponent.isSymLink(data)) {%>
 												<div class="Link"></div>
 											<%}%>
-											<div class="bgThumbnailImage"><img src="$thumbnailImage" retryCount="0"  onerror='loadImageOnError(this);' onload="if (this.parentNode) {this.parentNode.parentNode.style.backgroundImage = 'none'; this.parentNode.parentNode.style.width = 'auto'; this.parentNode.parentNode.style.height = 'auto';} this.style.display = 'block';" /></div>
+											<div class="bgThumbnailImage" style="background-image: url($thumbnailImage); background-repeat:no-repeat; background-position:center;">
+												<div>
+													<img src="$thumbnailImage" retryCount="0"  onerror='loadImageOnError(this);' />
+												</div>
+											</div>
 									</div>
 							    
 							    <div style="display: none;" class="<%=Utils.getNodeTypeIcon(data, "uiIcon64x64")%>">
