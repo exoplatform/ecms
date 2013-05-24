@@ -165,7 +165,7 @@
   -->
   <UIViewRelationList>
     <label>
-      <languages-list>Langues</languages-list>
+      <languages-list>Traductions</languages-list>
       <relation-list>Relations</relation-list>
       <references-list>Références</references-list>
       <no-related-document>Aucun document</no-related-document>
@@ -2445,7 +2445,7 @@
   <UIJcrExplorerEditForm>
     <label>
       <driveName>Nom du Lecteur</driveName>
-      <DriveNameInput>UIJcrExplorerEditForm</DriveNameInput>
+      <DriveNameInput>UI JCR Explorer Edit Form</DriveNameInput>
     </label>
     <msg>
       <not-have-social>Le type Social n'est pas disponible, le type Sélection sera utilisé.</not-have-social>
@@ -3108,7 +3108,7 @@
       <showHiddens>Cachés</showHiddens>
       <showTrash>Corbeille</showTrash>
     </label>
-    <title>Configurer les préférences</title>
+    <title>Configurer les filtres</title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -3416,9 +3416,9 @@
   <WCMContentView>
    <header>
       <status>Etat</status>
-     <author>L'auteur</author>
-     <date>La date de création</date>
-     <title>Le titre du document</title>
+      <author>Auteur</author>
+      <date>Date de création</date>
+      <title>Titre du document</title>
      <lastUser>Dernier utilisateur</lastUser>
 	</header>
   </WCMContentView>

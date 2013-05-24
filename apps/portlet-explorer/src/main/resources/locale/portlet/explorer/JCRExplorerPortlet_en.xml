@@ -719,7 +719,7 @@
       <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
       <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
       <metadatasitemetadata>metadata:siteMetadata</metadatasitemetadata>
-      <dcelementset>dc:elementSet</dcelementset>
+      <dcelementset>Dublin Core</dcelementset>
     </title>
   </UITabPane>
   <UIPropertyTab>
@@ -1751,7 +1751,7 @@
     </action>
     <label>
       <category>Category</category>
-      <actions>Actions</actions>
+      <actions>Action</actions>
       <delete>Delete</delete>
     </label>
   </UICategoriesAddedList>

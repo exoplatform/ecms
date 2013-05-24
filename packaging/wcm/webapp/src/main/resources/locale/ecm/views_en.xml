@@ -122,7 +122,7 @@
         <hold-until>Hold Until</hold-until>
         <transfer-date>Transfer Date</transfer-date>
         <transfer-location>Transfer Location</transfer-location>
-        <accession-date>Access Date</accession-date>
+        <accession-date>Accession Date</accession-date>
         <accession-location>Access Location</accession-location>
         <destruction-date>Destruction Date</destruction-date>
       </label>

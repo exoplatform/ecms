@@ -610,7 +610,6 @@
       <permission-invalid>You must select at least one right.</permission-invalid>
     </msg>
     <label>
-      Workspace Wizard
       <step>Step</step>
       <wizardSteps>Wizard Steps</wizardSteps>
       <name>Name</name>
@@ -1130,7 +1129,6 @@
   -->
   <UIViewForm>
     <title>
-      Add/Edit View
       <AddPermission>Add Permission</AddPermission>
       <RemovePermission>Remove Permission</RemovePermission>
     </title>

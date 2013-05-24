@@ -7,7 +7,7 @@
       <cannot-save>An error occurred while saving the node.</cannot-save>
       <saved-successfully>{0}</saved-successfully>
       <not-support>Cannot load the template of '{0}'.</not-support>
-      <not-add-folder>Only nt:file can be added to this folder.</not-add-folder>
+      <not-add-folder>Only files can be added to this folder.</not-add-folder>
       <access-denied>Access denied. You do not have add permission at '{0}'.</access-denied>
       <path-not-found>The path '{0}' was deleted or invalid.</path-not-found>
       <node-locked>Node '{0}' is locked. Please unlock this node before creating documents.</node-locked>
@@ -33,8 +33,8 @@
       <UIFCCTemplateFormSelectBox>Select Template</UIFCCTemplateFormSelectBox>
       <UIFCCSaveFormStringInput>Custom Save Button</UIFCCSaveFormStringInput>
       <UIFCCMessageFormTextareaInput>Custom Save Message</UIFCCMessageFormTextareaInput>
-      <UIFCCRedirectFormCheckboxInput>Redirect</UIFCCRedirectFormCheckboxInput>
-      <UIFCCRedirectPathFormStringInput>Redirect Path</UIFCCRedirectPathFormStringInput>
+      <UIFCCRedirectFormCheckboxInput>Redirect:</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectPathFormStringInput>Redirect Path:</UIFCCRedirectPathFormStringInput>
       <UIFCCActionField>Actions</UIFCCActionField>
       <UIFCCActionList/>
     </label>
@@ -88,8 +88,8 @@
 
   <UIWorkspaceList>
     <label>
-      <workspaceName>Workspace</workspaceName>
-      <rootNodePath>Root Path</rootNodePath>
+      <workspaceName>Workspace:</workspaceName>
+      <rootNodePath>Root Path:</rootNodePath>
       <rootNodeInfo/>
     </label>
   </UIWorkspaceList>

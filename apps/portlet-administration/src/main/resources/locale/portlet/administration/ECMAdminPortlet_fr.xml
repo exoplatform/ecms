@@ -610,7 +610,6 @@
       <permission-invalid>Veuillez indiquer au moins un droit</permission-invalid>
     </msg>
     <label>
-      Assistant de création d'espace de travail
       <step>Etape</step>
       <wizardSteps>Etapes de l'assistant</wizardSteps>
       <name>Nom</name>
@@ -1130,7 +1129,6 @@
   -->
   <UIViewForm>
     <title>
-      Ajouter/Editer la Vue
       <AddPermission>Ajouter une Permission</AddPermission>
       <RemovePermission>Supprimer la Permission</RemovePermission>
     </title>
@@ -1596,10 +1594,10 @@
       <UIPopupWindow>Selectionner</UIPopupWindow>
       <permission>UIPermissionTreeForm</permission>
       <userOrGroup>Utilisateur ou Groupe</userOrGroup>
-      <read>Droit de Lecture</read>
-      <add_node>Droit d'ajout de noeud</add_node>
+      <read>Lecture</read>
+      <add_node>Ajout</add_node>
       <set_property>Droit de MAJ des propriétés</set_property>
-      <remove>Droit de suppression</remove>
+      <remove>Suppression</remove>
     </label>
     <title>Ajouter une permission à ce noeud</title>
     <action>
@@ -1931,7 +1929,7 @@
 <navigation>Navigation</navigation>
   </label>
   <msg>
-  <template-existing>This template name already exists. Please select another one.</template-existing>
+  <template-existing>Ce nom de template existe déjà. Veuillez sélectionner un autre.</template-existing>
   </msg>
 </UICLVTemplateForm>
 

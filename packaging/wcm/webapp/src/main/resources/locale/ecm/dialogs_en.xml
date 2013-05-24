@@ -458,7 +458,7 @@
       <label>
         <name>Name</name>
         <autoload>Auto Load</autoload>
-        <minetype>Mine Type</minetype>
+        <minetype>MIME Type</minetype>
         <content>Content</content>
       </label>
     </dialog>

@@ -33,7 +33,7 @@
       <UIFCCTemplateFormSelectBox>Sélectionner un modèle</UIFCCTemplateFormSelectBox>
       <UIFCCSaveFormStringInput>Personnaliser le bouton Enregistrer</UIFCCSaveFormStringInput>
       <UIFCCMessageFormTextareaInput>Message de remerciement</UIFCCMessageFormTextareaInput>
-      <UIFCCRedirectFormCheckboxInput>Redirection</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectFormCheckboxInput>Redirection:</UIFCCRedirectFormCheckboxInput>
       <UIFCCRedirectPathFormStringInput>URL de redirection</UIFCCRedirectPathFormStringInput>
       <UIFCCActionField>Actions</UIFCCActionField>
       <UIFCCActionList/>
@@ -88,8 +88,8 @@
 
   <UIWorkspaceList>
     <label>
-      <workspaceName>Espace de stockage</workspaceName>
-      <rootNodePath>Chemin d'accès racine</rootNodePath>
+      <workspaceName>Espace de stockage:</workspaceName>
+      <rootNodePath>Chemin d'accès racine:</rootNodePath>
       <rootNodeInfo/>
     </label>
   </UIWorkspaceList>
@@ -171,7 +171,7 @@
 
   <PopupComponent>
     <title>
-      <UICategoriesSelector>Ajouter des Catégories</UICategoriesSelector>
+      <UICategoriesSelector>Add Categories</UICategoriesSelector>
     </title>
   </PopupComponent>
 

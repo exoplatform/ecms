@@ -458,7 +458,7 @@
       <label>
         <name>Nom</name>
         <autoload>Chargement automatique</autoload>
-        <minetype>Type Mime</minetype>
+        <minetype>Type MIME</minetype>
         <content>Contenu</content>
       </label>
     </dialog>
