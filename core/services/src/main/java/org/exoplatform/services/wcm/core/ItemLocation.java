@@ -209,7 +209,10 @@ public class ItemLocation {
       String uuid = null;
       try {
         if (item instanceof Node)
-          uuid = ((Node)item).getUUID();
+          if(session.isLive()) 
+          {
+            uuid = ((Node)item).getUUID();
+          }
       } catch (Exception e) {
         // Do nothing}
       }
