@@ -277,7 +277,7 @@
 	function cleanName(oldName) {
 	
 		if (!oldName || oldName==null ||oldName==undefined) return oldName;
-		specialChar = "[]/'\":";
+		specialChar = "[]/'\":;";
 		var ret = "";
 		for (var i = 0; i < oldName.length; i++) {
 			if (specialChar.indexOf(oldName[i]) > -1) {
