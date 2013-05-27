@@ -88,6 +88,11 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
      * Migrate activities which contains "/sites content/live" in the url
      */
     migrateSocialActivities();
+    
+    /**
+     * Migrate taxonomy actions which contains some properties which still point to old path related to "/sites content/live"
+     */
+    migrateTaxonomyAction();
 
   }
   
@@ -391,5 +396,47 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
         sessionProvider.close();
       }
     }
+  }
+  
+  /**
+   * Migrate taxonomy actions which contains some properties which still point to old path related to "/sites content/live"
+   */
+  private void migrateTaxonomyAction() {
+	  if (LOG.isInfoEnabled()) {
+		  LOG.info("Start " + this.getClass().getName() + ".............");
+	  }
+	  SessionProvider sessionProvider = null;
+	  try {
+		  sessionProvider = SessionProvider.createSystemProvider();
+		  String wsName = repoService_.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
+		  Session session = sessionProvider.getSession(wsName, repoService_.getCurrentRepository());
+
+		  if (LOG.isInfoEnabled()) {
+			  LOG.info("=====Start to migrate taxonomy actions=====");
+		  }
+		  String statement = 
+				  "select * from exo:taxonomyAction where (exo:targetPath like '%/sites content/live/%' or exo:storeHomePath like '%/sites content/live/%')";
+		  QueryResult result = session.getWorkspace().getQueryManager().createQuery(statement, Query.SQL).execute();
+		  NodeIterator nodeIter = result.getNodes();
+		  while(nodeIter.hasNext()) {
+			  Node taxoAction = nodeIter.nextNode();
+			  String targetPath = taxoAction.getProperty("exo:targetPath").getString();
+			  String homePath = taxoAction.getProperty("exo:storeHomePath").getString();
+			  taxoAction.setProperty("exo:targetPath", StringUtils.replace(targetPath, "/sites content/live/", "/sites/"));
+			  taxoAction.setProperty("exo:storeHomePath", StringUtils.replace(homePath, "/sites content/live/", "/sites/"));
+		  }
+		  session.save();
+		  if (LOG.isInfoEnabled()) {
+			  LOG.info("=====Completed the migration for taxonomy action=====");
+		  }
+	  } catch (Exception e) {
+		  if (LOG.isErrorEnabled()) {
+			  LOG.error("An unexpected error occurs when migrating for taxonomy actions: ", e);
+		  }
+	  } finally {
+		  if (sessionProvider != null) {
+			  sessionProvider.close();
+		  }
+	  }
   }
 }
