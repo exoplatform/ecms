@@ -136,8 +136,8 @@ public class UIPageNodeSelector extends UIContainer {
   private void chooseAndShowNavigation() throws Exception {
     // select the navigation of current portal
     UserNavigation portalSelectedNav = 
-      NavigationUtils.getUserNavigationOfPortal(
-              userPortal, Util.getUIPortal().getSiteKey().getName());
+      NavigationUtils.getUserNavigation(
+              userPortal, Util.getUIPortal().getSiteKey());
     int portalSelectedNavId = getId(portalSelectedNav);
     if (getUserNavigation(portalSelectedNavId) != null) {
       selectNavigation(portalSelectedNavId);

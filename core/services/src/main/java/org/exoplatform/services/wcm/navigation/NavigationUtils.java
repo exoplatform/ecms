@@ -40,7 +40,6 @@ import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserNodeFilterConfig;
 import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.mop.user.UserPortalImpl;
-import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
@@ -108,7 +107,7 @@ public class NavigationUtils {
     if (portalNav == null) {
       return null;
     }
-    UserPortalConfig userPortalCfg = Util.getPortalRequestContext().getUserPortalConfig();
+    UserPortalConfig userPortalCfg = userPortalConfigService.getUserPortalConfig(userPortalConfigService.getDefaultPortal(), ConversationState.getCurrent().getIdentity().getUserId(), PortalRequestContext.USER_PORTAL_CONTEXT);
     return userNavigationCtor.newInstance(userPortal, portalNav, userACL.hasEditPermission(userPortalCfg.getPortalConfig()));
   }
   
