@@ -26,7 +26,6 @@ import javax.jcr.Session;
 import org.exoplatform.clouddrive.CloudDriveService;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -42,19 +41,19 @@ public class CloudDriveUIService implements Startable {
 
   private static final Log         LOG                        = ExoLogger.getLogger(CloudDriveUIService.class);
 
-  private static final String      EXO_BUTTONS                = "exo:buttons";
+  protected static final String      EXO_BUTTONS                = "exo:buttons";
 
   public static final String       CONNECT_CLOUD_DRIVE_ACTION = "add.connect.clouddrive.action";
 
-  private final RepositoryService  jcrService;
+  protected final RepositoryService  jcrService;
 
-  private final ManageViewService  manageView;
+  protected final ManageViewService  manageView;
 
-  private final CloudDriveService  driveService;
+  protected final CloudDriveService  driveService;
 
-  private final UIExtensionManager uiExtensions;
+  protected final UIExtensionManager uiExtensions;
 
-  private final List<String>       VIEWS                      = Arrays.asList("List/List",
+  protected final List<String>       VIEWS                      = Arrays.asList("List/List",
                                                                               "Admin/Admin",
                                                                               "Web/Authoring",
                                                                               "Icons/Icons",
@@ -70,11 +69,11 @@ public class CloudDriveUIService implements Startable {
     this.uiExtensions = uiExtensions;
   }
 
-  public void prepareViews() throws Exception {
+  protected void prepareViews() throws Exception {
     // find all Cloud Drive actions configured for action bar
     List<String> cdActions = new ArrayList<String>();
     for (UIExtension ext : uiExtensions.getUIExtensions(ManageViewService.EXTENSION_TYPE)) {
-      if (ConnectCloudDriveManagerComponent.class.isAssignableFrom(ext.getComponent())) {
+      if (ConnectGoogleDriveActionComponent.class.isAssignableFrom(ext.getComponent())) {
         cdActions.add(ext.getName());
       }
     }
@@ -135,24 +134,5 @@ public class CloudDriveUIService implements Startable {
   @Override
   public void stop() {
     // nothing
-  }
-
-  // ******** internals **********
-
-  /**
-   * Action on repository start. Actual for mutlitenant environments.
-   * 
-   * @param name {@link String} repository name
-   */
-  protected void repositoryStarted(String name) {
-    try {
-      jcrService.setCurrentRepositoryName(name);
-      prepareViews();
-    } catch (RepositoryConfigurationException e) {
-      LOG.error("Error adding Connect Cloud Drive Action - cannot set current repository name '" + name
-          + "': " + e.getMessage(), e);
-    } catch (Exception e) {
-      LOG.error("Error adding Connect Cloud Drive Action to " + name + "': " + e.getMessage(), e);
-    }
   }
 }

@@ -26,10 +26,9 @@ import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.ext.manager.UIAbstractManager;
-import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 @ComponentConfig(events = { @EventConfig(listeners = ShowConnectCloudDriveActionComponent.ShowConnectCloudDriveActionListener.class) })
-public class ShowConnectCloudDriveActionComponent extends ConnectCloudDriveManagerComponent {
+public class ShowConnectCloudDriveActionComponent extends BaseCloudDriveManagerComponent {
 
   public static class ShowConnectCloudDriveActionListener
                                                          extends

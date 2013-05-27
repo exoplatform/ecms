@@ -23,12 +23,10 @@ import org.exoplatform.clouddrive.ecms.filters.CloudFileFilter;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.Parameter;
-import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
-
 
 /**
  * Created by The eXo Platform SAS
@@ -39,12 +37,12 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
 public class OpenCloudFileManagerComponent extends BaseCloudDriveManagerComponent {
 
-  protected static final Log LOG        = ExoLogger.getLogger(OpenCloudFileManagerComponent.class);
+  protected static final Log                     LOG        = ExoLogger.getLogger(OpenCloudFileManagerComponent.class);
 
-  public static final String EVENT_NAME = "OpenCloudFile";
-  
-  protected static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] { new CloudFileFilter() });
-  
+  public static final String                     EVENT_NAME = "OpenCloudFile";
+
+  protected static final List<UIExtensionFilter> FILTERS    = Arrays.asList(new UIExtensionFilter[] { new CloudFileFilter() });
+
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
@@ -56,20 +54,12 @@ public class OpenCloudFileManagerComponent extends BaseCloudDriveManagerComponen
   @Override
   public String renderEventURL(boolean ajax, String name, String beanId, Parameter[] params) throws Exception {
     if (EVENT_NAME.equals(name)) {
-      // objectId a trick for JS in UIRightClickPopupMenu.prepareObjectId()
-      return "javascript:cloudDrive.openFile(this, 'objectId');"; 
+      initContext();
+      return "javascript:void(0);//objectId";
     } else if (EVENT_NAME.equals(name)) {
       LOG.info(EVENT_NAME + ": " + name + " " + beanId + " " + params);
     }
     return super.renderEventURL(ajax, name, beanId, params);
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void processRender(WebuiRequestContext context) throws Exception {
-    //context.getWriter().append("<link id="cld" rel="stylesheet" type="text/css" href="/cloud-workspaces-drives/skin/cloud-drive-skin/cloud-drive-lt.css" />"); 
-    super.processRender(context);
-  }  
 }

@@ -16,6 +16,7 @@
  */
 package org.exoplatform.clouddrive.ecms;
 
+import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -28,12 +29,11 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: BaseCloudDriveManagerComponent.java 00000 Sep 26, 2012 pnedonosko $
  */
-public class BaseCloudDriveManagerComponent extends UIAbstractManagerComponent {
+public abstract class BaseCloudDriveManagerComponent extends UIAbstractManagerComponent {
 
-  protected static final Log                     LOG     = ExoLogger.getLogger(BaseCloudDriveManagerComponent.class);
+  protected static final Log LOG = ExoLogger.getLogger(BaseCloudDriveManagerComponent.class);
 
   public BaseCloudDriveManagerComponent() {
-    CloudDriveContext.addScript(WebuiRequestContext.getCurrentInstance());
   }
 
   /**
@@ -42,5 +42,16 @@ public class BaseCloudDriveManagerComponent extends UIAbstractManagerComponent {
   @Override
   public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
     return UIAbstractManager.class;
+  }
+
+  protected void initContext() throws Exception {
+    UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
+    if (uiExplorer != null) {
+      String nodePath = uiExplorer.getCurrentNode().getPath();
+      String workspace = uiExplorer.getCurrentNode().getSession().getWorkspace().getName();
+      CloudDriveContext.init(WebuiRequestContext.getCurrentInstance(), workspace, nodePath);
+    } else {
+      LOG.error("Cannot find ancestor of type UIJCRExplorer in component " + this);
+    }
   }
 }

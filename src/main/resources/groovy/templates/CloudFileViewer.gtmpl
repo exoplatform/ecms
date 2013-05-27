@@ -48,7 +48,7 @@ if (drive) {
   	def editFile = _ctx.appRes("CloudFileViewer.event.EditFile")
 	%>
 	<div style="display: none;"><span id="ViewerSwitch" view-title="${viewFile}" edit-title="${editFile}"
-		style="position: relative; padding-left: 5px; font-weight: normal; font-size: 11px;">(<a href="javascript:cloudDriveUI.swicthFileViewer();">${editFile}</a>)</span>
+		style="position: relative; padding-left: 5px; font-weight: normal; font-size: 11px;">(<a href="javascript:void(0);">${editFile}</a>)</span>
 		<iframe frameborder="0"
 			style="position: absolute; width: 100%; height: 100%; marginwidth: 0; marginheight: 0;"
 			src="">

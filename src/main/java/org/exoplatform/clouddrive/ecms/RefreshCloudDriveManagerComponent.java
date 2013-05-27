@@ -28,7 +28,6 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 
-
 /**
  * Created by The eXo Platform SAS
  * 
@@ -38,11 +37,11 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
 public class RefreshCloudDriveManagerComponent extends BaseCloudDriveManagerComponent {
 
-  protected static final Log LOG        = ExoLogger.getLogger(RefreshCloudDriveManagerComponent.class);
+  protected static final Log                     LOG        = ExoLogger.getLogger(RefreshCloudDriveManagerComponent.class);
 
-  public static final String EVENT_NAME = "RefreshCloudDrive";
-  
-  protected static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] { new CloudDriveFiler() });
+  public static final String                     EVENT_NAME = "RefreshCloudDrive";
+
+  protected static final List<UIExtensionFilter> FILTERS    = Arrays.asList(new UIExtensionFilter[] { new CloudDriveFiler() });
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
@@ -55,7 +54,8 @@ public class RefreshCloudDriveManagerComponent extends BaseCloudDriveManagerComp
   @Override
   public String renderEventURL(boolean ajax, String name, String beanId, Parameter[] params) throws Exception {
     if (EVENT_NAME.equals(name)) {
-      return "javascript:cloudDrive.synchronize(this, 'objectId');";
+      initContext();
+      return "javascript:void(0);//objectId";
     }
     return super.renderEventURL(ajax, name, beanId, params);
   }

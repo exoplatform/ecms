@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.exoplatform.clouddrive.ecms.filters.CloudFileFilter;
+import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.Parameter;
@@ -28,7 +29,6 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
-
 
 /**
  * Created by The eXo Platform SAS.
@@ -49,7 +49,7 @@ public class CloudFileViewerComponent extends UIComponent {
    * 
    */
   public CloudFileViewerComponent() {
-    CloudDriveContext.addScript(WebuiRequestContext.getCurrentInstance());
+
   }
 
   @UIExtensionFilters
@@ -63,7 +63,16 @@ public class CloudFileViewerComponent extends UIComponent {
   @Override
   public String renderEventURL(boolean ajax, String name, String beanId, Parameter[] params) throws Exception {
     if (EVENT_NAME.equals(name)) {
-      return "javascript:cloudDrive.openFile(this, 'objectId');";
+      UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
+      if (uiExplorer != null) {
+        String nodePath = uiExplorer.getCurrentNode().getPath();
+        String workspace = uiExplorer.getCurrentNode().getSession().getWorkspace().getName();
+        CloudDriveContext.init(WebuiRequestContext.getCurrentInstance(), workspace, nodePath);
+      } else {
+        LOG.error("Cannot find ancestor of type UIJCRExplorer in viwer component " + this);
+      }
+
+      return "javascript:void(0);//objectId";
     }
     return super.renderEventURL(ajax, name, beanId, params);
   }
