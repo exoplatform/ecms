@@ -980,29 +980,33 @@
 					window.close();
 					editor.OnAfterSetHTML = window.close();				
 				}
-			} else {      						
-				var newImg = new Image();
-				newImg.src = url;
-	      newImg.onload = function() {
-					var height = newImg.height;
-					var width = newImg.width;  
-	        var parent = window.opener.document;
-	        parent.getElementById(eXo.ecm.ECS.components).src=url;
-					parent.getElementById(eXo.ecm.ECS.components).style.display="block";
-					parent.getElementById(editor.name+"_txtWidth").value=width;	
-					parent.getElementById(editor.name+"_txtHeight").value=height;        
-	        var elements = parent.getElementsByTagName('*');
-	       	for(var i=0;i<elements.length;i++)	{        
-						if(elements[i].type && elements[i].type=="text") {          
-							if(elements[i].id && elements[i].id==editor.name+"_txtUrl") elements[i].value = url;
-						}
-					}       
-					window.close();
-					editor.OnAfterSetHTML = window.close();				
-				}
-			}		
-		}
-	};
+     } else {
+       var newImg = new Image();
+       url = decodeURIComponent(url);
+       function loadInfoImage () {
+         var height = newImg.height;
+         var width = newImg.width;
+         var parent = window.opener.document;
+         parent.getElementById(eXo.ecm.ECS.components).src=url;
+         parent.getElementById(eXo.ecm.ECS.components).style.display="block";
+         parent.getElementById(editor.name+"_txtWidth").value=width;  
+         parent.getElementById(editor.name+"_txtHeight").value=height;
+         var element = parent.getElementById(editor.name+"_txtUrl");
+         if(element.type && element.type=="text") {
+           element.value = url;
+         }
+         window.close();
+         editor.OnAfterSetHTML = window.close();
+       }
+     }
+     newImg.onload = loadInfoImage;
+     newImg.src = url;
+     if (newImg.complete)
+     {
+       loadInfoImage();
+     }
+   }
+  };
 	
 	EcmContentSelector.prototype.insertMultiContent = function(operation, currentpath) {
 		var rws = document.getElementById("RightWorkspace");
