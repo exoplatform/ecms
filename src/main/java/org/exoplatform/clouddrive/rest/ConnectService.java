@@ -241,14 +241,14 @@ public class ConnectService implements ResourceContainer {
     /**
      * ConversationState used by initail thread.
      */
-    final ConversationState conversation;
+    //final ConversationState conversation;
 
     ConnectProcess(String name, String workspaceName, CloudDrive drive, ConversationState conversation) throws CloudDriveException,
         RepositoryException {
       this.drive = drive;
       this.name = name;
       this.workspaceName = workspaceName;
-      this.conversation = conversation;
+      //this.conversation = conversation;
       this.drive.addListener(this); // listen to remove from active map
       this.process = drive.connect(true);
 
@@ -257,11 +257,12 @@ public class ConnectService implements ResourceContainer {
 
     void rollback() throws RepositoryException {
       // set correct user's ConversationState
-      ConversationState.setCurrent(conversation);
+      //ConversationState.setCurrent(conversation);
       // set correct SessionProvider
-      sessionProviders.setSessionProvider(null, new SessionProvider(conversation));
+      //sessionProviders.setSessionProvider(null, new SessionProvider(conversation));
 
-      SessionProvider provider = new SessionProvider(conversation);
+      //SessionProvider provider = new SessionProvider(conversation);
+      SessionProvider provider = sessionProviders.getSessionProvider(null);
       Session session = provider.getSession(workspaceName, jcrService.getCurrentRepository());
 
       try {
@@ -271,6 +272,8 @@ public class ConnectService implements ResourceContainer {
         // not found - ok
       } catch (DriveRemovedException e) {
         // removed - ok
+      } finally {
+        session.logout();
       }
     }
 
@@ -700,7 +703,7 @@ public class ConnectService implements ResourceContainer {
     } else if (repoName != null) {
       if (baseHost.equals(uriInfo.getRequestUri().getHost())) {
         // need redirect to actual service URL, TODO remove state query parameter
-        resp.location(locator.getServiceHost(repoName, baseHost));
+        resp.location(locator.getServiceLink(repoName, uriInfo.getRequestUri().toString()));
         return resp.status(Status.MOVED_PERMANENTLY).build(); // redirect
       }
     }

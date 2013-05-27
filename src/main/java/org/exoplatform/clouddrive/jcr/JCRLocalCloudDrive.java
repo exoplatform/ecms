@@ -620,7 +620,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       // set correct user's ConversationState
       ConversationState.setCurrent(conversation);
       // set correct SessionProvider
-      sessionProviders.setSessionProvider(null, new SessionProvider(conversation));
+      SessionProvider sp =  new SessionProvider(conversation);
+      sessionProviders.setSessionProvider(null, sp);
 
       try {
         command.exec();
@@ -628,6 +629,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
         LOG.error(e.getMessage(), e);
       } catch (Throwable e) {
         LOG.error(e.getMessage(), e);
+      } finally {
+        sp.close();
       }
     }
   }
@@ -638,14 +641,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   protected abstract class AbstractCommand implements Command, CommandProgress {
 
     /**
-     * Target JCR node.
-     */
-    protected final Node             driveRoot;
-
-    /**
      * Local files affected by the command.
      */
     protected final Queue<CloudFile> result = new ConcurrentLinkedQueue<CloudFile>();
+
+    /**
+     * Target JCR node. Will be initialized in exec() method (in actual runner thread).
+     */
+    protected Node             driveRoot;
 
     /**
      * Progress indicator in percents.
@@ -674,7 +677,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
      * @throws DriveRemovedException
      */
     protected AbstractCommand() throws RepositoryException, DriveRemovedException {
-      this.driveRoot = rootNode();
+      
     }
 
     /**
@@ -701,6 +704,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
      */
     void exec() throws CloudDriveException, RepositoryException {
       startTime = System.currentTimeMillis();
+      driveRoot = rootNode(); // init in actual runner thread
 
       try {
         startAction(JCRLocalCloudDrive.this);

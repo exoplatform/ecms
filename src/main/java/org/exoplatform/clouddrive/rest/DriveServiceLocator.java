@@ -46,7 +46,7 @@ public class DriveServiceLocator {
    * @param requestHost {@link String}
    * @return {@link String}
    */
-  public String getServiceHost(String context, String requestHost) {
+  public String getServiceLink(String context, String requestHost) {
     // ignore context 
     return requestHost;
   }

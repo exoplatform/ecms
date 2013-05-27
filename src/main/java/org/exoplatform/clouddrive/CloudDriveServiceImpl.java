@@ -296,41 +296,13 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
    */
   @Override
   public void start() {
-    // TODO load all ecd:cloudDrive nodes into connected map if ecd:connected is
-    // true for each of them
     try {
-      final SessionProvider spOrig = sessionProviders.getSessionProvider(null);
-      final String origRepoName = jcrService.getCurrentRepository().getConfiguration().getName();
-      try {
-        for (RepositoryEntry repo : jcrService.getConfig().getRepositoryConfigurations()) {
-          SessionProvider sp = SessionProvider.createSystemProvider();
-          try {
-            jcrService.setCurrentRepositoryName(repo.getName());
-            sessionProviders.setSessionProvider(null, sp);
-
-            loadConnected(jcrService.getRepository(repo.getName()));
-          } catch (Exception e) {
-            LOG.error("Repository cannot be open " + repo.getName(), e);
-          } finally {
-            try {
-              sp.close();
-            } catch (IllegalStateException e) {
-              // should not happen but already closed
-              LOG.warn("Unexpectedly session provider already closed: " + e.getMessage());
-            }
-          }
-        }
-      } finally {
-        sessionProviders.setSessionProvider(null, spOrig);
-        try {
-          jcrService.setCurrentRepositoryName(origRepoName);
-        } catch (RepositoryConfigurationException e) {
-          LOG.error("Error set current repository name to " + origRepoName, e);
-        }
-      }
+      loadConnected(jcrService.getCurrentRepository());
     } catch (RepositoryException e) {
-      LOG.error("Error loading connected drives", e);
+      LOG.error("Error reading current repository: " + e.getMessage());
+      throw new RuntimeException("Error loading connected drives: cannot read current repository", e);
     }
+    LOG.info("Cloud Drive service successfuly started");
   }
 
   /**
@@ -341,66 +313,10 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     // cleanup of local caches
     repositoryDrives.clear();
     userDrives.clear();
+    LOG.info("Cloud Drive service successfuly stopped");
   }
 
   // *********************** internal stuff *********************
-
-  /**
-   * Load connected drives from started repository. Actual for mutlitenant environments.
-   * 
-   * @param name {@link String}
-   */
-  protected void repositoryStarted(String name) {
-    if (!repositoryDrives.containsKey(name)) {
-      try {
-        final SessionProvider spOrig = sessionProviders.getSessionProvider(null);
-        final String origRepoName = jcrService.getCurrentRepository().getConfiguration().getName();
-
-        SessionProvider sp = SessionProvider.createSystemProvider();
-        try {
-          jcrService.setCurrentRepositoryName(name);
-          sessionProviders.setSessionProvider(null, sp);
-          loadConnected(jcrService.getRepository(name));
-        } catch (Exception e) {
-          LOG.error("Repository cannot be open " + name, e);
-        } finally {
-          try {
-            sp.close();
-          } catch (IllegalStateException e) {
-            // should not happen but already closed
-            LOG.warn("Unexpectedly session provider already closed: " + e.getMessage());
-          }
-          sessionProviders.setSessionProvider(null, spOrig);
-          try {
-            jcrService.setCurrentRepositoryName(origRepoName);
-          } catch (RepositoryConfigurationException e) {
-            LOG.error("Error set current repository name to " + origRepoName, e);
-          }
-        }
-      } catch (RepositoryException e) {
-        LOG.error("Error loading connected drives", e);
-      }
-    }
-  }
-
-  /**
-   * Unload drives mapped to stopped repository. Actual for mutlitenant environments.
-   * 
-   * @param name {@link String}
-   */
-  protected void repositoryStopped(String name) {
-    // removed from caches
-    Map<CloudUser, CloudDrive> drives = repositoryDrives.remove(name);
-    if (drives != null) {
-      for (Iterator<Map.Entry<CloudUser, Map<CloudUser, CloudDrive>>> uditer = userDrives.entrySet()
-                                                                                         .iterator(); uditer.hasNext();) {
-        Map.Entry<CloudUser, Map<CloudUser, CloudDrive>> e = uditer.next();
-        if (drives == e.getValue()) {
-          uditer.remove();
-        }
-      }
-    }
-  }
 
   protected void registerDrive(CloudUser user, CloudDrive drive, String repoName) {
     // register in caches
@@ -416,64 +332,83 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
     drive.addListener(drivesListener);
   }
 
+  /**
+   * Load all ecd:cloudDrive nodes into connected map if ecd:connected is true for each of them.
+   * 
+   * @param jcrRepository {@link ManageableRepository}
+   */
   protected void loadConnected(ManageableRepository jcrRepository) {
-    for (WorkspaceEntry w : jcrRepository.getConfiguration().getWorkspaceEntries()) {
-      try {
-        Map<CloudProvider, Set<Node>> repoDrives = new HashMap<CloudProvider, Set<Node>>();
-        SessionProvider sp = sessionProviders.getSessionProvider(null);
-        Session session = sp.getSession(w.getName(), jcrRepository);
+    final SessionProvider spOrig = sessionProviders.getSessionProvider(null);
+    final SessionProvider sp = SessionProvider.createSystemProvider();
+    sessionProviders.setSessionProvider(null, sp); // set current
+    try {
+      for (WorkspaceEntry w : jcrRepository.getConfiguration().getWorkspaceEntries()) {
         try {
-          // gather all drive nodes from the jcr repo
-          Query q = session.getWorkspace()
-                           .getQueryManager()
-                           .createQuery("select * from " + JCRLocalCloudDrive.ECD_CLOUDDRIVE, Query.SQL);
-          NodeIterator r = q.execute().getNodes();
-          while (r.hasNext()) {
-            Node drive = r.nextNode();
-            // We're reading nodes directly here. Much pretty it would be to do this in connectors,
-            // but then it will cause more reads of the same items, thus will affects the
-            // performance a bit. So, to avoid reading of the same we do it here once.
-            if (drive.getProperty("ecd:connected").getBoolean()) {
-              String providerId = drive.getProperty("ecd:provider").getString();
-              try {
-                CloudProvider provider = getProvider(providerId);
-                Set<Node> driveNodes = repoDrives.get(provider);
-                if (driveNodes == null) {
-                  driveNodes = new HashSet<Node>();
-                  repoDrives.put(provider, driveNodes);
+          Map<CloudProvider, Set<Node>> repoDrives = new HashMap<CloudProvider, Set<Node>>();
+          Session session = sp.getSession(w.getName(), jcrRepository);
+          try {
+            // gather all drive nodes from the jcr repo
+            Query q = session.getWorkspace()
+                             .getQueryManager()
+                             .createQuery("select * from " + JCRLocalCloudDrive.ECD_CLOUDDRIVE, Query.SQL);
+            NodeIterator r = q.execute().getNodes();
+            while (r.hasNext()) {
+              Node drive = r.nextNode();
+              // We're reading nodes directly here. Much pretty it would be to do this in connectors,
+              // but then it will cause more reads of the same items, thus will affects the
+              // performance a bit. So, to avoid reading of the same we do it here once.
+              if (drive.getProperty("ecd:connected").getBoolean()) {
+                String providerId = drive.getProperty("ecd:provider").getString();
+                try {
+                  CloudProvider provider = getProvider(providerId);
+                  Set<Node> driveNodes = repoDrives.get(provider);
+                  if (driveNodes == null) {
+                    driveNodes = new HashSet<Node>();
+                    repoDrives.put(provider, driveNodes);
+                  }
+                  driveNodes.add(drive);
+                } catch (CloudDriveException e) {
+                  LOG.error("Error loading stored drive " + drive.getPath() + ": " + e.getMessage(), e);
                 }
-                driveNodes.add(drive);
-              } catch (CloudDriveException e) {
-                LOG.error("Error loading stored drive " + drive.getPath() + ": " + e.getMessage(), e);
               }
             }
-          }
 
-          // get connected drives and add them to local cache
-          for (Map.Entry<CloudProvider, Set<Node>> pd : repoDrives.entrySet()) {
-            CloudDriveConnector conn = connectors.get(pd.getKey());
-            try {
-              Set<CloudDrive> locals = conn.loadStored(pd.getValue());
-              for (CloudDrive local : locals) {
-                if (local.isConnected()) {
-                  CloudUser user = local.getUser();
-                  String repoName = jcrRepository.getConfiguration().getName();
-                  registerDrive(user, local, repoName);
+            // get connected drives and add them to local cache
+            for (Map.Entry<CloudProvider, Set<Node>> pd : repoDrives.entrySet()) {
+              CloudDriveConnector conn = connectors.get(pd.getKey());
+              try {
+                Set<CloudDrive> locals = conn.loadStored(pd.getValue());
+                for (CloudDrive local : locals) {
+                  if (local.isConnected()) {
+                    CloudUser user = local.getUser();
+                    String repoName = jcrRepository.getConfiguration().getName();
+                    registerDrive(user, local, repoName);
+                  }
                 }
+              } catch (CloudDriveException e) {
+                LOG.error("Error loading stored drive for " + pd.getKey().getName() + ": " + e.getMessage(),
+                          e);
               }
-            } catch (CloudDriveException e) {
-              LOG.error("Error loading stored drive for " + pd.getKey().getName() + ": " + e.getMessage(), e);
             }
+          } catch (RepositoryException e) {
+            LOG.error("Search error on " + w.getName() + "@" + jcrRepository.getConfiguration().getName(), e);
+          } finally {
+            session.logout();
           }
         } catch (RepositoryException e) {
-          LOG.error("Search error on " + w.getName() + "@" + jcrRepository.getConfiguration().getName(), e);
-        } finally {
-          session.logout();
+          LOG.error("System session error on " + w.getName() + "@"
+              + jcrRepository.getConfiguration().getName(), e);
         }
-      } catch (RepositoryException e) {
-        LOG.error("System session error on " + w.getName() + "@" + jcrRepository.getConfiguration().getName(),
-                  e);
       }
+    } finally {
+      try {
+        sp.close();
+      } catch (IllegalStateException e) {
+        // should not happen but already closed
+        LOG.warn("Unexpectedly session provider already closed: " + e.getMessage());
+      }
+      // restore existing session provider
+      sessionProviders.setSessionProvider(null, spOrig);
     }
   }
 }
