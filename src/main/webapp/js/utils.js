@@ -67,6 +67,16 @@
 				// $("head").append($("<link href='" + cssUrl + "' rel='stylesheet' type='text/css' />"));
 			}
 		};
+		
+		/** For debug logging. */
+		this.log = function(msg, e) {
+			if (typeof console != "undefined" && typeof console.log != "undefined") {
+				console.log(msg);
+				if (e && typeof e.stack != "undefined") {
+					console.log(e.stack);
+				}
+			}
+		};
 	}
 	
 	return new CDUtils();

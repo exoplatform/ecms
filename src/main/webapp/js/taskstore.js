@@ -82,15 +82,15 @@
 						var task = tasks[i];
 						try {
 							removeTask(task);
-							log("Loading task [" + task + "]");
+							utils.log("Loading task [" + task + "]");
 							eval(task);
 						} catch (e) {
-							log("Error evaluating task: " + task + ":" + e + ". Skipped.");
+							utils.log("Error evaluating task: " + task + ":" + e + ". Skipped.");
 						}
 					}
 				} finally {
 					loaded = true;
-					log("Tasks loaded.");
+					utils.log("Tasks loaded.");
 				}
 			}
 		};
@@ -102,7 +102,7 @@
 			if (task) {
 				addTask(task);
 			} else {
-				log("not valid task (code is not defined)");
+				utils.log("not valid task (code is not defined)");
 			}
 		};
 
@@ -117,11 +117,11 @@
 		$(function() {
 			try {
 				setTimeout(function() {
-					log("Loading deffered tasks");
+					utils.log("Loading deffered tasks");
 					load();
 				}, 4000);
 			} catch (e) {
-				log("Error loading tasks", e);
+				utils.log("Error loading tasks", e);
 			}
 		});
 	}
