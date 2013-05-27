@@ -76,8 +76,9 @@ public class FavoriteServiceImpl implements FavoriteService {
     Node userFavoriteNode = null;
     try {
       userFavoriteNode = getUserFavoriteFolder(userName);
-      if (userFavoriteNode == null)
+      if (userFavoriteNode == null) {
         return;
+      }
     } catch (PathNotFoundException e) {
       userFavoriteNode = createFavoriteFolder(userName);
     }
@@ -128,15 +129,17 @@ public class FavoriteServiceImpl implements FavoriteService {
     } else {
       // remove favorite
       Node userFavoriteNode = getUserFavoriteFolder(userName);
-      NodeIterator nodeIter = userFavoriteNode.getNodes();
-      while (nodeIter.hasNext()) {
-        Node childNode = nodeIter.nextNode();
-        if (linkManager.isLink(childNode)) {
-          targetNode = getTargetNode(childNode);
-          if (node.isSame(targetNode)) {
-            childNode.remove();
-            userFavoriteNode.getSession().save();
-            return;
+      if(userFavoriteNode != null) { // to avoid NPE
+        NodeIterator nodeIter = userFavoriteNode.getNodes();
+        while (nodeIter.hasNext()) {
+          Node childNode = nodeIter.nextNode();
+          if (linkManager.isLink(childNode)) {
+           targetNode = getTargetNode(childNode);
+            if (node.isSame(targetNode)) {
+              childNode.remove();
+              userFavoriteNode.getSession().save();
+              return;
+            }
           }
         }
       }
@@ -153,7 +156,10 @@ public class FavoriteServiceImpl implements FavoriteService {
     Node userFavoriteNode = null;
     try {
       userFavoriteNode = getUserFavoriteFolder(userName);
-    }catch (PathNotFoundException e) {
+      if(userFavoriteNode == null) {
+        return false;
+      }
+    } catch (PathNotFoundException e) {
       return false;
     }
 
