@@ -108,7 +108,6 @@ public class NavigationUtils {
    * @return UserNavigation of group  
    */
   public static UserNavigation getUserNavigation(UserPortal userPortal, SiteKey siteKey) throws Exception {
-      UIPortalApplication portalApp = Util.getUIPortalApplication();
 	    UserACL userACL = WCMCoreUtils.getService(UserACL.class);
 	    UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
 	    //userPortalConfigService.get
@@ -117,9 +116,8 @@ public class NavigationUtils {
 	    if (portalNav == null) {
 	      return null;
 	    } else {
-	      return userNavigationCtor.newInstance(
-                userPortal, portalNav, 
-                userACL.hasEditPermission(portalApp.getUserPortalConfig().getPortalConfig()));
+	      UserPortalConfig userPortalCfg = userPortalConfigService.getUserPortalConfig(userPortalConfigService.getDefaultPortal(), ConversationState.getCurrent().getIdentity().getUserId(), PortalRequestContext.USER_PORTAL_CONTEXT);
+              return userNavigationCtor.newInstance(userPortal, portalNav, userACL.hasEditPermission(userPortalCfg.getPortalConfig()));
 	    }
 	  }
   
