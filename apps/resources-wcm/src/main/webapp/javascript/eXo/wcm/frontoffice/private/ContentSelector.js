@@ -963,6 +963,7 @@
 	    url = encodeURIComponent(temp);
 	    url = decodeURIComponent(url);    
 	 	  var name 	= encodeURIComponent(objNode.title);
+	 	  if (name == "") name = objNode.innerHTML;
 	 	  name = decodeURIComponent(name);
 			var strHTML = '';	
 			var editor = eXo.ecm.ECS.currentEditor ;    
