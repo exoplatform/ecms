@@ -41,7 +41,7 @@
     </label>
     <button>
       <label>
-        <cancel>Close</cancel>
+        <confirm>Ok</confirm>
       </label>
     </button>
     <msg>
