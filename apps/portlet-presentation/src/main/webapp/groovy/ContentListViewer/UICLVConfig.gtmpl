@@ -107,7 +107,7 @@
 						                          String downLink = uicomponent.event("Decrease", Integer.toString(i));  
 						                          %>
 						                            <tr>
-						                              <td><%= ContentReader.getXSSCompatibilityContent(URLDecoder.decode(contents.get(0))) %></td>
+						                              <td><%= ContentReader.getXSSCompatibilityContent(URLDecoder.decode(content)) %></td>
 						                              <td class="center"><a class="actionIcon" onclick="$downLink"><i class="uiIconSortDown"></i></a></td>
 						                              <td class="center"><a class="actionIcon" onclick="$upLink"><i class="uiIconSortUp"></i></a></td>
 						                            </tr>
