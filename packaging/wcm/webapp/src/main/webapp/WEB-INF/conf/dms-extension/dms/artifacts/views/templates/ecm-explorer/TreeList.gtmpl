@@ -141,21 +141,21 @@
                       <a href="<%=uicomponent.event("Sort", typeActionLink + "Alphabetic")%>">
                         <%=_ctx.appRes("FileView.label.name")%>
                         <% if ("active".equals(nameClass)) {%>
-                          <i class="uiIconSort$sortOrder">&nbsp;</i>
+                          <i class="uiIconSort<%="Down".equals(sortOrder)?"Up":"Down"%>">&nbsp;</i>
                         <%} %>
                       </a>
                     </li>
                     <li class="$dateClass">
                       <a href="<%=uicomponent.event("Sort", typeActionLink + "Date")%>"><%=_ctx.appRes("FileView.label.date")%>
                         <% if ("active".equals(dateClass)) {%>
-                          <i class="uiIconSort$sortOrder">&nbsp;</i>
+                          <i class="uiIconSort<%="Down".equals(sortOrder)?"Up":"Down"%>">&nbsp;</i>
                         <%} %>
                       </a>
                     </li>
                     <li class="$sizeClass">
                     <a href="<%=uicomponent.event("Sort", typeActionLink + "Size")%>"><%=_ctx.appRes("FileView.label.size")%>
                       <% if ("active".equals(sizeClass)) {%>
-                        <i class="uiIconSort$sortOrder">&nbsp;</i>
+                        <i class="uiIconSort<%="Down".equals(sortOrder)?"Up":"Down"%>">&nbsp;</i>
                       <%} %>
                     </a>
                   </li>
