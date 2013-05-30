@@ -353,6 +353,15 @@
 			eXo.ecm.WCMUtils.loadAvartar(commentor, img);
 		});
 	};
+
+	WCMUtils.prototype.loadImageForFileActivityCallback = function(obj){
+      		var img = gj(obj).nextAll("a:first")[0];
+      		img.style.display = "block";
+      		obj.style.display = "none";
+      		gj(obj.parentNode).removeClass();
+      		gj(obj.parentNode).addClass("fileTypeContent");
+      		
+    	};
 	
 	eXo.ecm.WCMUtils = new WCMUtils();
 	
