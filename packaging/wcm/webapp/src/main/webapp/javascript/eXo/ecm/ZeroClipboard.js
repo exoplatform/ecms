@@ -255,6 +255,8 @@
                 case 'mouseup':
                   var item = document.getElementById(this.domElement.id);
                   item.className = 'menuItemNormal';
+                  gj(item).click(); // 
+                  this.div.style.zIndex = -99;  // put into lower layer
                   break;
             } // switch eventName
         

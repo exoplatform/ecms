@@ -795,8 +795,20 @@ UIFileView.prototype.clickRightMouse = function(event, elemt, menuId, objId, whi
     gj("#ActionMenuPlaceHolder").prepend(contextMenu);
     gj(contextMenu).addClass("uiFileViewActionBar");
     var moreButton = gj("#hiddenMoreButton:first")[0];
-    gj(contextMenu).find("ul:first").append(moreButton);
     
+    // Init url clipboard when click more button
+    gj(moreButton).mouseup(function() {
+      var timer = setInterval(function()
+        {
+          if (gj("#hiddenMoreButton .dropdown-menu").is(":visible")) {
+            eXo.ecm.ECMUtils.initClipboard();
+            clearInterval(timer);
+          }
+        }
+        , 200);
+    });
+
+    gj(contextMenu).find("ul:first").append(moreButton);
     eXo.webui.UIPopup.show(contextMenu);
     var menubar = gj('div.uiFileViewActionBar');
     if (menubar) {
@@ -807,6 +819,10 @@ UIFileView.prototype.clickRightMouse = function(event, elemt, menuId, objId, whi
     if (moreButton) {
     	moreButton.hide();
     }
+    
+    // Init feature Copy URL to Clipboard in case the action button appears right after select item in file view
+    if(gj("#ECMContextMenu .uiIconEcmsCopyUrlToClipboard").is(":visible"))
+      eXo.ecm.ECMUtils.initClipboard();
 };
 
 function pressCtrl(event) {
