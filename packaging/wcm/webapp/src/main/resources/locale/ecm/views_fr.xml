@@ -109,7 +109,7 @@
         <cutoff-record>Enregistrements prélevés</cutoff-record>
         <holdable-record>Enregistrements suspensifs</holdable-record>
         <transferable-record>Enregistrements transférables</transferable-record>
-        <accessionable-record>Enregistrements acquis</accessionable-record>
+        <accessionable-record>Enregistrements à Acquérir</accessionable-record>
         <destroyable-record>Enregistrements destructibles</destroyable-record>
         <record-id>Identifiant de l'Enregistrement</record-id>
         <record-name>Nom de l'Enregistrement</record-name>
@@ -387,7 +387,7 @@
       <label>
         <not-available>ND</not-available>
         <accession-executed>Acquisition exécutée</accession-executed>
-        <accession-date>Planification de l'extraction</accession-date>
+        <accession-date>Date d'acquisition</accession-date>
       </label>
       <action>
         <add-edit>Ajouter/Modification</add-edit>

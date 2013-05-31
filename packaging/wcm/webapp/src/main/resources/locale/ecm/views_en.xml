@@ -109,7 +109,7 @@
         <cutoff-record>Cutoff Records</cutoff-record>
         <holdable-record>Holdable Records</holdable-record>
         <transferable-record>Transferable Records</transferable-record>
-        <accessionable-record>Accessible Records</accessionable-record>
+        <accessionable-record>Accessionable Records</accessionable-record>
         <destroyable-record>Destroyable Records</destroyable-record>
         <record-id>Record Id</record-id>
         <record-name>Record name</record-name>
@@ -123,7 +123,7 @@
         <transfer-date>Transfer Date</transfer-date>
         <transfer-location>Transfer Location</transfer-location>
         <accession-date>Accession Date</accession-date>
-        <accession-location>Access Location</accession-location>
+        <accession-location>Accession Location</accession-location>
         <destruction-date>Destruction Date</destruction-date>
       </label>
     </view>
@@ -386,8 +386,8 @@
     <view>
       <label>
         <not-available>N/A</not-available>
-        <accession-executed>Accessible Executed</accession-executed>
-        <accession-date>Access Date</accession-date>
+        <accession-executed>Accession Executed</accession-executed>
+        <accession-date>Accession Date</accession-date>
       </label>
       <action>
         <add-edit>Add/Edit</add-edit>
