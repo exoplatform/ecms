@@ -204,6 +204,7 @@ public class UIRenameForm extends UIForm implements UIPopupComponent {
           if(destNode.canAddMixin("exo:modify")) {
               destNode.addMixin("exo:modify");            
           }
+          destNode.setProperty("exo:name", newName);
           destNode.setProperty(Utils.EXO_LASTMODIFIER, nodeSession.getUserID());
           currentNode = destNode;
         }
