@@ -4,7 +4,7 @@
   <parent>
     <artifactId>ecms-ext-xcmis</artifactId>
     <groupId>org.exoplatform.ecms</groupId>
-    <version>4.0.x-SNAPSHOT</version>
+    <version>4.1.0-SNAPSHOT</version>
   </parent>
   <artifactId>ecms-ext-xcmis-sp</artifactId>
   <packaging>jar</packaging>
