@@ -2204,9 +2204,9 @@
   </UITagStyleList>  
   <UITagStyleForm>
     <label>
-      <styleName>Nom du Style</styleName>
-      <documentRange>Nombre de références</documentRange>
-      <styleHTML>Style Html</styleHTML>
+      <styleName>Nom du Style:</styleName>
+      <documentRange>Nombre de références:</documentRange>
+      <styleHTML>Style Html:</styleHTML>
     </label>
     <action>
       <UpdateStyle>Mettre à jour</UpdateStyle>
