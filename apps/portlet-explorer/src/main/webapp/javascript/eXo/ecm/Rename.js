@@ -95,31 +95,33 @@
 	
 	  // Bind scoll event
 	  var treeExplorer = document.getElementById('UITreeExplorer');
-	  if (!treeExplorer) return;
-	  var treeExplorerOffset = gj(treeExplorer).offset();
-	  var treeExplorerHeight = gj(treeExplorer).height();
-	  var treeExplorerBottom = treeExplorerOffset.top + treeExplorerHeight;
-	  gj('#UITreeExplorer').scroll(function () {
-	    var rightClickedElement = eXo.ecm.Rename.getRightClickedElement();
-	    if (!rightClickedElement) return;
-	    var rightClickedElementHeight = gj(rightClickedElement).height();
-	    var popupOffset = eXo.ecm.Rename.getPopupPosition();
-	    var rightClickedElementBottom = popupOffset.top + rightClickedElementHeight;
+	  if (treeExplorer) {
+			var treeExplorerOffset = gj(treeExplorer).offset();
+			var treeExplorerHeight = gj(treeExplorer).height();
+			var treeExplorerBottom = treeExplorerOffset.top + treeExplorerHeight;
+			gj('#UITreeExplorer').scroll(function () {
+			  var rightClickedElement = eXo.ecm.Rename.getRightClickedElement();
+			  if (!rightClickedElement) return;
+			  var rightClickedElementHeight = gj(rightClickedElement).height();
+			  var popupOffset = eXo.ecm.Rename.getPopupPosition();
+			  var rightClickedElementBottom = popupOffset.top + rightClickedElementHeight;
 	
-	    if ((popupOffset.top < treeExplorerOffset.top) || (treeExplorerBottom < rightClickedElementBottom)) {
-	      gj(renameWindowPopup).hide();
-	      gj('#UITreeExplorer').unbind('scroll');
-	    } else {
-	      gj(renameWindowPopup).offset(popupOffset);
-	    }
-	  });
+			  if ((popupOffset.top < treeExplorerOffset.top) || (treeExplorerBottom < rightClickedElementBottom)) {
+			    gj(renameWindowPopup).hide();
+			    gj('#UITreeExplorer').unbind('scroll');
+			  } else {
+			    gj(renameWindowPopup).offset(popupOffset);
+			  }
+			});
+	  }
 	  
 	  // Dismiss rename form when clicking outside
 	  gj(document).mouseup(function (e) {
 	    var container = gj(renameWindowPopup);
-	    if (!container.is(e.target) && container.has(e.target).length == 0) {
+	    if (!container.is(e.target) && container.has(e.target).length == 0 && gj(container).is(":visible")) {
 	      container.hide();
-	      gj(this).unbind(e);
+	      eXo.ecm.UIFileView.clearCheckboxes();
+	      gj(this).unbind('mouseup');
 	    }
 	  });
 	};
@@ -140,6 +142,13 @@
 	
 	  // Update status to in progress renaming
 	  this.setNodeTitle(eXo.ecm.WCMUtils.getBundle('RenameConnector.msg.renaming', eXo.env.portal.language), true);
+	  // set invisible file extention part in file view
+	  if (gj("#UIDocumentInfo .uiFileView").length > 0) {
+	    var elements = this.getElementsOfRenamedNode();
+	    var fileExtension = gj(elements[0]).find("span.fileExtension:first")[0];
+	    gj(fileExtension).hide();
+	    
+	  }
 	
 	  // Build url to request rest service to execute rename on server
 	  var oldPath = this.getNodePath(true);
