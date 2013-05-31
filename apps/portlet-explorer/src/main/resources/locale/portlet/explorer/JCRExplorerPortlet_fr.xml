@@ -41,7 +41,7 @@
     </label>
     <button>
       <label>
-        <cancel>Annuler</cancel>
+        <confirm>Ok</confirm>
       </label>
     </button>
     <msg>
@@ -1751,7 +1751,7 @@
     </action>
     <label>
       <category>Catégorie</category>
-      <actions>Actions</actions>
+      <actions>Action</actions>
       <delete>Supprimer</delete>
     </label>
   </UICategoriesAddedList>

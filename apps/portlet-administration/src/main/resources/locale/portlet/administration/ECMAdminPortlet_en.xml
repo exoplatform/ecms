@@ -908,7 +908,7 @@
     <title>Select Import Node Type</title>
     <msg>
       <no-nodetype-registered>There are no node types registered.</no-nodetype-registered>
-      <nodetype-registered>Register successfully.</nodetype-registered>
+      <nodetype-registered>Registration successful.</nodetype-registered>
     </msg>
   </UINodeTypeImport>
   <NodeTypeImportPopup>
@@ -1142,7 +1142,7 @@
     </msg>
     <label>
       <viewName>Name</viewName>
-      <template>Templates</template>
+      <template>Template</template>
 						<version>Restore Version</version>
       <enableVersion>Enable Version</enableVersion>
       <hideExplorerPanel>Hide explorer panel in side bar</hideExplorerPanel>						
@@ -1215,7 +1215,7 @@
     <tab>
       <label>
         <UITabContainer>Action</UITabContainer>
-        <UIViewForm>Setting</UIViewForm>
+        <UIViewForm>View</UIViewForm>
         <UIViewPermissionContainer>Permission</UIViewPermissionContainer>    
       </label>
     </tab>
@@ -2204,9 +2204,9 @@
   </UITagStyleList>
   <UITagStyleForm>
     <label>
-      <styleName>Style Name</styleName>
-      <documentRange>Document Range</documentRange>
-      <styleHTML>HTML Style</styleHTML>
+      <styleName>Style Name:</styleName>
+      <documentRange>Document Range:</documentRange>
+      <styleHTML>HTML Style:</styleHTML>
     </label>
     <action>
       <UpdateStyle>Update</UpdateStyle>

@@ -34,7 +34,7 @@
       <UIFCCSaveFormStringInput>Personnaliser le bouton Enregistrer</UIFCCSaveFormStringInput>
       <UIFCCMessageFormTextareaInput>Message de remerciement</UIFCCMessageFormTextareaInput>
       <UIFCCRedirectFormCheckboxInput>Redirection:</UIFCCRedirectFormCheckboxInput>
-      <UIFCCRedirectPathFormStringInput>URL de redirection</UIFCCRedirectPathFormStringInput>
+      <UIFCCRedirectPathFormStringInput>URL de redirection:</UIFCCRedirectPathFormStringInput>
       <UIFCCActionField>Actions</UIFCCActionField>
       <UIFCCActionList/>
     </label>
@@ -88,8 +88,8 @@
 
   <UIWorkspaceList>
     <label>
-      <workspaceName>Espace de stockage:</workspaceName>
-      <rootNodePath>Chemin d'accès racine:</rootNodePath>
+      <workspaceName>Espace de Stockage</workspaceName>
+      <rootNodePath>Racine de l'arborescence</rootNodePath>
       <rootNodeInfo/>
     </label>
   </UIWorkspaceList>
