@@ -48,6 +48,8 @@ import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.listener.ListenerService;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -63,6 +65,9 @@ import org.w3c.dom.Element;
  * Sep 4, 2009
  */
 public class FileUploadHandler {
+
+  /** Logger */  
+  private static final Log LOG = ExoLogger.getLogger(FileUploadHandler.class.getName());
 
   /** The Constant UPLOAD_ACTION. */
   public final static String UPLOAD_ACTION = "upload";
@@ -299,110 +304,115 @@ public class FileUploadHandler {
                                String siteName,
                                String userId,
                                String existenceAction) throws Exception {
-    CacheControl cacheControl = new CacheControl();
-    cacheControl.setNoCache(true);
-    UploadResource resource = uploadService.getUploadResource(uploadId);
-    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
-    if (parent == null) {
-      Document fileNotUploaded = fckMessage.createMessage(FCKMessage.FILE_NOT_UPLOADED,
-                                                          FCKMessage.ERROR,
-                                                          language,
-                                                          null);
-      return Response.ok(new DOMSource(fileNotUploaded), MediaType.TEXT_XML)
-                     .cacheControl(cacheControl)
-                     .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
-                     .build();
-    }
-    if (!FCKUtils.hasAddNodePermission(parent)) {
-      Object[] args = { parent.getPath() };
-      Document message = fckMessage.createMessage(FCKMessage.FILE_UPLOAD_RESTRICTION,
-                                                  FCKMessage.ERROR,
-                                                  language,
-                                                  args);
-      return Response.ok(new DOMSource(message), MediaType.TEXT_XML)
-                     .cacheControl(cacheControl)
-                     .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
-                     .build();
-    }
-    if ((fileName == null) || (fileName.length() == 0)) {
-      fileName = resource.getFileName();
-    }
-    //add lock token
-    if(parent.isLocked()) {
-      parent.getSession().addLockToken(LockUtil.getLockToken(parent));
-    }
-    if (parent.hasNode(fileName)) {
-//      Object args[] = { fileName, parent.getPath() };
-//      Document fileExisted = fckMessage.createMessage(FCKMessage.FILE_EXISTED,
-//                                                      FCKMessage.ERROR,
-//                                                      language,
-//                                                      args);
-//      return Response.ok(new DOMSource(fileExisted), MediaType.TEXT_XML)
-//                     .cacheControl(cacheControl)
-//                     .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
-//                     .build();
-      if (REPLACE.equals(existenceAction)) {
-        //Broadcast the event when user move node to Trash
-        ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
-        listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, parent, parent.getNode(fileName));
-        parent.getNode(fileName).remove();
-        parent.save();        
+    try {
+      CacheControl cacheControl = new CacheControl();
+      cacheControl.setNoCache(true);
+      UploadResource resource = uploadService.getUploadResource(uploadId);
+      DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+      if (parent == null) {
+        Document fileNotUploaded = fckMessage.createMessage(FCKMessage.FILE_NOT_UPLOADED,
+                                                            FCKMessage.ERROR,
+                                                            language,
+                                                            null);
+        return Response.ok(new DOMSource(fileNotUploaded), MediaType.TEXT_XML)
+                       .cacheControl(cacheControl)
+                       .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                       .build();
       }
+      if (!FCKUtils.hasAddNodePermission(parent)) {
+        Object[] args = { parent.getPath() };
+        Document message = fckMessage.createMessage(FCKMessage.FILE_UPLOAD_RESTRICTION,
+                                                    FCKMessage.ERROR,
+                                                    language,
+                                                    args);
+        return Response.ok(new DOMSource(message), MediaType.TEXT_XML)
+                       .cacheControl(cacheControl)
+                       .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                       .build();
+      }
+      if ((fileName == null) || (fileName.length() == 0)) {
+        fileName = resource.getFileName();
+      }
+      //add lock token
+      if(parent.isLocked()) {
+        parent.getSession().addLockToken(LockUtil.getLockToken(parent));
+      }
+      if (parent.hasNode(fileName)) {
+  //      Object args[] = { fileName, parent.getPath() };
+  //      Document fileExisted = fckMessage.createMessage(FCKMessage.FILE_EXISTED,
+  //                                                      FCKMessage.ERROR,
+  //                                                      language,
+  //                                                      args);
+  //      return Response.ok(new DOMSource(fileExisted), MediaType.TEXT_XML)
+  //                     .cacheControl(cacheControl)
+  //                     .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+  //                     .build();
+        if (REPLACE.equals(existenceAction)) {
+          //Broadcast the event when user move node to Trash
+          ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
+          listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, parent, parent.getNode(fileName));
+          parent.getNode(fileName).remove();
+          parent.save();        
+        }
+      }
+      String location = resource.getStoreLocation();
+      //save node with name=fileName
+      Node file = null;
+      boolean fileCreated = false;
+      fileName = Text.escapeIllegalJcrChars(fileName);
+      String nodeName = fileName;
+      int count = 0;
+      do {
+        try {
+          file = parent.addNode(nodeName,FCKUtils.NT_FILE);
+          fileCreated = true;
+        } catch (ItemExistsException e) {//sameNameSibling is not allowed
+          nodeName = increaseName(fileName, ++count);
+        }      
+      } while (!fileCreated);
+      //--------------------------------------------------------
+      if(!file.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
+      	file.addMixin(NodetypeConstant.MIX_REFERENCEABLE);
+      }
+      
+      if(!file.isNodeType(NodetypeConstant.MIX_COMMENTABLE))
+      	file.addMixin(NodetypeConstant.MIX_COMMENTABLE);
+      
+      if(!file.isNodeType(NodetypeConstant.MIX_VOTABLE))
+      	file.addMixin(NodetypeConstant.MIX_VOTABLE);
+      
+      if(!file.isNodeType(NodetypeConstant.MIX_I18N))
+      	file.addMixin(NodetypeConstant.MIX_I18N);
+      
+      if(!file.hasProperty(NodetypeConstant.EXO_TITLE)) {
+      	file.setProperty(NodetypeConstant.EXO_TITLE, file.getName());
+      }
+      Node jcrContent = file.addNode("jcr:content","nt:resource");
+      //MimeTypeResolver mimeTypeResolver = new MimeTypeResolver();
+      DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();
+      String mimetype = mimeTypeResolver.getMimeType(resource.getFileName());
+      jcrContent.setProperty("jcr:data",new BufferedInputStream(new FileInputStream(new File(location))));
+      jcrContent.setProperty("jcr:lastModified",new GregorianCalendar());
+      jcrContent.setProperty("jcr:mimeType",mimetype);
+      
+      parent.getSession().refresh(true); // Make refreshing data
+      uploadService.removeUploadResource(uploadId);
+      uploadIdTimeMap.remove(uploadId);
+      WCMPublicationService wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);    
+      wcmPublicationService.updateLifecyleOnChangeContent(file, siteName, userId);
+     
+      if (activityService.isBroadcastNTFileEvents(file)) {
+        listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, file);
+      }
+      file.getSession().save();
+      return Response.ok(createDOMResponse("Result", mimetype), MediaType.TEXT_XML)
+          .cacheControl(cacheControl)
+          .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+          .build();
+    } catch (Exception exc) {
+      LOG.error(exc.getMessage(), exc);
+      return Response.serverError().entity(exc.getMessage()).build();
     }
-    String location = resource.getStoreLocation();
-    //save node with name=fileName
-    Node file = null;
-    boolean fileCreated = false;
-    fileName = Text.escapeIllegalJcrChars(fileName);
-    String nodeName = fileName;
-    int count = 0;
-    do {
-      try {
-        file = parent.addNode(nodeName,FCKUtils.NT_FILE);
-        fileCreated = true;
-      } catch (ItemExistsException e) {//sameNameSibling is not allowed
-        nodeName = increaseName(fileName, ++count);
-      }      
-    } while (!fileCreated);
-    //--------------------------------------------------------
-    if(!file.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
-    	file.addMixin(NodetypeConstant.MIX_REFERENCEABLE);
-    }
-    
-    if(!file.isNodeType(NodetypeConstant.MIX_COMMENTABLE))
-    	file.addMixin(NodetypeConstant.MIX_COMMENTABLE);
-    
-    if(!file.isNodeType(NodetypeConstant.MIX_VOTABLE))
-    	file.addMixin(NodetypeConstant.MIX_VOTABLE);
-    
-    if(!file.isNodeType(NodetypeConstant.MIX_I18N))
-    	file.addMixin(NodetypeConstant.MIX_I18N);
-    
-    if(!file.hasProperty(NodetypeConstant.EXO_TITLE)) {
-    	file.setProperty(NodetypeConstant.EXO_TITLE, file.getName());
-    }
-    Node jcrContent = file.addNode("jcr:content","nt:resource");
-    //MimeTypeResolver mimeTypeResolver = new MimeTypeResolver();
-    DMSMimeTypeResolver mimeTypeResolver = DMSMimeTypeResolver.getInstance();
-    String mimetype = mimeTypeResolver.getMimeType(resource.getFileName());
-    jcrContent.setProperty("jcr:data",new BufferedInputStream(new FileInputStream(new File(location))));
-    jcrContent.setProperty("jcr:lastModified",new GregorianCalendar());
-    jcrContent.setProperty("jcr:mimeType",mimetype);
-    
-    parent.getSession().refresh(true); // Make refreshing data
-    uploadService.removeUploadResource(uploadId);
-    uploadIdTimeMap.remove(uploadId);
-    WCMPublicationService wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);    
-    wcmPublicationService.updateLifecyleOnChangeContent(file, siteName, userId);
-   
-    if (activityService.isBroadcastNTFileEvents(file)) {
-      listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, file);
-    }
-    file.getSession().save();
-    return Response.ok(createDOMResponse("Result", mimetype), MediaType.TEXT_XML)
-                   .cacheControl(cacheControl)
-                   .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
-                   .build();
   }
   
   public boolean isDocumentNodeType(Node node) throws Exception {
