@@ -102,6 +102,7 @@ public class UIDriveManager extends UIAbstractManager {
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, UIDriveForm.POPUP_NODETYPE_SELECTOR);
     uiPopup.setShowMask(true);
     uiPopup.setWindowSize(580, 300);
+    uiPopup.setResizable(true);
     UINodeTypeSelector uiNodeTypeSelector =
       createUIComponent(UINodeTypeSelector.class, null, null) ;
     uiNodeTypeSelector.setRepositoryName(getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository());
