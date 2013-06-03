@@ -240,8 +240,12 @@
                     break;
             
                 case 'mouseover':
-                  var item = document.getElementById(this.domElement.id);
-                  item.className = 'menuItemSelected';
+                  if(gj("#ECMContextMenu .uiIconEcmsCopyUrlToClipboard").is(":visible")) {
+                    var item = document.getElementById(this.domElement.id);
+                    item.className = 'menuItemSelected';
+                  } else {
+                    this.destroy();
+                  }
                   break;
             
                 case 'mouseout':
