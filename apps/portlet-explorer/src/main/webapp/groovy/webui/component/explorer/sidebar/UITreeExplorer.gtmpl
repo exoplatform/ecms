@@ -214,9 +214,9 @@
 </div>
 
  
-	<h5 class="title" style="cursor: pointer;" rel="tooltip" data-placement="bottom" title="$label" onclick="<%=uicomponent.event("Expand",treeNodeRoot.getPath())%>" $contextMenuEvent>
+	<h6 class="title" style="cursor: pointer;" rel="tooltip" data-placement="bottom" title="$label" onclick="<%=uicomponent.event("Expand",treeNodeRoot.getPath())%>" $contextMenuEvent>
 		<i class="uiIconEcmsHome"></i> ${label}
-	</h5>			  	
+	</h6>			  	
 			  	
 
   <div class="uiContentBox">
