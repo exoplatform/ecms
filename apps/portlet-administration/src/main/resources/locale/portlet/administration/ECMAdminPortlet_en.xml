@@ -413,7 +413,7 @@
       <viewSideBar>Show Sidebar:</viewSideBar>
       <permissions>Permissions:</permissions>
       <showHiddenNode>Show Hidden Nodes:</showHiddenNode>
-      <allowCreateFolder>Allow Folder Creation:</allowCreateFolder>
+      <allowCreateFolders>Allow Folder Creation:</allowCreateFolders>
       <Admin>Admin:</Admin>
       <Categories>Categories:</Categories>
       <Icons>Icons:</Icons>
