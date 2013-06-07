@@ -19,9 +19,7 @@ package org.exoplatform.clouddrive.ecms.filters;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
-import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveService;
-import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -53,8 +51,5 @@ public class CloudDriveFiler extends AbstractCloudDriveNodeFilter {
     Node actualNode = (Node) finder.getItem(node.getSession(), node.getPath(), true);
 
     return driveService.isDrive(actualNode);
-    
-    // TODO cleanup
-    // return node.isNodeType(JCRLocalCloudDrive.ECD_CLOUDDRIVE);
   }
 }

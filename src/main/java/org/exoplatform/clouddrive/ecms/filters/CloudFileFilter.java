@@ -23,17 +23,12 @@ import javax.jcr.RepositoryException;
 
 import org.exoplatform.clouddrive.CloudDrive;
 import org.exoplatform.clouddrive.CloudDriveService;
-import org.exoplatform.clouddrive.CloudFile;
 import org.exoplatform.clouddrive.DriveRemovedException;
-import org.exoplatform.clouddrive.NotCloudFileException;
-import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.services.cms.link.NodeFinder;
-import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.application.WebuiRequestContext;
-
 
 /**
  * Filter for cloud files.
@@ -57,6 +52,7 @@ public class CloudFileFilter extends AbstractCloudDriveNodeFilter {
     if (drive != null) {
       try {
         if (drive.hasFile(actualNode.getPath())) {
+          // attribute used in CloudFileViewer.gtmpl
           WebuiRequestContext.getCurrentInstance().setAttribute(CloudDrive.class, drive);
           return true;
         }
@@ -65,28 +61,6 @@ public class CloudFileFilter extends AbstractCloudDriveNodeFilter {
       }
     }
 
-    return false;
-
-    // TODO cleanup
-    // boolean accepted = isCloudFile(node);
-    // if (!accepted && node.isNodeType("exo:symlink")) {
-    // // if it's symlink, check referenced node
-    // Node ref = ((ExtendedSession) node.getSession()).getNodeByIdentifier(node.getProperty("exo:uuid")
-    // .getString());
-    // accepted = isCloudFile(ref);
-    // }
-  }
-
-  @Deprecated
-  protected boolean isCloudFile(Node node) throws RepositoryException {
-    if (node.isNodeType(JCRLocalCloudDrive.ECD_CLOUDFILE)) {
-      return true;
-    } else if (node.isNodeType(JCRLocalCloudDrive.ECD_CLOUDFILERESOURCE)) {
-      Node parent = node.getParent();
-      if (parent.isNodeType(JCRLocalCloudDrive.ECD_CLOUDFILE)) {
-        return true;
-      }
-    }
     return false;
   }
 }

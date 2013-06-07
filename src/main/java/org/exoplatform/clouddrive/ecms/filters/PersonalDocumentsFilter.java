@@ -24,6 +24,9 @@ import javax.jcr.Node;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
 
@@ -39,11 +42,16 @@ public class PersonalDocumentsFilter implements UIExtensionFilter {
     // XXX only show in Personal Doc's root!
     String userId = Util.getPortalRequestContext().getRemoteUser();
     UIJCRExplorer uiExplorer = (UIJCRExplorer) context.get(UIJCRExplorer.class.getName());
-    String personalDrivePath = org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(uiExplorer.getDriveData()
-                                                                                                      .getHomePath(),
-                                                                                            userId);
+
+    SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
+    NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
+    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
+
+    String driveRootPath = org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(uiExplorer.getDriveData()
+                                                                                                  .getHomePath(),
+                                                                                        userId);
     Node currentNode = (Node) context.get(Node.class.getName());
-    return currentNode.getPath().equals(personalDrivePath);
+    return currentNode.getPath().equals(driveRootPath) && driveRootPath.startsWith(userNode.getPath());
   }
 
   /**
