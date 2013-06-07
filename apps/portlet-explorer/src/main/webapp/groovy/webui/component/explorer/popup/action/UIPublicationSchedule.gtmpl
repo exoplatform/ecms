@@ -4,8 +4,14 @@
 <div class="uiPublicationSchedule" id="$uiform.id">
   <span class="help-block"><%=_ctx.appRes("UIPublicationSchedule.label.introduction")%></span>
   <div class="form-inline">
-    <span class="help-inline"> <%=_ctx.appRes("UIPublicationPanel.scheduled.from")%></span><% uicomponent.renderChild(uicomponent.START_PUBLICATION); %>
-    <span class="help-inline"> <%=_ctx.appRes("UIPublicationPanel.scheduled.to")%></span><% uicomponent.renderChild(uicomponent.END_PUBLICATION); %>
+    <span class="pull-left label-title"> <%=_ctx.appRes("UIPublicationPanel.scheduled.from")%></span>
+    <div class="pull-left">
+    	<% uicomponent.renderChild(uicomponent.START_PUBLICATION); %>
+    </div>
+    <span class="pull-left label-title"> <%=_ctx.appRes("UIPublicationPanel.scheduled.to")%></span>
+    <div class="pull-left">
+    	<% uicomponent.renderChild(uicomponent.END_PUBLICATION); %>
+    </div>
     <%
       String saveLabel = _ctx.appRes(uiform.getName() + ".action.Save");
       String saveLink = uiform.event("Save");
