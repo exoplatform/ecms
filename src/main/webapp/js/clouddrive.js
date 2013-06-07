@@ -464,7 +464,7 @@
 
 				// start work here (registered done() will be called)
 				if (updateProvider) {
-					// previous attempt tells us we have t oupdate access keys - reconnect
+					// previous attempt tells us we have to update access keys - reconnect
 					var connect = connectDrive(updateProvider.id, updateProvider.authUrl);
 					connect.done(function(state) {
 						initiator.resolve();
@@ -498,7 +498,7 @@
 				};
 			}
 			
-			utils.log(providerId + "(" + authUrl + ") to " + contextNode.workspace + "@" + contextNode.path);
+			//utils.log(providerId + "(" + authUrl + ") to " + contextNode.workspace + "@" + contextNode.path);
 			
 			// reset previous drive context
 			contextDrive = null;
@@ -650,7 +650,7 @@
 	 * WebUI integration.
 	 */
 	function CloudDriveUI() {
-		var NOTICE_WIDTH = "400px"
+		var NOTICE_WIDTH = "380px"
 		
 		var MENU_OPEN_FILE = "OpenCloudFile";
 		var MENU_REFRESH_DRIVE = "RefreshCloudDrive";
@@ -784,7 +784,6 @@
 		};
 
 		var initDocument = function() {
-			utils.log("initDocument");
 			var drive = cloudDrive.getContextDrive();
 			if (drive) {
 				// Fix Action Bar items 
@@ -995,7 +994,8 @@
 				opacity : .75,
 				shadow : false,
 				nonblock : true,
-				nonblock_opacity : .25
+				nonblock_opacity : .25,
+				width : NOTICE_WIDTH
 			});
 
 			// show close buton in 1min
@@ -1293,18 +1293,18 @@
 			if (typeof uiFileView.UIFileView != "undefined" && typeof uiFileView.UIFileView.__cw_overridden == "undefined") {
 				uiFileView.UIFileView.clickRightMouse_orig = uiFileView.UIFileView.clickRightMouse;
 				uiFileView.UIFileView.clickRightMouse = function (event, elemt, menuId, objId, whiteList, opt) {
-					utils.log("UIFileView.clickRightMouse: event=" + event +
+					/*utils.log("UIFileView.clickRightMouse: event=" + event +
 							", elemt=" + elemt +
 							", menuId=" + menuId +
 							", objId=" + objId +
 							", whiteList=" + whiteList +
-							", opt=" + opt);
+							", opt=" + opt);*/
 					uiFileView.UIFileView.clickRightMouse_orig(event, elemt, menuId, objId, filterActions(objId, elemt, whiteList), opt);					
 				};
 				
 				uiFileView.UIFileView.showItemContextMenu_orig = uiFileView.UIFileView.showItemContextMenu;
 				uiFileView.UIFileView.showItemContextMenu = function (event, element) {
-					utils.log("UIFileView.showItemContextMenu: " + event + " " + element);
+					//utils.log("UIFileView.showItemContextMenu: " + event + " " + element);
 					// run original
 					uiFileView.UIFileView.showItemContextMenu_orig(event, element);				
 					
