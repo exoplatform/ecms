@@ -258,6 +258,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
             // given user already connected to another node (possible if node was renamed in JCR), we cannot
             // proceed
             // TODO should we point an user email in the message?
+            LOG.warn("User " + user.getEmail() + " already connected to another node " + localPath);
             throw new UserAlreadyConnectedException("User " + user.getEmail()
                 + " already connected to another node " + localPath);
           }
@@ -265,8 +266,9 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
           // removed, so can create new one
         } catch (AccessDeniedException e) {
           // this email already connected in current repository
+          LOG.warn("User " + user.getEmail() + " already connected to another node", e);
           throw new UserAlreadyConnectedException("User " + user.getEmail()
-              + " already connected to another node " + local);
+              + " already connected to another node.");
         }
       } // else, no drive cached
     } // else, no drives in this repository

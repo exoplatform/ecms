@@ -308,10 +308,11 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       public void onEvent(EventIterator events) {
         String userId = null; // for error messages
         try {
+          Session session = systemSession();
           Node driveRoot;
           try {
-            driveRoot = rootNode();
-          } catch (DriveRemovedException e) {
+            driveRoot = session.getNodeByUUID(rootUUID);
+          } catch (ItemNotFoundException e) {
             // already removed
             LOG.warn("Cloud Drive '" + title() + "' node already removed directly from JCR: "
                 + e.getMessage());
@@ -345,13 +346,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       public void onEvent(EventIterator events) {
         String userId = null; // for error messages
         try {
+          Session session = systemSession();
           Node driveRoot;
           try {
-            driveRoot = rootNode();
-          } catch (DriveRemovedException e) {
+            driveRoot = session.getNodeByUUID(rootUUID);
+          } catch (ItemNotFoundException e) {
             // node already deleted
             LOG.warn("Cloud Drive " + title() + " node already removed directly from JCR: " + e.getMessage());
-            finishRemove(session(), initialRootPath);
+            finishRemove(session, initialRootPath);
             return;
           }
 
@@ -620,7 +622,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       // set correct user's ConversationState
       ConversationState.setCurrent(conversation);
       // set correct SessionProvider
-      SessionProvider sp =  new SessionProvider(conversation);
+      SessionProvider sp = new SessionProvider(conversation);
       sessionProviders.setSessionProvider(null, sp);
 
       try {
@@ -648,7 +650,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     /**
      * Target JCR node. Will be initialized in exec() method (in actual runner thread).
      */
-    protected Node             driveRoot;
+    protected Node                   driveRoot;
 
     /**
      * Progress indicator in percents.
@@ -677,7 +679,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
      * @throws DriveRemovedException
      */
     protected AbstractCommand() throws RepositoryException, DriveRemovedException {
-      
+
     }
 
     /**
@@ -1496,6 +1498,14 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     }
   }
 
+  protected Session systemSession() throws LoginException, NoSuchWorkspaceException, RepositoryException {
+    SessionProvider ssp = sessionProviders.getSystemSessionProvider(null);
+    if (ssp != null) {
+      return ssp.getSession(rootWorkspace, repository);
+    }
+    throw new RepositoryException("Cannot get session provider.");
+  }
+
   protected Session session() throws LoginException, NoSuchWorkspaceException, RepositoryException {
     SessionProvider sp = sessionProviders.getSessionProvider(null);
     if (sp != null) {
@@ -1973,11 +1983,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
    * @return String - JCR compatible name of local file
    */
   protected String cleanName(String str) {
-    // TODO cleanup
     str = accentsConverter.transliterate(str.trim());
-    // LOG.info("str: " + str);
-    // the character ? seems to not be changed to d by the transliterate
-    // function
+    // the character ? seems to not be changed to d by the transliterate function
     StringBuffer cleanedStr = new StringBuffer(str.trim());
     // delete special character
     if (cleanedStr.length() == 1) {
@@ -1992,34 +1999,19 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     } else {
       for (int i = 0; i < cleanedStr.length(); i++) {
         char c = cleanedStr.charAt(i);
-        // if (c == ' ') {
-        // if (i > 0 && cleanedStr.charAt(i - 1) == '-') {
-        // cleanedStr.deleteCharAt(i--);
-        // } else {
-        // c = '-';
-        // cleanedStr.setCharAt(i, c);
-        // }
-        // continue;
-        // }
-        // if (i > 0 && !(Character.isLetterOrDigit(c) || c == '-')) {
         if (c == '/' || c == ':' || c == '[' || c == ']' || c == '*' || c == '\'' || c == '"' || c == '|') {
           cleanedStr.deleteCharAt(i);
           cleanedStr.insert(i, '_');
-          continue;
         } else if (!(Character.isLetterOrDigit(c) || c == ' ' || c == '.' || c == '-' || c == '_')) {
           cleanedStr.deleteCharAt(i--);
-          continue;
+        } else if (Character.isWhitespace(c)) {
+          // replace all whitepaces with simple space
+          cleanedStr.deleteCharAt(i);
+          cleanedStr.insert(i, ' ');
         }
-        // if (i > 0 && c == '-' && cleanedStr.charAt(i - 1) == '-')
-        // cleanedStr.deleteCharAt(i--);
       }
     }
-    // String clean = cleanedStr.toString().toLowerCase();
-    // String clean = cleanedStr.toString();
-    // if (clean.endsWith("-")) {
-    // clean = clean.substring(0, clean.length() - 1);
-    // }
-    return cleanedStr.toString();
+    return cleanedStr.toString().trim(); // finally trim also 
   }
 
   /**
