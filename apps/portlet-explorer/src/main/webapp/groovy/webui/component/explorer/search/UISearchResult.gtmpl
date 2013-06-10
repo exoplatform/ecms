@@ -111,7 +111,6 @@
         else rowClass =  "OddRow";
         even = !even;
         String excerpt = row.getRepExcerpt();
-        excerpt = StringEscapeUtils.unescapeHtml(excerpt);
         String score = row.getJcrScore();
             if (node != null) {
       %>
