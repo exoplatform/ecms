@@ -209,7 +209,9 @@
 											  } else if(formInput.getName().equals(uicomponent.ADVANCED_TAB)) {
 											  %>
 												<div class="form-horizontal" >  
-													<h6 class="clearfix"> <a class="actionIcon pull-right" title="<%= _ctx.appRes("UICLVConfig.help.ContextualHelp") %> <%= _ctx.appRes("UICLVConfig.help.ParameterHelp") %> <%= _ctx.appRes("UICLVConfig.help.ContentByQueryHelp") %> <%= _ctx.appRes("UICLVConfig.help.ShowDetailInPageHelp") %>" data-placement="left" rel="tooltip"><i class="uiIconQuestion uiIconLightGray" id="" ></i></a><%=uicomponent.getLabel(uicomponent.DYNAMIC_NAVIGATION_LABEL) %></h6>
+													<h6 class="clearfix"> 
+														<a class="actionIcon pull-right" title="<%= _ctx.appRes("UICLVConfig.help.ContextualHelp") %>" data-placement="left" rel="tooltip"><i class="uiIconQuestion uiIconLightGray" id="" ></i></a><%=uicomponent.getLabel(uicomponent.DYNAMIC_NAVIGATION_LABEL) %>
+													</h6>
 													<div class="control-group">  
 													  <label class="control-label"><%=uicomponent.getLabel(uicomponent.CONTEXTUAL_FOLDER_RADIOBOX_INPUT) %>: </label>
 													  <div class="controls">
@@ -253,7 +255,7 @@
 														<% uiform.renderField(uicomponent.SHOW_SCV_WITH_STRING_INPUT) %>
 													  </div>
 													</div>
-													<h6 class="clearfix"> <a class="actionIcon pull-right" title="<%= _ctx.appRes("UICLVConfig.help.ContentsVisibilityHelp") %>" data-placement="left" rel="tooltip"><i class="uiIconQuestion uiIconLightGray" id="" ></i></a><%=uicomponent.getLabel(uicomponent.CACHE_MANAGEMENT_LABEL)%></h6>
+													<h6 class="clearfix"> <a class="actionIcon pull-right" title='<%= _ctx.appRes("UICLVConfig.help.ContentsVisibilityHelp") %>' data-placement="left" rel="tooltip"><i class="uiIconQuestion uiIconLightGray" id="" ></i></a><%=uicomponent.getLabel(uicomponent.CACHE_MANAGEMENT_LABEL)%></h6>
 													<div class="control-group">                  
 													  <% uiform.renderField(uicomponent.CACHE_ENABLE_RADIOBOX_INPUT) %>
 													</div>
