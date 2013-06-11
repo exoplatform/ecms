@@ -25,6 +25,7 @@ import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.nodetype.PropertyDefinition;
 import javax.jcr.version.OnParentVersionAction;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.scripts.impl.ScriptServiceImpl;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -101,8 +102,11 @@ public class UIActionTypeForm extends UIForm {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>() ;
     ScriptServiceImpl scriptService = WCMCoreUtils.getService(ScriptServiceImpl.class);
     List<Node> scriptOptions = scriptService.getECMActionScripts(WCMCoreUtils.getUserSessionProvider());
+    String baseScriptPath = scriptService.getBaseScriptPath();
     for(Node script : scriptOptions) {
-      options.add(new SelectItemOption<String>(script.getName(), script.getPath())) ;
+      SelectItemOption<String> itemOption =
+          new SelectItemOption<String>(script.getName(), StringUtils.substringAfter(script.getPath(), baseScriptPath + "/"));
+      options.add(itemOption);
     }
     return options ;
   }
