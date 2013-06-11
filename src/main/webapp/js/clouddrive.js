@@ -147,7 +147,6 @@
 
 		var connectInit = function(providerId, callbacks) {
 			var request = $.ajax({
-				// async : false,
 				type : "GET",
 				url : prefixUrl + "/portal/rest/clouddrive/connect/init/" + providerId,
 				dataType : "json"
@@ -498,8 +497,6 @@
 				};
 			}
 
-			// utils.log(providerId + "(" + authUrl + ") to " + contextNode.workspace + "@" + contextNode.path);
-
 			// reset previous drive context
 			contextDrive = null;
 			excluded = {};
@@ -559,7 +556,6 @@
 					var file = contextDrive.files[nodePath];
 					if (!file) {
 						// file not cached, get the file from the server and cache it locally
-						// utils.log(">>> Init context node, get file");
 						getFile(nodeWorkspace, nodePath, {
 							fail : function(err, status) {
 								utils.log("ERROR: Cloud Drive file " + nodeWorkspace + ":" + nodePath + " cannot be read: " + err + " (" + status + ")");
@@ -569,14 +565,12 @@
 								if (status != 204) {
 									contextDrive.files[nodePath] = file;
 								} else {
-									// utils.log("Not a cloud file: " + nodePath); // it's not a Cloud Drive file
 									addExcluded(nodePath);
 								}
 							}
 						});
 					}
 				} else {
-					// utils.log(">>> Init context node, get drive");
 					// load all files related to this drive
 					getDrive(nodeWorkspace, nodePath, {
 						fail : function(err, status) {
@@ -736,10 +730,6 @@
 					$(this).text(text);
 					$(this).prepend(i);
 				});
-				// TODO Set visibility of only allowed common ECMS actions
-				// $("#ECMContextMenu li.menuItem a i").not(allowed).each(function() {
-				// $(this).parent().css("display", "none");
-				// });
 
 				if (cloudDrive.isContextSymlink()) {
 					allowedItems = allowedItems.concat(ALLOWED_SYMLINK_MENU_ACTIONS);
@@ -762,14 +752,9 @@
 							$(this).parent().attr("onclick", "eXo.ecm.WCMUtils.hideContextMenu(this);eXo.ecm.UIFileView.clearCheckboxes();");
 						});
 						$(this).find("i.uiIconEcmsViewDocument").each(function() {
-						// XXX using ECMS native action - open in new window
-						// $(this).parent().attr("href", link);
-						// $(this).parent().attr("onclick", "eXo.ecm.WCMUtils.hideContextMenu(this);eXo.ecm.UIFileView.clearCheckboxes();");
 						});
 						$(this).find("i.uiIconEcmsCopyUrlToClipboard").each(function() {
 							$(this).parent().attr("path", link);
-							// TODO $(this).parent().attr("onclick", "eXo.ecm.ECMUtils.pushToClipboard(event,'" + link +
-							// "');eXo.ecm.UIFileView.clearCheckboxes();");
 							$(this).parent().click(function() {
 								eXo.ecm.ECMUtils.pushToClipboard(event, link); // TODO use require
 								uiFileView.UIFileView.clearCheckboxes();
@@ -862,15 +847,6 @@
 							titleText.append(vswitch);
 							viewer.find("div").show();
 						} else {
-							// TODO init simple view (p>a)
-							// var vp = $(viewer).find("p");
-							// $(vp).find("a").each(function() {
-							// $(this).attr("title", openOnProvider);
-							// $(this).attr("href", file.link);
-							// $(this).text(file.title);
-							// });
-							// $(vp).show();
-							// init preview/edit view
 							viewer.find("iframe").attr("src", file.link);
 							vswitch.remove();
 							viewer.find("div").show();
@@ -885,7 +861,6 @@
 		 * Find link to open Personal Documents view in WCM. Can return nothing if current page doesn't contain such element.
 		 */
 		var personalDocumentsLink = function() {
-			// TODO var link = $(".BarContent div[title='Personal Documents']");
 			var link = $("a.refreshIcon");
 			if (link.size() > 0) {
 				return link.attr("href");
@@ -1128,9 +1103,6 @@
 						var details;
 						if (files + folders > 0) {
 							// Don't refresh at all, as user can change the view. Istead we show a link on the message.
-							// TODO cloudDriveUI.openDrive(drive.title);
-							// TODO cloudDriveUI.refreshDocuments();
-
 							var details;
 							if (files > 0) {
 								details = files + " file" + (files > 1 ? "s" : "");
@@ -1227,14 +1199,13 @@
 			// init doc view (list of file view)
 			initDocument();
 
-			// init on each document reload (incl. ajax calls)
+			// TODO PLF4 init on each document reload (incl. ajax calls)
 			// XXX using deprecated DOMNodeInserted and the explorer panes selector
 			// choose better selector to get less events here for DOM, now it's tens of events
 			// reloading during the navigation
 			var ieVersion = getIEVersion();
 			var domEvent = ieVersion > 0 && ieVersion < 9.0 ? "onpropertychange" : "DOMNodeInserted"; // DOMSubtreeModified
 			$(".PORTLET-FRAGMENT").on(domEvent, ".LeftCotainer, .RightCotainer", function(event) { // #UIJCRExplorerPortlet
-				// utils.log("DOMSubtreeModified " + event.target); // DOMSubtreeModified
 				if (!initLock) {
 					initLock = setTimeout(function() {
 						utils.log(">>>>>>>>> initDocument");
