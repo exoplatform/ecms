@@ -4,15 +4,17 @@
 	width: 16px !important;
 }
 
+.uiIconEcmsOpenCloudFile,.uiIconEcmsRefreshCloudDrive {
+	background: url("icons/googledrive-gray-16x16.png") no-repeat left center transparent !important;
+}
+
 /*************************** NodeType Icon ***********************/
 /*https://ssl.gstatic.com/docs/doclist/images/icon_10_generic_xl128.png*/
-/*.application_vnd_google-apps_presentation16x16Icon,.application_vnd_ms-powerpoint16x16Icon {*/
-.uiIcon24x24applicationvndgoogle-appspresentation,.uiIcon16x16applicationvndgoogle-appspresentation/*,.uiIcon24x24applicationvndms-powerpoint,.uiIcon16x16applicationvndms-powerpoint*/ {
+.uiIcon24x24applicationvndgoogle-appspresentation,.uiIcon16x16applicationvndgoogle-appspresentation {
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_11_presentation_list.png') no-repeat left center !important; /* orientation=lt */
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_11_presentation_list.png') no-repeat right center !important; /* orientation=rt */
 }
 
-/*.application_vnd_google-apps_presentation48x48Icon,.application_vnd_ms-powerpoint48x48Icon {*/
 .uiIcon64x64applicationvndgoogle-appspresentation,.uiIcon64x64applicationvndms-powerpoint {
 	width: auto;
 	height: 128px;
@@ -42,14 +44,12 @@
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_11_document_xl128.png') no-repeat right center !important; /* orientation=rt */
 }
 
-/*.application_vnd_google-apps_photo16x16Icon {*/
-.uiIcon24x24applicationvndgoogle-appsphoto,.uiIcon16x16applicationvndgoogle-appsphoto/*,.uiIcon24x24imagepng,.uiIcon16x16imagepng,.uiIcon24x24imagejpeg,.uiIcon16x16imagejpeg,.uiIcon24x24imagegif,.uiIcon16x16imagegif*/ {
+.uiIcon24x24applicationvndgoogle-appsphoto,.uiIcon16x16applicationvndgoogle-appsphoto {
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_11_image_list.png') no-repeat left center !important; /* orientation=lt */
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_11_image_list.png') no-repeat right center !important; /* orientation=rt */
 }
 
-/*.application_vnd_google-apps_photo48x48Icon {*/
-.uiIcon64x64applicationvndgoogle-appsphoto/*,.uiIcon64x64imagepng,.uiIcon64x64imagejpeg,.uiIcon64x64imagegif*/ {
+.uiIcon64x64applicationvndgoogle-appsphoto {
 	width: auto;
 	height: 128px;
 	-webkit-transform: scale(0.5);
@@ -61,13 +61,11 @@
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_11_image_xl128.png') no-repeat right center !important; /* orientation=rt */
 }
 
-/*.application_vnd_google-apps_script16x16Icon {*/
 .uiIcon24x24applicationvndgoogle-appsscript,.uiIcon16x16applicationvndgoogle-appsscript {
 	background: url('icons/js.gif') no-repeat left center !important; /* orientation=lt */
 	background: url('icons/js.gif') no-repeat right center !important; /* orientation=rt */
 }
 
-/*.application_vnd_google-apps_script48x48Icon {*/
 .uiIcon64x64applicationvndgoogle-appsscript {
 	width: auto;
 	height: 128px;
@@ -80,7 +78,6 @@
 	background: url('icons/js.gif') no-repeat right center !important; /* orientation=rt */
 }
 
-/*.application_vnd_google-apps_spreadsheet16x16Icon {*/
 .uiIcon24x24applicationvndgoogle-appsspreadsheet,.uiIcon16x16applicationvndgoogle-appsspreadsheet {
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_11_spreadsheet_list.png') no-repeat left center !important; /* orientation=lt */
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_11_spreadsheet_list.png') no-repeat right center !important; /* orientation=rt */
@@ -98,14 +95,12 @@
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_11_spreadsheet_xl128.png') no-repeat right center !important; /* orientation=rt */
 }
 
-/*.application_vnd_google-apps_video16x16Icon,.video_quicktime16x16Icon,.video_x-msvideo16x16Icon,.video_x-ms-wmv16x16Icon,.video_3gpp16x16Icon,.video_avi16x16Icon,.video_mpeg16x16Icon*/
-.uiIcon24x24applicationvndgoogle-appsvideo,.uiIcon16x16applicationvndgoogle-appsvideo/*,.uiIcon24x24videomp4,.uiIcon16x16videomp4,.uiIcon24x24videox-msvideo,.uiIcon16x16videox-msvideo,.video_quicktime16x16Icon,.video_x-ms-wmv16x16Icon,.video_3gpp16x16Icon,.video_avi16x16Icon,.video_mpeg16x16Icon,.QuicktimeMovieFile*/ {
+.uiIcon24x24applicationvndgoogle-appsvideo,.uiIcon16x16applicationvndgoogle-appsvideo {
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_11_video_list.png') no-repeat left center !important; /* orientation=lt */
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_11_video_list.png') no-repeat right center !important; /* orientation=rt */
 }
 
-/*.application_vnd_google-apps_video48x48Icon,.video_quicktime48x48Icon,.video_x-msvideo48x48Icon {*/
-.uiIcon64x64applicationvndgoogle-appsvideo/*,.uiIcon64x64videomp4,.uiIcon64x64videox-msvideo,.video_quicktime48x48Icon*/ {
+.uiIcon64x64applicationvndgoogle-appsvideo {
 	width: auto;
 	height: 128px;
 	-webkit-transform: scale(0.5);
@@ -117,14 +112,12 @@
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_11_video_xl128.png') no-repeat right center !important; /* orientation=rt */
 }
 
-/*.application_vnd_google-apps_audio16x16Icon,.audio_midi16x16Icon,.audio_mp316x16Icon,.audio_mpeg16x16Icon,.audio_x-wav16x16Icon {*/
-.uiIcon24x24applicationvndgoogle-appsaudio,.uiIcon16x16applicationvndgoogle-appsaudio/*,.audio_midi16x16Icon,.audio_mp316x16Icon,.audio_mpeg16x16Icon,.audio_x-wav16x16Icon*/ {
+.uiIcon24x24applicationvndgoogle-appsaudio,.uiIcon16x16applicationvndgoogle-appsaudio {
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_10_audio_list.png') no-repeat left center !important; /* orientation=lt */
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_10_audio_list.png') no-repeat right center !important; /* orientation=rt */
 }
 
-/*.application_vnd_google-apps_audio48x48Icon,.audio_midi48x48Icon,.audio_mp348x48Icon,.audio_mpeg48x48Icon,.audio_x-wav48x48Icon {*/
-.uiIcon64x64applicationvndgoogle-appsaudio /*,.audio_midi48x48Icon,.audio_mp348x48Icon,.audio_mpeg48x48Icon,.audio_x-wav48x48Icon*/ {
+.uiIcon64x64applicationvndgoogle-appsaudio {
 	width: auto;
 	height: 128px;
 	-webkit-transform: scale(0.5);
@@ -136,13 +129,11 @@
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_10_audio_xl128.png') no-repeat right center !important; /* orientation=rt */
 }
 
-/*.application_vnd_google-apps_drawing16x16Icon {*/
 .uiIcon24x24applicationvndgoogle-appsdrawing,.uiIcon16x16applicationvndgoogle-appsdrawing {
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_11_drawing_list.png') no-repeat left center !important; /* orientation=lt */
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_11_drawing_list.png') no-repeat right center !important; /* orientation=rt */
 }
 
-/*.application_vnd_google-apps_drawing48x48Icon {*/
 .uiIcon64x64applicationvndgoogle-appsdrawing {
 	width: auto;
 	height: 128px;
@@ -155,27 +146,11 @@
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_11_drawing_xl128.png') no-repeat right center !important; /* orientation=rt */
 }
 
-/*.application_vnd_ms-word16x16Icon,.application_msword16x16Icon {*/
-/*.uiIcon24x24applicationvndms-word,.uiIcon16x16applicationvndms-word,.uiIcon24x24applicationmsword,.uiIcon16x16applicationmsword { 
-	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_10_word_list.png') no-repeat left center !important;
-	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_10_word_list.png') no-repeat right center !important;
-}*/
-
-/*.application_vnd_ms-word48x48Icon,.application_msword48x48Icon {*/
-/*.uiIcon64x64applicationvndms-word,.uiIcon64x64applicationmsword {
-	width: auto;
-	height: 128px;
-	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_10_word_xl128.png') no-repeat left center !important;
-	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_10_word_xl128.png') no-repeat right center !important;
-}*/
-
-/*.application_vnd_ms-excel16x16Icon {*/
 .uiIcon24x24applicationvndms-excel,.uiIcon16x16applicationvndms-excel {
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_10_excel_list.png') no-repeat left center !important; /* orientation=lt */
 	background: url('https://ssl.gstatic.com/docs/doclist/images/icon_10_excel_list.png') no-repeat right center !important; /* orientation=rt */
 }
 
-/*.application_vnd_ms-excel48x48Icon {*/
 .uiIcon64x64applicationvndms-excel {
 	width: auto;
 	height: 128px;
@@ -285,9 +260,4 @@
 
 .picon.picon-process-stop {
 	background-image: url("icons/oxygen/16/actions/process-stop.png")
-}
-
-/* .FileContent .ActionButton */ 
-.uiIconEcmsOpenCloudFile,.uiIconEcmsRefreshCloudDrive {
-	background: url("icons/googledrive-gray-16x16.png") no-repeat left center transparent !important;
 }
