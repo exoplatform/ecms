@@ -54,9 +54,11 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
 
   public static final String             CONFIG_CONNECTOR_HOST            = "connector-host";
 
-  public static final int                PROVIDER_REQUEST_ATTEMPTS        = 3;
+  // CLDINT-1051 increased from 3 to 5
+  public static final int                PROVIDER_REQUEST_ATTEMPTS        = 5; 
 
-  public static final long               PROVIDER_REQUEST_ATTEMPT_TIMEOUT = 5000;                                          // 5sec
+  // CLDINT-1051 increased from 5s tp 10s
+  public static final long               PROVIDER_REQUEST_ATTEMPT_TIMEOUT = 10000;                                          
 
   protected static final Log             LOG                              = ExoLogger.getLogger(CloudDriveConnector.class);
 
