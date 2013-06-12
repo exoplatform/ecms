@@ -86,6 +86,12 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
                           String newState,
                           HashMap<String, String> context) throws IncorrectStateUpdateLifecycleException,
                                                                                       Exception {
+    // Add mixin mix:versionable
+    if (node.canAddMixin(Utils.MIX_VERSIONABLE)) {
+      node.addMixin(Utils.MIX_VERSIONABLE);
+      node.save();
+    }
+    
     String versionName = context.get(AuthoringPublicationConstant.CURRENT_REVISION_NAME);
     String logItemName = versionName;
     String userId = "";
@@ -412,7 +418,7 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
     String nodetypes = System.getProperty("wcm.nodetypes.ignoreversion");
     if(nodetypes == null || nodetypes.length() == 0)
        nodetypes = "exo:webContent";
-    if(Utils.isMakeVersionable(node, nodetypes.split(","))) {
+    if(!Utils.NT_FILE.equals(node.getPrimaryNodeType().getName()) || Utils.isMakeVersionable(node, nodetypes.split(","))) {
       if (!node.isNodeType(AuthoringPublicationConstant.MIX_VERSIONABLE)) {
         node.addMixin(AuthoringPublicationConstant.MIX_VERSIONABLE);
       }
