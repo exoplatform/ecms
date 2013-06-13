@@ -178,6 +178,8 @@
       
       // Init feature Copy URL to Clipboard
       eXo.ecm.ECMUtils.initClipboard();
+      
+      event.preventDefault();
     };
 
     ListView.prototype.mouseUpTree = function(evt) {
