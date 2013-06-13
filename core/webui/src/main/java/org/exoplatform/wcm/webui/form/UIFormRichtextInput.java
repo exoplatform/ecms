@@ -112,7 +112,7 @@ public class UIFormRichtextInput extends UIFormInputBase<String> {
     for (SkinConfig portalSkin : portalSkins) {
       contentsCss.append("'").append(portalSkin.createURL(Util.getPortalRequestContext().getControllerContext())).append("',");
     }
-    contentsCss.delete(contentsCss.length() - 1, contentsCss.length());
+    contentsCss.append("'/eXoWCMResources/ckeditor/contents.css'");
     contentsCss.append("]");
 
     StringBuffer buffer = new StringBuffer();
@@ -127,7 +127,7 @@ public class UIFormRichtextInput extends UIFormInputBase<String> {
     buffer.append("<script type='text/javascript'>\n");
     buffer.append("    require(['/eXoWCMResources/ckeditor/ckeditor.js'], function() {");
     buffer.append("  //<![CDATA[\n");
-    buffer.append("    var instances = CKEDITOR.instances['" + name + "']; if (instances) instances.destroy(true);\n");
+    buffer.append("    var instance = CKEDITOR.instances['" + name + "']; if (instance) { CKEDITOR.remove(instance); instance = null;}\n");
     buffer.append("    CKEDITOR.replace('" + name + "', {toolbar:'" + toolbar + "', height:"
     		+ height + ", contentsCss:" + contentsCss + ", enterMode:" + enterMode + ", shiftEnterMode:" + enterMode + "});\n");
     buffer.append("       });");

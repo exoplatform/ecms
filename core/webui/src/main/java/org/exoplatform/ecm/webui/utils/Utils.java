@@ -772,7 +772,7 @@ public class Utils {
     for (SkinConfig portalSkin : portalSkins) {
       contentsCss.append("'").append(portalSkin.createURL(Util.getPortalRequestContext().getControllerContext())).append("',");
     }
-    contentsCss.delete(contentsCss.length() - 1, contentsCss.length());
+    contentsCss.append("'/eXoWCMResources/ckeditor/contents.css'");
     contentsCss.append("]");
 
     StringBuffer buffer = new StringBuffer();
@@ -787,7 +787,7 @@ public class Utils {
     buffer.append("<script type='text/javascript'>\n");
     buffer.append("  //<![CDATA[ \n");
     buffer.append("    require(['/eXoWCMResources/ckeditor/ckeditor.js'], function() {");
-    buffer.append("    var instances = CKEDITOR.instances['" + name + "']; if (instances) instances.destroy(true);\n");
+    buffer.append("    var instance = CKEDITOR.instances['" + name + "']; if (instance) {CKEDITOR.remove(instance); instance = null;}\n");
     buffer.append("    CKEDITOR.replace('" + name + "', {toolbar:'" + toolbar + "', width:'98%', height: 200, contentsCss:" +
         contentsCss + ", ignoreEmptyParagraph:true});\n");
     buffer.append("    CKEDITOR.instances['" + name + "'].on(\"instanceReady\", function(){  ");

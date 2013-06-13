@@ -85,7 +85,7 @@
 	      try {
 	        oEditor = CKEDITOR.instances[name] ;
 	        if (oEditor && document.getElementById(name)) {
-	            var rendered = gj(document.getElementById(name)).nextAll('span:first')[0].id.indexOf('cke');
+	            var rendered = gj(document.getElementById(name)).nextAll('div:first')[0].id.indexOf('cke');
 	            if (rendered == 0) document.getElementById(name).value = oEditor.getData();
 	        }
 	      } catch(e) {
@@ -133,7 +133,7 @@
 		      try {
 		        oEditor = CKEDITOR.instances[name] ;
 		        if (oEditor && document.getElementById(name)) {
-		            var rendered = gj(document.getElementById(name)).nextAll('span:first')[0].id.indexOf('cke');
+		            var rendered = gj(document.getElementById(name)).nextAll('div:first')[0].id.indexOf('cke');
 		            if (rendered == 0) document.getElementById(name).value = oEditor.getData();
 		        }
 		      } catch(e) {
