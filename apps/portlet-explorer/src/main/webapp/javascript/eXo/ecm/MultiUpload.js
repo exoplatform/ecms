@@ -435,6 +435,11 @@
 		if (eXo.ecm.MultiUpload.pathMap[fileID] != undefined) {
 			info.title = eXo.ecm.MultiUpload.IN + " " + eXo.ecm.MultiUpload.driveTitle + (eXo.ecm.MultiUpload.pathMap[fileID].indexOf("/") == 0 ? "" : "/") + 
 						   eXo.ecm.MultiUpload.pathMap[fileID];
+			info.setAttribute("data-toggle", "tooltip");
+			info.setAttribute("rel", "tooltip");
+			info.setAttribute("data-original-title", info.title);
+			info.setAttribute("data-placement", "bottom");
+			info.title="";
 		}
 		loadContentDiv.appendChild(info);
 		//return ret
@@ -455,15 +460,15 @@
 		var loadContentDiv = eXo.ecm.MultiUpload.insertFileName(listDivID, file, fileID);
 		//outer progress
 		  var outerProgress = eXo.ecm.MultiUpload.document.createElement("div");
-		  outerProgress.className = "loaddingPercent pull-right";
+		  outerProgress.className = "progress progress-striped pull-right";
 		  //progress
-		  var progress = eXo.ecm.MultiUpload.document.createElement("div");
+		  var progress = eXo.ecm.MultiUpload.document.createElement("span");
 		  progress.id = fileID;
-		  progress.className = "percent";
+		  progress.className = "textPercent";
 		  progress.innerHTML = "0%";
 		  //span
-		  var spanProgress = eXo.ecm.MultiUpload.document.createElement("span");
-		  spanProgress.className="loadding";
+		  var spanProgress = eXo.ecm.MultiUpload.document.createElement("div");
+		  spanProgress.className="bar";
 		  spanProgress.style.width="0%";
 		  //cancel
 		  var cancel = eXo.ecm.MultiUpload.document.createElement("i");
@@ -478,11 +483,16 @@
 		  } else {
 		  	cancel.onclick=eXo.ecm.MultiUpload.handleReaderAbort(fileID);
 		  }
+		  //a wrapping cancel
+		  var aCancel = eXo.ecm.MultiUpload.document.createElement("span");
+		  aCancel.className="actionIcon pull-right";
+		  aCancel.onclick="javascript:void(0)";
+		  aCancel.appendChild(cancel);
 		  //-------------------------------------
 		  outerProgress.appendChild(spanProgress);    
 		  outerProgress.appendChild(progress);
 		  //---
-		  loadContentDiv.appendChild(cancel);
+		  loadContentDiv.appendChild(aCancel);
 		  loadContentDiv.appendChild(outerProgress);
 		  //return ret
 		  return loadContentDiv;
@@ -800,7 +810,7 @@
 				progMeter = gj("#" + id, eXo.ecm.MultiUpload.document)[0];
 				if (progMeter) {
 					progMeter.innerHTML = nPercent + "%";
-					gj(progMeter).prev("span").width(nPercent + "%");
+					gj(progMeter).prev("div").width(nPercent + "%");
 				}
 				if (!nPercent || nPercent < 100) {
 					if (nPercent == 0) {
@@ -860,6 +870,7 @@
 			  	  progMeter.parentNode.parentNode.removeChild(progMeter.parentNode);
 			  	  cancelButton.innerHTML= getFileSizeFormat(eXo.ecm.MultiUpload.sizeMap[progressID]);
 			  	  cancelButton.className = "fileSize pull-right";
+			  	  gj(cancelButton.parentNode).removeClass("actionIcon");
 		  	  } else {
 				var e = eXo.ecm.MultiUpload.handleReaderLoad(progressID);
 				setTimeout(function(){e(window.event);}, 1000);
@@ -964,8 +975,9 @@
 		  	gj("#msg" + progressID, eXo.ecm.MultiUpload.document).remove();
 		  }
 		  gj("#LoadContent" + progressID, eXo.ecm.MultiUpload.document).insertAfter("#MultiUploadListSeperator");
-		  cancelButton.className = "fileSize pull-right";
+		  cancelButton.className = "fileSize cancelStatus pull-right";
 		  cancelButton.innerHTML = message;
+		  gj(cancelButton.parentNode).removeClass("actionIcon");
 		cancelButton.style.color="darkgray";
 		var filename = eXo.ecm.MultiUpload.document.getElementById("file" + progressID);
 		filename.style.color="darkgray";
