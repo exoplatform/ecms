@@ -61,12 +61,12 @@ import org.exoplatform.webui.form.input.UICheckBoxInput;
 )
 
 public class UIFolderForm extends UIForm implements UIPopupComponent {
-  private static final Log LOG  = ExoLogger.getLogger(UIFolderForm.class.getName());
-
   public static final String FIELD_TITLE_TEXT_BOX = "titleTextBox";
   public static final String FIELD_CUSTOM_TYPE_CHECK_BOX = "customTypeCheckBox";
   public static final String FIELD_CUSTOM_TYPE_SELECT_BOX = "customTypeSelectBox";
-  
+
+  private static final Log LOG  = ExoLogger.getLogger(UIFolderForm.class.getName());
+  private static final String DEFAULT_NAME = "untitled";
   private static final String MANAGED_SITES = "Managed Sites";
   
   private String selectedType;
@@ -220,6 +220,9 @@ public class UIFolderForm extends UIForm implements UIPopupComponent {
       
       // The name automatically determined from the title according to the current algorithm.
       String name = Text.escapeIllegalJcrChars(org.exoplatform.services.cms.impl.Utils.cleanString(title));
+      
+      // Set default name if new title contain no valid character
+      name = (StringUtils.isEmpty(name)) ? DEFAULT_NAME : name;
       
       // Get selected folder type
       if (customTypeCheckBox.isRendered()) {
