@@ -52,9 +52,9 @@
 		margin-left: 8px;
 		.action {
 			cursor:pointer;
-		
+			color: @textColor;
 			&:hover {
-				color: @grayDark;
+				color: @linkColorHover;
 			}
 		}
 	}
@@ -65,7 +65,7 @@
 		&:hover {
 			background: #f8f8f8;
 		}
-
+		
 		.fileName {
 			cursor: pointer;
 			overflow: hidden;
@@ -80,18 +80,14 @@
 		.fileSize {
 			width: 100px; 
 			text-align: right;
+			font-weight: bold;
 		}
-		
 		.warningContainer {
 			margin-right: 10px;
 		}
 		
 		.action {
 			margin-left: 5px;
-			
-			&:hover {
-				color: @grayDark;
-			}
 		}
 
 		.loaddingPercent {
@@ -108,7 +104,9 @@
 			height: 15px;
 			display: block;
 		}
-		
+		.cancelStatus {
+			font-weight: normal;
+		}
 		.percent {
 			position: absolute;
 			z-index: 10;
@@ -116,9 +114,24 @@
 			left: 40%;
 		}
 		
+		.progress {
+			width: 270px;
+			position: relative;
+			.border-radius(3px);
+			.textPercent {
+				color: #FFFFFF;
+			    left: 5px;
+			    position: absolute;
+			    top: 0;
+			    text-shadow: 0 0 1px #666;
+			}
+		}
+		.actionIcon {
+		    margin-left: 10px;
+    		margin-top: -2px;
+		}
 		.uiIconRemove {
 			cursor: pointer;
-			margin-left: 10px;
 		}
 	}
 
