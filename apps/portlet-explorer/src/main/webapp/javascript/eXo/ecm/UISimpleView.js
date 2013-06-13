@@ -205,6 +205,8 @@
       
       // Init feature Copy URL to Clipboard
       eXo.ecm.ECMUtils.initClipboard();
+      
+      event.preventDefault();
     };
 
     SimpleView.prototype.mouseUpTree = function(evt) {
