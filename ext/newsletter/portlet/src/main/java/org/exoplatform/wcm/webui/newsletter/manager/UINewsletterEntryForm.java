@@ -308,8 +308,7 @@ public class UINewsletterEntryForm extends UIDialogForm {
         }
         if (listEmailAddress.size() > 0) {
           message = new Message() ;
-          message.setTo(listEmailAddress.get(0));
-          for (int i = 1; i < listEmailAddress.size(); i ++) {
+          for (int i = 0; i < listEmailAddress.size(); i ++) {
             sbReceiver.append(listEmailAddress.get(i)).append(",");
           }
           String content = 
@@ -349,6 +348,10 @@ public class UINewsletterEntryForm extends UIDialogForm {
           message.setSubject(newsletterNode.getName()) ;
           message.setBody(content) ;
           message.setMimeType("text/html") ;
+          String from = System.getProperty("gatein.email.smtp.from");
+          if (from!=null && !from.isEmpty())
+              message.setFrom(from);
+          message.setTo(message.getFrom());
           try {
             mailService.sendMessage(message);
           } catch (Exception e) {
