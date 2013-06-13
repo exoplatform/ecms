@@ -686,7 +686,7 @@ public class Utils {
     sb.append("<div class=\"InlineEditing\">\n");
     sb.append("\n<div rel=\"tooltip\" data-placement=\"bottom\" id=\"").append(showBlockId).append("\" Class=\"").append(cssClass).append("\"");
     sb.append("title=\"").append(strSuggestion).append("\"");
-    sb.append(" onDblClick=\"InlineEditor.presentationSwitchBlock('").append(showBlockId).
+    sb.append(" onClick=\"InlineEditor.presentationSwitchBlock('").append(showBlockId).
        append("', '").append(editBlockEditorID).append("');\"");
     sb.append("onmouseout=\"this.className='").append(cssClass).
        append("';\" onblur=\"this.className='").append(cssClass).
