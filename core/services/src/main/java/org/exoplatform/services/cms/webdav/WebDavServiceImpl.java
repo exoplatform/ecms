@@ -718,9 +718,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
   	Item item = null;
     try {
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
-      repoPath = convertRepoPath(repoPath, true);
-      
-      
+      repoPath = convertRepoPath(repoPath, false);
       
       Session session = null;
       try {
