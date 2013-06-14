@@ -44,6 +44,7 @@ import org.exoplatform.services.cms.documents.FavoriteService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -135,7 +136,7 @@ public class FavouriteManageComponent extends UIAbstractManagerComponent {
         throw new VersionException("node is locked, can't add favourite to node:" + node.getPath());
       if (!PermissionUtil.canSetProperty(node))
         throw new AccessDeniedException("access denied, can't add favourite to node:" + node.getPath());
-      favoriteService.addFavorite(node, session.getUserID());
+      favoriteService.addFavorite(node, ConversationState.getCurrent().getIdentity().getUserId());
       uiExplorer.updateAjax(event);
     } catch (LockException e) {
       if (LOG.isErrorEnabled()) {
