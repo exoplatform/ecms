@@ -627,7 +627,7 @@
       <AddToFavourite>Ajouter aux Favoris</AddToFavourite>
       <RemoveFromFavourite>Supprimer</RemoveFromFavourite>
       <MoveToTrash>Déplacer dans la Corbeille</MoveToTrash>
-      <RestoreFromTrash>Supprimer</RestoreFromTrash>
+      <RestoreFromTrash>Restaurer</RestoreFromTrash>
       <EmptyTrash>Supprimer</EmptyTrash>
       <WebDavView>Modifier à Distance</WebDavView>
     </event>
@@ -2421,7 +2421,7 @@
     <label>
       <repository>Entrepôt</repository>
       <categoryMandatoryWhenFileUpload>Spécifier une catégorie quand un fichier est ajouté.</categoryMandatoryWhenFileUpload>
-      <uploadFileSizeLimitMB>Limiter la tailler des fichiers ajoutés (Mo)</uploadFileSizeLimitMB>
+      <uploadFileSizeLimitMB>Limiter la taille des fichiers ajoutés (Mo)</uploadFileSizeLimitMB>
       <isDirectlyDrive>Accès direct aux lecteurs</isDirectlyDrive>
       <driveName>Nom du Lecteur</driveName>
       <usecase>Type d'accès</usecase>
@@ -2918,7 +2918,7 @@
       <fileName-error>Veuillez vous assurer que vous avez transféré le fichier en cliquant sur l'icône de chargement.</fileName-error>
       <taxonomyPath-error>Veuillez choisir une catégorie.</taxonomyPath-error>
       <fileName-invalid>Le nom du fichier contient des caractères invalides. Veuillez changer le nom fichier avant de l'envoyer.</fileName-invalid>
-      <fileSize-too-big>La taille du fichier est trop importante. Essayez de découper votre fichier en plusieurs parties ou utiliser l'accès webdav.</fileSize-too-big>
+      <fileSize-too-big>Le fichier est trop grand. Veuillez découper votre fichier en plusieurs parties ou utiliser l'accès webdav.</fileSize-too-big>
       <name-is-exist>Le nom '{0}' existe déjà. Vous ne pouvez pas ajouter plusieurs fichiers du même nom.</name-is-exist>
       <contraint-violation>Impossible d'ajouter le noeud '{0}' car son type ne convient pas aux contraintes imposées par le noeud parent.</contraint-violation>
       <lock-exception>Ce noeud est verrouillé. Certaines actions ne marcheront pas correctement.</lock-exception>
