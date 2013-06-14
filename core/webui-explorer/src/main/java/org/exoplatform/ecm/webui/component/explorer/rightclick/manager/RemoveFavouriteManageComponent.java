@@ -42,6 +42,7 @@ import org.exoplatform.services.cms.documents.FavoriteService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -140,7 +141,7 @@ public class RemoveFavouriteManageComponent extends UIAbstractManagerComponent {
           throw new VersionException("node is locked, can't remove favourite of node :" + node.getPath());
         if (!PermissionUtil.canRemoveNode(node))
           throw new AccessDeniedException("access denied, can't remove favourite of node:" + node.getPath());
-        favoriteService.removeFavorite(node, session.getUserID());
+        favoriteService.removeFavorite(node, ConversationState.getCurrent().getIdentity().getUserId());
         uiExplorer.updateAjax(event);
       } catch (LockException e) {
         if (LOG.isErrorEnabled()) {
