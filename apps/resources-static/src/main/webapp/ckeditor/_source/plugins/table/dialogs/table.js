@@ -204,6 +204,8 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 							var cellNumber = rows * cols;
 
 								for (var i = 0; i < cellNumber; i++) {
+                  if (this._.selectedElement.$.getElementsByTagName('td')[i])
+                  {
 							       var styleString = this._.selectedElement.$.getElementsByTagName('td')[i].style.cssText;
 								   if (navigator.userAgent.indexOf("MSIE 8") >= 0 || navigator.userAgent.indexOf("MSIE 7") >= 0) {
 								   styleString = Replace (styleString.toLowerCase(),"border-top: ",info.txtBorder);
@@ -221,7 +223,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 								   styleString = Replace (styleString,"padding: ",info.txtCellPad);
 								   }
 								   this._.selectedElement.$.getElementsByTagName('td')[i].style.cssText = styleString;
-
+                  }
 							}
 						}
 					}
