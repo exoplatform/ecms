@@ -163,8 +163,7 @@
   </module>
   
   <scripts>
-    <name>ckeditor-loader</name>
-    <as>ckeditor_loader</as>
+    <name>ckeditor</name>
     <script>
       <path>/ckeditor/ckeditor.js</path>
     </script>

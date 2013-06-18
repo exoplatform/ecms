@@ -725,9 +725,10 @@ public class Utils {
     sb.append("\t\t<div class=\"Edit").append(cssClass).append("Input\">\n ");
 
     if (inputType.equalsIgnoreCase(INPUT_WYSIWYG)) {
+    	parsedArguments.put(TOOLBAR, "InlineEdit");
       sb.append(createCKEditorField(newValueInputId, currentValue, parsedArguments));
     }else if (inputType.equalsIgnoreCase(INPUT_TEXT_AREA)){
-      sb.append("\t\t<TEXTAREA ").append("\" name =\"");
+      /*sb.append("\t\t<TEXTAREA ").append("\" name =\"");
       sb.append(newValueInputId).append("\" id =\"").append(newValueInputId).append("\"");
       if (height!=null && height.length()>0) {
         sb.append(" style =\"height:").append(height);
@@ -737,11 +738,17 @@ public class Utils {
         sb.append("\"");
       }
       sb.append(">");
-      sb.append(currentValue).append("</TEXTAREA>");
+      sb.append(currentValue).append("</TEXTAREA>");*/
+    	parsedArguments.remove(TOOLBAR);
+    	parsedArguments.put(TOOLBAR, "InlineEditTitle");
+    	sb.append(createCKEditorField(newValueInputId, currentValue, parsedArguments));
     }else if (inputType.equalsIgnoreCase(INPUT_TEXT)) {
-      sb.append("\t\t<input type=\"TEXT\" name =\"");
-      sb.append(newValueInputId).append("\" id =\"").append(newValueInputId).
-         append("\" value=\"").append(currentValue).append("\"/>");
+      //sb.append("\t\t<input type=\"TEXT\" name =\"");
+      //sb.append(newValueInputId).append("\" id =\"").append(newValueInputId).
+      //   append("\" value=\"").append(currentValue).append("\"/>");
+    	parsedArguments.remove(TOOLBAR);
+    	parsedArguments.put(TOOLBAR, "InlineEditTitle");
+    	sb.append(createCKEditorField(newValueInputId, currentValue, parsedArguments));
     }
 
     sb.append("\n\t\t</div>\n\t</form>\n</div>\n\n</div>");
@@ -759,7 +766,7 @@ public class Utils {
     String toolbar = arguments.get(TOOLBAR);
     String passedCSS = arguments.get(CSS);
 
-    if (toolbar == null) toolbar = "BasicWCM";
+    if (toolbar == null) toolbar = "InlineEdit";
     StringBuffer contentsCss = new StringBuffer();
     contentsCss.append("[");
     SkinService skinService = WCMCoreUtils.getService(SkinService.class);
@@ -788,8 +795,14 @@ public class Utils {
     buffer.append("  //<![CDATA[ \n");
     buffer.append("    require(['/eXoWCMResources/ckeditor/ckeditor.js'], function() {");
     buffer.append("    var instance = CKEDITOR.instances['" + name + "']; if (instance) {CKEDITOR.remove(instance); instance = null;}\n");
-    buffer.append("    CKEDITOR.replace('" + name + "', {toolbar:'" + toolbar + "', width:'98%', height: 200, contentsCss:" +
+    buffer.append("    CKEDITOR.replace('" + name + "', {toolbar:'" + toolbar + "', contentsCss:" +
         contentsCss + ", ignoreEmptyParagraph:true});\n");
+    //buffer.append("		 var instance = CKEDITOR.instances['" + name + "']; \n");
+    //buffer.append("		 instance.on( 'configLoaded', function() { \n");
+    //buffer.append("		 instance.config.removePlugins = 'colorbutton,find,flash,font,forms,iframe,image,newpage,removeformat,smiley,specialchar,stylescombo,templates'; \n");
+    //buffer.append("		 instance.config.toolbarGroups = [{ name: 'editing',groups: [ 'basicstyles', 'links' ] },{ name: 'undo' },{ name: 'clipboard',groups: [ 'selection', 'clipboard' ] },{ name: 'about' }]; \n");
+    //buffer.append("		 }); \n");
+    
     buffer.append("    CKEDITOR.instances['" + name + "'].on(\"instanceReady\", function(){  ");
     buffer.append("       eXo.ecm.CKEditor.insertCSS('" + name + "', 'cssContent" + name + "');\n");
     buffer.append("       });");

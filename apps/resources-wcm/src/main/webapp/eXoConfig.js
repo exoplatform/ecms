@@ -15,11 +15,14 @@ CKEDITOR.editorConfig = function( config ){
 	config.toolbarCanCollapse = false;
 	config.skin = 'moono';
 	config.allowedContent = true;
+	config.resize_enabled = true;
+	config.disableNativeSpellChecker = true,
+	config.scayt_autoStartup = true,
 	config.language = eXo.env.portal.language || 'en';
 	//config.uiColor = '#AADC6E';
 	config.toolbar_Default = [
 		['Source','Templates'],
-		['Cut','Copy','PasteText','-','SpellCheck'],
+		['Cut','Copy','Paste','PasteText','PasteFromWord','-','find','selection','SpellCheck'],
 		['Undo','Redo','-','RemoveFormat'],
 		'/',
 		['Bold','Italic','Underline','Strike'],
@@ -41,7 +44,7 @@ CKEDITOR.editorConfig = function( config ){
 
 	config.toolbar_CompleteWCM = [
 		['Source','Templates','ShowBlocks'],
-		['Cut','Copy','PasteText','-','SpellCheck','-','Undo','Redo'],
+		['Cut','Copy','Paste','PasteText','PasteFromWord','-','find','selection','SpellCheck','-','Undo','Redo'],
 		['insertGadget.btn','Flash','Table','SpecialChar', 'content.btn', 'Image'], 
 		'/',	
 		['Bold','Italic','Underline','Strike','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','NumberedList','BulletedList','-','TextColor','BGColor','-','RemoveFormat'],
@@ -63,5 +66,19 @@ CKEDITOR.editorConfig = function( config ){
 		   ['Source','-','Bold','Italic','Underline'],
 		   ['-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
 		   ['-','Link','Unlink','insertPortalLink.btn','insertGadget.btn','content.btn', 'Image'],	
+	] ;
+
+	config.toolbar_InlineEdit = [
+		['Bold','Italic','Underline','Strike'],
+    		['-','NumberedList','BulletedList','Outdent','Indent'],
+		['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','Blockquote'],
+    		'/',
+		['-','Link','Unlink','insertPortalLink.btn','content.btn', 'Image'],
+    		['-','Style','Format','Font','FontSize']
+	] ;
+	config.toolbar_InlineEditTitle = [
+		['Bold','Italic','Underline','Strike'],    		
+		['-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','Blockquote'],
+    		['-','Style','Format','Font','FontSize']
 	] ;
 };
