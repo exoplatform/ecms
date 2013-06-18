@@ -324,7 +324,7 @@
     SimpleView.prototype.dragItemsSelected = function(event) {
         var event = event || window.event;
         document.onselectstart = function(){return false;}
-        if (eXo.ecm.UIListView.enableDragAndDrop != "true")
+        if (eXo.ecm.UISimpleView.enableDragAndDrop != "true")
           return;
         var d = new Date();      
         Self.t2 = d.getTime();      
