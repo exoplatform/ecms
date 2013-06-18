@@ -1004,4 +1004,6 @@
   return {
     UISimpleView : eXo.ecm.UISimpleView
   };
+
 })(gj, base, wcm_utils);
+
