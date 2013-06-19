@@ -1,22 +1,21 @@
-Taxonomies are used to sort documents to ease searches when browsing documents online. The main idea behind that concept is to provide a multi dimensional set of paths to find a document. The best example is when you browse Yahoo news. In many cases, you can get your content by using different category paths. Therefore, after creating a document somewhere in the repository, it is possible to categorize it by adding several taxonomy references. By browsing the taxonomy tree, it will be possible to find the referencing article and display them as if they were children of the taxonomy nodes. As you can imagine, taxonomies are stored in the JCR itself and we are using the JCR Reference functionality to provide that advanced ECM feature.
+The _TaxonomyService_ component is used to sort documents to ease searches when browsing documents online. It provides a multi-dimensional set of paths to find a document. In many cases, you can get your content by using different category paths. Therefore, after creating a document somewhere in the repository, it is possible to categorize it by adding several taxonomy references. By browsing the taxonomy tree, it will be possible to find the referencing article and display them as if they were children of the taxonomy nodes. Taxonomies are stored in the JCR itself and the JCR Reference functionality is used to provide that advanced WCM feature.
 
-Managing the tree of taxonomies is very simple, you can copy/cut nodes and paste them. Of course, you can add and remove taxonomies from the tree. Once a taxonomy has been added, any user who has access to the "Manage Categories" icon from his/her view can then browse the taxonomy tree and refer one of its nodes to the created documents.
-
+The tree of taxonomies can be managed simply, such as copying/cutting/pasting nodes, or adding and removing taxonomies from the tree. Once a taxonomy has been added, any user who has access to the "Manage Categories" icon from his/her view can then browse the taxonomy tree and refer one of its nodes to the created documents.
 
 h1. Fields {anchor:id=CONTref.Configuration.Taxonomies.Fields}
 *Object type*: _org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission_
 || *Field name* || *Collection type* ||*Description* ||
-| *permissions* | {{java.util.ArrayList<TaxonomyTreeDefaultUserPermission$Permission>}} | List of default user permission to access the taxonomy tree |
+| *permissions* | {{java.util.ArrayList<TaxonomyTreeDefaultUserPermission$Permission>}} |The list of default user permission to access the taxonomy tree. |
 
 *Object type*: _org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission$Permission_
 
 
 || *Field name*|| *Type* || *Default value*|| *Description* ||
-| *identity* | {{String}} |{{ {{{*:/platform/administrators}}} }}| user name or user group. |
-| *read* | {{Boolean}} |{{true}}| permission to read  the taxonomy tree. |
-| *addNode* | {{Boolean}} | {{true}}| permission to add a node in the taxonomy tree. |
-| *setProperty* | {{Boolean}} |{{true}}| permission to set properties for a node in the taxonomy tree . |
-| *remove* | {{Boolean }} | {{true}}| permission to remove a node from the taxonomy tree. |
+| *identity* | {{String}} |{{ {{{*:/platform/administrators}}} }}|The user/group name. |
+| *read* | {{Boolean}} |{{true}}|The permission to read  the taxonomy tree. |
+| *addNode* | {{Boolean}} | {{true}}|The permission to add a node to the taxonomy tree. |
+| *setProperty* | {{Boolean}} |{{true}}|The permission to set properties for a node in the taxonomy tree. |
+| *remove* | {{Boolean }} | {{true}}|The permission to remove a node from the taxonomy tree. |
 
 *Target Component*: {{org.exoplatform.services.cms.taxonomy.TaxonomyService}}
 
@@ -27,46 +26,46 @@ h1. Fields {anchor:id=CONTref.Configuration.Taxonomies.Fields}
 *Type*: _org.exoplatform.services.cms.taxonomy.impl.TaxonomyPlugin_
 
 || *value param*|| *Type* || *Default value* || *Description*||
-| *autoCreateInNewRepository* | {{Boolean}} |{{true}}| enable/ Disable the creation of the taxonomies in new created repository. |
-| *repository* | {{String}} |{{repository}}| name of the repository where taxonomies are created. |
-| *workspace* | {{String}} |{{dms-system}}| name of the workspace where taxonomies are created. |
-| *treeName* | {{String}} | {{system}}|name of the taxonomy tree to be created. |
+| *autoCreateInNewRepository* | {{Boolean}} |{{true}}| Enable/ Disable the creation of the taxonomies in a new created repository. |
+| *repository* | {{String}} |{{repository}}|The name of the repository where taxonomies are created. |
+| *workspace* | {{String}} |{{dms-system}}|The name of the workspace where taxonomies are created. |
+| *treeName* | {{String}} | {{system}}|The name of the taxonomy tree which is created. |
 
 || *Object param*|| *Type* || *Default value* || *Description*||
-| *permission.configuration* | {{String}}|{{org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig}} | access permission for the whole taxonomy tree. |
-| *predefined.actions* | {{string}}| {{org.exoplatform.services.cms.actions.impl.ActionConfig}} | predefined actions for the taxonomy tree root node. |
-| *taxonomy.configuration* | {{String}}| {{org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig}} | access permissions for each taxonomy in tree. |
+| *permission.configuration* | {{String}}|{{org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig}} |The access permission to the whole taxonomy tree. |
+| *predefined.actions* | {{string}}| {{org.exoplatform.services.cms.actions.impl.ActionConfig}} |The predefined actions for the taxonomy tree root node. |
+| *taxonomy.configuration* | {{String}}| {{org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig}} |The access permissions to each taxonomy in the tree. |
 
 *Object type*: _org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig_
 ||*Name* || *Type*|| *Description*  ||
-| *taxonomies* | {{java.util.ArrayList<TaxonomyConfig$Taxonomy>}} | list of taxonomy to be configured permission. |
+| *taxonomies* | {{java.util.ArrayList<TaxonomyConfig$Taxonomy>}} |The list of taxonomies which are configured permission. |
 
 *Object type*: _org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig$Taxonomy_
 ||*Name* || *Type*|| *Default value*|| *Description*  ||
-| *name* | {{String}} | {{name}}| name of the taxonomy. |
-| *path* | {{String}} | {{cms}}| path to the taxonomy in taxonomy tree. |
-| *permissions* |{{Arraylist}}| {{java.util.ArrayList<TaxonomyTreeDefaultUserPermission$Permission>}} | list of permissions for user or group to access the taxonomy. |
+| *name* | {{String}} | {{name}}| The name of the taxonomy. |
+| *path* | {{String}} | {{cms}}|The path to the taxonomy in the taxonomy tree. |
+| *permissions* |{{Arraylist}}| {{java.util.ArrayList<TaxonomyTreeDefaultUserPermission$Permission>}} |The list of permissions for user or group to access the taxonomy. |
 
 *Object type*: _org.exoplatform.services.cms.actions.impl.ActionConfig_
 ||*Name* || *Type*|| *Default value*|| *Description*  ||
-| *actions* || {{Arraylist}}|{{java.util.ArrayList<ActionConfig$TaxonomyAction>}} | list of actions which are created for the taxonomy tree root node. |
+| *actions* || {{Arraylist}}|{{java.util.ArrayList<ActionConfig$TaxonomyAction>}} |The list of actions which are created for the taxonomy tree root node. |
 
 *Object type*: _org.exoplatform.services.cms.actions.impl.ActionConfig$TaxonomyAction_
 || *Field name* || *Type* ||*Default value*||  *Description* ||
-| *type* | {{String}} |{{exo:taxonomyAction}}| type of the action. |
-| *name* | {{String}} |{{taxonomyAction}}|  name of the action. |
-| *description* | {{String}} | {{N/A}}|  description of the action. |
-| *homePath* | {{String}} | {{dms-system:/exo:ecm/exo:taxonomyTrees/storage/System}}| location of node where the action node is stored. |
-| *targetWspace* | {{String}} |{{N/A}}|  when a new node is created in the node whose path is defined in *homePath* field, it will be moved to a new location automatically. The target workspace is specified in this field. |
-| *targetPath* | {{String}} |{{collaboration}}|  when a new node is created in the node whose path is defined in *homePath* field, it will be moved to a new location automatically. The target path is specified in this field. |
-| *lifecyclePhase* |{{Arraylist}}|  {{java.util.ArrayList<String>}} | the life cycle phases, in which the action is activated. |
-| *roles* | {{String}} | {{{*:/platform/administrators}}}| the users or groups only with whom the action is activated. |
-| *mixins* |{{Arraylist}}|  {{java.util.ArrayList<ActionConfig$Mixin>}} | list of node types that are affected by this action. |
+| *type* | {{String}} |{{exo:taxonomyAction}}|The type of the action. |
+| *name* | {{String}} |{{taxonomyAction}}|The name of the action. |
+| *description* | {{String}} | {{N/A}}| The description of the action. |
+| *homePath* | {{String}} | {{dms-system:/exo:ecm/exo:taxonomyTrees/storage/System}}|The location of node where the action node is stored. |
+| *targetWspace* | {{String}} |{{N/A}}|When a new node is created in the node whose path is defined in the *homePath* field. It will be moved to a new location automatically. The target workspace is specified in this field. |
+| *targetPath* | {{String}} |{{collaboration}}| When a new node is created in the node whose path is defined in the *homePath* field. It will be moved to a new location automatically. The target path is specified in this field. |
+| *lifecyclePhase* |{{Arraylist}}|  {{java.util.ArrayList<String>}} | The life cycle phases, in which the action is activated. |
+| *roles* | {{String}} | {{{*:/platform/administrators}}}| The users or groups only with whom the action is activated. |
+| *mixins* |{{Arraylist}}|  {{java.util.ArrayList<ActionConfig$Mixin>}} |The list of node types that are affected by this action. |
 
 *Object type*: _org.exoplatform.services.cms.actions.impl.ActionConfig$Mixin_
 || *Field name* || *Type* || *Default value*||  *Description* ||
-| *name* | {{String}} |{{mix:affectedNodeTypes}}|  mixin node type name that will be added, whose responsibility is to store the affected node types. |
-| *properties* || {{String}} | {{exo:affectedNodeTypeNames=exo:article,exo:podcast,exo:sample,kfx:document,nt:file,rma:filePlan}}| the name of the properties that store all the node types affected by the action. |
+| *name* | {{String}} |{{mix:affectedNodeTypes}}|  The mixin node type name that will be added to store the affected node types. |
+| *properties* || {{String}} | {{exo:affectedNodeTypeNames=exo:article,exo:podcast,exo:sample,kfx:document,nt:file,rma:filePlan}}| The name of the properties that store all the node types affected by the action. |
 
 
 
@@ -219,8 +218,5 @@ h1. Sample Configuration {anchor:id=CONTref.Configuration.Taxonomies.Sample_conf
 			</init-params>
 		</component-plugin>
 	</external-component-plugins>
-
 </component>
-
-
 {code}

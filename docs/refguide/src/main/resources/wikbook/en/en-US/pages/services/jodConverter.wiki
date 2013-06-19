@@ -2,6 +2,6 @@ _JODConverter_ is used to convert documents into different office formats.
 
 _Package org.exoplatform.services.cms.jodconverter.JodConverterService_
 
-||*Method*||*Return*||*Prototype*||*Description*||
-|*convert*| {{void}} |convert(InputStream input, String formatInput, OutputStream out, String formatOutput) throws Exception; | Convert _InputStream_ with the _formatInput_ format into _OutputStream_ with the _formatOutput_ format. *Deprecate*: This method is not supported by JODConverter 3.0 anymore, please use _convert(File, File, String)_ instead. {example}{example}@param {{input}}{example}{example}@param {{formatInput}}{example}{example}@param {{out}}{example}{example}@param {{formatOutput}}|
-|*convert*| {{boolean}} |convert(File input, File output, String outputFormat) throws OfficeException;| Convert the _input_ file into the _output_ file with the outputFormat format.{example}{example} @param {{input}} {example}{example}@param {{output}} {example}{example} @param {{outputFormat}}|
+|| *Method* ||*Param* || *Return* ||  *Description* ||
+| *convert*(InputStream input, String formatInput, OutputStream out, String formatOutput) throws Exception; |{example}{example}{{input}}{example}{example}{{formatInput}}{example}{example}{{out}}{example}{example}{{formatOutput}}| {{void}} | Convert InputStream in the formatInput format to OutputStream with the formatOutput format. Deprecate: This method is not supported by JODConverter 3.0 anymore, please use _convert(File, File, String)_ instead.|
+| *convert*(File input, File output, String outputFormat) throws OfficeException;|{{input}} {example}{example}{{output}} {example}{example}{{outputFormat}}|{{boolean}}| Convert input File to output File with the outputFormat.|

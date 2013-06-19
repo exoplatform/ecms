@@ -1,109 +1,111 @@
-h1. component configuration {anchor:id=CONTref.Configuration.Component}
+h1. Component configuration {anchor:id=CONTref.Configuration.Component}
 
 || *Configuration name* || *Data type* || *Sample value* || *Description* ||
-| *key* | {{String}} | {{org.exoplatform.services.wcm.publication.WCMPublicationService}} | Service class location |
-| *type* | {{String}} | {{org.exoplatform.services.wcm.publication.WCMPublicationServiceImpl}} | Service class's implementation location |
-| *component-plugins* | {{Object}} |N/A  | The plugins that are used inside the component |
-| *init-params* | {{Object}} |N/A | The intitial parameter that will be used inside the component |
+| *key* | {{String}} | {{org.exoplatform.services.wcm.publication.WCMPublicationService}} | The service class location. |
+| *type* | {{String}} | {{org.exoplatform.services.wcm.publication.WCMPublicationServiceImpl}} |The service class's implementation location. |
+| *component-plugins* | {{Object}} |N/A  | The plugins that are used inside the component. |
+| *init-params* | {{Object}} |N/A | The initial parameter that will be used inside the component. |
 
 h2. component-plugin configuration {anchor:id=CONTref.Configuration.Component.component_plugin}
-* *Description*:
 
 || *Configuration name* || *Data type* || *Sample value* || *Description* ||
-| *name* | {{String}} | {{Simple publication}} | Name of component-plugin |
-| *set-method* | {{String}} | {{addPublicationPlugin}} | Set method to start using plugin |
-| *type* | {{String}} | {{org.exoplatform.services.wcm.publication.lifecycle.simple.SimplePublicationPlugin}} | Class and location of plugin |
+| *name* | {{String}} | {{Simple publication}} | The name of component-plugin. |
+| *set-method* | {{String}} | {{addPublicationPlugin}} |The set method used to start using the plugin. |
+| *type* | {{String}} | {{org.exoplatform.services.wcm.publication.lifecycle.simple.SimplePublicationPlugin}} |The class and location of the plugin. |
 
 h2. init-params configuration  {anchor:id=CONTref.Configuration.Component.init-params}
 
-- parameter will be set in pair: name-value and will be placed inside the <value-param> object
+* The parameter will be set in pairs {{name-value}} and placed inside the {{<value-param>}} object.
 || *Configuration name* || *Data type* || *Sample value* ||
-|*name* | {{String}} | {{useCache}} | 
+|*name* | {{String}} | {{useCache}} |
 | *value* | {{String}} | {{true}} |
 
 
-- parameter also can be set in an object, with further information will be the object's properties.
+* The parameter also can be set in an object. To have further information, it will be  set in the object's properties.
 || *Configuration name* || *Data type* || *Sample value* || *Description* ||
-| *name* | {{String}} | {{cache.config.wcm.composer}} |The name of the object |
-| *description* | {{String}} |N/A  |The brief description about the object |
-| *object* | {{Object}} |N/A  |  This object will be passed to component as a parameter, this object includes fieldset properties |
+| *name* | {{String}} | {{cache.config.wcm.composer}} |The name of the object. |
+| *description* | {{String}} |N/A  |The brief description about the object. |
+| *object* | {{Object}} |N/A  |This object will be passed to the component as a parameter. It includes the field set properties. |
 
 h1. external-component-plugins configuration {anchor:id=CONTref.Configuration.external-component-plugins}
 
 || *Configuration name* || *Data type* || *Sample value* || *Description* ||
-| *target-component* | {{String}} | {{org.exoplatform.services.wcm.core.WebSchemaConfigService<}} | External plugin's class location |
-| *component-plugin* | {{Object}} | N/A | Configuration of component that will be used as a plugin |
+| *target-component* | {{String}} | {{org.exoplatform.services.wcm.core.WebSchemaConfigService}} | The external plugin's class location. |
+| *component-plugin* | {{Object}} | N/A | The configuration of component that will be used as a plugin. |
 
 h1. Example {anchor:id=CONTref.Configuration.Example}
 
 h2. Example of component using plugins {anchor:id=CONTref.Configuration.Example.Component_using_plugins}
-{code:language=xml|indent=2}
+{code:xml}
 <component>
-    <key>org.exoplatform.services.wcm.publication.WCMPublicationService</key>
-    <type>org.exoplatform.services.wcm.publication.WCMPublicationServiceImpl</type>
-    <component-plugins>
-      <component-plugin>
-        <name>States and versions based publication</name>
-        <set-method>addPublicationPlugin</set-method>
-        <type>org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationPlugin</type>
-        <description>This publication lifecycle publish a web content or DMS document to a portal page with more state and version.</description>
-      </component-plugin>
-      <component-plugin>
-        <name>Simple publication</name>
-        <set-method>addPublicationPlugin</set-method>
-        <type>org.exoplatform.services.wcm.publication.lifecycle.simple.SimplePublicationPlugin</type>
-        <description>This publication lifecycle publish a web content or DMS document to a portal page without version</description>
-      </component-plugin>
-    </component-plugins>
-  </component>
+  <key>org.exoplatform.services.wcm.publication.WCMPublicationService</key>
+  <type>org.exoplatform.services.wcm.publication.WCMPublicationServiceImpl</type>
+  <component-plugins>
+    <component-plugin>
+      <name>States and versions based publication</name>
+      <set-method>addPublicationPlugin</set-method>
+      <type>org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationPlugin</type>
+      <description>This publication lifecycle publish a web content or DMS document to a portal page with more state and
+        version.
+      </description>
+    </component-plugin>
+    <component-plugin>
+      <name>Simple publication</name>
+      <set-method>addPublicationPlugin</set-method>
+      <type>org.exoplatform.services.wcm.publication.lifecycle.simple.SimplePublicationPlugin</type>
+      <description>This publication lifecycle publish a web content or DMS document to a portal page without version
+      </description>
+    </component-plugin>
+  </component-plugins>
+</component>
 {code}
 
 h2. Example of component having init-params {anchor:id=CONTref.Configuration.Example.Component_having_initparams}
-{code:language=xml|indent=2}
+{code:xml}
 <component>
-    <key>org.exoplatform.services.wcm.publication.WCMComposer</key>
-    <type>org.exoplatform.services.wcm.publication.WCMComposerImpl</type>
-    <init-params>
-      <value-param>
-        <name>useCache</name>
-        <value>true</value>
-      </value-param>
-    </init-params>
-  </component>
+  <key>org.exoplatform.services.wcm.publication.WCMComposer</key>
+  <type>org.exoplatform.services.wcm.publication.WCMComposerImpl</type>
+  <init-params>
+    <value-param>
+      <name>useCache</name>
+      <value>true</value>
+    </value-param>
+  </init-params>
+</component>
 {code}
 
 h2. Example of external-component-plugins configuration {anchor:id=CONTref.Configuration.Example.External-components-plugins-configuration}
-{code:language=xml|indent=2}
+{code:xml}
 <external-component-plugins>
-    <target-component>org.exoplatform.services.cache.CacheService</target-component>
-    <component-plugin>
-      <name>addExoCacheConfig</name>
-      <set-method>addExoCacheConfig</set-method>
-      <type>org.exoplatform.services.cache.ExoCacheConfigPlugin</type>
-      <description>Configures the cache for query service</description>
-      <init-params>
-        <object-param>
-          <name>cache.config.wcm.composer</name>
-          <description>The default cache configuration</description>
-          <object type="org.exoplatform.services.cache.ExoCacheConfig">
-            <field name="name">
-              <string>wcm.composer</string>
-            </field>
-            <field name="maxSize">
-              <int>300</int>
-            </field>
-            <field name="liveTime">
-              <long>600</long>
-            </field>
-            <field name="distributed">
-              <boolean>false</boolean>
-            </field>
-            <field name="implementation">
-              <string>org.exoplatform.services.cache.concurrent.ConcurrentFIFOExoCache</string>
-            </field>
-          </object>
-        </object-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
+  <target-component>org.exoplatform.services.cache.CacheService</target-component>
+  <component-plugin>
+    <name>addExoCacheConfig</name>
+    <set-method>addExoCacheConfig</set-method>
+    <type>org.exoplatform.services.cache.ExoCacheConfigPlugin</type>
+    <description>Configures the cache for query service</description>
+    <init-params>
+      <object-param>
+        <name>cache.config.wcm.composer</name>
+        <description>The default cache configuration</description>
+        <object type="org.exoplatform.services.cache.ExoCacheConfig">
+          <field name="name">
+            <string>wcm.composer</string>
+          </field>
+          <field name="maxSize">
+            <int>300</int>
+          </field>
+          <field name="liveTime">
+            <long>600</long>
+          </field>
+          <field name="distributed">
+            <boolean>false</boolean>
+          </field>
+          <field name="implementation">
+            <string>org.exoplatform.services.cache.concurrent.ConcurrentFIFOExoCache</string>
+          </field>
+        </object>
+      </object-param>
+    </init-params>
+  </component-plugin>
+</external-component-plugins>
 {code}

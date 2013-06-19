@@ -2,15 +2,15 @@
 h1. Available preferences {anchor:id=CONTref.Portlets.Search.AvailablePreferences}
 
 || *Preference* || *Type*|| *Default value* || *Description* ||
-| *repository* | {{String}} | {{repository}} | The repository is a place where data are stored and maintained.|
-| *workspace* | {{String}} | {{collaboration}} | The workspace where the content is stored|
-| *searchFormTemplatePath* | {{String}} | {{/exo:ecm/views/templates/WCM Advance Search/search-form/UIDefaultSearchForm.gtmpl}} | The path to the search form template|
-| *searchResultTemplatePath* | {{String}} |{{ /exo:ecm/views/templates/WCM Advance Search/search-result/UIDefaultSearchResult.gtmpl}} | The path to the search result template|
-| *searchPaginatorTemplatePath* | {{String}} | {{/exo:ecm/views/templates/WCM Advance Search/search-paginator/UIDefaultSearchPaginator.gtmpl}} | The path to the search paginator template|
-| *searchPageLayoutTemplatePath* | {{String}} |{{/exo:ecm/views/templates/WCM Advance Search/search-page-layout/UISearchPageLayoutDefault.gtmpl}} | The path to the search page template|
-| *itemsPerPage* | {{Integer}} | 5 | The number of items for each page |
-| *showQuickEditButton* | {{Boolean}} | {{true}} | Show or hide the quick edit icon (!) |
-| *basePath* | {{String}} | {{parameterizedviewer}} | The page which is used to display the search result |
+| *repository* | {{String}} | {{repository}} | The place where data are stored and maintained.|
+| *workspace* | {{String}} | {{collaboration}} | The place where the content is stored.|
+| *searchFormTemplatePath* | {{String}} | {{/exo:ecm/views/templates/WCM Advance Search/search-form/UIDefaultSearchForm.gtmpl}} | The path to the search form template.|
+| *searchResultTemplatePath* | {{String}} |{{ /exo:ecm/views/templates/WCM Advance Search/search-result/UIDefaultSearchResult.gtmpl}} | The path to the search result template.|
+| *searchPaginatorTemplatePath* | {{String}} | {{/exo:ecm/views/templates/WCM Advance Search/search-paginator/UIDefaultSearchPaginator.gtmpl}} | The path to the search paginator template.|
+| *searchPageLayoutTemplatePath* | {{String}} |{{/exo:ecm/views/templates/WCM Advance Search/search-page-layout/UISearchPageLayoutDefault.gtmpl}} | The path to the search page template.|
+| *itemsPerPage* | {{Integer}} | 5 | The number of items for each page. |
+| *showQuickEditButton* | {{Boolean}} | {{true}} | Show or hide the quick edit icon. |
+| *basePath* | {{String}} | {{parameterizedviewer}} | The page which is used to display the search result. |
 
 h1. Sample configuration {anchor:id=CONTref.Portlets.Search.SampleConfiguration}
 {code:language=xml|indent=2}

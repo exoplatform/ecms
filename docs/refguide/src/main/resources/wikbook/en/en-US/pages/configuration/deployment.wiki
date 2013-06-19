@@ -1,73 +1,73 @@
-When a site is created, normally the end-user wants to see something in the page instead of a blank page, so we need this service for deployment of some "default" contents like Banner, Footer, Navigation, Breadcrumb, etc.
+When a site is created, normally the end-user wants to see something in the page instead of a blank page, so this service is used to deploy some "default" contents like Banner, Footer, Navigation, Breadcrumb, and more.
 
 There are two main cases to use:
-- The site is created only one time when the database is clean.
-- The site is created at runtime, when a user uses the core feature of GateIn portal.
+* The site is created only one time when the database is clean.
+* The site is created at runtime, when a user uses the core features of GateIn portal.
 
 h1. Fields {anchor:id=CONTref.Configuration.Deployment.Fields}
 
-*{{init-params}}*
+*init-params*
 || *Element* || *Type* || *Description* ||
-| *object-param* | {{Object}} | The parameter which is an Object |
+| *object-param* | {{Object}} | The parameter which is an Object. |
 
-*{{object-param}}*
+*object-param*
 || *Element* || *Type* || *Default value* || *object-param* ||
-| *name* | {{String}} |{{ACME Logo data}} | The name of this object parameter |
-| *description* | {{String}} |{{Deployment Descriptor}} | The description of this object parameter |
-| *object* | {{Class}} | {{org.exoplatform.services.deployment.DeploymentDescriptor}} | The object of this object parameter |
+| *name* | {{String}} |{{ACME Logo data}} | The name of this object parameter.|
+| *description* | {{String}} |{{Deployment Descriptor}} | The description of this object parameter. |
+| *object* | {{Class}} | {{org.exoplatform.services.deployment.DeploymentDescriptor}} | The object of this object-parameter. |
 
-*{{object}}*
+*object*
 || *Attribute* || *Type* || *Default value* || *Description* ||
-| *type* | {{String}} | {{org.exoplatform.services.deployment.DeploymentDescriptor (*)}} | The type of this object |
+| *type* | {{String}} | {{org.exoplatform.services.deployment.DeploymentDescriptor (*)}} | The type of this object. |
 
 _*org.exoplatform.services.deployment.DeploymentDescriptor*_
 || *Name* || *Type* || *Default value* || *Description* ||
-| *target* | {{Object}} | {{org.exoplatform.services.deployment.DeploymentDescriptor$Target (*)}} | The target node (which will contains the imported node) |
-| *sourcePath* | {{String}} | {{war:/conf/sample-portal/wcm/artifacts/site-resources/acme/Logo.xml}} | The absolute path of the XML file |
-| *cleanupPublication* | {{Boolean}} | {{false}} | Decide when allows to cleanup the publication lifecycle in the target folder after importing the data.{example}{example}true: allow{example}{example}false:not allow |
+| *target* | {{Object}} | {{org.exoplatform.services.deployment.DeploymentDescriptor$Target (*)}} | The target node which will contain the imported node. |
+| *sourcePath* | {{String}} | {{war:/conf/sample-portal/wcm/artifacts/site-resources/acme/Logo.xml}} | The absolute path of the XML file. |
+| *cleanupPublication* | {{Boolean}} | {{false}} | Specify when allows cleaning up the publication lifecycle in the target folder after importing the data.{example}{example}true: allow{example}{example}false:not allow |
 
-*{{org.exoplatform.services.deployment.DeploymentDescriptor$Target}}*
+*org.exoplatform.services.deployment.DeploymentDescriptor$Target*
 || *Field* || *Type* || *Default value* || *Description* ||
-| *repository* | {{String}} | {{repository}} | The repository of the target node |
-| *workspace* | {{String}} | {{collaboration}}  | The workspace of the target node |
-| *nodePath* | {{String}} | {{/sites content/live/acme/web contents/site artifacts}} | The path of the target node |
+| *repository* | {{String}} | {{repository}} | The repository of the target node. |
+| *workspace* | {{String}} | {{collaboration}}  | The workspace of the target node. |
+| *nodePath* | {{String}} | {{/sites content/live/acme/web contents/site artifacts}} | The path of the target node. |
 
 h1. Example of configuration {anchor:id=CONTref.Configuration.Deployment.Example_configuration}
-{code:language=xml|indent=2}
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.deployment.WCMContentInitializerService</target-component>
-    <component-plugin>
-      <name>Content Initializer Service</name>
-      <set-method>addPlugin</set-method>
-      <type>org.exoplatform.services.deployment.plugins.XMLDeploymentPlugin</type>
-      <description>XML Deployment Plugin</description>
-      <init-params>
-        <object-param>
-          <name>ACME Logo data</name>
-          <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
-            <field name="target">
-              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
-                <field name="repository">
-                  <string>repository</string>
-                </field>
-                <field name="workspace">
-                  <string>collaboration</string>
-                </field>
-                <field name="nodePath">
-                  <string>/sites content/live/acme/web contents/site artifacts</string>
-                </field>
-              </object>
-            </field>
-            <field name="sourcePath">
-              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/acme/Logo.xml</string>
-            </field>
-            <field name="cleanupPublication">
-              <boolean>true</boolean>
-            </field>
-          </object>
-        </object-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
+{code:xml}
+<external-component-plugins>
+  <target-component>org.exoplatform.services.deployment.WCMContentInitializerService</target-component>
+  <component-plugin>
+    <name>Content Initializer Service</name>
+    <set-method>addPlugin</set-method>
+    <type>org.exoplatform.services.deployment.plugins.XMLDeploymentPlugin</type>
+    <description>XML Deployment Plugin</description>
+    <init-params>
+      <object-param>
+        <name>ACME Logo data</name>
+        <description>Deployment Descriptor</description>
+        <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
+          <field name="target">
+            <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
+              <field name="repository">
+                <string>repository</string>
+              </field>
+              <field name="workspace">
+                <string>collaboration</string>
+              </field>
+              <field name="nodePath">
+                <string>/sites content/live/acme/web contents/site artifacts</string>
+              </field>
+            </object>
+          </field>
+          <field name="sourcePath">
+            <string>war:/conf/sample-portal/wcm/artifacts/site-resources/acme/Logo.xml</string>
+          </field>
+          <field name="cleanupPublication">
+            <boolean>true</boolean>
+          </field>
+        </object>
+      </object-param>
+    </init-params>
+  </component-plugin>
+</external-component-plugins>
 {code}

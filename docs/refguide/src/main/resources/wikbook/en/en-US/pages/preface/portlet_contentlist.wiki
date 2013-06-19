@@ -1,147 +1,146 @@
 h1. Available preferences {anchor:id=CONTref.Portlets.ContentList.AvailablePreferences}
-
-|| *Preference* || *Type* || *Default Value* || *Description* ||
-| *mode* | {{String}} | {{AutoViewerMode}} | The mode that the portlet uses to display content: all contents in a specific folder or all specific contents in the portlet. |
+|| *Preference* || *Type* || *Value* || *Description* ||
+| *mode* | {{String}} | {{AutoViewerMode}} | The mode for displaying content of the portlet: all contents in a specific folder or all specific contents in the portlet. |
 | *folderPath* | {{String}} | | The path to the folder whose contents are displayed by this portlet. |
 | *orderBy* | {{String}} | {{publication:liveDate}} | The property by which all the contents in the portlet are sorted. |
-| *orderType* | {{String}} | {{DESC}} | The type of the content sort method: ascending or descending |
-| *header* | {{String}} | | Header of the portlet. It is displayed at the top of the portlet. |
-| *automaticDetection* | {{Boolean}} | {{true}} | This value indicates whether the header of the portlet is chosen to be the title of the folder given in the *folderPath* parameter (true value) or the value given in the *header* paramter above |
-| *formViewTemplatePath* | {{String}} | {{/exo:ecm/views/templates/content-list-viewer/list/UIContentListPresentationDefault.gtmpl}} | Path to the template used to display the contents in this portlet. |
-| *paginatorTemplatePath* | {{String}} | {{/exo:ecm/views/templates/content-list-viewer/paginators/UIPaginatorDefault.gtmpl}} | Path to the paginator used to display the contents in this portlet. |
-| *itemsPerPage* | {{Integer}} | 10 | Number of contents displayed in every "page" of the portlet. |
+| *orderType* | {{String}} | {{DESC}} | The type of the content sort method: ascending or descending. |
+| *header* | {{String}} | | The header of the portlet which is displayed at the top of the portlet. |
+| *automaticDetection* | {{Boolean}} | {{true}} | This value indicates whether the header of the portlet is selected to be the title of the folder given in the _folderPath_ parameter (true value) or the value given in the _header_ parameter above. |
+| *formViewTemplatePath* | {{String}} | {{/exo:ecm/views/templates/content-list-viewer/list/UIContentListPresentationDefault.gtmpl}} | The path to the template used to display the contents in this portlet. |
+| *paginatorTemplatePath* | {{String}} | {{/exo:ecm/views/templates/content-list-viewer/paginators/UIPaginatorDefault.gtmpl}} | The path to the paginator used to display the contents in this portlet. |
+| *itemsPerPage* | {{Integer}} | 10 | The number of contents displayed in every "page" of the portlet. |
 | *showThumbnailsView* | {{Boolean}} | {{true}} | This value indicates whether the content image in this portlet is shown or not. |
 | *showTitle* | {{Boolean}} | {{true}} | This value indicates whether the content title in this portlet is shown or not. |
 | *showHeader* | {{Boolean}} | {{true}} | This value indicates whether the content header in this portlet is shown or not. |
-| *showRefreshButton* | {{Boolean}} | {{false}} | This value indicates whether the *refresh* button is shown in this portlet or not. |
+| *showRefreshButton* | {{Boolean}} | {{false}} | This value indicates whether the *Refresh* button is shown in this portlet or not. |
 | *showDateCreated* | {{Boolean}} | {{true}} | This value indicates whether the content created date in this portlet is shown or not. |
-| *showReadmore* | {{Boolean}} | {{true}} | This value indicates whether the *Readmore* button is shown in every content of the portlet (After clicking this button, user can read the whole text of the content). |
+| *showReadmore* | {{Boolean}} | {{true}} | This value indicates whether the *Read more* button is shown in every content of the portlet or not. After clicking this button, the user can read the whole text of the content. |
 | *showSummary* | {{Boolean}} | {{true}} | This value indicates whether the content summary in this portlet is shown or not. |
-| *showLink* | {{Boolean}} | {{true}} | If this value is *true*, the header of every content is also the link to view this content fully. If the value is *false*, the header is considered as a simple text |
-| *showRssLink* | {{Boolean}} | {{true}} | Show the rss link of this portlet. |
-| *basePath* | {{String}} | {{detail}} | Show the page in which the full content is displayed when user clicks to the *Read more* button. |
-| *contextualFolder* | {{String}} | {{contextualDisable}} | Enable/ disable the contextual mode of the portlet. If enabled, the portlet can take the folder path indicated in the URL to display contents. |
-| *showScvWith* | {{String}} | {{content-id}} | The name of the parameter shows the path of content in url to display when clicking the "Read more" button of this content. |
-| *showClvBy* | {{String}} | {{folder-id}} | The name of the parameter shows the path of the folder in url to display its contents. |
+| *showLink* | {{Boolean}} | {{true}} | If this value is {{true}}, the header of every content is also the link to view this content fully. If the value is {{false}}, the header is considered as a simple text. |
+| *showRssLink* | {{Boolean}} | {{true}} | Show the RSS link of this portlet. |
+| *basePath* | {{String}} | {{detail}} | Show the page in which the full content is displayed when the user clicks to the *Read more* button. |
+| *contextualFolder* | {{String}} | {{contextualDisable}} | Enable/disable the contextual mode of the portlet. If enabled, the portlet can take the folder path indicated in the URL to display contents. |
+| *showScvWith* | {{String}} | {{content-id}} | The parameter name which shows the folder path in the URL when the *Read more* button is clicked.|
+| *showClvBy* | {{String}} | {{folder-id}} | The parameter name which shows the folder path in the URL. |
 | *sharedCache* | {{Boolean}} | {{true}} | Define if the portlet will cache the displayed contents. |
 
 h1. Sample Configuration {anchor:id=CONTref.Portlets.ContentList.SampleConfiguration}
-{code:language=xml|indent=2}
-    <portlet-preferences>
-      <preference>
-	<name>mode</name>
-	<value>AutoViewerMode</value>
-	<read-only>false</read-only>
-      </preference>
-      <preference>
-	<name>folderPath</name>
-	<value></value>
-	<read-only>false</read-only>
-      </preference>
-      <preference>
-        <name>orderBy</name>
-        <value>publication:liveDate</value>
-        <read-only>false</read-only>
-      </preference>
-      <preference>
-        <name>orderType</name>
-        <value>DESC</value>
-        <read-only>false</read-only>
-      </preference>
-      <preference>
-        <name>header</name>
-        <value></value>
-        <read-only>false</read-only>
-      </preference>
-      <preference>
-        <name>automaticDetection</name>
-        <value>true</value>
-        <read-only>false</read-only>
-      </preference>
-      <preference>
-	<name>formViewTemplatePath</name>
-	<value>/exo:ecm/views/templates/content-list-viewer/list/UIContentListPresentationDefault.gtmpl</value>
-	<read-only>false</read-only>
-      </preference>
-      <preference>
-	<name>paginatorTemplatePath</name>
-	<value>/exo:ecm/views/templates/content-list-viewer/paginators/UIPaginatorDefault.gtmpl</value>
-	<read-only>false</read-only>
-      </preference>
-      <preference>
-	<name>itemsPerPage</name>
-	<value>10</value>
-	<read-only>false</read-only>
-      </preference>
-      <preference>
-        <name>showThumbnailsView</name>
-        <value>true</value>
-        <read-only>false</read-only>
-      </preference>
-      <preference>
-        <name>showTitle</name>
-        <value>true</value>
-        <read-only>false</read-only>
-      </preference>
-      <preference>
-        <name>showHeader</name>
-        <value>true</value>
-        <read-only>false</read-only>
-      </preference>
-      <preference>
-	<name>showRefreshButton</name>
-	<value>false</value>
-	<read-only>false</read-only>
-      </preference>
-      <preference>
-        <name>showDateCreated</name>
-        <value>true</value>
-        <read-only>false</read-only>
-      </preference>
-      <preference>
-        <name>showReadmore</name>
-        <value>true</value>
-        <read-only>false</read-only>
-      </preference>
-      <preference>
-        <name>showSummary</name>
-        <value>true</value>
-        <read-only>false</read-only>
-      </preference>
-      <preference>
-        <name>showLink</name>
-        <value>true</value>
-        <read-only>false</read-only>
-      </preference>
-      <preference>
-        <name>showRssLink</name>
-        <value>true</value>
-        <read-only>false</read-only>
-      </preference>
-      <preference>
-        <name>basePath</name>
-        <value>detail</value>
-        <read-only>false</read-only>
-      </preference>
-      <preference>
-        <name>contextualFolder</name>
-        <value>contextualDisable</value>
-        <read-only>false</read-only>
-      </preference>
-      <preference>
-        <name>showScvWith</name>
-        <value>content-id</value>
-        <read-only>false</read-only>
-      </preference>
-      <preference>
-        <name>showClvBy</name>
-        <value>folder-id</value>
-        <read-only>false</read-only>
-      </preference>
-      <preference>
-	<name>sharedCache</name>
-	<value>true</value>
-	<read-only>false</read-only>
-      </preference>      
-    </portlet-preferences>
+{code}
+<portlet-preferences>
+  <preference>
+    <name>mode</name>
+    <value>AutoViewerMode</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>folderPath</name>
+    <value></value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>orderBy</name>
+    <value>publication:liveDate</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>orderType</name>
+    <value>DESC</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>header</name>
+    <value></value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>automaticDetection</name>
+    <value>true</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>formViewTemplatePath</name>
+    <value>/exo:ecm/views/templates/content-list-viewer/list/UIContentListPresentationDefault.gtmpl</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>paginatorTemplatePath</name>
+    <value>/exo:ecm/views/templates/content-list-viewer/paginators/UIPaginatorDefault.gtmpl</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>itemsPerPage</name>
+    <value>10</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>showThumbnailsView</name>
+    <value>true</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>showTitle</name>
+    <value>true</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>showHeader</name>
+    <value>true</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>showRefreshButton</name>
+    <value>false</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>showDateCreated</name>
+    <value>true</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>showReadmore</name>
+    <value>true</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>showSummary</name>
+    <value>true</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>showLink</name>
+    <value>true</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>showRssLink</name>
+    <value>true</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>basePath</name>
+    <value>detail</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>contextualFolder</name>
+    <value>contextualDisable</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>showScvWith</name>
+    <value>content-id</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>showClvBy</name>
+    <value>folder-id</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>sharedCache</name>
+    <value>true</value>
+    <read-only>false</read-only>
+  </preference>
+</portlet-preferences>
 {code}

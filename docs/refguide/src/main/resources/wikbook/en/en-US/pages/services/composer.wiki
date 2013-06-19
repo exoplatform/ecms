@@ -1,17 +1,15 @@
 This class is used to get contents inside the WCM product.
-You should not access contents directly from the jcr on the front side.
+You should not access contents directly from the JCR on the front side.
 
-In generall, this service stands between publication and cache.
+In general, this service stands between publication and cache.
 
 _Package org.exoplatform.services.wcm.publication.WCMComposer_
 
-|| *Method* || *Return* || *Prototype* || *Description* ||
-| *getContent* | {{Node}} | {{getContent(String repository, String workspace, String nodeIdentifier, HashMap<String, String> filters, SessionProvider sessionProvider)}}{example}{example} {{throws Exception ;}} | returns content at the specified path based on filters.{example}{example}repository the repository{example}{example} workspace the workspace{example}{example}@param path: the path{example}{example} @param filters: the filters{example}{example} @param sessionProvider: the session provider{example}{example}@return a jcr node {example}{example} @throws Exception: the exception|
-| *getContents* | {{List<Node>}} | {{getContents(String repository, String workspace, String path, HashMap<String, String> filters, SessionProvider sessionProvider)}}{example}{example} {{throws Exception ;}} | returns contents at the specified path based on filters.{example}{example}{example}{example} @param repository: the repository {example}{example}{example}{example} @param workspace: the workspace{example}{example} @param path:  the path {example}{example} @param filters: the filters {example}{example} @param sessionProvider: the session provider {example}{example}{example}{example} @return a jcr node {example}{example} @throws Exception: the exception|
-| *updateContent* | {{boolean}} | {{updateContent(String repository, String workspace, String nodeIdentifier, HashMap<String, String> filters)}}{example}{example} {{throws Exception;}} | Update content.{example}{example}{example}{example}repository the repository{example}{example}@param workspace: the workspace{example}{example}@param path: the path{example}{example}{example}{example}@param filters: the filters{example}{example}{example}{example}@return true, if successful |
-| *getAllowedStates*| {{List<String>}} | {{getAllowedStates(String mode)}}{example}{example} {{throws Exception ;}} | returns allowed states for a specified mode.{example}{example}{example}{example} @param mode: the mode {example}{example} @return a jcr node {example}{example} @throws Exception: the exception |
-| *cleanTemplates* | {{void}} | {{cleanTemplates()}}{example}{example} {{throws Exception ;}} | initialize the templates hashmap{example}{example}{example}{example} @throws Exception: the exception |
-| *isCached* | {{boolean}} | {{isCached()}} {example}{example}{{throws Exception;}} | Check isCache or not {example}{example}@return the state of cache {example}{example} @throws Exception: the exception |
-| *updateTemplatesSQLFilter* | {{String}} | {{updateTemplatesSQLFilter(String repository)}} {example}{example}{{throws Exception;}} | Update all document nodetypes and write a query cause. {example}{example} @param repository: the repository {example}{example}{example}{example}@return: A part of the query allow search all document node and taxonomy link also. Return null if there is any exception. {example}{example} @throws Exception: the exception|
-
-
+|| *Method* ||*Param* || *Return* || *Description* ||
+| *getContent*(String repository, String workspace, String nodeIdentifier, HashMap<String, String> filters, SessionProvider sessionProvider)throws Exception; |{{repository}} {example}{example} {{workspace}}{example}{example} {{nodeIdentifier}} {example}{example} {{filters}}{example}{example} {{sessionProvider}}: The session provider. | {{Node}} | Return contents at the specified path based on filters. |
+| *getContents*(String repository, String workspace, String path, HashMap<String, String> filters, SessionProvider sessionProvider)throws Exception; |{{repository}} {example}{example} {{workspace}}{example}{example} {{path}} {example}{example} {{filters}}{example}{example} {{sessionProvider}}: The session provider. | {{List<Node>}} | Return contents at the specified path based on filters.|
+| *updateContent*(String repository, String workspace, String nodeIdentifier, HashMap<String, String> filters)throws Exception; |{{repository}} {example}{example}{{workspace}} {example}{example} {{path}} {example}{example} {{filters}} | {{boolean}} | Update content.|
+| *getAllowedStates*String mode)throws Exception; |{{mode}}| {{List<String>}} | Return allowed states for a specified mode.  |
+| *cleanTemplates*()throws Exception;| {{N/A}} | {{void}} |Initialize the template hashmap.|
+| *isCached*()throws Exception;| {{N/A}} | {{boolean}} |  Check isCache or not.|
+| *updateTemplatesSQLFilter*()throws Exception; | {{N/A}} | {{String}} | Update all document nodetypes and write a query cause. It returns a part of the query that allows to search all document nodes and taxonomy links. Return null if there is any exception.|

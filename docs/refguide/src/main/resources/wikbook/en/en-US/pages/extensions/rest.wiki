@@ -1,8 +1,8 @@
-h1. REST Overview {anchor:id=CONTref.Extensions.RESTServices.RESTOverview}
+h1. Overview {anchor:id=CONTref.Extensions.RESTServices.RESTOverview}
 
 REST-style architectures consist of clients and servers. Clients initiate requests to servers; servers process requests and return appropriate responses. Requests and responses are built around the transfer of "representations" of "resources". A resource can be essentially any coherent and meaningful concept that may be addressed. A representation of a resource is typically a document that captures the current or intended state of a resource.
 
-At any particular time, a client can either be in transition between application states or "at rest". A client in a REST state is able to interact with its user, but creates no load and consumes no per-client storage on the set of servers or on the network.
+At any particular time, a client can either be in transition between application states or "at rest". A client in a REST state is able to interact with its users, but creates no load and consumes no per-client storage on the set of servers or on the network.
 
 The client begins sending requests when it is ready to make the transition to a new state. While one or more requests are outstanding, the client is considered to be in transition. The representation of each application state contains links that may be used the next time, the client chooses to initiate a new state transition.
 
@@ -10,60 +10,57 @@ REST is initially described in the context of HTTP, but is not limited to that p
 
 h1. Restful Web Service {anchor:id=CONTref.Extensions.RESTServices.RestfulWebService}
 h2. HTTP Methods {anchor:id=CONTref.Extensions.RESTServices.RestfulWebService.HTTPMethods}
-Here is the convention we should follow:
-|| *Method* ||*Definition*||
-| *GET* | Get a Resource. It should never modify a state |
-| *POST* | Create a Resource (or anything that don't fit elsewhere) |
-| *PUT* | Update a Resource |
-| *DELETE* | Delete a Resource |
+Here is the convention you should follow:
+|| *Method* || *Definition* ||
+| *GET* | Get a Resource. Its state should not be modified. |
+| *POST* | Create a Resource (or anything that does not fit elsewhere). |
+| *PUT* | Update a Resource. |
+| *DELETE* | Delete a Resource. |
 
 h2. Formats {anchor:id=CONTref.Extensions.RESTServices.RestfulWebService.Formats}
-We should support this format for all our APIs:
-* [Json|http://tools.ietf.org/html/rfc4627]: because it's easy to parse in a lot of language like Javascript, Python or Ruby
-* [XML|http://www.w3.org/TR/xml/]: Java developers like it
-* [Atom|http://tools.ietf.org/html/rfc4287]: It is the standard, it can be used by many applications.
-listener
-h2. Parameters common to every APIs {anchor:id=CONTref.Extensions.RESTServices.RestfulWebService.Parameters_common_every_APIs}
+The followings are formats which need to be supported for all your APIs:
+* [JSON|http://tools.ietf.org/html/rfc4627]: This format makes developers easy to parse in a lot of languages, such as JavaScript, Python or Ruby.
+* [XML|http://www.w3.org/TR/xml/]: Most of Java developers like using this format.
+* [ATOM|http://tools.ietf.org/html/rfc4287]: This is a standard format which can be used by many applications.
+
 h2. Data Format {anchor:id=CONTref.Extensions.RESTServices.RestfulWebService.DataFormat}
 The default format is JSON.
 
-The format of the response can be specified by a parameter in the request: "_format_"
-Specify the format requested. 
+The response format can be specified by a parameter in the request: "_format_". You need to specify the format requested.
 
 h2. REST configuration {anchor:id=CONTref.Extensions.RESTServices.RestfulWebService.RestConfiguration}
 
-First, we have to register REST service class to the configuration file in the package named *_conf.portal_*
-{code:lang=xml}
-<configuration
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd http://www.exoplaform.org/xml/ns/kernel_1_1.xsd"
-   xmlns="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd">
+First, you need to register the REST service class to the configuration file in the package named _conf.portal_.
 
-   <component>    			        	   
-	  <type>org.exoplatform.services.ecm.publication.REST.presentation.document.publication.PublicationGetDocumentRESTService</type>
-   </component>	
+{code:xml}
+<configuration
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd http://www.exoplaform.org/xml/ns/kernel_1_1.xsd"
+  xmlns="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd">
+  <component>
+    <type>org.exoplatform.services.ecm.publication.REST.presentation.document.publication.PublicationGetDocumentRESTService</type>
+  </component>
 </configuration>
 {code}
 
 
 h2. Create a REST service {anchor:id=CONTref.Extensions.RESTServices.RestfulWebService.CreateRESTService}
 
-We start to create GetEditedDocumentRESTService that implements from the ResourceContainer interface.
+You can start creating _GetEditedDocumentRESTService_ that implements from the ResourceContainer interface as follows:
 
-{code}
+{code:java}
 @Path("/presentation/document/edit/")
-	public class GetEditedDocumentRESTService implements ResourceContainer {
-		@Path("/{repository}/")
+public class GetEditedDocumentRESTService implements ResourceContainer {
+	@Path("/{repository}/")
 		@GET
 		public Response getLastEditedDoc(@PathParam("repository") String repository,
 		   @QueryParam("showItems") String showItems) throws Exception {
 		   ........
 		}
-	}
+}
 {code}
 
-
 || *Parameters* ||*Definition*||
-| @Path("/presentation/document/edit/") | Specify the URI path that a resource or class method will serve requests for.|
+| @Path("/presentation/document/edit/") | Specify the URI path which a resource or class method will serve requests for.|
 | @PathParam("repository") | Bind the value *repository* of a URI  parameter or a path segment containing the template parameter to a resource method parameter, resource class field, or resource class bean property. |
-| @QueryParam("showItems") | Bind the value *showItems* of a HTTP query parameter to a resource method parameter, resource class field, or resource class bean property.|
+| @QueryParam("showItems") | Bind the value *showItems* of a HTTP query parameter to a resource method parameter, resource class field, or resource class bean property. |

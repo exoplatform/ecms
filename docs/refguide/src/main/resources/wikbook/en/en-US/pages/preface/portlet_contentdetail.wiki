@@ -1,79 +1,79 @@
 h1. Available preferences {anchor:id=CONTref.Portlets.ContentDetail.AvailablePreferences}
 
-|| *Preference* || *Type* || *Default Value* || *Description* ||
-| *repository* | {{String}} | {{repository}} | Repository is a place where data are stored and maintained |
-| *workspace* | {{String}} | {{collaboration}} | Workspace is a place where the content is stored |
-| *nodeIdentifier* | {{String}} | {{N/A}} | The UUID or the path of content that you want to show |
-| *ShowTitle* | {{Boolean}} | {{true}} | Show the content title on the top of the portlet |
-| *ShowDate* | {{Boolean}} | {{false}} | Show the content date on the top of the portlet |
-| *ShowOptionBar* | {{Boolean}} | {{false}} | Show a bar with some actions (Print, Back) |
-| *ContextEnable* | {{Boolean}} | {{false}} | Define if the portlet will use the parameter on URL as the path to content to display or not|
-| *ParameterName* | {{String}} | {{content-id}} | Define which parameter will be used to get the content's path |
-| *ShowVote* | {{Boolean}} | {{false}} | Show the result of voting for the displayed content |
-| *ShowComments* | {{Boolean}} | {{false}} | Show the existing comments of this content (if any) |
+|| *Preference* || *Type* || *Value* || *Description* ||
+| *repository* | {{String}} | {{repository}} | The place where data are stored and maintained. |
+| *workspace* | {{String}} | {{collaboration}} | The place where content is stored. |
+| *nodeIdentifier* | {{String}} | {{N/A}} | The UUID or the path of content that you want to show. |
+| *ShowTitle* | {{Boolean}} | {{true}} | Show the content title on the top of the portlet. |
+| *ShowDate* | {{Boolean}} | {{false}} | Show the content date on the top of the portlet. |
+| *ShowOptionBar* | {{Boolean}} | {{false}} | Show a bar with some actions (Print, Back). |
+| *ContextEnable* | {{Boolean}} | {{false}} | Define if the portlet will use the parameter on URL as the path to content to display or not. |
+| *ParameterName* | {{String}} | {{content-id}} | Define which parameter will be used to get the content's path. |
+| *ShowVote* | {{Boolean}} | {{false}} | Show the result of voting for the displayed content. |
+| *ShowComments* | {{Boolean}} | {{false}} | Show the existing comments of this content (if any). |
 | *sharedCache* | {{Boolean}} | {{true}} | Define if the portlet will cache the displayed contents. |
 
 h1. Sample configuration {anchor:id=CONTref.Portlets.ContentDetail.SampleConfiguration}
-{code:language=xml|indent=2}
-		<portlet-preferences>
-			<preference>
-				<name>repository</name>
-				<value>repository</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>workspace</name>
-				<value>collaboration</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>nodeIdentifier</name>
-				<value>/myfolder/mycontent</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>ShowTitle</name>
-				<value>true</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>ShowDate</name>
-				<value>false</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>ShowOptionBar</name>
-				<value>false</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>ShowPrintAction</name>
-				<value>true</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>isQuickCreate</name>
-				<value>false</value>
-				<read-only>true</read-only>
-			</preference>
-			<preference>
-				<name>ContextEnable</name>
-				<value>false</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>ParameterName</name>
-				<value>content-id</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>sharedCache</name>
-				<value>true</value>
-				<read-only>false</read-only>
-			</preference>			
-		</portlet-preferences>
+{code:xml}
+<portlet-preferences>
+  <preference>
+    <name>repository</name>
+    <value>repository</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>workspace</name>
+    <value>collaboration</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>nodeIdentifier</name>
+    <value>/myfolder/mycontent</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>ShowTitle</name>
+    <value>true</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>ShowDate</name>
+    <value>false</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>ShowOptionBar</name>
+    <value>false</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>ShowPrintAction</name>
+    <value>true</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>isQuickCreate</name>
+    <value>false</value>
+    <read-only>true</read-only>
+  </preference>
+  <preference>
+    <name>ContextEnable</name>
+    <value>false</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>ParameterName</name>
+    <value>content-id</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>sharedCache</name>
+    <value>true</value>
+    <read-only>false</read-only>
+  </preference>
+</portlet-preferences>
 {code}
 
 {note}
-In 2.1.x, there are some preferences that are no longer used, for example, ShowPrintAction preference.
+In eXo Content 2.1.x, there are some preferences that are no longer used, for example, the *ShowPrintAction* preference.
 {note}

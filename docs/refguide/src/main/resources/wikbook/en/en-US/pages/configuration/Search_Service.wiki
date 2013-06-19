@@ -2,8 +2,8 @@ _SiteSearchService_ is used in the Search portlet that allows users to find all 
 
 It is configured in the _core/core-configuration/src/main/webapp/WEB-INF/conf/configuration.xml_ file as follows:
 
-{code:language=xml|indent=2}
-	<import>war:/conf/wcm-core/core-search-configuration.xml</import>
+{code:xml}
+<import>war:/conf/wcm-core/core-search-configuration.xml</import>
 {code}
 
 h1. Component Configuration  {anchor:id=CONTref.Configuration.Search_Service.Component_Configuration}
@@ -42,7 +42,7 @@ Type: _org.exoplatform.services.wcm.search.ExcludeIncludeDataTypePlugin_
 The {{search.exclude.datatype}} property includes two attributes:
 ||*Attributes*|| *Values*||*Description*||
 |name |mimetypes|Name of the property param. |
-|value |text/css,text/javascript,application/x-javascript,text/ecmascript |List mimetypes which will be excluded from the search results.|
+|value |text/css,text/javascript,application/x-javascript,text/ecmascript |List of mimetypes which will be excluded from the search results.|
 
 
 h1. Sample Configuration  {anchor:id=CONTref.Configuration.Search_Service.Sample_Config}

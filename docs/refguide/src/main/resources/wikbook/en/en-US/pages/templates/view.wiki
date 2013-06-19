@@ -1,35 +1,48 @@
-{code:language=java}
+The following is an sample code of the *View* template of a content node:
+
+* Get a content node to display:
+{code:groovy}
 <%
-	def node = uicomponent.getNode() ;
-	def originalNode = uicomponent.getOriginalNode()
+  def node = uicomponent.getNode() ;
+  def originalNode = uicomponent.getOriginalNode()
 %>
 {code}
 
-{code:language=java}
+* Display the name of the content node:
+{code:groovy}
 <%=node.getName()%>
 {code}
 
-{code:language=java}
-<%if(node.hasProperty("exo:title")) {%>
+* Display the _exo\:title_ property of the content node:
+{code:groovy}
+<%
+  if(node.hasProperty("exo:title")) {
+%>
   <%=node.getProperty("exo:title").getString()%>
-<%}%>
+<%
+  }
+%>
 {code}
 
-{code:language=java}
+* Display the _exo\:date_ property of the content node in a desired format. For example: "MM DD YYYY" or "YYYY MM DD".
+{code:groovy}
 <%
-	import java.text.SimpleDateFormat ;
-	SimpleDateFormat dateFormat = new SimpleDateFormat() ;
+  import java.text.SimpleDateFormat ;
+  SimpleDateFormat dateFormat = new SimpleDateFormat() ;
 %>
 ...
 
-<%if(node.hasProperty("exo:date")) {
-  dateFormat.applyPattern("MMMMM dd yyyy") ;						
+<%
+  if(node.hasProperty("exo:date")) {
+    dateFormat.applyPattern("MMMMM dd yyyy") ;
 %>
-  <%=dateFormat.format(node.getProperty("exo:date").getDate().getTime())%>
-<%}%>
+    <%=dateFormat.format(node.getProperty("exo:date").getDate().getTime())%>
+<%
+  }
+%>
 {code}
 
-
-{code:language=java}
+* Display the translation of the _Sample.view.label.node-name_ message in different lanaguages.
+{code:groovy}
 <%=_ctx.appRes("Sample.view.label.node-name")%>
 {code}
