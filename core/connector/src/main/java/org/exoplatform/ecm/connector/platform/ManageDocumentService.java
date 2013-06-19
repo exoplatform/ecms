@@ -70,7 +70,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * This is a service which is used to perform some actions on a folder or on a file, such as creating,
+ * This service is used to perform some actions on a folder or on a file, such as creating,
  * or deleting a folder/file, or uploading a file.
  *
  * @LevelAPI Provisional
@@ -130,9 +130,10 @@ public class ManageDocumentService implements ResourceContainer {
 
   private static final String  PRIVATE              = "Private";
   /**
-   * Instantiates a new platform document selector.
+   * Instantiates a document service.
    *
-   * @param manageDriveService
+   * @param manageDriveService Instantiates a drive manager service.
+   * @param linkManager Instantiates a link manager service.
    */
   public ManageDocumentService(ManageDriveService manageDriveService, LinkManager linkManager) {
     this.manageDriveService = manageDriveService;
@@ -144,12 +145,12 @@ public class ManageDocumentService implements ResourceContainer {
   }
 
   /**
-   * Get all drives by type (General, Group or Personal).
+   * Gets all drives by type (General, Group or Personal).
    *
    * @param driveType The types of drive (General, Group, or Personal).
-   * @param showPrivate Show the Private drive or not. The default value is false.
-   * @param showPersonal Show the Personal drive or not. The default value is false.
-   * @return {@link Document} Contain the drives.
+   * @param showPrivate Shows the Private drive or not. The default value is false.
+   * @param showPersonal Shows the Personal drive or not. The default value is false.
+   * @return {@link Document} which contains the drives.
    * @throws Exception The exception
    *
    * @anchor ManageDocumentService.getDrives
@@ -201,13 +202,13 @@ public class ManageDocumentService implements ResourceContainer {
   }
 
   /**
-   * Get all folders and files which can be viewed by the current user.
+   * Gets all folders and files which can be viewed by the current user.
    *
-   * @param driveName The name of drive.
-   * @param workspaceName The name of workspace.
+   * @param driveName The drive name.
+   * @param workspaceName The workspace name.
    * @param currentFolder The path to the folder to achieve its folders and files.
-   * @param showHidden Show the hidden items or not. The default value is false.
-   * @return {@link Document} Contain the folders and files.
+   * @param showHidden Shows the hidden items or not. The default value is false.
+   * @return {@link Document} which contains the folders and files.
    * @throws Exception The exception
    *
    * @anchor ManageDocumentService.getFoldersAndFiles
@@ -248,12 +249,12 @@ public class ManageDocumentService implements ResourceContainer {
   }
 
   /**
-   * Delete a folder/file.
+   * Deletes a folder/file.
    *
-   * @param driveName The name of drive.
-   * @param workspaceName The name of workspace.
+   * @param driveName The drive name.
+   * @param workspaceName The workspace name.
    * @param itemPath The path to the folder/file.
-   * @return {@link Response} Return the status of an item which has been deleted.
+   * @return {@link Response} Returns the status of an item which has been deleted.
    * @throws Exception The exception
    *
    * @anchor ManageDocumentService.deleteFolderOrFile
@@ -296,13 +297,13 @@ public class ManageDocumentService implements ResourceContainer {
   }
 
   /**
-   * Create a new folder and return its information.
+   * Creates a new folder and returns its information.
    *
-   * @param driveName The name of drive.
-   * @param workspaceName The name of workspace.
+   * @param driveName The drive name.
+   * @param workspaceName The workspace name.
    * @param currentFolder The path to the folder where a child folder is added.
-   * @param folderName The name of folder.
-   * @return {@link Document} Contain the created folder.
+   * @param folderName The folder name.
+   * @return {@link Document} which contains the created folder.
    * @throws Exception The exception
    *
    * @anchor ManageDocumentService.createFolder
@@ -353,10 +354,10 @@ public class ManageDocumentService implements ResourceContainer {
   }
 
   /**
-   * Upload a file to the server.
+   * Uploads a file to the server.
    *
-   * @param uploadId The Id of uploaded resource.
-   * @param servletRequest The servlet request.
+   * @param uploadId The Id of the uploaded resource.
+   * @param servletRequest The request.
    *
    * @return The response.
    *
@@ -375,16 +376,16 @@ public class ManageDocumentService implements ResourceContainer {
   }
 
   /**
-   * Return information about the upload status of a file (upload percentage, file name, and more).
+   * Returns information about the upload status of a file, such as the upload percentage, the file name, and more.
    *
-   * @param workspaceName The name of workspace.
-   * @param driveName The name of drive.
+   * @param workspaceName The workspace name.
+   * @param driveName The drive name.
    * @param currentFolder The path to the current folder.
    * @param currentPortal The name of the current site.
    * @param action The action to perform (saving, processing, and more).
-   * @param language The language of user.
-   * @param fileName The name of file.
-   * @param uploadId The Id of the uploaded resource .
+   * @param language The language of the user.
+   * @param fileName The name of the file.
+   * @param uploadId The Id of the uploaded resource.
    * @return The response.
    * @throws Exception The exception
    *
@@ -698,14 +699,14 @@ public class ManageDocumentService implements ResourceContainer {
   /**
    * Creates the process upload response.
    *
-   * @param workspaceName the workspace name
-   * @param userId the user id
-   * @param action the action
-   * @param language the language
-   * @param fileName the file name
-   * @param uploadId the upload id
-   * @param siteName the portal name
-   * @param currentFolderNode the current folder node
+   * @param workspaceName the workspace name.
+   * @param userId The user Id.
+   * @param action The action.
+   * @param language The language.
+   * @param fileName The file name.
+   * @param uploadId The upload Id.
+   * @param siteName The portal name.
+   * @param currentFolderNode The current folder node.
    *
    * @return the response
    *

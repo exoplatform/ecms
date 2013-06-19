@@ -28,7 +28,7 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 
 /**
- * Return a list of favorite documents of a given user. 
+ * Returns a list of favorite documents of a given user.
  *
  * @LevelAPI Provisional
  * 
@@ -60,12 +60,12 @@ public class FavoriteRESTService implements ResourceContainer {
   }
 
   /**
-   * Return a list of favorite documents of a given user.
+   * Returns a list of favorite documents of a given user.
    * 
-   * @param repoName The name of repository.
-   * @param workspaceName The name of workspace.
+   * @param repoName The repository name.
+   * @param workspaceName The workspace name.
    * @param userName The username.
-   * @param showItems  Show the number of items per page.
+   * @param showItems  Shows the number of items per page.
    * @return Response inputstream.
    * @throws Exception
    * 

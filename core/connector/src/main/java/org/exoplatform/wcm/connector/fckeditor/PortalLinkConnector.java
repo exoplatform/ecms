@@ -63,7 +63,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * Return a page URI for a given location.
+ * Returns a page URI for a given location.
  *
  * @LevelAPI Provisional
  *
@@ -96,10 +96,10 @@ public class PortalLinkConnector implements ResourceContainer {
   /**
    * Instantiates a new portal link connector.
    *
-   * @param params the params.
-   * @param dataStorage the data storage.
-   * @param userACL the user acl.
-   * @param servletContext the servlet context.
+   * @param params The params.
+   * @param dataStorage The data storage.
+   * @param userACL The user ACL.
+   * @param servletContext The servlet context.
    *
    * @throws Exception the exception
    */
@@ -113,11 +113,11 @@ public class PortalLinkConnector implements ResourceContainer {
   }
 
   /**
-   * Get the page URI.
+   * Gets the page URI.
    *
    * @param currentFolder The current folder.
-   * @param command The command.
-   * @param type The type.
+   * @param command The command to get folders/files.
+   * @param type The file type.
    * @return The page URI.
    * @throws Exception The exception
    *
@@ -144,7 +144,7 @@ public class PortalLinkConnector implements ResourceContainer {
   /**
    * Gets the current user.
    *
-   * @return the current user
+   * @return The current user
    */
   private String getCurrentUser() {
     try {
@@ -159,11 +159,11 @@ public class PortalLinkConnector implements ResourceContainer {
   }
 
   /**
-   * Builds the reponse.
+   * Builds the response.
    *
-   * @param currentFolder the current folder
-   * @param command the command
-   * @param userId the user id
+   * @param currentFolder The current folder.
+   * @param command The command.
+   * @param userId The user Id
    *
    * @return the response
    *
@@ -189,11 +189,11 @@ public class PortalLinkConnector implements ResourceContainer {
   /**
    * Builds the portal xml response.
    *
-   * @param currentFolder the current folder
-   * @param command the command
-   * @param userId the user id
+   * @param currentFolder The current folder.
+   * @param command The command.
+   * @param userId The user Id.
    *
-   * @return the document
+   * @return The document
    *
    * @throws Exception the exception
    */
@@ -230,11 +230,11 @@ public class PortalLinkConnector implements ResourceContainer {
   /**
    * Builds the navigation xml response.
    *
-   * @param currentFolder the current folder
-   * @param command the command
-   * @param userId the user id
+   * @param currentFolder The current folder.
+   * @param command The command.
+   * @param userId The user Id.
    *
-   * @return the document
+   * @return The document.
    *
    * @throws Exception the exception
    */
@@ -300,12 +300,12 @@ public class PortalLinkConnector implements ResourceContainer {
   }
 
   /**
-   * Inits the root element.
+   * Initializes the root element.
    *
-   * @param commandStr the command str
-   * @param currentPath the current path
+   * @param commandStr The command str.
+   * @param currentPath The current path.
    *
-   * @return the element
+   * @return The element.
    *
    * @throws ParserConfigurationException the parser configuration exception
    */
@@ -326,14 +326,14 @@ public class PortalLinkConnector implements ResourceContainer {
   }
 
   /**
-   * Process page node.
+   * Processes page nodes.
    *
-   * @param portalName the portal name
-   * @param userNode the user node
-   * @param foldersElement the root element
+   * @param portalName The portal name.
+   * @param userNode The user node.
+   * @param foldersElement The root element.
    * @param filesElement
-   * @param userId the user id
-   * @param portalConfigService the portal config service
+   * @param userId The user Id.
+   * @param portalConfigService The portal config service.
    *
    * @throws Exception the exception
    */

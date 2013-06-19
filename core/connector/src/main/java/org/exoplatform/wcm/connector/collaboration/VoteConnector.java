@@ -41,10 +41,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * Return and set a vote value of a given node in the sent parameter. 
+ * Returns and sets a vote value of a given node in the sent parameter.
  *
  * {{{{portalname}}}}: The name of portal.
- * {{{{restcontextname}}}}: The context name of REST web application which is deployed to the "{{{{portalname}}}}" portal.
+ * {{{{restcontextname}}}}: The context name of the REST web application which is deployed to the "{{{{portalname}}}}" portal.
  *
  * @LevelAPI Provisional
  * 
@@ -59,7 +59,7 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
   public VoteConnector() {}
 
   /**
-   * Set a vote value for a given content.
+   * Sets a vote value for a given content.
    *
    * @param jcrPath The path of the content.
    * @param vote The vote value.
@@ -82,10 +82,10 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
   }
 
  /**
-   * Return a vote value for a given content.
+   * Returns a vote value for a given content.
    *
-   * @param repositoryName The name of repository.
-   * @param workspaceName The name of workspace.
+   * @param repositoryName The repository name.
+   * @param workspaceName The workspace name.
    * @param jcrPath The path of the content.
    * @return http The code.
    * @throws Exception The exception
@@ -105,10 +105,10 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
 
 
   /**
-   * Set a vote value for a given content.
+   * Sets a vote value for a given content.
    *
-   * @param repositoryName The name of repository.
-   * @param workspaceName The name of workspace.
+   * @param repositoryName The repository name.
+   * @param workspaceName The workspace name.
    * @param jcrPath The path of the content.
    * @param vote The vote value.
    * @param lang The language of the content.
@@ -150,10 +150,10 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
   }
 
   /**
-   * Return a vote value for a given content.
+   * Returns a vote value for a given content.
    *
-   * @param repositoryName The name of repository.
-   * @param workspaceName The name of workspace.
+   * @param repositoryName The repository name.
+   * @param workspaceName The workspace name.
    * @param jcrPath The path of the content.
    * @return http The code
    * @throws Exception The exception

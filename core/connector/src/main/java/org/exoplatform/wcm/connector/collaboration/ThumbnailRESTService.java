@@ -48,10 +48,10 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
- * Return a responding data as a thumbnail image.
+ * Returns a responding data as a thumbnail image.
  * {{{{repoName}}}}: The name of repository.
  * {{{{workspaceName}}}}: The name of workspace.
- * {{{{{nodePath}}}}: The node path.
+ * {{{{nodePath}}}}: The node path.
  *
  * {{{{portalname}}}}: The name of the portal.
  * {{{{restcontextname}}}}: The context name of REST web application which is deployed to the "{{{{portalname}}}}" portal.
@@ -84,11 +84,11 @@ public class ThumbnailRESTService implements ResourceContainer {
   }
 
 /**
- * Return an image at a medium size (64x64).
+ * Returns an image with a medium size (64x64).
  * For example: /portal/rest/thumbnailImage/medium/repository/collaboration/test.gif/
  *
- * @param repoName The name of repository.
- * @param workspaceName The name of workspace.
+ * @param repoName The repository name.
+ * @param workspaceName The workspace name.
  * @param nodePath The node path.
  * @return Response inputstream.
  * @throws Exception
@@ -108,10 +108,10 @@ public class ThumbnailRESTService implements ResourceContainer {
   }
 
 /**
- * Return an image at a big size.
+ * Returns an image with a big size.
  *
- * @param repoName The name of repository.
- * @param workspaceName The name of workspace.
+ * @param repoName The repository name.
+ * @param workspaceName The workspace name.
  * @param nodePath The node path.
  * @return Response inputstream.
  * @throws Exception
@@ -128,10 +128,10 @@ public class ThumbnailRESTService implements ResourceContainer {
   }
 
 /**
- * Return an image at a large size (300x300).
+ * Returns an image with a large size (300x300).
  *
- * @param repoName The name of repository.
- * @param workspaceName The name of workspace.
+ * @param repoName The repository name.
+ * @param workspaceName The workspace name.
  * @param nodePath The node path.
  * @return Response inputstream.
  * @throws Exception
@@ -148,10 +148,10 @@ public class ThumbnailRESTService implements ResourceContainer {
   }
 
 /**
- * Return an image at a small size (32x32).
+ * Returns an image with a small size (32x32).
  *
- * @param repoName The name of repository.
- * @param workspaceName The name of workspace.
+ * @param repoName The repository name.
+ * @param workspaceName The workspace name.
  * @param nodePath The node path.
  * @return Response inputstream.
  * @throws Exception
@@ -168,11 +168,11 @@ public class ThumbnailRESTService implements ResourceContainer {
   }
 
 /**
- * Return an image at a custom size.
+ * Returns an image with a custom size.
  *
  * @param size The customized size of the image.
- * @param repoName The name of repository.
- * @param workspaceName The name of workspace.
+ * @param repoName The repository name.
+ * @param workspaceName The workspace name.
  * @param nodePath The node path.
  * @return Response inputstream.
  * @throws Exception
@@ -190,10 +190,10 @@ public class ThumbnailRESTService implements ResourceContainer {
   }
 
   /**
-   * Return an image at an original size.
+   * Returns an image with an original size.
    *
-   * @param repoName The name of repository.
-   * @param workspaceName The name of workspace.
+   * @param repoName The repository name.
+   * @param workspaceName The workspace name.
    * @param nodePath The node path.
    * @return Response data stream.
    * @throws Exception

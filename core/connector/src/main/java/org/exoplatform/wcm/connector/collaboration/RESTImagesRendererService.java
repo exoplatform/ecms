@@ -45,7 +45,7 @@ import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
- * Get the image binary data of a given image node. 
+ * Gets the image binary data of a given image node.
  *
  * @LevelAPI Provisional
  * 
@@ -76,10 +76,10 @@ public class RESTImagesRendererService implements ResourceContainer{
   private static String PROPERTY_MIME_TYPE = "jcr:mimeType";
 
   /**
-   * Instantiates a new rEST images renderer service.
+   * Instantiates a new REST images renderer service.
    *
-   * @param repositoryService the repository service.
-   * @param sessionProviderService the session provider service.
+   * @param repositoryService The repository service.
+   * @param sessionProviderService The session provider service.
    */
   public RESTImagesRendererService(RepositoryService repositoryService, SessionProviderService sessionProviderService) {
     this.repositoryService = repositoryService;
@@ -87,12 +87,12 @@ public class RESTImagesRendererService implements ResourceContainer{
   }
 
   /**
-   * Get the image binary data of a given image node.
+   * Gets the image binary data of a given image node.
    * @param repositoryName The repository.
    * @param workspaceName The workspace.
    * @param nodeIdentifier The node identifier.
-   * @param param Check if the document is a file or not. Default value is "file".
-   * @param ifModifiedSince Check the modify date.
+   * @param param Checks if the document is a file or not. The default value is "file".
+   * @param ifModifiedSince Checks the modification date.
    * @return The response
    *
    * @anchor RESTImagesRendererService.serveImage
@@ -160,9 +160,9 @@ public class RESTImagesRendererService implements ResourceContainer{
   }
 
   /**
-   * get the last modified date of node
-  + * @param node
-  + * @return the last modified date
+   * Gets the last modified date of a node.
+  + * @param node A specific node.
+  + * @return The last modified date.
   + * @throws Exception
   + */
   private Date getLastModifiedDate(Node node) throws Exception {
@@ -178,9 +178,9 @@ public class RESTImagesRendererService implements ResourceContainer{
   }
 
   /**
-   * check resources were modified or not
-   * @param ifModifiedSince
-   * @param node
+   * Checks if resources were modified or not.
+   * @param ifModifiedSince The date when the node is modified.
+   * @param node A specific node.
    * @return
    * @throws Exception
    */

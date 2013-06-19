@@ -53,7 +53,7 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
- * Return a list of published documents.
+ * Returns a list of published documents.
  *
  * @LevelAPI Provisional
  * 
@@ -86,13 +86,13 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
   }
 
   /**
-   * Return a list of published documents by the default plugin.
+   * Returns a list of published documents by the default plugin.
    * For example: {{{/portal/rest/publication/presentation/{repository}/{workspace}/{state}?showItems={numberOfItem}}}}
    *
-   * @param repository The name of repository.
-   * @param workspace The name of workspace.
+   * @param repository The repository name.
+   * @param workspace The workspace name.
    * @param state The state is specified to classify the process.
-   * @param showItems Show the number of items per page.
+   * @param showItems Shows the number of items per page.
    * @return
    * @throws Exception
    * 
@@ -108,14 +108,14 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
   }
 
   /**
-   * Return a list of published documents by a specific plugin.
+   * Returns a list of published documents by a specific plugin.
    * For example: {{{/portal/rest/publication/presentation/{repository}/{workspace}/{publicationPluginName}/{state}?showItems={numberOfItem}}}}
    *
    * @param repoName The repository name.
    * @param workspace The workspace name.
    * @param publicationPluginName The name of the plugin.
    * @param state The state is specified to classify the process.
-   * @param showItems Show the number of items per page.
+   * @param showItems Shows the number of items per page.
    * @return
    * @throws Exception
    * 
