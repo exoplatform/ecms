@@ -54,7 +54,7 @@ import com.sun.syndication.feed.synd.SyndFeedImpl;
 import com.sun.syndication.io.SyndFeedOutput;
 
 /**
- * Generate an RSS feed.
+ * Generates an RSS feed.
  *
  * @LevelAPI Provisional
  * @anchor RssConnector
@@ -102,7 +102,7 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
   private static final Log LOG = ExoLogger.getLogger(RssConnector.class.getName());
 
   /**
-   * Instantiates a new rss connector.
+   * Instantiates a new RSS connector.
    */
   public RssConnector() {
     this.wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);    
@@ -110,10 +110,10 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
   }
 
   /**
-   * Generate an RSS feed.
+   * Generates an RSS feed.
    *
-   * @param repository The name of repository.
-   * @param workspace The name of workspace.
+   * @param repository The repository name.
+   * @param workspace The workspace name.
    * @param server The server.
    * @param siteName The name of site.
    * @param title The title of the feed.
@@ -123,7 +123,7 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
    * @param orderType The descending or ascending order.
    * @param lang   The language of the feed.
    * @param detailPage The page used to open the content.
-   * @param detailParam The parameters is the key in the URL to let CLV know which really is the path in the current URL.
+   * @param detailParam The parameters are the key in the URL to let CLV know which really is the path in the current URL.
    * @param recursive This param is deprecated and will be moved soon.
    * @return The response.
    * @throws Exception The exception
@@ -197,7 +197,7 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
   }
 
   /**
-   * Generate rss.
+   * Generates RSS.
    *
    * @param context The context.
    * @return the string

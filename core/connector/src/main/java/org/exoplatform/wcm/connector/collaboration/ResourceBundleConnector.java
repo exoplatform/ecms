@@ -40,7 +40,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * Get the bundle that is based on the key and the locale.
+ * Gets the bundle that is based on the key and the locale.
  *
  * @LevelAPI Provisional
  *
@@ -50,7 +50,7 @@ import org.w3c.dom.Element;
 public class ResourceBundleConnector implements ResourceContainer {
 
   /**
-  * Get the bundle that is based on the key and the locale.
+  * Gets the bundle that is based on the key and the locale.
    *
   * @param key The key used to get the bundle.
   * @param locale  The locale used to get the bundle.

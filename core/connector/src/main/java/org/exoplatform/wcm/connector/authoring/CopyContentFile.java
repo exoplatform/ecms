@@ -18,7 +18,7 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.extensions.security.SHAMessageDigester;
 
 /**
- * Copy a file. 
+ * Copies a file.
  *
  * @LevelAPI Provisional
  * 
@@ -48,7 +48,7 @@ public class CopyContentFile implements ResourceContainer {
   }
 
   /**
-  * Copy a file.
+  * Copies a file.
   * 
   * @param param The file path.
   * @return Response inputstream.

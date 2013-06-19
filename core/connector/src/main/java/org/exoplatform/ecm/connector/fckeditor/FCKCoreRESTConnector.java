@@ -44,7 +44,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * Get a list of files and folders, and create a folder and upload files.
+ * Gets a list of files and folders, and creates a folder and uploads files.
  *
  * @LevelAPI Provisional
  * @anchor FCKCoreRESTConnector
@@ -59,10 +59,10 @@ public class FCKCoreRESTConnector implements ResourceContainer {
   private RepositoryService repositoryService;
 
   /**
-   * Instantiates a new fCK core rest connector.
+   * Instantiates a new FCK core REST connector.
    *
-   * @param repositoryService the repository service.
-   * @param providerService the provider service.
+   * @param repositoryService The repository service.
+   * @param providerService The provider service.
    */
   public FCKCoreRESTConnector(RepositoryService repositoryService, ThreadLocalSessionProviderService providerService) {
     this.repositoryService = repositoryService;
@@ -73,13 +73,13 @@ public class FCKCoreRESTConnector implements ResourceContainer {
   }
 
   /**
-   * Return folders and files in the current folder.
+   * Returns folders and files in the current folder.
    *
-   * @param repoName The name of repository.
-   * @param workspaceName The name of workspace.
+   * @param repoName The repository name.
+   * @param workspaceName The workspace name.
    * @param currentFolder The current folder.
-   * @param command The command.
-   * @param type The type.
+   * @param command The command to get files/folders.
+   * @param type The file type.
    * @return The folders and files.
    * @throws Exception The exception
    * 
@@ -131,12 +131,12 @@ public class FCKCoreRESTConnector implements ResourceContainer {
   }
 
   /**
-   * Create a folder under the current folder.
+   * Creates a folder under the current folder.
    *
-   * @param repositoryName The name of repository.
-   * @param workspaceName The name of workspace.
+   * @param repositoryName The repository name.
+   * @param workspaceName The workspace name.
    * @param currentFolder The current folder.
-   * @param newFolderName The name of new folder.
+   * @param newFolderName The name of the new folder.
    * @param language The language.
    * @return The response.
    * @throws Exception The exception
@@ -158,7 +158,7 @@ public class FCKCoreRESTConnector implements ResourceContainer {
   }
 
   /**
-   * Upload a file with the HttpServletRequest.
+   * Uploads a file with the HttpServletRequest.
    *
    * @return The response
    * 
@@ -173,7 +173,7 @@ public class FCKCoreRESTConnector implements ResourceContainer {
   }
 
   /**
-   * Control the process of uploading a file, such as aborting, deleting or progressing the file.
+   * Controls the process of uploading a file, such as aborting, deleting or progressing the file.
    *
    * @param action The action.
    * @param uploadId The Id of upload.

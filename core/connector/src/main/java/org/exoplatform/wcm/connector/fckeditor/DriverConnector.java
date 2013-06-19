@@ -80,7 +80,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 /**
- * Return a list of drives/folders/documents in a specified location for a given user. Also, it processes the file uploading action.
+ * Returns a list of drives/folders/documents in a specified location for a given user. Also, it processes the file uploading action.
  *
  * {{{{portalname}}}}: The name of portal.
  * {{{{restcontextname}}}}: The context name of REST web application which is deployed to the "{{{{portalname}}}}" portal.
@@ -136,7 +136,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   /**
    * Instantiates a new driver connector.
    *
-   * @param params the params
+   * @param params The init parameters.
    */
   public DriverConnector(InitParams params) {
     limit = Integer.parseInt(params.getValueParam("upload.limit.size").getValue());
@@ -149,19 +149,19 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
   
   /**
-   * gets the file size limit
-   * @return the file size limit
+   * Gets the maximum size of the uploaded file.
+   * @return The file size limit.
    */
   public int getLimitSize() { return limit; }
 
   /**
-   * gets the file upload number limit on client side
-   * @return the file upload number limit on client side
+   * Gets the maximum number of files uploaded from the client side.
+   * @return The maximum number of files uploaded on the client side.
    */
   public int getMaxUploadCount() { return limitCountClient_; }
   
   /**
-   * Return a list of drives for the current user.
+   * Returns a list of drives for the current user.
    *
    * @param lang The language of the drive name.
    * @return The drives.
@@ -199,13 +199,13 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   /**
-   * Return all folders and files in a given location.
+   * Returns all folders and files in a given location.
    *
-   * @param driverName The name of drive.
+   * @param driverName The drive name.
    * @param currentFolder The current folder.
    * @param currentPortal The current portal.
-   * @param repositoryName The name of repository.
-   * @param workspaceName The name of workspace.
+   * @param repositoryName The repository name.
+   * @param workspaceName The workspace name.
    * @param filterBy The type of filter.
    * @return The folders and files.
    * @throws Exception The exception
@@ -261,7 +261,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   /**
    * Checks if the drive can upload a new file.
    *
-   * @return Response containing the status indicating if upload is available 
+   * @return Response containing the status indicating if upload is available.
    * @throws Exception
    * @anchor DriverConnector.checkUploadAvailable
    */
@@ -279,9 +279,9 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   /**
-   * Upload a file.
+   * Uploads a file.
    *
-   * @param uploadId The Id of upload.
+   * @param uploadId The Id of the uploaded file.
    * @return The response.
    * @throws Exception The exception
    *
@@ -306,11 +306,11 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   /**
-   * Control the process of uploading a file, such as aborting, deleting or progressing the file.
+   * Check the status of uploading a file, such as aborting, deleting or progressing the file.
    *
    * @param repositoryName The repository name.
    * @param workspaceName The workspace name.
-   * @param driverName The Drive name.
+   * @param driverName The drive name.
    * @param currentFolder The current folder.
    * @param currentPortal The portal name.
    * @param language The language file.
@@ -348,20 +348,20 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   /**
-   * Control the process of uploading a file, such as aborting, deleting or progressing the file.
+   * Controls the process of uploading a file, such as aborting, deleting or progressing the file.
    *
-   * @param repositoryName The name of repository.
-   * @param workspaceName The name of workspace.
-   * @param driverName The name of drive.
+   * @param repositoryName The repository name.
+   * @param workspaceName The workspace name.
+   * @param driverName The drive name.
    * @param currentFolder The current folder.
    * @param currentPortal The current portal.
    * @param userId The user identity.
    * @param jcrPath The path of the file.
    * @param action The action.
    * @param language The language.
-   * @param fileName The name of file.
+   * @param fileName The file name.
    * @param uploadId The Id of upload.
-   * @param existenceAction Check if an action exist
+   * @param existenceAction Checks if an action exists or not.
    * @return The response.
    * @throws Exception The exception
    *
@@ -417,11 +417,11 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   /**
-   * Gets the drivers by user id.
+   * Gets the drives by user Id.
    *
-   * @param userId the user id
+   * @param userId the user Id
    *
-   * @return the drivers by user id
+   * @return the drives by user Id
    *
    * @throws Exception the exception
    */
@@ -432,13 +432,13 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   /**
-   * Append drivers.
+   * Appends drives.
    *
-   * @param document the document
-   * @param driversList the drivers list
-   * @param groupName the group name
+   * @param document The document.
+   * @param driversList The drivers list.
+   * @param groupName The group name.
    *
-   * @return the element
+   * @return The element.
    */
   private Element appendDrivers(Document document,
                                 List<DriveData> driversList,
@@ -828,13 +828,13 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @param workspaceName The workspace name.
    * @param currentFolderNode The current folder.
    * @param siteName The portal name.
-   * @param userId  The user id.
+   * @param userId  The user Id.
    * @param jcrPath The path of the file.
    * @param action The action.
    * @param language The language.
-   * @param fileName Tthe file name.
+   * @param fileName The file name.
    * @param uploadId The Id of upload.
-   * @param existenceAction Check if an action exist.
+   * @param existenceAction Checks if an action exists.
    * @return the response
    * @throws Exception the exception
    */

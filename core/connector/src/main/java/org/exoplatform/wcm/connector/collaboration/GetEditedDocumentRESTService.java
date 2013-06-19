@@ -56,7 +56,7 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
- * Return the latest edited documents. 
+ * Returns the latest edited documents.
  *
  * @LevelAPI Provisional
  *
@@ -108,11 +108,11 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
   }
 
   /**
-   * Return the latest edited documents.
+   * Returns the latest edited documents.
    * 
-   * @param repository The name of repository.
-   * @param showItems Return the number of items in each page.
-   * @param showGadgetWs Show the gadget workspace or not. 
+   * @param repository The repository name.
+   * @param showItems Returns the number of items in each page.
+   * @param showGadgetWs Shows the gadget workspace or not.
    * @return Response inputstream.
    * @throws Exception
    * 

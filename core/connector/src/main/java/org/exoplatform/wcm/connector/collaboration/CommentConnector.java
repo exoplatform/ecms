@@ -44,7 +44,7 @@ import org.w3c.dom.Element;
 
 
 /**
- * The CommentConnector aims to manage and use comment for the content commments.
+ * The CommentConnector aims to manage and use comments for the content.
  *
  * @LevelAPI Experimental
  *
@@ -58,7 +58,7 @@ public class CommentConnector extends BaseConnector implements ResourceContainer
   /**
    * Instantiates a new tag connector.
    *
-   * @param commentsService Service instanciation.
+   * @param commentsService Service instantiation.
    */
   public CommentConnector(CommentsService commentsService) {
     this.commentsService = commentsService;
@@ -67,11 +67,11 @@ public class CommentConnector extends BaseConnector implements ResourceContainer
 
   /**
    *
-   * Add a new comment to the content.
+   * Adds a new comment to the content.
    *
    * @param jcrPath The JCR path of the content.
    * @param comment The comment to add.
-   * @return The last modified date as property to check the result
+   * @return The last modified date as a property to check the result.
    * @throws Exception The exception
    *
    * @anchor CommentConnector.addComment
@@ -99,7 +99,7 @@ public class CommentConnector extends BaseConnector implements ResourceContainer
   }
 
   /**
-   * Get all comments for a specific content.
+   * Gets all comments for a specific content.
    *
    * @param jcrPath The JCR path of the content.
    * @return All comments
