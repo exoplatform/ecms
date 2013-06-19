@@ -63,7 +63,7 @@ import org.icepdf.core.pobjects.Stream;
 import org.icepdf.core.util.GraphicsRenderingHints;
 
 /**
- * Return a PDF content to be displayed on the webpage.
+ * Returns a PDF content to be displayed on the web page.
  *
  * @LevelAPI Provisional
  *
@@ -93,10 +93,10 @@ public class PDFViewerRESTService implements ResourceContainer {
   }
 
   /**
-   * Return a thumbnail image for a PDF document.
+   * Returns a thumbnail image for a PDF document.
    *
-   * @param repoName The name of repository.
-   * @param wsName The name of workspace.
+   * @param repoName The repository name.
+   * @param wsName The workspace name.
    * @param uuid The identifier of the document.
    * @param pageNumber The page number.
    * @param rotation The page rotation. The valid values are: 0.0f, 90.0f, 180.0f, 270.0f.
@@ -266,7 +266,7 @@ public class PDFViewerRESTService implements ResourceContainer {
   }
 
   /**
-   * Init pdf document from InputStream in nt:file node
+   * Initializes the PDF document from InputStream in the _nt\:file_ node.
    * @param currentNode The name of the current node.
    * @param repoName  The repository name.
    * @return
@@ -277,9 +277,9 @@ public class PDFViewerRESTService implements ResourceContainer {
   }
 
   /**
-   * Write PDF data to file
-   * @param currentNode
-   * @param repoName
+   * Writes PDF data to file.
+   * @param currentNode The name of the current node.
+   * @param repoName The repository name.
    * @return
    * @throws Exception
    */

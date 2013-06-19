@@ -23,7 +23,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * Return a list of content during a given state range of the publication lifecycle.
+ * Returns a list of content during a given state range of the publication lifecycle.
  *
  * @LevelAPI Provisional
  *
@@ -39,10 +39,10 @@ public class LifecycleConnector implements ResourceContainer {
   private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
 
   /**
-   * Return a list of content from a given to the last state.
+   * Returns a list of content from the beginning state.
    *
    * {@code
-   * For example: http://localhost:8080/ecmdemo/rest-ecmdemo/authoring/bystate/?fromstate
+   * For example: http://localhost:8080/portal/rest/authoring/bystate/?fromstate
    * =draft&user=root&lang=en&workspace=collaboration
    * }
    *
@@ -67,10 +67,10 @@ public class LifecycleConnector implements ResourceContainer {
   }
 
   /**
-   * Return a list of content from the beginning to the last state.
+   * Returns a list of content from the beginning state to the last state.
    *
    * {@code
-   * For example: http://localhost:8080/ecmdemo/rest-ecmdemo/authoring/tostate/?fromstate
+   * For example: http://localhost:8080/portal/rest/authoring/tostate/?fromstate
    * =draft&tostate=pending&user=root&lang=en&workspace=collaboration
    * }
    *
@@ -97,14 +97,14 @@ public class LifecycleConnector implements ResourceContainer {
   }
 
   /**
-   * Return a list of content from the given beginning to published state and before the given date.
+   * Returns a list of content from the given beginning state to the published state and before the given date.
    *
    * {@code
-   * For example: http://localhost:8080/ecmdemo/rest-ecmdemo/authoring/bydate/?fromstate
+   * For example: http://localhost:8080/portal/rest/authoring/bydate/?fromstate
    * =staged&date=2&lang=en&workspace=collaboration
    * }
    *
-   * @param fromstate  The beginning state of the content.
+   * @param fromstate The beginning state of the content.
    * @param date The date before when the content is published.
    * @param workspace The workspace name which contains the content.
    * @param lang The language of the content.

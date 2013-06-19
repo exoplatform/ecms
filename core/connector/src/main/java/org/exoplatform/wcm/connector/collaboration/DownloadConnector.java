@@ -21,7 +21,7 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
- * Enable downloading the content of _nt\:file_.
+ * Enables downloading the content of _nt\:file_.
  *
  * @LevelAPI Provisional
  *
@@ -31,9 +31,9 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 public class DownloadConnector implements ResourceContainer{
 
   /**
-   * Return to browser a stream got from _jcr\:content_/_jcr\:data_ for downloading the content of the node.
+   * Returns to browser a stream got from _jcr\:content_/_jcr\:data_ for downloading the content of the node.
    *
-   * @param workspace The workspace where to store the document node.
+   * @param workspace The workspace where stores the document node.
    * @param path The path to the document node.
    * @param version The version name.
    * @return the instance of javax.ws.rs.core.Response.
