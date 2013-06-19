@@ -20,7 +20,7 @@ This is an example of the *Content Detail* portlet used in Content:
 | *ParameterName* | {{String}} | {{content-id}} | Define which parameter will be used to get the content's path. |
 | *ShowVote* | {{Boolean}} | {{false}} | Show the result of voting for the displayed content. |
 | *ShowComments* | {{Boolean}} | {{false}} | Show the existing comments of this content (if any). |
-| *sharedCache* | {{Boolean}} | {{true}} | Define if the portlet will use the cache shared between users to display content. If you want the content displayed in CLV to be got from one cache, set the value to {{true}}. In most cases, you should not set *sharedCache* to {{false}} as it reduces the overall performance. See [Content Visibility|#User_Guide-Preferences-Content_Detail_Preferences-Content_visibilityCLV].|
+| *sharedCache* | {{Boolean}} | {{true}} | Define if the portlet will use the cache shared between users to display content. If you want the content displayed in CLV to be got from one cache, set the value to {{true}}. In most cases, you should not set *sharedCache* to {{false}} as it reduces the overall performance. See [Content Visibility|../../user-guide/html/Platform_User_Guide.Organize_Content.html#User_Guide-Preferences-Content_Detail_Preferences-Content_visibilityCLV].|
 
 * *Sample configuration* {anchor:id=CONTref.Portlets.ContentDetail.SampleConfiguration}
 
