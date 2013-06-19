@@ -60,7 +60,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
- * Instantiate a new gadget connector.  
+ * Instantiates a new gadget connector.
  *
  * @LevelAPI Provisional
  * 
@@ -98,7 +98,7 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
   }
 
   /**
-   * Get folders and files.
+   * Gets folders and files.
    *
    * @param currentFolder The current folder.
    * @param lang The language.
@@ -127,7 +127,7 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
   }
 
   /**
-   * Builds the xml response.
+   * Builds the XML response.
    *
    * @param currentFolder The current folder.
    * @param language The language.
@@ -154,11 +154,11 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
   /**
    * Creates the root element.
    *
-   * @param currentFolder the current folder
-   * @param applicationCategories the application categories
-   * @param language the language
+   * @param currentFolder The current folder.
+   * @param applicationCategories The application categories.
+   * @param language The language.
    *
-   * @return the element
+   * @return The element
    *
    * @throws Exception the exception
    */
@@ -219,10 +219,10 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
   /**
    * Creates the folder element.
    *
-   * @param document the document
-   * @param applicationCategories the application categories
+   * @param document The document.
+   * @param applicationCategories The application categories.
    *
-   * @return the element
+   * @return The element
    *
    * @throws Exception the exception
    */
@@ -240,8 +240,8 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
   /**
    * Creates the file element.
    *
-   * @param document the document
-   * @param applicationCategory the application category
+   * @param document The document.
+   * @param applicationCategory The application category.
    *
    * @return the element
    *
@@ -297,7 +297,7 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
   /**
    * Gets the gadget categories.
    *
-   * @return the gadget categories
+   * @return The gadget categories.
    *
    * @throws Exception the exception
    */
