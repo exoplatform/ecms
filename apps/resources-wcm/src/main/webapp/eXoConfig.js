@@ -16,13 +16,12 @@ CKEDITOR.editorConfig = function( config ){
 	config.skin = 'moono';
 	config.allowedContent = true;
 	config.resize_enabled = true;
-	config.disableNativeSpellChecker = true,
 	config.scayt_autoStartup = true,
 	config.language = eXo.env.portal.language || 'en';
 	//config.uiColor = '#AADC6E';
 	config.toolbar_Default = [
 		['Source','Templates'],
-		['Cut','Copy','Paste','PasteText','PasteFromWord','-','find','selection','SpellCheck'],
+		['Cut','Copy','Paste','PasteText','PasteFromWord','-','find','selection','spellCheck','scayt'],
 		['Undo','Redo','-','RemoveFormat'],
 		'/',
 		['Bold','Italic','Underline','Strike'],
@@ -44,7 +43,7 @@ CKEDITOR.editorConfig = function( config ){
 
 	config.toolbar_CompleteWCM = [
 		['Source','Templates','ShowBlocks'],
-		['Cut','Copy','Paste','PasteText','PasteFromWord','-','find','selection','SpellCheck','-','Undo','Redo'],
+		['Cut','Copy','Paste','PasteText','PasteFromWord','-','find','selection','spellCheck','scayt','-','Undo','Redo'],
 		['insertGadget.btn','Flash','Table','SpecialChar', 'content.btn', 'Image'], 
 		'/',	
 		['Bold','Italic','Underline','Strike','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','NumberedList','BulletedList','-','TextColor','BGColor','-','RemoveFormat'],
