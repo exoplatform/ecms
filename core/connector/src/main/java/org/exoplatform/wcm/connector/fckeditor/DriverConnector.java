@@ -872,38 +872,30 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     ManageableRepository manageableRepository = WCMCoreUtils.getRepository();
     Session session = sessionProvider.getSession(workspaceName, manageableRepository);
     ManageDriveService manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
-    try {
-      DriveData driveData = manageDriveService.getDriveByName(driverName);
-      String parentPath = (driveData != null ? driveData.getHomePath() : "");
-      NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
-      if(driveData != null && 
-         driveData.getHomePath().startsWith(nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH) + "/${userId}")) {
-         parentPath = Utils.getPersonalDrivePath(driveData.getHomePath(), 
-                                                 ConversationState.getCurrent().getIdentity().getUserId());
-      };
-      parentPath += ((currentFolder != null && currentFolder.length() != 0) ? "/" : "") + currentFolder;
-      parentPath = parentPath.replace("//", "/");
-      //return result;
-      return getTargetNode(session, parentPath);
-    } catch (Exception e) {
-      return null;
-    }
+    DriveData driveData = manageDriveService.getDriveByName(driverName);
+    String parentPath = (driveData != null ? driveData.getHomePath() : "");
+    NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
+    if(driveData != null && 
+       driveData.getHomePath().startsWith(nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH) + "/${userId}")) {
+       parentPath = Utils.getPersonalDrivePath(driveData.getHomePath(), 
+                                               ConversationState.getCurrent().getIdentity().getUserId());
+    };
+    parentPath += ((currentFolder != null && currentFolder.length() != 0) ? "/" : "") + currentFolder;
+    parentPath = parentPath.replace("//", "/");
+    //return result;
+    return getTargetNode(session, parentPath);
   }
   
-  private Node getTargetNode(Session session, String path) {
-    try {
-      Node node = null;
-      if (linkManager_ == null) {
-        linkManager_ = WCMCoreUtils.getService(LinkManager.class);
-      }
-      if (nodeFinder_ == null) {
-        nodeFinder_ = WCMCoreUtils.getService(NodeFinder.class);
-      }
-      node = (Node)nodeFinder_.getItem(session, path, true);
-      return node;
-    } catch (Exception e) {
-      return null;
+  private Node getTargetNode(Session session, String path) throws Exception {
+    Node node = null;
+    if (linkManager_ == null) {
+      linkManager_ = WCMCoreUtils.getService(LinkManager.class);
     }
+    if (nodeFinder_ == null) {
+      nodeFinder_ = WCMCoreUtils.getService(NodeFinder.class);
+    }
+    node = (Node)nodeFinder_.getItem(session, path, true);
+    return node;
   }
 
   private Element createFolderElement(Document document,
