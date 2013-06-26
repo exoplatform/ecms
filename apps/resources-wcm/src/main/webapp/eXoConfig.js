@@ -10,21 +10,18 @@ CKEDITOR.eXoPath = CKEDITOR.basePath.substr(0, CKEDITOR.basePath.indexOf("ckedit
 (function() {CKEDITOR.plugins.addExternal('insertPortalLink',CKEDITOR.eXoPath+'eXoPlugins/insertPortalLink/','plugin.js');})();
 
 CKEDITOR.editorConfig = function( config ){
-	config.resize_enabled = false; // config to disable editor resizing in CKEDITOR
-	config.extraPlugins = 'content,insertGadget,insertPortalLink,autosave,scayt';
+	config.extraPlugins = 'content,insertGadget,insertPortalLink,autosave,scayt,wsc';
 	config.toolbarCanCollapse = false;
 	config.skin = 'moono';
 	config.allowedContent = true;
 	config.resize_enabled = true;
-	//config.scayt_autoStartup = true;
+	config.scayt_autoStartup = true;
 	config.language = eXo.env.portal.language || 'en';
-	//config.disableNativeSpellChecker = true,
 	//config.uiColor = '#AADC6E';
 	config.toolbar_Default = [
 		['Source','Templates'],
-		['Cut','Copy','Paste','PasteText','PasteFromWord','-','Find','SelectAll','SCAYT'],
+		['Cut','Copy','Paste','PasteText','PasteFromWord','-','Find','Replace','SelectAll','Scayt'],
 		['Undo','Redo','-','RemoveFormat'],
-		'/',
 		['Bold','Italic','Underline','Strike'],
 		['NumberedList','BulletedList'],
 		['Link','Unlink','Anchor'],
@@ -43,13 +40,10 @@ CKEDITOR.editorConfig = function( config ){
 	] ;
 
 	config.toolbar_CompleteWCM = [
-		['Source','Templates','ShowBlocks'],
-		['Cut','Copy','Paste','PasteText','PasteFromWord','-','Find','SelectAll','SCAYT','-','Undo','Redo'],
-		['insertGadget.btn','Flash','Table','SpecialChar', 'content.btn', 'Image'], 
-		'/',	
-		['Bold','Italic','Underline','Strike','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','NumberedList','BulletedList','-','TextColor','BGColor','-','RemoveFormat'],
-		['Link','insertPortalLink.btn','Unlink','Anchor'],
-		'/',
+		['Source','Templates'],
+		['Cut','Copy','Paste','PasteText','PasteFromWord','-','Find','Replace','SelectAll','Scayt','-','Undo','Redo'],
+		['insertGadget.btn','Flash','Table','SpecialChar', 'content.btn', 'Image'], 		['Bold','Italic','Underline','Strike','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','NumberedList','BulletedList','-','TextColor','BGColor','-','RemoveFormat'],
+		['Link','insertPortalLink.btn','Unlink','Anchor'],		
 		['Style','Format','Font','FontSize', '-' ,'Maximize']
 	] ;
 	
@@ -57,7 +51,6 @@ CKEDITOR.editorConfig = function( config ){
 		['Source','-','Bold','Italic','Underline','Strike'],
     ['-','NumberedList','BulletedList','Outdent','Indent'],
 		['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','Blockquote'],
-    '/',
 		['-','Link','Unlink','insertPortalLink.btn','content.btn', 'Image'],
     ['-','Maximize','ShowBlocks','Style','Format','Font','FontSize']
 	] ;
@@ -72,7 +65,6 @@ CKEDITOR.editorConfig = function( config ){
 		['Bold','Italic','Underline','Strike'],
     		['-','NumberedList','BulletedList','Outdent','Indent'],
 		['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','Blockquote'],
-    		'/',
 		['-','Link','Unlink','insertPortalLink.btn','content.btn', 'Image'],
     		['-','Style','Format','Font','FontSize']
 	] ;
