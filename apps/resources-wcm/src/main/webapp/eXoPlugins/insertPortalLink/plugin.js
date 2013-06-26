@@ -16,6 +16,7 @@ CKEDITOR.plugins.add( 'insertPortalLink',
 			dialogName : 'insertPortalLink.dlg',
 			editorFocus : 'false',
 			exec : function(editor) {
+ 				console.log('open dialog');
 				editor.openDialog('insertPortalLink.dlg');
 				var title = getTheSelectedText(editor);
 				editor.titleLink = title;

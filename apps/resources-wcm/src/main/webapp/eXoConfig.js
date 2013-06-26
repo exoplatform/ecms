@@ -11,17 +11,18 @@ CKEDITOR.eXoPath = CKEDITOR.basePath.substr(0, CKEDITOR.basePath.indexOf("ckedit
 
 CKEDITOR.editorConfig = function( config ){
 	config.resize_enabled = false; // config to disable editor resizing in CKEDITOR
-	config.extraPlugins = 'content,insertGadget,insertPortalLink';
+	config.extraPlugins = 'content,insertGadget,insertPortalLink,autosave,scayt';
 	config.toolbarCanCollapse = false;
 	config.skin = 'moono';
 	config.allowedContent = true;
 	config.resize_enabled = true;
-	config.scayt_autoStartup = true,
+	//config.scayt_autoStartup = true;
 	config.language = eXo.env.portal.language || 'en';
+	//config.disableNativeSpellChecker = true,
 	//config.uiColor = '#AADC6E';
 	config.toolbar_Default = [
 		['Source','Templates'],
-		['Cut','Copy','Paste','PasteText','PasteFromWord','-','find','selection','spellCheck','scayt'],
+		['Cut','Copy','Paste','PasteText','PasteFromWord','-','Find','SelectAll','SCAYT'],
 		['Undo','Redo','-','RemoveFormat'],
 		'/',
 		['Bold','Italic','Underline','Strike'],
@@ -43,7 +44,7 @@ CKEDITOR.editorConfig = function( config ){
 
 	config.toolbar_CompleteWCM = [
 		['Source','Templates','ShowBlocks'],
-		['Cut','Copy','Paste','PasteText','PasteFromWord','-','find','selection','spellCheck','scayt','-','Undo','Redo'],
+		['Cut','Copy','Paste','PasteText','PasteFromWord','-','Find','SelectAll','SCAYT','-','Undo','Redo'],
 		['insertGadget.btn','Flash','Table','SpecialChar', 'content.btn', 'Image'], 
 		'/',	
 		['Bold','Italic','Underline','Strike','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','NumberedList','BulletedList','-','TextColor','BGColor','-','RemoveFormat'],
