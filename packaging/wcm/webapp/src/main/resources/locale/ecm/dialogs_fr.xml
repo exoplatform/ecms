@@ -40,10 +40,10 @@
 	    <vitalRecordIndicator>Indicateur d'enregistrement vital</vitalRecordIndicator>
 	    <processCutoff>Processus de prélèvement</processCutoff>
 	    <eventTrigger>Déclenchement d'évènement</eventTrigger>
-	    <processHold>Suspension du Processus</processHold>
+	    <processHold>Procéder à la Rétention</processHold>
 	    <processTransfer>Processus de transfert</processTransfer>
 	    <transferBlockSize>Taille du bloc de transfert</transferBlockSize>
-	    <processAccession>Processus d'acquisition</processAccession>
+	    <processAccession>Processus d'Acquisition</processAccession>
 	    <accessionBlockSize>Taille du bloc d'acquisition</accessionBlockSize>
 	    <processDestruction>Processus de destruction</processDestruction>
     <location>Dans</location>
@@ -312,10 +312,10 @@
   <Holdable>
     <dialog>
       <label>
-        <hold-executed>Suspension exécutée</hold-executed>
-        <hold-until>Suspension jusqu'à</hold-until>
+        <hold-executed>Rétention Exécutée</hold-executed>
+        <hold-until>Rétention Jusqu'à</hold-until>
         <holds-discretionary>Suspension discrétionnaire</holds-discretionary>
-        <hold-until-event>Suspension jusqu'à évènement</hold-until-event>
+        <hold-until-event>Rétention Jusqu'à Evènement</hold-until-event>
         <freeze>Geler</freeze>
       </label>
     </dialog>

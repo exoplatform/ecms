@@ -403,7 +403,7 @@
       <can-not-unlock-node>You do not have permission to unlock this node. Please contact the administrator.</can-not-unlock-node>
       <no-node>Please select at least one node before pasting.</no-node>
       <can-not-paste-node>You do not have permission to move to this node. Please contact the administrator.</can-not-paste-node>
-      <can-not-move-node>You do not have permission to move to this node. Please contact the administrator.</can-not-move-node>
+      <can-not-move-node>You do not have permission to move this node. Please contact the administrator.</can-not-move-node>
       <does-not-support-versioning>You do not have permission to move to this node. Please contact the administrator.</does-not-support-versioning>
       <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
       <paste-lock-exception>You cannot paste '{0}' to this node because the source or the destination node is locked or is related to the locked node.</paste-lock-exception>
