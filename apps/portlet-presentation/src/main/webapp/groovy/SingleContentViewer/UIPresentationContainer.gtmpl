@@ -30,13 +30,10 @@
 			def edittingStyle = "z-index: 5";
 			if (isShowInfoBar)
 				edittingStyle = "z-index: 5; top:20px";
-			%>
+			%>			
+		
 			<div class="UIPresentationContainer" id="$uicomponent.id">
-			<%
-			  //jsManager.require("SHARED/wcm-utils", "wcmutil").
-        //addScripts("wcmutil.WCMUtils.addEvent('${uicomponent.id}','mouseover',function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','UIPresentationContainer $hoverClass')});").
-        //addScripts("wcmutil.WCMUtils.addEvent('${uicomponent.id}','mouseout',function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','UIPresentationContainer')});");
-			
+			<%		
 			
 			  jsManager.require("SHARED/wcm-utils", "wcmutil");      
 		    jsManager.require("SHARED/jquery", "gj").addScripts("gj('#"+uicomponent.id+"').mouseenter( function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','UIPresentationContainer $hoverClass');});").
@@ -107,9 +104,7 @@
                 %><div class="Title"><%= uicomponent.getTitle(node) %></div><%
   					  }else {
   					   def orgNode =uicomponent.getOriginalNode();    					  
-    					  %>
-    					  <%= uicomponent.getInlineEditingField(orgNode, "exo:title") %>    						  
-                <%            
+  					   %><div class="Title" contenteditable="true" ><%= uicomponent.getTitle(node) %></div><%             
               }
             } %>
 						<% if (isShowDate) { %>

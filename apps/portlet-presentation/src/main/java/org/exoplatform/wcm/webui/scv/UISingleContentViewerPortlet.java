@@ -37,6 +37,7 @@ import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.services.wcm.navigation.NavigationUtils;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.wcm.webui.Utils;
+import org.exoplatform.web.application.RequireJS;
 import org.exoplatform.webui.application.WebuiApplication;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -194,6 +195,8 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
     if (context.getRemoteUser() != null && WCMComposer.MODE_EDIT.equals(Utils.getCurrentMode())) {
       pContext.getJavascriptManager().loadScriptResource(ResourceScope.SHARED, "content-selector");
       pContext.getJavascriptManager().loadScriptResource(ResourceScope.SHARED, "quick-edit");
+      RequireJS requireJS = pContext.getJavascriptManager().getRequireJS();
+    	requireJS.require("SHARED/ckeditor-loader", "ckeditor");
     }
 
     setId(UISingleContentViewerPortlet.class.getSimpleName() + pContext.getWindowId());
