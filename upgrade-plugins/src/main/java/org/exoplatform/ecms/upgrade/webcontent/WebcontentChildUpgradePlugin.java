@@ -14,14 +14,16 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.exoplatform.services.wcm.webcontent;
+package org.exoplatform.ecms.upgrade.webcontent;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
 
-import org.exoplatform.services.deployment.WCMContentInitializerService;
+import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
+import org.exoplatform.commons.version.util.VersionComparator;
+import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.WorkspaceEntry;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -29,28 +31,24 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.picocontainer.Startable;
 
 /**
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          exo@exoplatform.com
- * Apr 22, 2013  
+ * Jun 27, 2013  
  */
-public class WebcontentChildUpgradeService implements Startable {
-
+public class WebcontentChildUpgradePlugin extends UpgradeProductPlugin {
+  
+  private Log LOG = ExoLogger.getLogger(this.getClass().getName());
   private RepositoryService repoService_;
-  private static final Log LOG = ExoLogger.getLogger(WebcontentChildUpgradeService.class.getName());
 
-  public WebcontentChildUpgradeService(RepositoryService repoService, 
-                                        WCMContentInitializerService initService) {
-    this.repoService_ = repoService;
+  public WebcontentChildUpgradePlugin(RepositoryService repoService, InitParams initParams) {
+    super(initParams);
+    this.repoService_  = repoService;
   }
-
-  /* (non-Javadoc)
-   * @see org.picocontainer.Startable#start()
-   */
-  public void start() {
+  
+  public void processUpgrade(String oldVersion, String newVersion) {
     if (LOG.isInfoEnabled()) {
       LOG.info("Start " + this.getClass().getName() + ".............");
     }
@@ -101,10 +99,11 @@ public class WebcontentChildUpgradeService implements Startable {
       sessionProvider.close();
     }
   }
-
+  
   @Override
-  public void stop() {
-    // TODO Auto-generated method stub
+  public boolean shouldProceedToUpgrade(String newVersion, String previousVersion) {
+    // --- return true only for the first version of platform
+    return VersionComparator.isAfter(newVersion,previousVersion);
   }
 
 }
