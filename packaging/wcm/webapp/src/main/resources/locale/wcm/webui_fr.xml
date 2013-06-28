@@ -200,7 +200,7 @@
       <SearchWebContent>Recherche</SearchWebContent>
     </action>
     <msg>
-      <time-to-late>La le temps de recherche ne soit trop tard</time-to-late>
+      <time-to-late>Le temps de recherche est trop long.</time-to-late>
       <empty-field>La valeur de ce champ est nulle ou vide!</empty-field>
       <invalid-format>Blancs datetime format dans le champ '{0}'</invalid-format>
       <invalid-date>"To Date" have to greater than "From Date"</invalid-date>

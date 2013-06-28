@@ -43,7 +43,7 @@
 	    <processHold>Process Hold</processHold>
 	    <processTransfer>Process Transfer</processTransfer>
 	    <transferBlockSize>Transfer Block Size</transferBlockSize>
-	    <processAccession>Process Access</processAccession>
+	    <processAccession>Process Accession</processAccession>
 	    <accessionBlockSize>Access Block Size</accessionBlockSize>
 	    <processDestruction>Process Destruction</processDestruction>
 	    <location>Location</location>
@@ -314,7 +314,7 @@
       <label>
         <hold-executed>Hold Executed</hold-executed>
         <hold-until>Hold Until</hold-until>
-        <holds-discretionary>Hold Discretionary</holds-discretionary>
+        <holds-discretionary>Discretionary Hold</holds-discretionary>
         <hold-until-event>Hold Until Event</hold-until-event>
         <freeze>Freeze</freeze>
       </label>
