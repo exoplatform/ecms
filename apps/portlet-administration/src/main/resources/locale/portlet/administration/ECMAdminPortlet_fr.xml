@@ -1436,7 +1436,7 @@
       <scriptContent>Contenu</scriptContent>
       <scriptLabel>Nom</scriptLabel>
       <scriptName>Script</scriptName>
-      <enableVersion>Activer le versionning</enableVersion>
+      <enableVersion>Activer le versionnage</enableVersion>
     </label>
   </UIScriptForm>
   <!--
@@ -1669,7 +1669,7 @@
     <title>
       <SelectUser>Sélectionner un utilisateur</SelectUser>
       <SelectMember>Rôle</SelectMember>
-      <AddAny>Sélectionner "tout le monde"</AddAny>
+      <AddAny>Tout le monde</AddAny>
     </title>
   </permission>
   <!--
@@ -2658,7 +2658,7 @@
     
   <UITagPermissionInfo>
     <header>
-      <usersOrGroups>Rôles</usersOrGroups>
+      <usersOrGroups>Utilisateur ou Groupe</usersOrGroups>
       <action>Action</action>
     </header>
       <action>

@@ -45,7 +45,7 @@
       <no-taxonomy-selected>You must copy or cut at least one category.</no-taxonomy-selected>
       <node-is-cutting>You cannot paste here. The category node '{0}' might be cut.</node-is-cutting>
       <can-not-paste>There is no data in the clipboard to paste.</can-not-paste>
-      <reference-exception>Cannot delete this category node, because it is currently the target of a REFERENCE property.</reference-exception>
+      <reference-exception>Cannot delete this category , because it is currently referenced.</reference-exception>
       <path-error>An error occurred while removing this category node.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -1436,7 +1436,7 @@
       <scriptContent>Content</scriptContent>
       <scriptLabel>Name</scriptLabel>
       <scriptName>Script</scriptName>
-      <enableVersion>Enabled Version</enableVersion>
+      <enableVersion>Enable Versioning</enableVersion>
     </label>
   </UIScriptForm>
   <!--
@@ -1669,7 +1669,7 @@
     <title>
       <SelectUser>Select User</SelectUser>
       <SelectMember>Select Membership</SelectMember>
-      <AddAny>Select Everyone</AddAny>
+      <AddAny>Everyone</AddAny>
     </title>
   </permission>
   <!--
@@ -1962,7 +1962,7 @@
       <name>Name:</name>
       <isDocumentTemplate>is Document Template</isDocumentTemplate>
       <viewPermission>Permission:</viewPermission>
-      <enableVersion>is Enabled Version</enableVersion>
+      <enableVersion>Versioning activated</enableVersion>
     </label>
     <title>Add/Edit View</title>
   </ViewForm>
@@ -1975,7 +1975,7 @@
       <name>Name:</name>
       <isDocumentTemplate>is Document Template</isDocumentTemplate>
       <viewPermission>Permission:</viewPermission>
-      <enableVersion>is Enabled Version</enableVersion>
+      <enableVersion>Enable Versioning</enableVersion>
     </label>
     <title>Add/Edit Dialog</title>
   </DialogForm>
@@ -2594,7 +2594,7 @@
       <name>Name:</name>
       <isDocumentTemplate>is Document Template</isDocumentTemplate>
       <viewPermission>Permission:</viewPermission>
-      <enableVersion>is Enabled Version</enableVersion>
+      <enableVersion>Enable Versioning</enableVersion>
     </label>
     <title>Add/Edit Skin</title>
   </SkinForm>
@@ -2658,7 +2658,7 @@
   
   <UITagPermissionInfo>
     <header>
-      <usersOrGroups>Memberships</usersOrGroups>
+      <usersOrGroups>User or Group</usersOrGroups>
       <action>Action</action>
     </header>
     <action>
