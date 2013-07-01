@@ -31,8 +31,9 @@
 			if (isShowInfoBar)
 				edittingStyle = "z-index: 5; top:20px";
 			%>			
-		
+			
 			<div class="UIPresentationContainer" id="$uicomponent.id">
+			
 			<%		
 			
 			  jsManager.require("SHARED/wcm-utils", "wcmutil");      

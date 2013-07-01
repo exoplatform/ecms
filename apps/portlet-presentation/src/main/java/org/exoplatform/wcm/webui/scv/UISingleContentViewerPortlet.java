@@ -192,11 +192,9 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
       response.addProperty(MimeResponse.MARKUP_HEAD_ELEMENT, title);
     }
 
-    if (context.getRemoteUser() != null && WCMComposer.MODE_EDIT.equals(Utils.getCurrentMode())) {
+    if (context.getRemoteUser() != null && WCMComposer.MODE_EDIT.equals(Utils.getCurrentMode())) {    	
       pContext.getJavascriptManager().loadScriptResource(ResourceScope.SHARED, "content-selector");
-      pContext.getJavascriptManager().loadScriptResource(ResourceScope.SHARED, "quick-edit");
-      RequireJS requireJS = pContext.getJavascriptManager().getRequireJS();
-    	requireJS.require("SHARED/ckeditor-loader", "ckeditor");
+      pContext.getJavascriptManager().loadScriptResource(ResourceScope.SHARED, "quick-edit");      
     }
 
     setId(UISingleContentViewerPortlet.class.getSimpleName() + pContext.getWindowId());

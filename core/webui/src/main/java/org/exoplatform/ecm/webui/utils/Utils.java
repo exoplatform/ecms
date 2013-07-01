@@ -602,18 +602,20 @@ public class Utils {
     HashMap<String,String> parsedArguments = parseArguments(arguments) ;
     String height = parsedArguments.get(HEIGHT);
     String bDirection = parsedArguments.get(BUTTON_DIR);
-    if ( org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE)) {
-      if (orgNode.hasProperty(propertyName)) {
-        try {
-          if(propertyName.equals(EXO_TITLE))
-            return ContentReader.getXSSCompatibilityContent(orgNode.getProperty(propertyName).getString());
+    
+    if (orgNode.hasProperty(propertyName)) {
+      try {
+        if(propertyName.equals(EXO_TITLE))
+          return ContentReader.getXSSCompatibilityContent(orgNode.getProperty(propertyName).getString());
+        if (org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE))
           return orgNode.getProperty(propertyName).getString();
-        } catch (Exception e) {
-          return defaultValue;
-        }
+        else 
+        	return "<div contenteditable=\"true\">" + orgNode.getProperty(propertyName).getString() + "</div>";
+      } catch (Exception e) {
+        return defaultValue;
       }
-      return defaultValue;
     }
+      
     String currentValue = defaultValue;
     ResourceBundle resourceBundle;
     if (orgNode.hasProperty(propertyName)) {
@@ -683,7 +685,7 @@ public class Utils {
     }
     String strAction = actionsb.toString();
 
-    sb.append("<div class=\"InlineEditing\">\n");
+    sb.append("<div class=\"InlineEditing\" >\n");
     sb.append("\n<div rel=\"tooltip\" data-placement=\"bottom\" id=\"").append(showBlockId).append("\" Class=\"").append(cssClass).append("\"");
     sb.append("title=\"").append(strSuggestion).append("\"");
     sb.append(" onClick=\"InlineEditor.presentationSwitchBlock('").append(showBlockId).
@@ -724,93 +726,13 @@ public class Utils {
     }
     sb.append("\t\t<div class=\"Edit").append(cssClass).append("Input\">\n ");
 
-    if (inputType.equalsIgnoreCase(INPUT_WYSIWYG)) {
-    	parsedArguments.put(TOOLBAR, "InlineEdit");
-      sb.append(createCKEditorField(newValueInputId, currentValue, parsedArguments));
-    }else if (inputType.equalsIgnoreCase(INPUT_TEXT_AREA)){
-      /*sb.append("\t\t<TEXTAREA ").append("\" name =\"");
-      sb.append(newValueInputId).append("\" id =\"").append(newValueInputId).append("\"");
-      if (height!=null && height.length()>0) {
-        sb.append(" style =\"height:").append(height);
-        if (!height.endsWith("px")) {
-          sb.append("px;");
-        }
-        sb.append("\"");
-      }
-      sb.append(">");
-      sb.append(currentValue).append("</TEXTAREA>");*/
-    	parsedArguments.remove(TOOLBAR);
-    	parsedArguments.put(TOOLBAR, "InlineEditTitle");
-    	sb.append(createCKEditorField(newValueInputId, currentValue, parsedArguments));
-    }else if (inputType.equalsIgnoreCase(INPUT_TEXT)) {
-      //sb.append("\t\t<input type=\"TEXT\" name =\"");
-      //sb.append(newValueInputId).append("\" id =\"").append(newValueInputId).
-      //   append("\" value=\"").append(currentValue).append("\"/>");
-    	parsedArguments.remove(TOOLBAR);
-    	parsedArguments.put(TOOLBAR, "InlineEditTitle");
-    	sb.append(createCKEditorField(newValueInputId, currentValue, parsedArguments));
-    }
+    
 
     sb.append("\n\t\t</div>\n\t</form>\n</div>\n\n</div>");
     return sb.toString();
   }
 
-  /**
-   *
-   * @param name
-   * @param value_
-   * @param arguments
-   * @return
-   */
-  private static String createCKEditorField(String name, String value_, HashMap<String,String> arguments) {
-    String toolbar = arguments.get(TOOLBAR);
-    String passedCSS = arguments.get(CSS);
-
-    if (toolbar == null) toolbar = "InlineEdit";
-    StringBuffer contentsCss = new StringBuffer();
-    contentsCss.append("[");
-    SkinService skinService = WCMCoreUtils.getService(SkinService.class);
-    UserPortalConfig upc = Util.getPortalRequestContext().getUserPortalConfig();
-    String skin = upc.getPortalConfig().getSkin();
-    String portal = Util.getUIPortal().getName();
-    Collection<SkinConfig> portalSkins = skinService.getPortalSkins(skin);
-    SkinConfig customSkin = skinService.getSkin(portal, upc.getPortalConfig().getSkin());
-    if (customSkin != null) portalSkins.add(customSkin);
-    for (SkinConfig portalSkin : portalSkins) {
-      contentsCss.append("'").append(portalSkin.createURL(Util.getPortalRequestContext().getControllerContext())).append("',");
-    }
-    contentsCss.append("'/eXoWCMResources/ckeditor/contents.css'");
-    contentsCss.append("]");
-
-    StringBuffer buffer = new StringBuffer();
-     buffer.append("<div style=\"display:none\">" +
-         "<textarea id='cssContent" + name + "' name='cssContent" + name + "'>" + passedCSS + "</textarea></div>\n");
-
-    if (value_!=null) {
-      buffer.append("<textarea id='" + name + "' name='" + name + "'>" + value_ + "</textarea>\n");
-    }else {
-      buffer.append("<textarea id='" + name + "' name='" + name + "'></textarea>\n");
-    }
-    buffer.append("<script type='text/javascript'>\n");
-    buffer.append("  //<![CDATA[ \n");
-    buffer.append("    require(['/eXoWCMResources/ckeditor/ckeditor.js'], function() {");
-    buffer.append("    var instance = CKEDITOR.instances['" + name + "']; if (instance) {CKEDITOR.remove(instance); instance = null;}\n");
-    buffer.append("    CKEDITOR.replace('" + name + "', {toolbar:'" + toolbar + "', contentsCss:" +
-        contentsCss + ", ignoreEmptyParagraph:true});\n");
-    //buffer.append("		 var instance = CKEDITOR.instances['" + name + "']; \n");
-    //buffer.append("		 instance.on( 'configLoaded', function() { \n");
-    //buffer.append("		 instance.config.removePlugins = 'colorbutton,find,flash,font,forms,iframe,image,newpage,removeformat,smiley,specialchar,stylescombo,templates'; \n");
-    //buffer.append("		 instance.config.toolbarGroups = [{ name: 'editing',groups: [ 'basicstyles', 'links' ] },{ name: 'undo' },{ name: 'clipboard',groups: [ 'selection', 'clipboard' ] },{ name: 'about' }]; \n");
-    //buffer.append("		 }); \n");
-    
-    buffer.append("    CKEDITOR.instances['" + name + "'].on(\"instanceReady\", function(){  ");
-    buffer.append("       eXo.ecm.CKEditor.insertCSS('" + name + "', 'cssContent" + name + "');\n");
-    buffer.append("       });");
-    buffer.append("       });");
-    buffer.append("  //]]> \n");
-    buffer.append("</script>\n");
-    return buffer.toString();
-  }
+  
   protected static final String SEPARATOR  = "=";
   protected static final String TOOLBAR    = "toolbar";
   protected static final String CSS        = "CSSData";
