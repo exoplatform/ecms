@@ -88,8 +88,12 @@
 	  }
   } catch(Exception ex) {}
 %>
-
+<!--[if IE 7]> <html class="ie7 lt-ie8 lt-ie9 lt-ie10"  xmlns="http://www.w3.org/1999/xhtml" xml:lang="$lang" lang="$lang" dir="$dir"> <![endif]-->
+<!--[if IE 8]> <html class="ie8 lt-ie9  lt-ie10"  xmlns="http://www.w3.org/1999/xhtml" xml:lang="$lang" lang="$lang" dir="$dir"> <![endif]-->
+<!--[if IE 9]> <html class="ie9 lt-ie10"  xmlns="http://www.w3.org/1999/xhtml" xml:lang="$lang" lang="$lang" dir="$dir"> <![endif]-->
+<!--[if gt IE 9]><!-->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="$lang" lang="$lang" dir="$dir">
+<!-- <![endif]-->
   <head id="head">
     <title><%=title%></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
