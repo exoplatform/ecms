@@ -4,13 +4,13 @@
 <div class="uiPublicationSchedule" id="$uiform.id">
   <span class="help-block"><%=_ctx.appRes("UIPublicationSchedule.label.introduction")%></span>
   <div class="form-inline">
-    <span class="pull-left label-title"> <%=_ctx.appRes("UIPublicationPanel.scheduled.from")%></span>
+    <span class="pull-left label-title"> <%=_ctx.appRes("UIPublicationPanel.scheduled.from")%>:</span>
     <div class="pull-left">
-    	<% uicomponent.renderChild(uicomponent.START_PUBLICATION); %>
+      <% uicomponent.renderChild(uicomponent.START_PUBLICATION); %>
     </div>
-    <span class="pull-left label-title"> <%=_ctx.appRes("UIPublicationPanel.scheduled.to")%></span>
+    <span class="pull-left label-title"> <%=_ctx.appRes("UIPublicationPanel.scheduled.to")%>:</span>
     <div class="pull-left">
-    	<% uicomponent.renderChild(uicomponent.END_PUBLICATION); %>
+      <% uicomponent.renderChild(uicomponent.END_PUBLICATION); %>
     </div>
     <%
       String saveLabel = _ctx.appRes(uiform.getName() + ".action.Save");
