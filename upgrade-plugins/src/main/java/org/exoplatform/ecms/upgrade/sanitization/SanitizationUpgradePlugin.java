@@ -18,6 +18,16 @@
  **************************************************************************/
 package org.exoplatform.ecms.upgrade.sanitization;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.Session;
+import javax.jcr.Value;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryResult;
+
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.upgrade.UpgradeProductPlugin;
 import org.exoplatform.commons.version.util.VersionComparator;
@@ -30,15 +40,6 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.Session;
-import javax.jcr.Value;
-import javax.jcr.query.Query;
-import javax.jcr.query.QueryResult;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This upgrade plugin will be used to migrate all the old data to the new one which related to
@@ -93,6 +94,11 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
      * Migrate taxonomy actions which contains some properties which still point to old path related to "/sites content/live"
      */
     migrateTaxonomyAction();
+    
+    /**
+     * Migrate preference 'Drive name' of site explorer portlet which should be changed to Collaboration instead of collaboration"
+     */
+    migrateDriveNameOfPortletPreferences();
 
   }
   
@@ -439,4 +445,35 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
 		  }
 	  }
   }
+  
+  /**
+   * Migrate preference 'Drive name' of site explorer portlet which should be changed to Collaboration instead of collaboration"
+   */
+  private void migrateDriveNameOfPortletPreferences() {
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Start " + this.getClass().getName() + ".............");
+    }
+    try {
+      Session session = WCMCoreUtils.getSystemSessionProvider().getSession("portal-system",
+          repoService_.getCurrentRepository());
+      if (LOG.isInfoEnabled()) {
+        LOG.info("=====Start migrate portlet preferences drive name=====");
+      }
+      String statement = "select * from mop:portletpreference where exo:name='mop:driveName' and mop:value='collaboration'";
+      QueryResult result = session.getWorkspace().getQueryManager().createQuery(statement, Query.SQL).execute();
+      NodeIterator nodeIter = result.getNodes();
+      while(nodeIter.hasNext()) {
+        Node preferenceNode = nodeIter.nextNode();
+        preferenceNode.setProperty("mop:value", new String[]{"Collaboration"});
+      }
+      session.save();
+      if (LOG.isInfoEnabled()) {
+        LOG.info("===== Preference drive name have been upgrade completed =====");
+      }
+    } catch (Exception e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("An unexpected error occurs when migrating preferences drive name: ", e);
+      }
+    }
+  }  
 }
