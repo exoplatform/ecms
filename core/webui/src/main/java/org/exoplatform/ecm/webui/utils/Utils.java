@@ -660,7 +660,7 @@ public class Utils {
         if (org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE))
           return orgNode.getProperty(propertyName).getString();
         else 
-        	return "<div contenteditable=\"true\" actionLink=\""+strAction+"\">" + orgNode.getProperty(propertyName).getString() + "</div>";
+        	return "<div contenteditable=\"true\" propertyName=\""+propertyName+"\" repo=\""+repo+"\" workspace=\""+workspace+"\" uuid=\""+uuid+"\" siteName=\""+siteName+"\" language=\""+language+"\" >" + orgNode.getProperty(propertyName).getString() + "</div>";
       } catch (Exception e) {
         return defaultValue;
       }
