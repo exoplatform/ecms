@@ -124,7 +124,7 @@
                     String actionLink = uiParent.event(uiParent.EDIT_ACTION, beanId, params);
                     %>
                     <td>
-                      <div class="$cssClass" title="$value">
+                      <div class="$cssClass">
                         <span class="uiCheckbox">
                           <input id="$checkBoxId" type="checkbox" class="checkbox" name="$checkBoxId" $checked $readOnly onclick="$actionLink">
                           <span></span>
