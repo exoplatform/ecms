@@ -590,6 +590,10 @@ public class ConnectService implements ResourceContainer {
             // KO:error during the connect
             // TODO hack for 503 from Google, move this logic to Google connector, as well as access_denied
             String error = connect.error.getMessage();
+            if (error == null) {
+              // NPE case
+              error = "null"; 
+            }
             if (error.indexOf("backendError") >= 0) {
               error = "Google backend error. Try again later.";
             }

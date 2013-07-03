@@ -34,12 +34,12 @@ import org.exoplatform.clouddrive.DriveRemovedException;
 import org.exoplatform.clouddrive.SyncNotSupportedException;
 import org.exoplatform.clouddrive.googledrive.GoogleDriveAPI.ChangesIterator;
 import org.exoplatform.clouddrive.googledrive.GoogleDriveAPI.ChildIterator;
-import org.exoplatform.clouddrive.googledrive.GoogleDriveAPI.PageIterator;
 import org.exoplatform.clouddrive.googledrive.GoogleDriveConnector.API;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudFile;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 
+import com.google.api.client.util.DateTime;
 import com.google.api.services.drive.model.About;
 import com.google.api.services.drive.model.Change;
 import com.google.api.services.drive.model.ChildReference;
@@ -107,8 +107,17 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
         if (!gf.getLabels().getTrashed()) { // XXX skip files in Trash
           // create JCR node here
           boolean isFolder = api.isFolder(gf);
-          Calendar created = api.parseDate(gf.getCreatedDate().toStringRfc3339());
-          Calendar modified = api.parseDate(gf.getModifiedDate().toStringRfc3339());
+
+          DateTime createDate = gf.getCreatedDate();
+          if (createDate == null) {
+            throw new GoogleDriveException("File " + gf.getTitle() + " doesn't have Created Date.");
+          }
+          Calendar created = api.parseDate(createDate.toStringRfc3339());
+          DateTime modifiedDate = gf.getModifiedDate();
+          if (modifiedDate == null) {
+            throw new GoogleDriveException("File " + gf.getTitle() + " doesn't have Modified Date.");
+          }
+          Calendar modified = api.parseDate(modifiedDate.toStringRfc3339());
 
           // TODO apply multiple owners in cloud file and show them in ECM
 
@@ -174,7 +183,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
      * {@inheritDoc}
      */
     @Override
-    public int getAvailable() {    
+    public int getAvailable() {
       int available = 0;
       for (ChildIterator child : iterators) {
         available += child.available;
