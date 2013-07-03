@@ -24,7 +24,6 @@ import org.exoplatform.management.annotations.ManagedName;
 import org.exoplatform.management.jmx.annotations.NameTemplate;
 import org.exoplatform.management.jmx.annotations.Property;
 import org.exoplatform.management.rest.annotations.RESTEndpoint;
-import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.documents.TrashService;
@@ -44,7 +43,7 @@ import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
 import org.exoplatform.services.jcr.sessions.ACLSessionProviderService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -935,7 +934,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
   private String getRemoteUser() {
     String remoteUser = null;
     try {
-      remoteUser = Util.getPortalRequestContext().getRemoteUser();
+      remoteUser = ConversationState.getCurrent().getIdentity().getUserId();
     } catch (Exception e) {
       remoteUser = null;
     }
