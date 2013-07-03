@@ -42,6 +42,8 @@ import org.exoplatform.services.seo.SEOService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.validator.FloatNumberValidator;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.web.url.navigation.NavigationResource;
+import org.exoplatform.web.url.navigation.NodeURL;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -423,7 +425,7 @@ public class UISEOForm extends UIForm{
       }
       uiForm.setSelectedLanguage(lang);
       String portalName = portalRequestContext.getPortalOwner();
-      String uri = portalRequestContext.getRequestURI();
+      String uri = portalRequestContext.createURL(NodeURL.TYPE, new NavigationResource(Util.getUIPortal().getSelectedUserNode())).toString();
       String fullStatus = null;
       String pageReference = Util.getUIPortal().getSelectedUserNode().getPageRef().format();
 
