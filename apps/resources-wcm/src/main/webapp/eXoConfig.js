@@ -8,9 +8,11 @@ CKEDITOR.eXoPath = CKEDITOR.basePath.substr(0, CKEDITOR.basePath.indexOf("ckedit
 (function() {CKEDITOR.plugins.addExternal('content',CKEDITOR.eXoPath+'eXoPlugins/content/','plugin.js');})();
 (function() {CKEDITOR.plugins.addExternal('insertGadget',CKEDITOR.eXoPath+'eXoPlugins/insertGadget/','plugin.js');})();
 (function() {CKEDITOR.plugins.addExternal('insertPortalLink',CKEDITOR.eXoPath+'eXoPlugins/insertPortalLink/','plugin.js');})();
+(function() {CKEDITOR.plugins.addExternal('accept',CKEDITOR.eXoPath+'eXoPlugins/accept/','plugin.js');})();
+(function() {CKEDITOR.plugins.addExternal('cancel',CKEDITOR.eXoPath+'eXoPlugins/cancel/','plugin.js');})();
 
 CKEDITOR.editorConfig = function( config ){
-	config.extraPlugins = 'content,insertGadget,insertPortalLink,autosave,scayt,wsc';
+	config.extraPlugins = 'content,insertGadget,insertPortalLink,autosave,scayt,wsc,accept,cancel';
 	config.toolbarCanCollapse = false;
 	config.skin = 'moono';
 	config.allowedContent = true;
@@ -66,7 +68,8 @@ CKEDITOR.editorConfig = function( config ){
     		['-','NumberedList','BulletedList','Outdent','Indent'],
 		['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','Blockquote'],
 		['-','Link','Unlink','insertPortalLink.btn','content.btn', 'Image'],
-    		['-','Style','Format','Font','FontSize']
+    		['-','Style','Format','Font','FontSize'],
+		['-','accept.btn','cancel.btn']
 	] ;
 	config.toolbar_InlineEditTitle = [
 		['Bold','Italic','Underline','Strike'],    		

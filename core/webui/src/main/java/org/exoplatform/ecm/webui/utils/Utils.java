@@ -603,42 +603,10 @@ public class Utils {
     String height = parsedArguments.get(HEIGHT);
     String bDirection = parsedArguments.get(BUTTON_DIR);
     
-    if (orgNode.hasProperty(propertyName)) {
-      try {
-        if(propertyName.equals(EXO_TITLE))
-          return ContentReader.getXSSCompatibilityContent(orgNode.getProperty(propertyName).getString());
-        if (org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE))
-          return orgNode.getProperty(propertyName).getString();
-        else 
-        	return "<div contenteditable=\"true\">" + orgNode.getProperty(propertyName).getString() + "</div>";
-      } catch (Exception e) {
-        return defaultValue;
-      }
-    }
-      
-    String currentValue = defaultValue;
-    ResourceBundle resourceBundle;
-    if (orgNode.hasProperty(propertyName)) {
-      try {
-        if(propertyName.equals(EXO_TITLE))
-          currentValue =  ContentReader.getXSSCompatibilityContent(orgNode.getProperty(propertyName).getString());
-        else {
-          if (orgNode.getProperty(propertyName).getDefinition().isMultiple()) {
-          //The requested property is multiple-valued, inline editing enable users to edit the first value of property
-            currentValue = orgNode.getProperty(propertyName).getValues()[0].getString();
-          }else {
-            currentValue =  orgNode.getProperty(propertyName).getString() ;
-          }
-        }
-      }catch (Exception e) {
-        if (LOG.isWarnEnabled()) {
-          LOG.warn(e.getMessage());
-        }
-      }
-    }
     Locale locale = WebuiRequestContext.getCurrentInstance().getLocale();
     String language = locale.getLanguage();
     ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
+    ResourceBundle resourceBundle;
     resourceBundle = resourceBundleService.getResourceBundle(LOCALE_WEBUI_DMS, locale);
 
     String portletRealID = org.exoplatform.wcm.webui.Utils.getRealPortletId((PortletRequestContext)
@@ -684,6 +652,42 @@ public class Utils {
       actionsb.append("');");
     }
     String strAction = actionsb.toString();
+    
+    if (orgNode.hasProperty(propertyName)) {
+      try {
+        if(propertyName.equals(EXO_TITLE))
+          return ContentReader.getXSSCompatibilityContent(orgNode.getProperty(propertyName).getString());
+        if (org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE))
+          return orgNode.getProperty(propertyName).getString();
+        else 
+        	return "<div contenteditable=\"true\" actionLink=\""+strAction+"\">" + orgNode.getProperty(propertyName).getString() + "</div>";
+      } catch (Exception e) {
+        return defaultValue;
+      }
+    }
+      
+    String currentValue = defaultValue;    
+    if (orgNode.hasProperty(propertyName)) {
+      try {
+        if(propertyName.equals(EXO_TITLE))
+          currentValue =  ContentReader.getXSSCompatibilityContent(orgNode.getProperty(propertyName).getString());
+        else {
+          if (orgNode.getProperty(propertyName).getDefinition().isMultiple()) {
+          //The requested property is multiple-valued, inline editing enable users to edit the first value of property
+            currentValue = orgNode.getProperty(propertyName).getValues()[0].getString();
+          }else {
+            currentValue =  orgNode.getProperty(propertyName).getString() ;
+          }
+        }
+      }catch (Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
+      }
+    }
+   
+    
+    
 
     sb.append("<div class=\"InlineEditing\" >\n");
     sb.append("\n<div rel=\"tooltip\" data-placement=\"bottom\" id=\"").append(showBlockId).append("\" Class=\"").append(cssClass).append("\"");
