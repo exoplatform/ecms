@@ -8,11 +8,11 @@ CKEDITOR.eXoPath = CKEDITOR.basePath.substr(0, CKEDITOR.basePath.indexOf("ckedit
 (function() {CKEDITOR.plugins.addExternal('content',CKEDITOR.eXoPath+'eXoPlugins/content/','plugin.js');})();
 (function() {CKEDITOR.plugins.addExternal('insertGadget',CKEDITOR.eXoPath+'eXoPlugins/insertGadget/','plugin.js');})();
 (function() {CKEDITOR.plugins.addExternal('insertPortalLink',CKEDITOR.eXoPath+'eXoPlugins/insertPortalLink/','plugin.js');})();
-(function() {CKEDITOR.plugins.addExternal('accept',CKEDITOR.eXoPath+'eXoPlugins/accept/','plugin.js');})();
-(function() {CKEDITOR.plugins.addExternal('cancel',CKEDITOR.eXoPath+'eXoPlugins/cancel/','plugin.js');})();
+(function() {CKEDITOR.plugins.addExternal('acceptInline',CKEDITOR.eXoPath+'eXoPlugins/acceptInline/','plugin.js');})();
+(function() {CKEDITOR.plugins.addExternal('cancelInline',CKEDITOR.eXoPath+'eXoPlugins/cancelInline/','plugin.js');})();
 
 CKEDITOR.editorConfig = function( config ){
-	config.extraPlugins = 'content,insertGadget,insertPortalLink,autosave,scayt,wsc,accept,cancel';
+	config.extraPlugins = 'content,insertGadget,insertPortalLink,autosave,scayt,wsc,acceptInline,cancelInline';
 	config.toolbarCanCollapse = false;
 	config.skin = 'moono';
 	config.allowedContent = true;
@@ -69,7 +69,7 @@ CKEDITOR.editorConfig = function( config ){
 		['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','Blockquote'],
 		['-','Link','Unlink','insertPortalLink.btn','content.btn', 'Image'],
     		['-','Style','Format','Font','FontSize'],
-		['-','accept.btn','cancel.btn']
+		['-','acceptInline.btn','cancelInline.btn']
 	] ;
 	config.toolbar_InlineEditTitle = [
 		['Bold','Italic','Underline','Strike'],    		

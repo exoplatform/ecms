@@ -1,18 +1,18 @@
-CKEDITOR.plugins.add('cancel',
+CKEDITOR.plugins.add('cancelInline',
 	{
     lang : ['en','fr','vi'],
 		init : function(editor) {
-			var pluginName = 'cancel';
+			var pluginName = 'cancelInline';
 			var mypath = this.path;	
 			editor.ui.addButton(
-				'cancel.btn',
+				'cancelInline.btn',
 				{
 					label : editor.lang.CancelUpdateInline,
-					command : 'cancel.cmd',
+					command : 'cancelInline.cmd',
 					icon : mypath + '/images/cancel.png'
 				}
 			);
-			var cmd = editor.addCommand('cancel.cmd', {exec:cancelUpdate});
+			var cmd = editor.addCommand('cancelInline.cmd', {exec:cancelUpdate});
 			cmd.modes = {wysiwyg: 1, source: 1};
 			cmd.canUndo = false;	
 		}

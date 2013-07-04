@@ -1,4 +1,4 @@
-CKEDITOR.plugins.setLang( 'content', 'en',
+CKEDITOR.plugins.setLang( 'acceptInline', 'en',
 { 
   AcceptUpdateInline        : 'Accept'
 } );

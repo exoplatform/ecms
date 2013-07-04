@@ -1,18 +1,18 @@
-CKEDITOR.plugins.add('accept',
+CKEDITOR.plugins.add('acceptInline',
 	{
     lang : ['en','fr','vi'],
 		init : function(editor) {
-			var pluginName = 'accept';
+			var pluginName = 'acceptInline';
 			var mypath = this.path;	
 			editor.ui.addButton(
-				'accept.btn',
+				'acceptInline.btn',
 				{
 					label : editor.lang.AcceptUpdateInline,
-					command : 'accept.cmd',
+					command : 'acceptInline.cmd',
 					icon : mypath + '/images/accept.png'
 				}
 			);
-			var cmd = editor.addCommand('accept.cmd', {exec:acceptUpdate});
+			var cmd = editor.addCommand('acceptInline.cmd', {exec:acceptUpdate});
 			cmd.modes = {wysiwyg: 1, source: 1};
 			cmd.canUndo = false;	
 		}
