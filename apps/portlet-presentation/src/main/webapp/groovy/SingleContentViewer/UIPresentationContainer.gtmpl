@@ -1,10 +1,16 @@
 <%
   	import org.exoplatform.wcm.webui.scv.UISingleContentViewerPortlet;
   	import org.exoplatform.wcm.webui.Utils;
+  	import java.util.Locale;
   	import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
   	import org.exoplatform.ecm.webui.utils.LockUtil;
   	import org.exoplatform.services.jcr.core.ManageableRepository;
   	import org.exoplatform.wcm.webui.administration.UIEditingForm;
+  	import org.exoplatform.services.jcr.core.ManageableRepository;
+  	import org.exoplatform.web.application.RequestContext;
+  	import org.exoplatform.webui.application.WebuiRequestContext;
+  	import org.exoplatform.webui.application.portlet.PortletRequestContext;
+
 
 		def rcontext = _ctx.getRequestContext();
     def jsManager = rcontext.getJavascriptManager();
@@ -16,7 +22,20 @@
 		def hoverClass = Utils.isShowQuickEdit() ? " containerHoverClass" : "";
 		def node = uicomponent.getNodeView();
 		def currentState = uicomponent.getCurrentState();
+		def repo = "";
+	  def workspace = "";
+	  def uuid = "";
+	  def propertyName = "exo:title";
+	  def siteName = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getPortalOwner();
+	  Locale locale = WebuiRequestContext.getCurrentInstance().getLocale();
+    def language = locale.getLanguage();
+	    
 		if (node != null) {
+			
+			repo = ((ManageableRepository)node.getSession().getRepository()).getConfiguration().getName();
+		  workspace = node.getSession().getWorkspace().getName();
+		  uuid = node.getUUID();
+		    
 			def isShowOptionBar = uicomponent.isShowOptionBar(); 
 			def isShowTitle = uicomponent.isShowTitle();
 			def isShowDate  = uicomponent.isShowDate();
@@ -105,7 +124,7 @@
                 %><div class="Title"><%= uicomponent.getTitle(node) %></div><%
   					  }else {
   					   def orgNode =uicomponent.getOriginalNode();    					  
-  					   %><div class="Title" contenteditable="true" ><%= uicomponent.getTitle(node) %></div><%             
+  					   %><div class="Title" propertyName="<%=propertyName%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" language="<%=language%>" contenteditable="true" ><%= uicomponent.getTitle(node) %></div><%             
               }
             } %>
 						<% if (isShowDate) { %>

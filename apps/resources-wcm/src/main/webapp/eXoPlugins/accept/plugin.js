@@ -123,7 +123,12 @@ InlineEditor.presentationAjaxRequest = function (url, params, method) {
   var sitename = container.getAttribute("sitename");
   var language = container.getAttribute("language");
   var propertyname = container.getAttribute("propertyname");
-  var data = e.getData();
+  var data = "";
+  if(propertyname.indexOf("exo:title") >= 0)
+    data = e.editable().getText();
+  else
+    data = e.getData();
+
   
   var params =""; 
   params = "newValue=" + encodeURIComponent(data);
