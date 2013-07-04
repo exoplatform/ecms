@@ -251,8 +251,8 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
         if (node.hasProperty(TITLE)) {
           String nTitle = node.getProperty(TITLE).getString();
           //encoding
-          nTitle = new String(nTitle.getBytes("UTF-8"));
-          entry.setTitle(Text.encodeIllegalXMLCharacters(nTitle));
+          nTitle = Text.unescapeIllegalJcrChars(new String(nTitle.getBytes("UTF-8")));
+          entry.setTitle(Text.encodeIllegalXMLCharacters(nTitle).replaceAll("&quot;", "\"").replaceAll("&apos;", "\'"));
         }
         else entry.setTitle("") ;
 
@@ -260,11 +260,12 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
         SyndContent description = new SyndContentImpl();
         description.setType("text/plain");
 
-        if (node.hasProperty(SUMMARY))
-          description.setValue(Text.encodeIllegalXMLCharacters(node.getProperty(SUMMARY)
-                                                                   .getString())
-                                   .replaceAll("&nbsp;", " "));
-        else
+        if (node.hasProperty(SUMMARY)){
+          String summary=Text.encodeIllegalXMLCharacters(node.getProperty(SUMMARY)
+                                                         .getString())
+                         .replaceAll("&nbsp;", " ").replaceAll("&amp;quot;", "\"").replaceAll("&apos;", "\'");
+          description.setValue(summary);
+        }else
           description.setValue("");
 
         entry.setDescription(description);
