@@ -13,7 +13,7 @@
     SimpleView.prototype.enableDragDrop = null;
 
     SimpleView.prototype.colorSelected = "#e7f3ff";
-    SimpleView.prototype.colorHover = "#f2f8ff";
+    SimpleView.prototype.colorHover = "#eeeeee";
     SimpleView.prototype.selectedItemClass = "selectedBox";
 
     SimpleView.prototype.t1 = 0;
@@ -253,7 +253,7 @@
       var event = event || window.event;
       var element = this;
       if (!element.selected) {
-        //element.style.background = Self.colorHover;
+        element.style.background = Self.colorHover;
         element.temporary = true;
         //eXo.core.Browser.setOpacity(element, 100);
       }
@@ -263,10 +263,10 @@
       var event = event || window.event;
       var element = this;
       element.temporary = false;
-    //if (!element.selected) {
-      //element.style.background = "none";
+      if (!element.selected) {
+        element.style.background = "none";
       //eXo.core.Browser.setOpacity(element, 85);
-    //}
+      }
     };
 
     SimpleView.prototype.mouseDownItem = function(evt) {
