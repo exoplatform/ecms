@@ -140,7 +140,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     StringBuilder link = new StringBuilder();
     link.append("<a onclick=\"")
         .append(event(action))
-        .append("\" class=\"ChangeTypeLink\">(")
+        .append("\" class=\"changeTypeLink\">(")
         .append(strChangeTypeLabel)
         .append(")</a>");
     return link.toString();
