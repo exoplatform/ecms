@@ -19,7 +19,6 @@
 .UIJCRExplorerPortlet {
 	overflow: hidden; /* orientation=rt */
 	background: white;
-  padding: 9px;
 }
 
 .UIJCRExplorerPortlet .NoShow {	
