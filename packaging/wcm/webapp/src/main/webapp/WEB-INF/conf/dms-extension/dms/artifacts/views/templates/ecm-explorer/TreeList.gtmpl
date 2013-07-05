@@ -204,7 +204,7 @@
 
 						<ul>
   					  <li id="hiddenMoreButton" class="dropdown pull-right listHiddenActionsContainer">
-    					  <a data-toggle="dropdown" class="dropdown-toggle" href="#">More <b class="caret"></b></a>
+    					  <a data-toggle="dropdown" class="dropdown-toggle" href="#"><%=_ctx.appRes("UIViewBar.label.more")%>  <b class="caret"></b></a>
     					  <ul class="dropdown-menu">
     					    <!-- <li><a data-toggle="tab" href="#dropdown1_4">Tab demo1</a></li> -->
     					  </ul>
@@ -233,7 +233,7 @@
                         }
                       %>
                       <li class="dropdown pull-right listHiddenActionsContainer">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">More <b class="caret"></b></a>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#"><%=_ctx.appRes("UIViewBar.label.more")%> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                           <!-- <li><a data-toggle="tab" href="#dropdown1_4">Tab demo1</a></li> -->
                         </ul>
@@ -267,7 +267,7 @@
                 </li>
                 <%}%>
                 <li class="dropdown pull-right listHiddenActionsContainer">
-                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">More <b class="caret"></b></a>
+                  <a data-toggle="dropdown" class="dropdown-toggle" href="#"><%=_ctx.appRes("UIViewBar.label.more")%> <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <!-- <li><a data-toggle="tab" href="#dropdown1_4">Tab demo1</a></li> -->
                   </ul>
