@@ -1665,7 +1665,7 @@ public class UIDialogForm extends UIForm {
               + "','RemoveReference','&objectId="
               + fieldName
               + "' )\"><i"
-              +" class='uiIconTrash'></i>"
+              +" class='uiIconTrash uiIconLightGray'></i>"
               + "</a>");
       }
     }
