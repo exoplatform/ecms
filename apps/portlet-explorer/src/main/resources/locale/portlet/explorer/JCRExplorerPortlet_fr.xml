@@ -41,7 +41,7 @@
     </label>
     <button>
       <label>
-        <confirm>Ok</confirm>
+        <confirm>OK</confirm>
       </label>
     </button>
     <msg>
@@ -403,7 +403,7 @@
       <can-not-unlock-node>Vous n'avez pas les droits suffisants pour déverrouiller ce noeud.</can-not-unlock-node>
       <no-node>Aucun noeud n'a été sélectionné.</no-node>
       <can-not-paste-node>Vous n'avez pas les droits suffisants pour coller ce noeud.</can-not-paste-node>
-      <can-not-move-node>Vous n'avez pas les droits requis pour déplacer ce noeud.</can-not-move-node>
+      <can-not-move-node>Vous n'êtes pas autorisé à déplacer ce nœud. Veuillez contacter l'administrateur.</can-not-move-node>
       <does-not-support-versioning>Le versioning n'est pas supporté par ce noeud.</does-not-support-versioning>
       <path-not-found>Cet élément a été modifié ou supprimé. Veuillez cliquer sur le bouton "Actualiser".</path-not-found>
       <paste-lock-exception>Impossible de coller le noeud car le noeud source ou le noeud cible est verrouillé ou possède une relation avec un noeud verrouillé.</paste-lock-exception>

@@ -45,7 +45,7 @@
       <no-taxonomy-selected>Vous devez copier ou couper au moins une catégorie</no-taxonomy-selected>
       <node-is-cutting>Impossible de copier ici. La catégorie sélectionnée ('{0}') a probablement été déplacée ou supprimée.</node-is-cutting>
       <can-not-paste>Le presse-papier ne contient aucune donnée à copier.</can-not-paste>
-      <reference-exception>Impossible de supprimer cette catégorie car elle est actuellement référencée ailleurs.</reference-exception>
+      <reference-exception>Impossible de supprimer cette catégorie car elle est actuellement référencée par un contenu.</reference-exception>
       <path-error>Un problème est survenu lors de la suppression de cette catégorie.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -908,7 +908,7 @@
     <title>Sélection d'un type de noeud à importer</title>
     <msg>
       <no-nodetype-registered>Aucun type de noeud enregistré.</no-nodetype-registered>
-      <nodetype-registered>Enregistrement réussi.</nodetype-registered>
+      <nodetype-registered>Enregistrement du type réussie.</nodetype-registered>
     </msg>
   </UINodeTypeImport>
   <NodeTypeImportPopup>
@@ -1142,7 +1142,7 @@
     </msg>
     <label>
       <viewName>Nom</viewName>
-      <template>Gabarit</template>
+      <template>Modèle</template>
 <version>Restaurer cette version</version>
       <enableVersion>Activer les Versions</enableVersion>
       <hideExplorerPanel>Masquez l'arbre dans le panneau latéral</hideExplorerPanel>
@@ -1215,7 +1215,7 @@
     <tab>
       <label>
         <UITabContainer>Barre d'Outils</UITabContainer>
-        <UIViewForm>Vue</UIViewForm>
+        <UIViewForm>Aperçu</UIViewForm>
 								<UIViewPermissionContainer>Permission</UIViewPermissionContainer>
       </label>
     </tab>
@@ -1436,7 +1436,7 @@
       <scriptContent>Contenu</scriptContent>
       <scriptLabel>Nom</scriptLabel>
       <scriptName>Script</scriptName>
-      <enableVersion>Activer le versionnage</enableVersion>
+      <enableVersion>Activer le Versioning</enableVersion>
     </label>
   </UIScriptForm>
   <!--
@@ -1451,7 +1451,7 @@
       <scriptContent>Script</scriptContent>
       <scriptLabel>Nom</scriptLabel>
       <scriptName>Script</scriptName>
-      <enableVersion>Activer le Versionage</enableVersion>
+      <enableVersion>Activer le versionnage</enableVersion>
     </label>
   </ecmScriptForm>
   <!--
@@ -1962,7 +1962,7 @@
       <name>Nom</name>
       <isDocumentTemplate>Marquer comme Document</isDocumentTemplate>
       <viewPermission>Permission</viewPermission>
-      <enableVersion>Versionnage Activé</enableVersion>
+      <enableVersion>Versioning activé</enableVersion>
     </label>
     <title>Ajout/Modification d'un formulaire de visualisation</title>
   </ViewForm>
@@ -1975,7 +1975,7 @@
       <name>Nom</name>
       <isDocumentTemplate>Marquer comme Document</isDocumentTemplate>
       <viewPermission>Permission</viewPermission>
-      <enableVersion>Versionnage  Activé</enableVersion>
+      <enableVersion>Activer le Versioning</enableVersion>
     </label>
     <title>Ajout/Modification d'un formulaire d'édition</title>
   </DialogForm>
@@ -2204,9 +2204,9 @@
   </UITagStyleList>  
   <UITagStyleForm>
     <label>
-      <styleName>Nom du Style:</styleName>
+      <styleName>Nom du style:</styleName>
       <documentRange>Nombre de références:</documentRange>
-      <styleHTML>Style Html:</styleHTML>
+      <styleHTML>Style HTML :</styleHTML>
     </label>
     <action>
       <UpdateStyle>Mettre à jour</UpdateStyle>
@@ -2594,7 +2594,7 @@
       <name>Nom</name>
       <isDocumentTemplate>Marquer comme Document</isDocumentTemplate>
       <viewPermission>Permission</viewPermission>
-      <enableVersion>Activer le versionnage</enableVersion>
+      <enableVersion>Activer le Versioning</enableVersion>
     </label>
     <title>Ajouter/Modifier un Style</title>
   </SkinForm>
