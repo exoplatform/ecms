@@ -45,7 +45,7 @@
       <no-taxonomy-selected>You must copy or cut at least one category.</no-taxonomy-selected>
       <node-is-cutting>You cannot paste here. The category node '{0}' might be cut.</node-is-cutting>
       <can-not-paste>There is no data in the clipboard to paste.</can-not-paste>
-      <reference-exception>Cannot delete this category , because it is currently referenced.</reference-exception>
+      <reference-exception>Cannot delete this category  because it is currently referenced by a content.</reference-exception>
       <path-error>An error occurred while removing this category node.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -1451,7 +1451,7 @@
       <scriptContent>Content</scriptContent>
       <scriptLabel>Name</scriptLabel>
       <scriptName>Script</scriptName>
-      <enableVersion>Enabled Version</enableVersion>
+      <enableVersion>Enable Versioning</enableVersion>
     </label>
   </ecmScriptForm>
   <!--
@@ -2194,7 +2194,7 @@
   <UITagStyleList>
     <header>
       <name>Style Name</name>
-      <documentRange>Document Range</documentRange>
+      <documentRange>Number of Occurrences</documentRange>
       <tagHTML>Tag Style</tagHTML>
       <action>Action</action>
     </header>
