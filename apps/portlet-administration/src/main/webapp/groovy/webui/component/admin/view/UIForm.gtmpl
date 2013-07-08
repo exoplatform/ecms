@@ -28,7 +28,12 @@
           }
         %>
     </div>
-    <div class="uiAction"> 
+    <% 
+	    def hideClass = "";
+	    if(uicomponent.getActions().length == 0)
+	    	hideClass = " hide";
+	  %>
+    <div class="uiAction$hideClass"> 
       <% for(action in uicomponent.getActions()) { 
            String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action);
            String link = uicomponent.event(action);
