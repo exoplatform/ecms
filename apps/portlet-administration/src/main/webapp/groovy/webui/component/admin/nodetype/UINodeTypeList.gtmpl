@@ -114,7 +114,7 @@
     </tbody>
   </table>
   <% if (allNodeTypes.size() > 5) {
-      uicomponent.getUIPageIterator().setUseMaxSizeSetting(true);
+      uicomponent.getUIPageIterator().setUseMaxSizeSetting(false);
       _ctx.renderUIComponent(uicomponent.getUIPageIterator());
     }%>
 	<div class="uiAction uiActionBorder">
