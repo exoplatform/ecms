@@ -14,15 +14,8 @@
 if (rcontext.getRemoteUser() != null && WCMComposer.MODE_EDIT.equals(Utils.getCurrentMode())) {  
 %>
 <script type="text/javascript">
-	  require(['/eXoWCMResources/ckeditor/ckeditor.js'], function() {
-	  for(name in CKEDITOR.instances)
-	  {
-	    CKEDITOR.remove(CKEDITOR.instances[name]);
-	  }
-	  CKEDITOR.disableAutoInline = true;
-	  CKEDITOR.config.toolbar = "InlineEdit";
-    CKEDITOR.inlineAll();
-    
+	  require(['/eXoWCMResources/ckeditor/ckeditor.js'], function() {	 
+	  CKEDITOR.config.toolbar = "InlineEdit";    
   });
 </script>
 <%}%>
