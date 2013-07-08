@@ -28,14 +28,19 @@
           }
         %>
     </div>
-    <div class="uiAction uiActionBorder"> 
-      <% for(action in uicomponent.getActions()) { 
-           String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action);
-           String link = uicomponent.event(action);
-      %>
-            <button type="button" onclick="$link" class="btn">$actionLabel</button>
-      <%}%> 
-    </div>
+    <% 
+      def hideClass = "";
+	    if(uicomponent.getActions().length == 0)
+	    	hideClass = " hide";
+	  %>
+	    <div class="uiAction uiActionBorder$hideClass"> 
+	      <% for(action in uicomponent.getActions()) { 
+	           String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action);
+	           String link = uicomponent.event(action);
+	      %>
+	            <button type="button" onclick="$link" class="btn">$actionLabel</button>
+	      <%}%> 
+	    </div>
     
   <%uiform.end()%>
 </div>
