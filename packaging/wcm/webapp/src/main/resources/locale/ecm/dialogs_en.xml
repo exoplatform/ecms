@@ -519,8 +519,6 @@
 	<CLASSIFIED>Classified</CLASSIFIED>
 	<UNCLASSIFIED>Unclassified</UNCLASSIFIED>
 	<NOCONTRACT>No Contract</NOCONTRACT>
-	<true>True</true>
-	<false>False</false>
 	<one-minute>One Minute</one-minute>
 	<hourly>Hourly</hourly>
 	<daily>Daily</daily>

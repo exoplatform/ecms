@@ -2444,7 +2444,6 @@
   </UIDriveSelector>
   <UIJcrExplorerEditForm>
     <label>
-      <driveName>Drive Name</driveName>
       <DriveNameInput>UI JCR Explorer Edit Form</DriveNameInput>
     </label>
     <msg>
@@ -2716,7 +2715,6 @@
 
   <UIDocumentForm>
     <msg>
-      <not-support>Cannot load the template of '{0}'.</not-support>
       <do-not-permission>You do not have permission to load the template '{0}'.</do-not-permission>
     </msg>
   </UIDocumentForm>
@@ -3087,7 +3085,6 @@
   <Views>
     <label>
       <slide-show>Slide Show</slide-show>
-      <timeline-view>Timeline View</timeline-view>
     </label>
   </Views>
   <ECMContextMenu>
@@ -3108,7 +3105,6 @@
       <showHiddens>Hidden</showHiddens>
       <showTrash>Trash</showTrash>
     </label>
-    <title>Set Up Filter Preferences</title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -3306,11 +3302,6 @@
     </title>
   </rootNodeInfo>
 
-  <UIPopupWindow>
-    <title>
-      <UISelectRestorePath>Select Restore Path</UISelectRestorePath>
-    </title>
-  </UIPopupWindow>
   <UIActionForm>
     <msg>
       <homePath-emty>The home path is empty.</homePath-emty>
@@ -3437,9 +3428,6 @@
         <UIOneTaxonomySelector>Select Category</UIOneTaxonomySelector>
       </label>
     </tab>
-    <action>
-    	 <Close>Close</Close>
-    </action>
   </UICategoryManagerSearch>
 
   <UIPreferencesForm>
@@ -3494,8 +3482,6 @@
 	  <CLASSIFIED>Classified</CLASSIFIED>
   <UNCLASSIFIED>Unclassified</UNCLASSIFIED>
 	  <NOCONTRACT>No Contract</NOCONTRACT>
-	  <true>True</true>
-	  <false>False</false>
 	  <one-minute>One Minute</one-minute>
 	  <hourly>Hourly</hourly>
 	  <daily>Daily</daily>

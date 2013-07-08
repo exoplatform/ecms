@@ -141,14 +141,6 @@
 	##########################################################################################
 	-->
   <UIPermissionTreeForm>
-    <title>Add a permission to that node</title>
-    <label>
-      <userOrGroup>User Or Group</userOrGroup>
-      <read>Read Right</read>
-      <add_node>Add Node Right</add_node>
-      <set_property>Set Property Right</set_property>
-      <remove>Remove Right</remove>
-    </label>
     <msg>
       <have-not-any-permission>Please specify at least one permission for this node.</have-not-any-permission>
     </msg>
@@ -373,12 +365,6 @@
       <permission>{0} in {1}</permission>
     </label>
   </UIDriveList>
-  <PopupDrivePermission>
-    <title>
-      <AddDrivePermissionSelector>Add Permission</AddDrivePermissionSelector>
-      <UIDrivePermissionSelector>Set Permissions</UIDrivePermissionSelector>
-    </title>
-  </PopupDrivePermission>
   <UIDriveForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
