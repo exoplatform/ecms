@@ -1030,7 +1030,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     return driveData;
   }
 
-  private List<Node> filterNodeList(List<Node> sourceNodeList) throws Exception {
+  public List<Node> filterNodeList(List<Node> sourceNodeList) throws Exception {
     List<Node> ret = new ArrayList<Node>();
 
     if (!this.hasFilters()) {
