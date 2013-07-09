@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDefaultSearchForm>
+    <label>
+      <keyword>Schlüsselbegriff</keyword>
+      <portal>Portal</portal>
+      <Page>Seite</Page>
+      <Document>Dokument</Document>
+    </label>
+    <action>
+      <Search>Suche</Search>
+    </action>
+  </UIDefaultSearchForm>
+
+  <UIDefaultSearchResult>
+    <label>
+      <Page>Seite</Page>
+      <Document>Dokument</Document>
+      <DocumentAndPage>Dokument und Seite</DocumentAndPage>
+      <documentandpage>Dokument und Seite</documentandpage>
+      <resutlsCaption>Ergebnisse</resutlsCaption>
+      <ofAboutCaption>von ungefähr</ofAboutCaption>
+      <forCaption>für</forCaption>
+      <timeUnitCaption>Sekunden</timeUnitCaption>
+      <similar>Seiten, auf denen der gleiche Inhalt angezeigt wird</similar>
+      <editor>Editor</editor>
+    </label>
+    <action>
+      <edit>Bearbeiten</edit>
+    </action>
+    <msg>
+      <your-search>Ihre Suche</your-search>
+      <did-not-match>ergab keine Übereinstimmung mit</did-not-match>
+      <new-suggestion>Vorschlag</new-suggestion>
+    </msg>
+  </UIDefaultSearchResult>
+  <UISearchPageLayoutManager>
+    <label>
+      <itemsPerPageSelector>Elemente pro Seite</itemsPerPageSelector>
+      <searchFormSelector>Suchformular Vorlage</searchFormSelector>
+      <searchResultSelector>Suchergebnis Vorlage</searchResultSelector>
+      <searchPaginatorSelector>Suche-Paginierung Vorlage</searchPaginatorSelector>
+      <searchPageLayoutSelector>Suche-Seitenlayout Vorlage</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Basispfad</searchResultBasePathInputSetAction>
+      <pageMode>Seitenmodus</pageMode>
+      <option>
+        <none>Keine</none>
+        <more>Mehr</more>
+        <pagination>Paginierung</pagination>
+      </option>
+    </label>
+    <action>
+      <Save>Speichern</Save>
+      <Cancel>Abbrechen</Cancel>
+    </action>
+  </UISearchPageLayoutManager>
+  <searchResultBasePathInputSetAction>
+    <title>
+      <SelectBasePath>einen Basispfad auswählen</SelectBasePath>
+    </title>
+  </searchResultBasePathInputSetAction>  
+  <UISearchForm>  
+   <message>
+     <keyword-not-support>Das Schlüsselwort ist ungültig. Einige Zeichen werden nicht erkannt.</keyword-not-support>
+     <not-checked>Bitte wählen Sie einen Suchtyp.</not-checked>
+     <keyword-not-empty>Bitte geben Sie ein Schlüsselwort ein.</keyword-not-empty>
+   </message>
+  </UISearchForm>
+  <UIPaginatorDefault>
+    <label>
+      <next>Weiter</next>
+      <previous>Zurück</previous>
+      <more>Mehr</more>
+    </label>
+  </UIPaginatorDefault>
+  <UISearchPageLayoutDefault>
+    <label>
+      <quickEditTitle>Quick Edit</quickEditTitle>
+    </label>
+  </UISearchPageLayoutDefault>
+  <searchOption>
+    <label>
+      <pageCheckBox>in Seiten</pageCheckBox>
+      <documentCheckBox>im Inhalt</documentCheckBox>
+    </label>
+  </searchOption>
+  <ViewMode>
+    <label>
+      <option>
+        <all>Suche auf allen Seiten</all>
+      </option>  
+    </label>  
+  </ViewMode>
+</bundle>

@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ 
+  <View>
+    <label>
+      <languages>
+        <en>Englisch</en>
+        <fr>Französisch</fr>
+        <ru>Russisch</ru>
+        <vi>Vietnamesisch</vi>
+        <nl>Holländisch</nl>
+        <de>Deutsch</de>
+        <uk>Ukrainisch</uk>
+        <ar>Arabisch</ar>
+      </languages>
+    </label>
+  </View>
+  <!--
+  ################resoucebundle FOR EXO:CALENDAR VIEW TEMPLATE############
+  -->
+  <Calendar>
+    <view>
+      <label>
+        <calendar>Kalender</calendar>
+        <shared>Geteilt</shared>
+      </label>
+    </view>
+  </Calendar>
+  <!--
+  ################resoucebundle FOR EXO:COMMENT VIEW TEMPLATE#############
+  -->
+  <Comment>
+    <view>
+      <label>
+        <postedBy>Letzter Kommentar gepostet von</postedBy>
+        <at>um</at>
+        <comments>Kommentar (e)</comments>
+        <show-comments>Kommentare anzeigen</show-comments>
+        <hide-comments>Kommentare ausblenden</hide-comments>
+        <comment-by>Kommentiert von</comment-by>
+        <email>E-mail</email>
+        <site>Seite</site>
+      </label>
+    </view>
+  </Comment>
+  <!--
+  ################resoucebundle FOR EXO:EVENT VIEW TEMPLATE#############
+  -->
+  <Event>
+    <view>
+      <label>
+        <january>Januar</january>
+        <february>Februar</february>
+        <march>März</march>
+        <april>April</april>
+        <may>Mai</may>
+        <june>Juni</june>
+        <july>Juli</july>
+        <august>August</august>
+        <september>September</september>
+        <october>Oktober</october>
+        <november>November</november>
+        <december>Dezember</december>
+        <event>Veranstaltung</event>
+        <subject>Betreff</subject>
+        <location>Ort</location>
+        <comment>Kommentar</comment>
+        <description>Beschreibung</description>
+      </label>
+    </view>
+  </Event>
+  <!--
+  ################resoucebundle FOR EXO:DATA VIEW TEMPLATE#############
+  ################resoucebundle FOR NT:FILE VIEW TEMPLATE##############
+  -->
+  <File>
+    <view>
+      <label>
+        <not-viewable>Dieser Inhalt kann nicht angezeigt werden</not-viewable>
+        <using-webDAV>oder benutzen Sie WebDAV, um auf die Inhalte zuzugreifen</using-webDAV>
+        <file-size-too-big>Der Inhalt dieser Datei ist zu groß. Sie sollten Sie herunterladen und im Client öffnen.</file-size-too-big>
+        <webDAV>WebDAV Ansicht</webDAV>
+        <download>Herunterladen</download>
+        <htmlview>Als HTML anzeigen</htmlview>
+        <plaintextview>Als nur-Text anzeigen</plaintextview>
+      </label>
+    </view>
+  </File>
+  <!--
+  ################resoucebundle FOR RMA:FILEPLAN VIEW TEMPLATE##############
+  -->
+  <FilePlan>
+    <view>
+      <label>
+        <content>Dateiplan Inhalt</content>
+        <record-category-identifier>Datensatzkategorie Identifikator</record-category-identifier>
+        <disposition-author>Dispositionsautorität</disposition-author>
+        <disposition-instruction>Dispositionsanweisungen</disposition-instruction>
+        <permanent-record-indicator>Indikator für dauerhafte Datensätze</permanent-record-indicator>
+        <contain-record-folder>Enthält Datensatzordner</contain-record-folder>
+        <default-media-type>Standardmedientyp</default-media-type>
+        <default-marking-list>Standard Markierungsliste</default-marking-list>
+        <default-originating-organization>Standard Herkunftsorganisation</default-originating-organization>
+        <number-of-record>Anzahl der Datensätze</number-of-record>
+        <record>Datensätze</record>
+        <obsolete-record>Veraltete Datensätze</obsolete-record>
+        <supreseded-record>Abgelöste Datensätze</supreseded-record>
+        <vital-record>Vitale Datensätze</vital-record>
+        <cutoff-record>Abgeschnittene Datensätze</cutoff-record>
+        <holdable-record>Haltbare Datensätze</holdable-record>
+        <transferable-record>Übertragbare Datensätze</transferable-record>
+        <accessionable-record>Accessionable Records</accessionable-record>
+        <destroyable-record>Zerstörbare Datensätze</destroyable-record>
+        <record-id>Datensatz-Id</record-id>
+        <record-name>Datensatzname</record-name>
+        <originator>Urheber</originator>
+        <date-received>Eingangsdatum</date-received>
+        <originating-organization>Ursprungsorganisation</originating-organization>
+        <next-review-date>Nächstes Überprüfungsdatum</next-review-date>
+        <previous-review-date>Letztes Überprüfungsdatum</previous-review-date>
+        <cutoff-date>Cut-Off-Datum</cutoff-date>
+        <hold-until>Vorhalten bis</hold-until>
+        <transfer-date>Übertragungsdatum</transfer-date>
+        <transfer-location>Übertragungsort</transfer-location>
+        <accession-date>Akquisitionsdatum</accession-date>
+        <accession-location>Accession Location</accession-location>
+        <destruction-date>Löschungsdatum</destruction-date>
+      </label>
+    </view>
+  </FilePlan>
+  <!--
+  ################resoucebundle FOR KFX:DOCUMENT VIEW TEMPLATE##############
+  -->
+  <Kofax>
+    <view>
+      <label>
+        <document-name>Kofax Dokumentname</document-name>
+        <downloadable>Herunterladbare Datei</downloadable>
+      </label>
+    </view>
+  </Kofax>
+  <!--
+  ################resoucebundle FOR MAIL:DOCUMENT VIEW TEMPLATE##############
+  -->
+  <Mail>
+    <view>
+      <label>
+        <from>Von:</from>
+        <to>An:</to>
+        <cc>Cc:</cc>
+        <date>Datum:</date>
+        <subject>Betreff:</subject>
+        <attachment>Anhänge:</attachment>
+      </label>
+    </view>
+  </Mail>
+  <!--
+  ################resoucebundle FOR EXO:PODCAST VIEW TEMPLATE##############
+  -->
+  <Podcast>
+    <view>
+      <label>
+        <podcast>Podcast</podcast>
+        <title>Titel</title>
+        <link>Link</link>
+        <author>Autor</author>
+        <explicit>Eindeutiger Inhalt</explicit>
+        <category>Kategorie</category>
+        <keyword>Schlüsselwörter</keyword>
+        <publish-date>Veröffentlichungsdatum</publish-date>
+        <mime-type>MIME-Typ</mime-type>
+        <length>Länge</length>
+        <description>Beschreibung</description>
+      </label>
+    </view>
+  </Podcast>
+  <!--
+  ################resoucebundle FOR EXO:SAMPLE VIEW TEMPLATE##############
+  -->
+  <Sample>
+    <view>
+      <label>
+        <node-name>Knotenname</node-name>
+        <title>Titel</title>
+        <date>Datum</date>
+        <date-time>Datum-Uhrzeit</date-time>
+        <description>Beschreibung</description>
+        <image>Bild</image>
+        <summary>Zusammenfassung</summary>
+        <content>Inhalt</content>
+        <relation>Beziehungen</relation>
+        <attachment>Anhänge</attachment>
+      </label>
+    </view>
+  </Sample>
+  <!--
+  ################resoucebundle FOR EXO:VOTE VIEW TEMPLATE##############
+  -->
+  <Vote>
+    <view>
+      <label>
+        <avg-rating>Durschnittliche Bewertung</avg-rating>
+        <subscription>Stimmen</subscription>
+      </label>
+    </view>
+  </Vote>
+  <!--
+  ################resoucebundle FOR LISTVIEW VIEW TEMPLATE##############
+  -->
+  <ListView>
+    <view>
+      <label>
+        <name>Name</name>
+        <versionable>Versionierbar</versionable>
+        <exo_owner>Eigentümer</exo_owner>
+        <exo_dateCreated>Erstellungsdatum</exo_dateCreated>
+        <exo_dateModified>Bearbeitungsdatum</exo_dateModified>
+        <auditing>Audit</auditing>
+      </label>
+    </view>
+  </ListView>
+  <!--
+  ################resoucebundle FOR exo:workflowAction VIEW TEMPLATE##############
+  -->
+  <Workflow>
+    <view>
+      <label>
+        <name>Name</name>
+        <lifecycle>Lebenszyklus</lifecycle>
+        <description>Beschreibung</description>
+        <validator>Genehmiger</validator>
+        <to-workspace>zum Arbeitsbereich</to-workspace>
+        <at-location>Am Ort</at-location>
+      </label>
+    </view>
+  </Workflow>
+  <!--
+  ################resoucebundle FOR exo:backupAction VIEW TEMPLATE##############
+  -->
+  <Backup>
+    <view>
+      <label>
+        <name>Name</name>
+        <lifecycle>Lebenszyklus</lifecycle>
+        <description>Beschreibung</description>
+        <to-workspace>zum Arbeitsbereich</to-workspace>
+        <at-location>Am Ort</at-location>
+      </label>
+    </view>
+  </Backup>
+ 
+  <!--
+  ###################### resoucebundle for exo:iCalendarGenerateAction view template ####
+  -->
+  <Icalendar>
+    <view>
+      <label>
+        <action-name>Aktionname</action-name>
+        <lifecycle>Lebenszyklus</lifecycle>
+        <calendar-path>Kalenderpfad</calendar-path>
+        <description>Beschreibung</description>
+        <query>Abfrage</query>
+        <repository>Repository</repository>
+      </label>
+    </view>
+  </Icalendar>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction view template ####
+  -->
+  <AddMetadata>
+    <view>
+      <label>
+        <action-name>Aktionname</action-name>
+        <lifecycle>Lebenszyklus</lifecycle>
+        <metadata>Metadaten</metadata>
+        <description>Beschreibung</description>
+      </label>
+    </view>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning view template ####
+  -->
+  <AutoVersioning>
+    <view>
+      <label>
+        <action-name>Aktionname</action-name>
+        <lifecycle>Lebenszyklus</lifecycle>
+        <description>Beschreibung</description>
+      </label>
+    </view>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong view template ####
+  -->
+  <EnableVersioning>
+    <view>
+      <label>
+        <action-name>Name</action-name>
+        <lifecycle>Lebenszyklus</lifecycle>
+        <description>Beschreibung</description>
+      </label>
+    </view>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet view template ####
+  -->
+  <ElementSet>
+    <view>
+      <label>
+        <not-avaliable>N/V</not-avaliable>
+        <title>Titel</title>
+        <creator>Ersteller</creator>
+        <subject>Betreff</subject>
+        <source>Quelle</source>
+        <contributor>Beiträger</contributor>
+        <resource-type>Ressourcentyp</resource-type>
+        <date>Datum</date>
+        <publisher>Veröffentlicher</publisher>
+        <description>Beschreibung</description>
+        <rights>Rechte</rights>
+        <relation>Beziehung</relation>
+        <format>Format</format>
+        <coverage>Abdeckung</coverage>
+        <identifier>Identifikator</identifier>
+        <languages>Sprachen</languages>
+      </label>
+      <action>
+        <add-edit>Hinzufügen/Bearbeiten</add-edit>
+        <cancel>Abbrechen</cancel>
+      </action>
+      <tooltip>
+        <cancel>Abbrechen</cancel>
+        <add-edit>Eigenschaften hinzufügen/bearbeiten</add-edit>
+      </tooltip>
+    </view>
+  </ElementSet>
+  <!--
+  ###################### resoucebundle for rma:cutoffable view template ####
+  -->
+  <Cutoffable>
+    <view>
+      <label>
+        <not-available>N/V</not-available>
+        <cutoff-executed>Cut-Off ausgeführt</cutoff-executed>
+        <cutoff-now>Cut-Off jetzt</cutoff-now>
+        <cutoff-date-time>Cut-Off-Datum/-Zeit</cutoff-date-time>
+        <cutoff-event>Cut-Off-Ereignis</cutoff-event>
+        <cutoff-obsolete>Cut-Off veraltet</cutoff-obsolete>
+        <cutoff-superseded>Cut-Off abgelöst</cutoff-superseded>
+      </label>
+      <action>
+        <add-edit>Hinzufügen/Bearbeiten</add-edit>
+        <cancel>Abbrechen</cancel>
+      </action>
+      <tooltip>
+        <cancel>Abbrechen</cancel>
+        <add-edit>Eigenschaften hinzufügen/bearbeiten</add-edit>
+      </tooltip>
+    </view>
+  </Cutoffable>
+  <!--
+  ###################### resoucebundle for rma:destroyable view template ####
+  -->
+  <Destroyable>
+    <view>
+      <label>
+        <not-available>N/V</not-available>
+        <destruction-date>Löschungsdatum</destruction-date>
+      </label>
+      <action>
+        <add-edit>Hinzufügen/Bearbeiten</add-edit>
+        <cancel>Abbrechen</cancel>
+      </action>
+      <tooltip>
+        <cancel>Abbrechen</cancel>
+        <add-edit>Eigenschaften hinzufügen/bearbeiten</add-edit>
+      </tooltip>
+    </view>
+  </Destroyable>
+  <!--
+  ###################### resoucebundle for rma:accessionable view template ####
+  -->
+  <Accessionable>
+    <view>
+      <label>
+        <not-available>N/V</not-available>
+        <accession-executed>Accession Executed</accession-executed>
+        <accession-date>Akquisitionsdatum</accession-date>
+      </label>
+      <action>
+        <add-edit>Hinzufügen/Bearbeiten</add-edit>
+        <cancel>Abbrechen</cancel>
+      </action>
+      <tooltip>
+        <cancel>Abbrechen</cancel>
+      </tooltip>
+    </view>
+  </Accessionable>
+  <!--
+  ###################### resoucebundle for rma:holdable view template ####
+  -->
+  <Holdable>
+    <view>
+      <label>
+        <not-available>N/V</not-available>
+        <hold-executed>﻿Anhalten ausgeführt</hold-executed>
+        <hold-until>Vorhalten bis</hold-until>
+        <holds-discretionary>Benutzerbestimmbares Anhalten</holds-discretionary>
+        <hold-until-event>Vorhalten bis Ereignis</hold-until-event>
+        <freeze>Einfrieren</freeze>
+      </label>
+      <action>
+        <add-edit>Hinzufügen/Bearbeiten</add-edit>
+        <cancel>Abbrechen</cancel>
+      </action>
+      <tooltip>
+        <cancel>Abbrechen</cancel>
+        <add-edit>Eigenschaften hinzufügen/bearbeiten</add-edit>
+      </tooltip>
+    </view>
+  </Holdable>
+  <!--
+  ###################### resoucebundle rma:record view template ####
+  -->
+  <Record>
+    <view>
+      <label>
+        <not-available>N/V</not-available>
+        <supplemental-marking-list>Zusätzliche Anmeldungsliste</supplemental-marking-list>
+        <subject>Betreff</subject>
+        <record-identifier>Datensatzidentifikator</record-identifier>
+        <originator>Urheber</originator>
+        <format>Format</format>
+        <addresses>Adressen</addresses>
+        <originating-organization>Ursprungsorganisation</originating-organization>
+        <other-addresses>Weitere Adressen</other-addresses>
+        <publication-date>Veröffentlichungsdatum</publication-date>
+        <record-note>Datensatznotiz</record-note>
+        <date-received>Eingangsdatum</date-received>
+        <media-format>Medienformat</media-format>
+        <is-obsolete>Ist veraltet</is-obsolete>
+        <date-field>Datumsfeld</date-field>
+        <superseded>Abgelöst</superseded>
+        <uuid>UUID</uuid>
+      </label>
+      <action>
+        <add-edit>Hinzufügen/Bearbeiten</add-edit>
+        <cancel>Abbrechen</cancel>
+      </action>
+      <tooltip>
+        <cancel>Abbrechen</cancel>
+        <add-edit>Eigenschaften hinzufügen/bearbeiten</add-edit>
+      </tooltip>
+    </view>
+  </Record>
+  <!--
+  ###################### resoucebundle rma:transferable view template ####
+  -->
+  <Transferable>
+    <view>
+      <label>
+        <not-available>N/V</not-available>
+        <transfer-executed>Übertragung ausgeführt</transfer-executed>
+        <transfer-date>Übertragungsdatum</transfer-date>
+        <transfer-location>Übertragungsort</transfer-location>
+      </label>
+      <action>
+        <add-edit>Hinzufügen/Bearbeiten</add-edit>
+        <cancel>Abbrechen</cancel>
+      </action>
+      <tooltip>
+        <cancel>Abbrechen</cancel>
+        <add-edit>Eigenschaften hinzufügen/bearbeiten</add-edit>
+      </tooltip>
+    </view>
+  </Transferable>
+  <!--
+  ###################### resoucebundle rma:vitalRecord view template ####
+  -->
+  <VitalRecord>
+    <view>
+      <label>
+        <not-available>N/V</not-available>
+        <is-vital-record>Ist ein vitaler Datensatz</is-vital-record>
+        <prev-review-date>Letztes Überprüfungsdatum</prev-review-date>
+        <next-review-date>Nächstes Überprüfungsdatum</next-review-date>
+      </label>
+      <action>
+        <add-edit>Hinzufügen/Bearbeiten</add-edit>
+        <cancel>Abbrechen</cancel>
+      </action>
+      <tooltip>
+        <cancel>Abbrechen</cancel>
+        <add-edit>Eigenschaften hinzufügen/bearbeiten</add-edit>
+      </tooltip>
+    </view>
+  </VitalRecord>
+  <!--
+  ###################### resoucebundle exo:contentPublishing dialogs template ####
+  -->
+  <ContentPublishing>
+    <view>
+      <label>
+        <id>ID</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <description>#{word.description}</description>
+        <validator>Genehmiger</validator>
+        <supervisor>Vorgesetzter</supervisor>
+        <public-workspace>Veröffentlichender Arbeitsbereich</public-workspace>
+        <public-path>Veröffentlichungspfad</public-path>
+        <pending-workspace>Ausstehender Arbeitsbereich</pending-workspace>
+        <pending-path>Ausstehender Pfad</pending-path>
+        <backup-workspace>Sicherungsarbeitsbereich</backup-workspace>
+        <backup-path>Sicherungspfad</backup-path>
+        <trash-workspace>Papierkorb Arbeitsbereich</trash-workspace>
+        <trash-path>Pfad für Papierkorb</trash-path>
+<affectedNodeTypeNames>Betroffenen Knotentypen</affectedNodeTypeNames>
+      </label>
+    </view>
+  </ContentPublishing>
+
+  <SendMail>
+    <view>
+      <label> 
+        <isDeep>Ist rekursiv</isDeep>
+        <nodetypes>Knotentypen</nodetypes>
+        <affectedNodeTypeNames>Betroffenen Knotentypen</affectedNodeTypeNames>
+        <nodeTypeName>Knotentypnamen</nodeTypeName>
+      </label> 
+  </view>
+  </SendMail>
+
+  <ScriptAction>
+    <view>
+      <label> 
+        <isDeep>Ist rekursiv</isDeep>
+        <nodetypes>Knotentypen</nodetypes>
+        <affectedNodeTypeNames>Betroffenen Knotentypen</affectedNodeTypeNames>
+        <nodeTypeName>Knotentypnamen</nodeTypeName>
+      </label> 
+    </view>
+  </ScriptAction>
+  
+  <Getmail>
+    <view>
+      <label>
+        <isDeep>Ist rekursiv</isDeep>
+        <nodetypes>Knotentypen</nodetypes>
+        <affectedNodeTypeNames>Betroffenen Knotentypen</affectedNodeTypeNames>
+        <nodeTypeName>Knotentypnamen</nodeTypeName>
+      </label> 
+    </view>
+  </Getmail>
+  
+  <Rss>
+    <view>
+      <label> 
+        <isDeep>Ist rekursiv</isDeep>
+        <nodetypes>Knotentypen</nodetypes>
+        <affectedNodeTypeNames>Betroffenen Knotentypen</affectedNodeTypeNames>
+        <nodeTypeName>Knotentypnamen</nodeTypeName>
+      </label> 
+    </view>
+  </Rss>
+  
+  <AddMetadata>
+    <view>
+      <label>
+        <isDeep>Ist rekursiv</isDeep>
+        <nodetypes>Knotentypen</nodetypes>
+        <affectedNodeTypeNames>Betroffenen Knotentypen</affectedNodeTypeNames>
+        <nodeTypeName>Knotentypnamen</nodeTypeName>
+      </label> 
+    </view>
+  </AddMetadata>
+
+  <ReloadAction>
+    <view>
+      <label>
+        <isDeep>Ist rekursiv</isDeep>
+        <nodetypes>Knotentypen</nodetypes>
+        <affectedNodeTypeNames>Betroffenen Knotentypen</affectedNodeTypeNames>
+        <nodeTypeName>Knotentypnamen</nodeTypeName>
+      </label> 
+    </view>
+  </ReloadAction>
+
+  <Transform>
+    <view>
+      <label> 
+        <isDeep>Ist rekursiv</isDeep>
+        <nodetypes>Knotentypen</nodetypes>
+        <affectedNodeTypeNames>Betroffenen Knotentypen</affectedNodeTypeNames>
+        <nodeTypeName>Knotentypnamen</nodeTypeName>
+      </label> 
+    </view>
+  </Transform>
+
+  <EnableVersioning>
+    <view>
+      <label>
+        <isDeep>Ist rekursiv</isDeep>
+        <nodetypes>Knotentypen</nodetypes> 
+        <affectedNodeTypeNames>Betroffenen Knotentypen</affectedNodeTypeNames>
+        <nodeTypeName>Knotentypnamen</nodeTypeName>
+      </label> 
+    </view>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <view>
+      <label>
+        <isDeep>Ist rekursiv</isDeep>
+        <nodetypes>Knotentypen</nodetypes>
+        <affectedNodeTypeNames>Betroffenen Knotentypen</affectedNodeTypeNames>
+        <nodeTypeName>Knotentypnamen</nodeTypeName>
+      </label> 
+    </view>
+  </AutoVersioning>
+  
+   <AccessibleMedia>
+    <view>
+      <label>
+      <Play-audio-description-of-this-video>Audio-Beschreibung</Play-audio-description-of-this-video>
+      <Read-more>Mehr lesen</Read-more>
+      <Read-less>Weniger lesen</Read-less>
+      <Switch-back-to-original-video>Originalvideo</Switch-back-to-original-video>
+      </label>
+      <tooltip>
+      <A-second-media-file-is-available-as-audio-description>Eine zweite Mediendatei steht als Audio-Beschreibung zur Verfügung</A-second-media-file-is-available-as-audio-description>
+      </tooltip>
+    </view>
+  </AccessibleMedia>
+ 
+</bundle>
