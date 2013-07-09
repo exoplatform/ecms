@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIPresentationContainer>
+    <title>
+      <QuickEdit>Im Inhaltsexplorer bearbeiten</QuickEdit>
+      <print>Diese Seite drucken</print>
+      <FastPublish>Veröffentlichen</FastPublish>
+    </title>
+    <label>
+      <draft>Entwurf</draft>
+      <print>Drucken</print>
+    </label>
+    <msg>
+      <no-content>Keine Inhalte gefunden.</no-content>
+      <internal-server-error>Beim Anfordern von Daten vom Server ist ein Fehler aufgetreten.</internal-server-error>
+      <empty-title-error>Bitte geben Sie den neuen Titel ein.</empty-title-error>
+    </msg>
+  </UIPresentationContainer>
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorOne>Inhalt auswählen</UIContentSelectorOne>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+  <UISingleContentViewerPortlet>
+    <msg>
+      <AccessControlException>Ihnen fehlt die Berechtigung auf den Bearbeitungsmodus zuzugreifen.</AccessControlException>
+    </msg>
+  </UISingleContentViewerPortlet>
+  <UISCVContextualRadioBox>
+    <label>
+      <Enable>Aktiviert</Enable>
+      <Disable>Deaktiviert</Disable>
+    </label>
+  </UISCVContextualRadioBox>
+  <UIPreferencesPopupWindows>
+    <title>
+      <UISCVPreferences>Einstellungen zu Details des Inhalts</UISCVPreferences>
+    </title>
+  </UIPreferencesPopupWindows>
+  <UISCVPreferences>
+    <action>
+      <Save>Speichern</Save>
+      <Abort>Abbrechen</Abort>
+      <Cancel>Abbrechen</Cancel>
+      <Print>Drucken</Print>
+      <Close>Schließen</Close>
+    </action>
+    <title>Einstellungen zu Details des Inhalts</title>
+    <label>
+      <Back>Zurück zur vorherigen Seite</Back>
+      <Edit>Bearbeiten</Edit>
+      <Preferences>Präferenzen</Preferences>
+      <Title>Einstellungen zu Details des Inhalts</Title>
+      <UISCVShowTitleConfigurationCheckBox>Titel anzeigen</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>Datum anzeigen</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowOptionBarConfigurationCheckBox>Optionsleiste anzeigen</UISCVShowOptionBarConfigurationCheckBox>
+      <DisplaySettingBlock>Anzeigeeinstellungen</DisplaySettingBlock>
+      <ContentPathBlock>Inhaltsauswahl</ContentPathBlock>
+      <UISCVConfigItemPathFormInputSet>Inhaltspfad</UISCVConfigItemPathFormInputSet>
+    <UISCVContentPathConfigurationInputBox>Inhaltspfad</UISCVContentPathConfigurationInputBox>
+      <Advance>Erweitert</Advance>
+      <ContextCaption>Dynamische Navigation</ContextCaption>
+      <UISCVContextualRadioBox>Kontextueller Inhalt</UISCVContextualRadioBox>
+      <UISCVParameterInputBox>von</UISCVParameterInputBox>
+      <PrintSettingBlock>Druckeinstellungen</PrintSettingBlock>
+      <UISCVPrintPageParameter>mit</UISCVPrintPageParameter>
+      <UISCVConfigPrintPageFormInputSet>In Seite anzeigen</UISCVConfigPrintPageFormInputSet>
+      <LockStatus>Sperren</LockStatus>
+      <CacheManagement>Inhaltssichtbarkeit</CacheManagement>
+      <UISCVCacheRadioBox>Inhalt teilen</UISCVCacheRadioBox>
+    </label>
+    <help>
+      <ContentPathBlock>Wählen Sie den Inhalt, den Sie anzeigen möchten. Dieser Standard-Inhalt wird dynamisch ersetzt werden, wenn Sie die dynamische Navigation aktivieren (sehen Sie unten für den erweiterten Modus).</ContentPathBlock>
+      <DisplaySettingBlock>Sie können die Optionsleiste ein- oder ausblenden, um den Druck-Link anzuzeigen. Die Titel- und Datumsanzeige sind ebenfalls optional.</DisplaySettingBlock>
+      <ContextualHelp>Die dynamische Navigation aktivieren. Der Inhalt kann durch einen anderen URL-basierten Parameter dynamisch geändert werden.</ContextualHelp>
+      <ParameterHelp>Dieser Parameter wird verwendet werden, um den Inhalt zu erhalten, wenn die dynamische Navigation aktiviert ist.</ParameterHelp>
+    </help>
+    <msg>
+      <not-valid-path>Der Elementpfad ist ungültig.</not-valid-path>
+    </msg>
+    <tab>
+      <label>
+        <UISCVConfigContentFormInputSet>Inhaltsauswahl</UISCVConfigContentFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Anzeigeeinstellungen</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>Druckeinstellungen</UISCVConfigPrintFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Erweitert</UISCVConfigAdvancedFormInputSet>
+      </label>
+    </tab>
+  </UISCVPreferences>
+  <UISCVConfigItemPathFormInputSet>
+    <title>
+      <SelectFolderPath>Einen Ordnerpfad auswählen</SelectFolderPath>
+    </title>
+  </UISCVConfigItemPathFormInputSet>
+  <UISCVConfigPrintPageFormInputSet>
+    <title>
+      <SelectTargetPage>In Seite anzeigen</SelectTargetPage>
+    </title>
+  </UISCVConfigPrintPageFormInputSet>
+  <PublicationStates>
+    <archived>Archiviert</archived>
+    <obsolete>Veraltet</obsolete>
+    <unpublished>Unveröffentlicht</unpublished>
+    <enrolled>Eingeschrieben</enrolled>
+    <draft>Entwurf</draft>
+    <pending>Ausstehend</pending>
+    <approved>Genehmigt</approved>
+    <inreview>Unter Überprüfung</inreview>
+    <staged>bereitgestellt</staged>
+    <published>Veröffentlicht</published>
+  </PublicationStates>
+  <UISCVCacheRadioBox>
+    <label>
+      <Enable>Beschränkt durch Authentifzierung</Enable>
+      <Disable>Beschränkt durch Benutzerrollen</Disable>
+    </label>
+  </UISCVCacheRadioBox>
+</bundle>
