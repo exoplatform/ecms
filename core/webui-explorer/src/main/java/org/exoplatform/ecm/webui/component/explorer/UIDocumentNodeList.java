@@ -37,7 +37,11 @@ import javax.jcr.RepositoryException;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.EmptySerializablePageList;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.commons.utils.PageList;
+import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.control.action.ManageVersionsActionComponent;
 import org.exoplatform.ecm.webui.component.explorer.versions.UIActivateVersion;
 import org.exoplatform.ecm.webui.component.explorer.versions.UIVersionInfo;
@@ -129,8 +133,7 @@ public class UIDocumentNodeList extends UIContainer {
   public void setShowMoreButton(boolean value) { showMoreButton_ = value; }
   
   public void setCurrentNode(Node node) throws Exception {
-    UIDocumentInfo uiDocInfo = getAncestorOfType(UIDocumentInfo.class);
-    setPageList(uiDocInfo.getPageList(node.getPath()));
+    setPageList(this.getPageList(node.getPath()));
   }
   
   public void updateUIDocumentNodeListChildren() throws Exception {
@@ -294,6 +297,26 @@ public class UIDocumentNodeList extends UIContainer {
 
   public String getFileSize(Node file) throws Exception {
     return org.exoplatform.services.cms.impl.Utils.fileSize(file);
+  }
+  
+  @SuppressWarnings("unchecked")
+  private LazyPageList<Object> getPageList(String path) throws Exception {
+    List<Node> nodeList = null;
+
+    UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
+    UIDocumentInfo uiDocInfo = this.getAncestorOfType(UIDocumentInfo.class);
+    Preference pref = uiExplorer.getPreference();
+    int nodesPerPage = pref.getNodesPerPage();
+
+    Set<String> allItemByTypeFilterMap = uiExplorer.getAllItemByTypeFilterMap();
+    if (allItemByTypeFilterMap.size() > 0)
+      nodeList = uiDocInfo.filterNodeList(uiExplorer.getChildrenList(path, !pref.isShowPreferenceDocuments()));
+    else
+      nodeList = uiDocInfo.filterNodeList(uiExplorer.getChildrenList(path, pref.isShowPreferenceDocuments()));
+
+    ListAccess<Object> nodeAccList =
+        new ListAccessImpl<Object>(Object.class, NodeLocation.getLocationsByNodeList(nodeList));
+    return new LazyPageList<Object>(nodeAccList, nodesPerPage);
   }
   
   static public class ExpandNodeActionListener extends EventListener<UIDocumentNodeList> {
