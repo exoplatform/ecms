@@ -177,10 +177,10 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
             if (target != null)
               listNode.add(target);
           } catch (ItemNotFoundException ex) {
-            //ignore this exception
+            continue;
           }
           catch (AccessDeniedException adex) {
-            //ignore this exception
+            continue;
           }
         }
       }

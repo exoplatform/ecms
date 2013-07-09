@@ -854,7 +854,7 @@ public class Utils {
         try {
           title = content.getProperty("dc:title").getValues()[0].getString();
         } catch(Exception ex) {
-          // Do nothing
+          title = null;
         }
       }
     }

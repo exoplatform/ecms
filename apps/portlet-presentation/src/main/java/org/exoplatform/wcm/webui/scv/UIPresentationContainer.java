@@ -122,7 +122,7 @@ public class UIPresentationContainer extends UIContainer{
           try {
             title = content.getProperty("dc:title").getValues()[0].getString().trim();
           } catch (Exception e) {
-            // Do nothing
+            title = null;
           }
         }
       }
