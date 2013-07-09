@@ -118,8 +118,8 @@ public class RenameConnector implements ResourceContainer {
       String oldName = renamedNode.getName();
       if (oldName.indexOf('.') != -1 && renamedNode.isNodeType(NodetypeConstant.NT_FILE)) {
         String ext = oldName.substring(oldName.lastIndexOf('.'));
-        newName += ext;
-        newExoTitle += ext;
+        newName = newName.concat(ext);
+        newExoTitle = newExoTitle.concat(ext);
       }
 
       // Stop process if new name and exo:title is the same with old one

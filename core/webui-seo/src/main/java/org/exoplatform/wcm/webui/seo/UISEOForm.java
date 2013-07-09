@@ -535,7 +535,7 @@ public class UISEOForm extends UIForm{
   		String lang = uiForm.getUIFormSelectBox(LANGUAGE_TYPE).getValue();
   		if(lang.equals("language")) return;
   		uiForm.setSelectedLanguage(lang);
-  		String pageReference = Util.getUIPortal().getSelectedUserNode().getPageRef().format();
+      String pageReference = Util.getUIPortal().getSelectedUserNode().getPageRef().format();
   		SEOService seoService = uiForm.getApplicationComponent(SEOService.class);
   		PageMetadataModel seoData = new PageMetadataModel();
   		PageMetadataModel metaModel = seoService.getMetadata(uiForm.paramsArray, pageReference, uiForm.defaultLanguage);
@@ -564,8 +564,8 @@ public class UISEOForm extends UIForm{
   		uiForm.setSelectedLanguage(lang);
   		SEOService seoService = uiForm.getApplicationComponent(SEOService.class);
   		PageMetadataModel metaModel = new PageMetadataModel();
-  		String pageReference = Util.getUIPortal().getSelectedUserNode().getPageRef().format();
-  		metaModel = seoService.getMetadata(uiForm.paramsArray, pageReference, lang);
+      String pageReference = Util.getUIPortal().getSelectedUserNode().getPageRef().format();
+      metaModel = seoService.getMetadata(uiForm.paramsArray, pageReference, lang);
   		if(metaModel == null || (metaModel != null && metaModel.getFullStatus().equals("Empty"))) {	
 	  		metaModel = seoService.getMetadata(uiForm.paramsArray, pageReference, uiForm.defaultLanguage);
   		}
@@ -582,7 +582,7 @@ public class UISEOForm extends UIForm{
   		String lang = event.getRequestContext().getRequestParameter(OBJECTID) ;
   		SEOService seoService = uiForm.getApplicationComponent(SEOService.class);
   		PageMetadataModel metaModel = new PageMetadataModel();
-  		String pageReference = Util.getUIPortal().getSelectedUserNode().getPageRef().format();
+      String pageReference = Util.getUIPortal().getSelectedUserNode().getPageRef().format();
   		metaModel.setPageReference(pageReference);
   		if(uiForm.onContent) {
   			Node contentNode = null;

@@ -213,7 +213,7 @@ public class UIViewInfoContainer extends UIContainer {
         try {
           title = content.getProperty(DC_TITLE).getValues()[0].getString();
         } catch(Exception ex) {
-          // Do nothing
+          title = null;
         }
       }
     } else if (node.hasProperty(Utils.EXO_TITLE)) {

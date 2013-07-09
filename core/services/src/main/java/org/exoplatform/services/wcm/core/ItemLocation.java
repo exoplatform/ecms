@@ -19,6 +19,7 @@ package org.exoplatform.services.wcm.core;
 import javax.jcr.Item;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -210,12 +211,12 @@ public class ItemLocation {
       try {
         if (item instanceof Node)
           uuid = ((Node)item).getUUID();
-      } catch (Exception e) {
-        // Do nothing}
+      } catch (RepositoryException e) {
+        uuid = null;
       }
       boolean isSystemSession = IdentityConstants.SYSTEM.equals(session.getUserID());
       return new ItemLocation(repository, workspace, path, uuid, isSystemSession);
-    } catch (Exception e) {
+    } catch (RepositoryException e) {
       return null;
     }
   }

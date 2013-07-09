@@ -342,8 +342,8 @@ public class LinkManagerImpl implements LinkManager {
    * {@inheritDoc}
    */
   public List<Node> getAllLinks(Node targetNode, String linkType, SessionProvider sessionProvider) {
-    List<Node> result = new ArrayList<Node>();
     try {
+      List<Node> result = new ArrayList<Node>();
       ManageableRepository repository  = WCMCoreUtils.getRepository();
       String[] workspaces = repository.getWorkspaceNames();
       String queryString = new StringBuilder().append("SELECT * FROM ").
@@ -364,10 +364,12 @@ public class LinkManagerImpl implements LinkManager {
           result.add(iter.nextNode());
         }
       }
-    } catch (Exception e) {
+      
+      return result;
+    } catch (RepositoryException e) {
       // return empty node list if there are errors in execution or user has no right to access nodes
+      return new ArrayList<Node>();
     }
-    return result;
   }
 
   /**
