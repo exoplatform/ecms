@@ -39,4 +39,4 @@
 %>
 
 <!-- ############################ FLASH ########################################## -->
-<embed width="610" allowscriptaccess="always" wmode="opaque" quality="high" bgcolor="#ffffff" name="$originalNode.name" id="$originalNode.name" src="$binarySrc" type="application/x-shockwave-flash"/>
+<embed width="640" height="480" allowscriptaccess="always" wmode="opaque" quality="high" bgcolor="#ffffff" name="$originalNode.name" id="$originalNode.name" src="$binarySrc" type="application/x-shockwave-flash"/>
