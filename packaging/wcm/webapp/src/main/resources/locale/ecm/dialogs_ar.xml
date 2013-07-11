@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ###################### global word for ECM dialogs resoucebundle ####
+  -->
+  <Ecm>
+    <dialog>
+      <label>
+        <end-time>نهاية التوقيت</end-time>
+        <start-time>بداية التوقيت</start-time>
+        <lifecycle>دورة الحياة</lifecycle>
+        <mimeType>نوع التوصيلة</mimeType>
+        <repeat-count>تكرار العدّ</repeat-count>
+        <time-interval>الفترة الزمنية</time-interval>
+        <query-items>عناصر الاستبيان</query-items>
+        <schedule-type>نوع التخطيط</schedule-type>
+        <remove>إزالة العنصر</remove>
+        <add>إضافة عنصر</add>
+        <expand>قُم بتمديد هذا</expand>
+      </label>
+    </dialog>
+  </Ecm>
+  
+  <UIDocumentForm>
+    <label>
+      <title>#{word.title}</title>
+      <link>الوصلة</link>
+      <contentHtml>#{word.content}</contentHtml>
+      <content>#{word.content}</content>
+      <contentPlain>#{word.content}</contentPlain>
+      <name>الاسم</name>
+    <categories>الفئات</categories>
+    <recordCategoryIdentifier>المعرف الوحيد لفئة السجل</recordCategoryIdentifier>
+    <dispositionAuthority>مؤلف التنظيم</dispositionAuthority>
+    <permanentRecordIndicator>المؤشر الدائم للسجل</permanentRecordIndicator>
+    <containsRecordFolders>المجلد المحتوي للسجل</containsRecordFolders>
+    <defaultMediaType>نوع الوسائط الافتراضي</defaultMediaType>
+    <defaultMarkingList>قائمة التأشير الافتراضية</defaultMarkingList>
+    <defaultOriginatingOrganization>منظمة البعث الافتراضية</defaultOriginatingOrganization>
+    <vitalRecordIndicator>المؤشرالحيوي للسّجل</vitalRecordIndicator>
+    <processCutoff>عمليّة القطع</processCutoff>
+    <eventTrigger>نوابض الحدث</eventTrigger>
+    <processHold>إرجاء العملية</processHold>
+    <processTransfer>عمليّة التّحويل</processTransfer>
+    <transferBlockSize>حجم كتلة التحويل</transferBlockSize>
+    <processAccession>Process Accession</processAccession>
+    <accessionBlockSize>حجم كتلة الاكتساب</accessionBlockSize>
+    <processDestruction>عمليّة الاتلاف</processDestruction>
+    <location>المكان</location>
+    <LinkURL>عنوان الموارد الموحّد(URL)</LinkURL>
+    </label>
+  </UIDocumentForm>
+ 
+  <!--
+  ###################### resoucebundle for HTMLFile dialogs template ####
+  -->
+  <HtmlFile>
+    <dialog>
+      <label>
+        <name>الاسم</name>
+        <content>المحتوى</content>
+      </label>
+    </dialog>
+  </HtmlFile>
+  <!--
+  ###################### resoucebundle for exo:calendar dialogs template ####
+  -->
+  <Calendar>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <shared>مشترك</shared>
+      </label>
+    </dialog>
+  </Calendar>
+  <!--
+  ###################### resoucebundle for nt:file dialogs template ####
+  -->
+  <File>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <categories>الفئات</categories>
+        <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
+        <content>#{word.content}</content>
+        <re-upload>ملف موجود مسبقا. يمكنك استبدال من قبل حذفه وتحميل ملف آخر من هنا.</re-upload>
+      </label>
+    </dialog>
+  </File>
+
+  <UIActionForm>
+    <label>
+      <description>#{word.description}</description>
+      <port>المنفذ</port>
+      <userName>#{word.userName}</userName>
+      <password>كلمةالسر</password>
+      <link>الوصلة</link>
+      <to>بعث الرسالة الالكترونية إلى</to>
+      <actionName>#{word.name}</actionName>
+    </label>
+  </UIActionForm>
+  <EditFormAction>
+    <label>
+      <description>#{word.description}</description>
+      <port>المنفذ</port>
+      <userName>#{word.userName}</userName>
+      <password>كلمة السر</password>
+      <link>الوصلة</link>
+      <to>بعث الرسالة الالكترونية إلى</to>
+      <actionName>#{word.name}</actionName>
+    </label>
+  </EditFormAction>
+  <!--
+  ###################### resoucebundle for exo:bacupAction dialogs template ####
+  -->
+  <Backup>
+    <dialog>
+      <label>
+        <id>المعرف الوحيد</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <description>#{word.description}</description>
+        <to-workspace>الى فضاء العمل</to-workspace>
+        <with-path>المسار</with-path>
+      </label>
+    </dialog>
+  </Backup>
+  <!--
+  ###################### resoucebundle for exo:getmail dialogs template ####
+  -->
+  <Getmail>
+    <dialog>
+      <label>
+        <id>المعرف الوحيد</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <protocol>البروتوكول</protocol>
+        <host>المضيف</host>
+        <port>المنفذ</port>
+        <folder>المجلد</folder>
+        <username>#{word.userName}</username>
+        <password>كلمةالسر</password>
+        <description>#{word.description}</description>
+        <stote-path>مسار التخزين</stote-path>
+      </label>
+    </dialog>
+  </Getmail>
+  <!--
+  ###################### resoucebundle for exo:iCalendarGenerateAction dialogs template ####
+  -->
+  <Icalendar>
+    <dialog>
+      <label>
+        <id>المعرف الوحيد</id>
+        <action-name>اسم العمل</action-name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <description>#{word.description}</description>
+        <calendar-file-name>اسم ملف الرزنامة</calendar-file-name>
+        <query-items>#{Ecm.dialog.label.query-items}</query-items>
+      </label>
+    </dialog>
+  </Icalendar>
+ 
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction dialogs template ####
+  -->
+  <AddMetadata>
+    <dialog>
+      <label>
+        <id>المعرف الوحيد</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <metadata>قالب المعلومات القياسية</metadata>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning dialogs template ####
+  -->
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <id>المعرف الوحيد</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <start-time>#{Ecm.dialog.label.start-time}</start-time>
+        <end-time>#{Ecm.dialog.label.end-time}</end-time>
+        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <cron-expression>عبارة كرون</cron-expression>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong dialogs template ####
+  -->
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <id>المعرف الوحيد</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <start-time>#{Ecm.dialog.label.start-time}</start-time>
+        <end-time>#{Ecm.dialog.label.end-time}</end-time>
+        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <cron-expression>عبارة كرون</cron-expression>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet dialogs template ####
+  -->
+  <ElementSet>
+    <dialog>
+      <label>
+        <title>#{word.title}</title>
+        <creator>الصانع</creator>
+        <subject>#{word.subject}</subject>
+        <source>المصدر</source>
+        <contributor>المساهم</contributor>
+        <resource-type>نوع المورد</resource-type>
+        <date>#{word.date}</date>
+        <publisher>الناشر</publisher>
+        <description>#{word.description}</description>
+        <rights>الحقوق</rights>
+        <relation>العلاقة</relation>
+        <format>#{word.format}</format>
+        <coverage>التغطية</coverage>
+        <identifier>المعرف الوحيد:</identifier>
+        <language>اللغة:</language>
+      </label>
+    </dialog>
+  </ElementSet>
+  <!--
+  ###################### resoucebundle for rma:cutoffable dialogs template ####
+  -->
+  <Cutoffable>
+    <dialog>
+      <label>
+        <cutoff-executed>تمّ تشغيل القطع</cutoff-executed>
+        <cutoff-now>قطع فوري</cutoff-now>
+        <cutoff-date-time>تاريخ و توقيت القطع</cutoff-date-time>
+        <cutoff-event>حدث القطع</cutoff-event>
+        <cutoff-obsolete>القطع المهمل</cutoff-obsolete>
+        <cutoff-superseded>قطع التعويض</cutoff-superseded>
+      </label>
+    </dialog>
+  </Cutoffable>
+  <!--
+  ###################### resoucebundle for rma:destroyable dialogs template ####
+  -->
+  <Destroyable>
+    <dialog>
+      <label>
+        <destruction-date>تاريخ الاتلاف</destruction-date>
+      </label>
+    </dialog>
+  </Destroyable>
+  <!--
+  ###################### resoucebundle for rma:accessControllable dialogs template ####
+  -->
+  <AccessControllable>
+    <dialog>
+      <label>
+        <owner>الصاحب</owner>
+        <permissions>الصلاحيات</permissions>
+      </label>
+    </dialog>
+  </AccessControllable>
+  <!--
+  ###################### resoucebundle for rma:accessionable dialogs template ####
+  -->
+  <Accessionable>
+    <dialog>
+      <label>
+        <accession-executed>اكتساب منفذ</accession-executed>
+        <accession-date>تاريخ الاكتساب</accession-date>
+      </label>
+    </dialog>
+  </Accessionable>
+  <!--
+  ###################### resoucebundle for exo:actionable dialogs template ####
+  -->
+  <Actionable>
+    <dialog>
+      <label>
+        <primary-type>النوع الرئيسي</primary-type>
+        <mixin-types>انواع الميكسين</mixin-types>
+      </label>
+    </dialog>
+  </Actionable>
+  <!--
+  ###################### resoucebundle for exo:categorized dialogs template ####
+  -->
+  <Categorized>
+    <dialog>
+      <label>
+        <category>#{word.category}</category>
+      </label>
+    </dialog>
+  </Categorized>
+  <!--
+  ###################### resoucebundle for rma:holdable dialogs template ####
+  -->
+  <Holdable>
+    <dialog>
+      <label>
+        <hold-executed>إرجاء منفذ</hold-executed>
+        <hold-until>إرجاء حتى</hold-until>
+        <holds-discretionary>Discretionary Hold</holds-discretionary>
+        <hold-until-event>إرجاء الى حين حدث</hold-until-event>
+        <freeze>تجميد</freeze>
+      </label>
+    </dialog>
+  </Holdable>
+  <!--
+  ###################### resoucebundle for rma:lockable dialogs template ####
+  -->
+  <Lockable>
+    <dialog>
+      <label>
+        <lock-owner>صاحب القفل</lock-owner>
+        <lock-is-deep>قفل متكرر</lock-is-deep>
+      </label>
+    </dialog>
+  </Lockable>
+  <!--
+  ###################### resoucebundle for exo:move dialogs template ####
+  -->
+  <Move>
+    <dialog>
+      <label>
+        <destination-workpsace>فضاء العمل المقصود</destination-workpsace>
+        <destination-path>المسارالمقصود</destination-path>
+        <primary-type>النوع الرئيسي</primary-type>
+        <mixin-types>انواع الميكسين</mixin-types>
+      </label>
+    </dialog>
+  </Move>
+  <!--
+  ###################### resoucebundle for exo:published dialogs template ####
+  -->
+  <Published>
+    <dialog>
+      <label>
+        <start-publication>بداية النشر</start-publication>
+        <end-publication>نهاية النشر</end-publication>
+      </label>
+    </dialog>
+  </Published>
+  <!--
+  ###################### resoucebundle rma:record dialogs template ####
+  -->
+  <Record>
+    <dialog>
+      <label>
+        <supplemental-marking-list>القائمة الإضافية للتسجيل</supplemental-marking-list>
+        <subject>#{word.subject}</subject>
+        <record-identifier>معرف السجل</record-identifier>
+        <originator>الصانع</originator>
+        <format>#{word.format}</format>
+        <addresses>العناوين</addresses>
+        <originating-organization>المنظمة الاصلية</originating-organization>
+        <other-addresses>عناوين اخرى</other-addresses>
+        <publication-date>تاريخ النشر</publication-date>
+        <record-note>مذكرة السجل</record-note>
+        <date-received>تاريخ الاستقبال</date-received>
+        <media-format>شكل الوسيط</media-format>
+        <is-obsolete>مهمل</is-obsolete>
+        <date-field>مجال التاريخ</date-field>
+        <superseded>معوض</superseded>
+        <uuid>UUID</uuid>
+      </label>
+    </dialog>
+  </Record>
+  <!--
+  ###################### resoucebundle mix:referenceable dialogs template ####
+  -->
+  <Referenceable>
+    <dialog>
+      <label>
+        <uuid>UUID</uuid>
+      </label>
+    </dialog>
+  </Referenceable>
+  <!--
+  ###################### resoucebundle exo:relationable dialogs template ####
+  -->
+  <Relationable>
+    <dialog>
+      <label>
+        <relation>العلاقة</relation>
+      </label>
+    </dialog>
+  </Relationable>
+  <!--
+  ###################### resoucebundle exo:rss-enable dialogs template ####
+  -->
+  <RssEnable>
+    <dialog>
+      <label>
+        <title>العنوان</title>
+        <summary>#{word.summary}</summary>
+      </label>
+    </dialog>
+  </RssEnable>
+  <!--
+  ###################### resoucebundle rma:transferable dialogs template ####
+  -->
+  <Transferable>
+    <dialog>
+      <label>
+        <transfer-executed>تمّت عمليّة التحويل</transfer-executed>
+        <transfer-date>تاريخ التحويل</transfer-date>
+        <transfer-location>مكان التحويل</transfer-location>
+      </label>
+    </dialog>
+  </Transferable>
+  <!--
+  ###################### resoucebundle mix:versionable dialogs template ####
+  -->
+  <Versionable>
+    <dialog>
+      <label>
+        <version-history>تاريخ الإصدارات</version-history>
+        <base-version>الاصدار الاساسي</base-version>
+        <is-checked-out>في حالة انهاء المعالجة</is-checked-out>
+        <predecessors>الأسلاف</predecessors>
+        <merge-failed>فشل الادماج</merge-failed>
+        <uuid>UUID</uuid>
+      </label>
+    </dialog>
+  </Versionable>
+  <!--
+  ###################### resoucebundle rma:vitalRecord dialogs template ####
+  -->
+  <VitalRecord>
+    <dialog>
+      <label>
+        <is-vital-record>السجل حيوي</is-vital-record>
+        <prev-review-date>تاريخ المراجعة السابقة</prev-review-date>
+        <next-review-date>تاريخ المراجعة المُـقبلة</next-review-date>
+      </label>
+    </dialog>
+  </VitalRecord>
+  <!--
+  ##################### resoucebundle for resouce container dialogs template#####
+  -->
+  <ResouceContainer>
+    <dialog>
+      <label>
+        <name>الاسم</name>
+        <autoload>التحميل الالي</autoload>
+        <minetype>نوع الـMIME</minetype>
+        <content>المحتوى</content>
+      </label>
+    </dialog>
+  </ResouceContainer>
+  <!--
+  ###################### resoucebundle for validator ####
+  -->
+  <EmailAddressValidator>
+    <msg>
+      <Invalid-input>عنوان البريد الالكتروني غير صحيح</Invalid-input>
+    </msg>
+  </EmailAddressValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>المجال '{0}' مطلوب. الرجاء ادخال القيمة</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <NumberFormatValidator>
+    <msg>
+      <Invalid-number>المجال '{0}' غير صحيح</Invalid-number>
+    </msg>
+  </NumberFormatValidator>
+  <!--
+  #####Since version 2.4#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+  <ScriptAction>
+    <dialog>
+      <label>
+        <id>المعرف الوحيد</id>
+        <name>الاسم</name>
+        <lifecycle>دورة الحياة</lifecycle>
+        <homePath>مسار الاستقبال</homePath>
+        <targetWorkspace>هدف فضاء العمل</targetWorkspace>
+        <targetPath>مسار الهدف</targetPath>
+      </label>
+    </dialog>
+  </ScriptAction>
+  <UIDialogForm>
+   <form>
+   <DialogFormException>لا يمكن حفظ هذا الملفّ. رُبّما توجد مشكلة في عمليّة استباق الحفظ الخاصّة بالمُعترض</DialogFormException>
+   </form>
+  </UIDialogForm>
+
+  <!--
+  #####Since version 2.6#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+<no>لا</no>
+<yes>نعم</yes>
+<true>صحيح</true>
+<false>خطأ</false>
+<Electronic>إلكتروني</Electronic>
+<Paper>ورقة</Paper>
+<NONE>لا شيء</NONE>
+<CLASSIFIED>مُصنّف</CLASSIFIED>
+<UNCLASSIFIED>غير مُصنّف</UNCLASSIFIED>
+<NOCONTRACT>بدون عَقد</NOCONTRACT>
+<true>True</true>
+<false>False</false>
+<one-minute>دقيقة واحدة</one-minute>
+<hourly>كل ساعة</hourly>
+<daily>يوميا</daily>
+<quarterly>فصليا (كُل ثلاثَة أشْهُر)</quarterly>
+<yearly>سنويا</yearly>
+<ten-years>عشر سنوات</ten-years>
+<read>إجراء المستخدم</read>
+  <schedule>جدولة</schedule>
+  <node_added>إضافة محتوى</node_added>
+  <node_removed>إزالة المحتوى</node_removed>
+  <property_added>إضافة خاصية</property_added>
+  <property_removed>إزالة الخاصية</property_removed>
+  <property_changed>تعديل الملكية</property_changed>
+  <SendMail>
+    <dialog>
+      <label>
+        <isDeep>عميق</isDeep>
+        <nodetypes>نوع العقدة</nodetypes>
+        <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </SendMail>
+
+  <ScriptAction>
+    <dialog>
+      <label>
+        <isDeep>عميق</isDeep>
+        <nodetypes>نوع العقدة</nodetypes>
+        <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </ScriptAction>
+
+  <Getmail>
+    <dialog>
+      <label>
+        <isDeep>عميق</isDeep>
+        <nodetypes>نوع العقدة</nodetypes>
+        <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </Getmail>
+
+  <Rss>
+    <dialog>
+      <label>
+        <isDeep>عميق</isDeep>
+        <nodetypes>نوع العقدة</nodetypes>
+        <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </Rss>
+
+  <AddMetadata>
+    <dialog>
+      <label>
+        <isDeep>عميق</isDeep>
+        <nodetypes>نوع العقدة</nodetypes>
+        <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <ReloadAction>
+    <dialog>
+      <label>
+        <isDeep>عميق</isDeep>
+        <nodetypes>نوع العقدة</nodetypes>
+        <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </ReloadAction>
+
+  <Transform>
+    <dialog>
+      <label>
+        <isDeep>عميق</isDeep>
+        <nodetypes>نوع العقدة</nodetypes>
+        <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </Transform>
+
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <isDeep>عميق</isDeep>
+        <nodetypes>نوع العقدة</nodetypes>
+        <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <isDeep>عميق</isDeep>
+        <nodetypes>أنواع العقد</nodetypes>
+        <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AutoVersioning>
+
+  <!--
+  ###################### resoucebundle exo:contentPublishing dialogs template ####
+  -->
+  <ContentPublishing>
+    <dialog>
+      <label>
+        <id>المعرف</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <description>#{word.description}</description>
+        <validator>المكلّف بالمصادقة</validator>
+        <supervisor>المراقب</supervisor>
+        <public-workspace>فضاء النشر</public-workspace>
+        <public-path>مسار النشر</public-path>
+        <pending-workspace>فضاء في حالة انتظار</pending-workspace>
+        <pending-path>مسار في حالة انتظار</pending-path>
+        <backup-workspace>فضاء الحفظ</backup-workspace>
+        <backup-path>مسار الحفظ</backup-path>
+        <trash-workspace>فضاء سلة المهملات</trash-workspace>
+        <trash-path>مسار سلة المهملات</trash-path>
+<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </ContentPublishing>
+  
+  <AccessibleMedia>
+  <dialog>
+  <label>
+  <captions>التسميات التوضيحية</captions>
+<audioDescription>الوصف الصوتي</audioDescription>
+<alternativeText>النص البديل</alternativeText>
+</label>
+</dialog>
+<help>
+<CaptionsHelp>ينبغي للتّسميات التّوضيحيّة تقديم نص الحوار والأصوات الهامة</CaptionsHelp>
+<AudioDescriptionHelp>الوصف الصّوتي هو بمثابة السرد و التّعليق للفيديو</AudioDescriptionHelp>
+<AlternativeTextHelp>يرجى توفير وسيلة بديلة  قصد تقديم معلومات سهلة المنال</AlternativeTextHelp>
+</help>
+</AccessibleMedia>
+  
+</bundle>
