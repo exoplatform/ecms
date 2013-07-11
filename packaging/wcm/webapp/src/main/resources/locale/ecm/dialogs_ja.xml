@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ###################### global word for ECM dialogs resoucebundle ####
+  -->
+  <Ecm>
+    <dialog>
+      <label>
+        <end-time>終了時刻</end-time>
+        <start-time>開始時刻</start-time>
+        <lifecycle>ライフサイクル</lifecycle>
+        <mimeType>Mime タイプ</mimeType>
+        <repeat-count>繰り返し回数</repeat-count>
+        <time-interval>インターバル</time-interval>
+        <query-items>アイテム検索</query-items>
+        <schedule-type>スケジュールタイプ</schedule-type>
+        <remove>アイテムを削除</remove>
+        <add>アイテムを追加</add>
+        <expand>展開する</expand>
+      </label>
+    </dialog>
+  </Ecm>
+  
+  <UIDocumentForm>
+    <label>
+      <title>#{word.title}</title>
+      <link>リンク</link>
+      <contentHtml>#{word.content}</contentHtml>
+      <content>#{word.content}</content>
+      <contentPlain>#{word.content}</contentPlain>
+      <name>名前</name>
+    <categories>カテゴリー</categories>
+    <recordCategoryIdentifier>レコードカテゴリ識別子</recordCategoryIdentifier>
+    <dispositionAuthority>権限を削除</dispositionAuthority>
+    <permanentRecordIndicator>永続的レコードインジケーター</permanentRecordIndicator>
+    <containsRecordFolders>レコードフォルダを含む</containsRecordFolders>
+    <defaultMediaType>デフォルトメディアタイプ</defaultMediaType>
+    <defaultMarkingList>デフォルトマーキングリスト</defaultMarkingList>
+    <defaultOriginatingOrganization>デフォルトの元組織</defaultOriginatingOrganization>
+    <vitalRecordIndicator>必須レコード インジケーター</vitalRecordIndicator>
+    <processCutoff>カットオフの実行</processCutoff>
+    <eventTrigger>イベント トリガー</eventTrigger>
+    <processHold>プロセスの保留</processHold>
+    <processTransfer>プロセスの転送</processTransfer>
+    <transferBlockSize>転送ブロック サイズ</transferBlockSize>
+    <processAccession>Process Accession</processAccession>
+    <accessionBlockSize>アクセス ブロック サイズ</accessionBlockSize>
+    <processDestruction>プロセス中断</processDestruction>
+    <location>ロケーション</location>
+    <LinkURL>URL</LinkURL>
+    </label>
+  </UIDocumentForm>
+ 
+  <!--
+  ###################### resoucebundle for HTMLFile dialogs template ####
+  -->
+  <HtmlFile>
+    <dialog>
+      <label>
+        <name>名前</name>
+        <content>コンテンツ</content>
+      </label>
+    </dialog>
+  </HtmlFile>
+  <!--
+  ###################### resoucebundle for exo:calendar dialogs template ####
+  -->
+  <Calendar>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <shared>共有</shared>
+      </label>
+    </dialog>
+  </Calendar>
+  <!--
+  ###################### resoucebundle for nt:file dialogs template ####
+  -->
+  <File>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <categories>カテゴリ</categories>
+        <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
+        <content>#{word.content}</content>
+        <re-upload>ファイルが既に存在します。再度アップロードすることで置き換えることができます。</re-upload>
+      </label>
+    </dialog>
+  </File>
+
+  <UIActionForm>
+    <label>
+      <description>#{word.description}</description>
+      <port>ポート</port>
+      <userName>#{word.userName}</userName>
+      <password>パスワード</password>
+      <link>リンク</link>
+      <to>メール送信</to>
+      <actionName>#{word.name}</actionName>
+    </label>
+  </UIActionForm>
+  <EditFormAction>
+    <label>
+      <description>#{word.description}</description>
+      <port>ポート</port>
+      <userName>#{word.userName}</userName>
+      <password>パスワード</password>
+      <link>リンク</link>
+      <to>メール送信</to>
+      <actionName>#{word.name}</actionName>
+    </label>
+  </EditFormAction>
+  <!--
+  ###################### resoucebundle for exo:bacupAction dialogs template ####
+  -->
+  <Backup>
+    <dialog>
+      <label>
+        <id>Id</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <description>#{word.description}</description>
+        <to-workspace>ワークスペースへ</to-workspace>
+        <with-path>パス</with-path>
+      </label>
+    </dialog>
+  </Backup>
+  <!--
+  ###################### resoucebundle for exo:getmail dialogs template ####
+  -->
+  <Getmail>
+    <dialog>
+      <label>
+        <id>Id</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <protocol>プロトコル</protocol>
+        <host>ホスト</host>
+        <port>ポート</port>
+        <folder>フォルダ</folder>
+        <username>#{word.userName}</username>
+        <password>パスワード</password>
+        <description>#{word.description}</description>
+        <stote-path>保存パス</stote-path>
+      </label>
+    </dialog>
+  </Getmail>
+  <!--
+  ###################### resoucebundle for exo:iCalendarGenerateAction dialogs template ####
+  -->
+  <Icalendar>
+    <dialog>
+      <label>
+        <id>Id</id>
+        <action-name>アクション名</action-name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <description>#{word.description}</description>
+        <calendar-file-name>カレンダーファイル名</calendar-file-name>
+        <query-items>#{Ecm.dialog.label.query-items}</query-items>
+      </label>
+    </dialog>
+  </Icalendar>
+ 
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction dialogs template ####
+  -->
+  <AddMetadata>
+    <dialog>
+      <label>
+        <id>Id</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <metadata>メタデータ</metadata>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning dialogs template ####
+  -->
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <id>Id</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <start-time>#{Ecm.dialog.label.start-time}</start-time>
+        <end-time>#{Ecm.dialog.label.end-time}</end-time>
+        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <cron-expression>表現のクローン</cron-expression>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong dialogs template ####
+  -->
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <id>Id</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <start-time>#{Ecm.dialog.label.start-time}</start-time>
+        <end-time>#{Ecm.dialog.label.end-time}</end-time>
+        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <cron-expression>表現のクローン</cron-expression>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet dialogs template ####
+  -->
+  <ElementSet>
+    <dialog>
+      <label>
+        <title>#{word.title}</title>
+        <creator>作成者</creator>
+        <subject>#{word.subject}</subject>
+        <source>ソース</source>
+        <contributor>コントリビュータ</contributor>
+        <resource-type>リソースタイプ</resource-type>
+        <date>#{word.date}</date>
+        <publisher>公開者</publisher>
+        <description>#{word.description}</description>
+        <rights>権限</rights>
+        <relation>関連</relation>
+        <format>#{word.format}</format>
+        <coverage>範囲</coverage>
+        <identifier>識別子</identifier>
+        <language>言語</language>
+      </label>
+    </dialog>
+  </ElementSet>
+  <!--
+  ###################### resoucebundle for rma:cutoffable dialogs template ####
+  -->
+  <Cutoffable>
+    <dialog>
+      <label>
+        <cutoff-executed>カットオフ実行</cutoff-executed>
+        <cutoff-now>Cutoff now</cutoff-now>
+        <cutoff-date-time>Cutoff date time</cutoff-date-time>
+        <cutoff-event>Cutoff event</cutoff-event>
+        <cutoff-obsolete>Cutoff obsolete</cutoff-obsolete>
+        <cutoff-superseded>Cutoff superseded</cutoff-superseded>
+      </label>
+    </dialog>
+  </Cutoffable>
+  <!--
+  ###################### resoucebundle for rma:destroyable dialogs template ####
+  -->
+  <Destroyable>
+    <dialog>
+      <label>
+        <destruction-date>破棄日</destruction-date>
+      </label>
+    </dialog>
+  </Destroyable>
+  <!--
+  ###################### resoucebundle for rma:accessControllable dialogs template ####
+  -->
+  <AccessControllable>
+    <dialog>
+      <label>
+        <owner>オーナー</owner>
+        <permissions>パーミッション</permissions>
+      </label>
+    </dialog>
+  </AccessControllable>
+  <!--
+  ###################### resoucebundle for rma:accessionable dialogs template ####
+  -->
+  <Accessionable>
+    <dialog>
+      <label>
+        <accession-executed>アクセッション実行</accession-executed>
+        <accession-date>アクセッション日</accession-date>
+      </label>
+    </dialog>
+  </Accessionable>
+  <!--
+  ###################### resoucebundle for exo:actionable dialogs template ####
+  -->
+  <Actionable>
+    <dialog>
+      <label>
+        <primary-type>基本タイプ</primary-type>
+        <mixin-types>Mixin タイプ</mixin-types>
+      </label>
+    </dialog>
+  </Actionable>
+  <!--
+  ###################### resoucebundle for exo:categorized dialogs template ####
+  -->
+  <Categorized>
+    <dialog>
+      <label>
+        <category>#{word.category}</category>
+      </label>
+    </dialog>
+  </Categorized>
+  <!--
+  ###################### resoucebundle for rma:holdable dialogs template ####
+  -->
+  <Holdable>
+    <dialog>
+      <label>
+        <hold-executed>Hold executed</hold-executed>
+        <hold-until>Hold until</hold-until>
+        <holds-discretionary>Discretionary Hold</holds-discretionary>
+        <hold-until-event>Hold until event</hold-until-event>
+        <freeze>中断しました</freeze>
+      </label>
+    </dialog>
+  </Holdable>
+  <!--
+  ###################### resoucebundle for rma:lockable dialogs template ####
+  -->
+  <Lockable>
+    <dialog>
+      <label>
+        <lock-owner>Lock owner</lock-owner>
+        <lock-is-deep>Lock is deep</lock-is-deep>
+      </label>
+    </dialog>
+  </Lockable>
+  <!--
+  ###################### resoucebundle for exo:move dialogs template ####
+  -->
+  <Move>
+    <dialog>
+      <label>
+        <destination-workpsace>移動先ワークスペース</destination-workpsace>
+        <destination-path>移動先パス</destination-path>
+        <primary-type>基本タイプ</primary-type>
+        <mixin-types>Mixin タイプ</mixin-types>
+      </label>
+    </dialog>
+  </Move>
+  <!--
+  ###################### resoucebundle for exo:published dialogs template ####
+  -->
+  <Published>
+    <dialog>
+      <label>
+        <start-publication>公開開始</start-publication>
+        <end-publication>公開終了</end-publication>
+      </label>
+    </dialog>
+  </Published>
+  <!--
+  ###################### resoucebundle rma:record dialogs template ####
+  -->
+  <Record>
+    <dialog>
+      <label>
+        <supplemental-marking-list>追加マーキングリスト</supplemental-marking-list>
+        <subject>#{word.subject}</subject>
+        <record-identifier>レコード識別子</record-identifier>
+        <originator>発生元</originator>
+        <format>#{word.format}</format>
+        <addresses>アドレス</addresses>
+        <originating-organization>Originating organization</originating-organization>
+        <other-addresses>他のアドレス</other-addresses>
+        <publication-date>公開日</publication-date>
+        <record-note>レコード注記</record-note>
+        <date-received>受け取り日</date-received>
+        <media-format>メディアフォーマット</media-format>
+        <is-obsolete>廃止</is-obsolete>
+        <date-field>日付フィールド</date-field>
+        <superseded>代替される</superseded>
+        <uuid>UUID</uuid>
+      </label>
+    </dialog>
+  </Record>
+  <!--
+  ###################### resoucebundle mix:referenceable dialogs template ####
+  -->
+  <Referenceable>
+    <dialog>
+      <label>
+        <uuid>UUID</uuid>
+      </label>
+    </dialog>
+  </Referenceable>
+  <!--
+  ###################### resoucebundle exo:relationable dialogs template ####
+  -->
+  <Relationable>
+    <dialog>
+      <label>
+        <relation>関連</relation>
+      </label>
+    </dialog>
+  </Relationable>
+  <!--
+  ###################### resoucebundle exo:rss-enable dialogs template ####
+  -->
+  <RssEnable>
+    <dialog>
+      <label>
+        <title>タイトル</title>
+        <summary>#{word.summary}</summary>
+      </label>
+    </dialog>
+  </RssEnable>
+  <!--
+  ###################### resoucebundle rma:transferable dialogs template ####
+  -->
+  <Transferable>
+    <dialog>
+      <label>
+        <transfer-executed>Transfer executed</transfer-executed>
+        <transfer-date>Transfer date</transfer-date>
+        <transfer-location>Transfer location</transfer-location>
+      </label>
+    </dialog>
+  </Transferable>
+  <!--
+  ###################### resoucebundle mix:versionable dialogs template ####
+  -->
+  <Versionable>
+    <dialog>
+      <label>
+        <version-history>バージョン履歴</version-history>
+        <base-version>ベースバージョン</base-version>
+        <is-checked-out>チェックアウト</is-checked-out>
+        <predecessors>先行オペレーション</predecessors>
+        <merge-failed>マージ失敗</merge-failed>
+        <uuid>UUID</uuid>
+      </label>
+    </dialog>
+  </Versionable>
+  <!--
+  ###################### resoucebundle rma:vitalRecord dialogs template ####
+  -->
+  <VitalRecord>
+    <dialog>
+      <label>
+        <is-vital-record>Is vital record</is-vital-record>
+        <prev-review-date>前回レビュー日</prev-review-date>
+        <next-review-date>次回レビュー日</next-review-date>
+      </label>
+    </dialog>
+  </VitalRecord>
+  <!--
+  ##################### resoucebundle for resouce container dialogs template#####
+  -->
+  <ResouceContainer>
+    <dialog>
+      <label>
+        <name>名前</name>
+        <autoload>オートロード</autoload>
+        <minetype>Mime タイプ</minetype>
+        <content>コンテンツ</content>
+      </label>
+    </dialog>
+  </ResouceContainer>
+  <!--
+  ###################### resoucebundle for validator ####
+  -->
+  <EmailAddressValidator>
+    <msg>
+      <Invalid-input>メールアドレスが不正です。</Invalid-input>
+    </msg>
+  </EmailAddressValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>フィールド '{0}' は必須です。</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <NumberFormatValidator>
+    <msg>
+      <Invalid-number>フィールド '{0}' が不正です。</Invalid-number>
+    </msg>
+  </NumberFormatValidator>
+  <!--
+  #####Since version 2.4#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+  <ScriptAction>
+    <dialog>
+      <label>
+        <id>Id</id>
+        <name>名前</name>
+        <lifecycle>ライフサイクル</lifecycle>
+        <homePath>ホームパス</homePath>
+        <targetWorkspace>ターゲットワークスペース</targetWorkspace>
+        <targetPath>ターゲットパス</targetPath>
+      </label>
+    </dialog>
+  </ScriptAction>
+  <UIDialogForm>
+   <form>
+   <DialogFormException>ドキュメントが保存できません。保存前のインターセプタに問題があるかもしれません。</DialogFormException>
+   </form>
+  </UIDialogForm>
+
+  <!--
+  #####Since version 2.6#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+<no>いいえ</no>
+<yes>はい</yes>
+<true>真</true>
+<false>偽</false>
+<Electronic>電子</Electronic>
+<Paper>紙</Paper>
+<NONE>無し</NONE>
+<CLASSIFIED>機密</CLASSIFIED>
+<UNCLASSIFIED>非機密</UNCLASSIFIED>
+<NOCONTRACT>契約無し</NOCONTRACT>
+<true>True</true>
+<false>False</false>
+<one-minute>1分</one-minute>
+<hourly>毎時</hourly>
+<daily>毎日</daily>
+<quarterly>毎4半期</quarterly>
+<yearly>毎年</yearly>
+<ten-years>10年</ten-years>
+<read>ユーザアクション</read>
+  <schedule>スケジューラ</schedule>
+  <node_added>コンテンツの追加</node_added>
+  <node_removed>コンテンツの削除</node_removed>
+  <property_added>プロパティの追加</property_added>
+  <property_removed>プロパティの削除</property_removed>
+  <property_changed>プロパティの変更</property_changed>
+  <SendMail>
+    <dialog>
+      <label>
+        <isDeep>Is deep</isDeep>
+        <nodetypes>ノードタイプ</nodetypes>
+        <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </SendMail>
+
+  <ScriptAction>
+    <dialog>
+      <label>
+        <isDeep>Is deep</isDeep>
+        <nodetypes>ノードタイプ</nodetypes>
+        <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </ScriptAction>
+
+  <Getmail>
+    <dialog>
+      <label>
+        <isDeep>Is deep</isDeep>
+        <nodetypes>ノードタイプ</nodetypes>
+        <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </Getmail>
+
+  <Rss>
+    <dialog>
+      <label>
+        <isDeep>Is deep</isDeep>
+        <nodetypes>ノードタイプ</nodetypes>
+        <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </Rss>
+
+  <AddMetadata>
+    <dialog>
+      <label>
+        <isDeep>Is deep</isDeep>
+        <nodetypes>ノードタイプ</nodetypes>
+        <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <ReloadAction>
+    <dialog>
+      <label>
+        <isDeep>Is deep</isDeep>
+        <nodetypes>ノードタイプ</nodetypes>
+        <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </ReloadAction>
+
+  <Transform>
+    <dialog>
+      <label>
+        <isDeep>Is deep</isDeep>
+        <nodetypes>ノードタイプ</nodetypes>
+        <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </Transform>
+
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <isDeep>Is deep</isDeep>
+        <nodetypes>ノードタイプ</nodetypes>
+        <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <isDeep>Is deep</isDeep>
+        <nodetypes>ノードタイプ</nodetypes>
+        <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AutoVersioning>
+
+  <!--
+  ###################### resoucebundle exo:contentPublishing dialogs template ####
+  -->
+  <ContentPublishing>
+    <dialog>
+      <label>
+        <id>Id</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <description>#{word.description}</description>
+        <validator>バリデータ</validator>
+        <supervisor>スーパーバイザ</supervisor>
+        <public-workspace>公開ワークスペース</public-workspace>
+        <public-path>公開パス</public-path>
+        <pending-workspace>ペンディングワークスペース</pending-workspace>
+        <pending-path>ペンディングパス</pending-path>
+        <backup-workspace>バックアップワークスペース</backup-workspace>
+        <backup-path>バックアップパス</backup-path>
+        <trash-workspace>ごみ箱ワークスペース</trash-workspace>
+        <trash-path>ごみ箱パス</trash-path>
+<affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </ContentPublishing>
+  
+  <AccessibleMedia>
+  <dialog>
+  <label>
+  <captions>キャプション</captions>
+<audioDescription>オーディオの説明</audioDescription>
+<alternativeText>代替テキスト</alternativeText>
+</label>
+</dialog>
+<help>
+<CaptionsHelp>キャプションには テキスト文や重要な音声を記載する必要があります</CaptionsHelp>
+<AudioDescriptionHelp>音声の説明文は、ビデオのナレーション トラックです。</AudioDescriptionHelp>
+<AlternativeTextHelp>Provide an accessible alternative way of presenting the information</AlternativeTextHelp>
+</help>
+</AccessibleMedia>
+  
+</bundle>
