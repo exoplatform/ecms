@@ -31,7 +31,7 @@
       <UIFolksonomyManager>Tags</UIFolksonomyManager>      
     </label>
     <msg>
-      <access-denied>Access denied. You do not have permission to perform this function.</access-denied>
+      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
     </msg>
   </UIECMAdminControlPanel>
   <!--
@@ -1466,7 +1466,7 @@
     </action>
     <title>Add Category</title>
     <label>
-      <taxonomyName>Category Name</taxonomyName>
+      <taxonomyName>Category Name:</taxonomyName>
       <parentPath>Parent</parentPath>
     </label>
     <msg>
