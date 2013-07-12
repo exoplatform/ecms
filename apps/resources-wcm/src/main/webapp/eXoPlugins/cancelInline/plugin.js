@@ -1,3 +1,6 @@
+require(['/eXoResources/javascript/jquery-1.7.1.js']);
+
+
 CKEDITOR.plugins.add('cancelInline',
 	{
     lang : ['en','fr','vi'],
@@ -20,7 +23,13 @@ CKEDITOR.plugins.add('cancelInline',
 );
 
 
-function cancelUpdate(e){
-  var instanceCK = document.getElementById("cke_"+e.name);
-  e.fire("blur");  
+function cancelUpdate(e){ 
+  var editorElement = e.element;
+  $(editorElement).removeClass();
+  $(editorElement).attr('style','');
+  $(e.container).blur();
+  $(e).blur();
+  e.fire("blur");
+  location.reload(true);
 }
+
