@@ -15,6 +15,7 @@
     ListView.prototype.enableDragDrop = null;
 
     ListView.prototype.colorSelected = "#e8e8e8";
+    ListView.prototype.colorHover = "#eeeeee";
 
     ListView.prototype.t1 = 0;
     ListView.prototype.t2 = 0;
@@ -234,6 +235,7 @@
       var event = event || window.event;
       var element = this;
       if (!element.selected) {
+        element.style.background = Self.colorHover;
         element.temporary = true;
         //eXo.core.Browser.setOpacity(element, 100);
       }
@@ -243,10 +245,10 @@
       var event = event || window.event;
       var element = this;
       element.temporary = false;
-      //if (!element.selected) {
-      //  element.style.background = "none";
+      if (!element.selected) {
+        element.style.background = "none";
       //  eXo.core.Browser.setOpacity(element, 85);
-      //}
+      }
     };
 
     ListView.prototype.mouseDownItem = function(evt) {
