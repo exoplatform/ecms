@@ -908,7 +908,7 @@
     <title>Sélection d'un type de noeud à importer</title>
     <msg>
       <no-nodetype-registered>Aucun type de noeud enregistré.</no-nodetype-registered>
-      <nodetype-registered>Enregistrement du type réussie.</nodetype-registered>
+      <nodetype-registered>Enregistrement du type réussi.</nodetype-registered>
     </msg>
   </UINodeTypeImport>
   <NodeTypeImportPopup>
