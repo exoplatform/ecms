@@ -21,6 +21,8 @@
   import org.exoplatform.services.wcm.utils.WCMCoreUtils;
   import org.exoplatform.wcm.webui.reader.ContentReader;
   import org.exoplatform.services.wcm.portal.LivePortalManagerService;
+  import org.exoplatform.wcm.webui.Utils;
+  import org.exoplatform.services.wcm.publication.WCMComposer;
   
   def rcontext = _ctx.getRequestContext() ;
   String docBase =  rcontext.getRequestContextPath() ;  
@@ -183,6 +185,16 @@
     <%}
    %>
  </head>
+ 
+ <%
+ if (rcontext.getRemoteUser() != null && WCMComposer.MODE_EDIT.equals(Utils.getCurrentMode())) {  
+ %>
+	<script type="text/javascript">
+		  require(['/eXoWCMResources/ckeditor/ckeditor.js'], function() {		  
+		  CKEDITOR.config.toolbar = "InlineEdit";	    
+	  });
+	</script>
+ <%}%>
 
  <body style="height: 100%;">
 

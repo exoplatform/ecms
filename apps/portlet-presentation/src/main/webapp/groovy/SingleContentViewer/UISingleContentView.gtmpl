@@ -20,12 +20,3 @@
 <div id="$uicomponent.id" class="UISingleContentViewerPortlet">
 	<% uicomponent.renderChildren(); %>	  
 </div>
-<%
-  if (rcontext.getRemoteUser() != null && WCMComposer.MODE_EDIT.equals(Utils.getCurrentMode())) {  
-%>
-	<script type="text/javascript">
-		  require(['/eXoWCMResources/ckeditor/ckeditor.js'], function() {		  
-		  CKEDITOR.config.toolbar = "InlineEdit";	    
-	  });
-	</script>
-<%}%>
