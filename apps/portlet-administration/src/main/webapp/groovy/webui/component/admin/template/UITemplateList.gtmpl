@@ -86,14 +86,15 @@
 	        <td class="center">         
 	            <%def beanIdField = uicomponent.getBeanIdField() ; %>          
 	            <%for(action in beanActions) { %>
-	            <%  def beanId = uicomponent.getFieldValue(bean,beanIdField)  ; %>               
+	            <%  def beanId = uicomponent.getFieldValue(bean,beanIdField)  ; %>
+                    <%  def actionTitle = _ctx.appRes("UITemplatesManager.title." + action); %>                 
 	              <% 
 	                if(action != null) { 
 	                  if(uicomponent.isUseAjax()){
 	             %>             
-	                <a class="actionIcon" onclick="<%=uicomponent.event(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "$action" ><i class="uiIcon${action}"></i></a>
+	                <a class="actionIcon" onclick="<%=uicomponent.event(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "$actionTitle" ><i class="uiIcon${action}"></i></a>
 	              <%  }else{ %>
-	                <a class="actionIcon" onclick="<%=uicomponent.url(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "$action" ><i class="uiIcon${action}"></i></a>
+	                <a class="actionIcon" onclick="<%=uicomponent.url(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "$actionTitle" ><i class="uiIcon${action}"></i></a>
 	              <%  } %> 
 	              <%} %> 
 	            <%}%>      
