@@ -194,7 +194,7 @@
  if (rcontext.getRemoteUser() != null && WCMComposer.MODE_EDIT.equals(Utils.getCurrentMode())) {  
  %>
 	<script type="text/javascript">
-		  require(['/CommonsResources/ckeditor/ckeditor.js'], function() {
+		  require(['/CommonsResources/ckeditor/ckeditor.js'], function() {		  
 		  CKEDITOR.config.toolbar = "InlineEdit";	    
 	  });
 	</script>
