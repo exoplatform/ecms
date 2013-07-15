@@ -162,13 +162,7 @@
     </depends>
   </module>
   
-  <scripts>
-    <name>ckeditor-loader</name>
-    <script>
-      <path>/ckeditor/ckeditor.js</path>
-    </script>
-  </scripts>
-  
+ 
   <module>
     <name>wcm-navigation</name>
     <as>wcm_navigation</as>
