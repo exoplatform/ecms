@@ -257,10 +257,12 @@
 	
 	WCMUtils.prototype.changeStyleClass = function(element, newStyleClass) {
             var isFocusOnCKEditor = false;
-            for(name in CKEDITOR.instances)
-	    {
-		var editor = CKEDITOR.instances[name];
-                if(editor.focusManager.hasFocus) isFocusOnCKEditor = true;
+            if(CKEDITOR) {
+		    for(name in CKEDITOR.instances)
+		    {
+			var editor = CKEDITOR.instances[name];
+		        if(editor.focusManager.hasFocus) isFocusOnCKEditor = true;
+		    }
 	    }
 	    if(!isFocusOnCKEditor) {
 	      var elementId = typeof element != 'object' ? element : element.id;
