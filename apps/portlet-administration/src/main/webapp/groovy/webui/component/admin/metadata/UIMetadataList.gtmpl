@@ -56,7 +56,7 @@
 	              <%
 	              	if(meta.hasTemplate()) {
 	              	%>
-	              	<a class="actionIcon" onclick="<%=uicomponent.event("Delete", meta.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIMetadataList.title.edit")%>"><i  class="uiIconDelete"></i></a>
+	              	<a class="actionIcon" onclick="<%=uicomponent.event("Delete", meta.getName())%>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIMetadataList.title.delete")%>"><i  class="uiIconDelete"></i></a>
 	              	<%
 	              	}
 	              %>
