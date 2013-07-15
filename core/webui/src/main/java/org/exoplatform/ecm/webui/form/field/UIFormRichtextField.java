@@ -16,9 +16,15 @@
  */
 package org.exoplatform.ecm.webui.form.field;
 
+import java.util.Collection;
+
 import org.exoplatform.ecm.webui.form.DialogFormField;
 import org.exoplatform.ecm.webui.utils.DialogFormUtil;
-import org.exoplatform.wcm.webui.form.UIFormRichtextInput;
+import org.exoplatform.portal.resource.SkinConfig;
+import org.exoplatform.portal.resource.SkinService;
+import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.webui.form.UIFormRichtextInput;
 import org.exoplatform.webui.form.UIFormInputBase;
 
 /**
@@ -51,6 +57,25 @@ public class UIFormRichtextField extends DialogFormField {
     richtext.setWidth(width);
     richtext.setHeight(height);
     richtext.setEnterMode(enterMode);
+    
+    StringBuffer contentsCss = new StringBuffer();
+    contentsCss.append("[");
+    SkinService skinService = WCMCoreUtils.getService(SkinService.class);
+    String skin = Util.getUIPortalApplication().getUserPortalConfig().getPortalConfig().getSkin();
+    String portal = Util.getUIPortal().getName();
+    Collection<SkinConfig> portalSkins = skinService.getPortalSkins(skin);
+    SkinConfig customSkin = skinService.getSkin(portal, Util.getUIPortalApplication()
+                                                            .getUserPortalConfig()
+                                                            .getPortalConfig()
+                                                            .getSkin());
+    if (customSkin != null) portalSkins.add(customSkin);
+    for (SkinConfig portalSkin : portalSkins) {
+      contentsCss.append("'").append(portalSkin.createURL(Util.getPortalRequestContext().getControllerContext())).append("',");
+    }
+    contentsCss.append("'/CommonsResources/ckeditor/contents.css'");
+    contentsCss.append("]");    
+    richtext.setCss(contentsCss.toString());
+    
     if(validateType != null) {
       DialogFormUtil.addValidators(richtext, validateType);
     }
