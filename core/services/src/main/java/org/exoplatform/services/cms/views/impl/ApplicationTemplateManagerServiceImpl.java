@@ -27,6 +27,7 @@ import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
@@ -131,7 +132,13 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
    */
   public Node getApplicationTemplateHome(String portletName, SessionProvider provider) throws Exception {
     Node basedApplicationTemplateHome = getBasedApplicationTemplatesHome(provider);
-    return basedApplicationTemplateHome.getNode(portletName);
+    try {
+      return basedApplicationTemplateHome.getNode(portletName);
+    } catch(PathNotFoundException pne) {
+      Node templateHome = basedApplicationTemplateHome.addNode(portletName);
+      basedApplicationTemplateHome.save();
+      return templateHome;
+    }
   }
 
   /**
