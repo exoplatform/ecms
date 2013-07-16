@@ -11,6 +11,7 @@ import org.exoplatform.services.log.Log;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
 
 /**
  * 
@@ -49,7 +50,13 @@ public class NodePathUpgradePlugin extends UpgradeProductPlugin {
     try{
       ExtendedSession session = (ExtendedSession)sessionProvider.getSession(workspace, repositoryService_.getCurrentRepository());
       Node sourceNode = session.getRootNode().getNode(nodePath.substring(1));
-      Node targetNode = session.getRootNode().getNode(destNode.substring(1));
+      Node targetNode = null;
+      try {
+    	targetNode = session.getRootNode().getNode(destNode.substring(1));
+      } catch(PathNotFoundException pne) {
+    	targetNode = session.getRootNode().addNode("sites"); 
+    	session.getRootNode().save();
+      }
       if (sourceNode.hasNodes()){
         NodeIterator iter = sourceNode.getNodes();
         while (iter.hasNext()){
