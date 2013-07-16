@@ -1,6 +1,7 @@
 package org.exoplatform.ecm.webui.component.explorer.control.filter;
 
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -41,6 +42,13 @@ public class IsAbleToRestoreFilter extends UIExtensionAbstractFilter {
             //Is not a deleted node, may be groovy action, hidden node,...
             return false;
         }
+        if(Utils.isInTrash(currentNode) && Utils.isSymLink(currentNode)){
+            //return false if the target is already deleted
+            Node targetNode = Utils.getNodeSymLink(currentNode);
+            if(Utils.isInTrash(targetNode)){
+              return false;
+            }
+          }
         Session session = WCMCoreUtils.getUserSessionProvider().getSession(restoreWorkspace, WCMCoreUtils.getRepository());
         try {
             restoreLocationNode = (Node) session.getItem(restorePath);

@@ -24,6 +24,7 @@ import org.exoplatform.ecm.webui.component.explorer.popup.actions.UISelectRestor
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.documents.TrashService;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -166,6 +167,11 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
       Node trashHomeNode = (Node) trashSession.getItem(trashHomeNodePath);
       try {
         trashService.restoreFromTrash(srcPath, sessionProvider);
+        LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
+        List<Node> symlinks = linkManager.getAllLinks(node, org.exoplatform.services.cms.impl.Utils.EXO_SYMLINK);
+        for (Node symlink : symlinks) {
+          trashService.restoreFromTrash(symlink.getPath(), sessionProvider);
+        }
         uiExplorer.updateAjax(event);
       } catch(PathNotFoundException e) {
         UIPopupContainer uiPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
