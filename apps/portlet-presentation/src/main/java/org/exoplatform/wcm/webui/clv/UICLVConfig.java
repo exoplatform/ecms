@@ -356,9 +356,9 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
     orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_TITLE, NodetypeConstant.EXO_TITLE));
     orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_DATE_CREATED, NodetypeConstant.EXO_DATE_CREATED));
     orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_DATE_MODIFIED, NodetypeConstant.EXO_DATE_MODIFIED));
-    orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_DATE_PUBLISHED,"publication:liveDate"));
-    orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_DATE_START_EVENT,"exo:startEvent"));
-    orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_INDEX,"exo:index"));
+    orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_DATE_PUBLISHED, NodetypeConstant.PUBLICATION_LIVE_DATE));
+    orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_DATE_START_EVENT, NodetypeConstant.EXO_START_EVENT));
+    orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_INDEX, NodetypeConstant.EXO_INDEX));
     UIFormSelectBox orderBySelectBox = new UIFormSelectBox(ORDER_BY_FORM_SELECT_BOX, ORDER_BY_FORM_SELECT_BOX, orderByOptions);
     orderBySelectBox.setValue(orderBy);
 

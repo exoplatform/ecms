@@ -44,6 +44,7 @@ import org.exoplatform.services.jcr.sessions.ACLSessionProviderService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
@@ -318,6 +319,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     boolean filterTemplates = true;
     if (queryFilterFull!=null) {
       statement.append(queryFilterFull);
+      updateSymlinkByQuery(workspace, queryFilterFull, sessionProvider);
     } else {
       addUsedPrimaryTypes(primaryType);
       if (primaryType == null) {
@@ -353,6 +355,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
         statement.append(queryFilter);
       }
       statement.append(orderFilter);
+      updateSymlink(workspace, path, sessionProvider);
     }
     Query query = manager.createQuery(statement.toString(), Query.SQL);
 
@@ -675,4 +678,38 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     }
     return remoteUser;
   }
+  
+  private void updateSymlink(String workspace, String path, SessionProvider sessionProvider) {
+    if ("/".equals(path)) {
+      path = "";
+    }
+    StringBuilder statement = new StringBuilder();
+    statement.append("SELECT * FROM " + NodetypeConstant.EXO_SYMLINK + " WHERE (jcr:path LIKE '" + path + "/%'")
+             .append(" AND NOT jcr:path LIKE '" + path + "/%/%')");
+    updateSymlinkByQuery(workspace, statement.toString(), sessionProvider);
+  }
+  
+  private void updateSymlinkByQuery(String workspace, String statement, SessionProvider sessionProvider) {
+    try {
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
+      Session session = sessionProvider.getSession(workspace, manageableRepository);
+      QueryManager manager = session.getWorkspace().getQueryManager();
+      NodeIterator iter = manager.createQuery(statement, Query.SQL).execute().getNodes();
+      while (iter.hasNext()) {
+        try {
+          Node currentNode = iter.nextNode();
+          linkManager.updateSymlink(currentNode);
+        } catch (Exception ex) {
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Can not update symlink data", ex);
+          }
+        }
+      }
+    } catch (RepositoryException e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Can not update symlinks data", e);
+      }
+    }
+  }
+  
 }

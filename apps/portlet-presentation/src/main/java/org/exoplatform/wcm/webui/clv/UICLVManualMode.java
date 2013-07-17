@@ -30,6 +30,10 @@ import org.exoplatform.ecm.webui.comparator.PropertyValueComparator;
 import org.exoplatform.portal.webui.application.UIPortlet;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
+import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.publication.PaginatedResultIterator;
@@ -61,6 +65,9 @@ import org.exoplatform.webui.core.lifecycle.Lifecycle;
 )
 @SuppressWarnings("deprecation")
 public class UICLVManualMode extends UICLVContainer {
+
+  /** The log. */
+  private static final Log LOG = ExoLogger.getLogger(UICLVManualMode.class.getName());
 
   /* (non-Javadoc)
    * @see org.exoplatform.wcm.webui.clv.UICLVContainer#init()
@@ -111,11 +118,21 @@ public class UICLVManualMode extends UICLVContainer {
       return;
     } else {
       String[] listContent = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null).split(";");
+      LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
       //get node to sort
       List<Node> originalList = new ArrayList<Node>();
       if (listContent != null && listContent.length != 0) {
         for (String itemPath : listContent) {
-          originalList.add(NodeLocation.getNodeByExpression(itemPath));
+          Node currentNode = NodeLocation.getNodeByExpression(itemPath);
+          try {
+            linkManager.updateSymlink(currentNode);
+            currentNode = NodeLocation.getNodeByExpression(itemPath);
+          } catch (Exception e) {
+            if (LOG.isErrorEnabled()) {
+              LOG.error("Can not update symlink: " + currentNode.getPath(), e);
+            }
+          }
+          originalList.add(currentNode);
         }
       }
       //sort nodes
