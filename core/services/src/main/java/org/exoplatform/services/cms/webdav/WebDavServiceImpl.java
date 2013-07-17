@@ -17,6 +17,8 @@
 package org.exoplatform.services.cms.webdav;
 
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -42,6 +44,7 @@ import javax.ws.rs.core.UriInfo;
 
 import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.common.util.HierarchicalProperty;
+import org.exoplatform.commons.utils.MimeTypeResolver;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
@@ -98,6 +101,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
 
   private ListenerService listenerService;
 
+  private final MimeTypeResolver mimeTypeResolver = new MimeTypeResolver();
+  
   public WebDavServiceImpl(InitParams params,
                            RepositoryService repositoryService,
                            ThreadLocalSessionProviderService sessionProviderService,
@@ -610,7 +615,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       }
       return Response.serverError().build();
     }
-    return super.move(repoName,
+    Response response = super.move(repoName,
                       repoPath,
                       destinationHeader,
                       lockTokenHeader,
@@ -619,6 +624,53 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                       overwriteHeader,
                       uriInfo,
                       body);
+    if (response.getStatus() == HTTPStatus.CREATED ){
+      updateProperties(destinationHeader, repoName);
+    }
+    return response;
+  }
+  
+  /**
+   * update exo:name, exo:title and jcr:mimeType when rename a node
+   * 
+   * @param destinationHeader
+   * @param repoName
+   */
+  private void updateProperties(String destinationHeader, String repoName){
+    try {
+      URI dest = buildURI(destinationHeader);
+      String destPath = dest.getPath();
+      int repoIndex = destPath.indexOf(repoName);
+      destPath = normalizePath(repoIndex == -1 ? destPath : destPath.substring(repoIndex + repoName.length() + 1));
+      String destNodePath = path(destPath);
+      Node destNode = (Node) nodeFinder.getItem(workspaceName(destPath), path(normalizePath(destNodePath)), true);
+      String nodeName = Text.escapeIllegalJcrChars(destNode.getName());
+      destNode.setProperty("exo:name", nodeName);
+      destNode.setProperty("exo:title", nodeName);
+      Node content = destNode.getNode("jcr:content");
+      String mimeType = mimeTypeResolver.getMimeType(nodeName);
+      content.setProperty("jcr:mimeType", mimeType);
+      destNode.save();
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Cannot change property of destNode" + destinationHeader, e);
+      }
+    }
+  }
+  
+  /** 
+   * Build URI from string. 
+   */
+  private URI buildURI(String path) throws URISyntaxException
+  {
+     try
+     {
+        return new URI(path);
+     }
+     catch (URISyntaxException e)
+     {
+        return new URI(TextUtil.escape(path, '%', true));
+     }
   }
 
   /**
