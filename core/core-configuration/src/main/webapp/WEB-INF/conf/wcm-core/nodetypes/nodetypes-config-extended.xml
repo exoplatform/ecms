@@ -550,6 +550,12 @@
 			</propertyDefinition>
 		</propertyDefinitions>
 	</nodeType>
+	
+    <nodeType name="exo:targetData" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
+		<supertypes>
+		  <supertype>nt:unstructured</supertype>
+		</supertypes>
+	</nodeType>
 
 	<nodeType name="exo:taxonomyLink" isMixin="false" hasOrderableChildNodes="false" primaryItemName="exo:primaryType">
 		<supertypes>
