@@ -2098,44 +2098,44 @@
   
 
   <nodeType name="exo:symlink" isMixin="false" hasOrderableChildNodes="false" primaryItemName="exo:primaryType">
-
+		<supertypes>
+		  <supertype>nt:hierarchyNode</supertype>
+		</supertypes>
+		<propertyDefinitions>
+			<propertyDefinition name="exo:workspace" requiredType="String" autoCreated="false" mandatory="false"
+			onParentVersion="COPY" protected="false" multiple="false">
+			  <valueConstraints/>
+			</propertyDefinition>
+			<propertyDefinition name="exo:uuid" requiredType="String" autoCreated="false" mandatory="true"
+			onParentVersion="COPY" protected="false" multiple="false">
+				<valueConstraints/>
+			</propertyDefinition>
+			<propertyDefinition name="exo:primaryType" requiredType="Name" autoCreated="false" mandatory="true"
+				onParentVersion="COPY" protected="false" multiple="false">
+				<valueConstraints/>
+			</propertyDefinition>
+		</propertyDefinitions>
+	</nodeType>
+	
+  <nodeType name="exo:targetData" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
     <supertypes>
-
-      <supertype>nt:hierarchyNode</supertype>
-
+      <supertype>nt:base</supertype>
     </supertypes>
-
     <propertyDefinitions>
-
-      <propertyDefinition name="exo:workspace" requiredType="String" autoCreated="false" mandatory="false"
-
-      onParentVersion="COPY" protected="false" multiple="false">
-
-        <valueConstraints/>
-
-      </propertyDefinition>
-
-      <propertyDefinition name="exo:uuid" requiredType="String" autoCreated="false" mandatory="true"
-
-      onParentVersion="COPY" protected="false" multiple="false">
-
-        <valueConstraints/>
-
-      </propertyDefinition>
-
-      <propertyDefinition name="exo:primaryType" requiredType="Name" autoCreated="false" mandatory="true"
-
-        onParentVersion="COPY" protected="false" multiple="false">
-
-        <valueConstraints/>
-
-      </propertyDefinition>
-
+      <propertyDefinition name="exo:title" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false"/>
+      <propertyDefinition name="exo:dateCreated" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false"/>
+      <propertyDefinition name="exo:dateModified" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false"/>
+      <propertyDefinition name="publication:liveDate" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false"/>
+      <propertyDefinition name="exo:startEvent" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false"/>
+      <propertyDefinition name="exo:index" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY"
+        protected="false" multiple="false"/>
     </propertyDefinitions>
-
   </nodeType>
-
-     
 
   <nodeType name="exo:taxonomyLink" isMixin="false" hasOrderableChildNodes="false" primaryItemName="exo:primaryType">
 
