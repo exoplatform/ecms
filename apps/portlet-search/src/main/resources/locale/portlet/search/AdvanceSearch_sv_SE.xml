@@ -2,92 +2,92 @@
 <bundle>
   <UIDefaultSearchForm>
     <label>
-      <keyword>Keyword</keyword>
+      <keyword>Sökord</keyword>
       <portal>Portal</portal>
-      <Page>Page</Page>
-      <Document>Document</Document>
+      <Page>Sida</Page>
+      <Document>Dokument</Document>
     </label>
     <action>
-      <Search>Search</Search>
+      <Search>Sök</Search>
     </action>
   </UIDefaultSearchForm>
 
   <UIDefaultSearchResult>
     <label>
-      <Page>Page</Page>
-      <Document>Document</Document>
-      <DocumentAndPage>Document and Page</DocumentAndPage>
-      <documentandpage>Document and Page</documentandpage>
-      <resutlsCaption>Results</resutlsCaption>
-      <ofAboutCaption>of about</ofAboutCaption>
-      <forCaption>for</forCaption>
-      <timeUnitCaption>seconds</timeUnitCaption>
-      <similar>Pages where the same content appears</similar>
-      <editor>Editor</editor>
+      <Page>Sida</Page>
+      <Document>Dokument</Document>
+      <DocumentAndPage>Dokument och sida</DocumentAndPage>
+      <documentandpage>Dokument och sida</documentandpage>
+      <resutlsCaption>Sökresultat</resutlsCaption>
+      <ofAboutCaption>om</ofAboutCaption>
+      <forCaption>för</forCaption>
+      <timeUnitCaption>sekunder</timeUnitCaption>
+      <similar>Sidor där samma innehåll visas</similar>
+      <editor>Redigerare</editor>
     </label>
     <action>
-      <edit>Edit</edit>
+      <edit>Redigera</edit>
     </action>
     <msg>
-      <your-search>Your search</your-search>
-      <did-not-match>did not match any</did-not-match>
-      <new-suggestion>suggestion</new-suggestion>
+      <your-search>Din sökning</your-search>
+      <did-not-match>matchade inte någon</did-not-match>
+      <new-suggestion>förslag</new-suggestion>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>
     <label>
-      <itemsPerPageSelector>Items per Page</itemsPerPageSelector>
-      <searchFormSelector>Search Form Template</searchFormSelector>
-      <searchResultSelector>Search Result Template</searchResultSelector>
-      <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
-      <searchPageLayoutSelector>Search Page Layout Template</searchPageLayoutSelector>
-      <searchResultBasePathInputSetAction>Base Path</searchResultBasePathInputSetAction>
-      <pageMode>Page Mode</pageMode>
+      <itemsPerPageSelector>Poster per sida</itemsPerPageSelector>
+      <searchFormSelector>Sök formulärmall</searchFormSelector>
+      <searchResultSelector>Sök resultat</searchResultSelector>
+      <searchPaginatorSelector>Sök sidnumrering</searchPaginatorSelector>
+      <searchPageLayoutSelector>Sök sidlayout</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Rotkatalog</searchResultBasePathInputSetAction>
+      <pageMode>Sidinställning</pageMode>
       <option>
-        <none>None</none>
-        <more>More</more>
-        <pagination>Pagination</pagination>
+        <none>Ingen</none>
+        <more>Mer</more>
+        <pagination>Sidnumrering</pagination>
       </option>
     </label>
     <action>
-      <Save>Save</Save>
-      <Cancel>Cancel</Cancel>
+      <Save>Spara</Save>
+      <Cancel>Rensa</Cancel>
     </action>
   </UISearchPageLayoutManager>
   <searchResultBasePathInputSetAction>
     <title>
-      <SelectBasePath>Select Base Path</SelectBasePath>
+      <SelectBasePath>Välj rotkatalog</SelectBasePath>
     </title>
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
    <message>
-     <keyword-not-support>The keyword is invalid. Some characters are not recognized.</keyword-not-support>
-     <not-checked>Please select a search type.</not-checked>
-     <keyword-not-empty>Please enter a keyword.</keyword-not-empty>
+     <keyword-not-support>Sökord ogiltigt. Innehåller okända tecken.</keyword-not-support>
+     <not-checked>Välj typ av sök.</not-checked>
+     <keyword-not-empty>Skriv in ett sökord.</keyword-not-empty>
    </message>
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>Next</next>
-      <previous>Previous</previous>
-      <more>More</more>
+      <next>Nästa</next>
+      <previous>Föregående</previous>
+      <more>Mer</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>
     <label>
-      <quickEditTitle>Quick Edit</quickEditTitle>
+      <quickEditTitle>Snabbredigering</quickEditTitle>
     </label>
   </UISearchPageLayoutDefault>
   <searchOption>
     <label>
-      <pageCheckBox>in Pages</pageCheckBox>
-      <documentCheckBox>in Content</documentCheckBox>
+      <pageCheckBox>i sidor</pageCheckBox>
+      <documentCheckBox>i innehåll</documentCheckBox>
     </label>
   </searchOption>
   <ViewMode>
     <label>
       <option>
-        <all>search all sites</all>
+        <all>Sök alla platser</all>
       </option>  
     </label>  
   </ViewMode>

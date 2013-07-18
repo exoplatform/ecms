@@ -2,170 +2,170 @@
 <bundle>
   <UIFCCForm>
     <msg>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <in-versioning>Please check the current node before adding a new node.</in-versioning>
-      <cannot-save>An error occurred while saving the node.</cannot-save>
+      <name-not-allowed>Detta namn är inte tillåtet.</name-not-allowed>
+      <in-versioning>Kontrollera den aktuella noden innan du lägger till en ny nod.</in-versioning>
+      <cannot-save>Ett fel uppstod när noden sparades.</cannot-save>
       <saved-successfully>{0}</saved-successfully>
-      <not-support>Cannot load the template of '{0}'.</not-support>
-      <not-add-folder>Only files can be added to this folder.</not-add-folder>
-      <access-denied>Access denied. You do not have add permission at '{0}'.</access-denied>
-      <path-not-found>The path '{0}' was deleted or invalid.</path-not-found>
-      <node-locked>Node '{0}' is locked. Please unlock this node before creating documents.</node-locked>
-      <node-isExist>This node already exists in '{0}' and is not allowed to be the same name as its sibling.</node-isExist>
-      <get-dialog-path>An error occurred while getting the dialog path.</get-dialog-path>
-      <new-jcr-template>An error occurred while creating a new template.</new-jcr-template>
+      <not-support>Kan inte ladda mallen {0}.</not-support>
+      <not-add-folder>Endast filer kan läggas till den här mappen.</not-add-folder>
+      <access-denied>Åtkomst nekad. Du har inte behörigheten att lägga till på {0}.</access-denied>
+      <path-not-found>Sökvägen {0} var ogiltig eller borttagen.</path-not-found>
+      <node-locked>Noden {0} är låst. Lås upp denna nod innan du skapar dokument.</node-locked>
+      <node-isExist>Den här noden redan finns i {0} och får inte vara samma namn som sitt syskon.</node-isExist>
+      <get-dialog-path>Ett fel inträffade när sökvägen för dialogrutan hämtades.</get-dialog-path>
+      <new-jcr-template>Ett fel uppstod när du skapade en ny mall.</new-jcr-template>
     </msg>
     <action>
-      <Save>Save</Save>
-      <Cancel>Cancel</Cancel>
+      <Save>Spara</Save>
+      <Cancel>Avbryt</Cancel>
     </action>
   </UIFCCForm>
 
   <UIFCCConfig>
     <label>
-      <select-repository>Select Repository</select-repository>
-      <UIFCCSaveLocationField>Save Location</UIFCCSaveLocationField>
-      <UIFCCRepositoryFormSelectBox>Select Repository</UIFCCRepositoryFormSelectBox>
-      <UIFCCWorkspaceFormSelectBox>Select Workspace</UIFCCWorkspaceFormSelectBox>
-      <UIFCCTemplateField>Template Options</UIFCCTemplateField>
-      <UIFCCLocationFormInputAction>Location to Save</UIFCCLocationFormInputAction>
+      <select-repository>Välj databas</select-repository>
+      <UIFCCSaveLocationField>Spara plats</UIFCCSaveLocationField>
+      <UIFCCRepositoryFormSelectBox>Välj databas</UIFCCRepositoryFormSelectBox>
+      <UIFCCWorkspaceFormSelectBox>Välj arbetsyta</UIFCCWorkspaceFormSelectBox>
+      <UIFCCTemplateField>Mall optioner</UIFCCTemplateField>
+      <UIFCCLocationFormInputAction>Plats att spara</UIFCCLocationFormInputAction>
       <UIFCCLocationFormStringInput/>
-      <UIFCCTemplateFormSelectBox>Select Template</UIFCCTemplateFormSelectBox>
-      <UIFCCSaveFormStringInput>Custom Save Button</UIFCCSaveFormStringInput>
-      <UIFCCMessageFormTextareaInput>Custom Save Message</UIFCCMessageFormTextareaInput>
-      <UIFCCRedirectFormCheckboxInput>Redirect:</UIFCCRedirectFormCheckboxInput>
-      <UIFCCRedirectPathFormStringInput>Redirect Path:</UIFCCRedirectPathFormStringInput>
-      <UIFCCActionField>Actions</UIFCCActionField>
+      <UIFCCTemplateFormSelectBox>Välj mall</UIFCCTemplateFormSelectBox>
+      <UIFCCSaveFormStringInput>Option Spara knappen</UIFCCSaveFormStringInput>
+      <UIFCCMessageFormTextareaInput>Option Spara meddelande</UIFCCMessageFormTextareaInput>
+      <UIFCCRedirectFormCheckboxInput>Omdirigering:</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectPathFormStringInput>Omdirigering sökväg:</UIFCCRedirectPathFormStringInput>
+      <UIFCCActionField>Åtgärder</UIFCCActionField>
       <UIFCCActionList/>
     </label>
     <msg>
-      <save-successfully>Saved to portlet preferences successfully.</save-successfully>
-      <item-not-found>This path is invalid.</item-not-found>
-      <fileType-empty>Please select a file type before saving this configuration.</fileType-empty>
-      <ws-empty>Please select one workspace.</ws-empty>
-      <action-empty>Please select a folder with an action.</action-empty>
-      <message-empty>The "Custom Save Message" field is required in case you do not choose the redirect option, or the path is empty.</message-empty>
-      <get-template>An error occurred while accessing the template.</get-template>
-      <set-template-option>An error occurred while setting the template option.</set-template-option>
-      <do-select>An error occurred while selecting the location.</do-select>
+      <save-successfully>Sparats till portlet preferenser.</save-successfully>
+      <item-not-found>Sökvägen är ogiltig.</item-not-found>
+      <fileType-empty>Välj en filtyp innan du sparar den här konfigurationen.</fileType-empty>
+      <ws-empty>Välj en arbetsyta.</ws-empty>
+      <action-empty>Välj en mapp med en åtgärd.</action-empty>
+      <message-empty>"Option Spara meddelande" fältet är obligatoriskt om du inte väljer alternativet omdirigera eller att sökvägen är tom.</message-empty>
+      <get-template>Ett fel uppstod när mallen användes.</get-template>
+      <set-template-option>Ett fel uppstod när optioner för mallen användes.</set-template-option>
+      <do-select>Ett fel uppstod medan du valde plats.</do-select>
       </msg>
     <action>
-      <Save>Save</Save>
+      <Save>Spara</Save>
     </action>
   </UIFCCConfig>
 
   <UIFCCLocationFormInputAction>
     <title>
-      <SelectPath>Select Path</SelectPath>
+      <SelectPath>Välj sökväg</SelectPath>
     </title>
   </UIFCCLocationFormInputAction>
 
   <UIFCCActionList>
     <header>
-      <name>Name</name>
-      <description>Description</description>
-      <instanceOf>Instance of</instanceOf>
-      <action>Action</action>
+      <name>Namn</name>
+      <description>Beskrivning</description>
+      <instanceOf>Förekomst av</instanceOf>
+      <action>Åtgärd</action>
     </header>
     <action>
-      <Add>Add</Add>
+      <Add>Lägg till</Add>
     </action>
     <msg>
-      <empty>No actions</empty>
-      <remove-popup-first>You must close the edit pop-up before deleting this node.</remove-popup-first>
-      <confirm-delete-action>Are you sure you want to delete this action?</confirm-delete-action>
-      <template-empty>The template of '{0}' is null or empty.</template-empty>
-      <template-null>The template is null or empty, or you do not have permission to access this template.</template-null>
-      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
+      <empty>Inga åtgärder</empty>
+      <remove-popup-first>Du måste stänga popup-fönstret Redigera innan du tar bort den här noden.</remove-popup-first>
+      <confirm-delete-action>Är du säker du vill ta bort denna åtgärd?</confirm-delete-action>
+      <template-empty>Mallen {0} är noll eller tom.</template-empty>
+      <template-null>Mallen är noll eller tom, eller du har inte behörighet att komma åt den här mallen.</template-null>
+      <access-denied>Åtkomst nekad. Du har inte behörighet att göra denna åtgärd.</access-denied>
     </msg>
   </UIFCCActionList>
 
   <UIFCCSelectorPopupWindow>
     <title>
-      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Välj plats</UIOneNodePathSelector>
     </title>
   </UIFCCSelectorPopupWindow>
 
   <UIWorkspaceList>
     <label>
-      <workspaceName>Workspace:</workspaceName>
-      <rootNodePath>Root Path:</rootNodePath>
+      <workspaceName>Arbetsyta:</workspaceName>
+      <rootNodePath>Rotsökvägen:</rootNodePath>
       <rootNodeInfo/>
     </label>
   </UIWorkspaceList>
 
   <rootNodeInfo>
     <title>
-      <AddRootNode>Add Root Node</AddRootNode>
+      <AddRootNode>Lägg till rotnoden</AddRootNode>
     </title>
   </rootNodeInfo>
 
   <UITreeList>
     <info>
-      <child-not-found>This node does not have any child ones.</child-not-found>
+      <child-not-found>Den här noden har inte underordnade noder.</child-not-found>
     </info>
     <header>
-      <name>Name</name>
-      <action>Action</action>
+      <name>Namn</name>
+      <action>Åtgärd</action>
     </header>
   </UITreeList>
 
   <UIFCCActionPopupWindow>
     <title>
-      <UIFCCActionContainer>Add Action</UIFCCActionContainer>
+      <UIFCCActionContainer>Lägg till åtgärd</UIFCCActionContainer>
     </title>
   </UIFCCActionPopupWindow>
 
   <UIFCCActionForm>
-    <title>Add/Edit Action</title>
+    <title>Lägg till/Redigera åtgärd</title>
     <action>
-      <Save>Save</Save>
-      <Close>Close</Close>
+      <Save>Spara</Save>
+      <Close>Stäng</Close>
     </action>
     <msg>
-      <repository-exception>Cannot save this action. The name provided must not have an index as its final element.</repository-exception>
-      <numberformat-exception>Cannot save this action. The name provided must not have '[' or ']'.</numberformat-exception>
-      <existed-action>The action name '{0}' already exists. Please select another name.</existed-action>
-      <unable-add-action>Unable to add this action.</unable-add-action>
-      <unable-add>Unable to add this action. This node is root or you do not have permision.</unable-add>
-      <not-support>The dialog '{0}' is not supported.</not-support>
-      <no-permission-add>Access denied. You do not have the right to add an action here.</no-permission-add>
-      <access-denied>Access denied. You do not have permission to access this template.</access-denied>
+      <repository-exception>Kan inte spara den här åtgärden. Det namn som används får inte ha ett index som sitt sista element.</repository-exception>
+      <numberformat-exception>Kan inte spara den här åtgärden. Det namn som används får inte ' [' eller '] ".</numberformat-exception>
+      <existed-action>Namnet på {0} finns redan. Välj ett annat namn.</existed-action>
+      <unable-add-action>Det går inte att lägga till denna åtgärd.</unable-add-action>
+      <unable-add>Det går inte att lägga till denna åtgärd. Den här noden är roten eller du har inte rättigheten.</unable-add>
+      <not-support>Dialogen {0} stöds inte.</not-support>
+      <no-permission-add>Åtkomst nekad. Du har inte rätt att lägga till en åtgärd här.</no-permission-add>
+      <access-denied>Åtkomst nekad. Du har inte behörighet att komma åt den här mallen.</access-denied>
     </msg>
     <validator>
       <validator>Validator</validator>
-      <destPath>With Path</destPath>
+      <destPath>Med sökväg</destPath>
     </validator>
   </UIFCCActionForm>
 
   <UIFCCActionTypeForm>
     <label>
-      <actionType>Create an Action of Type</actionType>
+      <actionType>Skapa en åtgärd av typen</actionType>
     </label>
     <msg>
-      <not-support>Cannot load the template of '{0}'.</not-support>
-      <do-not-permission>You do not have permission to load the template of '{0}'.</do-not-permission>
+      <not-support>Kan inte ladda mallen {0}.</not-support>
+      <do-not-permission>Du har inte behörighet att ladda mallen {0}.</do-not-permission>
     </msg>
   </UIFCCActionTypeForm>
 
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
-      <UIPermissionSelector>Permission Browser</UIPermissionSelector>
-      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+      <UIOneNodePathSelector>Välj plats</UIOneNodePathSelector>
+      <UIPermissionSelector>Rättigheter</UIPermissionSelector>
+      <UICategoriesSelector>Lägg till kategorier</UICategoriesSelector>
     </title>
   </PopupComponent>
 
   <DateTimeValidator>
     <msg>
-      <Invalid-input>The field '{0}' with the value '{1}' is invalid.</Invalid-input>
+      <Invalid-input>Fältet {0} med värdet '{1}' är ogiltigt.</Invalid-input>
     </msg>
   </DateTimeValidator>
 
   <UITabPane>
     <title>
-      <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
-      <UISelectedCategoriesGrid>Referenced Categories</UISelectedCategoriesGrid>
+      <UICategoriesSelectPanel>Välj kategorier</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Refererade kategorier</UISelectedCategoriesGrid>
     </title>
   </UITabPane>
 
@@ -177,25 +177,25 @@
 
   <UICategoriesSelector>
     <action>
-      <close>Close</close>
+      <close>Stäng</close>
     </action>
   </UICategoriesSelector>
 
   <PopupComponent>
     <title>
-      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Lägg till kategorier</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
 
   <UITreeTaxonomyList>
     <label>
-      <taxonomyTree>Category Tree</taxonomyTree>
+      <taxonomyTree>Kategoriträdet</taxonomyTree>
     </label>
   </UITreeTaxonomyList>
 
   <UIFCCTaxonomyPopupWindow>
     <title>
-      <UIOneTaxonomySelector>Category Selector</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Kategori Selector</UIOneTaxonomySelector>
     </title>
   </UIFCCTaxonomyPopupWindow>
 </bundle>

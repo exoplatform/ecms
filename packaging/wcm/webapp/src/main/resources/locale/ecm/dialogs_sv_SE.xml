@@ -6,17 +6,17 @@
   <Ecm>
     <dialog>
       <label>
-        <end-time>End Time</end-time>
-        <start-time>Start Time</start-time>
-        <lifecycle>Lifecycle</lifecycle>
-        <mimeType>Mime Type</mimeType>
-        <repeat-count>Repeat Count</repeat-count>
-        <time-interval>Time Interval</time-interval>
-        <query-items>Query Items</query-items>
-        <schedule-type>Schedule Type</schedule-type>
-        <remove>Remove Item</remove>
-        <add>Add Item</add>
-        <expand>Expand This</expand>
+        <end-time>Sluttid</end-time>
+        <start-time>Starttid</start-time>
+        <lifecycle>Livscykel</lifecycle>
+        <mimeType>MIME-typ</mimeType>
+        <repeat-count>Upprepa sammanräkning</repeat-count>
+        <time-interval>Tidsintervall</time-interval>
+        <query-items>Sök artiklar</query-items>
+        <schedule-type>Schematyp</schedule-type>
+        <remove>Ta bort objekt</remove>
+        <add>Lägg till objekt</add>
+        <expand>Expandera detta</expand>
       </label>
     </dialog>
   </Ecm>
@@ -24,29 +24,29 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Link</link>
+      <link>Länk</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
-      <name>Name</name>
-    <categories>Categories</categories>
+      <name>Namn</name>
+    <categories>Kategorier</categories>
     <recordCategoryIdentifier>Record Category Identifier</recordCategoryIdentifier>
-    <dispositionAuthority>Disposition Authority</dispositionAuthority>
+    <dispositionAuthority>Disposition myndigheten</dispositionAuthority>
     <permanentRecordIndicator>Permanent Record Indicator</permanentRecordIndicator>
-    <containsRecordFolders>Contains Records Folder</containsRecordFolders>
-    <defaultMediaType>Default Media Type</defaultMediaType>
-    <defaultMarkingList>Default Marking List</defaultMarkingList>
-    <defaultOriginatingOrganization>Default Originating Organization</defaultOriginatingOrganization>
+    <containsRecordFolders>Innehåller mapp för poster</containsRecordFolders>
+    <defaultMediaType>Standard mediatyp</defaultMediaType>
+    <defaultMarkingList>Standard märkningstyp</defaultMarkingList>
+    <defaultOriginatingOrganization>Ursprungliga standardorganisationen</defaultOriginatingOrganization>
     <vitalRecordIndicator>Vital Record Indicator</vitalRecordIndicator>
     <processCutoff>Process Cutoffs</processCutoff>
     <eventTrigger>Event Trigger</eventTrigger>
     <processHold>Process Hold</processHold>
     <processTransfer>Process Transfer</processTransfer>
-    <transferBlockSize>Transfer Block Size</transferBlockSize>
+    <transferBlockSize>Överföra blockstorlek</transferBlockSize>
     <processAccession>Process Accession</processAccession>
-    <accessionBlockSize>Access Block Size</accessionBlockSize>
+    <accessionBlockSize>Gå till blockstorlek</accessionBlockSize>
     <processDestruction>Process Destruction</processDestruction>
-    <location>Location</location>
+    <location>Plats</location>
     <LinkURL>URL</LinkURL>
     </label>
   </UIDocumentForm>
@@ -57,8 +57,8 @@
   <HtmlFile>
     <dialog>
       <label>
-        <name>Name</name>
-        <content>Content</content>
+        <name>Namn</name>
+        <content>Innehåll</content>
       </label>
     </dialog>
   </HtmlFile>
@@ -69,7 +69,7 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <shared>Shared</shared>
+        <shared>Delad</shared>
       </label>
     </dialog>
   </Calendar>
@@ -80,10 +80,10 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <categories>Categories</categories>
+        <categories>Kategorier</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
         <content>#{word.content}</content>
-        <re-upload>The file already exists. You can delete it and upload another file.</re-upload>
+        <re-upload>Filen finns redan. Du kan ta bort den och ladda upp en annan fil.</re-upload>
       </label>
     </dialog>
   </File>
@@ -91,22 +91,22 @@
   <UIActionForm>
     <label>
       <description>#{word.description}</description>
-      <port>Port</port>
+      <port>Portera</port>
       <userName>#{word.userName}</userName>
-      <password>Password</password>
-      <link>Link</link>
-      <to>Send Mail To</to>
+      <password>Lösenord</password>
+      <link>Länk</link>
+      <to>Skicka e-post till</to>
       <actionName>#{word.name}</actionName>
     </label>
   </UIActionForm>
   <EditFormAction>
     <label>
       <description>#{word.description}</description>
-      <port>Port</port>
+      <port>Portera</port>
       <userName>#{word.userName}</userName>
-      <password>Password</password>
-      <link>Link</link>
-      <to>Send Mail To</to>
+      <password>Lösenord</password>
+      <link>Länk</link>
+      <to>Skicka e-post till</to>
       <actionName>#{word.name}</actionName>
     </label>
   </EditFormAction>
@@ -116,12 +116,12 @@
   <Backup>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>ID</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <description>#{word.description}</description>
-        <to-workspace>To Workspace</to-workspace>
-        <with-path>With Path</with-path>
+        <to-workspace>Till arbetsytan</to-workspace>
+        <with-path>Med sökväg</with-path>
       </label>
     </dialog>
   </Backup>
@@ -131,15 +131,15 @@
   <Getmail>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>ID</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <protocol>Protocol</protocol>
-        <host>Host</host>
-        <port>Port</port>
-        <folder>Folder</folder>
+        <protocol>Protokoll</protocol>
+        <host>Värd</host>
+        <port>Portera</port>
+        <folder>Mapp</folder>
         <username>#{word.userName}</username>
-        <password>Password</password>
+        <password>Lösenord</password>
         <description>#{word.description}</description>
         <stote-path>Store path</stote-path>
       </label>
@@ -151,11 +151,11 @@
   <Icalendar>
     <dialog>
       <label>
-        <id>Id</id>
-        <action-name>Action Name</action-name>
+        <id>ID</id>
+        <action-name>Åtgärdens namn</action-name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <description>#{word.description}</description>
-        <calendar-file-name>Calendar File Name</calendar-file-name>
+        <calendar-file-name>Kalenderns filnamn</calendar-file-name>
         <query-items>#{Ecm.dialog.label.query-items}</query-items>
       </label>
     </dialog>
@@ -167,7 +167,7 @@
   <AddMetadata>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>ID</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <metadata>Metadata</metadata>
@@ -182,7 +182,7 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>ID</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -190,7 +190,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron expression</cron-expression>
+        <cron-expression>Cron process</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -201,7 +201,7 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>ID</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -221,20 +221,20 @@
     <dialog>
       <label>
         <title>#{word.title}:</title>
-        <creator>Creator:</creator>
+        <creator>Skapad av:</creator>
         <subject>#{word.subject}:</subject>
-        <source>Source:</source>
-        <contributor>Contributor:</contributor>
-        <resource-type>Resource Type:</resource-type>
+        <source>Källa:</source>
+        <contributor>Bidragsgivare:</contributor>
+        <resource-type>Resurstyp:</resource-type>
         <date>#{word.date}:</date>
-        <publisher>Publisher:</publisher>
+        <publisher>Utgivare:</publisher>
         <description>#{word.description}:</description>
-        <rights>Rights:</rights>
+        <rights>Rättigheter:</rights>
         <relation>Relation:</relation>
         <format>#{word.format}:</format>
-        <coverage>Coverage:</coverage>
-        <identifier>Identifier:</identifier>
-        <language>Language:</language>
+        <coverage>Täckning:</coverage>
+        <identifier>Identifierare:</identifier>
+        <language>Språk:</language>
       </label>
     </dialog>
   </ElementSet>
@@ -244,12 +244,12 @@
   <Cutoffable>
     <dialog>
       <label>
-        <cutoff-executed>Cutoff Executed</cutoff-executed>
-        <cutoff-now>Cutoff Now</cutoff-now>
-        <cutoff-date-time>Cutoff Date Time</cutoff-date-time>
-        <cutoff-event>Cutoff Event</cutoff-event>
-        <cutoff-obsolete>Cutoff Obsolete</cutoff-obsolete>
-        <cutoff-superseded>Cutoff Superseded</cutoff-superseded>
+        <cutoff-executed>Cutoff genomförd</cutoff-executed>
+        <cutoff-now>Cutoff nu</cutoff-now>
+        <cutoff-date-time>Cutoff datum tid</cutoff-date-time>
+        <cutoff-event>Cutoff händelse</cutoff-event>
+        <cutoff-obsolete>Cutoff föråldrade</cutoff-obsolete>
+        <cutoff-superseded>Cutoff ersatt</cutoff-superseded>
       </label>
     </dialog>
   </Cutoffable>
@@ -259,7 +259,7 @@
   <Destroyable>
     <dialog>
       <label>
-        <destruction-date>Destruction Date</destruction-date>
+        <destruction-date>Förstörelse datum</destruction-date>
       </label>
     </dialog>
   </Destroyable>
@@ -269,8 +269,8 @@
   <AccessControllable>
     <dialog>
       <label>
-        <owner>Owner</owner>
-        <permissions>Permissions</permissions>
+        <owner>Ägare</owner>
+        <permissions>Behörighet</permissions>
       </label>
     </dialog>
   </AccessControllable>
@@ -291,8 +291,8 @@
   <Actionable>
     <dialog>
       <label>
-        <primary-type>Primary Type</primary-type>
-        <mixin-types>Mixin Types</mixin-types>
+        <primary-type>Primär typ</primary-type>
+        <mixin-types>Mixin Typ</mixin-types>
       </label>
     </dialog>
   </Actionable>
@@ -312,11 +312,11 @@
   <Holdable>
     <dialog>
       <label>
-        <hold-executed>Hold Executed</hold-executed>
+        <hold-executed>Vänta med genomförande</hold-executed>
         <hold-until>Hold Until</hold-until>
         <holds-discretionary>Discretionary Hold</holds-discretionary>
-        <hold-until-event>Hold Until Event</hold-until-event>
-        <freeze>Freeze</freeze>
+        <hold-until-event>Håll tills händelse</hold-until-event>
+        <freeze>Frysa</freeze>
       </label>
     </dialog>
   </Holdable>
@@ -326,8 +326,8 @@
   <Lockable>
     <dialog>
       <label>
-        <lock-owner>Lock Owner</lock-owner>
-        <lock-is-deep>Lock is Deep</lock-is-deep>
+        <lock-owner>Låsägare</lock-owner>
+        <lock-is-deep>Låset är djupt</lock-is-deep>
       </label>
     </dialog>
   </Lockable>
@@ -337,10 +337,10 @@
   <Move>
     <dialog>
       <label>
-        <destination-workpsace>Destination Workspace</destination-workpsace>
-        <destination-path>Destination Path</destination-path>
-        <primary-type>Primary Type</primary-type>
-        <mixin-types>Mixin Types</mixin-types>
+        <destination-workpsace>Destination arbetsyta</destination-workpsace>
+        <destination-path>Målsökvägen</destination-path>
+        <primary-type>Primär typ</primary-type>
+        <mixin-types>Mixin Typ</mixin-types>
       </label>
     </dialog>
   </Move>
@@ -350,8 +350,8 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>Start Publication</start-publication>
-        <end-publication>End Publication</end-publication>
+        <start-publication>Starta publicering</start-publication>
+        <end-publication>Avsluta publikation</end-publication>
       </label>
     </dialog>
   </Published>
@@ -363,19 +363,19 @@
       <label>
         <supplemental-marking-list>Supplemental Marking List</supplemental-marking-list>
         <subject>#{word.subject}</subject>
-        <record-identifier>Record Identifier</record-identifier>
+        <record-identifier>Postidentifierare</record-identifier>
         <originator>Originator</originator>
         <format>#{word.format}</format>
-        <addresses>Addresses</addresses>
+        <addresses>Adresser</addresses>
         <originating-organization>Originating Organization</originating-organization>
-        <other-addresses>Other Addresses</other-addresses>
-        <publication-date>Publication Date</publication-date>
-        <record-note>Record Note</record-note>
-        <date-received>Date Received</date-received>
-        <media-format>Media Format</media-format>
-        <is-obsolete>Is Obsolete</is-obsolete>
-        <date-field>Date Field</date-field>
-        <superseded>Superseded</superseded>
+        <other-addresses>Andra adresser</other-addresses>
+        <publication-date>Utgivningsdatum</publication-date>
+        <record-note>Posten Obs</record-note>
+        <date-received>Datum mottaget</date-received>
+        <media-format>Media-Format</media-format>
+        <is-obsolete>Är föråldrad</is-obsolete>
+        <date-field>Datum fält</date-field>
+        <superseded>Ersatt</superseded>
         <uuid>UUID</uuid>
       </label>
     </dialog>
@@ -406,7 +406,7 @@
   <RssEnable>
     <dialog>
       <label>
-        <title>Title</title>
+        <title>Titel</title>
         <summary>#{word.summary}</summary>
       </label>
     </dialog>
@@ -417,9 +417,9 @@
   <Transferable>
     <dialog>
       <label>
-        <transfer-executed>Transfer Executed</transfer-executed>
-        <transfer-date>Transfer Date</transfer-date>
-        <transfer-location>Transfer Location</transfer-location>
+        <transfer-executed>Överföring utförs</transfer-executed>
+        <transfer-date>Överföringsdatum</transfer-date>
+        <transfer-location>Plats för överföring</transfer-location>
       </label>
     </dialog>
   </Transferable>
@@ -429,11 +429,11 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>Version History</version-history>
-        <base-version>Base Version</base-version>
-        <is-checked-out>Is Checked out</is-checked-out>
-        <predecessors>Predecessors</predecessors>
-        <merge-failed>Merge Failed</merge-failed>
+        <version-history>Versionshistorik</version-history>
+        <base-version>Bas version</base-version>
+        <is-checked-out>Utcheckad</is-checked-out>
+        <predecessors>Föregångare</predecessors>
+        <merge-failed>Det gick inte att koppla dokument</merge-failed>
         <uuid>UUID</uuid>
       </label>
     </dialog>
@@ -444,9 +444,9 @@
   <VitalRecord>
     <dialog>
       <label>
-        <is-vital-record>Is Vital Record</is-vital-record>
+        <is-vital-record>Är viktig post</is-vital-record>
         <prev-review-date>Prev Review Date</prev-review-date>
-        <next-review-date>Next Review Date</next-review-date>
+        <next-review-date>Nästa granskningsdatum</next-review-date>
       </label>
     </dialog>
   </VitalRecord>
@@ -456,10 +456,10 @@
   <ResouceContainer>
     <dialog>
       <label>
-        <name>Name</name>
+        <name>Namn</name>
         <autoload>Auto Load</autoload>
-        <minetype>MIME Type</minetype>
-        <content>Content</content>
+        <minetype>MIME-typ</minetype>
+        <content>Innehåll</content>
       </label>
     </dialog>
   </ResouceContainer>
@@ -468,17 +468,17 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>The email address is invalid.</Invalid-input>
+      <Invalid-input>E-postadressen är ogiltig.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>The field '{0}' is required. Please enter your value.</empty-input>
+      <empty-input>Fältet {0} är obligatoriskt. Skriv in ditt värde.</empty-input>
     </msg>
   </EmptyFieldValidator>
   <NumberFormatValidator>
     <msg>
-      <Invalid-number>The field '{0}' is invalid.</Invalid-number>
+      <Invalid-number>Fältet {0} är ogiltig.</Invalid-number>
     </msg>
   </NumberFormatValidator>
   <!--
@@ -489,18 +489,18 @@
   <ScriptAction>
     <dialog>
       <label>
-        <id>Id</id>
-        <name>Name</name>
-        <lifecycle>Lifecycle</lifecycle>
-        <homePath>Home Path</homePath>
-        <targetWorkspace>Target Workspace</targetWorkspace>
-        <targetPath>Target Path</targetPath>
+        <id>ID</id>
+        <name>Namn</name>
+        <lifecycle>Livscykel</lifecycle>
+        <homePath>Sökväg Hem</homePath>
+        <targetWorkspace>Målet arbetsyta</targetWorkspace>
+        <targetPath>Målet sökväg</targetPath>
       </label>
     </dialog>
   </ScriptAction>
   <UIDialogForm>
    <form>
-   <DialogFormException>Cannot save this document. There may be a problem with the pre-save interceptor.</DialogFormException>
+   <DialogFormException>Det går inte att spara dokumentet. Det kan finnas ett problem med spara-funktionen.</DialogFormException>
    </form>
   </UIDialogForm>
 
@@ -509,37 +509,35 @@
 
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
-<no>No</no>
-<yes>Yes</yes>
-<true>True</true>
-<false>False</false>
-<Electronic>Electronic</Electronic>
-<Paper>Paper</Paper>
-<NONE>None</NONE>
-<CLASSIFIED>Classified</CLASSIFIED>
-<UNCLASSIFIED>Unclassified</UNCLASSIFIED>
-<NOCONTRACT>No Contract</NOCONTRACT>
-<true>True</true>
-<false>False</false>
-<one-minute>One Minute</one-minute>
-<hourly>Hourly</hourly>
-<daily>Daily</daily>
-<quarterly>Quarterly</quarterly>
-<yearly>Yearly</yearly>
-<ten-years>Ten Years</ten-years>
-<read>User Action</read>
-  <schedule>Scheduler</schedule>
-  <node_added>Content Addition</node_added>
-  <node_removed>Content Removal</node_removed>
-  <property_added>Property Addition</property_added>
-  <property_removed>Property Removal</property_removed>
-  <property_changed>Property Modification</property_changed>
+<no>Nej</no>
+<yes>Ja</yes>
+<true>sant</true>
+<false>falskt</false>
+<Electronic>Elektroniska</Electronic>
+<Paper>Papper</Paper>
+<NONE>Ingen</NONE>
+<CLASSIFIED>Klassificerad</CLASSIFIED>
+<UNCLASSIFIED>Oklassificerad</UNCLASSIFIED>
+<NOCONTRACT>Inget kontrakt</NOCONTRACT>
+<one-minute>En minut</one-minute>
+<hourly>Varje timme</hourly>
+<daily>Dagligen</daily>
+<quarterly>Kvartalsvis</quarterly>
+<yearly>Årligen</yearly>
+<ten-years>Tio år</ten-years>
+<read>Användaråtgärd</read>
+  <schedule>Schemaläggaren</schedule>
+  <node_added>Tillägg till innehåll</node_added>
+  <node_removed>Ta bort innehåll</node_removed>
+  <property_added>Lägg till egenskaper</property_added>
+  <property_removed>Ta bort egenskaper</property_removed>
+  <property_changed>Ändra egenskaper</property_changed>
   <SendMail>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Är för djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
       </label>
     </dialog>
   </SendMail>
@@ -547,9 +545,9 @@
   <ScriptAction>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Är för djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
       </label>
     </dialog>
   </ScriptAction>
@@ -557,9 +555,9 @@
   <Getmail>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Är för djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
       </label>
     </dialog>
   </Getmail>
@@ -567,9 +565,9 @@
   <Rss>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Är för djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
       </label>
     </dialog>
   </Rss>
@@ -577,9 +575,9 @@
   <AddMetadata>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Är för djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
       </label>
     </dialog>
   </AddMetadata>
@@ -587,9 +585,9 @@
   <ReloadAction>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Är för djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
       </label>
     </dialog>
   </ReloadAction>
@@ -597,9 +595,9 @@
   <Transform>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Är för djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
       </label>
     </dialog>
   </Transform>
@@ -607,9 +605,9 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Är för djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
       </label>
     </dialog>
   </EnableVersioning>
@@ -617,9 +615,9 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Är för djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
       </label>
     </dialog>
   </AutoVersioning>
@@ -630,21 +628,21 @@
   <ContentPublishing>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>ID</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <description>#{word.description}</description>
         <validator>Validator</validator>
         <supervisor>Supervisor</supervisor>
-        <public-workspace>Publishing Workspace</public-workspace>
-        <public-path>Publishing Path</public-path>
-        <pending-workspace>Pending Workspace</pending-workspace>
-        <pending-path>Pending Path</pending-path>
-        <backup-workspace>Backup Workspace</backup-workspace>
-        <backup-path>Backup Path</backup-path>
-        <trash-workspace>Trash Workspace</trash-workspace>
-        <trash-path>Trash Path</trash-path>
-<affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <public-workspace>Publicerand arbetsyta</public-workspace>
+        <public-path>Publicerad sökväg</public-path>
+        <pending-workspace>Pågående arbetsyta</pending-workspace>
+        <pending-path>Väntande sökväg</pending-path>
+        <backup-workspace>Backup arbetsyta</backup-workspace>
+        <backup-path>Backup av sökväg</backup-path>
+        <trash-workspace>Papperskorg för arbetsyta</trash-workspace>
+        <trash-path>Papperskorgens sökväg</trash-path>
+<affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
       </label>
     </dialog>
   </ContentPublishing>
@@ -652,15 +650,15 @@
   <AccessibleMedia>
   <dialog>
   <label>
-  <captions>Captions</captions>
-<audioDescription>Audio description</audioDescription>
-<alternativeText>Alternative text</alternativeText>
+  <captions>Bildtexter</captions>
+<audioDescription>Ljudbeskrivning</audioDescription>
+<alternativeText>Alternativ text</alternativeText>
 </label>
 </dialog>
 <help>
-<CaptionsHelp>Captions should provide text of dialog and important sounds</CaptionsHelp>
-<AudioDescriptionHelp>An audio description is a narrated track of the video</AudioDescriptionHelp>
-<AlternativeTextHelp>Provide an accessible, alternative way of presenting the information</AlternativeTextHelp>
+<CaptionsHelp>Bildtexter skall innehålla text och viktiga ljud</CaptionsHelp>
+<AudioDescriptionHelp>En Ljudbeskrivning är ett klipp ur videon</AudioDescriptionHelp>
+<AlternativeTextHelp>Ge ett tillgängligt, alternativt sätt att presentera informationen</AlternativeTextHelp>
 </help>
 </AccessibleMedia>
   
