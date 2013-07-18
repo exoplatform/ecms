@@ -109,10 +109,16 @@
      def itemExcerpt = resultNode.getExcerpt();
      String description = resultNode.getDescription();
      def itemScore = resultNode.getScore();
+     PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
+     String requestURL = portalRequestContext.getRequest().getRequestURL().toString();
      %>
       <div class="SearchItem">
        <div class="ItemTitle">
-        <a href="$itemUrl">$itemName</a>
+         <%if(resultType.equals("Document")){%>
+          <a href="$itemUrl&urlSearch=$requestURL">$itemName</a>
+        <%}else{%>
+          <a href="$itemUrl">$itemName</a>
+        <%}%>
        </div>
        <%if(itemExcerpt != null && itemExcerpt.trim().length() > 0){%>
        		<div class="ItemExcerpt" style="font-weight:bold;"><%=_ctx.appRes("UIDefaultSearchResult.label.editor")%>: $editor</div>
