@@ -12,7 +12,7 @@
     <isInherited>Được kế thừa từ trang mẹ</isInherited>
       <priority>Độ ưu tiên:</priority>
       <frequency>Tần suất:</frequency>
-      <select-language>Chọn một ngôn ngữ</select-language>
+      <select-language>Chọn Ngôn ngữ</select-language>
       <option>
         <Always>Luôn luôn</Always>
         <Hourly>Hàng giờ</Hourly>

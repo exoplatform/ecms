@@ -7,9 +7,9 @@
   -->
   <UIActionBar>
     <tooltip>
-      <PublicationRequestApproval>Request Approval</PublicationRequestApproval>
+      <PublicationRequestApproval>Yêu cầu duyệt</PublicationRequestApproval>
       <PublicationApproveContent>Duyệt nội dung</PublicationApproveContent>
-      <PublicationPublish>Publish</PublicationPublish>
+      <PublicationPublish>Xuất bản</PublicationPublish>
     </tooltip>
   </UIActionBar>
 </bundle>

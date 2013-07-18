@@ -12,7 +12,7 @@
     </header>
     <action/>
     <info>
-      <child-not-found>Không tìm thấy node con!</child-not-found>
+      <child-not-found>Không tìm thấy nút con.</child-not-found>
     </info>
   </UITreeList>
   <!--

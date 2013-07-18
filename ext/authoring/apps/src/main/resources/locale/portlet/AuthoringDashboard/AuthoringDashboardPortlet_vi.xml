@@ -2,12 +2,12 @@
 <bundle>
   <UIDashboardForm>
     <label>
-      <title>Author Dashboard</title>
-      <nocontent>Không có nội dung</nocontent>
-      <mydraft>My Draft Content</mydraft>
-      <waitingapproval>Nội dung chờ duyệt</waitingapproval>
-      <approve>Duyệt</approve>
-      <publishedtomorrow>To Be Published Tomorrow</publishedtomorrow>
+      <title>Bảng ứng dụng cá nhân của Tác giả</title>
+      <nocontent>Không có Nội dung</nocontent>
+      <mydraft>Nội dung Nháp của Tôi</mydraft>
+      <waitingapproval>Đang chờ Phê duyệt của Tôi</waitingapproval>
+      <approve>Phê duyệt</approve>
+      <publishedtomorrow>Phát hành vào Ngày mai</publishedtomorrow>
     </label>
   </UIDashboardForm>
 </bundle>

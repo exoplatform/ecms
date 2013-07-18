@@ -39,7 +39,7 @@
         <hide-comments>Ẩn bình luận</hide-comments>
         <comment-by>Ẩn bình luận</comment-by>
         <email>Email</email>
-        <site>Site</site>
+        <site>Trang</site>
       </label>
     </view>
   </Comment>
@@ -79,7 +79,7 @@
         <not-viewable>Nội dung này không thể xem được.</not-viewable>
         <using-webDAV>hoặc dùng WebDAV để xem nội dung đó.</using-webDAV>
         <file-size-too-big>Nội dung của tệp tin này quá lớn. Bạn nên tải xuống và mở tại máy khách.</file-size-too-big>
-        <webDAV>WebDAV View</webDAV>
+        <webDAV>Hiển thị kiểu WebDAV</webDAV>
         <download>Tải xuống</download>
         <htmlview>Xem dưới dạng HTML</htmlview>
         <plaintextview>Xem dưới dạng văn bản Thuần túy</plaintextview>
@@ -100,10 +100,10 @@
         <contain-record-folder>Chứa Thư mục Bản ghi</contain-record-folder>
         <default-media-type>Kiểu Phương tiện Mặc định</default-media-type>
         <default-marking-list>Danh sách Đánh dấu Mặc định</default-marking-list>
-        <default-originating-organization>Default Originating Organization</default-originating-organization>
+        <default-originating-organization>Nguồn gốc tổ chức mặc định</default-originating-organization>
         <number-of-record>Số lượng Bản ghi</number-of-record>
         <record>Bản ghi</record>
-        <obsolete-record>Obsolete Records</obsolete-record>
+        <obsolete-record>Bản ghi hết hạn</obsolete-record>
         <supreseded-record>Superseded Records</supreseded-record>
         <vital-record>Bản ghi Quan trọng</vital-record>
         <cutoff-record>Cutoff Records</cutoff-record>
@@ -211,11 +211,11 @@
     <view>
       <label>
         <name>Tên</name>
-        <versionable>Versionable</versionable>
+        <versionable>Phiên bản</versionable>
         <exo_owner>Người sở hữu</exo_owner>
         <exo_dateCreated>Ngày Tạo</exo_dateCreated>
         <exo_dateModified>Ngày Sửa đổi</exo_dateModified>
-        <auditing>Auditing</auditing>
+        <auditing>Kiểm định</auditing>
       </label>
     </view>
   </ListView>
@@ -271,9 +271,9 @@
   <AddMetadata>
     <view>
       <label>
-        <action-name>Action Name</action-name>
+        <action-name>Tên hành động</action-name>
         <lifecycle>Chu kỳ</lifecycle>
-        <metadata>Metadata</metadata>
+        <metadata>Siêu dữ liệu</metadata>
         <description>Mô tả</description>
       </label>
     </view>
@@ -285,7 +285,7 @@
   <AutoVersioning>
     <view>
       <label>
-        <action-name>Action Name</action-name>
+        <action-name>Tên hành động</action-name>
         <lifecycle>Chu kỳ</lifecycle>
         <description>Mô tả</description>
       </label>
@@ -309,21 +309,21 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>N/A</not-avaliable>
+        <not-avaliable>Không sẵn</not-avaliable>
         <title>Tiêu đề</title>
         <creator>Người tạo</creator>
         <subject>Chủ đề</subject>
         <source>Nguồn</source>
-        <contributor>Contributor</contributor>
+        <contributor>Người cộng tác</contributor>
         <resource-type>Loại tài nguyên</resource-type>
         <date>Ngày</date>
-        <publisher>Publisher</publisher>
+        <publisher>Nhà xuất bản</publisher>
         <description>Mô tả</description>
         <rights>Các Quyền</rights>
         <relation>Quan hệ</relation>
         <format>Định dạng</format>
-        <coverage>Coverage</coverage>
-        <identifier>Identifier</identifier>
+        <coverage>Phạm vi</coverage>
+        <identifier>Định danh</identifier>
         <languages>Ngôn ngữ</languages>
       </label>
       <action>
@@ -342,7 +342,7 @@
   <Cutoffable>
     <view>
       <label>
-        <not-available>N/A</not-available>
+        <not-available>Không xác định</not-available>
         <cutoff-executed>Cutoff Executed</cutoff-executed>
         <cutoff-now>Cutoff Now</cutoff-now>
         <cutoff-date-time>Cutoff Date Time</cutoff-date-time>
@@ -366,7 +366,7 @@
   <Destroyable>
     <view>
       <label>
-        <not-available>N/A</not-available>
+        <not-available>Không xác định</not-available>
         <destruction-date>Ngày Hủy</destruction-date>
       </label>
       <action>
@@ -385,7 +385,7 @@
   <Accessionable>
     <view>
       <label>
-        <not-available>N/A</not-available>
+        <not-available>Không xác định</not-available>
         <accession-executed>Accession Executed</accession-executed>
         <accession-date>Accession Date</accession-date>
       </label>
@@ -404,7 +404,7 @@
   <Holdable>
     <view>
       <label>
-        <not-available>N/A</not-available>
+        <not-available>Không xác định</not-available>
         <hold-executed>Hold Executed</hold-executed>
         <hold-until>Hold Until</hold-until>
         <holds-discretionary>Hold Discretionary</holds-discretionary>
@@ -427,7 +427,7 @@
   <Record>
     <view>
       <label>
-        <not-available>N/A</not-available>
+        <not-available>Không xác định</not-available>
         <supplemental-marking-list>Danh sách Đánh dấu Bổ sung</supplemental-marking-list>
         <subject>Chủ đề</subject>
         <record-identifier>Record Identifier</record-identifier>
@@ -461,7 +461,7 @@
   <Transferable>
     <view>
       <label>
-        <not-available>N/A</not-available>
+        <not-available>Không xác định</not-available>
         <transfer-executed>Transfer Executed</transfer-executed>
         <transfer-date>Ngày Truyền tải</transfer-date>
         <transfer-location>Vị trí Truyền tải</transfer-location>
@@ -482,7 +482,7 @@
   <VitalRecord>
     <view>
       <label>
-        <not-available>N/A</not-available>
+        <not-available>Không xác định</not-available>
         <is-vital-record>Là Bản ghi Quan trọng</is-vital-record>
         <prev-review-date>Ngày Xem lại Trước đó</prev-review-date>
         <next-review-date>Ngày Xem lại Kế tiếp</next-review-date>
@@ -503,18 +503,18 @@
   <ContentPublishing>
     <view>
       <label>
-        <id>Id</id>
+        <id>Mã</id>
         <name>#{word.name}</name>
         <lifecycle>Chu kỳ</lifecycle>
         <description>#{word.description}</description>
         <validator>Người phê duyệt</validator>
         <supervisor>Người giám sát</supervisor>
         <public-workspace>Publishing Workspace</public-workspace>
-        <public-path>Publishing Path</public-path>
-        <pending-workspace>Pending Workspace</pending-workspace>
-        <pending-path>Pending Path</pending-path>
-        <backup-workspace>Backup Workspace</backup-workspace>
-        <backup-path>Backup Path</backup-path>
+        <public-path>Đường dẫn công bố</public-path>
+        <pending-workspace>Vùng làm việc chờ đợi xử lý</pending-workspace>
+        <pending-path>Đường dẫn vùng làm việc chờ đợi xử lý</pending-path>
+        <backup-workspace>Sao lưu vùng làm việc</backup-workspace>
+        <backup-path>Đường dẫn sao lưu</backup-path>
         <trash-workspace>Trash Workspace</trash-workspace>
         <trash-path>Trash Path</trash-path>
 <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
@@ -525,10 +525,10 @@
   <SendMail>
     <view>
       <label> 
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
+        <isDeep>Độ sâu</isDeep>
+        <nodetypes>Kiểu node</nodetypes>
+        <affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
+        <nodeTypeName>Tên kiểu node</nodeTypeName>
       </label> 
   </view>
   </SendMail>
@@ -536,10 +536,10 @@
   <ScriptAction>
     <view>
       <label> 
-        <isDeep>Is Deep</isDeep>
+        <isDeep>Độ sâu</isDeep>
         <nodetypes>Kiểu node</nodetypes>
         <affectedNodeTypeNames>Các kiểu node bị ảnh hưởng</affectedNodeTypeNames>
-        <nodeTypeName>Node type names</nodeTypeName>
+        <nodeTypeName>Tên kiểu node</nodeTypeName>
       </label> 
     </view>
   </ScriptAction>
@@ -547,8 +547,8 @@
   <Getmail>
     <view>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
+        <isDeep>Độ sâu</isDeep>
+        <nodetypes>Kiểu node</nodetypes>
         <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
         <nodeTypeName>Tên Kiểu Node</nodeTypeName>
       </label> 
@@ -569,9 +569,9 @@
   <AddMetadata>
     <view>
       <label>
-        <isDeep>Is Deep</isDeep>
+        <isDeep>Tác động sâu</isDeep>
         <nodetypes>Kiểu Node</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
         <nodeTypeName>Tên Kiểu Node</nodeTypeName>
       </label> 
     </view>
@@ -602,9 +602,9 @@
   <EnableVersioning>
     <view>
       <label>
-        <isDeep>Is Deep</isDeep>
+        <isDeep>Tác động sâu</isDeep>
         <nodetypes>Kiểu Node</nodetypes> 
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
         <nodeTypeName>Tên Kiểu Node</nodeTypeName>
       </label> 
     </view>
@@ -613,9 +613,9 @@
   <AutoVersioning>
     <view>
       <label>
-        <isDeep>Is Deep</isDeep>
+        <isDeep>Tác động sâu</isDeep>
         <nodetypes>Kiểu Node</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
         <nodeTypeName>Tên Kiểu Node</nodeTypeName>
       </label> 
     </view>
@@ -624,13 +624,13 @@
    <AccessibleMedia>
     <view>
       <label>
-      <Play-audio-description-of-this-video>Audio description</Play-audio-description-of-this-video>
+      <Play-audio-description-of-this-video>Mô tả âm thanh</Play-audio-description-of-this-video>
       <Read-more>Đọc thêm</Read-more>
-      <Read-less>Read less</Read-less>
+      <Read-less>Thu gọn</Read-less>
       <Switch-back-to-original-video>Video Gốc</Switch-back-to-original-video>
       </label>
       <tooltip>
-      <A-second-media-file-is-available-as-audio-description>A second media file is available as an audio description</A-second-media-file-is-available-as-audio-description>
+      <A-second-media-file-is-available-as-audio-description>Một tập tin thứ hai được dùng như là một tài liệu mô tả âm thanh</A-second-media-file-is-available-as-audio-description>
       </tooltip>
     </view>
   </AccessibleMedia>
