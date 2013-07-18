@@ -51,6 +51,7 @@ import org.exoplatform.webui.form.UIFormInput;
 import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 
 /**
  * Created by The eXo Platform SARL
@@ -151,11 +152,16 @@ public class UIViewMetadataForm extends UIDialogForm {
           } else {
             if (requiredType == 6) { // boolean
               UIFormInput uiInput = uiForm.getUIInput(inputName);
-              String value = "false";
-              if(uiInput instanceof UIFormSelectBox) value =  ((UIFormSelectBox)uiInput).getValue();
-              if(!node.hasProperty(name) || (node.hasProperty(name) && 
-                  node.getProperty(name).getBoolean() != Boolean.parseBoolean(value)))
-                node.setProperty(name, Boolean.parseBoolean(value));
+              boolean value = false;
+              //2 cases to return true, UIFormSelectBox with value true or UICheckBoxInput checked
+              if(uiInput instanceof UIFormSelectBox){
+            	  value =  Boolean.parseBoolean(((UIFormSelectBox)uiInput).getValue());
+              }else if( uiInput instanceof UICheckBoxInput){
+            	  value = ((UICheckBoxInput)uiInput).isChecked();
+              }
+	            if(!node.hasProperty(name) || (node.hasProperty(name) && node.getProperty(name).getBoolean() != value)) {
+		            node.setProperty(name, value);
+	            }
             } else if (requiredType == 5) { // date
               UIFormDateTimeInput cal = (UIFormDateTimeInput) uiForm.getUIInput(inputName);
               node.setProperty(name, cal.getCalendar());
