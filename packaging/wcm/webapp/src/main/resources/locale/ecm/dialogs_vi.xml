@@ -16,7 +16,7 @@
         <schedule-type>Kiểu Lịch trình</schedule-type>
         <remove>Xóa Mục</remove>
         <add>Thêm Mục</add>
-        <expand>Expand This</expand>
+        <expand>Mở rộng</expand>
       </label>
     </dialog>
   </Ecm>
@@ -116,7 +116,7 @@
   <Backup>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>Mã</id>
         <name>#{word.name}</name>
         <lifecycle>Chu kỳ</lifecycle>
         <description>#{word.description}</description>
@@ -131,7 +131,7 @@
   <Getmail>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>Mã</id>
         <name>Tên</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <protocol>Giao thức</protocol>
@@ -151,7 +151,7 @@
   <Icalendar>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>Mã</id>
         <action-name>Tên Hành động</action-name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <description>#{word.description}</description>
@@ -167,10 +167,10 @@
   <AddMetadata>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>Mã</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <metadata>Metadata</metadata>
+        <metadata>Siêu dữ liệu</metadata>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -182,7 +182,7 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>Mã</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -190,7 +190,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron expression</cron-expression>
+        <cron-expression>Lệnh Cron</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -201,7 +201,7 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>Mã</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -224,7 +224,7 @@
         <creator>Người tạo:</creator>
         <subject>#{word.subject}:</subject>
         <source>Nguồn:</source>
-        <contributor>Contributor:</contributor>
+        <contributor>Người cộng tác</contributor>
         <resource-type>Kiểu Tài nguyên:</resource-type>
         <date>#{word.date}:</date>
         <publisher>Người đăng tải:</publisher>
@@ -232,8 +232,8 @@
         <rights>Các Quyền:</rights>
         <relation>Quan hệ:</relation>
         <format>#{word.format}:</format>
-        <coverage>Coverage:</coverage>
-        <identifier>Identifier:</identifier>
+        <coverage>Mức độ bao phủ</coverage>
+        <identifier>Người Định danh</identifier>
         <language>Ngôn ngữ:</language>
       </label>
     </dialog>
@@ -291,7 +291,7 @@
   <Actionable>
     <dialog>
       <label>
-        <primary-type>Primary Type</primary-type>
+        <primary-type>Kiểu chính</primary-type>
         <mixin-types>Kiểu Mixin</mixin-types>
       </label>
     </dialog>
@@ -326,8 +326,8 @@
   <Lockable>
     <dialog>
       <label>
-        <lock-owner>Lock Owner</lock-owner>
-        <lock-is-deep>Lock is Deep</lock-is-deep>
+        <lock-owner>Chủ sở hữu khóa</lock-owner>
+        <lock-is-deep>Khóa cả con</lock-is-deep>
       </label>
     </dialog>
   </Lockable>
@@ -350,8 +350,8 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>Start Publication</start-publication>
-        <end-publication>End Publication</end-publication>
+        <start-publication>Bắt đầu công bố</start-publication>
+        <end-publication>Kết thúc công bố</end-publication>
       </label>
     </dialog>
   </Published>
@@ -431,8 +431,8 @@
       <label>
         <version-history>Lược sử Phiên bản</version-history>
         <base-version>Phiên bản cơ sở</base-version>
-        <is-checked-out>Is Checked out</is-checked-out>
-        <predecessors>Predecessors</predecessors>
+        <is-checked-out>Đã check out</is-checked-out>
+        <predecessors>Phiên bản trước</predecessors>
         <merge-failed>Không Hợp lại được</merge-failed>
         <uuid>UUID</uuid>
       </label>
@@ -457,8 +457,8 @@
     <dialog>
       <label>
         <name>Tên</name>
-        <autoload>Auto Load</autoload>
-        <minetype>MIME Type</minetype>
+        <autoload>Tự động tải</autoload>
+        <minetype>Định dạng</minetype>
         <content>Nội dung</content>
       </label>
     </dialog>
@@ -489,12 +489,12 @@
   <ScriptAction>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>Mã</id>
         <name>Tên</name>
         <lifecycle>Chu kỳ</lifecycle>
-        <homePath>Home Path</homePath>
-        <targetWorkspace>Target Workspace</targetWorkspace>
-        <targetPath>Target Path</targetPath>
+        <homePath>Đường dẫn nguồn</homePath>
+        <targetWorkspace>Vùng đích</targetWorkspace>
+        <targetPath>Đường dẫn đích</targetPath>
       </label>
     </dialog>
   </ScriptAction>
@@ -519,27 +519,25 @@
 <CLASSIFIED>Đã được phân loại</CLASSIFIED>
 <UNCLASSIFIED>Unclassified</UNCLASSIFIED>
 <NOCONTRACT>No Contract</NOCONTRACT>
-<true>True</true>
-<false>False</false>
-<one-minute>One Minute</one-minute>
-<hourly>Hourly</hourly>
-<daily>Daily</daily>
-<quarterly>Quarterly</quarterly>
-<yearly>Yearly</yearly>
-<ten-years>Ten Years</ten-years>
-<read>User Action</read>
-  <schedule>Scheduler</schedule>
-  <node_added>Content Addition</node_added>
-  <node_removed>Content Removal</node_removed>
-  <property_added>Property Addition</property_added>
-  <property_removed>Property Removal</property_removed>
-  <property_changed>Property Modification</property_changed>
+<one-minute>1 phút</one-minute>
+<hourly>Hàng giờ</hourly>
+<daily>Hàng ngày</daily>
+<quarterly>Hàng quý</quarterly>
+<yearly>Hàng năm</yearly>
+<ten-years>10 năm</ten-years>
+<read>Thao tác của người dùng</read>
+  <schedule>Biểu thời gian</schedule>
+  <node_added>Thêm mới nội dung</node_added>
+  <node_removed>Xoá bỏ nội dung</node_removed>
+  <property_added>Thêm mới thuộc tính</property_added>
+  <property_removed>Xóa bỏ thuộc tính</property_removed>
+  <property_changed>Thay đổi tính chất</property_changed>
   <SendMail>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Độ sâu</isDeep>
+        <nodetypes>Kiểu nút</nodetypes>
+        <affectedNodeTypeNames>Các kiểu nút bị ảnh hưởng</affectedNodeTypeNames>
       </label>
     </dialog>
   </SendMail>
@@ -547,9 +545,9 @@
   <ScriptAction>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Độ sâu</isDeep>
+        <nodetypes>Kiểu nút</nodetypes>
+        <affectedNodeTypeNames>Các kiểu node bị ảnh hưởng</affectedNodeTypeNames>
       </label>
     </dialog>
   </ScriptAction>
@@ -557,9 +555,9 @@
   <Getmail>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Độ sâu</isDeep>
+        <nodetypes>Kiểu nút</nodetypes>
+        <affectedNodeTypeNames>Các kiểu nút bị ảnh hưởng</affectedNodeTypeNames>
       </label>
     </dialog>
   </Getmail>
@@ -567,9 +565,9 @@
   <Rss>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Độ sâu</isDeep>
+        <nodetypes>Kiểu nút</nodetypes>
+        <affectedNodeTypeNames>Các kiểu nút bị ảnh hưởng</affectedNodeTypeNames>
       </label>
     </dialog>
   </Rss>
@@ -577,9 +575,9 @@
   <AddMetadata>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Độ sâu</isDeep>
+        <nodetypes>Kiểu nút</nodetypes>
+        <affectedNodeTypeNames>Các kiểu nút bị ảnh hưởng</affectedNodeTypeNames>
       </label>
     </dialog>
   </AddMetadata>
@@ -587,9 +585,9 @@
   <ReloadAction>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Độ sâu</isDeep>
+        <nodetypes>Kiểu nút</nodetypes>
+        <affectedNodeTypeNames>Các kiểu nút bị ảnh hưởng</affectedNodeTypeNames>
       </label>
     </dialog>
   </ReloadAction>
@@ -597,9 +595,9 @@
   <Transform>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Độ sâu</isDeep>
+        <nodetypes>Kiểu nút</nodetypes>
+        <affectedNodeTypeNames>Các kiểu nút bị ảnh hưởng</affectedNodeTypeNames>
       </label>
     </dialog>
   </Transform>
@@ -607,9 +605,9 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Độ sâu</isDeep>
+        <nodetypes>Kiểu node</nodetypes>
+        <affectedNodeTypeNames>Các kiểu nút bị ảnh hưởng</affectedNodeTypeNames>
       </label>
     </dialog>
   </EnableVersioning>
@@ -617,9 +615,9 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Độ sâu</isDeep>
+        <nodetypes>Kiểu node</nodetypes>
+        <affectedNodeTypeNames>Các kiểu nút bị ảnh hưởng</affectedNodeTypeNames>
       </label>
     </dialog>
   </AutoVersioning>
@@ -630,12 +628,12 @@
   <ContentPublishing>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>Mã</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <description>#{word.description}</description>
-        <validator>Validator</validator>
-        <supervisor>Supervisor</supervisor>
+        <validator>Người xác thực</validator>
+        <supervisor>Người giám sát</supervisor>
         <public-workspace>Publishing Workspace</public-workspace>
         <public-path>Publishing Path</public-path>
         <pending-workspace>Pending Workspace</pending-workspace>
@@ -644,7 +642,7 @@
         <backup-path>Backup Path</backup-path>
         <trash-workspace>Trash Workspace</trash-workspace>
         <trash-path>Trash Path</trash-path>
-<affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+<affectedNodeTypeNames>Các kiểu nút bị ảnh hưởng</affectedNodeTypeNames>
       </label>
     </dialog>
   </ContentPublishing>
@@ -652,15 +650,15 @@
   <AccessibleMedia>
   <dialog>
   <label>
-  <captions>Captions</captions>
-<audioDescription>Audio description</audioDescription>
-<alternativeText>Alternative text</alternativeText>
+  <captions>Chú thích</captions>
+<audioDescription>Mô tả âm thanh</audioDescription>
+<alternativeText>Văn bản thay thế</alternativeText>
 </label>
 </dialog>
 <help>
-<CaptionsHelp>Captions should provide text of dialog and important sounds</CaptionsHelp>
-<AudioDescriptionHelp>An audio description is a narrated track of the video</AudioDescriptionHelp>
-<AlternativeTextHelp>Provide an accessible, alternative way of presenting the information</AlternativeTextHelp>
+<CaptionsHelp>Chú thích nên hỗ trợ mô tả bằng văn bản cho các đoạn hội thoại và âm thanh quan trọng</CaptionsHelp>
+<AudioDescriptionHelp>Mô tả âm thanh là một đoạn thuật lại của video</AudioDescriptionHelp>
+<AlternativeTextHelp>Cung cấp một cách có thể truy cập khác để trình bày các thông tin</AlternativeTextHelp>
 </help>
 </AccessibleMedia>
   

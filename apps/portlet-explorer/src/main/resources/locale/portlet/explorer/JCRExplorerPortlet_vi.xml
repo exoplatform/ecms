@@ -13,12 +13,12 @@
       <comment>Nhận xét</comment>
     </label>
     <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
+      <Save>Lưu</Save>
+      <Cancel>Hủy bỏ</Cancel>
     </action>
     <msg>
       <not-support>Bạn không thể nhận xét về kiểu tài liệu này.</not-support>
-      <not-checkedout>You must check out the node before commenting on it.</not-checkedout>
+      <not-checkedout>Bạn phải thoát khỏi nút trước khi đưa ra bình luận.</not-checkedout>
       <content-null>Bạn không thể đăng nhận xét trống.</content-null>
     </msg>
   </UICommentForm>
@@ -34,10 +34,10 @@
       <verygood>Trung bình</verygood>
       <excellent>Khá</excellent>
       <best>Tốt</best>
-      <no-value>no value yet</no-value>
+      <no-value>Chưa có giá trị</no-value>
     </title>
     <label>
-      <my-rating>My Rating:</my-rating>
+      <my-rating>Đánh giá của tôi:</my-rating>
     </label>
     <button>
       <label>
@@ -46,7 +46,7 @@
     </button>
     <msg>
       <not-support>Không được phép bình chọn cho kiểu tài liệu này.</not-support>
-      <not-checkedout>You must check out the node before voting.</not-checkedout>
+      <not-checkedout>Bạn phải thoát khỏi nút trước khi bình chọn.</not-checkedout>
       <vote-restriction>Bạn không thể bình chọn quá 1 lần.</vote-restriction>
     </msg>
   </UIVoteForm>
@@ -60,9 +60,9 @@
       File Explorer Main Drives
       <repository>Các Phân vùng trong Kho dữ liệu</repository>
       <repositoryList>Các Kho dữ liệu</repositoryList>
-      <PersonalDrives>Các Phân vùng Cá nhân</PersonalDrives>
-      <GroupDrives>Các Phân vùng Nhóm</GroupDrives>
-      <GeneralDrives>Các ổ đĩa chung.</GeneralDrives>
+      <PersonalDrives>Các ổ đĩa cá nhân</PersonalDrives>
+      <GroupDrives>Các ổ đĩa của nhóm</GroupDrives>
+      <GeneralDrives>Các ổ đĩa chung</GeneralDrives>
     </title>
     <icon>
       <workspace>
@@ -76,7 +76,7 @@
       <no-view-found>Không có giao diện xem nào được áp dụng cho phân quyền truy cập của bạn tại ổ đĩa '{0}'.</no-view-found>
       <access-denied>Truy cập bị khước từ. Có thể bạn không được phân quyền trong không gian làm việc thuộc phân vùng '{0}'.</access-denied>
       <empty-drives>Truy cập bị khước từ do không có ổ đĩa nào trong kho dữ liệu này hoặc do bạn không được phân quyền để truy cập bất kỳ ổ đĩa nào trong kho dữ liệu này.</empty-drives>
-      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+      <workspace-not-exist>Ổ đĩa '{0}' đã được lưu trong một không gian lưu trữ không được nhận biết. Vui lòng cấu hình lại ổ đĩa này.</workspace-not-exist>
     </msg>
   </UIDrivesBrowser>
   <!--
@@ -87,9 +87,9 @@
   <UIJCRExplorer>
     <msg>
       <refresh-session-success>Phiên làm việc đã được làm mới thành công.</refresh-session-success>
-      <no-node-history>You are in the root node.</no-node-history>
+      <no-node-history>Bạn đang ở thư mục gốc.</no-node-history>
       <save-session-success>Tất cả thay đổi đã được lưu lại.</save-session-success>
-      <target-path-not-found>Bạn không thể truy cập node này vì nó không tồn tại nữa hoặc bạn không có quyền truy cập nó.</target-path-not-found>
+      <target-path-not-found>Bạn không thể truy cập nút này vì nó không tồn tại nữa hoặc bạn không có quyền truy cập nó.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -100,14 +100,14 @@
   <UISideBar>
     <label>
       <Relation>Quan hệ</Relation>
-      <Explorer>File Explorer</Explorer>
+      <Explorer>Quản lý Tệp tin</Explorer>
       <Close>Đóng cây thư mục</Close>
-      <TagExplorer>Tag Cloud</TagExplorer>
+      <TagExplorer>Tập hợp nhãn</TagExplorer>
       <Clipboard>Bảng ghi tạm</Clipboard>
-      <SavedSearches>Saved Searches</SavedSearches>
+      <SavedSearches>Câu tìm kiếm đã lưu</SavedSearches>
     </label>
     <title>
-      <Control>Control Sidebar</Control>
+      <Control>Điều khiển Sidebar</Control>
       <Close>Đóng cây thư mục</Close>
     </title>
   </UISideBar>
@@ -118,9 +118,9 @@
   -->
   <UIViewBar>
     <label>
-      <driveWorkspace>Drive Workspace:</driveWorkspace>
+      <driveWorkspace>Không gian lưu trữ Ổ đĩa:</driveWorkspace>
       <backToJCR>Quay trở về danh sách các ổ đĩa</backToJCR>
-      <setUpBrowser>Set up your browsing preferences</setUpBrowser>
+      <setUpBrowser>Thiết lập hiển thị</setUpBrowser>
       <refesh>Làm mới</refesh>
       <saveSession>Lưu Phiên làm việc</saveSession>
       <currentDrive>Ổ đĩa Hiện tại</currentDrive>
@@ -149,9 +149,9 @@
   #############################################################################
   -->
   <UITreeExplorer>
-    <title>Explorer</title>
+    <title>Trình duyệt</title>
     <label>
-      <Root>Root</Root>
+      <Root>Gốc</Root>
       <webDavView>Tải xuống và cho phép thay đổi</webDavView>
     </label>
     <msg>
@@ -165,11 +165,11 @@
   -->
   <UIViewRelationList>
     <label>
-      <languages-list>Translations</languages-list>
-      <relation-list>Relations</relation-list>
-      <references-list>References</references-list>
-      <no-related-document>Không có Tài liệu Liên quan</no-related-document>
-      <related-document>Tài liệu Liên quan</related-document>
+      <languages-list>Bản dịch</languages-list>
+      <relation-list>Quan hệ</relation-list>
+      <references-list>Tham chiếu</references-list>
+      <no-related-document>Không có tài liệu liên quan.</no-related-document>
+      <related-document>Các tài liệu liên quan</related-document>
     </label>
   </UIViewRelationList>
   <!--
@@ -178,22 +178,22 @@
   #########################################################################################
   -->
   <UIPreferencesForm>
-    <title>Set up your browsing preferences</title>
+    <title>Thiết lập tùy chọn hiển thị</title>
     <label>
       <enableStructure>Hiển thị cấu trúc DMS:</enableStructure>
       <showSideBar>Hiện Sidebar:</showSideBar>
-      <showHiddenNode>Hiện Node Ẩn:</showHiddenNode>
-      <showNonDocument>Show Non-document Nodes:</showNonDocument>
+      <showHiddenNode>Hiện Nút Ẩn:</showHiddenNode>
+      <showNonDocument>Hiển thị tất cả các kiểu nút:</showNonDocument>
       <showRefDocuments>Hiện Tài liệu được Tham chiếu:</showRefDocuments>
       <showItemsByUserInTimeline>Show items by user in Timeline View</showItemsByUserInTimeline>
       <enableDragAndDrop>Bật tính năng Kéo Thả:</enableDragAndDrop>
-      <sortBy>Sort by:</sortBy>
-      <order>Order by:</order>
-      <nodesPerPage>Số node/1 trang:</nodesPerPage>
+      <sortBy>Phân loại theo:</sortBy>
+      <order>Xếp thứ tự theo:</order>
+      <nodesPerPage>Số nút/1 trang:</nodesPerPage>
     </label>
     <action>
-      <Back>#{word.close}</Back>
-      <Save>#{word.save}</Save>
+      <Back>Đóng lại</Back>
+      <Save>Lưu</Save>
     </action>
   </UIPreferencesForm>
   <!--
@@ -204,8 +204,8 @@
   <UIAllItemsPreferenceForm>
     <title>Thiết lập Tùy chọn Bộ lọc</title>
     <action>
-      <Cancel>#{word.cancel}</Cancel>
-      <Save>#{word.save}</Save>
+      <Cancel>Hủy bỏ</Cancel>
+      <Save>Lưu</Save>
     </action>
   </UIAllItemsPreferenceForm>
   <!--
@@ -220,17 +220,17 @@
       <titleField>Tiêu đề</titleField>
     </label>
     <action>
-      <Cancel>#{word.cancel}</Cancel>
-      <Save>#{word.save}</Save>
-      <Back>#{word.back}</Back>
+      <Cancel>Hủy bỏ</Cancel>
+      <Save>Lưu</Save>
+      <Back>Quay lại</Back>
     </action>
     <msg>
-      <rename-successfull>Node '{0}' was renamed to '{1}' successfully.</rename-successfull>
-      <rename-denied>Truy nhập bị khước từ. Bạn không thể đổi tên node này.</rename-denied>
+      <rename-successfull>Nút '{0}' được đổi tên thành công sang '{1}'.</rename-successfull>
+      <rename-denied>Truy nhập bị khước từ. Bạn không thể đổi tên nút này.</rename-denied>
       <fileName-invalid>Tên mới chứa một số ký tự không hợp lệ.</fileName-invalid>
       <newName-same-oldName>Tên mới đã tồn tại. Vui lòng kiểm tra lại.</newName-same-oldName>
-      <version-exception>This node (or the ancestor of this node) is not checked out.</version-exception>
-      <lock-exception>Node này đang bị khóa. Vui lòng mở khóa trước khi đổi tên.</lock-exception>
+      <version-exception>Nút này hoặc nút cha của nó chưa được check out.</version-exception>
+      <lock-exception>Nút này đang bị khóa. Vui lòng mở khóa trước khi đổi tên.</lock-exception>
       <constraintViolation-exception>Lỗi đã xảy ra khi đang đổi tên '{0}'. Vui lòng kiểm tra lại.</constraintViolation-exception>
       <unknown-prefix>Tiền tố '{0}' chưa được đăng ký.</unknown-prefix>
       <rename-error>Lỗi đã xảy ra khi đang đổi tên. Vui lòng kiểm tra lại.</rename-error>
@@ -239,48 +239,48 @@
   <UIPopupWindow>
     <title>
       <UIRenameForm>Đổi tên</UIRenameForm>
-      <UIActionContainer>Edit Action</UIActionContainer>
+      <UIActionContainer>Hành động sửa đổi</UIActionContainer>
       <UIFolderForm>Thêm một thư mục</UIFolderForm>
       <UIUploadManager>Tải lên Tệp tin</UIUploadManager>
       <UITicketForm>Create New Ticket</UITicketForm>
       <UIReferencesList>Danh sách Tham chiếu</UIReferencesList>
-      <UIExportNode>Export</UIExportNode>
-      <UINodeTypeInfo>Node Type Information</UINodeTypeInfo>
-      <UIVersionInfo>Version Info</UIVersionInfo>
-      <UIActivateVersion>Activate Version</UIActivateVersion>
-      <UIAuditingInfo>Auditing Information</UIAuditingInfo>
-      <UIActivateAuditing>Activate Auditing</UIActivateAuditing>
+      <UIExportNode>Kết xuất dữ liệu</UIExportNode>
+      <UINodeTypeInfo>Thông tin Nút</UINodeTypeInfo>
+      <UIVersionInfo>Thông tin Phiên bản</UIVersionInfo>
+      <UIActivateVersion>Kích hoạt Quản lý phiên bản</UIActivateVersion>
+      <UIAuditingInfo>Kiểm tra thông tin</UIAuditingInfo>
+      <UIActivateAuditing>Kích hoạt chức năng ghi lại các thay đổi trên một node</UIActivateAuditing>
       <UIPermissionManager>Quản lý Phân quyền</UIPermissionManager>
       <UIPropertiesManager>Quản lý Thuộc tính</UIPropertiesManager>
       <UIECMSearch>Tìm kiếm Nâng cao</UIECMSearch>
-      <UISavedQuery>Saved Queries List</UISavedQuery>
+      <UISavedQuery>Danh sách Truy vấn được lưu</UISavedQuery>
       <UIWatchDocumentForm>Theo dõi Tài liệu</UIWatchDocumentForm>
-      <UIActionManager>Manage Actions</UIActionManager>
+      <UIActionManager>Quản lý Hành động</UIActionManager>
       <UIDocumentForm>Chỉnh sửa Tài liệu</UIDocumentForm>
       <UIDocumentFormController>Thêm Tài liệu Mới</UIDocumentFormController>
       <EditFormController>Chỉnh sửa Tài liệu</EditFormController>
       <UIRelationManager>Thêm Quan hệ</UIRelationManager>
       <UICategoryManager>Thêm Danh mục</UICategoryManager>
-      <UIImportNode>Import</UIImportNode>
+      <UIImportNode>Nạp dữ liệu</UIImportNode>
       <UIViewMetadataManager>Xem Siêu dữ liệu</UIViewMetadataManager>
       <UIVoteForm>Bình chọn Tài liệu</UIVoteForm>
       <UICommentForm>Viết nhận xét</UICommentForm>
       <UIPreferencesForm>Tùy chọn Thiết lập</UIPreferencesForm>
       <UIPublicationManager>Quản lý Đăng tải</UIPublicationManager>
       <UIConfirmMessage>Có xóa không?</UIConfirmMessage>
-      <UIDeleteFileConfirmMessage>Delete File ?</UIDeleteFileConfirmMessage>
-      <UIDeleteFolderConfirmMessage>Delete Folder ?</UIDeleteFolderConfirmMessage>
-      <UIDeleteItemsConfirmMessage>Delete Items ?</UIDeleteItemsConfirmMessage>
+      <UIDeleteFileConfirmMessage>Xóa Tệp tin?</UIDeleteFileConfirmMessage>
+      <UIDeleteFolderConfirmMessage>Xoá Thư mục?</UIDeleteFolderConfirmMessage>
+      <UIDeleteItemsConfirmMessage>Xóa các mục?</UIDeleteItemsConfirmMessage>
       <UIRestoreConfirmMessage>Xác nhận Khôi phục</UIRestoreConfirmMessage>
-      <UIActivePublication>Enroll to Publication Lifecycle</UIActivePublication>
+      <UIActivePublication>Bắt đầu chu trình xuất bản</UIActivePublication>
       <UITaggingForm>Gán nhãn Tài liệu</UITaggingForm>
       <UIMultiLanguageForm>Đa Ngôn ngữ</UIMultiLanguageForm>
       <UIMultiLanguageManager>Đa Ngôn ngữ</UIMultiLanguageManager>
       <UIThumbnailForm>Thêm Ảnh Nhỏ</UIThumbnailForm>
       <UIAllItemsPreferenceForm>Thiết lập Tùy chọn</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Chọn Đường dẫn Khôi phục</UISelectRestorePath>
-      <UISEOForm>Manage SEO</UISEOForm>
-      <UISEOToolbarForm>Manage SEO</UISEOToolbarForm>
+      <UISEOForm>Quản lý SEO</UISEOForm>
+      <UISEOToolbarForm>Quản lý SEO</UISEOToolbarForm>
     </title>
     <header>
       <workspace>Không gian làm việc</workspace>
@@ -297,7 +297,7 @@
     <label>
       <name>Tên</name>
       <textToModify>Văn bản cần sửa đổi</textToModify>
-      <fileToUpload>Tải nội dung mới cho tài liệu đó (phải có cùng kiểu mime)</fileToUpload>
+      <fileToUpload>Tải nội dung mới cho tài liệu đó (phải có cùng định dạng).</fileToUpload>
     </label>
   </UIResourceForm>
   <!--
@@ -309,7 +309,7 @@
     <tooltip>
       <AddFolder>Thư mục Mới</AddFolder>
       <AddDocument>Nội dung Mới</AddDocument>
-      <EditDocument>Edit</EditDocument>
+      <EditDocument>Chỉnh sửa</EditDocument>
       <Upload>Tải lên</Upload>
       <Paste>Dán</Paste>
       <Search>Tìm kiếm</Search>
@@ -319,117 +319,117 @@
       <Vote>Bình chọn</Vote>
       <Comment>Nhận xét</Comment>
       <MultiLanguage>Add/Edit Localized Content</MultiLanguage>
-      <ManageVersions>Versions</ManageVersions>
+      <ManageVersions>Phiên bản</ManageVersions>
       <ManageAuditing>Quản lý thay đổi</ManageAuditing>
-      <ManagePublications>Publications</ManagePublications>
-      <ManageCategories>Categories</ManageCategories>
-      <ManageRelations>Relations</ManageRelations>
-      <ManageActions>Actions</ManageActions>
-      <ExportNode>Export</ExportNode>
-      <ImportNode>Import</ImportNode>
-      <OverloadThumbnail>Overload Thumbnail</OverloadThumbnail>
+      <ManagePublications>Xuất bản</ManagePublications>
+      <ManageCategories>Danh mục</ManageCategories>
+      <ManageRelations>Quan hệ</ManageRelations>
+      <ManageActions>Hành động</ManageActions>
+      <ExportNode>Xuất</ExportNode>
+      <ImportNode>Nhập</ImportNode>
+      <OverloadThumbnail>Chèn Hình nhỏ</OverloadThumbnail>
       <ManageHidden>Ẩn/Hiện Nội dung</ManageHidden>
       <ViewReferences>Các Tham chiếu</ViewReferences>
-      <ViewNodeType>Types</ViewNodeType>
-      <ViewPermissions>Permissions</ViewPermissions>
-      <ViewProperties>Properties</ViewProperties>
-      <ViewMetadatas>Metadata</ViewMetadatas>
+      <ViewNodeType>Xem cấu trúc node</ViewNodeType>
+      <ViewPermissions>Phân quyền</ViewPermissions>
+      <ViewProperties>Thuộc tính</ViewProperties>
+      <ViewMetadatas>Siêu dữ liệu</ViewMetadatas>
       <ViewRelations>Hiện/Ẩn các Quan hệ</ViewRelations>
       <ShowJCRStructure>Hiện/Ẩn Cấu trúc Nội dung</ShowJCRStructure>
     </tooltip>
     <msg>
-      <cannot-action-in-rootnode>You cannot perform this action in the root node.</cannot-action-in-rootnode>
-      <node-checkedin>You must check out first.</node-checkedin>
-      <cannot-enable-version-rootnode>Cannot enable versioning for the root node.</cannot-enable-version-rootnode>
-      <cannot-enable-publication-rootnode>Cannot enable publication for the root node.</cannot-enable-publication-rootnode>
+      <cannot-action-in-rootnode>Bạn không thể thực hiện hành động này ở nút gốc.</cannot-action-in-rootnode>
+      <node-checkedin>Bạn phải check out trước.</node-checkedin>
+      <cannot-enable-version-rootnode>Không thể kích hoạt tính năng lập phiên bản cho nút gốc.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Không thể kích hoạt tính năng xuất bản cho nút gốc.</cannot-enable-publication-rootnode>
       <manage-publication>
-        <not-supported-nodetype>The publication supports the document node only.</not-supported-nodetype>
-        <no-publication-lifecycle>No publication lifecycle is configured.</no-publication-lifecycle>
+        <not-supported-nodetype>Tính năng xuất bản chỉ hỗ trợ nút tài liệu.</not-supported-nodetype>
+        <no-publication-lifecycle>Không có chu trình xuất bản nào được cấu hình.</no-publication-lifecycle>
       </manage-publication>
-      <unsubcriber-lifecycle>The node was already unsubscribed.</unsubcriber-lifecycle>
-      <not-supported-nodetype>The unsubscriber lifecycle supports the document node only.</not-supported-nodetype>
-      <unsubcriber-lifecycle-finish>The node was unsubscribed successfully.</unsubcriber-lifecycle-finish>
-      <access-false>The node is not an article or checked in.</access-false>
-      <unsupported-action>This action is not supported.</unsupported-action>
-      <not-relationable>This node has not yet had any related links to another node.</not-relationable>
-      <node-pasted>Node '{0}' đã được dán vào vị trí '{1}'. Thao tác này đã được lưu lại.</node-pasted>
-      <no-node-selected>Không có node nào được sao chép.</no-node-selected>
-      <unable-edit>Node'{0}' with nodetype '{1}' is not supported to edit.</unable-edit>
-      <not-support>Không thể chỉnh sửa node đã chọn.</not-support>
-      <template-null>This node has no dialog available.</template-null>
-      <keyword-null>There are no keywords to search.</keyword-null>
+      <unsubcriber-lifecycle>Nút đã bỏ đăng ký.</unsubcriber-lifecycle>
+      <not-supported-nodetype>Bỏ đăng ký chỉ hỗ trợ cho định dạng tài liệu.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>Nút đã được ngừng đăng ký thành công.</unsubcriber-lifecycle-finish>
+      <access-false>Nút này không phải là một bài viết hoặc chưa được check in.</access-false>
+      <unsupported-action>Hành động này không được hỗ trợ.</unsupported-action>
+      <not-relationable>Nút này chưa có bất kỳ liên kết nào có quan hệ với nút khác.</not-relationable>
+      <node-pasted>Nút '{0}' đã được dán vào vị trí '{1}'. Thao tác này đã được lưu lại.</node-pasted>
+      <no-node-selected>Không có nút nào được sao chép.</no-node-selected>
+      <unable-edit>Nút '{0}' với kiểu nút '{1}' không được hỗ trợ để chỉnh sửa.</unable-edit>
+      <not-support>Không thể chỉnh sửa nút đã chọn.</not-support>
+      <template-null>Nút này không sẵn có hội thoại nào.</template-null>
+      <keyword-null>Không có từ khóa nào để tìm kiếm.</keyword-null>
       <not-found>Không tìm thấy kết quả nào.</not-found>
       <keyword-not-allow>Không cho phép từ khóa này.</keyword-not-allow>
-      <is-not-referenable>Node '{0}' cannot be referenceable.</is-not-referenable>
-      <access-denied>Truy cập bị khước từ. Bạn không được phân quyền chỉnh sửa trên node này.</access-denied>
-      <access-add-denied>Truy cập bị khước từ. Bạn không được phân quyền thêm mới trên node này.</access-add-denied>
-      <item-existed>This node already exists. It cannot have the same name as its sibling.</item-existed>
+      <is-not-referenable>Nút '{0}' không thể tham chiếu được.</is-not-referenable>
+      <access-denied>Truy cập bị khước từ. Bạn không được phân quyền chỉnh sửa trên nút này.</access-denied>
+      <access-add-denied>Truy cập bị khước từ. Bạn không được phân quyền thêm mới trên nút này.</access-add-denied>
+      <item-existed>Nút này đã tồn tại vì không thể có cùng tên với nút khác.</item-existed>
       <removed-hidden-mixin>Bạn đã gỡ bỏ thành công mixin ẩn.</removed-hidden-mixin>
       <added-hidden-mixin>Bạn đã thêm mixin ẩn thành công.</added-hidden-mixin>
       <not-supported>Chức năng này chỉ hỗ trợ cho kiểu tài liệu.</not-supported>
-      <empty-file-type>Bạn không thể thêm tài liệu cho node này.</empty-file-type>
-      <unsupported-watch>Chỉ có thể theo dõi được node tài liệu.</unsupported-watch>
-      <watch-checkedin>You must check out the node before watching.</watch-checkedin>
-      <unsupported-tagging>Chỉ có thể gán thẻ cho node tài liệu.</unsupported-tagging>
-      <tagnode-checkedin>You must check out the node before tagging.</tagnode-checkedin>
-      <unsupported-multilanguage>Bạn không thể thêm ngôn ngữ cho node này vì node này không phải thuộc kiểu tài liệu hoặc là kiểu kết hợp giữa một số kiểu.</unsupported-multilanguage>
-      <multilang-checkedin>You must check out the node before adding language.</multilang-checkedin>
+      <empty-file-type>Bạn không thể thêm tài liệu cho nút này.</empty-file-type>
+      <unsupported-watch>Chỉ những nút tài liệu mới cho phép chế độ theo dõi.</unsupported-watch>
+      <watch-checkedin>Bạn phải check out nút trước khi theo dõi.</watch-checkedin>
+      <unsupported-tagging>Chỉ có thể gán nhãn cho nút tài liệu.</unsupported-tagging>
+      <tagnode-checkedin>Bạn phải check out nút trước khi gán nhãn.</tagnode-checkedin>
+      <unsupported-multilanguage>Bạn không thể thêm ngôn ngữ cho nút này vì nút này không phải thuộc kiểu tài liệu hoặc là kiểu kết hợp giữa một số kiểu.</unsupported-multilanguage>
+      <multilang-checkedin>Bạn phải check out nút trước khi thêm ngôn ngữ.</multilang-checkedin>
     </msg>
     <title>
       <select-tab>Chọn Tab</select-tab>
       <SimpleSearch>Tìm kiếm Nhanh</SimpleSearch>
       <AdvanceSearch>Tìm kiếm Nâng cao</AdvanceSearch>
-      <SavedQueries>Saved Queries</SavedQueries>
-      <ShowAllOwnedByUser>Show All My Items</ShowAllOwnedByUser>
-      <ShowAllFavourite>Show All Favorite Items</ShowAllFavourite>
-      <ShowAllHidden>Show All Hidden Items</ShowAllHidden>
-      <ShowAllFromTrash>Show All Items From Trash</ShowAllFromTrash>
+      <SavedQueries>Truy vấn được lưu</SavedQueries>
+      <ShowAllOwnedByUser>Hiển thị các tài liệu của tôi</ShowAllOwnedByUser>
+      <ShowAllFavourite>Hiển thị các tài liệu trong mục ưa thích</ShowAllFavourite>
+      <ShowAllHidden>Hiển thị các tài liệu ẩn</ShowAllHidden>
+      <ShowAllFromTrash>Hiển thị các tài liệu trong thùng rác</ShowAllFromTrash>
     </title>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-      <has-not-permission>Truy cập bị khước từ. Bạn không có quyền thêm mới trên node này.</has-not-permission>
-      <has-not-edit-permission>Truy cập bị khước từ. Bạn không có quyền chỉnh sửa trên node này. Vui lòng liên hệ với quản trị viên.</has-not-edit-permission>
-      <cannot-login-node>Bạn không thể truy cập và dán node ở đây.</cannot-login-node>
-      <cannot-paste-nodetype>Bạn không thể dán node ở đây.</cannot-paste-nodetype>
-      <has-not-permission-unlok>Bạn không được phân quyền để mở khóa node này.</has-not-permission-unlok>
-      <bound-exception>Bạn không được phân quyền để đổi tên node này. Vui lòng liên hệ với quản trị viên.</bound-exception>
-      <bound-move-exception>Bạn không thể di chuyển một node đến chính nó hoặc đến node con của nó.</bound-move-exception>
-      <does-not-support-auditing>Bạn không thể kích hoạt tính năng ghi lại thay đổi trên node này.</does-not-support-auditing>
-      <can-not-rename-node>Bạn không được phân quyền để đổi tên node này. Vui lòng liên hệ với quản trị viên để được phân quyền thích hợp.</can-not-rename-node>
-      <can-not-cut-node>Bạn không được phân quyền để cắt node này. Vui lòng liên hệ với quản trị viên.</can-not-cut-node>
-      <can-not-remove-node>Bạn không được phân quyền để gỡ bỏ node này. Vui lòng liên hệ với quản trị viên.</can-not-remove-node>
-      <can-not-lock-node>Bạn không được phân quyền để khóa node {0}. Vui lòng liên hệ với quản trị viên.</can-not-lock-node>
-      <can-not-unlock-node>Bạn không được phân quyền để mở khóa node này. Vui lòng liên hệ với quản trị viên.</can-not-unlock-node>
-      <no-node>Vui lòng chọn ít nhất một node trước khi dán.</no-node>
-      <can-not-paste-node>Bạn không được phân quyền để chuyển đến node này. Vui lòng liên hệ với quản trị viên.</can-not-paste-node>
-      <can-not-move-node>You do not have permission to move this node. Please contact the administrator.</can-not-move-node>
-      <does-not-support-versioning>Bạn không được phân quyền để chuyển đến node này. Vui lòng liên hệ với quản trị viên.</does-not-support-versioning>
+      <has-not-permission>Truy cập bị khước từ. Bạn không có quyền thêm mới trên nút này.</has-not-permission>
+      <has-not-edit-permission>Truy cập bị khước từ. Bạn không có quyền chỉnh sửa trên nút này. Vui lòng liên hệ với quản trị viên.</has-not-edit-permission>
+      <cannot-login-node>Bạn không thể truy cập và dán nút ở đây.</cannot-login-node>
+      <cannot-paste-nodetype>Bạn không thể dán nút ở đây.</cannot-paste-nodetype>
+      <has-not-permission-unlok>Bạn không được phân quyền để mở khóa nút này.</has-not-permission-unlok>
+      <bound-exception>Bạn không được phân quyền để đổi tên nút này. Vui lòng liên hệ với quản trị viên.</bound-exception>
+      <bound-move-exception>Bạn không thể di chuyển một nút đến chính nó hoặc đến nút con của nó.</bound-move-exception>
+      <does-not-support-auditing>Bạn không thể kích hoạt tính năng ghi lại thay đổi trên nút này.</does-not-support-auditing>
+      <can-not-rename-node>Bạn không được phân quyền để đổi tên nút này. Vui lòng liên hệ với quản trị viên để được phân quyền thích hợp.</can-not-rename-node>
+      <can-not-cut-node>Bạn không được phân quyền để cắt nút này. Vui lòng liên hệ với quản trị viên.</can-not-cut-node>
+      <can-not-remove-node>Bạn không được phân quyền để xoá nút này. Vui lòng liên hệ với quản trị viên.</can-not-remove-node>
+      <can-not-lock-node>Bạn không được phân quyền để khóa nút {0}. Vui lòng liên hệ với quản trị viên.</can-not-lock-node>
+      <can-not-unlock-node>Bạn không được phân quyền để mở khóa nút này. Vui lòng liên hệ với quản trị viên.</can-not-unlock-node>
+      <no-node>Vui lòng chọn ít nhất một nút trước khi dán.</no-node>
+      <can-not-paste-node>Bạn không được phân quyền để chuyển đến nút này. Vui lòng liên hệ với quản trị viên.</can-not-paste-node>
+      <can-not-move-node>Bạn không được phân quyền để di chuyển nút này. Vui lòng liên hệ với người quản trị.</can-not-move-node>
+      <does-not-support-versioning>Bạn không được phân quyền để chuyển đến nút này. Vui lòng liên hệ với quản trị viên.</does-not-support-versioning>
       <path-not-found>Thành phần này đã bị xóa hoặc thay đổi. Vui lòng nhấp nút Làm mới.</path-not-found>
-      <paste-lock-exception>Bạn không thể dán '{0}' lên node này bởi vì node nguồn hoặc node đích bị khóa hoặc liên quan với node bị khóa.</paste-lock-exception>
-      <can-not-checkin-node>You cannot check in this node. Please check that you have the right permissions.</can-not-checkin-node>
-      <can-not-checkout-node>You cannot check out this node. Please check that you have the right permissions.</can-not-checkout-node>
-      <move-constraint-exception>Lỗi đã xảy ra khi đang di chuyển node này.</move-constraint-exception>
-      <not-lock-owner>Bạn không thể mở khóa node này bởi vì bạn không phải là người thực hiện khóa node.</not-lock-owner>
-      <is-checked-in>Please check out this node before renaming.</is-checked-in>
-      <is-checked-in-lock>Please check out this node before locking.</is-checked-in-lock>
-      <cant-lock>Bạn không thể khóa node này.</cant-lock>
-      <node-locked>The item with the path {0} or upper level is locked.</node-locked>
-      <can-not-delete>Vui lòng đóng node này trước khi xóa.</can-not-delete>
-      <can-not-delete-version>Bạn không thể xóa node này vì nó đang được thay đổi phiên bản.</can-not-delete-version>
-      <not-support>Bạn không thể xóa node đã chọn. Vui lòng chọn node khác.</not-support>
-      <current-node-not-allow-paste>Bạn không thể dán kiểu node đã sao chép trên node hiện tại.</current-node-not-allow-paste>
-      <copied-node-in-versioning>You cannot paste the copied node. It is versioning.</copied-node-in-versioning>
-      <parent-node-locked>Bạn không được phân quyền để mở khóa node '{0}'.</parent-node-locked>
-      <this-node-locked-by-parent>You cannot unlock this node. It is locked by the parent or ancestor node.</this-node-locked-by-parent>
-      <paste-node-same-name>You cannot paste a node with the same name as a node in the destination folder.</paste-node-same-name>
-      <has-not-add-permission>You do not have permission to add a new node.</has-not-add-permission>
-      <node-cutting>Node is being cut. You cannot paste it here.</node-cutting>
-      <access-denied>Access denied. You may not have permission in this node.</access-denied>
-      <remove-verion-exception>You cannot remove this node because it (or its ancestor) is checked in.</remove-verion-exception>
-      <remove-referentialIntegrityException>Bạn không thể xóa node này vì nó hiện đang là đích đến của thuộc tính Tham chiếu.</remove-referentialIntegrityException>
-      <constraintviolation-exception>Không tìm thấy mục bắt buộc jcr:uuid. Có thể node đã bị xóa hoặc thay đổi. Vui lòng nhấp nút Làm mới.</constraintviolation-exception>
-      <path-not-found-exception>Node này đã bị xóa hoặc thay đổi. Vui lòng nhấp nút Làm mới.</path-not-found-exception>
+      <paste-lock-exception>Bạn không thể dán '{0}' lên nút này bởi vì nút nguồn hoặc nút đích bị khóa hoặc liên quan với nút bị khóa.</paste-lock-exception>
+      <can-not-checkin-node>Bạn không thể check-in nút này. Hãy kiểm tra xem bạn có đúng quyền không.</can-not-checkin-node>
+      <can-not-checkout-node>Bạn không thể check out nút này. Hãy kiểm tra xem bạn có đúng quyền không.</can-not-checkout-node>
+      <move-constraint-exception>Lỗi đã xảy ra khi đang di chuyển nút.</move-constraint-exception>
+      <not-lock-owner>Bạn không thể mở khóa nút này bởi vì bạn không phải là người thực hiện khóa nút.</not-lock-owner>
+      <is-checked-in>Vui lòng check out nút này trước khi đổi tên.</is-checked-in>
+      <is-checked-in-lock>Vui lòng check out nút này trước khi khóa.</is-checked-in-lock>
+      <cant-lock>Bạn không thể khóa nút này.</cant-lock>
+      <node-locked>Khoản mục với đường dẫn {0} hoặc vị trí cao hơn đang bị khóa.</node-locked>
+      <can-not-delete>Vui lòng đóng nút này trước khi xóa.</can-not-delete>
+      <can-not-delete-version>Bạn không thể xóa nút này vì nó đang được đánh phiên bản.</can-not-delete-version>
+      <not-support>Bạn không thể xóa nút đã chọn. Vui lòng chọn nút khác.</not-support>
+      <current-node-not-allow-paste>Bạn không thể dán kiểu nút đã sao chép trên node hiện tại.</current-node-not-allow-paste>
+      <copied-node-in-versioning>Bạn không thể dán nút được sao chép trong quá trình đánh phiên bản.</copied-node-in-versioning>
+      <parent-node-locked>Bạn không được phân quyền để mở khóa nút '{0}'.</parent-node-locked>
+      <this-node-locked-by-parent>Bạn không thể mở khóa nút này vì nó đã bị khóa bởi nút cha hoặc nút mức trên.</this-node-locked-by-parent>
+      <paste-node-same-name>Thư mục đến không cho phép dán nút trùng tên.</paste-node-same-name>
+      <has-not-add-permission>Bạn không được phân quyền để thêm mới nút.</has-not-add-permission>
+      <node-cutting>Nút đang được cắt. Bạn không thể dán ở đây.</node-cutting>
+      <access-denied>Truy nhập bị từ chối! Có thể bạn không có quyền trên nút này.</access-denied>
+      <remove-verion-exception>Không thể gỡ bỏ vì nút này (hoặc nút cha của nó) đang được checkin.</remove-verion-exception>
+      <remove-referentialIntegrityException>Bạn không thể xóa nút này vì nó hiện đang là đích đến của thuộc tính Tham chiếu.</remove-referentialIntegrityException>
+      <constraintviolation-exception>Không tìm thấy thuộc tính jcr:uuid. Có thể nút đã bị xóa hoặc thay đổi. Vui lòng nhấp nút Làm mới.</constraintviolation-exception>
+      <path-not-found-exception>Nút này đã bị xóa hoặc thay đổi. Vui lòng nhấp nút Làm mới.</path-not-found-exception>
       <not-exist-categories>Danh mục không tồn tại.</not-exist-categories>
     </msg>
   </UIPopupMenu>
@@ -440,7 +440,7 @@
   -->
   <UIFolderForm>
     <action>
-      <Cancel>#{word.cancel}</Cancel>
+      <Cancel>Hủy bỏ</Cancel>
       <Save>Tạo Thư mục</Save>
     </action>
     <label>
@@ -452,18 +452,18 @@
       <addFolder-successful>Thêm thành công thư mục '{0}'.</addFolder-successful>
       <name-invalid>Vui lòng nhập tên thư mục.</name-invalid>
       <title-invalid>Vui lòng nhập tiêu đề thư mục.</title-invalid>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
+      <name-not-allowed>Tên này không hợp lệ.</name-not-allowed>
       <fileName-error>Tên tệp tin không hợp lệ.</fileName-error>
-      <constraint-violation>The current node does not allow you to add the node type '{0}'.</constraint-violation>
+      <constraint-violation>Nút hiện tại không cho phép bạn thêm kiểu nút '{0}'.</constraint-violation>
       <repository-exception>Lỗi đã xảy ra. Vui lòng liên hệ với quản trị viên của bạn để có thêm chi tiết.</repository-exception>
-      <repository-exception-permission>Bạn không được phân quyền để thêm mới thư mục vào node này.</repository-exception-permission>
+      <repository-exception-permission>Bạn không được phân quyền để thêm mới thư mục vào nút này.</repository-exception-permission>
       <numberformat-exception>Bạn không thể lưu thư mục này. Tên đã cung cấp phải ở định dạng số.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>Bạn không thể lưu thư mục này. Node này không cho phép hai node cùng tên.</not-allow-sameNameSibling>
+      <not-allow-sameNameSibling>Quá trình lưu không thành công do thư mục hiện tại không cho phép trùng tên.</not-allow-sameNameSibling>
       <ntFolder-not-avaiable>Bạn phải chọn kiểu thư mục tùy chỉnh.</ntFolder-not-avaiable>
     </msg>
     <help>
-      <customTypeCheckBoxHelp>Check if you intend to store web contents or custom document types in this folder</customTypeCheckBoxHelp>
+      <customTypeCheckBoxHelp>Đánh dấu chọn nếu bạn định lưu nội dung web hay kiểu tài liệu tùy chỉnh trong thư mục này</customTypeCheckBoxHelp>
     </help>
   </UIFolderForm>
   <!--
@@ -477,9 +477,9 @@
     </title>
     <msg>
       <!-- Delte one node is not in trash and have no relation -->
-      <confirm-delete>Are you sure you want to delete the item '{0}'?</confirm-delete>
-      <confirm-delete-file>Are you sure you want to delete the file '{0}'?</confirm-delete-file>
-      <confirm-delete-folder>Are you sure you want to delete the folder '{0}' and all subfolders?</confirm-delete-folder>
+      <confirm-delete>Bạn có chắc chắn muốn xoá bỏ khoản mục '{0}' không?</confirm-delete>
+      <confirm-delete-file>Bạn có chắc chắn muốn xóa tệp tin '{0}' không?</confirm-delete-file>
+      <confirm-delete-folder>Bạn có chắc chắn muốn xóa thư mục '{0}' và tất cả các thư mục con không?</confirm-delete-folder>
       
       <!-- Delte one node is in trash and have no relation -->
       <confirm-delete-permanently>Bạn có chắc chắn muốn xóa vĩnh viễn mục '{0}' không?</confirm-delete-permanently>
@@ -487,18 +487,18 @@
       <confirm-delete-folder-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn thư mục '{0}' và tất cả thư mục con của nó không?</confirm-delete-folder-permanently>
       
       <!-- Delte one node is not in trash and have relations -->
-      <confirm-delete-has-relations>Are you sure you want to delete the item '{0}' and its references?</confirm-delete-has-relations>
-      <confirm-delete-file-has-relations>Are you sure you want to delete the file '{0}' and its references?</confirm-delete-file-has-relations>
-      <confirm-delete-folder-has-relations>Are you sure you want to delete the folder '{0}' and its references?</confirm-delete-folder-has-relations>
+      <confirm-delete-has-relations>Bạn có chắc chắn muốn xóa mục '{0}' và các tham chiếu của nó không?</confirm-delete-has-relations>
+      <confirm-delete-file-has-relations>Bạn có chắc chắn muốn xóa tệp tin '{0}' và các tham chiếu của nó không?</confirm-delete-file-has-relations>
+      <confirm-delete-folder-has-relations>Bạn có chắc chắn muốn xóa thư mục '{0}' và các tham chiếu của nó không?</confirm-delete-folder-has-relations>
       
       <!-- Delte multiple nodes, not in Trash, have no relations -->
-      <confirm-delete-multi-nodes-generic>Are you sure you want to delete the {0} selected items?</confirm-delete-multi-nodes-generic>  
-      <confirm-delete-multi-nodes-file>Are you sure you want to delete the {0} selected files?</confirm-delete-multi-nodes-file>
-      <confirm-delete-multi-nodes-folder>Are you sure you want to delete the {0} selected folders and all subfolders?</confirm-delete-multi-nodes-folder>
-      <confirm-delete-multi-nodes-generic-and-file>Are you sure you want to delete the {0} selected items and files?</confirm-delete-multi-nodes-generic-and-file>
-      <confirm-delete-multi-nodes-generic-and-folder>Are you sure you want to delete the {0} selected items, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-folder>
-      <confirm-delete-multi-nodes-file-and-folder>Are you sure you want to delete the {0} selected files, folders and all subfolders?</confirm-delete-multi-nodes-file-and-folder>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder>Are you sure you want to delete the {0} selected items, files, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder>
+      <confirm-delete-multi-nodes-generic>Bạn có chắc chắn muốn xóa {0} khoản mục đã chọn không?</confirm-delete-multi-nodes-generic>  
+      <confirm-delete-multi-nodes-file>Bạn có chắc chắn muốn xóa {0} tệp tin đã chọn không?</confirm-delete-multi-nodes-file>
+      <confirm-delete-multi-nodes-folder>Bạn có chắc chắn muốn xóa {0} thư mục đã chọn và tất cả thư mục con không?</confirm-delete-multi-nodes-folder>
+      <confirm-delete-multi-nodes-generic-and-file>Bạn có chắc chắn muốn xóa {0} khoản mục và tệp tin đã chọn không?</confirm-delete-multi-nodes-generic-and-file>
+      <confirm-delete-multi-nodes-generic-and-folder>Bạn có chắc chắn muốn xóa {0} khoản mục, thư mục và tất cả thư mục con đã chọn không?</confirm-delete-multi-nodes-generic-and-folder>
+      <confirm-delete-multi-nodes-file-and-folder>Bạn có chắc chắn muốn xóa {0} tệp tin, thư mục và tất cả thư mục con đã chọn không?</confirm-delete-multi-nodes-file-and-folder>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder>Bạn có chắc chắn muốn xóa {0} khoản mục, tệp tin, thư mục và tất cả các thư mục con đã chọn không?</confirm-delete-multi-nodes-generic-and-file-and-folder>
       
       <!-- Delte multiple nodes, in Trash -->
       <confirm-delete-multi-nodes-generic-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn {0} mục đã chọn không?</confirm-delete-multi-nodes-generic-permanently>  
@@ -510,81 +510,81 @@
       <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn {0} mục, tệp tin và thư mục đã chọn và tất cả các thư mục con của chúng không?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
       
       <!-- Delte multiple nodes, have relations -->
-      <confirm-delete-multi-nodes-generic-have-relations>Are you sure you want to delete the {0} selected items and their references?</confirm-delete-multi-nodes-generic-have-relations>  
-      <confirm-delete-multi-nodes-file-have-relations>Are you sure you want to delete the {0} selected files and their references?</confirm-delete-multi-nodes-file-have-relations>
-      <confirm-delete-multi-nodes-folder-have-relations>Are you sure you want to delete the {0} selected folders, all subfolders and their references?</confirm-delete-multi-nodes-folder-have-relations>
-      <confirm-delete-multi-nodes-generic-and-file-have-relations>Are you sure you want to delete the {0} selected items, files and their references?</confirm-delete-multi-nodes-generic-and-file-have-relations>
+      <confirm-delete-multi-nodes-generic-have-relations>Bạn có chắc chắn muốn xóa {0} khoản mục đã chọn và các tham chiếu của chúng không?</confirm-delete-multi-nodes-generic-have-relations>  
+      <confirm-delete-multi-nodes-file-have-relations>Bạn có chắc chắn muốn xóa {0} tệp tin đã chọn và các tham chiếu của chúng không?</confirm-delete-multi-nodes-file-have-relations>
+      <confirm-delete-multi-nodes-folder-have-relations>Bạn có chắc chắn muốn xóa {0} thư mục đã chọn, tất cả các thư mục con và tham chiếu của chúng không?</confirm-delete-multi-nodes-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-have-relations>Bạn có chắc chắn muốn xóa {0} khoản mục, tệp tin đã chọn và các tham chiếu của chúng không?</confirm-delete-multi-nodes-generic-and-file-have-relations>
       <confirm-delete-multi-nodes-generic-and-folder-have-relations>Bạn có chắc chắn muốn xóa {0} mục đã chọn, các tham chiếu, thư mục và tất cả thư mục con của chúng không?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
       <confirm-delete-multi-nodes-file-and-folder-have-relations>Bạn có chắc chắn muốn xóa {0} tệp tin đã chọn, các tham chiếu, thư mục và tất cả thư mục con của chúng không?</confirm-delete-multi-nodes-file-and-folder-have-relations>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Are you sure you want to delete the {0} selected items, files, their references, folders and all subfolders?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Bạn có chắc chắn muốn xóa {0} khoản mục, tệp tin đã chọn, các tham chiếu, thư mục và tất cả thư mục con của chúng không?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
       
-      <feedback-delete>'{0}' was deleted succesfully.</feedback-delete>
-      <feedback-delete-multi>{0} items were deleted succesfully.</feedback-delete-multi>      
-      <feedback-delete-permanently>'{0}' was removed permanently.</feedback-delete-permanently>
-      <feedback-delete-permanently-multi>{0} items were removed permanently.</feedback-delete-permanently-multi>
-      <undo-delete>Undo</undo-delete>
-      <feedback-restore>'{0}' was successfully restored.</feedback-restore>
-      <feedback-restore-multi>{0} items were succesfully restored.</feedback-restore-multi>
+      <feedback-delete>'{0}' đã được xóa thành công.</feedback-delete>
+      <feedback-delete-multi>{0} mục đã được xóa thành công.</feedback-delete-multi>      
+      <feedback-delete-permanently>'{0}' đã được xoá vĩnh viễn.</feedback-delete-permanently>
+      <feedback-delete-permanently-multi>{0} mục đã được xóa vĩnh viễn.</feedback-delete-permanently-multi>
+      <undo-delete>Hoàn tác</undo-delete>
+      <feedback-restore>'{0}' đã được khôi phục thành công.</feedback-restore>
+      <feedback-restore-multi>{0} mục đã được khôi phục thành công.</feedback-restore-multi>
       
-      <confirm-restore>Một node có cùng tên đã từng tồn tại ở địa điểm cũ của node '{0}'. Bạn có chắc chắn muốn khôi phục node này không?</confirm-restore>
+      <confirm-restore>Một nút cùng tên đang tồn tại ở vị trí cũ của nút '{0}'. Bạn có chắc chắn muốn khôi phục nút này không?</confirm-restore>
       <confirm-move>Bạn có chắc chắn muốn chuyển không?</confirm-move>
-      <node-cut>Node '{0}' đã được cắt.</node-cut>
-      <execute-successfully>The custom action '{0}' has been executed.</execute-successfully>
-      <save-node-success>Node '{0}' đã được lưu lại.</save-node-success>
-      <move-problem>Bạn không thể di chuyển node '{0}' sang '{1}' vì có vấn đề với phân quyền hoặc điều kiện ràng buộc.</move-problem>
+      <node-cut>Nút '{0}' đã được cắt.</node-cut>
+      <execute-successfully>Hành động tùy chỉnh '{0}' đã được thực thi.</execute-successfully>
+      <save-node-success>Nút '{0}' đã được lưu lại.</save-node-success>
+      <move-problem>Bạn không thể di chuyển nút '{0}' sang '{1}' vì có vấn đề với phân quyền hoặc điều kiện ràng buộc.</move-problem>
     </msg>
   </UIWorkingArea>
   <UIDocumentWorkspace>
     <label>
-      <no-children>Node này không có bất kì node con nào.</no-children>
-      <no-children-but-has-hidden>Node này không có bất kì node con nào nhưng có một số tệp tin đã ẩn đi.</no-children-but-has-hidden>
+      <no-children>Nút này không có bất kì nút con nào.</no-children>
+      <no-children-but-has-hidden>Nút này không có bất kì nút con nào nhưng có một số tệp tin đã ẩn đi.</no-children-but-has-hidden>
     </label>
     <msg>
-      <unable-save-node>Node '{0}' has been newly created. Please save session before performing this action.</unable-save-node>
-      <save-node-success>Node '{0}' đã được lưu lại.</save-node-success>
-      <node-copied>Node '{0}' đã được sao chép.</node-copied>
-      <node-cut>Node '{0}' đã được cắt.</node-cut>
-      <remove-root>You cannot remove the root node.</remove-root>
-      <node-remove-success>Node '{0}' đã được xóa.</node-remove-success>
+      <unable-save-node>Nút '{0}' đã được tạo mới. Vui lòng lưu phiên làm việc trước khi thực hiện hành động này.</unable-save-node>
+      <save-node-success>Nút '{0}' đã được lưu lại.</save-node-success>
+      <node-copied>Nút '{0}' đã được sao chép.</node-copied>
+      <node-cut>Nút '{0}' đã được cắt.</node-cut>
+      <remove-root>Bạn không thể xoá thư mục gốc.</remove-root>
+      <node-remove-success>Nút '{0}' đã được xóa.</node-remove-success>
     </msg>
     <tooltip>
       <Rename>Đổi tên</Rename>
-      <Cut>Cut</Cut>
+      <Cut>Cắt</Cut>
       <Copy>Sao chép</Copy>
-      <Save>Save</Save>
-      <RemoveNode>Delete</RemoveNode>
+      <Save>Lưu</Save>
+      <RemoveNode>Xóa</RemoveNode>
       <Checkin>Checkin</Checkin>
       <Checkout>Checkout</Checkout>
-      <Lock>Lock</Lock>
-      <Unlock>Unlock</Unlock>
-      <EditDocument>Edit</EditDocument>
-      <Paste>Paste</Paste>
-      <LockedBy>Locked by</LockedBy>
+      <Lock>Khóa</Lock>
+      <Unlock>Mở khóa</Unlock>
+      <EditDocument>Chỉnh sửa</EditDocument>
+      <Paste>Dán</Paste>
+      <LockedBy>Khóa bởi</LockedBy>
     </tooltip>
   </UIDocumentWorkspace>
   <UIDocumentInfo>
     <msg>
-      <access-denied>Access denied. You cannot access node '{0}'.</access-denied>
-      <null-exception>Item not found. It was either removed or changed, or you do not have permission to access this node.</null-exception>
-      <confirm-deleteattachment>Are you sure you want to remove this attachment file?</confirm-deleteattachment>
-      <confirm-deleteattcomment>Are you sure you want to remove this comment?</confirm-deleteattcomment>
-      <access-denied-exception>Access denied. You may not have reading privileges, or the node may have been removed or changed.</access-denied-exception>
+      <access-denied>Truy cập bị từ chối. Bạn không thể truy cập nút '{0}'.</access-denied>
+      <null-exception>Tài liệu đã bị gỡ bỏ hoặc thay đổi hoặc bạn không được phân quyền để truy cập tài liệu này.</null-exception>
+      <confirm-deleteattachment>Bạn có chắc chắn muốn gỡ bỏ tệp đính kèm này không?</confirm-deleteattachment>
+      <confirm-deleteattcomment>Bạn có chắc chắn muốn gỡ bỏ bình luận này không?</confirm-deleteattcomment>
+      <access-denied-exception>Truy cập bị từ chối. Bạn có thể không có quyền truy cập hoặc nút này có thể đã bị gỡ bỏ hoặc thay đổi đường dẫn.</access-denied-exception>
       <path-not-found>Thành phần này đã bị xóa hoặc thay đổi. Hãy nhấp nút Làm mới.</path-not-found>
     </msg>
     <tooltip>
-      <remove-attachment>Remove this attachment file</remove-attachment>
-      <remove-comment>Remove this comment</remove-comment>
+      <remove-attachment>Gỡ bỏ tệp đính kèm này</remove-attachment>
+      <remove-comment>Gỡ bỏ bình luận này</remove-comment>
     </tooltip>
   </UIDocumentInfo>
   <ListView>
     <view>
       <label>
-        <name>Name</name>
-        <versionable>Versionable</versionable>
-        <exo_owner>Owner</exo_owner>
-        <auditing>Auditing</auditing>
-        <exo_dateCreated>Date Created</exo_dateCreated>
-        <exo_dateModified>Date Modifed</exo_dateModified>
+        <name>Tên</name>
+        <versionable>Phiên bản</versionable>
+        <exo_owner>Người tạo</exo_owner>
+        <auditing>Kiểm định</auditing>
+        <exo_dateCreated>Ngày tạo</exo_dateCreated>
+        <exo_dateModified>Ngày Sửa đổi</exo_dateModified>
       </label>
     </view>
   </ListView>
@@ -595,41 +595,41 @@
   -->
   <ECMContextMenu>
     <event>
-      <Lock>Lock</Lock>
-      <Unlock>UnLock</Unlock>
-      <EditDocument>Edit</EditDocument>
-      <Copy>Copy</Copy>
-      <Rename>Rename</Rename>
-      <Delete>Delete</Delete>
-      <Save>Save</Save>
-      <Cut>Cut</Cut>
-      <Paste>Paste</Paste>
-      <CheckOut>CheckOut</CheckOut>
-      <CheckIn>CheckIn</CheckIn>
-      <WebDAV>View WebDAV</WebDAV>
-      <sendmail>Send Mail</sendmail>
-      <transformsd>Transform</transformsd>
-      <reloadBP>Reload BP</reloadBP>
-      <workflow>Workflow</workflow>
-      <createRSS>Create RSS</createRSS>
-      <icalendara>Generate Icalendar</icalendara>
-      <getmail>Get Mail</getmail>
-      <autoversion>Auto Versioning</autoversion>
-      <Custom>Custom</Custom>
-      <AddFolder>New Folder</AddFolder>
-      <AddDocument>New Content</AddDocument>
-      <Upload>Upload Files</Upload>
+      <Lock>Khóa</Lock>
+      <Unlock>Mở khóa</Unlock>
+      <EditDocument>Chỉnh sửa</EditDocument>
+      <Copy>Sao chép</Copy>
+      <Rename>Đổi tên</Rename>
+      <Delete>Xóa</Delete>
+      <Save>Lưu</Save>
+      <Cut>Cắt</Cut>
+      <Paste>Dán</Paste>
+      <CheckOut>Checkout</CheckOut>
+      <CheckIn>Checkin</CheckIn>
+      <WebDAV>Xem dạng WebDAV</WebDAV>
+      <sendmail>Gửi Thư</sendmail>
+      <transformsd>Biến đổi</transformsd>
+      <reloadBP>Tải lại BP</reloadBP>
+      <workflow>Luồng công việc</workflow>
+      <createRSS>Tạo RSS</createRSS>
+      <icalendara>Tạo Icalendar</icalendara>
+      <getmail>Lấy Thư</getmail>
+      <autoversion>Tự động Tạo phiên bản</autoversion>
+      <Custom>Tùy chỉnh</Custom>
+      <AddFolder>Thư mục Mới</AddFolder>
+      <AddDocument>Nội dung Mới</AddDocument>
+      <Upload>Tệp tin Tải lên</Upload>
       <MoveNode>Di chuyển</MoveNode>
       <UnLock>Mở khóa</UnLock>
       <ViewProperties>Xem Thuộc tính</ViewProperties>
-      <GetURL>Copy URL To Clipboard</GetURL>
-      <AddThumbnail>Add/Remove Thumbnail</AddThumbnail>
+      <GetURL>Sao chép liên kết vào bảng ghi tạm</GetURL>
+      <AddThumbnail>Thêm mới/Gỡ bỏ Hình nhỏ</AddThumbnail>
       <AddToFavourite>Thêm vào Mục ưa thích</AddToFavourite>
       <RemoveFromFavourite>Xóa khỏi Mục ưa thích</RemoveFromFavourite>
-      <MoveToTrash>Move to Trash</MoveToTrash>
-      <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
-      <EmptyTrash>Empty Trash</EmptyTrash>
-      <WebDavView>Download and Allow Editing</WebDavView>
+      <MoveToTrash>Chuyển vào thùng rác</MoveToTrash>
+      <RestoreFromTrash>Khôi phục từ thùng rác</RestoreFromTrash>
+      <EmptyTrash>Xóa sạch thùng rác?</EmptyTrash>
+      <WebDavView>Tải về và chỉnh sửa</WebDavView>
     </event>
   </ECMContextMenu>
   <!--
@@ -684,41 +684,41 @@
     <title>
       <UIPublishingPanel>Publication Pane</UIPublishingPanel>
       <UIPublicationPanel>Phiên bản</UIPublicationPanel>
-      <UIPublicationSchedule>Scheduled</UIPublicationSchedule>
-      <UIPublicationPagesContainer>Pages</UIPublicationPagesContainer>
+      <UIPublicationSchedule>Theo lịch trình</UIPublicationSchedule>
+      <UIPublicationPagesContainer>Trang</UIPublicationPagesContainer>
       <UIPublicationHistory>Lược sử</UIPublicationHistory>
-      <UIVersionViewer>Version Viewer</UIVersionViewer>
+      <UIVersionViewer>Xem các phiên bản</UIVersionViewer>
 
       <UIPropertyTab>Các thuộc tính</UIPropertyTab>
       <UIMetadataTab>Siêu dữ liệu</UIMetadataTab>
       <UIPropertyForm>Thêm Mới Thuộc tính</UIPropertyForm>
       <UIUploadContent>Thông tin về tệp tin tải lên</UIUploadContent>
       <UIJCRAdvancedSearch>Truy vấn mới</UIJCRAdvancedSearch>
-      <UISavedQuery>Saved Query</UISavedQuery>
+      <UISavedQuery>Truy vấn được lưu</UISavedQuery>
       <AdvancedSearchResult>Kết quả tìm kiếm</AdvancedSearchResult>
-      <UISimpleSearch>Simple Search</UISimpleSearch>
+      <UISimpleSearch>Tìm kiếm đơn giản</UISimpleSearch>
       <UISearchContainer>Tìm kiếm Nâng cao</UISearchContainer>
       <UICategoryManagerSearch>Thêm Danh mục cần Tìm kiếm</UICategoryManagerSearch>
-      <UIConstraintsForm>Constraints Form</UIConstraintsForm>
+      <UIConstraintsForm>Biểu mẫu các ràng buộc</UIConstraintsForm>
       <UIViewSearchResult>Hiện Nội dung</UIViewSearchResult>
       <UIContentNameSearch>Tìm kiếm theo Tên</UIContentNameSearch>
       <UINodeInfo>Thông tin Phiên bản</UINodeInfo>
-      <UINodeProperty>Node Property</UINodeProperty>
-      <UIActionListContainer>Available Actions</UIActionListContainer>
-      <UIActionContainer>Add Action</UIActionContainer>
-      <UIActionViewContainer>Action Info</UIActionViewContainer>
-      <UIMultiLanguageForm>View Language</UIMultiLanguageForm>
+      <UINodeProperty>Thuộc tính của nút</UINodeProperty>
+      <UIActionListContainer>Các hành động có sẵn</UIActionListContainer>
+      <UIActionContainer>Thêm thao tác</UIActionContainer>
+      <UIActionViewContainer>Thông tin thao tác</UIActionViewContainer>
+      <UIMultiLanguageForm>Xem Ngôn ngữ</UIMultiLanguageForm>
       <UIAddLanguageContainer>Thêm Ngôn ngữ</UIAddLanguageContainer>
       <UINonPublishedForm>Trạng thái</UINonPublishedForm>
       <UIPublishedForm>Trạng thái</UIPublishedForm>
       <UIPublicationLogList>Lược sử</UIPublicationLogList>
-      <UIDocumentWithTree>File View</UIDocumentWithTree>
-      <UIDocumentInfo>Document View</UIDocumentInfo>
+      <UIDocumentWithTree>Tập tin</UIDocumentWithTree>
+      <UIDocumentInfo>Hiển thị theo kiểu tài liệu</UIDocumentInfo>
       <UICategoriesSelectPanel>Chọn Danh mục</UICategoriesSelectPanel>
       <UISelectedCategoriesGrid>Danh mục Tham chiếu</UISelectedCategoriesGrid>
       <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
       <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
-      <metadatasitemetadata>metadata:siteMetadata</metadatasitemetadata>
+      <metadatasitemetadata>Siêu dữ liệu của site</metadatasitemetadata>
       <dcelementset>Dublin Core</dcelementset>
     </title>
   </UITabPane>
@@ -735,15 +735,15 @@
       <name>Tên</name>
       <multiValue>Đa giá trị</multiValue>
       <value>Giá trị</value>
-      <action>Action</action>
+      <action>Thao tác</action>
     </header>
     <label>
-      <binary>Binary Data</binary>
-      <notavailable>N/A</notavailable>
+      <binary>Dữ liệu nhị phân</binary>
+      <notavailable>Không xác định</notavailable>
       <cannotget>Không thể lấy các giá trị</cannotget>
     </label>
     <action>
-      <Close>#{word.close}</Close>
+      <Close>Đóng</Close>
     </action>
   </UIPropertyTab>
   <!--
@@ -764,11 +764,11 @@
       <value>Giá trị:</value>
       <upload>Tải lên:</upload>
       <namespace>Định danh:</namespace>
-      <multiple>Multiple:</multiple>
+      <multiple>Đa giá trị</multiple>
       <property_select>Thêm Mới Thuộc tính:</property_select>
     </label>
     <action>
-      <Save>#{word.save}</Save>
+      <Save>Lưu</Save>
       <Cancel>Hủy bỏ</Cancel>
       <Reset>Thiết lập lại</Reset>
     </action>
@@ -776,12 +776,12 @@
       <name-invalid>Vui lòng nhập tên thuộc tính.</name-invalid>
       <unable-create>Không thể thêm các thuộc tính.</unable-create>
       <value-invalid>Vui lòng nhập giá trị.</value-invalid>
-      <node-checkedin>You must check out this node before adding a property.</node-checkedin>
-      <can-not-add>You cannot add properties to this node. This is only allowed for the node type nt:unstructured.</can-not-add>
+      <node-checkedin>Bạn phải kiểm tra ra nút này trước khi thêm thuộc tính.</node-checkedin>
+      <can-not-add>Bạn không thể thêm thuộc tính cho nút này. Chức năng giới hạn chỉ cho kiểu nút là nt:unstructured hoặc những thuộc tính đang bị thiếu ở nút hiện tại.</can-not-add>
       <propertyName-invalid>Tên thuộc tính phải chứa định danh (như là, namespace:name)</propertyName-invalid>
       <propertyName-exist>Thuộc tính '{0}' đã tồn tại.</propertyName-exist>
-      <propertyValu-null>Some values may be null.</propertyValu-null>
-      <valueFormatEx>You cannot assign a multiple-valued value to a single-valued property.</valueFormatEx>
+      <propertyValu-null>Một số giá trị có thể được null.</propertyValu-null>
+      <valueFormatEx>Không thể gán đa giá trị đối với thuộc tính có giá trị duy nhất</valueFormatEx>
       <number-format-exception>Giá trị mục nhập của bạn không đúng định dạng.</number-format-exception>
       <property-not-exist>Thuộc tính {0} không tồn tại.</property-not-exist>
     </msg>
@@ -798,8 +798,8 @@
   </UIMixinTypeSelect>
   <UIMixinTypeForm>
     <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
+      <Save>Lưu</Save>
+      <Cancel>Hủy bỏ</Cancel>
       <Reset>Thiết lập lại</Reset>
     </action>
   </UIMixinTypeForm>
@@ -809,12 +809,12 @@
   #############################################################################
   -->
   <UIMetadataTab>
-    <title>Input values for metadata elements</title>
+    <title>Nhập giá trị cho các yếu tố siêu dữ liệu</title>
     <label>
       <metadataName>Tên Siêu dữ liệu</metadataName>
     </label>
     <action>
-      <Save>#{word.save}</Save>
+      <Save>Lưu</Save>
     </action>
   </UIMetadataTab>
   <!--
@@ -826,28 +826,28 @@
     <action>
       <title>
         <Edit>Chỉnh sửa</Edit>
-        <Delete>Remove Permission</Delete>
+        <Delete>Xóa quyền</Delete>
       </title>
     </action>
     <header>
       <usersOrGroups>Người dùng hoặc Nhóm người dùng</usersOrGroups>
-      <read>Read</read>
-      <addNode>Modify</addNode>
-      <remove>Remove</remove>
-      <action>Action</action>
+      <read>Đọc</read>
+      <addNode>Sửa đổi</addNode>
+      <remove>Gỡ bỏ</remove>
+      <action>Hành động</action>
     </header>
     <msg>
-      <confirm-delete-permission>Are you sure you want to remove this permission?</confirm-delete-permission>
-      <no-permission-tochange>You do not have the right to remove permission.</no-permission-tochange>
-      <no-permission-remove>You cannot remove the owner.</no-permission-remove>
-      <access-denied>Access denied. You cannot remove this permission.</access-denied>
+      <confirm-delete-permission>Bạn có chắc chắn muốn gỡ bỏ phân quyền này?</confirm-delete-permission>
+      <no-permission-tochange>Bạn không có quyền để gỡ bỏ phân quyền này.</no-permission-tochange>
+      <no-permission-remove>Bạn không thể xóa quyền sở hữu.</no-permission-remove>
+      <access-denied>Truy cập bị từ chối. Bạn không thể gỡ bỏ phân quyền này.</access-denied>
     </msg>
   </UIPermissionInfo>
   <permission>
     <title>
       <SelectUser>Lựa chọn người dùng</SelectUser>
-      <SelectMember>Select Membership</SelectMember>
-      <AddAny>Select Everyone</AddAny>
+      <SelectMember>Chọn Kiểu thành viên</SelectMember>
+      <AddAny>Chọn Tất cả</AddAny>
     </title>
   </permission>
   <!--
@@ -857,18 +857,18 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>Select User</UIGroupSelector>
-      <UIPermissionSelector>Select Member</UIPermissionSelector>
-      <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
+      <UIGroupSelector>Chọn Người dùng</UIGroupSelector>
+      <UIPermissionSelector>Chọn Thành viên</UIPermissionSelector>
+      <UIGroupMemberSelector>Chọn Kiểu thành viên</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
-      <selectGroup>Browse and Select a Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectGroup>Duyệt và Chọn Nhóm người dùng</selectGroup>
+      <selectUser>Chọn Người dùng</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
+      <not-change-owner>'{0}' là người tạo nút này và có đầy đủ các quyền trên nút.</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
@@ -880,10 +880,10 @@
       <add_node>Quyền Sửa</add_node>
       <remove>Quyền Xóa</remove>
     </label>
-    <title>Có thêm phân quyền cho node không?</title>
+    <title>Thêm phân quyền cho Nút</title>
     <action>
-      <Close>#{word.close}</Close>
-      <Save>#{word.save}</Save>
+      <Close>Đóng</Close>
+      <Save>Lưu</Save>
       <Reset>Thiết lập lại</Reset>
     </action>
     <msg>
@@ -916,11 +916,11 @@
     <label>
       <upload>Chọn Tệp tin</upload>
       <name>Tên</name>
-      <fieldListTaxonomy>Categories List</fieldListTaxonomy>
+      <fieldListTaxonomy>Danh sách Danh mục</fieldListTaxonomy>
     </label>
     <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
+      <Save>Lưu</Save>
+      <Cancel>Hủy bỏ</Cancel>
     </action>
     <msg>
       <fileName-error>Vui lòng chọn tệp tin để tải lên.</fileName-error>
@@ -928,58 +928,58 @@
       <fileName-invalid>Tên tệp tin chứa một số ký tự không hợp lệ. Vui lòng nhập lại tên tệp tin hoặc tải lên tệp tin khác.</fileName-invalid>
       <fileName-invalid-with-name>Tên tệp tin '{0}' chứa một số ký tự không hợp lệ. Vui lòng nhập lại tên tệp tin hoặc tải lên tệp tin khác.</fileName-invalid-with-name>
       <fileSize-too-big>Kích thước tệp tin quá lớn. Vui lòng chia thành các tệp tin nhỏ hơn hoặc sử dụng WebDAV để tải lên.</fileSize-too-big>
-      <name-is-exist>The name '{0}' already exists.</name-is-exist>
-      <contraint-violation>You cannot add the node '{0}' as the child node to this node.</contraint-violation>
-      <lock-exception>You cannot upload the file. This node is locked.</lock-exception>
-      <confirm-behavior>The file name '{0}' already exists in this location. Please select a behavior below:</confirm-behavior>
+      <name-is-exist>Tên '{0}' đã tồn tại.</name-is-exist>
+      <contraint-violation>Bạn không thể thêm nút '{0}' dưới dạng nút con của chính nó.</contraint-violation>
+      <lock-exception>Bạn không thể tải lên tệp tin này vì nó hiện đang bị khóa.</lock-exception>
+      <confirm-behavior>Đã tồn tại một tài liệu với tên '{0}' tại vị trí này. Hãy chọn một cách bạn muốn để tạo tài liệu:</confirm-behavior>
     </msg>
   </UIUploadForm>
   <UIUploadContent>
     <label>
       <fileName>Tên tệp tin</fileName>
-      <nodeName>Node Name</nodeName>
+      <nodeName>Tên nút</nodeName>
       <fileSize>Kích thước tập tin</fileSize>
-      <mimeType>Mime Type</mimeType>
+      <mimeType>Định dạng</mimeType>
     </label>
     <title>
-      <uploaded-file>Uploaded File</uploaded-file>
-      <external-metadata>External Metadata</external-metadata>
-      <metadata-name>Metadata Name</metadata-name>
-      <action>Action</action>
+      <uploaded-file>Tệp tin được Tải lên</uploaded-file>
+      <external-metadata>Siêu dữ liệu Bên ngoài</external-metadata>
+      <metadata-name>Tên Siêu dữ liệu</metadata-name>
+      <action>Hành động</action>
     </title>
     <tooltip>
-      <Edit>Edit</Edit>
+      <Edit>Chỉnh sửa</Edit>
     </tooltip>
     <msg>
-      <has-not-template>The '{0}' template is null or empty.</has-not-template>
+      <has-not-template>Mẫu của '(0)' là null hoặc rỗng.</has-not-template>
     </msg>
   </UIUploadContent>
   <UIUploadContainer>
     <action>
-      <Close>#{word.close}</Close>
-      <AddMetadata>Add Metadata</AddMetadata>
+      <Close>Đóng</Close>
+      <AddMetadata>Thêm Siêu dữ liệu</AddMetadata>
     </action>
     <tab>
       <label>
-        <UIUploadContent>Information</UIUploadContent>
-        <UIAddMetadataForm>Metadata Form</UIAddMetadataForm>
+        <UIUploadContent>Thông tin</UIUploadContent>
+        <UIAddMetadataForm>Siêu dữ liệu mẫu</UIAddMetadataForm>
       </label>
     </tab>
   </UIUploadContainer>
   <AddMetadataPopup>
     <title>
-      <UIExternalMetadataForm>Add External Metadata</UIExternalMetadataForm>
+      <UIExternalMetadataForm>Thêm siêu dữ liệu bên ngoài</UIExternalMetadataForm>
     </title>
   </AddMetadataPopup>
   <UIExternalMetadataForm>
     <msg>
-      <can-not-add>The mixin cannot be added to this node.</can-not-add>
+      <can-not-add>Node này không thể thêm mixin.</can-not-add>
     </msg>
   </UIExternalMetadataForm>
   <UIAddMetadataForm>
     <action>
-      <Cancel>Cancel</Cancel>
-      <Save>Save</Save>
+      <Cancel>Hủy bỏ</Cancel>
+      <Save>Lưu lại</Save>
     </action>
   </UIAddMetadataForm>
   <!--
@@ -989,31 +989,31 @@
   -->
   <UINodeTypeInfo>
     <label>
-      <node-type>Node Type</node-type>
-      <name>Name</name>
-      <item>Primary Item Name</item>
-      <super-types>Parent Types</super-types>
-      <mixin>Mixin Node Type</mixin>
-      <orderable-children>Orderable Children</orderable-children>
-      <property-def>Node Property Definition</property-def>
-      <prop-name>Name</prop-name>
-      <prop-type>Type</prop-type>
+      <node-type>Kiểu Nút</node-type>
+      <name>Tên</name>
+      <item>Tên Mục Chính</item>
+      <super-types>Các kiểu cha</super-types>
+      <mixin>Kiểu nút Mixin</mixin>
+      <orderable-children>Nút con sắp xếp được</orderable-children>
+      <property-def>Định nghĩa thuộc tính của Nút</property-def>
+      <prop-name>Tên</prop-name>
+      <prop-type>Kiểu</prop-type>
       <prop-multiple>Mul</prop-multiple>
       <prop-mandatory>Man</prop-mandatory>
       <prop-protected>Pr</prop-protected>
       <prop-auto-create>AC</prop-auto-create>
       <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
       <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
-      <node-def>Child Node Definition</node-def>
-      <node-def-name>Name</node-def-name>
+      <node-def>Định nghĩa nút con</node-def>
+      <node-def-name>Tên</node-def-name>
       <node-def-opv>OPV</node-def-opv>
-      <node-def-ac>AC</node-def-ac>
+      <node-def-ac>Tự động tạo ra</node-def-ac>
       <node-def-man>MAN</node-def-man>
       <node-def-pr>PR</node-def-pr>
       <node-def-dnt>DNT</node-def-dnt>
     </label>
     <action>
-      <Close>Close</Close>
+      <Close>Đóng</Close>
     </action>
   </UINodeTypeInfo>
   <!--
@@ -1024,332 +1024,332 @@
   <UICategoryManagerSearch>
     <tab>
       <label>
-        <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
+        <UIOneNodePathSelector>Lựa chọn loại</UIOneNodePathSelector>
       </label>
     </tab>
     <action>
-      <Close>Close</Close>
+      <Close>Đóng</Close>
     </action>
   </UICategoryManagerSearch>
   <UIContentNameSearch>
     <label>
-      <keyword>Content Name:</keyword>
-      <location>Search in this location:</location>
+      <keyword>Từ khoá:</keyword>
+      <location>Tìm kiếm ở vị trí này:</location>
     </label>
     <action>
-      <Search>Search</Search>
-      <Cancel>#{word.cancel}</Cancel>
+      <Search>Tìm kiếm</Search>
+      <Cancel>Hủy bỏ</Cancel>
     </action>
     <msg>
-      <keyword-not-allowed>This keyword is not allowed.</keyword-not-allowed>
+      <keyword-not-allowed>Từ khóa này không được phép.</keyword-not-allowed>
     </msg>
   </UIContentNameSearch>
   <UISimpleSearch>
     <action>
-      <MoreConstraints>Show/Hide Constraint Form</MoreConstraints>
-      <Search>Search</Search>
+      <MoreConstraints>Hiển thị/Ẩn biểu mẫu ràng buộc.</MoreConstraints>
+      <Search>Tìm kiếm</Search>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
       <moreConstraints>UISimpleSearch</moreConstraints>
-      <firstOperator>Operator:</firstOperator>
-      <input>A word or phrase in content:</input>
-      <constraints>More Constraints:</constraints>
-      <nodePath>Current Location:</nodePath>
+      <firstOperator>Toán tử:</firstOperator>
+      <input>Một từ hoặc cụm từ trong nội dung:</input>
+      <constraints>Nhiều ràng buộc hơn:</constraints>
+      <nodePath>Vị trí hiện thời:</nodePath>
     </label>
     <msg>
-      <keyword-null>Please enter your keyword.</keyword-null>
-      <not-found>No results found.</not-found>
-      <keyword-not-allow>This keyword is not allowed.</keyword-not-allow>
-      <value-null>Please enter your keyword or constraints.</value-null>
-      <value-save-null>Please enter a keyword or constraints before saving this query.</value-save-null>
-      <inputSearch-invalid>There are invalid characters in the search input.</inputSearch-invalid>
-      <query-invalid>The query is invalid. Please check your constraint.</query-invalid>
+      <keyword-null>Vui lòng nhập từ khóa</keyword-null>
+      <not-found>Không có kết quả nào được tìm thấy!</not-found>
+      <keyword-not-allow>Từ khóa này không được phép.</keyword-not-allow>
+      <value-null>Vui lòng nhập từ khóa hoặc các ràng buộc của bạn.</value-null>
+      <value-save-null>Vui lòng nhập từ khóa hoặc các ràng buộc trước khi lưu truy vấn này.</value-save-null>
+      <inputSearch-invalid>Có các ký tự không hợp lệ trong mục nhập tìm kiếm.</inputSearch-invalid>
+      <query-invalid>Truy vấn không hợp lệ. Vui lòng kiểm tra ràng buộc của bạn.</query-invalid>
     </msg>
   </UISimpleSearch>
   <ViewSearch>
     <title>
-      <UIViewSearchResult>View Template</UIViewSearchResult>
+      <UIViewSearchResult>Xem Mẫu thiết kế</UIViewSearchResult>
     </title>
   </ViewSearch>
   <UISearchResult>
     <msg>
-      <not-support>There is no View template for this node.</not-support>
-      <empty>No results found.</empty>
-      <access-denied>You cannot open this folder, either because it no longer exists or because you do not have the right to access it.</access-denied>
-      <query-invalid>The query is invalid.</query-invalid>
+      <not-support>Mẫu hiển thị cho tài liệu này chưa được hỗ trợ.</not-support>
+      <empty>Không tìm thấy kết quả nào.</empty>
+      <access-denied>Bạn không thể mở thư mục này vì nó không tồn tại nữa hoặc bạn không có quyền truy cập nó.</access-denied>
+      <query-invalid>Truy vấn không hợp lệ.</query-invalid>
     </msg>
     <header>
-      <name>#{word.name}</name>
-      <path>Path</path>
-      <action>Action</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
-      <dateCreated>Date Created</dateCreated>
-      <score>Score</score>
+      <name>Tên</name>
+      <path>Đường dẫn</path>
+      <action>Hành động</action>
+      <shortcutPath>Đường dẫn</shortcutPath>
+      <type>Kiểu</type>
+      <dateCreated>Ngày Tạo</dateCreated>
+      <score>Điểm số</score>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
-      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+      <typeASC>Phân loại theo kiểu tài liệu có thứ tự tăng dần</typeASC>
+      <typeDESC>Phân loại theo kiểu tài liệu có thứ tự giảm dần</typeDESC>
+      <scoreASC>Phân loại theo điểm số với thứ tự tăng dần</scoreASC>
+      <scoreDESC>Phân loại theo điểm số có thứ tự giảm dần</scoreDESC>
+      <nameASC>Phân loại theo tên có thứ tự tăng dần</nameASC>
+      <nameDESC>Phân loại theo tên có thứ tự giảm dần</nameDESC>
+      <datecreatedASC>Phân loại theo ngày tạo có thứ tự tăng dần</datecreatedASC>
+      <datecreatedDESC>Phân loại theo ngày tạo có thứ tự giảm dần</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this node</View>
-      <OpenFolder>Go to folder</OpenFolder>
+      <View>Xem nút này</View>
+      <OpenFolder>Đi đến thư mục</OpenFolder>
     </tooltip>
   </UISearchResult>
   <UIShowAllOwnedByUserResult>
     <msg>
-      <not-support>There is no View template for this node</not-support>
-      <empty>No results found.</empty>
-      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
-      <query-invalid>The query is invalid</query-invalid>
+      <not-support>Không có mẫu hiển thị nào cho nút này.</not-support>
+      <empty>Không tìm thấy kết quả nào.</empty>
+      <access-denied>Bạn không thể xem nút này vì mẫu thiết kế này không được hỗ trợ hoặc truy cập bị từ chối.</access-denied>
+      <query-invalid>Truy vấn không hợp lệ</query-invalid>
     </msg>
     <header>
-      <name>#{word.name}</name>
-      <path>Path</path>
-      <action>Action</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
-      <dateCreated>Date Created</dateCreated>
-      <score>Score</score>
+      <name>Tên</name>
+      <path>Đường dẫn</path>
+      <action>Hành động</action>
+      <shortcutPath>Đường dẫn</shortcutPath>
+      <type>Kiểu</type>
+      <dateCreated>Ngày Tạo</dateCreated>
+      <score>Điểm số</score>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
-      <datecreatedASC>Sort by Created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by Created date in descending order</datecreatedDESC>
+      <typeASC>Sắp xếp theo kiểu tài liệu có thứ tự tăng dần</typeASC>
+      <typeDESC>Phân loại theo kiểu tài liệu có thứ tự giảm dần</typeDESC>
+      <scoreASC>Phân loại theo điểm số có thứ tự tăng dần</scoreASC>
+      <scoreDESC>Phân loại theo điểm số có thứ tự giảm dần</scoreDESC>
+      <nameASC>Phân loại theo tên có thứ tự tăng dần</nameASC>
+      <nameDESC>Phân loại theo tên có thứ tự giảm dần</nameDESC>
+      <datecreatedASC>Phân loại theo ngày tạo có thứ tự tăng dần</datecreatedASC>
+      <datecreatedDESC>Phân loại theo ngày Tạo có thứ tự giảm dần</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this node</View>
-      <OpenFolder>Go to Folder</OpenFolder>
+      <View>Xem nút này</View>
+      <OpenFolder>Đi đến Thư mục</OpenFolder>
     </tooltip>
   </UIShowAllOwnedByUserResult>
   <UIShowAllFavouriteResult>
     <msg>
-      <not-support>There is no View template for this node</not-support>
-      <empty>No results found</empty>
-      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
-      <query-invalid>The query is invalid</query-invalid>
+      <not-support>Không có mẫu hiển thị nào cho nút này.</not-support>
+      <empty>Không tìm thấy kết quả</empty>
+      <access-denied>Bạn không thể xem nút này vì mẫu này không được hỗ trợ hoặc truy cập bị từ chối.</access-denied>
+      <query-invalid>Truy vấn không hợp lệ</query-invalid>
     </msg>
     <header>
-      <name>#{word.name}</name>
-      <path>Path</path>
-      <action>Action</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
-      <dateCreated>Date Created</dateCreated>
-      <score>Score</score>
+      <name>Tên</name>
+      <path>Đường dẫn</path>
+      <action>Hành động</action>
+      <shortcutPath>Đường dẫn</shortcutPath>
+      <type>Kiểu</type>
+      <dateCreated>Ngày Tạo</dateCreated>
+      <score>Điểm số</score>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
-      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+      <typeASC>Phân loại theo kiểu tài liệu có thứ tự tăng dần</typeASC>
+      <typeDESC>Phân loại theo kiểu tài liệu có thứ tự giảm dần</typeDESC>
+      <scoreASC>Phân loại theo điểm số có thứ tự tăng dần</scoreASC>
+      <scoreDESC>Phân loại theo điểm số có thứ tự giảm dần</scoreDESC>
+      <nameASC>Phân loại theo tên có thứ tự tăng dần</nameASC>
+      <nameDESC>Phân loại theo tên có thứ tự giảm dần</nameDESC>
+      <datecreatedASC>Phân loại theo ngày tạo có thứ tự tăng dần</datecreatedASC>
+      <datecreatedDESC>Phân loại theo ngày tạo có thứ tự giảm dần</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Node</View>
-      <OpenFolder>Go to Folder</OpenFolder>
+      <View>Xem Nút này</View>
+      <OpenFolder>Đi đến Thư mục</OpenFolder>
     </tooltip>
   </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
-      <not-support>There is no View template for this node.</not-support>
-      <empty>No results found.</empty>
-      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
-      <query-invalid>The query is invalid.</query-invalid>
+      <not-support>Không có mẫu hiển thị nào cho nút này.</not-support>
+      <empty>Không tìm thấy kết quả.</empty>
+      <access-denied>Bạn không thể xem nút này vì mẫu này không được hỗ trợ hoặc truy cập bị từ chối.</access-denied>
+      <query-invalid>Truy vấn không hợp lệ.</query-invalid>
     </msg>
     <header>
-      <name>#{word.name}</name>
-      <path>Path</path>
-      <action>Action</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
-      <dateCreated>Date Created</dateCreated>
-      <score>Score</score>
-      <AddRemoveFavourite>Add/Remove to Favorite</AddRemoveFavourite>
+      <name>Tên</name>
+      <path>Đường dẫn</path>
+      <action>Hành động</action>
+      <shortcutPath>Đường dẫn</shortcutPath>
+      <type>Kiểu</type>
+      <dateCreated>Ngày Tạo</dateCreated>
+      <score>Điểm số</score>
+      <AddRemoveFavourite>Thêm vào/Gỡ bỏ khỏi Mục yêu thích</AddRemoveFavourite>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
-      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+      <typeASC>Phân loại theo kiểu tài liệu có thứ tự tăng dần</typeASC>
+      <typeDESC>Phân loại theo kiểu tài liệu có thứ tự giảm dần</typeDESC>
+      <scoreASC>Phân loại theo điểm số có thứ tự tăng dần</scoreASC>
+      <scoreDESC>Phân loại theo điểm số có thứ tự giảm dần</scoreDESC>
+      <nameASC>Phân loại theo tên có thứ tự tăng dần</nameASC>
+      <nameDESC>Phân loại theo tên có thứ tự giảm dần</nameDESC>
+      <datecreatedASC>Phân loại theo ngày tạo có thứ tự tăng dần</datecreatedASC>
+      <datecreatedDESC>Phân loại theo ngày tạo có thứ tự giảm dần</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Node</View>
-      <OpenFolder>Go to Folder</OpenFolder>
-      <RemoveHiddenAttribute>Remove Hidden Attribute</RemoveHiddenAttribute>
+      <View>Xem Nút này</View>
+      <OpenFolder>Đi đến Thư mục</OpenFolder>
+      <RemoveHiddenAttribute>Gỡ bỏ Thuộc tính Ẩn</RemoveHiddenAttribute>
     </tooltip>
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
-      <not-support>There is no View template for this node.</not-support>
-      <empty>No results found</empty>
-      <access-denied>You cannot view this node, either because this template is not supported or because access is denied.</access-denied>
-      <query-invalid>The query is invalid.</query-invalid>
+      <not-support>Không có mẫu hiển thị nào cho nút này.</not-support>
+      <empty>Không tìm thấy kết quả</empty>
+      <access-denied>Bạn không thể xem nút này vì mẫu hiển thị không được hỗ trợ hoặc truy cập bị từ chối.</access-denied>
+      <query-invalid>Truy vấn không hợp lệ.</query-invalid>
     </msg>
     <header>
-      <name>#{word.name}</name>
-      <path>Path</path>
-      <action>Action</action>
-      <shortcutPath>Path</shortcutPath>
-      <type>Type</type>
-      <dateCreated>Date Created</dateCreated>
-      <score>Score</score>
+      <name>Tên</name>
+      <path>Đường dẫn</path>
+      <action>Hành động</action>
+      <shortcutPath>Đường dẫn</shortcutPath>
+      <type>Kiểu</type>
+      <dateCreated>Ngày Tạo</dateCreated>
+      <score>Điểm số</score>
     </header>
     <title>
-      <typeASC>Sort by document type in ascending order</typeASC>
-      <typeDESC>Sort by document type in descending order</typeDESC>
-      <scoreASC>Sort by score in ascending order</scoreASC>
-      <scoreDESC>Sort by score in descending order</scoreDESC>
-      <nameASC>Sort by name in ascending order</nameASC>
-      <nameDESC>Sort by name in descending order</nameDESC>
-      <datecreatedASC>Sort by created date in ascending order</datecreatedASC>
-      <datecreatedDESC>Sort by created date in descending order</datecreatedDESC>
+      <typeASC>Sắp xếp theo kiểu tài liệu với thứ tự tăng dần.</typeASC>
+      <typeDESC>Sắp xếp theo kiểu tài liệu với thứ tự giảm dần.</typeDESC>
+      <scoreASC>Sắp xếp theo điểm số với thứ tự tăng dần</scoreASC>
+      <scoreDESC>Sắp xếp theo điểm số với thứ tự giảm dần</scoreDESC>
+      <nameASC>Sắp xếp theo tên với thứ tự tăng dần</nameASC>
+      <nameDESC>Sắp xếp theo tên với thứ tự giảm dần</nameDESC>
+      <datecreatedASC>Sắp xếp theo ngày tạo với thứ tự tăng dần</datecreatedASC>
+      <datecreatedDESC>Sắp xếp theo ngày tạo với thứ tự giảm dần</datecreatedDESC>
     </title>
     <tooltip>
-      <View>View this Node</View>
-      <OpenFolder>Go to Folder</OpenFolder>
-      <DeletePermanently>Delete permanently</DeletePermanently>
-      <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
+      <View>Xem nút này</View>
+      <OpenFolder>Đi đến thư mục</OpenFolder>
+      <DeletePermanently>Xóa vĩnh viễn</DeletePermanently>
+      <RestoreFromTrash>Khôi phục từ thùng rác</RestoreFromTrash>
     </tooltip>
   </UIShowAllTrashResult>
   <UIConstraintsForm>
     <label>
       <constraints>UIConstraintsForm</constraints>
-      <metadataProperty>Properties</metadataProperty>
-      <operator>Operator</operator>
-      <contains>Contain Value</contains>
-      <notcontains>Not Contain Value</notcontains>
+      <metadataProperty>Các thuộc tính</metadataProperty>
+      <operator>Toán tử</operator>
+      <contains>Chứa giá trị</contains>
+      <notcontains>Không chứa giá trị</notcontains>
     </label>
     <action>
-      <Add>Add</Add>
+      <Add>Thêm</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <properties-required>The Property name is required.</properties-required>
-      <value-required>The Value field is required.</value-required>
-      <date-invalid>The From date must be earlier than the To date.</date-invalid>
-      <fromDate-required>The From date is required.</fromDate-required>
-      <must-choose-one>You have to select at least one type.</must-choose-one>
-      <properties-null>Select properties first, then filter.</properties-null>
-      <exactly-require>You have to fill in the Value exactly before saving this constraint.</exactly-require>
-      <fromDate-invalid>Invalid type in the 'From' field. Please reselect or type correctly.</fromDate-invalid>
-      <toDate-invalid>Invalid type in the 'To' field. Please reselect or type correctly.</toDate-invalid>
+      <properties-required>Bạn chưa nhập tên thuộc tính.</properties-required>
+      <value-required>Trường giá trị được yêu cầu.</value-required>
+      <date-invalid>Ngày bắt đầu phải sớm hơn ngày đến.</date-invalid>
+      <fromDate-required>Nhập ngày bắt đầu.</fromDate-required>
+      <must-choose-one>Bạn phải chọn ít nhất một loại</must-choose-one>
+      <properties-null>Chọn thuộc tính đầu tiên, sau đó lọc.</properties-null>
+      <exactly-require>Bạn phải điền các giá trị chính xác trước khi lưu lại ràng buộc này.</exactly-require>
+      <fromDate-invalid>Giá trị không hợp lệ trong trường 'Từ ngày'.Vui lòng chọn hoặc nhập vào giá trị đúng.</fromDate-invalid>
+      <toDate-invalid>Giá trị không hợp lê trong trường 'Đến ngày'. Vui lòng chọn hoặc nhập vào giá trị đúng.</toDate-invalid>
     </msg>
     <button>
-      <label-Add>Add</label-Add>
-      <label-Cancel>Cancel</label-Cancel>
+      <label-Add>Thêm</label-Add>
+      <label-Cancel>Hủy bỏ</label-Cancel>
     </button>
   </UIConstraintsForm>
   <UIConstraintForm>
     <tooltip>
-      <AddMetadataType>Add Property</AddMetadataType>
-      <AddNodeType>Add Node Type</AddNodeType>
-      <AddCategory>Add Category</AddCategory>
-      <FindExactly>Find Exactly</FindExactly>
+      <AddMetadataType>Thêm thuộc tính</AddMetadataType>
+      <AddNodeType>Thêm kiểu nút</AddNodeType>
+      <AddCategory>Thêm loại</AddCategory>
+      <FindExactly>Tìm chính xác</FindExactly>
     </tooltip>
     <label>
       <colon>:</colon>
-      <operator>Operator</operator>
+      <operator>Toán tử</operator>
       <exactlyPro-properties>Thuộc tính</exactlyPro-properties>
-      <exactlyPro-ContainExactly>Contain Exactly</exactlyPro-ContainExactly>
-      <containPro-properties>Property</containPro-properties>
-      <containPro-Contain>Contain</containPro-Contain>
-      <notContainPro-properties>Property</notContainPro-properties>
-      <notContainPro-notContain>Not Contain</notContainPro-notContain>
+      <exactlyPro-ContainExactly>Chứa chính xác</exactlyPro-ContainExactly>
+      <containPro-properties>Thuộc tính</containPro-properties>
+      <containPro-Contain>Chứa</containPro-Contain>
+      <notContainPro-properties>Thuộc tính</notContainPro-properties>
+      <notContainPro-notContain>Không chứa</notContainPro-notContain>
       <ConstraintOption-From>Từ</ConstraintOption-From>
       <ConstraintOption-To>Đến</ConstraintOption-To>
-      <DocumentType-label>Document Type</DocumentType-label>
-      <Category-label>Category</Category-label>
-      <created>Created</created>
-      <modified>Modified</modified>
-      <and>And</and>
-      <or>Or</or>
+      <DocumentType-label>Kiểu tài liệu</DocumentType-label>
+      <Category-label>Danh mục</Category-label>
+      <created>Ngày tạo</created>
+      <modified>Ngày sửa</modified>
+      <and>Và</and>
+      <or>Hoặc</or>
     </label>
   </UIConstraintForm>
   <NodeTypePopup>
     <title>
-      <UINodeTypeSelectForm>Select Node Type</UINodeTypeSelectForm>
+      <UINodeTypeSelectForm>Chọn Kiểu Nút</UINodeTypeSelectForm>
     </title>
   </NodeTypePopup>
   <CategoryPopup>
     <title>
-      <UICategoryManagerSearch>Add Category to Search</UICategoryManagerSearch>
-      <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
+      <UICategoryManagerSearch>Thêm Danh mục để Tìm kiếm</UICategoryManagerSearch>
+      <UIOneNodePathSelector>Chọn Danh mục</UIOneNodePathSelector>
     </title>
   </CategoryPopup>
   <SaveQueryPopup>
     <title>
-      <UISaveQueryForm>Query Form</UISaveQueryForm>
+      <UISaveQueryForm>Biểu mẫu Truy vấn</UISaveQueryForm>
     </title>
   </SaveQueryPopup>
   <UINodeTypeSelectForm>
     <action>
-      <Cancel>Cancel</Cancel>
-      <Save>Save</Save>
+      <Cancel>Hủy bỏ</Cancel>
+      <Save>Lưu</Save>
     </action>
   </UINodeTypeSelectForm>
   <UICompareExactlyForm>
     <label>
-      <filter>Filter:</filter>
-      <result>Results:</result>
+      <filter>Bộ lọc:</filter>
+      <result>Kết quả:</result>
     </label>
     <title>
-      <result>Filter</result>
+      <result>Bộ lọc</result>
     </title>
     <button>
-      <label-Select>Select</label-Select>
-      <label-Cancel>Cancel</label-Cancel>
+      <label-Select>Lựa chọn</label-Select>
+      <label-Cancel>Hủy bỏ</label-Cancel>
     </button>
     <msg>
-      <not-result-found>No results found.</not-result-found>
+      <not-result-found>Không có kết quả nào.</not-result-found>
     </msg>
   </UICompareExactlyForm>
   <UIJCRAdvancedSearch>
     <label>
-      <name>Name:</name>
-      <selectBox>Select Query Style:</selectBox>
-      <query>Query:</query>
+      <name>Tên:</name>
+      <selectBox>Lựa chọn kiểu truy vấn:</selectBox>
+      <query>Truy vấn:</query>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Search>Search</Search>
+      <Search>Tìm kiếm</Search>
     </action>
     <msg>
       <!--DMS 2.4.x ECM-3566-->
-      <name-invalid>The name is invalid.</name-invalid>
-      <query-added>The query was added successfully.</query-added>
-      <save_unSuccessful>Cannot save the query. The statement may be invalid or the query name may already exist.</save_unSuccessful>
-      <invalid-queryStatement>Invalid query statement.</invalid-queryStatement>
-      <value-save-null>Please enter your query statement.</value-save-null>
-      <query-name-null>Please enter your query name.</query-name-null>
+      <name-invalid>Tên không hợp lệ.</name-invalid>
+      <query-added>Các truy vấn được nhập thành công.</query-added>
+      <save_unSuccessful>Truy vấn không hợp lệ hoặc tên của truy vấn đã tồn tại.</save_unSuccessful>
+      <invalid-queryStatement>Câu truy vấn không hợp lệ.</invalid-queryStatement>
+      <value-save-null>Vui lòng nhập câu truy vấn.</value-save-null>
+      <query-name-null>Vui lòng nhập tên câu truy vấn.</query-name-null>
     </msg>
   </UIJCRAdvancedSearch>
   <EditQueryForm>
     <label>
-      <name>Name</name>
-      <selectBox>Select Query Style</selectBox>
-      <query>Query</query>
+      <name>Tên</name>
+      <selectBox>Lựa chọn kiểu truy vấn</selectBox>
+      <query>Truy vấn</query>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1358,73 +1358,73 @@
   </EditQueryForm>
   <EditSavedQueryForm>
     <title>
-      <EditQueryForm>Edit Query Form</EditQueryForm>
+      <EditQueryForm>Chỉnh sửa Biểu mẫu Truy vấn</EditQueryForm>
     </title>
   </EditSavedQueryForm>
   <UIMetadataSelectForm>
     <label>
-      <metadataType>Metadata type</metadataType>
+      <metadataType>Kiểu Siêu dữ liệu</metadataType>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Add>Add</Add>
+      <Add>Thêm</Add>
     </action>
   </UIMetadataSelectForm>
   <property1MetadataPopup>
     <title>
-      <UISelectPropertyForm>Select Property</UISelectPropertyForm>
+      <UISelectPropertyForm>Lựa chọn thuộc tính</UISelectPropertyForm>
     </title>
   </property1MetadataPopup>
   <property2MetadataPopup>
     <title>
-      <UISelectPropertyForm>Select Property</UISelectPropertyForm>
+      <UISelectPropertyForm>Lựa chọn thuộc tính</UISelectPropertyForm>
     </title>
   </property2MetadataPopup>
   <property3MetadataPopup>
     <title>
-      <UISelectPropertyForm>Select Property</UISelectPropertyForm>
+      <UISelectPropertyForm>Lựa chọn thuộc tính</UISelectPropertyForm>
     </title>
   </property3MetadataPopup>
   <UISelectPropertyForm>
     <label>
-      <metadataType>Metadata Type</metadataType>
+      <metadataType>Kiểu Siêu dữ liệu</metadataType>
     </label>
-    <pLabel>Properties:</pLabel>
+    <pLabel>Thuộc tính:</pLabel>
     <action>
       <Add>Thêm</Add>
-      <Cancel>Hủy</Cancel>
+      <Cancel>Hủy bỏ</Cancel>
     </action>
   </UISelectPropertyForm>
   <ExactlyFormPopup>
     <title>
-      <UICompareExactlyForm>Filter Form</UICompareExactlyForm>
+      <UICompareExactlyForm>Biểu mẫu lọc</UICompareExactlyForm>
     </title>
   </ExactlyFormPopup>
   <UIECMSearch>
     <header>
-      <name>Name</name>
-      <language>Language</language>
-      <query>Query</query>
-      <action>Actions</action>
-      <path>Path</path>
+      <name>Tên</name>
+      <language>Ngôn ngữ</language>
+      <query>Truy vấn</query>
+      <action>Các thao tác</action>
+      <path>Đường dẫn</path>
     </header>
   </UIECMSearch>
   <UIResult>
     <msg>
-      <not-found>Data not found.</not-found>
+      <not-found>Dữ liệu không được tìm thấy</not-found>
     </msg>
     <header>
-      <action>Action</action>
+      <action>Hành động</action>
     </header>
   </UIResult>
   <UISaveQueryForm>
     <msg>
-      <query-name-null>Please enter query name to save.</query-name-null>
-      <access-denied>Access denied. You do not have the add permission needed to save this query.</access-denied>
-      <save-failed>You cannot save the query, either because the statement is invalid or because the query name already exists.</save-failed>
+      <query-name-null>Vui lòng nhập tên của câu truy vấn để lưu lại!</query-name-null>
+      <access-denied>Bạn cần có quyền thêm mới để lưu câu truy vấn này.</access-denied>
+      <save-failed>Không thể lưu: câu truy vấn không hợp lệ hoặc tên của câu truy vấn đã tồn tại.</save-failed>
     </msg>
     <label>
-      <queryName>Query name</queryName>
+      <queryName>Tên truy vấn</queryName>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1433,30 +1433,30 @@
   </UISaveQueryForm>
   <UISavedQuery>
     <header>
-      <name>Name</name>
-      <type>Type</type>
-      <statement>Statement</statement>
-      <permission>Permissions</permission>
-      <action>Actions</action>
+      <name>Tên</name>
+      <type>Kiểu</type>
+      <statement>Câu truy vấn</statement>
+      <permission>Quyền</permission>
+      <action>Các thao tác</action>
     </header>
     <tooltip>
-      <Execute>Execute</Execute>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <Execute>Thực thi</Execute>
+      <Edit>Sửa</Edit>
+      <Delete>Xóa</Delete>
     </tooltip>
     <label>
-      <no-children>No query is saved.</no-children>
+      <no-children>Không có câu truy vấn nào được lưu lại</no-children>
     </label>
     <msg>
-      <confirm-delete-query>Are you sure you want to delete this query?</confirm-delete-query>
-      <not-result-found>No results found.</not-result-found>
+      <confirm-delete-query>Bạn có thực sự muốn xóa câu truy vấn này?</confirm-delete-query>
+      <not-result-found>Không có kết quả nào được tìm thấy.</not-result-found>
     </msg>
   </UISavedQuery>
   <UIQueryResultPageIterator>
     <label>
-      <results>Results</results>
-      <of-about>of about</of-about>
-      <of>of</of>
+      <results>Các kết quả</results>
+      <of-about>khoảng</of-about>
+      <of>của</of>
     </label>
   </UIQueryResultPageIterator>
   <!--
@@ -1466,17 +1466,17 @@
   -->
   <UIExportNode>
     <label>
-      <format>Format</format>
-      <nodePath>Path to Export</nodePath>
-      <zip>Zip</zip>
-      <systemView>System View</systemView>
-      <documentView>Document View</documentView>
+      <format>Dạng</format>
+      <nodePath>Đường dẫn để xuất</nodePath>
+      <zip>Nén</zip>
+      <systemView>Kiểu hệ thống</systemView>
+      <documentView>Xem kiểu tài liệu</documentView>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Export>Export</Export>
+      <Export>Xuất</Export>
     </action>
-    <title>Export Node</title>
+    <title>Kết xuất nút</title>
   </UIExportNode>
   <!--
   ###############################################################################
@@ -1485,13 +1485,13 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Select User Permission</UIUserContainer>
+      <UIUserContainer>Chọn phân quyền cho người dùng</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
     <title>
-      <UICategoriesSelector>Add Categories</UICategoriesSelector>
-      <UIOneNodePathSelector>Add Categories</UIOneNodePathSelector>
+      <UICategoriesSelector>Thêm loại</UICategoriesSelector>
+      <UIOneNodePathSelector>Thêm loại</UIOneNodePathSelector>
     </title>
   </UIPopupTaxonomy>
   <!--
@@ -1501,23 +1501,23 @@
   -->
   <UIVersionInfo>
     <tooltip>
-      <addLabel>Add Label</addLabel>
-      <removeLable>Remove Label</removeLable>
-      <restoreVersion>Restore Version</restoreVersion>
-      <viewVersion>View Version Info</viewVersion>
-      <deleteVersion>Delete Version</deleteVersion>
-      <compareVersion>Compare with the  base version</compareVersion>
+      <addLabel>Thêm nhãn</addLabel>
+      <removeLable>Xóa bỏ nhãn</removeLable>
+      <restoreVersion>Khôi phục lại phiên bản</restoreVersion>
+      <viewVersion>Hiển thị thông tin về các phiên bản</viewVersion>
+      <deleteVersion>Xóa phiên bản</deleteVersion>
+      <compareVersion>So sánh với phiên bản cơ sở</compareVersion>
     </tooltip>
     <msg>
-      <have-no-view-template>The view template is not supported.</have-no-view-template>
-      <cannot-remove-version>You cannot remove the base version.</cannot-remove-version>
-      <confirm-delete>Are you sure you want to remove this version?</confirm-delete>
-      <not-checked-out>You have to check out this node before restoring.</not-checked-out>
-      <invalid-item-state>You cannot restore this version, either because one or more items were deleted or moved during another session.</invalid-item-state>
+      <have-no-view-template>Mẫu thiết kế giao diện xem này không được hỗ trợ.</have-no-view-template>
+      <cannot-remove-version>Không thể xóa một phiên bản cơ sở</cannot-remove-version>
+      <confirm-delete>Bạn có thực sự muốn xóa phiên bản này không?</confirm-delete>
+      <not-checked-out>Bạn cần phải kiểm tra nút này trước khi khôi phục.</not-checked-out>
+      <invalid-item-state>Bạn không thể khôi phục phiên bản này. Chắc chắn một số khoản mục đã bị xóa hoặc được di chuyển trong một phiên làm việc khác.</invalid-item-state>
     </msg>
     <action>
-      <close>Close</close>
-      <close-view>Close View</close-view>
+      <close>Đóng</close>
+      <close-view>Đóng cửa xem</close-view>
     </action>
   </UIVersionInfo>
   <!--
@@ -1527,39 +1527,39 @@
   -->
   <UIAuditingInfo>
     <msg>
-      <noVersion>No Version</noVersion>
+      <noVersion>Không có phiên bản</noVersion>
     </msg>
     <eventName>
-      <e_1>Node Added</e_1>
-      <e_2>Node Removed</e_2>
-      <e_4>Property Added</e_4>
-      <e_16>Property Changed</e_16>
-      <e_8>Property Removed</e_8>
-      <e_32>Save</e_32>
-      <e_64>Move</e_64>
-      <e_128>Copy</e_128>
-      <e_256>Add Mixin</e_256>
-      <e_512>Remove Mixin</e_512>
-      <e_1024>Clone</e_1024>
-      <e_2048>Update</e_2048>
-      <e_4096>Import</e_4096>
+      <e_1>Nút đã được thêm.</e_1>
+      <e_2>Nút đã được xóa</e_2>
+      <e_4>Thuộc tính đã được thêm.</e_4>
+      <e_16>Thuộc tính đã được thay đổi.</e_16>
+      <e_8>Thuộc tính đã bị xóa bỏ</e_8>
+      <e_32>Lưu trữ</e_32>
+      <e_64>Di chuyển</e_64>
+      <e_128>Sao chép</e_128>
+      <e_256>Thêm Mixin</e_256>
+      <e_512>Xóa mixin</e_512>
+      <e_1024>Bản sao</e_1024>
+      <e_2048>Cập nhật</e_2048>
+      <e_4096>Nhập</e_4096>
       <e_8192>Check in</e_8192>
       <e_16384>Check out</e_16384>
-      <e_32768>Restore</e_32768>
-      <e_65536>Merge</e_65536>
-      <e_131072>Cancel Merge</e_131072>
-      <e_262144>Done Merge</e_262144>
-      <e_524288>Add Version Label</e_524288>
-      <e_1048576>Remove Version Label</e_1048576>
-      <e_2097152>Remove Version</e_2097152>
-      <e_4194304>Lock</e_4194304>
-      <e_8388608>Unlock</e_8388608>
-      <e_16777216>Read</e_16777216>
+      <e_32768>Khôi phục</e_32768>
+      <e_65536>Gộp</e_65536>
+      <e_131072>Hủy bỏ hợp nhất</e_131072>
+      <e_262144>Hợp nhất</e_262144>
+      <e_524288>Thêm nhãn cho phiên bản</e_524288>
+      <e_1048576>Gỡ bỏ Nhãn Phiên bản</e_1048576>
+      <e_2097152>Gỡ bỏ Phiên bản</e_2097152>
+      <e_4194304>Khóa</e_4194304>
+      <e_8388608>Mở khóa</e_8388608>
+      <e_16777216>Đọc</e_16777216>
     </eventName>
     <label>
-      <operation>Operation</operation>
+      <operation>Thao tác</operation>
       <userName>Tên người dùng</userName>
-      <date>Date</date>
+      <date>Ngày tháng</date>
       <version>Phiên bản</version>
     </label>
   </UIAuditingInfo>
@@ -1571,13 +1571,13 @@
   -->
   <UIActivateVersion>
     <label>
-      <note>Versioning has not been activated for this node.</note>
-      <question>Are you sure you want to activate it?</question>
+      <note>Tính năng tạo phiên bản chưa được kích hoạt cho nút này.</note>
+      <question>Bạn có chắc chắn muốn kích hoạt nó không?</question>
       <button-active>Kích hoạt</button-active>
-      <button-cancel>Cancel</button-cancel>
+      <button-cancel>Hủy bỏ</button-cancel>
     </label>
     <msg>
-      <access-denied>You do not have permission to activate versioning on this node</access-denied>
+      <access-denied>Bạn không được phân quyền để kích hoạt tính năng Tạo phiên bản trên nút này.</access-denied>
     </msg>
   </UIActivateVersion>
   <!--
@@ -1587,21 +1587,21 @@
   -->
   <UIActivePublication>
     <header>
-      <LifecycleName>Name</LifecycleName>
-      <LifecycleDesc>Description</LifecycleDesc>
-      <action>Action</action>
+      <LifecycleName>Tên</LifecycleName>
+      <LifecycleDesc>Mô tả</LifecycleDesc>
+      <action>Hành động</action>
     </header>
     <action>
-      <Cancel>Close</Cancel>
+      <Cancel>Đóng</Cancel>
     </action>
     <grid>
       <msg>
-        <empty>No publication plugins found.</empty>
+        <empty>Không tìm thấy plugin xuất bản nào.</empty>
       </msg>
     </grid>
     <msg>
-      <node-type-invalid>Only the document node type can be enrolled.</node-type-invalid>
-      <already-enroled>This document has already been enrolled.</already-enroled>
+      <node-type-invalid>Chỉ loại nút tài liệu có thể được đưa vào chu trình.</node-type-invalid>
+      <already-enroled>Tài liệu này đã được đưa vào chu trình.</already-enroled>
     </msg>
   </UIActivePublication>
   <!--
@@ -1611,12 +1611,12 @@
   -->
   <UIActivateAuditing>
     <label>
-      <note>Auditing has not been activated for this node.</note>
-      <question>Are you sure you want to activate?</question>
+      <note>Việc ghi lại thay đổi chưa được kích hoạt đối với nút này.</note>
+      <question>Bạn có chắc chắn muốn kích hoạt không?</question>
     </label>
     <action>
-      <activate>Activate</activate>
-      <cancel>Cancel</cancel>
+      <activate>Kích hoạt</activate>
+      <cancel>Hủy bỏ</cancel>
     </action>
   </UIActivateAuditing>
   <!--
@@ -1626,11 +1626,11 @@
   -->
   <UIDiff>
     <label>
-      <diffTitle>Compare between two versions</diffTitle>
-      <noChange>No change between two versions</noChange>
-      <baseVerion>Base Version</baseVerion>
-      <compareVerion>Version</compareVerion>
-      <can-not-compare>Failed to compare two versions</can-not-compare>
+      <diffTitle>So sánh giữa hai phiên bản</diffTitle>
+      <noChange>Không có thay đổi giữa 2 phiên bản</noChange>
+      <baseVerion>Phiên bản Cơ sở</baseVerion>
+      <compareVerion>Phiên bản</compareVerion>
+      <can-not-compare>Không thể so sánh 2 phiên bản</can-not-compare>
     </label>
   </UIDiff>
   <!--
@@ -1640,24 +1640,24 @@
   -->
   <UIImportNode>
     <label>
-      <format>Format</format>
-      <systemView>System View</systemView>
-      <documentView>Document View</documentView>
-      <upload>Upload File</upload>
+      <format>Định dạng</format>
+      <systemView>Xem theo hệ thống</systemView>
+      <documentView>Xem theo tài liệu</documentView>
+      <upload>Tải Tệp tin</upload>
     </label>
     <action>
-      <Cancel>#{word.cancel}</Cancel>
-      <Import>Import</Import>
+      <Cancel>Hủy bỏ</Cancel>
+      <Import>Nhập</Import>
     </action>
-    <title>Import Node</title>
+    <title>Nhập Nút</title>
     <msg>
-      <import-successful>Imported successfully.</import-successful>
-      <filename-invalid>Browse an .xml file for the 'Upload File' field to import.</filename-invalid>
-      <filetype-error>Cannot import the uploaded file. The .xml file may be invalid.</filetype-error>
-      <mimetype-invalid>You can only import .xml or .zip files.</mimetype-invalid>
-      <access-denied>Access denied. You are not allowed to import there.</access-denied>
-      <constraint-violation-exception>You cannot import the node, either because the imported data are incorrect or because the node type '{0}' is not allowed to be child's node type'{0}'.</constraint-violation-exception>
-      <item-exists-exception>An incoming referenceable node has the same UUID as an existing node in the workspace.</item-exists-exception>
+      <import-successful>Đã nhập thành công.</import-successful>
+      <filename-invalid>Duyệt tệp tin .xml cho trường 'Tải tệp tin' để nhập vào.</filename-invalid>
+      <filetype-error>Không thể nhập tệp tin đã tải lên. Tệp tin .xml này có thể không hợp lệ.</filetype-error>
+      <mimetype-invalid>Bạn chỉ có thể nhập các tệp tin dạng .xml hoặc .zip.</mimetype-invalid>
+      <access-denied>Truy nhập bị từ chối. Bạn không được phép nhập ở đây.</access-denied>
+      <constraint-violation-exception>Không thể nhập nút do dữ liệu không chính xác hoặc do kiểu nút '{0}' không cho phép phép có kiểu con là '{0}'.</constraint-violation-exception>
+      <item-exists-exception>Một nút trong quá trình nhập có UUID trùng với một nút hiện đang tồn tại trong hệ thống.</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--
@@ -1667,16 +1667,16 @@
   -->
   <UILabelForm>
     <label>
-      <label>Label</label>
+      <label>Nhãn</label>
     </label>
     <action>
-      <Save>#{word.save}</Save>
-      <Cancel>Cancel</Cancel>
+      <Save>Lưu</Save>
+      <Cancel>Hủy bỏ</Cancel>
     </action>
-    <title>Add Label</title>
+    <title>Thêm Nhãn</title>
     <msg>
-      <label-invalid>The label contains some invalid characters.</label-invalid>
-      <label-exist>'{0}' already exists.</label-exist>
+      <label-invalid>Nhãn chứa một số ký tự không hợp lệ.</label-invalid>
+      <label-exist>'{0}' đã tồn tại.</label-exist>
     </msg>
   </UILabelForm>
   <!--
@@ -1685,12 +1685,12 @@
   ###############################################################################
   -->
   <UIRemoveLabelForm>
-    <title>Remove Label</title>
+    <title>Gỡ bỏ Nhãn</title>
     <label>
-      <label>Select Label</label>
+      <label>Chọn Nhãn</label>
     </label>
     <action>
-      <Remove>Remove</Remove>
+      <Remove>Gỡ bỏ</Remove>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIRemoveLabelForm>
@@ -1700,24 +1700,24 @@
   ###############################################################################
   -->
   <UIVersionTree>
-    <title>Children Tree</title>
+    <title>Cây thư mục con</title>
   </UIVersionTree>
   <UIViewVersion>
     <label>
-      <nodeType>Node Type</nodeType>
-      <nodeName>Node Name</nodeName>
-      <VersionNumber>Version Number</VersionNumber>
-      <VersionLabels>Version Labels</VersionLabels>
-      <VersionDate>Version Date</VersionDate>
-      <PropertyName>Property Name</PropertyName>
-      <PropertyValue>Property Values</PropertyValue>
+      <nodeType>Kiểu nút</nodeType>
+      <nodeName>Tên nút</nodeName>
+      <VersionNumber>Số phiên bản</VersionNumber>
+      <VersionLabels>Các nhãn của phiên bản</VersionLabels>
+      <VersionDate>Ngày của phiên bản</VersionDate>
+      <PropertyName>Tên thuộc tính</PropertyName>
+      <PropertyValue>Các giá trị của thuộc tính</PropertyValue>
     </label>
     <msg>
-      <not-supported>This function is not supported for versioning.</not-supported>
+      <not-supported>Chức năng này không hỗ trợ cho thay đổi phiên bản</not-supported>
     </msg>
   </UIViewVersion>
   <UIVersionList>
-    <title>Children Name</title>
+    <title>Tên node con</title>
   </UIVersionList>
   <!--
   ################################################################################
@@ -1726,42 +1726,42 @@
   -->
   <UICategoryManager>
     <action>
-      <Close>Close</Close>
+      <Close>Đóng</Close>
     </action>
     <tab>
       <label>
-        <UICategoriesAddedList>Referenced Categories</UICategoriesAddedList>
-        <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
+        <UICategoriesAddedList>Các danh mục được tham chiếu</UICategoriesAddedList>
+        <UIOneNodePathSelector>Chọn danh mục</UIOneNodePathSelector>
       </label>
     </tab>
   </UICategoryManager>
   <UICategoriesAddedList>
     <header>
-      <path>Category</path>
-      <action>Actions</action>
+      <path>Danh mục</path>
+      <action>Các thao tác</action>
     </header>
     <msg>
-      <access-denied>Access denied. You do not have access permission in this node.</access-denied>
-      <confirm-delete>Are you sure you want to delete this reference?</confirm-delete>
+      <access-denied>Truy nhập bị hủy bỏ! Bạn không có đủ quyền trên nút này.</access-denied>
+      <confirm-delete>Bạn có thực sự muốn xóa tham chiếu này?</confirm-delete>
     </msg>
     <action>
       <title>
-        <Delete>Delete</Delete>
+        <Delete>Xóa</Delete>
       </title>
     </action>
     <label>
-      <category>Category</category>
+      <category>Loại</category>
       <actions>Tác vụ</actions>
-      <delete>Delete</delete>
+      <delete>Xóa</delete>
     </label>
   </UICategoriesAddedList>
   <UITreeList>
     <header>
-      <name>Name</name>
-      <action>Action</action>
+      <name>Tên</name>
+      <action>Thao tác</action>
     </header>
     <info>
-      <child-not-found>This node does not have any child nodes.</child-not-found>
+      <child-not-found>Nút này không có bất kỳ nút con nào.</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -1771,32 +1771,32 @@
   -->
   <UIRelationManager>
     <action>
-      <Close>Close</Close>
+      <Close>Đóng</Close>
     </action>
     <tab>
       <label>
-        <UIOneNodePathSelector>Select Relation</UIOneNodePathSelector>
+        <UIOneNodePathSelector>Lựa chọn quan hệ</UIOneNodePathSelector>
       </label>
     </tab>
     <tab>
       <label>
-        <UIRelationsAddedList>Relation List</UIRelationsAddedList>
+        <UIRelationsAddedList>Danh sách các quan hệ</UIRelationsAddedList>
       </label>
     </tab>
   </UIRelationManager>
   <UIRelationsAddedList>
     <header>
-      <path>Relations</path>
-      <action>Actions</action>
+      <path>Các quan hệ</path>
+      <action>Các thao tác</action>
     </header>
     <action>
       <title>
-        <Delete>Delete</Delete>
+        <Delete>Xóa</Delete>
       </title>
     </action>
     <msg>
-      <confirm-delete>Are you sure you want to delete this relation?</confirm-delete>
-      <can-not-add-itself>You cannot add a relation to itself.</can-not-add-itself>
+      <confirm-delete>Bạn có thực sự muốn xóa quan hệ này?</confirm-delete>
+      <can-not-add-itself>Bạn không thể thêm một quan hệ cho bản thân một nút.</can-not-add-itself>
     </msg>
   </UIRelationsAddedList>
   <!--
@@ -1806,19 +1806,19 @@
   -->
   <UIClipboard>
     <header>
-      <path>Path</path>
+      <path>Đường dẫn</path>
       <command>Cm</command>
-      <action>Action</action>
+      <action>Thao tác</action>
     </header>
     <label>
-      <nocommand>There are no items in the clipboard.</nocommand>
+      <nocommand>Không có khoản mục nào trong sổ ghi tạm!</nocommand>
     </label>
     <action>
-      <clearall>Clear All</clearall>
+      <clearall>Xóa tất cả</clearall>
     </action>
     <msg>
-      <unable-pasted>Cannot paste this node.</unable-pasted>
-      <node-pasted>Node {0} has been pasted at location {1}. This operation has already been saved.</node-pasted>
+      <unable-pasted>Không thể dán nút này.</unable-pasted>
+      <node-pasted>Nút {0} đã được dán vào vị trí {1}. Thao tác này đã được lưu và bạn không cần nhập biểu tượng đĩa.</node-pasted>
     </msg>
   </UIClipboard>
   <!--
@@ -1833,9 +1833,9 @@
   -->
   <UISelectDocumentForm>
     <label>
-      <selectTemplate>Select your template from the list below</selectTemplate>
-      <ThumbnailView>Thumbnail View</ThumbnailView>
-      <ListView>List View</ListView>
+      <selectTemplate>Select your template in the list below</selectTemplate>
+      <ThumbnailView>Xem hình thu nhỏ</ThumbnailView>
+      <ListView>Hiển thị dạng danh sách</ListView>
       <Cancel>#{word.cancel}</Cancel>
     </label>
   </UISelectDocumentForm>
@@ -1845,29 +1845,29 @@
   #######################################################################
   -->
   <UIDocumentForm>
-    <title>Add New Document</title>
+    <title>Thêm tài liệu mới</title>
     <action>
-      <Save>Save</Save>
-      <SaveAndClose>Save &amp; Close</SaveAndClose>
-      <ChangeType>Change Content Type</ChangeType>
-      <Fullscreen>Fullscreen</Fullscreen>
+      <Save>#{word.save}</Save>
+      <SaveAndClose>Lưu và đóng</SaveAndClose>
+      <ChangeType>Thay đổi kiểu nội dung</ChangeType>
+      <Fullscreen>Toàn màn hình</Fullscreen>
       <Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
     </action>
 <tooltip>
-<FullScreen>Maximize/Minimize</FullScreen>
+<FullScreen>Phóng to/thu nhỏ</FullScreen>
 </tooltip>
     <msg>
-      <cannot-save>An error occurred while saving the document.</cannot-save>
-      <in-versioning>Please check out the current node before adding a new node.</in-versioning>
-      <not-support>Cannot load the template of '{0}'.</not-support>
-      <value-invalid>'{0}' is a needed value.</value-invalid>
-      <repository-exception>An error occurred while saving the document.</repository-exception>
+      <cannot-save>Lỗi xảy ra khi lưu tài liệu.</cannot-save>
+      <in-versioning>Cần checkout nút hiện thời trước khi thêm nút mới.</in-versioning>
+      <not-support>Không thể tải mẫu của '{0}'.</not-support>
+      <value-invalid>'{0}' là giá trị cần thiết.</value-invalid>
+      <repository-exception>Lỗi xảy ra khi lưu tài liệu.</repository-exception>
       <!--DMS 2.4.x; ECM-3543-->
-      <repository-exception-permission>You do not have permission to add a new document to this node.</repository-exception-permission>
-      <not-allowed-same-name-sibling>You cannot save this document. It is not allowed to have the same name as its sibling.</not-allowed-same-name-sibling>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
-      <item-not-found>Item not found. This node (or its ancestor) may have been deleted. Please click the Refresh button.</item-not-found>
+      <repository-exception-permission>Bạn không có quyền để thêm một tài liệu mới vào nút này.</repository-exception-permission>
+      <not-allowed-same-name-sibling>Không thể lưu tài liệu này. Node này không được phép trùng tên.</not-allowed-same-name-sibling>
+      <numberformat-exception>Bạn không thể lưu tài liệu này. Tên cung cấp phải ở định dạng số.</numberformat-exception>
+      <item-not-found>Khoản mục không được tìm thấy! Có thể nút này hoặc nút cha đã bị xóa. Vui lòng nhấp vào nút làm mới.</item-not-found>
     </msg>
   </UIDocumentForm>
   <!--
@@ -1878,7 +1878,7 @@
   <UIViewDocumentController>
     <tab>
       <label>
-        <UIViewDocumentInfo>Information</UIViewDocumentInfo>
+        <UIViewDocumentInfo>Thông tin</UIViewDocumentInfo>
       </label>
     </tab>
     <action>
@@ -1896,10 +1896,10 @@
   #############################################################################
   -->
   <UIQuerySaveForm>
-    <title>Save Query Form</title>
+    <title>Lưu hình thức truy vấn</title>
     <label>
-      <query>Query</query>
-      <name>Query Name</name>
+      <query>Truy vấn</query>
+      <name>Tên câu truy vấn</name>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1913,8 +1913,8 @@
   -->
   <editActionPopup>
     <title>
-      <UIActionForm>Edit Action</UIActionForm>
-      <EditFormAction>Edit Action</EditFormAction>
+      <UIActionForm>Thao tác sửa</UIActionForm>
+      <EditFormAction>Thao tác sửa</EditFormAction>
     </title>
   </editActionPopup>
   <UIActionViewContainer>
@@ -1925,18 +1925,18 @@
   <UIActionList>
     <header>
       <name>#{word.name}</name>
-      <description>Description</description>
-  <lifecycle>Life Cycle</lifecycle>
-  <triggeredaction>Triggered Action</triggeredaction>
-      <instanceOf>Instance of Action Type</instanceOf>
-      <action>Action</action>
+      <description>Mô tả</description>
+  <lifecycle>Vòng đời</lifecycle>
+  <triggeredaction>Hành động được kích hoạt</triggeredaction>
+      <instanceOf>Kiểu hành động</instanceOf>
+      <action>Hành động</action>
     </header>
     <msg>
-      <remove-popup-first>You must close the edit pop-up before deleting this node.</remove-popup-first>
-      <confirm-delete-action>Are you sure you want to delete this action?</confirm-delete-action>
-      <template-empty>The '{0}' template is null or empty.</template-empty>
-      <template-null>The template is either null or you do not have permission to access this template.</template-null>
-      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
+      <remove-popup-first>Bạn phải đóng cửa sổ trước khi xóa nút.</remove-popup-first>
+      <confirm-delete-action>Bạn có thực sự muốn xóa thao tác này?</confirm-delete-action>
+      <template-empty>Mẫu của '{0}' là null hoặc rỗng.</template-empty>
+      <template-null>Mẫu rỗng hoặc bạn không có quyền truy cập mẫu này.</template-null>
+      <access-denied>Truy nhập bị hủy bỏ!Bạn không có quyền để thực hiện thao tác này.</access-denied>
     </msg>
     <action>
       <Close>#{word.close}</Close>
@@ -1951,20 +1951,20 @@
       <Back>#{word.back}</Back>
     </action>
     <label>
-      <name>Action Form</name>
+      <name>Biểu mẫu hành động</name>
     </label>
     <msg>
-      <repository-exception>You cannot save this action. The name provided has some special characters.</repository-exception>
-      <numberformat-exception>You cannot save this action. The name provided must be in numerical format.</numberformat-exception>
-      <existed-action>The action name '{0}' already exists. Please select another one.</existed-action>
-      <unable-add-action>Cannot add this action.</unable-add-action>
-      <unable-add>Cannot add this action. This node is either root or you do not have permision.</unable-add>
-      <not-support>Dialog '{0}' is not supported.</not-support>
-      <no-permission-add>Access denied. You do not have the right to add an action here.</no-permission-add>
-      <access-denied>Access denied. You do not have permission to access this template.</access-denied>
-      <lifecycle-invalid>You cannot add this action. The lifecycle phase of action is invalid.</lifecycle-invalid>
+      <repository-exception>Không thể lưu thao tác này. Tên thao tác vừa nhập chứa một số kí tự đặc biệt.</repository-exception>
+      <numberformat-exception>Không thể lưu thao tác này. Tên phải là kiểu số.</numberformat-exception>
+      <existed-action>Tên thao tác '{0}' đã tồn tại. Vui lòng lựa chọn tên khác!</existed-action>
+      <unable-add-action>Không thể thêm thao tác này.</unable-add-action>
+      <unable-add>Không thể thêm hành động này. Do nút hiện tại là nút gốc hoặc bạn không có quyền tạo hành động.</unable-add>
+      <not-support>Hộp thoại '{0}' không được hỗ trợ</not-support>
+      <no-permission-add>Truy nhập bị hủy bỏ. Bạn không có quyền thêm một thao tác ở đây.</no-permission-add>
+      <access-denied>Truy nhập bị hủy bỏ. Bạn không có quyền truy cập mẫu này.</access-denied>
+      <lifecycle-invalid>Không thể thêm thao tác này. Vòng đời của thao tác không hợp lệ</lifecycle-invalid>
     </msg>
-    <title>Add/Edit Action</title>
+    <title>Thêm mới/Sửa một thao tác</title>
     <validator>
       <validator>Validator</validator>
       <destPath>With Path</destPath>
@@ -1972,22 +1972,22 @@
   </UIActionForm>
   <UIActionTypeForm>
     <label>
-      <actionType>Create Action of Type</actionType>
+      <actionType>Kiểu hành động</actionType>
     </label>
   </UIActionTypeForm>
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
-      <UIPermissionSelector>Permission Browser</UIPermissionSelector>
-      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+      <UIOneNodePathSelector>Chọn Vị trí</UIOneNodePathSelector>
+      <UIPermissionSelector>Lựa chọn quyền</UIPermissionSelector>
+      <UICategoriesSelector>Thêm Danh mục</UICategoriesSelector>
     </title>
   </PopupComponent>
   <EditFormAction>
     <validator>
       <validator>Validator</validator>
-      <destPath>With Path</destPath>
+      <destPath>Với đường dẫn</destPath>
     </validator>
-    <title>Action Form</title>
+    <title>Biểu mẫu hành động</title>
   </EditFormAction>
   <!--
   #############################################################################
@@ -1996,19 +1996,19 @@
   -->
   <UIAddressBar>
     <msg>
-      <path-not-found>Path not found.</path-not-found>
-      <access-denied>Access denied. You do not have the right to read the node.</access-denied>
-      <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
+      <path-not-found>Không tìm thấy đường dẫn.</path-not-found>
+      <access-denied>Truy cập bị từ chối. Bạn không có quyền để truy cập nút này.</access-denied>
+      <keyword-not-support>Từ khóa không hợp lệ. Một số ký tự không được hỗ trợ.</keyword-not-support>
     </msg>
     <label>
       <exeButton>Chuyển</exeButton>
-      <address>Address:</address>
+      <address>Địa chỉ:</address>
     </label>
     <title>
       <exeButton>Chuyển</exeButton>
-      <backButton>Back to the previous node</backButton>
-      <showHistory>Show the history address</showHistory>
-      <changeNode>Change Node</changeNode>
+      <backButton>Trở về nút trước</backButton>
+      <showHistory>Hiện địa chỉ lược sử</showHistory>
+      <changeNode>Thay đổi nút</changeNode>
     </title>
   </UIAddressBar>
   <!--
@@ -2020,17 +2020,17 @@
     <action>
       <Watch>Theo dõi</Watch>
       <Cancel>#{word.cancel}</Cancel>
-      <Continue>Continue</Continue>
+      <Continue>Tiếp tục</Continue>
       <Unwatch>Ngừng theo dõi</Unwatch>
     </action>
     <label>
-      <notificationType>Notification Type:</notificationType>
+      <notificationType>Kiểu thông báo:</notificationType>
     </label>
     <msg>
-      <not-support>This notification type is not supported. Please select another type.</not-support>
-      <watching-successfully>You are watching this document.</watching-successfully>
-      <unwatching-successfully>You have left the watchers list successfully.</unwatching-successfully>
-      <node-iswatching>This document is watched.</node-iswatching>
+      <not-support>Vui lòng chọn kiểu thông báo mà chúng tôi hỗ trợ.</not-support>
+      <watching-successfully>Bạn đang theo dõi tài liệu này.</watching-successfully>
+      <unwatching-successfully>Bạn không còn theo dõi tài liệu này nữa.</unwatching-successfully>
+      <node-iswatching>Tài liệu này đang được theo dõi.</node-iswatching>
     </msg>
   </UIWatchDocumentForm>
   <!--
@@ -2040,24 +2040,24 @@
   -->
   <UITaggingForm>
     <label>
-      <names>Tag Names:</names>
-      <linked>Linked Tags:</linked>
+      <names>Các nhãn:</names>
+      <linked>Nhãn liên kết:</linked>
       <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
-      <AddTag>Add</AddTag>
+      <AddTag>Thêm</AddTag>
       <Cancel>#{word.close}</Cancel>
     </action>
     <msg>
-      <name-exist>The tag name '{0}' already exists.</name-exist>
-      <tagName-invalid>The tag name contains some invalid characters.</tagName-invalid>
-      <tag-name-empty>Your tag name is empty</tag-name-empty>
-      <tag-name-duplicate>The input tag names are duplicate.</tag-name-duplicate>
-      <tagName-too-long>One of the tags entered was too long. The tag name must be less than 30 characters.</tagName-too-long>
-      <path-not-found>This tag has been deleted or changed. Please click on the Refresh button.</path-not-found>
+      <name-exist>Tên nhãn '{0}' đã tồn tại.</name-exist>
+      <tagName-invalid>Có một số kí tự không hợp lệ trong tên nhãn.</tagName-invalid>
+      <tag-name-empty>Tên thẻ của bạn là rỗng</tag-name-empty>
+      <tag-name-duplicate>Tên thẻ bạn nhập bị trùng nhau.</tag-name-duplicate>
+      <tagName-too-long>Một trong các thẻ nhập là quá dài. Tên thẻ phải là ít hơn 30 ký tự.</tagName-too-long>
+      <path-not-found>Có thể thẻ đã bị xóa hoặc bị thay đổi. Vui lòng nhấp nút Refresh.</path-not-found>
     </msg>
     <introduction>
-      <tagName>Separate multiple tags by commas ","</tagName>
+      <tagName>Tách nhiều thẻ bằng dấu phẩy ","</tagName>
     </introduction>
   </UITaggingForm>
   <!--
@@ -2067,30 +2067,30 @@
   -->
   <UIMultiLanguageForm>
     <label>
-      <languages>Language</languages>
-      <default>Default</default>
+      <languages>Ngôn ngữ</languages>
+      <default>Mặc định</default>
     </label>
     <action>
-      <AddLanguage>Add</AddLanguage>
-      <SetDefault>Set Default</SetDefault>
+      <AddLanguage>Thêm</AddLanguage>
+      <SetDefault>Thiết lập mặc định</SetDefault>
       <Cancel>#{word.cancel}</Cancel>
-      <View>View</View>
+      <View>Hiển thị</View>
     </action>
     <msg>
-      <access-denied>Access denied. You do not have add permission in this node.</access-denied>
+      <access-denied>Truy cập bị từ chối. Bạn không có quyền thêm mới trong nút này.</access-denied>
     </msg>
   </UIMultiLanguageForm>
   <UILanguageTypeForm>
     <label>
-      <typeLang>Language</typeLang>
-      <default>Set Default</default>
-      <defaultLang>Default Language</defaultLang>
+      <typeLang>Ngôn ngữ</typeLang>
+      <default>Thiết lập mặc định</default>
+      <defaultLang>Ngôn ngữ mặc định</defaultLang>
     </label>
   </UILanguageTypeForm>
   <UILanguageDialogForm>
     <msg>
-      <select-lang>You must select a language and fill in the information before saving.</select-lang>
-      <access-denied>Access denied. You do not have add permission in this node.</access-denied>
+      <select-lang>Bạn phải chọn một ngôn ngữ và điền các thông tin trước khi lưu.</select-lang>
+      <access-denied>Truy cập bị từ chối. Bạn không có quyền thêm mới trong nút này.</access-denied>
     </msg>
     <action>
       <Save>#{word.save}</Save>
@@ -2104,7 +2104,7 @@
   -->
   <UIViewMetadataContainer>
     <msg>
-      <path-not-found>Node does not support this view.</path-not-found>
+      <path-not-found>Nút không hỗ trợ kiểu hiển thị này.</path-not-found>
     </msg>
   </UIViewMetadataContainer>
   <!--
@@ -2120,12 +2120,12 @@
   </UIViewMetadataForm>
   <metadataForm>
     <title>
-      <UIViewMetadataForm>Add/Edit Properties</UIViewMetadataForm>
+      <UIViewMetadataForm>Thêm/Xóa các thuộc tính</UIViewMetadataForm>
     </title>
   </metadataForm>
   <UIViewMetadataTemplate>
     <msg>
-      <access-denied>Access denied. You are either not the owner or do not have edit permission in this node.</access-denied>
+      <access-denied>Truy cập bị từ chối. Bạn không phải là người tạo hoặc không có quyền sửa trên nút này.</access-denied>
     </msg>
   </UIViewMetadataTemplate>
   <!--
@@ -2135,26 +2135,26 @@
   -->
   <ECMNameValidator>
     <msg>
-      <Invalid-char>The field '{0}' contains some invalid characters. Please enter another value.</Invalid-char>
-      <empty-input>The value of the field '{0}' is null or empty.</empty-input>
+      <Invalid-char>Có một số kí tự không hợp lệ trong trường '{0}'. Vui lòng nhập giá trị khác!</Invalid-char>
+      <empty-input>Trường'{0}' chưa có giá trị.</empty-input>
     </msg>
   </ECMNameValidator>
   <DateTimeValidator>
     <msg>
-      <Invalid-input>Field '{0}' with value '{1}' is invalid.</Invalid-input>
+      <Invalid-input>Trường '{0}' với giá trị '{1}' là không hợp lệ</Invalid-input>
     </msg>
   </DateTimeValidator>
   <CronExpressionValidator>
-    <invalid-input>Your cron expression is invalid. Please check the syntax.</invalid-input>
+    <invalid-input>Biểu thức cron không đúng. Vui lòng kiểm tra lại cú pháp.</invalid-input>
   </CronExpressionValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>Please fill in the field '{0}'.</empty-input>
+      <empty-input>Vui lòng điền giá trị vào trường '{0}'</empty-input>
     </msg>
   </EmptyFieldValidator>
   <CategoryValidator>
     <msg>
-      <non-categories>Categories are wrong. Please select good categories.</non-categories>
+      <non-categories>Tên hạng mục sai. Xin vui lòng chọn hạng mục khác.</non-categories>
     </msg>
   </CategoryValidator>
   <!--
@@ -2163,25 +2163,25 @@
   ###################################################################################
   -->
   <ReferentialIntegrityException>
-    <msg>Action failed. There are still some reference items in the workspace.</msg>
+    <msg>Thao tác lỗi. Một số thuộc tính tham chiếu trong không gian làm việc vẫn tham chiếu đến khoản mục này.</msg>
   </ReferentialIntegrityException>
   <ItemExistsException>
-    <msg>This item already exists.</msg>
+    <msg>Khoản mục này đã tồn tại!</msg>
   </ItemExistsException>
   <AccessControlException>
-    <msg>Access denied. You do not have permission to perform this action.</msg>
+    <msg>Bạn không có đủ quyền để thực hiện thao tác này.</msg>
   </AccessControlException>
   <AccessDeniedException>
-    <msg>Access denied.</msg>
+    <msg>Truy cập bị hủy bỏ</msg>
   </AccessDeniedException>
   <ItemNotFoundException>
-    <msg>Item not found. It may have been removed or changed.</msg>
+    <msg>Không tìm thấy khoản mục này. Có thể nó đã bị xóa bỏ hoặc đã thay đổi.</msg>
   </ItemNotFoundException>
   <PathNotFoundException>
-    <msg>Path not found. It may have been removed or changed.</msg>
+    <msg>Không tìm thấy đường dẫn này. Có thể nó đã bị xóa bỏ hoặc thay đổi đường dẫn.</msg>
   </PathNotFoundException>
   <ConstraintViolationException>
-    <msg>You cannot perform this action due to some constraints.</msg>
+    <msg>Bạn không thể thực hiện hành động này vì một số ràng buộc.</msg>
   </ConstraintViolationException>
   <!--
   ###################################################################################
@@ -2191,19 +2191,19 @@
   <UIPublicationForm>
     <label>
       <published>Đã xuất bản</published>
-      <non-published>Unpublished</non-published>
-      <public>Public</public>
-      <private>Private</private>
-      <state>State</state>
-      <visibility>Visibility</visibility>
-      <nodeName>Tên Node :</nodeName>
-      <lifecycleName>Lifecycle Name</lifecycleName>
-      <stateName>State Name</stateName>
+      <non-published>Chưa xuất bản</non-published>
+      <public>Công khai</public>
+      <private>Riêng tư</private>
+      <state>Trạng thái</state>
+      <visibility>Khả năng hiển thị</visibility>
+      <nodeName>Tên Nút :</nodeName>
+      <lifecycleName>Tên vòng đời</lifecycleName>
+      <stateName>Tên tình trạng</stateName>
     </label>
     <action>
-      <Save>Save</Save>
-      <UnsubcriberLifeCycle>Unsubscriber</UnsubcriberLifeCycle>
-      <Cancel>Cancel</Cancel>
+      <Save>Lưu</Save>
+      <UnsubcriberLifeCycle>Gỡ bỏ ghi danh</UnsubcriberLifeCycle>
+      <Cancel>Hủy bỏ</Cancel>
     </action>
   </UIPublicationForm>
   <!--
@@ -2213,14 +2213,14 @@
   -->
   <UIWorkspaceList>
     <label>
-      <workspaceName>Workspace:</workspaceName>
-      <rootNodeInfo>Root Path:</rootNodeInfo>
-      <rootPath>Root Path:</rootPath>
+      <workspaceName>Không gian lưu trữ:</workspaceName>
+      <rootNodeInfo>Đường dẫn Gốc:</rootNodeInfo>
+      <rootPath>Đường dẫn Gốc:</rootPath>
     </label>
   </UIWorkspaceList>
   <pathSelector>
     <title>
-      <UIOneNodePathSelector>Node Selector</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Chọn Nút</UIOneNodePathSelector>
     </title>
   </pathSelector>
   <!--
@@ -2230,29 +2230,29 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>The email address is invalid.</Invalid-input>
+      <Invalid-input>Địa chỉ email không hợp lệ.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Are you sure you want to delete?</confirm-delete>
+      <confirm-delete>Bạn có chắc chắn muốn xóa không?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
   <RepeatCountValidator>
     <msg>
-      <invalid-value>The value in the field 'Repeat Count' is invalid. Only integers or -1 are allowed.</invalid-value>
+      <invalid-value>Giá trị không hợp lệ trong trường 'Repeat count'. Chỉ cho phép gõ kiểu số nguyên hoặc -1.</invalid-value>
     </msg>
   </RepeatCountValidator>
   <RepeatIntervalValidator>
     <msg>
-      <invalid-value>The value in the field 'Time Interval' is invalid. Only long types are allowed.</invalid-value>
+      <invalid-value>Các giá trị trong các trường 'Khoảng thời gian' không hợp lệ. Chỉ cho phép kiểu Long.</invalid-value>
     </msg>
   </RepeatIntervalValidator>
   <UIPermissionSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Chọn Nhóm</selectGroup>
+      <selectUser>Chọn Người dùng</selectUser>
+      <selectMembership>Chọn Kiểu thành viên</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2262,8 +2262,8 @@
   -->
   <ECMStandardPropertyNameValidator>
     <msg>
-      <empty-input>The value of the field '{0}' is null or empty.</empty-input>
-      <Invalid-char>The field '{0}'contains some invalid characters. Please enter another value.</Invalid-char>
+      <empty-input>Trường'{0}' chưa có giá trị.</empty-input>
+      <Invalid-char>Có một số kí tự không hợp lệ trong trường '{0}'. Vui lòng nhập giá trị khác.</Invalid-char>
     </msg>
   </ECMStandardPropertyNameValidator>
   <!--
@@ -2273,13 +2273,13 @@
   -->
   <SearchValidator>
     <msg>
-      <empty-input>The value of this field is null or empty.</empty-input>
-      <Invalid-char>This field contains some invalid characters. Please enter another value.</Invalid-char>
-      <Invalid-char2>The number must be followed by the character '~'.</Invalid-char2>
-      <Invalid-char1>The number following the character '~' must between 0 and 1.</Invalid-char1>
-      <Invalid-char3>The number must be followed by the character '^'.</Invalid-char3>
-      <Invalid-char4>Spaces are not allowed near the character '~'.</Invalid-char4>
-      <Invalid-char5>Spaces are not allowed near the character '^'.</Invalid-char5>
+      <empty-input>Giá trị trường này là null hoặc rỗng!</empty-input>
+      <Invalid-char>Có một số kí tự không hợp lệ trong trường này. Vui lòng nhập giá trị khác.</Invalid-char>
+      <Invalid-char2>Số phải được theo sau ký tự '~'.</Invalid-char2>
+      <Invalid-char1>Kiểu số theo sau ký tự '~' phải nằm trong khoảng 0 đến 1.</Invalid-char1>
+      <Invalid-char3>Kiểu số phải được theo sau ký tự '^'.</Invalid-char3>
+      <Invalid-char4>Dấu cách được phép gán ký tự '~'</Invalid-char4>
+      <Invalid-char5>Dấu cách được phép gán ký tự '^'</Invalid-char5>
     </msg>
   </SearchValidator>
   <!--
@@ -2289,15 +2289,15 @@
   -->
   <UIPublicationLogList>
     <header>
-      <date>Date</date>
-      <newState>New State</newState>
-      <user>User</user>
-      <description>Description</description>
-      <version>Version</version>
-      <visibility>Visibility</visibility>
+      <date>Ngày tháng</date>
+      <newState>Trạng thái mới</newState>
+      <user>Người dùng</user>
+      <description>Mô tả</description>
+      <version>Phiên bản</version>
+      <visibility>Khả năng hiển thị:</visibility>
     </header>
     <action>
-      <Close>Close</Close>
+      <Close>Đóng</Close>
     </action>
   </UIPublicationLogList>
   <!--
@@ -2307,8 +2307,8 @@
   -->
   <UIVersionTreeList>
     <header>
-      <version>Version</version>
-      <state>State</state>
+      <version>Phiên bản</version>
+      <state>Trạng thái</state>
     </header>
   </UIVersionTreeList>
   <!--
@@ -2320,20 +2320,20 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <RemoveThumbnail>Remove Thumbnail</RemoveThumbnail>
+      <RemoveThumbnail>Xoá ảnh nhỏ</RemoveThumbnail>
     </action>
     <label>
-      <mediumSize>Thumbnail Image</mediumSize>
-      <SelectFile>Choose Thumbnail Image</SelectFile>
+      <mediumSize>Ảnh nhỏ</mediumSize>
+      <SelectFile>Chọn ảnh nhỏ</SelectFile>
     </label>
     <msg>
-      <mimetype-incorrect>Incorrect file type. Thumbnails can only be created from .JPG, .PNG or .GIF files.</mimetype-incorrect>
-      <access-denied>Access denied. You do not have permission to add a thumbnail to this node.</access-denied>
-      <confirm-delete>Are you sure you want to remove this thumbnail?</confirm-delete>
-      <is-checked-in>This node is checked in. Please check out before performing any action.</is-checked-in>
+      <mimetype-incorrect>Kiểu tệp tin không hợp lệ. Hệ thống chỉ chấp nhận tệp có định dạng JPG, PNG, hoặc GIF.</mimetype-incorrect>
+      <access-denied>Truy nhập bị từ chối. Bạn không có quyền để thêm ảnh thu nhỏ cho nút này.</access-denied>
+      <confirm-delete>Bạn muốn xóa ảnh thu nhỏ này?</confirm-delete>
+      <is-checked-in>Nút này được checked-in. Vui lòng check-out trước khi thực hiện bất kì thao tác nào.</is-checked-in>
     </msg>
     <title>
-      <remove-thumbnail>Remove this Thumbnail</remove-thumbnail>
+      <remove-thumbnail>Xóa hình thu nhỏ này</remove-thumbnail>
     </title>
   </UIThumbnailForm>
   <!--
@@ -2343,13 +2343,13 @@
   -->
   <UIAnyPermission>
     <label>
-      <anyPermission>Any Permission</anyPermission>
+      <anyPermission>Cho phép tất cả</anyPermission>
     </label>
   </UIAnyPermission>
 
   <anyPermission>
     <title>
-      <AddAnyPermission>Set Any Permission</AddAnyPermission>
+      <AddAnyPermission>Thiết lập cho phép bất kỳ</AddAnyPermission>
     </title>
   </anyPermission>
   <!--
@@ -2359,7 +2359,7 @@
   -->
   <UICategoriesSelector>
     <action>
-      <close>Close</close>
+      <close>Đóng</close>
     </action>
   </UICategoriesSelector>
   <!--
@@ -2369,9 +2369,9 @@
   -->
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Chọn nhóm người dùng</selectGroup>
+      <selectUser>Chọn người dùng</selectUser>
+      <selectMembership>Chọn thành viên</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--
@@ -2408,68 +2408,67 @@
   Access directly a JCR FE drive
   -->
   <UIJCRExplorerPortlet>
-    <nopermission>There is either no drive or you do not have permission to access this drive.</nopermission>
+    <nopermission>Không có ổ đĩa này hoặc bạn không có quyền để truy cập.</nopermission>
   </UIJCRExplorerPortlet>
 
   <UIJcrExplorerEditForm>
-    <title>Edit File Explorer</title>
+    <title>Chỉnh sửa tập tin Explorer</title>
     <action>
-      <Edit>Edit</Edit>
-      <Save>Save</Save>
-      <Cancel>Cancel</Cancel>
+      <Edit>Sửa</Edit>
+      <Save>Lưu</Save>
+      <Cancel>Hủy bỏ</Cancel>
     </action>
     <label>
-      <repository>Repository</repository>
-      <categoryMandatoryWhenFileUpload>Specify a category while uploading a file.</categoryMandatoryWhenFileUpload>
-      <uploadFileSizeLimitMB>The size limit of the uploaded file (MB)</uploadFileSizeLimitMB>
-      <isDirectlyDrive>Direct Drive</isDirectlyDrive>
-      <driveName>Drive Name</driveName>
-      <usecase>Select Type</usecase>
-      <SelectNodePath>Select Path</SelectNodePath>
-      <editInNewWindow>Edit in New Window</editInNewWindow>
-      <showTopBar>Show Top Bar</showTopBar>
-      <showActionBar>Show Action Bar</showActionBar>
-      <showSideBar>Show Left Bar</showSideBar>
-      <showFilterBar>Show Filter Bar</showFilterBar>
-      <nodePath>Select Path</nodePath>
+      <repository>Kho dữ liệu</repository>
+      <categoryMandatoryWhenFileUpload>Bắt buộc chọn danh mục khi tải lên</categoryMandatoryWhenFileUpload>
+      <uploadFileSizeLimitMB>Giới hạn kích thước tệp tải lên (MB)</uploadFileSizeLimitMB>
+      <isDirectlyDrive>Ổ đĩa Trực tiếp</isDirectlyDrive>
+      <driveName>Tên ổ đĩa</driveName>
+      <usecase>Kiểu truy cập</usecase>
+      <SelectNodePath>Chọn Đường dẫn</SelectNodePath>
+      <editInNewWindow>Chỉnh sửa trong Cửa sổ Mới</editInNewWindow>
+      <showTopBar>Hiện Thanh Trên Cùng</showTopBar>
+      <showActionBar>Hiện Thanh Hành động</showActionBar>
+      <showSideBar>Hiện Thanh Trái</showSideBar>
+      <showFilterBar>Hiển thị Thanh Bộ lọc</showFilterBar>
+      <nodePath>Chọn Đường dẫn</nodePath>
     </label>
   </UIJcrExplorerEditForm>
 
   <UIDriveSelector>
     <label>
-      <driveName>Drive Name</driveName>
+      <driveName>Tên Ổ đĩa</driveName>
       <action>Hành động</action>
-      <adddrives>Add Drives</adddrives>
+      <adddrives>Thêm Ổ đĩa</adddrives>
     </label>
   </UIDriveSelector>
   <UIJcrExplorerEditForm>
     <label>
-      <driveName>Drive Name</driveName>
       <DriveNameInput>UI JCR Explorer Edit Form</DriveNameInput>
     </label>
     <msg>
       <not-have-social>The Social usecase is not available. Use the Selection one instead.</not-have-social>
-      <personal-usecase>The private drive of the current user will be used when you select the Personal usecase.</personal-usecase>
-      <drive-edit-permission>You cannot edit the drive name. Please click the Edit button.</drive-edit-permission>
-      <path-edit-permission>You cannot edit the path. Please click the Edit button.</path-edit-permission>
+      <personal-usecase>Ổ đĩa cá nhân của người sử dụng hiện tại sẽ được sử dụng khi bạn chọn kiểu truy cập là người dùng.</personal-usecase>
+      <drive-edit-permission>Bạn không thể Chỉnh sửa tên ổ đĩa. Vui lòng nhấp chọn nút Chỉnh sửa.</drive-edit-permission>
+      <path-edit-permission>Bạn không thể Chỉnh sửa đường dẫn. Hãy nhấp chọn nút Chỉnh sửa.</path-edit-permission>
     </msg>
   </UIJcrExplorerEditForm>
 
   <PopUpSelectDrive>
     <title>
-      <UIDriveSelector>Select Drive</UIDriveSelector>
+      <UIDriveSelector>Chọn Ổ đĩa</UIDriveSelector>
     </title>
   </PopUpSelectDrive>
 
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>Select Node</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Chọn Nút</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
 
   <DriveNameInput>
     <title>
-      <SelectDrive>Select Drive</SelectDrive>
+      <SelectDrive>Chọn Ổ đĩa</SelectDrive>
     </title>
   </DriveNameInput>
 
@@ -2478,141 +2477,141 @@
   -->
   <UIActionBar>
     <tooltip>
-      <AddSymLink>Add Symlink</AddSymLink>
-      <AddLocalizationLink>Add Translation</AddLocalizationLink>
+      <AddSymLink>Thêm mới liên kết</AddSymLink>
+      <AddLocalizationLink>Thêm bản dịch</AddLocalizationLink>
     </tooltip>
   </UIActionBar>
 
   <UIPopupWindow>
     <title>
-      <UISymLinkManager>Symlink Manager</UISymLinkManager>
-      <UIAddTranslationManager>Add Translation</UIAddTranslationManager>
+      <UISymLinkManager>Quản lý Symlink</UISymLinkManager>
+      <UIAddTranslationManager>Thêm bản dịch</UIAddTranslationManager>
     </title>
   </UIPopupWindow>
 
   <UISymLinkForm>
     <label>
-      <symLinkName>Symlink Name</symLinkName>
-      <pathNode>Path Node</pathNode>
+      <symLinkName>Tên Symlink</symLinkName>
+      <pathNode>Đường dẫn Nút</pathNode>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <addFolder-successful>The symlink '{0}' was added successfully.</addFolder-successful>
-      <name-invalid>Please enter the symlink name.</name-invalid>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <fileName-error>The file name is invalid.</fileName-error>
-      <constraint-violation>You cannot add the'{0}' node type to the current node.</constraint-violation>
-      <repository-exception>Access denied. You do not have permission to add symlink to this node.</repository-exception>
-      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
-      <path-node-invalid>Please enter the path node.</path-node-invalid>
-      <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
-      <non-node>Please select the trust target node; you may not have the right to read this node.</non-node>
-      <cannot-save>You cannot add a symlink for this node type.</cannot-save>
-      <item-exists-exception>The node name already exists.</item-exists-exception>
-      <translation-node-same-language-default>The translation node has the same language as the default language of current node.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>This target node is not referred.</UnsupportedRepositoryOperationException>
+      <addFolder-successful>Symlink '{0}' đã được thêm vào thành công.</addFolder-successful>
+      <name-invalid>Vui lòng nhập tên symlink.</name-invalid>
+      <name-not-allowed>Tên này không được phép.</name-not-allowed>
+      <fileName-error>Tên tệp tin không hợp lệ.</fileName-error>
+      <constraint-violation>Nút hiện tại không cho phép thêm mới kiểu nút là '{0}'</constraint-violation>
+      <repository-exception>Truy cập bị từ chối. Bạn không được phân quyền thêm mới symlink cho nút này.</repository-exception>
+      <numberformat-exception>Bạn không thể lưu thư mục này. Tên cung cấp phải ở định dạng chữ số.</numberformat-exception>
+      <path-node-invalid>Vui lòng nhập đường dẫn.</path-node-invalid>
+      <path-node-not-allowed>Tên này không được phép.</path-node-not-allowed>
+      <non-node>Bạn có thể không có quyền để đọc nút này. Vui lòng chọn nút đích tin cậy.</non-node>
+      <cannot-save>Bạn không thể thêm symlink cho kiểu nút này.</cannot-save>
+      <item-exists-exception>Tên nút này đã tồn tại.</item-exists-exception>
+      <translation-node-same-language-default>Nút dịch có cùng ngôn ngữ với ngôn ngữ mặc định của node hiện tại.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Nút được liên kết không thể tham chiếu đến (có thể do bị khóa).</UnsupportedRepositoryOperationException>
     </msg>
   </UISymLinkForm>
   
   <UIAddTranslationForm>
     <label>
-      <symLinkName>Symlink Name</symLinkName>
-      <pathNode>Document Path:</pathNode>
-      <note>Select another document that will serve as the translation</note>
+      <symLinkName>Tên Symlink</symLinkName>
+      <pathNode>Đường dẫn tài liệu:</pathNode>
+      <note>Chọn một tài liệu khác để làm bản dịch</note>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <SelectDocument>Select Document</SelectDocument>
+      <SelectDocument>Chọn Tài liệu</SelectDocument>
     </action>
     <msg>
-      <addFolder-successful>The symlink '{0}' is added successfully.</addFolder-successful>
-      <name-invalid>Please enter the symlink name.</name-invalid>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
+      <addFolder-successful>Thêm thành công symlink '{0}'.</addFolder-successful>
+      <name-invalid>Vui lòng nhập tên symlink.</name-invalid>
+      <name-not-allowed>Tên này không hợp lệ.</name-not-allowed>
       <fileName-error>Tên tệp tin không hợp lệ.</fileName-error>
-      <constraint-violation>You cannot add the'{0}' node type to the current node.</constraint-violation>
-      <repository-exception>Access denied. You do not have permission to add symlink to this node.</repository-exception>
-      <numberformat-exception>You cannot save this folder. The name provided must be in numerical format.</numberformat-exception>
-      <path-node-invalid>Please enter the path node.</path-node-invalid>
-      <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
-      <non-node>Please select the trust target node; you may not have the right to read this node.</non-node>
-      <cannot-save>An error occurred while creating the symlink.</cannot-save>
-      <item-exists-exception>The node name already exists.</item-exists-exception>
-      <translation-node-same-language-default>The translation node has the same language as the default language of current node.</translation-node-same-language-default>
-      <UnsupportedRepositoryOperationException>This target node is not referred.</UnsupportedRepositoryOperationException>
+      <constraint-violation>Không thể thêm kiểu nút '{0}' vào nút hiện tại.</constraint-violation>
+      <repository-exception>Truy cập bị từ chối. Bạn không được phân quyền để thêm symlink vào nút này.</repository-exception>
+      <numberformat-exception>Bạn không thể lưu thư mục này. Tên cung cấp phải ở định dạng số.</numberformat-exception>
+      <path-node-invalid>Vui lòng nhập đường dẫn.</path-node-invalid>
+      <path-node-not-allowed>Tên này không hợp lệ.</path-node-not-allowed>
+      <non-node>Vui lòng chọn nút đích tin cậy. có thể bạn không có quyền để đọc nút này.</non-node>
+      <cannot-save>Một lỗi đã xảy ra khi đang tạo symlink.</cannot-save>
+      <item-exists-exception>Tên nút này đã tồn tại.</item-exists-exception>
+      <translation-node-same-language-default>Nút dịch có cùng ngôn ngữ với ngôn ngữ mặc định của nút hiện tại.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Nút được liên kết không thể tham chiếu đến (có thể do bị khóa).</UnsupportedRepositoryOperationException>
     </msg>
   </UIAddTranslationForm>
 
   <UIPopupSymLink>
     <title>
-      <UIOneNodePathSelector>Select Target Node</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Chọn Node Đích</UIOneNodePathSelector>
     </title>
   </UIPopupSymLink>
   <UIPopupSymLink>
     <title>
-      <UIContentSelectorOne>Select Document</UIContentSelectorOne>
+      <UIContentSelectorOne>Chọn Tài liệu</UIContentSelectorOne>
     </title>
   </UIPopupSymLink>
 
   <ECMContextMenu>
     <event>
-      <AddSymLink>Add Symlink</AddSymLink>
-      <AddLocalizationLink>Add Translation</AddLocalizationLink>
+      <AddSymLink>Thêm Symlink</AddSymLink>
+      <AddLocalizationLink>Thêm bản dịch</AddLocalizationLink>
     </event>
   </ECMContextMenu>
 
   <UIWorkingArea>
     <msg>
-      <create-link-problem>You cannot create a link for node '{0}' at '{1}'.</create-link-problem>
-      <dest-node-is-link>The destination node '{0}' is already a symlink, so you cannot create a symlink inside it.</dest-node-is-link>
-      <selected-is-link>The selected node '{0}' is already a link, so you cannot create a link point to another link.</selected-is-link>
-      <confirm-create-link>Do you want to create a link to this location?</confirm-create-link>
+      <create-link-problem>Bạn không thể tạo liên kết cho nút '{0}' tại '{1}'.</create-link-problem>
+      <dest-node-is-link>Nút điểm đến '{0}' đã là một symlink. Vì vậy, bạn không thể tạo symlink bên trong nó.</dest-node-is-link>
+      <selected-is-link>Nút được chọn '{0}' đã là một symlink. Vì vậy, bạn không thể tạo một liên kết trỏ tới một liên kết khác.</selected-is-link>
+      <confirm-create-link>Bạn có muốn tạo liên kết đến vị trí này không?</confirm-create-link>
     </msg>
   </UIWorkingArea>
 
   <ECMContextMenu>
     <event>
-      <CreateLink>Create Link</CreateLink>
+      <CreateLink>Tạo Liên kết</CreateLink>
     </event>
   </ECMContextMenu>
 
   <UIWorkspaceList>
     <msg>
-      <AccessDeniedException>Access denied. You do not have read permission in this workspace.</AccessDeniedException>
+      <AccessDeniedException>Truy cập không được phép. Bạn đã bị giới hạn quyền truy cập trong phần này</AccessDeniedException>
     </msg>
     <label>
-      <taxonomyTree>Category Tree</taxonomyTree>
+      <taxonomyTree>Cây Danh mục</taxonomyTree>
     </label>
   </UIWorkspaceList>
 
   <UIPopupTaxonomy>
     <title>
-      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Thêm danh mục</UIOneTaxonomySelector>
     </title>
   </UIPopupTaxonomy>
 
   <UITreeTaxonomyList>
     <label>
-      <taxonomyTree>Category Tree:</taxonomyTree>
-      <rootNodePath>Root Tree:</rootNodePath>
+      <taxonomyTree>Cây phân loại:</taxonomyTree>
+      <rootNodePath>Cây gốc:</rootNodePath>
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>
 
   <UIActionBar>
     <tooltip>
-      <ManageSimpleCategories>Manage Simple Categories</ManageSimpleCategories>
+      <ManageSimpleCategories>Quản lý việc đơn phân loại.</ManageSimpleCategories>
     </tooltip>
   </UIActionBar>
 
   <UISimpleCategoryManager>
     <tab>
       <label>
-        <UICategoriesAddedList>Referenced Categories</UICategoriesAddedList>
-        <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
+        <UICategoriesAddedList>Những danh mục liên quan</UICategoriesAddedList>
+        <UIOneNodePathSelector>Lựa chọn danh mục</UIOneNodePathSelector>
       </label>
     </tab>
   </UISimpleCategoryManager>
@@ -2620,104 +2619,103 @@
   <UICategoryManager>
     <tab>
       <label>
-        <UIOneTaxonomySelector>Select Category</UIOneTaxonomySelector>
+        <UIOneTaxonomySelector>Lựa chọn danh mục</UIOneTaxonomySelector>
       </label>
     </tab>
   </UICategoryManager>
 
   <UISimpleCategoryManager>
     <action>
-      <Close>Close</Close>
+      <Close>#{word.close}</Close>
     </action>
   </UISimpleCategoryManager>
   <UIPopupWindow>
     <title>
-      <UISimpleCategoryManager>Add Category</UISimpleCategoryManager>
+      <UISimpleCategoryManager>Thêm Danh mục</UISimpleCategoryManager>
     </title>
   </UIPopupWindow>
   <UICategoriesAddedList>
     <msg>
-      <ItemExistsException>The category name already exists.</ItemExistsException>
+      <ItemExistsException>Tên danh mục đã tồn tại.</ItemExistsException>
     </msg>
   </UICategoriesAddedList>
 
   <UIConfirmMessage>
     <label>
       <Close>#{word.cancel}</Close>
-      <OK>Delete</OK>
-      <ReplaceData>Replace Data</ReplaceData>
-      <Back>Back to Rename</Back>
-      <Keepfile>Keep both files</Keepfile>
+      <OK>Xóa</OK>
+      <ReplaceData>Ghi đè dữ liệu</ReplaceData>
+      <Back>Quay lại đổi tên</Back>
+      <Keepfile>Giữ cả hai tệp</Keepfile>
     </label>
   </UIConfirmMessage>
 
   <UIRestoreConfirmMessage>
     <label>
       <Close>#{word.close}</Close>
-      <OK>OK</OK>
-      <ReplaceData>Replace Data</ReplaceData>
-      <Back>Back to Rename</Back>
-      <Keepfile>Keep both files</Keepfile>
+      <OK>Đồng ý</OK>
+      <ReplaceData>Ghi đè dữ liệu</ReplaceData>
+      <Back>Quay lại đổi tên</Back>
+      <Keepfile>Giữ cả hai tệp</Keepfile>
     </label>
   </UIRestoreConfirmMessage>
 
 
   <PopupComponent>
     <title>
-      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Thêm Danh mục</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
 
   <UIWorkingArea>
     <msg>
-      <can-not-move-to-itself>You cannot move the file, because the destination folder is the same as the source folder.</can-not-move-to-itself>
-      <is-editing>You cannot move a document while it is being edited. Please close it first.</is-editing>
+      <can-not-move-to-itself>Không thể di chuyển vị trí: Thư mục đích và thư mục nguồn là giống nhau</can-not-move-to-itself>
+      <is-editing>Tài liệu này đang được chỉnh sửa nên không thể di chuyển được. Bạn hãy đóng nó lại trước khi di chuyển.</is-editing>
     </msg>
   </UIWorkingArea>
 
   <UIImportNode>
     <label>
-      <behavior>UUID Behavior</behavior>
-      <versionHistory>Version History</versionHistory>
+      <behavior>Kiểu UUID</behavior>
+      <versionHistory>Lịch sử phiên bản</versionHistory>
     </label>
     <msg>
-      <history-invalid-type>Invalid file type in the version history. Only .zip files are supported.</history-invalid-type>
-      <history-invalid-content>Invalid content in the version history data. Please select a supported file type to import.</history-invalid-content>
+      <history-invalid-type>Kiểu tệp tin không hợp lệ trong lược sử phiên bản. Chỉ có các tệp tin .zip được hỗ trợ.</history-invalid-type>
+      <history-invalid-content>Dữ liệu trong tài liệu lịch sử phiên bản là không hợp lệ. Bạn nên chọn file chính xác để sử dụng.</history-invalid-content>
     </msg>
   </UIImportNode>
 
   <Import>
     <Behavior>
-      <type0>Create New</type0>
-      <type1>Remove Existing</type1>
-      <type2>Replace Existing</type2>
-      <type3>Throw Exception</type3>
+      <type0>Tạo mới</type0>
+      <type1>Xóa nếu node đang tồn tại</type1>
+      <type2>Chèn nếu node đang tồn tại</type2>
+      <type3>Văng lỗi nếu node đang tồn tại</type3>
     </Behavior>
   </Import>
 
   <UIExportNode>
     <action>
-      <ExportHistory>Export Version History</ExportHistory>
+      <ExportHistory>Xuất lịch sử phiên bản</ExportHistory>
     </action>
   </UIExportNode>
 
   <UIPopupMenu>
     <msg>
-      <node-locked-other-person>This node or its parent node is being locked by another user, so you cannot delete it.</node-locked-other-person>
+      <node-locked-other-person>Nút đang xét hoặc nút cha đang bị khóa bởi người dùng khác, Bạn không thể xóa!</node-locked-other-person>
     </msg>
   </UIPopupMenu>
 
   <Import>
     <label>
-      <docview>Document View</docview>
-      <sysview>System View</sysview>
+      <docview>Kiểu văn bản</docview>
+      <sysview>Kiểu hệ thống</sysview>
     </label>
   </Import>
 
   <UIDocumentForm>
     <msg>
-      <not-support>Cannot load the template of '{0}'.</not-support>
-      <do-not-permission>You do not have permission to load the template '{0}'.</do-not-permission>
+      <do-not-permission>Bạn không có quyền để tải mẫu '{0}'.</do-not-permission>
     </msg>
   </UIDocumentForm>
 
@@ -2729,17 +2727,17 @@
   -->
   <UIActionBar>
     <obtion>
-      <Admin>Admin</Admin>
-      <Info>Info</Info>
-      <Actions>Actions</Actions>
-      <Collaboration>Collaboration</Collaboration>
-      <Search>Search</Search>
+      <Admin>Quản trị</Admin>
+      <Info>Thông tin</Info>
+      <Actions>Hành động</Actions>
+      <Collaboration>Cộng đồng</Collaboration>
+      <Search>Tìm kiếm</Search>
     </obtion>
   </UIActionBar>
 
   <UIPopupMenu>
     <msg>
-      <can-not-unlock-node-is-checked-in>You cannot unlock because the node '{0}' (or its ancestor) is checked in.</can-not-unlock-node-is-checked-in>
+      <can-not-unlock-node-is-checked-in>Không thể mở khóa vì nút '{0}' hoặc cha của '{0}' đang ở trạng thái check-in.</can-not-unlock-node-is-checked-in>
     </msg>
   </UIPopupMenu>
 
@@ -2748,55 +2746,55 @@
   -->
   <UIActionBar>
     <msg>
-      <cannot-enable-version>Cannot enable versioning node.</cannot-enable-version>
+      <cannot-enable-version>Không cho phép tạo phiên bản</cannot-enable-version>
     </msg>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-        <cannot-readsource>You cannot read data from the source node.</cannot-readsource>
+        <cannot-readsource>Bạn không thể đọc dữ liệu từ nút nguồn.</cannot-readsource>
     </msg>
   </UIPopupMenu>
   <UIUploadForm>
     <msg>
-      <upload-not-null>Please upload the file before adding a category.</upload-not-null>
+      <upload-not-null>Xin vui lòng tải lên các tập tin trước khi thêm một thể loại.</upload-not-null>
     </msg>
   </UIUploadForm>
   <UIActionBar>
     <msg>
-      <allow-setProperty>You must set a property for this group.</allow-setProperty>
+      <allow-setProperty>Bạn cần chọn thuộc tính cho nhóm này.</allow-setProperty>
     </msg>
   </UIActionBar>
 
   <UIActionForm>
     <msg>
-      <name-not-allowed>This action name is not allowed.</name-not-allowed>
+      <name-not-allowed>Tên hành động  này không được cho phép.</name-not-allowed>
     </msg>
   </UIActionForm>
 
   <UISaveQueryForm>
     <msg>
-      <name-not-allowed>This query name is not allowed.</name-not-allowed>
+      <name-not-allowed>Tên truy vấn này không được cho phép.</name-not-allowed>
     </msg>
   </UISaveQueryForm>
   <UISimpleSearch>
     <msg>
-      <name-not-allowed>A word or phrase in the content is not allowed.</name-not-allowed>
+      <name-not-allowed>Một từ hoặc một cụm từ trong nội dung không hợp lệ.</name-not-allowed>
     </msg>
   </UISimpleSearch>
   <Drives>
     <label>
-      <Private>Private</Private>
-      <Public>Public</Public>
-      <BackupCenter>Backup Center</BackupCenter>
+      <Private>Riêng tư</Private>
+      <Public>Công khai</Public>
+      <BackupCenter>Ổ đĩa sao lưu</BackupCenter>
       <CategorizedDocumentsCenter>Categorized Documents Center</CategorizedDocumentsCenter>
       <CollaborationCenter>Collaboration Center</CollaborationCenter>
       <DigitalAssetsManagementCenter>Digital Assets Management Center</DigitalAssetsManagementCenter>
-      <DMSAdministration>DMS Administration</DMSAdministration>
-      <DocumentsManagementCenter>Documents Management Center</DocumentsManagementCenter>
-      <LiveDocumentsCenter>Live Documents Center</LiveDocumentsCenter>
-      <PendingDocumentsCenter>Pending Documents Center</PendingDocumentsCenter>
-      <RecordsManagementCenter>Records Management Center</RecordsManagementCenter>
-      <SharedUsersSpace>Shared Users Space</SharedUsersSpace>
+      <DMSAdministration>Quản trị DMS</DMSAdministration>
+      <DocumentsManagementCenter>Ổ đĩa quản lý tài liệu</DocumentsManagementCenter>
+      <LiveDocumentsCenter>Ổ đĩa chứa tài liệu có hiệu lực</LiveDocumentsCenter>
+      <PendingDocumentsCenter>Ổ đĩa chứa tài liệu chưa xử lý</PendingDocumentsCenter>
+      <RecordsManagementCenter>Ổ đĩa quản lý hồ sơ</RecordsManagementCenter>
+      <SharedUsersSpace>Ổ đĩa chia sẻ cho người dùng</SharedUsersSpace>
       <Systemfiles>System Files</Systemfiles>
       <ValidationRequestsDocumentsCenter>Validation Requests Documents Center</ValidationRequestsDocumentsCenter>
     </label>
@@ -2808,10 +2806,10 @@
   -->
   <UIUploadContent>
     <tooltip>
-      <ManageMetadata>Manage Metadata</ManageMetadata>
+      <ManageMetadata>Quản lý Siêu dữ liệu</ManageMetadata>
     </tooltip>
     <label>
-      <manageMetadata>Manage Metadata</manageMetadata>
+      <manageMetadata>Quản lý Siêu dữ liệu</manageMetadata>
     </label>
   </UIUploadContent>
   <UIUploadForm>
@@ -2823,7 +2821,7 @@
   <UIExternalMetadataForm>
     <action>
       <Add>Thêm</Add>
-      <Cancel>Hủy</Cancel>
+      <Cancel>Hủy bỏ</Cancel>
     </action>
   </UIExternalMetadataForm>
     <!--
@@ -2831,7 +2829,7 @@
    -->
   <ECMContextMenu>
       <event>
-        <Permlink>View Document</Permlink>
+        <Permlink>Xem tài liệu</Permlink>
       </event>
   </ECMContextMenu>
   <UIUploadContainer>
@@ -2847,8 +2845,8 @@
    -->
   <UIFolderForm>
     <label>
-      <nt_folder>Document Folder</nt_folder>
-      <nt_unstructured>Content Folder</nt_unstructured>
+      <nt_folder>Thư mục tài liệu</nt_folder>
+      <nt_unstructured>Thư  mục nội dung</nt_unstructured>
       <exo_cssFolder>CSS Folder</exo_cssFolder>
       <exo_jsFolder>Javascript Folder</exo_jsFolder>
       <exo_linkFolder>Link Folder</exo_linkFolder>
@@ -2858,120 +2856,120 @@
 
   <Comments>
     <tooltip>
-      <remove-comment>Remove this comment</remove-comment>
-      <edit-comment>Edit this comment</edit-comment>
+      <remove-comment>Gỡ bỏ bình luận này</remove-comment>
+      <edit-comment>Chỉnh sửa bình luận này</edit-comment>
     </tooltip>
   </Comments>
   <UIDocumentInfo>
     <msg>
-      <confirm-deletecomment>Are you sure you want to delete this comment?</confirm-deletecomment>
+      <confirm-deletecomment>Bạn có chắc chắn muốn xóa bình luận này không?</confirm-deletecomment>
     </msg>
   </UIDocumentInfo>
  <UIDrivesBrowser>
   <msg>
-    <drive-not-exist>The drive '{0}' was not found; you may not have permission to access this repository.</drive-not-exist>
+    <drive-not-exist>Không tìm thấy ổ đĩa '{0}'. Có thể bạn không có quyền truy cập kho dữ liệu này.</drive-not-exist>
   </msg>
  </UIDrivesBrowser>
 
  <UIExportNode>
   <msg>
-    <OutOfMemoryError>You should select System View while exporting large data.</OutOfMemoryError>
+    <OutOfMemoryError>Bạn nên chọn Giao diện kiểu Hệ thống khi xuất dữ liệu lớn.</OutOfMemoryError>
   </msg>
  </UIExportNode>
  <Taxonomy>
     <msg>
-      <AccessDeniedException>You do not have permission to access these category trees.</AccessDeniedException>
+      <AccessDeniedException>Bạn không được phân quyền truy cập các cây danh mục này.</AccessDeniedException>
     </msg>
   </Taxonomy>
 
   <UIJcrExplorerEditForm>
     <msg>
       <notNullDriveName>Chưa có giá trị cho tên ổ đĩa. Bạn hãy nhập giá trị hợp lệ.</notNullDriveName>
-      <notNullPath>The path is null or empty. Please fill out the path.</notNullPath>
+      <notNullPath>Đường dẫn đang bị null hoặc rỗng. Hãy nhập vào đường dẫn</notNullPath>
     </msg>
   </UIJcrExplorerEditForm>
 
   <UIViewSearchResult>
     <tooltip>
-      <remove-attachment>Are you sure you want to remove this attachment file?</remove-attachment>
+      <remove-attachment>Xóa file đính kèm này?</remove-attachment>
     </tooltip>
   </UIViewSearchResult>
 
   <SameNamePopup>
     <title>
-      <UIUploadBehaviorWithSameName>Upload File</UIUploadBehaviorWithSameName>
+      <UIUploadBehaviorWithSameName>Tải Tệp tin lên</UIUploadBehaviorWithSameName>
     </title>
   </SameNamePopup>
 
   <UISingleUploadForm>
-    <title>Upload File</title>
+    <title>Tải Tệp tin lên</title>
     <label>
-      <upload>Select File</upload>
+      <upload>Chọn Tệp tin</upload>
       <name>Tên</name>
-      <fieldListTaxonomy>Categories List</fieldListTaxonomy>
+      <fieldListTaxonomy>Danh sách Danh mục</fieldListTaxonomy>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <fileName-error>Please make sure that you uploaded the selected file to the server using the Upload icon.</fileName-error>
-      <taxonomyPath-error>Please select a category.</taxonomyPath-error>
-      <fileName-invalid>The file name contains some invalid characters. Please retype the file name or upload another file.</fileName-invalid>
+      <fileName-error>Vui lòng đảm bảo bạn đã tải tệp tin đã chọn lên máy chủ bằng cách dùng biểu tượng Tải lên.</fileName-error>
+      <taxonomyPath-error>Vui lòng chọn danh mục!</taxonomyPath-error>
+      <fileName-invalid>Tên tệp tin chứa một số ký tự không hợp lệ. Vui lòng nhập lại tên tập tin hoặc tải lên tệp khác.</fileName-invalid>
       <fileSize-too-big>Tập tin này quá lớn. Bạn cần chia thành một số tập tin nhỏ hơn hoặc dùng WebDAV để tải lên.</fileSize-too-big>
       <name-is-exist>The name '{0}' already exists. You cannot upload a file with the same name, except for 'nt:file'.</name-is-exist>
       <contraint-violation>You cannot add the node '{0}' to this node because it is not allowed as child's node type for parent node type.</contraint-violation>
-      <lock-exception>This node is locked. It is unlikely to run certain actions.</lock-exception>
+      <lock-exception>Nút này đang bị khóa. Do vậy một số thao tác sẽ không thể chạy được như mong muốn cho đến khi khoá được mở.</lock-exception>
     </msg>
   </UISingleUploadForm>
   <UISingleUploadContent>
     <label>
-      <fileName>File Name</fileName>
-      <nodeName>Node Name</nodeName>
-      <fileSize>File Size</fileSize>
-      <mimeType>Mime Type</mimeType>
+      <fileName>Tên tệp tin</fileName>
+      <nodeName>Tên nút</nodeName>
+      <fileSize>Kích thước tập tin</fileSize>
+      <mimeType>Định dạng</mimeType>
     </label>
     <title>
-      <uploaded-file>Uploaded File</uploaded-file>
-      <external-metadata>External Metadata</external-metadata>
-      <metadata-name>Metadata Name</metadata-name>
-      <action>Action</action>
+      <uploaded-file>Tệp tin được tải lên</uploaded-file>
+      <external-metadata>Siêu dữ liệu Bên ngoài</external-metadata>
+      <metadata-name>Tên Metadata</metadata-name>
+      <action>Thao tác</action>
     </title>
     <tooltip>
-      <Edit>Edit</Edit>
+      <Edit>Chỉnh sửa</Edit>
     </tooltip>
     <msg>
-      <has-not-template>The '{0}' template is null or empty.</has-not-template>
+      <has-not-template>Mẫu của '(0)' là null hoặc rỗng.</has-not-template>
     </msg>
   </UISingleUploadContent>
   <UISingleUploadContainer>
     <action>
       <Close>#{word.close}</Close>
-      <AddMetadata>Add Metadata</AddMetadata>
+      <AddMetadata>Thêm siêu dữ liệu</AddMetadata>
     </action>
     <tab>
       <label>
-        <UISingleUploadContent>Information</UISingleUploadContent>
-        <UISingleAddMetadataForm>Metadata Form</UISingleAddMetadataForm>
+        <UISingleUploadContent>Thông tin</UISingleUploadContent>
+        <UISingleAddMetadataForm>Siêu dữ liệu mẫu</UISingleAddMetadataForm>
       </label>
     </tab>
   </UISingleUploadContainer>
   <UISingleExternalMetadataForm>
     <action>
-      <Add>Add</Add>
-      <Cancel>Cancel</Cancel>
+      <Add>Thêm</Add>
+      <Cancel>Thoát</Cancel>
     </action>
   </UISingleExternalMetadataForm>
   <UISingleUploadContainer>
     <tab>
       <label>
-        <UIListMetadata>List External Metadata</UIListMetadata>
+        <UIListMetadata>Danh sách siêu dữ liệu bên ngoài</UIListMetadata>
       </label>
     </tab>
   </UISingleUploadContainer>
   <AddMetadataPopup>
     <title>
-      <UISingleExternalMetadataForm>Add External Metadata</UISingleExternalMetadataForm>
+      <UISingleExternalMetadataForm>Thêm siêu dữ liệu bên ngoài</UISingleExternalMetadataForm>
     </title>
   </AddMetadataPopup>
   <UISingleExternalMetadataForm>
@@ -2981,56 +2979,56 @@
   </UISingleExternalMetadataForm>
   <UISingleAddMetadataForm>
     <action>
-      <Cancel>Cancel</Cancel>
-      <Save>Save</Save>
+      <Cancel>Thoát</Cancel>
+      <Save>Cất</Save>
     </action>
   </UISingleAddMetadataForm>
 
   <UIAllItems>
     <label>
-      <OwnedByMe>Owned by me</OwnedByMe>
-      <Favourites>Favorites</Favourites>
-      <Hidden>Hidden</Hidden>
-      <Trash>Trash</Trash>
-      <Configuration>Set Up Preferences</Configuration>
+      <OwnedByMe>Của tôi</OwnedByMe>
+      <Favourites>Ưa thích</Favourites>
+      <Hidden>Tài liệu ẩn</Hidden>
+      <Trash>Thùng rác</Trash>
+      <Configuration>Thiết lập lựa chọn</Configuration>
     </label>
     <title>
-      <allItems>All Items</allItems>
+      <allItems>Tất cả tài liệu</allItems>
     </title>
   </UIAllItems>
 
   <UIPreferencesForm>
       <label>
-          <Alphabetic>Alphabetical</Alphabetic>
-          <Type>Type</Type>
+          <Alphabetic>Bảng chữ cái</Alphabetic>
+          <Type>Kiểu</Type>
           <CreatedDate>Ngày tạo</CreatedDate>
-          <ModifiedDate>Modified Date</ModifiedDate>
-          <Ascending>Ascending</Ascending>
-          <Descending>Descending</Descending>
+          <ModifiedDate>Ngày cập nhật</ModifiedDate>
+          <Ascending>Tăng dần</Ascending>
+          <Descending>Giảm dần</Descending>
       </label>
   </UIPreferencesForm>
 
   <UIDocumentInfo>
     <label>
-      <Today>Today</Today>
-      <Yesterday>Yesterday</Yesterday>
-      <EarlierThisWeek>Earlier This Week</EarlierThisWeek>
-      <EarlierThisMonth>Earlier This Month</EarlierThisMonth>
+      <Today>Ngày hôm nay</Today>
+      <Yesterday>Ngày hôm qua</Yesterday>
+      <EarlierThisWeek>Trong tuần</EarlierThisWeek>
+      <EarlierThisMonth>Trong tháng</EarlierThisMonth>
       <EarlierThisYear>Earlier This Year</EarlierThisYear>
       <tooltip>
-        <expand>Click here to view full list of this category</expand>
-        <collapse>Click here to view all categories</collapse>
+        <expand>Ấn vào đây để xem danh sách đầy đủ của danh mục này</expand>
+        <collapse>Ấn vào đây để xem tất cả các danh mục</collapse>
       </tooltip>
     </label>
     <header>
       <dateTime>Date Time</dateTime>
-      <name>Name</name>
-      <title>Document Title</title>
+      <name>Tên</name>
+      <title>Tiêu đề của tài liệu</title>
     </header>
     <tooltip>
-      <View>View</View>
-      <RemoveFromFavourite>Remove from Favorite</RemoveFromFavourite>
-      <AddToFavourite>Add to Favorite</AddToFavourite>
+      <View>Xem</View>
+      <RemoveFromFavourite>Xóa khỏi mục ưa thích</RemoveFromFavourite>
+      <AddToFavourite>Thêm vào mục ưa thích</AddToFavourite>
       <timelineFavouriteDESC>Sort by Favorite: Descending order</timelineFavouriteDESC>
       <timelineFavouriteASC>Sort by Favorite: Ascending order</timelineFavouriteASC>
       <timelineDateTimeASC>Sort by Modified Time: Ascending order</timelineDateTimeASC>
@@ -3042,28 +3040,28 @@
 
   <UISavedSearches>
     <title>
-      <savedSearches>Saved Searches</savedSearches>
+      <savedSearches>Câu tìm kiếm đã lưu</savedSearches>
     </title>
   </UISavedSearches>
   <DocumentType>
     <label>
-       <Images>Image</Images>
-       <Video>Video</Video>
-       <Music>Music</Music>
+       <Images>Ảnh</Images>
+       <Video>Phim</Video>
+       <Music>Âm thanh</Music>
        <Documents>Tài liệu</Documents>
-       <Contents>Content</Contents>
+       <Content>Nội dung</Content>
     </label>
   </DocumentType>
 
   <UIDocumentFilterForm>
     <label>
-      <Images>Image</Images>
-      <Video>Video</Video>
-      <Music>Music</Music>
+      <Images>Ảnh</Images>
+      <Video>Phim</Video>
+      <Music>Âm thanh</Music>
       <Documents>Tài liệu</Documents>
-      <Contents>Nội dung</Contents>
+      <Content>Nội dung</Content>
     </label>
-    <title>Set Up Filter Preferences</title>
+    <title>Thiết lập hiển thị</title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -3072,43 +3070,41 @@
 
   <UIAllItemsByType>
     <label>
-    <ByType>Filter by Type</ByType>
-      <DocumentFilterConfiguration>Set Up Filter Preferences</DocumentFilterConfiguration>
+    <ByType>Lọc theo kiểu tệp</ByType>
+      <DocumentFilterConfiguration>Chọn thiết lập hiển thị</DocumentFilterConfiguration>
     </label>
     <title>
-      <ShowVideo>Show all video files</ShowVideo>
-      <ShowMusic>Show all music files</ShowMusic>
-      <ShowImages>Show all image files</ShowImages>
-      <ShowDocuments>Show all document files</ShowDocuments>
-      <ShowContents>Show all document types</ShowContents>
+      <ShowVideo>Hiển thị các tệp video</ShowVideo>
+      <ShowMusic>Hiển thị các tệp âm nhạc</ShowMusic>
+      <ShowImages>Hiển thị các tệp ảnh</ShowImages>
+      <ShowDocuments>Hiển thị các tệp tài liệu</ShowDocuments>
+      <ShowContent>Hiển thị tất cả các kiểu tài liệu</ShowContent>
     </title>
   </UIAllItemsByType>
 
   <Views>
     <label>
-      <slide-show>Slide Show</slide-show>
-      <timeline-view>Timeline View</timeline-view>
+      <slide-show>Trình diễn theo slide</slide-show>
     </label>
   </Views>
   <ECMContextMenu>
     <event>
-      <PlayMedia>Play Media</PlayMedia>
+      <PlayMedia>Chơi nhạc</PlayMedia>
     </event>
   </ECMContextMenu>
   <UIPopupWindow>
     <title>
-      <UIDocumentFilterForm>Filter Documents Type</UIDocumentFilterForm>
+      <UIDocumentFilterForm>Lọc theo kiểu của tài liệu</UIDocumentFilterForm>
     </title>
   </UIPopupWindow>
 
   <UIAllItemsPreferenceForm>
     <label>
-      <showOwnedByUser>Owned by me</showOwnedByUser>
-      <showFavourites>Favorites</showFavourites>
-      <showHiddens>Hidden</showHiddens>
-      <showTrash>Trash</showTrash>
+      <showOwnedByUser>Của tôi</showOwnedByUser>
+      <showFavourites>Ưa thích</showFavourites>
+      <showHiddens>Tài liệu ẩn</showHiddens>
+      <showTrash>Thùng rác</showTrash>
     </label>
-    <title>Set Up Filter Preferences</title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -3117,70 +3113,70 @@
 
   <EmptyTrashManageComponent>
     <msg>
-      <confirm-delete>Are you sure you want to empty all items from trash?</confirm-delete>
+      <confirm-delete>Bạn có chắc chắn muốn xóa tất cả các mục khỏi thùng rác không?</confirm-delete>
     </msg>
   </EmptyTrashManageComponent>
   <UICategoryForm>
     <label>
-      <name>Category Name</name>
+      <name>Tên danh mục</name>
     </label>
     <action>
-      <Save>Save</Save>
-      <Cancel>Cancel</Cancel>
+      <Save>Lưu</Save>
+      <Cancel>Hủy</Cancel>
     </action>
   </UICategoryForm>
   <UIPopupWindow>
     <title>
-      <UICategoryForm>Add Category</UICategoryForm>
+      <UICategoryForm>Thêm danh mục</UICategoryForm>
     </title>
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <AddCategory>Add Category</AddCategory>
+      <AddCategory>Thêm danh mục</AddCategory>
     </tooltip>
    </UIActionBar>
 
    <UITaggingForm>
     <label>
-      <Public>Public</Public>
-      <Group>Group</Group>
+      <Public>Công khai</Public>
+      <Group>Nhóm</Group>
       <Site>Site</Site>
-      <Private>Private</Private>
-      <tagScopes>Tag Scopes</tagScopes>
+      <Private>Riêng</Private>
+      <tagScopes>Phạm vi</tagScopes>
     </label>
    </UITaggingForm>
 
   <UITagExplorer>
     <title>
       <EditPrivateTags>Edit Private Tags</EditPrivateTags>
-      <PublicTags>Tags</PublicTags>
-      <EditPublicTags>Edit Tags</EditPublicTags>
-      <PrivateTags>Tags</PrivateTags>
+      <PublicTags>Nhãn</PublicTags>
+      <EditPublicTags>Sửa nhãn</EditPublicTags>
+      <PrivateTags>Thẻ</PrivateTags>
     </title>
   </UITagExplorer>
 
   <UIEditingTagsForm>
     <header>
-      <name>Name</name>
-      <relatedDocuments>Related Documents</relatedDocuments>
-      <action>Action</action>
+      <name>Tên</name>
+      <relatedDocuments>Tài liệu liên quan</relatedDocuments>
+      <action>Hành động</action>
     </header>
     <action>
       <title>
-        <EditTag>Edit Tag</EditTag>
-        <RemoveTag>Remove Tag</RemoveTag>
-        <AddTag>Add Tag</AddTag>
+        <EditTag>Sửa nhãn</EditTag>
+        <RemoveTag>Xóa nhãn</RemoveTag>
+        <AddTag>Thêm nhãn</AddTag>
       </title>
     </action>
     <msg>
-      <confirm-remove>Are you sure to delete this tag?</confirm-remove>
+      <confirm-remove>Bạn có chắc chắn muốn xóa nhãn?</confirm-remove>
     </msg>
   </UIEditingTagsForm>
 
 
   <UIPopupWindow>
     <title>
-      <UIEditingTagsForm>Edit Tag</UIEditingTagsForm>
+      <UIEditingTagsForm>Sửa nhãn</UIEditingTagsForm>
     </title>
   </UIPopupWindow>
 
@@ -3190,70 +3186,70 @@
       <Cancel>#{word.close}</Cancel>
     </action>
     <label>
-      <tagName>Tag Name:</tagName>
-      <relatedDocuments>Related Documents</relatedDocuments>
+      <tagName>Tên thẻ:</tagName>
+      <relatedDocuments>Tài liệu liên quan</relatedDocuments>
     </label>
   </UITagForm>
 
   <TagPopup>
     <title>
-      <UITagForm>Tag</UITagForm>
+      <UITagForm>Biểu mẫu thẻ</UITagForm>
     </title>
   </TagPopup>
 
     <UIPopupMenu>
     <msg>
-      <node-locked-editing>You cannot edit this node with the path {0}. It is being locked by another user.</node-locked-editing>
+      <node-locked-editing>Bạn không thể chỉnh sửa nút này với đường dẫn {0}. Nó đã bị khóa bởi người dùng khác.</node-locked-editing>
     </msg>
   </UIPopupMenu>
   <UITagStyleForm>
     <msg>
-      <error-update>An error occurred while updating the tag style.</error-update>
+      <error-update>Một lỗi đã xảy ra khi đang cập nhật định dạng thẻ.</error-update>
     </msg>
   </UITagStyleForm>
 
   <UIPopupMenu>
     <msg>
-      <editTagAccessDenied>Access denied.</editTagAccessDenied>
+      <editTagAccessDenied>Lỗi truy cập!</editTagAccessDenied>
     </msg>
   </UIPopupMenu>
 
   <UIPopupWindow>
     <title>
-      <UITaggingFormContainer>Tag Manager</UITaggingFormContainer>
+      <UITaggingFormContainer>Quản lý nhãn</UITaggingFormContainer>
     </title>
   </UIPopupWindow>
 
     <PopupComponent>
     <title>
-      <UINodeTypeSelector>Select Node Type</UINodeTypeSelector>
+      <UINodeTypeSelector>Lựa chọn kiểu nút</UINodeTypeSelector>
     </title>
   </PopupComponent>
 
     <UIActionForm>
     <title>
-      <ShowComponent>Show Component</ShowComponent>
-      <removeReference>Remove</removeReference>
+      <ShowComponent>Hiện Thành phần</ShowComponent>
+      <removeReference>Loại bỏ</removeReference>
     </title>
   </UIActionForm>
 
   <EditFormAction>
     <title>
-      <ShowComponent>Show Component</ShowComponent>
-      <removeReference>Remove</removeReference>
+      <ShowComponent>Mở Thành phần</ShowComponent>
+      <removeReference>Loại bỏ</removeReference>
     </title>
   </EditFormAction>
 
   <NodeTypeNameValidator>
     <msg>
-      <Invalid-char>There are some invalid characters. Please type another value.</Invalid-char>
-      <empty-input>The value of the field is null or empty.</empty-input>
+      <Invalid-char>Có một số ký tự không hợp lệ. Xin vui lòng nhập một giá trị khác.</Invalid-char>
+      <empty-input>Giá trị bị rỗng</empty-input>
     </msg>
   </NodeTypeNameValidator>
 
   <UIPreferencesForm>
       <label>
-            <queryType>Query Type:</queryType>
+            <queryType>Kiểu truy vấn:</queryType>
             <SQL>SQL</SQL>
             <XPATH>XPATH</XPATH>
       </label>
@@ -3261,170 +3257,165 @@
 
   <UIDocumentInfo>
     <msg>
-      <repository-error>An error occurred. The information about the repository was lost.</repository-error>
+      <repository-error>Một lỗi đã xảy ra. Thông tin về kho dữ liệu đã bị mất.</repository-error>
     </msg>
   </UIDocumentInfo>
 
   <UITreeExplorer>
     <msg>
-      <repository-error>An error occurred. The information about the repository was lost.</repository-error>
+      <repository-error>Một lỗi đã xảy ra. Thông tin về kho dữ liệu đã bị mất.</repository-error>
     </msg>
   </UITreeExplorer>
   <UIDocumentForm>
     <msg>
-      <constraintviolation-exception>You cannot save the document. The input data are missing or invalid.</constraintviolation-exception>
+      <constraintviolation-exception>Không thể lưu tài liệu. Dữ liệu nhập vào thiếu hoặc không phù hợp.</constraintviolation-exception>
     </msg>
   </UIDocumentForm>
   <UIActionForm>
     <msg>
-      <constraintviolation-exception>You cannot save the document. The input data are missing or invalid.</constraintviolation-exception>
+      <constraintviolation-exception>Không thể lưu tài liệu. Dữ liệu nhập vào thiếu hoặc không phù hợp.</constraintviolation-exception>
     </msg>
   </UIActionForm>
 
   <UISelectRestorePath>
     <action>
-      <Save>Save</Save>
-      <Cancel>Cancel</Cancel>
+      <Save>Lưu</Save>
+      <Cancel>Hủy bỏ</Cancel>
     </action>
     <label>
-      <formInput>The previous path was lost. Please select a new one.</formInput>
+      <formInput>Đường dẫn cũ đã bị mất, mời bạn chọn đường dẫn mới!</formInput>
     </label>
   </UISelectRestorePath>
   <PathNode>
     <title>
-      <Add>Add</Add>
+      <Add>Thêm</Add>
     </title>
   </PathNode>
   <UIPopupPathFoRestore>
     <title>
-      <UIOneNodePathSelector>Select Parent Node</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Chọn nút cha</UIOneNodePathSelector>
     </title>
   </UIPopupPathFoRestore>
   <rootNodeInfo>
     <title>
-      <AddRootNode>Add Root Node</AddRootNode>
+      <AddRootNode>Chọn nút gốc</AddRootNode>
     </title>
   </rootNodeInfo>
 
-  <UIPopupWindow>
-    <title>
-      <UISelectRestorePath>Select Restore Path</UISelectRestorePath>
-    </title>
-  </UIPopupWindow>
   <UIActionForm>
     <msg>
-      <homePath-emty>The home path is empty.</homePath-emty>
-      <targetPath-emty>The target path is empty.</targetPath-emty>
+      <homePath-emty>Đường dẫn nguồn đang trống</homePath-emty>
+      <targetPath-emty>Đường dẫn đích đang trống</targetPath-emty>
     </msg>
     </UIActionForm>
     <UIActionBar>
       <msg>
-        <not-exist-categories>There are no categories.</not-exist-categories>
+        <not-exist-categories>Không tồn tại bất kỳ danh mục phân loại nào</not-exist-categories>
       </msg>
     </UIActionBar>
 
 <UIPublicationPanel>
     <button>
-      <Close>Close</Close>
+      <Close>Đóng</Close>
     </button>
     <revisions>
       <version>Phiên bản</version>
-      <date>Date</date>
+      <date>Ngày tháng</date>
       <author>Tác giả</author>
-      <status>Status</status>
-      <action>Action</action>
-      <label>Revision</label>
-      <none>No revisions</none>
-      <seeall>See all versions</seeall>
-      <currentVersion>Current Revision</currentVersion>
-      <confirm>You will lose your draft work. Are you sure you want to replace the current revision?</confirm>
+      <status>Trạng thái</status>
+      <action>Hành động</action>
+      <label>Phiên bản</label>
+      <none>Không có xét duyệt nào</none>
+      <seeall>Xem tất cả các phiên bản</seeall>
+      <currentVersion>Phiên bản hiện tại</currentVersion>
+      <confirm>Bạn sẽ mất những gì đã thay đổi trong phiên bản nháp, bạn có thực sự muốn khôi phục lại phiên bản này và thay thế cho phiên bản hiện tại không?</confirm>
     </revisions>
     <status>
-      <version>Revision</version>
-      <title>Status</title>
-      <archived>Archived</archived>
-      <obsolete>Obsolete</obsolete>
-      <unpublished>Unpublished</unpublished>
-      <enrolled>Enrolled</enrolled>
-      <draft>Draft</draft>
+      <version>Phiên bản</version>
+      <title>Trạng thái</title>
+      <archived>Đã lưu trữ</archived>
+      <obsolete>Cũ</obsolete>
+      <unpublished>Chưa xuất bản</unpublished>
+      <enrolled>Đã đăng ký</enrolled>
+      <draft>Dự thảo</draft>
       <pending>Đang chờ duyệt</pending>
-      <approved>Approved</approved>
-      <inreview>In Review</inreview>
-      <staged>Staged</staged>
+      <approved>Phê duyệt</approved>
+      <inreview>Đang đánh giá</inreview>
+      <staged>Chờ xuất bản</staged>
       <published>Đã xuất bản</published>
       <live>Đã xuất bản</live>
     </status>
     <scheduled>
-      <title>Scheduled</title>
-      <from>From</from>
-      <to>To</to>
+      <title>Đã xếp lịch</title>
+      <from>từ</from>
+      <to>đến</to>
     </scheduled>
     <title>
       <preview>Xem lại</preview>
-      <restore>Restore</restore>
+      <restore>Khôi phục</restore>
     </title>
     <msg>
-      <have-no-view-template>The View template is not supported.</have-no-view-template>
-      <restore-complete>Restore completed.</restore-complete>
+      <have-no-view-template>Mẫu hiển thị của nội dung này không được hỗ trợ</have-no-view-template>
+      <restore-complete>Khôi phục thành công</restore-complete>
     </msg>
   </UIPublicationPanel>
   <UIPublicationHistory>
     <header>
-      <date>Date</date>
-      <versionName>Revision Name</versionName>
-      <currentState>Current State</currentState>
-      <user>Author</user>
-      <description>Description</description>
+      <date>Ngày tháng</date>
+      <versionName>Tên phiên bản</versionName>
+      <currentState>Trạng thái hiện tại</currentState>
+      <user>Người tạo</user>
+      <description>Mô tả</description>
     </header>
   </UIPublicationHistory>
   
   <UIPublicationSchedule>
     <label>
-      <introduction>You can schedule the publication of your document. Select the dates you would like to see your document published</introduction>
-      <no-schedule-info>There is no publication schedule for your document</no-schedule-info>
+      <introduction>Bạn có thể đặt lich trình công bố tài liệu của bạn bằng cách chọn ngày bạn muốn tài liệu của bạn được xuất bản.</introduction>
+      <no-schedule-info>Không có lịch trình xuất bản nào cho tài liệu của bạn.</no-schedule-info>
     </label>
     <scheduled>
-      <title>Scheduled</title>
+      <title>Theo lịch trình</title>
       <from>Từ</from>
       <to>Đến</to>
     </scheduled>
     <msg>
-      <save-finished>Your new publication schedule was saved successfully.</save-finished>
+      <save-finished>Lịch trình xuất bản mới của bạn đã được lưu thành công.</save-finished>
     </msg>
   </UIPublicationSchedule>
 
   <UIPublicationPanel>
     <label>
-      <header>Publication Date</header>
-      <start>Start Publication</start>
-      <end>End Publication</end>
+      <header>Thời gian xuất bản</header>
+      <start>Bắt đầu xuất bản</start>
+      <end>Kết thúc xuất bản</end>
     </label>
     <action>
-      <Save>Save</Save>
+      <Save>Lưu</Save>
     </action>
     <msg>
-      <invalid-format>The datetime format is invalid. Please check again.</invalid-format>
-      <fromDate-after-toDate>The From date has to be earlier than the To date.</fromDate-after-toDate>
+      <invalid-format>Định dạng ngày giờ không hợp lệ. Vui lòng kiểm tra lại.</invalid-format>
+      <fromDate-after-toDate>Định dạng ngày Bắt đầu phải có giá trị trước ngày Kết thúc.</fromDate-after-toDate>
     </msg>
   </UIPublicationPanel>
   <UIPopupWindow>
     <title>
-      <UIPublicationContainer>Manage Publication</UIPublicationContainer>
-      <UIPublishingPanel>Manage Publication</UIPublishingPanel>
+      <UIPublicationContainer>Quản lý xuất bản</UIPublicationContainer>
+      <UIPublishingPanel>Quản lý xuất bản</UIPublishingPanel>
     </title>
   </UIPopupWindow>
   <WCMContentView>
     <header>
-      <status>Status</status>
-      <author>Author</author>
-      <date>Created Date</date>
-      <title>Document Title</title>
-      <lastUser>Last User</lastUser>
+      <status>Trạng thái</status>
+      <author>Tác giả</author>
+      <date>Ngày tạo</date>
+      <title>Tiêu đề của tài liệu</title>
+      <lastUser>Người dùng cuối</lastUser>
     </header>
   </WCMContentView>
   <UITagForm>
     <msg>
-      <NameAlreadyExist>The tag name already exists.</NameAlreadyExist>
+      <NameAlreadyExist>Tên nhãn đã tồn tại</NameAlreadyExist>
     </msg>
   </UITagForm>
 
@@ -3434,28 +3425,25 @@
   <UICategoryManagerSearch>
     <tab>
       <label>
-        <UIOneTaxonomySelector>Select Category</UIOneTaxonomySelector>
+        <UIOneTaxonomySelector>Lựa chọn danh mục</UIOneTaxonomySelector>
       </label>
     </tab>
-    <action>
-     <Close>Close</Close>
-    </action>
   </UICategoryManagerSearch>
 
   <UIPreferencesForm>
    <action>
-     <HideAdvance>Hide Advanced</HideAdvance>
-     <ShowAdvance>Show Advanced</ShowAdvance>
+     <HideAdvance>Ẩn</HideAdvance>
+     <ShowAdvance>Mở rộng</ShowAdvance>
     </action>
     <label>
-    <Advance>Advanced</Advance>
+    <Advance>Nâng cao</Advance>
     </label>
   </UIPreferencesForm>
 
   <UIJCRExplorerPortlet>
 <msg>
-  <file-access-denied>File access denied.</file-access-denied>
-  <anonymous-access-denied>Anonymous user does not have permission to use this function.</anonymous-access-denied>
+  <file-access-denied>Truy nhập tệp bị từ chối.</file-access-denied>
+  <anonymous-access-denied>Người dùng nặc danh không có quyền sử dụng chức năng này.</anonymous-access-denied>
 </msg>
   </UIJCRExplorerPortlet>
   <UIDrivesArea>
@@ -3466,117 +3454,115 @@
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
     <msg>
-      <fields-saved>All field values saved.</fields-saved>
-      <fields-cancelled>All field values canceled.</fields-cancelled>
+      <fields-saved>Các giá trị thiết lập đã được lưu!</fields-saved>
+      <fields-cancelled>Các giá trị thiết lập đã bị hủy bỏ!</fields-cancelled>
     </msg>
   </UIJcrExplorerEditForm>
   <UIDocumentForm>
   <msg>
-  <confirm-close>The changes you made will be lost if you close this form.</confirm-close>
-  <confirm-changeType>The changes you made will be lost if you change the content type.</confirm-changeType>
-  <confirm-navigate>The changes you made will be lost if you navigate away from this page.</confirm-navigate>
+  <confirm-close>Những thay đổi bạn thực hiện sẽ bị mất nếu bạn đóng biểu mẫu này.</confirm-close>
+  <confirm-changeType>Những thay đổi bạn thực hiện sẽ bị mất nếu bạn thay đổi kiểu nội dung.</confirm-changeType>
+  <confirm-navigate>Những thay đổi bạn thực hiện sẽ bị mất nếu bạn rời khỏi trang này.</confirm-navigate>
   </msg>
   </UIDocumentForm>
   <UploadFileMimeTypesValidator>
     <msg>
-      <wrong-mimetype>Mime type {0} is not allowed for field {1}. Please upload another file</wrong-mimetype>
+      <wrong-mimetype>Định dạng {0} không được phép cho trường {1}. Xin vui lòng tải lên một tập tin khác.</wrong-mimetype>
     </msg>
   </UploadFileMimeTypesValidator>
   <lifecyclePhase>
     <label>
-    <no>No</no>
-  <yes>Yes</yes>
-  <true>True</true>
-  <false>False</false>
-  <Electronic>Electronic</Electronic>
+    <no>Không</no>
+  <yes>Có</yes>
+  <true>Đúng</true>
+  <false>Sai</false>
+  <Electronic>Điện tử</Electronic>
   <Paper>Paper</Paper>
   <NONE>Không xác định</NONE>
   <CLASSIFIED>Classified</CLASSIFIED>
-  <UNCLASSIFIED>Unclassified</UNCLASSIFIED>
-  <NOCONTRACT>No Contract</NOCONTRACT>
-  <true>True</true>
-  <false>False</false>
-  <one-minute>One Minute</one-minute>
+  <UNCLASSIFIED>Không được phân loại</UNCLASSIFIED>
+  <NOCONTRACT>Không hợp đồng</NOCONTRACT>
+  <one-minute>1 phút</one-minute>
   <hourly>Hàng giờ</hourly>
   <daily>Hàng ngày</daily>
-  <quarterly>Quarterly</quarterly>
+  <quarterly>Hàng quý</quarterly>
   <yearly>Hàng năm</yearly>
-  <ten-years>Ten Years</ten-years>
-  <read>User Action</read>
-  <schedule>Scheduler</schedule>
-  <node_added>Content Addition</node_added>
-  <node_removed>Content Removal</node_removed>
-  <property_added>Property Addition</property_added>
-  <property_removed>Property Removal</property_removed>
-  <property_changed>Property Modification</property_changed>
+  <ten-years>10 năm</ten-years>
+  <read>Thao tác ủa người dùng</read>
+  <schedule>Biểu thời gian</schedule>
+  <node_added>Thêm mới nội dung</node_added>
+  <node_removed>Xoá bỏ nội dung</node_removed>
+  <property_added>Thêm mới thuộc tính</property_added>
+  <property_removed>Xóa bỏ thuộc tính</property_removed>
+  <property_changed>Sửa đổi thuộc tính</property_changed>
 </label>
   </lifecyclePhase>
   <UIPopupMenu>
   <msg>
-<can-not-remove-locked-node>Node {0} is locked. You cannot move it to the Trash.</can-not-remove-locked-node>
-<can-not-remove-checked-in-node>Node {0} or its parent is checked in. You cannot move it to the Trash.</can-not-remove-checked-in-node>
-<access-denied-to-delete>Access denied. You cannot move node {0} to the Trash.</access-denied-to-delete>
+<can-not-remove-locked-node>Nút {0} bị khóa. Bạn không thể di chuyển nó vào thùng rác.</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>Nút {0} hoặc cha của nó được đang ở trạng thái checked-in. Bạn không thể di chuyển nó vào thùng rác.</can-not-remove-checked-in-node>
+<access-denied-to-delete>Truy cập bị từ chối. Bạn không thể di chuyển nút {0} vào thùng rác.</access-denied-to-delete>
   </msg>
   </UIPopupMenu>
   <UIPropertyForm>
   <msg>
-  <unknown-error>An error occurred while editing this property.</unknown-error>
+  <unknown-error>Đã có lỗi xảy ra trong quá trình chỉnh sửa thông tin thuộc tính.</unknown-error>
     </msg>
   </UIPropertyForm>
   <UIWatchDocumentForm>
     <msg>
-      <node-is-locked>This node is locked. You cannot watch it.</node-is-locked>
-      <unknown-error>Some errors have occurred. You cannot watch this node.</unknown-error>
+      <node-is-locked>Nút này bị khóa, bạn không thể theo dõi nó!</node-is-locked>
+      <unknown-error>Có một số lỗi xảy ra, bạn không thể theo dõi nút này!</unknown-error>
     </msg>
   </UIWatchDocumentForm>   
   <UIActionForm>
     <msg>
-      <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
+      <xss-vulnerability-character>Trường '{0}' có chứa các ký tự không hợp lệ</xss-vulnerability-character>
     </msg>
   </UIActionForm>
   <UIMultiUpload>
   <label>
-    <AbortAll>Abort all</AbortAll>
-    <AbortAllFiles>Abort all Files</AbortAllFiles>
-    <MaxFileSize>Maximum file size is</MaxFileSize>
-    <InvalidCharacters>Invalid characters will be changed by '-'</InvalidCharacters>
-    <DropFileMessage>Drop your files here in the current folder</DropFileMessage>
-    <Close>Close</Close>
-    <in>in</in>
-    <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
-    <Waiting>Waiting</Waiting>
-    <Error>Error</Error>
-    <or>or</or>
-    <AlreadyInUse>Already in use</AlreadyInUse>
-    <Keep>Keep both</Keep>
-    <Replace>Replace</Replace>
-    <Canceled>Canceled</Canceled>
-    <Cancel>Cancel</Cancel>
-    <AbortAllConfirmation>Do you want to abort all files in progress?</AbortAllConfirmation>
+    <AbortAll>Hủy bỏ tất cả</AbortAll>
+    <AbortAllFiles>Hủy bỏ tất cả các tập tin</AbortAllFiles>
+    <MaxFileSize>Kích thước tối đa của tập tin là</MaxFileSize>
+    <InvalidCharacters>Ký tự không hợp lệ sẽ được thay đổi bằng '-'</InvalidCharacters>
+    <DropFileMessage>Kéo thả tập tin vào đây để tải lên</DropFileMessage>
+    <Close>Đóng</Close>
+    <in>Trong</in>
+    <MaxFileSizeAlert>Kích thước của tập tin vượt quá giới hạn</MaxFileSizeAlert>
+    <Waiting>Đợi</Waiting>
+    <Error>Lỗi</Error>
+    <or>hoặc</or>
+    <AlreadyInUse>Đã tồn tại</AlreadyInUse>
+    <Keep>Giữ cả hai</Keep>
+    <Replace>Thay thế</Replace>
+    <Canceled>Huỷ bỏ</Canceled>
+    <Cancel>Huỷ bỏ</Cancel>
+    <AbortAllConfirmation>Bạn có muốn hủy bỏ tất cả các tập tin đang được tải lên?</AbortAllConfirmation>
   </label>
   </UIMultiUpload>
   <UIDocumentNodeList>
   <label>
-  <CreatedOn>Created on</CreatedOn>
-  <Updated>Updated</Updated>
-  <by>by</by>
-  <you>you</you>
+  <CreatedOn>Thời điểm tạo</CreatedOn>
+  <Updated>Sửa đổi</Updated>
+  <by>bởi</by>
+  <you>bạn</you>
   </label>
   </UIDocumentNodeList>
   <FileView>
     <label>
-      <name>Name</name>
-      <date>Date</date>
+      <name>Tên</name>
+      <date>Ngày</date>
       <size>Kích cỡ</size>
-      <sortBy>Sort by:</sortBy>
-      <filesAreSelected>Files are selected.</filesAreSelected>
-      <ClearSelection>Clear selection</ClearSelection>
-      <more>More</more>
+      <sortBy>Sắp xếp theo:</sortBy>
+      <filesAreSelected>Các tệp đã được chọn.</filesAreSelected>
+      <ClearSelection>Bỏ lựa chọn</ClearSelection>
+      <more>Thêm</more>
     </label>
   </FileView>
   <UIPropertyForm>
   <msg>
-  <property-name-incorrect>The property name is incorrect, please enter another value for it!</property-name-incorrect>
+  <property-name-incorrect>Tên thuộc tính không hợp lệ, hãy điền vào giá trị khác!</property-name-incorrect>
     </msg>
   </UIPropertyForm>
   <!--
@@ -3585,6 +3571,6 @@
   ###################################################################################
   -->
   <VersionException>
-  <msg>Cannot modify documents that are being checked in.</msg>  
+  <msg>Không thể sửa tài liệu khi chúng đang check-in.</msg>  
   </VersionException>
 </bundle>

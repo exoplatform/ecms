@@ -2,135 +2,135 @@
 <bundle>
   <UIFCCForm>
     <msg>
-      <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <in-versioning>Please check the current node before adding a new node.</in-versioning>
-      <cannot-save>An error occurred while saving the node.</cannot-save>
+      <name-not-allowed>Không cho phép sử dụng tên này.</name-not-allowed>
+      <in-versioning>Hãy kiểm tra node hiện tại trước khi thêm node mới.</in-versioning>
+      <cannot-save>Lỗi xảy ra khi đang lưu dữ liệu.</cannot-save>
       <saved-successfully>{0}</saved-successfully>
-      <not-support>Cannot load the template of '{0}'.</not-support>
-      <not-add-folder>Only files can be added to this folder.</not-add-folder>
-      <access-denied>Access denied. You do not have add permission at '{0}'.</access-denied>
-      <path-not-found>The path '{0}' was deleted or invalid.</path-not-found>
-      <node-locked>Node '{0}' is locked. Please unlock this node before creating documents.</node-locked>
-      <node-isExist>This node already exists in '{0}' and is not allowed to be the same name as its sibling.</node-isExist>
-      <get-dialog-path>An error occurred while getting the dialog path.</get-dialog-path>
-      <new-jcr-template>An error occurred while creating a new template.</new-jcr-template>
+      <not-support>Không thể tải mẫu thiết kế của '{0}'.</not-support>
+      <not-add-folder>Chỉ có thể thêm các tệp tin vào thư mục này.</not-add-folder>
+      <access-denied>Truy cập bị từ chối. Bạn không có quyền thêm mới ở '{0}'.</access-denied>
+      <path-not-found>Đường dẫn '{0}' đã bị xóa hoặc không hợp lệ.</path-not-found>
+      <node-locked>Nút '{0}' hiện đang bị khóa. Vui lòng mở khóa node này trước khi tạo tài liệu.</node-locked>
+      <node-isExist>Nút này đã tồn tại trong '{0}' và tên cùng mức không được chấp nhận</node-isExist>
+      <get-dialog-path>Một lỗi đã xảy ra khi đang lấy đường dẫn hội thoại.</get-dialog-path>
+      <new-jcr-template>Một lỗi đã xảy ra khi đang tạo một mẫu thiết kế mới.</new-jcr-template>
     </msg>
     <action>
-      <Save>Save</Save>
-      <Cancel>Cancel</Cancel>
+      <Save>Lưu</Save>
+      <Cancel>Hủy bỏ</Cancel>
     </action>
   </UIFCCForm>
 
   <UIFCCConfig>
     <label>
-      <select-repository>Select Repository</select-repository>
-      <UIFCCSaveLocationField>Save Location</UIFCCSaveLocationField>
-      <UIFCCRepositoryFormSelectBox>Select Repository</UIFCCRepositoryFormSelectBox>
-      <UIFCCWorkspaceFormSelectBox>Select Workspace</UIFCCWorkspaceFormSelectBox>
-      <UIFCCTemplateField>Template Options</UIFCCTemplateField>
-      <UIFCCLocationFormInputAction>Location to Save</UIFCCLocationFormInputAction>
+      <select-repository>Chọn Kho dữ liệu</select-repository>
+      <UIFCCSaveLocationField>Vị trí Lưu</UIFCCSaveLocationField>
+      <UIFCCRepositoryFormSelectBox>Chọn Kho dữ liệu</UIFCCRepositoryFormSelectBox>
+      <UIFCCWorkspaceFormSelectBox>Chọn Không gian lưu trữ</UIFCCWorkspaceFormSelectBox>
+      <UIFCCTemplateField>Tùy chọn Mẫu thiết kế</UIFCCTemplateField>
+      <UIFCCLocationFormInputAction>Nơi Lưu trữ</UIFCCLocationFormInputAction>
       <UIFCCLocationFormStringInput/>
-      <UIFCCTemplateFormSelectBox>Select Template</UIFCCTemplateFormSelectBox>
-      <UIFCCSaveFormStringInput>Custom Save Button</UIFCCSaveFormStringInput>
-      <UIFCCMessageFormTextareaInput>Custom Save Message</UIFCCMessageFormTextareaInput>
-      <UIFCCRedirectFormCheckboxInput>Redirect:</UIFCCRedirectFormCheckboxInput>
-      <UIFCCRedirectPathFormStringInput>Redirect Path:</UIFCCRedirectPathFormStringInput>
-      <UIFCCActionField>Actions</UIFCCActionField>
+      <UIFCCTemplateFormSelectBox>Chọn Mẫu thiết kế</UIFCCTemplateFormSelectBox>
+      <UIFCCSaveFormStringInput>Nút Lưu Tùy chỉnh</UIFCCSaveFormStringInput>
+      <UIFCCMessageFormTextareaInput>Thông báo Lưu Tùy chỉnh</UIFCCMessageFormTextareaInput>
+      <UIFCCRedirectFormCheckboxInput>Chuyển đến:</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectPathFormStringInput>Đường dẫn:</UIFCCRedirectPathFormStringInput>
+      <UIFCCActionField>Hành động</UIFCCActionField>
       <UIFCCActionList/>
     </label>
     <msg>
-      <save-successfully>Saved to portlet preferences successfully.</save-successfully>
-      <item-not-found>This path is invalid.</item-not-found>
-      <fileType-empty>Please select a file type before saving this configuration.</fileType-empty>
-      <ws-empty>Please select one workspace.</ws-empty>
-      <action-empty>Please select a folder with an action.</action-empty>
-      <message-empty>The "Custom Save Message" field is required in case you do not choose the redirect option, or the path is empty.</message-empty>
-      <get-template>An error occurred while accessing the template.</get-template>
-      <set-template-option>An error occurred while setting the template option.</set-template-option>
-      <do-select>An error occurred while selecting the location.</do-select>
+      <save-successfully>Đã lưu thành công vào tùy chọn portlet.</save-successfully>
+      <item-not-found>Đường dẫn này không hợp lệ.</item-not-found>
+      <fileType-empty>Vui lòng chọn kiểu tệp tin trước khi lưu cấu hình này.</fileType-empty>
+      <ws-empty>Vui lòng chọn một không gian lưu trữ.</ws-empty>
+      <action-empty>Vui lòng chọn một thư mục với một hành động.</action-empty>
+      <message-empty>Mục thông bào phải có giá trị khi bạn không lựa chọn chuyển trang hoặc đường dẫn bị rỗng</message-empty>
+      <get-template>Lỗi xuất hiện khi truy cập vào các mẫu.</get-template>
+      <set-template-option>Một lỗi xảy ra trong khi thiết lập các tùy chọn tiêu bản.</set-template-option>
+      <do-select>Một lỗi xảy ra trong khi lựa chọn vị trí.</do-select>
       </msg>
     <action>
-      <Save>Save</Save>
+      <Save>Lưu</Save>
     </action>
   </UIFCCConfig>
 
   <UIFCCLocationFormInputAction>
     <title>
-      <SelectPath>Select Path</SelectPath>
+      <SelectPath>Chọn đường dẫn</SelectPath>
     </title>
   </UIFCCLocationFormInputAction>
 
   <UIFCCActionList>
     <header>
-      <name>Name</name>
-      <description>Description</description>
-      <instanceOf>Instance of</instanceOf>
-      <action>Action</action>
+      <name>Tên</name>
+      <description>Mô tả</description>
+      <instanceOf>Kiểu hành động</instanceOf>
+      <action>Hành động</action>
     </header>
     <action>
-      <Add>Add</Add>
+      <Add>Thêm</Add>
     </action>
     <msg>
-      <empty>No actions</empty>
-      <remove-popup-first>You must close the edit pop-up before deleting this node.</remove-popup-first>
-      <confirm-delete-action>Are you sure you want to delete this action?</confirm-delete-action>
-      <template-empty>The template of '{0}' is null or empty.</template-empty>
-      <template-null>The template is null or empty, or you do not have permission to access this template.</template-null>
-      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
+      <empty>Không có hành động nào</empty>
+      <remove-popup-first>Bạn phải đóng cửa sổ trước khi xóa nút này.</remove-popup-first>
+      <confirm-delete-action>Bạn có thực sự muốn xóa hành động này ?</confirm-delete-action>
+      <template-empty>Chưa có mẫu của '{0}'.</template-empty>
+      <template-null>Mẫu không tồn tại hoặc bạn không có quyền sử dụng mẫu này.</template-null>
+      <access-denied>Bạn không đủ quyền để thực hiện hành động này.</access-denied>
     </msg>
   </UIFCCActionList>
 
   <UIFCCSelectorPopupWindow>
     <title>
-      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Chọn vị trí</UIOneNodePathSelector>
     </title>
   </UIFCCSelectorPopupWindow>
 
   <UIWorkspaceList>
     <label>
-      <workspaceName>Workspace:</workspaceName>
-      <rootNodePath>Root Path:</rootNodePath>
+      <workspaceName>Không gian lưu trữ</workspaceName>
+      <rootNodePath>Đường dẫn Gốc:</rootNodePath>
       <rootNodeInfo/>
     </label>
   </UIWorkspaceList>
 
   <rootNodeInfo>
     <title>
-      <AddRootNode>Add Root Node</AddRootNode>
+      <AddRootNode>Thêm nút gốc</AddRootNode>
     </title>
   </rootNodeInfo>
 
   <UITreeList>
     <info>
-      <child-not-found>This node does not have any child ones.</child-not-found>
+      <child-not-found>Nút này không có nội dung nào bên trong.</child-not-found>
     </info>
     <header>
-      <name>Name</name>
-      <action>Action</action>
+      <name>Tên</name>
+      <action>Hành động</action>
     </header>
   </UITreeList>
 
   <UIFCCActionPopupWindow>
     <title>
-      <UIFCCActionContainer>Add Action</UIFCCActionContainer>
+      <UIFCCActionContainer>Thêm hành động</UIFCCActionContainer>
     </title>
   </UIFCCActionPopupWindow>
 
   <UIFCCActionForm>
-    <title>Add/Edit Action</title>
+    <title>Thêm/Sửa hành động</title>
     <action>
-      <Save>Save</Save>
-      <Close>Close</Close>
+      <Save>Lưu</Save>
+      <Close>Đóng</Close>
     </action>
     <msg>
-      <repository-exception>Cannot save this action. The name provided must not have an index as its final element.</repository-exception>
-      <numberformat-exception>Cannot save this action. The name provided must not have '[' or ']'.</numberformat-exception>
-      <existed-action>The action name '{0}' already exists. Please select another name.</existed-action>
-      <unable-add-action>Unable to add this action.</unable-add-action>
-      <unable-add>Unable to add this action. This node is root or you do not have permision.</unable-add>
-      <not-support>The dialog '{0}' is not supported.</not-support>
-      <no-permission-add>Access denied. You do not have the right to add an action here.</no-permission-add>
-      <access-denied>Access denied. You do not have permission to access this template.</access-denied>
+      <repository-exception>Tên hành động có ký tự đặc biệt.</repository-exception>
+      <numberformat-exception>Tên hành động không được có ký tự [' hoặc '.</numberformat-exception>
+      <existed-action>Hành động '{0}' đã tồn tại. Vui lòng chọn tên khác.</existed-action>
+      <unable-add-action>Không thể thêm hành động này.</unable-add-action>
+      <unable-add>Không thể thêm hành động này. Đây có thể là nút gốc hoặc bạn không đủ quyền.</unable-add>
+      <not-support>Mẫu '{0}' không được hỗ trợ</not-support>
+      <no-permission-add>Bạn không có quyền tạo hành động ở đây</no-permission-add>
+      <access-denied>Bạn không có quyền sử dụng mẫu này</access-denied>
     </msg>
     <validator>
       <validator>Validator</validator>
@@ -140,32 +140,32 @@
 
   <UIFCCActionTypeForm>
     <label>
-      <actionType>Create an Action of Type</actionType>
+      <actionType>Kiểu hành động</actionType>
     </label>
     <msg>
-      <not-support>Cannot load the template of '{0}'.</not-support>
-      <do-not-permission>You do not have permission to load the template of '{0}'.</do-not-permission>
+      <not-support>Không thể mở được mẫu của '{0}'.</not-support>
+      <do-not-permission>Bạn không có quyền để mở mẫu của '{0}'.</do-not-permission>
     </msg>
   </UIFCCActionTypeForm>
 
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
-      <UIPermissionSelector>Permission Browser</UIPermissionSelector>
-      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+      <UIOneNodePathSelector>Chọn vị trí</UIOneNodePathSelector>
+      <UIPermissionSelector>Phân quyền</UIPermissionSelector>
+      <UICategoriesSelector>Thêm danh mục</UICategoriesSelector>
     </title>
   </PopupComponent>
 
   <DateTimeValidator>
     <msg>
-      <Invalid-input>The field '{0}' with the value '{1}' is invalid.</Invalid-input>
+      <Invalid-input>Trường '{0}' không thể nhận giá trị '{1}'.</Invalid-input>
     </msg>
   </DateTimeValidator>
 
   <UITabPane>
     <title>
-      <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
-      <UISelectedCategoriesGrid>Referenced Categories</UISelectedCategoriesGrid>
+      <UICategoriesSelectPanel>Chọn danh mục</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Các danh mục tham chiếu</UISelectedCategoriesGrid>
     </title>
   </UITabPane>
 
@@ -183,19 +183,19 @@
 
   <PopupComponent>
     <title>
-      <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Thêm danh mục</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
 
   <UITreeTaxonomyList>
     <label>
-      <taxonomyTree>Category Tree</taxonomyTree>
+      <taxonomyTree>Cây danh mục</taxonomyTree>
     </label>
   </UITreeTaxonomyList>
 
   <UIFCCTaxonomyPopupWindow>
     <title>
-      <UIOneTaxonomySelector>Category Selector</UIOneTaxonomySelector>
+      <UIOneTaxonomySelector>Chọn danh mục</UIOneTaxonomySelector>
     </title>
   </UIFCCTaxonomyPopupWindow>
 </bundle>

@@ -65,7 +65,7 @@
       <Down>Xuống</Down>
       <UICLVConfigCacheManagementLabel>Tiêu chí Hiển thị Nội dung</UICLVConfigCacheManagementLabel>
       <UICLVContentByQueryLabel>Nội dung theo Truy vấn</UICLVContentByQueryLabel>
-      <UICLVConfigWorkspaceFormSelectBox>Không gian làm việc</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigWorkspaceFormSelectBox>Không gian lưu trữ</UICLVConfigWorkspaceFormSelectBox>
       <UICLVConfigContentByQueryTextArea>theo truy vấn</UICLVConfigContentByQueryTextArea>
       <UICLVConfigCacheEnableRadioBoxInput>Chia sẻ nội dung giữa người dùng</UICLVConfigCacheEnableRadioBoxInput>
     </label>

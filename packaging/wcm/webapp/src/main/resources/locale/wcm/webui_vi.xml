@@ -355,8 +355,8 @@
 
   <UIWizardPageSelectLayoutForm>
     <label>
-      <SingleContentViewer>Single Content Viewer</SingleContentViewer>
-      <ContentListViewer>Content List Viewer</ContentListViewer>
+      <SingleContentViewer>Nội dung đơn</SingleContentViewer>
+      <ContentListViewer>Danh sách các nội dung</ContentListViewer>
       <Search>Tìm kiếm</Search>
       <Sitemap>Sơ đồ Site</Sitemap>
       <TwoColumnsLayout>Bố cục 2 Cột</TwoColumnsLayout>
