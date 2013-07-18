@@ -2444,7 +2444,6 @@
   </UIDriveSelector>
   <UIJcrExplorerEditForm>
     <label>
-      <driveName>Drive Name</driveName>
       <DriveNameInput>UIJcrExplorerEditForm</DriveNameInput>
     </label>
     <msg>
@@ -2716,7 +2715,6 @@
 
   <UIDocumentForm>
     <msg>
-      <not-support>Cannot load the template of '{0}'.</not-support>
       <do-not-permission>'{0}' のテンプレートをロードするための権限がありません。</do-not-permission>
     </msg>
   </UIDocumentForm>
@@ -3051,7 +3049,7 @@
        <Video>ビデオ</Video>
        <Music>音楽</Music>
        <Documents>ドキュメント</Documents>
-       <Contents>コンテンツ</Contents>
+       <Content>コンテンツ</Content>
     </label>
   </DocumentType>
 
@@ -3061,7 +3059,7 @@
       <Video>ビデオ</Video>
       <Music>音楽</Music>
       <Documents>ドキュメント</Documents>
-      <Contents>コンテンツ</Contents>
+      <Content>コンテンツ</Content>
     </label>
     <title>優先フィルタの設定</title>
     <action>
@@ -3087,7 +3085,6 @@
   <Views>
     <label>
       <slide-show>スライドショー</slide-show>
-      <timeline-view>Timeline View</timeline-view>
     </label>
   </Views>
   <ECMContextMenu>
@@ -3108,7 +3105,6 @@
       <showHiddens>隠しファイル</showHiddens>
       <showTrash>ゴミ箱</showTrash>
     </label>
-    <title>Set Up Filter Preferences</title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -3306,11 +3302,6 @@
     </title>
   </rootNodeInfo>
 
-  <UIPopupWindow>
-    <title>
-      <UISelectRestorePath>Select Restore Path</UISelectRestorePath>
-    </title>
-  </UIPopupWindow>
   <UIActionForm>
     <msg>
       <homePath-emty>ホームパスは空です</homePath-emty>
@@ -3437,9 +3428,6 @@
         <UIOneTaxonomySelector>カテゴリの選択</UIOneTaxonomySelector>
       </label>
     </tab>
-    <action>
-     <Close>Close</Close>
-    </action>
   </UICategoryManagerSearch>
 
   <UIPreferencesForm>
@@ -3494,8 +3482,6 @@
   <CLASSIFIED>機密</CLASSIFIED>
   <UNCLASSIFIED>非機密</UNCLASSIFIED>
   <NOCONTRACT>契約無し</NOCONTRACT>
-  <true>True</true>
-  <false>False</false>
   <one-minute>1分</one-minute>
   <hourly>毎時</hourly>
   <daily>毎日</daily>

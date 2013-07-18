@@ -45,7 +45,7 @@
       <no-taxonomy-selected>少なくとも一つのカテゴリのコピーかカットをする必要があります。</no-taxonomy-selected>
       <node-is-cutting>ここに貼付けることができません。恐らく、分類ノード '{0}' はカットされています。</node-is-cutting>
       <can-not-paste>貼付けるためのクリップボードにデータがありません。</can-not-paste>
-      <reference-exception>Cannot delete this category , because it is currently referenced.</reference-exception>
+      <reference-exception>Cannot delete this category  because it is currently referenced by a content.</reference-exception>
       <path-error>分類ノードが削除されたので問題が発生している可能性があります。</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -141,14 +141,6 @@
 ##########################################################################################
 -->
   <UIPermissionTreeForm>
-    <title>ノードへ権限の追加</title>
-    <label>
-      <userOrGroup>ユーザorグループ</userOrGroup>
-      <read>読み込み権限</read>
-      <add_node>ノード権限の追加</add_node>
-      <set_property>プロパティ権限のセット</set_property>
-      <remove>削除権限</remove>
-    </label>
     <msg>
       <have-not-any-permission>ノード追加のための権限追加</have-not-any-permission>
     </msg>
@@ -373,12 +365,6 @@
       <permission>{1} に {0} があります</permission>
     </label>
   </UIDriveList>
-  <PopupDrivePermission>
-    <title>
-      <AddDrivePermissionSelector>権限の追加</AddDrivePermissionSelector>
-      <UIDrivePermissionSelector>権限の選択</UIDrivePermissionSelector>
-    </title>
-  </PopupDrivePermission>
   <UIDriveForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -1466,7 +1452,7 @@
     </action>
     <title>分類の追加</title>
     <label>
-      <taxonomyName>分類名</taxonomyName>
+      <taxonomyName>カテゴリ名</taxonomyName>
       <parentPath>親</parentPath>
     </label>
     <msg>
@@ -1593,13 +1579,13 @@
     <label>
       <UIPopupWindow>選択</UIPopupWindow>
       <permission>UI権限ツリーフォーム</permission>
-      <userOrGroup>User Or Group</userOrGroup>
-      <read>Read Right</read>
-      <add_node>Add Node Right</add_node>
-      <set_property>Set Property Right</set_property>
-      <remove>Remove Right</remove>
+      <userOrGroup>ユーザorグループ</userOrGroup>
+      <read>読み込み権限</read>
+      <add_node>ノード権限の追加</add_node>
+      <set_property>プロパティ権限のセット</set_property>
+      <remove>削除権限</remove>
     </label>
-    <title>Add a permission to that node</title>
+    <title>ノードへ権限の追加</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>保存</Save>
@@ -1627,7 +1613,7 @@
    
    <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>Add Permission</AddDrivePermissionSelector>
+      <AddDrivePermissionSelector>権限の追加</AddDrivePermissionSelector>
       <UIPermissionSelector>権限の選択</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
