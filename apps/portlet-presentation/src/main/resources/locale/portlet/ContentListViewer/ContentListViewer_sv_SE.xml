@@ -2,184 +2,184 @@
 <bundle>
   <UICLVContainer>
     <label>
-      <Preferences>Preferences</Preferences>
-      <AddContent>Add Content</AddContent>
-      <ManageContent>Manage Content</ManageContent>
+      <Preferences>Inställningar</Preferences>
+      <AddContent>Lägg till innehåll</AddContent>
+      <ManageContent>Hantera innehåll</ManageContent>
     </label>
     <msg>
-      <non-contents>Sorry, no articles are available.</non-contents>
-      <item-not-found>Item not found.</item-not-found>
-      <no-permission>You do not have permission to access this node.</no-permission>
-      <category-back>Go to previous</category-back>
+      <non-contents>Inga artiklar tillgängliga.</non-contents>
+      <item-not-found>Posten hittades inte.</item-not-found>
+      <no-permission>Behörighet saknas till den här noden.</no-permission>
+      <category-back>Gå till föregående</category-back>
     </msg>
   </UICLVContainer>
   <UIViewerManagementPopupWindow>
     <title>
-      <UICLVConfig>Content List Preferences</UICLVConfig>
+      <UICLVConfig>Inställningar för innehållslistan</UICLVConfig>
     </title>
   </UIViewerManagementPopupWindow>
   <UICLVConfig>
     <label>
-      <Title>Content List Preferences</Title>
-      <ContentSelectionBlock>Content Selection</ContentSelectionBlock>
-      <UICLVConfigDisplayModeFormRadioBoxInput>Mode</UICLVConfigDisplayModeFormRadioBoxInput>
-      <UICLVConfigItemPathFormInputSet>Folder Path</UICLVConfigItemPathFormInputSet>
-    <UICLVConfigItemPathFormStringInput>Folder Path</UICLVConfigItemPathFormStringInput>
-      <UICLVConfigOrderByFormSelectBox>Order by</UICLVConfigOrderByFormSelectBox>
+      <Title>Inställningar för innehållslistan</Title>
+      <ContentSelectionBlock>Val av innehåll</ContentSelectionBlock>
+      <UICLVConfigDisplayModeFormRadioBoxInput>Läge</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigItemPathFormInputSet>Sökväg</UICLVConfigItemPathFormInputSet>
+    <UICLVConfigItemPathFormStringInput>Sökväg</UICLVConfigItemPathFormStringInput>
+      <UICLVConfigOrderByFormSelectBox>Ordna efter</UICLVConfigOrderByFormSelectBox>
       <option>
-        <exo:title>Title</exo:title>
-        <exo:dateCreated>Created Date</exo:dateCreated>
-        <exo:dateModified>Modified Date</exo:dateModified>
-        <publication:liveDate>Published Date</publication:liveDate>
-        <exo:startEvent>Event Date</exo:startEvent>
+        <exo:title>Titel</exo:title>
+        <exo:dateCreated>Skapad</exo:dateCreated>
+        <exo:dateModified>Ändrad</exo:dateModified>
+        <publication:liveDate>Publicerad</publication:liveDate>
+        <exo:startEvent>Händelsedatum</exo:startEvent>
         <exo:index>Index</exo:index>
-        <DESC>Descendant</DESC>
-        <ASC>Ascendant</ASC>
+        <DESC>Fallande</DESC>
+        <ASC>Stigande</ASC>
       </option>
-      <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
-      <UICLVConfigHeaderFormStringInput>Header</UICLVConfigHeaderFormStringInput>
-      <UICLVConfigDisplayTemplateFormSelectBox>Template</UICLVConfigDisplayTemplateFormSelectBox>
-      <UICLVConfigPaginatorTemplateFormSelectBox>Paginator</UICLVConfigPaginatorTemplateFormSelectBox>
+      <DisplaySettingBlock>Bildskärmsinställningar</DisplaySettingBlock>
+      <UICLVConfigHeaderFormStringInput>Sidhuvud</UICLVConfigHeaderFormStringInput>
+      <UICLVConfigDisplayTemplateFormSelectBox>Mall</UICLVConfigDisplayTemplateFormSelectBox>
+      <UICLVConfigPaginatorTemplateFormSelectBox>Sidnumrering</UICLVConfigPaginatorTemplateFormSelectBox>
       <UICLVConfigTargetPageFormStringInput/>
-      <UICLVConfigItemsPerPageFormStringInput>Items per Page</UICLVConfigItemsPerPageFormStringInput>
-      <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
-      <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
-      <UICLVConfigShowHeaderFormCheckboxInput>Show Header</UICLVConfigShowHeaderFormCheckboxInput>
-      <UICLVConfigShowRefreshFormCheckboxInput>Show Refresh</UICLVConfigShowRefreshFormCheckboxInput>
-      <UICLVConfigShowTitleFormCheckboxInput>Show Title</UICLVConfigShowTitleFormCheckboxInput>
-      <UICLVConfigShowDateCreatedFormCheckboxInput>Show Date</UICLVConfigShowDateCreatedFormCheckboxInput>
-      <UICLVConfigShowLinkFormCheckboxInput>Show Link</UICLVConfigShowLinkFormCheckboxInput>
-      <UICLVConfigShowReadmoreFormCheckboxInput>Show More Links</UICLVConfigShowReadmoreFormCheckboxInput>
-      <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
-      <UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
-      <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatic Detection</UICLVConfigShowAutomaticDetectionCheckboxInput>
-      <AdvancedBlock>Advanced</AdvancedBlock>
-      <UICLVConfigDynamicNavigationLabel>Dynamic Navigation</UICLVConfigDynamicNavigationLabel>
-      <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
-      <UICLVConfigShowCLVByStringInput>by</UICLVConfigShowCLVByStringInput>
-      <UICLVConfigshowSCVWithStringInput>with</UICLVConfigshowSCVWithStringInput>
-      <UICLVConfigTargetPageFormInputSet>Show in Page</UICLVConfigTargetPageFormInputSet>
-      <content-not-found>Content not found.</content-not-found>
-      <ContentPath>Content Path</ContentPath>
-      <Up>Up</Up>
-      <Down>Down</Down>
-      <UICLVConfigCacheManagementLabel>Content Visibility</UICLVConfigCacheManagementLabel>
-      <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
-      <UICLVConfigWorkspaceFormSelectBox>Workspace</UICLVConfigWorkspaceFormSelectBox>
-      <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
-      <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
+      <UICLVConfigItemsPerPageFormStringInput>Poster per sida</UICLVConfigItemsPerPageFormStringInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>Visa bild</UICLVConfigShowIllustrationFormCheckboxInput>
+      <UICLVConfigShowSummaryFormCheckboxInput>Visa sammanfattning</UICLVConfigShowSummaryFormCheckboxInput>
+      <UICLVConfigShowHeaderFormCheckboxInput>Visa sidhuvud</UICLVConfigShowHeaderFormCheckboxInput>
+      <UICLVConfigShowRefreshFormCheckboxInput>Visa återställ</UICLVConfigShowRefreshFormCheckboxInput>
+      <UICLVConfigShowTitleFormCheckboxInput>Visa titel</UICLVConfigShowTitleFormCheckboxInput>
+      <UICLVConfigShowDateCreatedFormCheckboxInput>Visa datum</UICLVConfigShowDateCreatedFormCheckboxInput>
+      <UICLVConfigShowLinkFormCheckboxInput>Visa länk</UICLVConfigShowLinkFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>Visa fler länkar</UICLVConfigShowReadmoreFormCheckboxInput>
+      <UICLVConfigAllowDynamicUrlStringInput>Tillåt dynamisk URL</UICLVConfigAllowDynamicUrlStringInput>
+      <UICLVConfigShowRssLinkFormCheckboxInput>Visa RSS-länk</UICLVConfigShowRssLinkFormCheckboxInput>
+      <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatisk identifiering</UICLVConfigShowAutomaticDetectionCheckboxInput>
+      <AdvancedBlock>Avancerad</AdvancedBlock>
+      <UICLVConfigDynamicNavigationLabel>Dynamisk navigering</UICLVConfigDynamicNavigationLabel>
+      <UICLVConfigContextualFolderRadioBoxInput>Kontextuell</UICLVConfigContextualFolderRadioBoxInput>
+      <UICLVConfigShowCLVByStringInput>Av</UICLVConfigShowCLVByStringInput>
+      <UICLVConfigshowSCVWithStringInput>med</UICLVConfigshowSCVWithStringInput>
+      <UICLVConfigTargetPageFormInputSet>Visa i sidan</UICLVConfigTargetPageFormInputSet>
+      <content-not-found>Innehåll hittades inte.</content-not-found>
+      <ContentPath>Sökväg för innehåll</ContentPath>
+      <Up>Upp</Up>
+      <Down>Ner</Down>
+      <UICLVConfigCacheManagementLabel>Innehållets synlighet</UICLVConfigCacheManagementLabel>
+      <UICLVContentByQueryLabel>Innehåll efter fråga</UICLVContentByQueryLabel>
+      <UICLVConfigWorkspaceFormSelectBox>Arbetsyta</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigContentByQueryTextArea>genom fråga</UICLVConfigContentByQueryTextArea>
+      <UICLVConfigCacheEnableRadioBoxInput>Dela innehåll mellan användare</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
-      <ModeSelectionHelp>Two modes are available to show content. "By Folder" will take all the content available in your selected folder/category. "By Content" lets you manually select the content you want to show.</ModeSelectionHelp>
-      <FolderPathHelp>Select the content you want to show. The default selection will be replaced dynamically if you activate the Dynamic Navigation option (see the Advanced mode below).</FolderPathHelp>
-      <HeaderOptionHelp>Show a header on top of the content list. If you activate the Automatic Detection option, it will try to find the header based on the current selection.</HeaderOptionHelp>
-      <GeneralOptionHelp>Select the graphical elements you want to show in your list. Note that, depending on your selected template, some elements may not be available.</GeneralOptionHelp>
-      <ContextualHelp>Activates the Dynamic Navigation option. Others can change the content dynamically based on a URL parameter.</ContextualHelp>
-      <ParameterHelp>This parameter will be used to access the content if Dynamic Navigation is activated.</ParameterHelp>
-      <ShowDetailInPageHelp>Clicking on content redirects the user to a Detail page. You must have a "Content by URL" portlet with Dynamic Navigation enabled on the target page to show the content.</ShowDetailInPageHelp>
-      <DetailParameterHelp>This parameter will contain the path to the content in the link to the Detail page. This parameter must match the parameter used in the "Content by URL" portlet of the page.</DetailParameterHelp>
+      <ModeSelectionHelp>Det finns två lägen att visa innehåll. "Från mapp" visar allt innehåll i vald mapp/kategori. I "Från innehåll" väljs manuellt det innehåll som skall visas.</ModeSelectionHelp>
+      <FolderPathHelp>Välj det innehåll som du vill visa. Standardvalet kommer att ersättas dynamiskt om du aktiverar alternativet dynamisk navigering (se Avancerat läge nedan).</FolderPathHelp>
+      <HeaderOptionHelp>Visa rubrik på toppen av listan innehåll. Om du aktiverar alternativet Automatisk identifiering, försöker den hitta huvudet baserat på den aktuella markeringen.</HeaderOptionHelp>
+      <GeneralOptionHelp>Välj grafiskt element som du vill visa i listan. Observera att, beroende på den valda mallen, vissa delar kanske inte är tillgängliga.</GeneralOptionHelp>
+      <ContextualHelp>Aktiverar alternativet dynamisk navigering. Andra kan ändra innehållet dynamiskt baserat på en URL-parameter.</ContextualHelp>
+      <ParameterHelp>Denna parameter kommer att användas för åtkomst till innehållet om dynamisk navigering är aktiverad.</ParameterHelp>
+      <ShowDetailInPageHelp>Genom att klicka på innehåll omdirigeras användaren till en detaljsida. Du måste ha en "Innehåll via URL" portlet med dynamisk navigering aktiverad på sidan för att innehåll skall visas.</ShowDetailInPageHelp>
+      <DetailParameterHelp>Den här parametern innehåller sökvägen till innehållet i länken till detaljsidan. Denna parameter måste matcha den parameter som används i portleten "Innehåll via URL" på sidan.</DetailParameterHelp>
       <ContentByQueryHelp><![CDATA[You can set a SQL Query to get content dynamically. The following parameters are allowed : ${user}, ${lang} or any get parameter (PARAM) surrounded by ${PARAM}.]]></ContentByQueryHelp>
       <ContentsVisibilityHelp>"Restricted by Authentication" will filter the content based on the authentication. If you do not sign in, you see public content only. If you are logged in, you see all the content visible by intranet users (but shared by all). "Restricted by User Roles" means you will see content depending on your rights. In most cases, this option should not be used, as it reduces the overall performance.</ContentsVisibilityHelp>
     </help>
     <action>
-      <Save>Save</Save>
-      <Cancel>Cancel</Cancel>
-      <delete>Delete</delete>
+      <Save>Spara</Save>
+      <Cancel>Rensa</Cancel>
+      <delete>Ta bort</delete>
     </action>
     <msg>
-      <not-valid-path>The Folder Path is invalid.</not-valid-path>
-      <saving-success>The portlet's preferences are saved.</saving-success>
+      <not-valid-path>Ogiltig sökväg.</not-valid-path>
+      <saving-success>Inställningar i portleten sparas.</saving-success>
     </msg>
     <tab>
       <label>
-        <clvContentTab>Content Selection</clvContentTab>
-        <clvDisplayTab>Display Settings</clvDisplayTab>
-        <clvAdvancedTab>Advanced</clvAdvancedTab>
+        <clvContentTab>Val av innehåll</clvContentTab>
+        <clvDisplayTab>Bildskärmsinställningar</clvDisplayTab>
+        <clvAdvancedTab>Avancerad</clvAdvancedTab>
       </label>
     </tab>
   </UICLVConfig>
   <UICLVConfigDisplayModeFormRadioBoxInput>
     <label>
-      <AutoViewerMode>By Folder</AutoViewerMode>
-      <ManualViewerMode>By Content</ManualViewerMode>
+      <AutoViewerMode>Från mapp</AutoViewerMode>
+      <ManualViewerMode>Från innehåll</ManualViewerMode>
     </label>
   </UICLVConfigDisplayModeFormRadioBoxInput>
   <UICLVConfigItemPathFormInputSet>
     <title>
-      <SelectFolderPath>Select Folder Path</SelectFolderPath>
+      <SelectFolderPath>Välj sökväg</SelectFolderPath>
     </title>
   </UICLVConfigItemPathFormInputSet>
   <FolderPathSelectorPopupWindow>
     <title>
-      <UIContentSelectorFolder>Folder Browser</UIContentSelectorFolder>
+      <UIContentSelectorFolder>Mappen Browser</UIContentSelectorFolder>
     </title>
   </FolderPathSelectorPopupWindow>
   <UICLVConfigOrderTypeFormSelectBox>
     <label>
       <option>
-        <OrderDesc>Descendant</OrderDesc>
-        <OrderAsc>Ascendant</OrderAsc>
+        <OrderDesc>Fallande</OrderDesc>
+        <OrderAsc>Stigande</OrderAsc>
       </option>
     </label>
   </UICLVConfigOrderTypeFormSelectBox>
   <UICLVConfigTargetPageFormInputSet>
     <title>
-      <SelectBasePath>Select Base Path</SelectBasePath>
-      <SelectTargetPage>Select Base Path</SelectTargetPage>
+      <SelectBasePath>Välj rotkatalog</SelectBasePath>
+      <SelectTargetPage>Välj rotkatalog</SelectTargetPage>
     </title>
   </UICLVConfigTargetPageFormInputSet>
   <UICLVBasePathPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>Sidväljare</UIPageSelector>
     </title>
   </UICLVBasePathPopupWindow>
   <UICLVPresentation>
     <label>
-      <readmore>Read more</readmore>
-      <rssFeed>RSS Feed</rssFeed>
+      <readmore>Läs mer</readmore>
+      <rssFeed>RSS-flöde</rssFeed>
     </label>
     <action>
-      <refresh>Refresh</refresh>
-      <edit>Edit in Content Explorer</edit>
-      <delete>Delete</delete>
-      <publish>Publish</publish>
+      <refresh>Uppdatera</refresh>
+      <edit>Redigera innehåll i utforskaren</edit>
+      <delete>Ta bort</delete>
+      <publish>Publicera</publish>
     </action>
     <label>
-      <draft>Draft</draft>
+      <draft>Utkast</draft>
     </label>
   </UICLVPresentation>
   <CorrectContentSelectorPopupWindow>
     <title>
-      <UIContentSelectorMulti>Multiple Content Selector Pane</UIContentSelectorMulti>
+      <UIContentSelectorMulti>Multiväljare för innehåll</UIContentSelectorMulti>
     </title>
   </CorrectContentSelectorPopupWindow>
   <UIContentDialogFormPopupWindow>
     <title>
-      <UIContentDialogForm>Web Content Form</UIContentDialogForm>
+      <UIContentDialogForm>Formulär för webb Innehåll</UIContentDialogForm>
     </title>
   </UIContentDialogFormPopupWindow>
   <UICLVConfigContextualFolderRadioBoxInput>
     <label>
-      <contextualEnable>Enabled</contextualEnable>
-      <contextualDisable>Disabled</contextualDisable>
+      <contextualEnable>Aktiverad</contextualEnable>
+      <contextualDisable>Inaktiverad</contextualDisable>
     </label>
   </UICLVConfigContextualFolderRadioBoxInput>
   <PublicationStates>
-    <archived>Archived</archived>
-    <obsolete>Obsolete</obsolete>
-    <unpublished>Unpublished</unpublished>
-    <enrolled>Enrolled</enrolled>
-    <draft>Draft</draft>
-    <pending>Pending</pending>
-    <approved>Approved</approved>
-    <inreview>In Review</inreview>
-    <staged>Staged</staged>
-    <published>Published</published>
+    <archived>Arkiverad</archived>
+    <obsolete>Utgången</obsolete>
+    <unpublished>Ej publicerad</unpublished>
+    <enrolled>Inskrivna</enrolled>
+    <draft>Utkast</draft>
+    <pending>Väntläge</pending>
+    <approved>Godkänd</approved>
+    <inreview>Under granskning</inreview>
+    <staged>Iscensatt</staged>
+    <published>Publicerad</published>
   </PublicationStates>
   <UICLVConfigCacheEnableRadioBoxInput>
     <label>
-      <ENABLE>Restricted by Authentication</ENABLE>
-      <DISABLE>Restricted by User Roles</DISABLE>
+      <ENABLE>Begränsad för autentisering</ENABLE>
+      <DISABLE>Begränsad för användarroll</DISABLE>
     </label>
   </UICLVConfigCacheEnableRadioBoxInput>
 </bundle>

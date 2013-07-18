@@ -4,14 +4,14 @@
   <View>
     <label>
       <languages>
-        <en>English</en>
-        <fr>French</fr>
-        <ru>Russian</ru>
-        <vi>Vietnamese</vi>
-        <nl>Dutch</nl>
-        <de>German</de>
-        <uk>Ukrainian</uk>
-        <ar>Arabic</ar>
+        <en>Engelska</en>
+        <fr>Franska</fr>
+        <ru>Ryska</ru>
+        <vi>Vietnamesiska</vi>
+        <nl>Holländska</nl>
+        <de>Tyska</de>
+        <uk>Ukrainska</uk>
+        <ar>Arabiska</ar>
       </languages>
     </label>
   </View>
@@ -21,8 +21,8 @@
   <Calendar>
     <view>
       <label>
-        <calendar>Calendar</calendar>
-        <shared>Shared</shared>
+        <calendar>Kalender</calendar>
+        <shared>Delad</shared>
       </label>
     </view>
   </Calendar>
@@ -32,14 +32,14 @@
   <Comment>
     <view>
       <label>
-        <postedBy>Last comment posted by</postedBy>
-        <at>at</at>
-        <comments>Comment(s)</comments>
-        <show-comments>Show comments</show-comments>
-        <hide-comments>Hide comments</hide-comments>
-        <comment-by>Commented by</comment-by>
-        <email>Email</email>
-        <site>Site</site>
+        <postedBy>Senaste kommentar postat av</postedBy>
+        <at>på</at>
+        <comments>Kommentar (er)</comments>
+        <show-comments>Visa kommentarer</show-comments>
+        <hide-comments>Dölja kommentarer</hide-comments>
+        <comment-by>Kommenterad av</comment-by>
+        <email>E-post</email>
+        <site>Webbplats</site>
       </label>
     </view>
   </Comment>
@@ -49,23 +49,23 @@
   <Event>
     <view>
       <label>
-        <january>January</january>
-        <february>February</february>
-        <march>March</march>
+        <january>Januari</january>
+        <february>Februari</february>
+        <march>Mars</march>
         <april>April</april>
-        <may>May</may>
-        <june>June</june>
-        <july>July</july>
-        <august>August</august>
+        <may>Maj</may>
+        <june>Juni</june>
+        <july>Juli</july>
+        <august>Augusti</august>
         <september>September</september>
-        <october>October</october>
+        <october>Oktober</october>
         <november>November</november>
         <december>December</december>
-        <event>Event</event>
-        <subject>Subject</subject>
-        <location>Location</location>
-        <comment>Comment</comment>
-        <description>Description</description>
+        <event>Händelse</event>
+        <subject>Subjekt</subject>
+        <location>Plats</location>
+        <comment>Kommentar</comment>
+        <description>Beskrivning</description>
       </label>
     </view>
   </Event>
@@ -76,13 +76,13 @@
   <File>
     <view>
       <label>
-        <not-viewable>This content is not viewable</not-viewable>
-        <using-webDAV>or use WebDAV to access the content</using-webDAV>
-        <file-size-too-big>The content of this file is too big. You should download and open in the client.</file-size-too-big>
-        <webDAV>WebDAV View</webDAV>
-        <download>Download</download>
-        <htmlview>View as HTML</htmlview>
-        <plaintextview>View as Plain text</plaintextview>
+        <not-viewable>Detta innehåll kan inte visas</not-viewable>
+        <using-webDAV>eller använda WebDAV för att komma åt innehållet</using-webDAV>
+        <file-size-too-big>Innehållet i denna fil är för stor. Du bör hämta och öppna i klienten.</file-size-too-big>
+        <webDAV>WebDAV Vy</webDAV>
+        <download>Ladda ner</download>
+        <htmlview>Visa som HTML</htmlview>
+        <plaintextview>Visa som oformaterad text</plaintextview>
       </label>
     </view>
   </File>
@@ -94,37 +94,37 @@
       <label>
         <content>File Plan Content</content>
         <record-category-identifier>Record Category Identifier</record-category-identifier>
-        <disposition-author>Disposition Authority</disposition-author>
-        <disposition-instruction>Disposition Instructions</disposition-instruction>
+        <disposition-author>Disposition myndigheten</disposition-author>
+        <disposition-instruction>Disposition instruktioner</disposition-instruction>
         <permanent-record-indicator>Permanent Record Indicator</permanent-record-indicator>
-        <contain-record-folder>Contains Records Folder</contain-record-folder>
-        <default-media-type>Default Media Type</default-media-type>
-        <default-marking-list>Default Marking List</default-marking-list>
-        <default-originating-organization>Default Originating Organization</default-originating-organization>
-        <number-of-record>Number of Records</number-of-record>
-        <record>Records</record>
-        <obsolete-record>Obsolete Records</obsolete-record>
+        <contain-record-folder>Innehåller mapp för poster</contain-record-folder>
+        <default-media-type>Standard mediatyp</default-media-type>
+        <default-marking-list>Standardlistan märkning</default-marking-list>
+        <default-originating-organization>Ursprungliga standardorganisationen</default-originating-organization>
+        <number-of-record>Antal poster</number-of-record>
+        <record>Poster</record>
+        <obsolete-record>Föråldrade poster</obsolete-record>
         <supreseded-record>Superseded Records</supreseded-record>
-        <vital-record>Vitals Records</vital-record>
+        <vital-record>Vitals register</vital-record>
         <cutoff-record>Cutoff Records</cutoff-record>
         <holdable-record>Holdable Records</holdable-record>
-        <transferable-record>Transferable Records</transferable-record>
+        <transferable-record>Överlåtbara poster</transferable-record>
         <accessionable-record>Accessionable Records</accessionable-record>
         <destroyable-record>Destroyable Records</destroyable-record>
-        <record-id>Record Id</record-id>
-        <record-name>Record name</record-name>
+        <record-id>Post-ID</record-id>
+        <record-name>Postnamnet</record-name>
         <originator>Originator</originator>
-        <date-received>Date Received</date-received>
+        <date-received>Datum mottaget</date-received>
         <originating-organization>Originating Organization</originating-organization>
-        <next-review-date>Next Review Date</next-review-date>
-        <previous-review-date>Previous Review Date</previous-review-date>
+        <next-review-date>Nästa granskningsdatum</next-review-date>
+        <previous-review-date>Tidigare granskningsdatum</previous-review-date>
         <cutoff-date>Cutoff Date</cutoff-date>
         <hold-until>Hold Until</hold-until>
-        <transfer-date>Transfer Date</transfer-date>
-        <transfer-location>Transfer Location</transfer-location>
+        <transfer-date>Överföringsdatum</transfer-date>
+        <transfer-location>Plats för överföring</transfer-location>
         <accession-date>Accession Date</accession-date>
         <accession-location>Accession Location</accession-location>
-        <destruction-date>Destruction Date</destruction-date>
+        <destruction-date>Förstörelse datum</destruction-date>
       </label>
     </view>
   </FilePlan>
@@ -134,8 +134,8 @@
   <Kofax>
     <view>
       <label>
-        <document-name>Kofax Document Name</document-name>
-        <downloadable>Downloadable File</downloadable>
+        <document-name>Kofax dokumentnamn</document-name>
+        <downloadable>Nedladdningsbar fil</downloadable>
       </label>
     </view>
   </Kofax>
@@ -145,12 +145,12 @@
   <Mail>
     <view>
       <label>
-        <from>From:</from>
-        <to>To:</to>
+        <from>Från:</from>
+        <to>Till:</to>
         <cc>Cc:</cc>
-        <date>Date:</date>
-        <subject>Subject:</subject>
-        <attachment>Attachments:</attachment>
+        <date>Datum:</date>
+        <subject>Subjekt:</subject>
+        <attachment>Bilagor:</attachment>
       </label>
     </view>
   </Mail>
@@ -161,16 +161,16 @@
     <view>
       <label>
         <podcast>Podcast</podcast>
-        <title>Title</title>
-        <link>Link</link>
-        <author>Author</author>
+        <title>Titel</title>
+        <link>Länk</link>
+        <author>Författare</author>
         <explicit>Explicit</explicit>
-        <category>Category</category>
-        <keyword>Keywords</keyword>
-        <publish-date>Publish Date</publish-date>
-        <mime-type>Mime Type</mime-type>
-        <length>Length</length>
-        <description>Description</description>
+        <category>Kategori</category>
+        <keyword>Sökord</keyword>
+        <publish-date>Publicera datum</publish-date>
+        <mime-type>MIME-typ</mime-type>
+        <length>Längd</length>
+        <description>Beskrivning</description>
       </label>
     </view>
   </Podcast>
@@ -180,16 +180,16 @@
   <Sample>
     <view>
       <label>
-        <node-name>Node Name</node-name>
-        <title>Title</title>
-        <date>Date</date>
-        <date-time>Date Time</date-time>
-        <description>Description</description>
-        <image>Image</image>
-        <summary>Summary</summary>
-        <content>Content</content>
-        <relation>Relations</relation>
-        <attachment>Attachments</attachment>
+        <node-name>Nodnamnet</node-name>
+        <title>Titel</title>
+        <date>Datum</date>
+        <date-time>Datum tid</date-time>
+        <description>Beskrivning</description>
+        <image>Bild</image>
+        <summary>Sammanfattning</summary>
+        <content>Innehåll</content>
+        <relation>Förbindelser</relation>
+        <attachment>Bilagor</attachment>
       </label>
     </view>
   </Sample>
@@ -199,8 +199,8 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Avg. Rating</avg-rating>
-        <subscription>Votes</subscription>
+        <avg-rating>AVG. betyg</avg-rating>
+        <subscription>Röster</subscription>
       </label>
     </view>
   </Vote>
@@ -210,12 +210,12 @@
   <ListView>
     <view>
       <label>
-        <name>Name</name>
-        <versionable>Versionable</versionable>
-        <exo_owner>Owner</exo_owner>
-        <exo_dateCreated>Date Created</exo_dateCreated>
-        <exo_dateModified>Date Modified</exo_dateModified>
-        <auditing>Auditing</auditing>
+        <name>Namn</name>
+        <versionable>Tillämpningsbara</versionable>
+        <exo_owner>Ägare</exo_owner>
+        <exo_dateCreated>Datum skapad</exo_dateCreated>
+        <exo_dateModified>Ändringsdatum</exo_dateModified>
+        <auditing>Revision</auditing>
       </label>
     </view>
   </ListView>
@@ -225,12 +225,12 @@
   <Workflow>
     <view>
       <label>
-        <name>Name</name>
-        <lifecycle>Lifecycle</lifecycle>
-        <description>Description</description>
+        <name>Namn</name>
+        <lifecycle>Livscykel</lifecycle>
+        <description>Beskrivning</description>
         <validator>Validator</validator>
-        <to-workspace>To Workspace</to-workspace>
-        <at-location>At Location</at-location>
+        <to-workspace>Till arbetsytan</to-workspace>
+        <at-location>På plats</at-location>
       </label>
     </view>
   </Workflow>
@@ -240,11 +240,11 @@
   <Backup>
     <view>
       <label>
-        <name>Name</name>
-        <lifecycle>Lifecycle</lifecycle>
-        <description>Description</description>
-        <to-workspace>To Workspace</to-workspace>
-        <at-location>At Location</at-location>
+        <name>Namn</name>
+        <lifecycle>Livscykel</lifecycle>
+        <description>Beskrivning</description>
+        <to-workspace>Till arbetsytan</to-workspace>
+        <at-location>På plats</at-location>
       </label>
     </view>
   </Backup>
@@ -255,11 +255,11 @@
   <Icalendar>
     <view>
       <label>
-        <action-name>Action Name</action-name>
-        <lifecycle>Lifecycle</lifecycle>
-        <calendar-path>Calendar Path</calendar-path>
-        <description>Description</description>
-        <query>Query</query>
+        <action-name>Åtgärdens namn</action-name>
+        <lifecycle>Livscykel</lifecycle>
+        <calendar-path>Kalender väg</calendar-path>
+        <description>Beskrivning</description>
+        <query>Förfrågan</query>
         <repository>Repository</repository>
       </label>
     </view>
@@ -271,10 +271,10 @@
   <AddMetadata>
     <view>
       <label>
-        <action-name>Action Name</action-name>
-        <lifecycle>Lifecycle</lifecycle>
+        <action-name>Åtgärdens namn</action-name>
+        <lifecycle>Livscykel</lifecycle>
         <metadata>Metadata</metadata>
-        <description>Description</description>
+        <description>Beskrivning</description>
       </label>
     </view>
   </AddMetadata>
@@ -285,9 +285,9 @@
   <AutoVersioning>
     <view>
       <label>
-        <action-name>Action Name</action-name>
-        <lifecycle>Lifecycle</lifecycle>
-        <description>Description</description>
+        <action-name>Åtgärdens namn</action-name>
+        <lifecycle>Livscykel</lifecycle>
+        <description>Beskrivning</description>
       </label>
     </view>
   </AutoVersioning>
@@ -297,9 +297,9 @@
   <EnableVersioning>
     <view>
       <label>
-        <action-name>Name</action-name>
-        <lifecycle>Lifecycle</lifecycle>
-        <description>Description</description>
+        <action-name>Namn</action-name>
+        <lifecycle>Livscykel</lifecycle>
+        <description>Beskrivning</description>
       </label>
     </view>
   </EnableVersioning>
@@ -310,29 +310,29 @@
     <view>
       <label>
         <not-avaliable>N/A</not-avaliable>
-        <title>Title</title>
-        <creator>Creator</creator>
-        <subject>Subject</subject>
-        <source>Source</source>
-        <contributor>Contributor</contributor>
-        <resource-type>Resource Type</resource-type>
-        <date>Date</date>
-        <publisher>Publisher</publisher>
-        <description>Description</description>
-        <rights>Rights</rights>
+        <title>Titel</title>
+        <creator>Skapare</creator>
+        <subject>Subjekt</subject>
+        <source>Källa</source>
+        <contributor>Bidragsgivare</contributor>
+        <resource-type>Resurstyp</resource-type>
+        <date>Datum</date>
+        <publisher>Utgivare</publisher>
+        <description>Beskrivning</description>
+        <rights>Rättigheter</rights>
         <relation>Relation</relation>
         <format>Format</format>
-        <coverage>Coverage</coverage>
-        <identifier>Identifier</identifier>
-        <languages>Languages</languages>
+        <coverage>Täckning</coverage>
+        <identifier>Identifierare</identifier>
+        <languages>Språk</languages>
       </label>
       <action>
-        <add-edit>Add/Edit</add-edit>
-        <cancel>Cancel</cancel>
+        <add-edit>Lägg till/redigera</add-edit>
+        <cancel>Avbryt</cancel>
       </action>
       <tooltip>
-        <cancel>Cancel</cancel>
-        <add-edit>Add/Edit Properties</add-edit>
+        <cancel>Avbryt</cancel>
+        <add-edit>Lägg till/redigera egenskaper</add-edit>
       </tooltip>
     </view>
   </ElementSet>
@@ -343,20 +343,20 @@
     <view>
       <label>
         <not-available>N/A</not-available>
-        <cutoff-executed>Cutoff Executed</cutoff-executed>
-        <cutoff-now>Cutoff Now</cutoff-now>
-        <cutoff-date-time>Cutoff Date Time</cutoff-date-time>
-        <cutoff-event>Cutoff Event</cutoff-event>
-        <cutoff-obsolete>Cutoff Obsolete</cutoff-obsolete>
-        <cutoff-superseded>Cutoff Superseded</cutoff-superseded>
+        <cutoff-executed>Cutoff genomförd</cutoff-executed>
+        <cutoff-now>Cutoff nu</cutoff-now>
+        <cutoff-date-time>Cutoff datum tid</cutoff-date-time>
+        <cutoff-event>Cutoff händelse</cutoff-event>
+        <cutoff-obsolete>Cutoff föråldrade</cutoff-obsolete>
+        <cutoff-superseded>Cutoff ersatt</cutoff-superseded>
       </label>
       <action>
-        <add-edit>Add/Edit</add-edit>
-        <cancel>Cancel</cancel>
+        <add-edit>Lägg till/redigera</add-edit>
+        <cancel>Avbryt</cancel>
       </action>
       <tooltip>
-        <cancel>Cancel</cancel>
-        <add-edit>Add/Edit Properties</add-edit>
+        <cancel>Avbryt</cancel>
+        <add-edit>Lägg till/redigera egenskaper</add-edit>
       </tooltip>
     </view>
   </Cutoffable>
@@ -367,15 +367,15 @@
     <view>
       <label>
         <not-available>N/A</not-available>
-        <destruction-date>Destruction Date</destruction-date>
+        <destruction-date>Förstörelse datum</destruction-date>
       </label>
       <action>
-        <add-edit>Add/Edit</add-edit>
-        <cancel>Cancel</cancel>
+        <add-edit>Lägg till/redigera</add-edit>
+        <cancel>Avbryt</cancel>
       </action>
       <tooltip>
-        <cancel>Cancel</cancel>
-        <add-edit>Add/Edit Properties</add-edit>
+        <cancel>Avbryt</cancel>
+        <add-edit>Lägg till/redigera egenskaper</add-edit>
       </tooltip>
     </view>
   </Destroyable>
@@ -390,11 +390,11 @@
         <accession-date>Accession Date</accession-date>
       </label>
       <action>
-        <add-edit>Add/Edit</add-edit>
-        <cancel>Cancel</cancel>
+        <add-edit>Lägg till/redigera</add-edit>
+        <cancel>Avbryt</cancel>
       </action>
       <tooltip>
-        <cancel>Cancel</cancel>
+        <cancel>Avbryt</cancel>
       </tooltip>
     </view>
   </Accessionable>
@@ -405,19 +405,19 @@
     <view>
       <label>
         <not-available>N/A</not-available>
-        <hold-executed>Hold Executed</hold-executed>
-        <hold-until>Hold Until</hold-until>
-        <holds-discretionary>Hold Discretionary</holds-discretionary>
-        <hold-until-event>Hold Until Event</hold-until-event>
-        <freeze>Freeze</freeze>
+        <hold-executed>Vänta med genomförande</hold-executed>
+        <hold-until>Håll tills</hold-until>
+        <holds-discretionary>Håll diskretionära</holds-discretionary>
+        <hold-until-event>Håll tills händelse</hold-until-event>
+        <freeze>Frysa</freeze>
       </label>
       <action>
-        <add-edit>Add/Edit</add-edit>
-        <cancel>Cancel</cancel>
+        <add-edit>Lägg till/redigera</add-edit>
+        <cancel>Avbryt</cancel>
       </action>
       <tooltip>
-        <cancel>Cancel</cancel>
-        <add-edit>Add/Edit Properties</add-edit>
+        <cancel>Avbryt</cancel>
+        <add-edit>Lägg till/redigera egenskaper</add-edit>
       </tooltip>
     </view>
   </Holdable>
@@ -429,29 +429,29 @@
       <label>
         <not-available>N/A</not-available>
         <supplemental-marking-list>Supplemental Marking List</supplemental-marking-list>
-        <subject>Subject</subject>
-        <record-identifier>Record Identifier</record-identifier>
-        <originator>Originator</originator>
+        <subject>Subjekt</subject>
+        <record-identifier>Postidentifierare</record-identifier>
+        <originator>Beställaren</originator>
         <format>Format</format>
-        <addresses>Addresses</addresses>
-        <originating-organization>Originating Organization</originating-organization>
-        <other-addresses>Other Addresses</other-addresses>
-        <publication-date>Publication Date</publication-date>
-        <record-note>Record Note</record-note>
-        <date-received>Date Received</date-received>
-        <media-format>Media Format</media-format>
-        <is-obsolete>Is Obsolete</is-obsolete>
-        <date-field>Date Field</date-field>
-        <superseded>Superseded</superseded>
+        <addresses>Adresser</addresses>
+        <originating-organization>Organisations ursprung</originating-organization>
+        <other-addresses>Andra adresser</other-addresses>
+        <publication-date>Utgivningsdatum</publication-date>
+        <record-note>Posten Obs</record-note>
+        <date-received>Datum mottaget</date-received>
+        <media-format>Media-Format</media-format>
+        <is-obsolete>Är föråldrad</is-obsolete>
+        <date-field>Datum fält</date-field>
+        <superseded>Ersatt</superseded>
         <uuid>UUID</uuid>
       </label>
       <action>
-        <add-edit>Add/Edit</add-edit>
-        <cancel>Cancel</cancel>
+        <add-edit>Lägg till/redigera</add-edit>
+        <cancel>Avbryt</cancel>
       </action>
       <tooltip>
-        <cancel>Cancel</cancel>
-        <add-edit>Add/Edit Properties</add-edit>
+        <cancel>Avbryt</cancel>
+        <add-edit>Lägg till/redigera egenskaper</add-edit>
       </tooltip>
     </view>
   </Record>
@@ -462,17 +462,17 @@
     <view>
       <label>
         <not-available>N/A</not-available>
-        <transfer-executed>Transfer Executed</transfer-executed>
-        <transfer-date>Transfer Date</transfer-date>
-        <transfer-location>Transfer Location</transfer-location>
+        <transfer-executed>Överföring utförd</transfer-executed>
+        <transfer-date>Överföringsdatum</transfer-date>
+        <transfer-location>Plats för överföring</transfer-location>
       </label>
       <action>
-        <add-edit>Add/Edit</add-edit>
-        <cancel>Cancel</cancel>
+        <add-edit>Lägg till/redigera</add-edit>
+        <cancel>Avbryt</cancel>
       </action>
       <tooltip>
-        <cancel>Cancel</cancel>
-        <add-edit>Add/Edit Properties</add-edit>
+        <cancel>Avbryt</cancel>
+        <add-edit>Lägg till/redigera egenskaper</add-edit>
       </tooltip>
     </view>
   </Transferable>
@@ -483,17 +483,17 @@
     <view>
       <label>
         <not-available>N/A</not-available>
-        <is-vital-record>Is Vital Record</is-vital-record>
-        <prev-review-date>Previous Review Date</prev-review-date>
-        <next-review-date>Next Review Date</next-review-date>
+        <is-vital-record>Är viktig post</is-vital-record>
+        <prev-review-date>Tidigare granskningsdatum</prev-review-date>
+        <next-review-date>Nästa granskningsdatum</next-review-date>
       </label>
       <action>
-        <add-edit>Add/Edit</add-edit>
-        <cancel>Cancel</cancel>
+        <add-edit>Lägg till/redigera</add-edit>
+        <cancel>Avbryt</cancel>
       </action>
       <tooltip>
-        <cancel>Cancel</cancel>
-        <add-edit>Add/Edit Properties</add-edit>
+        <cancel>Avbryt</cancel>
+        <add-edit>Lägg till/redigera egenskaper</add-edit>
       </tooltip>
     </view>
   </VitalRecord>
@@ -503,21 +503,21 @@
   <ContentPublishing>
     <view>
       <label>
-        <id>Id</id>
+        <id>ID</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <description>#{word.description}</description>
         <validator>Validator</validator>
         <supervisor>Supervisor</supervisor>
-        <public-workspace>Publishing Workspace</public-workspace>
-        <public-path>Publishing Path</public-path>
-        <pending-workspace>Pending Workspace</pending-workspace>
-        <pending-path>Pending Path</pending-path>
-        <backup-workspace>Backup Workspace</backup-workspace>
-        <backup-path>Backup Path</backup-path>
-        <trash-workspace>Trash Workspace</trash-workspace>
-        <trash-path>Trash Path</trash-path>
-<affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <public-workspace>Publicerand arbetsyta</public-workspace>
+        <public-path>Publicerad sökväg</public-path>
+        <pending-workspace>Pågående arbetsyta</pending-workspace>
+        <pending-path>Väntande sökväg</pending-path>
+        <backup-workspace>Backup arbetsyta</backup-workspace>
+        <backup-path>Backup av sökväg</backup-path>
+        <trash-workspace>Papperskorg för arbetsyta</trash-workspace>
+        <trash-path>Papperskorgens sökväg</trash-path>
+<affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
       </label>
     </view>
   </ContentPublishing>
@@ -525,10 +525,10 @@
   <SendMail>
     <view>
       <label> 
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
+        <isDeep>Är djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
+        <nodeTypeName>Typ nodnamn</nodeTypeName>
       </label> 
   </view>
   </SendMail>
@@ -536,10 +536,10 @@
   <ScriptAction>
     <view>
       <label> 
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node types</nodetypes>
-        <affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
-        <nodeTypeName>Node type names</nodeTypeName>
+        <isDeep>Är djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
+        <nodeTypeName>Typ nodnamn</nodeTypeName>
       </label> 
     </view>
   </ScriptAction>
@@ -547,10 +547,10 @@
   <Getmail>
     <view>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
+        <isDeep>Är djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
+        <nodeTypeName>Typ nodnamn</nodeTypeName>
       </label> 
     </view>
   </Getmail>
@@ -558,10 +558,10 @@
   <Rss>
     <view>
       <label> 
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
+        <isDeep>Är djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
+        <nodeTypeName>Typ nodnamn</nodeTypeName>
       </label> 
     </view>
   </Rss>
@@ -569,10 +569,10 @@
   <AddMetadata>
     <view>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
+        <isDeep>Är djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
+        <nodeTypeName>Typ nodnamn</nodeTypeName>
       </label> 
     </view>
   </AddMetadata>
@@ -580,10 +580,10 @@
   <ReloadAction>
     <view>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
+        <isDeep>Är djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
+        <nodeTypeName>Typ nodnamn</nodeTypeName>
       </label> 
     </view>
   </ReloadAction>
@@ -591,10 +591,10 @@
   <Transform>
     <view>
       <label> 
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
+        <isDeep>Är djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
+        <nodeTypeName>Typ nodnamn</nodeTypeName>
       </label> 
     </view>
   </Transform>
@@ -602,10 +602,10 @@
   <EnableVersioning>
     <view>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes> 
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
+        <isDeep>Är djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes> 
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
+        <nodeTypeName>Typ nodnamn</nodeTypeName>
       </label> 
     </view>
   </EnableVersioning>
@@ -613,10 +613,10 @@
   <AutoVersioning>
     <view>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
+        <isDeep>Är djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
+        <nodeTypeName>Typ nodnamn</nodeTypeName>
       </label> 
     </view>
   </AutoVersioning>
@@ -624,9 +624,9 @@
    <AccessibleMedia>
     <view>
       <label>
-      <Play-audio-description-of-this-video>Audio description</Play-audio-description-of-this-video>
-      <Read-more>Read more</Read-more>
-      <Read-less>Read less</Read-less>
+      <Play-audio-description-of-this-video>Ljudbeskrivning</Play-audio-description-of-this-video>
+      <Read-more>Läs mer</Read-more>
+      <Read-less>Läs mindre</Read-less>
       <Switch-back-to-original-video>Original video</Switch-back-to-original-video>
       </label>
       <tooltip>

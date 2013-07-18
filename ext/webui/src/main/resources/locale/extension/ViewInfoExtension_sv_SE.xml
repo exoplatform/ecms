@@ -2,32 +2,32 @@
 <bundle>
 <UIPopupWindow>
 <title>
-<UIViewInfoManager>View Information</UIViewInfoManager>
+<UIViewInfoManager>Visa Information</UIViewInfoManager>
 </title>
 </UIPopupWindow>
     
 <ECMContextMenu>
 <event>
-<ViewInfo>View Information</ViewInfo>
+<ViewInfo>Visa Information</ViewInfo>
 </event>
 </ECMContextMenu>
 <UIViewInfoContainer>
 <label>
-      <name>Name</name>
-      <title>Title</title>
-      <type>Type</type>
-      <size>Size</size>
-      <owner>Owner</owner>
-      <lastModifier>Last Modifier</lastModifier>
-      <created>Created Date</created>
-      <lastModified>Last Modified Date</lastModified>
-      <publicationState>Published State</publicationState>
+      <name>Namn</name>
+      <title>Titel</title>
+      <type>Typ</type>
+      <size>Storlek</size>
+      <owner>Ägare</owner>
+      <lastModifier>Senaste person att ändra</lastModifier>
+      <created>Skapad</created>
+      <lastModified>Senaste ändringsdatum</lastModified>
+      <publicationState>Publiceringsstatus</publicationState>
 </label>
 <value>
-      <folder>Folder</folder>
+      <folder>Mappen</folder>
 </value>
 <action>
-<Close>Close</Close>
+<Close>Stäng</Close>
 </action>
 </UIViewInfoContainer>
 </bundle>
