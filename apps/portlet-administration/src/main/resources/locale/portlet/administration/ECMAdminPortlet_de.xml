@@ -45,7 +45,7 @@
       <no-taxonomy-selected>Sie müssen mindestens eine Kategorie kopieren oder ausschneiden.</no-taxonomy-selected>
       <node-is-cutting>Sie können hier nicht einfügen. Der Kategorieknoten "{0}" wurde vielleicht ausgeschnitten.</node-is-cutting>
       <can-not-paste>Es gibt keine Daten zum Einfügen in der Zwischenablage.</can-not-paste>
-      <reference-exception>Cannot delete this category , because it is currently referenced.</reference-exception>
+      <reference-exception>Cannot delete this category  because it is currently referenced by a content.</reference-exception>
       <path-error>Fehler beim Entfernen dieses Kategorieknotens.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -141,14 +141,6 @@
 ##########################################################################################
 -->
   <UIPermissionTreeForm>
-    <title>Eine Berechtigung auf diesen Knoten hinzufügen</title>
-    <label>
-      <userOrGroup>Benutzer oder Gruppe</userOrGroup>
-      <read>Lesen</read>
-      <add_node>Knotenrecht hinzufügen</add_node>
-      <set_property>Eigenschaftsrecht festlegen</set_property>
-      <remove>Entfernen</remove>
-    </label>
     <msg>
       <have-not-any-permission>Bitte geben Sie mindestens eine Berechtigung für diesen Knoten ein.</have-not-any-permission>
     </msg>
@@ -373,12 +365,6 @@
       <permission>{0} in {1}</permission>
     </label>
   </UIDriveList>
-  <PopupDrivePermission>
-    <title>
-      <AddDrivePermissionSelector>Berechtigung hinzufügen</AddDrivePermissionSelector>
-      <UIDrivePermissionSelector>Berechtigungen auswählen</UIDrivePermissionSelector>
-    </title>
-  </PopupDrivePermission>
   <UIDriveForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -1599,7 +1585,7 @@
       <set_property>Set Property Right</set_property>
       <remove>Remove Right</remove>
     </label>
-    <title>Add a permission to that node</title>
+    <title>Eine Berechtigung auf diesen Knoten hinzufügen</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Speichern</Save>
@@ -1627,7 +1613,7 @@
    
    <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>Add Permission</AddDrivePermissionSelector>
+      <AddDrivePermissionSelector>Berechtigung hinzufügen</AddDrivePermissionSelector>
       <UIPermissionSelector>Berechtigung auswählen</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
@@ -2194,7 +2180,7 @@
   <UITagStyleList>
     <header>
       <name>Stilname</name>
-      <documentRange>Document Range</documentRange>
+      <documentRange>Number of Occurrences</documentRange>
       <tagHTML>Stil des Tags</tagHTML>
       <action>Aktion</action>
     </header>
