@@ -519,8 +519,6 @@
 <CLASSIFIED>機密</CLASSIFIED>
 <UNCLASSIFIED>非機密</UNCLASSIFIED>
 <NOCONTRACT>契約無し</NOCONTRACT>
-<true>True</true>
-<false>False</false>
 <one-minute>1分</one-minute>
 <hourly>毎時</hourly>
 <daily>毎日</daily>
