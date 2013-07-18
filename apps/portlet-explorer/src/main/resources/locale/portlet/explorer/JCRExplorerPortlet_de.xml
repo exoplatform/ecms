@@ -41,7 +41,7 @@
     </label>
     <button>
       <label>
-        <confirm>Ok</confirm>
+        <confirm>OK</confirm>
       </label>
     </button>
     <msg>
@@ -2444,7 +2444,6 @@
   </UIDriveSelector>
   <UIJcrExplorerEditForm>
     <label>
-      <driveName>Drive Name</driveName>
       <DriveNameInput>UI JCR Explorer Edit Form</DriveNameInput>
     </label>
     <msg>
@@ -2716,7 +2715,6 @@
 
   <UIDocumentForm>
     <msg>
-      <not-support>Cannot load the template of '{0}'.</not-support>
       <do-not-permission>You do not have permission to load the template '{0}'.</do-not-permission>
     </msg>
   </UIDocumentForm>
@@ -3051,7 +3049,7 @@
        <Video>Video</Video>
        <Music>Musik</Music>
        <Documents>Documents</Documents>
-       <Contents>Inhalt</Contents>
+       <Content>Inhalt</Content>
     </label>
   </DocumentType>
 
@@ -3061,7 +3059,7 @@
       <Video>Video</Video>
       <Music>Musik</Music>
       <Documents>Documents</Documents>
-      <Contents>Inhalt</Contents>
+      <Content>Inhalt</Content>
     </label>
     <title>Set Up Filter Preferences</title>
     <action>
@@ -3087,7 +3085,6 @@
   <Views>
     <label>
       <slide-show>Slide Show</slide-show>
-      <timeline-view>Timeline View</timeline-view>
     </label>
   </Views>
   <ECMContextMenu>
@@ -3108,7 +3105,6 @@
       <showHiddens>Ausgeblendet</showHiddens>
       <showTrash>Papierkorb</showTrash>
     </label>
-    <title>Set Up Filter Preferences</title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -3306,11 +3302,6 @@
     </title>
   </rootNodeInfo>
 
-  <UIPopupWindow>
-    <title>
-      <UISelectRestorePath>Select Restore Path</UISelectRestorePath>
-    </title>
-  </UIPopupWindow>
   <UIActionForm>
     <msg>
       <homePath-emty>Der Quellpfad ist leer.</homePath-emty>
@@ -3437,9 +3428,6 @@
         <UIOneTaxonomySelector>Kategorie auswählen</UIOneTaxonomySelector>
       </label>
     </tab>
-    <action>
-     <Close>Close</Close>
-    </action>
   </UICategoryManagerSearch>
 
   <UIPreferencesForm>
@@ -3494,8 +3482,6 @@
   <CLASSIFIED>Klassifiziert</CLASSIFIED>
   <UNCLASSIFIED>Unklassifiziert</UNCLASSIFIED>
   <NOCONTRACT>Kein Vertrag</NOCONTRACT>
-  <true>True</true>
-  <false>False</false>
   <one-minute>Eine Minute</one-minute>
   <hourly>Stündlich</hourly>
   <daily>Täglich</daily>
