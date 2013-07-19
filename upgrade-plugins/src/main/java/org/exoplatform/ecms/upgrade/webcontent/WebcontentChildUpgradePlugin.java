@@ -40,7 +40,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  */
 public class WebcontentChildUpgradePlugin extends UpgradeProductPlugin {
   
-  private Log LOG = ExoLogger.getLogger(this.getClass().getName());
+  private static final Log LOG = ExoLogger.getLogger(WebcontentChildUpgradePlugin.class.getName());
   private RepositoryService repoService_;
 
   public WebcontentChildUpgradePlugin(RepositoryService repoService, InitParams initParams) {

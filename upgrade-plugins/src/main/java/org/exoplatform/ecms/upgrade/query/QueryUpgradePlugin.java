@@ -56,7 +56,7 @@ import org.exoplatform.services.log.Log;
  */
 public class QueryUpgradePlugin extends UpgradeProductPlugin {
 
-  private Log log = ExoLogger.getLogger(this.getClass());
+  private static final Log log = ExoLogger.getLogger(QueryUpgradePlugin.class.getName());
   
   private QueryService queryService_;
   private NodeHierarchyCreator nodeHierarchyCreator_;

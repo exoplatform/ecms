@@ -52,7 +52,7 @@ import org.exoplatform.services.log.Log;
  */
 public class NodeTypeTemplateUpgradePlugin extends UpgradeProductPlugin {
 
-  private Log log = ExoLogger.getLogger(this.getClass());
+  private static final Log log = ExoLogger.getLogger(NodeTypeTemplateUpgradePlugin.class.getName());
   
   private TemplateService templateService_;
   

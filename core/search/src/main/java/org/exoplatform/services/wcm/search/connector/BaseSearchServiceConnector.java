@@ -59,7 +59,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
   protected SiteSearchService siteSearch_;
   protected ManageDriveService driveService_;
   
-  protected static final Log LOG = ExoLogger.getLogger(BaseSearchServiceConnector.class.getName());
+  private static final Log LOG = ExoLogger.getLogger(BaseSearchServiceConnector.class.getName());
   
   public static final String DEFAULT_SITENAME = "intranet";
   public static final String PAGE_NAGVIGATION = "documents";

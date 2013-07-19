@@ -34,6 +34,7 @@ import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.Property;
 import javax.jcr.RepositoryException;
+import javax.jcr.ValueFormatException;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.EmptySerializablePageList;
@@ -235,10 +236,22 @@ public class UIDocumentNodeList extends UIContainer {
     Calendar pr2 = null;
     try {
       pr1 = node.getProperty(p1).getDate();
-    } catch (Exception e) {}
+    } catch (PathNotFoundException e) {
+      pr1 = null;
+    } catch (ValueFormatException e) {
+      pr1 = null;
+    } catch (RepositoryException e) {
+      pr1 = null;
+    }
     try {
       pr2 = node.getProperty(p2).getDate();
-    } catch (Exception e) {}
+    } catch (PathNotFoundException e) {
+      pr2 = null;
+    } catch (ValueFormatException e) {
+      pr2 = null;
+    } catch (RepositoryException e) {
+      pr2 = null;
+    }
     if ((pr1 == null) && (pr2 == null)) return true;
     if ((pr1 == null) || (pr2 == null)) return false;
     return Math.abs(pr1.getTimeInMillis() - pr2.getTimeInMillis()) < 3000;
