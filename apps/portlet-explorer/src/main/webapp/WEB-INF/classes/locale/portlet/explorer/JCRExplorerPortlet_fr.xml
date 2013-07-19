@@ -2959,7 +2959,7 @@
     	 <Video>Vidéo</Video>
     	 <Music>Musique</Music>
     	 <Documents>Document</Documents>
-    	 <Contents>Contenu</Contents>
+    	 <Content>Contenu</Content>
     </label>
   </DocumentType>
 
@@ -2969,7 +2969,7 @@
     	<Video>Vidéo</Video>
     	<Music>Musique</Music>
     	<Documents>Document</Documents>
-    	<Contents>Contenu</Contents>
+    	<Content>Contenu</Content>
     </label>
     <title>Configurer les filtres</title>
     <action>
@@ -2988,7 +2988,7 @@
   	  <ShowMusic>Afficher les fichiers musicaux</ShowMusic>
   	  <ShowImages>Afficher les images</ShowImages>
   	  <ShowDocuments>Afficher tous les fichiers</ShowDocuments>
-  	  <ShowContents>Afficher tous types de documents</ShowContents>
+  	  <ShowContent>Afficher tous types de documents</ShowContent>
   	</title>
   </UIAllItemsByType>
 
