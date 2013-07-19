@@ -64,7 +64,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 )
 public class UISelectPropertyForm extends UIForm implements UIPopupComponent {
 
-  private static final Log LOG = ExoLogger.getLogger(UIECMSearch.class.getName());
+  private static final Log LOG = ExoLogger.getLogger(UISelectPropertyForm.class.getName());
 
   final static public String METADATA_TYPE= "metadataType" ;
   final static public String PROPERTY = "property" ;

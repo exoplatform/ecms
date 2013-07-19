@@ -222,7 +222,9 @@ public class UIFolderForm extends UIForm implements UIPopupComponent {
       String name = Text.escapeIllegalJcrChars(org.exoplatform.services.cms.impl.Utils.cleanString(title));
       
       // Set default name if new title contain no valid character
-      name = (StringUtils.isEmpty(name)) ? DEFAULT_NAME : name;
+      if (StringUtils.isEmpty(name)) {
+        name = DEFAULT_NAME;
+      }
       
       // Get selected folder type
       if (customTypeCheckBox.isRendered()) {

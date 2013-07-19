@@ -261,7 +261,9 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       allNodeTypes.add(mixin);
     }
     for (NodeType nodetype:allNodeTypes) {
-      if (((NodeTypeImpl)nodetype).isChildNodePrimaryTypeAllowed(Constants.JCR_ANY_NAME, ((NodeTypeImpl)childNodeType).getQName())) {
+      if (((NodeTypeImpl)nodetype).isChildNodePrimaryTypeAllowed(
+             Constants.JCR_ANY_NAME,
+             ((NodeTypeImpl)childNodeType).getQName())) {
         return true;
       }
     }
@@ -948,7 +950,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     if (serviceLogContentNode != null) {
       String logData = serviceLogContentNode.getProperty(NodetypeConstant.JCR_DATA).getString();
       if (StringUtils.isEmpty(logData)) logData = nodeType;
-      else if (logData.indexOf(nodeType) == -1) logData = logData + ";" + nodeType;
+      else if (logData.indexOf(nodeType) == -1) logData = logData.concat(";").concat(nodeType);
       serviceLogContentNode.setProperty(NodetypeConstant.JCR_DATA, logData);
       serviceLogContentNode.getSession().save();
     }

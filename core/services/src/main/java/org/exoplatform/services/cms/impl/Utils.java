@@ -469,7 +469,8 @@ public class Utils {
   public static Node getServiceLogContentNode(String serviceName, String logType) throws Exception {
     // Get workspace and session where store service log
     ManageableRepository repository = WCMCoreUtils.getRepository();
-    Session session = WCMCoreUtils.getSystemSessionProvider().getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
+    Session session =
+        WCMCoreUtils.getSystemSessionProvider().getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
     Node serviceLogContentNode = null;
 
     if (session.getRootNode().hasNode("exo:services")) {
@@ -626,7 +627,7 @@ public class Utils {
     } else {
       defaultCssClass = nodeType;
     }
-    defaultCssClass += "Default";
+    defaultCssClass = defaultCssClass.concat("Default");
     
     str.append(appended);
     str.append(defaultCssClass);
