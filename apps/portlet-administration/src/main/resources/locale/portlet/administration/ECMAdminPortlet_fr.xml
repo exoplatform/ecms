@@ -141,14 +141,6 @@
 	##########################################################################################
 	-->
 	<UIPermissionTreeForm>
-		<title>Ajouter une permission à ce noeud</title>
-		<label>
-			<userOrGroup>Utilisateur ou Groupe</userOrGroup>
-      		<read>Lecture</read>
-      		<add_node>Ajout</add_node>
-      		<set_property>Droit de MAJ des propriétés</set_property>
-      		<remove>Suppression</remove>
-		</label>
 		<msg>
       <have-not-any-permission>Ajoutez au moins une permission à ce nœud.</have-not-any-permission>
 		</msg>
@@ -373,12 +365,6 @@
       <permission>{0} dans {1}</permission>
     </label>
   </UIDriveList>
-  <PopupDrivePermission>
-    <title>
-      <AddDrivePermissionSelector>Ajouter une permission</AddDrivePermissionSelector>
-      <UIDrivePermissionSelector>Définir les Permissions</UIDrivePermissionSelector>
-    </title>
-  </PopupDrivePermission>
   <UIDriveForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -413,7 +399,7 @@
       <viewSideBar>Panneau latéral:</viewSideBar>
       <permissions>Permissions</permissions>
       <showHiddenNode>Montrer les noeuds cachés</showHiddenNode>
-      <allowCreateFolder>Dossiers Autorisés:</allowCreateFolder>
+      <allowCreateFolders>Dossiers autorisés :</allowCreateFolders>
       <Admin>Admin:</Admin>
       <Categories>Catégories:</Categories>
       <Icons>Icônes:</Icons>
@@ -827,7 +813,7 @@
   </superTypesPopup>
   <NodeTypePopup>
     <title>
-      <UINodeTypeForm>Ajout/Modification es définitions de types de noeud</UINodeTypeForm>
+      <UINodeTypeForm>Ajout/Modification des définitions de types de noeud</UINodeTypeForm>
     </title>
   </NodeTypePopup>
   <ViewNodeTypePopup>
@@ -1254,8 +1240,8 @@
 		
 		<tab_permission>
 			 <title>
-  <SelectUser>Selectionnez un Utilisateur</SelectUser>
-<SelectMember>Selection d'un membre</SelectMember>
+  <SelectUser>Sélectionnez un utilisateur</SelectUser>
+<SelectMember>Sélectionnez un rôle</SelectMember>
 <AddAny>Tout Personne</AddAny>
 			 </title>
 		</tab_permission>
@@ -1451,7 +1437,7 @@
       <scriptContent>Script</scriptContent>
       <scriptLabel>Nom</scriptLabel>
       <scriptName>Script</scriptName>
-      <enableVersion>Activer le versionnage</enableVersion>
+      <enableVersion>Activer le Versioning</enableVersion>
     </label>
   </ecmScriptForm>
   <!--
@@ -1466,7 +1452,7 @@
     </action>
     <title>Ajout de catégorie</title>
     <label>
-      <taxonomyName>Nom</taxonomyName>
+      <taxonomyName>Nom de la catégorie</taxonomyName>
       <parentPath>Dossier parent</parentPath>
     </label>
     <msg>
@@ -1734,7 +1720,7 @@
   -->
   <UITemplateList>
     <header>
-      <name>Nom</name>
+      <name>Type</name>
       <action>Action</action>
       <label>Nom</label>
       <icon>Icône</icon>
@@ -2345,7 +2331,7 @@
   <UIDrivePermissionSelector>
     <label>
       <selectGroup>Sélectionnez un groupe</selectGroup>
-      <selectUser>Selectionnez un utilisateur</selectUser>
+      <selectUser>Sélectionnez un utilisateur</selectUser>
       <selectMembership>Rôle</selectMembership>
     </label>
   </UIDrivePermissionSelector>
@@ -2468,7 +2454,7 @@
       <exo_cssFolder>CSS</exo_cssFolder>
       <exo_jsFolder>Javascript</exo_jsFolder>
       <exo_linkFolder>Liens</exo_linkFolder>
-      <exo_webFolder>Documents</exo_webFolder>
+      <exo_webFolder>Web</exo_webFolder>
     </label>
   </DriveInputSet>
   <UIPermissionTreeInfo>
