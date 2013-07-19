@@ -718,7 +718,7 @@
       <UISelectedCategoriesGrid>Referenced Categories</UISelectedCategoriesGrid>
       <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
       <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
-      <metadatasitemetadata>metadata:siteMetadata</metadatasitemetadata>
+      <metadatasitemetadata>Site Metadata</metadatasitemetadata>
       <dcelementset>Dublin Core</dcelementset>
     </title>
   </UITabPane>

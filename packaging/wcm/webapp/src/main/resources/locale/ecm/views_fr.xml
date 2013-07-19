@@ -109,7 +109,7 @@
         <cutoff-record>Enregistrements prélevés</cutoff-record>
         <holdable-record>Enregistrements suspensifs</holdable-record>
         <transferable-record>Enregistrements transférables</transferable-record>
-        <accessionable-record>Enregistrements à Acquérir</accessionable-record>
+        <accessionable-record>Accessionable Records</accessionable-record>
         <destroyable-record>Enregistrements destructibles</destroyable-record>
         <record-id>Identifiant de l'Enregistrement</record-id>
         <record-name>Nom de l'Enregistrement</record-name>
@@ -123,7 +123,7 @@
         <transfer-date>Date de transfert</transfer-date>
         <transfer-location>Emplacement du transfert</transfer-location>
         <accession-date>Date d'acquisition</accession-date>
-        <accession-location>Location de l'acquisition</accession-location>
+        <accession-location>Accession Location</accession-location>
         <destruction-date>Date de destruction</destruction-date>
       </label>
     </view>
@@ -386,7 +386,7 @@
     <view>
       <label>
         <not-available>ND</not-available>
-        <accession-executed>Acquisition exécutée</accession-executed>
+        <accession-executed>Accession Executed</accession-executed>
         <accession-date>Date d'acquisition</accession-date>
       </label>
       <action>

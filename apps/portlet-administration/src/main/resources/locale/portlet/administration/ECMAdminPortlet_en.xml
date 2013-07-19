@@ -1452,7 +1452,7 @@
     </action>
     <title>Add Category</title>
     <label>
-      <taxonomyName>Category Name:</taxonomyName>
+      <taxonomyName>Category Name</taxonomyName>
       <parentPath>Parent</parentPath>
     </label>
     <msg>
@@ -2191,7 +2191,7 @@
   <UITagStyleForm>
     <label>
       <styleName>Style Name:</styleName>
-      <documentRange>Document Range:</documentRange>
+      <documentRange>Number of Occurrences:</documentRange>
       <styleHTML>HTML Style:</styleHTML>
     </label>
     <action>
@@ -2625,7 +2625,7 @@
 		</action>
   <msg>
     <xss-vulnerability-character>Field '{0}' contains XSS vulnerability characters</xss-vulnerability-character>
-				<xss-vulnerability-character-wo-label>Your field input may contains the XSS vulnerability characters</xss-vulnerability-character-wo-label>
+<xss-vulnerability-character-wo-label>Your input may contain XSS vulnerability characters</xss-vulnerability-character-wo-label>
   </msg>		
 	</UIActionForm>
 
