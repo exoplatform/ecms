@@ -27,6 +27,7 @@ import java.util.ResourceBundle;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
+import javax.jcr.ValueFormatException;
 import javax.portlet.PortletPreferences;
 
 import org.apache.commons.lang.StringUtils;
@@ -121,7 +122,13 @@ public class UIPresentationContainer extends UIContainer{
         if (content.hasProperty("dc:title")) {
           try {
             title = content.getProperty("dc:title").getValues()[0].getString().trim();
-          } catch (Exception e) {
+          } catch (ValueFormatException e) {
+            title = null;
+          }
+          catch (IllegalStateException e) {
+            title = null;
+          }
+          catch (RepositoryException e) {
             title = null;
           }
         }

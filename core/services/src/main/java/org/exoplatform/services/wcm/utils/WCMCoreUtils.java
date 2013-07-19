@@ -521,18 +521,22 @@ public class WCMCoreUtils {
   private static class FileCSSComparatorByPriority implements Comparator<Node>{
     @Override
     public int compare(Node o1, Node o2) {
-      try {
-        if (!o1.hasProperty(NodetypeConstant.EXO_PRIORITY)) {
-          return -1;
-        } else if (!o2.hasProperty(NodetypeConstant.EXO_PRIORITY)) {
-          return 1;
-        } else {
-          return (int)(o1.getProperty(NodetypeConstant.EXO_PRIORITY).getLong() -
-                       o2.getProperty(NodetypeConstant.EXO_PRIORITY).getLong());
+        try {
+          if (!o1.hasProperty(NodetypeConstant.EXO_PRIORITY)) {
+            return -1;
+          } else if (!o2.hasProperty(NodetypeConstant.EXO_PRIORITY)) {
+            return 1;
+          } else {
+            return (int)(o1.getProperty(NodetypeConstant.EXO_PRIORITY).getLong() -
+                         o2.getProperty(NodetypeConstant.EXO_PRIORITY).getLong());
+          }
+        } catch (ValueFormatException e) {
+          return 0;
+        } catch (PathNotFoundException e) {
+          return 0;
+        } catch (RepositoryException e) {
+          return 0;
         }
-      } catch (Exception e) {
-        return 0;
-      }
     }
   }
   /**

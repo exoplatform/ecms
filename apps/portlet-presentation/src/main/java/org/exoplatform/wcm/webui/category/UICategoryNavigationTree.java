@@ -223,13 +223,8 @@ public class UICategoryNavigationTree extends UIContainer {
 
     String categoryPath = parameters.substring(parameters.indexOf("/") + 1);
     if (preferenceTreeName.equals(categoryPath)) categoryPath = "";
-    try {
-      currentNode = NodeLocation.getNodeLocationByNode(treeNode.getNode(categoryPath));
-    } catch (Exception e) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn(e.getMessage());
-      }
-    }
+    currentNode = NodeLocation.getNodeLocationByNode(treeNode.getNode(categoryPath));
+
     super.processRender(context);
   }
 

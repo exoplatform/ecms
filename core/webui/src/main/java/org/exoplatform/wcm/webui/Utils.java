@@ -1095,7 +1095,8 @@ public class Utils {
   public static String getProfileLink(String userId) {
     RequestContext ctx = RequestContext.getCurrentInstance();
     NodeURL nodeURL = ctx.createURL(NodeURL.TYPE);
-    NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), "profile");
+    NavigationResource resource =
+        new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), "profile");
     return nodeURL.setResource(resource).toString() + "/" + userId;
   }
 }

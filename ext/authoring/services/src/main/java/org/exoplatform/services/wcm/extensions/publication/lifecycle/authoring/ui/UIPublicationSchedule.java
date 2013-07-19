@@ -102,12 +102,16 @@ public class UIPublicationSchedule extends UIForm {
       try {
         if ((startDate == null && StringUtils.isNotEmpty(startValue))
           || (endDate == null && StringUtils.isNotEmpty(endValue))) {
-          uiApp.addMessage(new ApplicationMessage("UIPublicationPanel.msg.invalid-format", null, ApplicationMessage.ERROR));
+          uiApp.addMessage(new ApplicationMessage("UIPublicationPanel.msg.invalid-format",
+                                                  null,
+                                                  ApplicationMessage.ERROR));
           event.getRequestContext().addUIComponentToUpdateByAjax(publicationSchedule);
           return;
         }
         if (startDate != null && endDate != null && startDate.after(endDate)) {
-          uiApp.addMessage(new ApplicationMessage("UIPublicationPanel.msg.fromDate-after-toDate", null, ApplicationMessage.ERROR));
+          uiApp.addMessage(new ApplicationMessage("UIPublicationPanel.msg.fromDate-after-toDate",
+                                                  null,
+                                                  ApplicationMessage.ERROR));
           event.getRequestContext().addUIComponentToUpdateByAjax(publicationSchedule);
           return;
         }
