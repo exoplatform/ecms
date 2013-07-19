@@ -367,6 +367,9 @@ public class WCMComposerImpl implements WCMComposer, Startable {
         ((QueryImpl)query).setLimit(limit);
       }
     }
+    
+    // order by title with in-sensitive case.
+    ((QueryImpl)query).setCaseInsensitiveOrder(true);
 
     return query.execute().getNodes();
   }
