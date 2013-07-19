@@ -359,7 +359,7 @@ public class UIJCRExplorer extends UIContainer {
    */
   public boolean hasPaginator(String nodePath, String workspaceName) throws Exception {
     int nodePerPages = this.getPreference().getNodesPerPage();
-    return getNodeByPath(nodePath, this.getSessionByWorkspace(workspaceName), true, false).getNodes().getSize() > nodePerPages;
+    return getNodeByPath(nodePath, this.getSessionByWorkspace(workspaceName)).getNodes().getSize() > nodePerPages;
   }
 
   public void setDriveData(DriveData driveData) { driveData_ = driveData ; }
@@ -1035,8 +1035,6 @@ public class UIJCRExplorer extends UIContainer {
         }
       }
       if (firstTime) {
-        UIApplication uiApp = getAncestorOfType(UIApplication.class) ;
-        JCRExceptionManager.process(uiApp, e);
         String workspace = null;
         try {
           workspace = session.getWorkspace().getName();
