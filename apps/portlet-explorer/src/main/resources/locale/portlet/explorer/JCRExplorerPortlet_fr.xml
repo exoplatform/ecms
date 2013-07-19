@@ -2213,7 +2213,7 @@
   -->
   <UIWorkspaceList>
     <label>
-      <workspaceName>Espace de Stockage</workspaceName>
+      <workspaceName>Espace de Stockage:</workspaceName>
       <rootNodeInfo>Racine de l'arborescence</rootNodeInfo>
       <rootPath>Racine de l'arborescence</rootPath>
     </label>
@@ -2444,7 +2444,6 @@
   </UIDriveSelector>
   <UIJcrExplorerEditForm>
     <label>
-      <driveName>Nom du Lecteur</driveName>
       <DriveNameInput>UI JCR Explorer Edit Form</DriveNameInput>
     </label>
     <msg>
@@ -2716,7 +2715,6 @@
 
   <UIDocumentForm>
   	<msg>
-  		<not-support>Impossible de charger le template '{0}'.</not-support>
   		<do-not-permission>Vous n'avez pas le droit de charger le template '{0}'.</do-not-permission>
   	</msg>
   </UIDocumentForm>
@@ -3051,7 +3049,7 @@
     	 <Video>Vidéo</Video>
     	 <Music>Musique</Music>
     	 <Documents>Document</Documents>
-    	 <Contents>Contenu</Contents>
+       <Content>Contenu</Content>
     </label>
   </DocumentType>
 
@@ -3061,7 +3059,7 @@
     	<Video>Vidéo</Video>
     	<Music>Musique</Music>
     	<Documents>Document</Documents>
-    	<Contents>Contenu</Contents>
+      <Content>Contenu</Content>
     </label>
     <title>Configurer les Filtres</title>
     <action>
@@ -3080,14 +3078,13 @@
   	  <ShowMusic>Afficher les fichiers musicaux</ShowMusic>
   	  <ShowImages>Afficher les images</ShowImages>
   	  <ShowDocuments>Afficher tous les fichiers</ShowDocuments>
-  	  <ShowContents>Afficher tous types de documents</ShowContents>
+      <ShowContent>Afficher tous types de documents</ShowContent>
   	</title>
   </UIAllItemsByType>
 
   <Views>
     <label>
       <slide-show>Diaporama</slide-show>
-      <timeline-view>Chronologie</timeline-view>
     </label>
   </Views>
   <ECMContextMenu>
@@ -3108,7 +3105,6 @@
       <showHiddens>Cachés</showHiddens>
       <showTrash>Corbeille</showTrash>
     </label>
-    <title>Configurer les filtres</title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -3306,11 +3302,6 @@
     </title>
   </rootNodeInfo>
 
-  <UIPopupWindow>
-    <title>
-      <UISelectRestorePath>Choisir le Chemin de Restauration</UISelectRestorePath>
-    </title>
-  </UIPopupWindow>
   <UIActionForm>
     <msg>
       <homePath-emty>Le chemin d'accueil est vide.</homePath-emty>
@@ -3437,9 +3428,6 @@
         <UIOneTaxonomySelector>Choisir une Catégorie</UIOneTaxonomySelector>
       </label>
     </tab>
-    <action>
-    	 <Close>Fermer</Close>
-    </action>
   </UICategoryManagerSearch>
 
   <UIPreferencesForm>
@@ -3494,8 +3482,6 @@
 	  <CLASSIFIED>Classé</CLASSIFIED>
 	  <UNCLASSIFIED>Non classé</UNCLASSIFIED>
 	  <NOCONTRACT>Aucun contrat</NOCONTRACT>
-	  <true>Vrai</true>
-	  <false>Faux</false>
 	  <one-minute>Une fois par minute</one-minute>
 	  <hourly>Une fois par heure</hourly>
 	  <daily>Quotidien</daily>

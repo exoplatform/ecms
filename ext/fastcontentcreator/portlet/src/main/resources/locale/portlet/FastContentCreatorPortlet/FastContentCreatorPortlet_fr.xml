@@ -88,8 +88,8 @@
 
   <UIWorkspaceList>
     <label>
-      <workspaceName>Espace de Stockage</workspaceName>
-      <rootNodePath>Racine de l'arborescence</rootNodePath>
+      <workspaceName>Espace de stockage :</workspaceName>
+      <rootNodePath>Racine de l'arborescence:</rootNodePath>
       <rootNodeInfo/>
     </label>
   </UIWorkspaceList>
