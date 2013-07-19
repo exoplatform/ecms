@@ -45,6 +45,7 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.seo.SEOService;
+import org.exoplatform.services.wcm.core.WebSchemaConfigService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.gatein.pc.api.PortletInvoker;
 import org.gatein.pc.api.info.PortletInfo;
@@ -190,6 +191,10 @@ public class TrashServiceImpl implements TrashService {
       SEOService seoService = (SEOService)myContainer.getComponentInstanceOfType(SEOService.class);
       cache.remove(seoService.getHash(nodeUUID));
     }
+    ExoContainer container = ExoContainerContext.getCurrentContainer();
+    WebSchemaConfigService schemaConfigService =
+      (WebSchemaConfigService) container.getComponentInstanceOfType(WebSchemaConfigService.class);
+    schemaConfigService.updateSchemaOnRemove(sessionProvider, node);
     if (!node.isNodeType(EXO_RESTORE_LOCATION)) {
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session trashSession = WCMCoreUtils.getSystemSessionProvider().getSession(this.trashWorkspace_, manageableRepository);
@@ -253,7 +258,6 @@ public class TrashServiceImpl implements TrashService {
         }
       }
       Node nodeInTrash =  trashSession.getRootNode().getNode(actualTrashPath.substring(1));
-      nodeInTrash.addMixin(EXO_RESTORE_LOCATION);
       nodeInTrash.setProperty(RESTORE_PATH, fixRestorePath(restorePath));
       nodeInTrash.setProperty(RESTORE_WORKSPACE, nodeWorkspaceName);
   
