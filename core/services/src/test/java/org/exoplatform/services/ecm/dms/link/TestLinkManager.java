@@ -380,8 +380,6 @@ public class TestLinkManager extends BaseWCMTestCase {
 
     linkManager.updateSymlink(symlinkNode);
 
-    assertEquals(symlinkNode.getProperty(NodetypeConstant.EXO_TITLE).getString(), 
-                 nodeB1_1.getProperty(NodetypeConstant.EXO_TITLE).getString());
     assertEquals(symlinkNode.getProperty(NodetypeConstant.EXO_DATE_CREATED).getDate(), 
                  nodeB1_1.getProperty(NodetypeConstant.EXO_DATE_CREATED).getDate());
     assertEquals(symlinkNode.getProperty(NodetypeConstant.EXO_DATE_MODIFIED).getDate(), 
