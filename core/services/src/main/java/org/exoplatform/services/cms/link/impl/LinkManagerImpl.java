@@ -397,7 +397,7 @@ public class LinkManagerImpl implements LinkManager {
         node.addMixin(NodetypeConstant.EXO_TARGET_DATA);
       }
       Node target = this.getTarget(node, true);
-      String[] propList = {NodetypeConstant.EXO_TITLE, NodetypeConstant.EXO_DATE_CREATED,
+      String[] propList = {NodetypeConstant.EXO_DATE_CREATED,
                            NodetypeConstant.EXO_DATE_MODIFIED, NodetypeConstant.PUBLICATION_LIVE_DATE,
                            NodetypeConstant.EXO_START_EVENT, NodetypeConstant.EXO_INDEX};
       for (String p : propList) {
