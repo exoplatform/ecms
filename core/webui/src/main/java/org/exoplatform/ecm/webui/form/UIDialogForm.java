@@ -434,7 +434,24 @@ public class UIDialogForm extends UIForm {
       } else {
         uiDateTime.setCalendar(new GregorianCalendar());
       }
-    }
+    }else{
+      if((node != null) && node.hasNode("jcr:content") && (childNode == null)) {
+        Node jcrContentNode = node.getNode("jcr:content");
+        if(jcrContentNode.hasProperty(propertyName)) {
+          if(jcrContentNode.getProperty(propertyName).getDefinition().isMultiple()) {
+            Value[] values = jcrContentNode.getProperty(propertyName).getValues();
+            for(Value value : values) {
+              if (uiDateTime.getDefaultValue() == null) {
+                uiDateTime.setCalendar(value.getDate());
+                uiDateTime.setDefaultValue(uiDateTime.getValue());
+              }
+            }
+          }else{
+            uiDateTime.setCalendar(jcrContentNode.getProperty(propertyName).getValue().getDate());
+          }
+        }
+      }
+    }    
     if (findComponentById(name) == null) addUIFormInput(uiDateTime);
     if(calendarField.isVisible()) renderField(name);
   }
