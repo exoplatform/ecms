@@ -9,7 +9,7 @@ CKEDITOR.plugins.add('insertGadget',
 				{
 					label : editor.lang.WCMInsertGadgetPlugins,
 					command : 'gadget.cmd',
-					icon : mypath + '/images/insertGadget.gif'
+					icon : mypath + '/images/insertGadget.png'
 				}
 			);
 			var cmd = editor.addCommand('gadget.cmd', {exec:showInsertGadget});

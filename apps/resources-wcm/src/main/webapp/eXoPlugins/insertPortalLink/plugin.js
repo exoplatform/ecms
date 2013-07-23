@@ -8,7 +8,7 @@ CKEDITOR.plugins.add( 'insertPortalLink',
 		{
 			label : editor.lang.WCMInsertPortalLinkPlugins,
 			command : 'insertPortalLink.cmd',
-			icon : this.path + 'images/insertPortalLink.gif'
+			icon : this.path + 'images/insertPortalLink.png'
 		});
 
 		var dialog = {
@@ -16,7 +16,6 @@ CKEDITOR.plugins.add( 'insertPortalLink',
 			dialogName : 'insertPortalLink.dlg',
 			editorFocus : 'false',
 			exec : function(editor) {
- 				console.log('open dialog');
 				editor.openDialog('insertPortalLink.dlg');
 				var title = getTheSelectedText(editor);
 				editor.titleLink = title;

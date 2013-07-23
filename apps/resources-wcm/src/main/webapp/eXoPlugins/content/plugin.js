@@ -9,7 +9,7 @@ CKEDITOR.plugins.add('content',
 				{
 					label : editor.lang.WCMInsertContentPlugins,
 					command : 'content.cmd',
-					icon : mypath + '/images/content.jpg'
+					icon : mypath + '/images/content.png'
 				}
 			);
 			var cmd = editor.addCommand('content.cmd', {exec:showContentSelector});
