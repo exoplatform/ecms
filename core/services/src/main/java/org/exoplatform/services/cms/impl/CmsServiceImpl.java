@@ -58,6 +58,7 @@ import org.exoplatform.services.idgenerator.IDGeneratorService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.jcr.impl.core.nodetype.ItemDefinitionImpl;
+import org.exoplatform.services.jcr.impl.core.nodetype.registration.NodeTypeConverter;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -145,7 +146,10 @@ public class CmsServiceImpl implements CmsService {
         currentNode.addMixin(ActivityCommonService.MIX_COMMENT);
         currentNode.setProperty(ActivityCommonService.MIX_COMMENT_CREATING, "true");
       }
+
       createNodeRecursively(NODE, currentNode, nodeType, mappings);
+      createNodeRecursively(NODE, currentNode, nodetypeManager.getNodeType("exo:sortable"), mappings);
+
       if(mixinTypes != null){
         for(String type : mixinTypes){
           if(!currentNode.isNodeType(type)) {
