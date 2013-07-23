@@ -44,6 +44,7 @@ import org.exoplatform.ecm.connector.fckeditor.FCKMessage;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.utils.LockUtil;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -98,6 +99,9 @@ public class FileUploadHandler {
 
   /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
   private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
+
+  /** Default file name */
+  private static final String DEFAULT_NAME = "untitled";
   
   public final static String POST_CREATE_CONTENT_EVENT = "CmsService.event.postCreate";
   
@@ -359,7 +363,21 @@ public class FileUploadHandler {
       //save node with name=fileName
       Node file = null;
       boolean fileCreated = false;
-      fileName = Text.escapeIllegalJcrChars(fileName);
+      String exoTitle = fileName;
+
+      // Clean file name by removing special characters ($%^&...)
+      String ext = StringUtils.EMPTY;
+      if (fileName.indexOf('.') > 0) {
+        ext = fileName.substring(fileName.lastIndexOf('.'));
+        fileName = Utils.cleanString(fileName.substring(0, fileName.lastIndexOf('.')));
+      } else {
+        fileName = Utils.cleanString(fileName);
+      }
+      if (StringUtils.isEmpty(fileName)) {
+        fileName = DEFAULT_NAME;
+      }
+      fileName.concat(ext);
+
       String nodeName = fileName;
       int count = 0;
       do {
@@ -385,7 +403,7 @@ public class FileUploadHandler {
       	file.addMixin(NodetypeConstant.MIX_I18N);
       
       if(!file.hasProperty(NodetypeConstant.EXO_TITLE)) {
-      	file.setProperty(NodetypeConstant.EXO_TITLE, file.getName());
+      	file.setProperty(NodetypeConstant.EXO_TITLE, exoTitle);
       }
       Node jcrContent = file.addNode("jcr:content","nt:resource");
       //MimeTypeResolver mimeTypeResolver = new MimeTypeResolver();
