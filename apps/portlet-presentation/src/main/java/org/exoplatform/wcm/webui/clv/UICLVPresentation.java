@@ -767,7 +767,7 @@ public class UICLVPresentation extends UIContainer {
       sb.append("    </div>");
       
     }
-    String className = this.getAncestorOfType(UICLVPortlet.class).getName();
+    String className = cssClass + " " + this.getAncestorOfType(UICLVPortlet.class).getName();
     String hoverClass = Utils.isShowQuickEdit() ? " containerHoverClassInner" : "";
     JavascriptManager jsManager = portletRequestContext.getJavascriptManager();
     jsManager.getRequireJS().addScripts("gj('#"+id+"').mouseenter( function() {eXo.ecm.WCMUtils.changeStyleClass('"+id+"','"+className+" "+hoverClass+"');});");
