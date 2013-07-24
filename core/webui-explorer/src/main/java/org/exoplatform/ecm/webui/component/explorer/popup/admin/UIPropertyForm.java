@@ -567,9 +567,7 @@ public class UIPropertyForm extends UIForm {
           }
         }
       }
-      UIPropertiesManager uiPropertiesManager = uiForm.getAncestorOfType(UIPropertiesManager.class);
-      uiPropertiesManager.setRenderedChild(UIPropertyForm.class);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
     }
   }
 
@@ -709,11 +707,9 @@ public class UIPropertyForm extends UIForm {
   static public class ResetActionListener extends EventListener<UIPropertyForm> {
     public void execute(Event<UIPropertyForm> event) throws Exception {
       UIPropertyForm uiForm = event.getSource();
-      UIPropertiesManager uiPropertiesManager = uiForm.getAncestorOfType(UIPropertiesManager.class);
       uiForm.refresh();
       uiForm.isAddNew_ = true;
-      uiPropertiesManager.setRenderedChild(UIPropertyForm.class);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
     }
   }
 
@@ -731,9 +727,7 @@ public class UIPropertyForm extends UIForm {
   static public class AddActionListener extends EventListener<UIPropertyForm> {
     public void execute(Event<UIPropertyForm> event) throws Exception {
       UIPropertyForm uiForm = event.getSource();
-      UIPropertiesManager uiPropertiesManager = uiForm.getAncestorOfType(UIPropertiesManager.class);
-      uiPropertiesManager.setRenderedChild(UIPropertyForm.class);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
     }
   }
 
@@ -749,10 +743,7 @@ public class UIPropertyForm extends UIForm {
           uiInput.setName(FIELD_VALUE + String.valueOf(i));
         }
       }
-      UIPropertiesManager uiPropertiesManager = uiForm.getAncestorOfType(UIPropertiesManager.class);
-
-      uiPropertiesManager.setRenderedChild(UIPropertyForm.class);
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
     }
   }
 
