@@ -219,7 +219,10 @@ public class UIPropertyTab extends UIContainer {
       try {
         if(currentNode.hasProperty(propertyName)) currentNode.getProperty(propertyName).remove();
         currentNode.save();
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiPropertyTab.getParent());
+        
+        UIPropertiesManager uiManager = uiPropertyTab.getParent();
+        uiManager.setRenderedChild(UIPropertyTab.class);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiPropertyTab);
         return;
       } catch(AccessDeniedException ace) {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.access-denied", null,
