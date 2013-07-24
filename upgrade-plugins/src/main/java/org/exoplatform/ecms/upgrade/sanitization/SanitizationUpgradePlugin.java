@@ -118,9 +118,8 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
       if (LOG.isInfoEnabled()) {
         LOG.info("=====Start migrate data for all user views=====");
       }
-      String statement = "SELECT * FROM exo:view ORDER BY exo:name DESC";
-      QueryResult result = session.getWorkspace().getQueryManager().createQuery(statement, Query.SQL).execute();
-      NodeIterator nodeIter = result.getNodes();
+      Node views = (Node)session.getItem("/exo:ecm/views/userviews");
+      NodeIterator nodeIter = views.getNodes();
       while(nodeIter.hasNext()) {
         Node viewNode = nodeIter.nextNode();
         String template = viewNode.getProperty("exo:template").getString();
@@ -210,9 +209,8 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
     try {
       Session session = WCMCoreUtils.getSystemSessionProvider().getSession(dmsConfiguration_.getConfig().getSystemWorkspace(),
                                                                                   repoService_.getCurrentRepository());
-      String statement = "SELECT * FROM exo:drive ORDER BY exo:name DESC";
-      QueryResult result = session.getWorkspace().getQueryManager().createQuery(statement, Query.SQL).execute();
-      NodeIterator nodeIter = result.getNodes();
+      Node drives = (Node)session.getItem("/exo:ecm/exo:drives");
+      NodeIterator nodeIter = drives.getNodes();
       while(nodeIter.hasNext()) {
         Node drive = nodeIter.nextNode();
         if (LOG.isInfoEnabled()) {
