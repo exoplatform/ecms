@@ -360,13 +360,13 @@ public class FileUploadHandler {
       //save node with name=fileName
       Node file = null;
       boolean fileCreated = false;
-      String exoTitle = Text.escapeIllegalJcrChars(fileName);
+      String exoTitle = fileName;
       
       if (fileName.indexOf('.') > 0) {
         String ext = fileName.substring(fileName.lastIndexOf('.'));
-        fileName = Text.escapeIllegalJcrChars(Utils.cleanString(fileName.substring(0, fileName.lastIndexOf('.')))).concat(ext);
+        fileName = Utils.cleanString(fileName.substring(0, fileName.lastIndexOf('.'))).concat(ext);
       } else {
-        fileName = Text.escapeIllegalJcrChars(Utils.cleanString(fileName));
+        fileName = Utils.cleanString(fileName);
       }
       
       String nodeName = fileName;

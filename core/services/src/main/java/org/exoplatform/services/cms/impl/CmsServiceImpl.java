@@ -58,7 +58,6 @@ import org.exoplatform.services.idgenerator.IDGeneratorService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.jcr.impl.core.nodetype.ItemDefinitionImpl;
-import org.exoplatform.services.jcr.impl.core.nodetype.registration.NodeTypeConverter;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
