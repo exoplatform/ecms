@@ -54,7 +54,8 @@ public interface SiteSearchService {
 
   public final static String PAGE_MODE_NONE = "none";
   public final static String PAGE_MODE_MORE = "more";
-  public final static String PAGE_MODE_PAGINATION = "pagination";  
+  public final static String PAGE_MODE_PAGINATION = "pagination";
+  public final static String PATH_PORTAL_SITES = "/production/mop:workspace/mop:portalsites";
   
   /**
    * Adds the exclude/include data type plugin.

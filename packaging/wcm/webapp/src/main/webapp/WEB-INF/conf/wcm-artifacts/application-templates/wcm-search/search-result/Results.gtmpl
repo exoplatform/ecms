@@ -2,11 +2,11 @@
  import java.net.URLEncoder;
  import java.util.ArrayList;
  import java.util.List;
- 
+
  import javax.jcr.Node;
  import javax.jcr.Value;
  import javax.servlet.http.HttpServletRequest;
- 
+
  import org.exoplatform.portal.application.PortalRequestContext;
  import org.exoplatform.portal.webui.portal.UIPortal;
  import org.exoplatform.portal.webui.util.Util;
@@ -16,80 +16,89 @@
  import org.exoplatform.wcm.webui.search.UISearchPageLayout;
  import org.exoplatform.services.wcm.search.SiteSearchService;
  import org.exoplatform.wcm.webui.reader.ContentReader;
- 
-%>
+ import org.exoplatform.services.cms.impl.Utils;
 
+%>
 <div id="$uicomponent.id" class="UIAdvanceSearchResultDefault">
  <%
   def showPaginator = false;
+  def startItemIndex = 1;
   def pageMode = uicomponent.getPageMode();
   def currentPageData = uicomponent.getCurrentPageData();
-  def keyword = uicomponent.getKeyword(); 
+  def currentPage = uicomponent.getCurrentPage();
+  def itemsPerPage = uicomponent.getItemsPerPage();
+  def endItemIndex = (currentPage - 1) * itemsPerPage + currentPageData.size();
+  def realCurrentPageData = uicomponent.getRealCurrentPageData();
+  def keyword = uicomponent.getKeyword();
   if(keyword != null)
-    keyword = ContentReader.getEscapeHtmlContent(keyword);  
+    keyword = ContentReader.getEscapeHtmlContent(keyword);
   def resultType = uicomponent.getResultType();
+  def sortField = uicomponent.getSortField();
+  def orderType = uicomponent.getOrderType();
   def rcontext = _ctx.getRequestContext() ;
-	def jsManager = rcontext.getJavascriptManager();
-//	jsManager.importJavascript('eXo.wcm.frontoffice.public.Search', '/eXoWCMResources/javascript/');
-	jsManager.require("SHARED/wcm-search", "search").
-	addScripts("search.SearchPortlet.scrollToBottom('${uicomponent.id}');").
-	addScripts("search.SearchPortlet.changeColor('NewResultData');");
+
+  def jsManager = rcontext.getJavascriptManager();
+  jsManager.require("SHARED/wcm-search", "search")
+    .addScripts("search.SearchPortlet.init();")
+    .addScripts("search.SearchPortlet.scrollToBottom('${uicomponent.id}');")
+    .addScripts("search.SearchPortlet.changeColor('NewResultData');");
+
+  // Get css used to describe arrow up or down for order criteria
+  private String getSortTypeCss(String checkField) {
+      if (checkField.equals(uicomponent.getSortField())) {
+          if ("desc".equals(uicomponent.getOrderType())) {
+              return "<i class=\"uiIconSortDown\"></i>";
+          } else {
+              return "<i class=\"uiIconSortUp\"></i>";
+          }
+      } else {
+          return "";
+      }
+  }
   %>
-   <div class="ResultHeader">
-    <div class="CaptionSearchType"><strong><%= _ctx.appRes("UIDefaultSearchResult.label." + resultType) %></strong></div>
-    <% 
-    if (currentPageData != null && !currentPageData.isEmpty()) {
-    	def currentPage = uicomponent.getCurrentPage();
-    	def itemsPerPage = uicomponent.getItemsPerPage();
-      def totalItem = uicomponent.getTotalItem();
-      def startItemIndex = 1;
-      def endItemIndex = (currentPage - 1) * itemsPerPage + currentPageData.size();
-      def searchTime = uicomponent.getSearchTime();
-      if (SiteSearchService.PAGE_MODE_PAGINATION.equals(pageMode) ) startItemIndex =  (currentPage - 1) * itemsPerPage + 1;
-      showPaginator = (itemsPerPage==currentPageData.size() && SiteSearchService.PAGE_MODE_MORE.equals(pageMode)) || 
-                                    (SiteSearchService.PAGE_MODE_PAGINATION.equals(pageMode));
-      %>
-       <div class="SearchSummary">
-        <%= _ctx.appRes("UIDefaultSearchResult.label.resutlsCaption") %> <strong><%= startItemIndex %></strong> - <strong><%= endItemIndex %></strong>
-        <% if (SiteSearchService.PAGE_MODE_PAGINATION.equals(pageMode)) { %>
-          <%= _ctx.appRes("UIDefaultSearchResult.label.ofAboutCaption") %> <strong><%= totalItem %></strong>
-          <%= _ctx.appRes("UIDefaultSearchResult.label.forCaption") %> <strong><%= keyword %></strong>
-        <% } %>
-        (<strong><%= searchTime %></strong> <%= _ctx.appRes("UIDefaultSearchResult.label.timeUnitCaption") %>)
-       </div>
+
+  <!-- Header -->
+  <div class="result clearfix">
       <%
-     }
-    %>
-   </div>
+      if (currentPageData != null && !currentPageData.isEmpty()) { 
+        if (SiteSearchService.PAGE_MODE_PAGINATION.equals(pageMode) ) startItemIndex =  (currentPage - 1) * itemsPerPage + 1;
+        showPaginator = (itemsPerPage==currentPageData.size() && SiteSearchService.PAGE_MODE_MORE.equals(pageMode)) ||
+                                      (SiteSearchService.PAGE_MODE_PAGINATION.equals(pageMode));
+   	 %>
+   		 <div class="pull-left resultHeader" id="resultHeader">
+	       <%= _ctx.appRes("UIDefaultSearchResult.label.resutlsCaption") %> <%= startItemIndex %> to <%= endItemIndex %> <%= _ctx.appRes("UIDefaultSearchResult.label.forCaption") %> <strong><%= keyword %></strong>
+	     </div>
+	     <div class="pull-right resultSort" id="resultSort" style="display: block;">
+	        <div class="btn-group uiDropdownWithIcon pull-right">
+	           <a class="btn dropdown-toggle" data-toggle="dropdown">
+	           <span id="sortField" sort="$sortField" order="$orderType"><%=uicomponent.getLabel("UIDefaultSearchResult.label." + sortField)%></span>
+	           <span class="spiter"></span>
+	           <span class="caret"></span>
+	           </a>
+	           <ul class="dropdown-menu" id="sortOptions">
+	              <li><a sort="relevancy" href="#"><%=uicomponent.getLabel("UIDefaultSearchResult.label.relevancy")%><%=getSortTypeCss("relevancy");%></a></li>
+	              <li><a sort="date" href="#"><%=uicomponent.getLabel("UIDefaultSearchResult.label.date")%><%=getSortTypeCss("date");%></a></li>
+	              <li><a sort="title" href="#"><%=uicomponent.getLabel("UIDefaultSearchResult.label.title")%><%=getSortTypeCss("title");%></a></li>
+	           </ul>
+	        </div>
+	        <span><%=uicomponent.getLabel("UIDefaultSearchResult.label.sortBy")%></span>
+	     </div>
+    
+      <% } %>
+     
+  </div>
+
   <%
-   def suggestion = uicomponent.getSuggestion();
-   if (suggestion != null) {
-    def uiSearchForm = uicomponent.getAncestorOfType(UISearchPageLayout.class).getChild(UISearchForm.class);
-    def suggestionURL = uiSearchForm.event("Search", suggestion);
-     %>
-     <p>
-      <%= _ctx.appRes("UIDefaultSearchResult.msg.new-suggestion") %> : <strong style="font-size: 15px; font-style: italic;"><a href="<%= suggestionURL %>"><%= suggestion %></a></strong>
-     </p>
-    <%
-   }
-   
-   if (uicomponent.getRealCurrentPageData().isEmpty()) {
+  if (realCurrentPageData.isEmpty()) {
     %>
      <p>
-      <%= _ctx.appRes("UIDefaultSearchResult.msg.your-search") %> <strong style="font-size: 15px; font-style: italic;"> <%= keyword %> </strong> - 
+      <%= _ctx.appRes("UIDefaultSearchResult.msg.your-search") %> <strong style="font-size: 15px; font-style: italic;"> <%= keyword %> </strong> -
       <%= _ctx.appRes("UIDefaultSearchResult.msg.did-not-match") %> <%= _ctx.appRes("UIDefaultSearchResult.label." + resultType.toLowerCase()) %>
      </p>
     <%
-   } else {
-    def dataSize = uicomponent.getRealCurrentPageData().size();
+  } else {
     int dataIndex = 0;
-    for (ResultNode resultNode : uicomponent.getRealCurrentPageData()) {
-     if (dataIndex == dataSize - currentPageData.size()) {
-       %>
-         <div id="NewResultData">
-       <%
-     }
-       
+    for (ResultNode resultNode : realCurrentPageData) {
      dataIndex++;
      Node viewNode = resultNode.getNode();
      def itemName = viewNode.getName();
@@ -105,76 +114,33 @@
          itemUrl = uicomponent.getPublishedNodeURI(listNavigationNodeUris.get(0));
        }
      }
-     def editor = resultNode.getEditor();
      def itemExcerpt = resultNode.getExcerpt();
-     String description = resultNode.getDescription();
-     def itemScore = resultNode.getScore();
      PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
      String requestURL = portalRequestContext.getRequest().getRequestURL().toString();
+     Node realNode = org.exoplatform.wcm.webui.Utils.getRealNode(viewNode);
+     String detail = uicomponent.getDetail(resultNode);
+
      %>
-      <div class="SearchItem">
-       <div class="ItemTitle">
-         <%if(resultType.equals("Document")){%>
-          <a href="$itemUrl&urlSearch=$requestURL">$itemName</a>
-        <%}else{%>
-          <a href="$itemUrl">$itemName</a>
-        <%}%>
+     <div class="resultBox clearfix">
+       <a href="$itemUrl&urlSearch=$requestURL">
+         <span class="avatar pull-left ">
+           <i class="<%=Utils.getNodeTypeIcon(realNode, "uiIcon64x64")%>"></i>
+         </span>
+       </a>
+       <div class="content">
+          <h6>
+             <a href="$itemUrl&urlSearch=$requestURL">$itemName</a>
+          </h6>
+          <p class="excerpt">$itemExcerpt</p>
+          <div class="detail">$detail</div>
        </div>
-       <%if(itemExcerpt != null && itemExcerpt.trim().length() > 0){%>
-       		<div class="ItemExcerpt" style="font-weight:bold;"><%=_ctx.appRes("UIDefaultSearchResult.label.editor")%>: $editor</div>
-          $itemExcerpt
-       <%} else if (description != null && description.trim().length() > 0){ %>
-          <div><span>$description</span></div>
-       <%}%>       
-       <div class="ItemInfo">
-        <span class="ItemUrl"><%=itemUrl%></span> - <span class="ItemScore"><%= itemScore %></span>
-        <%
-         if (!listNavigationNodeUris.isEmpty()) {
-          if (listNavigationNodeUris.size() != 1) {
-           %> 
-            - <span class="ItemSame" onclick="eXo.ecm.SearchPortlet.showObject(this)">
-             <a href="javascript:void(0)"><%= _ctx.appRes("UIDefaultSearchResult.label.similar") %></a>
-            </span>
-           <%
-          }
-          %>
-           <div class="ItemDetails">
-            <%
-             for (int i = 1; i < listNavigationNodeUris.size(); i ++) {
-              itemUrl = uicomponent.getPublishedNodeURI(listNavigationNodeUris.get(i));
-              %>
-               <div class="SearchItem">
-                <div class="ItemTitle">
-                 <a href="$itemUrl">$itemName</a>
-                </div>
-                <%if(itemExcerpt != null && itemExcerpt.trim().length() > 0){%>
-                		<div class="ItemExcerpt"  style="font-weight:bold;"><%=_ctx.appRes("UIDefaultSearchResult.label.editor")%>: <%=itemExcerpt%></div>
-                <%}%>
-                <div class="ItemInfo">
-                 <span class="ItemUrl"><%=itemUrl%></span> - <span class="ItemScore"><%=itemScore%></span>
-                </div>
-               </div>
-              <%
-             }
-            %>
-           </div>
-          <%
-         }
-        %>
-       </div>
-      </div>
+     </div>
      <%
-     if (dataIndex == dataSize) {
-       %>
-         </div>
-       <%
-     }
     }
-   %>
-    <div class="ItemFunc">
-     <% if (showPaginator) uicomponent.renderChild(UICustomizeablePaginator.class); %>
-    </div>
-   <%
-  }
- %>
+  }%>
+
+  <div class="ItemFunc">
+   <% if (showPaginator) uicomponent.renderChild(UICustomizeablePaginator.class); %>
+  </div>
 </div>
+

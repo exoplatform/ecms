@@ -22,37 +22,25 @@ addScripts('search.SearchPortlet.search("' + uicomponent.id + '");');
 
 <div class="UIForm $uicomponent.id" >
   <%uiform.begin()%>
-    <div class="SearchHorizontalLayout">
-      <div class="FormContainer">
-        <table class="UIFormGrid">
-          <tr>
-            <td class="FieldLabel">
-              <label for="<%=uiKeywordInput.getId()%>">
-                <%=_ctx.appRes("UIDefaultSearchForm.label.keyword")%>: 
-              </label>
-            </td>
-            <td>
-              <% uiform.renderField(uiKeywordInput) %>
-            </td>
-            <td>
-              <div class="UIAction">
-                <a href="$link" onclick="eXo.ecm.SearchPortlet.keepKeywordOnBoxSearch();" class="ActionButton LightBlueStyle SearchButton">$actionLabel</a>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>
-               <fieldset style="border:none;"><legend> </legend><%uiform.renderField(searchOptionRadioBox)%>
-                 <label for="<%=uiPortalSelectBox.getId()%>"><% uiform.renderField(uiPortalSelectBox) %></label>
-               </fieldset>
-            </td>
-            <td>
-            </td>
-          </tr>
-        </table>
-        <script type="text/javascript">
-        
+    <div class="form-horizontal">
+
+      <div class="control-group">
+        <label class="control-label" for="<%=uiKeywordInput.getId()%>">
+          <%=_ctx.appRes("UIDefaultSearchForm.label.keyword")%>: 
+        </label>
+        <div class="controls">
+          <% uiform.renderField(uiKeywordInput) %> <a href="$link" onclick="eXo.ecm.SearchPortlet.keepKeywordOnBoxSearch();" class="btn SearchButton">$actionLabel</a>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">&nbsp</label>
+        <div class="controls">
+           <fieldset style="border:none;"><%uiform.renderField(searchOptionRadioBox)%>
+             <label for="<%=uiPortalSelectBox.getId()%>"><% uiform.renderField(uiPortalSelectBox) %></label>
+           </fieldset>
+        </div>
+      </div>
+      <script type="text/javascript">
         function toggleSet()
         {
           var searchOption = document.getElementsByName("searchOption");
@@ -76,9 +64,11 @@ addScripts('search.SearchPortlet.search("' + uicomponent.id + '");');
         searchOption[1].onchange = function() { toggleSet(); };
       </script>
     </div>
-    </div>
-    <%uiform.end()%>
-    </div>
+  <%
+    uiform.renderChild(uicomponent.SORT_FIELD_HIDDEN_INPUT);
+    uiform.renderChild(uicomponent.ORDER_TYPE_HIDDEN_INPUT);
+    uiform.end()%>
+</div>
 <script type="text/javascript">
 	onload = function() {
 		eXo.ecm.SearchPortlet.keepKeywordOnBoxSearch();
