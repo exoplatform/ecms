@@ -13,7 +13,7 @@
    int totalPages = uiIterator.getAvailablePage();
    StringBuilder sB;
 %>
-<div class="uiActionList" id="$uicomponent.id">
+<div class="uiActionList resizable" id="$uicomponent.id">
   <table class="uiGrid table table-hover table-striped">
 	  <thead>
 	    <tr>
@@ -96,7 +96,9 @@
   <% if(totalPages > 1){ %>
   <% uicomponent.renderChild(UIPageIterator.class) %>
   <% } %>
-  <div class="uiAction"> 
-		<button type="button" onclick="<%=uicomponent.event("Close")%>" class="btn" href="javascript:void(0);"><%=_ctx.appRes("UIActionList.action.Close")%></button>
-	</div>
+</div>
+<div class="uiAction uiActionBorder"> 
+<button type="button" onclick="<%=uicomponent.event("Close")%>" class="btn" href="javascript:void(0);">
+    <%=_ctx.appRes("UIActionList.action.Close")%>
+ </button>
 </div>
