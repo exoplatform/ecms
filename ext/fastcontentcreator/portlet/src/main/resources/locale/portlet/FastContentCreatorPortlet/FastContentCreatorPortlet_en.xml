@@ -88,7 +88,7 @@
     <label>
       <workspaceName>Workspace:</workspaceName>
       <rootNodePath>Root Path:</rootNodePath>
-      <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
+      <rootNodeInfo>Root node</rootNodeInfo>
     </label>
   </UIWorkspaceList>
 
