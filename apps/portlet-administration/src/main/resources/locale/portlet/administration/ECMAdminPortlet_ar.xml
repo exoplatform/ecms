@@ -15,7 +15,6 @@
       </label>
     </tab>    
     <label>     
-      <UITaxonomyManager>ادارة الفئات العاديّة</UITaxonomyManager>
       <UITaxonomyManagerTrees>فئات</UITaxonomyManagerTrees>
       <UIMetadataManager>دليل المعلومات القياسيّة</UIMetadataManager>
       <UINamespaceManager>أسماء الفضاءات</UINamespaceManager>
@@ -45,7 +44,7 @@
       <no-taxonomy-selected>يجب عليك نسخ أو قص فئة واحدة على الأقل.</no-taxonomy-selected>
       <node-is-cutting>لا يمكنك اللصق هنا. ربما تمّ قطع فئة العقدة '{0}'</node-is-cutting>
       <can-not-paste>لا توجد بيانات في الحافظة تستطيع لصقها.</can-not-paste>
-      <reference-exception>لا يمكن حذف هذه الفئة، نظراً لأنه بصدد الإشارة إليه حاليّا.</reference-exception>
+      <reference-exception>لا يمكن حذف هذه الفئة. حاليّا هي مُشار إليها بواسطة محتوى.</reference-exception>
       <path-error>ربما، هناك مشكل عند حذف هذا التصنيف.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -141,14 +140,6 @@
 ##########################################################################################
 -->
   <UIPermissionTreeForm>
-    <title>إضافة صلاحيّة الى تلك العقدة</title>
-    <label>
-      <userOrGroup>مستخدم أو مجموعة</userOrGroup>
-      <read>حقّ القراءة</read>
-      <add_node>ضبط حقّ الملكية</add_node>
-      <set_property>مجموعة حق الملكية</set_property>
-      <remove>إزالة الامتياز</remove>
-    </label>
     <msg>
       <have-not-any-permission>يُرجى تحديد على الأقلّ صلاحية لهذه العقدة</have-not-any-permission>
     </msg>
@@ -373,12 +364,6 @@
       <permission>{0} في {1}</permission>
     </label>
   </UIDriveList>
-  <PopupDrivePermission>
-    <title>
-      <AddDrivePermissionSelector>Add Permissions</AddDrivePermissionSelector>
-      <UIDrivePermissionSelector>تعيين الصلاحيّات</UIDrivePermissionSelector>
-    </title>
-  </PopupDrivePermission>
   <UIDriveForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -413,7 +398,7 @@
       <viewSideBar>إضهار الشريط الجانبي</viewSideBar>
       <permissions>الصلاحيّات</permissions>
       <showHiddenNode>مشاهدة العُقد المخفية</showHiddenNode>
-      <allowCreateFolder>السماح بإنشاء مجلد</allowCreateFolder>
+      <allowCreateFolders>السّماح بإنشاء مجلد:</allowCreateFolders>
       <Admin>المدير:</Admin>
       <Categories>الفئات:</Categories>
       <Icons>الأيقونات:</Icons>
@@ -440,215 +425,13 @@
       <action>اجراء</action>
     </header>
   </UITreeList>
-  <!--
-  ################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.UIRepositoryManager #
-  ################################################################################
-  -->
-  <UIRepositoryControl>
-    <label>
-      <repoName>مستودع البيانات الحالي</repoName>
-    </label>
-    <title>
-      <repoAdd>اضافة مستودع بيانات</repoAdd>
-      <repoEdit>تغيير مستودع البيانات</repoEdit>
-      <repoDelete>حذف مستودع البيانات</repoDelete>
-    </title>
-    <msg>
-      <cannot-deleteRepo>لا يمكن حذف {0}، لإنه الإفتراضي !</cannot-deleteRepo>
-    </msg>
-  </UIRepositoryControl>
-  <UIECMAdminUIPopupWindow>
-    <title>
-      <UIRepositoryFormContainer>مستودع البيانات</UIRepositoryFormContainer>
-      <Delete>حذف</Delete>
-      <UIRepositoryList>قائمة مستودع البينات</UIRepositoryList>
-    </title>
-  </UIECMAdminUIPopupWindow>
-  <UIPopupWindowControl>
-    <title>
-      <UIWorkspaceWizardContainer>فضاء العمل</UIWorkspaceWizardContainer>
-      <UIRepositoryValueSelect>إختيار قسم التعرف</UIRepositoryValueSelect>
-    </title>
-  </UIPopupWindowControl>
-  <UIPopupWindowInWizard>
-    <title>
-      <UIPermissionSelector>اختيار الصلاحيّات</UIPermissionSelector>
-      <UIPermissionContainer>منتق الصلاحية</UIPermissionContainer>
-      <UIRepositoryValueSelect>إختيار القسم</UIRepositoryValueSelect>
-    </title>
-  </UIPopupWindowInWizard>
-  <UIRepositoryValueSelect>
-    <header>
-      <name>الاسم الكامل</name>
-      <action>اختيار</action>
-    </header>
-    <action>
-      <Close>إغلاق</Close>
-    </action>
-  </UIRepositoryValueSelect>
-  <UIRepositorySelectForm>
-    <msg-editError>هناك مشكل في فضاء العمل '{0}'، تثبت منه اوقُم بإنشاء فضاء عمل جديد</msg-editError>
-    <msg-accessdenied>جعلُه إفتراضي</msg-accessdenied>
-  </UIRepositorySelectForm>
-  <UIRepositoryForm>
-    <label>
-      <name>الاسم</name>
-      <wsInputSet>UIRepositoryForm</wsInputSet>
-      <authInputSet>UIRepositoryForm</authInputSet>
-      <workspace>فضاء العمل</workspace>
-      <isDefault>ضعه إفتراضي</isDefault>
-      <accessControl>التحكّم في الدخول</accessControl>
-      <authenticationPolicy>طريقة التعرّف</authenticationPolicy>
-      <securityDomain>مجال الأمن</securityDomain>
-      <sessionTime>اتاحة التكرار</sessionTime>
-      <channelConfig>تهيئة القناة</channelConfig>
-      <enableReplication>يمكن التكرار</enableReplication>
-      <repMode>طريقة التكرار</repMode>
-      <repTestMode>تجربة التكرار</repTestMode>
-      <directoryPath>دليل</directoryPath>
-      <maxBufferSize>الحجم الأقصى للذاكرة المؤقتة للبيانات</maxBufferSize>
-    </label>
-    <msg>
-      <cannot-delete-default-workspace>لا يمكن حذف فضاء العمل '{0}'</cannot-delete-default-workspace>
-      <repoName-exist>مستودع البينات '{0}' موجود مُسبقــا!</repoName-exist>
-      <repoName-not-alow>هنالك بعض الأحرف الغير مُتاحة في هذا الاسم!</repoName-not-alow>
-      <workspace-isrequire>يرجى اختيار على الأقل فضاء عمل</workspace-isrequire>
-      <cannot-delete-workspace>لا يمكن حذف {0}.</cannot-delete-workspace>
-      <workspace-setdefault>يجب تعيين فضاء العمل الإفتراضي</workspace-setdefault>
-      <!--DMS 2.4.x ECM-3611> -->
-      <workspace-setDMSsystem>الرجاء تحديد نظام عمل الـ DMS</workspace-setDMSsystem>
-      <workspace-bseChanel>القناة ضرورية</workspace-bseChanel>
-      <workspace-bseMode>طريقة التكرار ضرورية</workspace-bseMode>
-      <workspace-bsePath>المجلد ضروري</workspace-bsePath>
-      <sessionTime-invalid>صيغة مدة إنتهاء الدورة خاطئة</sessionTime-invalid>
-      <sessionTime-required>مدة إنتهاء الدورة ضرورية</sessionTime-required>
-      <workspace-bseBuffer>الحجم الأقصى للذاكرة المؤقتة للبيانات ضروري</workspace-bseBuffer>
-      <authen-isrequire>طريقة التعرف ضرورية</authen-isrequire>
-      <confirm-workspace-delete>هل تريد حقا أن تحذف فضاء العمل?</confirm-workspace-delete>
-    </msg>
-    <action>
-      <Close>#{word.close}</Close>
-      <Save>#{word.save}</Save>
-      <Reset>إعادة ضبط</Reset>
-      <AddWorkspace>إضافة مساحة عمل</AddWorkspace>
-    </action>
-  </UIRepositoryForm>
+  
   <UIRepositoryList>
     <titlebar>
       <label>إدارة مهام الـ'ECM'</label>
     </titlebar>
-    <header>
-      <name>الاسم</name>
-      <workspaces>فضاء العمل</workspaces>
-      <isdefault>هو الإفتراضي</isdefault>
-      <accesscontrol>التحكم في الدخول</accesscontrol>
-      <sessiontimeout>توقيت الدورة انتهى</sessiontimeout>
-      <action>الأعمال</action>
-    </header>
-    <action>
-      <Close>#{word.close}</Close>
-    </action>
-    <msg>
-      <cannot-delete>لا يمكن حذف '{0}'، ربما في حالة إستعمال</cannot-delete>
-      <confirm-delete>هل تريد حقا أن تحذف؟</confirm-delete>
-    </msg>
   </UIRepositoryList>
-  <UIWorkspacePermissionForm>
-    <label>
-      <permission>الصلاحيّات</permission>
-      <read>القراءة</read>
-      <add_node>صلاحية إضافة عقدة</add_node>
-      <set_property>صلاحية إضافة صفة</set_property>
-      <remove>الحذف</remove>
-    </label>
-    <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
-    </action>
-    <msg>
-      <check-one>يجب إختيار صلاحية واحدة على الأقل</check-one>
-    </msg>
-  </UIWorkspacePermissionForm>
-  <PermissionPopupSelect>
-    <title>
-      <UIPermissionSelector>مستكشف الصلاحيات</UIPermissionSelector>
-    </title>
-    <label>
-      <selectGroup>إختيار مجموعة</selectGroup>
-      <selectMembership>إختيار العضوية</selectMembership>
-    </label>
-  </PermissionPopupSelect>
-  <UIWorkspaceWizard>
-    <msg>
-      <wsname-exist>!فضاء العمل '{0}' موجود في قاعدة المعلومات</wsname-exist>
-      <name-require>إسم  فضاء العمل ضروري</name-require>
-      <permission-require>يجب ان تختار صلاحية</permission-require>
-      <nodeType-invalid>نوع العقدة التابعة لفضاء العمل الإفتراضي يجب ان يكون 'nt:unstructured'</nodeType-invalid>
-      <!--DMS 2.4.x ECM-3611-->
-      <nodeType-invalidSystemWs>نوع العقدة التابعة لفضاء العمل الإفتراضي يجب ان يكون 'nt:unstructured'</nodeType-invalidSystemWs>
-      <lockTimeOut-required>مدة حياة القفل ضرورية</lockTimeOut-required>
-      <lockTimeOut-invalid>شكل مدة حياة القفل غير صحيح</lockTimeOut-invalid>
-      <buffer-invalid>شكل حجم الذاكرة المؤقتة غير صحيح</buffer-invalid>
-      <buffer-require>حجم الذاكرة المؤقتة ضروري</buffer-require>
-      <buffer-zero>حجم الذاكرة المؤقتة يجب ان يكون اكبر من الصفر</buffer-zero>
-      <buffer-small>حجم الذاكرة المؤقتة صغير جدا</buffer-small>
-      <containerName-invalid>الحاوية ضرورية</containerName-invalid>
-      <maxSize-require>حجم الذاكرة المخبئية ضروري</maxSize-require>
-      <maxSize-invalid>شكل حجم الذاكرة المخبئية غير صحيح</maxSize-invalid>
-      <maxSize-rezo>حجم الذاكرة المخبئية صغير جدا</maxSize-rezo>
-      <liveTime-require>مدة حياة الذاكرة المخبئية ضروري</liveTime-require>
-      <liveTime-invalid>شكل مدة حياة الذاكرة المخبئية غير صحيح</liveTime-invalid>
-      <liveTime-rezo>مدة حياة الذاكرة المخبئية يجب ان تكون اكبر من الصفر</liveTime-rezo>
-      <sourceName-invalid>اسم المصدر ضروري</sourceName-invalid>
-      <storePath-invalid>مسار التخزين ضروري</storePath-invalid>
-      <swapPath-invalid>مسارالتبادل ضروري</swapPath-invalid>
-      <queryHandlerType>نوع المتصرف في الاستبيانات ضروري</queryHandlerType>
-      <indexPath-invalid>مسار  مؤشرات الإستبيانات ضروري</indexPath-invalid>
-      <storeType-invalid>نوع التخزين ضروري</storeType-invalid>
-      <queryHandlerType-invalid>المتصرف في الاستبيانات ضروري</queryHandlerType-invalid>
-      <permission-invalid>يجب اختيار صلاحية واحدة على الأقل</permission-invalid>
-    </msg>
-    <label>
-      <step>الخطوة</step>
-      <wizardSteps>خطوات المساعد</wizardSteps>
-      <name>الإسم</name>
-      <autoInitializedRootNt>نوع العقدة الجذر</autoInitializedRootNt>
-      <isDefault>ضعه كافتراضي</isDefault>
-      <!--DMS 2.4.x ECM-3611-->
-      <isDMSSytemWs>حدد نظام عمل نظام إدارة الوجهات السياحية</isDMSSytemWs>
-      <permission>الصلاحية الإفتراضية</permission>
-      <setLockTimeOut>مدة حياة القفل</setLockTimeOut>
-      <container>نوع الحاوية</container>
-      <sourceName>اسم المصدر</sourceName>
-      <dbType>اللهجة</dbType>
-      <isMulti>متعدد</isMulti>
-      <storeType>نوع المخزن</storeType>
-      <filterType>فلتر</filterType>
-      <maxBuffer>الحجم الأقصى للذاكرة المؤقتة (bytes)</maxBuffer>
-      <swapPath>مسارالتبادل</swapPath>
-      <storePath>مسار التخزين</storePath>
-      <externalStore>التخزين الخارجي</externalStore>
-      <queryHandler>المتصرف في الاستبيانات</queryHandler>
-      <indexPath>مجلد مؤشرات الإستبيانات</indexPath>
-      <isCache>تفعيل الذاكرة المخبئية</isCache>
-      <maxSize>الحجم الأقصى للذاكرة المخبئية</maxSize>
-      <liveTime>مدة حياة الذاكرة المخبئية</liveTime>
-    </label>
-    <tab>
-      <info>
-        <step1>...في الخطوة الأولى، يجب إدخال إسم فضاء العمل، نوع العقدة</step1>
-        <step2>...في هذه الخطوة تحتاج إلى التهيئة للحاويات ، والمخازن</step2>
-        <step3>...في هذه الخطوة تحتاج إلى تهيئة الذاكرة المخبئية ، متصرف الاستبيانات</step3>
-      </info>
-    </tab>
-    <action>
-      <Next>#{word.next}</Next>
-      <Back>#{word.back}</Back>
-      <Finish>الانتهاء</Finish>
-      <Cancel>#{word.cancel}</Cancel>
-    </action>
-  </UIWorkspaceWizard>
+  
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
@@ -996,8 +779,6 @@
     <title>
       <UIViewContainer>المشاهد</UIViewContainer>
       <ECMTemplate>قوالب الـ 'ECM'</ECMTemplate>
-      <CBTemplate>القوالب 'BC'</CBTemplate>
-      <UICBScripts>سكريبتات الـ'BC'</UICBScripts>
       <UIScriptForm>سكريبتات</UIScriptForm>
       <UIDialogTab>واجهة المستخدم</UIDialogTab>
       <UIViewTab>عرض</UIViewTab>
@@ -1163,11 +944,9 @@
       <template>النماذج</template>
       <enableVersion>تفعييل الإصدار</enableVersion>
       <addFolder>إضافة مجلد</addFolder>
-      <addSignature>إضافة توقيع</addSignature>
       <addDocument>إضافة وثيقة</addDocument>
       <editDocument>تغيير الوثيقة</editDocument>
       <upload>تحميل</upload>
-      <createTicket>Create Ticket</createTicket>
       <paste>ألصق</paste>
       <search>البحث</search>
       <viewReferences>عرض الوصلات</viewReferences>
@@ -1186,13 +965,11 @@
       <showJCRStructure>عرض هيكلة الـJCR</showJCRStructure>
       <watchDocument>تتبّع الوثيقة</watchDocument>
       <taggingDocument>إضافة علامات لهذه الوثيقة</taggingDocument>
-      <multiLanguage>متعدد اللغات</multiLanguage>
       <viewMetadatas>عرض دليل المعلومات</viewMetadatas>
       <overloadThumbnail>زيادة صورة مصغرة</overloadThumbnail>
       <manageHidden>إخفاء/عرض المحتوى</manageHidden>
       <comment>تعليق</comment>
       <vote>تصويت</vote>  
-      <manageSimpleCategories>إدارة الفئات البسيطة</manageSimpleCategories>
       <addCategory>إضافة فئة</addCategory>
       <addLocalizationLink>اضافة ترجمة</addLocalizationLink>
       <publicationRequestApproval>طلب المصادقة</publicationRequestApproval>
@@ -1226,19 +1003,6 @@
       <Close>#{word.close}</Close>
       <Restore>إستعادة</Restore>
     </action>
-    <label>
-     <option>
-      <ListView>عرض على شكل قائمة</ListView>
-        <TimelineView>عرض الجدول الزمني</TimelineView>
-      <ThumbnailsView>عرض على شكل صور مصغرة</ThumbnailsView>
-      <CoverFlow>عرض انسيابي</CoverFlow>
-      <IconView>عرض على شكل أيقونات</IconView>
-      <SlideShowView>عرض على شكل شرائح</SlideShowView>
-      <SystemView>عرض خاصّ بالنظام</SystemView>
-      <ContentView>عرض المحتوى</ContentView>
-      <FileView>عرض ادارة الملفات</FileView>
-    </option>
-    </label>
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
@@ -1433,7 +1197,7 @@
   <UIScriptForm>
     <label>
       <selectVersion>الإصدارات</selectVersion>
-      <scriptContent>محتوى</scriptContent>
+      <scriptContent>المحتوى</scriptContent>
       <scriptLabel>الاسم</scriptLabel>
       <scriptName>السكريبت</scriptName>
       <enableVersion>تفعيل عمليّة الإصدار</enableVersion>
@@ -1451,7 +1215,7 @@
       <scriptContent>محتوى السكريبت</scriptContent>
       <scriptLabel>الاسم</scriptLabel>
       <scriptName>اسم السكريبت</scriptName>
-      <enableVersion>تفعييل الإصدار</enableVersion>
+      <enableVersion>تفعيل عمليّة الإصدار</enableVersion>
     </label>
   </ecmScriptForm>
   <!--
@@ -1593,13 +1357,13 @@
     <label>
       <UIPopupWindow>اختيار</UIPopupWindow>
       <permission>UIPermissionTreeForm</permission>
-      <userOrGroup>User Or Group</userOrGroup>
-      <read>Read Right</read>
-      <add_node>Add Node Right</add_node>
-      <set_property>Set Property Right</set_property>
-      <remove>Remove Right</remove>
+      <userOrGroup>مستخدم أو مجموعة</userOrGroup>
+      <read>حقّ القراءة</read>
+      <add_node>ضبط حقّ الملكية</add_node>
+      <set_property>مجموعة حق الملكية</set_property>
+      <remove>إزالة الامتياز</remove>
     </label>
-    <title>Add a permission to that node</title>
+    <title>إضافة صلاحيّة الى تلك العقدة</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>حفظ</Save>
@@ -1627,7 +1391,7 @@
    
    <PopupDrivePermission>
     <title>
-      <AddDrivePermissionSelector>Add Permission</AddDrivePermissionSelector>
+      <AddDrivePermissionSelector>Add Permissions</AddDrivePermissionSelector>
       <UIPermissionSelector>اختيار صلاحيّة</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
@@ -1773,7 +1537,7 @@
       <name>النوع</name>
       <label>قالب</label>
       <icon>أيقونة</icon>
-      <action>حركة</action>
+      <action>اجراء</action>
     </header>
     <action>
       <AddNew>اضافة قالب</AddNew>
@@ -1794,7 +1558,7 @@
 
 <UITabPane>
  <title>
- <ContentTemplateContainer>محتوى</ContentTemplateContainer>
+ <ContentTemplateContainer>المحتوى</ContentTemplateContainer>
 <CateTemplateContainer>التصفح</CateTemplateContainer>
 <PageTemplateContainer>ترقيم الصّفحات</PageTemplateContainer>
  </title>
@@ -1803,7 +1567,7 @@
   <UICLVTemplateList>
     <header>
       <title>الاسم</title>
-      <action>حركة</action>
+      <action>اجراء</action>
       <template>قالب</template>
     </header>
     <action>
@@ -1890,7 +1654,7 @@
 <label>
  <title>اسم</title>
 <template>اسم النموذج</template>
-<content>محتوى</content>
+<content>المحتوى</content>
 <type>نوع النموذج</type>
 </label>
 </UICLVTemplateForm_ContentTemplateContainer>
@@ -1904,7 +1668,7 @@
 <label>
  <title>الاسم</title>
 <template>اسم النموذج</template>
-<content>محتوى</content>
+<content>المحتوى</content>
 <type>نوع النموذج</type>
 </label>
 </UICLVTemplateForm_PageTemplateContainer>
@@ -1918,14 +1682,14 @@
 <label>
  <title>الاسم</title>
 <template>اسم النموذج</template>
-<content>محتوى</content>
+<content>المحتوى</content>
 <type>نوع النموذج</type>
 </label>
 </UICLVTemplateForm_CateTemplateContainer>
 <UICLVTemplateForm>
   <label>
     <paginators>ترقيم الصّفحات</paginators>
-<list>محتوى</list>
+<list>المحتوى</list>
 <navigation>التصفح</navigation>
   </label>
   <msg>
@@ -2196,7 +1960,7 @@
       <name>اسم النّمط</name>
       <documentRange>ترتيب الوثيقة</documentRange>
       <tagHTML>نمط العلامة</tagHTML>
-      <action>حركة</action>
+      <action>اجراء</action>
     </header>
     <action>
       <AddStyle>اضافة نمط</AddStyle>
@@ -2205,7 +1969,7 @@
   <UITagStyleForm>
     <label>
       <styleName>اختيار الاسم:</styleName>
-      <documentRange>نطاق الوثيقة:</documentRange>
+      <documentRange>عدد التكرارات:</documentRange>
       <styleHTML>نمط الـ 'HTML':</styleHTML>
     </label>
     <action>
@@ -2412,13 +2176,6 @@
   <!--
   #########Since ECM 2.5##################
   --> 
-  <UIWorkspaceWizard>
-    <label>
-      <step1>الخطوة 1</step1>
-      <step2>الخطوة 2</step2>
-      <step3>3 الخطوة</step3>
-    </label>
-  </UIWorkspaceWizard>
   
   <UIDriveForm>
 <msg>
@@ -2736,21 +2493,7 @@
           <addLocalizationLink>اضافة ترجمة</addLocalizationLink>
   </label>
   </UIViewFormTabPane>
-  <UIDriveForm>
-<label>
-  <taxonomy-list>قائمة التصنيف</taxonomy-list>
-  <admin-view>العرض الخاص بالادارة</admin-view>
-  <authoring-view>العرض الخاص بالمؤلف</authoring-view>
-  <taxonomy-icons>أيقونات التصنيف</taxonomy-icons>
-  <anonymous-view>عرض بدون هويّة</anonymous-view>
-  <icon-view>عرض على شكل أيقونات</icon-view>
-  <slide-show>عرض على شكل شرائح</slide-show>
-  <simple-view>عرض عادي</simple-view>
-  <system-view>عرض خاص بالنظام</system-view>
-  <timeline-view>عرض الجدول الزمني</timeline-view>
-  <cover-flow>عرض انسيابي</cover-flow>
-  </label>
-  </UIDriveForm>
+
 <UIDriveForm>
 <label>
 <allowNodeTypesOnTree>نوع العُقد المسموح بها في الشجرة الموجودة على اليسار.</allowNodeTypesOnTree>

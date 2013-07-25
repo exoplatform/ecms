@@ -22,13 +22,13 @@
 <bundle>
   <UIExoStart>
     <tooltip>
-      <homepage>Homepage</homepage>
+      <homepage>الصفحة الرئيسية</homepage>
     </tooltip>
   </UIExoStart>
 
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Are you sure you want to delete this item?</confirm-delete>
+      <confirm-delete>هل أنت متأكد من أنك تريد حذف هذا العنصر؟</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
 
@@ -41,31 +41,31 @@
 
   <Views>
     <label>
-      <wcm-view>Web</wcm-view>
+      <wcm-view>الواب</wcm-view>
       <admin-view>إدارة</admin-view>
       <icon-view>أيقونات</icon-view>
       <thumbails-view>صور مصغرة</thumbails-view>
       <list-view>قائمة</list-view>
-      <authoring-view>Authoring</authoring-view>
-      <wcm-category-view>Categories</wcm-category-view>
+      <authoring-view>التأليف</authoring-view>
+      <wcm-category-view>الفئات</wcm-category-view>
       <file-view>عرض ادارة الملفات</file-view>
     </label>
   </Views>
 
   <UIActionBar>
     <obtion>
-      <Publication>Publication</Publication>
-      <System>System</System>
+      <Publication>النشر</Publication>
+      <System>النظام</System>
     </obtion>
   </UIActionBar>
 
   <UIPageSelectorPanel>
     <header>
       <path>مسار</path>
-      <action>حركة</action>
+      <action>اجراء</action>
     </header>
     <msg>
-      <child-not-found>No Page Found.</child-not-found>
+      <child-not-found>لا توجد أي صفحة.</child-not-found>
     </msg>
     <title>
       <select>اختيار</select>
@@ -74,116 +74,116 @@
 
   <UIContentDialogFormPopupWindow>
     <title>
-      <UIContentDialogPreference>Web Content Preference</UIContentDialogPreference>
+      <UIContentDialogPreference>خيارات محتوى الواب</UIContentDialogPreference>
     </title>
   </UIContentDialogFormPopupWindow>
 
   <UITabPane>
     <title>
-      <UIContentBrowsePanelOne>Content Browser</UIContentBrowsePanelOne>
-      <UIContentBrowsePanelMulti>Content Browser</UIContentBrowsePanelMulti>
-      <UIContentBrowsePanelFolder>Folder Browser</UIContentBrowsePanelFolder>
-      <UIContentSearchForm>Content Search Form</UIContentSearchForm>
+      <UIContentBrowsePanelOne>متصفح المحتوى</UIContentBrowsePanelOne>
+      <UIContentBrowsePanelMulti>متصفح المحتوى</UIContentBrowsePanelMulti>
+      <UIContentBrowsePanelFolder>متصفح المجلدات</UIContentBrowsePanelFolder>
+      <UIContentSearchForm>نموذج البحث في المحتوى</UIContentSearchForm>
       <UIContentSearchResult>نتائج البحث</UIContentSearchResult>
-      <UIContentViewer>Preview Content</UIContentViewer>
+      <UIContentViewer>معاينة المحتوى</UIContentViewer>
       <WebContentMetadataPopup>مُنتق الخاصيات</WebContentMetadataPopup>
-      <WebContentNodeTypePopup>Nodetype Selector</WebContentNodeTypePopup>
-      <UIPermissionManager>Permission Manager</UIPermissionManager>
+      <WebContentNodeTypePopup>مُنتق أنواع العقد</WebContentNodeTypePopup>
+      <UIPermissionManager>مدير الصلاحيّات</UIPermissionManager>
     </title>
   </UITabPane>
 
   <UIContentBrowsePanelOne>
     <selectBoxValues>
-      <FilterBy>Filter by</FilterBy>
-      <WebContent>Web Content</WebContent>
-      <DMSDocument>Document</DMSDocument>
-      <Media>Media</Media>
+      <FilterBy>تصنيف  بحسب</FilterBy>
+      <WebContent>محتوى الواب</WebContent>
+      <DMSDocument>الوثيقة</DMSDocument>
+      <Media>وسائل الاعلام</Media>
     </selectBoxValues>
     <msg>
-      <node-checkout>The node is checked out. Please check the node before performing this function.</node-checkout>
+      <node-checkout>يتم انهاء المعالجة لهذه العقدة. الرجاء التحقق من العقدة قبل القيام بهذا الاجراء.</node-checkout>
     </msg>
   </UIContentBrowsePanelOne>
 
   <UIContentBrowsePanelMulti>
     <selectBoxValues>
-      <FilterBy>Filter by</FilterBy>
-      <WebContent>Web Content</WebContent>
+      <FilterBy>تصنيف بحسب</FilterBy>
+      <WebContent>محتوى الواب</WebContent>
       <DMSDocument>وثائق</DMSDocument>
-      <Media>Media</Media>
+      <Media>وسائل الاعلام</Media>
     </selectBoxValues>
   </UIContentBrowsePanelMulti>
 
   <UIContentBrowsePanelOne>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
-      <RightColumn>The content below can be selected.</RightColumn>
+      <LeftColumn>اختيار مجلد لعرض فروعه باعتبارها محتوى.</LeftColumn>
+      <RightColumn>يمكن اختيار المحتوى أدناه.</RightColumn>
     </label>
   </UIContentBrowsePanelOne>
 
   <UIContentBrowsePanelMulti>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
-      <RightColumn>The content below can be selected.</RightColumn>
+      <LeftColumn>اختيار مجلد لعرض فروعه باعتبارها محتوى.</LeftColumn>
+      <RightColumn>يمكن اختيار المحتوى أدناه.</RightColumn>
     </label>
   </UIContentBrowsePanelMulti>
 
   <UIContentBrowsePanelFolder>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
-      <RightColumn>The folder below can be selected.</RightColumn>
+      <LeftColumn>اختيار مجلد لعرض فروعه باعتبارها محتوى.</LeftColumn>
+      <RightColumn>يمكن اختيار المجلّد أدناه.</RightColumn>
     </label>
   </UIContentBrowsePanelFolder>
 
   <UISelectedContentGrid>
     <label>
-      <name>Name</name>
-      <add>Add</add>
-      <delete>Delete</delete>
+      <name>الاسم</name>
+      <add>اضف</add>
+      <delete>حذف</delete>
     </label>
     <msg>
-      <no-content-found>No content found.</no-content-found>
-      <non-content>You have not selected any content.</non-content>
+      <no-content-found>لم يتم العثور على أيّ مُـحتوى.</no-content-found>
+      <non-content>لم تقم بتحديد أي محتوى.</non-content>
     </msg>
   </UISelectedContentGrid>
 
   <UICLVContentSelectedGrid>
     <action>
-      <SaveCategories>Save</SaveCategories>
-      <Cancel>Cancel</Cancel>
+      <SaveCategories>حفظ</SaveCategories>
+      <Cancel>الغاء</Cancel>
     </action>
   </UICLVContentSelectedGrid>
 
   <UIContentBrowsePathSelector>
     <header>
-      <name>Name</name>
+      <name>الاسم</name>
       <publicationstate>حالة النشر</publicationstate>
-      <action>حركة</action>
+      <action>اجراء</action>
     </header>
     <msg>
-      <child-not-found>No Content Found</child-not-found>
+      <child-not-found>لم يتمّ العثور على أيّ محتوى</child-not-found>
     </msg>
   </UIContentBrowsePathSelector>
 
   <UIContentBrowsePathSelectorFolder>
     <header>
-      <name>Name</name>
+      <name>الاسم</name>
       <publicationstate>حالة النشر</publicationstate>
-      <action>Action</action>
+      <action>اجراء</action>
     </header>
     <msg>
-      <child-not-found>No Folder Found</child-not-found>
+      <child-not-found>لم يتم العثور على المجلد</child-not-found>
     </msg>
   </UIContentBrowsePathSelectorFolder>
 
   <UIContentSearchForm>
     <title>
-      <Location>Site Name</Location>
-      <SearchByName>Search by Name</SearchByName>
-      <Fulltext>A word or phrase in context</Fulltext>
+      <Location>اسم الموقع</Location>
+      <SearchByName>البحث حسب الاسم</SearchByName>
+      <Fulltext>عبارة أو جُملة في نفس السّياق</Fulltext>
       <Property>الخاصية</Property>
       <Contain>تحتوي على</Contain>
-      <FromDate>From Date</FromDate>
-      <ToDate>To Date</ToDate>
+      <FromDate>من تاريخ</FromDate>
+      <ToDate>الى تاريخ</ToDate>
       <DocumentType>نوع الوثيقة</DocumentType>
     </title>
     <tooltip>
@@ -192,20 +192,20 @@
     </tooltip>    
     <label>
       <option>
-        <CREATED>Created</CREATED>
-        <MODIFIED>Modified</MODIFIED>
+        <CREATED>تمّ انشاؤه / ها</CREATED>
+        <MODIFIED>تم تغييره / ها</MODIFIED>
       </option>
     </label>
     <action>
-      <SearchWebContent>Search</SearchWebContent>
+      <SearchWebContent>البحث</SearchWebContent>
     </action>
     <msg>
       <time-to-late>وقت البحث طويل جداً.</time-to-late>
-      <empty-field>Please input a valid keyword for search.</empty-field>
-      <invalid-format>Invalid date/time format in field '{0}'.</invalid-format>
-      <invalid-date>"To Date" must be later than "From Date"</invalid-date>
-      <invalid-nodeType>The node type "{0}" is invalid. Please check again.</invalid-nodeType>
-      <invalid-keyword>The keyword is invalid. Some characters are not supported.</invalid-keyword>
+      <empty-field>يرجى التـّــأكد من صحّة كلمة البحث الرئيسية.</empty-field>
+      <invalid-format>صيغة التاريخ/التوقيت التي تمّ ادخالها في المجال '{0}' غير صحيحة.</invalid-format>
+      <invalid-date>قيمة "إلى تاريخ" يجب أن تأتي بعد قيمة "من تاريخ"</invalid-date>
+      <invalid-nodeType>نوع العقدة "{0}" غير صحيح. يُرجى اعادة التثبّت.</invalid-nodeType>
+      <invalid-keyword>الكلمة المفتاح غير صحيحة. لم يتم التعرّف على بعض الأحرف.</invalid-keyword>
     </msg>
   </UIContentSearchForm>
 
@@ -217,8 +217,8 @@
 
   <UIContentPropertySelector>
     <action>
-      <Add>Add</Add>
-      <Cancel>Cancel</Cancel>
+      <Add>اضافة</Add>
+      <Cancel>الغاء</Cancel>
     </action>
     <label>
       <metadataType>نوع قالب المعلومات القياسية</metadataType>
@@ -228,14 +228,14 @@
 
   <WebContentNodeTypePopup>
     <title>
-      <UIContentNodeTypeSelector>Node Type Selector</UIContentNodeTypeSelector>
+      <UIContentNodeTypeSelector>مُنتق نوع العقدة</UIContentNodeTypeSelector>
     </title>
   </WebContentNodeTypePopup>
 
   <UIContentNodeTypeSelector>
     <action>
-      <Save>Save</Save>
-      <Cancel>Cancel</Cancel>
+      <Save>حفظ</Save>
+      <Cancel>الغاء</Cancel>
     </action>
   </UIContentNodeTypeSelector>
 
@@ -244,62 +244,62 @@
       <title>عنوان</title>
       <score>المجموع</score>
       <publicationstate>حالة النشر</publicationstate>
-      <action>حركة</action>
+      <action>اجراء</action>
     </header>
     <title>
       <Select>اختيار</Select>
       <View>رأي</View>
     </title>
     <msg>
-    <template-not-support>Cannot preview this content. The template is not supported</template-not-support>
+    <template-not-support>لا يمكن معاينة هذا المحتوى. القالب غير معتمد</template-not-support>
     </msg>
   </UIContentSearchResult>
 
   <UIContentDialogForm>
     <action>
-      <SaveDraft>Save Draft</SaveDraft>
-      <FastPublish>Fast Publish</FastPublish>
+      <SaveDraft>حفظ المُسوّدة</SaveDraft>
+      <FastPublish>نشر سريع</FastPublish>
       <Preferences>تفضيلات</Preferences>
-      <Close>Close</Close>
+      <Close>غلق</Close>
     </action>
     <msg>
-      <access-denied>You do not have permission to add categories to this document.</access-denied>
-      <exception>An error occurred while adding categories to this document.</exception>
-      <non-categories>Categories are wrong. Please select appropriate categories.</non-categories>
+      <access-denied>ليس لديك الصلاحيّات الكافية لإضافة الفئات لهذه الوثيقة.</access-denied>
+      <exception>حدث خطأ أثناء إضافة فئات إلى هذه الوثيقة.</exception>
+      <non-categories>الفئات خاطئة. الرجاء اختيار الفئات المناسبة.</non-categories>
     </msg>
   </UIContentDialogForm>
 
   <UIPermissionManager>
     <label>
-      <UIPermissionInputSetWithAction>Permission</UIPermissionInputSetWithAction>
+      <UIPermissionInputSetWithAction>صلاحيّة</UIPermissionInputSetWithAction>
       <UIPermissionStringInput/>
-      <UIAccessibleCheckboxInput>Access Right</UIAccessibleCheckboxInput>
-      <UIEditableCheckboxInput>Edit Right</UIEditableCheckboxInput>
+      <UIAccessibleCheckboxInput>حق الدّخول</UIAccessibleCheckboxInput>
+      <UIEditableCheckboxInput>تغيير الاذن</UIEditableCheckboxInput>
     </label>
     <action>
-      <Save>Save</Save>
-      <Clear>Clear</Clear>
+      <Save>حفظ</Save>
+      <Clear>مسح</Clear>
       <title>
-        <Edit>Edit</Edit>
-        <Delete>Delete</Delete>
+        <Edit>تغيير</Edit>
+        <Delete>حذف</Delete>
       </title>
     </action>
   </UIPermissionManager>
 
   <UIPermissionManagerGrid>
     <header>
-      <owner>Permission</owner>
-      <accessible>Accessible</accessible>
-      <editable>Editable</editable>
-      <action>حركة</action>
+      <owner>صلاحيّة</owner>
+      <accessible>يمكن الوصول إليه/ها</accessible>
+      <editable>قابلة للتغيير</editable>
+      <action>اجراء</action>
     </header>
     <msg>
       <confirm-delete-permission>هل ترغب حقّا في حذف هذه الصلاحيّة؟</confirm-delete-permission>
-      <no-permission-remove>You do not have permission.</no-permission-remove>
-      <access-denied>Access denied.</access-denied>
-      <node-locked>The path element {0} or one of its parents is locked.</node-locked>
-      <userOrGroup-required>You must select a user or group.</userOrGroup-required>
-      <checkbox-require>You must set rights.</checkbox-require>
+      <no-permission-remove>ليس لديك الصلاحيّات الكافية.</no-permission-remove>
+      <access-denied>تم رفض الوصول.</access-denied>
+      <node-locked>يتم تأمين مسار العنصر {0} أو أحد العناصر الأصل.</node-locked>
+      <userOrGroup-required>يجب اختيار مستخدم أو مجموعة.</userOrGroup-required>
+      <checkbox-require>يجب عليك تعيين الحقوق.</checkbox-require>
       <node-checkedin>يجب عليك انهاء المراجعة أوّلا.</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
@@ -308,7 +308,7 @@
     <title>
       <SelectUser>اختيارمستخدم</SelectUser>
       <SelectMember>اختيار عضو</SelectMember>
-      <AddAny>Add Any Permission</AddAny>
+      <AddAny>أضف أي صلاحيّة</AddAny>
     </title>
   </UIPermissionInputSetWithAction>
 
@@ -326,7 +326,7 @@
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>اختيار مجموعة</selectGroup>
       <selectMembership>اختيار العضوية</selectMembership>
     </label>
   </UIGroupMemberSelector>
@@ -339,35 +339,35 @@
 
   <ZeroValidator>
     <msg>
-      <Invalid-number>Zero is not accepted in the field '{0}'.</Invalid-number>
+      <Invalid-number>لم يتم قبول القيمة صفر في المجال '{0}'.</Invalid-number>
     </msg>
   </ZeroValidator>
 
   <UIDropDownPageTemp>
     <item>
-      <WCMPageConfigs>WCM Page Configurations</WCMPageConfigs>
-      <ColumnPageConfigs>Column Page Configurations</ColumnPageConfigs>
-      <RowPageConfigs>Row Page Configurations</RowPageConfigs>
-      <TabsPageConfigs>Tabs Page Configurations</TabsPageConfigs>
-      <MixPageConfigs>Mix Page Configurations</MixPageConfigs>
+      <WCMPageConfigs>صفحة الاعدادات الخاصّة بالـWCM</WCMPageConfigs>
+      <ColumnPageConfigs>الاعدادات الخاصّة بعمود الصّفحة</ColumnPageConfigs>
+      <RowPageConfigs>الاعدادات الخاصّة بأسطر الصّفحة</RowPageConfigs>
+      <TabsPageConfigs>الاعدادات الخاصّة بعلامات التّبويب</TabsPageConfigs>
+      <MixPageConfigs>الاعدادات الخاصّة بمزيج الصفحة</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
   <UIWizardPageSelectLayoutForm>
     <label>
-      <SingleContentViewer>Single Content Viewer</SingleContentViewer>
-      <ContentListViewer>Content List Viewer</ContentListViewer>
-      <Search>Search</Search>
-      <Sitemap>Site Map</Sitemap>
-      <TwoColumnsLayout>Two-column Layout</TwoColumnsLayout>
-      <ThreeColumnsLayout>Three-column Layout</ThreeColumnsLayout>
-      <TwoRowsLayout>Two-row Layout</TwoRowsLayout>
-      <ThreeRowsLayout>Three-row Layout</ThreeRowsLayout>
-      <TwoTabsLayout>Two-tab layout</TwoTabsLayout>
-      <ThreeTabsLayout>Three-tab Layout</ThreeTabsLayout>
-      <TwoColumnsOneRowLayout>Two-column &amp; One-row Layout</TwoColumnsOneRowLayout>
-      <OneRowTwoColumnsLayout>One-row &amp; Two-column Layout</OneRowTwoColumnsLayout>
-      <ThreeRowsTwoColumnsLayout>Three-row &amp; Two-column Layout</ThreeRowsTwoColumnsLayout>
+      <SingleContentViewer>العارض الموحّد للمحتوى</SingleContentViewer>
+      <ContentListViewer>عارض قائمة المحتويات</ContentListViewer>
+      <Search>البحث</Search>
+      <Sitemap>خريطه الموقع</Sitemap>
+      <TwoColumnsLayout>تخطيط ذو عمودين</TwoColumnsLayout>
+      <ThreeColumnsLayout>تخطيط ذو ثلاثة أعمدة</ThreeColumnsLayout>
+      <TwoRowsLayout>تخطيط ذو سطرين</TwoRowsLayout>
+      <ThreeRowsLayout>تخطيط ذو ثلاثة أسطر</ThreeRowsLayout>
+      <TwoTabsLayout>تخطيط ذو تبويبتين</TwoTabsLayout>
+      <ThreeTabsLayout>تصميم ثلاثة-تبويبات</ThreeTabsLayout>
+      <TwoColumnsOneRowLayout>تخطيط عمودين و صف واحد</TwoColumnsOneRowLayout>
+      <OneRowTwoColumnsLayout>تخطيط ذو صف واحد و عمودين</OneRowTwoColumnsLayout>
+      <ThreeRowsTwoColumnsLayout>تخطيط ذو ثلاثة صفوف و عمودين</ThreeRowsTwoColumnsLayout>
     </label>
   </UIWizardPageSelectLayoutForm>
 
@@ -376,22 +376,22 @@
     <login>دخول</login>
     <logout>خروج</logout>
     <language>تغيير اللغة</language>
-    <register>Register</register>
+    <register>تسجيل</register>
   </Signin>
   <UIDriveForm>
 <label>
-<wcm-category-view>Category View</wcm-category-view>
-<wcm-view>WCM Content View</wcm-view>
+<wcm-category-view>عرض الفئات</wcm-category-view>
+<wcm-view>عرض محتوى الـ WCM</wcm-view>
 </label>
   </UIDriveForm>
   
   <ContentSelector>
     <title>
-      <PersonalDrives>Personal Drives</PersonalDrives>
-      <GeneralDrives>General Drives</GeneralDrives>
-      <GroupDrives>Group Drives</GroupDrives>
+      <PersonalDrives>الأقراص الشخصية</PersonalDrives>
+      <GeneralDrives>الأقراص العامّة</GeneralDrives>
+      <GroupDrives>أقراص المجموعة</GroupDrives>
       <Private>شخصي</Private>
-      <Public>Public</Public>
+      <Public>عام</Public>
       <BackupCenter>مركز النُّسخ الاحتياطية</BackupCenter>
       <CategorizedDocumentsCenter>مركز تصنيف الوثائق</CategorizedDocumentsCenter>
       <CollaborationCenter>مركز التعاون</CollaborationCenter>
@@ -417,7 +417,7 @@
   
   <UIDocumentInfo>
     <msg>
-      <access-denied-exception>Access denied. You maybe not have read permission, or the node may have been removed or changed.</access-denied-exception>
+      <access-denied-exception>تم رفض الوصول. رُبّما ليس لديك صلاحيّات القراءة، أو أنّ العقدة قد تمّ إزالتها أو تغييرها.</access-denied-exception>
     </msg>
   </UIDocumentInfo>
   <UIPortalApplication>
@@ -428,13 +428,13 @@
   
   <CategoryNavigationTemplate>
   <label>
-  <home>Home</home>
+  <home>الصفحة الرئيسية</home>
   </label>
   </CategoryNavigationTemplate>
   
   <Breadcrumb>
   <label>
-  <home>Home</home>
+  <home>الصفحة الرئيسية</home>
   </label>  
   </Breadcrumb>
 </bundle>

@@ -23,9 +23,7 @@
 
   <UIFCCConfig>
     <label>
-      <select-repository>اختر مستودع البيانات</select-repository>
       <UIFCCSaveLocationField>مكان الحفظ</UIFCCSaveLocationField>
-      <UIFCCRepositoryFormSelectBox>اختر مستودع البيانات</UIFCCRepositoryFormSelectBox>
       <UIFCCWorkspaceFormSelectBox>اختيار مساحة عمل</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>خيارات النموذج</UIFCCTemplateField>
       <UIFCCLocationFormInputAction>مكان الحفظ</UIFCCLocationFormInputAction>
@@ -90,7 +88,7 @@
     <label>
       <workspaceName>مساحة العمل</workspaceName>
       <rootNodePath>المسار الجذر:</rootNodePath>
-      <rootNodeInfo/>
+      <rootNodeInfo>[empty string]</rootNodeInfo>
     </label>
   </UIWorkspaceList>
 
