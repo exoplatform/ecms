@@ -15,17 +15,7 @@
       </languages>
     </label>
   </View>
-  <!--
-  ################resoucebundle FOR EXO:CALENDAR VIEW TEMPLATE############
-  -->
-  <Calendar>
-    <view>
-      <label>
-        <calendar>Lịch biểu</calendar>
-        <shared>Chia sẻ</shared>
-      </label>
-    </view>
-  </Calendar>
+ 
   <!--
   ################resoucebundle FOR EXO:COMMENT VIEW TEMPLATE#############
   -->
@@ -43,34 +33,8 @@
       </label>
     </view>
   </Comment>
+ 
   <!--
-  ################resoucebundle FOR EXO:EVENT VIEW TEMPLATE#############
-  -->
-  <Event>
-    <view>
-      <label>
-        <january>Tháng 1</january>
-        <february>Tháng 2</february>
-        <march>Tháng 3</march>
-        <april>Tháng 4</april>
-        <may>Tháng 5</may>
-        <june>Tháng 6</june>
-        <july>Tháng 7</july>
-        <august>Tháng 8</august>
-        <september>Tháng 9</september>
-        <october>Tháng 10</october>
-        <november>Tháng 11</november>
-        <december>Tháng 12</december>
-        <event>Sự kiện</event>
-        <subject>Chủ đề</subject>
-        <location>Vị trí</location>
-        <comment>Bình luận</comment>
-        <description>Mô tả</description>
-      </label>
-    </view>
-  </Event>
-  <!--
-  ################resoucebundle FOR EXO:DATA VIEW TEMPLATE#############
   ################resoucebundle FOR NT:FILE VIEW TEMPLATE##############
   -->
   <File>
@@ -86,59 +50,7 @@
       </label>
     </view>
   </File>
-  <!--
-  ################resoucebundle FOR RMA:FILEPLAN VIEW TEMPLATE##############
-  -->
-  <FilePlan>
-    <view>
-      <label>
-        <content>Nội dung File Plan</content>
-        <record-category-identifier>Record Category Identifier</record-category-identifier>
-        <disposition-author>Quyền Sắp xếp</disposition-author>
-        <disposition-instruction>Hướng dẫn Sắp xếp</disposition-instruction>
-        <permanent-record-indicator>Permanent Record Indicator</permanent-record-indicator>
-        <contain-record-folder>Chứa Thư mục Bản ghi</contain-record-folder>
-        <default-media-type>Kiểu Phương tiện Mặc định</default-media-type>
-        <default-marking-list>Danh sách Đánh dấu Mặc định</default-marking-list>
-        <default-originating-organization>Nguồn gốc tổ chức mặc định</default-originating-organization>
-        <number-of-record>Số lượng Bản ghi</number-of-record>
-        <record>Bản ghi</record>
-        <obsolete-record>Bản ghi hết hạn</obsolete-record>
-        <supreseded-record>Superseded Records</supreseded-record>
-        <vital-record>Bản ghi Quan trọng</vital-record>
-        <cutoff-record>Cutoff Records</cutoff-record>
-        <holdable-record>Holdable Records</holdable-record>
-        <transferable-record>Bản ghi Truyền tải được</transferable-record>
-        <accessionable-record>Accessionable Records</accessionable-record>
-        <destroyable-record>Destroyable Records</destroyable-record>
-        <record-id>Id Bản ghi</record-id>
-        <record-name>Tên Bản ghi</record-name>
-        <originator>Originator</originator>
-        <date-received>Ngày Nhận</date-received>
-        <originating-organization>Originating Organization</originating-organization>
-        <next-review-date>Ngày Xem lại Kế tiếp</next-review-date>
-        <previous-review-date>Ngày Xem lại Trước đó</previous-review-date>
-        <cutoff-date>Cutoff Date</cutoff-date>
-        <hold-until>Hold Until</hold-until>
-        <transfer-date>Ngày Truyền tải</transfer-date>
-        <transfer-location>Vị trí Truyền tải</transfer-location>
-        <accession-date>Accession Date</accession-date>
-        <accession-location>Accession Location</accession-location>
-        <destruction-date>Ngày Hủy</destruction-date>
-      </label>
-    </view>
-  </FilePlan>
-  <!--
-  ################resoucebundle FOR KFX:DOCUMENT VIEW TEMPLATE##############
-  -->
-  <Kofax>
-    <view>
-      <label>
-        <document-name>Tên Tài liệu kofax</document-name>
-        <downloadable>Tệp tin Tải xuống được</downloadable>
-      </label>
-    </view>
-  </Kofax>
+ 
   <!--
   ################resoucebundle FOR MAIL:DOCUMENT VIEW TEMPLATE##############
   -->
@@ -154,45 +66,6 @@
       </label>
     </view>
   </Mail>
-  <!--
-  ################resoucebundle FOR EXO:PODCAST VIEW TEMPLATE##############
-  -->
-  <Podcast>
-    <view>
-      <label>
-        <podcast>Podcast</podcast>
-        <title>Tiêu đề</title>
-        <link>Liên kết</link>
-        <author>Tác giả</author>
-        <explicit>Explicit</explicit>
-        <category>Danh mục</category>
-        <keyword>Từ khóa</keyword>
-        <publish-date>Ngày Xuất bản</publish-date>
-        <mime-type>Kiểu Mime</mime-type>
-        <length>Chiều dài</length>
-        <description>Mô tả</description>
-      </label>
-    </view>
-  </Podcast>
-  <!--
-  ################resoucebundle FOR EXO:SAMPLE VIEW TEMPLATE##############
-  -->
-  <Sample>
-    <view>
-      <label>
-        <node-name>Tên Node</node-name>
-        <title>Tiêu đề</title>
-        <date>Ngày</date>
-        <date-time>Date Time</date-time>
-        <description>Mô tả</description>
-        <image>Hình ảnh</image>
-        <summary>Tóm tắt</summary>
-        <content>Nội dung</content>
-        <relation>Quan hệ</relation>
-        <attachment>Đính kèm</attachment>
-      </label>
-    </view>
-  </Sample>
   <!--
   ################resoucebundle FOR EXO:VOTE VIEW TEMPLATE##############
   -->
@@ -219,51 +92,6 @@
       </label>
     </view>
   </ListView>
-  <!--
-  ################resoucebundle FOR exo:workflowAction VIEW TEMPLATE##############
-  -->
-  <Workflow>
-    <view>
-      <label>
-        <name>Tên</name>
-        <lifecycle>Chu kỳ</lifecycle>
-        <description>Mô tả</description>
-        <validator>Người phê duyệt</validator>
-        <to-workspace>To Workspace</to-workspace>
-        <at-location>Tại Vị trí</at-location>
-      </label>
-    </view>
-  </Workflow>
-  <!--
-  ################resoucebundle FOR exo:backupAction VIEW TEMPLATE##############
-  -->
-  <Backup>
-    <view>
-      <label>
-        <name>Tên</name>
-        <lifecycle>Chu kỳ</lifecycle>
-        <description>Mô tả</description>
-        <to-workspace>To Workspace</to-workspace>
-        <at-location>Tại Vị trí</at-location>
-      </label>
-    </view>
-  </Backup>
- 
-  <!--
-  ###################### resoucebundle for exo:iCalendarGenerateAction view template ####
-  -->
-  <Icalendar>
-    <view>
-      <label>
-        <action-name>Action Name</action-name>
-        <lifecycle>Chu kỳ</lifecycle>
-        <calendar-path>Đường dẫn đến Lịch biểu</calendar-path>
-        <description>Mô tả</description>
-        <query>Truy vấn</query>
-        <repository>Kho dữ liệu</repository>
-      </label>
-    </view>
-  </Icalendar>
 
   <!--
   ###################### resoucebundle for exo:addMetadataAction view template ####
@@ -336,202 +164,6 @@
       </tooltip>
     </view>
   </ElementSet>
-  <!--
-  ###################### resoucebundle for rma:cutoffable view template ####
-  -->
-  <Cutoffable>
-    <view>
-      <label>
-        <not-available>Không xác định</not-available>
-        <cutoff-executed>Cutoff Executed</cutoff-executed>
-        <cutoff-now>Cutoff Now</cutoff-now>
-        <cutoff-date-time>Cutoff Date Time</cutoff-date-time>
-        <cutoff-event>Cutoff Event</cutoff-event>
-        <cutoff-obsolete>Cutoff Obsolete</cutoff-obsolete>
-        <cutoff-superseded>Cutoff Superseded</cutoff-superseded>
-      </label>
-      <action>
-        <add-edit>Thêm/Chỉnh sửa</add-edit>
-        <cancel>Hủy bỏ</cancel>
-      </action>
-      <tooltip>
-        <cancel>Hủy bỏ</cancel>
-        <add-edit>Thêm/Chỉnh sửa Thuộc tính</add-edit>
-      </tooltip>
-    </view>
-  </Cutoffable>
-  <!--
-  ###################### resoucebundle for rma:destroyable view template ####
-  -->
-  <Destroyable>
-    <view>
-      <label>
-        <not-available>Không xác định</not-available>
-        <destruction-date>Ngày Hủy</destruction-date>
-      </label>
-      <action>
-        <add-edit>Thêm/Chỉnh sửa</add-edit>
-        <cancel>Hủy bỏ</cancel>
-      </action>
-      <tooltip>
-        <cancel>Hủy bỏ</cancel>
-        <add-edit>Thêm/Chỉnh sửa Thuộc tính</add-edit>
-      </tooltip>
-    </view>
-  </Destroyable>
-  <!--
-  ###################### resoucebundle for rma:accessionable view template ####
-  -->
-  <Accessionable>
-    <view>
-      <label>
-        <not-available>Không xác định</not-available>
-        <accession-executed>Accession Executed</accession-executed>
-        <accession-date>Accession Date</accession-date>
-      </label>
-      <action>
-        <add-edit>Thêm/Chỉnh sửa</add-edit>
-        <cancel>Hủy bỏ</cancel>
-      </action>
-      <tooltip>
-        <cancel>Hủy bỏ</cancel>
-      </tooltip>
-    </view>
-  </Accessionable>
-  <!--
-  ###################### resoucebundle for rma:holdable view template ####
-  -->
-  <Holdable>
-    <view>
-      <label>
-        <not-available>Không xác định</not-available>
-        <hold-executed>Hold Executed</hold-executed>
-        <hold-until>Hold Until</hold-until>
-        <holds-discretionary>Hold Discretionary</holds-discretionary>
-        <hold-until-event>Hold Until Event</hold-until-event>
-        <freeze>Freeze</freeze>
-      </label>
-      <action>
-        <add-edit>Thêm/Chỉnh sửa</add-edit>
-        <cancel>Hủy bỏ</cancel>
-      </action>
-      <tooltip>
-        <cancel>Hủy bỏ</cancel>
-        <add-edit>Thêm/Chỉnh sửa Thuộc tính</add-edit>
-      </tooltip>
-    </view>
-  </Holdable>
-  <!--
-  ###################### resoucebundle rma:record view template ####
-  -->
-  <Record>
-    <view>
-      <label>
-        <not-available>Không xác định</not-available>
-        <supplemental-marking-list>Danh sách Đánh dấu Bổ sung</supplemental-marking-list>
-        <subject>Chủ đề</subject>
-        <record-identifier>Record Identifier</record-identifier>
-        <originator>Originator</originator>
-        <format>Định dạng</format>
-        <addresses>Địa chỉ</addresses>
-        <originating-organization>Originating Organization</originating-organization>
-        <other-addresses>Địa chỉ khác</other-addresses>
-        <publication-date>Publication Date</publication-date>
-        <record-note>Record Note</record-note>
-        <date-received>Ngày Nhận</date-received>
-        <media-format>Định dạng Phương tiện</media-format>
-        <is-obsolete>Is Obsolete</is-obsolete>
-        <date-field>Trường Ngày tháng</date-field>
-        <superseded>Superseded</superseded>
-        <uuid>UUID</uuid>
-      </label>
-      <action>
-        <add-edit>Thêm/Chỉnh sửa</add-edit>
-        <cancel>Hủy bỏ</cancel>
-      </action>
-      <tooltip>
-        <cancel>Hủy bỏ</cancel>
-        <add-edit>Thêm/Chỉnh sửa Thuộc tính</add-edit>
-      </tooltip>
-    </view>
-  </Record>
-  <!--
-  ###################### resoucebundle rma:transferable view template ####
-  -->
-  <Transferable>
-    <view>
-      <label>
-        <not-available>Không xác định</not-available>
-        <transfer-executed>Transfer Executed</transfer-executed>
-        <transfer-date>Ngày Truyền tải</transfer-date>
-        <transfer-location>Vị trí Truyền tải</transfer-location>
-      </label>
-      <action>
-        <add-edit>Thêm/Chỉnh sửa</add-edit>
-        <cancel>Hủy bỏ</cancel>
-      </action>
-      <tooltip>
-        <cancel>Hủy bỏ</cancel>
-        <add-edit>Thêm/Chỉnh sửa Thuộc tính</add-edit>
-      </tooltip>
-    </view>
-  </Transferable>
-  <!--
-  ###################### resoucebundle rma:vitalRecord view template ####
-  -->
-  <VitalRecord>
-    <view>
-      <label>
-        <not-available>Không xác định</not-available>
-        <is-vital-record>Là Bản ghi Quan trọng</is-vital-record>
-        <prev-review-date>Ngày Xem lại Trước đó</prev-review-date>
-        <next-review-date>Ngày Xem lại Kế tiếp</next-review-date>
-      </label>
-      <action>
-        <add-edit>Thêm/Chỉnh sửa</add-edit>
-        <cancel>Hủy bỏ</cancel>
-      </action>
-      <tooltip>
-        <cancel>Hủy bỏ</cancel>
-        <add-edit>Thêm/Chỉnh sửa Thuộc tính</add-edit>
-      </tooltip>
-    </view>
-  </VitalRecord>
-  <!--
-  ###################### resoucebundle exo:contentPublishing dialogs template ####
-  -->
-  <ContentPublishing>
-    <view>
-      <label>
-        <id>Mã</id>
-        <name>#{word.name}</name>
-        <lifecycle>Chu kỳ</lifecycle>
-        <description>#{word.description}</description>
-        <validator>Người phê duyệt</validator>
-        <supervisor>Người giám sát</supervisor>
-        <public-workspace>Publishing Workspace</public-workspace>
-        <public-path>Đường dẫn công bố</public-path>
-        <pending-workspace>Vùng làm việc chờ đợi xử lý</pending-workspace>
-        <pending-path>Đường dẫn vùng làm việc chờ đợi xử lý</pending-path>
-        <backup-workspace>Sao lưu vùng làm việc</backup-workspace>
-        <backup-path>Đường dẫn sao lưu</backup-path>
-        <trash-workspace>Trash Workspace</trash-workspace>
-        <trash-path>Trash Path</trash-path>
-<affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-      </label>
-    </view>
-  </ContentPublishing>
-
-  <SendMail>
-    <view>
-      <label> 
-        <isDeep>Độ sâu</isDeep>
-        <nodetypes>Kiểu node</nodetypes>
-        <affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
-        <nodeTypeName>Tên kiểu node</nodeTypeName>
-      </label> 
-  </view>
-  </SendMail>
 
   <ScriptAction>
     <view>
@@ -544,28 +176,6 @@
     </view>
   </ScriptAction>
   
-  <Getmail>
-    <view>
-      <label>
-        <isDeep>Độ sâu</isDeep>
-        <nodetypes>Kiểu node</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Tên Kiểu Node</nodeTypeName>
-      </label> 
-    </view>
-  </Getmail>
-  
-  <Rss>
-    <view>
-      <label> 
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Kiểu Node</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Tên Kiểu Node</nodeTypeName>
-      </label> 
-    </view>
-  </Rss>
-  
   <AddMetadata>
     <view>
       <label>
@@ -576,28 +186,6 @@
       </label> 
     </view>
   </AddMetadata>
-
-  <ReloadAction>
-    <view>
-      <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Kiểu Node</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Tên Kiểu Node</nodeTypeName>
-      </label> 
-    </view>
-  </ReloadAction>
-
-  <Transform>
-    <view>
-      <label> 
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Kiểu Node</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Tên Kiểu Node</nodeTypeName>
-      </label> 
-    </view>
-  </Transform>
 
   <EnableVersioning>
     <view>

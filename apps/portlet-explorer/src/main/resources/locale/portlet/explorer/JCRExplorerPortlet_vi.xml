@@ -50,35 +50,7 @@
       <vote-restriction>Bạn không thể bình chọn quá 1 lần.</vote-restriction>
     </msg>
   </UIVoteForm>
-  <!--
-  #############################################################################
-  #             org.exoplatform.ecm.webui.component.explorer.UIDrivesBrowser  #
-  #############################################################################
-  -->
-  <UIDrivesBrowser>
-    <title>
-      File Explorer Main Drives
-      <repository>Các Phân vùng trong Kho dữ liệu</repository>
-      <repositoryList>Các Kho dữ liệu</repositoryList>
-      <PersonalDrives>Các ổ đĩa cá nhân</PersonalDrives>
-      <GroupDrives>Các ổ đĩa của nhóm</GroupDrives>
-      <GeneralDrives>Các ổ đĩa chung</GeneralDrives>
-    </title>
-    <icon>
-      <workspace>
-        <production>ProductionIcon</production>
-        <draft>DraftIcon</draft>
-        <backup>BackupIcon</backup>
-        <digital-assets>AssetsIcon</digital-assets>
-      </workspace>
-    </icon>
-    <msg>
-      <no-view-found>Không có giao diện xem nào được áp dụng cho phân quyền truy cập của bạn tại ổ đĩa '{0}'.</no-view-found>
-      <access-denied>Truy cập bị khước từ. Có thể bạn không được phân quyền trong không gian làm việc thuộc phân vùng '{0}'.</access-denied>
-      <empty-drives>Truy cập bị khước từ do không có ổ đĩa nào trong kho dữ liệu này hoặc do bạn không được phân quyền để truy cập bất kỳ ổ đĩa nào trong kho dữ liệu này.</empty-drives>
-      <workspace-not-exist>Ổ đĩa '{0}' đã được lưu trong một không gian lưu trữ không được nhận biết. Vui lòng cấu hình lại ổ đĩa này.</workspace-not-exist>
-    </msg>
-  </UIDrivesBrowser>
+ 
   <!--
   #############################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer    #
@@ -122,7 +94,6 @@
       <backToJCR>Quay trở về danh sách các ổ đĩa</backToJCR>
       <setUpBrowser>Thiết lập hiển thị</setUpBrowser>
       <refesh>Làm mới</refesh>
-      <saveSession>Lưu Phiên làm việc</saveSession>
       <currentDrive>Ổ đĩa Hiện tại</currentDrive>
       <selectView>Chọn Giao diện xem</selectView>
       <showSideBar>Hiện Sidebar</showSideBar>
@@ -130,19 +101,7 @@
       <backTo>Trở lại</backTo>
     </label>
   </UIViewBar>
-  <Views>
-    <label>
-      <simple-view>Hình nhỏ</simple-view>
-      <cover-flow>Cover Flow</cover-flow>
-      <admin-view>Chi tiết</admin-view>
-      <icon-view>Biểu tượng</icon-view>
-      <system-view>Chi tiết</system-view>
-      <anonymous-view>Biểu tượng</anonymous-view>
-      <taxonomy-list>Chi tiết</taxonomy-list>
-      <taxonomy-icons>Biểu tượng</taxonomy-icons>
-      <timeline-view>Hiển thị theo thời gian</timeline-view>
-    </label>
-  </Views>
+
   <!--
   #############################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UITreeExplorer    #
@@ -185,7 +144,6 @@
       <showHiddenNode>Hiện Nút Ẩn:</showHiddenNode>
       <showNonDocument>Hiển thị tất cả các kiểu nút:</showNonDocument>
       <showRefDocuments>Hiện Tài liệu được Tham chiếu:</showRefDocuments>
-      <showItemsByUserInTimeline>Show items by user in Timeline View</showItemsByUserInTimeline>
       <enableDragAndDrop>Bật tính năng Kéo Thả:</enableDragAndDrop>
       <sortBy>Phân loại theo:</sortBy>
       <order>Xếp thứ tự theo:</order>
@@ -242,7 +200,6 @@
       <UIActionContainer>Hành động sửa đổi</UIActionContainer>
       <UIFolderForm>Thêm một thư mục</UIFolderForm>
       <UIUploadManager>Tải lên Tệp tin</UIUploadManager>
-      <UITicketForm>Create New Ticket</UITicketForm>
       <UIReferencesList>Danh sách Tham chiếu</UIReferencesList>
       <UIExportNode>Kết xuất dữ liệu</UIExportNode>
       <UINodeTypeInfo>Thông tin Nút</UINodeTypeInfo>
@@ -274,8 +231,6 @@
       <UIRestoreConfirmMessage>Xác nhận Khôi phục</UIRestoreConfirmMessage>
       <UIActivePublication>Bắt đầu chu trình xuất bản</UIActivePublication>
       <UITaggingForm>Gán nhãn Tài liệu</UITaggingForm>
-      <UIMultiLanguageForm>Đa Ngôn ngữ</UIMultiLanguageForm>
-      <UIMultiLanguageManager>Đa Ngôn ngữ</UIMultiLanguageManager>
       <UIThumbnailForm>Thêm Ảnh Nhỏ</UIThumbnailForm>
       <UIAllItemsPreferenceForm>Thiết lập Tùy chọn</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Chọn Đường dẫn Khôi phục</UISelectRestorePath>
@@ -313,12 +268,10 @@
       <Upload>Tải lên</Upload>
       <Paste>Dán</Paste>
       <Search>Tìm kiếm</Search>
-      <CreateTicket>New Ticket</CreateTicket>
       <WatchDocument>Theo dõi/Ngừng theo dõi</WatchDocument>
       <TaggingDocument>Gán nhãn</TaggingDocument>
       <Vote>Bình chọn</Vote>
       <Comment>Nhận xét</Comment>
-      <MultiLanguage>Add/Edit Localized Content</MultiLanguage>
       <ManageVersions>Phiên bản</ManageVersions>
       <ManageAuditing>Quản lý thay đổi</ManageAuditing>
       <ManagePublications>Xuất bản</ManagePublications>
@@ -372,8 +325,6 @@
       <watch-checkedin>Bạn phải check out nút trước khi theo dõi.</watch-checkedin>
       <unsupported-tagging>Chỉ có thể gán nhãn cho nút tài liệu.</unsupported-tagging>
       <tagnode-checkedin>Bạn phải check out nút trước khi gán nhãn.</tagnode-checkedin>
-      <unsupported-multilanguage>Bạn không thể thêm ngôn ngữ cho nút này vì nút này không phải thuộc kiểu tài liệu hoặc là kiểu kết hợp giữa một số kiểu.</unsupported-multilanguage>
-      <multilang-checkedin>Bạn phải check out nút trước khi thêm ngôn ngữ.</multilang-checkedin>
     </msg>
     <title>
       <select-tab>Chọn Tab</select-tab>
@@ -607,13 +558,6 @@
       <CheckOut>Checkout</CheckOut>
       <CheckIn>Checkin</CheckIn>
       <WebDAV>Xem dạng WebDAV</WebDAV>
-      <sendmail>Gửi Thư</sendmail>
-      <transformsd>Biến đổi</transformsd>
-      <reloadBP>Tải lại BP</reloadBP>
-      <workflow>Luồng công việc</workflow>
-      <createRSS>Tạo RSS</createRSS>
-      <icalendara>Tạo Icalendar</icalendara>
-      <getmail>Lấy Thư</getmail>
       <autoversion>Tự động Tạo phiên bản</autoversion>
       <Custom>Tùy chỉnh</Custom>
       <AddFolder>Thư mục Mới</AddFolder>
@@ -632,32 +576,7 @@
       <WebDavView>Tải về và chỉnh sửa</WebDavView>
     </event>
   </ECMContextMenu>
-  <!--
-  #############################################################################
-  #             org.exoplatform.ecm.webui.component.explorer.UITicketForm     #
-  #############################################################################
-  -->
-  <UITicketForm>
-    <title>Create Ticket</title>
-    <label>
-      <users>Users</users>
-      <permission>Phân quyền</permission>
-      <creator>Người khởi tạo</creator>
-      <accessTime>Access Time</accessTime>
-      <accessLimit>Access Limit</accessLimit>
-      <description>Mô tả</description>
-      <sendToMail>Send to Mail</sendToMail>
-      <ticketID>Ticket ID</ticketID>
-    </label>
-    <action>
-      <Cancel>#{word.cancel}</Cancel>
-      <Update>#{word.update}</Update>
-      <Save>#{word.save}</Save>
-    </action>
-    <msg>
-      <unable-create>Cannot create the ticket.</unable-create>
-    </msg>
-  </UITicketForm>
+ 
   <!--
   #############################################################################
   #     org.exoplatform.ecm.webui.component.explorer.UIReferencesList         #
@@ -718,7 +637,7 @@
       <UISelectedCategoriesGrid>Danh mục Tham chiếu</UISelectedCategoriesGrid>
       <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
       <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
-      <metadatasitemetadata>Siêu dữ liệu của site</metadatasitemetadata>
+      <metadatasitemetadata>Siêu dữ liệu của trang web</metadatasitemetadata>
       <dcelementset>Dublin Core</dcelementset>
     </title>
   </UITabPane>
@@ -786,37 +705,7 @@
       <property-not-exist>Thuộc tính {0} không tồn tại.</property-not-exist>
     </msg>
   </UIPropertyForm>
-  <!--
-  #############################################################################
-  #           org.exoplatform.ecm.webui.component.explorer.UIMixinTypeSelect  #
-  #############################################################################
-  -->
-  <UIMixinTypeSelect>
-    <label>
-      <selectTemplate>Chọn Mẫu thiết kế</selectTemplate>
-    </label>
-  </UIMixinTypeSelect>
-  <UIMixinTypeForm>
-    <action>
-      <Save>Lưu</Save>
-      <Cancel>Hủy bỏ</Cancel>
-      <Reset>Thiết lập lại</Reset>
-    </action>
-  </UIMixinTypeForm>
-  <!--
-  #############################################################################
-  #           org.exoplatform.ecm.webui.component.explorer.UIMetadataTab     #
-  #############################################################################
-  -->
-  <UIMetadataTab>
-    <title>Nhập giá trị cho các yếu tố siêu dữ liệu</title>
-    <label>
-      <metadataName>Tên Siêu dữ liệu</metadataName>
-    </label>
-    <action>
-      <Save>Lưu</Save>
-    </action>
-  </UIMetadataTab>
+
   <!--
   #############################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UIPermissionInfo #
@@ -893,95 +782,7 @@
       <access-denied>Truy cập bị khước từ. Bạn không thể xóa phân quyền này.</access-denied>
     </msg>
   </UIPermissionForm>
-  <!--
-  ###############################################################################
-  #             org.exoplatform.ecm.webui.component.explorer.UIDriveDescription #
-  ###############################################################################
-  -->
-  <UIDriveDescription>
-    <title>Mô tả</title>
-  </UIDriveDescription>
-  <!--
-  ###############################################################################
-  #             org.exoplatform.ecm.webui.component.explorer.UIReferencesList #
-  ###############################################################################
-  -->
-  <!--
-  ################################################################################
-  #          org.exoplatform.ecm.webui.component.explorer.actions.UIUploadForm   #
-  ################################################################################
-  -->
-  <UIUploadForm>
-    <title>Tải lên Tệp tin</title>
-    <label>
-      <upload>Chọn Tệp tin</upload>
-      <name>Tên</name>
-      <fieldListTaxonomy>Danh sách Danh mục</fieldListTaxonomy>
-    </label>
-    <action>
-      <Save>Lưu</Save>
-      <Cancel>Hủy bỏ</Cancel>
-    </action>
-    <msg>
-      <fileName-error>Vui lòng chọn tệp tin để tải lên.</fileName-error>
-      <taxonomyPath-error>Vui lòng chọn danh mục.</taxonomyPath-error>
-      <fileName-invalid>Tên tệp tin chứa một số ký tự không hợp lệ. Vui lòng nhập lại tên tệp tin hoặc tải lên tệp tin khác.</fileName-invalid>
-      <fileName-invalid-with-name>Tên tệp tin '{0}' chứa một số ký tự không hợp lệ. Vui lòng nhập lại tên tệp tin hoặc tải lên tệp tin khác.</fileName-invalid-with-name>
-      <fileSize-too-big>Kích thước tệp tin quá lớn. Vui lòng chia thành các tệp tin nhỏ hơn hoặc sử dụng WebDAV để tải lên.</fileSize-too-big>
-      <name-is-exist>Tên '{0}' đã tồn tại.</name-is-exist>
-      <contraint-violation>Bạn không thể thêm nút '{0}' dưới dạng nút con của chính nó.</contraint-violation>
-      <lock-exception>Bạn không thể tải lên tệp tin này vì nó hiện đang bị khóa.</lock-exception>
-      <confirm-behavior>Đã tồn tại một tài liệu với tên '{0}' tại vị trí này. Hãy chọn một cách bạn muốn để tạo tài liệu:</confirm-behavior>
-    </msg>
-  </UIUploadForm>
-  <UIUploadContent>
-    <label>
-      <fileName>Tên tệp tin</fileName>
-      <nodeName>Tên nút</nodeName>
-      <fileSize>Kích thước tập tin</fileSize>
-      <mimeType>Định dạng</mimeType>
-    </label>
-    <title>
-      <uploaded-file>Tệp tin được Tải lên</uploaded-file>
-      <external-metadata>Siêu dữ liệu Bên ngoài</external-metadata>
-      <metadata-name>Tên Siêu dữ liệu</metadata-name>
-      <action>Hành động</action>
-    </title>
-    <tooltip>
-      <Edit>Chỉnh sửa</Edit>
-    </tooltip>
-    <msg>
-      <has-not-template>Mẫu của '(0)' là null hoặc rỗng.</has-not-template>
-    </msg>
-  </UIUploadContent>
-  <UIUploadContainer>
-    <action>
-      <Close>Đóng</Close>
-      <AddMetadata>Thêm Siêu dữ liệu</AddMetadata>
-    </action>
-    <tab>
-      <label>
-        <UIUploadContent>Thông tin</UIUploadContent>
-        <UIAddMetadataForm>Siêu dữ liệu mẫu</UIAddMetadataForm>
-      </label>
-    </tab>
-  </UIUploadContainer>
-  <AddMetadataPopup>
-    <title>
-      <UIExternalMetadataForm>Thêm siêu dữ liệu bên ngoài</UIExternalMetadataForm>
-    </title>
-  </AddMetadataPopup>
-  <UIExternalMetadataForm>
-    <msg>
-      <can-not-add>Node này không thể thêm mixin.</can-not-add>
-    </msg>
-  </UIExternalMetadataForm>
-  <UIAddMetadataForm>
-    <action>
-      <Cancel>Hủy bỏ</Cancel>
-      <Save>Lưu lại</Save>
-    </action>
-  </UIAddMetadataForm>
+
   <!--
   ###############################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UINodeTypeInfo     #
@@ -2060,43 +1861,7 @@
       <tagName>Tách nhiều thẻ bằng dấu phẩy ","</tagName>
     </introduction>
   </UITaggingForm>
-  <!--
-  ###################################################################################
-  # org.exoplatform.ecm.webui.component.explorer.popup.actions.UIMultiLanguageForm  #
-  ###################################################################################
-  -->
-  <UIMultiLanguageForm>
-    <label>
-      <languages>Ngôn ngữ</languages>
-      <default>Mặc định</default>
-    </label>
-    <action>
-      <AddLanguage>Thêm</AddLanguage>
-      <SetDefault>Thiết lập mặc định</SetDefault>
-      <Cancel>#{word.cancel}</Cancel>
-      <View>Hiển thị</View>
-    </action>
-    <msg>
-      <access-denied>Truy cập bị từ chối. Bạn không có quyền thêm mới trong nút này.</access-denied>
-    </msg>
-  </UIMultiLanguageForm>
-  <UILanguageTypeForm>
-    <label>
-      <typeLang>Ngôn ngữ</typeLang>
-      <default>Thiết lập mặc định</default>
-      <defaultLang>Ngôn ngữ mặc định</defaultLang>
-    </label>
-  </UILanguageTypeForm>
-  <UILanguageDialogForm>
-    <msg>
-      <select-lang>Bạn phải chọn một ngôn ngữ và điền các thông tin trước khi lưu.</select-lang>
-      <access-denied>Truy cập bị từ chối. Bạn không có quyền thêm mới trong nút này.</access-denied>
-    </msg>
-    <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
-    </action>
-  </UILanguageDialogForm>
+
   <!--
   ###################################################################################
   # org.exoplatform.ecm.webui.component.explorer.popup.info.UIMetadataContainer     #
@@ -2377,31 +2142,6 @@
   <!--
   ###Since ECM version 2.2##############
   -->
-  <!--
-  ###Since ECM version 2.3 Alpha##############
-  -->
-  <UIWorkflowPublicationActionForm>
-    <label>
-      <fieldValidator>Field Validator</fieldValidator>
-      <fieldDestPath>Field DestPath</fieldDestPath>
-      <fieldBackup>Field Backup</fieldBackup>
-    </label>
-  </UIWorkflowPublicationActionForm>
-  <workflow_validator>
-    <title>
-      <AddPermission>Add Permission</AddPermission>
-    </title>
-  </workflow_validator>
-  <workflow_destpath>
-    <title>
-      <AddDestPath>Add Path</AddDestPath>
-    </title>
-  </workflow_destpath>
-  <PublicationService>
-    <WorkflowPublicationPlugin>
-      <nodeValidationRequest>The node has been requested for validation.</nodeValidationRequest>
-    </WorkflowPublicationPlugin>
-  </PublicationService>
 
   <!--
   ### Since ECM version 2.3 Alpha##############
@@ -2419,14 +2159,11 @@
       <Cancel>Hủy bỏ</Cancel>
     </action>
     <label>
-      <repository>Kho dữ liệu</repository>
-      <categoryMandatoryWhenFileUpload>Bắt buộc chọn danh mục khi tải lên</categoryMandatoryWhenFileUpload>
       <uploadFileSizeLimitMB>Giới hạn kích thước tệp tải lên (MB)</uploadFileSizeLimitMB>
       <isDirectlyDrive>Ổ đĩa Trực tiếp</isDirectlyDrive>
       <driveName>Tên ổ đĩa</driveName>
       <usecase>Kiểu truy cập</usecase>
       <SelectNodePath>Chọn Đường dẫn</SelectNodePath>
-      <editInNewWindow>Chỉnh sửa trong Cửa sổ Mới</editInNewWindow>
       <showTopBar>Hiện Thanh Trên Cùng</showTopBar>
       <showActionBar>Hiện Thanh Hành động</showActionBar>
       <showSideBar>Hiện Thanh Trái</showSideBar>
@@ -2447,7 +2184,6 @@
       <DriveNameInput>UI JCR Explorer Edit Form</DriveNameInput>
     </label>
     <msg>
-      <not-have-social>The Social usecase is not available. Use the Selection one instead.</not-have-social>
       <personal-usecase>Ổ đĩa cá nhân của người sử dụng hiện tại sẽ được sử dụng khi bạn chọn kiểu truy cập là người dùng.</personal-usecase>
       <drive-edit-permission>Bạn không thể Chỉnh sửa tên ổ đĩa. Vui lòng nhấp chọn nút Chỉnh sửa.</drive-edit-permission>
       <path-edit-permission>Bạn không thể Chỉnh sửa đường dẫn. Hãy nhấp chọn nút Chỉnh sửa.</path-edit-permission>
@@ -2781,64 +2517,17 @@
       <name-not-allowed>Một từ hoặc một cụm từ trong nội dung không hợp lệ.</name-not-allowed>
     </msg>
   </UISimpleSearch>
-  <Drives>
-    <label>
-      <Private>Riêng tư</Private>
-      <Public>Công khai</Public>
-      <BackupCenter>Ổ đĩa sao lưu</BackupCenter>
-      <CategorizedDocumentsCenter>Categorized Documents Center</CategorizedDocumentsCenter>
-      <CollaborationCenter>Collaboration Center</CollaborationCenter>
-      <DigitalAssetsManagementCenter>Digital Assets Management Center</DigitalAssetsManagementCenter>
-      <DMSAdministration>Quản trị DMS</DMSAdministration>
-      <DocumentsManagementCenter>Ổ đĩa quản lý tài liệu</DocumentsManagementCenter>
-      <LiveDocumentsCenter>Ổ đĩa chứa tài liệu có hiệu lực</LiveDocumentsCenter>
-      <PendingDocumentsCenter>Ổ đĩa chứa tài liệu chưa xử lý</PendingDocumentsCenter>
-      <RecordsManagementCenter>Ổ đĩa quản lý hồ sơ</RecordsManagementCenter>
-      <SharedUsersSpace>Ổ đĩa chia sẻ cho người dùng</SharedUsersSpace>
-      <Systemfiles>System Files</Systemfiles>
-      <ValidationRequestsDocumentsCenter>Validation Requests Documents Center</ValidationRequestsDocumentsCenter>
-    </label>
-  </Drives>
 
 
   <!--
    #############  From DMS 2.6 #############
   -->
-  <UIUploadContent>
-    <tooltip>
-      <ManageMetadata>Quản lý Siêu dữ liệu</ManageMetadata>
-    </tooltip>
-    <label>
-      <manageMetadata>Quản lý Siêu dữ liệu</manageMetadata>
-    </label>
-  </UIUploadContent>
-  <UIUploadForm>
-    <action>
-      <AddUpload>Add Upload</AddUpload>
-      <RemoveUpload>Remove Upload</RemoveUpload>
-    </action>
-  </UIUploadForm>
-  <UIExternalMetadataForm>
-    <action>
-      <Add>Thêm</Add>
-      <Cancel>Hủy bỏ</Cancel>
-    </action>
-  </UIExternalMetadataForm>
-    <!--
-   #############  From DMS 2.6 #############
-   -->
   <ECMContextMenu>
       <event>
         <Permlink>Xem tài liệu</Permlink>
       </event>
   </ECMContextMenu>
-  <UIUploadContainer>
-    <tab>
-      <label>
-        <UIListMetadata>List External Metadata</UIListMetadata>
-      </label>
-    </tab>
-  </UIUploadContainer>
+  
 
   <!--
     ############  From DMS 2.6 ##############
@@ -2865,11 +2554,6 @@
       <confirm-deletecomment>Bạn có chắc chắn muốn xóa bình luận này không?</confirm-deletecomment>
     </msg>
   </UIDocumentInfo>
- <UIDrivesBrowser>
-  <msg>
-    <drive-not-exist>Không tìm thấy ổ đĩa '{0}'. Có thể bạn không có quyền truy cập kho dữ liệu này.</drive-not-exist>
-  </msg>
- </UIDrivesBrowser>
 
  <UIExportNode>
   <msg>
@@ -2901,89 +2585,6 @@
     </title>
   </SameNamePopup>
 
-  <UISingleUploadForm>
-    <title>Tải Tệp tin lên</title>
-    <label>
-      <upload>Chọn Tệp tin</upload>
-      <name>Tên</name>
-      <fieldListTaxonomy>Danh sách Danh mục</fieldListTaxonomy>
-    </label>
-    <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
-    </action>
-    <msg>
-      <fileName-error>Vui lòng đảm bảo bạn đã tải tệp tin đã chọn lên máy chủ bằng cách dùng biểu tượng Tải lên.</fileName-error>
-      <taxonomyPath-error>Vui lòng chọn danh mục!</taxonomyPath-error>
-      <fileName-invalid>Tên tệp tin chứa một số ký tự không hợp lệ. Vui lòng nhập lại tên tập tin hoặc tải lên tệp khác.</fileName-invalid>
-      <fileSize-too-big>Tập tin này quá lớn. Bạn cần chia thành một số tập tin nhỏ hơn hoặc dùng WebDAV để tải lên.</fileSize-too-big>
-      <name-is-exist>The name '{0}' already exists. You cannot upload a file with the same name, except for 'nt:file'.</name-is-exist>
-      <contraint-violation>You cannot add the node '{0}' to this node because it is not allowed as child's node type for parent node type.</contraint-violation>
-      <lock-exception>Nút này đang bị khóa. Do vậy một số thao tác sẽ không thể chạy được như mong muốn cho đến khi khoá được mở.</lock-exception>
-    </msg>
-  </UISingleUploadForm>
-  <UISingleUploadContent>
-    <label>
-      <fileName>Tên tệp tin</fileName>
-      <nodeName>Tên nút</nodeName>
-      <fileSize>Kích thước tập tin</fileSize>
-      <mimeType>Định dạng</mimeType>
-    </label>
-    <title>
-      <uploaded-file>Tệp tin được tải lên</uploaded-file>
-      <external-metadata>Siêu dữ liệu Bên ngoài</external-metadata>
-      <metadata-name>Tên Metadata</metadata-name>
-      <action>Thao tác</action>
-    </title>
-    <tooltip>
-      <Edit>Chỉnh sửa</Edit>
-    </tooltip>
-    <msg>
-      <has-not-template>Mẫu của '(0)' là null hoặc rỗng.</has-not-template>
-    </msg>
-  </UISingleUploadContent>
-  <UISingleUploadContainer>
-    <action>
-      <Close>#{word.close}</Close>
-      <AddMetadata>Thêm siêu dữ liệu</AddMetadata>
-    </action>
-    <tab>
-      <label>
-        <UISingleUploadContent>Thông tin</UISingleUploadContent>
-        <UISingleAddMetadataForm>Siêu dữ liệu mẫu</UISingleAddMetadataForm>
-      </label>
-    </tab>
-  </UISingleUploadContainer>
-  <UISingleExternalMetadataForm>
-    <action>
-      <Add>Thêm</Add>
-      <Cancel>Thoát</Cancel>
-    </action>
-  </UISingleExternalMetadataForm>
-  <UISingleUploadContainer>
-    <tab>
-      <label>
-        <UIListMetadata>Danh sách siêu dữ liệu bên ngoài</UIListMetadata>
-      </label>
-    </tab>
-  </UISingleUploadContainer>
-  <AddMetadataPopup>
-    <title>
-      <UISingleExternalMetadataForm>Thêm siêu dữ liệu bên ngoài</UISingleExternalMetadataForm>
-    </title>
-  </AddMetadataPopup>
-  <UISingleExternalMetadataForm>
-    <msg>
-      <can-not-add>This node cannot add mixin.</can-not-add>
-    </msg>
-  </UISingleExternalMetadataForm>
-  <UISingleAddMetadataForm>
-    <action>
-      <Cancel>Thoát</Cancel>
-      <Save>Cất</Save>
-    </action>
-  </UISingleAddMetadataForm>
-
   <UIAllItems>
     <label>
       <OwnedByMe>Của tôi</OwnedByMe>
@@ -3007,36 +2608,6 @@
           <Descending>Giảm dần</Descending>
       </label>
   </UIPreferencesForm>
-
-  <UIDocumentInfo>
-    <label>
-      <Today>Ngày hôm nay</Today>
-      <Yesterday>Ngày hôm qua</Yesterday>
-      <EarlierThisWeek>Trong tuần</EarlierThisWeek>
-      <EarlierThisMonth>Trong tháng</EarlierThisMonth>
-      <EarlierThisYear>Earlier This Year</EarlierThisYear>
-      <tooltip>
-        <expand>Ấn vào đây để xem danh sách đầy đủ của danh mục này</expand>
-        <collapse>Ấn vào đây để xem tất cả các danh mục</collapse>
-      </tooltip>
-    </label>
-    <header>
-      <dateTime>Date Time</dateTime>
-      <name>Tên</name>
-      <title>Tiêu đề của tài liệu</title>
-    </header>
-    <tooltip>
-      <View>Xem</View>
-      <RemoveFromFavourite>Xóa khỏi mục ưa thích</RemoveFromFavourite>
-      <AddToFavourite>Thêm vào mục ưa thích</AddToFavourite>
-      <timelineFavouriteDESC>Sort by Favorite: Descending order</timelineFavouriteDESC>
-      <timelineFavouriteASC>Sort by Favorite: Ascending order</timelineFavouriteASC>
-      <timelineDateTimeASC>Sort by Modified Time: Ascending order</timelineDateTimeASC>
-      <timelineDateTimeDESC>Sort by Modified Time: Descending order</timelineDateTimeDESC>
-      <timelineNameASC>Sort by Name: Ascending order</timelineNameASC>
-      <timelineNameDESC>Sort by Name: Descending order</timelineNameDESC>
-    </tooltip>
-  </UIDocumentInfo>
 
   <UISavedSearches>
     <title>
@@ -3139,8 +2710,6 @@
    <UITaggingForm>
     <label>
       <Public>Công khai</Public>
-      <Group>Nhóm</Group>
-      <Site>Site</Site>
       <Private>Riêng</Private>
       <tagScopes>Phạm vi</tagScopes>
     </label>
@@ -3148,7 +2717,6 @@
 
   <UITagExplorer>
     <title>
-      <EditPrivateTags>Edit Private Tags</EditPrivateTags>
       <PublicTags>Nhãn</PublicTags>
       <EditPublicTags>Sửa nhãn</EditPublicTags>
       <PrivateTags>Thẻ</PrivateTags>

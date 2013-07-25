@@ -53,7 +53,7 @@
       <label>
         <name>Tên</name>
         <active>Bật</active>
-        <priority>Độ ưu tiên</priority>
+        <priority>Mức ưu tiên</priority>
         <content>Dữ liệu CSS</content>
       </label>
     </dialog>
