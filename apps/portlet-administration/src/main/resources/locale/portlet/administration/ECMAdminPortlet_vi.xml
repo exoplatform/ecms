@@ -15,7 +15,6 @@
       </label>
     </tab>    
     <label>     
-      <UITaxonomyManager>Quản lý Danh mục Đơn giản</UITaxonomyManager>
       <UITaxonomyManagerTrees>Danh mục</UITaxonomyManagerTrees>
       <UIMetadataManager>Siêu dữ liệu</UIMetadataManager>
       <UINamespaceManager>Định danh</UINamespaceManager>
@@ -426,215 +425,13 @@
       <action>Hành động</action>
     </header>
   </UITreeList>
-  <!--
-  ################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.UIRepositoryManager #
-  ################################################################################
-  -->
-  <UIRepositoryControl>
-    <label>
-      <repoName>Kho dữ liệu hiện tại</repoName>
-    </label>
-    <title>
-      <repoAdd>Thêm Kho dữ liệu</repoAdd>
-      <repoEdit>Chỉnh sửa Kho dữ liệu</repoEdit>
-      <repoDelete>Gỡ bỏ Kho dữ liệu</repoDelete>
-    </title>
-    <msg>
-      <cannot-deleteRepo>Bạn không thể xóa {0} vì nó là mặc định.</cannot-deleteRepo>
-    </msg>
-  </UIRepositoryControl>
-  <UIECMAdminUIPopupWindow>
-    <title>
-      <UIRepositoryFormContainer>Kho dữ liệu</UIRepositoryFormContainer>
-      <Delete>Xóa</Delete>
-      <UIRepositoryList>Danh sách Kho dữ liệu</UIRepositoryList>
-    </title>
-  </UIECMAdminUIPopupWindow>
-  <UIPopupWindowControl>
-    <title>
-      <UIWorkspaceWizardContainer>Hướng dẫn Không gian lưu trữ</UIWorkspaceWizardContainer>
-      <UIRepositoryValueSelect>Select Authentication Class</UIRepositoryValueSelect>
-    </title>
-  </UIPopupWindowControl>
-  <UIPopupWindowInWizard>
-    <title>
-      <UIPermissionSelector>Chọn Phân quyền</UIPermissionSelector>
-      <UIPermissionContainer>Chọn Phân quyền</UIPermissionContainer>
-      <UIRepositoryValueSelect>Select Class</UIRepositoryValueSelect>
-    </title>
-  </UIPopupWindowInWizard>
-  <UIRepositoryValueSelect>
-    <header>
-      <name>Tên đầy đủ</name>
-      <action>Chọn</action>
-    </header>
-    <action>
-      <Close>Đóng</Close>
-    </action>
-  </UIRepositoryValueSelect>
-  <UIRepositorySelectForm>
-    <msg-editError>Một số lỗi đã xảy ra với kho dữ liệu '{0}'. Hãy kiểm tra các tùy chọn thiết lập hoặc tạo mới kho dữ liệu.</msg-editError>
-    <msg-accessdenied>Bạn không được phân quyền để chỉnh sửa kho dữ liệu '{0}'.</msg-accessdenied>
-  </UIRepositorySelectForm>
-  <UIRepositoryForm>
-    <label>
-      <name>Tên</name>
-      <wsInputSet>UIRepositoryForm</wsInputSet>
-      <authInputSet>UIRepositoryForm</authInputSet>
-      <workspace>Không gian lưu trữ</workspace>
-      <isDefault>Đặt mặc định</isDefault>
-      <accessControl>Kiểm soát Truy Cập</accessControl>
-      <authenticationPolicy>Chính sách Xác thực</authenticationPolicy>
-      <securityDomain>Tên miền An ninh</securityDomain>
-      <sessionTime>Kết thúc Phiên làm việc</sessionTime>
-      <channelConfig>Cấu hình Kênh</channelConfig>
-      <enableReplication>Bật Sao lưu</enableReplication>
-      <repMode>Chế độ Sao lưu</repMode>
-      <repTestMode>Thử nghiệm sao lưu không?</repTestMode>
-      <directoryPath>Thư mục</directoryPath>
-      <maxBufferSize>Bộ nhớ đệm lớn nhất</maxBufferSize>
-    </label>
-    <msg>
-      <cannot-delete-default-workspace>Không thể xóa không gian lưu trữ '{0}' vì đó là không gian mặc định.</cannot-delete-default-workspace>
-      <repoName-exist>Kho dữ liệu '{0}' đã tồn tại.</repoName-exist>
-      <repoName-not-alow>Tên kho dữ liệu chứa một số ký tự không hợp lệ.</repoName-not-alow>
-      <workspace-isrequire>Vui lòng chọn ít nhất một không gian lưu trữ.</workspace-isrequire>
-      <cannot-delete-workspace>Không thể xóa không gian lưu trữ {0}.</cannot-delete-workspace>
-      <workspace-setdefault>Bạn phải thiết lập không gian lưu trữ mặc định.</workspace-setdefault>
-      <!--DMS 2.4.x ECM-3611> -->
-      <workspace-setDMSsystem>Bạn phải thiết lập không gian lưu trữ hệ thống DMS.</workspace-setDMSsystem>
-      <workspace-bseChanel>Kênh là bắt buộc</workspace-bseChanel>
-      <workspace-bseMode>Bắt buộc phải có chế độ sao lưu.</workspace-bseMode>
-      <workspace-bsePath>Yêu cầu phải có thư mục.</workspace-bsePath>
-      <sessionTime-invalid>Kết thúc phiên làm việc có định dạng số không hợp lệ.</sessionTime-invalid>
-      <sessionTime-required>Yêu cầu phải có kết thúc phiên làm việc.</sessionTime-required>
-      <workspace-bseBuffer>Yêu cầu phải có bộ nhớ đệm lớn nhất.</workspace-bseBuffer>
-      <authen-isrequire>Bắt buộc phải có chính sách xác thực.</authen-isrequire>
-      <confirm-workspace-delete>Bạn có chắc chắn muốn xóa không gian lưu trữ này không?</confirm-workspace-delete>
-    </msg>
-    <action>
-      <Close>Đóng</Close>
-      <Save>Lưu</Save>
-      <Reset>Thiết lập lại</Reset>
-      <AddWorkspace>Thêm Không gian lưu trữ</AddWorkspace>
-    </action>
-  </UIRepositoryForm>
+  
   <UIRepositoryList>
     <titlebar>
-      <label>Quản lý Chức năng Chính ECM</label>
+      <label>Các Chức năng Quản trị nội dung</label>
     </titlebar>
-    <header>
-      <name>Tên</name>
-      <workspaces>Không gian lưu trữ</workspaces>
-      <isdefault>Mặc định</isdefault>
-      <accesscontrol>Kiểm soát Truy cập</accesscontrol>
-      <sessiontimeout>Kết thúc Phiên làm việc</sessiontimeout>
-      <action>Hành động</action>
-    </header>
-    <action>
-      <Close>Đóng</Close>
-    </action>
-    <msg>
-      <cannot-delete>Bạn không thể xóa '{0}' vì nó có thể đang được dùng.</cannot-delete>
-      <confirm-delete>Bạn có chắc chắn muốn xóa kho dữ liệu này không?</confirm-delete>
-    </msg>
   </UIRepositoryList>
-  <UIWorkspacePermissionForm>
-    <label>
-      <permission>Phân quyền</permission>
-      <read>Quyền đọc</read>
-      <add_node>Quyền Thêm node</add_node>
-      <set_property>Thiết lập Thuộc tính</set_property>
-      <remove>Quyền Xóa</remove>
-    </label>
-    <action>
-      <Save>Lưu</Save>
-      <Cancel>Hủy bỏ</Cancel>
-    </action>
-    <msg>
-      <check-one>Bạn phải chọn ít nhất một quyền cho phân quyền đó.</check-one>
-    </msg>
-  </UIWorkspacePermissionForm>
-  <PermissionPopupSelect>
-    <title>
-      <UIPermissionSelector>Chọn Phân quyền</UIPermissionSelector>
-    </title>
-    <label>
-      <selectGroup>Chọn Nhóm</selectGroup>
-      <selectMembership>Chọn Kiểu thành viên</selectMembership>
-    </label>
-  </PermissionPopupSelect>
-  <UIWorkspaceWizard>
-    <msg>
-      <wsname-exist>Không gian lưu trữ '{0}' đã tồn tại trong cơ sở dữ liệu này.</wsname-exist>
-      <name-require>Bắt buộc phải có tên không gian lưu trữ.</name-require>
-      <permission-require>Bạn phải chọn một phân quyền.</permission-require>
-      <nodeType-invalid>Kiểu node được khởi chạy tự động trong không gian lưu trữ mặc định phải ở dạng nt:unstructured.</nodeType-invalid>
-      <!--DMS 2.4.x ECM-3611-->
-      <nodeType-invalidSystemWs>Kiểu node được khởi chạy tự động trong không gian lưu trữ hệ thống DMS phải ở dạng nt:unstructured.</nodeType-invalidSystemWs>
-      <lockTimeOut-required>The lock timeout is required.</lockTimeOut-required>
-      <lockTimeOut-invalid>Kết thúc hoạt động khóa phải ở định dạng số.</lockTimeOut-invalid>
-      <buffer-invalid>Dung lượng bộ nhớ đệm phải ở định dạng số.</buffer-invalid>
-      <buffer-require>Yêu cầu phải có dung lượng bộ nhớ đệm.</buffer-require>
-      <buffer-zero>Bộ nhớ đệm phải có dung lượng lớn hơn 0.</buffer-zero>
-      <buffer-small>Dung lượng bộ nhớ đệm quá nhỏ.</buffer-small>
-      <containerName-invalid>The container name is required.</containerName-invalid>
-      <maxSize-require>Yêu cầu phải có dung lượng lớn nhất của bộ lưu trữ.</maxSize-require>
-      <maxSize-invalid>Dung lượng tối đa của bộ lưu trữ phải ở định dạng số.</maxSize-invalid>
-      <maxSize-rezo>Dung lượng lớn nhất của bộ lưu trữ phải lớn hơn 0.</maxSize-rezo>
-      <liveTime-require>Yêu cầu phải có thời gian tồn tại của bộ lưu trữ.</liveTime-require>
-      <liveTime-invalid>Thời gian tồn tại của bộ lưu trữ phải ở định dạng số.</liveTime-invalid>
-      <liveTime-rezo>Thời gian tồn tại của bộ lưu trữ phải lớn hơn 0.</liveTime-rezo>
-      <sourceName-invalid>Yêu cầu phải có tên nguồn.</sourceName-invalid>
-      <storePath-invalid>Bắt buộc phải có đường dẫn lưu trữ.</storePath-invalid>
-      <swapPath-invalid>Yêu cầu phải có đường dẫn hoán đổi.</swapPath-invalid>
-      <queryHandlerType>Yêu cầu phải có kiểu xử lý truy vấn.</queryHandlerType>
-      <indexPath-invalid>Yêu cầu phải có đường dẫn chỉ số truy vấn.</indexPath-invalid>
-      <storeType-invalid>Yêu cầu phải có kiểu lưu trữ.</storeType-invalid>
-      <queryHandlerType-invalid>Yêu cầu phải có bộ xử lý truy vấn.</queryHandlerType-invalid>
-      <permission-invalid>Bạn phải chọn ít nhất một quyền.</permission-invalid>
-    </msg>
-    <label>
-      <step>Bước</step>
-      <wizardSteps>Các Bước Wizard</wizardSteps>
-      <name>Tên</name>
-      <autoInitializedRootNt>Kiểu Node Gốc</autoInitializedRootNt>
-      <isDefault>Đặt làm Mặc định</isDefault>
-      <!--DMS 2.4.x ECM-3611-->
-      <isDMSSytemWs>Thiết lập dưới dạng Không gian lưu trữ Hệ thống DMS</isDMSSytemWs>
-      <permission>Auto-init Permission</permission>
-      <setLockTimeOut>Kết thúc thời gian khóa</setLockTimeOut>
-      <container>Kiểu Container</container>
-      <sourceName>Tên Nguồn</sourceName>
-      <dbType>Dialect</dbType>
-      <isMulti>Is Multiple</isMulti>
-      <storeType>Kiểu Lưu trữ</storeType>
-      <filterType>Bộ lọc</filterType>
-      <maxBuffer>Bộ đệm lớn nhất (byte)</maxBuffer>
-      <swapPath>Đường dẫn Trao đổi</swapPath>
-      <storePath>Đường dẫn lưu trữ</storePath>
-      <externalStore>Các Lưu trữ Giá trị Bên ngoài</externalStore>
-      <queryHandler>Điều khiển Truy vấn</queryHandler>
-      <indexPath>Đường dẫn Chỉ số Truy vấn</indexPath>
-      <isCache>Cho phép Lưu trữ</isCache>
-      <maxSize>Dung lượng Lưu trữ Lớn nhất</maxSize>
-      <liveTime>Cache Live Time</liveTime>
-    </label>
-    <tab>
-      <info>
-        <step1>Nhập tên không gian lưu  trữ, kiểu node và nhiều giá trị khác.</step1>
-        <step2>Configure for containers, storage and more.</step2>
-        <step3>Cấu hình cho bộ lưu trữ, điều khiển truy vấn và nhiều tính năng khác.</step3>
-      </info>
-    </tab>
-    <action>
-      <Next>#{word.next}</Next>
-      <Back>Quay lại</Back>
-      <Finish>Kết thúc</Finish>
-      <Cancel>Hủy bỏ</Cancel>
-    </action>
-  </UIWorkspaceWizard>
+  
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
@@ -982,8 +779,6 @@
     <title>
       <UIViewContainer>Giao diện xem</UIViewContainer>
       <ECMTemplate>Các mẫu Explorer</ECMTemplate>
-      <CBTemplate>Các mẫu BC</CBTemplate>
-      <UICBScripts>Kịch bản BC</UICBScripts>
       <UIScriptForm>Kịch bản</UIScriptForm>
       <UIDialogTab>Hộp thoại</UIDialogTab>
       <UIViewTab>Giao diện xem</UIViewTab>
@@ -1149,11 +944,9 @@
       <template>Mẫu thiết kế</template>
       <enableVersion>Cho phép tạo phiên bản</enableVersion>
       <addFolder>Thêm Thư mục</addFolder>
-      <addSignature>Thêm Chữ ký</addSignature>
       <addDocument>Thêm Tài liệu</addDocument>
       <editDocument>Chỉnh sửa Tài liệu</editDocument>
       <upload>Tải lên</upload>
-      <createTicket>Create Ticket</createTicket>
       <paste>Dán</paste>
       <search>Tìm kiếm</search>
       <viewReferences>Xem Tham chiếu</viewReferences>
@@ -1172,13 +965,11 @@
       <showJCRStructure>Hiển thị cấu trúc</showJCRStructure>
       <watchDocument>Theo dõi Tài liệu</watchDocument>
       <taggingDocument>Gán nhãn Tài liệu</taggingDocument>
-      <multiLanguage>Đa Ngôn ngữ</multiLanguage>
       <viewMetadatas>Xem Siêu dữ liệu</viewMetadatas>
       <overloadThumbnail>Chèn Hình nhỏ</overloadThumbnail>
       <manageHidden>Ẩn/Hiển thị nội dung</manageHidden>
-      <comment>Nhận xét</comment>
+      <comment>Bình luận</comment>
       <vote>Bình chọn</vote>  
-      <manageSimpleCategories>Quản lý việc đơn phân loại.</manageSimpleCategories>
       <addCategory>Thêm danh mục</addCategory>
       <addLocalizationLink>Thêm bản dịch</addLocalizationLink>
       <publicationRequestApproval>Yêu cầu phê duyệt</publicationRequestApproval>
@@ -1212,19 +1003,6 @@
       <Close>Đóng</Close>
       <Restore>Khôi phục</Restore>
     </action>
-    <label>
-     <option>
-      <ListView>Hiển thị dạng danh sách</ListView>
-        <TimelineView>Hiển thị theo thời gian</TimelineView>
-      <ThumbnailsView>Hiển thị hình thu nhỏ</ThumbnailsView>
-      <CoverFlow>Cover Flow</CoverFlow>
-      <IconView>Hiện thị biểu tượng</IconView>
-      <SlideShowView>Slide Show View</SlideShowView>
-      <SystemView>Kiểu hệ thống</SystemView>
-      <ContentView>Xem nội dung</ContentView>
-      <FileView>File Management View</FileView>
-    </option>
-    </label>
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
@@ -2330,7 +2108,7 @@
   </step3>
   <UIDrivePermissionSelector>
     <label>
-      <selectGroup>Chọn nhóm</selectGroup>
+      <selectGroup>Chọn Nhóm</selectGroup>
       <selectUser>Lựa chọn người dùng</selectUser>
       <selectMembership>Chọn Kiểu thành viên</selectMembership>
     </label>
@@ -2374,7 +2152,7 @@
   </MetadataPermission>
   <anyPermission>
     <title>
-      <AddAnyPermission>Thiết đặt bất kỳ Phân quyền nào</AddAnyPermission>
+      <AddAnyPermission>Tất cả người dùng</AddAnyPermission>
     </title>
   </anyPermission>
   <!--
@@ -2398,13 +2176,6 @@
   <!--
   #########Since ECM 2.5##################
   --> 
-  <UIWorkspaceWizard>
-    <label>
-      <step1>Bước 1</step1>
-      <step2>Bước 2</step2>
-      <step3>Bước 3</step3>
-    </label>
-  </UIWorkspaceWizard>
   
   <UIDriveForm>
 <msg>
@@ -2722,21 +2493,7 @@
           <addLocalizationLink>Thêm bản dịch</addLocalizationLink>
   </label>
   </UIViewFormTabPane>
-  <UIDriveForm>
-<label>
-  <taxonomy-list>Taxonomy List</taxonomy-list>
-  <admin-view>Quản trị</admin-view>
-  <authoring-view>Author View</authoring-view>
-  <taxonomy-icons>Taxonomy Icons</taxonomy-icons>
-  <anonymous-view>Anonymous View</anonymous-view>
-  <icon-view>Biểu tượng</icon-view>
-  <slide-show>Trình diễn theo slide</slide-show>
-  <simple-view>Simple View</simple-view>
-  <system-view>Kiểu hệ thống</system-view>
-  <timeline-view>Hiển thị theo thời gian</timeline-view>
-  <cover-flow>Cover Flow</cover-flow>
-  </label>
-  </UIDriveForm>
+
 <UIDriveForm>
 <label>
 <allowNodeTypesOnTree>Kiểu dữ liệu cho phép trên cây bên trái:</allowNodeTypesOnTree>
@@ -2782,7 +2539,7 @@
   </PopupComponent>
   <UIPageIterator>
     <label>
-      <maxPageSize>Số lượng Trang Tối đa</maxPageSize>
+      <maxPageSize>Số khoản mục trên mỗi trang</maxPageSize>
     </label>
   </UIPageIterator>
   <UILockNodeList>

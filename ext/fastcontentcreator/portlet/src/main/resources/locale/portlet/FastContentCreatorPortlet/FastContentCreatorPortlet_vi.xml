@@ -23,9 +23,7 @@
 
   <UIFCCConfig>
     <label>
-      <select-repository>Chọn Kho dữ liệu</select-repository>
       <UIFCCSaveLocationField>Vị trí Lưu</UIFCCSaveLocationField>
-      <UIFCCRepositoryFormSelectBox>Chọn Kho dữ liệu</UIFCCRepositoryFormSelectBox>
       <UIFCCWorkspaceFormSelectBox>Chọn Không gian lưu trữ</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>Tùy chọn Mẫu thiết kế</UIFCCTemplateField>
       <UIFCCLocationFormInputAction>Nơi Lưu trữ</UIFCCLocationFormInputAction>
@@ -90,7 +88,7 @@
     <label>
       <workspaceName>Không gian lưu trữ</workspaceName>
       <rootNodePath>Đường dẫn Gốc:</rootNodePath>
-      <rootNodeInfo/>
+      <rootNodeInfo>Nút gốc</rootNodeInfo>
     </label>
   </UIWorkspaceList>
 
