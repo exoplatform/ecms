@@ -48,6 +48,7 @@ import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -375,6 +376,41 @@ public class LinkManagerImpl implements LinkManager {
    */
   public List<Node> getAllLinks(Node targetNode, String linkType) {
     return getAllLinks(targetNode, linkType, WCMCoreUtils.getUserSessionProvider());
+  }
+  
+  /**
+   * {@inheritDoc}
+   * @throws RepositoryException 
+   */
+  public void updateSymlink(Node node) throws RepositoryException {
+    if (node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
+      try {
+        ((ExtendedNode)node).checkPermission(PermissionType.SET_PROPERTY);
+      } catch(AccessControlException e) {
+        SessionProvider provider = WCMCoreUtils.getSystemSessionProvider();
+        node = (Node)provider.getSession(node.getSession().getWorkspace().getName(), 
+                                         WCMCoreUtils.getRepository()).getItem(node.getPath());
+      }
+      if (node.canAddMixin(NodetypeConstant.EXO_TARGET_DATA)) {
+        node.addMixin(NodetypeConstant.EXO_TARGET_DATA);
+      }
+      Node target = this.getTarget(node, true);
+      String[] propList = {NodetypeConstant.EXO_DATE_CREATED,
+                           NodetypeConstant.EXO_DATE_MODIFIED, NodetypeConstant.PUBLICATION_LIVE_DATE,
+                           NodetypeConstant.EXO_START_EVENT, NodetypeConstant.EXO_INDEX};
+      for (String p : propList) {
+        try {
+          if (target.hasProperty(p)) {
+            node.setProperty(p, target.getProperty(p).getValue());
+            node.save();
+          }
+        } catch (RepositoryException e) {
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Can not update property: " + p + " for node: " + node.getPath(), e);
+          }
+        }
+      }
+    }
   }
 
 }
