@@ -58,7 +58,7 @@
       <ContentPathBlock>Selección de contenido</ContentPathBlock>
       <UISCVConfigItemPathFormInputSet>Ruta del contenido</UISCVConfigItemPathFormInputSet>
     <UISCVContentPathConfigurationInputBox>Ruta del contenido</UISCVContentPathConfigurationInputBox>
-      <Advance>Advanced</Advance>
+      <Advance>Avanzado</Advance>
       <ContextCaption>Navegación dinámica</ContextCaption>
       <UISCVContextualRadioBox>Contenido contextual</UISCVContextualRadioBox>
       <UISCVParameterInputBox>por</UISCVParameterInputBox>
@@ -83,7 +83,7 @@
         <UISCVConfigContentFormInputSet>Selección de contenido</UISCVConfigContentFormInputSet>
         <UISCVConfigDisplayFormInputSet>Mostrar ajustes</UISCVConfigDisplayFormInputSet>
         <UISCVConfigPrintFormInputSet>Configuración de impresión</UISCVConfigPrintFormInputSet>
-        <UISCVConfigAdvancedFormInputSet>Advanced</UISCVConfigAdvancedFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Avanzado</UISCVConfigAdvancedFormInputSet>
       </label>
     </tab>
   </UISCVPreferences>

@@ -19,7 +19,7 @@
       <DocumentAndPage>Documento y Página</DocumentAndPage>
       <documentandpage>Documento y Página</documentandpage>
       <resutlsCaption>Resultados</resutlsCaption>
-      <ofAboutCaption>of about</ofAboutCaption>
+      <ofAboutCaption>de unos</ofAboutCaption>
       <forCaption>para</forCaption>
       <timeUnitCaption>segundos</timeUnitCaption>
       <similar>Páginas donde aparece el mismo contenido</similar>
@@ -38,9 +38,9 @@
     <label>
       <itemsPerPageSelector>Elementos por Página</itemsPerPageSelector>
       <searchFormSelector>Plantilla del formulario de búsqueda</searchFormSelector>
-      <searchResultSelector>Search Result Template</searchResultSelector>
-      <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
-      <searchPageLayoutSelector>Search Page Layout Template</searchPageLayoutSelector>
+      <searchResultSelector>Plantilla de resultado de búsqueda</searchResultSelector>
+      <searchPaginatorSelector>Plantilla de búsqueda paginator</searchPaginatorSelector>
+      <searchPageLayoutSelector>Plantilla de diseño de la página de búsqueda</searchPageLayoutSelector>
       <searchResultBasePathInputSetAction>Ruta de la base</searchResultBasePathInputSetAction>
       <pageMode>Modo de Página</pageMode>
       <option>

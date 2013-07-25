@@ -39,62 +39,62 @@
       <DisplaySettingBlock>Mostrar ajustes</DisplaySettingBlock>
       <UICLVConfigHeaderFormStringInput>Encabezado</UICLVConfigHeaderFormStringInput>
       <UICLVConfigDisplayTemplateFormSelectBox>Plantilla</UICLVConfigDisplayTemplateFormSelectBox>
-      <UICLVConfigPaginatorTemplateFormSelectBox>Paginator</UICLVConfigPaginatorTemplateFormSelectBox>
+      <UICLVConfigPaginatorTemplateFormSelectBox>Paginación</UICLVConfigPaginatorTemplateFormSelectBox>
       <UICLVConfigTargetPageFormStringInput/>
       <UICLVConfigItemsPerPageFormStringInput>Elementos por Página</UICLVConfigItemsPerPageFormStringInput>
-      <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
-      <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
-      <UICLVConfigShowHeaderFormCheckboxInput>Show Header</UICLVConfigShowHeaderFormCheckboxInput>
-      <UICLVConfigShowRefreshFormCheckboxInput>Show Refresh</UICLVConfigShowRefreshFormCheckboxInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>Mostrar imagen</UICLVConfigShowIllustrationFormCheckboxInput>
+      <UICLVConfigShowSummaryFormCheckboxInput>Mostrar resúmen</UICLVConfigShowSummaryFormCheckboxInput>
+      <UICLVConfigShowHeaderFormCheckboxInput>Mostrar encabezado</UICLVConfigShowHeaderFormCheckboxInput>
+      <UICLVConfigShowRefreshFormCheckboxInput>Mostrar actualización</UICLVConfigShowRefreshFormCheckboxInput>
       <UICLVConfigShowTitleFormCheckboxInput>Mostrar título</UICLVConfigShowTitleFormCheckboxInput>
       <UICLVConfigShowDateCreatedFormCheckboxInput>Mostrar fecha</UICLVConfigShowDateCreatedFormCheckboxInput>
-      <UICLVConfigShowLinkFormCheckboxInput>Show Link</UICLVConfigShowLinkFormCheckboxInput>
-      <UICLVConfigShowReadmoreFormCheckboxInput>Show More Links</UICLVConfigShowReadmoreFormCheckboxInput>
-      <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
-      <UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
-      <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatic Detection</UICLVConfigShowAutomaticDetectionCheckboxInput>
-      <AdvancedBlock>Advanced</AdvancedBlock>
+      <UICLVConfigShowLinkFormCheckboxInput>Ver enlace</UICLVConfigShowLinkFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>Mostrar más enlaces</UICLVConfigShowReadmoreFormCheckboxInput>
+      <UICLVConfigAllowDynamicUrlStringInput>Permitir URL dinámica</UICLVConfigAllowDynamicUrlStringInput>
+      <UICLVConfigShowRssLinkFormCheckboxInput>Mostrar enlace RSS</UICLVConfigShowRssLinkFormCheckboxInput>
+      <UICLVConfigShowAutomaticDetectionCheckboxInput>Detección automática</UICLVConfigShowAutomaticDetectionCheckboxInput>
+      <AdvancedBlock>Avanzado</AdvancedBlock>
       <UICLVConfigDynamicNavigationLabel>Navegación dinámica</UICLVConfigDynamicNavigationLabel>
-      <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
-      <UICLVConfigShowCLVByStringInput>by</UICLVConfigShowCLVByStringInput>
+      <UICLVConfigContextualFolderRadioBoxInput>Carpeta contextual</UICLVConfigContextualFolderRadioBoxInput>
+      <UICLVConfigShowCLVByStringInput>por</UICLVConfigShowCLVByStringInput>
       <UICLVConfigshowSCVWithStringInput>con</UICLVConfigshowSCVWithStringInput>
       <UICLVConfigTargetPageFormInputSet>Mostrar en la página</UICLVConfigTargetPageFormInputSet>
-      <content-not-found>Content not found.</content-not-found>
+      <content-not-found>Contenido no encontrado.</content-not-found>
       <ContentPath>Ruta del contenido</ContentPath>
-      <Up>Up</Up>
-      <Down>Down</Down>
+      <Up>Arriba</Up>
+      <Down>Abajo</Down>
       <UICLVConfigCacheManagementLabel>Visibilidad de contenido</UICLVConfigCacheManagementLabel>
       <UICLVContentByQueryLabel>Contenido por consulta</UICLVContentByQueryLabel>
       <UICLVConfigWorkspaceFormSelectBox>Espacio de Trabajo</UICLVConfigWorkspaceFormSelectBox>
-      <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
-      <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
+      <UICLVConfigContentByQueryTextArea>Por consulta</UICLVConfigContentByQueryTextArea>
+      <UICLVConfigCacheEnableRadioBoxInput>Compartir contenido entre usuarios</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
-      <ModeSelectionHelp>Two modes are available to show content. "By Folder" will take all the content available in your selected folder/category. "By Content" lets you manually select the content you want to show.</ModeSelectionHelp>
-      <FolderPathHelp>Select the content you want to show. The default selection will be replaced dynamically if you activate the Dynamic Navigation option (see the Advanced mode below).</FolderPathHelp>
-      <HeaderOptionHelp>Show a header on top of the content list. If you activate the Automatic Detection option, it will try to find the header based on the current selection.</HeaderOptionHelp>
-      <GeneralOptionHelp>Select the graphical elements you want to show in your list. Note that, depending on your selected template, some elements may not be available.</GeneralOptionHelp>
-      <ContextualHelp>Activates the Dynamic Navigation option. Others can change the content dynamically based on a URL parameter.</ContextualHelp>
-      <ParameterHelp>This parameter will be used to access the content if Dynamic Navigation is activated.</ParameterHelp>
-      <ShowDetailInPageHelp>Clicking on content redirects the user to a Detail page. You must have a "Content by URL" portlet with Dynamic Navigation enabled on the target page to show the content.</ShowDetailInPageHelp>
-      <DetailParameterHelp>This parameter will contain the path to the content in the link to the Detail page. This parameter must match the parameter used in the "Content by URL" portlet of the page.</DetailParameterHelp>
+      <ModeSelectionHelp>Hay dos modos disponibles para mostrar contenido. "Por carpeta" tomará todo el contenido disponible en tu carpeta/categoría seleccionada. "Por contenido" le permite seleccionar manualmente el contenido que desee mostrar.</ModeSelectionHelp>
+      <FolderPathHelp>Seleccione el contenido que desee mostrar. La selección por defecto será reemplazada dinámicamente si activa la opción de navegación dinámica (Ver el modo avanzado más abajo).</FolderPathHelp>
+      <HeaderOptionHelp>Mostrar un encabezado arriba de la lista de contenido. Si activa la opción de detección automática, intentará encontrar el encabezado basado en la selección actual.</HeaderOptionHelp>
+      <GeneralOptionHelp>Seleccione los elementos gráficos que desee mostrar en su lista. Note que dependiendo  de la plantilla que escoja, algunos elementos pueden no estar disponibles.</GeneralOptionHelp>
+      <ContextualHelp>Active la opción de navegación dinámica. Otros pueden cambiar el contenido dinámicamente basado en el parámetro de la URL.</ContextualHelp>
+      <ParameterHelp>Este parámetro será usado para acceder al contenido si la navegación dinámica es activada.</ParameterHelp>
+      <ShowDetailInPageHelp>Hacer clic en el contenido redirecciona al usuario hacia la página de detalle. Debe tener un portlet "Contenido por URL" con navegación dinámica activado en la página de destino para mostrar el contenido.</ShowDetailInPageHelp>
+      <DetailParameterHelp>Este parámetro contendrá el camino hacia el contenido en el enlace hacia la página de detalle. Este parámetro debe coincidir con el parámetro usado en en portlet "Contenido por URL" de la pagina.</DetailParameterHelp>
       <ContentByQueryHelp><![CDATA[You can set a SQL Query to get content dynamically. The following parameters are allowed : ${user}, ${lang} or any get parameter (PARAM) surrounded by ${PARAM}.]]></ContentByQueryHelp>
-      <ContentsVisibilityHelp>"Restricted by Authentication" will filter the content based on the authentication. If you do not sign in, you see public content only. If you are logged in, you see all the content visible by intranet users (but shared by all). "Restricted by User Roles" means you will see content depending on your rights. In most cases, this option should not be used, as it reduces the overall performance.</ContentsVisibilityHelp>
+      <ContentsVisibilityHelp>"Restringido por autentificación" filtrará el contenido basado en la autentificación. Si no se registra, sólo verá el contenido público. Si está registrado, verá todo el contenido visible por usuarios de la intranet (pero compartidos por todos). "Restringido por roles de usuario" significa que verá el contenido dependiendo de sus derechos. En la mayoría de los casos esta opción no debería ser usada ya que reduce el rendimiento general.</ContentsVisibilityHelp>
     </help>
     <action>
       <Save>Guardar</Save>
       <Cancel>Cancelar</Cancel>
-      <delete>Delete</delete>
+      <delete>Eliminar</delete>
     </action>
     <msg>
-      <not-valid-path>The Folder Path is invalid.</not-valid-path>
-      <saving-success>The portlet's preferences are saved.</saving-success>
+      <not-valid-path>La ruta de la carpeta no es válida.</not-valid-path>
+      <saving-success>Las preferencias del portlet han sido guardadas.</saving-success>
     </msg>
     <tab>
       <label>
         <clvContentTab>Selección de contenido</clvContentTab>
         <clvDisplayTab>Mostrar ajustes</clvDisplayTab>
-        <clvAdvancedTab>Advanced</clvAdvancedTab>
+        <clvAdvancedTab>Avanzado</clvAdvancedTab>
       </label>
     </tab>
   </UICLVConfig>
@@ -139,10 +139,10 @@
       <rssFeed>RSS Feed</rssFeed>
     </label>
     <action>
-      <refresh>Refresh</refresh>
+      <refresh>Actualizar</refresh>
       <edit>Editar en el explorador de contenido</edit>
       <delete>Delete</delete>
-      <publish>Publish</publish>
+      <publish>Publicar</publish>
     </action>
     <label>
       <draft>Draft</draft>
@@ -179,7 +179,7 @@
   <UICLVConfigCacheEnableRadioBoxInput>
     <label>
       <ENABLE>Restringido por autenticación</ENABLE>
-      <DISABLE>Restricted by User Roles</DISABLE>
+      <DISABLE>Restringido por roles de usuario</DISABLE>
     </label>
   </UICLVConfigCacheEnableRadioBoxInput>
 </bundle>
