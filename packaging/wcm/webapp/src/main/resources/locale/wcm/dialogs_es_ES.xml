@@ -23,27 +23,27 @@
   <WebContent>
     <dialog>
       <label>
-        <MainContent>Main Content</MainContent>
+        <MainContent>Contenido principal</MainContent>
         <cssFile>default.css</cssFile>
         <jsFile>default.js</jsFile>
-        <Advanced>Advanced</Advanced>
+        <Advanced>Avanzado</Advanced>
         <Summary>Sumario</Summary>
-        <name>Name</name>
+        <name>Nombre</name>
         <title>Título</title>
-        <ContentCSS>CSS Data</ContentCSS>
-        <hintCSS>In this pane, you can specify the main stylesheet for your web content. This style will override the stylesheets defined at the site level and at the shared level.</hintCSS>
-        <ContentJS>JS Data</ContentJS>
-        <hintJS>In this pane, you can specify some JavaScript codes that can be executed before your web content is rendered.</hintJS>
-        <WebContentHtml>Main Content</WebContentHtml>
-        <Illustration>Illustration</Illustration>
-        <hintIllustration>In this pane, you can specify an image that will be shown when your web content is displayed in the lists. You can also specify some summary texts to go with this image.</hintIllustration>
-        <confirm-delete>Are you sure you want to delete this illustration?</confirm-delete>
-        <illustrationImage>Illustration Image</illustrationImage>
-        <imageMimeType>Image Type</imageMimeType>
-        <image>Upload Image</image>
-        <imageWidth>Image Width</imageWidth>
-        <imageHeight>Image Height</imageHeight>
-        <Synchronize>Synchronize with CSS and HTML</Synchronize>
+        <ContentCSS>Datos CSS</ContentCSS>
+        <hintCSS>En este panel, puede especificar la hoja de estilo principal para su contenido web. Este estilo se superpondrá a la hoja de estilo a nivel del sitio y del nivel compartido.</hintCSS>
+        <ContentJS>Datos JS</ContentJS>
+        <hintJS>En este panel, puede especificar algunos códigos Java Script que pueden ser ejecutados antes que el contenido web sea reproducido.</hintJS>
+        <WebContentHtml>Contenido principal</WebContentHtml>
+        <Illustration>Ilustración</Illustration>
+        <hintIllustration>En este panel, puede especificar una imagen que será mostrada cuando el contenido web sea mostrado en las listas. Puede también especificar algunos textos resumidos para ir con esta imagen.</hintIllustration>
+        <confirm-delete>¿Está seguro que desea eliminar esta ilustración?</confirm-delete>
+        <illustrationImage>Imagen de la ilustración</illustrationImage>
+        <imageMimeType>Tipo de imagen</imageMimeType>
+        <image>Subir imagen</image>
+        <imageWidth>Ancho de la imagen</imageWidth>
+        <imageHeight>Altura de la imagen</imageHeight>
+        <Synchronize>Sincronizar con CSS y HTML</Synchronize>
       </label>
     </dialog>
   </WebContent>
@@ -51,10 +51,10 @@
   <CSSFile>
     <dialog>
       <label>
-        <name>Name</name>
-        <active>Active</active>
-        <priority>Priority</priority>
-        <content>CSS Data</content>
+        <name>Nombre</name>
+        <active>Activo</active>
+        <priority>Prioridad</priority>
+        <content>Datos CSS</content>
       </label>
     </dialog>
   </CSSFile>
@@ -62,10 +62,10 @@
   <JSFile>
     <dialog>
       <label>
-        <name>Name</name>
-        <active>Active</active>
-        <priority>Priority</priority>
-        <content>JS Data</content>
+        <name>Nombre</name>
+        <active>Activo</active>
+        <priority>Prioridad</priority>
+        <content>Datos JS</content>
       </label>
     </dialog>
   </JSFile>
@@ -73,9 +73,9 @@
   <WebLink>
     <dialog>
       <label>
-        <name>Name</name>
+        <name>Nombre</name>
         <url>URL</url>
-        <description>Description</description>
+        <description>Descripción</description>
       </label>
     </dialog>
   </WebLink>
@@ -83,10 +83,10 @@
   <SiteMetadata>
     <dialog>
       <label>
-        <title>Site Title</title>
-        <description>Site Description</description>
-        <keywords>Site Keywords</keywords>
-        <robots>Search Engine Behavior</robots>
+        <title>Título del Sitio</title>
+        <description>Descripción del Sitio</description>
+        <keywords>Palabras clave del sitio</keywords>
+        <robots>Comportamiento del motor de búsqueda</robots>
       </label>
     </dialog>
   </SiteMetadata>
