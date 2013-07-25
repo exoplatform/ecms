@@ -15,7 +15,6 @@
       </label>
     </tab>    
     <label>     
-      <UITaxonomyManager>Hantera enkel kategori</UITaxonomyManager>
       <UITaxonomyManagerTrees>Kategorier</UITaxonomyManagerTrees>
       <UIMetadataManager>Metadata</UIMetadataManager>
       <UINamespaceManager>Namnplatser</UINamespaceManager>
@@ -426,215 +425,13 @@
       <action>Åtgärd</action>
     </header>
   </UITreeList>
-  <!--
-  ################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.UIRepositoryManager #
-  ################################################################################
-  -->
-  <UIRepositoryControl>
-    <label>
-      <repoName>Aktuellt Repository</repoName>
-    </label>
-    <title>
-      <repoAdd>Lägg till Repository</repoAdd>
-      <repoEdit>Redigera Repository</repoEdit>
-      <repoDelete>Ta bort Repository</repoDelete>
-    </title>
-    <msg>
-      <cannot-deleteRepo>Du kan inte ta bort {0} eftersom det är standard.</cannot-deleteRepo>
-    </msg>
-  </UIRepositoryControl>
-  <UIECMAdminUIPopupWindow>
-    <title>
-      <UIRepositoryFormContainer>Repository</UIRepositoryFormContainer>
-      <Delete>Radera</Delete>
-      <UIRepositoryList>Lista för Repository</UIRepositoryList>
-    </title>
-  </UIECMAdminUIPopupWindow>
-  <UIPopupWindowControl>
-    <title>
-      <UIWorkspaceWizardContainer>Arbetsytans Wizard</UIWorkspaceWizardContainer>
-      <UIRepositoryValueSelect>Välj klass för autentisering</UIRepositoryValueSelect>
-    </title>
-  </UIPopupWindowControl>
-  <UIPopupWindowInWizard>
-    <title>
-      <UIPermissionSelector>Välj behörighet</UIPermissionSelector>
-      <UIPermissionContainer>Väljare för behörighet</UIPermissionContainer>
-      <UIRepositoryValueSelect>Välj klass</UIRepositoryValueSelect>
-    </title>
-  </UIPopupWindowInWizard>
-  <UIRepositoryValueSelect>
-    <header>
-      <name>Fullständigt namn</name>
-      <action>Välj</action>
-    </header>
-    <action>
-      <Close>Stäng</Close>
-    </action>
-  </UIRepositoryValueSelect>
-  <UIRepositorySelectForm>
-    <msg-editError>Fel inträffade med databasen {0}. Kontrollera inställningarna eller skapa en ny.</msg-editError>
-    <msg-accessdenied>Du har inte behörighet att editera databasen {0}.</msg-accessdenied>
-  </UIRepositorySelectForm>
-  <UIRepositoryForm>
-    <label>
-      <name>Namn</name>
-      <wsInputSet>UIRepositoryForm</wsInputSet>
-      <authInputSet>UIRepositoryForm</authInputSet>
-      <workspace>Arbetsyta</workspace>
-      <isDefault>Ange som standard</isDefault>
-      <accessControl>Access Control</accessControl>
-      <authenticationPolicy>Policy för autentisering</authenticationPolicy>
-      <securityDomain>Säkerhetsdomän</securityDomain>
-      <sessionTime>Sessions-timeout</sessionTime>
-      <channelConfig>Kanal konfiguration</channelConfig>
-      <enableReplication>Aktivera replikering</enableReplication>
-      <repMode>Replikerings läge</repMode>
-      <repTestMode>Test replikering</repTestMode>
-      <directoryPath>Katalog</directoryPath>
-      <maxBufferSize>Max buffertstorlek</maxBufferSize>
-    </label>
-    <msg>
-      <cannot-delete-default-workspace>Du kan inte radera workspace {0} eftersom det är standardarbetsytan.</cannot-delete-default-workspace>
-      <repoName-exist>Repository {0} finns redan.</repoName-exist>
-      <repoName-not-alow>Repositoriet innehåller ogiltiga tecken.</repoName-not-alow>
-      <workspace-isrequire>Välj minst en arbetsyta.</workspace-isrequire>
-      <cannot-delete-workspace>Kan inte ta bort arbetsytan {0}.</cannot-delete-workspace>
-      <workspace-setdefault>Du måste ange standardarbetsytan.</workspace-setdefault>
-      <!--DMS 2.4.x ECM-3611> -->
-      <workspace-setDMSsystem>Du måste ange DMS-systemets arbetsyta.</workspace-setDMSsystem>
-      <workspace-bseChanel>Kanal krävs.</workspace-bseChanel>
-      <workspace-bseMode>Replikerings läge krävs.</workspace-bseMode>
-      <workspace-bsePath>The directory is required.</workspace-bsePath>
-      <sessionTime-invalid>Sessionstimeout är ogiltigt numeriskt format.</sessionTime-invalid>
-      <sessionTime-required>Sessionstimeout krävs.</sessionTime-required>
-      <workspace-bseBuffer>Max Buffer is required.</workspace-bseBuffer>
-      <authen-isrequire>Authentication policy is required.</authen-isrequire>
-      <confirm-workspace-delete>Are you sure you want to delete this workspace?</confirm-workspace-delete>
-    </msg>
-    <action>
-      <Close>#{word.close}</Close>
-      <Save>#{word.save}</Save>
-      <Reset>Återställ</Reset>
-      <AddWorkspace>Add Workspace</AddWorkspace>
-    </action>
-  </UIRepositoryForm>
+  
   <UIRepositoryList>
     <titlebar>
       <label>Hantera ECM huvudfunktioner</label>
     </titlebar>
-    <header>
-      <name>Namn</name>
-      <workspaces>Workspaces</workspaces>
-      <isdefault>Is Default</isdefault>
-      <accesscontrol>Access Control</accesscontrol>
-      <sessiontimeout>Sessions-timeout</sessiontimeout>
-      <action>Åtgärder</action>
-    </header>
-    <action>
-      <Close>#{word.close}</Close>
-    </action>
-    <msg>
-      <cannot-delete>You cannot delete '{0}' because it may be in use.</cannot-delete>
-      <confirm-delete>Are you sure you want to delete this repository?</confirm-delete>
-    </msg>
   </UIRepositoryList>
-  <UIWorkspacePermissionForm>
-    <label>
-      <permission>Behörighet</permission>
-      <read>Läs</read>
-      <add_node>Lägg till noden</add_node>
-      <set_property>Ange rättigheter</set_property>
-      <remove>Ta bort</remove>
-    </label>
-    <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
-    </action>
-    <msg>
-      <check-one>Du måste markera minst en rätt för tillåtelse.</check-one>
-    </msg>
-  </UIWorkspacePermissionForm>
-  <PermissionPopupSelect>
-    <title>
-      <UIPermissionSelector>Rättigheter</UIPermissionSelector>
-    </title>
-    <label>
-      <selectGroup>Välj grupp</selectGroup>
-      <selectMembership>Välj medlemskap</selectMembership>
-    </label>
-  </PermissionPopupSelect>
-  <UIWorkspaceWizard>
-    <msg>
-      <wsname-exist>The '{0}' workspace already exists in this database.</wsname-exist>
-      <name-require>The workspace name is required.</name-require>
-      <permission-require>You must select a permission.</permission-require>
-      <nodeType-invalid>The  auto-initialized node type in the default workspace must be nt:unstructured.</nodeType-invalid>
-      <!--DMS 2.4.x ECM-3611-->
-      <nodeType-invalidSystemWs>The  auto-initialized node type in the DMS system workspace must be nt:unstructured.</nodeType-invalidSystemWs>
-      <lockTimeOut-required>The lock timeout is required.</lockTimeOut-required>
-      <lockTimeOut-invalid>The lock timeout must be in numerical format.</lockTimeOut-invalid>
-      <buffer-invalid>The buffer size must be in numerical format.</buffer-invalid>
-      <buffer-require>The buffer size is required.</buffer-require>
-      <buffer-zero>The buffer size must be greater than zero.</buffer-zero>
-      <buffer-small>The buffer size is too small.</buffer-small>
-      <containerName-invalid>Behållarens namn krävs.</containerName-invalid>
-      <maxSize-require>The max cache size is required.</maxSize-require>
-      <maxSize-invalid>The max cache size must be in numerical format.</maxSize-invalid>
-      <maxSize-rezo>The max cache size must be greater than zero.</maxSize-rezo>
-      <liveTime-require>The cache live time is required.</liveTime-require>
-      <liveTime-invalid>The cache live time must be in numerical format.</liveTime-invalid>
-      <liveTime-rezo>The cache live time must be greater than zero.</liveTime-rezo>
-      <sourceName-invalid>The source name is required.</sourceName-invalid>
-      <storePath-invalid>The store path is required.</storePath-invalid>
-      <swapPath-invalid>The swap path is required.</swapPath-invalid>
-      <queryHandlerType>The query handler type is required.</queryHandlerType>
-      <indexPath-invalid>The query index path is required.</indexPath-invalid>
-      <storeType-invalid>The store type is required.</storeType-invalid>
-      <queryHandlerType-invalid>The query handler is required.</queryHandlerType-invalid>
-      <permission-invalid>You must select at least one right.</permission-invalid>
-    </msg>
-    <label>
-      <step>Steg</step>
-      <wizardSteps>Guide steg</wizardSteps>
-      <name>Namn</name>
-      <autoInitializedRootNt>Root Node Type</autoInitializedRootNt>
-      <isDefault>Set as Default</isDefault>
-      <!--DMS 2.4.x ECM-3611-->
-      <isDMSSytemWs>Set as DMS System Workspace</isDMSSytemWs>
-      <permission>Auto-init Permission</permission>
-      <setLockTimeOut>Lock Timeout</setLockTimeOut>
-      <container>Container Type</container>
-      <sourceName>Source Name</sourceName>
-      <dbType>Dialect</dbType>
-      <isMulti>Is Multiple</isMulti>
-      <storeType>Store Type</storeType>
-      <filterType>Filters</filterType>
-      <maxBuffer>Max Buffer (bytes)</maxBuffer>
-      <swapPath>Swap Path</swapPath>
-      <storePath>Store Path</storePath>
-      <externalStore>External Value Storages</externalStore>
-      <queryHandler>Query Handler</queryHandler>
-      <indexPath>Query Index Path</indexPath>
-      <isCache>Enable Cache</isCache>
-      <maxSize>Max Cache Size</maxSize>
-      <liveTime>Cache Live Time</liveTime>
-    </label>
-    <tab>
-      <info>
-        <step1>Enter workspace name, node type and more.</step1>
-        <step2>Configure for containers, storage and more.</step2>
-        <step3>Configure for cache, query handler and more.</step3>
-      </info>
-    </tab>
-    <action>
-      <Next>#{word.next}</Next>
-      <Back>#{word.back}</Back>
-      <Finish>Slutför</Finish>
-      <Cancel>#{word.cancel}</Cancel>
-    </action>
-  </UIWorkspaceWizard>
+  
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
@@ -982,8 +779,6 @@
     <title>
       <UIViewContainer>Vyer</UIViewContainer>
       <ECMTemplate>Explorer mallar</ECMTemplate>
-      <CBTemplate>BC Templates</CBTemplate>
-      <UICBScripts>BC Scripts</UICBScripts>
       <UIScriptForm>Skript</UIScriptForm>
       <UIDialogTab>Dialog</UIDialogTab>
       <UIViewTab>Visa</UIViewTab>
@@ -1149,11 +944,9 @@
       <template>Mallar</template>
       <enableVersion>Aktivera Version</enableVersion>
       <addFolder>Lägg till mapp</addFolder>
-      <addSignature>Lägg till signatur</addSignature>
       <addDocument>Lägga till dokument</addDocument>
       <editDocument>Redigera dokument</editDocument>
       <upload>Ladda upp</upload>
-      <createTicket>Create Ticket</createTicket>
       <paste>Klistra in</paste>
       <search>Sök</search>
       <viewReferences>Visa referenser</viewReferences>
@@ -1172,13 +965,11 @@
       <showJCRStructure>Visa JCR struktur</showJCRStructure>
       <watchDocument>Titta på dokumentet</watchDocument>
       <taggingDocument>Tag dokument</taggingDocument>
-      <multiLanguage>Flera språk</multiLanguage>
       <viewMetadatas>Visa Metadata</viewMetadatas>
       <overloadThumbnail>Överbelastning miniatyr</overloadThumbnail>
       <manageHidden>Visa/Dölj innehåll</manageHidden>
       <comment>Kommentar</comment>
       <vote>Rösta</vote>  
-      <manageSimpleCategories>Hantera enkla kategorier</manageSimpleCategories>
       <addCategory>Lägg till kategori</addCategory>
       <addLocalizationLink>Lägg till översättning</addLocalizationLink>
       <publicationRequestApproval>Godkännande</publicationRequestApproval>
@@ -1212,19 +1003,6 @@
       <Close>#{word.close}</Close>
       <Restore>Återställ</Restore>
     </action>
-    <label>
-     <option>
-      <ListView>Listvy</ListView>
-        <TimelineView>Vyn Tidslinje</TimelineView>
-      <ThumbnailsView>Miniatyrvyn</ThumbnailsView>
-      <CoverFlow>Cover Flow</CoverFlow>
-      <IconView>Ikonvy</IconView>
-      <SlideShowView>Slide Show View</SlideShowView>
-      <SystemView>Systemvy</SystemView>
-      <ContentView>Innehållsvyn</ContentView>
-      <FileView>Fil management vy</FileView>
-    </option>
-    </label>
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
@@ -2191,7 +1969,7 @@
   <UITagStyleForm>
     <label>
       <styleName>Formatmallens namn:</styleName>
-      <documentRange>Dokumentintervall:</documentRange>
+      <documentRange>Number of Occurrences:</documentRange>
       <styleHTML>HTML-format:</styleHTML>
     </label>
     <action>
@@ -2398,13 +2176,6 @@
   <!--
   #########Since ECM 2.5##################
   --> 
-  <UIWorkspaceWizard>
-    <label>
-      <step1>Step 1</step1>
-      <step2>Step 2</step2>
-      <step3>Step 3</step3>
-    </label>
-  </UIWorkspaceWizard>
   
   <UIDriveForm>
 <msg>
@@ -2625,7 +2396,7 @@
 </action>
   <msg>
     <xss-vulnerability-character>Fältet {0} innehåller XSS sårbarhets tecken</xss-vulnerability-character>
-<xss-vulnerability-character-wo-label>Din indata i formuläret innehåller XSS sårbarhets tecken</xss-vulnerability-character-wo-label>
+<xss-vulnerability-character-wo-label>Your input may contain XSS vulnerability characters</xss-vulnerability-character-wo-label>
   </msg>
 </UIActionForm>
 
@@ -2722,21 +2493,7 @@
           <addLocalizationLink>Lägg till översättning</addLocalizationLink>
   </label>
   </UIViewFormTabPane>
-  <UIDriveForm>
-<label>
-  <taxonomy-list>Taxonomi lista</taxonomy-list>
-  <admin-view>Admin Vy</admin-view>
-  <authoring-view>Författarvy</authoring-view>
-  <taxonomy-icons>Taxonomi ikoner</taxonomy-icons>
-  <anonymous-view>Anonym vy</anonymous-view>
-  <icon-view>Ikonvy</icon-view>
-  <slide-show>Bildspel</slide-show>
-  <simple-view>Enkel vy</simple-view>
-  <system-view>Systemvy</system-view>
-  <timeline-view>Vyn Tidslinje</timeline-view>
-  <cover-flow>Cover Flow</cover-flow>
-  </label>
-  </UIDriveForm>
+
 <UIDriveForm>
 <label>
 <allowNodeTypesOnTree>Ersättning nodetype på vänster träd:</allowNodeTypesOnTree>
