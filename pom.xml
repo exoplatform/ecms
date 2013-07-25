@@ -28,14 +28,14 @@
   </ciManagement>
   <properties>
     <!-- Dependencies versions -->
-    <org.exoplatform.kernel.version>2.3.12-GA-SNAPSHOT</org.exoplatform.kernel.version>
-    <org.exoplatform.core.version>2.4.12-GA-SNAPSHOT</org.exoplatform.core.version>
-    <org.exoplatform.ws.version>2.2.12-GA-SNAPSHOT</org.exoplatform.ws.version>
-    <org.exoplatform.jcr.version>1.14.12-GA-SNAPSHOT</org.exoplatform.jcr.version>
-    <org.exoplatform.jcr-services.version>1.14.12-GA-SNAPSHOT</org.exoplatform.jcr-services.version>
-    <org.exoplatform.portal.version>3.2.9-PLF-SNAPSHOT</org.exoplatform.portal.version>
+    <org.exoplatform.kernel.version>2.3.12-GA</org.exoplatform.kernel.version>
+    <org.exoplatform.core.version>2.4.12-GA</org.exoplatform.core.version>
+    <org.exoplatform.ws.version>2.2.12-GA</org.exoplatform.ws.version>
+    <org.exoplatform.jcr.version>1.14.12-GA</org.exoplatform.jcr.version>
+    <org.exoplatform.jcr-services.version>1.14.12-GA</org.exoplatform.jcr-services.version>
+    <org.exoplatform.portal.version>3.2.9-PLF</org.exoplatform.portal.version>
     <exo.tool.framework.junit.version>1.2.0</exo.tool.framework.junit.version>
-    <org.exoplatform.commons.version>1.1.13-SNAPSHOT</org.exoplatform.commons.version>
+    <org.exoplatform.commons.version>1.1.13</org.exoplatform.commons.version>
     <org.exoplatform.tool.version>1.0.0</org.exoplatform.tool.version>
     <chromattic.version>1.1.2</chromattic.version>
     <org.xcmis.version>1.2.2</org.xcmis.version>
@@ -102,7 +102,7 @@
     <org.jbossxb.version>2.0.1.GA</org.jbossxb.version>
     <org.jbosscore.version>2.2.9.GA</org.jbosscore.version>
     <org.imgscalr.version>4.2</org.imgscalr.version>
-    <org.exoplatform.doc.doc-style.version>1.0.11-SNAPSHOT</org.exoplatform.doc.doc-style.version>
+    <org.exoplatform.doc.doc-style.version>1.0.11</org.exoplatform.doc.doc-style.version>
         <!-- Wikbook -->
     <wikbook.version>0.9.41</wikbook.version>
     <!-- ************** -->
