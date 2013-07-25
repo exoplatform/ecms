@@ -15,17 +15,7 @@
       </languages>
     </label>
   </View>
-  <!--
-  ################resoucebundle FOR EXO:CALENDAR VIEW TEMPLATE############
-  -->
-  <Calendar>
-    <view>
-      <label>
-        <calendar>カレンダー</calendar>
-        <shared>共有</shared>
-      </label>
-    </view>
-  </Calendar>
+ 
   <!--
   ################resoucebundle FOR EXO:COMMENT VIEW TEMPLATE#############
   -->
@@ -43,34 +33,8 @@
       </label>
     </view>
   </Comment>
+ 
   <!--
-  ################resoucebundle FOR EXO:EVENT VIEW TEMPLATE#############
-  -->
-  <Event>
-    <view>
-      <label>
-        <january>1月</january>
-        <february>2月</february>
-        <march>3月</march>
-        <april>4月</april>
-        <may>5月</may>
-        <june>6月</june>
-        <july>7月</july>
-        <august>8月</august>
-        <september>9月</september>
-        <october>10月</october>
-        <november>11月</november>
-        <december>12月</december>
-        <event>イベント</event>
-        <subject>題</subject>
-        <location>場所</location>
-        <comment>コメント</comment>
-        <description>説明</description>
-      </label>
-    </view>
-  </Event>
-  <!--
-  ################resoucebundle FOR EXO:DATA VIEW TEMPLATE#############
   ################resoucebundle FOR NT:FILE VIEW TEMPLATE##############
   -->
   <File>
@@ -86,59 +50,7 @@
       </label>
     </view>
   </File>
-  <!--
-  ################resoucebundle FOR RMA:FILEPLAN VIEW TEMPLATE##############
-  -->
-  <FilePlan>
-    <view>
-      <label>
-        <content>ファイルプランコンテンツ</content>
-        <record-category-identifier>レコードカテゴリ識別子</record-category-identifier>
-        <disposition-author>権限を削除</disposition-author>
-        <disposition-instruction>指示を削除</disposition-instruction>
-        <permanent-record-indicator>永続的レコードインジケーター</permanent-record-indicator>
-        <contain-record-folder>レコードフォルダを含む</contain-record-folder>
-        <default-media-type>デフォルトメディアタイプ</default-media-type>
-        <default-marking-list>デフォルトマーキングリスト</default-marking-list>
-        <default-originating-organization>デフォルトの元組織</default-originating-organization>
-        <number-of-record>レコード数</number-of-record>
-        <record>レコード</record>
-        <obsolete-record>不要な旧レコード</obsolete-record>
-        <supreseded-record>置き換えレコード</supreseded-record>
-        <vital-record>必須 レコード</vital-record>
-        <cutoff-record>カットオフ レコード</cutoff-record>
-        <holdable-record>保持可能なレコード</holdable-record>
-        <transferable-record>移動可能レコード</transferable-record>
-        <accessionable-record>Accessionable Records</accessionable-record>
-        <destroyable-record>削除可能レコード</destroyable-record>
-        <record-id>レコードId</record-id>
-        <record-name>レコード名</record-name>
-        <originator>発生元</originator>
-        <date-received>受け取り日</date-received>
-        <originating-organization>発生元の組織</originating-organization>
-        <next-review-date>次回レビュー日</next-review-date>
-        <previous-review-date>前回レビュー日</previous-review-date>
-        <cutoff-date>Cutoff date</cutoff-date>
-        <hold-until>Hold until</hold-until>
-        <transfer-date>Transfer date</transfer-date>
-        <transfer-location>Transfer location</transfer-location>
-        <accession-date>アクセス日</accession-date>
-        <accession-location>Accession Location</accession-location>
-        <destruction-date>Destruction date</destruction-date>
-      </label>
-    </view>
-  </FilePlan>
-  <!--
-  ################resoucebundle FOR KFX:DOCUMENT VIEW TEMPLATE##############
-  -->
-  <Kofax>
-    <view>
-      <label>
-        <document-name>Kofax ドキュメント名</document-name>
-        <downloadable>ダウンロード可能ファイル</downloadable>
-      </label>
-    </view>
-  </Kofax>
+ 
   <!--
   ################resoucebundle FOR MAIL:DOCUMENT VIEW TEMPLATE##############
   -->
@@ -154,45 +66,6 @@
       </label>
     </view>
   </Mail>
-  <!--
-  ################resoucebundle FOR EXO:PODCAST VIEW TEMPLATE##############
-  -->
-  <Podcast>
-    <view>
-      <label>
-        <podcast>ポッドキャスト</podcast>
-        <title>タイトル</title>
-        <link>リンク</link>
-        <author>作者</author>
-        <explicit>過激表現を含む</explicit>
-        <category>カテゴリ</category>
-        <keyword>キーワード</keyword>
-        <publish-date>公開日</publish-date>
-        <mime-type>Mimeタイプ</mime-type>
-        <length>長さ</length>
-        <description>説明</description>
-      </label>
-    </view>
-  </Podcast>
-  <!--
-  ################resoucebundle FOR EXO:SAMPLE VIEW TEMPLATE##############
-  -->
-  <Sample>
-    <view>
-      <label>
-        <node-name>ノード名</node-name>
-        <title>タイトル</title>
-        <date>日付</date>
-        <date-time>日時</date-time>
-        <description>説明</description>
-        <image>画像</image>
-        <summary>サマリー</summary>
-        <content>コンテンツ</content>
-        <relation>関連</relation>
-        <attachment>添付</attachment>
-      </label>
-    </view>
-  </Sample>
   <!--
   ################resoucebundle FOR EXO:VOTE VIEW TEMPLATE##############
   -->
@@ -219,51 +92,6 @@
       </label>
     </view>
   </ListView>
-  <!--
-  ################resoucebundle FOR exo:workflowAction VIEW TEMPLATE##############
-  -->
-  <Workflow>
-    <view>
-      <label>
-        <name>名前</name>
-        <lifecycle>ライフサイクル</lifecycle>
-        <description>説明</description>
-        <validator>バリデータ</validator>
-        <to-workspace>ワークスペースへ</to-workspace>
-        <at-location>場所</at-location>
-      </label>
-    </view>
-  </Workflow>
-  <!--
-  ################resoucebundle FOR exo:backupAction VIEW TEMPLATE##############
-  -->
-  <Backup>
-    <view>
-      <label>
-        <name>名前</name>
-        <lifecycle>ライフサイクル</lifecycle>
-        <description>説明</description>
-        <to-workspace>ワークスペースへ</to-workspace>
-        <at-location>場所</at-location>
-      </label>
-    </view>
-  </Backup>
- 
-  <!--
-  ###################### resoucebundle for exo:iCalendarGenerateAction view template ####
-  -->
-  <Icalendar>
-    <view>
-      <label>
-        <action-name>アクション名</action-name>
-        <lifecycle>ライフサイクル</lifecycle>
-        <calendar-path>カレンダーパス</calendar-path>
-        <description>説明</description>
-        <query>クエリ</query>
-        <repository>リポジトリ</repository>
-      </label>
-    </view>
-  </Icalendar>
 
   <!--
   ###################### resoucebundle for exo:addMetadataAction view template ####
@@ -336,202 +164,6 @@
       </tooltip>
     </view>
   </ElementSet>
-  <!--
-  ###################### resoucebundle for rma:cutoffable view template ####
-  -->
-  <Cutoffable>
-    <view>
-      <label>
-        <not-available>N/A</not-available>
-        <cutoff-executed>カットオフ実行</cutoff-executed>
-        <cutoff-now>Cutoff now</cutoff-now>
-        <cutoff-date-time>Cutoff date time</cutoff-date-time>
-        <cutoff-event>Cutoff event</cutoff-event>
-        <cutoff-obsolete>Cutoff obsolete</cutoff-obsolete>
-        <cutoff-superseded>Cutoff superseded</cutoff-superseded>
-      </label>
-      <action>
-        <add-edit>追加/編集</add-edit>
-        <cancel>キャンセル</cancel>
-      </action>
-      <tooltip>
-        <cancel>キャンセル</cancel>
-        <add-edit>プロパティの追加/編集</add-edit>
-      </tooltip>
-    </view>
-  </Cutoffable>
-  <!--
-  ###################### resoucebundle for rma:destroyable view template ####
-  -->
-  <Destroyable>
-    <view>
-      <label>
-        <not-available>N/A</not-available>
-        <destruction-date>破棄日</destruction-date>
-      </label>
-      <action>
-        <add-edit>追加/編集</add-edit>
-        <cancel>キャンセル</cancel>
-      </action>
-      <tooltip>
-        <cancel>キャンセル</cancel>
-        <add-edit>プロパティの追加/編集</add-edit>
-      </tooltip>
-    </view>
-  </Destroyable>
-  <!--
-  ###################### resoucebundle for rma:accessionable view template ####
-  -->
-  <Accessionable>
-    <view>
-      <label>
-        <not-available>N/A</not-available>
-        <accession-executed>Accession Executed</accession-executed>
-        <accession-date>アクセス日</accession-date>
-      </label>
-      <action>
-        <add-edit>追加/編集</add-edit>
-        <cancel>キャンセル</cancel>
-      </action>
-      <tooltip>
-        <cancel>キャンセル</cancel>
-      </tooltip>
-    </view>
-  </Accessionable>
-  <!--
-  ###################### resoucebundle for rma:holdable view template ####
-  -->
-  <Holdable>
-    <view>
-      <label>
-        <not-available>N/A</not-available>
-        <hold-executed>Hold executed</hold-executed>
-        <hold-until>Hold until</hold-until>
-        <holds-discretionary>Hold discretionary</holds-discretionary>
-        <hold-until-event>Hold until event</hold-until-event>
-        <freeze>中断しました</freeze>
-      </label>
-      <action>
-        <add-edit>追加/編集</add-edit>
-        <cancel>キャンセル</cancel>
-      </action>
-      <tooltip>
-        <cancel>キャンセル</cancel>
-        <add-edit>プロパティの追加/編集</add-edit>
-      </tooltip>
-    </view>
-  </Holdable>
-  <!--
-  ###################### resoucebundle rma:record view template ####
-  -->
-  <Record>
-    <view>
-      <label>
-        <not-available>N/A</not-available>
-        <supplemental-marking-list>追加マーキングリスト</supplemental-marking-list>
-        <subject>題</subject>
-        <record-identifier>レコード識別子</record-identifier>
-        <originator>発生元</originator>
-        <format>フォーマット</format>
-        <addresses>アドレス</addresses>
-        <originating-organization>Originating organization</originating-organization>
-        <other-addresses>他のアドレス</other-addresses>
-        <publication-date>公開日</publication-date>
-        <record-note>レコード注記</record-note>
-        <date-received>受け取り日</date-received>
-        <media-format>メディアフォーマット</media-format>
-        <is-obsolete>廃止</is-obsolete>
-        <date-field>日付フィールド</date-field>
-        <superseded>代替される</superseded>
-        <uuid>UUID</uuid>
-      </label>
-      <action>
-        <add-edit>追加/編集</add-edit>
-        <cancel>キャンセル</cancel>
-      </action>
-      <tooltip>
-        <cancel>キャンセル</cancel>
-        <add-edit>プロパティの追加/編集</add-edit>
-      </tooltip>
-    </view>
-  </Record>
-  <!--
-  ###################### resoucebundle rma:transferable view template ####
-  -->
-  <Transferable>
-    <view>
-      <label>
-        <not-available>N/A</not-available>
-        <transfer-executed>Transfer executed</transfer-executed>
-        <transfer-date>Transfer date</transfer-date>
-        <transfer-location>Transfer location</transfer-location>
-      </label>
-      <action>
-        <add-edit>追加/編集</add-edit>
-        <cancel>キャンセル</cancel>
-      </action>
-      <tooltip>
-        <cancel>キャンセル</cancel>
-        <add-edit>プロパティの追加/編集</add-edit>
-      </tooltip>
-    </view>
-  </Transferable>
-  <!--
-  ###################### resoucebundle rma:vitalRecord view template ####
-  -->
-  <VitalRecord>
-    <view>
-      <label>
-        <not-available>N/A</not-available>
-        <is-vital-record>Is vital record</is-vital-record>
-        <prev-review-date>前回レビュー日</prev-review-date>
-        <next-review-date>次回レビュー日</next-review-date>
-      </label>
-      <action>
-        <add-edit>追加/編集</add-edit>
-        <cancel>キャンセル</cancel>
-      </action>
-      <tooltip>
-        <cancel>キャンセル</cancel>
-        <add-edit>プロパティの追加/編集</add-edit>
-      </tooltip>
-    </view>
-  </VitalRecord>
-  <!--
-  ###################### resoucebundle exo:contentPublishing dialogs template ####
-  -->
-  <ContentPublishing>
-    <view>
-      <label>
-        <id>Id</id>
-        <name>#{word.name}</name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <description>#{word.description}</description>
-        <validator>バリデータ</validator>
-        <supervisor>スーパーバイザ</supervisor>
-        <public-workspace>公開ワークスペース</public-workspace>
-        <public-path>公開パス</public-path>
-        <pending-workspace>ペンディングワークスペース</pending-workspace>
-        <pending-path>ペンディングパス</pending-path>
-        <backup-workspace>バックアップワークスペース</backup-workspace>
-        <backup-path>バックアップパス</backup-path>
-        <trash-workspace>ごみ箱ワークスペース</trash-workspace>
-        <trash-path>ごみ箱パス</trash-path>
-<affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
-      </label>
-    </view>
-  </ContentPublishing>
-
-  <SendMail>
-    <view>
-      <label> 
-        <isDeep>Is deep</isDeep>
-        <nodetypes>ノードタイプ</nodetypes>
-        <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
-        <nodeTypeName>Node type names</nodeTypeName>
-      </label> 
-  </view>
-  </SendMail>
 
   <ScriptAction>
     <view>
@@ -544,28 +176,6 @@
     </view>
   </ScriptAction>
   
-  <Getmail>
-    <view>
-      <label>
-        <isDeep>Is deep</isDeep>
-        <nodetypes>ノードタイプ</nodetypes>
-        <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
-        <nodeTypeName>Node type names</nodeTypeName>
-      </label> 
-    </view>
-  </Getmail>
-  
-  <Rss>
-    <view>
-      <label> 
-        <isDeep>Is deep</isDeep>
-        <nodetypes>ノードタイプ</nodetypes>
-        <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
-        <nodeTypeName>Node type names</nodeTypeName>
-      </label> 
-    </view>
-  </Rss>
-  
   <AddMetadata>
     <view>
       <label>
@@ -576,28 +186,6 @@
       </label> 
     </view>
   </AddMetadata>
-
-  <ReloadAction>
-    <view>
-      <label>
-        <isDeep>Is deep</isDeep>
-        <nodetypes>ノードタイプ</nodetypes>
-        <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
-        <nodeTypeName>Node type names</nodeTypeName>
-      </label> 
-    </view>
-  </ReloadAction>
-
-  <Transform>
-    <view>
-      <label> 
-        <isDeep>Is deep</isDeep>
-        <nodetypes>ノードタイプ</nodetypes>
-        <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
-        <nodeTypeName>Node type names</nodeTypeName>
-      </label> 
-    </view>
-  </Transform>
 
   <EnableVersioning>
     <view>
