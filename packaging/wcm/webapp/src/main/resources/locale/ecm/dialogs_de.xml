@@ -30,24 +30,6 @@
       <contentPlain>#{word.content}</contentPlain>
       <name>Name</name>
     <categories>Kategorien</categories>
-    <recordCategoryIdentifier>Datensatzkategorie Identifikator</recordCategoryIdentifier>
-    <dispositionAuthority>Dispositionsautorität</dispositionAuthority>
-    <permanentRecordIndicator>Indikator für dauerhafte Datensätze</permanentRecordIndicator>
-    <containsRecordFolders>Enthält Datensatzordner</containsRecordFolders>
-    <defaultMediaType>Standardmedientyp</defaultMediaType>
-    <defaultMarkingList>Standard Markierungsliste</defaultMarkingList>
-    <defaultOriginatingOrganization>Standard Herkunftsorganisation</defaultOriginatingOrganization>
-    <vitalRecordIndicator>Indikator für vitale Datensätze</vitalRecordIndicator>
-    <processCutoff>Abschneidevorgänge ausführen</processCutoff>
-    <eventTrigger>Ereignisauslöser</eventTrigger>
-    <processHold>Prozesssuspension</processHold>
-    <processTransfer>Übertragungsprozess</processTransfer>
-    <transferBlockSize>Übertragung-Blockgröße</transferBlockSize>
-    <processAccession>Process Accession</processAccession>
-    <accessionBlockSize>Akquisition-Blockgröße</accessionBlockSize>
-    <processDestruction>Prozesszerstörung</processDestruction>
-    <location>Ort</location>
-    <LinkURL>Uri</LinkURL>
     </label>
   </UIDocumentForm>
  
@@ -62,17 +44,7 @@
       </label>
     </dialog>
   </HtmlFile>
-  <!--
-  ###################### resoucebundle for exo:calendar dialogs template ####
-  -->
-  <Calendar>
-    <dialog>
-      <label>
-        <name>#{word.name}</name>
-        <shared>Freigegeben</shared>
-      </label>
-    </dialog>
-  </Calendar>
+
   <!--
   ###################### resoucebundle for nt:file dialogs template ####
   -->
@@ -110,56 +82,6 @@
       <actionName>#{word.name}</actionName>
     </label>
   </EditFormAction>
-  <!--
-  ###################### resoucebundle for exo:bacupAction dialogs template ####
-  -->
-  <Backup>
-    <dialog>
-      <label>
-        <id>Id</id>
-        <name>#{word.name}</name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <description>#{word.description}</description>
-        <to-workspace>zum Arbeitsbereich</to-workspace>
-        <with-path>Mit Pfad</with-path>
-      </label>
-    </dialog>
-  </Backup>
-  <!--
-  ###################### resoucebundle for exo:getmail dialogs template ####
-  -->
-  <Getmail>
-    <dialog>
-      <label>
-        <id>ID</id>
-        <name>#{word.name}</name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <protocol>Protokoll</protocol>
-        <host>Host</host>
-        <port>Port</port>
-        <folder>Ordner</folder>
-        <username>#{word.userName}</username>
-        <password>Passwort</password>
-        <description>#{word.description}</description>
-        <stote-path>Speicherpfad</stote-path>
-      </label>
-    </dialog>
-  </Getmail>
-  <!--
-  ###################### resoucebundle for exo:iCalendarGenerateAction dialogs template ####
-  -->
-  <Icalendar>
-    <dialog>
-      <label>
-        <id>ID</id>
-        <action-name>Aktionname</action-name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <description>#{word.description}</description>
-        <calendar-file-name>Kalenderdateiname</calendar-file-name>
-        <query-items>#{Ecm.dialog.label.query-items}</query-items>
-      </label>
-    </dialog>
-  </Icalendar>
  
   <!--
   ###################### resoucebundle for exo:addMetadataAction dialogs template ####
@@ -238,53 +160,7 @@
       </label>
     </dialog>
   </ElementSet>
-  <!--
-  ###################### resoucebundle for rma:cutoffable dialogs template ####
-  -->
-  <Cutoffable>
-    <dialog>
-      <label>
-        <cutoff-executed>Cut-Off ausgeführt</cutoff-executed>
-        <cutoff-now>Cut-Off jetzt</cutoff-now>
-        <cutoff-date-time>Cut-Off-Datum/-Zeit</cutoff-date-time>
-        <cutoff-event>Cut-Off-Ereignis</cutoff-event>
-        <cutoff-obsolete>Cut-Off veraltet</cutoff-obsolete>
-        <cutoff-superseded>Cut-Off abgelöst</cutoff-superseded>
-      </label>
-    </dialog>
-  </Cutoffable>
-  <!--
-  ###################### resoucebundle for rma:destroyable dialogs template ####
-  -->
-  <Destroyable>
-    <dialog>
-      <label>
-        <destruction-date>Löschungsdatum</destruction-date>
-      </label>
-    </dialog>
-  </Destroyable>
-  <!--
-  ###################### resoucebundle for rma:accessControllable dialogs template ####
-  -->
-  <AccessControllable>
-    <dialog>
-      <label>
-        <owner>Eigentümer</owner>
-        <permissions>Genehmigungen</permissions>
-      </label>
-    </dialog>
-  </AccessControllable>
-  <!--
-  ###################### resoucebundle for rma:accessionable dialogs template ####
-  -->
-  <Accessionable>
-    <dialog>
-      <label>
-        <accession-executed>Akquisition ausgeführt</accession-executed>
-        <accession-date>Akquisitionsdatum</accession-date>
-      </label>
-    </dialog>
-  </Accessionable>
+
   <!--
   ###################### resoucebundle for exo:actionable dialogs template ####
   -->
@@ -296,41 +172,7 @@
       </label>
     </dialog>
   </Actionable>
-  <!--
-  ###################### resoucebundle for exo:categorized dialogs template ####
-  -->
-  <Categorized>
-    <dialog>
-      <label>
-        <category>#{word.category}</category>
-      </label>
-    </dialog>
-  </Categorized>
-  <!--
-  ###################### resoucebundle for rma:holdable dialogs template ####
-  -->
-  <Holdable>
-    <dialog>
-      <label>
-        <hold-executed>﻿Anhalten ausgeführt</hold-executed>
-        <hold-until>Vorhalten bis</hold-until>
-        <holds-discretionary>Discretionary Hold</holds-discretionary>
-        <hold-until-event>Vorhalten bis zum Ereignis</hold-until-event>
-        <freeze>Einfrieren</freeze>
-      </label>
-    </dialog>
-  </Holdable>
-  <!--
-  ###################### resoucebundle for rma:lockable dialogs template ####
-  -->
-  <Lockable>
-    <dialog>
-      <label>
-        <lock-owner>Sperrenbesitzer</lock-owner>
-        <lock-is-deep>Sperre ist rekursiv</lock-is-deep>
-      </label>
-    </dialog>
-  </Lockable>
+
   <!--
   ###################### resoucebundle for exo:move dialogs template ####
   -->
@@ -355,31 +197,7 @@
       </label>
     </dialog>
   </Published>
-  <!--
-  ###################### resoucebundle rma:record dialogs template ####
-  -->
-  <Record>
-    <dialog>
-      <label>
-        <supplemental-marking-list>Zusätzliche Anmeldungsliste</supplemental-marking-list>
-        <subject>#{word.subject}</subject>
-        <record-identifier>Datensatzidentifikator</record-identifier>
-        <originator>Ersteller</originator>
-        <format>#{word.format}</format>
-        <addresses>Adressen</addresses>
-        <originating-organization>Ursprungsorganisation</originating-organization>
-        <other-addresses>Weitere Adressen</other-addresses>
-        <publication-date>Publication Date</publication-date>
-        <record-note>Datensatznotiz</record-note>
-        <date-received>Eingangsdatum</date-received>
-        <media-format>Medienformat</media-format>
-        <is-obsolete>Ist veraltet</is-obsolete>
-        <date-field>Datumsfeld</date-field>
-        <superseded>Abgelöst</superseded>
-        <uuid>UUID</uuid>
-      </label>
-    </dialog>
-  </Record>
+ 
   <!--
   ###################### resoucebundle mix:referenceable dialogs template ####
   -->
@@ -411,18 +229,7 @@
       </label>
     </dialog>
   </RssEnable>
-  <!--
-  ###################### resoucebundle rma:transferable dialogs template ####
-  -->
-  <Transferable>
-    <dialog>
-      <label>
-        <transfer-executed>Übertragung ausgeführt</transfer-executed>
-        <transfer-date>Übertragungsdatum</transfer-date>
-        <transfer-location>Dateiübertragungsort</transfer-location>
-      </label>
-    </dialog>
-  </Transferable>
+
   <!--
   ###################### resoucebundle mix:versionable dialogs template ####
   -->
@@ -438,18 +245,7 @@
       </label>
     </dialog>
   </Versionable>
-  <!--
-  ###################### resoucebundle rma:vitalRecord dialogs template ####
-  -->
-  <VitalRecord>
-    <dialog>
-      <label>
-        <is-vital-record>Ist ein vitaler Datensatz</is-vital-record>
-        <prev-review-date>Vorheriges Überprüfungsdatum</prev-review-date>
-        <next-review-date>Nächstes Überprüfungsdatum</next-review-date>
-      </label>
-    </dialog>
-  </VitalRecord>
+
   <!--
   ##################### resoucebundle for resouce container dialogs template#####
   -->
@@ -532,15 +328,6 @@
   <property_added>Eigenschaftshinzufügung</property_added>
   <property_removed>Eigenschaftsentfernung</property_removed>
   <property_changed>Eigenschaftsbearbeitung</property_changed>
-  <SendMail>
-    <dialog>
-      <label>
-        <isDeep>Ist rekursiv</isDeep>
-        <nodetypes>Knotentypen</nodetypes>
-        <affectedNodeTypeNames>Betroffenen Knotentypen</affectedNodeTypeNames>
-      </label>
-    </dialog>
-  </SendMail>
 
   <ScriptAction>
     <dialog>
@@ -552,26 +339,6 @@
     </dialog>
   </ScriptAction>
 
-  <Getmail>
-    <dialog>
-      <label>
-        <isDeep>Ist rekursiv</isDeep>
-        <nodetypes>Knotentypen</nodetypes>
-        <affectedNodeTypeNames>Betroffenen Knotentypen</affectedNodeTypeNames>
-      </label>
-    </dialog>
-  </Getmail>
-
-  <Rss>
-    <dialog>
-      <label>
-        <isDeep>Ist rekursiv</isDeep>
-        <nodetypes>Knotentypen</nodetypes>
-        <affectedNodeTypeNames>Betroffenen Knotentypen</affectedNodeTypeNames>
-      </label>
-    </dialog>
-  </Rss>
-
   <AddMetadata>
     <dialog>
       <label>
@@ -581,26 +348,6 @@
       </label>
     </dialog>
   </AddMetadata>
-
-  <ReloadAction>
-    <dialog>
-      <label>
-        <isDeep>Ist rekursiv</isDeep>
-        <nodetypes>Knotentypen</nodetypes>
-        <affectedNodeTypeNames>Betroffenen Knotentypen</affectedNodeTypeNames>
-      </label>
-    </dialog>
-  </ReloadAction>
-
-  <Transform>
-    <dialog>
-      <label>
-        <isDeep>Ist rekursiv</isDeep>
-        <nodetypes>Knotentypen</nodetypes>
-        <affectedNodeTypeNames>Betroffenen Knotentypen</affectedNodeTypeNames>
-      </label>
-    </dialog>
-  </Transform>
 
   <EnableVersioning>
     <dialog>
@@ -622,31 +369,6 @@
     </dialog>
   </AutoVersioning>
 
-  <!--
-  ###################### resoucebundle exo:contentPublishing dialogs template ####
-  -->
-  <ContentPublishing>
-    <dialog>
-      <label>
-        <id>ID</id>
-        <name>#{word.name}</name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <description>#{word.description}</description>
-        <validator>Genehmiger</validator>
-        <supervisor>Vorgesetzter</supervisor>
-        <public-workspace>Veröffentlichender Arbeitsbereich</public-workspace>
-        <public-path>Veröffentlichungspfad</public-path>
-        <pending-workspace>Ausstehender Arbeitsbereich</pending-workspace>
-        <pending-path>Ausstehender Pfad</pending-path>
-        <backup-workspace>Sicherungsarbeitsbereich</backup-workspace>
-        <backup-path>Sicherungspfad</backup-path>
-        <trash-workspace>Papierkorb-Arbeitsbereich</trash-workspace>
-        <trash-path>Pfad für Papierkorb</trash-path>
-<affectedNodeTypeNames>Betroffenen Knotentypen</affectedNodeTypeNames>
-      </label>
-    </dialog>
-  </ContentPublishing>
-  
   <AccessibleMedia>
   <dialog>
   <label>
