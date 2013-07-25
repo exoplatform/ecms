@@ -30,24 +30,6 @@
       <contentPlain>#{word.content}</contentPlain>
       <name>Namn</name>
     <categories>Kategorier</categories>
-    <recordCategoryIdentifier>Record Category Identifier</recordCategoryIdentifier>
-    <dispositionAuthority>Disposition myndigheten</dispositionAuthority>
-    <permanentRecordIndicator>Permanent Record Indicator</permanentRecordIndicator>
-    <containsRecordFolders>Innehåller mapp för poster</containsRecordFolders>
-    <defaultMediaType>Standard mediatyp</defaultMediaType>
-    <defaultMarkingList>Standard märkningstyp</defaultMarkingList>
-    <defaultOriginatingOrganization>Ursprungliga standardorganisationen</defaultOriginatingOrganization>
-    <vitalRecordIndicator>Vital Record Indicator</vitalRecordIndicator>
-    <processCutoff>Process Cutoffs</processCutoff>
-    <eventTrigger>Event Trigger</eventTrigger>
-    <processHold>Process Hold</processHold>
-    <processTransfer>Process Transfer</processTransfer>
-    <transferBlockSize>Överföra blockstorlek</transferBlockSize>
-    <processAccession>Process Accession</processAccession>
-    <accessionBlockSize>Gå till blockstorlek</accessionBlockSize>
-    <processDestruction>Process Destruction</processDestruction>
-    <location>Plats</location>
-    <LinkURL>URL</LinkURL>
     </label>
   </UIDocumentForm>
  
@@ -62,17 +44,7 @@
       </label>
     </dialog>
   </HtmlFile>
-  <!--
-  ###################### resoucebundle for exo:calendar dialogs template ####
-  -->
-  <Calendar>
-    <dialog>
-      <label>
-        <name>#{word.name}</name>
-        <shared>Delad</shared>
-      </label>
-    </dialog>
-  </Calendar>
+
   <!--
   ###################### resoucebundle for nt:file dialogs template ####
   -->
@@ -110,56 +82,6 @@
       <actionName>#{word.name}</actionName>
     </label>
   </EditFormAction>
-  <!--
-  ###################### resoucebundle for exo:bacupAction dialogs template ####
-  -->
-  <Backup>
-    <dialog>
-      <label>
-        <id>ID</id>
-        <name>#{word.name}</name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <description>#{word.description}</description>
-        <to-workspace>Till arbetsytan</to-workspace>
-        <with-path>Med sökväg</with-path>
-      </label>
-    </dialog>
-  </Backup>
-  <!--
-  ###################### resoucebundle for exo:getmail dialogs template ####
-  -->
-  <Getmail>
-    <dialog>
-      <label>
-        <id>ID</id>
-        <name>#{word.name}</name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <protocol>Protokoll</protocol>
-        <host>Värd</host>
-        <port>Portera</port>
-        <folder>Mapp</folder>
-        <username>#{word.userName}</username>
-        <password>Lösenord</password>
-        <description>#{word.description}</description>
-        <stote-path>Store path</stote-path>
-      </label>
-    </dialog>
-  </Getmail>
-  <!--
-  ###################### resoucebundle for exo:iCalendarGenerateAction dialogs template ####
-  -->
-  <Icalendar>
-    <dialog>
-      <label>
-        <id>ID</id>
-        <action-name>Åtgärdens namn</action-name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <description>#{word.description}</description>
-        <calendar-file-name>Kalenderns filnamn</calendar-file-name>
-        <query-items>#{Ecm.dialog.label.query-items}</query-items>
-      </label>
-    </dialog>
-  </Icalendar>
  
   <!--
   ###################### resoucebundle for exo:addMetadataAction dialogs template ####
@@ -238,53 +160,7 @@
       </label>
     </dialog>
   </ElementSet>
-  <!--
-  ###################### resoucebundle for rma:cutoffable dialogs template ####
-  -->
-  <Cutoffable>
-    <dialog>
-      <label>
-        <cutoff-executed>Cutoff genomförd</cutoff-executed>
-        <cutoff-now>Cutoff nu</cutoff-now>
-        <cutoff-date-time>Cutoff datum tid</cutoff-date-time>
-        <cutoff-event>Cutoff händelse</cutoff-event>
-        <cutoff-obsolete>Cutoff föråldrade</cutoff-obsolete>
-        <cutoff-superseded>Cutoff ersatt</cutoff-superseded>
-      </label>
-    </dialog>
-  </Cutoffable>
-  <!--
-  ###################### resoucebundle for rma:destroyable dialogs template ####
-  -->
-  <Destroyable>
-    <dialog>
-      <label>
-        <destruction-date>Förstörelse datum</destruction-date>
-      </label>
-    </dialog>
-  </Destroyable>
-  <!--
-  ###################### resoucebundle for rma:accessControllable dialogs template ####
-  -->
-  <AccessControllable>
-    <dialog>
-      <label>
-        <owner>Ägare</owner>
-        <permissions>Behörighet</permissions>
-      </label>
-    </dialog>
-  </AccessControllable>
-  <!--
-  ###################### resoucebundle for rma:accessionable dialogs template ####
-  -->
-  <Accessionable>
-    <dialog>
-      <label>
-        <accession-executed>Accessionable executed</accession-executed>
-        <accession-date>Accession date</accession-date>
-      </label>
-    </dialog>
-  </Accessionable>
+
   <!--
   ###################### resoucebundle for exo:actionable dialogs template ####
   -->
@@ -296,41 +172,7 @@
       </label>
     </dialog>
   </Actionable>
-  <!--
-  ###################### resoucebundle for exo:categorized dialogs template ####
-  -->
-  <Categorized>
-    <dialog>
-      <label>
-        <category>#{word.category}</category>
-      </label>
-    </dialog>
-  </Categorized>
-  <!--
-  ###################### resoucebundle for rma:holdable dialogs template ####
-  -->
-  <Holdable>
-    <dialog>
-      <label>
-        <hold-executed>Vänta med genomförande</hold-executed>
-        <hold-until>Hold Until</hold-until>
-        <holds-discretionary>Discretionary Hold</holds-discretionary>
-        <hold-until-event>Håll tills händelse</hold-until-event>
-        <freeze>Frysa</freeze>
-      </label>
-    </dialog>
-  </Holdable>
-  <!--
-  ###################### resoucebundle for rma:lockable dialogs template ####
-  -->
-  <Lockable>
-    <dialog>
-      <label>
-        <lock-owner>Låsägare</lock-owner>
-        <lock-is-deep>Låset är djupt</lock-is-deep>
-      </label>
-    </dialog>
-  </Lockable>
+
   <!--
   ###################### resoucebundle for exo:move dialogs template ####
   -->
@@ -355,31 +197,7 @@
       </label>
     </dialog>
   </Published>
-  <!--
-  ###################### resoucebundle rma:record dialogs template ####
-  -->
-  <Record>
-    <dialog>
-      <label>
-        <supplemental-marking-list>Supplemental Marking List</supplemental-marking-list>
-        <subject>#{word.subject}</subject>
-        <record-identifier>Postidentifierare</record-identifier>
-        <originator>Originator</originator>
-        <format>#{word.format}</format>
-        <addresses>Adresser</addresses>
-        <originating-organization>Originating Organization</originating-organization>
-        <other-addresses>Andra adresser</other-addresses>
-        <publication-date>Utgivningsdatum</publication-date>
-        <record-note>Posten Obs</record-note>
-        <date-received>Datum mottaget</date-received>
-        <media-format>Media-Format</media-format>
-        <is-obsolete>Är föråldrad</is-obsolete>
-        <date-field>Datum fält</date-field>
-        <superseded>Ersatt</superseded>
-        <uuid>UUID</uuid>
-      </label>
-    </dialog>
-  </Record>
+ 
   <!--
   ###################### resoucebundle mix:referenceable dialogs template ####
   -->
@@ -411,18 +229,7 @@
       </label>
     </dialog>
   </RssEnable>
-  <!--
-  ###################### resoucebundle rma:transferable dialogs template ####
-  -->
-  <Transferable>
-    <dialog>
-      <label>
-        <transfer-executed>Överföring utförs</transfer-executed>
-        <transfer-date>Överföringsdatum</transfer-date>
-        <transfer-location>Plats för överföring</transfer-location>
-      </label>
-    </dialog>
-  </Transferable>
+
   <!--
   ###################### resoucebundle mix:versionable dialogs template ####
   -->
@@ -438,18 +245,7 @@
       </label>
     </dialog>
   </Versionable>
-  <!--
-  ###################### resoucebundle rma:vitalRecord dialogs template ####
-  -->
-  <VitalRecord>
-    <dialog>
-      <label>
-        <is-vital-record>Är viktig post</is-vital-record>
-        <prev-review-date>Prev Review Date</prev-review-date>
-        <next-review-date>Nästa granskningsdatum</next-review-date>
-      </label>
-    </dialog>
-  </VitalRecord>
+
   <!--
   ##################### resoucebundle for resouce container dialogs template#####
   -->
@@ -532,15 +328,6 @@
   <property_added>Lägg till egenskaper</property_added>
   <property_removed>Ta bort egenskaper</property_removed>
   <property_changed>Ändra egenskaper</property_changed>
-  <SendMail>
-    <dialog>
-      <label>
-        <isDeep>Är för djupt</isDeep>
-        <nodetypes>Nodtyper</nodetypes>
-        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
-      </label>
-    </dialog>
-  </SendMail>
 
   <ScriptAction>
     <dialog>
@@ -552,26 +339,6 @@
     </dialog>
   </ScriptAction>
 
-  <Getmail>
-    <dialog>
-      <label>
-        <isDeep>Är för djupt</isDeep>
-        <nodetypes>Nodtyper</nodetypes>
-        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
-      </label>
-    </dialog>
-  </Getmail>
-
-  <Rss>
-    <dialog>
-      <label>
-        <isDeep>Är för djupt</isDeep>
-        <nodetypes>Nodtyper</nodetypes>
-        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
-      </label>
-    </dialog>
-  </Rss>
-
   <AddMetadata>
     <dialog>
       <label>
@@ -581,26 +348,6 @@
       </label>
     </dialog>
   </AddMetadata>
-
-  <ReloadAction>
-    <dialog>
-      <label>
-        <isDeep>Är för djupt</isDeep>
-        <nodetypes>Nodtyper</nodetypes>
-        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
-      </label>
-    </dialog>
-  </ReloadAction>
-
-  <Transform>
-    <dialog>
-      <label>
-        <isDeep>Är för djupt</isDeep>
-        <nodetypes>Nodtyper</nodetypes>
-        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
-      </label>
-    </dialog>
-  </Transform>
 
   <EnableVersioning>
     <dialog>
@@ -622,31 +369,6 @@
     </dialog>
   </AutoVersioning>
 
-  <!--
-  ###################### resoucebundle exo:contentPublishing dialogs template ####
-  -->
-  <ContentPublishing>
-    <dialog>
-      <label>
-        <id>ID</id>
-        <name>#{word.name}</name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <description>#{word.description}</description>
-        <validator>Validator</validator>
-        <supervisor>Supervisor</supervisor>
-        <public-workspace>Publicerand arbetsyta</public-workspace>
-        <public-path>Publicerad sökväg</public-path>
-        <pending-workspace>Pågående arbetsyta</pending-workspace>
-        <pending-path>Väntande sökväg</pending-path>
-        <backup-workspace>Backup arbetsyta</backup-workspace>
-        <backup-path>Backup av sökväg</backup-path>
-        <trash-workspace>Papperskorg för arbetsyta</trash-workspace>
-        <trash-path>Papperskorgens sökväg</trash-path>
-<affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
-      </label>
-    </dialog>
-  </ContentPublishing>
-  
   <AccessibleMedia>
   <dialog>
   <label>

@@ -15,17 +15,7 @@
       </languages>
     </label>
   </View>
-  <!--
-  ################resoucebundle FOR EXO:CALENDAR VIEW TEMPLATE############
-  -->
-  <Calendar>
-    <view>
-      <label>
-        <calendar>Kalender</calendar>
-        <shared>Delad</shared>
-      </label>
-    </view>
-  </Calendar>
+ 
   <!--
   ################resoucebundle FOR EXO:COMMENT VIEW TEMPLATE#############
   -->
@@ -43,34 +33,8 @@
       </label>
     </view>
   </Comment>
+ 
   <!--
-  ################resoucebundle FOR EXO:EVENT VIEW TEMPLATE#############
-  -->
-  <Event>
-    <view>
-      <label>
-        <january>Januari</january>
-        <february>Februari</february>
-        <march>Mars</march>
-        <april>April</april>
-        <may>Maj</may>
-        <june>Juni</june>
-        <july>Juli</july>
-        <august>Augusti</august>
-        <september>September</september>
-        <october>Oktober</october>
-        <november>November</november>
-        <december>December</december>
-        <event>Händelse</event>
-        <subject>Subjekt</subject>
-        <location>Plats</location>
-        <comment>Kommentar</comment>
-        <description>Beskrivning</description>
-      </label>
-    </view>
-  </Event>
-  <!--
-  ################resoucebundle FOR EXO:DATA VIEW TEMPLATE#############
   ################resoucebundle FOR NT:FILE VIEW TEMPLATE##############
   -->
   <File>
@@ -86,59 +50,7 @@
       </label>
     </view>
   </File>
-  <!--
-  ################resoucebundle FOR RMA:FILEPLAN VIEW TEMPLATE##############
-  -->
-  <FilePlan>
-    <view>
-      <label>
-        <content>File Plan Content</content>
-        <record-category-identifier>Record Category Identifier</record-category-identifier>
-        <disposition-author>Disposition myndigheten</disposition-author>
-        <disposition-instruction>Disposition instruktioner</disposition-instruction>
-        <permanent-record-indicator>Permanent Record Indicator</permanent-record-indicator>
-        <contain-record-folder>Innehåller mapp för poster</contain-record-folder>
-        <default-media-type>Standard mediatyp</default-media-type>
-        <default-marking-list>Standardlistan märkning</default-marking-list>
-        <default-originating-organization>Ursprungliga standardorganisationen</default-originating-organization>
-        <number-of-record>Antal poster</number-of-record>
-        <record>Poster</record>
-        <obsolete-record>Föråldrade poster</obsolete-record>
-        <supreseded-record>Superseded Records</supreseded-record>
-        <vital-record>Vitals register</vital-record>
-        <cutoff-record>Cutoff Records</cutoff-record>
-        <holdable-record>Holdable Records</holdable-record>
-        <transferable-record>Överlåtbara poster</transferable-record>
-        <accessionable-record>Accessionable Records</accessionable-record>
-        <destroyable-record>Destroyable Records</destroyable-record>
-        <record-id>Post-ID</record-id>
-        <record-name>Postnamnet</record-name>
-        <originator>Originator</originator>
-        <date-received>Datum mottaget</date-received>
-        <originating-organization>Originating Organization</originating-organization>
-        <next-review-date>Nästa granskningsdatum</next-review-date>
-        <previous-review-date>Tidigare granskningsdatum</previous-review-date>
-        <cutoff-date>Cutoff Date</cutoff-date>
-        <hold-until>Hold Until</hold-until>
-        <transfer-date>Överföringsdatum</transfer-date>
-        <transfer-location>Plats för överföring</transfer-location>
-        <accession-date>Accession Date</accession-date>
-        <accession-location>Accession Location</accession-location>
-        <destruction-date>Förstörelse datum</destruction-date>
-      </label>
-    </view>
-  </FilePlan>
-  <!--
-  ################resoucebundle FOR KFX:DOCUMENT VIEW TEMPLATE##############
-  -->
-  <Kofax>
-    <view>
-      <label>
-        <document-name>Kofax dokumentnamn</document-name>
-        <downloadable>Nedladdningsbar fil</downloadable>
-      </label>
-    </view>
-  </Kofax>
+ 
   <!--
   ################resoucebundle FOR MAIL:DOCUMENT VIEW TEMPLATE##############
   -->
@@ -154,45 +66,6 @@
       </label>
     </view>
   </Mail>
-  <!--
-  ################resoucebundle FOR EXO:PODCAST VIEW TEMPLATE##############
-  -->
-  <Podcast>
-    <view>
-      <label>
-        <podcast>Podcast</podcast>
-        <title>Titel</title>
-        <link>Länk</link>
-        <author>Författare</author>
-        <explicit>Explicit</explicit>
-        <category>Kategori</category>
-        <keyword>Sökord</keyword>
-        <publish-date>Publicera datum</publish-date>
-        <mime-type>MIME-typ</mime-type>
-        <length>Längd</length>
-        <description>Beskrivning</description>
-      </label>
-    </view>
-  </Podcast>
-  <!--
-  ################resoucebundle FOR EXO:SAMPLE VIEW TEMPLATE##############
-  -->
-  <Sample>
-    <view>
-      <label>
-        <node-name>Nodnamnet</node-name>
-        <title>Titel</title>
-        <date>Datum</date>
-        <date-time>Datum tid</date-time>
-        <description>Beskrivning</description>
-        <image>Bild</image>
-        <summary>Sammanfattning</summary>
-        <content>Innehåll</content>
-        <relation>Förbindelser</relation>
-        <attachment>Bilagor</attachment>
-      </label>
-    </view>
-  </Sample>
   <!--
   ################resoucebundle FOR EXO:VOTE VIEW TEMPLATE##############
   -->
@@ -219,51 +92,6 @@
       </label>
     </view>
   </ListView>
-  <!--
-  ################resoucebundle FOR exo:workflowAction VIEW TEMPLATE##############
-  -->
-  <Workflow>
-    <view>
-      <label>
-        <name>Namn</name>
-        <lifecycle>Livscykel</lifecycle>
-        <description>Beskrivning</description>
-        <validator>Validator</validator>
-        <to-workspace>Till arbetsytan</to-workspace>
-        <at-location>På plats</at-location>
-      </label>
-    </view>
-  </Workflow>
-  <!--
-  ################resoucebundle FOR exo:backupAction VIEW TEMPLATE##############
-  -->
-  <Backup>
-    <view>
-      <label>
-        <name>Namn</name>
-        <lifecycle>Livscykel</lifecycle>
-        <description>Beskrivning</description>
-        <to-workspace>Till arbetsytan</to-workspace>
-        <at-location>På plats</at-location>
-      </label>
-    </view>
-  </Backup>
- 
-  <!--
-  ###################### resoucebundle for exo:iCalendarGenerateAction view template ####
-  -->
-  <Icalendar>
-    <view>
-      <label>
-        <action-name>Åtgärdens namn</action-name>
-        <lifecycle>Livscykel</lifecycle>
-        <calendar-path>Kalender väg</calendar-path>
-        <description>Beskrivning</description>
-        <query>Förfrågan</query>
-        <repository>Repository</repository>
-      </label>
-    </view>
-  </Icalendar>
 
   <!--
   ###################### resoucebundle for exo:addMetadataAction view template ####
@@ -336,202 +164,6 @@
       </tooltip>
     </view>
   </ElementSet>
-  <!--
-  ###################### resoucebundle for rma:cutoffable view template ####
-  -->
-  <Cutoffable>
-    <view>
-      <label>
-        <not-available>N/A</not-available>
-        <cutoff-executed>Cutoff genomförd</cutoff-executed>
-        <cutoff-now>Cutoff nu</cutoff-now>
-        <cutoff-date-time>Cutoff datum tid</cutoff-date-time>
-        <cutoff-event>Cutoff händelse</cutoff-event>
-        <cutoff-obsolete>Cutoff föråldrade</cutoff-obsolete>
-        <cutoff-superseded>Cutoff ersatt</cutoff-superseded>
-      </label>
-      <action>
-        <add-edit>Lägg till/redigera</add-edit>
-        <cancel>Avbryt</cancel>
-      </action>
-      <tooltip>
-        <cancel>Avbryt</cancel>
-        <add-edit>Lägg till/redigera egenskaper</add-edit>
-      </tooltip>
-    </view>
-  </Cutoffable>
-  <!--
-  ###################### resoucebundle for rma:destroyable view template ####
-  -->
-  <Destroyable>
-    <view>
-      <label>
-        <not-available>N/A</not-available>
-        <destruction-date>Förstörelse datum</destruction-date>
-      </label>
-      <action>
-        <add-edit>Lägg till/redigera</add-edit>
-        <cancel>Avbryt</cancel>
-      </action>
-      <tooltip>
-        <cancel>Avbryt</cancel>
-        <add-edit>Lägg till/redigera egenskaper</add-edit>
-      </tooltip>
-    </view>
-  </Destroyable>
-  <!--
-  ###################### resoucebundle for rma:accessionable view template ####
-  -->
-  <Accessionable>
-    <view>
-      <label>
-        <not-available>N/A</not-available>
-        <accession-executed>Accession Executed</accession-executed>
-        <accession-date>Accession Date</accession-date>
-      </label>
-      <action>
-        <add-edit>Lägg till/redigera</add-edit>
-        <cancel>Avbryt</cancel>
-      </action>
-      <tooltip>
-        <cancel>Avbryt</cancel>
-      </tooltip>
-    </view>
-  </Accessionable>
-  <!--
-  ###################### resoucebundle for rma:holdable view template ####
-  -->
-  <Holdable>
-    <view>
-      <label>
-        <not-available>N/A</not-available>
-        <hold-executed>Vänta med genomförande</hold-executed>
-        <hold-until>Håll tills</hold-until>
-        <holds-discretionary>Håll diskretionära</holds-discretionary>
-        <hold-until-event>Håll tills händelse</hold-until-event>
-        <freeze>Frysa</freeze>
-      </label>
-      <action>
-        <add-edit>Lägg till/redigera</add-edit>
-        <cancel>Avbryt</cancel>
-      </action>
-      <tooltip>
-        <cancel>Avbryt</cancel>
-        <add-edit>Lägg till/redigera egenskaper</add-edit>
-      </tooltip>
-    </view>
-  </Holdable>
-  <!--
-  ###################### resoucebundle rma:record view template ####
-  -->
-  <Record>
-    <view>
-      <label>
-        <not-available>N/A</not-available>
-        <supplemental-marking-list>Supplemental Marking List</supplemental-marking-list>
-        <subject>Subjekt</subject>
-        <record-identifier>Postidentifierare</record-identifier>
-        <originator>Beställaren</originator>
-        <format>Format</format>
-        <addresses>Adresser</addresses>
-        <originating-organization>Organisations ursprung</originating-organization>
-        <other-addresses>Andra adresser</other-addresses>
-        <publication-date>Utgivningsdatum</publication-date>
-        <record-note>Posten Obs</record-note>
-        <date-received>Datum mottaget</date-received>
-        <media-format>Media-Format</media-format>
-        <is-obsolete>Är föråldrad</is-obsolete>
-        <date-field>Datum fält</date-field>
-        <superseded>Ersatt</superseded>
-        <uuid>UUID</uuid>
-      </label>
-      <action>
-        <add-edit>Lägg till/redigera</add-edit>
-        <cancel>Avbryt</cancel>
-      </action>
-      <tooltip>
-        <cancel>Avbryt</cancel>
-        <add-edit>Lägg till/redigera egenskaper</add-edit>
-      </tooltip>
-    </view>
-  </Record>
-  <!--
-  ###################### resoucebundle rma:transferable view template ####
-  -->
-  <Transferable>
-    <view>
-      <label>
-        <not-available>N/A</not-available>
-        <transfer-executed>Överföring utförd</transfer-executed>
-        <transfer-date>Överföringsdatum</transfer-date>
-        <transfer-location>Plats för överföring</transfer-location>
-      </label>
-      <action>
-        <add-edit>Lägg till/redigera</add-edit>
-        <cancel>Avbryt</cancel>
-      </action>
-      <tooltip>
-        <cancel>Avbryt</cancel>
-        <add-edit>Lägg till/redigera egenskaper</add-edit>
-      </tooltip>
-    </view>
-  </Transferable>
-  <!--
-  ###################### resoucebundle rma:vitalRecord view template ####
-  -->
-  <VitalRecord>
-    <view>
-      <label>
-        <not-available>N/A</not-available>
-        <is-vital-record>Är viktig post</is-vital-record>
-        <prev-review-date>Tidigare granskningsdatum</prev-review-date>
-        <next-review-date>Nästa granskningsdatum</next-review-date>
-      </label>
-      <action>
-        <add-edit>Lägg till/redigera</add-edit>
-        <cancel>Avbryt</cancel>
-      </action>
-      <tooltip>
-        <cancel>Avbryt</cancel>
-        <add-edit>Lägg till/redigera egenskaper</add-edit>
-      </tooltip>
-    </view>
-  </VitalRecord>
-  <!--
-  ###################### resoucebundle exo:contentPublishing dialogs template ####
-  -->
-  <ContentPublishing>
-    <view>
-      <label>
-        <id>ID</id>
-        <name>#{word.name}</name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <description>#{word.description}</description>
-        <validator>Validator</validator>
-        <supervisor>Supervisor</supervisor>
-        <public-workspace>Publicerand arbetsyta</public-workspace>
-        <public-path>Publicerad sökväg</public-path>
-        <pending-workspace>Pågående arbetsyta</pending-workspace>
-        <pending-path>Väntande sökväg</pending-path>
-        <backup-workspace>Backup arbetsyta</backup-workspace>
-        <backup-path>Backup av sökväg</backup-path>
-        <trash-workspace>Papperskorg för arbetsyta</trash-workspace>
-        <trash-path>Papperskorgens sökväg</trash-path>
-<affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
-      </label>
-    </view>
-  </ContentPublishing>
-
-  <SendMail>
-    <view>
-      <label> 
-        <isDeep>Är djupt</isDeep>
-        <nodetypes>Nodtyper</nodetypes>
-        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
-        <nodeTypeName>Typ nodnamn</nodeTypeName>
-      </label> 
-  </view>
-  </SendMail>
 
   <ScriptAction>
     <view>
@@ -544,28 +176,6 @@
     </view>
   </ScriptAction>
   
-  <Getmail>
-    <view>
-      <label>
-        <isDeep>Är djupt</isDeep>
-        <nodetypes>Nodtyper</nodetypes>
-        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
-        <nodeTypeName>Typ nodnamn</nodeTypeName>
-      </label> 
-    </view>
-  </Getmail>
-  
-  <Rss>
-    <view>
-      <label> 
-        <isDeep>Är djupt</isDeep>
-        <nodetypes>Nodtyper</nodetypes>
-        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
-        <nodeTypeName>Typ nodnamn</nodeTypeName>
-      </label> 
-    </view>
-  </Rss>
-  
   <AddMetadata>
     <view>
       <label>
@@ -576,28 +186,6 @@
       </label> 
     </view>
   </AddMetadata>
-
-  <ReloadAction>
-    <view>
-      <label>
-        <isDeep>Är djupt</isDeep>
-        <nodetypes>Nodtyper</nodetypes>
-        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
-        <nodeTypeName>Typ nodnamn</nodeTypeName>
-      </label> 
-    </view>
-  </ReloadAction>
-
-  <Transform>
-    <view>
-      <label> 
-        <isDeep>Är djupt</isDeep>
-        <nodetypes>Nodtyper</nodetypes>
-        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
-        <nodeTypeName>Typ nodnamn</nodeTypeName>
-      </label> 
-    </view>
-  </Transform>
 
   <EnableVersioning>
     <view>
