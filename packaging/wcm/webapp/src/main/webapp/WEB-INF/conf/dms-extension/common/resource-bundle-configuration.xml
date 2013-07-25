@@ -44,7 +44,6 @@
         <value>locale.portal.custom</value>
         <value>locale.ecm.dialogs</value>
         <value>locale.ecm.views</value>
-        <value>locale.ecm.homepage</value>
 				<value>locale.navigation.group.platform.administrators</value>
         <value>locale.navigation.group.platform.users</value>
         <value>locale.navigation.group.platform.guests</value>
