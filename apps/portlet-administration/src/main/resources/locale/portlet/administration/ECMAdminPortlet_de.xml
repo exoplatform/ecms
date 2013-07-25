@@ -15,7 +15,6 @@
       </label>
     </tab>    
     <label>     
-      <UITaxonomyManager>Einfache Kategorie verwalten</UITaxonomyManager>
       <UITaxonomyManagerTrees>Kategorien</UITaxonomyManagerTrees>
       <UIMetadataManager>Metadaten</UIMetadataManager>
       <UINamespaceManager>Namensräume</UINamespaceManager>
@@ -399,7 +398,7 @@
       <viewSideBar>Seitenleiste anzeigen:</viewSideBar>
       <permissions>Berechtigungen:</permissions>
       <showHiddenNode>Ausgeblendeten Knoten anzeigen:</showHiddenNode>
-      <allowCreateFolder>erlaubte Ordnertyp-Erstellung:</allowCreateFolder>
+      <allowCreateFolders>Allow Folder Creation:</allowCreateFolders>
       <Admin>Admin:</Admin>
       <Categories>Kategorien:</Categories>
       <Icons>Piktogramme:</Icons>
@@ -426,215 +425,13 @@
       <action>Aktion</action>
     </header>
   </UITreeList>
-  <!--
-  ################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.UIRepositoryManager #
-  ################################################################################
-  -->
-  <UIRepositoryControl>
-    <label>
-      <repoName>Aktuelles Repository</repoName>
-    </label>
-    <title>
-      <repoAdd>Repository hinzufügen</repoAdd>
-      <repoEdit>Repository bearbeiten</repoEdit>
-      <repoDelete>Repository entfernen</repoDelete>
-    </title>
-    <msg>
-      <cannot-deleteRepo>{0} kann nicht gelöscht werden, da es die Standardeinstellung ist.</cannot-deleteRepo>
-    </msg>
-  </UIRepositoryControl>
-  <UIECMAdminUIPopupWindow>
-    <title>
-      <UIRepositoryFormContainer>Repository</UIRepositoryFormContainer>
-      <Delete>Löschen</Delete>
-      <UIRepositoryList>Repository-Liste</UIRepositoryList>
-    </title>
-  </UIECMAdminUIPopupWindow>
-  <UIPopupWindowControl>
-    <title>
-      <UIWorkspaceWizardContainer>Arbeitsbereich-Assistent</UIWorkspaceWizardContainer>
-      <UIRepositoryValueSelect>Authentifizierungsklasse auswählen</UIRepositoryValueSelect>
-    </title>
-  </UIPopupWindowControl>
-  <UIPopupWindowInWizard>
-    <title>
-      <UIPermissionSelector>Berechtigungen auswählen</UIPermissionSelector>
-      <UIPermissionContainer>Berechtigungsauswahl</UIPermissionContainer>
-      <UIRepositoryValueSelect>Klasse auswählen</UIRepositoryValueSelect>
-    </title>
-  </UIPopupWindowInWizard>
-  <UIRepositoryValueSelect>
-    <header>
-      <name>Ganzer Name</name>
-      <action>Auswählen</action>
-    </header>
-    <action>
-      <Close>Schließen</Close>
-    </action>
-  </UIRepositoryValueSelect>
-  <UIRepositorySelectForm>
-    <msg-editError>Einige Fehler mit dem Repository "{0}" sind aufgetreten. Bitte überprüfen Sie die Einstellungen oder erstellen Sie ein neues.</msg-editError>
-    <msg-accessdenied>Ihnen fehlt die Berechtigung, das '{0}' Repository zu bearbeiten.</msg-accessdenied>
-  </UIRepositorySelectForm>
-  <UIRepositoryForm>
-    <label>
-      <name>Name</name>
-      <wsInputSet>UIRepositoryForm</wsInputSet>
-      <authInputSet>UIRepositoryForm</authInputSet>
-      <workspace>Arbeitsbereich</workspace>
-      <isDefault>Als Standard festlegen</isDefault>
-      <accessControl>Zugriffskontrolle</accessControl>
-      <authenticationPolicy>Authentifikationsrichtlinie</authenticationPolicy>
-      <securityDomain>Sicherheitsbereich</securityDomain>
-      <sessionTime>Ihre Benutzersitzung ist abgelaufen</sessionTime>
-      <channelConfig>Kanalkonfiguration</channelConfig>
-      <enableReplication>Replikation aktivieren</enableReplication>
-      <repMode>Replikationsmodus</repMode>
-      <repTestMode>Ist Test-Replikation</repTestMode>
-      <directoryPath>Verzeichnis</directoryPath>
-      <maxBufferSize>maximale Größe des Puffers</maxBufferSize>
-    </label>
-    <msg>
-      <cannot-delete-default-workspace>Der Arbeitsbereich "{0}" kann nicht gelöscht werden, da es dem Standard-Arbeitsbereich entspricht.</cannot-delete-default-workspace>
-      <repoName-exist>Das Repository "{0}" ist bereits vorhanden.</repoName-exist>
-      <repoName-not-alow>Der Repository-Name enthält ungültige Zeichen.</repoName-not-alow>
-      <workspace-isrequire>Bitte wählen Sie mindestens einen Arbeitsbereich.</workspace-isrequire>
-      <cannot-delete-workspace>Der Arbeitsbereich  {0} kann nicht gelöscht werden.</cannot-delete-workspace>
-      <workspace-setdefault>Sie müssen den Standard-Arbeitsbereich festlegen.</workspace-setdefault>
-      <!--DMS 2.4.x ECM-3611> -->
-      <workspace-setDMSsystem>Sie müssen den DMS-System-Arbeitsbereich festlegen.</workspace-setDMSsystem>
-      <workspace-bseChanel>Der Kanal wird benötigt.</workspace-bseChanel>
-      <workspace-bseMode>Replikationsmodus wird benötigt.</workspace-bseMode>
-      <workspace-bsePath>Das Verzeichnis wird benötigt.</workspace-bsePath>
-      <sessionTime-invalid>Ungültiges Format der Abfallzeit der Benutzersitzung.</sessionTime-invalid>
-      <sessionTime-required>Abfallzeit der Sitzung wird benötigt.</sessionTime-required>
-      <workspace-bseBuffer>Max Buffer is required.</workspace-bseBuffer>
-      <authen-isrequire>Authentication policy is required.</authen-isrequire>
-      <confirm-workspace-delete>Are you sure you want to delete this workspace?</confirm-workspace-delete>
-    </msg>
-    <action>
-      <Close>#{word.close}</Close>
-      <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
-      <AddWorkspace>Add Workspace</AddWorkspace>
-    </action>
-  </UIRepositoryForm>
+  
   <UIRepositoryList>
     <titlebar>
       <label>ECM Hauptfunktionen verwalten</label>
     </titlebar>
-    <header>
-      <name>Name</name>
-      <workspaces>Workspaces</workspaces>
-      <isdefault>Is Default</isdefault>
-      <accesscontrol>Access Control</accesscontrol>
-      <sessiontimeout>Session Timeout</sessiontimeout>
-      <action>Actions</action>
-    </header>
-    <action>
-      <Close>#{word.close}</Close>
-    </action>
-    <msg>
-      <cannot-delete>You cannot delete '{0}' because it may be in use.</cannot-delete>
-      <confirm-delete>Are you sure you want to delete this repository?</confirm-delete>
-    </msg>
   </UIRepositoryList>
-  <UIWorkspacePermissionForm>
-    <label>
-      <permission>Berechtigungen</permission>
-      <read>Lesen</read>
-      <add_node>Knoten hinzufügen</add_node>
-      <set_property>Eigenschaft einstellen</set_property>
-      <remove>Entfernen</remove>
-    </label>
-    <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
-    </action>
-    <msg>
-      <check-one>Bitte wählen Sie mindestens eine Berechtigung aus.</check-one>
-    </msg>
-  </UIWorkspacePermissionForm>
-  <PermissionPopupSelect>
-    <title>
-      <UIPermissionSelector>Berechtigungsbrowser</UIPermissionSelector>
-    </title>
-    <label>
-      <selectGroup>eine Gruppe auswählen</selectGroup>
-      <selectMembership>Rolle auswählen</selectMembership>
-    </label>
-  </PermissionPopupSelect>
-  <UIWorkspaceWizard>
-    <msg>
-      <wsname-exist>The '{0}' workspace already exists in this database.</wsname-exist>
-      <name-require>The workspace name is required.</name-require>
-      <permission-require>You must select a permission.</permission-require>
-      <nodeType-invalid>The  auto-initialized node type in the default workspace must be nt:unstructured.</nodeType-invalid>
-      <!--DMS 2.4.x ECM-3611-->
-      <nodeType-invalidSystemWs>The  auto-initialized node type in the DMS system workspace must be nt:unstructured.</nodeType-invalidSystemWs>
-      <lockTimeOut-required>The lock timeout is required.</lockTimeOut-required>
-      <lockTimeOut-invalid>The lock timeout must be in numerical format.</lockTimeOut-invalid>
-      <buffer-invalid>The buffer size must be in numerical format.</buffer-invalid>
-      <buffer-require>The buffer size is required.</buffer-require>
-      <buffer-zero>The buffer size must be greater than zero.</buffer-zero>
-      <buffer-small>The buffer size is too small.</buffer-small>
-      <containerName-invalid>Der Containername ist erforderlich.</containerName-invalid>
-      <maxSize-require>The max cache size is required.</maxSize-require>
-      <maxSize-invalid>The max cache size must be in numerical format.</maxSize-invalid>
-      <maxSize-rezo>The max cache size must be greater than zero.</maxSize-rezo>
-      <liveTime-require>The cache live time is required.</liveTime-require>
-      <liveTime-invalid>The cache live time must be in numerical format.</liveTime-invalid>
-      <liveTime-rezo>The cache live time must be greater than zero.</liveTime-rezo>
-      <sourceName-invalid>The source name is required.</sourceName-invalid>
-      <storePath-invalid>The store path is required.</storePath-invalid>
-      <swapPath-invalid>The swap path is required.</swapPath-invalid>
-      <queryHandlerType>The query handler type is required.</queryHandlerType>
-      <indexPath-invalid>The query index path is required.</indexPath-invalid>
-      <storeType-invalid>The store type is required.</storeType-invalid>
-      <queryHandlerType-invalid>The query handler is required.</queryHandlerType-invalid>
-      <permission-invalid>You must select at least one right.</permission-invalid>
-    </msg>
-    <label>
-      <step>Step</step>
-      <wizardSteps>Wizard Steps</wizardSteps>
-      <name>Name</name>
-      <autoInitializedRootNt>Root Node Type</autoInitializedRootNt>
-      <isDefault>Set as Default</isDefault>
-      <!--DMS 2.4.x ECM-3611-->
-      <isDMSSytemWs>Set as DMS System Workspace</isDMSSytemWs>
-      <permission>Auto-init Permission</permission>
-      <setLockTimeOut>Lock Timeout</setLockTimeOut>
-      <container>Container Type</container>
-      <sourceName>Source Name</sourceName>
-      <dbType>Dialect</dbType>
-      <isMulti>Is Multiple</isMulti>
-      <storeType>Store Type</storeType>
-      <filterType>Filters</filterType>
-      <maxBuffer>Max Buffer (bytes)</maxBuffer>
-      <swapPath>Swap Path</swapPath>
-      <storePath>Store Path</storePath>
-      <externalStore>External Value Storages</externalStore>
-      <queryHandler>Query Handler</queryHandler>
-      <indexPath>Query Index Path</indexPath>
-      <isCache>Enable Cache</isCache>
-      <maxSize>Max Cache Size</maxSize>
-      <liveTime>Cache Live Time</liveTime>
-    </label>
-    <tab>
-      <info>
-        <step1>Enter workspace name, node type and more.</step1>
-        <step2>Configure for containers, storage and more.</step2>
-        <step3>Configure for cache, query handler and more.</step3>
-      </info>
-    </tab>
-    <action>
-      <Next>#{word.next}</Next>
-      <Back>#{word.back}</Back>
-      <Finish>Finish</Finish>
-      <Cancel>#{word.cancel}</Cancel>
-    </action>
-  </UIWorkspaceWizard>
+  
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
@@ -982,8 +779,6 @@
     <title>
       <UIViewContainer>Ansichten</UIViewContainer>
       <ECMTemplate>Explorer-Vorlagen</ECMTemplate>
-      <CBTemplate>BC Templates</CBTemplate>
-      <UICBScripts>BC Scripts</UICBScripts>
       <UIScriptForm>Skripte</UIScriptForm>
       <UIDialogTab>Dialog</UIDialogTab>
       <UIViewTab>Ansehen</UIViewTab>
@@ -1149,11 +944,9 @@
       <template>Vorlagen</template>
       <enableVersion>Version aktivieren</enableVersion>
       <addFolder>Ordner hinzufügen</addFolder>
-      <addSignature>Signatur hinzufügen</addSignature>
       <addDocument>Dokument hinzufügen</addDocument>
       <editDocument>Dokument bearbeiten</editDocument>
       <upload>Hochladen</upload>
-      <createTicket>Create Ticket</createTicket>
       <paste>Einfügen</paste>
       <search>Suchen</search>
       <viewReferences>Referenzen ansehen</viewReferences>
@@ -1172,13 +965,11 @@
       <showJCRStructure>JCR Struktur anzeigen</showJCRStructure>
       <watchDocument>Dokument folgen</watchDocument>
       <taggingDocument>Dokument taggen</taggingDocument>
-      <multiLanguage>Mehrsprachig</multiLanguage>
       <viewMetadatas>Metadaten</viewMetadatas>
       <overloadThumbnail>Overload Thumbnail</overloadThumbnail>
       <manageHidden>Inhalt ein-/ausblenden</manageHidden>
       <comment>Kommentar</comment>
       <vote>Abstimmen</vote>  
-      <manageSimpleCategories>Manage Simple Categories</manageSimpleCategories>
       <addCategory>eine Kategorie hinzufügen</addCategory>
       <addLocalizationLink>Übersetzung hinzufügen</addLocalizationLink>
       <publicationRequestApproval>Genehmigung anfordern</publicationRequestApproval>
@@ -1212,19 +1003,6 @@
       <Close>#{word.close}</Close>
       <Restore>Wiederherstellen</Restore>
     </action>
-    <label>
-     <option>
-      <ListView>Listenansicht</ListView>
-        <TimelineView>Zeitachsenansicht</TimelineView>
-      <ThumbnailsView>Miniaturansicht</ThumbnailsView>
-      <CoverFlow>Coverflow</CoverFlow>
-      <IconView>Piktogrammansicht</IconView>
-      <SlideShowView>Diashow-Ansicht</SlideShowView>
-      <SystemView>Systemansicht</SystemView>
-      <ContentView>Inhaltsansicht</ContentView>
-      <FileView>Dateiverwaltung-Ansicht</FileView>
-    </option>
-    </label>
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
@@ -1437,7 +1215,7 @@
       <scriptContent>Skriptinhalt</scriptContent>
       <scriptLabel>Name</scriptLabel>
       <scriptName>Skript</scriptName>
-      <enableVersion>Versionierung aktivieren</enableVersion>
+      <enableVersion>Enable Versioning</enableVersion>
     </label>
   </ecmScriptForm>
   <!--
@@ -1579,11 +1357,11 @@
     <label>
       <UIPopupWindow>Auswählen</UIPopupWindow>
       <permission>UIPermissionTreeForm</permission>
-      <userOrGroup>User Or Group</userOrGroup>
-      <read>Read Right</read>
-      <add_node>Add Node Right</add_node>
-      <set_property>Set Property Right</set_property>
-      <remove>Remove Right</remove>
+      <userOrGroup>Benutzer oder Gruppe</userOrGroup>
+      <read>Lesen</read>
+      <add_node>Knotenrecht hinzufügen</add_node>
+      <set_property>Eigenschaftsrecht festlegen</set_property>
+      <remove>Entfernen</remove>
     </label>
     <title>Eine Berechtigung auf diesen Knoten hinzufügen</title>
     <action>
@@ -2191,7 +1969,7 @@
   <UITagStyleForm>
     <label>
       <styleName>Style Name:</styleName>
-      <documentRange>Document Range:</documentRange>
+      <documentRange>Number of Occurrences:</documentRange>
       <styleHTML>HTML Style:</styleHTML>
     </label>
     <action>
@@ -2398,13 +2176,6 @@
   <!--
   #########Since ECM 2.5##################
   --> 
-  <UIWorkspaceWizard>
-    <label>
-      <step1>Step 1</step1>
-      <step2>Step 2</step2>
-      <step3>Step 3</step3>
-    </label>
-  </UIWorkspaceWizard>
   
   <UIDriveForm>
 <msg>
@@ -2625,7 +2396,7 @@
 </action>
   <msg>
     <xss-vulnerability-character>Feld "{0}" enthält Zeichen, die XSS-Sicherheitslücken öffnen</xss-vulnerability-character>
-<xss-vulnerability-character-wo-label>Ihre Feldeingabe kann XSS-Sicherheitslücken öffnen</xss-vulnerability-character-wo-label>
+<xss-vulnerability-character-wo-label>Your input may contain XSS vulnerability characters</xss-vulnerability-character-wo-label>
   </msg>
 </UIActionForm>
 
@@ -2722,21 +2493,7 @@
           <addLocalizationLink>Übersetzung hinzufügen</addLocalizationLink>
   </label>
   </UIViewFormTabPane>
-  <UIDriveForm>
-<label>
-  <taxonomy-list>Taxonomieliste</taxonomy-list>
-  <admin-view>Admin-Ansicht</admin-view>
-  <authoring-view>Autoransicht</authoring-view>
-  <taxonomy-icons>Taxonomie-Piktogramm</taxonomy-icons>
-  <anonymous-view>Anonyme Ansicht</anonymous-view>
-  <icon-view>Piktogrammansicht</icon-view>
-  <slide-show>Slide Show</slide-show>
-  <simple-view>Einfache Ansicht</simple-view>
-  <system-view>Systemansicht</system-view>
-  <timeline-view>Zeitachsenansicht</timeline-view>
-  <cover-flow>Coverflow</cover-flow>
-  </label>
-  </UIDriveForm>
+
 <UIDriveForm>
 <label>
 <allowNodeTypesOnTree>Allowance nodetype on left tree:</allowNodeTypesOnTree>

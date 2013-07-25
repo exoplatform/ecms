@@ -23,9 +23,7 @@
 
   <UIFCCConfig>
     <label>
-      <select-repository>Ein Repository auswählen</select-repository>
       <UIFCCSaveLocationField>Ort speichern</UIFCCSaveLocationField>
-      <UIFCCRepositoryFormSelectBox>ein Repository auswählen</UIFCCRepositoryFormSelectBox>
       <UIFCCWorkspaceFormSelectBox>Wählen Sie den Arbeitsbereich</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>Vorlagenoptionen</UIFCCTemplateField>
       <UIFCCLocationFormInputAction>Zu speichernder Ort</UIFCCLocationFormInputAction>
