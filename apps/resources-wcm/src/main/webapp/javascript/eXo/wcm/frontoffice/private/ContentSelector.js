@@ -984,18 +984,27 @@
      } else {
        var newImg = new Image();
        url = decodeURIComponent(url);
+
        function loadInfoImage () {
          var height = newImg.height;
          var width = newImg.width;
+
          var parent = window.opener.document;
+
+         gj(parent).find("div[name*='info']").find("input").each(function(index) {
+	   if(index==0) {
+   	     this.src = url;
+ 	     this.value = url;
+  	     this.style.display="block";
+	   } else if(index == 2) {
+   	     this.value = width;
+           } else if(index == 3) {
+	     this.value = height;
+	   }
+	 });
          parent.getElementById(eXo.ecm.ECS.components).src=url;
          parent.getElementById(eXo.ecm.ECS.components).style.display="block";
-         parent.getElementById(editor.name+"_txtWidth").value=width;  
-         parent.getElementById(editor.name+"_txtHeight").value=height;
-         var element = parent.getElementById(editor.name+"_txtUrl");
-         if(element.type && element.type=="text") {
-           element.value = url;
-         }
+         
          window.close();
          editor.OnAfterSetHTML = window.close();
        }
