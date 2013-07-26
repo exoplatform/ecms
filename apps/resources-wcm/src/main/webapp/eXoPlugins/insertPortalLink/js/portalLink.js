@@ -182,7 +182,7 @@ CKEDITOR.dialog.add( 'insertPortalLink.dlg', function( editor )
 
 function getPortalLink() {
 	var sOptions = "toolbar=no,status=no,resizable=yes,dependent=yes,scrollbars=yes,width=800,height=600" ;
-	var newWindow = window.open(CKEDITOR.eXoPath+"eXoPlugins/insertPortalLink/insertPortalLink.html?type=PortalLink", "WCMInsertPortalLink", sOptions );
+	var newWindow = window.open("/eXoWCMResources/eXoPlugins/insertPortalLink/insertPortalLink.html?type=PortalLink", "WCMInsertPortalLink", sOptions );
 	newWindow.focus();
 }
 
