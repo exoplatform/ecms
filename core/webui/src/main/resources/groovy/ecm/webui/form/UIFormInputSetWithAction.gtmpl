@@ -10,7 +10,11 @@
 <%
   import org.exoplatform.webui.form.UIFormRadioBoxInput ;
   import org.exoplatform.webui.form.UIFormCheckBoxInput;
-%>
+
+  def rcontext = _ctx.getRequestContext();
+  rcontext.getJavascriptManager().require("SHARED/jquery", "gj").addScripts("gj(document).ready(function() { gj(\"*[rel='tooltip']\").tooltip();});");
+  
+  %>
 <div class="$uicomponent.id">
   
    <div class="form-horizontal">       
@@ -119,14 +123,14 @@
                if(actionField != null && actionField.length > 0) {
                  for(i in 0..actionField.length -1) {
              %>      
-                      <a class="actionIcon"><i onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>', '<%=actionField[i]%>', true)" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".title." + actionField[i])%>" class="uiIcon<%=actionField[i]%> uiIconLightGray" alt="<%=_ctx.appRes(uicomponent.getId() + ".title." + actionField[i])%>"></i></a>
+                      <a class="actionIcon" href="javascript:void(0);" onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>', '<%=actionField[i]%>', true)" rel="tooltip" data-placement="bottom" data-original-title="<%=_ctx.appRes(uicomponent.getId() + ".title." + actionField[i])%>"><i class="uiIcon<%=actionField[i]%> uiIconLightGray" ></i></a>
              <%
                   }
                }
               } else if(isShowAction) {                
                for(String action : uicomponent.getFieldActions(inputEntry.getName())) {
              %>      
-                      <a class="actionIcon"><i onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>', '<%=action%>', true)" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes(uicomponent.getId() + ".title." + action)%>" class="uiIcon$action uiIconLightGray" alt="<%=_ctx.appRes(uicomponent.getId() + ".title." + action)%>"></i></a>
+                      <a class="actionIcon" href="javascript:void(0);" onclick="javascript:eXo.webui.UIForm.submitForm('<%=formName%>', '<%=action%>', true)" rel="tooltip" data-placement="bottom" data-original-title="<%=_ctx.appRes(uicomponent.getId() + ".title." + action)%>"><i class="uiIcon$action uiIconLightGray" ></i></a>
              <%
                 }
               }
