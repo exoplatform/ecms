@@ -716,7 +716,7 @@ public class UICLVPresentation extends UIContainer {
           sb.append("          </a>");
         }
         sb.append("          <a class=\"btn\" onclick = 'eXo.ecm.CLV.addURL(this)' href=\"" + contentEditLink + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + strEditBundle + "\">");
-        sb.append("            <i class=\"uiIconEdit\" \"></i>");
+        sb.append("            <i class=\"uiIconEdit\"></i>");
         sb.append("          </a>");
       } else {
         sb.append("          <a class=\"btn\" >");

@@ -133,7 +133,7 @@
 						<div class="control-group">
 							<label class="control-label"><%=uicomponent.getLabel(uicomponent.SITEMAP) %></label>
 							<div class="controls">
-								<% uiform.renderField(uicomponent.SITEMAP) %> <span style="vertical-align: middle;"><%=uicomponent.getLabel(uicomponent.SITEMAP_VISIBLE) %></span>
+								<% uiform.renderField(uicomponent.SITEMAP) %> <span class="seoSitemap"><%=uicomponent.getLabel(uicomponent.SITEMAP_VISIBLE) %></span>
 							</div>
 						</div>			    
 						<div class="control-group">
