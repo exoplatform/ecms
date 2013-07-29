@@ -15,6 +15,7 @@ import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.reader.ContentReader;
 import org.exoplatform.wcm.webui.selector.content.UIContentSelector;
@@ -388,7 +389,7 @@ public class UISCVPreferences extends UIFormTabPane implements UISelectable{
    */
 
   protected String getNodeNameByPreferences(){
-    String repository = portletPreferences.getValue(UISingleContentViewerPortlet.REPOSITORY, null);
+    String repository = WCMCoreUtils.getRepository().getConfiguration().getName();
     String workspace = portletPreferences.getValue(UISingleContentViewerPortlet.WORKSPACE, null);
     String nodeIdentifier = portletPreferences.getValue(UISingleContentViewerPortlet.IDENTIFIER, null);
     String nodeDrive = portletPreferences.getValue(UISingleContentViewerPortlet.DRIVE, null);
