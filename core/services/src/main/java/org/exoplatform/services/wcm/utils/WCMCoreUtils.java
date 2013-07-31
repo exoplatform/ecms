@@ -16,6 +16,32 @@
  */
 package org.exoplatform.services.wcm.utils;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Properties;
+
+import javax.jcr.Item;
+import javax.jcr.ItemNotFoundException;
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.jcr.ValueFormatException;
+import javax.jcr.nodetype.NodeType;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import javax.jcr.query.QueryResult;
+
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.container.ExoContainer;
@@ -47,17 +73,9 @@ import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.quartz.JobExecutionContext;
 import org.quartz.impl.JobDetailImpl;
-
-import javax.jcr.*;
-import javax.jcr.nodetype.NodeType;
-import javax.jcr.query.Query;
-import javax.jcr.query.QueryManager;
-import javax.jcr.query.QueryResult;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.*;
 
 /**
  * Created by The eXo Platform SAS
@@ -358,6 +376,13 @@ public class WCMCoreUtils {
    */
   public static String getSiteGlobalActiveJs(Node siteNode) throws Exception {
     StringBuilder buffer = new StringBuilder();
+    LivePortalManagerService livePortalService = getService(LivePortalManagerService.class);
+    buffer.append(getSiteActiveJs(livePortalService.getLiveSharedPortal(getUserSessionProvider()))).append(getSiteActiveJs(siteNode));
+    return buffer.toString();
+  }
+  
+  public static String getSiteActiveJs(Node siteNode) throws Exception {
+    StringBuilder buffer = new StringBuilder();
     try {
       List<Node> jsNodeList = new ArrayList<Node>();
       NodeIterator iterator = siteNode.getNodes();
@@ -381,8 +406,8 @@ public class WCMCoreUtils {
       for (Node registeredJSFile : jsNodeList) {
         try {
           buffer.append(registeredJSFile.getNode(NodetypeConstant.JCR_CONTENT)
-                                         .getProperty(NodetypeConstant.JCR_DATA)
-                                         .getString());
+                                        .getProperty(NodetypeConstant.JCR_DATA)
+                                        .getString());
         } catch (Exception e) {
           continue;
         }
