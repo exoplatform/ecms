@@ -70,6 +70,7 @@ import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.quartz.JobExecutionContext;
 import org.quartz.impl.JobDetailImpl;
 
@@ -372,6 +373,13 @@ public class WCMCoreUtils {
    */
   public static String getSiteGlobalActiveJs(Node siteNode) throws Exception {
     StringBuilder buffer = new StringBuilder();
+    LivePortalManagerService livePortalService = getService(LivePortalManagerService.class);
+    buffer.append(getSiteActiveJs(livePortalService.getLiveSharedPortal(getUserSessionProvider()))).append(getSiteActiveJs(siteNode));
+    return buffer.toString();
+  }
+  
+  public static String getSiteActiveJs(Node siteNode) throws Exception {
+    StringBuilder buffer = new StringBuilder();
     try {
       List<Node> jsNodeList = new ArrayList<Node>();
       NodeIterator iterator = siteNode.getNodes();
@@ -395,8 +403,8 @@ public class WCMCoreUtils {
       for (Node registeredJSFile : jsNodeList) {
         try {
           buffer.append(registeredJSFile.getNode(NodetypeConstant.JCR_CONTENT)
-                                         .getProperty(NodetypeConstant.JCR_DATA)
-                                         .getString());
+                                        .getProperty(NodetypeConstant.JCR_DATA)
+                                        .getString());
         } catch (Exception e) {
           continue;
         }
