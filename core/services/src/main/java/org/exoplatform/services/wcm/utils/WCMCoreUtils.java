@@ -70,6 +70,7 @@ import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.quartz.JobExecutionContext;
 import org.quartz.impl.JobDetailImpl;
 
@@ -364,13 +365,26 @@ public class WCMCoreUtils {
   }
 
   /**
-   * gets the global javascript of given site node. For example, if the site is acme<br/>
-   * we then return all javascript code only inside acme/js
+   * Gets the global javascript's content of given site node plus the javascript's contents of shared site
    * @param siteNode the root node of the site
-   * @return global javascript code inside this site
+   * @return The javascript's contents inside a site which already appended the shared site javascript's contents.
    * @throws Exception
    */
   public static String getSiteGlobalActiveJs(Node siteNode) throws Exception {
+    StringBuilder buffer = new StringBuilder();
+    LivePortalManagerService livePortalService = getService(LivePortalManagerService.class);
+    buffer.append(getSiteActiveJs(livePortalService.getLiveSharedPortal(getUserSessionProvider()))).append(getSiteActiveJs(siteNode));
+    return buffer.toString();
+  }
+  
+  /**
+   * Gets the global javascript's content of a given site node. For example, if the site is acme<br/>
+   * we then return all javascript code only inside acme/js
+   * @param siteNode the root node of the site
+   * @return javascript's content inside a site node
+   * @throws Exception
+   */  
+  public static String getSiteActiveJs(Node siteNode) throws Exception {
     StringBuilder buffer = new StringBuilder();
     try {
       List<Node> jsNodeList = new ArrayList<Node>();
@@ -395,8 +409,8 @@ public class WCMCoreUtils {
       for (Node registeredJSFile : jsNodeList) {
         try {
           buffer.append(registeredJSFile.getNode(NodetypeConstant.JCR_CONTENT)
-                                         .getProperty(NodetypeConstant.JCR_DATA)
-                                         .getString());
+                                        .getProperty(NodetypeConstant.JCR_DATA)
+                                        .getString());
         } catch (Exception e) {
           continue;
         }
@@ -610,7 +624,7 @@ public class WCMCoreUtils {
   }
   
   public static boolean isDocumentNodeType(Node node) throws Exception {
-  	boolean isDocument = true;
+    boolean isDocument = true;
     TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
     isDocument = templateService.getAllDocumentNodeTypes().contains(node.getPrimaryNodeType().getName()); 
     return isDocument;
