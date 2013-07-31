@@ -254,6 +254,9 @@
 	      objElement.addEventListener(eventName, handler, false);
 	    }
 	};
+
+	function CKEDITOR() {
+	}
 	
 	WCMUtils.prototype.changeStyleClass = function(element, newStyleClass) {
             var isFocusOnCKEditor = false;
