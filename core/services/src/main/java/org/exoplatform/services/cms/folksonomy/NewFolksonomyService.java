@@ -21,7 +21,6 @@ import java.util.List;
 import javax.jcr.Node;
 
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.jcr.ext.distribution.DataDistributionMode;
 import org.exoplatform.services.jcr.ext.distribution.DataDistributionType;
 
 /**

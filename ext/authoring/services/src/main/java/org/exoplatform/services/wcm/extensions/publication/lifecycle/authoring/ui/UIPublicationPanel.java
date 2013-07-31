@@ -141,7 +141,8 @@ public class UIPublicationPanel extends org.exoplatform.services.wcm.publication
         String nodeVersionUUID = null;
         String currentState = currentNode.getProperty(AuthoringPublicationConstant.CURRENT_STATE)
                 .getString();
-        if (PublicationDefaultStates.PUBLISHED.equals(currentState) || PublicationDefaultStates.UNPUBLISHED.equals(currentState)) {
+        if (PublicationDefaultStates.PUBLISHED.equals(currentState) || 
+            PublicationDefaultStates.UNPUBLISHED.equals(currentState)) {
           if(currentNode.hasProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)){
             nodeVersionUUID = currentNode.getProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP).getString();
           }

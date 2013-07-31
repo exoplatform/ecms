@@ -230,7 +230,8 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
   /**
    * {@inheritDoc}
    */
-  public void addView(String name, String permissions, boolean hideExplorerPanel, String template, List<?> tabs) throws Exception {
+  public void addView(String name, String permissions, boolean hideExplorerPanel, String template, List<?> tabs) 
+      throws Exception {
     Session session = getSession();
     Node viewHome = (Node) session.getItem(baseViewPath_);
     Node view;
@@ -452,7 +453,8 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
    * @return
    * @throws Exception
    */
-  private Node addView(Node viewManager, String name, boolean hideExplorerPanel, String permissions, String template) throws Exception {
+  private Node addView(Node viewManager, String name, boolean hideExplorerPanel, String permissions, String template) 
+      throws Exception {
     Node contentNode = viewManager.addNode(name, "exo:view");
     contentNode.setProperty("exo:accessPermissions", permissions);
     contentNode.setProperty("exo:template", template);

@@ -278,7 +278,8 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
       Object spaceService = ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(spaceServiceClass);
       
       Class spaceClass = Class.forName("org.exoplatform.social.core.space.model.Space");
-      Object space = spaceServiceClass.getDeclaredMethod("getSpaceByGroupId", String.class).invoke(spaceService, id.replace(".", "/"));
+      Object space = spaceServiceClass.getDeclaredMethod("getSpaceByGroupId", String.class)
+                                      .invoke(spaceService, id.replace(".", "/"));
       if (space != null) {
         return String.valueOf(spaceClass.getDeclaredMethod("getDisplayName").invoke(space));
       }
