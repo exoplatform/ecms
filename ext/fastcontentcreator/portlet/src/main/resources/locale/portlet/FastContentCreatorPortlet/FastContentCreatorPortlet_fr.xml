@@ -28,7 +28,7 @@
       <UIFCCTemplateField>Options</UIFCCTemplateField>
       <UIFCCLocationFormInputAction>Dossier de Stockage</UIFCCLocationFormInputAction>
       <UIFCCLocationFormStringInput/>
-      <UIFCCTemplateFormSelectBox>Sélectionner un modèle</UIFCCTemplateFormSelectBox>
+      <UIFCCTemplateFormSelectBox>Entrez les valeurs pour les métadonnées</UIFCCTemplateFormSelectBox>
       <UIFCCSaveFormStringInput>Personnaliser le bouton Enregistrer</UIFCCSaveFormStringInput>
       <UIFCCMessageFormTextareaInput>Message de remerciement</UIFCCMessageFormTextareaInput>
       <UIFCCRedirectFormCheckboxInput>Redirection:</UIFCCRedirectFormCheckboxInput>
@@ -88,7 +88,7 @@
     <label>
       <workspaceName>Espace de stockage :</workspaceName>
       <rootNodePath>Racine de l'arborescence:</rootNodePath>
-      <rootNodeInfo>Noeud racine</rootNodeInfo>
+      <rootNodeInfo>Nœud racine</rootNodeInfo>
     </label>
   </UIWorkspaceList>
 

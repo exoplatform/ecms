@@ -1735,7 +1735,7 @@
     <msg>
       <remove-popup-first>Vous devez d'abord fermer la fenêtre d'édition avant de pouvoir supprimer ce noeud.</remove-popup-first>
       <confirm-delete-action>Confirmez-vous la suppression?</confirm-delete-action>
-      <template-empty>Le formulaire de '{0}' est vide ou inexistant</template-empty>
+      <template-empty>Le formulaire pour afficher '{0}' est manquant.</template-empty>
       <template-null>Le formulaire est inexistant, ou vous n'avez pas les droits d'accès suffisants.</template-null>
       <access-denied>Accès refusé. Vous n'avez pas les droits suffisants pour faire cette action.</access-denied>
     </msg>
@@ -2977,7 +2977,7 @@
       <status>Etat</status>
       <author>Auteur</author>
       <date>Date de création</date>
-      <title>Titre du document</title>
+      <title>Le titre du document</title>
      <lastUser>Dernier utilisateur</lastUser>
 	</header>
   </WCMContentView>
