@@ -182,7 +182,7 @@
 							<isDeep>Récursif</isDeep>
         <nodetypes>Types de noeud</nodetypes>
         <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
-        <nodeTypeName>Types de noeud</nodeTypeName>
+        <nodeTypeName>Types de noeuds</nodeTypeName>
      </label> 
    </view>
   </AddMetadata>

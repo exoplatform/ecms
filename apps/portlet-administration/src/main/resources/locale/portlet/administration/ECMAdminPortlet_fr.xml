@@ -253,7 +253,7 @@
       <path-not-found-exception>Ces métadonnées ont été supprimées ou modifiées. S'il vous plaît cliquez sur le bouton Actualiser.</path-not-found-exception>
     </msg>
     <action>
-      <Add>Ajouter une Métadonnée</Add>
+      <Add>Ajouter des Métadonnées</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIMetadataList>
@@ -523,7 +523,7 @@
       <superTypes>Super Types</superTypes>
       <propertyname>Nom</propertyname>
       <requiredType>Type</requiredType>
-      <multiple>Multi-valué</multiple>
+      <multiple>Multi</multiple>
       <mandatory>Obligatoire</mandatory>
       <autoCreated>Auto-créé</autoCreated>
       <parentversion>Héritage de version</parentversion>
@@ -1850,7 +1850,7 @@
       <name-invalid>Le nom contient des caractères invalides.</name-invalid>
       <roles-invalid>Veuillez saisir au moins une permission.</roles-invalid>
       <version-restored>Version {0} restaurée avec succès.</version-restored>
-      <name-exist>Le formulaire '{0}' existe déjà.</name-exist>
+      <name-exist>Le document '{0}' existe déjà.</name-exist>
     </msg>
     <title>
       <AddPermission>Ajouter une Permission</AddPermission>
