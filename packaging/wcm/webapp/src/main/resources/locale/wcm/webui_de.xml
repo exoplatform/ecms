@@ -48,7 +48,7 @@
       <list-view>Liste</list-view>
       <authoring-view>Autor</authoring-view>
       <wcm-category-view>Kategorien</wcm-category-view>
-      <file-view>Datei-Verwaltung-Ansicht</file-view>
+      <file-view>Dateiverwaltung-Ansicht</file-view>
     </label>
   </Views>
 
@@ -397,7 +397,7 @@
       <CollaborationCenter>Kollaborationscenter</CollaborationCenter>
       <DigitalAssetsManagementCenter>Managementcenter für digitale Assets</DigitalAssetsManagementCenter>
       <DMSAdministration>DMS Verwaltung</DMSAdministration>
-      <DocumentsManagementCenter>Dokumenten-Managementcenter</DocumentsManagementCenter>
+      <DocumentsManagementCenter>Dokumenten-Management-Center</DocumentsManagementCenter>
       <LiveDocumentsCenter>Center für Livedokumente</LiveDocumentsCenter>
       <PendingDocumentsCenter>Center für ausstehende Dokumente</PendingDocumentsCenter>
       <RecordsManagementCenter>Managementcenter für Datensätze</RecordsManagementCenter>

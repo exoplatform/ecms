@@ -1735,7 +1735,7 @@
     <msg>
       <remove-popup-first>You must close the edit pop-up before deleting this node.</remove-popup-first>
       <confirm-delete-action>Are you sure you want to delete this action?</confirm-delete-action>
-      <template-empty>The '{0}' template is null or empty.</template-empty>
+      <template-empty>Die Vorlage '{0}' ist null oder leer.</template-empty>
       <template-null>The template is either null or you do not have permission to access this template.</template-null>
       <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
     </msg>
@@ -2977,7 +2977,7 @@
       <status>Status</status>
       <author>Autor</author>
       <date>Erstellungsdatum</date>
-      <title>Dokumententitel</title>
+      <title>Titel des Dokuments</title>
       <lastUser>Letzter Benutzer</lastUser>
     </header>
   </WCMContentView>
