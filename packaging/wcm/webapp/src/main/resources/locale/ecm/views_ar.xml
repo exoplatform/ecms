@@ -182,7 +182,7 @@
         <isDeep>عميق</isDeep>
         <nodetypes>نوع العقدة</nodetypes>
         <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
-        <nodeTypeName>أسماء أنواع العقدة</nodeTypeName>
+        <nodeTypeName>Node type names</nodeTypeName>
       </label> 
     </view>
   </AddMetadata>
