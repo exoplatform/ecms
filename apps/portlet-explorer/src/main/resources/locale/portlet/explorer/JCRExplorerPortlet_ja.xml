@@ -1735,7 +1735,7 @@
     <msg>
       <remove-popup-first>このノードを削除する前に編集ポップアップを閉じる必要があります。</remove-popup-first>
       <confirm-delete-action>このアクションを削除したいですか？</confirm-delete-action>
-      <template-empty>'{0}' のテンプレートはnullもしくは空です。</template-empty>
+      <template-empty>'{0}' のテンプレートはnullか空です。</template-empty>
       <template-null>テンプレートはnullか、このテンプレートにアクセスするための十分な権限がありません。</template-null>
       <access-denied>アクセス出来ません! このアクションを実行するための十分な権限がありません。</access-denied>
     </msg>

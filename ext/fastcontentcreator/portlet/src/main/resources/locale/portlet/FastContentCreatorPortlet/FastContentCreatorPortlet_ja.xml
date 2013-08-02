@@ -28,7 +28,7 @@
       <UIFCCTemplateField>テンプレートオプション</UIFCCTemplateField>
       <UIFCCLocationFormInputAction>保存先</UIFCCLocationFormInputAction>
       <UIFCCLocationFormStringInput/>
-      <UIFCCTemplateFormSelectBox>テンプレートの選択</UIFCCTemplateFormSelectBox>
+      <UIFCCTemplateFormSelectBox>テンプレートを選択</UIFCCTemplateFormSelectBox>
       <UIFCCSaveFormStringInput>カスタム保存ボタン</UIFCCSaveFormStringInput>
       <UIFCCMessageFormTextareaInput>カスタム保存メッセージ</UIFCCMessageFormTextareaInput>
       <UIFCCRedirectFormCheckboxInput>リダイレクト:</UIFCCRedirectFormCheckboxInput>
@@ -88,7 +88,7 @@
     <label>
       <workspaceName>ワークスペース</workspaceName>
       <rootNodePath>ルートパス</rootNodePath>
-      <rootNodeInfo/>
+      <rootNodeInfo>Root node</rootNodeInfo>
     </label>
   </UIWorkspaceList>
 
