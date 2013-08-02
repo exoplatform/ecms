@@ -19,6 +19,27 @@
 	    if (msg[1]) EmptyTitleErrorMsg = decodeURI(msg[1]);
 	  }  
 	}
+	InlineEditor.saveInlineContent = function(e) {
+		InlineEditor.init();
+          	var container = e.container;
+		var repo = container.getAttribute("repo");
+		var workspace = container.getAttribute("workspace");
+		var uuid = container.getAttribute("uuid");
+		var sitename = container.getAttribute("sitename");
+		var language = container.getAttribute("language");
+		var propertyname = container.getAttribute("propertyname");
+		var data = "";
+		if(propertyname.indexOf("exo:title") >= 0)
+		  data = e.editable().getText();
+		else
+		  data = e.getData();
+		var params =""; 
+  		params = "newValue=" + encodeURIComponent(data);
+  		InlineEditor.presentationRequestChangePropertyPOST("/property?", propertyname, repo, 
+		workspace, uuid, sitename, language, params);         
+  		return false;
+	}
+
 	InlineEditor.onEnterRequest =function () {
 	  if (window.event && window.event.keyCode == 13){
 	    return false;

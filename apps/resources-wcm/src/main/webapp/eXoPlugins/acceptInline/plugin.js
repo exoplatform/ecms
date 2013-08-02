@@ -114,7 +114,7 @@ InlineEditor.presentationAjaxRequest = function (url, params, method) {
   window.InlineEditor = InlineEditor;
 
   var instanceCK = document.getElementById("cke_"+e.name);
-  e.fire("blur"); 
+  //e.fire("blur"); 
 
   var container = e.container;
   var repo = container.getAttribute("repo");
