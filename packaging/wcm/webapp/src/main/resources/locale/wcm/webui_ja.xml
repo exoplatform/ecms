@@ -43,8 +43,8 @@
     <label>
       <wcm-view>WCM ビュー</wcm-view>
       <admin-view>管理者 ビュー</admin-view>
-      <icon-view>アイコン ビュー</icon-view>
-      <thumbails-view>サムネイル ビュー</thumbails-view>
+      <icon-view>アイコン</icon-view>
+      <thumbails-view>サムネイル</thumbails-view>
       <list-view>一覧</list-view>
       <authoring-view>編集中</authoring-view>
       <wcm-category-view>カテゴリー</wcm-category-view>
@@ -392,18 +392,18 @@
       <GroupDrives>グループドライブ</GroupDrives>
       <Private>プライベート</Private>
       <Public>パブリック</Public>
-      <BackupCenter>バックアップセンター</BackupCenter>
-      <CategorizedDocumentsCenter>カテゴライズドドキュメントセンター</CategorizedDocumentsCenter>
-      <CollaborationCenter>コラボレーションセンター</CollaborationCenter>
-      <DigitalAssetsManagementCenter>デジタルアセット管理センター</DigitalAssetsManagementCenter>
+      <BackupCenter>バックアップセンタ</BackupCenter>
+      <CategorizedDocumentsCenter>カテゴライズされたドキュメントセンタ</CategorizedDocumentsCenter>
+      <CollaborationCenter>コラボレーションセンタ</CollaborationCenter>
+      <DigitalAssetsManagementCenter>デジタルアセット管理センタ</DigitalAssetsManagementCenter>
       <DMSAdministration>DMS アドミニストレーション</DMSAdministration>
-      <DocumentsManagementCenter>ドキュメント管理センター</DocumentsManagementCenter>
-      <LiveDocumentsCenter>ライブドキュメントセンター</LiveDocumentsCenter>
-      <PendingDocumentsCenter>ペンディングドキュメントセンター</PendingDocumentsCenter>
-      <RecordsManagementCenter>レコード管理センター</RecordsManagementCenter>
+      <DocumentsManagementCenter>ドキュメント管理センタ</DocumentsManagementCenter>
+      <LiveDocumentsCenter>Liveドキュメントセンタ</LiveDocumentsCenter>
+      <PendingDocumentsCenter>ペンディングドキュメントセンタ</PendingDocumentsCenter>
+      <RecordsManagementCenter>レコード管理センタ</RecordsManagementCenter>
       <SharedUsersSpace>共有ユーザスペース</SharedUsersSpace>
       <Systemfiles>システムファイル</Systemfiles>
-      <ValidationRequestsDocumentsCenter>バリデーションリクエストドキュメントセンター</ValidationRequestsDocumentsCenter>
+      <ValidationRequestsDocumentsCenter>バリデーションリクエストドキュメントセンタ</ValidationRequestsDocumentsCenter>
       <ManagedSites>サイト管理</ManagedSites>
       <SharedSite>共有サイト</SharedSite>
     </title>

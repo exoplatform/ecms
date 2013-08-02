@@ -523,7 +523,7 @@
       <superTypes>Superタイプ</superTypes>
       <propertyname>定義名</propertyname>
       <requiredType>必須タイプ</requiredType>
-      <multiple>複数</multiple>
+      <multiple>多数</multiple>
       <mandatory>必須</mandatory>
       <autoCreated>自動生成</autoCreated>
       <parentversion>親バージョン</parentversion>
@@ -1850,7 +1850,7 @@
       <name-invalid>フィールド名は、特殊文字を含むことができません。</name-invalid>
       <roles-invalid>権限フィールドは空にできません。</roles-invalid>
       <version-restored>バージョン {0} はリストアに成功しました。</version-restored>
-      <name-exist>名前 '{0}' は既に存在します。</name-exist>
+      <name-exist>名前 '{0}' は存在します。'nt:file'に存在する同じ名前のファイルはアップロード出来ません。</name-exist>
     </msg>
     <title>
       <AddPermission>権限の追加</AddPermission>
