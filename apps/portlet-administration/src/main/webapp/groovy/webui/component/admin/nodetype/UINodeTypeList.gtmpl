@@ -5,6 +5,10 @@
   def allNodeTypes = uicomponent.getAllNodeTypes();
   if(nodeTypes == null) return;
   int totalPages = uicomponent.getUIPageIterator().getAvailablePage();
+  
+  def rcontext = _ctx.getRequestContext();
+  rcontext.getJavascriptManager().require("SHARED/jquery", "gj").addScripts("gj(document).ready(function() { gj(\"*[rel='tooltip']\").tooltip();});");
+  
 %>
 <div class="uiNodeTypeList" id="$uicomponent.id">
   <% if (allNodeTypes.size() > 5) {
