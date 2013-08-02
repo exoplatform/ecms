@@ -43,8 +43,8 @@
     <label>
       <wcm-view>Vista WCM</wcm-view>
       <admin-view>Vista Admin</admin-view>
-      <icon-view>Vista Icone</icon-view>
-      <thumbails-view>Vista Thumbnails</thumbails-view>
+      <icon-view>Icone</icon-view>
+      <thumbails-view>Anteprime</thumbails-view>
       <list-view>Elenco</list-view>
       <authoring-view>Authoring</authoring-view>
       <wcm-category-view>Categorie</wcm-category-view>
@@ -394,16 +394,16 @@
       <Public>Pubblico</Public>
       <BackupCenter>Centro Backup</BackupCenter>
       <CategorizedDocumentsCenter>Centro Documenti Categorizzati</CategorizedDocumentsCenter>
-      <CollaborationCenter>Centro Collaborazione</CollaborationCenter>
-      <DigitalAssetsManagementCenter>Centro Gestione Contenuti Digitali</DigitalAssetsManagementCenter>
+      <CollaborationCenter>Centro Collaborazioni</CollaborationCenter>
+      <DigitalAssetsManagementCenter>Centro Gestione Collezioni Digitali</DigitalAssetsManagementCenter>
       <DMSAdministration>Amministrazione DMS</DMSAdministration>
       <DocumentsManagementCenter>Centro Gestione Documenti</DocumentsManagementCenter>
-      <LiveDocumentsCenter>Centro Documenti Live</LiveDocumentsCenter>
-      <PendingDocumentsCenter>Centro Documenti In attesa</PendingDocumentsCenter>
-      <RecordsManagementCenter>Centro Gestione Record</RecordsManagementCenter>
-      <SharedUsersSpace>Spazio Utenti Condiviso</SharedUsersSpace>
-      <Systemfiles>I File di Sistema</Systemfiles>
-      <ValidationRequestsDocumentsCenter>Centro Richieste Validazione Documenti</ValidationRequestsDocumentsCenter>
+      <LiveDocumentsCenter>Centro Documenti in Linea</LiveDocumentsCenter>
+      <PendingDocumentsCenter>Centro Documenti in Attesa</PendingDocumentsCenter>
+      <RecordsManagementCenter>Centro Gestione dei Record</RecordsManagementCenter>
+      <SharedUsersSpace>Spazio Condiviso Utenti</SharedUsersSpace>
+      <Systemfiles>File di Sistema</Systemfiles>
+      <ValidationRequestsDocumentsCenter>Centro Richiesta Validazione Documento</ValidationRequestsDocumentsCenter>
       <ManagedSites>Gestione Siti</ManagedSites>
       <SharedSite>Sito Condiviso</SharedSite>
     </title>
