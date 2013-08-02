@@ -108,7 +108,7 @@
 
   <TaxonomyTreeHomePath>
     <title>
-      <AddPath>إضافة مسار</AddPath>
+      <AddPath>اضافة مسار</AddPath>
     </title>
   </TaxonomyTreeHomePath>
   
@@ -253,7 +253,7 @@
       <path-not-found-exception>تمّ حذف أو تغيير بيانات التعريف. يُرجى النقر فوق زر التّحديث.</path-not-found-exception>
     </msg>
     <action>
-      <Add>إضافة دليل المعلومات</Add>
+      <Add>إضافة قالب المعلومات القياسية</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIMetadataList>
@@ -1850,7 +1850,7 @@
       <name-invalid>هناك بعض الأحرف الغير متاحة في مجال الاسم.</name-invalid>
       <roles-invalid>المجال الخاص بالصلاحية لا يمكن أن يكون فارغا.</roles-invalid>
       <version-restored>تمّ إستعادة الإصدار {0} بنجاح.</version-restored>
-      <name-exist>الاسم '{0}' موجود مُسبقــًا.</name-exist>
+      <name-exist>الاسم '{0}' موجود مُسبقـا.</name-exist>
     </msg>
     <title>
       <AddPermission>اضافة صلاحية</AddPermission>

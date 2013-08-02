@@ -89,7 +89,7 @@
   <AddMetadata>
     <dialog>
       <label>
-        <id>المعرف الوحيد</id>
+        <id>المعرف</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <metadata>قالب المعلومات القياسية</metadata>

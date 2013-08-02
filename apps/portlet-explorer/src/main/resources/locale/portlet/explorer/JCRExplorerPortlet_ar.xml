@@ -1735,7 +1735,7 @@
     <msg>
       <remove-popup-first>يجب عليك إغلاق مشهد التغيير قبل حذف العقدة.</remove-popup-first>
       <confirm-delete-action>هل تريد حقا حذف هذا الاجراء؟</confirm-delete-action>
-      <template-empty>النموذج '{0}' فارغ.</template-empty>
+      <template-empty>النموذج '{0}' بدون محتوى أو فارغ.</template-empty>
       <template-null>النموذج فارغ أو ربّما لا تملك الصلاحيّة الكافية للوصول الى هذا الأخير .</template-null>
       <access-denied>غير مسموح بالدخول. ليس لك الصلاحيّة الكفاية للقيام بهذا الاجراء.</access-denied>
     </msg>
@@ -2977,7 +2977,7 @@
       <status>الحالة</status>
       <author>المؤلف</author>
       <date>تاريخ الانشاء</date>
-      <title>عنوان الملفّ</title>
+      <title>عنوان الوثيقة</title>
       <lastUser>آخر مُستخدم</lastUser>
     </header>
   </WCMContentView>
