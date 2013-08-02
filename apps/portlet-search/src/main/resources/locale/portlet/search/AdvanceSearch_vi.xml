@@ -39,13 +39,13 @@
       <itemsPerPageSelector>Số kết quả/1 trang</itemsPerPageSelector>
       <searchFormSelector>Kiểu Mẫu Tìm kiếm</searchFormSelector>
       <searchResultSelector>Mẫu Kết quả Tìm kiếm</searchResultSelector>
-      <searchPaginatorSelector>Kiểu mẫu Phân trang Tìm kiếm</searchPaginatorSelector>
+      <searchPaginatorSelector>Mẫu Phân trang Tìm kiếm</searchPaginatorSelector>
       <searchPageLayoutSelector>Mẫu Bố cục Trang Tìm kiếm</searchPageLayoutSelector>
       <searchResultBasePathInputSetAction>Đường dẫn Gốc</searchResultBasePathInputSetAction>
       <pageMode>Kiểu Trang hiển thị</pageMode>
       <option>
-        <none>Hiển thị toàn bộ</none>
-        <more>Hiển thị từng trang</more>
+        <none>Không có</none>
+        <more>Hiển thị thêm</more>
         <pagination>Phân trang</pagination>
       </option>
     </label>
@@ -69,7 +69,7 @@
   <UIPaginatorDefault>
     <label>
       <next>Kế tiếp</next>
-      <previous>Trước</previous>
+      <previous>Trước đó</previous>
       <more>Hiển thị thêm</more>
     </label>
   </UIPaginatorDefault>

@@ -132,7 +132,7 @@
     </msg>
     <validator>
       <validator>Validator</validator>
-      <destPath>With Path</destPath>
+      <destPath>Đường dẫn</destPath>
     </validator>
   </UIFCCActionForm>
 

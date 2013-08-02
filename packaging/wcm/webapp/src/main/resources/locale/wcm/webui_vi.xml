@@ -44,7 +44,7 @@
       <wcm-view>Web</wcm-view>
       <admin-view>Quản trị</admin-view>
       <icon-view>Biểu tượng</icon-view>
-      <thumbails-view>Hình ảnh</thumbails-view>
+      <thumbails-view>Hình nhỏ</thumbails-view>
       <list-view>Danh sách</list-view>
       <authoring-view>Tác giả</authoring-view>
       <wcm-category-view>Danh mục</wcm-category-view>
@@ -392,16 +392,16 @@
       <GroupDrives>Ổ đĩa Nhóm</GroupDrives>
       <Private>Cá nhân</Private>
       <Public>Công khai</Public>
-      <BackupCenter>Trung tâm Sao lưu</BackupCenter>
+      <BackupCenter>Ổ đĩa sao lưu</BackupCenter>
       <CategorizedDocumentsCenter>Trung tâm Phân loại Tài liệu</CategorizedDocumentsCenter>
       <CollaborationCenter>Trung tâm Điều phối</CollaborationCenter>
       <DigitalAssetsManagementCenter>Trung tâm Quản lý Tài nguyên Số</DigitalAssetsManagementCenter>
       <DMSAdministration>Quản trị DMS</DMSAdministration>
-      <DocumentsManagementCenter>Trung tâm Quản lý Tài liệu</DocumentsManagementCenter>
-      <LiveDocumentsCenter>Trung tâm Dữ liệu động</LiveDocumentsCenter>
-      <PendingDocumentsCenter>Trung tâm Dữ liệu Chờ duyệt</PendingDocumentsCenter>
-      <RecordsManagementCenter>Trung tâm Quản lý Lưu trữ</RecordsManagementCenter>
-      <SharedUsersSpace>Không gian Chia sẻ Người dùng</SharedUsersSpace>
+      <DocumentsManagementCenter>Ổ đĩa quản lý tài liệu</DocumentsManagementCenter>
+      <LiveDocumentsCenter>Ổ đĩa chứa tài liệu có hiệu lực</LiveDocumentsCenter>
+      <PendingDocumentsCenter>Ổ đĩa chứa tài liệu chưa xử lý</PendingDocumentsCenter>
+      <RecordsManagementCenter>Ổ đĩa quản lý hồ sơ</RecordsManagementCenter>
+      <SharedUsersSpace>Ổ đĩa chia sẻ cho người dùng</SharedUsersSpace>
       <Systemfiles>Tệp Hệ thống</Systemfiles>
       <ValidationRequestsDocumentsCenter>Trung Tâm Kiểm duyệt Yêu Cầu Tài liệu</ValidationRequestsDocumentsCenter>
       <ManagedSites>Quản trị các trang</ManagedSites>

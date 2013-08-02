@@ -8,8 +8,8 @@
     </label>
     <msg>
       <non-contents>Xin lỗi, không sẵn có bài viết nào.</non-contents>
-      <item-not-found>Không tìm thấy mục này.</item-not-found>
-      <no-permission>Bạn không có phân quyền để xem nội dung này.</no-permission>
+      <item-not-found>Không tìm thấy mục nào.</item-not-found>
+      <no-permission>Bạn không được phân quyền để xem nội dung này.</no-permission>
       <category-back>Về thư mục trước</category-back>
     </msg>
   </UICLVContainer>
@@ -44,8 +44,8 @@
       <UICLVConfigItemsPerPageFormStringInput>Số lượng tài liệu/1 trang</UICLVConfigItemsPerPageFormStringInput>
       <UICLVConfigShowIllustrationFormCheckboxInput>Hiện Hình ảnh</UICLVConfigShowIllustrationFormCheckboxInput>
       <UICLVConfigShowSummaryFormCheckboxInput>Hiện Tóm tắt</UICLVConfigShowSummaryFormCheckboxInput>
-      <UICLVConfigShowHeaderFormCheckboxInput>Hiển thị tiêu đề</UICLVConfigShowHeaderFormCheckboxInput>
-      <UICLVConfigShowRefreshFormCheckboxInput>Hiển thị nút làm mới</UICLVConfigShowRefreshFormCheckboxInput>
+      <UICLVConfigShowHeaderFormCheckboxInput>Hiện Tiêu đề</UICLVConfigShowHeaderFormCheckboxInput>
+      <UICLVConfigShowRefreshFormCheckboxInput>Hiện Nút làm mới</UICLVConfigShowRefreshFormCheckboxInput>
       <UICLVConfigShowTitleFormCheckboxInput>Hiện Tiêu đề</UICLVConfigShowTitleFormCheckboxInput>
       <UICLVConfigShowDateCreatedFormCheckboxInput>Hiện Ngày tháng</UICLVConfigShowDateCreatedFormCheckboxInput>
       <UICLVConfigShowLinkFormCheckboxInput>Hiện Liên kết</UICLVConfigShowLinkFormCheckboxInput>
@@ -71,15 +71,15 @@
     </label>
     <help>
       <ModeSelectionHelp>Có hai chế độ để hiện nội dung. "Theo thư mục" sẽ cung cấp nội dung theo thư mục/danh mục đã chọn của bạn. "Theo Nội dung" sẽ cho phép bạn chọn bằng tay nội dung mà bạn muốn hiển thị.</ModeSelectionHelp>
-      <FolderPathHelp>Chọn nội dung mà bạn muốn hiển thị. Lựa chọn mặc định sẽ được thay thế dưới dạng động nếu bạn kích hoạt tùy chọn Điều hướng Động (xem chế độ Nâng cao ở dưới).</FolderPathHelp>
+      <FolderPathHelp>Chọn nội dung mà bạn muốn hiển thị. Lựa chọn mặc định sẽ được thay thế tự động nếu bạn kích hoạt tùy chọn Điều hướng Động (xem chế độ Nâng cao ở dưới).</FolderPathHelp>
       <HeaderOptionHelp>Chọn đầu mục ở trên đầu danh sách nội dung. Nếu bạn kích hoạt tùy chọn Tự động Phát hiện, tính năng này sẽ cố tìm kiếm đầu mục dựa theo lựa chọn hiện tại.</HeaderOptionHelp>
       <GeneralOptionHelp>Hãy chọn các phần tử đồ thị mà bạn muốn hiện trong danh sách của mình. Lưu ý một số phần tử có thể không sẵn dùng, tùy theo mẫu đã chọn của bạn.</GeneralOptionHelp>
-      <ContextualHelp>Kích hoạt tùy chọn Điều hướng Động. Những người khác có thể thay đổi nội dung dưới dạng động dựa vào tham số URL.</ContextualHelp>
+      <ContextualHelp>Kích hoạt tùy chọn Điều hướng Động. Những người khác có thể thay đổi nội dung tự động dựa vào tham số URL.</ContextualHelp>
       <ParameterHelp>Tham số này sẽ được dùng để truy cập nội dung nếu Điều hướng Động được kích hoạt.</ParameterHelp>
-      <ShowDetailInPageHelp>Việc nhấp vào nội dung sẽ đưa người dùng đến trang Chi tiết. Bạn phải có một portlet "Nội dung theo URL" cùng với tính năng Điều hướng Động đã được bật trên trang đích để hiển thị nội dung.</ShowDetailInPageHelp>
+      <ShowDetailInPageHelp>Việc nhấp vào nội dung sẽ đưa người dùng đến trang Chi tiết. Bạn phải có một portlet "Nội dung theo URL" cùng với tính năng Điều hướng Động đã được bật trên trang đích để hiện nội dung.</ShowDetailInPageHelp>
       <DetailParameterHelp>Tham số này sẽ chứa đường dẫn đến nội dung trong liên kết đến trang Chi tiết. Tham số này phải khớp với tham số được sử dụng trong portlet "Nội dung theo URL" của trang đó.</DetailParameterHelp>
       <ContentByQueryHelp><![CDATA[You can set a SQL Query to get content dynamically. The following parameters are allowed : ${user}, ${lang} or any get parameter (PARAM) surrounded by ${PARAM}.]]></ContentByQueryHelp>
-      <ContentsVisibilityHelp>"Giới hạn bởi xác thực" sẽ lọc nội dung dựa trên việc xác thực. Nếu bạn không đăng nhập, bạn sẽ chỉ thấy những nội dung đã được công khai. Nếu bạn đã đăng nhập, bạn thấy tất cả các nội dung có thể nhìn thấy bởi người sử dụng mạng nội bộ (nhưng được chia sẻ với tất cả mọi người). "Giới hạn bởi vai trò người dùng" có nghĩa là bạn sẽ thấy nội dung tùy thuộc vào quyền truy cập của bạn. Trong hầu hết trường hợp, tùy chọn này không nên được dùng, vì nó làm giảm tốc độ của hệ thống.</ContentsVisibilityHelp>
+      <ContentsVisibilityHelp>"Giới hạn bằng xác thực" sẽ lọc nội dung dựa trên việc xác thực. Nếu bạn không đăng nhập, bạn sẽ chỉ thấy những nội dung được công khai. Nếu bạn đã đăng nhập, bạn thấy tất cả các nội dung có thể nhìn thấy dành cho người sử dụng mạng nội bộ (nhưng được mọi người chia sẻ). "Giới hạn theo vai trò người dùng" nghĩa là bạn sẽ thấy nội dung tùy thuộc vào quyền hạn của bạn. Trong hầu hết trường hợp, tùy chọn này không nên được dùng, vì nó làm giảm hiệu năng chung của hệ thống.</ContentsVisibilityHelp>
     </help>
     <action>
       <Save>Lưu</Save>
@@ -92,9 +92,9 @@
     </msg>
     <tab>
       <label>
-        <clvContentTab>Chọn nội dung hiển thị</clvContentTab>
+        <clvContentTab>Chọn Nội dung</clvContentTab>
         <clvDisplayTab>Thiết lập Hiển thị</clvDisplayTab>
-        <clvAdvancedTab>Cấu hình nâng cao</clvAdvancedTab>
+        <clvAdvancedTab>Cấu hình Nâng cao</clvAdvancedTab>
       </label>
     </tab>
   </UICLVConfig>
@@ -124,8 +124,8 @@
   </UICLVConfigOrderTypeFormSelectBox>
   <UICLVConfigTargetPageFormInputSet>
     <title>
-      <SelectBasePath>Chọn theo Đường dẫn</SelectBasePath>
-      <SelectTargetPage>Chọn theo Đường dẫn</SelectTargetPage>
+      <SelectBasePath>Chọn Đường dẫn Gốc</SelectBasePath>
+      <SelectTargetPage>Chọn Đường dẫn Gốc</SelectTargetPage>
     </title>
   </UICLVConfigTargetPageFormInputSet>
   <UICLVBasePathPopupWindow>
@@ -150,7 +150,7 @@
   </UICLVPresentation>
   <CorrectContentSelectorPopupWindow>
     <title>
-      <UIContentSelectorMulti>Bảng Lựa chọn Nội dung</UIContentSelectorMulti>
+      <UIContentSelectorMulti>Bảng Chọn Đa Nội dung</UIContentSelectorMulti>
     </title>
   </CorrectContentSelectorPopupWindow>
   <UIContentDialogFormPopupWindow>
@@ -178,7 +178,7 @@
   </PublicationStates>
   <UICLVConfigCacheEnableRadioBoxInput>
     <label>
-      <ENABLE>Hạn chế bằng Xác thực</ENABLE>
+      <ENABLE>Giới hạn bằng Xác thực</ENABLE>
       <DISABLE>Giới hạn theo Vai trò Người dùng</DISABLE>
     </label>
   </UICLVConfigCacheEnableRadioBoxInput>
