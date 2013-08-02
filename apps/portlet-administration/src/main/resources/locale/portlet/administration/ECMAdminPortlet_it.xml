@@ -253,7 +253,7 @@
       <path-not-found-exception>Questi metadati sono stati eliminati o modificati. Fare clic sul pulsante Aggiorna.</path-not-found-exception>
     </msg>
     <action>
-      <Add>Aggiungi Metadato</Add>
+      <Add>Aggiungi metadato</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIMetadataList>
@@ -657,7 +657,7 @@
   -->
   <UINodeTypeUpload>
     <label>
-      <upload>NOme File</upload>
+      <upload>Nome File</upload>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -1850,7 +1850,7 @@
       <name-invalid>Il nome campo non deve contenere caratteri speciali.</name-invalid>
       <roles-invalid>Campo Permesso richiesto.</roles-invalid>
       <version-restored>Versione {0} ripristinata con successo.</version-restored>
-      <name-exist>Il nome '{0}' esiste già.</name-exist>
+      <name-exist>Il nome '{0}' esiste giÃ .</name-exist>
     </msg>
     <title>
       <AddPermission>Aggiungi Permesso</AddPermission>
