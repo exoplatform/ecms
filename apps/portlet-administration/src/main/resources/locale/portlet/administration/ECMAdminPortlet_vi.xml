@@ -253,7 +253,7 @@
       <path-not-found-exception>Siêu dữ liệu này đã bị xóa hoặc thay đổi. Hãy nhấp nút Làm mới.</path-not-found-exception>
     </msg>
     <action>
-      <Add>Thêm mới Siêu dữ liệu</Add>
+      <Add>Thêm Siêu dữ liệu</Add>
       <Cancel>Hủy bỏ</Cancel>
     </action>
   </UIMetadataList>
@@ -657,7 +657,7 @@
   -->
   <UINodeTypeUpload>
     <label>
-      <upload>Tên tệp</upload>
+      <upload>Tên tệp tin</upload>
     </label>
     <action>
       <Cancel>Hủy bỏ</Cancel>
@@ -924,7 +924,7 @@
     <label>
       <viewName>Tên</viewName>
       <template>Mẫu</template>
-<version>Khôi phục lại phiên bản</version>
+<version>Khôi phục Phiên bản</version>
       <enableVersion>Cho phép tạo phiên bản</enableVersion>
       <hideExplorerPanel>Ẩn cây thư mục bên trái</hideExplorerPanel>
     </label>
@@ -936,7 +936,7 @@
       <fileName-invalid>Tên tab chứa một số ký tự không hợp lệ.</fileName-invalid>
     </msg>
     <label>
-      <version>Khôi phục lại phiên bản</version>
+      <version>Khôi phục Phiên bản</version>
       <viewName>Tên</viewName>
       <tabName>Tên</tabName>
       <permission>Phân quyền</permission>
@@ -970,7 +970,7 @@
       <manageHidden>Ẩn/Hiển thị nội dung</manageHidden>
       <comment>Bình luận</comment>
       <vote>Bình chọn</vote>  
-      <addCategory>Thêm danh mục</addCategory>
+      <addCategory>Thêm Danh mục</addCategory>
       <addLocalizationLink>Thêm bản dịch</addLocalizationLink>
       <publicationRequestApproval>Yêu cầu phê duyệt</publicationRequestApproval>
       <publicationApproveContent>Duyệt nội dung</publicationApproveContent>
@@ -1018,7 +1018,7 @@
 
 <tab_permission>
  <title>
-  <SelectUser>Lựa chọn người dùng</SelectUser>
+  <SelectUser>Chọn Người dùng</SelectUser>
 <SelectMember>Chọn Thành viên</SelectMember>
 <AddAny>Bất kỳ ai</AddAny>
  </title>
@@ -2109,8 +2109,8 @@
   <UIDrivePermissionSelector>
     <label>
       <selectGroup>Chọn Nhóm</selectGroup>
-      <selectUser>Lựa chọn người dùng</selectUser>
-      <selectMembership>Chọn Kiểu thành viên</selectMembership>
+      <selectUser>Chọn Người dùng</selectUser>
+      <selectMembership>Chọn Vai trò</selectMembership>
     </label>
   </UIDrivePermissionSelector>
   

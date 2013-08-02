@@ -182,7 +182,7 @@
         <isDeep>Tác động sâu</isDeep>
         <nodetypes>Kiểu Node</nodetypes>
         <affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
-        <nodeTypeName>Tên Kiểu Node</nodeTypeName>
+        <nodeTypeName>Tên kiểu node</nodeTypeName>
       </label> 
     </view>
   </AddMetadata>

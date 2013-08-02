@@ -10,16 +10,16 @@
       <name>Tên</name>
       <email>Email</email>
       <website>Trang web</website>
-      <comment>Nhận xét</comment>
+      <comment>Bình luận</comment>
     </label>
     <action>
       <Save>Lưu</Save>
       <Cancel>Hủy bỏ</Cancel>
     </action>
     <msg>
-      <not-support>Bạn không thể nhận xét về kiểu tài liệu này.</not-support>
-      <not-checkedout>Bạn phải thoát khỏi nút trước khi đưa ra bình luận.</not-checkedout>
-      <content-null>Bạn không thể đăng nhận xét trống.</content-null>
+      <not-support>Bạn không thể bình luận trên kiểu tài liệu này.</not-support>
+      <not-checkedout>Bạn phải checkout nút đó trước khi đưa ra bình luận.</not-checkedout>
+      <content-null>Bạn không thể đăng tải một bình luận trống.</content-null>
     </msg>
   </UICommentForm>
   <!--
@@ -30,11 +30,11 @@
   <UIVoteForm>
     <title>
       <normal>Yếu</normal>
-      <good>Kém</good>
+      <good>Dưới  trung bình</good>
       <verygood>Trung bình</verygood>
       <excellent>Khá</excellent>
       <best>Tốt</best>
-      <no-value>Chưa có giá trị</no-value>
+      <no-value>chưa có giá trị</no-value>
     </title>
     <label>
       <my-rating>Đánh giá của tôi:</my-rating>
@@ -46,7 +46,7 @@
     </button>
     <msg>
       <not-support>Không được phép bình chọn cho kiểu tài liệu này.</not-support>
-      <not-checkedout>Bạn phải thoát khỏi nút trước khi bình chọn.</not-checkedout>
+      <not-checkedout>Bạn phải checkout nút đó trước khi bình chọn.</not-checkedout>
       <vote-restriction>Bạn không thể bình chọn quá 1 lần.</vote-restriction>
     </msg>
   </UIVoteForm>
@@ -72,15 +72,15 @@
   <UISideBar>
     <label>
       <Relation>Quan hệ</Relation>
-      <Explorer>Quản lý Tệp tin</Explorer>
-      <Close>Đóng cây thư mục</Close>
-      <TagExplorer>Tập hợp nhãn</TagExplorer>
+      <Explorer>Quản lý Tệp</Explorer>
+      <Close>Đóng Cây thư mục</Close>
+      <TagExplorer>Tập hợp Nhãn</TagExplorer>
       <Clipboard>Bảng ghi tạm</Clipboard>
-      <SavedSearches>Câu tìm kiếm đã lưu</SavedSearches>
+      <SavedSearches>Các Tìm kiếm Lưu lại</SavedSearches>
     </label>
     <title>
-      <Control>Điều khiển Sidebar</Control>
-      <Close>Đóng cây thư mục</Close>
+      <Control>Điều khiển Cây thư mục</Control>
+      <Close>Đóng Cây thư mục</Close>
     </title>
   </UISideBar>
   <!--
@@ -92,11 +92,11 @@
     <label>
       <driveWorkspace>Không gian lưu trữ Ổ đĩa:</driveWorkspace>
       <backToJCR>Quay trở về danh sách các ổ đĩa</backToJCR>
-      <setUpBrowser>Thiết lập hiển thị</setUpBrowser>
+      <setUpBrowser>Thiết lập các tùy chọn hiển thị</setUpBrowser>
       <refesh>Làm mới</refesh>
       <currentDrive>Ổ đĩa Hiện tại</currentDrive>
       <selectView>Chọn Giao diện xem</selectView>
-      <showSideBar>Hiện Sidebar</showSideBar>
+      <showSideBar>Hiện Cây thư mục</showSideBar>
       <more>Thêm</more>
       <backTo>Trở lại</backTo>
     </label>
@@ -140,7 +140,7 @@
     <title>Thiết lập tùy chọn hiển thị</title>
     <label>
       <enableStructure>Hiển thị cấu trúc DMS:</enableStructure>
-      <showSideBar>Hiện Sidebar:</showSideBar>
+      <showSideBar>Hiện Cây thư mục:</showSideBar>
       <showHiddenNode>Hiện Nút Ẩn:</showHiddenNode>
       <showNonDocument>Hiển thị tất cả các kiểu nút:</showNonDocument>
       <showRefDocuments>Hiện Tài liệu được Tham chiếu:</showRefDocuments>
@@ -189,24 +189,24 @@
       <newName-same-oldName>Tên mới đã tồn tại. Vui lòng kiểm tra lại.</newName-same-oldName>
       <version-exception>Nút này hoặc nút cha của nó chưa được check out.</version-exception>
       <lock-exception>Nút này đang bị khóa. Vui lòng mở khóa trước khi đổi tên.</lock-exception>
-      <constraintViolation-exception>Lỗi đã xảy ra khi đang đổi tên '{0}'. Vui lòng kiểm tra lại.</constraintViolation-exception>
+      <constraintViolation-exception>Lỗi đã xảy ra khi đang đổi tên nút '{0}'. Vui lòng kiểm tra lại.</constraintViolation-exception>
       <unknown-prefix>Tiền tố '{0}' chưa được đăng ký.</unknown-prefix>
-      <rename-error>Lỗi đã xảy ra khi đang đổi tên. Vui lòng kiểm tra lại.</rename-error>
+      <rename-error>Lỗi đã xảy ra khi đang đổi tên nút này. Vui lòng kiểm tra lại.</rename-error>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
     <title>
       <UIRenameForm>Đổi tên</UIRenameForm>
       <UIActionContainer>Hành động sửa đổi</UIActionContainer>
-      <UIFolderForm>Thêm một thư mục</UIFolderForm>
+      <UIFolderForm>Thêm Thư mục Mới</UIFolderForm>
       <UIUploadManager>Tải lên Tệp tin</UIUploadManager>
       <UIReferencesList>Danh sách Tham chiếu</UIReferencesList>
-      <UIExportNode>Kết xuất dữ liệu</UIExportNode>
-      <UINodeTypeInfo>Thông tin Nút</UINodeTypeInfo>
+      <UIExportNode>Xuất dữ liệu ra</UIExportNode>
+      <UINodeTypeInfo>Thông tin Kiểu Nút</UINodeTypeInfo>
       <UIVersionInfo>Thông tin Phiên bản</UIVersionInfo>
       <UIActivateVersion>Kích hoạt Quản lý phiên bản</UIActivateVersion>
       <UIAuditingInfo>Kiểm tra thông tin</UIAuditingInfo>
-      <UIActivateAuditing>Kích hoạt chức năng ghi lại các thay đổi trên một node</UIActivateAuditing>
+      <UIActivateAuditing>Kích hoạt Ghi lại thay đổi</UIActivateAuditing>
       <UIPermissionManager>Quản lý Phân quyền</UIPermissionManager>
       <UIPropertiesManager>Quản lý Thuộc tính</UIPropertiesManager>
       <UIECMSearch>Tìm kiếm Nâng cao</UIECMSearch>
@@ -218,18 +218,18 @@
       <EditFormController>Chỉnh sửa Tài liệu</EditFormController>
       <UIRelationManager>Thêm Quan hệ</UIRelationManager>
       <UICategoryManager>Thêm Danh mục</UICategoryManager>
-      <UIImportNode>Nạp dữ liệu</UIImportNode>
+      <UIImportNode>Nhập</UIImportNode>
       <UIViewMetadataManager>Xem Siêu dữ liệu</UIViewMetadataManager>
       <UIVoteForm>Bình chọn Tài liệu</UIVoteForm>
-      <UICommentForm>Viết nhận xét</UICommentForm>
+      <UICommentForm>Bình luận</UICommentForm>
       <UIPreferencesForm>Tùy chọn Thiết lập</UIPreferencesForm>
       <UIPublicationManager>Quản lý Đăng tải</UIPublicationManager>
       <UIConfirmMessage>Có xóa không?</UIConfirmMessage>
       <UIDeleteFileConfirmMessage>Xóa Tệp tin?</UIDeleteFileConfirmMessage>
       <UIDeleteFolderConfirmMessage>Xoá Thư mục?</UIDeleteFolderConfirmMessage>
-      <UIDeleteItemsConfirmMessage>Xóa các mục?</UIDeleteItemsConfirmMessage>
+      <UIDeleteItemsConfirmMessage>Xóa Mục?</UIDeleteItemsConfirmMessage>
       <UIRestoreConfirmMessage>Xác nhận Khôi phục</UIRestoreConfirmMessage>
-      <UIActivePublication>Bắt đầu chu trình xuất bản</UIActivePublication>
+      <UIActivePublication>Đăng ký Chu trình Xuất bản</UIActivePublication>
       <UITaggingForm>Gán nhãn Tài liệu</UITaggingForm>
       <UIThumbnailForm>Thêm Ảnh Nhỏ</UIThumbnailForm>
       <UIAllItemsPreferenceForm>Thiết lập Tùy chọn</UIAllItemsPreferenceForm>
@@ -281,13 +281,13 @@
       <ExportNode>Xuất</ExportNode>
       <ImportNode>Nhập</ImportNode>
       <OverloadThumbnail>Chèn Hình nhỏ</OverloadThumbnail>
-      <ManageHidden>Ẩn/Hiện Nội dung</ManageHidden>
+      <ManageHidden>Hiện/Ẩn Nội dung</ManageHidden>
       <ViewReferences>Các Tham chiếu</ViewReferences>
-      <ViewNodeType>Xem cấu trúc node</ViewNodeType>
+      <ViewNodeType>Xem Kiểu Nút</ViewNodeType>
       <ViewPermissions>Phân quyền</ViewPermissions>
       <ViewProperties>Thuộc tính</ViewProperties>
       <ViewMetadatas>Siêu dữ liệu</ViewMetadatas>
-      <ViewRelations>Hiện/Ẩn các Quan hệ</ViewRelations>
+      <ViewRelations>Hiện/Ẩn Quan hệ</ViewRelations>
       <ShowJCRStructure>Hiện/Ẩn Cấu trúc Nội dung</ShowJCRStructure>
     </tooltip>
     <msg>
@@ -296,11 +296,11 @@
       <cannot-enable-version-rootnode>Không thể kích hoạt tính năng lập phiên bản cho nút gốc.</cannot-enable-version-rootnode>
       <cannot-enable-publication-rootnode>Không thể kích hoạt tính năng xuất bản cho nút gốc.</cannot-enable-publication-rootnode>
       <manage-publication>
-        <not-supported-nodetype>Tính năng xuất bản chỉ hỗ trợ nút tài liệu.</not-supported-nodetype>
-        <no-publication-lifecycle>Không có chu trình xuất bản nào được cấu hình.</no-publication-lifecycle>
+        <not-supported-nodetype>Tính năng quản lý xuất bản chỉ hỗ trợ nút tài liệu.</not-supported-nodetype>
+        <no-publication-lifecycle>Không có chu trình xuất bản nào được thiết lập cấu hình.</no-publication-lifecycle>
       </manage-publication>
       <unsubcriber-lifecycle>Nút đã bỏ đăng ký.</unsubcriber-lifecycle>
-      <not-supported-nodetype>Bỏ đăng ký chỉ hỗ trợ cho định dạng tài liệu.</not-supported-nodetype>
+      <not-supported-nodetype>Chu trình bỏ đăng ký chỉ hỗ trợ cho nút tài liệu.</not-supported-nodetype>
       <unsubcriber-lifecycle-finish>Nút đã được ngừng đăng ký thành công.</unsubcriber-lifecycle-finish>
       <access-false>Nút này không phải là một bài viết hoặc chưa được check in.</access-false>
       <unsupported-action>Hành động này không được hỗ trợ.</unsupported-action>
@@ -312,16 +312,16 @@
       <template-null>Nút này không sẵn có hội thoại nào.</template-null>
       <keyword-null>Không có từ khóa nào để tìm kiếm.</keyword-null>
       <not-found>Không tìm thấy kết quả nào.</not-found>
-      <keyword-not-allow>Không cho phép từ khóa này.</keyword-not-allow>
-      <is-not-referenable>Nút '{0}' không thể tham chiếu được.</is-not-referenable>
+      <keyword-not-allow>Không cho phép dùng từ khóa này.</keyword-not-allow>
+      <is-not-referenable>Không thể tham chiếu được nút '{0}'.</is-not-referenable>
       <access-denied>Truy cập bị khước từ. Bạn không được phân quyền chỉnh sửa trên nút này.</access-denied>
-      <access-add-denied>Truy cập bị khước từ. Bạn không được phân quyền thêm mới trên nút này.</access-add-denied>
+      <access-add-denied>Truy cập bị từ chối. Bạn không được phân quyền thêm mới trên nút này.</access-add-denied>
       <item-existed>Nút này đã tồn tại vì không thể có cùng tên với nút khác.</item-existed>
-      <removed-hidden-mixin>Bạn đã gỡ bỏ thành công mixin ẩn.</removed-hidden-mixin>
-      <added-hidden-mixin>Bạn đã thêm mixin ẩn thành công.</added-hidden-mixin>
-      <not-supported>Chức năng này chỉ hỗ trợ cho kiểu tài liệu.</not-supported>
-      <empty-file-type>Bạn không thể thêm tài liệu cho nút này.</empty-file-type>
-      <unsupported-watch>Chỉ những nút tài liệu mới cho phép chế độ theo dõi.</unsupported-watch>
+      <removed-hidden-mixin>Bạn đã gỡ bỏ thành công nút mixin ẩn.</removed-hidden-mixin>
+      <added-hidden-mixin>Bạn đã thêm thành công nút mixin ẩn.</added-hidden-mixin>
+      <not-supported>Tính năng này chỉ hỗ trợ cho kiểu tài liệu.</not-supported>
+      <empty-file-type>Bạn không thể thêm tài liệu vào nút này.</empty-file-type>
+      <unsupported-watch>Chỉ có thể theo dõi nút tài liệu.</unsupported-watch>
       <watch-checkedin>Bạn phải check out nút trước khi theo dõi.</watch-checkedin>
       <unsupported-tagging>Chỉ có thể gán nhãn cho nút tài liệu.</unsupported-tagging>
       <tagnode-checkedin>Bạn phải check out nút trước khi gán nhãn.</tagnode-checkedin>
@@ -331,10 +331,10 @@
       <SimpleSearch>Tìm kiếm Nhanh</SimpleSearch>
       <AdvanceSearch>Tìm kiếm Nâng cao</AdvanceSearch>
       <SavedQueries>Truy vấn được lưu</SavedQueries>
-      <ShowAllOwnedByUser>Hiển thị các tài liệu của tôi</ShowAllOwnedByUser>
-      <ShowAllFavourite>Hiển thị các tài liệu trong mục ưa thích</ShowAllFavourite>
-      <ShowAllHidden>Hiển thị các tài liệu ẩn</ShowAllHidden>
-      <ShowAllFromTrash>Hiển thị các tài liệu trong thùng rác</ShowAllFromTrash>
+      <ShowAllOwnedByUser>Hiện Toàn bộ Mục Cá nhân</ShowAllOwnedByUser>
+      <ShowAllFavourite>Hiện Toàn bộ Mục Yêu thích</ShowAllFavourite>
+      <ShowAllHidden>Hiện Toàn bộ Mục Ẩn đi</ShowAllHidden>
+      <ShowAllFromTrash>Hiện Toàn bộ Mục trong Thư mục Rác</ShowAllFromTrash>
     </title>
   </UIActionBar>
   <UIPopupMenu>
@@ -349,37 +349,37 @@
       <does-not-support-auditing>Bạn không thể kích hoạt tính năng ghi lại thay đổi trên nút này.</does-not-support-auditing>
       <can-not-rename-node>Bạn không được phân quyền để đổi tên nút này. Vui lòng liên hệ với quản trị viên để được phân quyền thích hợp.</can-not-rename-node>
       <can-not-cut-node>Bạn không được phân quyền để cắt nút này. Vui lòng liên hệ với quản trị viên.</can-not-cut-node>
-      <can-not-remove-node>Bạn không được phân quyền để xoá nút này. Vui lòng liên hệ với quản trị viên.</can-not-remove-node>
+      <can-not-remove-node>Bạn không được phân quyền để gỡ bỏ nút này. Vui lòng liên hệ với quản trị viên.</can-not-remove-node>
       <can-not-lock-node>Bạn không được phân quyền để khóa nút {0}. Vui lòng liên hệ với quản trị viên.</can-not-lock-node>
       <can-not-unlock-node>Bạn không được phân quyền để mở khóa nút này. Vui lòng liên hệ với quản trị viên.</can-not-unlock-node>
       <no-node>Vui lòng chọn ít nhất một nút trước khi dán.</no-node>
       <can-not-paste-node>Bạn không được phân quyền để chuyển đến nút này. Vui lòng liên hệ với quản trị viên.</can-not-paste-node>
-      <can-not-move-node>Bạn không được phân quyền để di chuyển nút này. Vui lòng liên hệ với người quản trị.</can-not-move-node>
+      <can-not-move-node>Bạn không được phân quyền để di chuyển nút này. Vui lòng liên hệ với quản trị viên.</can-not-move-node>
       <does-not-support-versioning>Bạn không được phân quyền để chuyển đến nút này. Vui lòng liên hệ với quản trị viên.</does-not-support-versioning>
       <path-not-found>Thành phần này đã bị xóa hoặc thay đổi. Vui lòng nhấp nút Làm mới.</path-not-found>
-      <paste-lock-exception>Bạn không thể dán '{0}' lên nút này bởi vì nút nguồn hoặc nút đích bị khóa hoặc liên quan với nút bị khóa.</paste-lock-exception>
-      <can-not-checkin-node>Bạn không thể check-in nút này. Hãy kiểm tra xem bạn có đúng quyền không.</can-not-checkin-node>
+      <paste-lock-exception>Bạn không thể dán '{0}' lên nút này vì nút nguồn hoặc nút đích đến bị khóa hoặc có liên quan với nút bị khóa.</paste-lock-exception>
+      <can-not-checkin-node>Bạn không thể checkin nút này. Hãy kiểm tra xem bạn có đúng quyền không.</can-not-checkin-node>
       <can-not-checkout-node>Bạn không thể check out nút này. Hãy kiểm tra xem bạn có đúng quyền không.</can-not-checkout-node>
       <move-constraint-exception>Lỗi đã xảy ra khi đang di chuyển nút.</move-constraint-exception>
-      <not-lock-owner>Bạn không thể mở khóa nút này bởi vì bạn không phải là người thực hiện khóa nút.</not-lock-owner>
+      <not-lock-owner>Bạn không thể mở khóa nút này vì bạn không phải là người thực hiện khóa nút.</not-lock-owner>
       <is-checked-in>Vui lòng check out nút này trước khi đổi tên.</is-checked-in>
       <is-checked-in-lock>Vui lòng check out nút này trước khi khóa.</is-checked-in-lock>
       <cant-lock>Bạn không thể khóa nút này.</cant-lock>
-      <node-locked>Khoản mục với đường dẫn {0} hoặc vị trí cao hơn đang bị khóa.</node-locked>
+      <node-locked>Mục với đường dẫn {0} hoặc có vị trí cao hơn đang bị khóa.</node-locked>
       <can-not-delete>Vui lòng đóng nút này trước khi xóa.</can-not-delete>
       <can-not-delete-version>Bạn không thể xóa nút này vì nó đang được đánh phiên bản.</can-not-delete-version>
       <not-support>Bạn không thể xóa nút đã chọn. Vui lòng chọn nút khác.</not-support>
-      <current-node-not-allow-paste>Bạn không thể dán kiểu nút đã sao chép trên node hiện tại.</current-node-not-allow-paste>
-      <copied-node-in-versioning>Bạn không thể dán nút được sao chép trong quá trình đánh phiên bản.</copied-node-in-versioning>
+      <current-node-not-allow-paste>Bạn không thể dán kiểu nút đã sao chép trên nút hiện tại.</current-node-not-allow-paste>
+      <copied-node-in-versioning>Bạn không thể dán nút đã sao chép trong quá trình đánh phiên bản.</copied-node-in-versioning>
       <parent-node-locked>Bạn không được phân quyền để mở khóa nút '{0}'.</parent-node-locked>
       <this-node-locked-by-parent>Bạn không thể mở khóa nút này vì nó đã bị khóa bởi nút cha hoặc nút mức trên.</this-node-locked-by-parent>
-      <paste-node-same-name>Thư mục đến không cho phép dán nút trùng tên.</paste-node-same-name>
+      <paste-node-same-name>Bạn không thể dán nút có cùng tên với nút trong thư mục đích đến.</paste-node-same-name>
       <has-not-add-permission>Bạn không được phân quyền để thêm mới nút.</has-not-add-permission>
       <node-cutting>Nút đang được cắt. Bạn không thể dán ở đây.</node-cutting>
-      <access-denied>Truy nhập bị từ chối! Có thể bạn không có quyền trên nút này.</access-denied>
+      <access-denied>Truy cập bị từ chối! Có thể bạn không được phân quyền trên nút này.</access-denied>
       <remove-verion-exception>Không thể gỡ bỏ vì nút này (hoặc nút cha của nó) đang được checkin.</remove-verion-exception>
-      <remove-referentialIntegrityException>Bạn không thể xóa nút này vì nó hiện đang là đích đến của thuộc tính Tham chiếu.</remove-referentialIntegrityException>
-      <constraintviolation-exception>Không tìm thấy thuộc tính jcr:uuid. Có thể nút đã bị xóa hoặc thay đổi. Vui lòng nhấp nút Làm mới.</constraintviolation-exception>
+      <remove-referentialIntegrityException>Bạn không thể xóa vì nút này hiện đang là đích đến của thuộc tính Tham chiếu.</remove-referentialIntegrityException>
+      <constraintviolation-exception>Không tìm thấy thuộc tính bắt buộc jcr:uuid. Có thể nút đã bị xóa hoặc thay đổi. Vui lòng nhấp nút Làm mới.</constraintviolation-exception>
       <path-not-found-exception>Nút này đã bị xóa hoặc thay đổi. Vui lòng nhấp nút Làm mới.</path-not-found-exception>
       <not-exist-categories>Danh mục không tồn tại.</not-exist-categories>
     </msg>
@@ -403,8 +403,8 @@
       <addFolder-successful>Thêm thành công thư mục '{0}'.</addFolder-successful>
       <name-invalid>Vui lòng nhập tên thư mục.</name-invalid>
       <title-invalid>Vui lòng nhập tiêu đề thư mục.</title-invalid>
-      <name-not-allowed>Tên này không hợp lệ.</name-not-allowed>
-      <fileName-error>Tên tệp tin không hợp lệ.</fileName-error>
+      <name-not-allowed>Tên này không được phép.</name-not-allowed>
+      <fileName-error>Tên tệp không hợp lệ.</fileName-error>
       <constraint-violation>Nút hiện tại không cho phép bạn thêm kiểu nút '{0}'.</constraint-violation>
       <repository-exception>Lỗi đã xảy ra. Vui lòng liên hệ với quản trị viên của bạn để có thêm chi tiết.</repository-exception>
       <repository-exception-permission>Bạn không được phân quyền để thêm mới thư mục vào nút này.</repository-exception-permission>
@@ -428,46 +428,46 @@
     </title>
     <msg>
       <!-- Delte one node is not in trash and have no relation -->
-      <confirm-delete>Bạn có chắc chắn muốn xoá bỏ khoản mục '{0}' không?</confirm-delete>
-      <confirm-delete-file>Bạn có chắc chắn muốn xóa tệp tin '{0}' không?</confirm-delete-file>
+      <confirm-delete>Bạn có chắc chắn muốn xoá mục '{0}' không?</confirm-delete>
+      <confirm-delete-file>Bạn có chắc chắn muốn xóa tệp '{0}' không?</confirm-delete-file>
       <confirm-delete-folder>Bạn có chắc chắn muốn xóa thư mục '{0}' và tất cả các thư mục con không?</confirm-delete-folder>
       
       <!-- Delte one node is in trash and have no relation -->
-      <confirm-delete-permanently>Bạn có chắc chắn muốn xóa vĩnh viễn mục '{0}' không?</confirm-delete-permanently>
-      <confirm-delete-file-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn tệp tin '{0}' không?</confirm-delete-file-permanently>
+      <confirm-delete-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn mục '{0}' không?</confirm-delete-permanently>
+      <confirm-delete-file-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn tệp '{0}' không?</confirm-delete-file-permanently>
       <confirm-delete-folder-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn thư mục '{0}' và tất cả thư mục con của nó không?</confirm-delete-folder-permanently>
       
       <!-- Delte one node is not in trash and have relations -->
       <confirm-delete-has-relations>Bạn có chắc chắn muốn xóa mục '{0}' và các tham chiếu của nó không?</confirm-delete-has-relations>
-      <confirm-delete-file-has-relations>Bạn có chắc chắn muốn xóa tệp tin '{0}' và các tham chiếu của nó không?</confirm-delete-file-has-relations>
+      <confirm-delete-file-has-relations>Bạn có chắc chắn muốn xóa tệp '{0}' và các tham chiếu của nó không?</confirm-delete-file-has-relations>
       <confirm-delete-folder-has-relations>Bạn có chắc chắn muốn xóa thư mục '{0}' và các tham chiếu của nó không?</confirm-delete-folder-has-relations>
       
       <!-- Delte multiple nodes, not in Trash, have no relations -->
-      <confirm-delete-multi-nodes-generic>Bạn có chắc chắn muốn xóa {0} khoản mục đã chọn không?</confirm-delete-multi-nodes-generic>  
-      <confirm-delete-multi-nodes-file>Bạn có chắc chắn muốn xóa {0} tệp tin đã chọn không?</confirm-delete-multi-nodes-file>
+      <confirm-delete-multi-nodes-generic>Bạn có chắc chắn muốn xóa {0} mục đã chọn không?</confirm-delete-multi-nodes-generic>  
+      <confirm-delete-multi-nodes-file>Bạn có chắc chắn muốn xóa {0} tệp đã chọn không?</confirm-delete-multi-nodes-file>
       <confirm-delete-multi-nodes-folder>Bạn có chắc chắn muốn xóa {0} thư mục đã chọn và tất cả thư mục con không?</confirm-delete-multi-nodes-folder>
-      <confirm-delete-multi-nodes-generic-and-file>Bạn có chắc chắn muốn xóa {0} khoản mục và tệp tin đã chọn không?</confirm-delete-multi-nodes-generic-and-file>
-      <confirm-delete-multi-nodes-generic-and-folder>Bạn có chắc chắn muốn xóa {0} khoản mục, thư mục và tất cả thư mục con đã chọn không?</confirm-delete-multi-nodes-generic-and-folder>
-      <confirm-delete-multi-nodes-file-and-folder>Bạn có chắc chắn muốn xóa {0} tệp tin, thư mục và tất cả thư mục con đã chọn không?</confirm-delete-multi-nodes-file-and-folder>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder>Bạn có chắc chắn muốn xóa {0} khoản mục, tệp tin, thư mục và tất cả các thư mục con đã chọn không?</confirm-delete-multi-nodes-generic-and-file-and-folder>
+      <confirm-delete-multi-nodes-generic-and-file>Bạn có chắc chắn muốn xóa {0} mục và tệp đã chọn không?</confirm-delete-multi-nodes-generic-and-file>
+      <confirm-delete-multi-nodes-generic-and-folder>Bạn có chắc chắn muốn xóa {0} mục, thư mục và tất cả thư mục con đã chọn không?</confirm-delete-multi-nodes-generic-and-folder>
+      <confirm-delete-multi-nodes-file-and-folder>Bạn có chắc chắn muốn xóa {0} tệp, thư mục và tất cả thư mục con đã chọn không?</confirm-delete-multi-nodes-file-and-folder>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder>Bạn có chắc chắn muốn xóa {0} mục, tệp, thư mục và tất cả các thư mục con đã chọn không?</confirm-delete-multi-nodes-generic-and-file-and-folder>
       
       <!-- Delte multiple nodes, in Trash -->
       <confirm-delete-multi-nodes-generic-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn {0} mục đã chọn không?</confirm-delete-multi-nodes-generic-permanently>  
-      <confirm-delete-multi-nodes-file-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn {0} tệp tin đã chọn không?</confirm-delete-multi-nodes-file-permanently>
+      <confirm-delete-multi-nodes-file-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn {0} tệp đã chọn không?</confirm-delete-multi-nodes-file-permanently>
       <confirm-delete-multi-nodes-folder-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn {0} thư mục đã chọn và tất cả các thư mục con của chúng không?</confirm-delete-multi-nodes-folder-permanently>
-      <confirm-delete-multi-nodes-generic-and-file-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn {0} mục và tệp tin đã chọn không?</confirm-delete-multi-nodes-generic-and-file-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn {0} mục và tệp đã chọn không?</confirm-delete-multi-nodes-generic-and-file-permanently>
       <confirm-delete-multi-nodes-generic-and-folder-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn {0} mục, thư mục đã chọn và tất cả các thư mục con của chúng không?</confirm-delete-multi-nodes-generic-and-folder-permanently>
-      <confirm-delete-multi-nodes-file-and-folder-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn {0} tệp tin và thư mục đã chọn và tất cả các thư mục con của chúng không?</confirm-delete-multi-nodes-file-and-folder-permanently>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn {0} mục, tệp tin và thư mục đã chọn và tất cả các thư mục con của chúng không?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-file-and-folder-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn {0} tệp và thư mục đã chọn và tất cả các thư mục con của chúng không?</confirm-delete-multi-nodes-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn {0} mục, tệp và thư mục đã chọn và tất cả các thư mục con của chúng không?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
       
       <!-- Delte multiple nodes, have relations -->
-      <confirm-delete-multi-nodes-generic-have-relations>Bạn có chắc chắn muốn xóa {0} khoản mục đã chọn và các tham chiếu của chúng không?</confirm-delete-multi-nodes-generic-have-relations>  
-      <confirm-delete-multi-nodes-file-have-relations>Bạn có chắc chắn muốn xóa {0} tệp tin đã chọn và các tham chiếu của chúng không?</confirm-delete-multi-nodes-file-have-relations>
+      <confirm-delete-multi-nodes-generic-have-relations>Bạn có chắc chắn muốn xóa {0} mục đã chọn và các tham chiếu của chúng không?</confirm-delete-multi-nodes-generic-have-relations>  
+      <confirm-delete-multi-nodes-file-have-relations>Bạn có chắc chắn muốn xóa {0} tệp đã chọn và các tham chiếu của chúng không?</confirm-delete-multi-nodes-file-have-relations>
       <confirm-delete-multi-nodes-folder-have-relations>Bạn có chắc chắn muốn xóa {0} thư mục đã chọn, tất cả các thư mục con và tham chiếu của chúng không?</confirm-delete-multi-nodes-folder-have-relations>
-      <confirm-delete-multi-nodes-generic-and-file-have-relations>Bạn có chắc chắn muốn xóa {0} khoản mục, tệp tin đã chọn và các tham chiếu của chúng không?</confirm-delete-multi-nodes-generic-and-file-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-have-relations>Bạn có chắc chắn muốn xóa {0} mục, tệp đã chọn và các tham chiếu của chúng không?</confirm-delete-multi-nodes-generic-and-file-have-relations>
       <confirm-delete-multi-nodes-generic-and-folder-have-relations>Bạn có chắc chắn muốn xóa {0} mục đã chọn, các tham chiếu, thư mục và tất cả thư mục con của chúng không?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
       <confirm-delete-multi-nodes-file-and-folder-have-relations>Bạn có chắc chắn muốn xóa {0} tệp tin đã chọn, các tham chiếu, thư mục và tất cả thư mục con của chúng không?</confirm-delete-multi-nodes-file-and-folder-have-relations>
-      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Bạn có chắc chắn muốn xóa {0} khoản mục, tệp tin đã chọn, các tham chiếu, thư mục và tất cả thư mục con của chúng không?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Bạn có chắc chắn muốn xóa {0} khoản mục, tệp đã chọn, các tham chiếu, thư mục và tất cả thư mục con của chúng không?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
       
       <feedback-delete>'{0}' đã được xóa thành công.</feedback-delete>
       <feedback-delete-multi>{0} mục đã được xóa thành công.</feedback-delete-multi>      
@@ -478,7 +478,7 @@
       <feedback-restore-multi>{0} mục đã được khôi phục thành công.</feedback-restore-multi>
       
       <confirm-restore>Một nút cùng tên đang tồn tại ở vị trí cũ của nút '{0}'. Bạn có chắc chắn muốn khôi phục nút này không?</confirm-restore>
-      <confirm-move>Bạn có chắc chắn muốn chuyển không?</confirm-move>
+      <confirm-move>Bạn có chắc chắn muốn di chuyển không?</confirm-move>
       <node-cut>Nút '{0}' đã được cắt.</node-cut>
       <execute-successfully>Hành động tùy chỉnh '{0}' đã được thực thi.</execute-successfully>
       <save-node-success>Nút '{0}' đã được lưu lại.</save-node-success>
@@ -488,15 +488,15 @@
   <UIDocumentWorkspace>
     <label>
       <no-children>Nút này không có bất kì nút con nào.</no-children>
-      <no-children-but-has-hidden>Nút này không có bất kì nút con nào nhưng có một số tệp tin đã ẩn đi.</no-children-but-has-hidden>
+      <no-children-but-has-hidden>Nút này không có bất kì nút con nào nhưng có một số tệp đã ẩn đi.</no-children-but-has-hidden>
     </label>
     <msg>
-      <unable-save-node>Nút '{0}' đã được tạo mới. Vui lòng lưu phiên làm việc trước khi thực hiện hành động này.</unable-save-node>
+      <unable-save-node>Nút '{0}' vừa được tạo mới. Vui lòng lưu phiên làm việc trước khi thực hiện hành động này.</unable-save-node>
       <save-node-success>Nút '{0}' đã được lưu lại.</save-node-success>
       <node-copied>Nút '{0}' đã được sao chép.</node-copied>
       <node-cut>Nút '{0}' đã được cắt.</node-cut>
-      <remove-root>Bạn không thể xoá thư mục gốc.</remove-root>
-      <node-remove-success>Nút '{0}' đã được xóa.</node-remove-success>
+      <remove-root>Bạn không thể gỡ bỏ thư mục gốc.</remove-root>
+      <node-remove-success>Nút '{0}' đã được gỡ bỏ.</node-remove-success>
     </msg>
     <tooltip>
       <Rename>Đổi tên</Rename>
@@ -510,16 +510,16 @@
       <Unlock>Mở khóa</Unlock>
       <EditDocument>Chỉnh sửa</EditDocument>
       <Paste>Dán</Paste>
-      <LockedBy>Khóa bởi</LockedBy>
+      <LockedBy>Người khóa</LockedBy>
     </tooltip>
   </UIDocumentWorkspace>
   <UIDocumentInfo>
     <msg>
       <access-denied>Truy cập bị từ chối. Bạn không thể truy cập nút '{0}'.</access-denied>
-      <null-exception>Tài liệu đã bị gỡ bỏ hoặc thay đổi hoặc bạn không được phân quyền để truy cập tài liệu này.</null-exception>
+      <null-exception>Không tìm thấy mục nào vì nó đã bị gỡ bỏ hoặc thay đổi hoặc bạn không được phân quyền để truy cập nút này.</null-exception>
       <confirm-deleteattachment>Bạn có chắc chắn muốn gỡ bỏ tệp đính kèm này không?</confirm-deleteattachment>
       <confirm-deleteattcomment>Bạn có chắc chắn muốn gỡ bỏ bình luận này không?</confirm-deleteattcomment>
-      <access-denied-exception>Truy cập bị từ chối. Bạn có thể không có quyền truy cập hoặc nút này có thể đã bị gỡ bỏ hoặc thay đổi đường dẫn.</access-denied-exception>
+      <access-denied-exception>Truy cập bị từ chối. Bạn có thể không có quyền đọc hoặc nút này có thể đã bị gỡ bỏ hoặc thay đổi.</access-denied-exception>
       <path-not-found>Thành phần này đã bị xóa hoặc thay đổi. Hãy nhấp nút Làm mới.</path-not-found>
     </msg>
     <tooltip>
@@ -534,8 +534,8 @@
         <versionable>Phiên bản</versionable>
         <exo_owner>Người tạo</exo_owner>
         <auditing>Kiểm định</auditing>
-        <exo_dateCreated>Ngày tạo</exo_dateCreated>
-        <exo_dateModified>Ngày Sửa đổi</exo_dateModified>
+        <exo_dateCreated>Ngày Tạo</exo_dateCreated>
+        <exo_dateModified>Ngày Sửa</exo_dateModified>
       </label>
     </view>
   </ListView>
@@ -560,20 +560,20 @@
       <WebDAV>Xem dạng WebDAV</WebDAV>
       <autoversion>Tự động Tạo phiên bản</autoversion>
       <Custom>Tùy chỉnh</Custom>
-      <AddFolder>Thư mục Mới</AddFolder>
-      <AddDocument>Nội dung Mới</AddDocument>
+      <AddFolder>Thêm Mới Thư mục</AddFolder>
+      <AddDocument>Thêm Mới Nội dung</AddDocument>
       <Upload>Tệp tin Tải lên</Upload>
       <MoveNode>Di chuyển</MoveNode>
       <UnLock>Mở khóa</UnLock>
       <ViewProperties>Xem Thuộc tính</ViewProperties>
-      <GetURL>Sao chép liên kết vào bảng ghi tạm</GetURL>
-      <AddThumbnail>Thêm mới/Gỡ bỏ Hình nhỏ</AddThumbnail>
+      <GetURL>Sao chép URL Vào Bảng ghi tạm</GetURL>
+      <AddThumbnail>Thêm/Gỡ bỏ Hình nhỏ</AddThumbnail>
       <AddToFavourite>Thêm vào Mục ưa thích</AddToFavourite>
-      <RemoveFromFavourite>Xóa khỏi Mục ưa thích</RemoveFromFavourite>
-      <MoveToTrash>Chuyển vào thùng rác</MoveToTrash>
-      <RestoreFromTrash>Khôi phục từ thùng rác</RestoreFromTrash>
-      <EmptyTrash>Xóa sạch thùng rác?</EmptyTrash>
-      <WebDavView>Tải về và chỉnh sửa</WebDavView>
+      <RemoveFromFavourite>Gỡ khỏi Mục ưa thích</RemoveFromFavourite>
+      <MoveToTrash>Chuyển vào Thư mục Rác</MoveToTrash>
+      <RestoreFromTrash>Khôi phục từ Thư mục Rác</RestoreFromTrash>
+      <EmptyTrash>Xóa sạch Thư mục Rác?</EmptyTrash>
+      <WebDavView>Tải về và Cho phép Chỉnh sửa</WebDavView>
     </event>
   </ECMContextMenu>
  
@@ -602,7 +602,7 @@
   <UITabPane>
     <title>
       <UIPublishingPanel>Publication Pane</UIPublishingPanel>
-      <UIPublicationPanel>Phiên bản</UIPublicationPanel>
+      <UIPublicationPanel>Xét duyệt</UIPublicationPanel>
       <UIPublicationSchedule>Theo lịch trình</UIPublicationSchedule>
       <UIPublicationPagesContainer>Trang</UIPublicationPagesContainer>
       <UIPublicationHistory>Lược sử</UIPublicationHistory>
@@ -611,21 +611,21 @@
       <UIPropertyTab>Các thuộc tính</UIPropertyTab>
       <UIMetadataTab>Siêu dữ liệu</UIMetadataTab>
       <UIPropertyForm>Thêm Mới Thuộc tính</UIPropertyForm>
-      <UIUploadContent>Thông tin về tệp tin tải lên</UIUploadContent>
+      <UIUploadContent>Thông tin về tệp tải lên</UIUploadContent>
       <UIJCRAdvancedSearch>Truy vấn mới</UIJCRAdvancedSearch>
       <UISavedQuery>Truy vấn được lưu</UISavedQuery>
-      <AdvancedSearchResult>Kết quả tìm kiếm</AdvancedSearchResult>
-      <UISimpleSearch>Tìm kiếm đơn giản</UISimpleSearch>
+      <AdvancedSearchResult>Kết quả Tìm kiếm</AdvancedSearchResult>
+      <UISimpleSearch>Tìm kiếm Đơn giản</UISimpleSearch>
       <UISearchContainer>Tìm kiếm Nâng cao</UISearchContainer>
       <UICategoryManagerSearch>Thêm Danh mục cần Tìm kiếm</UICategoryManagerSearch>
-      <UIConstraintsForm>Biểu mẫu các ràng buộc</UIConstraintsForm>
-      <UIViewSearchResult>Hiện Nội dung</UIViewSearchResult>
+      <UIConstraintsForm>Biểu mẫu Ràng buộc</UIConstraintsForm>
+      <UIViewSearchResult>Xem Nội dung</UIViewSearchResult>
       <UIContentNameSearch>Tìm kiếm theo Tên</UIContentNameSearch>
       <UINodeInfo>Thông tin Phiên bản</UINodeInfo>
-      <UINodeProperty>Thuộc tính của nút</UINodeProperty>
+      <UINodeProperty>Thuộc tính Nút</UINodeProperty>
       <UIActionListContainer>Các hành động có sẵn</UIActionListContainer>
-      <UIActionContainer>Thêm thao tác</UIActionContainer>
-      <UIActionViewContainer>Thông tin thao tác</UIActionViewContainer>
+      <UIActionContainer>Thêm Hành động</UIActionContainer>
+      <UIActionViewContainer>Thông tin Hành động</UIActionViewContainer>
       <UIMultiLanguageForm>Xem Ngôn ngữ</UIMultiLanguageForm>
       <UIAddLanguageContainer>Thêm Ngôn ngữ</UIAddLanguageContainer>
       <UINonPublishedForm>Trạng thái</UINonPublishedForm>
@@ -683,7 +683,7 @@
       <value>Giá trị:</value>
       <upload>Tải lên:</upload>
       <namespace>Định danh:</namespace>
-      <multiple>Đa giá trị</multiple>
+      <multiple>Đa giá trị:</multiple>
       <property_select>Thêm Mới Thuộc tính:</property_select>
     </label>
     <action>
@@ -695,12 +695,12 @@
       <name-invalid>Vui lòng nhập tên thuộc tính.</name-invalid>
       <unable-create>Không thể thêm các thuộc tính.</unable-create>
       <value-invalid>Vui lòng nhập giá trị.</value-invalid>
-      <node-checkedin>Bạn phải kiểm tra ra nút này trước khi thêm thuộc tính.</node-checkedin>
+      <node-checkedin>Bạn phải checkout nút này trước khi thêm thuộc tính.</node-checkedin>
       <can-not-add>Bạn không thể thêm thuộc tính cho nút này. Chức năng giới hạn chỉ cho kiểu nút là nt:unstructured hoặc những thuộc tính đang bị thiếu ở nút hiện tại.</can-not-add>
-      <propertyName-invalid>Tên thuộc tính phải chứa định danh (như là, namespace:name)</propertyName-invalid>
+      <propertyName-invalid>Tên thuộc tính phải chứa định danh (như là namespace:name)</propertyName-invalid>
       <propertyName-exist>Thuộc tính '{0}' đã tồn tại.</propertyName-exist>
-      <propertyValu-null>Một số giá trị có thể được null.</propertyValu-null>
-      <valueFormatEx>Không thể gán đa giá trị đối với thuộc tính có giá trị duy nhất</valueFormatEx>
+      <propertyValu-null>Một số giá trị có thể là rỗng.</propertyValu-null>
+      <valueFormatEx>Không thể gán đa giá trị đối với thuộc tính có giá trị duy nhất.</valueFormatEx>
       <number-format-exception>Giá trị mục nhập của bạn không đúng định dạng.</number-format-exception>
       <property-not-exist>Thuộc tính {0} không tồn tại.</property-not-exist>
     </msg>
@@ -715,7 +715,7 @@
     <action>
       <title>
         <Edit>Chỉnh sửa</Edit>
-        <Delete>Xóa quyền</Delete>
+        <Delete>Gỡ bỏ Phân quyền</Delete>
       </title>
     </action>
     <header>
@@ -728,14 +728,14 @@
     <msg>
       <confirm-delete-permission>Bạn có chắc chắn muốn gỡ bỏ phân quyền này?</confirm-delete-permission>
       <no-permission-tochange>Bạn không có quyền để gỡ bỏ phân quyền này.</no-permission-tochange>
-      <no-permission-remove>Bạn không thể xóa quyền sở hữu.</no-permission-remove>
+      <no-permission-remove>Bạn không thể gỡ bỏ người sở hữu này.</no-permission-remove>
       <access-denied>Truy cập bị từ chối. Bạn không thể gỡ bỏ phân quyền này.</access-denied>
     </msg>
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Lựa chọn người dùng</SelectUser>
-      <SelectMember>Chọn Kiểu thành viên</SelectMember>
+      <SelectUser>Chọn Người dùng</SelectUser>
+      <SelectMember>Chọn Vai trò</SelectMember>
       <AddAny>Chọn Tất cả</AddAny>
     </title>
   </permission>
@@ -748,12 +748,12 @@
     <title>
       <UIGroupSelector>Chọn Người dùng</UIGroupSelector>
       <UIPermissionSelector>Chọn Thành viên</UIPermissionSelector>
-      <UIGroupMemberSelector>Chọn Kiểu thành viên</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Chọn Vai trò</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
-      <selectGroup>Duyệt và Chọn Nhóm người dùng</selectGroup>
+      <selectGroup>Duyệt và Chọn Nhóm</selectGroup>
       <selectUser>Chọn Người dùng</selectUser>
     </label>
     <msg>
@@ -764,12 +764,12 @@
     <label>
       <UIPopupWindow>Chọn</UIPopupWindow>
       <permission>UIPermissionForm</permission>
-      <userOrGroup>Người dùng hoặc Nhóm người dùng</userOrGroup>
+      <userOrGroup>Người dùng hoặc Nhóm</userOrGroup>
       <read>Quyền Đọc</read>
       <add_node>Quyền Sửa</add_node>
       <remove>Quyền Xóa</remove>
     </label>
-    <title>Thêm phân quyền cho Nút</title>
+    <title>Thêm phân quyền cho nút đó</title>
     <action>
       <Close>Đóng</Close>
       <Save>Lưu</Save>
@@ -778,7 +778,7 @@
     <msg>
       <checkbox-require>Vui lòng chọn ít nhất một phân quyền.</checkbox-require>
       <userOrGroup-required>Vui lòng chọn một người dùng hoặc nhóm người dùng trước khi lưu phân quyền này.</userOrGroup-required>
-      <not-change-permission>Bạn không có quyền để thêm mới một phân quyền.</not-change-permission>
+      <not-change-permission>Bạn không có quyền để thêm một phân quyền.</not-change-permission>
       <access-denied>Truy cập bị khước từ. Bạn không thể xóa phân quyền này.</access-denied>
     </msg>
   </UIPermissionForm>
@@ -794,9 +794,9 @@
       <name>Tên</name>
       <item>Tên Mục Chính</item>
       <super-types>Các kiểu cha</super-types>
-      <mixin>Kiểu nút Mixin</mixin>
+      <mixin>Kiểu Nút Mixin</mixin>
       <orderable-children>Nút con sắp xếp được</orderable-children>
-      <property-def>Định nghĩa thuộc tính của Nút</property-def>
+      <property-def>Định nghĩa Thuộc tính Nút</property-def>
       <prop-name>Tên</prop-name>
       <prop-type>Kiểu</prop-type>
       <prop-multiple>Mul</prop-multiple>
@@ -805,7 +805,7 @@
       <prop-auto-create>AC</prop-auto-create>
       <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
       <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
-      <node-def>Định nghĩa nút con</node-def>
+      <node-def>Định nghĩa Nút Con</node-def>
       <node-def-name>Tên</node-def-name>
       <node-def-opv>OPV</node-def-opv>
       <node-def-ac>Tự động tạo ra</node-def-ac>
@@ -825,7 +825,7 @@
   <UICategoryManagerSearch>
     <tab>
       <label>
-        <UIOneNodePathSelector>Lựa chọn loại</UIOneNodePathSelector>
+        <UIOneNodePathSelector>Chọn Danh mục</UIOneNodePathSelector>
       </label>
     </tab>
     <action>
@@ -834,7 +834,7 @@
   </UICategoryManagerSearch>
   <UIContentNameSearch>
     <label>
-      <keyword>Từ khoá:</keyword>
+      <keyword>Tên Nội dung:</keyword>
       <location>Tìm kiếm ở vị trí này:</location>
     </label>
     <action>
@@ -847,7 +847,7 @@
   </UIContentNameSearch>
   <UISimpleSearch>
     <action>
-      <MoreConstraints>Hiển thị/Ẩn biểu mẫu ràng buộc.</MoreConstraints>
+      <MoreConstraints>Hiện/Ẩn Biểu mẫu Ràng buộc</MoreConstraints>
       <Search>Tìm kiếm</Search>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -856,15 +856,15 @@
       <moreConstraints>UISimpleSearch</moreConstraints>
       <firstOperator>Toán tử:</firstOperator>
       <input>Một từ hoặc cụm từ trong nội dung:</input>
-      <constraints>Nhiều ràng buộc hơn:</constraints>
-      <nodePath>Vị trí hiện thời:</nodePath>
+      <constraints>Thêm Ràng buộc khác:</constraints>
+      <nodePath>Vị trí hiện tại:</nodePath>
     </label>
     <msg>
-      <keyword-null>Vui lòng nhập từ khóa</keyword-null>
-      <not-found>Không có kết quả nào được tìm thấy!</not-found>
+      <keyword-null>Vui lòng nhập từ khóa.</keyword-null>
+      <not-found>Không tìm thấy kết quả nào.</not-found>
       <keyword-not-allow>Từ khóa này không được phép.</keyword-not-allow>
-      <value-null>Vui lòng nhập từ khóa hoặc các ràng buộc của bạn.</value-null>
-      <value-save-null>Vui lòng nhập từ khóa hoặc các ràng buộc trước khi lưu truy vấn này.</value-save-null>
+      <value-null>Vui lòng nhập từ khóa hoặc điều kiện ràng buộc của bạn.</value-null>
+      <value-save-null>Vui lòng nhập từ khóa hoặc các điều kiện ràng buộc trước khi lưu truy vấn này.</value-save-null>
       <inputSearch-invalid>Có các ký tự không hợp lệ trong mục nhập tìm kiếm.</inputSearch-invalid>
       <query-invalid>Truy vấn không hợp lệ. Vui lòng kiểm tra ràng buộc của bạn.</query-invalid>
     </msg>
@@ -907,7 +907,7 @@
   </UISearchResult>
   <UIShowAllOwnedByUserResult>
     <msg>
-      <not-support>Không có mẫu hiển thị nào cho nút này.</not-support>
+      <not-support>Không có mẫu Giao diện xem nào cho nút này.</not-support>
       <empty>Không tìm thấy kết quả nào.</empty>
       <access-denied>Bạn không thể xem nút này vì mẫu thiết kế này không được hỗ trợ hoặc truy cập bị từ chối.</access-denied>
       <query-invalid>Truy vấn không hợp lệ</query-invalid>
@@ -922,13 +922,13 @@
       <score>Điểm số</score>
     </header>
     <title>
-      <typeASC>Sắp xếp theo kiểu tài liệu có thứ tự tăng dần</typeASC>
+      <typeASC>Phân loại theo kiểu tài liệu có thứ tự tăng dần</typeASC>
       <typeDESC>Phân loại theo kiểu tài liệu có thứ tự giảm dần</typeDESC>
       <scoreASC>Phân loại theo điểm số có thứ tự tăng dần</scoreASC>
       <scoreDESC>Phân loại theo điểm số có thứ tự giảm dần</scoreDESC>
       <nameASC>Phân loại theo tên có thứ tự tăng dần</nameASC>
       <nameDESC>Phân loại theo tên có thứ tự giảm dần</nameDESC>
-      <datecreatedASC>Phân loại theo ngày tạo có thứ tự tăng dần</datecreatedASC>
+      <datecreatedASC>Phân loại theo ngày Tạo có thứ tự tăng dần</datecreatedASC>
       <datecreatedDESC>Phân loại theo ngày Tạo có thứ tự giảm dần</datecreatedDESC>
     </title>
     <tooltip>
@@ -938,7 +938,7 @@
   </UIShowAllOwnedByUserResult>
   <UIShowAllFavouriteResult>
     <msg>
-      <not-support>Không có mẫu hiển thị nào cho nút này.</not-support>
+      <not-support>Không có mẫu Giao diện xem nào cho nút này.</not-support>
       <empty>Không tìm thấy kết quả</empty>
       <access-denied>Bạn không thể xem nút này vì mẫu này không được hỗ trợ hoặc truy cập bị từ chối.</access-denied>
       <query-invalid>Truy vấn không hợp lệ</query-invalid>
@@ -969,7 +969,7 @@
   </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
-      <not-support>Không có mẫu hiển thị nào cho nút này.</not-support>
+      <not-support>Không có mẫu Giao diện xem nào cho nút này.</not-support>
       <empty>Không tìm thấy kết quả.</empty>
       <access-denied>Bạn không thể xem nút này vì mẫu này không được hỗ trợ hoặc truy cập bị từ chối.</access-denied>
       <query-invalid>Truy vấn không hợp lệ.</query-invalid>
@@ -1002,7 +1002,7 @@
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
-      <not-support>Không có mẫu hiển thị nào cho nút này.</not-support>
+      <not-support>Không có mẫu Giao diện xem nào cho nút này.</not-support>
       <empty>Không tìm thấy kết quả</empty>
       <access-denied>Bạn không thể xem nút này vì mẫu hiển thị không được hỗ trợ hoặc truy cập bị từ chối.</access-denied>
       <query-invalid>Truy vấn không hợp lệ.</query-invalid>
@@ -1017,20 +1017,20 @@
       <score>Điểm số</score>
     </header>
     <title>
-      <typeASC>Sắp xếp theo kiểu tài liệu với thứ tự tăng dần.</typeASC>
-      <typeDESC>Sắp xếp theo kiểu tài liệu với thứ tự giảm dần.</typeDESC>
-      <scoreASC>Sắp xếp theo điểm số với thứ tự tăng dần</scoreASC>
-      <scoreDESC>Sắp xếp theo điểm số với thứ tự giảm dần</scoreDESC>
-      <nameASC>Sắp xếp theo tên với thứ tự tăng dần</nameASC>
-      <nameDESC>Sắp xếp theo tên với thứ tự giảm dần</nameDESC>
-      <datecreatedASC>Sắp xếp theo ngày tạo với thứ tự tăng dần</datecreatedASC>
-      <datecreatedDESC>Sắp xếp theo ngày tạo với thứ tự giảm dần</datecreatedDESC>
+      <typeASC>Phân loại theo kiểu tài liệu có thứ tự tăng dần</typeASC>
+      <typeDESC>Phân loại theo kiểu tài liệu có thứ tự giảm dần</typeDESC>
+      <scoreASC>Phân loại theo điểm số có thứ tự tăng dần</scoreASC>
+      <scoreDESC>Phân loại theo điểm số có thứ tự giảm dần</scoreDESC>
+      <nameASC>Phân loại theo tên có thứ tự tăng dần</nameASC>
+      <nameDESC>Phân loại theo tên có thứ tự giảm dần</nameDESC>
+      <datecreatedASC>Phân loại theo ngày tạo có thứ tự tăng dần</datecreatedASC>
+      <datecreatedDESC>Phân loại theo ngày tạo có thứ tự giảm dần</datecreatedDESC>
     </title>
     <tooltip>
-      <View>Xem nút này</View>
-      <OpenFolder>Đi đến thư mục</OpenFolder>
+      <View>Xem Nút này</View>
+      <OpenFolder>Đi đến Thư mục</OpenFolder>
       <DeletePermanently>Xóa vĩnh viễn</DeletePermanently>
-      <RestoreFromTrash>Khôi phục từ thùng rác</RestoreFromTrash>
+      <RestoreFromTrash>Khôi phục từ Thư mục Rác</RestoreFromTrash>
     </tooltip>
   </UIShowAllTrashResult>
   <UIConstraintsForm>
@@ -1038,8 +1038,8 @@
       <constraints>UIConstraintsForm</constraints>
       <metadataProperty>Các thuộc tính</metadataProperty>
       <operator>Toán tử</operator>
-      <contains>Chứa giá trị</contains>
-      <notcontains>Không chứa giá trị</notcontains>
+      <contains>Chứa Giá trị</contains>
+      <notcontains>Không Chứa Giá trị</notcontains>
     </label>
     <action>
       <Add>Thêm</Add>
@@ -1048,13 +1048,13 @@
     <msg>
       <properties-required>Bạn chưa nhập tên thuộc tính.</properties-required>
       <value-required>Trường giá trị được yêu cầu.</value-required>
-      <date-invalid>Ngày bắt đầu phải sớm hơn ngày đến.</date-invalid>
-      <fromDate-required>Nhập ngày bắt đầu.</fromDate-required>
-      <must-choose-one>Bạn phải chọn ít nhất một loại</must-choose-one>
-      <properties-null>Chọn thuộc tính đầu tiên, sau đó lọc.</properties-null>
-      <exactly-require>Bạn phải điền các giá trị chính xác trước khi lưu lại ràng buộc này.</exactly-require>
-      <fromDate-invalid>Giá trị không hợp lệ trong trường 'Từ ngày'.Vui lòng chọn hoặc nhập vào giá trị đúng.</fromDate-invalid>
-      <toDate-invalid>Giá trị không hợp lê trong trường 'Đến ngày'. Vui lòng chọn hoặc nhập vào giá trị đúng.</toDate-invalid>
+      <date-invalid>Ngày Bắt đầu phải trước ngày Kết thúc.</date-invalid>
+      <fromDate-required>Bắt buộc phải nhập ngày Bắt đầu.</fromDate-required>
+      <must-choose-one>Bạn phải chọn ít nhất một kiểu.</must-choose-one>
+      <properties-null>Hãy chọn các thuộc tính trước, sau đó lọc.</properties-null>
+      <exactly-require>Bạn phải điền chính xác vào trường Giá trị trước khi lưu điều kiện ràng buộc này.</exactly-require>
+      <fromDate-invalid>Kiểu không hợp lệ trong trường 'Ngày Bắt đầu'. Vui lòng chọn lại hoặc nhập chính xác.</fromDate-invalid>
+      <toDate-invalid>Kiểu không hợp lệ trong trường 'Ngày Kết thúc'. Vui lòng chọn lại hoặc nhập chính xác.</toDate-invalid>
     </msg>
     <button>
       <label-Add>Thêm</label-Add>
@@ -1063,26 +1063,26 @@
   </UIConstraintsForm>
   <UIConstraintForm>
     <tooltip>
-      <AddMetadataType>Thêm thuộc tính</AddMetadataType>
-      <AddNodeType>Thêm kiểu nút</AddNodeType>
-      <AddCategory>Thêm loại</AddCategory>
-      <FindExactly>Tìm chính xác</FindExactly>
+      <AddMetadataType>Thêm Thuộc tính</AddMetadataType>
+      <AddNodeType>Thêm Kiểu Nút</AddNodeType>
+      <AddCategory>Thêm Danh mục</AddCategory>
+      <FindExactly>Tìm Chính xác</FindExactly>
     </tooltip>
     <label>
       <colon>:</colon>
       <operator>Toán tử</operator>
       <exactlyPro-properties>Thuộc tính</exactlyPro-properties>
-      <exactlyPro-ContainExactly>Chứa chính xác</exactlyPro-ContainExactly>
+      <exactlyPro-ContainExactly>Chứa Chính xác</exactlyPro-ContainExactly>
       <containPro-properties>Thuộc tính</containPro-properties>
       <containPro-Contain>Chứa</containPro-Contain>
       <notContainPro-properties>Thuộc tính</notContainPro-properties>
-      <notContainPro-notContain>Không chứa</notContainPro-notContain>
+      <notContainPro-notContain>Không Chứa</notContainPro-notContain>
       <ConstraintOption-From>Từ</ConstraintOption-From>
       <ConstraintOption-To>Đến</ConstraintOption-To>
-      <DocumentType-label>Kiểu tài liệu</DocumentType-label>
+      <DocumentType-label>Kiểu Tài liệu</DocumentType-label>
       <Category-label>Danh mục</Category-label>
-      <created>Ngày tạo</created>
-      <modified>Ngày sửa</modified>
+      <created>Ngày Tạo</created>
+      <modified>Ngày Sửa</modified>
       <and>Và</and>
       <or>Hoặc</or>
     </label>
@@ -1111,11 +1111,11 @@
   </UINodeTypeSelectForm>
   <UICompareExactlyForm>
     <label>
-      <filter>Bộ lọc:</filter>
+      <filter>Lọc:</filter>
       <result>Kết quả:</result>
     </label>
     <title>
-      <result>Bộ lọc</result>
+      <result>Lọc</result>
     </title>
     <button>
       <label-Select>Lựa chọn</label-Select>
@@ -1128,7 +1128,7 @@
   <UIJCRAdvancedSearch>
     <label>
       <name>Tên:</name>
-      <selectBox>Lựa chọn kiểu truy vấn:</selectBox>
+      <selectBox>Chọn Kiểu Truy vấn:</selectBox>
       <query>Truy vấn:</query>
     </label>
     <action>
@@ -1139,17 +1139,17 @@
     <msg>
       <!--DMS 2.4.x ECM-3566-->
       <name-invalid>Tên không hợp lệ.</name-invalid>
-      <query-added>Các truy vấn được nhập thành công.</query-added>
-      <save_unSuccessful>Truy vấn không hợp lệ hoặc tên của truy vấn đã tồn tại.</save_unSuccessful>
+      <query-added>Các truy vấn được thêm vào thành công.</query-added>
+      <save_unSuccessful>Không thể lưu truy vấn có thể do câu truy vấn không hợp lệ hoặc tên truy vấn đã tồn tại.</save_unSuccessful>
       <invalid-queryStatement>Câu truy vấn không hợp lệ.</invalid-queryStatement>
       <value-save-null>Vui lòng nhập câu truy vấn.</value-save-null>
-      <query-name-null>Vui lòng nhập tên câu truy vấn.</query-name-null>
+      <query-name-null>Vui lòng nhập tên truy vấn.</query-name-null>
     </msg>
   </UIJCRAdvancedSearch>
   <EditQueryForm>
     <label>
       <name>Tên</name>
-      <selectBox>Lựa chọn kiểu truy vấn</selectBox>
+      <selectBox>Chọn Kiểu Truy vấn</selectBox>
       <query>Truy vấn</query>
     </label>
     <action>
@@ -1168,22 +1168,22 @@
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Add>Thêm</Add>
+      <Add>Thêm mới</Add>
     </action>
   </UIMetadataSelectForm>
   <property1MetadataPopup>
     <title>
-      <UISelectPropertyForm>Lựa chọn thuộc tính</UISelectPropertyForm>
+      <UISelectPropertyForm>Chọn Thuộc tính</UISelectPropertyForm>
     </title>
   </property1MetadataPopup>
   <property2MetadataPopup>
     <title>
-      <UISelectPropertyForm>Lựa chọn thuộc tính</UISelectPropertyForm>
+      <UISelectPropertyForm>Chọn Thuộc tính</UISelectPropertyForm>
     </title>
   </property2MetadataPopup>
   <property3MetadataPopup>
     <title>
-      <UISelectPropertyForm>Lựa chọn thuộc tính</UISelectPropertyForm>
+      <UISelectPropertyForm>Chọn Thuộc tính</UISelectPropertyForm>
     </title>
   </property3MetadataPopup>
   <UISelectPropertyForm>
@@ -1198,7 +1198,7 @@
   </UISelectPropertyForm>
   <ExactlyFormPopup>
     <title>
-      <UICompareExactlyForm>Biểu mẫu lọc</UICompareExactlyForm>
+      <UICompareExactlyForm>Biểu mẫu Lọc</UICompareExactlyForm>
     </title>
   </ExactlyFormPopup>
   <UIECMSearch>
@@ -1206,13 +1206,13 @@
       <name>Tên</name>
       <language>Ngôn ngữ</language>
       <query>Truy vấn</query>
-      <action>Các thao tác</action>
+      <action>Các Hành động</action>
       <path>Đường dẫn</path>
     </header>
   </UIECMSearch>
   <UIResult>
     <msg>
-      <not-found>Dữ liệu không được tìm thấy</not-found>
+      <not-found>Không tìm thấy dữ liệu.</not-found>
     </msg>
     <header>
       <action>Hành động</action>
@@ -1220,12 +1220,12 @@
   </UIResult>
   <UISaveQueryForm>
     <msg>
-      <query-name-null>Vui lòng nhập tên của câu truy vấn để lưu lại!</query-name-null>
-      <access-denied>Bạn cần có quyền thêm mới để lưu câu truy vấn này.</access-denied>
-      <save-failed>Không thể lưu: câu truy vấn không hợp lệ hoặc tên của câu truy vấn đã tồn tại.</save-failed>
+      <query-name-null>Vui lòng nhập tên truy vấn để lưu lại.</query-name-null>
+      <access-denied>Truy cập bị từ chối. Bạn không có quyền thêm mới để lưu truy vấn này.</access-denied>
+      <save-failed>Bạn không thể lưu truy vấn đó do câu truy vấn không hợp lệ hoặc tên truy vấn đã tồn tại.</save-failed>
     </msg>
     <label>
-      <queryName>Tên truy vấn</queryName>
+      <queryName>Tên Truy vấn</queryName>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1238,24 +1238,24 @@
       <type>Kiểu</type>
       <statement>Câu truy vấn</statement>
       <permission>Quyền</permission>
-      <action>Các thao tác</action>
+      <action>Các hành động</action>
     </header>
     <tooltip>
       <Execute>Thực thi</Execute>
-      <Edit>Sửa</Edit>
+      <Edit>Chỉnh sửa</Edit>
       <Delete>Xóa</Delete>
     </tooltip>
     <label>
-      <no-children>Không có câu truy vấn nào được lưu lại</no-children>
+      <no-children>Không có truy vấn nào được lưu lại.</no-children>
     </label>
     <msg>
-      <confirm-delete-query>Bạn có thực sự muốn xóa câu truy vấn này?</confirm-delete-query>
-      <not-result-found>Không có kết quả nào được tìm thấy.</not-result-found>
+      <confirm-delete-query>Bạn có chắc chắn muốn xóa truy vấn này không?</confirm-delete-query>
+      <not-result-found>Không tìm thấy kết quả.</not-result-found>
     </msg>
   </UISavedQuery>
   <UIQueryResultPageIterator>
     <label>
-      <results>Các kết quả</results>
+      <results>Kết quả</results>
       <of-about>khoảng</of-about>
       <of>của</of>
     </label>
@@ -1267,11 +1267,11 @@
   -->
   <UIExportNode>
     <label>
-      <format>Dạng</format>
-      <nodePath>Đường dẫn để xuất</nodePath>
+      <format>Định dạng</format>
+      <nodePath>Đường dẫn để Xuất ra</nodePath>
       <zip>Nén</zip>
-      <systemView>Kiểu hệ thống</systemView>
-      <documentView>Xem kiểu tài liệu</documentView>
+      <systemView>Kiểu Hệ thống</systemView>
+      <documentView>Kiểu Tài liệu</documentView>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -1286,13 +1286,13 @@
   -->
   <PopupUserSelector>
     <title>
-      <UIUserContainer>Chọn phân quyền cho người dùng</UIUserContainer>
+      <UIUserContainer>Chọn Phân quyền Người dùng</UIUserContainer>
     </title>
   </PopupUserSelector>
   <UIPopupTaxonomy>
     <title>
-      <UICategoriesSelector>Thêm loại</UICategoriesSelector>
-      <UIOneNodePathSelector>Thêm loại</UIOneNodePathSelector>
+      <UICategoriesSelector>Thêm Danh mục</UICategoriesSelector>
+      <UIOneNodePathSelector>Thêm Danh mục</UIOneNodePathSelector>
     </title>
   </UIPopupTaxonomy>
   <!--
@@ -1302,18 +1302,18 @@
   -->
   <UIVersionInfo>
     <tooltip>
-      <addLabel>Thêm nhãn</addLabel>
-      <removeLable>Xóa bỏ nhãn</removeLable>
-      <restoreVersion>Khôi phục lại phiên bản</restoreVersion>
-      <viewVersion>Hiển thị thông tin về các phiên bản</viewVersion>
-      <deleteVersion>Xóa phiên bản</deleteVersion>
+      <addLabel>Thêm Nhãn</addLabel>
+      <removeLable>Gỡ bỏ Nhãn</removeLable>
+      <restoreVersion>Khôi phục Phiên bản</restoreVersion>
+      <viewVersion>Xem Thông tin Phiên bản</viewVersion>
+      <deleteVersion>Xóa Phiên bản</deleteVersion>
       <compareVersion>So sánh với phiên bản cơ sở</compareVersion>
     </tooltip>
     <msg>
-      <have-no-view-template>Mẫu thiết kế giao diện xem này không được hỗ trợ.</have-no-view-template>
-      <cannot-remove-version>Không thể xóa một phiên bản cơ sở</cannot-remove-version>
-      <confirm-delete>Bạn có thực sự muốn xóa phiên bản này không?</confirm-delete>
-      <not-checked-out>Bạn cần phải kiểm tra nút này trước khi khôi phục.</not-checked-out>
+      <have-no-view-template>Mẫu giao diện xem này không được hỗ trợ.</have-no-view-template>
+      <cannot-remove-version>Bạn không thể gỡ bỏ một phiên bản cơ sở.</cannot-remove-version>
+      <confirm-delete>Bạn có chắc chắn muốn xóa phiên bản này không?</confirm-delete>
+      <not-checked-out>Bạn phải checkout nút này trước khi khôi phục.</not-checked-out>
       <invalid-item-state>Bạn không thể khôi phục phiên bản này. Chắc chắn một số khoản mục đã bị xóa hoặc được di chuyển trong một phiên làm việc khác.</invalid-item-state>
     </msg>
     <action>
@@ -1660,7 +1660,7 @@
 </tooltip>
     <msg>
       <cannot-save>Lỗi xảy ra khi lưu tài liệu.</cannot-save>
-      <in-versioning>Cần checkout nút hiện thời trước khi thêm nút mới.</in-versioning>
+      <in-versioning>Vui lòng checkout nút hiện thời trước khi thêm nút mới.</in-versioning>
       <not-support>Không thể tải mẫu của '{0}'.</not-support>
       <value-invalid>'{0}' là giá trị cần thiết.</value-invalid>
       <repository-exception>Lỗi xảy ra khi lưu tài liệu.</repository-exception>
@@ -1735,7 +1735,7 @@
     <msg>
       <remove-popup-first>Bạn phải đóng cửa sổ trước khi xóa nút.</remove-popup-first>
       <confirm-delete-action>Bạn có thực sự muốn xóa thao tác này?</confirm-delete-action>
-      <template-empty>Mẫu của '{0}' là null hoặc rỗng.</template-empty>
+      <template-empty>Mẫu của '(0)' là null hoặc rỗng.</template-empty>
       <template-null>Mẫu rỗng hoặc bạn không có quyền truy cập mẫu này.</template-null>
       <access-denied>Truy nhập bị hủy bỏ!Bạn không có quyền để thực hiện thao tác này.</access-denied>
     </msg>
@@ -1910,7 +1910,7 @@
     </msg>
   </DateTimeValidator>
   <CronExpressionValidator>
-    <invalid-input>Biểu thức cron không đúng. Vui lòng kiểm tra lại cú pháp.</invalid-input>
+    <invalid-input>Biểu thức cron không hợp lệ. Vui lòng kiểm tra cú pháp.</invalid-input>
   </CronExpressionValidator>
   <EmptyFieldValidator>
     <msg>
@@ -2095,7 +2095,7 @@
       <mimetype-incorrect>Kiểu tệp tin không hợp lệ. Hệ thống chỉ chấp nhận tệp có định dạng JPG, PNG, hoặc GIF.</mimetype-incorrect>
       <access-denied>Truy nhập bị từ chối. Bạn không có quyền để thêm ảnh thu nhỏ cho nút này.</access-denied>
       <confirm-delete>Bạn muốn xóa ảnh thu nhỏ này?</confirm-delete>
-      <is-checked-in>Nút này được checked-in. Vui lòng check-out trước khi thực hiện bất kì thao tác nào.</is-checked-in>
+      <is-checked-in>Nút này hiện đang được checkin. Vui lòng checkout trước khi thực hiện bất kì thao tác nào.</is-checked-in>
     </msg>
     <title>
       <remove-thumbnail>Xóa hình thu nhỏ này</remove-thumbnail>
@@ -2266,13 +2266,13 @@
     <msg>
       <addFolder-successful>Thêm thành công symlink '{0}'.</addFolder-successful>
       <name-invalid>Vui lòng nhập tên symlink.</name-invalid>
-      <name-not-allowed>Tên này không hợp lệ.</name-not-allowed>
-      <fileName-error>Tên tệp tin không hợp lệ.</fileName-error>
+      <name-not-allowed>Tên này không được phép.</name-not-allowed>
+      <fileName-error>Tên tệp không hợp lệ.</fileName-error>
       <constraint-violation>Không thể thêm kiểu nút '{0}' vào nút hiện tại.</constraint-violation>
       <repository-exception>Truy cập bị từ chối. Bạn không được phân quyền để thêm symlink vào nút này.</repository-exception>
       <numberformat-exception>Bạn không thể lưu thư mục này. Tên cung cấp phải ở định dạng số.</numberformat-exception>
       <path-node-invalid>Vui lòng nhập đường dẫn.</path-node-invalid>
-      <path-node-not-allowed>Tên này không hợp lệ.</path-node-not-allowed>
+      <path-node-not-allowed>Tên này không được phép.</path-node-not-allowed>
       <non-node>Vui lòng chọn nút đích tin cậy. có thể bạn không có quyền để đọc nút này.</non-node>
       <cannot-save>Một lỗi đã xảy ra khi đang tạo symlink.</cannot-save>
       <item-exists-exception>Tên nút này đã tồn tại.</item-exists-exception>
@@ -2473,7 +2473,7 @@
 
   <UIPopupMenu>
     <msg>
-      <can-not-unlock-node-is-checked-in>Không thể mở khóa vì nút '{0}' hoặc cha của '{0}' đang ở trạng thái check-in.</can-not-unlock-node-is-checked-in>
+      <can-not-unlock-node-is-checked-in>Không thể mở khóa vì nút '{0}' hoặc cha của '{0}' đang được checkin.</can-not-unlock-node-is-checked-in>
     </msg>
   </UIPopupMenu>
 
@@ -3068,7 +3068,7 @@
   <UIPopupMenu>
   <msg>
 <can-not-remove-locked-node>Nút {0} bị khóa. Bạn không thể di chuyển nó vào thùng rác.</can-not-remove-locked-node>
-<can-not-remove-checked-in-node>Nút {0} hoặc cha của nó được đang ở trạng thái checked-in. Bạn không thể di chuyển nó vào thùng rác.</can-not-remove-checked-in-node>
+<can-not-remove-checked-in-node>Nút {0} hoặc nút cha của nó được đang được checkin. Bạn không thể di chuyển nó vào Thư mục Rác.</can-not-remove-checked-in-node>
 <access-denied-to-delete>Truy cập bị từ chối. Bạn không thể di chuyển nút {0} vào thùng rác.</access-denied-to-delete>
   </msg>
   </UIPopupMenu>
@@ -3139,6 +3139,6 @@
   ###################################################################################
   -->
   <VersionException>
-  <msg>Không thể sửa tài liệu khi chúng đang check-in.</msg>  
+  <msg>Không thể sửa đổi tài liệu khi chúng đang được checkin.</msg>  
   </VersionException>
 </bundle>

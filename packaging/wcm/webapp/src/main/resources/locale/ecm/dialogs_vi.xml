@@ -9,7 +9,7 @@
         <end-time>Thời gian Kết thúc</end-time>
         <start-time>Thời gian Bắt đầu</start-time>
         <lifecycle>Chu kỳ</lifecycle>
-        <mimeType>Kiểu Mime</mimeType>
+        <mimeType>Định dạng</mimeType>
         <repeat-count>Số lần Lặp lại</repeat-count>
         <time-interval>Khoảng Thời gian</time-interval>
         <query-items>Mục Truy vấn</query-items>
@@ -91,7 +91,7 @@
       <label>
         <id>Mã</id>
         <name>#{word.name}</name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <lifecycle>Chu kỳ</lifecycle>
         <metadata>Siêu dữ liệu</metadata>
         <description>#{word.description}</description>
       </label>
