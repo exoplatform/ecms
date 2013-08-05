@@ -6,6 +6,9 @@
   String[] beanActions =  uicomponent.getBeanActions() ;
   UIComponent uiParent = uicomponent.getParent() ;
   String name = uicomponent.getId() ; 
+  
+  def rcontext = _ctx.getRequestContext();
+  rcontext.getJavascriptManager().require("SHARED/jquery", "gj").addScripts("gj(document).ready(function() { gj(\"*[rel='tooltip']\").tooltip();});");
 %>
 
 <div id="$uicomponent.id">
@@ -91,9 +94,9 @@
 	                if(action != null) { 
 	                  if(uicomponent.isUseAjax()){
 	             %>             
-	                <a class="actionIcon" onclick="<%=uicomponent.event(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "$action" ><i class="uiIcon${action}"></i></a>
+	                <a class="actionIcon" onclick="<%=uicomponent.event(action, beanId)%>" rel="tooltip" data-placement="bottom" data-original-title = "$action" ><i class="uiIcon${action}"></i></a>
 	              <%  }else{ %>
-	                <a class="actionIcon" onclick="<%=uicomponent.url(action, beanId)%>" rel="tooltip" data-placement="bottom" title = "$action" ><i class="uiIcon${action}"></i></a>
+	                <a class="actionIcon" onclick="<%=uicomponent.url(action, beanId)%>" rel="tooltip" data-placement="bottom" data-original-title = "$action" ><i class="uiIcon${action}"></i></a>
 	              <%  } %> 
 	              <%} %> 
 	            <%}%>      
