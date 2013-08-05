@@ -602,7 +602,7 @@
   <UITabPane>
     <title>
       <UIPublishingPanel>Publication Pane</UIPublishingPanel>
-      <UIPublicationPanel>Xét duyệt</UIPublicationPanel>
+      <UIPublicationPanel>Phiên bản</UIPublicationPanel>
       <UIPublicationSchedule>Theo lịch trình</UIPublicationSchedule>
       <UIPublicationPagesContainer>Trang</UIPublicationPagesContainer>
       <UIPublicationHistory>Lược sử</UIPublicationHistory>
