@@ -9,7 +9,10 @@
 	    this.languageLoaded = false;
 	    this.InternalServerErrorMsg="";
 	    this.EmptyTitleErrorMsg = "";
+	    this.isModified = false;
+	    this.editorName = "";
 	  }
+	  
 	};
 	
 	InlineEditor.loadLanguage =function (msg) {
@@ -19,24 +22,33 @@
 	    if (msg[1]) EmptyTitleErrorMsg = decodeURI(msg[1]);
 	  }  
 	}
+
+	InlineEditor.modifyInlineContent = function(e) {
+          InlineEditor.init();
+          InlineEditor.isModified = true;
+	}
 	InlineEditor.saveInlineContent = function(e) {
-		InlineEditor.init();
-          	var container = e.container;
-		var repo = container.getAttribute("repo");
-		var workspace = container.getAttribute("workspace");
-		var uuid = container.getAttribute("uuid");
-		var sitename = container.getAttribute("sitename");
-		var language = container.getAttribute("language");
-		var propertyname = container.getAttribute("propertyname");
-		var data = "";
-		if(propertyname.indexOf("exo:title") >= 0)
-		  data = e.editable().getText();
-		else
-		  data = e.getData();
-		var params =""; 
-  		params = "newValue=" + encodeURIComponent(data);
-  		InlineEditor.presentationRequestChangePropertyPOST("/property?", propertyname, repo, 
-		workspace, uuid, sitename, language, params);         
+		if(InlineEditor.isModified) {
+		  	var container = e.container;
+			InlineEditor.editorName = e.name;
+			var repo = container.getAttribute("repo");
+			var workspace = container.getAttribute("workspace");
+			var uuid = container.getAttribute("uuid");
+			var sitename = container.getAttribute("sitename");
+			var language = container.getAttribute("language");
+			var propertyname = container.getAttribute("propertyname");
+			var data = "";
+			if(propertyname.indexOf("exo:title") >= 0)
+			  data = e.editable().getText();
+			else
+			  data = e.getData();
+			var params =""; 
+	  		params = "newValue=" + encodeURIComponent(data);
+			gj(container).append("<i class='uiWaitting'></i>");
+	  		InlineEditor.presentationRequestChangePropertyPOST("/property?", propertyname, repo, 
+			workspace, uuid, sitename, language, params);  
+			InlineEditor.isModified = false;      
+		} 
   		return false;
 	}
 
@@ -183,7 +195,10 @@
 	    var locale_message = nodeList[0].getAttribute("message"); 
 	    if (InlineEditor.xmlHttpRequest.readyState == 4) {
 	      if (InlineEditor.xmlHttpRequest.status == 200) {
-	        if(locale_message == "OK") location.reload(true);
+	        if(locale_message == "OK") {
+			gj('.uiWaitting').remove();
+			CKEDITOR.instances[InlineEditor.editorName].updateElement();			
+		}
 	        else alert(locale_message);
 	      }
 	    }else {

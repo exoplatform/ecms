@@ -32,6 +32,7 @@ function acceptUpdate(e){
       this.languageLoaded = false;
       this.InternalServerErrorMsg="";
       this.EmptyTitleErrorMsg = "";
+      this.editorName = "";
     }
   };
 
@@ -95,7 +96,9 @@ InlineEditor.presentationAjaxRequest = function (url, params, method) {
 	    var locale_message = nodeList[0].getAttribute("message"); 
 	    if (InlineEditor.xmlHttpRequest.readyState == 4) {
 	      if (InlineEditor.xmlHttpRequest.status == 200) {
-	        if(locale_message == "OK") location.reload(true);
+	        if(locale_message == "OK") {
+			CKEDITOR.instances[InlineEditor.editorName].updateElement();
+		}
 	        else alert(locale_message);
 	      }
 	    }else {
@@ -114,9 +117,8 @@ InlineEditor.presentationAjaxRequest = function (url, params, method) {
   window.InlineEditor = InlineEditor;
 
   var instanceCK = document.getElementById("cke_"+e.name);
-  //e.fire("blur"); 
-
   var container = e.container;
+  InlineEditor.editorName = e.name;
   var repo = container.getAttribute("repo");
   var workspace = container.getAttribute("workspace");
   var uuid = container.getAttribute("uuid");

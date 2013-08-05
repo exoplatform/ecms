@@ -27,9 +27,6 @@ function cancelUpdate(e){
   var editorElement = e.element;
   $(editorElement).removeClass();
   $(editorElement).attr('style','');
-  $(e.container).blur();
-  $(e).blur();
-  e.fire("blur");
   location.reload(true);
 }
 
