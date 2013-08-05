@@ -1265,8 +1265,8 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <parentPath>親</parentPath>
-      <taxonomyName>分類名</taxonomyName>
+      <parentPath>Parent:</parentPath>
+      <taxonomyName>Category Name:</taxonomyName>
     </label>
     <msg>
       <name-null>名前はnulllです。</name-null>
