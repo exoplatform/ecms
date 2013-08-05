@@ -1265,8 +1265,8 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <parentPath>Percorso Padre</parentPath>
-      <taxonomyName>Nome Categoria</taxonomyName>
+      <parentPath>Parent:</parentPath>
+      <taxonomyName>Category Name:</taxonomyName>
     </label>
     <msg>
       <name-null>Nome categoria vuoto.</name-null>
