@@ -362,14 +362,12 @@ public class Utils {
     }
     return ret;
   }
+  
   /**
-   * 
+   * Remove all the link of a deleted node
    * @param     : node
    * @param     : keepInTrash true if the link will be move to trash, otherwise set by false
    * @throws    : Exception
-   * @Objective : Remove all the link of a deleted node
-   * @Author    : Nguyen The Vinh from ECM of eXoPlatform
-   *              vinh.nguyen@exoplatform.com
    */
   public static void removeDeadSymlinks(Node node, boolean keepInTrash) throws Exception {
     if (isInTrash(node)) {
@@ -386,8 +384,7 @@ public class Utils {
         node = queue.poll();
         if (!node.isNodeType(EXO_SYMLINK)) {
           try {
-            List<Node> symlinks = linkManager.getAllLinks(node, EXO_SYMLINK);
-
+            List<Node> symlinks = linkManager.getAllLinks(node, EXO_SYMLINK, sessionProvider);
             // Before removing symlinks, We order symlinks by name descending, index descending.
             // Example: symlink[3],symlink[2], symlink[1] to avoid the case that
             // the index of same name symlink automatically changed to increasing one by one

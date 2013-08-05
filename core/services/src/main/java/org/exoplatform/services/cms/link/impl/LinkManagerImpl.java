@@ -357,6 +357,8 @@ public class LinkManagerImpl implements LinkManager {
 
       for (String workspace : workspaces) {
         Session session = sessionProvider.getSession(workspace, repository);
+        //Continue In the case cannot access to a workspace
+        if(session == null) continue;
         QueryManager queryManager = session.getWorkspace().getQueryManager();
         Query query = queryManager.createQuery(queryString, Query.SQL);
         QueryResult queryResult = query.execute();
