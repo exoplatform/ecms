@@ -1265,8 +1265,8 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <parentPath>Überordner</parentPath>
-      <taxonomyName>Kategoriename</taxonomyName>
+      <parentPath>Parent:</parentPath>
+      <taxonomyName>Category Name:</taxonomyName>
     </label>
     <msg>
       <name-null>Der Kategoriename ist leer.</name-null>
