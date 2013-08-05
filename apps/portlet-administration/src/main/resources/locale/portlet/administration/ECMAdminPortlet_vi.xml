@@ -1265,8 +1265,8 @@
       <Cancel>Hủy bỏ</Cancel>
     </action>
     <label>
-      <parentPath>Đường dẫn mẹ</parentPath>
-      <taxonomyName>Tên Danh mục</taxonomyName>
+      <parentPath>Đường dẫn cha:</parentPath>
+      <taxonomyName>Tên Danh mục:</taxonomyName>
     </label>
     <msg>
       <name-null>Tên danh mục bị bỏ trống.</name-null>
