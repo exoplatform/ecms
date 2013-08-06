@@ -46,7 +46,6 @@
   <%uicomponent.renderChildren()%>
 </div>
 <%
-if (rcontext.getRemoteUser() != null && WCMComposer.MODE_EDIT.equals(Utils.getCurrentMode())) {
   def jsManager = rcontext.getJavascriptManager(); 
   jsManager.require("SHARED/jquery", "gj"); 
   %>
@@ -57,6 +56,5 @@ if (rcontext.getRemoteUser() != null && WCMComposer.MODE_EDIT.equals(Utils.getCu
       });
     </script>
 <%
-jsManager.require("SHARED/quick-edit", "quickEdit").addScripts("for(var instanceName in CKEDITOR.instances) { var editor = CKEDITOR.instances[instanceName]; editor.on('change', function(e) {quickEdit.InlineEditor.modifyInlineContent();}); editor.on('blur', (function(tmp) { return function() {quickEdit.InlineEditor.saveInlineContent(tmp);}})(editor)); }");
-}
+  jsManager.require("SHARED/quick-edit", "quickEdit").addScripts("for(var instanceName in CKEDITOR.instances) { var editor = CKEDITOR.instances[instanceName]; editor.on('change', function(e) {quickEdit.InlineEditor.modifyInlineContent();}); editor.on('blur', (function(tmp) { return function() {quickEdit.InlineEditor.saveInlineContent(tmp);}})(editor)); }");
 %>

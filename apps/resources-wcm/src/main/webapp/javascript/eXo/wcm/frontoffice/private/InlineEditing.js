@@ -44,7 +44,11 @@
 			  data = e.getData();
 			var params =""; 
 	  		params = "newValue=" + encodeURIComponent(data);
-			gj(container).append("<i class='uiWaitting'></i>");
+			gj(container.$).append("<i class='uiWaitting'></i>");			
+                        var parentContainer = gj(container.$).parent();
+                        var offset = parentContainer.offset();
+			gj(parentContainer).append("<div class='markLayerInline' style='width:"+gj(parentContainer).outerWidth()+"px; height:"+gj(parentContainer).outerHeight()+"px; top:"+offset.top+"px; left:"+offset.left+"px'></div>");
+    
 	  		InlineEditor.presentationRequestChangePropertyPOST("/property?", propertyname, repo, 
 			workspace, uuid, sitename, language, params);  
 			InlineEditor.isModified = false;      
@@ -197,6 +201,7 @@
 	      if (InlineEditor.xmlHttpRequest.status == 200) {
 	        if(locale_message == "OK") {
 			gj('.uiWaitting').remove();
+			gj('.markLayerInline').remove();
 			CKEDITOR.instances[InlineEditor.editorName].updateElement();			
 		}
 	        else alert(locale_message);
