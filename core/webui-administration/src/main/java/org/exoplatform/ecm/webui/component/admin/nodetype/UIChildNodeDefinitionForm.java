@@ -133,14 +133,14 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
     protectedItem.add(new SelectItemOption<String>(TRUE, TRUE));
 
     getUIFormSelectBox(NAMESPACE).setOptions(getNamespaces()).setDisabled(false);
-    getUIStringInput(CHILD_NAME).setEditable(true).setValue(null);
-    getUIStringInput(DEFAULT_PRIMARY_TYPE).setEditable(true).setValue(null);
+    getUIStringInput(CHILD_NAME).setReadOnly(false).setValue(null);
+    getUIStringInput(DEFAULT_PRIMARY_TYPE).setReadOnly(false).setValue(null);
     getUIFormSelectBox(AUTOCREATED).setOptions(autoListItem).setDisabled(false);
     getUIFormSelectBox(MANDATORY).setOptions(mandoListItem).setDisabled(false);
     getUIFormSelectBox(PARENTVERSION).setOptions(getParentVersions()).setDisabled(false);
     getUIFormSelectBox(PROTECTED).setOptions(protectedItem).setDisabled(false);
     getUIFormSelectBox(SAME_NAME).setOptions(sameNameListItem).setDisabled(false);
-    getUIStringInput(REQUIRED_PRIMARY_TYPE).setEditable(true).setValue(null);
+    getUIStringInput(REQUIRED_PRIMARY_TYPE).setReadOnly(false).setValue(null);
     UINodeTypeForm uiForm = getParent();
     UIFormInputSetWithAction uiChildTab = uiForm.getChildById(UINodeTypeForm.CHILDNODE_DEFINITION);
     uiForm.setActionInTab(uiChildTab);
@@ -183,17 +183,16 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
       }
     }
     getUIFormSelectBox(NAMESPACE).setDisabled(true);
-    getUIStringInput(CHILD_NAME).setEditable(false);
-    getUIStringInput(DEFAULT_PRIMARY_TYPE).setEditable(false);
+    getUIStringInput(CHILD_NAME).setReadOnly(true);
+    getUIStringInput(DEFAULT_PRIMARY_TYPE).setReadOnly(true);
     getUIFormSelectBox(AUTOCREATED).setDisabled(true);
     getUIFormSelectBox(MANDATORY).setDisabled(true);
     getUIFormSelectBox(PARENTVERSION).setDisabled(true);
     getUIFormSelectBox(PROTECTED).setDisabled(true);
     getUIFormSelectBox(SAME_NAME).setDisabled(true);
-    getUIStringInput(REQUIRED_PRIMARY_TYPE).setEditable(false);
+    getUIStringInput(REQUIRED_PRIMARY_TYPE).setReadOnly(true);
   }
 
-  @SuppressWarnings("unchecked")
   private void setValues(NodeDefinitionValue node) {
     String childNodeName = node.getName();
     if(childNodeName.indexOf(":") > -1) {

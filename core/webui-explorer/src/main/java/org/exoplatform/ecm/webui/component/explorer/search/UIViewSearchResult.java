@@ -263,7 +263,6 @@ public class UIViewSearchResult extends UIBaseNodePresentation {
     return null;
   }
 
-  @SuppressWarnings("unused")
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     return getAncestorOfType(UIJCRExplorer.class).getJCRTemplateResourceResolver() ;
   }
@@ -398,15 +397,12 @@ public class UIViewSearchResult extends UIBaseNodePresentation {
     return false;
   }
 
-  @SuppressWarnings("unused")
   public void setEnableComment(boolean value) {
   }
 
-  @SuppressWarnings("unused")
   public void setEnableVote(boolean value) {
   }
 
-  @SuppressWarnings("unused")
   public String getInlineEditingField(Node orgNode, String propertyName,
       String defaultValue, String inputType, String idGenerator, String cssClass,
       boolean isGenericProperty, String... arguments) throws Exception {

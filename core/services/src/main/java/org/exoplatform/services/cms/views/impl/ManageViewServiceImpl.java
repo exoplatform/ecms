@@ -369,7 +369,7 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
     Session session = getSession() ;
     Node templateHome = (Node)session.getItem(homeTemplate) ;
     String templatePath = templateService.createTemplate(templateHome,
-                                                         name,
+                                                         name, name,
                                                          new ByteArrayInputStream(content.getBytes()),
                                                          new String[] { "*" });
     session.save();
@@ -386,7 +386,7 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
     Session session = getSession(provider);
     Node templateHome = (Node) session.getItem(homeTemplate);
     String templatePath = templateService.createTemplate(templateHome,
-                                                         name,
+                                                         name, name, 
                                                          new ByteArrayInputStream(content.getBytes()),
                                                          new String[] { "*" });
     session.save();

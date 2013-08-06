@@ -71,7 +71,6 @@ public class UIPublicationPagesContainer extends UIContainer {
    *
    * @throws Exception the exception
    */
-  @SuppressWarnings("unchecked")
   private List<String> getRunningPortals(String userId) throws Exception {
     List<String> listPortalName = new ArrayList<String>();
     DataStorage service = WCMCoreUtils.getService(DataStorage.class);

@@ -83,11 +83,11 @@ public class UILockNodeList extends UIPagingGridDecorator {
   private String typeSort_ = Preference.SORT_BY_NODETYPE;
   private String sortOrder_ = Preference.BLUE_UP_ARROW;
   private String order_ = Preference.ASCENDING_ORDER;
-  
+
   public static final String SORT_BY_NODENAME = "Alphabetic" ;
   public static final String SORT_BY_NODEOWNER= "Owner" ;
-  
-  
+
+
   public String getTypeSort() { return typeSort_; }
 
   public void setTypeSort(String typeSort) {
@@ -99,13 +99,13 @@ public class UILockNodeList extends UIPagingGridDecorator {
   public void setSortOrder(String sortOrder) {
     sortOrder_ = sortOrder;
   }
-  
+
   public String getOrder() { return order_; }
 
   public void setOrder(String order) {
     order_ = order;
   }
-  
+
   public void setPreferences(Preference preference) {this.preferences_ = preference; }
 
   public UILockNodeList() throws Exception {
@@ -158,31 +158,31 @@ public class UILockNodeList extends UIPagingGridDecorator {
     }
     return listLockedNodes;
   }
-  
+
   private List<Node> sort(List<Node> childrenList) {
-  	if (SORT_BY_NODENAME.equals(this.getTypeSort()))
+    if (SORT_BY_NODENAME.equals(this.getTypeSort()))
       Collections.sort(childrenList, new NodeTitleComparator(this.getOrder())) ;
-  	else if(SORT_BY_NODEOWNER.equals(this.getTypeSort()))
-  		Collections.sort(childrenList, new NodeOwnerComparator(this.getOrder())) ;
-		return childrenList;
-   
+    else if(SORT_BY_NODEOWNER.equals(this.getTypeSort()))
+      Collections.sort(childrenList, new NodeOwnerComparator(this.getOrder())) ;
+    return childrenList;
+
   }
-  
+
   static public class SortActionListener extends EventListener<UILockNodeList> {
     public void execute(Event<UILockNodeList> event) throws Exception {
-    	UILockNodeList uicomp = event.getSource();
-    	UIUnLockManager uiUnLockManager = event.getSource().getParent();
+      UILockNodeList uicomp = event.getSource();
+      UIUnLockManager uiUnLockManager = event.getSource().getParent();
       UIApplication uiApp = uiUnLockManager.getAncestorOfType(UIApplication.class);
-      
-      
+
+
       try {
         String sortParam = event.getRequestContext().getRequestParameter(OBJECTID) ;
         String[] array = sortParam.split(";");
-        String order = Preference.ASCENDING_ORDER.equals(array[0].trim()) || !array[1].trim().equals(uicomp.getTypeSort()) ? 
+        String order = Preference.ASCENDING_ORDER.equals(array[0].trim()) || !array[1].trim().equals(uicomp.getTypeSort()) ?
                        Preference.BLUE_DOWN_ARROW : Preference.BLUE_UP_ARROW;
-        
+
         String prefOrder = Preference.ASCENDING_ORDER.equals(array[0].trim()) || !array[1].trim().equals(uicomp.getTypeSort())?
-                           Preference.ASCENDING_ORDER : Preference.DESCENDING_ORDER;                                                                                                     
+                           Preference.ASCENDING_ORDER : Preference.DESCENDING_ORDER;
         uicomp.setSortOrder(order);
         uicomp.setTypeSort(array[1]);
         uicomp.setOrder(prefOrder);
@@ -192,8 +192,8 @@ public class UILockNodeList extends UIPagingGridDecorator {
         JCRExceptionManager.process(uiApp, e);
         return;
       }
-      
-      
+
+
     }
   }
 
@@ -263,7 +263,7 @@ public class UILockNodeList extends UIPagingGridDecorator {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiUnLockManager);
         return;
       }
-      
+
       if (isAuthenticated ) {
         session = WCMCoreUtils.getSystemSessionProvider()
                               .getSession(lockedNode.getSession().getWorkspace().getName(),

@@ -53,6 +53,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.upload.UploadService;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.web.application.RequireJS;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -68,8 +69,7 @@ import org.exoplatform.webui.form.UIFormInput;
 import org.exoplatform.webui.form.UIFormInputBase;
 import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormStringInput;
-import org.exoplatform.webui.form.UIFormUploadInput;
-import org.exoplatform.web.application.RequireJS;
+import org.exoplatform.webui.form.input.UIUploadInput;
 
 
 /**
@@ -296,7 +296,6 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
    *
    * @see SaveActionEvent
    */
-  @SuppressWarnings("unchecked")
   static public class SaveActionListener extends EventListener<UIFCCForm> {
 
     /* (non-Javadoc)
@@ -328,7 +327,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
           String valueName = input.getValue().toString().trim();
           if (!org.exoplatform.ecm.webui.utils.Utils.isNameValid(valueName, arrFilterChar)) {
             uiApp.addMessage(new ApplicationMessage("UIFCCForm.msg.name-not-allowed", null, ApplicationMessage.WARNING));
-            
+
             return;
           }
         }
@@ -351,7 +350,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
           if ((categoriesPathList == null) || (categoriesPathList.length == 0)) {
             uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null,
                 ApplicationMessage.WARNING));
-            
+
             return;
           }
 
@@ -360,7 +359,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
               if (categoryPath.indexOf("/") == -1) {
                 uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null,
                     ApplicationMessage.WARNING));
-                
+
                 return;
               }
             }
@@ -378,13 +377,13 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
         Object[] args = { preferencePath } ;
         uiApp.addMessage(new ApplicationMessage("UIFCCForm.msg.access-denied", args,
             ApplicationMessage.WARNING)) ;
-        
+
         return;
       } catch(PathNotFoundException pnfe) {
         Object[] args = { preferencePath } ;
         uiApp.addMessage(new ApplicationMessage("UIFCCForm.msg.path-not-found", args,
             ApplicationMessage.WARNING)) ;
-        
+
         return;
       }
       try {
@@ -406,9 +405,9 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
         for(UIComponent uiChild : fastContentCreatorForm.getChildren()) {
           if(uiChild instanceof UIFormMultiValueInputSet) {
             ((UIFormMultiValueInputSet)uiChild).setValue(new ArrayList<Value>()) ;
-          } else if(uiChild instanceof UIFormUploadInput) {
+          } else if(uiChild instanceof UIUploadInput) {
             UploadService uploadService = fastContentCreatorForm.getApplicationComponent(UploadService.class) ;
-            uploadService.removeUploadResource(((UIFormUploadInput)uiChild).getUploadId()) ;
+            uploadService.removeUploadResource(((UIUploadInput)uiChild).getUploadIds()[0]) ;
           }
         }
         session.save() ;
@@ -418,16 +417,16 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
         boolean preferenceIsRedirect = Boolean.parseBoolean(preferences.getValue(UIFCCConstant.PREFERENCE_IS_REDIRECT, "")) ;
         String preferenceRedirectPath = preferences.getValue(UIFCCConstant.PREFERENCE_REDIRECT_PATH, "") ;
         if (preferenceIsRedirect && preferenceRedirectPath != null) {
-        	RequireJS requireJS = event.getRequestContext().getJavascriptManager().getRequireJS();
-        	requireJS.require("SHARED/ecm-utils", "ecmutil").addScripts("ecmutil.ECMUtils.ajaxRedirect('" + preferenceRedirectPath + "');");
+          RequireJS requireJS = event.getRequestContext().getJavascriptManager().getRequireJS();
+          requireJS.require("SHARED/ecm-utils", "ecmutil").addScripts("ecmutil.ECMUtils.ajaxRedirect('" + preferenceRedirectPath + "');");
         } else {
           String saveMessage = preferences.getValue(UIFCCConstant.PREFERENCE_SAVE_MESSAGE, "") ;
           if (saveMessage == null) saveMessage = "saved-successfully";
           Object[] args = { saveMessage } ;
-          ApplicationMessage appMessage = new ApplicationMessage("UIFCCForm.msg.saved-successfully", args); 
+          ApplicationMessage appMessage = new ApplicationMessage("UIFCCForm.msg.saved-successfully", args);
           appMessage.setArgsLocalized(false);
           uiApp.addMessage(appMessage) ;
-          
+
         }
         event.getRequestContext().addUIComponentToUpdateByAjax(fastContentCreatorForm.getParent()) ;
       } catch (AccessControlException ace) {
@@ -435,25 +434,25 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
       } catch(VersionException ve) {
         uiApp.addMessage(new ApplicationMessage("UIFCCForm.msg.in-versioning", null,
             ApplicationMessage.WARNING)) ;
-        
+
         return;
       } catch(AccessDeniedException e) {
         Object[] args = { preferencePath } ;
         String key = "UIFCCForm.msg.access-denied" ;
         uiApp.addMessage(new ApplicationMessage(key, args, ApplicationMessage.WARNING)) ;
-        
+
         return;
       } catch(LockException lock) {
         Object[] args = { preferencePath } ;
         String key = "UIFCCForm.msg.node-locked" ;
         uiApp.addMessage(new ApplicationMessage(key, args, ApplicationMessage.WARNING)) ;
-        
+
         return;
       } catch(ItemExistsException item) {
         Object[] args = { preferencePath } ;
         String key = "UIFCCForm.msg.node-isExist" ;
         uiApp.addMessage(new ApplicationMessage(key, args, ApplicationMessage.WARNING)) ;
-        
+
       }
     }
   }

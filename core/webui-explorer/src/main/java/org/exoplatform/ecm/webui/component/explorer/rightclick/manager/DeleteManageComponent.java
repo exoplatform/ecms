@@ -73,12 +73,9 @@ import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
-import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -121,7 +118,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
   private static final int FILES_AND_FOLDERS = 3; //"011";
   private static final int GENERIC = 4; //"100";
   private static final int GENERICS_AND_FOLDERS = 5; //"101";
-  private static final int GENERICS_AND_FILES = 6; //"110";  
+  private static final int GENERICS_AND_FILES = 6; //"110";
   private static final int GENERICS_AND_FILES_AND_FOLDERS = 7; //"111";
 
   private static final List<UIExtensionFilter> FILTERS
@@ -184,38 +181,13 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     if (!checkToMoveToTrash || Utils.isInTrash(node))
       processRemoveNode(nodePath, node, event, isMultiSelect);
     else {
-      WCMComposer wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
-      List<Node> categories = WCMCoreUtils.getService(TaxonomyService.class).getAllCategories(node);
-
-      String parentPath = node.getParent().getPath();
-      String parentWSpace = node.getSession().getWorkspace().getName();
-
-      wcmComposer.updateContent(parentWSpace, node.getPath(), new HashMap<String, String>());
-      boolean isNodeReferenceable = Utils.isReferenceable(node);
-      String nodeUUID = null;
-      if(isNodeReferenceable)
-        nodeUUID = node.getUUID();
       boolean moveOK = moveToTrash(nodePath, node, event, isMultiSelect);
       if (moveOK) {
-        for(Node categoryNode : categories){
-          wcmComposer.updateContents(categoryNode.getSession().getWorkspace().getName(),
-                                     categoryNode.getPath(),
-                                     new HashMap<String, String>());
-        }
-        PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
-
-        PortletPreferences portletPref = pcontext.getRequest().getPreferences();
-
-        String trashWorkspace = portletPref.getValue(Utils.TRASH_WORKSPACE, "");
-        if(isNodeReferenceable) {
-          wcmComposer.updateContent(trashWorkspace, nodeUUID, new HashMap<String, String>());
-        }
-        wcmComposer.updateContents(parentWSpace, parentPath, new HashMap<String, String>());
         //Broadcast the event when user move node to Trash
         ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
         ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
         Node parent = node.getParent();
-        if (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {        
+        if (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
           if (activityService.isBroadcastNTFileEvents(node)) {
             listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, parent, node);
           }
@@ -243,8 +215,6 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
               LOG.warn(e.getMessage());
             }
           }
-
-
         }
       }
     }
@@ -467,7 +437,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       processRemoveMultiple(nodePath.split(";"), wsName.split(";"), event);
     } else {
       processRemove(nodePath, wsName, event, false);
-    }    
+    }
     uiExplorer.updateAjax(event);
     uiExplorer.getSession().save();
   }
@@ -493,7 +463,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       else deleteNotice = "UIWorkingArea.msg.feedback-delete-permanently-multi";
       deleteNoticeParam = String.valueOf(nodePath.split(";").length);
     } else {
-      UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);      
+      UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
       // Prepare to remove
       try {
         Node node = this.getNodeByPath(nodePath);
@@ -502,7 +472,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         deleteNoticeParam = Utils.getTitle(node);
         if (node != null) {
           processRemoveOrMoveToTrash(node.getPath(), node, event, false, checkToMoveToTrash);
-        }        
+        }
       } catch (PathNotFoundException path) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", null,
                                                 ApplicationMessage.WARNING));
@@ -516,7 +486,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     deleteNotice = res.getString(deleteNotice);
     deleteNotice = deleteNotice.replaceAll("\\{" + 0 + "\\}", deleteNoticeParam);
     if(checkToMoveToTrash) {
-      String undoLink = getUndoLink(nodePath);      
+      String undoLink = getUndoLink(nodePath);
       uiWorkingArea.setDeleteNotice(deleteNotice);
       uiWorkingArea.setNodePathDelete(undoLink);
     } else {
@@ -532,7 +502,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
    * @throws Exception
    */
   private String getUndoLink(String nodePath) throws Exception {
-    String undoLink = "";    
+    String undoLink = "";
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
     PortletPreferences portletPrefs = uiExplorer.getPortletPreferences();
 
@@ -543,7 +513,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     NodeIterator iter = null;
     if (nodePath.indexOf(";") > -1) {
       String[] nodePaths = nodePath.split(";");
-      for(int i=0; i<nodePaths.length; i++) {  
+      for(int i=0; i<nodePaths.length; i++) {
         nodePath = nodePaths[i].substring(nodePaths[i].indexOf(":") + 1, nodePaths[i].length());
         String queryStatement = "SELECT * from exo:restoreLocation WHERE exo:restorePath = '$0'";
         queryStatement = StringUtils.replace(queryStatement, "$0", nodePath);
@@ -552,9 +522,9 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         iter = queryResult.getNodes();
         while (iter.hasNext()) {
           undoLink += trashWorkspace + ":" + iter.nextNode().getPath() + ";";
-        }        
+        }
       }
-      if(undoLink.length() > 0) undoLink = undoLink.substring(0,undoLink.length()-1);        
+      if(undoLink.length() > 0) undoLink = undoLink.substring(0,undoLink.length()-1);
     } else {
       nodePath = nodePath.substring(nodePath.indexOf(":") + 1, nodePath.length());
       String queryStatement = "SELECT * from exo:restoreLocation WHERE exo:restorePath = '$0'";
@@ -570,7 +540,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         undoLink = undoLink.substring(0,undoLink.length()-1);
         undoLink =  trashWorkspace + ":" +undoLink;
       }
-    }    
+    }
     return undoLink;
   }
 
@@ -595,7 +565,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
   private boolean isDocumentNodeType(Node node) throws Exception {
     boolean isDocument = true;
     TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
-    isDocument = templateService.getAllDocumentNodeTypes().contains(node.getPrimaryNodeType().getName()); 
+    isDocument = templateService.getAllDocumentNodeTypes().contains(node.getPrimaryNodeType().getName());
     return isDocument;
   }
   /**
@@ -605,13 +575,13 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
    * @throws Exception
    */
   private int getContentType(String nodePath) throws Exception {
-    int content_type = 1;    
+    int content_type = 1;
     Node node = getNodeByPath(nodePath);
     String primaryType = node.getPrimaryNodeType().getName();
     if(node.isNodeType(NodetypeConstant.NT_FILE)) content_type = 2;
-    else if (primaryType.equals(NodetypeConstant.NT_FOLDER) || primaryType.equals(NodetypeConstant.NT_UNSTRUCTURED)) 
+    else if (primaryType.equals(NodetypeConstant.NT_FOLDER) || primaryType.equals(NodetypeConstant.NT_UNSTRUCTURED))
       content_type = 3;
-    else content_type = 1;   
+    else content_type = 1;
     return content_type;
   }
   /**
@@ -627,7 +597,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     boolean isFile = false;
     boolean isFolder = false;
 
-    for(int i=0; i<nodePaths.length; i++) { 
+    for(int i=0; i<nodePaths.length; i++) {
       Node node = getNodeByPath(nodePaths[i]);
       String primaryType = node.getPrimaryNodeType().getName();
       if(node.isNodeType(NodetypeConstant.NT_FILE)) isFile = true;
@@ -667,7 +637,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
 
     boolean isInTrashFolder = deleteManageComponent.isInTrashFolder(nodePath);
     uiConfirmMessage.setNodeInTrash(isInTrashFolder);
-    String nodeName = nodePath; 
+    String nodeName = nodePath;
     int contentType = 1;
     int multiContentType = 1;
     String message_key = "";
@@ -675,7 +645,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     if(nodePath.indexOf(";") > 0) {
       uiConfirmMessage.setId(DELETE_ITEMS_CONFIRM_TITLE);
       multiContentType = deleteManageComponent.getMultiContentType(nodePath);
-    } else {      
+    } else {
       Node node = deleteManageComponent.getNodeByPath(nodePath);
       if(node != null)
         nodeName = Utils.getTitle(node);
@@ -684,10 +654,10 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         uiConfirmMessage.setId(DELETE_FILE_CONFIRM_TITLE);
       else if (contentType == FOLDER_TYPE)
         uiConfirmMessage.setId(DELETE_FOLDER_CONFIRM_TITLE);
-    }      
+    }
 
     //show confirm message
-    if (listNodesHaveRelations != null && listNodesHaveRelations.size() > 0) { // there are some nodes which have relations referring to them      
+    if (listNodesHaveRelations != null && listNodesHaveRelations.size() > 0) { // there are some nodes which have relations referring to them
       // in the deleting node list
       // build node list to string to add into the confirm message
       StringBuffer sb = new StringBuffer();
@@ -706,13 +676,13 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
           message_key = "UIWorkingArea.msg.confirm-delete-folder-has-relations";
         }
         uiConfirmMessage.setMessageKey(message_key);
-        uiConfirmMessage.setArguments(new String[] { nodeName });      
+        uiConfirmMessage.setArguments(new String[] { nodeName });
       } else { // in case: delete multiple node have relations
 
         switch(multiContentType) {
         case FOLDERS: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-folder-have-relations"; break;
         case FILES: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-file-have-relations"; break;
-        case FILES_AND_FOLDERS: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-file-and-folder-have-relations"; 
+        case FILES_AND_FOLDERS: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-file-and-folder-have-relations";
         break;
         case GENERIC: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-have-relations"; break;
         case GENERICS_AND_FOLDERS: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-and" +
@@ -722,7 +692,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         case GENERICS_AND_FILES_AND_FOLDERS: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-" +
             "and-file-and-folder-have-relations"; break;
         default: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-have-relations"; break;
-        }          
+        }
 
         uiConfirmMessage.setMessageKey(message_key);
         uiConfirmMessage.setArguments(new String[] { Integer.toString(nodePath.split(";").length) });
@@ -741,7 +711,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
           case GENERICS_AND_FILES: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-and-file-permanently"; break;
           case GENERICS_AND_FILES_AND_FOLDERS: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-and-file-and-folder-permanently"; break;
           default: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-permanently"; break;
-          }   
+          }
 
           uiConfirmMessage.setMessageKey(message_key);
           uiConfirmMessage.setArguments(new String[] { Integer.toString(nodePath.split(";").length) });
@@ -768,7 +738,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
           case GENERICS_AND_FILES_AND_FOLDERS: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-and-file-" +
               "and-folder"; break;
           default: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic"; break;
-          }          
+          }
           uiConfirmMessage.setMessageKey(message_key);
           uiConfirmMessage.setArguments(new String[] { Integer.toString(nodePath.split(";").length) });
         } else { // delete one
@@ -784,7 +754,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       }
     }
 
-    uiConfirmMessage.setNodePath(nodePath);    
+    uiConfirmMessage.setNodePath(nodePath);
     UIPopupWindow popUp = uiExplorer.getChild(UIPopupWindow.class);
     popUp.setUIComponent(uiConfirmMessage);
     popUp.setShowMask(true);

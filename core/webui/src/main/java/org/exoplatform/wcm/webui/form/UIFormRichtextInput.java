@@ -36,7 +36,7 @@ public class UIFormRichtextInput extends UIFormInputBase<String> {
   public static final String FULL_TOOLBAR = "Full";
 
   public static final String BASIC_TOOLBAR = "Basic";
-  
+
   public static final String ENTER_P = "1";
   public static final String ENTER_BR = "2";
   public static final String ENTER_DIV = "3";
@@ -46,7 +46,7 @@ public class UIFormRichtextInput extends UIFormInputBase<String> {
   private String height;
 
   private String toolbar;
-  
+
   private String enterMode;
 
   public UIFormRichtextInput(String name, String bindingField, String value) {
@@ -59,7 +59,7 @@ public class UIFormRichtextInput extends UIFormInputBase<String> {
     this.value_ = value;
     this.enterMode = enterMode;
  }
-  
+
   public String getWidth() {
     return width;
   }
@@ -79,17 +79,17 @@ public class UIFormRichtextInput extends UIFormInputBase<String> {
   public String getToolbar() {
     return toolbar;
   }
-  
+
   public String getEnterMode() {
-  	return enterMode;
+    return enterMode;
   }
 
   public void setToolbar(String toolbar) {
     this.toolbar = toolbar;
   }
-  
+
   public void setEnterMode(String enterMode) {
-  	this.enterMode = enterMode;
+    this.enterMode = enterMode;
   }
 
   public void processRender(WebuiRequestContext context) throws Exception {
@@ -101,10 +101,10 @@ public class UIFormRichtextInput extends UIFormInputBase<String> {
     StringBuffer contentsCss = new StringBuffer();
     contentsCss.append("[");
     SkinService skinService = WCMCoreUtils.getService(SkinService.class);
-    String skin = Util.getUIPortalApplication().getUserPortalConfig().getPortalConfig().getSkin();
+    String skin = Util.getPortalRequestContext().getUserPortalConfig().getPortalConfig().getSkin();
     String portal = Util.getUIPortal().getName();
     Collection<SkinConfig> portalSkins = skinService.getPortalSkins(skin);
-    SkinConfig customSkin = skinService.getSkin(portal, Util.getUIPortalApplication()
+    SkinConfig customSkin = skinService.getSkin(portal, Util.getPortalRequestContext()
                                                             .getUserPortalConfig()
                                                             .getPortalConfig()
                                                             .getSkin());
@@ -123,13 +123,13 @@ public class UIFormRichtextInput extends UIFormInputBase<String> {
     }else {
       buffer.append("<textarea id='" + name + "' name='" + name + "'></textarea>\n");
     }
-    
+
     buffer.append("<script type='text/javascript'>\n");
     buffer.append("    require(['/eXoWCMResources/ckeditor/ckeditor.js'], function() {");
     buffer.append("  //<![CDATA[\n");
     buffer.append("    var instances = CKEDITOR.instances['" + name + "']; if (instances) instances.destroy(true);\n");
     buffer.append("    CKEDITOR.replace('" + name + "', {toolbar:'" + toolbar + "', height:"
-    		+ height + ", contentsCss:" + contentsCss + ", enterMode:" + enterMode + ", shiftEnterMode:" + enterMode + "});\n");
+        + height + ", contentsCss:" + contentsCss + ", enterMode:" + enterMode + ", shiftEnterMode:" + enterMode + "});\n");
     buffer.append("       });");
     buffer.append("  //]]>\n");
     buffer.append("</script>\n");
@@ -137,8 +137,8 @@ public class UIFormRichtextInput extends UIFormInputBase<String> {
     if (isMandatory()) {
       buffer.append("<span style='float:left'> &nbsp;*</span>");
     }
-    
-    buffer.append("</div>");    
+
+    buffer.append("</div>");
     context.getWriter().write(buffer.toString());
   }
 

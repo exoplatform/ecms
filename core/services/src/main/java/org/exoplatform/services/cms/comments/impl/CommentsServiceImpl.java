@@ -128,9 +128,9 @@ public class CommentsServiceImpl implements CommentsService {
       OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
       User user = organizationService.getUserHandler().findUserByName(commentor);
       if(user == null)
-      	newComment.setProperty(COMMENTOR_FULLNAME,"ANONYMOUS") ;
+        newComment.setProperty(COMMENTOR_FULLNAME,"ANONYMOUS") ;
       else
-      	newComment.setProperty(COMMENTOR_FULLNAME,user.getFullName()) ; 
+        newComment.setProperty(COMMENTOR_FULLNAME,user.getDisplayName()) ; 
       
       newComment.setProperty(CREATED_DATE,commentDate) ;
       newComment.setProperty(MESSAGE,comment) ;

@@ -15,7 +15,7 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 
 /**
  * Author : TAN DUNG DANG
@@ -53,9 +53,9 @@ public class UIContentNodeTypeSelector extends UIForm {
     getChildren().clear();
     TemplateService tempService = getApplicationComponent(TemplateService.class);
     List<String> nodeTypes = tempService.getAllDocumentNodeTypes();
-    UIFormCheckBoxInput<String> uiCheckBox = null;
+    UICheckBoxInput uiCheckBox = null;
     for(String nodeType : nodeTypes) {
-      uiCheckBox = new UIFormCheckBoxInput<String>(nodeType, nodeType, "");
+      uiCheckBox = new UICheckBoxInput(nodeType, nodeType, null);
       if(propertiesSelected(nodeType)) uiCheckBox.setChecked(true);
       else uiCheckBox.setChecked(false);
       addUIFormInput(uiCheckBox);
@@ -128,15 +128,14 @@ public class UIContentNodeTypeSelector extends UIForm {
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
-    @SuppressWarnings("unchecked")
     public void execute(Event<UIContentNodeTypeSelector> event) throws Exception {
       UIContentNodeTypeSelector contentNodetypeSelector = event.getSource();
       UIPopupWindow uiPopupWindow = contentNodetypeSelector.getParent();
       UIContainer uiContainer = uiPopupWindow.getAncestorOfType(UIContainer.class);
       UIContentSelector contentSelector = (UIContentSelector) uiContainer.findFirstComponentOfType(UIContentSelector.class);
       List<String> selectedNodeTypes = new ArrayList<String>();
-      List<UIFormCheckBoxInput> listCheckbox =  new ArrayList<UIFormCheckBoxInput>();
-      contentNodetypeSelector.findComponentOfType(listCheckbox, UIFormCheckBoxInput.class);
+      List<UICheckBoxInput> listCheckbox =  new ArrayList<UICheckBoxInput>();
+      contentNodetypeSelector.findComponentOfType(listCheckbox, UICheckBoxInput.class);
       UIContentSearchForm contentSearchForm = contentSelector.getChild(UIContentSearchForm.class);
       String nodeTypesValue = contentSearchForm.getUIStringInput(UIContentSearchForm.DOC_TYPE).getValue();
       contentNodetypeSelector.makeSelectedNode(nodeTypesValue, selectedNodeTypes, listCheckbox);
@@ -144,7 +143,7 @@ public class UIContentNodeTypeSelector extends UIForm {
       contentSelector.setSelectedTab(contentSearchForm.getId());
       uiPopupWindow.setRendered(false);
       uiPopupWindow.setShow(false);
-      
+
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupWindow);
       event.getRequestContext().addUIComponentToUpdateByAjax(contentSearchForm);
     }
@@ -159,9 +158,8 @@ public class UIContentNodeTypeSelector extends UIForm {
    *
    * @throws Exception the exception
    */
-  @SuppressWarnings("unchecked")
   private void makeSelectedNode(String nodeTypesValue,
-      List<String> selectedNodeTypes, List<UIFormCheckBoxInput> listCheckbox) throws Exception {
+      List<String> selectedNodeTypes, List<UICheckBoxInput> listCheckbox) throws Exception {
     if(nodeTypesValue != null && nodeTypesValue.length() > 0) {
       String[] array = nodeTypesValue.split(",");
       for(int i = 0; i < array.length; i ++) {

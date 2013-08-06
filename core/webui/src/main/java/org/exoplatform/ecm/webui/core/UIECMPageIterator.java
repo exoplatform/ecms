@@ -31,7 +31,7 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SAS
  * Author : Dang Viet Ha
  *          hadv@exoplatform.com
- * 19-05-2011  
+ * 19-05-2011
  */
 /**
  * A component that allows pagination, with an iterator to change pages
@@ -47,17 +47,17 @@ public class UIECMPageIterator extends UIPageIterator {
    * The list of pages
    */
   private int               itemsPerPage_      = 0;
-  
+
   private int               totalItems         = 0;
 
   private boolean           useMaxSizeSetting_ = false;
 
   public static final int[] MAX_ITEMS_PER_PAGE = new int[] { 5, 10, 15, 20, 30, 60, 100 };
- 
+
   private boolean justPaginated_ = false;
-  
+
   public boolean isJustPaginated() { return justPaginated_; }
-  
+
   public void setJustPaginated(boolean value) {
     justPaginated_ = value;
   }
@@ -78,14 +78,14 @@ public class UIECMPageIterator extends UIPageIterator {
       return pageSizeList;
     }
   }
-  
+
   public int getItemsPerPage() {
     if (itemsPerPage_ <= 0) {
       itemsPerPage_ = 10;
     }
     return itemsPerPage_;
   }
-  
+
   public void setItemsPerPage(int itemsPerPage) {
     this.itemsPerPage_ = itemsPerPage;
   }
@@ -111,13 +111,13 @@ public class UIECMPageIterator extends UIPageIterator {
   public boolean isUseMaxSizeSetting() {
     return useMaxSizeSetting_;
   }
-  
+
   public void setPageList(PageList pageList)
   {
      super.setPageList(pageList);
      this.itemsPerPage_ = pageList.getPageSize();
   }
-  
+
   private boolean isPageSizeInList(int pageSize) {
     for (int size : MAX_ITEMS_PER_PAGE) {
       if (size == pageSize) {
@@ -127,7 +127,6 @@ public class UIECMPageIterator extends UIPageIterator {
     return false;
   }
 
-  @SuppressWarnings("unused")
   static public class ShowPageActionListener extends EventListener<UIECMPageIterator> {
     public void execute(Event<UIECMPageIterator> event) throws Exception {
       UIECMPageIterator uiPageIterator = event.getSource();
@@ -141,7 +140,7 @@ public class UIECMPageIterator extends UIPageIterator {
       parent.broadcast(event, event.getExecutionPhase());
     }
   }
-  
+
   static public class ChangeMaxSizePageActionListener extends EventListener<UIECMPageIterator>{
 
     public void execute(Event<UIECMPageIterator> event) throws Exception {

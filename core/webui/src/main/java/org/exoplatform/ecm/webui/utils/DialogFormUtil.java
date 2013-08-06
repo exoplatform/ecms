@@ -46,12 +46,12 @@ import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.upload.UploadResource;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.core.UIComponent;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormDateTimeInput;
 import org.exoplatform.webui.form.UIFormInputBase;
 import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormSelectBox;
-import org.exoplatform.webui.form.UIFormUploadInput;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
+import org.exoplatform.webui.form.input.UIUploadInput;
 import org.exoplatform.webui.form.validator.DateTimeValidator;
 import org.exoplatform.webui.form.validator.EmailAddressValidator;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
@@ -92,7 +92,6 @@ public class DialogFormUtil {
    * @return the map< string, jcr input property>
    * @throws Exception the exception
    */
-  @SuppressWarnings("unchecked")
   public static Map<String, JcrInputProperty> prepareMap(List inputs, Map properties) throws Exception {
     return prepareMap(inputs, properties, null);
   }
@@ -104,7 +103,6 @@ public class DialogFormUtil {
     String inputName = null;
     String mimeTypeJcrPath = null;
     InputStream inputStream = null;
-    byte[] content = null;
     Map<String, JcrInputProperty> mimeTypes = new HashMap<String, JcrInputProperty>();
     for (int i = 0; i < inputs.size(); i++) {
       JcrInputProperty property = null;
@@ -114,12 +112,13 @@ public class DialogFormUtil {
         inputName = (inputI).getName() ;
         if(!hasMap.containsKey(inputName)) {
           List<UIComponent> inputChild = inputI.getChildren();
-          property = (JcrInputProperty) properties.get(inputName);          
-          if (inputChild != null && inputChild.size() > 0 && 
-              inputChild.get(0) instanceof UIFormUploadInput) {
+          property = (JcrInputProperty) properties.get(inputName);
+          if (inputChild != null && inputChild.size() > 0 &&
+              inputChild.get(0) instanceof UIUploadInput) {
             Map<String, List> uploadDataMap = new TreeMap<String, List>();
             for (UIComponent child : inputChild) {
-              UIFormUploadInput uploadInput = (UIFormUploadInput)child;
+              UIUploadInput uploadInput = (UIUploadInput)child;
+              String uploadId = uploadInput.getUploadIds()[0];
               String uploadDataName = null;
               String uploadMimeType = null;
               byte[] uploadData = null;
@@ -128,7 +127,7 @@ public class DialogFormUtil {
                 uploadMimeType = ((UIFormUploadInputNoUploadButton)uploadInput).getMimeType();
                 uploadData = ((UIFormUploadInputNoUploadButton)uploadInput).getByteValue();
               } else {
-                UploadResource uploadResource = (uploadInput).getUploadResource();
+                UploadResource uploadResource = (uploadInput).getUploadResource(uploadId);
                 if (uploadResource != null) {
                 String location = uploadResource.getStoreLocation();
                 uploadDataName = uploadResource.getFileName();
@@ -137,7 +136,7 @@ public class DialogFormUtil {
                 }
               }
               if (uploadDataName != null && uploadData != null) {
-                List data = new ArrayList();
+                List<Object> data = new ArrayList<Object>();
                 data.add(uploadMimeType);
                 data.add(uploadData);
                 if (!uploadDataMap.containsKey(uploadDataName)) {
@@ -150,13 +149,8 @@ public class DialogFormUtil {
                   uploadDataMap.put(uploadDataName + count, data);
                 }
               }
-//                mimeTypeJcrPath = property.getJcrPath().replace("jcr:data", "jcr:mimeType");
-//                JcrInputProperty mimeTypeInputPropertyTmp = new JcrInputProperty();
-//                mimeTypeInputPropertyTmp.setJcrPath(mimeTypeJcrPath);
-//                mimeTypeInputPropertyTmp.setValue(((UIFormUploadInput) input).getUploadResource().getMimeType());
-//                mimeTypes.put(mimeTypeJcrPath, mimeTypeInputPropertyTmp);              
-            }
-            property.setValue(uploadDataMap);            
+           }
+            property.setValue(uploadDataMap);
           } else {
             List<String> values = (List<String>) (inputI).getValue() ;
             if(property != null){
@@ -170,9 +164,10 @@ public class DialogFormUtil {
         property = (JcrInputProperty) properties.get(input.getName());
         if(options != null && options.get(input.getName()) != null) option = (String)options.get(input.getName());
         if(property != null) {
-          if (input instanceof UIFormUploadInput) {
-            UploadResource uploadResource = ((UIFormUploadInput) input).getUploadResource();
-            if (uploadResource == null) { 
+          if (input instanceof UIUploadInput) {
+            String uploadId = ((UIUploadInput) input).getUploadIds()[0];
+            UploadResource uploadResource = ((UIUploadInput) input).getUploadResource(uploadId);
+            if (uploadResource == null) {
               if (property.getChangeInJcrPathParam() != null)
                 changeInJcrPathParamMap.put(property.getChangeInJcrPathParam(), "");
               continue;
@@ -181,14 +176,14 @@ public class DialogFormUtil {
               byte[] uploadData = IOUtil.getFileContentAsBytes(location);
               property.setValue(uploadData);
               //change param in jcr path
-              if (property.getChangeInJcrPathParam() != null) 
-                changeInJcrPathParamMap.put(property.getChangeInJcrPathParam(), 
+              if (property.getChangeInJcrPathParam() != null)
+                changeInJcrPathParamMap.put(property.getChangeInJcrPathParam(),
                                             Text.escapeIllegalJcrChars(uploadResource.getFileName()));
 
               mimeTypeJcrPath = property.getJcrPath().replace("jcr:data", "jcr:mimeType");
               JcrInputProperty mimeTypeInputPropertyTmp = new JcrInputProperty();
               mimeTypeInputPropertyTmp.setJcrPath(mimeTypeJcrPath);
-              mimeTypeInputPropertyTmp.setValue(((UIFormUploadInput) input).getUploadResource().getMimeType());
+              mimeTypeInputPropertyTmp.setValue(((UIUploadInput) input).getUploadResource(uploadId).getMimeType());
               mimeTypes.put(mimeTypeJcrPath, mimeTypeInputPropertyTmp);
           } else if(input instanceof UIFormDateTimeInput) {
             property.setValue(((UIFormDateTimeInput)input).getCalendar()) ;
@@ -199,8 +194,8 @@ public class DialogFormUtil {
             }else {
               property.setValue(uiSelectBox.getSelectedValues());
             }
-          } else if(input instanceof UIFormCheckBoxInput) {
-            property.setValue(((UIFormCheckBoxInput)input).isChecked()) ;
+          } else if(input instanceof UICheckBoxInput) {
+            property.setValue(((UICheckBoxInput)input).isChecked()) ;
           } else {
             if(input.getValue()!=null) {
               String inputValue = input.getValue().toString().trim();
@@ -213,7 +208,7 @@ public class DialogFormUtil {
                 jcrExoTitle.setValue(inputValue);
                 properties.put("/node/exo:title", jcrExoTitle);
                 inputValue = Utils.cleanString(inputValue);
-              } 
+              }
               property.setValue(inputValue);
             } else {
               property.setValue(input.getValue());
@@ -233,19 +228,19 @@ public class DialogFormUtil {
         rawinputs.put(jcrPath, mimeTypes.get(jcrPath)) ;
       }
     }
-    List<UIFormUploadInput> formUploadList = new ArrayList<UIFormUploadInput>();
+    List<UIUploadInput> formUploadList = new ArrayList<UIUploadInput>();
     for (Object input : inputs) {
       if (input instanceof UIFormMultiValueInputSet) {
         UIFormMultiValueInputSet uiSet = (UIFormMultiValueInputSet) input;
-        if (uiSet.getId() != null && uiSet.getUIFormInputBase().equals(UIFormUploadInput.class)
+        if (uiSet.getId() != null && uiSet.getUIFormInputBase().equals(UIUploadInput.class)
             && uiSet.getId().equals("attachment__")) {
           List<UIComponent> list = uiSet.getChildren();
           for (UIComponent component : list) {
-            if (!formUploadList.contains(component)) formUploadList.add((UIFormUploadInput) component);
+            if (!formUploadList.contains(component)) formUploadList.add((UIUploadInput) component);
           }
         }
-      } else if (input instanceof UIFormUploadInput) {
-        if (!formUploadList.contains(input)) formUploadList.add((UIFormUploadInput) input);
+      } else if (input instanceof UIUploadInput) {
+        if (!formUploadList.contains(input)) formUploadList.add((UIUploadInput) input);
       }
     }
     if (formUploadList.size() > 0) {
@@ -255,23 +250,24 @@ public class DialogFormUtil {
         String inputJCRKey = (String) inputJCRKeyTmp;
         if (inputJCRKey.contains("attachment__")) {
           JcrInputProperty jcrInputProperty = rawinputs.get(inputJCRKey);
-          for (UIFormUploadInput formUploadInput : formUploadList) {
+          for (UIUploadInput uploadInput : formUploadList) {
+            String uploadId = uploadInput.getUploadIds()[0];
             JcrInputProperty newJcrInputProperty = clone(jcrInputProperty);
-            if (formUploadInput == null || formUploadInput.getUploadResource() == null
-                || formUploadInput.getUploadResource().getFileName() == null)
+            if (uploadInput == null || uploadInput.getUploadResource(uploadId) == null
+                || uploadInput.getUploadResource(uploadId).getFileName() == null)
               continue;
-            String fileName = formUploadInput.getUploadResource().getFileName();
+            String fileName = uploadInput.getUploadResource(uploadId).getFileName();
             String newJCRPath = inputJCRKey.replace("attachment__", fileName);
             newJcrInputProperty.setJcrPath(newJCRPath);
             if (inputJCRKey.endsWith("attachment__")) {
               newJcrInputProperty.setValue(fileName);
               JcrInputProperty mimeTypeInputPropertyTmp = new JcrInputProperty();
               mimeTypeInputPropertyTmp.setJcrPath(newJCRPath + "/jcr:content/jcr:mimeType");
-              mimeTypeInputPropertyTmp.setValue(formUploadInput.getUploadResource().getMimeType());
+              mimeTypeInputPropertyTmp.setValue(uploadInput.getUploadResource(uploadId).getMimeType());
               jcrPropertiesToAdd.put(mimeTypeInputPropertyTmp.getJcrPath(), mimeTypeInputPropertyTmp);
             }
             if (inputJCRKey.endsWith("jcr:data")) {
-              inputStream = formUploadInput.getUploadDataAsStream();
+              inputStream = uploadInput.getUploadDataAsStream(uploadId);
               newJcrInputProperty.setValue(inputStream);
             }
             jcrPropertiesToAdd.put(newJCRPath, newJcrInputProperty);
@@ -289,7 +285,7 @@ public class DialogFormUtil {
     if (changeInJcrPathParamMap.isEmpty()) {
       return rawinputs;
     }
-    
+
     Map<String, JcrInputProperty> ret = new HashMap<String, JcrInputProperty>();
     Set<String> removedKeys = new HashSet<String>();
     for (Map.Entry<String, String> changeEntry : changeInJcrPathParamMap.entrySet()) {
@@ -304,7 +300,7 @@ public class DialogFormUtil {
             value.setValue(((String)value.getValue()).replace(changeEntry.getKey(), changeEntry.getValue()));
           }
           if (value != null && !"".equals(value) && changeEntry.getValue() != null && !"".equals(changeEntry.getValue())) {
-            ret.put(entry.getKey().replace(changeEntry.getKey(), changeEntry.getValue()), 
+            ret.put(entry.getKey().replace(changeEntry.getKey(), changeEntry.getValue()),
                     value);
           }
         }
@@ -315,7 +311,7 @@ public class DialogFormUtil {
         ret.put(entry.getKey(), entry.getValue());
       }
     }
-    
+
     return ret;
   }
 
@@ -341,7 +337,6 @@ public class DialogFormUtil {
    * @return the t
    * @throws Exception the exception
    */
-  @SuppressWarnings("unchecked")
   public static <T extends UIFormInputBase> T createFormInput(Class<T> type,String name, String label,
       String validateType, Class valueType) throws Exception {
     Object[] args= {name, null, valueType };

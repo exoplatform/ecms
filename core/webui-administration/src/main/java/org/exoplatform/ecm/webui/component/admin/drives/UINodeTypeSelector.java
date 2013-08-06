@@ -17,10 +17,10 @@ import org.exoplatform.webui.core.UIPageIterator;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIFormStringInput;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 
 /**
  * Created by The eXo Platform SARL
@@ -81,7 +81,7 @@ public class UINodeTypeSelector extends
 
   public static class OnChangeActionListener extends EventListener<UINodeTypeSelector> {
 
-    private void updateCheckBox(List<String> selectedNodetypes, UIFormCheckBoxInput uiCheckBox) {
+    private void updateCheckBox(List<String> selectedNodetypes, UICheckBoxInput uiCheckBox) {
       if (uiCheckBox.isChecked()) {
         if (!selectedNodetypes.contains(uiCheckBox.getValue().toString()))
           selectedNodetypes.add(uiCheckBox.getValue().toString());
@@ -96,23 +96,23 @@ public class UINodeTypeSelector extends
       List<String> preSelectedNodetypes = new ArrayList<String>();
       preSelectedNodetypes.addAll(selectedNodetypes);
       List<NodeTypeBean> lstNodeType = uiNodeTypeSelect.getNodeTypeList();
-      UIFormCheckBoxInput uiCheckBox = (UIFormCheckBoxInput)uiNodeTypeSelect.getChildById(ALL_DOCUMENT_TYPES);
+      UICheckBoxInput uiCheckBox = (UICheckBoxInput)uiNodeTypeSelect.getChildById(ALL_DOCUMENT_TYPES);
       updateCheckBox(selectedNodetypes, uiCheckBox);
       for (NodeTypeBean nodetype : lstNodeType) {
-        uiCheckBox = (UIFormCheckBoxInput) uiNodeTypeSelect.getChildById(nodetype.getName());
+        uiCheckBox = (UICheckBoxInput) uiNodeTypeSelect.getChildById(nodetype.getName());
         updateCheckBox(selectedNodetypes, uiCheckBox);
       }
 
       // if at this times, check box 'ALL_DOCUMENT_TYPES' change
       if (selectedNodetypes.contains(ALL_DOCUMENT_TYPES) && !preSelectedNodetypes.contains(ALL_DOCUMENT_TYPES)) {
         for(String nodeTypeName : uiNodeTypeSelect.getDocumentNodetypes()) {
-          ((UIFormCheckBoxInput) uiNodeTypeSelect.getChildById(nodeTypeName)).setChecked(true);
+          ((UICheckBoxInput) uiNodeTypeSelect.getChildById(nodeTypeName)).setChecked(true);
           if (!selectedNodetypes.contains(nodeTypeName)) selectedNodetypes.add(nodeTypeName);
         }
       } else if (!selectedNodetypes.contains(ALL_DOCUMENT_TYPES) && preSelectedNodetypes.contains(ALL_DOCUMENT_TYPES)) {
         if (selectedNodetypes.containsAll(uiNodeTypeSelect.getDocumentNodetypes()))
           for (String nodeTypeName : uiNodeTypeSelect.getDocumentNodetypes()) {
-            ((UIFormCheckBoxInput) uiNodeTypeSelect.getChildById(nodeTypeName)).setChecked(false);
+            ((UICheckBoxInput) uiNodeTypeSelect.getChildById(nodeTypeName)).setChecked(false);
             selectedNodetypes.remove(nodeTypeName);
           }
       }
@@ -131,7 +131,7 @@ public class UINodeTypeSelector extends
         selectedNodetypes.remove(UINodeTypeSelector.ALL_DOCUMENT_TYPES);
         for (String docNodeType : uiNodeTypeSelector.getDocumentNodetypes()) {
           if (!selectedNodetypes.contains(docNodeType)
-              && ((UIFormCheckBoxInput) uiNodeTypeSelector.findComponentById(docNodeType)).isChecked()) {
+              && ((UICheckBoxInput) uiNodeTypeSelector.findComponentById(docNodeType)).isChecked()) {
             selectedNodetypes.add(docNodeType);
           }
         }
@@ -162,8 +162,8 @@ public class UINodeTypeSelector extends
   public static class RefreshActionListener extends EventListener<UINodeTypeSelector> {
     public void execute(Event<UINodeTypeSelector> event) throws Exception {
       UINodeTypeSelector uiNodeTypeSelector = event.getSource();
-      List<UIFormCheckBoxInput> listCheckbox = new ArrayList<UIFormCheckBoxInput>();
-      uiNodeTypeSelector.findComponentOfType(listCheckbox, UIFormCheckBoxInput.class);
+      List<UICheckBoxInput> listCheckbox = new ArrayList<UICheckBoxInput>();
+      uiNodeTypeSelector.findComponentOfType(listCheckbox, UICheckBoxInput.class);
       for (int i = 0; i < listCheckbox.size(); i++) {
         listCheckbox.get(i).setChecked(false);
         uiNodeTypeSelector.getSelectedNodetypes().clear();
@@ -191,9 +191,9 @@ public class UINodeTypeSelector extends
     public void execute(Event<UIPageIterator> event) throws Exception {
       UINodeTypeSelector uiNodeTypeSelector = event.getSource().getAncestorOfType(UINodeTypeSelector.class);
       List<String> selectedNodetypes = uiNodeTypeSelector.getSelectedNodetypes();
-      List<UIFormCheckBoxInput> listCheckbox = new ArrayList<UIFormCheckBoxInput>();
-      uiNodeTypeSelector.findComponentOfType(listCheckbox, UIFormCheckBoxInput.class);
-      for (UIFormCheckBoxInput uiCheckBox : listCheckbox) {
+      List<UICheckBoxInput> listCheckbox = new ArrayList<UICheckBoxInput>();
+      uiNodeTypeSelector.findComponentOfType(listCheckbox, UICheckBoxInput.class);
+      for (UICheckBoxInput uiCheckBox : listCheckbox) {
         if (selectedNodetypes.contains(uiCheckBox.getValue().toString())) {
           uiCheckBox.setChecked(true);
         } else {

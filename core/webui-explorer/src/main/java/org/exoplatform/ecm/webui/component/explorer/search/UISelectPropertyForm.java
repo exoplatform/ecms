@@ -152,11 +152,11 @@ public class UISelectPropertyForm extends UIForm implements UIPopupComponent {
       uiConstraintsForm.getUIStringInput(uiForm.fieldName_).setValue(property) ;
       /*  Set value of checkbox is checked when choose value of property */
       if (uiForm.fieldName_.equals(UIConstraintsForm.PROPERTY1)) {
-        uiConstraintsForm.getUIFormCheckBoxInput(UIConstraintsForm.EXACTLY_PROPERTY).setChecked(true);
+        uiConstraintsForm.getUICheckBoxInput(UIConstraintsForm.EXACTLY_PROPERTY).setChecked(true);
       } else if (uiForm.fieldName_.equals(UIConstraintsForm.PROPERTY2)) {
-        uiConstraintsForm.getUIFormCheckBoxInput(UIConstraintsForm.CONTAIN_PROPERTY).setChecked(true);
+        uiConstraintsForm.getUICheckBoxInput(UIConstraintsForm.CONTAIN_PROPERTY).setChecked(true);
       } else if (uiForm.fieldName_.equals(UIConstraintsForm.PROPERTY3)) {
-        uiConstraintsForm.getUIFormCheckBoxInput(UIConstraintsForm.NOT_CONTAIN_PROPERTY).setChecked(true);
+        uiConstraintsForm.getUICheckBoxInput(UIConstraintsForm.NOT_CONTAIN_PROPERTY).setChecked(true);
       }
       UIPopupContainer.deActivate() ;
       event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer) ;

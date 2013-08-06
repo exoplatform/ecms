@@ -24,7 +24,7 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.form.UIFormInputBase;
-import org.exoplatform.webui.form.UIFormUploadInput;
+import org.exoplatform.webui.form.input.UIUploadInput;
 
 /**
  * Created by The eXo Platform SAS
@@ -40,18 +40,16 @@ public class UIFormUploadField extends DialogFormField{
 
   @SuppressWarnings("unchecked")
   public <T extends UIFormInputBase> T createUIFormInput() throws Exception {
-    UIFormUploadInput uiInputUpload = null;
+    UIUploadInput uiInputUpload = null;
     PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
     PortletPreferences portletPref = pcontext.getRequest().getPreferences();
     String limitPref = portletPref.getValue(Utils.UPLOAD_SIZE_LIMIT_MB, "");
     if (StringUtils.isNotEmpty(limitPref.trim())) {
-      uiInputUpload = new UIFormUploadInput(name, name, Integer.parseInt(limitPref.trim()));
+      uiInputUpload = new UIUploadInput(name, name, 1, Integer.parseInt(limitPref.trim()));
     } else {
-      uiInputUpload = new UIFormUploadInput(name, name);
+      uiInputUpload = new UIUploadInput(name, name);
     }
     if(label != null) uiInputUpload.setLabel(label) ;
-    uiInputUpload.setAutoUpload(true);
     return (T)uiInputUpload;
   }
-
 }

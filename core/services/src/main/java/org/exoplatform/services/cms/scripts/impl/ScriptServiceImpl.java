@@ -188,16 +188,16 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
     }
     session.save();
     session.logout();
-  }  
-  
+  }
+
   /**
    * {@inheritDoc}
    */
   public Node getECMScriptHome(SessionProvider provider) throws Exception {
     Session session = getSession(provider);
     return getNodeByAlias(BasePath.ECM_EXPLORER_SCRIPTS,session);
-  }  
-  
+  }
+
   /**
    * {@inheritDoc}
    */
@@ -205,8 +205,8 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
   public List<Node> getECMActionScripts(SessionProvider provider) throws Exception {
     Session session = getSession(provider);
     return getScriptList(BasePath.ECM_ACTION_SCRIPTS, session);
-  }  
-  
+  }
+
   /**
    * {@inheritDoc}
    */
@@ -214,8 +214,8 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
   public List<Node> getECMInterceptorScripts(SessionProvider provider) throws Exception {
     Session session = getSession(provider);
     return getScriptList(BasePath.ECM_INTERCEPTOR_SCRIPTS, session);
-  }  
-  
+  }
+
   /**
    * {@inheritDoc}
    */
@@ -223,7 +223,7 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
   public List<Node> getECMWidgetScripts(SessionProvider provider) throws Exception {
     Session session = getSession(provider);
     return getScriptList(BasePath.ECM_WIDGET_SCRIPTS,session);
-  }  
+  }
 
   /**
    * {@inheritDoc}
@@ -268,8 +268,8 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
     resourceCache_.put(scriptName, scriptObject) ;
 
     return scriptObject;
-  }  
-  
+  }
+
   /**
    * {@inheritDoc}
    */
@@ -296,7 +296,7 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
   public void removeScript(String scriptName, SessionProvider provider) throws Exception {
     removeResource(scriptName, provider);
     removeFromCache(scriptName) ;
-  }  
+  }
 
   /**
    * Get ScriptHome
@@ -411,17 +411,14 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
           nodeName = className ;
           filename = className.replace('.', File.separatorChar) + ".groovy";
         }
-        InputStream in = null;
-        SessionProvider provider = SessionProvider.createSystemProvider() ;
+        String scriptContent = null;
         try {
-          in = WCMCoreUtils.getService(BaseResourceLoaderService.class).getResourceAsStream(nodeName);
-          provider.close();
+          scriptContent = WCMCoreUtils.getService(BaseResourceLoaderService.class).getResourceAsText(nodeName);
         } catch (Exception e) {
-          provider.close();
           throw new ClassNotFoundException("Could not read " + nodeName + ": " + e);
         }
         try {
-          return parseClass(in, filename);
+          return parseClass(scriptContent, filename);
         } catch (CompilationFailedException e2) {
           throw new ClassNotFoundException("Syntax error in " + filename
               + ": " + e2);
@@ -429,7 +426,7 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
       }
     };
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -442,7 +439,7 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
       return null;
     }
   }
-  
+
 
   /**
    * Return session of the current repository
@@ -481,7 +478,7 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
   public Set<String> getAllConfiguredScripts() {
     return configuredScripts_;
   }
-  
+
   private void addConfigScripts(ResourceConfig resourceConfig) {
     for (Object obj :  resourceConfig.getRessources()) {
       if (obj instanceof ResourceConfig.Resource) {

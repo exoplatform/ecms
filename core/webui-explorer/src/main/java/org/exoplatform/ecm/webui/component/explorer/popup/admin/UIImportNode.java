@@ -50,7 +50,7 @@ import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormSelectBox;
-import org.exoplatform.webui.form.UIFormUploadInput;
+import org.exoplatform.webui.form.input.UIUploadInput;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh minh.dang@exoplatform.com Oct 5, 2006
@@ -75,14 +75,12 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
   public UIImportNode() throws Exception {
     this.setMultiPart(true);
     // Disabling the size limit since it makes no sense in the import case
-    UIFormUploadInput uiFileUpload = new UIFormUploadInput(FILE_UPLOAD, FILE_UPLOAD, 0);
-    uiFileUpload.setAutoUpload(true);
+    UIUploadInput uiFileUpload = new UIUploadInput(FILE_UPLOAD, FILE_UPLOAD, 1, 0);
     addUIFormInput(uiFileUpload);
     addUIFormInput(new UIFormSelectBox(IMPORT_BEHAVIOR, IMPORT_BEHAVIOR, null));
     // Disabling the size limit since it makes no sense in the import case
-    UIFormUploadInput uiHistoryFileUpload =
-      new UIFormUploadInput(VERSION_HISTORY_FILE_UPLOAD, VERSION_HISTORY_FILE_UPLOAD, 0);
-    uiHistoryFileUpload.setAutoUpload(true);
+    UIUploadInput uiHistoryFileUpload =
+      new UIUploadInput(VERSION_HISTORY_FILE_UPLOAD, VERSION_HISTORY_FILE_UPLOAD, 1, 0);
     addUIFormInput(uiHistoryFileUpload);
   }
 
@@ -113,9 +111,10 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
   }
 
   private boolean validHistoryUploadFile(Event<?> event) throws Exception {
-    UIFormUploadInput inputHistory = getUIInput(VERSION_HISTORY_FILE_UPLOAD);
+    UIUploadInput inputHistory = getUIInput(VERSION_HISTORY_FILE_UPLOAD);
     UIApplication uiApp = getAncestorOfType(UIApplication.class);
-    ZipInputStream zipInputStream = new ZipInputStream(inputHistory.getUploadDataAsStream());
+    ZipInputStream zipInputStream =
+        new ZipInputStream(inputHistory.getUploadDataAsStream(inputHistory.getUploadIds()[0]));
     ZipEntry entry = zipInputStream.getNextEntry();
     while(entry != null) {
       if(entry.getName().equals(MAPPING_FILE)) {
@@ -142,21 +141,23 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
       UIImportNode uiImport = event.getSource();
       UIJCRExplorer uiExplorer = uiImport.getAncestorOfType(UIJCRExplorer.class);
       UIApplication uiApp = uiImport.getAncestorOfType(UIApplication.class);
-      UIFormUploadInput input = uiImport.getUIInput(FILE_UPLOAD);
-      UIFormUploadInput inputHistory = uiImport.getUIInput(VERSION_HISTORY_FILE_UPLOAD);
+      UIUploadInput input = uiImport.getUIInput(FILE_UPLOAD);
+      UIUploadInput inputHistory = uiImport.getUIInput(VERSION_HISTORY_FILE_UPLOAD);
       Node currentNode = uiExplorer.getCurrentNode();
       Session session = currentNode.getSession() ;
       String nodePath = currentNode.getPath();
       uiExplorer.addLockToken(currentNode);
+      String inputUploadId = input.getUploadIds()[0];
+      String inputHistoryUploadId = inputHistory.getUploadIds()[0];
 
-      if (input.getUploadResource() == null) {
+      if (input.getUploadResource(inputUploadId) == null) {
         uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.filename-invalid", null,
             ApplicationMessage.WARNING));
 
         return;
       }
-      if(inputHistory.getUploadResource() != null) {
-        String mimeTypeHistory = uiImport.getMimeType(inputHistory.getUploadResource().getFileName());
+      if(inputHistory.getUploadResource(inputHistoryUploadId) != null) {
+        String mimeTypeHistory = uiImport.getMimeType(inputHistory.getUploadResource(inputHistoryUploadId).getFileName());
         if(!mimeTypeHistory.equals("application/zip")) {
           uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.history-invalid-type", null,
               ApplicationMessage.WARNING));
@@ -165,12 +166,12 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
         }
         if(!uiImport.validHistoryUploadFile(event)) return;
       }
-      String mimeType = uiImport.getMimeType(input.getUploadResource().getFileName());
+      String mimeType = uiImport.getMimeType(input.getUploadResource(inputUploadId).getFileName());
       InputStream xmlInputStream = null;
       if ("text/xml".equals(mimeType)) {
-        xmlInputStream = new BufferedInputStream(input.getUploadDataAsStream());
+        xmlInputStream = new BufferedInputStream(input.getUploadDataAsStream(inputUploadId));
       } else if ("application/zip".equals(mimeType)) {
-        ZipInputStream zipInputStream = new ZipInputStream(new BufferedInputStream(input.getUploadDataAsStream()));
+        ZipInputStream zipInputStream = new ZipInputStream(new BufferedInputStream(input.getUploadDataAsStream(inputUploadId)));
         xmlInputStream = Utils.extractFirstEntryFromZipFile(zipInputStream);
       } else {
         uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.mimetype-invalid", null,
@@ -196,11 +197,11 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
         }
 
         //Process import version history
-        if(inputHistory.getUploadResource() != null) {
+        if(inputHistory.getUploadResource(inputHistoryUploadId) != null) {
           Map<String, String> mapHistoryValue =
-            org.exoplatform.services.cms.impl.Utils.getMapImportHistory(inputHistory.getUploadDataAsStream());
+            org.exoplatform.services.cms.impl.Utils.getMapImportHistory(inputHistory.getUploadDataAsStream(inputHistoryUploadId));
           org.exoplatform.services.cms.impl.Utils.processImportHistory(
-              currentNode, inputHistory.getUploadDataAsStream(), mapHistoryValue);
+              currentNode, inputHistory.getUploadDataAsStream(inputHistoryUploadId), mapHistoryValue);
         }
           // if an import fails, it's possible when source xml contains errors,
           // user may fix the fail caused items and save session (JSR-170, 7.3.7 Session Import Methods).
@@ -241,8 +242,8 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
         return;
       } finally {
         UploadService uploadService = uiImport.getApplicationComponent(UploadService.class) ;
-        uploadService.removeUploadResource(input.getUploadId());
-        uploadService.removeUploadResource(inputHistory.getUploadId());
+        uploadService.removeUploadResource(inputUploadId);
+        uploadService.removeUploadResource(inputHistoryUploadId);
       }
       uiExplorer.updateAjax(event);
     }

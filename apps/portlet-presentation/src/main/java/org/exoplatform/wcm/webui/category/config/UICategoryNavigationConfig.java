@@ -126,7 +126,7 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
       new UIFormStringInput(UICategoryNavigationConstant.TARGET_PATH_FORM_STRING_INPUT,
                             UICategoryNavigationConstant.TARGET_PATH_FORM_STRING_INPUT,
                             preferenceTargetPath);
-    targetPathFormStringInput.setEditable(false);
+    targetPathFormStringInput.setReadOnly(true);
     targetPathFormInputSet.setActionInfo(UICategoryNavigationConstant.TARGET_PATH_FORM_STRING_INPUT,
                                          new String[] { "SelectTargetPath" });
     targetPathFormInputSet.addUIFormInput(targetPathFormStringInput);
@@ -257,7 +257,7 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
         ((PortletRequestContext)event.getRequestContext()).setApplicationMode(PortletMode.VIEW);
         Utils.closePopupWindow(categoryNavigationConfig, UICategoryNavigationPortlet.CONFIG_POPUP_WINDOW);
         RequireJS requireJS = event.getRequestContext().getJavascriptManager().getRequireJS();
-      	requireJS.require("SHARED/ecm-utils", "ecmutil").addScripts("ecmutil.ECMUtils.ajaxRedirect('" + uri + "');");
+        requireJS.require("SHARED/ecm-utils", "ecmutil").addScripts("ecmutil.ECMUtils.ajaxRedirect('" + uri + "');");
       } else {
         if (Utils.isQuickEditMode(categoryNavigationConfig,
                                   UICategoryNavigationPortlet.CONFIG_POPUP_WINDOW)) {

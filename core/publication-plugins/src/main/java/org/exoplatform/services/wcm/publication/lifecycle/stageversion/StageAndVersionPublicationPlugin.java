@@ -54,7 +54,6 @@ import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleExc
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.security.ConversationState;
-import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.publication.PublicationUtil;
 import org.exoplatform.services.wcm.publication.WCMComposer;
@@ -264,13 +263,8 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
         }
       }
     }
-    
-    NodeLocation location = NodeLocation.getNodeLocationByNode(node);
-    composer.updateContent(location.getWorkspace(),
-                           location.getPath(),
-                           new HashMap<String, String>());
   }
-  
+
   /**
    * Gets the value.
    *
@@ -449,7 +443,6 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
    *
    * @throws Exception the exception
    */
-  @SuppressWarnings("unchecked")
   private List<String> getRunningPortals(String userId) throws Exception {
     List<String> listPortalName = new ArrayList<String>();
     DataStorage service = WCMCoreUtils.getService(DataStorage.class);
@@ -475,7 +468,6 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
    *
    * @throws Exception the exception
    */
-  @SuppressWarnings("unchecked")
   public List<String> getListUserNavigationUri(Page page, String remoteUser) throws Exception {
     List<String> listPageNavigationUri = new ArrayList<String>();
     for (String portalName : getRunningPortals(remoteUser)) {
