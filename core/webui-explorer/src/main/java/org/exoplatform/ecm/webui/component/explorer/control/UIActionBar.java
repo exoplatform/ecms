@@ -149,9 +149,7 @@ public class UIActionBar extends UIForm {
   }
   public String getBackLink() {
     String newLink = getAncestorOfType(UIJCRExplorerPortlet.class).getBacktoValue();
-    if (newLink != null && newLink.length()>0)
-      backLink = URLDecoder.decode(newLink);
-    return backLink;
+    return newLink;
   }
   public String getTemplateName() { return templateName_;  }
 
