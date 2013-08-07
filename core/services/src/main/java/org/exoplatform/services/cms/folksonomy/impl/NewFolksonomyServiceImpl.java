@@ -348,6 +348,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     for (NodeIterator iter = query.execute().getNodes(); iter.hasNext();) {
       ret.add(iter.nextNode());
     }
+    Collections.sort(ret, new NodeComparator());
     return ret;
   }  
 
@@ -661,7 +662,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     NodeIterator nodeIter = node.getNodes();
     while (nodeIter.hasNext()) {
       ret.add(nodeIter.nextNode());
-    }
+    } 
+    Collections.sort(ret, new NodeComparator());
     return ret;
   }
 
@@ -781,7 +783,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
             ret.add(tagNode);
         }
       }
-    }
+    } 
+    Collections.sort(ret, new NodeComparator());
     return ret;
   }
 
