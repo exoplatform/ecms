@@ -12,6 +12,18 @@
 		import org.exoplatform.wcm.webui.clv.UICLVPortlet;
 		import org.exoplatform.wcm.webui.Utils;
 		import org.exoplatform.services.wcm.core.NodeLocation;		
+    import org.exoplatform.services.jcr.core.ManageableRepository;
+    import org.exoplatform.webui.application.WebuiRequestContext;
+
+		
+		def propertyName = "exo:title";
+		def repo = "";
+    def workspace = "";
+    def uuid = "";
+    
+    def siteName = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getPortalOwner();
+    Locale locale = WebuiRequestContext.getCurrentInstance().getLocale();
+    def language = locale.getLanguage();
 
 %>
 
@@ -84,6 +96,10 @@
 								
 								def itemIcon = uicomponent.getContentIcon(viewNode);
 								
+								repo = ((ManageableRepository)viewNode.getSession().getRepository()).getConfiguration().getName();
+                workspace = viewNode.getSession().getWorkspace().getName();
+                uuid = viewNode.getUUID();
+								
       					%>
                 <%=uicomponent.addQuickEditDiv("Column1 ClearFix", viewNode)%>
                 <%
@@ -94,18 +110,32 @@
 												<div class="Content">
 													<div class="ClearFix">
 													<%
-													if (isShowTitle) {
-														%><div title="$itemName" class="$itemIcon FL"></div><%
-														if (isShowLink) {
-															%><div class="Title"><a onclick="javascript:window.open('$itemWebdavLink');" style="cursor:pointer" rel="tooltip" data-placement="bottom" title="$itemName">$itemName</a></div><%
-														} else {
-															%><div class="Title">
-															<%
-                                print uicomponent.getInlineEditingField(viewNode, "exo:title", itemName, "TEXT", "CLVTitle_"+String.valueOf(i), "GroovyCLVTitle", true, "button_direction=left-to-right");
+													if (uicomponent.isViewMode()){
+                            if (isShowTitle) {
+                              if (isShowLink) {
+                                %><div class="Title"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="$itemName">$itemName</a></div><%
+                              } else {                          
                               %>
-															</div><%
-														}
-													}
+                                <div class="Title">                              
+                                  <% print uicomponent.getInlineEditingField(viewNode, "exo:title", itemName, "TEXT", "CLVTitle_"+String.valueOf(i), "GroovyCLVTitle", true, "button_direction=left-to-right");%>
+                                </div>
+                              <%  
+                              }
+                            }
+                          }
+                          else {
+                            if (isShowTitle) {
+                              if (isShowLink) {
+                                %><div class="Title" propertyName="<%=propertyName%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" language="<%=language%>" contenteditable="true"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="$itemName">$itemName</a></div><%
+                              } else {
+                              %>
+                                <div class="Title" propertyName="<%=propertyName%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" language="<%=language%>" contenteditable="true"> 
+                                  <% print uicomponent.getInlineEditingField(viewNode, "exo:title", itemName, "TEXT", "CLVTitle_"+String.valueOf(i), "GroovyCLVTitle", true, "button_direction=left-to-right"); %>
+                                </div>
+                              <%  
+                              }
+                            }
+                          }
 													
 													if (isShowDate) {
 													  %><div class="DateAndMail">$itemDateCreated</div><%

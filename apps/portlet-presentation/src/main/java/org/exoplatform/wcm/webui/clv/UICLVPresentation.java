@@ -596,6 +596,10 @@ public class UICLVPresentation extends UIContainer {
     }
     return false;
   }
+  
+  public boolean isViewMode() {
+    return Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE);
+  }
 
   /**
    * Gets the illustrative image.

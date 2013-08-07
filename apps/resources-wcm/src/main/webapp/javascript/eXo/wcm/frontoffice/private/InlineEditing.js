@@ -176,12 +176,6 @@
 	    if (method) {
 	      InlineEditor.xmlHttpRequest.open(method, url, true);
 	      InlineEditor.xmlHttpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	      if (params) {
-	        InlineEditor.xmlHttpRequest.setRequestHeader("Content-length", params.length);
-	      }else {
-	        InlineEditor.xmlHttpRequest.setRequestHeader("Content-length", 0);
-	      }
-	      InlineEditor.xmlHttpRequest.setRequestHeader("Connection", "close");      
 	    }else {
 	      InlineEditor.xmlHttpRequest.open(InlineEditor.defaultMethod, url, true);
 	    }
@@ -194,26 +188,28 @@
 	};
 	
 	InlineEditor.presentationAjaxResponse = function (){
-		var xmlTreeNodes = InlineEditor.xmlHttpRequest.responseXML;		
-	    var nodeList = xmlTreeNodes.getElementsByTagName("bundle");   
-	    var locale_message = nodeList[0].getAttribute("message"); 
-	    if (InlineEditor.xmlHttpRequest.readyState == 4) {
-	      if (InlineEditor.xmlHttpRequest.status == 200) {
-	        if(locale_message == "OK") {
-			gj('.uiWaitting').remove();
-			gj('.markLayerInline').remove();
-			CKEDITOR.instances[InlineEditor.editorName].updateElement();			
-		}
-	        else alert(locale_message);
-	      }
-	    }else {
-	      try{
-	        if (InlineEditor.xmlHttpRequest.status!=200) {
-	          alert(InlineEditor.InternalServerErrorMsg + "\n" + InlineEditor.xmlHttpRequest.statusText);
-	        }      
-	      }catch (e) {
-	      }
-	    }
+	    var xmlTreeNodes = InlineEditor.xmlHttpRequest.responseXML;
+	    if(xmlTreeNodes) {
+		    var nodeList = xmlTreeNodes.getElementsByTagName("bundle");   
+		    var locale_message = nodeList[0].getAttribute("message"); 
+		    if (InlineEditor.xmlHttpRequest.readyState == 4) {
+		      if (InlineEditor.xmlHttpRequest.status == 200) {
+			if(locale_message == "OK") {
+				gj('.uiWaitting').remove();
+				gj('.markLayerInline').remove();
+				CKEDITOR.instances[InlineEditor.editorName].updateElement();			
+			}
+			else alert(locale_message);
+		      }
+		    }else {
+		      try{
+			if (InlineEditor.xmlHttpRequest.status!=200) {
+			  alert(InlineEditor.InternalServerErrorMsg + "\n" + InlineEditor.xmlHttpRequest.statusText);
+			}      
+		      }catch (e) {
+		      }
+		    }
+	     }
 	}
 	InlineEditor.init();
 	window.InlineEditor = InlineEditor;

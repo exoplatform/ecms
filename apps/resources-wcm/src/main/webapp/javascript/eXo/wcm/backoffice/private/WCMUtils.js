@@ -255,9 +255,6 @@
 	    }
 	};
 
-	function CKEDITOR() {
-	}
-	
 	WCMUtils.prototype.changeStyleClass = function(element, newStyleClass) {
             var isFocusOnCKEditor = false;
             if(CKEDITOR) {

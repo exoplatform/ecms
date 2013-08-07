@@ -1,3 +1,7 @@
+require(['/eXoResources/javascript/jquery-1.7.1.js']);
+
+
+
 CKEDITOR.plugins.add('acceptInline',
 	{
     lang : ['en','fr','vi'],
@@ -33,6 +37,7 @@ function acceptUpdate(e){
       this.InternalServerErrorMsg="";
       this.EmptyTitleErrorMsg = "";
       this.editorName = "";
+      this.isModified = false;
     }
   };
 
@@ -72,13 +77,7 @@ InlineEditor.presentationAjaxRequest = function (url, params, method) {
 	    InlineEditor.xmlHttpRequest.onreadystatechange = InlineEditor.presentationAjaxResponse;
 	    if (method) {
 	      InlineEditor.xmlHttpRequest.open(method, url, true);
-	      InlineEditor.xmlHttpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	      if (params) {
-	        InlineEditor.xmlHttpRequest.setRequestHeader("Content-length", params.length);
-	      }else {
-	        InlineEditor.xmlHttpRequest.setRequestHeader("Content-length", 0);
-	      }
-	      InlineEditor.xmlHttpRequest.setRequestHeader("Connection", "close");      
+	      InlineEditor.xmlHttpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");	      
 	    }else {
 	      InlineEditor.xmlHttpRequest.open(InlineEditor.defaultMethod, url, true);
 	    }
@@ -91,24 +90,28 @@ InlineEditor.presentationAjaxRequest = function (url, params, method) {
 	};
 	
 	InlineEditor.presentationAjaxResponse = function (){
-		var xmlTreeNodes = InlineEditor.xmlHttpRequest.responseXML;		
-	    var nodeList = xmlTreeNodes.getElementsByTagName("bundle");   
-	    var locale_message = nodeList[0].getAttribute("message"); 
-	    if (InlineEditor.xmlHttpRequest.readyState == 4) {
-	      if (InlineEditor.xmlHttpRequest.status == 200) {
-	        if(locale_message == "OK") {
-			CKEDITOR.instances[InlineEditor.editorName].updateElement();
-		}
-	        else alert(locale_message);
-	      }
-	    }else {
-	      try{
-	        if (InlineEditor.xmlHttpRequest.status!=200) {
-	          alert(InlineEditor.InternalServerErrorMsg + "\n" + InlineEditor.xmlHttpRequest.statusText);
-	        }      
-	      }catch (e) {
-	      }
-	    }
+	    var xmlTreeNodes = InlineEditor.xmlHttpRequest.responseXML;	
+	    if(xmlTreeNodes) {	
+		    var nodeList = xmlTreeNodes.getElementsByTagName("bundle");   
+		    var locale_message = nodeList[0].getAttribute("message"); 
+		    if (InlineEditor.xmlHttpRequest.readyState == 4) {
+		      if (InlineEditor.xmlHttpRequest.status == 200) {
+			if(locale_message == "OK") {
+				$('.uiWaitting').remove();
+				$('.markLayerInline').remove();
+				CKEDITOR.instances[InlineEditor.editorName].updateElement();
+			}
+			else alert(locale_message);
+		      }
+		    }else {
+		      try{
+			if (InlineEditor.xmlHttpRequest.status!=200) {
+			  alert(InlineEditor.InternalServerErrorMsg + "\n" + InlineEditor.xmlHttpRequest.statusText);
+			}      
+		      }catch (e) {
+		      }
+		    }
+	     }
 	}
 
 
@@ -131,10 +134,15 @@ InlineEditor.presentationAjaxRequest = function (url, params, method) {
   else
     data = e.getData();
 
-  
+  $(container.$).append("<i class='uiWaitting'></i>");			
+  var parentContainer = $(container.$).parent();
+  var offset = parentContainer.offset();
+  $(parentContainer).append("<div class='markLayerInline' style='width:"+$(parentContainer).outerWidth()+"px; height:"+$(parentContainer).outerHeight()+"px; top:"+offset.top+"px; left:"+offset.left+"px'></div>");
+
   var params =""; 
   params = "newValue=" + encodeURIComponent(data);
-  InlineEditor.presentationRequestChangePropertyPOST("/property?", propertyname, repo, workspace, uuid, sitename, language, params);         
+  InlineEditor.presentationRequestChangePropertyPOST("/property?", propertyname, repo, workspace, uuid, sitename, language, params);
+  InlineEditor.isModified = true;
   return false;
 
 }

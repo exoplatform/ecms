@@ -4,7 +4,6 @@
   	import java.util.Locale;
   	import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
   	import org.exoplatform.ecm.webui.utils.LockUtil;
-  	import org.exoplatform.services.jcr.core.ManageableRepository;
   	import org.exoplatform.wcm.webui.administration.UIEditingForm;
   	import org.exoplatform.services.jcr.core.ManageableRepository;
   	import org.exoplatform.web.application.RequestContext;
