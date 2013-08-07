@@ -23,8 +23,8 @@
   <WebLink>
     <view>
       <label>
-        <url>URL</url>
-        <description>Description</description>
+        <url>عنوان الموارد الموحد (URL)</url>
+        <description>الوصف</description>
       </label>
     </view>
   </WebLink>
@@ -38,12 +38,12 @@
         <robots>سلوكيات محركات البحث</robots>
       </label>
       <tooltip>
-        <add-edit>Add/Edit Metadata</add-edit>
-        <cancel>Cancel</cancel>
+        <add-edit>إضافة/تغيير البيانات الوصفية</add-edit>
+        <cancel>الغاء</cancel>
       </tooltip>
       <action>
         <add-edit>اضافة/تغيير</add-edit>
-        <cancel>Cancel</cancel>
+        <cancel>الغاء</cancel>
       </action>
     </view>
   </SiteMetadata>

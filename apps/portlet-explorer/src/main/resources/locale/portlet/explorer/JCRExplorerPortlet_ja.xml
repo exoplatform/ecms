@@ -41,7 +41,7 @@
     </label>
     <button>
       <label>
-        <confirm>Ok</confirm>
+        <confirm>OK</confirm>
       </label>
     </button>
     <msg>
@@ -50,35 +50,7 @@
       <vote-restriction>一度しか投票は出来ません。</vote-restriction>
     </msg>
   </UIVoteForm>
-  <!--
-  #############################################################################
-  #             org.exoplatform.ecm.webui.component.explorer.UIDrivesBrowser  #
-  #############################################################################
-  -->
-  <UIDrivesBrowser>
-    <title>
-      File Explorer Main Drives
-      <repository>リポジトリ内のドライブ</repository>
-      <repositoryList>リポジトリ</repositoryList>
-      <PersonalDrives>パーソナルドライブ</PersonalDrives>
-      <GroupDrives>グループドライブ</GroupDrives>
-      <GeneralDrives>一般ドライブ</GeneralDrives>
-    </title>
-    <icon>
-      <workspace>
-        <production>プロダクションアイコン</production>
-        <draft>ドラフトアイコン</draft>
-        <backup>バックアップアイコン</backup>
-        <digital-assets>アセットアイコン</digital-assets>
-      </workspace>
-    </icon>
-    <msg>
-      <no-view-found>There is not any View applies for your access permission in drive '{0}'</no-view-found>
-      <access-denied>アクセスできません！ドライブ '{0}' のワークスペースに権限がない可能性があります。</access-denied>
-      <empty-drives>このリポジトリにドライブがないか、もしくは、このリポジトリ内のドライブにアクセスするための権限がありません。</empty-drives>
-      <workspace-not-exist>ドライブ '{0}' は未承認のワークスペース内でストアされました。再度、ドライブを設定してください。</workspace-not-exist>
-    </msg>
-  </UIDrivesBrowser>
+ 
   <!--
   #############################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer    #
@@ -122,7 +94,6 @@
       <backToJCR>JCRメインドライブに戻る</backToJCR>
       <setUpBrowser>ブラウジング設定のセットアップ</setUpBrowser>
       <refesh>リフレッシュ</refesh>
-      <saveSession>セッションの保存</saveSession>
       <currentDrive>現在のドライブ</currentDrive>
       <selectView>ビューの選択</selectView>
       <showSideBar>サイドバーの表示</showSideBar>
@@ -130,19 +101,7 @@
       <backTo>戻る</backTo>
     </label>
   </UIViewBar>
-  <Views>
-    <label>
-      <simple-view>サムネイル</simple-view>
-      <cover-flow>カバーフロー</cover-flow>
-      <admin-view>詳細</admin-view>
-      <icon-view>アイコン</icon-view>
-      <system-view>詳細</system-view>
-      <anonymous-view>アイコン</anonymous-view>
-      <taxonomy-list>詳細</taxonomy-list>
-      <taxonomy-icons>アイコン</taxonomy-icons>
-      <timeline-view>タイムラインビュー</timeline-view>
-    </label>
-  </Views>
+
   <!--
   #############################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UITreeExplorer    #
@@ -185,7 +144,6 @@
       <showHiddenNode>隠しノードの表示</showHiddenNode>
       <showNonDocument>"non document"ノードの表示</showNonDocument>
       <showRefDocuments>参照ドキュメントの表示</showRefDocuments>
-      <showItemsByUserInTimeline>タイムラインビュー内でユーザのアイテムを表示</showItemsByUserInTimeline>
       <enableDragAndDrop>ドラッグ &amp; ドロップの許可</enableDragAndDrop>
       <sortBy>ソート順</sortBy>
       <order>Order by</order>
@@ -242,7 +200,6 @@
       <UIActionContainer>アクション編集</UIActionContainer>
       <UIFolderForm>フォルダ追加</UIFolderForm>
       <UIUploadManager>ファイルアップロード</UIUploadManager>
-      <UITicketForm>新しいチケットの作成</UITicketForm>
       <UIReferencesList>参照リスト</UIReferencesList>
       <UIExportNode>ノードのエクスポート</UIExportNode>
       <UINodeTypeInfo>ノードタイプ情報</UINodeTypeInfo>
@@ -274,8 +231,6 @@
       <UIRestoreConfirmMessage>リストアの確認</UIRestoreConfirmMessage>
       <UIActivePublication>公開ライフサイクルのための登録</UIActivePublication>
       <UITaggingForm>ドキュメントにタグ付け</UITaggingForm>
-      <UIMultiLanguageForm>マルチ言語</UIMultiLanguageForm>
-      <UIMultiLanguageManager>マルチ言語</UIMultiLanguageManager>
       <UIThumbnailForm>サムネイルイメージの追加</UIThumbnailForm>
       <UIAllItemsPreferenceForm>設定</UIAllItemsPreferenceForm>
       <UISelectRestorePath>リストアパスの選択</UISelectRestorePath>
@@ -313,12 +268,10 @@
       <Upload>アップロード</Upload>
       <Paste>貼り付け</Paste>
       <Search>検索</Search>
-      <CreateTicket>新しいチケット</CreateTicket>
       <WatchDocument>このドキュメントのWatch/Unwatch</WatchDocument>
       <TaggingDocument>ドキュメントにタグ付け</TaggingDocument>
       <Vote>ドキュメントに投票</Vote>
       <Comment>ドキュメントにコメント</Comment>
-      <MultiLanguage>配置されたコンテンツの追加/編集</MultiLanguage>
       <ManageVersions>バージョン管理</ManageVersions>
       <ManageAuditing>監査の管理</ManageAuditing>
       <ManagePublications>公開管理</ManagePublications>
@@ -372,8 +325,6 @@
       <watch-checkedin>ウオッチする前にノードをチェックアウトしなければなりません。</watch-checkedin>
       <unsupported-tagging>ドキュメントノードのみタグ付け可能です。</unsupported-tagging>
       <tagnode-checkedin>タギングの前にノードをチェックアウトしなければなりません。</tagnode-checkedin>
-      <unsupported-multilanguage>このノードに言語を追加することはできません。このノードはドキュメントタイプではないか、同じタイプが混じり合っています。</unsupported-multilanguage>
-      <multilang-checkedin>言語を追加する前にノードをチェックアウトしなければなりません。</multilang-checkedin>
     </msg>
     <title>
       <select-tab>選択タブ</select-tab>
@@ -607,13 +558,6 @@
       <CheckOut>チェックアウト</CheckOut>
       <CheckIn>チェックイン</CheckIn>
       <WebDAV>WebDAV観覧</WebDAV>
-      <sendmail>メールの送信</sendmail>
-      <transformsd>変換</transformsd>
-      <reloadBP>BPリロード</reloadBP>
-      <workflow>ワークフロー</workflow>
-      <createRSS>RSSの作成</createRSS>
-      <icalendara>iカレンダーの生成</icalendara>
-      <getmail>メールを得る</getmail>
       <autoversion>自動バージョニング</autoversion>
       <Custom>カスタム</Custom>
       <AddFolder>フォルダ追加</AddFolder>
@@ -632,32 +576,7 @@
       <WebDavView>ダウンロード</WebDavView>
     </event>
   </ECMContextMenu>
-  <!--
-  #############################################################################
-  #             org.exoplatform.ecm.webui.component.explorer.UITicketForm     #
-  #############################################################################
-  -->
-  <UITicketForm>
-    <title>チケットの作成</title>
-    <label>
-      <users>ユーザ</users>
-      <permission>権限</permission>
-      <creator>作者</creator>
-      <accessTime>アクセス時間</accessTime>
-      <accessLimit>アクセスリミット</accessLimit>
-      <description>説明</description>
-      <sendToMail>メールの送信</sendToMail>
-      <ticketID>チケット ID</ticketID>
-    </label>
-    <action>
-      <Cancel>#{word.cancel}</Cancel>
-      <Update>#{word.update}</Update>
-      <Save>#{word.save}</Save>
-    </action>
-    <msg>
-      <unable-create>作成できません！</unable-create>
-    </msg>
-  </UITicketForm>
+ 
   <!--
   #############################################################################
   #     org.exoplatform.ecm.webui.component.explorer.UIReferencesList         #
@@ -718,7 +637,7 @@
       <UISelectedCategoriesGrid>カテゴリ参照</UISelectedCategoriesGrid>
       <UIWorkflowPublicationActionForm>Workflow 公開 アクション</UIWorkflowPublicationActionForm>
       <UIWorkflowPublicationViewForm>Workflow 公開 ビュー</UIWorkflowPublicationViewForm>
-      <metadatasitemetadata>metadata:siteMetadata</metadatasitemetadata>
+      <metadatasitemetadata>Site Metadata</metadatasitemetadata>
       <dcelementset>ダブリンコア</dcelementset>
     </title>
   </UITabPane>
@@ -786,37 +705,7 @@
       <property-not-exist>プロパティ {0} は、存在しません</property-not-exist>
     </msg>
   </UIPropertyForm>
-  <!--
-  #############################################################################
-  #           org.exoplatform.ecm.webui.component.explorer.UIMixinTypeSelect  #
-  #############################################################################
-  -->
-  <UIMixinTypeSelect>
-    <label>
-      <selectTemplate>テンプレートを選択</selectTemplate>
-    </label>
-  </UIMixinTypeSelect>
-  <UIMixinTypeForm>
-    <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
-      <Reset>リセット</Reset>
-    </action>
-  </UIMixinTypeForm>
-  <!--
-  #############################################################################
-  #           org.exoplatform.ecm.webui.component.explorer.UIMetadataTab     #
-  #############################################################################
-  -->
-  <UIMetadataTab>
-    <title>メタデータ要素のための値の入力</title>
-    <label>
-      <metadataName>メタデータ名</metadataName>
-    </label>
-    <action>
-      <Save>#{word.save}</Save>
-    </action>
-  </UIMetadataTab>
+
   <!--
   #############################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UIPermissionInfo #
@@ -893,95 +782,7 @@
       <access-denied>アクセスできません！権限の削除はできません。</access-denied>
     </msg>
   </UIPermissionForm>
-  <!--
-  ###############################################################################
-  #             org.exoplatform.ecm.webui.component.explorer.UIDriveDescription #
-  ###############################################################################
-  -->
-  <UIDriveDescription>
-    <title>説明</title>
-  </UIDriveDescription>
-  <!--
-  ###############################################################################
-  #             org.exoplatform.ecm.webui.component.explorer.UIReferencesList #
-  ###############################################################################
-  -->
-  <!--
-  ################################################################################
-  #          org.exoplatform.ecm.webui.component.explorer.actions.UIUploadForm   #
-  ################################################################################
-  -->
-  <UIUploadForm>
-    <title>ファイルアップロード</title>
-    <label>
-      <upload>ファイル選択</upload>
-      <name>名前</name>
-      <fieldListTaxonomy>分類リスト</fieldListTaxonomy>
-    </label>
-    <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
-    </action>
-    <msg>
-      <fileName-error>アップロードするファイルを選択してください。</fileName-error>
-      <taxonomyPath-error>分類を選択してください。</taxonomyPath-error>
-      <fileName-invalid>ファイル名に無効な文字列が使われています。ファイル名入力するか、他のファイルを選択してください。</fileName-invalid>
-      <fileName-invalid-with-name>ファイル名 '{0}' に無効な文字列が使われています。ファイル名入力するか、他のファイルを選択してください。</fileName-invalid-with-name>
-      <fileSize-too-big>ファイルサイズは大きすぎます。小さなファイルに分割するか、WebDavアップロードを利用してください。</fileSize-too-big>
-      <name-is-exist>名前 '{0}' は存在します。'nt:file'に存在する同じ名前のファイルはアップロード出来ません。</name-is-exist>
-      <contraint-violation>親ノードタイプのために子ノードタイプとすることが許されていないため、このノードにノード '{0}' を追加できません。</contraint-violation>
-      <lock-exception>このノードはロックされました。いくつかのアクションは制限されます。</lock-exception>
-      <confirm-behavior>このロケーションに同じ名前 '{0}' のファイルが存在します。 キープしたい振る舞いを選択してください。</confirm-behavior>
-    </msg>
-  </UIUploadForm>
-  <UIUploadContent>
-    <label>
-      <fileName>ファイル名</fileName>
-      <nodeName>ノード名</nodeName>
-      <fileSize>ファイルサイズ</fileSize>
-      <mimeType>Mimeタイプ</mimeType>
-    </label>
-    <title>
-      <uploaded-file>アップロードされたファイル</uploaded-file>
-      <external-metadata>外部メタデータ</external-metadata>
-      <metadata-name>メタデータ名</metadata-name>
-      <action>アクション</action>
-    </title>
-    <tooltip>
-      <Edit>編集</Edit>
-    </tooltip>
-    <msg>
-      <has-not-template>'{0}' のテンプレートはnullか空です。</has-not-template>
-    </msg>
-  </UIUploadContent>
-  <UIUploadContainer>
-    <action>
-      <Close>#{word.close}</Close>
-      <AddMetadata>メタデータの追加</AddMetadata>
-    </action>
-    <tab>
-      <label>
-        <UIUploadContent>情報</UIUploadContent>
-        <UIAddMetadataForm>メタデータフォーム</UIAddMetadataForm>
-      </label>
-    </tab>
-  </UIUploadContainer>
-  <AddMetadataPopup>
-    <title>
-      <UIExternalMetadataForm>外部メタデータの追加</UIExternalMetadataForm>
-    </title>
-  </AddMetadataPopup>
-  <UIExternalMetadataForm>
-    <msg>
-      <can-not-add>このノードはmixinの追加ができません。</can-not-add>
-    </msg>
-  </UIExternalMetadataForm>
-  <UIAddMetadataForm>
-    <action>
-      <Cancel>キャンセル</Cancel>
-      <Save>保存</Save>
-    </action>
-  </UIAddMetadataForm>
+
   <!--
   ###############################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UINodeTypeInfo     #
@@ -2060,43 +1861,7 @@
       <tagName>(複数のタグを追加する為に","をセパレータとして利用)</tagName>
     </introduction>
   </UITaggingForm>
-  <!--
-  ###################################################################################
-  # org.exoplatform.ecm.webui.component.explorer.popup.actions.UIMultiLanguageForm  #
-  ###################################################################################
-  -->
-  <UIMultiLanguageForm>
-    <label>
-      <languages>言語</languages>
-      <default>デフォルト</default>
-    </label>
-    <action>
-      <AddLanguage>追加</AddLanguage>
-      <SetDefault>デフォルトのセット</SetDefault>
-      <Cancel>#{word.cancel}</Cancel>
-      <View>ビュー</View>
-    </action>
-    <msg>
-      <access-denied>アクセス出来ません. このノードの'追加'権限がありません。</access-denied>
-    </msg>
-  </UIMultiLanguageForm>
-  <UILanguageTypeForm>
-    <label>
-      <typeLang>言語</typeLang>
-      <default>デフォルトのセット</default>
-      <defaultLang>デフォルト言語</defaultLang>
-    </label>
-  </UILanguageTypeForm>
-  <UILanguageDialogForm>
-    <msg>
-      <select-lang>一つの言語を選択し、保存する前に情報を入力する必要があります。</select-lang>
-      <access-denied>アクセス出来ません. このノードの'追加'権限がありません。</access-denied>
-    </msg>
-    <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
-    </action>
-  </UILanguageDialogForm>
+
   <!--
   ###################################################################################
   # org.exoplatform.ecm.webui.component.explorer.popup.info.UIMetadataContainer     #
@@ -2377,31 +2142,6 @@
   <!--
   ###Since ECM version 2.2##############
   -->
-  <!--
-  ###Since ECM version 2.3 Alpha##############
-  -->
-  <UIWorkflowPublicationActionForm>
-    <label>
-      <fieldValidator>fieldValidator</fieldValidator>
-      <fieldDestPath>fieldDestPath</fieldDestPath>
-      <fieldBackup>fieldBackup</fieldBackup>
-    </label>
-  </UIWorkflowPublicationActionForm>
-  <workflow_validator>
-    <title>
-      <AddPermission>パーミッションの追加</AddPermission>
-    </title>
-  </workflow_validator>
-  <workflow_destpath>
-    <title>
-      <AddDestPath>パスの追加</AddDestPath>
-    </title>
-  </workflow_destpath>
-  <PublicationService>
-    <WorkflowPublicationPlugin>
-      <nodeValidationRequest>ノードは要求されたバリデーションでした。</nodeValidationRequest>
-    </WorkflowPublicationPlugin>
-  </PublicationService>
 
   <!--
   ### Since ECM version 2.3 Alpha##############
@@ -2419,14 +2159,11 @@
       <Cancel>キャンセル</Cancel>
     </action>
     <label>
-      <repository>レポジトリ</repository>
-      <categoryMandatoryWhenFileUpload>ファイルをアップデートする際、カテゴリを指定してください。</categoryMandatoryWhenFileUpload>
       <uploadFileSizeLimitMB>アップロード ファイルサイズリミット(MB)</uploadFileSizeLimitMB>
       <isDirectlyDrive>直接的なドライブ</isDirectlyDrive>
       <driveName>ドライブ名</driveName>
       <usecase>タイプの選択</usecase>
       <SelectNodePath>パスの選択</SelectNodePath>
-      <editInNewWindow>新しいウィンドウで編集</editInNewWindow>
       <showTopBar>トップバーの表示</showTopBar>
       <showActionBar>アクションバーの表示</showActionBar>
       <showSideBar>レフトバーの表示</showSideBar>
@@ -2447,7 +2184,6 @@
       <DriveNameInput>UIJcrExplorerEditForm</DriveNameInput>
     </label>
     <msg>
-      <not-have-social>ソーシャルユースケースは利用出来ません。 Selection one がその代わりに利用可能です。</not-have-social>
       <personal-usecase>パーソナルユースケースを選択するとき、現在のユーザのプライベートドライブが利用されます。</personal-usecase>
       <drive-edit-permission>ドライブ名を編集できません。編集ボタンをクリックしてください。</drive-edit-permission>
       <path-edit-permission>パスを編集できません。編集ボタンをクリックしてください。</path-edit-permission>
@@ -2781,64 +2517,17 @@
       <name-not-allowed>コンテンツ内で単語もしくは句許されていません。</name-not-allowed>
     </msg>
   </UISimpleSearch>
-  <Drives>
-    <label>
-      <Private>プライベート</Private>
-      <Public>パブリック</Public>
-      <BackupCenter>バックアップセンタ</BackupCenter>
-      <CategorizedDocumentsCenter>カテゴライズされたドキュメントセンタ</CategorizedDocumentsCenter>
-      <CollaborationCenter>コラボレーションセンタ</CollaborationCenter>
-      <DigitalAssetsManagementCenter>デジタルアセット管理センタ</DigitalAssetsManagementCenter>
-      <DMSAdministration>DMSアドミニストレーション</DMSAdministration>
-      <DocumentsManagementCenter>ドキュメント管理センタ</DocumentsManagementCenter>
-      <LiveDocumentsCenter>Liveドキュメントセンタ</LiveDocumentsCenter>
-      <PendingDocumentsCenter>ペンディングドキュメントセンタ</PendingDocumentsCenter>
-      <RecordsManagementCenter>レコード管理センタ</RecordsManagementCenter>
-      <SharedUsersSpace>共有ユーザスペース</SharedUsersSpace>
-      <Systemfiles>システムファイル</Systemfiles>
-      <ValidationRequestsDocumentsCenter>バリデーションリクエストドキュメントセンタ</ValidationRequestsDocumentsCenter>
-    </label>
-  </Drives>
 
 
   <!--
    #############  From DMS 2.6 #############
   -->
-  <UIUploadContent>
-    <tooltip>
-      <ManageMetadata>メタデータの管理</ManageMetadata>
-    </tooltip>
-    <label>
-      <manageMetadata>メタデータの管理</manageMetadata>
-    </label>
-  </UIUploadContent>
-  <UIUploadForm>
-    <action>
-      <AddUpload>アップロードの追加</AddUpload>
-      <RemoveUpload>アップロードの削除</RemoveUpload>
-    </action>
-  </UIUploadForm>
-  <UIExternalMetadataForm>
-    <action>
-      <Add>追加</Add>
-      <Cancel>キャンセル</Cancel>
-    </action>
-  </UIExternalMetadataForm>
-    <!--
-   #############  From DMS 2.6 #############
-   -->
   <ECMContextMenu>
       <event>
         <Permlink>ドキュメントの観覧</Permlink>
       </event>
   </ECMContextMenu>
-  <UIUploadContainer>
-    <tab>
-      <label>
-        <UIListMetadata>外部メタデータリスト</UIListMetadata>
-      </label>
-    </tab>
-  </UIUploadContainer>
+  
 
   <!--
     ############  From DMS 2.6 ##############
@@ -2865,11 +2554,6 @@
       <confirm-deletecomment>本当にこのコメントを削除しますか？</confirm-deletecomment>
     </msg>
   </UIDocumentInfo>
- <UIDrivesBrowser>
-  <msg>
-    <drive-not-exist>ドライブ '{0}' は見つからない。もしくはこのレポジトリにアクセスする権限がありません。</drive-not-exist>
-  </msg>
- </UIDrivesBrowser>
 
  <UIExportNode>
   <msg>
@@ -2901,89 +2585,6 @@
     </title>
   </SameNamePopup>
 
-  <UISingleUploadForm>
-    <title>ファイルのアップロード</title>
-    <label>
-      <upload>ファイルの選択</upload>
-      <name>名前</name>
-      <fieldListTaxonomy>分類リスト</fieldListTaxonomy>
-    </label>
-    <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
-    </action>
-    <msg>
-      <fileName-error>アップロードアイコンを使ったサーバに選択されたファイルがアップロードされたことを確認してください。</fileName-error>
-      <taxonomyPath-error>分類を選択してください。</taxonomyPath-error>
-      <fileName-invalid>ファイル名に無効な文字列が使われています。ファイル名入力するか、他のファイルを選択してください。</fileName-invalid>
-      <fileSize-too-big>ファイルサイズは大きすぎます。小さなファイルに分割するか、WebDavアップロードを利用してください。</fileSize-too-big>
-      <name-is-exist>名前 '{0}' は存在します。'nt:file'に存在する同じ名前のファイルはアップロード出来ません。</name-is-exist>
-      <contraint-violation>親ノードタイプのために子ノードタイプとすることが許されていないため、このノードにノード '{0}' を追加できません。</contraint-violation>
-      <lock-exception>このノードはロックされました。いくつかのアクションは制限されます。</lock-exception>
-    </msg>
-  </UISingleUploadForm>
-  <UISingleUploadContent>
-    <label>
-      <fileName>ファイル名</fileName>
-      <nodeName>ノード名</nodeName>
-      <fileSize>ファイルサイズ</fileSize>
-      <mimeType>Mimeタイプ</mimeType>
-    </label>
-    <title>
-      <uploaded-file>アップロードされたファイル</uploaded-file>
-      <external-metadata>外部メタデータ</external-metadata>
-      <metadata-name>メタデータ名</metadata-name>
-      <action>アクション</action>
-    </title>
-    <tooltip>
-      <Edit>編集</Edit>
-    </tooltip>
-    <msg>
-      <has-not-template>'{0}' のテンプレートはnullか空です。</has-not-template>
-    </msg>
-  </UISingleUploadContent>
-  <UISingleUploadContainer>
-    <action>
-      <Close>#{word.close}</Close>
-      <AddMetadata>メタデータの追加</AddMetadata>
-    </action>
-    <tab>
-      <label>
-        <UISingleUploadContent>情報</UISingleUploadContent>
-        <UISingleAddMetadataForm>メタデータフォーム</UISingleAddMetadataForm>
-      </label>
-    </tab>
-  </UISingleUploadContainer>
-  <UISingleExternalMetadataForm>
-    <action>
-      <Add>追加</Add>
-      <Cancel>キャンセル</Cancel>
-    </action>
-  </UISingleExternalMetadataForm>
-  <UISingleUploadContainer>
-    <tab>
-      <label>
-        <UIListMetadata>外部メタデータリスト</UIListMetadata>
-      </label>
-    </tab>
-  </UISingleUploadContainer>
-  <AddMetadataPopup>
-    <title>
-      <UISingleExternalMetadataForm>外部メタデータの追加</UISingleExternalMetadataForm>
-    </title>
-  </AddMetadataPopup>
-  <UISingleExternalMetadataForm>
-    <msg>
-      <can-not-add>このノードはmixinを追加できません</can-not-add>
-    </msg>
-  </UISingleExternalMetadataForm>
-  <UISingleAddMetadataForm>
-    <action>
-      <Cancel>キャンセル</Cancel>
-      <Save>保存</Save>
-    </action>
-  </UISingleAddMetadataForm>
-
   <UIAllItems>
     <label>
       <OwnedByMe>オーナー</OwnedByMe>
@@ -3007,36 +2608,6 @@
           <Descending>降順</Descending>
       </label>
   </UIPreferencesForm>
-
-  <UIDocumentInfo>
-    <label>
-      <Today>今日</Today>
-      <Yesterday>昨日</Yesterday>
-      <EarlierThisWeek>今週中</EarlierThisWeek>
-      <EarlierThisMonth>今月中</EarlierThisMonth>
-      <EarlierThisYear>今年中</EarlierThisYear>
-      <tooltip>
-        <expand>ここをクリックするとカテゴリの全リストが表示されます</expand>
-        <collapse>ここをクリックしてすべてのカテゴリを表示します</collapse>
-      </tooltip>
-    </label>
-    <header>
-      <dateTime>日時</dateTime>
-      <name>名前</name>
-      <title>ドキュメントタイトル</title>
-    </header>
-    <tooltip>
-      <View>ビュー</View>
-      <RemoveFromFavourite>お気に入りから削除</RemoveFromFavourite>
-      <AddToFavourite>お気に入りへ追加</AddToFavourite>
-      <timelineFavouriteDESC>昇順オーダーのお気に入りでソート</timelineFavouriteDESC>
-      <timelineFavouriteASC>降順オーダーのお気に入りでソート</timelineFavouriteASC>
-      <timelineDateTimeASC>昇順オーダーの変更時間でソート</timelineDateTimeASC>
-      <timelineDateTimeDESC>降順オーダーの変更時間でソート</timelineDateTimeDESC>
-      <timelineNameASC>昇順オーダーの名前でソート</timelineNameASC>
-      <timelineNameDESC>降順オーダーの名前でソート</timelineNameDESC>
-    </tooltip>
-  </UIDocumentInfo>
 
   <UISavedSearches>
     <title>
@@ -3078,7 +2649,7 @@
       <ShowMusic>全ての音楽ファイルを表示</ShowMusic>
       <ShowImages>全てのイメージファイルを表示</ShowImages>
       <ShowDocuments>全てのドキュメントファイルを表示</ShowDocuments>
-      <ShowContents>全てのコンテンツタイプドキュメントを表示</ShowContents>
+      <ShowContent>Show all document types</ShowContent>
     </title>
   </UIAllItemsByType>
 
@@ -3139,8 +2710,6 @@
    <UITaggingForm>
     <label>
       <Public>パブリック</Public>
-      <Group>グループ</Group>
-      <Site>サイト</Site>
       <Private>プライベート</Private>
       <tagScopes>タグスコープ</tagScopes>
     </label>
@@ -3148,7 +2717,6 @@
 
   <UITagExplorer>
     <title>
-      <EditPrivateTags>プライベートタグの編集</EditPrivateTags>
       <PublicTags>パブリックタグ</PublicTags>
       <EditPublicTags>パブリックタグの編集</EditPublicTags>
       <PrivateTags>プライベートタグ</PrivateTags>

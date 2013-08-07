@@ -23,9 +23,7 @@
 
   <UIFCCConfig>
     <label>
-      <select-repository>Välj databas</select-repository>
       <UIFCCSaveLocationField>Spara plats</UIFCCSaveLocationField>
-      <UIFCCRepositoryFormSelectBox>Välj databas</UIFCCRepositoryFormSelectBox>
       <UIFCCWorkspaceFormSelectBox>Välj arbetsyta</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>Mall optioner</UIFCCTemplateField>
       <UIFCCLocationFormInputAction>Plats att spara</UIFCCLocationFormInputAction>

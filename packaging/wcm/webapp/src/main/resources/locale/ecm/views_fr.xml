@@ -43,6 +43,7 @@
       </label>
     </view>
   </Comment>
+ 
   <!--
   ################resoucebundle FOR EXO:EVENT VIEW TEMPLATE#############
   -->
@@ -193,6 +194,21 @@
       </label>
     </view>
   </Sample>
+  <!--
+  ################resoucebundle FOR MAIL:DOCUMENT VIEW TEMPLATE##############
+  -->
+  <Mail>
+    <view>
+      <label>
+        <from>De :</from>
+        <to>À :</to>
+        <cc>Cc :</cc>
+        <date>Date :</date>
+        <subject>Sujet :</subject>
+        <attachment>Pièces jointes :</attachment>
+      </label>
+    </view>
+  </Mail>
   <!--
   ################resoucebundle FOR EXO:VOTE VIEW TEMPLATE##############
   -->

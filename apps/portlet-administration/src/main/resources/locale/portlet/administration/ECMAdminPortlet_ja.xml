@@ -15,7 +15,6 @@
       </label>
     </tab>    
     <label>     
-      <UITaxonomyManager>簡単なカテゴリを管理</UITaxonomyManager>
       <UITaxonomyManagerTrees>カテゴリー</UITaxonomyManagerTrees>
       <UIMetadataManager>メタデータ観覧</UIMetadataManager>
       <UINamespaceManager>名前空間</UINamespaceManager>
@@ -399,7 +398,7 @@
       <viewSideBar>サイドバーの表示</viewSideBar>
       <permissions>権限</permissions>
       <showHiddenNode>隠しノードの表示</showHiddenNode>
-      <allowCreateFolder>作成されたフォルダを許す</allowCreateFolder>
+      <allowCreateFolders>Allow Folder Creation:</allowCreateFolders>
       <Admin>管理者：</Admin>
       <Categories>カテゴリー:</Categories>
       <Icons>アイコン</Icons>
@@ -426,215 +425,13 @@
       <action>アクション</action>
     </header>
   </UITreeList>
-  <!--
-  ################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.UIRepositoryManager #
-  ################################################################################
-  -->
-  <UIRepositoryControl>
-    <label>
-      <repoName>現在のレポジトリ</repoName>
-    </label>
-    <title>
-      <repoAdd>レポジトリの追加</repoAdd>
-      <repoEdit>レポジトリの編集</repoEdit>
-      <repoDelete>レポジトリの削除</repoDelete>
-    </title>
-    <msg>
-      <cannot-deleteRepo>{0}を削除出来ません。デフォルトです。</cannot-deleteRepo>
-    </msg>
-  </UIRepositoryControl>
-  <UIECMAdminUIPopupWindow>
-    <title>
-      <UIRepositoryFormContainer>レポジトリフォーム</UIRepositoryFormContainer>
-      <Delete>削除</Delete>
-      <UIRepositoryList>レポジトリリスト</UIRepositoryList>
-    </title>
-  </UIECMAdminUIPopupWindow>
-  <UIPopupWindowControl>
-    <title>
-      <UIWorkspaceWizardContainer>ワークスペースウィザードフォーム</UIWorkspaceWizardContainer>
-      <UIRepositoryValueSelect>オーセンティケーションクラスの選択</UIRepositoryValueSelect>
-    </title>
-  </UIPopupWindowControl>
-  <UIPopupWindowInWizard>
-    <title>
-      <UIPermissionSelector>権限の選択</UIPermissionSelector>
-      <UIPermissionContainer>セレクタの権限</UIPermissionContainer>
-      <UIRepositoryValueSelect>クラスの選択</UIRepositoryValueSelect>
-    </title>
-  </UIPopupWindowInWizard>
-  <UIRepositoryValueSelect>
-    <header>
-      <name>フルネーム</name>
-      <action>選択</action>
-    </header>
-    <action>
-      <Close>閉じる</Close>
-    </action>
-  </UIRepositoryValueSelect>
-  <UIRepositorySelectForm>
-    <msg-editError>'{0}' レポジトリでエラーが発生しました。確認するか、新しいものを作成してください。</msg-editError>
-    <msg-accessdenied>'{0}' レポジトリを編集するための権限がありません。</msg-accessdenied>
-  </UIRepositorySelectForm>
-  <UIRepositoryForm>
-    <label>
-      <name>名前</name>
-      <wsInputSet>UIRepositoryForm</wsInputSet>
-      <authInputSet>UIRepositoryForm</authInputSet>
-      <workspace>ワークスペース</workspace>
-      <isDefault>デフォルトとしてセット</isDefault>
-      <accessControl>アクセスコントロール</accessControl>
-      <authenticationPolicy>オーセンティケーションポリシー</authenticationPolicy>
-      <securityDomain>セキュリティドメイン</securityDomain>
-      <sessionTime>セッションタイムアウト</sessionTime>
-      <channelConfig>チャンネル設定</channelConfig>
-      <enableReplication>レプリケーションの許可</enableReplication>
-      <repMode>レプリケーションモード</repMode>
-      <repTestMode>テストレプリケーション</repTestMode>
-      <directoryPath>ディレクトリ</directoryPath>
-      <maxBufferSize>最大バッファサイズ</maxBufferSize>
-    </label>
-    <msg>
-      <cannot-delete-default-workspace>ワークスペース'{0}' を削除できません。デフォルトのワークスペースです。</cannot-delete-default-workspace>
-      <repoName-exist>レポジトリ '{0}' は存在します。</repoName-exist>
-      <repoName-not-alow>名前に無効な文字があります。</repoName-not-alow>
-      <workspace-isrequire>少なくとも一つのワークスペースを要求</workspace-isrequire>
-      <cannot-delete-workspace>{0}を削除できません。</cannot-delete-workspace>
-      <workspace-setdefault>デフォルトワークスペースの設定が必要です。</workspace-setdefault>
-      <!--DMS 2.4.x ECM-3611> -->
-      <workspace-setDMSsystem>DMS システムワークスペースをセットする必要があります。</workspace-setDMSsystem>
-      <workspace-bseChanel>チャンネルは必須です。</workspace-bseChanel>
-      <workspace-bseMode>レプリケーションモードは必須です。</workspace-bseMode>
-      <workspace-bsePath>ディレクトリは必須です。</workspace-bsePath>
-      <sessionTime-invalid>セッションタイムアウトは無効なナンバーフォーマットです。</sessionTime-invalid>
-      <sessionTime-required>セッションタイムアウトは必須です。</sessionTime-required>
-      <workspace-bseBuffer>最大バッファは必須です。</workspace-bseBuffer>
-      <authen-isrequire>オーセンティケーションポリシーは必須です。</authen-isrequire>
-      <confirm-workspace-delete>本当にワークスペースを削除しますか？</confirm-workspace-delete>
-    </msg>
-    <action>
-      <Close>#{word.close}</Close>
-      <Save>#{word.save}</Save>
-      <Reset>リセット</Reset>
-      <AddWorkspace>ワークスペースの追加</AddWorkspace>
-    </action>
-  </UIRepositoryForm>
+  
   <UIRepositoryList>
     <titlebar>
       <label>メインECM機能の管理</label>
     </titlebar>
-    <header>
-      <name>名前</name>
-      <workspaces>ワークスペース</workspaces>
-      <isdefault>デフォルト</isdefault>
-      <accesscontrol>アクセスコントロール</accesscontrol>
-      <sessiontimeout>セッションタイムアウト</sessiontimeout>
-      <action>アクション</action>
-    </header>
-    <action>
-      <Close>#{word.close}</Close>
-    </action>
-    <msg>
-      <cannot-delete>'{0}'は削除できません。利用されている可能性があります。</cannot-delete>
-      <confirm-delete>本当に削除したいですか ?</confirm-delete>
-    </msg>
   </UIRepositoryList>
-  <UIWorkspacePermissionForm>
-    <label>
-      <permission>権限</permission>
-      <read>読み込み権限</read>
-      <add_node>ノード権限の追加</add_node>
-      <set_property>プロパティ権限のセット</set_property>
-      <remove>削除権限</remove>
-    </label>
-    <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
-    </action>
-    <msg>
-      <check-one>少なくとも一つの正しい権限をチェックする必要があります。</check-one>
-    </msg>
-  </UIWorkspacePermissionForm>
-  <PermissionPopupSelect>
-    <title>
-      <UIPermissionSelector>権限ブラウザ</UIPermissionSelector>
-    </title>
-    <label>
-      <selectGroup>グループの選択</selectGroup>
-      <selectMembership>メンバーシップの選択</selectMembership>
-    </label>
-  </PermissionPopupSelect>
-  <UIWorkspaceWizard>
-    <msg>
-      <wsname-exist>ワークスペース '{0}' はこのデータベース内に存在します。</wsname-exist>
-      <name-require>ワークスペース名は必須です。</name-require>
-      <permission-require>権限を選択する必要があります。</permission-require>
-      <nodeType-invalid>Default workspace auto init nodetype must nt:unstructured</nodeType-invalid>
-      <!--DMS 2.4.x ECM-3611-->
-      <nodeType-invalidSystemWs>DMS system workspace auto init nodetype must nt:unstructured</nodeType-invalidSystemWs>
-      <lockTimeOut-required>ロックタイムアウトは必須です。</lockTimeOut-required>
-      <lockTimeOut-invalid>ロックタイムアウトは無効なナンバーフォーマットです。</lockTimeOut-invalid>
-      <buffer-invalid>バッファサイズ は無効なナンバーフォーマットです。</buffer-invalid>
-      <buffer-require>バッファサイズ は必須です。</buffer-require>
-      <buffer-zero>バッファサイズ は0より大きく設定する必要があります。</buffer-zero>
-      <buffer-small>バッファサイズ は小さすぎます。</buffer-small>
-      <containerName-invalid>コンテナーは必須です。</containerName-invalid>
-      <maxSize-require>最大キャッシュサイズは必須です。</maxSize-require>
-      <maxSize-invalid>最大キャッシュサイズは無効なナンバーフォーマットです。</maxSize-invalid>
-      <maxSize-rezo>最大キャッシュサイズは0より大きく設定する必要があります。</maxSize-rezo>
-      <liveTime-require>キャッシュライブ時間 は必須です。</liveTime-require>
-      <liveTime-invalid>キャッシュライブ時間は無効なナンバーフォーマットです。</liveTime-invalid>
-      <liveTime-rezo>キャッシュライブ時間は0より大きく設定する必要があります。</liveTime-rezo>
-      <sourceName-invalid>ソース名は必須です。</sourceName-invalid>
-      <storePath-invalid>ストアパスは必須です。</storePath-invalid>
-      <swapPath-invalid>スワップパスは必須です。</swapPath-invalid>
-      <queryHandlerType>クエリハンドラタイプは必須です。</queryHandlerType>
-      <indexPath-invalid>クエリインデックスパスは必須です。</indexPath-invalid>
-      <storeType-invalid>ストアタイプは必須です。</storeType-invalid>
-      <queryHandlerType-invalid>クエリハンドラは必須です。</queryHandlerType-invalid>
-      <permission-invalid>少なくとも一つの権限を選択する必要があります。</permission-invalid>
-    </msg>
-    <label>
-      <step>ステップ</step>
-      <wizardSteps>ウィザードステップ</wizardSteps>
-      <name>名前</name>
-      <autoInitializedRootNt>ルートノードタイプ</autoInitializedRootNt>
-      <isDefault>デフォルトとして設定</isDefault>
-      <!--DMS 2.4.x ECM-3611-->
-      <isDMSSytemWs>DMSシステムワークスペースとしてセット</isDMSSytemWs>
-      <permission>Auto init permission</permission>
-      <setLockTimeOut>タイムアウトのロック</setLockTimeOut>
-      <container>コンテナのタイプ</container>
-      <sourceName>ソース名</sourceName>
-      <dbType>方言</dbType>
-      <isMulti>多数</isMulti>
-      <storeType>ストアタイプ</storeType>
-      <filterType>フィルタ</filterType>
-      <maxBuffer>最大バッファ(bytes)</maxBuffer>
-      <swapPath>スワップパス</swapPath>
-      <storePath>ストアパス</storePath>
-      <externalStore>外部バリューストレージ</externalStore>
-      <queryHandler>クエリハンドラ</queryHandler>
-      <indexPath>クエリ インデックスパス</indexPath>
-      <isCache>キャッシュの許可</isCache>
-      <maxSize>最大キャッシュサイズ</maxSize>
-      <liveTime>キャッシュライブタイム</liveTime>
-    </label>
-    <tab>
-      <info>
-        <step1>最初のステップでは、ワークスペース名、ノードタイプ..の入力が必要です。.</step1>
-        <step2>このステップでは、コンテナ、ストレージ..の設定が必要です。</step2>
-        <step3>このステップでは、キャッシュ、クエリハンドラ...の設定が必要です。</step3>
-      </info>
-    </tab>
-    <action>
-      <Next>#{word.next}</Next>
-      <Back>#{word.back}</Back>
-      <Finish>終了</Finish>
-      <Cancel>#{word.cancel}</Cancel>
-    </action>
-  </UIWorkspaceWizard>
+  
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
@@ -982,8 +779,6 @@
     <title>
       <UIViewContainer>ビュー</UIViewContainer>
       <ECMTemplate>ECMテンプレート</ECMTemplate>
-      <CBTemplate>BCテンプレート</CBTemplate>
-      <UICBScripts>BCスクリプト</UICBScripts>
       <UIScriptForm>スクリプト</UIScriptForm>
       <UIDialogTab>ダイアログ</UIDialogTab>
       <UIViewTab>ビュー</UIViewTab>
@@ -1149,11 +944,9 @@
       <template>テンプレート</template>
       <enableVersion>バージョンの許可化</enableVersion>
       <addFolder>フォルダの追加</addFolder>
-      <addSignature>シグネチャの追加</addSignature>
       <addDocument>ドキュメントの追加</addDocument>
       <editDocument>ドキュメントの編集</editDocument>
       <upload>アップロード</upload>
-      <createTicket>チケットの作成</createTicket>
       <paste>貼り付け</paste>
       <search>検索</search>
       <viewReferences>リファレンスの表示</viewReferences>
@@ -1172,13 +965,11 @@
       <showJCRStructure>JCR 構造を表示</showJCRStructure>
       <watchDocument>ドキュメント観覧</watchDocument>
       <taggingDocument>ドキュメントにタグ付け</taggingDocument>
-      <multiLanguage>マルチ言語</multiLanguage>
       <viewMetadatas>メタデータ観覧</viewMetadatas>
       <overloadThumbnail>オーバーロード サムネイル</overloadThumbnail>
       <manageHidden>コンテンツの表示/非表示</manageHidden>
       <comment>コメント</comment>
       <vote>ドキュメントに投票</vote>  
-      <manageSimpleCategories>シンプルカテゴリの管理</manageSimpleCategories>
       <addCategory>カテゴリーを追加</addCategory>
       <addLocalizationLink>Translationの追加</addLocalizationLink>
       <publicationRequestApproval>リクエストの承認</publicationRequestApproval>
@@ -1212,19 +1003,6 @@
       <Close>#{word.close}</Close>
       <Restore>リストア</Restore>
     </action>
-    <label>
-     <option>
-      <ListView>一覧表示</ListView>
-        <TimelineView>タイムラインビュー</TimelineView>
-      <ThumbnailsView>サムネイル ビュー</ThumbnailsView>
-      <CoverFlow>カバーフロー</CoverFlow>
-      <IconView>アイコンビュー</IconView>
-      <SlideShowView>スライド ショーの表示</SlideShowView>
-      <SystemView>システムビュー</SystemView>
-      <ContentView>コンテンツ ビュー</ContentView>
-      <FileView>ファイル管理ビュー</FileView>
-    </option>
-    </label>
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
@@ -1437,7 +1215,7 @@
       <scriptContent>スクリプトコンテンツ</scriptContent>
       <scriptLabel>名前</scriptLabel>
       <scriptName>スクリプト名</scriptName>
-      <enableVersion>有効なバージョン</enableVersion>
+      <enableVersion>Enable Versioning</enableVersion>
     </label>
   </ecmScriptForm>
   <!--
@@ -2191,7 +1969,7 @@
   <UITagStyleForm>
     <label>
       <styleName>Style Name:</styleName>
-      <documentRange>Document Range:</documentRange>
+      <documentRange>Number of Occurrences:</documentRange>
       <styleHTML>HTML Style:</styleHTML>
     </label>
     <action>
@@ -2398,13 +2176,6 @@
   <!--
   #########Since ECM 2.5##################
   --> 
-  <UIWorkspaceWizard>
-    <label>
-      <step1>ステップ 1</step1>
-      <step2>ステップ 2</step2>
-      <step3>ステップ 3</step3>
-    </label>
-  </UIWorkspaceWizard>
   
   <UIDriveForm>
 <msg>
@@ -2625,7 +2396,7 @@
 </action>
   <msg>
     <xss-vulnerability-character>フィールド'{0}'は、クロスサイトスクリプティングの脆弱性文字が含まれています。</xss-vulnerability-character>
-<xss-vulnerability-character-wo-label>フィールド入力 XSS 脆弱性の文字が含まれている可能性があります。</xss-vulnerability-character-wo-label>
+<xss-vulnerability-character-wo-label>Your input may contain XSS vulnerability characters</xss-vulnerability-character-wo-label>
   </msg>
 </UIActionForm>
 
@@ -2722,21 +2493,7 @@
           <addLocalizationLink>Translationの追加</addLocalizationLink>
   </label>
   </UIViewFormTabPane>
-  <UIDriveForm>
-<label>
-  <taxonomy-list>分類リスト</taxonomy-list>
-  <admin-view>管理ビュー</admin-view>
-  <authoring-view>Authoring View</authoring-view>
-  <taxonomy-icons>管理アイコン</taxonomy-icons>
-  <anonymous-view>アノニマスビュー</anonymous-view>
-  <icon-view>アイコンビュー</icon-view>
-  <slide-show>スライドショー</slide-show>
-  <simple-view>シンプルビュー</simple-view>
-  <system-view>システムビュー</system-view>
-  <timeline-view>タイムラインビュー</timeline-view>
-  <cover-flow>カバーフロー</cover-flow>
-  </label>
-  </UIDriveForm>
+
 <UIDriveForm>
 <label>
 <allowNodeTypesOnTree>Allowance nodetype on left tree</allowNodeTypesOnTree>

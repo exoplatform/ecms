@@ -2,29 +2,29 @@
 <bundle>
 <UIPopupWindow>
 <title>
-<UIViewInfoManager>View Information</UIViewInfoManager>
+<UIViewInfoManager>Ver Información</UIViewInfoManager>
 </title>
 </UIPopupWindow>
     
 <ECMContextMenu>
 <event>
-<ViewInfo>View Information</ViewInfo>
+<ViewInfo>Ver Información</ViewInfo>
 </event>
 </ECMContextMenu>
 <UIViewInfoContainer>
 <label>
-      <name>Name</name>
+      <name>Nombre</name>
       <title>Título</title>
-      <type>Type</type>
-      <size>Size</size>
+      <type>Tipo</type>
+      <size>Tamaño</size>
       <owner>Propietario</owner>
-      <lastModifier>Last Modifier</lastModifier>
+      <lastModifier>Último modificador</lastModifier>
       <created>Created Date</created>
-      <lastModified>Last Modified Date</lastModified>
-      <publicationState>Published State</publicationState>
+      <lastModified>Fecha de última modificación</lastModified>
+      <publicationState>Estado de publicación</publicationState>
 </label>
 <value>
-      <folder>Folder</folder>
+      <folder>Carpeta</folder>
 </value>
 <action>
 <Close>Cerrar</Close>

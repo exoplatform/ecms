@@ -532,16 +532,7 @@
   <property_added>Ajout de Propriété</property_added>
   <property_removed>Suppression de Propriété</property_removed>
   <property_changed>Modification de Propriété</property_changed>
-    <SendMail>
-   <dialog>
-     <label>
-							<isDeep>Récursif</isDeep>
-        <nodetypes>Types de Noeud</nodetypes>
-        <affectedNodeTypeNames>Types de Noeud Affectés</affectedNodeTypeNames>
-     </label>
-   </dialog>
-  </SendMail>
-
+  
   <ScriptAction>
    <dialog>
      <label>

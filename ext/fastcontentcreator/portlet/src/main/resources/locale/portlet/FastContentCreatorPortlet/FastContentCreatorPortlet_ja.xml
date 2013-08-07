@@ -23,9 +23,7 @@
 
   <UIFCCConfig>
     <label>
-      <select-repository>リポジトリの選択</select-repository>
       <UIFCCSaveLocationField>場所の選択</UIFCCSaveLocationField>
-      <UIFCCRepositoryFormSelectBox>リポジトリの選択</UIFCCRepositoryFormSelectBox>
       <UIFCCWorkspaceFormSelectBox>ワークスペースの選択</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>テンプレートオプション</UIFCCTemplateField>
       <UIFCCLocationFormInputAction>保存先</UIFCCLocationFormInputAction>

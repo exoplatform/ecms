@@ -30,24 +30,6 @@
       <contentPlain>#{word.content}</contentPlain>
       <name>الاسم</name>
     <categories>الفئات</categories>
-    <recordCategoryIdentifier>المعرف الوحيد لفئة السجل</recordCategoryIdentifier>
-    <dispositionAuthority>مؤلف التنظيم</dispositionAuthority>
-    <permanentRecordIndicator>المؤشر الدائم للسجل</permanentRecordIndicator>
-    <containsRecordFolders>المجلد المحتوي للسجل</containsRecordFolders>
-    <defaultMediaType>نوع الوسائط الافتراضي</defaultMediaType>
-    <defaultMarkingList>قائمة التأشير الافتراضية</defaultMarkingList>
-    <defaultOriginatingOrganization>منظمة البعث الافتراضية</defaultOriginatingOrganization>
-    <vitalRecordIndicator>المؤشرالحيوي للسّجل</vitalRecordIndicator>
-    <processCutoff>عمليّة القطع</processCutoff>
-    <eventTrigger>نوابض الحدث</eventTrigger>
-    <processHold>إرجاء العملية</processHold>
-    <processTransfer>عمليّة التّحويل</processTransfer>
-    <transferBlockSize>حجم كتلة التحويل</transferBlockSize>
-    <processAccession>Process Accession</processAccession>
-    <accessionBlockSize>حجم كتلة الاكتساب</accessionBlockSize>
-    <processDestruction>عمليّة الاتلاف</processDestruction>
-    <location>المكان</location>
-    <LinkURL>عنوان الموارد الموحّد(URL)</LinkURL>
     </label>
   </UIDocumentForm>
  
@@ -62,17 +44,7 @@
       </label>
     </dialog>
   </HtmlFile>
-  <!--
-  ###################### resoucebundle for exo:calendar dialogs template ####
-  -->
-  <Calendar>
-    <dialog>
-      <label>
-        <name>#{word.name}</name>
-        <shared>مشترك</shared>
-      </label>
-    </dialog>
-  </Calendar>
+
   <!--
   ###################### resoucebundle for nt:file dialogs template ####
   -->
@@ -110,56 +82,6 @@
       <actionName>#{word.name}</actionName>
     </label>
   </EditFormAction>
-  <!--
-  ###################### resoucebundle for exo:bacupAction dialogs template ####
-  -->
-  <Backup>
-    <dialog>
-      <label>
-        <id>المعرف الوحيد</id>
-        <name>#{word.name}</name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <description>#{word.description}</description>
-        <to-workspace>الى فضاء العمل</to-workspace>
-        <with-path>المسار</with-path>
-      </label>
-    </dialog>
-  </Backup>
-  <!--
-  ###################### resoucebundle for exo:getmail dialogs template ####
-  -->
-  <Getmail>
-    <dialog>
-      <label>
-        <id>المعرف الوحيد</id>
-        <name>#{word.name}</name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <protocol>البروتوكول</protocol>
-        <host>المضيف</host>
-        <port>المنفذ</port>
-        <folder>المجلد</folder>
-        <username>#{word.userName}</username>
-        <password>كلمةالسر</password>
-        <description>#{word.description}</description>
-        <stote-path>مسار التخزين</stote-path>
-      </label>
-    </dialog>
-  </Getmail>
-  <!--
-  ###################### resoucebundle for exo:iCalendarGenerateAction dialogs template ####
-  -->
-  <Icalendar>
-    <dialog>
-      <label>
-        <id>المعرف الوحيد</id>
-        <action-name>اسم العمل</action-name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <description>#{word.description}</description>
-        <calendar-file-name>اسم ملف الرزنامة</calendar-file-name>
-        <query-items>#{Ecm.dialog.label.query-items}</query-items>
-      </label>
-    </dialog>
-  </Icalendar>
  
   <!--
   ###################### resoucebundle for exo:addMetadataAction dialogs template ####
@@ -238,53 +160,7 @@
       </label>
     </dialog>
   </ElementSet>
-  <!--
-  ###################### resoucebundle for rma:cutoffable dialogs template ####
-  -->
-  <Cutoffable>
-    <dialog>
-      <label>
-        <cutoff-executed>تمّ تشغيل القطع</cutoff-executed>
-        <cutoff-now>قطع فوري</cutoff-now>
-        <cutoff-date-time>تاريخ و توقيت القطع</cutoff-date-time>
-        <cutoff-event>حدث القطع</cutoff-event>
-        <cutoff-obsolete>القطع المهمل</cutoff-obsolete>
-        <cutoff-superseded>قطع التعويض</cutoff-superseded>
-      </label>
-    </dialog>
-  </Cutoffable>
-  <!--
-  ###################### resoucebundle for rma:destroyable dialogs template ####
-  -->
-  <Destroyable>
-    <dialog>
-      <label>
-        <destruction-date>تاريخ الاتلاف</destruction-date>
-      </label>
-    </dialog>
-  </Destroyable>
-  <!--
-  ###################### resoucebundle for rma:accessControllable dialogs template ####
-  -->
-  <AccessControllable>
-    <dialog>
-      <label>
-        <owner>الصاحب</owner>
-        <permissions>الصلاحيات</permissions>
-      </label>
-    </dialog>
-  </AccessControllable>
-  <!--
-  ###################### resoucebundle for rma:accessionable dialogs template ####
-  -->
-  <Accessionable>
-    <dialog>
-      <label>
-        <accession-executed>اكتساب منفذ</accession-executed>
-        <accession-date>تاريخ الاكتساب</accession-date>
-      </label>
-    </dialog>
-  </Accessionable>
+
   <!--
   ###################### resoucebundle for exo:actionable dialogs template ####
   -->
@@ -296,41 +172,7 @@
       </label>
     </dialog>
   </Actionable>
-  <!--
-  ###################### resoucebundle for exo:categorized dialogs template ####
-  -->
-  <Categorized>
-    <dialog>
-      <label>
-        <category>#{word.category}</category>
-      </label>
-    </dialog>
-  </Categorized>
-  <!--
-  ###################### resoucebundle for rma:holdable dialogs template ####
-  -->
-  <Holdable>
-    <dialog>
-      <label>
-        <hold-executed>إرجاء منفذ</hold-executed>
-        <hold-until>إرجاء حتى</hold-until>
-        <holds-discretionary>Discretionary Hold</holds-discretionary>
-        <hold-until-event>إرجاء الى حين حدث</hold-until-event>
-        <freeze>تجميد</freeze>
-      </label>
-    </dialog>
-  </Holdable>
-  <!--
-  ###################### resoucebundle for rma:lockable dialogs template ####
-  -->
-  <Lockable>
-    <dialog>
-      <label>
-        <lock-owner>صاحب القفل</lock-owner>
-        <lock-is-deep>قفل متكرر</lock-is-deep>
-      </label>
-    </dialog>
-  </Lockable>
+
   <!--
   ###################### resoucebundle for exo:move dialogs template ####
   -->
@@ -355,31 +197,7 @@
       </label>
     </dialog>
   </Published>
-  <!--
-  ###################### resoucebundle rma:record dialogs template ####
-  -->
-  <Record>
-    <dialog>
-      <label>
-        <supplemental-marking-list>القائمة الإضافية للتسجيل</supplemental-marking-list>
-        <subject>#{word.subject}</subject>
-        <record-identifier>معرف السجل</record-identifier>
-        <originator>الصانع</originator>
-        <format>#{word.format}</format>
-        <addresses>العناوين</addresses>
-        <originating-organization>المنظمة الاصلية</originating-organization>
-        <other-addresses>عناوين اخرى</other-addresses>
-        <publication-date>تاريخ النشر</publication-date>
-        <record-note>مذكرة السجل</record-note>
-        <date-received>تاريخ الاستقبال</date-received>
-        <media-format>شكل الوسيط</media-format>
-        <is-obsolete>مهمل</is-obsolete>
-        <date-field>مجال التاريخ</date-field>
-        <superseded>معوض</superseded>
-        <uuid>UUID</uuid>
-      </label>
-    </dialog>
-  </Record>
+ 
   <!--
   ###################### resoucebundle mix:referenceable dialogs template ####
   -->
@@ -411,18 +229,7 @@
       </label>
     </dialog>
   </RssEnable>
-  <!--
-  ###################### resoucebundle rma:transferable dialogs template ####
-  -->
-  <Transferable>
-    <dialog>
-      <label>
-        <transfer-executed>تمّت عمليّة التحويل</transfer-executed>
-        <transfer-date>تاريخ التحويل</transfer-date>
-        <transfer-location>مكان التحويل</transfer-location>
-      </label>
-    </dialog>
-  </Transferable>
+
   <!--
   ###################### resoucebundle mix:versionable dialogs template ####
   -->
@@ -438,18 +245,7 @@
       </label>
     </dialog>
   </Versionable>
-  <!--
-  ###################### resoucebundle rma:vitalRecord dialogs template ####
-  -->
-  <VitalRecord>
-    <dialog>
-      <label>
-        <is-vital-record>السجل حيوي</is-vital-record>
-        <prev-review-date>تاريخ المراجعة السابقة</prev-review-date>
-        <next-review-date>تاريخ المراجعة المُـقبلة</next-review-date>
-      </label>
-    </dialog>
-  </VitalRecord>
+
   <!--
   ##################### resoucebundle for resouce container dialogs template#####
   -->
@@ -519,8 +315,6 @@
 <CLASSIFIED>مُصنّف</CLASSIFIED>
 <UNCLASSIFIED>غير مُصنّف</UNCLASSIFIED>
 <NOCONTRACT>بدون عَقد</NOCONTRACT>
-<true>True</true>
-<false>False</false>
 <one-minute>دقيقة واحدة</one-minute>
 <hourly>كل ساعة</hourly>
 <daily>يوميا</daily>
@@ -534,15 +328,6 @@
   <property_added>إضافة خاصية</property_added>
   <property_removed>إزالة الخاصية</property_removed>
   <property_changed>تعديل الملكية</property_changed>
-  <SendMail>
-    <dialog>
-      <label>
-        <isDeep>عميق</isDeep>
-        <nodetypes>نوع العقدة</nodetypes>
-        <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
-      </label>
-    </dialog>
-  </SendMail>
 
   <ScriptAction>
     <dialog>
@@ -554,26 +339,6 @@
     </dialog>
   </ScriptAction>
 
-  <Getmail>
-    <dialog>
-      <label>
-        <isDeep>عميق</isDeep>
-        <nodetypes>نوع العقدة</nodetypes>
-        <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
-      </label>
-    </dialog>
-  </Getmail>
-
-  <Rss>
-    <dialog>
-      <label>
-        <isDeep>عميق</isDeep>
-        <nodetypes>نوع العقدة</nodetypes>
-        <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
-      </label>
-    </dialog>
-  </Rss>
-
   <AddMetadata>
     <dialog>
       <label>
@@ -583,26 +348,6 @@
       </label>
     </dialog>
   </AddMetadata>
-
-  <ReloadAction>
-    <dialog>
-      <label>
-        <isDeep>عميق</isDeep>
-        <nodetypes>نوع العقدة</nodetypes>
-        <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
-      </label>
-    </dialog>
-  </ReloadAction>
-
-  <Transform>
-    <dialog>
-      <label>
-        <isDeep>عميق</isDeep>
-        <nodetypes>نوع العقدة</nodetypes>
-        <affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
-      </label>
-    </dialog>
-  </Transform>
 
   <EnableVersioning>
     <dialog>
@@ -624,31 +369,6 @@
     </dialog>
   </AutoVersioning>
 
-  <!--
-  ###################### resoucebundle exo:contentPublishing dialogs template ####
-  -->
-  <ContentPublishing>
-    <dialog>
-      <label>
-        <id>المعرف</id>
-        <name>#{word.name}</name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <description>#{word.description}</description>
-        <validator>المكلّف بالمصادقة</validator>
-        <supervisor>المراقب</supervisor>
-        <public-workspace>فضاء النشر</public-workspace>
-        <public-path>مسار النشر</public-path>
-        <pending-workspace>فضاء في حالة انتظار</pending-workspace>
-        <pending-path>مسار في حالة انتظار</pending-path>
-        <backup-workspace>فضاء الحفظ</backup-workspace>
-        <backup-path>مسار الحفظ</backup-path>
-        <trash-workspace>فضاء سلة المهملات</trash-workspace>
-        <trash-path>مسار سلة المهملات</trash-path>
-<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
-      </label>
-    </dialog>
-  </ContentPublishing>
-  
   <AccessibleMedia>
   <dialog>
   <label>

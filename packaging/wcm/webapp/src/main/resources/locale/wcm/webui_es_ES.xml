@@ -43,12 +43,12 @@
     <label>
       <wcm-view>Web</wcm-view>
       <admin-view>Admin</admin-view>
-      <icon-view>Icons</icon-view>
-      <thumbails-view>Thumbnails</thumbails-view>
-      <list-view>List</list-view>
+      <icon-view>Iconos</icon-view>
+      <thumbails-view>Miniaturas</thumbails-view>
+      <list-view>Lista</list-view>
       <authoring-view>Authoring</authoring-view>
-      <wcm-category-view>Categories</wcm-category-view>
-      <file-view>File Management View</file-view>
+      <wcm-category-view>Categorías</wcm-category-view>
+      <file-view>Vista de la gestión de archivos</file-view>
     </label>
   </Views>
 
@@ -68,7 +68,7 @@
       <child-not-found>No Page Found.</child-not-found>
     </msg>
     <title>
-      <select>Select</select>
+      <select>Seleccionar</select>
     </title>
   </UIPageSelectorPanel>
 
@@ -180,14 +180,14 @@
       <Location>Site Name</Location>
       <SearchByName>Search by Name</SearchByName>
       <Fulltext>A word or phrase in context</Fulltext>
-      <Property>Property</Property>
+      <Property>Propiedad</Property>
       <Contain>Contain</Contain>
       <FromDate>From Date</FromDate>
       <ToDate>To Date</ToDate>
       <DocumentType>Document Type</DocumentType>
     </title>
     <tooltip>
-      <AddMetadataType>Add Property</AddMetadataType>
+      <AddMetadataType>Añadir propiedad</AddMetadataType>
       <AddNodeType>Add Node Type</AddNodeType>
     </tooltip>    
     <label>
@@ -221,14 +221,14 @@
       <Cancel>Cancelar</Cancel>
     </action>
     <label>
-      <metadataType>Metadata Type</metadataType>
-      <property_select>Property</property_select>
+      <metadataType>Tipo de metadatos</metadataType>
+      <property_select>Propiedad</property_select>
     </label>
   </UIContentPropertySelector>
 
   <WebContentNodeTypePopup>
     <title>
-      <UIContentNodeTypeSelector>Node Type Selector</UIContentNodeTypeSelector>
+      <UIContentNodeTypeSelector>Selector del Tipo de Nodo</UIContentNodeTypeSelector>
     </title>
   </WebContentNodeTypePopup>
 
@@ -247,7 +247,7 @@
       <action>Acción</action>
     </header>
     <title>
-      <Select>Select</Select>
+      <Select>Seleccionar</Select>
       <View>Ver</View>
     </title>
     <msg>
@@ -294,7 +294,7 @@
       <action>Acción</action>
     </header>
     <msg>
-      <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
+      <confirm-delete-permission>¿Está seguro que desea eliminar este permiso?</confirm-delete-permission>
       <no-permission-remove>You do not have permission.</no-permission-remove>
       <access-denied>Access denied.</access-denied>
       <node-locked>The path element {0} or one of its parents is locked.</node-locked>
@@ -307,7 +307,7 @@
   <UIPermissionInputSetWithAction>
     <title>
       <SelectUser>Seleccionar Usuario</SelectUser>
-      <SelectMember>Select Member</SelectMember>
+      <SelectMember>Seleccionar miembro</SelectMember>
       <AddAny>Add Any Permission</AddAny>
     </title>
   </UIPermissionInputSetWithAction>
@@ -326,7 +326,7 @@
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Seleccionar grupo</selectGroup>
       <selectMembership>Seleccione la membresía</selectMembership>
     </label>
   </UIGroupMemberSelector>
@@ -373,10 +373,10 @@
 
   <Signin>
     <welcome>Bienvenido</welcome>
-    <login>Login</login>
+    <login>Ingresar</login>
     <logout>Logout</logout>
     <language>Cambiar Idioma</language>
-    <register>Register</register>
+    <register>Registro</register>
   </Signin>
   <UIDriveForm>
 <label>
@@ -428,13 +428,13 @@
   
   <CategoryNavigationTemplate>
   <label>
-  <home>Home</home>
+  <home>Inicio</home>
   </label>
   </CategoryNavigationTemplate>
   
   <Breadcrumb>
   <label>
-  <home>Home</home>
+  <home>Inicio</home>
   </label>  
   </Breadcrumb>
 </bundle>

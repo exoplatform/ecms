@@ -50,35 +50,7 @@
       <vote-restriction>Sie können nicht mehrmals abstimmen.</vote-restriction>
     </msg>
   </UIVoteForm>
-  <!--
-  #############################################################################
-  #             org.exoplatform.ecm.webui.component.explorer.UIDrivesBrowser  #
-  #############################################################################
-  -->
-  <UIDrivesBrowser>
-    <title>
-      File Explorer Main Drives
-      <repository>Laufwerke im Repository</repository>
-      <repositoryList>Repositorys</repositoryList>
-      <PersonalDrives>Persönliche Laufwerke</PersonalDrives>
-      <GroupDrives>Gruppenlaufwerke</GroupDrives>
-      <GeneralDrives>Allgemeine Laufwerke</GeneralDrives>
-    </title>
-    <icon>
-      <workspace>
-        <production>ProductionIcon</production>
-        <draft>DraftIcon</draft>
-        <backup>BackupIcon</backup>
-        <digital-assets>AssetsIcon</digital-assets>
-      </workspace>
-    </icon>
-    <msg>
-      <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
-      <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
-      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
-    </msg>
-  </UIDrivesBrowser>
+ 
   <!--
   #############################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer    #
@@ -122,7 +94,6 @@
       <backToJCR>Zurück zu JCR Hauptlaufwerke</backToJCR>
       <setUpBrowser>Ihre Browsing-Präferenzen einstellen</setUpBrowser>
       <refesh>Aktualisieren</refesh>
-      <saveSession>Sitzung speichern</saveSession>
       <currentDrive>Aktuelles Laufwerk</currentDrive>
       <selectView>Ansicht auswählen</selectView>
       <showSideBar>Seitenleiste anzeigen</showSideBar>
@@ -130,19 +101,7 @@
       <backTo>Zurück</backTo>
     </label>
   </UIViewBar>
-  <Views>
-    <label>
-      <simple-view>Miniaturansicht</simple-view>
-      <cover-flow>Coverflow</cover-flow>
-      <admin-view>Details</admin-view>
-      <icon-view>Piktogramme</icon-view>
-      <system-view>Detaillierte Informationen</system-view>
-      <anonymous-view>Piktogramme</anonymous-view>
-      <taxonomy-list>Detaillierte Informationen</taxonomy-list>
-      <taxonomy-icons>Piktogramme</taxonomy-icons>
-      <timeline-view>Zeitachsenansicht</timeline-view>
-    </label>
-  </Views>
+
   <!--
   #############################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UITreeExplorer    #
@@ -185,7 +144,6 @@
       <showHiddenNode>Ausgeblendeten Knoten anzeigen:</showHiddenNode>
       <showNonDocument>Alle Knotentypen anzeigen:</showNonDocument>
       <showRefDocuments>Referenzierte Dokumente anzeigen:</showRefDocuments>
-      <showItemsByUserInTimeline>Show items by user in Timeline View</showItemsByUserInTimeline>
       <enableDragAndDrop>Ziehen und Ablegen aktivieren:</enableDragAndDrop>
       <sortBy>Sortieren nach:</sortBy>
       <order>Sortieren nach:</order>
@@ -242,7 +200,6 @@
       <UIActionContainer>Aktion bearbeiten</UIActionContainer>
       <UIFolderForm>Neuer Ordner</UIFolderForm>
       <UIUploadManager>Datei hochladen</UIUploadManager>
-      <UITicketForm>Create New Ticket</UITicketForm>
       <UIReferencesList>Referenzliste</UIReferencesList>
       <UIExportNode>Exportieren</UIExportNode>
       <UINodeTypeInfo>Knotentyp Informationen</UINodeTypeInfo>
@@ -274,8 +231,6 @@
       <UIRestoreConfirmMessage>Wiederherstellung bestätigen</UIRestoreConfirmMessage>
       <UIActivePublication>Enroll to Publication Lifecycle</UIActivePublication>
       <UITaggingForm>Dokument taggen</UITaggingForm>
-      <UIMultiLanguageForm>Mehrsprachig</UIMultiLanguageForm>
-      <UIMultiLanguageManager>Mehrsprachig</UIMultiLanguageManager>
       <UIThumbnailForm>Miniaturbild hinzufügen</UIThumbnailForm>
       <UIAllItemsPreferenceForm>Präferenzeneinstellungen</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Wiederherstellungspfad auswählen</UISelectRestorePath>
@@ -313,12 +268,10 @@
       <Upload>Hochladen</Upload>
       <Paste>Einfügen</Paste>
       <Search>Suche</Search>
-      <CreateTicket>Neues Ticket</CreateTicket>
       <WatchDocument>Überwachen/nicht mehr überwachen</WatchDocument>
       <TaggingDocument>Tag</TaggingDocument>
       <Vote>Abstimmen</Vote>
       <Comment>Kommentieren</Comment>
-      <MultiLanguage>Lokalisierten Inhalte hinzufügen/bearbeiten</MultiLanguage>
       <ManageVersions>Versionen</ManageVersions>
       <ManageAuditing>Audit</ManageAuditing>
       <ManagePublications>Veröffentlichungen</ManagePublications>
@@ -372,8 +325,6 @@
       <watch-checkedin>Sie müssen diesen Knoten auschecken, bevor den überwachen zu können.</watch-checkedin>
       <unsupported-tagging>Nur Dokumenten können getagged werden.</unsupported-tagging>
       <tagnode-checkedin>Sie müssen den Knoten auschecken, bevor den taggen, zu können.</tagnode-checkedin>
-      <unsupported-multilanguage>You cannot add languages to this node because this node is not the document type or is mixed in some types.</unsupported-multilanguage>
-      <multilang-checkedin>Sie müssen den Knoten auschecken, bevor eine Sprache zu dem hinzuzufügen.</multilang-checkedin>
     </msg>
     <title>
       <select-tab>Reiter auswählen</select-tab>
@@ -607,13 +558,6 @@
       <CheckOut>Check-out</CheckOut>
       <CheckIn>Check-in</CheckIn>
       <WebDAV>WebDAV-Ansicht</WebDAV>
-      <sendmail>E-Mail senden</sendmail>
-      <transformsd>Transformieren</transformsd>
-      <reloadBP>BP Wiederladen</reloadBP>
-      <workflow>Arbeitsfluss</workflow>
-      <createRSS>RSS erstellen</createRSS>
-      <icalendara>iKalender erstellen</icalendara>
-      <getmail>Nachrichten prüfen</getmail>
       <autoversion>Automatische Versionierung</autoversion>
       <Custom>Personalisieren</Custom>
       <AddFolder>Neuer Ordner</AddFolder>
@@ -632,32 +576,7 @@
       <WebDavView>Download and Allow Editing</WebDavView>
     </event>
   </ECMContextMenu>
-  <!--
-  #############################################################################
-  #             org.exoplatform.ecm.webui.component.explorer.UITicketForm     #
-  #############################################################################
-  -->
-  <UITicketForm>
-    <title>Create Ticket</title>
-    <label>
-      <users>Benutzer</users>
-      <permission>Permission</permission>
-      <creator>Creator</creator>
-      <accessTime>Access Time</accessTime>
-      <accessLimit>Access Limit</accessLimit>
-      <description>Description</description>
-      <sendToMail>Send to Mail</sendToMail>
-      <ticketID>Ticket ID</ticketID>
-    </label>
-    <action>
-      <Cancel>#{word.cancel}</Cancel>
-      <Update>#{word.update}</Update>
-      <Save>#{word.save}</Save>
-    </action>
-    <msg>
-      <unable-create>Cannot create the ticket.</unable-create>
-    </msg>
-  </UITicketForm>
+ 
   <!--
   #############################################################################
   #     org.exoplatform.ecm.webui.component.explorer.UIReferencesList         #
@@ -718,7 +637,7 @@
       <UISelectedCategoriesGrid>Referenzierte Kategorien</UISelectedCategoriesGrid>
       <UIWorkflowPublicationActionForm>Aktion auf dem Veröffentlichungslebenszyklus</UIWorkflowPublicationActionForm>
       <UIWorkflowPublicationViewForm>Veröffentlichungslebenszyklus-Ansicht</UIWorkflowPublicationViewForm>
-      <metadatasitemetadata>Seite Metadaten</metadatasitemetadata>
+      <metadatasitemetadata>Site Metadata</metadatasitemetadata>
       <dcelementset>Dublin Core</dcelementset>
     </title>
   </UITabPane>
@@ -786,37 +705,7 @@
       <property-not-exist>Die Eigenschaft {0} existiert nicht.</property-not-exist>
     </msg>
   </UIPropertyForm>
-  <!--
-  #############################################################################
-  #           org.exoplatform.ecm.webui.component.explorer.UIMixinTypeSelect  #
-  #############################################################################
-  -->
-  <UIMixinTypeSelect>
-    <label>
-      <selectTemplate>Vorlage auswählen</selectTemplate>
-    </label>
-  </UIMixinTypeSelect>
-  <UIMixinTypeForm>
-    <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
-      <Reset>Zurücksetzen</Reset>
-    </action>
-  </UIMixinTypeForm>
-  <!--
-  #############################################################################
-  #           org.exoplatform.ecm.webui.component.explorer.UIMetadataTab     #
-  #############################################################################
-  -->
-  <UIMetadataTab>
-    <title>Input values for metadata elements</title>
-    <label>
-      <metadataName>Metadatenname</metadataName>
-    </label>
-    <action>
-      <Save>#{word.save}</Save>
-    </action>
-  </UIMetadataTab>
+
   <!--
   #############################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UIPermissionInfo #
@@ -893,95 +782,7 @@
       <access-denied>Access denied. You cannot remove this permission.</access-denied>
     </msg>
   </UIPermissionForm>
-  <!--
-  ###############################################################################
-  #             org.exoplatform.ecm.webui.component.explorer.UIDriveDescription #
-  ###############################################################################
-  -->
-  <UIDriveDescription>
-    <title>Beschreibung</title>
-  </UIDriveDescription>
-  <!--
-  ###############################################################################
-  #             org.exoplatform.ecm.webui.component.explorer.UIReferencesList #
-  ###############################################################################
-  -->
-  <!--
-  ################################################################################
-  #          org.exoplatform.ecm.webui.component.explorer.actions.UIUploadForm   #
-  ################################################################################
-  -->
-  <UIUploadForm>
-    <title>Datei hochladen</title>
-    <label>
-      <upload>Datei auswählen</upload>
-      <name>Name</name>
-      <fieldListTaxonomy>Kategorienliste</fieldListTaxonomy>
-    </label>
-    <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
-    </action>
-    <msg>
-      <fileName-error>Bitte wählen Sie eine Datei zum Hochladen aus.</fileName-error>
-      <taxonomyPath-error>Bitte wählen Sie eine Kategorie aus.</taxonomyPath-error>
-      <fileName-invalid>Der Dateiname enthält ungültige Zeichen. Bitte geben Sie den Dateinamen ein oder laden Sie eine andere Datei hoch.</fileName-invalid>
-      <fileName-invalid-with-name>Der Dateiname "{0}" enthält ungültige Zeichen. Bitte geben Sie den Dateinamen nochmal ein oder laden Sie eine andere Datei hoch.</fileName-invalid-with-name>
-      <fileSize-too-big>Die Dateigröße ist zu groß. Bitte teilen Sie es in kleinere Dateien oder verwenden Sie WebDav zum Hochladen.</fileSize-too-big>
-      <name-is-exist>Der Name "{0}" ist bereits vorhanden.</name-is-exist>
-      <contraint-violation>Sie können nicht den Knoten "{0}" als untergeordneten Knoten dieses Knotens hinzufügen.</contraint-violation>
-      <lock-exception>Die Datei kann nicht hochgeladen werden. Dieser Knoten ist gesperrt.</lock-exception>
-      <confirm-behavior>Der Dateiname "{0}" ist bereits an diesem Speicherort vorhanden. Bitte wählen Sie ein Verhalten unten:</confirm-behavior>
-    </msg>
-  </UIUploadForm>
-  <UIUploadContent>
-    <label>
-      <fileName>Dateiname</fileName>
-      <nodeName>Knotenname</nodeName>
-      <fileSize>Dateigröße</fileSize>
-      <mimeType>MIME-Typ</mimeType>
-    </label>
-    <title>
-      <uploaded-file>Hochgeladene Datei</uploaded-file>
-      <external-metadata>Externe Metadaten</external-metadata>
-      <metadata-name>Metadatenname</metadata-name>
-      <action>Aktion</action>
-    </title>
-    <tooltip>
-      <Edit>Bearbeiten</Edit>
-    </tooltip>
-    <msg>
-      <has-not-template>Die Vorlage '{0}' ist null oder leer.</has-not-template>
-    </msg>
-  </UIUploadContent>
-  <UIUploadContainer>
-    <action>
-      <Close>#{word.close}</Close>
-      <AddMetadata>Metadaten hinzufügen</AddMetadata>
-    </action>
-    <tab>
-      <label>
-        <UIUploadContent>Informationen</UIUploadContent>
-        <UIAddMetadataForm>Metadaten-Formular</UIAddMetadataForm>
-      </label>
-    </tab>
-  </UIUploadContainer>
-  <AddMetadataPopup>
-    <title>
-      <UIExternalMetadataForm>Externe Metadaten hinzufügen</UIExternalMetadataForm>
-    </title>
-  </AddMetadataPopup>
-  <UIExternalMetadataForm>
-    <msg>
-      <can-not-add>The mixin cannot be added to this node.</can-not-add>
-    </msg>
-  </UIExternalMetadataForm>
-  <UIAddMetadataForm>
-    <action>
-      <Cancel>Abbrechen</Cancel>
-      <Save>Speichern</Save>
-    </action>
-  </UIAddMetadataForm>
+
   <!--
   ###############################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UINodeTypeInfo     #
@@ -2060,43 +1861,7 @@
       <tagName>Separate multiple tags by commas ","</tagName>
     </introduction>
   </UITaggingForm>
-  <!--
-  ###################################################################################
-  # org.exoplatform.ecm.webui.component.explorer.popup.actions.UIMultiLanguageForm  #
-  ###################################################################################
-  -->
-  <UIMultiLanguageForm>
-    <label>
-      <languages>Sprache</languages>
-      <default>Standardeinstellung</default>
-    </label>
-    <action>
-      <AddLanguage>Hinzufügen</AddLanguage>
-      <SetDefault>Als Standareinstellung festlegen</SetDefault>
-      <Cancel>#{word.cancel}</Cancel>
-      <View>Ansehen</View>
-    </action>
-    <msg>
-      <access-denied>Access denied. You do not have add permission in this node.</access-denied>
-    </msg>
-  </UIMultiLanguageForm>
-  <UILanguageTypeForm>
-    <label>
-      <typeLang>Sprache</typeLang>
-      <default>Als Standareinstellung festlegen</default>
-      <defaultLang>Standardsprache</defaultLang>
-    </label>
-  </UILanguageTypeForm>
-  <UILanguageDialogForm>
-    <msg>
-      <select-lang>You must select a language and fill in the information before saving.</select-lang>
-      <access-denied>Access denied. You do not have add permission in this node.</access-denied>
-    </msg>
-    <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
-    </action>
-  </UILanguageDialogForm>
+
   <!--
   ###################################################################################
   # org.exoplatform.ecm.webui.component.explorer.popup.info.UIMetadataContainer     #
@@ -2377,31 +2142,6 @@
   <!--
   ###Since ECM version 2.2##############
   -->
-  <!--
-  ###Since ECM version 2.3 Alpha##############
-  -->
-  <UIWorkflowPublicationActionForm>
-    <label>
-      <fieldValidator>Genehmiger</fieldValidator>
-      <fieldDestPath>Zielpfad</fieldDestPath>
-      <fieldBackup>Sicherheitspfad</fieldBackup>
-    </label>
-  </UIWorkflowPublicationActionForm>
-  <workflow_validator>
-    <title>
-      <AddPermission>Berechtigung hinzufügen</AddPermission>
-    </title>
-  </workflow_validator>
-  <workflow_destpath>
-    <title>
-      <AddDestPath>Pfad hinzufügen</AddDestPath>
-    </title>
-  </workflow_destpath>
-  <PublicationService>
-    <WorkflowPublicationPlugin>
-      <nodeValidationRequest>Der Knoten wurde für die Validierung angefordert.</nodeValidationRequest>
-    </WorkflowPublicationPlugin>
-  </PublicationService>
 
   <!--
   ### Since ECM version 2.3 Alpha##############
@@ -2419,14 +2159,11 @@
       <Cancel>Abbrechen</Cancel>
     </action>
     <label>
-      <repository>Repository</repository>
-      <categoryMandatoryWhenFileUpload>Specify a category while uploading a file.</categoryMandatoryWhenFileUpload>
       <uploadFileSizeLimitMB>Die Größenbeschränkung der hochgeladenen Datei (MB)</uploadFileSizeLimitMB>
       <isDirectlyDrive>Direct Drive</isDirectlyDrive>
       <driveName>Laufwerkname</driveName>
       <usecase>Typ auswählen</usecase>
       <SelectNodePath>Pfad auswählen</SelectNodePath>
-      <editInNewWindow>Edit in New Window</editInNewWindow>
       <showTopBar>Show Top Bar</showTopBar>
       <showActionBar>Aktionsleiste anzeigen</showActionBar>
       <showSideBar>Linke Leiste anzeigen</showSideBar>
@@ -2447,7 +2184,6 @@
       <DriveNameInput>UI JCR Explorer Edit Form</DriveNameInput>
     </label>
     <msg>
-      <not-have-social>The Social usecase is not available. Use the Selection one instead.</not-have-social>
       <personal-usecase>The private drive of the current user will be used when you select the Personal usecase.</personal-usecase>
       <drive-edit-permission>You cannot edit the drive name. Please click the Edit button.</drive-edit-permission>
       <path-edit-permission>You cannot edit the path. Please click the Edit button.</path-edit-permission>
@@ -2781,64 +2517,17 @@
       <name-not-allowed>A word or phrase in the content is not allowed.</name-not-allowed>
     </msg>
   </UISimpleSearch>
-  <Drives>
-    <label>
-      <Private>Privat</Private>
-      <Public>Öffentlich</Public>
-      <BackupCenter>Backupcenter</BackupCenter>
-      <CategorizedDocumentsCenter>Categorized Documents Center</CategorizedDocumentsCenter>
-      <CollaborationCenter>Kollaborationscenter</CollaborationCenter>
-      <DigitalAssetsManagementCenter>Managementcenter für digitale Assets</DigitalAssetsManagementCenter>
-      <DMSAdministration>DMS Verwaltung</DMSAdministration>
-      <DocumentsManagementCenter>Dokumenten-Management-Center</DocumentsManagementCenter>
-      <LiveDocumentsCenter>Center für Livedokumente</LiveDocumentsCenter>
-      <PendingDocumentsCenter>Center für ausstehende Dokumente</PendingDocumentsCenter>
-      <RecordsManagementCenter>Managementcenter für Datensätze</RecordsManagementCenter>
-      <SharedUsersSpace>Shared Users Space</SharedUsersSpace>
-      <Systemfiles>Systemdateien</Systemfiles>
-      <ValidationRequestsDocumentsCenter>Validation Requests Documents Center</ValidationRequestsDocumentsCenter>
-    </label>
-  </Drives>
 
 
   <!--
    #############  From DMS 2.6 #############
   -->
-  <UIUploadContent>
-    <tooltip>
-      <ManageMetadata>Metadata verwalten</ManageMetadata>
-    </tooltip>
-    <label>
-      <manageMetadata>Metadata verwalten</manageMetadata>
-    </label>
-  </UIUploadContent>
-  <UIUploadForm>
-    <action>
-      <AddUpload>Datei anhängen</AddUpload>
-      <RemoveUpload>Datei entfernen</RemoveUpload>
-    </action>
-  </UIUploadForm>
-  <UIExternalMetadataForm>
-    <action>
-      <Add>Hinzufügen</Add>
-      <Cancel>Abbrechen</Cancel>
-    </action>
-  </UIExternalMetadataForm>
-    <!--
-   #############  From DMS 2.6 #############
-   -->
   <ECMContextMenu>
       <event>
         <Permlink>Dokument anzeigen</Permlink>
       </event>
   </ECMContextMenu>
-  <UIUploadContainer>
-    <tab>
-      <label>
-        <UIListMetadata>List External Metadata</UIListMetadata>
-      </label>
-    </tab>
-  </UIUploadContainer>
+  
 
   <!--
     ############  From DMS 2.6 ##############
@@ -2865,11 +2554,6 @@
       <confirm-deletecomment>Möchten Sie diesen Kommentar wirklich löschen?</confirm-deletecomment>
     </msg>
   </UIDocumentInfo>
- <UIDrivesBrowser>
-  <msg>
-    <drive-not-exist>Das Laufwerk "{0}" wurde nicht gefunden; Ihnen fehlt die Berechtigung, auf diesem Repository zuzugreifen.</drive-not-exist>
-  </msg>
- </UIDrivesBrowser>
 
  <UIExportNode>
   <msg>
@@ -2901,89 +2585,6 @@
     </title>
   </SameNamePopup>
 
-  <UISingleUploadForm>
-    <title>Datei hochladen</title>
-    <label>
-      <upload>Datei auswählen</upload>
-      <name>Name</name>
-      <fieldListTaxonomy>Kategorienliste</fieldListTaxonomy>
-    </label>
-    <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
-    </action>
-    <msg>
-      <fileName-error>Please make sure that you uploaded the selected file to the server using the Upload icon.</fileName-error>
-      <taxonomyPath-error>Bitte wählen Sie eine Kategorie aus.</taxonomyPath-error>
-      <fileName-invalid>Der Dateiname enthält ungültige Zeichen. Bitte geben Sie den Dateinamen ein oder laden Sie eine andere Datei hoch.</fileName-invalid>
-      <fileSize-too-big>The file size is too big. Please split it into smaller files or use WebDav to upload.</fileSize-too-big>
-      <name-is-exist>The name '{0}' already exists. You cannot upload a file with the same name, except for 'nt:file'.</name-is-exist>
-      <contraint-violation>You cannot add the node '{0}' to this node because it is not allowed as child's node type for parent node type.</contraint-violation>
-      <lock-exception>Dieser Knoten ist gesperrt. Bestimmte Aktionen können daher nicht ausgeführt werden.</lock-exception>
-    </msg>
-  </UISingleUploadForm>
-  <UISingleUploadContent>
-    <label>
-      <fileName>Dateiname</fileName>
-      <nodeName>Knotenname</nodeName>
-      <fileSize>Dateigröße</fileSize>
-      <mimeType>MIME-Typ</mimeType>
-    </label>
-    <title>
-      <uploaded-file>Hochgeladene Datei</uploaded-file>
-      <external-metadata>Externe Metadaten</external-metadata>
-      <metadata-name>Metadatenname</metadata-name>
-      <action>Aktion</action>
-    </title>
-    <tooltip>
-      <Edit>Bearbeiten</Edit>
-    </tooltip>
-    <msg>
-      <has-not-template>Die Vorlage '{0}' ist null oder leer.</has-not-template>
-    </msg>
-  </UISingleUploadContent>
-  <UISingleUploadContainer>
-    <action>
-      <Close>#{word.close}</Close>
-      <AddMetadata>Metadaten hinzufügen</AddMetadata>
-    </action>
-    <tab>
-      <label>
-        <UISingleUploadContent>Information</UISingleUploadContent>
-        <UISingleAddMetadataForm>Metadaten-Formular</UISingleAddMetadataForm>
-      </label>
-    </tab>
-  </UISingleUploadContainer>
-  <UISingleExternalMetadataForm>
-    <action>
-      <Add>Hinzufügen</Add>
-      <Cancel>Abbrechen</Cancel>
-    </action>
-  </UISingleExternalMetadataForm>
-  <UISingleUploadContainer>
-    <tab>
-      <label>
-        <UIListMetadata>Liste externer Metadaten</UIListMetadata>
-      </label>
-    </tab>
-  </UISingleUploadContainer>
-  <AddMetadataPopup>
-    <title>
-      <UISingleExternalMetadataForm>Externe Metadaten hinzufügen</UISingleExternalMetadataForm>
-    </title>
-  </AddMetadataPopup>
-  <UISingleExternalMetadataForm>
-    <msg>
-      <can-not-add>This node cannot add mixin.</can-not-add>
-    </msg>
-  </UISingleExternalMetadataForm>
-  <UISingleAddMetadataForm>
-    <action>
-      <Cancel>Abbrechen</Cancel>
-      <Save>Speichern</Save>
-    </action>
-  </UISingleAddMetadataForm>
-
   <UIAllItems>
     <label>
       <OwnedByMe>Im Besitz von mir</OwnedByMe>
@@ -3007,36 +2608,6 @@
           <Descending>Absteigend</Descending>
       </label>
   </UIPreferencesForm>
-
-  <UIDocumentInfo>
-    <label>
-      <Today>Heute</Today>
-      <Yesterday>Gestern</Yesterday>
-      <EarlierThisWeek>Früher diese Woche</EarlierThisWeek>
-      <EarlierThisMonth>Früher diesen Monat</EarlierThisMonth>
-      <EarlierThisYear>Früher in diesem Jahr</EarlierThisYear>
-      <tooltip>
-        <expand>Klicken Sie hier, um eine vollständige Liste dieser Kategorie zu erhalten</expand>
-        <collapse>Klicken Sie hier, um alle Kategorien anzeigen</collapse>
-      </tooltip>
-    </label>
-    <header>
-      <dateTime>Datum-Uhrzeit</dateTime>
-      <name>Name</name>
-      <title>Titel des Dokuments</title>
-    </header>
-    <tooltip>
-      <View>Anzeigen</View>
-      <RemoveFromFavourite>Aus den Favoriten entfernen</RemoveFromFavourite>
-      <AddToFavourite>Zu den Favoriten hinzufügen</AddToFavourite>
-      <timelineFavouriteDESC>Sort by Favorite: Descending order</timelineFavouriteDESC>
-      <timelineFavouriteASC>Sort by Favorite: Ascending order</timelineFavouriteASC>
-      <timelineDateTimeASC>Sort by Modified Time: Ascending order</timelineDateTimeASC>
-      <timelineDateTimeDESC>Sort by Modified Time: Descending order</timelineDateTimeDESC>
-      <timelineNameASC>Sort by Name: Ascending order</timelineNameASC>
-      <timelineNameDESC>Sort by Name: Descending order</timelineNameDESC>
-    </tooltip>
-  </UIDocumentInfo>
 
   <UISavedSearches>
     <title>
@@ -3078,7 +2649,7 @@
       <ShowMusic>Alle Musikdateien anzeigen</ShowMusic>
       <ShowImages>Alle Bilddateien anzeigen</ShowImages>
       <ShowDocuments>Alle Dokumentdateien anzeigen</ShowDocuments>
-      <ShowContents>Alle Dokumenttypen anzeigen</ShowContents>
+      <ShowContent>Show all document types</ShowContent>
     </title>
   </UIAllItemsByType>
 
@@ -3139,8 +2710,6 @@
    <UITaggingForm>
     <label>
       <Public>Öffentlich</Public>
-      <Group>Gruppe</Group>
-      <Site>Seite</Site>
       <Private>Privat</Private>
       <tagScopes>Tag Scopes</tagScopes>
     </label>
@@ -3148,7 +2717,6 @@
 
   <UITagExplorer>
     <title>
-      <EditPrivateTags>Private Tags bearbeiten</EditPrivateTags>
       <PublicTags>Tags</PublicTags>
       <EditPublicTags>Tags bearbeiten</EditPublicTags>
       <PrivateTags>Tags</PrivateTags>
