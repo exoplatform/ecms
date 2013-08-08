@@ -112,6 +112,7 @@
 													<%
 													if (uicomponent.isViewMode()){
                             if (isShowTitle) {
+                              %><div title="$itemName" class="$itemIcon FL"></div><%
                               if (isShowLink) {
                                 %><div class="Title"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="$itemName">$itemName</a></div><%
                               } else {                          
@@ -125,6 +126,7 @@
                           }
                           else {
                             if (isShowTitle) {
+                              %><div title="$itemName" class="$itemIcon FL"></div><%
                               if (isShowLink) {
                                 %><div class="Title" propertyName="<%=propertyName%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" language="<%=language%>" contenteditable="true"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="$itemName">$itemName</a></div><%
                               } else {

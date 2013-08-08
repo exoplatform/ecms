@@ -99,7 +99,9 @@ InlineEditor.presentationAjaxRequest = function (url, params, method) {
 			if(locale_message == "OK") {
 				$('.uiWaitting').remove();
 				$('.markLayerInline').remove();
-				CKEDITOR.instances[InlineEditor.editorName].updateElement();
+				var focusEditor = CKEDITOR.instances[InlineEditor.editorName];				
+				focusEditor.updateElement();
+				location.reload(true);
 			}
 			else alert(locale_message);
 		      }

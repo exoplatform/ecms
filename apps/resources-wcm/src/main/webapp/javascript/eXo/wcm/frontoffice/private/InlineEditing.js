@@ -197,7 +197,8 @@
 			if(locale_message == "OK") {
 				gj('.uiWaitting').remove();
 				gj('.markLayerInline').remove();
-				CKEDITOR.instances[InlineEditor.editorName].updateElement();			
+				CKEDITOR.instances[InlineEditor.editorName].updateElement();
+				location.reload(true);			
 			}
 			else alert(locale_message);
 		      }

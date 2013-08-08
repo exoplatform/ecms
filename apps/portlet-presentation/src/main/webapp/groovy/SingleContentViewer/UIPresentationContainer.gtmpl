@@ -57,7 +57,7 @@
 			  jsManager.require("SHARED/wcm-utils", "wcmutil");      
 		    jsManager.require("SHARED/jquery", "gj").addScripts("gj('#"+uicomponent.id+"').mouseenter( function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','UIPresentationContainer $hoverClass');});").
 		    addScripts("gj('#"+uicomponent.id+"').mouseleave( function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','UIPresentationContainer');});").
-		    addScripts("gj('#"+uicomponent.id+"').mousedown( function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','UIPresentationContainer');});").
+		    addScripts("gj('#"+uicomponent.id+"').click( function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','UIPresentationContainer');});").
 		    addScripts("wcmutil.WCMUtils.setZIndex(10);");
         
 			  if (Utils.isShowQuickEdit() && !LockUtil.isLocked(node)) {	%>	

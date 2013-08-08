@@ -47,7 +47,6 @@
 </div>
 <%
   def jsManager = rcontext.getJavascriptManager(); 
-  jsManager.require("SHARED/jquery", "gj"); 
   %>
     <script type="text/javascript">
       require(['/CommonsResources/ckeditor/ckeditor.js'], function() {      

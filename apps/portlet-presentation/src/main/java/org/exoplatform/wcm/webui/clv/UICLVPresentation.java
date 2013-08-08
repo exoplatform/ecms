@@ -691,7 +691,7 @@ public class UICLVPresentation extends UIContainer {
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
     sb.append("<div id=\""+id+"\" class=\"" + cssClass + " \">");
     if (Utils.isShowQuickEdit()) {
-      sb.append("  <div class=\"edittingContent\" style=\" z-index: 5\">");
+      sb.append("  <div class=\"edittingContent\" style=\" z-index: 105\">");
       sb.append("    <div class=\"edittingToolBar clearfix\" >");
       
       sb.append("    <div class=\"btn-group\" >");
@@ -776,7 +776,7 @@ public class UICLVPresentation extends UIContainer {
     JavascriptManager jsManager = portletRequestContext.getJavascriptManager();
     jsManager.getRequireJS().addScripts("gj('#"+id+"').mouseenter( function() {eXo.ecm.WCMUtils.changeStyleClass('"+id+"','"+className+" "+hoverClass+"');});");
     jsManager.getRequireJS().addScripts("gj('#"+id+"').mouseleave( function() {eXo.ecm.WCMUtils.changeStyleClass('"+id+"','"+className+"');});");
-    jsManager.getRequireJS().addScripts("gj('#"+id+"').mousedown( function() {eXo.ecm.WCMUtils.changeStyleClass('"+id+"','"+className+"');});");
+    jsManager.getRequireJS().addScripts("gj('#"+id+"').click( function() {eXo.ecm.WCMUtils.changeStyleClass('"+id+"','"+className+"');});");
     return sb.toString();
   }
 
@@ -841,7 +841,7 @@ public class UICLVPresentation extends UIContainer {
       Node parent = node.getParent();
       node.remove();
       parent.getSession().save();
-      event.getRequestContext().addUIComponentToUpdateByAjax(contentListPresentation);
+      //event.getRequestContext().addUIComponentToUpdateByAjax(contentListPresentation);
       Utils.createPopupMessage(contentListPresentation,
                                "UICLVPresentation.msg.delete-content-successfull",
                                null,
@@ -868,7 +868,6 @@ public class UICLVPresentation extends UIContainer {
       HashMap<String, String> context = new HashMap<String, String>();
 
       publicationService.changeState(node, "published", context);
-      event.getRequestContext().addUIComponentToUpdateByAjax(contentListPresentation);
     }
   }
 }
