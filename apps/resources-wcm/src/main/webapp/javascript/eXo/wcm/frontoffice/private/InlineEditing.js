@@ -11,6 +11,8 @@
 	    this.EmptyTitleErrorMsg = "";
 	    this.isModified = false;
 	    this.editorName = "";
+	    this.draft = "";
+	    this.publishLink = "";
 	  }
 	  
 	};
@@ -37,6 +39,8 @@
 			var sitename = container.getAttribute("sitename");
 			var language = container.getAttribute("language");
 			var propertyname = container.getAttribute("propertyname");
+			InlineEditor.draft = container.getAttribute("draftmsg");
+			InlineEditor.publishLink = container.getAttribute("fastpublishlink");
 			var data = "";
 			if(propertyname.indexOf("exo:title") >= 0)
 			  data = e.editable().getText();
@@ -197,8 +201,33 @@
 			if(locale_message == "OK") {
 				gj('.uiWaitting').remove();
 				gj('.markLayerInline').remove();
-				CKEDITOR.instances[InlineEditor.editorName].updateElement();
-				location.reload(true);			
+                                var inlineEditor = CKEDITOR.instances[InlineEditor.editorName];
+				inlineEditor.updateElement();
+				var container = inlineEditor.container.$;
+                                var tmpContainer = container;
+                                var parent = gj(tmpContainer).parent().get(0);
+				var edittingContainer = null;
+				while(!edittingContainer && parent ) {
+					edittingContainer = gj(parent).find(".edittingToolBarContainer, .edittingContent").get(0);
+					if(!edittingContainer) {
+					  tmpContainer = parent;
+					  parent = gj(tmpContainer).parent().get(0);
+					} 
+				}
+				if(edittingContainer) {
+					var currentState = gj(edittingContainer).find(".edittingCurrentState").get(0);
+                                        var spanElem = gj(currentState).find("span").get(0);
+                                        gj(spanElem).remove();
+ 				        gj(currentState).append('<span class="draftText">'+InlineEditor.draft+'</span>');
+					
+					var btrGroup = gj(edittingContainer).find(".btn-group").get(0);
+					if(gj(btrGroup).find("a").size() <3) {
+						var aElem = gj(btrGroup).find("a").get(0);
+                                        	gj(aElem).before("<a class=\"btn\" href=\""+InlineEditor.publishLink+"\" rel=\"tooltip\" data-placement=\"bottom\" data-original-title=\"Publish\">            <i class=\"uiIconEcmsPublish\"></i>          </a>");
+					}
+				}
+				gj(document).ready(function() { gj("*[rel='tooltip']").tooltip();});
+
 			}
 			else alert(locale_message);
 		      }

@@ -41,6 +41,7 @@ import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.portal.webui.workspace.UIWorkingWorkspace;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.ecm.publication.PublicationService;
@@ -639,6 +640,18 @@ public class UICLVPresentation extends UIContainer {
         && (this.getAncestorOfType(UICLVPortlet.class).getFolderPathParamValue() != null
             || UICLVPortlet.DISPLAY_MODE_AUTOMATIC.equals(Utils.getPortletPreference(UICLVPortlet.PREFERENCE_DISPLAY_MODE)));
   }
+  
+  public String getFastPublicLink(Node viewNode) {
+    String fastPublishLink = null;
+    try {
+      fastPublishLink = event("FastPublish", NodeLocation.getExpressionByNode(viewNode));
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
+    return fastPublishLink;
+  }
 
   /**
    * Gets the rss link.
@@ -691,7 +704,7 @@ public class UICLVPresentation extends UIContainer {
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
     sb.append("<div id=\""+id+"\" class=\"" + cssClass + " \">");
     if (Utils.isShowQuickEdit()) {
-      sb.append("  <div class=\"edittingContent\" style=\" z-index: 105\">");
+      sb.append("  <div class=\"edittingContent\" style=\" z-index: 5\">");
       sb.append("    <div class=\"edittingToolBar clearfix\" >");
       
       sb.append("    <div class=\"btn-group\" >");
@@ -841,7 +854,7 @@ public class UICLVPresentation extends UIContainer {
       Node parent = node.getParent();
       node.remove();
       parent.getSession().save();
-      //event.getRequestContext().addUIComponentToUpdateByAjax(contentListPresentation);
+      event.getRequestContext().addUIComponentToUpdateByAjax(contentListPresentation);
       Utils.createPopupMessage(contentListPresentation,
                                "UICLVPresentation.msg.delete-content-successfull",
                                null,
@@ -866,8 +879,9 @@ public class UICLVPresentation extends UIContainer {
         node.getSession().addLockToken(LockUtil.getLockToken(node));
       }
       HashMap<String, String> context = new HashMap<String, String>();
-
+      event.getRequestContext().addUIComponentToUpdateByAjax(contentListPresentation);
       publicationService.changeState(node, "published", context);
+      
     }
   }
 }

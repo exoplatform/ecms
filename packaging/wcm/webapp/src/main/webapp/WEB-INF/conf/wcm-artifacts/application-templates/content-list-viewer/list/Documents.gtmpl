@@ -24,7 +24,8 @@
     def siteName = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getPortalOwner();
     Locale locale = WebuiRequestContext.getCurrentInstance().getLocale();
     def language = locale.getLanguage();
-
+    def draftMsg = _ctx.appRes("PublicationStates.draft");
+    def publishedMsg = _ctx.appRes("PublicationStates.published");
 %>
 
 <div class="DocumentsCLVTemplate" id="$uicomponent.id"> 
@@ -118,7 +119,7 @@
                               } else {                          
                               %>
                                 <div class="Title">                              
-                                  <% print uicomponent.getInlineEditingField(viewNode, "exo:title", itemName, "TEXT", "CLVTitle_"+String.valueOf(i), "GroovyCLVTitle", true, "button_direction=left-to-right");%>
+                                  <% print uicomponent.getInlineEditingField(viewNode, "exo:title", itemName, "TEXT", "CLVTitle_"+String.valueOf(i), "GroovyCLVTitle", true, "button_direction=left-to-right","fast_publish=" + uicomponent.getFastPublicLink(viewNode));%>
                                 </div>
                               <%  
                               }
@@ -128,11 +129,11 @@
                             if (isShowTitle) {
                               %><div title="$itemName" class="$itemIcon FL"></div><%
                               if (isShowLink) {
-                                %><div class="Title" propertyName="<%=propertyName%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" language="<%=language%>" contenteditable="true"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="$itemName">$itemName</a></div><%
+                                %><div class="Title" propertyName="<%=propertyName%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" language="<%=language%>" publishedmsg="<%=publishedMsg%>" draftmsg="<%=draftMsg%>" fastpublishlink="<%=uicomponent.getFastPublicLink(viewNode)%>" contenteditable="true"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="$itemName">$itemName</a></div><%
                               } else {
                               %>
-                                <div class="Title" propertyName="<%=propertyName%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" language="<%=language%>" contenteditable="true"> 
-                                  <% print uicomponent.getInlineEditingField(viewNode, "exo:title", itemName, "TEXT", "CLVTitle_"+String.valueOf(i), "GroovyCLVTitle", true, "button_direction=left-to-right"); %>
+                                <div class="Title" propertyName="<%=propertyName%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" language="<%=language%>" publishedmsg="<%=publishedMsg%>" draftmsg="<%=draftMsg%>" fastpublishlink="<%=uicomponent.getFastPublicLink(viewNode)%>" contenteditable="true"> 
+                                  <% print uicomponent.getInlineEditingField(viewNode, "exo:title", itemName, "TEXT", "CLVTitle_"+String.valueOf(i), "GroovyCLVTitle", true, "button_direction=left-to-right","fast_publish=" + uicomponent.getFastPublicLink(viewNode)); %>
                                 </div>
                               <%  
                               }
@@ -146,7 +147,7 @@
                             %><div class="Summary">
                             <%
                               if (itemSummaryField!=null) {
-                                print uicomponent.getInlineEditingField(viewNode, itemSummaryField, itemSummary, "TEXTAREA", "Text_"+String.valueOf(i), "CLV1ColumnPresent", true);
+                                print uicomponent.getInlineEditingField(viewNode, itemSummaryField, itemSummary, "TEXTAREA", "Text_"+String.valueOf(i), "CLV1ColumnPresent", true,"fast_publish=" + uicomponent.getFastPublicLink(viewNode));
                               }
                             %>
                             </div></div><% 

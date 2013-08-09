@@ -602,12 +602,17 @@ public class Utils {
     HashMap<String,String> parsedArguments = parseArguments(arguments) ;
     String height = parsedArguments.get(HEIGHT);
     String bDirection = parsedArguments.get(BUTTON_DIR);
+    String publishLink = parsedArguments.get(FAST_PUBLISH_LINK);
     
     Locale locale = WebuiRequestContext.getCurrentInstance().getLocale();
     String language = locale.getLanguage();
     ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
     ResourceBundle resourceBundle;
     resourceBundle = resourceBundleService.getResourceBundle(LOCALE_WEBUI_DMS, locale);
+    
+    PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+    String draft = portletRequestContext.getApplicationResourceBundle().getString("PublicationStates.draft");
+    String published = portletRequestContext.getApplicationResourceBundle().getString("PublicationStates.published");
 
     String portletRealID = org.exoplatform.wcm.webui.Utils.getRealPortletId((PortletRequestContext)
         WebuiRequestContext.getCurrentInstance());
@@ -661,13 +666,13 @@ public class Utils {
           return orgNode.getProperty(propertyName).getString();
         else 
         	return "<div contenteditable=\"true\" propertyName=\""+propertyName+"\" repo=\""+repo+"\" workspace=\""+workspace+"\"" +
-        			" uuid=\""+uuid+"\" siteName=\""+siteName+"\" language=\""+language+"\" >" + orgNode.getProperty(propertyName).getString() + "</div>";
+        			" uuid=\""+uuid+"\" siteName=\""+siteName+"\" publishedMsg=\""+published+"\" draftMsg=\""+draft+"\" fastpublishlink=\""+publishLink+"\" language=\""+language+"\" >" + orgNode.getProperty(propertyName).getString() + "</div>";
       } catch (Exception e) {
       	if (org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE))
           return defaultValue;
       	else
         	return "<div contenteditable=\"true\" propertyName=\""+propertyName+"\" repo=\""+repo+"\" workspace=\""+workspace+"\" " +
-        			"uuid=\""+uuid+"\" siteName=\""+siteName+"\" language=\""+language+"\" >" + defaultValue + "</div>";
+        			"uuid=\""+uuid+"\" siteName=\""+siteName+"\" publishedMsg=\""+published+"\" draftMsg=\""+draft+"\" fastpublishlink=\""+publishLink+"\" language=\""+language+"\" >" + defaultValue + "</div>";
       }
     }
       
@@ -749,6 +754,7 @@ public class Utils {
   protected static final String BUTTON_DIR = "button_direction";
   protected static final String PREV_HTML  = "prev_html";
   protected static final String POST_HTML  = "post_html";
+  protected static final String FAST_PUBLISH_LINK  = "fast_publish";
   private static HashMap<String,String> parseArguments(String... arguments) {
     HashMap<String,String> map = new HashMap<String,String>() ;
     int sIndex =-1;
@@ -774,6 +780,8 @@ public class Utils {
         map.put(PREV_HTML, value); continue;
       } else if (argument.startsWith(POST_HTML)) {
         map.put(POST_HTML, value); continue;
+      } else if(argument.startsWith(FAST_PUBLISH_LINK)) {
+        map.put(FAST_PUBLISH_LINK, value); continue;
       }
     }
     return map;

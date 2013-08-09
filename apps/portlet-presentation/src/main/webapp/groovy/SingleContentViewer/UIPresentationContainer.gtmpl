@@ -16,6 +16,9 @@
     jsManager.loadScriptResource("quick-edit");
     jsManager.require("SHARED/jquery", "gj").addScripts("gj(document).ready(function() { gj(\"*[rel='tooltip']\").tooltip();});");
     
+    def draftMsg = _ctx.appRes("PublicationStates.draft");
+    def publishedMsg = _ctx.appRes("PublicationStates.published");
+    
     String portletId = Utils.getRealPortletId(rcontext);
 		def quickEditingBlockId = portletId + "-QuickEditingBlock";
 		def hoverClass = Utils.isShowQuickEdit() ? " containerHoverClass" : "";
@@ -124,7 +127,7 @@
                 %><div class="Title"><%= uicomponent.getTitle(node) %></div><%
   					  }else {
   					   def orgNode =uicomponent.getOriginalNode();    					  
-  					   %><div class="Title" propertyName="<%=propertyName%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" language="<%=language%>" contenteditable="true" ><%= uicomponent.getTitle(node) %></div><%             
+  					   %><div class="Title" propertyName="<%=propertyName%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" publishedmsg="<%=publishedMsg%>" draftmsg="<%=draftMsg%>" fastpublishlink="<%=uicomponent.event('FastPublish')%>" language="<%=language%>" contenteditable="true" ><%= uicomponent.getTitle(node) %></div><%             
               }
             } %>
 						<% if (isShowDate) { %>

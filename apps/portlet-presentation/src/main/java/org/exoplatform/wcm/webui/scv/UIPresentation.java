@@ -120,6 +120,19 @@ public class UIPresentation extends UIBaseNodePresentation {
     return ret;
   }
   
+  public String getFastPublicLink(Node viewNode) {
+    String fastPublishLink = null;
+    try {
+      UIPresentationContainer container = (UIPresentationContainer)this.getParent();      
+      fastPublishLink = container.event("FastPublish", NodeLocation.getExpressionByNode(viewNode));
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
+    return fastPublishLink;
+  }
+  
   public Node getDisplayNode() throws Exception {
     if (viewNodeLocation == null) return null;
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
