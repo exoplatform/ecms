@@ -70,25 +70,29 @@ LinkSelector.loadLinks = function() {
 	var xmlPortalLink = LinkSelector.xmlHttpRequest.responseXML;
 	var nodeList = xmlPortalLink.getElementsByTagName("Folder");
 	var treeHTML = '';
+	treeHTML 		+= 		'<div class="uiTreeExplorer" >';
+	treeHTML 		+= 			'<ul class="nodeGroup" >';
 	for(var i = 0; i < nodeList.length; i++) {
-		var nameFolder = nodeList[i].getAttribute("name");
-		treeHTML 		+= 		'<div class="Node" onclick="">';
-		treeHTML		+=			'<div class="Expand">';
-		treeHTML 		+= 				'<div name="/'+nameFolder+'/" class="IconNode nt_unstructured16x16Icon 16x16Icon" onclick="eXo.ecm.LinkSelector.listPortalLinks(this);">'	;
-		treeHTML		+= 					'<a href="javascript: void(0);">'+nameFolder+'</a>';
-		treeHTML		+=				'</div>';
-		treeHTML		+=			'</div>';
-		treeHTML		+=		'</div>';
-		treeHTML		+=		'<div class="ChildrenContainer" style="display:none;">';
-		treeHTML		+=		'</div>';
+		var nameFolder = nodeList[i].getAttribute("name");		
+		treeHTML 		+= 				'<li class="node">';
+		treeHTML		+=					'<div class="expandIcon">';
+		treeHTML 		+= 						'<div name="/'+nameFolder+'/" onclick="eXo.ecm.LinkSelector.listPortalLinks(this);">'	;
+		treeHTML		+= 							'<a href="javascript: void(0);"  data-original-title="'+nameFolder+'" data-placement="bottom" rel="tooltip"><i class="uiIcon16x16FolderDefault "></i>&nbsp;<span>'+nameFolder+'</span></a>';
+		treeHTML		+=						'</div>';
+		treeHTML		+=					'</div>';	
+		treeHTML		+=					'<ul class="ChildrenContainer nodeGroup" style="display:none;">';
+		treeHTML		+=					'</ul>';		
+		treeHTML		+=				'</li>';	
 	}
+	treeHTML		+=			'</ul>';
+	treeHTML		+=		'</div>';
 	var uiLeftWorkspace = document.getElementById('LeftWorkspace');	
 	if(uiLeftWorkspace) uiLeftWorkspace.innerHTML = treeHTML;
 };	
 
 LinkSelector.listPortalLinks = function(oPortalLink) {
-	var parentNode = gj(oPortalLink).parents(".Node:first")[0];
-	var nodeGroup = gj(parentNode).nextAll("div:first")[0];
+	var parentNode = gj(oPortalLink).parents(".node:first")[0];
+	var nodeGroup = gj(parentNode).find("ul:first")[0];
 	var namePortalLink = oPortalLink.getAttribute('name');
 	var command = LinkSelector.cmdPortalLink + LinkSelector.cmdGetFolderAndFile+"type="+LinkSelector.resourceType+"&currentFolder="+namePortalLink;
 	var url = LinkSelector.hostName + LinkSelector.connector + command+"&lang="+LinkSelector.userLanguage;
@@ -99,15 +103,15 @@ LinkSelector.listPortalLinks = function(oPortalLink) {
 	for(var i = 0; i < folderLinks.length; i++) {
 		var folderLink = folderLinks[i].getAttribute('name');
 		var currentFolder = namePortalLink + folderLink;
-		treeHTML += '<div class="Node">';
-		treeHTML += 	'<div class="Expand">';	
-		treeHTML +=			'<div name="'+currentFolder+'/" class="IconNode nt_unstructured16x16Icon 16x16Icon" onclick="eXo.ecm.LinkSelector.listPortalLinks(this);">';
-		treeHTML +=				'<a href="javascript:void(0);">'+folderLink+'</a>';
+		treeHTML += '<li class="node">';
+		treeHTML += 	'<div class="expandIcon">';	
+		treeHTML +=			'<div name="'+currentFolder+'/" onclick="eXo.ecm.LinkSelector.listPortalLinks(this);">';
+		treeHTML +=				'<a href="javascript:void(0);" data-original-title="'+folderLink+'" data-placement="bottom" rel="tooltip"><i class="uiIcon16x16FolderDefault "></i>&nbsp;<span>'+folderLink+'</span></a>';
 		treeHTML +=			'</div>';
-		treeHTML +=		'</div>';
-		treeHTML +=	'</div>';
-		treeHTML +=	'<div class="ChildrenContainer" style="display:none;">';
-		treeHTML +=	'</div>';
+		treeHTML +=		'</div>';		
+		treeHTML +=	'<ul class="ChildrenContainer nodeGroup" style="display:none;">';
+		treeHTML +=	'</ul>';
+		treeHTML +=	'</li>';
 	}
 	if (treeHTML.length > 0) {
 		nodeGroup.innerHTML = treeHTML;
@@ -118,10 +122,10 @@ LinkSelector.listPortalLinks = function(oPortalLink) {
 	var iconElt = gj(parentNode).children("div")[0];
 	if(nodeGroup.style.display != 'block') {
 		nodeGroup.style.display = 'block';
-		iconElt.className = 'Collapse';
+		iconElt.className = 'collapseIcon';
 	} else {
 		nodeGroup.style.display = 'none';
-		iconElt.className = 'Expand';
+		iconElt.className = 'expandIcon';
 	}
 	
 	var fileLinks = xmlLinks.getElementsByTagName('File');
@@ -139,25 +143,18 @@ LinkSelector.listFileLinks = function(fileLinks) {
 	if(!fileLinks || fileLinks.length <= 0) {
 		var tdNoContent = tblRWS.insertRow(1).insertCell(0);
 		tdNoContent.innerHTML = "There is no content";
-		tdNoContent.className = "Item TRNoContent";
+		tdNoContent.className = "empty";
 		tdNoContent.setAttribute('colspan', 2);
 		return;
 	}
 
-	var clazz = 'EventItem';
 	for(var i = 0; i < fileLinks.length; i++) {
-		if(clazz == 'EventItem') {
-			clazz = 'OddItem';
-		} else if(clazz == 'OddItem') {
-			clazz = 'EventItem';
-		}
 		var nameLink = fileLinks[i].getAttribute('name');
 		var urlLink	 = fileLinks[i].getAttribute('url');
 		var dateCreated = fileLinks[i].getAttribute('dateCreated');
 		var newRow = tblRWS.insertRow(i+1);
-		newRow.className = clazz;
-		newRow.insertCell(0).innerHTML = '<div class="Item default16x16Icon" url="'+urlLink+'" onclick="eXo.ecm.LinkSelector.insertLink(this);">'+nameLink+'</div>';
-		newRow.insertCell(1).innerHTML = '<div class="Item">'+ dateCreated +'</div>';
+		newRow.insertCell(0).innerHTML = '<div class="item" url="'+urlLink+'" onclick="eXo.ecm.LinkSelector.insertLink(this);" style="cursor: pointer"><i class="uiIcon16x16FileDefault "></i>&nbsp;'+nameLink+'</div>';
+		newRow.insertCell(1).innerHTML = '<div class="item">'+ dateCreated +'</div>';
 	}
 };
 
