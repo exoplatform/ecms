@@ -107,7 +107,7 @@
     <approved>Đã duyệt</approved>
     <inreview>Đang duyệt</inreview>
     <staged>Chờ xuất bản</staged>
-    <published>Đã xuất bản</published>
+    <published>Xuất bản</published>
   </PublicationStates>
   <UISCVCacheRadioBox>
     <label>
