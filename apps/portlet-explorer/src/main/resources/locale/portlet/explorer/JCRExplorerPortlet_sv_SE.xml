@@ -125,7 +125,7 @@
   <UIViewRelationList>
     <label>
       <languages-list>Översättningar</languages-list>
-      <relation-list>Förbindelser</relation-list>
+      <relation-list>Relations</relation-list>
       <references-list>Referenser</references-list>
       <no-related-document>Inga relaterade dokument</no-related-document>
       <related-document>Relaterade dokument</related-document>
@@ -276,18 +276,18 @@
       <ManageAuditing>Revision</ManageAuditing>
       <ManagePublications>Publikationer</ManagePublications>
       <ManageCategories>Kategorier</ManageCategories>
-      <ManageRelations>Förbindelser</ManageRelations>
+      <ManageRelations>Relations</ManageRelations>
       <ManageActions>Åtgärder</ManageActions>
       <ExportNode>Exportera</ExportNode>
       <ImportNode>Importera</ImportNode>
-      <OverloadThumbnail>Överbelastning miniatyr</OverloadThumbnail>
+      <OverloadThumbnail>Lägg till miniatyrbild</OverloadThumbnail>
       <ManageHidden>Visa/Dölj innehåll</ManageHidden>
       <ViewReferences>Referenser</ViewReferences>
       <ViewNodeType>Typer</ViewNodeType>
       <ViewPermissions>Behörighet</ViewPermissions>
       <ViewProperties>Egenskaper</ViewProperties>
       <ViewMetadatas>Metadata</ViewMetadatas>
-      <ViewRelations>Visa/Dölj förbindelser</ViewRelations>
+      <ViewRelations>Show/Hide Relations</ViewRelations>
       <ShowJCRStructure>Visa/Dölj innehålls struktur</ShowJCRStructure>
     </tooltip>
     <msg>
@@ -1587,7 +1587,7 @@
   </UIRelationManager>
   <UIRelationsAddedList>
     <header>
-      <path>Förbindelser</path>
+      <path>Relations</path>
       <action>Åtgärder</action>
     </header>
     <action>

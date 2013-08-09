@@ -179,11 +179,11 @@
     <title>
       <Location>Webbplatsens namn</Location>
       <SearchByName>Sök efter namn</SearchByName>
-      <Fulltext>A word or phrase in context</Fulltext>
+      <Fulltext>Ett ord eller en fras i innehållet</Fulltext>
       <Property>Rättigheter</Property>
       <Contain>Innehåller</Contain>
-      <FromDate>From Date</FromDate>
-      <ToDate>To Date</ToDate>
+      <FromDate>Från datum</FromDate>
+      <ToDate>Till Datum</ToDate>
       <DocumentType>Dokumenttyp</DocumentType>
     </title>
     <tooltip>
@@ -401,7 +401,7 @@
       <LiveDocumentsCenter>Levande dokument Center</LiveDocumentsCenter>
       <PendingDocumentsCenter>Väntande dokument Center</PendingDocumentsCenter>
       <RecordsManagementCenter>Records Management Center</RecordsManagementCenter>
-      <SharedUsersSpace>Delade användares utrymme</SharedUsersSpace>
+      <SharedUsersSpace>Delade användares webb-yta</SharedUsersSpace>
       <Systemfiles>Systemfiler</Systemfiles>
       <ValidationRequestsDocumentsCenter>Validering begäran om dokument Center</ValidationRequestsDocumentsCenter>
       <ManagedSites>Hantering av webbplatser</ManagedSites>
