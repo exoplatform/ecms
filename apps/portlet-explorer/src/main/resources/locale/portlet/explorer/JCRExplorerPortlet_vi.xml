@@ -1955,7 +1955,7 @@
   -->
   <UIPublicationForm>
     <label>
-      <published>Đã xuất bản</published>
+      <published>Xuất bản</published>
       <non-published>Chưa xuất bản</non-published>
       <public>Công khai</public>
       <private>Riêng tư</private>
@@ -2910,8 +2910,8 @@
       <approved>Phê duyệt</approved>
       <inreview>Đang đánh giá</inreview>
       <staged>Chờ xuất bản</staged>
-      <published>Đã xuất bản</published>
-      <live>Đã xuất bản</live>
+      <published>Xuất bản</published>
+      <live>Xuất bản</live>
     </status>
     <scheduled>
       <title>Đã xếp lịch</title>

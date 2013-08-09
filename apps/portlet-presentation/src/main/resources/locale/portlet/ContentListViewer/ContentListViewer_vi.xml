@@ -174,7 +174,7 @@
     <approved>Đã duyệt</approved>
     <inreview>Đang Xem xét</inreview>
     <staged>Chờ xuất bản</staged>
-    <published>Đã xuất bản</published>
+    <published>Xuất bản</published>
   </PublicationStates>
   <UICLVConfigCacheEnableRadioBoxInput>
     <label>
