@@ -1056,7 +1056,7 @@
 		formUpload.action = uri;
 		  //formUpload.submit();
 		  eXo.ecm.MultiUpload.formUpload = formUpload;
-		  var file = {name:cleanName(input.value.substring(input.value.lastIndexOf('\\') + 1)),type: " ", size:0};
+		  var file = {name:input.value.substring(input.value.lastIndexOf('\\') + 1),type: " ", size:0};
 		  eXo.ecm.MultiUpload.pathMap[progressId] = eXo.ecm.MultiUpload.path;
 		  eXo.ecm.MultiUpload.connectionFailed[progressId] = 0;
 	//	eXo.ecm.MultiUpload.insertFileNameWithMessage(eXo.ecm.MultiUpload.WAIT, file, progressId, eXo.ecm.MultiUpload.WAITING_TXT);
