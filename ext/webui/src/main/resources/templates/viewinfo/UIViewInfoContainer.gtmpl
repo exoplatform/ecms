@@ -1,3 +1,6 @@
+<%
+  import org.exoplatform.wcm.webui.reader.ContentReader;
+%>
 <div class="$uicomponent.id">
 	<div class="resizable">
 		<table class="uiGrid table table-hover table-striped" >
@@ -16,7 +19,7 @@
 				%>
 							<tr>
 								<td class="name"><%=_ctx.appRes("UIViewInfoContainer.label." + key)%></td>
-								<td><%= uicomponent.getInforMap().get(key)%></td>
+								<td><%= ContentReader.getXSSCompatibilityContent(uicomponent.getInforMap().get(key))%></td>
 							</tr>
 				<%
 						}
