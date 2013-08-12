@@ -218,7 +218,8 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
       allNodeTypes.add(mixin);
     }
     for (NodeType nodetype:allNodeTypes) {
-      if (((NodeTypeImpl)nodetype).isChildNodePrimaryTypeAllowed(Constants.JCR_ANY_NAME, ((NodeTypeImpl)childNodeType).getQName())) {
+      if (((NodeTypeImpl)nodetype).isChildNodePrimaryTypeAllowed(Constants.JCR_ANY_NAME,
+                                                                 ((NodeTypeImpl)childNodeType).getQName())) {
         return true;
       }
     }

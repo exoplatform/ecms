@@ -39,7 +39,7 @@ import org.exoplatform.webui.form.input.UICheckBoxInput;
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    		template = "system:/groovy/webui/form/UIForm.gtmpl",
+        template = "system:/groovy/webui/form/UIForm.gtmpl",
     events = {
       @EventConfig(listeners = UITemplateEditForm.SaveActionListener.class),
       @EventConfig(phase=Phase.DECODE, listeners = UITemplateEditForm.CancelActionListener.class)

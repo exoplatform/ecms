@@ -20,8 +20,6 @@ import java.util.Comparator;
 
 import javax.jcr.Node;
 
-import org.exoplatform.ecm.webui.utils.Utils;
-
 /**
  * Created by The eXo Platform SAS
  * Author : eXoPlatform

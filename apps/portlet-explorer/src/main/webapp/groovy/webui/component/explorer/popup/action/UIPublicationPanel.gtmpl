@@ -63,8 +63,10 @@
 				isBeforeCurrentState=false;
 			
 				if(isBaseVersion&&cNode.hasProperty("publication:currentState")&&!cNode.getProperty("publication:currentState").getString().equals(status)){
+				  String sateClass = "activeStatus";
+				  if(uicomponent.isCompletedSate(status)) sateClass += " completed";
 				%>
-				<li class="activeStatus" onclick="<%= uicomponent.event("ChangeState", status)%>"><a class="node">
+				<li class="<%=sateClass%>" onclick="<%= uicomponent.event("ChangeState", status)%>"><a class="node">
 				<%}
 				else{%>
 				<li class="currentStatus"><a class="node">
@@ -77,8 +79,10 @@
 				<%}
 				
 				else  if(!isAutomatic&&enableState){
+				  String sateClass = "activeStatus";
+				  if(uicomponent.isCompletedSate(status)) sateClass += " completed";
 				%>	
-				<li class="activeStatus" onclick="<%= uicomponent.event("ChangeState", status)%>"><a class="node">
+				<li class="<%=sateClass%>" onclick="<%= uicomponent.event("ChangeState", status)%>"><a class="node">
 					
 					<%}%>
 					</a>

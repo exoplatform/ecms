@@ -19,8 +19,8 @@ package org.exoplatform.services.jcr.analyzer;
 
 import java.io.Reader;
 
+import org.apache.lucene.analysis.ASCIIFoldingFilter;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.ISOLatin1AccentFilter;
 import org.apache.lucene.analysis.LowerCaseFilter;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.standard.StandardFilter;
@@ -36,11 +36,11 @@ public class IgnoreAccentAnalyzer extends Analyzer {
 
   public TokenStream tokenStream(String fieldName, Reader reader) {
     TokenStream result = new WhitespaceTokenizerWithDot(Version.LUCENE_35, reader);
-    result = new StandardFilter(result);
+    result = new StandardFilter(Version.LUCENE_35, result);
     result = new UnescapeHTMLFilter(result);
     result = new IgnoreSentencesEndFilter(result);
-    result = new LowerCaseFilter(result);
-    result = new ISOLatin1AccentFilter(result);
+    result = new LowerCaseFilter(Version.LUCENE_35, result);
+    result = new ASCIIFoldingFilter(result);
     return result;
   }
 }

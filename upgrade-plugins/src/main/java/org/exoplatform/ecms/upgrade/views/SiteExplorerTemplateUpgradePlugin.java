@@ -56,7 +56,7 @@ import org.exoplatform.services.log.Log;
  */
 public class SiteExplorerTemplateUpgradePlugin extends UpgradeProductPlugin {
 
-  private Log log = ExoLogger.getLogger(this.getClass());
+  private static final Log log = ExoLogger.getLogger(SiteExplorerTemplateUpgradePlugin.class.getName());
   private NodeHierarchyCreator nodeHierarchyCreator_;
   private DMSConfiguration dmsConfiguration_;
   private RepositoryService repositoryService_;

@@ -32,8 +32,6 @@ import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.views.ApplicationTemplateManagerService;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
@@ -88,7 +86,6 @@ import org.exoplatform.webui.form.validator.PositiveNumberFormatValidator;
 )
 public class UICLVConfig extends UIFormTabPane  implements UISelectable {
 
-  private static final Log LOG  = ExoLogger.getLogger(UICLVConfig.class.getName());
   final static public String CONTENT_TAB = "clvContentTab" ;
   final static public String DISPLAY_TAB = "clvDisplayTab" ;
   final static public String ADVANCED_TAB = "clvAdvancedTab" ;
@@ -356,9 +353,9 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
     orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_TITLE, NodetypeConstant.EXO_TITLE));
     orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_DATE_CREATED, NodetypeConstant.EXO_DATE_CREATED));
     orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_DATE_MODIFIED, NodetypeConstant.EXO_DATE_MODIFIED));
-    orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_DATE_PUBLISHED,"publication:liveDate"));
-    orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_DATE_START_EVENT,"exo:startEvent"));
-    orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_INDEX,"exo:index"));
+    orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_DATE_PUBLISHED, NodetypeConstant.PUBLICATION_LIVE_DATE));
+    orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_DATE_START_EVENT, NodetypeConstant.EXO_START_EVENT));
+    orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_INDEX, NodetypeConstant.EXO_INDEX));
     UIFormSelectBox orderBySelectBox = new UIFormSelectBox(ORDER_BY_FORM_SELECT_BOX, ORDER_BY_FORM_SELECT_BOX, orderByOptions);
     orderBySelectBox.setValue(orderBy);
 
@@ -1061,16 +1058,9 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
 
   private class TemplateNameComparator implements Comparator<SelectItemOption<String>> {
     public int compare(SelectItemOption<String> item1,SelectItemOption<String> item2) {
-      try {
-        String s1 = item1.getLabel().toLowerCase();
-        String s2 = item2.getLabel().toLowerCase();
-        return s1.compareTo(s2);
-      } catch (Exception e) {
-        if (LOG.isErrorEnabled()) {
-          LOG.error("Cannot compare nodes", e);
-        }
-      }
-      return 0;
+      String s1 = item1.getLabel().toLowerCase();
+      String s2 = item2.getLabel().toLowerCase();
+      return s1.compareTo(s2);
     }
   }
 }

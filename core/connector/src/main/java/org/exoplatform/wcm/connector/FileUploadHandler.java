@@ -44,6 +44,7 @@ import org.exoplatform.ecm.connector.fckeditor.FCKMessage;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.utils.LockUtil;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -359,7 +360,15 @@ public class FileUploadHandler {
       //save node with name=fileName
       Node file = null;
       boolean fileCreated = false;
-      fileName = Text.escapeIllegalJcrChars(fileName);
+      String exoTitle = fileName;
+      
+      if (fileName.indexOf('.') > 0) {
+        String ext = fileName.substring(fileName.lastIndexOf('.'));
+        fileName = Utils.cleanString(fileName.substring(0, fileName.lastIndexOf('.'))).concat(ext);
+      } else {
+        fileName = Utils.cleanString(fileName);
+      }
+      
       String nodeName = fileName;
       int count = 0;
       do {
@@ -372,20 +381,20 @@ public class FileUploadHandler {
       } while (!fileCreated);
       //--------------------------------------------------------
       if(!file.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)) {
-      	file.addMixin(NodetypeConstant.MIX_REFERENCEABLE);
+        file.addMixin(NodetypeConstant.MIX_REFERENCEABLE);
       }
       
       if(!file.isNodeType(NodetypeConstant.MIX_COMMENTABLE))
-      	file.addMixin(NodetypeConstant.MIX_COMMENTABLE);
+        file.addMixin(NodetypeConstant.MIX_COMMENTABLE);
       
       if(!file.isNodeType(NodetypeConstant.MIX_VOTABLE))
-      	file.addMixin(NodetypeConstant.MIX_VOTABLE);
+        file.addMixin(NodetypeConstant.MIX_VOTABLE);
       
       if(!file.isNodeType(NodetypeConstant.MIX_I18N))
-      	file.addMixin(NodetypeConstant.MIX_I18N);
+        file.addMixin(NodetypeConstant.MIX_I18N);
       
       if(!file.hasProperty(NodetypeConstant.EXO_TITLE)) {
-      	file.setProperty(NodetypeConstant.EXO_TITLE, file.getName());
+        file.setProperty(NodetypeConstant.EXO_TITLE, exoTitle);
       }
       Node jcrContent = file.addNode("jcr:content","nt:resource");
       //MimeTypeResolver mimeTypeResolver = new MimeTypeResolver();

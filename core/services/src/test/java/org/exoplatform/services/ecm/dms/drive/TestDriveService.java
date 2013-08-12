@@ -422,46 +422,6 @@ public class TestDriveService extends BaseWCMTestCase {
     assertEquals(driveDatas2.size(), 0);
   }
 
-  public void testGetAllDriveByPermissionWithPrivateDrive() throws Exception {
-    driveService.addDrive("MyDrive1", COLLABORATION_WS, "*:/platform/administrators",
-        "/TestTreeNode/A1", "admin-view", "", true, true, true, true, "nt:folder", "*");
-    driveService.addDrive("MyDrive2", COLLABORATION_WS, "*:/platform/user", "/TestTreeNode/A1_1",
-        "admin-view, system-view", "", true, true, true, false, "nt:unstructured", "*");
-    driveService.addDrive("MyDrive3", COLLABORATION_WS, "*:/platform/user", "/TestTreeNode/A1_2",
-        "system-view", "", true, true, true, true, "nt:unstructured", "*");
-    driveService.addDrive("Private", COLLABORATION_WS, "${userId}", "/Users/${userId}/Private",
-        "timeline-view", "", true, false, true, false, "nt:folder,nt:unstructured", "*");
-
-    List<DriveData> listDriveData = driveService.getAllDrives();
-    List<DriveData> driveDatas = driveService.getAllDriveByPermission("*:/platform/user");
-
-    assertEquals(listDriveData.size(), 4);
-    assertEquals(driveDatas.size(), 3);
-    assertEquals(driveDatas.get(0).getWorkspace(), COLLABORATION_WS) ;
-    assertEquals(driveDatas.get(0).getPermissions(), "*:/platform/user");
-    assertEquals(driveDatas.get(0).getHomePath(), "/TestTreeNode/A1_1");
-    assertEquals(driveDatas.get(0).getViews(), "admin-view, system-view");
-    assertEquals(driveDatas.get(0).getIcon(), "");
-    assertEquals(driveDatas.get(0).getViewPreferences(), true);
-    assertEquals(driveDatas.get(0).getViewNonDocument(), true);
-    assertEquals(driveDatas.get(0).getViewSideBar(), true);
-    assertEquals(driveDatas.get(0).getAllowCreateFolders(), "nt:unstructured");
-    assertEquals(driveDatas.get(0).getShowHiddenNode(), false);
-    assertEquals(driveDatas.get(1).getWorkspace(), COLLABORATION_WS) ;
-    assertEquals(driveDatas.get(1).getPermissions(), "*:/platform/user");
-    assertEquals(driveDatas.get(1).getHomePath(), "/TestTreeNode/A1_2");
-    assertEquals(driveDatas.get(1).getViews(), "system-view");
-    assertEquals(driveDatas.get(1).getIcon(), "");
-    assertEquals(driveDatas.get(1).getViewPreferences(), true);
-    assertEquals(driveDatas.get(1).getViewNonDocument(), true);
-    assertEquals(driveDatas.get(1).getViewSideBar(), true);
-    assertEquals(driveDatas.get(1).getAllowCreateFolders(), "nt:unstructured");
-    assertEquals(driveDatas.get(1).getShowHiddenNode(), true);
-    assertTrue(driveDatas.contains(driveService.getDriveByName("Private")));
-    List<DriveData> driveDatas2 = driveService.getAllDriveByPermission("*:/platform/xXx");
-    assertEquals(driveDatas2.size(), 1);
-  }
-
   /**
    * This method will check to make sure the view is not in used before remove this view
    * Input:

@@ -181,4 +181,11 @@ public interface LinkManager {
    */
   public List<Node> getAllLinks(Node targetNode, String linkType, SessionProvider sessionProvider) throws Exception;
   
+  /**
+   * clones some data from target to link: exo:title, exo:dateCreated, exo:dateModified, publication:liveDate, exo:index
+   * @param link the link
+   * @throws Exception
+   */
+  public void updateSymlink(Node link) throws Exception;
+  
 }

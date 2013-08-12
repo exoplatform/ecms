@@ -10,7 +10,7 @@
 import org.exoplatform.wcm.webui.reader.ContentReader;
  
 %>
-<div class="uiPropertyTab">
+<div class="uiPropertyTab" id="$uicomponent.id">
 	<div class="resizable">
 		<table class="uiGrid table table-hover table-striped" >
 			<thead>

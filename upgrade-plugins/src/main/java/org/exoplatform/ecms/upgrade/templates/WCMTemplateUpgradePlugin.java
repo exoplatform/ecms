@@ -55,7 +55,7 @@ import org.exoplatform.services.log.Log;
  */
 public class WCMTemplateUpgradePlugin extends UpgradeProductPlugin {
 
-  private Log log = ExoLogger.getLogger(this.getClass());
+  private static final Log log = ExoLogger.getLogger(WCMTemplateUpgradePlugin.class.getName());
   private ApplicationTemplateManagerService appTemplateService_;
   
   public WCMTemplateUpgradePlugin(ApplicationTemplateManagerService appTemplateService, InitParams initParams) {

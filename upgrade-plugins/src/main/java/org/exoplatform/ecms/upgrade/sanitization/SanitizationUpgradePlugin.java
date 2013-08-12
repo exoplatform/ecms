@@ -39,7 +39,6 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * This upgrade plugin will be used to migrate all the old data to the new one which related to
@@ -110,17 +109,18 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
 
   /* Migrate data for all user views */
   private void migrateViews() {
+	SessionProvider sessionProvider = null;
     try {
-      Session session = WCMCoreUtils.getSystemSessionProvider().getSession(dmsConfiguration_.getConfig().getSystemWorkspace(),
+      sessionProvider = SessionProvider.createSystemProvider();
+      Session session = sessionProvider.getSession(dmsConfiguration_.getConfig().getSystemWorkspace(),
                                                                                   repoService_.getCurrentRepository());
       String[] oldViewTemplates = {"ListView", "ContentView", "ThumbnailsView", 
               "IconView", "TimelineView", "CoverFlow", "SystemView", "SlideShowView"};
       if (LOG.isInfoEnabled()) {
         LOG.info("=====Start migrate data for all user views=====");
       }
-      String statement = "SELECT * FROM exo:view ORDER BY exo:name DESC";
-      QueryResult result = session.getWorkspace().getQueryManager().createQuery(statement, Query.SQL).execute();
-      NodeIterator nodeIter = result.getNodes();
+      Node views = (Node)session.getItem("/exo:ecm/views/userviews");
+      NodeIterator nodeIter = views.getNodes();
       while(nodeIter.hasNext()) {
         Node viewNode = nodeIter.nextNode();
         String template = viewNode.getProperty("exo:template").getString();
@@ -158,6 +158,10 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
       if (LOG.isErrorEnabled()) {
         LOG.error("An unexpected error occurs when migrate views", e);
       }
+    } finally {
+      if (sessionProvider != null) {
+        sessionProvider.close();
+      }
     }
   }
   
@@ -172,16 +176,17 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
 
   /* Migrate data for view templates */
   private void migrateViewTemplates() {
-    try {
+	SessionProvider sessionProvider = null;
+	try {
       if (LOG.isInfoEnabled()) {
         LOG.info("=====Start migrate data for all user views template=====");
       }
-      Session session = WCMCoreUtils.getSystemSessionProvider().getSession(dmsConfiguration_.getConfig().getSystemWorkspace(),
+      sessionProvider = SessionProvider.createSystemProvider();
+      Session session = sessionProvider.getSession(dmsConfiguration_.getConfig().getSystemWorkspace(),
               repoService_.getCurrentRepository());
       String[] oldViewTemplates = {"ListView", "ContentView", "ThumbnailsView", 
               "IconView", "TimelineView", "CoverFlow", "SystemView", "SlideShowView"};
-      List<Node> templates = 
-              viewService_.getAllTemplates(BasePath.ECM_EXPLORER_TEMPLATES, WCMCoreUtils.getSystemSessionProvider());
+      List<Node> templates = viewService_.getAllTemplates(BasePath.ECM_EXPLORER_TEMPLATES, sessionProvider);
       for(Node template : templates) {
         for(String oldViewTemp : oldViewTemplates) {
           if(template.getName().equals(oldViewTemp)) {
@@ -199,6 +204,10 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
       if (LOG.isErrorEnabled()) {
         LOG.error("An unexpected error occurs when migrate view templates", e);
       }
+    } finally {
+      if (sessionProvider != null) {
+        sessionProvider.close();
+      }
     }
   }
 
@@ -207,12 +216,13 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
     if (LOG.isInfoEnabled()) {
       LOG.info("=====Start migrate data for drives=====");
     }
+	SessionProvider sessionProvider = null;    
     try {
-      Session session = WCMCoreUtils.getSystemSessionProvider().getSession(dmsConfiguration_.getConfig().getSystemWorkspace(),
+      sessionProvider = SessionProvider.createSystemProvider();
+      Session session = sessionProvider.getSession(dmsConfiguration_.getConfig().getSystemWorkspace(),
                                                                                   repoService_.getCurrentRepository());
-      String statement = "SELECT * FROM exo:drive ORDER BY exo:name DESC";
-      QueryResult result = session.getWorkspace().getQueryManager().createQuery(statement, Query.SQL).execute();
-      NodeIterator nodeIter = result.getNodes();
+      Node drives = (Node)session.getItem("/exo:ecm/exo:drives");
+      NodeIterator nodeIter = drives.getNodes();
       while(nodeIter.hasNext()) {
         Node drive = nodeIter.nextNode();
         if (LOG.isInfoEnabled()) {
@@ -291,7 +301,11 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
       if (LOG.isErrorEnabled()) {
         LOG.error("An unexpected error occurs when migrate drives", e);
       }
-    } 
+    } finally {
+      if (sessionProvider != null) {
+        sessionProvider.close();
+      }
+    }
   }
 
   /**
@@ -301,8 +315,10 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
     if (LOG.isInfoEnabled()) {
       LOG.info("Start " + this.getClass().getName() + ".............");
     }
+	SessionProvider sessionProvider = null;
     try {
-      Session session = WCMCoreUtils.getSystemSessionProvider().getSession("portal-system",
+      sessionProvider = SessionProvider.createSystemProvider();
+      Session session = sessionProvider.getSession("portal-system",
           repoService_.getCurrentRepository());
       if (LOG.isInfoEnabled()) {
         LOG.info("=====Start migrate old preferences=====");
@@ -325,6 +341,10 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
       if (LOG.isErrorEnabled()) {
         LOG.error("An unexpected error occurs when migrating old preferences: ", e);
       }
+    } finally {
+      if (sessionProvider != null) {
+        sessionProvider.close();
+      }
     }
   }
 
@@ -335,8 +355,10 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
     if (LOG.isInfoEnabled()) {
       LOG.info("Start " + this.getClass().getName() + ".............");
     }
+	SessionProvider sessionProvider = null;    
     try {
-      Session session = WCMCoreUtils.getSystemSessionProvider().getSession("collaboration", repoService_.getCurrentRepository());
+      sessionProvider = SessionProvider.createSystemProvider();	
+      Session session = sessionProvider.getSession("collaboration", repoService_.getCurrentRepository());
       if (LOG.isInfoEnabled()) {
         LOG.info("=====Start migrate old link in contents=====");
       }
@@ -362,6 +384,10 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("An unexpected error occurs when migrating content links: ", e);
+      }
+    } finally {
+      if (sessionProvider != null) {
+        sessionProvider.close();
       }
     }
   }
@@ -409,40 +435,40 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
    */
   private void migrateTaxonomyAction() {
 	  if (LOG.isInfoEnabled()) {
-		  LOG.info("Start " + this.getClass().getName() + ".............");
+		LOG.info("Start " + this.getClass().getName() + ".............");
 	  }
 	  SessionProvider sessionProvider = null;
 	  try {
-		  sessionProvider = SessionProvider.createSystemProvider();
-		  String wsName = repoService_.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
-		  Session session = sessionProvider.getSession(wsName, repoService_.getCurrentRepository());
-
-		  if (LOG.isInfoEnabled()) {
-			  LOG.info("=====Start to migrate taxonomy actions=====");
-		  }
-		  String statement = 
-				  "select * from exo:taxonomyAction where (exo:targetPath like '%/sites content/live/%' or exo:storeHomePath like '%/sites content/live/%')";
-		  QueryResult result = session.getWorkspace().getQueryManager().createQuery(statement, Query.SQL).execute();
-		  NodeIterator nodeIter = result.getNodes();
-		  while(nodeIter.hasNext()) {
-			  Node taxoAction = nodeIter.nextNode();
-			  String targetPath = taxoAction.getProperty("exo:targetPath").getString();
-			  String homePath = taxoAction.getProperty("exo:storeHomePath").getString();
-			  taxoAction.setProperty("exo:targetPath", StringUtils.replace(targetPath, "/sites content/live/", "/sites/"));
-			  taxoAction.setProperty("exo:storeHomePath", StringUtils.replace(homePath, "/sites content/live/", "/sites/"));
-		  }
-		  session.save();
-		  if (LOG.isInfoEnabled()) {
-			  LOG.info("=====Completed the migration for taxonomy action=====");
-		  }
+		sessionProvider = SessionProvider.createSystemProvider();
+		String wsName = repoService_.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
+		Session session = sessionProvider.getSession(wsName, repoService_.getCurrentRepository());
+	
+		if (LOG.isInfoEnabled()) {
+	      LOG.info("=====Start to migrate taxonomy actions=====");
+		}
+		String statement = 
+				"select * from exo:taxonomyAction where (exo:targetPath like '%/sites content/live/%' or exo:storeHomePath like '%/sites content/live/%')";
+		QueryResult result = session.getWorkspace().getQueryManager().createQuery(statement, Query.SQL).execute();
+		NodeIterator nodeIter = result.getNodes();
+		while(nodeIter.hasNext()) {
+		  Node taxoAction = nodeIter.nextNode();
+		  String targetPath = taxoAction.getProperty("exo:targetPath").getString();
+		  String homePath = taxoAction.getProperty("exo:storeHomePath").getString();
+		  taxoAction.setProperty("exo:targetPath", StringUtils.replace(targetPath, "/sites content/live/", "/sites/"));
+		  taxoAction.setProperty("exo:storeHomePath", StringUtils.replace(homePath, "/sites content/live/", "/sites/"));
+		}
+		session.save();
+		if (LOG.isInfoEnabled()) {
+	      LOG.info("=====Completed the migration for taxonomy action=====");
+		}
 	  } catch (Exception e) {
-		  if (LOG.isErrorEnabled()) {
-			  LOG.error("An unexpected error occurs when migrating for taxonomy actions: ", e);
-		  }
+		if (LOG.isErrorEnabled()) {
+		  LOG.error("An unexpected error occurs when migrating for taxonomy actions: ", e);
+		}
 	  } finally {
-		  if (sessionProvider != null) {
-			  sessionProvider.close();
-		  }
+		if (sessionProvider != null) {
+		  sessionProvider.close();
+		}
 	  }
   }
   
@@ -453,8 +479,10 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
     if (LOG.isInfoEnabled()) {
       LOG.info("Start " + this.getClass().getName() + ".............");
     }
+    SessionProvider sessionProvider = null;    
     try {
-      Session session = WCMCoreUtils.getSystemSessionProvider().getSession("portal-system",
+      sessionProvider = SessionProvider.createSystemProvider();
+      Session session = sessionProvider.getSession("portal-system",
           repoService_.getCurrentRepository());
       if (LOG.isInfoEnabled()) {
         LOG.info("=====Start migrate portlet preferences drive name=====");
@@ -474,6 +502,10 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
       if (LOG.isErrorEnabled()) {
         LOG.error("An unexpected error occurs when migrating preferences drive name: ", e);
       }
-    }
+	} finally {
+      if (sessionProvider != null) {
+	    sessionProvider.close();
+	  }
+	}
   }  
 }

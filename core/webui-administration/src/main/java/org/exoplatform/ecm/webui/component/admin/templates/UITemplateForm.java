@@ -250,7 +250,7 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
         uiApp.addMessage(new ApplicationMessage("UITemplateForm.msg.role-require",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        
+
         return;
       }
       String[] roles = {role} ;

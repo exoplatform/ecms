@@ -126,7 +126,8 @@ public class PageSearchServiceConnector extends BaseSearchServiceConnector {
   @Override
   protected String getTitleResult(ResultNode node) throws Exception {
     try {
-      return ((Node)node.getSession().getItem(node.getProperty("mop:link/mop:page").getString())).getProperty("gtn:name").getString();
+      return ((Node)node.getSession().getItem(node.getProperty("mop:link/mop:page")
+                                     .getString())).getProperty("gtn:name").getString();
     } catch (Exception e) {
       return node.getTitle();
     }

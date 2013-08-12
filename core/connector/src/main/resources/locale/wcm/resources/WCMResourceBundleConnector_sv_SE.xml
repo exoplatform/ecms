@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <ContentSelector>
+    <msg>
+      <no-file-selected>Inget innehåll är valt. Välj minst en.</no-file-selected>
+    </msg>
+  </ContentSelector>
+  <RenameConnector>
+    <label>
+      <rename>Ändra Namn</rename>
+      <cancel>Avbryt</cancel>
+    </label>
+    <msg>
+      <renaming>Byter namn på...</renaming>
+    </msg>
+  </RenameConnector>
+</bundle>

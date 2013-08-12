@@ -128,7 +128,6 @@ public class UIViewVersion extends UIBaseNodePresentation {
   }
 
 
-  @SuppressWarnings("unused")
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     return getAncestorOfType(UIJCRExplorer.class).getJCRTemplateResourceResolver() ;
   }

@@ -367,9 +367,6 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
           driveByPermission.add(drive) ;
         }
       }
-      if(getDriveByName("Private") != null) {
-        driveByPermission.add(getDriveByName("Private")) ;
-      }
     } catch(Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("Unexpected error", e);
@@ -509,7 +506,6 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     if (drives != null)
       return new ArrayList<DriveData>((List<DriveData>) drives);
     List<DriveData> groupDrives = new ArrayList<DriveData>();
-    String groupPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_GROUPS_PATH);
     for (String role : userRoles) {
       String group = role.substring(role.indexOf(":")+1);
       if (groupDriveTemplate_ != null && group.charAt(0)=='/') {

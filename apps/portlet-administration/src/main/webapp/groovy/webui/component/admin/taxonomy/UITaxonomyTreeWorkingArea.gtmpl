@@ -26,8 +26,12 @@
 			          <%
 			            String path = node.getPath() ;
 			            String nodeName = path.substring(path.lastIndexOf("/") + 1, path.length()) ;
+			            String nodeTitle = nodeName;
+			            if (node.hasProperty("exo:title")) {
+			              nodeTitle = node.getProperty("exo:title").getString();
+			            }
 			           %>
-			          <div class="text" rel="tooltip" data-placement="bottom" title="$nodeName">$nodeName</div>
+			          <div class="text" rel="tooltip" data-placement="bottom" title="$nodeTitle">$nodeTitle</div>
 			        </td>
 			        
 		              <%

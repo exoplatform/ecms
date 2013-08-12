@@ -145,7 +145,10 @@ public class CmsServiceImpl implements CmsService {
         currentNode.addMixin(ActivityCommonService.MIX_COMMENT);
         currentNode.setProperty(ActivityCommonService.MIX_COMMENT_CREATING, "true");
       }
+
       createNodeRecursively(NODE, currentNode, nodeType, mappings);
+      createNodeRecursively(NODE, currentNode, nodetypeManager.getNodeType("exo:sortable"), mappings);
+
       if(mixinTypes != null){
         for(String type : mixinTypes){
           if(!currentNode.isNodeType(type)) {

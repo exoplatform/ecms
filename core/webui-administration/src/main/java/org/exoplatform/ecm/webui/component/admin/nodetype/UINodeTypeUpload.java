@@ -25,6 +25,7 @@ import javax.jcr.RepositoryException;
 
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
+import org.exoplatform.services.jcr.core.nodetype.NodeTypeValue;
 import org.exoplatform.services.jcr.core.nodetype.NodeTypeValuesList;
 import org.exoplatform.upload.UploadService;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -36,7 +37,7 @@ import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormUploadInput;
+import org.exoplatform.webui.form.input.UIUploadInput;
 import org.jibx.runtime.BindingDirectory;
 import org.jibx.runtime.IBindingFactory;
 import org.jibx.runtime.IUnmarshallingContext;
@@ -64,8 +65,7 @@ public class UINodeTypeUpload extends UIForm {
 
   public UINodeTypeUpload() throws Exception {
     this.setMultiPart(true) ;
-    UIFormUploadInput uiInput = new UIFormUploadInput(FIELD_UPLOAD, FIELD_UPLOAD);
-    uiInput.setAutoUpload(true);
+    UIUploadInput uiInput = new UIUploadInput(FIELD_UPLOAD, FIELD_UPLOAD);
     addUIFormInput(uiInput) ;
   }
 
@@ -77,14 +77,15 @@ public class UINodeTypeUpload extends UIForm {
       UIPopupWindow uiPopup = uiManager.findComponentById(UINodeTypeManager.IMPORT_POPUP) ;
       UINodeTypeImportPopup uiImportPopup = uiManager.findComponentById("UINodeTypeImportPopup") ;
       UIApplication uiApp = uiUploadForm.getAncestorOfType(UIApplication.class) ;
-      UIFormUploadInput input = uiUploadForm.getUIInput(FIELD_UPLOAD) ;
-      if(input.getUploadResource() == null) {
-        uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.filename-error", null)) ;        
+      UIUploadInput input = uiUploadForm.getUIInput(FIELD_UPLOAD);
+      String uploadId = input.getUploadIds()[0];
+      if(input.getUploadResource(uploadId) == null) {
+        uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.filename-error", null)) ;
         return ;
       }
-      String fileName = input.getUploadResource().getFileName();
+      String fileName = input.getUploadResource(uploadId).getFileName();
       if(fileName == null || fileName.trim().length() == 0) {
-        uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.filename-error", null)) ;        
+        uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.filename-error", null)) ;
         return ;
       }
       DMSMimeTypeResolver resolver = DMSMimeTypeResolver.getInstance();
@@ -93,21 +94,21 @@ public class UINodeTypeUpload extends UIForm {
       UINodeTypeImport uiNodeTypeImport = uiImportPopup.getChild(UINodeTypeImport.class);
       try {
         if(mimeType.trim().equals("text/xml")) {
-          is = new BufferedInputStream(input.getUploadDataAsStream());
+          is = new BufferedInputStream(input.getUploadDataAsStream(uploadId));
         }else if(mimeType.trim().equals("application/zip")) {
-          ZipInputStream zipInputStream = new ZipInputStream(new BufferedInputStream(input.getUploadDataAsStream())) ;
+          ZipInputStream zipInputStream = new ZipInputStream(new BufferedInputStream(input.getUploadDataAsStream(uploadId))) ;
           is = Utils.extractFirstEntryFromZipFile(zipInputStream);
         }else {
-          uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.data-file-error", null)) ;          
+          uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.data-file-error", null)) ;
           return;
         }
         IBindingFactory factory = BindingDirectory.getFactory(NodeTypeValuesList.class);
         IUnmarshallingContext uctx = factory.createUnmarshallingContext();
         NodeTypeValuesList nodeTypeValuesList = (NodeTypeValuesList)uctx.unmarshalDocument(is, null);
-        ArrayList ntvList = nodeTypeValuesList.getNodeTypeValuesList();
+        ArrayList<NodeTypeValue> ntvList = nodeTypeValuesList.getNodeTypeValuesList();
         uiNodeTypeImport.update(ntvList);
         if (uiNodeTypeImport.getRegisteredNodeType().size() > 0 || uiNodeTypeImport.getUndefinedNodeTypes().size() > 0) {
-          Class[] childrenToRender = {UINodeTypeImport.class, UIPopupWindow.class} ;
+          Class<?>[] childrenToRender = {UINodeTypeImport.class, UIPopupWindow.class} ;
           uiImportPopup.setRenderedChildrenOfTypes(childrenToRender) ;
           uiPopup.setShow(true);
           event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
@@ -128,8 +129,7 @@ public class UINodeTypeUpload extends UIForm {
         return ;
       } finally {
         UploadService uploadService = uiUploadForm.getApplicationComponent(UploadService.class);
-        UIFormUploadInput uiUploadInput = uiUploadForm.getChild(UIFormUploadInput.class);
-        uploadService.removeUploadResource(uiUploadInput.getUploadId());
+        uploadService.removeUploadResource(uploadId);
         if (is != null) is.close();
       }
     }

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #####################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UICategoriesSelectPanel #
+  #####################################################################
+  -->
+  <UITreeList>
+    <header>
+      <name>الفرع غير موجود!</name>
+      <action>إضافة</action>
+    </header>
+    <action/>
+    <info>
+      <child-not-found>الفرع غير موجود!</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UISelectedCategoriesGrid #
+  ######################################################################
+  -->
+  <UISelectedCategoriesGrid>
+    <header>
+      <categoryName>اسم الفئة</categoryName>
+      <categoryPath>مسار الفئة</categoryPath>
+      <action>اجراء</action>
+    </header>
+    <action>
+      <SaveCategories>احفظ</SaveCategories>
+      <Cancel>الغاء</Cancel>
+    </action>
+    <msg>
+      <cannot-save>لم يتمّ حفظ الفئات.</cannot-save>
+      <have-saved>تمّ حفظ الفئات بنجاح</have-saved>
+      <non-categories>فئات خاطئة. الرجاء اختيار الفئات المناسبة.</non-categories>
+      <confirm-delete>هل تريد حذف هذه الفئة؟</confirm-delete>
+    </msg>
+  </UISelectedCategoriesGrid>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.selector.UIPermissionSelector           #
+  ######################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIPermissionUser>اختيار المستخدم</UIPermissionUser>
+      <UIPermissionMembership>اختيارالعضوية</UIPermissionMembership>
+    </title>
+  </SelectUserOrGroup>
+  <UIPermissionUser>
+    <label>
+      <selectUser>اختيار المستخدم</selectUser>
+      <selectGroup>تصفح واختر مجموعة</selectGroup>
+    </label>
+  </UIPermissionUser>
+  <UIPermissionMembership>
+    <label>
+      <selectUser>اختيار العضوية</selectUser>
+      <selectGroup>تصفح واختر مجموعة</selectGroup>
+    </label>
+  </UIPermissionMembership>
+</bundle>

@@ -2,7 +2,7 @@
   import org.exoplatform.webui.form.UIFormInputBase;
 %>
 <div class="uiFormWithTitle uiBox $uicomponent.id" onkeypress="javascript:SubmitAction.call(this, event);">
-  <h5 class="title"><%=_ctx.appRes(uicomponent.getName() + ".title")%></h5>
+  <h6 class="title"><%=_ctx.appRes(uicomponent.getName() + ".title")%></h6>
   <% uiform.begin() %>
   <div class="uiContentBox">
     <div class="form-horizontal">

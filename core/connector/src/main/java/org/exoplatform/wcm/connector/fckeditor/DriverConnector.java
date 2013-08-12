@@ -390,7 +390,9 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       if ((repositoryName != null) && (workspaceName != null) && (driverName != null)
           && (currentFolder != null)) {
         ManageDriveService manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
-        workspaceName = workspaceName != null ? workspaceName : manageDriveService.getDriveByName(Text.escapeIllegalJcrChars(driverName)).getWorkspace();
+        workspaceName = workspaceName != null ? workspaceName : 
+                                                manageDriveService.getDriveByName(Text.escapeIllegalJcrChars(driverName))
+                                                                  .getWorkspace();
 
         Node currentFolderNode = getParentFolderNode(workspaceName,
                                                      Text.escapeIllegalJcrChars(driverName),

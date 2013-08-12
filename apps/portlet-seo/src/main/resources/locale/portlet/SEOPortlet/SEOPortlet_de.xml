@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UISEOForm>
+    <label>  
+      <title>Titel:</title>
+      <description>Beschreibung:</description>
+      <keywords>Schlüsselwörter:</keywords>
+      <language>Sprache:</language>
+      <robots>Robots:</robots>
+      <sitemap>Seitenübersicht:</sitemap>
+      <sitemapvisible>Sichtbar in der Seitenübersicht</sitemapvisible>
+    <isInherited>Geerbt von übergeordneter Seite</isInherited>
+      <priority>Priorität:</priority>
+      <frequency>Häufigkeit:</frequency>
+      <select-language>Sprache auswählen</select-language>
+      <option>
+        <Always>Immer</Always>
+        <Hourly>Stündlich</Hourly>
+        <Daily>Täglich</Daily>
+        <Weekly>Wöchentlich</Weekly>
+        <Monthly>Monatlich</Monthly>
+        <Yearly>Jährlich</Yearly>
+        <Never>Niemals</Never>
+      </option> 
+    </label>
+    <tip>
+  <priority>Gültige Werte liegen zwischen 0.0 und 1.0</priority>
+  </tip>   
+    <action>
+      <Save>Speichern</Save>
+      <Cancel>Abbrechen</Cancel>
+    </action>
+    <msg>
+      <repository-exception>Unerwarteter Fehler beim Speichern der Seitenmetadaten.</repository-exception>
+      <confirm-delete>Möchten Sie diese SEO-Daten wirklich löschen?</confirm-delete>      
+    </msg>
+    <title>
+    <seo-delete>Löschen</seo-delete>
+    </title>
+  <help> 
+  <priority>Gültige Werte liegen zwischen 0.0 und 1.0.</priority>
+  <description>Hilfesuchende: Lassen Sie die andere Benutzer wissen, dass die folgende Seite einen Link enthält, nach dem sie suchen.</description>
+  <keywords>Die wichtigsten Begriffe auf der Seite durch ein Komma getrennt.</keywords>  
+  </help>  
+  </UISEOForm>
+  <UISEOPopupWindow>
+  <title>
+      <UISEOForm>SEO Management</UISEOForm>
+  </title>
+  </UISEOPopupWindow>    
+  <UISEOToolbarForm>
+  <title>
+      <seo>SEO Management</seo>
+  </title>
+  <label>
+    <seo>SEO</seo>
+  </label>
+  </UISEOToolbarForm>  
+  <FloatNumberValidator>
+    <msg>
+      <Invalid-number>Der Wert des Prioritätfeldes muss in nummerischem Format sein. Die gültigen Werte liegen zwischen 0.0 und 1.0.</Invalid-number>
+    </msg>
+  </FloatNumberValidator>  
+  
+</bundle>

@@ -33,7 +33,6 @@ import org.exoplatform.ecm.webui.presentation.NodePresentation;
 import org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation;
 import org.exoplatform.ecm.webui.presentation.removeattach.RemoveAttachmentComponent;
 import org.exoplatform.ecm.webui.presentation.removecomment.RemoveCommentComponent;
-import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
@@ -54,7 +53,6 @@ import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
-import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
 import org.exoplatform.webui.event.Event;
@@ -338,7 +336,6 @@ public class UIPresentation extends UIBaseNodePresentation {
   static public class DownloadActionListener extends EventListener<UIPresentation> {
     public void execute(Event<UIPresentation> event) throws Exception {
       UIPresentation uiComp = event.getSource();
-      UIApplication uiApp = uiComp.getAncestorOfType(UIApplication.class);
       try {
         String downloadLink = Utils.getDownloadLink(Utils.getFileLangNode(uiComp.getNode()));
         RequireJS requireJS = event.getRequestContext().getJavascriptManager().getRequireJS();
@@ -347,10 +344,6 @@ public class UIPresentation extends UIBaseNodePresentation {
         if (LOG.isErrorEnabled()) {
          LOG.error("Repository cannot be found", e);
         }
-        return ;
-      } catch (Exception e) {
-        JCRExceptionManager.process(uiApp, e);
-        return;
       }
     }
   }

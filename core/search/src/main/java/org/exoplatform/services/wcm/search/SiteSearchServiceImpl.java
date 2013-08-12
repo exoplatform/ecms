@@ -481,37 +481,6 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     }
   }
   
-  private List<String> getKeywords(String queryString, boolean isMultiplePhaseSearch) {
-    List<String> ret = new ArrayList<String>();
-    if (!isMultiplePhaseSearch) {
-      ret.add(queryString);
-    } else {
-      boolean inQuote = false;
-      StringBuffer currentTerm = new StringBuffer();
-      for (int i = 0; i < queryString.length(); i++) {
-        char c = queryString.charAt(i);
-        if ('"' == c) {//change status inQuote outQuote
-          inQuote = !inQuote;
-          ret.add(currentTerm.toString());
-          currentTerm = new StringBuffer();
-        } else {//not change state
-          if (inQuote) {// in quote
-            currentTerm.append(c);
-          } else {// out quote
-            if (' ' != c) { //not space
-              currentTerm.append(c);
-            } else { // space
-              ret.add(currentTerm.toString());
-              currentTerm = new StringBuffer();
-            }
-          }
-        }
-      }
-      ret.add(currentTerm.toString());
-    }
-    return ret;
-  }
-
   /**
    * Search by node name.
    *

@@ -164,7 +164,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   final protected static String CONTENT_YEAR_PAGE_ITERATOR_ID      = "ContentYearPageIterator";
 
   protected UIDocumentNodeList    documentNodeList_;
-  
+
   private static final Log      LOG                                = ExoLogger.getLogger(UIDocumentInfo.class.getName());
 
   private String                typeSort_                          = Preference.SORT_BY_NODETYPE;
@@ -178,7 +178,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   private NodeLocation          currentNode_;
 
   private UIPageIterator        pageIterator_;
-  
+
   private UIPageIterator        todayPageIterator_;
 
   private UIPageIterator        yesterdayPageIterator_;
@@ -206,7 +206,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
   //flag indicating if we need to update data for Timeline
   private boolean updateTimeLineData_ = false;
-  
+
   //used in File View, indicating which folders are expanded
   private Set<String> expandedFolders_;
 
@@ -497,7 +497,6 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     return uiExplorer.getDocumentInfoTemplate();
   }
 
-  @SuppressWarnings("unused")
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     return getAncestorOfType(UIJCRExplorer.class).getJCRTemplateResourceResolver();
   }
@@ -607,7 +606,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
   public String getWebDAVServerPrefix() throws Exception {
     PortletRequestContext portletRequestContext = PortletRequestContext.getCurrentInstance() ;
-    String prefixWebDAV = portletRequestContext.getRequest().getScheme() + "://" 
+    String prefixWebDAV = portletRequestContext.getRequest().getScheme() + "://"
             + portletRequestContext.getRequest().getServerName() ;
     int serverPort = portletRequestContext.getRequest().getServerPort();
     if (serverPort!=80) {
@@ -862,8 +861,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     if(uiExplorer.getAllClipBoard().size() > 0) return true;
     return false;
   }
-  
-  @SuppressWarnings("unchecked")
+
   public void updatePageListData() throws Exception {
     UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
     String currentPath = uiExplorer.getCurrentPath();
@@ -875,7 +873,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
       documentNodeList_.setPageList(pageList);
     }
     updateTimeLineData_ = true;
-  }  
+  }
 
   @SuppressWarnings("unchecked")
   public LazyPageList<Object> getPageList(String path) throws Exception {
@@ -904,7 +902,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   public List<Node> getChildrenList() throws Exception {
     return NodeLocation.getNodeListByLocationList(pageIterator_.getCurrentPageData());
   }
-  
+
   public String getTypeSort() { return typeSort_; }
 
   public void setTypeSort(String typeSort) {
@@ -1139,7 +1137,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
       NodeFinder nodeFinder = uicomp.getApplicationComponent(NodeFinder.class);
       UIJCRExplorer uiExplorer = uicomp.getAncestorOfType(UIJCRExplorer.class);
-      UITreeExplorer uiTreeExplorer = uiExplorer.findFirstComponentOfType(UITreeExplorer.class);      
+      UITreeExplorer uiTreeExplorer = uiExplorer.findFirstComponentOfType(UITreeExplorer.class);
       String uri = event.getRequestContext().getRequestParameter(OBJECTID);
       String workspaceName = event.getRequestContext().getRequestParameter("workspaceName");
       boolean findDrive = Boolean.getBoolean(event.getRequestContext().getRequestParameter("findDrive"));
@@ -1175,8 +1173,8 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         uiExplorer.updateAjax(event);
         event.getRequestContext().getJavascriptManager().
         require("SHARED/multiUpload", "multiUpload").
-        addScripts("multiUpload.setLocation('" + 
-                   uiExplorer.getWorkspaceName()  + "','" + 
+        addScripts("multiUpload.setLocation('" +
+                   uiExplorer.getWorkspaceName()  + "','" +
                    uiExplorer.getDriveData().getName()  + "','" +
                    uiTreeExplorer.getLabel()  + "','" +
                    uiExplorer.getCurrentPath() + "','" +
@@ -1217,11 +1215,11 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
       try {
         String sortParam = event.getRequestContext().getRequestParameter(OBJECTID) ;
         String[] array = sortParam.split(";");
-        String order = Preference.ASCENDING_ORDER.equals(array[0].trim()) || !array[1].trim().equals(uicomp.getTypeSort()) ? 
+        String order = Preference.ASCENDING_ORDER.equals(array[0].trim()) || !array[1].trim().equals(uicomp.getTypeSort()) ?
                        Preference.BLUE_DOWN_ARROW : Preference.BLUE_UP_ARROW;
-        
+
         String prefOrder = Preference.ASCENDING_ORDER.equals(array[0].trim()) || !array[1].trim().equals(uicomp.getTypeSort())?
-                           Preference.ASCENDING_ORDER : Preference.DESCENDING_ORDER;                                                                                                     
+                           Preference.ASCENDING_ORDER : Preference.DESCENDING_ORDER;
         uicomp.setSortOrder(order);
         uicomp.setTypeSort(array[1]);
         Preference pref = uiExplorer.getPreference();
@@ -1540,7 +1538,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
       }
     }
   }
-  
+
   private class SearchComparator implements Comparator<NodeLocation> {
     public int compare(NodeLocation nodeA, NodeLocation nodeB) {
       try {
@@ -1642,7 +1640,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   public HashMap<String, String> getIsExpanded() {
     return isExpanded_;
   }
-  
+
   public Set<String> getExpandedFolders() {
     return this.expandedFolders_;
   }
@@ -1675,7 +1673,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
              parent.isNodeType(NodetypeConstant.EXO_ACCESSIBLE_MEDIA);
     } catch (Exception e) { return false; }
   }
-  
+
   /**
    * checks if user has permission to add nt:file to current node
    * @throws Exception
@@ -1700,7 +1698,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     }
     for (NodeDefinition def : defs) {
       for (NodeType type : def.getRequiredPrimaryTypes()) {
-        if ((NodetypeConstant.NT_FILE.equals(type.getName()) || 
+        if ((NodetypeConstant.NT_FILE.equals(type.getName()) ||
              NodetypeConstant.NT_BASE.equals(type.getName()) ||
              NodetypeConstant.NT_HIERARCHY_NODE.equals(type.getName())) &&
             "*".equals(def.getName())) {
@@ -1710,9 +1708,9 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     }
     return false;
   }
-  
+
   public String getDragAndDropEvents(Node node) throws Exception{
-    //define events for drag&drop files into subfolders  
+    //define events for drag&drop files into subfolders
     if (this.canAddNode(node)) {
     StringBuilder dragEvents = new StringBuilder().append("ondragover='eXo.ecm.MultiUpload.enableDragItemArea(event, this)' ").
                                                     append("ondragleave='eXo.ecm.MultiUpload.disableDragItemArea(this)' ").
@@ -1726,7 +1724,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
       return "";
     }
   }
-  
+
   @Override
   public void processRender(WebuiRequestContext context) throws Exception {
     //check if current user can add node to current node
@@ -1740,11 +1738,11 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     }
     super.processRender(context);
   }
-  
+
   public boolean hasChildren(Node node) {
     return false;
   }
-  
+
   public List<Node> getChildrenFromNode(Node node) {
     return null;
   }

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIPresentationContainer>
+    <title>
+      <QuickEdit>Modifica in Esplora Contenuto</QuickEdit>
+      <print>Stampa Questa Pagina</print>
+      <FastPublish>Pubblica</FastPublish>
+    </title>
+    <label>
+      <draft>Bozza</draft>
+      <print>Stampa</print>
+    </label>
+    <msg>
+      <no-content>Nessun contenuto trovato.</no-content>
+      <internal-server-error>Errore richiedendo i dati dal server.</internal-server-error>
+      <empty-title-error>Specifica il nuovo titolo.</empty-title-error>
+    </msg>
+  </UIPresentationContainer>
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorOne>Seleziona Contenuto</UIContentSelectorOne>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+  <UISingleContentViewerPortlet>
+    <msg>
+      <AccessControlException>Non hai i permessi di accedere alla modalitÃ  di Modifica.</AccessControlException>
+    </msg>
+  </UISingleContentViewerPortlet>
+  <UISCVContextualRadioBox>
+    <label>
+      <Enable>Abilitato</Enable>
+      <Disable>Disabilitato</Disable>
+    </label>
+  </UISCVContextualRadioBox>
+  <UIPreferencesPopupWindows>
+    <title>
+      <UISCVPreferences>Preferenze Dettaglio Contenuto</UISCVPreferences>
+    </title>
+  </UIPreferencesPopupWindows>
+  <UISCVPreferences>
+    <action>
+      <Save>Salva</Save>
+      <Abort>Abbandona</Abort>
+      <Cancel>Annulla</Cancel>
+      <Print>Stampa</Print>
+      <Close>Chiudi</Close>
+    </action>
+    <title>Preferenze Dettaglio Contenuto</title>
+    <label>
+      <Back>Torna alla pagina precedente</Back>
+      <Edit>Modifica</Edit>
+      <Preferences>Preferenze</Preferences>
+      <Title>Preferenze Dettaglio Contenuto</Title>
+      <UISCVShowTitleConfigurationCheckBox>Mostra Titolo</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>Mostra Data</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowOptionBarConfigurationCheckBox>Mostra Barra Opzioni</UISCVShowOptionBarConfigurationCheckBox>
+      <DisplaySettingBlock>Impostazioni di Visualizzazione</DisplaySettingBlock>
+      <ContentPathBlock>Seleziona Contenuto</ContentPathBlock>
+      <UISCVConfigItemPathFormInputSet>Percorso Contenuto</UISCVConfigItemPathFormInputSet>
+    <UISCVContentPathConfigurationInputBox>Percorso Contenuto</UISCVContentPathConfigurationInputBox>
+      <Advance>Avanzate</Advance>
+      <ContextCaption>Navigazione Dinamica</ContextCaption>
+      <UISCVContextualRadioBox>Contenuto Contestuale</UISCVContextualRadioBox>
+      <UISCVParameterInputBox>da</UISCVParameterInputBox>
+      <PrintSettingBlock>Impostazioni di Stampa</PrintSettingBlock>
+      <UISCVPrintPageParameter>con</UISCVPrintPageParameter>
+      <UISCVConfigPrintPageFormInputSet>Mostra in Pagina</UISCVConfigPrintPageFormInputSet>
+      <LockStatus>Blocca</LockStatus>
+      <CacheManagement>VisibilitÃ  Contenuti</CacheManagement>
+      <UISCVCacheRadioBox>Condividi Contenuti</UISCVCacheRadioBox>
+    </label>
+    <help>
+      <ContentPathBlock>Selezionare il contenuto che si desidera visualizzare. Questo contenuto di default sarÃ  sostituito dinamicamente se si attiva la navigazione dinamica (vedere la modalità avanzata sotto).</ContentPathBlock>
+      <DisplaySettingBlock>E' possibile visualizzare o nascondere la barra opzione utilizzata per mostrare il collegamento di stampa. Anche la visualizzazione di Titolo e Data è opzionale.</DisplaySettingBlock>
+      <ContextualHelp>Attiva la navigazione dinamica. Il contenuto puÃ² essere modificato dinamicamente da un altro URL basato su un parametro.</ContextualHelp>
+      <ParameterHelp>Questo parametro verrÃ  utilizzato per ottenere il contenuto se la navigazione dinamica Ãš attivato..</ParameterHelp>
+    </help>
+    <msg>
+      <not-valid-path>Percorso elemento non valido.</not-valid-path>
+    </msg>
+    <tab>
+      <label>
+        <UISCVConfigContentFormInputSet>Seleziona Contenuto</UISCVConfigContentFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Impostazioni di Visualizzazione</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>Impostazioni di Stampa</UISCVConfigPrintFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Avanzate</UISCVConfigAdvancedFormInputSet>
+      </label>
+    </tab>
+  </UISCVPreferences>
+  <UISCVConfigItemPathFormInputSet>
+    <title>
+      <SelectFolderPath>Seleziona Percorso Cartella</SelectFolderPath>
+    </title>
+  </UISCVConfigItemPathFormInputSet>
+  <UISCVConfigPrintPageFormInputSet>
+    <title>
+      <SelectTargetPage>Mostra in Pagina</SelectTargetPage>
+    </title>
+  </UISCVConfigPrintPageFormInputSet>
+  <PublicationStates>
+    <archived>Archiviato</archived>
+    <obsolete>Obsoleto</obsolete>
+    <unpublished>Non Pubblicato</unpublished>
+    <enrolled>Iscritto</enrolled>
+    <draft>Bozza</draft>
+    <pending>In Attesa</pending>
+    <approved>Approvato</approved>
+    <inreview>In Revisione</inreview>
+    <staged>In Cantiere</staged>
+    <published>Pubblicato</published>
+  </PublicationStates>
+  <UISCVCacheRadioBox>
+    <label>
+      <Enable>Ristretto da Autenticazione</Enable>
+      <Disable>Ristretto da Regole Utente</Disable>
+    </label>
+  </UISCVCacheRadioBox>
+</bundle>

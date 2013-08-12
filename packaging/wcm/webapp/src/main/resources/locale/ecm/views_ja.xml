@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ 
+  <View>
+    <label>
+      <languages>
+        <en>英語</en>
+        <fr>フランス語</fr>
+        <ru>ロシア語</ru>
+        <vi>ベトナム語</vi>
+        <nl>オランダ語</nl>
+        <de>ドイツ語</de>
+        <uk>ウクライナ語</uk>
+        <ar>アラビア語</ar>
+      </languages>
+    </label>
+  </View>
+ 
+  <!--
+  ################resoucebundle FOR EXO:COMMENT VIEW TEMPLATE#############
+  -->
+  <Comment>
+    <view>
+      <label>
+        <postedBy>最終コメント</postedBy>
+        <at>で</at>
+        <comments>コメント</comments>
+        <show-comments>コメントの表示</show-comments>
+        <hide-comments>コメントの非表示</hide-comments>
+        <comment-by>コメント</comment-by>
+        <email>メール</email>
+        <site>サイト</site>
+      </label>
+    </view>
+  </Comment>
+ 
+  <!--
+  ################resoucebundle FOR NT:FILE VIEW TEMPLATE##############
+  -->
+  <File>
+    <view>
+      <label>
+        <not-viewable>このコンテンツは見ることができません、ダウンロードする、もしくはWebDAVを使ってアクセスしてください。</not-viewable>
+        <using-webDAV>または、WebDAV を使用して、コンテンツにアクセスしてください</using-webDAV>
+        <file-size-too-big>ファイルのコンテンツが大きすぎます。ダウンロードし、クライアント上で開いて下さい。</file-size-too-big>
+        <webDAV>WebDAV ビュー</webDAV>
+        <download>ファイルをダウンロード</download>
+        <htmlview>HTMLで見る</htmlview>
+        <plaintextview>テキストで見る</plaintextview>
+      </label>
+    </view>
+  </File>
+ 
+  <!--
+  ################resoucebundle FOR MAIL:DOCUMENT VIEW TEMPLATE##############
+  -->
+  <Mail>
+    <view>
+      <label>
+        <from>差出人：</from>
+        <to>宛先：</to>
+        <cc>Cc:</cc>
+        <date>日付:</date>
+        <subject>件名：</subject>
+        <attachment>添付:</attachment>
+      </label>
+    </view>
+  </Mail>
+  <!--
+  ################resoucebundle FOR EXO:VOTE VIEW TEMPLATE##############
+  -->
+  <Vote>
+    <view>
+      <label>
+        <avg-rating>平均評価</avg-rating>
+        <subscription>投票</subscription>
+      </label>
+    </view>
+  </Vote>
+  <!--
+  ################resoucebundle FOR LISTVIEW VIEW TEMPLATE##############
+  -->
+  <ListView>
+    <view>
+      <label>
+        <name>名前</name>
+        <versionable>バージョン管理可能</versionable>
+        <exo_owner>オーナー</exo_owner>
+        <exo_dateCreated>作成日</exo_dateCreated>
+        <exo_dateModified>変更日</exo_dateModified>
+        <auditing>監査</auditing>
+      </label>
+    </view>
+  </ListView>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction view template ####
+  -->
+  <AddMetadata>
+    <view>
+      <label>
+        <action-name>アクション名</action-name>
+        <lifecycle>ライフサイクル</lifecycle>
+        <metadata>メタデータ</metadata>
+        <description>説明</description>
+      </label>
+    </view>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning view template ####
+  -->
+  <AutoVersioning>
+    <view>
+      <label>
+        <action-name>アクション名</action-name>
+        <lifecycle>ライフサイクル</lifecycle>
+        <description>説明</description>
+      </label>
+    </view>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong view template ####
+  -->
+  <EnableVersioning>
+    <view>
+      <label>
+        <action-name>名前</action-name>
+        <lifecycle>ライフサイクル</lifecycle>
+        <description>説明</description>
+      </label>
+    </view>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet view template ####
+  -->
+  <ElementSet>
+    <view>
+      <label>
+        <not-avaliable>N/A</not-avaliable>
+        <title>タイトル</title>
+        <creator>作成者</creator>
+        <subject>題</subject>
+        <source>ソース</source>
+        <contributor>コントリビュータ</contributor>
+        <resource-type>リソースタイプ</resource-type>
+        <date>日付</date>
+        <publisher>公開者</publisher>
+        <description>説明</description>
+        <rights>権限</rights>
+        <relation>関連</relation>
+        <format>フォーマット</format>
+        <coverage>範囲</coverage>
+        <identifier>識別子</identifier>
+        <languages>言語</languages>
+      </label>
+      <action>
+        <add-edit>追加/編集</add-edit>
+        <cancel>キャンセル</cancel>
+      </action>
+      <tooltip>
+        <cancel>キャンセル</cancel>
+        <add-edit>プロパティの追加/編集</add-edit>
+      </tooltip>
+    </view>
+  </ElementSet>
+
+  <ScriptAction>
+    <view>
+      <label> 
+        <isDeep>Is deep</isDeep>
+        <nodetypes>ノードタイプ</nodetypes>
+        <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
+        <nodeTypeName>ノードの型名</nodeTypeName>
+      </label> 
+    </view>
+  </ScriptAction>
+  
+  <AddMetadata>
+    <view>
+      <label>
+        <isDeep>Is deep</isDeep>
+        <nodetypes>ノードタイプ</nodetypes>
+        <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
+        <nodeTypeName>Node type names</nodeTypeName>
+      </label> 
+    </view>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <view>
+      <label>
+        <isDeep>Is deep</isDeep>
+        <nodetypes>ノードタイプ</nodetypes> 
+        <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
+        <nodeTypeName>Node type names</nodeTypeName>
+      </label> 
+    </view>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <view>
+      <label>
+        <isDeep>Is deep</isDeep>
+        <nodetypes>ノードタイプ</nodetypes>
+        <affectedNodeTypeNames>影響を受けるノードタイプ</affectedNodeTypeNames>
+        <nodeTypeName>Node type names</nodeTypeName>
+      </label> 
+    </view>
+  </AutoVersioning>
+  
+   <AccessibleMedia>
+    <view>
+      <label>
+      <Play-audio-description-of-this-video>オーディオの説明</Play-audio-description-of-this-video>
+      <Read-more>もっと読む</Read-more>
+      <Read-less>閉じる</Read-less>
+      <Switch-back-to-original-video>元のビデオ</Switch-back-to-original-video>
+      </label>
+      <tooltip>
+      <A-second-media-file-is-available-as-audio-description>A second media file is available as audio description</A-second-media-file-is-available-as-audio-description>
+      </tooltip>
+    </view>
+  </AccessibleMedia>
+ 
+</bundle>

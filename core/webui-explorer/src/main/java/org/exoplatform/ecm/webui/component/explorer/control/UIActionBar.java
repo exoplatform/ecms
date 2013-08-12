@@ -57,6 +57,8 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.query.Query;
 import javax.portlet.PortletPreferences;
+
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.*;
 
@@ -147,10 +149,10 @@ public class UIActionBar extends UIForm {
       backLink = newLink;
     return backLink != null;
   }
-  public String getBackLink() {
+  public String getBackLink() throws UnsupportedEncodingException {
     String newLink = getAncestorOfType(UIJCRExplorerPortlet.class).getBacktoValue();
     if (newLink != null && newLink.length()>0)
-      backLink = URLDecoder.decode(newLink);
+      backLink = URLDecoder.decode(newLink, "UTF-8");
     return backLink;
   }
   public String getTemplateName() { return templateName_;  }
@@ -260,13 +262,13 @@ public class UIActionBar extends UIForm {
       }
       UISearchResult uiSearchResult =
         uiDocumentWorkspace.getChildById(UIDocumentWorkspace.SIMPLE_SEARCH_RESULT);
-      
+
       long startTime = System.currentTimeMillis();
-      uiSearchResult.setQuery(queryStatement, currentNode.getSession().getWorkspace().getName(), Query.SQL, 
+      uiSearchResult.setQuery(queryStatement, currentNode.getSession().getWorkspace().getName(), Query.SQL,
                               IdentityConstants.SYSTEM.equals(WCMCoreUtils.getRemoteUser()), null);
       uiSearchResult.updateGrid();
       long time = System.currentTimeMillis() - startTime;
-      
+
       uiSearchResult.setSearchTime(time);
       uiDocumentWorkspace.setRenderedChild(UISearchResult.class);
     }
@@ -335,7 +337,7 @@ public class UIActionBar extends UIForm {
       uiPrefForm.update(uiJCRExplorer.getPreference()) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(popupAction) ;
     }
-  }  
+  }
 
   static public class ShowDrivesActionListener extends EventListener<UIActionBar> {
     public void execute(Event<UIActionBar> event) throws Exception {

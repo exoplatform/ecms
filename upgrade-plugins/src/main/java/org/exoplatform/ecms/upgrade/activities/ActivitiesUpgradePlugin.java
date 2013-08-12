@@ -8,7 +8,9 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.cms.impl.Utils;
 
+import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
@@ -47,6 +49,7 @@ public class ActivitiesUpgradePlugin extends UpgradeProductPlugin {
         Node paramsNode = viewNode.getNode("soc:params");
         String workspace = paramsNode.getProperty("workspace").getString();        
         String nodeUrl = viewNode.getProperty("soc:url").getString();
+        String nodeUUID = paramsNode.getProperty("id").getString();
         Session session2 = sessionProvider.getSession(workspace,
             repoService_.getCurrentRepository());
         try{
@@ -55,7 +58,20 @@ public class ActivitiesUpgradePlugin extends UpgradeProductPlugin {
 	        	viewNode.setProperty("soc:type", "files:spaces");
 	        }
         } catch(PathNotFoundException ex) {
-        	continue;
+          try {
+            Node node = (Node)session2.getNodeByUUID(nodeUUID);
+            if(node.isNodeType(NodetypeConstant.NT_FILE)) {
+              if(Utils.isInTrash(node)) { 
+                viewNode.remove();
+              }
+              else {
+                viewNode.setProperty("soc:type", "files:spaces");
+                viewNode.setProperty("soc:url", node.getPath());
+              }
+            }
+          } catch(ItemNotFoundException ix){
+            continue;
+          }
         }
       }
       session.save();

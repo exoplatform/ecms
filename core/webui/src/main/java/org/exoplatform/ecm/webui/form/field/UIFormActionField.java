@@ -46,7 +46,7 @@ public class UIFormActionField extends DialogFormField {
     if(label != null && label.length()!=0) {
       uiInput.setLabel(label);
     }
-    uiInput.setEditable(isEditable());
+    uiInput.setReadOnly(!isEditable());
     return (T)uiInput;
   }
 

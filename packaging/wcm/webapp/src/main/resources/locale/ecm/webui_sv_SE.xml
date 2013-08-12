@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #####################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UICategoriesSelectPanel #
+  #####################################################################
+  -->
+  <UITreeList>
+    <header>
+      <name>Namn</name>
+      <action>Lägg till</action>
+    </header>
+    <action/>
+    <info>
+      <child-not-found>underkategori hittades inte!</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UISelectedCategoriesGrid #
+  ######################################################################
+  -->
+  <UISelectedCategoriesGrid>
+    <header>
+      <categoryName>Kategorinamn</categoryName>
+      <categoryPath>Kategori sökväg</categoryPath>
+      <action>Åtgärd</action>
+    </header>
+    <action>
+      <SaveCategories>Spara</SaveCategories>
+      <Cancel>Avbryt</Cancel>
+    </action>
+    <msg>
+      <cannot-save>Kategorier sparades inte.</cannot-save>
+      <have-saved>Kategorier har sparats</have-saved>
+      <non-categories>Kategorier är fel. Välj lämpliga kategorier.</non-categories>
+      <confirm-delete>Vill du ta bort denna kategori?</confirm-delete>
+    </msg>
+  </UISelectedCategoriesGrid>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.selector.UIPermissionSelector           #
+  ######################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIPermissionUser>Välj användare</UIPermissionUser>
+      <UIPermissionMembership>Välj medlemskap</UIPermissionMembership>
+    </title>
+  </SelectUserOrGroup>
+  <UIPermissionUser>
+    <label>
+      <selectUser>Välj användare</selectUser>
+      <selectGroup>Bläddra och välj en grupp</selectGroup>
+    </label>
+  </UIPermissionUser>
+  <UIPermissionMembership>
+    <label>
+      <selectUser>Välj medlemskap</selectUser>
+      <selectGroup>Bläddra och välj en grupp</selectGroup>
+    </label>
+  </UIPermissionMembership>
+</bundle>

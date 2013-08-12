@@ -684,7 +684,8 @@ public class Utils {
     String strAction = actionsb.toString();
 
     sb.append("<div class=\"InlineEditing\">\n");
-    sb.append("\n<div rel=\"tooltip\" data-placement=\"bottom\" id=\"").append(showBlockId).append("\" Class=\"").append(cssClass).append("\"");
+    sb.append("\n<div rel=\"tooltip\" data-placement=\"bottom\" id=\"")
+      .append(showBlockId).append("\" Class=\"").append(cssClass).append("\"");
     sb.append("title=\"").append(strSuggestion).append("\"");
     sb.append(" onDblClick=\"InlineEditor.presentationSwitchBlock('").append(showBlockId).
        append("', '").append(editBlockEditorID).append("');\"");
@@ -702,7 +703,8 @@ public class Utils {
        append("\" name=\"").append(currentValueID).append("\">").append(currentValue).append("</DIV>");
 
     if (bDirection!=null && bDirection.equals(LEFT2RIGHT)) {
-      sb.append("\t\t<a href=\"#\" rel=\"tooltip\" data-placement=\"bottom\" class =\"AcceptButton\" style=\"float:left\" onclick=\"")
+      sb.append("\t\t<a href=\"#\" rel=\"tooltip\" data-placement=\"bottom\"")
+        .append(" class =\"AcceptButton\" style=\"float:left\" onclick=\"")
         .append(strAction)
         .append("\" title=\"" + acceptButton + "\">&nbsp;</a>\n");
       sb.append("\t\t<a href=\"#\" rel=\"tooltip\" data-placement=\"bottom\" class =\"CancelButton\" style=\"float:left\" ").

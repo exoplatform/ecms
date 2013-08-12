@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #####################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UICategoriesSelectPanel #
+  #####################################################################
+  -->
+  <UITreeList>
+    <header>
+      <name>Name</name>
+      <action>Hinzufügen</action>
+    </header>
+    <action/>
+    <info>
+      <child-not-found>Unterknoten nicht gefunden!</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UISelectedCategoriesGrid #
+  ######################################################################
+  -->
+  <UISelectedCategoriesGrid>
+    <header>
+      <categoryName>Kategoriename</categoryName>
+      <categoryPath>Kategoriepfad</categoryPath>
+      <action>Aktion</action>
+    </header>
+    <action>
+      <SaveCategories>Speichern</SaveCategories>
+      <Cancel>Abbrechen</Cancel>
+    </action>
+    <msg>
+      <cannot-save>Kategorien wurden nicht gespeichert.</cannot-save>
+      <have-saved>Kategorien wurden erfolgreich gespeichert</have-saved>
+      <non-categories>Kategorien sind falsch. Bitte wählen Sie die entsprechende Kategorien.</non-categories>
+      <confirm-delete>Möchten Sie diese Kategorie löschen?</confirm-delete>
+    </msg>
+  </UISelectedCategoriesGrid>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.selector.UIPermissionSelector           #
+  ######################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIPermissionUser>Benutzer auswählen</UIPermissionUser>
+      <UIPermissionMembership>Rolle auswählen</UIPermissionMembership>
+    </title>
+  </SelectUserOrGroup>
+  <UIPermissionUser>
+    <label>
+      <selectUser>Benutzer auswählen</selectUser>
+      <selectGroup>Durchsuchen und wählen Sie eine Gruppe</selectGroup>
+    </label>
+  </UIPermissionUser>
+  <UIPermissionMembership>
+    <label>
+      <selectUser>Rolle auswählen</selectUser>
+      <selectGroup>Durchsuchen und wählen Sie eine Gruppe</selectGroup>
+    </label>
+  </UIPermissionMembership>
+</bundle>

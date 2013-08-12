@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <ContentSelector>
+    <msg>
+      <no-file-selected>選択したコンテンツがありません。少なくとも 1 つ以上のコンテンツを選択してください。</no-file-selected>
+    </msg>
+  </ContentSelector>
+  <RenameConnector>
+    <label>
+      <rename>名前変更</rename>
+      <cancel>キャンセル</cancel>
+    </label>
+    <msg>
+      <renaming>名前を変更中です。。。</renaming>
+    </msg>
+  </RenameConnector>
+</bundle>

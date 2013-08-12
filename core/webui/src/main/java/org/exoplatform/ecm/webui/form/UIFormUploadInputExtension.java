@@ -16,35 +16,27 @@
  */
 package org.exoplatform.ecm.webui.form;
 
-import org.exoplatform.webui.form.UIFormUploadInput;
+import org.exoplatform.webui.form.input.UIUploadInput;
 
 /**
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          exo@exoplatform.com
- * Nov 24, 2011  
+ * Nov 24, 2011
  */
-public class UIFormUploadInputExtension extends UIFormUploadInput {
+public class UIFormUploadInputExtension extends UIUploadInput {
 
   protected byte[] byteValue;
   protected String fileName;
   protected String mimeType;
-  
+
   public UIFormUploadInputExtension(String name, String bindingExpression) {
     super(name, bindingExpression);
   }
-  
+
   public UIFormUploadInputExtension(String name, String bindingExpression, int limit) {
-    super(name, bindingExpression, limit);
+    super(name, bindingExpression, 1, limit);
   }
-  
-  public UIFormUploadInputExtension(String name, String bindingExpression, boolean isAutoUpload) {
-    super(name, bindingExpression, isAutoUpload);
-  }
-  
-  public UIFormUploadInputExtension(String name, String bindingExpression, int limit, boolean isAutoUpload) {
-    super(name, bindingExpression, limit, isAutoUpload);
-  }  
 
   public void setByteValue(byte[] value) { byteValue = value; }
 
@@ -53,9 +45,9 @@ public class UIFormUploadInputExtension extends UIFormUploadInput {
   public String getFileName() { return fileName; }
 
   public void setFileName(String fileName) { this.fileName = fileName; }
-  
+
   public void setMimeType(String value) { mimeType = value; }
-  
-  public String getMimeType() { return mimeType; }  
+
+  public String getMimeType() { return mimeType; }
 
 }

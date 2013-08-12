@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UISEOForm>
+    <label>  
+      <title>タイトル</title>
+      <description>説明:</description>
+      <keywords>キーワード:</keywords>
+      <language>言語:</language>
+      <robots>ロボット:</robots>
+      <sitemap>サイトマップ：</sitemap>
+      <sitemapvisible>サイトマップで参照可能</sitemapvisible>
+    <isInherited>親ページから継承</isInherited>
+      <priority>優先順位：</priority>
+      <frequency>頻度:</frequency>
+      <select-language>言語を選択</select-language>
+      <option>
+        <Always>常に表示</Always>
+        <Hourly>毎時</Hourly>
+        <Daily>毎日</Daily>
+        <Weekly>毎週</Weekly>
+        <Monthly>毎月</Monthly>
+        <Yearly>毎年</Yearly>
+        <Never>表示しない</Never>
+      </option> 
+    </label>
+    <tip>
+  <priority>有効な値の範囲は 0.0 から 1.0 です</priority>
+  </tip>   
+    <action>
+      <Save>保存</Save>
+      <Cancel>キャンセル</Cancel>
+    </action>
+    <msg>
+      <repository-exception>ページメタデータの保存中に予期しないエラーが発生しました。</repository-exception>
+      <confirm-delete>これらの SEO のデータを削除してもよろしいですか？</confirm-delete>      
+    </msg>
+    <title>
+    <seo-delete>削除</seo-delete>
+    </title>
+  <help> 
+  <priority>有効な値の範囲は 0.0 から 1.0 です</priority>
+  <description>Help searchers to let them know what the following page has a link with what they are looking for.</description>
+  <keywords>コンマで区切られた、このページで最も重要な用語</keywords>  
+  </help>  
+  </UISEOForm>
+  <UISEOPopupWindow>
+  <title>
+      <UISEOForm>SEO の管理</UISEOForm>
+  </title>
+  </UISEOPopupWindow>    
+  <UISEOToolbarForm>
+  <title>
+      <seo>SEO の管理</seo>
+  </title>
+  <label>
+    <seo>SEO</seo>
+  </label>
+  </UISEOToolbarForm>  
+  <FloatNumberValidator>
+    <msg>
+      <Invalid-number>優先度フィールドの値は数値形式である必要があります。有効な値の範囲は 0.0 から 1.0 です。</Invalid-number>
+    </msg>
+  </FloatNumberValidator>  
+  
+</bundle>

@@ -87,10 +87,10 @@ public class UISelectRestorePath extends UIForm implements UIPopupComponent, UIS
 
   private String             srcPath;
 
-  public Node getTrashHomeNode() { 
+  public Node getTrashHomeNode() {
     return NodeLocation.getNodeByLocation(trashHomeNode);
   }
-  
+
   public void setTrashHomeNode(Node trashHomeNode) {
     this.trashHomeNode = NodeLocation.getNodeLocationByNode(trashHomeNode);
   }
@@ -110,12 +110,12 @@ public class UISelectRestorePath extends UIForm implements UIPopupComponent, UIS
       UIFormInputSet uiFormInputAction = new UIFormInputSetWithAction("UIFormInputSetWithAction");
       UIFormStringInput homePathField = new UIFormStringInput(FORM_INPUT, FORM_INPUT, null);
       homePathField.setValue("");
-      homePathField.setEditable(false);
-  
+      homePathField.setReadOnly(true);
+
       uiFormInputAction.addUIFormInput(homePathField);
       uiFormInputAction.setId(FIELD_PATH);
       ((UIFormInputSetWithAction)uiFormInputAction).setActionInfo(FORM_INPUT, new String[]{"Add"});
-  
+
       this.addUIFormInput(uiFormInputAction);
       setActions(new String[] {"Save", "Cancel"});
     } catch (Exception e) {
@@ -225,37 +225,37 @@ public class UISelectRestorePath extends UIForm implements UIPopupComponent, UIS
           LOG.error("Path not found! Maybe, it was removed or path changed, can't restore node :" + trashNode.getPath());
         }
         JCRExceptionManager.process(uiApp, e);
-        
+
       } catch (LockException e) {
         if (LOG.isErrorEnabled()) {
           LOG.error("node is locked, can't restore node :" + trashNode.getPath());
         }
         JCRExceptionManager.process(uiApp, e);
-        
+
       } catch (VersionException e) {
         if (LOG.isErrorEnabled()) {
           LOG.error("node is checked in, can't restore node:" + trashNode.getPath());
         }
         JCRExceptionManager.process(uiApp, e);
-        
+
       } catch (AccessDeniedException e) {
         if (LOG.isErrorEnabled()) {
           LOG.error("access denied, can't restore of node:" + trashNode.getPath());
         }
         JCRExceptionManager.process(uiApp, e);
-        
+
       } catch (ConstraintViolationException e) {
         if (LOG.isErrorEnabled()) {
           LOG.error("access denied, can't restore of node:" + trashNode.getPath());
         }
         JCRExceptionManager.process(uiApp, e);
-        
+
       } catch (Exception e) {
         if (LOG.isErrorEnabled()) {
           LOG.error("an unexpected error occurs", e);
         }
         JCRExceptionManager.process(uiApp, e);
-        
+
       }
     }
   }

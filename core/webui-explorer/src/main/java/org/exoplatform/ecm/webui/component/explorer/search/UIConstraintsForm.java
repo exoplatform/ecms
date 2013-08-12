@@ -31,10 +31,10 @@ import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.model.SelectItemOption;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormDateTimeInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 
 @ComponentConfig(
     template =  "app:/groovy/webui/component/explorer/search/UIConstraintsForm.gtmpl"
@@ -83,28 +83,28 @@ public class UIConstraintsForm extends UIFormInputSetWithAction implements UISel
     ResourceBundle res = context.getApplicationResourceBundle();
     _AND_OPERATION = res.getString("UIConstraintForm.label.and");
     _OR_OPERATION = res.getString("UIConstraintForm.label.or");
-    _CREATED_DATE = res.getString("UIConstraintForm.label.created"); 
-    _MODIFIED_DATE = res.getString("UIConstraintForm.label.modified");    
+    _CREATED_DATE = res.getString("UIConstraintForm.label.created");
+    _MODIFIED_DATE = res.getString("UIConstraintForm.label.modified");
     setActions(new String[] {"Add", "Cancel"}, null) ;
     List<SelectItemOption<String>> typeOperation = new ArrayList<SelectItemOption<String>>() ;
     typeOperation.add(new SelectItemOption<String>(_AND_OPERATION, AND_OPERATION));
     typeOperation.add(new SelectItemOption<String>(_OR_OPERATION, OR_OPERATION));
     addUIFormInput(new UIFormSelectBox(OPERATOR, OPERATOR, typeOperation)) ;
 
-    addUIFormInput(new UIFormCheckBoxInput<Boolean>(EXACTLY_PROPERTY, EXACTLY_PROPERTY, null)) ;
+    addUIFormInput(new UICheckBoxInput(EXACTLY_PROPERTY, EXACTLY_PROPERTY, null)) ;
     addUIFormInput(new UIFormStringInput(PROPERTY1, PROPERTY1, null)) ;
     addUIFormInput(new UIFormStringInput(CONTAIN_EXACTLY, CONTAIN_EXACTLY, null)) ;
 
-    addUIFormInput(new UIFormCheckBoxInput<Boolean>(CONTAIN_PROPERTY, CONTAIN_PROPERTY, null)) ;
+    addUIFormInput(new UICheckBoxInput(CONTAIN_PROPERTY, CONTAIN_PROPERTY, null)) ;
     addUIFormInput(new UIFormStringInput(PROPERTY2, PROPERTY2, null)) ;
     addUIFormInput(new UIFormStringInput(CONTAIN, CONTAIN, null)) ;
 
-    addUIFormInput(new UIFormCheckBoxInput<Boolean>(NOT_CONTAIN_PROPERTY, NOT_CONTAIN_PROPERTY, null)) ;
+    addUIFormInput(new UICheckBoxInput(NOT_CONTAIN_PROPERTY, NOT_CONTAIN_PROPERTY, null)) ;
     addUIFormInput(new UIFormStringInput(PROPERTY3, PROPERTY3, null)) ;
     addUIFormInput(new UIFormStringInput(NOT_CONTAIN, NOT_CONTAIN, null)) ;
 
 
-    addUIFormInput(new UIFormCheckBoxInput<Boolean>(DATE_PROPERTY, DATE_PROPERTY, null)) ;
+    addUIFormInput(new UICheckBoxInput(DATE_PROPERTY, DATE_PROPERTY, null)) ;
     List<SelectItemOption<String>> dateOperation = new ArrayList<SelectItemOption<String>>() ;
     dateOperation.add(new SelectItemOption<String>(_CREATED_DATE, CREATED_DATE));
     dateOperation.add(new SelectItemOption<String>(_MODIFIED_DATE, MODIFIED_DATE));
@@ -115,9 +115,9 @@ public class UIConstraintsForm extends UIFormInputSetWithAction implements UISel
     UIFormDateTimeInput uiToDate = new UIFormDateTimeInput(END_TIME, END_TIME, null) ;
     uiToDate.setDisplayTime(true) ;
     addUIFormInput(uiToDate) ;
-    addUIFormInput(new UIFormCheckBoxInput<Boolean>(NODETYPE_PROPERTY, NODETYPE_PROPERTY, null)) ;
+    addUIFormInput(new UICheckBoxInput(NODETYPE_PROPERTY, NODETYPE_PROPERTY, null)) ;
     addUIFormInput(new UIFormStringInput(DOC_TYPE, DOC_TYPE, null)) ;
-    addUIFormInput(new UIFormCheckBoxInput<Boolean>(CATEGORY_PROPERTY, CATEGORY_PROPERTY, null)) ;
+    addUIFormInput(new UICheckBoxInput(CATEGORY_PROPERTY, CATEGORY_PROPERTY, null)) ;
     addUIFormInput(new UIFormStringInput(CATEGORY_TYPE, CATEGORY_TYPE, null)) ;
   }
 
@@ -323,12 +323,12 @@ public class UIConstraintsForm extends UIFormInputSetWithAction implements UISel
 
   void resetConstraintForm() {
     reset();
-    getUIFormCheckBoxInput(EXACTLY_PROPERTY).setChecked(false);
-    getUIFormCheckBoxInput(CONTAIN_PROPERTY).setChecked(false);
-    getUIFormCheckBoxInput(NOT_CONTAIN_PROPERTY).setChecked(false);
-    getUIFormCheckBoxInput(DATE_PROPERTY).setChecked(false);
-    getUIFormCheckBoxInput(NODETYPE_PROPERTY).setChecked(false);
-    getUIFormCheckBoxInput(CATEGORY_PROPERTY).setChecked(false);
+    getUICheckBoxInput(EXACTLY_PROPERTY).setChecked(false);
+    getUICheckBoxInput(CONTAIN_PROPERTY).setChecked(false);
+    getUICheckBoxInput(NOT_CONTAIN_PROPERTY).setChecked(false);
+    getUICheckBoxInput(DATE_PROPERTY).setChecked(false);
+    getUICheckBoxInput(NODETYPE_PROPERTY).setChecked(false);
+    getUICheckBoxInput(CATEGORY_PROPERTY).setChecked(false);
   }
 
   boolean isValidDateTime(String dateTime) {
@@ -353,11 +353,11 @@ public class UIConstraintsForm extends UIFormInputSetWithAction implements UISel
     /* Set value to textbox */
     if (value==null) {
       getUIStringInput(selectField).setValue("");
-      getUIFormCheckBoxInput(UIConstraintsForm.CATEGORY_PROPERTY).setChecked(false);
+      getUICheckBoxInput(UIConstraintsForm.CATEGORY_PROPERTY).setChecked(false);
     }else {
       getUIStringInput(selectField).setValue(value.toString());
       /* Set value for checkBox is checked */
-      getUIFormCheckBoxInput(UIConstraintsForm.CATEGORY_PROPERTY).setChecked(true);
+      getUICheckBoxInput(UIConstraintsForm.CATEGORY_PROPERTY).setChecked(true);
     }
     UISearchContainer uiSearchContainer = getAncestorOfType(UISearchContainer.class);
     /*
@@ -367,7 +367,7 @@ public class UIConstraintsForm extends UIFormInputSetWithAction implements UISel
     uiPopup.setRendered(false);
     uiPopup.setShow(false);
   }
-  
+
   public UIFormDateTimeInput getUIFormDateTimeInput(String name) {
     return findComponentById(name);
   }

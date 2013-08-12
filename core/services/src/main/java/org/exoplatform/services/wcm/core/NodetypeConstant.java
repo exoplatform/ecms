@@ -220,6 +220,14 @@ public class NodetypeConstant {
   
   public static final String EXO_WEBCONTENT_CHILD = "exo:webContentChild";
   
+  public static final String PUBLICATION_LIVE_DATE = "publication:liveDate";
+  
+  public static final String EXO_START_EVENT = "exo:startEvent";
+  
+  public static final String EXO_INDEX = "exo:index";
+  
+  public static final String EXO_TARGET_DATA = "exo:targetData";
+  
   // public static final String PUBLICATION_STATE_AND_VERSION_BASED_PUBLICATION
   // = "publication:stateAndVersionBasedPublication";
 

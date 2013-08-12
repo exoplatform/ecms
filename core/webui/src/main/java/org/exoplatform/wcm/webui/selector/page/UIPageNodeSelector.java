@@ -105,7 +105,7 @@ public class UIPageNodeSelector extends UIContainer {
 
   /**
    * Load navigations.
-   * 
+   *
    * @throws Exception the exception
    */
   public void loadNavigations() throws Exception {
@@ -126,10 +126,10 @@ public class UIPageNodeSelector extends UIContainer {
     // choose one navigation and show it on UI
     chooseAndShowNavigation();
   }
-  
+
   /**
    * Choose one navigation and show it on UI
-   * 
+   *
    * @throws Exception
    */
   private void chooseAndShowNavigation() throws Exception {
@@ -165,7 +165,7 @@ public class UIPageNodeSelector extends UIContainer {
 
   /**
    * get index of a navigation in navigation list
-   * 
+   *
    * @param navId the identify of navigation
    * @return the index of the navigation in navigation list
    */
@@ -205,7 +205,7 @@ public class UIPageNodeSelector extends UIContainer {
 
   /**
    * Select navigation.
-   * 
+   *
    * @param id the id
    */
   public void selectNavigation(int id) throws Exception {
@@ -229,10 +229,10 @@ public class UIPageNodeSelector extends UIContainer {
     UIDropDownControl uiDropDownSelector = getChild(UIDropDownControl.class);
     uiDropDownSelector.setValue(getIndex(id));
   }
-  
+
   /**
    * Select page node by uri.
-   * 
+   *
    * @param uri the uri
    */
   public void selectUserNodeByUri(String uri) throws Exception {
@@ -265,20 +265,20 @@ public class UIPageNodeSelector extends UIContainer {
     tree.setChildren(null);
     tree.setSibbling(sibbling);
   }
-  
+
   /**
    * Gets the user navigations.
    *
    * @return the page navigations
    */
-  public List<UserNavigation> getUserNavigations() { 
-    if(navigations == null) navigations = new ArrayList<UserNavigation>(); 
+  public List<UserNavigation> getUserNavigations() {
+    if(navigations == null) navigations = new ArrayList<UserNavigation>();
     return navigations;
   }
 
   /**
    * Gets the user navigation.
-   * 
+   *
    * @param id the id
    * @return the page navigation
    */
@@ -380,7 +380,7 @@ public class UIPageNodeSelector extends UIContainer {
 
     /**
      * Instantiates a new selected node.
-     * 
+     *
      * @param nav the nav
      * @param parentNode the parent node
      * @param node the node
@@ -394,7 +394,7 @@ public class UIPageNodeSelector extends UIContainer {
 
     /**
      * Gets the user navigation.
-     * 
+     *
      * @return the user navigation
      */
     public UserNavigation getUserNavigation() {
@@ -403,7 +403,7 @@ public class UIPageNodeSelector extends UIContainer {
 
     /**
      * Sets the page navigation.
-     * 
+     *
      * @param nav the new page navigation
      */
     public void setUserNavigation(UserNavigation nav) {
@@ -412,7 +412,7 @@ public class UIPageNodeSelector extends UIContainer {
 
     /**
      * Gets the root node
-     * 
+     *
      * @return the root node
      */
     public UserNode getRootNode() {
@@ -421,7 +421,7 @@ public class UIPageNodeSelector extends UIContainer {
 
     /**
      * Sets the root node
-     * 
+     *
      * @param the root node
      */
     public void setRootNode(UserNode rootNode) {
@@ -430,7 +430,7 @@ public class UIPageNodeSelector extends UIContainer {
 
     /**
      * Gets the parent node.
-     * 
+     *
      * @return the parent node
      */
     public UserNode getParentNode() {
@@ -439,7 +439,7 @@ public class UIPageNodeSelector extends UIContainer {
 
     /**
      * Sets the parent node.
-     * 
+     *
      * @param parentNode the new parent node
      */
     public void setParentNode(UserNode parentNode) {
@@ -448,7 +448,7 @@ public class UIPageNodeSelector extends UIContainer {
 
     /**
      * Gets the node.
-     * 
+     *
      * @return the node
      */
     public UserNode getNode() {
@@ -457,7 +457,7 @@ public class UIPageNodeSelector extends UIContainer {
 
     /**
      * Sets the node.
-     * 
+     *
      * @param node the new node
      */
     public void setNode(UserNode node) {
@@ -466,7 +466,7 @@ public class UIPageNodeSelector extends UIContainer {
 
     /**
      * Checks if is delete node.
-     * 
+     *
      * @return true, if is delete node
      */
     public boolean isDeleteNode() {
@@ -475,7 +475,7 @@ public class UIPageNodeSelector extends UIContainer {
 
     /**
      * Sets the delete node.
-     * 
+     *
      * @param deleteNode the new delete node
      */
     public void setDeleteNode(boolean deleteNode) {
@@ -484,7 +484,7 @@ public class UIPageNodeSelector extends UIContainer {
 
     /**
      * Checks if is clone node.
-     * 
+     *
      * @return true, if is clone node
      */
     public boolean isCloneNode() {
@@ -493,7 +493,7 @@ public class UIPageNodeSelector extends UIContainer {
 
     /**
      * Sets the clone node.
-     * 
+     *
      * @param b the new clone node
      */
     public void setCloneNode(boolean b) {
@@ -503,7 +503,7 @@ public class UIPageNodeSelector extends UIContainer {
 
   /**
    * Gets the selected node.
-   * 
+   *
    * @return the selected node
    */
   public SelectedNode getSelectedNode() {
@@ -512,7 +512,7 @@ public class UIPageNodeSelector extends UIContainer {
 
   /**
    * Gets the selected navigation.
-   * 
+   *
    * @return the selected navigation
    */
   public UserNavigation getSelectedNavigation() {
@@ -521,7 +521,7 @@ public class UIPageNodeSelector extends UIContainer {
 
   /**
    * Gets the root node of the selected navigation.
-   * 
+   *
    * @return the root node of the selected navigation.
    */
   public UserNode getRootNodeOfSelectedNav() {
@@ -530,7 +530,7 @@ public class UIPageNodeSelector extends UIContainer {
 
   /**
    * Gets the selected page node.
-   * 
+   *
    * @return the selected page node
    */
   public UserNode getSelectedUserNode() {
@@ -539,7 +539,7 @@ public class UIPageNodeSelector extends UIContainer {
 
   /**
    * Gets the up level uri.
-   * 
+   *
    * @return the up level uri
    */
   public String getUpLevelUri() {
@@ -548,7 +548,7 @@ public class UIPageNodeSelector extends UIContainer {
 
   /**
    * Gets the delete navigations.
-   * 
+   *
    * @return the delete navigations
    */
   public List<UserNavigation> getDeleteNavigations() {
