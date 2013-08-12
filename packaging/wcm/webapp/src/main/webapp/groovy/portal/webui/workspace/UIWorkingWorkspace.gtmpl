@@ -55,5 +55,5 @@
       });
     </script>
 <%
-  jsManager.require("SHARED/quick-edit", "quickEdit").addScripts("for(var instanceName in CKEDITOR.instances) { var editor = CKEDITOR.instances[instanceName]; editor.on('change', function(e) {quickEdit.InlineEditor.modifyInlineContent();}); editor.on('blur', (function(tmp) { return function() {quickEdit.InlineEditor.saveInlineContent(tmp);}})(editor)); }");
+jsManager.require("SHARED/quick-edit", "quickEdit").addScripts("for(var instanceName in CKEDITOR.instances) { var editor = CKEDITOR.instances[instanceName]; editor.on( 'focus', function( e ) {quickEdit.InlineEditor.removeHoverClass();} ); editor.on('change', function(e) {quickEdit.InlineEditor.modifyInlineContent();}); editor.on('blur', (function(tmp) { return function() {quickEdit.InlineEditor.saveInlineContent(tmp);}})(editor)); }");
 %>

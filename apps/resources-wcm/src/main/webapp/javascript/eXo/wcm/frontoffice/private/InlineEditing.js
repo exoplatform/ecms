@@ -25,6 +25,11 @@
 	  }  
 	}
 
+	InlineEditor.removeHoverClass = function() {
+		gj('.containerHoverClass').removeClass('containerHoverClass');	
+		gj('.containerHoverClassInner').removeClass('containerHoverClassInner');		
+	}
+
 	InlineEditor.modifyInlineContent = function(e) {
           InlineEditor.init();
           InlineEditor.isModified = true;

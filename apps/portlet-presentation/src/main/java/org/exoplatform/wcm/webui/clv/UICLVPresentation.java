@@ -41,7 +41,6 @@ import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.portal.webui.workspace.UIWorkingWorkspace;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.ecm.publication.PublicationService;
@@ -789,7 +788,6 @@ public class UICLVPresentation extends UIContainer {
     JavascriptManager jsManager = portletRequestContext.getJavascriptManager();
     jsManager.getRequireJS().addScripts("gj('#"+id+"').mouseenter( function() {eXo.ecm.WCMUtils.changeStyleClass('"+id+"','"+className+" "+hoverClass+"');});");
     jsManager.getRequireJS().addScripts("gj('#"+id+"').mouseleave( function() {eXo.ecm.WCMUtils.changeStyleClass('"+id+"','"+className+"');});");
-    jsManager.getRequireJS().addScripts("gj('#"+id+"').click( function() {eXo.ecm.WCMUtils.changeStyleClass('"+id+"','"+className+"');});");
     return sb.toString();
   }
 
@@ -854,7 +852,7 @@ public class UICLVPresentation extends UIContainer {
       Node parent = node.getParent();
       node.remove();
       parent.getSession().save();
-      event.getRequestContext().addUIComponentToUpdateByAjax(contentListPresentation);
+      event.getRequestContext().getJavascriptManager().getRequireJS().addScripts("location.reload(true);");
       Utils.createPopupMessage(contentListPresentation,
                                "UICLVPresentation.msg.delete-content-successfull",
                                null,
@@ -878,9 +876,9 @@ public class UICLVPresentation extends UIContainer {
       if (node.isLocked()) {
         node.getSession().addLockToken(LockUtil.getLockToken(node));
       }
-      HashMap<String, String> context = new HashMap<String, String>();
-      event.getRequestContext().addUIComponentToUpdateByAjax(contentListPresentation);
+      HashMap<String, String> context = new HashMap<String, String>();     
       publicationService.changeState(node, "published", context);
+      event.getRequestContext().getJavascriptManager().getRequireJS().addScripts("location.reload(true);");
       
     }
   }
