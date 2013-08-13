@@ -103,10 +103,10 @@ public class UIAddressBar extends UIForm {
 
   final static private  String ROOT_SQL_QUERY  = "select * from nt:base where " +
                                "(jcr:primaryType like 'exo:symlink' or jcr:primaryType like 'exo:taxonomyLink')" +
-                               " OR ( contains(*, '$1') or lower(exo:name) like '%$2%') order by exo:title ASC";
+                               " OR ( contains(*, '$1') or lower(exo:name) like '%$2%' or lower(exo:commentContent) like '%$3%') order by exo:title ASC";
   final static private String SQL_QUERY = "select * from nt:base where jcr:path like '$0/%' AND " +
                                "( (jcr:primaryType like 'exo:symlink' or jcr:primaryType like 'exo:taxonomyLink')" +
-                               " OR ( contains(*, '$1') or lower(exo:name) like '%$2%') ) order by exo:title ASC";
+                               " OR ( contains(*, '$1') or lower(exo:name) like '%$2%' or lower(exo:commentContent) like '%$3%') ) order by exo:title ASC";
 
   public UIAddressBar() throws Exception {
     addUIFormInput(new UIFormStringInput(FIELD_ADDRESS, FIELD_ADDRESS, null));
@@ -276,6 +276,7 @@ public class UIAddressBar extends UIForm {
       String escapedText = org.exoplatform.services.cms.impl.Utils.escapeIllegalCharacterInQuery(text);
       queryStatement = StringUtils.replace(queryStatement,"$1", escapedText.replaceAll("'", "''"));
       queryStatement = StringUtils.replace(queryStatement,"$2", escapedText.replaceAll("'", "''").toLowerCase());
+      queryStatement = StringUtils.replace(queryStatement,"$3", escapedText.replaceAll("'", "''").toLowerCase());
       uiExplorer.removeChildById("ViewSearch");
       UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
       UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
