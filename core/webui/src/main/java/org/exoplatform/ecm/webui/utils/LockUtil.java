@@ -28,8 +28,6 @@ import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.lock.LockService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -160,6 +158,35 @@ public class LockUtil {
               LockUtil.keepLock(itemNode.getLock(), lockTokenString, lockToken);
             }
           }
+        }
+      }
+    }
+  }
+
+  /**
+   * Remove a membership from lock cache.
+   * If membership type is *, remove all memberships of specified group except ignored list
+   *
+   * @param removedMembership
+   * @param ignoredMemberships
+   * @throws Exception
+   */
+  @SuppressWarnings("unchecked")
+  public static void removeLockCache(String removedMembership, List<String> ignoredMemberships) throws Exception {
+    OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
+    List<MembershipType> availMembershipTypes =
+        (List<MembershipType>) organizationService.getMembershipTypeHandler().findMembershipTypes();
+    HashMap<String, Map<String, String>> lockHolding = WCMCoreUtils.getService(LockService.class).getLockHolding();
+
+    // Remove lock cache for specific membership
+    lockHolding.remove(removedMembership);
+
+    // If membership type is *, remove all types except ignored list
+    if (removedMembership.startsWith("*")) {
+      for (MembershipType membershipType : availMembershipTypes) {
+        String membership = removedMembership.replace("*", membershipType.getName());
+        if (!ignoredMemberships.contains(membership)) {
+          lockHolding.remove(membership);
         }
       }
     }
