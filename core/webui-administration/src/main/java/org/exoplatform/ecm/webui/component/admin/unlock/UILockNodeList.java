@@ -32,6 +32,7 @@ import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 import javax.jcr.version.VersionException;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.ComponentRequestLifecycle;
@@ -48,6 +49,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.config.WorkspaceEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.organization.Group;
 import org.exoplatform.services.organization.Membership;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.wcm.core.NodeLocation;
@@ -192,26 +194,36 @@ public class UILockNodeList extends UIPagingGridDecorator {
         JCRExceptionManager.process(uiApp, e);
         return;
       }
-      
-      
     }
   }
 
   static public class UnLockActionListener extends EventListener<UILockNodeList> {
+    private List<String> getMemberships(String userId) throws Exception {
+      PortalContainer  manager = PortalContainer.getInstance() ;
+      OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
+      ((ComponentRequestLifecycle) organizationService).startRequest(manager);
+      List<String> groupList = new ArrayList<String> ();
+      Collection<?> gMembership = organizationService.getMembershipHandler().findMembershipsByUser(userId);
+      Object[] objects = gMembership.toArray();
+      for(int i = 0; i < objects.length; i ++ ){
+        Membership member = (Membership)objects[i];
+        groupList.add(member.getMembershipType()+ ":" +member.getGroupId());
+      }
+      return groupList;
+    }
+
     private List<String> getGroups(String userId) throws Exception {
       PortalContainer  manager = PortalContainer.getInstance() ;
       OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
-    ((ComponentRequestLifecycle) organizationService).startRequest(manager);
-    List<String> groupList = new ArrayList<String> ();
-    //Collection<?> groups = organizationService.getGroupHandler().findGroupsOfUser(userId);
-    Collection<?> gMembership = organizationService.getMembershipHandler().findMembershipsByUser(userId);
-    Object[] objects = gMembership.toArray();
-    for(int i = 0; i < objects.length; i ++ ){
-      Membership member = (Membership)objects[i];
-      groupList.add(member.getMembershipType()+":"+member.getGroupId());
+      ((ComponentRequestLifecycle) organizationService).startRequest(manager);
+      Collection<?> groups = organizationService.getGroupHandler().findGroupsOfUser(userId);
+      List<String> groupList = new ArrayList<String>();
+      for (Object group : groups) {
+        groupList.add(((Group)group).getId());
+      }
+      return groupList;
     }
-    return groupList;
-  }
+
     public void execute(Event<UILockNodeList> event) throws Exception {
       WebuiRequestContext rContext = event.getRequestContext();
       UIUnLockManager uiUnLockManager = event.getSource().getParent();
@@ -226,15 +238,19 @@ public class UILockNodeList extends UIPagingGridDecorator {
       boolean isAuthenticated = remoteUser.equals(userACLService.getSuperUser());
       if (!isAuthenticated) {
         LockService lockService = WCMCoreUtils.getService(LockService.class);
-        List<String> authenticatedGroups = lockService.getAllGroupsOrUsersForLock();
-        List<String> memberShips = getGroups(remoteUser);
-        for (String group: authenticatedGroups) {
-          if (memberShips.contains(group)){
-          isAuthenticated=true;
-          break;
+        List<String> authorizedMemberships = lockService.getAllGroupsOrUsersForLock();
+        List<String> loginedUserMemberShips = getMemberships(remoteUser);
+        List<String> loginedUserGroups = getGroups(remoteUser);
+        for (String authorizedMembership: authorizedMemberships) {
+          if ((authorizedMembership.startsWith("*") &&
+              loginedUserGroups.contains(StringUtils.substringAfter(authorizedMembership, ":")))
+              || loginedUserMemberShips.contains(authorizedMembership)) {
+            isAuthenticated=true;
+            break;
           }
         }
       }
+
       RepositoryEntry repo = repositoryService.getCurrentRepository().getConfiguration();
       for(WorkspaceEntry ws : repo.getWorkspaceEntries()) {
         if (isAuthenticated) {
