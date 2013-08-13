@@ -153,9 +153,13 @@ public class UIDocumentNodeList extends UIContainer {
       if (node instanceof NodeLinkAware) {
         node = ((NodeLinkAware)node).getRealNode();
       }
-      Node targetNode = linkManager_.isLink(node) ? linkManager_.getTarget(node) : node;
-      if (targetNode.isNodeType(NodetypeConstant.NT_FOLDER) || targetNode.isNodeType(NodetypeConstant.NT_UNSTRUCTURED)) {
-        addUIDocList(getID(node));
+      try {
+        Node targetNode = linkManager_.isLink(node) ? linkManager_.getTarget(node) : node;
+        if (targetNode.isNodeType(NodetypeConstant.NT_FOLDER) || targetNode.isNodeType(NodetypeConstant.NT_UNSTRUCTURED)) {
+          addUIDocList(getID(node));
+        }
+      } catch(ItemNotFoundException ine) {
+        continue;
       }
     }
   }

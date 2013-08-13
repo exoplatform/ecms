@@ -36,7 +36,9 @@ import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.LinkUtils;
+import org.exoplatform.services.cms.link.impl.LinkManagerImpl;
 import org.exoplatform.services.cms.relations.RelationsService;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -378,8 +380,16 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       if (PermissionUtil.canRemoveNode(node) && node.isNodeType(Utils.EXO_AUDITABLE)) {
         removeAuditForNode(node);
       }
+      //Remove symlinks
+      LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
+      if(!node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
+        for(Node symlink : linkManager.getAllLinks(node, NodetypeConstant.EXO_SYMLINK)) {
+          symlink.remove();
+          symlink.getSession().save();
+        }
+      }
       node.remove();
-      parentNode.save();
+      parentNode.getSession().save();
     } catch (VersionException ve) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.remove-verion-exception", null,
           ApplicationMessage.WARNING));
