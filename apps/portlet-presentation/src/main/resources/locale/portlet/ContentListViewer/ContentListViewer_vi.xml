@@ -10,7 +10,7 @@
       <non-contents>Xin lỗi, không sẵn có bài viết nào.</non-contents>
       <item-not-found>Không tìm thấy mục nào.</item-not-found>
       <no-permission>Bạn không được phân quyền để xem nội dung này.</no-permission>
-      <category-back>Về thư mục trước</category-back>
+      <category-back>Về danh mục trước</category-back>
     </msg>
   </UICLVContainer>
   <UIViewerManagementPopupWindow>
