@@ -200,6 +200,9 @@ public class Utils {
   final static public String MIX_VOTABLE = "mix:votable";
   final static public String EXO_SYMLINK = "exo:symlink";
   final static public String EXO_PRIMARYTYPE = "exo:primaryType";
+  
+  final static public String INLINE_DRAFT = "Draft";
+  final static public String INLINE_PUBLISHED = "Published";
 
   final static public String EXO_SORTABLE = "exo:sortable";
 
@@ -611,8 +614,16 @@ public class Utils {
     resourceBundle = resourceBundleService.getResourceBundle(LOCALE_WEBUI_DMS, locale);
     
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-    String draft = portletRequestContext.getApplicationResourceBundle().getString("PublicationStates.draft");
-    String published = portletRequestContext.getApplicationResourceBundle().getString("PublicationStates.published");
+    String draft = INLINE_DRAFT;
+    String published = INLINE_PUBLISHED;
+    try {
+      draft = portletRequestContext.getApplicationResourceBundle().getString("PublicationStates.draft");
+      published = portletRequestContext.getApplicationResourceBundle().getString("PublicationStates.published");
+    } catch(MissingResourceException ex) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(ex.getMessage());
+      }
+    }
 
     String portletRealID = org.exoplatform.wcm.webui.Utils.getRealPortletId((PortletRequestContext)
         WebuiRequestContext.getCurrentInstance());

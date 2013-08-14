@@ -82,7 +82,7 @@
 					%>
 				</div>
 				<%
-          print uicomponent.getInlineEditingField(currentNode, "default.html/jcr:content/jcr:data", html, "WYSIWYG", "Text", "Content", true, cssOption, "toolbar=CompleteWCM","fast_publish=" + uicomponent.getFastPublicLink(currentNode));
+          print uicomponent.getInlineEditingField(currentNode, "default.html/jcr:content/jcr:data", html, "WYSIWYG", "Text", "Content", true, cssOption, "toolbar=CompleteWCM");
         %>          
 		    <% if (uicomponent.isEnableVote()) 
 	           _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1"));
@@ -94,7 +94,7 @@
   } else {
 	  %>
     <%
-      print uicomponent.getInlineEditingField(currentNode, "default.html/jcr:content/jcr:data", html, "WYSIWYG", "Text", "Content", true, cssOption, "toolbar=CompleteWCM","fast_publish=" + uicomponent.getFastPublicLink(currentNode));
+      print uicomponent.getInlineEditingField(currentNode, "default.html/jcr:content/jcr:data", html, "WYSIWYG", "Text", "Content", true, cssOption, "toolbar=CompleteWCM");
     %>
     <% if (uicomponent.isEnableVote()) 
         _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1"));
