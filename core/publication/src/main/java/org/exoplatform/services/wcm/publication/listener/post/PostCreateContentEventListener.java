@@ -175,7 +175,7 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
       if (LOG.isDebugEnabled()) LOG.debug("No portal context available");
     }
     if (LOG.isInfoEnabled()) LOG.info(currentNode.getPath() + "::" + siteName + "::"+remoteUser);
-    if (remoteUser != null) {
+    if (remoteUser == null) {
       remoteUser = IdentityConstants.ANONIM;
     }
     publicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser);     
