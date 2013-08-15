@@ -201,10 +201,7 @@ public class CmsServiceImpl implements CmsService {
       listenerService.broadcast(POST_EDIT_CONTENT_EVENT, this, currentNode);
      
     }
-    //add lastModified property to jcr:content
-    if (currentNode.isNodeType(ActivityCommonService.MIX_COMMENT)) {
-      currentNode.removeMixin(ActivityCommonService.MIX_COMMENT);
-    }
+
     session.save();
     return currentNode.getPath();
   }
