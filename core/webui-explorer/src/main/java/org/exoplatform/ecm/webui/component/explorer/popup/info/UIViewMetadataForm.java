@@ -21,7 +21,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.jcr.Node;
-import javax.jcr.Property;
 import javax.jcr.RepositoryException;
 import javax.jcr.Value;
 import javax.jcr.ValueFormatException;

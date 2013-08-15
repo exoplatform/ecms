@@ -502,9 +502,11 @@ public class Utils {
     if(siteType.equals(PortalConfig.PORTAL_TYPE))
       editorPageURI = configurationService.getRuntimeContextParam(WCMConfigurationService.EDIT_PAGE_URI);
     else if(siteType.equals(PortalConfig.GROUP_TYPE)) {
+      StringBuffer sb = new StringBuffer();      
     	editorPageURI = pContext.getSiteName();
     	editorPageURI = editorPageURI.substring(editorPageURI.lastIndexOf("/")+1, editorPageURI.length());
-    	editorPageURI = editorPageURI + "/" + DOCUMENTS_ACTIVITY;
+    	sb.append(editorPageURI).append("/").append(DOCUMENTS_ACTIVITY);
+    	editorPageURI = sb.toString();
     }
     UserNode editorNode = getEditorNode(editorPageURI, siteType);
 

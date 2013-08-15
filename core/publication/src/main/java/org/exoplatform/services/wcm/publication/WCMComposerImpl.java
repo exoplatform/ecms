@@ -349,7 +349,8 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       }
       // If clv view mode is live, only get nodes which has published version
       if (MODE_LIVE.equals(mode) && !"exo:taxonomyLink".equals(primaryType))
-        statement.append(" AND (publication:currentState IS NULL OR publication:currentState = 'published' OR exo:titlePublished IS NOT NULL)");
+        statement.append(" AND (publication:currentState IS NULL OR publication:currentState = 'published' " +
+        		"OR exo:titlePublished IS NOT NULL)");
       if (filterTemplates) statement.append(" AND " + getTemplatesSQLFilter());
       if (queryFilter!=null) {
         statement.append(queryFilter);

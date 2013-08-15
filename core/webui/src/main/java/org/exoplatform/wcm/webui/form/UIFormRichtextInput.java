@@ -52,13 +52,13 @@ public class UIFormRichtextInput extends UIFormInputBase<String> {
   public UIFormRichtextInput(String name, String bindingField, String value) {
     super(name, bindingField, String.class);
     this.value_ = value;
- }
+  }
 
   public UIFormRichtextInput(String name, String bindingField, String value, String enterMode) {
     super(name, bindingField, String.class);
     this.value_ = value;
     this.enterMode = enterMode;
- }
+  }
 
   public String getWidth() {
     return width;
@@ -105,9 +105,9 @@ public class UIFormRichtextInput extends UIFormInputBase<String> {
     String portal = Util.getUIPortal().getName();
     Collection<SkinConfig> portalSkins = skinService.getPortalSkins(skin);
     SkinConfig customSkin = skinService.getSkin(portal, Util.getPortalRequestContext()
-                                                            .getUserPortalConfig()
-                                                            .getPortalConfig()
-                                                            .getSkin());
+                                                .getUserPortalConfig()
+                                                .getPortalConfig()
+                                                .getSkin());
     if (customSkin != null) portalSkins.add(customSkin);
     for (SkinConfig portalSkin : portalSkins) {
       contentsCss.append("'").append(portalSkin.createURL(Util.getPortalRequestContext().getControllerContext())).append("',");
@@ -145,7 +145,7 @@ public class UIFormRichtextInput extends UIFormInputBase<String> {
   public void decode(Object input, WebuiRequestContext context) {
     value_ = (String)input;
     if (value_ != null && value_.length() == 0)
-       value_ = null;
+      value_ = null;
   }
 
 }

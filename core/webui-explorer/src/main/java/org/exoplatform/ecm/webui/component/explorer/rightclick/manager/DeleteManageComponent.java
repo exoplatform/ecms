@@ -207,7 +207,8 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
               } else {
                 for (NodeIterator iter = tempNode.getNodes(); iter.hasNext(); ) {
                   Node childNode = iter.nextNode();
-                  if(isDocumentNodeType(childNode) || childNode.isNodeType(NodetypeConstant.NT_UNSTRUCTURED) || childNode.isNodeType(NodetypeConstant.NT_FOLDER))
+                  if(isDocumentNodeType(childNode) || childNode.isNodeType(NodetypeConstant.NT_UNSTRUCTURED) || 
+                      childNode.isNodeType(NodetypeConstant.NT_FOLDER))
                     queue.add(childNode);
                 }
               }
@@ -521,9 +522,10 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     QueryResult queryResult = null;
     NodeIterator iter = null;
+    StringBuffer sb = new StringBuffer();
     if (nodePath.indexOf(";") > -1) {
       String[] nodePaths = nodePath.split(";");
-      for(int i=0; i<nodePaths.length; i++) {
+      for(int i=0; i<nodePaths.length; i++) {        
         nodePath = nodePaths[i].substring(nodePaths[i].indexOf(":") + 1, nodePaths[i].length());
         String queryStatement = "SELECT * from exo:restoreLocation WHERE exo:restorePath = '$0'";
         queryStatement = StringUtils.replace(queryStatement, "$0", nodePath);
@@ -531,9 +533,10 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         queryResult = query.execute();
         iter = queryResult.getNodes();
         while (iter.hasNext()) {
-          undoLink += trashWorkspace + ":" + iter.nextNode().getPath() + ";";
-        }
+          sb.append(trashWorkspace).append(":").append(iter.nextNode().getPath()).append(";");
+        }        
       }
+      undoLink = sb.toString();
       if(undoLink.length() > 0) undoLink = undoLink.substring(0,undoLink.length()-1);
     } else {
       nodePath = nodePath.substring(nodePath.indexOf(":") + 1, nodePath.length());
@@ -544,8 +547,9 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       iter = queryResult.getNodes();
       while (iter.hasNext()) {
         Node tmpNode = iter.nextNode();
-        undoLink += tmpNode.getPath() + ";";
+        sb.append(tmpNode.getPath()).append(";");
       }
+      undoLink = sb.toString();
       if(undoLink.length() > 0) {
         undoLink = undoLink.substring(0,undoLink.length()-1);
         undoLink =  trashWorkspace + ":" +undoLink;
@@ -667,7 +671,8 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
     }
 
     //show confirm message
-    if (listNodesHaveRelations != null && listNodesHaveRelations.size() > 0) { // there are some nodes which have relations referring to them
+    if (listNodesHaveRelations != null && listNodesHaveRelations.size() > 0) { 
+      // there are some nodes which have relations referring to them
       // in the deleting node list
       // build node list to string to add into the confirm message
       StringBuffer sb = new StringBuffer();
@@ -715,11 +720,15 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
           switch(multiContentType) {
           case FOLDERS: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-folder-permanently"; break;
           case FILES: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-file-permanently"; break;
-          case FILES_AND_FOLDERS: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-file-and-folder-permanently"; break;
+          case FILES_AND_FOLDERS: 
+            message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-file-and-folder-permanently"; break;
           case GENERIC: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-permanently"; break;
-          case GENERICS_AND_FOLDERS: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-and-folder-permanently"; break;
-          case GENERICS_AND_FILES: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-and-file-permanently"; break;
-          case GENERICS_AND_FILES_AND_FOLDERS: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-and-file-and-folder-permanently"; break;
+          case GENERICS_AND_FOLDERS: 
+            message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-and-folder-permanently"; break;
+          case GENERICS_AND_FILES: 
+            message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-and-file-permanently"; break;
+          case GENERICS_AND_FILES_AND_FOLDERS: 
+            message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-and-file-and-folder-permanently"; break;
           default: message_key = "UIWorkingArea.msg.confirm-delete-multi-nodes-generic-permanently"; break;
           }
 

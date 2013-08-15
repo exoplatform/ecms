@@ -19,6 +19,7 @@ package org.exoplatform.ecm.webui.comparator;
 import java.util.Comparator;
 
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 
 
 public class NodeOwnerComparator implements Comparator<Node> {
@@ -39,7 +40,7 @@ public class NodeOwnerComparator implements Comparator<Node> {
         return nodeOwner1.compareToIgnoreCase(nodeOwner2) ;
       }
       return nodeOwner2.compareToIgnoreCase(nodeOwner1) ;
-    }catch (Exception e) {
+    }catch (RepositoryException e) {
       return 0;
     }
   }

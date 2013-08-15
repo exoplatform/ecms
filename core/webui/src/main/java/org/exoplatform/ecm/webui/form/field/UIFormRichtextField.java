@@ -68,7 +68,7 @@ public class UIFormRichtextField extends DialogFormField {
       } else if(HEIGHT.equals(entry[0])) {
         height = entry[1];
       } else if(ENTERMODE.equals(entry[0])) {
-      	enterMode = entry[1];
+        enterMode = entry[1];
       }
     }
   }

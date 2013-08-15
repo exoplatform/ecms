@@ -70,18 +70,19 @@ import org.exoplatform.webui.event.EventListener;
  * 11:30:17 AM
  */
 @ComponentConfig(
-    template = "app:/groovy/webui/component/admin/unlock/UILockNodeList.gtmpl",
-    events = {
-        @EventConfig(listeners = UILockNodeList.UnLockActionListener.class),
-        @EventConfig(listeners = UILockNodeList.SortActionListener.class)
-    }
-)
+                 template = "app:/groovy/webui/component/admin/unlock/UILockNodeList.gtmpl",
+                 events = {
+                     @EventConfig(listeners = UILockNodeList.UnLockActionListener.class),
+                     @EventConfig(listeners = UILockNodeList.SortActionListener.class)
+                 }
+    )
 public class UILockNodeList extends UIPagingGridDecorator {
   final static public String[] ACTIONS = {};
   final static public String ST_EDIT = "EditUnLockForm";
   private Preference preferences_;
 
-  private static final String LOCK_QUERY = "select * from mix:lockable where jcr:lockOwner IS NOT NULL order by exo:dateCreated DESC";
+  private static final String LOCK_QUERY = "select * from mix:lockable where jcr:lockOwner IS NOT NULL " +
+      "order by exo:dateCreated DESC";
   private String typeSort_ = Preference.SORT_BY_NODETYPE;
   private String sortOrder_ = Preference.BLUE_UP_ARROW;
   private String order_ = Preference.ASCENDING_ORDER;
@@ -181,10 +182,10 @@ public class UILockNodeList extends UIPagingGridDecorator {
         String sortParam = event.getRequestContext().getRequestParameter(OBJECTID) ;
         String[] array = sortParam.split(";");
         String order = Preference.ASCENDING_ORDER.equals(array[0].trim()) || !array[1].trim().equals(uicomp.getTypeSort()) ?
-                       Preference.BLUE_DOWN_ARROW : Preference.BLUE_UP_ARROW;
+                                                                                                                            Preference.BLUE_DOWN_ARROW : Preference.BLUE_UP_ARROW;
 
         String prefOrder = Preference.ASCENDING_ORDER.equals(array[0].trim()) || !array[1].trim().equals(uicomp.getTypeSort())?
-                           Preference.ASCENDING_ORDER : Preference.DESCENDING_ORDER;
+                                                                                                                               Preference.ASCENDING_ORDER : Preference.DESCENDING_ORDER;
         uicomp.setSortOrder(order);
         uicomp.setTypeSort(array[1]);
         uicomp.setOrder(prefOrder);
@@ -282,9 +283,9 @@ public class UILockNodeList extends UIPagingGridDecorator {
 
       if (isAuthenticated ) {
         session = WCMCoreUtils.getSystemSessionProvider()
-                              .getSession(lockedNode.getSession().getWorkspace().getName(),
-                                          (ManageableRepository) lockedNode.getSession()
-                                                                           .getRepository());
+            .getSession(lockedNode.getSession().getWorkspace().getName(),
+                        (ManageableRepository) lockedNode.getSession()
+                        .getRepository());
         lockedNode = (Node)session.getItem(lockedNode.getPath());
       }
 
@@ -306,7 +307,7 @@ public class UILockNodeList extends UIPagingGridDecorator {
       } catch(VersionException versionException) {
         Object[] args = {lockedNode.getName()};
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-unlock-node-is-checked-in", args,
-            ApplicationMessage.WARNING));
+                                                ApplicationMessage.WARNING));
 
         event.getRequestContext().addUIComponentToUpdateByAjax(uiUnLockManager);
         return;

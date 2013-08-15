@@ -143,7 +143,8 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
     }
     if(PortletMode.VIEW.equals(newMode)) {
       PortletRequestContext pContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
-      uiPresentation = addChild(UIPresentationContainer.class, null, UIPresentationContainer.class.getSimpleName() + pContext.getWindowId());
+      uiPresentation = addChild(UIPresentationContainer.class, null, UIPresentationContainer.class.getSimpleName() 
+                                + pContext.getWindowId());
     } else if (PortletMode.EDIT.equals(newMode)) {
       popPreferences = addChild(UISCVPreferences.class, null, null);
       popPreferences.setInternalPreferencesMode(true);

@@ -62,19 +62,19 @@ import org.exoplatform.webui.form.UIForm;
  * Mar 2, 2009
  */
 @ComponentConfig(
-    lifecycle = UIFormLifecycle.class,
-    template = "classpath:groovy/wcm/webui/publication/lifecycle/stageversion/ui/UIPublicationPanel.gtmpl",
-    events = {
-      @EventConfig(listeners=UIPublicationPanel.DraftActionListener.class),
-      @EventConfig(listeners=UIPublicationPanel.LiveActionListener.class),
-      @EventConfig(name= "obsolete", listeners= UIPublicationPanel.ObsoleteActionListener.class),
-      @EventConfig(listeners=UIPublicationPanel.ChangeVersionActionListener.class),
-      @EventConfig(listeners=UIPublicationPanel.PreviewVersionActionListener.class),
-      @EventConfig(listeners=UIPublicationPanel.RestoreVersionActionListener.class),
-      @EventConfig(listeners=UIPublicationPanel.SeeAllVersionActionListener.class),
-      @EventConfig(listeners=UIPublicationPanel.CloseActionListener.class)
-    }
-)
+                 lifecycle = UIFormLifecycle.class,
+                 template = "classpath:groovy/wcm/webui/publication/lifecycle/stageversion/ui/UIPublicationPanel.gtmpl",
+                 events = {
+                   @EventConfig(listeners=UIPublicationPanel.DraftActionListener.class),
+                   @EventConfig(listeners=UIPublicationPanel.LiveActionListener.class),
+                   @EventConfig(name= "obsolete", listeners= UIPublicationPanel.ObsoleteActionListener.class),
+                   @EventConfig(listeners=UIPublicationPanel.ChangeVersionActionListener.class),
+                   @EventConfig(listeners=UIPublicationPanel.PreviewVersionActionListener.class),
+                   @EventConfig(listeners=UIPublicationPanel.RestoreVersionActionListener.class),
+                   @EventConfig(listeners=UIPublicationPanel.SeeAllVersionActionListener.class),
+                   @EventConfig(listeners=UIPublicationPanel.CloseActionListener.class)
+                 }
+    )
 
 public class UIPublicationPanel extends UIForm {
 
@@ -91,7 +91,7 @@ public class UIPublicationPanel extends UIForm {
   private List<NodeLocation> viewedRevisions = new ArrayList<NodeLocation>(3);
 
   private WCMPublicationService wcmPublicationService;
-  
+
   private String sitename;
 
   private String remoteuser;
@@ -233,7 +233,7 @@ public class UIPublicationPanel extends UIForm {
     if(revision instanceof Version) {
       calendar= ((Version)revision).getCreated();
     }else {
-    	if(revision.hasProperty("exo:dateCreated")){
+      if(revision.hasProperty("exo:dateCreated")){
         calendar = revision.getProperty("exo:dateCreated").getDate();
       }else{
         calendar = revision.getProperty("jcr:created").getDate();
@@ -423,7 +423,7 @@ public class UIPublicationPanel extends UIForm {
         publicationPanel.updatePanel();
       } catch (Exception e) {
         UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class);
-//        JCRExceptionManager.process(uiApp,e);
+        //        JCRExceptionManager.process(uiApp,e);
       }
       UIPublicationContainer publicationContainer = publicationPanel.getAncestorOfType(UIPublicationContainer.class);
       publicationContainer.setActiveTab(publicationPanel, event.getRequestContext());
@@ -457,7 +457,7 @@ public class UIPublicationPanel extends UIForm {
         publicationPanel.updatePanel();
       } catch (Exception e) {
         UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class);
-//        JCRExceptionManager.process(uiApp,e);
+        //        JCRExceptionManager.process(uiApp,e);
       }
       UIPublicationContainer publicationContainer = publicationPanel.getAncestorOfType(UIPublicationContainer.class);
       publicationContainer.setActiveTab(publicationPanel, event.getRequestContext());
@@ -491,7 +491,7 @@ public class UIPublicationPanel extends UIForm {
         publicationPanel.updatePanel();
       } catch (Exception e) {
         UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class);
-//        JCRExceptionManager.process(uiApp,e);
+        //        JCRExceptionManager.process(uiApp,e);
       }
       UIPublicationContainer publicationContainer = publicationPanel.getAncestorOfType(UIPublicationContainer.class);
       publicationContainer.setActiveTab(publicationPanel, event.getRequestContext());
@@ -569,7 +569,7 @@ public class UIPublicationPanel extends UIForm {
       try {
         currentNode.restore(version,true);
         ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
-         ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+        ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
         if (activityService.isAcceptedNode(currentNode)) {
           listenerService.broadcast(ActivityCommonService.NODE_REVISION_CHANGED, currentNode, version.getName());
         }
@@ -599,12 +599,12 @@ public class UIPublicationPanel extends UIForm {
         currentNode.setProperty(StageAndVersionPublicationConstant.REVISION_DATA_PROP,valueList.toArray(new Value[]{}));
         //log the history
         VersionLog versionLog = 
-          new VersionLog(currentNode.getName(), 
-                         currentNode.getProperty(StageAndVersionPublicationConstant.CURRENT_STATE).getString(), 
-                         userId, 
-                         GregorianCalendar.getInstance(), 
-                         StageAndVersionPublicationConstant.PUBLICATION_LOG_RESTORE_VERSION + " from " + 
-                         version.getName());
+            new VersionLog(currentNode.getName(), 
+                           currentNode.getProperty(StageAndVersionPublicationConstant.CURRENT_STATE).getString(), 
+                           userId, 
+                           GregorianCalendar.getInstance(), 
+                           StageAndVersionPublicationConstant.PUBLICATION_LOG_RESTORE_VERSION + " from " + 
+                               version.getName());
         values = currentNode.getProperty(StageAndVersionPublicationConstant.HISTORY).getValues();
         ValueFactory valueFactory = currentNode.getSession().getValueFactory();
         List<Value> list = new ArrayList<Value>(Arrays.asList(values));
@@ -615,7 +615,7 @@ public class UIPublicationPanel extends UIForm {
         publicationPanel.updatePanel();
       } catch (Exception e) {
         UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class);
-//        JCRExceptionManager.process(uiApp,e);
+        //        JCRExceptionManager.process(uiApp,e);
       }
 
       UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class) ;

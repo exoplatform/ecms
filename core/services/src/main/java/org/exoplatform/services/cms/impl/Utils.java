@@ -45,6 +45,7 @@ import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.jcr.ValueFormatException;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.PropertyDefinition;
 import javax.ws.rs.core.MediaType;
@@ -88,19 +89,19 @@ public class Utils {
   public static final String MAPPING_FILE = "mapping.properties";
 
   public static final String EXO_SYMLINK = "exo:symlink";
-  
+
   public static final long KB = 1024L;
   public static final long MB = 1024L*KB;
   public static final long GB = 1024L*MB;
 
   public static Node makePath(Node rootNode, String path, String nodetype)
-  throws PathNotFoundException, RepositoryException {
+      throws PathNotFoundException, RepositoryException {
     return makePath(rootNode, path, nodetype, null);
   }
 
   @SuppressWarnings("unchecked")
   public static Node makePath(Node rootNode, String path, String nodetype, Map permissions)
-  throws PathNotFoundException, RepositoryException {
+      throws PathNotFoundException, RepositoryException {
     String[] tokens = path.split("/") ;
     Node node = rootNode;
     for (int i = 0; i < tokens.length; i++) {
@@ -304,12 +305,12 @@ public class Utils {
     NodeType[] mixins = node.getMixinNodeTypes() ;
     if (mixins != null) types.addAll(Arrays.asList(mixins)) ;
     for(NodeType nodeType : types) {
-        for(PropertyDefinition property : nodeType.getPropertyDefinitions()) {
-          String name = property.getName();
-          if(!name.equals("exo:internalUse")&& !property.isProtected()&& !node.hasProperty(name)) {
-            properties.add(property);
-          }
+      for(PropertyDefinition property : nodeType.getPropertyDefinitions()) {
+        String name = property.getName();
+        if(!name.equals("exo:internalUse")&& !property.isProtected()&& !node.hasProperty(name)) {
+          properties.add(property);
         }
+      }
     }
     return properties;
   }
@@ -335,7 +336,11 @@ public class Utils {
       if (content.hasProperty("dc:title")) {
         try {
           title = content.getProperty("dc:title").getValues()[0].getString();
-        } catch (Exception ex) {
+        } catch (PathNotFoundException ex) {
+          title = null;
+        } catch(ValueFormatException ex) {
+          title = null;
+        } catch(RepositoryException ex) {
           title = null;
         }
       }
@@ -362,7 +367,7 @@ public class Utils {
     }
     return ret;
   }
-  
+
   /**
    * Remove all the link of a deleted node
    * @param     : node
@@ -389,23 +394,23 @@ public class Utils {
             // Example: symlink[3],symlink[2], symlink[1] to avoid the case that
             // the index of same name symlink automatically changed to increasing one by one
             Collections.sort(symlinks, new Comparator<Node>()
-              {
-                @Override
-                public int compare(Node node1, Node node2) {
-                  try {
-                    String name1 = node1.getName();
-                    String name2 = node2.getName();
-                    if (name1.equals(name2)) {
-                      int index1 = node1.getIndex();
-                      int index2 = node2.getIndex();
-                      return -1 * ((Integer)index1).compareTo(index2);
-                    }
-                    return -1 * name1.compareTo(name2);
-                  } catch (RepositoryException e) {
-                    return 0;
+                             {
+              @Override
+              public int compare(Node node1, Node node2) {
+                try {
+                  String name1 = node1.getName();
+                  String name2 = node2.getName();
+                  if (name1.equals(name2)) {
+                    int index1 = node1.getIndex();
+                    int index2 = node2.getIndex();
+                    return -1 * ((Integer)index1).compareTo(index2);
                   }
+                  return -1 * name1.compareTo(name2);
+                } catch (RepositoryException e) {
+                  return 0;
                 }
-              });
+              }
+                             });
 
             for (Node symlink : symlinks) {
               synchronized (symlink) {
@@ -421,9 +426,9 @@ public class Utils {
               LOG.warn(e.getMessage());
             }
           }
-            for (NodeIterator iter = node.getNodes(); iter.hasNext(); ) {
-              queue.add(iter.nextNode());
-            }
+          for (NodeIterator iter = node.getNodes(); iter.hasNext(); ) {
+            queue.add(iter.nextNode());
+          }
         }
       }
     } catch (Exception e) {
@@ -476,23 +481,23 @@ public class Utils {
 
       // Get service node
       Node serviceNode = serviceFolder.hasNode(serviceName) ?
-        serviceFolder.getNode(serviceName) : serviceFolder.addNode(serviceName, NodetypeConstant.NT_UNSTRUCTURED);
+                                                             serviceFolder.getNode(serviceName) : serviceFolder.addNode(serviceName, NodetypeConstant.NT_UNSTRUCTURED);
 
-      // Get log node of service
-      String serviceLogName =  serviceName + "_" + logType;
-      Node serviceLogNode = serviceNode.hasNode(serviceLogName) ?
-        serviceNode.getNode(serviceLogName) : serviceNode.addNode(serviceLogName, NodetypeConstant.NT_FILE);
+                                                             // Get log node of service
+                                                             String serviceLogName =  serviceName + "_" + logType;
+                                                             Node serviceLogNode = serviceNode.hasNode(serviceLogName) ?
+                                                                                                                        serviceNode.getNode(serviceLogName) : serviceNode.addNode(serviceLogName, NodetypeConstant.NT_FILE);
 
-      // Get service log content
-      if (serviceLogNode.hasNode(NodetypeConstant.JCR_CONTENT)) {
-        serviceLogContentNode = serviceLogNode.getNode(NodetypeConstant.JCR_CONTENT);
-      } else {
-        serviceLogContentNode = serviceLogNode.addNode(NodetypeConstant.JCR_CONTENT, NodetypeConstant.NT_RESOURCE);
-        serviceLogContentNode.setProperty(NodetypeConstant.JCR_ENCODING, "UTF-8");
-        serviceLogContentNode.setProperty(NodetypeConstant.JCR_MIME_TYPE, MediaType.TEXT_PLAIN);
-        serviceLogContentNode.setProperty(NodetypeConstant.JCR_DATA, StringUtils.EMPTY);
-        serviceLogContentNode.setProperty(NodetypeConstant.JCR_LAST_MODIFIED, new Date().getTime());
-      }
+                                                                                                                        // Get service log content
+                                                                                                                        if (serviceLogNode.hasNode(NodetypeConstant.JCR_CONTENT)) {
+                                                                                                                          serviceLogContentNode = serviceLogNode.getNode(NodetypeConstant.JCR_CONTENT);
+                                                                                                                        } else {
+                                                                                                                          serviceLogContentNode = serviceLogNode.addNode(NodetypeConstant.JCR_CONTENT, NodetypeConstant.NT_RESOURCE);
+                                                                                                                          serviceLogContentNode.setProperty(NodetypeConstant.JCR_ENCODING, "UTF-8");
+                                                                                                                          serviceLogContentNode.setProperty(NodetypeConstant.JCR_MIME_TYPE, MediaType.TEXT_PLAIN);
+                                                                                                                          serviceLogContentNode.setProperty(NodetypeConstant.JCR_DATA, StringUtils.EMPTY);
+                                                                                                                          serviceLogContentNode.setProperty(NodetypeConstant.JCR_LAST_MODIFIED, new Date().getTime());
+                                                                                                                        }
     }
     session.save();
     return serviceLogContentNode;
@@ -547,7 +552,7 @@ public class Utils {
   public static List<String> getMemberships() throws Exception {
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
     List<String> userMemberships = new ArrayList<String>();
-   userMemberships.add(userId);
+    userMemberships.add(userId);
     // here we must retrieve memberships of the user using the
     // IdentityRegistry Service instead of Organization Service to
     // allow JAAS based authorization
@@ -557,8 +562,8 @@ public class Utils {
         String role = membership.getMembershipType() + ":" + membership.getGroup();
         userMemberships.add(role);
       }
-   }
-   return userMemberships;
+    }
+    return userMemberships;
   }
 
   /**
@@ -574,20 +579,20 @@ public class Utils {
     Identity currentUserIdentity = identityRegistry.getIdentity(authenticatedUser);
     return currentUserIdentity.getMemberships();
   }
-  
+
   public static String getNodeTypeIcon(Node node, String appended, String mode)
-  throws RepositoryException {
+      throws RepositoryException {
     StringBuilder str = new StringBuilder();
     if (node == null)
       return "";
-    
+
     // Primary node type
     String nodeType = node.getPrimaryNodeType().getName();
-    
+
     // Get real node if node is symlink
     if (node.isNodeType(EXO_SYMLINK)) {
       LinkManager linkManager = Util.getUIPortal().getApplicationComponent(
-          LinkManager.class);
+                                                                           LinkManager.class);
       try {
         nodeType = node.getProperty(NodetypeConstant.EXO_PRIMARYTYPE).getString();
         node = linkManager.getTarget(node);
@@ -597,7 +602,7 @@ public class Utils {
         return "";
       }
     }
-    
+
     if (node.isNodeType(NodetypeConstant.EXO_TRASH_FOLDER)) {
       nodeType = NodetypeConstant.EXO_TRASH_FOLDER;
     }
@@ -625,7 +630,7 @@ public class Utils {
       defaultCssClass = nodeType;
     }
     defaultCssClass = defaultCssClass.concat("Default");
-    
+
     str.append(appended);
     str.append(defaultCssClass);
     str.append(" ");
@@ -637,18 +642,18 @@ public class Utils {
       if (node.hasNode(NodetypeConstant.JCR_CONTENT)) {
         Node jcrContentNode = node.getNode(NodetypeConstant.JCR_CONTENT);
         str.append(' ').append(appended).append(
-            jcrContentNode.getProperty(NodetypeConstant.JCR_MIMETYPE).getString().toLowerCase().replaceAll(
-                "/|\\.", ""));
+                                                jcrContentNode.getProperty(NodetypeConstant.JCR_MIMETYPE).getString().toLowerCase().replaceAll(
+                                                                                                                                               "/|\\.", ""));
       }
     }
     return str.toString();
   }
-    
+
   public static String getNodeTypeIcon(Node node, String appended)
-    throws RepositoryException {
+      throws RepositoryException {
     return getNodeTypeIcon(node, appended, null);
   }
-  
+
   /**
    * Check if a node is document type.
    * @param node
@@ -667,7 +672,7 @@ public class Utils {
     }
     return false;
   }
-  
+
   /**
    * gets the file size in friendly format
    * @param node the file node
@@ -690,7 +695,7 @@ public class Utils {
     long kbSize = (size % MB) / KB;
     long mbSize = (size % GB) / MB;
     long gbSize = size / GB;
-    
+
     if (gbSize >= 1) {
       ret.append(gbSize).append(refine(mbSize)).append(" GB");
     } else if (mbSize >= 1) {
@@ -702,7 +707,7 @@ public class Utils {
     }
     return ret.toString();
   }
-  
+
   public static boolean isSupportThumbnailView(String mimeType) {
     List<String> thumbnailMimeTypes = new ArrayList<String>();
     List<ComponentPlugin> componentPlugins = WCMCoreUtils.getService(ThumbnailService.class).getComponentPlugins();
@@ -713,7 +718,7 @@ public class Utils {
     }
     return thumbnailMimeTypes.contains(mimeType);
   }
-  
+
   /**
    * refines the size up to 3 digits, add '0' in front if necessary.
    * @param size the size

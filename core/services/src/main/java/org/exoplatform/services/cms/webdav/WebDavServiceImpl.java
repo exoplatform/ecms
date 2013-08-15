@@ -50,7 +50,6 @@ import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.link.NodeFinder;
-import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.ThreadLocalSessionProviderService;
 import org.exoplatform.services.jcr.webdav.util.InitParamsDefaults;
@@ -690,7 +689,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
       Item item = nodeFinder.getItem(workspaceName(repoPath), LinkUtils.getParentPath(path(normalizePath(repoPath))), true);
       repoPath =
-          item.getSession().getWorkspace().getName() + LinkUtils.createPath(item.getPath(), LinkUtils.getItemName(path(repoPath)));
+          item.getSession().getWorkspace().getName() + LinkUtils.createPath(item.getPath(), 
+                                                                            LinkUtils.getItemName(path(repoPath)));
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.CONFLICT).entity(exc.getMessage()).build();
     } catch (NoSuchWorkspaceException exc) {
@@ -764,12 +764,14 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
         try {
           while (!queue.isEmpty()) {
             tempNode = queue.poll();
-            if (WCMCoreUtils.isDocumentNodeType(tempNode) || tempNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
+            if (WCMCoreUtils.isDocumentNodeType(tempNode) 
+                || tempNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
               listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, tempNode.getParent(), tempNode);
             } else {
               for (NodeIterator iter = tempNode.getNodes(); iter.hasNext(); ) {
                 Node childNode = iter.nextNode();
-                if(WCMCoreUtils.isDocumentNodeType(childNode) || childNode.isNodeType(NodetypeConstant.NT_UNSTRUCTURED) || childNode.isNodeType(NodetypeConstant.NT_FOLDER))
+                if(WCMCoreUtils.isDocumentNodeType(childNode) || childNode.isNodeType(NodetypeConstant.NT_UNSTRUCTURED) 
+                    || childNode.isNodeType(NodetypeConstant.NT_FOLDER))
                   queue.add(childNode);
               }
             }

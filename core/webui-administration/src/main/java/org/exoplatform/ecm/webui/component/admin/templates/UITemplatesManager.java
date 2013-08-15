@@ -38,56 +38,56 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
  * 9:43:23 AM
  */
 @ComponentConfigs( {
-	@ComponentConfig(template = "app:/groovy/webui/component/admin/template/UITemplatesManager.gtmpl", 
-			events = { @EventConfig(listeners = UITemplatesManager.SelectTabActionListener.class) })
+  @ComponentConfig(template = "app:/groovy/webui/component/admin/template/UITemplatesManager.gtmpl", 
+      events = { @EventConfig(listeners = UITemplatesManager.SelectTabActionListener.class) })
 })
 
 public class UITemplatesManager extends UIAbstractManager {
   final static public String POPUP_TEMPLATE_ID = "TemplateContainerPopup";
   final static public String ACTIONS_TEMPLATE_ID = "UIActionsTemplateContainer";
   final static public String OTHERS_TEMPLATE_ID = "UIOthersTemplateContainer";
-  
+
   final static public String ACTIONS_TEMPLATE_LIST_ID = "UIActionsTemplateList";
   final static public String OTHERS_TEMPLATE_LIST_ID  = "UIOthersTemplateList";
   final static public String ACTIONS_ITERATOR_ID = "ActionsNodeTypeListIterator";
   final static public String OTHERS_ITERATOR_ID = "OthersNodeTypeListIterator";
-  
-  
+
+
   private String selectedTabId = "UITemplateContainer";
 
   public String getSelectedTabId()
   {
-     return selectedTabId;
+    return selectedTabId;
   }
 
   public void setSelectedTab(String renderTabId)
   {
-     selectedTabId = renderTabId;
+    selectedTabId = renderTabId;
   }
 
   public void setSelectedTab(int index)
   {
-     selectedTabId = getChild(index - 1).getId();
+    selectedTabId = getChild(index - 1).getId();
   }
 
   public UITemplatesManager() throws Exception {    
     UITemplateContainer uiTemp = addChild(UITemplateContainer.class, null, null) ;
     uiTemp.getChild(UITemplateList.class).setTemplateFilter(UITemplateList.DOCUMENTS_TEMPLATE_TYPE);
-    
+
     UITemplateContainer uiActionsTemp = addChild(UITemplateContainer.class, null, ACTIONS_TEMPLATE_ID) ;
     uiActionsTemp.getChild(UITemplateList.class).setTemplateFilter(UITemplateList.ACTIONS_TEMPLATE_TYPE);
     uiActionsTemp.getChild(UITemplateList.class).setId(ACTIONS_TEMPLATE_LIST_ID);
-    
+
     UITemplateContainer uiOthersTemp = addChild(UITemplateContainer.class, null, OTHERS_TEMPLATE_ID) ;
     uiOthersTemp.getChild(UITemplateList.class).setTemplateFilter(UITemplateList.OTHERS_TEMPLATE_TYPE);
     uiOthersTemp.getChild(UITemplateList.class).setId(OTHERS_TEMPLATE_LIST_ID);
-    
+
     addChild(UIPopupWindow.class, null, POPUP_TEMPLATE_ID) ;    
     addChild(UIPopupWindow.class, null, UITemplateContent.TEMPLATE_PERMISSION) ;
-    
+
     setSelectedTab("UITemplateContainer");
   }
-  
+
   public void initPopup(UIComponent uiComponent) throws Exception {
     UIPopupWindow uiPopup = getChildById(POPUP_TEMPLATE_ID);
     uiPopup.setRendered(true);
@@ -97,7 +97,7 @@ public class UITemplatesManager extends UIAbstractManager {
     uiPopup.setShow(true) ;
     uiPopup.setResizable(true) ;
   }
-  
+
   public void initPopupPermission(String id, String membership) throws Exception {
     UIPopupWindow uiPopup = getChildById(UITemplateContent.TEMPLATE_PERMISSION);
     uiPopup.setWindowSize(560, 300);
@@ -121,10 +121,10 @@ public class UITemplatesManager extends UIAbstractManager {
   }
 
   public boolean isEditingTemplate() {
-  	UIECMAdminPortlet adminPortlet = this.getAncestorOfType(UIECMAdminPortlet.class);
-  	UIPopupContainer popupContainer = adminPortlet.getChild(UIPopupContainer.class);
-  	UIPopupWindow uiPopup = popupContainer.getChild(UIPopupWindow.class);
-  	uiPopup.setId(POPUP_TEMPLATE_ID);
+    UIECMAdminPortlet adminPortlet = this.getAncestorOfType(UIECMAdminPortlet.class);
+    UIPopupContainer popupContainer = adminPortlet.getChild(UIPopupContainer.class);
+    UIPopupWindow uiPopup = popupContainer.getChild(UIPopupWindow.class);
+    uiPopup.setId(POPUP_TEMPLATE_ID);
     return (uiPopup != null && uiPopup.isShow() && uiPopup.isRendered());
   }  
 
@@ -138,35 +138,35 @@ public class UITemplatesManager extends UIAbstractManager {
     templateActionsContainer.update();   
     templateOthersContainer.update();    
   }
-  
+
   static public class SelectTabActionListener extends EventListener<UITemplatesManager>
   {
-  	public void execute(Event<UITemplatesManager> event) throws Exception
+    public void execute(Event<UITemplatesManager> event) throws Exception
     {
-       WebuiRequestContext context = event.getRequestContext();
-       String renderTab = context.getRequestParameter(UIComponent.OBJECTID);
-       if (renderTab == null)
-          return;
-       event.getSource().setSelectedTab(renderTab);
-       WebuiRequestContext parentContext = (WebuiRequestContext)context.getParentAppRequestContext();
-       if (parentContext != null)
-       {
-          parentContext.setResponseComplete(true);
-       }
-       else
-       {
-          context.setResponseComplete(true);
-       }
+      WebuiRequestContext context = event.getRequestContext();
+      String renderTab = context.getRequestParameter(UIComponent.OBJECTID);
+      if (renderTab == null)
+        return;
+      event.getSource().setSelectedTab(renderTab);
+      WebuiRequestContext parentContext = (WebuiRequestContext)context.getParentAppRequestContext();
+      if (parentContext != null)
+      {
+        parentContext.setResponseComplete(true);
+      }
+      else
+      {
+        context.setResponseComplete(true);
+      }
     }
   }
-  
+
   public static class CloseActionListener extends EventListener<UIPopupWindow> {
     public void execute(Event<UIPopupWindow> event) throws Exception {
-  	  UITemplatesManager uiManager = event.getSource().getAncestorOfType(UITemplatesManager.class) ;
-  	  UIPopupWindow uiPopupWindow = uiManager.getChild(UIPopupWindow.class) ;
-  	  uiPopupWindow.setRendered(false) ;
-  	  event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
-  	}
+      UITemplatesManager uiManager = event.getSource().getAncestorOfType(UITemplatesManager.class) ;
+      UIPopupWindow uiPopupWindow = uiManager.getChild(UIPopupWindow.class) ;
+      uiPopupWindow.setRendered(false) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
+    }
   }
-  
+
 }

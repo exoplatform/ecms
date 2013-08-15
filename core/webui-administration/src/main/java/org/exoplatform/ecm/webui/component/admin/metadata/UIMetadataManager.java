@@ -25,7 +25,6 @@ import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIBreadcumbs;
-import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.UITree;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
@@ -48,9 +47,9 @@ public class UIMetadataManager extends UIAbstractManager {
   public UIMetadataManager() throws Exception {
     addChild(UIMetadataList.class, null, null) ;
   }
-  
+
   public void processRender(WebuiRequestContext context) throws Exception { 
-  	super.processRender(context);
+    super.processRender(context);
     refresh();
   }
 
@@ -94,11 +93,11 @@ public class UIMetadataManager extends UIAbstractManager {
     uiPopup.setShowMask(true);
     uiPopup.setWindowSize(560, 300);
     UIPermissionSelector uiECMPermission =
-      createUIComponent(UIPermissionSelector.class, null, "MetadataPermission") ;
+        createUIComponent(UIPermissionSelector.class, null, "MetadataPermission") ;
     uiECMPermission.getChild(UIAnyPermission.class).setId("UIMetadataAnyPermission");
     uiECMPermission.getChild(UIBreadcumbs.class).setId("MetadataBreadcumbGroupSelector");
     uiECMPermission.getChild(UITree.class).setId("UIMetadataTreeGroupSelector");
-    
+
     uiECMPermission.setSelectedMembership(true);
     if(membership != null && membership.indexOf(":/") > -1) {
       String[] arrMember = membership.split(":/") ;

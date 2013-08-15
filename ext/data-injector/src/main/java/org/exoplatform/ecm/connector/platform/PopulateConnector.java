@@ -89,7 +89,8 @@ public class PopulateConnector implements ResourceContainer {
   private static final String[] SOURCE_FILES1 = {"content.doc application/msword", "content.pdf application/pdf",
     "content.ppt application/ppt","content.xls application/xls"
   };
-  private static final String[] SOURCE_FILES2 = {"image.jpg image/jpeg", "image.jpeg image/jpeg", "image.gif image/gif", "image.png image/png"};
+  private static final String[] SOURCE_FILES2 = {"image.jpg image/jpeg", "image.jpeg image/jpeg", "image.gif image/gif", 
+  "image.png image/png"};
 
   private static final String IMPORTED_DOCUMENTS_FOLDER = "importedDocuments";
 
@@ -129,8 +130,8 @@ public class PopulateConnector implements ResourceContainer {
       Session session = sessionProvider.getSession(WORKSPACE_NAME, repoService_.getCurrentRepository());
       //remove importedFolderNode
       if (session.getRootNode().hasNode(IMPORTED_DOCUMENTS_FOLDER)) {
-        WCMCoreUtils.getService(TrashService.class).moveToTrash(
-                                                                session.getRootNode().getNode(IMPORTED_DOCUMENTS_FOLDER), sessionProvider);
+        WCMCoreUtils.getService(TrashService.class).moveToTrash(session.getRootNode().getNode(IMPORTED_DOCUMENTS_FOLDER),
+                                                                sessionProvider);
         session.save();
       }
       //create importedFolderNode
@@ -189,9 +190,8 @@ public class PopulateConnector implements ResourceContainer {
     String fileExtension = fileName.substring(fileName.indexOf('.') + 1);
     //build the set of word to generate document
     BufferedReader br = null;
-    br = new BufferedReader(
-                            new InputStreamReader(
-                                                  this.getClass().getResourceAsStream(SOURCE_DATA_FOLDER_PATH + "/" + DICTIONARY_FILE)));
+    br = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(SOURCE_DATA_FOLDER_PATH + "/" + 
+        DICTIONARY_FILE)));
     String line = null;
     List<String> dictionary = new ArrayList<String>(); 
     while ((line = br.readLine()) != null) {
@@ -243,7 +243,7 @@ public class PopulateConnector implements ResourceContainer {
       try {
         DocumentRenderer documentRender = new DocumentRenderer();
         boolean success = documentRender.createDocument(content.toString(), fileName, fileExtension);
-        if(success) tempFile = new File(fileName);
+        if(success) tempFile = new File(fileName); 
       } catch(Exception ex) {
         if (LOG.isErrorEnabled()) {
           LOG.error("Exception when creating document");

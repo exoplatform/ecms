@@ -48,13 +48,13 @@ public class AddFilePropertyActivityAction implements Action{
     // Do not create / update activity for bellow cases
     if (!activityService.isAcceptedFileProperties(propertyName)) return false;
     if (ConversationState.getCurrent() == null) return false;
-    
+
     if(node.isNodeType("nt:resource")) node = node.getParent();
     //filter node type
     if (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) && activityService.isBroadcastNTFileEvents(node)
-    		&& !activityService.isCreating(node)) {
+        && !activityService.isCreating(node)) {
       //Notify to update activity
-    	listenerService.broadcast(ActivityCommonService.FILE_ADD_ACTIVITY, nodeTemp, propertyName);    	
+      listenerService.broadcast(ActivityCommonService.FILE_ADD_ACTIVITY, nodeTemp, propertyName);    	
     }
     return false;
   }

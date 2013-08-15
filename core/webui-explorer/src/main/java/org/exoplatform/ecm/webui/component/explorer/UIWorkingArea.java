@@ -70,13 +70,13 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * July 3, 2006 10:07:15 AM
  */
 @ComponentConfigs( {
-    @ComponentConfig(template = "app:/groovy/webui/component/explorer/UIWorkingArea.gtmpl",
-                     events = {@EventConfig(listeners = UIWorkingArea.RefreshActionListener.class)}),
-    @ComponentConfig(
-        type = UIRightClickPopupMenu.class,
-        id = "ECMContextMenu",
-        template = "app:/groovy/webui/component/explorer/UIRightClickPopupMenu.gtmpl"
-    )
+  @ComponentConfig(template = "app:/groovy/webui/component/explorer/UIWorkingArea.gtmpl",
+      events = {@EventConfig(listeners = UIWorkingArea.RefreshActionListener.class)}),
+      @ComponentConfig(
+                       type = UIRightClickPopupMenu.class,
+                       id = "ECMContextMenu",
+                       template = "app:/groovy/webui/component/explorer/UIRightClickPopupMenu.gtmpl"
+          )
 })
 public class UIWorkingArea extends UIContainer {
 
@@ -106,33 +106,33 @@ public class UIWorkingArea extends UIContainer {
   public static final String               CUSTOM_ACTIONS           = "CustomActions";
 
   public static final String               PERMLINK                 = "PermlinkContextMenu";
-  
+
   private String nodePathDelete = "";
   private String deleteNotice = "";
   private String wcmNotice = "";
-  
+
   public void setNodePathDelete(String nodePathDelete) {
-  	this.nodePathDelete = nodePathDelete;
+    this.nodePathDelete = nodePathDelete;
   }
-  
+
   public String getNodePathDelete() {
-  	return nodePathDelete;
+    return nodePathDelete;
   }
-  
+
   public String getWCMNotice() {
-  	return wcmNotice;
+    return wcmNotice;
   }
-  
+
   public void setWCMNotice(String wcmNotice) {
-  	this.wcmNotice = wcmNotice;
+    this.wcmNotice = wcmNotice;
   }
-  
+
   public void setDeleteNotice(String deleteNotice) {
-  	this.deleteNotice = deleteNotice;
+    this.deleteNotice = deleteNotice;
   }
-  
+
   public String getDeleteNotice() {
-  	return this.deleteNotice;
+    return this.deleteNotice;
   }
 
   public static final String               REFRESH_ACTION           = "Refresh";
@@ -141,10 +141,10 @@ public class UIWorkingArea extends UIContainer {
 
 
   private List<UIAbstractManagerComponent> managers                 =
-    Collections.synchronizedList(new ArrayList<UIAbstractManagerComponent>());
+      Collections.synchronizedList(new ArrayList<UIAbstractManagerComponent>());
 
   private List<ClipboardCommand>           virtualClipboards_       =
-    Collections.synchronizedList(new LinkedList<ClipboardCommand>());
+      Collections.synchronizedList(new LinkedList<ClipboardCommand>());
 
   public UIWorkingArea() throws Exception {
     addChild(UIRightClickPopupMenu.class, "ECMContextMenu", null);
@@ -193,7 +193,7 @@ public class UIWorkingArea extends UIContainer {
         // You can access to the given extension but the extension is not valid
         if (LOG.isWarnEnabled()) {
           LOG.warn("All the extension '" + extension.getName() + "' of type '" + EXTENSION_TYPE
-              + "' must be associated to a component of type " + UIAbstractManagerComponent.class);
+                   + "' must be associated to a component of type " + UIAbstractManagerComponent.class);
         }
         removeChild(component.getClass());
       }
@@ -215,10 +215,10 @@ public class UIWorkingArea extends UIContainer {
     return virtualClipboards_;
   }
 
-//Should use this method to check for when execute Actions in Working Area instead in UIEditingTagsForm (line 120)
+  //Should use this method to check for when execute Actions in Working Area instead in UIEditingTagsForm (line 120)
   public boolean isShowSideBar() throws Exception {
-   UIJCRExplorer jcrExplorer = getParent();
-   return jcrExplorer.getPreference().isShowSideBar() && getAncestorOfType(UIJCRExplorerPortlet.class).isShowSideBar();
+    UIJCRExplorer jcrExplorer = getParent();
+    return jcrExplorer.getPreference().isShowSideBar() && getAncestorOfType(UIJCRExplorerPortlet.class).isShowSideBar();
   }
 
   public void setShowSideBar(boolean b) throws Exception {
@@ -289,17 +289,17 @@ public class UIWorkingArea extends UIContainer {
     List<UIComponent> uiActionList = new ArrayList<UIComponent>();
     List<UIExtension> uiExtensionList = getUIExtensionList();
     UIComponent uiAddedActionManage;
-      for (UIExtension uiextension : uiExtensionList) {
-        if (ITEM_CONTEXT_MENU.equals(uiextension.getCategory())
-            || ITEM_GROUND_CONTEXT_MENU.equals(uiextension.getCategory())
-            || MULTI_ITEM_CONTEXT_MENU.equals(uiextension.getCategory())) {
-          uiAddedActionManage = addUIExtension(uiextension, null);
-          if (uiAddedActionManage != null) {
-            if (!uiActionList.contains(uiAddedActionManage))
-              uiActionList.add(uiAddedActionManage);
-          }
+    for (UIExtension uiextension : uiExtensionList) {
+      if (ITEM_CONTEXT_MENU.equals(uiextension.getCategory())
+          || ITEM_GROUND_CONTEXT_MENU.equals(uiextension.getCategory())
+          || MULTI_ITEM_CONTEXT_MENU.equals(uiextension.getCategory())) {
+        uiAddedActionManage = addUIExtension(uiextension, null);
+        if (uiAddedActionManage != null) {
+          if (!uiActionList.contains(uiAddedActionManage))
+            uiActionList.add(uiAddedActionManage);
         }
       }
+    }
     return uiActionList;
   }
 
@@ -429,10 +429,10 @@ public class UIWorkingArea extends UIContainer {
     UISelectDocumentTemplateTitle uiTemplateTitle = findFirstComponentOfType(UISelectDocumentTemplateTitle.class);
     boolean isUITemplateTitleRendered = isUISelectDocumentTemplateTitleRendered();
     uiTemplateTitle.setRendered(isUITemplateTitleRendered);
-    
+
     super.processRender(context);
   }
-  
+
   public boolean isUISelectDocumentTemplateTitleRendered()  {
     UIDocumentFormController uiDocumentController = findFirstComponentOfType(UIDocumentFormController.class);
     boolean isUITemplateTitleRendered = 

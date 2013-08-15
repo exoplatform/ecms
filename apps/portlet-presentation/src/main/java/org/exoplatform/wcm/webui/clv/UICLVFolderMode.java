@@ -50,12 +50,12 @@ import org.exoplatform.webui.core.lifecycle.Lifecycle;
  * The Class UICLVFolderMode.
  */
 @ComponentConfig(
-  lifecycle = Lifecycle.class,
-   template = "app:/groovy/ContentListViewer/UICLVContainer.gtmpl",
-   events = {
-     @EventConfig(listeners = UICLVFolderMode.PreferencesActionListener.class)
-   }
-)
+                 lifecycle = Lifecycle.class,
+                 template = "app:/groovy/ContentListViewer/UICLVContainer.gtmpl",
+                 events = {
+                   @EventConfig(listeners = UICLVFolderMode.PreferencesActionListener.class)
+                 }
+    )
 public class UICLVFolderMode extends UICLVContainer {
 
   private UICLVPresentation clvPresentation;
@@ -88,7 +88,7 @@ public class UICLVFolderMode extends UICLVContainer {
         addChild(UICLVPresentation.class,
                  null,
                  UICLVPresentation.class.getSimpleName() + "_" + pContext.getWindowId()
-                 );
+            );
     ResourceResolver resourceResolver = getTemplateResourceResolver();
     clvPresentation.init(resourceResolver, paginatedResultIterator);
   }
@@ -125,9 +125,9 @@ public class UICLVFolderMode extends UICLVContainer {
     filters.put(WCMComposer.FILTER_LANGUAGE, filterLang.toString());
     filters.put(WCMComposer.FILTER_LIMIT, itemsPerPage);
     filters.put(WCMComposer.FILTER_VISIBILITY, ("true".equals(sharedCache))?
-        WCMComposer.VISIBILITY_PUBLIC:WCMComposer.VISIBILITY_USER);
+                                                                            WCMComposer.VISIBILITY_PUBLIC:WCMComposer.VISIBILITY_USER);
 
-    
+
     if (this.getAncestorOfType(UICLVPortlet.class).isQueryApplication()) {
       String folderPath = preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null);
       if (folderPath == null) {
@@ -159,7 +159,7 @@ public class UICLVFolderMode extends UICLVContainer {
                                             filters,
                                             WCMCoreUtils.getUserSessionProvider());
   }
-  
+
   /**
    * Gets the bar info show.
    *
@@ -178,6 +178,6 @@ public class UICLVFolderMode extends UICLVContainer {
    * @throws Exception the exception
    */
   public String getPortletName() throws Exception {
-  	return UICLVFolderMode.class.getSimpleName();
+    return UICLVFolderMode.class.getSimpleName();
   }
 }

@@ -50,13 +50,13 @@ import org.exoplatform.webui.event.EventListener;
  * 11:39:49 AM
  */
 @ComponentConfig(
-    template = "app:/groovy/webui/component/admin/drives/UIDriveList.gtmpl",
-    events = {
-        @EventConfig(listeners = UIDriveList.DeleteActionListener.class, confirm = "UIDriveList.msg.confirm-delete"),
-        @EventConfig(listeners = UIDriveList.EditInfoActionListener.class),
-        @EventConfig(listeners = UIDriveList.AddDriveActionListener.class)
-    }
-)
+                 template = "app:/groovy/webui/component/admin/drives/UIDriveList.gtmpl",
+                 events = {
+                     @EventConfig(listeners = UIDriveList.DeleteActionListener.class, confirm = "UIDriveList.msg.confirm-delete"),
+                     @EventConfig(listeners = UIDriveList.EditInfoActionListener.class),
+                     @EventConfig(listeners = UIDriveList.AddDriveActionListener.class)
+                 }
+    )
 public class UIDriveList extends UIPagingGridDecorator {
 
   final static public String[] ACTIONS = {"AddDrive"} ;
@@ -71,8 +71,8 @@ public class UIDriveList extends UIPagingGridDecorator {
 
   public void refresh(int currentPage) throws Exception {
     LazyPageList<DriveData> dataPageList = new LazyPageList<DriveData>(new ListAccessImpl<DriveData>(DriveData.class,
-                                                                                                     getDrives()),
-                                                                       getUIPageIterator().getItemsPerPage());
+        getDrives()),
+        getUIPageIterator().getItemsPerPage());
     getUIPageIterator().setPageList(dataPageList);
     if (currentPage > getUIPageIterator().getAvailablePage())
       getUIPageIterator().setCurrentPage(getUIPageIterator().getAvailablePage());
@@ -196,12 +196,12 @@ public class UIDriveList extends UIPagingGridDecorator {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiDriveManager) ;
     }
   }
-  
+
   public String standardizeGroupName(String groupName) throws Exception {
-  	groupName = groupName.replaceAll("-", " ");
-  	char[] stringArray = groupName.toCharArray();
-  	stringArray[0] = Character.toUpperCase(stringArray[0]);
-  	groupName = new String(stringArray);
-  	return groupName;
+    groupName = groupName.replaceAll("-", " ");
+    char[] stringArray = groupName.toCharArray();
+    stringArray[0] = Character.toUpperCase(stringArray[0]);
+    groupName = new String(stringArray);
+    return groupName;
   }
 }

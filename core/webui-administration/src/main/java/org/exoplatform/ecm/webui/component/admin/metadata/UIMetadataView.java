@@ -35,33 +35,33 @@ import org.exoplatform.webui.event.EventListener;
  * 8:59:13 AM
  */
 @ComponentConfig(
-    template = "app:/groovy/webui/component/admin/metadata/UIMetadataView.gtmpl",
-    events = { 
-    		@EventConfig(listeners = UIMetadataView.CancelActionListener.class),
-        @EventConfig(listeners = UIMetadataView.SelectTabActionListener.class) 
-    })
+                 template = "app:/groovy/webui/component/admin/metadata/UIMetadataView.gtmpl",
+                 events = { 
+                     @EventConfig(listeners = UIMetadataView.CancelActionListener.class),
+                     @EventConfig(listeners = UIMetadataView.SelectTabActionListener.class) 
+                 })
 public class UIMetadataView extends UIContainer{
 
   private NodeType metadataType_  ;
-  
+
   private String selectedTabId = METADATA_VIEW;
-  
+
   static public final String METADATA_VIEW = "Metadata";
   static public final String ELEMENT_VIEW = "Element";
 
   public String getSelectedTabId()
   {
-     return selectedTabId;
+    return selectedTabId;
   }
 
   public void setSelectedTab(String renderTabId)
   {
-     selectedTabId = renderTabId;
+    selectedTabId = renderTabId;
   }
 
   public void setSelectedTab(int index)
   {
-     selectedTabId = ((UIComponent)getChild(index - 1)).getId();
+    selectedTabId = ((UIComponent)getChild(index - 1)).getId();
   }
 
   public UIMetadataView() throws Exception {
@@ -80,25 +80,25 @@ public class UIMetadataView extends UIContainer{
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
-  
+
   static public class SelectTabActionListener extends EventListener<UIMetadataView>
   {
-  	public void execute(Event<UIMetadataView> event) throws Exception
+    public void execute(Event<UIMetadataView> event) throws Exception
     {
-       WebuiRequestContext context = event.getRequestContext();
-       String renderTab = context.getRequestParameter(UIComponent.OBJECTID);
-       if (renderTab == null)
-          return;
-       event.getSource().setSelectedTab(renderTab);
-       WebuiRequestContext parentContext = (WebuiRequestContext)context.getParentAppRequestContext();
-       if (parentContext != null)
-       {
-          parentContext.setResponseComplete(true);
-       }
-       else
-       {
-          context.setResponseComplete(true);
-       }
+      WebuiRequestContext context = event.getRequestContext();
+      String renderTab = context.getRequestParameter(UIComponent.OBJECTID);
+      if (renderTab == null)
+        return;
+      event.getSource().setSelectedTab(renderTab);
+      WebuiRequestContext parentContext = (WebuiRequestContext)context.getParentAppRequestContext();
+      if (parentContext != null)
+      {
+        parentContext.setResponseComplete(true);
+      }
+      else
+      {
+        context.setResponseComplete(true);
+      }
     }
   } 
 }

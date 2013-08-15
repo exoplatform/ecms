@@ -50,12 +50,12 @@ import org.exoplatform.webui.form.input.UICheckBoxInput;
  * 2:20:31 PM
  */
 @ComponentConfig(
-    lifecycle = UIFormLifecycle.class,
-    template = "classpath:groovy/ecm/webui/form/UIFormInputSetWithAction.gtmpl",
-    events = {
-      @EventConfig(listeners = UINodeTypeOptionList.AddTypeActionListener.class)
-    }
-)
+                 lifecycle = UIFormLifecycle.class,
+                 template = "classpath:groovy/ecm/webui/form/UIFormInputSetWithAction.gtmpl",
+                 events = {
+                   @EventConfig(listeners = UINodeTypeOptionList.AddTypeActionListener.class)
+                 }
+    )
 public class UINodeTypeOptionList extends UIFormInputSetWithAction {
 
   final static String TABLE_NAME =  "UINodeTypeOptionList";
@@ -81,7 +81,7 @@ public class UINodeTypeOptionList extends UIFormInputSetWithAction {
   public void update(String values) throws Exception {
     UIFormTableInputSet uiTableInputSet = createUIComponent(UIFormTableInputSet.class, null, null) ;
     NodeTypeManager ntManager = getApplicationComponent(RepositoryService.class)
-                                .getCurrentRepository().getNodeTypeManager() ;
+        .getCurrentRepository().getNodeTypeManager() ;
     NodeTypeIterator nodeTypeIter = ntManager.getAllNodeTypes() ;
     List<NodeType> nodeTypeList = new ArrayList<NodeType>() ;
     while(nodeTypeIter.hasNext()) {
@@ -116,15 +116,15 @@ public class UINodeTypeOptionList extends UIFormInputSetWithAction {
     UINodeTypeForm uiNodeTypeForm = getParent() ;
     if(uiNodeTypeForm == null) return;
     if(selectedNodes != null && selectedNodes.size() > 0) {
-	    for (int i = 0; i < selectedNodes.size(); i++) {
-	      if (strNodeList == null)
-	        strNodeList = new StringBuffer(selectedNodes.get(i));
-	      else
-	        strNodeList.append(",").append(selectedNodes.get(i));
-	    }
+      for (int i = 0; i < selectedNodes.size(); i++) {
+        if (strNodeList == null)
+          strNodeList = new StringBuffer(selectedNodes.get(i));
+        else
+          strNodeList.append(",").append(selectedNodes.get(i));
+      }
     }
     if(strNodeList == null)
-    	uiNodeTypeForm.getUIStringInput(fieldName).setValue(StringUtils.EMPTY) ;
+      uiNodeTypeForm.getUIStringInput(fieldName).setValue(StringUtils.EMPTY) ;
     else
       uiNodeTypeForm.getUIStringInput(fieldName).setValue(strNodeList.toString()) ;
     if(fieldName.equals(UINodeTypeForm.SUPER_TYPE)) {

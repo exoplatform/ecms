@@ -1114,7 +1114,9 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         }
       }
     } catch (PathNotFoundException ep) {
-      // Cannot found the node path in the repository. We will continue filter by content type in the next block code.
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Cannot found the node path in the repository. We will continue filter by content type in the next block code.");
+      }
   }
 
     if(!found && allItemsByTypeFilterSet.contains(Contents_Document_Type)) {

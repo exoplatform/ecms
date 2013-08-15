@@ -25,7 +25,8 @@ public class DocumentRenderer {
         return createPowerPointDocument(content, fileName);
       else if(fileExtension.equalsIgnoreCase("pdf"))
         return createPDFDocument(content, fileName);
-      else if(fileExtension.equalsIgnoreCase("jpg") || fileExtension.equalsIgnoreCase("jpeg") || fileExtension.equalsIgnoreCase("png"))
+      else if(fileExtension.equalsIgnoreCase("jpg") || fileExtension.equalsIgnoreCase("jpeg") || 
+          fileExtension.equalsIgnoreCase("png"))
         return createImageDocument(content, fileName);
       else return false;
     } catch(Exception ex) {

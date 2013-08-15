@@ -26,6 +26,7 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.ExoContainer;
@@ -204,10 +205,11 @@ public class UISEOForm extends UIForm{
     seoLanguages = new ArrayList<String>();
     if(seoLocales != null && seoLocales.size() > 0) {
       for (Locale locale : seoLocales) {
-        String lang = locale.getLanguage();
+        StringBuffer sb = new StringBuffer();
+        sb.append(locale.getLanguage());
         String country = locale.getCountry();
-        if(StringUtils.isNotEmpty(country)) lang += "_" + country;
-        seoLanguages.add(lang);
+        if(StringUtils.isNotEmpty(country)) sb.append("_").append(country);
+        seoLanguages.add(sb.toString());
       }
     }
 
@@ -328,10 +330,11 @@ public class UISEOForm extends UIForm{
       seoLanguages = new ArrayList<String>();
       if(seoLocales != null && seoLocales.size() > 0) {
         for (Locale locale : seoLocales) {
-          String lang = locale.getLanguage();
+          StringBuffer sb = new StringBuffer();
+          sb.append(locale.getLanguage());
           String country = locale.getCountry();
-          if(StringUtils.isNotEmpty(country)) lang += "_" + country;
-          seoLanguages.add(lang);
+          if(StringUtils.isNotEmpty(country)) sb.append("_").append(country);
+          seoLanguages.add(sb.toString());
         }
       }
       if(seoLanguages.size() <= 0) setSelectedLanguage(null);
@@ -416,10 +419,13 @@ public class UISEOForm extends UIForm{
       if(uiForm.getSelectedLanguage() != null) lang = uiForm.getSelectedLanguage();
       else {
         lang = uiForm.getUIFormSelectBox(LANGUAGE_TYPE).getValue() ;
+        StringBuffer sb = new StringBuffer();        
         if(lang == null || lang.equals(LANGUAGE_TYPE)) {
           lang = portalRequestContext.getLocale().getLanguage();
+          sb.append(portalRequestContext.getLocale().getLanguage());
           if(StringUtils.isNotEmpty(portalRequestContext.getLocale().getCountry()))
-            lang += "_" + portalRequestContext.getLocale().getCountry();
+            sb.append("_").append(portalRequestContext.getLocale().getCountry());
+          lang = sb.toString();
         }
       }
       uiForm.setSelectedLanguage(lang);
@@ -504,7 +510,7 @@ public class UISEOForm extends UIForm{
             event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
             event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getAncestorOfType(UIPopupContainer.class).getParent());
           }
-        } catch (Exception ex) {
+        } catch (RepositoryException ex) {
           if (LOG.isErrorEnabled()) {
             LOG.error("Unexpected error ", ex);
           }
@@ -597,10 +603,11 @@ public class UISEOForm extends UIForm{
       seoLocales = seoService.getSEOLanguages(portalRequestContext.getPortalOwner(), contentPath, uiForm.onContent);
       seoLanguages = new ArrayList<String>();
       for (Locale locale : seoLocales) {
-        String tmp = locale.getLanguage();
+        StringBuffer sb = new StringBuffer();
+        sb.append(locale.getLanguage());
         String country = locale.getCountry();
-        if(StringUtils.isNotEmpty(country)) tmp += "_" + country;
-        seoLanguages.add(tmp);
+        if(StringUtils.isNotEmpty(country)) sb.append("_").append(country);
+        seoLanguages.add(sb.toString());
       }
       String laguageFocus = uiForm.defaultLanguage;
       if(seoLanguages.size()> 0 && !seoLanguages.contains(uiForm.defaultLanguage))
@@ -633,9 +640,11 @@ public class UISEOForm extends UIForm{
     while (iter.hasNext()) {
       LocaleConfig localConfig = iter.next() ;
       Locale locale = localConfig.getLocale();
-      String lang = locale.getLanguage();
+      StringBuffer sb = new StringBuffer();
+      sb.append(locale.getCountry());
       String country = locale.getCountry();
-      if(StringUtils.isNotEmpty(country)) lang += "_" + country;
+      if(StringUtils.isNotEmpty(country)) sb.append("_").append(country);
+      String lang = sb.toString();
       if(seoLanguages == null || !seoLanguages.contains(lang)) {
         try {
           languages.add(new SelectItemOption<String>(CapitalFirstLetters(locale.getDisplayName(inLocale)), lang)) ;

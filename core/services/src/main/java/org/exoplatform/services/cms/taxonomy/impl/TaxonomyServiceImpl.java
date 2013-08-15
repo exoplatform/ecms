@@ -88,15 +88,15 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
   private ActivityCommonService  activityService;
 
   private final String           SQL_QUERY       = "Select * from exo:taxonomyLink where jcr:path like '$0/%' "
-                                                     + "and exo:uuid = '$1' "
-                                                     + "and exo:workspace = '$2' "
-                                                     + "order by exo:dateCreated DESC";
+      + "and exo:uuid = '$1' "
+      + "and exo:workspace = '$2' "
+      + "order by exo:dateCreated DESC";
 
   private final String SQL_QUERY_EXACT_PATH = "Select * from exo:taxonomyLink where jcr:path like '$0/%' "
-                                                      + "and not jcr:path like '$0/%/%' "
-                                                      + "and exo:uuid = '$1' "
-                                                      + "and exo:workspace = '$2' "
-                                                      + "order by exo:dateCreated DESC";
+      + "and not jcr:path like '$0/%/%' "
+      + "and exo:uuid = '$1' "
+      + "and exo:workspace = '$2' "
+      + "order by exo:dateCreated DESC";
 
 
   List<TaxonomyPlugin>           plugins_        = new ArrayList<TaxonomyPlugin>();
@@ -118,8 +118,8 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
    * @throws Exception
    */
   public TaxonomyServiceImpl(InitParams initParams, SessionProviderService providerService,
-      NodeHierarchyCreator nodeHierarchyCreator, RepositoryService repoService,
-      LinkManager linkManager, DMSConfiguration dmsConfiguration) throws Exception {
+                             NodeHierarchyCreator nodeHierarchyCreator, RepositoryService repoService,
+                             LinkManager linkManager, DMSConfiguration dmsConfiguration) throws Exception {
     providerService_ = providerService;
     nodeHierarchyCreator_ = nodeHierarchyCreator;
     repositoryService_ = repoService;
@@ -133,7 +133,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
     ObjectParameter objectParam = initParams.getObjectParam("defaultPermission.configuration");
     if (objectParam != null)
       taxonomyTreeDefaultUserPermissions_
-        = getPermissions(((TaxonomyTreeDefaultUserPermission)objectParam.getObject()).getPermissions());
+      = getPermissions(((TaxonomyTreeDefaultUserPermission)objectParam.getObject()).getPermissions());
     activityService = WCMCoreUtils.getService(ActivityCommonService.class);
   }
 
@@ -238,7 +238,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
    * {@inheritDoc}
    */
   public void addTaxonomyTree(Node taxonomyTree) throws RepositoryException,
-      TaxonomyAlreadyExistsException {
+  TaxonomyAlreadyExistsException {
     if (hasTaxonomyTree(taxonomyTree.getName())) {
       throw new TaxonomyAlreadyExistsException();
     }
@@ -291,7 +291,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
    * {@inheritDoc}
    */
   public void addTaxonomyNode(String workspace, String parentPath, String taxoNodeName,
-      String creatorUser) throws RepositoryException, TaxonomyNodeAlreadyExistsException {
+                              String creatorUser) throws RepositoryException, TaxonomyNodeAlreadyExistsException {
     Session systemSession = null;
     try {
       ManageableRepository manaRepo = repositoryService_.getCurrentRepository();
@@ -327,7 +327,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
     if (userName == null) return false;
     for (AccessControlEntry entry : entries)
       if (userName.equals(entry.getIdentity()))
-          return true;
+        return true;
     return false;
   }
 
@@ -369,7 +369,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
           sql = StringUtils.replace(sql, "$1", node.getUUID());
           sql = StringUtils.replace(sql, "$2", node.getSession().getWorkspace().getName());
           session =
-            repositoryService_.getCurrentRepository().login(rootNodeTaxonomy.getSession().getWorkspace().getName());
+              repositoryService_.getCurrentRepository().login(rootNodeTaxonomy.getSession().getWorkspace().getName());
           QueryManager queryManager = session.getWorkspace().getQueryManager();
           Query query = queryManager.createQuery(sql, Query.SQL);
           QueryResult result = query.execute();
@@ -487,13 +487,13 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
           }
           linkName = node.getName() + index++;
         }
-        
+
         //create link
         linkManager_.createLink(categoryNode, TAXONOMY_LINK, node, linkName);
         if (listenerService!=null) {
           try {
             if (activityService.isAcceptedNode(node) || (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) &&
-            		activityService.isBroadcastNTFileEvents(node))) {
+                activityService.isBroadcastNTFileEvents(node))) {
               listenerService.broadcast(ActivityCommonService.CATEGORY_ADDED_ACTIVITY, node, categoryName);
             }
           } catch (Exception e) {
@@ -595,7 +595,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       if (listenerService!=null) {
         try {
           if (activityService.isAcceptedNode(node) || (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) &&
-          		activityService.isBroadcastNTFileEvents(node))) {
+              activityService.isBroadcastNTFileEvents(node))) {
             listenerService.broadcast(ActivityCommonService.CATEGORY_REMOVED_ACTIVITY, node, categoryName);
           }
         } catch (Exception e) {
@@ -640,7 +640,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
    * @throws RepositoryConfigurationException
    */
   private Node getRootTaxonomyDef() throws RepositoryException,
-      RepositoryConfigurationException {
+  RepositoryConfigurationException {
     ManageableRepository manaRepository = repositoryService_.getCurrentRepository();
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     Session systemSession = getSession(manaRepository, dmsRepoConfig.getSystemWorkspace(), true);
@@ -659,10 +659,10 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
    * @throws RepositoryException
    */
   private Session getSession(ManageableRepository manageRepository, String workspaceName,
-      boolean system) throws RepositoryException {
+                             boolean system) throws RepositoryException {
     if (system)
       return providerService_.getSystemSessionProvider(null).getSession(workspaceName,
-          manageRepository);
+                                                                        manageRepository);
     return providerService_.getSessionProvider(null).getSession(workspaceName, manageRepository);
   }
 

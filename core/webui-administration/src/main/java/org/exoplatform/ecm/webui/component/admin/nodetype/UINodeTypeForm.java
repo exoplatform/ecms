@@ -63,41 +63,41 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  */
 @ComponentConfigs ({
   @ComponentConfig(
-    lifecycle = UIFormLifecycle.class,
-    template = "app:/groovy/webui/component/admin/nodetype/UINodeTypeForm.gtmpl",
-    events = {
-      @EventConfig(listeners = UINodeTypeForm.CancelActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UINodeTypeForm.CloseActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UINodeTypeOptionList.CancelTabActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UINodeTypeForm.SaveDraftActionListener.class),
-      @EventConfig(listeners = UINodeTypeForm.SaveActionListener.class),
-      @EventConfig(listeners = UINodeTypeForm.SelectTabActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIPropertyDefinitionForm.AddPropertyActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIChildNodeDefinitionForm.AddChildActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UINodeTypeForm.ViewChildNodeActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UINodeTypeForm.ViewPropertyActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UINodeTypeForm.AddSuperTypeActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIChildNodeDefinitionForm.AddDefaultTypeActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIChildNodeDefinitionForm.AddRequiredTypeActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UINodeTypeOptionList.AddTypeActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIChildNodeDefinitionForm.RemoveChildNodeActionListener.class,
-                   confirm = "UINodeTypeForm.msg.confirm-delete-child", phase = Phase.DECODE),
-      @EventConfig(listeners = UIChildNodeDefinitionForm.EditChildNodeActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIPropertyDefinitionForm.EditPropertyActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIPropertyDefinitionForm.RemovePropertyActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIChildNodeDefinitionForm.UpdateChildActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIChildNodeDefinitionForm.CancelChildActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIPropertyDefinitionForm.UpdatePropertyActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIPropertyDefinitionForm.CancelPropertyActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIPropertyDefinitionForm.ChangeRequiredTypeActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIPropertyDefinitionForm.AddConstraintsActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIPropertyDefinitionForm.AddValueActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIPropertyDefinitionForm.CancelConstraintsActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIPropertyDefinitionForm.AddActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIPropertyDefinitionForm.RemoveActionListener.class, phase = Phase.DECODE,
-                   confirm = "UINodeTypeForm.msg.confirm-delete-property")
-    }
-)
+                   lifecycle = UIFormLifecycle.class,
+                   template = "app:/groovy/webui/component/admin/nodetype/UINodeTypeForm.gtmpl",
+                   events = {
+                     @EventConfig(listeners = UINodeTypeForm.CancelActionListener.class, phase = Phase.DECODE),
+                     @EventConfig(listeners = UINodeTypeForm.CloseActionListener.class, phase = Phase.DECODE),
+                     @EventConfig(listeners = UINodeTypeOptionList.CancelTabActionListener.class, phase = Phase.DECODE),
+                     @EventConfig(listeners = UINodeTypeForm.SaveDraftActionListener.class),
+                     @EventConfig(listeners = UINodeTypeForm.SaveActionListener.class),
+                     @EventConfig(listeners = UINodeTypeForm.SelectTabActionListener.class, phase = Phase.DECODE),
+                     @EventConfig(listeners = UIPropertyDefinitionForm.AddPropertyActionListener.class, phase = Phase.DECODE),
+                     @EventConfig(listeners = UIChildNodeDefinitionForm.AddChildActionListener.class, phase = Phase.DECODE),
+                     @EventConfig(listeners = UINodeTypeForm.ViewChildNodeActionListener.class, phase = Phase.DECODE),
+                     @EventConfig(listeners = UINodeTypeForm.ViewPropertyActionListener.class, phase = Phase.DECODE),
+                     @EventConfig(listeners = UINodeTypeForm.AddSuperTypeActionListener.class, phase = Phase.DECODE),
+                     @EventConfig(listeners = UIChildNodeDefinitionForm.AddDefaultTypeActionListener.class, phase = Phase.DECODE),
+                     @EventConfig(listeners = UIChildNodeDefinitionForm.AddRequiredTypeActionListener.class, phase = Phase.DECODE),
+                     @EventConfig(listeners = UINodeTypeOptionList.AddTypeActionListener.class, phase = Phase.DECODE),
+                     @EventConfig(listeners = UIChildNodeDefinitionForm.RemoveChildNodeActionListener.class,
+                     confirm = "UINodeTypeForm.msg.confirm-delete-child", phase = Phase.DECODE),
+                     @EventConfig(listeners = UIChildNodeDefinitionForm.EditChildNodeActionListener.class, phase = Phase.DECODE),
+                     @EventConfig(listeners = UIPropertyDefinitionForm.EditPropertyActionListener.class, phase = Phase.DECODE),
+                     @EventConfig(listeners = UIPropertyDefinitionForm.RemovePropertyActionListener.class, phase = Phase.DECODE),
+                     @EventConfig(listeners = UIChildNodeDefinitionForm.UpdateChildActionListener.class, phase = Phase.DECODE),
+                     @EventConfig(listeners = UIChildNodeDefinitionForm.CancelChildActionListener.class, phase = Phase.DECODE),
+                     @EventConfig(listeners = UIPropertyDefinitionForm.UpdatePropertyActionListener.class, phase = Phase.DECODE),
+                     @EventConfig(listeners = UIPropertyDefinitionForm.CancelPropertyActionListener.class, phase = Phase.DECODE),
+                     @EventConfig(listeners = UIPropertyDefinitionForm.ChangeRequiredTypeActionListener.class, phase = Phase.DECODE),
+                     @EventConfig(listeners = UIPropertyDefinitionForm.AddConstraintsActionListener.class, phase = Phase.DECODE),
+                     @EventConfig(listeners = UIPropertyDefinitionForm.AddValueActionListener.class, phase = Phase.DECODE),
+                     @EventConfig(listeners = UIPropertyDefinitionForm.CancelConstraintsActionListener.class, phase = Phase.DECODE),
+                     @EventConfig(listeners = UIPropertyDefinitionForm.AddActionListener.class, phase = Phase.DECODE),
+                     @EventConfig(listeners = UIPropertyDefinitionForm.RemoveActionListener.class, phase = Phase.DECODE,
+                     confirm = "UINodeTypeForm.msg.confirm-delete-property")
+                   }
+      )
 })
 public class UINodeTypeForm extends UIFormTabPane {
 
@@ -149,17 +149,17 @@ public class UINodeTypeForm extends UIFormTabPane {
     super("UINodeTypeForm");
     UIFormInputSetWithAction nodeTypeTab = new UIFormInputSetWithAction(NODETYPE_DEFINITION);
     nodeTypeTab.addUIFormInput(new UIFormSelectBox(NAMESPACE, NAMESPACE, null))
-               .addUIFormInput(new UIFormStringInput(NODETYPE_NAME, NODETYPE_NAME, null).addValidator(MandatoryValidator.class))
-               .addUIFormInput(new UIFormSelectBox(MIXIN_TYPE, MIXIN_TYPE, null))
-               .addUIFormInput(new UIFormSelectBox(HAS_ORDERABLE_CHILDNODES,
-                                                   HAS_ORDERABLE_CHILDNODES,
-                                                   null))
-               .addUIFormInput(new UIFormStringInput(PRIMARY_ITEMNAME, PRIMARY_ITEMNAME, null))
-               .addUIFormInput(new UIFormStringInput(SUPER_TYPE, SUPER_TYPE, null).addValidator(MandatoryValidator.class))
-               .addUIFormInput(new UIFormInputInfo(PROPERTY_DEFINITIONS, PROPERTY_DEFINITIONS, null))
-               .addUIFormInput(new UIFormInputInfo(CHILDNODE_DEFINITIONS,
-                                                   CHILDNODE_DEFINITIONS,
-                                                   null));
+    .addUIFormInput(new UIFormStringInput(NODETYPE_NAME, NODETYPE_NAME, null).addValidator(MandatoryValidator.class))
+    .addUIFormInput(new UIFormSelectBox(MIXIN_TYPE, MIXIN_TYPE, null))
+    .addUIFormInput(new UIFormSelectBox(HAS_ORDERABLE_CHILDNODES,
+                                        HAS_ORDERABLE_CHILDNODES,
+                                        null))
+                                        .addUIFormInput(new UIFormStringInput(PRIMARY_ITEMNAME, PRIMARY_ITEMNAME, null))
+                                        .addUIFormInput(new UIFormStringInput(SUPER_TYPE, SUPER_TYPE, null).addValidator(MandatoryValidator.class))
+                                        .addUIFormInput(new UIFormInputInfo(PROPERTY_DEFINITIONS, PROPERTY_DEFINITIONS, null))
+                                        .addUIFormInput(new UIFormInputInfo(CHILDNODE_DEFINITIONS,
+                                                                            CHILDNODE_DEFINITIONS,
+                                                                            null));
     setActionInTab(nodeTypeTab) ;
     addUIComponentInput(nodeTypeTab) ;
 
@@ -204,7 +204,7 @@ public class UINodeTypeForm extends UIFormTabPane {
   public List<SelectItemOption<String>> getNamespaces() throws Exception {
     if (namespacesOptions_.size() == 0) {
       String[] namespaces = getApplicationComponent(RepositoryService.class)
-                            .getCurrentRepository().getNamespaceRegistry().getPrefixes() ;
+          .getCurrentRepository().getNamespaceRegistry().getPrefixes() ;
       for(int i = 0; i < namespaces.length; i ++){
         namespacesOptions_.add(new SelectItemOption<String>(namespaces[i], namespaces[i])) ;
       }
@@ -341,7 +341,7 @@ public class UINodeTypeForm extends UIFormTabPane {
       NodeDefinitionValue nodeTypeValue = new NodeDefinitionValue();
       nodeTypeValue.setName(childDef.getName()) ;
       String defaultPriType =
-        childDef.getProperty(UIChildNodeDefinitionForm.DEFAULT_PRIMARY_TYPE).getString() ;
+          childDef.getProperty(UIChildNodeDefinitionForm.DEFAULT_PRIMARY_TYPE).getString() ;
       nodeTypeValue.setDefaultNodeTypeName(defaultPriType) ;
       String sameName = childDef.getProperty(UIChildNodeDefinitionForm.SAME_NAME).getString() ;
       nodeTypeValue.setSameNameSiblings(Boolean.parseBoolean(sameName)) ;
@@ -354,7 +354,7 @@ public class UINodeTypeForm extends UIFormTabPane {
       String parentVer = childDef.getProperty(ON_PARENT_VERSION).getString() ;
       nodeTypeValue.setOnVersion(Integer.parseInt(parentVer)) ;
       String requiredTypes =
-        childDef.getProperty(UIChildNodeDefinitionForm.REQUIRED_PRIMARY_TYPE).getString() ;
+          childDef.getProperty(UIChildNodeDefinitionForm.REQUIRED_PRIMARY_TYPE).getString() ;
       List<String> requiredList = new ArrayList<String>() ;
       if(requiredTypes != null && requiredTypes.length() > 0) {
         if(requiredTypes.indexOf(",") > -1){
@@ -534,7 +534,7 @@ public class UINodeTypeForm extends UIFormTabPane {
       UINodeTypeForm uiForm = event.getSource() ;
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
       NodeTypeManager ntManager = uiForm.getApplicationComponent(RepositoryService.class)
-                                 .getCurrentRepository().getNodeTypeManager() ;
+          .getCurrentRepository().getNodeTypeManager() ;
       String prefix = uiForm.getUIFormSelectBox(NAMESPACE).getValue() ;
       String nodeTypeName = uiForm.getUIStringInput(NODETYPE_NAME).getValue() ;
       if(nodeTypeName == null || nodeTypeName.trim().length() == 0) {
@@ -631,7 +631,7 @@ public class UINodeTypeForm extends UIFormTabPane {
       UINodeTypeForm uiForm = event.getSource() ;
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
       ManageableRepository mRepository =
-        uiForm.getApplicationComponent(RepositoryService.class).getCurrentRepository() ;
+          uiForm.getApplicationComponent(RepositoryService.class).getCurrentRepository() ;
       String systemWorkspace = mRepository.getConfiguration().getDefaultWorkspaceName() ;
       Session session = mRepository.getSystemSession(systemWorkspace) ;
       String prefix = uiForm.getUIFormSelectBox(NAMESPACE).getValue() ;
@@ -763,7 +763,7 @@ public class UINodeTypeForm extends UIFormTabPane {
               requiredTypes.append(nodeDef.getRequiredNodeTypeNames().get(j).toString()) ;
             }
             childNode.setProperty(UIChildNodeDefinitionForm.REQUIRED_PRIMARY_TYPE,
-                requiredTypes.toString()) ;
+                                  requiredTypes.toString()) ;
           } else {
             childNode.setProperty(UIChildNodeDefinitionForm.REQUIRED_PRIMARY_TYPE, "") ;
           }
@@ -802,27 +802,27 @@ public class UINodeTypeForm extends UIFormTabPane {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent()) ;
     }
   }
-  
+
   static public class SelectTabActionListener extends EventListener<UINodeTypeForm>
   {
-  	public void execute(Event<UINodeTypeForm> event) throws Exception
+    public void execute(Event<UINodeTypeForm> event) throws Exception
     {
-       WebuiRequestContext context = event.getRequestContext();
-       String renderTab = context.getRequestParameter(UIComponent.OBJECTID);
-       if (renderTab == null)
-          return;
-       event.getSource().setSelectedTab(renderTab);
-       WebuiRequestContext parentContext = (WebuiRequestContext)context.getParentAppRequestContext();
-       if (parentContext != null)
-       {
-          parentContext.setResponseComplete(true);
-       }
-       else
-       {
-          context.setResponseComplete(true);
-       }
+      WebuiRequestContext context = event.getRequestContext();
+      String renderTab = context.getRequestParameter(UIComponent.OBJECTID);
+      if (renderTab == null)
+        return;
+      event.getSource().setSelectedTab(renderTab);
+      WebuiRequestContext parentContext = (WebuiRequestContext)context.getParentAppRequestContext();
+      if (parentContext != null)
+      {
+        parentContext.setResponseComplete(true);
+      }
+      else
+      {
+        context.setResponseComplete(true);
+      }
     }		
   } 
-  
-  
+
+
 }
