@@ -23,7 +23,7 @@
   <WebContent>
     <dialog>
       <label>
-        <MainContent>Nội dung chính</MainContent>
+        <MainContent>Nội dung Chính</MainContent>
         <cssFile>default.css</cssFile>
         <jsFile>default.js</jsFile>
         <Advanced>Nâng cao</Advanced>
@@ -34,14 +34,14 @@
         <hintCSS>Tại bảng này, bạn có thể tự định nghĩa style cho nội dung web. Style này sẽ được ghi đè lên bảng style được định nghĩa cấp độ site và cấp độ được chia sẻ.</hintCSS>
         <ContentJS>Dữ liệu Javascript</ContentJS>
         <hintJS>Tại bảng này, bạn có thể tự định nghĩa mã Javascript được thực thi trước khi nội dung web được hiển thị.</hintJS>
-        <WebContentHtml>Nội dung chính</WebContentHtml>
+        <WebContentHtml>Nội dung Chính</WebContentHtml>
         <Illustration>Minh họa</Illustration>
         <hintIllustration>Tại bảng này, bạn có thể chọn ra một bức ảnh để hiển thị khi nội dung web của bạn được hiển thị dưới dạng danh sách. Thêm vào đó, bạn có thể thêm vài dòng tóm tắt để hiển thị cùng ảnh minh họa.</hintIllustration>
         <confirm-delete>Bạn có chắc bạn muốn xóa minh hoạ này không?</confirm-delete>
-        <illustrationImage>Ảnh minh họa</illustrationImage>
-        <imageMimeType>Kiểu ảnh</imageMimeType>
-        <image>Tải ảnh lên</image>
-        <imageWidth>Chiều rộng ảnh</imageWidth>
+        <illustrationImage>Ảnh Minh họa</illustrationImage>
+        <imageMimeType>Kiểu Ảnh</imageMimeType>
+        <image>Tải Ảnh lên</image>
+        <imageWidth>Chiều rộng Ảnh</imageWidth>
         <imageHeight>Chiều cao Ảnh</imageHeight>
         <Synchronize>Đồng bộ CSS và HTML</Synchronize>
       </label>
@@ -86,7 +86,7 @@
         <title>Tiêu đề</title>
         <description>Mô tả</description>
         <keywords>Từ khóa</keywords>
-        <robots>Hành vi của bộ máy tìm kiếm</robots>
+        <robots>Hành vi của Bộ máy Tìm kiếm</robots>
       </label>
     </dialog>
   </SiteMetadata>

@@ -18,7 +18,7 @@
       <UITaxonomyManagerTrees>Danh mục</UITaxonomyManagerTrees>
       <UIMetadataManager>Siêu dữ liệu</UIMetadataManager>
       <UINamespaceManager>Định danh</UINamespaceManager>
-      <UINodeTypeManager>Kiểu nút</UINodeTypeManager>
+      <UINodeTypeManager>Kiểu Nút</UINodeTypeManager>
       <UITemplatesManager>Tài liệu</UITemplatesManager>
    <UICLVTemplatesManager>Danh sách</UICLVTemplatesManager>
       <UIViewManager>Giao diện xem</UIViewManager>
@@ -87,7 +87,7 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Thiết lập lại</Reset>
+      <Reset>Làm lại</Reset>
     </action>
     <msg>
       <name-not-allowed>Tên không hợp lệ</name-not-allowed>
@@ -708,7 +708,7 @@
     <label>
       <both>Cả hai</both>
       <folderOnly>Thư mục</folderOnly>
-      <unstructuredFolder>Unstructured Folder</unstructuredFolder>
+      <unstructuredFolder>Thư mục Không Cấu trúc</unstructuredFolder>
     </label>
     <title>
       <AddPermission>Thêm Phân quyền</AddPermission>
@@ -751,7 +751,7 @@
     <label>
       <actionType>Mở rộng Kiểu Hành động:</actionType>
       <name>Tên:</name>
-      <isMove>is Action Move:</isMove>
+      <isMove>Hành động Di chuyển</isMove>
       <variables>Các biến số:</variables>
       <exo_businessProcessAction>Quy trình công việc:</exo_businessProcessAction>
       <exo_scriptAction>Tập lệnh Groovy:</exo_scriptAction>

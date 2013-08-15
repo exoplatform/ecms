@@ -7,8 +7,8 @@
       <keywords>Từ khóa:</keywords>
       <language>Ngôn ngữ:</language>
       <robots>Các Robot:</robots>
-      <sitemap>Sơ đồ trang:</sitemap>
-      <sitemapvisible>Hiển thị trên Sơ đồ trang</sitemapvisible>
+      <sitemap>Sơ đồ Trang:</sitemap>
+      <sitemapvisible>Hiển thị trên Sơ đồ Trang</sitemapvisible>
     <isInherited>Được kế thừa từ trang mẹ</isInherited>
       <priority>Độ ưu tiên:</priority>
       <frequency>Tần suất:</frequency>
@@ -50,7 +50,7 @@
   </UISEOPopupWindow>    
   <UISEOToolbarForm>
   <title>
-      <seo>Quản trị SEO</seo>
+      <seo>Quản lý SEO</seo>
   </title>
   <label>
     <seo>SEO</seo>

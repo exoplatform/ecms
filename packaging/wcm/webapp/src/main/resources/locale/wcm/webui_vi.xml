@@ -87,7 +87,7 @@
       <UIContentSearchResult>Kết quả Tìm kiếm</UIContentSearchResult>
       <UIContentViewer>Xem trước Nội dung</UIContentViewer>
       <WebContentMetadataPopup>Chọn Thuộc tính</WebContentMetadataPopup>
-      <WebContentNodeTypePopup>Chọn Loại Node</WebContentNodeTypePopup>
+      <WebContentNodeTypePopup>Chọn Loại Nút</WebContentNodeTypePopup>
       <UIPermissionManager>Quản trị Quyền</UIPermissionManager>
     </title>
   </UITabPane>
@@ -228,7 +228,7 @@
 
   <WebContentNodeTypePopup>
     <title>
-      <UIContentNodeTypeSelector>Chọn Kiểu Node</UIContentNodeTypeSelector>
+      <UIContentNodeTypeSelector>Chọn Kiểu Nút</UIContentNodeTypeSelector>
     </title>
   </WebContentNodeTypePopup>
 
@@ -314,7 +314,7 @@
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>Chọn người dùng</UIUserContainer>
+      <UIUserContainer>Chọn Người dùng</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
@@ -355,8 +355,8 @@
 
   <UIWizardPageSelectLayoutForm>
     <label>
-      <SingleContentViewer>Nội dung đơn</SingleContentViewer>
-      <ContentListViewer>Danh sách các nội dung</ContentListViewer>
+      <SingleContentViewer>Hiển thị Nội dung Đơn</SingleContentViewer>
+      <ContentListViewer>Hiển thị Nội dung Liệt kê</ContentListViewer>
       <Search>Tìm kiếm</Search>
       <Sitemap>Sơ đồ Site</Sitemap>
       <TwoColumnsLayout>Bố cục 2 Cột</TwoColumnsLayout>
@@ -380,8 +380,8 @@
   </Signin>
   <UIDriveForm>
 <label>
-<wcm-category-view>Hiển thi theo Danh mục</wcm-category-view>
-<wcm-view>Hiển thị theo Nôi dung WCM</wcm-view>
+<wcm-category-view>Hiển thị theo Danh mục</wcm-category-view>
+<wcm-view>Hiển thị theo Nội dung WCM</wcm-view>
 </label>
   </UIDriveForm>
   
@@ -392,32 +392,32 @@
       <GroupDrives>Ổ đĩa Nhóm</GroupDrives>
       <Private>Cá nhân</Private>
       <Public>Công khai</Public>
-      <BackupCenter>Ổ đĩa sao lưu</BackupCenter>
+      <BackupCenter>Ổ đĩa Sao lưu</BackupCenter>
       <CategorizedDocumentsCenter>Trung tâm Phân loại Tài liệu</CategorizedDocumentsCenter>
       <CollaborationCenter>Trung tâm Điều phối</CollaborationCenter>
       <DigitalAssetsManagementCenter>Trung tâm Quản lý Tài nguyên Số</DigitalAssetsManagementCenter>
       <DMSAdministration>Quản trị DMS</DMSAdministration>
-      <DocumentsManagementCenter>Ổ đĩa quản lý tài liệu</DocumentsManagementCenter>
-      <LiveDocumentsCenter>Ổ đĩa chứa tài liệu có hiệu lực</LiveDocumentsCenter>
-      <PendingDocumentsCenter>Ổ đĩa chứa tài liệu chưa xử lý</PendingDocumentsCenter>
-      <RecordsManagementCenter>Ổ đĩa quản lý hồ sơ</RecordsManagementCenter>
-      <SharedUsersSpace>Ổ đĩa chia sẻ cho người dùng</SharedUsersSpace>
+      <DocumentsManagementCenter>Trung tâm Quản lý Tài liệu</DocumentsManagementCenter>
+      <LiveDocumentsCenter>Trung tâm Quản lý Tài liệu Hiện hành</LiveDocumentsCenter>
+      <PendingDocumentsCenter>Trung tâm Quản lý Tài liệu đang chờ Duyệt</PendingDocumentsCenter>
+      <RecordsManagementCenter>Trung tâm Quản lý Hồ sơ</RecordsManagementCenter>
+      <SharedUsersSpace>Nhóm Người dùng Chia sẻ</SharedUsersSpace>
       <Systemfiles>Tệp Hệ thống</Systemfiles>
-      <ValidationRequestsDocumentsCenter>Trung Tâm Kiểm duyệt Yêu Cầu Tài liệu</ValidationRequestsDocumentsCenter>
-      <ManagedSites>Quản trị các trang</ManagedSites>
+      <ValidationRequestsDocumentsCenter>Trung Tâm Kiểm duyệt Tài liệu Yêu cầu</ValidationRequestsDocumentsCenter>
+      <ManagedSites>Quản trị các Site</ManagedSites>
       <SharedSite>Site Chia sẻ</SharedSite>
     </title>
   </ContentSelector>
   
   <UICategoryNavigationTargetPathPopupWindow>
     <title>
-      <UIPageSelector>Chọn trang</UIPageSelector>
+      <UIPageSelector>Chọn Trang</UIPageSelector>
     </title>
   </UICategoryNavigationTargetPathPopupWindow>
   
   <UIDocumentInfo>
     <msg>
-      <access-denied-exception>Truy cập bị từ chối. Bạn không có quyền xem hoặc node này đã bị xóa hoặc thay đổi.</access-denied-exception>
+      <access-denied-exception>Truy cập bị từ chối. Bạn không có quyền xem hoặc nút này đã bị xóa hoặc thay đổi.</access-denied-exception>
     </msg>
   </UIDocumentInfo>
   <UIPortalApplication>
