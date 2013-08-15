@@ -35,14 +35,14 @@
         <title>Tiêu đề</title>
         <description>Mô tả</description>
         <keywords>Từ khóa</keywords>
-        <robots>Hành vi của bộ máy tìm kiếm</robots>
+        <robots>Hành vi của Bộ máy Tìm kiếm</robots>
       </label>
       <tooltip>
-        <add-edit>Thêm/sửa siêu dữ liệu</add-edit>
+        <add-edit>Thêm/sửa Siêu dữ liệu</add-edit>
         <cancel>Hủy bỏ</cancel>
       </tooltip>
       <action>
-        <add-edit>Thêm/xóa</add-edit>
+        <add-edit>Thêm/Sửa</add-edit>
         <cancel>Hủy bỏ</cancel>
       </action>
     </view>
@@ -50,13 +50,13 @@
 
   <Category>
     <view>
-      <label>Phân loại</label>
+      <label>Danh mục</label>
     </view>
   </Category>
 
   <Tag>
     <view>
-      <label>Thẻ</label>
+      <label>Nhãn</label>
     </view>
   </Tag>
 </bundle>

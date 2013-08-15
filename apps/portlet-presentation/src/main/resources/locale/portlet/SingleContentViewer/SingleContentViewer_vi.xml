@@ -2,8 +2,8 @@
 <bundle>
   <UIPresentationContainer>
     <title>
-      <QuickEdit>Chỉnh sửa trong Content Explorer</QuickEdit>
-      <print>In trang này</print>
+      <QuickEdit>Chỉnh sửa trong Trình duyệt Nội dung</QuickEdit>
+      <print>In Trang Này</print>
       <FastPublish>Xuất bản</FastPublish>
     </title>
     <label>
@@ -18,7 +18,7 @@
   </UIPresentationContainer>
   <CorrectContentSelectorPopupWindow>
     <title>
-      <UIContentSelectorOne>Chọn nội dung</UIContentSelectorOne>
+      <UIContentSelectorOne>Chọn Nội dung</UIContentSelectorOne>
     </title>
   </CorrectContentSelectorPopupWindow>
   <UISingleContentViewerPortlet>
@@ -45,29 +45,29 @@
       <Print>In</Print>
       <Close>Đóng</Close>
     </action>
-    <title>Tùy chọn</title>
+    <title>Tùy chọn Nội dung Chi Tiết</title>
     <label>
       <Back>Quay lại trang trước</Back>
-      <Edit>Hiệu chỉnh</Edit>
+      <Edit>Sửa</Edit>
       <Preferences>Tùy chọn</Preferences>
-      <Title>Tùy chọn</Title>
-      <UISCVShowTitleConfigurationCheckBox>Hiện tiêu đề</UISCVShowTitleConfigurationCheckBox>
-      <UISCVShowDateConfigurationCheckBox>Hiện ngày tháng</UISCVShowDateConfigurationCheckBox>
-      <UISCVShowOptionBarConfigurationCheckBox>Hiện thanh tùy chọn</UISCVShowOptionBarConfigurationCheckBox>
-      <DisplaySettingBlock>Thiết lập hiển thị</DisplaySettingBlock>
+      <Title>Tùy chọn Nội dung Chi Tiết</Title>
+      <UISCVShowTitleConfigurationCheckBox>Hiện Tiêu đề</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>Hiện Ngày Tháng</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowOptionBarConfigurationCheckBox>Hiện Thanh Tùy chọn</UISCVShowOptionBarConfigurationCheckBox>
+      <DisplaySettingBlock>Thiết lập Hiển thị</DisplaySettingBlock>
       <ContentPathBlock>Lựa chọn nội dung</ContentPathBlock>
-      <UISCVConfigItemPathFormInputSet>Đường dẫn</UISCVConfigItemPathFormInputSet>
-    <UISCVContentPathConfigurationInputBox>Đường dẫn</UISCVContentPathConfigurationInputBox>
+      <UISCVConfigItemPathFormInputSet>Đường dẫn Nội dung</UISCVConfigItemPathFormInputSet>
+    <UISCVContentPathConfigurationInputBox>Đường dẫn Nội dung</UISCVContentPathConfigurationInputBox>
       <Advance>Nâng cao</Advance>
-      <ContextCaption>Điều hướng động</ContextCaption>
-      <UISCVContextualRadioBox>Nội dung theo ngữ cảnh</UISCVContextualRadioBox>
+      <ContextCaption>Điều hướng Động</ContextCaption>
+      <UISCVContextualRadioBox>Nội dung theo Ngữ cảnh</UISCVContextualRadioBox>
       <UISCVParameterInputBox>theo tham số</UISCVParameterInputBox>
-      <PrintSettingBlock>Tùy chọn xem bản in</PrintSettingBlock>
+      <PrintSettingBlock>Thiết lập In ấn</PrintSettingBlock>
       <UISCVPrintPageParameter>với</UISCVPrintPageParameter>
       <UISCVConfigPrintPageFormInputSet>Hiển thị trên Trang</UISCVConfigPrintPageFormInputSet>
       <LockStatus>Khóa</LockStatus>
       <CacheManagement>Hiển thị Nội dung</CacheManagement>
-      <UISCVCacheRadioBox>Chia sẻ nội dung giữa người sử dụng</UISCVCacheRadioBox>
+      <UISCVCacheRadioBox>Chia sẻ Nội dung</UISCVCacheRadioBox>
     </label>
     <help>
       <ContentPathBlock>Chọn nội dung mà bạn muốn hiển thị. Nội dung mặc định này sẽ được thay thế tự động nếu bạn bật tùy chọn Điều hướng động (xem chế độ nâng cao dưới đây).</ContentPathBlock>
@@ -81,20 +81,20 @@
     <tab>
       <label>
         <UISCVConfigContentFormInputSet>Lựa chọn nội dung</UISCVConfigContentFormInputSet>
-        <UISCVConfigDisplayFormInputSet>Thiết lập hiển thị</UISCVConfigDisplayFormInputSet>
-        <UISCVConfigPrintFormInputSet>Tùy chọn xem bản in</UISCVConfigPrintFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Thiết lập Hiển thị</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>Thiết lập In ấn</UISCVConfigPrintFormInputSet>
         <UISCVConfigAdvancedFormInputSet>Nâng cao</UISCVConfigAdvancedFormInputSet>
       </label>
     </tab>
   </UISCVPreferences>
   <UISCVConfigItemPathFormInputSet>
     <title>
-      <SelectFolderPath>Lựa chọn đường dẫn</SelectFolderPath>
+      <SelectFolderPath>Lựa chọn Đường dẫn Thư mục</SelectFolderPath>
     </title>
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
     <title>
-      <SelectTargetPage>Xem bản in tại</SelectTargetPage>
+      <SelectTargetPage>Hiện tại Trang</SelectTargetPage>
     </title>
   </UISCVConfigPrintPageFormInputSet>
   <PublicationStates>

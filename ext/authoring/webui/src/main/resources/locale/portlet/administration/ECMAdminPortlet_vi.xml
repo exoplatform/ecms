@@ -2,8 +2,8 @@
 <bundle>
   <UIViewFormTabPane>
   <label>
-          <publicationRequestApproval>Xuất bản &gt; Yêu cầu duyệt</publicationRequestApproval>
-          <publicationApproveContent>Xuất bản &gt; Duyệt  nội dung</publicationApproveContent>
+          <publicationRequestApproval>Xuất bản &gt; Yêu cầu Duyệt</publicationRequestApproval>
+          <publicationApproveContent>Xuất bản &gt; Duyệt  Nội dung</publicationApproveContent>
           <publicationPublish>Xuất bản &gt; Phát hành</publicationPublish>
   </label>
   </UIViewFormTabPane>

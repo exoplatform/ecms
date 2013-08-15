@@ -2,13 +2,13 @@
 <bundle>
 <UIPopupWindow>
 <title>
-<UIViewInfoManager>Xem thông tin chi tiết</UIViewInfoManager>
+<UIViewInfoManager>Xem Thông tin</UIViewInfoManager>
 </title>
 </UIPopupWindow>
     
 <ECMContextMenu>
 <event>
-<ViewInfo>Xem thông tin chi tiết</ViewInfo>
+<ViewInfo>Xem Thông tin</ViewInfo>
 </event>
 </ECMContextMenu>
 <UIViewInfoContainer>
@@ -21,7 +21,7 @@
       <lastModifier>Người sửa cuối cùng</lastModifier>
       <created>Ngày tạo</created>
       <lastModified>Ngày sửa cuối</lastModified>
-      <publicationState>Trạng thái xuất bản</publicationState>
+      <publicationState>Trạng thái Xuất bản</publicationState>
 </label>
 <value>
       <folder>Thư mục</folder>

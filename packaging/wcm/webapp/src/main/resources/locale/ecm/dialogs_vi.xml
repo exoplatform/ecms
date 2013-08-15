@@ -155,7 +155,7 @@
         <relation>Quan hệ:</relation>
         <format>#{word.format}:</format>
         <coverage>Mức độ bao phủ</coverage>
-        <identifier>Người Định danh</identifier>
+        <identifier>Người Định danh:</identifier>
         <language>Ngôn ngữ:</language>
       </label>
     </dialog>
@@ -192,8 +192,8 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>Bắt đầu công bố</start-publication>
-        <end-publication>Kết thúc công bố</end-publication>
+        <start-publication>Bắt đầu Xuất bản</start-publication>
+        <end-publication>Kết thúc Xuất bản</end-publication>
       </label>
     </dialog>
   </Published>
@@ -237,10 +237,10 @@
     <dialog>
       <label>
         <version-history>Lược sử Phiên bản</version-history>
-        <base-version>Phiên bản cơ sở</base-version>
-        <is-checked-out>Đã check out</is-checked-out>
+        <base-version>Phiên bản Cơ sở</base-version>
+        <is-checked-out>Đã Check out</is-checked-out>
         <predecessors>Phiên bản trước</predecessors>
-        <merge-failed>Không Hợp lại được</merge-failed>
+        <merge-failed>Không Gộp lại được</merge-failed>
         <uuid>UUID</uuid>
       </label>
     </dialog>
@@ -253,7 +253,7 @@
     <dialog>
       <label>
         <name>Tên</name>
-        <autoload>Tự động tải</autoload>
+        <autoload>Tự động Tải</autoload>
         <minetype>Định dạng</minetype>
         <content>Nội dung</content>
       </label>
@@ -288,9 +288,9 @@
         <id>Mã</id>
         <name>Tên</name>
         <lifecycle>Chu kỳ</lifecycle>
-        <homePath>Đường dẫn nguồn</homePath>
-        <targetWorkspace>Vùng đích</targetWorkspace>
-        <targetPath>Đường dẫn đích</targetPath>
+        <homePath>Đường dẫn Nguồn</homePath>
+        <targetWorkspace>Vùng Đích</targetWorkspace>
+        <targetPath>Đường dẫn Đích</targetPath>
       </label>
     </dialog>
   </ScriptAction>

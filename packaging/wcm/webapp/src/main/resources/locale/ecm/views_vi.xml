@@ -23,11 +23,11 @@
     <view>
       <label>
         <postedBy>Bình luận mới nhất được đăng tải bởi</postedBy>
-        <at>tại</at>
+        <at>lúc</at>
         <comments>Bình luận</comments>
         <show-comments>Hiển thị bình luận</show-comments>
         <hide-comments>Ẩn bình luận</hide-comments>
-        <comment-by>Ẩn bình luận</comment-by>
+        <comment-by>Bình luận bởi</comment-by>
         <email>Email</email>
         <site>Trang</site>
       </label>
@@ -99,7 +99,7 @@
   <AddMetadata>
     <view>
       <label>
-        <action-name>Tên hành động</action-name>
+        <action-name>Tên Hành động</action-name>
         <lifecycle>Chu kỳ</lifecycle>
         <metadata>Siêu dữ liệu</metadata>
         <description>Mô tả</description>
@@ -113,7 +113,7 @@
   <AutoVersioning>
     <view>
       <label>
-        <action-name>Tên hành động</action-name>
+        <action-name>Tên Hành động</action-name>
         <lifecycle>Chu kỳ</lifecycle>
         <description>Mô tả</description>
       </label>
@@ -137,13 +137,13 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>Không sẵn</not-avaliable>
+        <not-avaliable>Không có sẵn</not-avaliable>
         <title>Tiêu đề</title>
         <creator>Người tạo</creator>
         <subject>Chủ đề</subject>
         <source>Nguồn</source>
         <contributor>Người cộng tác</contributor>
-        <resource-type>Loại tài nguyên</resource-type>
+        <resource-type>Loại Tài nguyên</resource-type>
         <date>Ngày</date>
         <publisher>Nhà xuất bản</publisher>
         <description>Mô tả</description>

@@ -3,7 +3,7 @@
   <UIFCCForm>
     <msg>
       <name-not-allowed>Không cho phép sử dụng tên này.</name-not-allowed>
-      <in-versioning>Hãy kiểm tra node hiện tại trước khi thêm node mới.</in-versioning>
+      <in-versioning>Hãy kiểm tra nút hiện tại trước khi thêm nút mới.</in-versioning>
       <cannot-save>Lỗi xảy ra khi đang lưu dữ liệu.</cannot-save>
       <saved-successfully>{0}</saved-successfully>
       <not-support>Không thể tải mẫu thiết kế của '{0}'.</not-support>
@@ -80,7 +80,7 @@
 
   <UIFCCSelectorPopupWindow>
     <title>
-      <UIOneNodePathSelector>Chọn vị trí</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Chọn Vị trí</UIOneNodePathSelector>
     </title>
   </UIFCCSelectorPopupWindow>
 
