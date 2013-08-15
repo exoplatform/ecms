@@ -66,22 +66,22 @@ import java.util.regex.Matcher;
  */
 
 @ComponentConfig(
-      events = {
-        @EventConfig(listeners = RestoreFromTrashManageComponent.RestoreFromTrashActionListener.class)
-      }
-)
+                 events = {
+                     @EventConfig(listeners = RestoreFromTrashManageComponent.RestoreFromTrashActionListener.class)
+                 }
+    )
 public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent {
 
   private static final List<UIExtensionFilter> FILTERS
-        = Arrays.asList(new UIExtensionFilter[] { new IsInTrashFilter(),
-                                                   new IsNotLockedFilter(),
-                                                   new IsCheckedOutFilter(),
-                                                   new HasRemovePermissionFilter(),
-                                                   new IsAbleToRestoreFilter(),
-                                                   new IsNotTrashHomeNodeFilter() });
+  = Arrays.asList(new UIExtensionFilter[] { new IsInTrashFilter(),
+      new IsNotLockedFilter(),
+      new IsCheckedOutFilter(),
+      new HasRemovePermissionFilter(),
+      new IsAbleToRestoreFilter(),
+      new IsNotTrashHomeNodeFilter() });
 
   private final static Log                     LOG     = ExoLogger.getLogger(RestoreFromTrashManageComponent.class.getName());
-  
+
   private static int numberItemsRestored = 0;
   private static String itemName = "";
 
@@ -112,7 +112,7 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
       srcPath = node.getPath();
     } catch(PathNotFoundException path) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
-          null,ApplicationMessage.WARNING));
+                                              null,ApplicationMessage.WARNING));
 
       return;
     }
@@ -135,7 +135,7 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
       return;
     }
     doRestore(srcPath, node, event);
-    
+
     numberItemsRestored++;
   }
 
@@ -162,7 +162,7 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
       RepositoryService repositoryService = uiExplorer.getApplicationComponent(RepositoryService.class);
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session trashSession = sessionProvider.getSession(trashWorkspace, manageableRepository);
-      
+
       Node trashHomeNode = (Node) trashSession.getItem(trashHomeNodePath);
       try {
         trashService.restoreFromTrash(srcPath, sessionProvider);
@@ -170,7 +170,7 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
       } catch(PathNotFoundException e) {
         UIPopupContainer uiPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
         UISelectRestorePath uiSelectRestorePath =
-          uiWorkingArea.createUIComponent(UISelectRestorePath.class, null, null);
+            uiWorkingArea.createUIComponent(UISelectRestorePath.class, null, null);
 
         uiSelectRestorePath.setTrashHomeNode(trashHomeNode);
         uiSelectRestorePath.setSrcPath(srcPath);
@@ -226,7 +226,7 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
 
   public static class RestoreFromTrashActionListener extends UIWorkingAreaActionListener<RestoreFromTrashManageComponent> {
     public void restoreFromTrashManage(Event<RestoreFromTrashManageComponent> event) throws Exception {   
-    	numberItemsRestored = 0;
+      numberItemsRestored = 0;
       String srcPath = event.getRequestContext().getRequestParameter(OBJECTID);
       if (srcPath.indexOf(';') > -1) {
         multiRestoreFromTrash(srcPath.split(";"), event);
@@ -237,24 +237,24 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
       ResourceBundle res = context.getApplicationResourceBundle();
       String restoreNotice = "";
       if(!srcPath.contains(";") && numberItemsRestored == 1) {
-      	restoreNotice = "UIWorkingArea.msg.feedback-restore";
-      	restoreNotice = res.getString(restoreNotice);
-      	restoreNotice = restoreNotice.replaceAll("\\{" + 0 + "\\}", itemName);
+        restoreNotice = "UIWorkingArea.msg.feedback-restore";
+        restoreNotice = res.getString(restoreNotice);
+        restoreNotice = restoreNotice.replaceAll("\\{" + 0 + "\\}", itemName);
       } else if(srcPath.indexOf(';') > -1 && numberItemsRestored >= 1) {
-      	restoreNotice = "UIWorkingArea.msg.feedback-restore-multi";
-      	restoreNotice = res.getString(restoreNotice);
-      	restoreNotice = restoreNotice.replaceAll("\\{" + 0 + "\\}", String.valueOf(numberItemsRestored));
+        restoreNotice = "UIWorkingArea.msg.feedback-restore-multi";
+        restoreNotice = res.getString(restoreNotice);
+        restoreNotice = restoreNotice.replaceAll("\\{" + 0 + "\\}", String.valueOf(numberItemsRestored));
       }      
       if(restoreNotice.length() > 0) {
-      	UIWorkingArea uiWorkingArea = event.getSource().getParent();
-      	uiWorkingArea.setWCMNotice(restoreNotice);
+        UIWorkingArea uiWorkingArea = event.getSource().getParent();
+        uiWorkingArea.setWCMNotice(restoreNotice);
       }
     }
 
     private void multiRestoreFromTrash(String[] paths, Event<RestoreFromTrashManageComponent> event) throws Exception {
       for (String path : paths) {
         if (acceptForMultiNode(event, path))
-        restoreFromTrash(path, event);
+          restoreFromTrash(path, event);
       }
     }
 

@@ -101,7 +101,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
   private final RepositoryService repositoryService;
 
   private ListenerService listenerService;
-  
+
   private final MimeTypeResolver mimeTypeResolver;
 
   public WebDavServiceImpl(InitParams params,
@@ -418,15 +418,15 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
       try {
         item = nodeFinder.getItem(workspaceName(repoPath),
-                                       LinkUtils.getParentPath(path(normalizePath(repoPath))),
-                                       true);
+                                  LinkUtils.getParentPath(path(normalizePath(repoPath))),
+                                  true);
         repoPath = item.getSession().getWorkspace().getName()
             + LinkUtils.createPath(item.getPath(), Text.escapeIllegalJcrChars(LinkUtils.getItemName(path(repoPath))));
         session = item.getSession();
       } catch (PathNotFoundException e) {
         item = nodeFinder.getItem(workspaceName(repoPath),
-                                       LinkUtils.getParentPath(path(Text.escapeIllegalJcrChars(repoPath))),
-                                       true);
+                                  LinkUtils.getParentPath(path(Text.escapeIllegalJcrChars(repoPath))),
+                                  true);
         repoPath = item.getSession().getWorkspace().getName()
             + LinkUtils.createPath(item.getPath(), Text.escapeIllegalJcrChars(LinkUtils.getItemName(path(repoPath))));
         session = item.getSession();
@@ -441,7 +441,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       }
       return Response.serverError().build();
     }
-    
+
     Response res = super.put(repoName,
                              repoPath,
                              lockTokenHeader,
@@ -458,15 +458,15 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       if (currentNode.isCheckedOut())
         listenerService.broadcast(this.POST_UPLOAD_CONTENT_EVENT, this, currentNode);
       if(currentNode != null) {
-      	ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
+        ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
         try {
-  				listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, currentNode);
-  				currentNode.getSession().save();
-  			} catch (Exception e) {
-  				if (LOG.isWarnEnabled()) {
-  	        LOG.warn("Cannot broadcast file create activity for the item at " + currentNode.getPath(), e);
-  	      }
-  			}
+          listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, currentNode);
+          currentNode.getSession().save();
+        } catch (Exception e) {
+          if (LOG.isWarnEnabled()) {
+            LOG.warn("Cannot broadcast file create activity for the item at " + currentNode.getPath(), e);
+          }
+        }
       }
     } catch (PathNotFoundException npfe) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(npfe.getMessage()).build();
@@ -619,27 +619,27 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       return Response.serverError().build();
     }
     Response response = super.move(repoName,
-                      repoPath,
-                      destinationHeader,
-                      lockTokenHeader,
-                      ifHeader,
-                      depthHeader,
-                      overwriteHeader,
-                      uriInfo,
-                      body);
-    
+                                   repoPath,
+                                   destinationHeader,
+                                   lockTokenHeader,
+                                   ifHeader,
+                                   depthHeader,
+                                   overwriteHeader,
+                                   uriInfo,
+                                   body);
+
     if (response.getStatus() == HTTPStatus.CREATED) {
       updateProperties(destinationHeader, repoName);
     }
     return response;
   }
-  
+
   /**
-  * update exo:name, exo:title and jcr:mimeType when rename a node
-  * 
-  * @param destinationHeader
-  * @param repoName
-  */
+   * update exo:name, exo:title and jcr:mimeType when rename a node
+   * 
+   * @param destinationHeader
+   * @param repoName
+   */
   private void updateProperties(String destinationHeader, String repoName) {
     try {
       URI dest = buildURI(destinationHeader);
@@ -661,17 +661,17 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       }
     }
   }
-  
+
   /** 
    * Build URI from string. 
    */
   private URI buildURI(String path) throws URISyntaxException {
-     try {
-        return new URI(path);
-     }
-     catch (URISyntaxException e) {
-        return new URI(TextUtil.escape(path, '%', true));
-     }
+    try {
+      return new URI(path);
+    }
+    catch (URISyntaxException e) {
+      return new URI(TextUtil.escape(path, '%', true));
+    }
   }
 
   /**
@@ -690,7 +690,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
       Item item = nodeFinder.getItem(workspaceName(repoPath), LinkUtils.getParentPath(path(normalizePath(repoPath))), true);
       repoPath =
-        item.getSession().getWorkspace().getName() + LinkUtils.createPath(item.getPath(), LinkUtils.getItemName(path(repoPath)));
+          item.getSession().getWorkspace().getName() + LinkUtils.createPath(item.getPath(), LinkUtils.getItemName(path(repoPath)));
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.CONFLICT).entity(exc.getMessage()).build();
     } catch (NoSuchWorkspaceException exc) {
@@ -716,24 +716,24 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                          @PathParam("repoPath") String repoPath,
                          @HeaderParam(ExtHttpHeaders.LOCKTOKEN) String lockTokenHeader,
                          @HeaderParam(ExtHttpHeaders.IF) String ifHeader) {
-  	Item item = null;
+    Item item = null;
     try {
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
       repoPath = convertRepoPath(repoPath, false);
-      
+
       Session session = null;
       try {
         item = nodeFinder.getItem(workspaceName(repoPath),
-                                       path(normalizePath(repoPath)),
-                                       true);        
+                                  path(normalizePath(repoPath)),
+                                  true);        
         session = item.getSession();
       } catch (PathNotFoundException e) {
         item = nodeFinder.getItem(workspaceName(repoPath),
-                                       path(Text.escapeIllegalJcrChars(repoPath)),
-                                       true);        
+                                  path(Text.escapeIllegalJcrChars(repoPath)),
+                                  true);        
         session = item.getSession();
       }     
-      
+
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
     } catch (NoSuchWorkspaceException exc) {
@@ -744,44 +744,44 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       }
       return Response.serverError().build();
     }    
-    
+
     try {
-	    //Broadcast the event when user move node to Trash
-	    Node node = (Node)item;
-	    ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
-	    ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
-	    Node parent = node.getParent();
-	    if (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {        
-	      if (activityService.isBroadcastNTFileEvents(node)) {
-	        listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, parent, node);
-	      }
-	    } else if(!WCMCoreUtils.isDocumentNodeType(node)){
-	    	Queue<Node> queue = new LinkedList<Node>();
-	      queue.add(node);
-	      
-	      //Broadcast event to remove file activities
-	      Node tempNode = null;
-	      try {
-	      	while (!queue.isEmpty()) {
-	      		tempNode = queue.poll();
-	      		if (WCMCoreUtils.isDocumentNodeType(tempNode) || tempNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
-	      			listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, tempNode.getParent(), tempNode);
-	      		} else {
-	          	for (NodeIterator iter = tempNode.getNodes(); iter.hasNext(); ) {
-	          		Node childNode = iter.nextNode();
-	          		if(WCMCoreUtils.isDocumentNodeType(childNode) || childNode.isNodeType(NodetypeConstant.NT_UNSTRUCTURED) || childNode.isNodeType(NodetypeConstant.NT_FOLDER))
-	                queue.add(childNode);
-	            }
-	      		}
-	      	}
-	      } catch (Exception e) {
-	        if (LOG.isWarnEnabled()) {
-	          LOG.warn(e.getMessage());
-	        }
-	      }         
-	    }
+      //Broadcast the event when user move node to Trash
+      Node node = (Node)item;
+      ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
+      ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+      Node parent = node.getParent();
+      if (node.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {        
+        if (activityService.isBroadcastNTFileEvents(node)) {
+          listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, parent, node);
+        }
+      } else if(!WCMCoreUtils.isDocumentNodeType(node)){
+        Queue<Node> queue = new LinkedList<Node>();
+        queue.add(node);
+
+        //Broadcast event to remove file activities
+        Node tempNode = null;
+        try {
+          while (!queue.isEmpty()) {
+            tempNode = queue.poll();
+            if (WCMCoreUtils.isDocumentNodeType(tempNode) || tempNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
+              listenerService.broadcast(ActivityCommonService.FILE_REMOVE_ACTIVITY, tempNode.getParent(), tempNode);
+            } else {
+              for (NodeIterator iter = tempNode.getNodes(); iter.hasNext(); ) {
+                Node childNode = iter.nextNode();
+                if(WCMCoreUtils.isDocumentNodeType(childNode) || childNode.isNodeType(NodetypeConstant.NT_UNSTRUCTURED) || childNode.isNodeType(NodetypeConstant.NT_FOLDER))
+                  queue.add(childNode);
+              }
+            }
+          }
+        } catch (Exception e) {
+          if (LOG.isWarnEnabled()) {
+            LOG.warn(e.getMessage());
+          }
+        }         
+      }
     } catch(Exception ex) {
-    	if (LOG.isWarnEnabled()) {
+      if (LOG.isWarnEnabled()) {
         LOG.warn(ex.getMessage());
       }
     }    

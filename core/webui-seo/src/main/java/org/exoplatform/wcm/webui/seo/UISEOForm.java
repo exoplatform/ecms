@@ -68,13 +68,13 @@ import org.exoplatform.webui.form.input.UICheckBoxInput;
  * Jun 17, 2011
  */
 @ComponentConfig(lifecycle = UIFormLifecycle.class,
-                 template = "classpath:groovy/webui/seo/UISEOForm.gtmpl",
-                 events = {
-                    @EventConfig(listeners = UISEOForm.SaveActionListener.class),
-                    @EventConfig(phase=Phase.DECODE, listeners = UISEOForm.RefreshActionListener.class),
-                    @EventConfig(phase=Phase.DECODE, listeners = UISEOForm.UpdateActionListener.class),
-                    @EventConfig(listeners = UISEOForm.RemoveActionListener.class, confirm = "UISEOForm.msg.confirm-delete"),
-                    @EventConfig(phase=Phase.DECODE, listeners = UISEOForm.CancelActionListener.class) })
+template = "classpath:groovy/webui/seo/UISEOForm.gtmpl",
+events = {
+  @EventConfig(listeners = UISEOForm.SaveActionListener.class),
+  @EventConfig(phase=Phase.DECODE, listeners = UISEOForm.RefreshActionListener.class),
+  @EventConfig(phase=Phase.DECODE, listeners = UISEOForm.UpdateActionListener.class),
+  @EventConfig(listeners = UISEOForm.RemoveActionListener.class, confirm = "UISEOForm.msg.confirm-delete"),
+  @EventConfig(phase=Phase.DECODE, listeners = UISEOForm.CancelActionListener.class) })
 
 public class UISEOForm extends UIForm{
 
@@ -266,7 +266,7 @@ public class UISEOForm extends UIForm{
       if (frequencyOptions != null && frequencyOptions.size() > 0) {
         for (int i = 0; i < frequencyOptions.size(); i++) {
           frequencyItemOptions.add(new SelectItemOption<String>(frequencyOptions.get(i).toString(),
-                                                                (frequencyOptions.get(i).toString())));
+              (frequencyOptions.get(i).toString())));
         }
       }
       UIFormSelectBox frequencySelectbox = new UIFormSelectBox(FREQUENCY, null, frequencyItemOptions);
@@ -390,7 +390,7 @@ public class UISEOForm extends UIForm{
       if (frequencyOptions != null && frequencyOptions.size() > 0) {
         for (int i = 0; i < frequencyOptions.size(); i++) {
           frequencyItemOptions.add(new SelectItemOption<String>(frequencyOptions.get(i).toString(),
-                                                                (frequencyOptions.get(i).toString())));
+              (frequencyOptions.get(i).toString())));
         }
       }
       UIFormSelectBox frequencySelectbox = this.getUIFormSelectBox(FREQUENCY);
