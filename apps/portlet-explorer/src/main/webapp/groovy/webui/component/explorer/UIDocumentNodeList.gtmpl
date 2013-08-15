@@ -55,6 +55,9 @@
             if (data instanceof NodeLinkAware) {
               data = ((NodeLinkAware)data).getRealNode();
             }
+            if (data == null) {
+              continue;
+            }
             def idChild = uicomponent.getID(data);
             def childComponent = uicomponent.getChildById(idChild);
             if (childComponent == null) {
@@ -88,6 +91,11 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
     data.getSession().getItem(data.getPath());
   } catch(PathNotFoundException pne) {
     return;
+  }
+  if (data instanceof NodeLinkAware) {
+    if (((NodeLinkAware)data).getRealNode() == null) {
+      return;
+    }
   }
   i++;
   def isPreferenceNode = uiDocumentInfo.isPreferenceNode(data) ;
