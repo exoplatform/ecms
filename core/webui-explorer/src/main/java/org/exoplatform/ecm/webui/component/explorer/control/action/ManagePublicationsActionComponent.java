@@ -64,8 +64,8 @@ public class ManagePublicationsActionComponent extends UIComponent {
       new HasPublicationLifecycleFilter(),
       new IsDocumentFilter("UIActionBar.msg.manage-publication.not-supported-nodetype"),
       new IsNotRootNodeFilter("UIActionBar.msg.cannot-enable-publication-rootnode"),
-      new CanSetPropertyFilter("UIActionBar.msg.access-denied"), new CanRemoveNodeFilter(),
-      new IsNotLockedFilter(), new IsNotIgnoreVersionNodeFilter()});
+      new CanSetPropertyFilter("UIActionBar.msg.access-denied"), new IsNotLockedFilter(), 
+      new IsNotIgnoreVersionNodeFilter()});
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
