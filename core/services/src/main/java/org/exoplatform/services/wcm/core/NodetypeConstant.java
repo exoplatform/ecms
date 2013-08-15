@@ -211,7 +211,7 @@ public class NodetypeConstant {
   
   public static final String[] SPECIFIC_FOLDERS = { EXO_MUSICFOLDER,
                                               EXO_VIDEOFOLDER, EXO_PICTUREFOLDER, EXO_DOCUMENTFOLDER, EXO_SEARCHFOLDER };
-					      
+
   public static final String JCR_MIMETYPE = "jcr:mimeType";
 
   public static final String GTN_NAME ="gtn:name";

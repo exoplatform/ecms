@@ -491,7 +491,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   }
 
   @SuppressWarnings("unchecked")
-  public List<String> getAllDocumentNodeTypes() throws Exception {
+  public List<String> getAllDocumentNodeTypes() throws PathNotFoundException, RepositoryException {
     List<String> nodeTypeList = (List<String>) nodeTypeListCached.get(NODETYPE_LIST);
     if(nodeTypeList != null && nodeTypeList.size() > 0)
       return nodeTypeList;
@@ -666,12 +666,13 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * Return session of the specified repository
    * @param provider        SessionProvider
    * @return
+   * @throws RepositoryException 
    * @see                   SessionProvider
    * @see                   ManageableRepository
    * @see                   DMSRepositoryConfiguration
    * @throws Exception
    */
-  private Session getSession(SessionProvider provider) throws Exception {
+  private Session getSession(SessionProvider provider) throws RepositoryException {
     ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     return provider.getSession(dmsRepoConfig.getSystemWorkspace(), manageableRepository);

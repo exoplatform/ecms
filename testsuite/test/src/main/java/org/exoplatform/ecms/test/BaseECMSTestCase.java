@@ -161,7 +161,9 @@ public abstract class BaseECMSTestCase extends BaseExoTestCase {
     try {
       applySystemSession();
     } catch (Exception e) {
-      e.printStackTrace();
+      if (log.isErrorEnabled()) {
+        log.error(e);
+      }
       fail();
     }
   }

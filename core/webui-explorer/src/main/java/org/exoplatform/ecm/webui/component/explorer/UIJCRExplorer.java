@@ -1006,12 +1006,7 @@ public class UIJCRExplorer extends UIContainer {
       if (firstTime) {
         UIApplication uiApp = getAncestorOfType(UIApplication.class) ;
         JCRExceptionManager.process(uiApp, e);
-        String workspace = null;
-        try {
-          workspace = session.getWorkspace().getName();
-        } catch (Exception e2) {
-          // do nothing
-        }
+        String workspace = session.getWorkspace().getName();
         if (LOG.isWarnEnabled()) {
           LOG.warn("The node cannot be found at " + nodePath
             + (workspace == null ? "" : " into the workspace " + workspace));

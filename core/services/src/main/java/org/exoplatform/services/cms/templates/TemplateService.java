@@ -22,6 +22,8 @@ import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
 import org.exoplatform.services.cms.templates.impl.TemplatePlugin;
@@ -313,7 +315,7 @@ public interface TemplateService {
    * @return  List<String>
    * @throws Exception
    */
-  public List<String> getAllDocumentNodeTypes() throws Exception;
+  public List<String> getAllDocumentNodeTypes() throws PathNotFoundException, RepositoryException;
 
   /**
    * Get path of css file which included in view template.

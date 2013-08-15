@@ -23,6 +23,8 @@ import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
@@ -118,13 +120,7 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
                                                  repositoryService_.getCurrentRepository());
     List<Node> resultList = new ArrayList<Node>();
     QueryResult results = null;
-    try {
-      results = executeQuery(session, buildQueryByMimeTypes(mimeTypes, userName), SQL);
-    } catch (Exception e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error(e.getMessage());
-      }
-    }
+    results = executeQuery(session, buildQueryByMimeTypes(mimeTypes, userName), SQL);
     NodeIterator iterator = results.getNodes();
     Node documentNode = null;
     while (iterator.hasNext()) {
@@ -178,7 +174,11 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
       try {
         // Execute sql query and return a results
         results = executeQuery(session, buildQueryByContentsType(userName), SQL);
-      } catch (Exception e) {
+      } catch (PathNotFoundException e) {
+        if (LOG.isErrorEnabled()) {
+          LOG.error("An unexpected exception appear", e);
+        }
+      } catch (RepositoryException e) {
         if (LOG.isErrorEnabled()) {
           LOG.error("An unexpected exception appear", e);
         }
@@ -197,7 +197,7 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
       QueryManager queryManager = session.getWorkspace().getQueryManager();
       Query query = queryManager.createQuery(statement, language);
       return query.execute();
-    } catch (Exception e) {
+    } catch (RepositoryException e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("SQL query fail", e);
       }
@@ -205,7 +205,7 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
     }
   }
 
-  private String buildQueryByMimeTypes(String[] mimeTypes, String userName) throws Exception {
+  private String buildQueryByMimeTypes(String[] mimeTypes, String userName) {
     StringBuilder query = new StringBuilder();
     if (userName == null) {
       for (String mimeType : mimeTypes) {
@@ -248,7 +248,7 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
     return QUERY + query.toString();
   }
 
-  private String buildQueryByContentsType(String userName) throws Exception {
+  private String buildQueryByContentsType(String userName) throws PathNotFoundException, RepositoryException {
     List<String> contentsType = templateService_.getAllDocumentNodeTypes();
     StringBuilder constraint = new StringBuilder();
     if (userName == null) {
