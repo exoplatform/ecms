@@ -1693,6 +1693,9 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     if (node == null || !PermissionUtil.canAddNode(node)) {
       return false;
     }
+    if ( !node.isCheckedOut() || node.isLocked()){
+    	return false;
+    }
     List<NodeDefinition> defs = new ArrayList<NodeDefinition>();
     defs.addAll(Arrays.asList(node.getPrimaryNodeType().getChildNodeDefinitions()));
     for (NodeType mix : node.getMixinNodeTypes()) {
