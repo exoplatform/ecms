@@ -222,6 +222,11 @@ public class UIPresentation extends UIBaseNodePresentation {
    * @return true, if need to render fast publish link
    */
   public boolean isFastPublishLink() { return true ; }
+  
+  public String getFastPublishLink() throws Exception {
+    UIPresentationContainer container = (UIPresentationContainer)getParent();
+    return container.event("FastPublish");
+  }
 
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getCommentComponent()

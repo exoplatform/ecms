@@ -6,7 +6,6 @@
 	import org.exoplatform.services.wcm.core.NodeLocation;
 	import org.exoplatform.services.wcm.skin.XSkinService;
 	import org.exoplatform.services.wcm.javascript.XJavascriptService;
-	import org.exoplatform.wcm.webui.scv.UIPresentationContainer;
 		
 	public boolean getPortletPreference(String name) {
     String value = _ctx.getRequestContext().getRequest().getPreferences().getValue(name, null);
@@ -80,8 +79,7 @@
 				</div>
 				<%
 				  if(uicomponent.isFastPublishLink()) {
-				    UIPresentationContainer presenstationContainer = (UIPresentationContainer)uicomponent.getParent();
-				    print uicomponent.getInlineEditingField(currentNode, "default.html/jcr:content/jcr:data", html, "WYSIWYG", "Text", "Content", true, cssOption, "toolbar=CompleteWCM", "fast_publish=" + presenstationContainer.event("FastPublish"));
+				    print uicomponent.getInlineEditingField(currentNode, "default.html/jcr:content/jcr:data", html, "WYSIWYG", "Text", "Content", true, cssOption, "toolbar=CompleteWCM", "fast_publish=" + uicomponent.getFastPublishLink());
 				  } else print uicomponent.getInlineEditingField(currentNode, "default.html/jcr:content/jcr:data", html, "WYSIWYG", "Text", "Content", true, cssOption, "toolbar=CompleteWCM");
         %>          
 		    <% if (uicomponent.isEnableVote()) 
@@ -95,8 +93,7 @@
 	  %>
     <%
     if(uicomponent.isFastPublishLink()) {
-      UIPresentationContainer presenstationContainer = (UIPresentationContainer)uicomponent.getParent();
-      print uicomponent.getInlineEditingField(currentNode, "default.html/jcr:content/jcr:data", html, "WYSIWYG", "Text", "Content", true, cssOption, "toolbar=CompleteWCM", "fast_publish=" + presenstationContainer.event("FastPublish"));
+      print uicomponent.getInlineEditingField(currentNode, "default.html/jcr:content/jcr:data", html, "WYSIWYG", "Text", "Content", true, cssOption, "toolbar=CompleteWCM", "fast_publish=" + uicomponent.getFastPublishLink());
     } else  print uicomponent.getInlineEditingField(currentNode, "default.html/jcr:content/jcr:data", html, "WYSIWYG", "Text", "Content", true, cssOption, "toolbar=CompleteWCM");
     %>
     <% if (uicomponent.isEnableVote()) 
