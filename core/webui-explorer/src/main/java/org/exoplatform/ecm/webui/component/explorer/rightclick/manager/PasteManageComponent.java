@@ -448,7 +448,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
         LockUtil.changeLockToken(srcPath, (Node)session.getItem(destPath));
         session.save();
       } catch (ArrayIndexOutOfBoundsException e) {
-        throw new MessageException(new ApplicationMessage("UIPopupMenu.msg.bound-exception", null,
+        throw new MessageException(new ApplicationMessage("UIPopupMenu.msg.node-cutting", null,
             ApplicationMessage.WARNING));
       }
       if (!isMultiSelect || (isMultiSelect && isLastPaste)) {
