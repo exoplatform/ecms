@@ -433,6 +433,7 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
         homePath = updateParam(taxoAction.getPath(), homePath, "{portalName}");
         homePath = updateParam(taxoAction.getPath(), homePath, "{treeName}");
         taxoAction.setProperty("exo:storeHomePath", StringUtils.replace(homePath, "/sites content/live/", "/sites/"));
+        taxoAction.save();
 		  }
 		  session.save();
 		  if (LOG.isInfoEnabled()) {
