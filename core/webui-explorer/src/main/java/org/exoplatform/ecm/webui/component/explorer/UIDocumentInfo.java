@@ -528,8 +528,8 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     return getAncestorOfType(UIWorkingArea.class).getChild(UIRightClickPopupMenu.class) ;
   }
 
-  public Node getNodeByUUID(String uuid) throws Exception{
-    ManageableRepository manageRepo = getApplicationComponent(RepositoryService.class).getCurrentRepository();
+  public Node getNodeByUUID(String uuid) {
+    ManageableRepository manageRepo = WCMCoreUtils.getRepository();
     String[] workspaces = manageRepo.getWorkspaceNames() ;
     for(String ws : workspaces) {
       try{

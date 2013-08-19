@@ -49,7 +49,6 @@ import org.exoplatform.services.cms.comments.CommentsService;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.views.ManageViewService;
-import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
@@ -249,8 +248,8 @@ public class UIViewSearchResult extends UIBaseNodePresentation {
     node_ = NodeLocation.getNodeLocationByNode(node);
   }
 
-  public Node getNodeByUUID(String uuid) throws Exception{
-    ManageableRepository manageRepo = getApplicationComponent(RepositoryService.class).getCurrentRepository();
+  public Node getNodeByUUID(String uuid) {
+    ManageableRepository manageRepo = WCMCoreUtils.getRepository();
     String[] workspaces = manageRepo.getWorkspaceNames() ;
     SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
     for(String ws : workspaces) {

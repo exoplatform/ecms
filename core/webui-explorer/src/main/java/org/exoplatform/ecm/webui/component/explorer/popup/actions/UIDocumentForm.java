@@ -402,7 +402,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
           }
         }
       }
-    }        
+    }
     Map inputProperties = DialogFormUtil.prepareMap(inputs, documentForm.getInputProperties(), documentForm.getInputOptions());
     Node newNode = null;
     String nodeType;
@@ -446,7 +446,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
           } else if(activityService.isAcceptedNode(newNode)) {
             listenerService.broadcast(ActivityCommonService.NODE_CREATED_ACTIVITY, null, newNode);
             newNode.getSession().save();
-          } 
+          }
         }
 
         if(newNode.isLocked()) {

@@ -37,7 +37,9 @@ import javax.imageio.ImageIO;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
+import javax.jcr.ValueFormatException;
 import javax.jcr.nodetype.NodeDefinition;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeManager;
@@ -660,7 +662,7 @@ public class Utils {
       strSuggestion = resourceBundle.getString("UIPresentation.label.EditingSuggestion");
       acceptButton = resourceBundle.getString("UIPresentation.title.AcceptButton");
       cancelButton = resourceBundle.getString("UIPresentation.title.CancelButton");
-    } catch (Exception e){
+    } catch (MissingResourceException e){
       if (LOG.isWarnEnabled()) {
         LOG.warn(e.getMessage());
       }
@@ -855,8 +857,10 @@ public class Utils {
       if (content.hasProperty("dc:title")) {
         try {
           title = content.getProperty("dc:title").getValues()[0].getString();
-        } catch(Exception ex) {
-          title = null;
+        } catch (ValueFormatException e) { title = null;
+        } catch (IllegalStateException e) { title = null;
+        } catch (PathNotFoundException e) { title = null;
+        } catch (RepositoryException e) { title = null;
         }
       }
     }
@@ -981,7 +985,7 @@ public class Utils {
 
 
   /**
-   * 
+   *
    * @param     :  node: nt:file node with have the data stream
    * @return    :  Link to download the jcr:data of the given node
    * @throws       Exception
@@ -1012,7 +1016,7 @@ public class Utils {
 
   /**
    * Get allowed folder types in current path.
-   * 
+   *
    * @param currentNode
    * @param currentDrive
    * @return List<String> of node types
@@ -1020,7 +1024,7 @@ public class Utils {
    */
   public static List<String> getAllowedFolderTypesInCurrentPath(Node currentNode, DriveData currentDrive) throws Exception {
     List<String> allowedTypes = new ArrayList<String>();
-    NodeTypeImpl currentNodeType = (NodeTypeImpl)currentNode.getPrimaryNodeType(); 
+    NodeTypeImpl currentNodeType = (NodeTypeImpl)currentNode.getPrimaryNodeType();
     String[] arrFoldertypes = currentDrive.getAllowCreateFolders().split(",");
     NodeTypeManager ntManager = currentNode.getSession().getWorkspace().getNodeTypeManager();
 

@@ -16,8 +16,11 @@
  */
 package org.exoplatform.wcm.webui.selector.content.multi;
 
+import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -53,7 +56,7 @@ import org.exoplatform.webui.event.EventListener;
 public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
 
   private static final Log LOG = ExoLogger.getLogger(UIContentBrowsePanelMulti.class.getName());
-  
+
   /** The item paths. */
   private String itemPaths;
   private String itemTarget;
@@ -87,7 +90,7 @@ public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
     this.itemPaths = itemPaths;
     setItemTargetPath(getTargetPath(itemPaths));
   }
-  
+
   public void setItemTargetPath(String _itemTarget) {
    this.itemTarget = _itemTarget;
   }
@@ -95,7 +98,7 @@ public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
    return this.itemTarget;
   }
    /**
-   * 
+   *
    * @param savedItems
    * @return
    */
@@ -112,18 +115,18 @@ public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
       String[] locations = (savedItem == null) ? null : savedItem.split(":");
       Node node = (locations != null && locations.length >= 3) ? Utils.getViewableNodeByComposer(
           locations[0], locations[1], locations[2]) : null;
-      savedItem="";
-      if (node!=null){
+      savedItem = StringUtils.EMPTY;
+      if (node != null){
         try {
          savedItem = node.getPath();
-         if (linkManager.isLink(node)) {           
+         if (linkManager.isLink(node)) {
            node = linkManager.getTarget(node);
            savedItem = node.getPath();
          }
-        }catch (Exception e){
-          if (LOG.isWarnEnabled()) {
-            LOG.warn(e.getMessage());
-          }
+        } catch (ItemNotFoundException e){
+          savedItem = StringUtils.EMPTY;
+        } catch (RepositoryException e){
+          savedItem = StringUtils.EMPTY;
         }
       }
       result.append(savedItem).append(";");
@@ -218,7 +221,7 @@ public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
                                                                    deleteConfirmationMsg,
                                                                    UIContentBrowsePanelMulti.class.getClassLoader());
   }
-  
+
   public String getLocaleMsg(String key) {
     return org.exoplatform.ecm.webui.utils.Utils.getResourceBundle(org.exoplatform.ecm.webui.utils.Utils.LOCALE_WEBUI_DMS,
                                                                    key,

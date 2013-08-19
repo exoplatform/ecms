@@ -36,10 +36,12 @@ import java.util.Set;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.PropertyType;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.Value;
+import javax.jcr.ValueFormatException;
 import javax.jcr.lock.LockException;
 
 import org.apache.commons.lang.StringUtils;
@@ -449,7 +451,7 @@ public class UIDialogForm extends UIForm {
           }
         }
       }
-    }    
+    }
     if (findComponentById(name) == null) addUIFormInput(uiDateTime);
     if(calendarField.isVisible()) renderField(name);
   }
@@ -1545,7 +1547,7 @@ public class UIDialogForm extends UIForm {
   public String getInputOption(String name) { return options.get(name); }
   public JCRResourceResolver getJCRResourceResolver() { return resourceResolver; }
 
-  public Node getNode() throws Exception {
+  public Node getNode() {
     if(nodePath == null) return null;
     try {
       return (Node) getSession().getItem(nodePath);
@@ -1782,20 +1784,20 @@ public class UIDialogForm extends UIForm {
     return getLastModifiedDate(getNode());
   }
 
-  public String getLastModifiedDate(Node node) throws Exception {
-    String d = "";
-    try {
-      if (node.hasProperty("exo:dateModified")) {
-        Locale locale = Util.getPortalRequestContext().getLocale();
-        DateFormat dateFormater = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.MEDIUM, SimpleDateFormat.MEDIUM, locale);
-        Calendar calendar = node.getProperty("exo:dateModified").getValue().getDate();
-        d = dateFormater.format(calendar.getTime());
+  public String getLastModifiedDate(Node node) {
+    String d = StringUtils.EMPTY;
+      try {
+        if (node.hasProperty("exo:dateModified")) {
+          Locale locale = Util.getPortalRequestContext().getLocale();
+          DateFormat dateFormater = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.MEDIUM, SimpleDateFormat.MEDIUM, locale);
+          Calendar calendar = node.getProperty("exo:dateModified").getValue().getDate();
+          d = dateFormater.format(calendar.getTime());
+        }
+      } catch (ValueFormatException e) { d = StringUtils.EMPTY;
+      } catch (IllegalStateException e) { d = StringUtils.EMPTY;
+      } catch (PathNotFoundException e) { d = StringUtils.EMPTY;
+      } catch (RepositoryException e) { d = StringUtils.EMPTY;
       }
-    } catch (Exception e) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn(e.getMessage());
-      }
-    }
     return d;
   }
 

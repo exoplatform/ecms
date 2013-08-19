@@ -112,13 +112,9 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
     VersionLog versionLog = null;
     ValueFactory valueFactory = node.getSession().getValueFactory();
     String containerName = context.get("containerName");
-    try {
-      if (containerName==null) containerName = PortalContainer.getCurrentPortalContainerName();
-    } catch (Exception e) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn(e.getMessage());
-      }
-    }
+    
+    if (containerName==null) containerName = PortalContainer.getCurrentPortalContainerName();
+    
     if (PublicationDefaultStates.PENDING.equals(newState)) {
       node.setProperty(AuthoringPublicationConstant.CURRENT_STATE, newState);
       versionLog = new VersionLog(logItemName,
