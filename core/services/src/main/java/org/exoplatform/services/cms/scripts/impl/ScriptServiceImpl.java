@@ -36,6 +36,7 @@ import javax.jcr.observation.EventIterator;
 import javax.jcr.observation.EventListener;
 import javax.jcr.observation.ObservationManager;
 
+import org.apache.commons.lang.StringUtils;
 import org.codehaus.groovy.control.CompilationFailedException;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
@@ -276,8 +277,8 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
   @Override
   public void addScript(String name, String text, SessionProvider provider) throws Exception {
     addScript(name, name, text, provider);
-  }  
-  
+  }
+
   /**
    * {@inheritDoc}
    */
@@ -287,8 +288,8 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
     InputStream in = new ByteArrayInputStream(text.getBytes());
     addResource(resourcesHome, name, description, in);
     removeFromCache(name) ;
-  }   
-  
+  }
+
   /**
    * {@inheritDoc}
    */
@@ -375,8 +376,8 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
           jcrSession = manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace());
           Property property = (Property) jcrSession.getItem(path);
           if ("jcr:data".equals(property.getName())) {
-            Node node = property.getParent();
-            removeFromCache(node.getName());
+            Node node = property.getParent().getParent();
+            removeFromCache(StringUtils.removeStart(StringUtils.removeStart(node.getPath(), this.getBaseScriptPath()), "/"));
           }
           jcrSession.logout();
         } catch (Exception e) {
