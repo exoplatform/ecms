@@ -29,7 +29,7 @@
     <application-name>ecmexplorer</application-name>
     <portlet-name>FileExplorerPortlet</portlet-name>
     <skin-name>Default</skin-name>
-    <css-path>/skin/webui/component/explorer/DefaultStylesheet.css</css-path>
+    <css-path>/skin/css/ecms-explorer.css</css-path>
   </portlet-skin>
   
   <!-- Order should be modified
