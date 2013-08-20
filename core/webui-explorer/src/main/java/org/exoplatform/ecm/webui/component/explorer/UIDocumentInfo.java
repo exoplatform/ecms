@@ -1694,12 +1694,12 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     if (node == null || !PermissionUtil.canAddNode(node) || !node.isCheckedOut()) {
       return false;
     }
-  //check for lock
-    String lockToken = LockUtil.getLockTokenOfUser(node);
-	if(lockToken != null) {
-	  node.getSession().addLockToken(LockUtil.getLockToken(node));
-    } else {
-       return false;
+    //check for lock
+    if (node.isLocked()){
+      String lockToken = LockUtil.getLockTokenOfUser(node);
+      if(lockToken == null) {
+        return false;
+      }
     }
     List<NodeDefinition> defs = new ArrayList<NodeDefinition>();
     defs.addAll(Arrays.asList(node.getPrimaryNodeType().getChildNodeDefinitions()));
