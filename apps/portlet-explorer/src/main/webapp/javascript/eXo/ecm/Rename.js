@@ -153,7 +153,7 @@
 	  // Build url to request rest service to execute rename on server
 	  var oldPath = this.getNodePath(true);
 	  newTitle = encodeURIComponent(newTitle);
-	  var command = this.renameConnector + this.cmdRename + "oldPath=" + oldPath + "&newTitle=" + newTitle;
+	  var command = this.renameConnector + this.cmdRename + "oldPath=" + encodeURIComponent(oldPath) + "&newTitle=" + newTitle;
 	  var url = this.restContext + command;
 	  gj.ajax({
 	    url:url,
