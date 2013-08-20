@@ -144,7 +144,7 @@
 	  // Build url to request rest service to execute rename on server
 	  var oldPath = this.getNodePath(true);
 	  newTitle = encodeURIComponent(newTitle);
-	  var command = this.renameConnector + this.cmdRename + "oldPath=" + oldPath + "&newTitle=" + newTitle;
+	  var command = this.renameConnector + this.cmdRename + "oldPath=" + encodeURIComponent(oldPath) + "&newTitle=" + newTitle;
 	  var url = this.restContext + command;
 	  gj.ajax({
 	    url:url,
@@ -225,7 +225,7 @@
 	*/
 	Rename.prototype.getNodeTitle = function(withFileExt) {
 	  var elements = this.getTextElementsOfRenamedNode();
-	  var label = gj(elements[0]).text();
+	  var label = gj.trim(gj(elements[0]).text());
 	
 	  // Check if include extention of file
 	  if (label.indexOf('.') != -1 && this.isFile() && !withFileExt) {
