@@ -574,7 +574,7 @@
 			var strViewContent = "";
 			// Depends on Paginators will be used or not. 'longDesc' if paginator, 'src' else.
 			var imageAttribute = "src";
-                       	if(list.length > 8) {
+      if(list.length > 8) {
 				// Paginator will be used
 				imageAttribute = "longDesc";
 			}			
