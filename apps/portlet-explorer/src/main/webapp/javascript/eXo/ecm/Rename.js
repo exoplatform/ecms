@@ -234,7 +234,7 @@
 	*/
 	Rename.prototype.getNodeTitle = function(withFileExt) {
 	  var elements = this.getTextElementsOfRenamedNode();
-	  var label = gj(elements[0]).text().trim();
+	  var label = gj.trim(gj(elements[0]).text());
 	
 	  // Check if include extention of file
 	  if (label.indexOf('.') != -1 && this.isFile() && !withFileExt) {
