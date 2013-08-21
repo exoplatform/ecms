@@ -21,12 +21,12 @@ import javax.jcr.RepositoryException;
 
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.tree.UIBaseNodeTreeSelector;
-import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
+import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPageIterator;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.event.Event;
@@ -46,7 +46,7 @@ import org.exoplatform.webui.event.EventListener;
     }
 )
 public class UISelectTaxonomyPanel extends UISelectPathPanel {
-  private UIPageIterator uiPageIterator_;
+  private UIPageIterator uiPageIterator_ = null;
   private static String TAXONOMY_TREE = "taxonomyTree";
   private String taxonomyTreePath = "";
 
@@ -59,7 +59,7 @@ public class UISelectTaxonomyPanel extends UISelectPathPanel {
   }
 
   public UISelectTaxonomyPanel() throws Exception {
-    uiPageIterator_ = addChild(UIPageIterator.class, null, "UISelectPathIterate");
+    this.uiPageIterator_ = addChild(UIPageIterator.class, null, "UISelectPathIterate");
   }
 
   public String getPathTaxonomy() throws Exception {
@@ -111,7 +111,9 @@ public class UISelectTaxonomyPanel extends UISelectPathPanel {
       }
       if (uiTreeSelector instanceof UIOneTaxonomySelector) {
         UIPopupWindow uiPopupWindow = uiTreeSelector.getAncestorOfType(UIPopupWindow.class);
-        if (uiPopupWindow != null) {
+        UIComponent parentOfUITreeSelector = uiTreeSelector.getParent();
+        if ((parentOfUITreeSelector instanceof UIPopupWindow)
+          || (uiPopupWindow != null && ((UIContainer)parentOfUITreeSelector).getChildren().size() == 1)) {
           uiPopupWindow.setShow(false);
           uiPopupWindow.setRendered(false);
           event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupWindow);
