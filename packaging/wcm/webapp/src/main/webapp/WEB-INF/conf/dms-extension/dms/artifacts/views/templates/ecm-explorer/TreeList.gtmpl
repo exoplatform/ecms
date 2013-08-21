@@ -44,7 +44,6 @@
             require("SHARED/multiUpload", "multiUpload").
   addScripts('uiFileView.UIFileView.clearCheckboxes();').
   addScripts("uiFileView.UIFileView.initStickBreadcrumb();").
-	addScripts('uiListView.UIListView.loadEffectedWidthColumn();').
   addScripts('uiFileView.UIFileView.clearOpenDivs();');
   
   
