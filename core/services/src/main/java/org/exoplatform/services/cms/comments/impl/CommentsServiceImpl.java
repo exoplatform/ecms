@@ -129,8 +129,11 @@ public class CommentsServiceImpl implements CommentsService {
       User user = organizationService.getUserHandler().findUserByName(commentor);
       if(user == null)
       	newComment.setProperty(COMMENTOR_FULLNAME,"ANONYMOUS") ;
-      else
-      	newComment.setProperty(COMMENTOR_FULLNAME,user.getFullName()) ; 
+      else {
+        String fullName = user.getDisplayName();
+        if(fullName == null) fullName = user.getUserName();
+        newComment.setProperty(COMMENTOR_FULLNAME,fullName); 
+      }
       
       newComment.setProperty(CREATED_DATE,commentDate) ;
       newComment.setProperty(MESSAGE,comment) ;
