@@ -135,7 +135,7 @@ public class UIFormRichtextInput extends UIFormInputBase<String> {
     buffer.append("</script>\n");
     buffer.append("</span>");
     if (isMandatory()) {
-      buffer.append("<span style='float:left'> &nbsp;*</span>");
+      buffer.append("<span> &nbsp;*</span>");
     }
 
     buffer.append("</div>");
