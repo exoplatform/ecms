@@ -2096,6 +2096,7 @@
       <access-denied>Access denied. You do not have permission to add a thumbnail to this node.</access-denied>
       <confirm-delete>Are you sure you want to remove this thumbnail?</confirm-delete>
       <is-checked-in>This node is checked in. Please check out before performing any action.</is-checked-in>
+      <fileName-error>Please select a file to upload.</fileName-error>
     </msg>
     <title>
       <remove-thumbnail>Remove this Thumbnail</remove-thumbnail>

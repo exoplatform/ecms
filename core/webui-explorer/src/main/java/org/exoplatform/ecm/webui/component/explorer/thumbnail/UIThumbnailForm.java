@@ -173,8 +173,9 @@ public class UIThumbnailForm extends UIForm implements UIPopupComponent {
       
       // Check resource available
       if(uiForm.getCurrentUploadResource() == null) {
-        uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.fileName-error", null,
+        uiApp.addMessage(new ApplicationMessage("UIThumbnailForm.msg.fileName-error", null,
                                                 ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
 
         return;
       }
