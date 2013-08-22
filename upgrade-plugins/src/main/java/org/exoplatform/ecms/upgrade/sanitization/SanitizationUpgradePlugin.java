@@ -244,6 +244,8 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
           drive.remove();
         } else if(drive.getName().equals("Private") || (drive.getName().equals("Public"))) {
           drive.remove();
+        } else if("Personal Documents".equals(drive.getName())) {
+          drive.setProperty("exo:viewNonDocument", false);
         } else if(drive.getProperty("exo:workspace").getString().equals("dms-system") && path.equals("/")) {
           drive.remove();
         } else {
