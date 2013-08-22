@@ -143,6 +143,16 @@ public interface ThumbnailService {
    * @throws Exception
    */
   public void processRemoveThumbnail(Node showingNode) throws Exception;
+
+  /**
+   * Copy thumbnail node to destination node after moving or copy&paste.
+   *
+   * @param srcThumbnailNode thumbnailNode of source node
+   * @param destNode destination Node
+   * @throws Exception
+   */
+  public void copyThumbnailNode(Node srcThumbnailNode, Node destNode) throws Exception;
+
   /**
    * Add Thumbnail Plugin
    * @param plugin ComponentPlugin
