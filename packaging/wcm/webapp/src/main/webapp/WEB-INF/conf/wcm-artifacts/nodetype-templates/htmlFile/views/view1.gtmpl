@@ -7,14 +7,8 @@
 
   def currentNode = uicomponent.getNode() ; 
   def contentNode = currentNode.getNode("jcr:content") ;
-  
-  def exSkinService = WCMCoreUtils.getService(XSkinService.class) ;
-  def exJSService = WCMCoreUtils.getService(XJavascriptService.class) ;
-       
-  def css= exSkinService.getActiveStylesheet(currentNode.getParent());
-  def js=  exJSService.getActiveJavaScript(currentNode.getParent()) ;
   def rcontext = _ctx.getRequestContext() ;
 %>  
-<style><%=css%></style>
+
 <%=contentNode.getProperty("jcr:data").getString() ;%>
-<script type="text/javascript"><%=js%></script>
+
