@@ -55,6 +55,10 @@
       <artifactId>ecms-core-services</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>ecms-core-connector</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.exoplatform.jcr</groupId>
       <artifactId>exo.jcr.component.core</artifactId>
     </dependency>

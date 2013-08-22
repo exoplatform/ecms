@@ -16,13 +16,9 @@
  */
 package org.exoplatform.ecm.webui.form.field;
 
-import javax.portlet.PortletPreferences;
-
-import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.form.DialogFormField;
-import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.application.portlet.PortletRequestContext;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.wcm.connector.fckeditor.DriverConnector;
 import org.exoplatform.webui.form.UIFormInputBase;
 import org.exoplatform.webui.form.input.UIUploadInput;
 
@@ -41,14 +37,8 @@ public class UIFormUploadField extends DialogFormField{
   @SuppressWarnings("unchecked")
   public <T extends UIFormInputBase> T createUIFormInput() throws Exception {
     UIUploadInput uiInputUpload = null;
-    PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
-    PortletPreferences portletPref = pcontext.getRequest().getPreferences();
-    String limitPref = portletPref.getValue(Utils.UPLOAD_SIZE_LIMIT_MB, "");
-    if (StringUtils.isNotEmpty(limitPref.trim())) {
-      uiInputUpload = new UIUploadInput(name, name, 1, Integer.parseInt(limitPref.trim()));
-    } else {
-      uiInputUpload = new UIUploadInput(name, name);
-    }
+    int limitSize = WCMCoreUtils.getService(DriverConnector.class).getLimitSize();
+    uiInputUpload = new UIUploadInput(name, name, 1, limitSize);
     if(label != null) uiInputUpload.setLabel(label) ;
     return (T)uiInputUpload;
   }

@@ -45,7 +45,7 @@ import org.exoplatform.ecm.webui.form.validator.IllegalDMSCharValidator;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.tree.selectone.UIOneTaxonomySelector;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
-import org.exoplatform.ecm.webui.utils.LockUtil;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.CmsService;

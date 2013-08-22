@@ -20,7 +20,6 @@ import javax.ws.rs.core.Response;
 import javax.xml.transform.dom.DOMSource;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.BaseConnectorTestCase;
 import org.exoplatform.services.rest.impl.ContainerResponse;
 import org.exoplatform.services.rest.wadl.research.HTTPMethods;
 import org.json.simple.JSONArray;

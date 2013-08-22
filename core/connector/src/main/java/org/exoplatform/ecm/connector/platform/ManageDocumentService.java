@@ -47,6 +47,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.dom.DOMSource;
 
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -129,19 +130,25 @@ public class ManageDocumentService implements ResourceContainer {
     EXO_VIDEOFOLDER, EXO_PICTUREFOLDER, EXO_DOCUMENTFOLDER, EXO_SEARCHFOLDER };
 
   private static final String  PRIVATE              = "Private";
+  
+  /** The limit size of uploaded file. */
+  private int limit;
+
   /**
    * Instantiates a document service.
    *
    * @param manageDriveService Instantiates a drive manager service.
    * @param linkManager Instantiates a link manager service.
    */
-  public ManageDocumentService(ManageDriveService manageDriveService, LinkManager linkManager) {
+  public ManageDocumentService(ManageDriveService manageDriveService, LinkManager linkManager,
+                               InitParams params) {
     this.manageDriveService = manageDriveService;
     this.linkManager = linkManager;
     fileUploadHandler = new FileUploadHandler();
     cc = new CacheControl();
     cc.setNoCache(true);
     cc.setNoStore(true);
+    limit = Integer.parseInt(params.getValueParam("upload.limit.size").getValue());
   }
 
   /**
@@ -372,7 +379,7 @@ public class ManageDocumentService implements ResourceContainer {
 //  @OutputTransformer(XMLOutputTransformer.class)
   public Response uploadFile(@Context HttpServletRequest servletRequest,
       @QueryParam("uploadId") String uploadId) throws Exception {
-    return fileUploadHandler.upload(servletRequest, uploadId, null);
+    return fileUploadHandler.upload(servletRequest, uploadId, limit);
   }
 
   /**

@@ -78,8 +78,6 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
    */
   private static final Log LOG  = ExoLogger.getLogger(UIJCRExplorerPortlet.class.getName());
 
-  final static public String MAX_SIZE_UPLOAD    = "uploadFileSizeLimitMB";
-
   final static public String ISDIRECTLY_DRIVE   = "isDirectlyDrive";
 
   final static public String DRIVE_NAME         = "driveName";

@@ -37,7 +37,7 @@ import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.utils.text.Text;
-import org.exoplatform.ecm.webui.utils.LockUtil;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.portal.webui.util.Util;

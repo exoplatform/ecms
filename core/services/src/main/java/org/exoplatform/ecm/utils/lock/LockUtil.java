@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
-package org.exoplatform.ecm.webui.utils;
+package org.exoplatform.ecm.utils.lock;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,11 +28,12 @@ import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
-import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.lock.LockService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.organization.MembershipType;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
@@ -47,7 +48,7 @@ public class LockUtil {
   public static void keepLock(Lock lock) throws Exception {
     LockService lockService = WCMCoreUtils.getService(LockService.class);
     String key = createLockKey(lock.getNode());
-    String userId = Util.getPortalRequestContext().getRemoteUser();
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
     if(userId == null) userId = IdentityConstants.ANONIM;
     Map<String,String> lockedNodesInfo = lockService.getLockInformation(userId);
     if(lockedNodesInfo == null) {
@@ -81,7 +82,7 @@ public class LockUtil {
 
   public static void removeLock(Node node) throws Exception {
     String key = createLockKey(node);
-    String userId = Util.getPortalRequestContext().getRemoteUser();
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
     LockService lockService = WCMCoreUtils.getService(LockService.class);
     if(userId == null) userId = IdentityConstants.ANONIM;
     Map<String,String> lockedNodesInfo = lockService.getLockInformation(userId);
@@ -148,7 +149,7 @@ public class LockUtil {
       for(NodeIterator iter = queryResult.getNodes(); iter.hasNext();) {
         Node itemNode = iter.nextNode();
         //add lockToken of this locked node to the given membership
-        if (!Utils.isInTrash(itemNode) && itemNode.isLocked()) {
+        if (!WCMCoreUtils.getService(TrashService.class).isInTrash(itemNode) && itemNode.isLocked()) {
           String lockToken = getLockToken(itemNode);
           keepLock(itemNode.getLock(), membership, lockToken);
           if (membership.startsWith("*")) {

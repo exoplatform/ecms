@@ -16,7 +16,7 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.control.filter;
 
-import org.exoplatform.ecm.webui.utils.LockUtil;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.ext.filter.UIExtensionAbstractFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilterType;

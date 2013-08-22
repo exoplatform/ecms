@@ -66,7 +66,7 @@ import org.exoplatform.ecm.webui.form.field.UIMixinField;
 import org.exoplatform.ecm.webui.form.validator.UploadFileMimeTypesValidator;
 import org.exoplatform.ecm.webui.utils.DialogFormUtil;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
-import org.exoplatform.ecm.webui.utils.LockUtil;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.BasePath;

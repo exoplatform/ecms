@@ -31,7 +31,7 @@ import javax.jcr.ValueFormatException;
 import javax.portlet.PortletPreferences;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.ecm.webui.utils.LockUtil;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.webui.application.UIPortlet;

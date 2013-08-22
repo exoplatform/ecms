@@ -36,7 +36,7 @@ import org.exoplatform.ecm.webui.core.bean.PermissionBean;
 import org.exoplatform.ecm.webui.selector.UIAnyPermission;
 import org.exoplatform.ecm.webui.selector.UIGroupMemberSelector;
 import org.exoplatform.ecm.webui.selector.UISelectable;
-import org.exoplatform.ecm.webui.utils.LockUtil;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;

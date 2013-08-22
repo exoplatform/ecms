@@ -4,6 +4,15 @@
   xmlns="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd">
 
   <component>
+    <key>org.exoplatform.services.wcm.extensions.publication.PublicationManager</key>
+    <type>org.exoplatform.wcm.connector.authoring.MockPublicationManager</type>
+  </component>
+
+  <component>
+    <type>org.exoplatform.wcm.connector.authoring.LifecycleConnector</type>
+  </component>
+  
+  <component>
     <key>org.exoplatform.services.cms.link.LinkManager</key>
     <type>org.exoplatform.services.cms.link.impl.LinkManagerImpl</type>
   </component>
@@ -124,6 +133,22 @@
     </init-params>
   </component>
   
+  <component>
+    <type>org.exoplatform.wcm.connector.authoring.CopyContentFile</type>
+    <init-params>
+      <value-param>
+        <name>stagingStorage</name>
+        <description>Staging storage</description>
+        <value></value>
+      </value-param>
+      <value-param>
+        <name>targetKey</name>
+        <description>Target key</description>
+        <value></value>
+      </value-param>
+    </init-params>
+  </component>
+  
   <external-component-plugins>
     <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
     <component-plugin>
@@ -168,88 +193,6 @@
           <name>systemWorkspace</name>
           <value>dms-system</value>
         </value-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
-  
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.deployment.WCMContentInitializerService</target-component>
-    <component-plugin>
-      <name>Content Initializer Service</name>
-      <set-method>addPlugin</set-method>
-      <type>org.exoplatform.services.deployment.plugins.XMLDeploymentPlugin</type>
-      <description>XML Deployment Plugin</description>
-      <init-params>
-        <value-param>
-          <name>siteName</name>
-          <description>name of site in which artifact is deployed</description>
-          <value>classic</value>
-        </value-param>      
-        <value-param>
-          <name>override</name>
-          <description>indicates if this plugin will override data over legacy data, default value:false</description>
-          <value>false</value>
-        </value-param>      
-        
-        <object-param>
-          <name>Pdf Document content</name>
-          <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
-            <field name="target">
-              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
-                <field name="workspace">
-                  <string>collaboration</string>
-                </field>
-                <field name="nodePath">
-                  <string>/</string>
-                </field>
-              </object>
-            </field>
-            <field name="sourcePath">
-              <string>classpath:/conf/wcm/deployment/DocPdf.xml</string>
-            </field>
-          </object>
-        </object-param>
-        
-        <object-param>
-          <name>Jpg Document content</name>
-          <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
-            <field name="target">
-              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
-                <field name="workspace">
-                  <string>collaboration</string>
-                </field>
-                <field name="nodePath">
-                  <string>/</string>
-                </field>
-              </object>
-            </field>
-            <field name="sourcePath">
-              <string>classpath:/conf/wcm/deployment/DocJpg.xml</string>
-            </field>
-          </object>
-        </object-param>
-        
-        <object-param>
-          <name>Word document content</name>
-          <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
-            <field name="target">
-              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
-                <field name="workspace">
-                  <string>collaboration</string>
-                </field>
-                <field name="nodePath">
-                  <string>/</string>
-                </field>
-              </object>
-            </field>
-            <field name="sourcePath">
-              <string>classpath:/conf/wcm/deployment/DocWord.xml</string>
-            </field>
-          </object>
-        </object-param>
       </init-params>
     </component-plugin>
   </external-component-plugins>

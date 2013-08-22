@@ -30,7 +30,7 @@ import javax.jcr.nodetype.PropertyDefinition;
 import org.apache.commons.lang.ArrayUtils;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.form.UIDialogForm;
-import org.exoplatform.ecm.webui.utils.LockUtil;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.metadata.MetadataService;

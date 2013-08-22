@@ -19,7 +19,6 @@ package org.exoplatform.wcm.connector.authoring;
 import javax.ws.rs.core.Response;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.BaseConnectorTestCase;
 import org.exoplatform.services.rest.impl.ContainerResponse;
 import org.exoplatform.services.rest.wadl.research.HTTPMethods;
 
