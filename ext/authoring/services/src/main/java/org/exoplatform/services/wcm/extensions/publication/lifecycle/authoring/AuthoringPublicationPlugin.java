@@ -275,10 +275,7 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
       }
       revisionsMap.put(node.getUUID(), versionData);
       addRevisionData(node, revisionsMap.values());
-    } else if (PublicationDefaultStates.PUBLISHED.equals(newState)) {
-      if (!node.isCheckedOut()) {
-        node.checkout();
-      }
+    } else if (PublicationDefaultStates.PUBLISHED.equals(newState)) {      
       Version liveVersion = node.checkin();
       node.checkout();
       // Change current live revision to unpublished
