@@ -32,10 +32,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -59,6 +61,7 @@ import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.thumbnail.ThumbnailPlugin;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
+import org.exoplatform.services.context.DocumentContext;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -514,6 +517,29 @@ public class Utils {
     session.save();
     return serviceLogContentNode;
   }
+  
+  public static Set<String> getAllEditedConfiguredDatas(String className, String id, boolean skipActivities) throws Exception {
+    DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, skipActivities);
+    HashSet<String> editedConfigTemplates = new HashSet<String>();
+    Node serviceLogContentNode= getServiceLogContentNode(className, id);
+    if (serviceLogContentNode != null) {
+      String logData = serviceLogContentNode.getProperty(NodetypeConstant.JCR_DATA).getString();
+      editedConfigTemplates.addAll(Arrays.asList(logData.split(";")));
+    }
+    return editedConfigTemplates;
+  }  
+  
+  public static void addEditedConfiguredDatas(String template, String className, String id, boolean skipActivities) throws Exception {
+    DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, skipActivities);
+    Node serviceLogContentNode = getServiceLogContentNode(className, id);
+    if (serviceLogContentNode != null) {
+      String logData = serviceLogContentNode.getProperty(NodetypeConstant.JCR_DATA).getString();
+      if (StringUtils.isEmpty(logData)) logData = template;
+      else if (logData.indexOf(template) == -1) logData = logData.concat(";").concat(template);
+      serviceLogContentNode.setProperty(NodetypeConstant.JCR_DATA, logData);
+      serviceLogContentNode.getSession().save();
+    }
+  }   
 
   public static String getObjectId(String nodePath) throws UnsupportedEncodingException {
     return URLEncoder.encode(nodePath.replaceAll("'", "\\\\'"), "utf-8");
