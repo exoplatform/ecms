@@ -230,7 +230,9 @@ public class UIDrivesArea extends UIContainer {
 
 
       Preference pref = uiJCRExplorer.getPreference();
-      pref.setShowSideBar(drive.getViewSideBar());
+      // check if Preferences has View-Side-Bar property to be true or not. if true, set TRUE for setViewSideBar() 
+      if (!pref.isShowSideBar())
+        pref.setShowSideBar(drive.getViewSideBar());
       pref.setShowPreferenceDocuments(drive.getViewPreferences());
       pref.setAllowCreateFoder(drive.getAllowCreateFolders());
       HttpServletRequest request = Util.getPortalRequestContext().getRequest();
