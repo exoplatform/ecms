@@ -519,7 +519,7 @@ public class Utils {
     }
     session.save();
     return serviceLogContentNode;
-  }
+  }  
 
   /**
    * Get all the templates which have been added into the system
