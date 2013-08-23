@@ -515,7 +515,7 @@ public class Utils {
     }
     session.save();
     return serviceLogContentNode;
-  }
+  }  
 
   public static String getObjectId(String nodePath) throws UnsupportedEncodingException {
     return URLEncoder.encode(nodePath.replaceAll("'", "\\\\'"), "utf-8");
