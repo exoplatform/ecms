@@ -673,12 +673,21 @@ public class UIJCRExplorer extends UIContainer {
     UIWorkingArea uiWorkingArea = getChild(UIWorkingArea.class) ;
     UIActionBar uiActionBar = findFirstComponentOfType(UIActionBar.class) ;
     UISideBar uiSideBar = findFirstComponentOfType(UISideBar.class);
+    UITreeExplorer uiTreeExplorer = findFirstComponentOfType(UITreeExplorer.class);
 
     uiAddressBar.getUIStringInput(UIAddressBar.FIELD_ADDRESS).setValue(
                                                                        Text.unescapeIllegalJcrChars(filterPath(currentPath_))) ;
     uiAddressBar.getUIInput(UIAddressBar.FIELD_ADDRESS_HIDDEN).setValue(
                                                                         filterPath(currentPath_)) ;
     event.getRequestContext().addUIComponentToUpdateByAjax(getChild(UIControl.class)) ;
+    UIPageIterator contentPageIterator = this.findComponentById(UIDocumentInfo.CONTENT_PAGE_ITERATOR_ID);
+    int currentPage = contentPageIterator.getCurrentPage();
+    int currentPageInTree = 1;
+    
+    UITreeNodePageIterator extendedPageIterator =
+        uiTreeExplorer.findFirstComponentOfType(UITreeNodePageIterator.class);
+    if(extendedPageIterator != null) currentPageInTree = extendedPageIterator.getCurrentPage();
+    
     if(preferences_.isShowSideBar()) {
       findFirstComponentOfType(UITreeExplorer.class).buildTree();
     }
@@ -694,6 +703,7 @@ public class UIJCRExplorer extends UIContainer {
         } else {
           UIDocumentInfo uiDocumentInfo = uiDocumentContainer.getChildById("UIDocumentInfo") ;
           uiDocumentInfo.updatePageListData();
+          contentPageIterator.setCurrentPage(currentPage);
           uiDocumentContainer.setRenderedChild("UIDocumentInfo") ;
         }
         if(getCurrentNode().isNodeType(Utils.NT_FOLDER) || getCurrentNode().isNodeType(Utils.NT_UNSTRUCTURED))
@@ -710,6 +720,7 @@ public class UIJCRExplorer extends UIContainer {
     uiActionBar.setRendered(uiPortlet.isShowActionBar());
     uiAddressBar.setRendered(uiPortlet.isShowTopBar());
     uiSideBar.setRendered(preferences_.isShowSideBar());
+    if(extendedPageIterator != null) extendedPageIterator.setCurrentPage(currentPageInTree);
     event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea);
     if (uiSideBar.isRendered()) event.getRequestContext().addUIComponentToUpdateByAjax(uiSideBar);
     event.getRequestContext().addUIComponentToUpdateByAjax(getChild(UIControl.class)) ;
