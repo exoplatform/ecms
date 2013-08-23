@@ -127,7 +127,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
     templateSet.add(category.getName() + "/" + config.getTemplateName());
     StringBuilder tBuilder = new StringBuilder();
     tBuilder.append(config.getCategory()).append(config.getTemplateName());
-    Utils.addEditedConfiguredDatas(tBuilder.toString(), this.getClass().getSimpleName(), EDITED_CONFIGURED_TEMPLATES, true);
+    Utils.addEditedConfiguredData(tBuilder.toString(), this.getClass().getSimpleName(), EDITED_CONFIGURED_TEMPLATES, true);
     configuredTemplates_.put(portletTemplateHome.getName(), templateSet);
   }
 
@@ -249,7 +249,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
       for(PortletTemplateConfig config: map.get(portletName)) {
         StringBuilder tBuilder = new StringBuilder();
         tBuilder.append(config.getCategory()).append(config.getTemplateName());
-        if(Utils.getAllEditedConfiguredDatas(this.getClass().getSimpleName(), EDITED_CONFIGURED_TEMPLATES, true).contains(tBuilder.toString())) continue;
+        if(Utils.getAllEditedConfiguredData(this.getClass().getSimpleName(), EDITED_CONFIGURED_TEMPLATES, true).contains(tBuilder.toString())) continue;
         addTemplate(templateNode,config);
       }
     }

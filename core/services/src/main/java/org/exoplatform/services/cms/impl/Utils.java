@@ -518,7 +518,7 @@ public class Utils {
     return serviceLogContentNode;
   }
   
-  public static Set<String> getAllEditedConfiguredDatas(String className, String id, boolean skipActivities) throws Exception {
+  public static Set<String> getAllEditedConfiguredData(String className, String id, boolean skipActivities) throws Exception {
     DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, skipActivities);
     HashSet<String> editedConfigTemplates = new HashSet<String>();
     Node serviceLogContentNode= getServiceLogContentNode(className, id);
@@ -529,7 +529,7 @@ public class Utils {
     return editedConfigTemplates;
   }  
   
-  public static void addEditedConfiguredDatas(String template, String className, String id, boolean skipActivities) throws Exception {
+  public static void addEditedConfiguredData(String template, String className, String id, boolean skipActivities) throws Exception {
     DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, skipActivities);
     Node serviceLogContentNode = getServiceLogContentNode(className, id);
     if (serviceLogContentNode != null) {

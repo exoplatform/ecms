@@ -138,10 +138,10 @@ public abstract class BaseResourceLoaderService implements Startable{
       String warPath = location + resourcesPath.substring(resourcesPath.lastIndexOf("/")) ;
       for (ResourceConfig.Resource resource : resources) {
         String name = resource.getName();
-        if(Utils.getAllEditedConfiguredDatas(this.getClass().getSimpleName(), EDITED_CONFIGURED_SCRIPTS, true).contains(name)) {
+        if(Utils.getAllEditedConfiguredData(this.getClass().getSimpleName(), EDITED_CONFIGURED_SCRIPTS, true).contains(name)) {
           continue;
         }
-        Utils.addEditedConfiguredDatas(name, this.getClass().getSimpleName(), EDITED_CONFIGURED_SCRIPTS, true);
+        Utils.addEditedConfiguredData(name, this.getClass().getSimpleName(), EDITED_CONFIGURED_SCRIPTS, true);
         String description = resource.getDescription();
         String path = warPath + "/" + name;
         InputStream in = cservice_.getInputStream(path);
