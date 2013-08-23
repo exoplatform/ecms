@@ -30,6 +30,7 @@
         <exo:title>Tiêu đề</exo:title>
         <exo:dateCreated>Ngày Tạo</exo:dateCreated>
         <exo:dateModified>Ngày Sửa</exo:dateModified>
+        <exo:lastModifiedDate>Ngày Sửa</exo:lastModifiedDate>
         <publication:liveDate>Ngày Đăng tải</publication:liveDate>
         <exo:startEvent>Ngày diễn ra Sự kiện</exo:startEvent>
         <exo:index>Chỉ số</exo:index>

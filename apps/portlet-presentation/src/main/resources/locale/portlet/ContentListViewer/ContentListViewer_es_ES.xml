@@ -30,6 +30,7 @@
         <exo:title>Título</exo:title>
         <exo:dateCreated>Created Date</exo:dateCreated>
         <exo:dateModified>Modified Date</exo:dateModified>
+        <exo:lastModifiedDate>Modified Date</exo:lastModifiedDate>
         <publication:liveDate>Fecha de Publicación</publication:liveDate>
         <exo:startEvent>Fecha del evento</exo:startEvent>
         <exo:index>Índice</exo:index>
