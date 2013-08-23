@@ -366,12 +366,15 @@ public class TestLinkManager extends BaseWCMTestCase {
     Node nodeB1_1 = rootNode.getNode("TestTreeNode/B1/B1_1");
     Node symlinkNode = linkManager.createLink(nodeA1, nodeB1_1);
     assertNotNull(symlinkNode);
+    symlinkNode.addMixin("exo:modify");
+    symlinkNode.save();
     
     nodeB1_1.setProperty(NodetypeConstant.EXO_TITLE, "titleB1");
     nodeB1_1.setProperty(NodetypeConstant.EXO_DATE_CREATED, new GregorianCalendar());
     Calendar d = new GregorianCalendar();
     d.add(Calendar.DATE, 1);
     nodeB1_1.setProperty(NodetypeConstant.EXO_DATE_MODIFIED, d);
+    nodeB1_1.setProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE, d);
     d = new GregorianCalendar();
     d.add(Calendar.DATE, 2);
     nodeB1_1.setProperty(NodetypeConstant.PUBLICATION_LIVE_DATE, d);
@@ -382,8 +385,8 @@ public class TestLinkManager extends BaseWCMTestCase {
 
     assertEquals(symlinkNode.getProperty(NodetypeConstant.EXO_DATE_CREATED).getDate(), 
                  nodeB1_1.getProperty(NodetypeConstant.EXO_DATE_CREATED).getDate());
-    assertEquals(symlinkNode.getProperty(NodetypeConstant.EXO_DATE_MODIFIED).getDate(), 
-                 nodeB1_1.getProperty(NodetypeConstant.EXO_DATE_MODIFIED).getDate());
+    assertEquals(symlinkNode.getProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE).getDate(), 
+                 nodeB1_1.getProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE).getDate());
     assertEquals(symlinkNode.getProperty(NodetypeConstant.PUBLICATION_LIVE_DATE).getDate(), 
                  nodeB1_1.getProperty(NodetypeConstant.PUBLICATION_LIVE_DATE).getDate());
     assertEquals(symlinkNode.getProperty(NodetypeConstant.EXO_INDEX).getLong(), 
