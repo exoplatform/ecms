@@ -2,7 +2,7 @@
   	import org.exoplatform.wcm.webui.scv.UISingleContentViewerPortlet;
   	import org.exoplatform.wcm.webui.Utils;
   	import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
-  	import org.exoplatform.ecm.webui.utils.LockUtil;
+  	import org.exoplatform.ecm.utils.lock.LockUtil;
   	import org.exoplatform.services.jcr.core.ManageableRepository;
   	import org.exoplatform.wcm.webui.administration.UIEditingForm;
   	import org.exoplatform.portal.application.PortalRequestContext;
