@@ -395,21 +395,25 @@ public class LinkManagerImpl implements LinkManager {
         node.addMixin(NodetypeConstant.EXO_TARGET_DATA);
       }
       Node target = this.getTarget(node, true);
-      String[] propList = {NodetypeConstant.EXO_DATE_CREATED,
-                           NodetypeConstant.EXO_DATE_MODIFIED, NodetypeConstant.PUBLICATION_LIVE_DATE,
-                           NodetypeConstant.EXO_START_EVENT, NodetypeConstant.EXO_INDEX};
-      for (String p : propList) {
-        try {
-          if (target.hasProperty(p)) {
-            node.setProperty(p, target.getProperty(p).getValue());
-            node.save();
-          }
-        } catch (RepositoryException e) {
-          if (LOG.isErrorEnabled()) {
-            LOG.error("Can not update property: " + p + " for node: " + node.getPath(), e);
+      if (!node.hasProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE) || 
+          node.getProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE).getDate().compareTo( 
+          target.getProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE).getDate()) < 0) {
+        String[] propList = {NodetypeConstant.EXO_DATE_CREATED,
+            NodetypeConstant.EXO_LAST_MODIFIED_DATE, NodetypeConstant.PUBLICATION_LIVE_DATE,
+            NodetypeConstant.EXO_START_EVENT, NodetypeConstant.EXO_INDEX};
+        for (String p : propList) {
+          try {
+            if (target.hasProperty(p)) {
+              node.setProperty(p, target.getProperty(p).getValue());
+              node.save();
+            }
+          } catch (RepositoryException e) {
+            if (LOG.isErrorEnabled()) {
+              LOG.error("Can not update property: " + p + " for node: " + node.getPath(), e);
+            }
           }
         }
-      }
+    }
     }
   }
 
