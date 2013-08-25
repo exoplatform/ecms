@@ -2882,7 +2882,13 @@
       </msg>
     </UIActionBar>
 
-	<UIPublicationPanel>
+  <UIPublicationContainer>
+   <action>
+    <Close>#{word.close}</Close>
+   </action>
+  </UIPublicationContainer>
+
+  <UIPublicationPanel>
     <button>
       <Close>Close</Close>
     </button>
@@ -2942,14 +2948,13 @@
       <introduction>You can schedule the publication of your document. Select the dates you would like to see your document published</introduction>
       <no-schedule-info>There is no publication schedule for your document</no-schedule-info>
     </label>
-    <scheduled>
-      <title>Scheduled</title>
-      <from>From</from>
-      <to>To</to>
-    </scheduled>
     <msg>
       <save-finished>Your new publication schedule was saved successfully.</save-finished>
     </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Reset</Reset>
+    </action>
   </UIPublicationSchedule>
 
   <UIPublicationPanel>
@@ -2958,9 +2963,6 @@
       <start>Start Publication</start>
       <end>End Publication</end>
     </label>
-    <action>
-      <Save>Save</Save>
-    </action>
     <msg>
       <invalid-format>The date format is invalid. Please check again.</invalid-format>
       <fromDate-after-toDate>The From date has to be earlier than the To date.</fromDate-after-toDate>
