@@ -22,7 +22,7 @@
 	}
   jsManager.require("SHARED/content-selector", "selector").
   addScripts("selector.ECS.loadListContent(\""+itemPaths+"\", \"" +itemTargetPath +"\");");%>
-<div id="$uicomponent.id" class="uiWCMSearchContainer resizable $uicomponent.id">
+<div id="$uicomponent.id" class="uiWCMSearchContainer resizable $uicomponent.id" style="height:400px;">
 	<div class="actionBar form-horizontal">
 		<div class="control-group">
 			<label class="control-label" for="Filter">Filter</label>
