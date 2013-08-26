@@ -82,7 +82,8 @@ import org.exoplatform.webui.event.EventListener;
 @ComponentConfigs( {
     @ComponentConfig(lifecycle = Lifecycle.class, events = {
         @EventConfig(listeners = UICLVPresentation.RefreshActionListener.class),
-        @EventConfig(listeners = UICLVPresentation.DeleteContentActionListener.class),
+        @EventConfig(listeners = UICLVPresentation.DeleteContentActionListener.class,
+                       confirm = "UICLVPresentation.msg.confirm-delete"),
         @EventConfig(listeners = UICLVPresentation.FastPublishActionListener.class) }),
     @ComponentConfig(type = UICustomizeablePaginator.class,
                      events = @EventConfig(listeners = UICustomizeablePaginator.ShowPageActionListener.class)) })
@@ -832,7 +833,7 @@ public class UICLVPresentation extends UIContainer {
       parent.getSession().save();
       event.getRequestContext().addUIComponentToUpdateByAjax(contentListPresentation);
       Utils.createPopupMessage(contentListPresentation,
-                               "UICLVPresentation.msg.delete-content-successfull",
+                               "UICLVPresentation.msg.delete-content-successfully",
                                null,
                                ApplicationMessage.INFO);
     }
