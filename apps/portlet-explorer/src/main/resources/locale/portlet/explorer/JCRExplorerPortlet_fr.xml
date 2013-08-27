@@ -2294,7 +2294,7 @@
 
 	<ECMContextMenu>
 		<event>
-      		<AddSymLink>Créer un Raccourci</AddSymLink>
+      <AddSymLink>Créer un raccourci</AddSymLink>
 			<AddLocalizationLink>Ajouter une Traduction</AddLocalizationLink>
     </event>
   </ECMContextMenu>
@@ -2310,7 +2310,7 @@
 
   <ECMContextMenu>
     <event>
-      <CreateLink>Créer un Raccourci</CreateLink>
+      <CreateLink>Créer un raccourci</CreateLink>
     </event>
   </ECMContextMenu>
 
