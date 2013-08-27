@@ -39,12 +39,14 @@
 			}
 		}
 		.activeStatus,
-		.disableStatus, {
+		.disableStatus {
 			p {
 				color: @grayLight;
 			}
 		}
-		.activeStatus.completed {
+		.completed,
+		.activeStatus.completed,
+		.disableStatus.completed {
 			p {
 				color: @grayDark;
 			}

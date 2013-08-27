@@ -65,11 +65,7 @@ events = {
 
 public class UIPublicationPanel extends org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationPanel {
 
-
-
   private static final Log    LOG               = LogFactory.getLog(UIPublicationPanel.class.getName());
-
-  private static Map<String, String> completedStates = new HashMap<String, String>();
 
   /**
    * Instantiates a new uI publication panel.
@@ -77,7 +73,6 @@ public class UIPublicationPanel extends org.exoplatform.services.wcm.publication
    * @throws Exception the exception
    */
   public UIPublicationPanel() throws Exception {
-    completedStates.clear();
   }
 
   public void init(Node node) throws Exception {
@@ -115,11 +110,7 @@ public class UIPublicationPanel extends org.exoplatform.services.wcm.publication
     public void execute(Event<UIPublicationPanel> event) throws Exception {
       UIPublicationPanel publicationPanel = event.getSource();
       String state = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      Node currentNode = publicationPanel.getCurrentNode();
-      if(currentNode.hasProperty("publication:currentState")) {
-        String currentState = currentNode.getProperty("publication:currentState").getString();
-        if(!completedStates.containsKey(currentState)) completedStates.put(currentState, currentState);
-      }
+      Node currentNode = publicationPanel.getCurrentNode();     
 
       PublicationService publicationService = publicationPanel.getApplicationComponent(PublicationService.class);
       WCMPublicationService wcmPublicationService = publicationPanel.getApplicationComponent(WCMPublicationService.class);
@@ -234,11 +225,7 @@ public class UIPublicationPanel extends org.exoplatform.services.wcm.publication
     }
     return false;
   }
-
-  public boolean isCompletedSate(String state) {
-    return completedStates.containsKey(state);
-  }
-
+ 
   /**
    * Check if a user is authorized to reach the state based on the state's role.
    * The user must have the role
