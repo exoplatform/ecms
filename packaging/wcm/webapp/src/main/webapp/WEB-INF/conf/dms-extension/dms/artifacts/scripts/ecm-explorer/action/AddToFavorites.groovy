@@ -17,7 +17,6 @@
 
 import java.util.Map;
 
-import javax.jcr.Node;
 
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -26,6 +25,7 @@ import org.exoplatform.services.cms.scripts.CmsScript;
 import org.exoplatform.services.cms.documents.FavoriteService;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
@@ -60,12 +60,12 @@ public class AddToFavoriteScript implements CmsScript {
       }
       String userID = ConversationState.getCurrent().getIdentity().getUserId();
       if(userID.equals(IdentityConstants.ANONIM) || userID.equals(IdentityConstants.SYSTEM)) return;
-      Node userNode = nodeHierarchyCreator_.getUserNode(WCMCoreUtils.getSystemSessionProvider(), userID);
+      ExtendedNode userNode = (ExtendedNode)nodeHierarchyCreator_.getUserNode(WCMCoreUtils.getSystemSessionProvider(), userID);
       String favoritePath = nodeHierarchyCreator_.getJcrPath(FAVORITE_ALIAS);
-      Node favoriteNode = userNode.getNode(favoritePath);
+      ExtendedNode favoriteNode = (ExtendedNode)userNode.getNode(favoritePath);
       if (nodePath.startsWith(favoriteNode.getPath())) { 
         // Get new added node
-        Node addedNode = (Node) WCMCoreUtils.getSystemSessionProvider().
+        ExtendedNode addedNode = (ExtendedNode) WCMCoreUtils.getSystemSessionProvider().
         getSession(workspace, repositoryService_.getCurrentRepository()).getItem(nodePath);
         if (templateService_.getAllDocumentNodeTypes().contains(addedNode.getPrimaryNodeType().getName())) {
           // Add new node to favorite
