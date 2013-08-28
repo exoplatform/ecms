@@ -17,7 +17,7 @@
 package org.exoplatform.ecm.webui.form.validator;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.wcm.webui.Utils;
+import org.exoplatform.services.deployment.Utils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.form.UIFormInput;

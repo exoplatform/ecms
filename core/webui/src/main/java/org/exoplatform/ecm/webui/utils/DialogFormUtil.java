@@ -201,7 +201,7 @@ public class DialogFormUtil {
               String inputValue = input.getValue().toString().trim();
               boolean isEmpty = Utils.isEmptyContent(inputValue);
               if(isEmpty) inputValue = "";
-              else if(option == null || option.indexOf(SANITIZATION_FLAG) < 0) inputValue = Utils.sanitize(inputValue);
+              else if(option == null || option.indexOf(SANITIZATION_FLAG) < 0) inputValue = org.exoplatform.services.deployment.Utils.sanitize(inputValue);
               if (input.getName().equals("name") && input.getAncestorOfType(UIDialogForm.class).isAddNew()) {
                 JcrInputProperty jcrExoTitle = new JcrInputProperty();
                 jcrExoTitle.setJcrPath("/node/exo:title");

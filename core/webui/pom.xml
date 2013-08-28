@@ -117,11 +117,7 @@
     <dependency>
       <groupId>org.gatein.portal</groupId>
       <artifactId>exo.portal.webui.portlet</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.owasp.antisamy</groupId>
-      <artifactId>antisamy</artifactId>
-    </dependency>
+    </dependency>    
     <dependency>
       <groupId>org.quartz-scheduler</groupId>
       <artifactId>quartz</artifactId>

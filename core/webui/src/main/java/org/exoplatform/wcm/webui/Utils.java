@@ -33,7 +33,6 @@ import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.container.PortalContainer;
-import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.portal.application.PortalRequestContext;
@@ -81,10 +80,6 @@ import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPortletApplication;
-import org.owasp.validator.html.AntiSamy;
-import org.owasp.validator.html.CleanResults;
-import org.owasp.validator.html.Policy;
-
 import com.ibm.icu.text.Transliterator;
 
 /**
@@ -97,8 +92,6 @@ public class Utils {
   public static final String TURN_ON_QUICK_EDIT = "turnOnQuickEdit";
 
   private static final String SQL_PARAM_PATTERN = "\\$\\{([^\\$\\{\\}])+\\}";
-
-  private static final String POLICY_FILE_LOCATION = "jar:/conf/portal/antisamy.xml";
 
   private static final String NT_FILE = "nt:file";
 
@@ -917,28 +910,6 @@ public class Utils {
     return NavigationUtils.getUserNavigation(
           Util.getPortalRequestContext().getUserPortalConfig().getUserPortal(),
           siteKey);
-  }
-
-  public static String sanitize(String value) {
-    try {
-      ConfigurationManager configMan = WCMCoreUtils.getService(ConfigurationManager.class);
-      Policy policy = Policy.getInstance(configMan.getResource(POLICY_FILE_LOCATION));
-      AntiSamy as = new AntiSamy();
-      CleanResults cr = as.scan(value, policy);
-      value = cr.getCleanHTML();
-      return value;
-    } catch(Exception ex) {
-      return value;
-    }
-  }
-  public static String sanitizeSearch(String value) {
-    try {
-      value = sanitize(value);
-      value = value.replaceAll("<iframe", "").replaceAll("<frame", "").replaceAll("<frameset", "");
-      return value;
-    } catch(Exception ex) {
-      return value;
-    }
   }
 
   public static boolean isEmptyContent(String inputValue) {
