@@ -26,6 +26,7 @@ import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanAddNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsCheckedOutFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotEditingDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotIgnoreVersionNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
@@ -53,7 +54,7 @@ public class PublicationApproveContentAction extends UIComponent {
 
   private static final List<UIExtensionFilter> FILTERS = Arrays.asList(
       new UIExtensionFilter[] {
-          new CanAddNodeFilter(), new IsNotLockedFilter(), new IsCheckedOutFilter(), new CanApproveFilter(), new IsNotIgnoreVersionNodeFilter()});
+          new CanAddNodeFilter(), new IsNotLockedFilter(), new IsCheckedOutFilter(), new CanApproveFilter(), new IsNotIgnoreVersionNodeFilter(), new IsNotEditingDocumentFilter()});
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
