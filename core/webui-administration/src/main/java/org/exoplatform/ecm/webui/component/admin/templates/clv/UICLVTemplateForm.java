@@ -143,12 +143,18 @@ public class UICLVTemplateForm extends UIForm {
               template, new ByteArrayInputStream(content.getBytes()), new String[] { "*" });
     } else {
       if(hasTemplate(category, template)) {
-        Node templateNode = getCategoryByName(category).getNode(template);
-        Node contentNode = templateNode.getNode(NodetypeConstant.JCR_CONTENT);
-        contentNode.setProperty(NodetypeConstant.JCR_DATA, new ByteArrayInputStream(content.getBytes()));
-        if(title == null || title.length() == 0) title = templateNode.getName();
-        contentNode.setProperty(NodetypeConstant.DC_TITLE, new String[] { title });
-        templateNode.save();
+        if(!selectedCategory.equals(category)) {
+          UIApplication uiApp = getAncestorOfType(UIApplication.class);
+          uiApp.addMessage(new ApplicationMessage("UICLVTemplateForm.msg.template-existing", null, ApplicationMessage.WARNING));
+          return;
+        } else {
+          Node templateNode = getCategoryByName(category).getNode(template);
+          Node contentNode = templateNode.getNode(NodetypeConstant.JCR_CONTENT);
+          contentNode.setProperty(NodetypeConstant.JCR_DATA, new ByteArrayInputStream(content.getBytes()));
+          if(title == null || title.length() == 0) title = templateNode.getName();
+          contentNode.setProperty(NodetypeConstant.DC_TITLE, new String[] { title });
+          templateNode.save();
+        }
       } else {
         templateService.createTemplate(getCategoryByName(category), title, 
                 template, new ByteArrayInputStream(content.getBytes()), new String[] { "*" });
