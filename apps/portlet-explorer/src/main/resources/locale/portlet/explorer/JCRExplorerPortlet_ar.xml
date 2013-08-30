@@ -2882,6 +2882,12 @@
       </msg>
     </UIActionBar>
 
+  <UIPublicationContainer>
+   <action>
+    <Close>#{word.close}</Close>
+   </action>
+  </UIPublicationContainer>
+
 <UIPublicationPanel>
     <button>
       <Close>غلق</Close>
@@ -2942,14 +2948,13 @@
       <introduction>يُمكنك برمجة عمليّة نشر ملفّك. حدد التواريخ التي تود أن يُنشَر خلالها الملفّ.</introduction>
       <no-schedule-info>لا توجد أي برمجة لنشر الملفّ الخاص بك</no-schedule-info>
     </label>
-    <scheduled>
-      <title>مُبرمج</title>
-      <from>من</from>
-      <to>إلى</to>
-    </scheduled>
     <msg>
       <save-finished>تمّ حفظ برمجة عمليّة النّشر الخاصة بك بنجاح.</save-finished>
     </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Reset</Reset>
+    </action>
   </UIPublicationSchedule>
 
   <UIPublicationPanel>
@@ -2958,11 +2963,8 @@
       <start>بداية النشر</start>
       <end>نهاية النشر</end>
     </label>
-    <action>
-      <Save>حفظ</Save>
-    </action>
     <msg>
-      <invalid-format>صيغة التاريخ والتوقيت غير صحيحة. يُرجى اعادة التثبّت.</invalid-format>
+      <invalid-format>The date format is invalid. Please check again.</invalid-format>
       <fromDate-after-toDate>تاريخ الابتداء يجب أن يأتي قبل تاريخ الانتهاء.</fromDate-after-toDate>
     </msg>
   </UIPublicationPanel>
