@@ -31,12 +31,12 @@
         <name>名前</name>
         <title>タイトル</title>
         <ContentCSS>CSS データ</ContentCSS>
-        <hintCSS>このパネルで、Webコンテンツのメインスタイルシートを指定できます。このスタイルはサイトレベル、共有レベルのスタイルを上書きします。</hintCSS>
+        <hintCSS>You can specify the main style sheet for your web content. This style will override the style sheets defined at the site level and at the shared level.</hintCSS>
         <ContentJS>JS データ</ContentJS>
-        <hintJS>このパネルで、Webコンテンツがレンダリングされる前に実行される Java Script を指定できます。</hintJS>
+        <hintJS>You can specify some JavaScript codes that can be executed before your web content is rendered.</hintJS>
         <WebContentHtml>メインコンテンツ</WebContentHtml>
         <Illustration>イラストレーション</Illustration>
-        <hintIllustration>このパネルで、Webコンテンツがリストに表示される際に使用される画像を指定できます。また、この画像に付記される要約テキストも指定できます。</hintIllustration>
+        <hintIllustration>You can specify an image that will be shown when your web content is displayed in the list. You can also specify some summary texts to go with this image.</hintIllustration>
         <confirm-delete>このイラストレーションを削除しますか？</confirm-delete>
         <illustrationImage>イラストレーション画像</illustrationImage>
         <imageMimeType>画像タイプ</imageMimeType>
