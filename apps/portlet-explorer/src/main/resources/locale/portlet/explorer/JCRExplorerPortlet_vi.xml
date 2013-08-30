@@ -2882,6 +2882,12 @@
       </msg>
     </UIActionBar>
 
+  <UIPublicationContainer>
+   <action>
+    <Close>#{word.close}</Close>
+   </action>
+  </UIPublicationContainer>
+
 <UIPublicationPanel>
     <button>
       <Close>Đóng</Close>
@@ -2942,14 +2948,13 @@
       <introduction>Bạn có thể đặt lich trình công bố tài liệu của bạn bằng cách chọn ngày bạn muốn tài liệu của bạn được xuất bản.</introduction>
       <no-schedule-info>Không có lịch trình xuất bản nào cho tài liệu của bạn.</no-schedule-info>
     </label>
-    <scheduled>
-      <title>Theo lịch trình</title>
-      <from>Từ</from>
-      <to>Đến</to>
-    </scheduled>
     <msg>
       <save-finished>Lịch trình xuất bản mới của bạn đã được lưu thành công.</save-finished>
     </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Reset</Reset>
+    </action>
   </UIPublicationSchedule>
 
   <UIPublicationPanel>
@@ -2958,9 +2963,6 @@
       <start>Bắt đầu xuất bản</start>
       <end>Kết thúc xuất bản</end>
     </label>
-    <action>
-      <Save>Lưu</Save>
-    </action>
     <msg>
       <invalid-format>Định dạng ngày giờ không hợp lệ. Vui lòng kiểm tra lại.</invalid-format>
       <fromDate-after-toDate>Định dạng ngày Bắt đầu phải có giá trị trước ngày Kết thúc.</fromDate-after-toDate>
