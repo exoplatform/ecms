@@ -31,12 +31,12 @@
         <name>Tên</name>
         <title>Tiêu đề</title>
         <ContentCSS>Dữ liệu CSS</ContentCSS>
-        <hintCSS>Tại bảng này, bạn có thể tự định nghĩa style cho nội dung web. Style này sẽ được ghi đè lên bảng style được định nghĩa cấp độ site và cấp độ được chia sẻ.</hintCSS>
+        <hintCSS>Bạn có thể định nghĩa CSS cho nội dung này. Giá trị này sẽ ghi đè lên CSS của Site.</hintCSS>
         <ContentJS>Dữ liệu Javascript</ContentJS>
-        <hintJS>Tại bảng này, bạn có thể tự định nghĩa mã Javascript được thực thi trước khi nội dung web được hiển thị.</hintJS>
+        <hintJS>Bạn có thể định nghĩa mã Javascript, nó sẽ được thực thi trước khi nội dung hiển thị.</hintJS>
         <WebContentHtml>Nội dung Chính</WebContentHtml>
         <Illustration>Minh họa</Illustration>
-        <hintIllustration>Tại bảng này, bạn có thể chọn ra một bức ảnh để hiển thị khi nội dung web của bạn được hiển thị dưới dạng danh sách. Thêm vào đó, bạn có thể thêm vài dòng tóm tắt để hiển thị cùng ảnh minh họa.</hintIllustration>
+        <hintIllustration>Bạn có thể thêm ảnh minh họa và tóm tắt.</hintIllustration>
         <confirm-delete>Bạn có chắc bạn muốn xóa minh hoạ này không?</confirm-delete>
         <illustrationImage>Ảnh Minh họa</illustrationImage>
         <imageMimeType>Kiểu Ảnh</imageMimeType>
