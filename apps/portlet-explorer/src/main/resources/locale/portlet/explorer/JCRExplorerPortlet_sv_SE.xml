@@ -2882,6 +2882,12 @@
       </msg>
     </UIActionBar>
 
+  <UIPublicationContainer>
+   <action>
+    <Close>#{word.close}</Close>
+   </action>
+  </UIPublicationContainer>
+
 <UIPublicationPanel>
     <button>
       <Close>Stäng</Close>
@@ -2942,14 +2948,13 @@
       <introduction>Du kan schemalägga publiceringen av dokumentet. Välj de datum som du vill se dokumentet publiceras</introduction>
       <no-schedule-info>Det finns ingen Utgivningsplan för dokumentet</no-schedule-info>
     </label>
-    <scheduled>
-      <title>Schemalagd</title>
-      <from>Från</from>
-      <to>Till</to>
-    </scheduled>
     <msg>
       <save-finished>Din nya utgivningsplan har sparats.</save-finished>
     </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Reset</Reset>
+    </action>
   </UIPublicationSchedule>
 
   <UIPublicationPanel>
@@ -2958,11 +2963,8 @@
       <start>Starta publicering</start>
       <end>Avsluta publikation</end>
     </label>
-    <action>
-      <Save>Spara</Save>
-    </action>
     <msg>
-      <invalid-format>Datum,tid-formatet är ogiltigt. Kontrollera igen.</invalid-format>
+      <invalid-format>The date format is invalid. Please check again.</invalid-format>
       <fromDate-after-toDate>Från-datum måste vara tidigare än till-datum.</fromDate-after-toDate>
     </msg>
   </UIPublicationPanel>

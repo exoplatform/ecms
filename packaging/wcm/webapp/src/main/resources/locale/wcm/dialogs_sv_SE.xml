@@ -31,12 +31,12 @@
         <name>Namn</name>
         <title>Titel</title>
         <ContentCSS>CSS Data</ContentCSS>
-        <hintCSS>I det här fönstret kan du ange de viktigaste formatmallen för webbinnehållet. Denna stil åsidosätter de formatmallar som anges på platsnivå och på delad nivå.</hintCSS>
+        <hintCSS>Du kan ange huvud formatmallen för webbinnehållet. Denna mall åsidosätter de formatmallar som anges på platsnivå och på delad nivå.</hintCSS>
         <ContentJS>JS Data</ContentJS>
-        <hintJS>I det här fönstret kan du ange några JavaScript-koder som kan utföras innan webbinnehållet återges.</hintJS>
+        <hintJS>Du kan ange JavaScript-koder som kan utföras innan webbinnehållet återges.</hintJS>
         <WebContentHtml>Huvudsakliga innehåll</WebContentHtml>
         <Illustration>Illustration</Illustration>
-        <hintIllustration>I det här fönstret kan du ange en bild som visas när webbinnehållet visas i listorna. Du kan också ange några sammanfattande texter att visa med denna bild.</hintIllustration>
+        <hintIllustration>Du kan ange en bild som visas när webbinnehållet visas i listan. Du kan också ange en  sammanfattande text att med denna bild.</hintIllustration>
         <confirm-delete>Är du säker på att du vill radera denna bild?</confirm-delete>
         <illustrationImage>Illustration bild</illustrationImage>
         <imageMimeType>Bildtyp</imageMimeType>
