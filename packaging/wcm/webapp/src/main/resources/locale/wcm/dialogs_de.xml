@@ -31,12 +31,12 @@
         <name>Name</name>
         <title>Titel</title>
         <ContentCSS>CSS-Daten</ContentCSS>
-        <hintCSS>In diesem Bereich können Sie das Haupt-Stylesheet für Ihre Webinhalte angeben. Dieser Stylesheet wird dann alle Stylesheets die auf Seiten- und geteilter Ebene vorhanden sind überschreiben.</hintCSS>
+        <hintCSS>You can specify the main style sheet for your web content. This style will override the style sheets defined at the site level and at the shared level.</hintCSS>
         <ContentJS>JS-Daten</ContentJS>
-        <hintJS>In diesem Bereich können Sie einigen JavaScript-Code angeben, der ausgeführt wird, bevor Ihre Webinhalte angezeigt werden.</hintJS>
+        <hintJS>You can specify some JavaScript codes that can be executed before your web content is rendered.</hintJS>
         <WebContentHtml>Hauptinhalt</WebContentHtml>
         <Illustration>Illustration</Illustration>
-        <hintIllustration>In diesem Bereich können Sie ein Bild angeben, das angezeigt werden soll, wenn Ihre Webinhalte in den Listen angezeigt werden. Sie können auch einige zusammenfassende Texte als Begleitung zu diesem Bild angeben.</hintIllustration>
+        <hintIllustration>You can specify an image that will be shown when your web content is displayed in the list. You can also specify some summary texts to go with this image.</hintIllustration>
         <confirm-delete>Möchten Sie diese Illustration wirklich löschen?</confirm-delete>
         <illustrationImage>Illustrationsbild</illustrationImage>
         <imageMimeType>Bildtyp</imageMimeType>
