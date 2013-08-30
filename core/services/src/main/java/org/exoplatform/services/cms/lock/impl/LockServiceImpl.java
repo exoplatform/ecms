@@ -118,14 +118,8 @@ public class LockServiceImpl implements LockService, Startable {
     preSettingLockList.clear();
     removeLocks();
     for(LockGroupsOrUsersPlugin plugin : lockGroupsOrUsersPlugin_) {
-      try{
-        settingLockList.addAll(plugin.initGroupsOrUsers());
-        preSettingLockList.addAll(plugin.initGroupsOrUsers());
-      }catch(Exception e) {
-        if (LOG.isErrorEnabled()) {
-          LOG.error("can not init lock groups or users: ", e);
-        }
-      }
+      settingLockList.addAll(plugin.initGroupsOrUsers());
+      preSettingLockList.addAll(plugin.initGroupsOrUsers());
     }
   }
 
@@ -241,7 +235,7 @@ public class LockServiceImpl implements LockService, Startable {
         }
         if(lockedNode.isLocked()) {
           lockedNode.unlock();
-        }  
+        }
         if (lockedNode.isNodeType("mix:lockable")) {
           lockedNode.removeMixin("mix:lockable");
         }

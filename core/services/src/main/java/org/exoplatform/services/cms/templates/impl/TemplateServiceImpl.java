@@ -273,7 +273,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   /**
    * {@inheritDoc}
    */
-  public boolean isManagedNodeType(String nodeTypeName) throws Exception {
+  public boolean isManagedNodeType(String nodeTypeName) throws RepositoryException {
     //check if the node type is document type first
     List<String> managedDocumentTypes = getManagedDocumentTypesMap();
     if(managedDocumentTypes != null && managedDocumentTypes.contains(nodeTypeName))
@@ -349,7 +349,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   /**
    * {@inheritDoc}
    */
-  public String getTemplatePathByUser(boolean isDialog, String nodeTypeName, String userName) throws Exception {
+  public String getTemplatePathByUser(boolean isDialog, String nodeTypeName, String userName) throws RepositoryException {
     if(IdentityConstants.ANONIM.equals(userName) || DynamicIdentity.DYNAMIC.equals(userName) || userName == null) {
       return getTemplatePathByAnonymous(isDialog, nodeTypeName);
     }
@@ -445,7 +445,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   /**
    * {@inheritDoc}
    */
-  public List<String> getDocumentTemplates() throws Exception {
+  public List<String> getDocumentTemplates() throws RepositoryException {
     List<String> templates = getManagedDocumentTypesMap();
     if (templates != null)
       return new ArrayList<String>(templates);
@@ -457,7 +457,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   /**
    * {@inheritDoc}
    */
-  public String getTemplatePathByAnonymous(boolean isDialog, String nodeTypeName) throws Exception {
+  public String getTemplatePathByAnonymous(boolean isDialog, String nodeTypeName) throws RepositoryException {
     String type = DIALOGS;
     if (!isDialog)
       type = VIEWS;
@@ -666,7 +666,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * Return session of the specified repository
    * @param provider        SessionProvider
    * @return
-   * @throws RepositoryException 
+   * @throws RepositoryException
    * @see                   SessionProvider
    * @see                   ManageableRepository
    * @see                   DMSRepositoryConfiguration
@@ -687,9 +687,8 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * @see                       MembershipEntry
    * @see                       IdentityRegistry
    * @return
-   * @throws Exception
    */
-  private boolean hasPermission(String userId, String roles, IdentityRegistry identityRegistry) throws Exception {
+  private boolean hasPermission(String userId, String roles, IdentityRegistry identityRegistry) {
     if(IdentityConstants.SYSTEM.equalsIgnoreCase(userId)) {
       return true ;
     }
@@ -713,9 +712,8 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * Check public template with the roles
    * @param roles         Value[]
    * @return
-   * @throws Exception
    */
-  private boolean hasPublicTemplate(String role) throws Exception {
+  private boolean hasPublicTemplate(String role) {
     String[] roles = role.split("; ");
     for (int i = 0; i < roles.length; i++) {
       if("*".equalsIgnoreCase(roles[i])) return true ;
@@ -848,7 +846,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       }
     }
     return null;
-  }  
+  }
 
   /**
    * {@inheritDoc}
