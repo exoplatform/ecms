@@ -2882,6 +2882,12 @@
       </msg>
     </UIActionBar>
 
+  <UIPublicationContainer>
+   <action>
+    <Close>#{word.close}</Close>
+   </action>
+  </UIPublicationContainer>
+
 <UIPublicationPanel>
     <button>
       <Close>閉じる</Close>
@@ -2942,14 +2948,13 @@
       <introduction>ドキュメントの発行スケジュールを設定することができます。公開日付を選択してください。</introduction>
       <no-schedule-info>ドキュメントの公開スケジュールはありません。</no-schedule-info>
     </label>
-    <scheduled>
-      <title>スケジュール</title>
-      <from>差出人</from>
-      <to>宛先</to>
-    </scheduled>
     <msg>
       <save-finished>新しいパブリケーション スケジュールは正常に保存されました。</save-finished>
     </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Reset</Reset>
+    </action>
   </UIPublicationSchedule>
 
   <UIPublicationPanel>
@@ -2958,11 +2963,8 @@
       <start>公開の開始</start>
       <end>公開の終了</end>
     </label>
-    <action>
-      <Save>保存</Save>
-    </action>
     <msg>
-      <invalid-format>無効なDatetimeフォーマットです。もう一度チェックしてください。</invalid-format>
+      <invalid-format>The date format is invalid. Please check again.</invalid-format>
       <fromDate-after-toDate>The From date has to be smaller than the To date.</fromDate-after-toDate>
     </msg>
   </UIPublicationPanel>
