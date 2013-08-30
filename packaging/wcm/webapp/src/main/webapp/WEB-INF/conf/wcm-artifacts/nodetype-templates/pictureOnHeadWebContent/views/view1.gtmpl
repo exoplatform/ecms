@@ -41,7 +41,8 @@
 		String imageWidth = getRimOfImage("exo:imageWidth", currentNode);
 		String imageHeight = getRimOfImage("exo:imageHeight", currentNode);
 		%>
-			<div style="float:left; padding-right: 10px;"><img alt="$imageURI" src="$imageURI" width="<%=imageWidth%>" height="<%=imageHeight%>"/></div>
+			<div style="padding: 10px;" class="clearfix viewDetail" >
+				<div class="pull-left introImage" style="margin: 0 10px 10px 0"><img alt="$imageURI" src="$imageURI" width="<%=imageWidth%>" height="<%=imageHeight%>"/></div>
 		<%
 	}
 	if((css != null) && (css.length() > 0)) {
@@ -108,6 +109,9 @@
 						_ctx.include(uicomponent.getViewTemplate("exo:comments", "view1")); 
 				%>
 			</div>
+			<% 	if (currentNode.hasProperty("exo:image")) { %>
+			</div>
+			<%}%>
 		<%
 	} else {
 		%><%= html %><%
