@@ -2882,6 +2882,12 @@
       </msg>
     </UIActionBar>
 
+  <UIPublicationContainer>
+   <action>
+    <Close>#{word.close}</Close>
+   </action>
+  </UIPublicationContainer>
+
 <UIPublicationPanel>
     <button>
       <Close>Chiudi</Close>
@@ -2942,14 +2948,13 @@
       <introduction>You can schedule the publication of your document. Select the dates you would like to see your document published</introduction>
       <no-schedule-info>There is no publication schedule for your document</no-schedule-info>
     </label>
-    <scheduled>
-      <title>Scheduled</title>
-      <from>Da</from>
-      <to>A</to>
-    </scheduled>
     <msg>
       <save-finished>Your new publication schedule was saved successfully.</save-finished>
     </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Reset</Reset>
+    </action>
   </UIPublicationSchedule>
 
   <UIPublicationPanel>
@@ -2958,11 +2963,8 @@
       <start>Inizio Pubblicazione</start>
       <end>Fine Pubblicazione</end>
     </label>
-    <action>
-      <Save>Salva</Save>
-    </action>
     <msg>
-      <invalid-format>Formato data e ora non valido. Controlla di nuovo.</invalid-format>
+      <invalid-format>The date format is invalid. Please check again.</invalid-format>
       <fromDate-after-toDate>La Data di Inizio deve essere minore della Data di Fine.</fromDate-after-toDate>
     </msg>
   </UIPublicationPanel>
