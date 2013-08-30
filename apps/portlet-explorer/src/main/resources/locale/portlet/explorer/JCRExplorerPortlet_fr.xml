@@ -2882,6 +2882,12 @@
 				</msg>
 		</UIActionBar>
 
+  <UIPublicationContainer>
+   <action>
+    <Close>#{word.close}</Close>
+   </action>
+  </UIPublicationContainer>
+
   <UIPublicationPanel>
     <button>
       <Close>Fermer</Close>
@@ -2942,14 +2948,13 @@
       <introduction>Vous pouvez programmer la publication de votre document. Choisissez la date que vous souhaitez voir votre document publié</introduction>
       <no-schedule-info>Il n'y a pas de calendrier de publication pour votre document</no-schedule-info>
     </label>
-    <scheduled>
-      <title>Planifier</title>
-      <from>de</from>
-      <to>à</to>
-    </scheduled>
     <msg>
       <save-finished>Votre nouveau calendrier de publication a été enregistré avec succès.</save-finished>
     </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Reset</Reset>
+    </action>
   </UIPublicationSchedule>
 
   <UIPublicationPanel>
@@ -2958,11 +2963,8 @@
       <start>Début</start>
       <end>Fin</end>
     </label>
-    <action>
-      <Save>Enregistrer</Save>
-    </action>
     <msg>
-      <invalid-format>Format de date incorrect. Veuillez vérifier à nouveau.</invalid-format>
+      <invalid-format>Le format de date n'est pas valide. S'il vous plaît vérifier à nouveau.</invalid-format>
       <fromDate-after-toDate>La date de début doit être avant la date de fin.</fromDate-after-toDate>
     </msg>
   </UIPublicationPanel>
