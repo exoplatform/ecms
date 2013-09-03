@@ -602,19 +602,20 @@ public class Utils {
     HashMap<String,String> parsedArguments = parseArguments(arguments) ;
     String height = parsedArguments.get(HEIGHT);
     String bDirection = parsedArguments.get(BUTTON_DIR);
+    String siteName = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getPortalOwner();
+    String currentValue =  StringUtils.replace(defaultValue,"{portalName}",siteName);
     if ( org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE)) {
       if (orgNode.hasProperty(propertyName)) {
         try {
           if(propertyName.equals(EXO_TITLE))
             return ContentReader.getXSSCompatibilityContent(orgNode.getProperty(propertyName).getString());
-          return orgNode.getProperty(propertyName).getString();
+          return StringUtils.replace(orgNode.getProperty(propertyName).getString(),"{portalName}",siteName);
         } catch (Exception e) {
-          return defaultValue;
+          return currentValue;
         }
       }
-      return defaultValue;
+      return currentValue;
     }
-    String currentValue = defaultValue;
     ResourceBundle resourceBundle;
     if (orgNode.hasProperty(propertyName)) {
       try {
@@ -655,7 +656,6 @@ public class Utils {
     String editFormID = "Edit" + idGenerator + "Form_" + portletRealID;
     String newValueInputId = "new" + idGenerator + "_" + portletRealID;
     String currentValueID = "old" + idGenerator + "_" + portletRealID;
-    String siteName = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getPortalOwner();
     try {
       strSuggestion = resourceBundle.getString("UIPresentation.label.EditingSuggestion");
       acceptButton = resourceBundle.getString("UIPresentation.title.AcceptButton");
