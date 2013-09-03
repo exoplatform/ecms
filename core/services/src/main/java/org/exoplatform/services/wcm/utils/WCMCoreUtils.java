@@ -365,10 +365,9 @@ public class WCMCoreUtils {
   }
 
   /**
-   * gets the global javascript of given site node. For example, if the site is acme<br/>
-   * we then return all javascript code only inside acme/js
+   * Gets the global javascript's content of given site node plus the javascript's contents of shared site
    * @param siteNode the root node of the site
-   * @return global javascript code inside this site
+   * @return The javascript's contents inside a site which already appended the shared site javascript's contents.
    * @throws Exception
    */
   public static String getSiteGlobalActiveJs(Node siteNode) throws Exception {
@@ -378,6 +377,13 @@ public class WCMCoreUtils {
     return buffer.toString();
   }
   
+  /**
+   * Gets the global javascript's content of a given site node. For example, if the site is acme<br/>
+   * we then return all javascript code only inside acme/js
+   * @param siteNode the root node of the site
+   * @return javascript's content inside a site node
+   * @throws Exception
+   */  
   public static String getSiteActiveJs(Node siteNode) throws Exception {
     StringBuilder buffer = new StringBuilder();
     try {
@@ -618,7 +624,7 @@ public class WCMCoreUtils {
   }
   
   public static boolean isDocumentNodeType(Node node) throws Exception {
-  	boolean isDocument = true;
+    boolean isDocument = true;
     TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
     isDocument = templateService.getAllDocumentNodeTypes().contains(node.getPrimaryNodeType().getName()); 
     return isDocument;
