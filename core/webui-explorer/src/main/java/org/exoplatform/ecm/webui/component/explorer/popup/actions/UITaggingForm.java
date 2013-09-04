@@ -16,15 +16,6 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Set;
-
-import javax.jcr.Node;
-
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
@@ -46,11 +37,10 @@ import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormInputInfo;
-import org.exoplatform.webui.form.UIFormSelectBox;
-import org.exoplatform.webui.form.UIFormStringInput;
-import org.exoplatform.webui.form.UIFormTextAreaInput;
+import org.exoplatform.webui.form.*;
+
+import javax.jcr.Node;
+import java.util.*;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh
@@ -224,7 +214,7 @@ public class UITaggingForm extends UIForm {
         uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tag-name-empty",
                                                 null,
                                                 ApplicationMessage.WARNING));
-
+	      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
         return;
       }
       String[] tagNames;
@@ -264,12 +254,19 @@ public class UITaggingForm extends UIForm {
           }
         }
       }
+      if(listTagNamesClone.size() == 0) {
+	      uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tagName-empty-or-invalid",
+		      null,
+		      ApplicationMessage.WARNING));
+	      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
+	      return;
+      }
       String tagScope = uiForm.getUIFormSelectBox(TAG_SCOPES).getValue();
       List<Node> tagList = newFolksonomyService.getLinkedTagsOfDocumentByScope(uiForm.getIntValue(tagScope),
                                                                                uiForm.getStrValue(tagScope,
-                                                                                                  currentNode),
-                                                                                                  uiExplorer.getCurrentNode(),
-                                                                                                  workspace);
+                                                                               currentNode),
+                                                                               uiExplorer.getCurrentNode(),
+                                                                               workspace);
       for (Node tag : tagList) {
         for (String t : listTagNames) {
           if (t.equals(tag.getName())) {

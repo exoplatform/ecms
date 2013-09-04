@@ -1852,6 +1852,7 @@
     <msg>
       <name-exist>The tag name '{0}' already exists.</name-exist>
       <tagName-invalid>The tag name contains some invalid characters.</tagName-invalid>
+      <tagName-empty-or-invalid>The tag name is empty or contains some invalid characters.</tagName-empty-or-invalid>
       <tag-name-empty>Your tag name is empty</tag-name-empty>
       <tag-name-duplicate>The input tag names are duplicate.</tag-name-duplicate>
       <tagName-too-long>One of the tags entered was too long. The tag name must be less than 30 characters.</tagName-too-long>
