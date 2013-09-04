@@ -602,8 +602,8 @@ public class Utils {
     HashMap<String,String> parsedArguments = parseArguments(arguments) ;
     String height = parsedArguments.get(HEIGHT);
     String bDirection = parsedArguments.get(BUTTON_DIR);
-      String siteName = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getPortalOwner();
-      String currentValue =  StringUtils.replace(defaultValue,"{portalName}",siteName);
+    String siteName = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getPortalOwner();
+    String currentValue =  StringUtils.replace(defaultValue,"{portalName}",siteName);
     if ( org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE)) {
       if (orgNode.hasProperty(propertyName)) {
         try {
