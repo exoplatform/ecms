@@ -6,17 +6,17 @@
   <Ecm>
     <dialog>
       <label>
-        <end-time>End Time</end-time>
-        <start-time>Start Time</start-time>
-        <lifecycle>Lifecycle</lifecycle>
+        <end-time>Hora de finalización</end-time>
+        <start-time>Hora de inicio</start-time>
+        <lifecycle>Ciclo de vida</lifecycle>
         <mimeType>Mime Type</mimeType>
-        <repeat-count>Repeat Count</repeat-count>
-        <time-interval>Time Interval</time-interval>
-        <query-items>Query Items</query-items>
-        <schedule-type>Schedule Type</schedule-type>
+        <repeat-count>Repita el conteo</repeat-count>
+        <time-interval>Intervalo de tiempo</time-interval>
+        <query-items>Elementos de Consulta</query-items>
+        <schedule-type>Tipo de Programa</schedule-type>
         <remove>Eliminar Item</remove>
         <add>Añadir Item</add>
-        <expand>Expand This</expand>
+        <expand>Extender este</expand>
       </label>
     </dialog>
   </Ecm>
@@ -28,7 +28,7 @@
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
-      <name>Name</name>
+      <name>Nombre</name>
     <categories>Categorías</categories>
     </label>
   </UIDocumentForm>
@@ -39,7 +39,7 @@
   <HtmlFile>
     <dialog>
       <label>
-        <name>Name</name>
+        <name>Nombre</name>
         <content>Contenido</content>
       </label>
     </dialog>
@@ -55,7 +55,7 @@
         <categories>Categorías</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
         <content>#{word.content}</content>
-        <re-upload>The file already exists. You can delete it and upload another file.</re-upload>
+        <re-upload>El archivo ya existe. Puede eliminarlo y cargar otro archivo.</re-upload>
       </label>
     </dialog>
   </File>
@@ -63,22 +63,22 @@
   <UIActionForm>
     <label>
       <description>#{word.description}</description>
-      <port>Port</port>
+      <port>Puerto</port>
       <userName>#{word.userName}</userName>
       <password>Contraseña</password>
       <link>Enlace</link>
-      <to>Send Mail To</to>
+      <to>Enviar correo a</to>
       <actionName>#{word.name}</actionName>
     </label>
   </UIActionForm>
   <EditFormAction>
     <label>
       <description>#{word.description}</description>
-      <port>Port</port>
+      <port>Puerto</port>
       <userName>#{word.userName}</userName>
       <password>Contraseña</password>
       <link>Enlace</link>
-      <to>Send Mail To</to>
+      <to>Enviar correo a</to>
       <actionName>#{word.name}</actionName>
     </label>
   </EditFormAction>
@@ -89,7 +89,7 @@
   <AddMetadata>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>ID</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <metadata>Metadatos</metadata>
@@ -104,7 +104,7 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>ID</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -123,7 +123,7 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>ID</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -285,7 +285,7 @@
   <ScriptAction>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>ID</id>
         <name>Name</name>
         <lifecycle>Lifecycle</lifecycle>
         <homePath>Ruta de Inicio</homePath>
@@ -316,7 +316,7 @@
 <UNCLASSIFIED>Unclassified</UNCLASSIFIED>
 <NOCONTRACT>No Contract</NOCONTRACT>
 <one-minute>One Minute</one-minute>
-<hourly>Hourly</hourly>
+<hourly>Por hora</hourly>
 <daily>Diario</daily>
 <quarterly>Quarterly</quarterly>
 <yearly>Anualmente</yearly>

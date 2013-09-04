@@ -86,9 +86,9 @@
         <name>Name</name>
         <versionable>Versionable</versionable>
         <exo_owner>Propietario</exo_owner>
-        <exo_dateCreated>Date Created</exo_dateCreated>
+        <exo_dateCreated>Fecha de creación</exo_dateCreated>
         <exo_dateModified>Date Modified</exo_dateModified>
-        <auditing>Auditing</auditing>
+        <auditing>Auditoría</auditing>
       </label>
     </view>
   </ListView>
@@ -213,7 +213,7 @@
     <view>
       <label>
       <Play-audio-description-of-this-video>Audio description</Play-audio-description-of-this-video>
-      <Read-more>Read more</Read-more>
+      <Read-more>Leer más</Read-more>
       <Read-less>Read less</Read-less>
       <Switch-back-to-original-video>Original video</Switch-back-to-original-video>
       </label>
