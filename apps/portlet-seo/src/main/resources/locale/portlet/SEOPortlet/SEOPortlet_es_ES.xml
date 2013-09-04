@@ -12,10 +12,10 @@
     <isInherited>Heredado de la página principal</isInherited>
       <priority>Prioridad:</priority>
       <frequency>Frecuencia:</frequency>
-      <select-language>Select a language</select-language>
+      <select-language>Seleccione un Idioma</select-language>
       <option>
         <Always>Siempre</Always>
-        <Hourly>Hourly</Hourly>
+        <Hourly>Por hora</Hourly>
         <Daily>Diario</Daily>
         <Weekly>Semanalmente</Weekly>
         <Monthly>Mensualmente</Monthly>

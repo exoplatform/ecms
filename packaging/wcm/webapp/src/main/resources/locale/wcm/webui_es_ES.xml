@@ -138,7 +138,7 @@
     <label>
       <name>Name</name>
       <add>Añadir</add>
-      <delete>Delete</delete>
+      <delete>Borrar</delete>
     </label>
     <msg>
       <no-content-found>No content found.</no-content-found>
@@ -281,7 +281,7 @@
       <Clear>Clear</Clear>
       <title>
         <Edit>Editar</Edit>
-        <Delete>Delete</Delete>
+        <Delete>Borrar</Delete>
       </title>
     </action>
   </UIPermissionManager>
@@ -300,7 +300,7 @@
       <node-locked>The path element {0} or one of its parents is locked.</node-locked>
       <userOrGroup-required>You must select a user or group.</userOrGroup-required>
       <checkbox-require>You must set rights.</checkbox-require>
-      <node-checkedin>You must check out first.</node-checkedin>
+      <node-checkedin>Debe verificar primero.</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
 
@@ -411,7 +411,7 @@
   
   <UICategoryNavigationTargetPathPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>Selector Página</UIPageSelector>
     </title>
   </UICategoryNavigationTargetPathPopupWindow>
   
