@@ -17,14 +17,6 @@
  **************************************************************************/
 package org.exoplatform.ecm.webui.component.admin.templates.clv;
 
-import java.io.ByteArrayInputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-
-import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
-
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -48,6 +40,13 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
+
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * Created by The eXo Platform SARL
@@ -181,10 +180,10 @@ public class UICLVTemplateForm extends UIForm {
     public void execute(Event<UICLVTemplateForm> event) throws Exception {
       UICLVTemplateForm uiForm = event.getSource() ;
       UICLVTemplatesManager uiManager = uiForm.getAncestorOfType(UICLVTemplatesManager.class);
-      String title = uiForm.getUIStringInput(FIELD_TITLE).getValue();
-      String template = uiForm.getUIStringInput(FIELD_TEMPLATE_NAME).getValue();
+      String title = uiForm.getUIStringInput(FIELD_TITLE).getValue().trim();
+      String template = uiForm.getUIStringInput(FIELD_TEMPLATE_NAME).getValue().trim();
       String category = uiForm.getUIFormSelectBox(FIELD_CONTENT_TYPE).getValue();
-      String content = uiForm.getUIFormTextAreaInput(FIELD_CONTENT).getValue();
+      String content = uiForm.getUIFormTextAreaInput(FIELD_CONTENT).getValue().trim();
       if(uiForm.isAddNew & uiForm.hasTemplate(category, template)) {
         UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(new ApplicationMessage("UICLVTemplateForm.msg.template-existing", null, ApplicationMessage.WARNING));
