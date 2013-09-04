@@ -88,7 +88,7 @@
     <label>
       <workspaceName>Espacio de Trabajo</workspaceName>
       <rootNodePath>Ruta de Raíz</rootNodePath>
-      <rootNodeInfo>Root node</rootNodeInfo>
+      <rootNodeInfo>Nodo raíz</rootNodeInfo>
     </label>
   </UIWorkspaceList>
 
@@ -132,7 +132,7 @@
     </msg>
     <validator>
       <validator>Validator</validator>
-      <destPath>With Path</destPath>
+      <destPath>Con Ruta</destPath>
     </validator>
   </UIFCCActionForm>
 
