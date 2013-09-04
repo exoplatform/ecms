@@ -37,7 +37,7 @@
 	}
 	
 	.fileViewRowView {
-		border-bottom: 1px solid #dedede;
+		border-bottom: 1px solid @borderColor;
 		padding: 10px 0px;
 		
 		.nodeName {
@@ -55,9 +55,9 @@
 		}
 		
 		.fileInfoVersion {
-			background-color: darkgray;
+			background-color: @grayDark;
 			border-radius: 4px 4px 4px 4px;
-			color: white;
+			color: @white;
 			display: inline;
 			font-size: 9px;
 			font-weight: bold;
@@ -74,8 +74,8 @@
 	.uiListGrid .titleTable {
 		font-weight: lighter;
 		padding: 5px 0px;
-		background: #f8f8f8;
-    border-bottom: 1px solid #dedede;
+		background: @grayLighter;
+    border-bottom: 1px solid @borderColor;
     font-weight: normal;
 		height: auto;
 
@@ -109,7 +109,7 @@
 		
 		.btn-group .dropdown-menu .active a,
 		.btn-group .dropdown-menu .active a:hover	{
-			color: #fff;
+			color: @white;
 			
 			i {
 				background-image: url("/eXoResources/skin/images/Icons/uiIconsWhite.png");
@@ -136,7 +136,7 @@
 }
 
 .uiFileView .MoreButton {
-	color:#058ee6;
+	color: @blue;
 	font-weight:bold;
 	margin-right:20px;
 	text-decoration:underline;
@@ -149,8 +149,8 @@
 	z-index: 8;
 	
 	.uiFileViewActionBar {
-		background: #f0f0f0;
-		border: 1px solid #cfcfcf;
+		background: @grayWhiteSmoke;
+		border: 1px solid @borderColor;
 		.border-radius(3px 3px 0px 0px);
 		height: 36px;
 	
@@ -176,8 +176,8 @@
 				}
 				
 				> a:hover {
-					#gradient > .vertical(#ffffff, #e6e6e6);
-					border: 1px solid #c7c7c7;
+					#gradient > .vertical(@white, @grayMediumWhiteSmoke);
+					border: 1px solid @borderColor;
 					.border-radius(@borderRadiusSmall);
 					color: @grayDark;
 					padding: 4px 6px;
@@ -201,7 +201,7 @@
 			.open > a, .open > a:hover,.open > a:focus,.active > a, .active > a:hover,.active > a:focus {
 				background: none;
 				box-shadow: 0px 2px 6px rgba(0,0,0,0.15) inset;
-				border: 1px solid #c7c7c7;
+				border: 1px solid @borderColor;
 				.border-radius(@borderRadiusSmall);
 				color: @grayDark;
 			}
@@ -237,8 +237,8 @@
 					}
 					
 					a:hover {
-						#gradient > .vertical(@dropdownLinkBackgroundHover, darken(@dropdownLinkBackgroundHover, 15%));
-						color: #fff;
+						#gradient > .vertical(@blueLighter, darken(@blueLighter, 15%));
+						color: @white;
 						
 						> i {
 							background-image: url("/eXoWCMResources/skin/images/Icons/uiIconsEcmsWhite.png");
