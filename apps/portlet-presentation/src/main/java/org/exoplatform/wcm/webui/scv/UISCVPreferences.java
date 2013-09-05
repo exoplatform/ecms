@@ -4,13 +4,6 @@
  **************************************************************************/
 package org.exoplatform.wcm.webui.scv;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-import javax.portlet.PortletPreferences;
-
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -26,6 +19,7 @@ import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
@@ -37,6 +31,12 @@ import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTabPane;
 import org.exoplatform.webui.form.ext.UIFormInputSetWithAction;
 import org.exoplatform.webui.form.input.UICheckBoxInput;
+
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+import javax.portlet.PortletPreferences;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -52,6 +52,7 @@ import org.exoplatform.webui.form.input.UICheckBoxInput;
                    @EventConfig(listeners = UISCVPreferences.SaveActionListener.class),
                    @EventConfig(listeners = UISCVPreferences.AddPathActionListener.class, phase = Phase.DECODE),
                    @EventConfig(listeners = UISCVPreferences.CancelActionListener.class, phase = Phase.DECODE),
+	                 @EventConfig(listeners = UISCVPreferences.SelectTabActionListener.class, phase = Phase.DECODE),
                    @EventConfig(listeners = UISCVPreferences.SelectTargetPageActionListener.class, phase = Phase.DECODE)
                  }
     )
@@ -342,6 +343,31 @@ public class UISCVPreferences extends UIFormTabPane implements UISelectable{
   public String getSelectedNodeDrive() {
     return this.selectedNodeDrive;
   }
+
+	/**
+	 * The listener interface for receiving selectTabAction events.
+	 * The class that is interested in processing a selectTabAction
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addSelectTabActionListener<code> method. When
+	 * the selectTabAction event occurs, that object's appropriate
+	 * method is invoked.
+	 */
+	static public class SelectTabActionListener extends EventListener<UISCVPreferences> {
+
+		/* (non-Javadoc)
+ * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
+ */
+		public void execute(Event<UISCVPreferences> event) throws Exception {
+			WebuiRequestContext context = event.getRequestContext();
+			String renderTab = context.getRequestParameter(UIComponent.OBJECTID);
+			if (renderTab == null) {
+				return;
+			}
+			event.getSource().setSelectedTab(renderTab);
+			event.getRequestContext().addUIComponentToUpdateByAjax(event.getSource());
+		}
+	}
 
   public static class AddPathActionListener extends EventListener<UISCVPreferences> {
     public void execute(Event<UISCVPreferences> event) throws Exception {

@@ -16,17 +16,6 @@
  */
 package org.exoplatform.wcm.webui.clv;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.RepositoryException;
-import javax.portlet.PortletPreferences;
-
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -48,21 +37,23 @@ import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.form.UIFormInputSet;
-import org.exoplatform.webui.form.UIFormRadioBoxInput;
-import org.exoplatform.webui.form.UIFormSelectBox;
-import org.exoplatform.webui.form.UIFormStringInput;
-import org.exoplatform.webui.form.UIFormTabPane;
-import org.exoplatform.webui.form.UIFormTextAreaInput;
+import org.exoplatform.webui.form.*;
 import org.exoplatform.webui.form.ext.UIFormInputSetWithAction;
 import org.exoplatform.webui.form.input.UICheckBoxInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
 import org.exoplatform.webui.form.validator.PositiveNumberFormatValidator;
+
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
+import javax.portlet.PortletPreferences;
+import java.util.*;
 
 /*
  * Created by The eXo Platform SAS Author : Anh Do Ngoc anh.do@exoplatform.com
@@ -81,6 +72,7 @@ import org.exoplatform.webui.form.validator.PositiveNumberFormatValidator;
                    @EventConfig(listeners = UICLVConfig.IncreaseActionListener.class, phase = Phase.DECODE),
                    @EventConfig(listeners = UICLVConfig.DecreaseActionListener.class, phase = Phase.DECODE),
                    @EventConfig(listeners = UICLVConfig.SelectTargetPageActionListener.class, phase = Phase.DECODE),
+	                 @EventConfig(listeners = UICLVConfig.SelectTabActionListener.class, phase = Phase.DECODE),
                    @EventConfig(listeners = UICLVConfig.ShowAdvancedBlockActionListener.class, phase = Phase.DECODE)
                  }
     )
@@ -887,6 +879,31 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
       }
     }
   }
+
+	/**
+	 * The listener interface for receiving selectTabAction events.
+	 * The class that is interested in processing a selectTabAction
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addSelectTabActionListener<code> method. When
+	 * the selectTabAction event occurs, that object's appropriate
+	 * method is invoked.
+	 */
+	static public class SelectTabActionListener extends EventListener<UICLVConfig> {
+
+		/* (non-Javadoc)
+ * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
+ */
+		public void execute(Event<UICLVConfig> event) throws Exception {
+			WebuiRequestContext context = event.getRequestContext();
+			String renderTab = context.getRequestParameter(UIComponent.OBJECTID);
+			if (renderTab == null) {
+				return;
+			}
+			event.getSource().setSelectedTab(renderTab);
+			event.getRequestContext().addUIComponentToUpdateByAjax(event.getSource());
+		}
+	}
 
   /**
    * The listener interface for receiving selectFolderPathAction events.
