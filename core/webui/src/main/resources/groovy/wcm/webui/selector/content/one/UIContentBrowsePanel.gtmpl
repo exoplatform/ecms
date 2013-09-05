@@ -16,7 +16,7 @@
 	  jsManager.require("SHARED/content-selector", "selector").
     addScripts("selector.ECS.initRequestXmlTree('one');");
 %>
-<div id="$uicomponent.id" class="uiWCMSearchContainer resizable $uicomponent.id" style="height: 400px;" >
+<div id="$uicomponent.id" class="uiWCMSearchContainer resizable $uicomponent.id">
 	<div class="actionBar form-horizontal">
 		<div class="control-group">
 			<label class="control-label" for="Filter">Filter</label>
