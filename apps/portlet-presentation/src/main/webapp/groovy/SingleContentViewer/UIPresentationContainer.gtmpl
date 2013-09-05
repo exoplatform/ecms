@@ -126,7 +126,7 @@
                 %><div class="Title"><%= uicomponent.getTitle(node) %></div><%
   					  }else {
   					   def orgNode =uicomponent.getOriginalNode();    					  
-  					   %><div class="Title" propertyName="<%=propertyName%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" publishedmsg="<%=publishedMsg%>" draftmsg="<%=draftMsg%>" fastpublishlink="<%=uicomponent.event('FastPublish')%>" language="<%=language%>" contenteditable="true" ><%= uicomponent.getTitle(node) %></div><%             
+  					   %><div class="Title WCMInlineEditable" contenteditable="true" propertyName="<%=propertyName%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" publishedmsg="<%=publishedMsg%>" draftmsg="<%=draftMsg%>" fastpublishlink="<%=uicomponent.event('FastPublish')%>" language="<%=language%>" ><%= uicomponent.getTitle(node) %></div><%             
               }
             } %>
 						<% if (isShowDate) { %>

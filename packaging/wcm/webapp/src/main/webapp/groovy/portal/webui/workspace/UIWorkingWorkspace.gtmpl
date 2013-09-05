@@ -51,7 +51,11 @@
     <script type="text/javascript">
       require(['/CommonsResources/ckeditor/ckeditor.js'], function() {      
         CKEDITOR.config.toolbar = "InlineEdit";
-        CKEDITOR.inlineAll();
+        CKEDITOR.disableAutoInline = true;
+        var allElements = document.getElementsByClassName("WCMInlineEditable");
+        for(var i=0; i < allElements.length; i++) {
+          CKEDITOR.inline(allElements[i]);
+        }        
       });
     </script>
 <%
