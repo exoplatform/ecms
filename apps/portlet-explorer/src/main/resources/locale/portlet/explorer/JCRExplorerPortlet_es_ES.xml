@@ -888,7 +888,7 @@
       <shortcutPath>Path</shortcutPath>
       <type>Type</type>
       <dateCreated>Date Created</dateCreated>
-      <score>Score</score>
+      <score>Puntuación</score>
     </header>
     <title>
       <typeASC>Sort by document type in ascending order</typeASC>
@@ -1064,7 +1064,7 @@
   <UIConstraintForm>
     <tooltip>
       <AddMetadataType>Añadir propiedad</AddMetadataType>
-      <AddNodeType>Add Node Type</AddNodeType>
+      <AddNodeType>Añadir el tipo de nodo</AddNodeType>
       <AddCategory>Add Category</AddCategory>
       <FindExactly>Find Exactly</FindExactly>
     </tooltip>
@@ -1074,16 +1074,16 @@
       <exactlyPro-properties>Propiedad</exactlyPro-properties>
       <exactlyPro-ContainExactly>Contain Exactly</exactlyPro-ContainExactly>
       <containPro-properties>Property</containPro-properties>
-      <containPro-Contain>Contain</containPro-Contain>
+      <containPro-Contain>Contienen</containPro-Contain>
       <notContainPro-properties>Property</notContainPro-properties>
       <notContainPro-notContain>Not Contain</notContainPro-notContain>
       <ConstraintOption-From>De</ConstraintOption-From>
       <ConstraintOption-To>Para</ConstraintOption-To>
-      <DocumentType-label>Document Type</DocumentType-label>
+      <DocumentType-label>Tipo de documento</DocumentType-label>
       <Category-label>Category</Category-label>
-      <created>Created</created>
-      <modified>Modified</modified>
-      <and>And</and>
+      <created>Creado</created>
+      <modified>Modificado</modified>
+      <and>Y</and>
       <or>Or</or>
     </label>
   </UIConstraintForm>
@@ -1257,7 +1257,7 @@
     <label>
       <results>Results</results>
       <of-about>of about</of-about>
-      <of>of</of>
+      <of>de</of>
     </label>
   </UIQueryResultPageIterator>
   <!--
@@ -1374,7 +1374,7 @@
     <label>
       <note>Versioning has not been activated for this node.</note>
       <question>Are you sure you want to activate it?</question>
-      <button-active>Activate</button-active>
+      <button-active>Activar</button-active>
       <button-cancel>Cancel</button-cancel>
     </label>
     <msg>
@@ -1799,7 +1799,7 @@
     <msg>
       <path-not-found>Path not found.</path-not-found>
       <access-denied>Access denied. You do not have the right to read the node.</access-denied>
-      <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
+      <keyword-not-support>La palabra clave no es válida. Algunos caracteres no son compatibles.</keyword-not-support>
     </msg>
     <label>
       <exeButton>Go</exeButton>
@@ -1819,10 +1819,10 @@
   -->
   <UIWatchDocumentForm>
     <action>
-      <Watch>Watch</Watch>
+      <Watch>Vigilar</Watch>
       <Cancel>#{word.cancel}</Cancel>
       <Continue>Continue</Continue>
-      <Unwatch>Unwatch</Unwatch>
+      <Unwatch>No vigilar más</Unwatch>
     </action>
     <label>
       <notificationType>Notification Type:</notificationType>
@@ -1885,7 +1885,7 @@
   </UIViewMetadataForm>
   <metadataForm>
     <title>
-      <UIViewMetadataForm>Add/Edit Properties</UIViewMetadataForm>
+      <UIViewMetadataForm>Añadir/Editar Propiedades</UIViewMetadataForm>
     </title>
   </metadataForm>
   <UIViewMetadataTemplate>
@@ -1937,7 +1937,7 @@
     <msg>Access denied. You do not have permission to perform this action.</msg>
   </AccessControlException>
   <AccessDeniedException>
-    <msg>Access denied.</msg>
+    <msg>Acceso denegado.</msg>
   </AccessDeniedException>
   <ItemNotFoundException>
     <msg>Item not found. It may have been removed or changed.</msg>
@@ -2413,7 +2413,7 @@
   <UIImportNode>
     <label>
       <behavior>UUID Behavior</behavior>
-      <versionHistory>Version History</versionHistory>
+      <versionHistory>Historia de la versión</versionHistory>
     </label>
     <msg>
       <history-invalid-type>Invalid file type in the version history. Only .zip files are supported.</history-invalid-type>
@@ -2463,7 +2463,7 @@
   -->
   <UIActionBar>
     <obtion>
-      <Admin>Admin</Admin>
+      <Admin>Administrador</Admin>
       <Info>Info</Info>
       <Actions>Actions</Actions>
       <Collaboration>Collaboration</Collaboration>
@@ -2619,7 +2619,7 @@
        <Images>Image</Images>
        <Video>Video</Video>
        <Music>Music</Music>
-       <Documents>Document</Documents>
+       <Documents>Documento</Documents>
        <Content>Contenido</Content>
     </label>
   </DocumentType>
@@ -2960,8 +2960,8 @@
   <UIPublicationPanel>
     <label>
       <header>Publication Date</header>
-      <start>Start Publication</start>
-      <end>End Publication</end>
+      <start>Comenzar la publicación</start>
+      <end>Publicación final</end>
     </label>
     <msg>
       <invalid-format>The date format is invalid. Please check again.</invalid-format>
@@ -3046,25 +3046,25 @@
   <yes>Yes</yes>
   <true>Cierto</true>
   <false>Falso</false>
-  <Electronic>Electronic</Electronic>
+  <Electronic>Electrónico</Electronic>
   <Paper>Paper</Paper>
   <NONE>Ninguno</NONE>
-  <CLASSIFIED>Classified</CLASSIFIED>
+  <CLASSIFIED>Clasificado</CLASSIFIED>
   <UNCLASSIFIED>Unclassified</UNCLASSIFIED>
   <NOCONTRACT>No Contract</NOCONTRACT>
-  <one-minute>One Minute</one-minute>
+  <one-minute>Un Minuto</one-minute>
   <hourly>Por hora</hourly>
   <daily>Diario</daily>
-  <quarterly>Quarterly</quarterly>
+  <quarterly>Trimestral</quarterly>
   <yearly>Anualmente</yearly>
-  <ten-years>Ten Years</ten-years>
-  <read>User Action</read>
-  <schedule>Scheduler</schedule>
-  <node_added>Content Addition</node_added>
-  <node_removed>Content Removal</node_removed>
-  <property_added>Property Addition</property_added>
-  <property_removed>Property Removal</property_removed>
-  <property_changed>Property Modification</property_changed>
+  <ten-years>Diez Años</ten-years>
+  <read>Acción de Usuario</read>
+  <schedule>Planificador</schedule>
+  <node_added>Adición del Contenido</node_added>
+  <node_removed>Eliminación del Contenido</node_removed>
+  <property_added>Añadir Propiedades</property_added>
+  <property_removed>Eliminación de la propiedad</property_removed>
+  <property_changed>Modificación de Propiedades</property_changed>
 </label>
   </lifecyclePhase>
   <UIPopupMenu>
