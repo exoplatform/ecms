@@ -29,7 +29,7 @@
       <option>
         <exo:title>Titre</exo:title>
         <exo:dateCreated>Date de création</exo:dateCreated>
-        <exo:lastModifiedDate>Modified Date</exo:lastModifiedDate>
+        <exo:lastModifiedDate>Date de Modification</exo:lastModifiedDate>
         <publication:liveDate>Date de publication</publication:liveDate>
         <exo:startEvent>Date d'événement</exo:startEvent>
         <exo:index>Index</exo:index>
@@ -107,7 +107,7 @@
   <UICLVConfigItemPathFormInputSet>
     <title>
       <SelectFolderPath>Sélectionner le Dossier</SelectFolderPath>
-      <AddPath>Add Path</AddPath>
+      <AddPath>Ajouter un chemin</AddPath>
     </title>
   </UICLVConfigItemPathFormInputSet>
   <FolderPathSelectorPopupWindow>
