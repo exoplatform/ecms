@@ -31,12 +31,12 @@
         <name>Nombre</name>
         <title>Título</title>
         <ContentCSS>Datos CSS</ContentCSS>
-        <hintCSS>You can specify the main style sheet for your web content. This style will override the style sheets defined at the site level and at the shared level.</hintCSS>
+        <hintCSS>En este panel, puede especificar la hoja de estilo principal para su contenido web. Este estilo se superpondrá a la hoja de estilo a nivel del sitio y del nivel compartido.</hintCSS>
         <ContentJS>Datos JS</ContentJS>
-        <hintJS>You can specify some JavaScript codes that can be executed before your web content is rendered.</hintJS>
+        <hintJS>En este panel, puede especificar algunos códigos Java Script que pueden ser ejecutados antes que el contenido web sea reproducido.</hintJS>
         <WebContentHtml>Contenido principal</WebContentHtml>
         <Illustration>Ilustración</Illustration>
-        <hintIllustration>You can specify an image that will be shown when your web content is displayed in the list. You can also specify some summary texts to go with this image.</hintIllustration>
+        <hintIllustration>En este panel, puede especificar una imagen que será mostrada cuando el contenido web sea mostrado en las listas. Puede también especificar algunos textos resumidos para ir con esta imagen.</hintIllustration>
         <confirm-delete>¿Está seguro que desea eliminar esta ilustración?</confirm-delete>
         <illustrationImage>Imagen de la ilustración</illustrationImage>
         <imageMimeType>Tipo de imagen</imageMimeType>
