@@ -29,7 +29,7 @@
       <option>
         <exo:title>タイトル</exo:title>
         <exo:dateCreated>作成日</exo:dateCreated>
-        <exo:lastModifiedDate>Modified Date</exo:lastModifiedDate>
+        <exo:lastModifiedDate>変更日</exo:lastModifiedDate>
         <publication:liveDate>公開日</publication:liveDate>
         <exo:startEvent>イベント日</exo:startEvent>
         <exo:index>目次</exo:index>
@@ -107,7 +107,7 @@
   <UICLVConfigItemPathFormInputSet>
     <title>
       <SelectFolderPath>フォルダパスの選択</SelectFolderPath>
-      <AddPath>Add Path</AddPath>
+      <AddPath>パスの追加</AddPath>
     </title>
   </UICLVConfigItemPathFormInputSet>
   <FolderPathSelectorPopupWindow>
