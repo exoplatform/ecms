@@ -90,7 +90,7 @@
   <UISCVConfigItemPathFormInputSet>
   	<title>
   		<SelectFolderPath>Choisissez un dossier</SelectFolderPath>
-      <AddPath>Add Path</AddPath>
+      <AddPath>Ajouter un chemin</AddPath>
   	</title>  	
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
