@@ -90,7 +90,7 @@
   <UISCVConfigItemPathFormInputSet>
     <title>
       <SelectFolderPath>フォルダパスの選択</SelectFolderPath>
-      <AddPath>Add Path</AddPath>
+      <AddPath>パスの追加</AddPath>
     </title>
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
