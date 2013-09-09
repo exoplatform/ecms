@@ -130,6 +130,7 @@
           <name>namespaces</name>
           <property name="ecd" value="http://www.exoplatform.com/jcr/clouddrive/1.0/"/>
           <property name="gdrive" value="http://www.exoplatform.com/jcr/googledrive/1.0/"/>
+          <property name="box" value="http://www.exoplatform.com/jcr/boxplatform/1.0/"/>
         </properties-param>
       </init-params>
     </component-plugin>
