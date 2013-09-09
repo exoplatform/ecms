@@ -122,6 +122,21 @@
         </properties-param>
       </init-params>
     </component-plugin>
+    <component-plugin>
+      <name>add.clouddriveprovider</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.clouddrive.exodrive.BoxConnector</type>
+      <init-params>
+        <properties-param>
+          <name>drive-configuration</name>
+          <property name="provider-id" value="box"/>
+          <property name="provider-name" value="Box File Storage"/>
+          <property name="provider-client-id" value="${clouddrive.box.client.id}"/>
+          <property name="provider-client-secret" value="${clouddrive.box.client.secret}"/>
+          <property name="connector-host" value="${clouddrive.service.host}"/>
+        </properties-param>
+      </init-params>
+    </component-plugin>
   </external-component-plugins>
 
   <import>classpath:/conf/portal/test-jcr-configuration.xml</import>

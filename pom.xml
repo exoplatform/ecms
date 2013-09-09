@@ -103,6 +103,14 @@
       <scope>compile</scope>
       <type>jar</type>
     </dependency>
+    
+    <!-- Box API -->
+    <dependency>
+      <groupId>com.box.boxjavalibv2</groupId>
+      <artifactId>BoxJavaLibraryV2</artifactId>
+      <scope>compile</scope>
+      <type>jar</type>
+    </dependency>
 
     <!-- Others third party -->
     <dependency>
