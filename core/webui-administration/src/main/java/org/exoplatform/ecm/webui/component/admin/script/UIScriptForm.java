@@ -16,14 +16,6 @@
  */
 package org.exoplatform.ecm.webui.component.admin.script;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.jcr.AccessDeniedException;
-import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.version.VersionHistory;
-
 import org.exoplatform.ecm.jcr.model.VersionNode;
 import org.exoplatform.ecm.webui.component.admin.script.UIScriptList.ScriptData;
 import org.exoplatform.ecm.webui.form.validator.XSSValidator;
@@ -51,6 +43,13 @@ import org.exoplatform.webui.form.UIFormTextAreaInput;
 import org.exoplatform.webui.form.input.UICheckBoxInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
 import org.exoplatform.webui.form.validator.NameValidator;
+
+import javax.jcr.AccessDeniedException;
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.version.VersionHistory;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by The eXo Platform SARL
@@ -188,19 +187,10 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
       UIScriptForm uiForm = event.getSource() ;
       ScriptService scriptService = uiForm.getApplicationComponent(ScriptService.class) ;
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
-      StringBuffer name = new StringBuffer();
+      StringBuilder name = new StringBuilder();
       name.append(uiForm.getUIStringInput(FIELD_SCRIPT_NAME).getValue().trim());
-      String content = uiForm.getUIFormTextAreaInput(FIELD_SCRIPT_CONTENT).getValue() ;
-      String label = uiForm.getUIStringInput(FIELD_SCRIPT_LABEL).getValue().trim();
-      if (content == null)
-        content = "";
-      if (name == null || name.toString().trim().length() == 0) {
-        uiApp.addMessage(new ApplicationMessage("UIScriptForm.msg.name-null",
-                                                null,
-                                                ApplicationMessage.WARNING));
-
-        return;
-      }
+      String content = uiForm.getUIFormTextAreaInput(FIELD_SCRIPT_CONTENT).getValue().trim();
+      String label = uiForm.getUIStringInput(FIELD_SCRIPT_LABEL).getValue();
       String[] arrFilterChar = {"&", "$", "@", ":","]", "'", "[", "*", "%", "!", "\""};
       for(String filterChar : arrFilterChar) {
         if(name.indexOf(filterChar) > -1) {
@@ -213,20 +203,20 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
       if (name.indexOf(SCRIPT_FILE_TYPE) < 0) {
         name.append(SCRIPT_FILE_TYPE);
       }
-      UIScriptList curentList = null ;
+      UIScriptList currentList = null ;
       UIScriptManager uiManager = uiForm.getAncestorOfType(UIScriptManager.class) ;
       List<String> listScript = new ArrayList<String>() ;
-      List<ScriptData> scriptDatas = new ArrayList<ScriptData>() ;
+      List<ScriptData> scriptData = new ArrayList<ScriptData>() ;
       String namePrefix = null ;
       
       UIScriptContainer uiContainer = uiManager.getChildById(uiManager.getSelectedTabId());
-      curentList = uiContainer.getChild(UIScriptList.class);
-      namePrefix = curentList.getScriptCategory() ;
+      currentList = uiContainer.getChild(UIScriptList.class);
+      namePrefix = currentList.getScriptCategory() ;
       String subNamePrefix = namePrefix.substring(namePrefix.lastIndexOf("/") + 1, namePrefix.length()) ;
-      scriptDatas = curentList.getcript(subNamePrefix) ;
+      scriptData = currentList.getScript(subNamePrefix) ;
         
         
-      for(ScriptData data : scriptDatas) {
+      for(ScriptData data : scriptData) {
         listScript.add(data.getName()) ;
       }
       if(listScript.contains(name.toString()) && uiForm.isAddNew_) {
@@ -238,6 +228,8 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
         return ;
       }
       boolean isEnableVersioning = uiForm.getUICheckBoxInput(FIELD_ENABLE_VERSION).isChecked() ;
+	    if(label == null) label = name.toString();
+	    else label = label.trim();
       if(uiForm.isAddNew_ || !isEnableVersioning) {
         try {
           scriptService.addScript(namePrefix + "/" + name, label, content, WCMCoreUtils.getUserSessionProvider());
@@ -249,7 +241,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
         }
       } else {
         try {
-          Node node = curentList.getScriptNode(curentList.getTemplateFilter(), name.toString()) ;
+          Node node = currentList.getScriptNode(currentList.getTemplateFilter(), name.toString()) ;
           if(!node.isNodeType(Utils.MIX_VERSIONABLE)) node.addMixin(Utils.MIX_VERSIONABLE) ;
           else node.checkout() ;
           scriptService.addScript(namePrefix + "/" + name, label, content, WCMCoreUtils.getUserSessionProvider());
@@ -266,8 +258,8 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
       uiForm.reset() ;      
       UIPopupWindow uiPopup = uiManager.getChild(UIPopupWindow.class);
       uiPopup.setRendered(false);
-      event.getRequestContext().addUIComponentToUpdateByAjax(curentList) ;
-      curentList.refresh(curentList.getTemplateFilter(),1) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(currentList) ;
+      currentList.refresh(currentList.getTemplateFilter(),1) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
@@ -276,18 +268,17 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
     public void execute(Event<UIScriptForm> event) throws Exception {    
       UIScriptForm uiForm = event.getSource();
       String name = uiForm.getUIStringInput(FIELD_SCRIPT_NAME).getValue() ;
-      UIScriptList uiScriptList = null ;
-      UIScriptManager uiManager = uiForm.getAncestorOfType(UIScriptManager.class) ;    
+      UIScriptManager uiManager = uiForm.getAncestorOfType(UIScriptManager.class) ;
       UIScriptContainer uiContainer = uiManager.getChildById(uiManager.getSelectedTabId());
-      uiScriptList = uiContainer.getChild(UIScriptList.class);
+	    UIScriptList uiScriptList = uiContainer.getChild(UIScriptList.class);
           
       try {
         Node node = uiScriptList.getScriptNode(uiScriptList.getTemplateFilter(), name);
-        String vesion = uiForm.getUIFormSelectBox(FIELD_SELECT_VERSION).getValue();
-        String baseVesion = node.getBaseVersion().getName() ;
-        if(!vesion.equals(baseVesion)) {
+        String version = uiForm.getUIFormSelectBox(FIELD_SELECT_VERSION).getValue();
+        String baseVersion = node.getBaseVersion().getName() ;
+        if(!version.equals(baseVersion)) {
           node.checkout() ;
-          node.restore(vesion, true) ;
+          node.restore(version, true) ;
           uiScriptList.refresh(uiScriptList.getTemplateFilter(), 1) ;
         }  
         UIPopupWindow uiPopup = uiManager.getChild(UIPopupWindow.class);
@@ -304,7 +295,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
   static public class RefreshActionListener extends EventListener<UIScriptForm> {
     public void execute(Event<UIScriptForm> event) throws Exception {
       UIScriptForm uiForm = event.getSource() ;
-      String sciptName = uiForm.getUIStringInput(UIScriptForm.FIELD_SCRIPT_NAME).getValue() ;
+      String scriptName = uiForm.getUIStringInput(UIScriptForm.FIELD_SCRIPT_NAME).getValue() ;
       if(uiForm.isAddNew_) {
         uiForm.update(null, true) ;
       } else {
@@ -312,7 +303,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
         UIScriptContainer uiScriptContainer = uiScriptManager.getChildById(uiScriptManager.getSelectedTabId());
         UIScriptList uiScriptList = uiScriptContainer.getChild(UIScriptList.class);        
         try {
-          Node script = uiScriptList.getScriptNode(uiScriptList.getTemplateFilter(), sciptName) ;
+          Node script = uiScriptList.getScriptNode(uiScriptList.getTemplateFilter(), scriptName) ;
           uiForm.update(script, false) ;
         } catch (PathNotFoundException pathNotFoundException) {
           String namePrefix = uiScriptList.getScriptCategory();
