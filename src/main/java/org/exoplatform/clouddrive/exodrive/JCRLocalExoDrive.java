@@ -394,7 +394,7 @@ public class JCRLocalExoDrive extends JCRLocalCloudDrive {
    * {@inheritDoc}
    */
   @Override
-  protected void updateAccessKey(CloudUser user) throws CloudDriveException {
+  protected void updateAccess(CloudUser user) throws CloudDriveException {
   }
 
   /**

@@ -517,13 +517,13 @@ public abstract class CloudDrive {
   protected abstract void checkAccess() throws CloudDriveException;
 
   /**
-   * Renew access key using given user credentials.
+   * Renew access using given user credentials.
    * 
    * @param user {@link CloudUser}
    * @throws CloudDriveException if drive node was removed or cloud provider error
    * @throws RepositoryException if storage error
    */
-  protected abstract void updateAccessKey(CloudUser user) throws CloudDriveException, RepositoryException;
+  protected abstract void updateAccess(CloudUser user) throws CloudDriveException, RepositoryException;
 
   /**
    * Used internally for logger messages.

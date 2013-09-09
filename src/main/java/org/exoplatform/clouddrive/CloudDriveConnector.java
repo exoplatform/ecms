@@ -54,6 +54,16 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
 
   public static final String             CONFIG_CONNECTOR_HOST            = "connector-host";
 
+  /**
+   * OAuth2 client id.
+   */
+  public static final String CONFIG_PROVIDER_CLIENT_ID     = "provider-client-id";
+
+  /**
+   * OAuth2 client secret.
+   */
+  public static final String CONFIG_PROVIDER_CLIENT_SECRET = "provider-client-secret";
+
   // CLDINT-1051 increased from 3 to 5
   public static final int                PROVIDER_REQUEST_ATTEMPTS        = 5; 
 
@@ -150,6 +160,14 @@ public abstract class CloudDriveConnector extends BaseComponentPlugin {
 
   protected String getProviderId() {
     return config.get(CONFIG_PROVIDER_ID);
+  }
+  
+  protected String getClientId() {
+    return config.get(CONFIG_PROVIDER_CLIENT_ID);
+  }
+  
+  protected  String getClientSecret() {
+    return config.get(CONFIG_PROVIDER_CLIENT_SECRET);
   }
 
   /**

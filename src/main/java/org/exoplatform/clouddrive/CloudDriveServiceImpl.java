@@ -251,7 +251,7 @@ public class CloudDriveServiceImpl implements CloudDriveService, Startable {
               // it's the same user, this could happen if the access was revoked and user want to get this
               // access again, thus we update access key from this new user instance.
               // XXX this usecase based on GoogleDrive workflow and can be changed
-              local.updateAccessKey(user);
+              local.updateAccess(user);
             } // else, local not null but not connected, just return it to the user
             return local;
           } else {

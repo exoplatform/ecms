@@ -239,15 +239,6 @@ class GoogleDriveAPI {
         available += hasNextPage() ? Math.round(newValue * 1.25f) : newValue;
         fetched = newFetched;
       }
-
-      // TODO cleanup
-      // if (available == 0) {
-      // available = newValue;
-      // } else {
-      // int newFetched = available;
-      // available += newValue;
-      // fetched = newFetched;
-      // }
     }
   }
 
@@ -365,8 +356,6 @@ class GoogleDriveAPI {
    */
   protected final Credential credential;
 
-  // protected Userinfo userInfo;
-
   /**
    * Drive services API.
    */
@@ -433,7 +422,7 @@ class GoogleDriveAPI {
                                                       new UserCredentialStore(userId,
                                                                               accessToken,
                                                                               refreshToken,
-                                                                              expirationTime));
+                                                                              expirationTime)); 
 
     try {
       this.credential = authFlow.loadCredential(userId);

@@ -16,6 +16,25 @@
  */
 package org.exoplatform.clouddrive.jcr;
 
+import com.ibm.icu.text.Transliterator;
+
+import org.exoplatform.clouddrive.CloudDrive;
+import org.exoplatform.clouddrive.CloudDriveAccessException;
+import org.exoplatform.clouddrive.CloudDriveConnector;
+import org.exoplatform.clouddrive.CloudDriveEvent;
+import org.exoplatform.clouddrive.CloudDriveException;
+import org.exoplatform.clouddrive.CloudFile;
+import org.exoplatform.clouddrive.CloudProviderException;
+import org.exoplatform.clouddrive.CloudUser;
+import org.exoplatform.clouddrive.DriveRemovedException;
+import org.exoplatform.clouddrive.NotCloudFileException;
+import org.exoplatform.clouddrive.NotConnectedException;
+import org.exoplatform.clouddrive.SyncNotSupportedException;
+import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.security.ConversationState;
+
 import java.lang.ref.SoftReference;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -23,13 +42,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Queue;
-import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import javax.jcr.AccessDeniedException;
@@ -52,25 +69,6 @@ import javax.jcr.observation.Event;
 import javax.jcr.observation.EventIterator;
 import javax.jcr.observation.EventListener;
 import javax.jcr.observation.ObservationManager;
-
-import org.exoplatform.clouddrive.CloudDrive;
-import org.exoplatform.clouddrive.CloudDriveAccessException;
-import org.exoplatform.clouddrive.CloudDriveConnector;
-import org.exoplatform.clouddrive.CloudDriveEvent;
-import org.exoplatform.clouddrive.CloudDriveException;
-import org.exoplatform.clouddrive.CloudFile;
-import org.exoplatform.clouddrive.CloudProviderException;
-import org.exoplatform.clouddrive.CloudUser;
-import org.exoplatform.clouddrive.DriveRemovedException;
-import org.exoplatform.clouddrive.NotCloudFileException;
-import org.exoplatform.clouddrive.NotConnectedException;
-import org.exoplatform.clouddrive.SyncNotSupportedException;
-import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.app.SessionProviderService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.security.ConversationState;
-
-import com.ibm.icu.text.Transliterator;
 
 /**
  * JCR storage for local cloud drive. Created by The eXo Platform SAS
@@ -887,11 +885,6 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
     protected Map<String, List<Node>> nodes;
 
     /**
-     * Existing files being synchronized with cloud.
-     */
-    protected final Set<Node>         synced = new HashSet<Node>();
-
-    /**
      * Constructor for synchronization command.
      * 
      * @throws RepositoryException
@@ -944,7 +937,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       List<Node> rootList = new ArrayList<Node>();
       rootList.add(driveRoot);
       nodes.put(rootId, rootList);
-      readNodes(driveRoot, nodes);
+      readNodes(driveRoot, nodes, true);
 
       this.nodes = nodes;
     }
@@ -1805,12 +1798,17 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
   }
 
   /**
-   * Read all local nodes of the drive mapped by fileId.
+   * Read local nodes from the drive folder to a map by file Id. It's possible that for a single Id we have
+   * several files (in different parents usually). This can be possible when Cloud Drive provider supports
+   * linking or tagging/labeling where tag/label is a folder (e.g. Google Drive).
    * 
-   * @return Map with all nodes of the drive.
+   * @param parent {@link Node}
+   * @param nodes {@link Map} of {@link List} objects to fill with the parent's child nodes
+   * @param deep boolean, if <code>true</code> read nodes recursive, <code>false</code> read only direct
+   *          child nodes.
    * @throws RepositoryException if JCR error happen
    */
-  protected void readNodes(Node parent, Map<String, List<Node>> nodes) throws RepositoryException {
+  protected void readNodes(Node parent, Map<String, List<Node>> nodes, boolean deep) throws RepositoryException {
     // TODO do we need caching of nodes?
     for (NodeIterator niter = parent.getNodes(); niter.hasNext();) {
       Node cn = niter.nextNode();
@@ -1822,8 +1820,8 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
           nodes.put(cnid, nodeList);
         }
         nodeList.add(cn);
-        if (cn.isNodeType(ECD_CLOUDFOLDER)) {
-          readNodes(cn, nodes);
+        if (deep && cn.isNodeType(ECD_CLOUDFOLDER)) {
+          readNodes(cn, nodes, deep);
         }
       } else {
         LOG.warn("Not a cloud file detected " + cn.getPath());
@@ -2007,7 +2005,7 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
         }
       }
     }
-    return cleanedStr.toString().trim(); // finally trim also 
+    return cleanedStr.toString().trim(); // finally trim also
   }
 
   /**

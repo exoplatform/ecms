@@ -16,16 +16,12 @@
  */
 package org.exoplatform.clouddrive.googledrive;
 
-import java.io.IOException;
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Iterator;
-import java.util.List;
-
-import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.RepositoryException;
+import com.google.api.client.util.DateTime;
+import com.google.api.services.drive.model.About;
+import com.google.api.services.drive.model.Change;
+import com.google.api.services.drive.model.ChildReference;
+import com.google.api.services.drive.model.File;
+import com.google.api.services.drive.model.ParentReference;
 
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudFile;
@@ -39,12 +35,18 @@ import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudFile;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 
-import com.google.api.client.util.DateTime;
-import com.google.api.services.drive.model.About;
-import com.google.api.services.drive.model.Change;
-import com.google.api.services.drive.model.ChildReference;
-import com.google.api.services.drive.model.File;
-import com.google.api.services.drive.model.ParentReference;
+import java.io.IOException;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
 
 /**
  * JCR local storage for Google Drive. Created by The eXo Platform SAS.
@@ -62,12 +64,12 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
     /**
      * Google Drive service API.
      */
-    protected final GoogleDriveAPI api;
+    final GoogleDriveAPI api;
 
     /**
      * Actually open child iterators. Used for progress indicator.
      */
-    List<ChildIterator>            iterators = new ArrayList<GoogleDriveAPI.ChildIterator>();
+    final List<ChildIterator>            iterators = new ArrayList<GoogleDriveAPI.ChildIterator>();
 
     /**
      * Create connect to Google Drive command.
@@ -201,7 +203,12 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
     /**
      * Google Drive service API.
      */
-    protected final GoogleDriveAPI api;
+    final GoogleDriveAPI api;
+
+    /**
+     * Existing files being synchronized with cloud.
+     */
+    final Set<Node>      synced = new HashSet<Node>();
 
     ChangesIterator                changes;
 
@@ -554,7 +561,7 @@ public class JCRLocalGoogleDrive extends JCRLocalCloudDrive {
    * {@inheritDoc}
    */
   @Override
-  protected void updateAccessKey(CloudUser newUser) throws CloudDriveException, RepositoryException {
+  protected void updateAccess(CloudUser newUser) throws CloudDriveException, RepositoryException {
     GoogleDriveAPI api = getUser().api();
     api.updateToken(((GoogleUser) newUser).api());
 

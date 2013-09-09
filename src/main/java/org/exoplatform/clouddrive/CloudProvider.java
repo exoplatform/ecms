@@ -17,7 +17,9 @@
 package org.exoplatform.clouddrive;
 
 /**
- * Created by The eXo Platform SAS
+ * Cloud Drive provider entity.
+ * 
+ * Created by The eXo Platform SAS.
  * 
  * @author <a href="mailto:pnedonosko@exoplatform.com">Peter Nedonosko</a>
  * @version $Id: CloudProvider.java 00000 Oct 4, 2012 pnedonosko $

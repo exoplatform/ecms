@@ -51,15 +51,4 @@ public class GoogleUser extends CloudUser {
   GoogleDriveAPI api() {
     return api;
   }
-  
-  // TODO cleanup
-  @Deprecated
-  String getLargestChangeId() {
-    throw new IllegalArgumentException();
-  }
-  
-  @Deprecated
-  void setLargestChangeId(String ch) {
-    throw new IllegalArgumentException(); 
-  }
 }
