@@ -40,9 +40,10 @@
 	  def imageURI = org.exoplatform.services.wcm.utils.WCMCoreUtils.generateImageURI(currentNode,"exo:image");
 		String imageWidth = getRimOfImage("exo:imageWidth", currentNode);
 		String imageHeight = getRimOfImage("exo:imageHeight", currentNode);
+		
 		%>
 			<div style="padding: 10px;" class="clearfix viewDetail" >
-				<div class="pull-left introImage" style="margin: 0 10px 10px 0"><img alt="$imageURI" src="$imageURI" width="<%=imageWidth%>" height="<%=imageHeight%>"/></div>
+				<div class="pull-left introImage" style="margin: 0 10px 10px 0; width:$imageWidth; height:$imageHeight"><img alt="$imageURI"  src="$imageURI" /></div>
 		<%
 	}
 	if((css != null) && (css.length() > 0)) {
