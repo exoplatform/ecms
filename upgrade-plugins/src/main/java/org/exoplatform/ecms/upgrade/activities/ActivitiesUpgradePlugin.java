@@ -48,12 +48,12 @@ public class ActivitiesUpgradePlugin extends UpgradeProductPlugin {
         Node viewNode = nodeIter.nextNode();
         Node paramsNode = viewNode.getNode("soc:params");
         String workspace = paramsNode.getProperty("workspace").getString();        
-        String nodeUrl = viewNode.getProperty("soc:url").getString();
         String nodeUUID = paramsNode.getProperty("id").getString();
-        Session session2 = sessionProvider.getSession(workspace,
+	      Session session2 = sessionProvider.getSession(workspace,
             repoService_.getCurrentRepository());
-        try{
-	        Node node = (Node)session2.getItem(nodeUrl);
+	      try{
+		      String nodeUrl = viewNode.getProperty("soc:url").getString();
+		      Node node = (Node)session2.getItem(nodeUrl);
 	        if(node.isNodeType(NodetypeConstant.NT_FILE)) {
 	        	viewNode.setProperty("soc:type", "files:spaces");
 	        }
