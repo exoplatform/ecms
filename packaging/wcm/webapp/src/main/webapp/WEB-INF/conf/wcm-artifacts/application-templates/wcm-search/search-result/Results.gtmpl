@@ -30,7 +30,6 @@
   def resultType = uicomponent.getResultType();
   def rcontext = _ctx.getRequestContext() ;
 	def jsManager = rcontext.getJavascriptManager();
-//	jsManager.importJavascript('eXo.wcm.frontoffice.public.Search', '/eXoWCMResources/javascript/');
 	jsManager.require("SHARED/wcm-search", "search").
 	addScripts("search.SearchPortlet.scrollToBottom('${uicomponent.id}');").
 	addScripts("search.SearchPortlet.changeColor('NewResultData');");
@@ -109,10 +108,13 @@
      def itemExcerpt = resultNode.getExcerpt();
      String description = resultNode.getDescription();
      def itemScore = resultNode.getScore();
+     PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
+     String requestURL = portalRequestContext.getRequest().getRequestURL().toString();
+     
      %>
       <div class="SearchItem">
        <div class="ItemTitle">
-        <a href="$itemUrl">$itemName</a>
+       <a href="$itemUrl&urlSearch=$requestURL">$itemName</a>
        </div>
        <%if(itemExcerpt != null && itemExcerpt.trim().length() > 0){%>
        		<div class="ItemExcerpt" style="font-weight:bold;"><%=_ctx.appRes("UIDefaultSearchResult.label.editor")%>: $editor</div>
@@ -139,7 +141,7 @@
               %>
                <div class="SearchItem">
                 <div class="ItemTitle">
-                 <a href="$itemUrl">$itemName</a>
+                <a href="$itemUrl&urlSearch=$requestURL">$itemName</a>
                 </div>
                 <%if(itemExcerpt != null && itemExcerpt.trim().length() > 0){%>
                 		<div class="ItemExcerpt"  style="font-weight:bold;"><%=_ctx.appRes("UIDefaultSearchResult.label.editor")%>: <%=itemExcerpt%></div>

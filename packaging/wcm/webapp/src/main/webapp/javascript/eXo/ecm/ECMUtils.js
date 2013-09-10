@@ -530,7 +530,8 @@
 		  if (Self.uiResizeSideBar) gj(Self.uiResizeSideBar).addClass("resizeBarDisplay");
 		  eXo.ecm.ECMUtils.resizableBlockWidth = resizableBlock.offsetWidth;
 		  eXo.ecm.ECMUtils.currentWidth = Self.uiLeftContainer.offsetWidth;
-		  var title = gj(Self.uiLeftContainer).find("h5.title:first")[0];
+		  var title = gj(Self.uiLeftContainer).find("h5.title:first")[0] ||
+		  			  gj(Self.uiLeftContainer).find("h6.title:first")[0];
 		  eXo.ecm.ECMUtils.currentTitleWidth = title.offsetWidth;
 		  window.clearTimeout(window.UIBrokenCheckingHandler);
 		  if (Self.uiLeftContainer.style.display == '' || Self.uiLeftContainer.style.display == 'block') {

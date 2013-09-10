@@ -30,7 +30,7 @@
 	
 	.uiSelectContent {
 		background: @grayWhiteSmoke;
-		border-top: 1px solid #c1c1c1;
+		border-top: 1px solid @borderColor;
 		height: 30px;
 		line-height: 16px;
 		padding: 0px 3px;
@@ -58,8 +58,8 @@
 			.size(23px,14px);
 			background: @white;
 			float: left;
-			border-left: 1px solid #c1c1c1;
-			border-right: 1px solid #c1c1c1;
+			border-left: 1px solid @borderColor;
+			border-right: 1px solid @borderColor;
 			margin-top: -1px;
 			
 			[class^="uiIconEcms"] {
@@ -134,8 +134,8 @@
 .uiSideBar  {
 
 	.ListExtendedItem {
-			background: none repeat scroll 0 0 #F7F7F7;
-			border: 1px solid #B7B7B7;
+			background: none repeat scroll 0 0 @grayLighter;
+			border: 1px solid @borderColor;
 			padding: 5px;
 			position: absolute;
 	}
@@ -178,7 +178,7 @@
 /*############################## -- uiViewRelationList   -- ##############################*/
 .uiViewRelationList {
 	.frameContent {
-		color: #999;
+		color: @grayLight;
 		a {
 			color: @grayDark;
 			&:hover {

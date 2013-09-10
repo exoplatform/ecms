@@ -100,7 +100,7 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
       String queryText = StringUtils.replace(SQL_QUERY, "$0", path) ;
       if ("/".equals(path)) queryText = ROOT_SQL_QUERY  ;
       getUIStringInput(FIELD_NAME).setValue(null) ;
-      getUIStringInput(FIELD_NAME).setEditable(true) ;
+      getUIStringInput(FIELD_NAME).setReadOnly(false) ;
       getUIFormSelectBox(FIELD_SELECT_BOX).setOnChange(CHANGE_OPTION) ;
       getUIFormSelectBox(FIELD_SELECT_BOX).setValue("sql") ;
       getUIFormTextAreaInput(FIELD_QUERY).setValue(queryText) ;
@@ -109,7 +109,7 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
       queryPath_ = storedPath ;
       storedPath = storedPath.substring(storedPath.lastIndexOf("/") + 1, storedPath.length()) ;
       getUIStringInput(FIELD_NAME).setValue(storedPath) ;
-      getUIStringInput(FIELD_NAME).setEditable(false) ;
+      getUIStringInput(FIELD_NAME).setReadOnly(true);
       getUIFormSelectBox(FIELD_SELECT_BOX).setOnChange(CHANGE_OPTION) ;
       getUIFormSelectBox(FIELD_SELECT_BOX).setValue(query.getLanguage()) ;
       getUIFormTextAreaInput(FIELD_QUERY).setValue(query.getStatement()) ;
@@ -138,7 +138,7 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
       UIJCRAdvancedSearch uiJAdvancedSearch = event.getSource() ;
       if(uiJAdvancedSearch.isEdit_) {
         UIPopupWindow uiPopup = uiJAdvancedSearch.getParent() ;
-        uiPopup.setShow(false) ;  
+        uiPopup.setShow(false) ;
         uiPopup.setRendered(false) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiJAdvancedSearch.getParent()) ;
       } else {

@@ -40,7 +40,7 @@
 		var uiDocumentForm = document.getElementById("UIDocumentForm");
 		var uiAction = gj(uiDocumentForm).find("div.UIAction:first")[0];
 		var fullscreenDiv = gj(uiAction).find("a.MaximizeScreen20x20Icon:first")[0];
-		var changeTypeLink = gj(uiAction).find("a.ChangeTypeLink:first")[0];
+		var changeTypeLink = gj(uiAction).find("a.changeTypeLink:first")[0];
 	
 		if (!fullscreenDiv) {
 			fullscreenDiv = gj(uiAction).find("a.MinimizeScreen20x20Icon:first")[0];
@@ -68,7 +68,7 @@
 		var uiDocumentWorkspace = document.getElementById('UIDocumentWorkspace');
 		var uiDocumentForm = document.getElementById("UIDocumentForm");
 		var uiAction = gj(uiDocumentForm).find("div.UIAction:first")[0];
-		var changeTypeLink = gj(uiAction).find("a.ChangeTypeLink:first")[0];	
+		var changeTypeLink = gj(uiAction).find("a.changeTypeLink:first")[0];	
 
 		if (!eXo.webui.UIDocForm.horizontalForm) {	
 			eXo.webui.UIDocForm.horizontalForm = gj(uiDocumentForm).find("div.form-horizontal:first")[0];

@@ -26,15 +26,15 @@
 			%>
 		  <div class="TopBoxHeader ClearFix">
 				<%	
-			  if (isShowHeader) {
+			  if (isShowHeader || isShowRssLink) {
 					%>
 						<div class="TitleBarL">
 							<div class="TitleBarR">
                 <div class="TitleBarM">
                   <%if (isShowRssLink) {
                     %><a class="RssIcon" onclick="javascript:window.open('$rssLink');" style="cursor:pointer" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVPresentation.label.rssFeed") %>">&nbsp;</a><%
-                  }%>
-                  $header                  
+                  }
+                  if(isShowHeader) {%> $header <%}%>                  
                 </div>
 							</div>
 						</div>

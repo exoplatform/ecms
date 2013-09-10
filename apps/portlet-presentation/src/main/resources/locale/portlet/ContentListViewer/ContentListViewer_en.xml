@@ -29,7 +29,7 @@
       <option>
         <exo:title>Title</exo:title>
         <exo:dateCreated>Created Date</exo:dateCreated>
-        <exo:dateModified>Modified Date</exo:dateModified>
+        <exo:lastModifiedDate>Modified Date</exo:lastModifiedDate>
         <publication:liveDate>Published Date</publication:liveDate>
         <exo:startEvent>Event Date</exo:startEvent>
         <exo:index>Index</exo:index>
@@ -135,6 +135,10 @@
     </title>
   </UICLVBasePathPopupWindow>
   <UICLVPresentation>
+    <msg>
+      <confirm-delete>Are you sure you want to delete this content?</confirm-delete>
+      <delete-content-successfull>Delete content successfully.</delete-content-successfull>
+    </msg>
     <label>
       <readmore>Read more</readmore>
       <rssFeed>RSS Feed</rssFeed>

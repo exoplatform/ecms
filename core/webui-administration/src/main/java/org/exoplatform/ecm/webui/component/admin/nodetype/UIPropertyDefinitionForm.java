@@ -32,10 +32,10 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 
 /**
  * Created by The eXo Platform SARL
@@ -156,14 +156,14 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
     protectedItem.add(new SelectItemOption<String>(TRUE, TRUE));
 
     getUIFormSelectBox(NAMESPACE).setOptions(getNamespaces()).setDisabled(false);
-    getUIStringInput(DEFINITION_NAME).setEditable(true).setValue(null);
+    getUIStringInput(DEFINITION_NAME).setReadOnly(false).setValue(null);
     getUIFormSelectBox(REQUIRED_TYPE).setOptions(getRequiredTypes()).setDisabled(false);
     getUIFormSelectBox(AUTOCREATED).setOptions(autoListItem).setDisabled(false);
     getUIFormSelectBox(MANDATORY).setOptions(mandoListItem).setDisabled(false);
     getUIFormSelectBox(PARENTVERSION).setOptions(getParentVersions()).setDisabled(false);
     getUIFormSelectBox(PROTECTED).setOptions(protectedItem).setDisabled(false);
     getUIFormSelectBox(MULTIPLE).setOptions(multiListItem).setDisabled(false);
-    getUIStringInput(VALUE_CONSTRAINTS).setEditable(true).setValue(null);
+    getUIStringInput(VALUE_CONSTRAINTS).setReadOnly(false).setValue(null);
     UINodeTypeForm uiForm = getParent();
     UIFormInputSetWithAction uiPropertyTab = uiForm.getChildById(UINodeTypeForm.PROPERTY_DEFINITION);
     uiForm.setActionInTab(uiPropertyTab);
@@ -214,14 +214,14 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
       }
     }
     getUIFormSelectBox(NAMESPACE).setDisabled(true);
-    getUIStringInput(DEFINITION_NAME).setEditable(false);
+    getUIStringInput(DEFINITION_NAME).setReadOnly(true);
     getUIFormSelectBox(REQUIRED_TYPE).setDisabled(true);
     getUIFormSelectBox(AUTOCREATED).setDisabled(true);
     getUIFormSelectBox(MANDATORY).setDisabled(true);
     getUIFormSelectBox(PARENTVERSION).setDisabled(true);
     getUIFormSelectBox(PROTECTED).setDisabled(true);
     getUIFormSelectBox(MULTIPLE).setDisabled(true);
-    getUIStringInput(VALUE_CONSTRAINTS).setEditable(false);
+    getUIStringInput(VALUE_CONSTRAINTS).setReadOnly(true);
   }
 
   private PropertyDefinitionValue getPropertyByName(String propertyName, List<PropertyDefinitionValue> listProperty) {
@@ -231,7 +231,6 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
     return null;
   }
 
-  @SuppressWarnings("unchecked")
   private void setValues(PropertyDefinitionValue property) throws Exception {
     String propertyName = property.getName();
     if (propertyName.indexOf(":") > -1) {
@@ -292,7 +291,7 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
       if(propertyName == null || propertyName.trim().length() == 0) {
         uiForm.setTabRender(UINodeTypeForm.PROPERTY_DEFINITION);
         UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
-        uiApp.addMessage(new ApplicationMessage("UIPropertyDefinitionForm.msg.property-name", null));       
+        uiApp.addMessage(new ApplicationMessage("UIPropertyDefinitionForm.msg.property-name", null));
         return;
       }
       PropertyDefinitionValue property =
@@ -308,7 +307,6 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
     }
   }
 
-  @SuppressWarnings("unchecked")
   static public class UpdatePropertyActionListener extends EventListener<UINodeTypeForm> {
     public void execute(Event<UINodeTypeForm> event) throws Exception {
       UINodeTypeForm uiForm = event.getSource();
@@ -321,7 +319,7 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
       String name = uiPropertyForm.getUIStringInput(DEFINITION_NAME).getValue();
       if(name == null || name.trim().length() == 0) {
         uiForm.setTabRender(UINodeTypeForm.PROPERTY_DEFINITION);
-        uiApp.addMessage(new ApplicationMessage("UIPropertyDefinitionForm.msg.property-name", null));        
+        uiApp.addMessage(new ApplicationMessage("UIPropertyDefinitionForm.msg.property-name", null));
         return;
       }
       for (int i = 0; i < name.length(); i++) {
@@ -343,7 +341,7 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
       } else {
         propertyInfo.setName(name);
       }
-      
+
       String requiredType = uiForm.getUIFormSelectBox(REQUIRED_TYPE).getValue();
       propertyInfo.setRequiredType(Integer.parseInt(requiredType));
       String isMultiple = uiForm.getUIFormSelectBox(MULTIPLE).getValue();
@@ -379,7 +377,6 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
     }
   }
 
-  @SuppressWarnings("unchecked")
   static public class AddPropertyActionListener extends EventListener<UINodeTypeForm> {
     public void execute(Event<UINodeTypeForm> event) throws Exception {
       UINodeTypeForm uiForm = event.getSource();
@@ -389,7 +386,7 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
         uiForm.getUIStringInput(DEFINITION_NAME).getValue();
       if(propertyName == null || propertyName.trim().length() == 0) {
         uiForm.setTabRender(UINodeTypeForm.PROPERTY_DEFINITION);
-        uiApp.addMessage(new ApplicationMessage("UIPropertyDefinitionForm.msg.property-name", null));        
+        uiApp.addMessage(new ApplicationMessage("UIPropertyDefinitionForm.msg.property-name", null));
         return;
       }
 
@@ -411,7 +408,7 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
         propertyInfo.setName(propertyName);
       }
       UIPropertyDefinitionForm uiPropertyForm = uiForm.getChild(UIPropertyDefinitionForm.class);
-      
+
 
       String requiredType = uiForm.getUIFormSelectBox(REQUIRED_TYPE).getValue();
       propertyInfo.setRequiredType(Integer.parseInt(requiredType));
@@ -455,9 +452,9 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
       String value = uiForm.getUIFormSelectBox(REQUIRED_TYPE).getValue();
       uiPropertyForm.setRequiredValue(value);
       if(value.equals("1") || value.equals("9")) {
-        uiForm.getUIStringInput(VALUE_CONSTRAINTS).setEditable(true);
+        uiForm.getUIStringInput(VALUE_CONSTRAINTS).setReadOnly(false);
       } else {
-        uiForm.getUIStringInput(VALUE_CONSTRAINTS).setEditable(false);
+        uiForm.getUIStringInput(VALUE_CONSTRAINTS).setReadOnly(true);
       }
       uiForm.getUIStringInput(VALUE_CONSTRAINTS).setValue(null);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
@@ -488,12 +485,12 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
       } else {
         UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
         String message = "UIPropertyDefinitionForm.msg.not-supported-value-constraints";
-        uiApp.addMessage(new ApplicationMessage(message, null));        
+        uiApp.addMessage(new ApplicationMessage(message, null));
         return;
       }
       uiForm.setSelectedTab("Contraints");
       String[] actionNames = new String[] {"AddValue", "CancelConstraints"};
-      constraintTab.setActions(actionNames, null);      
+      constraintTab.setActions(actionNames, null);
     }
   }
 
@@ -534,13 +531,11 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
       StringBuffer strValues = null;
       if(uiPropertyForm.getRequiredValue().equals("9")) {
         List<String> selectedNodes = new ArrayList<String>();
-        List<UIFormCheckBoxInput> listCheckbox =  new ArrayList<UIFormCheckBoxInput>();
-        uiForm.findComponentOfType(listCheckbox, UIFormCheckBoxInput.class);
-        int count = 0;
+        List<UICheckBoxInput> listCheckbox =  new ArrayList<UICheckBoxInput>();
+        uiForm.findComponentOfType(listCheckbox, UICheckBoxInput.class);
         for(int i = 0; i < listCheckbox.size(); i ++) {
           if(listCheckbox.get(i).isChecked()) {
             selectedNodes.add(listCheckbox.get(i).getName());
-            count ++;
           }
         }
         for (int i = 0; i < selectedNodes.size(); i++) {

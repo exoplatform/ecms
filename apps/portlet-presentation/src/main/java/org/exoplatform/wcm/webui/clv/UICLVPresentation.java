@@ -37,7 +37,7 @@ import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.utils.text.Text;
-import org.exoplatform.ecm.webui.utils.LockUtil;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.portal.webui.util.Util;
@@ -82,7 +82,8 @@ import org.exoplatform.webui.event.EventListener;
 @ComponentConfigs( {
     @ComponentConfig(lifecycle = Lifecycle.class, events = {
         @EventConfig(listeners = UICLVPresentation.RefreshActionListener.class),
-        @EventConfig(listeners = UICLVPresentation.DeleteContentActionListener.class),
+        @EventConfig(listeners = UICLVPresentation.DeleteContentActionListener.class,
+                       confirm = "UICLVPresentation.msg.confirm-delete"),
         @EventConfig(listeners = UICLVPresentation.FastPublishActionListener.class) }),
     @ComponentConfig(type = UICustomizeablePaginator.class,
                      events = @EventConfig(listeners = UICustomizeablePaginator.ShowPageActionListener.class)) })
@@ -716,7 +717,7 @@ public class UICLVPresentation extends UIContainer {
           sb.append("          </a>");
         }
         sb.append("          <a class=\"btn\" onclick = 'eXo.ecm.CLV.addURL(this)' href=\"" + contentEditLink + "\" rel=\"tooltip\" data-placement=\"bottom\" title=\"" + strEditBundle + "\">");
-        sb.append("            <i class=\"uiIconEdit\" \"></i>");
+        sb.append("            <i class=\"uiIconEdit\"></i>");
         sb.append("          </a>");
       } else {
         sb.append("          <a class=\"btn\" >");

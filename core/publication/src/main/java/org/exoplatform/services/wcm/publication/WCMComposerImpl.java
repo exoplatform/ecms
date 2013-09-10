@@ -44,6 +44,7 @@ import org.exoplatform.services.jcr.sessions.ACLSessionProviderService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
@@ -77,7 +78,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
   private WCMService wcmService;
 
   private MultiLanguageService multiLanguageService;
-  
+
   private ACLSessionProviderService aclSessionProviderService;
 
   private TrashService trashService;
@@ -166,7 +167,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
         }
       }
     }
-    
+
     Node node = null;
     try {
     if (WCMComposer.VISIBILITY_PUBLIC.equals(visibility) && MODE_LIVE.equals(mode)) {
@@ -181,10 +182,10 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     if (version == null || !BASE_VERSION.equals(version)) {
       node = getViewableContent(node, filters);
     }
-    
+
     return node;
   }
-  
+
   public List<Node> getContents(String workspace,
                                 String path,
                                 HashMap<String, String> filters,
@@ -193,7 +194,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     String version = filters.get(FILTER_VERSION);
     String orderBy = filters.get(FILTER_ORDER_BY);
     String orderType = filters.get(FILTER_ORDER_TYPE);
-    String visibility = filters.get(FILTER_VISIBILITY);    
+    String visibility = filters.get(FILTER_VISIBILITY);
     String remoteUser = null;
     if (WCMComposer.VISIBILITY_PUBLIC.equals(visibility)) {
       remoteUser = "##PUBLIC##VISIBILITY";
@@ -217,7 +218,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       }
       if (LOG.isDebugEnabled()) LOG.debug("##### "+path+":"+version+":"+remoteUser+":"+orderBy+":"+orderType);
       NodeIterator nodeIterator = getViewableContents(workspace, path, filters, sessionProvider, false);
-    
+
       Node node = null, viewNode = null;
       while (nodeIterator != null && nodeIterator.hasNext()) {
         node = nodeIterator.nextNode();
@@ -231,7 +232,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
         LOG.warn(e.getMessage());
       }
     }
-    
+
     return nodes;
   }
 
@@ -240,7 +241,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
                                      SessionProvider sessionProvider) throws Exception {
     String path = nodeLocation.getPath();
     String workspace = nodeLocation.getWorkspace();
-    
+
     String mode = filters.get(FILTER_MODE);
     String version = filters.get(FILTER_VERSION);
     String orderBy = filters.get(FILTER_ORDER_BY);
@@ -248,7 +249,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     String visibility = filters.get(FILTER_VISIBILITY);
     long offset = (filters.get(FILTER_OFFSET)!=null)?new Long(filters.get(FILTER_OFFSET)):0;
     long totalSize = (filters.get(FILTER_TOTAL)!=null)?new Long(filters.get(FILTER_TOTAL)):0;
-    
+
     String remoteUser = getRemoteUser();
 
     if (MODE_EDIT.equals(mode) && "publication:liveDate".equals(orderBy)) {
@@ -293,7 +294,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 
     return result;
   }
-  
+
   /*
    * (non-Javadoc)
    * @see
@@ -318,6 +319,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     boolean filterTemplates = true;
     if (queryFilterFull!=null) {
       statement.append(queryFilterFull);
+      updateSymlinkByQuery(workspace, queryFilterFull, sessionProvider);
     } else {
       addUsedPrimaryTypes(primaryType);
       if (primaryType == null) {
@@ -330,7 +332,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
         } else {
           return null;
         }
-               
+
         if (currentFolder != null && currentFolder.isNodeType("exo:taxonomy")) {
           primaryType = "exo:taxonomyLink";
         }
@@ -347,12 +349,14 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       }
       // If clv view mode is live, only get nodes which has published version
       if (MODE_LIVE.equals(mode) && !"exo:taxonomyLink".equals(primaryType))
-        statement.append(" AND (publication:currentState IS NULL OR publication:currentState = 'published' OR exo:titlePublished IS NOT NULL)");
+        statement.append(" AND (publication:currentState IS NULL OR publication:currentState = 'published' " +
+        		"OR exo:titlePublished IS NOT NULL)");
       if (filterTemplates) statement.append(" AND " + getTemplatesSQLFilter());
       if (queryFilter!=null) {
         statement.append(queryFilter);
       }
       statement.append(orderFilter);
+      updateSymlink(workspace, path, sessionProvider);
     }
     Query query = manager.createQuery(statement.toString(), Query.SQL);
 
@@ -364,6 +368,9 @@ public class WCMComposerImpl implements WCMComposer, Startable {
         ((QueryImpl)query).setLimit(limit);
       }
     }
+
+    // order by title with in-sensitive case.
+    ((QueryImpl)query).setCaseInsensitiveOrder(true);
 
     return query.execute().getNodes();
   }
@@ -391,7 +398,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     if (node != null && trashService.isInTrash(node)) {
       return null;
     }
-    
+
     String languageFilter = filters.get(FILTER_LANGUAGE);
     if (languageFilter!=null) {
       addUsedLanguage(languageFilter);
@@ -451,17 +458,6 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     return targetNode;
   }
 
-  /*
-   * (non-Javadoc)
-   * @see
-   * org.exoplatform.services.wcm.publication.WCMComposer#updateContent(java
-   * .lang.String, java.lang.String, java.lang.String, java.util.HashMap)
-   */
-  @Override
-  public boolean updateContent(String workspace, String path, HashMap<String, String> filters) throws Exception {
-    return true;
-  }
-  
   public List<Node> getCategories(Node node) throws Exception {
     if (taxonomyService==null) taxonomyService = WCMCoreUtils.getService(TaxonomyService.class);
     List<Node> listCategories = new ArrayList<Node>();
@@ -470,7 +466,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       listCategories.addAll(taxonomyService.getCategories(node, itemNode.getName()));
     }
     return listCategories;
-  }  
+  }
 
   List<Node> getAllTaxonomyTrees() throws RepositoryException {
     if (taxonomyService==null) taxonomyService = WCMCoreUtils.getService(TaxonomyService.class);
@@ -490,16 +486,6 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     return "";
   }
 
-  /*
-   * (non-Javadoc)
-   * @see
-   * org.exoplatform.services.wcm.publication.WCMComposer#updateContents(java
-   * .lang.String, java.lang.String, java.lang.String, java.util.HashMap)
-   */
-  @Override
-  public boolean updateContents(String workspace, String path, HashMap<String, String> filters) throws Exception {
-    return true;
-  }  
   /**
    * We currently support 2 modes :
    * MODE_LIVE : PUBLISHED state only
@@ -531,11 +517,6 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       getTemplatesSQLFilter();
       if (LOG.isDebugEnabled()) LOG.debug("WCMComposer templates have been cleaned !");
     }
-
-  @Override
-  public boolean isCached() {
-    return false;
-  }
 
   @Managed
   @ManagedDescription("How many nodes in the cache ?")
@@ -605,7 +586,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
    * @param repository the repository's name
    * @return a part of the query allow search all document node and taxonomy link also. Return null if there is any exception.
    */
-  public String updateTemplatesSQLFilter() {    
+  public String updateTemplatesSQLFilter() {
     try {
       List<String> documentTypes = templateService.getDocumentTemplates();
       StringBuffer documentTypeClause = new StringBuffer("(");
@@ -648,20 +629,20 @@ public class WCMComposerImpl implements WCMComposer, Startable {
   private void addUsedLanguage(String lang) {
     if (!usedLanguages.contains(lang)) usedLanguages.add(lang);
   }
-  
+
   private void addUsedOrderBy(String orderBy) {
     if (!usedOrderBy.contains(orderBy)) usedOrderBy.add(orderBy);
   }
   private void addUsedPrimaryTypes(String primaryType) {
     if (!usedPrimaryTypes.contains(primaryType)) usedPrimaryTypes.add(primaryType);
   }
-  
+
   private List<AccessControlEntry> getAnyUserACL() {
-    List<AccessControlEntry> ret = new ArrayList<AccessControlEntry>(); 
+    List<AccessControlEntry> ret = new ArrayList<AccessControlEntry>();
     ret.add(new AccessControlEntry(sharedGroup, PermissionType.READ));
     return ret;
   }
-  
+
   /**
    * Get login User
    * @return user name
@@ -675,4 +656,38 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     }
     return remoteUser;
   }
+
+  private void updateSymlink(String workspace, String path, SessionProvider sessionProvider) {
+    if ("/".equals(path)) {
+      path = "";
+    }
+    StringBuilder statement = new StringBuilder();
+    statement.append("SELECT * FROM " + NodetypeConstant.EXO_SYMLINK + " WHERE (jcr:path LIKE '" + path + "/%'")
+             .append(" AND NOT jcr:path LIKE '" + path + "/%/%')");
+    updateSymlinkByQuery(workspace, statement.toString(), sessionProvider);
+  }
+
+  private void updateSymlinkByQuery(String workspace, String statement, SessionProvider sessionProvider) {
+    try {
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
+      Session session = sessionProvider.getSession(workspace, manageableRepository);
+      QueryManager manager = session.getWorkspace().getQueryManager();
+      NodeIterator iter = manager.createQuery(statement, Query.SQL).execute().getNodes();
+      while (iter.hasNext()) {
+        try {
+          Node currentNode = iter.nextNode();
+          linkManager.updateSymlink(currentNode);
+        } catch (Exception ex) {
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Can not update symlink data", ex);
+          }
+        }
+      }
+    } catch (RepositoryException e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Can not update symlinks data", e);
+      }
+    }
+  }
+
 }

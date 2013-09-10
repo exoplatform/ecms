@@ -98,13 +98,13 @@ public class UIViewForm extends UIForm implements UISelectable {
   }
 
   public String[] getActions() { return new String[] {}; }
-  
+
   public void setPermission(String permission) {
     this.permission = permission;
   }
-  
+
   public UIViewForm() throws Exception {
-  	this("UIViewForm");  	
+    this("UIViewForm");  	
   }  
 
   public UIViewForm(String name) throws Exception {
@@ -133,7 +133,7 @@ public class UIViewForm extends UIForm implements UISelectable {
     addUIFormInput(enableVersion) ;
     //prefernce: is show side bar
     UICheckBoxInput hideExplorerPanel = 
-      new UICheckBoxInput(FIELD_HIDE_EXPLORER_PANEL, FIELD_HIDE_EXPLORER_PANEL, false);
+        new UICheckBoxInput(FIELD_HIDE_EXPLORER_PANEL, FIELD_HIDE_EXPLORER_PANEL, false);
     hideExplorerPanel.setRendered(false);
     addUIFormInput(hideExplorerPanel);
   }
@@ -194,7 +194,7 @@ public class UIViewForm extends UIForm implements UISelectable {
     }
     return options ;
   }
-  
+
   public HashMap<String, Tab> getTabMap() {
     return tabMap_;
   }
@@ -206,7 +206,7 @@ public class UIViewForm extends UIForm implements UISelectable {
     tab.setLocalizeButtons(getLocalizationButtons(buttons));
     tabMap_.put(tabName, tab) ;
   }
-  
+
   public String getLocalizationButtons(String buttons) {
     StringBuilder localizationButtons = new StringBuilder();
     RequestContext context = RequestContext.getCurrentInstance();
@@ -244,7 +244,7 @@ public class UIViewForm extends UIForm implements UISelectable {
     }
     return result.toString() ;
   }
-  
+
   public List<Tab> getTabs() throws Exception {
     return new ArrayList<Tab>(tabMap_.values());
   }  
@@ -299,7 +299,7 @@ public class UIViewForm extends UIForm implements UISelectable {
       //pref is show side bar
       getUICheckBoxInput(FIELD_HIDE_EXPLORER_PANEL).setRendered(true);
       getUICheckBoxInput(FIELD_HIDE_EXPLORER_PANEL).setValue(
-                       viewNode.getProperty(NodetypeConstant.EXO_HIDE_EXPLORER_PANEL).getBoolean());
+                                                             viewNode.getProperty(NodetypeConstant.EXO_HIDE_EXPLORER_PANEL).getBoolean());
     }
     //---------------------
     Node viewsNode = NodeLocation.getNodeByLocation(views_);
@@ -410,8 +410,8 @@ public class UIViewForm extends UIForm implements UISelectable {
   }
 
   public void deleteTab(String tabName) throws Exception {
-  UIViewFormTabPane viewTabPane = getParent() ;
-  //String permLastest = viewTabPane.getUIStringInput(UIViewForm.FIELD_PERMISSION).getValue();
+    UIViewFormTabPane viewTabPane = getParent() ;
+    //String permLastest = viewTabPane.getUIStringInput(UIViewForm.FIELD_PERMISSION).getValue();
     tabMap_.remove(tabName) ;
     update(null, false, null) ;
     UIViewContainer uiViewContainer = getAncestorOfType(UIViewContainer.class) ;
@@ -423,9 +423,9 @@ public class UIViewForm extends UIForm implements UISelectable {
 
   public void changeVersion() throws Exception {
     String path = NodeLocation.getNodeByLocation(views_)
-                              .getVersionHistory()
-                              .getVersion(getUIFormSelectBox(FIELD_VERSION).getValue())
-                              .getPath();
+        .getVersionHistory()
+        .getVersion(getUIFormSelectBox(FIELD_VERSION).getValue())
+        .getPath();
     VersionNode selectedVesion = rootVersionNode.findVersionNode(path);
     update(null, false, selectedVesion) ;
   }

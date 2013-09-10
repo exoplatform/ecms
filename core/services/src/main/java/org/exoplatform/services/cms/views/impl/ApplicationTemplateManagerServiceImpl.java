@@ -27,12 +27,14 @@ import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.views.ApplicationTemplateManagerService;
 import org.exoplatform.services.cms.views.PortletTemplatePlugin;
@@ -55,7 +57,9 @@ import org.picocontainer.Startable;
  */
 public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplateManagerService, Startable {
 
-  private static final Log LOG = ExoLogger.getLogger(ApplicationTemplateManagerService.class.getName());
+  private static final Log LOG = ExoLogger.getLogger(ApplicationTemplateManagerServiceImpl.class.getName());
+  private static final String EDITED_CONFIGURED_TEMPLATES = "EditedConfiguredTemplates";
+  
   private RepositoryService repositoryService;
 
   private List<PortletTemplatePlugin> portletTemplatePlugins = new ArrayList<PortletTemplatePlugin>();
@@ -123,6 +127,9 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
       templateSet = new HashSet<String>();
     }
     templateSet.add(category.getName() + "/" + config.getTemplateName());
+    StringBuilder tBuilder = new StringBuilder();
+    tBuilder.append(config.getCategory()).append(config.getTemplateName());
+    Utils.addEditedConfiguredDatas(tBuilder.toString(), this.getClass().getSimpleName(), EDITED_CONFIGURED_TEMPLATES, true);
     configuredTemplates_.put(portletTemplateHome.getName(), templateSet);
   }
 
@@ -131,7 +138,13 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
    */
   public Node getApplicationTemplateHome(String portletName, SessionProvider provider) throws Exception {
     Node basedApplicationTemplateHome = getBasedApplicationTemplatesHome(provider);
-    return basedApplicationTemplateHome.getNode(portletName);
+    try {
+      return basedApplicationTemplateHome.getNode(portletName);
+    } catch(PathNotFoundException pne) {
+      Node templateHome = basedApplicationTemplateHome.addNode(portletName);
+      basedApplicationTemplateHome.save();
+      return templateHome;
+    }
   }
 
   /**
@@ -236,13 +249,16 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
                           storedTemplateHomeNode.addNode(portletName,"nt:unstructured");
       storedTemplateHomeNode.save();
       for(PortletTemplateConfig config: map.get(portletName)) {
+        StringBuilder tBuilder = new StringBuilder();
+        tBuilder.append(config.getCategory()).append(config.getTemplateName());
+        if(Utils.getAllEditedConfiguredDatas(this.getClass().getSimpleName(), EDITED_CONFIGURED_TEMPLATES, true).contains(tBuilder.toString())) continue;
         addTemplate(templateNode,config);
       }
     }
     managedApplicationNames.put(repository,managedApplicationsPerRepo);
     storedTemplateHomeNode.getSession().save();
   }
-
+  
   /**
    * {@inheritDoc}
    */

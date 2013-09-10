@@ -38,13 +38,13 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormInputInfo;
 import org.exoplatform.webui.form.UIFormInputSet;
 import org.exoplatform.webui.form.UIFormTableInputSet;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 
 /**
  * Created by The eXo Platform SARL
@@ -90,9 +90,7 @@ public class UINodeTypeExport extends UIForm {
       uiInputSet = new UIFormInputSet(ntName) ;
       UIFormInputInfo uiInfo = new UIFormInputInfo(LABEL, null, ntName);
       uiInputSet.addChild(uiInfo);
-      UIFormCheckBoxInput<String> uiCheckbox = new UIFormCheckBoxInput<String>(ntName, ntName, null);
-      uiCheckbox.setChecked(true);
-      uiCheckbox.setValue(ntName);
+      UICheckBoxInput uiCheckbox = new UICheckBoxInput(ntName, ntName, true);
       uiInputSet.addChild(uiCheckbox);
       uiTableInputSet.addChild(uiInputSet);
     }
@@ -119,8 +117,8 @@ public class UINodeTypeExport extends UIForm {
       UINodeTypeManager uiManager = uiExport.getAncestorOfType(UINodeTypeManager.class) ;
       UIApplication uiApp = uiExport.getAncestorOfType(UIApplication.class) ;
       List<NodeType> selectedNodes = new ArrayList<NodeType>() ;
-      List<UIFormCheckBoxInput> listCheckbox =  new ArrayList<UIFormCheckBoxInput>();
-      uiExport.findComponentOfType(listCheckbox, UIFormCheckBoxInput.class);
+      List<UICheckBoxInput> listCheckbox =  new ArrayList<UICheckBoxInput>();
+      uiExport.findComponentOfType(listCheckbox, UICheckBoxInput.class);
       for(int i = 0; i < listCheckbox.size(); i ++) {
         boolean checked = listCheckbox.get(i).isChecked() ;
         if(checked) selectedNodes.add(uiExport.getNodeTypeByName(listCheckbox.get(i).getName())) ;
@@ -143,7 +141,7 @@ public class UINodeTypeExport extends UIForm {
       uiPopup.setShowMask(true);
       uiPopup.setRendered(false) ;
     }
-    private String getNodeTypeXML(List selectedNodes) {
+    private String getNodeTypeXML(List<NodeType> selectedNodes) {
       StringBuilder nodeTypeXML = new StringBuilder() ;
       nodeTypeXML.append("<nodeTypes xmlns:nt=").append("\"") ;
       nodeTypeXML.append("http://www.jcp.org/jcr/nt/1.5").append("\" ") ;
@@ -152,7 +150,7 @@ public class UINodeTypeExport extends UIForm {
       nodeTypeXML.append("xmlns:jcr=").append("\"").append("http://www.jcp.org/jcr/1.5") ;
       nodeTypeXML.append("\" >").append("\n") ;
       for(int i = 0; i < selectedNodes.size(); i++) {
-        NodeType nodeType = (NodeType)selectedNodes.get(i) ;
+        NodeType nodeType = selectedNodes.get(i) ;
         nodeTypeXML.append("<nodeType ") ;
         nodeTypeXML.append("name=").append("\"").append(nodeType.getName()).append("\" ") ;
         String isMixIn = String.valueOf(nodeType.isMixin()) ;
@@ -293,8 +291,8 @@ public class UINodeTypeExport extends UIForm {
   static public class UncheckAllActionListener extends EventListener<UINodeTypeExport> {
     public void execute(Event<UINodeTypeExport> event) throws Exception {
       UINodeTypeExport uiExport = event.getSource() ;
-      List<UIFormCheckBoxInput> listCheckbox =  new ArrayList<UIFormCheckBoxInput>();
-      uiExport.findComponentOfType(listCheckbox, UIFormCheckBoxInput.class);
+      List<UICheckBoxInput> listCheckbox =  new ArrayList<UICheckBoxInput>();
+      uiExport.findComponentOfType(listCheckbox, UICheckBoxInput.class);
       for(int i = 0; i < listCheckbox.size(); i ++) {
         listCheckbox.get(i).setChecked(false) ;
       }
@@ -306,8 +304,8 @@ public class UINodeTypeExport extends UIForm {
   static public class CheckAllActionListener extends EventListener<UINodeTypeExport> {
     public void execute(Event<UINodeTypeExport> event) throws Exception {
       UINodeTypeExport uiExport = event.getSource() ;
-      List<UIFormCheckBoxInput> listCheckbox =  new ArrayList<UIFormCheckBoxInput>();
-      uiExport.findComponentOfType(listCheckbox, UIFormCheckBoxInput.class);
+      List<UICheckBoxInput> listCheckbox =  new ArrayList<UICheckBoxInput>();
+      uiExport.findComponentOfType(listCheckbox, UICheckBoxInput.class);
       for(int i = 0; i < listCheckbox.size(); i ++) {
         listCheckbox.get(i).setChecked(true) ;
       }

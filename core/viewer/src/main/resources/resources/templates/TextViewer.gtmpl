@@ -5,7 +5,7 @@
 	import javax.jcr.NodeIterator;
 	import org.exoplatform.webui.core.UIComponent;
   import org.exoplatform.services.jcr.util.Text;	
-  import org.exoplatform.wcm.webui.Utils;
+  import org.exoplatform.services.deployment.Utils;
   import org.apache.commons.lang.StringEscapeUtils;
   import org.exoplatform.wcm.webui.reader.ContentReader;
 	

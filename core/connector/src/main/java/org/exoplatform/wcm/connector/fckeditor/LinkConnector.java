@@ -61,14 +61,14 @@ public class LinkConnector extends BaseConnector implements ResourceContainer {
   /**
    * Gets the folders and files.
    *
-   * @param repositoryName The repository name
-   * @param workspaceName The workspace name
-   * @param jcrPath The jcr path
-   * @param currentFolder The current folder
-   * @param command The command
-   * @param type The type
-   * @param currentPortal The current portal
-   * @return The folders and files
+   * @param repositoryName The repository name.
+   * @param workspaceName The workspace name.
+   * @param jcrPath The JCR path.
+   * @param currentFolder The current folder.
+   * @param command The command.
+   * @param type The type of folder/file.
+   * @param currentPortal The current portal.
+   * @return The folders and files.
    * @throws Exception The exception
    *
    * @anchor LinkConnector.getFoldersAndFiles

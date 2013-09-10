@@ -117,10 +117,10 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * @throws Exception
    */
   public TemplateServiceImpl(RepositoryService jcrService,
-      NodeHierarchyCreator nodeHierarchyCreator, IdentityRegistry identityRegistry,
-      org.exoplatform.groovyscript.text.TemplateService templateService,
-      DMSConfiguration dmsConfiguration, LocaleConfigService localeConfigService,
-      CacheService caService) throws Exception {
+                             NodeHierarchyCreator nodeHierarchyCreator, IdentityRegistry identityRegistry,
+                             org.exoplatform.groovyscript.text.TemplateService templateService,
+                             DMSConfiguration dmsConfiguration, LocaleConfigService localeConfigService,
+                             CacheService caService) throws Exception {
     identityRegistry_ = identityRegistry;
     repositoryService_ = jcrService;
     cmsTemplatesBasePath_ = nodeHierarchyCreator.getJcrPath(BasePath.CMS_TEMPLATES_PATH);
@@ -241,7 +241,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     for (String contentType : testContentTypes) {
       if (isChildNodePrimaryTypeAllowed(node, contentType)) {
         if (!folderType.equals(contentType)) // When content type is not parent
-                                             // node's content type
+          // node's content type
           result.add(contentType);
       }
     }
@@ -261,7 +261,9 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       allNodeTypes.add(mixin);
     }
     for (NodeType nodetype:allNodeTypes) {
-      if (((NodeTypeImpl)nodetype).isChildNodePrimaryTypeAllowed(Constants.JCR_ANY_NAME, ((NodeTypeImpl)childNodeType).getQName())) {
+      if (((NodeTypeImpl)nodetype).isChildNodePrimaryTypeAllowed(
+                                                                 Constants.JCR_ANY_NAME,
+                                                                 ((NodeTypeImpl)childNodeType).getQName())) {
         return true;
       }
     }
@@ -271,7 +273,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   /**
    * {@inheritDoc}
    */
-  public boolean isManagedNodeType(String nodeTypeName) throws Exception {
+  public boolean isManagedNodeType(String nodeTypeName) throws RepositoryException {
     //check if the node type is document type first
     List<String> managedDocumentTypes = getManagedDocumentTypesMap();
     if(managedDocumentTypes != null && managedDocumentTypes.contains(nodeTypeName))
@@ -316,7 +318,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * {@inheritDoc}
    */
   public NodeIterator getAllTemplatesOfNodeType(boolean isDialog, String nodeTypeName,
-      SessionProvider provider) throws Exception {
+                                                SessionProvider provider) throws Exception {
     Node nodeTypeHome = getTemplatesHome(provider).getNode(nodeTypeName);
     if (isDialog) {
       if(!nodeTypeHome.hasNode(DIALOGS)) return null;
@@ -339,7 +341,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * {@inheritDoc}
    */
   public Node getTemplateNode(String type, String nodeTypeName, String templateName,
-      SessionProvider provider) throws Exception {
+                              SessionProvider provider) throws Exception {
     Node nodeTypeNode = getTemplatesHome(provider).getNode(nodeTypeName);
     return nodeTypeNode.getNode(type).getNode(templateName);
   }
@@ -347,12 +349,12 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   /**
    * {@inheritDoc}
    */
-  public String getTemplatePathByUser(boolean isDialog, String nodeTypeName, String userName) throws Exception {
+  public String getTemplatePathByUser(boolean isDialog, String nodeTypeName, String userName) throws RepositoryException {
     if(IdentityConstants.ANONIM.equals(userName) || DynamicIdentity.DYNAMIC.equals(userName) || userName == null) {
       return getTemplatePathByAnonymous(isDialog, nodeTypeName);
     }
     Node templateHomeNode =
-      (Node) getSession(WCMCoreUtils.getSystemSessionProvider()).getItem(cmsTemplatesBasePath_);
+        (Node) getSession(WCMCoreUtils.getSystemSessionProvider()).getItem(cmsTemplatesBasePath_);
     String type = DIALOGS;
     if (!isDialog)
       type = VIEWS;
@@ -411,7 +413,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    */
   public void removeTemplate(String type, String nodeTypeName, String templateName) throws Exception {
     Node templatesHome =
-      (Node) getSession(WCMCoreUtils.getSystemSessionProvider()).getItem(cmsTemplatesBasePath_);
+        (Node) getSession(WCMCoreUtils.getSystemSessionProvider()).getItem(cmsTemplatesBasePath_);
     Node nodeTypeHome = templatesHome.getNode(nodeTypeName);
     Node specifiedTemplatesHome = nodeTypeHome.getNode(type);
     Node contentNode = specifiedTemplatesHome.getNode(templateName);
@@ -427,7 +429,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    */
   public void removeManagedNodeType(String nodeTypeName) throws Exception {
     Node templatesHome =
-      (Node) getSession(WCMCoreUtils.getSystemSessionProvider()).getItem(cmsTemplatesBasePath_);
+        (Node) getSession(WCMCoreUtils.getSystemSessionProvider()).getItem(cmsTemplatesBasePath_);
     Node managedNodeType = templatesHome.getNode(nodeTypeName);
     managedNodeType.remove();
     templatesHome.save();
@@ -443,7 +445,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   /**
    * {@inheritDoc}
    */
-  public List<String> getDocumentTemplates() throws Exception {
+  public List<String> getDocumentTemplates() throws RepositoryException {
     List<String> templates = getManagedDocumentTypesMap();
     if (templates != null)
       return new ArrayList<String>(templates);
@@ -455,12 +457,12 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   /**
    * {@inheritDoc}
    */
-  public String getTemplatePathByAnonymous(boolean isDialog, String nodeTypeName) throws Exception {
+  public String getTemplatePathByAnonymous(boolean isDialog, String nodeTypeName) throws RepositoryException {
     String type = DIALOGS;
     if (!isDialog)
       type = VIEWS;
     Node homeNode =
-      (Node) getSession(WCMCoreUtils.getSystemSessionProvider()).getItem(cmsTemplatesBasePath_);
+        (Node) getSession(WCMCoreUtils.getSystemSessionProvider()).getItem(cmsTemplatesBasePath_);
     Node nodeTypeNode = homeNode.getNode(nodeTypeName);
     NodeIterator templateIter = nodeTypeNode.getNode(type).getNodes();
     while (templateIter.hasNext()) {
@@ -489,7 +491,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   }
 
   @SuppressWarnings("unchecked")
-  public List<String> getAllDocumentNodeTypes() throws Exception {
+  public List<String> getAllDocumentNodeTypes() throws PathNotFoundException, RepositoryException {
     List<String> nodeTypeList = (List<String>) nodeTypeListCached.get(NODETYPE_LIST);
     if(nodeTypeList != null && nodeTypeList.size() > 0)
       return nodeTypeList;
@@ -498,7 +500,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     try {
       Node templatesHome =
-        (Node) getSession(sessionProvider).getItem(cmsTemplatesBasePath_);
+          (Node) getSession(sessionProvider).getItem(cmsTemplatesBasePath_);
       for (NodeIterator templateIter = templatesHome.getNodes(); templateIter.hasNext();) {
         Node template = templateIter.nextNode();
         if (template.getProperty(DOCUMENT_TEMPLATE_PROP).getBoolean())
@@ -516,7 +518,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    */
   public String getSkinPath(String nodeTypeName, String skinName, String locale) throws Exception {
     Node homeNode =
-      (Node) getSession(WCMCoreUtils.getSystemSessionProvider()).getItem(cmsTemplatesBasePath_);
+        (Node) getSession(WCMCoreUtils.getSystemSessionProvider()).getItem(cmsTemplatesBasePath_);
     Node nodeTypeNode = homeNode.getNode(nodeTypeName);
     Orientation orientation = getOrientation(locale);
     String skinPath = null;
@@ -578,7 +580,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * @throws Exception
    */
   private Node getTemplateNode(String type, String nodeTypeName,
-      String templateName) throws Exception {
+                               String templateName) throws Exception {
     Node homeNode = (Node) getSession(WCMCoreUtils.getSystemSessionProvider()).getItem(cmsTemplatesBasePath_);
     Node nodeTypeNode = homeNode.getNode(nodeTypeName);
     return nodeTypeNode.getNode(type).getNode(templateName);
@@ -638,7 +640,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   /**
    * Update document template
    * @param isDocumentTemplate    boolean
- * @param nodeTypeName          String
+   * @param nodeTypeName          String
    *                              The name of NodeType
    * @throws RepositoryException
    * @see                         Node
@@ -664,12 +666,13 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * Return session of the specified repository
    * @param provider        SessionProvider
    * @return
+   * @throws RepositoryException
    * @see                   SessionProvider
    * @see                   ManageableRepository
    * @see                   DMSRepositoryConfiguration
    * @throws Exception
    */
-  private Session getSession(SessionProvider provider) throws Exception {
+  private Session getSession(SessionProvider provider) throws RepositoryException {
     ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     return provider.getSession(dmsRepoConfig.getSystemWorkspace(), manageableRepository);
@@ -684,9 +687,8 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * @see                       MembershipEntry
    * @see                       IdentityRegistry
    * @return
-   * @throws Exception
    */
-  private boolean hasPermission(String userId, String roles, IdentityRegistry identityRegistry) throws Exception {
+  private boolean hasPermission(String userId, String roles, IdentityRegistry identityRegistry) {
     if(IdentityConstants.SYSTEM.equalsIgnoreCase(userId)) {
       return true ;
     }
@@ -710,9 +712,8 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * Check public template with the roles
    * @param roles         Value[]
    * @return
-   * @throws Exception
    */
-  private boolean hasPublicTemplate(String role) throws Exception {
+  private boolean hasPublicTemplate(String role) {
     String[] roles = role.split("; ");
     for (int i = 0; i < roles.length; i++) {
       if("*".equalsIgnoreCase(roles[i])) return true ;
@@ -748,7 +749,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
                                 String templateData) throws Exception {
     String label = nodeTypeNode.getProperty(TEMPLATE_LABEL).getString();
     return getContentNode(SKINS, templatesHome, nodeTypeNode.getName(), label, true, skinName
-        + orientation, new String[] { "*" }, new ByteArrayInputStream(templateData.getBytes()));
+                          + orientation, new String[] { "*" }, new ByteArrayInputStream(templateData.getBytes()));
   }
 
   private void removeTemplateNodeTypeList() throws Exception {
@@ -775,9 +776,9 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       updateTemplate(templateNode,templateFile, roles);
       session.save();
     } catch(PathNotFoundException e) {
-    	DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, true);
+      DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, true);
       templatePath = getContentNode(templateType, templatesHome, nodeTypeName, label,
-          isDocumentTemplate, templateName, roles, templateFile);
+                                    isDocumentTemplate, templateName, roles, templateFile);
     }
     //Update managedDocumentTypesMap
     removeCacheTemplate(templatePath);
@@ -805,7 +806,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       templateNode.save();
     } catch(PathNotFoundException e) {
       templatePath = getContentNode(templateType, templatesHome, nodeTypeName, label,
-          isDocumentTemplate, templateName, roles, templateFile);
+                                    isDocumentTemplate, templateName, roles, templateFile);
     }
     // Update managedDocumentTypesMap
     removeCacheTemplate(templatePath);
@@ -820,7 +821,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   public String createTemplate(Node templateFolder, String name, InputStream data, String[] roles) {
     return createTemplate(templateFolder, name, name, data, roles);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -845,7 +846,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       }
     }
     return null;
-  }  
+  }
 
   /**
    * {@inheritDoc}
@@ -873,23 +874,23 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * {@inheritDoc}
    */
   public String getTemplate(Node template) {
-      Node resourceNode;
-      try {
-        resourceNode = template.getNode(NodetypeConstant.JCR_CONTENT);
-        return resourceNode.getProperty(NodetypeConstant.JCR_DATA).getString();
-      } catch (ValueFormatException e) {
-        if (LOG.isErrorEnabled()) {
-          LOG.error("Wrong Value format ", e);
-        }
-      } catch (PathNotFoundException e) {
-        if (LOG.isErrorEnabled()) {
-          LOG.error("Can not found the template because of: ", e);
-        }
-      } catch (RepositoryException e) {
-        if (LOG.isErrorEnabled()) {
-          LOG.error("Repository failed ", e);
-        }
+    Node resourceNode;
+    try {
+      resourceNode = template.getNode(NodetypeConstant.JCR_CONTENT);
+      return resourceNode.getProperty(NodetypeConstant.JCR_DATA).getString();
+    } catch (ValueFormatException e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Wrong Value format ", e);
       }
+    } catch (PathNotFoundException e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Can not found the template because of: ", e);
+      }
+    } catch (RepositoryException e) {
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Repository failed ", e);
+      }
+    }
     return null;
   }
 
@@ -932,7 +933,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   }
 
   public Set<String> getAllEditedConfiguredNodeTypes() throws Exception {
-  	DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, true);
+    DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, true);
     HashSet<String> editedConfigNodetypes = new HashSet<String>();
     Node serviceLogContentNode= Utils.getServiceLogContentNode(this.getClass().getSimpleName(), EDITED_CONFIGURED_NODE_TYPES);
     if (serviceLogContentNode != null) {
@@ -943,12 +944,12 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   }
 
   private void addEditedConfiguredNodeType(String nodeType) throws Exception {
-  	DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, true);
+    DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, true);
     Node serviceLogContentNode = Utils.getServiceLogContentNode(this.getClass().getSimpleName(), EDITED_CONFIGURED_NODE_TYPES);
     if (serviceLogContentNode != null) {
       String logData = serviceLogContentNode.getProperty(NodetypeConstant.JCR_DATA).getString();
       if (StringUtils.isEmpty(logData)) logData = nodeType;
-      else if (logData.indexOf(nodeType) == -1) logData = logData + ";" + nodeType;
+      else if (logData.indexOf(nodeType) == -1) logData = logData.concat(";").concat(nodeType);
       serviceLogContentNode.setProperty(NodetypeConstant.JCR_DATA, logData);
       serviceLogContentNode.getSession().save();
     }

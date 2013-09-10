@@ -17,6 +17,8 @@
 
 package org.exoplatform.ecms.xcmis.sp;
 
+import java.io.IOException;
+
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.util.IdGenerator;
@@ -28,11 +30,14 @@ import org.xcmis.spi.RenditionContentStream;
 import org.xcmis.spi.RenditionManager;
 import org.xcmis.spi.utils.MimeType;
 
+import javax.jcr.LoginException;
+import javax.jcr.NoSuchWorkspaceException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.Property;
 import javax.jcr.Repository;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.observation.Event;
 import javax.jcr.observation.EventIterator;
@@ -131,9 +136,19 @@ public class RenditionsUpdateListener implements EventListener
                }
             }
          }
-      }
-      catch (Exception e)
-      {
+      } catch (LoginException e) {
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Creating rendition on event failed. " + e.getMessage(), e);
+        }
+      } catch (NoSuchWorkspaceException e) {
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Creating rendition on event failed. " + e.getMessage(), e);
+        }
+      } catch (RepositoryException e) {
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Creating rendition on event failed. " + e.getMessage(), e);
+        }
+      } catch (IOException e) {
         if (LOG.isErrorEnabled()) {
           LOG.error("Creating rendition on event failed. " + e.getMessage(), e);
         }

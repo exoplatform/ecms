@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDefaultSearchForm>
+    <label>
+      <keyword>Từ khóa</keyword>
+      <portal>Cổng thông tin</portal>
+      <Page>Trang</Page>
+      <Document>Tài liệu</Document>
+    </label>
+    <action>
+      <Search>Tìm kiếm</Search>
+    </action>
+  </UIDefaultSearchForm>
+
+  <UIDefaultSearchResult>
+    <label>
+      <Page>Trang</Page>
+      <Document>Tài liệu</Document>
+      <DocumentAndPage>Tài liệu và Trang</DocumentAndPage>
+      <documentandpage>Tài liệu và Trang</documentandpage>
+      <resutlsCaption>Kết quả tìm kiếm</resutlsCaption>
+      <ofAboutCaption>của</ofAboutCaption>
+      <forCaption>dành cho</forCaption>
+      <timeUnitCaption>giây</timeUnitCaption>
+      <similar>Các trang có cùng nội dung</similar>
+      <editor>Biên tập viên</editor>
+    </label>
+    <action>
+      <edit>Chỉnh sửa</edit>
+    </action>
+    <msg>
+      <your-search>Tìm kiếm của bạn</your-search>
+      <did-not-match>không khớp với bất kỳ mục nào</did-not-match>
+      <new-suggestion>đề xuất</new-suggestion>
+    </msg>
+  </UIDefaultSearchResult>
+  <UISearchPageLayoutManager>
+    <label>
+      <itemsPerPageSelector>Số kết quả/1 trang</itemsPerPageSelector>
+      <searchFormSelector>Kiểu Mẫu Tìm kiếm</searchFormSelector>
+      <searchResultSelector>Mẫu Kết quả Tìm kiếm</searchResultSelector>
+      <searchPaginatorSelector>Mẫu Phân trang Tìm kiếm</searchPaginatorSelector>
+      <searchPageLayoutSelector>Mẫu Bố cục Trang Tìm kiếm</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Đường dẫn Gốc</searchResultBasePathInputSetAction>
+      <pageMode>Kiểu Trang hiển thị</pageMode>
+      <option>
+        <none>Không có</none>
+        <more>Hiển thị thêm</more>
+        <pagination>Phân trang</pagination>
+      </option>
+    </label>
+    <action>
+      <Save>Lưu</Save>
+      <Cancel>Hủy bỏ</Cancel>
+    </action>
+  </UISearchPageLayoutManager>
+  <searchResultBasePathInputSetAction>
+    <title>
+      <SelectBasePath>Chọn Đường dẫn Gốc</SelectBasePath>
+    </title>
+  </searchResultBasePathInputSetAction>  
+  <UISearchForm>  
+   <message>
+     <keyword-not-support>Từ khóa không hợp lệ. Một số ký tự không được nhận diện.</keyword-not-support>
+     <not-checked>Vui lòng chọn kiểu tìm kiếm.</not-checked>
+     <keyword-not-empty>Vui lòng nhập từ khóa.</keyword-not-empty>
+   </message>
+  </UISearchForm>
+  <UIPaginatorDefault>
+    <label>
+      <next>Kế tiếp</next>
+      <previous>Trước đó</previous>
+      <more>Hiển thị thêm</more>
+    </label>
+  </UIPaginatorDefault>
+  <UISearchPageLayoutDefault>
+    <label>
+      <quickEditTitle>Chỉnh sửa Nhanh</quickEditTitle>
+    </label>
+  </UISearchPageLayoutDefault>
+  <searchOption>
+    <label>
+      <pageCheckBox>tìm theo Trang</pageCheckBox>
+      <documentCheckBox>tìm theo Nội dung</documentCheckBox>
+    </label>
+  </searchOption>
+  <ViewMode>
+    <label>
+      <option>
+        <all>tìm kiếm tất cả các trang</all>
+      </option>  
+    </label>  
+  </ViewMode>
+</bundle>

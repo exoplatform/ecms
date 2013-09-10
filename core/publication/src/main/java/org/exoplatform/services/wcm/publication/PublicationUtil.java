@@ -36,7 +36,6 @@ import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserNodeFilterConfig;
 import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.services.wcm.navigation.NavigationUtils;
 
 /**
  * Created by The eXo Platform SAS
@@ -54,7 +53,7 @@ public class PublicationUtil {
 
   /** The Constant URI_SEPARATOR. */
   public static final String URI_SEPARATOR = "/";
-   
+
   /**
    * Find user node by page id.
    * @param rootNode
@@ -67,7 +66,7 @@ public class PublicationUtil {
     findUserNodeByPageId(rootNode, pageId, allUserNodes);
     return allUserNodes;
   }
-  
+
   /**
    * Find user node by page id.
    * @param userNode
@@ -171,7 +170,7 @@ public class PublicationUtil {
         Application<?> application = Application.class.cast(object);
         if(!removingApplicationIds.contains(application.getId())) {
           childrenTmp.add(object);
-        }      
+        }
       } else if (object instanceof Container) {
         Container child = Container.class.cast(object);
         removedAppInstancesInContainerByNames(child, removingApplicationIds);
@@ -303,7 +302,7 @@ public class PublicationUtil {
    * @throws Exception the exception
    */
   public static boolean isNodeContentPublishedToPageNode(Node contentNode, String navNodeURI) throws Exception {
-    
+
     UserPortal userPortal = Util.getPortalRequestContext().getUserPortalConfig().getUserPortal();
 
     // make filter
@@ -314,14 +313,8 @@ public class PublicationUtil {
 
     // get user node
     String nodeURI = navNodeURI.replace("/" + Util.getPortalRequestContext().getPortalOwner() + "/", "");
-    UserNode userNode;
-    UserNavigation userNavigation = NavigationUtils.getUserNavigationOfPortal(
-                                                userPortal, Util.getUIPortal().getSiteKey().getName());
-    if (userNavigation != null) {
-      userNode = userPortal.resolvePath(userNavigation, filterConfig, nodeURI);
-    } else {
-      userNode = userPortal.resolvePath(filterConfig, nodeURI);
-    }
+    UserNavigation userNav = userPortal.getNavigation(Util.getUIPortal().getSiteKey());
+    UserNode userNode = userPortal.resolvePath(userNav, filterConfig, nodeURI);
     
     if (userNode == null || userNode.getPageRef() == null) return false;
     
@@ -344,7 +337,7 @@ public class PublicationUtil {
 
     return nodeContextList;
   }
-  
+
   public static StringBuilder buildUserNodeURI(NodeContext<?> context) {
     NodeContext<?> parent = (NodeContext<?>) context.getParentNode();
      if (parent != null)

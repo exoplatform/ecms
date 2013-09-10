@@ -59,12 +59,8 @@ public class RemoveCommentComponent extends AbstractActionComponent {
                                        String beanId) {
     String confirmKey  = event.getConfirm();
     if(confirmKey.length() < 1) return confirmKey;
-    try {
-      String confirm = Utils.getResourceBundle(Utils.LOCALE_WEBUI_DMS, confirmKey, getClass().getClassLoader());
-      return confirm.replaceAll("\\{0\\}", beanId);
-    } catch (Exception e) {
-      return confirmKey;
-    }
+    String confirm = Utils.getResourceBundle(Utils.LOCALE_WEBUI_DMS, confirmKey, getClass().getClassLoader());
+    return confirm.replaceAll("\\{0\\}", beanId);
   }
 
   public static void doDelete(Map<String, Object> variables) throws Exception {
@@ -75,7 +71,7 @@ public class RemoveCommentComponent extends AbstractActionComponent {
     String nodepath = String.valueOf(variables.get(OBJECTID));
     WebuiRequestContext requestcontext = (WebuiRequestContext)variables.get(Utils.REQUESTCONTEXT);
     try {
-      Node commentNode = (Node) nodefinder.getItem(wsname, 
+      Node commentNode = (Node) nodefinder.getItem(wsname,
           Text.escapeIllegalJcrChars(nodepath));
       CommentsService commentService = uicomponent.getApplicationComponent(CommentsService.class);
       commentService.deleteComment(commentNode);
@@ -86,12 +82,12 @@ public class RemoveCommentComponent extends AbstractActionComponent {
       }
       Object[] args = { nodepath } ;
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-delete-version", args,
-          ApplicationMessage.WARNING));      
+          ApplicationMessage.WARNING));
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("an unexpected error occurs while removing the node", e);
       }
-      JCRExceptionManager.process(uiApp, e);      
+      JCRExceptionManager.process(uiApp, e);
     }
   }
 

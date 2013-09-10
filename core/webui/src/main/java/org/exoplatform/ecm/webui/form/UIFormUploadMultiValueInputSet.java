@@ -21,13 +21,12 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.form.UIFormInputBase;
 import org.exoplatform.webui.form.UIFormMultiValueInputSet;
-import org.exoplatform.webui.form.UIFormUploadInput;
 
 /**
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          exo@exoplatform.com
- * Nov 21, 2011  
+ * Nov 21, 2011
  */
 @ComponentConfig(events = {
     @EventConfig(listeners = UIFormMultiValueInputSet.AddActionListener.class, phase = Phase.DECODE),
@@ -38,20 +37,14 @@ public class UIFormUploadMultiValueInputSet extends UIFormMultiValueInputSet {
     super();
     setComponentConfig(getClass(), null);
   }
-  
+
   public UIFormUploadMultiValueInputSet(String name, String bindingField) throws Exception
   {
      super(name, bindingField);
      setComponentConfig(getClass(), null);
   }
-  
-  @SuppressWarnings("unchecked")
-  public UIFormInputBase createUIFormInput(int idx) throws Exception {
-    UIFormInputBase ret = super.createUIFormInput(idx);
-    if (ret instanceof UIFormUploadInput) {
-      ((UIFormUploadInput)ret).setAutoUpload(true);
-    }
-    return ret;
-  }
 
+  public UIFormInputBase createUIFormInput(int idx) throws Exception {
+    return super.createUIFormInput(idx);
+  }
 }

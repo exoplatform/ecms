@@ -20,8 +20,10 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
 import javax.jcr.Value;
 
 import org.exoplatform.container.xml.PortalContainerInfo;
@@ -35,7 +37,6 @@ import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.voting.VotingService;
-import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
@@ -259,15 +260,17 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
    *
    * @throws Exception the exception
    */
-  public Node getNodeByUUID(String uuid) throws Exception{
-    ManageableRepository manageRepo = getApplicationComponent(RepositoryService.class).getCurrentRepository();
+  public Node getNodeByUUID(String uuid) {
+    ManageableRepository manageRepo = WCMCoreUtils.getRepository();
     String[] workspaces = manageRepo.getWorkspaceNames() ;
     //TODO: SystemProvider or SessionProvider
     SessionProvider provider = WCMCoreUtils.getSystemSessionProvider();
     for(String ws : workspaces) {
-      try{
+      try {
         return provider.getSession(ws, manageRepo).getNodeByUUID(uuid) ;
-      } catch(Exception e) {
+      } catch (ItemNotFoundException e) {
+        continue;
+      } catch (RepositoryException e) {
         continue;
       }
     }

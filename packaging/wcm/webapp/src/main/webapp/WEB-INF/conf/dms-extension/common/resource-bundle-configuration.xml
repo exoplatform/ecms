@@ -26,10 +26,8 @@
         <value>locale.ecm.dialogs</value>
         <value>locale.ecm.views</value>
         <value>locale.ecm.webui</value>
-        <value>locale.ecm.homepage</value>
         <value>locale.ecm.cms.taxonomy.taxonomies</value>
         <value>locale.portal.custom</value>
-        <value>locale.navigation.portal.classic</value>
         <value>locale.navigation.group.platform.administrators</value>
         <value>locale.navigation.group.platform.users</value>
         <value>locale.navigation.group.platform.guests</value>
@@ -46,7 +44,6 @@
         <value>locale.portal.custom</value>
         <value>locale.ecm.dialogs</value>
         <value>locale.ecm.views</value>
-        <value>locale.ecm.homepage</value>
 				<value>locale.navigation.group.platform.administrators</value>
         <value>locale.navigation.group.platform.users</value>
         <value>locale.navigation.group.platform.guests</value>

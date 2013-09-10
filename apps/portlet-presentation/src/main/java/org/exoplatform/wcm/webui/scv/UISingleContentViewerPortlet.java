@@ -28,6 +28,7 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceURL;
 
 import org.exoplatform.portal.mop.Visibility;
+import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserNodeFilterConfig;
 import org.exoplatform.portal.mop.user.UserPortal;
@@ -142,7 +143,8 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
     }
     if(PortletMode.VIEW.equals(newMode)) {
       PortletRequestContext pContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
-      uiPresentation = addChild(UIPresentationContainer.class, null, UIPresentationContainer.class.getSimpleName() + pContext.getWindowId());
+      uiPresentation = addChild(UIPresentationContainer.class, null, UIPresentationContainer.class.getSimpleName() 
+                                + pContext.getWindowId());
     } else if (PortletMode.EDIT.equals(newMode)) {
       popPreferences = addChild(UISCVPreferences.class, null, null);
       popPreferences.setInternalPreferencesMode(true);
@@ -235,14 +237,8 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
     UserNodeFilterConfig filterConfig = filterConfigBuilder.build();
 
     // get user node & update children
-    UserNode userNode;
-    if (context.getRemoteUser() != null) {
-      userNode = userPortal.resolvePath(
-            NavigationUtils.getUserNavigationOfPortal(userPortal, Util.getUIPortal().getSiteKey().getName()),
-            filterConfig, nodeURI);
-    } else {
-      userNode = userPortal.resolvePath(filterConfig, nodeURI);
-    }
+    UserNavigation userNav = userPortal.getNavigation(Util.getUIPortal().getSiteKey());
+    UserNode userNode = userPortal.resolvePath(userNav, filterConfig, nodeURI);
 
     if (userNode != null) {
       userPortal.updateNode(userNode, NavigationUtils.ECMS_NAVIGATION_SCOPE, null);

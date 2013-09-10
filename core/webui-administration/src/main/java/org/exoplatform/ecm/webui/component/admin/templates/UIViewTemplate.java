@@ -36,22 +36,22 @@ events = { @EventConfig(listeners = UIViewTemplate.SelectTabActionListener.class
 
 public class UIViewTemplate extends UIContainer {
   private String nodeTypeName_ ;
-  
+
   private String selectedTabId = "";
 
   public String getSelectedTabId()
   {
-     return selectedTabId;
+    return selectedTabId;
   }
 
   public void setSelectedTab(String renderTabId)
   {
-     selectedTabId = renderTabId;
+    selectedTabId = renderTabId;
   }
 
   public void setSelectedTab(int index)
   {
-     selectedTabId = getChild(index - 1).getId();
+    selectedTabId = getChild(index - 1).getId();
   }
 
   public UIViewTemplate() throws Exception {
@@ -70,25 +70,25 @@ public class UIViewTemplate extends UIContainer {
   public void setNodeTypeName(String nodeType) { nodeTypeName_ = nodeType ; }
 
   public String getNodeTypeName() { return nodeTypeName_ ; }
-  
+
   static public class SelectTabActionListener extends EventListener<UIViewTemplate>
   {
-  	public void execute(Event<UIViewTemplate> event) throws Exception
+    public void execute(Event<UIViewTemplate> event) throws Exception
     {
-       WebuiRequestContext context = event.getRequestContext();
-       String renderTab = context.getRequestParameter(UIComponent.OBJECTID);
-       if (renderTab == null)
-          return;
-       event.getSource().setSelectedTab(renderTab);
-       WebuiRequestContext parentContext = (WebuiRequestContext)context.getParentAppRequestContext();
-       if (parentContext != null)
-       {
-          parentContext.setResponseComplete(true);
-       }
-       else
-       {
-          context.setResponseComplete(true);
-       }
+      WebuiRequestContext context = event.getRequestContext();
+      String renderTab = context.getRequestParameter(UIComponent.OBJECTID);
+      if (renderTab == null)
+        return;
+      event.getSource().setSelectedTab(renderTab);
+      WebuiRequestContext parentContext = (WebuiRequestContext)context.getParentAppRequestContext();
+      if (parentContext != null)
+      {
+        parentContext.setResponseComplete(true);
+      }
+      else
+      {
+        context.setResponseComplete(true);
+      }
     }
   } 
 }

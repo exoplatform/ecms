@@ -56,7 +56,6 @@
     <dependency>
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>ecms-ext-xcmis-sp</artifactId>
-      <version>${project.version}</version>
       <scope>runtime</scope>
     </dependency>
   </dependencies>

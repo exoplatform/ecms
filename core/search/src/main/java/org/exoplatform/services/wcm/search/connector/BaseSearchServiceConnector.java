@@ -59,7 +59,7 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
   protected SiteSearchService siteSearch_;
   protected ManageDriveService driveService_;
   
-  protected static final Log LOG = ExoLogger.getLogger(BaseSearchServiceConnector.class.getName());
+  private static final Log LOG = ExoLogger.getLogger(BaseSearchServiceConnector.class.getName());
   
   public static final String DEFAULT_SITENAME = "intranet";
   public static final String PAGE_NAGVIGATION = "documents";
@@ -278,7 +278,8 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
       Object spaceService = ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(spaceServiceClass);
       
       Class spaceClass = Class.forName("org.exoplatform.social.core.space.model.Space");
-      Object space = spaceServiceClass.getDeclaredMethod("getSpaceByGroupId", String.class).invoke(spaceService, id.replace(".", "/"));
+      Object space = spaceServiceClass.getDeclaredMethod("getSpaceByGroupId", String.class)
+                                      .invoke(spaceService, id.replace(".", "/"));
       if (space != null) {
         return String.valueOf(spaceClass.getDeclaredMethod("getDisplayName").invoke(space));
       }

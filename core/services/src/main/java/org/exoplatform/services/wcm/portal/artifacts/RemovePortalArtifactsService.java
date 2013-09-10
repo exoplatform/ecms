@@ -44,5 +44,9 @@ public interface RemovePortalArtifactsService {
    * 
    * @throws Exception the exception
    */
-  public void invalidateArtifactsFromPortal(SessionProvider sessionProvider, String portalName, String portalTemplateName) throws Exception;
+  public void invalidateArtifactsFromPortal(
+                                            SessionProvider sessionProvider,
+                                            String portalName,
+                                            String portalTemplateName)
+                                                throws Exception;
 }

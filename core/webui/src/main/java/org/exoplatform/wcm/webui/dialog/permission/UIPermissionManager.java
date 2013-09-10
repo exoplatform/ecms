@@ -50,8 +50,8 @@ import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormStringInput;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 
 /**
  * Created by The eXo Platform SAS
@@ -117,13 +117,13 @@ public class UIPermissionManager extends UIForm implements UISelectable {
 
     UIFormInputSetWithAction permissionInputSet = new UIFormInputSetWithAction(PERMISSION_INPUT_SET);
     UIFormStringInput formStringInput = new UIFormStringInput(PERMISSION_STRING_INPUT, PERMISSION_STRING_INPUT, null);
-    formStringInput.setEditable(false);
+    formStringInput.setReadOnly(true);
     permissionInputSet.addChild(formStringInput);
     permissionInputSet.setActionInfo(PERMISSION_STRING_INPUT, new String[] {"SelectUser", "SelectMember", "AddAny"});
     permissionInputSet.showActionInfo(true);
     addChild(permissionInputSet);
-    addChild(new UIFormCheckBoxInput<String>(ACCESSIBLE_CHECKBOX_INPUT, ACCESSIBLE_CHECKBOX_INPUT, null));
-    addChild(new UIFormCheckBoxInput<String>(EDITABLE_CHECKBOX_INPUT, EDITABLE_CHECKBOX_INPUT, null));
+    addChild(new UICheckBoxInput(ACCESSIBLE_CHECKBOX_INPUT, ACCESSIBLE_CHECKBOX_INPUT, null));
+    addChild(new UICheckBoxInput(EDITABLE_CHECKBOX_INPUT, EDITABLE_CHECKBOX_INPUT, null));
     setActions(new String[] {"Save", "Clear"});
   }
 
@@ -317,8 +317,8 @@ public class UIPermissionManager extends UIForm implements UISelectable {
       permissionInputSet.getUIStringInput(PERMISSION_STRING_INPUT).setValue(name);
       String owner = node.getProperty("exo:owner").getString();
       if (name.equals(owner)) {
-        permissionManager.getUIFormCheckBoxInput(ACCESSIBLE_CHECKBOX_INPUT).setChecked(true);
-        permissionManager.getUIFormCheckBoxInput(EDITABLE_CHECKBOX_INPUT).setChecked(true);
+        permissionManager.getUICheckBoxInput(ACCESSIBLE_CHECKBOX_INPUT).setChecked(true);
+        permissionManager.getUICheckBoxInput(EDITABLE_CHECKBOX_INPUT).setChecked(true);
         permissionManager.setActions(new String[] {"Clear"});
         permissionInputSet.setActionInfo(PERMISSION_STRING_INPUT, null);
       } else {
@@ -335,11 +335,11 @@ public class UIPermissionManager extends UIForm implements UISelectable {
             numPermission++;
         }
         if (numPermission == PermissionType.ALL.length) {
-          permissionManager.getUIFormCheckBoxInput(ACCESSIBLE_CHECKBOX_INPUT).setChecked(true);
-          permissionManager.getUIFormCheckBoxInput(EDITABLE_CHECKBOX_INPUT).setChecked(true);
+          permissionManager.getUICheckBoxInput(ACCESSIBLE_CHECKBOX_INPUT).setChecked(true);
+          permissionManager.getUICheckBoxInput(EDITABLE_CHECKBOX_INPUT).setChecked(true);
         } else {
-          permissionManager.getUIFormCheckBoxInput(ACCESSIBLE_CHECKBOX_INPUT).setChecked(true);
-          permissionManager.getUIFormCheckBoxInput(EDITABLE_CHECKBOX_INPUT).setChecked(false);
+          permissionManager.getUICheckBoxInput(ACCESSIBLE_CHECKBOX_INPUT).setChecked(true);
+          permissionManager.getUICheckBoxInput(EDITABLE_CHECKBOX_INPUT).setChecked(false);
         }
         permissionManager.setActions(new String[] {"Save", "Clear"});
         permissionInputSet.setActionInfo(PERMISSION_STRING_INPUT, new String[] { "SelectUser",
@@ -383,11 +383,11 @@ public class UIPermissionManager extends UIForm implements UISelectable {
                                  ApplicationMessage.WARNING);
        return;
      }
-     if (permissionManager.getUIFormCheckBoxInput(ACCESSIBLE_CHECKBOX_INPUT).isChecked()) {
+     if (permissionManager.getUICheckBoxInput(ACCESSIBLE_CHECKBOX_INPUT).isChecked()) {
        permsList.clear();
        permsList.add(PermissionType.READ);
      }
-     if (permissionManager.getUIFormCheckBoxInput(EDITABLE_CHECKBOX_INPUT).isChecked()) {
+     if (permissionManager.getUICheckBoxInput(EDITABLE_CHECKBOX_INPUT).isChecked()) {
        permsList.clear();
        for (String perm : PermissionType.ALL)
          permsList.add(perm);
@@ -426,8 +426,8 @@ public class UIPermissionManager extends UIForm implements UISelectable {
      permissionManager.updateGrid();
      UIFormInputSetWithAction permissionInputSet = permissionManager.getChildById(PERMISSION_INPUT_SET);
      ((UIFormStringInput) permissionInputSet.getChildById(PERMISSION_STRING_INPUT)).setValue("");
-     permissionManager.getUIFormCheckBoxInput(ACCESSIBLE_CHECKBOX_INPUT).setChecked(false);
-     permissionManager.getUIFormCheckBoxInput(EDITABLE_CHECKBOX_INPUT).setChecked(false);
+     permissionManager.getUICheckBoxInput(ACCESSIBLE_CHECKBOX_INPUT).setChecked(false);
+     permissionManager.getUICheckBoxInput(EDITABLE_CHECKBOX_INPUT).setChecked(false);
    }
   }
 
@@ -452,8 +452,8 @@ public class UIPermissionManager extends UIForm implements UISelectable {
      UIPermissionManager permissionManager = event.getSource();
      UIFormInputSetWithAction permissionInputSet = permissionManager.getChildById(PERMISSION_INPUT_SET);
      ((UIFormStringInput) permissionInputSet.getChildById(PERMISSION_STRING_INPUT)).setValue("");
-     permissionManager.getUIFormCheckBoxInput(ACCESSIBLE_CHECKBOX_INPUT).setChecked(false);
-     permissionManager.getUIFormCheckBoxInput(EDITABLE_CHECKBOX_INPUT).setChecked(false);
+     permissionManager.getUICheckBoxInput(ACCESSIBLE_CHECKBOX_INPUT).setChecked(false);
+     permissionManager.getUICheckBoxInput(EDITABLE_CHECKBOX_INPUT).setChecked(false);
      permissionManager.setActions(new String[] {"Save", "Clear"});
       permissionInputSet.setActionInfo(PERMISSION_STRING_INPUT, new String[] { "SelectUser",
           "SelectMember", "AddAny" });
@@ -532,8 +532,8 @@ public class UIPermissionManager extends UIForm implements UISelectable {
       UIPermissionManager permissionManager = event.getSource();
       UIFormInputSetWithAction permisionInputSet = permissionManager.getChildById(PERMISSION_INPUT_SET);
       ((UIFormStringInput) permisionInputSet.getChildById(PERMISSION_STRING_INPUT)).setValue(IdentityConstants.ANY);
-      permissionManager.getUIFormCheckBoxInput(ACCESSIBLE_CHECKBOX_INPUT).setChecked(true);
-      permissionManager.getUIFormCheckBoxInput(EDITABLE_CHECKBOX_INPUT).setChecked(false);
+      permissionManager.getUICheckBoxInput(ACCESSIBLE_CHECKBOX_INPUT).setChecked(true);
+      permissionManager.getUICheckBoxInput(EDITABLE_CHECKBOX_INPUT).setChecked(false);
     }
   }
 

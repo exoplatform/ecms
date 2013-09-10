@@ -29,10 +29,10 @@ import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 
 /**
  * Created by The eXo Platform SARL
@@ -64,11 +64,11 @@ import org.exoplatform.webui.form.UIFormCheckBoxInput;
     List<String> supportedTypes = documentTypeService.getAllSupportedType();
 
     for (String supportedName : supportedTypes) {
-      addUIFormInput(new UIFormCheckBoxInput<Boolean>(supportedName, supportedName,null));
+      addUIFormInput(new UICheckBoxInput(supportedName, supportedName, null));
 
       for (String checkedTypeName : checkedTypes) {
         if (supportedName.equals(checkedTypeName)) {
-          getUIFormCheckBoxInput(supportedName).setChecked(true);
+          getUICheckBoxInput(supportedName).setChecked(true);
           continue;
         }
       }
@@ -85,7 +85,7 @@ import org.exoplatform.webui.form.UIFormCheckBoxInput;
       List<String> checkedSupportTypes = new ArrayList<String>();
 
       for (String checkedName : supportedTypes) {
-        if (uiForm.getUIFormCheckBoxInput(checkedName).isChecked())
+        if (uiForm.getUICheckBoxInput(checkedName).isChecked())
           checkedSupportTypes.add(checkedName);
       }
       uiExplorer.setCheckedSupportType(checkedSupportTypes);

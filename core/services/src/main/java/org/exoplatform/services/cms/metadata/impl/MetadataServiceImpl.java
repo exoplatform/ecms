@@ -234,9 +234,9 @@ public class MetadataServiceImpl implements MetadataService, Startable{
     String[] arrRoles = {};
     if(role != null) arrRoles = role.split(";");
     if(isDialog) {
-      templateService.createTemplate(templateHome, DIALOG1, content, arrRoles);
+      templateService.createTemplate(templateHome, DIALOG1, DIALOG1, content, arrRoles);
     } else {
-      templateService.createTemplate(templateHome, VIEW1, content, arrRoles);
+      templateService.createTemplate(templateHome, VIEW1, VIEW1, content, arrRoles);
     }
   }
 

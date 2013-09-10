@@ -34,10 +34,15 @@ import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.Property;
 import javax.jcr.RepositoryException;
+import javax.jcr.ValueFormatException;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.EmptySerializablePageList;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.commons.utils.PageList;
+import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.control.action.ManageVersionsActionComponent;
 import org.exoplatform.ecm.webui.component.explorer.versions.UIActivateVersion;
 import org.exoplatform.ecm.webui.component.explorer.versions.UIVersionInfo;
@@ -72,7 +77,7 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          exo@exoplatform.com
- * Nov 29, 2012  
+ * Nov 29, 2012
  */
 @ComponentConfig (
     template =  "app:/groovy/webui/component/explorer/UIDocumentNodeList.gtmpl",
@@ -86,29 +91,29 @@ import org.exoplatform.webui.event.EventListener;
 public class UIDocumentNodeList extends UIContainer {
 
   private static final Log      LOG                                = ExoLogger.getLogger(UIDocumentNodeList.class.getName());
-  
+
   private UIPageIterator        pageIterator_;
-  
+
   private LinkManager linkManager_;
-  
+
   private List dataList_;
-  
+
   private int padding_;
-  
+
   private boolean showMoreButton_ = true;
-  
+
   public UIDocumentNodeList() throws Exception {
     linkManager_ = WCMCoreUtils.getService(LinkManager.class);
     addChild(ManageVersionsActionComponent.class, null, null);
     pageIterator_ = addChild(UIPageIterator.class, null, "UIDocumentNodeListPageIterator");
     padding_ = 0;
   }
-  
+
   @SuppressWarnings("unchecked")
   public List<Node> getNodeChildrenList() throws Exception {
     return NodeLocation.getNodeListByLocationList(showMoreButton_ ? dataList_ : pageIterator_.getCurrentPageData());
   }
-  
+
   public void setPageList(PageList p) throws Exception {
     pageIterator_.setPageList(p);
     dataList_ = new ArrayList();
@@ -117,22 +122,21 @@ public class UIDocumentNodeList extends UIContainer {
     }
     updateUIDocumentNodeListChildren();
   }
-  
+
   public int getPadding() { return padding_; }
   public void setPadding(int value) { padding_ = value; }
-  
-  public boolean isShowMoreButton() { 
+
+  public boolean isShowMoreButton() {
     return showMoreButton_ && (pageIterator_ != null) &&
             (pageIterator_.getPageList() != null) &&
-            (dataList_ != null) && (dataList_.size() < pageIterator_.getPageList().getAvailable()); 
+            (dataList_ != null) && (dataList_.size() < pageIterator_.getPageList().getAvailable());
   }
   public void setShowMoreButton(boolean value) { showMoreButton_ = value; }
-  
+
   public void setCurrentNode(Node node) throws Exception {
-    UIDocumentInfo uiDocInfo = getAncestorOfType(UIDocumentInfo.class);
-    setPageList(uiDocInfo.getPageList(node.getPath()));
+    setPageList(this.getPageList(node.getPath()));
   }
-  
+
   public void updateUIDocumentNodeListChildren() throws Exception {
     Set<String> ids = new HashSet<String>();
     //get all ids of UIDocumentNodeList children
@@ -150,22 +154,26 @@ public class UIDocumentNodeList extends UIContainer {
       if (node instanceof NodeLinkAware) {
         node = ((NodeLinkAware)node).getRealNode();
       }
-      Node targetNode = linkManager_.isLink(node) ? linkManager_.getTarget(node) : node;
-      if (targetNode.isNodeType(NodetypeConstant.NT_FOLDER) || targetNode.isNodeType(NodetypeConstant.NT_UNSTRUCTURED)) {
-        addUIDocList(getID(node));
+      try {
+        Node targetNode = linkManager_.isLink(node) ? linkManager_.getTarget(node) : node;
+        if (targetNode.isNodeType(NodetypeConstant.NT_FOLDER) || targetNode.isNodeType(NodetypeConstant.NT_UNSTRUCTURED)) {
+          addUIDocList(getID(node));
+        }
+      } catch(ItemNotFoundException ine) {
+        continue;
       }
     }
   }
-  
+
   public UIPageIterator getContentPageIterator() {
     return pageIterator_;
   }
-  
+
   public String getID(Node node) throws Exception {
-    return this.getAncestorOfType(UIDocumentInfo.class).getClass().getSimpleName() + 
-           this.getClass().getSimpleName() + String.valueOf(Math.abs(node.getPath().hashCode())); 
+    return this.getAncestorOfType(UIDocumentInfo.class).getClass().getSimpleName() +
+           this.getClass().getSimpleName() + String.valueOf(Math.abs(node.getPath().hashCode()));
   }
-  
+
   public UIComponent addUIDocList(String id) throws Exception {
     UIDocumentNodeList child = addChild(UIDocumentNodeList.class, null, id);
     child.setPadding(padding_ + 1);
@@ -192,7 +200,7 @@ public class UIDocumentNodeList extends UIContainer {
       }
     }
   }
-  
+
   /**
    * gets the extension of file
    * @param file the file
@@ -212,7 +220,7 @@ public class UIDocumentNodeList extends UIContainer {
       }
     }
   }
-  
+
   /**
    * gets date presentation of file
    * @param file the file
@@ -222,25 +230,37 @@ public class UIDocumentNodeList extends UIContainer {
   public String getFileDate(Node file) throws Exception {
     String createdDate = this.getDatePropertyValue(file, NodetypeConstant.EXO_DATE_CREATED);
     String modifiedDate = this.getDatePropertyValue(file, NodetypeConstant.EXO_LAST_MODIFIED_DATE);
-    return StringUtils.isEmpty(modifiedDate) || 
-            equalDates(file, NodetypeConstant.EXO_DATE_CREATED, NodetypeConstant.EXO_LAST_MODIFIED_DATE)? 
+    return StringUtils.isEmpty(modifiedDate) ||
+            equalDates(file, NodetypeConstant.EXO_DATE_CREATED, NodetypeConstant.EXO_LAST_MODIFIED_DATE)?
             getLabel("CreatedOn") + " " + createdDate : getLabel("Updated") + " " +  modifiedDate;
   }
-  
+
   private boolean equalDates(Node node, String p1, String p2) {
     Calendar pr1 = null;
     Calendar pr2 = null;
     try {
       pr1 = node.getProperty(p1).getDate();
-    } catch (Exception e) {}
+    } catch (PathNotFoundException e) {
+      pr1 = null;
+    } catch (ValueFormatException e) {
+      pr1 = null;
+    } catch (RepositoryException e) {
+      pr1 = null;
+    }
     try {
       pr2 = node.getProperty(p2).getDate();
-    } catch (Exception e) {}
+    } catch (PathNotFoundException e) {
+      pr2 = null;
+    } catch (ValueFormatException e) {
+      pr2 = null;
+    } catch (RepositoryException e) {
+      pr2 = null;
+    }
     if ((pr1 == null) && (pr2 == null)) return true;
     if ((pr1 == null) || (pr2 == null)) return false;
     return Math.abs(pr1.getTimeInMillis() - pr2.getTimeInMillis()) < 3000;
   }
-  
+
   public String getDatePropertyValue(Node node, String propertyName) throws Exception {
     try {
       Property property = node.getProperty(propertyName);
@@ -254,7 +274,7 @@ public class UIDocumentNodeList extends UIContainer {
     }
     return "";
   }
-  
+
   /**
    * gets label
    * @param id the id
@@ -269,7 +289,7 @@ public class UIDocumentNodeList extends UIContainer {
       return id;
     }
   }
-  
+
   /**
    * gets number of version of the node
    * @param file the node
@@ -282,7 +302,7 @@ public class UIDocumentNodeList extends UIContainer {
       return "";
     }
   }
-  
+
   public String getAuthorName(Node file) throws Exception {
     String userName = getAncestorOfType(UIDocumentInfo.class).getPropertyValue(file, NodetypeConstant.EXO_LAST_MODIFIER);
     if (IdentityConstants.SYSTEM.equals(userName)) {
@@ -295,7 +315,27 @@ public class UIDocumentNodeList extends UIContainer {
   public String getFileSize(Node file) throws Exception {
     return org.exoplatform.services.cms.impl.Utils.fileSize(file);
   }
-  
+
+  @SuppressWarnings("unchecked")
+  private LazyPageList<Object> getPageList(String path) throws Exception {
+    List<Node> nodeList = null;
+
+    UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
+    UIDocumentInfo uiDocInfo = this.getAncestorOfType(UIDocumentInfo.class);
+    Preference pref = uiExplorer.getPreference();
+    int nodesPerPage = pref.getNodesPerPage();
+
+    Set<String> allItemByTypeFilterMap = uiExplorer.getAllItemByTypeFilterMap();
+    if (allItemByTypeFilterMap.size() > 0)
+      nodeList = uiDocInfo.filterNodeList(uiExplorer.getChildrenList(path, !pref.isShowPreferenceDocuments()));
+    else
+      nodeList = uiDocInfo.filterNodeList(uiExplorer.getChildrenList(path, pref.isShowPreferenceDocuments()));
+
+    ListAccess<Object> nodeAccList =
+        new ListAccessImpl<Object>(Object.class, NodeLocation.getLocationsByNodeList(nodeList));
+    return new LazyPageList<Object>(nodeAccList, nodesPerPage);
+  }
+
   static public class ExpandNodeActionListener extends EventListener<UIDocumentNodeList> {
     public void execute(Event<UIDocumentNodeList> event) throws Exception {
       UIDocumentNodeList uicomp = event.getSource();
@@ -314,7 +354,7 @@ public class UIDocumentNodeList extends UIContainer {
         }
 //        uiExplorer.setSelectNode(workspaceName, uri);
         Node clickedNode = (Node)item;
-//        UIDocumentNodeList uiDocNodeListChild = uicomp.addChild(UIDocumentNodeList.class, null, 
+//        UIDocumentNodeList uiDocNodeListChild = uicomp.addChild(UIDocumentNodeList.class, null,
 //                                                                String.valueOf(clickedNode.getPath().hashCode()));
         UIDocumentNodeList uiDocNodeListChild = uicomp.getChildById(uicomp.getID(clickedNode));
         uiDocNodeListChild.setCurrentNode(clickedNode);
@@ -346,7 +386,7 @@ public class UIDocumentNodeList extends UIContainer {
       }
     }
   }
-  
+
   static public class CollapseNodeActionListener extends EventListener<UIDocumentNodeList> {
     public void execute(Event<UIDocumentNodeList> event) throws Exception {
       UIDocumentNodeList uicomp = event.getSource();
@@ -390,8 +430,8 @@ public class UIDocumentNodeList extends UIContainer {
       }
     }
   }
-  
-  
+
+
   public static class ManageVersionsActionListener extends EventListener<UIDocumentNodeList> {
     public void execute(Event<UIDocumentNodeList> event) throws Exception {
       NodeFinder nodeFinder = event.getSource().getApplicationComponent(NodeFinder.class);
@@ -441,5 +481,5 @@ public class UIDocumentNodeList extends UIContainer {
       }
     }
   }
-  
+
 }

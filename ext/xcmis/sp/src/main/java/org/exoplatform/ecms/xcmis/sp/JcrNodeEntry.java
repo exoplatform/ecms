@@ -35,6 +35,7 @@ import java.util.Set;
 
 import javax.jcr.InvalidItemStateException;
 import javax.jcr.ItemExistsException;
+import javax.jcr.ItemNotFoundException;
 import javax.jcr.LoginException;
 import javax.jcr.NoSuchWorkspaceException;
 import javax.jcr.Node;
@@ -352,23 +353,29 @@ class JcrNodeEntry
             {
                try
                {
-                  Node n = jcrProperty.getNode();
-                  if (n.getPrimaryNodeType().isNodeType(JcrCMIS.CMIS_NT_POLICY))
-                  {
-                     try
-                     {
-                        policies.add(storage.fromNode(n));
-                     }
-                     catch (ObjectNotFoundException onfe)
-                     {
-                        // Ignore nodes with object not found.
-                     }
-                  }
+            	   Node n = jcrProperty.getNode();
+            	   if (n.getPrimaryNodeType().isNodeType(JcrCMIS.CMIS_NT_POLICY))
+            	   {
+            		   try
+            		   {
+            			   policies.add(storage.fromNode(n));
+            		   }
+            		   catch (ObjectNotFoundException onfe)
+            		   {
+            			   // Ignore nodes with object not found.
+            		   }
+            	   }
                }
                catch (ValueFormatException ignored)
                {
                   // Can be thrown id met multi-valued property. Not care about
                   // it cause policy reference may not be multi-valued.
+               }
+               catch(ItemNotFoundException infe) {
+            	   if(LOG.isDebugEnabled()) {
+            		   LOG.debug("Cannot find the reference node", infe);
+            	   }
+                   // it cause of reference property does not found and should be ignored
                }
             }
          }

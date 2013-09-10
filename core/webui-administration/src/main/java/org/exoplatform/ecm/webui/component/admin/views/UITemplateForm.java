@@ -57,11 +57,11 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  * July 3, 2006 10:07:15 AM
  */
 @ComponentConfig(lifecycle = UIFormLifecycle.class, template = "system:/groovy/webui/form/UIForm.gtmpl", events = {
-    @EventConfig(listeners = UITemplateForm.SaveActionListener.class),
-    @EventConfig(phase = Phase.DECODE, listeners = UITemplateForm.CancelActionListener.class),
-    @EventConfig(phase = Phase.DECODE, listeners = UITemplateForm.ResetActionListener.class),
-    @EventConfig(phase = Phase.DECODE, listeners = UITemplateForm.ChangeActionListener.class),
-    @EventConfig(phase = Phase.DECODE, listeners = UITemplateForm.RestoreActionListener.class) })
+  @EventConfig(listeners = UITemplateForm.SaveActionListener.class),
+  @EventConfig(phase = Phase.DECODE, listeners = UITemplateForm.CancelActionListener.class),
+  @EventConfig(phase = Phase.DECODE, listeners = UITemplateForm.ResetActionListener.class),
+  @EventConfig(phase = Phase.DECODE, listeners = UITemplateForm.ChangeActionListener.class),
+  @EventConfig(phase = Phase.DECODE, listeners = UITemplateForm.RestoreActionListener.class) })
 public class UITemplateForm extends UIForm {
 
   final static private String FIELD_VERSION       = "version";
@@ -73,7 +73,7 @@ public class UITemplateForm extends UIForm {
   final static private String FIELD_HOMETEMPLATE  = "homeTemplate";
 
   final static private String FIELD_ENABLEVERSION = "enableVersion"; 
-  
+
 
   private NodeLocation      template_           = null;
 
@@ -99,13 +99,13 @@ public class UITemplateForm extends UIForm {
     versions.setRendered(false);
     addUIFormInput(versions);
     addUIFormInput(new UIFormTextAreaInput(FIELD_CONTENT, FIELD_CONTENT, null)
-        .addValidator(MandatoryValidator.class));
+    .addValidator(MandatoryValidator.class));
     addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(
-        MandatoryValidator.class).addValidator(ECMNameValidator.class));
+                                                                                    MandatoryValidator.class).addValidator(ECMNameValidator.class));
     List<SelectItemOption<String>> typeList = new ArrayList<SelectItemOption<String>>();
     addUIFormInput(new UIFormSelectBox(FIELD_HOMETEMPLATE, FIELD_HOMETEMPLATE, typeList));
     UICheckBoxInput enableVersion = new UICheckBoxInput(FIELD_ENABLEVERSION,
-        FIELD_ENABLEVERSION, null);
+                                                        FIELD_ENABLEVERSION, null);
     enableVersion.setRendered(false);
     addUIFormInput(enableVersion);
   }
@@ -113,8 +113,8 @@ public class UITemplateForm extends UIForm {
   public String getRepository() {
     try {
       return getApplicationComponent(RepositoryService.class).getCurrentRepository()
-                                                             .getConfiguration()
-                                                             .getName();
+          .getConfiguration()
+          .getName();
     } catch (RepositoryException e) {
       return null;
     }
@@ -129,7 +129,7 @@ public class UITemplateForm extends UIForm {
     SessionProvider provider = WCMCoreUtils.getUserSessionProvider();
     if (getId().equalsIgnoreCase("ecmTempForm")) {
       Node ecmTemplateHome = getApplicationComponent(ManageViewService.class).getTemplateHome(
-          BasePath.ECM_EXPLORER_TEMPLATES, provider);
+                                                                                              BasePath.ECM_EXPLORER_TEMPLATES, provider);
       if (ecmTemplateHome != null) {
         typeList.add(new SelectItemOption<String>(ecmTemplateHome.getName(), ecmTemplateHome
             .getPath()));
@@ -201,7 +201,7 @@ public class UITemplateForm extends UIForm {
     if (templatePath != null) {
       templatePath_ = templatePath;
       Node templateNode = getApplicationComponent(ManageViewService.class).
-              getTemplate(templatePath, WCMCoreUtils.getUserSessionProvider());
+          getTemplate(templatePath, WCMCoreUtils.getUserSessionProvider());
       template_ = NodeLocation.getNodeLocationByNode(templateNode);
       getUIStringInput(FIELD_NAME).setValue(templateNode.getName());
       getUIStringInput(FIELD_NAME).setDisabled(true);
@@ -252,13 +252,13 @@ public class UITemplateForm extends UIForm {
       String path = null;
       if (uiForm.getId().equalsIgnoreCase(UIECMTemplateList.ST_ecmTempForm)) {
         List<Node> ecmTemps = manageViewService.getAllTemplates(BasePath.ECM_EXPLORER_TEMPLATES,
-            WCMCoreUtils.getUserSessionProvider());
+                                                                WCMCoreUtils.getUserSessionProvider());
         for (Node temp : ecmTemps) {
           if (temp.getName().equals(templateName) && uiForm.isAddNew_) {
             Object[] args = { templateName };
             uiApp.addMessage(new ApplicationMessage("UITemplateForm.msg.template-name-exist", args,
-                ApplicationMessage.WARNING));
-            
+                                                    ApplicationMessage.WARNING));
+
             return;
           }
         }
@@ -279,7 +279,7 @@ public class UITemplateForm extends UIForm {
                                                homeTemplate,
                                                WCMCoreUtils.getUserSessionProvider());
           uiForm.template_ = NodeLocation.getNodeLocationByNode(manageViewService.getTemplate(path, 
-              WCMCoreUtils.getUserSessionProvider()));
+                                                                                              WCMCoreUtils.getUserSessionProvider()));
         } catch (AccessDeniedException ex) {
           uiApp.addMessage(new ApplicationMessage("UITemplateForm.msg.add-permission-denied",
                                                   null,

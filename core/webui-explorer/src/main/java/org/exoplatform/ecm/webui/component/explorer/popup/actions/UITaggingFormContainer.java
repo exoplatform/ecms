@@ -50,7 +50,7 @@ import java.util.List;
     template = "system:/groovy/portal/webui/container/UIContainer.gtmpl"
 )
 public class UITaggingFormContainer extends UIContainer implements UIPopupComponent {
-  private static final Log LOG = ExoLogger.getLogger(UICommentForm.class.getName());
+  private static final Log LOG = ExoLogger.getLogger(UITaggingFormContainer.class.getName());
 
   public void activate() {
     try {

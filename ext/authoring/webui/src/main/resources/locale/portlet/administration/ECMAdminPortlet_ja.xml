@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIViewFormTabPane>
+  <label>
+          <publicationRequestApproval>パブリケーション＞リクエストの承認</publicationRequestApproval>
+          <publicationApproveContent>パブリケーション＞コンテンツの承認</publicationApproveContent>
+          <publicationPublish>パブリケーション＞公開</publicationPublish>
+  </label>
+  </UIViewFormTabPane>
+</bundle>

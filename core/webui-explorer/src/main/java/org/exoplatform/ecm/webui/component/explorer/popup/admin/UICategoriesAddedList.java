@@ -17,7 +17,6 @@
 package org.exoplatform.ecm.webui.component.explorer.popup.admin;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.MissingResourceException;
 
@@ -165,9 +164,6 @@ public class UICategoriesAddedList extends UIContainer implements UISelectable {
 
       NodeLocation location = NodeLocation.getNodeLocationByNode(currentNode);
       WCMComposer composer = WCMCoreUtils.getService(WCMComposer.class);
-      composer.updateContent(location.getWorkspace(),
-                             location.getPath(),
-                             new HashMap<String, String>());
 
     } catch (AccessDeniedException accessDeniedException) {
       throw new MessageException(new ApplicationMessage("AccessControlException.msg",
@@ -192,11 +188,9 @@ public class UICategoriesAddedList extends UIContainer implements UISelectable {
       UIApplication uiApp = uiAddedList.getAncestorOfType(UIApplication.class);
       String nodePath = event.getRequestContext().getRequestParameter(OBJECTID);
       UIJCRExplorer uiExplorer = uiAddedList.getAncestorOfType(UIJCRExplorer.class);
-      WCMComposer composer = WCMCoreUtils.getService(WCMComposer.class);
       Node currentNode = uiExplorer.getCurrentNode();
       TaxonomyService taxonomyService =
         uiAddedList.getApplicationComponent(TaxonomyService.class);
-      List<Node> categories = taxonomyService.getAllCategories(currentNode);
 
       try {
         List<Node> listNode = uiAddedList.getAllTaxonomyTrees();
@@ -208,11 +202,6 @@ public class UICategoriesAddedList extends UIContainer implements UISelectable {
           }
         }
         uiAddedList.updateGrid(uiAddedList.getUIPageIterator().getCurrentPage());
-        for (Node catnode : categories) {
-          composer.updateContents(catnode.getSession().getWorkspace().getName(),
-                                  catnode.getPath(),
-                                  new HashMap<String, String>());
-        }
       } catch(AccessDeniedException ace) {
         throw new MessageException(new ApplicationMessage("UICategoriesAddedList.msg.access-denied",
                                    null, ApplicationMessage.WARNING)) ;

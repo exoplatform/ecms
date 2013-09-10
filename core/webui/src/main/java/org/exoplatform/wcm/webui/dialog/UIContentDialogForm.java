@@ -110,7 +110,7 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
 
   /** The Constant TAXONOMY_CONTENT_POPUP_WINDOW. */
   public static final String TAXONOMY_CONTENT_POPUP_WINDOW = "UIContentPopupWindow";
-  
+
   /** The Log **/
   private static final Log LOG  = ExoLogger.getLogger(UIContentDialogForm.class.getName());
 
@@ -749,46 +749,4 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
       event.getRequestContext().addUIComponentToUpdateByAjax(contentDialogForm);
     }
   }
-
-  /**
-   * The listener interface for receiving removeDataAction events.
-   * The class that is interested in processing a removeDataAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
-   * component's <code>addRemoveDataActionListener<code> method. When
-   * the removeDataAction event occurs, that object's appropriate
-   * method is invoked.
-   *
-   * @see RemoveDataActionEvent
-   */
- /* static public class RemoveDataActionListener extends EventListener<UIContentDialogForm> {
-    public void execute(Event<UIContentDialogForm> event) throws Exception {
-      UIContentDialogForm uiForm = event.getSource();
-      uiForm.isRemovePreference = true;
-      String referenceNodePath = event.getRequestContext().getRequestParameter(UIDialogForm.OBJECTID);
-      if (referenceNodePath.startsWith("/")) {
-        Node referenceNode = (Node)uiForm.getSession().getItem(uiForm.getNodePath() + referenceNodePath);
-        if(referenceNode.hasProperty("jcr:data")) {
-          referenceNode.setProperty("jcr:data", "");
-          uiForm.setDataRemoved(true);
-          referenceNode.save();
-        }
-      } else {
-        Node currentNode = (Node) uiForm.getSession().getItem(uiForm.getNodePath());
-        if (currentNode.isLocked()) {
-          Object[] args = { currentNode.getPath() };
-          Utils.createPopupMessage(uiForm, "UIPermissionManagerGrid.msg.node-locked", args,
-              ApplicationMessage.WARNING);
-          return;
-        }
-
-        if (currentNode.hasProperty(referenceNodePath)) {
-          currentNode.setProperty(referenceNodePath, "");
-          currentNode.save();
-          uiForm.setDataRemoved(true);
-        }
-      }
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
-    }
-  }*/
 }

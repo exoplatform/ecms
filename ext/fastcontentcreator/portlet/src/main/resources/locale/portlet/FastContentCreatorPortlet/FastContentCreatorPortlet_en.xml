@@ -23,9 +23,7 @@
 
   <UIFCCConfig>
     <label>
-      <select-repository>Select Repository</select-repository>
       <UIFCCSaveLocationField>Save Location</UIFCCSaveLocationField>
-      <UIFCCRepositoryFormSelectBox>Select Repository</UIFCCRepositoryFormSelectBox>
       <UIFCCWorkspaceFormSelectBox>Select Workspace</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>Template Options</UIFCCTemplateField>
       <UIFCCLocationFormInputAction>Location to Save</UIFCCLocationFormInputAction>
@@ -90,7 +88,7 @@
     <label>
       <workspaceName>Workspace:</workspaceName>
       <rootNodePath>Root Path:</rootNodePath>
-      <rootNodeInfo/>
+      <rootNodeInfo>Root node</rootNodeInfo>
     </label>
   </UIWorkspaceList>
 

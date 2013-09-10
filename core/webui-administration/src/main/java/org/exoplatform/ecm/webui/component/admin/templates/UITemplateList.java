@@ -51,13 +51,13 @@ import org.exoplatform.webui.event.EventListener;
  * 9:43:23 AM
  */
 @ComponentConfig(
-		template = "app:/groovy/webui/component/admin/template/UITemplateList.gtmpl",
-    events = {
-      @EventConfig(listeners = UITemplateList.EditActionListener.class),
-      @EventConfig(listeners = UITemplateList.DeleteActionListener.class, confirm = "UITemplateList.msg.confirm-delete"),
-      @EventConfig(listeners = UITemplateList.AddNewActionListener.class)
-    }
-)
+                 template = "app:/groovy/webui/component/admin/template/UITemplateList.gtmpl",
+                 events = {
+                     @EventConfig(listeners = UITemplateList.EditActionListener.class),
+                     @EventConfig(listeners = UITemplateList.DeleteActionListener.class, confirm = "UITemplateList.msg.confirm-delete"),
+                     @EventConfig(listeners = UITemplateList.AddNewActionListener.class)
+                 }
+    )
 
 public class UITemplateList extends UIPagingGrid {
 
@@ -69,16 +69,16 @@ public class UITemplateList extends UIPagingGrid {
   public static final String LABEL_PROPERTY = "label";
   public static final String ICON_FIELD = "icon";
   public static final String LABEL_FIELD = "label";
-  
+
   private String filter = DOCUMENTS_TEMPLATE_TYPE;
-  
+
   public void setTemplateFilter(String filter) {
-  	this.filter = filter;
+    this.filter = filter;
   }  
   public String getTemplateFilter() {
-  	return this.filter;
+    return this.filter;
   }
-  
+
   public UITemplateList() throws Exception {
     configure("name", NODETYPE_BEAN_FIELD, NODETYPE_ACTION) ;
   }
@@ -98,13 +98,13 @@ public class UITemplateList extends UIPagingGrid {
   static public class EditActionListener extends EventListener<UITemplateList> {
     public void execute(Event<UITemplateList> event) throws Exception {
       UITemplateList nodeTemplateList = event.getSource() ;
-      
+
       UITemplatesManager uiManager = nodeTemplateList.getAncestorOfType(UITemplatesManager.class);
       UITemplateContainer uiTemplateContainer = uiManager.getChildById(uiManager.getSelectedTabId()) ;
-      
+
       String nodeType = event.getRequestContext().getRequestParameter(OBJECTID) ;
       UIViewTemplate uiViewTemplate = uiTemplateContainer.createUIComponent(UIViewTemplate.class, null, 
-      		"UIViewTemplate" + "_" + uiManager.getSelectedTabId()) ;
+                                                                            "UIViewTemplate" + "_" + uiManager.getSelectedTabId()) ;
       uiViewTemplate.getChild(UITemplateEditForm.class).update(nodeType) ;
       uiViewTemplate.setNodeTypeName(nodeType) ;
       UIDialogTab uiDialogTab = uiViewTemplate.findFirstComponentOfType(UIDialogTab.class) ;
@@ -126,7 +126,7 @@ public class UITemplateList extends UIPagingGrid {
       UIPopupWindow uiPopup = uiManager.getChildById(UITemplatesManager.POPUP_TEMPLATE_ID);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup) ;
     }
- 
+
   }
 
   static public class DeleteActionListener extends EventListener<UITemplateList> {
@@ -134,17 +134,17 @@ public class UITemplateList extends UIPagingGrid {
       UITemplatesManager uiTemplatesManager = event.getSource().getAncestorOfType(UITemplatesManager.class);
       UITemplateContainer uiTemplateContainer = uiTemplatesManager.getChildById(uiTemplatesManager.getSelectedTabId());
       UITemplateList uiTemplateList = uiTemplateContainer.getChild(UITemplateList.class);
-      
+
       if (uiTemplatesManager.isEditingTemplate()) {
         UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class) ;
         uiApp.addMessage(new ApplicationMessage("UITemplateList.msg.editing-template", null, ApplicationMessage.WARNING)) ;
         return;
       }
-      
+
       String nodeType = event.getRequestContext().getRequestParameter(OBJECTID);
       TemplateService templateService = uiTemplateList.getApplicationComponent(TemplateService.class);
       try {
-      	DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, true);
+        DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, true);
         templateService.removeManagedNodeType(nodeType);
       } catch (PathNotFoundException ex) {
         UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class) ;
@@ -176,9 +176,9 @@ public class UITemplateList extends UIPagingGrid {
     private String icon;
 
     public TemplateData(String dataName, String dataLabel, String dataIcon) { 
-    	name = dataName ;
-    	label = dataLabel;
-    	icon = dataIcon;
+      name = dataName ;
+      label = dataLabel;
+      icon = dataIcon;
     }
     public String getName() { return name ; }
     public String getLabel() { return label; }
@@ -205,27 +205,27 @@ public class UITemplateList extends UIPagingGrid {
       while (nodes.hasNext()) {
         Node node = nodes.nextNode();        
         if (listNodeTypeName.contains(node.getName())) {
-        	label = node.hasProperty(LABEL_PROPERTY) ? node.getProperty(LABEL_PROPERTY).getString() : node.getName();
-      		icon = "uiIcon16x16Template" + label.replaceAll(" ", "");
-      		icon = icon + " uiIconFile";
-        	if(filter.equals(DOCUMENTS_TEMPLATE_TYPE)) {        		
-        		if(documentNodeTypes.contains(node.getName()))
-        			templateData.add(new TemplateData(node.getName(), label, icon));
-        	} else if(filter.equals(ACTIONS_TEMPLATE_TYPE)) {
-        		if(ntManager.getNodeType(node.getName()).isNodeType("exo:action")) templateData.add(new TemplateData(node.getName(), 
-        				label, icon ));
-        	} else {
-        		if(!ntManager.getNodeType(node.getName()).isNodeType("exo:action") && !documentNodeTypes.contains(node.getName())) 
-        			templateData.add(new TemplateData(node.getName(), label, icon ));
-        	}          
+          label = node.hasProperty(LABEL_PROPERTY) ? node.getProperty(LABEL_PROPERTY).getString() : node.getName();
+          icon = "uiIcon16x16Template" + label.replaceAll(" ", "");
+          icon = icon + " uiIconFile";
+          if(filter.equals(DOCUMENTS_TEMPLATE_TYPE)) {        		
+            if(documentNodeTypes.contains(node.getName()))
+              templateData.add(new TemplateData(node.getName(), label, icon));
+          } else if(filter.equals(ACTIONS_TEMPLATE_TYPE)) {
+            if(ntManager.getNodeType(node.getName()).isNodeType("exo:action")) templateData.add(new TemplateData(node.getName(), 
+                                                                                                                 label, icon ));
+          } else {
+            if(!ntManager.getNodeType(node.getName()).isNodeType("exo:action") && !documentNodeTypes.contains(node.getName())) 
+              templateData.add(new TemplateData(node.getName(), label, icon ));
+          }          
         }
       }
       Collections.sort(templateData, new TemplateComparator());
     }
     ListAccess<TemplateData> dataList = new ListAccessImpl<TemplateData>(TemplateData.class,
-                                                                         templateData);
+        templateData);
     LazyPageList<TemplateData> pageList = new LazyPageList<TemplateData>(dataList,
-                                                                         getUIPageIterator().getItemsPerPage());
+        getUIPageIterator().getItemsPerPage());
     getUIPageIterator().setTotalItems(templateData.size());
     getUIPageIterator().setPageList(pageList);
     if (currentPage > getUIPageIterator().getAvailablePage())

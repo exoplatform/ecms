@@ -60,17 +60,17 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  * 9:43:23 AM
  */
 @ComponentConfig(
-    lifecycle = UIFormLifecycle.class,
-    template =  "app:/groovy/webui/component/admin/template/UITemplateForm.gtmpl",
-    events = {
-      @EventConfig(listeners = UITemplateForm.SaveActionListener.class),
-      @EventConfig(listeners = UITemplateForm.RefreshActionListener.class, phase=Phase.DECODE),
-      @EventConfig(listeners = UITemplateForm.CancelActionListener.class, phase=Phase.DECODE),
-      @EventConfig(listeners = UITemplateForm.AddPermissionActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UITemplateForm.OnChangeActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIViewTemplate.SelectTabActionListener.class)
-    }
-)
+                 lifecycle = UIFormLifecycle.class,
+                 template =  "app:/groovy/webui/component/admin/template/UITemplateForm.gtmpl",
+                 events = {
+                   @EventConfig(listeners = UITemplateForm.SaveActionListener.class),
+                   @EventConfig(listeners = UITemplateForm.RefreshActionListener.class, phase=Phase.DECODE),
+                   @EventConfig(listeners = UITemplateForm.CancelActionListener.class, phase=Phase.DECODE),
+                   @EventConfig(listeners = UITemplateForm.AddPermissionActionListener.class, phase = Phase.DECODE),
+                   @EventConfig(listeners = UITemplateForm.OnChangeActionListener.class, phase = Phase.DECODE),
+                   @EventConfig(listeners = UIViewTemplate.SelectTabActionListener.class)
+                 }
+    )
 public class UITemplateForm extends UIFormTabPane implements UISelectable {
   final static public String FIELD_NAME = "name" ;
   final static public String FIELD_LABEL = "label" ;
@@ -87,29 +87,29 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
   public static final String DOCUMENTS_TEMPLATE_TYPE = "templates";
   public static final String ACTIONS_TEMPLATE_TYPE = "actions";
   public static final String OTHERS_TEMPLATE_TYPE = "others";
-  
+
   private String selectedTabId = "";
   private String filter = ""; //DOCUMENTS_TEMPLATE_TYPE;
-  
+
   public String getSelectedTabId() {
-     return selectedTabId;
+    return selectedTabId;
   }
 
   public void setSelectedTab(String renderTabId) {
-     selectedTabId = renderTabId;
+    selectedTabId = renderTabId;
   }
-  
+
   public String getFilter() {
-  	return filter;
+    return filter;
   }
-  
+
   public void setFilter(String filter) {
-  	this.filter = filter;
+    this.filter = filter;
   }
 
   public void setSelectedTab(int index)
   {
-  	selectedTabId = getChild(index - 1).getId();
+    selectedTabId = getChild(index - 1).getId();
   }
 
   public UITemplateForm() throws Exception {
@@ -122,26 +122,26 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
                                addValidator(MandatoryValidator.class)) ;
 
     templateTab.addUIFormInput(new UICheckBoxInput(FIELD_ISTEMPLATE,
-                                                                FIELD_ISTEMPLATE,
-                                                                null).setChecked(true));
+                                                   FIELD_ISTEMPLATE,
+                                                   null).setChecked(true));
     templateTab.addUIFormInput(new UIFormStringInput(FIELD_PERMISSION, FIELD_PERMISSION,
                                                      null).setDisabled(true).addValidator(MandatoryValidator.class));
     templateTab.setActionInfo(FIELD_PERMISSION, new String[] {"AddPermission"}) ;
     addUIComponentInput(templateTab) ;
-    
-    
+
+
     setSelectedTab(templateTab.getId()) ;
     UIFormInputSetWithNoLabel defaultDialogTab = new UIFormInputSetWithNoLabel(FIELD_TAB_DIALOG) ;
     defaultDialogTab.addUIFormInput(new UIFormTextAreaInput(FIELD_DIALOG, FIELD_DIALOG, null).
                                     addValidator(MandatoryValidator.class)) ;
     addUIFormInput(defaultDialogTab) ;
-    
-    
+
+
     UIFormInputSetWithNoLabel defaultViewTab = new UIFormInputSetWithNoLabel(FIELD_TAB_VIEW) ;
     defaultViewTab.addUIFormInput(new UIFormTextAreaInput(FIELD_VIEW, FIELD_VIEW, null).
                                   addValidator(MandatoryValidator.class)) ;
     addUIFormInput(defaultViewTab) ;
-    
+
     UIFormInputSetWithNoLabel defaultSkinTab = new UIFormInputSetWithNoLabel(FIELD_TAB_SKIN) ;
     defaultSkinTab.addUIFormInput(new UIFormTextAreaInput(FIELD_SKIN, FIELD_SKIN, null)) ;
     addUIFormInput(defaultSkinTab) ;
@@ -194,31 +194,31 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
   }
 
   public List<SelectItemOption<String>> getOption() throws Exception { 
-    
+
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>() ;
     NodeTypeManager nodeTypeManager =
         getApplicationComponent(RepositoryService.class).getCurrentRepository().getNodeTypeManager() ;
     Node templatesHome = getApplicationComponent(TemplateService.class).
         getTemplatesHome(WCMCoreUtils.getUserSessionProvider());
-    
+
     if(templatesHome != null) {
       NodeIterator templateIter = templatesHome.getNodes() ;
       List<String> templates = new ArrayList<String>() ;
       while (templateIter.hasNext()) {
         templates.add(templateIter.nextNode().getName()) ;
       }
-      
+
       NodeTypeIterator iter = nodeTypeManager.getAllNodeTypes() ;
       while (iter.hasNext()) {
         NodeType nodeType = iter.nextNodeType();
         if (nodeType.isMixin()) continue;
         String nodeTypeName = nodeType.getName();
         if (!templates.contains(nodeTypeName)) {
-        	if(filter.equals(ACTIONS_TEMPLATE_TYPE) && nodeTypeManager.getNodeType(nodeTypeName).isNodeType("exo:action")) {
-        	  options.add(new SelectItemOption<String>(nodeTypeName, nodeTypeName));
-        	} else {
-        		options.add(new SelectItemOption<String>(nodeTypeName, nodeTypeName));
-        	}
+          if(filter.equals(ACTIONS_TEMPLATE_TYPE) && nodeTypeManager.getNodeType(nodeTypeName).isNodeType("exo:action")) {
+            options.add(new SelectItemOption<String>(nodeTypeName, nodeTypeName));
+          } else {
+            options.add(new SelectItemOption<String>(nodeTypeName, nodeTypeName));
+          }
         }
       }
       Collections.sort(options, new TemplateNameComparator()) ;
@@ -235,7 +235,7 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
     public void execute(Event<UITemplateForm> event) throws Exception {
       UITemplateForm uiForm = event.getSource() ;
       UITemplatesManager uiManager = event.getSource().getAncestorOfType(UITemplatesManager.class) ;
-      
+
       String name = uiForm.getUIFormSelectBox(FIELD_NAME).getValue().trim() ;
       String label = uiForm.getUIStringInput(FIELD_LABEL).getValue().trim() ;
       String dialog = uiForm.getUIFormTextAreaInput(FIELD_DIALOG).getValue() ;
@@ -250,7 +250,7 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
         uiApp.addMessage(new ApplicationMessage("UITemplateForm.msg.role-require",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        
+
         return;
       }
       String[] roles = {role} ;
@@ -260,11 +260,11 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
         view = "";
       TemplateService templateService = uiForm.getApplicationComponent(TemplateService.class) ;
       templateService.addTemplate(TemplateService.DIALOGS, name, label, isDocumentTemplate,
-          TemplateService.DEFAULT_DIALOG, roles, new ByteArrayInputStream(dialog.getBytes())) ;
+                                  TemplateService.DEFAULT_DIALOG, roles, new ByteArrayInputStream(dialog.getBytes())) ;
       templateService.addTemplate(TemplateService.VIEWS, name, label, isDocumentTemplate,
-          TemplateService.DEFAULT_VIEW, roles, new ByteArrayInputStream(view.getBytes())) ;
+                                  TemplateService.DEFAULT_VIEW, roles, new ByteArrayInputStream(view.getBytes())) ;
       templateService.addTemplate(TemplateService.SKINS, name, label, isDocumentTemplate,
-          TemplateService.DEFAULT_SKIN, roles, new ByteArrayInputStream(skin.getBytes())) ;
+                                  TemplateService.DEFAULT_SKIN, roles, new ByteArrayInputStream(skin.getBytes())) ;
       WCMComposer composer = WCMCoreUtils.getService(WCMComposer.class);
       composer.updateTemplatesSQLFilter();
       uiManager.refresh() ;

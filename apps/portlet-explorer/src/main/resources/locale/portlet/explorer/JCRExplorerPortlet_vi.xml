@@ -1,0 +1,3146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.UICommentForm             #
+  #############################################################################
+  -->
+  <UICommentForm>
+    <label>
+      <name>Tên</name>
+      <email>Email</email>
+      <website>Trang web</website>
+      <comment>Bình luận</comment>
+    </label>
+    <action>
+      <Save>Lưu</Save>
+      <Cancel>Hủy bỏ</Cancel>
+    </action>
+    <msg>
+      <not-support>Bạn không thể bình luận trên kiểu tài liệu này.</not-support>
+      <not-checkedout>Bạn phải checkout nút đó trước khi đưa ra bình luận.</not-checkedout>
+      <content-null>Bạn không thể đăng tải một bình luận trống.</content-null>
+    </msg>
+  </UICommentForm>
+  <!--
+  #############################################################
+  # org.exoplatform.ecm.webui.component.UIVoteForm.gtmpl    #
+  #############################################################
+  -->
+  <UIVoteForm>
+    <title>
+      <normal>Yếu</normal>
+      <good>Dưới  trung bình</good>
+      <verygood>Trung bình</verygood>
+      <excellent>Khá</excellent>
+      <best>Tốt</best>
+      <no-value>chưa có giá trị</no-value>
+    </title>
+    <label>
+      <my-rating>Đánh giá của tôi:</my-rating>
+    </label>
+    <button>
+      <label>
+        <confirm>OK</confirm>
+      </label>
+    </button>
+    <msg>
+      <not-support>Không được phép bình chọn cho kiểu tài liệu này.</not-support>
+      <not-checkedout>Bạn phải checkout nút đó trước khi bình chọn.</not-checkedout>
+      <vote-restriction>Bạn không thể bình chọn quá 1 lần.</vote-restriction>
+    </msg>
+  </UIVoteForm>
+ 
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer    #
+  #############################################################################
+  -->
+  <UIJCRExplorer>
+    <msg>
+      <refresh-session-success>Phiên làm việc đã được làm mới thành công.</refresh-session-success>
+      <no-node-history>Bạn đang ở thư mục gốc.</no-node-history>
+      <save-session-success>Tất cả thay đổi đã được lưu lại.</save-session-success>
+      <target-path-not-found>Bạn không thể truy cập nút này vì nó không tồn tại nữa hoặc bạn không có quyền truy cập nó.</target-path-not-found>
+    </msg>
+  </UIJCRExplorer>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UISideBar        #
+  #############################################################################
+  -->
+  <UISideBar>
+    <label>
+      <Relation>Quan hệ</Relation>
+      <Explorer>Quản lý Tệp</Explorer>
+      <Close>Đóng Cây thư mục</Close>
+      <TagExplorer>Tập hợp Nhãn</TagExplorer>
+      <Clipboard>Bảng ghi tạm</Clipboard>
+      <SavedSearches>Các Tìm kiếm Lưu lại</SavedSearches>
+    </label>
+    <title>
+      <Control>Điều khiển Cây thư mục</Control>
+      <Close>Đóng Cây thư mục</Close>
+    </title>
+  </UISideBar>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIExplorerActionBar #
+  ################################################################################
+  -->
+  <UIViewBar>
+    <label>
+      <driveWorkspace>Không gian lưu trữ Ổ đĩa:</driveWorkspace>
+      <backToJCR>Quay trở về danh sách các ổ đĩa</backToJCR>
+      <setUpBrowser>Thiết lập các tùy chọn hiển thị</setUpBrowser>
+      <refesh>Làm mới</refesh>
+      <currentDrive>Ổ đĩa Hiện tại</currentDrive>
+      <selectView>Chọn Giao diện xem</selectView>
+      <showSideBar>Hiện Cây thư mục</showSideBar>
+      <more>Thêm</more>
+      <backTo>Trở lại</backTo>
+    </label>
+  </UIViewBar>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UITreeExplorer    #
+  #############################################################################
+  -->
+  <UITreeExplorer>
+    <title>Trình duyệt</title>
+    <label>
+      <Root>Gốc</Root>
+      <webDavView>Tải xuống và cho phép thay đổi</webDavView>
+    </label>
+    <msg>
+      <path-not-found>Thành phần này đã bị xóa hoặc thay đổi. Hãy nhấp nút Làm mới.</path-not-found>
+    </msg>
+  </UITreeExplorer>
+  <!--
+  ##################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIViewRelationList    #
+  ##################################################################################
+  -->
+  <UIViewRelationList>
+    <label>
+      <languages-list>Bản dịch</languages-list>
+      <relation-list>Quan hệ</relation-list>
+      <references-list>Tham chiếu</references-list>
+      <no-related-document>Không có tài liệu liên quan.</no-related-document>
+      <related-document>Các tài liệu liên quan</related-document>
+    </label>
+  </UIViewRelationList>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.control.UIPreferencesForm  #
+  #########################################################################################
+  -->
+  <UIPreferencesForm>
+    <title>Thiết lập tùy chọn hiển thị</title>
+    <label>
+      <enableStructure>Hiển thị cấu trúc DMS:</enableStructure>
+      <showSideBar>Hiện Cây thư mục:</showSideBar>
+      <showHiddenNode>Hiện Nút Ẩn:</showHiddenNode>
+      <showNonDocument>Hiển thị tất cả các kiểu nút:</showNonDocument>
+      <showRefDocuments>Hiện Tài liệu được Tham chiếu:</showRefDocuments>
+      <enableDragAndDrop>Bật tính năng Kéo Thả:</enableDragAndDrop>
+      <sortBy>Phân loại theo:</sortBy>
+      <order>Xếp thứ tự theo:</order>
+      <nodesPerPage>Số nút/1 trang:</nodesPerPage>
+    </label>
+    <action>
+      <Back>Đóng lại</Back>
+      <Save>Lưu</Save>
+    </action>
+  </UIPreferencesForm>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.control.UIPreferencesForm  #
+  #########################################################################################
+  -->
+  <UIAllItemsPreferenceForm>
+    <title>Thiết lập Tùy chọn Bộ lọc</title>
+    <action>
+      <Cancel>Hủy bỏ</Cancel>
+      <Save>Lưu</Save>
+    </action>
+  </UIAllItemsPreferenceForm>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIRenameForm  #
+  #########################################################################################
+  -->
+  <UIRenameForm>
+    <title>Đổi tên</title>
+    <label>
+      <nameField>Tên</nameField>
+      <titleField>Tiêu đề</titleField>
+    </label>
+    <action>
+      <Cancel>Hủy bỏ</Cancel>
+      <Save>Lưu</Save>
+      <Back>Quay lại</Back>
+    </action>
+    <msg>
+      <rename-successfull>Nút '{0}' được đổi tên thành công sang '{1}'.</rename-successfull>
+      <rename-denied>Truy nhập bị khước từ. Bạn không thể đổi tên nút này.</rename-denied>
+      <fileName-invalid>Tên mới chứa một số ký tự không hợp lệ.</fileName-invalid>
+      <newName-same-oldName>Tên mới đã tồn tại. Vui lòng kiểm tra lại.</newName-same-oldName>
+      <version-exception>Nút này hoặc nút cha của nó chưa được check out.</version-exception>
+      <lock-exception>Nút này đang bị khóa. Vui lòng mở khóa trước khi đổi tên.</lock-exception>
+      <constraintViolation-exception>Lỗi đã xảy ra khi đang đổi tên nút '{0}'. Vui lòng kiểm tra lại.</constraintViolation-exception>
+      <unknown-prefix>Tiền tố '{0}' chưa được đăng ký.</unknown-prefix>
+      <rename-error>Lỗi đã xảy ra khi đang đổi tên nút này. Vui lòng kiểm tra lại.</rename-error>
+    </msg>
+  </UIRenameForm>
+  <UIPopupWindow>
+    <title>
+      <UIRenameForm>Đổi tên</UIRenameForm>
+      <UIActionContainer>Hành động sửa đổi</UIActionContainer>
+      <UIFolderForm>Thêm Thư mục Mới</UIFolderForm>
+      <UIUploadManager>Tải lên Tệp tin</UIUploadManager>
+      <UIReferencesList>Danh sách Tham chiếu</UIReferencesList>
+      <UIExportNode>Xuất dữ liệu ra</UIExportNode>
+      <UINodeTypeInfo>Thông tin Kiểu Nút</UINodeTypeInfo>
+      <UIVersionInfo>Thông tin Phiên bản</UIVersionInfo>
+      <UIActivateVersion>Kích hoạt Quản lý phiên bản</UIActivateVersion>
+      <UIAuditingInfo>Kiểm tra thông tin</UIAuditingInfo>
+      <UIActivateAuditing>Kích hoạt Ghi lại thay đổi</UIActivateAuditing>
+      <UIPermissionManager>Quản lý Phân quyền</UIPermissionManager>
+      <UIPropertiesManager>Quản lý Thuộc tính</UIPropertiesManager>
+      <UIECMSearch>Tìm kiếm Nâng cao</UIECMSearch>
+      <UISavedQuery>Danh sách Truy vấn được lưu</UISavedQuery>
+      <UIWatchDocumentForm>Theo dõi Tài liệu</UIWatchDocumentForm>
+      <UIActionManager>Quản lý Hành động</UIActionManager>
+      <UIDocumentForm>Chỉnh sửa Tài liệu</UIDocumentForm>
+      <UIDocumentFormController>Thêm Tài liệu Mới</UIDocumentFormController>
+      <EditFormController>Chỉnh sửa Tài liệu</EditFormController>
+      <UIRelationManager>Thêm Quan hệ</UIRelationManager>
+      <UICategoryManager>Thêm Danh mục</UICategoryManager>
+      <UIImportNode>Nhập</UIImportNode>
+      <UIViewMetadataManager>Xem Siêu dữ liệu</UIViewMetadataManager>
+      <UIVoteForm>Bình chọn Tài liệu</UIVoteForm>
+      <UICommentForm>Bình luận</UICommentForm>
+      <UIPreferencesForm>Tùy chọn Thiết lập</UIPreferencesForm>
+      <UIPublicationManager>Quản lý Đăng tải</UIPublicationManager>
+      <UIConfirmMessage>Có xóa không?</UIConfirmMessage>
+      <UIDeleteFileConfirmMessage>Xóa Tệp tin?</UIDeleteFileConfirmMessage>
+      <UIDeleteFolderConfirmMessage>Xoá Thư mục?</UIDeleteFolderConfirmMessage>
+      <UIDeleteItemsConfirmMessage>Xóa Mục?</UIDeleteItemsConfirmMessage>
+      <UIRestoreConfirmMessage>Xác nhận Khôi phục</UIRestoreConfirmMessage>
+      <UIActivePublication>Đăng ký Chu trình Xuất bản</UIActivePublication>
+      <UITaggingForm>Gán nhãn Tài liệu</UITaggingForm>
+      <UIThumbnailForm>Thêm Ảnh Nhỏ</UIThumbnailForm>
+      <UIAllItemsPreferenceForm>Thiết lập Tùy chọn</UIAllItemsPreferenceForm>
+      <UISelectRestorePath>Chọn Đường dẫn Khôi phục</UISelectRestorePath>
+      <UISEOForm>Quản lý SEO</UISEOForm>
+      <UISEOToolbarForm>Quản lý SEO</UISEOToolbarForm>
+    </title>
+    <header>
+      <workspace>Không gian làm việc</workspace>
+      <path>Đường dẫn</path>
+    </header>
+  </UIPopupWindow>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIResourceForm #
+  #########################################################################################
+  -->
+  <UIResourceForm>
+    <title>Chỉnh sửa Nội dung Tệp tin</title>
+    <label>
+      <name>Tên</name>
+      <textToModify>Văn bản cần sửa đổi</textToModify>
+      <fileToUpload>Tải nội dung mới cho tài liệu đó (phải có cùng định dạng).</fileToUpload>
+    </label>
+  </UIResourceForm>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIActionBar      #
+  ###################################################################################
+  -->
+  <UIActionBar>
+    <tooltip>
+      <AddFolder>Thư mục Mới</AddFolder>
+      <AddDocument>Nội dung Mới</AddDocument>
+      <EditDocument>Chỉnh sửa</EditDocument>
+      <Upload>Tải lên</Upload>
+      <Paste>Dán</Paste>
+      <Search>Tìm kiếm</Search>
+      <WatchDocument>Theo dõi/Ngừng theo dõi</WatchDocument>
+      <TaggingDocument>Gán nhãn</TaggingDocument>
+      <Vote>Bình chọn</Vote>
+      <Comment>Nhận xét</Comment>
+      <ManageVersions>Phiên bản</ManageVersions>
+      <ManageAuditing>Quản lý thay đổi</ManageAuditing>
+      <ManagePublications>Xuất bản</ManagePublications>
+      <ManageCategories>Danh mục</ManageCategories>
+      <ManageRelations>Quan hệ</ManageRelations>
+      <ManageActions>Hành động</ManageActions>
+      <ExportNode>Xuất</ExportNode>
+      <ImportNode>Nhập</ImportNode>
+      <OverloadThumbnail>Chèn Hình nhỏ</OverloadThumbnail>
+      <ManageHidden>Hiện/Ẩn Nội dung</ManageHidden>
+      <ViewReferences>Các Tham chiếu</ViewReferences>
+      <ViewNodeType>Xem Kiểu Nút</ViewNodeType>
+      <ViewPermissions>Phân quyền</ViewPermissions>
+      <ViewProperties>Thuộc tính</ViewProperties>
+      <ViewMetadatas>Siêu dữ liệu</ViewMetadatas>
+      <ViewRelations>Hiện/Ẩn Quan hệ</ViewRelations>
+      <ShowJCRStructure>Hiện/Ẩn Cấu trúc Nội dung</ShowJCRStructure>
+    </tooltip>
+    <msg>
+      <cannot-action-in-rootnode>Bạn không thể thực hiện hành động này ở nút gốc.</cannot-action-in-rootnode>
+      <node-checkedin>Bạn phải check out trước.</node-checkedin>
+      <cannot-enable-version-rootnode>Không thể kích hoạt tính năng lập phiên bản cho nút gốc.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Không thể kích hoạt tính năng xuất bản cho nút gốc.</cannot-enable-publication-rootnode>
+      <manage-publication>
+        <not-supported-nodetype>Tính năng quản lý xuất bản chỉ hỗ trợ nút tài liệu.</not-supported-nodetype>
+        <no-publication-lifecycle>Không có chu trình xuất bản nào được thiết lập cấu hình.</no-publication-lifecycle>
+      </manage-publication>
+      <unsubcriber-lifecycle>Nút đã bỏ đăng ký.</unsubcriber-lifecycle>
+      <not-supported-nodetype>Chu trình bỏ đăng ký chỉ hỗ trợ cho nút tài liệu.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>Nút đã được ngừng đăng ký thành công.</unsubcriber-lifecycle-finish>
+      <access-false>Nút này không phải là một bài viết hoặc chưa được check in.</access-false>
+      <unsupported-action>Hành động này không được hỗ trợ.</unsupported-action>
+      <not-relationable>Nút này chưa có bất kỳ liên kết nào có quan hệ với nút khác.</not-relationable>
+      <node-pasted>Nút '{0}' đã được dán vào vị trí '{1}'. Thao tác này đã được lưu lại.</node-pasted>
+      <no-node-selected>Không có nút nào được sao chép.</no-node-selected>
+      <unable-edit>Nút '{0}' với kiểu nút '{1}' không được hỗ trợ để chỉnh sửa.</unable-edit>
+      <not-support>Không thể chỉnh sửa nút đã chọn.</not-support>
+      <template-null>Nút này không sẵn có hội thoại nào.</template-null>
+      <keyword-null>Không có từ khóa nào để tìm kiếm.</keyword-null>
+      <not-found>Không tìm thấy kết quả nào.</not-found>
+      <keyword-not-allow>Không cho phép dùng từ khóa này.</keyword-not-allow>
+      <is-not-referenable>Không thể tham chiếu được nút '{0}'.</is-not-referenable>
+      <access-denied>Truy cập bị khước từ. Bạn không được phân quyền chỉnh sửa trên nút này.</access-denied>
+      <access-add-denied>Truy cập bị từ chối. Bạn không được phân quyền thêm mới trên nút này.</access-add-denied>
+      <item-existed>Nút này đã tồn tại vì không thể có cùng tên với nút khác.</item-existed>
+      <removed-hidden-mixin>Bạn đã gỡ bỏ thành công nút mixin ẩn.</removed-hidden-mixin>
+      <added-hidden-mixin>Bạn đã thêm thành công nút mixin ẩn.</added-hidden-mixin>
+      <not-supported>Tính năng này chỉ hỗ trợ cho kiểu tài liệu.</not-supported>
+      <empty-file-type>Bạn không thể thêm tài liệu vào nút này.</empty-file-type>
+      <unsupported-watch>Chỉ có thể theo dõi nút tài liệu.</unsupported-watch>
+      <watch-checkedin>Bạn phải check out nút trước khi theo dõi.</watch-checkedin>
+      <unsupported-tagging>Chỉ có thể gán nhãn cho nút tài liệu.</unsupported-tagging>
+      <tagnode-checkedin>Bạn phải check out nút trước khi gán nhãn.</tagnode-checkedin>
+    </msg>
+    <title>
+      <select-tab>Chọn Tab</select-tab>
+      <SimpleSearch>Tìm kiếm Nhanh</SimpleSearch>
+      <AdvanceSearch>Tìm kiếm Nâng cao</AdvanceSearch>
+      <SavedQueries>Truy vấn được lưu</SavedQueries>
+      <ShowAllOwnedByUser>Hiện Toàn bộ Mục Cá nhân</ShowAllOwnedByUser>
+      <ShowAllFavourite>Hiện Toàn bộ Mục Yêu thích</ShowAllFavourite>
+      <ShowAllHidden>Hiện Toàn bộ Mục Ẩn đi</ShowAllHidden>
+      <ShowAllFromTrash>Hiện Toàn bộ Mục trong Thư mục Rác</ShowAllFromTrash>
+    </title>
+  </UIActionBar>
+  <UIPopupMenu>
+    <msg>
+      <has-not-permission>Truy cập bị khước từ. Bạn không có quyền thêm mới trên nút này.</has-not-permission>
+      <has-not-edit-permission>Truy cập bị khước từ. Bạn không có quyền chỉnh sửa trên nút này. Vui lòng liên hệ với quản trị viên.</has-not-edit-permission>
+      <cannot-login-node>Bạn không thể truy cập và dán nút ở đây.</cannot-login-node>
+      <cannot-paste-nodetype>Bạn không thể dán nút ở đây.</cannot-paste-nodetype>
+      <has-not-permission-unlok>Bạn không được phân quyền để mở khóa nút này.</has-not-permission-unlok>
+      <bound-exception>Bạn không được phân quyền để đổi tên nút này. Vui lòng liên hệ với quản trị viên.</bound-exception>
+      <bound-move-exception>Bạn không thể di chuyển một nút đến chính nó hoặc đến nút con của nó.</bound-move-exception>
+      <does-not-support-auditing>Bạn không thể kích hoạt tính năng ghi lại thay đổi trên nút này.</does-not-support-auditing>
+      <can-not-rename-node>Bạn không được phân quyền để đổi tên nút này. Vui lòng liên hệ với quản trị viên để được phân quyền thích hợp.</can-not-rename-node>
+      <can-not-cut-node>Bạn không được phân quyền để cắt nút này. Vui lòng liên hệ với quản trị viên.</can-not-cut-node>
+      <can-not-remove-node>Bạn không được phân quyền để gỡ bỏ nút này. Vui lòng liên hệ với quản trị viên.</can-not-remove-node>
+      <can-not-lock-node>Bạn không được phân quyền để khóa nút {0}. Vui lòng liên hệ với quản trị viên.</can-not-lock-node>
+      <can-not-unlock-node>Bạn không được phân quyền để mở khóa nút này. Vui lòng liên hệ với quản trị viên.</can-not-unlock-node>
+      <no-node>Vui lòng chọn ít nhất một nút trước khi dán.</no-node>
+      <can-not-paste-node>Bạn không được phân quyền để chuyển đến nút này. Vui lòng liên hệ với quản trị viên.</can-not-paste-node>
+      <can-not-move-node>Bạn không được phân quyền để di chuyển nút này. Vui lòng liên hệ với quản trị viên.</can-not-move-node>
+      <does-not-support-versioning>Bạn không được phân quyền để chuyển đến nút này. Vui lòng liên hệ với quản trị viên.</does-not-support-versioning>
+      <path-not-found>Thành phần này đã bị xóa hoặc thay đổi. Vui lòng nhấp nút Làm mới.</path-not-found>
+      <paste-lock-exception>Bạn không thể dán '{0}' lên nút này vì nút nguồn hoặc nút đích đến bị khóa hoặc có liên quan với nút bị khóa.</paste-lock-exception>
+      <can-not-checkin-node>Bạn không thể checkin nút này. Hãy kiểm tra xem bạn có đúng quyền không.</can-not-checkin-node>
+      <can-not-checkout-node>Bạn không thể check out nút này. Hãy kiểm tra xem bạn có đúng quyền không.</can-not-checkout-node>
+      <move-constraint-exception>Lỗi đã xảy ra khi đang di chuyển nút.</move-constraint-exception>
+      <not-lock-owner>Bạn không thể mở khóa nút này vì bạn không phải là người thực hiện khóa nút.</not-lock-owner>
+      <is-checked-in>Vui lòng check out nút này trước khi đổi tên.</is-checked-in>
+      <is-checked-in-lock>Vui lòng check out nút này trước khi khóa.</is-checked-in-lock>
+      <cant-lock>Bạn không thể khóa nút này.</cant-lock>
+      <node-locked>Mục với đường dẫn {0} hoặc có vị trí cao hơn đang bị khóa.</node-locked>
+      <can-not-delete>Vui lòng đóng nút này trước khi xóa.</can-not-delete>
+      <can-not-delete-version>Bạn không thể xóa nút này vì nó đang được đánh phiên bản.</can-not-delete-version>
+      <not-support>Bạn không thể xóa nút đã chọn. Vui lòng chọn nút khác.</not-support>
+      <current-node-not-allow-paste>Bạn không thể dán kiểu nút đã sao chép trên nút hiện tại.</current-node-not-allow-paste>
+      <copied-node-in-versioning>Bạn không thể dán nút đã sao chép trong quá trình đánh phiên bản.</copied-node-in-versioning>
+      <parent-node-locked>Bạn không được phân quyền để mở khóa nút '{0}'.</parent-node-locked>
+      <this-node-locked-by-parent>Bạn không thể mở khóa nút này vì nó đã bị khóa bởi nút cha hoặc nút mức trên.</this-node-locked-by-parent>
+      <paste-node-same-name>Bạn không thể dán nút có cùng tên với nút trong thư mục đích đến.</paste-node-same-name>
+      <has-not-add-permission>Bạn không được phân quyền để thêm mới nút.</has-not-add-permission>
+      <node-cutting>Nút đang được cắt. Bạn không thể dán ở đây.</node-cutting>
+      <access-denied>Truy cập bị từ chối! Có thể bạn không được phân quyền trên nút này.</access-denied>
+      <remove-verion-exception>Không thể gỡ bỏ vì nút này (hoặc nút cha của nó) đang được checkin.</remove-verion-exception>
+      <remove-referentialIntegrityException>Bạn không thể xóa vì nút này hiện đang là đích đến của thuộc tính Tham chiếu.</remove-referentialIntegrityException>
+      <constraintviolation-exception>Không tìm thấy thuộc tính bắt buộc jcr:uuid. Có thể nút đã bị xóa hoặc thay đổi. Vui lòng nhấp nút Làm mới.</constraintviolation-exception>
+      <path-not-found-exception>Nút này đã bị xóa hoặc thay đổi. Vui lòng nhấp nút Làm mới.</path-not-found-exception>
+      <not-exist-categories>Danh mục không tồn tại.</not-exist-categories>
+    </msg>
+  </UIPopupMenu>
+  <!--
+  #############################################################################
+  #     org.exoplatform.ecm.webui.component.explorer.actions.UIFolderForm     #
+  #############################################################################
+  -->
+  <UIFolderForm>
+    <action>
+      <Cancel>Hủy bỏ</Cancel>
+      <Save>Tạo Thư mục</Save>
+    </action>
+    <label>
+      <titleTextBox>Tên Thư mục:</titleTextBox>
+      <customTypeCheckBox>Sử dụng kiểu thư mục tùy chỉnh</customTypeCheckBox>
+    </label>
+    <title>Thêm/Chỉnh sửa Thư mục</title>
+    <msg>
+      <addFolder-successful>Thêm thành công thư mục '{0}'.</addFolder-successful>
+      <name-invalid>Vui lòng nhập tên thư mục.</name-invalid>
+      <title-invalid>Vui lòng nhập tiêu đề thư mục.</title-invalid>
+      <name-not-allowed>Tên này không được phép.</name-not-allowed>
+      <fileName-error>Tên tệp không hợp lệ.</fileName-error>
+      <constraint-violation>Nút hiện tại không cho phép bạn thêm kiểu nút '{0}'.</constraint-violation>
+      <repository-exception>Lỗi đã xảy ra. Vui lòng liên hệ với quản trị viên của bạn để có thêm chi tiết.</repository-exception>
+      <repository-exception-permission>Bạn không được phân quyền để thêm mới thư mục vào nút này.</repository-exception-permission>
+      <numberformat-exception>Bạn không thể lưu thư mục này. Tên đã cung cấp phải ở định dạng số.</numberformat-exception>
+      <!--DMS 2.4.x; ECM-3553-->
+      <not-allow-sameNameSibling>Quá trình lưu không thành công do thư mục hiện tại không cho phép trùng tên.</not-allow-sameNameSibling>
+      <ntFolder-not-avaiable>Bạn phải chọn kiểu thư mục tùy chỉnh.</ntFolder-not-avaiable>
+    </msg>
+    <help>
+      <customTypeCheckBoxHelp>Đánh dấu chọn nếu bạn định lưu nội dung web hay kiểu tài liệu tùy chỉnh trong thư mục này</customTypeCheckBoxHelp>
+    </help>
+  </UIFolderForm>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace    #
+  ###################################################################################
+  -->
+  <UIWorkingArea>
+    <title>
+      <Icon>Biểu tượng</Icon>
+    </title>
+    <msg>
+      <!-- Delte one node is not in trash and have no relation -->
+      <confirm-delete>Bạn có chắc chắn muốn xoá mục '{0}' không?</confirm-delete>
+      <confirm-delete-file>Bạn có chắc chắn muốn xóa tệp '{0}' không?</confirm-delete-file>
+      <confirm-delete-folder>Bạn có chắc chắn muốn xóa thư mục '{0}' và tất cả các thư mục con không?</confirm-delete-folder>
+      
+      <!-- Delte one node is in trash and have no relation -->
+      <confirm-delete-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn mục '{0}' không?</confirm-delete-permanently>
+      <confirm-delete-file-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn tệp '{0}' không?</confirm-delete-file-permanently>
+      <confirm-delete-folder-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn thư mục '{0}' và tất cả thư mục con của nó không?</confirm-delete-folder-permanently>
+      
+      <!-- Delte one node is not in trash and have relations -->
+      <confirm-delete-has-relations>Bạn có chắc chắn muốn xóa mục '{0}' và các tham chiếu của nó không?</confirm-delete-has-relations>
+      <confirm-delete-file-has-relations>Bạn có chắc chắn muốn xóa tệp '{0}' và các tham chiếu của nó không?</confirm-delete-file-has-relations>
+      <confirm-delete-folder-has-relations>Bạn có chắc chắn muốn xóa thư mục '{0}' và các tham chiếu của nó không?</confirm-delete-folder-has-relations>
+      
+      <!-- Delte multiple nodes, not in Trash, have no relations -->
+      <confirm-delete-multi-nodes-generic>Bạn có chắc chắn muốn xóa {0} mục đã chọn không?</confirm-delete-multi-nodes-generic>  
+      <confirm-delete-multi-nodes-file>Bạn có chắc chắn muốn xóa {0} tệp đã chọn không?</confirm-delete-multi-nodes-file>
+      <confirm-delete-multi-nodes-folder>Bạn có chắc chắn muốn xóa {0} thư mục đã chọn và tất cả thư mục con không?</confirm-delete-multi-nodes-folder>
+      <confirm-delete-multi-nodes-generic-and-file>Bạn có chắc chắn muốn xóa {0} mục và tệp đã chọn không?</confirm-delete-multi-nodes-generic-and-file>
+      <confirm-delete-multi-nodes-generic-and-folder>Bạn có chắc chắn muốn xóa {0} mục, thư mục và tất cả thư mục con đã chọn không?</confirm-delete-multi-nodes-generic-and-folder>
+      <confirm-delete-multi-nodes-file-and-folder>Bạn có chắc chắn muốn xóa {0} tệp, thư mục và tất cả thư mục con đã chọn không?</confirm-delete-multi-nodes-file-and-folder>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder>Bạn có chắc chắn muốn xóa {0} mục, tệp, thư mục và tất cả các thư mục con đã chọn không?</confirm-delete-multi-nodes-generic-and-file-and-folder>
+      
+      <!-- Delte multiple nodes, in Trash -->
+      <confirm-delete-multi-nodes-generic-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn {0} mục đã chọn không?</confirm-delete-multi-nodes-generic-permanently>  
+      <confirm-delete-multi-nodes-file-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn {0} tệp đã chọn không?</confirm-delete-multi-nodes-file-permanently>
+      <confirm-delete-multi-nodes-folder-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn {0} thư mục đã chọn và tất cả các thư mục con của chúng không?</confirm-delete-multi-nodes-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn {0} mục và tệp đã chọn không?</confirm-delete-multi-nodes-generic-and-file-permanently>
+      <confirm-delete-multi-nodes-generic-and-folder-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn {0} mục, thư mục đã chọn và tất cả các thư mục con của chúng không?</confirm-delete-multi-nodes-generic-and-folder-permanently>
+      <confirm-delete-multi-nodes-file-and-folder-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn {0} tệp và thư mục đã chọn và tất cả các thư mục con của chúng không?</confirm-delete-multi-nodes-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Bạn có chắc chắn muốn gỡ bỏ vĩnh viễn {0} mục, tệp và thư mục đã chọn và tất cả các thư mục con của chúng không?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
+      
+      <!-- Delte multiple nodes, have relations -->
+      <confirm-delete-multi-nodes-generic-have-relations>Bạn có chắc chắn muốn xóa {0} mục đã chọn và các tham chiếu của chúng không?</confirm-delete-multi-nodes-generic-have-relations>  
+      <confirm-delete-multi-nodes-file-have-relations>Bạn có chắc chắn muốn xóa {0} tệp đã chọn và các tham chiếu của chúng không?</confirm-delete-multi-nodes-file-have-relations>
+      <confirm-delete-multi-nodes-folder-have-relations>Bạn có chắc chắn muốn xóa {0} thư mục đã chọn, tất cả các thư mục con và tham chiếu của chúng không?</confirm-delete-multi-nodes-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-have-relations>Bạn có chắc chắn muốn xóa {0} mục, tệp đã chọn và các tham chiếu của chúng không?</confirm-delete-multi-nodes-generic-and-file-have-relations>
+      <confirm-delete-multi-nodes-generic-and-folder-have-relations>Bạn có chắc chắn muốn xóa {0} mục đã chọn, các tham chiếu, thư mục và tất cả thư mục con của chúng không?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
+      <confirm-delete-multi-nodes-file-and-folder-have-relations>Bạn có chắc chắn muốn xóa {0} tệp tin đã chọn, các tham chiếu, thư mục và tất cả thư mục con của chúng không?</confirm-delete-multi-nodes-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Bạn có chắc chắn muốn xóa {0} khoản mục, tệp đã chọn, các tham chiếu, thư mục và tất cả thư mục con của chúng không?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
+      
+      <feedback-delete>'{0}' đã được xóa thành công.</feedback-delete>
+      <feedback-delete-multi>{0} mục đã được xóa thành công.</feedback-delete-multi>      
+      <feedback-delete-permanently>'{0}' đã được xoá vĩnh viễn.</feedback-delete-permanently>
+      <feedback-delete-permanently-multi>{0} mục đã được xóa vĩnh viễn.</feedback-delete-permanently-multi>
+      <undo-delete>Hoàn tác</undo-delete>
+      <feedback-restore>'{0}' đã được khôi phục thành công.</feedback-restore>
+      <feedback-restore-multi>{0} mục đã được khôi phục thành công.</feedback-restore-multi>
+      
+      <confirm-restore>Một nút cùng tên đang tồn tại ở vị trí cũ của nút '{0}'. Bạn có chắc chắn muốn khôi phục nút này không?</confirm-restore>
+      <confirm-move>Bạn có chắc chắn muốn di chuyển không?</confirm-move>
+      <node-cut>Nút '{0}' đã được cắt.</node-cut>
+      <execute-successfully>Hành động tùy chỉnh '{0}' đã được thực thi.</execute-successfully>
+      <save-node-success>Nút '{0}' đã được lưu lại.</save-node-success>
+      <move-problem>Bạn không thể di chuyển nút '{0}' sang '{1}' vì có vấn đề với phân quyền hoặc điều kiện ràng buộc.</move-problem>
+    </msg>
+  </UIWorkingArea>
+  <UIDocumentWorkspace>
+    <label>
+      <no-children>Nút này không có bất kì nút con nào.</no-children>
+      <no-children-but-has-hidden>Nút này không có bất kì nút con nào nhưng có một số tệp đã ẩn đi.</no-children-but-has-hidden>
+    </label>
+    <msg>
+      <unable-save-node>Nút '{0}' vừa được tạo mới. Vui lòng lưu phiên làm việc trước khi thực hiện hành động này.</unable-save-node>
+      <save-node-success>Nút '{0}' đã được lưu lại.</save-node-success>
+      <node-copied>Nút '{0}' đã được sao chép.</node-copied>
+      <node-cut>Nút '{0}' đã được cắt.</node-cut>
+      <remove-root>Bạn không thể gỡ bỏ thư mục gốc.</remove-root>
+      <node-remove-success>Nút '{0}' đã được gỡ bỏ.</node-remove-success>
+    </msg>
+    <tooltip>
+      <Rename>Đổi tên</Rename>
+      <Cut>Cắt</Cut>
+      <Copy>Sao chép</Copy>
+      <Save>Lưu</Save>
+      <RemoveNode>Xóa</RemoveNode>
+      <Checkin>Checkin</Checkin>
+      <Checkout>Checkout</Checkout>
+      <Lock>Khóa</Lock>
+      <Unlock>Mở khóa</Unlock>
+      <EditDocument>Chỉnh sửa</EditDocument>
+      <Paste>Dán</Paste>
+      <LockedBy>Người khóa</LockedBy>
+    </tooltip>
+  </UIDocumentWorkspace>
+  <UIDocumentInfo>
+    <msg>
+      <access-denied>Truy cập bị từ chối. Bạn không thể truy cập nút '{0}'.</access-denied>
+      <null-exception>Không tìm thấy mục nào vì nó đã bị gỡ bỏ hoặc thay đổi hoặc bạn không được phân quyền để truy cập nút này.</null-exception>
+      <confirm-deleteattachment>Bạn có chắc chắn muốn gỡ bỏ tệp đính kèm này không?</confirm-deleteattachment>
+      <confirm-deleteattcomment>Bạn có chắc chắn muốn gỡ bỏ bình luận này không?</confirm-deleteattcomment>
+      <access-denied-exception>Truy cập bị từ chối. Bạn có thể không có quyền đọc hoặc nút này có thể đã bị gỡ bỏ hoặc thay đổi.</access-denied-exception>
+      <path-not-found>Thành phần này đã bị xóa hoặc thay đổi. Hãy nhấp nút Làm mới.</path-not-found>
+    </msg>
+    <tooltip>
+      <remove-attachment>Gỡ bỏ tệp đính kèm này</remove-attachment>
+      <remove-comment>Gỡ bỏ bình luận này</remove-comment>
+    </tooltip>
+  </UIDocumentInfo>
+  <ListView>
+    <view>
+      <label>
+        <name>Tên</name>
+        <versionable>Phiên bản</versionable>
+        <exo_owner>Người tạo</exo_owner>
+        <auditing>Kiểm định</auditing>
+        <exo_dateCreated>Ngày Tạo</exo_dateCreated>
+        <exo_dateModified>Ngày Sửa</exo_dateModified>
+      </label>
+    </view>
+  </ListView>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.ECMContextMenu   #
+  #############################################################################
+  -->
+  <ECMContextMenu>
+    <event>
+      <Lock>Khóa</Lock>
+      <Unlock>Mở khóa</Unlock>
+      <EditDocument>Chỉnh sửa</EditDocument>
+      <Copy>Sao chép</Copy>
+      <Rename>Đổi tên</Rename>
+      <Delete>Xóa</Delete>
+      <Save>Lưu</Save>
+      <Cut>Cắt</Cut>
+      <Paste>Dán</Paste>
+      <CheckOut>Checkout</CheckOut>
+      <CheckIn>Checkin</CheckIn>
+      <WebDAV>Xem dạng WebDAV</WebDAV>
+      <autoversion>Tự động Tạo phiên bản</autoversion>
+      <Custom>Tùy chỉnh</Custom>
+      <AddFolder>Thêm Mới Thư mục</AddFolder>
+      <AddDocument>Thêm Mới Nội dung</AddDocument>
+      <Upload>Tệp tin Tải lên</Upload>
+      <MoveNode>Di chuyển</MoveNode>
+      <UnLock>Mở khóa</UnLock>
+      <ViewProperties>Xem Thuộc tính</ViewProperties>
+      <GetURL>Sao chép URL Vào Bảng ghi tạm</GetURL>
+      <AddThumbnail>Thêm/Gỡ bỏ Hình nhỏ</AddThumbnail>
+      <AddToFavourite>Thêm vào Mục ưa thích</AddToFavourite>
+      <RemoveFromFavourite>Gỡ khỏi Mục ưa thích</RemoveFromFavourite>
+      <MoveToTrash>Chuyển vào Thư mục Rác</MoveToTrash>
+      <RestoreFromTrash>Khôi phục từ Thư mục Rác</RestoreFromTrash>
+      <EmptyTrash>Xóa sạch Thư mục Rác?</EmptyTrash>
+      <WebDavView>Tải về và Cho phép Chỉnh sửa</WebDavView>
+    </event>
+  </ECMContextMenu>
+ 
+  <!--
+  #############################################################################
+  #     org.exoplatform.ecm.webui.component.explorer.UIReferencesList         #
+  #############################################################################
+  -->
+  <UIReferencesList>
+    <msg>
+      <no-references>Không tìm thấy các tham chiếu</no-references>
+    </msg>
+    <header>
+      <workspace>Không gian làm việc</workspace>
+      <path>Đường dẫn</path>
+    </header>
+    <action>
+      <Close>Đóng</Close>
+    </action>
+  </UIReferencesList>
+  <!--
+  #############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.UIPropertiesManager  #
+  #############################################################################
+  -->
+  <UITabPane>
+    <title>
+      <UIPublishingPanel>Publication Pane</UIPublishingPanel>
+      <UIPublicationPanel>Phiên bản</UIPublicationPanel>
+      <UIPublicationSchedule>Theo lịch trình</UIPublicationSchedule>
+      <UIPublicationPagesContainer>Trang</UIPublicationPagesContainer>
+      <UIPublicationHistory>Lược sử</UIPublicationHistory>
+      <UIVersionViewer>Xem các phiên bản</UIVersionViewer>
+
+      <UIPropertyTab>Các thuộc tính</UIPropertyTab>
+      <UIMetadataTab>Siêu dữ liệu</UIMetadataTab>
+      <UIPropertyForm>Thêm Mới Thuộc tính</UIPropertyForm>
+      <UIUploadContent>Thông tin về tệp tải lên</UIUploadContent>
+      <UIJCRAdvancedSearch>Truy vấn mới</UIJCRAdvancedSearch>
+      <UISavedQuery>Truy vấn được lưu</UISavedQuery>
+      <AdvancedSearchResult>Kết quả Tìm kiếm</AdvancedSearchResult>
+      <UISimpleSearch>Tìm kiếm Đơn giản</UISimpleSearch>
+      <UISearchContainer>Tìm kiếm Nâng cao</UISearchContainer>
+      <UICategoryManagerSearch>Thêm Danh mục cần Tìm kiếm</UICategoryManagerSearch>
+      <UIConstraintsForm>Biểu mẫu Ràng buộc</UIConstraintsForm>
+      <UIViewSearchResult>Xem Nội dung</UIViewSearchResult>
+      <UIContentNameSearch>Tìm kiếm theo Tên</UIContentNameSearch>
+      <UINodeInfo>Thông tin Phiên bản</UINodeInfo>
+      <UINodeProperty>Thuộc tính Nút</UINodeProperty>
+      <UIActionListContainer>Các hành động có sẵn</UIActionListContainer>
+      <UIActionContainer>Thêm Hành động</UIActionContainer>
+      <UIActionViewContainer>Thông tin Hành động</UIActionViewContainer>
+      <UIMultiLanguageForm>Xem Ngôn ngữ</UIMultiLanguageForm>
+      <UIAddLanguageContainer>Thêm Ngôn ngữ</UIAddLanguageContainer>
+      <UINonPublishedForm>Trạng thái</UINonPublishedForm>
+      <UIPublishedForm>Trạng thái</UIPublishedForm>
+      <UIPublicationLogList>Lược sử</UIPublicationLogList>
+      <UIDocumentWithTree>Tập tin</UIDocumentWithTree>
+      <UIDocumentInfo>Hiển thị theo kiểu tài liệu</UIDocumentInfo>
+      <UICategoriesSelectPanel>Chọn Danh mục</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Danh mục Tham chiếu</UISelectedCategoriesGrid>
+      <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
+      <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
+      <metadatasitemetadata>Siêu dữ liệu của trang web</metadatasitemetadata>
+      <dcelementset>Dublin Core</dcelementset>
+    </title>
+  </UITabPane>
+  <UIPropertyTab>
+    <title>
+      <edit>Chỉnh sửa thuộc tính này</edit>
+      <delete>Xóa thuộc tính này</delete>
+    </title>
+    <confirm>
+      <remove-property>Bạn có chắc chắn muốn gỡ bỏ thuộc tính này không?</remove-property>
+    </confirm>
+    <header>
+      <icon/>
+      <name>Tên</name>
+      <multiValue>Đa giá trị</multiValue>
+      <value>Giá trị</value>
+      <action>Thao tác</action>
+    </header>
+    <label>
+      <binary>Dữ liệu nhị phân</binary>
+      <notavailable>Không xác định</notavailable>
+      <cannotget>Không thể lấy các giá trị</cannotget>
+    </label>
+    <action>
+      <Close>Đóng</Close>
+    </action>
+  </UIPropertyTab>
+  <!--
+  #############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.UIPropertyTab     #
+  #############################################################################
+  -->
+  <!--
+  #############################################################################
+  #           org.exoplatform.ecm.webui.component.explorer.UIPropertyForm     #
+  #############################################################################
+  -->
+  <UIPropertyForm>
+    <title>Thêm/Chỉnh sửa Thuộc tính</title>
+    <label>
+      <name>Tên:</name>
+      <type>Kiểu:</type>
+      <value>Giá trị:</value>
+      <upload>Tải lên:</upload>
+      <namespace>Định danh:</namespace>
+      <multiple>Đa giá trị:</multiple>
+      <property_select>Thêm Mới Thuộc tính:</property_select>
+    </label>
+    <action>
+      <Save>Lưu</Save>
+      <Cancel>Hủy bỏ</Cancel>
+      <Reset>Thiết lập lại</Reset>
+    </action>
+    <msg>
+      <name-invalid>Vui lòng nhập tên thuộc tính.</name-invalid>
+      <unable-create>Không thể thêm các thuộc tính.</unable-create>
+      <value-invalid>Vui lòng nhập giá trị.</value-invalid>
+      <node-checkedin>Bạn phải checkout nút này trước khi thêm thuộc tính.</node-checkedin>
+      <can-not-add>Bạn không thể thêm thuộc tính cho nút này. Chức năng giới hạn chỉ cho kiểu nút là nt:unstructured hoặc những thuộc tính đang bị thiếu ở nút hiện tại.</can-not-add>
+      <propertyName-invalid>Tên thuộc tính phải chứa định danh (như là namespace:name)</propertyName-invalid>
+      <propertyName-exist>Thuộc tính '{0}' đã tồn tại.</propertyName-exist>
+      <propertyValu-null>Một số giá trị có thể là rỗng.</propertyValu-null>
+      <valueFormatEx>Không thể gán đa giá trị đối với thuộc tính có giá trị duy nhất.</valueFormatEx>
+      <number-format-exception>Giá trị mục nhập của bạn không đúng định dạng.</number-format-exception>
+      <property-not-exist>Thuộc tính {0} không tồn tại.</property-not-exist>
+    </msg>
+  </UIPropertyForm>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionInfo #
+  #############################################################################
+  -->
+  <UIPermissionInfo>
+    <action>
+      <title>
+        <Edit>Chỉnh sửa</Edit>
+        <Delete>Gỡ bỏ Phân quyền</Delete>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>Người dùng hoặc Nhóm người dùng</usersOrGroups>
+      <read>Đọc</read>
+      <addNode>Sửa đổi</addNode>
+      <remove>Gỡ bỏ</remove>
+      <action>Hành động</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>Bạn có chắc chắn muốn gỡ bỏ phân quyền này?</confirm-delete-permission>
+      <no-permission-tochange>Bạn không có quyền để gỡ bỏ phân quyền này.</no-permission-tochange>
+      <no-permission-remove>Bạn không thể gỡ bỏ người sở hữu này.</no-permission-remove>
+      <access-denied>Truy cập bị từ chối. Bạn không thể gỡ bỏ phân quyền này.</access-denied>
+    </msg>
+  </UIPermissionInfo>
+  <permission>
+    <title>
+      <SelectUser>Chọn Người dùng</SelectUser>
+      <SelectMember>Chọn Vai trò</SelectMember>
+      <AddAny>Chọn Tất cả</AddAny>
+    </title>
+  </permission>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionForm #
+  #############################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIGroupSelector>Chọn Người dùng</UIGroupSelector>
+      <UIPermissionSelector>Chọn Thành viên</UIPermissionSelector>
+      <UIGroupMemberSelector>Chọn Vai trò</UIGroupMemberSelector>
+    </title>
+  </SelectUserOrGroup>
+  <UIGroupSelector>
+    <label>
+      <selectGroup>Duyệt và Chọn Nhóm</selectGroup>
+      <selectUser>Chọn Người dùng</selectUser>
+    </label>
+    <msg>
+      <not-change-owner>'{0}' là người tạo nút này và có đầy đủ các quyền trên nút.</not-change-owner>
+    </msg>
+  </UIGroupSelector>
+  <UIPermissionForm>
+    <label>
+      <UIPopupWindow>Chọn</UIPopupWindow>
+      <permission>UIPermissionForm</permission>
+      <userOrGroup>Người dùng hoặc Nhóm</userOrGroup>
+      <read>Quyền Đọc</read>
+      <add_node>Quyền Sửa</add_node>
+      <remove>Quyền Xóa</remove>
+    </label>
+    <title>Thêm phân quyền cho nút đó</title>
+    <action>
+      <Close>Đóng</Close>
+      <Save>Lưu</Save>
+      <Reset>Thiết lập lại</Reset>
+    </action>
+    <msg>
+      <checkbox-require>Vui lòng chọn ít nhất một phân quyền.</checkbox-require>
+      <userOrGroup-required>Vui lòng chọn một người dùng hoặc nhóm người dùng trước khi lưu phân quyền này.</userOrGroup-required>
+      <not-change-permission>Bạn không có quyền để thêm một phân quyền.</not-change-permission>
+      <access-denied>Truy cập bị khước từ. Bạn không thể xóa phân quyền này.</access-denied>
+    </msg>
+  </UIPermissionForm>
+
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UINodeTypeInfo     #
+  ###############################################################################
+  -->
+  <UINodeTypeInfo>
+    <label>
+      <node-type>Kiểu Nút</node-type>
+      <name>Tên</name>
+      <item>Tên Mục Chính</item>
+      <super-types>Các kiểu cha</super-types>
+      <mixin>Kiểu Nút Mixin</mixin>
+      <orderable-children>Nút con sắp xếp được</orderable-children>
+      <property-def>Định nghĩa Thuộc tính Nút</property-def>
+      <prop-name>Tên</prop-name>
+      <prop-type>Kiểu</prop-type>
+      <prop-multiple>Mul</prop-multiple>
+      <prop-mandatory>Man</prop-mandatory>
+      <prop-protected>Pr</prop-protected>
+      <prop-auto-create>AC</prop-auto-create>
+      <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
+      <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
+      <node-def>Định nghĩa Nút Con</node-def>
+      <node-def-name>Tên</node-def-name>
+      <node-def-opv>OPV</node-def-opv>
+      <node-def-ac>Tự động tạo ra</node-def-ac>
+      <node-def-man>MAN</node-def-man>
+      <node-def-pr>PR</node-def-pr>
+      <node-def-dnt>DNT</node-def-dnt>
+    </label>
+    <action>
+      <Close>Đóng</Close>
+    </action>
+  </UINodeTypeInfo>
+  <!--
+  ###############################################################################
+  #                    org.exoplatform.ecm.webui.component.explorer.search      #
+  ###############################################################################
+  -->
+  <UICategoryManagerSearch>
+    <tab>
+      <label>
+        <UIOneNodePathSelector>Chọn Danh mục</UIOneNodePathSelector>
+      </label>
+    </tab>
+    <action>
+      <Close>Đóng</Close>
+    </action>
+  </UICategoryManagerSearch>
+  <UIContentNameSearch>
+    <label>
+      <keyword>Tên Nội dung:</keyword>
+      <location>Tìm kiếm ở vị trí này:</location>
+    </label>
+    <action>
+      <Search>Tìm kiếm</Search>
+      <Cancel>Hủy bỏ</Cancel>
+    </action>
+    <msg>
+      <keyword-not-allowed>Từ khóa này không được phép.</keyword-not-allowed>
+    </msg>
+  </UIContentNameSearch>
+  <UISimpleSearch>
+    <action>
+      <MoreConstraints>Hiện/Ẩn Biểu mẫu Ràng buộc</MoreConstraints>
+      <Search>Tìm kiếm</Search>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <moreConstraints>UISimpleSearch</moreConstraints>
+      <firstOperator>Toán tử:</firstOperator>
+      <input>Một từ hoặc cụm từ trong nội dung:</input>
+      <constraints>Thêm Ràng buộc khác:</constraints>
+      <nodePath>Vị trí hiện tại:</nodePath>
+    </label>
+    <msg>
+      <keyword-null>Vui lòng nhập từ khóa.</keyword-null>
+      <not-found>Không tìm thấy kết quả nào.</not-found>
+      <keyword-not-allow>Từ khóa này không được phép.</keyword-not-allow>
+      <value-null>Vui lòng nhập từ khóa hoặc điều kiện ràng buộc của bạn.</value-null>
+      <value-save-null>Vui lòng nhập từ khóa hoặc các điều kiện ràng buộc trước khi lưu truy vấn này.</value-save-null>
+      <inputSearch-invalid>Có các ký tự không hợp lệ trong mục nhập tìm kiếm.</inputSearch-invalid>
+      <query-invalid>Truy vấn không hợp lệ. Vui lòng kiểm tra ràng buộc của bạn.</query-invalid>
+    </msg>
+  </UISimpleSearch>
+  <ViewSearch>
+    <title>
+      <UIViewSearchResult>Xem Mẫu thiết kế</UIViewSearchResult>
+    </title>
+  </ViewSearch>
+  <UISearchResult>
+    <msg>
+      <not-support>Mẫu hiển thị cho tài liệu này chưa được hỗ trợ.</not-support>
+      <empty>Không tìm thấy kết quả nào.</empty>
+      <access-denied>Bạn không thể mở thư mục này vì nó không tồn tại nữa hoặc bạn không có quyền truy cập nó.</access-denied>
+      <query-invalid>Truy vấn không hợp lệ.</query-invalid>
+    </msg>
+    <header>
+      <name>Tên</name>
+      <path>Đường dẫn</path>
+      <action>Hành động</action>
+      <shortcutPath>Đường dẫn</shortcutPath>
+      <type>Kiểu</type>
+      <dateCreated>Ngày Tạo</dateCreated>
+      <score>Điểm số</score>
+    </header>
+    <title>
+      <typeASC>Phân loại theo kiểu tài liệu có thứ tự tăng dần</typeASC>
+      <typeDESC>Phân loại theo kiểu tài liệu có thứ tự giảm dần</typeDESC>
+      <scoreASC>Phân loại theo điểm số với thứ tự tăng dần</scoreASC>
+      <scoreDESC>Phân loại theo điểm số có thứ tự giảm dần</scoreDESC>
+      <nameASC>Phân loại theo tên có thứ tự tăng dần</nameASC>
+      <nameDESC>Phân loại theo tên có thứ tự giảm dần</nameDESC>
+      <datecreatedASC>Phân loại theo ngày tạo có thứ tự tăng dần</datecreatedASC>
+      <datecreatedDESC>Phân loại theo ngày tạo có thứ tự giảm dần</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Xem nút này</View>
+      <OpenFolder>Đi đến thư mục</OpenFolder>
+    </tooltip>
+  </UISearchResult>
+  <UIShowAllOwnedByUserResult>
+    <msg>
+      <not-support>Không có mẫu Giao diện xem nào cho nút này.</not-support>
+      <empty>Không tìm thấy kết quả nào.</empty>
+      <access-denied>Bạn không thể xem nút này vì mẫu thiết kế này không được hỗ trợ hoặc truy cập bị từ chối.</access-denied>
+      <query-invalid>Truy vấn không hợp lệ</query-invalid>
+    </msg>
+    <header>
+      <name>Tên</name>
+      <path>Đường dẫn</path>
+      <action>Hành động</action>
+      <shortcutPath>Đường dẫn</shortcutPath>
+      <type>Kiểu</type>
+      <dateCreated>Ngày Tạo</dateCreated>
+      <score>Điểm số</score>
+    </header>
+    <title>
+      <typeASC>Phân loại theo kiểu tài liệu có thứ tự tăng dần</typeASC>
+      <typeDESC>Phân loại theo kiểu tài liệu có thứ tự giảm dần</typeDESC>
+      <scoreASC>Phân loại theo điểm số có thứ tự tăng dần</scoreASC>
+      <scoreDESC>Phân loại theo điểm số có thứ tự giảm dần</scoreDESC>
+      <nameASC>Phân loại theo tên có thứ tự tăng dần</nameASC>
+      <nameDESC>Phân loại theo tên có thứ tự giảm dần</nameDESC>
+      <datecreatedASC>Phân loại theo ngày Tạo có thứ tự tăng dần</datecreatedASC>
+      <datecreatedDESC>Phân loại theo ngày Tạo có thứ tự giảm dần</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Xem nút này</View>
+      <OpenFolder>Đi đến Thư mục</OpenFolder>
+    </tooltip>
+  </UIShowAllOwnedByUserResult>
+  <UIShowAllFavouriteResult>
+    <msg>
+      <not-support>Không có mẫu Giao diện xem nào cho nút này.</not-support>
+      <empty>Không tìm thấy kết quả</empty>
+      <access-denied>Bạn không thể xem nút này vì mẫu này không được hỗ trợ hoặc truy cập bị từ chối.</access-denied>
+      <query-invalid>Truy vấn không hợp lệ</query-invalid>
+    </msg>
+    <header>
+      <name>Tên</name>
+      <path>Đường dẫn</path>
+      <action>Hành động</action>
+      <shortcutPath>Đường dẫn</shortcutPath>
+      <type>Kiểu</type>
+      <dateCreated>Ngày Tạo</dateCreated>
+      <score>Điểm số</score>
+    </header>
+    <title>
+      <typeASC>Phân loại theo kiểu tài liệu có thứ tự tăng dần</typeASC>
+      <typeDESC>Phân loại theo kiểu tài liệu có thứ tự giảm dần</typeDESC>
+      <scoreASC>Phân loại theo điểm số có thứ tự tăng dần</scoreASC>
+      <scoreDESC>Phân loại theo điểm số có thứ tự giảm dần</scoreDESC>
+      <nameASC>Phân loại theo tên có thứ tự tăng dần</nameASC>
+      <nameDESC>Phân loại theo tên có thứ tự giảm dần</nameDESC>
+      <datecreatedASC>Phân loại theo ngày tạo có thứ tự tăng dần</datecreatedASC>
+      <datecreatedDESC>Phân loại theo ngày tạo có thứ tự giảm dần</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Xem Nút này</View>
+      <OpenFolder>Đi đến Thư mục</OpenFolder>
+    </tooltip>
+  </UIShowAllFavouriteResult>
+  <UIShowAllHiddenResult>
+    <msg>
+      <not-support>Không có mẫu Giao diện xem nào cho nút này.</not-support>
+      <empty>Không tìm thấy kết quả.</empty>
+      <access-denied>Bạn không thể xem nút này vì mẫu này không được hỗ trợ hoặc truy cập bị từ chối.</access-denied>
+      <query-invalid>Truy vấn không hợp lệ.</query-invalid>
+    </msg>
+    <header>
+      <name>Tên</name>
+      <path>Đường dẫn</path>
+      <action>Hành động</action>
+      <shortcutPath>Đường dẫn</shortcutPath>
+      <type>Kiểu</type>
+      <dateCreated>Ngày Tạo</dateCreated>
+      <score>Điểm số</score>
+      <AddRemoveFavourite>Thêm vào/Gỡ bỏ khỏi Mục yêu thích</AddRemoveFavourite>
+    </header>
+    <title>
+      <typeASC>Phân loại theo kiểu tài liệu có thứ tự tăng dần</typeASC>
+      <typeDESC>Phân loại theo kiểu tài liệu có thứ tự giảm dần</typeDESC>
+      <scoreASC>Phân loại theo điểm số có thứ tự tăng dần</scoreASC>
+      <scoreDESC>Phân loại theo điểm số có thứ tự giảm dần</scoreDESC>
+      <nameASC>Phân loại theo tên có thứ tự tăng dần</nameASC>
+      <nameDESC>Phân loại theo tên có thứ tự giảm dần</nameDESC>
+      <datecreatedASC>Phân loại theo ngày tạo có thứ tự tăng dần</datecreatedASC>
+      <datecreatedDESC>Phân loại theo ngày tạo có thứ tự giảm dần</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Xem Nút này</View>
+      <OpenFolder>Đi đến Thư mục</OpenFolder>
+      <RemoveHiddenAttribute>Gỡ bỏ Thuộc tính Ẩn</RemoveHiddenAttribute>
+    </tooltip>
+  </UIShowAllHiddenResult>
+  <UIShowAllTrashResult>
+    <msg>
+      <not-support>Không có mẫu Giao diện xem nào cho nút này.</not-support>
+      <empty>Không tìm thấy kết quả</empty>
+      <access-denied>Bạn không thể xem nút này vì mẫu hiển thị không được hỗ trợ hoặc truy cập bị từ chối.</access-denied>
+      <query-invalid>Truy vấn không hợp lệ.</query-invalid>
+    </msg>
+    <header>
+      <name>Tên</name>
+      <path>Đường dẫn</path>
+      <action>Hành động</action>
+      <shortcutPath>Đường dẫn</shortcutPath>
+      <type>Kiểu</type>
+      <dateCreated>Ngày Tạo</dateCreated>
+      <score>Điểm số</score>
+    </header>
+    <title>
+      <typeASC>Phân loại theo kiểu tài liệu có thứ tự tăng dần</typeASC>
+      <typeDESC>Phân loại theo kiểu tài liệu có thứ tự giảm dần</typeDESC>
+      <scoreASC>Phân loại theo điểm số có thứ tự tăng dần</scoreASC>
+      <scoreDESC>Phân loại theo điểm số có thứ tự giảm dần</scoreDESC>
+      <nameASC>Phân loại theo tên có thứ tự tăng dần</nameASC>
+      <nameDESC>Phân loại theo tên có thứ tự giảm dần</nameDESC>
+      <datecreatedASC>Phân loại theo ngày tạo có thứ tự tăng dần</datecreatedASC>
+      <datecreatedDESC>Phân loại theo ngày tạo có thứ tự giảm dần</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Xem Nút này</View>
+      <OpenFolder>Đi đến Thư mục</OpenFolder>
+      <DeletePermanently>Xóa vĩnh viễn</DeletePermanently>
+      <RestoreFromTrash>Khôi phục từ Thư mục Rác</RestoreFromTrash>
+    </tooltip>
+  </UIShowAllTrashResult>
+  <UIConstraintsForm>
+    <label>
+      <constraints>UIConstraintsForm</constraints>
+      <metadataProperty>Các thuộc tính</metadataProperty>
+      <operator>Toán tử</operator>
+      <contains>Chứa Giá trị</contains>
+      <notcontains>Không Chứa Giá trị</notcontains>
+    </label>
+    <action>
+      <Add>Thêm</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <properties-required>Bạn chưa nhập tên thuộc tính.</properties-required>
+      <value-required>Trường giá trị được yêu cầu.</value-required>
+      <date-invalid>Ngày Bắt đầu phải trước ngày Kết thúc.</date-invalid>
+      <fromDate-required>Bắt buộc phải nhập ngày Bắt đầu.</fromDate-required>
+      <must-choose-one>Bạn phải chọn ít nhất một kiểu.</must-choose-one>
+      <properties-null>Hãy chọn các thuộc tính trước, sau đó lọc.</properties-null>
+      <exactly-require>Bạn phải điền chính xác vào trường Giá trị trước khi lưu điều kiện ràng buộc này.</exactly-require>
+      <fromDate-invalid>Kiểu không hợp lệ trong trường 'Ngày Bắt đầu'. Vui lòng chọn lại hoặc nhập chính xác.</fromDate-invalid>
+      <toDate-invalid>Kiểu không hợp lệ trong trường 'Ngày Kết thúc'. Vui lòng chọn lại hoặc nhập chính xác.</toDate-invalid>
+    </msg>
+    <button>
+      <label-Add>Thêm</label-Add>
+      <label-Cancel>Hủy bỏ</label-Cancel>
+    </button>
+  </UIConstraintsForm>
+  <UIConstraintForm>
+    <tooltip>
+      <AddMetadataType>Thêm Thuộc tính</AddMetadataType>
+      <AddNodeType>Thêm Kiểu Nút</AddNodeType>
+      <AddCategory>Thêm Danh mục</AddCategory>
+      <FindExactly>Tìm Chính xác</FindExactly>
+    </tooltip>
+    <label>
+      <colon>:</colon>
+      <operator>Toán tử</operator>
+      <exactlyPro-properties>Thuộc tính</exactlyPro-properties>
+      <exactlyPro-ContainExactly>Chứa Chính xác</exactlyPro-ContainExactly>
+      <containPro-properties>Thuộc tính</containPro-properties>
+      <containPro-Contain>Chứa</containPro-Contain>
+      <notContainPro-properties>Thuộc tính</notContainPro-properties>
+      <notContainPro-notContain>Không Chứa</notContainPro-notContain>
+      <ConstraintOption-From>Từ</ConstraintOption-From>
+      <ConstraintOption-To>Đến</ConstraintOption-To>
+      <DocumentType-label>Kiểu Tài liệu</DocumentType-label>
+      <Category-label>Danh mục</Category-label>
+      <created>Ngày Tạo</created>
+      <modified>Ngày Sửa</modified>
+      <and>Và</and>
+      <or>Hoặc</or>
+    </label>
+  </UIConstraintForm>
+  <NodeTypePopup>
+    <title>
+      <UINodeTypeSelectForm>Chọn Kiểu Nút</UINodeTypeSelectForm>
+    </title>
+  </NodeTypePopup>
+  <CategoryPopup>
+    <title>
+      <UICategoryManagerSearch>Thêm Danh mục để Tìm kiếm</UICategoryManagerSearch>
+      <UIOneNodePathSelector>Chọn Danh mục</UIOneNodePathSelector>
+    </title>
+  </CategoryPopup>
+  <SaveQueryPopup>
+    <title>
+      <UISaveQueryForm>Biểu mẫu Truy vấn</UISaveQueryForm>
+    </title>
+  </SaveQueryPopup>
+  <UINodeTypeSelectForm>
+    <action>
+      <Cancel>Hủy bỏ</Cancel>
+      <Save>Lưu</Save>
+    </action>
+  </UINodeTypeSelectForm>
+  <UICompareExactlyForm>
+    <label>
+      <filter>Lọc:</filter>
+      <result>Kết quả:</result>
+    </label>
+    <title>
+      <result>Lọc</result>
+    </title>
+    <button>
+      <label-Select>Lựa chọn</label-Select>
+      <label-Cancel>Hủy bỏ</label-Cancel>
+    </button>
+    <msg>
+      <not-result-found>Không có kết quả nào.</not-result-found>
+    </msg>
+  </UICompareExactlyForm>
+  <UIJCRAdvancedSearch>
+    <label>
+      <name>Tên:</name>
+      <selectBox>Chọn Kiểu Truy vấn:</selectBox>
+      <query>Truy vấn:</query>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Search>Tìm kiếm</Search>
+    </action>
+    <msg>
+      <!--DMS 2.4.x ECM-3566-->
+      <name-invalid>Tên không hợp lệ.</name-invalid>
+      <query-added>Các truy vấn được thêm vào thành công.</query-added>
+      <save_unSuccessful>Không thể lưu truy vấn có thể do câu truy vấn không hợp lệ hoặc tên truy vấn đã tồn tại.</save_unSuccessful>
+      <invalid-queryStatement>Câu truy vấn không hợp lệ.</invalid-queryStatement>
+      <value-save-null>Vui lòng nhập câu truy vấn.</value-save-null>
+      <query-name-null>Vui lòng nhập tên truy vấn.</query-name-null>
+    </msg>
+  </UIJCRAdvancedSearch>
+  <EditQueryForm>
+    <label>
+      <name>Tên</name>
+      <selectBox>Chọn Kiểu Truy vấn</selectBox>
+      <query>Truy vấn</query>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </EditQueryForm>
+  <EditSavedQueryForm>
+    <title>
+      <EditQueryForm>Chỉnh sửa Biểu mẫu Truy vấn</EditQueryForm>
+    </title>
+  </EditSavedQueryForm>
+  <UIMetadataSelectForm>
+    <label>
+      <metadataType>Kiểu Siêu dữ liệu</metadataType>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Add>Thêm mới</Add>
+    </action>
+  </UIMetadataSelectForm>
+  <property1MetadataPopup>
+    <title>
+      <UISelectPropertyForm>Chọn Thuộc tính</UISelectPropertyForm>
+    </title>
+  </property1MetadataPopup>
+  <property2MetadataPopup>
+    <title>
+      <UISelectPropertyForm>Chọn Thuộc tính</UISelectPropertyForm>
+    </title>
+  </property2MetadataPopup>
+  <property3MetadataPopup>
+    <title>
+      <UISelectPropertyForm>Chọn Thuộc tính</UISelectPropertyForm>
+    </title>
+  </property3MetadataPopup>
+  <UISelectPropertyForm>
+    <label>
+      <metadataType>Kiểu Siêu dữ liệu</metadataType>
+    </label>
+    <pLabel>Thuộc tính:</pLabel>
+    <action>
+      <Add>Thêm</Add>
+      <Cancel>Hủy bỏ</Cancel>
+    </action>
+  </UISelectPropertyForm>
+  <ExactlyFormPopup>
+    <title>
+      <UICompareExactlyForm>Biểu mẫu Lọc</UICompareExactlyForm>
+    </title>
+  </ExactlyFormPopup>
+  <UIECMSearch>
+    <header>
+      <name>Tên</name>
+      <language>Ngôn ngữ</language>
+      <query>Truy vấn</query>
+      <action>Các Hành động</action>
+      <path>Đường dẫn</path>
+    </header>
+  </UIECMSearch>
+  <UIResult>
+    <msg>
+      <not-found>Không tìm thấy dữ liệu.</not-found>
+    </msg>
+    <header>
+      <action>Hành động</action>
+    </header>
+  </UIResult>
+  <UISaveQueryForm>
+    <msg>
+      <query-name-null>Vui lòng nhập tên truy vấn để lưu lại.</query-name-null>
+      <access-denied>Truy cập bị từ chối. Bạn không có quyền thêm mới để lưu truy vấn này.</access-denied>
+      <save-failed>Bạn không thể lưu truy vấn đó do câu truy vấn không hợp lệ hoặc tên truy vấn đã tồn tại.</save-failed>
+    </msg>
+    <label>
+      <queryName>Tên Truy vấn</queryName>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISaveQueryForm>
+  <UISavedQuery>
+    <header>
+      <name>Tên</name>
+      <type>Kiểu</type>
+      <statement>Câu truy vấn</statement>
+      <permission>Quyền</permission>
+      <action>Các hành động</action>
+    </header>
+    <tooltip>
+      <Execute>Thực thi</Execute>
+      <Edit>Chỉnh sửa</Edit>
+      <Delete>Xóa</Delete>
+    </tooltip>
+    <label>
+      <no-children>Không có truy vấn nào được lưu lại.</no-children>
+    </label>
+    <msg>
+      <confirm-delete-query>Bạn có chắc chắn muốn xóa truy vấn này không?</confirm-delete-query>
+      <not-result-found>Không tìm thấy kết quả.</not-result-found>
+    </msg>
+  </UISavedQuery>
+  <UIQueryResultPageIterator>
+    <label>
+      <results>Kết quả</results>
+      <of-about>khoảng</of-about>
+      <of>của</of>
+    </label>
+  </UIQueryResultPageIterator>
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.admin.UIExportNode #
+  ###############################################################################
+  -->
+  <UIExportNode>
+    <label>
+      <format>Định dạng</format>
+      <nodePath>Đường dẫn để Xuất ra</nodePath>
+      <zip>Nén</zip>
+      <systemView>Kiểu Hệ thống</systemView>
+      <documentView>Kiểu Tài liệu</documentView>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Export>Xuất</Export>
+    </action>
+    <title>Kết xuất nút</title>
+  </UIExportNode>
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPopupAction     #
+  ###############################################################################
+  -->
+  <PopupUserSelector>
+    <title>
+      <UIUserContainer>Chọn Phân quyền Người dùng</UIUserContainer>
+    </title>
+  </PopupUserSelector>
+  <UIPopupTaxonomy>
+    <title>
+      <UICategoriesSelector>Thêm Danh mục</UICategoriesSelector>
+      <UIOneNodePathSelector>Thêm Danh mục</UIOneNodePathSelector>
+    </title>
+  </UIPopupTaxonomy>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIVersionInfo       #
+  ###############################################################################
+  -->
+  <UIVersionInfo>
+    <tooltip>
+      <addLabel>Thêm Nhãn</addLabel>
+      <removeLable>Gỡ bỏ Nhãn</removeLable>
+      <restoreVersion>Khôi phục Phiên bản</restoreVersion>
+      <viewVersion>Xem Thông tin Phiên bản</viewVersion>
+      <deleteVersion>Xóa Phiên bản</deleteVersion>
+      <compareVersion>So sánh với phiên bản cơ sở</compareVersion>
+    </tooltip>
+    <msg>
+      <have-no-view-template>Mẫu giao diện xem này không được hỗ trợ.</have-no-view-template>
+      <cannot-remove-version>Bạn không thể gỡ bỏ một phiên bản cơ sở.</cannot-remove-version>
+      <confirm-delete>Bạn có chắc chắn muốn xóa phiên bản này không?</confirm-delete>
+      <not-checked-out>Bạn phải checkout nút này trước khi khôi phục.</not-checked-out>
+      <invalid-item-state>Bạn không thể khôi phục phiên bản này. Chắc chắn một số khoản mục đã bị xóa hoặc được di chuyển trong một phiên làm việc khác.</invalid-item-state>
+    </msg>
+    <action>
+      <close>Đóng</close>
+      <close-view>Đóng cửa xem</close-view>
+    </action>
+  </UIVersionInfo>
+  <!--
+  ################################################################################
+  #  org.exoplatform.ecm.webui.component.explorer.auditing.UIAuditingInfo
+  ################################################################################
+  -->
+  <UIAuditingInfo>
+    <msg>
+      <noVersion>Không có phiên bản</noVersion>
+    </msg>
+    <eventName>
+      <e_1>Nút đã được thêm.</e_1>
+      <e_2>Nút đã được xóa</e_2>
+      <e_4>Thuộc tính đã được thêm.</e_4>
+      <e_16>Thuộc tính đã được thay đổi.</e_16>
+      <e_8>Thuộc tính đã bị xóa bỏ</e_8>
+      <e_32>Lưu trữ</e_32>
+      <e_64>Di chuyển</e_64>
+      <e_128>Sao chép</e_128>
+      <e_256>Thêm Mixin</e_256>
+      <e_512>Xóa mixin</e_512>
+      <e_1024>Bản sao</e_1024>
+      <e_2048>Cập nhật</e_2048>
+      <e_4096>Nhập</e_4096>
+      <e_8192>Check in</e_8192>
+      <e_16384>Check out</e_16384>
+      <e_32768>Khôi phục</e_32768>
+      <e_65536>Gộp</e_65536>
+      <e_131072>Hủy bỏ hợp nhất</e_131072>
+      <e_262144>Hợp nhất</e_262144>
+      <e_524288>Thêm nhãn cho phiên bản</e_524288>
+      <e_1048576>Gỡ bỏ Nhãn Phiên bản</e_1048576>
+      <e_2097152>Gỡ bỏ Phiên bản</e_2097152>
+      <e_4194304>Khóa</e_4194304>
+      <e_8388608>Mở khóa</e_8388608>
+      <e_16777216>Đọc</e_16777216>
+    </eventName>
+    <label>
+      <operation>Thao tác</operation>
+      <userName>Tên người dùng</userName>
+      <date>Ngày tháng</date>
+      <version>Phiên bản</version>
+    </label>
+  </UIAuditingInfo>
+
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivateVersion   #
+  ###############################################################################
+  -->
+  <UIActivateVersion>
+    <label>
+      <note>Tính năng tạo phiên bản chưa được kích hoạt cho nút này.</note>
+      <question>Bạn có chắc chắn muốn kích hoạt nó không?</question>
+      <button-active>Kích hoạt</button-active>
+      <button-cancel>Hủy bỏ</button-cancel>
+    </label>
+    <msg>
+      <access-denied>Bạn không được phân quyền để kích hoạt tính năng Tạo phiên bản trên nút này.</access-denied>
+    </msg>
+  </UIActivateVersion>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivePublication #
+  ###############################################################################
+  -->
+  <UIActivePublication>
+    <header>
+      <LifecycleName>Tên</LifecycleName>
+      <LifecycleDesc>Mô tả</LifecycleDesc>
+      <action>Hành động</action>
+    </header>
+    <action>
+      <Cancel>Đóng</Cancel>
+    </action>
+    <grid>
+      <msg>
+        <empty>Không tìm thấy plugin xuất bản nào.</empty>
+      </msg>
+    </grid>
+    <msg>
+      <node-type-invalid>Chỉ loại nút tài liệu có thể được đưa vào chu trình.</node-type-invalid>
+      <already-enroled>Tài liệu này đã được đưa vào chu trình.</already-enroled>
+    </msg>
+  </UIActivePublication>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivateAuditing  #
+  ###############################################################################
+  -->
+  <UIActivateAuditing>
+    <label>
+      <note>Việc ghi lại thay đổi chưa được kích hoạt đối với nút này.</note>
+      <question>Bạn có chắc chắn muốn kích hoạt không?</question>
+    </label>
+    <action>
+      <activate>Kích hoạt</activate>
+      <cancel>Hủy bỏ</cancel>
+    </action>
+  </UIActivateAuditing>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIDiff   #
+  ###############################################################################
+  -->
+  <UIDiff>
+    <label>
+      <diffTitle>So sánh giữa hai phiên bản</diffTitle>
+      <noChange>Không có thay đổi giữa 2 phiên bản</noChange>
+      <baseVerion>Phiên bản Cơ sở</baseVerion>
+      <compareVerion>Phiên bản</compareVerion>
+      <can-not-compare>Không thể so sánh 2 phiên bản</can-not-compare>
+    </label>
+  </UIDiff>
+  <!--
+  ###############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIImportNode      #
+  ###############################################################################
+  -->
+  <UIImportNode>
+    <label>
+      <format>Định dạng</format>
+      <systemView>Xem theo hệ thống</systemView>
+      <documentView>Xem theo tài liệu</documentView>
+      <upload>Tải Tệp tin</upload>
+    </label>
+    <action>
+      <Cancel>Hủy bỏ</Cancel>
+      <Import>Nhập</Import>
+    </action>
+    <title>Nhập Nút</title>
+    <msg>
+      <import-successful>Đã nhập thành công.</import-successful>
+      <filename-invalid>Duyệt tệp tin .xml cho trường 'Tải tệp tin' để nhập vào.</filename-invalid>
+      <filetype-error>Không thể nhập tệp tin đã tải lên. Tệp tin .xml này có thể không hợp lệ.</filetype-error>
+      <mimetype-invalid>Bạn chỉ có thể nhập các tệp tin dạng .xml hoặc .zip.</mimetype-invalid>
+      <access-denied>Truy nhập bị từ chối. Bạn không được phép nhập ở đây.</access-denied>
+      <constraint-violation-exception>Không thể nhập nút do dữ liệu không chính xác hoặc do kiểu nút '{0}' không cho phép phép có kiểu con là '{0}'.</constraint-violation-exception>
+      <item-exists-exception>Một nút trong quá trình nhập có UUID trùng với một nút hiện đang tồn tại trong hệ thống.</item-exists-exception>
+    </msg>
+  </UIImportNode>
+  <!--
+  ###############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.versions.UILabelForm   #
+  ###############################################################################
+  -->
+  <UILabelForm>
+    <label>
+      <label>Nhãn</label>
+    </label>
+    <action>
+      <Save>Lưu</Save>
+      <Cancel>Hủy bỏ</Cancel>
+    </action>
+    <title>Thêm Nhãn</title>
+    <msg>
+      <label-invalid>Nhãn chứa một số ký tự không hợp lệ.</label-invalid>
+      <label-exist>'{0}' đã tồn tại.</label-exist>
+    </msg>
+  </UILabelForm>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIRemoveLabelForm   #
+  ###############################################################################
+  -->
+  <UIRemoveLabelForm>
+    <title>Gỡ bỏ Nhãn</title>
+    <label>
+      <label>Chọn Nhãn</label>
+    </label>
+    <action>
+      <Remove>Gỡ bỏ</Remove>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIRemoveLabelForm>
+  <!--
+  ###############################################################################
+  #    org.exoplatform.ecm.webui.component.explorer.versions.UIViewVersion      #
+  ###############################################################################
+  -->
+  <UIVersionTree>
+    <title>Cây thư mục con</title>
+  </UIVersionTree>
+  <UIViewVersion>
+    <label>
+      <nodeType>Kiểu nút</nodeType>
+      <nodeName>Tên nút</nodeName>
+      <VersionNumber>Số phiên bản</VersionNumber>
+      <VersionLabels>Các nhãn của phiên bản</VersionLabels>
+      <VersionDate>Ngày của phiên bản</VersionDate>
+      <PropertyName>Tên thuộc tính</PropertyName>
+      <PropertyValue>Các giá trị của thuộc tính</PropertyValue>
+    </label>
+    <msg>
+      <not-supported>Chức năng này không hỗ trợ cho thay đổi phiên bản</not-supported>
+    </msg>
+  </UIViewVersion>
+  <UIVersionList>
+    <title>Tên node con</title>
+  </UIVersionList>
+  <!--
+  ################################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UICategoryManager #
+  ################################################################################
+  -->
+  <UICategoryManager>
+    <action>
+      <Close>Đóng</Close>
+    </action>
+    <tab>
+      <label>
+        <UICategoriesAddedList>Các danh mục được tham chiếu</UICategoriesAddedList>
+        <UIOneNodePathSelector>Chọn danh mục</UIOneNodePathSelector>
+      </label>
+    </tab>
+  </UICategoryManager>
+  <UICategoriesAddedList>
+    <header>
+      <path>Danh mục</path>
+      <action>Các thao tác</action>
+    </header>
+    <msg>
+      <access-denied>Truy nhập bị hủy bỏ! Bạn không có đủ quyền trên nút này.</access-denied>
+      <confirm-delete>Bạn có thực sự muốn xóa tham chiếu này?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Delete>Xóa</Delete>
+      </title>
+    </action>
+    <label>
+      <category>Loại</category>
+      <actions>Tác vụ</actions>
+      <delete>Xóa</delete>
+    </label>
+  </UICategoriesAddedList>
+  <UITreeList>
+    <header>
+      <name>Tên</name>
+      <action>Thao tác</action>
+    </header>
+    <info>
+      <child-not-found>Nút này không có bất kỳ nút con nào.</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ################################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIRelationManager #
+  ################################################################################
+  -->
+  <UIRelationManager>
+    <action>
+      <Close>Đóng</Close>
+    </action>
+    <tab>
+      <label>
+        <UIOneNodePathSelector>Lựa chọn quan hệ</UIOneNodePathSelector>
+      </label>
+    </tab>
+    <tab>
+      <label>
+        <UIRelationsAddedList>Danh sách các quan hệ</UIRelationsAddedList>
+      </label>
+    </tab>
+  </UIRelationManager>
+  <UIRelationsAddedList>
+    <header>
+      <path>Các quan hệ</path>
+      <action>Các thao tác</action>
+    </header>
+    <action>
+      <title>
+        <Delete>Xóa</Delete>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete>Bạn có thực sự muốn xóa quan hệ này?</confirm-delete>
+      <can-not-add-itself>Bạn không thể thêm một quan hệ cho bản thân một nút.</can-not-add-itself>
+    </msg>
+  </UIRelationsAddedList>
+  <!--
+  ###################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.UIClipboard  #
+  ###################################################################
+  -->
+  <UIClipboard>
+    <header>
+      <path>Đường dẫn</path>
+      <command>Cm</command>
+      <action>Thao tác</action>
+    </header>
+    <label>
+      <nocommand>Không có khoản mục nào trong sổ ghi tạm!</nocommand>
+    </label>
+    <action>
+      <clearall>Xóa tất cả</clearall>
+    </action>
+    <msg>
+      <unable-pasted>Không thể dán nút này.</unable-pasted>
+      <node-pasted>Nút {0} đã được dán vào vị trí {1}. Thao tác này đã được lưu và bạn không cần nhập biểu tượng đĩa.</node-pasted>
+    </msg>
+  </UIClipboard>
+  <!--
+  ###################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.UIPopupMenu  #
+  ###################################################################
+  -->
+  <!--
+  ###################################################################################
+  #org.exoplatform.ecm.webui.component.explorer.popup.actions.UISelectDocumentForm  #
+  ###################################################################################
+  -->
+  <UISelectDocumentForm>
+    <label>
+      <selectTemplate>Select your template in the list below</selectTemplate>
+      <ThumbnailView>Xem hình thu nhỏ</ThumbnailView>
+      <ListView>Hiển thị dạng danh sách</ListView>
+      <Cancel>#{word.cancel}</Cancel>
+    </label>
+  </UISelectDocumentForm>
+  <!--
+  #######################################################################
+  #org.exoplatform.ecm.webui.component.explorerpopup.actions.UIDocumentForm  #
+  #######################################################################
+  -->
+  <UIDocumentForm>
+    <title>Thêm tài liệu mới</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <SaveAndClose>Lưu và đóng</SaveAndClose>
+      <ChangeType>Thay đổi kiểu nội dung</ChangeType>
+      <Fullscreen>Toàn màn hình</Fullscreen>
+      <Cancel>#{word.cancel}</Cancel>
+      <Close>#{word.close}</Close>
+    </action>
+<tooltip>
+<FullScreen>Phóng to/thu nhỏ</FullScreen>
+</tooltip>
+    <msg>
+      <cannot-save>Lỗi xảy ra khi lưu tài liệu.</cannot-save>
+      <in-versioning>Vui lòng checkout nút hiện thời trước khi thêm nút mới.</in-versioning>
+      <not-support>Không thể tải mẫu của '{0}'.</not-support>
+      <value-invalid>'{0}' là giá trị cần thiết.</value-invalid>
+      <repository-exception>Lỗi xảy ra khi lưu tài liệu.</repository-exception>
+      <!--DMS 2.4.x; ECM-3543-->
+      <repository-exception-permission>Bạn không có quyền để thêm một tài liệu mới vào nút này.</repository-exception-permission>
+      <not-allowed-same-name-sibling>Không thể lưu tài liệu này. Node này không được phép trùng tên.</not-allowed-same-name-sibling>
+      <numberformat-exception>Bạn không thể lưu tài liệu này. Tên cung cấp phải ở định dạng số.</numberformat-exception>
+      <item-not-found>Khoản mục không được tìm thấy! Có thể nút này hoặc nút cha đã bị xóa. Vui lòng nhấp vào nút làm mới.</item-not-found>
+    </msg>
+  </UIDocumentForm>
+  <!--
+  #################################################################################
+  #org.exoplatform.ecm.webui.component.explorer.actions.UIViewDocumentController  #
+  #################################################################################
+  -->
+  <UIViewDocumentController>
+    <tab>
+      <label>
+        <UIViewDocumentInfo>Thông tin</UIViewDocumentInfo>
+      </label>
+    </tab>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIViewDocumentController>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.search.UI  #
+  #############################################################################
+  -->
+  <!--
+  #############################################################################
+  #    org.exoplatform.ecm.webui.component.explorer.search.UIQuerySaveForm    #
+  #############################################################################
+  -->
+  <UIQuerySaveForm>
+    <title>Lưu hình thức truy vấn</title>
+    <label>
+      <query>Truy vấn</query>
+      <name>Tên câu truy vấn</name>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIQuerySaveForm>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIActionManager  #
+  #############################################################################
+  -->
+  <editActionPopup>
+    <title>
+      <UIActionForm>Thao tác sửa</UIActionForm>
+      <EditFormAction>Thao tác sửa</EditFormAction>
+    </title>
+  </editActionPopup>
+  <UIActionViewContainer>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIActionViewContainer>
+  <UIActionList>
+    <header>
+      <name>#{word.name}</name>
+      <description>Mô tả</description>
+  <lifecycle>Vòng đời</lifecycle>
+  <triggeredaction>Hành động được kích hoạt</triggeredaction>
+      <instanceOf>Kiểu hành động</instanceOf>
+      <action>Hành động</action>
+    </header>
+    <msg>
+      <remove-popup-first>Bạn phải đóng cửa sổ trước khi xóa nút.</remove-popup-first>
+      <confirm-delete-action>Bạn có thực sự muốn xóa thao tác này?</confirm-delete-action>
+      <template-empty>Mẫu của '(0)' là null hoặc rỗng.</template-empty>
+      <template-null>Mẫu rỗng hoặc bạn không có quyền truy cập mẫu này.</template-null>
+      <access-denied>Truy nhập bị hủy bỏ!Bạn không có quyền để thực hiện thao tác này.</access-denied>
+    </msg>
+    <action>
+      <Close>#{word.close}</Close>
+      <View>Xem</View>
+      <Edit>Chỉnh sửa</Edit>
+      <Delete>Xóa</Delete>
+    </action>
+  </UIActionList>
+  <UIActionForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+    </action>
+    <label>
+      <name>Biểu mẫu hành động</name>
+    </label>
+    <msg>
+      <repository-exception>Không thể lưu thao tác này. Tên thao tác vừa nhập chứa một số kí tự đặc biệt.</repository-exception>
+      <numberformat-exception>Không thể lưu thao tác này. Tên phải là kiểu số.</numberformat-exception>
+      <existed-action>Tên thao tác '{0}' đã tồn tại. Vui lòng lựa chọn tên khác!</existed-action>
+      <unable-add-action>Không thể thêm thao tác này.</unable-add-action>
+      <unable-add>Không thể thêm hành động này. Do nút hiện tại là nút gốc hoặc bạn không có quyền tạo hành động.</unable-add>
+      <not-support>Hộp thoại '{0}' không được hỗ trợ</not-support>
+      <no-permission-add>Truy nhập bị hủy bỏ. Bạn không có quyền thêm một thao tác ở đây.</no-permission-add>
+      <access-denied>Truy nhập bị hủy bỏ. Bạn không có quyền truy cập mẫu này.</access-denied>
+      <lifecycle-invalid>Không thể thêm thao tác này. Vòng đời của thao tác không hợp lệ</lifecycle-invalid>
+    </msg>
+    <title>Thêm mới/Sửa một thao tác</title>
+    <validator>
+      <validator>Validator</validator>
+      <destPath>With Path</destPath>
+    </validator>
+  </UIActionForm>
+  <UIActionTypeForm>
+    <label>
+      <actionType>Kiểu hành động</actionType>
+    </label>
+  </UIActionTypeForm>
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>Chọn Vị trí</UIOneNodePathSelector>
+      <UIPermissionSelector>Lựa chọn quyền</UIPermissionSelector>
+      <UICategoriesSelector>Thêm Danh mục</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+  <EditFormAction>
+    <validator>
+      <validator>Validator</validator>
+      <destPath>Với đường dẫn</destPath>
+    </validator>
+    <title>Biểu mẫu hành động</title>
+  </EditFormAction>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar   #
+  #############################################################################
+  -->
+  <UIAddressBar>
+    <msg>
+      <path-not-found>Không tìm thấy đường dẫn.</path-not-found>
+      <access-denied>Truy cập bị từ chối. Bạn không có quyền để truy cập nút này.</access-denied>
+      <keyword-not-support>Từ khóa không hợp lệ. Một số ký tự không được hỗ trợ.</keyword-not-support>
+    </msg>
+    <label>
+      <exeButton>Chuyển</exeButton>
+      <address>Địa chỉ:</address>
+    </label>
+    <title>
+      <exeButton>Chuyển</exeButton>
+      <backButton>Trở về nút trước</backButton>
+      <showHistory>Hiện địa chỉ lược sử</showHistory>
+      <changeNode>Thay đổi nút</changeNode>
+    </title>
+  </UIAddressBar>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.actions.UIWatchDocumentForm  #
+  ###################################################################################
+  -->
+  <UIWatchDocumentForm>
+    <action>
+      <Watch>Theo dõi</Watch>
+      <Cancel>#{word.cancel}</Cancel>
+      <Continue>Tiếp tục</Continue>
+      <Unwatch>Ngừng theo dõi</Unwatch>
+    </action>
+    <label>
+      <notificationType>Kiểu thông báo:</notificationType>
+    </label>
+    <msg>
+      <not-support>Vui lòng chọn kiểu thông báo mà chúng tôi hỗ trợ.</not-support>
+      <watching-successfully>Bạn đang theo dõi tài liệu này.</watching-successfully>
+      <unwatching-successfully>Bạn không còn theo dõi tài liệu này nữa.</unwatching-successfully>
+      <node-iswatching>Tài liệu này đang được theo dõi.</node-iswatching>
+    </msg>
+  </UIWatchDocumentForm>
+  <!--
+  ###################################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.popup.actions.UITaggingForm      #
+  ###################################################################################
+  -->
+  <UITaggingForm>
+    <label>
+      <names>Các nhãn:</names>
+      <linked>Nhãn liên kết:</linked>
+      <tagSet>UITaggingForm</tagSet>
+    </label>
+    <action>
+      <AddTag>Thêm</AddTag>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <msg>
+      <name-exist>Tên nhãn '{0}' đã tồn tại.</name-exist>
+      <tagName-invalid>Có một số kí tự không hợp lệ trong tên nhãn.</tagName-invalid>
+      <tag-name-empty>Tên thẻ của bạn là rỗng</tag-name-empty>
+      <tag-name-duplicate>Tên thẻ bạn nhập bị trùng nhau.</tag-name-duplicate>
+      <tagName-too-long>Một trong các thẻ nhập là quá dài. Tên thẻ phải là ít hơn 30 ký tự.</tagName-too-long>
+      <path-not-found>Có thể thẻ đã bị xóa hoặc bị thay đổi. Vui lòng nhấp nút Refresh.</path-not-found>
+    </msg>
+    <introduction>
+      <tagName>Tách nhiều thẻ bằng dấu phẩy ","</tagName>
+    </introduction>
+  </UITaggingForm>
+
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.info.UIMetadataContainer     #
+  ###################################################################################
+  -->
+  <UIViewMetadataContainer>
+    <msg>
+      <path-not-found>Nút không hỗ trợ kiểu hiển thị này.</path-not-found>
+    </msg>
+  </UIViewMetadataContainer>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.info.UIViewMetadataForm      #
+  ###################################################################################
+  -->
+  <UIViewMetadataForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIViewMetadataForm>
+  <metadataForm>
+    <title>
+      <UIViewMetadataForm>Thêm/Xóa các thuộc tính</UIViewMetadataForm>
+    </title>
+  </metadataForm>
+  <UIViewMetadataTemplate>
+    <msg>
+      <access-denied>Truy cập bị từ chối. Bạn không phải là người tạo hoặc không có quyền sửa trên nút này.</access-denied>
+    </msg>
+  </UIViewMetadataTemplate>
+  <!--
+  ###################################################################################
+  # Validator messages                                                              #
+  ###################################################################################
+  -->
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>Có một số kí tự không hợp lệ trong trường '{0}'. Vui lòng nhập giá trị khác!</Invalid-char>
+      <empty-input>Trường'{0}' chưa có giá trị.</empty-input>
+    </msg>
+  </ECMNameValidator>
+  <DateTimeValidator>
+    <msg>
+      <Invalid-input>Trường '{0}' với giá trị '{1}' là không hợp lệ</Invalid-input>
+    </msg>
+  </DateTimeValidator>
+  <CronExpressionValidator>
+    <invalid-input>Biểu thức cron không hợp lệ. Vui lòng kiểm tra cú pháp.</invalid-input>
+  </CronExpressionValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>Vui lòng điền giá trị vào trường '{0}'</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <CategoryValidator>
+    <msg>
+      <non-categories>Tên hạng mục sai. Xin vui lòng chọn hạng mục khác.</non-categories>
+    </msg>
+  </CategoryValidator>
+  <!--
+  ###################################################################################
+  # JCR Exceptions manager                                                              #
+  ###################################################################################
+  -->
+  <ReferentialIntegrityException>
+    <msg>Thao tác lỗi. Một số thuộc tính tham chiếu trong không gian làm việc vẫn tham chiếu đến khoản mục này.</msg>
+  </ReferentialIntegrityException>
+  <ItemExistsException>
+    <msg>Khoản mục này đã tồn tại!</msg>
+  </ItemExistsException>
+  <AccessControlException>
+    <msg>Bạn không có đủ quyền để thực hiện thao tác này.</msg>
+  </AccessControlException>
+  <AccessDeniedException>
+    <msg>Truy cập bị hủy bỏ</msg>
+  </AccessDeniedException>
+  <ItemNotFoundException>
+    <msg>Không tìm thấy khoản mục này. Có thể nó đã bị xóa bỏ hoặc đã thay đổi.</msg>
+  </ItemNotFoundException>
+  <PathNotFoundException>
+    <msg>Không tìm thấy đường dẫn này. Có thể nó đã bị xóa bỏ hoặc thay đổi đường dẫn.</msg>
+  </PathNotFoundException>
+  <ConstraintViolationException>
+    <msg>Bạn không thể thực hiện hành động này vì một số ràng buộc.</msg>
+  </ConstraintViolationException>
+  <!--
+  ###################################################################################
+  # Publication Manage                                                              #
+  ###################################################################################
+  -->
+  <UIPublicationForm>
+    <label>
+      <published>Xuất bản</published>
+      <non-published>Chưa xuất bản</non-published>
+      <public>Công khai</public>
+      <private>Riêng tư</private>
+      <state>Trạng thái</state>
+      <visibility>Khả năng hiển thị</visibility>
+      <nodeName>Tên Nút :</nodeName>
+      <lifecycleName>Tên vòng đời</lifecycleName>
+      <stateName>Tên tình trạng</stateName>
+    </label>
+    <action>
+      <Save>Lưu</Save>
+      <UnsubcriberLifeCycle>Gỡ bỏ ghi danh</UnsubcriberLifeCycle>
+      <Cancel>Hủy bỏ</Cancel>
+    </action>
+  </UIPublicationForm>
+  <!--
+  ###################################################################################
+  # JCR Browser                                                             #
+  ###################################################################################
+  -->
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Không gian lưu trữ:</workspaceName>
+      <rootNodeInfo>Đường dẫn Gốc:</rootNodeInfo>
+      <rootPath>Đường dẫn Gốc:</rootPath>
+    </label>
+  </UIWorkspaceList>
+  <pathSelector>
+    <title>
+      <UIOneNodePathSelector>Chọn Nút</UIOneNodePathSelector>
+    </title>
+  </pathSelector>
+  <!--
+  ###################################################################################
+  # Others                                                                          #
+  ###################################################################################
+  -->
+  <EmailAddressValidator>
+    <msg>
+      <Invalid-input>Địa chỉ email không hợp lệ.</Invalid-input>
+    </msg>
+  </EmailAddressValidator>
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>Bạn có chắc chắn muốn xóa không?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <RepeatCountValidator>
+    <msg>
+      <invalid-value>Giá trị không hợp lệ trong trường 'Repeat count'. Chỉ cho phép gõ kiểu số nguyên hoặc -1.</invalid-value>
+    </msg>
+  </RepeatCountValidator>
+  <RepeatIntervalValidator>
+    <msg>
+      <invalid-value>Các giá trị trong các trường 'Khoảng thời gian' không hợp lệ. Chỉ cho phép kiểu Long.</invalid-value>
+    </msg>
+  </RepeatIntervalValidator>
+  <UIPermissionSelector>
+    <label>
+      <selectGroup>Chọn Nhóm</selectGroup>
+      <selectUser>Chọn Người dùng</selectUser>
+      <selectMembership>Chọn Kiểu thành viên</selectMembership>
+    </label>
+  </UIPermissionSelector>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.ECMStandardPropertyNameValidator                        #
+  ###################################################################################
+  -->
+  <ECMStandardPropertyNameValidator>
+    <msg>
+      <empty-input>Trường'{0}' chưa có giá trị.</empty-input>
+      <Invalid-char>Có một số kí tự không hợp lệ trong trường '{0}'. Vui lòng nhập giá trị khác.</Invalid-char>
+    </msg>
+  </ECMStandardPropertyNameValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.SearchValidator                                     #
+  ###################################################################################
+  -->
+  <SearchValidator>
+    <msg>
+      <empty-input>Giá trị trường này là null hoặc rỗng!</empty-input>
+      <Invalid-char>Có một số kí tự không hợp lệ trong trường này. Vui lòng nhập giá trị khác.</Invalid-char>
+      <Invalid-char2>Số phải được theo sau ký tự '~'.</Invalid-char2>
+      <Invalid-char1>Kiểu số theo sau ký tự '~' phải nằm trong khoảng 0 đến 1.</Invalid-char1>
+      <Invalid-char3>Kiểu số phải được theo sau ký tự '^'.</Invalid-char3>
+      <Invalid-char4>Dấu cách được phép gán ký tự '~'</Invalid-char4>
+      <Invalid-char5>Dấu cách được phép gán ký tự '^'</Invalid-char5>
+    </msg>
+  </SearchValidator>
+  <!--
+  ###################################################################################
+  # PublicationService                                                              #
+  ###################################################################################
+  -->
+  <UIPublicationLogList>
+    <header>
+      <date>Ngày tháng</date>
+      <newState>Trạng thái mới</newState>
+      <user>Người dùng</user>
+      <description>Mô tả</description>
+      <version>Phiên bản</version>
+      <visibility>Khả năng hiển thị:</visibility>
+    </header>
+    <action>
+      <Close>Đóng</Close>
+    </action>
+  </UIPublicationLogList>
+  <!--
+  ###################################################################################
+  # UIVersionTreeList                                                             #
+  ###################################################################################
+  -->
+  <UIVersionTreeList>
+    <header>
+      <version>Phiên bản</version>
+      <state>Trạng thái</state>
+    </header>
+  </UIVersionTreeList>
+  <!--
+  ###################################################################################
+  # UIThumbnailForm                                                             #
+  ###################################################################################
+  -->
+  <UIThumbnailForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <RemoveThumbnail>Xoá ảnh nhỏ</RemoveThumbnail>
+    </action>
+    <label>
+      <mediumSize>Ảnh nhỏ</mediumSize>
+      <SelectFile>Chọn ảnh nhỏ</SelectFile>
+    </label>
+    <msg>
+      <mimetype-incorrect>Kiểu tệp tin không hợp lệ. Hệ thống chỉ chấp nhận tệp có định dạng JPG, PNG, hoặc GIF.</mimetype-incorrect>
+      <access-denied>Truy nhập bị từ chối. Bạn không có quyền để thêm ảnh thu nhỏ cho nút này.</access-denied>
+      <confirm-delete>Bạn muốn xóa ảnh thu nhỏ này?</confirm-delete>
+      <is-checked-in>Nút này hiện đang được checkin. Vui lòng checkout trước khi thực hiện bất kì thao tác nào.</is-checked-in>
+    </msg>
+    <title>
+      <remove-thumbnail>Xóa hình thu nhỏ này</remove-thumbnail>
+    </title>
+  </UIThumbnailForm>
+  <!--
+  ###################################################################################
+  # UIAnyPermission                                                                 #
+  ###################################################################################
+  -->
+  <UIAnyPermission>
+    <label>
+      <anyPermission>Cho phép tất cả</anyPermission>
+    </label>
+  </UIAnyPermission>
+
+  <anyPermission>
+    <title>
+      <AddAnyPermission>Thiết lập cho phép bất kỳ</AddAnyPermission>
+    </title>
+  </anyPermission>
+  <!--
+  ###################################################################################
+  # UICategoriesAddedList                                                           #
+  ###################################################################################
+  -->
+  <UICategoriesSelector>
+    <action>
+      <close>Đóng</close>
+    </action>
+  </UICategoriesSelector>
+  <!--
+  ###################################################################################
+  # Since ECM version 2.2                                                             #
+  ###################################################################################
+  -->
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>Chọn nhóm người dùng</selectGroup>
+      <selectUser>Chọn người dùng</selectUser>
+      <selectMembership>Chọn thành viên</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+  <!--
+  ###Since ECM version 2.2##############
+  -->
+
+  <!--
+  ### Since ECM version 2.3 Alpha##############
+  Access directly a JCR FE drive
+  -->
+  <UIJCRExplorerPortlet>
+    <nopermission>Không có ổ đĩa này hoặc bạn không có quyền để truy cập.</nopermission>
+  </UIJCRExplorerPortlet>
+
+  <UIJcrExplorerEditForm>
+    <title>Chỉnh sửa tập tin Explorer</title>
+    <action>
+      <Edit>Sửa</Edit>
+      <Save>Lưu</Save>
+      <Cancel>Hủy bỏ</Cancel>
+    </action>
+    <label>
+      <uploadFileSizeLimitMB>Giới hạn kích thước tệp tải lên (MB)</uploadFileSizeLimitMB>
+      <isDirectlyDrive>Ổ đĩa Trực tiếp</isDirectlyDrive>
+      <driveName>Tên ổ đĩa</driveName>
+      <usecase>Kiểu truy cập</usecase>
+      <SelectNodePath>Chọn Đường dẫn</SelectNodePath>
+      <showTopBar>Hiện Thanh Trên Cùng</showTopBar>
+      <showActionBar>Hiện Thanh Hành động</showActionBar>
+      <showSideBar>Hiện Thanh Trái</showSideBar>
+      <showFilterBar>Hiển thị Thanh Bộ lọc</showFilterBar>
+      <nodePath>Chọn Đường dẫn</nodePath>
+    </label>
+  </UIJcrExplorerEditForm>
+
+  <UIDriveSelector>
+    <label>
+      <driveName>Tên Ổ đĩa</driveName>
+      <action>Hành động</action>
+      <adddrives>Thêm Ổ đĩa</adddrives>
+    </label>
+  </UIDriveSelector>
+  <UIJcrExplorerEditForm>
+    <label>
+      <DriveNameInput>UI JCR Explorer Edit Form</DriveNameInput>
+    </label>
+    <msg>
+      <personal-usecase>Ổ đĩa cá nhân của người sử dụng hiện tại sẽ được sử dụng khi bạn chọn kiểu truy cập là người dùng.</personal-usecase>
+      <drive-edit-permission>Bạn không thể Chỉnh sửa tên ổ đĩa. Vui lòng nhấp chọn nút Chỉnh sửa.</drive-edit-permission>
+      <path-edit-permission>Bạn không thể Chỉnh sửa đường dẫn. Hãy nhấp chọn nút Chỉnh sửa.</path-edit-permission>
+    </msg>
+  </UIJcrExplorerEditForm>
+
+  <PopUpSelectDrive>
+    <title>
+      <UIDriveSelector>Chọn Ổ đĩa</UIDriveSelector>
+    </title>
+  </PopUpSelectDrive>
+
+  <PopupSelectPath>
+    <title>
+      <UIOneNodePathSelector>Chọn Nút</UIOneNodePathSelector>
+    </title>
+  </PopupSelectPath>
+
+  <DriveNameInput>
+    <title>
+      <SelectDrive>Chọn Ổ đĩa</SelectDrive>
+    </title>
+  </DriveNameInput>
+
+  <!--
+  ### Since ECM version 2.4.x ##############
+  -->
+  <UIActionBar>
+    <tooltip>
+      <AddSymLink>Thêm mới liên kết</AddSymLink>
+      <AddLocalizationLink>Thêm bản dịch</AddLocalizationLink>
+    </tooltip>
+  </UIActionBar>
+
+  <UIPopupWindow>
+    <title>
+      <UISymLinkManager>Quản lý Symlink</UISymLinkManager>
+      <UIAddTranslationManager>Thêm bản dịch</UIAddTranslationManager>
+    </title>
+  </UIPopupWindow>
+
+  <UISymLinkForm>
+    <label>
+      <symLinkName>Tên Symlink</symLinkName>
+      <pathNode>Đường dẫn Nút</pathNode>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <addFolder-successful>Symlink '{0}' đã được thêm vào thành công.</addFolder-successful>
+      <name-invalid>Vui lòng nhập tên symlink.</name-invalid>
+      <name-not-allowed>Tên này không được phép.</name-not-allowed>
+      <fileName-error>Tên tệp tin không hợp lệ.</fileName-error>
+      <constraint-violation>Nút hiện tại không cho phép thêm mới kiểu nút là '{0}'</constraint-violation>
+      <repository-exception>Truy cập bị từ chối. Bạn không được phân quyền thêm mới symlink cho nút này.</repository-exception>
+      <numberformat-exception>Bạn không thể lưu thư mục này. Tên cung cấp phải ở định dạng chữ số.</numberformat-exception>
+      <path-node-invalid>Vui lòng nhập đường dẫn.</path-node-invalid>
+      <path-node-not-allowed>Tên này không được phép.</path-node-not-allowed>
+      <non-node>Bạn có thể không có quyền để đọc nút này. Vui lòng chọn nút đích tin cậy.</non-node>
+      <cannot-save>Bạn không thể thêm symlink cho kiểu nút này.</cannot-save>
+      <item-exists-exception>Tên nút này đã tồn tại.</item-exists-exception>
+      <translation-node-same-language-default>Nút dịch có cùng ngôn ngữ với ngôn ngữ mặc định của node hiện tại.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Nút được liên kết không thể tham chiếu đến (có thể do bị khóa).</UnsupportedRepositoryOperationException>
+    </msg>
+  </UISymLinkForm>
+  
+  <UIAddTranslationForm>
+    <label>
+      <symLinkName>Tên Symlink</symLinkName>
+      <pathNode>Đường dẫn tài liệu:</pathNode>
+      <note>Chọn một tài liệu khác để làm bản dịch</note>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <SelectDocument>Chọn Tài liệu</SelectDocument>
+    </action>
+    <msg>
+      <addFolder-successful>Thêm thành công symlink '{0}'.</addFolder-successful>
+      <name-invalid>Vui lòng nhập tên symlink.</name-invalid>
+      <name-not-allowed>Tên này không được phép.</name-not-allowed>
+      <fileName-error>Tên tệp không hợp lệ.</fileName-error>
+      <constraint-violation>Không thể thêm kiểu nút '{0}' vào nút hiện tại.</constraint-violation>
+      <repository-exception>Truy cập bị từ chối. Bạn không được phân quyền để thêm symlink vào nút này.</repository-exception>
+      <numberformat-exception>Bạn không thể lưu thư mục này. Tên cung cấp phải ở định dạng số.</numberformat-exception>
+      <path-node-invalid>Vui lòng nhập đường dẫn.</path-node-invalid>
+      <path-node-not-allowed>Tên này không được phép.</path-node-not-allowed>
+      <non-node>Vui lòng chọn nút đích tin cậy. có thể bạn không có quyền để đọc nút này.</non-node>
+      <cannot-save>Một lỗi đã xảy ra khi đang tạo symlink.</cannot-save>
+      <item-exists-exception>Tên nút này đã tồn tại.</item-exists-exception>
+      <translation-node-same-language-default>Nút dịch có cùng ngôn ngữ với ngôn ngữ mặc định của nút hiện tại.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Nút được liên kết không thể tham chiếu đến (có thể do bị khóa).</UnsupportedRepositoryOperationException>
+    </msg>
+  </UIAddTranslationForm>
+
+  <UIPopupSymLink>
+    <title>
+      <UIOneNodePathSelector>Chọn Node Đích</UIOneNodePathSelector>
+    </title>
+  </UIPopupSymLink>
+  <UIPopupSymLink>
+    <title>
+      <UIContentSelectorOne>Chọn Tài liệu</UIContentSelectorOne>
+    </title>
+  </UIPopupSymLink>
+
+  <ECMContextMenu>
+    <event>
+      <AddSymLink>Thêm Symlink</AddSymLink>
+      <AddLocalizationLink>Thêm bản dịch</AddLocalizationLink>
+    </event>
+  </ECMContextMenu>
+
+  <UIWorkingArea>
+    <msg>
+      <create-link-problem>Bạn không thể tạo liên kết cho nút '{0}' tại '{1}'.</create-link-problem>
+      <dest-node-is-link>Nút điểm đến '{0}' đã là một symlink. Vì vậy, bạn không thể tạo symlink bên trong nó.</dest-node-is-link>
+      <selected-is-link>Nút được chọn '{0}' đã là một symlink. Vì vậy, bạn không thể tạo một liên kết trỏ tới một liên kết khác.</selected-is-link>
+      <confirm-create-link>Bạn có muốn tạo liên kết đến vị trí này không?</confirm-create-link>
+    </msg>
+  </UIWorkingArea>
+
+  <ECMContextMenu>
+    <event>
+      <CreateLink>Tạo Liên kết</CreateLink>
+    </event>
+  </ECMContextMenu>
+
+  <UIWorkspaceList>
+    <msg>
+      <AccessDeniedException>Truy cập không được phép. Bạn đã bị giới hạn quyền truy cập trong phần này</AccessDeniedException>
+    </msg>
+    <label>
+      <taxonomyTree>Cây Danh mục</taxonomyTree>
+    </label>
+  </UIWorkspaceList>
+
+  <UIPopupTaxonomy>
+    <title>
+      <UIOneTaxonomySelector>Thêm danh mục</UIOneTaxonomySelector>
+    </title>
+  </UIPopupTaxonomy>
+
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>Cây phân loại:</taxonomyTree>
+      <rootNodePath>Cây gốc:</rootNodePath>
+      <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
+    </label>
+  </UITreeTaxonomyList>
+
+  <UIActionBar>
+    <tooltip>
+      <ManageSimpleCategories>Quản lý việc đơn phân loại.</ManageSimpleCategories>
+    </tooltip>
+  </UIActionBar>
+
+  <UISimpleCategoryManager>
+    <tab>
+      <label>
+        <UICategoriesAddedList>Những danh mục liên quan</UICategoriesAddedList>
+        <UIOneNodePathSelector>Lựa chọn danh mục</UIOneNodePathSelector>
+      </label>
+    </tab>
+  </UISimpleCategoryManager>
+
+  <UICategoryManager>
+    <tab>
+      <label>
+        <UIOneTaxonomySelector>Lựa chọn danh mục</UIOneTaxonomySelector>
+      </label>
+    </tab>
+  </UICategoryManager>
+
+  <UISimpleCategoryManager>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UISimpleCategoryManager>
+  <UIPopupWindow>
+    <title>
+      <UISimpleCategoryManager>Thêm Danh mục</UISimpleCategoryManager>
+    </title>
+  </UIPopupWindow>
+  <UICategoriesAddedList>
+    <msg>
+      <ItemExistsException>Tên danh mục đã tồn tại.</ItemExistsException>
+    </msg>
+  </UICategoriesAddedList>
+
+  <UIConfirmMessage>
+    <label>
+      <Close>#{word.cancel}</Close>
+      <OK>Xóa</OK>
+      <ReplaceData>Ghi đè dữ liệu</ReplaceData>
+      <Back>Quay lại đổi tên</Back>
+      <Keepfile>Giữ cả hai tệp</Keepfile>
+    </label>
+  </UIConfirmMessage>
+
+  <UIRestoreConfirmMessage>
+    <label>
+      <Close>#{word.close}</Close>
+      <OK>Đồng ý</OK>
+      <ReplaceData>Ghi đè dữ liệu</ReplaceData>
+      <Back>Quay lại đổi tên</Back>
+      <Keepfile>Giữ cả hai tệp</Keepfile>
+    </label>
+  </UIRestoreConfirmMessage>
+
+
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>Thêm Danh mục</UIOneTaxonomySelector>
+    </title>
+  </PopupComponent>
+
+  <UIWorkingArea>
+    <msg>
+      <can-not-move-to-itself>Không thể di chuyển vị trí: Thư mục đích và thư mục nguồn là giống nhau</can-not-move-to-itself>
+      <is-editing>Tài liệu này đang được chỉnh sửa nên không thể di chuyển được. Bạn hãy đóng nó lại trước khi di chuyển.</is-editing>
+    </msg>
+  </UIWorkingArea>
+
+  <UIImportNode>
+    <label>
+      <behavior>Kiểu UUID</behavior>
+      <versionHistory>Lịch sử phiên bản</versionHistory>
+    </label>
+    <msg>
+      <history-invalid-type>Kiểu tệp tin không hợp lệ trong lược sử phiên bản. Chỉ có các tệp tin .zip được hỗ trợ.</history-invalid-type>
+      <history-invalid-content>Dữ liệu trong tài liệu lịch sử phiên bản là không hợp lệ. Bạn nên chọn file chính xác để sử dụng.</history-invalid-content>
+    </msg>
+  </UIImportNode>
+
+  <Import>
+    <Behavior>
+      <type0>Tạo mới</type0>
+      <type1>Xóa nếu node đang tồn tại</type1>
+      <type2>Chèn nếu node đang tồn tại</type2>
+      <type3>Văng lỗi nếu node đang tồn tại</type3>
+    </Behavior>
+  </Import>
+
+  <UIExportNode>
+    <action>
+      <ExportHistory>Xuất lịch sử phiên bản</ExportHistory>
+    </action>
+  </UIExportNode>
+
+  <UIPopupMenu>
+    <msg>
+      <node-locked-other-person>Nút đang xét hoặc nút cha đang bị khóa bởi người dùng khác, Bạn không thể xóa!</node-locked-other-person>
+    </msg>
+  </UIPopupMenu>
+
+  <Import>
+    <label>
+      <docview>Kiểu văn bản</docview>
+      <sysview>Kiểu hệ thống</sysview>
+    </label>
+  </Import>
+
+  <UIDocumentForm>
+    <msg>
+      <do-not-permission>Bạn không có quyền để tải mẫu '{0}'.</do-not-permission>
+    </msg>
+  </UIDocumentForm>
+
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIActionBar                #
+  #                           Localize tab                                                                                    #
+  ###################################################################################
+  -->
+  <UIActionBar>
+    <obtion>
+      <Admin>Quản trị</Admin>
+      <Info>Thông tin</Info>
+      <Actions>Hành động</Actions>
+      <Collaboration>Cộng đồng</Collaboration>
+      <Search>Tìm kiếm</Search>
+    </obtion>
+  </UIActionBar>
+
+  <UIPopupMenu>
+    <msg>
+      <can-not-unlock-node-is-checked-in>Không thể mở khóa vì nút '{0}' hoặc cha của '{0}' đang được checkin.</can-not-unlock-node-is-checked-in>
+    </msg>
+  </UIPopupMenu>
+
+  <!--
+   #############  From DMS 2.5 #############
+  -->
+  <UIActionBar>
+    <msg>
+      <cannot-enable-version>Không cho phép tạo phiên bản</cannot-enable-version>
+    </msg>
+  </UIActionBar>
+  <UIPopupMenu>
+    <msg>
+        <cannot-readsource>Bạn không thể đọc dữ liệu từ nút nguồn.</cannot-readsource>
+    </msg>
+  </UIPopupMenu>
+  <UIUploadForm>
+    <msg>
+      <upload-not-null>Xin vui lòng tải lên các tập tin trước khi thêm một thể loại.</upload-not-null>
+    </msg>
+  </UIUploadForm>
+  <UIActionBar>
+    <msg>
+      <allow-setProperty>Bạn cần chọn thuộc tính cho nhóm này.</allow-setProperty>
+    </msg>
+  </UIActionBar>
+
+  <UIActionForm>
+    <msg>
+      <name-not-allowed>Tên hành động  này không được cho phép.</name-not-allowed>
+    </msg>
+  </UIActionForm>
+
+  <UISaveQueryForm>
+    <msg>
+      <name-not-allowed>Tên truy vấn này không được cho phép.</name-not-allowed>
+    </msg>
+  </UISaveQueryForm>
+  <UISimpleSearch>
+    <msg>
+      <name-not-allowed>Một từ hoặc một cụm từ trong nội dung không hợp lệ.</name-not-allowed>
+    </msg>
+  </UISimpleSearch>
+
+
+  <!--
+   #############  From DMS 2.6 #############
+  -->
+  <ECMContextMenu>
+      <event>
+        <Permlink>Xem tài liệu</Permlink>
+      </event>
+  </ECMContextMenu>
+  
+
+  <!--
+    ############  From DMS 2.6 ##############
+   -->
+  <UIFolderForm>
+    <label>
+      <nt_folder>Thư mục tài liệu</nt_folder>
+      <nt_unstructured>Thư  mục nội dung</nt_unstructured>
+      <exo_cssFolder>CSS Folder</exo_cssFolder>
+      <exo_jsFolder>Javascript Folder</exo_jsFolder>
+      <exo_linkFolder>Link Folder</exo_linkFolder>
+      <exo_webFolder>Web Content Folder</exo_webFolder>
+   </label>
+  </UIFolderForm>
+
+  <Comments>
+    <tooltip>
+      <remove-comment>Gỡ bỏ bình luận này</remove-comment>
+      <edit-comment>Chỉnh sửa bình luận này</edit-comment>
+    </tooltip>
+  </Comments>
+  <UIDocumentInfo>
+    <msg>
+      <confirm-deletecomment>Bạn có chắc chắn muốn xóa bình luận này không?</confirm-deletecomment>
+    </msg>
+  </UIDocumentInfo>
+
+ <UIExportNode>
+  <msg>
+    <OutOfMemoryError>Bạn nên chọn Giao diện kiểu Hệ thống khi xuất dữ liệu lớn.</OutOfMemoryError>
+  </msg>
+ </UIExportNode>
+ <Taxonomy>
+    <msg>
+      <AccessDeniedException>Bạn không được phân quyền truy cập các cây danh mục này.</AccessDeniedException>
+    </msg>
+  </Taxonomy>
+
+  <UIJcrExplorerEditForm>
+    <msg>
+      <notNullDriveName>Chưa có giá trị cho tên ổ đĩa. Bạn hãy nhập giá trị hợp lệ.</notNullDriveName>
+      <notNullPath>Đường dẫn đang bị null hoặc rỗng. Hãy nhập vào đường dẫn</notNullPath>
+    </msg>
+  </UIJcrExplorerEditForm>
+
+  <UIViewSearchResult>
+    <tooltip>
+      <remove-attachment>Xóa file đính kèm này?</remove-attachment>
+    </tooltip>
+  </UIViewSearchResult>
+
+  <SameNamePopup>
+    <title>
+      <UIUploadBehaviorWithSameName>Tải Tệp tin lên</UIUploadBehaviorWithSameName>
+    </title>
+  </SameNamePopup>
+
+  <UIAllItems>
+    <label>
+      <OwnedByMe>Của tôi</OwnedByMe>
+      <Favourites>Ưa thích</Favourites>
+      <Hidden>Tài liệu ẩn</Hidden>
+      <Trash>Thùng rác</Trash>
+      <Configuration>Thiết lập lựa chọn</Configuration>
+    </label>
+    <title>
+      <allItems>Tất cả tài liệu</allItems>
+    </title>
+  </UIAllItems>
+
+  <UIPreferencesForm>
+      <label>
+          <Alphabetic>Bảng chữ cái</Alphabetic>
+          <Type>Kiểu</Type>
+          <CreatedDate>Ngày tạo</CreatedDate>
+          <ModifiedDate>Ngày cập nhật</ModifiedDate>
+          <Ascending>Tăng dần</Ascending>
+          <Descending>Giảm dần</Descending>
+      </label>
+  </UIPreferencesForm>
+
+  <UISavedSearches>
+    <title>
+      <savedSearches>Câu tìm kiếm đã lưu</savedSearches>
+    </title>
+  </UISavedSearches>
+  <DocumentType>
+    <label>
+       <Images>Ảnh</Images>
+       <Video>Phim</Video>
+       <Music>Âm thanh</Music>
+       <Documents>Tài liệu</Documents>
+       <Content>Nội dung</Content>
+    </label>
+  </DocumentType>
+
+  <UIDocumentFilterForm>
+    <label>
+      <Images>Ảnh</Images>
+      <Video>Phim</Video>
+      <Music>Âm thanh</Music>
+      <Documents>Tài liệu</Documents>
+      <Content>Nội dung</Content>
+    </label>
+    <title>Thiết lập hiển thị</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIDocumentFilterForm>
+
+  <UIAllItemsByType>
+    <label>
+    <ByType>Lọc theo kiểu tệp</ByType>
+      <DocumentFilterConfiguration>Chọn thiết lập hiển thị</DocumentFilterConfiguration>
+    </label>
+    <title>
+      <ShowVideo>Hiển thị các tệp video</ShowVideo>
+      <ShowMusic>Hiển thị các tệp âm nhạc</ShowMusic>
+      <ShowImages>Hiển thị các tệp ảnh</ShowImages>
+      <ShowDocuments>Hiển thị các tệp tài liệu</ShowDocuments>
+      <ShowContent>Hiển thị tất cả các kiểu tài liệu</ShowContent>
+    </title>
+  </UIAllItemsByType>
+
+  <Views>
+    <label>
+      <slide-show>Trình diễn theo slide</slide-show>
+    </label>
+  </Views>
+  <ECMContextMenu>
+    <event>
+      <PlayMedia>Chơi nhạc</PlayMedia>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIDocumentFilterForm>Lọc theo kiểu của tài liệu</UIDocumentFilterForm>
+    </title>
+  </UIPopupWindow>
+
+  <UIAllItemsPreferenceForm>
+    <label>
+      <showOwnedByUser>Của tôi</showOwnedByUser>
+      <showFavourites>Ưa thích</showFavourites>
+      <showHiddens>Tài liệu ẩn</showHiddens>
+      <showTrash>Thùng rác</showTrash>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIAllItemsPreferenceForm>
+
+  <EmptyTrashManageComponent>
+    <msg>
+      <confirm-delete>Bạn có chắc chắn muốn xóa tất cả các mục khỏi thùng rác không?</confirm-delete>
+    </msg>
+  </EmptyTrashManageComponent>
+  <UICategoryForm>
+    <label>
+      <name>Tên danh mục</name>
+    </label>
+    <action>
+      <Save>Lưu</Save>
+      <Cancel>Hủy</Cancel>
+    </action>
+  </UICategoryForm>
+  <UIPopupWindow>
+    <title>
+      <UICategoryForm>Thêm danh mục</UICategoryForm>
+    </title>
+  </UIPopupWindow>
+  <UIActionBar>
+    <tooltip>
+      <AddCategory>Thêm danh mục</AddCategory>
+    </tooltip>
+   </UIActionBar>
+
+   <UITaggingForm>
+    <label>
+      <Public>Công khai</Public>
+      <Private>Riêng</Private>
+      <tagScopes>Phạm vi</tagScopes>
+    </label>
+   </UITaggingForm>
+
+  <UITagExplorer>
+    <title>
+      <PublicTags>Nhãn</PublicTags>
+      <EditPublicTags>Sửa nhãn</EditPublicTags>
+      <PrivateTags>Thẻ</PrivateTags>
+    </title>
+  </UITagExplorer>
+
+  <UIEditingTagsForm>
+    <header>
+      <name>Tên</name>
+      <relatedDocuments>Tài liệu liên quan</relatedDocuments>
+      <action>Hành động</action>
+    </header>
+    <action>
+      <title>
+        <EditTag>Sửa nhãn</EditTag>
+        <RemoveTag>Xóa nhãn</RemoveTag>
+        <AddTag>Thêm nhãn</AddTag>
+      </title>
+    </action>
+    <msg>
+      <confirm-remove>Bạn có chắc chắn muốn xóa nhãn?</confirm-remove>
+    </msg>
+  </UIEditingTagsForm>
+
+
+  <UIPopupWindow>
+    <title>
+      <UIEditingTagsForm>Sửa nhãn</UIEditingTagsForm>
+    </title>
+  </UIPopupWindow>
+
+  <UITagForm>
+    <action>
+      <UpdateTag>#{word.save}</UpdateTag>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <label>
+      <tagName>Tên thẻ:</tagName>
+      <relatedDocuments>Tài liệu liên quan</relatedDocuments>
+    </label>
+  </UITagForm>
+
+  <TagPopup>
+    <title>
+      <UITagForm>Biểu mẫu thẻ</UITagForm>
+    </title>
+  </TagPopup>
+
+    <UIPopupMenu>
+    <msg>
+      <node-locked-editing>Bạn không thể chỉnh sửa nút này với đường dẫn {0}. Nó đã bị khóa bởi người dùng khác.</node-locked-editing>
+    </msg>
+  </UIPopupMenu>
+  <UITagStyleForm>
+    <msg>
+      <error-update>Một lỗi đã xảy ra khi đang cập nhật định dạng thẻ.</error-update>
+    </msg>
+  </UITagStyleForm>
+
+  <UIPopupMenu>
+    <msg>
+      <editTagAccessDenied>Lỗi truy cập!</editTagAccessDenied>
+    </msg>
+  </UIPopupMenu>
+
+  <UIPopupWindow>
+    <title>
+      <UITaggingFormContainer>Quản lý nhãn</UITaggingFormContainer>
+    </title>
+  </UIPopupWindow>
+
+    <PopupComponent>
+    <title>
+      <UINodeTypeSelector>Lựa chọn kiểu nút</UINodeTypeSelector>
+    </title>
+  </PopupComponent>
+
+    <UIActionForm>
+    <title>
+      <ShowComponent>Hiện Thành phần</ShowComponent>
+      <removeReference>Loại bỏ</removeReference>
+    </title>
+  </UIActionForm>
+
+  <EditFormAction>
+    <title>
+      <ShowComponent>Mở Thành phần</ShowComponent>
+      <removeReference>Loại bỏ</removeReference>
+    </title>
+  </EditFormAction>
+
+  <NodeTypeNameValidator>
+    <msg>
+      <Invalid-char>Có một số ký tự không hợp lệ. Xin vui lòng nhập một giá trị khác.</Invalid-char>
+      <empty-input>Giá trị bị rỗng</empty-input>
+    </msg>
+  </NodeTypeNameValidator>
+
+  <UIPreferencesForm>
+      <label>
+            <queryType>Kiểu truy vấn:</queryType>
+            <SQL>SQL</SQL>
+            <XPATH>XPATH</XPATH>
+      </label>
+  </UIPreferencesForm>
+
+  <UIDocumentInfo>
+    <msg>
+      <repository-error>Một lỗi đã xảy ra. Thông tin về kho dữ liệu đã bị mất.</repository-error>
+    </msg>
+  </UIDocumentInfo>
+
+  <UITreeExplorer>
+    <msg>
+      <repository-error>Một lỗi đã xảy ra. Thông tin về kho dữ liệu đã bị mất.</repository-error>
+    </msg>
+  </UITreeExplorer>
+  <UIDocumentForm>
+    <msg>
+      <constraintviolation-exception>Không thể lưu tài liệu. Dữ liệu nhập vào thiếu hoặc không phù hợp.</constraintviolation-exception>
+    </msg>
+  </UIDocumentForm>
+  <UIActionForm>
+    <msg>
+      <constraintviolation-exception>Không thể lưu tài liệu. Dữ liệu nhập vào thiếu hoặc không phù hợp.</constraintviolation-exception>
+    </msg>
+  </UIActionForm>
+
+  <UISelectRestorePath>
+    <action>
+      <Save>Lưu</Save>
+      <Cancel>Hủy bỏ</Cancel>
+    </action>
+    <label>
+      <formInput>Đường dẫn cũ đã bị mất, mời bạn chọn đường dẫn mới!</formInput>
+    </label>
+  </UISelectRestorePath>
+  <PathNode>
+    <title>
+      <Add>Thêm</Add>
+    </title>
+  </PathNode>
+  <UIPopupPathFoRestore>
+    <title>
+      <UIOneNodePathSelector>Chọn nút cha</UIOneNodePathSelector>
+    </title>
+  </UIPopupPathFoRestore>
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Chọn nút gốc</AddRootNode>
+    </title>
+  </rootNodeInfo>
+
+  <UIActionForm>
+    <msg>
+      <homePath-emty>Đường dẫn nguồn đang trống</homePath-emty>
+      <targetPath-emty>Đường dẫn đích đang trống</targetPath-emty>
+    </msg>
+    </UIActionForm>
+    <UIActionBar>
+      <msg>
+        <not-exist-categories>Không tồn tại bất kỳ danh mục phân loại nào</not-exist-categories>
+      </msg>
+    </UIActionBar>
+
+  <UIPublicationContainer>
+   <action>
+    <Close>#{word.close}</Close>
+   </action>
+  </UIPublicationContainer>
+
+<UIPublicationPanel>
+    <button>
+      <Close>Đóng</Close>
+    </button>
+    <revisions>
+      <version>Phiên bản</version>
+      <date>Ngày tháng</date>
+      <author>Tác giả</author>
+      <status>Trạng thái</status>
+      <action>Hành động</action>
+      <label>Phiên bản</label>
+      <none>Không có xét duyệt nào</none>
+      <seeall>Xem tất cả các phiên bản</seeall>
+      <currentVersion>Phiên bản hiện tại</currentVersion>
+      <confirm>Bạn sẽ mất những gì đã thay đổi trong phiên bản nháp, bạn có thực sự muốn khôi phục lại phiên bản này và thay thế cho phiên bản hiện tại không?</confirm>
+    </revisions>
+    <status>
+      <version>Phiên bản</version>
+      <title>Trạng thái</title>
+      <archived>Đã lưu trữ</archived>
+      <obsolete>Cũ</obsolete>
+      <unpublished>Chưa xuất bản</unpublished>
+      <enrolled>Đã đăng ký</enrolled>
+      <draft>Dự thảo</draft>
+      <pending>Đang chờ duyệt</pending>
+      <approved>Phê duyệt</approved>
+      <inreview>Đang đánh giá</inreview>
+      <staged>Chờ xuất bản</staged>
+      <published>Xuất bản</published>
+      <live>Xuất bản</live>
+    </status>
+    <scheduled>
+      <title>Đã xếp lịch</title>
+      <from>từ</from>
+      <to>đến</to>
+    </scheduled>
+    <title>
+      <preview>Xem lại</preview>
+      <restore>Khôi phục</restore>
+    </title>
+    <msg>
+      <have-no-view-template>Mẫu hiển thị của nội dung này không được hỗ trợ</have-no-view-template>
+      <restore-complete>Khôi phục thành công</restore-complete>
+    </msg>
+  </UIPublicationPanel>
+  <UIPublicationHistory>
+    <header>
+      <date>Ngày tháng</date>
+      <versionName>Tên phiên bản</versionName>
+      <currentState>Trạng thái hiện tại</currentState>
+      <user>Người tạo</user>
+      <description>Mô tả</description>
+    </header>
+  </UIPublicationHistory>
+  
+  <UIPublicationSchedule>
+    <label>
+      <introduction>Bạn có thể đặt lich trình công bố tài liệu của bạn bằng cách chọn ngày bạn muốn tài liệu của bạn được xuất bản.</introduction>
+      <no-schedule-info>Không có lịch trình xuất bản nào cho tài liệu của bạn.</no-schedule-info>
+    </label>
+    <msg>
+      <save-finished>Lịch trình xuất bản mới của bạn đã được lưu thành công.</save-finished>
+    </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Reset</Reset>
+    </action>
+  </UIPublicationSchedule>
+
+  <UIPublicationPanel>
+    <label>
+      <header>Thời gian xuất bản</header>
+      <start>Bắt đầu xuất bản</start>
+      <end>Kết thúc xuất bản</end>
+    </label>
+    <msg>
+      <invalid-format>Định dạng ngày giờ không hợp lệ. Vui lòng kiểm tra lại.</invalid-format>
+      <fromDate-after-toDate>Định dạng ngày Bắt đầu phải có giá trị trước ngày Kết thúc.</fromDate-after-toDate>
+    </msg>
+  </UIPublicationPanel>
+  <UIPopupWindow>
+    <title>
+      <UIPublicationContainer>Quản lý xuất bản</UIPublicationContainer>
+      <UIPublishingPanel>Quản lý xuất bản</UIPublishingPanel>
+    </title>
+  </UIPopupWindow>
+  <WCMContentView>
+    <header>
+      <status>Trạng thái</status>
+      <author>Tác giả</author>
+      <date>Ngày tạo</date>
+      <title>Tiêu đề của tài liệu</title>
+      <lastUser>Người dùng cuối</lastUser>
+    </header>
+  </WCMContentView>
+  <UITagForm>
+    <msg>
+      <NameAlreadyExist>Tên nhãn đã tồn tại</NameAlreadyExist>
+    </msg>
+  </UITagForm>
+
+  <!--
+  ############  From WCM 2.1.0 ##############
+  -->
+  <UICategoryManagerSearch>
+    <tab>
+      <label>
+        <UIOneTaxonomySelector>Lựa chọn danh mục</UIOneTaxonomySelector>
+      </label>
+    </tab>
+  </UICategoryManagerSearch>
+
+  <UIPreferencesForm>
+   <action>
+     <HideAdvance>Ẩn</HideAdvance>
+     <ShowAdvance>Mở rộng</ShowAdvance>
+    </action>
+    <label>
+    <Advance>Nâng cao</Advance>
+    </label>
+  </UIPreferencesForm>
+
+  <UIJCRExplorerPortlet>
+<msg>
+  <file-access-denied>Truy nhập tệp bị từ chối.</file-access-denied>
+  <anonymous-access-denied>Người dùng nặc danh không có quyền sử dụng chức năng này.</anonymous-access-denied>
+</msg>
+  </UIJCRExplorerPortlet>
+  <UIDrivesArea>
+    <DrivesArea>
+      <allDrives>Nhấp vào nút Hiển thị ổ đĩa trên thanh hành động để hiển thị/ẩn danh sách các ổ đĩa.</allDrives>
+      <ShowDrives>Hiển thị các ổ đĩa</ShowDrives>
+    </DrivesArea>
+  </UIDrivesArea>
+  <UIJcrExplorerEditForm>
+    <msg>
+      <fields-saved>Các giá trị thiết lập đã được lưu!</fields-saved>
+      <fields-cancelled>Các giá trị thiết lập đã bị hủy bỏ!</fields-cancelled>
+    </msg>
+  </UIJcrExplorerEditForm>
+  <UIDocumentForm>
+  <msg>
+  <confirm-close>Những thay đổi bạn thực hiện sẽ bị mất nếu bạn đóng biểu mẫu này.</confirm-close>
+  <confirm-changeType>Những thay đổi bạn thực hiện sẽ bị mất nếu bạn thay đổi kiểu nội dung.</confirm-changeType>
+  <confirm-navigate>Những thay đổi bạn thực hiện sẽ bị mất nếu bạn rời khỏi trang này.</confirm-navigate>
+  </msg>
+  </UIDocumentForm>
+  <UploadFileMimeTypesValidator>
+    <msg>
+      <wrong-mimetype>Định dạng {0} không được phép cho trường {1}. Xin vui lòng tải lên một tập tin khác.</wrong-mimetype>
+    </msg>
+  </UploadFileMimeTypesValidator>
+  <lifecyclePhase>
+    <label>
+    <no>Không</no>
+  <yes>Có</yes>
+  <true>Đúng</true>
+  <false>Sai</false>
+  <Electronic>Điện tử</Electronic>
+  <Paper>Paper</Paper>
+  <NONE>Không xác định</NONE>
+  <CLASSIFIED>Classified</CLASSIFIED>
+  <UNCLASSIFIED>Không được phân loại</UNCLASSIFIED>
+  <NOCONTRACT>Không hợp đồng</NOCONTRACT>
+  <one-minute>1 phút</one-minute>
+  <hourly>Hàng giờ</hourly>
+  <daily>Hàng ngày</daily>
+  <quarterly>Hàng quý</quarterly>
+  <yearly>Hàng năm</yearly>
+  <ten-years>10 năm</ten-years>
+  <read>Thao tác ủa người dùng</read>
+  <schedule>Biểu thời gian</schedule>
+  <node_added>Thêm mới nội dung</node_added>
+  <node_removed>Xoá bỏ nội dung</node_removed>
+  <property_added>Thêm mới thuộc tính</property_added>
+  <property_removed>Xóa bỏ thuộc tính</property_removed>
+  <property_changed>Sửa đổi thuộc tính</property_changed>
+</label>
+  </lifecyclePhase>
+  <UIPopupMenu>
+  <msg>
+<can-not-remove-locked-node>Nút {0} bị khóa. Bạn không thể di chuyển nó vào thùng rác.</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>Nút {0} hoặc nút cha của nó được đang được checkin. Bạn không thể di chuyển nó vào Thư mục Rác.</can-not-remove-checked-in-node>
+<access-denied-to-delete>Truy cập bị từ chối. Bạn không thể di chuyển nút {0} vào thùng rác.</access-denied-to-delete>
+  </msg>
+  </UIPopupMenu>
+  <UIPropertyForm>
+  <msg>
+  <unknown-error>Đã có lỗi xảy ra trong quá trình chỉnh sửa thông tin thuộc tính.</unknown-error>
+    </msg>
+  </UIPropertyForm>
+  <UIWatchDocumentForm>
+    <msg>
+      <node-is-locked>Nút này bị khóa, bạn không thể theo dõi nó!</node-is-locked>
+      <unknown-error>Có một số lỗi xảy ra, bạn không thể theo dõi nút này!</unknown-error>
+    </msg>
+  </UIWatchDocumentForm>   
+  <UIActionForm>
+    <msg>
+      <xss-vulnerability-character>Trường '{0}' có chứa các ký tự không hợp lệ</xss-vulnerability-character>
+    </msg>
+  </UIActionForm>
+  <UIMultiUpload>
+  <label>
+    <AbortAll>Hủy bỏ tất cả</AbortAll>
+    <AbortAllFiles>Hủy bỏ tất cả các tập tin</AbortAllFiles>
+    <MaxFileSize>Kích thước tối đa của tập tin là</MaxFileSize>
+    <InvalidCharacters>Ký tự không hợp lệ sẽ được thay đổi bằng '-'</InvalidCharacters>
+    <DropFileMessage>Kéo thả tập tin vào đây để tải lên</DropFileMessage>
+    <Close>Đóng</Close>
+    <in>Trong</in>
+    <MaxFileSizeAlert>Kích thước của tập tin vượt quá giới hạn</MaxFileSizeAlert>
+    <Waiting>Đợi</Waiting>
+    <Error>Lỗi</Error>
+    <or>hoặc</or>
+    <AlreadyInUse>Đã tồn tại</AlreadyInUse>
+    <Keep>Giữ cả hai</Keep>
+    <Replace>Thay thế</Replace>
+    <Canceled>Huỷ bỏ</Canceled>
+    <Cancel>Huỷ bỏ</Cancel>
+    <AbortAllConfirmation>Bạn có muốn hủy bỏ tất cả các tập tin đang được tải lên?</AbortAllConfirmation>
+  </label>
+  </UIMultiUpload>
+  <UIDocumentNodeList>
+  <label>
+  <CreatedOn>Thời điểm tạo</CreatedOn>
+  <Updated>Sửa đổi</Updated>
+  <by>bởi</by>
+  <you>bạn</you>
+  </label>
+  </UIDocumentNodeList>
+  <FileView>
+    <label>
+      <name>Tên</name>
+      <date>Ngày</date>
+      <size>Kích cỡ</size>
+      <sortBy>Sắp xếp theo:</sortBy>
+      <filesAreSelected>Các tệp đã được chọn.</filesAreSelected>
+      <ClearSelection>Bỏ lựa chọn</ClearSelection>
+      <more>Thêm</more>
+    </label>
+  </FileView>
+  <UIPropertyForm>
+  <msg>
+  <property-name-incorrect>Tên thuộc tính không hợp lệ, hãy điền vào giá trị khác!</property-name-incorrect>
+    </msg>
+  </UIPropertyForm>
+  <!--
+  ###################################################################################
+  # JCR Exceptions manager                                                              #
+  ###################################################################################
+  -->
+  <VersionException>
+  <msg>Không thể sửa đổi tài liệu khi chúng đang được checkin.</msg>  
+  </VersionException>
+</bundle>

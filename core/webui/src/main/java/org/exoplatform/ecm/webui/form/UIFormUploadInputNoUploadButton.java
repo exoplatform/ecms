@@ -22,30 +22,20 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          exo@exoplatform.com
- * Nov 21, 2011  
+ * Nov 21, 2011
  */
 @ComponentConfig(type = UIFormUploadInputNoUploadButton.class,
                  template = "classpath:groovy/ecm/webui/form/UIFormUploadInputNoUploadButton.gtmpl")
 public class UIFormUploadInputNoUploadButton extends UIFormUploadInputExtension {
-  
+
   public UIFormUploadInputNoUploadButton(String name, String bindingExpression) {
     super(name, bindingExpression);
     setComponentConfig(UIFormUploadInputNoUploadButton.class, null);
   }
-  
+
   public UIFormUploadInputNoUploadButton(String name, String bindingExpression, int limit) {
     super (name, bindingExpression, limit);
-    setComponentConfig(UIFormUploadInputNoUploadButton.class, null);    
+    setComponentConfig(UIFormUploadInputNoUploadButton.class, null);
   }
-  
-  public UIFormUploadInputNoUploadButton(String name, String bindingExpression, boolean isAutoUpload) {
-    super (name, bindingExpression, isAutoUpload);
-    setComponentConfig(UIFormUploadInputNoUploadButton.class, null);    
-  }
-  
-  public UIFormUploadInputNoUploadButton(String name, String bindingExpression, int limit, boolean isAutoUpload) {
-    super(name, bindingExpression, limit, isAutoUpload);
-    setComponentConfig(UIFormUploadInputNoUploadButton.class, null);    
-  }
-    
+
 }

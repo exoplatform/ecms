@@ -151,7 +151,7 @@ public class ManageViewPlugin extends BaseComponentPlugin {
     if(templateHomeNode.hasNode(templateName)) return  ;
     String warPath = warViewPath + tempObject.getWarPath() ;
     InputStream in = cservice_.getInputStream(warPath) ;
-    templateService.createTemplate(templateHomeNode, templateName, in, new String[] {"*"});
+    templateService.createTemplate(templateHomeNode, templateName, templateName, in, new String[] {"*"});
   }
   
   public Set<String> getConfiguredTemplates() {

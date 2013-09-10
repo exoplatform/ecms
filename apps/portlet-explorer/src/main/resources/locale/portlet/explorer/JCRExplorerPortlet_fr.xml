@@ -41,7 +41,7 @@
     </label>
     <button>
       <label>
-        <cancel>Annuler</cancel>
+        <confirm>OK</confirm>
       </label>
     </button>
     <msg>
@@ -50,35 +50,7 @@
       <vote-restriction>Vous ne pouvez pas voter plus d'une fois.</vote-restriction>
     </msg>
   </UIVoteForm>
-  <!--
-  #############################################################################
-  #             org.exoplatform.ecm.webui.component.explorer.UIDrivesBrowser  #
-  #############################################################################
-  -->
-  <UIDrivesBrowser>
-    <title>
-      File Explorer Main Drives
-      <repository>Lecteurs de l'entrepôt</repository>
-      <repositoryList>Entrepôt</repositoryList>
-      <PersonalDrives>Lecteurs Personnels</PersonalDrives>
-      <GroupDrives>Lecteurs de Groupe</GroupDrives>
-      <GeneralDrives>Lecteurs Principaux</GeneralDrives>
-    </title>
-    <icon>
-      <workspace>
-        <production>ProductionIcon</production>
-        <draft>DraftIcon</draft>
-        <backup>BackupIcon</backup>
-        <digital-assets>AssetsIcon</digital-assets>
-      </workspace>
-    </icon>
-    <msg>
-      <no-view-found>Il n'y a pas de vue disponible par rapport à vos droits d'accès sur le lecteur '{0}'</no-view-found>
-      <access-denied>Accès refusé. Vous n'avez peut-être pas les droits suffisants pour accéder à l'espace de stockage du lecteur '{0}'.</access-denied>
-      <empty-drives>Accès refusé. Soit aucun lecteur n'est configuré pour cet entrepôt, soit vous n'avez pas les droits d'y accéder.</empty-drives>
-      <workspace-not-exist>Le lecteur '{0}' a été sauvegardé dans un espace de stockage inconnu. Veuillez reconfigurer le lecteur.</workspace-not-exist>
-    </msg>
-  </UIDrivesBrowser>
+ 
   <!--
   #############################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer    #
@@ -122,7 +94,6 @@
       <backToJCR>Retour aux Lecteurs</backToJCR>
       <setUpBrowser>Préférences d'Affichage</setUpBrowser>
       <refesh>Actualiser</refesh>
-      <saveSession>Enregistrer</saveSession>
       <currentDrive>Lecteur Courant</currentDrive>
       <selectView>Choisir une vue</selectView>
       <showSideBar>Afficher la barre latérale</showSideBar>
@@ -130,19 +101,7 @@
       <backTo>Retour</backTo>
     </label>
   </UIViewBar>
-  <Views>
-    <label>
-      <simple-view>Vignettes</simple-view>
-      <cover-flow>Défilé</cover-flow>
-      <admin-view>Détails</admin-view>
-      <icon-view>Icônes</icon-view>
-      <system-view>Détails</system-view>
-      <anonymous-view>Icônes</anonymous-view>
-      <taxonomy-list>Détails</taxonomy-list>
-      <taxonomy-icons>Icônes</taxonomy-icons>
-      <timeline-view>Chronologie</timeline-view>
-    </label>
-  </Views>
+
   <!--
   #############################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UITreeExplorer    #
@@ -185,7 +144,6 @@
       <showHiddenNode>Montrer les noeuds cachés</showHiddenNode>
       <showNonDocument>Montrer tout type de noeud</showNonDocument>
       <showRefDocuments>Montrer les documents référencés</showRefDocuments>
-      <showItemsByUserInTimeline>Afficher les éléments chronologiquement par utilisateur</showItemsByUserInTimeline>
       <enableDragAndDrop>Glisser-déposer:</enableDragAndDrop>
       <sortBy>Trier par:</sortBy>
       <order>Ordre</order>
@@ -242,7 +200,6 @@
       <UIActionContainer>Modifier</UIActionContainer>
       <UIFolderForm>Nouveau Dossier</UIFolderForm>
       <UIUploadManager>Transférer un fichier</UIUploadManager>
-      <UITicketForm>Créer un ticket</UITicketForm>
       <UIReferencesList>Liste des références</UIReferencesList>
       <UIExportNode>Exporter</UIExportNode>
       <UINodeTypeInfo>Information sur le type de noeud</UINodeTypeInfo>
@@ -274,8 +231,6 @@
       <UIRestoreConfirmMessage>Confirmer la Restauration</UIRestoreConfirmMessage>
       <UIActivePublication>Inscrire dans un cycle de publication</UIActivePublication>
       <UITaggingForm>Tagguer ce document</UITaggingForm>
-      <UIMultiLanguageForm>Contenu Multilingue</UIMultiLanguageForm>
-      <UIMultiLanguageManager>Contenu Multilingue</UIMultiLanguageManager>
       <UIThumbnailForm>Ajouter une Vignette</UIThumbnailForm>
       <UIAllItemsPreferenceForm>Préférences</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Choisir le Chemin de Restauration</UISelectRestorePath>
@@ -313,12 +268,10 @@
       <Upload>Ajouter des fichiers</Upload>
       <Paste>Coller</Paste>
       <Search>Chercher</Search>
-      <CreateTicket>Nouveau Ticket</CreateTicket>
       <WatchDocument>Suivre</WatchDocument>
       <TaggingDocument>Tagguer</TaggingDocument>
       <Vote>Voter</Vote>
       <Comment>Commenter</Comment>
-      <MultiLanguage>Traduction des Contenus</MultiLanguage>
       <ManageVersions>Versions</ManageVersions>
       <ManageAuditing>Audit</ManageAuditing>
       <ManagePublications>Publications</ManagePublications>
@@ -372,8 +325,6 @@
       <watch-checkedin>Vous devez d'abord effectuer un checkout avant de pouvoir vous abonner à ce document</watch-checkedin>
       <unsupported-tagging>Seuls les documents peuvent être taggués.</unsupported-tagging>
       <tagnode-checkedin>Vous devez d'abord effectuer un checkout avant de pouvoir tagguer ce document</tagnode-checkedin>
-      <unsupported-multilanguage>Seuls les documents supportent le multilangue.</unsupported-multilanguage>
-      <multilang-checkedin>Vous devez d'abord effectuer un checkout avant de pouvoir ajouter une langue.</multilang-checkedin>
     </msg>
     <title>
       <select-tab>Sélectioner l'onglet</select-tab>
@@ -403,7 +354,7 @@
       <can-not-unlock-node>Vous n'avez pas les droits suffisants pour déverrouiller ce noeud.</can-not-unlock-node>
       <no-node>Aucun noeud n'a été sélectionné.</no-node>
       <can-not-paste-node>Vous n'avez pas les droits suffisants pour coller ce noeud.</can-not-paste-node>
-      <can-not-move-node>Vous n'avez pas les droits requis pour supprimer ce noeud.</can-not-move-node>
+      <can-not-move-node>Vous n'êtes pas autorisé à déplacer ce nœud. Veuillez contacter l'administrateur.</can-not-move-node>
       <does-not-support-versioning>Le versioning n'est pas supporté par ce noeud.</does-not-support-versioning>
       <path-not-found>Cet élément a été modifié ou supprimé. Veuillez cliquer sur le bouton "Actualiser".</path-not-found>
       <paste-lock-exception>Impossible de coller le noeud car le noeud source ou le noeud cible est verrouillé ou possède une relation avec un noeud verrouillé.</paste-lock-exception>
@@ -607,13 +558,6 @@
       <CheckOut>CheckOut</CheckOut>
       <CheckIn>CheckIn</CheckIn>
       <WebDAV>Visualiser par WebDAV</WebDAV>
-      <sendmail>Envoyer un email</sendmail>
-      <transformsd>Transformer</transformsd>
-      <reloadBP>Recharger le BP</reloadBP>
-      <workflow>Workflow</workflow>
-      <createRSS>Créer un flux RSS</createRSS>
-      <icalendara>Générer un fichier au format iCal</icalendara>
-      <getmail>Vérifier les emails</getmail>
       <autoversion>Versioning automatique</autoversion>
       <Custom>Personnaliser</Custom>
       <AddFolder>Nouveau Dossier</AddFolder>
@@ -627,37 +571,12 @@
       <AddToFavourite>Ajouter aux Favoris</AddToFavourite>
       <RemoveFromFavourite>Supprimer</RemoveFromFavourite>
       <MoveToTrash>Déplacer dans la Corbeille</MoveToTrash>
-      <RestoreFromTrash>Supprimer</RestoreFromTrash>
+      <RestoreFromTrash>Restaurer</RestoreFromTrash>
       <EmptyTrash>Supprimer</EmptyTrash>
       <WebDavView>Modifier à Distance</WebDavView>
     </event>
   </ECMContextMenu>
-  <!--
-  #############################################################################
-  #             org.exoplatform.ecm.webui.component.explorer.UITicketForm     #
-  #############################################################################
-  -->
-  <UITicketForm>
-    <title>Create Ticket</title>
-    <label>
-      <users>Utilisateurs</users>
-      <permission>Permission</permission>
-      <creator>Créateur</creator>
-      <accessTime>Date d'Accès</accessTime>
-      <accessLimit>Access Limit</accessLimit>
-      <description>Description</description>
-      <sendToMail>Multi-Valuée</sendToMail>
-      <ticketID>Multi-Valuée</ticketID>
-    </label>
-    <action>
-      <Cancel>#{word.cancel}</Cancel>
-      <Update>#{word.update}</Update>
-      <Save>#{word.save}</Save>
-    </action>
-    <msg>
-      <unable-create>Création impossible!</unable-create>
-    </msg>
-  </UITicketForm>
+ 
   <!--
   #############################################################################
   #     org.exoplatform.ecm.webui.component.explorer.UIReferencesList         #
@@ -786,37 +705,7 @@
       <property-not-exist>La propriété {0} n'existe pas.</property-not-exist>
     </msg>
   </UIPropertyForm>
-  <!--
-  #############################################################################
-  #           org.exoplatform.ecm.webui.component.explorer.UIMixinTypeSelect  #
-  #############################################################################
-  -->
-  <UIMixinTypeSelect>
-    <label>
-      <selectTemplate>Entrez les valeurs pour les métadonnées</selectTemplate>
-    </label>
-  </UIMixinTypeSelect>
-  <UIMixinTypeForm>
-    <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
-      <Reset>Réinitialiser</Reset>
-    </action>
-  </UIMixinTypeForm>
-  <!--
-  #############################################################################
-  #           org.exoplatform.ecm.webui.component.explorer.UIMetadataTab     #
-  #############################################################################
-  -->
-  <UIMetadataTab>
-    <title>Modifier</title>
-    <label>
-      <metadataName>Nom de la métadonnée</metadataName>
-    </label>
-    <action>
-      <Save>#{word.save}</Save>
-    </action>
-  </UIMetadataTab>
+
   <!--
   #############################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UIPermissionInfo #
@@ -893,95 +782,7 @@
       <access-denied>Accès refusé. Vous ne pouvez pas supprimer cette permission.</access-denied>
     </msg>
   </UIPermissionForm>
-  <!--
-  ###############################################################################
-  #             org.exoplatform.ecm.webui.component.explorer.UIDriveDescription #
-  ###############################################################################
-  -->
-  <UIDriveDescription>
-    <title>Description</title>
-  </UIDriveDescription>
-  <!--
-  ###############################################################################
-  #             org.exoplatform.ecm.webui.component.explorer.UIReferencesList #
-  ###############################################################################
-  -->
-  <!--
-  ################################################################################
-  #          org.exoplatform.ecm.webui.component.explorer.actions.UIUploadForm	 #
-  ################################################################################
-  -->
-  <UIUploadForm>
-    <title>Envoyer un fichier</title>
-    <label>
-      <upload>Sélectionner un fichier</upload>
-      <name>Nom</name>
-      <fieldListTaxonomy>Catégories</fieldListTaxonomy>
-    </label>
-    <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
-    </action>
-    <msg>
-      <fileName-error>Veuillez sélectionner un fichier à envoyer.</fileName-error>
-      <taxonomyPath-error>Choisissez une catégorie.</taxonomyPath-error>
-      <fileName-invalid>Caractères invalides détectés dans le nom du fichier transféré.</fileName-invalid>
-      <fileName-invalid-with-name>Caractères invalides détectés dans le nom du fichier transféré '{0}'.</fileName-invalid-with-name>
-      <fileSize-too-big>Le fichier est trop volumineux. Veuillez le découper en plusieurs petits fichiers ou le charger en utilisant WebDav.</fileSize-too-big>
-      <name-is-exist>Le document '{0}' existe déjà.</name-is-exist>
-      <contraint-violation>Ajout du noeud '{0}' impossible en tant que sous-noeud.</contraint-violation>
-      <lock-exception>Ce noeud est verrouillé. Certaines actions ne pourront être lancées.</lock-exception>
-      <confirm-behavior>Il existe déjà un fichier portant le même nom '{0}' dans cet emplacement. Veuillez choisir l'action souhaitée sur ce fichier.</confirm-behavior>
-    </msg>
-  </UIUploadForm>
-  <UIUploadContent>
-    <label>
-      <fileName>Nom du fichier</fileName>
-      <nodeName>Nom du noeud</nodeName>
-      <fileSize>Taille du fichier</fileSize>
-      <mimeType>Type Mime</mimeType>
-    </label>
-    <title>
-      <uploaded-file>Fichier Envoyé</uploaded-file>
-      <external-metadata>Métadonnées Externes</external-metadata>
-      <metadata-name>Nom du jeu de Métadonnées</metadata-name>
-      <action>Action</action>
-    </title>
-    <tooltip>
-      <Edit>Modifier</Edit>
-    </tooltip>
-    <msg>
-      <has-not-template>Le formulaire pour afficher '{0}' est manquant.</has-not-template>
-    </msg>
-  </UIUploadContent>
-  <UIUploadContainer>
-    <action>
-      <Close>#{word.close}</Close>
-      <AddMetadata>Ajouter des Métadonnées</AddMetadata>
-    </action>
-    <tab>
-      <label>
-        <UIUploadContent>Information</UIUploadContent>
-        <UIAddMetadataForm>Formulaire des Métadonnées</UIAddMetadataForm>
-      </label>
-    </tab>
-  </UIUploadContainer>
-  <AddMetadataPopup>
-    <title>
-      <UIExternalMetadataForm>Le "mixin" ne peut pas être ajouté à ce noeud.</UIExternalMetadataForm>
-    </title>
-  </AddMetadataPopup>
-  <UIExternalMetadataForm>
-    <msg>
-      <can-not-add>Le mixin ne peut pas être ajouté à ce noeud.</can-not-add>
-    </msg>
-  </UIExternalMetadataForm>
-  <UIAddMetadataForm>
-    <action>
-      <Cancel>Annuler</Cancel>
-      <Save>Enregistrer</Save>
-    </action>
-  </UIAddMetadataForm>
+
   <!--
   ###############################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UINodeTypeInfo		  #
@@ -1751,7 +1552,7 @@
     </action>
     <label>
       <category>Catégorie</category>
-      <actions>Actions</actions>
+      <actions>Action</actions>
       <delete>Supprimer</delete>
     </label>
   </UICategoriesAddedList>
@@ -1934,7 +1735,7 @@
     <msg>
       <remove-popup-first>Vous devez d'abord fermer la fenêtre d'édition avant de pouvoir supprimer ce noeud.</remove-popup-first>
       <confirm-delete-action>Confirmez-vous la suppression?</confirm-delete-action>
-      <template-empty>Le formulaire de '{0}' est vide ou inexistant</template-empty>
+      <template-empty>Le formulaire pour afficher '{0}' est manquant.</template-empty>
       <template-null>Le formulaire est inexistant, ou vous n'avez pas les droits d'accès suffisants.</template-null>
       <access-denied>Accès refusé. Vous n'avez pas les droits suffisants pour faire cette action.</access-denied>
     </msg>
@@ -2060,43 +1861,7 @@
       <tagName>Utilisez le séparateur "," pour ajouter plusieurs tags</tagName>
     </introduction>
   </UITaggingForm>
-  <!--
-  ###################################################################################
-  # org.exoplatform.ecm.webui.component.explorer.popup.actions.UIMultiLanguageForm  #
-  ###################################################################################
-  -->
-  <UIMultiLanguageForm>
-    <label>
-      <languages>Langues</languages>
-      <default>défaut</default>
-    </label>
-    <action>
-      <AddLanguage>#{word.add}</AddLanguage>
-      <SetDefault>Définir par défaut</SetDefault>
-      <Cancel>#{word.cancel}</Cancel>
-      <View>Voir</View>
-    </action>
-    <msg>
-      <access-denied>Accès refusé. Vous n'avez pas les droits suffisants pour ajouter un noeud.</access-denied>
-    </msg>
-  </UIMultiLanguageForm>
-  <UILanguageTypeForm>
-    <label>
-      <typeLang>Langue</typeLang>
-      <default>Définir par défaut</default>
-      <defaultLang>Langue par défaut</defaultLang>
-    </label>
-  </UILanguageTypeForm>
-  <UILanguageDialogForm>
-    <msg>
-      <select-lang>Veuillez d'abord sélectionner une langue</select-lang>
-      <access-denied>Accès refusé. Vous n'avez pas les droits suffisants pour ajouter un noeud.</access-denied>
-    </msg>
-    <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
-    </action>
-  </UILanguageDialogForm>
+
   <!--
   ###################################################################################
   # org.exoplatform.ecm.webui.component.explorer.popup.info.UIMetadataContainer		  #
@@ -2213,7 +1978,7 @@
   -->
   <UIWorkspaceList>
     <label>
-      <workspaceName>Espace de Stockage</workspaceName>
+      <workspaceName>Espace de Stockage:</workspaceName>
       <rootNodeInfo>Racine de l'arborescence</rootNodeInfo>
       <rootPath>Racine de l'arborescence</rootPath>
     </label>
@@ -2377,31 +2142,6 @@
   <!--
   ###Since ECM version 2.2##############
   -->
-  <!--
-  ###Since ECM version 2.3 Alpha##############
-  -->
-  <UIWorkflowPublicationActionForm>
-    <label>
-      <fieldValidator>Validateur</fieldValidator>
-      <fieldDestPath>Chemin de destination</fieldDestPath>
-      <fieldBackup>Chemin d'archivage</fieldBackup>
-    </label>
-  </UIWorkflowPublicationActionForm>
-  <workflow_validator>
-    <title>
-      <AddPermission>Ajouter une permission</AddPermission>
-    </title>
-  </workflow_validator>
-  <workflow_destpath>
-    <title>
-      <AddDestPath>Ajouter un chemin</AddDestPath>
-    </title>
-  </workflow_destpath>
-  <PublicationService>
-    <WorkflowPublicationPlugin>
-      <nodeValidationRequest>Ce noeud a été soumis à validation.</nodeValidationRequest>
-    </WorkflowPublicationPlugin>
-  </PublicationService>
 
   <!--
   ### Since ECM version 2.3 Alpha##############
@@ -2419,14 +2159,11 @@
       <Cancel>Annuler</Cancel>
     </action>
     <label>
-      <repository>Entrepôt</repository>
-      <categoryMandatoryWhenFileUpload>Spécifier une catégorie quand un fichier est ajouté.</categoryMandatoryWhenFileUpload>
-      <uploadFileSizeLimitMB>Limiter la tailler des fichiers ajoutés (Mo)</uploadFileSizeLimitMB>
+      <uploadFileSizeLimitMB>Limiter la taille des fichiers ajoutés (Mo)</uploadFileSizeLimitMB>
       <isDirectlyDrive>Accès direct aux lecteurs</isDirectlyDrive>
       <driveName>Nom du Lecteur</driveName>
       <usecase>Type d'accès</usecase>
       <SelectNodePath>Sélectionner un dossier</SelectNodePath>
-      <editInNewWindow>Modifier dans une nouvelle fenêtre</editInNewWindow>
       <showTopBar>Afficher la Barre du Haut</showTopBar>
       <showActionBar>Afficher la Barre d'Actions</showActionBar>
       <showSideBar>Afficher le Panneau de Gauche</showSideBar>
@@ -2444,11 +2181,9 @@
   </UIDriveSelector>
   <UIJcrExplorerEditForm>
     <label>
-      <driveName>Nom du Lecteur</driveName>
       <DriveNameInput>UI JCR Explorer Edit Form</DriveNameInput>
     </label>
     <msg>
-      <not-have-social>Le type Social n'est pas disponible, le type Sélection sera utilisé.</not-have-social>
       <personal-usecase>Le lecteur privé de l'utilisateur courant sera utilisé quand vous choisissez le cas d'utilisation Personnel.</personal-usecase>
       <drive-edit-permission>Impossible de modifier le nom du lecteur. Veuillez cliquer sur le bouton Modifier.</drive-edit-permission>
       <path-edit-permission>Impossible de changer le chemin. Veuillez cliquer sur le bouton Modifier</path-edit-permission>
@@ -2559,7 +2294,7 @@
 
 	<ECMContextMenu>
 		<event>
-      		<AddSymLink>Créer un Raccourci</AddSymLink>
+      <AddSymLink>Créer un raccourci</AddSymLink>
 			<AddLocalizationLink>Ajouter une Traduction</AddLocalizationLink>
     </event>
   </ECMContextMenu>
@@ -2575,7 +2310,7 @@
 
   <ECMContextMenu>
     <event>
-      <CreateLink>Créer un Raccourci</CreateLink>
+      <CreateLink>Créer un raccourci</CreateLink>
     </event>
   </ECMContextMenu>
 
@@ -2716,7 +2451,6 @@
 
   <UIDocumentForm>
   	<msg>
-  		<not-support>Impossible de charger le template '{0}'.</not-support>
   		<do-not-permission>Vous n'avez pas le droit de charger le template '{0}'.</do-not-permission>
   	</msg>
   </UIDocumentForm>
@@ -2783,64 +2517,17 @@
       <name-not-allowed>Un mot ou une phrase dans le contenu est interdit.</name-not-allowed>
 		</msg>
 	</UISimpleSearch>
-	<Drives>
-		<label>
-			<Private>Privé</Private>
-			<Public>Public</Public>
-      <BackupCenter>Centre de Sauvegarde</BackupCenter>
-			<CategorizedDocumentsCenter>Centre Document des Catégories </CategorizedDocumentsCenter>
-			<CollaborationCenter>Centre de Collaboration</CollaborationCenter>
-      <DigitalAssetsManagementCenter>Centre de Gestion des Contenus Numériques</DigitalAssetsManagementCenter>
-      <DMSAdministration>Administration DMS</DMSAdministration>
-      <DocumentsManagementCenter>Centre de Gestion des Documents</DocumentsManagementCenter>
-      <LiveDocumentsCenter>Centre des Document Actifs</LiveDocumentsCenter>
-			<PendingDocumentsCenter>Centre des Documents en Attente</PendingDocumentsCenter>
-			<RecordsManagementCenter>Centre de Management Des Enregistrements</RecordsManagementCenter>
-      <SharedUsersSpace>Espace Partagé des Utilisateurs</SharedUsersSpace>
-      <Systemfiles>Fichiers Système</Systemfiles>
-			<ValidationRequestsDocumentsCenter>Centre des Documents en Attente de Validation</ValidationRequestsDocumentsCenter>
-		</label>
-	</Drives>
 
 
 	<!--
  	 #############	From DMS 2.6 #############
   -->
-	<UIUploadContent>
-		<tooltip>
-			<ManageMetadata>Gérer les Métadonnées</ManageMetadata>
-		</tooltip>
-		<label>
-			<manageMetadata>Gérer les Métadonnées</manageMetadata>
-		</label>
-	</UIUploadContent>
-	<UIUploadForm>
-		<action>
-      <AddUpload>Ajouter un Fichier</AddUpload>
-      <RemoveUpload>Ajout de fichier</RemoveUpload>
-		</action>
-	</UIUploadForm>
-	<UIExternalMetadataForm>
-		<action>
-			<Add>Ajouter</Add>
-			<Cancel>Annuler</Cancel>
-		</action>
-	</UIExternalMetadataForm>
-		<!--
-	 #############	From DMS 2.6 #############
-	 -->
   <ECMContextMenu>
 	    <event>
 	    	<Permlink>Voir Document</Permlink>
 	    </event>
   </ECMContextMenu>
-  <UIUploadContainer>
-  	<tab>
-  		<label>
-  			<UIListMetadata>Liste des metadonnées externes</UIListMetadata>
-  		</label>
-  	</tab>
-  </UIUploadContainer>
+  
 
   <!--
   	############  From DMS 2.6 ##############
@@ -2867,11 +2554,6 @@
 			    <confirm-deletecomment>Souhaitez-vous réellement supprimer ce commentaire?</confirm-deletecomment>
 			  </msg>
 			</UIDocumentInfo>
-		 <UIDrivesBrowser>
-		  <msg>
-    <drive-not-exist>Le lecteur '{0}' est introuvable ou vous n'avez pas le droit d'accéder à cet entrepôt.</drive-not-exist>
-		  </msg>
-		 </UIDrivesBrowser>
 
 	 <UIExportNode>
 	  <msg>
@@ -2903,89 +2585,6 @@
 	  </title>
 	</SameNamePopup>
 
-	<UISingleUploadForm>
-    <title>Ajouter un fichier</title>
-    <label>
-      <upload>Sélectionner un fichier</upload>
-      <name>Nom</name>
-      <fieldListTaxonomy>Liste des Catégories</fieldListTaxonomy>
-    </label>
-    <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
-    </action>
-    <msg>
-      <fileName-error>Veuillez vous assurer que vous avez transféré le fichier en cliquant sur l'icône de chargement.</fileName-error>
-      <taxonomyPath-error>Veuillez choisir une catégorie.</taxonomyPath-error>
-      <fileName-invalid>Le nom du fichier contient des caractères invalides. Veuillez changer le nom fichier avant de l'envoyer.</fileName-invalid>
-      <fileSize-too-big>La taille du fichier est trop importante. Essayez de découper votre fichier en plusieurs parties ou utiliser l'accès webdav.</fileSize-too-big>
-      <name-is-exist>Le nom '{0}' existe déjà. Vous ne pouvez pas ajouter plusieurs fichiers du même nom.</name-is-exist>
-      <contraint-violation>Impossible d'ajouter le noeud '{0}' car son type ne convient pas aux contraintes imposées par le noeud parent.</contraint-violation>
-      <lock-exception>Ce noeud est verrouillé. Certaines actions ne marcheront pas correctement.</lock-exception>
-    </msg>
-  </UISingleUploadForm>
-  <UISingleUploadContent>
-    <label>
-      <fileName>Nom du fichier</fileName>
-      <nodeName>Nom du noeud</nodeName>
-      <fileSize>Taille du fichier</fileSize>
-      <mimeType>Type Mime</mimeType>
-    </label>
-    <title>
-      <uploaded-file>Fichier Ajouté</uploaded-file>
-      <external-metadata>Metadonnées externes</external-metadata>
-      <metadata-name>Nom de la métadonnée</metadata-name>
-      <action>Action</action>
-    </title>
-    <tooltip>
-      <Edit>Modifier</Edit>
-    </tooltip>
-    <msg>
-      <has-not-template>Le template de '{0}' est vide.</has-not-template>
-    </msg>
-  </UISingleUploadContent>
-  <UISingleUploadContainer>
-    <action>
-      <Close>#{word.close}</Close>
-      <AddMetadata>Ajouter une metadonnée</AddMetadata>
-    </action>
-    <tab>
-      <label>
-        <UISingleUploadContent>Information</UISingleUploadContent>
-        <UISingleAddMetadataForm>Formulaire des Métadonnées</UISingleAddMetadataForm>
-      </label>
-    </tab>
-  </UISingleUploadContainer>
-  <UISingleExternalMetadataForm>
-		<action>
-			<Add>Ajouter</Add>
-			<Cancel>Annuler</Cancel>
-		</action>
-	</UISingleExternalMetadataForm>
-	<UISingleUploadContainer>
-  	<tab>
-  		<label>
-  			<UIListMetadata>Liste des métadonnées externes</UIListMetadata>
-  		</label>
-  	</tab>
-  </UISingleUploadContainer>
-  <AddMetadataPopup>
-    <title>
-      <UISingleExternalMetadataForm>Ajouter des Métadonnées Externes</UISingleExternalMetadataForm>
-    </title>
-  </AddMetadataPopup>
-  <UISingleExternalMetadataForm>
-    <msg>
-      <can-not-add>Impossible d'ajouter un mixin à ce noeud.</can-not-add>
-    </msg>
-  </UISingleExternalMetadataForm>
-  <UISingleAddMetadataForm>
-    <action>
-      <Cancel>Annuler</Cancel>
-      <Save>Enregistrer</Save>
-    </action>
-  </UISingleAddMetadataForm>
-
   <UIAllItems>
     <label>
       <OwnedByMe>Créés par moi</OwnedByMe>
@@ -3010,36 +2609,6 @@
       </label>
   </UIPreferencesForm>
 
-  <UIDocumentInfo>
-    <label>
-      <Today>Aujourd'hui</Today>
-      <Yesterday>Hier</Yesterday>
-      <EarlierThisWeek>Plus tôt cette semaine</EarlierThisWeek>
-      <EarlierThisMonth>Plus tôt ce mois-ci</EarlierThisMonth>
-      <EarlierThisYear>Plus tôt cette année</EarlierThisYear>
-      <tooltip>
-        <expand>Voir tous les documents de cette liste</expand>
-        <collapse>Voir toutes les catégories</collapse>
-      </tooltip>      
-    </label>
-    <header>
-      <dateTime>Date</dateTime>
-      <name>Nom</name>
-      <title>Le titre du document</title>
-    </header>
-    <tooltip>
-      <View>Vue</View>
-      <RemoveFromFavourite>Supprimer des favoris</RemoveFromFavourite>
-      <AddToFavourite>Ajouter aux favoris</AddToFavourite>
-      <timelineFavouriteDESC>Classer par favori croissant</timelineFavouriteDESC>
-      <timelineFavouriteASC>Classer par favori décroissant</timelineFavouriteASC>
-      <timelineDateTimeASC>Classer par date de modification croissant</timelineDateTimeASC>
-      <timelineDateTimeDESC>Classer par date de modification décroissant</timelineDateTimeDESC>
-      <timelineNameASC>Classer par nom croissant</timelineNameASC>
-      <timelineNameDESC>Classer par nom décroissant</timelineNameDESC>
-    </tooltip>
-  </UIDocumentInfo>
-
   <UISavedSearches>
     <title>
       <savedSearches>Recherches Enregistrées</savedSearches>
@@ -3051,7 +2620,7 @@
     	 <Video>Vidéo</Video>
     	 <Music>Musique</Music>
     	 <Documents>Document</Documents>
-    	 <Contents>Contenu</Contents>
+       <Content>Contenu</Content>
     </label>
   </DocumentType>
 
@@ -3061,7 +2630,7 @@
     	<Video>Vidéo</Video>
     	<Music>Musique</Music>
     	<Documents>Document</Documents>
-    	<Contents>Contenu</Contents>
+      <Content>Contenu</Content>
     </label>
     <title>Configurer les Filtres</title>
     <action>
@@ -3080,14 +2649,13 @@
   	  <ShowMusic>Afficher les fichiers musicaux</ShowMusic>
   	  <ShowImages>Afficher les images</ShowImages>
   	  <ShowDocuments>Afficher tous les fichiers</ShowDocuments>
-  	  <ShowContents>Afficher tous types de documents</ShowContents>
+      <ShowContent>Afficher tous types de documents</ShowContent>
   	</title>
   </UIAllItemsByType>
 
   <Views>
     <label>
       <slide-show>Diaporama</slide-show>
-      <timeline-view>Chronologie</timeline-view>
     </label>
   </Views>
   <ECMContextMenu>
@@ -3108,7 +2676,6 @@
       <showHiddens>Cachés</showHiddens>
       <showTrash>Corbeille</showTrash>
     </label>
-    <title>Configurer les filtres</title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -3143,8 +2710,6 @@
    <UITaggingForm>
     <label>
       <Public>Public</Public>
-      <Group>Groupe</Group>
-      <Site>Site</Site>
       <Private>Privé</Private>
       <tagScopes>Portée des Tags</tagScopes>
     </label>
@@ -3152,7 +2717,6 @@
 
    <UITagExplorer>
     <title>
-      <EditPrivateTags>Modifier les Tags Privés</EditPrivateTags>
       <PublicTags>Tags</PublicTags>
       <EditPublicTags>Modifier les Tags</EditPublicTags>
       <PrivateTags>Tags</PrivateTags>
@@ -3306,11 +2870,6 @@
     </title>
   </rootNodeInfo>
 
-  <UIPopupWindow>
-    <title>
-      <UISelectRestorePath>Choisir le Chemin de Restauration</UISelectRestorePath>
-    </title>
-  </UIPopupWindow>
   <UIActionForm>
     <msg>
       <homePath-emty>Le chemin d'accueil est vide.</homePath-emty>
@@ -3322,6 +2881,12 @@
         <not-exist-categories>Il n'y a pas de catégories.</not-exist-categories>
 				</msg>
 		</UIActionBar>
+
+  <UIPublicationContainer>
+   <action>
+    <Close>#{word.close}</Close>
+   </action>
+  </UIPublicationContainer>
 
   <UIPublicationPanel>
     <button>
@@ -3383,14 +2948,13 @@
       <introduction>Vous pouvez programmer la publication de votre document. Choisissez la date que vous souhaitez voir votre document publié</introduction>
       <no-schedule-info>Il n'y a pas de calendrier de publication pour votre document</no-schedule-info>
     </label>
-    <scheduled>
-      <title>Planifier</title>
-      <from>de</from>
-      <to>à</to>
-    </scheduled>
     <msg>
       <save-finished>Votre nouveau calendrier de publication a été enregistré avec succès.</save-finished>
     </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Reset</Reset>
+    </action>
   </UIPublicationSchedule>
 
   <UIPublicationPanel>
@@ -3399,11 +2963,8 @@
       <start>Début</start>
       <end>Fin</end>
     </label>
-    <action>
-      <Save>Enregistrer</Save>
-    </action>
     <msg>
-      <invalid-format>Format de date incorrect. Veuillez vérifier à nouveau.</invalid-format>
+      <invalid-format>Le format de date n'est pas valide. S'il vous plaît vérifier à nouveau.</invalid-format>
       <fromDate-after-toDate>La date de début doit être avant la date de fin.</fromDate-after-toDate>
     </msg>
   </UIPublicationPanel>
@@ -3418,7 +2979,7 @@
       <status>Etat</status>
       <author>Auteur</author>
       <date>Date de création</date>
-      <title>Titre du document</title>
+      <title>Le titre du document</title>
      <lastUser>Dernier utilisateur</lastUser>
 	</header>
   </WCMContentView>
@@ -3437,9 +2998,6 @@
         <UIOneTaxonomySelector>Choisir une Catégorie</UIOneTaxonomySelector>
       </label>
     </tab>
-    <action>
-    	 <Close>Fermer</Close>
-    </action>
   </UICategoryManagerSearch>
 
   <UIPreferencesForm>
@@ -3494,8 +3052,6 @@
 	  <CLASSIFIED>Classé</CLASSIFIED>
 	  <UNCLASSIFIED>Non classé</UNCLASSIFIED>
 	  <NOCONTRACT>Aucun contrat</NOCONTRACT>
-	  <true>Vrai</true>
-	  <false>Faux</false>
 	  <one-minute>Une fois par minute</one-minute>
 	  <hourly>Une fois par heure</hourly>
 	  <daily>Quotidien</daily>

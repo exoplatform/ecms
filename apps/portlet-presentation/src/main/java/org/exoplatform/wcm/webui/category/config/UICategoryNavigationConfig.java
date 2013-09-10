@@ -61,15 +61,15 @@ import org.exoplatform.webui.form.ext.UIFormInputSetWithAction;
  * Jun 28, 2009
  */
 @ComponentConfig(
-    lifecycle = UIFormLifecycle.class,
-    template = "system:/groovy/webui/form/UIForm.gtmpl",
-    events = {
-        @EventConfig(listeners = UICategoryNavigationConfig.SaveActionListener.class),
-        @EventConfig(listeners = UICategoryNavigationConfig.CancelActionListener.class),
-        @EventConfig(listeners = UICategoryNavigationConfig.ChangeRepositoryActionListener.class),
-        @EventConfig(listeners = UICategoryNavigationConfig.SelectTargetPathActionListener.class)
-    }
-)
+                 lifecycle = UIFormLifecycle.class,
+                 template = "system:/groovy/webui/form/UIForm.gtmpl",
+                 events = {
+                   @EventConfig(listeners = UICategoryNavigationConfig.SaveActionListener.class),
+                   @EventConfig(listeners = UICategoryNavigationConfig.CancelActionListener.class),
+                   @EventConfig(listeners = UICategoryNavigationConfig.ChangeRepositoryActionListener.class),
+                   @EventConfig(listeners = UICategoryNavigationConfig.SelectTargetPathActionListener.class)
+                 }
+    )
 public class UICategoryNavigationConfig extends UIForm implements UISelectable {
 
   /** The popup id. */
@@ -84,7 +84,7 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
     PortletPreferences preferences = UICategoryNavigationUtils.getPortletPreferences();
 
     String preferenceRepository = preferences.getValue(UICategoryNavigationConstant.PREFERENCE_REPOSITORY,
-                                                       "");
+        "");
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;
     List<SelectItemOption<String>> repositories = new ArrayList<SelectItemOption<String>>() ;
     RepositoryEntry repositoryEntry = repositoryService.getCurrentRepository().getConfiguration();
@@ -121,12 +121,12 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
 
     String preferenceTargetPath = preferences.getValue(UICategoryNavigationConstant.PREFERENCE_TARGET_PAGE, "");
     UIFormInputSetWithAction targetPathFormInputSet =
-      new UIFormInputSetWithAction(UICategoryNavigationConstant.TARGET_PATH_FORM_INPUT_SET);
+        new UIFormInputSetWithAction(UICategoryNavigationConstant.TARGET_PATH_FORM_INPUT_SET);
     UIFormStringInput targetPathFormStringInput =
-      new UIFormStringInput(UICategoryNavigationConstant.TARGET_PATH_FORM_STRING_INPUT,
-                            UICategoryNavigationConstant.TARGET_PATH_FORM_STRING_INPUT,
-                            preferenceTargetPath);
-    targetPathFormStringInput.setEditable(false);
+        new UIFormStringInput(UICategoryNavigationConstant.TARGET_PATH_FORM_STRING_INPUT,
+                              UICategoryNavigationConstant.TARGET_PATH_FORM_STRING_INPUT,
+                              preferenceTargetPath);
+    targetPathFormStringInput.setReadOnly(true);
     targetPathFormInputSet.setActionInfo(UICategoryNavigationConstant.TARGET_PATH_FORM_STRING_INPUT,
                                          new String[] { "SelectTargetPath" });
     targetPathFormInputSet.addUIFormInput(targetPathFormStringInput);
@@ -257,7 +257,7 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
         ((PortletRequestContext)event.getRequestContext()).setApplicationMode(PortletMode.VIEW);
         Utils.closePopupWindow(categoryNavigationConfig, UICategoryNavigationPortlet.CONFIG_POPUP_WINDOW);
         RequireJS requireJS = event.getRequestContext().getJavascriptManager().getRequireJS();
-      	requireJS.require("SHARED/ecm-utils", "ecmutil").addScripts("ecmutil.ECMUtils.ajaxRedirect('" + uri + "');");
+        requireJS.require("SHARED/ecm-utils", "ecmutil").addScripts("ecmutil.ECMUtils.ajaxRedirect('" + uri + "');");
       } else {
         if (Utils.isQuickEditMode(categoryNavigationConfig,
                                   UICategoryNavigationPortlet.CONFIG_POPUP_WINDOW)) {

@@ -22,6 +22,7 @@ import javax.jcr.Session;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS
@@ -172,8 +173,7 @@ public final class LinkUtils {
   }
 
   public static LinkManager getLinkManager() {
-    ExoContainer context = ExoContainerContext.getCurrentContainer();
-    return (LinkManager) context.getComponentInstance(LinkManager.class);
+    return WCMCoreUtils.getService(LinkManager.class);
   }
 
   /**

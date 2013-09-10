@@ -32,7 +32,7 @@ import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeNodePageIterator;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
-import org.exoplatform.ecm.webui.utils.LockUtil;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
@@ -132,7 +132,7 @@ public class UIJCRExplorer extends UIContainer {
   public void setFilterSave(boolean isFilterSave) { isFilterSave_ = isFilterSave; }
 
   public boolean  isShowDocumentViewForFile() { return isShowDocumentViewForFile_; }
-   public void setShowDocumentViewForFile(boolean value) { isShowDocumentViewForFile_ = value; }
+  public void setShowDocumentViewForFile(boolean value) { isShowDocumentViewForFile_ = value; }
 
   public boolean isPreferencesSaved() { return preferencesSaved_; }
   public void setPreferencesSaved(boolean value) { preferencesSaved_ = value; }
@@ -140,7 +140,7 @@ public class UIJCRExplorer extends UIContainer {
   public boolean isAddingDocument() {
     UIPopupContainer uiPopupContainer = this.getChild(UIPopupContainer.class);
     UIPopupWindow uiPopup = uiPopupContainer.getChild(UIPopupWindow.class);
-    
+
     UIWorkingArea uiWorkingArea = this.getChild(UIWorkingArea.class);
     UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
     //check if edit with popup
@@ -148,7 +148,7 @@ public class UIJCRExplorer extends UIContainer {
     if (uiComp instanceof UIDocumentFormController && ((UIDocumentFormController)uiComp).isRendered()) {
       return ((UIDocumentFormController)uiComp).getChild(UIDocumentForm.class).isAddNew();
     }
-     //check if edit without popup
+    //check if edit without popup
     if (uiDocumentWorkspace.isRendered()) {
       UIDocumentFormController controller = uiDocumentWorkspace.getChild(UIDocumentFormController.class);
       if (controller != null && controller.isRendered()) {
@@ -171,7 +171,7 @@ public class UIJCRExplorer extends UIContainer {
         uiComp instanceof UIDocumentFormController && ((UIDocumentFormController)uiComp).isRendered()) {
       return true;
     }
-     //check if edit without popup
+    //check if edit without popup
     if (uiDocumentWorkspace.isRendered()) {
       UIDocumentFormController controller = uiDocumentWorkspace.getChild(UIDocumentFormController.class);
       if (controller != null && controller.isRendered()) {
@@ -255,7 +255,7 @@ public class UIJCRExplorer extends UIContainer {
    */
   public void setCurrentPath(String  currentPath) {
     if (currentPath_ == null || !currentPath_.equals(currentPath)) {
-            isShowDocumentViewForFile_ = true;
+      isShowDocumentViewForFile_ = true;
     }
     currentPath_ = currentPath;
   }
@@ -349,10 +349,10 @@ public class UIJCRExplorer extends UIContainer {
   public Collection<HistoryEntry> getHistory() { return addressPath_.values() ; }
 
   public SessionProvider getSessionProvider() {
-      if(WCMCoreUtils.getRemoteUser().equals(WCMCoreUtils.getSuperUser())) {
-          return getSystemProvider();
-      }
-      return WCMCoreUtils.getUserSessionProvider();
+    if(WCMCoreUtils.getRemoteUser().equals(WCMCoreUtils.getSuperUser())) {
+      return getSystemProvider();
+    }
+    return WCMCoreUtils.getUserSessionProvider();
   }
 
   public SessionProvider getSystemProvider() { return WCMCoreUtils.getSystemSessionProvider(); }
@@ -407,7 +407,7 @@ public class UIJCRExplorer extends UIContainer {
     try{
       DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
       DMSRepositoryConfiguration dmsRepoConfig =
-        dmsConfiguration.getConfig();
+          dmsConfiguration.getConfig();
       String workspace =  dmsRepoConfig.getSystemWorkspace();
       jcrTemplateResourceResolver_ = new JCRResourceResolver(workspace) ;
     } catch(Exception e) {
@@ -481,8 +481,8 @@ public class UIJCRExplorer extends UIContainer {
   public boolean isSystemWorkspace() throws Exception {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;
     String systemWS = repositoryService.getCurrentRepository()
-                                       .getConfiguration()
-                                       .getSystemWorkspaceName();
+        .getConfiguration()
+        .getSystemWorkspaceName();
     if(getCurrentWorkspace().equals(systemWS)) return true ;
     return false ;
   }
@@ -497,9 +497,9 @@ public class UIJCRExplorer extends UIContainer {
 
   public void setPathToAddressBar(String path) throws Exception {
     findFirstComponentOfType(UIAddressBar.class).getUIStringInput(
-                                          UIAddressBar.FIELD_ADDRESS).setValue(Text.unescapeIllegalJcrChars(filterPath(path))) ;
+                                                                  UIAddressBar.FIELD_ADDRESS).setValue(Text.unescapeIllegalJcrChars(filterPath(path))) ;
     findFirstComponentOfType(UIAddressBar.class).getUIInput(
-        UIAddressBar.FIELD_ADDRESS_HIDDEN).setValue(filterPath(path)) ;
+                                                            UIAddressBar.FIELD_ADDRESS_HIDDEN).setValue(filterPath(path)) ;
   }
 
   private void refreshExplorer(Node currentNode) throws Exception {
@@ -519,7 +519,7 @@ public class UIJCRExplorer extends UIContainer {
       setCurrentPath(currentRootPath_);
     }
     findFirstComponentOfType(UIAddressBar.class).getUIStringInput(UIAddressBar.FIELD_ADDRESS).
-        setValue(Text.unescapeIllegalJcrChars(filterPath(currentPath_))) ;
+    setValue(Text.unescapeIllegalJcrChars(filterPath(currentPath_))) ;
     findFirstComponentOfType(UIAddressBar.class).getUIInput(UIAddressBar.FIELD_ADDRESS_HIDDEN).
     setValue(filterPath(currentPath_)) ;
     UIWorkingArea uiWorkingArea = getChild(UIWorkingArea.class);
@@ -540,7 +540,7 @@ public class UIJCRExplorer extends UIContainer {
           uiDocumentContainer.setRenderedChild("UIDocumentInfo") ;
         }
         if(getCurrentNode().isNodeType(Utils.NT_FOLDER) || getCurrentNode().isNodeType(Utils.NT_UNSTRUCTURED))
-        uiDocumentWorkspace.setRenderedChild(UIDocumentContainer.class) ;
+          uiDocumentWorkspace.setRenderedChild(UIDocumentContainer.class) ;
       } else {
         UIDocumentFormController uiDocController = uiDocumentWorkspace.getChild(UIDocumentFormController.class);
         UISelectDocumentForm uiSelectDoc = uiDocController.getChild(UISelectDocumentForm.class);
@@ -673,12 +673,21 @@ public class UIJCRExplorer extends UIContainer {
     UIWorkingArea uiWorkingArea = getChild(UIWorkingArea.class) ;
     UIActionBar uiActionBar = findFirstComponentOfType(UIActionBar.class) ;
     UISideBar uiSideBar = findFirstComponentOfType(UISideBar.class);
+    UITreeExplorer uiTreeExplorer = findFirstComponentOfType(UITreeExplorer.class);
 
     uiAddressBar.getUIStringInput(UIAddressBar.FIELD_ADDRESS).setValue(
-        Text.unescapeIllegalJcrChars(filterPath(currentPath_))) ;
+                                                                       Text.unescapeIllegalJcrChars(filterPath(currentPath_))) ;
     uiAddressBar.getUIInput(UIAddressBar.FIELD_ADDRESS_HIDDEN).setValue(
-        filterPath(currentPath_)) ;
+                                                                        filterPath(currentPath_)) ;
     event.getRequestContext().addUIComponentToUpdateByAjax(getChild(UIControl.class)) ;
+    UIPageIterator contentPageIterator = this.findComponentById(UIDocumentInfo.CONTENT_PAGE_ITERATOR_ID);
+    int currentPage = contentPageIterator.getCurrentPage();
+    int currentPageInTree = 1;
+    
+    UITreeNodePageIterator extendedPageIterator =
+        uiTreeExplorer.findFirstComponentOfType(UITreeNodePageIterator.class);
+    if(extendedPageIterator != null) currentPageInTree = extendedPageIterator.getCurrentPage();
+    
     if(preferences_.isShowSideBar()) {
       findFirstComponentOfType(UITreeExplorer.class).buildTree();
     }
@@ -694,6 +703,7 @@ public class UIJCRExplorer extends UIContainer {
         } else {
           UIDocumentInfo uiDocumentInfo = uiDocumentContainer.getChildById("UIDocumentInfo") ;
           uiDocumentInfo.updatePageListData();
+          contentPageIterator.setCurrentPage(currentPage);
           uiDocumentContainer.setRenderedChild("UIDocumentInfo") ;
         }
         if(getCurrentNode().isNodeType(Utils.NT_FOLDER) || getCurrentNode().isNodeType(Utils.NT_UNSTRUCTURED))
@@ -710,6 +720,7 @@ public class UIJCRExplorer extends UIContainer {
     uiActionBar.setRendered(uiPortlet.isShowActionBar());
     uiAddressBar.setRendered(uiPortlet.isShowTopBar());
     uiSideBar.setRendered(preferences_.isShowSideBar());
+    if(extendedPageIterator != null) extendedPageIterator.setCurrentPage(currentPageInTree);
     event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea);
     if (uiSideBar.isRendered()) event.getRequestContext().addUIComponentToUpdateByAjax(uiSideBar);
     event.getRequestContext().addUIComponentToUpdateByAjax(getChild(UIControl.class)) ;
@@ -722,8 +733,8 @@ public class UIJCRExplorer extends UIContainer {
       }
       UIPopupWindow popupWindow = getChild(UIPopupWindow.class) ;
       if(popupWindow != null && popupWindow.isShow()) {
-      	popupWindow.setShow(false);
-      	event.getRequestContext().addUIComponentToUpdateByAjax(popupWindow);
+        popupWindow.setShow(false);
+        event.getRequestContext().addUIComponentToUpdateByAjax(popupWindow);
       }
     }
     isHidePopup_ = false ;
@@ -813,15 +824,15 @@ public class UIJCRExplorer extends UIContainer {
       }
       UIApplication uiApp = this.getAncestorOfType(UIApplication.class);
       uiApp.addMessage(new ApplicationMessage("UIJCRExplorer.msg.target-path-not-found",
-            null,
-            ApplicationMessage.WARNING));
+                                              null,
+                                              ApplicationMessage.WARNING));
       return false;
     }
     if (testedNode.isNodeType(Utils.EXO_RESTORELOCATION)) {
       UIApplication uiApp = this.getAncestorOfType(UIApplication.class);
       uiApp.addMessage(new ApplicationMessage("UIJCRExplorer.msg.target-path-not-found",
-          null,
-          ApplicationMessage.WARNING));
+                                              null,
+                                              ApplicationMessage.WARNING));
       return false;
     }
     return true;
@@ -916,7 +927,7 @@ public class UIJCRExplorer extends UIContainer {
             childrenList.add(child) ;
           } else if(typeName.equals(Utils.EXO_SYMLINK) &&
               documentTypes.contains(primaryTypeName)) {
-              childrenList.add(child);
+            childrenList.add(child);
           } else if(documentTypes.contains(typeName)) {
             childrenList.add(child) ;
           }
@@ -955,9 +966,9 @@ public class UIJCRExplorer extends UIContainer {
     } else if (Preference.SORT_BY_AUDITING.equals(preferences_.getSortType())) {
       Collections.sort(childrenList, new StringComparator(preferences_.getOrder(), Preference.SORT_BY_AUDITING));
     } else if (Preference.SORT_BY_CREATED_DATE.equals(preferences_.getSortType())) {
-        Collections.sort(childrenList, new PropertyValueComparator(Utils.EXO_CREATED_DATE, preferences_.getOrder()));
+      Collections.sort(childrenList, new PropertyValueComparator(Utils.EXO_CREATED_DATE, preferences_.getOrder()));
     } else if (Preference.SORT_BY_MODIFIED_DATE.equals(preferences_.getSortType())) {
-        Collections.sort(childrenList, new PropertyValueComparator(Utils.EXO_MODIFIED_DATE, preferences_.getOrder()));
+      Collections.sort(childrenList, new PropertyValueComparator(Utils.EXO_MODIFIED_DATE, preferences_.getOrder()));
     } else if (Preference.SORT_BY_DATE.equals(preferences_.getSortType())) {
       Collections.sort(childrenList, new DateComparator(preferences_.getOrder()));
     } else {
@@ -1006,15 +1017,10 @@ public class UIJCRExplorer extends UIContainer {
       if (firstTime) {
         UIApplication uiApp = getAncestorOfType(UIApplication.class) ;
         JCRExceptionManager.process(uiApp, e);
-        String workspace = null;
-        try {
-          workspace = session.getWorkspace().getName();
-        } catch (Exception e2) {
-          // do nothing
-        }
+        String workspace = session.getWorkspace().getName();
         if (LOG.isWarnEnabled()) {
           LOG.warn("The node cannot be found at " + nodePath
-            + (workspace == null ? "" : " into the workspace " + workspace));
+                   + (workspace == null ? "" : " into the workspace " + workspace));
         }
       }
       throw e;
@@ -1036,17 +1042,17 @@ public class UIJCRExplorer extends UIContainer {
     List<Node> documentsOnTag = new ArrayList<Node>() ;
     WebuiRequestContext ctx = WebuiRequestContext.getCurrentInstance();
     SessionProvider sessionProvider = (ctx.getRemoteUser() == null) ?
-                                      WCMCoreUtils.createAnonimProvider() :
-                                      WCMCoreUtils.getUserSessionProvider();
-    for (Node node : newFolksonomyService.getAllDocumentsByTag(tagPath_,
-                                                               getRepository().getConfiguration().getDefaultWorkspaceName(),
-                                                               sessionProvider)) {
-      if (documentsType.contains(node.getPrimaryNodeType().getName())
-          && PermissionUtil.canRead(node)) {
-        documentsOnTag.add(node);
-      }
-    }
-    return documentsOnTag ;
+                                                                     WCMCoreUtils.createAnonimProvider() :
+                                                                       WCMCoreUtils.getUserSessionProvider();
+                                                                     for (Node node : newFolksonomyService.getAllDocumentsByTag(tagPath_,
+                                                                                                                                getRepository().getConfiguration().getDefaultWorkspaceName(),
+                                                                                                                                sessionProvider)) {
+                                                                       if (documentsType.contains(node.getPrimaryNodeType().getName())
+                                                                           && PermissionUtil.canRead(node)) {
+                                                                         documentsOnTag.add(node);
+                                                                       }
+                                                                     }
+                                                                     return documentsOnTag ;
   }
 
   public void setIsViewTag(boolean isViewTag) { isViewTag_ = isViewTag ; }

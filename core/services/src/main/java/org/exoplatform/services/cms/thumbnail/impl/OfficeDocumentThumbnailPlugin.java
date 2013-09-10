@@ -17,9 +17,6 @@
 package org.exoplatform.services.cms.thumbnail.impl;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.List;
 
 import javax.jcr.Node;
@@ -72,20 +69,20 @@ public class OfficeDocumentThumbnailPlugin implements ComponentPlugin, Thumbnail
   }
 
   public BufferedImage getBufferedImage(Node contentNode, String nodePath) throws Exception {
-  	RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
+    RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
     String repository = repositoryService.getCurrentRepository().getConfiguration().getName();
     Document pdfDocument = new Document();
     if(contentNode.isNodeType(NodetypeConstant.NT_RESOURCE)) contentNode = contentNode.getParent();
     PDFViewerService pdfViewerService = WCMCoreUtils.getService(PDFViewerService.class);
     pdfDocument = pdfViewerService.initDocument(contentNode,repository);    
     BufferedImage image = (BufferedImage) pdfDocument.getPageImage(0, GraphicsRenderingHints.SCREEN,
-        Page.BOUNDARY_CROPBOX, 0.0f, 1.0f);
+                                                                   Page.BOUNDARY_CROPBOX, 0.0f, 1.0f);
     pdfDocument.dispose();
     return image;
-    
+
   }
-  
-  
+
+
   public List<String> getMimeTypes() {
     return config.getMimeTypes();
   }

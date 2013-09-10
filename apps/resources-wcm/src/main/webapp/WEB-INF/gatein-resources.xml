@@ -29,7 +29,7 @@
   <portal-skin>
     <skin-name>Default</skin-name>
     <skin-module>WCMSkin</skin-module>
-    <css-path>/skin/DefaultSkin/WCMStylesheet.css</css-path>
+    <css-path>/skin/css/ecms-resources-wcmskin.css</css-path>
     <css-priority>1</css-priority>
   </portal-skin>
 

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UISEOForm>
+    <label>  
+      <title>Titolo:</title>
+      <description>Descrizione:</description>
+      <keywords>Parole Chiave:</keywords>
+      <language>Lingua:</language>
+      <robots>Robot:</robots>
+      <sitemap>Mappa Sito:</sitemap>
+      <sitemapvisible>Visibile nella Mappa Sito</sitemapvisible>
+    <isInherited>Ereditato dalla pagina superiore</isInherited>
+      <priority>Priorità:</priority>
+      <frequency>Frequenza:</frequency>
+      <select-language>Select a language</select-language>
+      <option>
+        <Always>Sempre</Always>
+        <Hourly>Ogni ora</Hourly>
+        <Daily>Quotidiano</Daily>
+        <Weekly>Settimanale</Weekly>
+        <Monthly>Mensile</Monthly>
+        <Yearly>Annuale</Yearly>
+        <Never>Mai</Never>
+      </option> 
+    </label>
+    <tip>
+  <priority>Valori validi da 0.0 a 1.0</priority>
+  </tip>   
+    <action>
+      <Save>Salva</Save>
+      <Cancel>Annulla</Cancel>
+    </action>
+    <msg>
+      <repository-exception>Errore salvando i metadati della pagina.</repository-exception>
+      <confirm-delete>Sei sicuro di voler cancellare questi dati SEO?</confirm-delete>      
+    </msg>
+    <title>
+    <seo-delete>Delete</seo-delete>
+    </title>
+  <help> 
+  <priority>Intervallo di valori validi da 0.0 a 1.0.</priority>
+  <description>Help searchers to let them know what the following page has a link with what they are looking for.</description>
+  <keywords>Termini più importanti nella pagina separati da una virgola.</keywords>  
+  </help>  
+  </UISEOForm>
+  <UISEOPopupWindow>
+  <title>
+      <UISEOForm>Gestione SEO</UISEOForm>
+  </title>
+  </UISEOPopupWindow>    
+  <UISEOToolbarForm>
+  <title>
+      <seo>Gestione SEO</seo>
+  </title>
+  <label>
+    <seo>SEO</seo>
+  </label>
+  </UISEOToolbarForm>  
+  <FloatNumberValidator>
+    <msg>
+      <Invalid-number>Il valore del campo Priorità deve essere in formato numerico. Valori validi da 0.0 a 1.0.</Invalid-number>
+    </msg>
+  </FloatNumberValidator>  
+  
+</bundle>

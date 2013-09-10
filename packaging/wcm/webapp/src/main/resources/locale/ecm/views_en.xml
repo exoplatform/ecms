@@ -15,17 +15,7 @@
       </languages>
     </label>
   </View>
-  <!--
-  ################resoucebundle FOR EXO:CALENDAR VIEW TEMPLATE############
-  -->
-  <Calendar>
-    <view>
-      <label>
-        <calendar>Calendar</calendar>
-        <shared>Shared</shared>
-      </label>
-    </view>
-  </Calendar>
+ 
   <!--
   ################resoucebundle FOR EXO:COMMENT VIEW TEMPLATE#############
   -->
@@ -43,34 +33,8 @@
       </label>
     </view>
   </Comment>
+ 
   <!--
-  ################resoucebundle FOR EXO:EVENT VIEW TEMPLATE#############
-  -->
-  <Event>
-    <view>
-      <label>
-        <january>January</january>
-        <february>February</february>
-        <march>March</march>
-        <april>April</april>
-        <may>May</may>
-        <june>June</june>
-        <july>July</july>
-        <august>August</august>
-        <september>September</september>
-        <october>October</october>
-        <november>November</november>
-        <december>December</december>
-        <event>Event</event>
-        <subject>Subject</subject>
-        <location>Location</location>
-        <comment>Comment</comment>
-        <description>Description</description>
-      </label>
-    </view>
-  </Event>
-  <!--
-  ################resoucebundle FOR EXO:DATA VIEW TEMPLATE#############
   ################resoucebundle FOR NT:FILE VIEW TEMPLATE##############
   -->
   <File>
@@ -86,59 +50,7 @@
       </label>
     </view>
   </File>
-  <!--
-  ################resoucebundle FOR RMA:FILEPLAN VIEW TEMPLATE##############
-  -->
-  <FilePlan>
-    <view>
-      <label>
-        <content>File Plan Content</content>
-        <record-category-identifier>Record Category Identifier</record-category-identifier>
-        <disposition-author>Disposition Authority</disposition-author>
-        <disposition-instruction>Disposition Instructions</disposition-instruction>
-        <permanent-record-indicator>Permanent Record Indicator</permanent-record-indicator>
-        <contain-record-folder>Contains Records Folder</contain-record-folder>
-        <default-media-type>Default Media Type</default-media-type>
-        <default-marking-list>Default Marking List</default-marking-list>
-        <default-originating-organization>Default Originating Organization</default-originating-organization>
-        <number-of-record>Number of Records</number-of-record>
-        <record>Records</record>
-        <obsolete-record>Obsolete Records</obsolete-record>
-        <supreseded-record>Superseded Records</supreseded-record>
-        <vital-record>Vitals Records</vital-record>
-        <cutoff-record>Cutoff Records</cutoff-record>
-        <holdable-record>Holdable Records</holdable-record>
-        <transferable-record>Transferable Records</transferable-record>
-        <accessionable-record>Accessible Records</accessionable-record>
-        <destroyable-record>Destroyable Records</destroyable-record>
-        <record-id>Record Id</record-id>
-        <record-name>Record name</record-name>
-        <originator>Originator</originator>
-        <date-received>Date Received</date-received>
-        <originating-organization>Originating Organization</originating-organization>
-        <next-review-date>Next Review Date</next-review-date>
-        <previous-review-date>Previous Review Date</previous-review-date>
-        <cutoff-date>Cutoff Date</cutoff-date>
-        <hold-until>Hold Until</hold-until>
-        <transfer-date>Transfer Date</transfer-date>
-        <transfer-location>Transfer Location</transfer-location>
-        <accession-date>Accession Date</accession-date>
-        <accession-location>Access Location</accession-location>
-        <destruction-date>Destruction Date</destruction-date>
-      </label>
-    </view>
-  </FilePlan>
-  <!--
-  ################resoucebundle FOR KFX:DOCUMENT VIEW TEMPLATE##############
-  -->
-  <Kofax>
-    <view>
-      <label>
-        <document-name>Kofax Document Name</document-name>
-        <downloadable>Downloadable File</downloadable>
-      </label>
-    </view>
-  </Kofax>
+ 
   <!--
   ################resoucebundle FOR MAIL:DOCUMENT VIEW TEMPLATE##############
   -->
@@ -154,45 +66,6 @@
       </label>
     </view>
   </Mail>
-  <!--
-  ################resoucebundle FOR EXO:PODCAST VIEW TEMPLATE##############
-  -->
-  <Podcast>
-    <view>
-      <label>
-        <podcast>Podcast</podcast>
-        <title>Title</title>
-        <link>Link</link>
-        <author>Author</author>
-        <explicit>Explicit</explicit>
-        <category>Category</category>
-        <keyword>Keywords</keyword>
-        <publish-date>Publish Date</publish-date>
-        <mime-type>Mime Type</mime-type>
-        <length>Length</length>
-        <description>Description</description>
-      </label>
-    </view>
-  </Podcast>
-  <!--
-  ################resoucebundle FOR EXO:SAMPLE VIEW TEMPLATE##############
-  -->
-  <Sample>
-    <view>
-      <label>
-        <node-name>Node Name</node-name>
-        <title>Title</title>
-        <date>Date</date>
-        <date-time>Date Time</date-time>
-        <description>Description</description>
-        <image>Image</image>
-        <summary>Summary</summary>
-        <content>Content</content>
-        <relation>Relations</relation>
-        <attachment>Attachments</attachment>
-      </label>
-    </view>
-  </Sample>
   <!--
   ################resoucebundle FOR EXO:VOTE VIEW TEMPLATE##############
   -->
@@ -219,51 +92,6 @@
       </label>
     </view>
   </ListView>
-  <!--
-  ################resoucebundle FOR exo:workflowAction VIEW TEMPLATE##############
-  -->
-  <Workflow>
-    <view>
-      <label>
-        <name>Name</name>
-        <lifecycle>Lifecycle</lifecycle>
-        <description>Description</description>
-        <validator>Validator</validator>
-        <to-workspace>To Workspace</to-workspace>
-        <at-location>At Location</at-location>
-      </label>
-    </view>
-  </Workflow>
-  <!--
-  ################resoucebundle FOR exo:backupAction VIEW TEMPLATE##############
-  -->
-  <Backup>
-    <view>
-      <label>
-        <name>Name</name>
-        <lifecycle>Lifecycle</lifecycle>
-        <description>Description</description>
-        <to-workspace>To Workspace</to-workspace>
-        <at-location>At Location</at-location>
-      </label>
-    </view>
-  </Backup>
- 
-  <!--
-  ###################### resoucebundle for exo:iCalendarGenerateAction view template ####
-  -->
-  <Icalendar>
-    <view>
-      <label>
-        <action-name>Action Name</action-name>
-        <lifecycle>Lifecycle</lifecycle>
-        <calendar-path>Calendar Path</calendar-path>
-        <description>Description</description>
-        <query>Query</query>
-        <repository>Repository</repository>
-      </label>
-    </view>
-  </Icalendar>
 
   <!--
   ###################### resoucebundle for exo:addMetadataAction view template ####
@@ -336,202 +164,6 @@
       </tooltip>
     </view>
   </ElementSet>
-  <!--
-  ###################### resoucebundle for rma:cutoffable view template ####
-  -->
-  <Cutoffable>
-    <view>
-      <label>
-        <not-available>N/A</not-available>
-        <cutoff-executed>Cutoff Executed</cutoff-executed>
-        <cutoff-now>Cutoff Now</cutoff-now>
-        <cutoff-date-time>Cutoff Date Time</cutoff-date-time>
-        <cutoff-event>Cutoff Event</cutoff-event>
-        <cutoff-obsolete>Cutoff Obsolete</cutoff-obsolete>
-        <cutoff-superseded>Cutoff Superseded</cutoff-superseded>
-      </label>
-      <action>
-        <add-edit>Add/Edit</add-edit>
-        <cancel>Cancel</cancel>
-      </action>
-      <tooltip>
-        <cancel>Cancel</cancel>
-        <add-edit>Add/Edit Properties</add-edit>
-      </tooltip>
-    </view>
-  </Cutoffable>
-  <!--
-  ###################### resoucebundle for rma:destroyable view template ####
-  -->
-  <Destroyable>
-    <view>
-      <label>
-        <not-available>N/A</not-available>
-        <destruction-date>Destruction Date</destruction-date>
-      </label>
-      <action>
-        <add-edit>Add/Edit</add-edit>
-        <cancel>Cancel</cancel>
-      </action>
-      <tooltip>
-        <cancel>Cancel</cancel>
-        <add-edit>Add/Edit Properties</add-edit>
-      </tooltip>
-    </view>
-  </Destroyable>
-  <!--
-  ###################### resoucebundle for rma:accessionable view template ####
-  -->
-  <Accessionable>
-    <view>
-      <label>
-        <not-available>N/A</not-available>
-        <accession-executed>Accessible Executed</accession-executed>
-        <accession-date>Access Date</accession-date>
-      </label>
-      <action>
-        <add-edit>Add/Edit</add-edit>
-        <cancel>Cancel</cancel>
-      </action>
-      <tooltip>
-        <cancel>Cancel</cancel>
-      </tooltip>
-    </view>
-  </Accessionable>
-  <!--
-  ###################### resoucebundle for rma:holdable view template ####
-  -->
-  <Holdable>
-    <view>
-      <label>
-        <not-available>N/A</not-available>
-        <hold-executed>Hold Executed</hold-executed>
-        <hold-until>Hold Until</hold-until>
-        <holds-discretionary>Hold Discretionary</holds-discretionary>
-        <hold-until-event>Hold Until Event</hold-until-event>
-        <freeze>Freeze</freeze>
-      </label>
-      <action>
-        <add-edit>Add/Edit</add-edit>
-        <cancel>Cancel</cancel>
-      </action>
-      <tooltip>
-        <cancel>Cancel</cancel>
-        <add-edit>Add/Edit Properties</add-edit>
-      </tooltip>
-    </view>
-  </Holdable>
-  <!--
-  ###################### resoucebundle rma:record view template ####
-  -->
-  <Record>
-    <view>
-      <label>
-        <not-available>N/A</not-available>
-        <supplemental-marking-list>Supplemental Marking List</supplemental-marking-list>
-        <subject>Subject</subject>
-        <record-identifier>Record Identifier</record-identifier>
-        <originator>Originator</originator>
-        <format>Format</format>
-        <addresses>Addresses</addresses>
-        <originating-organization>Originating Organization</originating-organization>
-        <other-addresses>Other Addresses</other-addresses>
-        <publication-date>Publication Date</publication-date>
-        <record-note>Record Note</record-note>
-        <date-received>Date Received</date-received>
-        <media-format>Media Format</media-format>
-        <is-obsolete>Is Obsolete</is-obsolete>
-        <date-field>Date Field</date-field>
-        <superseded>Superseded</superseded>
-        <uuid>UUID</uuid>
-      </label>
-      <action>
-        <add-edit>Add/Edit</add-edit>
-        <cancel>Cancel</cancel>
-      </action>
-      <tooltip>
-        <cancel>Cancel</cancel>
-        <add-edit>Add/Edit Properties</add-edit>
-      </tooltip>
-    </view>
-  </Record>
-  <!--
-  ###################### resoucebundle rma:transferable view template ####
-  -->
-  <Transferable>
-    <view>
-      <label>
-        <not-available>N/A</not-available>
-        <transfer-executed>Transfer Executed</transfer-executed>
-        <transfer-date>Transfer Date</transfer-date>
-        <transfer-location>Transfer Location</transfer-location>
-      </label>
-      <action>
-        <add-edit>Add/Edit</add-edit>
-        <cancel>Cancel</cancel>
-      </action>
-      <tooltip>
-        <cancel>Cancel</cancel>
-        <add-edit>Add/Edit Properties</add-edit>
-      </tooltip>
-    </view>
-  </Transferable>
-  <!--
-  ###################### resoucebundle rma:vitalRecord view template ####
-  -->
-  <VitalRecord>
-    <view>
-      <label>
-        <not-available>N/A</not-available>
-        <is-vital-record>Is Vital Record</is-vital-record>
-        <prev-review-date>Previous Review Date</prev-review-date>
-        <next-review-date>Next Review Date</next-review-date>
-      </label>
-      <action>
-        <add-edit>Add/Edit</add-edit>
-        <cancel>Cancel</cancel>
-      </action>
-      <tooltip>
-        <cancel>Cancel</cancel>
-        <add-edit>Add/Edit Properties</add-edit>
-      </tooltip>
-    </view>
-  </VitalRecord>
-  <!--
-  ###################### resoucebundle exo:contentPublishing dialogs template ####
-  -->
-  <ContentPublishing>
-    <view>
-      <label>
-        <id>Id</id>
-        <name>#{word.name}</name>
-        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <description>#{word.description}</description>
-        <validator>Validator</validator>
-        <supervisor>Supervisor</supervisor>
-        <public-workspace>Publishing Workspace</public-workspace>
-        <public-path>Publishing Path</public-path>
-        <pending-workspace>Pending Workspace</pending-workspace>
-        <pending-path>Pending Path</pending-path>
-        <backup-workspace>Backup Workspace</backup-workspace>
-        <backup-path>Backup Path</backup-path>
-        <trash-workspace>Trash Workspace</trash-workspace>
-        <trash-path>Trash Path</trash-path>
-								<affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-      </label>
-    </view>
-  </ContentPublishing>
-		
-  <SendMail>
-    <view>
-      <label> 
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
-      </label> 
-  </view>
-  </SendMail>
 
   <ScriptAction>
     <view>
@@ -544,28 +176,6 @@
     </view>
   </ScriptAction>
   	
-  <Getmail>
-    <view>
-      <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
-      </label> 
-    </view>
-  </Getmail>
-  	
-  <Rss>
-    <view>
-      <label> 
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
-      </label> 
-    </view>
-  </Rss>
-  	
   <AddMetadata>
     <view>
       <label>
@@ -577,28 +187,6 @@
     </view>
   </AddMetadata>
 		
-  <ReloadAction>
-    <view>
-      <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
-      </label> 
-    </view>
-  </ReloadAction>
-		
-  <Transform>
-    <view>
-      <label> 
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
-      </label> 
-    </view>
-  </Transform>
-
   <EnableVersioning>
     <view>
       <label>

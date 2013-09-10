@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UISEOForm>
+    <label>  
+      <title>Tiêu đề:</title>
+      <description>Mô tả:</description>
+      <keywords>Từ khóa:</keywords>
+      <language>Ngôn ngữ:</language>
+      <robots>Các Robot:</robots>
+      <sitemap>Sơ đồ Trang:</sitemap>
+      <sitemapvisible>Hiển thị trên Sơ đồ Trang</sitemapvisible>
+    <isInherited>Được kế thừa từ trang mẹ</isInherited>
+      <priority>Độ ưu tiên:</priority>
+      <frequency>Tần suất:</frequency>
+      <select-language>Chọn Ngôn ngữ</select-language>
+      <option>
+        <Always>Luôn luôn</Always>
+        <Hourly>Hàng giờ</Hourly>
+        <Daily>Hàng ngày</Daily>
+        <Weekly>Hàng tuần</Weekly>
+        <Monthly>Hàng tháng</Monthly>
+        <Yearly>Hàng năm</Yearly>
+        <Never>Không bao giờ</Never>
+      </option> 
+    </label>
+    <tip>
+  <priority>Phạm vi các giá trị hợp lệ từ 0.0 đến 1.0</priority>
+  </tip>   
+    <action>
+      <Save>Lưu</Save>
+      <Cancel>Hủy bỏ</Cancel>
+    </action>
+    <msg>
+      <repository-exception>Một lỗi bất ngờ đã xảy ra khi đang lưu siêu dữ liệu của trang.</repository-exception>
+      <confirm-delete>Bạn có chắc bạn muốn xóa các dữ liệu SEO?</confirm-delete>      
+    </msg>
+    <title>
+    <seo-delete>Xóa</seo-delete>
+    </title>
+  <help> 
+  <priority>Phạm vi các giá trị hợp lệ từ 0.0 đến 1.0.</priority>
+  <description>Trợ giúp người tìm kiếm: cho phép họ biết được trang dưới đây có một liên kết mà họ đang tìm kiếm.</description>
+  <keywords>Hầu hết các thuật ngữ quan trọng trên trang đều được tách ra bằng dấu phẩy.</keywords>  
+  </help>  
+  </UISEOForm>
+  <UISEOPopupWindow>
+  <title>
+      <UISEOForm>Quản lý SEO</UISEOForm>
+  </title>
+  </UISEOPopupWindow>    
+  <UISEOToolbarForm>
+  <title>
+      <seo>Quản lý SEO</seo>
+  </title>
+  <label>
+    <seo>SEO</seo>
+  </label>
+  </UISEOToolbarForm>  
+  <FloatNumberValidator>
+    <msg>
+      <Invalid-number>Giá trị của trường Ưu tiên phải ở định dạng số. Phạm vi các giá trị hợp lệ từ 0.0 đến 1.0.</Invalid-number>
+    </msg>
+  </FloatNumberValidator>  
+  
+</bundle>

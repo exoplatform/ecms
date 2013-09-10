@@ -3,6 +3,7 @@
 	import org.exoplatform.download.DownloadService;
 	import org.exoplatform.download.InputStreamDownloadResource;
 	import java.io.InputStream;
+	import org.exoplatform.wcm.webui.reader.ContentReader;
 	
 	def rcontext = _ctx.getRequestContext() ;
     def jsManager = rcontext.getJavascriptManager();
@@ -161,6 +162,7 @@
 										if(webContentNode != null && webContentNode.hasNode("default.html")) {
 											Node htmlNode = webContentNode.getNode("default.html");
 											htmlContent = htmlNode.getNode("jcr:content").getProperty("jcr:data").getValue().getString();
+											htmlContent = ContentReader.getEscapeHtmlContent(htmlContent);
 										}
 									}
 									if(htmlContent == null || htmlContent.equals("")) {
@@ -253,19 +255,7 @@
 										String[] fieldContentCSS = ["jcrPath=/node/css/default.css/jcr:content/jcr:data", cssContent] ;
 										uicomponent.addTextAreaField(cssFormId, fieldContentCSS) ;
 									%>
-									<i class="uiIconQuestion" id="cssContentHelp" 
-											onmouseover="eXo.ecm.WCMUtils.showInContextHelp('cssContentHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('cssContentHelp', 'false')"
-												onfocus="eXo.ecm.WCMUtils.showInContextHelp('cssContentHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('cssContentHelp', 'false')">
-										<div style="position: absolute;">
-											<div class="InContextHelpContent">                    
-												<div class="InContextHelpPopup">
-												 <div id="ContentPathHelpID" class="LeftInContextHelpPopup">
-													 <%=_ctx.appRes("WebContent.dialog.label.hintJS")%>
-													</div>
-												</div>                      
-											</div>
-										</div>
-									</i>
+									<i class="uiIconQuestion" id="cssContentHelp" data-placement="left" rel="tooltip" data-original-title="<%=_ctx.appRes("WebContent.dialog.label.hintJS")%>"></i>
 								</div>
 							</div>
 							<div class="control-group">
@@ -294,19 +284,7 @@
 									String[] fieldContentJS = ["jcrPath=/node/js/default.js/jcr:content/jcr:data", "options=noSanitization", jsContent];
 									uicomponent.addTextAreaField(jsFormId, fieldContentJS); 								
 								%>
-									<i class="uiIconQuestion" id="ContentJSHelp" 
-											onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ContentJSHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ContentJSHelp', 'false')"
-												onfocus="eXo.ecm.WCMUtils.showInContextHelp('ContentJSHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('ContentJSHelp', 'false')">
-										<div style="position: absolute;">
-											<div class="InContextHelpContent">                    
-												<div class="InContextHelpPopup">
-												 <div id="ContentPathHelpID" class="LeftInContextHelpPopup">
-													 <%=_ctx.appRes("WebContent.dialog.label.hintJS")%>
-													</div>
-												</div>                      
-											</div>
-										</div>
-									</i>
+									<i class="uiIconQuestion" id="ContentJSHelp" data-placement="left" rel="tooltip" data-original-title="<%=_ctx.appRes("WebContent.dialog.label.hintJS")%>"></i>
 								</div>
 							</div>
 						</div>

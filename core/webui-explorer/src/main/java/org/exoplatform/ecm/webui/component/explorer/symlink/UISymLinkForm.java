@@ -27,6 +27,7 @@ import javax.jcr.RepositoryException;
 import javax.jcr.UnsupportedRepositoryOperationException;
 import javax.jcr.nodetype.ConstraintViolationException;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector;
@@ -85,6 +86,7 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
   final static public String FIELD_PATH = "pathNode";
   final static public String FIELD_SYMLINK = "fieldPathNode";
   final static public String POPUP_SYMLINK = "UIPopupSymLink";
+  final static public String DEFAULT_NAME = "untitled";
 
   final static public byte DRIVE_SELECTOR_MODE = 0;
   final static public byte WORSPACE_SELECTOR_MODE = 1;
@@ -162,11 +164,14 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
       if(uiExplorer.nodeIsLocked(node)) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", null)) ;
         return ;
-      } 
+      }
       symLinkTitle = symLinkName;
       symLinkName = org.exoplatform.services.cms.impl.Utils.cleanString(symLinkName);
-      
-      if(!uiSymLinkForm.localizationMode && (symLinkName == null || symLinkName.length() ==0)) {
+      if (StringUtils.isEmpty(symLinkName)) {
+        symLinkName = DEFAULT_NAME;
+      }
+
+      if(!uiSymLinkForm.localizationMode && StringUtils.isEmpty(symLinkTitle)) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.name-invalid", null)) ;
         return ;
       }

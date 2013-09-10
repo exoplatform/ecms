@@ -4,13 +4,6 @@
  **************************************************************************/
 package org.exoplatform.wcm.webui.scv;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-import javax.portlet.PortletPreferences;
-
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -26,12 +19,12 @@ import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
+import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormInputSet;
 import org.exoplatform.webui.form.UIFormRadioBoxInput;
 import org.exoplatform.webui.form.UIFormStringInput;
@@ -39,7 +32,12 @@ import org.exoplatform.webui.form.UIFormTabPane;
 import org.exoplatform.webui.form.ext.UIFormInputSetWithAction;
 import org.exoplatform.webui.form.input.UICheckBoxInput;
 
-import com.google.common.util.concurrent.SettableFuture;
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+import javax.portlet.PortletPreferences;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Created by The eXo Platform SARL
@@ -48,20 +46,21 @@ import com.google.common.util.concurrent.SettableFuture;
  * Jul 16, 2010
  */
 @ComponentConfig(
-    lifecycle = UIFormLifecycle.class,
-    template = "app:/groovy/SingleContentViewer/UISCVPreferences.gtmpl",
-    events = {
-      @EventConfig(listeners = UISCVPreferences.SaveActionListener.class),
-      @EventConfig(listeners = UISCVPreferences.AddPathActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UISCVPreferences.CancelActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UISCVPreferences.SelectTargetPageActionListener.class, phase = Phase.DECODE)
-    }
-)
+                 lifecycle = UIFormLifecycle.class,
+                 template = "app:/groovy/SingleContentViewer/UISCVPreferences.gtmpl",
+                 events = {
+                   @EventConfig(listeners = UISCVPreferences.SaveActionListener.class),
+                   @EventConfig(listeners = UISCVPreferences.AddPathActionListener.class, phase = Phase.DECODE),
+                   @EventConfig(listeners = UISCVPreferences.CancelActionListener.class, phase = Phase.DECODE),
+	                 @EventConfig(listeners = UISCVPreferences.SelectTabActionListener.class, phase = Phase.DECODE),
+                   @EventConfig(listeners = UISCVPreferences.SelectTargetPageActionListener.class, phase = Phase.DECODE)
+                 }
+    )
 public class UISCVPreferences extends UIFormTabPane implements UISelectable{
 
   /** The Constant ITEM_PATH_FORM_INPUT_SET. */
   public final static String ITEM_PATH_FORM_INPUT_SET     = "UISCVConfigItemPathFormInputSet";
-  
+
   public final static String CONTENT_FORM_INPUT_SET       = "UISCVConfigContentFormInputSet";
   public final static String DISPLAY_FORM_INPUT_SET       = "UISCVConfigDisplayFormInputSet";
   public final static String PRINT_FORM_INPUT_SET         = "UISCVConfigPrintFormInputSet";
@@ -109,7 +108,7 @@ public class UISCVPreferences extends UIFormTabPane implements UISelectable{
   private UIFormRadioBoxInput           cacheOptionsRadioInputBox;
 
   public UISCVPreferences() throws Exception{
-  	super("UISCVPreferences");
+    super("UISCVPreferences");
     portletPreferences = ((PortletRequestContext) WebuiRequestContext.getCurrentInstance()).getRequest().getPreferences();
     initComponent();
     setActions(new String[] { "Save", "Cancel" });
@@ -133,7 +132,7 @@ public class UISCVPreferences extends UIFormTabPane implements UISelectable{
     UIFormInputSetWithAction contentInputSet = new UIFormInputSetWithAction(CONTENT_FORM_INPUT_SET);
     contentInputSet.addUIFormInput((UIFormInputSet)itemPathInputSet);
     setSelectedTab(CONTENT_FORM_INPUT_SET);
-    
+
     /** Option Show Title/Show Date/Show OptionBar **/
     boolean blnShowTitle = Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.SHOW_TITLE,
                                                                             null));
@@ -149,7 +148,7 @@ public class UISCVPreferences extends UIFormTabPane implements UISelectable{
                                                                                 null));
     chkShowOptionBar = new UICheckBoxInput(SHOW_OPION_BAR_CHECK_BOX, SHOW_OPION_BAR_CHECK_BOX, null);
     chkShowOptionBar.setChecked(blnShowOptionBar);
-    
+
     UIFormInputSetWithAction displayInputSet = new UIFormInputSetWithAction(DISPLAY_FORM_INPUT_SET);
     displayInputSet.addChild(chkShowTitle);
     displayInputSet.addChild(chkShowDate);
@@ -158,7 +157,7 @@ public class UISCVPreferences extends UIFormTabPane implements UISelectable{
 
     /** CONTEXTUAL MODE */
     boolean isShowContextOption = Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.CONTEXTUAL_MODE,
-                                                                                   "false"));
+        "false"));
     List<SelectItemOption<String>> contextOptions = new ArrayList<SelectItemOption<String>>();
     contextOptions.add(new SelectItemOption<String>(ENABLE_STRING, ENABLE_STRING));
     contextOptions.add(new SelectItemOption<String>(DISABLE_STRING, DISABLE_STRING));
@@ -172,7 +171,7 @@ public class UISCVPreferences extends UIFormTabPane implements UISelectable{
 
     /** CACHE MANAGEMENT */
     boolean isCacheEnabled = Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.ENABLE_CACHE,
-                                                                                    "false"));
+        "false"));
 
     List<SelectItemOption<String>> cacheOptions = new ArrayList<SelectItemOption<String>>();
     cacheOptions.add(new SelectItemOption<String>(ENABLE_STRING, ENABLE_STRING));
@@ -181,7 +180,7 @@ public class UISCVPreferences extends UIFormTabPane implements UISelectable{
                                                         CACHE_ENABLE_SELECT_RADIO_BOX,
                                                         cacheOptions);
     cacheOptionsRadioInputBox.setValue(isCacheEnabled ? ENABLE_STRING : DISABLE_STRING);
-    
+
     UIFormInputSetWithAction advancedInputSet = new UIFormInputSetWithAction(ADVANCED_FORM_INPUT_SET);
     advancedInputSet.addChild(cacheOptionsRadioInputBox);
     advancedInputSet.addChild(txtParameterName);
@@ -200,12 +199,12 @@ public class UISCVPreferences extends UIFormTabPane implements UISelectable{
     txtPrintPage.setReadOnly(true);
     targetPageInputSet.setActionInfo(PRINT_VIEW_PAGE_INPUT, new String[] {"SelectTargetPage"}) ;
     targetPageInputSet.addUIFormInput(txtPrintPage);
-    
+
     UIFormInputSetWithAction printInputSet = new UIFormInputSetWithAction(PRINT_FORM_INPUT_SET);
     printInputSet.addChild(txtPrintPageParameter);
     printInputSet.addChild(targetPageInputSet);
-  
-    
+
+
     addChild(contentInputSet);
     addChild(displayInputSet);
     addChild(printInputSet);
@@ -222,7 +221,7 @@ public class UISCVPreferences extends UIFormTabPane implements UISelectable{
       WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
       UISCVPreferences uiSCVPref = event.getSource();
       PortletPreferences portletPreferences = ((PortletRequestContext) event.getRequestContext()).getRequest()
-                                                                                                 .getPreferences();
+          .getPreferences();
       UIFormInputSetWithAction displayInputSet = uiSCVPref.findComponentById(DISPLAY_FORM_INPUT_SET);
       String strShowTitle = displayInputSet.getUICheckBoxInput(SHOW_TITLE_CHECK_BOX).isChecked() ? "true" : "false";
       String strShowDate = displayInputSet.getUICheckBoxInput(SHOW_DATE_CHECK_BOX).isChecked() ? "true" : "false";
@@ -234,13 +233,13 @@ public class UISCVPreferences extends UIFormTabPane implements UISelectable{
       String strParameterName = advancedInputSet.getUIStringInput(PARAMETER_INPUT_BOX).getValue();
       String strIsCacheEnabled = ((UIFormRadioBoxInput) advancedInputSet.getChildById(CACHE_ENABLE_SELECT_RADIO_BOX)).getValue();
       strIsCacheEnabled = ENABLE_STRING.equals(strIsCacheEnabled) ? "true" : "false";
-      
-      
+
+
       UIFormInputSetWithAction printInputSet = uiSCVPref.findComponentById(PRINT_FORM_INPUT_SET);
       String strPrintPageName = printInputSet.getUIStringInput(PRINT_VIEW_PAGE_INPUT).getValue();
       String strPrintParameterName  = printInputSet.getUIStringInput(PRINT_PAGE_PARAMETER_INPUT).getValue();
-      
-      
+
+
 
       if (!Boolean.parseBoolean(strIsContextEnable)) {
         if (uiSCVPref.getSelectedNodeUUID() != null) {
@@ -345,6 +344,31 @@ public class UISCVPreferences extends UIFormTabPane implements UISelectable{
     return this.selectedNodeDrive;
   }
 
+	/**
+	 * The listener interface for receiving selectTabAction events.
+	 * The class that is interested in processing a selectTabAction
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addSelectTabActionListener<code> method. When
+	 * the selectTabAction event occurs, that object's appropriate
+	 * method is invoked.
+	 */
+	static public class SelectTabActionListener extends EventListener<UISCVPreferences> {
+
+		/* (non-Javadoc)
+ * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
+ */
+		public void execute(Event<UISCVPreferences> event) throws Exception {
+			WebuiRequestContext context = event.getRequestContext();
+			String renderTab = context.getRequestParameter(UIComponent.OBJECTID);
+			if (renderTab == null) {
+				return;
+			}
+			event.getSource().setSelectedTab(renderTab);
+			event.getRequestContext().addUIComponentToUpdateByAjax(event.getSource());
+		}
+	}
+
   public static class AddPathActionListener extends EventListener<UISCVPreferences> {
     public void execute(Event<UISCVPreferences> event) throws Exception {
       UISCVPreferences uiSCVPref = event.getSource();
@@ -355,11 +379,11 @@ public class UISCVPreferences extends UIFormTabPane implements UISelectable{
                                                   uiSCVPref.getSelectedNodeWorkspace(),
                                                   uiSCVPref.getSelectedNodeUUID());
       contentSelector.init(uiSCVPref.getSelectedNodeDrive(), fixPath(node == null ? ""
-                                                                                 : node.getPath(),
-                                                                     uiSCVPref));
+                                                                                    : node.getPath(),
+                                                                                    uiSCVPref));
       contentSelector.getChild(UIContentBrowsePanelOne.class)
-                     .setSourceComponent(uiSCVPref,
-                                         new String[] { UISCVPreferences.CONTENT_PATH_INPUT });
+      .setSourceComponent(uiSCVPref,
+                          new String[] { UISCVPreferences.CONTENT_PATH_INPUT });
       Utils.createPopupWindow(uiSCVPref,
                               contentSelector,
                               UIContentSelector.CORRECT_CONTENT_SELECTOR_POPUP_WINDOW,
@@ -439,7 +463,7 @@ public class UISCVPreferences extends UIFormTabPane implements UISelectable{
 
   public boolean isContextualEnable() {
     return Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.CONTEXTUAL_MODE,
-                                                            "false"));
+        "false"));
   }
   public void doSelect(String selectField, Object value) throws Exception {
     String strRepository, strWorkspace, strDrive, strIdentifier, strNodeUUID;

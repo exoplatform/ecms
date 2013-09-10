@@ -33,9 +33,8 @@ import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.container.PortalContainer;
-import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.ecm.utils.text.Text;
-import org.exoplatform.ecm.webui.utils.LockUtil;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.config.UserPortalConfigService;
@@ -81,10 +80,6 @@ import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPortletApplication;
-import org.owasp.validator.html.AntiSamy;
-import org.owasp.validator.html.CleanResults;
-import org.owasp.validator.html.Policy;
-
 import com.ibm.icu.text.Transliterator;
 
 /**
@@ -97,8 +92,6 @@ public class Utils {
   public static final String TURN_ON_QUICK_EDIT = "turnOnQuickEdit";
 
   private static final String SQL_PARAM_PATTERN = "\\$\\{([^\\$\\{\\}])+\\}";
-
-  private static final String POLICY_FILE_LOCATION = "jar:/conf/portal/antisamy.xml";
 
   private static final String NT_FILE = "nt:file";
 
@@ -502,9 +495,11 @@ public class Utils {
     if(siteType.equals(PortalConfig.PORTAL_TYPE))
       editorPageURI = configurationService.getRuntimeContextParam(WCMConfigurationService.EDIT_PAGE_URI);
     else if(siteType.equals(PortalConfig.GROUP_TYPE)) {
+      StringBuffer sb = new StringBuffer();      
     	editorPageURI = pContext.getSiteName();
     	editorPageURI = editorPageURI.substring(editorPageURI.lastIndexOf("/")+1, editorPageURI.length());
-    	editorPageURI = editorPageURI + "/" + DOCUMENTS_ACTIVITY;
+    	sb.append(editorPageURI).append("/").append(DOCUMENTS_ACTIVITY);
+    	editorPageURI = sb.toString();
     }
     UserNode editorNode = getEditorNode(editorPageURI, siteType);
 
@@ -917,28 +912,6 @@ public class Utils {
           siteKey);
   }
 
-  public static String sanitize(String value) {
-    try {
-      ConfigurationManager configMan = WCMCoreUtils.getService(ConfigurationManager.class);
-      Policy policy = Policy.getInstance(configMan.getResource(POLICY_FILE_LOCATION));
-      AntiSamy as = new AntiSamy();
-      CleanResults cr = as.scan(value, policy);
-      value = cr.getCleanHTML();
-      return value;
-    } catch(Exception ex) {
-      return value;
-    }
-  }
-  public static String sanitizeSearch(String value) {
-    try {
-      value = sanitize(value);
-      value = value.replaceAll("<iframe", "").replaceAll("<frame", "").replaceAll("<frameset", "");
-      return value;
-    } catch(Exception ex) {
-      return value;
-    }
-  }
-
   public static boolean isEmptyContent(String inputValue) {
     boolean isEmpty = true;
     inputValue = inputValue.trim().replaceAll("<p>", "").replaceAll("</p>", "");
@@ -1064,7 +1037,7 @@ public class Utils {
     }
     return currentNode ;
   }
-  
+
   /**
    * Allows you to add a lock token to the given node
    */
@@ -1095,7 +1068,8 @@ public class Utils {
   public static String getProfileLink(String userId) {
     RequestContext ctx = RequestContext.getCurrentInstance();
     NodeURL nodeURL = ctx.createURL(NodeURL.TYPE);
-    NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), "profile");
+    NavigationResource resource =
+        new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), "profile");
     return nodeURL.setResource(resource).toString() + "/" + userId;
   }
 }

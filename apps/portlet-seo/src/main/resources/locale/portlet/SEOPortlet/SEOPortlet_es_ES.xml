@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UISEOForm>
+    <label>  
+      <title>Título:</title>
+      <description>Descripción:</description>
+      <keywords>Palabras Claves:</keywords>
+      <language>idioma:</language>
+      <robots>Robots:</robots>
+      <sitemap>Mapa del sitio:</sitemap>
+      <sitemapvisible>Visible en el mapa del sitio</sitemapvisible>
+    <isInherited>Heredado de la página principal</isInherited>
+      <priority>Prioridad:</priority>
+      <frequency>Frecuencia:</frequency>
+      <select-language>Select a language</select-language>
+      <option>
+        <Always>Siempre</Always>
+        <Hourly>Hourly</Hourly>
+        <Daily>Diario</Daily>
+        <Weekly>Semanalmente</Weekly>
+        <Monthly>Mensualmente</Monthly>
+        <Yearly>Anualmente</Yearly>
+        <Never>Nunca</Never>
+      </option> 
+    </label>
+    <tip>
+  <priority>Valores válidos oscilan entre 0.0 y 1.0</priority>
+  </tip>   
+    <action>
+      <Save>Guardar</Save>
+      <Cancel>Cancelar</Cancel>
+    </action>
+    <msg>
+      <repository-exception>Ocurrió un error inesperado al guardar los metadatos de la página.</repository-exception>
+      <confirm-delete>¿Está seguro que desea eliminar estos datos SEO?</confirm-delete>      
+    </msg>
+    <title>
+    <seo-delete>Eliminar</seo-delete>
+    </title>
+  <help> 
+  <priority>Valores válidos oscilan entre 0.0 y 1.0.</priority>
+  <description>Ayudar a los buscadores: hacerles saber que la siguiente página tiene un enlace que están buscando.</description>
+  <keywords>Términos más importantes en la página separados por una coma.</keywords>  
+  </help>  
+  </UISEOForm>
+  <UISEOPopupWindow>
+  <title>
+      <UISEOForm>Gestión de SEO</UISEOForm>
+  </title>
+  </UISEOPopupWindow>    
+  <UISEOToolbarForm>
+  <title>
+      <seo>Gestión de SEO</seo>
+  </title>
+  <label>
+    <seo>SEO</seo>
+  </label>
+  </UISEOToolbarForm>  
+  <FloatNumberValidator>
+    <msg>
+      <Invalid-number>El valor del campo de prioridad debe estar en el formato numérico. El intervalo de valores válidos es de 0.0 a 1.0.</Invalid-number>
+    </msg>
+  </FloatNumberValidator>  
+  
+</bundle>

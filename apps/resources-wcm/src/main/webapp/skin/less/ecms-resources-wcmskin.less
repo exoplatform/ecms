@@ -5,6 +5,7 @@
 @import "UITreeJCRExplorer/Style.less";
 @import "UIPublication/Style.less";
 @import "content/Style.less";
+@import "InlineEditing/Style.less";
 
 
 /******** UIContentBrowserPanel **************/
@@ -59,8 +60,8 @@
 	.leftWorkspace {
 		width: 210px;
 		float: left;
-		border: 1px solid #e1e1e1;
-		background: #f7f7f7;
+		border: 1px solid @borderColor;
+		background: @grayLighter;
 		overflow: auto;
 		height: 461px;
 		.ChildrenContainer{
@@ -78,9 +79,11 @@
 		}
 
 		.noContent{
-			color: #ccc;
+			color: @grayLight;
 		}
 	}
+  height: 400px;
+
 }
 
 .uiContentSearchForm {
@@ -126,7 +129,7 @@
 	}
 	
 	.noContent{
-		color: #ccc;
+		color: @grayLight;
 	}
 }
 
@@ -160,7 +163,7 @@
 	z-index: 1;
 	
 	.edittingToolBar {
-		background: #4f72ac;
+		background: @blueLight;
 		padding: 5px;
 		.border-radius(3px 3px 0px 0px);
     position: absolute;
@@ -169,12 +172,12 @@
 		
 		.btn-group .btn {
 			padding: 3px 5px;
-			border: 1px solid #3a5e9a;
-			background: #4f72ac;
+			border: 1px solid @blueDark;
+			background: @blueLight;
 			box-shadow: none;
 			margin-left: -5px;
 			&:hover {
-				#gradient .vertical(#638acd, #426393);
+				#gradient .vertical(@blueLighter, @blue);
 				box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
 			}
 		}
@@ -192,14 +195,14 @@
 		
 		.edittingCurrentState .publishText,
 		.edittingCurrentState .draftText {
-			color: white;
+			color: @white;
 			margin: 3px 10px 0px 3px;
 			font-weight: bold;
 			display: block;
 		}
 		
 		.edittingCurrentState .draftText {
-			color: #94aed7;
+			color: @blueLighter;
 		}
 	}
 }
@@ -212,7 +215,7 @@
 }
 
 .containerHoverClass {
-  border:1px solid #4f72ac !important;
+  border:1px solid @blueLight !important;
 	
 	.edittingToolBarContainer {
 		display: block;
@@ -220,7 +223,7 @@
 }
 
 .containerHoverClassInner:hover {
-  border:1px solid #4f72ac !important;
+  border:1px solid @blueLight !important;
 	
 	.edittingContent {
 		display: block;
@@ -251,18 +254,18 @@
 			
 			&:hover {
 				.nodeLabel {
-					background: #f0f0f0;
+					background: @grayWhiteSmoke;
 				}
 			}
 		}
 		
 		.selectedBox {
 			.nodeLabel {
-				background: #cfcfcf;
+				background: @grayDarkWhiteSmoke;
 			}
 			
 			.actionIconLabel {
-				background: #2f5e92;
+				background: @blue;
 				
 				> a {
 					color: @white;
@@ -272,7 +275,7 @@
 		
 		.bgThumbnailImage {
 			padding: 5px;
-			background: #fff;
+			background: @white;
 			box-shadow: 1px 1px 3px 1px rgba(25,44,48,0.2);
 			display: inline-block;
 		}
@@ -288,7 +291,7 @@
 				max-width: 116px;
 				max-height: 116px;
 				margin: auto;
-				border: 1px solid #afafaf;
+				border: 1px solid @borderColor;
 			}
 		}
 		
@@ -324,7 +327,7 @@
 			.border-radius(3px);
 			
 			> a {
-				color: #333333;
+				color: @textColor;
 			}
 		}
 	}
@@ -354,8 +357,8 @@
 /******** UIRelationManager **************/
 .uiOneNodePathSelector {
 	.breadcrumb {
-		background: #f7f7f7;
-		border: 1px solid #e1e1e1;
+		background: @grayLighter;
+		border: 1px solid @borderColor;
 		padding: 5px 10px;
 		margin-bottom: 20px;
 		line-height: 16px;
@@ -363,7 +366,7 @@
 	}
 }
 
-.uiGroupSelector, .uiGroupMembershipSelector, .uiMemberSelector{
+.uiGroupSelector, .uiGroupMembershipSelector, .uiMemberSelector, .anyPermission {
 	.form-horizontal{
 		padding: 0px;
 		.control-label{
@@ -380,6 +383,12 @@
 	}
 }
 
+.uiECMAdminPortlet {.uiECMAdminWorkingArea {.uiMDriveAnyPermission {.form-horizontal{
+       .form-horizontal{
+               padding: 0px;
+       }
+}}}}
+
 .uiPopup .popupContent .uiMemberSelector{
 	margin: -10px -10px 10px -10px;
 }
@@ -388,3 +397,27 @@
 	margin-left: 250px;
 }
 
+.InlineEditing {
+	.EditContent {
+	    display: none;
+	    height: 100%;
+	    padding: 2px 7px 2px 2px;
+	    width: 98%;
+	 }
+}
+
+.UIWCMSearchPortlet {
+	.UIAdvanceSearchResultDefault {
+	    border: 1px solid @borderColor;
+	    margin: 10px;
+	    .ResultHeader {
+		    border-bottom: 1px solid @borderColor;
+		    line-height: 25px;
+		    overflow: hidden;
+		    padding: 0 5px;
+		}
+		p {
+			padding: 0px 10px;
+		}
+	} 
+}

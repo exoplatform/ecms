@@ -29,8 +29,8 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
  * 5:20:02 PM
  */
 @ComponentConfig(
-     template = "app:/groovy/webui/component/explorer/popup/action/UIFormInputSetWithActionForTaggingForm.gtmpl"
-  )
+                 template = "app:/groovy/webui/component/explorer/popup/action/UIFormInputSetWithActionForTaggingForm.gtmpl"
+    )
 public class UIFormInputSetWithActionForTaggingForm extends UIFormInputSetWithAction {
 
   public UIFormInputSetWithActionForTaggingForm(String name) {
@@ -38,16 +38,16 @@ public class UIFormInputSetWithActionForTaggingForm extends UIFormInputSetWithAc
   }
 
   public String getTagNames() throws Exception {
-  	String tags = "";
-  	StringBuffer sb = new StringBuffer();
-  	List<String> tagsList = this.getAncestorOfType(UITaggingForm.class).getAllTagNames();
-  	for (String string : tagsList) {
-  		sb.append(string).append(",");			
-		}
-  	tags = sb.toString();
-  	if(tags.length() > 0)
-  		tags = tags.substring(0, tags.length()-1);
-  	return tags;
+    String tags = "";
+    StringBuffer sb = new StringBuffer();
+    List<String> tagsList = this.getAncestorOfType(UITaggingForm.class).getAllTagNames();
+    for (String string : tagsList) {
+      sb.append(string).append(",");			
+    }
+    tags = sb.toString();
+    if(tags.length() > 0)
+      tags = tags.substring(0, tags.length()-1);
+    return tags;
   }
 
 }

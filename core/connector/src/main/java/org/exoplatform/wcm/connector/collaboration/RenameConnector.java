@@ -50,10 +50,10 @@ import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
- * The RenameConnector aims to enhance the use of the rename action on the content explorer.
- * The system allows to set two values : name and title.
- * The title is a logical name that is used to display in the content explorer.
- * The name is the technical name of the file at JCR level. It is notably exposed via the WEBDAV layer.
+ * The RenameConnector aims to enhance the use of the _rename_ action on the Sites Explorer.
+ * The system allows setting two values: _name_ and _title_.
+ * The _title_ is a logical name that is used to display in the Sites Explorer.
+ * The _name_ is the technical name of the file at JCR level. It is notably exposed via the WEBDAV layer.
  *
  * @LevelAPI Experimental
  *
@@ -71,12 +71,12 @@ public class RenameConnector implements ResourceContainer {
   private static final String DEFAULT_NAME = "untitled";
 
   /**
-   * Get <em>objectid</em> of renamed node <br>
-   * Basically <em>objectid</em> is a partern which is useful to find html tag of specific node <br>
-   * <em>objectid</em> actually is node path encoded by URLEncoder. <br>
+   * Gets _objectid_ of the renamed node.
+   * Basically, _objectid_ is a pattern which is useful to find HTML tags of a specific node.
+   * _objectid_ actually is the node path encoded by _URLEncoder_.
    *
    * @param nodePath The node path
-   * @return <em>objectid</em>
+   * @return _objectid_
    * @throws Exception The exception
    *
    * @anchor RenameConnector.getObjectId
@@ -88,11 +88,11 @@ public class RenameConnector implements ResourceContainer {
   }
 
   /**
-   * Call RenameConnector rest service to execute rename process.
+   * Calls RenameConnector REST service to execute the "_rename_" process.
    *
-   * @param oldPath Old path of renamed node with syntax: [workspace:node path]
-   * @param newTitle New title of the node.
-   * @return Httpstatus 400 if rename fail, otherwise uuid of renamed node is returned
+   * @param oldPath The old path of the renamed node with syntax: [workspace:node path]
+   * @param newTitle The new title of the node.
+   * @return Httpstatus 400 if renaming fails, otherwise the UUID of the renamed node is returned.
    * @throws Exception The exception
    *
    * @anchor RenameConnector.rename
@@ -118,8 +118,8 @@ public class RenameConnector implements ResourceContainer {
       String oldName = renamedNode.getName();
       if (oldName.indexOf('.') != -1 && renamedNode.isNodeType(NodetypeConstant.NT_FILE)) {
         String ext = oldName.substring(oldName.lastIndexOf('.'));
-        newName += ext;
-        newExoTitle += ext;
+        newName = newName.concat(ext);
+        newExoTitle = newExoTitle.concat(ext);
       }
 
       // Stop process if new name and exo:title is the same with old one
@@ -227,10 +227,10 @@ public class RenameConnector implements ResourceContainer {
   }
 
   /**
-   * Update lock for child nodes after renaming.
+   * Updates lock for child nodes after renaming.
    *
-   * @param srcPath source path
-   * @param parentNewNode parent new node
+   * @param srcPath The source path.
+   * @param parentNewNode The destination node which gets the new name.
    * @throws Exception
    */
   private void changeLockForChild(String srcPath, Node parentNewNode) throws Exception {
@@ -247,10 +247,10 @@ public class RenameConnector implements ResourceContainer {
   }
 
   /**
-   * Check if can edit a locked node.
+   * Checks if a locked node is editable or not.
    *
-   * @param node a specific node
-   * @return true if can edit, false otherwise
+   * @param node A specific node.
+   * @return True if the locked node is editable, false otherwise.
    * @throws Exception
    */
   private boolean canEditLockedNode(Node node) throws Exception {
@@ -265,9 +265,9 @@ public class RenameConnector implements ResourceContainer {
   }
 
   /**
-   * Add lock token of a specific node to it's session.
+   * Adds the lock token of a specific node to its session.
    *
-   * @param node a specific node
+   * @param node A specific node.
    * @throws Exception
    */
   private void addLockToken(Node node) throws Exception {
@@ -280,10 +280,10 @@ public class RenameConnector implements ResourceContainer {
   }
 
   /**
-   * Get node by node path.
+   * Gets a node by its path.
    *
-   * @param nodePath node path of specific node with syntax [workspace:node
-   *          path]
+   * @param nodePath The path of a specific node with syntax [workspace:node
+   *          path].
    * @return Node of specific node path
    * @throws Exception
    */
@@ -298,7 +298,7 @@ public class RenameConnector implements ResourceContainer {
   }
 
   /**
-   * Get user session from specific workspace.
+   * Gets user session from a specific workspace.
    *
    * @param workspaceName
    * @return session
