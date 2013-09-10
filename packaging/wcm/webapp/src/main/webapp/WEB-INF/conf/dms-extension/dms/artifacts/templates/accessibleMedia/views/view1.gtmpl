@@ -134,11 +134,11 @@
                                    print tmpAlterText;
                                  } else {
                                    print(tmpAlterText.substring(0, 100)); %>
-                                   <span onclick="eXo.ecm.ECMUtils.displayFullAlternativeText(this)">
-                                     <a href="javascript:void(0);">
-                                       <%=_ctx.appRes("AccessibleMedia.view.label.Read-more")%>
-                                     </a>
-                                   </span>
+                                   <p onclick="eXo.ecm.ECMUtils.displayFullAlternativeText(this)">
+                                       <a href="javascript:void(0);">
+                                         <%=_ctx.appRes("AccessibleMedia.view.label.Read-more")%>
+                                       </a>
+                                   </p>
                               <% }
                                } else {
                                  print "<span></span>"
