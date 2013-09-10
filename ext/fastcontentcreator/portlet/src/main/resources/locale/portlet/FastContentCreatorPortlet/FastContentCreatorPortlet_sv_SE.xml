@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIFCCForm>
+    <msg>
+      <name-not-allowed>Detta namn är inte tillåtet.</name-not-allowed>
+      <in-versioning>Kontrollera den aktuella noden innan du lägger till en ny nod.</in-versioning>
+      <cannot-save>Ett fel uppstod när noden sparades.</cannot-save>
+      <saved-successfully>{0}</saved-successfully>
+      <not-support>Kan inte ladda mallen {0}.</not-support>
+      <not-add-folder>Endast filer kan läggas till den här mappen.</not-add-folder>
+      <access-denied>Åtkomst nekad. Du har inte behörigheten att lägga till på {0}.</access-denied>
+      <path-not-found>Sökvägen {0} var ogiltig eller borttagen.</path-not-found>
+      <node-locked>Noden {0} är låst. Lås upp denna nod innan du skapar dokument.</node-locked>
+      <node-isExist>Den här noden redan finns i {0} och får inte vara samma namn som sitt syskon.</node-isExist>
+      <get-dialog-path>Ett fel inträffade när sökvägen för dialogrutan hämtades.</get-dialog-path>
+      <new-jcr-template>Ett fel uppstod när du skapade en ny mall.</new-jcr-template>
+    </msg>
+    <action>
+      <Save>Spara</Save>
+      <Cancel>Avbryt</Cancel>
+    </action>
+  </UIFCCForm>
+
+  <UIFCCConfig>
+    <label>
+      <UIFCCSaveLocationField>Spara plats</UIFCCSaveLocationField>
+      <UIFCCWorkspaceFormSelectBox>Välj arbetsyta</UIFCCWorkspaceFormSelectBox>
+      <UIFCCTemplateField>Mall optioner</UIFCCTemplateField>
+      <UIFCCLocationFormInputAction>Plats att spara</UIFCCLocationFormInputAction>
+      <UIFCCLocationFormStringInput/>
+      <UIFCCTemplateFormSelectBox>Välj mall</UIFCCTemplateFormSelectBox>
+      <UIFCCSaveFormStringInput>Option Spara knappen</UIFCCSaveFormStringInput>
+      <UIFCCMessageFormTextareaInput>Option Spara meddelande</UIFCCMessageFormTextareaInput>
+      <UIFCCRedirectFormCheckboxInput>Omdirigering:</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectPathFormStringInput>Omdirigering sökväg:</UIFCCRedirectPathFormStringInput>
+      <UIFCCActionField>Åtgärder</UIFCCActionField>
+      <UIFCCActionList/>
+    </label>
+    <msg>
+      <save-successfully>Sparats till portlet preferenser.</save-successfully>
+      <item-not-found>Sökvägen är ogiltig.</item-not-found>
+      <fileType-empty>Välj en filtyp innan du sparar den här konfigurationen.</fileType-empty>
+      <ws-empty>Välj en arbetsyta.</ws-empty>
+      <action-empty>Välj en mapp med en åtgärd.</action-empty>
+      <message-empty>"Option Spara meddelande" fältet är obligatoriskt om du inte väljer alternativet omdirigera eller att sökvägen är tom.</message-empty>
+      <get-template>Ett fel uppstod när mallen användes.</get-template>
+      <set-template-option>Ett fel uppstod när optioner för mallen användes.</set-template-option>
+      <do-select>Ett fel uppstod medan du valde plats.</do-select>
+      </msg>
+    <action>
+      <Save>Spara</Save>
+    </action>
+  </UIFCCConfig>
+
+  <UIFCCLocationFormInputAction>
+    <title>
+      <SelectPath>Välj sökväg</SelectPath>
+    </title>
+  </UIFCCLocationFormInputAction>
+
+  <UIFCCActionList>
+    <header>
+      <name>Namn</name>
+      <description>Beskrivning</description>
+      <instanceOf>Förekomst av</instanceOf>
+      <action>Åtgärd</action>
+    </header>
+    <action>
+      <Add>Lägg till</Add>
+    </action>
+    <msg>
+      <empty>Inga åtgärder</empty>
+      <remove-popup-first>Du måste stänga popup-fönstret Redigera innan du tar bort den här noden.</remove-popup-first>
+      <confirm-delete-action>Är du säker du vill ta bort denna åtgärd?</confirm-delete-action>
+      <template-empty>Mallen {0} är noll eller tom.</template-empty>
+      <template-null>Mallen är noll eller tom, eller du har inte behörighet att komma åt den här mallen.</template-null>
+      <access-denied>Åtkomst nekad. Du har inte behörighet att göra denna åtgärd.</access-denied>
+    </msg>
+  </UIFCCActionList>
+
+  <UIFCCSelectorPopupWindow>
+    <title>
+      <UIOneNodePathSelector>Välj plats</UIOneNodePathSelector>
+    </title>
+  </UIFCCSelectorPopupWindow>
+
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Arbetsyta:</workspaceName>
+      <rootNodePath>Rotsökvägen:</rootNodePath>
+      <rootNodeInfo>Root noden</rootNodeInfo>
+    </label>
+  </UIWorkspaceList>
+
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Lägg till rotnoden</AddRootNode>
+    </title>
+  </rootNodeInfo>
+
+  <UITreeList>
+    <info>
+      <child-not-found>Den här noden har inte underordnade noder.</child-not-found>
+    </info>
+    <header>
+      <name>Namn</name>
+      <action>Åtgärd</action>
+    </header>
+  </UITreeList>
+
+  <UIFCCActionPopupWindow>
+    <title>
+      <UIFCCActionContainer>Lägg till åtgärd</UIFCCActionContainer>
+    </title>
+  </UIFCCActionPopupWindow>
+
+  <UIFCCActionForm>
+    <title>Lägg till/Redigera åtgärd</title>
+    <action>
+      <Save>Spara</Save>
+      <Close>Stäng</Close>
+    </action>
+    <msg>
+      <repository-exception>Kan inte spara den här åtgärden. Det namn som används får inte ha ett index som sitt sista element.</repository-exception>
+      <numberformat-exception>Kan inte spara den här åtgärden. Det namn som används får inte ' [' eller '] ".</numberformat-exception>
+      <existed-action>Namnet på {0} finns redan. Välj ett annat namn.</existed-action>
+      <unable-add-action>Det går inte att lägga till denna åtgärd.</unable-add-action>
+      <unable-add>Det går inte att lägga till denna åtgärd. Den här noden är roten eller du har inte rättigheten.</unable-add>
+      <not-support>Dialogen {0} stöds inte.</not-support>
+      <no-permission-add>Åtkomst nekad. Du har inte rätt att lägga till en åtgärd här.</no-permission-add>
+      <access-denied>Åtkomst nekad. Du har inte behörighet att komma åt den här mallen.</access-denied>
+    </msg>
+    <validator>
+      <validator>Validator</validator>
+      <destPath>Med sökväg</destPath>
+    </validator>
+  </UIFCCActionForm>
+
+  <UIFCCActionTypeForm>
+    <label>
+      <actionType>Skapa en åtgärd av typen</actionType>
+    </label>
+    <msg>
+      <not-support>Kan inte ladda mallen {0}.</not-support>
+      <do-not-permission>Du har inte behörighet att ladda mallen {0}.</do-not-permission>
+    </msg>
+  </UIFCCActionTypeForm>
+
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>Välj plats</UIOneNodePathSelector>
+      <UIPermissionSelector>Rättigheter</UIPermissionSelector>
+      <UICategoriesSelector>Lägg till kategorier</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
+  <DateTimeValidator>
+    <msg>
+      <Invalid-input>Fältet {0} med värdet '{1}' är ogiltigt.</Invalid-input>
+    </msg>
+  </DateTimeValidator>
+
+  <UITabPane>
+    <title>
+      <UICategoriesSelectPanel>Välj kategorier</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Refererade kategorier</UISelectedCategoriesGrid>
+    </title>
+  </UITabPane>
+
+  <PopupComponent>
+    <title>
+      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
+  <UICategoriesSelector>
+    <action>
+      <close>Stäng</close>
+    </action>
+  </UICategoriesSelector>
+
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>Lägg till kategorier</UIOneTaxonomySelector>
+    </title>
+  </PopupComponent>
+
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>Kategoriträdet</taxonomyTree>
+    </label>
+  </UITreeTaxonomyList>
+
+  <UIFCCTaxonomyPopupWindow>
+    <title>
+      <UIOneTaxonomySelector>Kategori Selector</UIOneTaxonomySelector>
+    </title>
+  </UIFCCTaxonomyPopupWindow>
+</bundle>

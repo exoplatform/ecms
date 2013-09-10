@@ -16,6 +16,7 @@
  */
 package org.exoplatform.wcm.webui.search;
 
+import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -161,7 +162,7 @@ public class UISearchResult extends UIContainer {
         keyword = searchForm.getUIStringInput(UISearchForm.KEYWORD_INPUT).getValue();
       }
       setKeyword(keyword);
-      keyword = keyword.replace('-', ' ').toLowerCase(porletRequestContext.getLocale());
+      keyword = Normalizer.normalize(keyword, Normalizer.Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
       keyword = keyword.replaceAll("'","''");
 
       SiteSearchService siteSearchService = getApplicationComponent(SiteSearchService.class);

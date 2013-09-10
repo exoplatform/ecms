@@ -43,6 +43,7 @@
       </label>
     </view>
   </Comment>
+ 
   <!--
   ################resoucebundle FOR EXO:EVENT VIEW TEMPLATE#############
   -->
@@ -109,7 +110,7 @@
         <cutoff-record>Enregistrements prélevés</cutoff-record>
         <holdable-record>Enregistrements suspensifs</holdable-record>
         <transferable-record>Enregistrements transférables</transferable-record>
-        <accessionable-record>Enregistrements acquis</accessionable-record>
+        <accessionable-record>Accessionable Records</accessionable-record>
         <destroyable-record>Enregistrements destructibles</destroyable-record>
         <record-id>Identifiant de l'Enregistrement</record-id>
         <record-name>Nom de l'Enregistrement</record-name>
@@ -123,7 +124,7 @@
         <transfer-date>Date de transfert</transfer-date>
         <transfer-location>Emplacement du transfert</transfer-location>
         <accession-date>Date d'acquisition</accession-date>
-        <accession-location>Location de l'acquisition</accession-location>
+        <accession-location>Accession Location</accession-location>
         <destruction-date>Date de destruction</destruction-date>
       </label>
     </view>
@@ -193,6 +194,21 @@
       </label>
     </view>
   </Sample>
+  <!--
+  ################resoucebundle FOR MAIL:DOCUMENT VIEW TEMPLATE##############
+  -->
+  <Mail>
+    <view>
+      <label>
+        <from>De :</from>
+        <to>À :</to>
+        <cc>Cc :</cc>
+        <date>Date :</date>
+        <subject>Sujet :</subject>
+        <attachment>Pièces jointes :</attachment>
+      </label>
+    </view>
+  </Mail>
   <!--
   ################resoucebundle FOR EXO:VOTE VIEW TEMPLATE##############
   -->
@@ -386,8 +402,8 @@
     <view>
       <label>
         <not-available>ND</not-available>
-        <accession-executed>Acquisition exécutée</accession-executed>
-        <accession-date>Planification de l'extraction</accession-date>
+        <accession-executed>Accession Executed</accession-executed>
+        <accession-date>Date d'acquisition</accession-date>
       </label>
       <action>
         <add-edit>Ajouter/Modification</add-edit>
@@ -572,7 +588,7 @@
 							<isDeep>Récursif</isDeep>
         <nodetypes>Types de noeud</nodetypes>
         <affectedNodeTypeNames>Types de noeud affectés</affectedNodeTypeNames>
-        <nodeTypeName>Types de noeud</nodeTypeName>
+        <nodeTypeName>Types de noeuds</nodeTypeName>
      </label> 
    </view>
   </AddMetadata>

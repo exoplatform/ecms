@@ -34,7 +34,8 @@ import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
-import org.exoplatform.webui.form.UIFormUploadInput;
+import org.exoplatform.webui.form.input.UIUploadInput;
+
 
 /**
  * Created by The eXo Platform SARL
@@ -79,9 +80,8 @@ public class UIResourceForm extends UIForm {
       String contentText = node.getProperty("jcr:data").getString() ;
       addUIFormInput(new UIFormTextAreaInput(FIElD_TEXTTOMODIFY, FIElD_TEXTTOMODIFY, contentText)) ;
     }else {
-      getUIStringInput(FIElD_NAME).setEditable(false);
-      UIFormUploadInput uiInput = new UIFormUploadInput(FIElD_FILETOUPLOAD, FIElD_FILETOUPLOAD);
-      uiInput.setAutoUpload(true);
+      getUIStringInput(FIElD_NAME).setReadOnly(true);
+      UIUploadInput uiInput = new UIUploadInput(FIElD_FILETOUPLOAD, FIElD_FILETOUPLOAD);
       addUIFormInput(uiInput) ;
     }
   }
@@ -100,9 +100,9 @@ public class UIResourceForm extends UIForm {
         String text = uiResourceForm.getUIFormTextAreaInput(FIElD_TEXTTOMODIFY).getValue() ;
         contentNode.setProperty("jcr:data", text) ;
       }else {
-        UIFormUploadInput  fileUpload =
-          (UIFormUploadInput)uiResourceForm.getUIInput(FIElD_FILETOUPLOAD) ;
-        InputStream content =  fileUpload.getUploadDataAsStream() ;
+        UIUploadInput  fileUpload =
+          (UIUploadInput)uiResourceForm.getUIInput(FIElD_FILETOUPLOAD) ;
+        InputStream content =  fileUpload.getUploadDataAsStream(fileUpload.getUploadIds()[0]);
         contentNode.setProperty("jcr:data", content) ;
       }
       if(uiResourceForm.session_ != null) uiResourceForm.session_.save() ;

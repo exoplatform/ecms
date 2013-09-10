@@ -24,6 +24,7 @@ import org.exoplatform.ecm.webui.component.explorer.popup.actions.UISelectRestor
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.documents.TrashService;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -52,6 +53,8 @@ import javax.jcr.lock.LockException;
 import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.version.VersionException;
 import javax.portlet.PortletPreferences;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -66,22 +69,22 @@ import java.util.regex.Matcher;
  */
 
 @ComponentConfig(
-      events = {
-        @EventConfig(listeners = RestoreFromTrashManageComponent.RestoreFromTrashActionListener.class)
-      }
-)
+                 events = {
+                     @EventConfig(listeners = RestoreFromTrashManageComponent.RestoreFromTrashActionListener.class)
+                 }
+    )
 public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent {
 
   private static final List<UIExtensionFilter> FILTERS
-        = Arrays.asList(new UIExtensionFilter[] { new IsInTrashFilter(),
-                                                   new IsNotLockedFilter(),
-                                                   new IsCheckedOutFilter(),
-                                                   new HasRemovePermissionFilter(),
-                                                   new IsAbleToRestoreFilter(),
-                                                   new IsNotTrashHomeNodeFilter() });
+  = Arrays.asList(new UIExtensionFilter[] { new IsInTrashFilter(),
+      new IsNotLockedFilter(),
+      new IsCheckedOutFilter(),
+      new HasRemovePermissionFilter(),
+      new IsAbleToRestoreFilter(),
+      new IsNotTrashHomeNodeFilter() });
 
   private final static Log                     LOG     = ExoLogger.getLogger(RestoreFromTrashManageComponent.class.getName());
-  
+
   private static int numberItemsRestored = 0;
   private static String itemName = "";
 
@@ -89,7 +92,7 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-
+  
   private static void restoreFromTrash(String srcPath, Event<RestoreFromTrashManageComponent> event) throws Exception {
     UIWorkingArea uiWorkingArea = event.getSource().getParent();
     UIJCRExplorer uiExplorer = uiWorkingArea.getAncestorOfType(UIJCRExplorer.class);
@@ -108,11 +111,16 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
     try {
       // Use the method getNodeByPath because it is link aware
       node = uiExplorer.getNodeByPath(srcPath, session, false);
+      
+      //return false if the target is already deleted
+      if ( Utils.targetNodeAndLinkInTrash(node) ) {
+        return;
+      }
       // Reset the path to manage the links that potentially create virtual path
       srcPath = node.getPath();
     } catch(PathNotFoundException path) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
-          null,ApplicationMessage.WARNING));
+                                              null,ApplicationMessage.WARNING));
 
       return;
     }
@@ -135,7 +143,7 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
       return;
     }
     doRestore(srcPath, node, event);
-    
+
     numberItemsRestored++;
   }
 
@@ -162,15 +170,23 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
       RepositoryService repositoryService = uiExplorer.getApplicationComponent(RepositoryService.class);
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session trashSession = sessionProvider.getSession(trashWorkspace, manageableRepository);
-      
+
       Node trashHomeNode = (Node) trashSession.getItem(trashHomeNodePath);
       try {
         trashService.restoreFromTrash(srcPath, sessionProvider);
+        
+        // delete symlink after target node
+        LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
+        List<Node> symlinks = linkManager.getAllLinks(node, org.exoplatform.services.cms.impl.Utils.EXO_SYMLINK);
+        for (Node symlink : symlinks) {
+          trashService.restoreFromTrash(symlink.getPath(), sessionProvider);
+        }
+        
         uiExplorer.updateAjax(event);
       } catch(PathNotFoundException e) {
         UIPopupContainer uiPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
         UISelectRestorePath uiSelectRestorePath =
-          uiWorkingArea.createUIComponent(UISelectRestorePath.class, null, null);
+            uiWorkingArea.createUIComponent(UISelectRestorePath.class, null, null);
 
         uiSelectRestorePath.setTrashHomeNode(trashHomeNode);
         uiSelectRestorePath.setSrcPath(srcPath);
@@ -226,7 +242,7 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
 
   public static class RestoreFromTrashActionListener extends UIWorkingAreaActionListener<RestoreFromTrashManageComponent> {
     public void restoreFromTrashManage(Event<RestoreFromTrashManageComponent> event) throws Exception {   
-    	numberItemsRestored = 0;
+      numberItemsRestored = 0;
       String srcPath = event.getRequestContext().getRequestParameter(OBJECTID);
       if (srcPath.indexOf(';') > -1) {
         multiRestoreFromTrash(srcPath.split(";"), event);
@@ -237,24 +253,62 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
       ResourceBundle res = context.getApplicationResourceBundle();
       String restoreNotice = "";
       if(!srcPath.contains(";") && numberItemsRestored == 1) {
-      	restoreNotice = "UIWorkingArea.msg.feedback-restore";
-      	restoreNotice = res.getString(restoreNotice);
-      	restoreNotice = restoreNotice.replaceAll("\\{" + 0 + "\\}", itemName);
+        restoreNotice = "UIWorkingArea.msg.feedback-restore";
+        restoreNotice = res.getString(restoreNotice);
+        restoreNotice = restoreNotice.replaceAll("\\{" + 0 + "\\}", itemName);
       } else if(srcPath.indexOf(';') > -1 && numberItemsRestored >= 1) {
-      	restoreNotice = "UIWorkingArea.msg.feedback-restore-multi";
-      	restoreNotice = res.getString(restoreNotice);
-      	restoreNotice = restoreNotice.replaceAll("\\{" + 0 + "\\}", String.valueOf(numberItemsRestored));
+        restoreNotice = "UIWorkingArea.msg.feedback-restore-multi";
+        restoreNotice = res.getString(restoreNotice);
+        restoreNotice = restoreNotice.replaceAll("\\{" + 0 + "\\}", String.valueOf(numberItemsRestored));
       }      
       if(restoreNotice.length() > 0) {
-      	UIWorkingArea uiWorkingArea = event.getSource().getParent();
-      	uiWorkingArea.setWCMNotice(restoreNotice);
+        UIWorkingArea uiWorkingArea = event.getSource().getParent();
+        uiWorkingArea.setWCMNotice(restoreNotice);
       }
     }
 
     private void multiRestoreFromTrash(String[] paths, Event<RestoreFromTrashManageComponent> event) throws Exception {
-      for (String path : paths) {
+      UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
+      
+      Session session;
+      Matcher matcher;
+      String  wsName;
+      Node    node;
+      String  origialPath;
+      
+      List<String> newPaths = new ArrayList<String>(); 
+
+      // In case multi checked items, check if a Symlink node is with its Target in Trash or not.
+      for (String srcPath : paths) {
+        origialPath = srcPath;
+        matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(srcPath);
+        if (matcher.find()) {
+          wsName  = matcher.group(1);
+          srcPath = matcher.group(2);
+        } else {
+          throw new IllegalArgumentException("The ObjectId is invalid '" + srcPath + "'");
+        }
+
+        try {
+          session = uiExplorer.getSessionByWorkspace(wsName);
+          // Use the method getNodeByPath because it is link aware
+          node = uiExplorer.getNodeByPath(srcPath, session, false);
+
+          // Not allow to restore multi items if there is a symlink node, which have Target-In-Trash, in items list. 
+          // program returns at once.
+          if (Utils.targetNodeAndLinkInTrash(node)) {
+            continue;
+          }
+          // Reset the path to manage the links that potentially create virtual
+          newPaths.add(origialPath);
+        } catch (PathNotFoundException path) {
+          return;
+        }
+      }
+
+      for (String path : newPaths) {
         if (acceptForMultiNode(event, path))
-        restoreFromTrash(path, event);
+          restoreFromTrash(path, event);
       }
     }
 

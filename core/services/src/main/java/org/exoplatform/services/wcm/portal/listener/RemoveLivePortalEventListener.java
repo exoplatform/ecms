@@ -62,8 +62,11 @@ public class RemoveLivePortalEventListener extends Listener<DataStorageImpl, Por
     }
 
     // Remove initial artifacts for this portal
-    RemovePortalArtifactsService removePortalArtifactsService = WCMCoreUtils.getService(RemovePortalArtifactsService.class);
-    removePortalArtifactsService.invalidateArtifactsFromPortal(sessionProvider, portalName, portalConfig.getPortalLayout().getId());
+    RemovePortalArtifactsService removePortalArtifactsService =
+        WCMCoreUtils.getService(RemovePortalArtifactsService.class);
+    removePortalArtifactsService.invalidateArtifactsFromPortal(sessionProvider,
+                                                               portalName,
+                                                               portalConfig.getPortalLayout().getId());
 
     // Remove site content storage for the portal
     try {

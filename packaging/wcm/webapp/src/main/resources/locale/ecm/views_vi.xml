@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ 
+  <View>
+    <label>
+      <languages>
+        <en>Tiếng Anh</en>
+        <fr>Tiếng Pháp</fr>
+        <ru>Tiếng Nga</ru>
+        <vi>Tiếng Việt</vi>
+        <nl>Tiếng Hà Lan</nl>
+        <de>Tiếng Đức</de>
+        <uk>Tiếng Ucraina</uk>
+        <ar>Tiếng A-rập</ar>
+      </languages>
+    </label>
+  </View>
+ 
+  <!--
+  ################resoucebundle FOR EXO:COMMENT VIEW TEMPLATE#############
+  -->
+  <Comment>
+    <view>
+      <label>
+        <postedBy>Bình luận mới nhất được đăng tải bởi</postedBy>
+        <at>lúc</at>
+        <comments>Bình luận</comments>
+        <show-comments>Hiển thị bình luận</show-comments>
+        <hide-comments>Ẩn bình luận</hide-comments>
+        <comment-by>Bình luận bởi</comment-by>
+        <email>Email</email>
+        <site>Trang</site>
+      </label>
+    </view>
+  </Comment>
+ 
+  <!--
+  ################resoucebundle FOR NT:FILE VIEW TEMPLATE##############
+  -->
+  <File>
+    <view>
+      <label>
+        <not-viewable>Nội dung này không thể xem được.</not-viewable>
+        <using-webDAV>hoặc dùng WebDAV để xem nội dung đó.</using-webDAV>
+        <file-size-too-big>Nội dung của tệp tin này quá lớn. Bạn nên tải xuống và mở tại máy khách.</file-size-too-big>
+        <webDAV>Hiển thị kiểu WebDAV</webDAV>
+        <download>Tải xuống</download>
+        <htmlview>Xem dưới dạng HTML</htmlview>
+        <plaintextview>Xem dưới dạng văn bản Thuần túy</plaintextview>
+      </label>
+    </view>
+  </File>
+ 
+  <!--
+  ################resoucebundle FOR MAIL:DOCUMENT VIEW TEMPLATE##############
+  -->
+  <Mail>
+    <view>
+      <label>
+        <from>Từ:</from>
+        <to>Đến:</to>
+        <cc>Cc:</cc>
+        <date>Ngày:</date>
+        <subject>Chủ đề:</subject>
+        <attachment>Đính kèm:</attachment>
+      </label>
+    </view>
+  </Mail>
+  <!--
+  ################resoucebundle FOR EXO:VOTE VIEW TEMPLATE##############
+  -->
+  <Vote>
+    <view>
+      <label>
+        <avg-rating>Xếp loại Trung bình</avg-rating>
+        <subscription>Số lượng bình chọn</subscription>
+      </label>
+    </view>
+  </Vote>
+  <!--
+  ################resoucebundle FOR LISTVIEW VIEW TEMPLATE##############
+  -->
+  <ListView>
+    <view>
+      <label>
+        <name>Tên</name>
+        <versionable>Phiên bản</versionable>
+        <exo_owner>Người sở hữu</exo_owner>
+        <exo_dateCreated>Ngày Tạo</exo_dateCreated>
+        <exo_dateModified>Ngày Sửa đổi</exo_dateModified>
+        <auditing>Kiểm định</auditing>
+      </label>
+    </view>
+  </ListView>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction view template ####
+  -->
+  <AddMetadata>
+    <view>
+      <label>
+        <action-name>Tên Hành động</action-name>
+        <lifecycle>Chu kỳ</lifecycle>
+        <metadata>Siêu dữ liệu</metadata>
+        <description>Mô tả</description>
+      </label>
+    </view>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning view template ####
+  -->
+  <AutoVersioning>
+    <view>
+      <label>
+        <action-name>Tên Hành động</action-name>
+        <lifecycle>Chu kỳ</lifecycle>
+        <description>Mô tả</description>
+      </label>
+    </view>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong view template ####
+  -->
+  <EnableVersioning>
+    <view>
+      <label>
+        <action-name>Tên</action-name>
+        <lifecycle>Chu kỳ</lifecycle>
+        <description>Mô tả</description>
+      </label>
+    </view>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet view template ####
+  -->
+  <ElementSet>
+    <view>
+      <label>
+        <not-avaliable>Không có sẵn</not-avaliable>
+        <title>Tiêu đề</title>
+        <creator>Người tạo</creator>
+        <subject>Chủ đề</subject>
+        <source>Nguồn</source>
+        <contributor>Người cộng tác</contributor>
+        <resource-type>Loại Tài nguyên</resource-type>
+        <date>Ngày</date>
+        <publisher>Nhà xuất bản</publisher>
+        <description>Mô tả</description>
+        <rights>Các Quyền</rights>
+        <relation>Quan hệ</relation>
+        <format>Định dạng</format>
+        <coverage>Phạm vi</coverage>
+        <identifier>Định danh</identifier>
+        <languages>Ngôn ngữ</languages>
+      </label>
+      <action>
+        <add-edit>Thêm/Chỉnh sửa</add-edit>
+        <cancel>Hủy bỏ</cancel>
+      </action>
+      <tooltip>
+        <cancel>Hủy bỏ</cancel>
+        <add-edit>Thêm/Chỉnh sửa Thuộc tính</add-edit>
+      </tooltip>
+    </view>
+  </ElementSet>
+
+  <ScriptAction>
+    <view>
+      <label> 
+        <isDeep>Độ sâu</isDeep>
+        <nodetypes>Kiểu node</nodetypes>
+        <affectedNodeTypeNames>Các kiểu node bị ảnh hưởng</affectedNodeTypeNames>
+        <nodeTypeName>Tên kiểu node</nodeTypeName>
+      </label> 
+    </view>
+  </ScriptAction>
+  
+  <AddMetadata>
+    <view>
+      <label>
+        <isDeep>Tác động sâu</isDeep>
+        <nodetypes>Kiểu Node</nodetypes>
+        <affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
+        <nodeTypeName>Tên kiểu node</nodeTypeName>
+      </label> 
+    </view>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <view>
+      <label>
+        <isDeep>Tác động sâu</isDeep>
+        <nodetypes>Kiểu Node</nodetypes> 
+        <affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
+        <nodeTypeName>Tên Kiểu Node</nodeTypeName>
+      </label> 
+    </view>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <view>
+      <label>
+        <isDeep>Tác động sâu</isDeep>
+        <nodetypes>Kiểu Node</nodetypes>
+        <affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
+        <nodeTypeName>Tên Kiểu Node</nodeTypeName>
+      </label> 
+    </view>
+  </AutoVersioning>
+  
+   <AccessibleMedia>
+    <view>
+      <label>
+      <Play-audio-description-of-this-video>Mô tả âm thanh</Play-audio-description-of-this-video>
+      <Read-more>Đọc thêm</Read-more>
+      <Read-less>Thu gọn</Read-less>
+      <Switch-back-to-original-video>Video Gốc</Switch-back-to-original-video>
+      </label>
+      <tooltip>
+      <A-second-media-file-is-available-as-audio-description>Một tập tin thứ hai được dùng như là một tài liệu mô tả âm thanh</A-second-media-file-is-available-as-audio-description>
+      </tooltip>
+    </view>
+  </AccessibleMedia>
+ 
+</bundle>

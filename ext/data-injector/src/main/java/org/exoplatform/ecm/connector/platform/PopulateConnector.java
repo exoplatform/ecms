@@ -77,33 +77,34 @@ public class PopulateConnector implements ResourceContainer {
 
   /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
   protected static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
-  
+
   protected static final String WORKSPACE_NAME = "collaboration";
-  
+
   /** Source folder */
   private static final String SOURCE_DATA_FOLDER_PATH = "/contents";
   /** Dictionary file */
   private static final String DICTIONARY_FILE = "dictionary.txt";
-  
+
   /** Files to be imported */
   private static final String[] SOURCE_FILES1 = {"content.doc application/msword", "content.pdf application/pdf",
-  																							 "content.ppt application/ppt","content.xls application/xls"
-    																						 };
-  private static final String[] SOURCE_FILES2 = {"image.jpg image/jpeg", "image.jpeg image/jpeg", "image.gif image/gif", "image.png image/png"};
-  
+    "content.ppt application/ppt","content.xls application/xls"
+  };
+  private static final String[] SOURCE_FILES2 = {"image.jpg image/jpeg", "image.jpeg image/jpeg", "image.gif image/gif", 
+  "image.png image/png"};
+
   private static final String IMPORTED_DOCUMENTS_FOLDER = "importedDocuments";
-  
+
   private static final int MAX_NORMAL_DATA_RATE = 300;
-  
+
   private static final int DEFAULT_DOCUMENT_SIZE = 1;//1kb
-  
+
   private RepositoryService repoService_;
   private CmsService cmsService_;
   private WCMPublicationService publicationService_;
   private DataDistributionManager dataDistributionManager_;
   private TaxonomyService taxonomyService_;
   private JodConverterService jodConverter_;
-  
+
   public PopulateConnector(RepositoryService repositoryService, CmsService cmsService, WCMPublicationService publicationService,
                            DataDistributionManager dataDistributionManager, TaxonomyService taxonomyService,
                            JodConverterService jodConverter) {
@@ -114,7 +115,7 @@ public class PopulateConnector implements ResourceContainer {
     taxonomyService_ = taxonomyService;
     jodConverter_ = jodConverter;
   }
-  
+
   /**
    * Initializes the data to use later
    * @param isPublishDoc indicates if the newly created documents are published.
@@ -129,8 +130,8 @@ public class PopulateConnector implements ResourceContainer {
       Session session = sessionProvider.getSession(WORKSPACE_NAME, repoService_.getCurrentRepository());
       //remove importedFolderNode
       if (session.getRootNode().hasNode(IMPORTED_DOCUMENTS_FOLDER)) {
-        WCMCoreUtils.getService(TrashService.class).moveToTrash(
-                          session.getRootNode().getNode(IMPORTED_DOCUMENTS_FOLDER), sessionProvider);
+        WCMCoreUtils.getService(TrashService.class).moveToTrash(session.getRootNode().getNode(IMPORTED_DOCUMENTS_FOLDER),
+                                                                sessionProvider);
         session.save();
       }
       //create importedFolderNode
@@ -177,7 +178,7 @@ public class PopulateConnector implements ResourceContainer {
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
-  
+
   /**
    * 
    * @param parentNode
@@ -189,9 +190,8 @@ public class PopulateConnector implements ResourceContainer {
     String fileExtension = fileName.substring(fileName.indexOf('.') + 1);
     //build the set of word to generate document
     BufferedReader br = null;
-    br = new BufferedReader(
-           new InputStreamReader(
-             this.getClass().getResourceAsStream(SOURCE_DATA_FOLDER_PATH + "/" + DICTIONARY_FILE)));
+    br = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(SOURCE_DATA_FOLDER_PATH + "/" + 
+        DICTIONARY_FILE)));
     String line = null;
     List<String> dictionary = new ArrayList<String>(); 
     while ((line = br.readLine()) != null) {
@@ -216,49 +216,49 @@ public class PopulateConnector implements ResourceContainer {
     content.append('.');
     File tempFile = null;
     if(fileExtension.equalsIgnoreCase("doc")) {
-	    //create a temporary txt file containing generated content at previous step
-	    tempFile = File.createTempFile("content_temp", fileExtension);
-	    InputStream input = new BufferedInputStream(new ByteArrayInputStream(content.toString().getBytes()));
-	    OutputStream out = new BufferedOutputStream((new FileOutputStream(tempFile)));
-	    // create temp file to store original data of nt:file node
-	    File in = File.createTempFile("content_tmp", null);
-	    read(input, new BufferedOutputStream(new FileOutputStream(in)));
-	    try {
-	      boolean success = jodConverter_.convert(in, tempFile, fileExtension);
-	      // If the converting was failure then delete the content temporary file
-	      if (!success) {
-	        tempFile.delete();
-	      }
-	    } catch (OfficeException connection) {
-	      tempFile.delete();
-	      if (LOG.isErrorEnabled()) {
-	        LOG.error("Exception when using Office Service");
-	      }
-	    } finally {
-	      in.delete();
-	      out.flush();
-	      out.close();
-	    }
+      //create a temporary txt file containing generated content at previous step
+      tempFile = File.createTempFile("content_temp", fileExtension);
+      InputStream input = new BufferedInputStream(new ByteArrayInputStream(content.toString().getBytes()));
+      OutputStream out = new BufferedOutputStream((new FileOutputStream(tempFile)));
+      // create temp file to store original data of nt:file node
+      File in = File.createTempFile("content_tmp", null);
+      read(input, new BufferedOutputStream(new FileOutputStream(in)));
+      try {
+        boolean success = jodConverter_.convert(in, tempFile, fileExtension);
+        // If the converting was failure then delete the content temporary file
+        if (!success) {
+          tempFile.delete();
+        }
+      } catch (OfficeException connection) {
+        tempFile.delete();
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Exception when using Office Service");
+        }
+      } finally {
+        in.delete();
+        out.flush();
+        out.close();
+      }
     } else {
-    	try {
-    		DocumentRenderer documentRender = new DocumentRenderer();
-    		boolean success = documentRender.createDocument(content.toString(), fileName, fileExtension);
-    		if(success) tempFile = new File(fileName);
-    	} catch(Exception ex) {
-    		if (LOG.isErrorEnabled()) {
-	        LOG.error("Exception when creating document");
-	      }
-    	}
+      try {
+        DocumentRenderer documentRender = new DocumentRenderer();
+        boolean success = documentRender.createDocument(content.toString(), fileName, fileExtension);
+        if(success) tempFile = new File(fileName); 
+      } catch(Exception ex) {
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Exception when creating document");
+        }
+      }
     }
     //import the newly created file into jcr
     InputStream inputStream = new FileInputStream(tempFile);
     String fileNodeName = cmsService_.storeNode("nt:file", parentNode,
                                                 getInputProperties(fileName, inputStream, mimeType), true);
-    
-    
+
+
     return fileNodeName;
   }
-  
+
   private void read(InputStream is, OutputStream os) throws Exception {
     int bufferLength = 1024;
     int readLength = 0;
@@ -272,7 +272,7 @@ public class PopulateConnector implements ResourceContainer {
     os.flush();
     os.close();
   }
-  
+
   /**
    * Initializes the data to use later
    * @param isPublishDoc indicates if the newly created documents are published.
@@ -283,7 +283,7 @@ public class PopulateConnector implements ResourceContainer {
   public Response initialLoad(@QueryParam("isPublishDoc") boolean isPublishDoc) {
     return initializeLoadData(isPublishDoc, false, 0);
   }
-  
+
   /**
    * Creates mass amount of data
    * @param name the node name
@@ -302,7 +302,7 @@ public class PopulateConnector implements ResourceContainer {
                           @QueryParam("folderPath") String folderPath,
                           @QueryParam("categories") String categories,
                           @QueryParam("size") Integer size) {
-    
+
     SessionProvider sessionProvider = null;
     try {
       //0.initial data
@@ -312,18 +312,18 @@ public class PopulateConnector implements ResourceContainer {
       sessionProvider = WCMCoreUtils.getUserSessionProvider();
       Session sourceSession = sessionProvider.getSession(WORKSPACE_NAME, repoService_.getCurrentRepository());
       Session session = sessionProvider.getSession(workspace, repoService_.getCurrentRepository());
-      
+
       initializeLoadData(true, true, (size == null ? 0 : size));
       //1.get source node
       Node sourceNode = getSourceNode(sourceSession, IMPORTED_DOCUMENTS_FOLDER, docType);
       Node targetFolder = dataDistributionManager_.getDataDistributionType(DataDistributionMode.NONE).getOrCreateDataNode(
-                                                    session.getRootNode(), folderPath);
+                                                                                                                          session.getRootNode(), folderPath);
       //2.store nodes
       if (to - from < MAX_NORMAL_DATA_RATE) {
         //normal mode
         for (int i = from; i <= to; i++) {
           String storedNodePath = new StringBuilder(folderPath).append("/").append(name).
-                                                    append(i).append('.').append(docType).toString();
+              append(i).append('.').append(docType).toString();
           if (!session.itemExists(storedNodePath)) {
             session.getWorkspace().copy(WORKSPACE_NAME, sourceNode.getPath(), storedNodePath);
             Node newNode = ((Node)session.getItem(storedNodePath));
@@ -336,14 +336,14 @@ public class PopulateConnector implements ResourceContainer {
       } else {
         //optimize storage mode
         DataDistributionType dataDistributionType = 
-          dataDistributionManager_.getDataDistributionType(DataDistributionMode.OPTIMIZED);
+            dataDistributionManager_.getDataDistributionType(DataDistributionMode.OPTIMIZED);
         Node parentFolder = null;
         for (int i = from; i <= to; i++) {
           if ((i == from) || (i % 100 == 0)) {
             parentFolder = dataDistributionType.getOrCreateDataNode(targetFolder, name + i);
           }
           String storedNodePath = new StringBuilder(parentFolder.getPath()).append("/").append(name).
-                                                  append(i).append('.').append(docType).toString();
+              append(i).append('.').append(docType).toString();
           if (!session.itemExists(storedNodePath)) {
             session.getWorkspace().copy(WORKSPACE_NAME, sourceNode.getPath(), storedNodePath);
             Node newNode = ((Node)session.getItem(storedNodePath));
@@ -366,11 +366,11 @@ public class PopulateConnector implements ResourceContainer {
       }
       return Response.serverError().build();
     } 
-    
+
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
-  
+
   /**
    * returns the document node in the folderPath corresponding to the given docType 
    * @param session session in which node will be retrieved
@@ -393,7 +393,7 @@ public class PopulateConnector implements ResourceContainer {
     }
     return null;
   }
-  
+
   /**
    * adds taxonomies to the given node
    * @param node the node to add taxonomy
@@ -428,7 +428,7 @@ public class PopulateConnector implements ResourceContainer {
       }
     }
   }
-  
+
   /**
    * gets the input properties map by given parameters
    * @param name the node name
@@ -445,7 +445,7 @@ public class PopulateConnector implements ResourceContainer {
     nodeInput.setMixintype("mix:i18n,mix:votable,mix:commentable");
     nodeInput.setType(JcrInputProperty.NODE);
     inputProperties.put("/node", nodeInput);
-    
+
     JcrInputProperty jcrContent = new JcrInputProperty();
     jcrContent.setJcrPath("/node/jcr:content");
     jcrContent.setValue("");
@@ -453,27 +453,27 @@ public class PopulateConnector implements ResourceContainer {
     jcrContent.setNodetype("nt:resource");
     jcrContent.setType(JcrInputProperty.NODE);
     inputProperties.put("/node/jcr:content", jcrContent);
-    
+
     JcrInputProperty jcrData = new JcrInputProperty();
     jcrData.setJcrPath("/node/jcr:content/jcr:data");
     jcrData.setValue(inputStream);
     inputProperties.put("/node/jcr:content/jcr:data", jcrData);
-    
+
     JcrInputProperty jcrMimeType = new JcrInputProperty();
     jcrMimeType.setJcrPath("/node/jcr:content/jcr:mimeType");
     jcrMimeType.setValue(mimeType);
-    
+
     inputProperties.put("/node/jcr:content/jcr:mimeType", jcrMimeType);
     JcrInputProperty jcrLastModified = new JcrInputProperty();
     jcrLastModified.setJcrPath("/node/jcr:content/jcr:lastModified");
     jcrLastModified.setValue(new GregorianCalendar());
     inputProperties.put("/node/jcr:content/jcr:lastModified", jcrLastModified);
-    
+
     JcrInputProperty jcrEncoding = new JcrInputProperty();
     jcrEncoding.setJcrPath("/node/jcr:content/jcr:encoding");
     jcrEncoding.setValue("UTF-8");
     inputProperties.put("/node/jcr:content/jcr:encoding", jcrEncoding);
-    
+
     return inputProperties;
   }
 

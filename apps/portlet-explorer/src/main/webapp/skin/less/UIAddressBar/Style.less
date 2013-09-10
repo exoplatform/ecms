@@ -78,13 +78,13 @@
 	}
 	
 	.uiSelectContent {
-		border: solid 1px #c1c1c1;
+		border: solid 1px @borderColor;
 		border-top: none;
 		position: absolute;
 		height: 150px;
 		width: 100%;
 		overflow: auto;
-		background: white;
+		background: @white;
 		left: -1px;
 		display: none;
 		
@@ -99,8 +99,8 @@
 			line-height: 18px;
 			margin: 2px;
 			cursor: pointer;
-			color: white;
-			background-color: #316ac5;
+			color: @white;
+			background-color: @blueLight;
 			padding: 0px 5px;
 		}
 	}
@@ -150,8 +150,8 @@
 
 	.listExtendedView {
 		position: absolute;
-		background: #f7f7f7;
-		border: 1px solid #b7b7b7;
+		background: @grayLighter;
+		border: 1px solid @borderColor;
 		padding: 5px;
 	}
 
@@ -163,6 +163,6 @@
 	.HomeLabel {
 		float: left;
 		margin: 0px 0px 0px 4px;
-		color: #515151;
+		color: @textColor;
 	}
 }

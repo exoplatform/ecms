@@ -49,7 +49,7 @@ import org.exoplatform.services.log.Log;
  */
 public class UserViewUpgradePlugin extends UpgradeProductPlugin {
   
-  private Log log = ExoLogger.getLogger(this.getClass());
+  private static final Log log = ExoLogger.getLogger(UserViewUpgradePlugin.class.getName());
   private ManageViewService manageViewService_;
 
   public UserViewUpgradePlugin(ManageViewService manageViewService, InitParams initParams) {

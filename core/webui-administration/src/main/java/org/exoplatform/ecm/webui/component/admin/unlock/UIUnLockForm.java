@@ -26,8 +26,8 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
@@ -56,7 +56,7 @@ public class UIUnLockForm extends UIForm implements UISelectable {
   public UIUnLockForm() throws Exception {
     UIFormInputSetWithAction uiInputAct = new UIFormInputSetWithAction("PermissionButton");
     uiInputAct.addUIFormInput( new UIFormStringInput(GROUPS_OR_USERS, GROUPS_OR_USERS, null).
-                               setEditable(false).addValidator(MandatoryValidator.class));
+                               setReadOnly(true).addValidator(MandatoryValidator.class));
     uiInputAct.setActionInfo(GROUPS_OR_USERS, new String[] {"AddPermission"});
     addUIComponentInput(uiInputAct);
   }
@@ -95,7 +95,7 @@ public class UIUnLockForm extends UIForm implements UISelectable {
       if((groupsOrUsers == null)||(groupsOrUsers.trim().length() == 0)) {
         uiApp.addMessage(new ApplicationMessage("UIUnLockForm.msg.permission-require", null,
                                                 ApplicationMessage.WARNING));
-        
+
         return;
       }
       UIUnLockManager uiManager = uiUnLockForm.getAncestorOfType(UIUnLockManager.class);

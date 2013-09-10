@@ -22,6 +22,8 @@ import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
 import org.exoplatform.services.cms.templates.impl.TemplatePlugin;
@@ -102,9 +104,9 @@ public interface TemplateService {
    *                        The current user
    * @see                   Node
    * @see                   Session
-   * @throws Exception
+   * @throws RepositoryException
    */
-  public String getTemplatePathByUser(boolean isDialog, String nodeTypeName, String userName) throws Exception ;
+  public String getTemplatePathByUser(boolean isDialog, String nodeTypeName, String userName) throws RepositoryException;
 
   /**
    * Return path template of the specified node.
@@ -211,17 +213,17 @@ public interface TemplateService {
    * @see                   SessionProvider
    * @see                   Session
    * @see                   Node
-   * @throws Exception
+   * @throws RepositoryException
    */
-  public boolean isManagedNodeType(String nodeTypeName) throws Exception ;
+  public boolean isManagedNodeType(String nodeTypeName) throws RepositoryException ;
 
   /**
    * Get all templates is document type of the specified repository.
    * @see                   Session
    * @see                   Node
-   * @throws Exception
+   * @throws RepositoryException
    */
-  public List<String> getDocumentTemplates() throws Exception ;
+  public List<String> getDocumentTemplates() throws RepositoryException ;
 
   /**
    * Return all teamplate of the specified NodeType.
@@ -313,7 +315,7 @@ public interface TemplateService {
    * @return  List<String>
    * @throws Exception
    */
-  public List<String> getAllDocumentNodeTypes() throws Exception;
+  public List<String> getAllDocumentNodeTypes() throws PathNotFoundException, RepositoryException;
 
   /**
    * Get path of css file which included in view template.
@@ -359,7 +361,7 @@ public interface TemplateService {
    */
   @Deprecated
   public String createTemplate(Node templateFolder, String name, InputStream data, String[] roles);
-  
+
   /**
    * Insert a template into JCR database as an nt:file node. This method should be used for all the template types.
    * @param templateFolder The parent node which contains the template node
@@ -368,7 +370,7 @@ public interface TemplateService {
    * @param data The template's data
    * @param roles The template's roles
    */
-  public String createTemplate(Node templateFolder, String title, String templateName, InputStream data, String[] roles);  
+  public String createTemplate(Node templateFolder, String title, String templateName, InputStream data, String[] roles);
 
   /**
    * Update a template inside JCR database. This method should be used for all the template types.
@@ -389,13 +391,13 @@ public interface TemplateService {
    * @param template The template node
    */
   public String getTemplateRoles(Node template);
-  
+
   /**
    * gets all node types configured
    * @return
    */
   public Set<String> getAllConfiguredNodeTypes();
-  
+
   /**
    * Gets all node types configured whose templates were edited.
    * @return list of String

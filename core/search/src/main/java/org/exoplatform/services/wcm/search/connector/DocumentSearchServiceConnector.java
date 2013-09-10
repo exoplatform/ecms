@@ -104,7 +104,8 @@ public class DocumentSearchServiceConnector extends BaseContentSearchServiceConn
       if(StringUtils.isNotBlank(siteKey.getName())) {
         String pageName = getPageName(siteKey);
         if(StringUtils.isNotBlank(pageName)) {
-          siteKey = SiteKey.portal(context.getSiteName() != null ? context.getSiteName():BaseSearchServiceConnector.DEFAULT_SITENAME);
+          siteKey = SiteKey.portal(context.getSiteName() != null ? context.getSiteName():
+                                                                   BaseSearchServiceConnector.DEFAULT_SITENAME);
           pageName = getPageName(siteKey);
         }
         url = "/" + handler + context.handler(handler).

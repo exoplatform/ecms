@@ -22,7 +22,7 @@ import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.groovyscript.text.TemplateService;
 import org.exoplatform.services.cms.metadata.MetadataService;
-import org.exoplatform.wcm.webui.Utils;
+import org.exoplatform.services.deployment.Utils;
 import org.exoplatform.wcm.webui.form.UIFormInputSetWithNoLabel;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;

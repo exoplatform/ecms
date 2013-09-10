@@ -23,18 +23,16 @@
 
   <UIFCCConfig>
     <label>
-      <select-repository>Sélectionnez le Référentiel</select-repository>
       <UIFCCSaveLocationField>Destination</UIFCCSaveLocationField>
-      <UIFCCRepositoryFormSelectBox>Sélectionner référentiel</UIFCCRepositoryFormSelectBox>
       <UIFCCWorkspaceFormSelectBox>Sélectionner espace de stockage</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>Options</UIFCCTemplateField>
       <UIFCCLocationFormInputAction>Dossier de Stockage</UIFCCLocationFormInputAction>
       <UIFCCLocationFormStringInput/>
-      <UIFCCTemplateFormSelectBox>Sélectionner un modèle</UIFCCTemplateFormSelectBox>
+      <UIFCCTemplateFormSelectBox>Entrez les valeurs pour les métadonnées</UIFCCTemplateFormSelectBox>
       <UIFCCSaveFormStringInput>Personnaliser le bouton Enregistrer</UIFCCSaveFormStringInput>
       <UIFCCMessageFormTextareaInput>Message de remerciement</UIFCCMessageFormTextareaInput>
       <UIFCCRedirectFormCheckboxInput>Redirection:</UIFCCRedirectFormCheckboxInput>
-      <UIFCCRedirectPathFormStringInput>URL de redirection</UIFCCRedirectPathFormStringInput>
+      <UIFCCRedirectPathFormStringInput>URL de redirection:</UIFCCRedirectPathFormStringInput>
       <UIFCCActionField>Actions</UIFCCActionField>
       <UIFCCActionList/>
     </label>
@@ -88,9 +86,9 @@
 
   <UIWorkspaceList>
     <label>
-      <workspaceName>Espace de stockage:</workspaceName>
-      <rootNodePath>Chemin d'accès racine:</rootNodePath>
-      <rootNodeInfo/>
+      <workspaceName>Espace de stockage :</workspaceName>
+      <rootNodePath>Racine de l'arborescence:</rootNodePath>
+      <rootNodeInfo>Nœud racine</rootNodeInfo>
     </label>
   </UIWorkspaceList>
 

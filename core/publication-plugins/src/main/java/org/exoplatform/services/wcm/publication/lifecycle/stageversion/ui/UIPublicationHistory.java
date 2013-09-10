@@ -98,7 +98,6 @@ public class UIPublicationHistory extends UIComponentDecorator {
    *
    * @throws Exception the exception
    */
-  @SuppressWarnings("unchecked")
   public void updateGrid() throws Exception {
     ListAccess<VersionLog> verLogList = new ListAccessImpl<VersionLog>(VersionLog.class, getLog());
     LazyPageList<VersionLog> dataPageList = new LazyPageList<VersionLog>(verLogList, 10);
@@ -119,7 +118,6 @@ public class UIPublicationHistory extends UIComponentDecorator {
    *
    * @throws Exception the exception
    */
-  @SuppressWarnings("unchecked")
   public List getLogList() throws Exception { return uiPageIterator_.getCurrentPageData() ; }
 
   /**

@@ -1,0 +1,2550 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIECMAdminControlPanel #
+  ################################################################################
+  -->
+  <UIECMAdminControlPanel>
+    <tab>
+      <label>
+        <Templates>Plantillas</Templates>
+        <Explorer>Explorador</Explorer>
+        <Repository>Repositorio</Repository>
+        <Advanced>Avanzado</Advanced>
+      </label>
+    </tab>    
+    <label>     
+      <UITaxonomyManagerTrees>Categorías</UITaxonomyManagerTrees>
+      <UIMetadataManager>Metadatos</UIMetadataManager>
+      <UINamespaceManager>Espacios de nombres</UINamespaceManager>
+      <UINodeTypeManager>Tipos de nodo</UINodeTypeManager>
+      <UITemplatesManager>Documentos</UITemplatesManager>
+   <UICLVTemplatesManager>Lista</UICLVTemplatesManager>
+      <UIViewManager>Vistas</UIViewManager>
+      <UIDriveManager>Unidades de disco</UIDriveManager>
+      <UIQueriesManager>Consultas</UIQueriesManager>
+      <UIActionManager>Acciones</UIActionManager>
+      <UIScriptManager>Secuencias de comandos</UIScriptManager>
+      <UIUnLockManager>Cerraduras</UIUnLockManager>
+      <UIFolksonomyManager>Etiquetas</UIFolksonomyManager>      
+    </label>
+    <msg>
+      <access-denied>Acceso denegado. No tiene permiso para realizar esta acción.</access-denied>
+    </msg>
+  </UIECMAdminControlPanel>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UITaxonomy #
+  ################################################################################
+  -->
+  <UITaxonomyWorkingArea>
+    <msg>
+      <referential-integrity>No se puede leer desde el archivo de origen o la categoría de destino es una subcategoría.</referential-integrity>
+      <no-taxonomy-selected>Debe copiar o cortar al menos una categoría.</no-taxonomy-selected>
+      <node-is-cutting>No se puede pegar aquí. Podría ser que se está cortando el nodo de la categoría '{0}'.</node-is-cutting>
+      <can-not-paste>No hay datos en el portapapeles para pegar.</can-not-paste>
+      <reference-exception>Cannot delete this category  because it is currently referenced by a content.</reference-exception>
+      <path-error>Error al eliminar este nodo de categoría.</path-error>
+    </msg>
+  </UITaxonomyWorkingArea>
+  <UITaxonomyManager>
+    <msg>
+      <confirm-delete>¿Está seguro que desea eliminar esta categoría?</confirm-delete>
+    </msg>
+    <title>
+      <add>Añadir</add>
+      <paste>Pegar</paste>
+      <cut>Cortar</cut>
+      <copy>Copiar</copy>
+      <remove>Eliminar</remove>
+    </title>
+  </UITaxonomyManager>
+  
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeContainer#
+  ################################################################################
+  -->
+  <UITaxonomyTreeContainer>
+    <tab>
+      <info>
+        <UITaxonomyTreeMainForm>Especifique el nombre de la categoría, el espacio de trabajo y la ruta de inicio.</UITaxonomyTreeMainForm>
+        <UIPermissionTreeManager>Establecer permisos para el árbol de la categoría.</UIPermissionTreeManager>
+        <UIActionTaxonomyManager>Agregar una acción al árbol de categorías para completar la creación o actualización.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Editar el árbol de la taxonomía, añadiendo, copiando, cortando y seleccionando los permisos.</UITaxonomyTreeCreateChild>
+      </info>
+    </tab>
+    <msg>
+      <not-exist-tree>El árbol de la categoría no existe.</not-exist-tree>
+    </msg>
+  </UITaxonomyTreeContainer>
+  
+  <!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeMainForm          #
+##########################################################################################
+-->
+  <UITaxonomyTreeMainForm>
+    <action>
+      <Reset>Resetear</Reset>
+    </action>
+    <msg>
+      <name-not-allowed>Nombre prohibido</name-not-allowed>
+      <name-emty>Se requiere el nombre de árbol.</name-emty>
+      <homePath-emty>La ruta de inicio es necesaria.</homePath-emty>
+      <targetPath-emty>La ruta de destino es necesaria.</targetPath-emty>
+      <taxonomytree-existed>El nombre de árbol de categoría ya existe.</taxonomytree-existed>
+    </msg>
+  </UITaxonomyTreeMainForm>
+
+  <TaxonomyTreeMainForm>
+    <label>
+      <TaxoTreeName>Nombre</TaxoTreeName>
+      <TaxoTreeWorkspace>Espacio de Trabajo</TaxoTreeWorkspace>
+      <TaxoTreeHomePath>Ruta de Inicio</TaxoTreeHomePath>
+    </label>
+  </TaxonomyTreeMainForm>
+
+  <TaxonomyTreeHomePath>
+    <title>
+      <AddPath>Agregar Ruta</AddPath>
+    </title>
+  </TaxonomyTreeHomePath>
+  
+  <!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeInfo  #
+##########################################################################################
+-->
+<UIPermissionTreeInfo>
+<action>
+<title>
+<Delete>Eliminar</Delete>
+<Edit>Editar</Edit>
+</title>
+</action>
+<header>
+<usersOrGroups>Usuario o Grupo</usersOrGroups>
+<read>Leer</read>
+<addNode>Agregar nodo</addNode>
+<setProperty>Establecer propiedades</setProperty>
+<remove>Eliminar</remove>
+<action>Acción</action>
+</header>
+</UIPermissionTreeInfo>
+
+<!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
+##########################################################################################
+-->
+  <UIPermissionTreeForm>
+    <msg>
+      <have-not-any-permission>Por favor especificar al menos un permiso para este nodo.</have-not-any-permission>
+    </msg>
+  </UIPermissionTreeForm>
+
+<!--
+################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
+################################################################################
+-->
+
+  <UIActionForm>
+    <title>Agregar una acción al árbol de categorías</title>
+    <action>
+      <Save>Guardar</Save>
+    </action>
+    <msg>
+      <name-not-allowed>Nombre vacío o caracteres especiales no están permitidos en el nombre de la acción.</name-not-allowed>
+      <path-invalid>Esta ruta no es válida.</path-invalid>
+      <taxonomy-existed>El árbol de la categoría ya existe.</taxonomy-existed>
+      <taxonomy-node-existed>La categoría para este nodo ya existe.</taxonomy-node-existed>
+      <no-permission-add>No tiene el derecho de agregar.</no-permission-add>
+      <not-created-tree>El árbol de la categoría no ha sido creado todavía.</not-created-tree>
+    </msg>
+  </UIActionForm>
+
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UITemplatesManager #
+  ################################################################################
+  -->
+  <UITemplatesList>
+    <header>
+      <name>Nombre de la Plantilla</name>
+      <action>Acciones</action>
+    </header>
+  </UITemplatesList>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UINamespaceForm  #
+  ################################################################################
+  -->
+  <NameSpacePopup>
+    <title>
+      <UINamespaceForm>Formulario del Nombre del Espacio</UINamespaceForm>
+    </title>
+  </NameSpacePopup>
+  <UINamespaceForm>
+    <title>Inscribir un nuevo nombre de espacio</title>
+    <label>
+      <namespace>Prefijo del Nombre del Espacio</namespace>
+      <uri>URI</uri>
+    </label>
+    <action>
+      <Save>#{palabra.guardar}</Save>
+      <Cancel>#{palabra.cancelar}</Cancel>
+    </action>
+    <msg>
+      <register-unsuccessfull>El nombre del espacio o URI ya existe.</register-unsuccessfull>
+      <prefix-null>Favor de especificar el prefijo del espacio de los nombres.</prefix-null>
+      <uri-null>Por favor, especifique el URL del nombre del espacio.</uri-null>
+    </msg>
+  </UINamespaceForm>
+  <!--
+  ################################################################################
+  #      org.exoplatform.ecm.webui.component.admin.namespace.UINamespaceList #
+  ################################################################################
+  -->
+  <UINamespaceList>
+    <header>
+      <prefix>Prefijo</prefix>
+      <uri>Nombre del espacio URI</uri>
+      <action>Acción</action>
+    </header>
+    <action>
+      <AddNamespace>Registrarse</AddNamespace>
+    </action>
+  </UINamespaceList>
+  <NamespacePopup>
+    <title>
+      <UINamespaceForm>Inscribir un nuevo nombre de espacio</UINamespaceForm>
+    </title>
+  </NamespacePopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIMetadataList #
+  ################################################################################
+  -->
+  <UIMetadataList>
+    <label>
+      <false>falso</false>
+      <true>cierto</true>
+      <True>cierto</True>
+      <False>falso</False>
+    </label>
+    <title>
+      <view>Ver</view>
+      <edit>Editar</edit>
+      <delete>Eliminar</delete>
+    </title>
+    <header>
+      <icon>Icono</icon>
+      <name>Metadatos</name>
+      <type>Tipo</type>
+      <internalUse>Uso interno</internalUse>
+      <action>Acciones</action>
+    </header>
+    <msg>
+      <confirm-delete>¿Está seguro que desea eliminar estos metadatos?</confirm-delete>
+      <delete-successful>Las plantillas de '{0}' se han eliminado correctamente.</delete-successful>
+      <path-not-found-exception>Estos metadatos han sido eliminados o cambiados. Por favor, haga clic en el botón Actualizar.</path-not-found-exception>
+    </msg>
+    <action>
+      <Add>Agregar metadatos</Add>
+      <Cancel>#{palabra.cancelar}</Cancel>
+    </action>
+  </UIMetadataList>
+  <MetadataPopupAddNew>
+    <title>
+      <UIMetadataForm>Añadir la Nueva Plantilla de Metadata</UIMetadataForm>
+    </title>
+  </MetadataPopupAddNew>
+  <MetadataPopupEdit>
+    <title>
+      <UIMetadataForm>Editar la Plantilla de Metadata</UIMetadataForm>
+    </title>
+  </MetadataPopupEdit>
+  <MetataPermissionPopup>
+    <title>
+      <MetadataPermission>Establecer permisos</MetadataPermission>
+      <QueriesPermissionBrowse>Añadir permisos</QueriesPermissionBrowse>
+    </title>
+  </MetataPermissionPopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataForm #
+  ################################################################################
+  -->
+  <UIMetadataForm>
+    <title>Trazar Metadatos</title>
+    <action>
+      <Cancel>#{palabra.cancelar}</Cancel>
+      <Save>Aplicar</Save>
+    </action>
+    <header>
+      <icon>Icono</icon>
+      <label>Nombre de nodo</label>
+      <input>Acción</input>
+    </header>
+    <label>
+      <dialogTemplate>Plantilla de diálogo:</dialogTemplate>
+      <viewTemplate>Ver Plantilla:</viewTemplate>
+      <metadataName>Nombre de metadatos:</metadataName>
+      <viewPermission>Permiso:</viewPermission>
+      <permission>UIMetadataForm</permission>
+      <metadataLabel>Etiqueta:</metadataLabel>
+    </label>
+    <tab>
+      <label>
+        <metadataTypeTab>Tipo de metadatos</metadataTypeTab>
+        <dialogTab>Plantilla de diálogo</dialogTab>
+        <viewTab>Ver Plantilla</viewTab>
+      </label>
+    </tab>
+  </UIMetadataForm>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataView #
+  ################################################################################
+  -->
+  <UIMetadataView>
+    <header>
+      <name>Nombre del Elemento</name>
+      <type>Tipo</type>
+      <description>Descripción</description>
+      <isMixin>Es el tipo Mixin</isMixin>
+      <orderable>Subnodos ordenables</orderable>
+    </header>
+    <info>
+      <description>Descripción</description>
+    </info>
+    <tab>
+      <element>Elementos</element>
+      <metadataView>Información de metadatos</metadataView>
+    </tab>
+    <action>
+      <Cancel>Cerrar</Cancel>
+      <Back>#{palabra.atrás}</Back>
+    </action>
+  </UIMetadataView>
+  <ViewMetadataPopup>
+    <title>
+      <UIMetadataView>Información de metadatos</UIMetadataView>
+    </title>
+  </ViewMetadataPopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIDriveManager #
+  ################################################################################
+  -->
+  <UIDriveList>
+    <header>
+      <icon>Icono</icon>
+      <name>Nombre</name>
+      <workspace>Espacio de Trabajo</workspace>
+      <homePath>Ruta de Inicio</homePath>
+      <permissions>Permisos</permissions>
+      <views>Ver</views>
+      <action>Acción</action>
+    </header>
+    <tooltip>
+      <Delete>Eliminar</Delete>
+      <EditInfo>Editar</EditInfo>
+    </tooltip>
+    <msg>
+      <confirm-delete>¿Está seguro que desea eliminar esta unidad?</confirm-delete>
+    </msg>
+    <action>
+      <AddDrive>Añadir Unidad</AddDrive>
+    </action>
+    <label>
+      <permission>{0} en {1}</permission>
+    </label>
+  </UIDriveList>
+  <UIDriveForm>
+    <action>
+      <Cancel>#{palabra.cancelar}</Cancel>
+      <Save>#{palabra.guardar}</Save>
+      <Back>#{palabra.atrás}</Back>
+      <Refresh>#{palabra.actualizar}</Refresh>
+    </action>
+    <msg>
+      <drive-exists>La unidad ya existe.</drive-exists>
+      <workspace-path-invalid>La ruta del espacio de trabajo no es válida.</workspace-path-invalid>
+      <drive-views-invalid>Por favor, seleccione una vista.</drive-views-invalid>
+      <icon-not-found>No se encontró el icono.</icon-not-found>
+      <permission-null>Debe establecer el permiso para esta unidad.</permission-null>
+      <allowCreateFolders>Debe seleccionar el tipo de carpeta.</allowCreateFolders>
+      <name-null>Por favor Introduce el nombre de la unidad.</name-null>
+      <fileName-invalid>El nombre de la unidad tiene algunos caracteres no válidos.</fileName-invalid>
+    </msg>
+    <tab>
+      <label>
+        <DriveInputSet>Lector</DriveInputSet>
+        <ViewsInputSet>Aplicar Vistas</ViewsInputSet>
+        <PermissionInputSet>Establecer permisos</PermissionInputSet>
+      </label>
+    </tab>
+    <label>
+      <name>Nombre:</name>
+      <workspace>Espacio de Trabajo</workspace>
+      <homePath>Ruta de Inicio:</homePath>
+      <icon>Icono de Espacio de Trabajo:</icon>
+      <viewPreferences>Mostrar documentos referenciados</viewPreferences>
+      <viewNonDocument>Mostrar nodos no documentados</viewNonDocument>
+      <viewSideBar>Mostrar barra lateral</viewSideBar>
+      <permissions>Permisos:</permissions>
+      <showHiddenNode>Mostrar los nodos ocultos</showHiddenNode>
+      <allowCreateFolders>Allow Folder Creation:</allowCreateFolders>
+      <Admin>Administrador:</Admin>
+      <Categories>Categorías:</Categories>
+      <Icons>Icons:</Icons>
+      <List>Lista:</List>
+      <Web>Web:</Web>
+    </label>
+  </UIDriveForm>
+  <AddDriveManagerPopup>
+    <title>
+      <UIDriveForm>Añadir Unidad</UIDriveForm>
+    </title>
+  </AddDriveManagerPopup>
+  <EditDriveManagerPopup>
+    <title>
+      <UIDriveForm>Editar unidad</UIDriveForm>
+    </title>
+  </EditDriveManagerPopup>
+  <UITreeList>
+    <info>
+      <child-not-found>Este subnodo no fue encontrado.</child-not-found>
+    </info>
+    <header>
+      <name>Nombre</name>
+      <action>Acción</action>
+    </header>
+  </UITreeList>
+  
+  <UIRepositoryList>
+    <titlebar>
+      <label>Administrar las funciones principales de ECM</label>
+    </titlebar>
+  </UIRepositoryList>
+  
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
+  ################################################################################
+  -->
+  <UINodeTypeManager>
+    <header>
+      <icon>Icono</icon>
+      <label>Nombre del Nodo</label>
+      <input>Acción</input>
+    </header>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+  </UINodeTypeManager>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeList #
+  ################################################################################
+  -->
+  <UINodeTypeList>
+    <label>
+      <true>Cierto</true>
+      <false>Falso</false>
+    </label>
+    <header>
+      <icon>Icono</icon>
+      <nodeType>Tipo de Nodo</nodeType>
+      <mixinType>Tipo de mixin</mixinType>
+      <orderable>Subnodos ordenables</orderable>
+      <action>Acción</action>
+    </header>
+    <action>
+      <Export>Exportar</Export>
+      <Import>Importar</Import>
+      <Add>Añadir</Add>
+    </action>
+    <tooltip>
+      <View>Ver</View>
+      <Edit>Editar</Edit>
+      <Delete>Eliminar</Delete>
+    </tooltip>
+    <msg>
+      <confirm-delete>¿Está seguro que desea eliminar este tipo de nodo?</confirm-delete>
+    </msg>
+  </UINodeTypeList>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeOptionList #
+  ################################################################################
+  -->
+  <UINodeTypeOptionList>
+    <action>
+      <Save>#{word.save}</Save>
+      <Add>Añadir</Add>
+    </action>
+    <header>
+      <icon>Icono</icon>
+      <label>Nombre del Nodo</label>
+      <input>Acción</input>
+    </header>
+  </UINodeTypeOptionList>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeForm #
+  ################################################################################
+  -->
+  <UINodeTypeForm>
+    <tab>
+      <label>
+        <nodeTypeDefinition>Tipo de Nodo</nodeTypeDefinition>
+        <propertyDefinition>Propiedad</propertyDefinition>
+        <childNodeDefinition>Subnodo</childNodeDefinition>
+        <superTypeTab>Super tipos</superTypeTab>
+        <DefaultTypeTab>Por defecto primario</DefaultTypeTab>
+        <RequiredTypeTab>Requerido Primaria</RequiredTypeTab>
+        <Contraints>Limitaciones</Contraints>
+      </label>
+    </tab>
+    <label>
+      <propertiesDefinitions>Definiciones de propiedad</propertiesDefinitions>
+      <childDefinitions>Definiciones de subnodos</childDefinitions>
+      <namespace>Espacio de nombres</namespace>
+      <propertyNamespace>Espacio de nombres</propertyNamespace>
+      <nodeTypeName>Nombre del Tipo de Nodo</nodeTypeName>
+      <mixinType>Es el tipo Mixin</mixinType>
+      <hasOrderableChildNodes>Subnodos ordenables</hasOrderableChildNodes>
+      <primaryItemName>Nombre del item primario</primaryItemName>
+      <superTypes>Super tipos</superTypes>
+      <propertyname>Nombre de la Definición</propertyname>
+      <requiredType>Tipo requerido</requiredType>
+      <multiple>Es múltiple</multiple>
+      <mandatory>Es obligatorio</mandatory>
+      <autoCreated>Es creada automáticamente</autoCreated>
+      <parentversion>En la versión principal</parentversion>
+      <protected>Está protegido</protected>
+      <constraints>Valores</constraints>
+      <UIFormTableInputSet>UIFormTableInputSet</UIFormTableInputSet>
+      <sameNameSiblings>Es el mismo nombre del hermano</sameNameSiblings>
+      <childNamespace>Espacio de nombres</childNamespace>
+      <childMandatory>Es obligatorio</childMandatory>
+      <childAutocreated>Es creada automáticamente</childAutocreated>
+      <childParentversion>En la versión principal</childParentversion>
+      <childProtected>Está protegido</childProtected>
+      <childNodename>Nombre de la Definición</childNodename>
+      <requiredPrimaryType>Tipo primario requerido</requiredPrimaryType>
+      <defaultPrimaryType>Tipo predeterminado de primaria</defaultPrimaryType>
+      <valueconstraints>Limitaciones de Valor</valueconstraints>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <SaveDraft>Guardar como Borrador</SaveDraft>
+      <AddProperty>Añadir propiedad</AddProperty>
+      <AddChild>Agregar subnodo</AddChild>
+      <AddConstraints>Añadir restricciones</AddConstraints>
+      <Back>#{word.back}</Back>
+      <AddType>Agregar tipo</AddType>
+      <AddValue>Añadir</AddValue>
+      <CancelConstraints>#{word.cancel}</CancelConstraints>
+      <CancelTab>#{word.cancel}</CancelTab>
+      <UpdateChild>#{palabra.actualizar}</UpdateChild>
+      <CancelChild>#{word.cancel}</CancelChild>
+      <UpdateProperty>#{palabra.actualizar}</UpdateProperty>
+      <CancelProperty>#{word.cancel}</CancelProperty>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <register-successfully>El tipo de nodo '{0}' se registró correctamente.</register-successfully>
+      <supertype-is-madatory>El super tipo es obligatorio cuando se registre un nuevo tipo de nodo. Por favor, seleccione al menos un super tipo.</supertype-is-madatory>
+      <register-failed>El registro del tipo de nodo no tuvo éxito. Ya existe o no es válido el supertipo.</register-failed>
+      <nodeType-name>Se requiere el nombre del tipo de nodo.</nodeType-name>
+      <fileName-invalid>El nombre de la carpeta contiene algunos caracteres no válidos.</fileName-invalid>
+      <node-type-exists>El tipo de nodo '{0}' ya existe.</node-type-exists>
+      <node-type-name>El nombre del tipo de nodo no es válido.</node-type-name>
+      <values-error>Por favor seleccione un único tipo del nodo para el tipo principal predeterminado.</values-error>
+      <confirm-delete-child>¿Está seguro que desea eliminar este nodo secundario?</confirm-delete-child>
+      <confirm-delete-property>¿Está seguro que desea eliminar esta propiedad?</confirm-delete-property>
+    </msg>
+  </UINodeTypeForm>
+  <UIPropertyDefinitionForm>
+    <tab>
+      <label>
+        <constraints>Limitaciones</constraints>
+        <UIFormMultiValueInputSet>Limitaciones</UIFormMultiValueInputSet>
+      </label>
+    </tab>
+    <msg>
+      <property-name>El nombre de la definición de la propiedad no es válido.</property-name>
+      <not-supported-value-constraints>Este tipo requerido no apoya restricciones de valor.</not-supported-value-constraints>
+    </msg>
+  </UIPropertyDefinitionForm>
+  <UIChildNodeDefinitionForm>
+    <msg>
+      <child-name>Se requiere el nombre del subnodo.</child-name>
+      <child-invalid>El nombre del subnodo contiene algunos caracteres no válidos.</child-invalid>
+      <default-node-type-not-found>No se encontró el tipo de nodo predeterminado.</default-node-type-not-found>
+      <requiredPrimaryType>Se requiere el tipo primario requerido.</requiredPrimaryType>
+      <defaultPrimaryType>El tipo principal predeterminado es necesario.</defaultPrimaryType>
+    </msg>
+  </UIChildNodeDefinitionForm>
+  <defaultPrimaryTypePopup>
+    <title>
+      <FormdefaultPrimaryTypePopup>Seleccione el tipo primario de forma predeterminada</FormdefaultPrimaryTypePopup>
+    </title>
+  </defaultPrimaryTypePopup>
+  <requiredPrimaryTypePopup>
+    <title>
+      <FormrequiredPrimaryTypePopup>Seleccione tipo primario requerido</FormrequiredPrimaryTypePopup>
+    </title>
+  </requiredPrimaryTypePopup>
+  <superTypesPopup>
+    <title>
+      <FormsuperTypesPopup>Seleccione los Super tipos</FormsuperTypesPopup>
+    </title>
+  </superTypesPopup>
+  <NodeTypePopup>
+    <title>
+      <UINodeTypeForm>Añadir/Editar Definiciones de Tipos de Nodo</UINodeTypeForm>
+    </title>
+  </NodeTypePopup>
+  <ViewNodeTypePopup>
+    <title>
+      <UINodeTypeForm>Ver información del tipo de nodo</UINodeTypeForm>
+    </title>
+  </ViewNodeTypePopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeExport   #
+  ################################################################################
+  -->
+  <UINodeTypeExport>
+    <header>
+      <icon>Icono</icon>
+      <label>Nombre de nodo</label>
+      <input>Acción</input>
+    </header>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Export>Exportar</Export>
+      <UncheckAll>Desmarca Todo</UncheckAll>
+      <CheckAll>Marcar todos</CheckAll>
+    </action>
+    <title>Exportar Tipos de Nodo</title>
+    <msg>
+      <item-null>Por favor, seleccione al menos un nodo que desea exportar.</item-null>
+    </msg>
+  </UINodeTypeExport>
+  <NodeTypeExportPopup>
+    <title>
+      <UINodeTypeExport>Exportar Tipos de Nodo</UINodeTypeExport>
+    </title>
+  </NodeTypeExportPopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeOptionList   #
+  ################################################################################
+  -->
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeUpload   #
+  ################################################################################
+  -->
+  <UINodeTypeUpload>
+    <label>
+      <upload>Nombre del archivo</upload>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Upload>Subir</Upload>
+    </action>
+    <title>Importar el tipo de nodo del archivo XML</title>
+    <msg>
+      <filename-error>Examinar un archivo de tipo de nodo para importar.</filename-error>
+      <data-file-error>Sólo los archivos .xml o .zip son compatibles para importar.</data-file-error>
+      <data-invalid>Los datos no están válidos. Por favor, compruebe el tipo de archivo y vuelva a intentarlo.</data-invalid>
+      <nodetype-exist>El tipo de nodo '{0}' ya existe.</nodetype-exist>
+      <namespace-invalid>El espacio de nombre '{0}' no es válido.</namespace-invalid>
+    </msg>
+  </UINodeTypeUpload>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeImport   #
+  ################################################################################
+  -->
+  <UINodeTypeImport>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Import>Importar</Import>
+      <Upload>Subir de Nuevo</Upload>
+    </action>
+    <header>
+      <icon>Icono</icon>
+      <label>Nombre del Nodo</label>
+      <input>Acción</input>
+    </header>
+    <title>Seleccionar el Tipo de Nodo a Importar</title>
+    <msg>
+      <no-nodetype-registered>No hay ningún tipo de nodo registrado.</no-nodetype-registered>
+      <nodetype-registered>Registro exitoso.</nodetype-registered>
+    </msg>
+  </UINodeTypeImport>
+  <NodeTypeImportPopup>
+    <title>
+      <UINodeTypeImportPopup>Importar el tipo de nodo del archivo XML</UINodeTypeImportPopup>
+    </title>
+  </NodeTypeImportPopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIDriveForm #
+  ################################################################################
+  -->
+  <DriveInputSet>
+    <label>
+      <both>Ambos</both>
+      <folderOnly>Carpeta</folderOnly>
+      <unstructuredFolder>Carpeta no estructurada</unstructuredFolder>
+    </label>
+    <title>
+      <AddPermission>Añadir Permisos</AddPermission>
+      <RemovePermission>Quitar el permiso</RemovePermission>
+      <AddIcon>Añadir icono</AddIcon>
+      <AddPath>Agregar Ruta</AddPath>
+    </title>
+  </DriveInputSet>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.action.UIActionTypeList#
+  ###################################################################################
+  -->
+  <UIActionTypeList>
+    <header>
+      <name>Script</name>
+      <label>Nombre</label>
+<action>Acciones</action>
+    </header>
+    <action>
+      <AddAction>Añadir el tipo de acción</AddAction>
+    </action>
+<msg>
+ <confirm-delete>¿Está seguro que desea eliminar este tipo de acción?</confirm-delete>
+<cannot-delete>No se puede quitar este tipo de acción porque el sistema todavía lo está utilizando.</cannot-delete>
+</msg>
+  </UIActionTypeList>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.action.UIActionTypeForm #
+  ######################################################################################
+  -->
+  <ActionPopup>
+    <title>
+      <UIActionTypeForm>Añadir el tipo de acción</UIActionTypeForm>
+    </title>
+  </ActionPopup>
+  <UIActionTypeForm>
+    <title>Añadir el tipo de acción</title>
+    <label>
+      <actionType>Extender el Tipo de Acción:</actionType>
+      <name>Nombre:</name>
+      <isMove>Acción con Movimiento:</isMove>
+      <variables>Variables:</variables>
+      <exo_businessProcessAction>Business Processes:</exo_businessProcessAction>
+      <exo_scriptAction>Groovy Scripts:</exo_scriptAction>
+      <exo_ruleAction>Defined Rules:</exo_ruleAction>
+      <script>Script:</script>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <action-type-added>The '{0}' action type was added successfully.</action-type-added>
+      <action-type-create-error>An error occurred while creating the action type.</action-type-create-error>
+      <action-name-invalid>'{0}' is invalid. The name must begin with 'exo:'.</action-name-invalid>
+      <action-exist>This action already exists in the ECM system.</action-exist>
+      <fileName-invalid>El nombre de acción contiene algunos caracteres no válidos.</fileName-invalid>
+    </msg>
+  </UIActionTypeForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewManager     #
+  ######################################################################################
+  -->
+  <UITabPane>
+    <title>
+      <UIViewContainer>Vistas</UIViewContainer>
+      <ECMTemplate>Plantillas del explorador</ECMTemplate>
+      <UIScriptForm>Secuencias de comandos</UIScriptForm>
+      <UIDialogTab>Diálogo</UIDialogTab>
+      <UIViewTab>Ver</UIViewTab>
+      <UITemplateEditForm>Plantilla</UITemplateEditForm>
+      <UITemplateForm>Plantilla</UITemplateForm>
+      <UITemplateContainer>Documentos</UITemplateContainer>
+      <UIActionsTemplateContainer>Acciones</UIActionsTemplateContainer>
+      <UIOthersTemplateContainer>Otros</UIOthersTemplateContainer>
+  <UIActionScriptContainer>Acción</UIActionScriptContainer>
+  <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
+<UIInterceptorScriptContainer>Interceptors</UIInterceptorScriptContainer>
+
+<nodeTypeDefinition>Tipo de Nodo</nodeTypeDefinition>
+      <propertyDefinition>Propiedad</propertyDefinition>
+      <childNodeDefinition>Subnodo</childNodeDefinition>
+      <SuperTypeTab>Super tipos</SuperTypeTab>
+      <DefaultTypeTab>Por defecto primario</DefaultTypeTab>
+      <RequiredTypeTab>Requerido Primaria</RequiredTypeTab>
+      <Contraints>Limitaciones</Contraints>
+    </title>
+  </UITabPane>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewList    #
+  ######################################################################################
+  -->
+  <UIViewList>
+   <title>
+     <View>Ver</View>
+     <EditInfo>Editar</EditInfo>
+     <Delete>Eliminar</Delete>
+   </title>
+    <header>
+      <name>Nombre</name>
+      <permissions>Permisos</permissions>
+      <tabList>Ficha de acción</tabList>
+      <baseVersion>Versión base</baseVersion>
+      <action>Acción</action>
+    </header>
+    <action>
+      <AddView>Añadir Vista</AddView>
+    </action>
+    <msg>
+      <access-denied>Acceso denegado. No tiene permiso para utilizar esta función.</access-denied>
+      <template-in-use>No se puede eliminar {0} Está actualmente en uso.</template-in-use>
+      <confirm-delete>¿Está seguro que desea eliminar esta vista?</confirm-delete>
+    </msg>
+  </UIViewList>
+  <ViewPopup>
+    <title>
+      <UIViewFormTabPane>Vista</UIViewFormTabPane>
+    </title>
+  </ViewPopup>
+  <AddPopup>
+    <title>
+      <UIViewFormTabPane>Añadir Vista</UIViewFormTabPane>
+      <AddPopup>Añadir plantilla</AddPopup>
+    </title>
+  </AddPopup>
+  <EditPopup>
+    <title>
+      <UIViewFormTabPane>Editar Vista</UIViewFormTabPane>
+    </title>
+  </EditPopup>
+
+<UITabList>
+ <header>
+  <tabName>Ficha</tabName>
+  <localizeButtons>Descripción</localizeButtons>
+<action>Acciones</action>
+</header>
+<action>
+ <AddTab>Añadir</AddTab>
+</action>
+<msg>
+ <confirm-delete>¿Está seguro de querer borrar esta etiqueta?</confirm-delete>
+</msg>
+<grid>
+ <msg>
+  <empty>No hay ninguna etiqueta en esta vista</empty>
+ </msg>
+</grid>
+</UITabList>
+
+<UIViewPermissionList>
+ <title>Seleccione el propietario con permisos para esta vista:</title>
+<label>
+ <permission>{0} en {1}</permission>
+</label>
+<msg>
+ <confirm-delete>¿Está seguro que desea eliminar este permiso?</confirm-delete>
+  <permission-cannot-empty>Ver permiso se requiere y no puede estar vacío.</permission-cannot-empty>
+</msg>
+</UIViewPermissionList>
+
+<UIViewPermissionList>
+ <header>
+<friendlyPermission>Permisos</friendlyPermission>
+     <action>Acción</action>
+ </header>
+<action>
+ <title>
+  <Delete>Eliminar</Delete>
+ </title>
+</action>
+<grid>
+ <msg>
+  <empty>No hay ningún permiso en esta vista</empty>
+ </msg>
+</grid>
+</UIViewPermissionList>
+
+<UIViewPermissionForm>
+<action>
+ <Add>Añadir</Add>
+</action>
+<label>
+ <userOrGroup>Usuario o Grupo</userOrGroup>
+</label>
+<msg>
+ <permission-exist>El permiso '{0}' ya existe en la lista.</permission-exist>
+</msg>
+</UIViewPermissionForm>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewFormTabPane   #
+  ######################################################################################
+  -->
+  <UIViewForm>
+    <title>
+      <AddPermission>Añadir Permisos</AddPermission>
+      <RemovePermission>Quitar el permiso</RemovePermission>
+    </title>
+    <msg>
+      <view-name-invalid>Se requiere el nombre de la vista.</view-name-invalid>
+      <fileName-invalid>El nuevo nombre contiene algunos caracteres inválidos.</fileName-invalid>
+      <permission-not-empty>Por favor, seleccione un permiso para la vista.</permission-not-empty>      
+      <mustbe-add-tab>Por favor agregar una etiqueta.</mustbe-add-tab>
+<mustbe-add-permission>Por favor seleccione el permiso para esta vista</mustbe-add-permission>
+      <view-exist>El nombre de la vista ya existe</view-exist>
+    </msg>
+    <label>
+      <viewName>Nombre</viewName>
+      <template>Plantilla</template>
+<version>Restablecer la Versión</version>
+      <enableVersion>Habilitar la versión</enableVersion>
+      <hideExplorerPanel>Ocultar panel de explorer en la barra lateral</hideExplorerPanel>
+    </label>
+  </UIViewForm>
+  <UITabForm>
+    <msg>
+      <button-select-error>Please select at least one function from the list.</button-select-error>
+      <tab-name-error>Se requiere el nombre de la ficha.</tab-name-error>
+      <fileName-invalid>El nombre de la etiqueta contiene algunos caracteres no válidos.</fileName-invalid>
+    </msg>
+    <label>
+      <version>Restablecer la Versión</version>
+      <viewName>Nombre</viewName>
+      <tabName>Nombre de la ficha</tabName>
+      <permission>Permiso</permission>
+      <tabs>Fichas</tabs>
+      <template>Plantillas</template>
+      <enableVersion>Habilitar la versión</enableVersion>
+      <addFolder>Agregar carpeta</addFolder>
+      <addDocument>Add Document</addDocument>
+      <editDocument>Editar Documento</editDocument>
+      <upload>Subir</upload>
+      <paste>Pegar</paste>
+      <search>Search</search>
+      <viewReferences>View References</viewReferences>
+      <viewNodeType>View Node Type</viewNodeType>
+      <viewPermissions>View Permissions</viewPermissions>
+      <viewProperties>View Properties</viewProperties>
+      <manageVersions>Manage Versions</manageVersions>
+      <manageAuditing>Manage Auditing</manageAuditing>
+      <managePublications>Administrar la Publicación</managePublications>
+      <manageCategories>Administrar categorías</manageCategories>
+      <manageRelations>Administrar Relaciones</manageRelations>
+      <manageActions>Gestionar las acciones</manageActions>
+      <exportNode>Exportar Nodo</exportNode>
+      <importNode>Importar Nodo</importNode>
+      <viewRelations>Ver Relaciones</viewRelations>
+      <showJCRStructure>Mostrar la Estructura JCR</showJCRStructure>
+      <watchDocument>Ver Documento</watchDocument>
+      <taggingDocument>Etiquetar este documento</taggingDocument>
+      <viewMetadatas>Ver metadatos</viewMetadatas>
+      <overloadThumbnail>Miniatura de sobrecarga</overloadThumbnail>
+      <manageHidden>Esconder/Mostrar contenido</manageHidden>
+      <comment>Comentar</comment>
+      <vote>Votar</vote>  
+      <addCategory>Añadir Categoría</addCategory>
+      <addLocalizationLink>Añadir traducción</addLocalizationLink>
+      <publicationRequestApproval>Solicitud de aprobación</publicationRequestApproval>
+      <publicationApproveContent>Aprobar el contenido</publicationApproveContent>
+      <publicationPublish>Publicar</publicationPublish>
+<contentNavigation>Navegación de contenido</contentNavigation>
+<addSymLink>Agregar Symlink</addSymLink>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>      
+      <Cancel>#{word.cancel}</Cancel>      
+    </action>
+  </UITabForm>
+  <UIPermissionForm>
+    <label>
+      <permission>UIPermissionForm</permission>
+    </label>
+  </UIPermissionForm>
+  <UIViewFormTabPane>
+    <tab>
+      <label>
+        <UITabContainer>Acción</UITabContainer>
+        <UIViewForm>Ver</UIViewForm>
+        <UIViewPermissionContainer>Permiso</UIViewPermissionContainer>    
+      </label>
+    </tab>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Resetear</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+      <Close>#{word.close}</Close>
+      <Restore>Restaurar</Restore>
+    </action>
+  </UIViewFormTabPane>
+  <PopupViewPermission>
+    <title>
+      <UIPermissionSelector>Seleccione Permiso</UIPermissionSelector>
+    </title>
+  </PopupViewPermission>
+
+<TabForm_Popup>
+ <title>
+  <UITabForm>Agregar/Editar ficha</UITabForm>
+ </title>
+</TabForm_Popup>
+
+<tab_permission>
+ <title>
+  <SelectUser>Seleccionar Usuario</SelectUser>
+<SelectMember>Seleccionar miembro</SelectMember>
+<AddAny>Cualquier</AddAny>
+ </title>
+</tab_permission>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIECMTemplateList   #
+  ######################################################################################
+  -->
+  <UIECMTemplateList>
+    <title>
+      <View>Ver</View>
+      <EditInfo>Editar</EditInfo>
+      <Delete>Eliminar</Delete>
+    </title>
+    <header>
+      <name>Nombre</name>
+      <path>Valor</path>
+      <baseVersion>Versión base</baseVersion>
+      <action>Acción</action>
+    </header>
+    <action>
+      <Add>Añadir</Add>
+    </action>
+    <msg>
+      <template-in-use>No se puede eliminar {0} Está actualmente en uso.</template-in-use>
+      <confirm-delete>¿Está seguro de querer eliminar esta plantilla?</confirm-delete>
+      <access-denied>Acceso denegado. No tiene permiso para utilizar esta función.</access-denied>
+      <delete-permission-denied>No tiene permiso para eliminar laplantilla '{0}'.</delete-permission-denied>
+    </msg>
+  </UIECMTemplateList>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UITemplateForm #
+  ################################################################################
+  -->
+  <UITemplateForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>Resetear</Reset>
+      <Restore>Restaurar</Restore>
+      <Refresh>#{palabra.actualizar}</Refresh>
+    </action>
+    <msg>
+      <version-restored>Version {0} was restored successfully.</version-restored>
+      <role-require>Please select a permission.</role-require>
+      <template-name-exist>The template name '{0}' already exists.</template-name-exist>
+      <add-permission-denied>You do not have permission to add a new template.</add-permission-denied>
+      <edit-permission-denied>You do not have permission to modify '{0}' template.</edit-permission-denied>
+    </msg>
+    <tab>
+      <label>
+        <template>Plantilla</template>
+        <defaultDialog>Diálogo</defaultDialog>
+        <defaultView>Ver</defaultView>
+      </label>
+    </tab>
+    <label>
+      <name>Nombre:</name>
+      <label>Etiqueta:</label>
+      <isDocumentTemplate>es la plantilla de documento:</isDocumentTemplate>
+      <dialog>Contenido del diálogo</dialog>
+      <view>Ver contenido</view>
+      <permission>Permiso:</permission>
+      <selectPemistion>Permiso</selectPemistion>
+    </label>
+  </UITemplateForm>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.ecmTempForm #
+  ################################################################################
+  -->
+  <ecmTempForm>
+    <label>
+      <version>Seleccionar Versión:</version>
+      <content>Contenido:</content>
+      <name>Nombre:</name>
+      <homeTemplate>Tipo de Plantilla:</homeTemplate>
+      <enableVersion>Versión habilitada:</enableVersion>
+    </label>
+  </ecmTempForm>
+  <ecmTempFormPopup>
+    <title>
+      <ecmTempForm>Añadir/Editar Plantilla de Visualización</ecmTempForm>
+    </title>
+  </ecmTempFormPopup>
+  <ecmTempFormAdd>
+    <title>
+      <ecmTempForm>Añadir plantilla de Explorer</ecmTempForm>
+      <ecmTempFormAdd>Añadir plantilla de Explorer</ecmTempFormAdd>
+    </title>
+  </ecmTempFormAdd>
+  <ecmTempFormEdit>
+    <title>
+      <ecmTempForm>Editar plantilla de Explorer</ecmTempForm>
+    </title>
+  </ecmTempFormEdit>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptManager #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIECMFilterForm #
+  ######################################################################################
+  -->
+  <UIECMFilterForm>
+    <label>
+      <selectScript>Seleccionar Categoría</selectScript>
+    </label>
+  </UIECMFilterForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptList #
+  ######################################################################################
+  -->
+  <UIScriptList>
+    <action>
+      <Edit>#{word.edit}</Edit>
+      <Delete>#{word.delete}</Delete>
+      <AddNew>Añadir Script</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>¿Está seguro que desea eliminar este script?</confirm-delete>
+    </msg>
+    <header>
+      <scriptName>Nombre</scriptName>
+      <path>Script</path>
+      <baseVersion>Versión base</baseVersion>
+      <action>Acciones</action>
+    </header>
+    <tooltip>
+      <Edit>Editar</Edit>
+      <Delete>Eliminar</Delete>
+    </tooltip>
+  </UIScriptList>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptForm #
+  ######################################################################################
+  -->
+  <uiECMScriptsPopup>
+    <title>
+      <ecmScriptForm>Script de ECM</ecmScriptForm>
+    </title>
+  </uiECMScriptsPopup>
+
+  <UIScriptForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Restore>#{word.restore}</Restore>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{palabra.actualizar}</Refresh>
+      <Change>Cambiar</Change>
+    </action>
+    <msg>
+      <version-restored>Versión {0} fue restaurada con éxito.</version-restored>
+      <name-null>Por favor ingrese el nombre del script.</name-null>
+      <name-exist>El nombre del script '{0}' ya existe.</name-exist>
+      <fileName-invalid>El nombre del script tiene algunos caracteres no válidos.</fileName-invalid>
+    </msg>
+  </UIScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.CBScriptForm #
+  ######################################################################################
+  -->
+  <ScriptContainerPopup>
+    <title>
+      <UIScriptForm>Agregar/Editar Script</UIScriptForm>
+    </title>
+  </ScriptContainerPopup>
+  <UIScriptForm>
+    <label>
+      <selectVersion>Versiones</selectVersion>
+      <scriptContent>Contenido</scriptContent>
+      <scriptLabel>Nombre</scriptLabel>
+      <scriptName>Script</scriptName>
+      <enableVersion>Habilitar versiones</enableVersion>
+    </label>
+  </UIScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm #
+  ######################################################################################
+  -->
+ 
+  <ecmScriptForm>
+    <label>
+      <selectVersion>Versiones</selectVersion>
+      <scriptContent>Contenido</scriptContent>
+      <scriptLabel>Nombre</scriptLabel>
+      <scriptName>Script</scriptName>
+      <enableVersion>Habilitar versiones</enableVersion>
+    </label>
+  </ecmScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyForm #
+  ######################################################################################
+  -->
+  <UITaxonomyForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <title>Añadir Categoría</title>
+    <label>
+      <taxonomyName>Category Name</taxonomyName>
+      <parentPath>Parent</parentPath>
+    </label>
+    <msg>
+      <exist>The "{0}" category already exists.</exist>
+      <name-null>Please specify the category name.</name-null>
+      <name-invalid>The category name has some invalid characters.</name-invalid>
+      <name-too-long>The category name must have less than 30 characters.</name-too-long>
+    </msg>
+  </UITaxonomyForm>
+    
+  <EditTaxonomyTreePopup>
+    <title>
+      <UITaxonomyTreeContainer>Edit Category Tree</UITaxonomyTreeContainer>
+    </title>
+  </EditTaxonomyTreePopup>
+
+  <AddTaxonomyTreePopup>
+    <title>
+      <UITaxonomyTreeContainer>Add Category Tree</UITaxonomyTreeContainer>
+    </title>
+  </AddTaxonomyTreePopup>
+  
+  <TaxonomyPopupCreateChild>
+    <title>
+      <UITaxonomyTreeCreateChildForm>Edit Category Tree</UITaxonomyTreeCreateChildForm>
+    </title>
+  </TaxonomyPopupCreateChild>
+
+<UITaxonomyTreeCreateChildForm>
+  <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <parentPath>Parent:</parentPath>
+      <taxonomyName>Category Name:</taxonomyName>
+    </label>
+    <msg>
+      <name-null>The category name is empty.</name-null>
+      <name-invalid>The category name is invalid.</name-invalid>
+      <name-too-long>The category name must not have more than {0} characters.</name-too-long>
+      <exist>The category name already exists.</exist>
+    </msg>
+</UITaxonomyTreeCreateChildForm>
+
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>Seleccione la ruta</UIOneNodePathSelector>
+    </title>
+  </PopupComponent>
+  
+  <TaxoPopupUserSelector>
+  <title>
+      <TaxoTreeSelectUserOrGroup>Seleccionar Usuario</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>Seleccionar Usuario</UIPermissionTreeSelectUser>
+    </title>
+  </TaxoPopupUserSelector>
+
+  <TaxoTreeSelectUserOrGroupPopup>
+  <title>
+      <TaxoTreeSelectUserOrGroup>Seleccione la membresía</TaxoTreeSelectUserOrGroup>
+    </title>
+  </TaxoTreeSelectUserOrGroupPopup>
+  
+  <TaxoTreeAnyPermission>
+    <label>
+      <any>Cualquier Permiso</any>
+      <anyPermission>TaxoTreeAnyPermission</anyPermission>
+    </label>
+  </TaxoTreeAnyPermission>
+  
+  <TaxoTreeSelectUserOrGroup>
+    <label>
+      <selectGroup>Seleccionar grupo</selectGroup>
+      <selectMembership>Seleccione la membresía</selectMembership>
+    </label>
+  </TaxoTreeSelectUserOrGroup>
+  
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeList #
+  ######################################################################################
+  -->
+  <UITaxonomyTreeList>
+    <header>
+      <name>Árbol de categorías</name>
+      <workspace>Espacio de Trabajo</workspace>
+      <homePath>Ruta</homePath>
+      <action>Acción</action>
+    </header>
+    <action>
+      <AddTaxonomyTree>Agregar árbol de categoría</AddTaxonomyTree>
+    </action>
+    <tooltip>
+      <EditTaxonomyTree>Editar el árbol de categorías</EditTaxonomyTree>
+      <Delete>Eliminar el árbol de categorías</Delete>
+    </tooltip>
+    <title>Navegar en el árbol de categorías</title>
+    <msg>
+      <no-list>No se han creado árboles de categoría.</no-list>
+      <confirm-delete>¿Está seguro de querer eliminar este árbol de categoría?</confirm-delete>
+      <is-in-trash>Este árbol de categoría ha sido trasladado a la basura.</is-in-trash>
+    </msg>
+  </UITaxonomyTreeList>
+  
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeForm  #
+  ######################################################################################
+  -->
+  <UITaxonomyTreeForm>
+    <label>
+      <name>Nombre</name>
+      <workspace>Espacio de Trabajo</workspace>
+      <homePath>Ruta</homePath>
+      <permissions>Permisos</permissions>
+    </label>
+    <msg>
+      <homapath-emty>Ruta de entrada</homapath-emty>
+    </msg>
+  </UITaxonomyTreeForm>
+  
+  <UIPermissionTreeForm>
+    <label>
+      <UIPopupWindow>Seleccionar</UIPopupWindow>
+      <permission>UIPermissionTreeForm</permission>
+      <userOrGroup>Usuario o Grupo</userOrGroup>
+      <read>Derecho de Leer</read>
+      <add_node>Derecho de añadir nodo</add_node>
+      <set_property>Establecer el derecho de la propiedad</set_property>
+      <remove>Quitar el derecho</remove>
+    </label>
+    <title>Añadir un permiso a ese nodo</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>Guardar</Save>
+      <Reset>Resetear</Reset>
+    </action>
+    <msg>
+      <checkbox-require>Por favor, seleccione al menos un permiso.</checkbox-require>
+      <userOrGroup-required>Por favor, seleccione un usuario o un grupo antes de guardar el permiso.</userOrGroup-required>
+      <not-change-permission>No tiene derecho de añadir el permiso.</not-change-permission>
+      <access-denied>¡Acceso denegado! No puede remover este permiso.</access-denied>
+    </msg>
+  </UIPermissionTreeForm>
+  
+  <PopupTaxonomyJCRBrowser>
+  <title>
+      <UIOneNodePathSelector>Seleccione la Ruta de Inicio</UIOneNodePathSelector>
+    </title>
+  </PopupTaxonomyJCRBrowser>
+  
+  <PopupTaxonomyTreePermission>
+    <title>
+      <UIPermissionSelector>Seleccione Permiso</UIPermissionSelector>
+    </title>
+   </PopupTaxonomyTreePermission>
+   
+   <PopupDrivePermission>
+    <title>
+      <AddDrivePermissionSelector>Añadir Permisos</AddDrivePermissionSelector>
+      <UIPermissionSelector>Seleccione Permiso</UIPermissionSelector>
+    </title>
+  </PopupDrivePermission>
+  
+  <UIPopupWindow>
+    <title>
+      <UIPermissionManager>Gestión de Permisos</UIPermissionManager>
+    </title>
+   </UIPopupWindow>
+
+  <PopupUserSelector>
+    <title>
+      <UIUserContainer>Gestión de Permisos</UIUserContainer>
+    </title>
+   </PopupUserSelector>
+   
+  <UIPermissionInfo>
+    <action>
+      <title>
+        <Edit>Editar</Edit>
+        <Delete>Quitar el permiso</Delete>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>Usuario o Grupo</usersOrGroups>
+      <read>Leer</read>
+      <addNode>Modificar Nodo</addNode>
+      <remove>Retirar</remove>
+      <action>Acción</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>¿Está seguro que desea remover este permiso?</confirm-delete-permission>
+      <no-permission-tochange>No tiene derecho a quitar el permiso.</no-permission-tochange>
+      <no-permission-remove>No puede eliminar el propietario o el usuario del sistema.</no-permission-remove>
+      <access-denied>¡Acceso denegado! No puede quitar este permiso.</access-denied>
+    </msg>
+  </UIPermissionInfo>
+  <permission>
+    <title>
+      <SelectUser>Seleccionar Usuario</SelectUser>
+      <SelectMember>Seleccione la membresía</SelectMember>
+      <AddAny>Todos</AddAny>
+    </title>
+  </permission>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionForm #
+  #############################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIGroupSelector>Seleccionar Usuario</UIGroupSelector>
+      <UIPermissionSelector>Seleccionar miembro</UIPermissionSelector>
+      <UIGroupMemberSelector>Seleccione la membresía</UIGroupMemberSelector>
+    </title>
+  </SelectUserOrGroup>
+  <UIGroupSelector>
+    <label>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Seleccionar Usuario</selectUser>
+    </label>
+    <msg>
+      <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
+    </msg>
+  </UIGroupSelector>
+  <UIPermissionForm>
+    <label>
+      <UIPopupWindow>Seleccionar</UIPopupWindow>
+      <permission>UIPermissionForm</permission>
+      <userOrGroup>Usuario o Grupo</userOrGroup>
+      <read>Leer</read>
+      <add_node>Modify</add_node>
+      <remove>Remove</remove>
+    </label>
+    <title>Add permission to that node</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>#{word.save}</Save>
+      <Reset>Resetear</Reset>
+    </action>
+    <msg>
+      <checkbox-require>Por favor, seleccione al menos un permiso.</checkbox-require>
+      <userOrGroup-required>Por favor, seleccione un usuario o un grupo antes de guardar el permiso.</userOrGroup-required>
+      <not-change-permission>No tiene derecho de añadir el permiso.</not-change-permission>
+      <access-denied>¡Acceso denegado! No puede remover este permiso.</access-denied>
+    </msg>
+  </UIPermissionForm>
+  
+  <TaxonomyPopup>
+    <title>
+      <UITaxonomyForm>Añadir Categoría</UITaxonomyForm>
+    </title>
+  </TaxonomyPopup>
+  
+  <UITaxonomyManager>
+    <title>
+      <permission>Gestión de Permisos</permission>
+    </title>
+  </UITaxonomyManager>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateList #
+  ######################################################################################
+  -->
+  <UITemplateList>
+    <header>
+      <name>Tipo</name>
+      <action>Acción</action>
+      <label>Plantilla</label>
+      <icon>Icono</icon>
+    </header>
+    <action>
+      <AddNew>Añadir plantilla</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>¿Está seguro de querer borrar?</confirm-delete>
+      <access-denied>Acceso denegado. No tiene permiso para utilizar esta función.</access-denied>
+      <editing-template>¡Acceso denegado! No puede simultáneamente, eliminar y editar la plantilla</editing-template>
+      <template-not-exist>La plantilla que intenta eliminar no existe.</template-not-exist>
+    </msg>
+  </UITemplateList>
+  
+  <UIActionsTemplateList>
+    <header>
+      <name>Tipo</name>
+      <action>Acción</action>
+      <label>Plantilla</label>
+      <icon>Icono</icon>
+    </header>
+    <action>
+      <AddNew>Añadir plantilla</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>¿Está seguro de querer borrar?</confirm-delete>
+      <access-denied>Acceso denegado. No tiene permiso para utilizar esta función.</access-denied>
+      <editing-template>¡Acceso denegado! No puede simultáneamente, eliminar y editar esta plantilla.</editing-template>
+      <template-not-exist>La plantilla que intenta eliminar no existe.</template-not-exist>
+    </msg>
+  </UIActionsTemplateList>
+  
+  <UIOthersTemplateList>
+    <header>
+      <name>Tipo</name>
+      <label>Plantilla</label>
+      <icon>Icono</icon>
+      <action>Acción</action>
+    </header>
+    <action>
+      <AddNew>Añadir plantilla</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>¿Está seguro de querer borrar?</confirm-delete>
+      <access-denied>Acceso denegado. No tiene permiso para utilizar esta función.</access-denied>
+      <editing-template>¡Acceso denegado! No puede simultáneamente, eliminar y editar esta plantilla.</editing-template>
+      <template-not-exist>La plantilla que intenta eliminar no existe.</template-not-exist>
+    </msg>
+  </UIOthersTemplateList>
+
+ <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+  ######################################################################################
+  -->
+
+<UITabPane>
+ <title>
+ <ContentTemplateContainer>Contenido</ContentTemplateContainer>
+<CateTemplateContainer>Navegación</CateTemplateContainer>
+<PageTemplateContainer>Paginación</PageTemplateContainer>
+ </title>
+</UITabPane>
+
+  <UICLVTemplateList>
+    <header>
+      <title>Nombre</title>
+      <action>Acción</action>
+      <template>Plantilla</template>
+    </header>
+    <action>
+      <AddTemplate>Añadir plantilla</AddTemplate>
+<Edit>Editar</Edit>
+<Delete>Eliminar</Delete>
+    </action>
+    <msg>
+      <confirm-delete>¿Está seguro de querer eliminar esta plantilla?</confirm-delete>
+      <access-denied>Acceso denegado. No tiene permiso para utilizar esta función.</access-denied>
+      <editing-template>¡Acceso denegado! No puede simultáneamente, eliminar y editar esta plantilla.</editing-template>
+      <template-not-exist>La plantilla que intenta eliminar no existe.</template-not-exist>
+    </msg>
+  </UICLVTemplateList>
+
+<CateTemplateList>
+    <header>
+      <title>Nombre</title>
+      <action>Acción</action>
+      <template>Plantilla</template>
+    </header>
+    <action>
+      <AddTemplate>Añadir plantilla</AddTemplate>
+<Edit>Editar</Edit>
+<Delete>Eliminar</Delete>
+    </action>
+</CateTemplateList>
+
+<PageTemplateList>
+    <header>
+      <title>Nombre</title>
+      <action>Acción</action>
+      <template>Plantilla</template>
+    </header>
+    <action>
+      <AddTemplate>Añadir plantilla</AddTemplate>
+<Edit>Editar</Edit>
+<Delete>Delete</Delete>
+    </action>
+</PageTemplateList>
+
+<EditCLVTemplatePopup_ContentTemplateContainer>
+ <title>
+   <UICLVTemplateForm_ContentTemplateContainer>Edit List Template</UICLVTemplateForm_ContentTemplateContainer>   
+ </title>
+</EditCLVTemplatePopup_ContentTemplateContainer>
+
+<EditCLVTemplatePopup_CateTemplateContainer>
+ <title>
+   <UICLVTemplateForm_CateTemplateContainer>Edit List Template</UICLVTemplateForm_CateTemplateContainer>   
+ </title>
+</EditCLVTemplatePopup_CateTemplateContainer>
+
+<EditCLVTemplatePopup_PageTemplateContainer>
+ <title>
+   <UICLVTemplateForm_PageTemplateContainer>Edit List Template</UICLVTemplateForm_PageTemplateContainer>   
+ </title>
+</EditCLVTemplatePopup_PageTemplateContainer>
+
+<CLVTemplatePopup_ContentTemplateContainer>
+ <title>
+   <UICLVTemplateForm_ContentTemplateContainer>Add List Template</UICLVTemplateForm_ContentTemplateContainer>   
+ </title>
+</CLVTemplatePopup_ContentTemplateContainer>
+
+<CLVTemplatePopup_CateTemplateContainer>
+ <title>
+   <UICLVTemplateForm_CateTemplateContainer>Add List Template</UICLVTemplateForm_CateTemplateContainer>   
+ </title>
+</CLVTemplatePopup_CateTemplateContainer>
+
+<CLVTemplatePopup_PageTemplateContainer>
+ <title>
+   <UICLVTemplateForm_PageTemplateContainer>Add List Template</UICLVTemplateForm_PageTemplateContainer>   
+ </title>
+</CLVTemplatePopup_PageTemplateContainer>
+
+<UICLVTemplateForm_ContentTemplateContainer>
+ <action>
+  <Save>#{word.save}</Save>
+<Reset>Resetear</Reset>
+<Cancel>#{word.cancel}</Cancel>
+ </action>
+<label>
+ <title>Name</title>
+<template>Nombre de la Plantilla</template>
+<content>Contenido</content>
+<type>Template Type</type>
+</label>
+</UICLVTemplateForm_ContentTemplateContainer>
+
+<UICLVTemplateForm_PageTemplateContainer>
+ <action>
+  <Save>#{word.save}</Save>
+<Reset>Resetear</Reset>
+<Cancel>#{word.cancel}</Cancel>
+ </action>
+<label>
+ <title>Nombre</title>
+<template>Nombre de la Plantilla</template>
+<content>Contenido</content>
+<type>Tipo de Plantilla</type>
+</label>
+</UICLVTemplateForm_PageTemplateContainer>
+
+<UICLVTemplateForm_CateTemplateContainer>
+ <action>
+  <Save>#{word.save}</Save>
+<Reset>Resetear</Reset>
+<Cancel>#{word.cancel}</Cancel>
+ </action>
+<label>
+ <title>Nombre</title>
+<template>Nombre de la Plantilla</template>
+<content>Contenido</content>
+<type>Tipo de Plantilla</type>
+</label>
+</UICLVTemplateForm_CateTemplateContainer>
+<UICLVTemplateForm>
+  <label>
+    <paginators>Paginación</paginators>
+<list>Contenido</list>
+<navigation>Navegación</navigation>
+  </label>
+  <msg>
+  <template-existing>El nombre para esta plantilla ya existe. Por favor seleccione otro.</template-existing>
+  </msg>
+</UICLVTemplateForm>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateForm #
+  ######################################################################################
+  -->
+  <AddNewTemplatePermission>
+    <title>
+      <UIPermissionSelector>Seleccione Permiso</UIPermissionSelector>
+    </title>
+  </AddNewTemplatePermission>
+  <TemplatePermission>
+    <title>
+      <UIPermissionSelector>Seleccione Permiso</UIPermissionSelector>
+    </title>
+  </TemplatePermission>
+  <TemplateContainerPopup>
+    <title>
+      <UITemplateForm>Forma de la plantilla</UITemplateForm>
+    </title>
+  </TemplateContainerPopup>
+  <ViewForm>
+    <label>
+      <UITemplateContent>ViewForm</UITemplateContent>
+      <UIPopupWindow>Ver Permiso</UIPopupWindow>
+      <selectVersion>Versiones</selectVersion>
+      <content>Contenido:</content>
+      <name>Nombre:</name>
+      <isDocumentTemplate>Es una Plantilla de Documento</isDocumentTemplate>
+      <viewPermission>Permiso:</viewPermission>
+      <enableVersion>Habilitar versiones</enableVersion>
+    </label>
+    <title>Agregar/Editar vista</title>
+  </ViewForm>
+  <DialogForm>
+    <label>
+      <UITemplateContent>DialogForm</UITemplateContent>
+      <UIPopupWindow>Permiso de Diálogo</UIPopupWindow>
+      <selectVersion>Versiones</selectVersion>
+      <content>Contenido:</content>
+      <name>Nombre:</name>
+      <isDocumentTemplate>Es una Plantilla de Documento</isDocumentTemplate>
+      <viewPermission>Permiso:</viewPermission>
+      <enableVersion>Habilitar versiones</enableVersion>
+    </label>
+    <title>Agregar/ Editar el Diálogo</title>
+  </DialogForm>
+  <DialogFormTemplatePermission>
+    <title>
+      <UIPermissionSelector>Seleccione Permiso</UIPermissionSelector>
+    </title>
+  </DialogFormTemplatePermission>
+  <ViewFormTemplatePermission>
+    <title>
+      <UIPermissionSelector>Seleccione Permiso</UIPermissionSelector>
+    </title>
+  </ViewFormTemplatePermission>
+  <TemplateContainerPopup>
+    <title>
+      <UIViewTemplate_UITemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UITemplateContainer>
+      <UIViewTemplate_UIActionsTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
+      <UIViewTemplate_UIOthersTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
+    </title>
+  </TemplateContainerPopup>
+  <UITemplatesManager>
+    <title>
+      <Edit>Editar</Edit>
+      <Delete>Eliminar</Delete>
+    </title>
+  </UITemplatesManager>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIViewTemplate #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateEditForm #
+  ######################################################################################
+  -->
+  <UITemplateEditForm>
+    <label>
+      <name>Nombre:</name>
+      <label>Etiqueta:</label>
+      <isDocumentTemplate>es la plantilla de documento:</isDocumentTemplate>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{palabra.actualizar}</Refresh>
+    </action>
+  </UITemplateEditForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIDialogTab #
+  ######################################################################################
+  -->
+  <UIDialogTab>
+    <header>
+      <name>Name</name>
+      <roles>Roles</roles>
+      <baseVersion>Versión</baseVersion>
+      <action>Actions</action>
+    </header>
+    <msg>
+      <undeletable>You cannot delete '{0}' because it is the default one.</undeletable>
+      <confirm-delete>Are you sure you want to delete this dialog?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>Editar</Edit>
+        <Delete>Delete</Delete>
+      </title>
+    </action>
+  </UIDialogTab>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIViewTab #
+  ######################################################################################
+  -->
+  <UIViewTab>
+    <header>
+      <name>Name</name>
+      <roles>Roles</roles>
+      <baseVersion>Versión</baseVersion>
+      <action>Acciones</action>
+    </header>
+    <msg>
+      <undeletable>'{0}' no puede ser borrado, es el que se utiliza por defecto.</undeletable>
+      <confirm-delete>¿Está seguro de querer borrar?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>Editar</Edit>
+        <Delete>Eliminar</Delete>
+      </title>
+    </action>
+  </UIViewTab>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateContent #
+  ######################################################################################
+  -->
+  <UITemplateContent>
+    <action>
+      <Save>#{word.save}</Save>
+      <Restore>#{word.restore}</Restore>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{palabra.actualizar}</Refresh>
+    </action>
+    <msg>
+      <name-invalid>El nombre del campo no debe contener caracteres especiales.</name-invalid>
+      <roles-invalid>El campo de permiso es obligatorio.</roles-invalid>
+      <version-restored>Versión {0} fue restaurada con éxito.</version-restored>
+      <name-exist>El nombre '{0}' ya existe.</name-exist>
+    </msg>
+    <title>
+      <AddPermission>Añadir Permisos</AddPermission>
+      <RemovePermission>Quitar el permiso</RemovePermission>
+    </title>
+  </UITemplateContent>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.DialogForm #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.ViewForm #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.UIJCRBrowser #
+  ######################################################################################
+  -->
+  <JCRBrowser>
+    <title>
+      <UIOneNodePathSelector>Seleccione la Ruta de Inicio</UIOneNodePathSelector>
+    </title>
+  </JCRBrowser>
+  <JCRBrowserAssets>
+    <title>
+      <UIOneNodePathSelector>Selecciona un Icono</UIOneNodePathSelector>
+    </title>
+  </JCRBrowserAssets>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.queries #
+  ######################################################################################
+  -->
+  <UIQueriesList>
+    <header>
+      <name>Nombre</name>
+      <type>Tipo</type>
+      <statement>Estado</statement>
+      <permission>Permisos</permission>
+      <action>Acciones</action>
+    </header>
+    <action>
+      <AddQuery>Añadir Consulta</AddQuery>
+    </action>
+    <tooltip>
+      <Edit>Editar esta consulta</Edit>
+      <Delete>Eliminar esta consulta</Delete>
+    </tooltip>
+    <msg>
+      <confirm-delete>¿Estás seguro de eliminar esta consulta?</confirm-delete>
+      <query-not-existed>La consulta ya no existe.</query-not-existed>
+      <can-not-remove>Error al eliminar la consulta. Póngase en contacto con el administrador para obtener información.</can-not-remove>
+    </msg>
+  </UIQueriesList>
+  <UIQueriesForm>
+    <label>
+      <name>Nombre de la Consulta</name>
+      <type>Tipo de Consulta</type>
+      <statement>Estado</statement>
+      <cache>Habilitar caché de resultados</cache>
+      <permissions>Permisos</permissions>
+      <PermissionButton>UIQueriesForm</PermissionButton>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <permission-require>Por favor seleccione permisos.</permission-require>
+      <name-invalid>El campo del nombre no puede contener caracteres especiales.</name-invalid>
+      <name-existing>Ya existe el nombre de esta consulta. Por favor, seleccione otro.</name-existing>
+      <invalid-query>La consulta no es válida. Por favor comprueba su consulta.</invalid-query>
+      <access-denied>Acceso denegado. No tiene permiso para realizar esta operación.</access-denied>
+    </msg>
+  </UIQueriesForm>
+  <AddQueryForm>
+    <title>
+      <UIQueriesForm>Añadir Consulta</UIQueriesForm>
+    </title>
+  </AddQueryForm>
+  <EditQueryForm>
+    <title>
+      <UIQueriesForm>Editar consulta</UIQueriesForm>
+    </title>
+  </EditQueryForm>
+<PermissionPopup>
+  <title>
+    <UIGroupMemberSelector>Seleccione Permiso</UIGroupMemberSelector>
+  </title>
+</PermissionPopup>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.folksonomy #
+  ######################################################################################
+  -->
+  <UITagManager>
+    <title>
+      <EditStyle>Editar estilo</EditStyle>
+      <RemoveStyle>Quitar estilo</RemoveStyle>
+    </title>    
+  </UITagManager>
+  <UITagStyleList>
+    <header>
+      <name>Nombre del estilo</name>
+      <documentRange>Número de ocurrencias</documentRange>
+      <tagHTML>Estilo de etiqueta</tagHTML>
+      <action>Acción</action>
+    </header>
+    <action>
+      <AddStyle>Add Style</AddStyle>
+    </action>
+  </UITagStyleList>
+  <UITagStyleForm>
+    <label>
+      <styleName>Style Name:</styleName>
+      <documentRange>Number of Occurrences:</documentRange>
+      <styleHTML>HTML Style:</styleHTML>
+    </label>
+    <action>
+      <UpdateStyle>Actualizar</UpdateStyle>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <range-validator>The range is invalid. The format must be: a..b, among which a, b are positive integers. You can use * instead of b to indicate that the range is unlimited.</range-validator>
+      <error-update>Update failed. Your information is invalid.</error-update>
+      <item-not-existing>You cannot save changes to this tag since it no longer exists in the database.</item-not-existing>
+    </msg>
+  </UITagStyleForm>
+  <FolksonomyPopup>
+    <title>
+      <UITagStyleForm>Edit Tag Style Configuration</UITagStyleForm>
+    </title>
+  </FolksonomyPopup>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.ECMNameValidator  #
+  ###################################################################################
+  -->
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>The field '{0}' has some invalid characters. Please type another value.</Invalid-char>
+      <empty-input>The value of the field '{0}' is empty.</empty-input>
+    </msg>
+  </ECMNameValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>Please enter the value into the field '{0}'.</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.PermissionValidator  #
+  ###################################################################################
+  -->
+  <PermissionValidator>
+  <msg>
+      <permission-path-invalid>The permission '{0}' is invalid.</permission-path-invalid>
+  </msg>
+  </PermissionValidator>
+  <!--
+  ###################################################################################
+  # Repository  #
+  ###################################################################################
+  -->
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Espacio de Trabajo</workspaceName>
+      <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
+      <rootNodePath>Ruta de Raíz</rootNodePath>
+    </label>
+  </UIWorkspaceList>
+  <!--
+  ###################################################################################
+  # Others  #
+  ###################################################################################
+  -->
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>Are you sure you want to delete?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <template>
+    <title>
+      <AddPermission>Añadir Permisos</AddPermission>
+    </title>
+  </template>
+  <metadataTypeTab>
+    <title>
+      <AddPermission>Añadir Permisos</AddPermission>
+    </title>
+  </metadataTypeTab>
+  <PermissionButton>
+    <title>
+      <AddPermission>Añadir Permisos</AddPermission>
+    </title>
+  </PermissionButton>
+  <nodeTypeDefinition>
+    <title>
+      <AddSuperType>Add Super Type</AddSuperType>
+    </title>
+  </nodeTypeDefinition>
+  <childNodeDefinition>
+    <title>
+      <AddRequiredType>Add Required Type</AddRequiredType>
+      <AddDefaultType>Add Default Type</AddDefaultType>
+    </title>
+  </childNodeDefinition>
+  <propertyDefinition>
+    <title>
+      <AddConstraints>Añadir restricciones</AddConstraints>
+    </title>
+  </propertyDefinition>
+  <authInputSet>
+    <title>
+      <Select>Seleccionar</Select>
+    </title>
+  </authInputSet>
+  <!--
+  #grid with action
+  -->
+  <UIViewContainer>
+    <title>
+      <View>Ver</View>
+      <EditInfo>Editar</EditInfo>
+      <Delete>Eliminar</Delete>
+    </title>
+<label>
+  <permission>{0} en {1}</permission>
+</label>
+  </UIViewContainer>
+  <ECMTemplate>
+    <title>
+      <EditInfo>Editar</EditInfo>
+      <Delete>Eliminar</Delete>
+    </title>
+  </ECMTemplate>
+  <step1>
+    <title>
+      <AddPermission>Añadir Permisos</AddPermission>
+    </title>
+  </step1>
+  <step2>
+    <title>
+      <SelectContainer>Seleccionar Contenedor</SelectContainer>
+      <SelectStore>Seleccionar Almacén</SelectStore>
+    </title>
+  </step2>
+  <step3>
+    <title>
+      <SelectQueryHandler>Seleccione controlador de consulta</SelectQueryHandler>
+    </title>
+  </step3>
+  <UIDrivePermissionSelector>
+    <label>
+      <selectGroup>Seleccionar grupo</selectGroup>
+      <selectUser>Seleccionar Usuario</selectUser>
+      <selectMembership>Seleccione la membresía</selectMembership>
+    </label>
+  </UIDrivePermissionSelector>
+  
+  <UIPermissionSelector>
+    <label>
+      <selectGroup>Seleccionar Grupo</selectGroup>
+      <selectUser>Seleccionar Usuario</selectUser>
+      <selectMembership>Seleccione la membresía</selectMembership>
+    </label>
+  </UIPermissionSelector>
+  
+  <UIAnyPermission>
+    <label>
+      <anyPermission>Cualquier Permiso</anyPermission>
+    </label>
+  </UIAnyPermission>
+  
+  <UIMDriveAnyPermission>
+    <label>
+      <anyPermission>Cualquier Permiso</anyPermission>
+    </label>
+  </UIMDriveAnyPermission>
+  
+  <UIQueriesAnyPermission>
+    <label>
+      <anyPermission>Cualquier Permiso</anyPermission>
+    </label>
+  </UIQueriesAnyPermission>
+  
+  <MetadataPermission>
+    <label>
+      <selectGroup>Seleccionar Grupo</selectGroup>
+    </label>
+  </MetadataPermission>  
+  <MetadataPermission>
+    <label>
+      <selectMembership>Seleccione la membresía</selectMembership>
+    </label>
+  </MetadataPermission>
+  <anyPermission>
+    <title>
+      <AddAnyPermission>Establecer cualquier permiso</AddAnyPermission>
+    </title>
+  </anyPermission>
+  <!--
+  #########Since ECM 2.3##################
+  -->
+  <QueriesPermissionBrowse>
+    <label>
+      <selectGroup>Seleccionar grupo</selectGroup>
+      <selectUser>Seleccionar Usuario</selectUser>
+      <selectMembership>Seleccione la membresía</selectMembership>
+    </label>
+  </QueriesPermissionBrowse>
+  <!--
+  #########Since ECM 2.4##################
+  -->  
+  <UIViewFormTabPane>
+    <label>
+      <addSymLink>Agregar Symlink</addSymLink>
+    </label>
+  </UIViewFormTabPane>
+  <!--
+  #########Since ECM 2.5##################
+  --> 
+  
+  <UIDriveForm>
+<msg>
+  <permission-path-invalid>El permiso '{0}' no es válido.</permission-path-invalid>
+  </msg>
+  </UIDriveForm>
+  
+  <UITaxonomyTreeMainForm>
+    <msg>
+      <homepath-emty>La ruta de inicio es necesaria.</homepath-emty>
+      <targetpath-emty>La ruta de destino es necesaria.</targetpath-emty>
+    </msg>
+  </UITaxonomyTreeMainForm>
+  <UITaxonomyWorkingArea>
+  <msg>
+  <exist>Ya existe este nodo de árbol.</exist>
+  </msg>
+  </UITaxonomyWorkingArea>
+
+  <PermissionTreeSelectUser>
+    <label>
+      <option>
+        <userName>#{word.userName}</userName>
+        <lastName>#{word.lastName}</lastName>
+        <firstName>#{word.firstName}</firstName>
+        <email>#{word.email}</email>
+      </option>
+      <group>Grupo</group>
+      <searchUser>Usuario</searchUser>
+      <userName>#{word.userName}</userName>
+      <lastName>#{word.lastName}</lastName>
+      <firstName>#{word.firstName}</firstName>
+    <email>#{word.email}</email>
+      <action>#{word.action}</action>
+      <Add>#{word.Add}</Add>
+      <Close>#{word.Close}</Close>
+    </label>
+  </PermissionTreeSelectUser>
+  
+  <!--
+  #########Since ECM 2.6 ##################
+  -->   
+  <DriveInputSet>
+    <label>
+      <nt_folder>Archivo del documento</nt_folder>
+      <nt_unstructured>Carpeta de contenido</nt_unstructured>
+      <exo_cssFolder>Carpeta CSS</exo_cssFolder>
+      <exo_jsFolder>Carpeta de JavaScript</exo_jsFolder>
+      <exo_linkFolder>Carpeta de enlace</exo_linkFolder>
+      <exo_webFolder>Carpeta de contenido Web</exo_webFolder>
+   </label>
+  </DriveInputSet>
+  <UIPermissionTreeInfo>
+  <msg>
+      <confirm-delete-permission>¿Está seguro que desea eliminar este permiso?</confirm-delete-permission>
+      <no-permission-remove>No puede eliminar el propietario o el usuario del sistema.</no-permission-remove>  
+  </msg>
+  </UIPermissionTreeInfo>  
+  <UITaxonomyTreeMainForm>
+<msg>
+      <no-right-target-path>Please select another home path.</no-right-target-path>
+</msg>
+</UITaxonomyTreeMainForm>
+
+<UIECMAdminControlPanel>
+    <tab>
+      <label>        
+        <ManageUnLock>Manage Locks</ManageUnLock>
+      </label>
+    </tab>        
+</UIECMAdminControlPanel>
+<UIUnLockForm>
+    <label>
+      <name>Path Node</name>      
+      <permissions>Permisos</permissions>
+      <PermissionButton>UI Unlock Form</PermissionButton>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <permission-require>You must select permissions.</permission-require>      
+    </msg>
+  </UIUnLockForm>
+  <UILockHolderList>
+  <header>
+  <name>Groups or Users</name>
+  <action>Acción</action>
+  </header>
+  <tooltip>
+<DeleteLock>Borrar Grupo</DeleteLock>
+  </tooltip>
+  <msg>
+  <can-not-delete-lock-holder>No se puede eliminar el grupo {0}.</can-not-delete-lock-holder>
+  </msg>
+  </UILockHolderList>
+  <UILockNodeList>
+  <header>
+  <name>Título</name>
+  <hoderLock>Dueño del bloqueo</hoderLock>
+  <action>Acción</action>
+  </header>
+  <tooltip>
+<UnLock>Desbloquear</UnLock>
+  </tooltip>
+  <msg>
+  <access-denied-exception>No tiene permiso para acceder al nodo con la ruta {0}, o el nodo fue eliminado.</access-denied-exception>
+  </msg>
+  </UILockNodeList>
+  <EditUnLockForm>
+    <title>
+      <UIUnLockForm>Administrar el bloqueo</UIUnLockForm>
+    </title>
+  </EditUnLockForm>  
+  <UITabPane>
+    <action>
+      <Close>Cerrar</Close>
+    </action>
+    <title>
+    <UILockHolderContainer>Administrar el bloqueo</UILockHolderContainer>
+    <UILockNodeList>Nodo bloqueado</UILockNodeList>
+    </title>
+  </UITabPane>
+  
+  <UIViewFormTabPane>
+    <action>
+      <AddTabForm>Añadir Ficha</AddTabForm>
+      <AddTab>Guardar</AddTab>
+      <BackViewForm>Atrás</BackViewForm>
+    </action>
+  </UIViewFormTabPane>
+  
+ <UITemplateForm>
+<tab>
+<label>
+<defaultSkin>CSS</defaultSkin>
+</label>
+</tab>
+</UITemplateForm>
+ 
+  <UITabPane>
+    <title>
+      <UISkinTab>CSS</UISkinTab>
+    </title>
+  </UITabPane>
+  
+  <UISkinTab>
+    <header>
+      <name>Nombre</name>
+      <roles>Roles</roles>
+      <baseVersion>Versión</baseVersion>
+      <action>Acciones</action>
+    </header>
+    <msg>
+      <undeletable>No puede eliminar '{0}' porque es el predeterminado.</undeletable>
+      <confirm-delete>¿Está seguro de querer eliminar esta hoja de estilo?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>Editar</Edit>
+        <Delete>Eliminar</Delete>
+      </title>
+    </action>
+  </UISkinTab>
+  
+  <SkinForm>
+    <label>
+      <UITemplateContent>SkinForm</UITemplateContent>
+      <UIPopupWindow>Permiso de la hoja de estilo</UIPopupWindow>
+      <selectVersion>Versiones</selectVersion>
+      <content>Contenido:</content>
+      <name>Nombre:</name>
+      <isDocumentTemplate>Es una Plantilla de Documento</isDocumentTemplate>
+      <viewPermission>Permiso:</viewPermission>
+      <enableVersion>Habilitar versiones</enableVersion>
+    </label>
+    <title>Agregar o editar la piel</title>
+  </SkinForm>
+
+ <UITagManager>
+   <action>
+     <title>
+       <RemoveStyle>Quitar</RemoveStyle>
+         <AddStyle>Añadir estilo</AddStyle>
+     </title>
+   </action>
+   <msg>
+     <confirm-delete>¿Está seguro de querer eliminar este estilo de etiqueta?</confirm-delete>
+   </msg>
+ </UITagManager>
+
+<UITaxonomyTreeContainer>
+<action>
+<Cancel>Cerrar</Cancel>
+</action>
+</UITaxonomyTreeContainer>
+<UITaxonomyTreeMainForm>
+<action>
+<NextViewPermission>Siguiente</NextViewPermission>
+<Reset>Reset</Reset>
+</action>
+</UITaxonomyTreeMainForm>
+
+<UIPermissionTreeForm>
+<action>
+<Save>Save</Save>
+<Reset>Reset</Reset>
+<NextAddAction>Siguiente</NextAddAction>
+<Previous>Previo</Previous>
+</action>
+</UIPermissionTreeForm>
+
+<UIActionForm>
+<action>
+<PreviousViewPermission>Previo</PreviousViewPermission>
+<NextViewTree>Siguiente</NextViewTree>
+</action>
+  <msg>
+    <xss-vulnerability-character>El campo '{0}' contiene caracteres de vulnerabilidad XSS</xss-vulnerability-character>
+<xss-vulnerability-character-wo-label>Your input may contain XSS vulnerability characters</xss-vulnerability-character-wo-label>
+  </msg>
+</UIActionForm>
+
+<UITaxonomyTreeWorkingArea>
+<action>
+<Previous>Previo</Previous>
+</action>
+</UITaxonomyTreeWorkingArea>
+
+  <UITabPane>
+    <title>
+      <UITagManager>Gestionar las Etiquetas</UITagManager>
+      <UITagPermissionManager>Gestor de Permiso de Etiquetas</UITagPermissionManager>
+    </title>
+  </UITabPane>
+  
+  <UITagPermissionInfo>
+    <header>
+      <usersOrGroups>Usuario o Grupo</usersOrGroups>
+      <action>Acción</action>
+    </header>
+    <action>
+      <title>
+        <Delete>Delete</Delete>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete-permission>¿Está seguro que desea eliminar este permiso?</confirm-delete-permission>
+    </msg>   
+  </UITagPermissionInfo>
+  <UITagPermissionForm>
+    <title>Añadir Permisos</title>
+    <action>
+      <Save>Guardar</Save>
+    </action>
+    <label>
+      <userOrGroup>Memberships:</userOrGroup>
+      <permission/>
+    </label>
+    <msg>
+      <userOrGroup-alreadyExists>This membership already exists. Please select another one.</userOrGroup-alreadyExists>
+    </msg>    
+  </UITagPermissionForm>
+  
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>Seleccionar grupo</selectGroup>
+      <selectMembership>Seleccione la membresía</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+  
+  <UIFolksonomyManager>
+  <msg>
+      <confirm-delete>Are you sure you want to delete this style?</confirm-delete>
+  </msg>
+    <action>
+      <title>
+        <AddStyle>Add Style</AddStyle>
+      </title>
+    </action>
+  </UIFolksonomyManager>  
+<UIActionForm>
+  <title>
+  <ShowComponent>Open Window</ShowComponent>
+  <removeReference>Remove</removeReference>
+  </title>
+  </UIActionForm> 
+  <NodeTypeNameValidator>
+    <msg>
+      <Invalid-char>There are some invalid characters. Please enter another value.</Invalid-char>
+      <empty-input>The value of the field is empty.</empty-input>
+    </msg>
+  </NodeTypeNameValidator>
+  <UIActionForm>
+    <msg>
+      <constraint-violation-exception>The node '{0}' cannot be added to '{1}' in the workspace '{2}'.  There is a problem with the permissions or constraints condition.</constraint-violation-exception>
+    </msg>
+  </UIActionForm>
+  
+  <UIWorkspaceWizard>
+    <msg>
+      <name-not-allowed>Nombre prohibido</name-not-allowed>
+    </msg>
+  </UIWorkspaceWizard>
+  <UIRepositoryForm>
+    <msg>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
+    </msg>
+  </UIRepositoryForm>
+  
+  <UIViewFormTabPane>
+  <label>
+  <addCategory>Añadir Categoría</addCategory>
+          <addLocalizationLink>Añadir traducción</addLocalizationLink>
+  </label>
+  </UIViewFormTabPane>
+
+  <UIDriveForm>
+<label>
+<allowNodeTypesOnTree>Autorización de tipo de nodo en el árbol izquierdo:</allowNodeTypesOnTree>
+</label>
+</UIDriveForm>
+<DriveInputSet>
+<title>
+<RemovePermission>Remove Permission</RemovePermission>
+<ChooseNodeType>Seleccione los tipos de nodo</ChooseNodeType>
+<RemoveNodeType>Quitar</RemoveNodeType>
+</title>
+</DriveInputSet>
+<PopupNodeTypeSelector>
+<title>
+<UINodeTypeSelector>Seleccione los tipos de nodo</UINodeTypeSelector>
+<PopupNodeTypeSelector>Seleccione los tipos de nodo</PopupNodeTypeSelector>
+</title>
+</PopupNodeTypeSelector>
+  <UINodeTypeSelector>
+    <label>
+      <selectedAllNodeTypes>Seleccione todos los tipos de nodo</selectedAllNodeTypes>
+    </label>
+  </UINodeTypeSelector>
+  <UIScriptForm>
+    <msg>
+      <PathNotFoundException>El script ya existe en la carpeta '{0}'.</PathNotFoundException>      
+    </msg>
+  </UIScriptForm>
+ <UINodeTypeList>
+   <msg>
+   <no-list>No hay ningún tipo de nodo con condición de búsqueda.</no-list>
+   </msg>
+ </UINodeTypeList>
+  <UIActionForm>
+    <msg>
+      <canotChangeActionId>No se puede cambiar el ID de acción.</canotChangeActionId>
+    </msg>
+  </UIActionForm>
+  <PopupComponent>
+    <title>
+      <UINodeTypeSelector>Selector del Tipo de Nodo</UINodeTypeSelector>
+    </title>
+  </PopupComponent>
+  <UIPageIterator>
+    <label>
+      <maxPageSize>Tamaño máximo de página</maxPageSize>
+    </label>
+  </UIPageIterator>
+  <UILockNodeList>
+    <msg>
+      <can-not-unlock-node>No tiene permiso para desbloquear este nodo.  Favor de contactar al administrador para conseguir el derecho correcto.</can-not-unlock-node>
+    </msg>
+ </UILockNodeList>
+</bundle>

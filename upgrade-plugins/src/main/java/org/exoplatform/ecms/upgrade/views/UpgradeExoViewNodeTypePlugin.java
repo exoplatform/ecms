@@ -92,7 +92,8 @@ public class UpgradeExoViewNodeTypePlugin extends UpgradeProductPlugin {
         nodeTypeManager.registerNodeType(exoView, ExtendedNodeTypeManager.REPLACE_IF_EXISTS);
       }
       if (LOG.isInfoEnabled()) {
-        LOG.info("Add new property definition '" + EXO_HIDE_EXPLORER_PANEL + "' for node type definition '" + EXO_VIEW + "' successfully!");
+        LOG.info("Add new property definition '" + EXO_HIDE_EXPLORER_PANEL + 
+                 "' for node type definition '" + EXO_VIEW + "' successfully!");
       }
       //add new property value
       String statement = "SELECT * FROM exo:view where exo:hideExplorerPanel IS NULL";

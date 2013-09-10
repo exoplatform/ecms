@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UICLVContainer>
+    <label>
+      <Preferences>Inställningar</Preferences>
+      <AddContent>Lägg till innehåll</AddContent>
+      <ManageContent>Hantera innehåll</ManageContent>
+    </label>
+    <msg>
+      <non-contents>Inga artiklar tillgängliga.</non-contents>
+      <item-not-found>Posten hittades inte.</item-not-found>
+      <no-permission>Behörighet saknas till den här noden.</no-permission>
+      <category-back>Gå till föregående</category-back>
+    </msg>
+  </UICLVContainer>
+  <UIViewerManagementPopupWindow>
+    <title>
+      <UICLVConfig>Inställningar för innehållslistan</UICLVConfig>
+    </title>
+  </UIViewerManagementPopupWindow>
+  <UICLVConfig>
+    <label>
+      <Title>Inställningar för innehållslistan</Title>
+      <ContentSelectionBlock>Val av innehåll</ContentSelectionBlock>
+      <UICLVConfigDisplayModeFormRadioBoxInput>Läge</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigItemPathFormInputSet>Sökväg</UICLVConfigItemPathFormInputSet>
+    <UICLVConfigItemPathFormStringInput>Sökväg</UICLVConfigItemPathFormStringInput>
+      <UICLVConfigOrderByFormSelectBox>Ordna efter</UICLVConfigOrderByFormSelectBox>
+      <option>
+        <exo:title>Titel</exo:title>
+        <exo:dateCreated>Skapad</exo:dateCreated>
+        <exo:dateModified>Ändrad</exo:dateModified>
+        <publication:liveDate>Publicerad</publication:liveDate>
+        <exo:startEvent>Händelsedatum</exo:startEvent>
+        <exo:index>Index</exo:index>
+        <DESC>Fallande</DESC>
+        <ASC>Stigande</ASC>
+      </option>
+      <DisplaySettingBlock>Bildskärmsinställningar</DisplaySettingBlock>
+      <UICLVConfigHeaderFormStringInput>Sidhuvud</UICLVConfigHeaderFormStringInput>
+      <UICLVConfigDisplayTemplateFormSelectBox>Mall</UICLVConfigDisplayTemplateFormSelectBox>
+      <UICLVConfigPaginatorTemplateFormSelectBox>Sidnumrering</UICLVConfigPaginatorTemplateFormSelectBox>
+      <UICLVConfigTargetPageFormStringInput/>
+      <UICLVConfigItemsPerPageFormStringInput>Poster per sida</UICLVConfigItemsPerPageFormStringInput>
+      <UICLVConfigShowIllustrationFormCheckboxInput>Visa bild</UICLVConfigShowIllustrationFormCheckboxInput>
+      <UICLVConfigShowSummaryFormCheckboxInput>Visa sammanfattning</UICLVConfigShowSummaryFormCheckboxInput>
+      <UICLVConfigShowHeaderFormCheckboxInput>Visa sidhuvud</UICLVConfigShowHeaderFormCheckboxInput>
+      <UICLVConfigShowRefreshFormCheckboxInput>Visa återställ</UICLVConfigShowRefreshFormCheckboxInput>
+      <UICLVConfigShowTitleFormCheckboxInput>Visa titel</UICLVConfigShowTitleFormCheckboxInput>
+      <UICLVConfigShowDateCreatedFormCheckboxInput>Visa datum</UICLVConfigShowDateCreatedFormCheckboxInput>
+      <UICLVConfigShowLinkFormCheckboxInput>Visa länk</UICLVConfigShowLinkFormCheckboxInput>
+      <UICLVConfigShowReadmoreFormCheckboxInput>Visa fler länkar</UICLVConfigShowReadmoreFormCheckboxInput>
+      <UICLVConfigAllowDynamicUrlStringInput>Tillåt dynamisk URL</UICLVConfigAllowDynamicUrlStringInput>
+      <UICLVConfigShowRssLinkFormCheckboxInput>Visa RSS-länk</UICLVConfigShowRssLinkFormCheckboxInput>
+      <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatisk identifiering</UICLVConfigShowAutomaticDetectionCheckboxInput>
+      <AdvancedBlock>Avancerad</AdvancedBlock>
+      <UICLVConfigDynamicNavigationLabel>Dynamisk navigering</UICLVConfigDynamicNavigationLabel>
+      <UICLVConfigContextualFolderRadioBoxInput>Kontextuell</UICLVConfigContextualFolderRadioBoxInput>
+      <UICLVConfigShowCLVByStringInput>Av</UICLVConfigShowCLVByStringInput>
+      <UICLVConfigshowSCVWithStringInput>med</UICLVConfigshowSCVWithStringInput>
+      <UICLVConfigTargetPageFormInputSet>Visa i sidan</UICLVConfigTargetPageFormInputSet>
+      <content-not-found>Innehåll hittades inte.</content-not-found>
+      <ContentPath>Sökväg för innehåll</ContentPath>
+      <Up>Upp</Up>
+      <Down>Ner</Down>
+      <UICLVConfigCacheManagementLabel>Innehållets synlighet</UICLVConfigCacheManagementLabel>
+      <UICLVContentByQueryLabel>Innehåll efter fråga</UICLVContentByQueryLabel>
+      <UICLVConfigWorkspaceFormSelectBox>Arbetsyta</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigContentByQueryTextArea>genom fråga</UICLVConfigContentByQueryTextArea>
+      <UICLVConfigCacheEnableRadioBoxInput>Dela innehåll mellan användare</UICLVConfigCacheEnableRadioBoxInput>
+    </label>
+    <help>
+      <ModeSelectionHelp>Det finns två lägen att visa innehåll. "Från mapp" visar allt innehåll i vald mapp/kategori. I "Från innehåll" väljs manuellt det innehåll som skall visas.</ModeSelectionHelp>
+      <FolderPathHelp>Välj det innehåll som du vill visa. Standardvalet kommer att ersättas dynamiskt om du aktiverar alternativet dynamisk navigering (se Avancerat läge nedan).</FolderPathHelp>
+      <HeaderOptionHelp>Visa rubrik på toppen av listan innehåll. Om du aktiverar alternativet Automatisk identifiering, försöker den hitta huvudet baserat på den aktuella markeringen.</HeaderOptionHelp>
+      <GeneralOptionHelp>Välj grafiskt element som du vill visa i listan. Observera att, beroende på den valda mallen, vissa delar kanske inte är tillgängliga.</GeneralOptionHelp>
+      <ContextualHelp>Aktiverar alternativet dynamisk navigering. Andra kan ändra innehållet dynamiskt baserat på en URL-parameter.</ContextualHelp>
+      <ParameterHelp>Denna parameter kommer att användas för åtkomst till innehållet om dynamisk navigering är aktiverad.</ParameterHelp>
+      <ShowDetailInPageHelp>Genom att klicka på innehåll omdirigeras användaren till en detaljsida. Du måste ha en "Innehåll via URL" portlet med dynamisk navigering aktiverad på sidan för att innehåll skall visas.</ShowDetailInPageHelp>
+      <DetailParameterHelp>Den här parametern innehåller sökvägen till innehållet i länken till detaljsidan. Denna parameter måste matcha den parameter som används i portleten "Innehåll via URL" på sidan.</DetailParameterHelp>
+      <ContentByQueryHelp><![CDATA[You can set a SQL Query to get content dynamically. The following parameters are allowed : ${user}, ${lang} or any get parameter (PARAM) surrounded by ${PARAM}.]]></ContentByQueryHelp>
+      <ContentsVisibilityHelp>"Restricted by Authentication" will filter the content based on the authentication. If you do not sign in, you see public content only. If you are logged in, you see all the content visible by intranet users (but shared by all). "Restricted by User Roles" means you will see content depending on your rights. In most cases, this option should not be used, as it reduces the overall performance.</ContentsVisibilityHelp>
+    </help>
+    <action>
+      <Save>Spara</Save>
+      <Cancel>Rensa</Cancel>
+      <delete>Ta bort</delete>
+    </action>
+    <msg>
+      <not-valid-path>Ogiltig sökväg.</not-valid-path>
+      <saving-success>Inställningar i portleten sparas.</saving-success>
+    </msg>
+    <tab>
+      <label>
+        <clvContentTab>Val av innehåll</clvContentTab>
+        <clvDisplayTab>Bildskärmsinställningar</clvDisplayTab>
+        <clvAdvancedTab>Avancerad</clvAdvancedTab>
+      </label>
+    </tab>
+  </UICLVConfig>
+  <UICLVConfigDisplayModeFormRadioBoxInput>
+    <label>
+      <AutoViewerMode>Från mapp</AutoViewerMode>
+      <ManualViewerMode>Från innehåll</ManualViewerMode>
+    </label>
+  </UICLVConfigDisplayModeFormRadioBoxInput>
+  <UICLVConfigItemPathFormInputSet>
+    <title>
+      <SelectFolderPath>Välj sökväg</SelectFolderPath>
+    </title>
+  </UICLVConfigItemPathFormInputSet>
+  <FolderPathSelectorPopupWindow>
+    <title>
+      <UIContentSelectorFolder>Mappen Browser</UIContentSelectorFolder>
+    </title>
+  </FolderPathSelectorPopupWindow>
+  <UICLVConfigOrderTypeFormSelectBox>
+    <label>
+      <option>
+        <OrderDesc>Fallande</OrderDesc>
+        <OrderAsc>Stigande</OrderAsc>
+      </option>
+    </label>
+  </UICLVConfigOrderTypeFormSelectBox>
+  <UICLVConfigTargetPageFormInputSet>
+    <title>
+      <SelectBasePath>Välj rotkatalog</SelectBasePath>
+      <SelectTargetPage>Välj rotkatalog</SelectTargetPage>
+    </title>
+  </UICLVConfigTargetPageFormInputSet>
+  <UICLVBasePathPopupWindow>
+    <title>
+      <UIPageSelector>Sidväljare</UIPageSelector>
+    </title>
+  </UICLVBasePathPopupWindow>
+  <UICLVPresentation>
+    <label>
+      <readmore>Läs mer</readmore>
+      <rssFeed>RSS-flöde</rssFeed>
+    </label>
+    <action>
+      <refresh>Uppdatera</refresh>
+      <edit>Redigera innehåll i utforskaren</edit>
+      <delete>Ta bort</delete>
+      <publish>Publicera</publish>
+    </action>
+    <label>
+      <draft>Utkast</draft>
+    </label>
+  </UICLVPresentation>
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorMulti>Multiväljare för innehåll</UIContentSelectorMulti>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+  <UIContentDialogFormPopupWindow>
+    <title>
+      <UIContentDialogForm>Formulär för webb Innehåll</UIContentDialogForm>
+    </title>
+  </UIContentDialogFormPopupWindow>
+  <UICLVConfigContextualFolderRadioBoxInput>
+    <label>
+      <contextualEnable>Aktiverad</contextualEnable>
+      <contextualDisable>Inaktiverad</contextualDisable>
+    </label>
+  </UICLVConfigContextualFolderRadioBoxInput>
+  <PublicationStates>
+    <archived>Arkiverad</archived>
+    <obsolete>Utgången</obsolete>
+    <unpublished>Ej publicerad</unpublished>
+    <enrolled>Inskrivna</enrolled>
+    <draft>Utkast</draft>
+    <pending>Väntläge</pending>
+    <approved>Godkänd</approved>
+    <inreview>Under granskning</inreview>
+    <staged>Iscensatt</staged>
+    <published>Publicerad</published>
+  </PublicationStates>
+  <UICLVConfigCacheEnableRadioBoxInput>
+    <label>
+      <ENABLE>Begränsad för autentisering</ENABLE>
+      <DISABLE>Begränsad för användarroll</DISABLE>
+    </label>
+  </UICLVConfigCacheEnableRadioBoxInput>
+</bundle>

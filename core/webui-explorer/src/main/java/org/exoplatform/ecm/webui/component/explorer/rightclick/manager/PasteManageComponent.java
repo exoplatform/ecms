@@ -49,13 +49,14 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHom
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsPasteableFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
-import org.exoplatform.ecm.webui.utils.LockUtil;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.relations.RelationsService;
+import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -122,7 +123,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     if (uiExplorer.getAllClipBoard().size() < 1) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.no-node", null,
           ApplicationMessage.WARNING));
-      
+
       return;
     }
     Node destNode;
@@ -139,7 +140,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     } catch (PathNotFoundException path) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", null,
           ApplicationMessage.WARNING));
-      
+
       return;
     } catch (Exception e) {
       JCRExceptionManager.process(uiApp, e);
@@ -148,7 +149,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     if (!PermissionUtil.canAddNode(destNode)) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-paste-node", null,
           ApplicationMessage.WARNING));
-      
+
       uiExplorer.updateAjax(event);
       return;
     }
@@ -156,12 +157,12 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       Object[] arg = { destPath };
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", arg,
           ApplicationMessage.WARNING));
-      
+
       return;
     }
     if (!destNode.isCheckedOut()) {
       uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null));
-      
+
       return;
     }
 
@@ -173,7 +174,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       }
     } catch (PathNotFoundException pe) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.cannot-readsource", null));
-      
+
       return;
     }
     session.save();
@@ -263,6 +264,11 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     srcPath = srcNode.getPath();
     // Reset the session to manage the links that potentially change of workspace
     srcSession = srcNode.getSession();
+
+    // Get thumbnail node of source node
+    ThumbnailService thumbnailService = WCMCoreUtils.getService(ThumbnailService.class);
+    Node srcThumbnailNode = thumbnailService.getThumbnailNode(srcNode);
+
     // Reset the workspace name to manage the links that potentially change of
     // workspace
     srcWorkspace = srcSession.getWorkspace().getName();
@@ -287,7 +293,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     if (ClipboardCommand.CUT.equals(type) && srcPath.equals(destPath)) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-cutting", null,
           ApplicationMessage.WARNING));
-      
+
       return;
     }
     // Make destination path without index on final name
@@ -299,57 +305,61 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     try {
       if (ClipboardCommand.COPY.equals(type)) {
         pasteByCopy(destSession, srcWorkspace, srcPath, destPath);
-        Node selectedNode = (Node) destSession.getItem(destPath);
-        actionContainer.initiateObservation(selectedNode);
+        destNode = (Node) destSession.getItem(destPath);
+        actionContainer.initiateObservation(destNode);
       } else {
         pasteByCut(currentClipboard, uiExplorer, destSession, srcWorkspace, srcPath, destPath,
             actionContainer, isMultiSelect, isLastPaste);
+        destNode = (Node) destSession.getItem(destPath);
       }
+
+      // Update thumbnail for the node after pasting
+      thumbnailService.copyThumbnailNode(srcThumbnailNode, destNode);
     } catch (ConstraintViolationException ce) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.current-node-not-allow-paste", null,
           ApplicationMessage.WARNING));
-      
+
       uiExplorer.updateAjax(event);
       return;
     } catch (VersionException ve) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.copied-node-in-versioning", null,
           ApplicationMessage.WARNING));
-      
+
       uiExplorer.updateAjax(event);
       return;
     } catch (ItemExistsException iee) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.paste-node-same-name", null,
           ApplicationMessage.WARNING));
-      
+
       uiExplorer.updateAjax(event);
       return;
     } catch (LoginException e) {
       if (ClipboardCommand.CUT.equals(type)) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.cannot-login-node", null,
             ApplicationMessage.WARNING));
-        
+
         uiExplorer.updateAjax(event);
         return;
       }
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.cannot-paste-nodetype", null,
           ApplicationMessage.WARNING));
-      
+
       uiExplorer.updateAjax(event);
       return;
     } catch (AccessDeniedException ace) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.access-denied", null,
           ApplicationMessage.WARNING));
-      
+
       uiExplorer.updateAjax(event);
       return;
     } catch (LockException locke) {
       Object[] arg = { srcPath };
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.paste-lock-exception", arg,
           ApplicationMessage.WARNING));
-      
+
     } catch (Exception e) {
       JCRExceptionManager.process(uiApp, e);
-      
+
       uiExplorer.updateAjax(event);
       return;
     }
@@ -448,7 +458,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
         LockUtil.changeLockToken(srcPath, (Node)session.getItem(destPath));
         session.save();
       } catch (ArrayIndexOutOfBoundsException e) {
-        throw new MessageException(new ApplicationMessage("UIPopupMenu.msg.bound-exception", null,
+        throw new MessageException(new ApplicationMessage("UIPopupMenu.msg.node-cutting", null,
             ApplicationMessage.WARNING));
       }
       if (!isMultiSelect || (isMultiSelect && isLastPaste)) {

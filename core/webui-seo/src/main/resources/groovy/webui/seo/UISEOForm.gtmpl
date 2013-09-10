@@ -86,38 +86,14 @@
 						<label class="control-label" for="<%=uicomponent.DESCRIPTION%>"><%=uicomponent.getLabel(uicomponent.DESCRIPTION) %></label>
 						<div class="controls">
 							<% uiform.renderField(uicomponent.DESCRIPTION) %>
-							<i class="uiIconQuestion" id="DescriptionHelp" 
-										onmouseover="eXo.ecm.WCMUtils.showInContextHelp('DescriptionHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('DescriptionHelp', 'false')"
-										onfocus="eXo.ecm.WCMUtils.showInContextHelp('DescriptionHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('DescriptionHelp', 'false')">
-								<div style="position: absolute;">
-									<div class="InContextHelpContent">                    
-										<div class="InContextHelpPopup">
-										 <div id="ContentPathHelpID" class="LeftInContextHelpPopup">
-											 <%= _ctx.appRes("UISEOForm.help.description") %>
-											</div>
-										</div>                      
-									</div>
-								</div>
-							</i>
+							<a class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="<%= _ctx.appRes("UISEOForm.help.description") %>"><i class="uiIconQuestion" id="DescriptionHelp" ></i></a>
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label" for="<%=uicomponent.KEYWORDS%>"><%=uicomponent.getLabel(uicomponent.KEYWORDS) %></label>
 						<div class="controls">
 							<% uiform.renderField(uicomponent.KEYWORDS) %>
-							<i class="uiIconQuestion" id="KeywordsHelp" 
-										onmouseover="eXo.ecm.WCMUtils.showInContextHelp('KeywordsHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('KeywordsHelp', 'false')"
-										onfocus="eXo.ecm.WCMUtils.showInContextHelp('KeywordsHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('KeywordsHelp', 'false')">
-								<div style="position: absolute;">
-									<div class="InContextHelpContent">                    
-										<div class="InContextHelpPopup">
-										 <div id="ContentPathHelpID" class="LeftInContextHelpPopup">
-											 <%= _ctx.appRes("UISEOForm.help.keywords") %>
-											</div>
-										</div>                      
-									</div>
-								</div>
-							</i>
+							<a class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="<%= _ctx.appRes("UISEOForm.help.keywords") %>"><i class="uiIconQuestion" id="DescriptionHelp" ></i></a>
 						</div>
 					</div>	
 					 
@@ -144,19 +120,7 @@
 							<label class="control-label" for="<%=uicomponent.PRIORITY%>"><%=uicomponent.getLabel(uicomponent.PRIORITY) %></label>
 							<div class="controls">
 								<% uiform.renderField(uicomponent.PRIORITY) %>
-								<i class="uiIconQuestion" id="PriorityHelp" 
-											onmouseover="eXo.ecm.WCMUtils.showInContextHelp('PriorityHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('PriorityHelp', 'false')"
-											onfocus="eXo.ecm.WCMUtils.showInContextHelp('PriorityHelp', 'true')" onblur="eXo.ecm.WCMUtils.showInContextHelp('PriorityHelp', 'false')">
-									<div style="position: absolute;">
-										<div class="InContextHelpContent" >                    
-											<div class="InContextHelpPopup">
-											 <div id="ContentPathHelpID" class="LeftInContextHelpPopup">
-												 <%= _ctx.appRes("UISEOForm.help.priority") %>
-												</div>
-											</div>                      
-										</div>
-									</div>
-								</i>
+								<a class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="<%= _ctx.appRes("UISEOForm.help.priority") %>"><i class="uiIconQuestion" id="PriorityHelp" ></i></a>
 							</div>
 						</div>			
 					<%}%>		   

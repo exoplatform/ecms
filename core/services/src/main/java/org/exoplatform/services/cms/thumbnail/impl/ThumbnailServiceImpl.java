@@ -232,6 +232,33 @@ public class ThumbnailServiceImpl implements ThumbnailService {
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  public void copyThumbnailNode(Node srcThumbnailNode, Node destNode) throws Exception {
+
+    // Validate arguments
+    if (srcThumbnailNode == null || destNode == null) {
+      return;
+    }
+
+    // Copy thumbnail to destination node
+    Node destThumbnailNode = this.addThumbnailNode(destNode);
+    if (srcThumbnailNode.hasProperty(SMALL_SIZE)) {
+      destThumbnailNode.setProperty(SMALL_SIZE, srcThumbnailNode.getProperty(SMALL_SIZE).getValue());
+    }
+
+    if (srcThumbnailNode.hasProperty(MEDIUM_SIZE)) {
+      destThumbnailNode.setProperty(MEDIUM_SIZE, srcThumbnailNode.getProperty(MEDIUM_SIZE).getValue());
+    }
+
+    if (srcThumbnailNode.hasProperty(BIG_SIZE)) {
+      destThumbnailNode.setProperty(BIG_SIZE, srcThumbnailNode.getProperty(BIG_SIZE).getValue());
+    }
+
+    destThumbnailNode.save();
+  }
+
   public void addPlugin(ComponentPlugin plugin) {
     if(plugin instanceof ThumbnailPlugin) plugins_.add(plugin);
   }

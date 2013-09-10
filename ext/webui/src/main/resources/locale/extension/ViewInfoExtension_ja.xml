@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+<UIPopupWindow>
+<title>
+<UIViewInfoManager>情報の表示</UIViewInfoManager>
+</title>
+</UIPopupWindow>
+    
+<ECMContextMenu>
+<event>
+<ViewInfo>情報の表示</ViewInfo>
+</event>
+</ECMContextMenu>
+<UIViewInfoContainer>
+<label>
+      <name>名前</name>
+      <title>タイトル</title>
+      <type>タイプ</type>
+      <size>サイズ</size>
+      <owner>所有者</owner>
+      <lastModifier>最終更新者</lastModifier>
+      <created>作成日</created>
+      <lastModified>最終更新日付</lastModified>
+      <publicationState>公開状態</publicationState>
+</label>
+<value>
+      <folder>フォルダ</folder>
+</value>
+<action>
+<Close>閉じる</Close>
+</action>
+</UIViewInfoContainer>
+</bundle>

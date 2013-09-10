@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<bundle>
+  <UIExoStart>
+    <tooltip>
+      <homepage>Hemsida</homepage>
+    </tooltip>
+  </UIExoStart>
+
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>Är du säker på att du vill ta bort objektet?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+
+  <Drives>
+    <label>
+      <ManagedSites>Hantering av webbplatser</ManagedSites>
+      <SharedSite>Delad webbplats</SharedSite>
+    </label>
+  </Drives>
+
+  <Views>
+    <label>
+      <wcm-view>Web</wcm-view>
+      <admin-view>Admin</admin-view>
+      <icon-view>Ikoner</icon-view>
+      <thumbails-view>Miniatyrer</thumbails-view>
+      <list-view>Listvy</list-view>
+      <authoring-view>Författande</authoring-view>
+      <wcm-category-view>Kategorier</wcm-category-view>
+      <file-view>Fil management vy</file-view>
+    </label>
+  </Views>
+
+  <UIActionBar>
+    <obtion>
+      <Publication>Publikation</Publication>
+      <System>System</System>
+    </obtion>
+  </UIActionBar>
+
+  <UIPageSelectorPanel>
+    <header>
+      <path>Sökväg</path>
+      <action>Åtgärd</action>
+    </header>
+    <msg>
+      <child-not-found>Hittade ingen sida.</child-not-found>
+    </msg>
+    <title>
+      <select>Välj</select>
+    </title>
+  </UIPageSelectorPanel>
+
+  <UIContentDialogFormPopupWindow>
+    <title>
+      <UIContentDialogPreference>Val av Web Innehåll</UIContentDialogPreference>
+    </title>
+  </UIContentDialogFormPopupWindow>
+
+  <UITabPane>
+    <title>
+      <UIContentBrowsePanelOne>Innehållsläsaren</UIContentBrowsePanelOne>
+      <UIContentBrowsePanelMulti>Innehållsläsaren</UIContentBrowsePanelMulti>
+      <UIContentBrowsePanelFolder>Mapp Läsare</UIContentBrowsePanelFolder>
+      <UIContentSearchForm>Innehåll sökformulär</UIContentSearchForm>
+      <UIContentSearchResult>Sökresultat</UIContentSearchResult>
+      <UIContentViewer>Förhandsgranska innehåll</UIContentViewer>
+      <WebContentMetadataPopup>Val av Egenskapen</WebContentMetadataPopup>
+      <WebContentNodeTypePopup>NodeType Val</WebContentNodeTypePopup>
+      <UIPermissionManager>Tillstånds Manager</UIPermissionManager>
+    </title>
+  </UITabPane>
+
+  <UIContentBrowsePanelOne>
+    <selectBoxValues>
+      <FilterBy>Filtrera</FilterBy>
+      <WebContent>Webbinnehåll</WebContent>
+      <DMSDocument>Dokument</DMSDocument>
+      <Media>Media</Media>
+    </selectBoxValues>
+    <msg>
+      <node-checkout>Noden är utcheckad. Vänligen kontrollera noden innan du utför den här funktionen.</node-checkout>
+    </msg>
+  </UIContentBrowsePanelOne>
+
+  <UIContentBrowsePanelMulti>
+    <selectBoxValues>
+      <FilterBy>Filtrera</FilterBy>
+      <WebContent>Webbinnehåll</WebContent>
+      <DMSDocument>Dokument</DMSDocument>
+      <Media>Media</Media>
+    </selectBoxValues>
+  </UIContentBrowsePanelMulti>
+
+  <UIContentBrowsePanelOne>
+    <label>
+      <LeftColumn>Välj en mapp för att visa dess barn som innehåll.</LeftColumn>
+      <RightColumn>Innehållet nedan kan väljas.</RightColumn>
+    </label>
+  </UIContentBrowsePanelOne>
+
+  <UIContentBrowsePanelMulti>
+    <label>
+      <LeftColumn>Välj en mapp för att visa dess barn som innehåll.</LeftColumn>
+      <RightColumn>Innehållet nedan kan väljas.</RightColumn>
+    </label>
+  </UIContentBrowsePanelMulti>
+
+  <UIContentBrowsePanelFolder>
+    <label>
+      <LeftColumn>Välj en mapp för att visa dess barn som innehåll.</LeftColumn>
+      <RightColumn>Mappen nedan kan väljas.</RightColumn>
+    </label>
+  </UIContentBrowsePanelFolder>
+
+  <UISelectedContentGrid>
+    <label>
+      <name>Namn</name>
+      <add>Lägg till</add>
+      <delete>Ta bort</delete>
+    </label>
+    <msg>
+      <no-content-found>Inget innehåll funnet.</no-content-found>
+      <non-content>Du har inte valt något innehåll.</non-content>
+    </msg>
+  </UISelectedContentGrid>
+
+  <UICLVContentSelectedGrid>
+    <action>
+      <SaveCategories>Spara</SaveCategories>
+      <Cancel>Avbryt</Cancel>
+    </action>
+  </UICLVContentSelectedGrid>
+
+  <UIContentBrowsePathSelector>
+    <header>
+      <name>Namn</name>
+      <publicationstate>Publiceringsstatus</publicationstate>
+      <action>Åtgärd</action>
+    </header>
+    <msg>
+      <child-not-found>Inget innehåll</child-not-found>
+    </msg>
+  </UIContentBrowsePathSelector>
+
+  <UIContentBrowsePathSelectorFolder>
+    <header>
+      <name>Namn</name>
+      <publicationstate>Publiceringsstatus</publicationstate>
+      <action>Åtgärd</action>
+    </header>
+    <msg>
+      <child-not-found>Ingen mapp hittade</child-not-found>
+    </msg>
+  </UIContentBrowsePathSelectorFolder>
+
+  <UIContentSearchForm>
+    <title>
+      <Location>Webbplatsens namn</Location>
+      <SearchByName>Sök efter namn</SearchByName>
+      <Fulltext>Ett ord eller en fras i innehållet</Fulltext>
+      <Property>Rättigheter</Property>
+      <Contain>Innehåller</Contain>
+      <FromDate>Från datum</FromDate>
+      <ToDate>Till Datum</ToDate>
+      <DocumentType>Dokumenttyp</DocumentType>
+    </title>
+    <tooltip>
+      <AddMetadataType>Lägg till egenskap</AddMetadataType>
+      <AddNodeType>Lägg till nodtyp</AddNodeType>
+    </tooltip>    
+    <label>
+      <option>
+        <CREATED>Skapad</CREATED>
+        <MODIFIED>Ändrad</MODIFIED>
+      </option>
+    </label>
+    <action>
+      <SearchWebContent>Sök</SearchWebContent>
+    </action>
+    <msg>
+      <time-to-late>Sökningen tog för lång tid</time-to-late>
+      <empty-field>Vänligen ange ett giltigt nyckelord för sökning.</empty-field>
+      <invalid-format>Ogiltigt datum/tid-format i fältet {0}.</invalid-format>
+      <invalid-date>"Till datum" måste vara senare än "Från datum"</invalid-date>
+      <invalid-nodeType>Nodtypen {0} är ogiltig. Kontrollera igen.</invalid-nodeType>
+      <invalid-keyword>Nyckelordet är ogiltig. Vissa tecken stöds inte.</invalid-keyword>
+    </msg>
+  </UIContentSearchForm>
+
+  <WebContentMetadataPopup>
+    <title>
+      <UIContentPropertySelector>Val av Egenskapen</UIContentPropertySelector>
+    </title>
+  </WebContentMetadataPopup>
+
+  <UIContentPropertySelector>
+    <action>
+      <Add>Lägg till</Add>
+      <Cancel>Avbryt</Cancel>
+    </action>
+    <label>
+      <metadataType>Metadatatyp</metadataType>
+      <property_select>Rättigheter</property_select>
+    </label>
+  </UIContentPropertySelector>
+
+  <WebContentNodeTypePopup>
+    <title>
+      <UIContentNodeTypeSelector>Nod typ väljare</UIContentNodeTypeSelector>
+    </title>
+  </WebContentNodeTypePopup>
+
+  <UIContentNodeTypeSelector>
+    <action>
+      <Save>Spara</Save>
+      <Cancel>Avbryt</Cancel>
+    </action>
+  </UIContentNodeTypeSelector>
+
+  <UIContentSearchResult>
+    <header>
+      <title>Titel</title>
+      <score>Poäng</score>
+      <publicationstate>Publiceringsstatus</publicationstate>
+      <action>Åtgärd</action>
+    </header>
+    <title>
+      <Select>Välj</Select>
+      <View>Visa</View>
+    </title>
+    <msg>
+    <template-not-support>Kan inte förhandsgranska innehållet. Mallen stöds inte</template-not-support>
+    </msg>
+  </UIContentSearchResult>
+
+  <UIContentDialogForm>
+    <action>
+      <SaveDraft>Spara utkast</SaveDraft>
+      <FastPublish>Snabbt publicera</FastPublish>
+      <Preferences>Inställningar</Preferences>
+      <Close>Stäng</Close>
+    </action>
+    <msg>
+      <access-denied>Du har inte behörighet att lägga till kategorier i detta dokument.</access-denied>
+      <exception>Ett fel uppstod när du lägger till kategorier i detta dokument.</exception>
+      <non-categories>Kategorier är fel. Välj lämpliga kategorier.</non-categories>
+    </msg>
+  </UIContentDialogForm>
+
+  <UIPermissionManager>
+    <label>
+      <UIPermissionInputSetWithAction>Rättigheter</UIPermissionInputSetWithAction>
+      <UIPermissionStringInput/>
+      <UIAccessibleCheckboxInput>Rättigheter för tillgång</UIAccessibleCheckboxInput>
+      <UIEditableCheckboxInput>Redigera höger</UIEditableCheckboxInput>
+    </label>
+    <action>
+      <Save>Spara</Save>
+      <Clear>Rensa</Clear>
+      <title>
+        <Edit>Redigera</Edit>
+        <Delete>Ta bort</Delete>
+      </title>
+    </action>
+  </UIPermissionManager>
+
+  <UIPermissionManagerGrid>
+    <header>
+      <owner>Rättigheter</owner>
+      <accessible>Tillgänglig</accessible>
+      <editable>Redigerbara</editable>
+      <action>Åtgärd</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>Är du säker på att du vill ta bort denna rättighet?</confirm-delete-permission>
+      <no-permission-remove>Du har inte behörighet.</no-permission-remove>
+      <access-denied>Åtkomst nekad.</access-denied>
+      <node-locked>Sökvägen för elementet {0} eller någon av dess föräldrar är låst.</node-locked>
+      <userOrGroup-required>Du måste välja en användare eller grupp.</userOrGroup-required>
+      <checkbox-require>Du måste ställa in rättigheter.</checkbox-require>
+      <node-checkedin>Du måste checka ut först.</node-checkedin>
+    </msg>
+  </UIPermissionManagerGrid>
+
+  <UIPermissionInputSetWithAction>
+    <title>
+      <SelectUser>Välj användare</SelectUser>
+      <SelectMember>Välj medlem</SelectMember>
+      <AddAny>Lägg till alla behörighetsgrupper</AddAny>
+    </title>
+  </UIPermissionInputSetWithAction>
+
+  <UIUserSelectorPopupWindow>
+    <title>
+      <UIUserContainer>Välj användare</UIUserContainer>
+    </title>
+  </UIUserSelectorPopupWindow>
+
+  <UIGroupSelectorPopupWindow>
+    <title>
+      <UIGroupMemberSelector>Välj Grupp</UIGroupMemberSelector>
+    </title>
+  </UIGroupSelectorPopupWindow>
+
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>Välj grupp</selectGroup>
+      <selectMembership>Välj medlemskap</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+
+  <UIContentDialogPreference>
+    <action>
+      <Back>Tillbaka</Back>
+    </action>
+  </UIContentDialogPreference>
+
+  <ZeroValidator>
+    <msg>
+      <Invalid-number>Noll är inte accepterat i fältet {0}.</Invalid-number>
+    </msg>
+  </ZeroValidator>
+
+  <UIDropDownPageTemp>
+    <item>
+      <WCMPageConfigs>WCM sid konfigurationer</WCMPageConfigs>
+      <ColumnPageConfigs>Kolumn sid konfiguration</ColumnPageConfigs>
+      <RowPageConfigs>Rad sidkonfiguration</RowPageConfigs>
+      <TabsPageConfigs>Flik sid konfigurationer</TabsPageConfigs>
+      <MixPageConfigs>Mix sida konfigurationer</MixPageConfigs>
+    </item>
+  </UIDropDownPageTemp>
+
+  <UIWizardPageSelectLayoutForm>
+    <label>
+      <SingleContentViewer>Vy för ett innehåll</SingleContentViewer>
+      <ContentListViewer>Vy på Innehållslista</ContentListViewer>
+      <Search>Sök</Search>
+      <Sitemap>Webbplatsens karta</Sitemap>
+      <TwoColumnsLayout>Layout med två kolumner</TwoColumnsLayout>
+      <ThreeColumnsLayout>Tre-kolumn Layout</ThreeColumnsLayout>
+      <TwoRowsLayout>Två rader Layout</TwoRowsLayout>
+      <ThreeRowsLayout>Tre-rad Layout</ThreeRowsLayout>
+      <TwoTabsLayout>Två-flik layout</TwoTabsLayout>
+      <ThreeTabsLayout>Tre-flik Layout</ThreeTabsLayout>
+      <TwoColumnsOneRowLayout>Två kolumner &amp; en rad Layout</TwoColumnsOneRowLayout>
+      <OneRowTwoColumnsLayout>En rad &amp; två kolumner Layout</OneRowTwoColumnsLayout>
+      <ThreeRowsTwoColumnsLayout>Tre-rad &amp; två kolumner Layout</ThreeRowsTwoColumnsLayout>
+    </label>
+  </UIWizardPageSelectLayoutForm>
+
+  <Signin>
+    <welcome>Välkommen</welcome>
+    <login>Logga in</login>
+    <logout>Logga ut</logout>
+    <language>Ändra språk</language>
+    <register>Registrera dig</register>
+  </Signin>
+  <UIDriveForm>
+<label>
+<wcm-category-view>Kategorivy</wcm-category-view>
+<wcm-view>WCM innehållsvy</wcm-view>
+</label>
+  </UIDriveForm>
+  
+  <ContentSelector>
+    <title>
+      <PersonalDrives>Personliga enheter</PersonalDrives>
+      <GeneralDrives>Allmänna enheter</GeneralDrives>
+      <GroupDrives>Grupp enheter</GroupDrives>
+      <Private>Privat</Private>
+      <Public>Offentlig</Public>
+      <BackupCenter>Backup Center</BackupCenter>
+      <CategorizedDocumentsCenter>Kategoriserade dokument Center</CategorizedDocumentsCenter>
+      <CollaborationCenter>Samarbetes Center</CollaborationCenter>
+      <DigitalAssetsManagementCenter>Digitala tillgångar Management Center</DigitalAssetsManagementCenter>
+      <DMSAdministration>DMS Administration</DMSAdministration>
+      <DocumentsManagementCenter>Dokument Management Center</DocumentsManagementCenter>
+      <LiveDocumentsCenter>Levande dokument Center</LiveDocumentsCenter>
+      <PendingDocumentsCenter>Väntande dokument Center</PendingDocumentsCenter>
+      <RecordsManagementCenter>Records Management Center</RecordsManagementCenter>
+      <SharedUsersSpace>Delade användares webb-yta</SharedUsersSpace>
+      <Systemfiles>Systemfiler</Systemfiles>
+      <ValidationRequestsDocumentsCenter>Validering begäran om dokument Center</ValidationRequestsDocumentsCenter>
+      <ManagedSites>Hantering av webbplatser</ManagedSites>
+      <SharedSite>Delad webbplats</SharedSite>
+    </title>
+  </ContentSelector>
+  
+  <UICategoryNavigationTargetPathPopupWindow>
+    <title>
+      <UIPageSelector>Sidväljare</UIPageSelector>
+    </title>
+  </UICategoryNavigationTargetPathPopupWindow>
+  
+  <UIDocumentInfo>
+    <msg>
+      <access-denied-exception>Åtkomst nekad. Du kanske inte har läsbehörighet eller noden kan ha tagits bort eller ändrats.</access-denied-exception>
+    </msg>
+  </UIDocumentInfo>
+  <UIPortalApplication>
+    <title>
+      <abort>Avbryt</abort>
+    </title>
+  </UIPortalApplication>    
+  
+  <CategoryNavigationTemplate>
+  <label>
+  <home>Hem</home>
+  </label>
+  </CategoryNavigationTemplate>
+  
+  <Breadcrumb>
+  <label>
+  <home>Hem</home>
+  </label>  
+  </Breadcrumb>
+</bundle>

@@ -64,12 +64,14 @@ import org.exoplatform.webui.form.UIFormStringInput;
  */
 
 @ComponentConfigs( {
-    @ComponentConfig(lifecycle = UIFormLifecycle.class, template = "app:/groovy/webui/component/explorer/thumbnail/UIAddTranslationForm.gtmpl", events = {
-        @EventConfig(listeners = UIAddTranslationForm.SaveActionListener.class),
-        @EventConfig(listeners = UIAddTranslationForm.CancelActionListener.class, phase = Phase.DECODE) }),
+    @ComponentConfig(lifecycle = UIFormLifecycle.class,
+        template = "app:/groovy/webui/component/explorer/thumbnail/UIAddTranslationForm.gtmpl",
+        events = {
+      @EventConfig(listeners = UIAddTranslationForm.SaveActionListener.class),
+      @EventConfig(listeners = UIAddTranslationForm.CancelActionListener.class, phase = Phase.DECODE) }),
     @ComponentConfig(type = UITranslationFormMultiValueInputSet.class, id = "SymLinkMultipleInputset", events = {
-        @EventConfig(listeners = UIAddTranslationForm.RemoveActionListener.class, phase = Phase.DECODE),
-        @EventConfig(listeners = UIAddTranslationForm.SelectDocumentActionListener.class, phase = Phase.DECODE) }) })
+      @EventConfig(listeners = UIAddTranslationForm.RemoveActionListener.class, phase = Phase.DECODE),
+      @EventConfig(listeners = UIAddTranslationForm.SelectDocumentActionListener.class, phase = Phase.DECODE) }) })
 
 public class UIAddTranslationForm extends UIForm implements UIPopupComponent, UISelectable {
   
@@ -170,21 +172,24 @@ public class UIAddTranslationForm extends UIForm implements UIPopupComponent, UI
       try {
         nodeFinder.getItem(workspaceName, pathNode);
       } catch (ItemNotFoundException e) {
-        uiApp.addMessage(new ApplicationMessage("UIAddTranslationForm.msg.non-node", null,
-            ApplicationMessage.WARNING));
+        uiApp.addMessage(new ApplicationMessage("UIAddTranslationForm.msg.non-node",
+                                                null,
+                                                ApplicationMessage.WARNING));
 
         return;
       } catch (RepositoryException re) {
-        uiApp.addMessage(new ApplicationMessage("UIAddTranslationForm.msg.non-node", null,
-            ApplicationMessage.WARNING));
+        uiApp.addMessage(new ApplicationMessage("UIAddTranslationForm.msg.non-node",
+                                                null,
+                                                ApplicationMessage.WARNING));
 
         return;
       } catch(Exception e) {
         if (LOG.isErrorEnabled()) {
           LOG.error("An unexpected error occurs", e);
         }
-        uiApp.addMessage(new ApplicationMessage("UIAddTranslationForm.msg.non-node", null,
-            ApplicationMessage.WARNING));
+        uiApp.addMessage(new ApplicationMessage("UIAddTranslationForm.msg.non-node",
+                                                null,
+                                                ApplicationMessage.WARNING));
 
         return;
       }
@@ -194,28 +199,39 @@ public class UIAddTranslationForm extends UIForm implements UIPopupComponent, UI
         langService.addSynchronizedLinkedLanguage(node, targetNode);
         uiExplorer.updateAjax(event);
       } catch (AccessControlException ace) {
-        uiApp.addMessage(new ApplicationMessage("UIAddTranslationForm.msg.repository-exception", null, ApplicationMessage.WARNING));
+        uiApp.addMessage(new ApplicationMessage("UIAddTranslationForm.msg.repository-exception",
+                                                null,
+                                                ApplicationMessage.WARNING));
 
         return;
       } catch (AccessDeniedException ade) {
-        uiApp.addMessage(new ApplicationMessage("UIAddTranslationForm.msg.repository-exception", null, ApplicationMessage.WARNING));
+        uiApp.addMessage(new ApplicationMessage("UIAddTranslationForm.msg.repository-exception",
+                                                null,
+                                                ApplicationMessage.WARNING));
 
         return;
       } catch(NumberFormatException nume) {
-        uiApp.addMessage(new ApplicationMessage("UIAddTranslationForm.msg.numberformat-exception", null, ApplicationMessage.WARNING));
+        uiApp.addMessage(new ApplicationMessage("UIAddTranslationForm.msg.numberformat-exception",
+                                                null,
+                                                ApplicationMessage.WARNING));
 
         return;
       } catch(ConstraintViolationException cve) {
-        uiApp.addMessage(new ApplicationMessage("UIAddTranslationForm.msg.cannot-save", null, ApplicationMessage.WARNING));
+        uiApp.addMessage(new ApplicationMessage("UIAddTranslationForm.msg.cannot-save",
+                                                null,
+                                                ApplicationMessage.WARNING));
 
         return;
       } catch(ItemExistsException iee) {
-        uiApp.addMessage(new ApplicationMessage("UIAddTranslationForm.msg.item-exists-exception", null, ApplicationMessage.WARNING));
+        uiApp.addMessage(new ApplicationMessage("UIAddTranslationForm.msg.item-exists-exception",
+                                                null,
+                                                ApplicationMessage.WARNING));
 
         return;
       } catch(UnsupportedRepositoryOperationException unOperationException) {
-        uiApp.addMessage(new ApplicationMessage("UIAddTranslationForm.msg.UnsupportedRepositoryOperationException", null,
-            ApplicationMessage.WARNING));
+        uiApp.addMessage(new ApplicationMessage("UIAddTranslationForm.msg.UnsupportedRepositoryOperationException",
+                                                null,
+                                                ApplicationMessage.WARNING));
 
         return;
       } catch (SameAsDefaultLangException unOperationException) {
@@ -228,7 +244,9 @@ public class UIAddTranslationForm extends UIForm implements UIPopupComponent, UI
         if (LOG.isErrorEnabled()) {
           LOG.error("Unexpected error", e);
         }
-        uiApp.addMessage(new ApplicationMessage("UIAddTranslationForm.msg.cannot-save", null, ApplicationMessage.WARNING));
+        uiApp.addMessage(new ApplicationMessage("UIAddTranslationForm.msg.cannot-save",
+                                                null,
+                                                ApplicationMessage.WARNING));
 
         return;
       }

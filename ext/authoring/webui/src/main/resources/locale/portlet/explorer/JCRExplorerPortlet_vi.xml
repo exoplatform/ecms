@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIActionBar      #
+  ###################################################################################
+  -->
+  <UIActionBar>
+    <tooltip>
+      <PublicationRequestApproval>Yêu cầu Duyệt</PublicationRequestApproval>
+      <PublicationApproveContent>Duyệt Nội dung</PublicationApproveContent>
+      <PublicationPublish>Xuất bản</PublicationPublish>
+    </tooltip>
+  </UIActionBar>
+</bundle>

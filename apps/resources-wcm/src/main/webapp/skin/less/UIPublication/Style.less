@@ -24,7 +24,6 @@
 			margin-right: -4px;
 			
 			p {
-				color: @grayDark;
 				font-size: 13px;
 				font-weight: bold;
 				margin: 10px 0px;
@@ -37,6 +36,19 @@
 				display: block; 
 				margin: 0px auto; 
 				cursor: pointer;
+			}
+		}
+		.activeStatus,
+		.disableStatus {
+			p {
+				color: @grayLight;
+			}
+		}
+		.completed,
+		.activeStatus.completed,
+		.disableStatus.completed {
+			p {
+				color: @grayDark;
 			}
 		}
 
@@ -59,7 +71,7 @@
 		}
 
 		.currentStatus p {
-			color: #2f5e92;
+			color: @blue;
 		}
 
 		.disableStatus .node {

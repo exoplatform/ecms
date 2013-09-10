@@ -53,7 +53,7 @@ import org.exoplatform.services.log.Log;
  */
 public class ScriptUpgradePlugin extends UpgradeProductPlugin {
   
-  private Log log = ExoLogger.getLogger(this.getClass());
+  private static final Log log = ExoLogger.getLogger(ScriptUpgradePlugin.class.getName());
   private ScriptService scriptService_;
   
   public ScriptUpgradePlugin(ScriptService scriptService, InitParams initParams) {

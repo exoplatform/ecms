@@ -47,7 +47,7 @@ import org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector;
 import org.exoplatform.ecm.webui.tree.selectone.UIOneTaxonomySelector;
 import org.exoplatform.ecm.webui.utils.DialogFormUtil;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
-import org.exoplatform.ecm.webui.utils.LockUtil;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
@@ -93,21 +93,21 @@ import org.exoplatform.webui.form.UIFormMultiValueInputSet;
  */
 
 @ComponentConfigs( {
-    @ComponentConfig(type = UIFormMultiValueInputSet.class, id = "WYSIWYGRichTextMultipleInputset", events = {
-        @EventConfig(listeners = UIDialogForm.AddActionListener.class, phase = Phase.DECODE),
-        @EventConfig(listeners = UIFormMultiValueInputSet.RemoveActionListener.class, phase = Phase.DECODE) }),
+  @ComponentConfig(type = UIFormMultiValueInputSet.class, id = "WYSIWYGRichTextMultipleInputset", events = {
+    @EventConfig(listeners = UIDialogForm.AddActionListener.class, phase = Phase.DECODE),
+    @EventConfig(listeners = UIFormMultiValueInputSet.RemoveActionListener.class, phase = Phase.DECODE) }),
     @ComponentConfig(lifecycle = UIFormLifecycle.class, events = {
-        @EventConfig(listeners = UIDocumentForm.SaveActionListener.class),
-        @EventConfig(listeners = UIDocumentForm.SaveAndCloseActionListener.class),
-        @EventConfig(listeners = UIDocumentForm.CloseActionListener.class, phase = Phase.DECODE),
-        @EventConfig(listeners = UIDocumentForm.ChangeTypeActionListener.class, phase = Phase.DECODE),
-        @EventConfig(listeners = UIDocumentForm.AddActionListener.class, phase = Phase.DECODE),
-        @EventConfig(listeners = UIDocumentForm.RemoveActionListener.class, phase = Phase.DECODE),
-        @EventConfig(listeners = UIDocumentForm.ShowComponentActionListener.class, phase = Phase.DECODE),
-        @EventConfig(listeners = UIDocumentForm.RemoveReferenceActionListener.class,
-                     confirm = "DialogFormField.msg.confirm-delete", phase = Phase.DECODE),
-        @EventConfig(listeners = DialogFormActionListeners.RemoveDataActionListener.class, phase = Phase.DECODE),
-        @EventConfig(listeners = DialogFormActionListeners.ChangeTabActionListener.class, phase = Phase.DECODE) }) })
+      @EventConfig(listeners = UIDocumentForm.SaveActionListener.class),
+      @EventConfig(listeners = UIDocumentForm.SaveAndCloseActionListener.class),
+      @EventConfig(listeners = UIDocumentForm.CloseActionListener.class, phase = Phase.DECODE),
+      @EventConfig(listeners = UIDocumentForm.ChangeTypeActionListener.class, phase = Phase.DECODE),
+      @EventConfig(listeners = UIDocumentForm.AddActionListener.class, phase = Phase.DECODE),
+      @EventConfig(listeners = UIDocumentForm.RemoveActionListener.class, phase = Phase.DECODE),
+      @EventConfig(listeners = UIDocumentForm.ShowComponentActionListener.class, phase = Phase.DECODE),
+      @EventConfig(listeners = UIDocumentForm.RemoveReferenceActionListener.class,
+      confirm = "DialogFormField.msg.confirm-delete", phase = Phase.DECODE),
+      @EventConfig(listeners = DialogFormActionListeners.RemoveDataActionListener.class, phase = Phase.DECODE),
+      @EventConfig(listeners = DialogFormActionListeners.ChangeTabActionListener.class, phase = Phase.DECODE) }) })
 
 public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UISelectable {
 
@@ -139,10 +139,10 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     String strChangeTypeLabel = res.getString(getName() + ".action." + action);
     StringBuilder link = new StringBuilder();
     link.append("<a onclick=\"")
-        .append(event(action))
-        .append("\" class=\"changeTypeLink\">(")
-        .append(strChangeTypeLabel)
-        .append(")</a>");
+    .append(event(action))
+    .append("\" class=\"changeTypeLink\">(")
+    .append(strChangeTypeLabel)
+    .append(")</a>");
     return link.toString();
   }
 
@@ -182,7 +182,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       UIApplication uiApp = getAncestorOfType(UIApplication.class);
       Object[] arg = { contentType };
       uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.not-support", arg,
-          ApplicationMessage.ERROR));
+                                              ApplicationMessage.ERROR));
       return null;
     }
   }
@@ -219,8 +219,8 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     } catch (AccessControlException e) {
       if (LOG.isErrorEnabled()) {
         LOG.error("AccessControlException: user [" + userName
-          + "] does not have access to the template for content type [" + contentType
-          + "] in repository + [" + repositoryName + "]");
+                  + "] does not have access to the template for content type [" + contentType
+                  + "] in repository + [" + repositoryName + "]");
       }
       return null;
     } catch (Exception e) {
@@ -230,7 +230,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       UIApplication uiApp = getAncestorOfType(UIApplication.class);
       Object[] arg = { contentType };
       uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.not-support", arg,
-          ApplicationMessage.ERROR));
+                                              ApplicationMessage.ERROR));
       return null;
     }
   }
@@ -272,19 +272,19 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       }
       link = event(action);
       writer.append("<button type=\"button\" ")
-            .append("onclick=\"")
-            .append(link)
-            .append("\" class=\"" + btn  +"\">")
-            .append(actionLabel)
-            .append("</button>");
+      .append("onclick=\"")
+      .append(link)
+      .append("\" class=\"" + btn  +"\">")
+      .append(actionLabel)
+      .append("</button>");
     }
     String fullscreen = res.getString(getName() + ".tooltip.FullScreen");
     writer.append("<a class=\"actionIcon\" onclick='eXo.webui.UIDocForm.FullScreenToggle(this); return false;'><i ")
-          .append(fullscreen)
-          .append("\" id=\"")
-          .append(contextID)
-          .append("\" class=\"uiIconEcmsExpand uiIconEcmsLightGrey\"></i></a>");
-					
+    .append(fullscreen)
+    .append("\" id=\"")
+    .append(contextID)
+    .append("\" class=\"uiIconEcmsExpand uiIconEcmsLightGrey\"></i></a>");
+
     writer.append("</div>");
     writer.append("<span class='uiDialogTitle'>" + getTemplateLabel() + " " + getChangeTypeActionLink () + "</span>");
     writer.append("</h5>");
@@ -363,7 +363,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
           String valueName = input.getValue().toString();
           if (!Utils.isNameValid(valueName, arrFilterChar)) {
             uiApp.addMessage(new ApplicationMessage("UIFolderForm.msg.name-not-allowed", null,
-                ApplicationMessage.WARNING));
+                                                    ApplicationMessage.WARNING));
 
             return null;
           }
@@ -390,7 +390,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
                 taxonomyService.getTaxonomyTree(categoryPath);
               } else {
                 taxonomyService.getTaxonomyTree(categoryPath.substring(0, index))
-                               .getNode(categoryPath.substring(index + 1));
+                .getNode(categoryPath.substring(index + 1));
               }
             }
           } catch (Exception e) {
@@ -402,7 +402,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
           }
         }
       }
-    }        
+    }
     Map inputProperties = DialogFormUtil.prepareMap(inputs, documentForm.getInputProperties(), documentForm.getInputOptions());
     Node newNode = null;
     String nodeType;
@@ -437,17 +437,18 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         newNode = (Node)homeNode.getSession().getItem(addedPath);
         //Broadcast the add file activity
         if(documentForm.isAddNew()) {
-	        ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
-	        ActivityCommonService   activityService = WCMCoreUtils.getService(ActivityCommonService.class);
-	        if (newNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) && activityService.isBroadcastNTFileEvents(newNode)) {
-	          listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, newNode);
-	          newNode.getSession().save();
-	        } else if(activityService.isAcceptedNode(newNode)) {
-	          listenerService.broadcast(ActivityCommonService.NODE_CREATED_ACTIVITY, null, newNode);
-	          newNode.getSession().save();
-	        } 
+          ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
+          ActivityCommonService   activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+          if (newNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) 
+              && activityService.isBroadcastNTFileEvents(newNode)) {
+            listenerService.broadcast(ActivityCommonService.FILE_CREATED_ACTIVITY, null, newNode);
+            newNode.getSession().save();
+          } else if(activityService.isAcceptedNode(newNode)) {
+            listenerService.broadcast(ActivityCommonService.NODE_CREATED_ACTIVITY, null, newNode);
+            newNode.getSession().save();
+          }
         }
-       
+
         if(newNode.isLocked()) {
           newNode.getSession().addLockToken(LockUtil.getLockToken(newNode));
         }
@@ -459,7 +460,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
           for (Node taxonomyTrees : listTaxonomyTrees) {
             if (existedTaxonomy.getPath().contains(taxonomyTrees.getPath())) {
               listExistingTaxonomy.add(taxonomyTrees.getName()
-                  + existedTaxonomy.getPath().substring(taxonomyTrees.getPath().length()));
+                                       + existedTaxonomy.getPath().substring(taxonomyTrees.getPath().length()));
               break;
             }
           }
@@ -486,7 +487,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
               }
             } catch(AccessDeniedException accessDeniedException) {
               uiApp.addMessage(new ApplicationMessage("AccessControlException.msg", null,
-                  ApplicationMessage.WARNING));
+                                                      ApplicationMessage.WARNING));
 
             } catch (Exception e) {
               continue;
@@ -512,17 +513,17 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       throw new AccessDeniedException(ace.getMessage());
     } catch(VersionException ve) {
       uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.in-versioning", null,
-          ApplicationMessage.WARNING));
+                                              ApplicationMessage.WARNING));
 
       return null;
     } catch(ItemNotFoundException item) {
       uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.item-not-found", null,
-          ApplicationMessage.WARNING));
+                                              ApplicationMessage.WARNING));
 
       return null;
     } catch(AccessDeniedException accessDeniedException) {
       uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.repository-exception-permission", null,
-          ApplicationMessage.WARNING));
+                                              ApplicationMessage.WARNING));
 
       return null;
     } catch(ItemExistsException existedex) {
@@ -561,7 +562,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
 
       return null;
     } finally {
-       documentForm.releaseLock();
+      documentForm.releaseLock();
     }
     return null;
   }
@@ -730,7 +731,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
               String repository = uiExplorer.getRepositoryName();
               if(uiSet.getValue().size() == 0) uiSet.setValue(new ArrayList<Value>());
               UIOneTaxonomySelector uiOneTaxonomySelector =
-                uiFormController.createUIComponent(UIOneTaxonomySelector.class, null, null);
+                  uiFormController.createUIComponent(UIOneTaxonomySelector.class, null, null);
               TaxonomyService taxonomyService = uiDocumentForm.getApplicationComponent(TaxonomyService.class);
               List<Node> lstTaxonomyTree = taxonomyService.getAllTaxonomyTrees();
               if (lstTaxonomyTree.size() == 0) throw new AccessDeniedException();
@@ -754,7 +755,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
           event.getRequestContext().addUIComponentToUpdateByAjax(uiFormController);
         } catch (AccessDeniedException accessDeniedException) {
           uiApp.addMessage(new ApplicationMessage("Taxonomy.msg.AccessDeniedException", null,
-              ApplicationMessage.WARNING));
+                                                  ApplicationMessage.WARNING));
 
           return;
         } catch (Exception e) {

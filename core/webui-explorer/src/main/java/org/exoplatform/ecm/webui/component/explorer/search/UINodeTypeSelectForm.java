@@ -28,10 +28,10 @@ import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 
 /**
  * Created by The eXo Platform SARL
@@ -60,14 +60,13 @@ public class UINodeTypeSelectForm extends UIForm implements UIPopupComponent {
     }
   }
 
-  @SuppressWarnings("unchecked")
   public void setRenderNodeTypes() throws Exception {
     getChildren().clear() ;
-    UIFormCheckBoxInput<String> uiCheckBox ;
+    UICheckBoxInput uiCheckBox ;
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
     List<String> templates = templateService.getDocumentTemplates() ;
     for(String template : templates) {
-      uiCheckBox = new UIFormCheckBoxInput<String>(template, template, "") ;
+      uiCheckBox = new UICheckBoxInput(template, template, null);
       if(propertiesSelected(template)) uiCheckBox.setChecked(true) ;
       else uiCheckBox.setChecked(false) ;
       addUIFormInput(uiCheckBox) ;
@@ -117,8 +116,8 @@ public class UINodeTypeSelectForm extends UIForm implements UIPopupComponent {
       UIConstraintsForm uiConstraintsForm =
         uiSearchContainer.findFirstComponentOfType(UIConstraintsForm.class) ;
       List<String> selectedNodeTypes = new ArrayList<String>() ;
-      List<UIFormCheckBoxInput> listCheckbox =  new ArrayList<UIFormCheckBoxInput>();
-      uiForm.findComponentOfType(listCheckbox, UIFormCheckBoxInput.class);
+      List<UICheckBoxInput> listCheckbox =  new ArrayList<UICheckBoxInput>();
+      uiForm.findComponentOfType(listCheckbox, UICheckBoxInput.class);
       String nodeTypesValue =
         uiConstraintsForm.getUIStringInput(UIConstraintsForm.DOC_TYPE).getValue() ;
       if(nodeTypesValue != null && nodeTypesValue.length() > 0) {
@@ -141,7 +140,7 @@ public class UINodeTypeSelectForm extends UIForm implements UIPopupComponent {
       /* Set value for textbox */
       uiForm.setNodeTypes(selectedNodeTypes) ;
       /* Set value of checkbox is checked */
-      uiConstraintsForm.getUIFormCheckBoxInput(UIConstraintsForm.NODETYPE_PROPERTY).setChecked(true);
+      uiConstraintsForm.getUICheckBoxInput(UIConstraintsForm.NODETYPE_PROPERTY).setChecked(true);
       UIPopupContainer uiPopup = uiSearchContainer.getChild(UIPopupContainer.class) ;
       uiPopup.deActivate() ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiSearchContainer) ;

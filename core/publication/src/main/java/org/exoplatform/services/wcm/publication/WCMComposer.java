@@ -96,10 +96,10 @@ public interface WCMComposer {
 
   /** The Constant for base version. */
   public final static String BASE_VERSION = "base";
-  
+
   /** The Constant VISIBILITY PUBLIC. */
   public final static String VISIBILITY_PUBLIC = "public";
-  
+
   /** The Constant VISIBILITY USER. */
   public final static String VISIBILITY_USER = "user";
 
@@ -116,11 +116,11 @@ public interface WCMComposer {
   public Node getContent(String workspace,
                          String nodeIdentifier,
                          HashMap<String, String> filters,
-                         SessionProvider sessionProvider) throws Exception;  
+                         SessionProvider sessionProvider) throws Exception;
 
   /**
    * Return content at the specified path based on filters.
-   * 
+   *
    * @param workspace The workspace
    * @param path The path
    * @param filters The filters
@@ -132,7 +132,7 @@ public interface WCMComposer {
                                 String path,
                                 HashMap<String, String> filters,
                                 SessionProvider sessionProvider) throws Exception;
-  
+
  /**
   * Return content at the specified path based on filters.
   *
@@ -142,37 +142,9 @@ public interface WCMComposer {
   * @return A jcr node
   * @throws Exception The exception
   */
- public Result getPaginatedContents(NodeLocation nodeLocation, 
-                                                             HashMap<String, String> filters, 
+ public Result getPaginatedContents(NodeLocation nodeLocation,
+                                                             HashMap<String, String> filters,
                                                              SessionProvider sessionProvider) throws Exception ;
-  
-  /**
-   * Update content.
-   * Deprecated since version 4.0.
-   * 
-   * @param workspace The workspace
-   * @param nodeIdentifier The path
-   * @param filters The filters
-   * @return true, if successful
-   * @throws Exception The exception
-   */
- @Deprecated 
- public boolean updateContent(String workspace,
-                               String nodeIdentifier,
-                               HashMap<String, String> filters) throws Exception;
-
-  /**
-   * Update content.
-   * Deprecated since version 4.0.
-   *
-   * @param workspace The workspace
-   * @param path The path
-   * @param filters The filters
-   * @return true, if successful
-   * @throws Exception The exception
-   */
- @Deprecated
- public boolean updateContents(String workspace, String path, HashMap<String, String> filters) throws Exception;
 
   /**
    *  Return the allowed states for a specified mode.
@@ -191,20 +163,10 @@ public interface WCMComposer {
   public void cleanTemplates() throws Exception ;
 
   /**
-   * Check isCache or not.
-   * Deprecated since version 4.0.
-   *
-   * @return True if is in cache or False otherwise
-   * @throws Exception the exception
-   */
-  @Deprecated
-  public boolean isCached() throws Exception;
-
-  /**
    * Update all document nodetypes and write a query cause.
    *
    * @return It returns a part of the query that allows to search all document nodes and taxonomy links. Return null if there is any exception.
    * @throws Exception the exception
    */
-  public String updateTemplatesSQLFilter() throws Exception; 
+  public String updateTemplatesSQLFilter() throws Exception;
 }

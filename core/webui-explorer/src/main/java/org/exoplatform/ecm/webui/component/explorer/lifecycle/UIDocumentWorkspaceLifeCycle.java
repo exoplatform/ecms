@@ -37,7 +37,8 @@ public class UIDocumentWorkspaceLifeCycle extends Lifecycle<UIContainer> {
     context.getWriter()
            .append("<div class=\"")
            .append(uicomponent.getId())
-           .append(isUISelectDocumentTemplateTitleRendered || uiActionBar.isRendered() ? StringUtils.EMPTY : " uiDocumentWorkspaceBox") 
+           .append(isUISelectDocumentTemplateTitleRendered || uiActionBar.isRendered()
+                   ? StringUtils.EMPTY : " uiDocumentWorkspaceBox") 
            .append("\" id=\"")
            .append(uicomponent.getId())
            .append("\">");

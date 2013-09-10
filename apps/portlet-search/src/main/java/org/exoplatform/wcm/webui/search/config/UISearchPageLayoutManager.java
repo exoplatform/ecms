@@ -90,7 +90,7 @@ public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
 
   /** The Constant ITEMS_PER_PAGE_SELECTOR. */
   public final static String ITEMS_PER_PAGE_SELECTOR            = "itemsPerPageSelector";
-  
+
   /** The Constant PAGE_MODE_SELECTOR. */
   public final static String PAGE_MODE_SELECTOR                 = "pageMode";
 
@@ -155,11 +155,11 @@ public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
     pageModeList.add(new SelectItemOption<String>("none", "none"));
     pageModeList.add(new SelectItemOption<String>("more", "more"));
     pageModeList.add(new SelectItemOption<String>("pagination", "pagination"));
-    
+
     UIFormSelectBox pageModeSelector = new UIFormSelectBox(PAGE_MODE_SELECTOR,
             PAGE_MODE_SELECTOR,
             pageModeList);
-    
+
     UIFormSelectBox itemsPerPageSelector = new UIFormSelectBox(ITEMS_PER_PAGE_SELECTOR,
                                                                ITEMS_PER_PAGE_SELECTOR,
                                                                itemsPerPageList);
@@ -180,7 +180,7 @@ public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
     UIFormInputSetWithAction targetPathFormInputSet = new UIFormInputSetWithAction(BASE_PATH_INPUT_SET_ACTION);
     UIFormStringInput targetPathFormStringInput = new UIFormStringInput(BASE_PATH_INPUT, BASE_PATH_INPUT, preferenceBasePath);
     targetPathFormStringInput.setValue(preferenceBasePath);
-    targetPathFormStringInput.setEditable(false);
+    targetPathFormStringInput.setReadOnly(true);
     targetPathFormInputSet.setActionInfo(BASE_PATH_INPUT, new String[] {"SelectBasePath"}) ;
     targetPathFormInputSet.addUIFormInput(targetPathFormStringInput);
 
@@ -265,7 +265,7 @@ public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
           getUIFormSelectBox(UISearchPageLayoutManager.ITEMS_PER_PAGE_SELECTOR).getValue();
 
       String pageMode = uiSearchLayoutManager.getUIFormSelectBox(UISearchPageLayoutManager.PAGE_MODE_SELECTOR).getValue();
-      
+
       String basePath = uiSearchLayoutManager.getUIStringInput(UISearchPageLayoutManager.BASE_PATH_INPUT)
                                              .getValue();
 

@@ -2,9 +2,11 @@
   	import org.exoplatform.wcm.webui.scv.UISingleContentViewerPortlet;
   	import org.exoplatform.wcm.webui.Utils;
   	import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
-  	import org.exoplatform.ecm.webui.utils.LockUtil;
+  	import org.exoplatform.ecm.utils.lock.LockUtil;
   	import org.exoplatform.services.jcr.core.ManageableRepository;
   	import org.exoplatform.wcm.webui.administration.UIEditingForm;
+  	import org.exoplatform.portal.application.PortalRequestContext;
+  	import org.exoplatform.portal.webui.util.Util;
 
 		def rcontext = _ctx.getRequestContext();
     def jsManager = rcontext.getJavascriptManager();
@@ -117,13 +119,21 @@
 						<% } %>
 				<%
 			}
-				
+			PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
+      String urlSearch = portalRequestContext.getRequestParameter("urlSearch");
+      
 			if (!Utils.isPortalEditMode() && isShowOptionBar && !uicomponent.isPrinting()) { 
 				%>
-					<div class="UIOptionBar clearfix">
-	         <div class="BackButton" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UISCVPreferences.label.Back") %>" onclick="history.go(-1)"><span></span></div>
-						<a class="ActionIcon PrintIcon" href="javascript: void(0);" onclick="window.open('<%= uicomponent.getPrintUrl(node) %>')" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UIPresentationContainer.label.print");%>"><%= _ctx.appRes("UIPresentationContainer.label.print") %></a>
-					</div>
+				<div class="UIOptionBar">
+        <% if (urlSearch != null) { %>  
+          <a href="$urlSearch">
+             <div class="BackButton" title="<%= _ctx.appRes("UISCVPreferences.label.Back") %>" ><span></span></div>
+          </a>
+        <% } else {%>
+             <div class="BackButton" title="<%= _ctx.appRes("UISCVPreferences.label.Back") %>" onclick="history.go(-1)" ><span></span></div>
+        <% } %>
+            <a class="ActionIcon PrintIcon" href="javascript: void(0);" onclick="window.open('<%= uicomponent.getPrintUrl(node) %>')" title="<%= _ctx.appRes("UIPresentationContainer.label.print");%>"><%= _ctx.appRes("UIPresentationContainer.label.print") %></a>
+        </div>
 				<% 
 			} 
 			uicomponent.renderChildren();

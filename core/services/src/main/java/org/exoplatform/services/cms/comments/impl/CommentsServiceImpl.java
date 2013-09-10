@@ -70,7 +70,7 @@ public class CommentsServiceImpl implements CommentsService {
    * @param multiLangService    MultiLanguageService Object
    */
   public CommentsServiceImpl(CacheService cacheService,
-      MultiLanguageService multiLangService) throws Exception {
+                             MultiLanguageService multiLangService) throws Exception {
     commentsCache_ = cacheService.getCacheInstance(CommentsService.class.getName()) ;
     multiLangService_ = multiLangService ;
     activityService = WCMCoreUtils.getService(ActivityCommonService.class);
@@ -79,7 +79,8 @@ public class CommentsServiceImpl implements CommentsService {
   /**
    * {@inheritDoc}
    */
-  public void addComment(Node node, String commentor,String email, String site, String comment,String language) throws Exception {
+  public void addComment(Node node, String commentor,String email, String site, String comment,String language)
+      throws Exception {
     if (listenerService==null) {
       listenerService = WCMCoreUtils.getService(ListenerService.class);
     }
@@ -119,19 +120,22 @@ public class CommentsServiceImpl implements CommentsService {
       if(commentor == null || commentor.length() == 0) {
         commentor = ANONYMOUS ;
       }      
-      
+
       Calendar commentDate = new GregorianCalendar() ;
       String name = Long.toString(commentDate.getTimeInMillis()) ;
       Node newComment = commentNode.addNode(name,EXO_COMMENTS) ;
       newComment.setProperty(COMMENTOR,commentor) ;
-      
+
       OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
       User user = organizationService.getUserHandler().findUserByName(commentor);
+     
       if(user == null)
-      	newComment.setProperty(COMMENTOR_FULLNAME,"ANONYMOUS") ;
-      else
-      	newComment.setProperty(COMMENTOR_FULLNAME,user.getFullName()) ; 
-      
+        newComment.setProperty(COMMENTOR_FULLNAME,"ANONYMOUS") ;
+      else {
+        String fullName = user.getDisplayName();
+        if(fullName == null) fullName = user.getUserName();
+        newComment.setProperty(COMMENTOR_FULLNAME,fullName) ; 
+      }
       newComment.setProperty(CREATED_DATE,commentDate) ;
       newComment.setProperty(MESSAGE,comment) ;
       if(email!=null && email.length()>0) {
@@ -144,8 +148,9 @@ public class CommentsServiceImpl implements CommentsService {
       systemSession.save();
       if (listenerService!=null) {
         try {
-          if (activityService.isAcceptedNode(document) || (document.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) 
-          		&& activityService.isBroadcastNTFileEvents(document))) {
+          if (activityService.isAcceptedNode(document) 
+              || (document.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) 
+                  && activityService.isBroadcastNTFileEvents(document))) {
             listenerService.broadcast(ActivityCommonService.COMMENT_ADDED_ACTIVITY, document, newComment);
           }
         } catch (Exception e) {
@@ -177,8 +182,8 @@ public class CommentsServiceImpl implements CommentsService {
     if (listenerService!=null && activityService!=null) {
       try {
         if (activityService.isAcceptedNode(documentNode) || 
-        		(documentNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) && 
-        				activityService.isBroadcastNTFileEvents(documentNode))) {
+            (documentNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) && 
+                activityService.isBroadcastNTFileEvents(documentNode))) {
           listenerService.broadcast(ActivityCommonService.COMMENT_UPDATED_ACTIVITY, documentNode, commentNode);
         }
       } catch (Exception e) {
@@ -203,11 +208,11 @@ public class CommentsServiceImpl implements CommentsService {
     commentNode.remove();
     document.save();    
     if (listenerService!=null && activityID !=null && activityService !=null) {
-    	Node parentNode = document.getParent();
+      Node parentNode = document.getParent();
       try {
         if (activityService.isAcceptedNode(parentNode) || 
-        		(parentNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) && 
-        				activityService.isBroadcastNTFileEvents(parentNode))) {
+            (parentNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) && 
+                activityService.isBroadcastNTFileEvents(parentNode))) {
           listenerService.broadcast(ActivityCommonService.COMMENT_REMOVED_ACTIVITY, parentNode, activityID);
         }
       } catch (Exception e) {

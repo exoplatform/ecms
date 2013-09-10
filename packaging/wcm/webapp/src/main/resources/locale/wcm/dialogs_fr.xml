@@ -31,12 +31,12 @@
         <name>Nom</name>
         <title>Titre</title>
         <ContentCSS>CSS</ContentCSS>
-        <hintCSS>Dans ce panneau, vous pouvez spécifier la feuille de style principale pour votre contenu web. Ce style surchargera celui défini au niveau du site et au niveau partagé.</hintCSS>
+        <hintCSS>Vous pouvez spécifier la feuille de style principale pour votre contenu web. Ce style surchargera celui défini au niveau du site et au niveau partagé.</hintCSS>
         <ContentJS>Javascript</ContentJS>
-        <hintJS>Dans ce panneau, vous pouvez spécifier du code JavaScript qui sera exécuté avant que votre contenu web est affiché sur la page.</hintJS>
+        <hintJS>Vous pouvez spécifier du code JavaScript qui sera exécuté avant que votre contenu web est affiché sur la page.</hintJS>
         <WebContentHtml>Contenu principal</WebContentHtml>
         <Illustration>Illustration</Illustration>
-        <hintIllustration>Dans ce panneau, vous pouvez spécifier une image qui sera affichée lorsque votre contenu web sera affiché dans les listes. En plus, vous pouvez spécifier un résumé accompagnant cette image.</hintIllustration>
+        <hintIllustration>Vous pouvez spécifier une image qui sera affichée lorsque votre contenu web sera affiché dans les listes. En plus, vous pouvez spécifier un résumé accompagnant cette image.</hintIllustration>
         <confirm-delete>Confirmez-vous la suppression de cette illustration?</confirm-delete>
         <illustrationImage>Vignette Illustrative</illustrationImage>
         <imageMimeType>Type d'image</imageMimeType>

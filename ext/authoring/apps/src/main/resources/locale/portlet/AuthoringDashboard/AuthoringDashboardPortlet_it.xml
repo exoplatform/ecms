@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDashboardForm>
+    <label>
+      <title>Authoring Dashboard</title>
+      <nocontent>Nessun contenuto</nocontent>
+      <mydraft>I miei conenuti in Bozza</mydraft>
+      <waitingapproval>In attesa della mia Approvazione</waitingapproval>
+      <approve>Approva</approve>
+      <publishedtomorrow>Pubblicati Domani</publishedtomorrow>
+    </label>
+  </UIDashboardForm>
+</bundle>

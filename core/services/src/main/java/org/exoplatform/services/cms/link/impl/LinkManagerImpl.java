@@ -48,6 +48,7 @@ import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -65,9 +66,9 @@ public class LinkManagerImpl implements LinkManager {
   private final static String    UUID          = "exo:uuid";
 
   private final static String    PRIMARY_TYPE  = "exo:primaryType";
-  
+
   private final static String    SYMLINK_NAME  = "exo:name";
-  
+
   private final static String    SYMLINK_TITLE = "exo:title";
 
   private final static Log       LOG  = ExoLogger.getLogger(LinkManagerImpl.class.getName());
@@ -91,17 +92,17 @@ public class LinkManagerImpl implements LinkManager {
   public Node createLink(Node parent, Node target) throws RepositoryException {
     return createLink(parent, null, target, null);
   }
-  
+
   /**
    * {@inheritDoc}
-  */  
+   */  
   public Node createLink(Node parent, String linkType, Node target, String linkName) throws RepositoryException {
-  	return createLink(parent, linkType, target, linkName, linkName);
+    return createLink(parent, linkType, target, linkName, linkName);
   }
 
   /**
    * {@inheritDoc}
-  */
+   */
   public Node createLink(Node parent, String linkType, Node target, String linkName, String linkTitle)
       throws RepositoryException {
     if (!target.isNodeType(SYMLINK)) {
@@ -152,7 +153,7 @@ public class LinkManagerImpl implements LinkManager {
    * {@inheritDoc}
    */
   public Node getTarget(Node link, boolean system) throws ItemNotFoundException,
-      RepositoryException {
+  RepositoryException {
     String uuid = link.getProperty(UUID).getString();
     Node targetNode = getSession(link, system).getNodeByUUID(uuid);
     return targetNode;
@@ -164,11 +165,11 @@ public class LinkManagerImpl implements LinkManager {
     if (workspaceLink.equals(workspaceTarget))
       return link.getSession();
     return getSession((ManageableRepository) link.getSession().getRepository(), workspaceTarget,
-        system);
+                      system);
   }
 
   private Session getSession(ManageableRepository manageRepository, String workspaceName,
-      boolean system) throws RepositoryException {
+                             boolean system) throws RepositoryException {
     if (system)
       return providerService_.getSystemSessionProvider(null).getSession(workspaceName, manageRepository);
     return providerService_.getSessionProvider(null).getSession(workspaceName, manageRepository);
@@ -301,7 +302,7 @@ public class LinkManagerImpl implements LinkManager {
    * @throws RepositoryException
    */
   private boolean canRemovePermission(Node node, String identity) throws ValueFormatException,
-        PathNotFoundException, RepositoryException {
+  PathNotFoundException, RepositoryException {
     String owner = getNodeOwner(node);
     if(identity.equals(IdentityConstants.SYSTEM)) return false;
     if(owner != null && owner.equals(identity)) return false;
@@ -347,15 +348,17 @@ public class LinkManagerImpl implements LinkManager {
       ManageableRepository repository  = WCMCoreUtils.getRepository();
       String[] workspaces = repository.getWorkspaceNames();
       String queryString = new StringBuilder().append("SELECT * FROM ").
-                                               append(linkType).
-                                               append(" WHERE exo:uuid='").
-                                               append(targetNode.getUUID()).append("'").
-                                               append(" AND exo:workspace='").
-                                               append(targetNode.getSession().getWorkspace().getName()).
-                                               append("'").toString();
+          append(linkType).
+          append(" WHERE exo:uuid='").
+          append(targetNode.getUUID()).append("'").
+          append(" AND exo:workspace='").
+          append(targetNode.getSession().getWorkspace().getName()).
+          append("'").toString();
 
       for (String workspace : workspaces) {
         Session session = sessionProvider.getSession(workspace, repository);
+        //Continue In the case cannot access to a workspace
+        if(session == null) continue;
         QueryManager queryManager = session.getWorkspace().getQueryManager();
         Query query = queryManager.createQuery(queryString, Query.SQL);
         QueryResult queryResult = query.execute();
@@ -364,7 +367,7 @@ public class LinkManagerImpl implements LinkManager {
           result.add(iter.nextNode());
         }
       }
-      
+
       return result;
     } catch (RepositoryException e) {
       // return empty node list if there are errors in execution or user has no right to access nodes
@@ -377,6 +380,45 @@ public class LinkManagerImpl implements LinkManager {
    */
   public List<Node> getAllLinks(Node targetNode, String linkType) {
     return getAllLinks(targetNode, linkType, WCMCoreUtils.getUserSessionProvider());
+  }
+
+  /**
+   * {@inheritDoc}
+   * @throws RepositoryException 
+   */
+  public void updateSymlink(Node node) throws RepositoryException {
+    if (node.isNodeType(NodetypeConstant.EXO_SYMLINK)) {
+      try {
+        ((ExtendedNode)node).checkPermission(PermissionType.SET_PROPERTY);
+      } catch(AccessControlException e) {
+        SessionProvider provider = WCMCoreUtils.getSystemSessionProvider();
+        node = (Node)provider.getSession(node.getSession().getWorkspace().getName(), 
+                                         WCMCoreUtils.getRepository()).getItem(node.getPath());
+      }
+      if (node.canAddMixin(NodetypeConstant.EXO_TARGET_DATA)) {
+        node.addMixin(NodetypeConstant.EXO_TARGET_DATA);
+      }
+      Node target = this.getTarget(node, true);
+      if (!node.hasProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE) || 
+          node.getProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE).getDate().compareTo( 
+          target.getProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE).getDate()) < 0) {
+        String[] propList = {NodetypeConstant.EXO_DATE_CREATED,
+            NodetypeConstant.EXO_LAST_MODIFIED_DATE, NodetypeConstant.PUBLICATION_LIVE_DATE,
+            NodetypeConstant.EXO_START_EVENT, NodetypeConstant.EXO_INDEX};
+        for (String p : propList) {
+          try {
+            if (target.hasProperty(p)) {
+              node.setProperty(p, target.getProperty(p).getValue());
+              node.save();
+            }
+          } catch (RepositoryException e) {
+            if (LOG.isErrorEnabled()) {
+              LOG.error("Can not update property: " + p + " for node: " + node.getPath(), e);
+            }
+          }
+        }
+    }
+    }
   }
 
 }

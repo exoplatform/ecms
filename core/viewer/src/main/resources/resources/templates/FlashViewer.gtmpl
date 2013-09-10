@@ -8,6 +8,8 @@
   import org.exoplatform.container.PortalContainer;
   import org.exoplatform.services.jcr.RepositoryService;
   import org.exoplatform.wcm.webui.Utils;
+  import org.apache.commons.lang.StringUtils;
+  import javax.jcr.PathNotFoundException;
 
 
 	UIComponent uiParent = uicomponent.getParent();
@@ -35,8 +37,25 @@
   def contentNode = currentNode.getNode("jcr:content") ;
   def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
   def binarySrc = Utils.getWebdavURL(currentNode);
+  
+  def width = null;
+  def height = null;
+  
+  try {
+    width = currentNode.getProperty("exo:documentWidth").getString();
+  } catch(PathNotFoundException pne) {
+    width = "640";
+  }
+  try {
+    height = currentNode.getProperty("exo:documentHeight").getString();
+  } catch(PathNotFoundException pne) {
+    height = "400";
+  }
+  
+  if(StringUtils.isEmpty(width)) width = "640";
+  if(StringUtils.isEmpty(height)) height = "400";
 
 %>
 
 <!-- ############################ FLASH ########################################## -->
-<embed width="610" allowscriptaccess="always" wmode="opaque" quality="high" bgcolor="#ffffff" name="$originalNode.name" id="$originalNode.name" src="$binarySrc" type="application/x-shockwave-flash"/>
+<div class="FlashViewer"><embed width="$width" height="$height" allowscriptaccess="always" wmode="opaque" quality="high" bgcolor="#ffffff" name="$originalNode.name" id="$originalNode.name" src="$binarySrc" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer"/></div>

@@ -16,24 +16,6 @@
  */
 package org.exoplatform.ecm.webui.component.explorer;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.jcr.AccessDeniedException;
-import javax.jcr.NoSuchWorkspaceException;
-import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-import javax.portlet.PortletMode;
-import javax.portlet.PortletPreferences;
-
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
@@ -68,6 +50,13 @@ import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 
+import javax.jcr.*;
+import javax.portlet.PortletMode;
+import javax.portlet.PortletPreferences;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 @ComponentConfig(
     lifecycle = UIApplicationLifecycle.class
 )
@@ -77,8 +66,6 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
    * Logger.
    */
   private static final Log LOG  = ExoLogger.getLogger(UIJCRExplorerPortlet.class.getName());
-
-  final static public String MAX_SIZE_UPLOAD    = "uploadFileSizeLimitMB";
 
   final static public String ISDIRECTLY_DRIVE   = "isDirectlyDrive";
 
@@ -338,8 +325,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
       if (driveData == null) throw new PathNotFoundException();
     } catch (PathNotFoundException e) {
       Object[] args = { driveName };
-      uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.drive-not-exist", args, ApplicationMessage.WARNING));
-      
+
       return;
     }
     RepositoryService rservice = getApplicationComponent(RepositoryService.class);
@@ -394,12 +380,12 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
       session.getItem(homePath);
     } catch(AccessDeniedException ace) {
       Object[] args = { driveName };
-      uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.access-denied", args,
+      uiApp.addMessage(new ApplicationMessage("UIDrivesArea.msg.access-denied", args,
           ApplicationMessage.WARNING));      
       return;
     } catch(NoSuchWorkspaceException nosuchWS) {
       Object[] args = { driveName };
-      uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.workspace-not-exist", args,
+      uiApp.addMessage(new ApplicationMessage("UIDrivesArea.msg.workspace-not-exist", args,
           ApplicationMessage.WARNING));      
       return;
     } catch(Exception e) {

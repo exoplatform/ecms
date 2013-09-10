@@ -42,7 +42,7 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 
 /**
  * Created by The eXo Platform SARL
@@ -60,16 +60,16 @@ public class UIExternalMetadataForm extends UIForm {
 
   public void renderExternalList() throws Exception {
     MetadataService metadataService = getApplicationComponent(MetadataService.class) ;
-    UIFormCheckBoxInput<String> uiCheckBox ;
+    UICheckBoxInput uiCheckBox ;
     for(NodeType nodeType : metadataService.getAllMetadatasNodeType()) {
-      uiCheckBox = new UIFormCheckBoxInput<String>(nodeType.getName(), nodeType.getName(), "") ;
+      uiCheckBox = new UICheckBoxInput(nodeType.getName(), nodeType.getName(), null) ;
       if(!isInternalUse(nodeType)) {
         if(hasExternalMetadata(nodeType.getName())) {
-          uiCheckBox.setChecked(true) ;
-          uiCheckBox.setEnable(false) ;
+          uiCheckBox.setChecked(true);
+          uiCheckBox.setDisabled(true) ;
         } else {
           uiCheckBox.setChecked(false) ;
-          uiCheckBox.setEnable(true) ;
+          uiCheckBox.setDisabled(false);
         }
         addUIFormInput(uiCheckBox) ;
       }
@@ -121,20 +121,20 @@ public class UIExternalMetadataForm extends UIForm {
   static  public class AddActionListener extends EventListener<UIExternalMetadataForm> {
     public void execute(Event<UIExternalMetadataForm> event) throws Exception {
       UIExternalMetadataForm uiExternalMetadataForm = event.getSource() ;
-      List<UIFormCheckBoxInput> listCheckbox =  new ArrayList<UIFormCheckBoxInput>();
-      uiExternalMetadataForm.findComponentOfType(listCheckbox, UIFormCheckBoxInput.class);
+      List<UICheckBoxInput> listCheckbox =  new ArrayList<UICheckBoxInput>();
+      uiExternalMetadataForm.findComponentOfType(listCheckbox, UICheckBoxInput.class);
       UIUploadManager uiUploadManager = event.getSource().getAncestorOfType(UIUploadManager.class) ;
       UIUploadContainer uiContainer = uiUploadManager.getChild(UIUploadContainer.class) ;
       String metadataName = null ;
       Node uploadedNode = uiContainer.getUploadedNode() ;
       for(int i = 0; i < listCheckbox.size(); i ++) {
-        if(listCheckbox.get(i).isChecked() && listCheckbox.get(i).isEnable()) {
+        if(listCheckbox.get(i).isChecked() && !listCheckbox.get(i).isDisabled()) {
           metadataName = listCheckbox.get(i).getName() ;
           if(!uploadedNode.canAddMixin(metadataName)) {
             UIApplication uiApp = uiExternalMetadataForm.getAncestorOfType(UIApplication.class) ;
             uiApp.addMessage(new ApplicationMessage("UIExternalMetadataForm.msg.can-not-add", null,
                                                     ApplicationMessage.WARNING)) ;
-            
+
             return ;
           }
           uploadedNode.addMixin(metadataName);

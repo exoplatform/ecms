@@ -45,10 +45,16 @@ public class CanDeleteNodeFilter  extends UIExtensionAbstractFilter {
   public boolean accept(Map<String, Object> context) throws Exception {
     if (context==null) return true;
     Node currentNode = (Node) context.get(Node.class.getName());
-    return (PermissionUtil.canRemoveNode(currentNode))&&
-          (!isVersionableOrAncestor(currentNode) ||
-          (isVersionableOrAncestor(currentNode) &&
-          IsCheckedOutFilter.isCheckedOut(currentNode)));
+    
+    // in case exo:actions are in checked items in Trash. return false.
+    if (Utils.EXO_ACTIONS.equals(currentNode.getName()) && Utils.isInTrash(currentNode)) {
+      return false;
+    } else {
+      return (PermissionUtil.canRemoveNode(currentNode))&&
+                    (!isVersionableOrAncestor(currentNode) ||
+                    (isVersionableOrAncestor(currentNode) &&
+                    IsCheckedOutFilter.isCheckedOut(currentNode))); 
+    }
   }
 
   public void onDeny(Map<String, Object> context) throws Exception {

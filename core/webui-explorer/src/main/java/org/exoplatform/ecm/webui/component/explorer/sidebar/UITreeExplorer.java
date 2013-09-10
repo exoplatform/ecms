@@ -77,13 +77,13 @@ import org.exoplatform.webui.event.EventListener;
  * Aug 2, 2006
  */
 @ComponentConfig(
-    template =  "app:/groovy/webui/component/explorer/sidebar/UITreeExplorer.gtmpl",
-    events = {
-        @EventConfig(listeners = UITreeExplorer.ExpandActionListener.class),
-        @EventConfig(listeners = UITreeExplorer.CollapseActionListener.class),
-        @EventConfig(listeners = UITreeExplorer.ExpandTreeActionListener.class)
-    }
-)
+                 template =  "app:/groovy/webui/component/explorer/sidebar/UITreeExplorer.gtmpl",
+                 events = {
+                     @EventConfig(listeners = UITreeExplorer.ExpandActionListener.class),
+                     @EventConfig(listeners = UITreeExplorer.CollapseActionListener.class),
+                     @EventConfig(listeners = UITreeExplorer.ExpandTreeActionListener.class)
+                 }
+    )
 
 public class UITreeExplorer extends UIContainer {
 
@@ -116,15 +116,15 @@ public class UITreeExplorer extends UIContainer {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
     if (uiExplorer.getAllClipBoard().size() > 0) {
       return getContextMenu().getJSOnclickShowPopup(uiExplorer.getCurrentDriveWorkspace() + ":"
-                                                        + uiExplorer.getRootPath(),
-                                                    "Paste").toString();
+          + uiExplorer.getRootPath(),
+          "Paste").toString();
     }
     return "" ;
   }
 
   public boolean isDirectlyDrive() {
     PortletPreferences portletPref =
-      getAncestorOfType(UIJCRExplorerPortlet.class).getPortletPreferences();
+        getAncestorOfType(UIJCRExplorerPortlet.class).getPortletPreferences();
     String usecase =  portletPref.getValue("usecase", "").trim();
     if ("selection".equals(usecase)) {
       return false;
@@ -148,8 +148,8 @@ public class UITreeExplorer extends UIContainer {
       try {
         RepositoryService repoService = WCMCoreUtils.getService(RepositoryService.class);
         Node groupNode = (Node)WCMCoreUtils.getSystemSessionProvider().getSession(
-                                      repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName(),
-                                      repoService.getCurrentRepository()).getItem(path);
+                                                                                  repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName(),
+                                                                                  repoService.getCurrentRepository()).getItem(path);
         return groupNode.getProperty(NodetypeConstant.EXO_LABEL).getString();
       } catch(Exception e) {
         return id.replace(".", " / ");
@@ -231,8 +231,8 @@ public class UITreeExplorer extends UIContainer {
   public String getServerPath() {
     PortletRequestContext portletRequestContext = PortletRequestContext.getCurrentInstance() ;
     String prefixWebDAV = portletRequestContext.getRequest().getScheme() + "://" +
-                          portletRequestContext.getRequest().getServerName() + ":" +
-                          String.format("%s",portletRequestContext.getRequest().getServerPort()) ;
+        portletRequestContext.getRequest().getServerName() + ":" +
+        String.format("%s",portletRequestContext.getRequest().getServerPort()) ;
     return prefixWebDAV ;
   }
 
@@ -324,7 +324,7 @@ public class UITreeExplorer extends UIContainer {
     }
     if (temp.getChildrenSize() > nodePerPages) {
       ListAccess<TreeNode> childList = new ListAccessImpl<TreeNode>(TreeNode.class,
-                                                                    temp.getChildren());
+          temp.getChildren());
       LazyPageList<TreeNode> pageList = new LazyPageList<TreeNode>(childList, nodePerPages);
       addTreeNodePageIteratorAsChild(temp.getPath(), pageList, rootPath, path);
     }
@@ -351,7 +351,7 @@ public class UITreeExplorer extends UIContainer {
 
       if (temp.getChildrenSize() > nodePerPages) {
         ListAccess<TreeNode> childNodeList = new ListAccessImpl<TreeNode>(TreeNode.class,
-                                                                          temp.getChildren());
+            temp.getChildren());
         LazyPageList<TreeNode> pageList = new LazyPageList<TreeNode>(childNodeList, nodePerPages);
         addTreeNodePageIteratorAsChild(temp.getPath(), pageList, subPath.toString(), path);
       }
@@ -391,17 +391,17 @@ public class UITreeExplorer extends UIContainer {
         item = nodeFinder.getItem(session, path);
       } catch(PathNotFoundException pa) {
         uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.path-not-found", null,
-            ApplicationMessage.WARNING)) ;
+                                                ApplicationMessage.WARNING)) ;
 
         return ;
       } catch(ItemNotFoundException inf) {
-          uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.path-not-found", null,
-              ApplicationMessage.WARNING)) ;
+        uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.path-not-found", null,
+                                                ApplicationMessage.WARNING)) ;
 
-          return ;
+        return ;
       } catch(AccessDeniedException ace) {
-          uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.access-denied", null,
-                  ApplicationMessage.WARNING)) ;
+        uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.access-denied", null,
+                                                ApplicationMessage.WARNING)) ;
 
         return ;
       } catch(RepositoryException e) {
@@ -409,7 +409,7 @@ public class UITreeExplorer extends UIContainer {
           LOG.error("Repository cannot be found");
         }
         uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.repository-error", null,
-            ApplicationMessage.WARNING)) ;
+                                                ApplicationMessage.WARNING)) ;
 
         return ;
       } catch (Exception e) {
@@ -428,19 +428,19 @@ public class UITreeExplorer extends UIContainer {
         uiDocumentWorkspace.setRenderedChild(UIDocumentContainer.class);
       }
       uiExplorer.setSelectNode(workspaceName, path);
-//      UIDocumentContainer uiDocumentContainer = uiDocumentWorkspace.getChild(UIDocumentContainer.class);
-//      UIDocumentInfo uiDocumentInfo = uiDocumentContainer.getChildById("UIDocumentInfo") ;
+      //      UIDocumentContainer uiDocumentContainer = uiDocumentWorkspace.getChild(UIDocumentContainer.class);
+      //      UIDocumentInfo uiDocumentInfo = uiDocumentContainer.getChildById("UIDocumentInfo") ;
 
       uiExplorer.updateAjax(event);
       event.getRequestContext().getJavascriptManager().
-            require("SHARED/multiUpload", "multiUpload").
-            addScripts("multiUpload.setLocation('" + 
-                       uiExplorer.getWorkspaceName()  + "','" + 
-                       uiExplorer.getDriveData().getName()  + "','" +
-                       uiTreeExplorer.getLabel()  + "','" +
-                       uiExplorer.getCurrentPath() + "','" +
-                       Utils.getPersonalDrivePath(uiExplorer.getDriveData().getHomePath(),
-                       ConversationState.getCurrent().getIdentity().getUserId()) + "');");
+      require("SHARED/multiUpload", "multiUpload").
+      addScripts("multiUpload.setLocation('" + 
+          uiExplorer.getWorkspaceName()  + "','" + 
+          uiExplorer.getDriveData().getName()  + "','" +
+          uiTreeExplorer.getLabel()  + "','" +
+          uiExplorer.getCurrentPath() + "','" +
+          Utils.getPersonalDrivePath(uiExplorer.getDriveData().getHomePath(),
+                                     ConversationState.getCurrent().getIdentity().getUserId()) + "');");
     }
 
   }
@@ -487,7 +487,7 @@ public class UITreeExplorer extends UIContainer {
           LOG.error("Repository cannot be found");
         }
         uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.repository-error", null,
-            ApplicationMessage.WARNING)) ;
+                                                ApplicationMessage.WARNING)) ;
 
         return ;
       } catch (Exception e) {
@@ -518,7 +518,7 @@ public class UITreeExplorer extends UIContainer {
           LOG.error("Repository cannot be found");
         }
         uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.repository-error", null,
-            ApplicationMessage.WARNING)) ;
+                                                ApplicationMessage.WARNING)) ;
 
         return ;
       } catch (Exception e) {
@@ -547,7 +547,7 @@ public class UITreeExplorer extends UIContainer {
       // Not allow to show hidden and non-document nodes
       if (!preferences.isShowHiddenNode() && !preferences.isShowNonDocumentType()) {
         if(!tmpNode.isNodeType(org.exoplatform.ecm.webui.utils.Utils.EXO_HIDDENABLE) && isDocumentOrFolderType(tmpNode)) 
-        	return true;                 
+          return true;                 
       }
       // Not allow to show non-document nodes
       else if (preferences.isShowHiddenNode() && !preferences.isShowNonDocumentType()) {
@@ -556,7 +556,7 @@ public class UITreeExplorer extends UIContainer {
       // Not allow to show hidden nodes
       else if (!preferences.isShowHiddenNode() && preferences.isShowNonDocumentType()) {
         if(!tmpNode.isNodeType(org.exoplatform.ecm.webui.utils.Utils.EXO_HIDDENABLE))
-        	return true;
+          return true;
       }
       // Allow to show hidden and non-document nodes
       else return true;
@@ -569,7 +569,7 @@ public class UITreeExplorer extends UIContainer {
    * @param node
    * @return
    * @throws Exception
-  */
+   */
   private boolean isDocumentOrFolderType(Node node) throws Exception {
     if(node.isNodeType(org.exoplatform.ecm.webui.utils.Utils.NT_FOLDER) ||
         node.isNodeType(org.exoplatform.ecm.webui.utils.Utils.NT_UNSTRUCTURED)) return true;
@@ -578,8 +578,8 @@ public class UITreeExplorer extends UIContainer {
     return templateService.getDocumentTemplates().contains(nodeType.getName());
   }
   private boolean isFolderType(Node node) throws Exception {
-     if(node.isNodeType(org.exoplatform.ecm.webui.utils.Utils.NT_FOLDER) ||
-      node.isNodeType(org.exoplatform.ecm.webui.utils.Utils.NT_UNSTRUCTURED)) return true;
+    if(node.isNodeType(org.exoplatform.ecm.webui.utils.Utils.NT_FOLDER) ||
+        node.isNodeType(org.exoplatform.ecm.webui.utils.Utils.NT_UNSTRUCTURED)) return true;
     return false;
   }
 }

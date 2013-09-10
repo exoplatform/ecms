@@ -30,6 +30,10 @@ import org.exoplatform.ecm.webui.comparator.PropertyValueComparator;
 import org.exoplatform.portal.webui.application.UIPortlet;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
+import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.publication.PaginatedResultIterator;
@@ -53,14 +57,17 @@ import org.exoplatform.webui.core.lifecycle.Lifecycle;
  * Feb 23, 2009
  */
 @ComponentConfig(
-  lifecycle = Lifecycle.class,
-   template = "app:/groovy/ContentListViewer/UICLVContainer.gtmpl",
-   events = {
-     @EventConfig(listeners = UICLVManualMode.PreferencesActionListener.class)
-   }
-)
+                 lifecycle = Lifecycle.class,
+                 template = "app:/groovy/ContentListViewer/UICLVContainer.gtmpl",
+                 events = {
+                   @EventConfig(listeners = UICLVManualMode.PreferencesActionListener.class)
+                 }
+    )
 @SuppressWarnings("deprecation")
 public class UICLVManualMode extends UICLVContainer {
+
+  /** The log. */
+  private static final Log LOG = ExoLogger.getLogger(UICLVManualMode.class.getName());
 
   /* (non-Javadoc)
    * @see org.exoplatform.wcm.webui.clv.UICLVContainer#init()
@@ -73,7 +80,7 @@ public class UICLVManualMode extends UICLVContainer {
     String workspace = portletPreferences.getValue(UICLVPortlet.PREFERENCE_WORKSPACE, null);
     List<Node> nodes = new ArrayList<Node>();
     String folderPath="";
-    
+
     HashMap<String, String> filters = new HashMap<String, String>();
     if (UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER_ENABLE.equals(contextualMode)) {
       String folderParamName = portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_CLV_BY, null);
@@ -84,7 +91,7 @@ public class UICLVManualMode extends UICLVContainer {
     String sharedCache = portletPreferences.getValue(UISingleContentViewerPortlet.ENABLE_CACHE, "true");
     sharedCache = "true".equals(sharedCache) ? WCMComposer.VISIBILITY_PUBLIC:WCMComposer.VISIBILITY_USER;
     int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEMS_PER_PAGE, null));
-    
+
     String strQuery = this.getAncestorOfType(UICLVPortlet.class).getQueryStatement(query);
     if (strQuery != null) strQuery = strQuery.replaceAll("\"", "'");
     if (this.getAncestorOfType(UICLVPortlet.class).isQueryApplication()
@@ -96,7 +103,7 @@ public class UICLVManualMode extends UICLVContainer {
       nodeLocation.setSystemSession(false);
       filters.put(WCMComposer.FILTER_QUERY_FULL, strQuery);
       Result rNodes = WCMCoreUtils.getService(WCMComposer.class)
-                .getPaginatedContents(nodeLocation, filters, WCMCoreUtils.getUserSessionProvider());
+          .getPaginatedContents(nodeLocation, filters, WCMCoreUtils.getUserSessionProvider());
       PaginatedResultIterator paginatedResultIterator = new PaginatedResultIterator(rNodes, itemsPerPage);
       getChildren().clear();
       ResourceResolver resourceResolver = getTemplateResourceResolver();
@@ -105,23 +112,33 @@ public class UICLVManualMode extends UICLVContainer {
           addChild(UICLVPresentation.class,
                    null,
                    UICLVPresentation.class.getSimpleName() + "_" + pContext.getWindowId()
-                   );
+              );
       clvPresentation.init(resourceResolver, paginatedResultIterator);
-      
+
       return;
     } else {
       String[] listContent = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null).split(";");
+      LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
       //get node to sort
       List<Node> originalList = new ArrayList<Node>();
       if (listContent != null && listContent.length != 0) {
         for (String itemPath : listContent) {
-          originalList.add(NodeLocation.getNodeByExpression(itemPath));
+          Node currentNode = NodeLocation.getNodeByExpression(itemPath);
+          try {
+            linkManager.updateSymlink(currentNode);
+            currentNode = NodeLocation.getNodeByExpression(itemPath);
+          } catch (Exception e) {
+            if (LOG.isErrorEnabled()) {
+              LOG.error("Can not update symlink: " + currentNode.getPath(), e);
+            }
+          }
+          originalList.add(currentNode);
         }
       }
       //sort nodes
       String orderBy = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ORDER_BY, NodetypeConstant.EXO_TITLE);
       String orderType = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ORDER_TYPE, "ASC");
-      
+
       Collections.sort(originalList, new PropertyValueComparator(orderBy, "ASC".equals(orderType) ? "Ascending" : "Descending"));
       //get real node by portlet mode
       for (Node node : originalList) {
@@ -138,15 +155,15 @@ public class UICLVManualMode extends UICLVContainer {
     }
     getChildren().clear();
     AbstractPageList<NodeLocation> pageList = 
-      PageListFactory.createPageList(nodes, itemsPerPage, null, 
-                                     new CLVNodeCreator());
+        PageListFactory.createPageList(nodes, itemsPerPage, null, 
+                                       new CLVNodeCreator());
     ResourceResolver resourceResolver = getTemplateResourceResolver();
     PortletRequestContext pContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
     UICLVPresentation clvPresentation =
-      addChild(UICLVPresentation.class,
-               null,
-               UICLVPresentation.class.getSimpleName() + "_" + pContext.getWindowId()
-              );
+        addChild(UICLVPresentation.class,
+                 null,
+                 UICLVPresentation.class.getSimpleName() + "_" + pContext.getWindowId()
+            );
     clvPresentation.init(resourceResolver, pageList);
   }
   /**
@@ -167,6 +184,6 @@ public class UICLVManualMode extends UICLVContainer {
    * @throws Exception the exception
    */
   public String getPortletName() throws Exception {
-  	return UICLVManualMode.class.getSimpleName();
+    return UICLVManualMode.class.getSimpleName();
   }
 }

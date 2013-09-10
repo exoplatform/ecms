@@ -16,6 +16,47 @@
  */
 package org.exoplatform.ecm.webui.component.explorer;
 
+import java.awt.Image;
+import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.regex.Matcher;
+
+import javax.imageio.ImageIO;
+import javax.jcr.AccessDeniedException;
+import javax.jcr.Item;
+import javax.jcr.ItemNotFoundException;
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.Property;
+import javax.jcr.PropertyType;
+import javax.jcr.ReferentialIntegrityException;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.jcr.Value;
+import javax.jcr.lock.LockException;
+import javax.jcr.nodetype.ConstraintViolationException;
+import javax.jcr.nodetype.NodeDefinition;
+import javax.jcr.nodetype.NodeType;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import javax.jcr.query.QueryResult;
+import javax.jcr.version.VersionException;
+
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
@@ -34,6 +75,7 @@ import org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation;
 import org.exoplatform.ecm.webui.presentation.removeattach.RemoveAttachmentComponent;
 import org.exoplatform.ecm.webui.presentation.removecomment.RemoveCommentComponent;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
@@ -82,24 +124,6 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.ext.UIExtensionManager;
-
-import javax.imageio.ImageIO;
-import javax.jcr.*;
-import javax.jcr.lock.LockException;
-import javax.jcr.nodetype.ConstraintViolationException;
-import javax.jcr.nodetype.NodeDefinition;
-import javax.jcr.nodetype.NodeType;
-import javax.jcr.query.Query;
-import javax.jcr.query.QueryManager;
-import javax.jcr.query.QueryResult;
-import javax.jcr.version.VersionException;
-import java.awt.*;
-import java.io.InputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.List;
-import java.util.regex.Matcher;
 
 /**
  * Created by The eXo Platform SARL
@@ -164,7 +188,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   final protected static String CONTENT_YEAR_PAGE_ITERATOR_ID      = "ContentYearPageIterator";
 
   protected UIDocumentNodeList    documentNodeList_;
-  
+
   private static final Log      LOG                                = ExoLogger.getLogger(UIDocumentInfo.class.getName());
 
   private String                typeSort_                          = Preference.SORT_BY_NODETYPE;
@@ -178,7 +202,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   private NodeLocation          currentNode_;
 
   private UIPageIterator        pageIterator_;
-  
+
   private UIPageIterator        todayPageIterator_;
 
   private UIPageIterator        yesterdayPageIterator_;
@@ -206,7 +230,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
   //flag indicating if we need to update data for Timeline
   private boolean updateTimeLineData_ = false;
-  
+
   //used in File View, indicating which folders are expanded
   private Set<String> expandedFolders_;
 
@@ -497,7 +521,6 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     return uiExplorer.getDocumentInfoTemplate();
   }
 
-  @SuppressWarnings("unused")
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     return getAncestorOfType(UIJCRExplorer.class).getJCRTemplateResourceResolver();
   }
@@ -506,8 +529,8 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     return getAncestorOfType(UIWorkingArea.class).getChild(UIRightClickPopupMenu.class) ;
   }
 
-  public Node getNodeByUUID(String uuid) throws Exception{
-    ManageableRepository manageRepo = getApplicationComponent(RepositoryService.class).getCurrentRepository();
+  public Node getNodeByUUID(String uuid) {
+    ManageableRepository manageRepo = WCMCoreUtils.getRepository();
     String[] workspaces = manageRepo.getWorkspaceNames() ;
     for(String ws : workspaces) {
       try{
@@ -607,7 +630,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
   public String getWebDAVServerPrefix() throws Exception {
     PortletRequestContext portletRequestContext = PortletRequestContext.getCurrentInstance() ;
-    String prefixWebDAV = portletRequestContext.getRequest().getScheme() + "://" 
+    String prefixWebDAV = portletRequestContext.getRequest().getScheme() + "://"
             + portletRequestContext.getRequest().getServerName() ;
     int serverPort = portletRequestContext.getRequest().getServerPort();
     if (serverPort!=80) {
@@ -862,8 +885,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     if(uiExplorer.getAllClipBoard().size() > 0) return true;
     return false;
   }
-  
-  @SuppressWarnings("unchecked")
+
   public void updatePageListData() throws Exception {
     UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
     String currentPath = uiExplorer.getCurrentPath();
@@ -875,7 +897,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
       documentNodeList_.setPageList(pageList);
     }
     updateTimeLineData_ = true;
-  }  
+  }
 
   @SuppressWarnings("unchecked")
   public LazyPageList<Object> getPageList(String path) throws Exception {
@@ -904,7 +926,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   public List<Node> getChildrenList() throws Exception {
     return NodeLocation.getNodeListByLocationList(pageIterator_.getCurrentPageData());
   }
-  
+
   public String getTypeSort() { return typeSort_; }
 
   public void setTypeSort(String typeSort) {
@@ -1093,7 +1115,9 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         }
       }
     } catch (PathNotFoundException ep) {
-      // Cannot found the node path in the repository. We will continue filter by content type in the next block code.
+      if (LOG.isErrorEnabled()) {
+        LOG.error("Cannot found the node path in the repository. We will continue filter by content type in the next block code.");
+      }
   }
 
     if(!found && allItemsByTypeFilterSet.contains(Contents_Document_Type)) {
@@ -1139,7 +1163,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
       NodeFinder nodeFinder = uicomp.getApplicationComponent(NodeFinder.class);
       UIJCRExplorer uiExplorer = uicomp.getAncestorOfType(UIJCRExplorer.class);
-      UITreeExplorer uiTreeExplorer = uiExplorer.findFirstComponentOfType(UITreeExplorer.class);      
+      UITreeExplorer uiTreeExplorer = uiExplorer.findFirstComponentOfType(UITreeExplorer.class);
       String uri = event.getRequestContext().getRequestParameter(OBJECTID);
       String workspaceName = event.getRequestContext().getRequestParameter("workspaceName");
       boolean findDrive = Boolean.getBoolean(event.getRequestContext().getRequestParameter("findDrive"));
@@ -1175,8 +1199,8 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
         uiExplorer.updateAjax(event);
         event.getRequestContext().getJavascriptManager().
         require("SHARED/multiUpload", "multiUpload").
-        addScripts("multiUpload.setLocation('" + 
-                   uiExplorer.getWorkspaceName()  + "','" + 
+        addScripts("multiUpload.setLocation('" +
+                   uiExplorer.getWorkspaceName()  + "','" +
                    uiExplorer.getDriveData().getName()  + "','" +
                    uiTreeExplorer.getLabel()  + "','" +
                    uiExplorer.getCurrentPath() + "','" +
@@ -1217,11 +1241,11 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
       try {
         String sortParam = event.getRequestContext().getRequestParameter(OBJECTID) ;
         String[] array = sortParam.split(";");
-        String order = Preference.ASCENDING_ORDER.equals(array[0].trim()) || !array[1].trim().equals(uicomp.getTypeSort()) ? 
+        String order = Preference.ASCENDING_ORDER.equals(array[0].trim()) || !array[1].trim().equals(uicomp.getTypeSort()) ?
                        Preference.BLUE_DOWN_ARROW : Preference.BLUE_UP_ARROW;
-        
+
         String prefOrder = Preference.ASCENDING_ORDER.equals(array[0].trim()) || !array[1].trim().equals(uicomp.getTypeSort())?
-                           Preference.ASCENDING_ORDER : Preference.DESCENDING_ORDER;                                                                                                     
+                           Preference.ASCENDING_ORDER : Preference.DESCENDING_ORDER;
         uicomp.setSortOrder(order);
         uicomp.setTypeSort(array[1]);
         Preference pref = uiExplorer.getPreference();
@@ -1540,7 +1564,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
       }
     }
   }
-  
+
   private class SearchComparator implements Comparator<NodeLocation> {
     public int compare(NodeLocation nodeA, NodeLocation nodeB) {
       try {
@@ -1642,7 +1666,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   public HashMap<String, String> getIsExpanded() {
     return isExpanded_;
   }
-  
+
   public Set<String> getExpandedFolders() {
     return this.expandedFolders_;
   }
@@ -1675,7 +1699,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
              parent.isNodeType(NodetypeConstant.EXO_ACCESSIBLE_MEDIA);
     } catch (Exception e) { return false; }
   }
-  
+
   /**
    * checks if user has permission to add nt:file to current node
    * @throws Exception
@@ -1690,17 +1714,36 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
    * @throws Exception
    */
   public boolean canAddNode(Node node) throws Exception {
-    if (node == null || !PermissionUtil.canAddNode(node)) {
+    if (node == null || !PermissionUtil.canAddNode(node) || !node.isCheckedOut()) {
       return false;
     }
+    if (node.isLocked()) {
+      //check for lock
+      String lockToken = LockUtil.getLockTokenOfUser(node);
+      if(lockToken == null) {
+        return false;
+      }
+    }
+    LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
+    if(linkManager.isLink(node)) {
+      try {
+        linkManager.getTarget(node);
+      } catch(ItemNotFoundException ine) {
+        return false;
+      }
+    }
     List<NodeDefinition> defs = new ArrayList<NodeDefinition>();
-    defs.addAll(Arrays.asList(node.getPrimaryNodeType().getChildNodeDefinitions()));
+    if(node.getPrimaryNodeType().getChildNodeDefinitions() != null) {
+      defs.addAll(Arrays.asList(node.getPrimaryNodeType().getChildNodeDefinitions()));
+    }
     for (NodeType mix : node.getMixinNodeTypes()) {
-      defs.addAll(Arrays.asList(mix.getChildNodeDefinitions()));
+      if(mix.getChildNodeDefinitions() != null) {
+        defs.addAll(Arrays.asList(mix.getChildNodeDefinitions()));
+      }
     }
     for (NodeDefinition def : defs) {
       for (NodeType type : def.getRequiredPrimaryTypes()) {
-        if ((NodetypeConstant.NT_FILE.equals(type.getName()) || 
+        if ((NodetypeConstant.NT_FILE.equals(type.getName()) ||
              NodetypeConstant.NT_BASE.equals(type.getName()) ||
              NodetypeConstant.NT_HIERARCHY_NODE.equals(type.getName())) &&
             "*".equals(def.getName())) {
@@ -1710,9 +1753,9 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     }
     return false;
   }
-  
+
   public String getDragAndDropEvents(Node node) throws Exception{
-    //define events for drag&drop files into subfolders  
+    //define events for drag&drop files into subfolders
     if (this.canAddNode(node)) {
     StringBuilder dragEvents = new StringBuilder().append("ondragover='eXo.ecm.MultiUpload.enableDragItemArea(event, this)' ").
                                                     append("ondragleave='eXo.ecm.MultiUpload.disableDragItemArea(this)' ").
@@ -1726,7 +1769,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
       return "";
     }
   }
-  
+
   @Override
   public void processRender(WebuiRequestContext context) throws Exception {
     //check if current user can add node to current node
@@ -1740,13 +1783,66 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     }
     super.processRender(context);
   }
-  
+
   public boolean hasChildren(Node node) {
     return false;
   }
-  
+
   public List<Node> getChildrenFromNode(Node node) {
     return null;
+  }
+  
+  /** get node attribute in Icons View & Web View **/
+  public String getNodeAttributeInView(Node node) throws Exception {
+    String preferenceWS = node.getSession().getWorkspace().getName();
+    String attr = getNodeAttributeInCommon(node);
+    StringBuilder builder = new StringBuilder(attr);
+    String rightClickMenu = "";
+    // right click menu in Icon View
+    if(!isSystemWorkspace()) 
+        rightClickMenu = "" + getContextMenu().getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(node.getPath()), getActionsList(node));
+    
+    builder.append(rightClickMenu);
+    return builder.toString();
+  }
+  
+  /** get node attribute in Admin View **/
+  public String getNodeAttribute(Node node) throws Exception {
+    StringBuilder builder = new StringBuilder();
+    String preferenceWS = node.getSession().getWorkspace().getName();
+    
+    builder.append(getNodeAttributeInCommon(node));
+    
+    // right click menu in Admin View
+    if (!isSystemWorkspace()) {
+      builder.append(" onmousedown=\"eXo.ecm.UIFileView.clickRightMouse(event, this, 'ECMContextMenu','");
+      builder.append(preferenceWS + ":");
+      builder.append(Utils.formatNodeName(node.getPath()) + "','" );
+      builder.append(getActionsList(node) + "');\"");
+    }
+    return builder.toString();
+  }
+  
+  /** get Attribute in common. */
+  private String getNodeAttributeInCommon(Node node) throws Exception {
+    StringBuilder builder = new StringBuilder();
+    String preferenceWS = node.getSession().getWorkspace().getName();
+    
+    // drag and drop events
+    builder.append(" " + getDragAndDropEvents(node));
+    // in common
+    builder.append(" trashHome='" + Utils.isTrashHomeNode(node) + "' "); 
+    builder.append(" locked='" + node.isLocked() + "' ");
+    builder.append(" mediaType='" + isMediaType(node) + "' ");
+    builder.append(" removeFavourite='" + isFavouriter(node) + "' ");
+    builder.append(" inTrash='" + node.isNodeType("exo:restoreLocation") + "' ");
+    builder.append(" workspacename='" + preferenceWS + "' ");
+    builder.append(" objectId='" + org.exoplatform.services.cms.impl.Utils.getObjectId(node.getPath()) + "' ");
+    builder.append(" isFile='" + node.isNodeType("nt:file") + "' ");
+    builder.append(" isLinkWithTarget='" + Utils.targetNodeAndLinkInTrash(node) + "' ");
+    builder.append(" isExoAction='" + (Utils.EXO_ACTIONS.equals(node.getName()) && Utils.isInTrash(node)) + "' ");
+    
+    return builder.toString();
   }
 
 }

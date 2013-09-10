@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <ContentSelector>
+    <msg>
+      <no-file-selected>لم يتمّ اختيار أيّ محتوى. الرّجاء اختيار واحد على الأقل.</no-file-selected>
+    </msg>
+  </ContentSelector>
+  <RenameConnector>
+    <label>
+      <rename>إعادة تسمية</rename>
+      <cancel>الغاء</cancel>
+    </label>
+    <msg>
+      <renaming>بصدد إعادة التّسمية...</renaming>
+    </msg>
+  </RenameConnector>
+</bundle>

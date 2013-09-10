@@ -646,8 +646,21 @@
       var checkInTrash = false;
       var checkMediaType = false;
       var checkEmptyTrash = false;
+      var checkLinkAndTargetInTash = false;
+  	  var checkExoActionNode = false;
+  	  
       for (var i in Self.itemsSelected) {
         if (Array.prototype[i]) continue;
+        // check if a node is exo:action or not to show nothing on action bar.
+  	  	if (	Self.itemsSelected[i].getAttribute('isExoAction') == "true") {
+  		  checkExoActionNode = true;
+  		  break;
+  	  	}  
+  	  	//check symlink and target are in trash to show Delete button only on action bar.
+  	  	else if (Self.itemsSelected[i].getAttribute('isLinkWithTarget') == "true") {
+  	  	  checkLinkAndTargetInTash = true; 
+  	  	  continue;
+  	  	}
         if (Self.itemsSelected[i].getAttribute('locked') == "true") checkUnlock = true;
         if (Self.itemsSelected[i].getAttribute('removeFavourite') == "true") checkRemoveFavourite = true;
         if (Self.itemsSelected[i].getAttribute('inTrash') == "true") checkInTrash = true;
@@ -656,50 +669,75 @@
       }
       var lockAction = gj(contextMenu).find("i.uiIconEcmsLock:first")[0];
       var unlockAction = gj(contextMenu).find("i.uiIconEcmsUnlock:first")[0];
-
-      if (checkUnlock) {
-        unlockAction.parentNode.parentNode.style.display = "block";
-        lockAction.parentNode.parentNode.style.display = "none";
-      } else {
-        unlockAction.parentNode.parentNode.style.display = "none";
-        lockAction.parentNode.parentNode.style.display = "block";
-      }
-
       var addFavouriteAction = gj(contextMenu).find("i.uiIconEcmsAddToFavourite:first")[0];
       var removeFavouriteAction = gj(contextMenu).find("i.uiIconEcmsRemoveFromFavourite:first")[0];
-      if (checkRemoveFavourite) {
-        removeFavouriteAction.parentNode.parentNode.style.display = "block";
-        addFavouriteAction.parentNode.parentNode.style.display = "none";
-      } else {
-        addFavouriteAction.parentNode.parentNode.style.display = "block";
-        removeFavouriteAction.parentNode.parentNode.style.display = "none";
-      }
       var restoreFromTrashAction = gj(contextMenu).find("i.uiIconEcmsRestoreFromTrash:first")[0];
       var emptyTrashAction = gj(contextMenu).find("i.uiIconEcmsEmptyTrash:first")[0];
       var playMediaAction = gj(contextMenu).find("i.uiIconEcmsPlayMedia:first")[0];
-
-      if (!checkInTrash) {
-        restoreFromTrashAction.parentNode.parentNode.style.display = "none";
-      } else {
-        restoreFromTrashAction.parentNode.parentNode.style.display = "block";
-      }
-      if (!checkMediaType) {
-        playMediaAction.parentNode.parentNode.style.display = "none";
-      } else {
-        playMediaAction.parentNode.parentNode.style.display = "block";
-      }
-      if (emptyTrashAction) {
-        if (!checkEmptyTrash) {
-          emptyTrashAction.parentNode.parentNode.style.display = "none";
-        } else {
-          emptyTrashAction.parentNode.parentNode.style.display = "block";
-        }
-      }
       var pasteAction = gj(contextMenu).find("i.uiIconEcmsPaste:first")[0];
+      var deleteAction = gj(contextMenu).find("i.uiIconEcmsDelete:first")[0];
+  	  var viewInfoAction = gj(contextMenu).find("i.uiIconEcmsViewInfo:first")[0];
+  	  var copyAction = gj(contextMenu).find("i.uiIconEcmsCopy:first")[0];
+	  var cutAction= gj(contextMenu).find("i.uiIconEcmsCut:first")[0];
+	  var addSymLinkAction= gj(contextMenu).find("i.uiIconEcmsAddSymLink:first")[0];
 
-      if (Self.itemsSelected.length > 1) {
-        pasteAction.parentNode.parentNode.style.display = "none";
-      }
+	  if (checkExoActionNode) {
+		// disable all buttons
+        contextMenu.style.display = "none";
+	  } else if (checkLinkAndTargetInTash) {
+		  // just display Delete button.
+		  deleteAction.parentNode.style.display = "block";
+		  unlockAction.parentNode.parentNode.style.display = "none";
+	      lockAction.parentNode.parentNode.style.display = "none";
+	      removeFavouriteAction.parentNode.parentNode.style.display = "none";
+	      addFavouriteAction.parentNode.parentNode.style.display = "none";
+	      restoreFromTrashAction.parentNode.parentNode.style.display = "none";
+	      playMediaAction.parentNode.parentNode.style.display = "none";
+	      //emptyTrashAction.parentNode.parentNode.style.display = "none";
+	      pasteAction.parentNode.parentNode.style.display = "none";
+	      copyAction.parentNode.style.display = "none";
+		  cutAction.parentNode.style.display = "none";
+		  addSymLinkAction.parentNode.style.display = "none";
+	  } else {
+		  if (checkUnlock) {
+		    unlockAction.parentNode.parentNode.style.display = "block";
+		    lockAction.parentNode.parentNode.style.display = "none";
+		  } else {
+		    unlockAction.parentNode.parentNode.style.display = "none";
+		    lockAction.parentNode.parentNode.style.display = "block";
+		  }
+
+		      if (checkRemoveFavourite) {
+		        removeFavouriteAction.parentNode.parentNode.style.display = "block";
+		        addFavouriteAction.parentNode.parentNode.style.display = "none";
+		      } else {
+		        addFavouriteAction.parentNode.parentNode.style.display = "block";
+		        removeFavouriteAction.parentNode.parentNode.style.display = "none";
+		      }
+
+		      if (!checkInTrash) {
+		        restoreFromTrashAction.parentNode.parentNode.style.display = "none";
+		      } else {
+		        restoreFromTrashAction.parentNode.parentNode.style.display = "block";
+		      }
+		      if (!checkMediaType) {
+		        playMediaAction.parentNode.parentNode.style.display = "none";
+		      } else {
+		        playMediaAction.parentNode.parentNode.style.display = "block";
+		      }
+		      if (emptyTrashAction) {
+		        if (!checkEmptyTrash) {
+		          emptyTrashAction.parentNode.parentNode.style.display = "none";
+		        } else {
+		          emptyTrashAction.parentNode.parentNode.style.display = "block";
+		        }
+		      }
+
+		      if (Self.itemsSelected.length > 1) {
+		        pasteAction.parentNode.parentNode.style.display = "none";
+		      }	    
+	  }
+      
       //check position popup
       var X = event.pageX || event.clientX;
       var Y = event.pageY || event.clientY;

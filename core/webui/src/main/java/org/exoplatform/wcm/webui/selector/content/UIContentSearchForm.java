@@ -141,7 +141,8 @@ public class UIContentSearchForm extends UIForm {
       UIContentSearchForm contentSearchForm = event.getSource();
       UIContentSelector contentSelector = contentSearchForm.getParent();
       contentSearchForm.setCheckedRadioId(event.getRequestContext().getRequestParameter(CHECKED_RADIO_ID));
-      UIContainer uiContainer = contentSearchForm.getAncestorOfType(UIContentSelectorOne.class).getAncestorOfType(UIContainer.class);
+      UIContainer uiContainer =
+          contentSearchForm.getAncestorOfType(UIContentSelectorOne.class).getAncestorOfType(UIContainer.class);
       contentSelector.initMetadataPopup(uiContainer);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
     }
@@ -152,7 +153,8 @@ public class UIContentSearchForm extends UIForm {
       UIContentSearchForm contentSearchForm = event.getSource();
       UIContentSelector contentSelector = contentSearchForm.getParent();
       contentSearchForm.setCheckedRadioId(event.getRequestContext().getRequestParameter(CHECKED_RADIO_ID));
-      UIContainer uiContainer = contentSearchForm.getAncestorOfType(UIContentSelectorOne.class).getAncestorOfType(UIContainer.class);
+      UIContainer uiContainer =
+          contentSearchForm.getAncestorOfType(UIContentSelectorOne.class).getAncestorOfType(UIContainer.class);
       contentSelector.initNodeTypePopup(uiContainer);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
     }

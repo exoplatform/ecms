@@ -12,7 +12,7 @@
 	.multiUploadDragFileBackground {
 		position: absolute;
 		background: rgba(235, 235, 235, 0.8);
-		border: 4px dashed #ccc;
+		border: 4px dashed @borderColor;
 		right: 0px;
 		top: 0px;
 		width: 644px;
@@ -24,7 +24,7 @@
 		.multiUploadDragFile {
 			text-align: center;
 			font-size: 18px;
-			color: black;
+			color: @textColor;
 			z-index:2;
 			position: absolute;
 			width: 100%;
@@ -63,7 +63,7 @@
 		padding: 10px !important;
 		
 		&:hover {
-			background: #f8f8f8;
+			background: @grayLighter;
 		}
 		
 		.fileName {
@@ -95,12 +95,12 @@
 			height: 15px; 
 			text-align: center;
 			background: white;
-			border: 1px solid #cbcbcb;
+			border: 1px solid @borderColor;
 			position: relative;
 		}
 
 		.loadding {
-			background: #f0f0f0;
+			background: @grayWhiteSmoke;
 			height: 15px;
 			display: block;
 		}
@@ -120,11 +120,11 @@
 			margin: 0;
 			.border-radius(3px);
 			.textPercent {
-				color: #FFFFFF;
+				color: @white;
 			    left: 5px;
 			    position: absolute;
 			    top: 0;
-			    text-shadow: 0 0 1px #666;
+			    text-shadow: 0 0 1px @gray;
 			}
 		}
 		.actionIcon {
@@ -137,7 +137,7 @@
 	}
 
 	.multiUploadListSeperator {
-		border-top: 1px solid #CFCFCF;
+		border-top: 1px solid @borderColor;
 		display: block;
 	}
 	
@@ -146,7 +146,7 @@
 		max-height: 163px;
 		
 		.loadContent .Action {
-			color: #466799;
+			color: @blue;
 			height: 20px;
 			text-align: center;
 			cursor: pointer;

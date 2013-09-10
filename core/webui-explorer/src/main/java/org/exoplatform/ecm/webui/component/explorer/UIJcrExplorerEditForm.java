@@ -41,7 +41,6 @@ import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.input.UICheckBoxInput;
-import org.exoplatform.webui.form.validator.NumberFormatValidator;
 
 /**
  * Created by The eXo Platform SARL
@@ -67,14 +66,6 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
 
 
   public UIJcrExplorerEditForm() throws Exception {
-
-    UIFormStringInput uiMaxSizeUpload = new UIFormStringInput(UIJCRExplorerPortlet.MAX_SIZE_UPLOAD,
-                                                              UIJCRExplorerPortlet.MAX_SIZE_UPLOAD,
-                                                              null);
-    uiMaxSizeUpload.addValidator(NumberFormatValidator.class);
-    uiMaxSizeUpload.setValue(getPreference().getValue(UIJCRExplorerPortlet.MAX_SIZE_UPLOAD, ""));
-    addChild(uiMaxSizeUpload);
-
     List<SelectItemOption<String>> listType = new ArrayList<SelectItemOption<String>>();
     String usecase = getPreference().getValue(UIJCRExplorerPortlet.USECASE, "");
     listType.add(new SelectItemOption<String>("Selection", "selection"));
@@ -193,8 +184,6 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
         driveNameInput.setRendered(false);
         uiParamPathInput.setRendered(false);
       }
-      UIFormStringInput uiMaxFileSize = uiForm.getUIStringInput(UIJCRExplorerPortlet.MAX_SIZE_UPLOAD);
-      uiMaxFileSize.setValue(pref.getValue(UIJCRExplorerPortlet.MAX_SIZE_UPLOAD, ""));
 
       UIApplication uiApp  = uiForm.getAncestorOfType(UIApplication.class);
       uiApp.addMessage(new ApplicationMessage("UIJcrExplorerEditForm.msg.fields-cancelled", null));
@@ -247,7 +236,6 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
     public void execute(Event<UIJcrExplorerEditForm> event) throws Exception {
       UIJcrExplorerEditForm uiForm = event.getSource();
       PortletPreferences pref = uiForm.getPreference();
-      UIFormStringInput uiMaxFileSize = uiForm.getUIStringInput(UIJCRExplorerPortlet.MAX_SIZE_UPLOAD);
       UIFormSelectBox typeSelectBox = uiForm.getChildById(UIJCRExplorerPortlet.USECASE);
 
       UIFormInputSetWithAction driveNameInput = uiForm.getChildById("DriveNameInput");
@@ -285,7 +273,6 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
 //        uiForm.setFlagSelectRender(true);
       }
       uiForm.setFlagSelectRender(true);
-      pref.setValue(UIJCRExplorerPortlet.MAX_SIZE_UPLOAD, String.valueOf(uiMaxFileSize.getValue()));
 
       pref.setValue(UIJCRExplorerPortlet.USECASE, useCase);
       pref.setValue(UIJCRExplorerPortlet.DRIVE_NAME, driveName);

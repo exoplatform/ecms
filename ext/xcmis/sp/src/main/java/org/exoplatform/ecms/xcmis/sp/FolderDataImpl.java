@@ -60,17 +60,8 @@ class FolderDataImpl extends BaseObjectData implements FolderData
          next = null;
          if (iter.hasNext())
          {
-            try
-            {
                JcrNodeEntry childEntry = iter.next();
                next = ((StorageImpl)entry.storage).getObject(childEntry);
-            }
-            catch (Exception re)
-            {
-              if (LOG.isWarnEnabled()) {
-                LOG.warn("Unexpected error. Failed get next CMIS object. " + re.getMessage());
-              }
-            }
          }
       }
 

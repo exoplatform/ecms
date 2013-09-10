@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<bundle>
+  <UIExoStart>
+    <tooltip>
+      <homepage>Startseite</homepage>
+    </tooltip>
+  </UIExoStart>
+
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>Möchten Sie dieses Element wirklich löschen?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+
+  <Drives>
+    <label>
+      <ManagedSites>Seitenverwaltung</ManagedSites>
+      <SharedSite>Gemeinsame Webseite</SharedSite>
+    </label>
+  </Drives>
+
+  <Views>
+    <label>
+      <wcm-view>Web</wcm-view>
+      <admin-view>Administrator</admin-view>
+      <icon-view>Piktogramme</icon-view>
+      <thumbails-view>Miniaturansicht</thumbails-view>
+      <list-view>Liste</list-view>
+      <authoring-view>Autor</authoring-view>
+      <wcm-category-view>Kategorien</wcm-category-view>
+      <file-view>Dateiverwaltung-Ansicht</file-view>
+    </label>
+  </Views>
+
+  <UIActionBar>
+    <obtion>
+      <Publication>Veröffentlichung</Publication>
+      <System>System</System>
+    </obtion>
+  </UIActionBar>
+
+  <UIPageSelectorPanel>
+    <header>
+      <path>Pfad</path>
+      <action>Aktion</action>
+    </header>
+    <msg>
+      <child-not-found>Keine Seite gefunden.</child-not-found>
+    </msg>
+    <title>
+      <select>Auswählen</select>
+    </title>
+  </UIPageSelectorPanel>
+
+  <UIContentDialogFormPopupWindow>
+    <title>
+      <UIContentDialogPreference>Webinhalte-Präferenz</UIContentDialogPreference>
+    </title>
+  </UIContentDialogFormPopupWindow>
+
+  <UITabPane>
+    <title>
+      <UIContentBrowsePanelOne>Inhaltsbrowser</UIContentBrowsePanelOne>
+      <UIContentBrowsePanelMulti>Inhaltsbrowser</UIContentBrowsePanelMulti>
+      <UIContentBrowsePanelFolder>Ordner-Browser</UIContentBrowsePanelFolder>
+      <UIContentSearchForm>Inhalts-Suchformular</UIContentSearchForm>
+      <UIContentSearchResult>Suchergebnis</UIContentSearchResult>
+      <UIContentViewer>Inhaltsvorschau</UIContentViewer>
+      <WebContentMetadataPopup>Eigenschaftsauswahl</WebContentMetadataPopup>
+      <WebContentNodeTypePopup>Knotentypauswahl</WebContentNodeTypePopup>
+      <UIPermissionManager>Berechtigungs-Verwalter</UIPermissionManager>
+    </title>
+  </UITabPane>
+
+  <UIContentBrowsePanelOne>
+    <selectBoxValues>
+      <FilterBy>Filtern nach</FilterBy>
+      <WebContent>Web-Inhalt</WebContent>
+      <DMSDocument>Documents</DMSDocument>
+      <Media>Medien</Media>
+    </selectBoxValues>
+    <msg>
+      <node-checkout>Der Knoten wurde ausgecheckt. Bitte überprüfen Sie den Knoten, bevor Sie diese Funktion ausführen.</node-checkout>
+    </msg>
+  </UIContentBrowsePanelOne>
+
+  <UIContentBrowsePanelMulti>
+    <selectBoxValues>
+      <FilterBy>Filtern nach</FilterBy>
+      <WebContent>Web-Inhalt</WebContent>
+      <DMSDocument>Documents</DMSDocument>
+      <Media>Medien</Media>
+    </selectBoxValues>
+  </UIContentBrowsePanelMulti>
+
+  <UIContentBrowsePanelOne>
+    <label>
+      <LeftColumn>Wählen Sie einen Ordner, um dessen Unterordner als Inhalt anzuzeigen.</LeftColumn>
+      <RightColumn>Die folgenden Inhalte können ausgewählt werden.</RightColumn>
+    </label>
+  </UIContentBrowsePanelOne>
+
+  <UIContentBrowsePanelMulti>
+    <label>
+      <LeftColumn>Wählen Sie einen Ordner, um dessen Unterordner als Inhalt anzuzeigen.</LeftColumn>
+      <RightColumn>Die folgenden Inhalte können ausgewählt werden.</RightColumn>
+    </label>
+  </UIContentBrowsePanelMulti>
+
+  <UIContentBrowsePanelFolder>
+    <label>
+      <LeftColumn>Wählen Sie einen Ordner, um dessen Unterordner als Inhalt anzuzeigen.</LeftColumn>
+      <RightColumn>Der folgende Ordner kann ausgewählt werden.</RightColumn>
+    </label>
+  </UIContentBrowsePanelFolder>
+
+  <UISelectedContentGrid>
+    <label>
+      <name>Name</name>
+      <add>Hinzufügen</add>
+      <delete>Löschen</delete>
+    </label>
+    <msg>
+      <no-content-found>Kein Inhalt gefunden.</no-content-found>
+      <non-content>Sie haben keinen Inhalt ausgewählt.</non-content>
+    </msg>
+  </UISelectedContentGrid>
+
+  <UICLVContentSelectedGrid>
+    <action>
+      <SaveCategories>Speichern</SaveCategories>
+      <Cancel>Abbrechen</Cancel>
+    </action>
+  </UICLVContentSelectedGrid>
+
+  <UIContentBrowsePathSelector>
+    <header>
+      <name>Name</name>
+      <publicationstate>Veröffentlichungszustand</publicationstate>
+      <action>Aktion</action>
+    </header>
+    <msg>
+      <child-not-found>Kein Inhalt gefunden</child-not-found>
+    </msg>
+  </UIContentBrowsePathSelector>
+
+  <UIContentBrowsePathSelectorFolder>
+    <header>
+      <name>Name</name>
+      <publicationstate>Veröffentlichungszustand</publicationstate>
+      <action>Aktion</action>
+    </header>
+    <msg>
+      <child-not-found>Kein Ordner gefunden</child-not-found>
+    </msg>
+  </UIContentBrowsePathSelectorFolder>
+
+  <UIContentSearchForm>
+    <title>
+      <Location>Seitenname</Location>
+      <SearchByName>Suche nach Namen</SearchByName>
+      <Fulltext>Ein Wort oder Ausdruck im Kontext</Fulltext>
+      <Property>Eigenschaft</Property>
+      <Contain>Enthalten</Contain>
+      <FromDate>Anfangsdatum</FromDate>
+      <ToDate>Enddatum</ToDate>
+      <DocumentType>Dockmenttyp</DocumentType>
+    </title>
+    <tooltip>
+      <AddMetadataType>Eigenschaft hinzufügen</AddMetadataType>
+      <AddNodeType>Knotentyp hinzufügen</AddNodeType>
+    </tooltip>    
+    <label>
+      <option>
+        <CREATED>Erstellt</CREATED>
+        <MODIFIED>Bearbeitet</MODIFIED>
+      </option>
+    </label>
+    <action>
+      <SearchWebContent>Suche</SearchWebContent>
+    </action>
+    <msg>
+      <time-to-late>The searching time is too long.</time-to-late>
+      <empty-field>Bitte geben Sie ein gültiges Schlüsselwort für die Suche ein.</empty-field>
+      <invalid-format>Ungültiges Datums-/Zeitformat im Feld '{0}'.</invalid-format>
+      <invalid-date>Das Enddatum muss nach dem Anfangsdatum liegen</invalid-date>
+      <invalid-nodeType>Der Knotentyp "{0}" ist ungültig. Bitte überprüfen Sie ihn.</invalid-nodeType>
+      <invalid-keyword>Das Schlüsselwort ist ungültig. Einige Zeichen werden nicht erkannt.</invalid-keyword>
+    </msg>
+  </UIContentSearchForm>
+
+  <WebContentMetadataPopup>
+    <title>
+      <UIContentPropertySelector>Eigenschaftsauswahl</UIContentPropertySelector>
+    </title>
+  </WebContentMetadataPopup>
+
+  <UIContentPropertySelector>
+    <action>
+      <Add>Hinzufügen</Add>
+      <Cancel>Abbrechen</Cancel>
+    </action>
+    <label>
+      <metadataType>Metadatentyp</metadataType>
+      <property_select>Eigenschaft</property_select>
+    </label>
+  </UIContentPropertySelector>
+
+  <WebContentNodeTypePopup>
+    <title>
+      <UIContentNodeTypeSelector>Knotentypauswahl</UIContentNodeTypeSelector>
+    </title>
+  </WebContentNodeTypePopup>
+
+  <UIContentNodeTypeSelector>
+    <action>
+      <Save>Speichern</Save>
+      <Cancel>Abbrechen</Cancel>
+    </action>
+  </UIContentNodeTypeSelector>
+
+  <UIContentSearchResult>
+    <header>
+      <title>Titel</title>
+      <score>Ergebnis</score>
+      <publicationstate>Veröffentlichungszustand</publicationstate>
+      <action>Aktion</action>
+    </header>
+    <title>
+      <Select>Auswählen</Select>
+      <View>Sehen</View>
+    </title>
+    <msg>
+    <template-not-support>Diesen Inhalt können Sie nicht vorab anschauen. Die Vorlage wird nicht unterstützt</template-not-support>
+    </msg>
+  </UIContentSearchResult>
+
+  <UIContentDialogForm>
+    <action>
+      <SaveDraft>Entwurf speichern</SaveDraft>
+      <FastPublish>Schnell veröffentlichen</FastPublish>
+      <Preferences>Präferenzen</Preferences>
+      <Close>Schließen</Close>
+    </action>
+    <msg>
+      <access-denied>Sie haben keine Berechtigung zum Hinzufügen von Kategorien zu diesem Dokument.</access-denied>
+      <exception>Fehler beim Hinzufügen von Kategorien zu diesem Dokument.</exception>
+      <non-categories>Kategorien sind falsch. Bitte wählen Sie passende Kategorien.</non-categories>
+    </msg>
+  </UIContentDialogForm>
+
+  <UIPermissionManager>
+    <label>
+      <UIPermissionInputSetWithAction>Berechtigung</UIPermissionInputSetWithAction>
+      <UIPermissionStringInput/>
+      <UIAccessibleCheckboxInput>Zugriffsrecht</UIAccessibleCheckboxInput>
+      <UIEditableCheckboxInput>Recht bearbeiten</UIEditableCheckboxInput>
+    </label>
+    <action>
+      <Save>Speichern</Save>
+      <Clear>Leeren</Clear>
+      <title>
+        <Edit>Bearbeiten</Edit>
+        <Delete>Löschen</Delete>
+      </title>
+    </action>
+  </UIPermissionManager>
+
+  <UIPermissionManagerGrid>
+    <header>
+      <owner>Berechtigung</owner>
+      <accessible>Zugänglich</accessible>
+      <editable>Editierbar</editable>
+      <action>Aktion</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>Möchten Sie diese Berechtigung wirklich löschen?</confirm-delete-permission>
+      <no-permission-remove>Sie haben keine Berechtigung.</no-permission-remove>
+      <access-denied>Zugriff verweigert.</access-denied>
+      <node-locked>Die Pfad-Element {0} oder eines seiner übergeordneten ist gesperrt.</node-locked>
+      <userOrGroup-required>Sie müssen einen Benutzer oder eine Gruppe auswählen.</userOrGroup-required>
+      <checkbox-require>Sie müssen Rechte festlegen.</checkbox-require>
+      <node-checkedin>Sie müssen erstmal auschecken.</node-checkedin>
+    </msg>
+  </UIPermissionManagerGrid>
+
+  <UIPermissionInputSetWithAction>
+    <title>
+      <SelectUser>Benutzer auswählen</SelectUser>
+      <SelectMember>Mitglied auswählen</SelectMember>
+      <AddAny>Jede Berechtigung hinzufügen</AddAny>
+    </title>
+  </UIPermissionInputSetWithAction>
+
+  <UIUserSelectorPopupWindow>
+    <title>
+      <UIUserContainer>Benutzerauswahl</UIUserContainer>
+    </title>
+  </UIUserSelectorPopupWindow>
+
+  <UIGroupSelectorPopupWindow>
+    <title>
+      <UIGroupMemberSelector>Gruppenauswahl</UIGroupMemberSelector>
+    </title>
+  </UIGroupSelectorPopupWindow>
+
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>Gruppe auswählen</selectGroup>
+      <selectMembership>Rolle auswählen</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+
+  <UIContentDialogPreference>
+    <action>
+      <Back>Zurück</Back>
+    </action>
+  </UIContentDialogPreference>
+
+  <ZeroValidator>
+    <msg>
+      <Invalid-number>Der Wert "Null" wird in dem Feld "{0}" nicht akzeptiert.</Invalid-number>
+    </msg>
+  </ZeroValidator>
+
+  <UIDropDownPageTemp>
+    <item>
+      <WCMPageConfigs>WCM-Seitenkonfigurationen</WCMPageConfigs>
+      <ColumnPageConfigs>Spaltenkonfigurationen für Seite</ColumnPageConfigs>
+      <RowPageConfigs>Zeilenkonfigurationen für Seite</RowPageConfigs>
+      <TabsPageConfigs>Reiterkonfigurationen für Seite</TabsPageConfigs>
+      <MixPageConfigs>Gemischte Seitenkonfigurationen</MixPageConfigs>
+    </item>
+  </UIDropDownPageTemp>
+
+  <UIWizardPageSelectLayoutForm>
+    <label>
+      <SingleContentViewer>Betrachter für einzelne Inhalte</SingleContentViewer>
+      <ContentListViewer>Inhaltslistenbetrachter</ContentListViewer>
+      <Search>Suchen</Search>
+      <Sitemap>Seitenübersicht</Sitemap>
+      <TwoColumnsLayout>Zweispaltiges Layout</TwoColumnsLayout>
+      <ThreeColumnsLayout>Dreispaltiges Layout</ThreeColumnsLayout>
+      <TwoRowsLayout>Zweizeiliges Layout</TwoRowsLayout>
+      <ThreeRowsLayout>Dreizeiliges Layout</ThreeRowsLayout>
+      <TwoTabsLayout>Zwei Reiter Layout</TwoTabsLayout>
+      <ThreeTabsLayout>Drei Reiter Layout</ThreeTabsLayout>
+      <TwoColumnsOneRowLayout>Zweispaltiges  und einzeiliges Layout</TwoColumnsOneRowLayout>
+      <OneRowTwoColumnsLayout>Einreihiges und zweispaltiges Layout</OneRowTwoColumnsLayout>
+      <ThreeRowsTwoColumnsLayout>Dreireihiges und zweispaltiges Layout</ThreeRowsTwoColumnsLayout>
+    </label>
+  </UIWizardPageSelectLayoutForm>
+
+  <Signin>
+    <welcome>Willkommen</welcome>
+    <login>Anmelden</login>
+    <logout>Abmelden</logout>
+    <language>Spracheinstellungen ändern</language>
+    <register>Registrieren</register>
+  </Signin>
+  <UIDriveForm>
+<label>
+<wcm-category-view>Kategorieansicht</wcm-category-view>
+<wcm-view>WCM Inhaltsansicht</wcm-view>
+</label>
+  </UIDriveForm>
+  
+  <ContentSelector>
+    <title>
+      <PersonalDrives>Persönliche Laufwerke</PersonalDrives>
+      <GeneralDrives>Allgemeine Laufwerke</GeneralDrives>
+      <GroupDrives>Gruppenlaufwerke</GroupDrives>
+      <Private>Privat</Private>
+      <Public>Öffentlich</Public>
+      <BackupCenter>Backupcenter</BackupCenter>
+      <CategorizedDocumentsCenter>Kategorisiertes Dokumentencenter</CategorizedDocumentsCenter>
+      <CollaborationCenter>Kollaborationscenter</CollaborationCenter>
+      <DigitalAssetsManagementCenter>Managementcenter für digitale Assets</DigitalAssetsManagementCenter>
+      <DMSAdministration>DMS Verwaltung</DMSAdministration>
+      <DocumentsManagementCenter>Dokumenten-Management-Center</DocumentsManagementCenter>
+      <LiveDocumentsCenter>Center für Livedokumente</LiveDocumentsCenter>
+      <PendingDocumentsCenter>Center für ausstehende Dokumente</PendingDocumentsCenter>
+      <RecordsManagementCenter>Managementcenter für Datensätze</RecordsManagementCenter>
+      <SharedUsersSpace>Von Benutzern gemeinsam genutzer Raum</SharedUsersSpace>
+      <Systemfiles>Systemdateien</Systemfiles>
+      <ValidationRequestsDocumentsCenter>Center für Dokumente mit Validierungsanforderungen</ValidationRequestsDocumentsCenter>
+      <ManagedSites>Seitenverwaltung</ManagedSites>
+      <SharedSite>Gemeinsame Webseite</SharedSite>
+    </title>
+  </ContentSelector>
+  
+  <UICategoryNavigationTargetPathPopupWindow>
+    <title>
+      <UIPageSelector>Seitenauswahl</UIPageSelector>
+    </title>
+  </UICategoryNavigationTargetPathPopupWindow>
+  
+  <UIDocumentInfo>
+    <msg>
+      <access-denied-exception>Zugriff verweigert. Sie haben vielleicht keine Leseberechtigung oder der Knoten könnte entfernt oder geändert worden sein.</access-denied-exception>
+    </msg>
+  </UIDocumentInfo>
+  <UIPortalApplication>
+    <title>
+      <abort>Abbrechen</abort>
+    </title>
+  </UIPortalApplication>    
+  
+  <CategoryNavigationTemplate>
+  <label>
+  <home>Startseite</home>
+  </label>
+  </CategoryNavigationTemplate>
+  
+  <Breadcrumb>
+  <label>
+  <home>Startseite</home>
+  </label>  
+  </Breadcrumb>
+</bundle>

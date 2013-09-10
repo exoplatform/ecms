@@ -12,7 +12,10 @@
   import javax.imageio.stream.ImageInputStream;
   import javax.imageio.ImageReader;
 
-	UIComponent uiParent = uicomponent.getParent();
+  def rcontext = _ctx.getRequestContext();
+  rcontext.getJavascriptManager().require("SHARED/jquery", "gj").addScripts("gj(document).ready(function() { gj(\"*[rel='tooltip']\").tooltip();});");
+  
+  UIComponent uiParent = uicomponent.getParent();
 	
 	public boolean isVersionable(Node node) throws Exception {
     return node.isNodeType("mix:versionable");
@@ -92,5 +95,5 @@
 <% } else { %>
   <div style="text-align:center; height:610px; overflow:auto;">
 <% } %>
-    <a rel="tooltip" data-placement="bottom" title="$dcTitle" onclick="javascript:window.open('$binarySrc');" style="cursor:pointer"><img src="$binarySrc" width="$imageWidthStr"/></a>
+    <a rel="tooltip" data-placement="bottom" data-original-title="$dcTitle" onclick="javascript:window.open('$binarySrc');" style="cursor:pointer"><img src="$binarySrc" width="$imageWidthStr"/></a>
   </div>

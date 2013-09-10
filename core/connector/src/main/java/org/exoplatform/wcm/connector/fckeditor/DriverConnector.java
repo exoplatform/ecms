@@ -117,13 +117,13 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
   /** The limit. */
   private int limit;
-  
+
   /** The file number limit on client side. */
   private int limitCountClient_ = 3;
-  
+
   /** The file number limit on server side. */
   private int limitCountServer_ = 30;
-  
+
   private ResourceBundleService resourceBundleService=null;
   private NodeFinder nodeFinder_ = null;
   private LinkManager linkManager_ = null;
@@ -147,7 +147,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       limitCountServer_ = Integer.parseInt(params.getValueParam("upload.limit.count.server").getValue());
     }
   }
-  
+
   /**
    * Gets the maximum size of the uploaded file.
    * @return The file size limit.
@@ -159,7 +159,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @return The maximum number of files uploaded on the client side.
    */
   public int getMaxUploadCount() { return limitCountClient_; }
-  
+
   /**
    * Returns a list of drives for the current user.
    *
@@ -257,7 +257,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
 
-  
+
   /**
    * Checks if the drive can upload a new file.
    *
@@ -335,7 +335,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       Node currentFolderNode = getParentFolderNode(workspaceName,
                                                    Text.escapeIllegalJcrChars(driverName),
                                                    Text.escapeIllegalJcrChars(currentFolder));
-      
+
       return fileUploadHandler.checkExistence(currentFolderNode, fileName);
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
@@ -390,7 +390,9 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       if ((repositoryName != null) && (workspaceName != null) && (driverName != null)
           && (currentFolder != null)) {
         ManageDriveService manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
-        workspaceName = workspaceName != null ? workspaceName : manageDriveService.getDriveByName(Text.escapeIllegalJcrChars(driverName)).getWorkspace();
+        workspaceName = workspaceName != null ? workspaceName :
+                                                manageDriveService.getDriveByName(Text.escapeIllegalJcrChars(driverName))
+                                                                  .getWorkspace();
 
         Node currentFolderNode = getParentFolderNode(workspaceName,
                                                      Text.escapeIllegalJcrChars(driverName),
@@ -692,16 +694,16 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
         || checkNode.isNodeType(NodetypeConstant.NT_FOLDER)
         || checkNode.isNodeType(NodetypeConstant.EXO_TAXONOMY);
   }
-  
+
   /**
    * Check if specific node has child which is type of nt:folder or nt:unstructured.
-   * 
+   *
    * @param checkNode The node to be checked
    * @return True if the folder has some child.
    * @throws Exception
    */
   private boolean hasFolderChild(Node checkNode) throws Exception {
-    return (Utils.hasChild(checkNode, NodetypeConstant.NT_UNSTRUCTURED) 
+    return (Utils.hasChild(checkNode, NodetypeConstant.NT_UNSTRUCTURED)
               || Utils.hasChild(checkNode, NodetypeConstant.NT_FOLDER));
   }
 
@@ -735,9 +737,9 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    *
    * @param node specific Node
    * @return true: is document, false: not document
-   * @throws Exception
+   * @throws RepositoryException
    */
-  private boolean isDocument(Node node) throws Exception {
+  private boolean isDocument(Node node) throws RepositoryException {
     TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
     List<String> documentTypeList = templateService.getDocumentTemplates();
     documentTypeList.remove(NodetypeConstant.EXO_WEBCONTENT);
@@ -875,9 +877,9 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     DriveData driveData = manageDriveService.getDriveByName(driverName);
     String parentPath = (driveData != null ? driveData.getHomePath() : "");
     NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
-    if(driveData != null && 
+    if(driveData != null &&
        driveData.getHomePath().startsWith(nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH) + "/${userId}")) {
-       parentPath = Utils.getPersonalDrivePath(driveData.getHomePath(), 
+       parentPath = Utils.getPersonalDrivePath(driveData.getHomePath(),
                                                ConversationState.getCurrent().getIdentity().getUserId());
     };
     parentPath += ((currentFolder != null && currentFolder.length() != 0) ? "/" : "") + currentFolder;
@@ -885,7 +887,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     //return result;
     return getTargetNode(session, parentPath);
   }
-  
+
   private Node getTargetNode(Session session, String path) throws Exception {
     Node node = null;
     if (linkManager_ == null) {
@@ -912,13 +914,13 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       folder.setAttribute("isUpload", "true");
       folder.setAttribute("hasFolderChild", String.valueOf(this.hasFolderChild(child)));
       folder.setAttribute("nodeTypeCssClass", Utils.getNodeTypeIcon(child, "uiIcon16x16"));
-      
+
 
       if (nodeDriveName!=null && nodeDriveName.length()>0) folder.setAttribute("nodeDriveName", nodeDriveName);
       return folder;
     }
-  
-  
+
+
   /**
    * returns a DOMSource object containing given message
    * @param message the message
@@ -933,7 +935,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     doc.appendChild(rootElement);
     return new DOMSource(doc);
   }
-  
+
   private static class NodeTitleComparator implements Comparator<Node>{
     @Override
     public int compare(Node node1, Node node2) {

@@ -37,13 +37,13 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormInputInfo;
 import org.exoplatform.webui.form.UIFormInputSet;
 import org.exoplatform.webui.form.UIFormTableInputSet;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 
 /**
  * Created by The eXo Platform SARL
@@ -93,7 +93,7 @@ public class UINodeTypeImport extends UIForm {
   public UINodeTypeImport() throws Exception {
   }
 
-  public void update(ArrayList nodeTypeList) throws Exception {
+  public void update(ArrayList<NodeTypeValue> nodeTypeList) throws Exception {
     UIFormTableInputSet uiTableInputSet = getChild(UIFormTableInputSet.class) ;
     if(uiTableInputSet == null ) {
       uiTableInputSet = createUIComponent(UIFormTableInputSet.class, null, null) ;
@@ -113,7 +113,7 @@ public class UINodeTypeImport extends UIForm {
     UIFormInputInfo uiInfo;
     String nodeTypeName;
     NodeTypeValue nodeTypeValue;
-    UIFormCheckBoxInput<String> checkbox;
+    UICheckBoxInput checkbox;
     NodeType register = null;
     for(int i = 0 ; i < nodeTypeList_.size() ; i ++) {
       nodeTypeValue = (NodeTypeValue)nodeTypeList_.get(i) ;
@@ -121,14 +121,14 @@ public class UINodeTypeImport extends UIForm {
       uiInputSet = new UIFormInputSet(nodeTypeName) ;
       uiInfo = new UIFormInputInfo("label", null, nodeTypeName);
       uiInputSet.addChild(uiInfo);
-      checkbox = new UIFormCheckBoxInput<String>(nodeTypeName, nodeTypeName, "") ;
+      checkbox = new UICheckBoxInput(nodeTypeName, nodeTypeName, null) ;
       try {
         register = ntManager.getNodeType(nodeTypeName) ;
         uiInputSet.addChild(checkbox);
         uiTableInputSet.addChild(uiInputSet);
         if(register != null) {
           getRegisteredNodeType().add(nodeTypeName);
-          checkbox.setEnable(false);
+          checkbox.setDisabled(true);
         }
       } catch (NamespaceException e) {
         if (nodeTypeName != null && nodeTypeName.contains(":")) {
@@ -139,7 +139,7 @@ public class UINodeTypeImport extends UIForm {
         getUndefinedNodeTypes().add(nodeTypeName);
         uiInputSet.addChild(checkbox);
         uiTableInputSet.addChild(uiInputSet);
-        checkbox.setEnable(true);
+        checkbox.setDisabled(false);
       } catch (RepositoryException e) {
         if (NamespaceException.class.isInstance(e.getCause())) {
           if (nodeTypeName != null && nodeTypeName.contains(":")) {
@@ -197,8 +197,8 @@ public class UINodeTypeImport extends UIForm {
       UIApplication uiApp = uiImport.getAncestorOfType(UIApplication.class) ;
       ExtendedNodeTypeManager extManager = (ExtendedNodeTypeManager) ntManager ;
       int counter = 0 ;
-      List<UIFormCheckBoxInput> listCheckbox =  new ArrayList<UIFormCheckBoxInput>();
-      uiImport.findComponentOfType(listCheckbox, UIFormCheckBoxInput.class);
+      List<UICheckBoxInput> listCheckbox =  new ArrayList<UICheckBoxInput>();
+      uiImport.findComponentOfType(listCheckbox, UICheckBoxInput.class);
       for(int i = 0 ; i < uiImport.nodeTypeList_.size() ; i ++){
         NodeTypeValue nodeTypeValue = (NodeTypeValue)uiImport.nodeTypeList_.get(i) ;
         if(listCheckbox.get(i).isChecked()) {
@@ -218,11 +218,11 @@ public class UINodeTypeImport extends UIForm {
         uiNodeTypeList.refresh(uiNodeTypeList.getUIPageIterator().getCurrentPage());
         UIPopupWindow uiPopup = uiManager.findComponentById(UINodeTypeManager.IMPORT_POPUP) ;
         uiPopup.setRendered(false) ;
-        uiApp.addMessage(new ApplicationMessage("UINodeTypeImport.msg.nodetype-registered", count)) ;        
+        uiApp.addMessage(new ApplicationMessage("UINodeTypeImport.msg.nodetype-registered", count)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
         return ;
       }
-      uiApp.addMessage(new ApplicationMessage("UINodeTypeImport.msg.no-nodetype-registered", null)) ;     
+      uiApp.addMessage(new ApplicationMessage("UINodeTypeImport.msg.no-nodetype-registered", null)) ;
     }
   }
 }

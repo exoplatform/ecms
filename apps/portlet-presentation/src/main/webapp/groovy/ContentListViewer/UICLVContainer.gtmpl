@@ -1,27 +1,27 @@
-	<%
-		import org.exoplatform.wcm.webui.clv.UICLVPresentation;
+  <%
+    import org.exoplatform.wcm.webui.clv.UICLVPresentation;
 
-		import org.exoplatform.wcm.webui.clv.UICLVFolderMode;
-		import org.exoplatform.wcm.webui.Utils;
-		
-		def hoverClass = Utils.isShowQuickEdit() ? " containerHoverClass" : "";
-		def rcontext = _ctx.getRequestContext() ;
+    import org.exoplatform.wcm.webui.clv.UICLVFolderMode;
+    import org.exoplatform.wcm.webui.Utils;
+    
+    def hoverClass = Utils.isShowQuickEdit() ? " containerHoverClass" : "";
+    def rcontext = _ctx.getRequestContext() ;
     def jsManager = rcontext.getJavascriptManager();
-		def className = uicomponent.getPortletName();
+    def className = uicomponent.getPortletName();
 %>
 <div class="$className" id="$uicomponent.id">
-	<%
+  <%
 
-		jsManager.loadScriptResource("quick-edit");
-	  jsManager.require("SHARED/wcm-utils", "wcmutil");      
-	  jsManager.require("SHARED/jquery", "gj").addScripts("gj('#"+uicomponent.id+"').mouseenter( function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','$className $hoverClass');});").
-	  addScripts("gj('#"+uicomponent.id+"').mouseleave( function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','$className');});").
-	  addScripts("wcmutil.WCMUtils.setZIndex(10);");
+    jsManager.loadScriptResource("quick-edit");
+    jsManager.require("SHARED/wcm-utils", "wcmutil");      
+    jsManager.require("SHARED/jquery", "gj").addScripts("gj('#"+uicomponent.id+"').mouseenter( function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','$className $hoverClass');});").
+    addScripts("gj('#"+uicomponent.id+"').mouseleave( function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','$className');});").
+    addScripts("wcmutil.WCMUtils.setZIndex(10);");
     
-		String portletId = Utils.getRealPortletId(rcontext);
-		def quickEditingBlockId = portletId + "-QuickEditingBlock";
-		def addContentBlockId = portletId + "-AddContentBlock";
-    def manageContentBlockId = portletId + "-ManageContentBlock";		
+    String portletId = Utils.getRealPortletId(rcontext);
+    def quickEditingBlockId = portletId + "-QuickEditingBlock";
+    def addContentBlockId = portletId + "-AddContentBlock";
+    def manageContentBlockId = portletId + "-ManageContentBlock";   
     
     def addContentLink = uicomponent.getEditLink(false, true);
     def manageContentsLink = uicomponent.getEditLink(false, false);
@@ -31,33 +31,32 @@
         edittingStyle = "z-index: 10; top:20px";
     if (Utils.isShowQuickEdit()) {
     %>
-	 <div class="edittingToolBarContainer" style="$edittingStyle">
-		 <div class="edittingToolBar" >
-			<div class="btn-group"> 				
+   <div class="edittingToolBarContainer" style="$edittingStyle">
+     <div class="edittingToolBar" >
+      <div class="btn-group">         
         <%
-				if (uicomponent.isShowAddContent()) {          
-				%>
-					<a id="<%=addContentBlockId%>" class="btn" onclick = "eXo.ecm.CLV.addURL(this)" href="<%=addContentLink%>"><i class="uiIconPlus" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVContainer.label.AddContent");%>"></i></a>
-				<% }
-				
-				if (uicomponent.isShowManageContent()) {
-				%>
-					<a id="<%=manageContentBlockId%>" class="btn" onclick = "eXo.ecm.CLV.addURL(this)" href="<%=manageContentsLink%>"><i class="uiIconEcmsManageContent" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVContainer.label.ManageContent");%>"></i></a>
-				<% }
-				
-				if (uicomponent.isShowPreferences()) {					
-				%>
-					<a id="<%=quickEditingBlockId%>" class="btn" onclick="<%=uicomponent.event("Preferences")%>"><i class="uiIconSetting" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVContainer.label.Preferences");%>"></i></a>
-				<% } %>
-			</div>
-		</div>
-	</div>
+        if (uicomponent.isShowAddContent()) {          
+        %>
+          <a id="<%=addContentBlockId%>" class="btn" onclick = "eXo.ecm.CLV.addURL(this)" href="<%=addContentLink%>"><i class="uiIconPlus" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVContainer.label.AddContent");%>"></i></a>
+        <% }
+        
+        if (uicomponent.isShowManageContent()) {
+        %>
+          <a id="<%=manageContentBlockId%>" class="btn" onclick = "eXo.ecm.CLV.addURL(this)" href="<%=manageContentsLink%>"><i class="uiIconEcmsManageContent" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVContainer.label.ManageContent");%>"></i></a>
+        <% }
+        
+        if (uicomponent.isShowPreferences()) {          
+        %>
+          <a id="<%=quickEditingBlockId%>" class="btn" onclick="<%=uicomponent.event("Preferences")%>"><i class="uiIconSetting" rel="tooltip" data-placement="bottom" title="<%= _ctx.appRes("UICLVContainer.label.Preferences");%>"></i></a>
+        <% } %>
+      </div>
+    </div>
+  </div>
 
-	<% 			
+  <%      
     }
-	if (uicomponent.getChild(UICLVPresentation.class) != null)	{
-		uicomponent.renderChild(UICLVPresentation.class);
-	}
-	%>
+  if (uicomponent.getChild(UICLVPresentation.class) != null)  {
+    uicomponent.renderChild(UICLVPresentation.class);
+  }
+  %>
 </div>
-

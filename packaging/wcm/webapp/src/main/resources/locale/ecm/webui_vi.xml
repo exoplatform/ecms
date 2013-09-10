@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #####################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UICategoriesSelectPanel #
+  #####################################################################
+  -->
+  <UITreeList>
+    <header>
+      <name>Tên</name>
+      <action>Thêm</action>
+    </header>
+    <action/>
+    <info>
+      <child-not-found>Không tìm thấy nút con.</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UISelectedCategoriesGrid #
+  ######################################################################
+  -->
+  <UISelectedCategoriesGrid>
+    <header>
+      <categoryName>Tên Danh mục</categoryName>
+      <categoryPath>Đường dẫn Danh mục</categoryPath>
+      <action>Hành động</action>
+    </header>
+    <action>
+      <SaveCategories>Lưu</SaveCategories>
+      <Cancel>Hủy bỏ</Cancel>
+    </action>
+    <msg>
+      <cannot-save>Danh mục không được lưu.</cannot-save>
+      <have-saved>Danh mục được lưu thành công.</have-saved>
+      <non-categories>Danh mục không đúng. Vui lòng chọn danh mục chính xác.</non-categories>
+      <confirm-delete>Bạn có muốn xóa danh mục này không?</confirm-delete>
+    </msg>
+  </UISelectedCategoriesGrid>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.selector.UIPermissionSelector           #
+  ######################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIPermissionUser>Chọn Người dùng</UIPermissionUser>
+      <UIPermissionMembership>Chọn Kiểu thành viên</UIPermissionMembership>
+    </title>
+  </SelectUserOrGroup>
+  <UIPermissionUser>
+    <label>
+      <selectUser>Chọn Người dùng</selectUser>
+      <selectGroup>Duyệt và chọn nhóm người dùng</selectGroup>
+    </label>
+  </UIPermissionUser>
+  <UIPermissionMembership>
+    <label>
+      <selectUser>Chọn Kiểu thành viên</selectUser>
+      <selectGroup>Duyệt và chọn nhóm người dùng</selectGroup>
+    </label>
+  </UIPermissionMembership>
+</bundle>

@@ -36,24 +36,24 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
 events = { @EventConfig(listeners = UIViewManager.SelectTabActionListener.class) })
 
 public class UIViewManager extends UIAbstractManager {
-	
-	private String selectedTabId = "";
+
+  private String selectedTabId = "";
 
   public String getSelectedTabId()
   {
-     return selectedTabId;
+    return selectedTabId;
   }
 
   public void setSelectedTab(String renderTabId)
   {
-     selectedTabId = renderTabId;
+    selectedTabId = renderTabId;
   }
 
   public void setSelectedTab(int index)
   {
-     selectedTabId = getChild(index - 1).getId();
+    selectedTabId = getChild(index - 1).getId();
   }
-  
+
   public UIViewManager() throws Exception{	
     addChild(UIViewContainer.class, null, null);
     UITemplateContainer uiECMTemp = addChild(UITemplateContainer.class, null, "ECMTemplate") ;
@@ -70,25 +70,25 @@ public class UIViewManager extends UIAbstractManager {
     UIECMTemplateList uiECMTemplateList = ((UITemplateContainer)getChildById("ECMTemplate")).getChild(UIECMTemplateList.class);
     uiECMTemplateList.refresh(uiECMTemplateList.getUIPageIterator().getCurrentPage());
   }
-  
+
   static public class SelectTabActionListener extends EventListener<UIViewManager>
   {
-  	public void execute(Event<UIViewManager> event) throws Exception
+    public void execute(Event<UIViewManager> event) throws Exception
     {
-       WebuiRequestContext context = event.getRequestContext();
-       String renderTab = context.getRequestParameter(UIComponent.OBJECTID);
-       if (renderTab == null)
-          return;
-       event.getSource().setSelectedTab(renderTab);
-       WebuiRequestContext parentContext = (WebuiRequestContext)context.getParentAppRequestContext();
-       if (parentContext != null)
-       {
-          parentContext.setResponseComplete(true);
-       }
-       else
-       {
-          context.setResponseComplete(true);
-       }
+      WebuiRequestContext context = event.getRequestContext();
+      String renderTab = context.getRequestParameter(UIComponent.OBJECTID);
+      if (renderTab == null)
+        return;
+      event.getSource().setSelectedTab(renderTab);
+      WebuiRequestContext parentContext = (WebuiRequestContext)context.getParentAppRequestContext();
+      if (parentContext != null)
+      {
+        parentContext.setResponseComplete(true);
+      }
+      else
+      {
+        context.setResponseComplete(true);
+      }
     }
   } 
 }

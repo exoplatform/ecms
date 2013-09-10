@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIViewFormTabPane>
+  <label>
+          <publicationRequestApproval>Xuất bản &gt; Yêu cầu Duyệt</publicationRequestApproval>
+          <publicationApproveContent>Xuất bản &gt; Duyệt  Nội dung</publicationApproveContent>
+          <publicationPublish>Xuất bản &gt; Phát hành</publicationPublish>
+  </label>
+  </UIViewFormTabPane>
+</bundle>

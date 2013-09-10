@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIFCCForm>
+    <msg>
+      <name-not-allowed>Dieser Name ist nicht erlaubt.</name-not-allowed>
+      <in-versioning>Überprüfen Sie den aktuellen Knoten, bevor Sie einen neuen Knoten hinzufügen.</in-versioning>
+      <cannot-save>Fehler beim Speichern des Knotens.</cannot-save>
+      <saved-successfully>{0}</saved-successfully>
+      <not-support>Vorlage für "{0}" kann nicht geladen werden.</not-support>
+      <not-add-folder>Diesem Ordner können nur Dateien hinzugefügt werden.</not-add-folder>
+      <access-denied>Zugriff verweigert. Sie haben nicht die Berechtigung etwas bei "{0}" hinzuzufügen.</access-denied>
+      <path-not-found>Der Pfad '{0}' wurde gelöscht oder ist ungültig.</path-not-found>
+      <node-locked>Der Knoten "{0}" ist gesperrt. Bitte entsperren Sie diesen Knoten vor dem Erstellen von Dokumenten.</node-locked>
+      <node-isExist>Dieser Knoten ist in "{0}" bereits vorhanden und es ist nicht erlaubt, den gleichen Namen wie dort zu verwenden.</node-isExist>
+      <get-dialog-path>Fehler beim Abrufen des Dialogpfads.</get-dialog-path>
+      <new-jcr-template>Fehler beim Erstellen einer neuen Vorlage.</new-jcr-template>
+    </msg>
+    <action>
+      <Save>Speichern</Save>
+      <Cancel>Abbrechen</Cancel>
+    </action>
+  </UIFCCForm>
+
+  <UIFCCConfig>
+    <label>
+      <UIFCCSaveLocationField>Ort speichern</UIFCCSaveLocationField>
+      <UIFCCWorkspaceFormSelectBox>Wählen Sie den Arbeitsbereich</UIFCCWorkspaceFormSelectBox>
+      <UIFCCTemplateField>Vorlagenoptionen</UIFCCTemplateField>
+      <UIFCCLocationFormInputAction>Zu speichernder Ort</UIFCCLocationFormInputAction>
+      <UIFCCLocationFormStringInput/>
+      <UIFCCTemplateFormSelectBox>Vorlage auswählen</UIFCCTemplateFormSelectBox>
+      <UIFCCSaveFormStringInput>Die Schaltfläche "Speichern" personalisieren</UIFCCSaveFormStringInput>
+      <UIFCCMessageFormTextareaInput>Benutzerdefinierte Nachricht</UIFCCMessageFormTextareaInput>
+      <UIFCCRedirectFormCheckboxInput>Umleitung:</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectPathFormStringInput>Umleitungspfad:</UIFCCRedirectPathFormStringInput>
+      <UIFCCActionField>Aktionen</UIFCCActionField>
+      <UIFCCActionList/>
+    </label>
+    <msg>
+      <save-successfully>Portlet-Einstellungen erfolgreich gespeichert.</save-successfully>
+      <item-not-found>Dieser Pfad ist ungültig.</item-not-found>
+      <fileType-empty>Bitte wählen Sie einen Dateityp, bevor Sie diese Konfiguration speichern.</fileType-empty>
+      <ws-empty>Bitte wählen Sie einen Arbeitsbereich.</ws-empty>
+      <action-empty>Bitte wählen Sie einen Ordner mit einer Aktion.</action-empty>
+      <message-empty>Das Feld "Benutzerdefinierte Nachricht beim Speichern" ist erforderlich wenn Sie nicht die Umleitungsoption auswählen oder der Pfad leer ist.</message-empty>
+      <get-template>Fehler beim Zugriff auf die Vorlage.</get-template>
+      <set-template-option>Fehler beim Festlegen der Vorlageoption.</set-template-option>
+      <do-select>Fehler beim Auswählen des Speicherortes.</do-select>
+      </msg>
+    <action>
+      <Save>Speichern</Save>
+    </action>
+  </UIFCCConfig>
+
+  <UIFCCLocationFormInputAction>
+    <title>
+      <SelectPath>Pfad auswählen</SelectPath>
+    </title>
+  </UIFCCLocationFormInputAction>
+
+  <UIFCCActionList>
+    <header>
+      <name>Name</name>
+      <description>Beschreibung</description>
+      <instanceOf>Instanz von</instanceOf>
+      <action>Aktion</action>
+    </header>
+    <action>
+      <Add>Hinzufügen</Add>
+    </action>
+    <msg>
+      <empty>Keine Aktionen</empty>
+      <remove-popup-first>Sie müssen das Bearbeiten-Popup-Fenster schließen, vor dem Löschen dieses Knotens.</remove-popup-first>
+      <confirm-delete-action>Möchten Sie diese Aktion wirklich löschen?</confirm-delete-action>
+      <template-empty>Die Vorlage von '{0}' ist unbekannt oder leer.</template-empty>
+      <template-null>Die Vorlage ist unbekannt oder leer, oder Sie haben keine Berechtigung auf diese Vorlage zuzugreifen.</template-null>
+      <access-denied>Zugriff verweigert. Sie haben keine Berechtigung, diesen Vorgang durchzuführen.</access-denied>
+    </msg>
+  </UIFCCActionList>
+
+  <UIFCCSelectorPopupWindow>
+    <title>
+      <UIOneNodePathSelector>Ort auswählen</UIOneNodePathSelector>
+    </title>
+  </UIFCCSelectorPopupWindow>
+
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Arbeitsbereich:</workspaceName>
+      <rootNodePath>Quellpfad:</rootNodePath>
+      <rootNodeInfo>Root node</rootNodeInfo>
+    </label>
+  </UIWorkspaceList>
+
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Quellknoten hinzufügen</AddRootNode>
+    </title>
+  </rootNodeInfo>
+
+  <UITreeList>
+    <info>
+      <child-not-found>Dieser Knoten hat keine Unterknoten.</child-not-found>
+    </info>
+    <header>
+      <name>Name</name>
+      <action>Aktion</action>
+    </header>
+  </UITreeList>
+
+  <UIFCCActionPopupWindow>
+    <title>
+      <UIFCCActionContainer>Aktion hinzufügen</UIFCCActionContainer>
+    </title>
+  </UIFCCActionPopupWindow>
+
+  <UIFCCActionForm>
+    <title>Aktion hinzufügen/bearbeiten</title>
+    <action>
+      <Save>Speichern</Save>
+      <Close>Schließen</Close>
+    </action>
+    <msg>
+      <repository-exception>Diese Aktion kann nicht gespeichert werden. Der angegebene Name darf keinen Index als sein letztes Element besitzen.</repository-exception>
+      <numberformat-exception>Diese Aktion kann nicht gespeichert werden. Der angegebene Name darf ' [' oder ']' nicht enthalten.</numberformat-exception>
+      <existed-action>Der Aktionsname "{0}" ist bereits vorhanden. Wählen Sie bitte einen anderen Namen.</existed-action>
+      <unable-add-action>Diese Aktion kann nicht hinzugefügt werden.</unable-add-action>
+      <unable-add>Diese Aktion kann nicht hinzugefügt werden. Dieser Knoten ist ein Wurzelknoten oder Sie haben keine Berechtigung.</unable-add>
+      <not-support>Der Dialog "{0}" wird nicht unterstützt.</not-support>
+      <no-permission-add>Zugriff verweigert. Sie haben hier nicht die Berechtigung zum Hinzufügen einer Aktion.</no-permission-add>
+      <access-denied>Zugriff verweigert. Sie haben keine Berechtigung auf diese Vorlage zuzugreifen.</access-denied>
+    </msg>
+    <validator>
+      <validator>Genehmiger</validator>
+      <destPath>Mit Pfad</destPath>
+    </validator>
+  </UIFCCActionForm>
+
+  <UIFCCActionTypeForm>
+    <label>
+      <actionType>Erstellen Sie eine Aktion des Typs</actionType>
+    </label>
+    <msg>
+      <not-support>Die Vorlage von "{0}" kann nicht geladen werden.</not-support>
+      <do-not-permission>Sie haben keine Berechtigung zum Laden der Vorlage '{0}'.</do-not-permission>
+    </msg>
+  </UIFCCActionTypeForm>
+
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>Ort auswählen</UIOneNodePathSelector>
+      <UIPermissionSelector>Berechtigungsbrowser</UIPermissionSelector>
+      <UICategoriesSelector>Kategorien hinzufügen</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
+  <DateTimeValidator>
+    <msg>
+      <Invalid-input>Das Feld "{0}" mit dem Wert "{1}" ist ungültig.</Invalid-input>
+    </msg>
+  </DateTimeValidator>
+
+  <UITabPane>
+    <title>
+      <UICategoriesSelectPanel>Kategorien auswählen</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Referenzierte Kategorien</UISelectedCategoriesGrid>
+    </title>
+  </UITabPane>
+
+  <PopupComponent>
+    <title>
+      <UICategoriesSelector>Add Categories</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
+  <UICategoriesSelector>
+    <action>
+      <close>Schließen</close>
+    </action>
+  </UICategoriesSelector>
+
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>Kategorien hinzufügen</UIOneTaxonomySelector>
+    </title>
+  </PopupComponent>
+
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>Kategoriebaum</taxonomyTree>
+    </label>
+  </UITreeTaxonomyList>
+
+  <UIFCCTaxonomyPopupWindow>
+    <title>
+      <UIOneTaxonomySelector>Kategorieauswahl</UIOneTaxonomySelector>
+    </title>
+  </UIFCCTaxonomyPopupWindow>
+</bundle>

@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ###################### global word for ECM dialogs resoucebundle ####
+  -->
+  <Ecm>
+    <dialog>
+      <label>
+        <end-time>Sluttid</end-time>
+        <start-time>Starttid</start-time>
+        <lifecycle>Livscykel</lifecycle>
+        <mimeType>MIME-typ</mimeType>
+        <repeat-count>Upprepa sammanräkning</repeat-count>
+        <time-interval>Tidsintervall</time-interval>
+        <query-items>Sök artiklar</query-items>
+        <schedule-type>Schematyp</schedule-type>
+        <remove>Ta bort objekt</remove>
+        <add>Lägg till objekt</add>
+        <expand>Expandera detta</expand>
+      </label>
+    </dialog>
+  </Ecm>
+  
+  <UIDocumentForm>
+    <label>
+      <title>#{word.title}</title>
+      <link>Länk</link>
+      <contentHtml>#{word.content}</contentHtml>
+      <content>#{word.content}</content>
+      <contentPlain>#{word.content}</contentPlain>
+      <name>Namn</name>
+    <categories>Kategorier</categories>
+    </label>
+  </UIDocumentForm>
+ 
+  <!--
+  ###################### resoucebundle for HTMLFile dialogs template ####
+  -->
+  <HtmlFile>
+    <dialog>
+      <label>
+        <name>Namn</name>
+        <content>Innehåll</content>
+      </label>
+    </dialog>
+  </HtmlFile>
+
+  <!--
+  ###################### resoucebundle for nt:file dialogs template ####
+  -->
+  <File>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <categories>Kategorier</categories>
+        <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
+        <content>#{word.content}</content>
+        <re-upload>Filen finns redan. Du kan ta bort den och ladda upp en annan fil.</re-upload>
+      </label>
+    </dialog>
+  </File>
+
+  <UIActionForm>
+    <label>
+      <description>#{word.description}</description>
+      <port>Portera</port>
+      <userName>#{word.userName}</userName>
+      <password>Lösenord</password>
+      <link>Länk</link>
+      <to>Skicka e-post till</to>
+      <actionName>#{word.name}</actionName>
+    </label>
+  </UIActionForm>
+  <EditFormAction>
+    <label>
+      <description>#{word.description}</description>
+      <port>Portera</port>
+      <userName>#{word.userName}</userName>
+      <password>Lösenord</password>
+      <link>Länk</link>
+      <to>Skicka e-post till</to>
+      <actionName>#{word.name}</actionName>
+    </label>
+  </EditFormAction>
+ 
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction dialogs template ####
+  -->
+  <AddMetadata>
+    <dialog>
+      <label>
+        <id>ID</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <metadata>Metadata</metadata>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning dialogs template ####
+  -->
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <id>ID</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <start-time>#{Ecm.dialog.label.start-time}</start-time>
+        <end-time>#{Ecm.dialog.label.end-time}</end-time>
+        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <cron-expression>Cron process</cron-expression>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong dialogs template ####
+  -->
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <id>ID</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <start-time>#{Ecm.dialog.label.start-time}</start-time>
+        <end-time>#{Ecm.dialog.label.end-time}</end-time>
+        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <cron-expression>Cron Expression</cron-expression>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet dialogs template ####
+  -->
+  <ElementSet>
+    <dialog>
+      <label>
+        <title>#{word.title}:</title>
+        <creator>Skapad av:</creator>
+        <subject>#{word.subject}:</subject>
+        <source>Källa:</source>
+        <contributor>Bidragsgivare:</contributor>
+        <resource-type>Resurstyp:</resource-type>
+        <date>#{word.date}:</date>
+        <publisher>Utgivare:</publisher>
+        <description>#{word.description}:</description>
+        <rights>Rättigheter:</rights>
+        <relation>Relation:</relation>
+        <format>#{word.format}:</format>
+        <coverage>Täckning:</coverage>
+        <identifier>Identifierare:</identifier>
+        <language>Språk:</language>
+      </label>
+    </dialog>
+  </ElementSet>
+
+  <!--
+  ###################### resoucebundle for exo:actionable dialogs template ####
+  -->
+  <Actionable>
+    <dialog>
+      <label>
+        <primary-type>Primär typ</primary-type>
+        <mixin-types>Mixin Typ</mixin-types>
+      </label>
+    </dialog>
+  </Actionable>
+
+  <!--
+  ###################### resoucebundle for exo:move dialogs template ####
+  -->
+  <Move>
+    <dialog>
+      <label>
+        <destination-workpsace>Destination arbetsyta</destination-workpsace>
+        <destination-path>Målsökvägen</destination-path>
+        <primary-type>Primär typ</primary-type>
+        <mixin-types>Mixin Typ</mixin-types>
+      </label>
+    </dialog>
+  </Move>
+  <!--
+  ###################### resoucebundle for exo:published dialogs template ####
+  -->
+  <Published>
+    <dialog>
+      <label>
+        <start-publication>Starta publicering</start-publication>
+        <end-publication>Avsluta publikation</end-publication>
+      </label>
+    </dialog>
+  </Published>
+ 
+  <!--
+  ###################### resoucebundle mix:referenceable dialogs template ####
+  -->
+  <Referenceable>
+    <dialog>
+      <label>
+        <uuid>UUID</uuid>
+      </label>
+    </dialog>
+  </Referenceable>
+  <!--
+  ###################### resoucebundle exo:relationable dialogs template ####
+  -->
+  <Relationable>
+    <dialog>
+      <label>
+        <relation>Relation</relation>
+      </label>
+    </dialog>
+  </Relationable>
+  <!--
+  ###################### resoucebundle exo:rss-enable dialogs template ####
+  -->
+  <RssEnable>
+    <dialog>
+      <label>
+        <title>Titel</title>
+        <summary>#{word.summary}</summary>
+      </label>
+    </dialog>
+  </RssEnable>
+
+  <!--
+  ###################### resoucebundle mix:versionable dialogs template ####
+  -->
+  <Versionable>
+    <dialog>
+      <label>
+        <version-history>Versionshistorik</version-history>
+        <base-version>Bas version</base-version>
+        <is-checked-out>Utcheckad</is-checked-out>
+        <predecessors>Föregångare</predecessors>
+        <merge-failed>Det gick inte att koppla dokument</merge-failed>
+        <uuid>UUID</uuid>
+      </label>
+    </dialog>
+  </Versionable>
+
+  <!--
+  ##################### resoucebundle for resouce container dialogs template#####
+  -->
+  <ResouceContainer>
+    <dialog>
+      <label>
+        <name>Namn</name>
+        <autoload>Auto Load</autoload>
+        <minetype>MIME-typ</minetype>
+        <content>Innehåll</content>
+      </label>
+    </dialog>
+  </ResouceContainer>
+  <!--
+  ###################### resoucebundle for validator ####
+  -->
+  <EmailAddressValidator>
+    <msg>
+      <Invalid-input>E-postadressen är ogiltig.</Invalid-input>
+    </msg>
+  </EmailAddressValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>Fältet {0} är obligatoriskt. Skriv in ditt värde.</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <NumberFormatValidator>
+    <msg>
+      <Invalid-number>Fältet {0} är ogiltig.</Invalid-number>
+    </msg>
+  </NumberFormatValidator>
+  <!--
+  #####Since version 2.4#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+  <ScriptAction>
+    <dialog>
+      <label>
+        <id>ID</id>
+        <name>Namn</name>
+        <lifecycle>Livscykel</lifecycle>
+        <homePath>Sökväg Hem</homePath>
+        <targetWorkspace>Målet arbetsyta</targetWorkspace>
+        <targetPath>Målet sökväg</targetPath>
+      </label>
+    </dialog>
+  </ScriptAction>
+  <UIDialogForm>
+   <form>
+   <DialogFormException>Det går inte att spara dokumentet. Det kan finnas ett problem med spara-funktionen.</DialogFormException>
+   </form>
+  </UIDialogForm>
+
+  <!--
+  #####Since version 2.6#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+<no>Nej</no>
+<yes>Ja</yes>
+<true>sant</true>
+<false>falskt</false>
+<Electronic>Elektroniska</Electronic>
+<Paper>Papper</Paper>
+<NONE>Ingen</NONE>
+<CLASSIFIED>Klassificerad</CLASSIFIED>
+<UNCLASSIFIED>Oklassificerad</UNCLASSIFIED>
+<NOCONTRACT>Inget kontrakt</NOCONTRACT>
+<one-minute>En minut</one-minute>
+<hourly>Varje timme</hourly>
+<daily>Dagligen</daily>
+<quarterly>Kvartalsvis</quarterly>
+<yearly>Årligen</yearly>
+<ten-years>Tio år</ten-years>
+<read>Användaråtgärd</read>
+  <schedule>Schemaläggaren</schedule>
+  <node_added>Tillägg till innehåll</node_added>
+  <node_removed>Ta bort innehåll</node_removed>
+  <property_added>Lägg till egenskaper</property_added>
+  <property_removed>Ta bort egenskaper</property_removed>
+  <property_changed>Ändra egenskaper</property_changed>
+
+  <ScriptAction>
+    <dialog>
+      <label>
+        <isDeep>Är för djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </ScriptAction>
+
+  <AddMetadata>
+    <dialog>
+      <label>
+        <isDeep>Är för djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <isDeep>Är för djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <isDeep>Är för djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AutoVersioning>
+
+  <AccessibleMedia>
+  <dialog>
+  <label>
+  <captions>Bildtexter</captions>
+<audioDescription>Ljudbeskrivning</audioDescription>
+<alternativeText>Alternativ text</alternativeText>
+</label>
+</dialog>
+<help>
+<CaptionsHelp>Bildtexter skall innehålla text och viktiga ljud</CaptionsHelp>
+<AudioDescriptionHelp>En Ljudbeskrivning är ett klipp ur videon</AudioDescriptionHelp>
+<AlternativeTextHelp>Ge ett tillgängligt, alternativt sätt att presentera informationen</AlternativeTextHelp>
+</help>
+</AccessibleMedia>
+  
+</bundle>

@@ -39,10 +39,11 @@ import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
-import org.exoplatform.ecm.webui.utils.LockUtil;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
+import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -102,7 +103,7 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
     if (destPath.startsWith(nodePath)) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.bound-move-exception", null,
           ApplicationMessage.WARNING));
-      
+
       return;
     }
     Node destNode;
@@ -117,7 +118,7 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
     } catch (PathNotFoundException path) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", null,
           ApplicationMessage.WARNING));
-      
+
       return;
     } catch (Exception e) {
       JCRExceptionManager.process(uiApp, e);
@@ -126,7 +127,7 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
     if (!PermissionUtil.canAddNode(destNode)) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-move-node", null,
           ApplicationMessage.WARNING));
-      
+
       uiExplorer.updateAjax(event);
       return;
     }
@@ -134,12 +135,12 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
       Object[] arg = { destPath };
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", arg,
           ApplicationMessage.WARNING));
-      
+
       return;
     }
     if (!destNode.isCheckedOut()) {
       uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null));
-      
+
       return;
     }
     try {
@@ -154,18 +155,18 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
       Object[] arg = { destPath };
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.has-not-add-permission", arg,
           ApplicationMessage.WARNING));
-      
+
       return;
     } catch (LockException lock) {
       Object[] arg = { nodePath };
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", arg,
           ApplicationMessage.WARNING));
-      
+
       return;
     } catch (ConstraintViolationException constraint) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.move-constraint-exception", null,
           ApplicationMessage.WARNING));
-      
+
       return;
     } catch (Exception e) {
       if (LOG.isErrorEnabled()) {
@@ -200,7 +201,7 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
         uiApp.addMessage(new ApplicationMessage("UIWorkingArea.msg.can-not-move-to-itself",
                                                 null,
                                                 ApplicationMessage.WARNING));
-        
+
         return;
       }
     }
@@ -218,7 +219,7 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
       if (!selectedNode.isCheckedOut()) {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null,
             ApplicationMessage.WARNING));
-        
+
         return;
       }
       uiExplorer.addLockToken(selectedNode);
@@ -230,13 +231,19 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
       Workspace destWorkspace = destNode.getSession().getWorkspace();
       if (srcPath.indexOf(":/") > -1)
         srcPath = srcPath.substring(srcPath.indexOf(":/") + 1);
+
+      // Get thumbnail node if source node
+      ThumbnailService thumbnailService = WCMCoreUtils.getService(ThumbnailService.class);
+      Node srcThumbnailNode = thumbnailService.getThumbnailNode(selectedNode);
+
       ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
       ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
+      Node desNode = null;
       if (srcWorkspace.equals(destWorkspace)) {
         srcWorkspace.move(srcPath, destPath);
         //delete EXO_RESTORE_LOCATION if source is in trash
         removeMixinEXO_RESTORE_LOCATION(srcSession, destPath);
-        Node desNode = (Node)srcSession.getItem(destPath);
+        desNode = (Node)srcSession.getItem(destPath);
         LockUtil.changeLockToken(srcPath, desNode);
         if (activityService.isAcceptedNode(desNode) || desNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
           listenerService.broadcast(ActivityCommonService.NODE_MOVED_ACTIVITY, desNode, desNode.getPath());
@@ -244,7 +251,7 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
         srcSession.save();
       } else {
         destWorkspace.clone(srcWorkspace.getName(), srcPath, destPath, false);
-        Node desNode =(Node) destWorkspace.getSession().getItem(destPath);
+        desNode =(Node) destWorkspace.getSession().getItem(destPath);
         if (activityService.isAcceptedNode(desNode) || desNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)) {
           listenerService.broadcast(ActivityCommonService.NODE_MOVED_ACTIVITY, desNode, destPath);
         }
@@ -252,13 +259,15 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
         removeMixinEXO_RESTORE_LOCATION(destWorkspace.getSession(), destPath);
         destWorkspace.getSession().save();
       }
-      
-      
+
+      // Update thumbnail node for destination node
+      thumbnailService.copyThumbnailNode(srcThumbnailNode, desNode);
+
     } catch (Exception e) {
       Object[] args = { srcPath, messagePath };
       uiApp.addMessage(new ApplicationMessage("UIWorkingArea.msg.move-problem", args,
           ApplicationMessage.WARNING));
-      
+
       return;
     }
   }

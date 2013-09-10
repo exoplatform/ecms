@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+<UIPopupWindow>
+<title>
+<UIViewInfoManager>Visa Information</UIViewInfoManager>
+</title>
+</UIPopupWindow>
+    
+<ECMContextMenu>
+<event>
+<ViewInfo>Visa Information</ViewInfo>
+</event>
+</ECMContextMenu>
+<UIViewInfoContainer>
+<label>
+      <name>Namn</name>
+      <title>Titel</title>
+      <type>Typ</type>
+      <size>Storlek</size>
+      <owner>Ägare</owner>
+      <lastModifier>Senaste person att ändra</lastModifier>
+      <created>Skapad</created>
+      <lastModified>Senaste ändringsdatum</lastModified>
+      <publicationState>Publiceringsstatus</publicationState>
+</label>
+<value>
+      <folder>Mappen</folder>
+</value>
+<action>
+<Close>Stäng</Close>
+</action>
+</UIViewInfoContainer>
+</bundle>

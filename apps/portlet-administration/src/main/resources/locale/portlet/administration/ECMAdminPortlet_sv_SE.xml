@@ -1,0 +1,2550 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIECMAdminControlPanel #
+  ################################################################################
+  -->
+  <UIECMAdminControlPanel>
+    <tab>
+      <label>
+        <Templates>Mallar</Templates>
+        <Explorer>Explorer</Explorer>
+        <Repository>Repository</Repository>
+        <Advanced>Avancerad</Advanced>
+      </label>
+    </tab>    
+    <label>     
+      <UITaxonomyManagerTrees>Kategorier</UITaxonomyManagerTrees>
+      <UIMetadataManager>Metadata</UIMetadataManager>
+      <UINamespaceManager>Namnplatser</UINamespaceManager>
+      <UINodeTypeManager>Nodtyper</UINodeTypeManager>
+      <UITemplatesManager>Dokument</UITemplatesManager>
+   <UICLVTemplatesManager>Listvy</UICLVTemplatesManager>
+      <UIViewManager>Vyer</UIViewManager>
+      <UIDriveManager>Enheter</UIDriveManager>
+      <UIQueriesManager>Frågor</UIQueriesManager>
+      <UIActionManager>Åtgärder</UIActionManager>
+      <UIScriptManager>Skript</UIScriptManager>
+      <UIUnLockManager>Lås</UIUnLockManager>
+      <UIFolksonomyManager>Taggar</UIFolksonomyManager>      
+    </label>
+    <msg>
+      <access-denied>Åtkomst nekad. Du har inte behörighet till denna funktion.</access-denied>
+    </msg>
+  </UIECMAdminControlPanel>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UITaxonomy #
+  ################################################################################
+  -->
+  <UITaxonomyWorkingArea>
+    <msg>
+      <referential-integrity>Går inte att läsa från filen eller att målkategorin är en underkategori.</referential-integrity>
+      <no-taxonomy-selected>Du måste kopiera eller ta bort minst en kategori.</no-taxonomy-selected>
+      <node-is-cutting>Du kan inte klistra in här. Kategorinoden {0} kan tas bort.</node-is-cutting>
+      <can-not-paste>Det finns inga data i Urklipp.</can-not-paste>
+      <reference-exception>Cannot delete this category  because it is currently referenced by a content.</reference-exception>
+      <path-error>Ett fel uppstod när du tog bort denna kategorinod.</path-error>
+    </msg>
+  </UITaxonomyWorkingArea>
+  <UITaxonomyManager>
+    <msg>
+      <confirm-delete>Är du säker på att du vill ta bort denna kategori?</confirm-delete>
+    </msg>
+    <title>
+      <add>Lägg till</add>
+      <paste>Klistra in</paste>
+      <cut>Klipp ur</cut>
+      <copy>Kopiera</copy>
+      <remove>Ta bort</remove>
+    </title>
+  </UITaxonomyManager>
+  
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeContainer#
+  ################################################################################
+  -->
+  <UITaxonomyTreeContainer>
+    <tab>
+      <info>
+        <UITaxonomyTreeMainForm>Ange kategorins namn, arbetsyta och hem.</UITaxonomyTreeMainForm>
+        <UIPermissionTreeManager>Ställa in behörighet för kategoriträdet.</UIPermissionTreeManager>
+        <UIActionTaxonomyManager>Lägga till en åtgärd i kategoriträdet för att slutföra eller uppdatera.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Redigera taxonomi trädet genom att lägga till, kopiera, klippa och välja behörigheter.</UITaxonomyTreeCreateChild>
+      </info>
+    </tab>
+    <msg>
+      <not-exist-tree>Kategoriträdet finns inte.</not-exist-tree>
+    </msg>
+  </UITaxonomyTreeContainer>
+  
+  <!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeMainForm          #
+##########################################################################################
+-->
+  <UITaxonomyTreeMainForm>
+    <action>
+      <Reset>Återställ</Reset>
+    </action>
+    <msg>
+      <name-not-allowed>Förbjudet namn</name-not-allowed>
+      <name-emty>Trädnamnet krävs.</name-emty>
+      <homePath-emty>Sökvägen till Hem krävs.</homePath-emty>
+      <targetPath-emty>Målsökvägen krävs.</targetPath-emty>
+      <taxonomytree-existed>Namnet på kategori trädet finns redan.</taxonomytree-existed>
+    </msg>
+  </UITaxonomyTreeMainForm>
+
+  <TaxonomyTreeMainForm>
+    <label>
+      <TaxoTreeName>Namn</TaxoTreeName>
+      <TaxoTreeWorkspace>Arbetsyta</TaxoTreeWorkspace>
+      <TaxoTreeHomePath>Sökväg Hem</TaxoTreeHomePath>
+    </label>
+  </TaxonomyTreeMainForm>
+
+  <TaxonomyTreeHomePath>
+    <title>
+      <AddPath>Lägga till sökväg</AddPath>
+    </title>
+  </TaxonomyTreeHomePath>
+  
+  <!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeInfo  #
+##########################################################################################
+-->
+<UIPermissionTreeInfo>
+<action>
+<title>
+<Delete>Ta bort</Delete>
+<Edit>Editera</Edit>
+</title>
+</action>
+<header>
+<usersOrGroups>Användare eller grupp</usersOrGroups>
+<read>Läs</read>
+<addNode>Lägg till nod</addNode>
+<setProperty>Ange rättigheter</setProperty>
+<remove>Ta bort</remove>
+<action>Åtgärd</action>
+</header>
+</UIPermissionTreeInfo>
+
+<!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
+##########################################################################################
+-->
+  <UIPermissionTreeForm>
+    <msg>
+      <have-not-any-permission>Ange minst ett rättighet för den här noden.</have-not-any-permission>
+    </msg>
+  </UIPermissionTreeForm>
+
+<!--
+################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
+################################################################################
+-->
+
+  <UIActionForm>
+    <title>Lägga till en åtgärd i kategoriträdet</title>
+    <action>
+      <Save>Spara</Save>
+    </action>
+    <msg>
+      <name-not-allowed>Tomma namn eller specialtecken är inte tillåtna i namnet.</name-not-allowed>
+      <path-invalid>Sökvägen är ogiltig.</path-invalid>
+      <taxonomy-existed>Kategoriträdet finns redan.</taxonomy-existed>
+      <taxonomy-node-existed>Kategorinoden finns redan.</taxonomy-node-existed>
+      <no-permission-add>Du har inte rättigheter att lägga till.</no-permission-add>
+      <not-created-tree>Kategoriträdet har inte skapats ännu.</not-created-tree>
+    </msg>
+  </UIActionForm>
+
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UITemplatesManager #
+  ################################################################################
+  -->
+  <UITemplatesList>
+    <header>
+      <name>Mallnamn</name>
+      <action>Åtgärder</action>
+    </header>
+  </UITemplatesList>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UINamespaceForm  #
+  ################################################################################
+  -->
+  <NameSpacePopup>
+    <title>
+      <UINamespaceForm>Namnplats formulär</UINamespaceForm>
+    </title>
+  </NameSpacePopup>
+  <UINamespaceForm>
+    <title>Registrera ny Namnplats</title>
+    <label>
+      <namespace>Namnplats Prefix</namespace>
+      <uri>URI</uri>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <register-unsuccessfull>Namespace eller URI finns redan.</register-unsuccessfull>
+      <prefix-null>Ange namnområdesprefix.</prefix-null>
+      <uri-null>Vänligen ange namnområdets URI.</uri-null>
+    </msg>
+  </UINamespaceForm>
+  <!--
+  ################################################################################
+  #      org.exoplatform.ecm.webui.component.admin.namespace.UINamespaceList #
+  ################################################################################
+  -->
+  <UINamespaceList>
+    <header>
+      <prefix>Prefix</prefix>
+      <uri>Namnplats URI</uri>
+      <action>Åtgärd</action>
+    </header>
+    <action>
+      <AddNamespace>Registrera</AddNamespace>
+    </action>
+  </UINamespaceList>
+  <NamespacePopup>
+    <title>
+      <UINamespaceForm>Registrera ny Namnplats</UINamespaceForm>
+    </title>
+  </NamespacePopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIMetadataList #
+  ################################################################################
+  -->
+  <UIMetadataList>
+    <label>
+      <false>falskt</false>
+      <true>sant</true>
+      <True>sant</True>
+      <False>falskt</False>
+    </label>
+    <title>
+      <view>Visa</view>
+      <edit>Editera</edit>
+      <delete>Ta bort</delete>
+    </title>
+    <header>
+      <icon>Ikon</icon>
+      <name>Metadata</name>
+      <type>Typ</type>
+      <internalUse>Internt bruk</internalUse>
+      <action>Åtgärder</action>
+    </header>
+    <msg>
+      <confirm-delete>Är du säker på att du vill ta bort denna metadata?</confirm-delete>
+      <delete-successful>Mallar för {0} raderades.</delete-successful>
+      <path-not-found-exception>Dessa metadata har tagits bort eller ändrats. Klicka på Uppdatera.</path-not-found-exception>
+    </msg>
+    <action>
+      <Add>Lägg till Metadata</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIMetadataList>
+  <MetadataPopupAddNew>
+    <title>
+      <UIMetadataForm>Lägg till ny mall för metadata</UIMetadataForm>
+    </title>
+  </MetadataPopupAddNew>
+  <MetadataPopupEdit>
+    <title>
+      <UIMetadataForm>Redigera mall för metadata</UIMetadataForm>
+    </title>
+  </MetadataPopupEdit>
+  <MetataPermissionPopup>
+    <title>
+      <MetadataPermission>Ange behörighet</MetadataPermission>
+      <QueriesPermissionBrowse>Lägga till behörighet</QueriesPermissionBrowse>
+    </title>
+  </MetataPermissionPopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataForm #
+  ################################################################################
+  -->
+  <UIMetadataForm>
+    <title>Mappning av Metadata</title>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>Tillämpa</Save>
+    </action>
+    <header>
+      <icon>Ikon</icon>
+      <label>Nodnamn</label>
+      <input>Åtgärd</input>
+    </header>
+    <label>
+      <dialogTemplate>Dialog mall:</dialogTemplate>
+      <viewTemplate>Visa mall:</viewTemplate>
+      <metadataName>Metadatans namn:</metadataName>
+      <viewPermission>Rättigheter:</viewPermission>
+      <permission>UIMetadataForm</permission>
+      <metadataLabel>Etikett:</metadataLabel>
+    </label>
+    <tab>
+      <label>
+        <metadataTypeTab>Metadatatyp</metadataTypeTab>
+        <dialogTab>Dialog mall</dialogTab>
+        <viewTab>Visa mall</viewTab>
+      </label>
+    </tab>
+  </UIMetadataForm>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataView #
+  ################################################################################
+  -->
+  <UIMetadataView>
+    <header>
+      <name>Elementnamn</name>
+      <type>Typ</type>
+      <description>Beskrivning</description>
+      <isMixin>Mixin typ</isMixin>
+      <orderable>Orderable children</orderable>
+    </header>
+    <info>
+      <description>Beskrivning</description>
+    </info>
+    <tab>
+      <element>Element</element>
+      <metadataView>Metadatainformation</metadataView>
+    </tab>
+    <action>
+      <Cancel>Stäng</Cancel>
+      <Back>#{word.back}</Back>
+    </action>
+  </UIMetadataView>
+  <ViewMetadataPopup>
+    <title>
+      <UIMetadataView>Metadatainformation</UIMetadataView>
+    </title>
+  </ViewMetadataPopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIDriveManager #
+  ################################################################################
+  -->
+  <UIDriveList>
+    <header>
+      <icon>Ikon</icon>
+      <name>Namn</name>
+      <workspace>Arbetsyta</workspace>
+      <homePath>Sökväg Hem</homePath>
+      <permissions>Behörighet</permissions>
+      <views>Visa</views>
+      <action>Åtgärd</action>
+    </header>
+    <tooltip>
+      <Delete>Ta bort</Delete>
+      <EditInfo>Editera</EditInfo>
+    </tooltip>
+    <msg>
+      <confirm-delete>Är du säker på att du vill ta bort denna enhet?</confirm-delete>
+    </msg>
+    <action>
+      <AddDrive>Lägg till enhet</AddDrive>
+    </action>
+    <label>
+      <permission>{0} i {1}</permission>
+    </label>
+  </UIDriveList>
+  <UIDriveForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <drive-exists>Enheten finns redan.</drive-exists>
+      <workspace-path-invalid>Sökvägen är ogiltig.</workspace-path-invalid>
+      <drive-views-invalid>Välj en vy.</drive-views-invalid>
+      <icon-not-found>Ikonen hittades inte.</icon-not-found>
+      <permission-null>Du måste ställa in behörigheten för den här enheten.</permission-null>
+      <allowCreateFolders>Du måste välja mapptyp.</allowCreateFolders>
+      <name-null>Ange disknamnet.</name-null>
+      <fileName-invalid>Enhetens namn har ogiltiga tecken.</fileName-invalid>
+    </msg>
+    <tab>
+      <label>
+        <DriveInputSet>Enhet</DriveInputSet>
+        <ViewsInputSet>Tillämpa visningar</ViewsInputSet>
+        <PermissionInputSet>Ange behörighet</PermissionInputSet>
+      </label>
+    </tab>
+    <label>
+      <name>Namn:</name>
+      <workspace>Arbetsyta:</workspace>
+      <homePath>Sökväg Hem:</homePath>
+      <icon>Ikon för arbetsytan:</icon>
+      <viewPreferences>Visa dokument:</viewPreferences>
+      <viewNonDocument>Visa icke-dokument noder:</viewNonDocument>
+      <viewSideBar>Visa sidofält:</viewSideBar>
+      <permissions>Behörighet:</permissions>
+      <showHiddenNode>Visa dolda noder:</showHiddenNode>
+      <allowCreateFolders>Allow Folder Creation:</allowCreateFolders>
+      <Admin>Admin:</Admin>
+      <Categories>Kategorier:</Categories>
+      <Icons>Ikoner:</Icons>
+      <List>Lista:</List>
+      <Web>Web:</Web>
+    </label>
+  </UIDriveForm>
+  <AddDriveManagerPopup>
+    <title>
+      <UIDriveForm>Lägg till enhet</UIDriveForm>
+    </title>
+  </AddDriveManagerPopup>
+  <EditDriveManagerPopup>
+    <title>
+      <UIDriveForm>Redigera enhet</UIDriveForm>
+    </title>
+  </EditDriveManagerPopup>
+  <UITreeList>
+    <info>
+      <child-not-found>Underordnad nod hittades inte.</child-not-found>
+    </info>
+    <header>
+      <name>Namn</name>
+      <action>Åtgärd</action>
+    </header>
+  </UITreeList>
+  
+  <UIRepositoryList>
+    <titlebar>
+      <label>Hantera ECM huvudfunktioner</label>
+    </titlebar>
+  </UIRepositoryList>
+  
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
+  ################################################################################
+  -->
+  <UINodeTypeManager>
+    <header>
+      <icon>Ikon</icon>
+      <label>Nodnamnet</label>
+      <input>Åtgärd</input>
+    </header>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+  </UINodeTypeManager>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeList #
+  ################################################################################
+  -->
+  <UINodeTypeList>
+    <label>
+      <true>sant</true>
+      <false>falskt</false>
+    </label>
+    <header>
+      <icon>Ikon</icon>
+      <nodeType>Nodtyp</nodeType>
+      <mixinType>Mixin Typ</mixinType>
+      <orderable>underordnade noder</orderable>
+      <action>Åtgärd</action>
+    </header>
+    <action>
+      <Export>Exportera</Export>
+      <Import>Import</Import>
+      <Add>Lägg till</Add>
+    </action>
+    <tooltip>
+      <View>Visa</View>
+      <Edit>Editera</Edit>
+      <Delete>Ta bort</Delete>
+    </tooltip>
+    <msg>
+      <confirm-delete>Är du säker på att du vill ta bort denna nodtyp?</confirm-delete>
+    </msg>
+  </UINodeTypeList>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeOptionList #
+  ################################################################################
+  -->
+  <UINodeTypeOptionList>
+    <action>
+      <Save>#{word.save}</Save>
+      <Add>Lägg till</Add>
+    </action>
+    <header>
+      <icon>Ikon</icon>
+      <label>Nodnamn</label>
+      <input>Åtgärd</input>
+    </header>
+  </UINodeTypeOptionList>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeForm #
+  ################################################################################
+  -->
+  <UINodeTypeForm>
+    <tab>
+      <label>
+        <nodeTypeDefinition>Typ av nod</nodeTypeDefinition>
+        <propertyDefinition>Rättigheter</propertyDefinition>
+        <childNodeDefinition>Underordnad nod</childNodeDefinition>
+        <superTypeTab>Super typer</superTypeTab>
+        <DefaultTypeTab>Standard primära</DefaultTypeTab>
+        <RequiredTypeTab>primära krävs</RequiredTypeTab>
+        <Contraints>Begränsningar</Contraints>
+      </label>
+    </tab>
+    <label>
+      <propertiesDefinitions>Egenskapsdefinitioner</propertiesDefinitions>
+      <childDefinitions>Definition Underordnad nod.</childDefinitions>
+      <namespace>Namnutrymme</namespace>
+      <propertyNamespace>Namnutrymme</propertyNamespace>
+      <nodeTypeName>Nodnamn</nodeTypeName>
+      <mixinType>Mixin typ</mixinType>
+      <hasOrderableChildNodes>underordnade noder</hasOrderableChildNodes>
+      <primaryItemName>Primära Artikelnamn</primaryItemName>
+      <superTypes>Super typer</superTypes>
+      <propertyname>Definition namn</propertyname>
+      <requiredType>Obligatorisk typ</requiredType>
+      <multiple>Är Multipel</multiple>
+      <mandatory>Är obligatoriskt</mandatory>
+      <autoCreated>Skapas automatiskt</autoCreated>
+      <parentversion>På överordnade version</parentversion>
+      <protected>Skyddad</protected>
+      <constraints>Värden</constraints>
+      <UIFormTableInputSet>UIFormTableInputSet</UIFormTableInputSet>
+      <sameNameSiblings>Är samma namn syskon</sameNameSiblings>
+      <childNamespace>Namnutrymme</childNamespace>
+      <childMandatory>Obligatoriskt</childMandatory>
+      <childAutocreated>Skapas automatiskt</childAutocreated>
+      <childParentversion>På överordnade version</childParentversion>
+      <childProtected>Skyddad</childProtected>
+      <childNodename>Definition namn</childNodename>
+      <requiredPrimaryType>Obligatorisk primär typ</requiredPrimaryType>
+      <defaultPrimaryType>Standard primärtyp</defaultPrimaryType>
+      <valueconstraints>Värde begränsningar</valueconstraints>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <SaveDraft>Spara som utkast</SaveDraft>
+      <AddProperty>Lägga till egenskap</AddProperty>
+      <AddChild>Lägg till underordnad</AddChild>
+      <AddConstraints>Lägg till begränsningarna för</AddConstraints>
+      <Back>#{word.back}</Back>
+      <AddType>Lägga till typ</AddType>
+      <AddValue>Lägg till</AddValue>
+      <CancelConstraints>#{word.cancel}</CancelConstraints>
+      <CancelTab>#{word.cancel}</CancelTab>
+      <UpdateChild>#{word.update}</UpdateChild>
+      <CancelChild>#{word.cancel}</CancelChild>
+      <UpdateProperty>#{word.update}</UpdateProperty>
+      <CancelProperty>#{word.cancel}</CancelProperty>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <register-successfully>Nodtypen {0} registrerades framgångsrikt.</register-successfully>
+      <supertype-is-madatory>Super typer är obligatoriska när du registrerar en ny nodtyp. Välj minst en super typ.</supertype-is-madatory>
+      <register-failed>Nodtyp registreringen misslyckade. Antingen finns den redan eller supertypen är ogiltig.</register-failed>
+      <nodeType-name>Namnet på nodtypen krävs.</nodeType-name>
+      <fileName-invalid>Filnamnet innehåller ogiltiga tecken.</fileName-invalid>
+      <node-type-exists>Nodtypen {0} finns redan.</node-type-exists>
+      <node-type-name>Namnet på noden är ogiltig.</node-type-name>
+      <values-error>Välj endast en nodtyp för primära standardtypen.</values-error>
+      <confirm-delete-child>Är du säker på att du vill ta bort denna underordnad nod?</confirm-delete-child>
+      <confirm-delete-property>Är du säker på att du vill ta bort den här egenskapen?</confirm-delete-property>
+    </msg>
+  </UINodeTypeForm>
+  <UIPropertyDefinitionForm>
+    <tab>
+      <label>
+        <constraints>Begränsningar</constraints>
+        <UIFormMultiValueInputSet>Begränsningar</UIFormMultiValueInputSet>
+      </label>
+    </tab>
+    <msg>
+      <property-name>Egenskapsdefinitionens namn var ogiltigt.</property-name>
+      <not-supported-value-constraints>Denna typ stödjer inte databegränsningar.</not-supported-value-constraints>
+    </msg>
+  </UIPropertyDefinitionForm>
+  <UIChildNodeDefinitionForm>
+    <msg>
+      <child-name>Nodnamnet  för undernod krävs.</child-name>
+      <child-invalid>Nodnamnet för undernod innehåller ogiltiga tecken.</child-invalid>
+      <default-node-type-not-found>Standard nodtypen finns inte.</default-node-type-not-found>
+      <requiredPrimaryType>Den primära typen krävs.</requiredPrimaryType>
+      <defaultPrimaryType>Standard primärtypen krävs.</defaultPrimaryType>
+    </msg>
+  </UIChildNodeDefinitionForm>
+  <defaultPrimaryTypePopup>
+    <title>
+      <FormdefaultPrimaryTypePopup>Välj Standard primära typ</FormdefaultPrimaryTypePopup>
+    </title>
+  </defaultPrimaryTypePopup>
+  <requiredPrimaryTypePopup>
+    <title>
+      <FormrequiredPrimaryTypePopup>Välj primära typ</FormrequiredPrimaryTypePopup>
+    </title>
+  </requiredPrimaryTypePopup>
+  <superTypesPopup>
+    <title>
+      <FormsuperTypesPopup>Välj Super typer</FormsuperTypesPopup>
+    </title>
+  </superTypesPopup>
+  <NodeTypePopup>
+    <title>
+      <UINodeTypeForm>Lägg till/redigera nodtyp definitioner</UINodeTypeForm>
+    </title>
+  </NodeTypePopup>
+  <ViewNodeTypePopup>
+    <title>
+      <UINodeTypeForm>Visa nodtyp information</UINodeTypeForm>
+    </title>
+  </ViewNodeTypePopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeExport   #
+  ################################################################################
+  -->
+  <UINodeTypeExport>
+    <header>
+      <icon>Ikon</icon>
+      <label>Nodnamn</label>
+      <input>Åtgärd</input>
+    </header>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Export>Exportera</Export>
+      <UncheckAll>Avmarkera alla</UncheckAll>
+      <CheckAll>Markera alla</CheckAll>
+    </action>
+    <title>Exportera nodtyper</title>
+    <msg>
+      <item-null>Välj minst en nod som du vill exportera.</item-null>
+    </msg>
+  </UINodeTypeExport>
+  <NodeTypeExportPopup>
+    <title>
+      <UINodeTypeExport>Exportera nodtyper</UINodeTypeExport>
+    </title>
+  </NodeTypeExportPopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeOptionList   #
+  ################################################################################
+  -->
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeUpload   #
+  ################################################################################
+  -->
+  <UINodeTypeUpload>
+    <label>
+      <upload>Filnamn</upload>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Upload>Ladda upp</Upload>
+    </action>
+    <title>Importera nodtyp från XML-filen</title>
+    <msg>
+      <filename-error>Bläddra bland nodtypfiler att importera.</filename-error>
+      <data-file-error>Endast XML eller zip-filer kan importeras.</data-file-error>
+      <data-invalid>Data är ogiltig. Kontrollera din filtyp och försök igen.</data-invalid>
+      <nodetype-exist>Nodtypen {0} finns redan.</nodetype-exist>
+      <namespace-invalid>Namnområdet {0} är ogiltig.</namespace-invalid>
+    </msg>
+  </UINodeTypeUpload>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeImport   #
+  ################################################################################
+  -->
+  <UINodeTypeImport>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Import>Import</Import>
+      <Upload>Ladda upp igen</Upload>
+    </action>
+    <header>
+      <icon>Ikon</icon>
+      <label>Nodnamnet</label>
+      <input>Åtgärd</input>
+    </header>
+    <title>Välj Importera nodtyp</title>
+    <msg>
+      <no-nodetype-registered>Det finns inga registrerade nodtyper.</no-nodetype-registered>
+      <nodetype-registered>Registrering framgångsrik.</nodetype-registered>
+    </msg>
+  </UINodeTypeImport>
+  <NodeTypeImportPopup>
+    <title>
+      <UINodeTypeImportPopup>Importera nodtyp från XML-filen</UINodeTypeImportPopup>
+    </title>
+  </NodeTypeImportPopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIDriveForm #
+  ################################################################################
+  -->
+  <DriveInputSet>
+    <label>
+      <both>Both</both>
+      <folderOnly>Folder</folderOnly>
+      <unstructuredFolder>Unstructured Folder</unstructuredFolder>
+    </label>
+    <title>
+      <AddPermission>Lägg till behörighet</AddPermission>
+      <RemovePermission>Ta bort behörigheten</RemovePermission>
+      <AddIcon>Lägg till ikon</AddIcon>
+      <AddPath>Lägga till sökväg</AddPath>
+    </title>
+  </DriveInputSet>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.action.UIActionTypeList#
+  ###################################################################################
+  -->
+  <UIActionTypeList>
+    <header>
+      <name>Skript</name>
+      <label>Namn</label>
+<action>Åtgärder</action>
+    </header>
+    <action>
+      <AddAction>Lägg till åtgärdstyp</AddAction>
+    </action>
+<msg>
+ <confirm-delete>Är du säker på att du vill ta bort denna aktivitets typ?</confirm-delete>
+<cannot-delete>Du kan inte ta bort den här åtgärdstypen eftersom systemet använder det fortfarande.</cannot-delete>
+</msg>
+  </UIActionTypeList>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.action.UIActionTypeForm #
+  ######################################################################################
+  -->
+  <ActionPopup>
+    <title>
+      <UIActionTypeForm>Lägg till åtgärdstyp</UIActionTypeForm>
+    </title>
+  </ActionPopup>
+  <UIActionTypeForm>
+    <title>Lägg till åtgärdstyp</title>
+    <label>
+      <actionType>Utöka åtgärdstyp:</actionType>
+      <name>Namn:</name>
+      <isMove>är åtgärden flytta:</isMove>
+      <variables>Variabler:</variables>
+      <exo_businessProcessAction>Affärsprocesser:</exo_businessProcessAction>
+      <exo_scriptAction>Groovy skript:</exo_scriptAction>
+      <exo_ruleAction>Definierade regler:</exo_ruleAction>
+      <script>Skript:</script>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <action-type-added>Åtgärdstypen {0} har lagts till.</action-type-added>
+      <action-type-create-error>Ett fel inträffade under genereringen åtgärdstypen.</action-type-create-error>
+      <action-name-invalid>{0} är ogiltig. Namnet måste börja med ' exo: ".</action-name-invalid>
+      <action-exist>Denna åtgärd finns redan i ECM-systemet.</action-exist>
+      <fileName-invalid>Aktivitetsnamnet innehåller ogiltiga tecken.</fileName-invalid>
+    </msg>
+  </UIActionTypeForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewManager     #
+  ######################################################################################
+  -->
+  <UITabPane>
+    <title>
+      <UIViewContainer>Vyer</UIViewContainer>
+      <ECMTemplate>Explorer mallar</ECMTemplate>
+      <UIScriptForm>Skript</UIScriptForm>
+      <UIDialogTab>Dialog</UIDialogTab>
+      <UIViewTab>Visa</UIViewTab>
+      <UITemplateEditForm>Mall</UITemplateEditForm>
+      <UITemplateForm>Mall</UITemplateForm>
+      <UITemplateContainer>Dokument</UITemplateContainer>
+      <UIActionsTemplateContainer>Åtgärder</UIActionsTemplateContainer>
+      <UIOthersTemplateContainer>Andra</UIOthersTemplateContainer>
+  <UIActionScriptContainer>Åtgärd</UIActionScriptContainer>
+  <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
+<UIInterceptorScriptContainer>Jaktplan</UIInterceptorScriptContainer>
+
+<nodeTypeDefinition>Nodtyp</nodeTypeDefinition>
+      <propertyDefinition>Rättigheter</propertyDefinition>
+      <childNodeDefinition>Underordnad nod</childNodeDefinition>
+      <SuperTypeTab>Super typer</SuperTypeTab>
+      <DefaultTypeTab>Standard primära</DefaultTypeTab>
+      <RequiredTypeTab>primära krävs</RequiredTypeTab>
+      <Contraints>Begränsningar</Contraints>
+    </title>
+  </UITabPane>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewList    #
+  ######################################################################################
+  -->
+  <UIViewList>
+   <title>
+     <View>Visa</View>
+     <EditInfo>Redigera</EditInfo>
+     <Delete>Ta bort</Delete>
+   </title>
+    <header>
+      <name>Namn</name>
+      <permissions>Behörighet</permissions>
+      <tabList>Fliken</tabList>
+      <baseVersion>Bas versionen</baseVersion>
+      <action>Åtgärd</action>
+    </header>
+    <action>
+      <AddView>Lägg till vy</AddView>
+    </action>
+    <msg>
+      <access-denied>Åtkomst nekad. Du har inte behörighet att använda denna funktion.</access-denied>
+      <template-in-use>Kan inte ta bort {0}. Det används för närvarande.</template-in-use>
+      <confirm-delete>Är du säker på att du vill ta bort vyn?</confirm-delete>
+    </msg>
+  </UIViewList>
+  <ViewPopup>
+    <title>
+      <UIViewFormTabPane>Visa</UIViewFormTabPane>
+    </title>
+  </ViewPopup>
+  <AddPopup>
+    <title>
+      <UIViewFormTabPane>Lägg till vy</UIViewFormTabPane>
+      <AddPopup>Lägg till mall</AddPopup>
+    </title>
+  </AddPopup>
+  <EditPopup>
+    <title>
+      <UIViewFormTabPane>Redigera Vy</UIViewFormTabPane>
+    </title>
+  </EditPopup>
+
+<UITabList>
+ <header>
+  <tabName>Fliken</tabName>
+  <localizeButtons>Beskrivning</localizeButtons>
+<action>Åtgärder</action>
+</header>
+<action>
+ <AddTab>Lägg till</AddTab>
+</action>
+<msg>
+ <confirm-delete>Är du säker på att du vill ta bort den här fliken?</confirm-delete>
+</msg>
+<grid>
+ <msg>
+  <empty>Det finns ingen flik på denna vy</empty>
+ </msg>
+</grid>
+</UITabList>
+
+<UIViewPermissionList>
+ <title>Välj ägare med behörigheter på den här vyn:</title>
+<label>
+ <permission>{0} i {1}</permission>
+</label>
+<msg>
+ <confirm-delete>Är du säker på att du vill ta bort denna rättighet?</confirm-delete>
+  <permission-cannot-empty>Behörighet att visa krävs och kan inte vara tomt.</permission-cannot-empty>
+</msg>
+</UIViewPermissionList>
+
+<UIViewPermissionList>
+ <header>
+<friendlyPermission>Behörighet</friendlyPermission>
+     <action>Åtgärd</action>
+ </header>
+<action>
+ <title>
+  <Delete>Ta bort</Delete>
+ </title>
+</action>
+<grid>
+ <msg>
+  <empty>Det finns ingen behörighet på detta</empty>
+ </msg>
+</grid>
+</UIViewPermissionList>
+
+<UIViewPermissionForm>
+<action>
+ <Add>Lägg till</Add>
+</action>
+<label>
+ <userOrGroup>Användare eller grupp</userOrGroup>
+</label>
+<msg>
+ <permission-exist>Behörigheten {0} finns redan i listan.</permission-exist>
+</msg>
+</UIViewPermissionForm>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewFormTabPane   #
+  ######################################################################################
+  -->
+  <UIViewForm>
+    <title>
+      <AddPermission>Lägg till behörighet</AddPermission>
+      <RemovePermission>Ta bort behörigheten</RemovePermission>
+    </title>
+    <msg>
+      <view-name-invalid>Vynamnet krävs.</view-name-invalid>
+      <fileName-invalid>Vy namnet innehåller ogiltiga tecken.</fileName-invalid>
+      <permission-not-empty>Välj en behörighet för vyn.</permission-not-empty>      
+      <mustbe-add-tab>Lägg till en flik.</mustbe-add-tab>
+<mustbe-add-permission>Välj behörighet för den här vyn</mustbe-add-permission>
+      <view-exist>Vy namnet finns redan.</view-exist>
+    </msg>
+    <label>
+      <viewName>Namn</viewName>
+      <template>Mall</template>
+<version>Återställa Version</version>
+      <enableVersion>Aktivera Version</enableVersion>
+      <hideExplorerPanel>Dölja explorer panel i sidomenyn</hideExplorerPanel>
+    </label>
+  </UIViewForm>
+  <UITabForm>
+    <msg>
+      <button-select-error>Välj minst en funktion från listan.</button-select-error>
+      <tab-name-error>Fliknamnet krävs.</tab-name-error>
+      <fileName-invalid>Fliknamnet innehåller ogiltiga tecken.</fileName-invalid>
+    </msg>
+    <label>
+      <version>Återställa Version</version>
+      <viewName>Namn</viewName>
+      <tabName>Fliknamn</tabName>
+      <permission>Rättigheter</permission>
+      <tabs>Flikar</tabs>
+      <template>Mallar</template>
+      <enableVersion>Aktivera Version</enableVersion>
+      <addFolder>Lägg till mapp</addFolder>
+      <addDocument>Lägga till dokument</addDocument>
+      <editDocument>Redigera dokument</editDocument>
+      <upload>Ladda upp</upload>
+      <paste>Klistra in</paste>
+      <search>Sök</search>
+      <viewReferences>Visa referenser</viewReferences>
+      <viewNodeType>Visa nodtyp</viewNodeType>
+      <viewPermissions>Visa behörigheter</viewPermissions>
+      <viewProperties>Visa egenskaper</viewProperties>
+      <manageVersions>Hantera versioner</manageVersions>
+      <manageAuditing>Hantera granskning</manageAuditing>
+      <managePublications>Hantera publikation</managePublications>
+      <manageCategories>Hantera kategorier</manageCategories>
+      <manageRelations>Hantera relationer</manageRelations>
+      <manageActions>Hantera åtgärder</manageActions>
+      <exportNode>Exportera nod</exportNode>
+      <importNode>Importera noden</importNode>
+      <viewRelations>Visa relationer</viewRelations>
+      <showJCRStructure>Visa JCR struktur</showJCRStructure>
+      <watchDocument>Titta på dokumentet</watchDocument>
+      <taggingDocument>Tag dokument</taggingDocument>
+      <viewMetadatas>Visa Metadata</viewMetadatas>
+      <overloadThumbnail>Lägg till miniatyrbild</overloadThumbnail>
+      <manageHidden>Visa/Dölj innehåll</manageHidden>
+      <comment>Kommentar</comment>
+      <vote>Rösta</vote>  
+      <addCategory>Lägg till kategori</addCategory>
+      <addLocalizationLink>Lägg till översättning</addLocalizationLink>
+      <publicationRequestApproval>Godkännande</publicationRequestApproval>
+      <publicationApproveContent>Godkänn innehållet</publicationApproveContent>
+      <publicationPublish>Publicera</publicationPublish>
+<contentNavigation>Navigering i innehåll</contentNavigation>
+<addSymLink>Lägg till Symlink</addSymLink>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>      
+      <Cancel>#{word.cancel}</Cancel>      
+    </action>
+  </UITabForm>
+  <UIPermissionForm>
+    <label>
+      <permission>UIPermissionForm</permission>
+    </label>
+  </UIPermissionForm>
+  <UIViewFormTabPane>
+    <tab>
+      <label>
+        <UITabContainer>Åtgärd</UITabContainer>
+        <UIViewForm>Visa</UIViewForm>
+        <UIViewPermissionContainer>Rättigheter</UIViewPermissionContainer>    
+      </label>
+    </tab>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Återställ</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+      <Close>#{word.close}</Close>
+      <Restore>Återställ</Restore>
+    </action>
+  </UIViewFormTabPane>
+  <PopupViewPermission>
+    <title>
+      <UIPermissionSelector>Välj behörighet</UIPermissionSelector>
+    </title>
+  </PopupViewPermission>
+
+<TabForm_Popup>
+ <title>
+  <UITabForm>Lägg till/redigera-fliken</UITabForm>
+ </title>
+</TabForm_Popup>
+
+<tab_permission>
+ <title>
+  <SelectUser>Välj användare</SelectUser>
+<SelectMember>Välj medlem</SelectMember>
+<AddAny>Någon</AddAny>
+ </title>
+</tab_permission>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIECMTemplateList   #
+  ######################################################################################
+  -->
+  <UIECMTemplateList>
+    <title>
+      <View>Visa</View>
+      <EditInfo>Redigera</EditInfo>
+      <Delete>Ta bort</Delete>
+    </title>
+    <header>
+      <name>Namn</name>
+      <path>Värde</path>
+      <baseVersion>Bas versionen</baseVersion>
+      <action>Åtgärd</action>
+    </header>
+    <action>
+      <Add>Lägg till</Add>
+    </action>
+    <msg>
+      <template-in-use>Kan inte ta bort {0}. Det används för närvarande.</template-in-use>
+      <confirm-delete>Är det säkert att du vill ta bort mallen?</confirm-delete>
+      <access-denied>Åtkomst nekad. Du har inte behörighet att använda denna funktion.</access-denied>
+      <delete-permission-denied>Du har inte behörighet att ta bort {0} mall.</delete-permission-denied>
+    </msg>
+  </UIECMTemplateList>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UITemplateForm #
+  ################################################################################
+  -->
+  <UITemplateForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>Återställ</Reset>
+      <Restore>Återställ</Restore>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <version-restored>Version {0} återställdes framgångsrikt.</version-restored>
+      <role-require>Välj en rättighet.</role-require>
+      <template-name-exist>Mallnamnet {0} finns redan.</template-name-exist>
+      <add-permission-denied>Du har inte behörighet att lägga till en ny mall.</add-permission-denied>
+      <edit-permission-denied>Du har inte behörighet att ändra mallen {0}.</edit-permission-denied>
+    </msg>
+    <tab>
+      <label>
+        <template>Mall</template>
+        <defaultDialog>Dialog</defaultDialog>
+        <defaultView>Visa</defaultView>
+      </label>
+    </tab>
+    <label>
+      <name>Namn:</name>
+      <label>Etikett:</label>
+      <isDocumentTemplate>är dokumentmall:</isDocumentTemplate>
+      <dialog>Dialog innehåll</dialog>
+      <view>Visa innehåll</view>
+      <permission>Rättigheter:</permission>
+      <selectPemistion>Rättigheter</selectPemistion>
+    </label>
+  </UITemplateForm>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.ecmTempForm #
+  ################################################################################
+  -->
+  <ecmTempForm>
+    <label>
+      <version>Välj Version:</version>
+      <content>Innehåll:</content>
+      <name>Namn:</name>
+      <homeTemplate>Typ av mall:</homeTemplate>
+      <enableVersion>Aktiverat Version:</enableVersion>
+    </label>
+  </ecmTempForm>
+  <ecmTempFormPopup>
+    <title>
+      <ecmTempForm>Lägg till/Redigera Visa mall</ecmTempForm>
+    </title>
+  </ecmTempFormPopup>
+  <ecmTempFormAdd>
+    <title>
+      <ecmTempForm>Lägg till Explorer mall</ecmTempForm>
+      <ecmTempFormAdd>Lägg till Explorer mall</ecmTempFormAdd>
+    </title>
+  </ecmTempFormAdd>
+  <ecmTempFormEdit>
+    <title>
+      <ecmTempForm>Redigera Explorer mall</ecmTempForm>
+    </title>
+  </ecmTempFormEdit>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptManager #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIECMFilterForm #
+  ######################################################################################
+  -->
+  <UIECMFilterForm>
+    <label>
+      <selectScript>Välj kategori</selectScript>
+    </label>
+  </UIECMFilterForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptList #
+  ######################################################################################
+  -->
+  <UIScriptList>
+    <action>
+      <Edit>#{word.edit}</Edit>
+      <Delete>#{word.delete}</Delete>
+      <AddNew>Lägga till skript</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Är du säker på att du vill ta bort skriptet?</confirm-delete>
+    </msg>
+    <header>
+      <scriptName>Namn</scriptName>
+      <path>Skript</path>
+      <baseVersion>Bas version</baseVersion>
+      <action>Åtgärder</action>
+    </header>
+    <tooltip>
+      <Edit>Redigera</Edit>
+      <Delete>Ta bort</Delete>
+    </tooltip>
+  </UIScriptList>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptForm #
+  ######################################################################################
+  -->
+  <uiECMScriptsPopup>
+    <title>
+      <ecmScriptForm>ECM-skript</ecmScriptForm>
+    </title>
+  </uiECMScriptsPopup>
+
+  <UIScriptForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Restore>#{word.restore}</Restore>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+      <Change>Ändra</Change>
+    </action>
+    <msg>
+      <version-restored>Version {0} återställdes framgångsrikt.</version-restored>
+      <name-null>Ange namnet på skriptet.</name-null>
+      <name-exist>Skriptnamnet {0} finns redan.</name-exist>
+      <fileName-invalid>Skriptnamnet har ogiltiga tecken.</fileName-invalid>
+    </msg>
+  </UIScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.CBScriptForm #
+  ######################################################################################
+  -->
+  <ScriptContainerPopup>
+    <title>
+      <UIScriptForm>Lägg till/Redigera skript</UIScriptForm>
+    </title>
+  </ScriptContainerPopup>
+  <UIScriptForm>
+    <label>
+      <selectVersion>Versioner</selectVersion>
+      <scriptContent>Innehåll</scriptContent>
+      <scriptLabel>Namn</scriptLabel>
+      <scriptName>Skript</scriptName>
+      <enableVersion>Aktivera versionshantering</enableVersion>
+    </label>
+  </UIScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm #
+  ######################################################################################
+  -->
+ 
+  <ecmScriptForm>
+    <label>
+      <selectVersion>Versioner</selectVersion>
+      <scriptContent>Innehåll</scriptContent>
+      <scriptLabel>Namn</scriptLabel>
+      <scriptName>Skript</scriptName>
+      <enableVersion>Aktivera versionshantering</enableVersion>
+    </label>
+  </ecmScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyForm #
+  ######################################################################################
+  -->
+  <UITaxonomyForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <title>Lägg till kategori</title>
+    <label>
+      <taxonomyName>Kategorinamn</taxonomyName>
+      <parentPath>Förälder</parentPath>
+    </label>
+    <msg>
+      <exist>Kategorin {0} finns redan.</exist>
+      <name-null>Vänligen ange kategorinamnet.</name-null>
+      <name-invalid>Kategorinamnet har ogiltiga tecken.</name-invalid>
+      <name-too-long>Kategorinamnet måste ha mindre än 30 tecken.</name-too-long>
+    </msg>
+  </UITaxonomyForm>
+    
+  <EditTaxonomyTreePopup>
+    <title>
+      <UITaxonomyTreeContainer>Redigera kategoriträd</UITaxonomyTreeContainer>
+    </title>
+  </EditTaxonomyTreePopup>
+
+  <AddTaxonomyTreePopup>
+    <title>
+      <UITaxonomyTreeContainer>Lägg till kategoriträd</UITaxonomyTreeContainer>
+    </title>
+  </AddTaxonomyTreePopup>
+  
+  <TaxonomyPopupCreateChild>
+    <title>
+      <UITaxonomyTreeCreateChildForm>Redigera kategoriträd</UITaxonomyTreeCreateChildForm>
+    </title>
+  </TaxonomyPopupCreateChild>
+
+<UITaxonomyTreeCreateChildForm>
+  <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <parentPath>Parent:</parentPath>
+      <taxonomyName>Category Name:</taxonomyName>
+    </label>
+    <msg>
+      <name-null>Kategorinamnet är tom.</name-null>
+      <name-invalid>Kategorinamnet är ogiltig.</name-invalid>
+      <name-too-long>Kategorinamnet får inte ha mer än {0} tecken.</name-too-long>
+      <exist>Kategorinamn finns redan.</exist>
+    </msg>
+</UITaxonomyTreeCreateChildForm>
+
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>Välj sökväg</UIOneNodePathSelector>
+    </title>
+  </PopupComponent>
+  
+  <TaxoPopupUserSelector>
+  <title>
+      <TaxoTreeSelectUserOrGroup>Välj användare</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>Välj användare</UIPermissionTreeSelectUser>
+    </title>
+  </TaxoPopupUserSelector>
+
+  <TaxoTreeSelectUserOrGroupPopup>
+  <title>
+      <TaxoTreeSelectUserOrGroup>Välj medlemskap</TaxoTreeSelectUserOrGroup>
+    </title>
+  </TaxoTreeSelectUserOrGroupPopup>
+  
+  <TaxoTreeAnyPermission>
+    <label>
+      <any>Alla tillstånd</any>
+      <anyPermission>TaxoTreeAnyPermission</anyPermission>
+    </label>
+  </TaxoTreeAnyPermission>
+  
+  <TaxoTreeSelectUserOrGroup>
+    <label>
+      <selectGroup>Välj grupp</selectGroup>
+      <selectMembership>Välj medlemskap</selectMembership>
+    </label>
+  </TaxoTreeSelectUserOrGroup>
+  
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeList #
+  ######################################################################################
+  -->
+  <UITaxonomyTreeList>
+    <header>
+      <name>Kategoriträdet</name>
+      <workspace>Arbetsyta</workspace>
+      <homePath>Sökväg</homePath>
+      <action>Åtgärd</action>
+    </header>
+    <action>
+      <AddTaxonomyTree>Lägg till kategoriträd</AddTaxonomyTree>
+    </action>
+    <tooltip>
+      <EditTaxonomyTree>Redigera kategoriträd</EditTaxonomyTree>
+      <Delete>Ta bort kategoriträd</Delete>
+    </tooltip>
+    <title>Bläddra  i kategoriträdet</title>
+    <msg>
+      <no-list>Ingen kategori träd har skapats.</no-list>
+      <confirm-delete>Är du säker på att du vill ta bort kategoriträdet?</confirm-delete>
+      <is-in-trash>Detta kategoriträd har flyttats till papperskorgen.</is-in-trash>
+    </msg>
+  </UITaxonomyTreeList>
+  
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeForm  #
+  ######################################################################################
+  -->
+  <UITaxonomyTreeForm>
+    <label>
+      <name>Namn</name>
+      <workspace>Arbetsyta</workspace>
+      <homePath>Sökväg</homePath>
+      <permissions>Behörigheter</permissions>
+    </label>
+    <msg>
+      <homapath-emty>sökväg för Indata</homapath-emty>
+    </msg>
+  </UITaxonomyTreeForm>
+  
+  <UIPermissionTreeForm>
+    <label>
+      <UIPopupWindow>Välj</UIPopupWindow>
+      <permission>UIPermissionTreeForm</permission>
+      <userOrGroup>Användare eller grupp</userOrGroup>
+      <read>Läsrättigheter</read>
+      <add_node>Lägg till rättigheter för noder</add_node>
+      <set_property>Skapa rättigheter</set_property>
+      <remove>Ta bort rättigheter</remove>
+    </label>
+    <title>Lägga till en rättighet till noden</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>Spara</Save>
+      <Reset>Återställ</Reset>
+    </action>
+    <msg>
+      <checkbox-require>Välj minst en rättighet.</checkbox-require>
+      <userOrGroup-required>Välj en användare eller grupp innan du sparar tillstånd.</userOrGroup-required>
+      <not-change-permission>Du har inte rätt att lägga till en behörighets.</not-change-permission>
+      <access-denied>Åtkomst nekad. Du kan inte ta bort denna behörighet.</access-denied>
+    </msg>
+  </UIPermissionTreeForm>
+  
+  <PopupTaxonomyJCRBrowser>
+  <title>
+      <UIOneNodePathSelector>Välj hem väg</UIOneNodePathSelector>
+    </title>
+  </PopupTaxonomyJCRBrowser>
+  
+  <PopupTaxonomyTreePermission>
+    <title>
+      <UIPermissionSelector>Välj behörighet</UIPermissionSelector>
+    </title>
+   </PopupTaxonomyTreePermission>
+   
+   <PopupDrivePermission>
+    <title>
+      <AddDrivePermissionSelector>Lägg till behörighet</AddDrivePermissionSelector>
+      <UIPermissionSelector>Välj behörighet</UIPermissionSelector>
+    </title>
+  </PopupDrivePermission>
+  
+  <UIPopupWindow>
+    <title>
+      <UIPermissionManager>Hantering av behörighet</UIPermissionManager>
+    </title>
+   </UIPopupWindow>
+
+  <PopupUserSelector>
+    <title>
+      <UIUserContainer>Hantering av behörighet</UIUserContainer>
+    </title>
+   </PopupUserSelector>
+   
+  <UIPermissionInfo>
+    <action>
+      <title>
+        <Edit>Redigera</Edit>
+        <Delete>Ta bort behörigheten</Delete>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>Användare eller grupp</usersOrGroups>
+      <read>Läs</read>
+      <addNode>Ändra nod</addNode>
+      <remove>Ta bort</remove>
+      <action>Åtgärd</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>Är du säker på att du vill ta bort detta tillstånd?</confirm-delete-permission>
+      <no-permission-tochange>Du har inte rätt att ta bort denna behörighet.</no-permission-tochange>
+      <no-permission-remove>Du kan inte ta bort ägare eller systemanvändaren.</no-permission-remove>
+      <access-denied>Åtkomst nekad. Du kan inte ta bort denna behörighet.</access-denied>
+    </msg>
+  </UIPermissionInfo>
+  <permission>
+    <title>
+      <SelectUser>Välj användare</SelectUser>
+      <SelectMember>Välj medlemskap</SelectMember>
+      <AddAny>Alla</AddAny>
+    </title>
+  </permission>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionForm #
+  #############################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIGroupSelector>Välj användare</UIGroupSelector>
+      <UIPermissionSelector>Välj medlem</UIPermissionSelector>
+      <UIGroupMemberSelector>Välj medlemskap</UIGroupMemberSelector>
+    </title>
+  </SelectUserOrGroup>
+  <UIGroupSelector>
+    <label>
+      <selectGroup>Välj grupp</selectGroup>
+      <selectUser>Välj användare</selectUser>
+    </label>
+    <msg>
+      <not-change-owner>{0} är ägare av denna nod och har fullständig behörighet.</not-change-owner>
+    </msg>
+  </UIGroupSelector>
+  <UIPermissionForm>
+    <label>
+      <UIPopupWindow>Välj</UIPopupWindow>
+      <permission>UIPermissionForm</permission>
+      <userOrGroup>Användare eller grupp</userOrGroup>
+      <read>Läs</read>
+      <add_node>Ändra</add_node>
+      <remove>Ta bort</remove>
+    </label>
+    <title>Lägga till en rättighet till noden</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>#{word.save}</Save>
+      <Reset>Återställ</Reset>
+    </action>
+    <msg>
+      <checkbox-require>Välj minst en rättighet.</checkbox-require>
+      <userOrGroup-required>Välj en användare eller grupp innan du sparar tillstånd.</userOrGroup-required>
+      <not-change-permission>Du har inte rätt att lägga till en behörighets.</not-change-permission>
+      <access-denied>Åtkomst nekad. Du kan inte ta bort denna behörighet.</access-denied>
+    </msg>
+  </UIPermissionForm>
+  
+  <TaxonomyPopup>
+    <title>
+      <UITaxonomyForm>Lägg till kategori</UITaxonomyForm>
+    </title>
+  </TaxonomyPopup>
+  
+  <UITaxonomyManager>
+    <title>
+      <permission>Hantering av behörighet</permission>
+    </title>
+  </UITaxonomyManager>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateList #
+  ######################################################################################
+  -->
+  <UITemplateList>
+    <header>
+      <name>Typ</name>
+      <action>Åtgärd</action>
+      <label>Mall</label>
+      <icon>Ikon</icon>
+    </header>
+    <action>
+      <AddNew>Lägg till mall</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Vill du verkligen ta bort?</confirm-delete>
+      <access-denied>Åtkomst nekad. Du har inte behörighet att använda denna funktion.</access-denied>
+      <editing-template>Åtkomst nekad. Du kan inte ta bort och redigera mallen samtidigt.</editing-template>
+      <template-not-exist>Den mall som du försöker ta bort finns inte.</template-not-exist>
+    </msg>
+  </UITemplateList>
+  
+  <UIActionsTemplateList>
+    <header>
+      <name>Typ</name>
+      <action>Åtgärd</action>
+      <label>Mall</label>
+      <icon>Ikon</icon>
+    </header>
+    <action>
+      <AddNew>Lägg till mall</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Vill du verkligen ta bort?</confirm-delete>
+      <access-denied>Åtkomst nekad. Du har inte behörighet att använda denna funktion.</access-denied>
+      <editing-template>Åtkomst nekad. Du kan inte ta bort och redigera mallen samtidigt.</editing-template>
+      <template-not-exist>Den mall som du försöker ta bort finns inte.</template-not-exist>
+    </msg>
+  </UIActionsTemplateList>
+  
+  <UIOthersTemplateList>
+    <header>
+      <name>Typ</name>
+      <label>Mall</label>
+      <icon>Ikon</icon>
+      <action>Åtgärd</action>
+    </header>
+    <action>
+      <AddNew>Lägg till mall</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>Vill du verkligen ta bort?</confirm-delete>
+      <access-denied>Åtkomst nekad. Du har inte behörighet att använda denna funktion.</access-denied>
+      <editing-template>Åtkomst nekad. Du kan inte ta bort och redigera mallen samtidigt.</editing-template>
+      <template-not-exist>Den mall som du försöker ta bort finns inte.</template-not-exist>
+    </msg>
+  </UIOthersTemplateList>
+
+ <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+  ######################################################################################
+  -->
+
+<UITabPane>
+ <title>
+ <ContentTemplateContainer>Innehåll</ContentTemplateContainer>
+<CateTemplateContainer>Navigering</CateTemplateContainer>
+<PageTemplateContainer>Sidnumrering</PageTemplateContainer>
+ </title>
+</UITabPane>
+
+  <UICLVTemplateList>
+    <header>
+      <title>Namn</title>
+      <action>Åtgärd</action>
+      <template>Mall</template>
+    </header>
+    <action>
+      <AddTemplate>Lägg till mall</AddTemplate>
+<Edit>Redigera</Edit>
+<Delete>Ta bort</Delete>
+    </action>
+    <msg>
+      <confirm-delete>Är det säkert att du vill ta bort mallen?</confirm-delete>
+      <access-denied>Åtkomst nekad. Du har inte behörighet att använda denna funktion.</access-denied>
+      <editing-template>Åtkomst nekad. Du kan inte ta bort och redigera mallen samtidigt.</editing-template>
+      <template-not-exist>Den mall som du försöker ta bort finns inte.</template-not-exist>
+    </msg>
+  </UICLVTemplateList>
+
+<CateTemplateList>
+    <header>
+      <title>Namn</title>
+      <action>Åtgärd</action>
+      <template>Mall</template>
+    </header>
+    <action>
+      <AddTemplate>Lägg till mall</AddTemplate>
+<Edit>Redigera</Edit>
+<Delete>Ta bort</Delete>
+    </action>
+</CateTemplateList>
+
+<PageTemplateList>
+    <header>
+      <title>Namn</title>
+      <action>Åtgärd</action>
+      <template>Mall</template>
+    </header>
+    <action>
+      <AddTemplate>Lägg till mall</AddTemplate>
+<Edit>Redigera</Edit>
+<Delete>Ta bort</Delete>
+    </action>
+</PageTemplateList>
+
+<EditCLVTemplatePopup_ContentTemplateContainer>
+ <title>
+   <UICLVTemplateForm_ContentTemplateContainer>Redigera lista mall</UICLVTemplateForm_ContentTemplateContainer>   
+ </title>
+</EditCLVTemplatePopup_ContentTemplateContainer>
+
+<EditCLVTemplatePopup_CateTemplateContainer>
+ <title>
+   <UICLVTemplateForm_CateTemplateContainer>Redigera lista mall</UICLVTemplateForm_CateTemplateContainer>   
+ </title>
+</EditCLVTemplatePopup_CateTemplateContainer>
+
+<EditCLVTemplatePopup_PageTemplateContainer>
+ <title>
+   <UICLVTemplateForm_PageTemplateContainer>Redigera mall lista</UICLVTemplateForm_PageTemplateContainer>   
+ </title>
+</EditCLVTemplatePopup_PageTemplateContainer>
+
+<CLVTemplatePopup_ContentTemplateContainer>
+ <title>
+   <UICLVTemplateForm_ContentTemplateContainer>Lägg till lista mallar</UICLVTemplateForm_ContentTemplateContainer>   
+ </title>
+</CLVTemplatePopup_ContentTemplateContainer>
+
+<CLVTemplatePopup_CateTemplateContainer>
+ <title>
+   <UICLVTemplateForm_CateTemplateContainer>Lägg till lista mallar</UICLVTemplateForm_CateTemplateContainer>   
+ </title>
+</CLVTemplatePopup_CateTemplateContainer>
+
+<CLVTemplatePopup_PageTemplateContainer>
+ <title>
+   <UICLVTemplateForm_PageTemplateContainer>Lägg till listmallen</UICLVTemplateForm_PageTemplateContainer>   
+ </title>
+</CLVTemplatePopup_PageTemplateContainer>
+
+<UICLVTemplateForm_ContentTemplateContainer>
+ <action>
+  <Save>#{word.save}</Save>
+<Reset>Återställ</Reset>
+<Cancel>#{word.cancel}</Cancel>
+ </action>
+<label>
+ <title>Namn</title>
+<template>Mallnamn</template>
+<content>Innehåll</content>
+<type>Typ av mall</type>
+</label>
+</UICLVTemplateForm_ContentTemplateContainer>
+
+<UICLVTemplateForm_PageTemplateContainer>
+ <action>
+  <Save>#{word.save}</Save>
+<Reset>Återställ</Reset>
+<Cancel>#{word.cancel}</Cancel>
+ </action>
+<label>
+ <title>Namn</title>
+<template>Mallnamn</template>
+<content>Innehåll</content>
+<type>Typ av mall</type>
+</label>
+</UICLVTemplateForm_PageTemplateContainer>
+
+<UICLVTemplateForm_CateTemplateContainer>
+ <action>
+  <Save>#{word.save}</Save>
+<Reset>Återställ</Reset>
+<Cancel>#{word.cancel}</Cancel>
+ </action>
+<label>
+ <title>Namn</title>
+<template>Mallnamn</template>
+<content>Innehåll</content>
+<type>Typ av mall</type>
+</label>
+</UICLVTemplateForm_CateTemplateContainer>
+<UICLVTemplateForm>
+  <label>
+    <paginators>Sidnumrering</paginators>
+<list>Innehåll</list>
+<navigation>Navigering</navigation>
+  </label>
+  <msg>
+  <template-existing>Detta namn finns redan. Välj en annan.</template-existing>
+  </msg>
+</UICLVTemplateForm>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateForm #
+  ######################################################################################
+  -->
+  <AddNewTemplatePermission>
+    <title>
+      <UIPermissionSelector>Välj behörighet</UIPermissionSelector>
+    </title>
+  </AddNewTemplatePermission>
+  <TemplatePermission>
+    <title>
+      <UIPermissionSelector>Välj behörighet</UIPermissionSelector>
+    </title>
+  </TemplatePermission>
+  <TemplateContainerPopup>
+    <title>
+      <UITemplateForm>Mall Formulär</UITemplateForm>
+    </title>
+  </TemplateContainerPopup>
+  <ViewForm>
+    <label>
+      <UITemplateContent>ViewForm</UITemplateContent>
+      <UIPopupWindow>Kontrollera behörighet</UIPopupWindow>
+      <selectVersion>Versioner</selectVersion>
+      <content>Innehåll:</content>
+      <name>Namn:</name>
+      <isDocumentTemplate>är dokumentmall</isDocumentTemplate>
+      <viewPermission>Rättigheter:</viewPermission>
+      <enableVersion>Aktivera versionshantering</enableVersion>
+    </label>
+    <title>Lägg till/Redigera Vy</title>
+  </ViewForm>
+  <DialogForm>
+    <label>
+      <UITemplateContent>DialogForm</UITemplateContent>
+      <UIPopupWindow>Dialogrutan behörighet</UIPopupWindow>
+      <selectVersion>Versioner</selectVersion>
+      <content>Innehåll:</content>
+      <name>Namn:</name>
+      <isDocumentTemplate>är dokumentmall</isDocumentTemplate>
+      <viewPermission>Rättigheter:</viewPermission>
+      <enableVersion>Aktivera versionshantering</enableVersion>
+    </label>
+    <title>Lägga till eller redigera dialogrutan</title>
+  </DialogForm>
+  <DialogFormTemplatePermission>
+    <title>
+      <UIPermissionSelector>Välj behörighet</UIPermissionSelector>
+    </title>
+  </DialogFormTemplatePermission>
+  <ViewFormTemplatePermission>
+    <title>
+      <UIPermissionSelector>Välj behörighet</UIPermissionSelector>
+    </title>
+  </ViewFormTemplatePermission>
+  <TemplateContainerPopup>
+    <title>
+      <UIViewTemplate_UITemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UITemplateContainer>
+      <UIViewTemplate_UIActionsTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
+      <UIViewTemplate_UIOthersTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
+    </title>
+  </TemplateContainerPopup>
+  <UITemplatesManager>
+    <title>
+      <Edit>Redigera</Edit>
+      <Delete>Ta bort</Delete>
+    </title>
+  </UITemplatesManager>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIViewTemplate #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateEditForm #
+  ######################################################################################
+  -->
+  <UITemplateEditForm>
+    <label>
+      <name>Namn:</name>
+      <label>Etikett:</label>
+      <isDocumentTemplate>är dokumentmall:</isDocumentTemplate>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+  </UITemplateEditForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIDialogTab #
+  ######################################################################################
+  -->
+  <UIDialogTab>
+    <header>
+      <name>Namn</name>
+      <roles>Roller</roles>
+      <baseVersion>Version</baseVersion>
+      <action>Åtgärder</action>
+    </header>
+    <msg>
+      <undeletable>Du kan inte ta bort {0} eftersom det är standarden.</undeletable>
+      <confirm-delete>Är du säker på att  du vill ta bort den här dialogrutan?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>Redigera</Edit>
+        <Delete>Ta bort</Delete>
+      </title>
+    </action>
+  </UIDialogTab>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIViewTab #
+  ######################################################################################
+  -->
+  <UIViewTab>
+    <header>
+      <name>Namn</name>
+      <roles>Roller</roles>
+      <baseVersion>Version</baseVersion>
+      <action>Åtgärder</action>
+    </header>
+    <msg>
+      <undeletable>{0} kan inte tas bort, den är standard</undeletable>
+      <confirm-delete>Vill du verkligen ta bort?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>Redigera</Edit>
+        <Delete>Ta bort</Delete>
+      </title>
+    </action>
+  </UIViewTab>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateContent #
+  ######################################################################################
+  -->
+  <UITemplateContent>
+    <action>
+      <Save>#{word.save}</Save>
+      <Restore>#{word.restore}</Restore>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <name-invalid>Filnamnet får inte innehålla specialtecken.</name-invalid>
+      <roles-invalid>Fältet för tillstånd krävs.</roles-invalid>
+      <version-restored>Version {0} återställdes framgångsrikt.</version-restored>
+      <name-exist>Namnet {0} finns redan.</name-exist>
+    </msg>
+    <title>
+      <AddPermission>Lägg till behörighet</AddPermission>
+      <RemovePermission>Ta bort behörigheten</RemovePermission>
+    </title>
+  </UITemplateContent>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.DialogForm #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.ViewForm #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.UIJCRBrowser #
+  ######################################################################################
+  -->
+  <JCRBrowser>
+    <title>
+      <UIOneNodePathSelector>Välj hem väg</UIOneNodePathSelector>
+    </title>
+  </JCRBrowser>
+  <JCRBrowserAssets>
+    <title>
+      <UIOneNodePathSelector>Välj ikonen</UIOneNodePathSelector>
+    </title>
+  </JCRBrowserAssets>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.queries #
+  ######################################################################################
+  -->
+  <UIQueriesList>
+    <header>
+      <name>Namn</name>
+      <type>Typ</type>
+      <statement>Uttalande</statement>
+      <permission>Behörigheter</permission>
+      <action>Åtgärder</action>
+    </header>
+    <action>
+      <AddQuery>Lägga till fråga</AddQuery>
+    </action>
+    <tooltip>
+      <Edit>Redigera den här frågan</Edit>
+      <Delete>Ta bort den här frågan</Delete>
+    </tooltip>
+    <msg>
+      <confirm-delete>Är du säker på att du vill ta bort den här frågan?</confirm-delete>
+      <query-not-existed>Frågan finns inte längre.</query-not-existed>
+      <can-not-remove>Ett fel uppstod när du tar bort frågan. Kontakta administratören för information.</can-not-remove>
+    </msg>
+  </UIQueriesList>
+  <UIQueriesForm>
+    <label>
+      <name>Frågenamn</name>
+      <type>Frågetyp</type>
+      <statement>Uttalande</statement>
+      <cache>Aktivera Cache resultat</cache>
+      <permissions>Behörigheter</permissions>
+      <PermissionButton>UIQueriesForm</PermissionButton>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <permission-require>Välj behörigheter.</permission-require>
+      <name-invalid>Namnfältet får inte innehålla specialtecken.</name-invalid>
+      <name-existing>Namnet på fråga finns redan. Välj en annan.</name-existing>
+      <invalid-query>Frågan är ogiltigt. Vänligen kontrollera din frågesats.</invalid-query>
+      <access-denied>Åtkomst nekad. Du har inte behörighet att utföra den här åtgärden.</access-denied>
+    </msg>
+  </UIQueriesForm>
+  <AddQueryForm>
+    <title>
+      <UIQueriesForm>Lägga till fråga</UIQueriesForm>
+    </title>
+  </AddQueryForm>
+  <EditQueryForm>
+    <title>
+      <UIQueriesForm>Redigera fråga</UIQueriesForm>
+    </title>
+  </EditQueryForm>
+<PermissionPopup>
+  <title>
+    <UIGroupMemberSelector>Välj behörighet</UIGroupMemberSelector>
+  </title>
+</PermissionPopup>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.folksonomy #
+  ######################################################################################
+  -->
+  <UITagManager>
+    <title>
+      <EditStyle>Redigera format</EditStyle>
+      <RemoveStyle>Ta bort format</RemoveStyle>
+    </title>    
+  </UITagManager>
+  <UITagStyleList>
+    <header>
+      <name>Formatmallens namn</name>
+      <documentRange>Antal förekomster</documentRange>
+      <tagHTML>Tag stil</tagHTML>
+      <action>Åtgärd</action>
+    </header>
+    <action>
+      <AddStyle>Lägga till stil</AddStyle>
+    </action>
+  </UITagStyleList>
+  <UITagStyleForm>
+    <label>
+      <styleName>Formatmallens namn:</styleName>
+      <documentRange>Number of Occurrences:</documentRange>
+      <styleHTML>HTML-format:</styleHTML>
+    </label>
+    <action>
+      <UpdateStyle>Uppdatera</UpdateStyle>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <range-validator>Området är ogiltig. Formatet måste vara: en...b, bland vilka a, b är positiva heltal. Du kan använda * istället för b att visa ett obegränsat område.</range-validator>
+      <error-update>Det gick inte att uppdatera. Din information är ogiltig.</error-update>
+      <item-not-existing>Du kan inte spara ändringar i denna tagg eftersom den inte längre finns i databasen.</item-not-existing>
+    </msg>
+  </UITagStyleForm>
+  <FolksonomyPopup>
+    <title>
+      <UITagStyleForm>Redigera konfigurationen för tagg formatet</UITagStyleForm>
+    </title>
+  </FolksonomyPopup>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.ECMNameValidator  #
+  ###################################################################################
+  -->
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>Fältet {0} innehåller ogiltiga tecken. Ange ett annat värde.</Invalid-char>
+      <empty-input>Värdet för fältet {0} är tomt.</empty-input>
+    </msg>
+  </ECMNameValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>Ange värdet i fältet {0}.</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.PermissionValidator  #
+  ###################################################################################
+  -->
+  <PermissionValidator>
+  <msg>
+      <permission-path-invalid>Behörigheten {0} är ogiltig.</permission-path-invalid>
+  </msg>
+  </PermissionValidator>
+  <!--
+  ###################################################################################
+  # Repository  #
+  ###################################################################################
+  -->
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Arbetsyta:</workspaceName>
+      <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
+      <rootNodePath>Rotsökvägen:</rootNodePath>
+    </label>
+  </UIWorkspaceList>
+  <!--
+  ###################################################################################
+  # Others  #
+  ###################################################################################
+  -->
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>Är du säker på att du vill ta bort?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <template>
+    <title>
+      <AddPermission>Lägg till behörighet</AddPermission>
+    </title>
+  </template>
+  <metadataTypeTab>
+    <title>
+      <AddPermission>Lägg till behörighet</AddPermission>
+    </title>
+  </metadataTypeTab>
+  <PermissionButton>
+    <title>
+      <AddPermission>Lägg till behörighet</AddPermission>
+    </title>
+  </PermissionButton>
+  <nodeTypeDefinition>
+    <title>
+      <AddSuperType>Lägga till Super typ</AddSuperType>
+    </title>
+  </nodeTypeDefinition>
+  <childNodeDefinition>
+    <title>
+      <AddRequiredType>Lägga till obligatorisk typ</AddRequiredType>
+      <AddDefaultType>Lägga till standardtyp</AddDefaultType>
+    </title>
+  </childNodeDefinition>
+  <propertyDefinition>
+    <title>
+      <AddConstraints>Lägg till begränsningarna för</AddConstraints>
+    </title>
+  </propertyDefinition>
+  <authInputSet>
+    <title>
+      <Select>Välj</Select>
+    </title>
+  </authInputSet>
+  <!--
+  #grid with action
+  -->
+  <UIViewContainer>
+    <title>
+      <View>Visa</View>
+      <EditInfo>Redigera</EditInfo>
+      <Delete>Ta bort</Delete>
+    </title>
+<label>
+  <permission>{0} i {1}</permission>
+</label>
+  </UIViewContainer>
+  <ECMTemplate>
+    <title>
+      <EditInfo>Redigera</EditInfo>
+      <Delete>Ta bort</Delete>
+    </title>
+  </ECMTemplate>
+  <step1>
+    <title>
+      <AddPermission>Lägg till behörighet</AddPermission>
+    </title>
+  </step1>
+  <step2>
+    <title>
+      <SelectContainer>Välj behållare</SelectContainer>
+      <SelectStore>Välj lagra</SelectStore>
+    </title>
+  </step2>
+  <step3>
+    <title>
+      <SelectQueryHandler>Välj frågehanterare</SelectQueryHandler>
+    </title>
+  </step3>
+  <UIDrivePermissionSelector>
+    <label>
+      <selectGroup>Välj grupp</selectGroup>
+      <selectUser>Välj användare</selectUser>
+      <selectMembership>Välj medlemskap</selectMembership>
+    </label>
+  </UIDrivePermissionSelector>
+  
+  <UIPermissionSelector>
+    <label>
+      <selectGroup>Välj grupp</selectGroup>
+      <selectUser>Välj användare</selectUser>
+      <selectMembership>Välj medlemskap</selectMembership>
+    </label>
+  </UIPermissionSelector>
+  
+  <UIAnyPermission>
+    <label>
+      <anyPermission>Alla tillstånd</anyPermission>
+    </label>
+  </UIAnyPermission>
+  
+  <UIMDriveAnyPermission>
+    <label>
+      <anyPermission>Alla tillstånd</anyPermission>
+    </label>
+  </UIMDriveAnyPermission>
+  
+  <UIQueriesAnyPermission>
+    <label>
+      <anyPermission>Alla tillstånd</anyPermission>
+    </label>
+  </UIQueriesAnyPermission>
+  
+  <MetadataPermission>
+    <label>
+      <selectGroup>Välj grupp</selectGroup>
+    </label>
+  </MetadataPermission>  
+  <MetadataPermission>
+    <label>
+      <selectMembership>Välj medlemskap</selectMembership>
+    </label>
+  </MetadataPermission>
+  <anyPermission>
+    <title>
+      <AddAnyPermission>Ange alla behörigheter</AddAnyPermission>
+    </title>
+  </anyPermission>
+  <!--
+  #########Since ECM 2.3##################
+  -->
+  <QueriesPermissionBrowse>
+    <label>
+      <selectGroup>Välj grupp</selectGroup>
+      <selectUser>Välj användare</selectUser>
+      <selectMembership>Välj medlemskap</selectMembership>
+    </label>
+  </QueriesPermissionBrowse>
+  <!--
+  #########Since ECM 2.4##################
+  -->  
+  <UIViewFormTabPane>
+    <label>
+      <addSymLink>Lägg till Symlink</addSymLink>
+    </label>
+  </UIViewFormTabPane>
+  <!--
+  #########Since ECM 2.5##################
+  --> 
+  
+  <UIDriveForm>
+<msg>
+  <permission-path-invalid>Behörigheten {0} är ogiltig.</permission-path-invalid>
+  </msg>
+  </UIDriveForm>
+  
+  <UITaxonomyTreeMainForm>
+    <msg>
+      <homepath-emty>Sökvägen till Hem krävs.</homepath-emty>
+      <targetpath-emty>Målsökvägen krävs.</targetpath-emty>
+    </msg>
+  </UITaxonomyTreeMainForm>
+  <UITaxonomyWorkingArea>
+  <msg>
+  <exist>Denna trädnod finns redan.</exist>
+  </msg>
+  </UITaxonomyWorkingArea>
+
+  <PermissionTreeSelectUser>
+    <label>
+      <option>
+        <userName>#{word.userName}</userName>
+        <lastName>#{word.lastName}</lastName>
+        <firstName>#{word.firstName}</firstName>
+        <email>#{word.email}</email>
+      </option>
+      <group>Grupp</group>
+      <searchUser>Användare</searchUser>
+      <userName>#{word.userName}</userName>
+      <lastName>#{word.lastName}</lastName>
+      <firstName>#{word.firstName}</firstName>
+    <email>#{word.email}</email>
+      <action>#{word.action}</action>
+      <Add>#{word.Add}</Add>
+      <Close>#{word.Close}</Close>
+    </label>
+  </PermissionTreeSelectUser>
+  
+  <!--
+  #########Since ECM 2.6 ##################
+  -->   
+  <DriveInputSet>
+    <label>
+      <nt_folder>Dokumentmapp</nt_folder>
+      <nt_unstructured>Innehållsmappen</nt_unstructured>
+      <exo_cssFolder>CSS mapp</exo_cssFolder>
+      <exo_jsFolder>JavaScript mapp</exo_jsFolder>
+      <exo_linkFolder>Länk mapp</exo_linkFolder>
+      <exo_webFolder>Webbinnehållsmapp</exo_webFolder>
+   </label>
+  </DriveInputSet>
+  <UIPermissionTreeInfo>
+  <msg>
+      <confirm-delete-permission>Är du säker på att du vill ta bort denna rättighet?</confirm-delete-permission>
+      <no-permission-remove>Du kan inte ta bort ägare eller systemanvändaren.</no-permission-remove>  
+  </msg>
+  </UIPermissionTreeInfo>  
+  <UITaxonomyTreeMainForm>
+<msg>
+      <no-right-target-path>Välj en annan sökväg hem.</no-right-target-path>
+</msg>
+</UITaxonomyTreeMainForm>
+
+<UIECMAdminControlPanel>
+    <tab>
+      <label>        
+        <ManageUnLock>Hantera lås</ManageUnLock>
+      </label>
+    </tab>        
+</UIECMAdminControlPanel>
+<UIUnLockForm>
+    <label>
+      <name>Sökväg till nod</name>      
+      <permissions>Behörigheter</permissions>
+      <PermissionButton>UI Unlock Form</PermissionButton>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <permission-require>Du måste välja behörigheter.</permission-require>      
+    </msg>
+  </UIUnLockForm>
+  <UILockHolderList>
+  <header>
+  <name>Grupper eller användare</name>
+  <action>Åtgärd</action>
+  </header>
+  <tooltip>
+<DeleteLock>Ta bort grupp</DeleteLock>
+  </tooltip>
+  <msg>
+  <can-not-delete-lock-holder>Kan inte ta bort gruppen {0}.</can-not-delete-lock-holder>
+  </msg>
+  </UILockHolderList>
+  <UILockNodeList>
+  <header>
+  <name>Titel</name>
+  <hoderLock>Lås ägare</hoderLock>
+  <action>Åtgärd</action>
+  </header>
+  <tooltip>
+<UnLock>Låsa upp</UnLock>
+  </tooltip>
+  <msg>
+  <access-denied-exception>Du har inte behörighet att komma åt noden med sökvägen {0}, eller denna nod är borttagen</access-denied-exception>
+  </msg>
+  </UILockNodeList>
+  <EditUnLockForm>
+    <title>
+      <UIUnLockForm>Hantera lås</UIUnLockForm>
+    </title>
+  </EditUnLockForm>  
+  <UITabPane>
+    <action>
+      <Close>Stäng</Close>
+    </action>
+    <title>
+    <UILockHolderContainer>Hantera lås</UILockHolderContainer>
+    <UILockNodeList>Låst nod</UILockNodeList>
+    </title>
+  </UITabPane>
+  
+  <UIViewFormTabPane>
+    <action>
+      <AddTabForm>Lägg till fliken</AddTabForm>
+      <AddTab>Spara</AddTab>
+      <BackViewForm>Tillbaka</BackViewForm>
+    </action>
+  </UIViewFormTabPane>
+  
+ <UITemplateForm>
+<tab>
+<label>
+<defaultSkin>CSS</defaultSkin>
+</label>
+</tab>
+</UITemplateForm>
+ 
+  <UITabPane>
+    <title>
+      <UISkinTab>CSS</UISkinTab>
+    </title>
+  </UITabPane>
+  
+  <UISkinTab>
+    <header>
+      <name>Namn</name>
+      <roles>Roller</roles>
+      <baseVersion>Version</baseVersion>
+      <action>Åtgärder</action>
+    </header>
+    <msg>
+      <undeletable>Du kan inte ta bort {0} eftersom det är standarden.</undeletable>
+      <confirm-delete>Är du säker på att du vill ta bort detta utseende?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>Redigera</Edit>
+        <Delete>Ta bort</Delete>
+      </title>
+    </action>
+  </UISkinTab>
+  
+  <SkinForm>
+    <label>
+      <UITemplateContent>SkinForm</UITemplateContent>
+      <UIPopupWindow>Tillstånd för utseende</UIPopupWindow>
+      <selectVersion>Versioner</selectVersion>
+      <content>Innehåll:</content>
+      <name>Namn:</name>
+      <isDocumentTemplate>är dokumentmall</isDocumentTemplate>
+      <viewPermission>Rättigheter:</viewPermission>
+      <enableVersion>Aktivera versionshantering</enableVersion>
+    </label>
+    <title>Lägg till/redigera utseende</title>
+  </SkinForm>
+
+ <UITagManager>
+   <action>
+     <title>
+       <RemoveStyle>Ta bort</RemoveStyle>
+         <AddStyle>Lägga till stil</AddStyle>
+     </title>
+   </action>
+   <msg>
+     <confirm-delete>Är du säker på att du vill ta bort denna tagg stil?</confirm-delete>
+   </msg>
+ </UITagManager>
+
+<UITaxonomyTreeContainer>
+<action>
+<Cancel>Stäng</Cancel>
+</action>
+</UITaxonomyTreeContainer>
+<UITaxonomyTreeMainForm>
+<action>
+<NextViewPermission>Nästa</NextViewPermission>
+<Reset>Reset</Reset>
+</action>
+</UITaxonomyTreeMainForm>
+
+<UIPermissionTreeForm>
+<action>
+<Save>Save</Save>
+<Reset>Reset</Reset>
+<NextAddAction>Nästa</NextAddAction>
+<Previous>Föregående</Previous>
+</action>
+</UIPermissionTreeForm>
+
+<UIActionForm>
+<action>
+<PreviousViewPermission>Föregående</PreviousViewPermission>
+<NextViewTree>Nästa</NextViewTree>
+</action>
+  <msg>
+    <xss-vulnerability-character>Fältet {0} innehåller XSS sårbarhets tecken</xss-vulnerability-character>
+<xss-vulnerability-character-wo-label>Your input may contain XSS vulnerability characters</xss-vulnerability-character-wo-label>
+  </msg>
+</UIActionForm>
+
+<UITaxonomyTreeWorkingArea>
+<action>
+<Previous>Föregående</Previous>
+</action>
+</UITaxonomyTreeWorkingArea>
+
+  <UITabPane>
+    <title>
+      <UITagManager>Tag administration</UITagManager>
+      <UITagPermissionManager>Tag tillstånd Manager</UITagPermissionManager>
+    </title>
+  </UITabPane>
+  
+  <UITagPermissionInfo>
+    <header>
+      <usersOrGroups>Användare eller grupp</usersOrGroups>
+      <action>Åtgärd</action>
+    </header>
+    <action>
+      <title>
+        <Delete>Ta bort</Delete>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete-permission>Är du säker på att du vill ta bort denna rättighet?</confirm-delete-permission>
+    </msg>   
+  </UITagPermissionInfo>
+  <UITagPermissionForm>
+    <title>Lägg till behörighet</title>
+    <action>
+      <Save>Spara</Save>
+    </action>
+    <label>
+      <userOrGroup>Medlemskap:</userOrGroup>
+      <permission/>
+    </label>
+    <msg>
+      <userOrGroup-alreadyExists>Detta medlemskap finns redan. Välj en annan.</userOrGroup-alreadyExists>
+    </msg>    
+  </UITagPermissionForm>
+  
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>Välj grupp</selectGroup>
+      <selectMembership>Välj medlemskap</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+  
+  <UIFolksonomyManager>
+  <msg>
+      <confirm-delete>Är du säker på att du vill ta bort denna tagg stil?</confirm-delete>
+  </msg>
+    <action>
+      <title>
+        <AddStyle>Lägga till stil</AddStyle>
+      </title>
+    </action>
+  </UIFolksonomyManager>  
+<UIActionForm>
+  <title>
+  <ShowComponent>Öppna fönstret</ShowComponent>
+  <removeReference>Ta bort</removeReference>
+  </title>
+  </UIActionForm> 
+  <NodeTypeNameValidator>
+    <msg>
+      <Invalid-char>Det finns ogiltiga tecken. Ange ett annat värde.</Invalid-char>
+      <empty-input>Värdet i fältet är tomt.</empty-input>
+    </msg>
+  </NodeTypeNameValidator>
+  <UIActionForm>
+    <msg>
+      <constraint-violation-exception>Noden {0} kan inte läggas till {1} i arbetsytan {2}.  Det finns ett problem med behörigheter eller begränsningar.</constraint-violation-exception>
+    </msg>
+  </UIActionForm>
+  
+  <UIWorkspaceWizard>
+    <msg>
+      <name-not-allowed>Förbjudet namn</name-not-allowed>
+    </msg>
+  </UIWorkspaceWizard>
+  <UIRepositoryForm>
+    <msg>
+      <not-complete-repository>The repository is being created. You need to wait a few minutes before creating another one.</not-complete-repository>
+    </msg>
+  </UIRepositoryForm>
+  
+  <UIViewFormTabPane>
+  <label>
+  <addCategory>Lägg till kategori</addCategory>
+          <addLocalizationLink>Lägg till översättning</addLocalizationLink>
+  </label>
+  </UIViewFormTabPane>
+
+<UIDriveForm>
+<label>
+<allowNodeTypesOnTree>Ersättning nodetype på vänster träd:</allowNodeTypesOnTree>
+</label>
+</UIDriveForm>
+<DriveInputSet>
+<title>
+<RemovePermission>Remove Permission</RemovePermission>
+<ChooseNodeType>Markera nodtyper</ChooseNodeType>
+<RemoveNodeType>Ta bort</RemoveNodeType>
+</title>
+</DriveInputSet>
+<PopupNodeTypeSelector>
+<title>
+<UINodeTypeSelector>Markera nodtyper</UINodeTypeSelector>
+<PopupNodeTypeSelector>Markera nodtyper</PopupNodeTypeSelector>
+</title>
+</PopupNodeTypeSelector>
+  <UINodeTypeSelector>
+    <label>
+      <selectedAllNodeTypes>Välj alla nodtyper</selectedAllNodeTypes>
+    </label>
+  </UINodeTypeSelector>
+  <UIScriptForm>
+    <msg>
+      <PathNotFoundException>Skriptet finns redan i mappen {0}.</PathNotFoundException>      
+    </msg>
+  </UIScriptForm>
+ <UINodeTypeList>
+   <msg>
+   <no-list>Det finns inte någon nodtyp med villkor Sök.</no-list>
+   </msg>
+ </UINodeTypeList>
+  <UIActionForm>
+    <msg>
+      <canotChangeActionId>Du kan inte ändra åtgärds-ID.</canotChangeActionId>
+    </msg>
+  </UIActionForm>
+  <PopupComponent>
+    <title>
+      <UINodeTypeSelector>Nod typ väljare</UINodeTypeSelector>
+    </title>
+  </PopupComponent>
+  <UIPageIterator>
+    <label>
+      <maxPageSize>Maximal sidstorlek</maxPageSize>
+    </label>
+  </UIPageIterator>
+  <UILockNodeList>
+    <msg>
+      <can-not-unlock-node>Du har inte behörighet att låsa upp den här noden. Kontakta administratören för att få rätt rättigheter.</can-not-unlock-node>
+    </msg>
+ </UILockNodeList>
+</bundle>

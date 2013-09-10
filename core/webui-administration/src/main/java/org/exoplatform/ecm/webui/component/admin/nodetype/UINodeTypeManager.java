@@ -72,6 +72,7 @@ public class UINodeTypeManager extends UIAbstractManager {
       uiPopup.createUIComponent(UINodeTypeImportPopup.class, null, null) ;
     uiPopup.setUIComponent(uiImportPopup) ;
     uiPopup.setShow(true) ;
+    uiPopup.setShowMask(true);
     uiPopup.setResizable(true) ;
   }
 

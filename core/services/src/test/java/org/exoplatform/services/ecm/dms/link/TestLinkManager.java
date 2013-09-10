@@ -16,12 +16,18 @@
  */
 package org.exoplatform.services.ecm.dms.link;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
 
 import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 
 /**
  * Created by The eXo Platform SARL
@@ -39,6 +45,8 @@ public class TestLinkManager extends BaseWCMTestCase {
   private final static String WORKSPACE = "exo:workspace";
   private final static String UUID = "exo:uuid";
   private final static String PRIMARY_TYPE = "exo:primaryType";
+  
+  private static final Log LOG = ExoLogger.getLogger(TestLinkManager.class.getName());
 
   /**
    * Set up for testing
@@ -326,6 +334,63 @@ public class TestLinkManager extends BaseWCMTestCase {
     assertEquals(symlinkNodeUpdate.getProperty(UUID).getString(), nodeB1.getUUID());
     assertEquals(symlinkNodeUpdate.getProperty(PRIMARY_TYPE).getString(), nodeB1.getPrimaryNodeType().getName());
     assertEquals(symlinkNodeUpdate.getPrimaryNodeType().getName(), symlinkNodeA1.getPrimaryNodeType().getName());
+  }
+  
+  /**
+   * Updates the given symlink
+   * Input: Create a new link (symlinkNodeA1)
+   *    parent = nodeA1(TestTreeNode/A1), nodeB1_1(TestTreeNode/B1/B1_1)
+   *    set nodeB1_1.exo:title = tileB1;
+   *        nodeB1_1.exo:dateCreated = current Date;
+   *        nodeB1_1.exo:dateModified = current Date + 1 day;
+   *        nodeB1_1.publication:liveDate = current Date + 2 days;
+   *        nodeB1_1.exo:startEvent = = current Date + 3 days
+   *        nodeB1_1.exo:index = 100;
+   * Input:
+   *    link = symlinkNodeA1, target = nodeB1
+   *    
+   * Expect:
+   *    node update is not null
+   *    value property of this node
+   *        symlink.exo:title = nodeB1_1.exo:title
+   *        symlink.exo:dateCreated = nodeB1_1.exo:dateCreated
+   *        symlink.exo:dateModified = nodeB1_1.exo:dateModified
+   *        symlink.publication:liveDate = nodeB1_1.exo:title
+   *        symlink.exo:index = nodeB1_1.exo:index
+   * @throws Exception
+   */
+  public void testUpdateSymlink() throws Exception {
+    LOG.info("==============Test update symlink================");
+    
+    Node nodeA1 = rootNode.getNode("TestTreeNode/A1");
+    Node nodeB1_1 = rootNode.getNode("TestTreeNode/B1/B1_1");
+    Node symlinkNode = linkManager.createLink(nodeA1, nodeB1_1);
+    assertNotNull(symlinkNode);
+    symlinkNode.addMixin("exo:modify");
+    symlinkNode.save();
+    
+    nodeB1_1.setProperty(NodetypeConstant.EXO_TITLE, "titleB1");
+    nodeB1_1.setProperty(NodetypeConstant.EXO_DATE_CREATED, new GregorianCalendar());
+    Calendar d = new GregorianCalendar();
+    d.add(Calendar.DATE, 1);
+    nodeB1_1.setProperty(NodetypeConstant.EXO_DATE_MODIFIED, d);
+    nodeB1_1.setProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE, d);
+    d = new GregorianCalendar();
+    d.add(Calendar.DATE, 2);
+    nodeB1_1.setProperty(NodetypeConstant.PUBLICATION_LIVE_DATE, d);
+    nodeB1_1.setProperty(NodetypeConstant.EXO_INDEX, 100);
+    session.save();
+
+    linkManager.updateSymlink(symlinkNode);
+
+    assertEquals(symlinkNode.getProperty(NodetypeConstant.EXO_DATE_CREATED).getDate(), 
+                 nodeB1_1.getProperty(NodetypeConstant.EXO_DATE_CREATED).getDate());
+    assertEquals(symlinkNode.getProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE).getDate(), 
+                 nodeB1_1.getProperty(NodetypeConstant.EXO_LAST_MODIFIED_DATE).getDate());
+    assertEquals(symlinkNode.getProperty(NodetypeConstant.PUBLICATION_LIVE_DATE).getDate(), 
+                 nodeB1_1.getProperty(NodetypeConstant.PUBLICATION_LIVE_DATE).getDate());
+    assertEquals(symlinkNode.getProperty(NodetypeConstant.EXO_INDEX).getLong(), 
+                 nodeB1_1.getProperty(NodetypeConstant.EXO_INDEX).getLong());
   }
 
   public void tearDown() throws Exception {

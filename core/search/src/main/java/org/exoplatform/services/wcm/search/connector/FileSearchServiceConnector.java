@@ -26,6 +26,8 @@ import org.exoplatform.container.definition.PortalContainerConfig;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.services.cms.drives.DriveData;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.search.ResultNode;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -34,6 +36,8 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * The search should be capable to match files of the DMS. \
  */
 public class FileSearchServiceConnector extends BaseContentSearchServiceConnector {
+  
+  private static final Log LOG = ExoLogger.getLogger(FileSearchServiceConnector.class.getName());
 
   public FileSearchServiceConnector(InitParams initParams) throws Exception {
     super(initParams);

@@ -214,7 +214,7 @@ xmlns="http://www.exoplaform.org/xml/ns/kernel_1_2.xsd">
           <property name="tkn" value="http://www.gatein.org/jcr/token/1.0/" />
           <property name="wsrp" value="http://www.gatein.org/jcr/wsrp/1.0/" />
           <property name="pc" value="http://www.gatein.org/jcr/pc/1.0/" />
-          <property name="jos" value="http://nl.ijs.si/jos/" />
+          <property name="jos" value="http://www.exoplatform.com/jcr-services/organization-service/1.0/" />
         </properties-param>
       </init-params>
     </component-plugin>

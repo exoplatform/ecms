@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIViewFormTabPane>
+  <label>
+          <publicationRequestApproval>Publicación &gt; Solicitud de aprobación</publicationRequestApproval>
+          <publicationApproveContent>Publicación &gt; Contenido aprobado</publicationApproveContent>
+          <publicationPublish>Publicación &gt; Publicar</publicationPublish>
+  </label>
+  </UIViewFormTabPane>
+</bundle>

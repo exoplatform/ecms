@@ -90,10 +90,7 @@
 					        uicomponent.addUploadField("image", fieldImage) ;								
 								}
 							}
-						} else if(uicomponent.dataRemoved()) {
-			        String[] fieldImage = ["jcrPath=/node/exo:image/jcr:data"] ;
-			        uicomponent.addUploadField("image", fieldImage) ;						
-						}	else {
+						} else {
 			        String[] fieldImage = ["jcrPath=/node/exo:image/jcr:data"] ;
 			        uicomponent.addUploadField("image", fieldImage) ;
 						}
