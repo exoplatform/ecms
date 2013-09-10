@@ -68,7 +68,7 @@
       <child-not-found>No Page Found.</child-not-found>
     </msg>
     <title>
-      <select>Select</select>
+      <select>Selecionar</select>
     </title>
   </UIPageSelectorPanel>
 
@@ -314,7 +314,7 @@
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>User Selector</UIUserContainer>
+      <UIUserContainer>Seletor de Usuário</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
