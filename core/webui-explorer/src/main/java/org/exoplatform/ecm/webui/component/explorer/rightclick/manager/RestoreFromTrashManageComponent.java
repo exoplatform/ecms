@@ -53,6 +53,8 @@ import javax.jcr.lock.LockException;
 import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.version.VersionException;
 import javax.portlet.PortletPreferences;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -90,7 +92,7 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-
+  
   private static void restoreFromTrash(String srcPath, Event<RestoreFromTrashManageComponent> event) throws Exception {
     UIWorkingArea uiWorkingArea = event.getSource().getParent();
     UIJCRExplorer uiExplorer = uiWorkingArea.getAncestorOfType(UIJCRExplorer.class);
@@ -109,6 +111,11 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
     try {
       // Use the method getNodeByPath because it is link aware
       node = uiExplorer.getNodeByPath(srcPath, session, false);
+      
+      //return false if the target is already deleted
+      if ( Utils.targetNodeAndLinkInTrash(node) ) {
+        return;
+      }
       // Reset the path to manage the links that potentially create virtual path
       srcPath = node.getPath();
     } catch(PathNotFoundException path) {
@@ -167,6 +174,7 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
       Node trashHomeNode = (Node) trashSession.getItem(trashHomeNodePath);
       try {
         trashService.restoreFromTrash(srcPath, sessionProvider);
+        // delete symlink after target node
         LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
         List<Node> symlinks = linkManager.getAllLinks(node, org.exoplatform.services.cms.impl.Utils.EXO_SYMLINK);
         for (Node symlink : symlinks) {
@@ -258,7 +266,45 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
     }
 
     private void multiRestoreFromTrash(String[] paths, Event<RestoreFromTrashManageComponent> event) throws Exception {
-      for (String path : paths) {
+      UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
+      
+      Session session;
+      Matcher matcher;
+      String  wsName;
+      Node    node;
+      String  origialPath;
+      
+      List<String> newPaths = new ArrayList<String>(); 
+
+      // In case multi checked items, check if a Symlink node is with its Target in Trash or not.
+      for (String srcPath : paths) {
+        origialPath = srcPath;
+        matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(srcPath);
+        if (matcher.find()) {
+          wsName  = matcher.group(1);
+          srcPath = matcher.group(2);
+        } else {
+          throw new IllegalArgumentException("The ObjectId is invalid '" + srcPath + "'");
+        }
+
+        try {
+          session = uiExplorer.getSessionByWorkspace(wsName);
+          // Use the method getNodeByPath because it is link aware
+          node = uiExplorer.getNodeByPath(srcPath, session, false);
+
+          // Not allow to restore multi items if there is a symlink node, which have Target-In-Trash, in items list. 
+          // program returns at once.
+          if (Utils.targetNodeAndLinkInTrash(node)) {
+            continue;
+          }
+          // Reset the path to manage the links that potentially create virtual
+          newPaths.add(origialPath);
+        } catch (PathNotFoundException path) {
+          return;
+        }
+      }
+
+      for (String path : newPaths) {
         if (acceptForMultiNode(event, path))
         restoreFromTrash(path, event);
       }

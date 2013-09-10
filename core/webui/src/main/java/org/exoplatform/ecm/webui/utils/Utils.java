@@ -260,6 +260,17 @@ public class Utils {
     TrashService trashService = WCMCoreUtils.getService(TrashService.class);
     return trashService.isInTrash(node);
   }
+  
+  /** check a symlink node and its target are in Trash or not */
+  public static boolean targetNodeAndLinkInTrash( Node currentNode ) throws Exception {
+    if (Utils.isInTrash(currentNode) && Utils.isSymLink(currentNode)) {
+    Node targetNode = Utils.getNodeSymLink(currentNode);
+    if (Utils.isInTrash(targetNode)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
     public static boolean isReferenceable(Node node) throws RepositoryException {
       return node.isNodeType(MIX_REFERENCEABLE);
