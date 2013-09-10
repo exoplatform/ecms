@@ -186,34 +186,15 @@
               }
               strActs += "</ul></li>" ;
                 
-              def rightClickMenu = "" ;
               Boolean isLocked = false;
               String lockedLabel = "";
-              String isFavourite = "false";
-              String isInTrash = "false";
-              String isMediaType = "false";
-              String isTrashHome = "false";
               String hiddenStyle = (data.isNodeType("exo:hiddenable"))?"color: #A0A0A0;":"";
               if (data.isLocked()) {
                 isLocked = true;
                 lockedLabel  = "("+_ctx.appRes("UIDocumentWorkspace.tooltip.LockedBy")+" "+data.getLock().getLockOwner()+")";
               }
-       				//data.getProperty("exo:favouriter");    
-               if (uicomponent.isFavouriter(data)) isFavourite = "true";
-               if (data.isNodeType("exo:restoreLocation")) isInTrash = "true";
-               if (uicomponent.isMediaType(data)) isMediaType = "true";
-               if(!uicomponent.isSystemWorkspace()) rightClickMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(nodePath), uicomponent.getActionsList(data)) ;
 		        %>   
-		      <div class="actionIconBox" <%= uicomponent.getDragAndDropEvents(data) %> 
-		                                 locked="<%=isLocked%>"
-		      													 trashHome="$isTrashHome" 
-																		 removeFavourite="$isFavourite"
-																		 inTrash="$isInTrash"
-																		 mediaType="$isMediaType"
-		      													 <%=rightClickMenu%>
-		       													 objectId="<%=org.exoplatform.services.cms.impl.Utils.getObjectId(data.getPath())%>"
-		       													 isFile="<%=data.isNodeType("nt:file")%>"
-		       													 workspaceName="$preferenceWS" 
+		      <div class="actionIconBox" <%= uicomponent.getNodeAttributeInView(data) %> 
 	       													   ondblclick="$actionLink">
 		        <div style="height: auto; width: auto; border: none; -moz-user-select: none;" unselectable="on">
 							<div class="nodeLabel">
