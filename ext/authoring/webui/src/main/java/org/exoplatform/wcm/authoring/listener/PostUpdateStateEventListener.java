@@ -111,7 +111,7 @@ public class PostUpdateStateEventListener extends Listener<CmsService, Node> {
         PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
         UIWorkingWorkspace uiWorkingWS = portalApplication.getChildById(UIPortalApplication.UI_WORKING_WS_ID);
         portalRequestContext.addUIComponentToUpdateByAjax(uiWorkingWS);
-        portalRequestContext.setFullRender(true);
+        portalRequestContext.ignoreAJAXUpdateOnPortlets(true);
       } catch (Exception e) {
         if (LOG.isWarnEnabled()) {
           LOG.warn(e.getMessage());
@@ -133,7 +133,7 @@ public class PostUpdateStateEventListener extends Listener<CmsService, Node> {
       OrganizationService orgService = WCMCoreUtils.getService(OrganizationService.class);
       UserHandler userh = orgService.getUserHandler();
       MembershipHandler msh = orgService.getMembershipHandler();
-      
+
       ListAccess<User> userList = userh.findUsersByGroupId(group);
       User currentUser = null;
       try {

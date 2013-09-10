@@ -40,10 +40,10 @@
 	    <vitalRecordIndicator>Indicateur d'enregistrement vital</vitalRecordIndicator>
 	    <processCutoff>Processus de prélèvement</processCutoff>
 	    <eventTrigger>Déclenchement d'évènement</eventTrigger>
-	    <processHold>Suspension du Processus</processHold>
+	    <processHold>Procéder à la Rétention</processHold>
 	    <processTransfer>Processus de transfert</processTransfer>
 	    <transferBlockSize>Taille du bloc de transfert</transferBlockSize>
-	    <processAccession>Processus d'acquisition</processAccession>
+    <processAccession>Process Accession</processAccession>
 	    <accessionBlockSize>Taille du bloc d'acquisition</accessionBlockSize>
 	    <processDestruction>Processus de destruction</processDestruction>
     <location>Dans</location>
@@ -312,10 +312,10 @@
   <Holdable>
     <dialog>
       <label>
-        <hold-executed>Suspension exécutée</hold-executed>
-        <hold-until>Suspension jusqu'à</hold-until>
+        <hold-executed>Rétention Exécutée</hold-executed>
+        <hold-until>Rétention Jusqu'à</hold-until>
         <holds-discretionary>Suspension discrétionnaire</holds-discretionary>
-        <hold-until-event>Suspension jusqu'à évènement</hold-until-event>
+        <hold-until-event>Rétention Jusqu'à Evènement</hold-until-event>
         <freeze>Geler</freeze>
       </label>
     </dialog>
@@ -519,8 +519,6 @@
 	<CLASSIFIED>Classé</CLASSIFIED>
 	<UNCLASSIFIED>Non classé</UNCLASSIFIED>
 	<NOCONTRACT>Aucun contrat</NOCONTRACT>
-	<true>Vrai</true>
-	<false>Faux</false>
 	<one-minute>Une fois par Minute</one-minute>
 	<hourly>Une fois par heure</hourly>
 <daily>Quotidien</daily>
@@ -534,16 +532,7 @@
   <property_added>Ajout de Propriété</property_added>
   <property_removed>Suppression de Propriété</property_removed>
   <property_changed>Modification de Propriété</property_changed>
-    <SendMail>
-   <dialog>
-     <label>
-							<isDeep>Récursif</isDeep>
-        <nodetypes>Types de Noeud</nodetypes>
-        <affectedNodeTypeNames>Types de Noeud Affectés</affectedNodeTypeNames>
-     </label>
-   </dialog>
-  </SendMail>
-
+  
   <ScriptAction>
    <dialog>
      <label>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ 
+  <View>
+    <label>
+      <languages>
+        <en>Engelska</en>
+        <fr>Franska</fr>
+        <ru>Ryska</ru>
+        <vi>Vietnamesiska</vi>
+        <nl>Holländska</nl>
+        <de>Tyska</de>
+        <uk>Ukrainska</uk>
+        <ar>Arabiska</ar>
+      </languages>
+    </label>
+  </View>
+ 
+  <!--
+  ################resoucebundle FOR EXO:COMMENT VIEW TEMPLATE#############
+  -->
+  <Comment>
+    <view>
+      <label>
+        <postedBy>Senaste kommentar postat av</postedBy>
+        <at>på</at>
+        <comments>Kommentar (er)</comments>
+        <show-comments>Visa kommentarer</show-comments>
+        <hide-comments>Dölja kommentarer</hide-comments>
+        <comment-by>Kommenterad av</comment-by>
+        <email>E-post</email>
+        <site>Webbplats</site>
+      </label>
+    </view>
+  </Comment>
+ 
+  <!--
+  ################resoucebundle FOR NT:FILE VIEW TEMPLATE##############
+  -->
+  <File>
+    <view>
+      <label>
+        <not-viewable>Detta innehåll kan inte visas</not-viewable>
+        <using-webDAV>eller använda WebDAV för att komma åt innehållet</using-webDAV>
+        <file-size-too-big>Innehållet i denna fil är för stor. Du bör hämta och öppna i klienten.</file-size-too-big>
+        <webDAV>WebDAV Vy</webDAV>
+        <download>Ladda ner</download>
+        <htmlview>Visa som HTML</htmlview>
+        <plaintextview>Visa som oformaterad text</plaintextview>
+      </label>
+    </view>
+  </File>
+ 
+  <!--
+  ################resoucebundle FOR MAIL:DOCUMENT VIEW TEMPLATE##############
+  -->
+  <Mail>
+    <view>
+      <label>
+        <from>Från:</from>
+        <to>Till:</to>
+        <cc>Cc:</cc>
+        <date>Datum:</date>
+        <subject>Subjekt:</subject>
+        <attachment>Bilagor:</attachment>
+      </label>
+    </view>
+  </Mail>
+  <!--
+  ################resoucebundle FOR EXO:VOTE VIEW TEMPLATE##############
+  -->
+  <Vote>
+    <view>
+      <label>
+        <avg-rating>AVG. betyg</avg-rating>
+        <subscription>Röster</subscription>
+      </label>
+    </view>
+  </Vote>
+  <!--
+  ################resoucebundle FOR LISTVIEW VIEW TEMPLATE##############
+  -->
+  <ListView>
+    <view>
+      <label>
+        <name>Namn</name>
+        <versionable>Tillämpningsbara</versionable>
+        <exo_owner>Ägare</exo_owner>
+        <exo_dateCreated>Datum skapad</exo_dateCreated>
+        <exo_dateModified>Ändringsdatum</exo_dateModified>
+        <auditing>Revision</auditing>
+      </label>
+    </view>
+  </ListView>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction view template ####
+  -->
+  <AddMetadata>
+    <view>
+      <label>
+        <action-name>Åtgärdens namn</action-name>
+        <lifecycle>Livscykel</lifecycle>
+        <metadata>Metadata</metadata>
+        <description>Beskrivning</description>
+      </label>
+    </view>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning view template ####
+  -->
+  <AutoVersioning>
+    <view>
+      <label>
+        <action-name>Åtgärdens namn</action-name>
+        <lifecycle>Livscykel</lifecycle>
+        <description>Beskrivning</description>
+      </label>
+    </view>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong view template ####
+  -->
+  <EnableVersioning>
+    <view>
+      <label>
+        <action-name>Namn</action-name>
+        <lifecycle>Livscykel</lifecycle>
+        <description>Beskrivning</description>
+      </label>
+    </view>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet view template ####
+  -->
+  <ElementSet>
+    <view>
+      <label>
+        <not-avaliable>N/A</not-avaliable>
+        <title>Titel</title>
+        <creator>Skapare</creator>
+        <subject>Subjekt</subject>
+        <source>Källa</source>
+        <contributor>Bidragsgivare</contributor>
+        <resource-type>Resurstyp</resource-type>
+        <date>Datum</date>
+        <publisher>Utgivare</publisher>
+        <description>Beskrivning</description>
+        <rights>Rättigheter</rights>
+        <relation>Relation</relation>
+        <format>Format</format>
+        <coverage>Täckning</coverage>
+        <identifier>Identifierare</identifier>
+        <languages>Språk</languages>
+      </label>
+      <action>
+        <add-edit>Lägg till/redigera</add-edit>
+        <cancel>Avbryt</cancel>
+      </action>
+      <tooltip>
+        <cancel>Avbryt</cancel>
+        <add-edit>Lägg till/redigera egenskaper</add-edit>
+      </tooltip>
+    </view>
+  </ElementSet>
+
+  <ScriptAction>
+    <view>
+      <label> 
+        <isDeep>Är djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
+        <nodeTypeName>Typ nodnamn</nodeTypeName>
+      </label> 
+    </view>
+  </ScriptAction>
+  
+  <AddMetadata>
+    <view>
+      <label>
+        <isDeep>Är djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
+        <nodeTypeName>Typ nodnamn</nodeTypeName>
+      </label> 
+    </view>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <view>
+      <label>
+        <isDeep>Är djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes> 
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
+        <nodeTypeName>Typ nodnamn</nodeTypeName>
+      </label> 
+    </view>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <view>
+      <label>
+        <isDeep>Är djupt</isDeep>
+        <nodetypes>Nodtyper</nodetypes>
+        <affectedNodeTypeNames>Drabbade nodtyper</affectedNodeTypeNames>
+        <nodeTypeName>Typ nodnamn</nodeTypeName>
+      </label> 
+    </view>
+  </AutoVersioning>
+  
+   <AccessibleMedia>
+    <view>
+      <label>
+      <Play-audio-description-of-this-video>Ljudbeskrivning</Play-audio-description-of-this-video>
+      <Read-more>Läs mer</Read-more>
+      <Read-less>Läs mindre</Read-less>
+      <Switch-back-to-original-video>Original video</Switch-back-to-original-video>
+      </label>
+      <tooltip>
+      <A-second-media-file-is-available-as-audio-description>En andra media-fil är tillgänglig som en ljudbeskrivning</A-second-media-file-is-available-as-audio-description>
+      </tooltip>
+    </view>
+  </AccessibleMedia>
+ 
+</bundle>

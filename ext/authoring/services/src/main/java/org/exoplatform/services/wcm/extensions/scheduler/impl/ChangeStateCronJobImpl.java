@@ -99,7 +99,7 @@ public class ChangeStateCronJobImpl implements Job {
                = new StringBuilder().append("select * from nt:base where ").
                                      append("(publication:currentState='").append(fromState).append("') ").
                                      append(" and (").append(property).append(" IS NOT NULL )").
-                                     append(" and (").append(property).append(" < TIMESTAMP '").append(currentTime).append("') ").  
+                                     append(" and (").append(property).append(" < TIMESTAMP '").append(currentTime).append("') ").
                                      append(" and (jcr:path like '").append(contentPath).append("%' )");
           
           StringBuilder stagedNodesStatement

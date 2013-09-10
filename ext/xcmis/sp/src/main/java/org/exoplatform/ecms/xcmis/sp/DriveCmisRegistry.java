@@ -102,7 +102,7 @@ public class DriveCmisRegistry extends JcrCmisRegistry
                provider0.init();
                provider = provider0;
             }
-            catch (Exception e)
+            catch (RepositoryException e)
             {
                throw new CmisRuntimeException("Initializing of storage provider " + storageId + " failed. "
                   + e.getMessage(), e);
@@ -175,7 +175,7 @@ public class DriveCmisRegistry extends JcrCmisRegistry
                   provider0.init();
                   provider = provider0;
                }
-               catch (Exception e)
+               catch (RepositoryException e)
                {
                  if (LOG.isErrorEnabled()) {
                    LOG.error("Initializing of storage provider " + driveName + " failed. ", e);
@@ -189,28 +189,16 @@ public class DriveCmisRegistry extends JcrCmisRegistry
 
             if (provider != null)
             {
-               Connection connection = null;
-               try
-               {
-                  String storageID = provider.getStorageID();
-                  RepositoryShortInfo info = new RepositoryShortInfo(storageID, storageID);
-                  connection = provider.getConnection();
-                  info.setRootFolderId(connection.getStorage().getRepositoryInfo().getRootFolderId());
-                  repositories.add(info);
-               }
-               catch (Exception e)
-               {
-                 if (LOG.isErrorEnabled()) {
-                   LOG.error(e.getMessage(), e);
-                 }
-               }
-               finally
-               {
-                  if (connection != null)
-                  {
-                     connection.close();
-                  }
-               }
+              Connection connection = null;
+              String storageID = provider.getStorageID();
+              RepositoryShortInfo info = new RepositoryShortInfo(storageID, storageID);
+              connection = provider.getConnection();
+              info.setRootFolderId(connection.getStorage().getRepositoryInfo().getRootFolderId());
+              repositories.add(info);
+              if (connection != null)
+              {
+                 connection.close();
+              }
             }
          }
       }
@@ -278,7 +266,7 @@ public class DriveCmisRegistry extends JcrCmisRegistry
             sp.init();
             addStorage(sp);
          }
-         catch (Exception e)
+         catch (RepositoryException e)
          {
            if (LOG.isErrorEnabled()) {
              LOG.error("Initializing of storage provider " + driveName + " failed. " + e.getMessage(), e);

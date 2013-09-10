@@ -49,9 +49,10 @@ import org.exoplatform.ecm.webui.component.explorer.popup.admin.UIActionForm;
 import org.exoplatform.ecm.webui.component.explorer.popup.admin.UIActionTypeForm;
 import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
-import org.exoplatform.ecm.webui.utils.LockUtil;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.lock.LockService;
+import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
 import org.exoplatform.services.organization.MembershipType;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -75,10 +76,10 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * 6 mai 2009
  */
 @ComponentConfig(
-     events = {
-       @EventConfig(listeners = EditDocumentActionComponent.EditDocumentActionListener.class)
-     }
- )
+                 events = {
+                     @EventConfig(listeners = EditDocumentActionComponent.EditDocumentActionListener.class)
+                 }
+    )
 
 public class EditDocumentActionComponent extends UIAbstractManagerComponent {
 
@@ -102,9 +103,9 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
                                   UIJCRExplorer uiExplorer,
                                   Node selectedNode,
                                   UIApplication uiApp) throws RepositoryException,
-                                                      Exception,
-                                                      ValueFormatException,
-                                                      PathNotFoundException {
+                                  Exception,
+                                  ValueFormatException,
+                                  PathNotFoundException {
     if (event != null)
       context = event.getRequestContext();
     if (selectedNode.isNodeType(Utils.EXO_ACTION)) {
@@ -128,85 +129,91 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
         nodeType = selectedNode.getPrimaryNodeType().getName();
       }
       UIDocumentFormController uiController =
-        event != null ?
-        event.getSource().createUIComponent(UIDocumentFormController.class, null, "EditFormController") :
-        comp.createUIComponent(UIDocumentFormController.class, null, "EditFormController");
-      UIDocumentForm uiDocumentForm = uiController.getChild(UIDocumentForm.class);
-      uiDocumentForm.setRepositoryName(uiExplorer.getRepositoryName());
-      uiDocumentForm.setContentType(nodeType);
-      uiDocumentForm.clearRemovedNode();
-      uiDocumentForm.clearDataRemovedList();
-      if(uiDocumentForm.getTemplate() == null) {
-        uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.template-null", null));
-        return;
-      }
-      refresh(selectedNode);
-      // Check document is lock for editing
-      uiDocumentForm.setIsKeepinglock(false);
-      if (!selectedNode.isLocked()) {
-        OrganizationService service = WCMCoreUtils.getService(OrganizationService.class);
-        List<MembershipType> memberships = (List<MembershipType>) service.getMembershipTypeHandler().findMembershipTypes();
-        synchronized (EditDocumentActionComponent.class) {
-          refresh(selectedNode);
-          if (!selectedNode.isLocked()) {
-            if(selectedNode.canAddMixin(Utils.MIX_LOCKABLE)){
-              selectedNode.addMixin(Utils.MIX_LOCKABLE);
-              selectedNode.save();
-            }
-            Lock lock = selectedNode.lock(false, false);
-            LockUtil.keepLock(lock);
-            LockService lockService = uiExplorer.getApplicationComponent(LockService.class);
-            List<String> settingLockList = lockService.getAllGroupsOrUsersForLock();
-            for (String settingLock : settingLockList) {
-              LockUtil.keepLock(lock, settingLock);
-              if (!settingLock.startsWith("*"))
-                continue;
-              String lockTokenString = settingLock;
-              for (MembershipType membership : memberships) {
-                lockTokenString = settingLock.replace("*", membership.getName());
-                LockUtil.keepLock(lock, lockTokenString);
-              }
-            }
-            selectedNode.save();
-            uiDocumentForm.setIsKeepinglock(true);
-          }
-        }
-      }
-      // Update data avoid concurrent modification by other session
-      refresh(selectedNode);
-      // Check again after node is locking by current user or another
-      if (LockUtil.getLockTokenOfUser(selectedNode) == null) {
-        Object[] arg = { selectedNode.getPath() };
-        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked-editing", arg,
-                ApplicationMessage.WARNING));
-        return;
-      }
-      uiDocumentForm.setNodePath(selectedNode.getPath());
-      uiDocumentForm.addNew(false);
-      uiDocumentForm.setWorkspace(selectedNode.getSession().getWorkspace().getName());
-      uiDocumentForm.setStoredPath(selectedNode.getPath());
-      uiController.setRenderedChild(UIDocumentForm.class);
+          event != null ?
+           event.getSource().createUIComponent(UIDocumentFormController.class, null, "EditFormController") :
+             comp.createUIComponent(UIDocumentFormController.class, null, "EditFormController");
+           UIDocumentForm uiDocumentForm = uiController.getChild(UIDocumentForm.class);
+           uiDocumentForm.setRepositoryName(uiExplorer.getRepositoryName());
+           uiDocumentForm.setContentType(nodeType);
+           uiDocumentForm.clearRemovedNode();
+           uiDocumentForm.clearDataRemovedList();
+           if(uiDocumentForm.getTemplate() == null) {
+             uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.template-null", null));
+             return;
+           }
+           refresh(selectedNode);
+           // Check document is lock for editing
+           uiDocumentForm.setIsKeepinglock(false);
+           if (!selectedNode.isLocked()) {
+             OrganizationService service = WCMCoreUtils.getService(OrganizationService.class);
+             List<MembershipType> memberships = (List<MembershipType>) service.getMembershipTypeHandler().findMembershipTypes();
+             synchronized (EditDocumentActionComponent.class) {
+               refresh(selectedNode);
+               if (!selectedNode.isLocked()) {
+                 if(selectedNode.canAddMixin(Utils.MIX_LOCKABLE)){
+                   selectedNode.addMixin(Utils.MIX_LOCKABLE);
+                   selectedNode.save();
+                 }
+                 Lock lock = selectedNode.lock(false, false);
+                 LockUtil.keepLock(lock);
+                 LockService lockService = uiExplorer.getApplicationComponent(LockService.class);
+                 List<String> settingLockList = lockService.getAllGroupsOrUsersForLock();
+                 for (String settingLock : settingLockList) {
+                   LockUtil.keepLock(lock, settingLock);
+                   if (!settingLock.startsWith("*"))
+                     continue;
+                   String lockTokenString = settingLock;
+                   for (MembershipType membership : memberships) {
+                     lockTokenString = settingLock.replace("*", membership.getName());
+                     LockUtil.keepLock(lock, lockTokenString);
+                   }
+                 }
+                 selectedNode.save();
+                 uiDocumentForm.setIsKeepinglock(true);
+               }
+             }
+           }
+           // Add mixin type exo:documentSize if the current node is flash file
+           String mimeType = DMSMimeTypeResolver.getInstance().getMimeType(selectedNode.getName());
+           if(mimeType.indexOf(Utils.FLASH_MIMETYPE) >= 0 && selectedNode.canAddMixin(Utils.EXO_RISIZEABLE)) {
+             selectedNode.addMixin(Utils.EXO_RISIZEABLE);
+             selectedNode.save();          	
+           }
+           // Update data avoid concurrent modification by other session
+           refresh(selectedNode);
+           // Check again after node is locking by current user or another
+           if (LockUtil.getLockTokenOfUser(selectedNode) == null) {
+             Object[] arg = { selectedNode.getPath() };
+             uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked-editing", arg,
+                                                     ApplicationMessage.WARNING));
+             return;
+           }
+           uiDocumentForm.setNodePath(selectedNode.getPath());
+           uiDocumentForm.addNew(false);
+           uiDocumentForm.setWorkspace(selectedNode.getSession().getWorkspace().getName());
+           uiDocumentForm.setStoredPath(selectedNode.getPath());
+           uiController.setRenderedChild(UIDocumentForm.class);
 
-      UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
-      UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
-      if(!uiDocumentWorkspace.isRendered()) {
-        uiWorkingArea.getChild(UIDrivesArea.class).setRendered(false);
-        uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(true);
-      }
-      uiDocumentWorkspace.getChild(UIDocumentContainer.class).setRendered(false);
-      uiDocumentWorkspace.getChild(UISearchResult.class).setRendered(false);
-      UIDocumentFormController controller = uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
-      if (controller != null) {
-        controller.getChild(UIDocumentForm.class).releaseLock();
-      }
-      uiDocumentWorkspace.addChild(uiController);
-      uiController.initOptionBlockPanel();
-      uiController.setRendered(true);
-      context.addUIComponentToUpdateByAjax(uiWorkingArea);
-      if (event != null) {
-        uiExplorer.updateAjax(event);
-      }
-      context.addUIComponentToUpdateByAjax(uiExplorer.getChild(UIControl.class));
+           UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
+           UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
+           if(!uiDocumentWorkspace.isRendered()) {
+             uiWorkingArea.getChild(UIDrivesArea.class).setRendered(false);
+             uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(true);
+           }
+           uiDocumentWorkspace.getChild(UIDocumentContainer.class).setRendered(false);
+           uiDocumentWorkspace.getChild(UISearchResult.class).setRendered(false);
+           UIDocumentFormController controller = uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
+           if (controller != null) {
+             controller.getChild(UIDocumentForm.class).releaseLock();
+           }
+           uiDocumentWorkspace.addChild(uiController);
+           uiController.initOptionBlockPanel();
+           uiController.setRendered(true);
+           context.addUIComponentToUpdateByAjax(uiWorkingArea);
+           if (event != null) {
+             uiExplorer.updateAjax(event);
+           }
+           context.addUIComponentToUpdateByAjax(uiExplorer.getChild(UIControl.class));
     }
   }
 
@@ -232,12 +239,12 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
           selectedNode = uiExplorer.getNodeByPath(nodePath, session);
         } catch (PathNotFoundException path) {
           uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", null,
-              ApplicationMessage.WARNING));
+                                                  ApplicationMessage.WARNING));
 
           return;
         } catch (AccessDeniedException ace) {
           uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.null-exception", null,
-              ApplicationMessage.WARNING));
+                                                  ApplicationMessage.WARNING));
 
           return;
         } catch (Exception e) {

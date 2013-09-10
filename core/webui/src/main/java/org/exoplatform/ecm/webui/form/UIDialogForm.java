@@ -25,7 +25,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -37,10 +36,12 @@ import java.util.Set;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.PropertyType;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.Value;
+import javax.jcr.ValueFormatException;
 import javax.jcr.lock.LockException;
 
 import org.apache.commons.lang.StringUtils;
@@ -65,7 +66,7 @@ import org.exoplatform.ecm.webui.form.field.UIMixinField;
 import org.exoplatform.ecm.webui.form.validator.UploadFileMimeTypesValidator;
 import org.exoplatform.ecm.webui.utils.DialogFormUtil;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
-import org.exoplatform.ecm.webui.utils.LockUtil;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.BasePath;
@@ -103,8 +104,8 @@ import org.exoplatform.webui.form.UIFormRadioBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
-import org.exoplatform.webui.form.UIFormUploadInput;
 import org.exoplatform.webui.form.input.UICheckBoxInput;
+import org.exoplatform.webui.form.input.UIUploadInput;
 import org.exoplatform.webui.form.wysiwyg.FCKEditorConfig;
 import org.exoplatform.webui.form.wysiwyg.UIFormWYSIWYGInput;
 
@@ -175,7 +176,7 @@ public class UIDialogForm extends UIForm {
 
   private String SEPARATOR_VALUE = "::";
 
-  public UIDialogForm() { 
+  public UIDialogForm() {
     removedBinary = new ArrayList<String>();
   }
 
@@ -315,9 +316,9 @@ public class UIDialogForm extends UIForm {
       if(uiInput == null) {
         isFirstTimeRender = true;
         uiInput = formActionField.createUIFormInput();
-        addUIFormInput((UIFormInput)uiInput);
+        addUIFormInput((UIFormInput<?>)uiInput);
       }
-      ((UIFormStringInput)uiInput).setEditable(formActionField.isEditable());
+      ((UIFormStringInput)uiInput).setReadOnly(!formActionField.isEditable());
     }
     String propertyName = getPropertyName(jcrPath);
     propertiesName.put(name, propertyName);
@@ -366,11 +367,11 @@ public class UIDialogForm extends UIForm {
     Node childNode = getChildNode();
     if(isNotEditNode && !isShowingComponent && !isRemovePreference && !isRemoveActionField) {
       if(childNode != null) {
-        ((UIFormInput)uiInput).setValue(propertyName);
+        ((UIFormInput<String>)uiInput).setValue(propertyName);
       } else if(childNode == null && jcrPath.equals("/node") && node != null) {
-        ((UIFormInput)uiInput).setValue(node.getName());
+        ((UIFormInput<String>)uiInput).setValue(node.getName());
       } else {
-        ((UIFormInput)uiInput).setValue(null);
+        ((UIFormInput<?>)uiInput).setValue(null);
       }
     }
     renderField(name);
@@ -379,7 +380,6 @@ public class UIDialogForm extends UIForm {
     addActionField(name,null,arguments);
   }
 
-  @SuppressWarnings("unchecked")
   public void addCalendarField(String name, String label, String[] arguments) throws Exception {
     UIFormCalendarField calendarField = new UIFormCalendarField(name,label,arguments);
     String jcrPath = calendarField.getJcrPath();
@@ -433,6 +433,23 @@ public class UIDialogForm extends UIForm {
         uiDateTime.setCalendar(node.getProperty(propertyName).getDate());
       } else {
         uiDateTime.setCalendar(new GregorianCalendar());
+      }
+    }else{
+      if((node != null) && node.hasNode("jcr:content") && (childNode == null)) {
+        Node jcrContentNode = node.getNode("jcr:content");
+        if(jcrContentNode.hasProperty(propertyName)) {
+          if(jcrContentNode.getProperty(propertyName).getDefinition().isMultiple()) {
+            Value[] values = jcrContentNode.getProperty(propertyName).getValues();
+            for(Value value : values) {
+              if (uiDateTime.getDefaultValue() == null) {
+                uiDateTime.setCalendar(value.getDate());
+                uiDateTime.setDefaultValue(uiDateTime.getValue());
+              }
+            }
+          }else{
+            uiDateTime.setCalendar(jcrContentNode.getProperty(propertyName).getValue().getDate());
+          }
+        }
       }
     }
     if (findComponentById(name) == null) addUIFormInput(uiDateTime);
@@ -488,7 +505,7 @@ public class UIDialogForm extends UIForm {
         addUIFormInput(uiMixin);
       } else
         uiMixin.setValue(node.getName());
-      uiMixin.setEditable(false);
+      uiMixin.setReadOnly(true);
       renderField(name);
     }
   }
@@ -497,7 +514,6 @@ public class UIDialogForm extends UIForm {
     addMixinField(name,null,arguments);
   }
 
-  @SuppressWarnings("unchecked")
   public void addCheckBoxField(String name, String lable, String[] arguments) throws Exception{
     UIFormCheckBoxField formCheckBoxField =  new UIFormCheckBoxField(name, lable, arguments);
     String jcrPath = formCheckBoxField.getJcrPath();
@@ -727,7 +743,7 @@ public class UIDialogForm extends UIForm {
         }
       }
     }
-    uiSelectBox.setEditable(formSelectBoxField.isEditable());
+    uiSelectBox.setReadOnly(!formSelectBoxField.isEditable());
 //    addUIFormInput(uiSelectBox);
     if(isNotEditNode) {
       Node child = getChildNode();
@@ -764,10 +780,10 @@ public class UIDialogForm extends UIForm {
       if (inputProperty.getValue() != null) {
       String oldValue = inputProperty.getValue().toString();
       if ((oldValue != null) && (!oldValue.equals(newValue))) {
-        Iterator componentSelector = componentSelectors.keySet().iterator();
+        Iterator<String> componentSelector = componentSelectors.keySet().iterator();
         Map<String, String> obj = null;
         while (componentSelector.hasNext()) {
-          String componentName = (String)componentSelector.next();
+          String componentName = componentSelector.next();
           obj = (Map<String, String>) componentSelectors.get(componentName);
           Set<String> set = obj.keySet();
           for (String key : set) {
@@ -1016,7 +1032,7 @@ public class UIDialogForm extends UIForm {
       else
         uiTextArea.setValue("");
     }
-    uiTextArea.setEditable(formTextAreaField.isEditable());
+    uiTextArea.setReadOnly(!formTextAreaField.isEditable());
     renderField(name);
   }
   public void addTextAreaField(String name, String[] arguments) throws Exception {
@@ -1215,9 +1231,9 @@ public class UIDialogForm extends UIForm {
       uiInput = formTextField.createUIFormInput();
       addUIFormInput(uiInput);
     }
-    uiInput.setEditable(formTextField.isEditable());
+    uiInput.setReadOnly(!formTextField.isEditable());
     if(uiInput.getValue() == null) uiInput.setValue(formTextField.getDefaultValue());
-    else uiInput.setEditable(true);
+    else uiInput.setReadOnly(false);
 
     if(node != null && !isShowingComponent && !isRemovePreference) {
       if(jcrPath.equals("/node") && (!formTextField.isEditable() || formTextField.isEditableIfNull())) {
@@ -1287,7 +1303,7 @@ public class UIDialogForm extends UIForm {
           while (nodeIter.hasNext()) {
             Node childNode = nodeIter.nextNode();
             if (!childNode.isNodeType(NodetypeConstant.NT_FILE)) continue;
-            UIFormInputBase uiInput = multiValueField.createUIFormInput(count++);
+            UIFormInputBase<?> uiInput = multiValueField.createUIFormInput(count++);
             ((UIFormUploadInputNoUploadButton)uiInput).setFileName(childNode.getName());
             Value value = childNode.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getValue();
             ((UIFormUploadInputNoUploadButton)uiInput).setByteValue(
@@ -1305,7 +1321,7 @@ public class UIDialogForm extends UIForm {
         return;
       }
     } else {
-      UIFormUploadInput uiInputUpload = findComponentById(name);
+      UIUploadInput uiInputUpload = findComponentById(name);
       if(uiInputUpload == null) {
         uiInputUpload = formUploadField.createUIFormInput();
         if (mimeTypes != null) {
@@ -1367,7 +1383,7 @@ public class UIDialogForm extends UIForm {
     String propertyName = getPropertyName(jcrPath);
     List<UIFormInputBase<String>> ret = new ArrayList<UIFormInputBase<String>>();
 
-    UIFormInputBase formInput = formField.isMultiValues() ? null : (UIFormInputBase)findComponentById(name);
+    UIFormInputBase<String> formInput = formField.isMultiValues() ? null : (UIFormInputBase<String>)findComponentById(name);
 
     boolean isFirstTimeRender = false;
     if(formInput == null) {
@@ -1456,7 +1472,7 @@ public class UIDialogForm extends UIForm {
     }
     if (values != null && isFirstTimeRender) {
       for (Value v : values) {
-        UIFormInputBase uiFormInput = formField.createUIFormInput();
+        UIFormInputBase<String> uiFormInput = formField.createUIFormInput();
         if (uiFormInput instanceof UIFormWYSIWYGInput)
           ((UIFormWYSIWYGInput)uiFormInput).setFCKConfig((FCKEditorConfig)config.clone());
         if(v == null || v.getString() == null)
@@ -1531,7 +1547,7 @@ public class UIDialogForm extends UIForm {
   public String getInputOption(String name) { return options.get(name); }
   public JCRResourceResolver getJCRResourceResolver() { return resourceResolver; }
 
-  public Node getNode() throws Exception {
+  public Node getNode() {
     if(nodePath == null) return null;
     try {
       return (Node) getSession().getItem(nodePath);
@@ -1768,20 +1784,20 @@ public class UIDialogForm extends UIForm {
     return getLastModifiedDate(getNode());
   }
 
-  public String getLastModifiedDate(Node node) throws Exception {
-    String d = "";
-    try {
-      if (node.hasProperty("exo:dateModified")) {
-        Locale locale = Util.getPortalRequestContext().getLocale();
-        DateFormat dateFormater = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.MEDIUM, SimpleDateFormat.MEDIUM, locale);
-        Calendar calendar = node.getProperty("exo:dateModified").getValue().getDate();
-        d = dateFormater.format(calendar.getTime());
+  public String getLastModifiedDate(Node node) {
+    String d = StringUtils.EMPTY;
+      try {
+        if (node.hasProperty("exo:dateModified")) {
+          Locale locale = Util.getPortalRequestContext().getLocale();
+          DateFormat dateFormater = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.MEDIUM, SimpleDateFormat.MEDIUM, locale);
+          Calendar calendar = node.getProperty("exo:dateModified").getValue().getDate();
+          d = dateFormater.format(calendar.getTime());
+        }
+      } catch (ValueFormatException e) { d = StringUtils.EMPTY;
+      } catch (IllegalStateException e) { d = StringUtils.EMPTY;
+      } catch (PathNotFoundException e) { d = StringUtils.EMPTY;
+      } catch (RepositoryException e) { d = StringUtils.EMPTY;
       }
-    } catch (Exception e) {
-      if (LOG.isWarnEnabled()) {
-        LOG.warn(e.getMessage());
-      }
-    }
     return d;
   }
 
@@ -1865,15 +1881,15 @@ public class UIDialogForm extends UIForm {
     return repositoryService.getCurrentRepository();
   }
 
-  private UIFormMultiValueInputSet renderMultiValuesInput(Class type, String name,String label) throws Exception{
+  private UIFormMultiValueInputSet renderMultiValuesInput(Class<? extends UIFormInputBase<?>> type, String name,String label) throws Exception{
     UIFormMultiValueInputSet ret = addMultiValuesInput(type, name, label);
     renderField(name);
     return ret;
   }
 
-  private UIFormMultiValueInputSet addMultiValuesInput(Class type, String name,String label) throws Exception{
+  private UIFormMultiValueInputSet addMultiValuesInput(Class<? extends UIFormInputBase<?>> type, String name,String label) throws Exception{
     UIFormMultiValueInputSet uiMulti = null;
-    if (UIFormUploadInput.class.isAssignableFrom(type)) {
+    if (UIUploadInput.class.isAssignableFrom(type)) {
       uiMulti = createUIComponent(UIFormUploadMultiValueInputSet.class, null, null);
     }
     else {
@@ -1941,13 +1957,13 @@ public class UIDialogForm extends UIForm {
         // get max id
         List<UIComponent> children = uiSet.getChildren();
         if (children.size() > 0) {
-          UIFormInputBase uiInput = (UIFormInputBase) children.get(children.size() - 1);
+          UIFormInputBase<?> uiInput = (UIFormInputBase<?>) children.get(children.size() - 1);
           String index = uiInput.getId();
           int maxIndex = Integer.parseInt(index.replaceAll(id, ""));
 
           UIDialogForm uiDialogForm = uiSet.getAncestorOfType(UIDialogForm.class);
           String[] arguments = uiDialogForm.uiMultiValueParam.get(uiSet.getName());
-          UIFormInputBase newUIInput = null;
+          UIFormInputBase<?> newUIInput = null;
           if (uiInput instanceof UIFormWYSIWYGInput) {
             newUIInput = uiDialogForm.getUIFormInputList(uiSet.getName(),
                                                          new UIFormWYSIWYGField(uiSet.getName(),

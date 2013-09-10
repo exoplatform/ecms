@@ -93,11 +93,11 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   private Set<String>               tagPermissionList      = new HashSet<String>();
 
   private Map<String, String>       sitesTagPath           = new HashMap<String, String>();
-  
+
   private ListenerService           listenerService;
-  
+
   private ActivityCommonService     activityService;
-  
+
   //The DataDistributionType used to store tagNodes
   private DataDistributionType dataDistributionType;
 
@@ -146,8 +146,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
    */
   public void stop() {
   }
-  
-  
+
+
 
   /**
    * {@inheritDoc}
@@ -174,11 +174,11 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
         }else {
           tagValue.append(",").append(tag);
         }
-        
+
       } catch (Exception e) {
         if (LOG.isErrorEnabled()) {
           LOG.error("can't add tag '" + tag + "' to node: " + targetNode.getPath() + " for user: "
-            + userName);
+              + userName);
         }
       }
     }//
@@ -188,8 +188,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     if (listenerService!=null && activityService !=null) {
       try {
         if (activityService.isAcceptedNode(documentNode) || 
-        		(documentNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) && 
-        				activityService.isBroadcastNTFileEvents(documentNode))) {
+            (documentNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) && 
+                activityService.isBroadcastNTFileEvents(documentNode))) {
           listenerService.broadcast(ActivityCommonService.TAG_ADDED_ACTIVITY, documentNode, tagValue);
         }
       } catch (Exception e) {
@@ -199,7 +199,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
       }
     }
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -222,7 +222,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
         } catch (Exception e) {
           if (LOG.isErrorEnabled()) {
             LOG.error("can't add tag '" + tag + "' to node: " + targetNode.getPath() + " for group: "
-              + group);
+                + group);
           }
         }
       }
@@ -240,7 +240,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     Node targetNode = getTargetNode(documentNode);
     boolean firstTagFlag = true;
     StringBuffer tagValue = new StringBuffer();
-    
+
     for (String tag : tagsName) {
       try {
         // Find tag node
@@ -248,16 +248,16 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
         // Add symlink and total
         addTag(tagNode, targetNode);
         publicFolksonomyTreeNode.getSession().save();
-         if (firstTagFlag) {
-           firstTagFlag = false;
-           tagValue.append(tag);
-         }else {
-           tagValue.append(",").append(tag);
-         }
+        if (firstTagFlag) {
+          firstTagFlag = false;
+          tagValue.append(tag);
+        }else {
+          tagValue.append(",").append(tag);
+        }
       } catch (Exception e) {
         if (LOG.isErrorEnabled()) {
           LOG.error("can't add tag '" + tag + "' to node: " + targetNode.getPath()
-            + " in public folksonomy tree!");
+                    + " in public folksonomy tree!");
         }
       }
     }//off for
@@ -339,15 +339,16 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     }
     return new ArrayList<Node>(tagSet);
   }
-  
+
   private List<Node> queryTagNodes(Node rootNode) throws Exception {
     List<Node> ret = new ArrayList<Node>();
     StringBuilder queryStr = new StringBuilder().append("select * from ").append(EXO_TAGGED).append(" where jcr:path like '").
-    append(rootNode.getPath()).append("/%'");
+        append(rootNode.getPath()).append("/%'");
     Query query = rootNode.getSession().getWorkspace().getQueryManager().createQuery(queryStr.toString(), Query.SQL); 
     for (NodeIterator iter = query.execute().getNodes(); iter.hasNext();) {
       ret.add(iter.nextNode());
     }
+    Collections.sort(ret, new NodeComparator());
     return ret;
   }  
 
@@ -474,7 +475,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
       throw new ItemExistsException("node " + newTagName + " has already existed!");
 
     StringBuilder newPath = new StringBuilder(oldTagNode.getParent().getPath()).append('/')
-                                                                               .append(newTagName);
+        .append(newTagName);
 
     ManageableRepository manageableRepository = WCMCoreUtils.getRepository();
 
@@ -484,7 +485,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     session.save();
     return getNode(workspace, newPath.toString());
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -503,7 +504,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     if (oldTagNode.hasProperty(EXO_TOTAL)) {
       newTagNode.setProperty(EXO_TOTAL, oldTagNode.getProperty(EXO_TOTAL).getValue());
     }
-    
+
     Map<String, String> pathMap = new HashMap<String, String>();
     for (NodeIterator iter = oldTagNode.getNodes(); iter.hasNext();) {
       Node node = iter.nextNode();
@@ -518,8 +519,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     session.save();
     return newTagNode;
   }      
-  
-  
+
+
   /**
    * {@inheritDoc}
    */
@@ -530,8 +531,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     parentNode.getSession().save();
     if (listenerService!=null && activityService!=null) {
       try {
-        if (activityService.isAcceptedNode(tagNode) || (tagNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) &&
-        		activityService.isBroadcastNTFileEvents(tagNode))) {
+        if (activityService.isAcceptedNode(tagNode) || (tagNode.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) 
+            && activityService.isBroadcastNTFileEvents(tagNode))) {
           listenerService.broadcast(ActivityCommonService.TAG_REMOVED_ACTIVITY, tagNode, tagNode.getName());
         }
       } catch (Exception e) {
@@ -571,7 +572,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
             removedTags.append(ActivityCommonService.VALUE_SEPERATOR).append(tagName);
           }
           link.remove();
-          
+
           long total = tagNode.getProperty(EXO_TOTAL).getLong();
           tagNode.setProperty(EXO_TOTAL, total - 1);
           Node parentNode = tagNode.getParent();
@@ -584,8 +585,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     }
     if (listenerService!=null && activityService!=null) {
       try {
-        if (activityService.isAcceptedNode(document) || (document.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE) &&
-        		activityService.isBroadcastNTFileEvents(document))) {
+        if (activityService.isAcceptedNode(document) || (document.getPrimaryNodeType().getName().equals(NodetypeConstant.NT_FILE)
+            && activityService.isBroadcastNTFileEvents(document))) {
           listenerService.broadcast(ActivityCommonService.TAG_REMOVED_ACTIVITY, document, removedTags.toString());
         }
       } catch (Exception e) {
@@ -661,7 +662,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     NodeIterator nodeIter = node.getNodes();
     while (nodeIter.hasNext()) {
       ret.add(nodeIter.nextNode());
-    }
+    } 
+    Collections.sort(ret, new NodeComparator());
     return ret;
   }
 
@@ -734,8 +736,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
 
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     QueryManager queryManager = sessionProvider.getSession(workspace, manageableRepository)
-                                               .getWorkspace()
-                                               .getQueryManager();
+        .getWorkspace()
+        .getQueryManager();
     Query query = queryManager.createQuery(queryStr.toString(), Query.SQL);
     QueryResult queryResult = query.execute();
     NodeIterator nodeIter = queryResult.getNodes();
@@ -781,7 +783,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
             ret.add(tagNode);
         }
       }
-    }
+    } 
+    Collections.sort(ret, new NodeComparator());
     return ret;
   }
 
@@ -850,7 +853,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
       break;
     case GROUP:
       tags = value.indexOf(";") >= 0 ? getAllGroupTags(value.split(";"), workspace)
-                                    : getAllGroupTags(value, workspace);
+                                     : getAllGroupTags(value, workspace);
       break;
     case SITE:
       tags = getAllSiteTags(value, workspace);
@@ -868,7 +871,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
 
       SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
       Session session = sessionProvider.getSession(initParams_.getValueParam("workspace")
-                                                              .getValue(), manageableRepository);
+                                                   .getValue(), manageableRepository);
 
       String[] paths = initParams_.getValueParam("path").getValue().split("/");
       Node rootNode = session.getRootNode();
@@ -877,7 +880,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
       for (String path : paths) {
         if (path.length() > 0) {
           Node cnode = currentNode.hasNode(path) ? currentNode.getNode(path)
-                                                : currentNode.addNode(path);
+                                                 : currentNode.addNode(path);
           currentNode = cnode;
           if (depth++ == 0)
             if (!currentNode.isNodeType(EXO_HIDDENABLE))
@@ -905,12 +908,12 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
       tagNode.setProperty(EXO_TOTAL, total + 1);
     }
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public DataDistributionType getDataDistributionType() {
     return this.dataDistributionType;
   }
-  
+
 }

@@ -16,18 +16,6 @@
  */
 package org.exoplatform.ecm.webui.component.explorer;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
-
-import javax.jcr.AccessDeniedException;
-import javax.jcr.NoSuchWorkspaceException;
-import javax.jcr.Node;
-import javax.jcr.Session;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-
 import org.exoplatform.container.definition.PortalContainerConfig;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.ecm.jcr.model.Preference;
@@ -61,6 +49,17 @@ import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+
+import javax.jcr.AccessDeniedException;
+import javax.jcr.NoSuchWorkspaceException;
+import javax.jcr.Node;
+import javax.jcr.Session;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 /**
  * Created by The eXo Platform SARL
@@ -206,7 +205,7 @@ public class UIDrivesArea extends UIContainer {
       }
       if(viewList.isEmpty()) {
         Object[] args = { driveName };
-        uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.no-view-found", args));
+        uiApp.addMessage(new ApplicationMessage("UIDrivesArea.msg.no-view-found", args));
 
         return;
       }
@@ -230,7 +229,9 @@ public class UIDrivesArea extends UIContainer {
 
 
       Preference pref = uiJCRExplorer.getPreference();
-      pref.setShowSideBar(drive.getViewSideBar());
+      // check if Preferences has View-Side-Bar property to be true or not. if true, set TRUE for setViewSideBar() 
+      if (!pref.isShowSideBar())
+        pref.setShowSideBar(drive.getViewSideBar());
       pref.setShowPreferenceDocuments(drive.getViewPreferences());
       pref.setAllowCreateFoder(drive.getAllowCreateFolders());
       HttpServletRequest request = Util.getPortalRequestContext().getRequest();
@@ -255,13 +256,13 @@ public class UIDrivesArea extends UIContainer {
         session.getItem(homePath);
       } catch(AccessDeniedException ace) {
         Object[] args = { driveName };
-        uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.access-denied", args,
+        uiApp.addMessage(new ApplicationMessage("UIDrivesArea.msg.access-denied", args,
             ApplicationMessage.WARNING));
 
         return;
       } catch(NoSuchWorkspaceException nosuchWS) {
         Object[] args = { driveName };
-        uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.workspace-not-exist", args,
+        uiApp.addMessage(new ApplicationMessage("UIDrivesArea.msg.workspace-not-exist", args,
             ApplicationMessage.WARNING));
 
         return;

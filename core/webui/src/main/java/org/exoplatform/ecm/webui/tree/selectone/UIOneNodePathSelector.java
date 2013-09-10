@@ -239,13 +239,17 @@ public class UIOneNodePathSelector extends UIBaseNodeTreeSelector {
     selectPathPanel.updateGrid();
     UIBreadcumbs uiBreadcumbs = getChild(UIBreadcumbs.class);
     String pathName = currentNode.getName();
+    String pathTitle = pathName;
+    if (currentNode.hasProperty("exo:title")){
+      pathTitle = currentNode.getProperty("exo:title").getString();
+    } 
     NodeFinder nodeFinder = getApplicationComponent(NodeFinder.class);
     Node rootNode = (Node) nodeFinder.getItem(workspaceName, rootTreePath);
 
     if (currentNode.equals(rootNode)) {
       pathName = "";
     }
-    UIBreadcumbs.LocalPath localPath = new UIBreadcumbs.LocalPath(pathName, pathName);
+    UIBreadcumbs.LocalPath localPath = new UIBreadcumbs.LocalPath(pathName, pathTitle);
     List<LocalPath> listLocalPath = uiBreadcumbs.getPath();
     StringBuilder buffer = new StringBuilder(1024);
     for(LocalPath iterLocalPath: listLocalPath) {

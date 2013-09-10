@@ -68,7 +68,8 @@ public class AddLocalizationLinkActionComponent extends UIAbstractManagerCompone
     public void processEvent(Event<AddLocalizationLinkActionComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
     UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
-    UIAddTranslationManager uiAddTranslationManager = event.getSource().createUIComponent(UIAddTranslationManager.class, null, null);
+    UIAddTranslationManager uiAddTranslationManager =
+        event.getSource().createUIComponent(UIAddTranslationManager.class, null, null);
     UIPopupContainer.activate(uiAddTranslationManager, 600, 155);
     event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
     }

@@ -38,11 +38,11 @@ import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 
 /**
  * Created by The eXo Platform SARL
@@ -141,20 +141,13 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
     queryOption.add(new SelectItemOption<String>(SQLQuery, Preference.SQL_QUERY));
     queryOption.add(new SelectItemOption<String>(XPathQuery, Preference.XPATH_QUERY));
 
-    addUIFormInput(new UIFormCheckBoxInput<Boolean>(FIELD_ENABLESTRUCTURE, FIELD_ENABLESTRUCTURE,
-        null));
-    addUIFormInput(new UIFormCheckBoxInput<Boolean>(FIELD_SHOWSIDEBAR, FIELD_SHOWSIDEBAR, null));
-    addUIFormInput(new UIFormCheckBoxInput<Boolean>(FIELD_SHOWNONDOCUMENT, FIELD_SHOWNONDOCUMENT,
-        null));
-    addUIFormInput(new UIFormCheckBoxInput<Boolean>(FIELD_SHOWREFDOCUMENTS, FIELD_SHOWREFDOCUMENTS,
-        null));
-    addUIFormInput(new UIFormCheckBoxInput<Boolean>(FIELD_SHOW_HIDDEN_NODE, FIELD_SHOW_HIDDEN_NODE,
-        null));
-    addUIFormInput(new UIFormCheckBoxInput<Boolean>(FIELD_SHOW_ITEMS_BY_USER,
-                                                    FIELD_SHOW_ITEMS_BY_USER, null));
-    addUIFormInput(new UIFormCheckBoxInput<Boolean>(FIELD_ENABLE_DRAG_AND_DROP,
-                                                    FIELD_ENABLE_DRAG_AND_DROP, null));
-
+    addUIFormInput(new UICheckBoxInput(FIELD_ENABLESTRUCTURE, FIELD_ENABLESTRUCTURE, null));
+    addUIFormInput(new UICheckBoxInput(FIELD_SHOWSIDEBAR, FIELD_SHOWSIDEBAR, null));
+    addUIFormInput(new UICheckBoxInput(FIELD_SHOWNONDOCUMENT, FIELD_SHOWNONDOCUMENT, null));
+    addUIFormInput(new UICheckBoxInput(FIELD_SHOWREFDOCUMENTS, FIELD_SHOWREFDOCUMENTS, null));
+    addUIFormInput(new UICheckBoxInput(FIELD_SHOW_HIDDEN_NODE, FIELD_SHOW_HIDDEN_NODE, null));
+    addUIFormInput(new UICheckBoxInput(FIELD_SHOW_ITEMS_BY_USER, FIELD_SHOW_ITEMS_BY_USER, null));
+    addUIFormInput(new UICheckBoxInput(FIELD_ENABLE_DRAG_AND_DROP, FIELD_ENABLE_DRAG_AND_DROP, null));
     addUIFormInput(new UIFormSelectBox(FIELD_QUERY_TYPE, FIELD_QUERY_TYPE, queryOption));
     addUIFormInput(new UIFormSelectBox(FIELD_SHORTBY, FIELD_SHORTBY, sortOptions));
     addUIFormInput(new UIFormSelectBox(FIELD_ORDERBY, FIELD_ORDERBY, orderOption));
@@ -198,15 +191,15 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
   }
 
   public void update(Preference pref) {
-    getUIFormCheckBoxInput(FIELD_ENABLESTRUCTURE).setChecked(pref.isJcrEnable());
-    UIFormCheckBoxInput<Boolean> showSideBar = getUIFormCheckBoxInput(FIELD_SHOWSIDEBAR);
+    getUICheckBoxInput(FIELD_ENABLESTRUCTURE).setChecked(pref.isJcrEnable());
+    UICheckBoxInput showSideBar = getUICheckBoxInput(FIELD_SHOWSIDEBAR);
     showSideBar.setChecked(pref.isShowSideBar());
-    showSideBar.setEnable(this.getAncestorOfType(UIJCRExplorerPortlet.class).isShowSideBar());    
-    getUIFormCheckBoxInput(FIELD_SHOWNONDOCUMENT).setChecked(pref.isShowNonDocumentType());
-    getUIFormCheckBoxInput(FIELD_SHOWREFDOCUMENTS).setChecked(pref.isShowPreferenceDocuments());
-    getUIFormCheckBoxInput(FIELD_SHOW_HIDDEN_NODE).setChecked(pref.isShowHiddenNode());
-    getUIFormCheckBoxInput(FIELD_SHOW_ITEMS_BY_USER).setChecked(pref.isShowItemsByUser());
-    getUIFormCheckBoxInput(FIELD_ENABLE_DRAG_AND_DROP).setChecked(pref.isEnableDragAndDrop());
+    showSideBar.setDisabled(!this.getAncestorOfType(UIJCRExplorerPortlet.class).isShowSideBar());
+    getUICheckBoxInput(FIELD_SHOWNONDOCUMENT).setChecked(pref.isShowNonDocumentType());
+    getUICheckBoxInput(FIELD_SHOWREFDOCUMENTS).setChecked(pref.isShowPreferenceDocuments());
+    getUICheckBoxInput(FIELD_SHOW_HIDDEN_NODE).setChecked(pref.isShowHiddenNode());
+    getUICheckBoxInput(FIELD_SHOW_ITEMS_BY_USER).setChecked(pref.isShowItemsByUser());
+    getUICheckBoxInput(FIELD_ENABLE_DRAG_AND_DROP).setChecked(pref.isEnableDragAndDrop());
     getUIFormSelectBox(FIELD_SHORTBY).setValue(pref.getSortType());
     getUIFormSelectBox(FIELD_ORDERBY).setValue(pref.getOrder());
     getUIFormSelectBox(NODES_PER_PAGE).setValue(Integer.toString(pref.getNodesPerPage()));
@@ -221,33 +214,27 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
 
   private void savePreferenceInCookies() {
     HttpServletResponse response = Util.getPortalRequestContext().getResponse();
-    if (getUIFormCheckBoxInput(FIELD_ENABLESTRUCTURE).isChecked())
+    if (getUICheckBoxInput(FIELD_ENABLESTRUCTURE).isChecked())
       response.addCookie(createNewCookie(Preference.PREFERENCE_ENABLESTRUCTURE, "true"));
     else
       response.addCookie(createNewCookie(Preference.PREFERENCE_ENABLESTRUCTURE, "false"));
-    if (getUIFormCheckBoxInput(FIELD_SHOWSIDEBAR).isChecked())
+    if (getUICheckBoxInput(FIELD_SHOWSIDEBAR).isChecked())
       response.addCookie(createNewCookie(Preference.PREFERENCE_SHOWSIDEBAR, "true"));
     else
       response.addCookie(createNewCookie(Preference.PREFERENCE_SHOWSIDEBAR, "false"));
-    if (getUIFormCheckBoxInput(FIELD_SHOWNONDOCUMENT).isChecked())
+    if (getUICheckBoxInput(FIELD_SHOWNONDOCUMENT).isChecked())
       response.addCookie(createNewCookie(Preference.SHOW_NON_DOCUMENTTYPE, "true"));
     else
       response.addCookie(createNewCookie(Preference.SHOW_NON_DOCUMENTTYPE, "false"));
-    if (getUIFormCheckBoxInput(FIELD_SHOWREFDOCUMENTS).isChecked())
+    if (getUICheckBoxInput(FIELD_SHOWREFDOCUMENTS).isChecked())
       response.addCookie(createNewCookie(Preference.PREFERENCE_SHOWREFDOCUMENTS, "true"));
     else
       response.addCookie(createNewCookie(Preference.PREFERENCE_SHOWREFDOCUMENTS, "false"));
-    if (getUIFormCheckBoxInput(FIELD_SHOW_HIDDEN_NODE).isChecked())
+    if (getUICheckBoxInput(FIELD_SHOW_HIDDEN_NODE).isChecked())
       response.addCookie(createNewCookie(Preference.PREFERENCE_SHOW_HIDDEN_NODE, "true"));
     else
       response.addCookie(createNewCookie(Preference.PREFERENCE_SHOW_HIDDEN_NODE, "false"));
-    /*
-    if (getUIFormCheckBoxInput(FIELD_SHOW_ITEMS_BY_USER).isChecked())
-      response.addCookie(createNewCookie(Preference.PREFERENCE_SHOW_ITEMS_BY_USER, "true"));
-    else
-      response.addCookie(createNewCookie(Preference.PREFERENCE_SHOW_ITEMS_BY_USER, "false"));
-    */
-    if (getUIFormCheckBoxInput(FIELD_ENABLE_DRAG_AND_DROP).isChecked())
+    if (getUICheckBoxInput(FIELD_ENABLE_DRAG_AND_DROP).isChecked())
       response.addCookie(createNewCookie(Preference.ENABLE_DRAG_AND_DROP, "true"));
     else
       response.addCookie(createNewCookie(Preference.ENABLE_DRAG_AND_DROP, "false"));
@@ -257,33 +244,30 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
     response.addCookie(createNewCookie(Preference.NODES_PER_PAGE, getUIFormSelectBox(NODES_PER_PAGE).getValue()));
   }
 
-  @SuppressWarnings("unused")
   static public class SaveActionListener extends EventListener<UIPreferencesForm> {
     public void execute(Event<UIPreferencesForm> event) throws Exception {
       UIPreferencesForm uiForm = event.getSource();
       UIJCRExplorerPortlet explorerPorltet = uiForm.getAncestorOfType(UIJCRExplorerPortlet.class);
       UIJCRExplorer uiExplorer = explorerPorltet.findFirstComponentOfType(UIJCRExplorer.class);
       Preference pref = uiExplorer.getPreference();
-      pref.setJcrEnable(uiForm.getUIFormCheckBoxInput(FIELD_ENABLESTRUCTURE).isChecked());
-      pref.setShowSideBar(uiForm.getUIFormCheckBoxInput(FIELD_SHOWSIDEBAR).isChecked());
-      pref.setShowNonDocumentType(uiForm.getUIFormCheckBoxInput(FIELD_SHOWNONDOCUMENT).isChecked());
-      pref.setShowPreferenceDocuments(uiForm.getUIFormCheckBoxInput(FIELD_SHOWREFDOCUMENTS).isChecked());
-      pref.setShowHiddenNode(uiForm.getUIFormCheckBoxInput(FIELD_SHOW_HIDDEN_NODE).isChecked());
+      pref.setJcrEnable(uiForm.getUICheckBoxInput(FIELD_ENABLESTRUCTURE).isChecked());
+      pref.setShowSideBar(uiForm.getUICheckBoxInput(FIELD_SHOWSIDEBAR).isChecked());
+      pref.setShowNonDocumentType(uiForm.getUICheckBoxInput(FIELD_SHOWNONDOCUMENT).isChecked());
+      pref.setShowPreferenceDocuments(uiForm.getUICheckBoxInput(FIELD_SHOWREFDOCUMENTS).isChecked());
+      pref.setShowHiddenNode(uiForm.getUICheckBoxInput(FIELD_SHOW_HIDDEN_NODE).isChecked());
       if (pref.isShowHiddenNode()) {
         uiExplorer.getAllItemFilterMap().add(UIAllItems.HIDDEN);
       } else {
         uiExplorer.getAllItemFilterMap().remove(UIAllItems.HIDDEN);
       }
 
-      //pref.setShowItemsByUser(uiForm.getUIFormCheckBoxInput(FIELD_SHOW_ITEMS_BY_USER).isChecked());
-      pref.setEnableDragAndDrop(uiForm.getUIFormCheckBoxInput(FIELD_ENABLE_DRAG_AND_DROP).isChecked());
+      pref.setEnableDragAndDrop(uiForm.getUICheckBoxInput(FIELD_ENABLE_DRAG_AND_DROP).isChecked());
       pref.setSortType(uiForm.getUIFormSelectBox(FIELD_SHORTBY).getValue());
       pref.setQueryType(uiForm.getUIFormSelectBox(FIELD_QUERY_TYPE).getValue());
       pref.setOrder(uiForm.getUIFormSelectBox(FIELD_ORDERBY).getValue());
       pref.setNodesPerPage(Integer.parseInt(uiForm.getUIFormSelectBox(NODES_PER_PAGE).getValue()));
       uiForm.savePreferenceInCookies();
       uiExplorer.setPreferencesSaved(true);
-      //uiExplorer.getPreference();
       uiExplorer.refreshExplorer();
       explorerPorltet.setRenderedChild(UIJCRExplorer.class);
       uiExplorer.updateAjax(event);
@@ -302,7 +286,7 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
   static public class AdvanceActionListener extends EventListener<UIPreferencesForm> {
     public void execute(Event<UIPreferencesForm> event) throws Exception {
       UIPreferencesForm uiPreferencesForm = event.getSource();
-      if (uiPreferencesForm.isAdvancePreferences()) { 
+      if (uiPreferencesForm.isAdvancePreferences()) {
         uiPreferencesForm.setAdvancePreferences(false);
       }
       else {

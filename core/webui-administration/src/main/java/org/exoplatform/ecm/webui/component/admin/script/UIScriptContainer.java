@@ -31,12 +31,12 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
  * 2:09:18 PM
  */
 @ComponentConfigs( {
-	@ComponentConfig(lifecycle = UIContainerLifecycle.class) })
+  @ComponentConfig(lifecycle = UIContainerLifecycle.class) })
 
 public class UIScriptContainer extends UIContainer {
 
   public UIScriptContainer() throws Exception {
-  	addChild(UIScriptList.class, null, null) ;
+    addChild(UIScriptList.class, null, null) ;
   }
 
   public void initPopup(UIComponent uiComponent, String popupId) throws Exception {
@@ -48,9 +48,9 @@ public class UIScriptContainer extends UIContainer {
     uiPopup.setShow(true) ;
     uiPopup.setResizable(true) ;
   }
-  
+
   public void update() throws Exception {
-  	UIScriptList uiScriptList = getChild(UIScriptList.class);
-  	uiScriptList.refresh(uiScriptList.getTemplateFilter(), uiScriptList.getUIPageIterator().getCurrentPage());
+    UIScriptList uiScriptList = getChild(UIScriptList.class);
+    uiScriptList.refresh(uiScriptList.getTemplateFilter(), uiScriptList.getUIPageIterator().getCurrentPage());
   }  
 }

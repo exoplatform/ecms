@@ -48,7 +48,9 @@ public class UISelectDocumentTemplateTitle extends UIComponent {
       UISelectDocumentTemplateTitle uiTemplateTitle = event.getSource();
       UIWorkingArea uiWorkingArea = uiTemplateTitle.getAncestorOfType(UIWorkingArea.class);
       UISelectDocumentForm uiSelectForm = 
-          uiWorkingArea.getChild(UIDocumentWorkspace.class).getChild(UIDocumentFormController.class).getChild(UISelectDocumentForm.class);
+          uiWorkingArea.getChild(UIDocumentWorkspace.class)
+            .getChild(UIDocumentFormController.class)
+            .getChild(UISelectDocumentForm.class);
       UIJCRExplorer uiExplorer = uiSelectForm.getAncestorOfType(UIJCRExplorer.class);
       if (viewType.equals(THUMBNAIL_VIEW_TYPE)) {
         uiSelectForm.setTemplate(THUMBNAIL_VIEW_TEMPLATE);

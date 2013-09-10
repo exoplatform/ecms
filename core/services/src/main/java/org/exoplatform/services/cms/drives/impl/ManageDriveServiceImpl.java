@@ -156,8 +156,8 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
    * @throws Exception
    */
   public ManageDriveServiceImpl(RepositoryService jcrService,
-      NodeHierarchyCreator nodeHierarchyCreator, DMSConfiguration dmsConfiguration,
-      CacheService caService) throws Exception{
+                                NodeHierarchyCreator nodeHierarchyCreator, DMSConfiguration dmsConfiguration,
+                                CacheService caService) throws Exception{
     repositoryService_ = jcrService ;
     nodeHierarchyCreator_ = nodeHierarchyCreator ;
     baseDrivePath_ = nodeHierarchyCreator_.getJcrPath(BasePath.EXO_DRIVES_PATH);
@@ -317,8 +317,8 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
    * {@inheritDoc}
    */
   public void addDrive(String name, String workspace, String permissions, String homePath,
-      String views, String icon, boolean viewReferences, boolean viewNonDocument,
-      boolean viewSideBar, boolean showHiddenNode, String allowCreateFolder, String allowNodeTypesOnTree) throws Exception {
+                       String views, String icon, boolean viewReferences, boolean viewNonDocument,
+                       boolean viewSideBar, boolean showHiddenNode, String allowCreateFolder, String allowNodeTypesOnTree) throws Exception {
     Session session = getSession();
     Node driveHome = (Node)session.getItem(baseDrivePath_) ;
     if (!driveHome.hasNode(name)){
@@ -366,9 +366,6 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
         if(drive.hasPermission(drive.getAllPermissions(), permission)){
           driveByPermission.add(drive) ;
         }
-      }
-      if(getDriveByName("Private") != null) {
-        driveByPermission.add(getDriveByName("Private")) ;
       }
     } catch(Exception e) {
       if (LOG.isErrorEnabled()) {
@@ -463,26 +460,26 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
         boolean flag = false;
         for (String permission : allPermission) {
           if (permission.equalsIgnoreCase("${userId}")) {
-          	if(!driveList.contains(drive)) driveList.add(drive);
-          	flag = true;
+            if(!driveList.contains(drive)) driveList.add(drive);
+            flag = true;
             break;
           }
           if (permission.equalsIgnoreCase("*")) {
-          	if(!driveList.contains(drive)) driveList.add(drive);
-          	flag = true;
+            if(!driveList.contains(drive)) driveList.add(drive);
+            flag = true;
             break;
           }
           if (flag) continue;
           for (String rolse : userRoles) {
             if (drive.hasPermission(allPermission, rolse)) {
-            	if(!driveList.contains(drive)) driveList.add(drive);
+              if(!driveList.contains(drive)) driveList.add(drive);
               break;
             }
           }
         }
       }
       for (DriveData drive : getGroupDrives(userId, userRoles)) {
-      	if(!driveList.contains(drive)) driveList.add(drive); 
+        if(!driveList.contains(drive)) driveList.add(drive); 
       }
     } else {
       for (DriveData drive : getAllDrives()) {
@@ -509,7 +506,6 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     if (drives != null)
       return new ArrayList<DriveData>((List<DriveData>) drives);
     List<DriveData> groupDrives = new ArrayList<DriveData>();
-    String groupPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_GROUPS_PATH);
     for (String role : userRoles) {
       String group = role.substring(role.indexOf(":")+1);
       if (groupDriveTemplate_ != null && group.charAt(0)=='/') {

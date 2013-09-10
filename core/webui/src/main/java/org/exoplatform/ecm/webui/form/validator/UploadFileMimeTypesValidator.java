@@ -16,13 +16,13 @@
  */
 package org.exoplatform.ecm.webui.form.validator;
 
-import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.form.UIFormInput;
-import org.exoplatform.webui.form.UIFormUploadInput;
+import org.exoplatform.webui.form.input.UIUploadInput;
 import org.exoplatform.webui.form.validator.Validator;
 
 /**
@@ -33,25 +33,26 @@ import org.exoplatform.webui.form.validator.Validator;
  * Jul 13, 2011
  */
 public class UploadFileMimeTypesValidator implements Validator {
-  
+
   private String mimeTypes_;
-  
+
   public UploadFileMimeTypesValidator() {
   }
-  
+
   public UploadFileMimeTypesValidator(String mimeTypes) {
     this.mimeTypes_ = mimeTypes;
   }
   public void validate(UIFormInput uiInput) throws Exception {
-    if (uiInput instanceof UIFormUploadInput) {
-      UIFormUploadInput uploadInput = UIFormUploadInput.class.cast(uiInput);
-      String mimeTypeInput = uploadInput.getUploadResource() == null ? null : uploadInput.getUploadResource().getMimeType();
+    if (uiInput instanceof UIUploadInput) {
+      UIUploadInput uploadInput = UIUploadInput.class.cast(uiInput);
+      String uploadId = uploadInput.getUploadIds()[0];
+      String mimeTypeInput = uploadInput.getUploadResource(uploadId) == null ? null : uploadInput.getUploadResource(uploadId).getMimeType();
       if (mimeTypes_ != null && mimeTypeInput != null) {
         if (mimeTypes_.contains(mimeTypeInput)) {
           return;
         }
         Pattern pattern = Pattern.compile(mimeTypes_.replace("*", ".*"));
-        Matcher matcher = pattern.matcher(mimeTypeInput); 
+        Matcher matcher = pattern.matcher(mimeTypeInput);
         if (!matcher.find()) {
           Object[] args = { mimeTypeInput, uploadInput.getName() };
           throw new MessageException(

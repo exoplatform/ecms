@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIPresentationContainer>
+    <title>
+      <QuickEdit>Redigera innehåll i utforskaren</QuickEdit>
+      <print>Skriv ut sidan</print>
+      <FastPublish>Publicera</FastPublish>
+    </title>
+    <label>
+      <draft>Utkast</draft>
+      <print>Skriv ut</print>
+    </label>
+    <msg>
+      <no-content>Ingen innehållet hittades.</no-content>
+      <internal-server-error>Ett fel uppstod då data begärdes från sever.</internal-server-error>
+      <empty-title-error>Ange den nya titeln.</empty-title-error>
+    </msg>
+  </UIPresentationContainer>
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorOne>Markera/välj innehåll</UIContentSelectorOne>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+  <UISingleContentViewerPortlet>
+    <msg>
+      <AccessControlException>Du saknar behörighet för åtkomst till redigeringsläge.</AccessControlException>
+    </msg>
+  </UISingleContentViewerPortlet>
+  <UISCVContextualRadioBox>
+    <label>
+      <Enable>Aktiverad</Enable>
+      <Disable>Inaktiverad</Disable>
+    </label>
+  </UISCVContextualRadioBox>
+  <UIPreferencesPopupWindows>
+    <title>
+      <UISCVPreferences>Detaljinställningar för innehåll</UISCVPreferences>
+    </title>
+  </UIPreferencesPopupWindows>
+  <UISCVPreferences>
+    <action>
+      <Save>Spara</Save>
+      <Abort>Avbryt</Abort>
+      <Cancel>Avbryt</Cancel>
+      <Print>Skriv ut</Print>
+      <Close>Stäng</Close>
+    </action>
+    <title>Detaljinställningar för innehåll</title>
+    <label>
+      <Back>Tillbaka till föregående sida</Back>
+      <Edit>Redigera</Edit>
+      <Preferences>Inställningar</Preferences>
+      <Title>Detaljinställningar för innehåll</Title>
+      <UISCVShowTitleConfigurationCheckBox>Visa titel</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>Visa datum</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowOptionBarConfigurationCheckBox>Visa optioner</UISCVShowOptionBarConfigurationCheckBox>
+      <DisplaySettingBlock>Bildskärmsinställningar</DisplaySettingBlock>
+      <ContentPathBlock>Val av innehåll</ContentPathBlock>
+      <UISCVConfigItemPathFormInputSet>Sökväg för innehåll</UISCVConfigItemPathFormInputSet>
+    <UISCVContentPathConfigurationInputBox>Sökväg för innehåll</UISCVContentPathConfigurationInputBox>
+      <Advance>Avancerad</Advance>
+      <ContextCaption>Dynamisk navigering</ContextCaption>
+      <UISCVContextualRadioBox>Kontextuellt innehåll</UISCVContextualRadioBox>
+      <UISCVParameterInputBox>av</UISCVParameterInputBox>
+      <PrintSettingBlock>Utskriftsinställningar</PrintSettingBlock>
+      <UISCVPrintPageParameter>med</UISCVPrintPageParameter>
+      <UISCVConfigPrintPageFormInputSet>Visa i sidan</UISCVConfigPrintPageFormInputSet>
+      <LockStatus>Lås</LockStatus>
+      <CacheManagement>Innehållets synlighet</CacheManagement>
+      <UISCVCacheRadioBox>Dela innehåll</UISCVCacheRadioBox>
+    </label>
+    <help>
+      <ContentPathBlock>Välj det innehåll som du vill visa. Standardvalet kommer att ersättas dynamiskt om du aktiverar alternativet dynamisk navigering (se Avancerat läge nedan).</ContentPathBlock>
+      <DisplaySettingBlock>Du kan visa eller dölja panelen som används för länken Skriv ut. Titel och datum i panelen är också frivilligt.</DisplaySettingBlock>
+      <ContextualHelp>Aktiverar dynamiskt navigering. Innehållet kan ändras dynamiskt av en annan URL-baserat parameter.</ContextualHelp>
+      <ParameterHelp>Denna parameter kommer att användas att få innehållet då dynamisk navigering är aktiverad.</ParameterHelp>
+    </help>
+    <msg>
+      <not-valid-path>Sökväg till denna artikeln är ogiltig.</not-valid-path>
+    </msg>
+    <tab>
+      <label>
+        <UISCVConfigContentFormInputSet>Val av innehåll</UISCVConfigContentFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Bildskärmsinställningar</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>Utskriftsinställningar</UISCVConfigPrintFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Avancerad</UISCVConfigAdvancedFormInputSet>
+      </label>
+    </tab>
+  </UISCVPreferences>
+  <UISCVConfigItemPathFormInputSet>
+    <title>
+      <SelectFolderPath>Välj sökväg</SelectFolderPath>
+    </title>
+  </UISCVConfigItemPathFormInputSet>
+  <UISCVConfigPrintPageFormInputSet>
+    <title>
+      <SelectTargetPage>Visa i sidan</SelectTargetPage>
+    </title>
+  </UISCVConfigPrintPageFormInputSet>
+  <PublicationStates>
+    <archived>Arkiverad</archived>
+    <obsolete>Utgången</obsolete>
+    <unpublished>Ej publicerad</unpublished>
+    <enrolled>Inskrivna</enrolled>
+    <draft>Utkast</draft>
+    <pending>Väntläge</pending>
+    <approved>Godkänd</approved>
+    <inreview>Under granskning</inreview>
+    <staged>Godkänd</staged>
+    <published>Publicerad</published>
+  </PublicationStates>
+  <UISCVCacheRadioBox>
+    <label>
+      <Enable>Begränsad för autentisering</Enable>
+      <Disable>Begränsad för användarroll</Disable>
+    </label>
+  </UISCVCacheRadioBox>
+</bundle>

@@ -41,7 +41,6 @@ import org.exoplatform.portal.mop.user.UserNodeFilterConfig;
 import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.mop.user.UserPortalImpl;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
@@ -58,11 +57,11 @@ import org.exoplatform.webui.application.WebuiRequestContext;
 public class NavigationUtils {
 
   public static final Scope ECMS_NAVIGATION_SCOPE = Scope.CHILDREN;
-  
+
   private static ThreadLocal<Map<String, String>> gotNavigationKeeper = new ThreadLocal<Map<String, String>>();
-  
+
   private static Constructor<UserNavigation> userNavigationCtor = null;
-  
+
   private static final Log LOG = ExoLogger.getLogger(NavigationUtils.class.getName());
   static {
     try {
@@ -77,14 +76,14 @@ public class NavigationUtils {
       }
     }
   } //of static reflection
-  
-  public static boolean gotNavigation(String portal, String user) { 
+
+  public static boolean gotNavigation(String portal, String user) {
     Map<String, String> navigations = gotNavigationKeeper.get();
     if (navigations == null) return false;
     String navigation = navigations.get(portal + " " + user);
     return (navigation != null);
   }
-  
+
   public static UserNavigation getUserNavigationOfPortal(UserPortal userPortal, String portalName) throws Exception {
     UserACL userACL = WCMCoreUtils.getService(UserACL.class);
     UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
@@ -92,37 +91,36 @@ public class NavigationUtils {
                                         loadNavigation(new SiteKey(SiteType.PORTAL, portalName));
     if (portalNav ==null) {
       return null;
-    } 
+    }
     UserPortalConfig userPortalCfg = userPortalConfigService.getUserPortalConfig(portalName,
             ConversationState.getCurrent().getIdentity().getUserId(),
             PortalRequestContext.USER_PORTAL_CONTEXT);
     return userNavigationCtor.newInstance(
-            userPortal, portalNav, 
+            userPortal, portalNav,
             userACL.hasEditPermission(userPortalCfg.getPortalConfig()));
   }
-  
+
   /**
    * Get UserNavigation of a specified element
    * @param userPortal
    * @param siteKey Key
-   * @return UserNavigation of group  
+   * @return UserNavigation of group
    */
   public static UserNavigation getUserNavigation(UserPortal userPortal, SiteKey siteKey) throws Exception {
-      UIPortalApplication portalApp = Util.getUIPortalApplication();
-	    UserACL userACL = WCMCoreUtils.getService(UserACL.class);
-	    UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
-	    //userPortalConfigService.get
-	    NavigationContext portalNav = userPortalConfigService.getNavigationService().
-	                                                          loadNavigation(siteKey);
-	    if (portalNav == null) {
-	      return null;
-	    } else {
-	      return userNavigationCtor.newInstance(
-                userPortal, portalNav, 
-                userACL.hasEditPermission(portalApp.getUserPortalConfig().getPortalConfig()));
-	    }
-	  }
-  
+      UserACL userACL = WCMCoreUtils.getService(UserACL.class);
+      UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
+      //userPortalConfigService.get
+      NavigationContext portalNav = userPortalConfigService.getNavigationService().
+                                                            loadNavigation(siteKey);
+      if (portalNav == null) {
+        return null;
+      } else {
+        return userNavigationCtor.newInstance(
+                userPortal, portalNav,
+                userACL.hasEditPermission(Util.getPortalRequestContext().getUserPortalConfig().getPortalConfig()));
+      }
+    }
+
   public static void removeNavigationAsJson (String portalName, String username) throws Exception
   {
     String key = portalName + " " + username;
@@ -132,7 +130,7 @@ public class NavigationUtils {
       gotNavigationKeeper.set(navigations);
     }
   }
-  
+
   public static String getNavigationAsJSON(String portalName, String username) throws Exception {
 
     String key = portalName + " " + username;
@@ -150,13 +148,13 @@ public class NavigationUtils {
                                                                                  username,
                                                                                  PortalRequestContext.USER_PORTAL_CONTEXT);
     UserPortal userPortal = userPortalCfg.getUserPortal();
-    
+
     //filter nodes
     UserNodeFilterConfig.Builder filterConfigBuilder = UserNodeFilterConfig.builder();
     filterConfigBuilder.withReadWriteCheck().withVisibility(Visibility.DISPLAYED, Visibility.TEMPORAL);
     filterConfigBuilder.withTemporalCheck();
     UserNodeFilterConfig filterConfig = filterConfigBuilder.build();
-    
+
     //get nodes
     UserNavigation navigation = getUserNavigationOfPortal(userPortal, portalName);
     UserNode root = userPortal.getNode(navigation, ECMS_NAVIGATION_SCOPE, filterConfig, null);
@@ -166,7 +164,7 @@ public class NavigationUtils {
     gotNavigationKeeper.set(navigations);
     return ret;
   }
-  
+
   private static String createJsonTree(UserNavigation navigation, UserNode rootNode) throws Exception {
     StringBuffer sbJsonTree = new StringBuffer();
     sbJsonTree.append("[");
@@ -179,7 +177,7 @@ public class NavigationUtils {
     sbJsonTree.append("]");
     return sbJsonTree.toString();
   }
-  
+
   private static StringBuffer addJsonNodes(Iterator<UserNode> children) throws Exception {
     StringBuffer sbJsonTree = new StringBuffer();
     sbJsonTree.append("[");
@@ -204,7 +202,7 @@ public class NavigationUtils {
       ResourceURL resourceURL = res.createResourceURL();
       resourceURL.setResourceID(res.encodeURL(child.getURI()));
       Writer w = new StringWriter();
-      resourceURL.write(w, true);      
+      resourceURL.write(w, true);
       sbJsonTree.append("\"getNodeURL\":\"").append(w.toString()).append("\",");
       sbJsonTree.append("\"nodes\":").append(addJsonNodes(child.getChildren().iterator()));
       sbJsonTree.append("}");

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <ContentSelector>
+    <msg>
+      <no-file-selected>Es ist kein Inhalt ausgewählt. Bitte wählen Sie mindestens einen.</no-file-selected>
+    </msg>
+  </ContentSelector>
+  <RenameConnector>
+    <label>
+      <rename>Umbenennen</rename>
+      <cancel>Abbrechen</cancel>
+    </label>
+    <msg>
+      <renaming>Umbenennen...</renaming>
+    </msg>
+  </RenameConnector>
+</bundle>

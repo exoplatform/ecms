@@ -200,7 +200,7 @@
       <SearchWebContent>Recherche</SearchWebContent>
     </action>
     <msg>
-      <time-to-late>La le temps de recherche ne soit trop tard</time-to-late>
+      <time-to-late>Le temps de recherche est trop long.</time-to-late>
       <empty-field>La valeur de ce champ est nulle ou vide!</empty-field>
       <invalid-format>Blancs datetime format dans le champ '{0}'</invalid-format>
       <invalid-date>"To Date" have to greater than "From Date"</invalid-date>
@@ -393,17 +393,17 @@
       <Private>Privé</Private>
       <Public>Public</Public>
       <BackupCenter>Centre de Sauvegarde</BackupCenter>
-      <CategorizedDocumentsCenter>Centre des documents catégorisés</CategorizedDocumentsCenter>
+      <CategorizedDocumentsCenter>Centre Document des Catégories</CategorizedDocumentsCenter>
       <CollaborationCenter>Centre de Collaboration</CollaborationCenter>
-      <DigitalAssetsManagementCenter>Centre de gestion des Contenus numériques</DigitalAssetsManagementCenter>
+      <DigitalAssetsManagementCenter>Centre de Gestion des Contenus Numériques</DigitalAssetsManagementCenter>
       <DMSAdministration>Administration DMS</DMSAdministration>
-      <DocumentsManagementCenter>Centre de gestion des Documents</DocumentsManagementCenter>
-      <LiveDocumentsCenter>Centre des Documents publiés</LiveDocumentsCenter>
-      <PendingDocumentsCenter>Centre des Documents en attente</PendingDocumentsCenter>
-      <RecordsManagementCenter>Centre de gestion des enregistrements</RecordsManagementCenter>
-      <SharedUsersSpace>Espace partagé des utilisateurs</SharedUsersSpace>
+      <DocumentsManagementCenter>Centre de Gestion des Documents</DocumentsManagementCenter>
+      <LiveDocumentsCenter>Centre des Document Actifs</LiveDocumentsCenter>
+      <PendingDocumentsCenter>Centre des Documents en Attente</PendingDocumentsCenter>
+      <RecordsManagementCenter>Centre de Management Des Enregistrements</RecordsManagementCenter>
+      <SharedUsersSpace>Espace Partagé des Utilisateurs</SharedUsersSpace>
       <Systemfiles>Fichiers Système</Systemfiles>
-      <ValidationRequestsDocumentsCenter>Centre des Documents en attente de validation</ValidationRequestsDocumentsCenter>
+      <ValidationRequestsDocumentsCenter>Centre des Documents en Attente de Validation</ValidationRequestsDocumentsCenter>
       <ManagedSites>Gestion des Sites</ManagedSites>
       <SharedSite>Site Partagé</SharedSite>   
     </title>

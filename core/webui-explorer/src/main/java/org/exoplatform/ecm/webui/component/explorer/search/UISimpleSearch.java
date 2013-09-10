@@ -84,7 +84,7 @@ public class UISimpleSearch extends UIForm {
   public static final String FIRST_OPERATOR = "firstOperator";
   public static final String OR = "or";
   public static final String AND = "and";
-  
+
   private static final Log LOG  = ExoLogger.getLogger(UISimpleSearch.class.getName());
   private List<String> constraints_ = new ArrayList<String>();
   private List<String> virtualConstraints_ = new ArrayList<String>();
@@ -100,8 +100,8 @@ public class UISimpleSearch extends UIForm {
   private static final String XPATH_QUERY      = "/jcr:root$0//*";
 
   private static final String ROOT_SQL_QUERY   = "SELECT * FROM nt:base WHERE jcr:path LIKE '/%' ";
-  
-  private static final String LINK_REQUIREMENT = "AND ( (jcr:primaryType like 'exo:symlink' or " + 
+
+  private static final String LINK_REQUIREMENT = "AND ( (jcr:primaryType like 'exo:symlink' or " +
                                                         "jcr:primaryType like 'exo:taxonomyLink') ";
 
   private static final String SQL_QUERY        = "SELECT * FROM nt:base WHERE jcr:path LIKE '$0/%' ";
@@ -333,8 +333,8 @@ public class UISimpleSearch extends UIForm {
       }
       long startTime = System.currentTimeMillis();
       try {
-        uiSearchResult.setQuery(statement, currentNode.getSession().getWorkspace().getName(), 
-                                queryType.equals(Preference.XPATH_QUERY) ? Query.XPATH : Query.SQL, 
+        uiSearchResult.setQuery(statement, currentNode.getSession().getWorkspace().getName(),
+                                queryType.equals(Preference.XPATH_QUERY) ? Query.XPATH : Query.SQL,
                                 IdentityConstants.SYSTEM.equals(currentNode.getSession().getUserID()), text);
         uiSearchResult.updateGrid();
       } catch (RepositoryException reEx) {
@@ -367,16 +367,16 @@ public class UISimpleSearch extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiSimpleSearch);
     }
   }
-  
+
   static public class AddActionListener extends EventListener<UISimpleSearch> {
     public void execute(Event<UISimpleSearch> event) throws Exception {
       UIConstraintsForm uiForm = event.getSource().getChild(UIConstraintsForm.class);
-      boolean isExactly = uiForm.getUIFormCheckBoxInput(UIConstraintsForm.EXACTLY_PROPERTY).isChecked() ;
-      boolean isContain = uiForm.getUIFormCheckBoxInput(UIConstraintsForm.CONTAIN_PROPERTY).isChecked() ;
-      boolean isNotContain = uiForm.getUIFormCheckBoxInput(UIConstraintsForm.NOT_CONTAIN_PROPERTY).isChecked() ;
-      boolean isDateTime = uiForm.getUIFormCheckBoxInput(UIConstraintsForm.DATE_PROPERTY).isChecked() ;
-      boolean isNodeType = uiForm.getUIFormCheckBoxInput(UIConstraintsForm.NODETYPE_PROPERTY).isChecked() ;
-      boolean isCategory = uiForm.getUIFormCheckBoxInput(UIConstraintsForm.CATEGORY_PROPERTY).isChecked() ;
+      boolean isExactly = uiForm.getUICheckBoxInput(UIConstraintsForm.EXACTLY_PROPERTY).isChecked() ;
+      boolean isContain = uiForm.getUICheckBoxInput(UIConstraintsForm.CONTAIN_PROPERTY).isChecked() ;
+      boolean isNotContain = uiForm.getUICheckBoxInput(UIConstraintsForm.NOT_CONTAIN_PROPERTY).isChecked() ;
+      boolean isDateTime = uiForm.getUICheckBoxInput(UIConstraintsForm.DATE_PROPERTY).isChecked() ;
+      boolean isNodeType = uiForm.getUICheckBoxInput(UIConstraintsForm.NODETYPE_PROPERTY).isChecked() ;
+      boolean isCategory = uiForm.getUICheckBoxInput(UIConstraintsForm.CATEGORY_PROPERTY).isChecked() ;
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
       if (!isExactly && !isContain && !isNotContain && !isDateTime && !isNodeType && !isCategory) {
         uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.must-choose-one",

@@ -45,13 +45,13 @@ import org.exoplatform.webui.event.EventListener;
  * 11:57:24 AM
  */
 @ComponentConfig(
-    template = "app:/groovy/webui/component/admin/metadata/UIMetadataList.gtmpl",
-    events = {
-      @EventConfig(listeners = UIMetadataList.ViewActionListener.class),
-      @EventConfig(listeners = UIMetadataList.EditActionListener.class),
-      @EventConfig(listeners = UIMetadataList.DeleteActionListener.class, confirm="UIMetadataList.msg.confirm-delete")
-    }
-)
+                 template = "app:/groovy/webui/component/admin/metadata/UIMetadataList.gtmpl",
+                 events = {
+                     @EventConfig(listeners = UIMetadataList.ViewActionListener.class),
+                     @EventConfig(listeners = UIMetadataList.EditActionListener.class),
+                     @EventConfig(listeners = UIMetadataList.DeleteActionListener.class, confirm="UIMetadataList.msg.confirm-delete")
+                 }
+    )
 public class UIMetadataList extends UIPagingGridDecorator {
 
   final static public String INTERNAL_USE = "exo:internalUse" ;
@@ -62,7 +62,7 @@ public class UIMetadataList extends UIPagingGridDecorator {
 
   public void refresh(int currentPage) throws Exception {
     ListAccess<Metadata> metaDataList = new ListAccessImpl<Metadata>(Metadata.class,
-                                                                     getAllMetadatas());
+        getAllMetadatas());
     LazyPageList<Metadata> pageList = new LazyPageList<Metadata>(metaDataList, getUIPageIterator().getItemsPerPage());
     getUIPageIterator().setPageList(pageList);
     if (currentPage > getUIPageIterator().getAvailablePage())
@@ -133,7 +133,7 @@ public class UIMetadataList extends UIPagingGridDecorator {
       try {
         metadataService.removeMetadata(metadataName);
       } catch(PathNotFoundException ex) {
-      	uiApp.addMessage(new ApplicationMessage("UIMetadataList.msg.path-not-found-exception", null, ApplicationMessage.WARNING));
+        uiApp.addMessage(new ApplicationMessage("UIMetadataList.msg.path-not-found-exception", null, ApplicationMessage.WARNING));
         return;
       }
       uiMetaList.refresh(uiMetaList.getUIPageIterator().getCurrentPage());
@@ -158,7 +158,7 @@ public class UIMetadataList extends UIPagingGridDecorator {
 
     public boolean hasTemplate() { return hasTemplate ; }
     public void isTemplate(boolean isTemplate) { hasTemplate = isTemplate ; }
-    
+
     public String getLabel() { return label; }
     public void setLabel(String label) { this.label = label; }
   }

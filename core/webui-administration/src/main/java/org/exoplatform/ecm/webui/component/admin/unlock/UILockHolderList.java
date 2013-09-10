@@ -16,12 +16,15 @@
  */
 package org.exoplatform.ecm.webui.component.admin.unlock;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.core.UIPagingGridDecorator;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.services.cms.lock.LockService;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -80,16 +83,30 @@ public class UILockHolderList extends UIPagingGridDecorator {
     public void execute(Event<UILockHolderList> event) throws Exception {
       UILockHolderList uiLockHolderList = event.getSource();
       UILockHolderContainer uiLockHolderContainer = uiLockHolderList.getAncestorOfType(UILockHolderContainer.class);
-      String settingLock = event.getRequestContext().getRequestParameter(OBJECTID);
+      String removedLockSetting = event.getRequestContext().getRequestParameter(OBJECTID);
       LockService lockService = uiLockHolderContainer.getApplicationComponent(LockService.class);
-      if (!lockService.getPreSettingLockList().contains(settingLock)) {
-        lockService.removeGroupsOrUsersForLock(settingLock);
+      if (!lockService.getPreSettingLockList().contains(removedLockSetting)) {
+        lockService.removeGroupsOrUsersForLock(removedLockSetting);
+
+        // Update lock cache
+        List<String> ignoredList = new ArrayList<String>();
+        if (removedLockSetting.startsWith("*")) {
+          String groupOfRemovedLockSetting = StringUtils.substringAfter(removedLockSetting, ":");
+          List<String> allLockSettings = lockService.getAllGroupsOrUsersForLock();
+          for (String lockSetting : allLockSettings) {
+            if (groupOfRemovedLockSetting.equals(StringUtils.substringAfter(lockSetting, ":"))) {
+              ignoredList.add(lockSetting);
+            }
+          }
+        }
+        LockUtil.removeLockCache(removedLockSetting, ignoredList);
+
       } else {
-        Object[] args = {settingLock};
+        Object[] args = {removedLockSetting};
         UIApplication uiApp = uiLockHolderList.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(new ApplicationMessage("UILockHolderList.msg.can-not-delete-lock-holder", args,
             ApplicationMessage.WARNING));
-        
+
         event.getRequestContext().addUIComponentToUpdateByAjax(uiLockHolderContainer.getParent());
       }
       UILockHolderList uiHolderList = uiLockHolderContainer.getChild(UILockHolderList.class);

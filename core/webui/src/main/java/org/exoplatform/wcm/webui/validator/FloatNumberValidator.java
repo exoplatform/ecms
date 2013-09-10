@@ -50,7 +50,8 @@ public class FloatNumberValidator implements Validator{
       Float.parseFloat(s);
     } catch (NumberFormatException ex) {
       Object[] args = {label};
-      throw new MessageException(new ApplicationMessage("FloatNumberValidator.msg.Invalid-number", args, ApplicationMessage.WARNING));
+      throw new MessageException(new ApplicationMessage("FloatNumberValidator.msg.Invalid-number", args, 
+                                                        ApplicationMessage.WARNING));
     }
   }
 }

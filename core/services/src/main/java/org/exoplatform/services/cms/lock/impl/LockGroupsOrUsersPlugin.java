@@ -43,7 +43,7 @@ public class LockGroupsOrUsersPlugin extends BaseComponentPlugin {
    * Init tag permission in repository.
    */
   @SuppressWarnings("unchecked")
-  public List<String> initGroupsOrUsers() throws Exception {
+  public List<String> initGroupsOrUsers() {
     Iterator<ObjectParameter> it = params_.getObjectParamIterator();
     LockGroupsOrUsersConfig lockGroupsOrUsersConfig;
     while(it.hasNext()) {
@@ -52,5 +52,4 @@ public class LockGroupsOrUsersPlugin extends BaseComponentPlugin {
     }
     return new ArrayList<String>();
   }
-
 }

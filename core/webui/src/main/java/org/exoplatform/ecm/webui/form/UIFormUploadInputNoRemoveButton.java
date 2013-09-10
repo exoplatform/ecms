@@ -22,30 +22,19 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          exo@exoplatform.com
- * Nov 21, 2011  
+ * Nov 21, 2011
  */
 @ComponentConfig(type = UIFormUploadInputNoRemoveButton.class,
                  template = "classpath:groovy/ecm/webui/form/UIFormUploadInputNoRemoveButton.gtmpl")
 public class UIFormUploadInputNoRemoveButton extends UIFormUploadInputExtension {
-  
+
   public UIFormUploadInputNoRemoveButton(String name, String bindingExpression) {
     super(name, bindingExpression);
     setComponentConfig(UIFormUploadInputNoRemoveButton.class, null);
   }
-  
+
   public UIFormUploadInputNoRemoveButton(String name, String bindingExpression, int limit) {
     super (name, bindingExpression, limit);
-    setComponentConfig(UIFormUploadInputNoRemoveButton.class, null);    
+    setComponentConfig(UIFormUploadInputNoRemoveButton.class, null);
   }
-  
-  public UIFormUploadInputNoRemoveButton(String name, String bindingExpression, boolean isAutoUpload) {
-    super (name, bindingExpression, isAutoUpload);
-    setComponentConfig(UIFormUploadInputNoRemoveButton.class, null);    
-  }
-  
-  public UIFormUploadInputNoRemoveButton(String name, String bindingExpression, int limit, boolean isAutoUpload) {
-    super(name, bindingExpression, limit, isAutoUpload);
-    setComponentConfig(UIFormUploadInputNoRemoveButton.class, null);    
-  }
-  
 }

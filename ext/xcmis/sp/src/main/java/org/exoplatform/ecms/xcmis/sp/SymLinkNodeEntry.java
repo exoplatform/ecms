@@ -17,11 +17,6 @@
 
 package org.exoplatform.ecms.xcmis.sp;
 
-import org.exoplatform.services.jcr.core.ExtendedNode;
-import org.xcmis.spi.CmisRuntimeException;
-import org.xcmis.spi.ObjectNotFoundException;
-import org.xcmis.spi.StorageException;
-
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,7 +24,11 @@ import java.util.Set;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
-import javax.jcr.Workspace;
+
+import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.xcmis.spi.CmisRuntimeException;
+import org.xcmis.spi.ObjectNotFoundException;
+import org.xcmis.spi.StorageException;
 
 /**
  * @author <a href="mailto:andrew00x@gmail.com">Andrey Parfonov</a>

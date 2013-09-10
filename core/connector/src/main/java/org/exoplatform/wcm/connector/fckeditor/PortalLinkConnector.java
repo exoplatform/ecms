@@ -197,7 +197,6 @@ public class PortalLinkConnector implements ResourceContainer {
    *
    * @throws Exception the exception
    */
-  @SuppressWarnings("unchecked")
   private Document buildPortalXMLResponse(String currentFolder, String command, String userId) throws Exception {
     Element rootElement = initRootElement(command, currentFolder);
     PortalContainer container = PortalContainer.getInstance();

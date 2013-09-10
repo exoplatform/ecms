@@ -34,7 +34,7 @@ import org.exoplatform.webui.event.EventListener;
  * 2:09:18 PM
  */
 @ComponentConfigs( {
-	@ComponentConfig(lifecycle = UIContainerLifecycle.class)	
+  @ComponentConfig(lifecycle = UIContainerLifecycle.class)	
 })
 
 public class UITemplateContainer extends UIContainer {
@@ -54,10 +54,10 @@ public class UITemplateContainer extends UIContainer {
   }
 
   public void update() throws Exception {
-  	UITemplateList uiTemplateList = getChild(UITemplateList.class);
-  	uiTemplateList.refresh(uiTemplateList.getUIPageIterator().getCurrentPage());
+    UITemplateList uiTemplateList = getChild(UITemplateList.class);
+    uiTemplateList.refresh(uiTemplateList.getUIPageIterator().getCurrentPage());
   }  
-  
+
   public void initPopupPermission(String id, String membership) throws Exception {  	
     String popupId = id.concat(UITemplateContent.TEMPLATE_PERMISSION);
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, popupId);
@@ -83,11 +83,11 @@ public class UITemplateContainer extends UIContainer {
   }
   public static class CloseActionListener extends EventListener<UIPopupWindow> {
     public void execute(Event<UIPopupWindow> event) throws Exception {
-  	  UITemplatesManager uiManager = event.getSource().getAncestorOfType(UITemplatesManager.class) ;
-  	  UITemplateContainer uiTemplateContainer = uiManager.getChildById(uiManager.getSelectedTabId());
-  	  UIPopupWindow uiPopupWindow = uiTemplateContainer.getChild(UIPopupWindow.class) ;
-  	  uiPopupWindow.setRendered(false) ;
-  	  event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
-  	}
+      UITemplatesManager uiManager = event.getSource().getAncestorOfType(UITemplatesManager.class) ;
+      UITemplateContainer uiTemplateContainer = uiManager.getChildById(uiManager.getSelectedTabId());
+      UIPopupWindow uiPopupWindow = uiTemplateContainer.getChild(UIPopupWindow.class) ;
+      uiPopupWindow.setRendered(false) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
+    }
   }
 }

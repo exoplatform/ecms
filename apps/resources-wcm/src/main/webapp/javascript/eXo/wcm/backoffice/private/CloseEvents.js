@@ -1,5 +1,11 @@
 (function(gj, uiForm) {	
 	/**
+	* Variable to check if Content Selector is opened in IE
+	* - true if Content Selector is opened
+	**/
+	window.popup_opened = false;
+
+	/**
 	 * Variable to check if some content has changed
 	 * - true if some content has changed
 	 **/
@@ -95,6 +101,17 @@
 	  }
 	 } catch(e) {}
 	  form.elements['formOp'].value = action ;
+	  
+
+	 if (navigator.appName == 'Microsoft Internet Explorer')
+	 {
+	   if ((action.toLowerCase() == "save" || action.toLowerCase() == "saveandclose" || action.toLowerCase() == "close") && window.popup_opened == true) {
+	     window.onbeforeunload = null;
+	     useAjax=false;
+	     window.popup_opened = false;
+	   }
+	  }
+
 	  if(useAjax) {
 	    b_changed = false;
 	    this.ajaxPost(form, callback) ;
@@ -149,7 +166,16 @@
 		form.action =  form.originalAction +  encodeURI(params) ;
 	  b_changed = false;
 	  this.ajaxPost(form) ;
-	} ;
+	  
+	  if (navigator.appName == 'Microsoft Internet Explorer')
+	  {
+	    if (action.toLowerCase() == "changetab" && window.popup_opened == true) {
+	      window.popup_opened = false;
+	      form.submit();
+	    }
+	  }
+	  
+	};
 	
 	/**
 	 * Before we change the url, we check if the content has changed

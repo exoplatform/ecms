@@ -21,11 +21,13 @@ public class CanAddSymlinkFilter implements UIExtensionFilter {
     UIJCRExplorer uiExplorer = (UIJCRExplorer) context.get(UIJCRExplorer.class.getName());
     if(uiExplorer == null) return true;    
     Node currentNode = uiExplorer.getCurrentNode();
-    if (currentNode.getPrimaryNodeType().canAddChildNode(String.valueOf(System.currentTimeMillis()), Utils.EXO_SYMLINK)) return true;
+    if (currentNode.getPrimaryNodeType().canAddChildNode(String.valueOf(System.currentTimeMillis()), Utils.EXO_SYMLINK)) {
+      return true;
+    }
     NodeType[] declaredSuperTypes = currentNode.getPrimaryNodeType().getSupertypes();
     for (NodeType nodeType : declaredSuperTypes) {
       if(nodeType.canAddChildNode(String.valueOf(System.currentTimeMillis()), Utils.EXO_SYMLINK)) return true;
-    }			
+    }
     NodeType[] declaredSuperTypesOfMixs = currentNode.getMixinNodeTypes();
     for (NodeType mixin : declaredSuperTypesOfMixs) {
       NodeType[] superTypes = mixin.getSupertypes();
@@ -36,11 +38,11 @@ public class CanAddSymlinkFilter implements UIExtensionFilter {
     }
     return false;
   }
-	
+
   public UIExtensionFilterType getType() {
     return UIExtensionFilterType.MANDATORY;
   }
-	 
+
   public void onDeny(Map<String, Object> context) throws Exception {
   }
 }

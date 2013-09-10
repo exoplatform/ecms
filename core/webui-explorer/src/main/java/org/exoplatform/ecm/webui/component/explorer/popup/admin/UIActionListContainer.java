@@ -23,7 +23,7 @@ import javax.jcr.lock.Lock;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.control.action.EditDocumentActionComponent;
-import org.exoplatform.ecm.webui.utils.LockUtil;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.lock.LockService;
 import org.exoplatform.services.organization.MembershipType;

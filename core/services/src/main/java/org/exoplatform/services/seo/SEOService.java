@@ -65,7 +65,8 @@ public interface SEOService {
    * @param language The language of the page.
    * @throws Exception The exception
    */
-  public void removePageMetadata(PageMetadataModel metaModel, String portalName, boolean onContent, String language) throws Exception;
+  public void removePageMetadata(PageMetadataModel metaModel, String portalName, boolean onContent, String language) 
+      throws Exception;
 
   /**
    * Return the content node by the content path.

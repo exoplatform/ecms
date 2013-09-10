@@ -83,7 +83,7 @@ public class UIViewList extends UIPagingGrid {
   }
 
   private String getBaseVersion(String name) throws Exception {
-    Node node = 
+    Node node =
       getApplicationComponent(ManageViewService.class).getViewByName(name, WCMCoreUtils.getSystemSessionProvider());
     if(node == null) return null ;
     if(!node.isNodeType(Utils.MIX_VERSIONABLE) || node.isNodeType(Utils.NT_FROZEN)) return "";
@@ -176,9 +176,9 @@ public class UIViewList extends UIPagingGrid {
       String viewName = event.getRequestContext().getRequestParameter(OBJECTID)  ;
       ManageDriveService manageDrive = viewList.getApplicationComponent(ManageDriveService.class);
       ManageViewService manageViewService = viewList.getApplicationComponent(ManageViewService.class);
-      
+
       if(!viewList.canDelete(manageDrive.getAllDrives(), viewName)) {
-        
+
         // Get view display name
         ResourceBundle res = RequestContext.getCurrentInstance().getApplicationResourceBundle();
         String viewDisplayName = null;
@@ -187,7 +187,7 @@ public class UIViewList extends UIPagingGrid {
         } catch (MissingResourceException e) {
           viewDisplayName = viewName;
         }
-        
+
         // Dis play error message
         UIApplication app = viewList.getAncestorOfType(UIApplication.class);
         Object[] args = {viewDisplayName};
@@ -195,7 +195,7 @@ public class UIViewList extends UIPagingGrid {
         event.getRequestContext().addUIComponentToUpdateByAjax(viewList.getParent());
         return;
       }
-      
+
       manageViewService.removeView(viewName);
       viewList.refresh(viewList.getUIPageIterator().getCurrentPage());
       event.getRequestContext().addUIComponentToUpdateByAjax(viewList.getParent());
@@ -313,7 +313,7 @@ public class UIViewList extends UIPagingGrid {
 
     public String getTabList() { return tabList; }
     public void setTabList(String ls) { tabList = ls; }
-    
+
     public String getId() { return id; }
   }
   

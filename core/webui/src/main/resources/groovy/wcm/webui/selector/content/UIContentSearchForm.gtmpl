@@ -14,7 +14,7 @@
 
 <div class="uiContentSearchForm">
   <%uiform.begin();%>
-	<div class="form-horizontal resizable">
+	<div class="form-horizontal resizable" style="height: 400px;" >
     <div class="control-group">
 			<div class="control-label" for="<%=uicomponent.LOCATION%>">
 				<%= _ctx.appRes("UIContentSearchForm.title.Location")%>:

@@ -65,6 +65,9 @@
             if (data instanceof NodeLinkAware) {
               data = ((NodeLinkAware)data).getRealNode();
             }
+            if (data == null) {
+              continue;
+            }
             def idChild = uicomponent.getID(data);
             def childComponent = uicomponent.getChildById(idChild);
             if (childComponent == null) {
@@ -98,6 +101,11 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
     data.getSession().getItem(data.getPath());
   } catch(PathNotFoundException pne) {
     return;
+  }
+  if (data instanceof NodeLinkAware) {
+    if (((NodeLinkAware)data).getRealNode() == null) {
+      return;
+    }
   }
   i++;
   def isPreferenceNode = uiDocumentInfo.isPreferenceNode(data) ;
@@ -186,34 +194,16 @@ public void writeNodes(level, i, data, uiWorkingArea, linkManager, restContextNa
   
   strActs += "</ul>";
   strActs += "</li>";
-  def rightClickMenu = "" ;
   Boolean isLocked = false;
   String lockedLabel = "";
-  String isFavourite = "false";
-  String isInTrash = "false";
-  String isMediaType = "false";
-  String isTrashHome = "false";
   String hiddenStyle = (data.isNodeType("exo:hiddenable"))?"color: #A0A0A0;":"";
   if (data.isLocked()) {
     isLocked = true;
     lockedLabel  = "("+_ctx.appRes("UIDocumentWorkspace.tooltip.LockedBy")+" "+data.getLock().getLockOwner()+")";
   }
-  if (uiDocumentInfo.isFavouriter(data)) isFavourite = "true";
-  if (data.isNodeType("exo:restoreLocation")) isInTrash = "true";
-  if (uiDocumentInfo.isMediaType(data)) isMediaType = "true";
-  if (Utils.isTrashHomeNode(data)) isTrashHome = "true"
-//  if (!uiDocumentInfo.isSystemWorkspace()) rightClickMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(nodePath), uiWorkingArea.getActionsExtensionList(data)) ;            
-  if (!uiDocumentInfo.isSystemWorkspace()) 
-    rightClickMenu = "onmousedown=\"eXo.ecm.UIFileView.clickRightMouse(event, this, 'ECMContextMenu','" + preferenceWS + ":" + Utils.formatNodeName(nodePath) + "','" + uiWorkingArea.getActionsExtensionList(data) + "');\"";
 %>
   <div class="rowView fileViewRowView Normal clearfix"  
-			 <%= uiDocumentInfo.getDragAndDropEvents(data) %> 
-       <%=rightClickMenu%>
-       trashHome="$isTrashHome" locked="$isLocked" 
-       mediaType="$isMediaType" removeFavourite="$isFavourite" 
-       inTrash="$isInTrash" workspacename="$preferenceWS" 
-       objectId="<%=org.exoplatform.services.cms.impl.Utils.getObjectId(nodePath)%>"
-       isFile="<%=data.isNodeType("nt:file")%>"
+       <%=uiDocumentInfo.getNodeAttribute(data)%>
        style="padding-left:<%=uicomponent.getPadding()*40%>px">
     $strActs
     <% def folderIcon = "noArrow";

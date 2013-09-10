@@ -16,7 +16,6 @@
  */
 package org.exoplatform.ecm.webui.component.admin.folksonomy;
 
-import org.apache.poi.ss.formula.functions.T;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.ext.manager.UIAbstractManager;
 

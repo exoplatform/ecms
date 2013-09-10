@@ -45,7 +45,7 @@ public class TagsUpgradePlugin extends UpgradeProductPlugin {
   private NewFolksonomyService folksonomyService_;
   private NodeHierarchyCreator nodeCreator_;
   private LinkManager linkManager_;
-  private Log log = ExoLogger.getLogger(this.getClass());
+  private static final Log log = ExoLogger.getLogger(TagsUpgradePlugin.class.getName());
 
   public TagsUpgradePlugin(NewFolksonomyService folksonomyService,
                             NodeHierarchyCreator nodeCreator,
@@ -76,7 +76,9 @@ public class TagsUpgradePlugin extends UpgradeProductPlugin {
         Node oldTag = oldTagIter.nextNode();
         try {
           String tagName = oldTag.getName();
-          System.out.println("Migrating tag '" + tagName + "'...");
+          if (log.isInfoEnabled()) {
+            log.info("Migrating tag '" + tagName + "'...");
+          }
           //move old to temp folder
           session.move(oldTag.getPath(), tempFolder.getPath() + '/' + tagName);
           session.save();

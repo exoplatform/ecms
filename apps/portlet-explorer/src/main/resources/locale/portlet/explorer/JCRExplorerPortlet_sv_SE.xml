@@ -1,0 +1,3146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.UICommentForm             #
+  #############################################################################
+  -->
+  <UICommentForm>
+    <label>
+      <name>Namn</name>
+      <email>E-post</email>
+      <website>Webbplats</website>
+      <comment>Kommentar</comment>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <not-support>Du kan inte kommentera denna dokumenttyp.</not-support>
+      <not-checkedout>Du måste checka ut noden innan du kan kommentera.</not-checkedout>
+      <content-null>Du kan inte lägga in en tom kommentar.</content-null>
+    </msg>
+  </UICommentForm>
+  <!--
+  #############################################################
+  # org.exoplatform.ecm.webui.component.UIVoteForm.gtmpl    #
+  #############################################################
+  -->
+  <UIVoteForm>
+    <title>
+      <normal>Dålig</normal>
+      <good>Under genomsnittet</good>
+      <verygood>Genomsnittlig</verygood>
+      <excellent>Över genomsnittet</excellent>
+      <best>Bra</best>
+      <no-value>inget värde ännu</no-value>
+    </title>
+    <label>
+      <my-rating>Mitt betyg:</my-rating>
+    </label>
+    <button>
+      <label>
+        <confirm>OK</confirm>
+      </label>
+    </button>
+    <msg>
+      <not-support>Du kan inte rösta på denna dokumenttyp.</not-support>
+      <not-checkedout>Du måste checka ut noden innan röstningen.</not-checkedout>
+      <vote-restriction>Du kan inte rösta mer än en gång.</vote-restriction>
+    </msg>
+  </UIVoteForm>
+ 
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer    #
+  #############################################################################
+  -->
+  <UIJCRExplorer>
+    <msg>
+      <refresh-session-success>Sessionen uppdaterades framgångsrikt.</refresh-session-success>
+      <no-node-history>Du är i rotnoden.</no-node-history>
+      <save-session-success>Alla ändringar har sparats.</save-session-success>
+      <target-path-not-found>Du kan inte komma åt noden, antingen eftersom det inte existerar längre eller eftersom du inte har rätt att komma åt den.</target-path-not-found>
+    </msg>
+  </UIJCRExplorer>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UISideBar        #
+  #############################################################################
+  -->
+  <UISideBar>
+    <label>
+      <Relation>Relation</Relation>
+      <Explorer>File Explorer</Explorer>
+      <Close>Stäng Sidopanelen</Close>
+      <TagExplorer>Taggmoln</TagExplorer>
+      <Clipboard>Urklipp</Clipboard>
+      <SavedSearches>Sparade sökningar</SavedSearches>
+    </label>
+    <title>
+      <Control>Kontroll Sidopanel</Control>
+      <Close>Stäng Sidopanelen</Close>
+    </title>
+  </UISideBar>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIExplorerActionBar #
+  ################################################################################
+  -->
+  <UIViewBar>
+    <label>
+      <driveWorkspace>Enheten arbetsyta:</driveWorkspace>
+      <backToJCR>Tillbaka till JCR Huvud enheten</backToJCR>
+      <setUpBrowser>Ställa in din webläsare</setUpBrowser>
+      <refesh>Uppdatera</refesh>
+      <currentDrive>Aktuell enhet</currentDrive>
+      <selectView>Välj Visa</selectView>
+      <showSideBar>Visa sidofält</showSideBar>
+      <more>Mer</more>
+      <backTo>Tillbaka</backTo>
+    </label>
+  </UIViewBar>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UITreeExplorer    #
+  #############################################################################
+  -->
+  <UITreeExplorer>
+    <title>Utforskaren</title>
+    <label>
+      <Root>rot</Root>
+      <webDavView>Hämta och tillåt utgåvan</webDavView>
+    </label>
+    <msg>
+      <path-not-found>Detta element har tagits bort eller ändrats. Klicka på knappen Uppdatera.</path-not-found>
+    </msg>
+  </UITreeExplorer>
+  <!--
+  ##################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIViewRelationList    #
+  ##################################################################################
+  -->
+  <UIViewRelationList>
+    <label>
+      <languages-list>Översättningar</languages-list>
+      <relation-list>Relations</relation-list>
+      <references-list>Referenser</references-list>
+      <no-related-document>Inga relaterade dokument</no-related-document>
+      <related-document>Relaterade dokument</related-document>
+    </label>
+  </UIViewRelationList>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.control.UIPreferencesForm  #
+  #########################################################################################
+  -->
+  <UIPreferencesForm>
+    <title>Ställa in din webläsare</title>
+    <label>
+      <enableStructure>Aktivera DMS struktur:</enableStructure>
+      <showSideBar>Visa sidofält:</showSideBar>
+      <showHiddenNode>Visa dolda noder:</showHiddenNode>
+      <showNonDocument>Visa icke-dokument noder:</showNonDocument>
+      <showRefDocuments>Visa dokument:</showRefDocuments>
+      <enableDragAndDrop>Aktivera dra &amp; släpp:</enableDragAndDrop>
+      <sortBy>Sortera efter:</sortBy>
+      <order>Ordna efter:</order>
+      <nodesPerPage>Noder Per sida:</nodesPerPage>
+    </label>
+    <action>
+      <Back>#{word.close}</Back>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIPreferencesForm>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.control.UIPreferencesForm  #
+  #########################################################################################
+  -->
+  <UIAllItemsPreferenceForm>
+    <title>Ställa in Filter</title>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+    </action>
+  </UIAllItemsPreferenceForm>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIRenameForm  #
+  #########################################################################################
+  -->
+  <UIRenameForm>
+    <title>Ändra Namn</title>
+    <label>
+      <nameField>Namn</nameField>
+      <titleField>Titel</titleField>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+    </action>
+    <msg>
+      <rename-successfull>Noden {0} ändrades till {1} .</rename-successfull>
+      <rename-denied>Åtkomst nekad. Du kan inte byta namn på den här noden.</rename-denied>
+      <fileName-invalid>Det nya namnet innehåller ogiltiga tecken.</fileName-invalid>
+      <newName-same-oldName>Det nya namnet finns redan. Kontrollera igen.</newName-same-oldName>
+      <version-exception>Denna nod (eller överordnad nod) har inte checkats ut.</version-exception>
+      <lock-exception>Den här noden är låst. Lås upp den innan du byter namn.</lock-exception>
+      <constraintViolation-exception>Ett fel uppstod när du byter namn på noden {0}. Kontrollera igen.</constraintViolation-exception>
+      <unknown-prefix>Prefixet {0} har inte registrerats ännu.</unknown-prefix>
+      <rename-error>Ett fel uppstod när du byter namn på den här noden. Kontrollera igen.</rename-error>
+    </msg>
+  </UIRenameForm>
+  <UIPopupWindow>
+    <title>
+      <UIRenameForm>Ändra Namn</UIRenameForm>
+      <UIActionContainer>Redigera åtgärd</UIActionContainer>
+      <UIFolderForm>Ny mapp</UIFolderForm>
+      <UIUploadManager>Ladda upp fil</UIUploadManager>
+      <UIReferencesList>Referenslistan</UIReferencesList>
+      <UIExportNode>Exportera</UIExportNode>
+      <UINodeTypeInfo>Information om nod</UINodeTypeInfo>
+      <UIVersionInfo>Versionsinfo</UIVersionInfo>
+      <UIActivateVersion>Aktivera Version</UIActivateVersion>
+      <UIAuditingInfo>Granska information</UIAuditingInfo>
+      <UIActivateAuditing>Aktivera granskning</UIActivateAuditing>
+      <UIPermissionManager>Hantering av behörighet</UIPermissionManager>
+      <UIPropertiesManager>Hantering av egenskaper</UIPropertiesManager>
+      <UIECMSearch>Avancerad sökning</UIECMSearch>
+      <UISavedQuery>Sparad frågelista</UISavedQuery>
+      <UIWatchDocumentForm>Titta på dokument</UIWatchDocumentForm>
+      <UIActionManager>Hantera åtgärder</UIActionManager>
+      <UIDocumentForm>Redigera dokument</UIDocumentForm>
+      <UIDocumentFormController>Lägg till nytt dokument</UIDocumentFormController>
+      <EditFormController>Redigera dokument</EditFormController>
+      <UIRelationManager>Lägg till Relation</UIRelationManager>
+      <UICategoryManager>Lägg till kategori</UICategoryManager>
+      <UIImportNode>Import</UIImportNode>
+      <UIViewMetadataManager>Visa Metadata</UIViewMetadataManager>
+      <UIVoteForm>Omröstning dokument</UIVoteForm>
+      <UICommentForm>Kommentar</UICommentForm>
+      <UIPreferencesForm>Inställningar</UIPreferencesForm>
+      <UIPublicationManager>Hantera publikation</UIPublicationManager>
+      <UIConfirmMessage>Ta bort?</UIConfirmMessage>
+      <UIDeleteFileConfirmMessage>Ta bort fil ?</UIDeleteFileConfirmMessage>
+      <UIDeleteFolderConfirmMessage>Ta bort mappen?</UIDeleteFolderConfirmMessage>
+      <UIDeleteItemsConfirmMessage>Ta bort objekt?</UIDeleteItemsConfirmMessage>
+      <UIRestoreConfirmMessage>Bekräfta återställning</UIRestoreConfirmMessage>
+      <UIActivePublication>Registrera till publikation livscykel</UIActivePublication>
+      <UITaggingForm>Tag dokument</UITaggingForm>
+      <UIThumbnailForm>Lägga till miniatyrbild</UIThumbnailForm>
+      <UIAllItemsPreferenceForm>Inställningar</UIAllItemsPreferenceForm>
+      <UISelectRestorePath>Välj Återställ sökväg</UISelectRestorePath>
+      <UISEOForm>Hantera SEO</UISEOForm>
+      <UISEOToolbarForm>Hantera SEO</UISEOToolbarForm>
+    </title>
+    <header>
+      <workspace>Arbetsyta</workspace>
+      <path>Sökväg</path>
+    </header>
+  </UIPopupWindow>
+  <!--
+  #########################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIResourceForm #
+  #########################################################################################
+  -->
+  <UIResourceForm>
+    <title>Redigera filens innehåll</title>
+    <label>
+      <name>Namn</name>
+      <textToModify>Text att ändra</textToModify>
+      <fileToUpload>Ladda upp nytt innehåll för dokumentet (måste vara samma mime-typ)</fileToUpload>
+    </label>
+  </UIResourceForm>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIActionBar      #
+  ###################################################################################
+  -->
+  <UIActionBar>
+    <tooltip>
+      <AddFolder>Ny mapp</AddFolder>
+      <AddDocument>Nytt innehåll</AddDocument>
+      <EditDocument>Redigera</EditDocument>
+      <Upload>Ladda upp</Upload>
+      <Paste>Klistra in</Paste>
+      <Search>Sök</Search>
+      <WatchDocument>Titta/Titta inte</WatchDocument>
+      <TaggingDocument>Tag</TaggingDocument>
+      <Vote>Rösta</Vote>
+      <Comment>Kommentar</Comment>
+      <ManageVersions>Versioner</ManageVersions>
+      <ManageAuditing>Revision</ManageAuditing>
+      <ManagePublications>Publikationer</ManagePublications>
+      <ManageCategories>Kategorier</ManageCategories>
+      <ManageRelations>Relations</ManageRelations>
+      <ManageActions>Åtgärder</ManageActions>
+      <ExportNode>Exportera</ExportNode>
+      <ImportNode>Importera</ImportNode>
+      <OverloadThumbnail>Lägg till miniatyrbild</OverloadThumbnail>
+      <ManageHidden>Visa/Dölj innehåll</ManageHidden>
+      <ViewReferences>Referenser</ViewReferences>
+      <ViewNodeType>Typer</ViewNodeType>
+      <ViewPermissions>Behörighet</ViewPermissions>
+      <ViewProperties>Egenskaper</ViewProperties>
+      <ViewMetadatas>Metadata</ViewMetadatas>
+      <ViewRelations>Show/Hide Relations</ViewRelations>
+      <ShowJCRStructure>Visa/Dölj innehålls struktur</ShowJCRStructure>
+    </tooltip>
+    <msg>
+      <cannot-action-in-rootnode>Du kan inte utföra den här åtgärden i rotnoden.</cannot-action-in-rootnode>
+      <node-checkedin>Du måste checka ut först.</node-checkedin>
+      <cannot-enable-version-rootnode>Kan inte aktivera versionshantering för rotnoden.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Kan inte aktivera publicering för rotnoden.</cannot-enable-publication-rootnode>
+      <manage-publication>
+        <not-supported-nodetype>Publikationen stöder endast dokumentnoden.</not-supported-nodetype>
+        <no-publication-lifecycle>Ingen publikations livscykel är konfigurerad.</no-publication-lifecycle>
+      </manage-publication>
+      <unsubcriber-lifecycle>Prenumeration på noden var redan avslutad.</unsubcriber-lifecycle>
+      <not-supported-nodetype>Avsluta prenumeration på lifecycle stödjes endast på dokumentnoden.</not-supported-nodetype>
+      <unsubcriber-lifecycle-finish>Noden avslutar prenumerationen.</unsubcriber-lifecycle-finish>
+      <access-false>Noden är inte en artikel eller incheckad.</access-false>
+      <unsupported-action>Denna åtgärd stöds inte.</unsupported-action>
+      <not-relationable>Den här noden har ännu inte haft några relaterade länkar till en annan nod.</not-relationable>
+      <node-pasted>Nod {0} har klistrats in på plats {1}. Den här åtgärden har redan sparats.</node-pasted>
+      <no-node-selected>Ingen nod kopierades.</no-node-selected>
+      <unable-edit>Noden {0} med nodtype {1} stöds inte för redigering.</unable-edit>
+      <not-support>Kan inte redigera den markerade noden.</not-support>
+      <template-null>För den här noden finns ingen dialogruta.</template-null>
+      <keyword-null>Det finns inga nyckelord att söka.</keyword-null>
+      <not-found>Inga resultat hittades.</not-found>
+      <keyword-not-allow>Nyckelordet är inte tillåtet.</keyword-not-allow>
+      <is-not-referenable>Noden {0} kan inte vara referensbar.</is-not-referenable>
+      <access-denied>Åtkomst nekad. Du har inte behörighet att redigera den här noden.</access-denied>
+      <access-add-denied>Åtkomst nekad. Du har inte behörigheten lägga till i den här noden.</access-add-denied>
+      <item-existed>Denna nod finns redan. Det kan inte ha samma namn som sitt syskon.</item-existed>
+      <removed-hidden-mixin>Dolda mixin är borttagna.</removed-hidden-mixin>
+      <added-hidden-mixin>Du har lagt till dolda mixin.</added-hidden-mixin>
+      <not-supported>Denna funktion stöds endast för dokumenttypen.</not-supported>
+      <empty-file-type>Du kan inte lägga till ett dokument till den här noden.</empty-file-type>
+      <unsupported-watch>Endast dokumentnoden kan ses.</unsupported-watch>
+      <watch-checkedin>Du måste check ut noden innan du tittar på den.</watch-checkedin>
+      <unsupported-tagging>Endast dokumentnoden kan taggas.</unsupported-tagging>
+      <tagnode-checkedin>Du måste checka ut noden innan taggning.</tagnode-checkedin>
+    </msg>
+    <title>
+      <select-tab>Välj etikett</select-tab>
+      <SimpleSearch>Snabb sökning</SimpleSearch>
+      <AdvanceSearch>Avancerad sökning</AdvanceSearch>
+      <SavedQueries>Sparade frågor</SavedQueries>
+      <ShowAllOwnedByUser>Visa alla mina objekt</ShowAllOwnedByUser>
+      <ShowAllFavourite>Visa alla favorit objekt</ShowAllFavourite>
+      <ShowAllHidden>Visa alla dolda objekt</ShowAllHidden>
+      <ShowAllFromTrash>Visa alla artiklar från papperskorgen</ShowAllFromTrash>
+    </title>
+  </UIActionBar>
+  <UIPopupMenu>
+    <msg>
+      <has-not-permission>Åtkomst nekad. Du har inte behörigheten Lägg till i den här noden.</has-not-permission>
+      <has-not-edit-permission>Åtkomst nekad. Du har inte  behörigheten redigera i den här noden. Kontakta administratören.</has-not-edit-permission>
+      <cannot-login-node>Du kan inte komma åt och klistra in den här noden.</cannot-login-node>
+      <cannot-paste-nodetype>Du kan inte klistra in den här noden.</cannot-paste-nodetype>
+      <has-not-permission-unlok>Du har inte behörighet att låsa upp den här noden.</has-not-permission-unlok>
+      <bound-exception>Du har inte behörighet att namnändra denna nod. Kontakta administratören.</bound-exception>
+      <bound-move-exception>Du kan inte flytta noden till sig själv eller i till dess undernod</bound-move-exception>
+      <does-not-support-auditing>Du kan inte aktivera granskning på den här noden.</does-not-support-auditing>
+      <can-not-rename-node>Du har inte behörighet att namnändra denna nod. Kontakta administratören för att få rätt rättighet.</can-not-rename-node>
+      <can-not-cut-node>Du har inte behörighet att kapa ur denna nod. Kontakta administratören.</can-not-cut-node>
+      <can-not-remove-node>Du har inte behörighet att ta bort den här noden. Kontakta administratören.</can-not-remove-node>
+      <can-not-lock-node>Du har inte behörighet att låsa noden {0}. Kontakta administratören.</can-not-lock-node>
+      <can-not-unlock-node>Du har inte behörighet att låsa upp den här noden. Kontakta administratören.</can-not-unlock-node>
+      <no-node>Välj minst en nod innan du klistrar in.</no-node>
+      <can-not-paste-node>Du har inte behörighet att flytta till den här noden. Kontakta administratören.</can-not-paste-node>
+      <can-not-move-node>Du har inte behörighet att flytta denna nod. Kontakta administratören.</can-not-move-node>
+      <does-not-support-versioning>Du har inte behörighet att flytta till den här noden. Kontakta administratören.</does-not-support-versioning>
+      <path-not-found>Detta element har tagits bort eller ändrats. Klicka på knappen Uppdatera.</path-not-found>
+      <paste-lock-exception>Du kan inte klistra in '{0}' till den här noden eftersom källan eller målnod är låst eller är relaterade till läst nod.</paste-lock-exception>
+      <can-not-checkin-node>Du kan inte checka in denna nod. Kontrollera att du har rätt behörigheter.</can-not-checkin-node>
+      <can-not-checkout-node>Du kan inte checka ut denna nod. Kontrollera att du har rätt behörigheter.</can-not-checkout-node>
+      <move-constraint-exception>Ett fel uppstod när du flyttar noden.</move-constraint-exception>
+      <not-lock-owner>Du kan inte låsa upp den här noden eftersom du inte är låsägaren.</not-lock-owner>
+      <is-checked-in>Kolla gärna in denna nod innan du byter namn.</is-checked-in>
+      <is-checked-in-lock>Kolla gärna in denna nod innan låsning.</is-checked-in-lock>
+      <cant-lock>Du kan inte låsa den här noden.</cant-lock>
+      <node-locked>Objektet med sökvägen {0} eller övre nivån är låst.</node-locked>
+      <can-not-delete>Stäng denna nod innan du tar bort den.</can-not-delete>
+      <can-not-delete-version>Du kan inte ta bort den här noden. Det är versionshantering.</can-not-delete-version>
+      <not-support>Du kan inte ta bort den markerade noden. Välj en annan nod.</not-support>
+      <current-node-not-allow-paste>Du kan inte klistra in den kopierade nodtypen på den aktuella noden.</current-node-not-allow-paste>
+      <copied-node-in-versioning>Du kan inte klistra in den kopierade noden. Det är versionshantering.</copied-node-in-versioning>
+      <parent-node-locked>Du har inte behörighet att låsa upp noden {0}.</parent-node-locked>
+      <this-node-locked-by-parent>Du kan inte låsa upp den här noden. Den är låst av nodens förälder eller förfader.</this-node-locked-by-parent>
+      <paste-node-same-name>Du kan inte klistra in en nod med samma namn som en nod i målmappen.</paste-node-same-name>
+      <has-not-add-permission>Du har inte behörighet att lägga till en ny nod.</has-not-add-permission>
+      <node-cutting>Noden skärs. Du kan inte klistra in det här.</node-cutting>
+      <access-denied>Åtkomst nekad. Du kanske inte har behörighet i den här noden.</access-denied>
+      <remove-verion-exception>Du kan inte ta bort den här noden eftersom det (eller dess förfader) är incheckad.</remove-verion-exception>
+      <remove-referentialIntegrityException>Du kan inte ta bort den här noden eftersom det för närvarande är målet för en egenskap som referens.</remove-referentialIntegrityException>
+      <constraintviolation-exception>Obligatorisk objekt jcr:uuid hittades inte. Noden kan ha tagits bort eller ändrats. Klicka på knappen Uppdatera.</constraintviolation-exception>
+      <path-not-found-exception>Denna nod har tagits bort eller ändrats. Klicka på knappen Uppdatera.</path-not-found-exception>
+      <not-exist-categories>Kategorin finns inte.</not-exist-categories>
+    </msg>
+  </UIPopupMenu>
+  <!--
+  #############################################################################
+  #     org.exoplatform.ecm.webui.component.explorer.actions.UIFolderForm     #
+  #############################################################################
+  -->
+  <UIFolderForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>Skapa mapp</Save>
+    </action>
+    <label>
+      <titleTextBox>Mappnamn:</titleTextBox>
+      <customTypeCheckBox>Använda en anpassad typ av mapp</customTypeCheckBox>
+    </label>
+    <title>Lägg till/redigera mappen</title>
+    <msg>
+      <addFolder-successful>Mappen {0} har lagts till.</addFolder-successful>
+      <name-invalid>Ange mappens namn.</name-invalid>
+      <title-invalid>Ange mappen titeln.</title-invalid>
+      <name-not-allowed>Detta namn är inte tillåtet.</name-not-allowed>
+      <fileName-error>Filnamnet är ogiltig.</fileName-error>
+      <constraint-violation>Den aktuella noden tillåter inte att lägga till nodtypen {0}.</constraint-violation>
+      <repository-exception>Ett oväntat fel uppstod. Kontakta administratören för mer information.</repository-exception>
+      <repository-exception-permission>Du har inte behörighet att lägga till en ny mapp i den här noden.</repository-exception-permission>
+      <numberformat-exception>Du kan inte spara den här mappen. Namnet som anges måste vara i numeriskt format.</numberformat-exception>
+      <!--DMS 2.4.x; ECM-3553-->
+      <not-allow-sameNameSibling>Du kan inte spara mappen. Den här noden accepterar inte två noder med samma namn.</not-allow-sameNameSibling>
+      <ntFolder-not-avaiable>Du måste välja en anpassad typ av mapp</ntFolder-not-avaiable>
+    </msg>
+    <help>
+      <customTypeCheckBoxHelp>Kolla om du tänker lagra webbinnehåll eller anpassade dokumenttyper i denna mapp</customTypeCheckBoxHelp>
+    </help>
+  </UIFolderForm>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace    #
+  ###################################################################################
+  -->
+  <UIWorkingArea>
+    <title>
+      <Icon>Ikon</Icon>
+    </title>
+    <msg>
+      <!-- Delte one node is not in trash and have no relation -->
+      <confirm-delete>Är du säker på att du vill ta bort objektet {0}?</confirm-delete>
+      <confirm-delete-file>Är du säker på att du vill ta bort filen '{0}'?</confirm-delete-file>
+      <confirm-delete-folder>Är du säker på att du vill ta bort mappen {0} och alla undermappar?</confirm-delete-folder>
+      
+      <!-- Delte one node is in trash and have no relation -->
+      <confirm-delete-permanently>Är du säker på att du vill ta bort objektet {0} permanent?</confirm-delete-permanently>
+      <confirm-delete-file-permanently>Är du säker på att du vill ta bort objektet {0} permanent?</confirm-delete-file-permanently>
+      <confirm-delete-folder-permanently>Är du säker på att du vill ta bort mappen {0} och alla undermappar permanent?</confirm-delete-folder-permanently>
+      
+      <!-- Delte one node is not in trash and have relations -->
+      <confirm-delete-has-relations>Är du säker på att du vill ta bort objektet {0} och dess referenser?</confirm-delete-has-relations>
+      <confirm-delete-file-has-relations>Är du säker på att du vill ta bort objektet {0} och dess referenser?</confirm-delete-file-has-relations>
+      <confirm-delete-folder-has-relations>Är du säker du vill ta bort mappen {0} och dess referenser?</confirm-delete-folder-has-relations>
+      
+      <!-- Delte multiple nodes, not in Trash, have no relations -->
+      <confirm-delete-multi-nodes-generic>Är du säker du vill ta bort {0} markerat objekt?</confirm-delete-multi-nodes-generic>  
+      <confirm-delete-multi-nodes-file>Är du säker på att du vill ta bort  filerna {0} ?</confirm-delete-multi-nodes-file>
+      <confirm-delete-multi-nodes-folder>Är du säker på att du vill ta bort mapparna {0} och alla undermappar?</confirm-delete-multi-nodes-folder>
+      <confirm-delete-multi-nodes-generic-and-file>Är du säker på att du vill ta bort {0} markerat objekt och filer?</confirm-delete-multi-nodes-generic-and-file>
+      <confirm-delete-multi-nodes-generic-and-folder>Är du säker på att du vill ta bort {0} utvalda artiklar, mappar och undermappar?</confirm-delete-multi-nodes-generic-and-folder>
+      <confirm-delete-multi-nodes-file-and-folder>Är du säker på att du vill ta bort {0} markerade filer, mappar och undermappar?</confirm-delete-multi-nodes-file-and-folder>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder>Är du säker på att  du vill ta bort {0} markerat objekt, filer, mappar och undermappar?</confirm-delete-multi-nodes-generic-and-file-and-folder>
+      
+      <!-- Delte multiple nodes, in Trash -->
+      <confirm-delete-multi-nodes-generic-permanently>Är du säker på att du vill permanent ta bort {0} markerade objekt?</confirm-delete-multi-nodes-generic-permanently>  
+      <confirm-delete-multi-nodes-file-permanently>Är du säker på att du vill permanent ta bort  {0} markerade filer?</confirm-delete-multi-nodes-file-permanently>
+      <confirm-delete-multi-nodes-folder-permanently>Är du säker på att du vill ta bort permanent {0} valda mappar och undermappar?</confirm-delete-multi-nodes-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-permanently>Är du säker på att du vill ta bort permanent {0} valt objekt och filer?</confirm-delete-multi-nodes-generic-and-file-permanently>
+      <confirm-delete-multi-nodes-generic-and-folder-permanently>Är du säker på att du vill ta bort permanent {0} utvalda artiklar, mappar och undermappar?</confirm-delete-multi-nodes-generic-and-folder-permanently>
+      <confirm-delete-multi-nodes-file-and-folder-permanently>Är du säker på att du vill ta bort permanent {0} markerade filer, mappar och undermappar?</confirm-delete-multi-nodes-file-and-folder-permanently>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>Är du säker på att du vill ta bort permanent {0} markerat objekt, filer, mappar och undermappar?</confirm-delete-multi-nodes-generic-and-file-and-folder-permanently>
+      
+      <!-- Delte multiple nodes, have relations -->
+      <confirm-delete-multi-nodes-generic-have-relations>Är du säker på att du vill ta bort {0} markerade objekten och deras referenser?</confirm-delete-multi-nodes-generic-have-relations>  
+      <confirm-delete-multi-nodes-file-have-relations>Är du säker på att du vill ta bort {0} markerade filer och deras referenser?</confirm-delete-multi-nodes-file-have-relations>
+      <confirm-delete-multi-nodes-folder-have-relations>Är du säker på att du vill ta bort {0} markerade mappar, undermappar och deras referenser?</confirm-delete-multi-nodes-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-have-relations>Är du säker på att  du vill ta bort {0} utvalda artiklar, filer och deras referenser?</confirm-delete-multi-nodes-generic-and-file-have-relations>
+      <confirm-delete-multi-nodes-generic-and-folder-have-relations>Är du säker på att du vill ta bort {0} utvalda artiklar, deras referenser, mappar och alla undermappar?</confirm-delete-multi-nodes-generic-and-folder-have-relations>
+      <confirm-delete-multi-nodes-file-and-folder-have-relations>Är du säker på att du vill ta bort {0} utvalda filer, deras referenser, mappar och alla undermappar?</confirm-delete-multi-nodes-file-and-folder-have-relations>
+      <confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>Är du säker på att du vill ta bort {0} markerat objekt, filer, deras referenser, mappar och undermappar?</confirm-delete-multi-nodes-generic-and-file-and-folder-have-relations>
+      
+      <feedback-delete>{0} är borttagna.</feedback-delete>
+      <feedback-delete-multi>{0} poster var borttagna.</feedback-delete-multi>      
+      <feedback-delete-permanently>{0} har tagits bort permanent.</feedback-delete-permanently>
+      <feedback-delete-permanently-multi>{0} objekt togs bort permanent.</feedback-delete-permanently-multi>
+      <undo-delete>Ångra</undo-delete>
+      <feedback-restore>{0} var återställt.</feedback-restore>
+      <feedback-restore-multi>{0} gick framgångsrikt att återställa.</feedback-restore-multi>
+      
+      <confirm-restore>En nod med samma namn finns redan på den gamla platsen för nod {0}. Är du säker på att du vill återställa denna nod?</confirm-restore>
+      <confirm-move>Är du säker på att du vill flytta?</confirm-move>
+      <node-cut>Noden {0} har beskurits.</node-cut>
+      <execute-successfully>Den anpassade åtgärden {0} har utförts.</execute-successfully>
+      <save-node-success>Noden {0} har sparats.</save-node-success>
+      <move-problem>Du kan inte flytta noden {0} till {1} eftersom det fanns ett problem med tillstånd eller villkor.</move-problem>
+    </msg>
+  </UIWorkingArea>
+  <UIDocumentWorkspace>
+    <label>
+      <no-children>Den här noden har inte underordnade noder.</no-children>
+      <no-children-but-has-hidden>Den här noden har inte några underordnade noder, men det finns några dolda filer.</no-children-but-has-hidden>
+    </label>
+    <msg>
+      <unable-save-node>Noden {0} har skapats nyligen. Spara session innan du utför den här åtgärden.</unable-save-node>
+      <save-node-success>Noden {0} har sparats.</save-node-success>
+      <node-copied>Noden {0} har kopierats.</node-copied>
+      <node-cut>Noden {0} har beskurits.</node-cut>
+      <remove-root>Du kan inte ta bort rotnoden.</remove-root>
+      <node-remove-success>Noden {0} har tagits bort.</node-remove-success>
+    </msg>
+    <tooltip>
+      <Rename>Ändra Namn</Rename>
+      <Cut>Klipp ur</Cut>
+      <Copy>Kopiera</Copy>
+      <Save>Spara</Save>
+      <RemoveNode>Ta bort</RemoveNode>
+      <Checkin>Checka in</Checkin>
+      <Checkout>Checka ut</Checkout>
+      <Lock>Lås</Lock>
+      <Unlock>Lås upp</Unlock>
+      <EditDocument>Redigera</EditDocument>
+      <Paste>Klistra in</Paste>
+      <LockedBy>Låst av</LockedBy>
+    </tooltip>
+  </UIDocumentWorkspace>
+  <UIDocumentInfo>
+    <msg>
+      <access-denied>Åtkomst nekad. Du kan inte komma åt noden {0}.</access-denied>
+      <null-exception>Objektet hittades inte. Det har antingen tagits bort eller ändrats, eller du har inte behörighet till den här noden.</null-exception>
+      <confirm-deleteattachment>Är du säker på att du vill ta bort den här bifogade filen?</confirm-deleteattachment>
+      <confirm-deleteattcomment>Är du säker på att du vill ta bort denna kommentar?</confirm-deleteattcomment>
+      <access-denied-exception>Åtkomst nekad. Du kanske inte har läs privilegier eller noden kan ha tagits bort eller ändrats.</access-denied-exception>
+      <path-not-found>Detta element har tagits bort eller ändrats. Klicka på knappen Uppdatera.</path-not-found>
+    </msg>
+    <tooltip>
+      <remove-attachment>Ta bort den här bifogade filen</remove-attachment>
+      <remove-comment>Ta bort denna kommentar</remove-comment>
+    </tooltip>
+  </UIDocumentInfo>
+  <ListView>
+    <view>
+      <label>
+        <name>Namn</name>
+        <versionable>Tillämpningsbara</versionable>
+        <exo_owner>Ägare</exo_owner>
+        <auditing>Revision</auditing>
+        <exo_dateCreated>Datum skapad</exo_dateCreated>
+        <exo_dateModified>Datum Modifierad</exo_dateModified>
+      </label>
+    </view>
+  </ListView>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.ECMContextMenu   #
+  #############################################################################
+  -->
+  <ECMContextMenu>
+    <event>
+      <Lock>Lås</Lock>
+      <Unlock>Låsa upp</Unlock>
+      <EditDocument>Redigera</EditDocument>
+      <Copy>Kopiera</Copy>
+      <Rename>Ändra Namn</Rename>
+      <Delete>Ta bort</Delete>
+      <Save>Spara</Save>
+      <Cut>Klipp ur</Cut>
+      <Paste>Klistra in</Paste>
+      <CheckOut>Checka ut</CheckOut>
+      <CheckIn>Checka in</CheckIn>
+      <WebDAV>Visa WebDAV</WebDAV>
+      <autoversion>Automatisk versionshantering</autoversion>
+      <Custom>Anpassad</Custom>
+      <AddFolder>Ny mapp</AddFolder>
+      <AddDocument>Nytt innehåll</AddDocument>
+      <Upload>Ladda upp filer</Upload>
+      <MoveNode>Flytta</MoveNode>
+      <UnLock>Lås upp</UnLock>
+      <ViewProperties>Visa egenskaper</ViewProperties>
+      <GetURL>Kopiera Webbadressen till Urklipp</GetURL>
+      <AddThumbnail>Lägg till/ta bort miniatyr</AddThumbnail>
+      <AddToFavourite>Lägga till favoriter</AddToFavourite>
+      <RemoveFromFavourite>Ta bort från favoriter</RemoveFromFavourite>
+      <MoveToTrash>Flytta till papperskorgen</MoveToTrash>
+      <RestoreFromTrash>Återställ från papperskorgen</RestoreFromTrash>
+      <EmptyTrash>Töm papperskorgen</EmptyTrash>
+      <WebDavView>Ladda ner och starta redigering</WebDavView>
+    </event>
+  </ECMContextMenu>
+ 
+  <!--
+  #############################################################################
+  #     org.exoplatform.ecm.webui.component.explorer.UIReferencesList         #
+  #############################################################################
+  -->
+  <UIReferencesList>
+    <msg>
+      <no-references>Referenser hittades inte</no-references>
+    </msg>
+    <header>
+      <workspace>Arbetsyta</workspace>
+      <path>Sökväg</path>
+    </header>
+    <action>
+      <Close>Stäng</Close>
+    </action>
+  </UIReferencesList>
+  <!--
+  #############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.UIPropertiesManager  #
+  #############################################################################
+  -->
+  <UITabPane>
+    <title>
+      <UIPublishingPanel>Publikations ruta</UIPublishingPanel>
+      <UIPublicationPanel>Revision</UIPublicationPanel>
+      <UIPublicationSchedule>Schemalagd</UIPublicationSchedule>
+      <UIPublicationPagesContainer>Sidor</UIPublicationPagesContainer>
+      <UIPublicationHistory>Historik</UIPublicationHistory>
+      <UIVersionViewer>Versions Vy</UIVersionViewer>
+
+      <UIPropertyTab>Egenskaper</UIPropertyTab>
+      <UIMetadataTab>Metadata</UIMetadataTab>
+      <UIPropertyForm>Lägga till ny egenskap</UIPropertyForm>
+      <UIUploadContent>Information om uppladdad fil</UIUploadContent>
+      <UIJCRAdvancedSearch>Ny fråga</UIJCRAdvancedSearch>
+      <UISavedQuery>Sparad fråga</UISavedQuery>
+      <AdvancedSearchResult>Sökresultat</AdvancedSearchResult>
+      <UISimpleSearch>Enkel sökning</UISimpleSearch>
+      <UISearchContainer>Avancerad sökning</UISearchContainer>
+      <UICategoryManagerSearch>Lägga till kategori att Söka i</UICategoryManagerSearch>
+      <UIConstraintsForm>Formulär för begränsningar</UIConstraintsForm>
+      <UIViewSearchResult>Visa innehåll</UIViewSearchResult>
+      <UIContentNameSearch>Sök efter namn</UIContentNameSearch>
+      <UINodeInfo>Versionsinfo</UINodeInfo>
+      <UINodeProperty>Nodens rättigheter</UINodeProperty>
+      <UIActionListContainer>Tillgängliga åtgärder</UIActionListContainer>
+      <UIActionContainer>Lägg till åtgärd</UIActionContainer>
+      <UIActionViewContainer>Åtgärds information</UIActionViewContainer>
+      <UIMultiLanguageForm>Visa språk</UIMultiLanguageForm>
+      <UIAddLanguageContainer>Lägga till språk</UIAddLanguageContainer>
+      <UINonPublishedForm>Läge</UINonPublishedForm>
+      <UIPublishedForm>Läge</UIPublishedForm>
+      <UIPublicationLogList>Historik</UIPublicationLogList>
+      <UIDocumentWithTree>Filvy</UIDocumentWithTree>
+      <UIDocumentInfo>Dokumentvy</UIDocumentInfo>
+      <UICategoriesSelectPanel>Välj kategorier</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Refererade kategorier</UISelectedCategoriesGrid>
+      <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
+      <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
+      <metadatasitemetadata>Site Metadata</metadatasitemetadata>
+      <dcelementset>Dublin Core</dcelementset>
+    </title>
+  </UITabPane>
+  <UIPropertyTab>
+    <title>
+      <edit>Redigera den här egenskapen</edit>
+      <delete>Ta bort den här egenskapen</delete>
+    </title>
+    <confirm>
+      <remove-property>Är du säker på att du vill ta bort den här egenskapen?</remove-property>
+    </confirm>
+    <header>
+      <icon/>
+      <name>Namn</name>
+      <multiValue>Multi värde</multiValue>
+      <value>Värde</value>
+      <action>Åtgärd</action>
+    </header>
+    <label>
+      <binary>Binära Data</binary>
+      <notavailable>N/A</notavailable>
+      <cannotget>Kan inte få värden</cannotget>
+    </label>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIPropertyTab>
+  <!--
+  #############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.UIPropertyTab     #
+  #############################################################################
+  -->
+  <!--
+  #############################################################################
+  #           org.exoplatform.ecm.webui.component.explorer.UIPropertyForm     #
+  #############################################################################
+  -->
+  <UIPropertyForm>
+    <title>Lägg till/redigera egenskapen</title>
+    <label>
+      <name>Namn:</name>
+      <type>Typ:</type>
+      <value>Värde:</value>
+      <upload>Ladda upp:</upload>
+      <namespace>Utrymme för namn:</namespace>
+      <multiple>Flera:</multiple>
+      <property_select>Lägga till ny egenskap:</property_select>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>Avbryt</Cancel>
+      <Reset>Återställ</Reset>
+    </action>
+    <msg>
+      <name-invalid>Ange egenskapens namn.</name-invalid>
+      <unable-create>Det går inte att lägga till egenskaper.</unable-create>
+      <value-invalid>Ange värdet.</value-invalid>
+      <node-checkedin>Du måste checka ut denna nod innan du lägger till en egenskap.</node-checkedin>
+      <can-not-add>Du kan inte lägga till egenskaper till den här noden. Detta är endast tillåtet för nod typen nt:unstructured.</can-not-add>
+      <propertyName-invalid>Egenskapens namn måste innehålla namnområdet (t.ex. namespace:name).</propertyName-invalid>
+      <propertyName-exist>Egenskapen {0} finns redan.</propertyName-exist>
+      <propertyValu-null>Vissa värden kan vara noll.</propertyValu-null>
+      <valueFormatEx>Du kan inte tilldela ett multipel-värde till ett enkel-värde attribut.</valueFormatEx>
+      <number-format-exception>Ditt indatavärde har fel format.</number-format-exception>
+      <property-not-exist>Den egenskap {0} finns inte.</property-not-exist>
+    </msg>
+  </UIPropertyForm>
+
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionInfo #
+  #############################################################################
+  -->
+  <UIPermissionInfo>
+    <action>
+      <title>
+        <Edit>Redigera</Edit>
+        <Delete>Ta bort behörigheten</Delete>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>Användare eller grupp</usersOrGroups>
+      <read>Läs</read>
+      <addNode>Ändra</addNode>
+      <remove>Ta bort</remove>
+      <action>Åtgärd</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>Är du säker på att du vill ta bort denna behörighet?</confirm-delete-permission>
+      <no-permission-tochange>Du har inte rätt att ta bort denna behörighet.</no-permission-tochange>
+      <no-permission-remove>Du kan inte ta bort ägare.</no-permission-remove>
+      <access-denied>Åtkomst nekad. Du kan inte ta bort denna behörighet.</access-denied>
+    </msg>
+  </UIPermissionInfo>
+  <permission>
+    <title>
+      <SelectUser>Välj användare</SelectUser>
+      <SelectMember>Välj medlemskap</SelectMember>
+      <AddAny>Välj alla</AddAny>
+    </title>
+  </permission>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionForm #
+  #############################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIGroupSelector>Välj en användare</UIGroupSelector>
+      <UIPermissionSelector>Välj medlem</UIPermissionSelector>
+      <UIGroupMemberSelector>Välj medlemskap</UIGroupMemberSelector>
+    </title>
+  </SelectUserOrGroup>
+  <UIGroupSelector>
+    <label>
+      <selectGroup>Bläddra och välj en grupp</selectGroup>
+      <selectUser>Välj en användare</selectUser>
+    </label>
+    <msg>
+      <not-change-owner>{0} är ägare av denna nod och har fullständig behörighet.</not-change-owner>
+    </msg>
+  </UIGroupSelector>
+  <UIPermissionForm>
+    <label>
+      <UIPopupWindow>Välj</UIPopupWindow>
+      <permission>UIPermissionForm</permission>
+      <userOrGroup>Användare eller grupp</userOrGroup>
+      <read>Läsrättigheter</read>
+      <add_node>Rätt att ändra</add_node>
+      <remove>Ta bort rättigheter</remove>
+    </label>
+    <title>Lägga till en rättighet till noden</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>#{word.save}</Save>
+      <Reset>Återställ</Reset>
+    </action>
+    <msg>
+      <checkbox-require>Välj minst en rättighet.</checkbox-require>
+      <userOrGroup-required>Välj en användare eller grupp innan du sparar denna rättighet</userOrGroup-required>
+      <not-change-permission>Du har inte rätt att lägga till en behörighets.</not-change-permission>
+      <access-denied>Åtkomst nekad. Du kan inte ta bort denna behörighet.</access-denied>
+    </msg>
+  </UIPermissionForm>
+
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UINodeTypeInfo     #
+  ###############################################################################
+  -->
+  <UINodeTypeInfo>
+    <label>
+      <node-type>Nodtyp</node-type>
+      <name>Namn</name>
+      <item>Primära Artikelnamn</item>
+      <super-types>Överordnade typer</super-types>
+      <mixin>Mixin nodtyp</mixin>
+      <orderable-children>Möjliga underliggande</orderable-children>
+      <property-def>Nodens egenskaper</property-def>
+      <prop-name>Namn</prop-name>
+      <prop-type>Typ</prop-type>
+      <prop-multiple>Mul</prop-multiple>
+      <prop-mandatory>Man</prop-mandatory>
+      <prop-protected>Pr</prop-protected>
+      <prop-auto-create>AC</prop-auto-create>
+      <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
+      <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
+      <node-def>Underordnade nodens definition</node-def>
+      <node-def-name>Namn</node-def-name>
+      <node-def-opv>OPV</node-def-opv>
+      <node-def-ac>AC</node-def-ac>
+      <node-def-man>MAN</node-def-man>
+      <node-def-pr>PR</node-def-pr>
+      <node-def-dnt>DNT</node-def-dnt>
+    </label>
+    <action>
+      <Close>Stäng</Close>
+    </action>
+  </UINodeTypeInfo>
+  <!--
+  ###############################################################################
+  #                    org.exoplatform.ecm.webui.component.explorer.search      #
+  ###############################################################################
+  -->
+  <UICategoryManagerSearch>
+    <tab>
+      <label>
+        <UIOneNodePathSelector>Välj kategori</UIOneNodePathSelector>
+      </label>
+    </tab>
+    <action>
+      <Close>Stäng</Close>
+    </action>
+  </UICategoryManagerSearch>
+  <UIContentNameSearch>
+    <label>
+      <keyword>Innehållets namn:</keyword>
+      <location>Sök på denna plats:</location>
+    </label>
+    <action>
+      <Search>Sök</Search>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <keyword-not-allowed>Nyckelordet är inte tillåtet.</keyword-not-allowed>
+    </msg>
+  </UIContentNameSearch>
+  <UISimpleSearch>
+    <action>
+      <MoreConstraints>Visa/Dölj Constraint Formulär</MoreConstraints>
+      <Search>Sök</Search>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <moreConstraints>UISimpleSearch</moreConstraints>
+      <firstOperator>Operatör:</firstOperator>
+      <input>Ett ord eller en fras i innehållet:</input>
+      <constraints>Fler begränsningar:</constraints>
+      <nodePath>Nuvarande plats:</nodePath>
+    </label>
+    <msg>
+      <keyword-null>Skriv in ditt sökord.</keyword-null>
+      <not-found>Inga resultat hittades.</not-found>
+      <keyword-not-allow>Nyckelordet är inte tillåtet.</keyword-not-allow>
+      <value-null>Skriv in ditt sökord eller begränsningar.</value-null>
+      <value-save-null>Ange ett nyckelord eller begränsning innan du sparar den här frågan.</value-save-null>
+      <inputSearch-invalid>Det finns ogiltiga tecken i Sök-frågan.</inputSearch-invalid>
+      <query-invalid>Frågan är ogiltigt. Vänligen kontrollera din begränsning.</query-invalid>
+    </msg>
+  </UISimpleSearch>
+  <ViewSearch>
+    <title>
+      <UIViewSearchResult>Visa mall</UIViewSearchResult>
+    </title>
+  </ViewSearch>
+  <UISearchResult>
+    <msg>
+      <not-support>Det finns ingen Visa mall för noden.</not-support>
+      <empty>Inga resultat hittades.</empty>
+      <access-denied>Du kan inte öppna denna mapp, antingen eftersom det inte längre finns eller eftersom du inte har rätt att komma åt den.</access-denied>
+      <query-invalid>Frågan är ogiltigt.</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Sökväg</path>
+      <action>Åtgärd</action>
+      <shortcutPath>Sökväg</shortcutPath>
+      <type>Typ</type>
+      <dateCreated>Datum skapad</dateCreated>
+      <score>Poäng</score>
+    </header>
+    <title>
+      <typeASC>Sortera efter dokumenttyp i stigande ordning</typeASC>
+      <typeDESC>Sortera efter dokumenttyp i fallande ordning</typeDESC>
+      <scoreASC>Sortera efter poäng i stigande ordning</scoreASC>
+      <scoreDESC>Sortera efter poäng i fallande ordning</scoreDESC>
+      <nameASC>Sortera efter namn i stigande ordning</nameASC>
+      <nameDESC>Sortera efter namn i fallande ordning</nameDESC>
+      <datecreatedASC>Sortera efter skapade datum, i stigande ordning</datecreatedASC>
+      <datecreatedDESC>Sortera efter skapad datum i fallande ordning</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Visa denna nod</View>
+      <OpenFolder>Gå till mappen</OpenFolder>
+    </tooltip>
+  </UISearchResult>
+  <UIShowAllOwnedByUserResult>
+    <msg>
+      <not-support>Det finns ingen Visa mall för noden</not-support>
+      <empty>Inga resultat hittades.</empty>
+      <access-denied>Du kan inte Visa den här noden, antingen eftersom mallen inte stöds eller eftersom åtkomst nekades.</access-denied>
+      <query-invalid>Frågan är ogiltigt</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Sökväg</path>
+      <action>Åtgärd</action>
+      <shortcutPath>Sökväg</shortcutPath>
+      <type>Typ</type>
+      <dateCreated>Datum skapad</dateCreated>
+      <score>Poäng</score>
+    </header>
+    <title>
+      <typeASC>Sortera efter dokumenttyp i stigande ordning</typeASC>
+      <typeDESC>Sortera efter dokumenttyp i fallande ordning</typeDESC>
+      <scoreASC>Sortera efter poäng i stigande ordning</scoreASC>
+      <scoreDESC>Sortera efter poäng i fallande ordning</scoreDESC>
+      <nameASC>Sortera efter namn i stigande ordning</nameASC>
+      <nameDESC>Sortera efter namn i fallande ordning</nameDESC>
+      <datecreatedASC>Sortera efter skapad datum, i stigande ordning</datecreatedASC>
+      <datecreatedDESC>Sortera efter datum, skapad i fallande ordning</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Visa denna nod</View>
+      <OpenFolder>Gå till mappen</OpenFolder>
+    </tooltip>
+  </UIShowAllOwnedByUserResult>
+  <UIShowAllFavouriteResult>
+    <msg>
+      <not-support>Det finns ingen Visa mall för noden</not-support>
+      <empty>Inga resultat hittades</empty>
+      <access-denied>Du kan inte Visa den här noden, antingen eftersom mallen inte stöds eller eftersom åtkomst nekades.</access-denied>
+      <query-invalid>Frågan är ogiltigt</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Sökväg</path>
+      <action>Åtgärd</action>
+      <shortcutPath>Sökväg</shortcutPath>
+      <type>Typ</type>
+      <dateCreated>Datum skapad</dateCreated>
+      <score>Poäng</score>
+    </header>
+    <title>
+      <typeASC>Sortera efter dokumenttyp i stigande ordning</typeASC>
+      <typeDESC>Sortera efter dokumenttyp i fallande ordning</typeDESC>
+      <scoreASC>Sortera efter poäng i stigande ordning</scoreASC>
+      <scoreDESC>Sortera efter poäng i fallande ordning</scoreDESC>
+      <nameASC>Sortera efter namn i stigande ordning</nameASC>
+      <nameDESC>Sortera efter namn i fallande ordning</nameDESC>
+      <datecreatedASC>Sortera efter skapade datum, i stigande ordning</datecreatedASC>
+      <datecreatedDESC>Sortera efter skapad datum i fallande ordning</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Titta på denna nod</View>
+      <OpenFolder>Gå till mappen</OpenFolder>
+    </tooltip>
+  </UIShowAllFavouriteResult>
+  <UIShowAllHiddenResult>
+    <msg>
+      <not-support>Det finns ingen Visa mall för noden.</not-support>
+      <empty>Inga resultat hittades.</empty>
+      <access-denied>Du kan inte Visa den här noden, antingen eftersom mallen inte stöds eller eftersom åtkomst nekades.</access-denied>
+      <query-invalid>Frågan är ogiltigt.</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Sökväg</path>
+      <action>Åtgärd</action>
+      <shortcutPath>Sökväg</shortcutPath>
+      <type>Typ</type>
+      <dateCreated>Datum skapad</dateCreated>
+      <score>Poäng</score>
+      <AddRemoveFavourite>Lägg till/ta bort till favoriter</AddRemoveFavourite>
+    </header>
+    <title>
+      <typeASC>Sortera efter dokumenttyp i stigande ordning</typeASC>
+      <typeDESC>Sortera efter dokumenttyp i fallande ordning</typeDESC>
+      <scoreASC>Sortera efter poäng i stigande ordning</scoreASC>
+      <scoreDESC>Sortera efter poäng i fallande ordning</scoreDESC>
+      <nameASC>Sortera efter namn i stigande ordning</nameASC>
+      <nameDESC>Sortera efter namn i fallande ordning</nameDESC>
+      <datecreatedASC>Sortera efter skapade datum, i stigande ordning</datecreatedASC>
+      <datecreatedDESC>Sortera efter skapad datum i fallande ordning</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Visa denna nod</View>
+      <OpenFolder>Gå till mappen</OpenFolder>
+      <RemoveHiddenAttribute>Ta bort dolda attribut</RemoveHiddenAttribute>
+    </tooltip>
+  </UIShowAllHiddenResult>
+  <UIShowAllTrashResult>
+    <msg>
+      <not-support>Det finns ingen Visa mall för noden.</not-support>
+      <empty>Inga resultat hittades</empty>
+      <access-denied>Du kan inte Visa den här noden, antingen eftersom mallen inte stöds eller eftersom åtkomst nekades.</access-denied>
+      <query-invalid>Frågan är ogiltigt.</query-invalid>
+    </msg>
+    <header>
+      <name>#{word.name}</name>
+      <path>Sökväg</path>
+      <action>Åtgärd</action>
+      <shortcutPath>Sökväg</shortcutPath>
+      <type>Typ</type>
+      <dateCreated>Datum skapad</dateCreated>
+      <score>Poäng</score>
+    </header>
+    <title>
+      <typeASC>Sortera efter dokumenttyp i stigande ordning</typeASC>
+      <typeDESC>Sortera efter dokumenttyp i fallande ordning</typeDESC>
+      <scoreASC>Sortera efter poäng i stigande ordning</scoreASC>
+      <scoreDESC>Sortera efter poäng i fallande ordning</scoreDESC>
+      <nameASC>Sortera efter namn i stigande ordning</nameASC>
+      <nameDESC>Sortera efter namn i fallande ordning</nameDESC>
+      <datecreatedASC>Sortera efter skapade datum, i stigande ordning</datecreatedASC>
+      <datecreatedDESC>Sortera efter skapad datum i fallande ordning</datecreatedDESC>
+    </title>
+    <tooltip>
+      <View>Visa denna nod</View>
+      <OpenFolder>Gå till mappen</OpenFolder>
+      <DeletePermanently>Ta bort permanent</DeletePermanently>
+      <RestoreFromTrash>Återställa från papperskorgen</RestoreFromTrash>
+    </tooltip>
+  </UIShowAllTrashResult>
+  <UIConstraintsForm>
+    <label>
+      <constraints>UIConstraintsForm</constraints>
+      <metadataProperty>Egenskaper</metadataProperty>
+      <operator>Operatör</operator>
+      <contains>Innehåller data</contains>
+      <notcontains>innehålla inte data</notcontains>
+    </label>
+    <action>
+      <Add>Lägg till</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <properties-required>Egenskapens namn krävs.</properties-required>
+      <value-required>Fältet data krävs.</value-required>
+      <date-invalid>Från-datum måste vara tidigare än till-datum.</date-invalid>
+      <fromDate-required>Från-datum krävs.</fromDate-required>
+      <must-choose-one>Du måste välja minst en typ.</must-choose-one>
+      <properties-null>Först välja egenskaper och sedan filtrera.</properties-null>
+      <exactly-require>Du måste fylla i värdet exakt innan du sparar detta.</exactly-require>
+      <fromDate-invalid>Ogiltig typ i fältet 'Från'. Vänligen välj om eller skriv korrekt.</fromDate-invalid>
+      <toDate-invalid>Ogiltig typ i fältet 'till'. Vänligen välj om eller skriv korrekt.</toDate-invalid>
+    </msg>
+    <button>
+      <label-Add>Lägg till</label-Add>
+      <label-Cancel>Avbryt</label-Cancel>
+    </button>
+  </UIConstraintsForm>
+  <UIConstraintForm>
+    <tooltip>
+      <AddMetadataType>Lägg till egenskap</AddMetadataType>
+      <AddNodeType>Lägg till nodtyp</AddNodeType>
+      <AddCategory>Lägg till kategori</AddCategory>
+      <FindExactly>Hitta exakt</FindExactly>
+    </tooltip>
+    <label>
+      <colon>:</colon>
+      <operator>Operatör</operator>
+      <exactlyPro-properties>Rättigheter</exactlyPro-properties>
+      <exactlyPro-ContainExactly>Innehåller exakt</exactlyPro-ContainExactly>
+      <containPro-properties>Rättigheter</containPro-properties>
+      <containPro-Contain>Innehåller</containPro-Contain>
+      <notContainPro-properties>Rättigheter</notContainPro-properties>
+      <notContainPro-notContain>Innehåller inte</notContainPro-notContain>
+      <ConstraintOption-From>Från</ConstraintOption-From>
+      <ConstraintOption-To>Till</ConstraintOption-To>
+      <DocumentType-label>Dokumenttyp</DocumentType-label>
+      <Category-label>Kategori</Category-label>
+      <created>Skapad</created>
+      <modified>Ändrad</modified>
+      <and>Och</and>
+      <or>Eller</or>
+    </label>
+  </UIConstraintForm>
+  <NodeTypePopup>
+    <title>
+      <UINodeTypeSelectForm>Välj nodtyp</UINodeTypeSelectForm>
+    </title>
+  </NodeTypePopup>
+  <CategoryPopup>
+    <title>
+      <UICategoryManagerSearch>Lägga till kategori att Söka i</UICategoryManagerSearch>
+      <UIOneNodePathSelector>Välj kategori</UIOneNodePathSelector>
+    </title>
+  </CategoryPopup>
+  <SaveQueryPopup>
+    <title>
+      <UISaveQueryForm>Frågeformulär</UISaveQueryForm>
+    </title>
+  </SaveQueryPopup>
+  <UINodeTypeSelectForm>
+    <action>
+      <Cancel>Avbryt</Cancel>
+      <Save>Spara</Save>
+    </action>
+  </UINodeTypeSelectForm>
+  <UICompareExactlyForm>
+    <label>
+      <filter>Filter:</filter>
+      <result>Resultat:</result>
+    </label>
+    <title>
+      <result>Filter</result>
+    </title>
+    <button>
+      <label-Select>Välj</label-Select>
+      <label-Cancel>Avbryt</label-Cancel>
+    </button>
+    <msg>
+      <not-result-found>Inga resultat hittades.</not-result-found>
+    </msg>
+  </UICompareExactlyForm>
+  <UIJCRAdvancedSearch>
+    <label>
+      <name>Namn:</name>
+      <selectBox>Välj stil för frågan:</selectBox>
+      <query>Förfrågan:</query>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Search>Sök</Search>
+    </action>
+    <msg>
+      <!--DMS 2.4.x ECM-3566-->
+      <name-invalid>Namnet är ogiltig.</name-invalid>
+      <query-added>Frågan har lagts in.</query-added>
+      <save_unSuccessful>Kan inte spara frågan. Uttrycket kan vara ogiltig eller frågenamnet kan redan finns.</save_unSuccessful>
+      <invalid-queryStatement>Ogiltig frågesats.</invalid-queryStatement>
+      <value-save-null>Skriv in din frågesats.</value-save-null>
+      <query-name-null>Ange Namn på din fråga.</query-name-null>
+    </msg>
+  </UIJCRAdvancedSearch>
+  <EditQueryForm>
+    <label>
+      <name>Namn</name>
+      <selectBox>Välj stil för frågan</selectBox>
+      <query>Förfrågan</query>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </EditQueryForm>
+  <EditSavedQueryForm>
+    <title>
+      <EditQueryForm>Redigera frågeformulär</EditQueryForm>
+    </title>
+  </EditSavedQueryForm>
+  <UIMetadataSelectForm>
+    <label>
+      <metadataType>Metadatatyp</metadataType>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Add>Lägg till</Add>
+    </action>
+  </UIMetadataSelectForm>
+  <property1MetadataPopup>
+    <title>
+      <UISelectPropertyForm>Välj egenskap</UISelectPropertyForm>
+    </title>
+  </property1MetadataPopup>
+  <property2MetadataPopup>
+    <title>
+      <UISelectPropertyForm>Välj egenskap</UISelectPropertyForm>
+    </title>
+  </property2MetadataPopup>
+  <property3MetadataPopup>
+    <title>
+      <UISelectPropertyForm>Välj egenskap</UISelectPropertyForm>
+    </title>
+  </property3MetadataPopup>
+  <UISelectPropertyForm>
+    <label>
+      <metadataType>Metadatatyp</metadataType>
+    </label>
+    <pLabel>Egenskaper:</pLabel>
+    <action>
+      <Add>Lägg till</Add>
+      <Cancel>Avbryt</Cancel>
+    </action>
+  </UISelectPropertyForm>
+  <ExactlyFormPopup>
+    <title>
+      <UICompareExactlyForm>Filtrera formulär</UICompareExactlyForm>
+    </title>
+  </ExactlyFormPopup>
+  <UIECMSearch>
+    <header>
+      <name>Namn</name>
+      <language>Språk</language>
+      <query>Förfrågan</query>
+      <action>Åtgärder</action>
+      <path>Sökväg</path>
+    </header>
+  </UIECMSearch>
+  <UIResult>
+    <msg>
+      <not-found>Data hittades inte.</not-found>
+    </msg>
+    <header>
+      <action>Åtgärd</action>
+    </header>
+  </UIResult>
+  <UISaveQueryForm>
+    <msg>
+      <query-name-null>Ange frågans namn att spara.</query-name-null>
+      <access-denied>Åtkomst nekad. Du har inte behörigheten Lägg till för att spara den här frågan.</access-denied>
+      <save-failed>Du kan inte spara frågan, antingen eftersom meddelandet är ogiltig eller eftersom frågans namn finns redan.</save-failed>
+    </msg>
+    <label>
+      <queryName>Frågenamn</queryName>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UISaveQueryForm>
+  <UISavedQuery>
+    <header>
+      <name>Namn</name>
+      <type>Typ</type>
+      <statement>Uttalande</statement>
+      <permission>Behörighet</permission>
+      <action>Åtgärder</action>
+    </header>
+    <tooltip>
+      <Execute>Utföra</Execute>
+      <Edit>Redigera</Edit>
+      <Delete>Ta bort</Delete>
+    </tooltip>
+    <label>
+      <no-children>Ingen fråga har sparats.</no-children>
+    </label>
+    <msg>
+      <confirm-delete-query>Är du säker på att du vill ta bort den här frågan?</confirm-delete-query>
+      <not-result-found>Inga resultat hittades.</not-result-found>
+    </msg>
+  </UISavedQuery>
+  <UIQueryResultPageIterator>
+    <label>
+      <results>Resultat</results>
+      <of-about>om</of-about>
+      <of>av</of>
+    </label>
+  </UIQueryResultPageIterator>
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.admin.UIExportNode #
+  ###############################################################################
+  -->
+  <UIExportNode>
+    <label>
+      <format>Format</format>
+      <nodePath>Sökvägen till Export</nodePath>
+      <zip>Zip</zip>
+      <systemView>Systemvy</systemView>
+      <documentView>Dokumentvy</documentView>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Export>Exportera</Export>
+    </action>
+    <title>Exportera nod</title>
+  </UIExportNode>
+  <!--
+  ###############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPopupAction     #
+  ###############################################################################
+  -->
+  <PopupUserSelector>
+    <title>
+      <UIUserContainer>Välj användarrättigheter</UIUserContainer>
+    </title>
+  </PopupUserSelector>
+  <UIPopupTaxonomy>
+    <title>
+      <UICategoriesSelector>Lägg till kategorier</UICategoriesSelector>
+      <UIOneNodePathSelector>Lägg till kategorier</UIOneNodePathSelector>
+    </title>
+  </UIPopupTaxonomy>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIVersionInfo       #
+  ###############################################################################
+  -->
+  <UIVersionInfo>
+    <tooltip>
+      <addLabel>Lägg till etikett</addLabel>
+      <removeLable>Ta bort etikett</removeLable>
+      <restoreVersion>Återställ Version</restoreVersion>
+      <viewVersion>Visa Versionsinfo</viewVersion>
+      <deleteVersion>Ta bort Version</deleteVersion>
+      <compareVersion>Jämför med basversionen</compareVersion>
+    </tooltip>
+    <msg>
+      <have-no-view-template>Visa mallen stöds inte.</have-no-view-template>
+      <cannot-remove-version>Du kan inte ta bort bas versionen.</cannot-remove-version>
+      <confirm-delete>Är du säker på att du vill ta bort denna version?</confirm-delete>
+      <not-checked-out>Du måste checka ut denna nod innan du återställer.</not-checked-out>
+      <invalid-item-state>Du kan inte återställa denna version, antingen eftersom ett eller flera objekt var borttagna eller flyttade under en annan session.</invalid-item-state>
+    </msg>
+    <action>
+      <close>Stäng</close>
+      <close-view>Stäng vy</close-view>
+    </action>
+  </UIVersionInfo>
+  <!--
+  ################################################################################
+  #  org.exoplatform.ecm.webui.component.explorer.auditing.UIAuditingInfo
+  ################################################################################
+  -->
+  <UIAuditingInfo>
+    <msg>
+      <noVersion>Ingen Version</noVersion>
+    </msg>
+    <eventName>
+      <e_1>Nod adderad</e_1>
+      <e_2>Nod borttagen</e_2>
+      <e_4>Egenskap adderad</e_4>
+      <e_16>Egenskapen ändrad</e_16>
+      <e_8>Egenskapen borttagen</e_8>
+      <e_32>Spara</e_32>
+      <e_64>Flytta</e_64>
+      <e_128>Kopiera</e_128>
+      <e_256>Addera Mixin</e_256>
+      <e_512>Ta bort Mixin</e_512>
+      <e_1024>Klon</e_1024>
+      <e_2048>Uppdatera</e_2048>
+      <e_4096>Import</e_4096>
+      <e_8192>Checka in</e_8192>
+      <e_16384>Checka ut</e_16384>
+      <e_32768>Återställ</e_32768>
+      <e_65536>Sammanfoga</e_65536>
+      <e_131072>Avbryta samanfoga</e_131072>
+      <e_262144>Sammanfogat</e_262144>
+      <e_524288>Lägg till versionsetikett</e_524288>
+      <e_1048576>Ta bort versionsetikett</e_1048576>
+      <e_2097152>Ta bort Version</e_2097152>
+      <e_4194304>Lås</e_4194304>
+      <e_8388608>Lås upp</e_8388608>
+      <e_16777216>Läs</e_16777216>
+    </eventName>
+    <label>
+      <operation>Användning</operation>
+      <userName>Användarnamn</userName>
+      <date>Datum</date>
+      <version>Version</version>
+    </label>
+  </UIAuditingInfo>
+
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivateVersion   #
+  ###############################################################################
+  -->
+  <UIActivateVersion>
+    <label>
+      <note>Versionshantering har inte aktiverats för den här noden.</note>
+      <question>Är du säker på att du vill aktivera den?</question>
+      <button-active>Aktivera</button-active>
+      <button-cancel>Avbryt</button-cancel>
+    </label>
+    <msg>
+      <access-denied>Du har inte behörighet att aktivera versionshantering på den här noden</access-denied>
+    </msg>
+  </UIActivateVersion>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivePublication #
+  ###############################################################################
+  -->
+  <UIActivePublication>
+    <header>
+      <LifecycleName>Namn</LifecycleName>
+      <LifecycleDesc>Beskrivning</LifecycleDesc>
+      <action>Åtgärd</action>
+    </header>
+    <action>
+      <Cancel>Stäng</Cancel>
+    </action>
+    <grid>
+      <msg>
+        <empty>Ingen publikations plugins finns.</empty>
+      </msg>
+    </grid>
+    <msg>
+      <node-type-invalid>Endast dokument nod typen kan registreras.</node-type-invalid>
+      <already-enroled>Detta dokument har redan registrerats.</already-enroled>
+    </msg>
+  </UIActivePublication>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivateAuditing  #
+  ###############################################################################
+  -->
+  <UIActivateAuditing>
+    <label>
+      <note>Granskning har inte aktiverats för den här noden.</note>
+      <question>Är du säker på att du vill aktivera den?</question>
+    </label>
+    <action>
+      <activate>Aktivera</activate>
+      <cancel>Avbryt</cancel>
+    </action>
+  </UIActivateAuditing>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIDiff   #
+  ###############################################################################
+  -->
+  <UIDiff>
+    <label>
+      <diffTitle>Jämför mellan två versioner</diffTitle>
+      <noChange>Ingen ändringar mellan två versioner</noChange>
+      <baseVerion>Bas versionen</baseVerion>
+      <compareVerion>Version</compareVerion>
+      <can-not-compare>Det gick inte att jämföra två versioner</can-not-compare>
+    </label>
+  </UIDiff>
+  <!--
+  ###############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIImportNode      #
+  ###############################################################################
+  -->
+  <UIImportNode>
+    <label>
+      <format>Format</format>
+      <systemView>Systemvy</systemView>
+      <documentView>Dokumentvy</documentView>
+      <upload>Ladda upp fil</upload>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Import>Import</Import>
+    </action>
+    <title>Importera noden</title>
+    <msg>
+      <import-successful>Har importerats.</import-successful>
+      <filename-invalid>Sök i en .xml-fil för fältet 'Ladda upp fil' för att importera.</filename-invalid>
+      <filetype-error>Kan inte importera den uppladdade filen. XML-filen kan vara ogiltigt.</filetype-error>
+      <mimetype-invalid>Du kan bara importera .xml- eller .zip-filer.</mimetype-invalid>
+      <access-denied>Åtkomst nekad. Du får inte importera det.</access-denied>
+      <constraint-violation-exception>Du kan inte importera noden, antingen eftersom den importerade informationen är felaktig eller att nodtypen {0} inte får vara undernodens nodtyp {0}.</constraint-violation-exception>
+      <item-exists-exception>En inkommande refererande nod har samma UUID som en befintlig nod i arbetsytan.</item-exists-exception>
+    </msg>
+  </UIImportNode>
+  <!--
+  ###############################################################################
+  #         org.exoplatform.ecm.webui.component.explorer.versions.UILabelForm   #
+  ###############################################################################
+  -->
+  <UILabelForm>
+    <label>
+      <label>Etikett</label>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>Avbryt</Cancel>
+    </action>
+    <title>Lägg till etikett</title>
+    <msg>
+      <label-invalid>Etiketten innehåller ogiltiga tecken.</label-invalid>
+      <label-exist>{0} finns redan.</label-exist>
+    </msg>
+  </UILabelForm>
+  <!--
+  ###############################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.versions.UIRemoveLabelForm   #
+  ###############################################################################
+  -->
+  <UIRemoveLabelForm>
+    <title>Ta bort etikett</title>
+    <label>
+      <label>Välj etikett</label>
+    </label>
+    <action>
+      <Remove>Ta bort</Remove>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIRemoveLabelForm>
+  <!--
+  ###############################################################################
+  #    org.exoplatform.ecm.webui.component.explorer.versions.UIViewVersion      #
+  ###############################################################################
+  -->
+  <UIVersionTree>
+    <title>Barn träd</title>
+  </UIVersionTree>
+  <UIViewVersion>
+    <label>
+      <nodeType>Nodtyp</nodeType>
+      <nodeName>Nodnamnet</nodeName>
+      <VersionNumber>Versionsnummer</VersionNumber>
+      <VersionLabels>Versionsetiketter</VersionLabels>
+      <VersionDate>Versionsdatum</VersionDate>
+      <PropertyName>Egenskapsnamn</PropertyName>
+      <PropertyValue>Egenskapsvärden</PropertyValue>
+    </label>
+    <msg>
+      <not-supported>Den här funktionen stöds inte för versionshantering.</not-supported>
+    </msg>
+  </UIViewVersion>
+  <UIVersionList>
+    <title>Barn namn</title>
+  </UIVersionList>
+  <!--
+  ################################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UICategoryManager #
+  ################################################################################
+  -->
+  <UICategoryManager>
+    <action>
+      <Close>Stäng</Close>
+    </action>
+    <tab>
+      <label>
+        <UICategoriesAddedList>Refererade kategorier</UICategoriesAddedList>
+        <UIOneNodePathSelector>Välj kategori</UIOneNodePathSelector>
+      </label>
+    </tab>
+  </UICategoryManager>
+  <UICategoriesAddedList>
+    <header>
+      <path>Kategori</path>
+      <action>Åtgärder</action>
+    </header>
+    <msg>
+      <access-denied>Åtkomst nekad. Du har inte åtkomstbehörighet i den här noden.</access-denied>
+      <confirm-delete>Är du säker på att du vill ta bort denna referens?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Delete>Ta bort</Delete>
+      </title>
+    </action>
+    <label>
+      <category>Kategori</category>
+      <actions>Åtgärd</actions>
+      <delete>Ta bort</delete>
+    </label>
+  </UICategoriesAddedList>
+  <UITreeList>
+    <header>
+      <name>Namn</name>
+      <action>Åtgärd</action>
+    </header>
+    <info>
+      <child-not-found>Den här noden har inte underordnade noder.</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ################################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIRelationManager #
+  ################################################################################
+  -->
+  <UIRelationManager>
+    <action>
+      <Close>Stäng</Close>
+    </action>
+    <tab>
+      <label>
+        <UIOneNodePathSelector>Välj Relation</UIOneNodePathSelector>
+      </label>
+    </tab>
+    <tab>
+      <label>
+        <UIRelationsAddedList>Relations lista</UIRelationsAddedList>
+      </label>
+    </tab>
+  </UIRelationManager>
+  <UIRelationsAddedList>
+    <header>
+      <path>Relations</path>
+      <action>Åtgärder</action>
+    </header>
+    <action>
+      <title>
+        <Delete>Ta bort</Delete>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete>Är du säker på att du vill ta bort detta förhållande?</confirm-delete>
+      <can-not-add-itself>Du kan inte lägga till en relation till sig själv.</can-not-add-itself>
+    </msg>
+  </UIRelationsAddedList>
+  <!--
+  ###################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.UIClipboard  #
+  ###################################################################
+  -->
+  <UIClipboard>
+    <header>
+      <path>Sökväg</path>
+      <command>Cm</command>
+      <action>Åtgärd</action>
+    </header>
+    <label>
+      <nocommand>Det finns inga objekt i Urklipp.</nocommand>
+    </label>
+    <action>
+      <clearall>Rensa alla</clearall>
+    </action>
+    <msg>
+      <unable-pasted>Kan inte klistra in den här noden.</unable-pasted>
+      <node-pasted>Nod {0} har klistrats in på plats {1}. Den här åtgärden har redan sparats.</node-pasted>
+    </msg>
+  </UIClipboard>
+  <!--
+  ###################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.UIPopupMenu  #
+  ###################################################################
+  -->
+  <!--
+  ###################################################################################
+  #org.exoplatform.ecm.webui.component.explorer.popup.actions.UISelectDocumentForm  #
+  ###################################################################################
+  -->
+  <UISelectDocumentForm>
+    <label>
+      <selectTemplate>Välj din mall i listan nedan</selectTemplate>
+      <ThumbnailView>Miniatyrvyn</ThumbnailView>
+      <ListView>Listvy</ListView>
+      <Cancel>#{word.cancel}</Cancel>
+    </label>
+  </UISelectDocumentForm>
+  <!--
+  #######################################################################
+  #org.exoplatform.ecm.webui.component.explorerpopup.actions.UIDocumentForm  #
+  #######################################################################
+  -->
+  <UIDocumentForm>
+    <title>Lägg till nytt dokument</title>
+    <action>
+      <Save>Spara</Save>
+      <SaveAndClose>Spara &amp; Stäng</SaveAndClose>
+      <ChangeType>Ändra innehållstyp</ChangeType>
+      <Fullscreen>Helskärm</Fullscreen>
+      <Cancel>#{word.cancel}</Cancel>
+      <Close>#{word.close}</Close>
+    </action>
+<tooltip>
+<FullScreen>Maximera/minimera</FullScreen>
+</tooltip>
+    <msg>
+      <cannot-save>Ett fel uppstod när du sparade dokumentet.</cannot-save>
+      <in-versioning>Kolla gärna in den aktuella noden innan du lägger till en ny nod.</in-versioning>
+      <not-support>Kan inte ladda mallen {0}.</not-support>
+      <value-invalid>{0} är ett värde som behövs.</value-invalid>
+      <repository-exception>Ett fel uppstod när du sparade dokumentet.</repository-exception>
+      <!--DMS 2.4.x; ECM-3543-->
+      <repository-exception-permission>Du har inte behörighet att lägga till ett nytt dokument till den här noden.</repository-exception-permission>
+      <not-allowed-same-name-sibling>Du kan inte spara det här dokumentet. Det är inte tillåtet att ha samma namn som sitt syskon.</not-allowed-same-name-sibling>
+      <numberformat-exception>Du kan inte spara det här dokumentet. Namnet som anges måste vara i numeriskt format.</numberformat-exception>
+      <item-not-found>Objektet hittades inte. Denna nod (eller dess förfader) kan ha tagits bort. Klicka på knappen Uppdatera.</item-not-found>
+    </msg>
+  </UIDocumentForm>
+  <!--
+  #################################################################################
+  #org.exoplatform.ecm.webui.component.explorer.actions.UIViewDocumentController  #
+  #################################################################################
+  -->
+  <UIViewDocumentController>
+    <tab>
+      <label>
+        <UIViewDocumentInfo>Information</UIViewDocumentInfo>
+      </label>
+    </tab>
+    <action>
+      <Close>#{word.close}</Close>
+    </action>
+  </UIViewDocumentController>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.search.UI  #
+  #############################################################################
+  -->
+  <!--
+  #############################################################################
+  #    org.exoplatform.ecm.webui.component.explorer.search.UIQuerySaveForm    #
+  #############################################################################
+  -->
+  <UIQuerySaveForm>
+    <title>Spara fråga Formulär</title>
+    <label>
+      <query>Förfrågan</query>
+      <name>Frågenamn</name>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIQuerySaveForm>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.admin.UIActionManager  #
+  #############################################################################
+  -->
+  <editActionPopup>
+    <title>
+      <UIActionForm>Redigera åtgärd</UIActionForm>
+      <EditFormAction>Redigera åtgärd</EditFormAction>
+    </title>
+  </editActionPopup>
+  <UIActionViewContainer>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIActionViewContainer>
+  <UIActionList>
+    <header>
+      <name>#{word.name}</name>
+      <description>Beskrivning</description>
+  <lifecycle>Livscykel</lifecycle>
+  <triggeredaction>Triggade åtgärder</triggeredaction>
+      <instanceOf>Instansen av typen</instanceOf>
+      <action>Åtgärd</action>
+    </header>
+    <msg>
+      <remove-popup-first>Du måste stänga popup-fönstret Redigera innan du tar bort den här noden.</remove-popup-first>
+      <confirm-delete-action>Är du säker på att du vill ta bort denna åtgärd?</confirm-delete-action>
+      <template-empty>Mallen {0} är noll eller tom.</template-empty>
+      <template-null>Mallen är antingen noll eller du har inte behörighet att komma åt den här mallen.</template-null>
+      <access-denied>Åtkomst nekad. Du har inte behörighet att utföra denna åtgärd.</access-denied>
+    </msg>
+    <action>
+      <Close>#{word.close}</Close>
+      <View>Visa</View>
+      <Edit>Redigera</Edit>
+      <Delete>Ta bort</Delete>
+    </action>
+  </UIActionList>
+  <UIActionForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+    </action>
+    <label>
+      <name>Åtgärdsformulär</name>
+    </label>
+    <msg>
+      <repository-exception>Du kan inte spara den här åtgärden. Namn har vissa specialtecken.</repository-exception>
+      <numberformat-exception>Du kan inte spara den här åtgärden. Namnet som anges måste vara i numeriskt format.</numberformat-exception>
+      <existed-action>Namnet på {0} finns redan. Välj en annan.</existed-action>
+      <unable-add-action>Kan inte lägga till denna åtgärd.</unable-add-action>
+      <unable-add>Kan inte lägga till denna åtgärd. Den här noden är antingen rot eller du har inte rättighet</unable-add>
+      <not-support>Dialogrutan {0} stöds inte.</not-support>
+      <no-permission-add>Åtkomst nekad. Du har inte rättigheten att lägga till en åtgärd här.</no-permission-add>
+      <access-denied>Åtkomst nekad. Du har inte behörighet att komma åt den här mallen.</access-denied>
+      <lifecycle-invalid>Du kan inte lägga till denna åtgärd. Livscykelfasen av åtgärden är ogiltig.</lifecycle-invalid>
+    </msg>
+    <title>Lägg till/Redigera åtgärd</title>
+    <validator>
+      <validator>Validator</validator>
+      <destPath>Med sökväg</destPath>
+    </validator>
+  </UIActionForm>
+  <UIActionTypeForm>
+    <label>
+      <actionType>Skapa åtgärd av typen</actionType>
+    </label>
+  </UIActionTypeForm>
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>Välj plats</UIOneNodePathSelector>
+      <UIPermissionSelector>Rättigheter</UIPermissionSelector>
+      <UICategoriesSelector>Lägg till kategorier</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+  <EditFormAction>
+    <validator>
+      <validator>Validator</validator>
+      <destPath>Med sökväg</destPath>
+    </validator>
+    <title>Åtgärdsformulär</title>
+  </EditFormAction>
+  <!--
+  #############################################################################
+  #       org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar   #
+  #############################################################################
+  -->
+  <UIAddressBar>
+    <msg>
+      <path-not-found>Sökvägen hittades inte.</path-not-found>
+      <access-denied>Åtkomst nekad. Du har inte rätt att läsa noden.</access-denied>
+      <keyword-not-support>Nyckelordet är ogiltig. Vissa tecken stöds inte.</keyword-not-support>
+    </msg>
+    <label>
+      <exeButton>Gå</exeButton>
+      <address>Adress:</address>
+    </label>
+    <title>
+      <exeButton>Gå</exeButton>
+      <backButton>Tillbaka till den föregående noden</backButton>
+      <showHistory>Visa tidigare historisk adress</showHistory>
+      <changeNode>Ändra nod</changeNode>
+    </title>
+  </UIAddressBar>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.actions.UIWatchDocumentForm  #
+  ###################################################################################
+  -->
+  <UIWatchDocumentForm>
+    <action>
+      <Watch>Titta på</Watch>
+      <Cancel>#{word.cancel}</Cancel>
+      <Continue>Fortsätt</Continue>
+      <Unwatch>Visa ej</Unwatch>
+    </action>
+    <label>
+      <notificationType>Meddelandetyp:</notificationType>
+    </label>
+    <msg>
+      <not-support>Denna meddelandetyp stöds inte. Välj en annan typ.</not-support>
+      <watching-successfully>Du tittar på detta dokument.</watching-successfully>
+      <unwatching-successfully>Du har lämnat Titta på listan.</unwatching-successfully>
+      <node-iswatching>Detta dokument är tittat på.</node-iswatching>
+    </msg>
+  </UIWatchDocumentForm>
+  <!--
+  ###################################################################################
+  #   org.exoplatform.ecm.webui.component.explorer.popup.actions.UITaggingForm      #
+  ###################################################################################
+  -->
+  <UITaggingForm>
+    <label>
+      <names>Taggnamn:</names>
+      <linked>Länkade Taggar:</linked>
+      <tagSet>UITaggingForm</tagSet>
+    </label>
+    <action>
+      <AddTag>Lägg till</AddTag>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <msg>
+      <name-exist>Taggens namn {0} finns redan.</name-exist>
+      <tagName-invalid>Taggens namn innehåller ogiltiga tecken.</tagName-invalid>
+      <tag-name-empty>Din taggnamn är tom</tag-name-empty>
+      <tag-name-duplicate>Input-tagg namnen är dubbletter.</tag-name-duplicate>
+      <tagName-too-long>En av de taggar som angetts är för långt. Taggens namn måste vara mindre än 30 tecken.</tagName-too-long>
+      <path-not-found>Denna tagg har tagits bort eller ändrats. Klicka på knappen Uppdatera.</path-not-found>
+    </msg>
+    <introduction>
+      <tagName>Separera flera Taggar med kommatecken ","</tagName>
+    </introduction>
+  </UITaggingForm>
+
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.info.UIMetadataContainer     #
+  ###################################################################################
+  -->
+  <UIViewMetadataContainer>
+    <msg>
+      <path-not-found>Noden stöder inte denna vy.</path-not-found>
+    </msg>
+  </UIViewMetadataContainer>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.webui.component.explorer.popup.info.UIViewMetadataForm      #
+  ###################################################################################
+  -->
+  <UIViewMetadataForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIViewMetadataForm>
+  <metadataForm>
+    <title>
+      <UIViewMetadataForm>Lägg till/redigera egenskaper</UIViewMetadataForm>
+    </title>
+  </metadataForm>
+  <UIViewMetadataTemplate>
+    <msg>
+      <access-denied>Åtkomst nekad. Du är antingen inte ägaren eller har inte behörighet att redigera i den här noden.</access-denied>
+    </msg>
+  </UIViewMetadataTemplate>
+  <!--
+  ###################################################################################
+  # Validator messages                                                              #
+  ###################################################################################
+  -->
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>Fältet {0} innehåller ogiltiga tecken. Ange ett annat värde.</Invalid-char>
+      <empty-input>Värdet för fältet {0} är noll eller tomt.</empty-input>
+    </msg>
+  </ECMNameValidator>
+  <DateTimeValidator>
+    <msg>
+      <Invalid-input>Fältet {0} med värdet '{1}' är ogiltigt.</Invalid-input>
+    </msg>
+  </DateTimeValidator>
+  <CronExpressionValidator>
+    <invalid-input>Ditt cron-uttryck är ogiltig. Vänligen kontrollera syntax.</invalid-input>
+  </CronExpressionValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>Fyll i fältet {0}.</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <CategoryValidator>
+    <msg>
+      <non-categories>Kategorier är fel. Välj bra kategorier.</non-categories>
+    </msg>
+  </CategoryValidator>
+  <!--
+  ###################################################################################
+  # JCR Exceptions manager                                                              #
+  ###################################################################################
+  -->
+  <ReferentialIntegrityException>
+    <msg>Åtgärden misslyckades. Det finns fortfarande några referensobjekt i arbetsytan.</msg>
+  </ReferentialIntegrityException>
+  <ItemExistsException>
+    <msg>Objektet finns redan.</msg>
+  </ItemExistsException>
+  <AccessControlException>
+    <msg>Åtkomst nekad. Du har inte behörighet att utföra denna åtgärd.</msg>
+  </AccessControlException>
+  <AccessDeniedException>
+    <msg>Åtkomst nekad.</msg>
+  </AccessDeniedException>
+  <ItemNotFoundException>
+    <msg>Objektet hittades inte. Det kan ha tagits bort eller ändrats.</msg>
+  </ItemNotFoundException>
+  <PathNotFoundException>
+    <msg>Sökvägen hittades inte. Det kan ha tagits bort eller ändrats.</msg>
+  </PathNotFoundException>
+  <ConstraintViolationException>
+    <msg>Du kan inte utföra den här åtgärden på grund av vissa begränsningar.</msg>
+  </ConstraintViolationException>
+  <!--
+  ###################################################################################
+  # Publication Manage                                                              #
+  ###################################################################################
+  -->
+  <UIPublicationForm>
+    <label>
+      <published>Publicerad</published>
+      <non-published>Ej publicerad</non-published>
+      <public>Offentlig</public>
+      <private>Privat</private>
+      <state>Läge</state>
+      <visibility>Synlighet</visibility>
+      <nodeName>Nodnamn:</nodeName>
+      <lifecycleName>Livscykel namn</lifecycleName>
+      <stateName>Läges namn</stateName>
+    </label>
+    <action>
+      <Save>Spara</Save>
+      <UnsubcriberLifeCycle>Avsluta prenumeration</UnsubcriberLifeCycle>
+      <Cancel>Avbryt</Cancel>
+    </action>
+  </UIPublicationForm>
+  <!--
+  ###################################################################################
+  # JCR Browser                                                             #
+  ###################################################################################
+  -->
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>Arbetsyta:</workspaceName>
+      <rootNodeInfo>Rotsökvägen:</rootNodeInfo>
+      <rootPath>Rotsökvägen:</rootPath>
+    </label>
+  </UIWorkspaceList>
+  <pathSelector>
+    <title>
+      <UIOneNodePathSelector>Nod väljare</UIOneNodePathSelector>
+    </title>
+  </pathSelector>
+  <!--
+  ###################################################################################
+  # Others                                                                          #
+  ###################################################################################
+  -->
+  <EmailAddressValidator>
+    <msg>
+      <Invalid-input>E-postadressen är ogiltig.</Invalid-input>
+    </msg>
+  </EmailAddressValidator>
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>Är du säker på att du vill ta bort?</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <RepeatCountValidator>
+    <msg>
+      <invalid-value>Värdet i fältet 'Upprepa räkning' är ogiltigt. Endast heltal eller -1 är tillåtet.</invalid-value>
+    </msg>
+  </RepeatCountValidator>
+  <RepeatIntervalValidator>
+    <msg>
+      <invalid-value>Värdet i fältet "Tidsintervall" är ogiltig. Endast långa typer är tillåtna.</invalid-value>
+    </msg>
+  </RepeatIntervalValidator>
+  <UIPermissionSelector>
+    <label>
+      <selectGroup>Välj grupp</selectGroup>
+      <selectUser>Välj användare</selectUser>
+      <selectMembership>Välj medlemskap</selectMembership>
+    </label>
+  </UIPermissionSelector>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.ECMStandardPropertyNameValidator                        #
+  ###################################################################################
+  -->
+  <ECMStandardPropertyNameValidator>
+    <msg>
+      <empty-input>Värdet för fältet {0} är noll eller tomt.</empty-input>
+      <Invalid-char>Fältet {0} innehåller ogiltiga tecken. Ange ett annat värde.</Invalid-char>
+    </msg>
+  </ECMStandardPropertyNameValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.SearchValidator                                     #
+  ###################################################################################
+  -->
+  <SearchValidator>
+    <msg>
+      <empty-input>Värdet i det här fältet är noll eller tomt.</empty-input>
+      <Invalid-char>Det här fältet innehåller ogiltiga tecken. Ange ett annat värde.</Invalid-char>
+      <Invalid-char2>Numret måste följas av tecknet "~".</Invalid-char2>
+      <Invalid-char1>Numret efter tecknet "~" måste mellan 0 och 1.</Invalid-char1>
+      <Invalid-char3>Numret måste följas av karaktären ' ^'.</Invalid-char3>
+      <Invalid-char4>Blanksteg är inte tillåtna nära tecknet "~".</Invalid-char4>
+      <Invalid-char5>Blanksteg är inte tillåtna nära tecknet ' ^'.</Invalid-char5>
+    </msg>
+  </SearchValidator>
+  <!--
+  ###################################################################################
+  # PublicationService                                                              #
+  ###################################################################################
+  -->
+  <UIPublicationLogList>
+    <header>
+      <date>Datum</date>
+      <newState>Nytt läge</newState>
+      <user>Användare</user>
+      <description>Beskrivning</description>
+      <version>Version</version>
+      <visibility>Synlighet</visibility>
+    </header>
+    <action>
+      <Close>Stäng</Close>
+    </action>
+  </UIPublicationLogList>
+  <!--
+  ###################################################################################
+  # UIVersionTreeList                                                             #
+  ###################################################################################
+  -->
+  <UIVersionTreeList>
+    <header>
+      <version>Version</version>
+      <state>Läge</state>
+    </header>
+  </UIVersionTreeList>
+  <!--
+  ###################################################################################
+  # UIThumbnailForm                                                             #
+  ###################################################################################
+  -->
+  <UIThumbnailForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <RemoveThumbnail>Ta bort miniatyr</RemoveThumbnail>
+    </action>
+    <label>
+      <mediumSize>Miniatyrbild</mediumSize>
+      <SelectFile>Välj miniatyrbild</SelectFile>
+    </label>
+    <msg>
+      <mimetype-incorrect>Felaktig filtyp. Miniatyrerna kan endast skapas från.JPG.PNG eller.GIF-filer.</mimetype-incorrect>
+      <access-denied>Åtkomst nekad. Du har inte behörighet att lägga till en miniatyrbild till den här noden.</access-denied>
+      <confirm-delete>Är du säker på att du vill ta bort denna miniatyr?</confirm-delete>
+      <is-checked-in>Den här noden är incheckad. Kolla gärna innan du utför en åtgärd.</is-checked-in>
+    </msg>
+    <title>
+      <remove-thumbnail>Ta bort den här miniatyrbilden</remove-thumbnail>
+    </title>
+  </UIThumbnailForm>
+  <!--
+  ###################################################################################
+  # UIAnyPermission                                                                 #
+  ###################################################################################
+  -->
+  <UIAnyPermission>
+    <label>
+      <anyPermission>Alla tillstånd</anyPermission>
+    </label>
+  </UIAnyPermission>
+
+  <anyPermission>
+    <title>
+      <AddAnyPermission>Ange alla behörigheter</AddAnyPermission>
+    </title>
+  </anyPermission>
+  <!--
+  ###################################################################################
+  # UICategoriesAddedList                                                           #
+  ###################################################################################
+  -->
+  <UICategoriesSelector>
+    <action>
+      <close>Stäng</close>
+    </action>
+  </UICategoriesSelector>
+  <!--
+  ###################################################################################
+  # Since ECM version 2.2                                                             #
+  ###################################################################################
+  -->
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>Välj grupp</selectGroup>
+      <selectUser>Välj användare</selectUser>
+      <selectMembership>Välj medlemskap</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+  <!--
+  ###Since ECM version 2.2##############
+  -->
+
+  <!--
+  ### Since ECM version 2.3 Alpha##############
+  Access directly a JCR FE drive
+  -->
+  <UIJCRExplorerPortlet>
+    <nopermission>Det finns antingen ingen enhet eller du har inte behörighet att komma åt enheten.</nopermission>
+  </UIJCRExplorerPortlet>
+
+  <UIJcrExplorerEditForm>
+    <title>Redigera fil utforskare</title>
+    <action>
+      <Edit>Redigera</Edit>
+      <Save>Spara</Save>
+      <Cancel>Avbryt</Cancel>
+    </action>
+    <label>
+      <uploadFileSizeLimitMB>Storleksgränsen för den överförda filen (MB)</uploadFileSizeLimitMB>
+      <isDirectlyDrive>Direkt enhet</isDirectlyDrive>
+      <driveName>Enhetsnamn</driveName>
+      <usecase>Välj typ</usecase>
+      <SelectNodePath>Välj sökväg</SelectNodePath>
+      <showTopBar>Visa Topp fält</showTopBar>
+      <showActionBar>Visa Åtgärds fält</showActionBar>
+      <showSideBar>Visa vänster fält</showSideBar>
+      <showFilterBar>Visa Filter panel</showFilterBar>
+      <nodePath>Välj sökväg</nodePath>
+    </label>
+  </UIJcrExplorerEditForm>
+
+  <UIDriveSelector>
+    <label>
+      <driveName>Enhetsnamn</driveName>
+      <action>Åtgärd</action>
+      <adddrives>Lägga till enheter</adddrives>
+    </label>
+  </UIDriveSelector>
+  <UIJcrExplorerEditForm>
+    <label>
+      <DriveNameInput>UI JCR Explorer Edit Form</DriveNameInput>
+    </label>
+    <msg>
+      <personal-usecase>Den privata enheten för den aktuella användaren kommer att användas när du väljer personlig användarfall.</personal-usecase>
+      <drive-edit-permission>Du kan inte redigera enhetsnamnet. Klicka på knappen Redigera.</drive-edit-permission>
+      <path-edit-permission>Du kan inte redigera sökvägen. Klicka på knappen Redigera.</path-edit-permission>
+    </msg>
+  </UIJcrExplorerEditForm>
+
+  <PopUpSelectDrive>
+    <title>
+      <UIDriveSelector>Välj enhet</UIDriveSelector>
+    </title>
+  </PopUpSelectDrive>
+
+  <PopupSelectPath>
+    <title>
+      <UIOneNodePathSelector>Markera noden</UIOneNodePathSelector>
+    </title>
+  </PopupSelectPath>
+
+  <DriveNameInput>
+    <title>
+      <SelectDrive>Välj enhet</SelectDrive>
+    </title>
+  </DriveNameInput>
+
+  <!--
+  ### Since ECM version 2.4.x ##############
+  -->
+  <UIActionBar>
+    <tooltip>
+      <AddSymLink>Lägg till Symlink</AddSymLink>
+      <AddLocalizationLink>Lägg till översättning</AddLocalizationLink>
+    </tooltip>
+  </UIActionBar>
+
+  <UIPopupWindow>
+    <title>
+      <UISymLinkManager>Symlink Manager</UISymLinkManager>
+      <UIAddTranslationManager>Lägg till översättning</UIAddTranslationManager>
+    </title>
+  </UIPopupWindow>
+
+  <UISymLinkForm>
+    <label>
+      <symLinkName>Symlink namn</symLinkName>
+      <pathNode>Sökväg till nod</pathNode>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <addFolder-successful>Den symboliska länken {0} har lagts.</addFolder-successful>
+      <name-invalid>Ange den symboliska länken.</name-invalid>
+      <name-not-allowed>Detta namn är inte tillåtet.</name-not-allowed>
+      <fileName-error>Filnamnet är ogiltig.</fileName-error>
+      <constraint-violation>Du kan inte lägga till nodtypen {0} i den aktuella noden.</constraint-violation>
+      <repository-exception>Åtkomst nekad. Du har inte behörighet att lägga till symlink i den här noden.</repository-exception>
+      <numberformat-exception>Du kan inte spara den här mappen. Namnet som anges måste vara i numeriskt format.</numberformat-exception>
+      <path-node-invalid>Ange sökvägen till noden.</path-node-invalid>
+      <path-node-not-allowed>Detta namn är inte tillåtet.</path-node-not-allowed>
+      <non-node>Välj målnoden med "trust";  Du kanske inte har rätt att läsa den här noden.</non-node>
+      <cannot-save>Du kan inte lägga till en symbolisk länk för den här noden.</cannot-save>
+      <item-exists-exception>Nodnamnet finns redan.</item-exists-exception>
+      <translation-node-same-language-default>Översättnings noden har samma språk som standardspråk för den aktuella noden.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Denna målnod refereras inte.</UnsupportedRepositoryOperationException>
+    </msg>
+  </UISymLinkForm>
+  
+  <UIAddTranslationForm>
+    <label>
+      <symLinkName>Symlink namn</symLinkName>
+      <pathNode>Dokumentets sökväg:</pathNode>
+      <note>Välj ett annat dokument som kommer att fungera som översättningen</note>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <SelectDocument>Välj dokument</SelectDocument>
+    </action>
+    <msg>
+      <addFolder-successful>Den symboliska länken {0} är lagts till.</addFolder-successful>
+      <name-invalid>Ange den symboliska länken.</name-invalid>
+      <name-not-allowed>Detta namn är inte tillåtet.</name-not-allowed>
+      <fileName-error>Filnamnet är ogiltig.</fileName-error>
+      <constraint-violation>Du kan inte lägga till nodtypen {0} i den aktuella noden.</constraint-violation>
+      <repository-exception>Åtkomst nekad. Du har inte behörighet att lägga till symlink i den här noden.</repository-exception>
+      <numberformat-exception>Du kan inte spara den här mappen. Namnet som anges måste vara i numeriskt format.</numberformat-exception>
+      <path-node-invalid>Ange sökvägen till noden.</path-node-invalid>
+      <path-node-not-allowed>Detta namn är inte tillåtet.</path-node-not-allowed>
+      <non-node>Välj målnoden med "trust";  Du kanske inte har rätt att läsa den här noden.</non-node>
+      <cannot-save>Ett fel uppstod när den symboliska länken skapades.</cannot-save>
+      <item-exists-exception>Nodnamnet finns redan.</item-exists-exception>
+      <translation-node-same-language-default>Översättnings noden har samma språk som standardspråk för den aktuella noden.</translation-node-same-language-default>
+      <UnsupportedRepositoryOperationException>Denna målnod refereras inte.</UnsupportedRepositoryOperationException>
+    </msg>
+  </UIAddTranslationForm>
+
+  <UIPopupSymLink>
+    <title>
+      <UIOneNodePathSelector>Välj målnod</UIOneNodePathSelector>
+    </title>
+  </UIPopupSymLink>
+  <UIPopupSymLink>
+    <title>
+      <UIContentSelectorOne>Välj dokument</UIContentSelectorOne>
+    </title>
+  </UIPopupSymLink>
+
+  <ECMContextMenu>
+    <event>
+      <AddSymLink>Lägg till Symlink</AddSymLink>
+      <AddLocalizationLink>Lägg till översättning</AddLocalizationLink>
+    </event>
+  </ECMContextMenu>
+
+  <UIWorkingArea>
+    <msg>
+      <create-link-problem>Du kan inte skapa en länk för noden {0} på {1}.</create-link-problem>
+      <dest-node-is-link>Målnod {0} är redan en symbolisk länk, så du inte kan skapa en symbolisk länk inuti den.</dest-node-is-link>
+      <selected-is-link>Den markerade noden {0} är redan en länk, så du inte kan skapa en länk till en annan länk.</selected-is-link>
+      <confirm-create-link>Vill du skapa en länk till den här platsen?</confirm-create-link>
+    </msg>
+  </UIWorkingArea>
+
+  <ECMContextMenu>
+    <event>
+      <CreateLink>Skapa länk</CreateLink>
+    </event>
+  </ECMContextMenu>
+
+  <UIWorkspaceList>
+    <msg>
+      <AccessDeniedException>Åtkomst nekad. Du har inte läsbehörighet i den här arbetsytan.</AccessDeniedException>
+    </msg>
+    <label>
+      <taxonomyTree>Kategoriträdet</taxonomyTree>
+    </label>
+  </UIWorkspaceList>
+
+  <UIPopupTaxonomy>
+    <title>
+      <UIOneTaxonomySelector>Lägg till kategorier</UIOneTaxonomySelector>
+    </title>
+  </UIPopupTaxonomy>
+
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>Kategoriträdet:</taxonomyTree>
+      <rootNodePath>Rot träd:</rootNodePath>
+      <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
+    </label>
+  </UITreeTaxonomyList>
+
+  <UIActionBar>
+    <tooltip>
+      <ManageSimpleCategories>Hantera enkla kategorier</ManageSimpleCategories>
+    </tooltip>
+  </UIActionBar>
+
+  <UISimpleCategoryManager>
+    <tab>
+      <label>
+        <UICategoriesAddedList>Refererade kategorier</UICategoriesAddedList>
+        <UIOneNodePathSelector>Välj kategori</UIOneNodePathSelector>
+      </label>
+    </tab>
+  </UISimpleCategoryManager>
+
+  <UICategoryManager>
+    <tab>
+      <label>
+        <UIOneTaxonomySelector>Välj kategori</UIOneTaxonomySelector>
+      </label>
+    </tab>
+  </UICategoryManager>
+
+  <UISimpleCategoryManager>
+    <action>
+      <Close>Stäng</Close>
+    </action>
+  </UISimpleCategoryManager>
+  <UIPopupWindow>
+    <title>
+      <UISimpleCategoryManager>Lägg till kategori</UISimpleCategoryManager>
+    </title>
+  </UIPopupWindow>
+  <UICategoriesAddedList>
+    <msg>
+      <ItemExistsException>Kategorinamnet finns redan.</ItemExistsException>
+    </msg>
+  </UICategoriesAddedList>
+
+  <UIConfirmMessage>
+    <label>
+      <Close>#{word.cancel}</Close>
+      <OK>Ta bort</OK>
+      <ReplaceData>Ersätta Data</ReplaceData>
+      <Back>Tillbaka till namnbyte</Back>
+      <Keepfile>Behåll båda filerna</Keepfile>
+    </label>
+  </UIConfirmMessage>
+
+  <UIRestoreConfirmMessage>
+    <label>
+      <Close>#{word.close}</Close>
+      <OK>Ok</OK>
+      <ReplaceData>Ersätta Data</ReplaceData>
+      <Back>Tillbaka till namnbyte</Back>
+      <Keepfile>Behåll båda filerna</Keepfile>
+    </label>
+  </UIRestoreConfirmMessage>
+
+
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>Lägg till kategorier</UIOneTaxonomySelector>
+    </title>
+  </PopupComponent>
+
+  <UIWorkingArea>
+    <msg>
+      <can-not-move-to-itself>Du kan inte flytta filen, eftersom målmappen är samma som källmappen.</can-not-move-to-itself>
+      <is-editing>Du kan inte flytta ett dokument medan den redigeras. Stäng den först.</is-editing>
+    </msg>
+  </UIWorkingArea>
+
+  <UIImportNode>
+    <label>
+      <behavior>UUID beteende</behavior>
+      <versionHistory>Versionshistorik</versionHistory>
+    </label>
+    <msg>
+      <history-invalid-type>Ogiltig filtyp i versionshistoriken. Endast zip-filer stöds.</history-invalid-type>
+      <history-invalid-content>Ogiltigt innehåll i versionshistorik data. Välj ett filformat som du vill importera.</history-invalid-content>
+    </msg>
+  </UIImportNode>
+
+  <Import>
+    <Behavior>
+      <type0>Skapa nya</type0>
+      <type1>Ta bort befintliga</type1>
+      <type2>Ersätta befintliga</type2>
+      <type3>Undantagsfelet</type3>
+    </Behavior>
+  </Import>
+
+  <UIExportNode>
+    <action>
+      <ExportHistory>Exportera versionshistorik</ExportHistory>
+    </action>
+  </UIExportNode>
+
+  <UIPopupMenu>
+    <msg>
+      <node-locked-other-person>Denna eller dess överordnade nod är låst av en annan användare, så du inte kan ta bort den.</node-locked-other-person>
+    </msg>
+  </UIPopupMenu>
+
+  <Import>
+    <label>
+      <docview>Dokumentvy</docview>
+      <sysview>Systemvy</sysview>
+    </label>
+  </Import>
+
+  <UIDocumentForm>
+    <msg>
+      <do-not-permission>Du har inte behörighet att ladda mallen {0}.</do-not-permission>
+    </msg>
+  </UIDocumentForm>
+
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIActionBar                #
+  #                           Localize tab                                                                                    #
+  ###################################################################################
+  -->
+  <UIActionBar>
+    <obtion>
+      <Admin>Admin</Admin>
+      <Info>Information</Info>
+      <Actions>Åtgärder</Actions>
+      <Collaboration>Samarbete</Collaboration>
+      <Search>Sök</Search>
+    </obtion>
+  </UIActionBar>
+
+  <UIPopupMenu>
+    <msg>
+      <can-not-unlock-node-is-checked-in>Du kan inte låsa upp eftersom noden {0} (eller dess förfader) checkas in.</can-not-unlock-node-is-checked-in>
+    </msg>
+  </UIPopupMenu>
+
+  <!--
+   #############  From DMS 2.5 #############
+  -->
+  <UIActionBar>
+    <msg>
+      <cannot-enable-version>Kan inte aktivera versionshanterings nod.</cannot-enable-version>
+    </msg>
+  </UIActionBar>
+  <UIPopupMenu>
+    <msg>
+        <cannot-readsource>Du kan inte läsa data från Källnoden.</cannot-readsource>
+    </msg>
+  </UIPopupMenu>
+  <UIUploadForm>
+    <msg>
+      <upload-not-null>Vänligen ladda upp filen innan du lägger till en kategori.</upload-not-null>
+    </msg>
+  </UIUploadForm>
+  <UIActionBar>
+    <msg>
+      <allow-setProperty>Du måste ange en egenskap för denna grupp.</allow-setProperty>
+    </msg>
+  </UIActionBar>
+
+  <UIActionForm>
+    <msg>
+      <name-not-allowed>Detta åtgärdsnamn är inte tillåtet.</name-not-allowed>
+    </msg>
+  </UIActionForm>
+
+  <UISaveQueryForm>
+    <msg>
+      <name-not-allowed>Detta frågenamn tillåts inte.</name-not-allowed>
+    </msg>
+  </UISaveQueryForm>
+  <UISimpleSearch>
+    <msg>
+      <name-not-allowed>Ett ord eller en fras i innehåll är inte tillåtet.</name-not-allowed>
+    </msg>
+  </UISimpleSearch>
+
+
+  <!--
+   #############  From DMS 2.6 #############
+  -->
+  <ECMContextMenu>
+      <event>
+        <Permlink>Visa dokument</Permlink>
+      </event>
+  </ECMContextMenu>
+  
+
+  <!--
+    ############  From DMS 2.6 ##############
+   -->
+  <UIFolderForm>
+    <label>
+      <nt_folder>Dokumentmapp</nt_folder>
+      <nt_unstructured>Innehållsmappen</nt_unstructured>
+      <exo_cssFolder>CSS mapp</exo_cssFolder>
+      <exo_jsFolder>JavaScript mapp</exo_jsFolder>
+      <exo_linkFolder>Länk mapp</exo_linkFolder>
+      <exo_webFolder>Webbinnehållsmapp</exo_webFolder>
+   </label>
+  </UIFolderForm>
+
+  <Comments>
+    <tooltip>
+      <remove-comment>Ta bort denna kommentar</remove-comment>
+      <edit-comment>Redigera denna kommentar</edit-comment>
+    </tooltip>
+  </Comments>
+  <UIDocumentInfo>
+    <msg>
+      <confirm-deletecomment>Är du säker på att du vill radera denna kommentar?</confirm-deletecomment>
+    </msg>
+  </UIDocumentInfo>
+
+ <UIExportNode>
+  <msg>
+    <OutOfMemoryError>Du bör välja systemvy när du exporterar stora mängder data.</OutOfMemoryError>
+  </msg>
+ </UIExportNode>
+ <Taxonomy>
+    <msg>
+      <AccessDeniedException>Du har inte behörighet att komma åt dessa kategori träd.</AccessDeniedException>
+    </msg>
+  </Taxonomy>
+
+  <UIJcrExplorerEditForm>
+    <msg>
+      <notNullDriveName>Enhetsnamnet är noll eller tomt. Fyll i fältet för enhetsnamnet.</notNullDriveName>
+      <notNullPath>Sökvägen är noll eller tomt. Fyll i sökvägen.</notNullPath>
+    </msg>
+  </UIJcrExplorerEditForm>
+
+  <UIViewSearchResult>
+    <tooltip>
+      <remove-attachment>Är du säker på att du vill ta bort den här bifogade filen?</remove-attachment>
+    </tooltip>
+  </UIViewSearchResult>
+
+  <SameNamePopup>
+    <title>
+      <UIUploadBehaviorWithSameName>Ladda upp fil</UIUploadBehaviorWithSameName>
+    </title>
+  </SameNamePopup>
+
+  <UIAllItems>
+    <label>
+      <OwnedByMe>Ägs av mig</OwnedByMe>
+      <Favourites>Favoriter</Favourites>
+      <Hidden>Dold</Hidden>
+      <Trash>Papperskorgen</Trash>
+      <Configuration>Ställa in inställningar</Configuration>
+    </label>
+    <title>
+      <allItems>Alla objekt</allItems>
+    </title>
+  </UIAllItems>
+
+  <UIPreferencesForm>
+      <label>
+          <Alphabetic>Alfabetisk</Alphabetic>
+          <Type>Typ</Type>
+          <CreatedDate>Skapad Datum</CreatedDate>
+          <ModifiedDate>Ändrade datum</ModifiedDate>
+          <Ascending>Stigande ordning</Ascending>
+          <Descending>Fallande ordning</Descending>
+      </label>
+  </UIPreferencesForm>
+
+  <UISavedSearches>
+    <title>
+      <savedSearches>Sparade sökningar</savedSearches>
+    </title>
+  </UISavedSearches>
+  <DocumentType>
+    <label>
+       <Images>Bild</Images>
+       <Video>Video</Video>
+       <Music>Musik</Music>
+       <Documents>Dokument</Documents>
+       <Content>Innehåll</Content>
+    </label>
+  </DocumentType>
+
+  <UIDocumentFilterForm>
+    <label>
+      <Images>Bild</Images>
+      <Video>Video</Video>
+      <Music>Musik</Music>
+      <Documents>Dokument</Documents>
+      <Content>Innehåll</Content>
+    </label>
+    <title>Ställa in Filter</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIDocumentFilterForm>
+
+  <UIAllItemsByType>
+    <label>
+    <ByType>Filtrera efter typ</ByType>
+      <DocumentFilterConfiguration>Ställa in Filter</DocumentFilterConfiguration>
+    </label>
+    <title>
+      <ShowVideo>Visa alla video-filer</ShowVideo>
+      <ShowMusic>Visa alla musikfiler</ShowMusic>
+      <ShowImages>Visa alla bildfiler</ShowImages>
+      <ShowDocuments>Visa alla dokumentfiler</ShowDocuments>
+      <ShowContent>Show all document types</ShowContent>
+    </title>
+  </UIAllItemsByType>
+
+  <Views>
+    <label>
+      <slide-show>Bildspel</slide-show>
+    </label>
+  </Views>
+  <ECMContextMenu>
+    <event>
+      <PlayMedia>Spela upp Media</PlayMedia>
+    </event>
+  </ECMContextMenu>
+  <UIPopupWindow>
+    <title>
+      <UIDocumentFilterForm>Filtrera dokument typ</UIDocumentFilterForm>
+    </title>
+  </UIPopupWindow>
+
+  <UIAllItemsPreferenceForm>
+    <label>
+      <showOwnedByUser>Ägs av mig</showOwnedByUser>
+      <showFavourites>Favoriter</showFavourites>
+      <showHiddens>Dold</showHiddens>
+      <showTrash>Papperskorgen</showTrash>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIAllItemsPreferenceForm>
+
+  <EmptyTrashManageComponent>
+    <msg>
+      <confirm-delete>Är du säker du vill tömma alla objekt från papperskorgen?</confirm-delete>
+    </msg>
+  </EmptyTrashManageComponent>
+  <UICategoryForm>
+    <label>
+      <name>Kategorinamn</name>
+    </label>
+    <action>
+      <Save>Spara</Save>
+      <Cancel>Avbryt</Cancel>
+    </action>
+  </UICategoryForm>
+  <UIPopupWindow>
+    <title>
+      <UICategoryForm>Lägg till kategori</UICategoryForm>
+    </title>
+  </UIPopupWindow>
+  <UIActionBar>
+    <tooltip>
+      <AddCategory>Lägg till kategori</AddCategory>
+    </tooltip>
+   </UIActionBar>
+
+   <UITaggingForm>
+    <label>
+      <Public>Offentlig</Public>
+      <Private>Privat</Private>
+      <tagScopes>Tagg scope</tagScopes>
+    </label>
+   </UITaggingForm>
+
+  <UITagExplorer>
+    <title>
+      <PublicTags>Taggar</PublicTags>
+      <EditPublicTags>Ändra taggar</EditPublicTags>
+      <PrivateTags>Taggar</PrivateTags>
+    </title>
+  </UITagExplorer>
+
+  <UIEditingTagsForm>
+    <header>
+      <name>Namn</name>
+      <relatedDocuments>Relaterade dokument</relatedDocuments>
+      <action>Åtgärd</action>
+    </header>
+    <action>
+      <title>
+        <EditTag>Redigera tagg</EditTag>
+        <RemoveTag>Ta bort tagg</RemoveTag>
+        <AddTag>Lägg till Tag</AddTag>
+      </title>
+    </action>
+    <msg>
+      <confirm-remove>Är du säker på att ta bort denna tagg?</confirm-remove>
+    </msg>
+  </UIEditingTagsForm>
+
+
+  <UIPopupWindow>
+    <title>
+      <UIEditingTagsForm>Redigera tagg</UIEditingTagsForm>
+    </title>
+  </UIPopupWindow>
+
+  <UITagForm>
+    <action>
+      <UpdateTag>#{word.save}</UpdateTag>
+      <Cancel>#{word.close}</Cancel>
+    </action>
+    <label>
+      <tagName>Taggnamn:</tagName>
+      <relatedDocuments>Relaterade dokument</relatedDocuments>
+    </label>
+  </UITagForm>
+
+  <TagPopup>
+    <title>
+      <UITagForm>Tag</UITagForm>
+    </title>
+  </TagPopup>
+
+    <UIPopupMenu>
+    <msg>
+      <node-locked-editing>Du kan inte redigera den här noden med sökvägen {0}. Den är låst av en annan användare.</node-locked-editing>
+    </msg>
+  </UIPopupMenu>
+  <UITagStyleForm>
+    <msg>
+      <error-update>Ett fel inträffade under uppdateringen av tag utseendet.</error-update>
+    </msg>
+  </UITagStyleForm>
+
+  <UIPopupMenu>
+    <msg>
+      <editTagAccessDenied>Åtkomst nekad.</editTagAccessDenied>
+    </msg>
+  </UIPopupMenu>
+
+  <UIPopupWindow>
+    <title>
+      <UITaggingFormContainer>Tag administration</UITaggingFormContainer>
+    </title>
+  </UIPopupWindow>
+
+    <PopupComponent>
+    <title>
+      <UINodeTypeSelector>Välj nodtyp</UINodeTypeSelector>
+    </title>
+  </PopupComponent>
+
+    <UIActionForm>
+    <title>
+      <ShowComponent>Visa komponent</ShowComponent>
+      <removeReference>Ta bort</removeReference>
+    </title>
+  </UIActionForm>
+
+  <EditFormAction>
+    <title>
+      <ShowComponent>Visa komponent</ShowComponent>
+      <removeReference>Ta bort</removeReference>
+    </title>
+  </EditFormAction>
+
+  <NodeTypeNameValidator>
+    <msg>
+      <Invalid-char>Det finns ogiltiga tecken. Ange ett annat värde.</Invalid-char>
+      <empty-input>Värdet i fältet är noll eller tomt.</empty-input>
+    </msg>
+  </NodeTypeNameValidator>
+
+  <UIPreferencesForm>
+      <label>
+            <queryType>Frågetyp:</queryType>
+            <SQL>SQL</SQL>
+            <XPATH>XPATH</XPATH>
+      </label>
+  </UIPreferencesForm>
+
+  <UIDocumentInfo>
+    <msg>
+      <repository-error>Ett fel uppstod. Information om databasen är förlorat.</repository-error>
+    </msg>
+  </UIDocumentInfo>
+
+  <UITreeExplorer>
+    <msg>
+      <repository-error>Ett fel uppstod. Information om databasen är förlorat.</repository-error>
+    </msg>
+  </UITreeExplorer>
+  <UIDocumentForm>
+    <msg>
+      <constraintviolation-exception>Du kan inte spara dokumentet. Indata är ogiltig eller saknas.</constraintviolation-exception>
+    </msg>
+  </UIDocumentForm>
+  <UIActionForm>
+    <msg>
+      <constraintviolation-exception>Du kan inte spara dokumentet. Indata är ogiltig eller saknas.</constraintviolation-exception>
+    </msg>
+  </UIActionForm>
+
+  <UISelectRestorePath>
+    <action>
+      <Save>Spara</Save>
+      <Cancel>Avbryt</Cancel>
+    </action>
+    <label>
+      <formInput>Den tidigare sökvägen är borta. Välj en ny.</formInput>
+    </label>
+  </UISelectRestorePath>
+  <PathNode>
+    <title>
+      <Add>Lägg till</Add>
+    </title>
+  </PathNode>
+  <UIPopupPathFoRestore>
+    <title>
+      <UIOneNodePathSelector>Välj överordnad nod</UIOneNodePathSelector>
+    </title>
+  </UIPopupPathFoRestore>
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Lägg till rotnoden</AddRootNode>
+    </title>
+  </rootNodeInfo>
+
+  <UIActionForm>
+    <msg>
+      <homePath-emty>Hem sökvägen är tom.</homePath-emty>
+      <targetPath-emty>Målsökvägen är tom.</targetPath-emty>
+    </msg>
+    </UIActionForm>
+    <UIActionBar>
+      <msg>
+        <not-exist-categories>Det finns inga kategorier.</not-exist-categories>
+      </msg>
+    </UIActionBar>
+
+  <UIPublicationContainer>
+   <action>
+    <Close>#{word.close}</Close>
+   </action>
+  </UIPublicationContainer>
+
+<UIPublicationPanel>
+    <button>
+      <Close>Stäng</Close>
+    </button>
+    <revisions>
+      <version>Revideringar</version>
+      <date>Datum</date>
+      <author>Författare</author>
+      <status>Status</status>
+      <action>Åtgärd</action>
+      <label>Revision</label>
+      <none>Inga ändringar</none>
+      <seeall>Se alla versioner</seeall>
+      <currentVersion>Aktuell översyn</currentVersion>
+      <confirm>Du kommer att förlorar ditt utkast till arbete. Är du säker på att du vill ersätta den aktuella översynen?</confirm>
+    </revisions>
+    <status>
+      <version>Revision</version>
+      <title>Status</title>
+      <archived>Arkiverad</archived>
+      <obsolete>Utgången</obsolete>
+      <unpublished>Ej publicerad</unpublished>
+      <enrolled>Inskrivna</enrolled>
+      <draft>Utkast</draft>
+      <pending>Väntläge</pending>
+      <approved>Godkänd</approved>
+      <inreview>Under granskning</inreview>
+      <staged>Iscensatt</staged>
+      <published>Publicerad</published>
+      <live>Publicerad</live>
+    </status>
+    <scheduled>
+      <title>Schemalagd</title>
+      <from>Från</from>
+      <to>Till</to>
+    </scheduled>
+    <title>
+      <preview>Förhandsgranska</preview>
+      <restore>Återställ</restore>
+    </title>
+    <msg>
+      <have-no-view-template>Visa mallen stöds inte.</have-no-view-template>
+      <restore-complete>Återställningen slutförd.</restore-complete>
+    </msg>
+  </UIPublicationPanel>
+  <UIPublicationHistory>
+    <header>
+      <date>Datum</date>
+      <versionName>Reviderings namn</versionName>
+      <currentState>Aktuellt läge</currentState>
+      <user>Författare</user>
+      <description>Beskrivning</description>
+    </header>
+  </UIPublicationHistory>
+  
+  <UIPublicationSchedule>
+    <label>
+      <introduction>Du kan schemalägga publiceringen av dokumentet. Välj de datum som du vill se dokumentet publiceras</introduction>
+      <no-schedule-info>Det finns ingen Utgivningsplan för dokumentet</no-schedule-info>
+    </label>
+    <msg>
+      <save-finished>Din nya utgivningsplan har sparats.</save-finished>
+    </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Reset</Reset>
+    </action>
+  </UIPublicationSchedule>
+
+  <UIPublicationPanel>
+    <label>
+      <header>Utgivningsdatum</header>
+      <start>Starta publicering</start>
+      <end>Avsluta publikation</end>
+    </label>
+    <msg>
+      <invalid-format>The date format is invalid. Please check again.</invalid-format>
+      <fromDate-after-toDate>Från-datum måste vara tidigare än till-datum.</fromDate-after-toDate>
+    </msg>
+  </UIPublicationPanel>
+  <UIPopupWindow>
+    <title>
+      <UIPublicationContainer>Hantera publikation</UIPublicationContainer>
+      <UIPublishingPanel>Hantera publikation</UIPublishingPanel>
+    </title>
+  </UIPopupWindow>
+  <WCMContentView>
+    <header>
+      <status>Status</status>
+      <author>Författare</author>
+      <date>Skapad Datum</date>
+      <title>Dokumenttitel</title>
+      <lastUser>Senaste användare</lastUser>
+    </header>
+  </WCMContentView>
+  <UITagForm>
+    <msg>
+      <NameAlreadyExist>Taggnamnet finns redan.</NameAlreadyExist>
+    </msg>
+  </UITagForm>
+
+  <!--
+  ############  From WCM 2.1.0 ##############
+  -->
+  <UICategoryManagerSearch>
+    <tab>
+      <label>
+        <UIOneTaxonomySelector>Välj kategori</UIOneTaxonomySelector>
+      </label>
+    </tab>
+  </UICategoryManagerSearch>
+
+  <UIPreferencesForm>
+   <action>
+     <HideAdvance>Dölj avancerad</HideAdvance>
+     <ShowAdvance>Visa avancerade</ShowAdvance>
+    </action>
+    <label>
+    <Advance>Avancerad</Advance>
+    </label>
+  </UIPreferencesForm>
+
+  <UIJCRExplorerPortlet>
+<msg>
+  <file-access-denied>Fileåtkomst nekad.</file-access-denied>
+  <anonymous-access-denied>Anonyma användaren har inte behörighet att använda denna funktion.</anonymous-access-denied>
+</msg>
+  </UIJCRExplorerPortlet>
+  <UIDrivesArea>
+    <DrivesArea>
+      <allDrives>Klicka på knappen Visa enheter att visa/dölja en lista över diskar i åtgärdsfältet.</allDrives>
+      <ShowDrives>Visa enheter</ShowDrives>
+    </DrivesArea>
+  </UIDrivesArea>
+  <UIJcrExplorerEditForm>
+    <msg>
+      <fields-saved>Alla fältvärden har sparats.</fields-saved>
+      <fields-cancelled>Alla fältvärden har tagits bort.</fields-cancelled>
+    </msg>
+  </UIJcrExplorerEditForm>
+  <UIDocumentForm>
+  <msg>
+  <confirm-close>Dina ändringar går förlorade om du stänger formuläret.</confirm-close>
+  <confirm-changeType>Dina ändringar går förlorade om du ändrar innehållstypen.</confirm-changeType>
+  <confirm-navigate>Dina ändringar går förlorade om du navigerar bort från denna sida.</confirm-navigate>
+  </msg>
+  </UIDocumentForm>
+  <UploadFileMimeTypesValidator>
+    <msg>
+      <wrong-mimetype>MIME-typen {0} tillåts inte för fältet {1}. Ladda upp en annan fil</wrong-mimetype>
+    </msg>
+  </UploadFileMimeTypesValidator>
+  <lifecyclePhase>
+    <label>
+    <no>Nej</no>
+  <yes>Ja</yes>
+  <true>sant</true>
+  <false>falskt</false>
+  <Electronic>Elektroniska</Electronic>
+  <Paper>Papper</Paper>
+  <NONE>Ingen</NONE>
+  <CLASSIFIED>Klassificerad</CLASSIFIED>
+  <UNCLASSIFIED>Oklassificerad</UNCLASSIFIED>
+  <NOCONTRACT>Inget kontrakt</NOCONTRACT>
+  <one-minute>En minut</one-minute>
+  <hourly>Varje timme</hourly>
+  <daily>Dagligen</daily>
+  <quarterly>Kvartalsvis</quarterly>
+  <yearly>Årligt</yearly>
+  <ten-years>Tio år</ten-years>
+  <read>Användaråtgärd</read>
+  <schedule>Schemaläggaren</schedule>
+  <node_added>Tillägg till innehåll</node_added>
+  <node_removed>Ta bort innehåll</node_removed>
+  <property_added>Lägg till egenskaper</property_added>
+  <property_removed>Ta bort egenskaper</property_removed>
+  <property_changed>Ändra egenskaper</property_changed>
+</label>
+  </lifecyclePhase>
+  <UIPopupMenu>
+  <msg>
+<can-not-remove-locked-node>Nod {0} är låst. Du kan inte flytta det till papperskorgen.</can-not-remove-locked-node>
+<can-not-remove-checked-in-node>Nod {0} eller dess överordnade är incheckad. Du kan inte flytta det till papperskorgen.</can-not-remove-checked-in-node>
+<access-denied-to-delete>Åtkomst nekad. Du kan inte flytta noden {0} till papperskorgen.</access-denied-to-delete>
+  </msg>
+  </UIPopupMenu>
+  <UIPropertyForm>
+  <msg>
+  <unknown-error>Ett fel uppstod medan du redigerar den här egenskapen.</unknown-error>
+    </msg>
+  </UIPropertyForm>
+  <UIWatchDocumentForm>
+    <msg>
+      <node-is-locked>Den här noden är låst. Du kan inte titta på den.</node-is-locked>
+      <unknown-error>Några fel har inträffat. Du kan inte titta på den här noden.</unknown-error>
+    </msg>
+  </UIWatchDocumentForm>   
+  <UIActionForm>
+    <msg>
+      <xss-vulnerability-character>Fältet {0} innehåller XSS sårbarhets tecken</xss-vulnerability-character>
+    </msg>
+  </UIActionForm>
+  <UIMultiUpload>
+  <label>
+    <AbortAll>Avbryt alla</AbortAll>
+    <AbortAllFiles>Avbryta alla filer</AbortAllFiles>
+    <MaxFileSize>Maximal filstorlek är</MaxFileSize>
+    <InvalidCharacters>Ogiltiga tecken kommer att ändras av "-"</InvalidCharacters>
+    <DropFileMessage>Släpp dina filer här i den aktuella mappen</DropFileMessage>
+    <Close>Stäng</Close>
+    <in>in</in>
+    <MaxFileSizeAlert>Filstorleken överskrider storleksbegränsningen</MaxFileSizeAlert>
+    <Waiting>Väntar på</Waiting>
+    <Error>Fel</Error>
+    <or>eller</or>
+    <AlreadyInUse>Redan används</AlreadyInUse>
+    <Keep>Behåll båda</Keep>
+    <Replace>Ersätt</Replace>
+    <Canceled>Avbruten</Canceled>
+    <Cancel>Avbryt</Cancel>
+    <AbortAllConfirmation>Vill du avbryta alla filer som är i process?</AbortAllConfirmation>
+  </label>
+  </UIMultiUpload>
+  <UIDocumentNodeList>
+  <label>
+  <CreatedOn>Skapat på</CreatedOn>
+  <Updated>Uppdaterad</Updated>
+  <by>Av</by>
+  <you>du</you>
+  </label>
+  </UIDocumentNodeList>
+  <FileView>
+    <label>
+      <name>Namn</name>
+      <date>Datum</date>
+      <size>Storlek</size>
+      <sortBy>Sortera efter:</sortBy>
+      <filesAreSelected>Filer är markerade.</filesAreSelected>
+      <ClearSelection>Tydlig markering</ClearSelection>
+      <more>Mer</more>
+    </label>
+  </FileView>
+  <UIPropertyForm>
+  <msg>
+  <property-name-incorrect>Egenskapsnamnet är felaktig, ange ett annat värde för det!</property-name-incorrect>
+    </msg>
+  </UIPropertyForm>
+  <!--
+  ###################################################################################
+  # JCR Exceptions manager                                                              #
+  ###################################################################################
+  -->
+  <VersionException>
+  <msg>Kan inte ändra dokument som checkas in.</msg>  
+  </VersionException>
+</bundle>

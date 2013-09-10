@@ -60,9 +60,9 @@ import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormInputInfo;
 import org.exoplatform.webui.form.UIFormRadioBoxInput;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 
 /**
  * Created by The eXo Platform SARL
@@ -111,7 +111,7 @@ public class UIExportNode extends UIForm implements UIPopupComponent {
     addUIFormInput(new UIFormInputInfo(NODE_PATH, NODE_PATH, null)) ;
     addUIFormInput(new UIFormRadioBoxInput(FORMAT, SYS_VIEW, formatItem).
                    setAlign(UIFormRadioBoxInput.VERTICAL_ALIGN)) ;
-    addUIFormInput(new UIFormCheckBoxInput<Boolean>(ZIP, ZIP, null)) ;
+    addUIFormInput(new UICheckBoxInput(ZIP, ZIP, null)) ;
   }
 
   public void update(Node node) throws Exception {
@@ -191,7 +191,7 @@ public class UIExportNode extends UIForm implements UIPopupComponent {
       DownloadService dservice = uiExport.getApplicationComponent(DownloadService.class);
       InputStreamDownloadResource dresource;
       String format = uiExport.<UIFormRadioBoxInput> getUIInput(FORMAT).getValue();
-      boolean isZip = uiExport.getUIFormCheckBoxInput(ZIP).isChecked();
+      boolean isZip = uiExport.getUICheckBoxInput(ZIP).isChecked();
       Node currentNode = uiExplorer.getCurrentNode();
       Session session = currentNode.getSession() ;
       String nodePath = currentNode.getPath();
@@ -228,7 +228,7 @@ public class UIExportNode extends UIForm implements UIPopupComponent {
         uiExplorer.cancelAction();
       } catch (OutOfMemoryError error) {
         uiApp.addMessage(new ApplicationMessage("UIExportNode.msg.OutOfMemoryError", null, ApplicationMessage.ERROR));
-        
+
         return;
       } finally {
         out.close();
@@ -304,7 +304,7 @@ public class UIExportNode extends UIForm implements UIPopupComponent {
         requireJS.require("SHARED/ecm-utils", "ecmutil").addScripts("ecmutil.ECMUtils.ajaxRedirect('" + downloadLink + "');");
       } catch (OutOfMemoryError error) {
         uiApp.addMessage(new ApplicationMessage("UIExportNode.msg.OutOfMemoryError", null, ApplicationMessage.ERROR));
-        
+
         return;
       } finally {
         propertiesBOS.close();

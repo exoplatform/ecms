@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIPresentationContainer>
+    <title>
+      <QuickEdit>Editar en el explorador de contenido</QuickEdit>
+      <print>Imprimir esta página</print>
+      <FastPublish>Publicar</FastPublish>
+    </title>
+    <label>
+      <draft>Draft</draft>
+      <print>Imprimir</print>
+    </label>
+    <msg>
+      <no-content>No se encontró contenido.</no-content>
+      <internal-server-error>Un error ocurrió al solicitar los datos desde el servidor.</internal-server-error>
+      <empty-title-error>Por favor especifique el nuevo título.</empty-title-error>
+    </msg>
+  </UIPresentationContainer>
+  <CorrectContentSelectorPopupWindow>
+    <title>
+      <UIContentSelectorOne>Seleccione contenido</UIContentSelectorOne>
+    </title>
+  </CorrectContentSelectorPopupWindow>
+  <UISingleContentViewerPortlet>
+    <msg>
+      <AccessControlException>No tiene permiso para acceder al modo de edición.</AccessControlException>
+    </msg>
+  </UISingleContentViewerPortlet>
+  <UISCVContextualRadioBox>
+    <label>
+      <Enable>Habilitado</Enable>
+      <Disable>Deshabilitado</Disable>
+    </label>
+  </UISCVContextualRadioBox>
+  <UIPreferencesPopupWindows>
+    <title>
+      <UISCVPreferences>Preferencias del detalle de contenido</UISCVPreferences>
+    </title>
+  </UIPreferencesPopupWindows>
+  <UISCVPreferences>
+    <action>
+      <Save>Guardar</Save>
+      <Abort>Anular</Abort>
+      <Cancel>Cancelar</Cancel>
+      <Print>Imprimir</Print>
+      <Close>Cerrar</Close>
+    </action>
+    <title>Preferencias del detalle de contenido</title>
+    <label>
+      <Back>Volver a la página anterior</Back>
+      <Edit>Editar</Edit>
+      <Preferences>Preferencias</Preferences>
+      <Title>Preferencias del detalle de contenido</Title>
+      <UISCVShowTitleConfigurationCheckBox>Mostrar título</UISCVShowTitleConfigurationCheckBox>
+      <UISCVShowDateConfigurationCheckBox>Mostrar fecha</UISCVShowDateConfigurationCheckBox>
+      <UISCVShowOptionBarConfigurationCheckBox>Mostrar barra de opción</UISCVShowOptionBarConfigurationCheckBox>
+      <DisplaySettingBlock>Mostrar ajustes</DisplaySettingBlock>
+      <ContentPathBlock>Selección de contenido</ContentPathBlock>
+      <UISCVConfigItemPathFormInputSet>Ruta del contenido</UISCVConfigItemPathFormInputSet>
+    <UISCVContentPathConfigurationInputBox>Ruta del contenido</UISCVContentPathConfigurationInputBox>
+      <Advance>Avanzado</Advance>
+      <ContextCaption>Navegación dinámica</ContextCaption>
+      <UISCVContextualRadioBox>Contenido contextual</UISCVContextualRadioBox>
+      <UISCVParameterInputBox>por</UISCVParameterInputBox>
+      <PrintSettingBlock>Configuración de impresión</PrintSettingBlock>
+      <UISCVPrintPageParameter>con</UISCVPrintPageParameter>
+      <UISCVConfigPrintPageFormInputSet>Mostrar en la página</UISCVConfigPrintPageFormInputSet>
+      <LockStatus>Lock</LockStatus>
+      <CacheManagement>Visibilidad de contenido</CacheManagement>
+      <UISCVCacheRadioBox>Compartir contenido</UISCVCacheRadioBox>
+    </label>
+    <help>
+      <ContentPathBlock>Seleccione el contenido que desea mostrar.  La selección por defecto será remplazada dinámicamente si activa la navegación dinámica (modo avanzado, ver debajo).</ContentPathBlock>
+      <DisplaySettingBlock>Puede mostrar u ocultar la barra de opciones que se utiliza para mostrar el enlace de impresión. La muestra de título y fecha también es opcional.</DisplaySettingBlock>
+      <ContextualHelp>Activa la navegación dinámica.  El contenido puede ser cambiado dinámicamente por otro parámetro basado en URL.</ContextualHelp>
+      <ParameterHelp>Este parámetro será usado para conseguir el contenido si la navegación dinámica es activada.</ParameterHelp>
+    </help>
+    <msg>
+      <not-valid-path>El camino del item no es válido.</not-valid-path>
+    </msg>
+    <tab>
+      <label>
+        <UISCVConfigContentFormInputSet>Selección de contenido</UISCVConfigContentFormInputSet>
+        <UISCVConfigDisplayFormInputSet>Mostrar ajustes</UISCVConfigDisplayFormInputSet>
+        <UISCVConfigPrintFormInputSet>Configuración de impresión</UISCVConfigPrintFormInputSet>
+        <UISCVConfigAdvancedFormInputSet>Avanzado</UISCVConfigAdvancedFormInputSet>
+      </label>
+    </tab>
+  </UISCVPreferences>
+  <UISCVConfigItemPathFormInputSet>
+    <title>
+      <SelectFolderPath>Seleccione la ruta de la carpeta</SelectFolderPath>
+    </title>
+  </UISCVConfigItemPathFormInputSet>
+  <UISCVConfigPrintPageFormInputSet>
+    <title>
+      <SelectTargetPage>Mostrar en la página</SelectTargetPage>
+    </title>
+  </UISCVConfigPrintPageFormInputSet>
+  <PublicationStates>
+    <archived>Archived</archived>
+    <obsolete>Obsolete</obsolete>
+    <unpublished>Unpublished</unpublished>
+    <enrolled>Enrolled</enrolled>
+    <draft>Draft</draft>
+    <pending>Pendiente</pending>
+    <approved>Approved</approved>
+    <inreview>En Revisión</inreview>
+    <staged>Staged</staged>
+    <published>Published</published>
+  </PublicationStates>
+  <UISCVCacheRadioBox>
+    <label>
+      <Enable>Restringido por autenticación</Enable>
+      <Disable>Restringido por roles de usuario</Disable>
+    </label>
+  </UISCVCacheRadioBox>
+</bundle>

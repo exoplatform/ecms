@@ -19,7 +19,6 @@ package org.exoplatform.wcm.webui.seo;
 
 import java.util.Date;
 
-import org.exoplatform.webui.application.WebuiApplication;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIPopupContainer;
@@ -34,21 +33,17 @@ import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 
 @ComponentConfig(lifecycle = UIApplicationLifecycle.class)
 public class UISEOToolbarPortlet extends UIPortletApplication  {
-  
+
   public UISEOToolbarPortlet() throws Exception {
     addChild(UIPopupContainer.class, null, "UIPopupContainer-" + new Date().getTime());
     addChild(UISEOToolbarForm.class, null, null);  
   }
-  
-  //public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
-  //  super.processRender(app, context);
-  //}
 
-	@Override
-	public void processRender(WebuiRequestContext context) throws Exception {
-		// TODO Auto-generated method stub
-		super.processRender(context);
-	}
-  
-  
+
+  @Override
+  public void processRender(WebuiRequestContext context) throws Exception {
+    super.processRender(context);
+  }
+
+
 }

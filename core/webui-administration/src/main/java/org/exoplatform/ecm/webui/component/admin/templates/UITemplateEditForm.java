@@ -38,13 +38,13 @@ import org.exoplatform.webui.form.input.UICheckBoxInput;
  * Dec 4, 2006 9:50:06 AM
  */
 @ComponentConfig(
-    lifecycle = UIFormLifecycle.class,
-    		template = "system:/groovy/webui/form/UIForm.gtmpl",
-    events = {
-      @EventConfig(listeners = UITemplateEditForm.SaveActionListener.class),
-      @EventConfig(phase=Phase.DECODE, listeners = UITemplateEditForm.CancelActionListener.class)
-    }
-)
+                 lifecycle = UIFormLifecycle.class,
+                 template = "system:/groovy/webui/form/UIForm.gtmpl",
+                 events = {
+                   @EventConfig(listeners = UITemplateEditForm.SaveActionListener.class),
+                   @EventConfig(phase=Phase.DECODE, listeners = UITemplateEditForm.CancelActionListener.class)
+                 }
+    )
 
 public class UITemplateEditForm extends UIForm {
 

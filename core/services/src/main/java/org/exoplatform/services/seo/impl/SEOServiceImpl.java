@@ -123,7 +123,7 @@ public class SEOServiceImpl implements SEOService {
    * {@inheritDoc}
    */
   public void storeMetadata(PageMetadataModel metaModel, String portalName,
-      boolean onContent, String language) throws Exception {
+                            boolean onContent, String language) throws Exception {
     String uri = metaModel.getUri();
     String pageReference = metaModel.getPageReference();
     // Inherit from parent page
@@ -147,7 +147,7 @@ public class SEOServiceImpl implements SEOService {
     LivePortalManagerService livePortalManagerService = WCMCoreUtils
         .getService(LivePortalManagerService.class);
     Node dummyNode = livePortalManagerService.getLivePortal(sessionProvider,
-        portalName);
+                                                            portalName);
     session = dummyNode.getSession();    
     if (!dummyNode.hasNode(METADATA_BASE_PATH)) {
       dummyNode.addNode(METADATA_BASE_PATH);
@@ -158,40 +158,40 @@ public class SEOServiceImpl implements SEOService {
     // Store sitemap data
     Node node = null;
     if (onContent) {
-    	node = session.getNodeByUUID(uri);
+      node = session.getNodeByUUID(uri);
       if (!node.isNodeType("mix:referenceable")) {
-      	node.addMixin("mix:referenceable");
+        node.addMixin("mix:referenceable");
       }
     } else {
       session = sessionProvider.getSession("portal-system", WCMCoreUtils
-          .getRepository());
+                                           .getRepository());
       String uuid = Util.getUIPortal().getSelectedUserNode().getId();
       node = session.getNodeByUUID(uuid);
       if (!node.isNodeType("exo:seoMetadata")) {
-      	node.addMixin("exo:seoMetadata");
+        node.addMixin("exo:seoMetadata");
       }
     }    
-    
+
     Node languageNode = null;
     if(node.hasNode(LANGUAGES))
-    	languageNode = node.getNode(LANGUAGES);
+      languageNode = node.getNode(LANGUAGES);
     else
-    	languageNode = node.addNode(LANGUAGES);
+      languageNode = node.addNode(LANGUAGES);
     if(languageNode.canAddMixin("exo:hiddenable"))
-    	languageNode.addMixin("exo:hiddenable");
+      languageNode.addMixin("exo:hiddenable");
     session.save();
     Node seoNode = null;
     if(languageNode.hasNode(language)) seoNode = languageNode.getNode(language);
     else seoNode = languageNode.addNode(language);
     if (!seoNode.isNodeType("mix:referenceable")) {
-    	seoNode.addMixin("mix:referenceable");
+      seoNode.addMixin("mix:referenceable");
     }
     if (seoNode.isNodeType("exo:pageMetadata")) {
       seoNode.setProperty("exo:metaKeywords", keyword);
       seoNode.setProperty("exo:metaDescription", description);
       seoNode.setProperty("exo:metaFully", fullStatus);
       if (!onContent) {
-      	seoNode.setProperty("exo:metaTitle", title);
+        seoNode.setProperty("exo:metaTitle", title);
         seoNode.setProperty("exo:metaRobots", robots);
         seoNode.setProperty("exo:metaSitemap", sitemap);
         seoNode.setProperty("exo:metaPriority", priority);
@@ -215,7 +215,7 @@ public class SEOServiceImpl implements SEOService {
         seoNode.setProperty("exo:metaUri", seoNode.getUUID());
         hash = getHash(seoNode.getUUID() + language);
       } else {      	
-      	seoNode.setProperty("exo:metaTitle", title);
+        seoNode.setProperty("exo:metaTitle", title);
         seoNode.setProperty("exo:metaUri", pageReference);
         seoNode.setProperty("exo:metaRobots", robots);
         seoNode.setProperty("exo:metaSitemap", sitemap);
@@ -229,39 +229,39 @@ public class SEOServiceImpl implements SEOService {
     }
     session.save();
   } 
-  
+
   public String getState(String path, String language, boolean onContent) throws Exception{
-  	String state = "Empty";
-  	Node node = null;
-  	String hash = null;
-  	PageMetadataModel metaModel = null;
-  	if(onContent) {
-  		node = getContentNode(path);
-  		hash = getHash(node.getUUID() + language);
-  		if (cache.get(hash) != null) metaModel = (PageMetadataModel) cache.get(hash);
-  		if(metaModel != null) return metaModel.getFullStatus();
-  		
-  	} else {
-  		hash = getHash(path + language);
-  		if (cache.get(hash) != null)
+    String state = "Empty";
+    Node node = null;
+    String hash = null;
+    PageMetadataModel metaModel = null;
+    if(onContent) {
+      node = getContentNode(path);
+      hash = getHash(node.getUUID() + language);
+      if (cache.get(hash) != null) metaModel = (PageMetadataModel) cache.get(hash);
+      if(metaModel != null) return metaModel.getFullStatus();
+
+    } else {
+      hash = getHash(path + language);
+      if (cache.get(hash) != null)
         metaModel = (PageMetadataModel) cache.get(hash);
-  		if(metaModel != null) return metaModel.getFullStatus();
-  		SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+      if(metaModel != null) return metaModel.getFullStatus();
+      SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
       Session session = sessionProvider.getSession("portal-system",
-          WCMCoreUtils.getRepository());
+                                                   WCMCoreUtils.getRepository());
       String uuid = Util.getUIPortal().getSelectedUserNode().getId();
       node = session.getNodeByUUID(uuid);
-  	}
-  	if(node.hasNode(LANGUAGES+"/"+language)) {
-			Node seoNode = node.getNode(LANGUAGES+"/"+language);
-			if (seoNode.isNodeType("exo:pageMetadata") && seoNode.hasProperty("exo:metaFully"))
-				return seoNode.getProperty("exo:metaFully").getString();  			
-		}
-  	return state;
+    }
+    if(node.hasNode(LANGUAGES+"/"+language)) {
+      Node seoNode = node.getNode(LANGUAGES+"/"+language);
+      if (seoNode.isNodeType("exo:pageMetadata") && seoNode.hasProperty("exo:metaFully"))
+        return seoNode.getProperty("exo:metaFully").getString();  			
+    }
+    return state;
   }
 
   public PageMetadataModel getMetadata(ArrayList<String> params,
-      String pageReference, String language) throws Exception {
+                                       String pageReference, String language) throws Exception {
     PageMetadataModel metaModel = null;
     if (params != null) {
       metaModel = getContentMetadata(params, language);
@@ -285,7 +285,7 @@ public class SEOServiceImpl implements SEOService {
       if (contentNode != null)
         break;
     }
-    
+
     if (contentNode == null)
       return null;
     if (!contentNode.isNodeType("mix:referenceable")) {
@@ -294,26 +294,26 @@ public class SEOServiceImpl implements SEOService {
     String hash = getHash(contentNode.getUUID() + language);
     if (cache.get(hash) != null)
       metaModel = (PageMetadataModel) cache.get(hash);
-    
+
     if (metaModel == null && contentNode.hasNode(LANGUAGES+"/"+language)) {
-    	//Getting seo node by language
-    	Node seoNode = contentNode.getNode(LANGUAGES+"/"+language);
-    	if (!seoNode.isNodeType("mix:referenceable")) {
-    		seoNode.addMixin("mix:referenceable");
+      //Getting seo node by language
+      Node seoNode = contentNode.getNode(LANGUAGES+"/"+language);
+      if (!seoNode.isNodeType("mix:referenceable")) {
+        seoNode.addMixin("mix:referenceable");
       }
       if (seoNode.isNodeType("exo:pageMetadata")) {
         metaModel = new PageMetadataModel();
         metaModel.setUri(pageUri);        
         if (seoNode.hasProperty("exo:metaKeywords"))
           metaModel.setKeywords((seoNode.getProperty("exo:metaKeywords"))
-              .getString());
+                                .getString());
         if (seoNode.hasProperty("exo:metaDescription"))
           metaModel.setDescription((seoNode
               .getProperty("exo:metaDescription")).getString());
         if (seoNode.hasProperty("exo:metaRobots"))
           metaModel
-              .setRobotsContent((seoNode.getProperty("exo:metaRobots"))
-                  .getString());
+          .setRobotsContent((seoNode.getProperty("exo:metaRobots"))
+                            .getString());
         if (seoNode.hasProperty("exo:metaSitemap"))
           metaModel.setSiteMap(Boolean.parseBoolean((seoNode
               .getProperty("exo:metaSitemap")).getString()));
@@ -322,10 +322,10 @@ public class SEOServiceImpl implements SEOService {
               .getProperty("exo:metaPriority")).getString()));
         if (seoNode.hasProperty("exo:metaFrequency"))
           metaModel.setFrequency((seoNode.getProperty("exo:metaFrequency"))
-              .getString());
+                                 .getString());
         if (seoNode.hasProperty("exo:metaFully"))
           metaModel.setFullStatus((seoNode.getProperty("exo:metaFully"))
-              .getString());
+                                  .getString());
         cache.put(hash, metaModel);
       }
     }
@@ -343,79 +343,79 @@ public class SEOServiceImpl implements SEOService {
     if (metaModel == null) {
       SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
       Session session = sessionProvider.getSession("portal-system",
-          WCMCoreUtils.getRepository());
+                                                   WCMCoreUtils.getRepository());
       String uuid = Util.getUIPortal().getSelectedUserNode().getId();
       Node pageNode = session.getNodeByUUID(uuid);
-      
+
       if (pageNode != null && pageNode.hasNode(LANGUAGES+"/"+language)) {
-      	Node seoNode = pageNode.getNode(LANGUAGES+"/"+language);
-      	if(seoNode.isNodeType("exo:pageMetadata")) {
-	        metaModel = new PageMetadataModel();
-	        if (seoNode.hasProperty("exo:metaTitle"))
-	          metaModel.setTitle((seoNode.getProperty("exo:metaTitle")).getString());
-	        if (seoNode.hasProperty("exo:metaKeywords"))
-	          metaModel.setKeywords((seoNode.getProperty("exo:metaKeywords"))
-	              .getString());
-	        if (seoNode.hasProperty("exo:metaDescription"))
-	          metaModel
-	              .setDescription((seoNode.getProperty("exo:metaDescription"))
-	                  .getString());
-	        if (seoNode.hasProperty("exo:metaRobots"))
-	          metaModel.setRobotsContent((seoNode.getProperty("exo:metaRobots"))
-	              .getString());
-	        if (seoNode.hasProperty("exo:metaSitemap"))
-	          metaModel.setSiteMap(Boolean.parseBoolean((seoNode
-	              .getProperty("exo:metaSitemap")).getString()));
-	        if (seoNode.hasProperty("exo:metaPriority"))
-	          metaModel.setPriority(Long.parseLong((seoNode
-	              .getProperty("exo:metaPriority")).getString()));
-	        if (seoNode.hasProperty("exo:metaFrequency"))
-	          metaModel.setFrequency((seoNode.getProperty("exo:metaFrequency"))
-	              .getString());
-	        if (seoNode.hasProperty("exo:metaFully"))
-	          metaModel.setFullStatus((seoNode.getProperty("exo:metaFully"))
-	              .getString());
-	        cache.put(hash, metaModel);
-      	}
+        Node seoNode = pageNode.getNode(LANGUAGES+"/"+language);
+        if(seoNode.isNodeType("exo:pageMetadata")) {
+          metaModel = new PageMetadataModel();
+          if (seoNode.hasProperty("exo:metaTitle"))
+            metaModel.setTitle((seoNode.getProperty("exo:metaTitle")).getString());
+          if (seoNode.hasProperty("exo:metaKeywords"))
+            metaModel.setKeywords((seoNode.getProperty("exo:metaKeywords"))
+                                  .getString());
+          if (seoNode.hasProperty("exo:metaDescription"))
+            metaModel
+            .setDescription((seoNode.getProperty("exo:metaDescription"))
+                            .getString());
+          if (seoNode.hasProperty("exo:metaRobots"))
+            metaModel.setRobotsContent((seoNode.getProperty("exo:metaRobots"))
+                                       .getString());
+          if (seoNode.hasProperty("exo:metaSitemap"))
+            metaModel.setSiteMap(Boolean.parseBoolean((seoNode
+                .getProperty("exo:metaSitemap")).getString()));
+          if (seoNode.hasProperty("exo:metaPriority"))
+            metaModel.setPriority(Long.parseLong((seoNode
+                .getProperty("exo:metaPriority")).getString()));
+          if (seoNode.hasProperty("exo:metaFrequency"))
+            metaModel.setFrequency((seoNode.getProperty("exo:metaFrequency"))
+                                   .getString());
+          if (seoNode.hasProperty("exo:metaFully"))
+            metaModel.setFullStatus((seoNode.getProperty("exo:metaFully"))
+                                    .getString());
+          cache.put(hash, metaModel);
+        }
       }
     }
     return metaModel;
   }
-  
+
   public List<Locale> getSEOLanguages(String portalName, String seoPath, boolean onContent) throws Exception {  	
-  	List<Locale> languages = new ArrayList<Locale>();
-  	Node languagesNode = null;
-  	if(onContent) {
-  		Node contentNode = null;
-  		contentNode = getContentNode(seoPath);
-  		if (contentNode != null && contentNode.hasNode(LANGUAGES)) languagesNode = contentNode.getNode(LANGUAGES);  	
-  	} else {
-  		SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    List<Locale> languages = new ArrayList<Locale>();
+    Node languagesNode = null;
+    if(onContent) {
+      Node contentNode = null;
+      contentNode = getContentNode(seoPath);
+      if (contentNode != null && contentNode.hasNode(LANGUAGES)) languagesNode = contentNode.getNode(LANGUAGES);  	
+    } else {
+      SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
       Session session = sessionProvider.getSession("portal-system",
-          WCMCoreUtils.getRepository());
+                                                   WCMCoreUtils.getRepository());
       String uuid = Util.getUIPortal().getSelectedUserNode().getId();
       Node pageNode = session.getNodeByUUID(uuid);
       if (pageNode != null && pageNode.hasNode(LANGUAGES)) languagesNode = pageNode.getNode(LANGUAGES);
-  	}
-  	if(languagesNode != null) {
-  		NodeIterator iter = languagesNode.getNodes();
-    	while(iter.hasNext()) {   
-    		String lang = iter.nextNode().getName();
-    		String[] arr = lang.split("_");
-    		if(arr.length > 1) {
-    			languages.add(new Locale(arr[0],arr[1]));    			
-    		} else languages.add(new Locale(lang));
-    	}    	
-    	Collections.sort(languages, new SEOItemComparator());
-    	return languages;
-  	} 
-  	return languages;
+    }
+    if(languagesNode != null) {
+      NodeIterator iter = languagesNode.getNodes();
+      while(iter.hasNext()) {   
+        String lang = iter.nextNode().getName();
+        String[] arr = lang.split("_");
+        if(arr.length > 1) {
+          languages.add(new Locale(arr[0],arr[1]));    			
+        } else languages.add(new Locale(lang));
+      }    	
+      Collections.sort(languages, new SEOItemComparator());
+      return languages;
+    } 
+    return languages;
   }
-  
+
   class SEOItemComparator implements Comparator<Locale> {
     @Override
     public int compare(Locale locale1, Locale locale2) {
-			return locale1.getDisplayName().compareTo(locale2.getDisplayName());
+      return locale1.getDisplayName().compareTo(locale2.getDisplayName());
     }
   }
 
@@ -423,25 +423,25 @@ public class SEOServiceImpl implements SEOService {
    * {@inheritDoc}
    */
   public void removePageMetadata(PageMetadataModel metaModel,
-      String portalName, boolean onContent, String language) throws Exception {
+                                 String portalName, boolean onContent, String language) throws Exception {
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     ManageableRepository currentRepo = WCMCoreUtils.getRepository();
     Session session = sessionProvider.getSession(currentRepo.getConfiguration()
-        .getDefaultWorkspaceName(), currentRepo);
+                                                 .getDefaultWorkspaceName(), currentRepo);
     String hash = "";
     Node node = null;
     if (onContent) {
-    	node = session.getNodeByUUID(metaModel.getUri());
+      node = session.getNodeByUUID(metaModel.getUri());
     } else {
       session = sessionProvider.getSession("portal-system", WCMCoreUtils
-          .getRepository());
+                                           .getRepository());
       String uuid = Util.getUIPortal().getSelectedUserNode().getId();
       node = session.getNodeByUUID(uuid);
     }    
     Node seoNode = null;
     if(node.hasNode(LANGUAGES+"/"+language)) 
-    	seoNode = node.getNode(LANGUAGES+"/"+language);
-   
+      seoNode = node.getNode(LANGUAGES+"/"+language);
+
     if (seoNode != null) {
       seoNode.remove();
       if (onContent)
@@ -470,12 +470,12 @@ public class SEOServiceImpl implements SEOService {
    * @throws Exception
    */
   public void updateSiteMap(String uri, float priority, String frequency,
-      boolean visibleSitemap, String portalName) throws Exception {
+                            boolean visibleSitemap, String portalName) throws Exception {
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     LivePortalManagerService livePortalManagerService = WCMCoreUtils
         .getService(LivePortalManagerService.class);
     Node dummyNode = livePortalManagerService.getLivePortal(sessionProvider,
-        portalName);
+                                                            portalName);
     Session session = dummyNode.getSession();
     uri = getStandardURL(uri);
     if(uri == null) uri = "";
@@ -504,9 +504,9 @@ public class SEOServiceImpl implements SEOService {
       rootElement.setAttribute("xmlns:xsi",
           "http://www.w3.org/2001/XMLSchema-instance");
       rootElement
-          .setAttribute(
-              "xsi:schemaLocation",
-              "http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd");
+      .setAttribute(
+                    "xsi:schemaLocation",
+          "http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd");
       doc.appendChild(rootElement);
       if (visibleSitemap) {
         // Create element in sitemap for uri
@@ -521,7 +521,7 @@ public class SEOServiceImpl implements SEOService {
         Element priorityElement = doc.createElement("priority");
         if(priority >= 0) {        	
           priorityElement.setTextContent(String.valueOf(priority));
-        	urlElement.appendChild(priorityElement);
+          urlElement.appendChild(priorityElement);
         }
         // Create element in sitemap for uri_clone
         if (uri_clone != null && uri_clone.length() > 0) {
@@ -534,9 +534,9 @@ public class SEOServiceImpl implements SEOService {
           freqElement.setTextContent(frequency);
           urlElement.appendChild(freqElement);          
           if(priority >= 0) {
-          	priorityElement = doc.createElement("priority");
+            priorityElement = doc.createElement("priority");
             priorityElement.setTextContent(String.valueOf(priority));
-          	urlElement.appendChild(priorityElement);
+            urlElement.appendChild(priorityElement);
           }
         }
       }
@@ -574,25 +574,25 @@ public class SEOServiceImpl implements SEOService {
           Element locElement = (Element) locList.item(0);
           // The location is exist
           if(locElement.getChildNodes().item(0) != null) {
-	          String locationValue = locElement.getChildNodes().item(0).getNodeValue();
-	          if (locationValue != null & (locationValue.trim().equals(uri) || locationValue.trim().equals(uri_clone))) {
-	            fLoc = true;
-	            if (visibleSitemap) {
-	              org.w3c.dom.Node freqNode = urlElement.getElementsByTagName(
-	                  "changefreq").item(0);
-	              freqNode.setTextContent(frequency);              
-	              if(priority >= 0) {
-	              	org.w3c.dom.Node priorityNode = urlElement.getElementsByTagName("priority").item(0);
-	              	if(priorityNode == null) {
-	              		Element priorityElement = doc.createElement("priority");
-	              		priorityElement.setTextContent(String.valueOf(priority));
-	              		urlElement.appendChild(priorityElement);
-	              	} else priorityNode.setTextContent(String.valueOf(priority));
-	              }
-	            } else {
-	              arrNodes.add(urlNode);
-	            }
-	          }
+            String locationValue = locElement.getChildNodes().item(0).getNodeValue();
+            if (locationValue != null & (locationValue.trim().equals(uri) || locationValue.trim().equals(uri_clone))) {
+              fLoc = true;
+              if (visibleSitemap) {
+                org.w3c.dom.Node freqNode = urlElement.getElementsByTagName(
+                    "changefreq").item(0);
+                freqNode.setTextContent(frequency);              
+                if(priority >= 0) {
+                  org.w3c.dom.Node priorityNode = urlElement.getElementsByTagName("priority").item(0);
+                  if(priorityNode == null) {
+                    Element priorityElement = doc.createElement("priority");
+                    priorityElement.setTextContent(String.valueOf(priority));
+                    urlElement.appendChild(priorityElement);
+                  } else priorityNode.setTextContent(String.valueOf(priority));
+                }
+              } else {
+                arrNodes.add(urlNode);
+              }
+            }
           }
         }
       }
@@ -614,8 +614,8 @@ public class SEOServiceImpl implements SEOService {
         urlElement.appendChild(freqElement);
         Element priorityElement = doc.createElement("priority");
         if(priority >= 0) {
-        	priorityElement.setTextContent(String.valueOf(priority));
-        	urlElement.appendChild(priorityElement);
+          priorityElement.setTextContent(String.valueOf(priority));
+          urlElement.appendChild(priorityElement);
         }        
         root.appendChild(urlElement);
         // create element in sitemap for uri_clone
@@ -651,9 +651,9 @@ public class SEOServiceImpl implements SEOService {
     }
     session.save();
   }
-  
+
   public void updateRobots(Node dummyNode, String portalName) throws Exception {
-  	if (!dummyNode.getNode(METADATA_BASE_PATH).hasNode(ROBOTS_NAME)) {
+    if (!dummyNode.getNode(METADATA_BASE_PATH).hasNode(ROBOTS_NAME)) {
       dummyNode.getNode(METADATA_BASE_PATH).addNode(ROBOTS_NAME, "nt:file");
       Node robotsFolder = dummyNode.getNode(METADATA_BASE_PATH + "/"
           + ROBOTS_NAME);
@@ -664,23 +664,23 @@ public class SEOServiceImpl implements SEOService {
       robotsContent.append("User-agent: * \n");
       robotsContent.append("Disallow: \n");
       if(ctx.getRequest() != null) {
-	      if (ctx.getRequest().getServerPort() != 80) {
-	        robotsContent.append("Sitemap: ")
-	                     .append(ctx.getRequest().getScheme())
-	                     .append("://")
-	                     .append(ctx.getRequest().getServerName())
-	                     .append(":")
-	                     .append(ctx.getRequest().getServerPort())
-	                     .append(ctx.getPortalURI())
-	                     .append("sitemaps.xml \n");
-	      } else {
-	        robotsContent.append("Sitemap: ")
-	                     .append(ctx.getRequest().getScheme())
-	                     .append("://")
-	                     .append(ctx.getRequest().getServerName())
-	                     .append(ctx.getPortalURI())
-	                     .append("sitemaps.xml \n");
-	      }
+        if (ctx.getRequest().getServerPort() != 80) {
+          robotsContent.append("Sitemap: ")
+          .append(ctx.getRequest().getScheme())
+          .append("://")
+          .append(ctx.getRequest().getServerName())
+          .append(":")
+          .append(ctx.getRequest().getServerPort())
+          .append(ctx.getPortalURI())
+          .append("sitemaps.xml \n");
+        } else {
+          robotsContent.append("Sitemap: ")
+          .append(ctx.getRequest().getScheme())
+          .append("://")
+          .append(ctx.getRequest().getServerName())
+          .append(ctx.getPortalURI())
+          .append("sitemaps.xml \n");
+        }
       }
       robotsNode.setProperty("jcr:data", robotsContent.toString());
       robotsNode.setProperty("jcr:lastModified", new GregorianCalendar());
@@ -702,7 +702,7 @@ public class SEOServiceImpl implements SEOService {
       LivePortalManagerService livePortalManagerService = WCMCoreUtils
           .getService(LivePortalManagerService.class);
       Node dummyNode = livePortalManagerService.getLivePortal(sessionProvider,
-          portalName);
+                                                              portalName);
       Session session = dummyNode.getSession();
       if (dummyNode.hasNode(METADATA_BASE_PATH)
           && dummyNode.getNode(METADATA_BASE_PATH).hasNode(SITEMAP_NAME)) {
@@ -749,8 +749,8 @@ public class SEOServiceImpl implements SEOService {
     String hash = getHash(portalName + ROBOTS_NAME);
     String robotsCache = null;
     if (cache.get(hash) != null)
-    	robotsCache = (String) cache.get(hash);
-    
+      robotsCache = (String) cache.get(hash);
+
     if (robotsCache != null && robotsCache.trim().length() > 0) {
       return robotsCache;
     }
@@ -788,10 +788,10 @@ public class SEOServiceImpl implements SEOService {
   }
 
   private String getStandardURL(String path) throws Exception {
-  	if(path != null) {
-	    if (path.substring(path.length() - 1, path.length()).equals("/"))
-	      path = path.substring(0, path.length() - 1);
-  	}
+    if(path != null) {
+      if (path.substring(path.length() - 1, path.length()).equals("/"))
+        path = path.substring(0, path.length() - 1);
+    }
     return path;
   }
 
@@ -808,7 +808,7 @@ public class SEOServiceImpl implements SEOService {
         if (repo != null && ws != null) {
           boolean isWs = false;
           String nodePath = tmpPath.substring(
-              tmpPath.indexOf(ws) + ws.length(), tmpPath.length());
+                                              tmpPath.indexOf(ws) + ws.length(), tmpPath.length());
           if (nodePath != null && nodePath.length() > 0) {
             ManageableRepository manageRepo = WCMCoreUtils.getRepository();
             ArrayList<WorkspaceEntry> wsList = manageRepo.getConfiguration()
@@ -852,7 +852,7 @@ public class SEOServiceImpl implements SEOService {
   @Managed
   @ManagedDescription("Activate/deactivate the composer cache ?")
   public void setCached(
-      @ManagedDescription("Enable/Disable the cache ?") @ManagedName("isCached") boolean isCached) {
+                        @ManagedDescription("Enable/Disable the cache ?") @ManagedName("isCached") boolean isCached) {
     this.isCached = isCached;
   }
 }

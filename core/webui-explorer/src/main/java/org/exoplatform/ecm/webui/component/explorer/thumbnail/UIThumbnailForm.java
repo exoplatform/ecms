@@ -46,7 +46,7 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormUploadInput;
+import org.exoplatform.webui.form.input.UIUploadInput;
 
 /**
  * Created by The eXo Platform SARL
@@ -60,7 +60,7 @@ import org.exoplatform.webui.form.UIFormUploadInput;
         @EventConfig(listeners = UIThumbnailForm.CancelActionListener.class, phase = Phase.DECODE),
         @EventConfig(listeners = UIThumbnailForm.RemoveThumbnailActionListener.class, confirm = "UIThumbnailForm.msg.confirm-delete", phase = Phase.DECODE),
         @EventConfig(listeners = UIThumbnailForm.PreviewActionListener.class) }),
-    @ComponentConfig(type = UIFormUploadInput.class, template = "app:/groovy/webui/component/explorer/thumbnail/UIFormUploadInput.gtmpl") })
+    @ComponentConfig(id="mediumSize", type = UIUploadInput.class, template = "app:/groovy/webui/component/explorer/thumbnail/UIFormUploadInput.gtmpl") })
 public class UIThumbnailForm extends UIForm implements UIPopupComponent {
 
   /**
@@ -69,7 +69,7 @@ public class UIThumbnailForm extends UIForm implements UIPopupComponent {
   private static final Log LOG  = ExoLogger.getLogger(UIThumbnailForm.class.getName());
 
   private static final String THUMBNAIL_FIELD = "mediumSize";
-  
+
   private UploadResource currentUploadResource;
   private BufferedImage currentUploadImage;
   private String currentPreviewLink;
@@ -77,27 +77,27 @@ public class UIThumbnailForm extends UIForm implements UIPopupComponent {
   public UIThumbnailForm() throws Exception {
     initForm();
   }
-  
+
   private void initForm() throws Exception {
     currentUploadResource = null;
     currentUploadImage = null;
     currentPreviewLink = null;
-    
+
     setMultiPart(true);
-    UIFormUploadInput uiInput = new UIFormUploadInput(THUMBNAIL_FIELD, THUMBNAIL_FIELD);
-    uiInput.setAutoUpload(true);
-    removeChild(UIFormUploadInput.class);
+    UIUploadInput uiInput = new UIUploadInput(THUMBNAIL_FIELD, THUMBNAIL_FIELD);
+    removeChild(UIUploadInput.class);
     addUIFormInput(uiInput);
   }
 
   public String getThumbnailImage(Node node) throws Exception {
     return Utils.getThumbnailImage(node, ThumbnailService.MEDIUM_SIZE);
   }
-  
+
   public String getPreviewImage() throws Exception {
-    UIFormUploadInput input = (UIFormUploadInput)this.getUIInput(THUMBNAIL_FIELD);
-    if (input.getUploadResource() == null) return null;
-    return Utils.getThumbnailImage(input.getUploadDataAsStream(), input.getUploadResource().getFileName());
+    UIUploadInput input = this.getUIInput(THUMBNAIL_FIELD);
+    String uploadId = input.getUploadIds()[0];
+    if(input.getUploadResource(uploadId) == null)  return null;
+    return Utils.getThumbnailImage(input.getUploadDataAsStream(uploadId), input.getUploadResource(uploadId).getFileName());
   }
 
   public Node getSelectedNode() throws Exception {
@@ -143,7 +143,7 @@ public class UIThumbnailForm extends UIForm implements UIPopupComponent {
   public UploadResource getCurrentUploadResource() {
     return currentUploadResource;
   }
-  
+
   /**
    * @param currentUploadResource the currentUploadResource to set
    */
@@ -170,15 +170,16 @@ public class UIThumbnailForm extends UIForm implements UIPopupComponent {
       UIThumbnailForm uiForm = event.getSource();
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
       UIJCRExplorer uiExplorer = uiForm.getAncestorOfType(UIJCRExplorer.class);
-      
+
       // Check resource available
       if(uiForm.getCurrentUploadResource() == null) {
-        uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.fileName-error", null,
+        uiApp.addMessage(new ApplicationMessage("UIThumbnailForm.msg.fileName-error", null,
                                                 ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
 
         return;
       }
-      
+
       // Check if file is image
       String fileName = uiForm.getCurrentUploadResource().getFileName();
       DMSMimeTypeResolver mimeTypeSolver = DMSMimeTypeResolver.getInstance();
@@ -189,7 +190,7 @@ public class UIThumbnailForm extends UIForm implements UIPopupComponent {
 
         return;
       }
-      
+
       // Add lock token
       Node selectedNode = uiExplorer.getRealCurrentNode();
       uiExplorer.addLockToken(selectedNode);
@@ -198,7 +199,7 @@ public class UIThumbnailForm extends UIForm implements UIPopupComponent {
       ThumbnailService thumbnailService = WCMCoreUtils.getService(ThumbnailService.class);
       try {
         thumbnailService.createThumbnailImage(selectedNode, uiForm.getCurrentUploadImage(), mimeType);
-        
+
         selectedNode.getSession().save();
         uiExplorer.updateAjax(event);
       } catch(AccessDeniedException ace) {
@@ -218,27 +219,27 @@ public class UIThumbnailForm extends UIForm implements UIPopupComponent {
       }
     }
   }
-  
+
   static  public class PreviewActionListener extends EventListener<UIThumbnailForm> {
     public void execute(Event<UIThumbnailForm> event) throws Exception {
       UIThumbnailForm uiForm = event.getSource();
-      
+
       // Current review link
-      UIFormUploadInput input = (UIFormUploadInput)uiForm.getUIInput(THUMBNAIL_FIELD);
-      if (input.getUploadDataAsStream() != null) {
+      UIUploadInput input = (UIUploadInput)uiForm.getUIInput(THUMBNAIL_FIELD);
+      String uploadId = input.getUploadIds()[0];
+      if (input.getUploadDataAsStream(uploadId) != null) {
         uiForm.setCurrentPreviewLink(uiForm.getPreviewImage());
-        uiForm.setCurrentUploadImage(ImageIO.read(input.getUploadDataAsStream()));
-        uiForm.setCurrentUploadResource(input.getUploadResource());
+        uiForm.setCurrentUploadImage(ImageIO.read(input.getUploadDataAsStream(uploadId)));
+        uiForm.setCurrentUploadResource(input.getUploadResource(uploadId));
       } else {
         uiForm.setCurrentPreviewLink(null);
         uiForm.setCurrentUploadImage(null);
         uiForm.setCurrentUploadResource(null);
       }
-      
+
       // New upload input
-      uiForm.removeChild(UIFormUploadInput.class);
-      UIFormUploadInput uiInput = new UIFormUploadInput(THUMBNAIL_FIELD, THUMBNAIL_FIELD) ;
-      uiInput.setAutoUpload(true);
+      uiForm.removeChild(UIUploadInput.class);
+      UIUploadInput uiInput = new UIUploadInput(THUMBNAIL_FIELD, THUMBNAIL_FIELD) ;
       uiForm.addUIFormInput(uiInput) ;
     }
   }
@@ -257,7 +258,7 @@ public class UIThumbnailForm extends UIForm implements UIPopupComponent {
           // Remove thumbmail
           thumbnailNode.remove();
           selectedNode.getSession().save();
-          
+
           // Reset form
           uiForm.initForm();
           event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);

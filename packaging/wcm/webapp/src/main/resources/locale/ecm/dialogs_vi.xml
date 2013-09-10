@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ###################### global word for ECM dialogs resoucebundle ####
+  -->
+  <Ecm>
+    <dialog>
+      <label>
+        <end-time>Thời gian Kết thúc</end-time>
+        <start-time>Thời gian Bắt đầu</start-time>
+        <lifecycle>Chu kỳ</lifecycle>
+        <mimeType>Định dạng</mimeType>
+        <repeat-count>Số lần Lặp lại</repeat-count>
+        <time-interval>Khoảng Thời gian</time-interval>
+        <query-items>Mục Truy vấn</query-items>
+        <schedule-type>Kiểu Lịch trình</schedule-type>
+        <remove>Xóa Mục</remove>
+        <add>Thêm Mục</add>
+        <expand>Mở rộng</expand>
+      </label>
+    </dialog>
+  </Ecm>
+  
+  <UIDocumentForm>
+    <label>
+      <title>#{word.title}</title>
+      <link>Liên kết</link>
+      <contentHtml>#{word.content}</contentHtml>
+      <content>#{word.content}</content>
+      <contentPlain>#{word.content}</contentPlain>
+      <name>Tên</name>
+    <categories>Danh mục</categories>
+    </label>
+  </UIDocumentForm>
+ 
+  <!--
+  ###################### resoucebundle for HTMLFile dialogs template ####
+  -->
+  <HtmlFile>
+    <dialog>
+      <label>
+        <name>Tên</name>
+        <content>Nội dung</content>
+      </label>
+    </dialog>
+  </HtmlFile>
+
+  <!--
+  ###################### resoucebundle for nt:file dialogs template ####
+  -->
+  <File>
+    <dialog>
+      <label>
+        <name>#{word.name}</name>
+        <categories>Danh mục</categories>
+        <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
+        <content>#{word.content}</content>
+        <re-upload>Tệp tin đã tồn tại. Bạn có thể xóa nó và tải lên tệp tin khác.</re-upload>
+      </label>
+    </dialog>
+  </File>
+
+  <UIActionForm>
+    <label>
+      <description>#{word.description}</description>
+      <port>Cổng</port>
+      <userName>#{word.userName}</userName>
+      <password>Mật khẩu</password>
+      <link>Liên kết</link>
+      <to>Gửi Thư Đến</to>
+      <actionName>#{word.name}</actionName>
+    </label>
+  </UIActionForm>
+  <EditFormAction>
+    <label>
+      <description>#{word.description}</description>
+      <port>Cổng</port>
+      <userName>#{word.userName}</userName>
+      <password>Mật khẩu</password>
+      <link>Liên kết</link>
+      <to>Gửi Thư Đến</to>
+      <actionName>#{word.name}</actionName>
+    </label>
+  </EditFormAction>
+ 
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction dialogs template ####
+  -->
+  <AddMetadata>
+    <dialog>
+      <label>
+        <id>Mã</id>
+        <name>#{word.name}</name>
+        <lifecycle>Chu kỳ</lifecycle>
+        <metadata>Siêu dữ liệu</metadata>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning dialogs template ####
+  -->
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <id>Mã</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <start-time>#{Ecm.dialog.label.start-time}</start-time>
+        <end-time>#{Ecm.dialog.label.end-time}</end-time>
+        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <cron-expression>Lệnh Cron</cron-expression>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong dialogs template ####
+  -->
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <id>Mã</id>
+        <name>#{word.name}</name>
+        <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <start-time>#{Ecm.dialog.label.start-time}</start-time>
+        <end-time>#{Ecm.dialog.label.end-time}</end-time>
+        <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
+        <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
+        <cron-expression>Cron Expression</cron-expression>
+        <description>#{word.description}</description>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet dialogs template ####
+  -->
+  <ElementSet>
+    <dialog>
+      <label>
+        <title>#{word.title}:</title>
+        <creator>Người tạo:</creator>
+        <subject>#{word.subject}:</subject>
+        <source>Nguồn:</source>
+        <contributor>Người cộng tác</contributor>
+        <resource-type>Kiểu Tài nguyên:</resource-type>
+        <date>#{word.date}:</date>
+        <publisher>Người đăng tải:</publisher>
+        <description>#{word.description}:</description>
+        <rights>Các Quyền:</rights>
+        <relation>Quan hệ:</relation>
+        <format>#{word.format}:</format>
+        <coverage>Mức độ bao phủ</coverage>
+        <identifier>Người Định danh:</identifier>
+        <language>Ngôn ngữ:</language>
+      </label>
+    </dialog>
+  </ElementSet>
+
+  <!--
+  ###################### resoucebundle for exo:actionable dialogs template ####
+  -->
+  <Actionable>
+    <dialog>
+      <label>
+        <primary-type>Kiểu chính</primary-type>
+        <mixin-types>Kiểu Mixin</mixin-types>
+      </label>
+    </dialog>
+  </Actionable>
+
+  <!--
+  ###################### resoucebundle for exo:move dialogs template ####
+  -->
+  <Move>
+    <dialog>
+      <label>
+        <destination-workpsace>Không gian lưu trữ Đích</destination-workpsace>
+        <destination-path>Đường dẫn đến vùng đích</destination-path>
+        <primary-type>Kiểu Gốc</primary-type>
+        <mixin-types>Kiểu Mixin</mixin-types>
+      </label>
+    </dialog>
+  </Move>
+  <!--
+  ###################### resoucebundle for exo:published dialogs template ####
+  -->
+  <Published>
+    <dialog>
+      <label>
+        <start-publication>Bắt đầu Xuất bản</start-publication>
+        <end-publication>Kết thúc Xuất bản</end-publication>
+      </label>
+    </dialog>
+  </Published>
+ 
+  <!--
+  ###################### resoucebundle mix:referenceable dialogs template ####
+  -->
+  <Referenceable>
+    <dialog>
+      <label>
+        <uuid>UUID</uuid>
+      </label>
+    </dialog>
+  </Referenceable>
+  <!--
+  ###################### resoucebundle exo:relationable dialogs template ####
+  -->
+  <Relationable>
+    <dialog>
+      <label>
+        <relation>Quan hệ</relation>
+      </label>
+    </dialog>
+  </Relationable>
+  <!--
+  ###################### resoucebundle exo:rss-enable dialogs template ####
+  -->
+  <RssEnable>
+    <dialog>
+      <label>
+        <title>Tiêu đề</title>
+        <summary>#{word.summary}</summary>
+      </label>
+    </dialog>
+  </RssEnable>
+
+  <!--
+  ###################### resoucebundle mix:versionable dialogs template ####
+  -->
+  <Versionable>
+    <dialog>
+      <label>
+        <version-history>Lược sử Phiên bản</version-history>
+        <base-version>Phiên bản Cơ sở</base-version>
+        <is-checked-out>Đã Check out</is-checked-out>
+        <predecessors>Phiên bản trước</predecessors>
+        <merge-failed>Không Gộp lại được</merge-failed>
+        <uuid>UUID</uuid>
+      </label>
+    </dialog>
+  </Versionable>
+
+  <!--
+  ##################### resoucebundle for resouce container dialogs template#####
+  -->
+  <ResouceContainer>
+    <dialog>
+      <label>
+        <name>Tên</name>
+        <autoload>Tự động Tải</autoload>
+        <minetype>Định dạng</minetype>
+        <content>Nội dung</content>
+      </label>
+    </dialog>
+  </ResouceContainer>
+  <!--
+  ###################### resoucebundle for validator ####
+  -->
+  <EmailAddressValidator>
+    <msg>
+      <Invalid-input>Địa chỉ email không hợp lệ.</Invalid-input>
+    </msg>
+  </EmailAddressValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>Bắt buộc phải có trường '{0}'. Vui lòng nhập giá trị của bạn vào.</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <NumberFormatValidator>
+    <msg>
+      <Invalid-number>Trường '{0}' không hợp lệ.</Invalid-number>
+    </msg>
+  </NumberFormatValidator>
+  <!--
+  #####Since version 2.4#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+  <ScriptAction>
+    <dialog>
+      <label>
+        <id>Mã</id>
+        <name>Tên</name>
+        <lifecycle>Chu kỳ</lifecycle>
+        <homePath>Đường dẫn Nguồn</homePath>
+        <targetWorkspace>Vùng Đích</targetWorkspace>
+        <targetPath>Đường dẫn Đích</targetPath>
+      </label>
+    </dialog>
+  </ScriptAction>
+  <UIDialogForm>
+   <form>
+   <DialogFormException>Không thể lưu tài liệu này, có thể do vấn đề với hành động xảy ra trước khi lưu.</DialogFormException>
+   </form>
+  </UIDialogForm>
+
+  <!--
+  #####Since version 2.6#######
+
+  ###################### resoucebundle exo:taxonomyAction dialogs template ####
+  -->
+<no>Không</no>
+<yes>Có</yes>
+<true>Đúng</true>
+<false>Sai</false>
+<Electronic>Điện tử</Electronic>
+<Paper>Paper</Paper>
+<NONE>Không xác định</NONE>
+<CLASSIFIED>Đã được phân loại</CLASSIFIED>
+<UNCLASSIFIED>Unclassified</UNCLASSIFIED>
+<NOCONTRACT>No Contract</NOCONTRACT>
+<one-minute>1 phút</one-minute>
+<hourly>Hàng giờ</hourly>
+<daily>Hàng ngày</daily>
+<quarterly>Hàng quý</quarterly>
+<yearly>Hàng năm</yearly>
+<ten-years>10 năm</ten-years>
+<read>Thao tác của người dùng</read>
+  <schedule>Biểu thời gian</schedule>
+  <node_added>Thêm mới nội dung</node_added>
+  <node_removed>Xoá bỏ nội dung</node_removed>
+  <property_added>Thêm mới thuộc tính</property_added>
+  <property_removed>Xóa bỏ thuộc tính</property_removed>
+  <property_changed>Thay đổi tính chất</property_changed>
+
+  <ScriptAction>
+    <dialog>
+      <label>
+        <isDeep>Độ sâu</isDeep>
+        <nodetypes>Kiểu nút</nodetypes>
+        <affectedNodeTypeNames>Các kiểu node bị ảnh hưởng</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </ScriptAction>
+
+  <AddMetadata>
+    <dialog>
+      <label>
+        <isDeep>Độ sâu</isDeep>
+        <nodetypes>Kiểu nút</nodetypes>
+        <affectedNodeTypeNames>Các kiểu nút bị ảnh hưởng</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <dialog>
+      <label>
+        <isDeep>Độ sâu</isDeep>
+        <nodetypes>Kiểu node</nodetypes>
+        <affectedNodeTypeNames>Các kiểu nút bị ảnh hưởng</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <dialog>
+      <label>
+        <isDeep>Độ sâu</isDeep>
+        <nodetypes>Kiểu node</nodetypes>
+        <affectedNodeTypeNames>Các kiểu nút bị ảnh hưởng</affectedNodeTypeNames>
+      </label>
+    </dialog>
+  </AutoVersioning>
+
+  <AccessibleMedia>
+  <dialog>
+  <label>
+  <captions>Chú thích</captions>
+<audioDescription>Mô tả âm thanh</audioDescription>
+<alternativeText>Văn bản thay thế</alternativeText>
+</label>
+</dialog>
+<help>
+<CaptionsHelp>Chú thích nên hỗ trợ mô tả bằng văn bản cho các đoạn hội thoại và âm thanh quan trọng</CaptionsHelp>
+<AudioDescriptionHelp>Mô tả âm thanh là một đoạn thuật lại của video</AudioDescriptionHelp>
+<AlternativeTextHelp>Cung cấp một cách có thể truy cập khác để trình bày các thông tin</AlternativeTextHelp>
+</help>
+</AccessibleMedia>
+  
+</bundle>

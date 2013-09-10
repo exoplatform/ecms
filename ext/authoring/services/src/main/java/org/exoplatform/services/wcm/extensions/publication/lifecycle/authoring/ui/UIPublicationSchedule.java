@@ -25,7 +25,7 @@ import javax.jcr.RepositoryException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.exoplatform.ecm.webui.utils.LockUtil;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.AuthoringPublicationConstant;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -102,12 +102,16 @@ public class UIPublicationSchedule extends UIForm {
       try {
         if ((startDate == null && StringUtils.isNotEmpty(startValue))
           || (endDate == null && StringUtils.isNotEmpty(endValue))) {
-          uiApp.addMessage(new ApplicationMessage("UIPublicationPanel.msg.invalid-format", null, ApplicationMessage.ERROR));
+          uiApp.addMessage(new ApplicationMessage("UIPublicationPanel.msg.invalid-format",
+                                                  null,
+                                                  ApplicationMessage.ERROR));
           event.getRequestContext().addUIComponentToUpdateByAjax(publicationSchedule);
           return;
         }
         if (startDate != null && endDate != null && startDate.after(endDate)) {
-          uiApp.addMessage(new ApplicationMessage("UIPublicationPanel.msg.fromDate-after-toDate", null, ApplicationMessage.ERROR));
+          uiApp.addMessage(new ApplicationMessage("UIPublicationPanel.msg.fromDate-after-toDate",
+                                                  null,
+                                                  ApplicationMessage.ERROR));
           event.getRequestContext().addUIComponentToUpdateByAjax(publicationSchedule);
           return;
         }

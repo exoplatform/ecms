@@ -25,6 +25,7 @@ import java.util.Map;
 
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
 import org.exoplatform.container.xml.InitParams;
@@ -75,13 +76,13 @@ public class NewGroupListener extends GroupEventListener
      buildGroupStructure(group);
    }
 
-   public void preDelete(Group group) throws Exception
+   public void preDelete(Group group)
    {
      try
      {
         removeGroup(group.getId());
      }
-     catch (Exception e)
+     catch (RepositoryException e)
      {
        if (LOG.isWarnEnabled()) {
          LOG.warn(e.getMessage());
@@ -89,7 +90,7 @@ public class NewGroupListener extends GroupEventListener
      }
    }
 
-   private void removeGroup(String groupId) throws Exception
+   private void removeGroup(String groupId) throws RepositoryException
    {
       ManageableRepository manageableRepository = jcrService_.getCurrentRepository();
       String systemWorkspace = manageableRepository.getConfiguration().getDefaultWorkspaceName();

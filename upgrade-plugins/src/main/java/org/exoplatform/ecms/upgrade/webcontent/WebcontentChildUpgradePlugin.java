@@ -40,7 +40,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  */
 public class WebcontentChildUpgradePlugin extends UpgradeProductPlugin {
   
-  private Log LOG = ExoLogger.getLogger(this.getClass().getName());
+  private static final Log LOG = ExoLogger.getLogger(WebcontentChildUpgradePlugin.class.getName());
   private RepositoryService repoService_;
 
   public WebcontentChildUpgradePlugin(RepositoryService repoService, InitParams initParams) {
@@ -76,14 +76,16 @@ public class WebcontentChildUpgradePlugin extends UpgradeProductPlugin {
             }
             //css/default.css/jcr:content
             if (wc.hasNode("css/default.css/" + NodetypeConstant.JCR_CONTENT) &&
-                wc.getNode("css/default.css/" + NodetypeConstant.JCR_CONTENT).canAddMixin(NodetypeConstant.EXO_WEBCONTENT_CHILD)) {
+                wc.getNode("css/default.css/" + NodetypeConstant.JCR_CONTENT)
+                .canAddMixin(NodetypeConstant.EXO_WEBCONTENT_CHILD)) {
               wc.getNode("css/default.css/" + NodetypeConstant.JCR_CONTENT).addMixin(NodetypeConstant.EXO_WEBCONTENT_CHILD);
             }
             wc.save();
             LOG.info("Added mixin " + NodetypeConstant.EXO_WEBCONTENT_CHILD + " for node " + wc.getPath());
           } catch (Exception e) {
             if (LOG.isErrorEnabled()) {
-              LOG.error("An unexpected error occurs when add mixin " + NodetypeConstant.EXO_WEBCONTENT_CHILD + " for node " + wc.getPath());
+              LOG.error("An unexpected error occurs when add mixin " + NodetypeConstant.EXO_WEBCONTENT_CHILD + 
+                        " for node " + wc.getPath());
             }
           }
         }

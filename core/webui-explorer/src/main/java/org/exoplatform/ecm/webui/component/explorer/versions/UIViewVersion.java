@@ -41,7 +41,6 @@ import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.comments.CommentsService;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.cms.templates.TemplateService;
-import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -128,7 +127,6 @@ public class UIViewVersion extends UIBaseNodePresentation {
   }
 
 
-  @SuppressWarnings("unused")
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     return getAncestorOfType(UIJCRExplorer.class).getJCRTemplateResourceResolver() ;
   }
@@ -155,8 +153,8 @@ public class UIViewVersion extends UIBaseNodePresentation {
     node_ = NodeLocation.getNodeLocationByNode(node);
   }
 
-  public Node getNodeByUUID(String uuid) throws Exception{
-    ManageableRepository manageRepo = getApplicationComponent(RepositoryService.class).getCurrentRepository();
+  public Node getNodeByUUID(String uuid) {
+    ManageableRepository manageRepo = WCMCoreUtils.getRepository();
     String[] workspaces = manageRepo.getWorkspaceNames() ;
     for(String ws : workspaces) {
       try{

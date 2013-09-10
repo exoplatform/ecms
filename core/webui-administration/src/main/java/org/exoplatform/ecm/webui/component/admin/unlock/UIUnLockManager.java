@@ -39,7 +39,7 @@ public class UIUnLockManager extends UIAbstractManager {
     update();
   }
 
-  public void update() throws Exception {
+  public void update() throws Exception{
     UILockNodeList uiLockNodeList = getChild(UILockNodeList.class);
     uiLockNodeList.refresh(uiLockNodeList.getUIPageIterator().getCurrentPage());
     UILockHolderContainer uiHolderContainer = getChild(UILockHolderContainer.class);

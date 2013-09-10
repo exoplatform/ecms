@@ -1,0 +1,2550 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIECMAdminControlPanel #
+  ################################################################################
+  -->
+  <UIECMAdminControlPanel>
+    <tab>
+      <label>
+        <Templates>テンプレート</Templates>
+        <Explorer>エクスプローラー</Explorer>
+        <Repository>レポジトリ</Repository>
+        <Advanced>詳細設定</Advanced>
+      </label>
+    </tab>    
+    <label>     
+      <UITaxonomyManagerTrees>カテゴリー</UITaxonomyManagerTrees>
+      <UIMetadataManager>メタデータ観覧</UIMetadataManager>
+      <UINamespaceManager>名前空間</UINamespaceManager>
+      <UINodeTypeManager>ノードタイプ</UINodeTypeManager>
+      <UITemplatesManager>ドキュメント</UITemplatesManager>
+   <UICLVTemplatesManager>一覧</UICLVTemplatesManager>
+      <UIViewManager>ビュー</UIViewManager>
+      <UIDriveManager>ドライブ</UIDriveManager>
+      <UIQueriesManager>クエリ</UIQueriesManager>
+      <UIActionManager>アクション</UIActionManager>
+      <UIScriptManager>スクリプト</UIScriptManager>
+      <UIUnLockManager>ロックの管理</UIUnLockManager>
+      <UIFolksonomyManager>パブリックタグ</UIFolksonomyManager>      
+    </label>
+    <msg>
+      <access-denied>アクセスできません！権限がありません</access-denied>
+    </msg>
+  </UIECMAdminControlPanel>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UITaxonomy #
+  ################################################################################
+  -->
+  <UITaxonomyWorkingArea>
+    <msg>
+      <referential-integrity>ソースフォルダから読めないか、目的のカテゴリはサブカテゴリです。</referential-integrity>
+      <no-taxonomy-selected>少なくとも一つのカテゴリのコピーかカットをする必要があります。</no-taxonomy-selected>
+      <node-is-cutting>ここに貼付けることができません。恐らく、分類ノード '{0}' はカットされています。</node-is-cutting>
+      <can-not-paste>貼付けるためのクリップボードにデータがありません。</can-not-paste>
+      <reference-exception>Cannot delete this category  because it is currently referenced by a content.</reference-exception>
+      <path-error>分類ノードが削除されたので問題が発生している可能性があります。</path-error>
+    </msg>
+  </UITaxonomyWorkingArea>
+  <UITaxonomyManager>
+    <msg>
+      <confirm-delete>本当に削除したいですか?</confirm-delete>
+    </msg>
+    <title>
+      <add>追加</add>
+      <paste>張付け</paste>
+      <cut>切取り</cut>
+      <copy>コピー</copy>
+      <remove>削除</remove>
+    </title>
+  </UITaxonomyManager>
+  
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeContainer#
+  ################################################################################
+  -->
+  <UITaxonomyTreeContainer>
+    <tab>
+      <info>
+        <UITaxonomyTreeMainForm>分類名の入力、ワークスペースおよび分類ホームパスの選択</UITaxonomyTreeMainForm>
+        <UIPermissionTreeManager>分離ツリーパスの権限選択</UIPermissionTreeManager>
+        <UIActionTaxonomyManager>このツリーのアクションの登録を実施する前に、分類ツリーは作成/アップデートされるでしょう。</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>追加、コピーおよび選択される権限の分類ツリーの編集.</UITaxonomyTreeCreateChild>
+      </info>
+    </tab>
+    <msg>
+      <not-exist-tree>ツリーはまだ存在しません。</not-exist-tree>
+    </msg>
+  </UITaxonomyTreeContainer>
+  
+  <!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeMainForm          #
+##########################################################################################
+-->
+  <UITaxonomyTreeMainForm>
+    <action>
+      <Reset>リセット</Reset>
+    </action>
+    <msg>
+      <name-not-allowed>名前が見つかりません。</name-not-allowed>
+      <name-emty>ツリーの名前は空です。</name-emty>
+      <homePath-emty>ホームパスは空です。</homePath-emty>
+      <targetPath-emty>ターゲットパスは空です。</targetPath-emty>
+      <taxonomytree-existed>同じ名前の分類ツリーが存在します。</taxonomytree-existed>
+    </msg>
+  </UITaxonomyTreeMainForm>
+
+  <TaxonomyTreeMainForm>
+    <label>
+      <TaxoTreeName>名前</TaxoTreeName>
+      <TaxoTreeWorkspace>ワークスペース</TaxoTreeWorkspace>
+      <TaxoTreeHomePath>ホームパス</TaxoTreeHomePath>
+    </label>
+  </TaxonomyTreeMainForm>
+
+  <TaxonomyTreeHomePath>
+    <title>
+      <AddPath>パスの追加</AddPath>
+    </title>
+  </TaxonomyTreeHomePath>
+  
+  <!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeInfo  #
+##########################################################################################
+-->
+<UIPermissionTreeInfo>
+<action>
+<title>
+<Delete>削除</Delete>
+<Edit>編集</Edit>
+</title>
+</action>
+<header>
+<usersOrGroups>ユーザorグループ</usersOrGroups>
+<read>読み込み</read>
+<addNode>ノードの追加</addNode>
+<setProperty>プロパティのセット</setProperty>
+<remove>削除</remove>
+<action>アクション</action>
+</header>
+</UIPermissionTreeInfo>
+
+<!--
+##########################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeForm  #
+##########################################################################################
+-->
+  <UIPermissionTreeForm>
+    <msg>
+      <have-not-any-permission>ノード追加のための権限追加</have-not-any-permission>
+    </msg>
+  </UIPermissionTreeForm>
+
+<!--
+################################################################################
+#     org.exoplatform.ecm.webui.component.admin.taxonomy.UIActionForm          #
+################################################################################
+-->
+
+  <UIActionForm>
+    <title>分類ツリーの為のアクションの追加</title>
+    <action>
+      <Save>保存</Save>
+    </action>
+    <msg>
+      <name-not-allowed>名前が見つかりません</name-not-allowed>
+      <path-invalid>パスは無効です。</path-invalid>
+      <taxonomy-existed>分類ツリーは既に存在します。</taxonomy-existed>
+      <taxonomy-node-existed>分類ノードは既に存在します。</taxonomy-node-existed>
+      <no-permission-add>ユーザは権限を持っていません。</no-permission-add>
+      <not-created-tree>分類ツリーはまだ作成されていません。</not-created-tree>
+    </msg>
+  </UIActionForm>
+
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UITemplatesManager #
+  ################################################################################
+  -->
+  <UITemplatesList>
+    <header>
+      <name>テンプレート名</name>
+      <action>アクション</action>
+    </header>
+  </UITemplatesList>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UINamespaceForm  #
+  ################################################################################
+  -->
+  <NameSpacePopup>
+    <title>
+      <UINamespaceForm>ネームスペースフォーム</UINamespaceForm>
+    </title>
+  </NameSpacePopup>
+  <UINamespaceForm>
+    <title>新しいネームスペースの登録</title>
+    <label>
+      <namespace>ネームスペース接頭辞</namespace>
+      <uri>URI</uri>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <register-unsuccessfull>ネームスペースもしくはURIは既に存在します。</register-unsuccessfull>
+      <prefix-null>ネームスペースの接頭辞を入力する必要があります。</prefix-null>
+      <uri-null>ネームスペースのURIを入力する必要があります。</uri-null>
+    </msg>
+  </UINamespaceForm>
+  <!--
+  ################################################################################
+  #      org.exoplatform.ecm.webui.component.admin.namespace.UINamespaceList #
+  ################################################################################
+  -->
+  <UINamespaceList>
+    <header>
+      <prefix>接頭辞</prefix>
+      <uri>ネームスペースUri</uri>
+      <action>アクション</action>
+    </header>
+    <action>
+      <AddNamespace>登録</AddNamespace>
+    </action>
+  </UINamespaceList>
+  <NamespacePopup>
+    <title>
+      <UINamespaceForm>新しいネームスペースの登録</UINamespaceForm>
+    </title>
+  </NamespacePopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIMetadataList #
+  ################################################################################
+  -->
+  <UIMetadataList>
+    <label>
+      <false>偽</false>
+      <true>真</true>
+      <True>真</True>
+      <False>偽</False>
+    </label>
+    <title>
+      <view>ビュー</view>
+      <edit>編集</edit>
+      <delete>削除</delete>
+    </title>
+    <header>
+      <icon>アイコン</icon>
+      <name>メタデータ観覧</name>
+      <type>タイプ</type>
+      <internalUse>内部利用</internalUse>
+      <action>Action</action>
+    </header>
+    <msg>
+      <confirm-delete>本当に削除したいですか?</confirm-delete>
+      <delete-successful>'{0}' のテンプレートは削除されました。</delete-successful>
+      <path-not-found-exception>このメタデータは、削除または変更されました。[更新] ボタンをクリックしてください。</path-not-found-exception>
+    </msg>
+    <action>
+      <Add>メタデータの追加</Add>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+  </UIMetadataList>
+  <MetadataPopupAddNew>
+    <title>
+      <UIMetadataForm>新しいメタデータテンプレートの追加</UIMetadataForm>
+    </title>
+  </MetadataPopupAddNew>
+  <MetadataPopupEdit>
+    <title>
+      <UIMetadataForm>メタデータテンプレートの編集</UIMetadataForm>
+    </title>
+  </MetadataPopupEdit>
+  <MetataPermissionPopup>
+    <title>
+      <MetadataPermission>権限の選択</MetadataPermission>
+      <QueriesPermissionBrowse>権限の追加</QueriesPermissionBrowse>
+    </title>
+  </MetataPermissionPopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataForm #
+  ################################################################################
+  -->
+  <UIMetadataForm>
+    <title>メタデータのマッピング</title>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>適用</Save>
+    </action>
+    <header>
+      <icon>アイコン</icon>
+      <label>ノード名</label>
+      <input>アクション</input>
+    </header>
+    <label>
+      <dialogTemplate>ダイアログテンプレート</dialogTemplate>
+      <viewTemplate>ビューテンプレート</viewTemplate>
+      <metadataName>メタデータ名</metadataName>
+      <viewPermission>権限</viewPermission>
+      <permission>UIMetadataForm</permission>
+      <metadataLabel>ラベル:</metadataLabel>
+    </label>
+    <tab>
+      <label>
+        <metadataTypeTab>メタデータタイプ</metadataTypeTab>
+        <dialogTab>ダイアログテンプレート</dialogTab>
+        <viewTab>ビューテンプレート</viewTab>
+      </label>
+    </tab>
+  </UIMetadataForm>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.metadata.UIMetadataView #
+  ################################################################################
+  -->
+  <UIMetadataView>
+    <header>
+      <name>要素名</name>
+      <type>タイプ</type>
+      <description>説明</description>
+      <isMixin>mixinタイプ</isMixin>
+      <orderable>オーダ可能な子</orderable>
+    </header>
+    <info>
+      <description>説明</description>
+    </info>
+    <tab>
+      <element>要素</element>
+      <metadataView>メタデータ情報</metadataView>
+    </tab>
+    <action>
+      <Cancel>閉じる</Cancel>
+      <Back>#{word.back}</Back>
+    </action>
+  </UIMetadataView>
+  <ViewMetadataPopup>
+    <title>
+      <UIMetadataView>メタデータ情報</UIMetadataView>
+    </title>
+  </ViewMetadataPopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIDriveManager #
+  ################################################################################
+  -->
+  <UIDriveList>
+    <header>
+      <icon>アイコン</icon>
+      <name>名前</name>
+      <workspace>ワークスペース</workspace>
+      <homePath>ホームパス</homePath>
+      <permissions>権限</permissions>
+      <views>ビュー</views>
+      <action>アクション</action>
+    </header>
+    <tooltip>
+      <Delete>削除</Delete>
+      <EditInfo>編集</EditInfo>
+    </tooltip>
+    <msg>
+      <confirm-delete>本当に削除したいですか?</confirm-delete>
+    </msg>
+    <action>
+      <AddDrive>ドライブの追加</AddDrive>
+    </action>
+    <label>
+      <permission>{1} に {0} があります</permission>
+    </label>
+  </UIDriveList>
+  <UIDriveForm>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <Back>#{word.back}</Back>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <drive-exists>ドライブは既に存在します！</drive-exists>
+      <workspace-path-invalid>ワークスペースパスは無効です！</workspace-path-invalid>
+      <drive-views-invalid>ビューを選択する必要があります。</drive-views-invalid>
+      <icon-not-found>アイコンは見つかりません。</icon-not-found>
+      <permission-null>このドライブのための権限を選択する必要があります。</permission-null>
+      <allowCreateFolders>作成されたフォルダタイプを選択する必要があります。</allowCreateFolders>
+      <name-null>ドライブ名を入力してください。</name-null>
+      <fileName-invalid>ドライブ名に無効な文字が含まれています。</fileName-invalid>
+    </msg>
+    <tab>
+      <label>
+        <DriveInputSet>ドライブ</DriveInputSet>
+        <ViewsInputSet>適用ビュー</ViewsInputSet>
+        <PermissionInputSet>権限の選択</PermissionInputSet>
+      </label>
+    </tab>
+    <label>
+      <name>名前</name>
+      <workspace>ワークスペース</workspace>
+      <homePath>ホームパス</homePath>
+      <icon>ワークスペースアイコン</icon>
+      <viewPreferences>リファレンスドキュメントの表示</viewPreferences>
+      <viewNonDocument>"non document" ノードの表示</viewNonDocument>
+      <viewSideBar>サイドバーの表示</viewSideBar>
+      <permissions>権限</permissions>
+      <showHiddenNode>隠しノードの表示</showHiddenNode>
+      <allowCreateFolders>Allow Folder Creation:</allowCreateFolders>
+      <Admin>管理者：</Admin>
+      <Categories>カテゴリー:</Categories>
+      <Icons>アイコン</Icons>
+      <List>一覧：</List>
+      <Web>Web:</Web>
+    </label>
+  </UIDriveForm>
+  <AddDriveManagerPopup>
+    <title>
+      <UIDriveForm>ドライブの追加</UIDriveForm>
+    </title>
+  </AddDriveManagerPopup>
+  <EditDriveManagerPopup>
+    <title>
+      <UIDriveForm>ドライブの編集</UIDriveForm>
+    </title>
+  </EditDriveManagerPopup>
+  <UITreeList>
+    <info>
+      <child-not-found>子ノードが見つかりません</child-not-found>
+    </info>
+    <header>
+      <name>名前</name>
+      <action>アクション</action>
+    </header>
+  </UITreeList>
+  
+  <UIRepositoryList>
+    <titlebar>
+      <label>メインECM機能の管理</label>
+    </titlebar>
+  </UIRepositoryList>
+  
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager #
+  ################################################################################
+  -->
+  <UINodeTypeManager>
+    <header>
+      <icon>アイコン</icon>
+      <label>ノード名</label>
+      <input>アクション</input>
+    </header>
+    <action>
+      <Save>#{word.save}</Save>
+    </action>
+  </UINodeTypeManager>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeList #
+  ################################################################################
+  -->
+  <UINodeTypeList>
+    <label>
+      <true>true</true>
+      <false>false</false>
+    </label>
+    <header>
+      <icon>アイコン</icon>
+      <nodeType>ノードタイプ</nodeType>
+      <mixinType>Mixinタイプ</mixinType>
+      <orderable>オーダー可能な子ノード</orderable>
+      <action>アクション</action>
+    </header>
+    <action>
+      <Export>エクスポート</Export>
+      <Import>インポート</Import>
+      <Add>追加</Add>
+    </action>
+    <tooltip>
+      <View>ビュー</View>
+      <Edit>編集</Edit>
+      <Delete>削除</Delete>
+    </tooltip>
+    <msg>
+      <confirm-delete>本当に削除したいですか ?</confirm-delete>
+    </msg>
+  </UINodeTypeList>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeOptionList #
+  ################################################################################
+  -->
+  <UINodeTypeOptionList>
+    <action>
+      <Save>#{word.save}</Save>
+      <Add>追加</Add>
+    </action>
+    <header>
+      <icon>アイコン</icon>
+      <label>ノード名</label>
+      <input>アクション</input>
+    </header>
+  </UINodeTypeOptionList>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeForm #
+  ################################################################################
+  -->
+  <UINodeTypeForm>
+    <tab>
+      <label>
+        <nodeTypeDefinition>ノードタイプ</nodeTypeDefinition>
+        <propertyDefinition>プロパティ</propertyDefinition>
+        <childNodeDefinition>子ノード</childNodeDefinition>
+        <superTypeTab>Superタイプ</superTypeTab>
+        <DefaultTypeTab>デフォルトプライマリ</DefaultTypeTab>
+        <RequiredTypeTab>必須プライマリ</RequiredTypeTab>
+        <Contraints>制約</Contraints>
+      </label>
+    </tab>
+    <label>
+      <propertiesDefinitions>プロパティ定義</propertiesDefinitions>
+      <childDefinitions>子ノード定義</childDefinitions>
+      <namespace>ネームスペース</namespace>
+      <propertyNamespace>ネームスペース</propertyNamespace>
+      <nodeTypeName>ノードタイプ名</nodeTypeName>
+      <mixinType>Mixinタイプ</mixinType>
+      <hasOrderableChildNodes>オーダー可能な子ノード</hasOrderableChildNodes>
+      <primaryItemName>プライマリアイテム名</primaryItemName>
+      <superTypes>Superタイプ</superTypes>
+      <propertyname>定義名</propertyname>
+      <requiredType>必須タイプ</requiredType>
+      <multiple>多数</multiple>
+      <mandatory>必須</mandatory>
+      <autoCreated>自動生成</autoCreated>
+      <parentversion>親バージョン</parentversion>
+      <protected>プロテクトされた</protected>
+      <constraints>値</constraints>
+      <UIFormTableInputSet>UIFormTableInputSet</UIFormTableInputSet>
+      <sameNameSiblings>同じ名前の兄弟ノード</sameNameSiblings>
+      <childNamespace>ネームスペース</childNamespace>
+      <childMandatory>必須</childMandatory>
+      <childAutocreated>自動生成</childAutocreated>
+      <childParentversion>親バージョン</childParentversion>
+      <childProtected>プロテクトされた</childProtected>
+      <childNodename>定義名</childNodename>
+      <requiredPrimaryType>必須プライマリタイプ</requiredPrimaryType>
+      <defaultPrimaryType>デフォルトプライマリタイプ</defaultPrimaryType>
+      <valueconstraints>制約の値</valueconstraints>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Save>#{word.save}</Save>
+      <SaveDraft>ドラフトの保存</SaveDraft>
+      <AddProperty>プロパティの追加</AddProperty>
+      <AddChild>子の追加</AddChild>
+      <AddConstraints>制約の追加</AddConstraints>
+      <Back>#{word.back}</Back>
+      <AddType>タイプの追加</AddType>
+      <AddValue>追加</AddValue>
+      <CancelConstraints>#{word.cancel}</CancelConstraints>
+      <CancelTab>#{word.cancel}</CancelTab>
+      <UpdateChild>#{word.update}</UpdateChild>
+      <CancelChild>#{word.cancel}</CancelChild>
+      <UpdateProperty>#{word.update}</UpdateProperty>
+      <CancelProperty>#{word.cancel}</CancelProperty>
+      <Close>#{word.close}</Close>
+    </action>
+    <msg>
+      <register-successfully>ノードタイプ '{0}' は登録されました。</register-successfully>
+      <supertype-is-madatory>Superタイプは新しいノードタイプを登録するのに必須です。少なくとも一つのSuperタイプを選択してください。</supertype-is-madatory>
+      <register-failed>ノードタイプ登録に失敗しました。存在するか、Superタイプが無効です。</register-failed>
+      <nodeType-name>ノードタイプ名は必須です。</nodeType-name>
+      <fileName-invalid>名前に無効な文字が含まれます。</fileName-invalid>
+      <node-type-exists>ノードタイプ '{0}' は既に存在します。</node-type-exists>
+      <node-type-name>ノードタイプ名は無効です。</node-type-name>
+      <values-error>デフォルトプライマリタイプの為に一つのノードを選択</values-error>
+      <confirm-delete-child>子ノードを削除しますか？</confirm-delete-child>
+      <confirm-delete-property>このプロパティを削除しますか？</confirm-delete-property>
+    </msg>
+  </UINodeTypeForm>
+  <UIPropertyDefinitionForm>
+    <tab>
+      <label>
+        <constraints>制約</constraints>
+        <UIFormMultiValueInputSet>制約</UIFormMultiValueInputSet>
+      </label>
+    </tab>
+    <msg>
+      <property-name>プロパティ定義名は無効でした。</property-name>
+      <not-supported-value-constraints>必須タイプは辺りの制約をサポートしません。</not-supported-value-constraints>
+    </msg>
+  </UIPropertyDefinitionForm>
+  <UIChildNodeDefinitionForm>
+    <msg>
+      <child-name>子ノード名は必須です。</child-name>
+      <child-invalid>子ノード名は無効な文字を含みます。</child-invalid>
+      <default-node-type-not-found>デフォルトノードタイプは見つかりません。</default-node-type-not-found>
+      <requiredPrimaryType>必須プライマリタイプ は必須です。</requiredPrimaryType>
+      <defaultPrimaryType>デフォルトプライマリタイプは必須です。</defaultPrimaryType>
+    </msg>
+  </UIChildNodeDefinitionForm>
+  <defaultPrimaryTypePopup>
+    <title>
+      <FormdefaultPrimaryTypePopup>デフォルトプライマリタイプの選択</FormdefaultPrimaryTypePopup>
+    </title>
+  </defaultPrimaryTypePopup>
+  <requiredPrimaryTypePopup>
+    <title>
+      <FormrequiredPrimaryTypePopup>必須プライマリタイプの選択</FormrequiredPrimaryTypePopup>
+    </title>
+  </requiredPrimaryTypePopup>
+  <superTypesPopup>
+    <title>
+      <FormsuperTypesPopup>Superタイプの選択</FormsuperTypesPopup>
+    </title>
+  </superTypesPopup>
+  <NodeTypePopup>
+    <title>
+      <UINodeTypeForm>ノードタイプ定義の追加/編集</UINodeTypeForm>
+    </title>
+  </NodeTypePopup>
+  <ViewNodeTypePopup>
+    <title>
+      <UINodeTypeForm>ノードタイプ情報の観覧</UINodeTypeForm>
+    </title>
+  </ViewNodeTypePopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeExport   #
+  ################################################################################
+  -->
+  <UINodeTypeExport>
+    <header>
+      <icon>アイコン</icon>
+      <label>ノード名</label>
+      <input>アクション</input>
+    </header>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Export>エクスポート</Export>
+      <UncheckAll>全てを未チェック</UncheckAll>
+      <CheckAll>全てをチェック</CheckAll>
+    </action>
+    <title>ノードタイプのエクスポート</title>
+    <msg>
+      <item-null>エクスポートするために少なくとも一つのノードをチェックする必要があります。</item-null>
+    </msg>
+  </UINodeTypeExport>
+  <NodeTypeExportPopup>
+    <title>
+      <UINodeTypeExport>ノードタプのエクスポート</UINodeTypeExport>
+    </title>
+  </NodeTypeExportPopup>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeOptionList   #
+  ################################################################################
+  -->
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeUpload   #
+  ################################################################################
+  -->
+  <UINodeTypeUpload>
+    <label>
+      <upload>ファイル名</upload>
+    </label>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Upload>アップロード</Upload>
+    </action>
+    <title>XMLファイルからノードタイプのインポート</title>
+    <msg>
+      <filename-error>インポートの為にノードタイプファイルをブラウズ</filename-error>
+      <data-file-error>XMLファイルもしくはZIPファイルのみインポートすることがサポートされます。</data-file-error>
+      <data-invalid>タンプノードをインポートする際の無効なデータ</data-invalid>
+      <nodetype-exist>無効なデータ：ノードタイプは存在します : '{0}'</nodetype-exist>
+      <namespace-invalid>無効なデータ:  不明なネームスペース : '{0}'</namespace-invalid>
+    </msg>
+  </UINodeTypeUpload>
+  <!--
+  ################################################################################
+  #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeImport   #
+  ################################################################################
+  -->
+  <UINodeTypeImport>
+    <action>
+      <Cancel>#{word.cancel}</Cancel>
+      <Import>インポート</Import>
+      <Upload>再アップロード</Upload>
+    </action>
+    <header>
+      <icon>アイコン</icon>
+      <label>ノード名</label>
+      <input>アクション</input>
+    </header>
+    <title>インポートノードタイプの選択</title>
+    <msg>
+      <no-nodetype-registered>登録されていないノードタイプ</no-nodetype-registered>
+      <nodetype-registered>Registration successful.</nodetype-registered>
+    </msg>
+  </UINodeTypeImport>
+  <NodeTypeImportPopup>
+    <title>
+      <UINodeTypeImportPopup>XMLファイルからノードタイプのインポート</UINodeTypeImportPopup>
+    </title>
+  </NodeTypeImportPopup>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.UIDriveForm #
+  ################################################################################
+  -->
+  <DriveInputSet>
+    <label>
+      <both>両方</both>
+      <folderOnly>フォルダ</folderOnly>
+      <unstructuredFolder>体系化されていないフォルダ</unstructuredFolder>
+    </label>
+    <title>
+      <AddPermission>権限の追加</AddPermission>
+      <RemovePermission>権限の削除</RemovePermission>
+      <AddIcon>追加アイコン</AddIcon>
+      <AddPath>追加パス</AddPath>
+    </title>
+  </DriveInputSet>
+  <!--
+  ###################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.action.UIActionTypeList#
+  ###################################################################################
+  -->
+  <UIActionTypeList>
+    <header>
+      <name>名前</name>
+      <label>名前</label>
+<action>アクション</action>
+    </header>
+    <action>
+      <AddAction>追加</AddAction>
+    </action>
+<msg>
+ <confirm-delete>このアクション種類を削除してもよろしいですか？</confirm-delete>
+<cannot-delete>システムはまだ使用しているので、そのアクション種類は削除できません。</cannot-delete>
+</msg>
+  </UIActionTypeList>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.action.UIActionTypeForm #
+  ######################################################################################
+  -->
+  <ActionPopup>
+    <title>
+      <UIActionTypeForm>アクション タイプ フォーム</UIActionTypeForm>
+    </title>
+  </ActionPopup>
+  <UIActionTypeForm>
+    <title>アクションタイプの追加/編集</title>
+    <label>
+      <actionType>アクションタイプの拡張</actionType>
+      <name>名前 (starts with "exo:")</name>
+      <isMove>is Action Move</isMove>
+      <variables>変数</variables>
+      <exo_businessProcessAction>ビジネスプロセス</exo_businessProcessAction>
+      <exo_scriptAction>Groovyスクリプト</exo_scriptAction>
+      <exo_ruleAction>定義されたルール</exo_ruleAction>
+      <script>スクリプト:</script>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <action-type-added>'{0}' は追加されます。.</action-type-added>
+      <action-type-create-error>アクションタイプを作成できません！</action-type-create-error>
+      <action-name-invalid>'{0}' は無効です。名前は 'exo:' で始める必要があります。</action-name-invalid>
+      <action-exist>このアクションはECMシステム内に存在します。</action-exist>
+      <fileName-invalid>アクション名の中に無効な文字があります。</fileName-invalid>
+    </msg>
+  </UIActionTypeForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewManager     #
+  ######################################################################################
+  -->
+  <UITabPane>
+    <title>
+      <UIViewContainer>ビュー</UIViewContainer>
+      <ECMTemplate>ECMテンプレート</ECMTemplate>
+      <UIScriptForm>スクリプト</UIScriptForm>
+      <UIDialogTab>ダイアログ</UIDialogTab>
+      <UIViewTab>ビュー</UIViewTab>
+      <UITemplateEditForm>テンプレート</UITemplateEditForm>
+      <UITemplateForm>テンプレート</UITemplateForm>
+      <UITemplateContainer>ドキュメント</UITemplateContainer>
+      <UIActionsTemplateContainer>アクション</UIActionsTemplateContainer>
+      <UIOthersTemplateContainer>その他</UIOthersTemplateContainer>
+  <UIActionScriptContainer>アクション</UIActionScriptContainer>
+  <UIWidgetScriptContainer>ウィジェット</UIWidgetScriptContainer>
+<UIInterceptorScriptContainer>インターセプター</UIInterceptorScriptContainer>
+
+<nodeTypeDefinition>ノードタイプ</nodeTypeDefinition>
+      <propertyDefinition>プロパティ</propertyDefinition>
+      <childNodeDefinition>子ノード</childNodeDefinition>
+      <SuperTypeTab>Superタイプ</SuperTypeTab>
+      <DefaultTypeTab>デフォルトプライマリ</DefaultTypeTab>
+      <RequiredTypeTab>必須プライマリ</RequiredTypeTab>
+      <Contraints>制約</Contraints>
+    </title>
+  </UITabPane>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewList    #
+  ######################################################################################
+  -->
+  <UIViewList>
+   <title>
+     <View>ビュー</View>
+     <EditInfo>編集</EditInfo>
+     <Delete>削除</Delete>
+   </title>
+    <header>
+      <name>名前</name>
+      <permissions>権限</permissions>
+      <tabList>アクション タブ</tabList>
+      <baseVersion>ベースバージョン</baseVersion>
+      <action>アクション</action>
+    </header>
+    <action>
+      <AddView>ビューの追加</AddView>
+    </action>
+    <msg>
+      <access-denied>アクセスできません！この機能を使うための権限がありません。</access-denied>
+      <template-in-use>{0} を削除できません。</template-in-use>
+      <confirm-delete>本当に削除したいですか ?</confirm-delete>
+    </msg>
+  </UIViewList>
+  <ViewPopup>
+    <title>
+      <UIViewFormTabPane>ビュー</UIViewFormTabPane>
+    </title>
+  </ViewPopup>
+  <AddPopup>
+    <title>
+      <UIViewFormTabPane>ビューの追加</UIViewFormTabPane>
+      <AddPopup>テンプレートの追加</AddPopup>
+    </title>
+  </AddPopup>
+  <EditPopup>
+    <title>
+      <UIViewFormTabPane>ビューの編集</UIViewFormTabPane>
+    </title>
+  </EditPopup>
+
+<UITabList>
+ <header>
+  <tabName>タブ</tabName>
+  <localizeButtons>説明:</localizeButtons>
+<action>アクション</action>
+</header>
+<action>
+ <AddTab>追加</AddTab>
+</action>
+<msg>
+ <confirm-delete>削除したいですか？</confirm-delete>
+</msg>
+<grid>
+ <msg>
+  <empty>このビューではタブがありません。</empty>
+ </msg>
+</grid>
+</UITabList>
+
+<UIViewPermissionList>
+ <title>このビューに対する権限を持つ所有者を選択します。</title>
+<label>
+ <permission>{1} に {0} があります</permission>
+</label>
+<msg>
+ <confirm-delete>本当にこの権限を削除しますか？</confirm-delete>
+  <permission-cannot-empty>参照アクセス許可は必須入力です。空白のままでは許可されません。</permission-cannot-empty>
+</msg>
+</UIViewPermissionList>
+
+<UIViewPermissionList>
+ <header>
+<friendlyPermission>権限観覧</friendlyPermission>
+     <action>アクション</action>
+ </header>
+<action>
+ <title>
+  <Delete>削除</Delete>
+ </title>
+</action>
+<grid>
+ <msg>
+  <empty>このビューに対する権限はありません。</empty>
+ </msg>
+</grid>
+</UIViewPermissionList>
+
+<UIViewPermissionForm>
+<action>
+ <Add>追加</Add>
+</action>
+<label>
+ <userOrGroup>ユーザorグループ</userOrGroup>
+</label>
+<msg>
+ <permission-exist>アクセス権限 '{0}' は、既に存在しています。</permission-exist>
+</msg>
+</UIViewPermissionForm>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIViewFormTabPane   #
+  ######################################################################################
+  -->
+  <UIViewForm>
+    <title>
+      <AddPermission>権限の追加</AddPermission>
+      <RemovePermission>権限の削除</RemovePermission>
+    </title>
+    <msg>
+      <view-name-invalid>名前を入力する必要があります。</view-name-invalid>
+      <fileName-invalid>名前の中に無効な文字があります。</fileName-invalid>
+      <permission-not-empty>権限を選択する必要があります</permission-not-empty>      
+      <mustbe-add-tab>タブを使いする必要があります。</mustbe-add-tab>
+<mustbe-add-permission>このビューのアクセス権限を選択してください。</mustbe-add-permission>
+      <view-exist>ビュー名はすでに存在します。</view-exist>
+    </msg>
+    <label>
+      <viewName>名前</viewName>
+      <template>テンプレート</template>
+<version>バージョンのリストア</version>
+      <enableVersion>バージョンの許可</enableVersion>
+      <hideExplorerPanel>サイド ・ バーにあるエクスプ ローラー パネルを非表示にしてください。</hideExplorerPanel>
+    </label>
+  </UIViewForm>
+  <UITabForm>
+    <msg>
+      <button-select-error>少なくとも一つはチェックする必要があります。</button-select-error>
+      <tab-name-error>タブ名を入力する必要があります。</tab-name-error>
+      <fileName-invalid>名前の中に無効な文字があります。</fileName-invalid>
+    </msg>
+    <label>
+      <version>バージョンのリストア</version>
+      <viewName>名前</viewName>
+      <tabName>タブ名</tabName>
+      <permission>パーミッション</permission>
+      <tabs>タブ</tabs>
+      <template>テンプレート</template>
+      <enableVersion>バージョンの許可化</enableVersion>
+      <addFolder>フォルダの追加</addFolder>
+      <addDocument>ドキュメントの追加</addDocument>
+      <editDocument>ドキュメントの編集</editDocument>
+      <upload>アップロード</upload>
+      <paste>貼り付け</paste>
+      <search>検索</search>
+      <viewReferences>リファレンスの表示</viewReferences>
+      <viewNodeType>ノードタイプの表示</viewNodeType>
+      <viewPermissions>権限の表示</viewPermissions>
+      <viewProperties>プロパティの観覧</viewProperties>
+      <manageVersions>バージョン管理</manageVersions>
+      <manageAuditing>監査管理</manageAuditing>
+      <managePublications>公開管理</managePublications>
+      <manageCategories>カテゴリー管理</manageCategories>
+      <manageRelations>関連管理</manageRelations>
+      <manageActions>アクションの管理</manageActions>
+      <exportNode>ノードエクスポート</exportNode>
+      <importNode>ノードインポート</importNode>
+      <viewRelations>リレーションの参照</viewRelations>
+      <showJCRStructure>JCR 構造を表示</showJCRStructure>
+      <watchDocument>ドキュメント観覧</watchDocument>
+      <taggingDocument>ドキュメントにタグ付け</taggingDocument>
+      <viewMetadatas>メタデータ観覧</viewMetadatas>
+      <overloadThumbnail>オーバーロード サムネイル</overloadThumbnail>
+      <manageHidden>コンテンツの表示/非表示</manageHidden>
+      <comment>コメント</comment>
+      <vote>ドキュメントに投票</vote>  
+      <addCategory>カテゴリーを追加</addCategory>
+      <addLocalizationLink>Translationの追加</addLocalizationLink>
+      <publicationRequestApproval>リクエストの承認</publicationRequestApproval>
+      <publicationApproveContent>コンテンツの承認</publicationApproveContent>
+      <publicationPublish>公開</publicationPublish>
+<contentNavigation>コンテンツ ナビゲーション</contentNavigation>
+<addSymLink>Symリンクの追加</addSymLink>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>      
+      <Cancel>#{word.cancel}</Cancel>      
+    </action>
+  </UITabForm>
+  <UIPermissionForm>
+    <label>
+      <permission>UI権限フォーム</permission>
+    </label>
+  </UIPermissionForm>
+  <UIViewFormTabPane>
+    <tab>
+      <label>
+        <UITabContainer>アクション</UITabContainer>
+        <UIViewForm>ビュー</UIViewForm>
+        <UIViewPermissionContainer>パーミッション</UIViewPermissionContainer>    
+      </label>
+    </tab>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>リセット</Reset>
+      <Cancel>#{word.cancel}</Cancel>
+      <Close>#{word.close}</Close>
+      <Restore>リストア</Restore>
+    </action>
+  </UIViewFormTabPane>
+  <PopupViewPermission>
+    <title>
+      <UIPermissionSelector>権限の選択</UIPermissionSelector>
+    </title>
+  </PopupViewPermission>
+
+<TabForm_Popup>
+ <title>
+  <UITabForm>タブの追加と編集</UITabForm>
+ </title>
+</TabForm_Popup>
+
+<tab_permission>
+ <title>
+  <SelectUser>ユーザの選択</SelectUser>
+<SelectMember>メンバの選択</SelectMember>
+<AddAny>任意の</AddAny>
+ </title>
+</tab_permission>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UIECMTemplateList   #
+  ######################################################################################
+  -->
+  <UIECMTemplateList>
+    <title>
+      <View>ビュー</View>
+      <EditInfo>編集</EditInfo>
+      <Delete>削除</Delete>
+    </title>
+    <header>
+      <name>名前</name>
+      <path>値</path>
+      <baseVersion>ベースバージョン</baseVersion>
+      <action>アクション</action>
+    </header>
+    <action>
+      <Add>追加</Add>
+    </action>
+    <msg>
+      <template-in-use>{0} を削除できません: テンプレートは利用されています。</template-in-use>
+      <confirm-delete>本当に削除したいですか?</confirm-delete>
+      <access-denied>アクセスできません！権限がありません</access-denied>
+      <delete-permission-denied>'{0}' テンプレートを削除する権限がありません。</delete-permission-denied>
+    </msg>
+  </UIECMTemplateList>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.UITemplateForm #
+  ################################################################################
+  -->
+  <UITemplateForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Reset>リセット</Reset>
+      <Restore>リストア</Restore>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <version-restored>バージョン {0} はリストアされました。</version-restored>
+      <role-require>権限を選択する必要があります</role-require>
+      <template-name-exist>テンプレート名 '{0}' は存在します。</template-name-exist>
+      <add-permission-denied>You do not have permission to add new template.</add-permission-denied>
+      <edit-permission-denied>'{0}' テンプレートを変更する権限がありません。</edit-permission-denied>
+    </msg>
+    <tab>
+      <label>
+        <template>テンプレート</template>
+        <defaultDialog>ダイアログ</defaultDialog>
+        <defaultView>ビュー</defaultView>
+      </label>
+    </tab>
+    <label>
+      <name>名前</name>
+      <label>ラベル</label>
+      <isDocumentTemplate>ドキュメントテンプレート</isDocumentTemplate>
+      <dialog>ダイアログ コンテンツ</dialog>
+      <view>ビュー コンテンツ</view>
+      <permission>権限</permission>
+      <selectPemistion>権限</selectPemistion>
+    </label>
+  </UITemplateForm>
+  <!--
+  ################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.view.ecmTempForm #
+  ################################################################################
+  -->
+  <ecmTempForm>
+    <label>
+      <version>バージョンの選択</version>
+      <content>コンテンツ</content>
+      <name>名前</name>
+      <homeTemplate>テンプレート タイプ</homeTemplate>
+      <enableVersion>バージョンの許可</enableVersion>
+    </label>
+  </ecmTempForm>
+  <ecmTempFormPopup>
+    <title>
+      <ecmTempForm>ビューテンプレートの追加/編集</ecmTempForm>
+    </title>
+  </ecmTempFormPopup>
+  <ecmTempFormAdd>
+    <title>
+      <ecmTempForm>ECMテンプレートの追加</ecmTempForm>
+      <ecmTempFormAdd>ECMテンプレートの追加</ecmTempFormAdd>
+    </title>
+  </ecmTempFormAdd>
+  <ecmTempFormEdit>
+    <title>
+      <ecmTempForm>ECMテンプレートの編集</ecmTempForm>
+    </title>
+  </ecmTempFormEdit>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptManager #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIECMFilterForm #
+  ######################################################################################
+  -->
+  <UIECMFilterForm>
+    <label>
+      <selectScript>カテゴリの選択</selectScript>
+    </label>
+  </UIECMFilterForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptList #
+  ######################################################################################
+  -->
+  <UIScriptList>
+    <action>
+      <Edit>#{word.edit}</Edit>
+      <Delete>#{word.delete}</Delete>
+      <AddNew>追加</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>本当に削除したいですか?</confirm-delete>
+    </msg>
+    <header>
+      <scriptName>名前</scriptName>
+      <path>パス</path>
+      <baseVersion>ベースバージョン</baseVersion>
+      <action>アクション</action>
+    </header>
+    <tooltip>
+      <Edit>編集</Edit>
+      <Delete>削除</Delete>
+    </tooltip>
+  </UIScriptList>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.UIScriptForm #
+  ######################################################################################
+  -->
+  <uiECMScriptsPopup>
+    <title>
+      <ecmScriptForm>ECMスクリプト</ecmScriptForm>
+    </title>
+  </uiECMScriptsPopup>
+
+  <UIScriptForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Restore>#{word.restore}</Restore>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+      <Change>変更</Change>
+    </action>
+    <msg>
+      <version-restored>バージョン {0} のリストアに成功しました。</version-restored>
+      <name-null>スクリプト名を入力してください。</name-null>
+      <name-exist>スクリプト '{0}' は既に存在します。</name-exist>
+      <fileName-invalid>無効な文字がスクリプト名にあります。</fileName-invalid>
+    </msg>
+  </UIScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.CBScriptForm #
+  ######################################################################################
+  -->
+  <ScriptContainerPopup>
+    <title>
+      <UIScriptForm>スクリプトの追加/編集</UIScriptForm>
+    </title>
+  </ScriptContainerPopup>
+  <UIScriptForm>
+    <label>
+      <selectVersion>バージョン管理</selectVersion>
+      <scriptContent>コンテンツ</scriptContent>
+      <scriptLabel>名前</scriptLabel>
+      <scriptName>名前</scriptName>
+      <enableVersion>Enable Versioning</enableVersion>
+    </label>
+  </UIScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.script.ecmScriptForm #
+  ######################################################################################
+  -->
+ 
+  <ecmScriptForm>
+    <label>
+      <selectVersion>バージョン</selectVersion>
+      <scriptContent>スクリプトコンテンツ</scriptContent>
+      <scriptLabel>名前</scriptLabel>
+      <scriptName>スクリプト名</scriptName>
+      <enableVersion>Enable Versioning</enableVersion>
+    </label>
+  </ecmScriptForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyForm #
+  ######################################################################################
+  -->
+  <UITaxonomyForm>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <title>分類の追加</title>
+    <label>
+      <taxonomyName>カテゴリ名</taxonomyName>
+      <parentPath>親</parentPath>
+    </label>
+    <msg>
+      <exist>"{0}" カテゴリは既に存在します。</exist>
+      <name-null>カテゴリ名を入力する必要があります。</name-null>
+      <name-invalid>名前の中に無効な文字が存在します。</name-invalid>
+      <name-too-long>分類名は30文字以内である必要があります。</name-too-long>
+    </msg>
+  </UITaxonomyForm>
+    
+  <EditTaxonomyTreePopup>
+    <title>
+      <UITaxonomyTreeContainer>分類ツリーの編集</UITaxonomyTreeContainer>
+    </title>
+  </EditTaxonomyTreePopup>
+
+  <AddTaxonomyTreePopup>
+    <title>
+      <UITaxonomyTreeContainer>分類ツリーの追加</UITaxonomyTreeContainer>
+    </title>
+  </AddTaxonomyTreePopup>
+  
+  <TaxonomyPopupCreateChild>
+    <title>
+      <UITaxonomyTreeCreateChildForm>分類ツリーの編集</UITaxonomyTreeCreateChildForm>
+    </title>
+  </TaxonomyPopupCreateChild>
+
+<UITaxonomyTreeCreateChildForm>
+  <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <label>
+      <parentPath>Parent:</parentPath>
+      <taxonomyName>Category Name:</taxonomyName>
+    </label>
+    <msg>
+      <name-null>名前はnulllです。</name-null>
+      <name-invalid>名前は無効です。</name-invalid>
+      <name-too-long>名前は長過ぎます。</name-too-long>
+      <exist>名前は既に存在します。</exist>
+    </msg>
+</UITaxonomyTreeCreateChildForm>
+
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>パスの選択</UIOneNodePathSelector>
+    </title>
+  </PopupComponent>
+  
+  <TaxoPopupUserSelector>
+  <title>
+      <TaxoTreeSelectUserOrGroup>ユーザの選択</TaxoTreeSelectUserOrGroup>
+      <UIPermissionTreeSelectUser>ユーザの選択</UIPermissionTreeSelectUser>
+    </title>
+  </TaxoPopupUserSelector>
+
+  <TaxoTreeSelectUserOrGroupPopup>
+  <title>
+      <TaxoTreeSelectUserOrGroup>メンバーシップの選択</TaxoTreeSelectUserOrGroup>
+    </title>
+  </TaxoTreeSelectUserOrGroupPopup>
+  
+  <TaxoTreeAnyPermission>
+    <label>
+      <any>権限</any>
+      <anyPermission>TaxoTreeAnyPermission</anyPermission>
+    </label>
+  </TaxoTreeAnyPermission>
+  
+  <TaxoTreeSelectUserOrGroup>
+    <label>
+      <selectGroup>グループの選択</selectGroup>
+      <selectMembership>メンバーシップの選択</selectMembership>
+    </label>
+  </TaxoTreeSelectUserOrGroup>
+  
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeList #
+  ######################################################################################
+  -->
+  <UITaxonomyTreeList>
+    <header>
+      <name>名前</name>
+      <workspace>ワークスペース</workspace>
+      <homePath>ホームパス</homePath>
+      <action>アクション</action>
+    </header>
+    <action>
+      <AddTaxonomyTree>分類ツリーの追加</AddTaxonomyTree>
+    </action>
+    <tooltip>
+      <EditTaxonomyTree>分類ツリーの編集</EditTaxonomyTree>
+      <Delete>分類ツリーの削除</Delete>
+    </tooltip>
+    <title>分類ツリーのブラウズ</title>
+    <msg>
+      <no-list>分類ツリーがありません。</no-list>
+      <confirm-delete>削除しますか？</confirm-delete>
+      <is-in-trash>この分類ツリーをごみ箱に移動されていた！</is-in-trash>
+    </msg>
+  </UITaxonomyTreeList>
+  
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeForm  #
+  ######################################################################################
+  -->
+  <UITaxonomyTreeForm>
+    <label>
+      <name>名前</name>
+      <workspace>ワークスペース</workspace>
+      <homePath>ホームパス</homePath>
+      <permissions>権限</permissions>
+    </label>
+    <msg>
+      <homapath-emty>ホームパスの入力</homapath-emty>
+    </msg>
+  </UITaxonomyTreeForm>
+  
+  <UIPermissionTreeForm>
+    <label>
+      <UIPopupWindow>選択</UIPopupWindow>
+      <permission>UI権限ツリーフォーム</permission>
+      <userOrGroup>ユーザorグループ</userOrGroup>
+      <read>読み込み権限</read>
+      <add_node>ノード権限の追加</add_node>
+      <set_property>プロパティ権限のセット</set_property>
+      <remove>削除権限</remove>
+    </label>
+    <title>ノードへ権限の追加</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>保存</Save>
+      <Reset>リセット</Reset>
+    </action>
+    <msg>
+      <checkbox-require>少なくとも一つの権限を選択する必要があります。</checkbox-require>
+      <userOrGroup-required>権限を保存する前にユーザかグループを選択する必要があります。</userOrGroup-required>
+      <not-change-permission>権限を追加するための権利がありません。</not-change-permission>
+      <access-denied>アクセスできません！権限がありません</access-denied>
+    </msg>
+  </UIPermissionTreeForm>
+  
+  <PopupTaxonomyJCRBrowser>
+  <title>
+      <UIOneNodePathSelector>ホームパスの選択</UIOneNodePathSelector>
+    </title>
+  </PopupTaxonomyJCRBrowser>
+  
+  <PopupTaxonomyTreePermission>
+    <title>
+      <UIPermissionSelector>権限の選択</UIPermissionSelector>
+    </title>
+   </PopupTaxonomyTreePermission>
+   
+   <PopupDrivePermission>
+    <title>
+      <AddDrivePermissionSelector>権限の追加</AddDrivePermissionSelector>
+      <UIPermissionSelector>権限の選択</UIPermissionSelector>
+    </title>
+  </PopupDrivePermission>
+  
+  <UIPopupWindow>
+    <title>
+      <UIPermissionManager>権限管理</UIPermissionManager>
+    </title>
+   </UIPopupWindow>
+
+  <PopupUserSelector>
+    <title>
+      <UIUserContainer>権限管理</UIUserContainer>
+    </title>
+   </PopupUserSelector>
+   
+  <UIPermissionInfo>
+    <action>
+      <title>
+        <Edit>編集</Edit>
+        <Delete>権限の削除</Delete>
+      </title>
+    </action>
+    <header>
+      <usersOrGroups>ユーザorグループ</usersOrGroups>
+      <read>読み込み</read>
+      <addNode>Modify</addNode>
+      <remove>削除</remove>
+      <action>アクション</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>この権限を削除したいですか？</confirm-delete-permission>
+      <no-permission-tochange>権限を削除すると権利がありません。</no-permission-tochange>
+      <no-permission-remove>オーナーもしくはシステムは削除することが出来ません。</no-permission-remove>
+      <access-denied>アクセスできません！権限がありません</access-denied>
+    </msg>
+  </UIPermissionInfo>
+  <permission>
+    <title>
+      <SelectUser>ユーザの選択</SelectUser>
+      <SelectMember>メンバーシップの選択</SelectMember>
+      <AddAny>みんな</AddAny>
+    </title>
+  </permission>
+  <!--
+  #############################################################################
+  #             org.exoplatform.ecm.webui.component.explorer.UIPermissionForm #
+  #############################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIGroupSelector>ユーザの選択</UIGroupSelector>
+      <UIPermissionSelector>メンバの選択</UIPermissionSelector>
+      <UIGroupMemberSelector>メンバーシップの選択</UIGroupMemberSelector>
+    </title>
+  </SelectUserOrGroup>
+  <UIGroupSelector>
+    <label>
+      <selectGroup>グループのブラウズと選択</selectGroup>
+      <selectUser>ユーザの選択</selectUser>
+    </label>
+    <msg>
+      <not-change-owner>'{0}' はこのノードのオーナーで全てのコントロール権限を持ちます。</not-change-owner>
+    </msg>
+  </UIGroupSelector>
+  <UIPermissionForm>
+    <label>
+      <UIPopupWindow>選択</UIPopupWindow>
+      <permission>UIPermissionForm</permission>
+      <userOrGroup>ユーザorグループ</userOrGroup>
+      <read>読み込み権限</read>
+      <add_node>変更</add_node>
+      <remove>削除権限</remove>
+    </label>
+    <title>ノードへ権限の追加</title>
+    <action>
+      <Close>#{word.close}</Close>
+      <Save>#{word.save}</Save>
+      <Reset>リセット</Reset>
+    </action>
+    <msg>
+      <checkbox-require>少なくとも一つの権限を選択する必要があります。</checkbox-require>
+      <userOrGroup-required>権限の保存をする前にユーザもしくはグループを選択する必要があります。</userOrGroup-required>
+      <not-change-permission>権限を追加するための権利がありません。</not-change-permission>
+      <access-denied>アクセスできません！権限がありません</access-denied>
+    </msg>
+  </UIPermissionForm>
+  
+  <TaxonomyPopup>
+    <title>
+      <UITaxonomyForm>分類の追加</UITaxonomyForm>
+    </title>
+  </TaxonomyPopup>
+  
+  <UITaxonomyManager>
+    <title>
+      <permission>権限マネージメント</permission>
+    </title>
+  </UITaxonomyManager>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateList #
+  ######################################################################################
+  -->
+  <UITemplateList>
+    <header>
+      <name>テンプレート名</name>
+      <action>アクション</action>
+      <label>テンプレート</label>
+      <icon>アイコン</icon>
+    </header>
+    <action>
+      <AddNew>追加</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>本当に削除したいですか?</confirm-delete>
+      <access-denied>アクセスできません。この機能を使う権限がありません。</access-denied>
+      <editing-template>アクセスできません。テンプレートの削除と編集はできません。</editing-template>
+      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+    </msg>
+  </UITemplateList>
+  
+  <UIActionsTemplateList>
+    <header>
+      <name>Template Name</name>
+      <action>アクション</action>
+      <label>テンプレート</label>
+      <icon>アイコン</icon>
+    </header>
+    <action>
+      <AddNew>テンプレートの追加</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>本当に削除したいですか?</confirm-delete>
+      <access-denied>Access denied! You haven't got permission to use this function.</access-denied>
+      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
+      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+    </msg>
+  </UIActionsTemplateList>
+  
+  <UIOthersTemplateList>
+    <header>
+      <name>Template Name</name>
+      <label>テンプレート</label>
+      <icon>アイコン</icon>
+      <action>アクション</action>
+    </header>
+    <action>
+      <AddNew>テンプレートの追加</AddNew>
+    </action>
+    <msg>
+      <confirm-delete>本当に削除したいですか?</confirm-delete>
+      <access-denied>Access denied! You haven't got permission to use this function.</access-denied>
+      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
+      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+    </msg>
+  </UIOthersTemplateList>
+
+ <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.clv package #
+  ######################################################################################
+  -->
+
+<UITabPane>
+ <title>
+ <ContentTemplateContainer>コンテンツ</ContentTemplateContainer>
+<CateTemplateContainer>ナビゲーション</CateTemplateContainer>
+<PageTemplateContainer>改ページ</PageTemplateContainer>
+ </title>
+</UITabPane>
+
+  <UICLVTemplateList>
+    <header>
+      <title>名前</title>
+      <action>アクション</action>
+      <template>テンプレート</template>
+    </header>
+    <action>
+      <AddTemplate>テンプレートの追加</AddTemplate>
+<Edit>編集</Edit>
+<Delete>削除</Delete>
+    </action>
+    <msg>
+      <confirm-delete>本当に削除したいですか?</confirm-delete>
+      <access-denied>アクセスできません！この機能を使うための権限がありません。</access-denied>
+      <editing-template>Access denied! You can't delete and edit template simultaneously.</editing-template>
+      <template-not-exist>The template that you attempt to delete doesn't exist.</template-not-exist>
+    </msg>
+  </UICLVTemplateList>
+
+<CateTemplateList>
+    <header>
+      <title>名前</title>
+      <action>アクション</action>
+      <template>テンプレート</template>
+    </header>
+    <action>
+      <AddTemplate>テンプレートの追加</AddTemplate>
+<Edit>編集</Edit>
+<Delete>削除</Delete>
+    </action>
+</CateTemplateList>
+
+<PageTemplateList>
+    <header>
+      <title>名前</title>
+      <action>アクション</action>
+      <template>テンプレート</template>
+    </header>
+    <action>
+      <AddTemplate>テンプレートの追加</AddTemplate>
+<Edit>編集</Edit>
+<Delete>削除</Delete>
+    </action>
+</PageTemplateList>
+
+<EditCLVTemplatePopup_ContentTemplateContainer>
+ <title>
+   <UICLVTemplateForm_ContentTemplateContainer>リスト テンプレートを編集</UICLVTemplateForm_ContentTemplateContainer>   
+ </title>
+</EditCLVTemplatePopup_ContentTemplateContainer>
+
+<EditCLVTemplatePopup_CateTemplateContainer>
+ <title>
+   <UICLVTemplateForm_CateTemplateContainer>リスト テンプレートを編集</UICLVTemplateForm_CateTemplateContainer>   
+ </title>
+</EditCLVTemplatePopup_CateTemplateContainer>
+
+<EditCLVTemplatePopup_PageTemplateContainer>
+ <title>
+   <UICLVTemplateForm_PageTemplateContainer>リスト テンプレートを編集</UICLVTemplateForm_PageTemplateContainer>   
+ </title>
+</EditCLVTemplatePopup_PageTemplateContainer>
+
+<CLVTemplatePopup_ContentTemplateContainer>
+ <title>
+   <UICLVTemplateForm_ContentTemplateContainer>リスト テンプレートを追加</UICLVTemplateForm_ContentTemplateContainer>   
+ </title>
+</CLVTemplatePopup_ContentTemplateContainer>
+
+<CLVTemplatePopup_CateTemplateContainer>
+ <title>
+   <UICLVTemplateForm_CateTemplateContainer>リスト テンプレートを追加</UICLVTemplateForm_CateTemplateContainer>   
+ </title>
+</CLVTemplatePopup_CateTemplateContainer>
+
+<CLVTemplatePopup_PageTemplateContainer>
+ <title>
+   <UICLVTemplateForm_PageTemplateContainer>リスト テンプレートを追加</UICLVTemplateForm_PageTemplateContainer>   
+ </title>
+</CLVTemplatePopup_PageTemplateContainer>
+
+<UICLVTemplateForm_ContentTemplateContainer>
+ <action>
+  <Save>#{word.save}</Save>
+<Reset>リセット</Reset>
+<Cancel>#{word.cancel}</Cancel>
+ </action>
+<label>
+ <title>名前</title>
+<template>テンプレート名</template>
+<content>コンテンツ</content>
+<type>テンプレート タイプ</type>
+</label>
+</UICLVTemplateForm_ContentTemplateContainer>
+
+<UICLVTemplateForm_PageTemplateContainer>
+ <action>
+  <Save>#{word.save}</Save>
+<Reset>リセット</Reset>
+<Cancel>#{word.cancel}</Cancel>
+ </action>
+<label>
+ <title>名前</title>
+<template>テンプレート名</template>
+<content>コンテンツ</content>
+<type>テンプレート タイプ</type>
+</label>
+</UICLVTemplateForm_PageTemplateContainer>
+
+<UICLVTemplateForm_CateTemplateContainer>
+ <action>
+  <Save>#{word.save}</Save>
+<Reset>リセット</Reset>
+<Cancel>#{word.cancel}</Cancel>
+ </action>
+<label>
+ <title>名前</title>
+<template>テンプレート名</template>
+<content>コンテンツ</content>
+<type>テンプレート タイプ</type>
+</label>
+</UICLVTemplateForm_CateTemplateContainer>
+<UICLVTemplateForm>
+  <label>
+    <paginators>改ページ</paginators>
+<list>コンテンツ</list>
+<navigation>ナビゲーション</navigation>
+  </label>
+  <msg>
+  <template-existing>このテンプレート名は既に存在します。他の名称を選択してください。</template-existing>
+  </msg>
+</UICLVTemplateForm>
+
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateForm #
+  ######################################################################################
+  -->
+  <AddNewTemplatePermission>
+    <title>
+      <UIPermissionSelector>権限の選択</UIPermissionSelector>
+    </title>
+  </AddNewTemplatePermission>
+  <TemplatePermission>
+    <title>
+      <UIPermissionSelector>権限の選択</UIPermissionSelector>
+    </title>
+  </TemplatePermission>
+  <TemplateContainerPopup>
+    <title>
+      <UITemplateForm>テンプレートフォーム</UITemplateForm>
+    </title>
+  </TemplateContainerPopup>
+  <ViewForm>
+    <label>
+      <UITemplateContent>ビューフォーム</UITemplateContent>
+      <UIPopupWindow>ビュー権限</UIPopupWindow>
+      <selectVersion>バージョン</selectVersion>
+      <content>コンテンツ</content>
+      <name>名前</name>
+      <isDocumentTemplate>ドキュメントテンプレート</isDocumentTemplate>
+      <viewPermission>権限</viewPermission>
+      <enableVersion>Versioning activated</enableVersion>
+    </label>
+    <title>ビューの追加/編集</title>
+  </ViewForm>
+  <DialogForm>
+    <label>
+      <UITemplateContent>ダイアログフォーム</UITemplateContent>
+      <UIPopupWindow>ダイアログ権限</UIPopupWindow>
+      <selectVersion>バージョン</selectVersion>
+      <content>コンテンツ</content>
+      <name>名前</name>
+      <isDocumentTemplate>ドキュメントテンプレート</isDocumentTemplate>
+      <viewPermission>権限</viewPermission>
+      <enableVersion>Enable Versioning</enableVersion>
+    </label>
+    <title>ダイアログの追加/編集</title>
+  </DialogForm>
+  <DialogFormTemplatePermission>
+    <title>
+      <UIPermissionSelector>権限の選択</UIPermissionSelector>
+    </title>
+  </DialogFormTemplatePermission>
+  <ViewFormTemplatePermission>
+    <title>
+      <UIPermissionSelector>権限の選択</UIPermissionSelector>
+    </title>
+  </ViewFormTemplatePermission>
+  <TemplateContainerPopup>
+    <title>
+      <UIViewTemplate_UITemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UITemplateContainer>
+      <UIViewTemplate_UIActionsTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIActionsTemplateContainer>
+      <UIViewTemplate_UIOthersTemplateContainer><![CDATA[View & Edit Template]]></UIViewTemplate_UIOthersTemplateContainer>
+    </title>
+  </TemplateContainerPopup>
+  <UITemplatesManager>
+    <title>
+      <Edit>編集</Edit>
+      <Delete>削除</Delete>
+    </title>
+  </UITemplatesManager>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIViewTemplate #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateEditForm #
+  ######################################################################################
+  -->
+  <UITemplateEditForm>
+    <label>
+      <name>名前</name>
+      <label>ラベル</label>
+      <isDocumentTemplate>ドキュメントテンプレート</isDocumentTemplate>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+  </UITemplateEditForm>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIDialogTab #
+  ######################################################################################
+  -->
+  <UIDialogTab>
+    <header>
+      <name>名前</name>
+      <roles>ロール</roles>
+      <baseVersion>バージョン</baseVersion>
+      <action>アクション</action>
+    </header>
+    <msg>
+      <undeletable>'{0}' は削除できません。デフォルトです。</undeletable>
+      <confirm-delete>本当に削除したいですか?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>編集</Edit>
+        <Delete>削除</Delete>
+      </title>
+    </action>
+  </UIDialogTab>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UIViewTab #
+  ######################################################################################
+  -->
+  <UIViewTab>
+    <header>
+      <name>名前</name>
+      <roles>ロール</roles>
+      <baseVersion>バージョン</baseVersion>
+      <action>アクション</action>
+    </header>
+    <msg>
+      <undeletable>'{0}' は削除できません。デフォルトです。</undeletable>
+      <confirm-delete>本当に削除したいですか ?</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>編集</Edit>
+        <Delete>削除</Delete>
+      </title>
+    </action>
+  </UIViewTab>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.UITemplateContent #
+  ######################################################################################
+  -->
+  <UITemplateContent>
+    <action>
+      <Save>#{word.save}</Save>
+      <Restore>#{word.restore}</Restore>
+      <Cancel>#{word.cancel}</Cancel>
+      <Refresh>#{word.refresh}</Refresh>
+    </action>
+    <msg>
+      <name-invalid>フィールド名は、特殊文字を含むことができません。</name-invalid>
+      <roles-invalid>権限フィールドは空にできません。</roles-invalid>
+      <version-restored>バージョン {0} はリストアに成功しました。</version-restored>
+      <name-exist>名前 '{0}' は存在します。'nt:file'に存在する同じ名前のファイルはアップロード出来ません。</name-exist>
+    </msg>
+    <title>
+      <AddPermission>権限の追加</AddPermission>
+      <RemovePermission>権限の削除</RemovePermission>
+    </title>
+  </UITemplateContent>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.DialogForm #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.templates.ViewForm #
+  ######################################################################################
+  -->
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.UIJCRBrowser #
+  ######################################################################################
+  -->
+  <JCRBrowser>
+    <title>
+      <UIOneNodePathSelector>ルートパスの選択</UIOneNodePathSelector>
+    </title>
+  </JCRBrowser>
+  <JCRBrowserAssets>
+    <title>
+      <UIOneNodePathSelector>アイコンの選択</UIOneNodePathSelector>
+    </title>
+  </JCRBrowserAssets>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.queries #
+  ######################################################################################
+  -->
+  <UIQueriesList>
+    <header>
+      <name>名前</name>
+      <type>タイプ</type>
+      <statement>ステートメント</statement>
+      <permission>権限</permission>
+      <action>アクション</action>
+    </header>
+    <action>
+      <AddQuery>クエリの追加</AddQuery>
+    </action>
+    <tooltip>
+      <Edit>このクエリの編集</Edit>
+      <Delete>このクエリの削除</Delete>
+    </tooltip>
+    <msg>
+      <confirm-delete>本当に削除したいですか?</confirm-delete>
+      <query-not-existed>クエリはもう存在しません。</query-not-existed>
+      <can-not-remove>クエリの削除中にエラーが発生しました。詳細については、管理者に問い合わせてください。</can-not-remove>
+    </msg>
+  </UIQueriesList>
+  <UIQueriesForm>
+    <label>
+      <name>クエリ名</name>
+      <type>クエリタイプ</type>
+      <statement>ステートメント</statement>
+      <cache>キャッシュの有効</cache>
+      <permissions>権限</permissions>
+      <PermissionButton>UIQueriesForm</PermissionButton>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <permission-require>権限を選択する必要があります。</permission-require>
+      <name-invalid>フィールド名は、特殊文字を含んではいけません</name-invalid>
+      <name-existing>このクエリ名は既に存在します。違う名前を選択してください。</name-existing>
+      <invalid-query>無効なクエリです。クエリ表記をチェックしてください。</invalid-query>
+      <access-denied>アクセスが拒否されました。この操作を実行する権限がありません。</access-denied>
+    </msg>
+  </UIQueriesForm>
+  <AddQueryForm>
+    <title>
+      <UIQueriesForm>クエリの追加</UIQueriesForm>
+    </title>
+  </AddQueryForm>
+  <EditQueryForm>
+    <title>
+      <UIQueriesForm>クエリの編集</UIQueriesForm>
+    </title>
+  </EditQueryForm>
+<PermissionPopup>
+  <title>
+    <UIGroupMemberSelector>権限の選択</UIGroupMemberSelector>
+  </title>
+</PermissionPopup>
+  <!--
+  ######################################################################################
+  #             org.exoplatform.ecm.webui.component.admin.folksonomy #
+  ######################################################################################
+  -->
+  <UITagManager>
+    <title>
+      <EditStyle>編集</EditStyle>
+      <RemoveStyle>削除</RemoveStyle>
+    </title>    
+  </UITagManager>
+  <UITagStyleList>
+    <header>
+      <name>スタイル名</name>
+      <documentRange>ドキュメント幅</documentRange>
+      <tagHTML>タグのスタイル</tagHTML>
+      <action>アクション</action>
+    </header>
+    <action>
+      <AddStyle>追加</AddStyle>
+    </action>
+  </UITagStyleList>
+  <UITagStyleForm>
+    <label>
+      <styleName>Style Name:</styleName>
+      <documentRange>Number of Occurrences:</documentRange>
+      <styleHTML>HTML Style:</styleHTML>
+    </label>
+    <action>
+      <UpdateStyle>更新</UpdateStyle>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <range-validator>無効なレンジです。正しいレンジのフォーマットは a..b with a, b is positive integer. You can use * instead of b to indicate that unlimited.</range-validator>
+      <error-update>情報は正しくありません。</error-update>
+      <item-not-existing>You cannot save changes to this tag that no longer exist in database</item-not-existing>
+    </msg>
+  </UITagStyleForm>
+  <FolksonomyPopup>
+    <title>
+      <UITagStyleForm>タグスタイルコンフィグレーションの編集</UITagStyleForm>
+    </title>
+  </FolksonomyPopup>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.ECMNameValidator  #
+  ###################################################################################
+  -->
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>無効な文字列がフィールド '{0}' にあります。</Invalid-char>
+      <empty-input>フィールド '{0}' の値はnullか空です。</empty-input>
+    </msg>
+  </ECMNameValidator>
+  <EmptyFieldValidator>
+    <msg>
+      <empty-input>フィードル '{0}' に値を入力してください。</empty-input>
+    </msg>
+  </EmptyFieldValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.PermissionValidator  #
+  ###################################################################################
+  -->
+  <PermissionValidator>
+  <msg>
+      <permission-path-invalid>アクセス権限 '{0}' は無効です。</permission-path-invalid>
+  </msg>
+  </PermissionValidator>
+  <!--
+  ###################################################################################
+  # Repository  #
+  ###################################################################################
+  -->
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>ワークスペース</workspaceName>
+      <rootNodeInfo>UIワークスペースリスト</rootNodeInfo>
+      <rootNodePath>ルートパス</rootNodePath>
+    </label>
+  </UIWorkspaceList>
+  <!--
+  ###################################################################################
+  # Others  #
+  ###################################################################################
+  -->
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>本当に削除したいですか？</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+  <template>
+    <title>
+      <AddPermission>権限の追加</AddPermission>
+    </title>
+  </template>
+  <metadataTypeTab>
+    <title>
+      <AddPermission>権限の追加</AddPermission>
+    </title>
+  </metadataTypeTab>
+  <PermissionButton>
+    <title>
+      <AddPermission>権限の追加</AddPermission>
+    </title>
+  </PermissionButton>
+  <nodeTypeDefinition>
+    <title>
+      <AddSuperType>Superタイプの追加</AddSuperType>
+    </title>
+  </nodeTypeDefinition>
+  <childNodeDefinition>
+    <title>
+      <AddRequiredType>要求されたタイプの追加</AddRequiredType>
+      <AddDefaultType>デフォルトタイプの追加</AddDefaultType>
+    </title>
+  </childNodeDefinition>
+  <propertyDefinition>
+    <title>
+      <AddConstraints>制約の追加</AddConstraints>
+    </title>
+  </propertyDefinition>
+  <authInputSet>
+    <title>
+      <Select>選択</Select>
+    </title>
+  </authInputSet>
+  <!--
+  #grid with action
+  -->
+  <UIViewContainer>
+    <title>
+      <View>ビュー</View>
+      <EditInfo>編集</EditInfo>
+      <Delete>削除</Delete>
+    </title>
+<label>
+  <permission>{1} に {0} があります</permission>
+</label>
+  </UIViewContainer>
+  <ECMTemplate>
+    <title>
+      <EditInfo>編集</EditInfo>
+      <Delete>削除</Delete>
+    </title>
+  </ECMTemplate>
+  <step1>
+    <title>
+      <AddPermission>権限の追加</AddPermission>
+    </title>
+  </step1>
+  <step2>
+    <title>
+      <SelectContainer>コンテナの選択</SelectContainer>
+      <SelectStore>ストアの選択</SelectStore>
+    </title>
+  </step2>
+  <step3>
+    <title>
+      <SelectQueryHandler>クエリハンドラの選択</SelectQueryHandler>
+    </title>
+  </step3>
+  <UIDrivePermissionSelector>
+    <label>
+      <selectGroup>グループの選択</selectGroup>
+      <selectUser>ユーザの選択</selectUser>
+      <selectMembership>メンバシップの選択</selectMembership>
+    </label>
+  </UIDrivePermissionSelector>
+  
+  <UIPermissionSelector>
+    <label>
+      <selectGroup>グループの選択</selectGroup>
+      <selectUser>ユーザの選択</selectUser>
+      <selectMembership>メンバーシップの選択</selectMembership>
+    </label>
+  </UIPermissionSelector>
+  
+  <UIAnyPermission>
+    <label>
+      <anyPermission>権限</anyPermission>
+    </label>
+  </UIAnyPermission>
+  
+  <UIMDriveAnyPermission>
+    <label>
+      <anyPermission>権限</anyPermission>
+    </label>
+  </UIMDriveAnyPermission>
+  
+  <UIQueriesAnyPermission>
+    <label>
+      <anyPermission>権限</anyPermission>
+    </label>
+  </UIQueriesAnyPermission>
+  
+  <MetadataPermission>
+    <label>
+      <selectGroup>グループの選択</selectGroup>
+    </label>
+  </MetadataPermission>  
+  <MetadataPermission>
+    <label>
+      <selectMembership>メンバーシップの選択</selectMembership>
+    </label>
+  </MetadataPermission>
+  <anyPermission>
+    <title>
+      <AddAnyPermission>権限の設定</AddAnyPermission>
+    </title>
+  </anyPermission>
+  <!--
+  #########Since ECM 2.3##################
+  -->
+  <QueriesPermissionBrowse>
+    <label>
+      <selectGroup>グループの選択</selectGroup>
+      <selectUser>ユーザの選択</selectUser>
+      <selectMembership>メンバーシップの選択</selectMembership>
+    </label>
+  </QueriesPermissionBrowse>
+  <!--
+  #########Since ECM 2.4##################
+  -->  
+  <UIViewFormTabPane>
+    <label>
+      <addSymLink>システムリンクの追加</addSymLink>
+    </label>
+  </UIViewFormTabPane>
+  <!--
+  #########Since ECM 2.5##################
+  --> 
+  
+  <UIDriveForm>
+<msg>
+  <permission-path-invalid>権限は無効です！</permission-path-invalid>
+  </msg>
+  </UIDriveForm>
+  
+  <UITaxonomyTreeMainForm>
+    <msg>
+      <homepath-emty>ホームパスは空です。</homepath-emty>
+      <targetpath-emty>ターゲットパスは空です。</targetpath-emty>
+    </msg>
+  </UITaxonomyTreeMainForm>
+  <UITaxonomyWorkingArea>
+  <msg>
+  <exist>このツリーノードは存在します！</exist>
+  </msg>
+  </UITaxonomyWorkingArea>
+
+  <PermissionTreeSelectUser>
+    <label>
+      <option>
+        <userName>#{word.userName}</userName>
+        <lastName>#{word.lastName}</lastName>
+        <firstName>#{word.firstName}</firstName>
+        <email>#{word.email}</email>
+      </option>
+      <group>グループ</group>
+      <searchUser>ユーザー</searchUser>
+      <userName>#{word.userName}</userName>
+      <lastName>#{word.lastName}</lastName>
+      <firstName>#{word.firstName}</firstName>
+    <email>#{word.email}</email>
+      <action>#{word.action}</action>
+      <Add>#{word.Add}</Add>
+      <Close>#{word.Close}</Close>
+    </label>
+  </PermissionTreeSelectUser>
+  
+  <!--
+  #########Since ECM 2.6 ##################
+  -->   
+  <DriveInputSet>
+    <label>
+      <nt_folder>フォルダ</nt_folder>
+      <nt_unstructured>体系化されていないフォルダ</nt_unstructured>
+      <exo_cssFolder>CSS フォルダー</exo_cssFolder>
+      <exo_jsFolder>Java スクリプトフォルダー</exo_jsFolder>
+      <exo_linkFolder>リンク フォルダー</exo_linkFolder>
+      <exo_webFolder>Web コンテンツ フォルダー</exo_webFolder>
+   </label>
+  </DriveInputSet>
+  <UIPermissionTreeInfo>
+  <msg>
+      <confirm-delete-permission>本当にこの権限を削除したいですか？</confirm-delete-permission>
+      <no-permission-remove>オーナーもしくはシステムを削除することは出来ません。</no-permission-remove>  
+  </msg>
+  </UIPermissionTreeInfo>  
+  <UITaxonomyTreeMainForm>
+<msg>
+      <no-right-target-path>他のホームパスを選択しなければなりません。</no-right-target-path>
+</msg>
+</UITaxonomyTreeMainForm>
+
+<UIECMAdminControlPanel>
+    <tab>
+      <label>        
+        <ManageUnLock>ロックの管理</ManageUnLock>
+      </label>
+    </tab>        
+</UIECMAdminControlPanel>
+<UIUnLockForm>
+    <label>
+      <name>パスノード</name>      
+      <permissions>権限</permissions>
+      <PermissionButton>UIUnLockForm</PermissionButton>
+    </label>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>
+    </action>
+    <msg>
+      <permission-require>権限を選択しなければなりません。</permission-require>      
+    </msg>
+  </UIUnLockForm>
+  <UILockHolderList>
+  <header>
+  <name>グループorユーザ</name>
+  <action>アクション</action>
+  </header>
+  <tooltip>
+<DeleteLock>グループの削除</DeleteLock>
+  </tooltip>
+  <msg>
+  <can-not-delete-lock-holder>グループ {0}を削除できません。</can-not-delete-lock-holder>
+  </msg>
+  </UILockHolderList>
+  <UILockNodeList>
+  <header>
+  <name>ノードパス</name>
+  <hoderLock>ユーザロック</hoderLock>
+  <action>アクション</action>
+  </header>
+  <tooltip>
+<UnLock>ロック解除</UnLock>
+  </tooltip>
+  <msg>
+  <access-denied-exception>パス {0} のノードにアクセスするための権限が無いか、ノードは削除されました。</access-denied-exception>
+  </msg>
+  </UILockNodeList>
+  <EditUnLockForm>
+    <title>
+      <UIUnLockForm>管理ロック</UIUnLockForm>
+    </title>
+  </EditUnLockForm>  
+  <UITabPane>
+    <action>
+      <Close>閉じる</Close>
+    </action>
+    <title>
+    <UILockHolderContainer>管理ロック</UILockHolderContainer>
+    <UILockNodeList>ロックされたノード</UILockNodeList>
+    </title>
+  </UITabPane>
+  
+  <UIViewFormTabPane>
+    <action>
+      <AddTabForm>タブの追加</AddTabForm>
+      <AddTab>保存</AddTab>
+      <BackViewForm>戻る</BackViewForm>
+    </action>
+  </UIViewFormTabPane>
+  
+ <UITemplateForm>
+<tab>
+<label>
+<defaultSkin>CSS</defaultSkin>
+</label>
+</tab>
+</UITemplateForm>
+ 
+  <UITabPane>
+    <title>
+      <UISkinTab>CSS</UISkinTab>
+    </title>
+  </UITabPane>
+  
+  <UISkinTab>
+    <header>
+      <name>名前</name>
+      <roles>ロール</roles>
+      <baseVersion>バージョン</baseVersion>
+      <action>アクション</action>
+    </header>
+    <msg>
+      <undeletable>'{0}' は削除する事が出来ません。デフォルトです。</undeletable>
+      <confirm-delete>本当に削除しますか？</confirm-delete>
+    </msg>
+    <action>
+      <title>
+        <Edit>編集</Edit>
+        <Delete>削除</Delete>
+      </title>
+    </action>
+  </UISkinTab>
+  
+  <SkinForm>
+    <label>
+      <UITemplateContent>スキンフォーム</UITemplateContent>
+      <UIPopupWindow>スキン権限</UIPopupWindow>
+      <selectVersion>バージョン</selectVersion>
+      <content>コンテンツ</content>
+      <name>名前</name>
+      <isDocumentTemplate>ドキュメントタイプ</isDocumentTemplate>
+      <viewPermission>権限</viewPermission>
+      <enableVersion>Enable Versioning</enableVersion>
+    </label>
+    <title>スキンの追加/編集</title>
+  </SkinForm>
+
+ <UITagManager>
+   <action>
+     <title>
+       <RemoveStyle>削除</RemoveStyle>
+         <AddStyle>スタイルの追加</AddStyle>
+     </title>
+   </action>
+   <msg>
+     <confirm-delete>このタグスタイルを削除したいですか？</confirm-delete>
+   </msg>
+ </UITagManager>
+
+<UITaxonomyTreeContainer>
+<action>
+<Cancel>閉じる</Cancel>
+</action>
+</UITaxonomyTreeContainer>
+<UITaxonomyTreeMainForm>
+<action>
+<NextViewPermission>次へ</NextViewPermission>
+<Reset>Reset</Reset>
+</action>
+</UITaxonomyTreeMainForm>
+
+<UIPermissionTreeForm>
+<action>
+<Save>Save</Save>
+<Reset>Reset</Reset>
+<NextAddAction>次へ</NextAddAction>
+<Previous>前へ</Previous>
+</action>
+</UIPermissionTreeForm>
+
+<UIActionForm>
+<action>
+<PreviousViewPermission>前へ</PreviousViewPermission>
+<NextViewTree>次へ</NextViewTree>
+</action>
+  <msg>
+    <xss-vulnerability-character>フィールド'{0}'は、クロスサイトスクリプティングの脆弱性文字が含まれています。</xss-vulnerability-character>
+<xss-vulnerability-character-wo-label>Your input may contain XSS vulnerability characters</xss-vulnerability-character-wo-label>
+  </msg>
+</UIActionForm>
+
+<UITaxonomyTreeWorkingArea>
+<action>
+<Previous>前へ</Previous>
+</action>
+</UITaxonomyTreeWorkingArea>
+
+  <UITabPane>
+    <title>
+      <UITagManager>タグマネージャ</UITagManager>
+      <UITagPermissionManager>タグ権限マネージャ</UITagPermissionManager>
+    </title>
+  </UITabPane>
+  
+  <UITagPermissionInfo>
+    <header>
+      <usersOrGroups>ユーザorグループ</usersOrGroups>
+      <action>アクション</action>
+    </header>
+    <action>
+      <title>
+        <Delete>削除</Delete>
+      </title>
+    </action>
+    <msg>
+      <confirm-delete-permission>この権限を削除したいですか？</confirm-delete-permission>
+    </msg>   
+  </UITagPermissionInfo>
+  <UITagPermissionForm>
+    <title>権限の追加</title>
+    <action>
+      <Save>保存</Save>
+    </action>
+    <label>
+      <userOrGroup>メンバーシップ:</userOrGroup>
+      <permission/>
+    </label>
+    <msg>
+      <userOrGroup-alreadyExists>メンバーシップは既に存在します。別の物を選択してください!</userOrGroup-alreadyExists>
+    </msg>    
+  </UITagPermissionForm>
+  
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>グループの選択</selectGroup>
+      <selectMembership>メンバーシップの選択</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+  
+  <UIFolksonomyManager>
+  <msg>
+      <confirm-delete>このスタイルを削除したいですか？</confirm-delete>
+  </msg>
+    <action>
+      <title>
+        <AddStyle>スタイルの追加</AddStyle>
+      </title>
+    </action>
+  </UIFolksonomyManager>  
+<UIActionForm>
+  <title>
+  <ShowComponent>ウィンドウを開く</ShowComponent>
+  <removeReference>削除</removeReference>
+  </title>
+  </UIActionForm> 
+  <NodeTypeNameValidator>
+    <msg>
+      <Invalid-char>無効な文字があります。他の値を入力してください。</Invalid-char>
+      <empty-input>フィールドの値はnullもしくは空です。</empty-input>
+    </msg>
+  </NodeTypeNameValidator>
+  <UIActionForm>
+    <msg>
+      <constraint-violation-exception>ワークスペース'{2}'の'{1}に'{0}'を追加できません。</constraint-violation-exception>
+    </msg>
+  </UIActionForm>
+  
+  <UIWorkspaceWizard>
+    <msg>
+      <name-not-allowed>許されない名前</name-not-allowed>
+    </msg>
+  </UIWorkspaceWizard>
+  <UIRepositoryForm>
+    <msg>
+      <not-complete-repository>レポジトリは作成されています。新しいレポジトリを作成する為に数秒待つ必要があります。</not-complete-repository>
+    </msg>
+  </UIRepositoryForm>
+  
+  <UIViewFormTabPane>
+  <label>
+  <addCategory>カテゴリーの追加</addCategory>
+          <addLocalizationLink>Translationの追加</addLocalizationLink>
+  </label>
+  </UIViewFormTabPane>
+
+<UIDriveForm>
+<label>
+<allowNodeTypesOnTree>Allowance nodetype on left tree</allowNodeTypesOnTree>
+</label>
+</UIDriveForm>
+<DriveInputSet>
+<title>
+<RemovePermission>Remove Permission</RemovePermission>
+<ChooseNodeType>ノードタイプの選択</ChooseNodeType>
+<RemoveNodeType>削除</RemoveNodeType>
+</title>
+</DriveInputSet>
+<PopupNodeTypeSelector>
+<title>
+<UINodeTypeSelector>ノードタイプを選択</UINodeTypeSelector>
+<PopupNodeTypeSelector>ノードタイプを選択</PopupNodeTypeSelector>
+</title>
+</PopupNodeTypeSelector>
+  <UINodeTypeSelector>
+    <label>
+      <selectedAllNodeTypes>すべてのノードタイプを選択</selectedAllNodeTypes>
+    </label>
+  </UINodeTypeSelector>
+  <UIScriptForm>
+    <msg>
+      <PathNotFoundException>スクリプトは '{0}' フォルダに既に存在します。</PathNotFoundException>      
+    </msg>
+  </UIScriptForm>
+ <UINodeTypeList>
+   <msg>
+   <no-list>ノードタイプはありません。</no-list>
+   </msg>
+ </UINodeTypeList>
+  <UIActionForm>
+    <msg>
+      <canotChangeActionId>アクションIDを変更することは出来ません</canotChangeActionId>
+    </msg>
+  </UIActionForm>
+  <PopupComponent>
+    <title>
+      <UINodeTypeSelector>ノードタイプセレクター</UINodeTypeSelector>
+    </title>
+  </PopupComponent>
+  <UIPageIterator>
+    <label>
+      <maxPageSize>最大ページサイズ</maxPageSize>
+    </label>
+  </UIPageIterator>
+  <UILockNodeList>
+    <msg>
+      <can-not-unlock-node>このノードをロック解除する権限がありません。正しい権限を得る為に管理者にコンタクトしてください。</can-not-unlock-node>
+    </msg>
+ </UILockNodeList>
+</bundle>

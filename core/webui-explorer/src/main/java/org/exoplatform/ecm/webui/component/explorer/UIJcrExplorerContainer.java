@@ -16,18 +16,6 @@
  */
 package org.exoplatform.ecm.webui.component.explorer;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
-
-import javax.jcr.AccessDeniedException;
-import javax.jcr.NoSuchWorkspaceException;
-import javax.jcr.Node;
-import javax.jcr.Session;
-import javax.portlet.PortletPreferences;
-import javax.portlet.PortletRequest;
-
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
 import org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar;
@@ -51,6 +39,17 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIRightClickPopupMenu;
 import org.exoplatform.webui.core.model.SelectItemOption;
+
+import javax.jcr.AccessDeniedException;
+import javax.jcr.NoSuchWorkspaceException;
+import javax.jcr.Node;
+import javax.jcr.Session;
+import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 /**
  * Created by The eXo Platform SARL
  */
@@ -143,12 +142,12 @@ public class UIJcrExplorerContainer extends UIContainer {
         session.getItem(homePath);
       } catch(AccessDeniedException ace) {
         Object[] args = { driveName };
-        uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.access-denied", args,
+        uiApp.addMessage(new ApplicationMessage("UIDrivesArea.msg.access-denied", args,
             ApplicationMessage.WARNING));        
         return;
       } catch(NoSuchWorkspaceException nosuchWS) {
         Object[] args = { driveName };
-        uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.workspace-not-exist", args,
+        uiApp.addMessage(new ApplicationMessage("UIDrivesArea.msg.workspace-not-exist", args,
             ApplicationMessage.WARNING));        
         return;
       } catch(Exception e) {

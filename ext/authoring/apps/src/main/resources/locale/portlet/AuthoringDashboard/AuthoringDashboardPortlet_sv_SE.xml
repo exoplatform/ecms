@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDashboardForm>
+    <label>
+      <title>Kontrollpanel Författare</title>
+      <nocontent>Inget innehåll</nocontent>
+      <mydraft>Mitt förslag till innehåll</mydraft>
+      <waitingapproval>Väntar på mitt godkännande</waitingapproval>
+      <approve>Godkänn</approve>
+      <publishedtomorrow>Att publiceras i morgon</publishedtomorrow>
+    </label>
+  </UIDashboardForm>
+</bundle>

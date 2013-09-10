@@ -19,13 +19,14 @@ package org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.jcr.Node;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
-import org.exoplatform.ecm.webui.utils.LockUtil;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
 import org.exoplatform.services.ecm.publication.PublicationService;
@@ -49,21 +50,20 @@ import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
+
 /**
  * Created by The eXo Platform MEA Author : haikel.thamri@exoplatform.com
  */
 @ComponentConfig(lifecycle = UIFormLifecycle.class,
-                 template = "app:/groovy/webui/component/explorer/popup/action/UIPublicationPanel.gtmpl",
-                 events = {
-    @EventConfig(listeners = UIPublicationPanel.ChangeStateActionListener.class),
-    @EventConfig(listeners = UIPublicationPanel.ChangeVersionActionListener.class),
-    @EventConfig(listeners = UIPublicationPanel.PreviewVersionActionListener.class),
-    @EventConfig(listeners = UIPublicationPanel.RestoreVersionActionListener.class),
-    @EventConfig(listeners = UIPublicationPanel.SeeAllVersionActionListener.class)})
+template = "app:/groovy/webui/component/explorer/popup/action/UIPublicationPanel.gtmpl",
+events = {
+  @EventConfig(listeners = UIPublicationPanel.ChangeStateActionListener.class),
+  @EventConfig(listeners = UIPublicationPanel.ChangeVersionActionListener.class),
+  @EventConfig(listeners = UIPublicationPanel.PreviewVersionActionListener.class),
+  @EventConfig(listeners = UIPublicationPanel.RestoreVersionActionListener.class),
+  @EventConfig(listeners = UIPublicationPanel.SeeAllVersionActionListener.class)})
 
 public class UIPublicationPanel extends org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationPanel {
-
-
 
   private static final Log    LOG               = LogFactory.getLog(UIPublicationPanel.class.getName());
 
@@ -73,17 +73,16 @@ public class UIPublicationPanel extends org.exoplatform.services.wcm.publication
    * @throws Exception the exception
    */
   public UIPublicationPanel() throws Exception {
-    
   }
 
   public void init(Node node) throws Exception {
     String nodeVersionUUID = null;
     super.init(node);
     String currentState = node.getProperty(AuthoringPublicationConstant.CURRENT_STATE)
-            .getString();
+        .getString();
     if (PublicationDefaultStates.PUBLISHED.equals(currentState) || PublicationDefaultStates.UNPUBLISHED.equals(currentState)) {
       nodeVersionUUID = node.getProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)
-                            .getString();
+          .getString();
       if (!"".equals(nodeVersionUUID)) {
         Node revision = this.getRevisionByUUID(nodeVersionUUID);
         this.setCurrentRevision(revision);
@@ -111,11 +110,12 @@ public class UIPublicationPanel extends org.exoplatform.services.wcm.publication
     public void execute(Event<UIPublicationPanel> event) throws Exception {
       UIPublicationPanel publicationPanel = event.getSource();
       String state = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      Node currentNode = publicationPanel.getCurrentNode();
+      Node currentNode = publicationPanel.getCurrentNode();     
+
       PublicationService publicationService = publicationPanel.getApplicationComponent(PublicationService.class);
       WCMPublicationService wcmPublicationService = publicationPanel.getApplicationComponent(WCMPublicationService.class);
       PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins()
-                                                              .get(AuthoringPublicationConstant.LIFECYCLE_NAME);
+          .get(AuthoringPublicationConstant.LIFECYCLE_NAME);
       HashMap<String, String> context = new HashMap<String, String>();
       Node currentRevision = publicationPanel.getCurrentRevision();
       if (currentRevision != null) {
@@ -131,8 +131,9 @@ public class UIPublicationPanel extends org.exoplatform.services.wcm.publication
 
         String nodeVersionUUID = null;
         String currentState = currentNode.getProperty(AuthoringPublicationConstant.CURRENT_STATE)
-                .getString();
-        if (PublicationDefaultStates.PUBLISHED.equals(currentState) || PublicationDefaultStates.UNPUBLISHED.equals(currentState)) {
+            .getString();
+        if (PublicationDefaultStates.PUBLISHED.equals(currentState) || 
+            PublicationDefaultStates.UNPUBLISHED.equals(currentState)) {
           if(currentNode.hasProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)){
             nodeVersionUUID = currentNode.getProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP).getString();
           }
@@ -224,7 +225,7 @@ public class UIPublicationPanel extends org.exoplatform.services.wcm.publication
     }
     return false;
   }
-
+ 
   /**
    * Check if a user is authorized to reach the state based on the state's role.
    * The user must have the role

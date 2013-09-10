@@ -15,7 +15,6 @@
       </label>
     </tab>
     <label>     
-      <UITaxonomyManager>Gérer les Catégorie Simples</UITaxonomyManager>
       <UITaxonomyManagerTrees>Catégories</UITaxonomyManagerTrees>
       <UIMetadataManager>Métadonnées</UIMetadataManager>
       <UINamespaceManager>Espaces de nommage</UINamespaceManager>
@@ -45,7 +44,7 @@
       <no-taxonomy-selected>Vous devez copier ou couper au moins une catégorie</no-taxonomy-selected>
       <node-is-cutting>Impossible de copier ici. La catégorie sélectionnée ('{0}') a probablement été déplacée ou supprimée.</node-is-cutting>
       <can-not-paste>Le presse-papier ne contient aucune donnée à copier.</can-not-paste>
-      <reference-exception>Impossible de supprimer cette catégorie car elle est actuellement référencée ailleurs.</reference-exception>
+      <reference-exception>Impossible de supprimer cette catégorie car elle est actuellement référencée par un contenu.</reference-exception>
       <path-error>Un problème est survenu lors de la suppression de cette catégorie.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -141,14 +140,6 @@
 	##########################################################################################
 	-->
 	<UIPermissionTreeForm>
-		<title>Ajouter une permission à ce noeud</title>
-		<label>
-			<userOrGroup>Utilisateur ou Groupe</userOrGroup>
-      		<read>Lecture</read>
-      		<add_node>Ajout</add_node>
-      		<set_property>Droit de MAJ des propriétés</set_property>
-      		<remove>Suppression</remove>
-		</label>
 		<msg>
       <have-not-any-permission>Ajoutez au moins une permission à ce nœud.</have-not-any-permission>
 		</msg>
@@ -262,7 +253,7 @@
       <path-not-found-exception>Ces métadonnées ont été supprimées ou modifiées. S'il vous plaît cliquez sur le bouton Actualiser.</path-not-found-exception>
     </msg>
     <action>
-      <Add>Ajouter une Métadonnée</Add>
+      <Add>Ajouter des Métadonnées</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIMetadataList>
@@ -373,12 +364,6 @@
       <permission>{0} dans {1}</permission>
     </label>
   </UIDriveList>
-  <PopupDrivePermission>
-    <title>
-      <AddDrivePermissionSelector>Ajouter une permission</AddDrivePermissionSelector>
-      <UIDrivePermissionSelector>Définir les Permissions</UIDrivePermissionSelector>
-    </title>
-  </PopupDrivePermission>
   <UIDriveForm>
     <action>
       <Cancel>#{word.cancel}</Cancel>
@@ -413,7 +398,7 @@
       <viewSideBar>Panneau latéral:</viewSideBar>
       <permissions>Permissions</permissions>
       <showHiddenNode>Montrer les noeuds cachés</showHiddenNode>
-      <allowCreateFolder>Dossiers Autorisés:</allowCreateFolder>
+      <allowCreateFolders>Dossiers autorisés :</allowCreateFolders>
       <Admin>Admin:</Admin>
       <Categories>Catégories:</Categories>
       <Icons>Icônes:</Icons>
@@ -440,215 +425,13 @@
       <action>Action</action>
     </header>
   </UITreeList>
-  <!--
-  ################################################################################
-  #             org.exoplatform.ecm.webui.component.admin.UIRepositoryManager		 #
-  ################################################################################
-  -->
-  <UIRepositoryControl>
-    <label>
-      <repoName>Entrepôt Courant</repoName>
-    </label>
-    <title>
-      <repoAdd>Ajouter un entrepôt</repoAdd>
-      <repoEdit>Modifier</repoEdit>
-      <repoDelete>Supprimer l'entrepôt</repoDelete>
-    </title>
-    <msg>
-      <cannot-deleteRepo>Entrepôt</cannot-deleteRepo>
-    </msg>
-  </UIRepositoryControl>
-  <UIECMAdminUIPopupWindow>
-    <title>
-      <UIRepositoryFormContainer>Entrepôt</UIRepositoryFormContainer>
-      <Delete>Supprimer</Delete>
-      <UIRepositoryList>Liste des entrepôts</UIRepositoryList>
-    </title>
-  </UIECMAdminUIPopupWindow>
-  <UIPopupWindowControl>
-    <title>
-      <UIWorkspaceWizardContainer>Espace de stockage cible</UIWorkspaceWizardContainer>
-      <UIRepositoryValueSelect>Classe d'authentification</UIRepositoryValueSelect>
-    </title>
-  </UIPopupWindowControl>
-  <UIPopupWindowInWizard>
-    <title>
-      <UIPermissionSelector>Sélection d'une permission</UIPermissionSelector>
-      <UIPermissionContainer>Choisir une permission</UIPermissionContainer>
-      <UIRepositoryValueSelect>Choisir une classe</UIRepositoryValueSelect>
-    </title>
-  </UIPopupWindowInWizard>
-  <UIRepositoryValueSelect>
-    <header>
-      <name>Nom complet</name>
-      <action>Sélection</action>
-    </header>
-    <action>
-      <Close>Fermer</Close>
-    </action>
-  </UIRepositoryValueSelect>
-  <UIRepositorySelectForm>
-    <msg-editError>Une erreur est survenue avec l'entrepôt "{0}", veuillez vérifier ou en créer un nouveau</msg-editError>
-    <msg-accessdenied>Vous n'avez pas la permission de modifier l'entrepôt '{0}'.</msg-accessdenied>
-  </UIRepositorySelectForm>
-  <UIRepositoryForm>
-    <label>
-      <name>Nom</name>
-      <wsInputSet>UIRepositoryForm</wsInputSet>
-      <authInputSet>UIRepositoryForm</authInputSet>
-      <workspace>Espace de stockage</workspace>
-      <isDefault>Définir comme dépôt par défaut</isDefault>
-      <accessControl>Contrôle des accès</accessControl>
-      <authenticationPolicy>Méthode d'authentification</authenticationPolicy>
-      <securityDomain>Domaine de Securité</securityDomain>
-      <sessionTime>Timeout de session</sessionTime>
-      <channelConfig>Configuration du cannal</channelConfig>
-      <enableReplication>Activer la réplication</enableReplication>
-      <repMode>Mode de réplication</repMode>
-      <repTestMode>Réplication en mode test</repTestMode>
-      <directoryPath>Dossier</directoryPath>
-      <maxBufferSize>Taille Max du Buffer</maxBufferSize>
-    </label>
-    <msg>
-      <cannot-delete-default-workspace>Impossible de supprimer le workspace '{0}' car il s'agit du workspace par défaut.</cannot-delete-default-workspace>
-      <repoName-exist>L'entrepôt '{0}' existe déjà.</repoName-exist>
-      <repoName-not-alow>Caractères invalides dans le nom!</repoName-not-alow>
-      <workspace-isrequire>Veuillez indiquer au moins un espace de stockage.</workspace-isrequire>
-      <cannot-delete-workspace>Suppression impossible de '{0}'</cannot-delete-workspace>
-      <workspace-setdefault>Un espace de stockage par défaut doit être défini.</workspace-setdefault>
-      <!--DMS 2.4.x ECM-3611> -->
-      <workspace-setDMSsystem>Veuillez choisir un espace de stockage système pour DMS</workspace-setDMSsystem>
-      <workspace-bseChanel>Un canal est requis</workspace-bseChanel>
-      <workspace-bseMode>Veuillez indiquer un mode de réplication</workspace-bseMode>
-      <workspace-bsePath>Veuillez indiquer un dossier.</workspace-bsePath>
-      <sessionTime-invalid>Le format du timeout de session est incorrect</sessionTime-invalid>
-      <sessionTime-required>Veuillez indiquer un timeout de session</sessionTime-required>
-      <workspace-bseBuffer>Veuillez indiquer une taille maximum de buffer</workspace-bseBuffer>
-      <authen-isrequire>Veuillez indiquer une méthode d'authentification</authen-isrequire>
-      <confirm-workspace-delete>Confirmez-vous la suppression de cette espace de stockage?</confirm-workspace-delete>
-    </msg>
-    <action>
-      <Close>#{word.close}</Close>
-      <Save>#{word.save}</Save>
-      <Reset>Réinitialiser</Reset>
-      <AddWorkspace>Ajouter un espace de stockage</AddWorkspace>
-    </action>
-  </UIRepositoryForm>
+  
   <UIRepositoryList>
     <titlebar>
       <label>Administration ECM</label>
     </titlebar>
-    <header>
-      <name>Nom</name>
-      <workspaces>Espaces de stockage</workspaces>
-      <isdefault>Entrepôt par défaut</isdefault>
-      <accesscontrol>Contrôle d'accès</accesscontrol>
-      <sessiontimeout>Timeout de session</sessiontimeout>
-      <action>Actions</action>
-    </header>
-    <action>
-      <Close>#{word.close}</Close>
-    </action>
-    <msg>
-      <cannot-delete>Suppression du dépôt '{0}' (probablement en cours d'utilisation)</cannot-delete>
-      <confirm-delete>Confirmez-vous la suppression?</confirm-delete>
-    </msg>
   </UIRepositoryList>
-  <UIWorkspacePermissionForm>
-    <label>
-      <permission>Permission</permission>
-      <read>Lecture</read>
-      <add_node>Droit d'ajout de document</add_node>
-      <set_property>Droit d'ajout/modification de propriété</set_property>
-      <remove>Suppression</remove>
-    </label>
-    <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
-    </action>
-    <msg>
-      <check-one>Vous devez sélectionner au moins une permission</check-one>
-    </msg>
-  </UIWorkspacePermissionForm>
-  <PermissionPopupSelect>
-    <title>
-      <UIPermissionSelector>Parcourir les permissions</UIPermissionSelector>
-    </title>
-    <label>
-      <selectGroup>Groupe</selectGroup>
-      <selectMembership>Rôle</selectMembership>
-    </label>
-  </PermissionPopupSelect>
-  <UIWorkspaceWizard>
-    <msg>
-      <wsname-exist>L'espace de stockage "{0}" existe déjà dans cette base de données!</wsname-exist>
-      <name-require>Veuillez indiquer un nom d'espace de stockage</name-require>
-      <permission-require>Veuillez sélectionner une permission</permission-require>
-      <nodeType-invalid>Le nodetype d'initialisation par défaut de l'espace de stockage doit être "nt:unstructured"</nodeType-invalid>
-      <!--DMS 2.4.x ECM-3611-->
-      <nodeType-invalidSystemWs>Le nodetype d'initialisation par défaut de l'espace de stockage système de DMS doit être "nt:unstructured"</nodeType-invalidSystemWs>
-      <lockTimeOut-required>Veuillez indiquer un timeout de verrouillage</lockTimeOut-required>
-      <lockTimeOut-invalid>Le format du timeout de verrouillage est incorrect</lockTimeOut-invalid>
-      <buffer-invalid>Le format de la taille du buffer est invalide</buffer-invalid>
-      <buffer-require>Veuillez indiquer une taille de buffer</buffer-require>
-      <buffer-zero>Veuillez indiquer une taille de buffer &gt; 0</buffer-zero>
-      <buffer-small>La taille de buffer est trop petite</buffer-small>
-      <containerName-invalid>Veuillez indiquer un nom de container.</containerName-invalid>
-      <maxSize-require>Veuillez indiquer une taille de cache maximum</maxSize-require>
-      <maxSize-invalid>Le format de la taille du cache maximum est invalide</maxSize-invalid>
-      <maxSize-rezo>Veuillez indiquer une taille de cache maximum &gt; 0</maxSize-rezo>
-      <liveTime-require>Veuillez indiquer une durée de vie du cache</liveTime-require>
-      <liveTime-invalid>Le format de la durée de vie du cache est invalide</liveTime-invalid>
-      <liveTime-rezo>Veuillez indiquer une durée de vie du cache &gt; 0</liveTime-rezo>
-      <sourceName-invalid>Veuillez indiquer une source</sourceName-invalid>
-      <storePath-invalid>Veuillez indiquer un dossier de stockage.</storePath-invalid>
-      <swapPath-invalid>Veuillez indiquer un dossier de swap.</swapPath-invalid>
-      <queryHandlerType>Veuillez indiquer un type de gestionnaire de requête (Query handler)</queryHandlerType>
-      <indexPath-invalid>Veuillez indiquer un dossier pour le stockage des index de requêtes.</indexPath-invalid>
-      <storeType-invalid>Veuillez indiquer un type de stockage</storeType-invalid>
-      <queryHandlerType-invalid>Veuillez indiquer un type de gestionnaire de requête (Query handler)</queryHandlerType-invalid>
-      <permission-invalid>Veuillez indiquer au moins un droit</permission-invalid>
-    </msg>
-    <label>
-      <step>Etape</step>
-      <wizardSteps>Etapes de l'assistant</wizardSteps>
-      <name>Nom</name>
-      <autoInitializedRootNt>Type du noeud racine</autoInitializedRootNt>
-      <isDefault>Définir par défault</isDefault>
-      <!--DMS 2.4.x ECM-3611-->
-      <isDMSSytemWs>Définir comme l'espace de stockage système de DMS</isDMSSytemWs>
-      <permission>Permission par défaut</permission>
-      <setLockTimeOut>Timeout de verrouillage</setLockTimeOut>
-      <container>Type de container</container>
-      <sourceName>Nom de la source</sourceName>
-      <dbType>Dialecte</dbType>
-      <isMulti>Multi</isMulti>
-      <storeType>Type de stockage</storeType>
-      <filterType>Filtres</filterType>
-      <maxBuffer>Buffer max (octets)</maxBuffer>
-      <swapPath>Répertoire fichier d'échange</swapPath>
-      <storePath>Répertoire de stockage</storePath>
-      <externalStore>Stockage externe</externalStore>
-      <queryHandler>Gestionnaire de requêtes</queryHandler>
-      <indexPath>Répertoire des index de requêtes</indexPath>
-      <isCache>Gestion du cache activée</isCache>
-      <maxSize>Taille max de cache</maxSize>
-      <liveTime>Temps de validité du cache</liveTime>
-    </label>
-    <tab>
-      <info>
-        <step1>1ère étape : choix du nom de l'espace de travail, du nodetype...</step1>
-        <step2>2ème étape : configuration du container, stockage ...</step2>
-        <step3>3ème étape : configuration du cache, gestionnaire de requêtes ...</step3>
-      </info>
-    </tab>
-    <action>
-      <Next>#{word.next}</Next>
-      <Back>#{word.back}</Back>
-      <Finish>Terminer</Finish>
-      <Cancel>#{word.cancel}</Cancel>
-    </action>
-  </UIWorkspaceWizard>
+  
   <!--
   ################################################################################
   #    org.exoplatform.ecm.webui.component.admin.nodetype.UINodeTypeManager			 #
@@ -740,7 +523,7 @@
       <superTypes>Super Types</superTypes>
       <propertyname>Nom</propertyname>
       <requiredType>Type</requiredType>
-      <multiple>Multi-valué</multiple>
+      <multiple>Multi</multiple>
       <mandatory>Obligatoire</mandatory>
       <autoCreated>Auto-créé</autoCreated>
       <parentversion>Héritage de version</parentversion>
@@ -827,7 +610,7 @@
   </superTypesPopup>
   <NodeTypePopup>
     <title>
-      <UINodeTypeForm>Ajout/Modification es définitions de types de noeud</UINodeTypeForm>
+      <UINodeTypeForm>Ajout/Modification des définitions de types de noeud</UINodeTypeForm>
     </title>
   </NodeTypePopup>
   <ViewNodeTypePopup>
@@ -908,7 +691,7 @@
     <title>Sélection d'un type de noeud à importer</title>
     <msg>
       <no-nodetype-registered>Aucun type de noeud enregistré.</no-nodetype-registered>
-      <nodetype-registered>Enregistrement réussi.</nodetype-registered>
+      <nodetype-registered>Enregistrement du type réussi.</nodetype-registered>
     </msg>
   </UINodeTypeImport>
   <NodeTypeImportPopup>
@@ -996,8 +779,6 @@
     <title>
       <UIViewContainer>Vues</UIViewContainer>
       <ECMTemplate>Gabarits</ECMTemplate>
-      <CBTemplate>BC Templates</CBTemplate>
-      <UICBScripts>BC Scripts</UICBScripts>
       <UIScriptForm>Scripts</UIScriptForm>
       <UIDialogTab>Edition</UIDialogTab>
       <UIViewTab>Visualisation</UIViewTab>
@@ -1142,7 +923,7 @@
     </msg>
     <label>
       <viewName>Nom</viewName>
-      <template>Gabarit</template>
+      <template>Modèle</template>
 <version>Restaurer cette version</version>
       <enableVersion>Activer les Versions</enableVersion>
       <hideExplorerPanel>Masquez l'arbre dans le panneau latéral</hideExplorerPanel>
@@ -1163,11 +944,9 @@
       <template>Formulaires</template>
       <enableVersion>Activer le Versionnage</enableVersion>
       <addFolder>Ajouter un dossier</addFolder>
-      <addSignature>Ajouter une signature</addSignature>
       <addDocument>Ajouter un document</addDocument>
       <editDocument>Modifier</editDocument>
       <upload>Ajouter des Fichiers</upload>
-      <createTicket>Create Ticket</createTicket>
       <paste>Coller</paste>
       <search>Rechercher</search>
       <viewReferences>Voir les références</viewReferences>
@@ -1180,19 +959,17 @@
       <manageCategories>Catégories</manageCategories>
       <manageRelations>Relations</manageRelations>
       <manageActions>Actions</manageActions>
-      <exportNode>Export</exportNode>
-      <importNode>Import</importNode>
+      <exportNode>Exporter un noeud</exportNode>
+      <importNode>Importer un noeud</importNode>
       <viewRelations>Voir les relations</viewRelations>
       <showJCRStructure>Mode Structure</showJCRStructure>
       <watchDocument>Suivre</watchDocument>
       <taggingDocument>Tagger</taggingDocument>
-      <multiLanguage>Multilangues</multiLanguage>
       <viewMetadatas>Métadonnées</viewMetadatas>
       <overloadThumbnail>Surcharger une vignette</overloadThumbnail>
       <manageHidden>Cacher/Montrer le contenu</manageHidden>
       <comment>Commenter</comment>
       <vote>Voter</vote>	  
-      <manageSimpleCategories>Gérer les catégories simples</manageSimpleCategories>
       <addCategory>Ajouter une Catégorie</addCategory>
       <addLocalizationLink>Ajouter une Traduction</addLocalizationLink>
       <publicationRequestApproval>Demander Validation</publicationRequestApproval>
@@ -1215,7 +992,7 @@
     <tab>
       <label>
         <UITabContainer>Barre d'Outils</UITabContainer>
-        <UIViewForm>Vue</UIViewForm>
+        <UIViewForm>Aperçu</UIViewForm>
 								<UIViewPermissionContainer>Permission</UIViewPermissionContainer>
       </label>
     </tab>
@@ -1226,19 +1003,6 @@
       <Close>#{word.close}</Close>
       <Restore>Restaurer</Restore>
     </action>
-    <label>
-	  <option>
-	  	<ListView>Vue de liste</ListView>
-		  <TimelineView>Vue de chronologie</TimelineView>
-		  <ThumbnailsView>Vue des vignettes</ThumbnailsView>
-		  <CoverFlow>Flux de couverture</CoverFlow>
-		  <IconView>Visualisation de l'icône</IconView>
-		  <SlideShowView>Vue du diaporama</SlideShowView>
-		  <SystemView>Vue du système</SystemView>
-		  <ContentView>Visualisation du contenu</ContentView>
-      <FileView>Vue Fichiers</FileView>
-	  </option>
-    </label>
   </UIViewFormTabPane>
   <PopupViewPermission>
     <title>
@@ -1254,8 +1018,8 @@
 		
 		<tab_permission>
 			 <title>
-  <SelectUser>Selectionnez un Utilisateur</SelectUser>
-<SelectMember>Selection d'un membre</SelectMember>
+  <SelectUser>Sélectionnez un utilisateur</SelectUser>
+<SelectMember>Sélectionnez un rôle</SelectMember>
 <AddAny>Tout Personne</AddAny>
 			 </title>
 		</tab_permission>
@@ -1436,7 +1200,7 @@
       <scriptContent>Contenu</scriptContent>
       <scriptLabel>Nom</scriptLabel>
       <scriptName>Script</scriptName>
-      <enableVersion>Activer le versionning</enableVersion>
+      <enableVersion>Activer le Versioning</enableVersion>
     </label>
   </UIScriptForm>
   <!--
@@ -1451,7 +1215,7 @@
       <scriptContent>Script</scriptContent>
       <scriptLabel>Nom</scriptLabel>
       <scriptName>Script</scriptName>
-      <enableVersion>Activer le Versionage</enableVersion>
+      <enableVersion>Activer le Versioning</enableVersion>
     </label>
   </ecmScriptForm>
   <!--
@@ -1466,7 +1230,7 @@
     </action>
     <title>Ajout de catégorie</title>
     <label>
-      <taxonomyName>Nom</taxonomyName>
+      <taxonomyName>Nom de la catégorie</taxonomyName>
       <parentPath>Dossier parent</parentPath>
     </label>
     <msg>
@@ -1501,8 +1265,8 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <parentPath>Parent</parentPath>
-      <taxonomyName>Catégorie</taxonomyName>
+      <parentPath>Parent :</parentPath>
+      <taxonomyName>Nom de la catégorie :</taxonomyName>
     </label>
     <msg>
       <name-null>Le nom est vide.</name-null>
@@ -1652,7 +1416,7 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>Uilisateur ou Groupe</usersOrGroups>
+      <usersOrGroups>Utilisateur ou Groupe</usersOrGroups>
       <read>Lecture</read>
       <addNode>Modification</addNode>
       <remove>Suppression</remove>
@@ -1669,7 +1433,7 @@
     <title>
       <SelectUser>Sélectionner un utilisateur</SelectUser>
       <SelectMember>Rôle</SelectMember>
-      <AddAny>Sélectionner "tout le monde"</AddAny>
+      <AddAny>Tout le monde</AddAny>
     </title>
   </permission>
   <!--
@@ -1734,7 +1498,7 @@
   -->
   <UITemplateList>
     <header>
-      <name>Nom</name>
+      <name>Type</name>
       <action>Action</action>
       <label>Nom</label>
       <icon>Icône</icon>
@@ -1962,7 +1726,7 @@
       <name>Nom</name>
       <isDocumentTemplate>Marquer comme Document</isDocumentTemplate>
       <viewPermission>Permission</viewPermission>
-      <enableVersion>Versionnage Activé</enableVersion>
+      <enableVersion>Versioning activé</enableVersion>
     </label>
     <title>Ajout/Modification d'un formulaire de visualisation</title>
   </ViewForm>
@@ -1975,7 +1739,7 @@
       <name>Nom</name>
       <isDocumentTemplate>Marquer comme Document</isDocumentTemplate>
       <viewPermission>Permission</viewPermission>
-      <enableVersion>Versionnage  Activé</enableVersion>
+      <enableVersion>Activer le Versioning</enableVersion>
     </label>
     <title>Ajout/Modification d'un formulaire d'édition</title>
   </DialogForm>
@@ -2086,7 +1850,7 @@
       <name-invalid>Le nom contient des caractères invalides.</name-invalid>
       <roles-invalid>Veuillez saisir au moins une permission.</roles-invalid>
       <version-restored>Version {0} restaurée avec succès.</version-restored>
-      <name-exist>Le formulaire '{0}' existe déjà.</name-exist>
+      <name-exist>Le document '{0}' existe déjà.</name-exist>
     </msg>
     <title>
       <AddPermission>Ajouter une Permission</AddPermission>
@@ -2204,9 +1968,9 @@
   </UITagStyleList>  
   <UITagStyleForm>
     <label>
-      <styleName>Nom du Style</styleName>
-      <documentRange>Nombre de références</documentRange>
-      <styleHTML>Style Html</styleHTML>
+      <styleName>Nom du style:</styleName>
+      <documentRange>Nombre de références:</documentRange>
+      <styleHTML>Style HTML :</styleHTML>
     </label>
     <action>
       <UpdateStyle>Mettre à jour</UpdateStyle>
@@ -2345,7 +2109,7 @@
   <UIDrivePermissionSelector>
     <label>
       <selectGroup>Sélectionnez un groupe</selectGroup>
-      <selectUser>Selectionnez un utilisateur</selectUser>
+      <selectUser>Sélectionnez un utilisateur</selectUser>
       <selectMembership>Rôle</selectMembership>
     </label>
   </UIDrivePermissionSelector>
@@ -2412,13 +2176,6 @@
   <!--
   #########Since ECM 2.5##################
   --> 
-  <UIWorkspaceWizard>
-    <label>
-      <step1>Etape 1</step1>
-      <step2>Etape 2</step2>
-      <step3>Etape 3</step3>
-    </label>
-  </UIWorkspaceWizard>
   
   <UIDriveForm>
 		<msg>
@@ -2468,7 +2225,7 @@
       <exo_cssFolder>CSS</exo_cssFolder>
       <exo_jsFolder>Javascript</exo_jsFolder>
       <exo_linkFolder>Liens</exo_linkFolder>
-      <exo_webFolder>Documents</exo_webFolder>
+      <exo_webFolder>Web</exo_webFolder>
     </label>
   </DriveInputSet>
   <UIPermissionTreeInfo>
@@ -2594,7 +2351,7 @@
       <name>Nom</name>
       <isDocumentTemplate>Marquer comme Document</isDocumentTemplate>
       <viewPermission>Permission</viewPermission>
-      <enableVersion>Activer le versionnage</enableVersion>
+      <enableVersion>Activer le Versioning</enableVersion>
     </label>
     <title>Ajouter/Modifier un Style</title>
   </SkinForm>
@@ -2658,7 +2415,7 @@
     
   <UITagPermissionInfo>
     <header>
-      <usersOrGroups>Rôles</usersOrGroups>
+      <usersOrGroups>Utilisateur ou Groupe</usersOrGroups>
       <action>Action</action>
     </header>
       <action>
@@ -2736,21 +2493,7 @@
           <addLocalizationLink>Ajouter une Traduction</addLocalizationLink>
   		</label>
   </UIViewFormTabPane>
-  <UIDriveForm>
-			<label>
-  <taxonomy-list>Liste des Arbres de Catégories</taxonomy-list>
-  <admin-view>Vue Admin</admin-view>
-  <authoring-view>Vue Web</authoring-view>
-  <taxonomy-icons>Icônes des Arbres de Catégories</taxonomy-icons>
-  <anonymous-view>Vue Anonyme</anonymous-view>
-  		<icon-view>Icônes</icon-view>
-  		<slide-show>Diaporama</slide-show>
-  <simple-view>Simple</simple-view>
-  <system-view>Système</system-view>
-  		<timeline-view>Chronologie</timeline-view>
-  		<cover-flow>Défilé</cover-flow>	
-  	</label>
-  </UIDriveForm>
+
 	<UIDriveForm>
 		<label>
 <allowNodeTypesOnTree>Type de noeud autorisés dans l'arborescence de gauche</allowNodeTypesOnTree>

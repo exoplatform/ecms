@@ -23,6 +23,7 @@
 	boolean isBaseVersion= false;
 	boolean isBeforeCurrentState = true;
 	boolean enableState = false;
+	boolean isLeftState = false;
     List<State> states = uicomponent.getStates(cNode);
 	if(currentRevision.getUUID().equals(cNode.getUUID())){
 		isBaseVersion=true;
@@ -63,22 +64,29 @@
 				isBeforeCurrentState=false;
 			
 				if(isBaseVersion&&cNode.hasProperty("publication:currentState")&&!cNode.getProperty("publication:currentState").getString().equals(status)){
+				  String sateClass = "activeStatus";
+				  if(!isLeftState) sateClass += " completed";
 				%>
-				<li class="activeStatus" onclick="<%= uicomponent.event("ChangeState", status)%>"><a class="node">
+				<li class="<%=sateClass%>" onclick="<%= uicomponent.event("ChangeState", status)%>"><a class="node">
 				<%}
-				else{%>
+				else{
+				  isLeftState = true;
+				%>
 				<li class="currentStatus"><a class="node">
 				<%}
 				
 				}else if((!isBaseVersion&&isBeforeCurrentState)||isAutomatic||!enableState) {
-				
+				  String sateClass = "disableStatus";
+          if(!isLeftState) sateClass += " completed";
 				%>
-				<li class="disableStatus"><a class="node">
+				<li class="<%=sateClass%>"><a class="node">
 				<%}
 				
 				else  if(!isAutomatic&&enableState){
+				  String sateClass = "activeStatus";
+				  if(!isLeftState) sateClass += " completed";
 				%>	
-				<li class="activeStatus" onclick="<%= uicomponent.event("ChangeState", status)%>"><a class="node">
+				<li class="<%=sateClass%>" onclick="<%= uicomponent.event("ChangeState", status)%>"><a class="node">
 					
 					<%}%>
 					</a>

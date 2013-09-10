@@ -54,7 +54,7 @@ import org.exoplatform.services.security.ConversationState;
 })
 public abstract class BaseECMSTestCase extends BaseExoTestCase {
 
-  protected static Log                  log                    = ExoLogger.getLogger("org.exoplatform.ecms.test");
+  protected static Log            log               = ExoLogger.getLogger(BaseECMSTestCase.class.getName());
   
   protected PortalContainer        container;
   
@@ -100,8 +100,6 @@ public abstract class BaseECMSTestCase extends BaseExoTestCase {
   }
 
   private void removeAllData() {
-    // TODO Auto-generated method stub
-    
   }
 
   @SuppressWarnings("unchecked")
@@ -163,7 +161,9 @@ public abstract class BaseECMSTestCase extends BaseExoTestCase {
     try {
       applySystemSession();
     } catch (Exception e) {
-      e.printStackTrace();
+      if (log.isErrorEnabled()) {
+        log.error(e);
+      }
       fail();
     }
   }

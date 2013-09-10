@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+ 
+  <View>
+    <label>
+      <languages>
+        <en>Englisch</en>
+        <fr>Französisch</fr>
+        <ru>Russisch</ru>
+        <vi>Vietnamesisch</vi>
+        <nl>Holländisch</nl>
+        <de>Deutsch</de>
+        <uk>Ukrainisch</uk>
+        <ar>Arabisch</ar>
+      </languages>
+    </label>
+  </View>
+ 
+  <!--
+  ################resoucebundle FOR EXO:COMMENT VIEW TEMPLATE#############
+  -->
+  <Comment>
+    <view>
+      <label>
+        <postedBy>Letzter Kommentar gepostet von</postedBy>
+        <at>um</at>
+        <comments>Kommentar (e)</comments>
+        <show-comments>Kommentare anzeigen</show-comments>
+        <hide-comments>Kommentare ausblenden</hide-comments>
+        <comment-by>Kommentiert von</comment-by>
+        <email>E-mail</email>
+        <site>Seite</site>
+      </label>
+    </view>
+  </Comment>
+ 
+  <!--
+  ################resoucebundle FOR NT:FILE VIEW TEMPLATE##############
+  -->
+  <File>
+    <view>
+      <label>
+        <not-viewable>Dieser Inhalt kann nicht angezeigt werden</not-viewable>
+        <using-webDAV>oder benutzen Sie WebDAV, um auf die Inhalte zuzugreifen</using-webDAV>
+        <file-size-too-big>Der Inhalt dieser Datei ist zu groß. Sie sollten Sie herunterladen und im Client öffnen.</file-size-too-big>
+        <webDAV>WebDAV Ansicht</webDAV>
+        <download>Herunterladen</download>
+        <htmlview>Als HTML anzeigen</htmlview>
+        <plaintextview>Als nur-Text anzeigen</plaintextview>
+      </label>
+    </view>
+  </File>
+ 
+  <!--
+  ################resoucebundle FOR MAIL:DOCUMENT VIEW TEMPLATE##############
+  -->
+  <Mail>
+    <view>
+      <label>
+        <from>Von:</from>
+        <to>An:</to>
+        <cc>Cc:</cc>
+        <date>Datum:</date>
+        <subject>Betreff:</subject>
+        <attachment>Anhänge:</attachment>
+      </label>
+    </view>
+  </Mail>
+  <!--
+  ################resoucebundle FOR EXO:VOTE VIEW TEMPLATE##############
+  -->
+  <Vote>
+    <view>
+      <label>
+        <avg-rating>Durschnittliche Bewertung</avg-rating>
+        <subscription>Stimmen</subscription>
+      </label>
+    </view>
+  </Vote>
+  <!--
+  ################resoucebundle FOR LISTVIEW VIEW TEMPLATE##############
+  -->
+  <ListView>
+    <view>
+      <label>
+        <name>Name</name>
+        <versionable>Versionierbar</versionable>
+        <exo_owner>Eigentümer</exo_owner>
+        <exo_dateCreated>Erstellungsdatum</exo_dateCreated>
+        <exo_dateModified>Bearbeitungsdatum</exo_dateModified>
+        <auditing>Audit</auditing>
+      </label>
+    </view>
+  </ListView>
+
+  <!--
+  ###################### resoucebundle for exo:addMetadataAction view template ####
+  -->
+  <AddMetadata>
+    <view>
+      <label>
+        <action-name>Aktionname</action-name>
+        <lifecycle>Lebenszyklus</lifecycle>
+        <metadata>Metadaten</metadata>
+        <description>Beschreibung</description>
+      </label>
+    </view>
+  </AddMetadata>
+
+  <!--
+  ###################### resoucebundle for exo:autoVersioning view template ####
+  -->
+  <AutoVersioning>
+    <view>
+      <label>
+        <action-name>Aktionname</action-name>
+        <lifecycle>Lebenszyklus</lifecycle>
+        <description>Beschreibung</description>
+      </label>
+    </view>
+  </AutoVersioning>
+  <!--
+  ###################### resoucebundle for exo:enableVersiong view template ####
+  -->
+  <EnableVersioning>
+    <view>
+      <label>
+        <action-name>Name</action-name>
+        <lifecycle>Lebenszyklus</lifecycle>
+        <description>Beschreibung</description>
+      </label>
+    </view>
+  </EnableVersioning>
+  <!--
+  ###################### resoucebundle for dc:elementSet view template ####
+  -->
+  <ElementSet>
+    <view>
+      <label>
+        <not-avaliable>N/V</not-avaliable>
+        <title>Titel</title>
+        <creator>Ersteller</creator>
+        <subject>Betreff</subject>
+        <source>Quelle</source>
+        <contributor>Beiträger</contributor>
+        <resource-type>Ressourcentyp</resource-type>
+        <date>Datum</date>
+        <publisher>Veröffentlicher</publisher>
+        <description>Beschreibung</description>
+        <rights>Rechte</rights>
+        <relation>Beziehung</relation>
+        <format>Format</format>
+        <coverage>Abdeckung</coverage>
+        <identifier>Identifikator</identifier>
+        <languages>Sprachen</languages>
+      </label>
+      <action>
+        <add-edit>Hinzufügen/Bearbeiten</add-edit>
+        <cancel>Abbrechen</cancel>
+      </action>
+      <tooltip>
+        <cancel>Abbrechen</cancel>
+        <add-edit>Eigenschaften hinzufügen/bearbeiten</add-edit>
+      </tooltip>
+    </view>
+  </ElementSet>
+
+  <ScriptAction>
+    <view>
+      <label> 
+        <isDeep>Ist rekursiv</isDeep>
+        <nodetypes>Knotentypen</nodetypes>
+        <affectedNodeTypeNames>Betroffenen Knotentypen</affectedNodeTypeNames>
+        <nodeTypeName>Knotentypnamen</nodeTypeName>
+      </label> 
+    </view>
+  </ScriptAction>
+  
+  <AddMetadata>
+    <view>
+      <label>
+        <isDeep>Ist rekursiv</isDeep>
+        <nodetypes>Knotentypen</nodetypes>
+        <affectedNodeTypeNames>Betroffenen Knotentypen</affectedNodeTypeNames>
+        <nodeTypeName>Knotentypnamen</nodeTypeName>
+      </label> 
+    </view>
+  </AddMetadata>
+
+  <EnableVersioning>
+    <view>
+      <label>
+        <isDeep>Ist rekursiv</isDeep>
+        <nodetypes>Knotentypen</nodetypes> 
+        <affectedNodeTypeNames>Betroffenen Knotentypen</affectedNodeTypeNames>
+        <nodeTypeName>Knotentypnamen</nodeTypeName>
+      </label> 
+    </view>
+  </EnableVersioning>
+  
+  <AutoVersioning>
+    <view>
+      <label>
+        <isDeep>Ist rekursiv</isDeep>
+        <nodetypes>Knotentypen</nodetypes>
+        <affectedNodeTypeNames>Betroffenen Knotentypen</affectedNodeTypeNames>
+        <nodeTypeName>Knotentypnamen</nodeTypeName>
+      </label> 
+    </view>
+  </AutoVersioning>
+  
+   <AccessibleMedia>
+    <view>
+      <label>
+      <Play-audio-description-of-this-video>Audio-Beschreibung</Play-audio-description-of-this-video>
+      <Read-more>Mehr lesen</Read-more>
+      <Read-less>Weniger lesen</Read-less>
+      <Switch-back-to-original-video>Originalvideo</Switch-back-to-original-video>
+      </label>
+      <tooltip>
+      <A-second-media-file-is-available-as-audio-description>Eine zweite Mediendatei steht als Audio-Beschreibung zur Verfügung</A-second-media-file-is-available-as-audio-description>
+      </tooltip>
+    </view>
+  </AccessibleMedia>
+ 
+</bundle>

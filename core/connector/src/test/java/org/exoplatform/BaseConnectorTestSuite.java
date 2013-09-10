@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2012 eXo Platform SAS.
+* Copyright (C) 2003-2012 eXo Platform SAS.
  *
  * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU Affero General Public License
@@ -18,8 +18,8 @@ package org.exoplatform;
 
 import org.exoplatform.commons.testing.BaseExoContainerTestSuite;
 import org.exoplatform.commons.testing.ConfigTestCase;
-import org.exoplatform.wcm.connector.authoring.TestCopyContentFile;
-import org.exoplatform.wcm.connector.authoring.TestLifecycleConnector;
+//import org.exoplatform.wcm.connector.authoring.TestCopyContentFile;
+//import org.exoplatform.wcm.connector.authoring.TestLifecycleConnector;
 import org.exoplatform.wcm.connector.collaboration.TestDownloadConnector;
 import org.exoplatform.wcm.connector.collaboration.TestFavoriteRESTService;
 import org.exoplatform.wcm.connector.collaboration.TestThumbnailRESTService;
@@ -40,8 +40,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({ 
   TestPortalLinkConnector.class,
   TestPDFViewerRESTService.class,
-  TestCopyContentFile.class,
-  TestLifecycleConnector.class,
+//  TestCopyContentFile.class,
+//  TestLifecycleConnector.class,
   TestDownloadConnector.class,
   TestThumbnailRESTService.class,
   TestFavoriteRESTService.class

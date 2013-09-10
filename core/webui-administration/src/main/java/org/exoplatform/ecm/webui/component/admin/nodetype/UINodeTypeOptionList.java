@@ -37,10 +37,10 @@ import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormInputInfo;
 import org.exoplatform.webui.form.UIFormInputSet;
 import org.exoplatform.webui.form.UIFormTableInputSet;
+import org.exoplatform.webui.form.input.UICheckBoxInput;
 
 /**
  * Created by The eXo Platform SARL
@@ -50,12 +50,12 @@ import org.exoplatform.webui.form.UIFormTableInputSet;
  * 2:20:31 PM
  */
 @ComponentConfig(
-    lifecycle = UIFormLifecycle.class,
-    template = "classpath:groovy/ecm/webui/form/UIFormInputSetWithAction.gtmpl",
-    events = {
-      @EventConfig(listeners = UINodeTypeOptionList.AddTypeActionListener.class)
-    }
-)
+                 lifecycle = UIFormLifecycle.class,
+                 template = "classpath:groovy/ecm/webui/form/UIFormInputSetWithAction.gtmpl",
+                 events = {
+                   @EventConfig(listeners = UINodeTypeOptionList.AddTypeActionListener.class)
+                 }
+    )
 public class UINodeTypeOptionList extends UIFormInputSetWithAction {
 
   final static String TABLE_NAME =  "UINodeTypeOptionList";
@@ -78,11 +78,10 @@ public class UINodeTypeOptionList extends UIFormInputSetWithAction {
     return false ;
   }
 
-  @SuppressWarnings("unchecked")
   public void update(String values) throws Exception {
     UIFormTableInputSet uiTableInputSet = createUIComponent(UIFormTableInputSet.class, null, null) ;
     NodeTypeManager ntManager = getApplicationComponent(RepositoryService.class)
-                                .getCurrentRepository().getNodeTypeManager() ;
+        .getCurrentRepository().getNodeTypeManager() ;
     NodeTypeIterator nodeTypeIter = ntManager.getAllNodeTypes() ;
     List<NodeType> nodeTypeList = new ArrayList<NodeType>() ;
     while(nodeTypeIter.hasNext()) {
@@ -98,13 +97,12 @@ public class UINodeTypeOptionList extends UIFormInputSetWithAction {
       uiInputSet = new UIFormInputSet(ntName) ;
       UIFormInputInfo uiInfo = new UIFormInputInfo("label", null, ntName);
       uiInputSet.addChild(uiInfo);
-      UIFormCheckBoxInput<String> uiCheckbox = new UIFormCheckBoxInput<String>(ntName, ntName, null);
+      UICheckBoxInput uiCheckbox = new UICheckBoxInput(ntName, ntName, null);
       if(values != null) {
         if(getCheckedValue(values, ntName)) uiCheckbox.setChecked(true) ;
       } else {
         uiCheckbox.setChecked(false);
       }
-      uiCheckbox.setValue(ntName);
       uiInputSet.addChild(uiCheckbox);
       uiTableInputSet.addChild(uiInputSet);
     }
@@ -118,15 +116,15 @@ public class UINodeTypeOptionList extends UIFormInputSetWithAction {
     UINodeTypeForm uiNodeTypeForm = getParent() ;
     if(uiNodeTypeForm == null) return;
     if(selectedNodes != null && selectedNodes.size() > 0) {
-	    for (int i = 0; i < selectedNodes.size(); i++) {
-	      if (strNodeList == null)
-	        strNodeList = new StringBuffer(selectedNodes.get(i));
-	      else
-	        strNodeList.append(",").append(selectedNodes.get(i));
-	    }
+      for (int i = 0; i < selectedNodes.size(); i++) {
+        if (strNodeList == null)
+          strNodeList = new StringBuffer(selectedNodes.get(i));
+        else
+          strNodeList.append(",").append(selectedNodes.get(i));
+      }
     }
     if(strNodeList == null)
-    	uiNodeTypeForm.getUIStringInput(fieldName).setValue(StringUtils.EMPTY) ;
+      uiNodeTypeForm.getUIStringInput(fieldName).setValue(StringUtils.EMPTY) ;
     else
       uiNodeTypeForm.getUIStringInput(fieldName).setValue(strNodeList.toString()) ;
     if(fieldName.equals(UINodeTypeForm.SUPER_TYPE)) {
@@ -162,8 +160,8 @@ public class UINodeTypeOptionList extends UIFormInputSetWithAction {
       String fieldName = event.getRequestContext().getRequestParameter(OBJECTID) ;
       List<String> selectedNodes = new ArrayList<String>() ;
       UINodeTypeManager uiManager = uiForm.getAncestorOfType(UINodeTypeManager.class) ;
-      List<UIFormCheckBoxInput> listCheckbox =  new ArrayList<UIFormCheckBoxInput>();
-      uiForm.findComponentOfType(listCheckbox, UIFormCheckBoxInput.class);
+      List<UICheckBoxInput> listCheckbox =  new ArrayList<UICheckBoxInput>();
+      uiForm.findComponentOfType(listCheckbox, UICheckBoxInput.class);
       int count = 0 ;
       for(int i = 0; i < listCheckbox.size(); i ++) {
         if(listCheckbox.get(i).isChecked()) {

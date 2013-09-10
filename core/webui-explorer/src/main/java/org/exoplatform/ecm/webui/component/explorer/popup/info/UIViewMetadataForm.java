@@ -21,7 +21,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.jcr.Node;
-import javax.jcr.Property;
 import javax.jcr.RepositoryException;
 import javax.jcr.Value;
 import javax.jcr.ValueFormatException;
@@ -31,7 +30,7 @@ import javax.jcr.nodetype.PropertyDefinition;
 import org.apache.commons.lang.ArrayUtils;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.form.UIDialogForm;
-import org.exoplatform.ecm.webui.utils.LockUtil;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.metadata.MetadataService;
@@ -61,14 +60,14 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * 1:47:55 PM
  */
 @ComponentConfigs( {
-    @ComponentConfig(type = UIFormMultiValueInputSet.class, id = "WYSIWYGRichTextMultipleInputset", 
-                     events = {
-        @EventConfig(listeners = UIDialogForm.AddActionListener.class, phase = Phase.DECODE),
-        @EventConfig(listeners = UIFormMultiValueInputSet.RemoveActionListener.class, phase = Phase.DECODE) }
+  @ComponentConfig(type = UIFormMultiValueInputSet.class, id = "WYSIWYGRichTextMultipleInputset", 
+      events = {
+    @EventConfig(listeners = UIDialogForm.AddActionListener.class, phase = Phase.DECODE),
+    @EventConfig(listeners = UIFormMultiValueInputSet.RemoveActionListener.class, phase = Phase.DECODE) }
 
-    ),
-    @ComponentConfig(lifecycle = UIFormLifecycle.class, 
-                     events = {
+      ),
+      @ComponentConfig(lifecycle = UIFormLifecycle.class, 
+      events = {
         @EventConfig(listeners = UIViewMetadataForm.SaveActionListener.class),
         @EventConfig(listeners = UIViewMetadataForm.CancelActionListener.class, phase = Phase.DECODE),
         @EventConfig(listeners = UIViewMetadataForm.AddActionListener.class, phase = Phase.DECODE),
@@ -117,9 +116,9 @@ public class UIViewMetadataForm extends UIDialogForm {
       //Add MIX_COMMENT before update property
       Node activityNode = node;
       if(node.isNodeType(NodetypeConstant.NT_RESOURCE)) activityNode = node.getParent();
-      
+
       if (activityNode.canAddMixin(ActivityCommonService.MIX_COMMENT)) {
-      	activityNode.addMixin(ActivityCommonService.MIX_COMMENT);
+        activityNode.addMixin(ActivityCommonService.MIX_COMMENT);
       }
       NodeTypeManager ntManager = uiJCRExplorer.getSession().getWorkspace().getNodeTypeManager();
       PropertyDefinition[] props = ntManager.getNodeType(uiForm.getNodeType()).getPropertyDefinitions();
@@ -139,13 +138,13 @@ public class UIViewMetadataForm extends UIDialogForm {
               if(uiInput instanceof UIFormSelectBox) {
                 String[] valuesReal = ((UIFormSelectBox)uiInput).getSelectedValues();
                 if(!node.hasProperty(name) || (node.hasProperty(name) && 
-                		!uiForm.isEqualsValueStringArrays(node.getProperty(name).getValues(), valuesReal)))
+                    !uiForm.isEqualsValueStringArrays(node.getProperty(name).getValues(), valuesReal)))
                   node.setProperty(name, valuesReal);
               } else {
                 List<String> values = (List<String>) ((UIFormMultiValueInputSet)uiInput).getValue();
                 if(!node.hasProperty(name) || (node.hasProperty(name) && 
-                		!uiForm.isEqualsValueStringArrays(node.getProperty(name).getValues(), 
-                				values.toArray(new String[values.size()]))))
+                    !uiForm.isEqualsValueStringArrays(node.getProperty(name).getValues(), 
+                                                      values.toArray(new String[values.size()]))))
                   node.setProperty(name, values.toArray(new String[values.size()]));
               }
             }
@@ -155,7 +154,7 @@ public class UIViewMetadataForm extends UIDialogForm {
               String value = "false";
               if(uiInput instanceof UIFormSelectBox) value =  ((UIFormSelectBox)uiInput).getValue();
               if(!node.hasProperty(name) || (node.hasProperty(name) && 
-              		node.getProperty(name).getBoolean() != Boolean.parseBoolean(value)))
+                  node.getProperty(name).getBoolean() != Boolean.parseBoolean(value)))
                 node.setProperty(name, Boolean.parseBoolean(value));
             } else if (requiredType == 5) { // date
               UIFormDateTimeInput cal = (UIFormDateTimeInput) uiForm.getUIInput(inputName);
@@ -174,7 +173,7 @@ public class UIViewMetadataForm extends UIDialogForm {
       }
       //Remove MIX_COMMENT after update property
       if (activityNode.isNodeType(ActivityCommonService.MIX_COMMENT)) {
-      	activityNode.removeMixin(ActivityCommonService.MIX_COMMENT);
+        activityNode.removeMixin(ActivityCommonService.MIX_COMMENT);
       }
       node.getSession().save();
       event.getRequestContext().addUIComponentToUpdateByAjax(uiViewManager);
@@ -205,25 +204,25 @@ public class UIViewMetadataForm extends UIDialogForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(event.getSource().getParent());
     }
   }
-  
+
   public boolean isEqualsValueStringArrays(Value[] arrayValue1, String[] arrayValue2) throws ValueFormatException, 
   IllegalStateException, RepositoryException {
-  	if(arrayValue1 != null) {
-  	  String[] stringArray = new String[arrayValue1.length];
-  	  int i = 0;
-  	  for (Value valueItem : arrayValue1) {  	  	
-  	  	if(valueItem != null && valueItem.getString() != null)
-  	  	stringArray[i] = valueItem.getString();
-  	  	i++;
-			}
-  	  if(stringArray != null && stringArray.length > 0)
-  	    Arrays.sort(stringArray);
-  	  if(arrayValue2 != null && arrayValue2.length > 0)
-  	    Arrays.sort(arrayValue2);
-  	  return ArrayUtils.isEquals(stringArray, arrayValue2);  	    
-  	} else {
-  		if(arrayValue2 != null) return false;
-  		else return true;
-  	}	
+    if(arrayValue1 != null) {
+      String[] stringArray = new String[arrayValue1.length];
+      int i = 0;
+      for (Value valueItem : arrayValue1) {  	  	
+        if(valueItem != null && valueItem.getString() != null)
+          stringArray[i] = valueItem.getString();
+        i++;
+      }
+      if(stringArray != null && stringArray.length > 0)
+        Arrays.sort(stringArray);
+      if(arrayValue2 != null && arrayValue2.length > 0)
+        Arrays.sort(arrayValue2);
+      return ArrayUtils.isEquals(stringArray, arrayValue2);  	    
+    } else {
+      if(arrayValue2 != null) return false;
+      else return true;
+    }	
   }
 }

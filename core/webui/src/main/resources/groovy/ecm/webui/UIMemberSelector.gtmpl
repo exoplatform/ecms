@@ -11,19 +11,19 @@
 	<div class="row-fluid" >
 		<div class="span6">
 			<div class="uiBox selectGroup noRounded">
-				<h5 class="title"><%=_ctx.appRes(uicomponent.id+".label.selectGroup")%></h5>
+				<h6 class="title"><%=_ctx.appRes(uicomponent.id+".label.selectGroup")%></h6>
 				<%uicomponent.renderChild(UITree.class);%>
 			</div>
 		</div>
 		<div class="span6">
 			<div class="uiBox noRounded childGoup">
-				<h5 class="title">
+				<h6 class="title">
 					<%
 					String key = uicomponent.id+".label.selectUser";
 					if(uicomponent.isSelectedMembership) key = uicomponent.id+".label.selectMembership";
 				  %>
 				  <%=_ctx.appRes(key)%>
-				</h5>
+				</h6>
 				
 				<div class="uiContentBox">
 				  <ul>

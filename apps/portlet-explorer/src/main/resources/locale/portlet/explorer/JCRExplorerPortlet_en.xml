@@ -41,7 +41,7 @@
     </label>
     <button>
       <label>
-        <confirm>Ok</confirm>
+        <confirm>OK</confirm>
       </label>
     </button>
     <msg>
@@ -50,35 +50,7 @@
       <vote-restriction>You cannot vote more than one time. </vote-restriction>
     </msg>
   </UIVoteForm>
-  <!--
-  #############################################################################
-  #             org.exoplatform.ecm.webui.component.explorer.UIDrivesBrowser  #
-  #############################################################################
-  -->
-  <UIDrivesBrowser>
-    <title>
-      File Explorer Main Drives
-      <repository>Drives in Repository</repository>
-      <repositoryList>Repositories</repositoryList>
-      <PersonalDrives>Personal drives</PersonalDrives>
-      <GroupDrives>Group drives</GroupDrives>
-      <GeneralDrives>General drives</GeneralDrives>
-    </title>
-    <icon>
-      <workspace>
-        <production>ProductionIcon</production>
-        <draft>DraftIcon</draft>
-        <backup>BackupIcon</backup>
-        <digital-assets>AssetsIcon</digital-assets>
-      </workspace>
-    </icon>
-    <msg>
-      <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
-      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
-      <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
-      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
-    </msg>
-  </UIDrivesBrowser>
+ 
   <!--
   #############################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer    #
@@ -122,7 +94,6 @@
       <backToJCR>Back to JCR Main Drives</backToJCR>
       <setUpBrowser>Set up your browsing preferences</setUpBrowser>
       <refesh>Refresh</refesh>
-      <saveSession>Save Session</saveSession>
       <currentDrive>Current Drive</currentDrive>
       <selectView>Select View</selectView>
       <showSideBar>Show Sidebar</showSideBar>
@@ -130,19 +101,7 @@
       <backTo>Back</backTo>
     </label>
   </UIViewBar>
-  <Views>
-    <label>
-      <simple-view>Thumbnails</simple-view>
-      <cover-flow>Cover Flow</cover-flow>
-      <admin-view>Details</admin-view>
-      <icon-view>Icons</icon-view>
-      <system-view>Details</system-view>
-      <anonymous-view>Icons</anonymous-view>
-      <taxonomy-list>Details</taxonomy-list>
-      <taxonomy-icons>Icons</taxonomy-icons>
-      <timeline-view>Timeline View</timeline-view>
-    </label>
-  </Views>
+
   <!--
   #############################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UITreeExplorer    #
@@ -185,7 +144,6 @@
       <showHiddenNode>Show Hidden Nodes:</showHiddenNode>
       <showNonDocument>Show Non-document Nodes:</showNonDocument>
       <showRefDocuments>Show Referenced Documents:</showRefDocuments>
-      <showItemsByUserInTimeline>Show items by user in Timeline View</showItemsByUserInTimeline>
       <enableDragAndDrop>Enable Drag &amp; Drop:</enableDragAndDrop>
       <sortBy>Sort by:</sortBy>
       <order>Order by:</order>
@@ -242,7 +200,6 @@
       <UIActionContainer>Edit Action</UIActionContainer>
       <UIFolderForm>New Folder</UIFolderForm>
       <UIUploadManager>Upload File</UIUploadManager>
-      <UITicketForm>Create New Ticket</UITicketForm>
       <UIReferencesList>References List</UIReferencesList>
       <UIExportNode>Export</UIExportNode>
       <UINodeTypeInfo>Node Type Information</UINodeTypeInfo>
@@ -274,8 +231,6 @@
       <UIRestoreConfirmMessage>Confirm Restore</UIRestoreConfirmMessage>
       <UIActivePublication>Enroll to Publication Lifecycle</UIActivePublication>
       <UITaggingForm>Tag Document</UITaggingForm>
-      <UIMultiLanguageForm>Multi Language</UIMultiLanguageForm>
-      <UIMultiLanguageManager>Multi Language</UIMultiLanguageManager>
       <UIThumbnailForm>Add Thumbnail Image</UIThumbnailForm>
       <UIAllItemsPreferenceForm>Preference Settings</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Select Restore Path</UISelectRestorePath>
@@ -313,12 +268,10 @@
       <Upload>Upload</Upload>
       <Paste>Paste</Paste>
       <Search>Search</Search>
-      <CreateTicket>New Ticket</CreateTicket>
       <WatchDocument>Watch/Unwatch</WatchDocument>
       <TaggingDocument>Tag</TaggingDocument>
       <Vote>Vote</Vote>
       <Comment>Comment</Comment>
-      <MultiLanguage>Add/Edit Localized Content</MultiLanguage>
       <ManageVersions>Versions</ManageVersions>
       <ManageAuditing>Audit</ManageAuditing>
       <ManagePublications>Publications</ManagePublications>
@@ -372,8 +325,6 @@
       <watch-checkedin>You must check out the node before watching.</watch-checkedin>
       <unsupported-tagging>Only the document node can be tagged.</unsupported-tagging>
       <tagnode-checkedin>You must check out the node before tagging.</tagnode-checkedin>
-      <unsupported-multilanguage>You cannot add languages to this node because this node is not the document type or is mixed in some types.</unsupported-multilanguage>
-      <multilang-checkedin>You must check out the node before adding language.</multilang-checkedin>
     </msg>
     <title>
       <select-tab>Select Tab</select-tab>
@@ -403,7 +354,7 @@
       <can-not-unlock-node>You do not have permission to unlock this node. Please contact the administrator.</can-not-unlock-node>
       <no-node>Please select at least one node before pasting.</no-node>
       <can-not-paste-node>You do not have permission to move to this node. Please contact the administrator.</can-not-paste-node>
-      <can-not-move-node>You do not have permission to move to this node. Please contact the administrator.</can-not-move-node>
+      <can-not-move-node>You do not have permission to move this node. Please contact the administrator.</can-not-move-node>
       <does-not-support-versioning>You do not have permission to move to this node. Please contact the administrator.</does-not-support-versioning>
       <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
       <paste-lock-exception>You cannot paste '{0}' to this node because the source or the destination node is locked or is related to the locked node.</paste-lock-exception>
@@ -607,13 +558,6 @@
       <CheckOut>CheckOut</CheckOut>
       <CheckIn>CheckIn</CheckIn>
       <WebDAV>View WebDAV</WebDAV>
-      <sendmail>Send Mail</sendmail>
-      <transformsd>Transform</transformsd>
-      <reloadBP>Reload BP</reloadBP>
-      <workflow>Workflow</workflow>
-      <createRSS>Create RSS</createRSS>
-      <icalendara>Generate Icalendar</icalendara>
-      <getmail>Get Mail</getmail>
       <autoversion>Auto Versioning</autoversion>
       <Custom>Custom</Custom>
       <AddFolder>New Folder</AddFolder>
@@ -632,32 +576,7 @@
       <WebDavView>Download and Allow Editing</WebDavView>
     </event>
   </ECMContextMenu>
-  <!--
-  #############################################################################
-  #             org.exoplatform.ecm.webui.component.explorer.UITicketForm     #
-  #############################################################################
-  -->
-  <UITicketForm>
-    <title>Create Ticket</title>
-    <label>
-      <users>Users</users>
-      <permission>Permission</permission>
-      <creator>Creator</creator>
-      <accessTime>Access Time</accessTime>
-      <accessLimit>Access Limit</accessLimit>
-      <description>Description</description>
-      <sendToMail>Send to Mail</sendToMail>
-      <ticketID>Ticket ID</ticketID>
-    </label>
-    <action>
-      <Cancel>#{word.cancel}</Cancel>
-      <Update>#{word.update}</Update>
-      <Save>#{word.save}</Save>
-    </action>
-    <msg>
-      <unable-create>Cannot create the ticket.</unable-create>
-    </msg>
-  </UITicketForm>
+ 
   <!--
   #############################################################################
   #     org.exoplatform.ecm.webui.component.explorer.UIReferencesList         #
@@ -718,7 +637,7 @@
       <UISelectedCategoriesGrid>Referenced Categories</UISelectedCategoriesGrid>
       <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
       <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
-      <metadatasitemetadata>metadata:siteMetadata</metadatasitemetadata>
+      <metadatasitemetadata>Site Metadata</metadatasitemetadata>
       <dcelementset>Dublin Core</dcelementset>
     </title>
   </UITabPane>
@@ -786,37 +705,7 @@
       <property-not-exist>The property {0} doesn't exist.</property-not-exist>
     </msg>
   </UIPropertyForm>
-  <!--
-  #############################################################################
-  #           org.exoplatform.ecm.webui.component.explorer.UIMixinTypeSelect  #
-  #############################################################################
-  -->
-  <UIMixinTypeSelect>
-    <label>
-      <selectTemplate>Select Template</selectTemplate>
-    </label>
-  </UIMixinTypeSelect>
-  <UIMixinTypeForm>
-    <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
-      <Reset>Reset</Reset>
-    </action>
-  </UIMixinTypeForm>
-  <!--
-  #############################################################################
-  #           org.exoplatform.ecm.webui.component.explorer.UIMetadataTab     #
-  #############################################################################
-  -->
-  <UIMetadataTab>
-    <title>Input values for metadata elements</title>
-    <label>
-      <metadataName>Metadata Name</metadataName>
-    </label>
-    <action>
-      <Save>#{word.save}</Save>
-    </action>
-  </UIMetadataTab>
+
   <!--
   #############################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UIPermissionInfo #
@@ -893,95 +782,7 @@
       <access-denied>Access denied. You cannot remove this permission.</access-denied>
     </msg>
   </UIPermissionForm>
-  <!--
-  ###############################################################################
-  #             org.exoplatform.ecm.webui.component.explorer.UIDriveDescription #
-  ###############################################################################
-  -->
-  <UIDriveDescription>
-    <title>Description</title>
-  </UIDriveDescription>
-  <!--
-  ###############################################################################
-  #             org.exoplatform.ecm.webui.component.explorer.UIReferencesList #
-  ###############################################################################
-  -->
-  <!--
-  ################################################################################
-  #          org.exoplatform.ecm.webui.component.explorer.actions.UIUploadForm   #
-  ################################################################################
-  -->
-  <UIUploadForm>
-    <title>Upload File</title>
-    <label>
-      <upload>Select File</upload>
-      <name>Name</name>
-      <fieldListTaxonomy>Categories List</fieldListTaxonomy>
-    </label>
-    <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
-    </action>
-    <msg>
-      <fileName-error>Please select a file to upload.</fileName-error>
-      <taxonomyPath-error>Please select a category.</taxonomyPath-error>
-      <fileName-invalid>The file name contains some invalid characters. Please retype the file name or upload another file.</fileName-invalid>
-      <fileName-invalid-with-name>The file name '{0}' contains some invalid characters. Please retype the file name or upload another file.</fileName-invalid-with-name>
-      <fileSize-too-big>The file size is too big. Please split it into smaller files or use WebDav to upload.</fileSize-too-big>
-      <name-is-exist>The name '{0}' already exists.</name-is-exist>
-      <contraint-violation>You cannot add the node '{0}' as the child node to this node.</contraint-violation>
-      <lock-exception>You cannot upload the file. This node is locked.</lock-exception>
-      <confirm-behavior>The file name '{0}' already exists in this location. Please select a behavior below:</confirm-behavior>
-    </msg>
-  </UIUploadForm>
-  <UIUploadContent>
-    <label>
-      <fileName>File Name</fileName>
-      <nodeName>Node Name</nodeName>
-      <fileSize>File Size</fileSize>
-      <mimeType>Mime Type</mimeType>
-    </label>
-    <title>
-      <uploaded-file>Uploaded File</uploaded-file>
-      <external-metadata>External Metadata</external-metadata>
-      <metadata-name>Metadata Name</metadata-name>
-      <action>Action</action>
-    </title>
-    <tooltip>
-      <Edit>Edit</Edit>
-    </tooltip>
-    <msg>
-      <has-not-template>The '{0}' template is null or empty.</has-not-template>
-    </msg>
-  </UIUploadContent>
-  <UIUploadContainer>
-    <action>
-      <Close>#{word.close}</Close>
-      <AddMetadata>Add Metadata</AddMetadata>
-    </action>
-    <tab>
-      <label>
-        <UIUploadContent>Information</UIUploadContent>
-        <UIAddMetadataForm>Metadata Form</UIAddMetadataForm>
-      </label>
-    </tab>
-  </UIUploadContainer>
-  <AddMetadataPopup>
-    <title>
-      <UIExternalMetadataForm>Add External Metadata</UIExternalMetadataForm>
-    </title>
-  </AddMetadataPopup>
-  <UIExternalMetadataForm>
-    <msg>
-      <can-not-add>The mixin cannot be added to this node.</can-not-add>
-    </msg>
-  </UIExternalMetadataForm>
-  <UIAddMetadataForm>
-    <action>
-      <Cancel>Cancel</Cancel>
-      <Save>Save</Save>
-    </action>
-  </UIAddMetadataForm>
+
   <!--
   ###############################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UINodeTypeInfo     #
@@ -2051,6 +1852,7 @@
     <msg>
       <name-exist>The tag name '{0}' already exists.</name-exist>
       <tagName-invalid>The tag name contains some invalid characters.</tagName-invalid>
+      <tagName-empty-or-invalid>The tag name is empty or contains some invalid characters.</tagName-empty-or-invalid>
       <tag-name-empty>Your tag name is empty</tag-name-empty>
       <tag-name-duplicate>The input tag names are duplicate.</tag-name-duplicate>
       <tagName-too-long>One of the tags entered was too long. The tag name must be less than 30 characters.</tagName-too-long>
@@ -2060,43 +1862,7 @@
       <tagName>Separate multiple tags by commas ","</tagName>
     </introduction>
   </UITaggingForm>
-  <!--
-  ###################################################################################
-  # org.exoplatform.ecm.webui.component.explorer.popup.actions.UIMultiLanguageForm  #
-  ###################################################################################
-  -->
-  <UIMultiLanguageForm>
-    <label>
-      <languages>Language</languages>
-      <default>Default</default>
-    </label>
-    <action>
-      <AddLanguage>Add</AddLanguage>
-      <SetDefault>Set Default</SetDefault>
-      <Cancel>#{word.cancel}</Cancel>
-      <View>View</View>
-    </action>
-    <msg>
-      <access-denied>Access denied. You do not have add permission in this node.</access-denied>
-    </msg>
-  </UIMultiLanguageForm>
-  <UILanguageTypeForm>
-    <label>
-      <typeLang>Language</typeLang>
-      <default>Set Default</default>
-      <defaultLang>Default Language</defaultLang>
-    </label>
-  </UILanguageTypeForm>
-  <UILanguageDialogForm>
-    <msg>
-      <select-lang>You must select a language and fill in the information before saving.</select-lang>
-      <access-denied>Access denied. You do not have add permission in this node.</access-denied>
-    </msg>
-    <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
-    </action>
-  </UILanguageDialogForm>
+
   <!--
   ###################################################################################
   # org.exoplatform.ecm.webui.component.explorer.popup.info.UIMetadataContainer     #
@@ -2331,6 +2097,7 @@
       <access-denied>Access denied. You do not have permission to add a thumbnail to this node.</access-denied>
       <confirm-delete>Are you sure you want to remove this thumbnail?</confirm-delete>
       <is-checked-in>This node is checked in. Please check out before performing any action.</is-checked-in>
+      <fileName-error>Please select a file to upload.</fileName-error>
     </msg>
     <title>
       <remove-thumbnail>Remove this Thumbnail</remove-thumbnail>
@@ -2377,32 +2144,7 @@
   <!--
   ###Since ECM version 2.2##############
   -->
-  <!--
-  ###Since ECM version 2.3 Alpha##############
-  -->
-  <UIWorkflowPublicationActionForm>
-    <label>
-      <fieldValidator>Field Validator</fieldValidator>
-      <fieldDestPath>Field DestPath</fieldDestPath>
-      <fieldBackup>Field Backup</fieldBackup>
-    </label>
-  </UIWorkflowPublicationActionForm>
-  <workflow_validator>
-    <title>
-      <AddPermission>Add Permission</AddPermission>
-    </title>
-  </workflow_validator>
-  <workflow_destpath>
-    <title>
-      <AddDestPath>Add Path</AddDestPath>
-    </title>
-  </workflow_destpath>
-  <PublicationService>
-    <WorkflowPublicationPlugin>
-      <nodeValidationRequest>The node has been requested for validation.</nodeValidationRequest>
-    </WorkflowPublicationPlugin>
-  </PublicationService>
-
+ 
   <!--
   ### Since ECM version 2.3 Alpha##############
   Access directly a JCR FE drive
@@ -2419,14 +2161,11 @@
       <Cancel>Cancel</Cancel>
     </action>
     <label>
-      <repository>Repository</repository>
-      <categoryMandatoryWhenFileUpload>Specify a category while uploading a file.</categoryMandatoryWhenFileUpload>
       <uploadFileSizeLimitMB>The size limit of the uploaded file (MB)</uploadFileSizeLimitMB>
       <isDirectlyDrive>Direct Drive</isDirectlyDrive>
       <driveName>Drive Name</driveName>
       <usecase>Select Type</usecase>
       <SelectNodePath>Select Path</SelectNodePath>
-      <editInNewWindow>Edit in New Window</editInNewWindow>
       <showTopBar>Show Top Bar</showTopBar>
       <showActionBar>Show Action Bar</showActionBar>
       <showSideBar>Show Left Bar</showSideBar>
@@ -2448,7 +2187,6 @@
       <DriveNameInput>UI JCR Explorer Edit Form</DriveNameInput>
     </label>
     <msg>
-      <not-have-social>The Social usecase is not available. Use the Selection one instead.</not-have-social>
       <personal-usecase>The private drive of the current user will be used when you select the Personal usecase.</personal-usecase>
       <drive-edit-permission>You cannot edit the drive name. Please click the Edit button.</drive-edit-permission>
       <path-edit-permission>You cannot edit the path. Please click the Edit button.</path-edit-permission>
@@ -2783,49 +2521,8 @@
       <name-not-allowed>A word or phrase in the content is not allowed.</name-not-allowed>
     </msg>
   </UISimpleSearch>
-  <Drives>
-    <label>
-      <Private>Private</Private>
-      <Public>Public</Public>
-      <BackupCenter>Backup Center</BackupCenter>
-      <CategorizedDocumentsCenter>Categorized Documents Center</CategorizedDocumentsCenter>
-      <CollaborationCenter>Collaboration Center</CollaborationCenter>
-      <DigitalAssetsManagementCenter>Digital Assets Management Center</DigitalAssetsManagementCenter>
-      <DMSAdministration>DMS Administration</DMSAdministration>
-      <DocumentsManagementCenter>Documents Management Center</DocumentsManagementCenter>
-      <LiveDocumentsCenter>Live Documents Center</LiveDocumentsCenter>
-      <PendingDocumentsCenter>Pending Documents Center</PendingDocumentsCenter>
-      <RecordsManagementCenter>Records Management Center</RecordsManagementCenter>
-      <SharedUsersSpace>Shared Users Space</SharedUsersSpace>
-      <Systemfiles>System Files</Systemfiles>
-      <ValidationRequestsDocumentsCenter>Validation Requests Documents Center</ValidationRequestsDocumentsCenter>
-    </label>
-  </Drives>
 
-
-  <!--
-   #############  From DMS 2.6 #############
-  -->
-  <UIUploadContent>
-    <tooltip>
-      <ManageMetadata>Manage Metadata</ManageMetadata>
-    </tooltip>
-    <label>
-      <manageMetadata>Manage Metadata</manageMetadata>
-    </label>
-  </UIUploadContent>
-  <UIUploadForm>
-    <action>
-      <AddUpload>Add Upload</AddUpload>
-      <RemoveUpload>Remove Upload</RemoveUpload>
-    </action>
-  </UIUploadForm>
-  <UIExternalMetadataForm>
-    <action>
-      <Add>Add</Add>
-      <Cancel>Cancel</Cancel>
-    </action>
-  </UIExternalMetadataForm>
+ 
     <!--
    #############  From DMS 2.6 #############
    -->
@@ -2834,13 +2531,7 @@
         <Permlink>View Document</Permlink>
       </event>
   </ECMContextMenu>
-  <UIUploadContainer>
-    <tab>
-      <label>
-        <UIListMetadata>List External Metadata</UIListMetadata>
-      </label>
-    </tab>
-  </UIUploadContainer>
+  
 
   <!--
     ############  From DMS 2.6 ##############
@@ -2867,11 +2558,6 @@
       <confirm-deletecomment>Are you sure you want to delete this comment?</confirm-deletecomment>
     </msg>
   </UIDocumentInfo>
- <UIDrivesBrowser>
-  <msg>
-    <drive-not-exist>The drive '{0}' was not found; you may not have permission to access this repository.</drive-not-exist>
-  </msg>
- </UIDrivesBrowser>
 
  <UIExportNode>
   <msg>
@@ -2903,89 +2589,6 @@
     </title>
   </SameNamePopup>
 
-  <UISingleUploadForm>
-    <title>Upload File</title>
-    <label>
-      <upload>Select File</upload>
-      <name>Name</name>
-      <fieldListTaxonomy>Categories List</fieldListTaxonomy>
-    </label>
-    <action>
-      <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>
-    </action>
-    <msg>
-      <fileName-error>Please make sure that you uploaded the selected file to the server using the Upload icon.</fileName-error>
-      <taxonomyPath-error>Please select a category.</taxonomyPath-error>
-      <fileName-invalid>The file name contains some invalid characters. Please retype the file name or upload another file.</fileName-invalid>
-      <fileSize-too-big>The file size is too big. Please split it into smaller files or use WebDav to upload.</fileSize-too-big>
-      <name-is-exist>The name '{0}' already exists. You cannot upload a file with the same name, except for 'nt:file'.</name-is-exist>
-      <contraint-violation>You cannot add the node '{0}' to this node because it is not allowed as child's node type for parent node type.</contraint-violation>
-      <lock-exception>This node is locked. It is unlikely to run certain actions.</lock-exception>
-    </msg>
-  </UISingleUploadForm>
-  <UISingleUploadContent>
-    <label>
-      <fileName>File Name</fileName>
-      <nodeName>Node Name</nodeName>
-      <fileSize>File Size</fileSize>
-      <mimeType>Mime Type</mimeType>
-    </label>
-    <title>
-      <uploaded-file>Uploaded File</uploaded-file>
-      <external-metadata>External Metadata</external-metadata>
-      <metadata-name>Metadata Name</metadata-name>
-      <action>Action</action>
-    </title>
-    <tooltip>
-      <Edit>Edit</Edit>
-    </tooltip>
-    <msg>
-      <has-not-template>The '{0}' template is null or empty.</has-not-template>
-    </msg>
-  </UISingleUploadContent>
-  <UISingleUploadContainer>
-    <action>
-      <Close>#{word.close}</Close>
-      <AddMetadata>Add Metadata</AddMetadata>
-    </action>
-    <tab>
-      <label>
-        <UISingleUploadContent>Information</UISingleUploadContent>
-        <UISingleAddMetadataForm>Metadata Form</UISingleAddMetadataForm>
-      </label>
-    </tab>
-  </UISingleUploadContainer>
-  <UISingleExternalMetadataForm>
-    <action>
-      <Add>Add</Add>
-      <Cancel>Cancel</Cancel>
-    </action>
-  </UISingleExternalMetadataForm>
-  <UISingleUploadContainer>
-    <tab>
-      <label>
-        <UIListMetadata>List External Metadata</UIListMetadata>
-      </label>
-    </tab>
-  </UISingleUploadContainer>
-  <AddMetadataPopup>
-    <title>
-      <UISingleExternalMetadataForm>Add External Metadata</UISingleExternalMetadataForm>
-    </title>
-  </AddMetadataPopup>
-  <UISingleExternalMetadataForm>
-    <msg>
-      <can-not-add>This node cannot add mixin.</can-not-add>
-    </msg>
-  </UISingleExternalMetadataForm>
-  <UISingleAddMetadataForm>
-    <action>
-      <Cancel>Cancel</Cancel>
-      <Save>Save</Save>
-    </action>
-  </UISingleAddMetadataForm>
-
   <UIAllItems>
     <label>
       <OwnedByMe>Owned by me</OwnedByMe>
@@ -3009,36 +2612,6 @@
           <Descending>Descending</Descending>
       </label>
   </UIPreferencesForm>
-
-  <UIDocumentInfo>
-    <label>
-      <Today>Today</Today>
-      <Yesterday>Yesterday</Yesterday>
-      <EarlierThisWeek>Earlier This Week</EarlierThisWeek>
-      <EarlierThisMonth>Earlier This Month</EarlierThisMonth>
-      <EarlierThisYear>Earlier This Year</EarlierThisYear>
-      <tooltip>
-        <expand>Click here to view full list of this category</expand>
-        <collapse>Click here to view all categories</collapse>
-      </tooltip>
-    </label>
-    <header>
-      <dateTime>Date Time</dateTime>
-      <name>Name</name>
-      <title>Document Title</title>
-    </header>
-    <tooltip>
-      <View>View</View>
-      <RemoveFromFavourite>Remove from Favorite</RemoveFromFavourite>
-      <AddToFavourite>Add to Favorite</AddToFavourite>
-      <timelineFavouriteDESC>Sort by Favorite: Descending order</timelineFavouriteDESC>
-      <timelineFavouriteASC>Sort by Favorite: Ascending order</timelineFavouriteASC>
-      <timelineDateTimeASC>Sort by Modified Time: Ascending order</timelineDateTimeASC>
-      <timelineDateTimeDESC>Sort by Modified Time: Descending order</timelineDateTimeDESC>
-      <timelineNameASC>Sort by Name: Ascending order</timelineNameASC>
-      <timelineNameDESC>Sort by Name: Descending order</timelineNameDESC>
-    </tooltip>
-  </UIDocumentInfo>
 
   <UISavedSearches>
     <title>
@@ -3143,8 +2716,6 @@
    <UITaggingForm>
     <label>
       <Public>Public</Public>
-      <Group>Group</Group>
-      <Site>Site</Site>
       <Private>Private</Private>
       <tagScopes>Tag Scopes</tagScopes>
     </label>
@@ -3152,7 +2723,6 @@
 
   <UITagExplorer>
     <title>
-      <EditPrivateTags>Edit Private Tags</EditPrivateTags>
       <PublicTags>Tags</PublicTags>
       <EditPublicTags>Edit Tags</EditPublicTags>
       <PrivateTags>Tags</PrivateTags>
@@ -3323,7 +2893,13 @@
       </msg>
     </UIActionBar>
 
-	<UIPublicationPanel>
+  <UIPublicationContainer>
+   <action>
+    <Close>#{word.close}</Close>
+   </action>
+  </UIPublicationContainer>
+
+  <UIPublicationPanel>
     <button>
       <Close>Close</Close>
     </button>
@@ -3383,14 +2959,13 @@
       <introduction>You can schedule the publication of your document. Select the dates you would like to see your document published</introduction>
       <no-schedule-info>There is no publication schedule for your document</no-schedule-info>
     </label>
-    <scheduled>
-      <title>Scheduled</title>
-      <from>From</from>
-      <to>To</to>
-    </scheduled>
     <msg>
       <save-finished>Your new publication schedule was saved successfully.</save-finished>
     </msg>
+    <action>
+      <Save>#{word.save}</Save>
+      <Reset>Reset</Reset>
+    </action>
   </UIPublicationSchedule>
 
   <UIPublicationPanel>
@@ -3399,11 +2974,8 @@
       <start>Start Publication</start>
       <end>End Publication</end>
     </label>
-    <action>
-      <Save>Save</Save>
-    </action>
     <msg>
-      <invalid-format>The datetime format is invalid. Please check again.</invalid-format>
+      <invalid-format>The date format is invalid. Please check again.</invalid-format>
       <fromDate-after-toDate>The From date has to be earlier than the To date.</fromDate-after-toDate>
     </msg>
   </UIPublicationPanel>
@@ -3463,6 +3035,12 @@
       <allDrives>Click the Show Drives button on the action bar to show/hide a list of drives.</allDrives>
       <ShowDrives>Show Drives</ShowDrives>
     </DrivesArea>
+    <msg>
+      <no-view-found>There are no views applied for your access permission in drive '{0}'.</no-view-found>
+      <access-denied>Access denied. You may not have permission in the workspace of drive '{0}'.</access-denied>
+      <empty-drives>Access denied. Either there is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
+      <workspace-not-exist>Drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
+    </msg>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
     <msg>

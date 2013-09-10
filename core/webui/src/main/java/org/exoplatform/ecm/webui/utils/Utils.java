@@ -37,7 +37,9 @@ import javax.imageio.ImageIO;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
+import javax.jcr.ValueFormatException;
 import javax.jcr.nodetype.NodeDefinition;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeManager;
@@ -134,8 +136,8 @@ public class Utils {
   final public static String EXO_OWNER = "exo:owner";
 
   final public static String SPECIALCHARACTER[] = { SEMI_COLON, COLON, SLASH,
-      BACKSLASH, "'", "|", ">", "<", "\"", "?", "!", "@", "#", "$", "%", "^",
-      "&", "*", "(", ")", "[", "]", "{", "}" };
+    BACKSLASH, "'", "|", ">", "<", "\"", "?", "!", "@", "#", "$", "%", "^",
+    "&", "*", "(", ")", "[", "]", "{", "}" };
   final public static String REPOSITORY = "repository";
   final public static String VIEWS = "views";
   final public static String DRIVE = "drive";
@@ -204,16 +206,18 @@ public class Utils {
   final static public String INLINE_DRAFT = "Draft";
   final static public String INLINE_PUBLISHED = "Published";
 
-  final static public String EXO_SORTABLE = "exo:sortable";
+  final static public String EXO_SORTABLE = "exo:sortable";  
+  final static public String EXO_RISIZEABLE = "exo:documentSize";
+  final static public String FLASH_MIMETYPE = "flash";
 
   final static public String[] SPECIFIC_FOLDERS = { EXO_MUSICFOLDER,
-      EXO_VIDEOFOLDER, EXO_PICTUREFOLDER, EXO_DOCUMENTFOLDER, EXO_SEARCHFOLDER };
+    EXO_VIDEOFOLDER, EXO_PICTUREFOLDER, EXO_DOCUMENTFOLDER, EXO_SEARCHFOLDER };
 
   final static public String[] FOLDERS = { NT_UNSTRUCTURED, NT_FOLDER };
   final static public String[] NON_EDITABLE_NODETYPES = { NT_UNSTRUCTURED,
-      NT_FOLDER, NT_RESOURCE };
+    NT_FOLDER, NT_RESOURCE };
   final public static String[] CATEGORY_NODE_TYPES = { NT_FOLDER,
-      NT_UNSTRUCTURED, EXO_TAXONOMY };
+    NT_UNSTRUCTURED, EXO_TAXONOMY };
   final static public String CATEGORY_MANDATORY = "categoryMandatoryWhenFileUpload";
   final static public String UPLOAD_SIZE_LIMIT_MB = "uploadFileSizeLimitMB";
   final static public String FILE_VIEWER_EXTENSION_TYPE = "org.exoplatform.ecm.dms.FileViewer";
@@ -244,7 +248,7 @@ public class Utils {
 
   public static String encodeHTML(String text) {
     return text.replaceAll("&", "&amp;").replaceAll("\"", "&quot;").replaceAll(
-        "<", "&lt;").replaceAll(">", "&gt;");
+                                                                               "<", "&lt;").replaceAll(">", "&gt;");
   }
 
   public static String formatNodeName(String text) {
@@ -263,10 +267,21 @@ public class Utils {
     TrashService trashService = WCMCoreUtils.getService(TrashService.class);
     return trashService.isInTrash(node);
   }
-
-    public static boolean isReferenceable(Node node) throws RepositoryException {
-      return node.isNodeType(MIX_REFERENCEABLE);
+  
+  /** check a symlink node and its target are in Trash or not */
+  public static boolean targetNodeAndLinkInTrash( Node currentNode ) throws Exception {
+    if (Utils.isInTrash(currentNode) && Utils.isSymLink(currentNode)) {
+    Node targetNode = Utils.getNodeSymLink(currentNode);
+    if (Utils.isInTrash(targetNode)) {
+        return true;
+      }
     }
+    return false;
+  }
+
+  public static boolean isReferenceable(Node node) throws RepositoryException {
+    return node.isNodeType(MIX_REFERENCEABLE);
+  }
 
   static public class NodeTypeNameComparator implements Comparator<NodeType> {
     public int compare(NodeType n1, NodeType n2) throws ClassCastException {
@@ -442,13 +457,13 @@ public class Utils {
 
   public static boolean isSymLink(Node node) throws RepositoryException {
     LinkManager linkManager = Util.getUIPortal().getApplicationComponent(
-        LinkManager.class);
+                                                                         LinkManager.class);
     return linkManager.isLink(node);
   }
 
   public static Node getNodeSymLink(Node node) throws Exception {
     LinkManager linkManager = Util.getUIPortal().getApplicationComponent(
-        LinkManager.class);
+                                                                         LinkManager.class);
     Node realNode = null;
     if (linkManager.isLink(node)) {
       if (linkManager.isTargetReachable(node)) {
@@ -461,7 +476,7 @@ public class Utils {
   }
 
   public static InputStream extractFirstEntryFromZipFile(
-      ZipInputStream zipStream) throws Exception {
+                                                         ZipInputStream zipStream) throws Exception {
     return zipStream.getNextEntry() == null ? null : zipStream;
   }
 
@@ -469,11 +484,11 @@ public class Utils {
       throws Exception {
     DownloadService dservice = WCMCoreUtils.getService(DownloadService.class);
     InputStreamDownloadResource dresource = new InputStreamDownloadResource(
-        input, "image");
+                                                                            input, "image");
     dresource.setDownloadName(downloadName);
     return dservice.getDownloadLink(dservice.addDownloadResource(dresource));
   }
-  
+
   public static String getThumbnailImage(Node node, String propertyName)
       throws Exception {
     ThumbnailService thumbnailService = Util.getUIPortal()
@@ -484,18 +499,18 @@ public class Utils {
       if (mimeType.startsWith("image")) {
         Node thumbnailNode = thumbnailService.addThumbnailNode(node);
         InputStream inputStream = node.getNode(JCR_CONTENT).getProperty(
-            JCR_DATA).getStream();
+                                                                        JCR_DATA).getStream();
         thumbnailService.createSpecifiedThumbnail(thumbnailNode, ImageIO
-            .read(inputStream), propertyName);
+                                                  .read(inputStream), propertyName);
       }
     }
     Node thumbnailNode = thumbnailService.getThumbnailNode(node);
     if (thumbnailNode != null && thumbnailNode.hasProperty(propertyName)) {
       DownloadService dservice = Util.getUIPortal().getApplicationComponent(
-          DownloadService.class);
+                                                                            DownloadService.class);
       InputStream input = thumbnailNode.getProperty(propertyName).getStream();
       InputStreamDownloadResource dresource = new InputStreamDownloadResource(
-          input, "image");
+                                                                              input, "image");
       dresource.setDownloadName(node.getName());
       return dservice.getDownloadLink(dservice.addDownloadResource(dresource));
     }
@@ -557,7 +572,7 @@ public class Utils {
     Locale locale = WebuiRequestContext.getCurrentInstance().getLocale();
     ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
     ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(
-        name, locale, cl);
+                                                                            name, locale, cl);
     try {
       return resourceBundle.getString(key);
     } catch (MissingResourceException ex) {
@@ -582,7 +597,7 @@ public class Utils {
     }
     idGenerator = m.replaceAll("_");
     return getInlineEditingField(orgNode, propertyName, defaultValue, INPUT_TEXT, idGenerator
-                                  , DEFAULT_CSS_NAME, true);
+                                 , DEFAULT_CSS_NAME, true);
   }
   /**
    *
@@ -601,12 +616,12 @@ public class Utils {
    * @author                 vinh_nguyen
    */
   public static String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, String inputType,
-                    String idGenerator, String cssClass, boolean isGenericProperty, String... arguments) throws Exception {
+                                             String idGenerator, String cssClass, boolean isGenericProperty, String... arguments) throws Exception {
     HashMap<String,String> parsedArguments = parseArguments(arguments) ;
     String height = parsedArguments.get(HEIGHT);
     String bDirection = parsedArguments.get(BUTTON_DIR);
     String publishLink = parsedArguments.get(FAST_PUBLISH_LINK);
-    
+
     Locale locale = WebuiRequestContext.getCurrentInstance().getLocale();
     String language = locale.getLanguage();
     ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
@@ -626,7 +641,7 @@ public class Utils {
     }
 
     String portletRealID = org.exoplatform.wcm.webui.Utils.getRealPortletId((PortletRequestContext)
-        WebuiRequestContext.getCurrentInstance());
+                                                                            WebuiRequestContext.getCurrentInstance());
     StringBuffer sb = new StringBuffer();
     StringBuffer actionsb = new StringBuffer();
     String repo = ((ManageableRepository)orgNode.getSession().getRepository()).getConfiguration().getName();
@@ -646,7 +661,7 @@ public class Utils {
       strSuggestion = resourceBundle.getString("UIPresentation.label.EditingSuggestion");
       acceptButton = resourceBundle.getString("UIPresentation.title.AcceptButton");
       cancelButton = resourceBundle.getString("UIPresentation.title.CancelButton");
-    } catch (Exception e){
+    } catch (MissingResourceException e){
       if (LOG.isWarnEnabled()) {
         LOG.warn(e.getMessage());
       }
@@ -706,8 +721,6 @@ public class Utils {
         }
       }
     }
-   
-    
     
 
     sb.append("<div class=\"InlineEditing\" >\n");
@@ -715,49 +728,50 @@ public class Utils {
     sb.append("title=\"").append(strSuggestion).append("\"");
     sb.append(" onClick=\"InlineEditor.presentationSwitchBlock('").append(showBlockId).
        append("', '").append(editBlockEditorID).append("');\"");
+
     sb.append("onmouseout=\"this.className='").append(cssClass).
-       append("';\" onblur=\"this.className='").append(cssClass).
-       append("';\" onfocus=\"this.className='").append(cssClass).append("Hover").
-       append("';\" onmouseover=\"this.className='").
-       append(cssClass).append("Hover';\">").
-       append(currentValue).
-       append("</div>\n");
+    append("';\" onblur=\"this.className='").append(cssClass).
+    append("';\" onfocus=\"this.className='").append(cssClass).append("Hover").
+    append("';\" onmouseover=\"this.className='").
+    append(cssClass).append("Hover';\">").
+    append(currentValue).
+    append("</div>\n");
     sb.append("\t<div id=\"").append(editBlockEditorID).append("\" class=\"Edit").append(cssClass).append("\">\n");
     sb.append("\t\t<form name=\"").append(editFormID).append("\" id=\"").append(editFormID).
-       append("\" onSubmit=\"").append(strAction).append("\">\n");
+    append("\" onSubmit=\"").append(strAction).append("\">\n");
     sb.append("<DIV style=\"display:none; visible:hidden\" id=\"").append(currentValueID).
-       append("\" name=\"").append(currentValueID).append("\">").append(currentValue).append("</DIV>");
+    append("\" name=\"").append(currentValueID).append("\">").append(currentValue).append("</DIV>");
 
     if (bDirection!=null && bDirection.equals(LEFT2RIGHT)) {
-      sb.append("\t\t<a href=\"#\" rel=\"tooltip\" data-placement=\"bottom\" class =\"AcceptButton\" style=\"float:left\" onclick=\"")
-        .append(strAction)
-        .append("\" title=\"" + acceptButton + "\">&nbsp;</a>\n");
+      sb.append("\t\t<a href=\"#\" rel=\"tooltip\" data-placement=\"bottom\"")
+      .append(" class =\"AcceptButton\" style=\"float:left\" onclick=\"")
+      .append(strAction)
+      .append("\" title=\"" + acceptButton + "\">&nbsp;</a>\n");
       sb.append("\t\t<a href=\"#\" rel=\"tooltip\" data-placement=\"bottom\" class =\"CancelButton\" style=\"float:left\" ").
-         append("onClick=\"InlineEditor.presentationSwitchBlock('");
+      append("onClick=\"InlineEditor.presentationSwitchBlock('");
       sb.append(editBlockEditorID)
-        .append("', '")
-        .append(showBlockId)
-        .append("');\" title=\"" + cancelButton + "\">&nbsp;</a>\n");
+      .append("', '")
+      .append(showBlockId)
+      .append("');\" title=\"" + cancelButton + "\">&nbsp;</a>\n");
     } else {
       sb.append("\t\t<a href=\"#\" rel=\"tooltip\" data-placement=\"bottom\" class =\"CancelButton\" ")
-        .append("onClick=\"InlineEditor.presentationSwitchBlock('");
+      .append("onClick=\"InlineEditor.presentationSwitchBlock('");
       sb.append(editBlockEditorID)
-        .append("', '")
-        .append(showBlockId)
-        .append("');\" title=\"" + cancelButton + "\">&nbsp;</a>\n");
+      .append("', '")
+      .append(showBlockId)
+      .append("');\" title=\"" + cancelButton + "\">&nbsp;</a>\n");
       sb.append("\t\t<a href=\"#\" rel=\"tooltip\" data-placement=\"bottom\" class =\"AcceptButton\" onclick=\"")
-        .append(strAction)
-        .append("\" title=\"" + acceptButton + "\">&nbsp;</a>\n");
+      .append(strAction)
+      .append("\" title=\"" + acceptButton + "\">&nbsp;</a>\n");
     }
     sb.append("\t\t<div class=\"Edit").append(cssClass).append("Input\">\n ");
 
-    
+
 
     sb.append("\n\t\t</div>\n\t</form>\n</div>\n\n</div>");
     return sb.toString();
-  }
+  } 
 
-  
   protected static final String SEPARATOR  = "=";
   protected static final String TOOLBAR    = "toolbar";
   protected static final String CSS        = "CSSData";
@@ -816,8 +830,10 @@ public class Utils {
       if (content.hasProperty("dc:title")) {
         try {
           title = content.getProperty("dc:title").getValues()[0].getString();
-        } catch(Exception ex) {
-          title = null;
+        } catch (ValueFormatException e) { title = null;
+        } catch (IllegalStateException e) { title = null;
+        } catch (PathNotFoundException e) { title = null;
+        } catch (RepositoryException e) { title = null;
         }
       }
     }
@@ -940,9 +956,9 @@ public class Utils {
     return null;
   }
 
-  
+
   /**
-   * 
+   *
    * @param     :  node: nt:file node with have the data stream
    * @return    :  Link to download the jcr:data of the given node
    * @throws       Exception
@@ -950,10 +966,10 @@ public class Utils {
   public static String getDownloadRestServiceLink(Node node) throws Exception{
     ExoContainer container = ExoContainerContext.getCurrentContainer() ;
     PortalContainerInfo containerInfo = (PortalContainerInfo)container.
-                                        getComponentInstanceOfType(PortalContainerInfo.class) ;
+        getComponentInstanceOfType(PortalContainerInfo.class) ;
     String portalName = containerInfo.getContainerName() ;
     PortalContainerConfig portalContainerConfig = (PortalContainerConfig) container.
-                                        getComponentInstance(PortalContainerConfig.class);
+        getComponentInstance(PortalContainerConfig.class);
     String restContextName = portalContainerConfig.getRestContextName(portalName);
     StringBuilder sb = new StringBuilder();
     Node currentNode = org.exoplatform.wcm.webui.Utils.getRealNode(node);
@@ -970,10 +986,10 @@ public class Utils {
     }
     return sb.toString();
   }
-  
+
   /**
    * Get allowed folder types in current path.
-   * 
+   *
    * @param currentNode
    * @param currentDrive
    * @return List<String> of node types
@@ -981,7 +997,7 @@ public class Utils {
    */
   public static List<String> getAllowedFolderTypesInCurrentPath(Node currentNode, DriveData currentDrive) throws Exception {
     List<String> allowedTypes = new ArrayList<String>();
-    NodeTypeImpl currentNodeType = (NodeTypeImpl)currentNode.getPrimaryNodeType(); 
+    NodeTypeImpl currentNodeType = (NodeTypeImpl)currentNode.getPrimaryNodeType();
     String[] arrFoldertypes = currentDrive.getAllowCreateFolders().split(",");
     NodeTypeManager ntManager = currentNode.getSession().getWorkspace().getNodeTypeManager();
 
@@ -992,10 +1008,10 @@ public class Utils {
         allowedTypes.add(strFolderType);
       }
     }
-      
+
     return allowedTypes;
   }
-  
+
   /**
    * removes child nodes in path list if ancestor of the node exists in list
    * @param srcPath the list of nodes
@@ -1026,5 +1042,5 @@ public class Utils {
     }
     return ret.toArray(new String[]{});
   }
-  
+
 }

@@ -56,7 +56,7 @@ public class PostCreateNodeTypeEventListener extends Listener<CmsService, String
    * @param configurationService the configuration service
    * @param schemaConfigService the schema config service
    */
-   public PostCreateNodeTypeEventListener(WCMComposer composer) {
+  public PostCreateNodeTypeEventListener(WCMComposer composer) {
     this.composer = composer;
   }
 
@@ -65,35 +65,35 @@ public class PostCreateNodeTypeEventListener extends Listener<CmsService, String
    */
   public void onEvent(Event<CmsService, String> event) throws Exception {
     composer.cleanTemplates();
-    
+
     this.taxonomyService = WCMCoreUtils.getService(TaxonomyService.class);
     this.actionServiceContainer = WCMCoreUtils.getService(ActionServiceContainer.class);
     String nodetypeName = event.getData();
     List<Node> taxonomyTrees = taxonomyService.getAllTaxonomyTrees();
     for (Node taxonomyTree : taxonomyTrees) {
       // Get node whose type is exo:taxonomyAction
-    	Node action = null;
-    	List<Node> actions = actionServiceContainer.getActions(taxonomyTree);
-    	for (Node taxonomyAction : actions) {
-    		if (taxonomyAction.isNodeType(TAXONOMY_ACTION)) {
-    			action = taxonomyAction;
-    			break;
-    		}
-    	}
-    	if(action != null) {
-    		Session session = action.getSession();
-    		ValueFactory valueFactory = session.getValueFactory();
-    		Value[] values = action.getProperty("exo:affectedNodeTypeNames").getValues();
-    		List<Value> tmpValues = new ArrayList<Value>();
-    		if(tmpValues != null) {
-    			for (Value value : values) {
-    				tmpValues.add(value);
-    			}
-    			tmpValues.add(valueFactory.createValue(nodetypeName));
-    			action.setProperty("exo:affectedNodeTypeNames", tmpValues.toArray(new Value[tmpValues.size()]));
-    		}
-    		session.save();
-    	}
+      Node action = null;
+      List<Node> actions = actionServiceContainer.getActions(taxonomyTree);
+      for (Node taxonomyAction : actions) {
+        if (taxonomyAction.isNodeType(TAXONOMY_ACTION)) {
+          action = taxonomyAction;
+          break;
+        }
+      }
+      if(action != null) {
+        Session session = action.getSession();
+        ValueFactory valueFactory = session.getValueFactory();
+        Value[] values = action.getProperty("exo:affectedNodeTypeNames").getValues();
+        List<Value> tmpValues = new ArrayList<Value>();
+        if(tmpValues != null) {
+          for (Value value : values) {
+            tmpValues.add(value);
+          }
+          tmpValues.add(valueFactory.createValue(nodetypeName));
+          action.setProperty("exo:affectedNodeTypeNames", tmpValues.toArray(new Value[tmpValues.size()]));
+        }
+        session.save();
+      }
     }
   }
 }

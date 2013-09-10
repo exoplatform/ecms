@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIDashboardForm>
+    <label>
+      <title>Bảng ứng dụng cá nhân của Tác giả</title>
+      <nocontent>Không có Nội dung</nocontent>
+      <mydraft>Nội dung Nháp của Tôi</mydraft>
+      <waitingapproval>Đang chờ Phê duyệt của Tôi</waitingapproval>
+      <approve>Phê duyệt</approve>
+      <publishedtomorrow>Phát hành vào Ngày mai</publishedtomorrow>
+    </label>
+  </UIDashboardForm>
+</bundle>

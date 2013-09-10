@@ -36,7 +36,7 @@ import org.exoplatform.ecm.webui.core.bean.PermissionBean;
 import org.exoplatform.ecm.webui.selector.UIAnyPermission;
 import org.exoplatform.ecm.webui.selector.UIGroupMemberSelector;
 import org.exoplatform.ecm.webui.selector.UISelectable;
-import org.exoplatform.ecm.webui.utils.LockUtil;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
@@ -69,28 +69,28 @@ import org.exoplatform.webui.event.Event.Phase;
  */
 
 @ComponentConfig(
-    lifecycle = UIFormLifecycle.class,
-    template = "app:/groovy/webui/component/admin/taxonomy/UIPermissionTreeForm.gtmpl",
-    events = {
-      @EventConfig(listeners = UIPermissionTreeForm.SaveActionListener.class),
-      @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.NextAddActionActionListener.class),
-      @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.PreviousActionListener.class),
-      @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.ResetActionListener.class),
-      @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.SelectUserActionListener.class),
-      @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.SelectMemberActionListener.class),
-      @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.AddAnyActionListener.class),
-      @EventConfig(phase = Phase.DECODE, listeners = UIPermissionInputSet.OnChangeActionListener.class),
-      @EventConfig(listeners = UIPermissionTreeForm.CancelActionListener.class)
-    }
-)
+                 lifecycle = UIFormLifecycle.class,
+                 template = "app:/groovy/webui/component/admin/taxonomy/UIPermissionTreeForm.gtmpl",
+                 events = {
+                   @EventConfig(listeners = UIPermissionTreeForm.SaveActionListener.class),
+                   @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.NextAddActionActionListener.class),
+                   @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.PreviousActionListener.class),
+                   @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.ResetActionListener.class),
+                   @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.SelectUserActionListener.class),
+                   @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.SelectMemberActionListener.class),
+                   @EventConfig(phase = Phase.DECODE, listeners = UIPermissionTreeForm.AddAnyActionListener.class),
+                   @EventConfig(phase = Phase.DECODE, listeners = UIPermissionInputSet.OnChangeActionListener.class),
+                   @EventConfig(listeners = UIPermissionTreeForm.CancelActionListener.class)
+                 }
+    )
 public class UIPermissionTreeForm extends UIPermissionFormBase implements UISelectable {
 
   public static final String PERMISSION      = "permission";
 
   public static final String POPUP_SELECT    = "TaxoTreeSelectUserOrGroupPopup";
-  
+
   public static final String[] PERMISSIONS   = new String[] { PermissionType.READ, PermissionType.ADD_NODE, 
-  	PermissionType.REMOVE };
+    PermissionType.REMOVE };
 
   public static final String SELECT_GROUP_ID = "TaxoTreeSelectUserOrGroup";
   private static final Log LOG  = ExoLogger.getLogger(UIPermissionTreeForm.class.getName());
@@ -106,7 +106,7 @@ public class UIPermissionTreeForm extends UIPermissionFormBase implements UISele
   public void checkAll(boolean check) {
     UIPermissionInputSet uiInputSet = getChildById(PERMISSION) ;
     for (String perm : PermissionType.ALL) {
-    	if(uiInputSet.getUICheckBoxInput(perm) != null) uiInputSet.getUICheckBoxInput(perm).setChecked(check);
+      if(uiInputSet.getUICheckBoxInput(perm) != null) uiInputSet.getUICheckBoxInput(perm).setChecked(check);
     }
   }
 
@@ -209,7 +209,7 @@ public class UIPermissionTreeForm extends UIPermissionFormBase implements UISele
       UITaxonomyTreeContainer uiContainer = uiForm.getAncestorOfType(UITaxonomyTreeContainer.class);
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
       String userOrGroup = uiForm.getChild(UIPermissionInputSet.class).getUIStringInput(
-          UIPermissionInputSet.FIELD_USERORGROUP).getValue();
+                                                                                        UIPermissionInputSet.FIELD_USERORGROUP).getValue();
       List<String> permsList = new ArrayList<String>();
       List<String> permsRemoveList = new ArrayList<String>();
       PermissionBean permBean = new PermissionBean();
@@ -236,14 +236,14 @@ public class UIPermissionTreeForm extends UIPermissionFormBase implements UISele
 
       if (Utils.isNameEmpty(userOrGroup)) {
         uiApp.addMessage(new ApplicationMessage("UIPermissionTreeForm.msg.userOrGroup-required", null,
-            ApplicationMessage.WARNING));
-        
+                                                ApplicationMessage.WARNING));
+
         return;
       }
       if (permsList.size() == 0) {
         uiApp.addMessage(new ApplicationMessage("UIPermissionTreeForm.msg.checkbox-require", null,
-            ApplicationMessage.WARNING));
-        
+                                                ApplicationMessage.WARNING));
+
         return;
       }
       String[] permsArray = permsList.toArray(new String[permsList.size()]);
@@ -255,8 +255,8 @@ public class UIPermissionTreeForm extends UIPermissionFormBase implements UISele
         }
         if(!currentNode.isCheckedOut()) {
           uiApp.addMessage(new ApplicationMessage("UIPermissionTreeForm.msg.node-checkedin", null,
-              ApplicationMessage.WARNING));
-          
+                                                  ApplicationMessage.WARNING));
+
           return;
         }
 
@@ -272,7 +272,7 @@ public class UIPermissionTreeForm extends UIPermissionFormBase implements UISele
             } catch (AccessDeniedException ade) {
               uiApp.addMessage(new ApplicationMessage("UIPermissionTreeForm.msg.access-denied", null,
                                                       ApplicationMessage.WARNING));
-              
+
               return;
             }
           }
@@ -281,8 +281,8 @@ public class UIPermissionTreeForm extends UIPermissionFormBase implements UISele
           node.save();
         } else {
           uiApp.addMessage(new ApplicationMessage("UIPermissionTreeForm.msg.not-change-permission", null,
-              ApplicationMessage.WARNING));
-          
+                                                  ApplicationMessage.WARNING));
+
           return;
         }
         currentNode.getSession().save();
@@ -303,8 +303,8 @@ public class UIPermissionTreeForm extends UIPermissionFormBase implements UISele
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
       if (uiPermInfo.getPermBeans().size() < 1) {
         uiApp.addMessage(new ApplicationMessage("UIPermissionTreeForm.msg.have-not-any-permission", null,
-            ApplicationMessage.WARNING));
-        
+                                                ApplicationMessage.WARNING));
+
         return;
       }
       UITaxonomyTreeContainer uiTaxonomyTreeContainer = uiForm.getAncestorOfType(UITaxonomyTreeContainer.class);
@@ -335,7 +335,7 @@ public class UIPermissionTreeForm extends UIPermissionFormBase implements UISele
       UIPermissionTreeForm uiForm = event.getSource();
       UIPermissionInputSet uiInputSet = uiForm.getChildById(UIPermissionForm.PERMISSION);
       uiInputSet.getUIStringInput(UIPermissionInputSet.FIELD_USERORGROUP).setValue(
-          IdentityConstants.ANY);
+                                                                                   IdentityConstants.ANY);
       uiForm.checkAll(false);
       uiInputSet.getUICheckBoxInput(PermissionType.READ).setChecked(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
@@ -364,7 +364,7 @@ public class UIPermissionTreeForm extends UIPermissionFormBase implements UISele
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTaxonomyManagerTrees);
     }
   }
-  
+
   public static class CancelActionListener extends EventListener<UIPermissionTreeForm> {
     public void execute(Event<UIPermissionTreeForm> event) throws Exception {
       UIPermissionTreeForm uiForm = event.getSource();
@@ -379,5 +379,5 @@ public class UIPermissionTreeForm extends UIPermissionFormBase implements UISele
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTaxonomyManagerTrees);
     }
   }
-  
+
 }

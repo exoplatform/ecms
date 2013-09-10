@@ -679,7 +679,7 @@
 			var url 			= list[i].getAttribute("url");
 			var path 			= list[i].getAttribute("path");
 			var nodeType	= list[i].getAttribute("folderType");
-			var node = list[i].getAttribute("name");
+			var node = list[i].getAttribute("title");
 			var label = list[i].getAttribute("label");
 			if (!label) label = node;
 			var newRow = tblRWS.tBodies[0].insertRow(i);

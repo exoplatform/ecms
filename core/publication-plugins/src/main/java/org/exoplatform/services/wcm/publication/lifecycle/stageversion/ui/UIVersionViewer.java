@@ -84,7 +84,7 @@ public class UIVersionViewer extends UIBaseNodePresentation {
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation#getOriginalNode()
    */
-  public Node getOriginalNode() throws Exception {
+  public Node getOriginalNode() {
     return NodeLocation.getNodeByLocation(originalNodeLocation);
   }
 
@@ -115,7 +115,7 @@ public class UIVersionViewer extends UIBaseNodePresentation {
       String nodeType = getOriginalNode().getPrimaryNodeType().getName();
       if(templateService.isManagedNodeType(nodeType))
         templatePath = templateService.getTemplatePathByUser(false, nodeType, userName) ;
-    } catch (Exception e) {
+    } catch (RepositoryException e) {
       templatePath = null;
     }
     return templatePath ;

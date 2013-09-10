@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+<bundle>
+  <UIExoStart>
+    <tooltip>
+      <homepage>ホームページ</homepage>
+    </tooltip>
+  </UIExoStart>
+
+  <UIFormInputSetWithAction>
+    <msg>
+      <confirm-delete>このアイテムを削除しますか？</confirm-delete>
+    </msg>
+  </UIFormInputSetWithAction>
+
+  <Drives>
+    <label>
+      <ManagedSites>サイト管理</ManagedSites>
+      <SharedSite>共有サイト</SharedSite>
+    </label>
+  </Drives>
+
+  <Views>
+    <label>
+      <wcm-view>WCM ビュー</wcm-view>
+      <admin-view>管理者 ビュー</admin-view>
+      <icon-view>アイコン</icon-view>
+      <thumbails-view>サムネイル</thumbails-view>
+      <list-view>一覧</list-view>
+      <authoring-view>編集中</authoring-view>
+      <wcm-category-view>カテゴリー</wcm-category-view>
+      <file-view>ファイル管理ビュー</file-view>
+    </label>
+  </Views>
+
+  <UIActionBar>
+    <obtion>
+      <Publication>パブリケーション</Publication>
+      <System>システム</System>
+    </obtion>
+  </UIActionBar>
+
+  <UIPageSelectorPanel>
+    <header>
+      <path>パス</path>
+      <action>アクション</action>
+    </header>
+    <msg>
+      <child-not-found>ページがありません</child-not-found>
+    </msg>
+    <title>
+      <select>選択</select>
+    </title>
+  </UIPageSelectorPanel>
+
+  <UIContentDialogFormPopupWindow>
+    <title>
+      <UIContentDialogPreference>Webコンテンツ設定</UIContentDialogPreference>
+    </title>
+  </UIContentDialogFormPopupWindow>
+
+  <UITabPane>
+    <title>
+      <UIContentBrowsePanelOne>コンテンツブラウザ</UIContentBrowsePanelOne>
+      <UIContentBrowsePanelMulti>コンテンツブラウザ</UIContentBrowsePanelMulti>
+      <UIContentBrowsePanelFolder>フォルダブラウザ</UIContentBrowsePanelFolder>
+      <UIContentSearchForm>コンテンツ検索フォーム</UIContentSearchForm>
+      <UIContentSearchResult>検索結果</UIContentSearchResult>
+      <UIContentViewer>コンテンツのプレビュー</UIContentViewer>
+      <WebContentMetadataPopup>プロパティセレクタ</WebContentMetadataPopup>
+      <WebContentNodeTypePopup>ノードタイプセレクタ</WebContentNodeTypePopup>
+      <UIPermissionManager>パーミッションマネージャ</UIPermissionManager>
+    </title>
+  </UITabPane>
+
+  <UIContentBrowsePanelOne>
+    <selectBoxValues>
+      <FilterBy>フィルタ</FilterBy>
+      <WebContent>Webコンテンツ</WebContent>
+      <DMSDocument>ドキュメント</DMSDocument>
+      <Media>メディア</Media>
+    </selectBoxValues>
+    <msg>
+      <node-checkout>ノードがチェックアウトされています。この機能の前にはノードをチェックインしてください。</node-checkout>
+    </msg>
+  </UIContentBrowsePanelOne>
+
+  <UIContentBrowsePanelMulti>
+    <selectBoxValues>
+      <FilterBy>フィルタ</FilterBy>
+      <WebContent>Webコンテンツ</WebContent>
+      <DMSDocument>ドキュメント</DMSDocument>
+      <Media>メディア</Media>
+    </selectBoxValues>
+  </UIContentBrowsePanelMulti>
+
+  <UIContentBrowsePanelOne>
+    <label>
+      <LeftColumn>フォルダを選択すると子要素がコンテンツとして表示されます。</LeftColumn>
+      <RightColumn>選択可能なコンテンツです。</RightColumn>
+    </label>
+  </UIContentBrowsePanelOne>
+
+  <UIContentBrowsePanelMulti>
+    <label>
+      <LeftColumn>フォルダを選択すると子要素がコンテンツとして表示されます。</LeftColumn>
+      <RightColumn>選択可能なコンテンツです。</RightColumn>
+    </label>
+  </UIContentBrowsePanelMulti>
+
+  <UIContentBrowsePanelFolder>
+    <label>
+      <LeftColumn>フォルダを選択すると子要素がコンテンツとして表示されます。</LeftColumn>
+      <RightColumn>選択可能なフォルダです。</RightColumn>
+    </label>
+  </UIContentBrowsePanelFolder>
+
+  <UISelectedContentGrid>
+    <label>
+      <name>名前</name>
+      <add>追加</add>
+      <delete>削除</delete>
+    </label>
+    <msg>
+      <no-content-found>コンテンツがありません</no-content-found>
+      <non-content>コンテンツが選択されていません</non-content>
+    </msg>
+  </UISelectedContentGrid>
+
+  <UICLVContentSelectedGrid>
+    <action>
+      <SaveCategories>保存</SaveCategories>
+      <Cancel>キャンセル</Cancel>
+    </action>
+  </UICLVContentSelectedGrid>
+
+  <UIContentBrowsePathSelector>
+    <header>
+      <name>名前</name>
+      <publicationstate>公開ステータス</publicationstate>
+      <action>アクション</action>
+    </header>
+    <msg>
+      <child-not-found>コンテンツがありません</child-not-found>
+    </msg>
+  </UIContentBrowsePathSelector>
+
+  <UIContentBrowsePathSelectorFolder>
+    <header>
+      <name>名前</name>
+      <publicationstate>公開ステータス</publicationstate>
+      <action>アクション</action>
+    </header>
+    <msg>
+      <child-not-found>フォルダがありません</child-not-found>
+    </msg>
+  </UIContentBrowsePathSelectorFolder>
+
+  <UIContentSearchForm>
+    <title>
+      <Location>サイト名</Location>
+      <SearchByName>名前で検索</SearchByName>
+      <Fulltext>単語またはフレーズ</Fulltext>
+      <Property>プロパティ</Property>
+      <Contain>含む</Contain>
+      <FromDate>開始日</FromDate>
+      <ToDate>終了日</ToDate>
+      <DocumentType>ドキュメントタイプ</DocumentType>
+    </title>
+    <tooltip>
+      <AddMetadataType>プロパティの追加</AddMetadataType>
+      <AddNodeType>ノードタイプの追加</AddNodeType>
+    </tooltip>    
+    <label>
+      <option>
+        <CREATED>作成</CREATED>
+        <MODIFIED>修正</MODIFIED>
+      </option>
+    </label>
+    <action>
+      <SearchWebContent>検索</SearchWebContent>
+    </action>
+    <msg>
+      <time-to-late>The searching time is too long.</time-to-late>
+      <empty-field>正しい検索キーワードを入力してください</empty-field>
+      <invalid-format>不正な日時フォーマットです '{0}'</invalid-format>
+      <invalid-date>終了日は開始日より大きい必要があります</invalid-date>
+      <invalid-nodeType>ノードタイプ "{0}" が不正です。確認してください</invalid-nodeType>
+      <invalid-keyword>検索キーワードが有効ではありません。文字列が認識されていません。</invalid-keyword>
+    </msg>
+  </UIContentSearchForm>
+
+  <WebContentMetadataPopup>
+    <title>
+      <UIContentPropertySelector>プロパティセレクタ</UIContentPropertySelector>
+    </title>
+  </WebContentMetadataPopup>
+
+  <UIContentPropertySelector>
+    <action>
+      <Add>追加</Add>
+      <Cancel>キャンセル</Cancel>
+    </action>
+    <label>
+      <metadataType>メタデータタイプ</metadataType>
+      <property_select>プロパティ</property_select>
+    </label>
+  </UIContentPropertySelector>
+
+  <WebContentNodeTypePopup>
+    <title>
+      <UIContentNodeTypeSelector>ノードタイプセレクタ</UIContentNodeTypeSelector>
+    </title>
+  </WebContentNodeTypePopup>
+
+  <UIContentNodeTypeSelector>
+    <action>
+      <Save>保存</Save>
+      <Cancel>キャンセル</Cancel>
+    </action>
+  </UIContentNodeTypeSelector>
+
+  <UIContentSearchResult>
+    <header>
+      <title>タイトル</title>
+      <score>スコア</score>
+      <publicationstate>公開ステータス</publicationstate>
+      <action>アクション</action>
+    </header>
+    <title>
+      <Select>セレクト</Select>
+      <View>ビュー</View>
+    </title>
+    <msg>
+    <template-not-support>このコンテンツをプレビューすることはできません。テンプレートはサポートされていません</template-not-support>
+    </msg>
+  </UIContentSearchResult>
+
+  <UIContentDialogForm>
+    <action>
+      <SaveDraft>ドラフトの保存</SaveDraft>
+      <FastPublish>すぐ公開</FastPublish>
+      <Preferences>設定</Preferences>
+      <Close>閉じる</Close>
+    </action>
+    <msg>
+      <access-denied>このドキュメントにカテゴリを追加する権限がありません。</access-denied>
+      <exception>このドキュメントにカテゴリを追加する際に例外が発生しました。</exception>
+      <non-categories>カテゴリが間違っています。正しいカテゴリを選択してください。</non-categories>
+    </msg>
+  </UIContentDialogForm>
+
+  <UIPermissionManager>
+    <label>
+      <UIPermissionInputSetWithAction>パーミッション</UIPermissionInputSetWithAction>
+      <UIPermissionStringInput/>
+      <UIAccessibleCheckboxInput>アクセス権</UIAccessibleCheckboxInput>
+      <UIEditableCheckboxInput>編集権</UIEditableCheckboxInput>
+    </label>
+    <action>
+      <Save>保存</Save>
+      <Clear>クリア</Clear>
+      <title>
+        <Edit>編集</Edit>
+        <Delete>削除</Delete>
+      </title>
+    </action>
+  </UIPermissionManager>
+
+  <UIPermissionManagerGrid>
+    <header>
+      <owner>パーミッション</owner>
+      <accessible>アクセス可能</accessible>
+      <editable>編集可能</editable>
+      <action>アクション</action>
+    </header>
+    <msg>
+      <confirm-delete-permission>削除しますか？</confirm-delete-permission>
+      <no-permission-remove>権限がありません。</no-permission-remove>
+      <access-denied>アクセスが拒否されました</access-denied>
+      <node-locked>パス {0} のアイテム、もしくは上位のレベルがロックされています。</node-locked>
+      <userOrGroup-required>ユーザもしくはグループを選択してください。</userOrGroup-required>
+      <checkbox-require>訂正してください</checkbox-require>
+      <node-checkedin>先にチェックアウトする必要があります。</node-checkedin>
+    </msg>
+  </UIPermissionManagerGrid>
+
+  <UIPermissionInputSetWithAction>
+    <title>
+      <SelectUser>ユーザの選択</SelectUser>
+      <SelectMember>メンバの選択</SelectMember>
+      <AddAny>パーミッションの追加</AddAny>
+    </title>
+  </UIPermissionInputSetWithAction>
+
+  <UIUserSelectorPopupWindow>
+    <title>
+      <UIUserContainer>ユーザセレクタ</UIUserContainer>
+    </title>
+  </UIUserSelectorPopupWindow>
+
+  <UIGroupSelectorPopupWindow>
+    <title>
+      <UIGroupMemberSelector>グループセレクタ</UIGroupMemberSelector>
+    </title>
+  </UIGroupSelectorPopupWindow>
+
+  <UIGroupMemberSelector>
+    <label>
+      <selectGroup>グループの選択</selectGroup>
+      <selectMembership>メンバシップの選択</selectMembership>
+    </label>
+  </UIGroupMemberSelector>
+
+  <UIContentDialogPreference>
+    <action>
+      <Back>戻る</Back>
+    </action>
+  </UIContentDialogPreference>
+
+  <ZeroValidator>
+    <msg>
+      <Invalid-number>ゼロは指定不可能です '{0}'</Invalid-number>
+    </msg>
+  </ZeroValidator>
+
+  <UIDropDownPageTemp>
+    <item>
+      <WCMPageConfigs>WCM ページ設定</WCMPageConfigs>
+      <ColumnPageConfigs>カラム ページ設定</ColumnPageConfigs>
+      <RowPageConfigs>ロウ ページ設定</RowPageConfigs>
+      <TabsPageConfigs>タブ ページ設定</TabsPageConfigs>
+      <MixPageConfigs>ミックス ページ設定</MixPageConfigs>
+    </item>
+  </UIDropDownPageTemp>
+
+  <UIWizardPageSelectLayoutForm>
+    <label>
+      <SingleContentViewer>シングルコンテンツビューア</SingleContentViewer>
+      <ContentListViewer>コンテントリストビューア</ContentListViewer>
+      <Search>検索</Search>
+      <Sitemap>サイトマップ</Sitemap>
+      <TwoColumnsLayout>2カラム　レイアウト</TwoColumnsLayout>
+      <ThreeColumnsLayout>3カラム　レイアウト</ThreeColumnsLayout>
+      <TwoRowsLayout>2ロウ　レイアウト</TwoRowsLayout>
+      <ThreeRowsLayout>3ロウ　レイアウト</ThreeRowsLayout>
+      <TwoTabsLayout>2タブ　レイアウト</TwoTabsLayout>
+      <ThreeTabsLayout>3タブ　レイアウト</ThreeTabsLayout>
+      <TwoColumnsOneRowLayout>2カラム 1ロウ レイアウト</TwoColumnsOneRowLayout>
+      <OneRowTwoColumnsLayout>1ロウ 2カラム レイアウト</OneRowTwoColumnsLayout>
+      <ThreeRowsTwoColumnsLayout>3ロウ 2カラム レイアウト</ThreeRowsTwoColumnsLayout>
+    </label>
+  </UIWizardPageSelectLayoutForm>
+
+  <Signin>
+    <welcome>ようこそ</welcome>
+    <login>ログイン</login>
+    <logout>ログアウト</logout>
+    <language>言語の変更</language>
+    <register>登録</register>
+  </Signin>
+  <UIDriveForm>
+<label>
+<wcm-category-view>カテゴリ ビュー</wcm-category-view>
+<wcm-view>WCM コンテンツ ビュー</wcm-view>
+</label>
+  </UIDriveForm>
+  
+  <ContentSelector>
+    <title>
+      <PersonalDrives>パーソナルドライブ</PersonalDrives>
+      <GeneralDrives>一般ドライブ</GeneralDrives>
+      <GroupDrives>グループドライブ</GroupDrives>
+      <Private>プライベート</Private>
+      <Public>パブリック</Public>
+      <BackupCenter>バックアップセンタ</BackupCenter>
+      <CategorizedDocumentsCenter>カテゴライズされたドキュメントセンタ</CategorizedDocumentsCenter>
+      <CollaborationCenter>コラボレーションセンタ</CollaborationCenter>
+      <DigitalAssetsManagementCenter>デジタルアセット管理センタ</DigitalAssetsManagementCenter>
+      <DMSAdministration>DMS アドミニストレーション</DMSAdministration>
+      <DocumentsManagementCenter>ドキュメント管理センタ</DocumentsManagementCenter>
+      <LiveDocumentsCenter>Liveドキュメントセンタ</LiveDocumentsCenter>
+      <PendingDocumentsCenter>ペンディングドキュメントセンタ</PendingDocumentsCenter>
+      <RecordsManagementCenter>レコード管理センタ</RecordsManagementCenter>
+      <SharedUsersSpace>共有ユーザスペース</SharedUsersSpace>
+      <Systemfiles>システムファイル</Systemfiles>
+      <ValidationRequestsDocumentsCenter>バリデーションリクエストドキュメントセンタ</ValidationRequestsDocumentsCenter>
+      <ManagedSites>サイト管理</ManagedSites>
+      <SharedSite>共有サイト</SharedSite>
+    </title>
+  </ContentSelector>
+  
+  <UICategoryNavigationTargetPathPopupWindow>
+    <title>
+      <UIPageSelector>ページセレクタ</UIPageSelector>
+    </title>
+  </UICategoryNavigationTargetPathPopupWindow>
+  
+  <UIDocumentInfo>
+    <msg>
+      <access-denied-exception>アクセスが拒否されました。読み出し権がない、もしくはノードが削除、変更されたかもしれません。</access-denied-exception>
+    </msg>
+  </UIDocumentInfo>
+  <UIPortalApplication>
+    <title>
+      <abort>中断</abort>
+    </title>
+  </UIPortalApplication>    
+  
+  <CategoryNavigationTemplate>
+  <label>
+  <home>ホーム</home>
+  </label>
+  </CategoryNavigationTemplate>
+  
+  <Breadcrumb>
+  <label>
+  <home>ホーム</home>
+  </label>  
+  </Breadcrumb>
+</bundle>

@@ -769,6 +769,7 @@
 	};
 	//when reader in progress
 	MultiUpload.prototype.handleReaderProgress= function(id) {
+		  if (!eXo.ecm.MultiUpload.uploadingFileIds[id]) return;
 		  var uri = eXo.ecm.MultiUpload.restContext + "/wcmDriver/uploadFile/control?" +
 		  "repositoryName=repository&workspaceName=" + eXo.ecm.MultiUpload.ws +
 		  "&driverName=" + eXo.ecm.MultiUpload.drive +
@@ -776,7 +777,7 @@
 		  "&currentPortal="+ eXo.ecm.MultiUpload.portalName +
 		  "&userId=" + eXo.ecm.MultiUpload.userId +
 		  "&action=progress&uploadId=" + id;
-		  gj.ajax({url: uri, timeout: 1000,
+		  gj.ajax({url: uri, 
 			   success: function(ret) {
 		  		if (!ret) {
 					setTimeout(function(){eXo.ecm.MultiUpload.handleReaderProgress(id)}, 1000);
@@ -806,11 +807,11 @@
 						eXo.ecm.MultiUpload.percentMap[id] = nPercent;
 						eXo.ecm.MultiUpload.connectionFailed[id] = 0;
 					}
-				}
-				progMeter = gj("#" + id, eXo.ecm.MultiUpload.document)[0];
-				if (progMeter) {
-					progMeter.innerHTML = nPercent + "%";
-					gj(progMeter).prev("div").width(nPercent + "%");
+					progMeter = gj("#" + id, eXo.ecm.MultiUpload.document)[0];
+					if (progMeter) {
+						progMeter.innerHTML = nPercent + "%";
+						gj(progMeter).prev("div").width(nPercent + "%");
+					}
 				}
 				if (!nPercent || nPercent < 100) {
 					if (nPercent == 0) {
@@ -856,7 +857,7 @@
 		    "&fileName=" + cleanName(file.name) + 
 		    "&language=" + eXo.ecm.MultiUpload.userLanguage +
 		    "&existenceAction=" + eXo.ecm.MultiUpload.existingBehavior[progressID];
-		    gj.ajax({url: uri, timeout: 1000,
+		    gj.ajax({url: uri, 
 	 	     success: function(ret, status, xhr) {
 		  	  //mark OK
 		  	  if (eXo.ecm.MultiUpload.connectionFailed[progressID] > eXo.ecm.MultiUpload.MAX_CONNECTION) {
@@ -934,11 +935,11 @@
 		  	  eXo.ecm.MultiUpload.processNextUploadRequestInQueue();
 		    	 },
 		       error: function() {
-				 if (eXo.ecm.MultiUpload.connectionFailed[id]++ > eXo.ecm.MultiUpload.MAX_CONNECTION) {
-					 var e = eXo.ecm.MultiUpload.handleReaderAbort(id, eXo.ecm.MultiUpload.ERROR);
+				 if (eXo.ecm.MultiUpload.connectionFailed[progressID]++ > eXo.ecm.MultiUpload.MAX_CONNECTION) {
+					 var e = eXo.ecm.MultiUpload.handleReaderAbort(progressID, eXo.ecm.MultiUpload.ERROR);
 					 e(window.event);
 				 } else {
-					  	setTimeout(function(){eXo.ecm.MultiUpload.handleReaderLoad(id);}, 1000);	        		 
+					  	setTimeout(function(){eXo.ecm.MultiUpload.handleReaderLoad(progressID);}, 1000);	        		 
 				 }
 		    	 }
 		    });

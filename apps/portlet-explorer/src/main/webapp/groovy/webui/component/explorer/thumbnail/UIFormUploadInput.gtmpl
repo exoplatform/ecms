@@ -1,5 +1,5 @@
 <%
-  String uploadId = uicomponent.getUploadId();
+  String uploadId = uicomponent.getUploadIds()[0];
   def rcontext = _ctx.getRequestContext();
   def id = uicomponent.getId();
   rcontext.getJavascriptManager().require("SHARED/upload", "upload")

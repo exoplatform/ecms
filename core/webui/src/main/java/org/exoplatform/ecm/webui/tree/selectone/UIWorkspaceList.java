@@ -51,13 +51,13 @@ import org.exoplatform.webui.form.UIFormSelectBox;
  * Jun 21, 2007 2:32:49 PM
  */
 @ComponentConfig(
-    lifecycle = UIFormLifecycle.class,
-    template = "classpath:groovy/ecm/webui/form/UIFormWithoutAction.gtmpl",
-    events = {
-      @EventConfig(listeners = UIWorkspaceList.ChangeWorkspaceActionListener.class),
-      @EventConfig(listeners = UIWorkspaceList.AddRootNodeActionListener.class)
-    }
-)
+                 lifecycle = UIFormLifecycle.class,
+                 template = "classpath:groovy/ecm/webui/form/UIFormWithoutAction.gtmpl",
+                 events = {
+                   @EventConfig(listeners = UIWorkspaceList.ChangeWorkspaceActionListener.class),
+                   @EventConfig(listeners = UIWorkspaceList.AddRootNodeActionListener.class)
+                 }
+    )
 public class UIWorkspaceList extends UIForm {
 
   static private String WORKSPACE_NAME = "workspaceName";
@@ -91,25 +91,25 @@ public class UIWorkspaceList extends UIForm {
     UIFormInputSetWithAction uiInputAction = getChildById(ROOT_NODE_INFO);
     uiInputAction.setRendered(isRender);
   }
-  
+
   public void setWorkspaceList() throws Exception {
     wsList_ = new ArrayList<String>();
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     String[] wsNames = repositoryService.getCurrentRepository().getWorkspaceNames();
-   
+
     String systemWsName = repositoryService.getCurrentRepository()
-                                           .getConfiguration()
-                                           .getSystemWorkspaceName();
+        .getConfiguration()
+        .getSystemWorkspaceName();
     List<SelectItemOption<String>> workspace = new ArrayList<SelectItemOption<String>>();
     for (String wsName : wsNames) {
-    	Node rootNode = null;
-    	try {
+      Node rootNode = null;
+      try {
         rootNode = getRootNode(wsName);
-    	} catch(AccessDeniedException ex) {
+      } catch(AccessDeniedException ex) {
         continue;
-    	} catch(RepositoryException ex) {
+      } catch(RepositoryException ex) {
         continue;
-    	}    		
+      }    		
       if (!isShowSystem_) {
         if (!wsName.equals(systemWsName)) {
           workspace.add(new SelectItemOption<String>(wsName, wsName));
