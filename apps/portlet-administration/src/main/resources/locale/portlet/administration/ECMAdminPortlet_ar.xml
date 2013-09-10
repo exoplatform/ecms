@@ -1265,8 +1265,8 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <parentPath>Parent:</parentPath>
-      <taxonomyName>Category Name:</taxonomyName>
+      <parentPath>الأصل:</parentPath>
+      <taxonomyName>اسم الفئة:</taxonomyName>
     </label>
     <msg>
       <name-null>اسم الفئة فارغ.</name-null>
