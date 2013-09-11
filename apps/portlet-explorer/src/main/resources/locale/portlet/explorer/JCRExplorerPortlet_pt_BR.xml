@@ -98,7 +98,7 @@
       <selectView>Select View</selectView>
       <showSideBar>Show Sidebar</showSideBar>
       <more>More</more>
-      <backTo>Back</backTo>
+      <backTo>Voltar</backTo>
     </label>
   </UIViewBar>
 
@@ -501,7 +501,7 @@
     <tooltip>
       <Rename>Rename</Rename>
       <Cut>Cut</Cut>
-      <Copy>Copy</Copy>
+      <Copy>Copiar</Copy>
       <Save>Save</Save>
       <RemoveNode>Delete</RemoveNode>
       <Checkin>Checkin</Checkin>
@@ -1359,7 +1359,7 @@
     </eventName>
     <label>
       <operation>Operation</operation>
-      <userName>Username</userName>
+      <userName>Nome do usuário</userName>
       <date>Date</date>
       <version>Version</version>
     </label>
