@@ -310,11 +310,11 @@
 <true>Cierto</true>
 <false>Falso</false>
 <Electronic>Electrónico</Electronic>
-<Paper>Paper</Paper>
+<Paper>Papel</Paper>
 <NONE>Ninguno</NONE>
 <CLASSIFIED>Clasificado</CLASSIFIED>
-<UNCLASSIFIED>Unclassified</UNCLASSIFIED>
-<NOCONTRACT>No Contract</NOCONTRACT>
+<UNCLASSIFIED>Sin clasificar</UNCLASSIFIED>
+<NOCONTRACT>Ningún Contrato</NOCONTRACT>
 <one-minute>Un Minuto</one-minute>
 <hourly>Por hora</hourly>
 <daily>Diario</daily>
