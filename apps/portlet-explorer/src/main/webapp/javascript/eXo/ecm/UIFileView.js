@@ -367,6 +367,12 @@ UIFileView.prototype.mouseUpItem = function(evt) {
 	Self.firstTimeClick = false
 	Self.checkSelectedItemCount();
     eXo.ecm.ECMUtils.loadContainerWidth();
+  
+	// Close rename popup
+	var renameWindowPopup = gj('#UIRenameWindowPopup');
+	if (renameWindowPopup) {
+	  renameWindowPopup.hide();
+	}
 };
 
 UIFileView.prototype.mutipleSelect = function(event) {
