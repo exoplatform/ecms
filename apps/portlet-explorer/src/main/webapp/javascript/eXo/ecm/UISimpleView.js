@@ -764,18 +764,7 @@
 
   	  if (checkExoActionNode) {
   		// disable all buttons
-  		deleteAction.parentNode.style.display = "none";
-  		unlockAction.parentNode.parentNode.style.display = "none";
-        lockAction.parentNode.parentNode.style.display = "none";
-        removeFavouriteAction.parentNode.parentNode.style.display = "none";
-        addFavouriteAction.parentNode.parentNode.style.display = "none";
-        restoreFromTrashAction.parentNode.parentNode.style.display = "none";
-        playMediaAction.parentNode.style.display = "none";
-        //emptyTrashAction.parentNode.style.display = "none";
-        pasteAction.parentNode.parentNode.style.display = "none";
-        copyAction.parentNode.style.display = "none";
-		cutAction.parentNode.style.display = "none";
-		addSymLinkAction.parentNode.style.display = "none";
+        contextMenu.style.display = "none";
   	  } else if (checkLinkAndTargetInTash) {
   		  // just display Delete button.
   		deleteAction.parentNode.style.display = "block";
