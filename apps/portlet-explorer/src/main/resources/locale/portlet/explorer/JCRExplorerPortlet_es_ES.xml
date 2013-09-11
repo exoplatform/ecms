@@ -1347,7 +1347,7 @@
       <e_8192>Check in</e_8192>
       <e_16384>Check out</e_16384>
       <e_32768>Restore</e_32768>
-      <e_65536>Merge</e_65536>
+      <e_65536>Unir</e_65536>
       <e_131072>Cancel Merge</e_131072>
       <e_262144>Done Merge</e_262144>
       <e_524288>Add Version Label</e_524288>
@@ -1634,8 +1634,8 @@
   -->
   <UISelectDocumentForm>
     <label>
-      <selectTemplate>Select your template from the list below</selectTemplate>
-      <ThumbnailView>Thumbnail View</ThumbnailView>
+      <selectTemplate>Seleccione la plantilla en la lista de abajo</selectTemplate>
+      <ThumbnailView>Vista en miniatura</ThumbnailView>
       <ListView>Vista de la lista</ListView>
       <Cancel>#{word.cancel}</Cancel>
     </label>
@@ -1646,29 +1646,29 @@
   #######################################################################
   -->
   <UIDocumentForm>
-    <title>Add New Document</title>
+    <title>Añadir Nuevo Documento</title>
     <action>
-      <Save>Save</Save>
-      <SaveAndClose>Save &amp; Close</SaveAndClose>
-      <ChangeType>Change Content Type</ChangeType>
-      <Fullscreen>Fullscreen</Fullscreen>
+      <Save>Guardar</Save>
+      <SaveAndClose>Guardar &amp; cerrar</SaveAndClose>
+      <ChangeType>Cambiar el tipo de contenido</ChangeType>
+      <Fullscreen>Pantalla completa</Fullscreen>
       <Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
     </action>
 <tooltip>
-<FullScreen>Maximize/Minimize</FullScreen>
+<FullScreen>Maximizar/Minimizar</FullScreen>
 </tooltip>
     <msg>
-      <cannot-save>An error occurred while saving the document.</cannot-save>
-      <in-versioning>Please check out the current node before adding a new node.</in-versioning>
+      <cannot-save>Error al guardar el documento.</cannot-save>
+      <in-versioning>Por favor revise el nodo actual antes de agregar un nuevo nodo.</in-versioning>
       <not-support>No se puede cargar la plantilla de '{0}'.</not-support>
-      <value-invalid>'{0}' is a needed value.</value-invalid>
-      <repository-exception>An error occurred while saving the document.</repository-exception>
+      <value-invalid>'{0}' es un valor necesario.</value-invalid>
+      <repository-exception>Error al guardar el documento.</repository-exception>
       <!--DMS 2.4.x; ECM-3543-->
-      <repository-exception-permission>You do not have permission to add a new document to this node.</repository-exception-permission>
-      <not-allowed-same-name-sibling>You cannot save this document. It is not allowed to have the same name as its sibling.</not-allowed-same-name-sibling>
-      <numberformat-exception>You cannot save this document. The name provided must be in numerical format.</numberformat-exception>
-      <item-not-found>Item not found. This node (or its ancestor) may have been deleted. Please click the Refresh button.</item-not-found>
+      <repository-exception-permission>No tiene permiso para añadir un nuevo documento en este nodo.</repository-exception-permission>
+      <not-allowed-same-name-sibling>No puede guardar este documento. No puede tener el mismo nombre que su hermano.</not-allowed-same-name-sibling>
+      <numberformat-exception>No se puede guardar este documento. El nombre proporcionado debe estar en formato numérico.</numberformat-exception>
+      <item-not-found>No se ha encontrado el elemento. Tal vez se eliminó este nodo o su ancestro. Por favor haga clic en el botón de Actualizar.</item-not-found>
     </msg>
   </UIDocumentForm>
   <!--
@@ -1679,7 +1679,7 @@
   <UIViewDocumentController>
     <tab>
       <label>
-        <UIViewDocumentInfo>Information</UIViewDocumentInfo>
+        <UIViewDocumentInfo>Información</UIViewDocumentInfo>
       </label>
     </tab>
     <action>
@@ -1697,9 +1697,9 @@
   #############################################################################
   -->
   <UIQuerySaveForm>
-    <title>Save Query Form</title>
+    <title>Guardar Formulario de Consulta</title>
     <label>
-      <query>Query</query>
+      <query>Consulta</query>
       <name>Nombre de la Consulta</name>
     </label>
     <action>
@@ -1714,8 +1714,8 @@
   -->
   <editActionPopup>
     <title>
-      <UIActionForm>Edit Action</UIActionForm>
-      <EditFormAction>Edit Action</EditFormAction>
+      <UIActionForm>Editar acción</UIActionForm>
+      <EditFormAction>Editar acción</EditFormAction>
     </title>
   </editActionPopup>
   <UIActionViewContainer>
@@ -1726,23 +1726,23 @@
   <UIActionList>
     <header>
       <name>#{word.name}</name>
-      <description>Description</description>
-  <lifecycle>Life Cycle</lifecycle>
-  <triggeredaction>Triggered Action</triggeredaction>
-      <instanceOf>Instance of Action Type</instanceOf>
-      <action>Action</action>
+      <description>Descripción</description>
+  <lifecycle>Ciclo de vida</lifecycle>
+  <triggeredaction>Acción desencadenada</triggeredaction>
+      <instanceOf>Instancia del tipo de acción</instanceOf>
+      <action>Acción</action>
     </header>
     <msg>
       <remove-popup-first>Debe cerrar la ventana emergente antes de eliminar este nodo.</remove-popup-first>
       <confirm-delete-action>¿Estás seguro de eliminar esta acción?</confirm-delete-action>
-      <template-empty>The '{0}' template is null or empty.</template-empty>
-      <template-null>The template is either null or you do not have permission to access this template.</template-null>
-      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
+      <template-empty>La plantilla de '{0}' es nula o está vacía.</template-empty>
+      <template-null>La plantilla o bien es nula o bien usted no tiene permiso para acceder a esta plantilla.</template-null>
+      <access-denied>Acceso denegado. No tiene suficientes permisos para realizar esta acción.</access-denied>
     </msg>
     <action>
       <Close>#{word.close}</Close>
-      <View>View</View>
-      <Edit>Edit</Edit>
+      <View>Ver</View>
+      <Edit>Editar</Edit>
       <Delete>Delete</Delete>
     </action>
   </UIActionList>
@@ -1767,7 +1767,7 @@
     </msg>
     <title>Add/Edit Action</title>
     <validator>
-      <validator>Validator</validator>
+      <validator>Validador</validator>
       <destPath>Con Ruta</destPath>
     </validator>
   </UIActionForm>
@@ -1980,12 +1980,12 @@
     <label>
       <workspaceName>Espacio de Trabajo</workspaceName>
       <rootNodeInfo>Ruta de Raíz</rootNodeInfo>
-      <rootPath>Root Path:</rootPath>
+      <rootPath>Ruta de Raíz</rootPath>
     </label>
   </UIWorkspaceList>
   <pathSelector>
     <title>
-      <UIOneNodePathSelector>Node Selector</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Selector de Nodo</UIOneNodePathSelector>
     </title>
   </pathSelector>
   <!--
@@ -1995,7 +1995,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>The email address is invalid.</Invalid-input>
+      <Invalid-input>El correo electrónico es inválido.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <UIFormInputSetWithAction>
@@ -2717,7 +2717,7 @@
 
   <UITagExplorer>
     <title>
-      <PublicTags>Tags</PublicTags>
+      <PublicTags>Etiquetas públicas</PublicTags>
       <EditPublicTags>Edit Tags</EditPublicTags>
       <PrivateTags>Tags</PrivateTags>
     </title>
@@ -2733,7 +2733,7 @@
       <title>
         <EditTag>Edit Tag</EditTag>
         <RemoveTag>Remove Tag</RemoveTag>
-        <AddTag>Add Tag</AddTag>
+        <AddTag>Agregar etiqueta</AddTag>
       </title>
     </action>
     <msg>
@@ -3047,11 +3047,11 @@
   <true>Cierto</true>
   <false>Falso</false>
   <Electronic>Electrónico</Electronic>
-  <Paper>Paper</Paper>
+  <Paper>Papel</Paper>
   <NONE>Ninguno</NONE>
   <CLASSIFIED>Clasificado</CLASSIFIED>
-  <UNCLASSIFIED>Unclassified</UNCLASSIFIED>
-  <NOCONTRACT>No Contract</NOCONTRACT>
+  <UNCLASSIFIED>Sin clasificar</UNCLASSIFIED>
+  <NOCONTRACT>Ningún Contrato</NOCONTRACT>
   <one-minute>Un Minuto</one-minute>
   <hourly>Por hora</hourly>
   <daily>Diario</daily>

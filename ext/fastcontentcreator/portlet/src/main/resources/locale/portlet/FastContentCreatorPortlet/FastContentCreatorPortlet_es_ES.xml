@@ -131,7 +131,7 @@
       <access-denied>Acceso denegado. No tiene permiso para acceder a esta plantilla.</access-denied>
     </msg>
     <validator>
-      <validator>Validator</validator>
+      <validator>Validador</validator>
       <destPath>Con Ruta</destPath>
     </validator>
   </UIFCCActionForm>
