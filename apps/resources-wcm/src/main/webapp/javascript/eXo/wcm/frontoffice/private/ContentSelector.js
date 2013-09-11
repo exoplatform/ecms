@@ -786,7 +786,7 @@
 			}
 		} else {
 			var icon_container = document.getElementById(eXo.ecm.Pager.tableName);    
-	    icons =  gj(icon_container).children("div.actionIconBox");    
+	    icons =  gj(icon_container).find("div.actionIconBox");    
 	    len = icons.length;		
 		}
 	  var records = len; 
@@ -818,9 +818,9 @@
 			}
 		} else {
 			var icons = null;   
-	    var icon_container = document.getElementById(eXo.ecm.Pager.tableName);    
-	    icons =  gj(icon_container).children("div.actionIconBox");    
-	    len = icons.length;		
+	    var icon_container = document.getElementById(eXo.ecm.Pager.tableName);
+	    icons =  gj(icon_container).find("div.actionIconBox");    
+	    len = icons.length;
 			for (var i = 0; i < len; i++) {
 				if (i < from-1 || i > to-1)  {   //from starts at 1 and icons table starts at 0. Need to shift 1
 					  icons[i].style.display = 'none';
@@ -1340,6 +1340,3 @@
 		ECS : eXo.ecm.ECS
 	};
 })(gj, wcm_utils);
-
-
-
