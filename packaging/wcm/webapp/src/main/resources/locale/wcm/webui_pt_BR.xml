@@ -428,13 +428,13 @@
   
   <CategoryNavigationTemplate>
   <label>
-  <home>Home</home>
+  <home>Principal</home>
   </label>
   </CategoryNavigationTemplate>
   
   <Breadcrumb>
   <label>
-  <home>Home</home>
+  <home>Principal</home>
   </label>  
   </Breadcrumb>
 </bundle>

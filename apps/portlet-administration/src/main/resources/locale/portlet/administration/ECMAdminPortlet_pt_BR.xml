@@ -20,7 +20,7 @@
       <UINamespaceManager>Namespaces</UINamespaceManager>
       <UINodeTypeManager>Node Types</UINodeTypeManager>
       <UITemplatesManager>Documents</UITemplatesManager>
-   <UICLVTemplatesManager>List</UICLVTemplatesManager>
+   <UICLVTemplatesManager>Lista</UICLVTemplatesManager>
       <UIViewManager>Views</UIViewManager>
       <UIDriveManager>Drives</UIDriveManager>
       <UIQueriesManager>Queries</UIQueriesManager>
@@ -948,7 +948,7 @@
       <editDocument>Edit Document</editDocument>
       <upload>Enviar</upload>
       <paste>Paste</paste>
-      <search>Search</search>
+      <search>Buscar</search>
       <viewReferences>View References</viewReferences>
       <viewNodeType>View Node Type</viewNodeType>
       <viewPermissions>View Permissions</viewPermissions>
