@@ -34,7 +34,7 @@
       <verygood>Average</verygood>
       <excellent>Above average</excellent>
       <best>Good</best>
-      <no-value>no value yet</no-value>
+      <no-value>nenhum valor ainda</no-value>
     </title>
     <label>
       <my-rating>My Rating:</my-rating>
@@ -270,7 +270,7 @@
       <Search>Search</Search>
       <WatchDocument>Watch/Unwatch</WatchDocument>
       <TaggingDocument>Tag</TaggingDocument>
-      <Vote>Vote</Vote>
+      <Vote>Votar para esse documento</Vote>
       <Comment>Comment</Comment>
       <ManageVersions>Versions</ManageVersions>
       <ManageAuditing>Audit</ManageAuditing>
@@ -604,7 +604,7 @@
       <UIPublishingPanel>Publication Pane</UIPublishingPanel>
       <UIPublicationPanel>Revisão</UIPublicationPanel>
       <UIPublicationSchedule>Scheduled</UIPublicationSchedule>
-      <UIPublicationPagesContainer>Pages</UIPublicationPagesContainer>
+      <UIPublicationPagesContainer>Páginas</UIPublicationPagesContainer>
       <UIPublicationHistory>History</UIPublicationHistory>
       <UIVersionViewer>Version Viewer</UIVersionViewer>
 
@@ -1077,7 +1077,7 @@
       <containPro-Contain>Contain</containPro-Contain>
       <notContainPro-properties>Property</notContainPro-properties>
       <notContainPro-notContain>Not Contain</notContainPro-notContain>
-      <ConstraintOption-From>From</ConstraintOption-From>
+      <ConstraintOption-From>De</ConstraintOption-From>
       <ConstraintOption-To>To</ConstraintOption-To>
       <DocumentType-label>Document Type</DocumentType-label>
       <Category-label>Category</Category-label>
@@ -1361,7 +1361,7 @@
       <operation>Operation</operation>
       <userName>Nome do usuário</userName>
       <date>Date</date>
-      <version>Version</version>
+      <version>Versão</version>
     </label>
   </UIAuditingInfo>
 
@@ -1958,7 +1958,7 @@
       <published>Published</published>
       <non-published>Unpublished</non-published>
       <public>Public</public>
-      <private>Private</private>
+      <private>Privado</private>
       <state>State</state>
       <visibility>Visibility</visibility>
       <nodeName>Node Name:</nodeName>
@@ -2925,7 +2925,7 @@
       <to>To</to>
     </scheduled>
     <title>
-      <preview>Preview</preview>
+      <preview>Prévia</preview>
       <restore>Restore</restore>
     </title>
     <msg>
@@ -3054,7 +3054,7 @@
   <NOCONTRACT>No Contract</NOCONTRACT>
   <one-minute>One Minute</one-minute>
   <hourly>Hourly</hourly>
-  <daily>Daily</daily>
+  <daily>Diariamente</daily>
   <quarterly>Quarterly</quarterly>
   <yearly>Yearly</yearly>
   <ten-years>Ten Years</ten-years>
@@ -3101,7 +3101,7 @@
     <in>in</in>
     <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
     <Waiting>Waiting</Waiting>
-    <Error>Error</Error>
+    <Error>Erro</Error>
     <or>or</or>
     <AlreadyInUse>Already in use</AlreadyInUse>
     <Keep>Keep both</Keep>
@@ -3121,7 +3121,7 @@
   </UIDocumentNodeList>
   <FileView>
     <label>
-      <name>Name</name>
+      <name>Nome</name>
       <date>Data</date>
       <size>Size</size>
       <sortBy>Sort by:</sortBy>

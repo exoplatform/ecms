@@ -34,7 +34,7 @@
 
   <Drives>
     <label>
-      <ManagedSites>Sites Management</ManagedSites>
+      <ManagedSites>Gerenciamento de Sites</ManagedSites>
       <SharedSite>Shared Site</SharedSite>
     </label>
   </Drives>
@@ -84,7 +84,7 @@
       <UIContentBrowsePanelMulti>Content Browser</UIContentBrowsePanelMulti>
       <UIContentBrowsePanelFolder>Folder Browser</UIContentBrowsePanelFolder>
       <UIContentSearchForm>Content Search Form</UIContentSearchForm>
-      <UIContentSearchResult>Search Result</UIContentSearchResult>
+      <UIContentSearchResult>Resultado da busca</UIContentSearchResult>
       <UIContentViewer>Preview Content</UIContentViewer>
       <WebContentMetadataPopup>Property Selector</WebContentMetadataPopup>
       <WebContentNodeTypePopup>Nodetype Selector</WebContentNodeTypePopup>
@@ -422,7 +422,7 @@
   </UIDocumentInfo>
   <UIPortalApplication>
     <title>
-      <abort>Abort</abort>
+      <abort>Cancelar</abort>
     </title>
   </UIPortalApplication>    
   
