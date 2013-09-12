@@ -419,7 +419,7 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
 			  LOG.info("=====Start to migrate taxonomy actions=====");
 		  }
 		  String statement = 
-				  "select * from exo:taxonomyAction where (exo:targetPath like '%/sites content/live/%' or exo:storeHomePath like '%/sites content/live/%')";
+				  "select * from exo:taxonomyAction where (exo:targetPath like '%/sites content/live/%' or exo:targetPath like '%/sites/{portalName}/%' or exo:storeHomePath like '%/sites content/live/%' or exo:storeHomePath like '%/sites/{portalName}/%')";
 		  QueryResult result = session.getWorkspace().getQueryManager().createQuery(statement, Query.SQL).execute();
 		  NodeIterator nodeIter = result.getNodes();
 		  while(nodeIter.hasNext()) {
