@@ -19,7 +19,7 @@
       <UIMetadataManager>Metadata</UIMetadataManager>
       <UINamespaceManager>Namespaces</UINamespaceManager>
       <UINodeTypeManager>Node Types</UINodeTypeManager>
-      <UITemplatesManager>Documents</UITemplatesManager>
+      <UITemplatesManager>Documentos</UITemplatesManager>
    <UICLVTemplatesManager>Lista</UICLVTemplatesManager>
       <UIViewManager>Views</UIViewManager>
       <UIDriveManager>Drives</UIDriveManager>
@@ -243,7 +243,7 @@
     <header>
       <icon>Icon</icon>
       <name>Metadata</name>
-      <type>Type</type>
+      <type>Tipo</type>
       <internalUse>Internal Use</internalUse>
       <action>Actions</action>
     </header>
@@ -725,7 +725,7 @@
   <UIActionTypeList>
     <header>
       <name>Script</name>
-      <label>Name</label>
+      <label>Nome</label>
 <action>Actions</action>
     </header>
     <action>
@@ -784,7 +784,7 @@
       <UIViewTab>View</UIViewTab>
       <UITemplateEditForm>Template</UITemplateEditForm>
       <UITemplateForm>Template</UITemplateForm>
-      <UITemplateContainer>Documents</UITemplateContainer>
+      <UITemplateContainer>Documentos</UITemplateContainer>
       <UIActionsTemplateContainer>Actions</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Others</UIOthersTemplateContainer>
   <UIActionScriptContainer>Ação</UIActionScriptContainer>
@@ -922,7 +922,7 @@
       <view-exist>The view name already exists.</view-exist>
     </msg>
     <label>
-      <viewName>Name</viewName>
+      <viewName>Nome</viewName>
       <template>Modelo</template>
 <version>Restore Version</version>
       <enableVersion>Enable Version</enableVersion>
@@ -937,7 +937,7 @@
     </msg>
     <label>
       <version>Restore Version</version>
-      <viewName>Name</viewName>
+      <viewName>Nome</viewName>
       <tabName>Tab Name</tabName>
       <permission>Permissão</permission>
       <tabs>Tabs</tabs>
@@ -1198,7 +1198,7 @@
     <label>
       <selectVersion>Versions</selectVersion>
       <scriptContent>Conteúdo</scriptContent>
-      <scriptLabel>Name</scriptLabel>
+      <scriptLabel>Nome</scriptLabel>
       <scriptName>Script</scriptName>
       <enableVersion>Enable Versioning</enableVersion>
     </label>
@@ -1213,7 +1213,7 @@
     <label>
       <selectVersion>Versions</selectVersion>
       <scriptContent>Content</scriptContent>
-      <scriptLabel>Name</scriptLabel>
+      <scriptLabel>Nome</scriptLabel>
       <scriptName>Script</scriptName>
       <enableVersion>Enable Versioning</enableVersion>
     </label>
@@ -1433,7 +1433,7 @@
     <title>
       <SelectUser>Select User</SelectUser>
       <SelectMember>Select Membership</SelectMember>
-      <AddAny>Everyone</AddAny>
+      <AddAny>Todos</AddAny>
     </title>
   </permission>
   <!--
@@ -1566,7 +1566,7 @@
 
   <UICLVTemplateList>
     <header>
-      <title>Name</title>
+      <title>Nome</title>
       <action>Ação</action>
       <template>Modelo</template>
     </header>
@@ -1585,7 +1585,7 @@
 
 <CateTemplateList>
     <header>
-      <title>Name</title>
+      <title>Nome</title>
       <action>Ação</action>
       <template>Modelo</template>
     </header>
@@ -1598,7 +1598,7 @@
 
 <PageTemplateList>
     <header>
-      <title>Name</title>
+      <title>Nome</title>
       <action>Ação</action>
       <template>Modelo</template>
     </header>
@@ -1652,7 +1652,7 @@
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
- <title>Name</title>
+ <title>Nome</title>
 <template>Template Name</template>
 <content>Conteúdo</content>
 <type>Template Type</type>
@@ -1666,7 +1666,7 @@
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
- <title>Name</title>
+ <title>Nome</title>
 <template>Template Name</template>
 <content>Conteúdo</content>
 <type>Template Type</type>
@@ -1680,7 +1680,7 @@
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
- <title>Name</title>
+ <title>Nome</title>
 <template>Template Name</template>
 <content>Conteúdo</content>
 <type>Template Type</type>
