@@ -1669,7 +1669,7 @@ public class UIDialogForm extends UIForm {
             + "onclick=\"javascript:eXo.webui.UIForm.submitEvent('" + "" + getId()
             + "','ShowComponent','&objectId=" + fieldName + "' )\"><i"
             + " class='"
-            + iconClass + "'></i></a>");
+            + iconClass + " uiIconLightGray'></i></a>");
         /* No need Remove action if uiInput is UIFormMultiValueInputSet */
         if (!UIFormMultiValueInputSet.class.isInstance(uiInput))
           w.write("<a rel=\"tooltip\" data-placement=\"bottom\" class=\"actionIcon\" title=\""
