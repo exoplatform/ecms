@@ -11,6 +11,7 @@ import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.cms.impl.Utils;
 
 import javax.jcr.ItemNotFoundException;
+import javax.jcr.RepositoryException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
@@ -61,8 +62,12 @@ public class ActivitiesUpgradePlugin extends UpgradeProductPlugin {
           try {
             Node node = (Node)session2.getNodeByUUID(nodeUUID);
             if(node.isNodeType(NodetypeConstant.NT_FILE)) {
+
+
               if(Utils.isInTrash(node)) { 
-                viewNode.remove();
+		removeActivityReferences(viewNode);                
+		viewNode.remove();
+		
               }
               else {
                 viewNode.setProperty("soc:type", "files:spaces");
@@ -88,6 +93,15 @@ public class ActivitiesUpgradePlugin extends UpgradeProductPlugin {
       }
     }
 		
+	}
+
+        private void removeActivityReferences(Node activity) throws RepositoryException {
+		String statement = "SELECT * FROM soc:activityref WHERE soc:target = '"+activity.getUUID()+"'";
+		QueryResult result = activity.getSession().getWorkspace().getQueryManager().createQuery(statement, Query.SQL).execute();
+		NodeIterator nodeIter = result.getNodes();
+		while(nodeIter.hasNext()) {
+			nodeIter.nextNode().remove();
+		}
 	}
 
 	@Override
