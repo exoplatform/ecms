@@ -33,17 +33,14 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.event.Event;
 
 @ComponentConfig(
-                 events = { @EventConfig(
-                                         listeners = ConnectGoogleDriveActionComponent.ConnectGoogleDriveActionListener.class) })
-public class ConnectGoogleDriveActionComponent extends BaseCloudDriveManagerComponent {
+                 events = { @EventConfig(listeners = ConnectBoxActionComponent.ConnectBoxActionListener.class) })
+public class ConnectBoxActionComponent extends BaseCloudDriveManagerComponent {
 
-  protected static final Log LOG = ExoLogger.getLogger(ConnectGoogleDriveActionComponent.class);
+  protected static final Log LOG = ExoLogger.getLogger(ConnectBoxActionComponent.class);
 
-  public static class ConnectGoogleDriveActionListener
-                                                      extends
-                                                      UIActionBarActionListener<ConnectGoogleDriveActionComponent> {
+  public static class ConnectBoxActionListener extends UIActionBarActionListener<ConnectBoxActionComponent> {
 
-    public void processEvent(Event<ConnectGoogleDriveActionComponent> event) throws Exception {
+    public void processEvent(Event<ConnectBoxActionComponent> event) throws Exception {
     }
   }
 
@@ -55,8 +52,8 @@ public class ConnectGoogleDriveActionComponent extends BaseCloudDriveManagerComp
     CloudDriveService drivesService = WCMCoreUtils.getService(CloudDriveService.class);
     if (drivesService != null) {
       try {
-        // XXX gdrive - Google Drive id from configuration
-        CloudProvider provider = drivesService.getProvider("gdrive");
+        // XXX box - Box id from configuration
+        CloudProvider provider = drivesService.getProvider("box");
 
         initContext();
 
@@ -70,7 +67,7 @@ public class ConnectGoogleDriveActionComponent extends BaseCloudDriveManagerComp
         return "javascript:void(0);//" + provider.getId() + "//objectId";
       } catch (ProviderNotAvailableException e) {
         // if no such provider, cannot do anything - default link
-        LOG.error("Error rendering Connect to Google Drive component: " + e.getMessage());
+        LOG.error("Error rendering Connect to Box component: " + e.getMessage());
         return super.renderEventURL(ajax, name, beanId, params);
       }
     } else {
@@ -84,6 +81,6 @@ public class ConnectGoogleDriveActionComponent extends BaseCloudDriveManagerComp
    */
   @Override
   public String getName() {
-    return "Connect your Google Drive";
+    return "Connect your Box files";
   }
 }

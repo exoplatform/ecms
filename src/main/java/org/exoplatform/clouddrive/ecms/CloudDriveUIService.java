@@ -39,11 +39,11 @@ import org.picocontainer.Startable;
  */
 public class CloudDriveUIService implements Startable {
 
-  private static final Log         LOG                        = ExoLogger.getLogger(CloudDriveUIService.class);
+  private static final Log           LOG                        = ExoLogger.getLogger(CloudDriveUIService.class);
 
   protected static final String      EXO_BUTTONS                = "exo:buttons";
 
-  public static final String       CONNECT_CLOUD_DRIVE_ACTION = "add.connect.clouddrive.action";
+  public static final String         CONNECT_CLOUD_DRIVE_ACTION = "add.connect.clouddrive.action";
 
   protected final RepositoryService  jcrService;
 
@@ -54,10 +54,10 @@ public class CloudDriveUIService implements Startable {
   protected final UIExtensionManager uiExtensions;
 
   protected final List<String>       VIEWS                      = Arrays.asList("List/List",
-                                                                              "Admin/Admin",
-                                                                              "Web/Authoring",
-                                                                              "Icons/Icons",
-                                                                              "Categories/Collaboration");
+                                                                                "Admin/Admin",
+                                                                                "Web/Authoring",
+                                                                                "Icons/Icons",
+                                                                                "Categories/Collaboration");
 
   public CloudDriveUIService(RepositoryService repoService,
                              CloudDriveService driveService,
@@ -75,6 +75,8 @@ public class CloudDriveUIService implements Startable {
     for (UIExtension ext : uiExtensions.getUIExtensions(ManageViewService.EXTENSION_TYPE)) {
       if (ConnectGoogleDriveActionComponent.class.isAssignableFrom(ext.getComponent())) {
         cdActions.add(ext.getName());
+      } else if (ConnectBoxActionComponent.class.isAssignableFrom(ext.getComponent())) {
+        cdActions.add(ext.getName());
       }
     }
 
@@ -82,7 +84,7 @@ public class CloudDriveUIService implements Startable {
     try {
       Session session = jcrSessions.getSession("dms-system", jcrService.getCurrentRepository());
       for (String view : VIEWS) {
-        Node listNode = manageView.getViewByName(view, jcrSessions); 
+        Node listNode = manageView.getViewByName(view, jcrSessions);
         StringBuilder newActions = new StringBuilder();
         if (listNode.hasProperty(EXO_BUTTONS)) {
           String[] actions = listNode.getProperty(EXO_BUTTONS).getString().split(";");

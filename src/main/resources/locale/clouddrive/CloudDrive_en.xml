@@ -10,9 +10,14 @@
       <ShowConnectCloudDrive>Connect Cloud Documents</ShowConnectCloudDrive>
     </tooltip>
   </UIActionBar>
-    <UIActionBar>
+  <UIActionBar>
     <tooltip>
       <ConnectGoogleDrive>Connect your Google Drive</ConnectGoogleDrive>
+    </tooltip>
+  </UIActionBar>
+  <UIActionBar>
+    <tooltip>
+      <ConnectBox>Connect your Box files</ConnectBox>
     </tooltip>
   </UIActionBar>
   <ECMContextMenu>
