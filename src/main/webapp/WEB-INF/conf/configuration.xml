@@ -45,7 +45,7 @@
   <component>
     <type>org.exoplatform.clouddrive.rest.DriveService</type>
   </component>
-  
+
   <component>
     <type>org.exoplatform.clouddrive.rest.DriveServiceLocator</type>
   </component>
@@ -128,9 +128,9 @@
       <init-params>
         <properties-param>
           <name>namespaces</name>
-          <property name="ecd" value="http://www.exoplatform.com/jcr/clouddrive/1.0/"/>
-          <property name="gdrive" value="http://www.exoplatform.com/jcr/googledrive/1.0/"/>
-          <property name="box" value="http://www.exoplatform.com/jcr/boxplatform/1.0/"/>
+          <property name="ecd" value="http://www.exoplatform.com/jcr/clouddrive/1.0/" />
+          <property name="gdrive" value="http://www.exoplatform.com/jcr/googledrive/1.0/" />
+          <property name="box" value="http://www.exoplatform.com/jcr/boxplatform/1.0/" />
         </properties-param>
       </init-params>
     </component-plugin>
@@ -158,11 +158,26 @@
       <init-params>
         <properties-param>
           <name>drive-configuration</name>
-          <property name="provider-id" value="gdrive"/>
-          <property name="provider-name" value="Google Drive"/>
-          <property name="provider-client-id" value="${clouddrive.google.client.id}"/>
-          <property name="provider-client-secret" value="${clouddrive.google.client.secret}"/>
-          <property name="connector-host" value="${clouddrive.service.host}"/>
+          <property name="provider-id" value="gdrive" />
+          <property name="provider-name" value="Google Drive" />
+          <property name="provider-client-id" value="${clouddrive.google.client.id}" />
+          <property name="provider-client-secret" value="${clouddrive.google.client.secret}" />
+          <property name="connector-host" value="${clouddrive.service.host}" />
+        </properties-param>
+      </init-params>
+    </component-plugin>
+    <component-plugin>
+      <name>add.clouddriveprovider</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.clouddrive.box.BoxConnector</type>
+      <init-params>
+        <properties-param>
+          <name>drive-configuration</name>
+          <property name="provider-id" value="box" />
+          <property name="provider-name" value="Box" />
+          <property name="provider-client-id" value="${clouddrive.box.client.id}" />
+          <property name="provider-client-secret" value="${clouddrive.box.client.secret}" />
+          <property name="connector-host" value="${clouddrive.service.host}" />
         </properties-param>
       </init-params>
     </component-plugin>
