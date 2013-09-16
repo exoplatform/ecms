@@ -419,15 +419,21 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
 			  LOG.info("=====Start to migrate taxonomy actions=====");
 		  }
 		  String statement = 
-				  "select * from exo:taxonomyAction where (exo:targetPath like '%/sites content/live/%' or exo:storeHomePath like '%/sites content/live/%')";
+				  "select * from exo:taxonomyAction where (exo:targetPath like '%/sites content/live/%' or exo:targetPath like '%/sites/{portalName}/%' or exo:storeHomePath like '%/sites content/live/%' or exo:storeHomePath like '%/sites/{portalName}/%')";
 		  QueryResult result = session.getWorkspace().getQueryManager().createQuery(statement, Query.SQL).execute();
 		  NodeIterator nodeIter = result.getNodes();
 		  while(nodeIter.hasNext()) {
 			  Node taxoAction = nodeIter.nextNode();
-			  String targetPath = taxoAction.getProperty("exo:targetPath").getString();
-			  String homePath = taxoAction.getProperty("exo:storeHomePath").getString();
-			  taxoAction.setProperty("exo:targetPath", StringUtils.replace(targetPath, "/sites content/live/", "/sites/"));
-			  taxoAction.setProperty("exo:storeHomePath", StringUtils.replace(homePath, "/sites content/live/", "/sites/"));
+        String targetPath = taxoAction.getProperty("exo:targetPath").getString();
+        targetPath = updateParam(taxoAction.getPath(), targetPath, "{portalName}");
+        targetPath = updateParam(taxoAction.getPath(), targetPath, "{treeName}");
+        taxoAction.setProperty("exo:targetPath", StringUtils.replace(targetPath, "/sites content/live/", "/sites/"));
+        
+        String homePath = taxoAction.getProperty("exo:storeHomePath").getString();
+        homePath = updateParam(taxoAction.getPath(), homePath, "{portalName}");
+        homePath = updateParam(taxoAction.getPath(), homePath, "{treeName}");
+        taxoAction.setProperty("exo:storeHomePath", StringUtils.replace(homePath, "/sites content/live/", "/sites/"));
+        taxoAction.save();
 		  }
 		  session.save();
 		  if (LOG.isInfoEnabled()) {
@@ -443,6 +449,18 @@ public class SanitizationUpgradePlugin extends UpgradeProductPlugin {
 		  }
 	  }
   }
+  
+  private String updateParam(String nodePath, String src, String param) {
+    if (src.contains(param)) {
+      int length = "/sites/".length();
+      String siteName = nodePath.substring(length);
+      int index = siteName.indexOf("/");
+      siteName = siteName.substring(0, index);
+      return src.replace(param, siteName);
+    } else {
+      return src;
+    }
+  }  
   
   /**
    * Migrate preference 'Drive name' of site explorer portlet which should be changed to Collaboration instead of collaboration"
