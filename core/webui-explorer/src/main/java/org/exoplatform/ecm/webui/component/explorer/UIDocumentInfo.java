@@ -1783,5 +1783,58 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   public List<Node> getChildrenFromNode(Node node) {
     return null;
   }
+  
+  /** get node attribute in Icons View & Web View **/
+  public String getNodeAttributeInView(Node node) throws Exception {
+    String preferenceWS = node.getSession().getWorkspace().getName();
+    String attr = getNodeAttributeInCommon(node);
+    StringBuilder builder = new StringBuilder(attr);
+    String rightClickMenu = "";
+    // right click menu in Icon View
+    if(!isSystemWorkspace()) 
+        rightClickMenu = "" + getContextMenu().getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(node.getPath()), getActionsList(node));
+    
+    builder.append(rightClickMenu);
+    return builder.toString();
+  }
+  
+  /** get node attribute in Admin View **/
+  public String getNodeAttribute(Node node) throws Exception {
+    StringBuilder builder = new StringBuilder();
+    String preferenceWS = node.getSession().getWorkspace().getName();
+    
+    builder.append(getNodeAttributeInCommon(node));
+    
+    // right click menu in Admin View
+    if (!isSystemWorkspace()) {
+      builder.append(" onmousedown=\"eXo.ecm.UIFileView.clickRightMouse(event, this, 'ECMContextMenu','");
+      builder.append(preferenceWS + ":");
+      builder.append(Utils.formatNodeName(node.getPath()) + "','" );
+      builder.append(getActionsList(node) + "');\"");
+    }
+    return builder.toString();
+  }
+  
+  /** get Attribute in common. */
+  private String getNodeAttributeInCommon(Node node) throws Exception {
+    StringBuilder builder = new StringBuilder();
+    String preferenceWS = node.getSession().getWorkspace().getName();
+    
+    // drag and drop events
+    builder.append(" " + getDragAndDropEvents(node));
+    // in common
+    builder.append(" trashHome='" + Utils.isTrashHomeNode(node) + "' "); 
+    builder.append(" locked='" + node.isLocked() + "' ");
+    builder.append(" mediaType='" + isMediaType(node) + "' ");
+    builder.append(" removeFavourite='" + isFavouriter(node) + "' ");
+    builder.append(" inTrash='" + node.isNodeType("exo:restoreLocation") + "' ");
+    builder.append(" workspacename='" + preferenceWS + "' ");
+    builder.append(" objectId='" + org.exoplatform.services.cms.impl.Utils.getObjectId(node.getPath()) + "' ");
+    builder.append(" isFile='" + node.isNodeType("nt:file") + "' ");
+    builder.append(" isLinkWithTarget='" + Utils.targetNodeAndLinkInTrash(node) + "' ");
+    builder.append(" isExoAction='" + (Utils.EXO_ACTIONS.equals(node.getName()) && Utils.isInTrash(node)) + "' ");
+    
+    return builder.toString();
+  }
 
 }

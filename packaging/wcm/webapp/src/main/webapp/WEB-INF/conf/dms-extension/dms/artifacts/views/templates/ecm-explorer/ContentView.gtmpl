@@ -323,28 +323,17 @@
             strActs += "</li>";
           }
           strActs += "</ul></li>";
-          def rightClickMenu = "" ;
           Boolean isLocked = false;
           String lockedLabel = "";
-          String isFavourite = "false";
-          String isInTrash = "false";
-          String isMediaType = "false";
-          String isTrashHome = "false";
           String hiddenStyle = (data.isNodeType("exo:hiddenable"))?"color: #A0A0A0;":"";
           if (data.isLocked()) {
             isLocked = true;
             lockedLabel  = "("+_ctx.appRes("UIDocumentWorkspace.tooltip.LockedBy")+" "+data.getLock().getLockOwner()+")";
           }
-          if (uicomponent.isFavouriter(data)) isFavourite = "true";
-          if (data.isNodeType("exo:restoreLocation")) isInTrash = "true";
-          if (uicomponent.isMediaType(data)) isMediaType = "true";
-          if (Utils.isTrashHomeNode(data)) isTrashHome = "true"
-          if (!uicomponent.isSystemWorkspace()) rightClickMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(nodePath), uiWorkingArea.getActionsExtensionList(data)) ;            
           %>
-            <div <%= uicomponent.getDragAndDropEvents(data) %>  <%=rightClickMenu%> class="rowView $oddEvenClassRow clearfix" trashHome="$isTrashHome" locked="$isLocked" 
-                 mediaType="$isMediaType" removeFavourite="$isFavourite" inTrash="$isInTrash" workspacename="$preferenceWS" 
-                 ondblclick="$actionLink" isFile="<%=data.isNodeType("nt:file")%>" 
-                 objectId="<%=org.exoplatform.services.cms.impl.Utils.getObjectId(nodePath)%>" 
+            <div <%= uicomponent.getNodeAttributeInView(data) %> class="rowView $oddEvenClassRow clearfix" 
+                  
+                 ondblclick="$actionLink"
                  >$strActs
               <div class="columnIcon" style="width: 20px;">
                 <div rel="tooltip" data-placement="bottom" title="$name" class="<%=Utils.getNodeTypeIcon(data, "uiIcon16x16")%>">
