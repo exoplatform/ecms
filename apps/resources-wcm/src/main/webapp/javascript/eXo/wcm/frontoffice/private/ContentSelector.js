@@ -989,8 +989,15 @@
          var height = newImg.height;
          var width = newImg.width;
 
-         var parent = window.opener.document;
-
+         var document = window.opener.document;
+         var parentClassName = ".cke_editor_"+eXo.ecm.ECS.currentEditor.name+"_dialog";
+         var parent = null;
+         
+         gj(document).find(parentClassName).each(function(index) {
+		 if(gj(this).css('display')=='block') {
+			 parent = this;
+		 }
+	 });
          gj(parent).find("div[name*='info']").find("input").each(function(index) {
 	   if(index==0) {
    	     this.src = url;
@@ -1002,8 +1009,8 @@
 	     this.value = height;
 	   }
 	 });
-         parent.getElementById(eXo.ecm.ECS.components).src=url;
-         parent.getElementById(eXo.ecm.ECS.components).style.display="block";
+         document.getElementById(eXo.ecm.ECS.components).src=url;
+         document.getElementById(eXo.ecm.ECS.components).style.display="block";
          
          window.close();
          editor.OnAfterSetHTML = window.close();
