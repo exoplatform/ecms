@@ -10,9 +10,9 @@ def buttonActions = uicomponent.getButtonActions();
 def primaryButton = uicomponent.getPrimaryButtonAction();
 %>
 <div class="$uicomponent.id">
-		<div class="controls">
+		<div class="controls clearfix">
+			<div class="pull-right">
 			<%
-			uicomponent.renderChild(uicomponent.FIELD_USERORGROUP);
 			def actionField = uicomponent.getActionInfo(uicomponent.FIELD_USERORGROUP);
 			if(actionField != null && actionField.length > 0) {
 				for(i in 0..actionField.length -1) {
@@ -28,6 +28,12 @@ def primaryButton = uicomponent.getPrimaryButtonAction();
 			%>
 			     <button type="button" onclick="<%=uiForm.event(buttonAct) %>" class="$classbtn"><%=_ctx.appRes(uiForm.getName() + ".action." + buttonAct)%></button>
 		 <% } %>
+		 </div>
+		 <div class="PemissionInputset">
+		 <%
+		 	uicomponent.renderChild(uicomponent.FIELD_USERORGROUP);			
+		 %>
+		 </div>
 		</div>
     <div class="form-inline">
       <%
