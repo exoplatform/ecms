@@ -18,9 +18,8 @@
  */
 package org.exoplatform.clouddrive.rest;
 
-
 /**
- * Host management for Cloud Drive connections.<br>   
+ * Host management for Cloud Drive connections.<br>
  * 
  * Created by The eXo Platform SAS.
  * 
@@ -31,24 +30,64 @@ package org.exoplatform.clouddrive.rest;
 public class DriveServiceLocator {
 
   /**
-   * Base host name or <code>null</code> if base should be obtained from a request. 
+   * Base host name or <code>null</code> if base should be obtained from a request. This method can be
+   * overridden for context depended locators.
    * 
    * @return {@link String}
    */
   public String getBaseHost() {
     return null;
   }
-  
+
   /**
-   * Compile service host name from request host, optionally  taking in account context. 
+   * Compile service host name from given request's host, optionally taking in account context. This method
+   * can be overridden for context depended locators. See also {@link #isRedirect(String)}.
    * 
    * @param context {@link String}
-   * @param requestHost {@link String}
+   * @param requestURI {@link String}
    * @return {@link String}
    */
-  public String getServiceLink(String context, String requestHost) {
-    // ignore context 
-    return requestHost;
+  public String getServiceLink(String context, String requestURI) {
+    // ignore context
+    return requestURI;
+  }
+
+  /**
+   * Answers whether the request (to given host) should be redirected to its contextual link. See also
+   * {@link #getServiceLink(String, String)}.
+   * 
+   * @return boolean, <code>true</code> if request should be redirected, <code>false</code> otherwise.
+   */
+  public final boolean isRedirect(String requestHost) {
+    String baseHost = getBaseHost();
+    if (baseHost != null) {
+      return baseHost.equals(requestHost);
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * Return host name for given request URI.
+   * 
+   * @param requestHost {@link String}
+   * @return String with the host's domain name or empty string if it's <code>localhost</code>
+   */
+  public final String getServiceHost(String requestHost) {
+    String host = getBaseHost();
+    if (host == null) {
+      host = requestHost;
+    }
+    if (host.equalsIgnoreCase("localhost")) {
+      // empty host for localhost domain, see http://curl.haxx.se/rfc/cookie_spec.html
+      host = "";
+    }
+    // TODO cleanup
+    // int port = uriInfo.getRequestUri().getPort();
+    // if (port != 80 && port != 443) { // omit default ports
+    // host += ":" + port;
+    // }
+    return host;
   }
 
 }

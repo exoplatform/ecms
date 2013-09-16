@@ -16,7 +16,26 @@
  */
 package org.exoplatform.clouddrive.rest;
 
-import java.net.URI;
+import org.exoplatform.clouddrive.BaseCloudDriveListener;
+import org.exoplatform.clouddrive.CloudDrive;
+import org.exoplatform.clouddrive.CloudDrive.Command;
+import org.exoplatform.clouddrive.CloudDriveEvent;
+import org.exoplatform.clouddrive.CloudDriveException;
+import org.exoplatform.clouddrive.CloudDriveService;
+import org.exoplatform.clouddrive.CloudProvider;
+import org.exoplatform.clouddrive.CloudUser;
+import org.exoplatform.clouddrive.DriveRemovedException;
+import org.exoplatform.clouddrive.ProviderNotAvailableException;
+import org.exoplatform.clouddrive.UserAlreadyConnectedException;
+import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.security.ConversationState;
+
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
@@ -47,26 +66,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
-import org.exoplatform.clouddrive.BaseCloudDriveListener;
-import org.exoplatform.clouddrive.CloudDrive;
-import org.exoplatform.clouddrive.CloudDriveEvent;
-import org.exoplatform.clouddrive.CloudDriveException;
-import org.exoplatform.clouddrive.CloudDriveService;
-import org.exoplatform.clouddrive.CloudProvider;
-import org.exoplatform.clouddrive.CloudUser;
-import org.exoplatform.clouddrive.DriveRemovedException;
-import org.exoplatform.clouddrive.ProviderNotAvailableException;
-import org.exoplatform.clouddrive.UserAlreadyConnectedException;
-import org.exoplatform.clouddrive.CloudDrive.Command;
-import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.ext.app.SessionProviderService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.rest.resource.ResourceContainer;
-import org.exoplatform.services.security.ConversationState;
-
 /**
  * REST service responsible for connection of cloud drives to local JCR nodes. <br>
  * Handles following workflow:
@@ -91,6 +90,8 @@ public class ConnectService implements ResourceContainer {
   public static final String    ERROR_COOKIE           = "cloud-drive-error";
 
   public static final String    INIT_COOKIE            = "cloud-drive-init-id";
+
+  public static final String    INIT_COOKIE_PATH       = "/portal/rest/clouddrive/connect";
 
   /**
    * Init cookie expire time in seconds.
@@ -173,7 +174,7 @@ public class ConnectService implements ResourceContainer {
     ConnectResponse authError(String message, String host, String providerName, String initId, String baseHost) {
       if (initId != null) {
         // need reset previous cookie by expire time = 0
-        cookie(INIT_COOKIE, initId, "/", baseHost, "Cloud Drive init ID", 0, false);
+        cookie(INIT_COOKIE, initId, INIT_COOKIE_PATH, baseHost, "Cloud Drive init ID", 0, false);
       }
       cookie(ERROR_COOKIE, message, "/", host, "Cloud Drive connection error", ERROR_COOKIE_EXPIRE, false);
       super.entity("<!doctype html><html><head><script type='text/javascript'> setTimeout(function() {window.close();}, 4000);</script></head><body><div id='messageString'>"
@@ -213,9 +214,9 @@ public class ConnectService implements ResourceContainer {
 
     final CloudProvider provider;
 
-    final URI           host;
+    final String        host;
 
-    ConnectInit(String localUser, CloudProvider provider, URI host) {
+    ConnectInit(String localUser, CloudProvider provider, String host) {
       this.localUser = localUser;
       this.provider = provider;
       this.host = host;
@@ -226,29 +227,29 @@ public class ConnectService implements ResourceContainer {
    * Connect process record used in connect workflow. Also used to answer on state request.
    */
   class ConnectProcess extends BaseCloudDriveListener {
-    final CloudDrive        drive;
+    final CloudDrive drive;
 
-    final Command           process;
+    final Command    process;
 
-    final String            name;
+    final String     name;
 
-    final String            workspaceName;
+    final String     workspaceName;
 
-    final Lock              lock = new ReentrantLock();
+    final Lock       lock = new ReentrantLock();
 
-    Throwable               error;
+    Throwable        error;
 
     /**
      * ConversationState used by initail thread.
      */
-    //final ConversationState conversation;
+    // final ConversationState conversation;
 
     ConnectProcess(String name, String workspaceName, CloudDrive drive, ConversationState conversation) throws CloudDriveException,
         RepositoryException {
       this.drive = drive;
       this.name = name;
       this.workspaceName = workspaceName;
-      //this.conversation = conversation;
+      // this.conversation = conversation;
       this.drive.addListener(this); // listen to remove from active map
       this.process = drive.connect(true);
 
@@ -257,11 +258,11 @@ public class ConnectService implements ResourceContainer {
 
     void rollback() throws RepositoryException {
       // set correct user's ConversationState
-      //ConversationState.setCurrent(conversation);
+      // ConversationState.setCurrent(conversation);
       // set correct SessionProvider
-      //sessionProviders.setSessionProvider(null, new SessionProvider(conversation));
+      // sessionProviders.setSessionProvider(null, new SessionProvider(conversation));
 
-      //SessionProvider provider = new SessionProvider(conversation);
+      // SessionProvider provider = new SessionProvider(conversation);
       SessionProvider provider = sessionProviders.getSessionProvider(null);
       Session session = provider.getSession(workspaceName, jcrService.getCurrentRepository());
 
@@ -406,7 +407,7 @@ public class ConnectService implements ResourceContainer {
                                @CookieParam(INIT_COOKIE) Cookie initId) {
 
     ConnectResponse resp = new ConnectResponse();
-    String host = serviceHost(uriInfo);
+    String host = locator.getServiceHost(uriInfo.getRequestUri().getHost());
     if (connectId != null) {
       UUID cid = UUID.fromString(connectId.getValue());
       CloudUser user = authenticated.remove(cid);
@@ -415,136 +416,138 @@ public class ConnectService implements ResourceContainer {
       Node userNode = null;
       Node driveNode = null;
       if (user != null) {
-        try {
-          ConversationState convo = ConversationState.getCurrent();
-          if (convo == null) {
-            LOG.error("Error connect drive for user " + user.getEmail()
-                + ". User identity not set: ConversationState.getCurrent() is null");
-            return resp.connectError("User identity not set.", cid.toString(), host)
-                       .status(Status.INTERNAL_SERVER_ERROR)
-                       .build();
-          }
+        if (workspace != null) {
+          if (path != null) {
+            Session userSession = null;
+            try {
+              ConversationState convo = ConversationState.getCurrent();
+              if (convo == null) {
+                LOG.error("Error connect drive for user " + user.getEmail()
+                    + ". User identity not set: ConversationState.getCurrent() is null");
+                return resp.connectError("User identity not set.", cid.toString(), host)
+                           .status(Status.INTERNAL_SERVER_ERROR)
+                           .build();
+              }
 
-          if (workspace != null) {
-            if (path != null) {
               SessionProvider sp = sessionProviders.getSessionProvider(null);
-              Session userSession = sp.getSession(workspace, jcrService.getCurrentRepository());
-              try {
-                Item item = userSession.getItem(path);
-                if (item.isNode()) {
-                  userNode = (Node) item;
-                  String name = driveName(user);
-                  String processId = processId(workspace, userNode.getPath(), name);
+              userSession = sp.getSession(workspace, jcrService.getCurrentRepository());
 
-                  // rest it by expire = 0
-                  resp.cookie(CONNECT_COOKIE, cid.toString(), "/", host, "Cloud Drive connect ID", 0, false);
+              Item item = userSession.getItem(path);
+              if (item.isNode()) {
+                userNode = (Node) item;
+                String name = driveName(user);
+                String processId = processId(workspace, userNode.getPath(), name);
 
-                  ConnectProcess connect = active.get(processId);
-                  if (connect == null || connect.error != null) {
-                    // initiate connect process if it is not already active or a previous had an exception
+                // rest it by expire = 0
+                resp.cookie(CONNECT_COOKIE, cid.toString(), "/", host, "Cloud Drive connect ID", 0, false);
+
+                ConnectProcess connect = active.get(processId);
+                if (connect == null || connect.error != null) {
+                  // initiate connect process if it is not already active or a previous had an exception
+                  try {
+                    driveNode = userNode.getNode(name);
+                  } catch (PathNotFoundException pnte) {
+                    // node not found - add it
                     try {
-                      driveNode = userNode.getNode(name);
-                    } catch (PathNotFoundException pnte) {
-                      // node not found - add it
-                      try {
-                        driveNode = userNode.addNode(name, JCRLocalCloudDrive.NT_FOLDER);
-                        userNode.save();
-                      } catch (RepositoryException e) {
-                        rollback(userNode, null);
-                        LOG.error("Error creating node for the drive of user " + user.getEmail()
-                            + ". Cannot create node under " + path, e);
-                        return resp.connectError("Error creating node for the drive: storage error.",
-                                                 cid.toString(),
-                                                 host)
-                                   .status(Status.INTERNAL_SERVER_ERROR)
-                                   .build();
-                      }
+                      driveNode = userNode.addNode(name, JCRLocalCloudDrive.NT_FOLDER);
+                      userNode.save();
+                    } catch (RepositoryException e) {
+                      rollback(userNode, null);
+                      LOG.error("Error creating node for the drive of user " + user.getEmail()
+                          + ". Cannot create node under " + path, e);
+                      return resp.connectError("Error creating node for the drive: storage error.",
+                                               cid.toString(),
+                                               host)
+                                 .status(Status.INTERNAL_SERVER_ERROR)
+                                 .build();
                     }
+                  }
 
+                  // state check url
+                  resp.serviceUrl(uriInfo.getRequestUriBuilder()
+                                         .queryParam("workspace", workspace)
+                                         .queryParam("path", driveNode.getPath())
+                                         .build(new Object[0])
+                                         .toASCIIString());
+
+                  try {
+                    CloudDrive local = cloudDrives.createDrive(user, driveNode);
+                    if (local.isConnected()) {
+                      // exists and already connected
+
+                      resp.status(Status.CREATED); // OK vs CREATED?
+                      DriveInfo drive = DriveInfo.create(local);
+                      resp.drive(drive);
+                      LOG.info(drive.getEmail() + " already connected.");
+                    } else {
+                      // a new or exist but not connected - connect it
+                      connect = new ConnectProcess(name, workspace, local, convo);
+                      active.put(processId, connect);
+
+                      resp.status(connect.process.isDone() ? Status.CREATED : Status.ACCEPTED);
+                      resp.progress(connect.process.getProgress());
+                      DriveInfo drive = DriveInfo.create(local, connect.process.getFiles());
+                      resp.drive(drive);
+                    }
+                  } catch (UserAlreadyConnectedException e) {
+                    LOG.warn(e.getMessage(), e);
+                    resp.connectError(e.getMessage(), cid.toString(), host).status(Status.CONFLICT);
+                  } catch (CloudDriveException e) {
+                    rollback(userNode, driveNode);
+                    LOG.error("Error connecting drive for user " + user + ", " + workspace + ":" + path, e);
+                    resp.connectError("Error connecting drive. " + e.getMessage(), cid.toString(), host)
+                        .status(Status.INTERNAL_SERVER_ERROR);
+                  }
+                } else {
+                  // else, such connect already in progress (probably was started by another request)
+                  // client can warn the user or try use check url to get that work status
+                  String message = "Connect to " + connect.name
+                      + " already posted and currently in progress.";
+                  LOG.warn(message);
+
+                  try {
+                    // do response with that process lock as done in state()
+                    connect.lock.lock();
                     // state check url
                     resp.serviceUrl(uriInfo.getRequestUriBuilder()
                                            .queryParam("workspace", workspace)
-                                           .queryParam("path", driveNode.getPath())
+                                           .queryParam("path", connect.drive.getPath())
                                            .build(new Object[0])
                                            .toASCIIString());
-
-                    try {
-                      CloudDrive local = cloudDrives.createDrive(user, driveNode);
-                      if (local.isConnected()) {
-                        // exists and already connected
-
-                        resp.status(Status.CREATED); // OK vs CREATED?
-                        DriveInfo drive = DriveInfo.create(local);
-                        resp.drive(drive);
-                        LOG.info(drive.getEmail() + " already connected.");
-                      } else {
-                        // a new or exist but not connected - connect it
-                        connect = new ConnectProcess(name, workspace, local, convo);
-                        active.put(processId, connect);
-
-                        resp.status(connect.process.isDone() ? Status.CREATED : Status.ACCEPTED);
-                        resp.progress(connect.process.getProgress());
-                        DriveInfo drive = DriveInfo.create(local, connect.process.getFiles());
-                        resp.drive(drive);
-                      }
-                    } catch (UserAlreadyConnectedException e) {
-                      LOG.warn(e.getMessage(), e);
-                      resp.connectError(e.getMessage(), cid.toString(), host).status(Status.CONFLICT);
-                    } catch (CloudDriveException e) {
-                      rollback(userNode, driveNode);
-                      LOG.error("Error connecting drive for user " + user + ", " + workspace + ":" + path, e);
-                      resp.connectError("Error connecting drive. " + e.getMessage(), cid.toString(), host)
-                          .status(Status.INTERNAL_SERVER_ERROR);
-                    }
-                  } else {
-                    // else, such connect already in progress (probably was started by another request)
-                    // client can warn the user or try use check url to get that work status
-                    String message = "Connect to " + connect.name
-                        + " already posted and currently in progress.";
-                    LOG.warn(message);
-
-                    try {
-                      // do response with that process lock as done in state()
-                      connect.lock.lock();
-                      // state check url
-                      resp.serviceUrl(uriInfo.getRequestUriBuilder()
-                                             .queryParam("workspace", workspace)
-                                             .queryParam("path", connect.drive.getPath())
-                                             .build(new Object[0])
-                                             .toASCIIString());
-                      resp.progress(connect.process.getProgress());
-                      resp.drive(DriveInfo.create(connect.drive));
-                      resp.connectError(message, cid.toString(), host).status(Status.CONFLICT);
-                    } finally {
-                      connect.lock.unlock();
-                    }
+                    resp.progress(connect.process.getProgress());
+                    resp.drive(DriveInfo.create(connect.drive));
+                    resp.connectError(message, cid.toString(), host).status(Status.CONFLICT);
+                  } finally {
+                    connect.lock.unlock();
                   }
-                } else {
-                  LOG.warn("Item " + workspace + ":" + path + " not a node.");
-                  resp.connectError("Not a node.", cid.toString(), host).status(Status.PRECONDITION_FAILED);
                 }
-              } finally {
+              } else {
+                LOG.warn("Item " + workspace + ":" + path + " not a node.");
+                resp.connectError("Not a node.", cid.toString(), host).status(Status.PRECONDITION_FAILED);
+              }
+            } catch (LoginException e) {
+              LOG.warn("Error login to connect drive " + workspace + ":" + path + ". " + e.getMessage());
+              resp.connectError("Authentication error.", cid.toString(), host).status(Status.UNAUTHORIZED);
+            } catch (RepositoryException e) {
+              LOG.error("Error connecting drive for user " + user + ", node " + workspace + ":" + path, e);
+              rollback(userNode, driveNode);
+              resp.connectError("Error connecting drive: storage error.", cid.toString(), host)
+                  .status(Status.INTERNAL_SERVER_ERROR);
+            } catch (Throwable e) {
+              LOG.error("Error connecting drive for user " + user + ", node " + workspace + ":" + path, e);
+              rollback(userNode, driveNode);
+              resp.connectError("Error connecting drive: runtime error.", cid.toString(), host)
+                  .status(Status.INTERNAL_SERVER_ERROR);
+            } finally {
+              if (userSession != null) {
                 userSession.logout();
               }
-            } else {
-              return Response.status(Status.BAD_REQUEST).entity("Null path.").build();
             }
           } else {
-            return Response.status(Status.BAD_REQUEST).entity("Null workspace.").build();
+            return Response.status(Status.BAD_REQUEST).entity("Null path.").build();
           }
-        } catch (LoginException e) {
-          LOG.warn("Error login to connect drive " + workspace + ":" + path + ". " + e.getMessage());
-          resp.connectError("Authentication error.", cid.toString(), host).status(Status.UNAUTHORIZED);
-        } catch (RepositoryException e) {
-          LOG.error("Error connecting drive for user " + user + ", node " + workspace + ":" + path, e);
-          rollback(userNode, driveNode);
-          resp.connectError("Error connecting drive: storage error.", cid.toString(), host)
-              .status(Status.INTERNAL_SERVER_ERROR);
-        } catch (Throwable e) {
-          LOG.error("Error connecting drive for user " + user + ", node " + workspace + ":" + path, e);
-          rollback(userNode, driveNode);
-          resp.connectError("Error connecting drive: runtime error.", cid.toString(), host)
-              .status(Status.INTERNAL_SERVER_ERROR);
+        } else {
+          return Response.status(Status.BAD_REQUEST).entity("Null workspace.").build();
         }
       } else {
         LOG.warn("User not authenticated for connectId " + connectId);
@@ -592,7 +595,7 @@ public class ConnectService implements ResourceContainer {
             String error = connect.error.getMessage();
             if (error == null) {
               // NPE case
-              error = "null"; 
+              error = "Internal error (null).";
             }
             if (error.indexOf("backendError") >= 0) {
               error = "Google backend error. Try again later.";
@@ -701,16 +704,26 @@ public class ConnectService implements ResourceContainer {
     // LOG.info(INIT_COOKIE + ": " + initId);
 
     ConnectResponse resp = new ConnectResponse();
-    String baseHost = locator.getBaseHost();
-    if (baseHost == null) {
-      baseHost = uriInfo.getRequestUri().getHost();
-    } else if (repoName != null) {
-      if (baseHost.equals(uriInfo.getRequestUri().getHost())) {
+
+    String requestHost = uriInfo.getRequestUri().getHost();
+    if (repoName != null) {
+      if (locator.isRedirect(requestHost)) {
         // need redirect to actual service URL, TODO remove state query parameter
         resp.location(locator.getServiceLink(repoName, uriInfo.getRequestUri().toString()));
         return resp.status(Status.MOVED_PERMANENTLY).build(); // redirect
       }
     }
+    String baseHost = locator.getServiceHost(requestHost);
+
+    // if (baseHost == null) {
+    // baseHost = uriInfo.getRequestUri().getHost();
+    // } else if (repoName != null) {
+    // if (baseHost.equals(uriInfo.getRequestUri().getHost())) {
+    // // need redirect to actual service URL, TODO remove state query parameter
+    // resp.location(locator.getServiceLink(repoName, uriInfo.getRequestUri().toString()));
+    // return resp.status(Status.MOVED_PERMANENTLY).build(); // redirect
+    // }
+    // }
 
     if (initId != null) {
       try {
@@ -736,13 +749,19 @@ public class ConnectService implements ResourceContainer {
                   resp.cookie(CONNECT_COOKIE,
                               connectId.toString(),
                               "/",
-                              connect.host.getHost(),
+                              connect.host,
                               "Cloud Drive connect ID",
                               CONNECT_COOKIE_EXPIRE,
                               false);
 
                   // reset it by expire time = 0
-                  resp.cookie(INIT_COOKIE, iid.toString(), "/", baseHost, "Cloud Drive init ID", 0, false);
+                  resp.cookie(INIT_COOKIE,
+                              iid.toString(),
+                              INIT_COOKIE_PATH,
+                              baseHost,
+                              "Cloud Drive init ID",
+                              0,
+                              false);
 
                   resp.entity("<!doctype html><html><head><script type='text/javascript'> window.close();</script></head><body><div id='messageString'>Connecting to "
                       + cloudProvider.getName() + "</div></body></html>");
@@ -751,7 +770,7 @@ public class ConnectService implements ResourceContainer {
                 } catch (CloudDriveException e) {
                   LOG.warn("Error authenticating user to access " + cloudProvider.getName(), e);
                   return resp.authError("Authentication error on " + cloudProvider.getName(),
-                                        connect.host.getHost(),
+                                        connect.host,
                                         cloudProvider.getName(),
                                         iid.toString(),
                                         baseHost)
@@ -762,7 +781,7 @@ public class ConnectService implements ResourceContainer {
               } else {
                 LOG.warn("Key required for " + cloudProvider.getName());
                 return resp.authError("Key required for " + cloudProvider.getName(),
-                                      connect.host.getHost(),
+                                      connect.host,
                                       cloudProvider.getName(),
                                       iid.toString(),
                                       baseHost)
@@ -776,16 +795,13 @@ public class ConnectService implements ResourceContainer {
               // TODO hack for access_denied from Google, move this logic to Google connector
               if (error.indexOf("access_denied") >= 0) {
                 resp.authError("Acccess denied.",
-                               connect.host.getHost(),
+                               connect.host,
                                cloudProvider.getName(),
                                iid.toString(),
                                baseHost).status(Status.FORBIDDEN);
               } else {
-                resp.authError(error,
-                               connect.host.getHost(),
-                               cloudProvider.getName(),
-                               iid.toString(),
-                               baseHost).status(Status.BAD_REQUEST);
+                resp.authError(error, connect.host, cloudProvider.getName(), iid.toString(), baseHost)
+                    .status(Status.BAD_REQUEST);
               }
 
               return resp.build();
@@ -794,7 +810,7 @@ public class ConnectService implements ResourceContainer {
             LOG.error("Authentication was not initiated for " + providerId + " but request to "
                 + cloudProvider.getId() + " recorded with id " + initId);
             return resp.authError("Authentication not initiated to " + cloudProvider.getName(),
-                                  connect.host.getHost(),
+                                  connect.host,
                                   cloudProvider.getName(),
                                   iid.toString(),
                                   baseHost)
@@ -850,16 +866,16 @@ public class ConnectService implements ResourceContainer {
       ConversationState convo = ConversationState.getCurrent();
       if (convo != null) {
         String localUser = convo.getIdentity().getUserId();
-        String host = serviceHost(uriInfo);
+        String host = locator.getServiceHost(uriInfo.getRequestUri().getHost());
 
         UUID initId = generateId(localUser);
-        initiated.put(initId, new ConnectInit(localUser, cloudProvider, new URI("http://" + host
-            + "/portal/rest")));
+        initiated.put(initId, new ConnectInit(localUser, cloudProvider, host)); // TODO cleanup +
+                                                                                // "/portal/rest"
         timeline.put(initId, System.currentTimeMillis() + (INIT_COOKIE_EXPIRE * 1000) + 5000);
 
         resp.cookie(INIT_COOKIE,
                     initId.toString(),
-                    "/",
+                    INIT_COOKIE_PATH,
                     host,
                     "Cloud Drive init ID",
                     INIT_COOKIE_EXPIRE,
@@ -924,12 +940,28 @@ public class ConnectService implements ResourceContainer {
     }
     return false;
   }
+  //
+  // /**
+  // * Return host name for given request URI.
+  // *
+  // * @param uriInfo {@link UriInfo}
+  // * @return String with the host's domain name or empty string if it's <code>localhost</code>
+  // */
+  // protected String serviceHost(UriInfo uriInfo) {
+  // String host = locator.getBaseHost();
+  // if (host == null) {
+  // host = uriInfo.getRequestUri().getHost();
+  // }
+  // if (host.equalsIgnoreCase("localhost")) {
+  // // empty host for localhost domain, see http://curl.haxx.se/rfc/cookie_spec.html
+  // host = "";
+  // }
+  // // TODO cleanup
+  // // int port = uriInfo.getRequestUri().getPort();
+  // // if (port != 80 && port != 443) { // omit default ports
+  // // host += ":" + port;
+  // // }
+  // return host;
+  // }
 
-  protected String serviceHost(UriInfo uriInfo) {
-    String host = locator.getBaseHost();
-    if (host == null) {
-      host = uriInfo.getRequestUri().getHost();
-    }
-    return host;
-  }
 }

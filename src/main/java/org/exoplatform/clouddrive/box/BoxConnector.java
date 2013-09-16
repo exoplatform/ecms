@@ -103,7 +103,7 @@ public class BoxConnector extends CloudDriveConnector {
     redirectUrl.append(getProviderId());
 
     StringBuilder authUrl = new StringBuilder();
-    authUrl.append("https://www.box.com/api/oauth2/authorize");
+    authUrl.append("https://www.box.com/api/oauth2/authorize?");
     authUrl.append("response_type=code&client_id=");
     authUrl.append(getClientId());
     authUrl.append("&state=");

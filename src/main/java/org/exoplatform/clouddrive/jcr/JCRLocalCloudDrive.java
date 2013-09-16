@@ -626,9 +626,9 @@ public abstract class JCRLocalCloudDrive extends CloudDrive {
       try {
         command.exec();
       } catch (CloudDriveException e) {
-        LOG.error(e.getMessage(), e);
+        LOG.error("Cloud Drive error during " + command.getCommandVerb() + ": " + e.getMessage(), e);
       } catch (Throwable e) {
-        LOG.error(e.getMessage(), e);
+        LOG.error("Error to " + command.getCommandVerb() + ": " + e.getMessage(), e);
       } finally {
         sp.close();
       }

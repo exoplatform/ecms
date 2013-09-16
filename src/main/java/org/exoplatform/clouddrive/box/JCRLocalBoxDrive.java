@@ -21,6 +21,7 @@ package org.exoplatform.clouddrive.box;
 import com.box.boxjavalibv2.dao.BoxFile;
 import com.box.boxjavalibv2.dao.BoxFolder;
 import com.box.boxjavalibv2.dao.BoxItem;
+import com.box.boxjavalibv2.dao.BoxSharedLink;
 
 import org.exoplatform.clouddrive.CloudDriveException;
 import org.exoplatform.clouddrive.CloudFile;
@@ -35,6 +36,7 @@ import org.exoplatform.clouddrive.jcr.JCRLocalCloudDrive;
 import org.exoplatform.clouddrive.jcr.JCRLocalCloudFile;
 import org.exoplatform.clouddrive.oauth2.UserToken;
 import org.exoplatform.clouddrive.oauth2.UserTokenRefreshListener;
+import org.exoplatform.commons.utils.MimeTypeResolver;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 
 import java.util.ArrayList;
@@ -64,7 +66,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
    */
   protected class BoxConnect extends ConnectCommand {
 
-    final BoxAPI        api;
+    final BoxAPI              api;
 
     /**
      * Actually open child iterators. Used for progress indicator.
@@ -105,41 +107,51 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
      */
     @Override
     protected void fetchFiles() throws CloudDriveException, RepositoryException {
-      fetchChilds(BoxAPI.BOX_ROOT_ID, driveRoot); // root folder id = 0 in Box
+      BoxFolder root = fetchChilds(BoxAPI.BOX_ROOT_ID, driveRoot);
+      // actual drive URL (its root folder's id), see initDrive() also
+      driveRoot.setProperty("ecd:url", api.getLink(root));
     }
 
-    protected void fetchChilds(String fileId, Node parent) throws CloudDriveException, RepositoryException {
+    protected BoxFolder fetchChilds(String fileId, Node parent) throws CloudDriveException,
+                                                               RepositoryException {
       ItemsIterator items = api.getFolderItems(fileId);
       iterators.add(items);
       while (items.hasNext()) {
         BoxItem item = items.next();
-
         Calendar created = api.parseDate(item.getCreatedAt());
         Calendar modified = api.parseDate(item.getModifiedAt());
         boolean isFolder = item instanceof BoxFolder;
+        String id = item.getId();
+        String name = item.getName();
+        String type, link, embedLink, downloadLink;
         Node localNode;
         if (isFolder) {
           // add folder
           BoxFolder f = (BoxFolder) item;
-          localNode = openFolder(f.getId(), f.getName(), parent);
-          initFolder(localNode, f.getId(), f.getName(), f.getType(), // mimetype
-                     f.getSharedLink().getUrl(), // gf.getAlternateLink(),
+          type = f.getType();
+          link = embedLink = downloadLink =api.getLink(f);
+          localNode = openFolder(id, name, parent);
+          initFolder(localNode, id, name, type, // type=folder
+                     link, // gf.getAlternateLink(),
                      f.getCreatedBy().getLogin(), // gf.getOwnerNames().get(0),
                      f.getModifiedBy().getLogin(), // gf.getLastModifyingUserName(),
                      created,
                      modified);
           // go recursive
-          fetchChilds(f.getId(), localNode);
+          fetchChilds(id, localNode);
         } else {
           // file
           BoxFile f = (BoxFile) item;
-          localNode = openFile(f.getId(), f.getName(), f.getType(), parent);
+          type = mimeTypes.getMimeType(name);
+          link = downloadLink = api.getLink(f);
+          embedLink = api.getEmbedLink(f);
+          localNode = openFile(id, name, type, parent);
           // TODO for thumbnail we can use Thumbnail service
           // https://api.box.com/2.0/files/FILE_ID/thumbnail.png?min_height=256&min_width=256
-          initFile(localNode, f.getId(), f.getName(), f.getType(), // mimetype
-                   f.getSharedLink().getUrl(), // gf.getAlternateLink(),
-                   f.getSharedLink().getUrl(), // gf.getEmbedLink(),
-                   f.getSharedLink().getDownloadUrl(), // gf.getThumbnailLink(),
+          initFile(localNode, id, name, type, // mimetype
+                   link, // gf.getAlternateLink(),
+                   embedLink, // gf.getEmbedLink(),
+                   downloadLink, // gf.getThumbnailLink(), // XXX not used
                    f.getCreatedBy().getLogin(), // gf.getOwnerNames().get(0),
                    f.getModifiedBy().getLogin(), // gf.getLastModifyingUserName(),
                    created,
@@ -147,13 +159,14 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
           initBoxItem(localNode, item);
         }
 
+        // XXX thumbnail link not used
         result.add(new JCRLocalCloudFile(localNode.getPath(),
-                                         item.getId(),
-                                         item.getName(),
-                                         item.getSharedLink().getUrl(),
-                                         item.getSharedLink().getUrl(),
-                                         item.getSharedLink().getUrl(),
-                                         item.getType(),
+                                         id,
+                                         name,
+                                         link,
+                                         embedLink,
+                                         downloadLink,
+                                         type,
                                          item.getCreatedBy().getLogin(),
                                          item.getModifiedBy().getLogin(),
                                          created,
@@ -161,19 +174,21 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
                                          isFolder));
       }
       initBoxItem(parent, items.parent); // finally init parent
+      return items.parent;
     }
   }
 
   /**
    * Sync algorithm for Box drive. With the Box API we don't have a diff/changes feature, thus we do
-   * compare all remote files by its Etag and fetch an item if the etags differ.
+   * compare all remote files by its Etag and fetch an item if the etags differ. <br>
+   * // TODO use Events service to get file related events http://developers.box.com/docs/#events
    */
   protected class BoxSync extends SyncCommand {
 
     /**
      * Box API.
      */
-    final BoxAPI        api;
+    final BoxAPI              api;
 
     /**
      * Actually open child iterators. Used for progress indicator.
@@ -228,7 +243,7 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
       ItemsIterator items = api.getFolderItems(folderId);
       if (!driveRoot.getProperty("box:etag").getString().equals(items.parent.getEtag())) {
         // need sync
-        
+
         iterators.add(items);
 
         // local nodes of this folder, after this sync we'll remove what will lie in this map
@@ -311,6 +326,8 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
     }
   }
 
+  private MimeTypeResolver mimeTypes = new MimeTypeResolver();
+
   /**
    * @param user
    * @param driveNode
@@ -332,6 +349,18 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
       CloudDriveException {
     // TODO user isn't transparently synced with persistent state of the drive
     super(loadUser(apiBuilder, provider, driveNode), driveNode, sessionProviders);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  protected void initDrive(Node driveNode) throws CloudDriveException, RepositoryException {
+    super.initDrive(driveNode);
+
+    driveNode.setProperty("ecd:id", BoxAPI.BOX_ROOT_ID);
+    // XXX dummy URL here, an actual one will be set during files fetching in BoxConnect
+    driveNode.setProperty("ecd:url", "https://box.com/");
   }
 
   /**
@@ -476,8 +505,12 @@ public class JCRLocalBoxDrive extends JCRLocalCloudDrive implements UserTokenRef
     localNode.setProperty("box:ownedBy", item.getOwnedBy().getLogin());
     localNode.setProperty("box:sequenceId", item.getSequenceId());
     localNode.setProperty("box:description", item.getDescription());
-    localNode.setProperty("box:sharedAccess", item.getSharedLink().getAccess());
-    localNode.setProperty("box:sharedCanDownload", item.getSharedLink().getPermissions().isCan_download());
+
+    BoxSharedLink shared = item.getSharedLink();
+    if (shared != null) {
+      localNode.setProperty("box:sharedAccess", shared.getAccess());
+      localNode.setProperty("box:sharedCanDownload", shared.getPermissions().isCan_download());
+    }
   }
 
 }

@@ -21,9 +21,11 @@ package org.exoplatform.clouddrive.box;
 import com.box.boxjavalibv2.BoxClient;
 import com.box.boxjavalibv2.authorization.OAuthRefreshListener;
 import com.box.boxjavalibv2.dao.BoxCollection;
+import com.box.boxjavalibv2.dao.BoxFile;
 import com.box.boxjavalibv2.dao.BoxFolder;
 import com.box.boxjavalibv2.dao.BoxItem;
 import com.box.boxjavalibv2.dao.BoxOAuthToken;
+import com.box.boxjavalibv2.dao.BoxSharedLink;
 import com.box.boxjavalibv2.exceptions.AuthFatalFailureException;
 import com.box.boxjavalibv2.exceptions.BoxServerException;
 import com.box.boxjavalibv2.interfaces.IAuthData;
@@ -106,7 +108,7 @@ public class BoxAPI {
     /**
      * Parent folder.
      */
-    BoxFolder            parent;
+    BoxFolder         parent;
 
     ItemsIterator(String folderId) throws BoxException {
       this.folderId = folderId;
@@ -119,6 +121,22 @@ public class BoxAPI {
 
     Iterator<BoxItem> nextChunk() throws BoxException {
       BoxFolderRequestObject obj = BoxFolderRequestObject.getFolderItemsRequestObject(limit, offset);
+      obj.addField("id");
+      obj.addField("parent");
+      obj.addField("name");
+      obj.addField("type");
+      obj.addField("etag");
+      obj.addField("sequence_id");
+      obj.addField("created_at");
+      obj.addField("modified_at");
+      obj.addField("description");
+      obj.addField("size");
+      obj.addField("created_by");
+      obj.addField("modified_by");
+      obj.addField("owned_by");
+      obj.addField("shared_link");
+      obj.addField("item_status");
+      obj.addField("item_collection");
       try {
         // BoxCollection items = client.getFoldersManager().getFolderItems(folderId, obj);
         // offset = items.getNextStreamPosition();
@@ -200,18 +218,35 @@ public class BoxAPI {
     }
   }
 
-  protected static final Log LOG         = ExoLogger.getLogger(BoxAPI.class);
+  protected static final Log    LOG            = ExoLogger.getLogger(BoxAPI.class);
 
-  public static final String NO_STATE    = "__no_state_set__";
+  public static final String    NO_STATE       = "__no_state_set__";
 
   /**
    * Id of root folder on Box.
    */
-  public static final String BOX_ROOT_ID = "0";
+  public static final String    BOX_ROOT_ID    = "0";
 
-  private BoxToken           token;
+  /**
+   * Not official part of the path used in file services with Box API.
+   */
+  protected static final String BOX_FILES_PATH = "files/0/f/";
 
-  private BoxClient          client;
+  /**
+   * URL prefix for Box files' UI.
+   */
+  public static final String    BOX_FILE_URL   = "https://app.box.com/" + BOX_FILES_PATH;
+
+  /**
+   * URL patter for Embedded UI of Box file. Based on:<br>
+   * http://stackoverflow.com/questions/12816239/box-com-embedded-file-folder-viewer-code-via-api
+   * http://developers.box.com/box-embed/
+   */
+  public static final String    BOX_EMBED_URL  = "https://app.box.com/embed_widget/000000000000/%s?show_parent_path=no";
+
+  private BoxToken              token;
+
+  private BoxClient             client;
 
   /**
    * Create Box API from OAuth2 authentication code.
@@ -301,6 +336,25 @@ public class BoxAPI {
     }
   }
 
+  /**
+   * The Box root folder.
+   * 
+   * @return {@link BoxFolder}
+   * @throws BoxException
+   */
+  BoxFolder getRootFolder() throws BoxException {
+    try {
+      BoxFolder root = client.getFoldersManager().getFolder(BOX_ROOT_ID, null);
+      return root;
+    } catch (BoxRestException e) {
+      throw new BoxException("Error getting root folder: " + e.getMessage(), e);
+    } catch (BoxServerException e) {
+      throw new BoxException("Error reading root folder: " + e.getMessage(), e);
+    } catch (AuthFatalFailureException e) {
+      throw new BoxException("Authentication error for root folder: " + e.getMessage(), e);
+    }
+  }
+
   ItemsIterator getFolderItems(String folderId) throws BoxException {
     return new ItemsIterator(folderId);
   }
@@ -314,5 +368,87 @@ public class BoxAPI {
       LOG.error("Error persing date: " + dateString, e);
     }
     return calendar;
+  }
+
+  /**
+   * Link (URl) to the Box file for opening on Box site (UI).
+   * 
+   * @param item {@link BoxItem}
+   * @return String with the file URL.
+   */
+  String getLink(BoxItem item) {
+    BoxSharedLink shared = item.getSharedLink();
+    if (shared != null) {
+      String link = shared.getUrl();
+      if (link != null) {
+        return link;
+      }
+    }
+
+    // XXX This link build not on official documentation, but from observed URLs from Box app site.
+    StringBuilder link = new StringBuilder();
+    link.append(BOX_FILE_URL);
+    String id = item.getId();
+    if (BOX_ROOT_ID.equals(id)) {
+      link.append(id);
+    } else if (item instanceof BoxFile) {
+      String parentId = item.getParent().getId();
+      link.append(parentId);
+      link.append("/1/f_");
+      link.append(id);
+    } else if (item instanceof BoxFolder) {
+      link.append(id);
+      link.append('/');
+      link.append(item.getName());
+    } else {
+      // for unknown open root folder
+      link.append(BOX_FILE_URL);
+    }
+
+    link.append("/");
+    // TODO this doesn't take in account custom domain for Enterprise on Box
+    return link.toString();
+  }
+
+  /**
+   * Link (URL) to embed a file onto external app (in PLF).
+   * 
+   * @param item {@link BoxItem}
+   * @return String with the file embed URL.
+   */
+  String getEmbedLink(BoxItem item) {
+    StringBuilder linkValue = new StringBuilder();
+    BoxSharedLink shared = item.getSharedLink();
+    if (shared != null) {
+      String link = shared.getUrl();
+      String[] lparts = link.split("/");
+      if (lparts.length > 3 && lparts[lparts.length - 2].equals("s")) {
+        // XXX unofficial way of linkValue extracting from shared link
+        linkValue.append("s/");
+        linkValue.append(lparts[lparts.length - 1]);
+      }
+    }
+
+    if (linkValue.length() == 0) {
+      linkValue.append(BOX_FILES_PATH);
+      // XXX This link build not on official documentation, but from observed URLs from Box app site.
+      String id = item.getId();
+      if (BOX_ROOT_ID.equals(id)) {
+        linkValue.append(id);
+      } else if (item instanceof BoxFile) {
+        String parentId = item.getParent().getId();
+        linkValue.append(parentId);
+        linkValue.append("/1/f_");
+        linkValue.append(id);
+      } else if (item instanceof BoxFolder) {
+        linkValue.append(id);
+      } else {
+        // for unknown open root folder
+        linkValue.append(BOX_FILE_URL);
+      }
+    }
+
+    // TODO this doesn't take in account custom domain for Enterprise on Box
+    return String.format(BOX_EMBED_URL, linkValue.toString());
   }
 }
