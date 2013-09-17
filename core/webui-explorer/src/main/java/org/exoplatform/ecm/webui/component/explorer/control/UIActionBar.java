@@ -149,11 +149,8 @@ public class UIActionBar extends UIForm {
       backLink = newLink;
     return backLink != null;
   }
-  public String getBackLink() throws UnsupportedEncodingException {
-    String newLink = getAncestorOfType(UIJCRExplorerPortlet.class).getBacktoValue();
-    if (newLink != null && newLink.length()>0)
-      backLink = URLDecoder.decode(newLink, "UTF-8");
-    return backLink;
+  public String getBackLink() {
+    return getAncestorOfType(UIJCRExplorerPortlet.class).getBacktoValue();
   }
   public String getTemplateName() { return templateName_;  }
 

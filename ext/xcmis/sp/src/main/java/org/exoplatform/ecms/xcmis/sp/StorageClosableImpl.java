@@ -316,161 +316,130 @@ public class StorageClosableImpl implements Storage
 
    public RepositoryInfo getRepositoryInfo()
    {
-      try
-      {
-         StorageImpl storage =
-            new StorageImpl(rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
-         return storage.getRepositoryInfo();
-      }
-      catch (Exception e)
-      {
-         processException(e);
-      }
-      return null;
+     try {
+       StorageImpl storage =
+          new StorageImpl(rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
+       return storage.getRepositoryInfo();
+     } catch (Exception e) {
+       processException(e);
+     }
+     return null;
    }
-
 
    public Iterator<String> getUnfiledObjectsId() throws StorageException
    {
-      try
-      {
-         StorageImpl storage =
-            new StorageImpl(rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
-         return storage.getUnfiledObjectsId();
-      }
-      catch (Exception e)
-      {
-         processException(e);
-      }
-      return null;
+     try {
+       StorageImpl storage =
+          new StorageImpl(rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
+       return storage.getUnfiledObjectsId();
+     } catch (Exception e) {
+       processException(e);
+     }
+     return null;
    }
 
 
    public ObjectData moveObject(ObjectData object, FolderData target, FolderData source)
       throws UpdateConflictException, VersioningException, NameConstraintViolationException, StorageException
    {
-      try
-      {
-         StorageImpl storage =
-            new StorageImpl(rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
-         return storage.moveObject(object, target, source);
-      }
-      catch (Exception e)
-      {
-         processException(e);
-      }
-      return null;
+     try {
+       StorageImpl storage =
+          new StorageImpl(rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
+       return storage.moveObject(object, target, source);
+     } catch (Exception e) {
+       processException(e);
+     }
+     return null;
    }
 
 
    public ItemsIterator<Result> query(Query query)
    {
-      try
-      {
-         StorageImpl storage =
-            new StorageImpl(rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
-         return storage.query(query);
-      }
-      catch (Exception e)
-      {
-         processException(e);
-      }
-      return null;
+     try {
+       StorageImpl storage =
+          new StorageImpl(rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
+       return storage.query(query);
+     } catch (Exception e) {
+       processException(e);
+     }
+     return null;
    }
 
 
    public void unfileObject(ObjectData object)
    {
-      try
-      {
-         StorageImpl storage =
-            new StorageImpl(rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
-         storage.unfileObject(object);
-      }
-      catch (Exception e)
-      {
-         processException(e);
-      }
+     try {
+       StorageImpl storage =
+          new StorageImpl(rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
+       storage.unfileObject(object);
+     } catch (Exception e) {
+       processException(e);
+     }
    }
 
 
    public String addType(TypeDefinition type) throws ConstraintException, StorageException
    {
-      try
-      {
-         StorageImpl storage =
-            new StorageImpl(rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
-         return storage.addType(type);
-      }
-      catch (Exception e)
-      {
-         processException(e);
-      }
-      return null;
+     try {
+       StorageImpl storage =
+          new StorageImpl(rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
+       return storage.addType(type);
+     } catch (Exception e) {
+       processException(e);
+     }
+     return null;
    }
 
 
    public ItemsIterator<TypeDefinition> getTypeChildren(String typeId, boolean includePropertyDefinitions)
       throws TypeNotFoundException
    {
-      try
-      {
-         StorageImpl storage =
-            new StorageImpl(rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
-         return storage.getTypeChildren(typeId, includePropertyDefinitions);
-      }
-      catch (Exception e)
-      {
-         processException(e);
-      }
-      return null;
+     try {
+       StorageImpl storage =
+          new StorageImpl(rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
+       return storage.getTypeChildren(typeId, includePropertyDefinitions);
+     } catch (Exception e) {
+       processException(e);
+     }
+     return null;       
    }
 
 
    public TypeDefinition getTypeDefinition(String typeId, boolean includePropertyDefinition)
       throws TypeNotFoundException
    {
-      try
-      {
-         StorageImpl storage =
-            new StorageImpl(rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
-         return storage.getTypeDefinition(typeId, includePropertyDefinition);
-      }
-      catch (Exception e)
-      {
-         processException(e);
-      }
-      return null;
+     try {
+       StorageImpl storage =
+          new StorageImpl(rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
+       return storage.getTypeDefinition(typeId, includePropertyDefinition);
+     } catch (Exception e) {
+       processException(e);
+     }
+     return null;
    }
 
 
    public void removeType(String typeId) throws ConstraintException, TypeNotFoundException, StorageException
    {
-      try
-      {
-         StorageImpl storage =
-            new StorageImpl(rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
-         storage.removeType(typeId);
-      }
-      catch (Exception e)
-      {
-         processException(e);
-      }
+     try {
+       StorageImpl storage =
+          new StorageImpl(rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
+       storage.removeType(typeId);
+     } catch (Exception e) {
+       processException(e);
+     }
    }
 
    public boolean isSupportedNodeType(String nodeTypeName)
    {
-      try
-      {
-         StorageImpl storage =
-            new StorageImpl(rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
-         return storage.isSupportedNodeType(nodeTypeName);
-      }
-      catch (Exception e)
-      {
-         processException(e);
-      }
-      return false;
+     try {
+       StorageImpl storage =
+          new StorageImpl(rootStorageConfiguration, null, permissionService, defaultNodetypeMapping);
+       return storage.isSupportedNodeType(nodeTypeName);
+     } catch (Exception e) {
+       processException(e);
+     }
+     return false;
    }
 
    private static void processException(Exception e) {

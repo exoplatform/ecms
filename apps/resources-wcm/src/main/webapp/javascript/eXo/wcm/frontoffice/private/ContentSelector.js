@@ -574,7 +574,7 @@
 			var strViewContent = "";
 			// Depends on Paginators will be used or not. 'longDesc' if paginator, 'src' else.
 			var imageAttribute = "src";
-			if(list.length > 6) {
+                       	if(list.length > 8) {
 				// Paginator will be used
 				imageAttribute = "longDesc";
 			}			
@@ -782,11 +782,11 @@
 				} else {
 					rows = gj(tHead).children("tr");
 				}
-				len = rows.length -1;
+				len = rows.length;
 			}
 		} else {
 			var icon_container = document.getElementById(eXo.ecm.Pager.tableName);    
-	    icons =  gj(icon_container).children("div.actionIconBox");    
+	    icons =  gj(icon_container).find("div.actionIconBox");    
 	    len = icons.length;		
 		}
 	  var records = len; 
@@ -809,8 +809,8 @@
 				rows = gj(tHead).children("tr");
 			}
 			len = rows.length - 1;		  
-			for (var i = 1; i < len + 1; i++) {  //starts from 1 to skip table header row
-				if (i < from || i > to)  {
+			for (var i = 0; i < len + 1  ; i++) {  //starts from 1 to skip table header row
+				if (i < from - 1 || i > to - 1 )  {
 					  rows[i].style.display = 'none';
 				} else {
 					  gj(rows[i]).css("display", "");
@@ -818,8 +818,8 @@
 			}
 		} else {
 			var icons = null;   
-	    var icon_container = document.getElementById(eXo.ecm.Pager.tableName);    
-	    icons =  gj(icon_container).children("div.actionIconBox");    
+	    var icon_container = document.getElementById(eXo.ecm.Pager.tableName);
+	    icons =  gj(icon_container).find("div.actionIconBox");    
 	    len = icons.length;		
 			for (var i = 0; i < len; i++) {
 				if (i < from-1 || i > to-1)  {   //from starts at 1 and icons table starts at 0. Need to shift 1
@@ -833,7 +833,7 @@
 				}
 			}    
 		}
-		if(len <= 9) { gj("#pageNavPosition").html("");	return;}
+		if(len <= 8) { gj("#pageNavPosition").html(""); return;}
 	};
 	
 	Pager.prototype.showPage = function(pageNumber) {
@@ -1340,6 +1340,3 @@
 		ECS : eXo.ecm.ECS
 	};
 })(gj, wcm_utils);
-
-
-
