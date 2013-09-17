@@ -204,31 +204,21 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
                        PublicationDefaultStates.UNPUBLISHED);
       addRevisionData(node, revisionsMap.values());
     } else if (PublicationDefaultStates.OBSOLETE.equals(newState)) {
-      Value value = valueFactory.createValue(selectedRevision);
-      Value liveRevision = null;
-      if (node.hasProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)) {
-        liveRevision = node.getProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)
-                               .getValue();
-      }
-      if (liveRevision != null && value.getString().equals(liveRevision.getString())) {
-        node.setProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP,
-                         valueFactory.createValue(""));
-      }
       node.setProperty(AuthoringPublicationConstant.CURRENT_STATE, newState);
-      versionLog = new VersionLog(logItemName,
+      versionLog = new VersionLog(selectedRevision.getName(),
                                   newState,
                                   userId,
                                   GregorianCalendar.getInstance(),
                                   AuthoringPublicationConstant.CHANGE_TO_OBSOLETED);
       addLog(node, versionLog);
-      VersionData versionData = revisionsMap.get(node.getUUID());
+      VersionData versionData = revisionsMap.get(selectedRevision.getUUID());
       if (versionData != null) {
         versionData.setAuthor(userId);
         versionData.setState(newState);
       } else {
-        versionData = new VersionData(node.getUUID(), newState, userId);
+    	versionData = new VersionData(selectedRevision.getUUID(), newState, userId);
       }
-      revisionsMap.put(node.getUUID(), versionData);
+      revisionsMap.put(selectedRevision.getUUID(), versionData);
       addRevisionData(node, revisionsMap.values());
     } else if (PublicationDefaultStates.ARCHIVED.equalsIgnoreCase(newState)) {
       Value value = valueFactory.createValue(selectedRevision);
@@ -533,7 +523,7 @@ public class AuthoringPublicationPlugin extends  WebpagePublicationPlugin {
     WCMPublicationService wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);
     String currentState = wcmPublicationService.getContentState(node);
     if (PublicationDefaultStates.ENROLLED.equals(currentState)
-        || PublicationDefaultStates.OBSOLETE.equals(currentState))
+        || PublicationDefaultStates.UNPUBLISHED.equals(currentState))
       return null;
 
     // if current mode is edit mode

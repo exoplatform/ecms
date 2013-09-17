@@ -285,6 +285,9 @@ public abstract class BaseSearchServiceConnector extends SearchServiceConnector 
       }
     } catch (Exception e) {
       //can not get space, do nothing, will return the drive label
+      if (LOG.isInfoEnabled()) {
+        LOG.info("Can not find the space corresponding to drive " + id);
+      }
     }
     //get drive label
     try {

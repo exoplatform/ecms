@@ -180,10 +180,13 @@ public class UICLVTemplateForm extends UIForm {
     public void execute(Event<UICLVTemplateForm> event) throws Exception {
       UICLVTemplateForm uiForm = event.getSource() ;
       UICLVTemplatesManager uiManager = uiForm.getAncestorOfType(UICLVTemplatesManager.class);
-      String title = uiForm.getUIStringInput(FIELD_TITLE).getValue().trim();
-      String template = uiForm.getUIStringInput(FIELD_TEMPLATE_NAME).getValue().trim();
+      String title = uiForm.getUIStringInput(FIELD_TITLE).getValue();
+	    if(title != null) title = title.trim();
+      String template = uiForm.getUIStringInput(FIELD_TEMPLATE_NAME).getValue();
+	    if(template != null) template = template.trim();
       String category = uiForm.getUIFormSelectBox(FIELD_CONTENT_TYPE).getValue();
-      String content = uiForm.getUIFormTextAreaInput(FIELD_CONTENT).getValue().trim();
+      String content = uiForm.getUIFormTextAreaInput(FIELD_CONTENT).getValue();
+	    if(content != null) content = content.trim();
       if(uiForm.isAddNew & uiForm.hasTemplate(category, template)) {
         UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(new ApplicationMessage("UICLVTemplateForm.msg.template-existing", null, ApplicationMessage.WARNING));

@@ -20,6 +20,7 @@ import org.exoplatform.ecm.jcr.TypeNodeComparator;
 import org.exoplatform.ecm.jcr.model.ClipboardCommand;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.comparator.*;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
@@ -31,8 +32,6 @@ import org.exoplatform.ecm.webui.component.explorer.popup.actions.UISelectDocume
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeNodePageIterator;
-import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
-import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
@@ -678,7 +677,7 @@ public class UIJCRExplorer extends UIContainer {
     uiAddressBar.getUIStringInput(UIAddressBar.FIELD_ADDRESS).setValue(
                                                                        Text.unescapeIllegalJcrChars(filterPath(currentPath_))) ;
     uiAddressBar.getUIInput(UIAddressBar.FIELD_ADDRESS_HIDDEN).setValue(
-                                                                        filterPath(currentPath_)) ;
+	    filterPath(currentPath_)) ;
     event.getRequestContext().addUIComponentToUpdateByAjax(getChild(UIControl.class)) ;
     UIPageIterator contentPageIterator = this.findComponentById(UIDocumentInfo.CONTENT_PAGE_ITERATOR_ID);
     int currentPage = contentPageIterator.getCurrentPage();
@@ -863,14 +862,17 @@ public class UIJCRExplorer extends UIContainer {
     // Store previous node path to history for backing
     if(previousPath != null && !currentPath_.equals(previousPath) && !back) {
       // If previous node path has paginator, store last page index to history
-      if (this.hasPaginator(previousPath, lastWorkspaceName_)) {
-        UIPageIterator pageIterator = this.findComponentById(UIDocumentInfo.CONTENT_PAGE_ITERATOR_ID);
-        if (pageIterator != null) {
-          record(previousPath, lastWorkspaceName_, pageIterator.getCurrentPage());
+      try{
+        if(this.hasPaginator(previousPath, lastWorkspaceName_)){
+          UIPageIterator pageIterator = this.findComponentById(UIDocumentInfo.CONTENT_PAGE_ITERATOR_ID);
+          if (pageIterator != null) {
+            record(previousPath, lastWorkspaceName_, pageIterator.getCurrentPage());
+          }
+        }else{
+          record(previousPath, lastWorkspaceName_);
         }
-      }
-      else {
-        record(previousPath, lastWorkspaceName_);
+      }catch(PathNotFoundException e){
+        LOG.info("This node " + previousPath +" is no longer accessible ");
       }
     }
   }
@@ -1015,12 +1017,10 @@ public class UIJCRExplorer extends UIContainer {
         }
       }
       if (firstTime) {
-        UIApplication uiApp = getAncestorOfType(UIApplication.class) ;
-        JCRExceptionManager.process(uiApp, e);
         String workspace = session.getWorkspace().getName();
         if (LOG.isWarnEnabled()) {
           LOG.warn("The node cannot be found at " + nodePath
-                   + (workspace == null ? "" : " into the workspace " + workspace));
+            + " into the workspace " + workspace);
         }
       }
       throw e;

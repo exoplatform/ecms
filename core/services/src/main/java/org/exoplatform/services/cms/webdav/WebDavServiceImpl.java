@@ -132,7 +132,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                                      true);
       return item.getSession().getWorkspace().getName()
           + LinkUtils.createPath(item.getPath(), LinkUtils.getItemName(path(destPath)));
-    } catch (Exception e) {
+    } catch (RepositoryException e) {
       if (LOG.isWarnEnabled()) {
         LOG.warn("Cannot find the item at " + repoName + "/" + destPath, e);
       }
