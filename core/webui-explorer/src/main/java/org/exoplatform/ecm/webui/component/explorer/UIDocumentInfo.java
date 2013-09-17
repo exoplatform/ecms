@@ -75,6 +75,7 @@ import org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation;
 import org.exoplatform.ecm.webui.presentation.removeattach.RemoveAttachmentComponent;
 import org.exoplatform.ecm.webui.presentation.removecomment.RemoveCommentComponent;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
+import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
@@ -1713,9 +1714,17 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
    * @throws Exception
    */
   public boolean canAddNode(Node node) throws Exception {
-    if (node == null || !PermissionUtil.canAddNode(node)) {
+    if (node == null || !PermissionUtil.canAddNode(node) || !node.isCheckedOut()) {
       return false;
     }
+    //check for lock
+    if (node.isLocked()){
+      String lockToken = LockUtil.getLockTokenOfUser(node);
+      if(lockToken == null) {
+        return false;
+      }
+    }
+
     LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
     if(linkManager.isLink(node)) {
       try {
