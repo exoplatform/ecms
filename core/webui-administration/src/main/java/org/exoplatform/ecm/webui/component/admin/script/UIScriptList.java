@@ -16,15 +16,6 @@
  */
 package org.exoplatform.ecm.webui.component.admin.script;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import javax.jcr.AccessDeniedException;
-import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
-
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
@@ -39,6 +30,14 @@ import org.exoplatform.webui.core.UIPageIterator;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.exception.MessageException;
+
+import javax.jcr.AccessDeniedException;
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * Created by The eXo Platform SARL
@@ -59,7 +58,6 @@ import org.exoplatform.webui.exception.MessageException;
 public class UIScriptList extends UIComponentDecorator {
 
   private UIPageIterator uiPageIterator_;
-  final static public String ECMScript_EDIT = "ECMScriptPopupWindow";
   public static final String ACTION_SCRIPT_TYPE = "action";
   public static final String INTERCEPTOR_SCRIPT_TYPE = "interceptor";
   public static final String WIDGET_SCRIPT_TYPE = "widget";
@@ -95,20 +93,19 @@ public class UIScriptList extends UIComponentDecorator {
 
   public String getScriptCategory() throws Exception {
     ScriptService scriptService =  getApplicationComponent(ScriptService.class);
-    Node script = null; 
     UIScriptManager uiManager = getAncestorOfType(UIScriptManager.class);
-    UIScriptContainer uiContaier = uiManager.getChildById(uiManager.getSelectedTabId());
-    UIScriptList uiScriptList = uiContaier.getChild(UIScriptList.class);
-    script = scriptService.getECMScriptHome(WCMCoreUtils.getSystemSessionProvider()).getNode(uiScriptList.getTemplateFilter());
+    UIScriptContainer uiContainer = uiManager.getChildById(uiManager.getSelectedTabId());
+    UIScriptList uiScriptList = uiContainer.getChild(UIScriptList.class);
+    Node script = scriptService.getECMScriptHome(WCMCoreUtils.getSystemSessionProvider()).getNode(uiScriptList.getTemplateFilter());
     String basePath = scriptService.getBaseScriptPath() + "/";
     return script.getPath().substring(basePath.length());
   }
 
   public void refresh(String templateFilter, int currentPage) throws Exception {
-    this.updateGrid(getcript(templateFilter), currentPage);
+    this.updateGrid(getScript(templateFilter), currentPage);
   }
 
-  public List<ScriptData> getcript(String name) throws Exception {
+  public List<ScriptData> getScript(String name) throws Exception {
     List <ScriptData> scriptData = new ArrayList <ScriptData>() ;
     List<Node> scripts = new ArrayList<Node> () ;
     if(name.equals(ACTION_SCRIPT_TYPE)) {
@@ -121,9 +118,11 @@ public class UIScriptList extends UIComponentDecorator {
     }
     for(Node scriptNode : scripts) {
       Node content = scriptNode.getNode(NodetypeConstant.JCR_CONTENT);
-      String scriptDescription = "";
+      String scriptDescription;
       try {
         scriptDescription = content.getProperty(NodetypeConstant.DC_DESCRIPTION).getValues()[0].getString();
+      } catch(ArrayIndexOutOfBoundsException are) {
+	      scriptDescription = scriptNode.getName();
       } catch(PathNotFoundException pne) {
         scriptDescription = scriptNode.getName();
       }
@@ -136,10 +135,8 @@ public class UIScriptList extends UIComponentDecorator {
 
   public Node getScriptNode(String templateFilter, String nodeName) throws Exception {
     ScriptService scriptService =  getApplicationComponent(ScriptService.class);
-    Node script = null ;
     Node category = scriptService.getECMScriptHome(WCMCoreUtils.getUserSessionProvider()).getNode(templateFilter);
-    script = category.getNode(nodeName);
-    return script;
+    return category.getNode(nodeName);
   }
 
   static public class ScriptComparator implements Comparator<ScriptData> {

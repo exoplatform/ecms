@@ -497,9 +497,9 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
       newTagNode = dataDistributionType.getDataNode(publicFolksonomyTreeNode, newTagName);
       throw new ItemExistsException("node " + newTagName + " has already existed!");
     } catch (PathNotFoundException e) {
-      //Path not found means newTagName does not exists, it is expected behavior. 
+      //Path not found means newTagName does not exists, it is expected behavior.
+      newTagNode = dataDistributionType.getOrCreateDataNode(publicFolksonomyTreeNode, newTagName);
     }
-    newTagNode = dataDistributionType.getOrCreateDataNode(publicFolksonomyTreeNode, newTagName);
     newTagNode.addMixin(EXO_TAGGED);
     if (oldTagNode.hasProperty(EXO_TOTAL)) {
       newTagNode.setProperty(EXO_TOTAL, oldTagNode.getProperty(EXO_TOTAL).getValue());

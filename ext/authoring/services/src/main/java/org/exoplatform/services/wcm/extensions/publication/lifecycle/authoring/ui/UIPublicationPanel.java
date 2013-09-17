@@ -16,17 +16,10 @@
  */
 package org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.ui;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.jcr.Node;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.utils.lock.LockUtil;
+import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
 import org.exoplatform.services.ecm.publication.PublicationService;
@@ -49,6 +42,11 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+
+import javax.jcr.Node;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 
 /**
@@ -78,9 +76,9 @@ public class UIPublicationPanel extends org.exoplatform.services.wcm.publication
   public void init(Node node) throws Exception {
     String nodeVersionUUID = null;
     super.init(node);
-    String currentState = node.getProperty(AuthoringPublicationConstant.CURRENT_STATE)
-        .getString();
-    if (PublicationDefaultStates.PUBLISHED.equals(currentState) || PublicationDefaultStates.UNPUBLISHED.equals(currentState)) {
+    String currentState = node.getProperty(AuthoringPublicationConstant.CURRENT_STATE).getString();
+    if (PublicationDefaultStates.PUBLISHED.equals(currentState) || PublicationDefaultStates.UNPUBLISHED.equals(currentState)
+	    || PublicationDefaultStates.OBSOLETE.equals(currentState)) {
       nodeVersionUUID = node.getProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)
           .getString();
       if (!"".equals(nodeVersionUUID)) {
@@ -130,10 +128,9 @@ public class UIPublicationPanel extends org.exoplatform.services.wcm.publication
         currentNode.setProperty("publication:lastUser", event.getRequestContext().getRemoteUser());
 
         String nodeVersionUUID = null;
-        String currentState = currentNode.getProperty(AuthoringPublicationConstant.CURRENT_STATE)
-            .getString();
-        if (PublicationDefaultStates.PUBLISHED.equals(currentState) || 
-            PublicationDefaultStates.UNPUBLISHED.equals(currentState)) {
+        String currentState = currentNode.getProperty(AuthoringPublicationConstant.CURRENT_STATE).getString();
+        if (PublicationDefaultStates.PUBLISHED.equals(currentState) || PublicationDefaultStates.UNPUBLISHED.equals(currentState)
+	        || PublicationDefaultStates.OBSOLETE.equals(currentState)) {
           if(currentNode.hasProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP)){
             nodeVersionUUID = currentNode.getProperty(AuthoringPublicationConstant.LIVE_REVISION_PROP).getString();
           }

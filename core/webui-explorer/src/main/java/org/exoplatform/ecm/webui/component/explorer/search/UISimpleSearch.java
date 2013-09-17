@@ -117,10 +117,13 @@ public class UISimpleSearch extends UIForm {
     RequestContext context = RequestContext.getCurrentInstance();
     try {
     ResourceBundle res = context.getApplicationResourceBundle();
-    _AND = res.getString("UIConstraintForm.label.and");
-    _OR = res.getString("UIConstraintForm.label.or");
+      _AND = res.getString("UIConstraintForm.label.and");
+      _OR = res.getString("UIConstraintForm.label.or");
     }catch (MissingResourceException e) {
       // There is no resource found, just use the default resource-bundle in English as first value of _OR & _AND
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("Can not get resource bundle for UISimpleSearch label: " + e.getMessage());
+      }
     }
     operators.add(new SelectItemOption<String>(_AND, AND));
     operators.add(new SelectItemOption<String>(_OR, OR));
