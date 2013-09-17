@@ -59,6 +59,19 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 		return maxCols;
 	}
+	
+  function replaceString (expr, a, b) {
+    var i=expr.indexOf(a);
+    if(i >= 0) {
+      var inter = expr.substring(i , expr.length);
+      var j = inter.indexOf('px');
+      var inter2 = inter.substring(0 , j);
+      var k = inter2.lastIndexOf(' ');
+      var long = j - a.length;
+      expr = expr.substring(0, i + k + 1) + b + expr.substring(i + a.length + long, expr.length);
+    }
+    return expr
+  }
 
 	function tableDialog( editor, command )
 	{
@@ -188,12 +201,27 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 						var cols = parseInt( info.txtCols, 10 ) || 0;
 						if (rows > 0 && cols > 0) {
 							var cellNumber = rows * cols;
-							var styleString = 'border:' + info.txtBorder + 'px solid #000000; padding:' + info.txtCellPad + 'px;';
-							for (var i = 0; i < cellNumber; i++) {
-								this._.selectedElement.$.getElementsByTagName('td')[i].style.cssText = styleString;
-							}
-						}
-					}
+              for (var i = 0; i < cellNumber ; i++) {
+                if (this._.selectedElement.$.getElementsByTagName ('td')[i]) {
+                  var styleString = this._.selectedElement.$.getElementsByTagName('td')[i].style.cssText;
+                  if (navigator.userAgent.indexOf("MSIE 8") >= 0 || navigator.userAgent.indexOf("MSIE 7") >= 0) {
+                    styleString = replaceString (styleString.toLowerCase(), "border-top: ", info.txtBorder);
+                    styleString = replaceString (styleString.toLowerCase(), "border-right: ", info.txtBorder);
+                    styleString = replaceString (styleString.toLowerCase(), "border-left: ", info.txtBorder);
+                    styleString = replaceString (styleString.toLowerCase(), "border-bottom: ", info.txtBorder);
+                    styleString = replaceString (styleString.toLowerCase(), "padding-top: ", info.txtCellPad);
+                    styleString = replaceString (styleString.toLowerCase(), "padding-right: ", info.txtCellPad);
+                    styleString = replaceString (styleString.toLowerCase(), "padding-left: ", info.txtCellPad);
+                    styleString = replaceString (styleString.toLowerCase(), "padding-bottom: ", info.txtCellPad);
+                  } else {
+                    styleString = replaceString (styleString, "border: ", info.txtBorder);
+                    styleString = replaceString (styleString, "padding: ", info.txtCellPad);
+                  }
+                  this._.selectedElement.$.getElementsByTagName('td')[i].style.cssText = styleString;
+                }
+              }
+            }
+          }
 
 					// Modify the table headers. Depends on having rows and cols generated
 					// correctly so it can't be done in commit functions.
@@ -419,10 +447,12 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 											{
 												// set value for txtBorder 
 												var styleString = selectedTable.$.style.cssText.toLowerCase(); 
-												if (navigator.userAgent.indexOf("Firefox") >= 0) {
-												    this.setValue(getValueFromMultiValuesStyle(styleString, 'border', 1));
-												} else {
+
+												if (navigator.userAgent.indexOf("MSIE 8") >= 0 || navigator.userAgent.indexOf("MSIE 7") >= 0) {
+
 												    this.setValue(getValueFromMultiValuesStyle(styleString, 'border-top', 2));
+												} else {
+													this.setValue(getValueFromMultiValuesStyle(styleString, 'border', 1));
 												}
 											},
 											commit : function( data, selectedTable )
@@ -587,10 +617,10 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 											{
 												//set value for txtCellPad
 												var cellStyle = selectedTable.$.getElementsByTagName('td')[0].style.cssText.toLowerCase();
-												if (navigator.userAgent.indexOf("Firefox") >= 0) {
-												    this.setValue(getValueFromStyle(cellStyle, 'padding') || '');
-												} else {
+												if (navigator.userAgent.indexOf("MSIE 8") >= 0 || navigator.userAgent.indexOf("MSIE 7") >= 0) {
 												    this.setValue(getValueFromStyle(cellStyle, 'padding-right') || '');
+												} else {
+												    this.setValue(getValueFromStyle(cellStyle, 'padding') || '');
 												}
 											},											
 											commit : commitValue
