@@ -107,9 +107,11 @@ public class ActivitiesUpgradePlugin extends UpgradeProductPlugin {
 	}
 
 	private void updateActivityNumber(Node activityRef) throws Exception {
-		Node activityRefList = (Node)activityRef.getAncestor(4);
-		Long currentNumber = activityRefList.getProperty("soc:number").getValue().getLong();
-		activityRefList.setProperty("soc:number", currentNumber - 1);
+		Node activityRefList = activityRef.getParent().getParent().getParent().getParent();
+		if(activityRefList.hasProperty("soc:number")) {
+			Long currentNumber = activityRefList.getProperty("soc:number").getValue().getLong();
+			if(currentNumber > 0) activityRefList.setProperty("soc:number", currentNumber - 1);
+		}
 	}
 
 	@Override
