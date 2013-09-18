@@ -8,13 +8,14 @@ UploadForm.prototype.showUploadForm = function() {
 		var sPath = eXo.ecm.ECS.currentNode.getAttribute("name");
 	} else {
 		sPath = "/";
-	}
+	}	
+	
 	var popupContainer = document.getElementById("PopupContainer");
 	popupContainer.style.display = 'block';
-	popupContainer.style.width = "100%";
-	popupContainer.style.height = "100%";
+	popupContainer.style.width = "500px";
+	popupContainer.style.height = "222px";
 	popupContainer.style.position = "absolute";
-	popupContainer.style.top = "0px";
+	popupContainer.style.top = "194px";
 	popupContainer.innerHTML = uploadContainer.innerHTML;
 	var iFrame = gj(popupContainer).find("iframe.iFrameUpload:first")[0];
 	var iContent = document.getElementById("iContentUpLoad").innerHTML;
@@ -31,17 +32,45 @@ UploadForm.prototype.showUploadForm = function() {
 	var uploadForm = gj(popupContainer).find("div.UploadForm:first")[0];
 	var maskLayer = gj(popupContainer).find("div.MaskLayer:first")[0];
 	if (maskLayer!=null) maskLayer.style.zIndex = uploadForm.style.zIndex++;
-	uploadForm.style.position = 'absolute';
+	//uploadForm.style.position = 'absolute';
 	var widthUploadForm = (gj(window).width() - uploadForm.offsetWidth)/2;
 	var heightUploadForm = (gj(window).height() - uploadForm.offsetHeight)/2;
-	uploadForm.style.left = widthUploadForm + "px";
-	uploadForm.style.top = heightUploadForm + "px";
+	//uploadForm.style.left = widthUploadForm + "px";
+	//uploadForm.style.top = heightUploadForm + "px";
 	
-	var tblActionContainer =  gj(uploadForm).find("table.ActionContainer:first")[0];
-	var trFolder =  gj(tblActionContainer).find("tr.PathFolder:first")[0];
-	var spanFolder = gj(trFolder).find("span")[0];
-	spanFolder.innerHTML += ":"+ eXo.ecm.ECS.currentFolder;
+	//var tblActionContainer =  gj(uploadForm).find("table.ActionContainer:first")[0];
+	//var trFolder =  gj(tblActionContainer).find("tr.PathFolder:first")[0];
+	//var spanFolder = gj(trFolder).find("span")[0];
+	//spanFolder.innerHTML += ":"+ eXo.ecm.ECS.currentFolder;
+	
+	
+	var uploadBtn = popupContainer.getElementsByClassName("uploadButton")[0];
+	var iFrameUpload = gj(popupContainer).find("iframe.iFrameUpload:first")[0];	
+	var formUpload = iFrameUpload.contentWindow.document.getElementsByTagName("form")[0];
+	var fileUpload = formUpload.file;
+			
+	gj(uploadBtn).off("click").click(function() {
+	  gj(fileUpload).change(function() {
+		var fileNameUpload = gj(fileUpload).val();
+		if(fileNameUpload == null || fileNameUpload == "") {
+			fileNameUpload = "No file selected";
+		}
+		fileNameUpload = fileNameUpload.replace(/^.*[\\\/]/, '');
+		var labelUpload = gj(uploadBtn).find(".noFile");
+		gj(labelUpload).text(fileNameUpload);
+		console.log(labelUpload);			
+		
+	  });
+	  gj(fileUpload).click();
+	  
+	})
+	
+	
 };
+
+UploadForm.prototype.alertFilename = function() {
+	alert('fsfs');
+}
 
 UploadForm.prototype.showAlert = function() {
 	eXo.ecm.UploadForm.removeMask();
@@ -116,11 +145,13 @@ UploadForm.prototype.uploadFile = function() {
 			formUpload.submit();
 		}
 		eXo.ecm.UploadForm.stopUpload = false;
+		var uploadBtn = popupContainer.getElementsByClassName("uploadButton")[0];
+		uploadBtn.style.display = "none";
 		var uploadField = gj(popupContainer).find("tr.UploadField:first")[0];
 		uploadField.style.display = "none";
 		var UploadInfo = gj(popupContainer).find("tr.UploadInfo:first")[0];
 		UploadInfo.style.display = "";
-		var CancelAction = gj(popupContainer).find("tr.CancelAction:first")[0];
+		var CancelAction = gj(popupContainer).find("button.CancelAction:first")[0];
 		CancelAction.style.display = "none";
 		if(!eXo.ecm.UploadForm.stopUpload) {
 				this.uploadProgressTimer = setInterval(function() {
@@ -131,8 +162,8 @@ UploadForm.prototype.uploadFile = function() {
 					if (repositoryName !== undefined) strParam += "repositoryName="+ repositoryName;
 					if (workspaceName !== undefined)  strParam += "&workspaceName=" + workspaceName;
 					if(driverName) strParam += "&driverName=" + driverName;
-					strParam += "&currentFolder="+eXo.ecm.currentFolder;
-					strParam += "&currentPortal="+eXo.ecm.portalName;
+					strParam += "&currentFolder="+eXo.ecm.ECS.currentFolder;
+					strParam += "&currentPortal="+eXo.ecm.ECS.portalName;
 					strParam +="&action=progress&uploadId="+uploadId;
 					var strConnector = eXo.ecm.ECS.connector.replace("/getDrivers?repositoryName=repository", "/");
 					var connector = strConnector + eXo.ecm.ECS.cmdEcmDriver + eXo.ecm.ECS.controlUpload + "?"+ strParam + "&language=" + eXo.ecm.ECS.userLanguage;
@@ -305,3 +336,5 @@ UploadForm.prototype.isInvalidName = function(name) {
 }
 
 eXo.ecm.UploadForm = new UploadForm();
+
+
