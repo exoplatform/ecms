@@ -17,13 +17,19 @@
  **************************************************************************/
 package org.exoplatform.ecm.webui.component.explorer.control.filter;
 
+import java.security.AccessControlException;
+
 import java.util.Map;
 
 import javax.jcr.Node;
 
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.ext.filter.UIExtensionAbstractFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
+
 
 /**
  * Created by The eXo Platform SARL
@@ -44,9 +50,21 @@ public class IsEditableFilter extends UIExtensionAbstractFilter {
   public boolean accept(Map<String, Object> context) throws Exception {
     if (context == null) return true;
     Node currentNode = (Node) context.get(Node.class.getName());
-    String nodeType = currentNode.getPrimaryNodeType().getName();
+    String nodeType;
+    if(currentNode.hasProperty("exo:presentationType")) {
+      nodeType = currentNode.getProperty("exo:presentationType").getString();
+    }else {
+      nodeType = currentNode.getPrimaryNodeType().getName();
+    }
     for(String type:Utils.NON_EDITABLE_NODETYPES) {
       if(type.equalsIgnoreCase(nodeType)) return false;
+    }
+    String userName = Util.getPortalRequestContext().getRemoteUser();
+    try{
+      TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
+      templateService.getTemplatePathByUser(true, nodeType, userName);
+    }catch(AccessControlException e){
+      return false;
     }
     return true;
   }

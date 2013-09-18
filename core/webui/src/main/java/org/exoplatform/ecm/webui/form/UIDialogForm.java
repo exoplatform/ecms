@@ -527,6 +527,7 @@ public class UIDialogForm extends UIForm {
     propertiesName.put(name, propertyName);
     fieldNames.put(propertyName, name);
     Node node = getNode();
+    Node childNode = getChildNode();
     UICheckBoxInput uiCheckBoxInput = findComponentById(name);
     boolean isFirstTimeRender = false;
     if(uiCheckBoxInput == null || isResetForm ){
@@ -541,6 +542,9 @@ public class UIDialogForm extends UIForm {
     if (node != null && node.hasProperty(propertyName) && isFirstTimeRender) {
       uiCheckBoxInput.setValue(Boolean.parseBoolean(node.getProperty(propertyName).getValue().toString()));
       uiCheckBoxInput.setChecked(node.getProperty(propertyName).getValue().getBoolean());
+    }else if( childNode != null && childNode.hasProperty(propertyName) && isFirstTimeRender){
+      uiCheckBoxInput.setValue(Boolean.parseBoolean(childNode.getProperty(propertyName).getValue().toString()));
+      uiCheckBoxInput.setChecked(childNode.getProperty(propertyName).getValue().getBoolean());
     }
 
     if (formCheckBoxField.validateType != null) {
@@ -1669,7 +1673,7 @@ public class UIDialogForm extends UIForm {
             + "onclick=\"javascript:eXo.webui.UIForm.submitEvent('" + "" + getId()
             + "','ShowComponent','&objectId=" + fieldName + "' )\"><i"
             + " class='"
-            + iconClass + "'></i></a>");
+            + iconClass + " uiIconLightGray'></i></a>");
         /* No need Remove action if uiInput is UIFormMultiValueInputSet */
         if (!UIFormMultiValueInputSet.class.isInstance(uiInput))
           w.write("<a rel=\"tooltip\" data-placement=\"bottom\" class=\"actionIcon\" title=\""

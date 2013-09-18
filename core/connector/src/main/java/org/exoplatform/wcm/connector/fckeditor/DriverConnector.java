@@ -906,8 +906,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
                                       String childName,
                                       String nodeDriveName) throws Exception {
       Element folder = document.createElement("Folder");
-      folder.setAttribute("name", childName);
-      folder.setAttribute("title", Utils.getTitle(child));
+      folder.setAttribute("name", childName.replaceAll("%", "%25"));
+      folder.setAttribute("title", Utils.getTitle(child).replaceAll("%", "%25"));
       folder.setAttribute("url", FCKUtils.createWebdavURL(child));
       folder.setAttribute("folderType", folderType);
       folder.setAttribute("path", child.getPath());

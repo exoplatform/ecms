@@ -11,6 +11,7 @@
   import org.exoplatform.services.wcm.core.NodetypeConstant;
   import org.exoplatform.wcm.webui.reader.ContentReader;  
   
+  
   public Node getFileLangNode(Node currentNode) throws Exception {
     if(currentNode.isNodeType("nt:unstructured")) {
       if(currentNode.getNodes().getSize() > 0) {
@@ -128,15 +129,16 @@
                              <%
                                if(currentNode.hasProperty(NodetypeConstant.EXO_ALTERNATIVE_TEXT)) {
                                  alterText = currentNode.getProperty(NodetypeConstant.EXO_ALTERNATIVE_TEXT).getString();
-                                 if (alterText.length() < 100) {
-                                   print alterText;
+                                 def tmpAlterText = alterText.replaceAll("<(.|\n)*?>","");
+                                 if (tmpAlterText.length() < 100) {
+                                   print tmpAlterText;
                                  } else {
-                                   print(alterText.substring(0, 100)); %>
-                                   <span onclick="eXo.ecm.ECMUtils.displayFullAlternativeText(this)">
-                                     <a href="javascript:void(0);">
-                                       <%=_ctx.appRes("AccessibleMedia.view.label.Read-more")%>
-                                     </a>
-                                   </span>
+                                   print(tmpAlterText.substring(0, 100)); %>
+                                   <p onclick="eXo.ecm.ECMUtils.displayFullAlternativeText(this)">
+                                       <a href="javascript:void(0);">
+                                         <%=_ctx.appRes("AccessibleMedia.view.label.Read-more")%>
+                                       </a>
+                                   </p>
                               <% }
                                } else {
                                  print "<span></span>"
