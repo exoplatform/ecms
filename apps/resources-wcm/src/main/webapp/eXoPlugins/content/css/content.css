@@ -344,12 +344,6 @@ a {
 }
 
 
-.UploadForm {
-	background: #f9f9f9;
-	padding: 5px;
-	width: 400px;
-	border: 2px solid #c7c7c7;
-}
 
 .UploadForm .Abort  .Abort {
 	display: block;
@@ -367,48 +361,21 @@ a {
 	display: block;
 }
 
-.UploadForm  .UploadInfo .GraphProgress{
-	background: #abcdef;
-	width: 0px;
-	height: 21px;
-	line-height: 21px;
-}
-
-.UploadForm  .UploadInfo .NumberProgress{
-	color: orange;
-	height: 21px;
-	line-height: 21px;
-	margin-top: -21px;
-	text-align: center;
-}
-
 .UploadForm input {
-	margin: 2px 6px 0px 0px;
-	
+	margin: 10px 6px 0px 0px;
+	width: 260px;
 }
 
 .UploadForm iframe {
 	height: 0px;
 	border: none;
 }
-
-.PopupContainer {
-	position: absolute;
-	top: 30%;
-	left: 0px;
-	width: 100%;
-	display: none;
+.UploadForm  .progress {
+    height: 18px;
+    line-height: 18px;
 }
-
-
-body {
-	font-family:Tahoma,Verdana,Arial,Helvetica,sans-serif;
-	font-size:11px;
-	height:100%;
-	margin:0px;
-	overflow-x:hidden;
-	padding:0px;
-	background: #e1e1e2;
+.PopupContainer {
+	height: auto!important;
 }
 
 .UIHomePagePortlet {

@@ -68,8 +68,8 @@
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>Next</next>
-      <previous>Previous</previous>
+      <next>Próximo</next>
+      <previous>Anterior</previous>
       <more>More</more>
     </label>
   </UIPaginatorDefault>

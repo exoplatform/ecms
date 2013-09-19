@@ -4,8 +4,8 @@
   <View>
     <label>
       <languages>
-        <en>English</en>
-        <fr>French</fr>
+        <en>Inglês</en>
+        <fr>Francês</fr>
         <ru>Russian</ru>
         <vi>Vietnamese</vi>
         <nl>Dutch</nl>
@@ -44,7 +44,7 @@
         <using-webDAV>or use WebDAV to access the content</using-webDAV>
         <file-size-too-big>The content of this file is too big. You should download and open in the client.</file-size-too-big>
         <webDAV>WebDAV View</webDAV>
-        <download>Download</download>
+        <download>Baixar</download>
         <htmlview>View as HTML</htmlview>
         <plaintextview>View as Plain text</plaintextview>
       </label>
@@ -57,7 +57,7 @@
   <Mail>
     <view>
       <label>
-        <from>From:</from>
+        <from>De:</from>
         <to>To:</to>
         <cc>Cc:</cc>
         <date>Date:</date>
@@ -143,7 +143,7 @@
         <subject>Subject</subject>
         <source>Source</source>
         <contributor>Contributor</contributor>
-        <resource-type>Resource Type</resource-type>
+        <resource-type>Tipo de Recurso</resource-type>
         <date>Date</date>
         <publisher>Publisher</publisher>
         <description>Description</description>

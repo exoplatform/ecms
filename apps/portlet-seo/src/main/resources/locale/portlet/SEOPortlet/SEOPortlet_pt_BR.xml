@@ -4,21 +4,21 @@
     <label>  
       <title>Title:</title>
       <description>Description:</description>
-      <keywords>Keywords:</keywords>
-      <language>Language:</language>
+      <keywords>Palavras chave:</keywords>
+      <language>Idioma:</language>
       <robots>Robots:</robots>
-      <sitemap>Sitemap:</sitemap>
+      <sitemap>Mapa do site:</sitemap>
       <sitemapvisible>Visible in Sitemap</sitemapvisible>
-    <isInherited>Inherited from parent page</isInherited>
-      <priority>Priority:</priority>
-      <frequency>Frequency:</frequency>
+    <isInherited>Herdado da página pai</isInherited>
+      <priority>Prioridade:</priority>
+      <frequency>Frequência:</frequency>
       <select-language>Select a language</select-language>
       <option>
         <Always>Always</Always>
         <Hourly>Hourly</Hourly>
         <Daily>Daily</Daily>
-        <Weekly>Weekly</Weekly>
-        <Monthly>Monthly</Monthly>
+        <Weekly>Semanal</Weekly>
+        <Monthly>Mensal</Monthly>
         <Yearly>Yearly</Yearly>
         <Never>Never</Never>
       </option> 
@@ -38,7 +38,7 @@
     <seo-delete>Delete</seo-delete>
     </title>
   <help> 
-  <priority>Valid values range from 0.0 to 1.0.</priority>
+  <priority>Valores válidos de 0.0 a 1.0.</priority>
   <description>Help searchers: let them know that the following page has a link that they are looking for.</description>
   <keywords>Most important terms in the page separated by a comma.</keywords>  
   </help>  

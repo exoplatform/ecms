@@ -4,14 +4,14 @@
   <View>
     <label>
       <languages>
-        <en>English</en>
-        <fr>French</fr>
-        <ru>Russian</ru>
-        <vi>Vietnamese</vi>
-        <nl>Dutch</nl>
-        <de>German</de>
-        <uk>Ukrainian</uk>
-        <ar>Arabic</ar>
+        <en>Inglés</en>
+        <fr>Francés</fr>
+        <ru>Ruso</ru>
+        <vi>vietnamita</vi>
+        <nl>Holandés</nl>
+        <de>Alemán</de>
+        <uk>Ucraniano</uk>
+        <ar>Árabe</ar>
       </languages>
     </label>
   </View>
@@ -22,14 +22,14 @@
   <Comment>
     <view>
       <label>
-        <postedBy>Last comment posted by</postedBy>
-        <at>at</at>
-        <comments>Comment(s)</comments>
-        <show-comments>Show comments</show-comments>
-        <hide-comments>Hide comments</hide-comments>
-        <comment-by>Commented by</comment-by>
-        <email>Email</email>
-        <site>Site</site>
+        <postedBy>Último comentario publicado por</postedBy>
+        <at>en</at>
+        <comments>Comentario (s)</comments>
+        <show-comments>Mostrar comentarios</show-comments>
+        <hide-comments>Ocultar comentarios</hide-comments>
+        <comment-by>Comentado por</comment-by>
+        <email>Correo electrónico</email>
+        <site>Sitio</site>
       </label>
     </view>
   </Comment>
@@ -40,13 +40,13 @@
   <File>
     <view>
       <label>
-        <not-viewable>This content is not viewable</not-viewable>
-        <using-webDAV>or use WebDAV to access the content</using-webDAV>
-        <file-size-too-big>The content of this file is too big. You should download and open in the client.</file-size-too-big>
-        <webDAV>WebDAV View</webDAV>
-        <download>Download</download>
-        <htmlview>View as HTML</htmlview>
-        <plaintextview>View as Plain text</plaintextview>
+        <not-viewable>Este contenido no es visible</not-viewable>
+        <using-webDAV>o utilizar WebDAV para acceder a los contenidos</using-webDAV>
+        <file-size-too-big>El contenido de este archivo es demasiado grande. Debe descargar y abrir en el cliente.</file-size-too-big>
+        <webDAV>Vista WebDAV</webDAV>
+        <download>Descargar</download>
+        <htmlview>Ver como HTML</htmlview>
+        <plaintextview>Ver como texto sin formato</plaintextview>
       </label>
     </view>
   </File>
@@ -57,12 +57,12 @@
   <Mail>
     <view>
       <label>
-        <from>From:</from>
-        <to>To:</to>
+        <from>De:</from>
+        <to>Para:</to>
         <cc>Cc:</cc>
-        <date>Date:</date>
-        <subject>Subject:</subject>
-        <attachment>Attachments:</attachment>
+        <date>Fecha:</date>
+        <subject>Tema:</subject>
+        <attachment>Archivos adjuntos:</attachment>
       </label>
     </view>
   </Mail>
@@ -72,8 +72,8 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Avg. Rating</avg-rating>
-        <subscription>Votes</subscription>
+        <avg-rating>Clasificación Avg</avg-rating>
+        <subscription>Votos</subscription>
       </label>
     </view>
   </Vote>
@@ -83,12 +83,12 @@
   <ListView>
     <view>
       <label>
-        <name>Name</name>
+        <name>Nombre</name>
         <versionable>Versionable</versionable>
         <exo_owner>Propietario</exo_owner>
-        <exo_dateCreated>Date Created</exo_dateCreated>
-        <exo_dateModified>Date Modified</exo_dateModified>
-        <auditing>Auditing</auditing>
+        <exo_dateCreated>Fecha de creación</exo_dateCreated>
+        <exo_dateModified>Fecha Modificada</exo_dateModified>
+        <auditing>Auditoría</auditing>
       </label>
     </view>
   </ListView>
@@ -99,8 +99,8 @@
   <AddMetadata>
     <view>
       <label>
-        <action-name>Action Name</action-name>
-        <lifecycle>Lifecycle</lifecycle>
+        <action-name>Nombre de la acción</action-name>
+        <lifecycle>Ciclo de vida</lifecycle>
         <metadata>Metadatos</metadata>
         <description>Descripción</description>
       </label>
@@ -113,8 +113,8 @@
   <AutoVersioning>
     <view>
       <label>
-        <action-name>Action Name</action-name>
-        <lifecycle>Lifecycle</lifecycle>
+        <action-name>Nombre de la acción</action-name>
+        <lifecycle>Ciclo de vida</lifecycle>
         <description>Descripción</description>
       </label>
     </view>
@@ -125,8 +125,8 @@
   <EnableVersioning>
     <view>
       <label>
-        <action-name>Name</action-name>
-        <lifecycle>Lifecycle</lifecycle>
+        <action-name>Nombre</action-name>
+        <lifecycle>Ciclo de vida</lifecycle>
         <description>Descripción</description>
       </label>
     </view>
@@ -141,18 +141,18 @@
         <title>Título</title>
         <creator>Creador</creator>
         <subject>Asunto</subject>
-        <source>Source</source>
-        <contributor>Contributor</contributor>
-        <resource-type>Resource Type</resource-type>
+        <source>Fuente</source>
+        <contributor>Contribuyente</contributor>
+        <resource-type>Tipo de Recursos</resource-type>
         <date>Fecha</date>
-        <publisher>Publisher</publisher>
+        <publisher>Editor</publisher>
         <description>Descripción</description>
-        <rights>Rights</rights>
+        <rights>Derechos</rights>
         <relation>Relación</relation>
         <format>Formato</format>
-        <coverage>Coverage</coverage>
-        <identifier>Identifier</identifier>
-        <languages>Languages</languages>
+        <coverage>Cobertura</coverage>
+        <identifier>Identificador</identifier>
+        <languages>Idiomas</languages>
       </label>
       <action>
         <add-edit>Agregar/Editar</add-edit>
@@ -160,7 +160,7 @@
       </action>
       <tooltip>
         <cancel>Cancelar</cancel>
-        <add-edit>Add/Edit Properties</add-edit>
+        <add-edit>Añadir/Editar Propiedades</add-edit>
       </tooltip>
     </view>
   </ElementSet>
@@ -168,10 +168,10 @@
   <ScriptAction>
     <view>
       <label> 
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node types</nodetypes>
-        <affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
-        <nodeTypeName>Node type names</nodeTypeName>
+        <isDeep>Es profundo</isDeep>
+        <nodetypes>Tipos de nodos</nodetypes>
+        <affectedNodeTypeNames>Tipos de nodo afectado</affectedNodeTypeNames>
+        <nodeTypeName>Nombres de tipo de nodo</nodeTypeName>
       </label> 
     </view>
   </ScriptAction>
@@ -179,10 +179,10 @@
   <AddMetadata>
     <view>
       <label>
-        <isDeep>Is Deep</isDeep>
+        <isDeep>Es profundo</isDeep>
         <nodetypes>Tipos de nodo</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
+        <affectedNodeTypeNames>Tipos de nodo afectados</affectedNodeTypeNames>
+        <nodeTypeName>Nombres de tipos de nodo</nodeTypeName>
       </label> 
     </view>
   </AddMetadata>
@@ -190,10 +190,10 @@
   <EnableVersioning>
     <view>
       <label>
-        <isDeep>Is Deep</isDeep>
+        <isDeep>Es profundo</isDeep>
         <nodetypes>Tipos de nodo</nodetypes> 
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
+        <affectedNodeTypeNames>Tipos de nodo afectados</affectedNodeTypeNames>
+        <nodeTypeName>Nombres de tipos de nodo</nodeTypeName>
       </label> 
     </view>
   </EnableVersioning>
@@ -201,10 +201,10 @@
   <AutoVersioning>
     <view>
       <label>
-        <isDeep>Is Deep</isDeep>
+        <isDeep>Es profundo</isDeep>
         <nodetypes>Tipos de nodo</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
+        <affectedNodeTypeNames>Tipos de nodo afectados</affectedNodeTypeNames>
+        <nodeTypeName>Nombres de tipos de nodo</nodeTypeName>
       </label> 
     </view>
   </AutoVersioning>
@@ -212,13 +212,13 @@
    <AccessibleMedia>
     <view>
       <label>
-      <Play-audio-description-of-this-video>Audio description</Play-audio-description-of-this-video>
-      <Read-more>Read more</Read-more>
-      <Read-less>Read less</Read-less>
-      <Switch-back-to-original-video>Original video</Switch-back-to-original-video>
+      <Play-audio-description-of-this-video>Descripción audio</Play-audio-description-of-this-video>
+      <Read-more>Leer más</Read-more>
+      <Read-less>Leer menos</Read-less>
+      <Switch-back-to-original-video>Video original</Switch-back-to-original-video>
       </label>
       <tooltip>
-      <A-second-media-file-is-available-as-audio-description>A second media file is available as an audio description</A-second-media-file-is-available-as-audio-description>
+      <A-second-media-file-is-available-as-audio-description>Un segundo archivo multimedia está disponible como audio descripción</A-second-media-file-is-available-as-audio-description>
       </tooltip>
     </view>
   </AccessibleMedia>

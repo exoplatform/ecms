@@ -29,7 +29,7 @@
       <option>
         <exo:title>Tiêu đề</exo:title>
         <exo:dateCreated>Ngày Tạo</exo:dateCreated>
-        <exo:dateModified>Ngày Sửa</exo:dateModified>
+        <exo:lastModifiedDate>Ngày cập nhật</exo:lastModifiedDate>
         <publication:liveDate>Ngày Đăng tải</publication:liveDate>
         <exo:startEvent>Ngày diễn ra Sự kiện</exo:startEvent>
         <exo:index>Chỉ số</exo:index>
@@ -107,6 +107,7 @@
   <UICLVConfigItemPathFormInputSet>
     <title>
       <SelectFolderPath>Chọn Đường dẫn Thư mục</SelectFolderPath>
+      <AddPath>Thêm Đường dẫn</AddPath>
     </title>
   </UICLVConfigItemPathFormInputSet>
   <FolderPathSelectorPopupWindow>
