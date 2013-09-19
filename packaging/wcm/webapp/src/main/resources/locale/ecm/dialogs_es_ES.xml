@@ -6,17 +6,17 @@
   <Ecm>
     <dialog>
       <label>
-        <end-time>End Time</end-time>
-        <start-time>Start Time</start-time>
-        <lifecycle>Lifecycle</lifecycle>
-        <mimeType>Mime Type</mimeType>
-        <repeat-count>Repeat Count</repeat-count>
-        <time-interval>Time Interval</time-interval>
-        <query-items>Query Items</query-items>
-        <schedule-type>Schedule Type</schedule-type>
+        <end-time>Hora de finalización</end-time>
+        <start-time>Hora de inicio</start-time>
+        <lifecycle>Ciclo de vida</lifecycle>
+        <mimeType>Tipo Mime</mimeType>
+        <repeat-count>Repita el conteo</repeat-count>
+        <time-interval>Intervalo de tiempo</time-interval>
+        <query-items>Elementos de Consulta</query-items>
+        <schedule-type>Tipo de Programa</schedule-type>
         <remove>Eliminar Item</remove>
         <add>Añadir Item</add>
-        <expand>Expand This</expand>
+        <expand>Extender este</expand>
       </label>
     </dialog>
   </Ecm>
@@ -28,7 +28,7 @@
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
-      <name>Name</name>
+      <name>Nombre</name>
     <categories>Categorías</categories>
     </label>
   </UIDocumentForm>
@@ -39,7 +39,7 @@
   <HtmlFile>
     <dialog>
       <label>
-        <name>Name</name>
+        <name>Nombre</name>
         <content>Contenido</content>
       </label>
     </dialog>
@@ -55,7 +55,7 @@
         <categories>Categorías</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
         <content>#{word.content}</content>
-        <re-upload>The file already exists. You can delete it and upload another file.</re-upload>
+        <re-upload>El archivo ya existe. Puede eliminarlo y cargar otro archivo.</re-upload>
       </label>
     </dialog>
   </File>
@@ -63,22 +63,22 @@
   <UIActionForm>
     <label>
       <description>#{word.description}</description>
-      <port>Port</port>
+      <port>Puerto</port>
       <userName>#{word.userName}</userName>
       <password>Contraseña</password>
       <link>Enlace</link>
-      <to>Send Mail To</to>
+      <to>Enviar correo a</to>
       <actionName>#{word.name}</actionName>
     </label>
   </UIActionForm>
   <EditFormAction>
     <label>
       <description>#{word.description}</description>
-      <port>Port</port>
+      <port>Puerto</port>
       <userName>#{word.userName}</userName>
       <password>Contraseña</password>
       <link>Enlace</link>
-      <to>Send Mail To</to>
+      <to>Enviar correo a</to>
       <actionName>#{word.name}</actionName>
     </label>
   </EditFormAction>
@@ -89,7 +89,7 @@
   <AddMetadata>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>ID</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <metadata>Metadatos</metadata>
@@ -104,7 +104,7 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>ID</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -112,7 +112,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron expression</cron-expression>
+        <cron-expression>Expresión de cron</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -123,7 +123,7 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>ID</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -143,20 +143,20 @@
     <dialog>
       <label>
         <title>#{word.title}:</title>
-        <creator>Creator:</creator>
+        <creator>Creador:</creator>
         <subject>#{word.subject}:</subject>
-        <source>Source:</source>
-        <contributor>Contributor:</contributor>
-        <resource-type>Resource Type:</resource-type>
+        <source>Fuente:</source>
+        <contributor>Contribuyente:</contributor>
+        <resource-type>Tipo de Recursos:</resource-type>
         <date>#{word.date}:</date>
-        <publisher>Publisher:</publisher>
+        <publisher>Editorial:</publisher>
         <description>#{word.description}:</description>
-        <rights>Rights:</rights>
-        <relation>Relation:</relation>
+        <rights>Derechos:</rights>
+        <relation>Relación:</relation>
         <format>#{word.format}:</format>
-        <coverage>Coverage:</coverage>
-        <identifier>Identifier:</identifier>
-        <language>Language:</language>
+        <coverage>Cobertura:</coverage>
+        <identifier>Identificador:</identifier>
+        <language>idioma:</language>
       </label>
     </dialog>
   </ElementSet>
@@ -167,8 +167,8 @@
   <Actionable>
     <dialog>
       <label>
-        <primary-type>Primary Type</primary-type>
-        <mixin-types>Mixin Types</mixin-types>
+        <primary-type>Tipo primario</primary-type>
+        <mixin-types>Tipos Mixin</mixin-types>
       </label>
     </dialog>
   </Actionable>
@@ -179,10 +179,10 @@
   <Move>
     <dialog>
       <label>
-        <destination-workpsace>Destination Workspace</destination-workpsace>
-        <destination-path>Destination Path</destination-path>
-        <primary-type>Primary Type</primary-type>
-        <mixin-types>Mixin Types</mixin-types>
+        <destination-workpsace>Destinación del espacio de trabajo</destination-workpsace>
+        <destination-path>Ruta de destino</destination-path>
+        <primary-type>Tipo primario</primary-type>
+        <mixin-types>Tipos Mixin</mixin-types>
       </label>
     </dialog>
   </Move>
@@ -192,8 +192,8 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>Start Publication</start-publication>
-        <end-publication>End Publication</end-publication>
+        <start-publication>Comenzar la publicación</start-publication>
+        <end-publication>Publicación final</end-publication>
       </label>
     </dialog>
   </Published>
@@ -236,11 +236,11 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>Version History</version-history>
+        <version-history>Historia de la versión</version-history>
         <base-version>Versión base</base-version>
-        <is-checked-out>Is Checked out</is-checked-out>
-        <predecessors>Predecessors</predecessors>
-        <merge-failed>Merge Failed</merge-failed>
+        <is-checked-out>Está retirado</is-checked-out>
+        <predecessors>Antecesores</predecessors>
+        <merge-failed>La unión falló</merge-failed>
         <uuid>UUID</uuid>
       </label>
     </dialog>
@@ -252,9 +252,9 @@
   <ResouceContainer>
     <dialog>
       <label>
-        <name>Name</name>
-        <autoload>Auto Load</autoload>
-        <minetype>MIME Type</minetype>
+        <name>Nombre</name>
+        <autoload>Carga automática</autoload>
+        <minetype>Tipo MIME</minetype>
         <content>Contenido</content>
       </label>
     </dialog>
@@ -264,17 +264,17 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>The email address is invalid.</Invalid-input>
+      <Invalid-input>El correo electrónico es inválido.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>The field '{0}' is required. Please enter your value.</empty-input>
+      <empty-input>El campo '{0}' es necesario.  Por favor introduzca su valor.</empty-input>
     </msg>
   </EmptyFieldValidator>
   <NumberFormatValidator>
     <msg>
-      <Invalid-number>The field '{0}' is invalid.</Invalid-number>
+      <Invalid-number>El campo '{0}' es inválido.</Invalid-number>
     </msg>
   </NumberFormatValidator>
   <!--
@@ -285,18 +285,18 @@
   <ScriptAction>
     <dialog>
       <label>
-        <id>Id</id>
-        <name>Name</name>
-        <lifecycle>Lifecycle</lifecycle>
+        <id>ID</id>
+        <name>Nombre</name>
+        <lifecycle>Ciclo de vida</lifecycle>
         <homePath>Ruta de Inicio</homePath>
-        <targetWorkspace>Target Workspace</targetWorkspace>
-        <targetPath>Target Path</targetPath>
+        <targetWorkspace>El espacio de trabajo meta</targetWorkspace>
+        <targetPath>Ruta de destino</targetPath>
       </label>
     </dialog>
   </ScriptAction>
   <UIDialogForm>
    <form>
-   <DialogFormException>Cannot save this document. There may be a problem with the pre-save interceptor.</DialogFormException>
+   <DialogFormException>No se puede guardar este documento. Puede haber un problema con el interceptor ahorro previo.</DialogFormException>
    </form>
   </UIDialogForm>
 
@@ -306,35 +306,35 @@
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
 <no>No</no>
-<yes>Yes</yes>
+<yes>Si</yes>
 <true>Cierto</true>
 <false>Falso</false>
-<Electronic>Electronic</Electronic>
-<Paper>Paper</Paper>
+<Electronic>Electrónico</Electronic>
+<Paper>Papel</Paper>
 <NONE>Ninguno</NONE>
-<CLASSIFIED>Classified</CLASSIFIED>
-<UNCLASSIFIED>Unclassified</UNCLASSIFIED>
-<NOCONTRACT>No Contract</NOCONTRACT>
-<one-minute>One Minute</one-minute>
-<hourly>Hourly</hourly>
+<CLASSIFIED>Clasificado</CLASSIFIED>
+<UNCLASSIFIED>Sin clasificar</UNCLASSIFIED>
+<NOCONTRACT>Ningún Contrato</NOCONTRACT>
+<one-minute>Un Minuto</one-minute>
+<hourly>Por hora</hourly>
 <daily>Diario</daily>
-<quarterly>Quarterly</quarterly>
+<quarterly>Trimestral</quarterly>
 <yearly>Anualmente</yearly>
-<ten-years>Ten Years</ten-years>
-<read>User Action</read>
-  <schedule>Scheduler</schedule>
-  <node_added>Content Addition</node_added>
-  <node_removed>Content Removal</node_removed>
-  <property_added>Property Addition</property_added>
-  <property_removed>Property Removal</property_removed>
-  <property_changed>Property Modification</property_changed>
+<ten-years>Diez Años</ten-years>
+<read>Acción de Usuario</read>
+  <schedule>Planificador</schedule>
+  <node_added>Adición del Contenido</node_added>
+  <node_removed>Eliminación del Contenido</node_removed>
+  <property_added>Añadir Propiedades</property_added>
+  <property_removed>Eliminación de la propiedad</property_removed>
+  <property_changed>Modificación de Propiedades</property_changed>
 
   <ScriptAction>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
+        <isDeep>Es profundo</isDeep>
         <nodetypes>Tipos de nodo</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Tipos de nodo afectados</affectedNodeTypeNames>
       </label>
     </dialog>
   </ScriptAction>
@@ -342,9 +342,9 @@
   <AddMetadata>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
+        <isDeep>Es profundo</isDeep>
         <nodetypes>Tipos de nodo</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Tipos de nodo afectados</affectedNodeTypeNames>
       </label>
     </dialog>
   </AddMetadata>
@@ -352,9 +352,9 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
+        <isDeep>Es profundo</isDeep>
         <nodetypes>Tipos de nodo</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Tipos de nodo afectados</affectedNodeTypeNames>
       </label>
     </dialog>
   </EnableVersioning>
@@ -362,9 +362,9 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
+        <isDeep>Es profundo</isDeep>
         <nodetypes>Tipos de nodo</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <affectedNodeTypeNames>Tipos de nodo afectados</affectedNodeTypeNames>
       </label>
     </dialog>
   </AutoVersioning>
@@ -372,15 +372,15 @@
   <AccessibleMedia>
   <dialog>
   <label>
-  <captions>Captions</captions>
-<audioDescription>Audio description</audioDescription>
-<alternativeText>Alternative text</alternativeText>
+  <captions>Leyendas</captions>
+<audioDescription>Descripción audio</audioDescription>
+<alternativeText>Texto alternativo</alternativeText>
 </label>
 </dialog>
 <help>
-<CaptionsHelp>Captions should provide text of dialog and important sounds</CaptionsHelp>
-<AudioDescriptionHelp>An audio description is a narrated track of the video</AudioDescriptionHelp>
-<AlternativeTextHelp>Provide an accessible, alternative way of presenting the information</AlternativeTextHelp>
+<CaptionsHelp>Las leyendas deben proporcionar el texto del cuadro de diálogo y los sonidos importantes</CaptionsHelp>
+<AudioDescriptionHelp>Una descripción audio es una pista narrada del vídeo</AudioDescriptionHelp>
+<AlternativeTextHelp>Proporcionar una alternativa accesible de presentar la información</AlternativeTextHelp>
 </help>
 </AccessibleMedia>
   

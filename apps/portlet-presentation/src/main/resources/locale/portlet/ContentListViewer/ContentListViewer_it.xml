@@ -29,7 +29,7 @@
       <option>
         <exo:title>Titolo</exo:title>
         <exo:dateCreated>Data di Creazione</exo:dateCreated>
-        <exo:dateModified>Data di Modifica</exo:dateModified>
+        <exo:lastModifiedDate>Data di Modifica</exo:lastModifiedDate>
         <publication:liveDate>Published Date</publication:liveDate>
         <exo:startEvent>Data Evento</exo:startEvent>
         <exo:index>Indice</exo:index>
@@ -107,6 +107,7 @@
   <UICLVConfigItemPathFormInputSet>
     <title>
       <SelectFolderPath>Seleziona Percorso Cartella</SelectFolderPath>
+      <AddPath>Aggiungi Percorso</AddPath>
     </title>
   </UICLVConfigItemPathFormInputSet>
   <FolderPathSelectorPopupWindow>

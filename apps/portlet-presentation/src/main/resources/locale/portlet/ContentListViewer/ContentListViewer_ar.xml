@@ -29,7 +29,7 @@
       <option>
         <exo:title>عنوان</exo:title>
         <exo:dateCreated>تاريخ الإنشاء</exo:dateCreated>
-        <exo:dateModified>تاريخ التغيير</exo:dateModified>
+        <exo:lastModifiedDate>تاريخ التغيير</exo:lastModifiedDate>
         <publication:liveDate>تاريخ النشر</publication:liveDate>
         <exo:startEvent>تاريخ الحدث</exo:startEvent>
         <exo:index>الفهرس</exo:index>
@@ -107,6 +107,7 @@
   <UICLVConfigItemPathFormInputSet>
     <title>
       <SelectFolderPath>حدد مسار المجلد</SelectFolderPath>
+      <AddPath>اضافة مسار</AddPath>
     </title>
   </UICLVConfigItemPathFormInputSet>
   <FolderPathSelectorPopupWindow>

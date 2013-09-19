@@ -7,7 +7,7 @@
       <FastPublish>Publicar</FastPublish>
     </title>
     <label>
-      <draft>Draft</draft>
+      <draft>Borrador</draft>
       <print>Imprimir</print>
     </label>
     <msg>
@@ -65,7 +65,7 @@
       <PrintSettingBlock>Configuración de impresión</PrintSettingBlock>
       <UISCVPrintPageParameter>con</UISCVPrintPageParameter>
       <UISCVConfigPrintPageFormInputSet>Mostrar en la página</UISCVConfigPrintPageFormInputSet>
-      <LockStatus>Lock</LockStatus>
+      <LockStatus>Bloqueo</LockStatus>
       <CacheManagement>Visibilidad de contenido</CacheManagement>
       <UISCVCacheRadioBox>Compartir contenido</UISCVCacheRadioBox>
     </label>
@@ -90,6 +90,7 @@
   <UISCVConfigItemPathFormInputSet>
     <title>
       <SelectFolderPath>Seleccione la ruta de la carpeta</SelectFolderPath>
+      <AddPath>Agregar Ruta</AddPath>
     </title>
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>
@@ -98,16 +99,16 @@
     </title>
   </UISCVConfigPrintPageFormInputSet>
   <PublicationStates>
-    <archived>Archived</archived>
-    <obsolete>Obsolete</obsolete>
-    <unpublished>Unpublished</unpublished>
-    <enrolled>Enrolled</enrolled>
-    <draft>Draft</draft>
+    <archived>Archivado</archived>
+    <obsolete>Obsoleto</obsolete>
+    <unpublished>No Publicado</unpublished>
+    <enrolled>Inscrito</enrolled>
+    <draft>Borrador</draft>
     <pending>Pendiente</pending>
-    <approved>Approved</approved>
+    <approved>Aprobado</approved>
     <inreview>En Revisión</inreview>
-    <staged>Staged</staged>
-    <published>Published</published>
+    <staged>Escenificado</staged>
+    <published>Publicado</published>
   </PublicationStates>
   <UISCVCacheRadioBox>
     <label>

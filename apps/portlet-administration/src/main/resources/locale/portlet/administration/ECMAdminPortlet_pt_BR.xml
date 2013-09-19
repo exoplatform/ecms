@@ -19,8 +19,8 @@
       <UIMetadataManager>Metadata</UIMetadataManager>
       <UINamespaceManager>Namespaces</UINamespaceManager>
       <UINodeTypeManager>Node Types</UINodeTypeManager>
-      <UITemplatesManager>Documents</UITemplatesManager>
-   <UICLVTemplatesManager>List</UICLVTemplatesManager>
+      <UITemplatesManager>Documentos</UITemplatesManager>
+   <UICLVTemplatesManager>Lista</UICLVTemplatesManager>
       <UIViewManager>Views</UIViewManager>
       <UIDriveManager>Drives</UIDriveManager>
       <UIQueriesManager>Queries</UIQueriesManager>
@@ -243,7 +243,7 @@
     <header>
       <icon>Icon</icon>
       <name>Metadata</name>
-      <type>Type</type>
+      <type>Tipo</type>
       <internalUse>Internal Use</internalUse>
       <action>Actions</action>
     </header>
@@ -661,7 +661,7 @@
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Upload>Upload</Upload>
+      <Upload>Enviar</Upload>
     </action>
     <title>Import Node Type From XML File</title>
     <msg>
@@ -725,7 +725,7 @@
   <UIActionTypeList>
     <header>
       <name>Script</name>
-      <label>Name</label>
+      <label>Nome</label>
 <action>Actions</action>
     </header>
     <action>
@@ -784,10 +784,10 @@
       <UIViewTab>View</UIViewTab>
       <UITemplateEditForm>Template</UITemplateEditForm>
       <UITemplateForm>Template</UITemplateForm>
-      <UITemplateContainer>Documents</UITemplateContainer>
+      <UITemplateContainer>Documentos</UITemplateContainer>
       <UIActionsTemplateContainer>Actions</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Others</UIOthersTemplateContainer>
-  <UIActionScriptContainer>Action</UIActionScriptContainer>
+  <UIActionScriptContainer>Ação</UIActionScriptContainer>
   <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
 <UIInterceptorScriptContainer>Interceptors</UIInterceptorScriptContainer>
 
@@ -808,7 +808,7 @@
   <UIViewList>
    <title>
      <View>View</View>
-     <EditInfo>Edit</EditInfo>
+     <EditInfo>Editar</EditInfo>
      <Delete>Delete</Delete>
    </title>
     <header>
@@ -835,7 +835,7 @@
   <AddPopup>
     <title>
       <UIViewFormTabPane>Add View</UIViewFormTabPane>
-      <AddPopup>Add Template</AddPopup>
+      <AddPopup>Adicionar modelo</AddPopup>
     </title>
   </AddPopup>
   <EditPopup>
@@ -851,7 +851,7 @@
 <action>Actions</action>
 </header>
 <action>
- <AddTab>Add</AddTab>
+ <AddTab>Adicionar</AddTab>
 </action>
 <msg>
  <confirm-delete>Are you sure you want to delete this tab?</confirm-delete>
@@ -877,7 +877,7 @@
 <UIViewPermissionList>
  <header>
 <friendlyPermission>Permissions</friendlyPermission>
-     <action>Action</action>
+     <action>Ação</action>
  </header>
 <action>
  <title>
@@ -893,10 +893,10 @@
 
 <UIViewPermissionForm>
 <action>
- <Add>Add</Add>
+ <Add>Adicionar</Add>
 </action>
 <label>
- <userOrGroup>User or Group</userOrGroup>
+ <userOrGroup>Usuário ou Grupo</userOrGroup>
 </label>
 <msg>
  <permission-exist>The permission '{0}' already exists in the list.</permission-exist>
@@ -922,8 +922,8 @@
       <view-exist>The view name already exists.</view-exist>
     </msg>
     <label>
-      <viewName>Name</viewName>
-      <template>Template</template>
+      <viewName>Nome</viewName>
+      <template>Modelo</template>
 <version>Restore Version</version>
       <enableVersion>Enable Version</enableVersion>
       <hideExplorerPanel>Hide explorer panel in side bar</hideExplorerPanel>
@@ -937,18 +937,18 @@
     </msg>
     <label>
       <version>Restore Version</version>
-      <viewName>Name</viewName>
+      <viewName>Nome</viewName>
       <tabName>Tab Name</tabName>
-      <permission>Permission</permission>
+      <permission>Permissão</permission>
       <tabs>Tabs</tabs>
       <template>Templates</template>
       <enableVersion>Enable Version</enableVersion>
       <addFolder>Add Folder</addFolder>
       <addDocument>Add Document</addDocument>
       <editDocument>Edit Document</editDocument>
-      <upload>Upload</upload>
+      <upload>Enviar</upload>
       <paste>Paste</paste>
-      <search>Search</search>
+      <search>Buscar</search>
       <viewReferences>View References</viewReferences>
       <viewNodeType>View Node Type</viewNodeType>
       <viewPermissions>View Permissions</viewPermissions>
@@ -991,9 +991,9 @@
   <UIViewFormTabPane>
     <tab>
       <label>
-        <UITabContainer>Action</UITabContainer>
+        <UITabContainer>Ação</UITabContainer>
         <UIViewForm>View</UIViewForm>
-        <UIViewPermissionContainer>Permission</UIViewPermissionContainer>    
+        <UIViewPermissionContainer>Permissão</UIViewPermissionContainer>    
       </label>
     </tab>
     <action>
@@ -1018,7 +1018,7 @@
 
 <tab_permission>
  <title>
-  <SelectUser>Select User</SelectUser>
+  <SelectUser>Selecionar usuário</SelectUser>
 <SelectMember>Select Member</SelectMember>
 <AddAny>Any</AddAny>
  </title>
@@ -1031,7 +1031,7 @@
   <UIECMTemplateList>
     <title>
       <View>View</View>
-      <EditInfo>Edit</EditInfo>
+      <EditInfo>Editar</EditInfo>
       <Delete>Delete</Delete>
     </title>
     <header>
@@ -1197,8 +1197,8 @@
   <UIScriptForm>
     <label>
       <selectVersion>Versions</selectVersion>
-      <scriptContent>Content</scriptContent>
-      <scriptLabel>Name</scriptLabel>
+      <scriptContent>Conteúdo</scriptContent>
+      <scriptLabel>Nome</scriptLabel>
       <scriptName>Script</scriptName>
       <enableVersion>Enable Versioning</enableVersion>
     </label>
@@ -1213,7 +1213,7 @@
     <label>
       <selectVersion>Versions</selectVersion>
       <scriptContent>Content</scriptContent>
-      <scriptLabel>Name</scriptLabel>
+      <scriptLabel>Nome</scriptLabel>
       <scriptName>Script</scriptName>
       <enableVersion>Enable Versioning</enableVersion>
     </label>
@@ -1433,7 +1433,7 @@
     <title>
       <SelectUser>Select User</SelectUser>
       <SelectMember>Select Membership</SelectMember>
-      <AddAny>Everyone</AddAny>
+      <AddAny>Todos</AddAny>
     </title>
   </permission>
   <!--
@@ -1500,7 +1500,7 @@
     <header>
       <name>Type</name>
       <action>Action</action>
-      <label>Template</label>
+      <label>Modelo</label>
       <icon>Icon</icon>
     </header>
     <action>
@@ -1517,12 +1517,12 @@
   <UIActionsTemplateList>
     <header>
       <name>Type</name>
-      <action>Action</action>
-      <label>Template</label>
+      <action>Ação</action>
+      <label>Modelo</label>
       <icon>Icon</icon>
     </header>
     <action>
-      <AddNew>Add Template</AddNew>
+      <AddNew>Adicionar modelo</AddNew>
     </action>
     <msg>
       <confirm-delete>Do you really want to delete?</confirm-delete>
@@ -1535,12 +1535,12 @@
   <UIOthersTemplateList>
     <header>
       <name>Type</name>
-      <label>Template</label>
+      <label>Modelo</label>
       <icon>Icon</icon>
-      <action>Action</action>
+      <action>Ação</action>
     </header>
     <action>
-      <AddNew>Add Template</AddNew>
+      <AddNew>Adicionar modelo</AddNew>
     </action>
     <msg>
       <confirm-delete>Do you really want to delete?</confirm-delete>
@@ -1558,7 +1558,7 @@
 
 <UITabPane>
  <title>
- <ContentTemplateContainer>Content</ContentTemplateContainer>
+ <ContentTemplateContainer>Conteúdo</ContentTemplateContainer>
 <CateTemplateContainer>Navigation</CateTemplateContainer>
 <PageTemplateContainer>Paginator</PageTemplateContainer>
  </title>
@@ -1566,13 +1566,13 @@
 
   <UICLVTemplateList>
     <header>
-      <title>Name</title>
-      <action>Action</action>
-      <template>Template</template>
+      <title>Nome</title>
+      <action>Ação</action>
+      <template>Modelo</template>
     </header>
     <action>
-      <AddTemplate>Add Template</AddTemplate>
-<Edit>Edit</Edit>
+      <AddTemplate>Adicionar modelo</AddTemplate>
+<Edit>Editar</Edit>
 <Delete>Delete</Delete>
     </action>
     <msg>
@@ -1585,26 +1585,26 @@
 
 <CateTemplateList>
     <header>
-      <title>Name</title>
-      <action>Action</action>
-      <template>Template</template>
+      <title>Nome</title>
+      <action>Ação</action>
+      <template>Modelo</template>
     </header>
     <action>
-      <AddTemplate>Add Template</AddTemplate>
-<Edit>Edit</Edit>
+      <AddTemplate>Adicionar modelo</AddTemplate>
+<Edit>Editar</Edit>
 <Delete>Delete</Delete>
     </action>
 </CateTemplateList>
 
 <PageTemplateList>
     <header>
-      <title>Name</title>
-      <action>Action</action>
-      <template>Template</template>
+      <title>Nome</title>
+      <action>Ação</action>
+      <template>Modelo</template>
     </header>
     <action>
-      <AddTemplate>Add Template</AddTemplate>
-<Edit>Edit</Edit>
+      <AddTemplate>Adicionar modelo</AddTemplate>
+<Edit>Editar</Edit>
 <Delete>Delete</Delete>
     </action>
 </PageTemplateList>
@@ -1648,13 +1648,13 @@
 <UICLVTemplateForm_ContentTemplateContainer>
  <action>
   <Save>#{word.save}</Save>
-<Reset>Reset</Reset>
+<Reset>Limpar</Reset>
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
- <title>Name</title>
+ <title>Nome</title>
 <template>Template Name</template>
-<content>Content</content>
+<content>Conteúdo</content>
 <type>Template Type</type>
 </label>
 </UICLVTemplateForm_ContentTemplateContainer>
@@ -1662,13 +1662,13 @@
 <UICLVTemplateForm_PageTemplateContainer>
  <action>
   <Save>#{word.save}</Save>
-<Reset>Reset</Reset>
+<Reset>Limpar</Reset>
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
- <title>Name</title>
+ <title>Nome</title>
 <template>Template Name</template>
-<content>Content</content>
+<content>Conteúdo</content>
 <type>Template Type</type>
 </label>
 </UICLVTemplateForm_PageTemplateContainer>
@@ -1676,20 +1676,20 @@
 <UICLVTemplateForm_CateTemplateContainer>
  <action>
   <Save>#{word.save}</Save>
-<Reset>Reset</Reset>
+<Reset>Limpar</Reset>
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
- <title>Name</title>
+ <title>Nome</title>
 <template>Template Name</template>
-<content>Content</content>
+<content>Conteúdo</content>
 <type>Template Type</type>
 </label>
 </UICLVTemplateForm_CateTemplateContainer>
 <UICLVTemplateForm>
   <label>
     <paginators>Paginator</paginators>
-<list>Content</list>
+<list>Conteúdo</list>
 <navigation>Navigation</navigation>
   </label>
   <msg>
@@ -1960,7 +1960,7 @@
       <name>Style Name</name>
       <documentRange>Number of Occurrences</documentRange>
       <tagHTML>Tag Style</tagHTML>
-      <action>Action</action>
+      <action>Ação</action>
     </header>
     <action>
       <AddStyle>Add Style</AddStyle>
@@ -2108,8 +2108,8 @@
   </step3>
   <UIDrivePermissionSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectUser>Select User</selectUser>
+      <selectGroup>Selecionar Grupo</selectGroup>
+      <selectUser>Selecionar usuário</selectUser>
       <selectMembership>Select Membership</selectMembership>
     </label>
   </UIDrivePermissionSelector>
@@ -2204,7 +2204,7 @@
         <email>#{word.email}</email>
       </option>
       <group>Group</group>
-      <searchUser>User</searchUser>
+      <searchUser>Usuário</searchUser>
       <userName>#{word.userName}</userName>
       <lastName>#{word.lastName}</lastName>
       <firstName>#{word.firstName}</firstName>
@@ -2415,7 +2415,7 @@
   
   <UITagPermissionInfo>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
+      <usersOrGroups>Usuário ou Grupo</usersOrGroups>
       <action>Action</action>
     </header>
     <action>

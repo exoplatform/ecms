@@ -131,7 +131,7 @@
       <access-denied>Bạn không có quyền sử dụng mẫu này</access-denied>
     </msg>
     <validator>
-      <validator>Validator</validator>
+      <validator>Người duyệt</validator>
       <destPath>Đường dẫn</destPath>
     </validator>
   </UIFCCActionForm>

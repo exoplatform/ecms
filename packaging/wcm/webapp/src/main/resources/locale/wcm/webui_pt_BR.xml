@@ -34,7 +34,7 @@
 
   <Drives>
     <label>
-      <ManagedSites>Sites Management</ManagedSites>
+      <ManagedSites>Gerenciamento de Sites</ManagedSites>
       <SharedSite>Shared Site</SharedSite>
     </label>
   </Drives>
@@ -68,7 +68,7 @@
       <child-not-found>No Page Found.</child-not-found>
     </msg>
     <title>
-      <select>Select</select>
+      <select>Selecionar</select>
     </title>
   </UIPageSelectorPanel>
 
@@ -84,7 +84,7 @@
       <UIContentBrowsePanelMulti>Content Browser</UIContentBrowsePanelMulti>
       <UIContentBrowsePanelFolder>Folder Browser</UIContentBrowsePanelFolder>
       <UIContentSearchForm>Content Search Form</UIContentSearchForm>
-      <UIContentSearchResult>Search Result</UIContentSearchResult>
+      <UIContentSearchResult>Resultado da busca</UIContentSearchResult>
       <UIContentViewer>Preview Content</UIContentViewer>
       <WebContentMetadataPopup>Property Selector</WebContentMetadataPopup>
       <WebContentNodeTypePopup>Nodetype Selector</WebContentNodeTypePopup>
@@ -314,7 +314,7 @@
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>User Selector</UIUserContainer>
+      <UIUserContainer>Seletor de Usuário</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
@@ -422,19 +422,19 @@
   </UIDocumentInfo>
   <UIPortalApplication>
     <title>
-      <abort>Abort</abort>
+      <abort>Cancelar</abort>
     </title>
   </UIPortalApplication>    
   
   <CategoryNavigationTemplate>
   <label>
-  <home>Home</home>
+  <home>Principal</home>
   </label>
   </CategoryNavigationTemplate>
   
   <Breadcrumb>
   <label>
-  <home>Home</home>
+  <home>Principal</home>
   </label>  
   </Breadcrumb>
 </bundle>

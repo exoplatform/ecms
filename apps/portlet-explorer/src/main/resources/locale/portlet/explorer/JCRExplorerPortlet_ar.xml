@@ -29,7 +29,7 @@
   -->
   <UIVoteForm>
     <title>
-      <normal>عادي/ اضغط للتصويت</normal>
+      <normal>رديء</normal>
       <good>جيد/اضغط للتصويت</good>
       <verygood>متوسّط</verygood>
       <excellent>حسن</excellent>
@@ -37,7 +37,7 @@
       <no-value>لا يحتوي على قيمة</no-value>
     </title>
     <label>
-      <my-rating>ترتيبي:</my-rating>
+      <my-rating>تقديري:</my-rating>
     </label>
     <button>
       <label>
@@ -2953,7 +2953,7 @@
     </msg>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>إعادة تعيين</Reset>
     </action>
   </UIPublicationSchedule>
 
@@ -2964,7 +2964,7 @@
       <end>نهاية النشر</end>
     </label>
     <msg>
-      <invalid-format>The date format is invalid. Please check again.</invalid-format>
+      <invalid-format>صيغة التاريخ والتوقيت غير صحيحة. يُرجى اعادة التثبّت.</invalid-format>
       <fromDate-after-toDate>تاريخ الابتداء يجب أن يأتي قبل تاريخ الانتهاء.</fromDate-after-toDate>
     </msg>
   </UIPublicationPanel>

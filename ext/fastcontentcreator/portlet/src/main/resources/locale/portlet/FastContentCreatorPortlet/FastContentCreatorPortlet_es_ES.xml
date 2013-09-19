@@ -88,7 +88,7 @@
     <label>
       <workspaceName>Espacio de Trabajo</workspaceName>
       <rootNodePath>Ruta de Raíz</rootNodePath>
-      <rootNodeInfo>Root node</rootNodeInfo>
+      <rootNodeInfo>Nodo raíz</rootNodeInfo>
     </label>
   </UIWorkspaceList>
 
@@ -131,8 +131,8 @@
       <access-denied>Acceso denegado. No tiene permiso para acceder a esta plantilla.</access-denied>
     </msg>
     <validator>
-      <validator>Validator</validator>
-      <destPath>With Path</destPath>
+      <validator>Validador</validator>
+      <destPath>Con Ruta</destPath>
     </validator>
   </UIFCCActionForm>
 

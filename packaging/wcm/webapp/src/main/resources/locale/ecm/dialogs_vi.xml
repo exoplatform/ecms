@@ -310,11 +310,11 @@
 <true>Đúng</true>
 <false>Sai</false>
 <Electronic>Điện tử</Electronic>
-<Paper>Paper</Paper>
+<Paper>Bài báo</Paper>
 <NONE>Không xác định</NONE>
 <CLASSIFIED>Đã được phân loại</CLASSIFIED>
-<UNCLASSIFIED>Unclassified</UNCLASSIFIED>
-<NOCONTRACT>No Contract</NOCONTRACT>
+<UNCLASSIFIED>Không được phân loại</UNCLASSIFIED>
+<NOCONTRACT>Không hợp đồng</NOCONTRACT>
 <one-minute>1 phút</one-minute>
 <hourly>Hàng giờ</hourly>
 <daily>Hàng ngày</daily>
