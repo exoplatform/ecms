@@ -20,8 +20,8 @@
            PDFHistory, ThumbnailView, noContextMenuHandler, SecondaryToolbar */
 
 'use strict';
-
-var DEFAULT_URL = 'compressed.tracemonkey-pldi-09.pdf';
+if(!DEFAULT_URL) var DEFAULT_URL = 'compressed.tracemonkey-pldi-09.pdf';
+alert('test');
 var DEFAULT_SCALE = 'auto';
 var DEFAULT_SCALE_DELTA = 1.1;
 var UNKNOWN_SCALE = 0;
@@ -2453,7 +2453,7 @@ function updateViewarea() {
     store.set('scrollTop', Math.round(topLeft[1]));
   });
   var href = PDFView.getAnchorUrl(pdfOpenParams);
-  document.getElementById('viewBookmark').href = href;
+  //document.getElementById('viewBookmark').href = href;
 
   // Update the current bookmark in the browsing history.
   PDFHistory.updateCurrentBookmark(pdfOpenParams, pageNumber);
@@ -2530,8 +2530,10 @@ window.addEventListener('localized', function localized(evt) {
       var width = select.clientWidth + SCALE_SELECT_CONTAINER_PADDING;
       select.setAttribute('style', 'min-width: ' +
                                    (width + SCALE_SELECT_PADDING) + 'px;');
-      container.setAttribute('style', 'min-width: ' + width + 'px; ' +
-                                      'max-width: ' + width + 'px;');
+      //container.setAttribute('style', 'min-width: ' + width + 'px; ' +
+      //                                'max-width: ' + width + 'px;');
+      //Remove setting min-width for scaleSelectContainer component
+      container.setAttribute('style', 'max-width: ' + width + 'px;');
     }
 
     // Set the 'max-height' CSS property of the secondary toolbar.

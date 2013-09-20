@@ -754,6 +754,8 @@ var Promise = PDFJS.Promise = (function PromiseClosure() {
     },
 
     runHandlers: function runHandlers() {
+		//alert("ttest2");
+      console.log("555555=============================================");
       while (this.handlers.length > 0) {
         var handler = this.handlers.shift();
 
