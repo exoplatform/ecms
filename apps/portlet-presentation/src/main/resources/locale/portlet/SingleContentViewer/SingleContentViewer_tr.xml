@@ -39,16 +39,16 @@
   </UIPreferencesPopupWindows>
   <UISCVPreferences>
     <action>
-      <Save>Save</Save>
+      <Save>Kaydet</Save>
       <Abort>Abort</Abort>
-      <Cancel>Cancel</Cancel>
+      <Cancel>İptal</Cancel>
       <Print>Print</Print>
-      <Close>Close</Close>
+      <Close>Kapat</Close>
     </action>
     <title>Content Detail Preferences</title>
     <label>
       <Back>Back to previous page</Back>
-      <Edit>Edit</Edit>
+      <Edit>Düzenle</Edit>
       <Preferences>Preferences</Preferences>
       <Title>Content Detail Preferences</Title>
       <UISCVShowTitleConfigurationCheckBox>Show Title</UISCVShowTitleConfigurationCheckBox>
@@ -104,7 +104,7 @@
     <unpublished>Unpublished</unpublished>
     <enrolled>Enrolled</enrolled>
     <draft>Draft</draft>
-    <pending>Pending</pending>
+    <pending>Bekleyen</pending>
     <approved>Approved</approved>
     <inreview>Under Review</inreview>
     <staged>Staged</staged>

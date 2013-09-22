@@ -2,16 +2,16 @@
 <bundle>
   <ContentSelector>
     <msg>
-      <no-file-selected>There is no content selected. Please select at least one.</no-file-selected>
+      <no-file-selected>Seçinlen içerik yok. Lütfen en az bir tane seçin.</no-file-selected>
     </msg>
   </ContentSelector>
   <RenameConnector>
     <label>
-      <rename>Rename</rename>
-      <cancel>Cancel</cancel>
+      <rename>Yeniden Adlandır</rename>
+      <cancel>İptal</cancel>
     </label>
     <msg>
-      <renaming>Renaming...</renaming>
+      <renaming>Yeniden adlandırılıyor...</renaming>
     </msg>
   </RenameConnector>
 </bundle>

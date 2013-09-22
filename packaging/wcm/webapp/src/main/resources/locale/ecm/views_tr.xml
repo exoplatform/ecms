@@ -4,8 +4,8 @@
   <View>
     <label>
       <languages>
-        <en>English</en>
-        <fr>French</fr>
+        <en>İngilizce</en>
+        <fr>Fransızca</fr>
         <ru>Russian</ru>
         <vi>Vietnamese</vi>
         <nl>Dutch</nl>
@@ -23,7 +23,7 @@
     <view>
       <label>
         <postedBy>Last comment posted by</postedBy>
-        <at>at</at>
+        <at>de</at>
         <comments>Comment(s)</comments>
         <show-comments>Show comments</show-comments>
         <hide-comments>Hide comments</hide-comments>
@@ -44,7 +44,7 @@
         <using-webDAV>or use WebDAV to access the content</using-webDAV>
         <file-size-too-big>The content of this file is too big. You should download and open in the client.</file-size-too-big>
         <webDAV>WebDAV View</webDAV>
-        <download>Download</download>
+        <download>İndir</download>
         <htmlview>View as HTML</htmlview>
         <plaintextview>View as Plain text</plaintextview>
       </label>
@@ -73,7 +73,7 @@
     <view>
       <label>
         <avg-rating>Avg. Rating</avg-rating>
-        <subscription>Votes</subscription>
+        <subscription>Oylar</subscription>
       </label>
     </view>
   </Vote>
@@ -141,12 +141,12 @@
         <title>Title</title>
         <creator>Creator</creator>
         <subject>Subject</subject>
-        <source>Source</source>
+        <source>Kaynak</source>
         <contributor>Contributor</contributor>
         <resource-type>Resource Type</resource-type>
         <date>Date</date>
         <publisher>Publisher</publisher>
-        <description>Description</description>
+        <description>Açıklama</description>
         <rights>Rights</rights>
         <relation>Relation</relation>
         <format>Format</format>
@@ -155,11 +155,11 @@
         <languages>Languages</languages>
       </label>
       <action>
-        <add-edit>Add/Edit</add-edit>
-        <cancel>Cancel</cancel>
+        <add-edit>Ekle/Düzenle</add-edit>
+        <cancel>İptal</cancel>
       </action>
       <tooltip>
-        <cancel>Cancel</cancel>
+        <cancel>İptal</cancel>
         <add-edit>Add/Edit Properties</add-edit>
       </tooltip>
     </view>

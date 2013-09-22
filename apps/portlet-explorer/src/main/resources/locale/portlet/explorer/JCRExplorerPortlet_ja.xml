@@ -2096,6 +2096,7 @@
       <access-denied>アクセス出来ません。このノードにサムネイルを追加する権限がありません。</access-denied>
       <confirm-delete>このサムネイルを削除したいですか？</confirm-delete>
       <is-checked-in>このノードはチェックインされています。アクションを起こす前にチェックアウトしてください。</is-checked-in>
+      <fileName-error>Please select a file to upload.</fileName-error>
     </msg>
     <title>
       <remove-thumbnail>このサムネイルに削除</remove-thumbnail>
