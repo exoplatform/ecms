@@ -23,7 +23,7 @@
       <forCaption>for</forCaption>
       <timeUnitCaption>seconds</timeUnitCaption>
       <similar>Pages where the same content appears</similar>
-      <editor>Editor</editor>
+      <editor>Düzenleyen</editor>
     </label>
     <action>
       <edit>Edit</edit>
@@ -45,13 +45,13 @@
       <pageMode>Page Mode</pageMode>
       <option>
         <none>None</none>
-        <more>More</more>
+        <more>Daha</more>
         <pagination>Pagination</pagination>
       </option>
     </label>
     <action>
-      <Save>Save</Save>
-      <Cancel>Cancel</Cancel>
+      <Save>Kaydet</Save>
+      <Cancel>İptal</Cancel>
     </action>
   </UISearchPageLayoutManager>
   <searchResultBasePathInputSetAction>
@@ -68,9 +68,9 @@
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
-      <next>Next</next>
+      <next>Sonraki</next>
       <previous>Previous</previous>
-      <more>More</more>
+      <more>Daha</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>

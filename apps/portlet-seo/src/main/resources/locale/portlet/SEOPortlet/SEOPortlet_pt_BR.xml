@@ -2,55 +2,55 @@
 <bundle>
   <UISEOForm>
     <label>  
-      <title>Title:</title>
-      <description>Description:</description>
+      <title>Título:</title>
+      <description>Descrição:</description>
       <keywords>Palavras chave:</keywords>
       <language>Idioma:</language>
-      <robots>Robots:</robots>
+      <robots>Robôs:</robots>
       <sitemap>Mapa do site:</sitemap>
-      <sitemapvisible>Visible in Sitemap</sitemapvisible>
+      <sitemapvisible>Vísivel no mapa do site</sitemapvisible>
     <isInherited>Herdado da página pai</isInherited>
       <priority>Prioridade:</priority>
       <frequency>Frequência:</frequency>
-      <select-language>Select a language</select-language>
+      <select-language>Selecione um idioma</select-language>
       <option>
-        <Always>Always</Always>
-        <Hourly>Hourly</Hourly>
-        <Daily>Daily</Daily>
+        <Always>Sempre</Always>
+        <Hourly>De hora em hora</Hourly>
+        <Daily>Diariamente</Daily>
         <Weekly>Semanal</Weekly>
         <Monthly>Mensal</Monthly>
-        <Yearly>Yearly</Yearly>
-        <Never>Never</Never>
+        <Yearly>Anualmente</Yearly>
+        <Never>Nunca</Never>
       </option> 
     </label>
     <tip>
-  <priority>Valid values range from 0.0 to 1.0</priority>
+  <priority>Valores válidos de 0.0 a 1.0</priority>
   </tip>   
     <action>
-      <Save>Save</Save>
-      <Cancel>Cancel</Cancel>
+      <Save>Salvar</Save>
+      <Cancel>Cancelar</Cancel>
     </action>
     <msg>
-      <repository-exception>An unexpected error occurred while saving the page metadata.</repository-exception>
-      <confirm-delete>Are you sure you want to delete these SEO data?</confirm-delete>      
+      <repository-exception>Ocorreu um erro inesperado enquanto salvava os metadados da página.</repository-exception>
+      <confirm-delete>Tem certeza que deseja excluir estes dados SEO?</confirm-delete>      
     </msg>
     <title>
-    <seo-delete>Delete</seo-delete>
+    <seo-delete>Excluir</seo-delete>
     </title>
   <help> 
   <priority>Valores válidos de 0.0 a 1.0.</priority>
-  <description>Help searchers: let them know that the following page has a link that they are looking for.</description>
-  <keywords>Most important terms in the page separated by a comma.</keywords>  
+  <description>Ajude os buscadores deixando eles informados de que a seguinte página tem um link com o que eles procuram.</description>
+  <keywords>Termos mais importantes na página separados por vírgulas.</keywords>  
   </help>  
   </UISEOForm>
   <UISEOPopupWindow>
   <title>
-      <UISEOForm>SEO Management</UISEOForm>
+      <UISEOForm>Gerenciamento SEO</UISEOForm>
   </title>
   </UISEOPopupWindow>    
   <UISEOToolbarForm>
   <title>
-      <seo>SEO Management</seo>
+      <seo>Gerenciamento SEO</seo>
   </title>
   <label>
     <seo>SEO</seo>
@@ -58,7 +58,7 @@
   </UISEOToolbarForm>  
   <FloatNumberValidator>
     <msg>
-      <Invalid-number>The value of the Priority field must be in a numerical format. The valid values range is from 0.0 to 1.0.</Invalid-number>
+      <Invalid-number>O valor do campo prioridade deve ser no formato numérico. Os valores válidos são de 0.0 a 1.0.</Invalid-number>
     </msg>
   </FloatNumberValidator>  
   

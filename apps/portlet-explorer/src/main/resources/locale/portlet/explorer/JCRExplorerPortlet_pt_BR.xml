@@ -37,7 +37,7 @@
       <no-value>nenhum valor ainda</no-value>
     </title>
     <label>
-      <my-rating>My Rating:</my-rating>
+      <my-rating>Minha avaliação:</my-rating>
     </label>
     <button>
       <label>
@@ -199,9 +199,9 @@
       <UIRenameForm>Rename</UIRenameForm>
       <UIActionContainer>Edit Action</UIActionContainer>
       <UIFolderForm>New Folder</UIFolderForm>
-      <UIUploadManager>Upload File</UIUploadManager>
+      <UIUploadManager>Upload de arquivo</UIUploadManager>
       <UIReferencesList>References List</UIReferencesList>
-      <UIExportNode>Export</UIExportNode>
+      <UIExportNode>Exportar Node</UIExportNode>
       <UINodeTypeInfo>Node Type Information</UINodeTypeInfo>
       <UIVersionInfo>Version Info</UIVersionInfo>
       <UIActivateVersion>Activate Version</UIActivateVersion>
@@ -506,8 +506,8 @@
       <RemoveNode>Delete</RemoveNode>
       <Checkin>Checkin</Checkin>
       <Checkout>Checkout</Checkout>
-      <Lock>Lock</Lock>
-      <Unlock>Unlock</Unlock>
+      <Lock>Bloquear</Lock>
+      <Unlock>Desbloquear</Unlock>
       <EditDocument>Edit</EditDocument>
       <Paste>Paste</Paste>
       <LockedBy>Locked by</LockedBy>
@@ -546,7 +546,7 @@
   -->
   <ECMContextMenu>
     <event>
-      <Lock>Lock</Lock>
+      <Lock>Bloquear</Lock>
       <Unlock>UnLock</Unlock>
       <EditDocument>Edit</EditDocument>
       <Copy>Copy</Copy>
@@ -564,7 +564,7 @@
       <AddDocument>New Content</AddDocument>
       <Upload>Upload Files</Upload>
       <MoveNode>Mover</MoveNode>
-      <UnLock>Unlock</UnLock>
+      <UnLock>Desbloquear</UnLock>
       <ViewProperties>View Properties</ViewProperties>
       <GetURL>Copy URL To Clipboard</GetURL>
       <AddThumbnail>Add/Remove Thumbnail</AddThumbnail>
@@ -628,12 +628,12 @@
       <UIActionViewContainer>Action Info</UIActionViewContainer>
       <UIMultiLanguageForm>View Language</UIMultiLanguageForm>
       <UIAddLanguageContainer>Add Language</UIAddLanguageContainer>
-      <UINonPublishedForm>State</UINonPublishedForm>
-      <UIPublishedForm>State</UIPublishedForm>
+      <UINonPublishedForm>Estado</UINonPublishedForm>
+      <UIPublishedForm>Estado</UIPublishedForm>
       <UIPublicationLogList>History</UIPublicationLogList>
       <UIDocumentWithTree>File View</UIDocumentWithTree>
       <UIDocumentInfo>Document View</UIDocumentInfo>
-      <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
+      <UICategoriesSelectPanel>Selecionar categorias</UICategoriesSelectPanel>
       <UISelectedCategoriesGrid>Referenced Categories</UISelectedCategoriesGrid>
       <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
       <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
@@ -825,7 +825,7 @@
   <UICategoryManagerSearch>
     <tab>
       <label>
-        <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
+        <UIOneNodePathSelector>Escolher categoria</UIOneNodePathSelector>
       </label>
     </tab>
     <action>
@@ -888,7 +888,7 @@
       <shortcutPath>Path</shortcutPath>
       <type>Type</type>
       <dateCreated>Date Created</dateCreated>
-      <score>Score</score>
+      <score>Pontuação</score>
     </header>
     <title>
       <typeASC>Sort by document type in ascending order</typeASC>
@@ -1078,7 +1078,7 @@
       <notContainPro-properties>Property</notContainPro-properties>
       <notContainPro-notContain>Not Contain</notContainPro-notContain>
       <ConstraintOption-From>De</ConstraintOption-From>
-      <ConstraintOption-To>To</ConstraintOption-To>
+      <ConstraintOption-To>Para</ConstraintOption-To>
       <DocumentType-label>Document Type</DocumentType-label>
       <Category-label>Category</Category-label>
       <created>Created</created>
@@ -1347,14 +1347,14 @@
       <e_8192>Check in</e_8192>
       <e_16384>Check out</e_16384>
       <e_32768>Restore</e_32768>
-      <e_65536>Merge</e_65536>
+      <e_65536>Mesclar</e_65536>
       <e_131072>Cancel Merge</e_131072>
       <e_262144>Done Merge</e_262144>
       <e_524288>Add Version Label</e_524288>
       <e_1048576>Remove Version Label</e_1048576>
       <e_2097152>Remove Version</e_2097152>
-      <e_4194304>Lock</e_4194304>
-      <e_8388608>Unlock</e_8388608>
+      <e_4194304>Bloquear</e_4194304>
+      <e_8388608>Desbloquear</e_8388608>
       <e_16777216>Read</e_16777216>
     </eventName>
     <label>
@@ -1374,7 +1374,7 @@
     <label>
       <note>Versioning has not been activated for this node.</note>
       <question>Are you sure you want to activate it?</question>
-      <button-active>Activate</button-active>
+      <button-active>Ativar</button-active>
       <button-cancel>Cancel</button-cancel>
     </label>
     <msg>
@@ -1741,7 +1741,7 @@
     </msg>
     <action>
       <Close>#{word.close}</Close>
-      <View>View</View>
+      <View>Visualizar</View>
       <Edit>Editar</Edit>
       <Delete>Delete</Delete>
     </action>
@@ -1959,7 +1959,7 @@
       <non-published>Unpublished</non-published>
       <public>Public</public>
       <private>Privado</private>
-      <state>State</state>
+      <state>Estado</state>
       <visibility>Visibility</visibility>
       <nodeName>Node Name:</nodeName>
       <lifecycleName>Lifecycle Name</lifecycleName>
@@ -2073,7 +2073,7 @@
   <UIVersionTreeList>
     <header>
       <version>Version</version>
-      <state>State</state>
+      <state>Estado</state>
     </header>
   </UIVersionTreeList>
   <!--
@@ -2096,6 +2096,7 @@
       <access-denied>Access denied. You do not have permission to add a thumbnail to this node.</access-denied>
       <confirm-delete>Are you sure you want to remove this thumbnail?</confirm-delete>
       <is-checked-in>This node is checked in. Please check out before performing any action.</is-checked-in>
+      <fileName-error>Please select a file to upload.</fileName-error>
     </msg>
     <title>
       <remove-thumbnail>Remove this Thumbnail</remove-thumbnail>
@@ -2372,7 +2373,7 @@
   </UIPopupWindow>
   <UICategoriesAddedList>
     <msg>
-      <ItemExistsException>The category name already exists.</ItemExistsException>
+      <ItemExistsException>Uma categoria com o mesmo nome já existe</ItemExistsException>
     </msg>
   </UICategoriesAddedList>
 
@@ -2602,8 +2603,8 @@
       <label>
           <Alphabetic>Alphabetical</Alphabetic>
           <Type>Type</Type>
-          <CreatedDate>Created Date</CreatedDate>
-          <ModifiedDate>Modified Date</ModifiedDate>
+          <CreatedDate>Data de Criação</CreatedDate>
+          <ModifiedDate>Data de Modificação</ModifiedDate>
           <Ascending>Ascending</Ascending>
           <Descending>Descending</Descending>
       </label>
@@ -2733,7 +2734,7 @@
       <title>
         <EditTag>Edit Tag</EditTag>
         <RemoveTag>Remove Tag</RemoveTag>
-        <AddTag>Add Tag</AddTag>
+        <AddTag>Adicionar tag</AddTag>
       </title>
     </action>
     <msg>
@@ -2784,7 +2785,7 @@
 
   <UIPopupWindow>
     <title>
-      <UITaggingFormContainer>Tag Manager</UITaggingFormContainer>
+      <UITaggingFormContainer>Gerenciador de Tag</UITaggingFormContainer>
     </title>
   </UIPopupWindow>
 
@@ -2913,7 +2914,7 @@
       <enrolled>Enrolled</enrolled>
       <draft>Draft</draft>
       <pending>Pending</pending>
-      <approved>Approved</approved>
+      <approved>Aprovado</approved>
       <inreview>In Review</inreview>
       <staged>Staged</staged>
       <published>Published</published>
@@ -3006,7 +3007,7 @@
      <ShowAdvance>Show Advanced</ShowAdvance>
     </action>
     <label>
-    <Advance>Advanced</Advance>
+    <Advance>Avançado</Advance>
     </label>
   </UIPreferencesForm>
 
@@ -3045,7 +3046,7 @@
     <no>Não</no>
   <yes>Yes</yes>
   <true>True</true>
-  <false>False</false>
+  <false>Falso</false>
   <Electronic>Electronic</Electronic>
   <Paper>Paper</Paper>
   <NONE>None</NONE>
@@ -3115,7 +3116,7 @@
   <label>
   <CreatedOn>Created on</CreatedOn>
   <Updated>Updated</Updated>
-  <by>by</by>
+  <by>por</by>
   <you>you</you>
   </label>
   </UIDocumentNodeList>
@@ -3123,7 +3124,7 @@
     <label>
       <name>Nome</name>
       <date>Data</date>
-      <size>Size</size>
+      <size>Tamanho</size>
       <sortBy>Sort by:</sortBy>
       <filesAreSelected>Files are selected.</filesAreSelected>
       <ClearSelection>Clear selection</ClearSelection>
