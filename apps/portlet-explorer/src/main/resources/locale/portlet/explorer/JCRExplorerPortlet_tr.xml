@@ -679,7 +679,7 @@
     <title>Add/Edit Property</title>
     <label>
       <name>Adı:</name>
-      <type>Type:</type>
+      <type>Türü:</type>
       <value>Value:</value>
       <upload>Yükle:</upload>
       <namespace>Namespace:</namespace>
