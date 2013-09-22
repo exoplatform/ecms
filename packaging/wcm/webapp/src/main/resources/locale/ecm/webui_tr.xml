@@ -45,7 +45,7 @@
   <SelectUserOrGroup>
     <title>
       <UIPermissionUser>Select User</UIPermissionUser>
-      <UIPermissionMembership>Select Membership</UIPermissionMembership>
+      <UIPermissionMembership>Üye Seçin</UIPermissionMembership>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>

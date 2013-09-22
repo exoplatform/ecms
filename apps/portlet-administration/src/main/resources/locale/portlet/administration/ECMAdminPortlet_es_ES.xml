@@ -2524,7 +2524,7 @@
   </UIScriptForm>
  <UINodeTypeList>
    <msg>
-   <no-list>No hay ningún tipo de nodo con condición de búsqueda.</no-list>
+   <no-list>There is no node type matching your search.</no-list>
    </msg>
  </UINodeTypeList>
   <UIActionForm>

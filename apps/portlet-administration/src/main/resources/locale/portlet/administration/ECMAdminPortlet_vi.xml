@@ -2524,7 +2524,7 @@
   </UIScriptForm>
  <UINodeTypeList>
    <msg>
-   <no-list>Không có bất kỳ kiểu nút nào thỏa mãn điều kiện.</no-list>
+   <no-list>Không có kiểu nút thỏa mãn điều kiện tìm kiếm.</no-list>
    </msg>
  </UINodeTypeList>
   <UIActionForm>
