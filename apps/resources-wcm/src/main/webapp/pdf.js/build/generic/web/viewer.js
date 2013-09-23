@@ -21,7 +21,7 @@
 
 'use strict';
 
-var DEFAULT_URL = 'compressed.tracemonkey-pldi-09.pdf';
+if(!DEFAULT_URL) var DEFAULT_URL = 'compressed.tracemonkey-pldi-09.pdf';
 var DEFAULT_SCALE = 'auto';
 var DEFAULT_SCALE_DELTA = 1.1;
 var UNKNOWN_SCALE = 0;
@@ -48,7 +48,7 @@ var FindStates = {
 };
 
 PDFJS.imageResourcesPath = './images/';
-  PDFJS.workerSrc = '../build/pdf.worker.js';
+  PDFJS.workerSrc = '/eXoWCMResources/pdf.js/build/generic/build/pdf.worker.js';
 
 var mozL10n = document.mozL10n || document.webL10n;
 
@@ -4074,8 +4074,8 @@ function updateViewarea() {
     store.set('scrollLeft', Math.round(topLeft[0]));
     store.set('scrollTop', Math.round(topLeft[1]));
   });
-  var href = PDFView.getAnchorUrl(pdfOpenParams);
-  document.getElementById('viewBookmark').href = href;
+  //var href = PDFView.getAnchorUrl(pdfOpenParams);
+  //document.getElementById('viewBookmark').href = href;
 
   // Update the current bookmark in the browsing history.
   PDFHistory.updateCurrentBookmark(pdfOpenParams, pageNumber);

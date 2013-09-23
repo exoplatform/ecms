@@ -21,7 +21,6 @@
 
 'use strict';
 if(!DEFAULT_URL) var DEFAULT_URL = 'compressed.tracemonkey-pldi-09.pdf';
-alert('test');
 var DEFAULT_SCALE = 'auto';
 var DEFAULT_SCALE_DELTA = 1.1;
 var UNKNOWN_SCALE = 0;
