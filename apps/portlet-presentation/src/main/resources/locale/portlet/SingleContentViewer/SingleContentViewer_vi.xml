@@ -90,6 +90,7 @@
   <UISCVConfigItemPathFormInputSet>
     <title>
       <SelectFolderPath>Lựa chọn Đường dẫn Thư mục</SelectFolderPath>
+      <AddPath>Thêm Đường dẫn</AddPath>
     </title>
   </UISCVConfigItemPathFormInputSet>
   <UISCVConfigPrintPageFormInputSet>

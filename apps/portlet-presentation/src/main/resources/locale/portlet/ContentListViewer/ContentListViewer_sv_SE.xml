@@ -29,7 +29,7 @@
       <option>
         <exo:title>Titel</exo:title>
         <exo:dateCreated>Skapad</exo:dateCreated>
-        <exo:dateModified>Ändrad</exo:dateModified>
+        <exo:lastModifiedDate>Ändrade datum</exo:lastModifiedDate>
         <publication:liveDate>Publicerad</publication:liveDate>
         <exo:startEvent>Händelsedatum</exo:startEvent>
         <exo:index>Index</exo:index>
@@ -107,6 +107,7 @@
   <UICLVConfigItemPathFormInputSet>
     <title>
       <SelectFolderPath>Välj sökväg</SelectFolderPath>
+      <AddPath>Lägga till sökväg</AddPath>
     </title>
   </UICLVConfigItemPathFormInputSet>
   <FolderPathSelectorPopupWindow>

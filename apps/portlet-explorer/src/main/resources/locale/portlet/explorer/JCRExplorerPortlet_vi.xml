@@ -1767,8 +1767,8 @@
     </msg>
     <title>Thêm mới/Sửa một thao tác</title>
     <validator>
-      <validator>Validator</validator>
-      <destPath>With Path</destPath>
+      <validator>Người xác thực</validator>
+      <destPath>Đường dẫn</destPath>
     </validator>
   </UIActionForm>
   <UIActionTypeForm>
@@ -1785,7 +1785,7 @@
   </PopupComponent>
   <EditFormAction>
     <validator>
-      <validator>Validator</validator>
+      <validator>Người xác thực</validator>
       <destPath>Với đường dẫn</destPath>
     </validator>
     <title>Biểu mẫu hành động</title>
@@ -2536,10 +2536,10 @@
     <label>
       <nt_folder>Thư mục tài liệu</nt_folder>
       <nt_unstructured>Thư  mục nội dung</nt_unstructured>
-      <exo_cssFolder>CSS Folder</exo_cssFolder>
-      <exo_jsFolder>Javascript Folder</exo_jsFolder>
+      <exo_cssFolder>Thư mục CSS</exo_cssFolder>
+      <exo_jsFolder>Thư mục Javascript</exo_jsFolder>
       <exo_linkFolder>Link Folder</exo_linkFolder>
-      <exo_webFolder>Web Content Folder</exo_webFolder>
+      <exo_webFolder>Thư mục nội dung web</exo_webFolder>
    </label>
   </UIFolderForm>
 
@@ -2953,7 +2953,7 @@
     </msg>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Làm lại</Reset>
     </action>
   </UIPublicationSchedule>
 
@@ -3047,9 +3047,9 @@
   <true>Đúng</true>
   <false>Sai</false>
   <Electronic>Điện tử</Electronic>
-  <Paper>Paper</Paper>
+  <Paper>Bài báo</Paper>
   <NONE>Không xác định</NONE>
-  <CLASSIFIED>Classified</CLASSIFIED>
+  <CLASSIFIED>Đã được phân loại</CLASSIFIED>
   <UNCLASSIFIED>Không được phân loại</UNCLASSIFIED>
   <NOCONTRACT>Không hợp đồng</NOCONTRACT>
   <one-minute>1 phút</one-minute>

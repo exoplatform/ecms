@@ -34,7 +34,7 @@
       <verygood>Average</verygood>
       <excellent>Above average</excellent>
       <best>Good</best>
-      <no-value>no value yet</no-value>
+      <no-value>nenhum valor ainda</no-value>
     </title>
     <label>
       <my-rating>My Rating:</my-rating>
@@ -98,7 +98,7 @@
       <selectView>Select View</selectView>
       <showSideBar>Show Sidebar</showSideBar>
       <more>More</more>
-      <backTo>Back</backTo>
+      <backTo>Voltar</backTo>
     </label>
   </UIViewBar>
 
@@ -172,7 +172,7 @@
   #########################################################################################
   -->
   <UIRenameForm>
-    <title>Rename</title>
+    <title>Renomear</title>
     <label>
       <nameField>Name</nameField>
       <titleField>Title</titleField>
@@ -265,12 +265,12 @@
       <AddFolder>New Folder</AddFolder>
       <AddDocument>New Content</AddDocument>
       <EditDocument>Edit</EditDocument>
-      <Upload>Upload</Upload>
+      <Upload>Enviar</Upload>
       <Paste>Paste</Paste>
       <Search>Search</Search>
       <WatchDocument>Watch/Unwatch</WatchDocument>
       <TaggingDocument>Tag</TaggingDocument>
-      <Vote>Vote</Vote>
+      <Vote>Votar para esse documento</Vote>
       <Comment>Comment</Comment>
       <ManageVersions>Versions</ManageVersions>
       <ManageAuditing>Audit</ManageAuditing>
@@ -501,7 +501,7 @@
     <tooltip>
       <Rename>Rename</Rename>
       <Cut>Cut</Cut>
-      <Copy>Copy</Copy>
+      <Copy>Copiar</Copy>
       <Save>Save</Save>
       <RemoveNode>Delete</RemoveNode>
       <Checkin>Checkin</Checkin>
@@ -563,7 +563,7 @@
       <AddFolder>New Folder</AddFolder>
       <AddDocument>New Content</AddDocument>
       <Upload>Upload Files</Upload>
-      <MoveNode>Move</MoveNode>
+      <MoveNode>Mover</MoveNode>
       <UnLock>Unlock</UnLock>
       <ViewProperties>View Properties</ViewProperties>
       <GetURL>Copy URL To Clipboard</GetURL>
@@ -602,9 +602,9 @@
   <UITabPane>
     <title>
       <UIPublishingPanel>Publication Pane</UIPublishingPanel>
-      <UIPublicationPanel>Revision</UIPublicationPanel>
+      <UIPublicationPanel>Revisão</UIPublicationPanel>
       <UIPublicationSchedule>Scheduled</UIPublicationSchedule>
-      <UIPublicationPagesContainer>Pages</UIPublicationPagesContainer>
+      <UIPublicationPagesContainer>Páginas</UIPublicationPagesContainer>
       <UIPublicationHistory>History</UIPublicationHistory>
       <UIVersionViewer>Version Viewer</UIVersionViewer>
 
@@ -614,7 +614,7 @@
       <UIUploadContent>Information of uploaded file</UIUploadContent>
       <UIJCRAdvancedSearch>New Query</UIJCRAdvancedSearch>
       <UISavedQuery>Saved Query</UISavedQuery>
-      <AdvancedSearchResult>Search Results</AdvancedSearchResult>
+      <AdvancedSearchResult>Procurar Resultados</AdvancedSearchResult>
       <UISimpleSearch>Simple Search</UISimpleSearch>
       <UISearchContainer>Advanced Search</UISearchContainer>
       <UICategoryManagerSearch>Add Category to Search</UICategoryManagerSearch>
@@ -719,7 +719,7 @@
       </title>
     </action>
     <header>
-      <usersOrGroups>User or Group</usersOrGroups>
+      <usersOrGroups>Usuário ou Grupo</usersOrGroups>
       <read>Read</read>
       <addNode>Modify</addNode>
       <remove>Remove</remove>
@@ -734,7 +734,7 @@
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Select User</SelectUser>
+      <SelectUser>Selecionar usuário</SelectUser>
       <SelectMember>Select Membership</SelectMember>
       <AddAny>Select Everyone</AddAny>
     </title>
@@ -762,7 +762,7 @@
   </UIGroupSelector>
   <UIPermissionForm>
     <label>
-      <UIPopupWindow>Select</UIPopupWindow>
+      <UIPopupWindow>Selecionar</UIPopupWindow>
       <permission>UIPermissionForm</permission>
       <userOrGroup>User or Group</userOrGroup>
       <read>Read Right</read>
@@ -773,7 +773,7 @@
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Limpar</Reset>
     </action>
     <msg>
       <checkbox-require>Please select at least one permission.</checkbox-require>
@@ -1077,7 +1077,7 @@
       <containPro-Contain>Contain</containPro-Contain>
       <notContainPro-properties>Property</notContainPro-properties>
       <notContainPro-notContain>Not Contain</notContainPro-notContain>
-      <ConstraintOption-From>From</ConstraintOption-From>
+      <ConstraintOption-From>De</ConstraintOption-From>
       <ConstraintOption-To>To</ConstraintOption-To>
       <DocumentType-label>Document Type</DocumentType-label>
       <Category-label>Category</Category-label>
@@ -1192,8 +1192,8 @@
     </label>
     <pLabel>Properties:</pLabel>
     <action>
-      <Add>Add</Add>
-      <Cancel>Cancel</Cancel>
+      <Add>Adicionar</Add>
+      <Cancel>Cancelar</Cancel>
     </action>
   </UISelectPropertyForm>
   <ExactlyFormPopup>
@@ -1359,9 +1359,9 @@
     </eventName>
     <label>
       <operation>Operation</operation>
-      <userName>Username</userName>
+      <userName>Nome do usuário</userName>
       <date>Date</date>
-      <version>Version</version>
+      <version>Versão</version>
     </label>
   </UIAuditingInfo>
 
@@ -1552,7 +1552,7 @@
     </action>
     <label>
       <category>Category</category>
-      <actions>Action</actions>
+      <actions>Ação</actions>
       <delete>Delete</delete>
     </label>
   </UICategoriesAddedList>
@@ -1742,7 +1742,7 @@
     <action>
       <Close>#{word.close}</Close>
       <View>View</View>
-      <Edit>Edit</Edit>
+      <Edit>Editar</Edit>
       <Delete>Delete</Delete>
     </action>
   </UIActionList>
@@ -1778,7 +1778,7 @@
   </UIActionTypeForm>
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Selecionar local</UIOneNodePathSelector>
       <UIPermissionSelector>Permission Browser</UIPermissionSelector>
       <UICategoriesSelector>Add Categories</UICategoriesSelector>
     </title>
@@ -1958,7 +1958,7 @@
       <published>Published</published>
       <non-published>Unpublished</non-published>
       <public>Public</public>
-      <private>Private</private>
+      <private>Privado</private>
       <state>State</state>
       <visibility>Visibility</visibility>
       <nodeName>Node Name:</nodeName>
@@ -2620,7 +2620,7 @@
        <Video>Video</Video>
        <Music>Music</Music>
        <Documents>Document</Documents>
-       <Content>Content</Content>
+       <Content>Conteúdo</Content>
     </label>
   </DocumentType>
 
@@ -2630,7 +2630,7 @@
       <Video>Video</Video>
       <Music>Music</Music>
       <Documents>Document</Documents>
-      <Content>Content</Content>
+      <Content>Conteúdo</Content>
     </label>
     <title>Set Up Filter Preferences</title>
     <action>
@@ -2893,9 +2893,9 @@
       <Close>Close</Close>
     </button>
     <revisions>
-      <version>Revisions</version>
+      <version>Revisões</version>
       <date>Date</date>
-      <author>Author</author>
+      <author>Autor</author>
       <status>Status</status>
       <action>Action</action>
       <label>Revision</label>
@@ -2925,7 +2925,7 @@
       <to>To</to>
     </scheduled>
     <title>
-      <preview>Preview</preview>
+      <preview>Prévia</preview>
       <restore>Restore</restore>
     </title>
     <msg>
@@ -2953,7 +2953,7 @@
     </msg>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>Limpar</Reset>
     </action>
   </UIPublicationSchedule>
 
@@ -3042,7 +3042,7 @@
   </UploadFileMimeTypesValidator>
   <lifecyclePhase>
     <label>
-    <no>No</no>
+    <no>Não</no>
   <yes>Yes</yes>
   <true>True</true>
   <false>False</false>
@@ -3054,7 +3054,7 @@
   <NOCONTRACT>No Contract</NOCONTRACT>
   <one-minute>One Minute</one-minute>
   <hourly>Hourly</hourly>
-  <daily>Daily</daily>
+  <daily>Diariamente</daily>
   <quarterly>Quarterly</quarterly>
   <yearly>Yearly</yearly>
   <ten-years>Ten Years</ten-years>
@@ -3097,17 +3097,17 @@
     <MaxFileSize>Maximum file size is</MaxFileSize>
     <InvalidCharacters>Invalid characters will be changed by '-'</InvalidCharacters>
     <DropFileMessage>Drop your files here in the current folder</DropFileMessage>
-    <Close>Close</Close>
+    <Close>Fechar</Close>
     <in>in</in>
     <MaxFileSizeAlert>The file size exceeds the size limit of</MaxFileSizeAlert>
     <Waiting>Waiting</Waiting>
-    <Error>Error</Error>
+    <Error>Erro</Error>
     <or>or</or>
     <AlreadyInUse>Already in use</AlreadyInUse>
     <Keep>Keep both</Keep>
     <Replace>Replace</Replace>
     <Canceled>Canceled</Canceled>
-    <Cancel>Cancel</Cancel>
+    <Cancel>Cancelar</Cancel>
     <AbortAllConfirmation>Do you want to abort all files in progress?</AbortAllConfirmation>
   </label>
   </UIMultiUpload>
@@ -3121,8 +3121,8 @@
   </UIDocumentNodeList>
   <FileView>
     <label>
-      <name>Name</name>
-      <date>Date</date>
+      <name>Nome</name>
+      <date>Data</date>
       <size>Size</size>
       <sortBy>Sort by:</sortBy>
       <filesAreSelected>Files are selected.</filesAreSelected>

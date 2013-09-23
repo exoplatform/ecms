@@ -2953,7 +2953,7 @@
     </msg>
     <action>
       <Save>#{word.save}</Save>
-      <Reset>Reset</Reset>
+      <Reset>リセット</Reset>
     </action>
   </UIPublicationSchedule>
 

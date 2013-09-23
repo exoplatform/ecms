@@ -28,8 +28,8 @@
       <UICLVConfigOrderByFormSelectBox>Ordenar por</UICLVConfigOrderByFormSelectBox>
       <option>
         <exo:title>Título</exo:title>
-        <exo:dateCreated>Created Date</exo:dateCreated>
-        <exo:dateModified>Modified Date</exo:dateModified>
+        <exo:dateCreated>Fecha de creación</exo:dateCreated>
+        <exo:lastModifiedDate>Fecha modificada</exo:lastModifiedDate>
         <publication:liveDate>Fecha de Publicación</publication:liveDate>
         <exo:startEvent>Fecha del evento</exo:startEvent>
         <exo:index>Índice</exo:index>
@@ -100,18 +100,19 @@
   </UICLVConfig>
   <UICLVConfigDisplayModeFormRadioBoxInput>
     <label>
-      <AutoViewerMode>By Folder</AutoViewerMode>
-      <ManualViewerMode>By Content</ManualViewerMode>
+      <AutoViewerMode>Por Archivo</AutoViewerMode>
+      <ManualViewerMode>Por contenido</ManualViewerMode>
     </label>
   </UICLVConfigDisplayModeFormRadioBoxInput>
   <UICLVConfigItemPathFormInputSet>
     <title>
       <SelectFolderPath>Seleccione la ruta de la carpeta</SelectFolderPath>
+      <AddPath>Agregar Ruta</AddPath>
     </title>
   </UICLVConfigItemPathFormInputSet>
   <FolderPathSelectorPopupWindow>
     <title>
-      <UIContentSelectorFolder>Folder Browser</UIContentSelectorFolder>
+      <UIContentSelectorFolder>Explorador de carpetas</UIContentSelectorFolder>
     </title>
   </FolderPathSelectorPopupWindow>
   <UICLVConfigOrderTypeFormSelectBox>
@@ -130,32 +131,32 @@
   </UICLVConfigTargetPageFormInputSet>
   <UICLVBasePathPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>Selector Página</UIPageSelector>
     </title>
   </UICLVBasePathPopupWindow>
   <UICLVPresentation>
     <label>
-      <readmore>Read more</readmore>
-      <rssFeed>RSS Feed</rssFeed>
+      <readmore>Leer más</readmore>
+      <rssFeed>Flujo de RSS</rssFeed>
     </label>
     <action>
       <refresh>Actualizar</refresh>
       <edit>Editar en el explorador de contenido</edit>
-      <delete>Delete</delete>
+      <delete>Borrar</delete>
       <publish>Publicar</publish>
     </action>
     <label>
-      <draft>Draft</draft>
+      <draft>Borrador</draft>
     </label>
   </UICLVPresentation>
   <CorrectContentSelectorPopupWindow>
     <title>
-      <UIContentSelectorMulti>Multiple Content Selector Pane</UIContentSelectorMulti>
+      <UIContentSelectorMulti>Panel Selector de contenido múltiple</UIContentSelectorMulti>
     </title>
   </CorrectContentSelectorPopupWindow>
   <UIContentDialogFormPopupWindow>
     <title>
-      <UIContentDialogForm>Web Content Form</UIContentDialogForm>
+      <UIContentDialogForm>Formulario de contenido web</UIContentDialogForm>
     </title>
   </UIContentDialogFormPopupWindow>
   <UICLVConfigContextualFolderRadioBoxInput>
@@ -165,16 +166,16 @@
     </label>
   </UICLVConfigContextualFolderRadioBoxInput>
   <PublicationStates>
-    <archived>Archived</archived>
-    <obsolete>Obsolete</obsolete>
-    <unpublished>Unpublished</unpublished>
-    <enrolled>Enrolled</enrolled>
-    <draft>Draft</draft>
+    <archived>Archivado</archived>
+    <obsolete>Obsoleto</obsolete>
+    <unpublished>Inédito</unpublished>
+    <enrolled>Inscrito</enrolled>
+    <draft>Borrador</draft>
     <pending>Pendiente</pending>
-    <approved>Approved</approved>
-    <inreview>In Review</inreview>
-    <staged>Staged</staged>
-    <published>Published</published>
+    <approved>Aprobado</approved>
+    <inreview>En Revisión</inreview>
+    <staged>Escenificado</staged>
+    <published>Publicado</published>
   </PublicationStates>
   <UICLVConfigCacheEnableRadioBoxInput>
     <label>

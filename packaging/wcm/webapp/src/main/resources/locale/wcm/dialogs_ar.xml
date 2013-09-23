@@ -31,12 +31,12 @@
         <name>الاسم</name>
         <title>عنوان</title>
         <ContentCSS>بيانات الـCSS</ContentCSS>
-        <hintCSS>You can specify the main style sheet for your web content. This style will override the style sheets defined at the site level and at the shared level.</hintCSS>
+        <hintCSS>يمكنك تحديد الأنماط الرئيسية لمحتوى الويب الخاص بك. وسوف يتجاوز هذا النمط الأنماط الخاصّة بهذا الموقع، وعلى الصعيد المشترك.</hintCSS>
         <ContentJS>بيانات الــ JS</ContentJS>
-        <hintJS>You can specify some JavaScript codes that can be executed before your web content is rendered.</hintJS>
+        <hintJS>يمكنك تحديد بعض رموز الجافا سكريبت التي يمكن تنفيذها قبل تشغيل محتوى الويب الخاصّ بك.</hintJS>
         <WebContentHtml>المحتوى الأصلي</WebContentHtml>
         <Illustration>رسم بياني</Illustration>
-        <hintIllustration>You can specify an image that will be shown when your web content is displayed in the list. You can also specify some summary texts to go with this image.</hintIllustration>
+        <hintIllustration>في هذه اللوحة، يمكنك تحديد الصورة التي سيتم عرضها عندما يتم عرض محتوى ويب ضمن جملة القائمات. يمكنك أيضا تحديد بعض النصوص الموجزة بحيث تستطيع أن ترفقها مع هذه الصورة.</hintIllustration>
         <confirm-delete>هل أنت متأكد من حذف هذا الرسم البياني؟</confirm-delete>
         <illustrationImage>صورة الرسم البياني</illustrationImage>
         <imageMimeType>نوع الصورة</imageMimeType>

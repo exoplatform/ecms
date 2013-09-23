@@ -58,10 +58,10 @@ public class PostEditContentEventListener extends Listener<CmsService,Node> {
    */
   public void onEvent(Event<CmsService, Node> event) throws Exception {
     Node currentNode = event.getData();
-    if( currentNode.isNodeType("exo:cssFile") ||
+    if( (currentNode.isNodeType("exo:cssFile") && currentNode.getParent().isNodeType("exo:cssFolder")) ||
         currentNode.isNodeType("exo:template") ||
-        currentNode.isNodeType("exo:jsFile") ||
-        currentNode.isNodeType("exo:action") ){
+        (currentNode.isNodeType("exo:jsFile") && currentNode.getParent().isNodeType("exo:jsFolder")) ||
+        currentNode.isNodeType("exo:action")){
       if (currentNode.isNodeType("exo:cssFile") || currentNode.isNodeType("exo:jsFile")) {
         ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
         CmsService cmsService = WCMCoreUtils.getService(CmsService.class);

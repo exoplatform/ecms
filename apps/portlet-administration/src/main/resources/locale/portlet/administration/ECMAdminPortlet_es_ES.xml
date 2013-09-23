@@ -44,7 +44,7 @@
       <no-taxonomy-selected>Debe copiar o cortar al menos una categoría.</no-taxonomy-selected>
       <node-is-cutting>No se puede pegar aquí. Podría ser que se está cortando el nodo de la categoría '{0}'.</node-is-cutting>
       <can-not-paste>No hay datos en el portapapeles para pegar.</can-not-paste>
-      <reference-exception>Cannot delete this category  because it is currently referenced by a content.</reference-exception>
+      <reference-exception>No se puede eliminar esta categoría, porque actualmente está referenciada por un contenido.</reference-exception>
       <path-error>Error al eliminar este nodo de categoría.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -398,10 +398,10 @@
       <viewSideBar>Mostrar barra lateral</viewSideBar>
       <permissions>Permisos:</permissions>
       <showHiddenNode>Mostrar los nodos ocultos</showHiddenNode>
-      <allowCreateFolders>Allow Folder Creation:</allowCreateFolders>
+      <allowCreateFolders>Permitir la creación de la carpeta:</allowCreateFolders>
       <Admin>Administrador:</Admin>
       <Categories>Categorías:</Categories>
-      <Icons>Icons:</Icons>
+      <Icons>Iconos:</Icons>
       <List>Lista:</List>
       <Web>Web:</Web>
     </label>
@@ -753,20 +753,20 @@
       <name>Nombre:</name>
       <isMove>Acción con Movimiento:</isMove>
       <variables>Variables:</variables>
-      <exo_businessProcessAction>Business Processes:</exo_businessProcessAction>
-      <exo_scriptAction>Groovy Scripts:</exo_scriptAction>
-      <exo_ruleAction>Defined Rules:</exo_ruleAction>
-      <script>Script:</script>
+      <exo_businessProcessAction>Procesos de Negocio:</exo_businessProcessAction>
+      <exo_scriptAction>Guiones Groovy:</exo_scriptAction>
+      <exo_ruleAction>Reglas Definidas:</exo_ruleAction>
+      <script>Guión:</script>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <action-type-added>The '{0}' action type was added successfully.</action-type-added>
-      <action-type-create-error>An error occurred while creating the action type.</action-type-create-error>
-      <action-name-invalid>'{0}' is invalid. The name must begin with 'exo:'.</action-name-invalid>
-      <action-exist>This action already exists in the ECM system.</action-exist>
+      <action-type-added>El tipo de acción '{0}' se agregó correctamente.</action-type-added>
+      <action-type-create-error>Error al crear el tipo de acción.</action-type-create-error>
+      <action-name-invalid>'{0}' no es válido. El nombre debe empezar con 'exo:'.</action-name-invalid>
+      <action-exist>Esta acción ya existe en el sistema de ECM.</action-exist>
       <fileName-invalid>El nombre de acción contiene algunos caracteres no válidos.</fileName-invalid>
     </msg>
   </UIActionTypeForm>
@@ -788,8 +788,8 @@
       <UIActionsTemplateContainer>Acciones</UIActionsTemplateContainer>
       <UIOthersTemplateContainer>Otros</UIOthersTemplateContainer>
   <UIActionScriptContainer>Acción</UIActionScriptContainer>
-  <UIWidgetScriptContainer>Widgets</UIWidgetScriptContainer>
-<UIInterceptorScriptContainer>Interceptors</UIInterceptorScriptContainer>
+  <UIWidgetScriptContainer>Accesorios</UIWidgetScriptContainer>
+<UIInterceptorScriptContainer>Interceptores</UIInterceptorScriptContainer>
 
 <nodeTypeDefinition>Tipo de Nodo</nodeTypeDefinition>
       <propertyDefinition>Propiedad</propertyDefinition>
@@ -931,7 +931,7 @@
   </UIViewForm>
   <UITabForm>
     <msg>
-      <button-select-error>Please select at least one function from the list.</button-select-error>
+      <button-select-error>Por favor, seleccione al menos una función en la lista.</button-select-error>
       <tab-name-error>Se requiere el nombre de la ficha.</tab-name-error>
       <fileName-invalid>El nombre de la etiqueta contiene algunos caracteres no válidos.</fileName-invalid>
     </msg>
@@ -944,17 +944,17 @@
       <template>Plantillas</template>
       <enableVersion>Habilitar la versión</enableVersion>
       <addFolder>Agregar carpeta</addFolder>
-      <addDocument>Add Document</addDocument>
+      <addDocument>Añadir Documento</addDocument>
       <editDocument>Editar Documento</editDocument>
       <upload>Subir</upload>
       <paste>Pegar</paste>
-      <search>Search</search>
-      <viewReferences>View References</viewReferences>
-      <viewNodeType>View Node Type</viewNodeType>
-      <viewPermissions>View Permissions</viewPermissions>
-      <viewProperties>View Properties</viewProperties>
-      <manageVersions>Manage Versions</manageVersions>
-      <manageAuditing>Manage Auditing</manageAuditing>
+      <search>Búsqueda</search>
+      <viewReferences>Ver Referencias</viewReferences>
+      <viewNodeType>Ver Tipo de Nodo</viewNodeType>
+      <viewPermissions>Ver Permisos</viewPermissions>
+      <viewProperties>Ver propiedades</viewProperties>
+      <manageVersions>Administrar versiones</manageVersions>
+      <manageAuditing>Gestión de auditoría</manageAuditing>
       <managePublications>Administrar la Publicación</managePublications>
       <manageCategories>Administrar categorías</manageCategories>
       <manageRelations>Administrar Relaciones</manageRelations>
@@ -1064,11 +1064,11 @@
       <Refresh>#{palabra.actualizar}</Refresh>
     </action>
     <msg>
-      <version-restored>Version {0} was restored successfully.</version-restored>
-      <role-require>Please select a permission.</role-require>
-      <template-name-exist>The template name '{0}' already exists.</template-name-exist>
-      <add-permission-denied>You do not have permission to add a new template.</add-permission-denied>
-      <edit-permission-denied>You do not have permission to modify '{0}' template.</edit-permission-denied>
+      <version-restored>Versión {0} fue restaurada con éxito.</version-restored>
+      <role-require>Por favor, seleccione un permiso.</role-require>
+      <template-name-exist>El nombre de la plantilla '{0}' ya existe.</template-name-exist>
+      <add-permission-denied>No tiene permiso para añadir una nueva plantilla.</add-permission-denied>
+      <edit-permission-denied>No tiene permiso para modificar la '{0}' plantilla.</edit-permission-denied>
     </msg>
     <tab>
       <label>
@@ -1230,32 +1230,32 @@
     </action>
     <title>Añadir Categoría</title>
     <label>
-      <taxonomyName>Category Name</taxonomyName>
-      <parentPath>Parent</parentPath>
+      <taxonomyName>Nombre de la Categoría</taxonomyName>
+      <parentPath>Emparentado</parentPath>
     </label>
     <msg>
-      <exist>The "{0}" category already exists.</exist>
-      <name-null>Please specify the category name.</name-null>
-      <name-invalid>The category name has some invalid characters.</name-invalid>
-      <name-too-long>The category name must have less than 30 characters.</name-too-long>
+      <exist>La categoría "{0}" ya existe.</exist>
+      <name-null>Por favor, especifique el nombre de categoría.</name-null>
+      <name-invalid>El nombre de la categoría tiene algunos caracteres no válidos.</name-invalid>
+      <name-too-long>El nombre de categoría debe tener menos de 30 caracteres.</name-too-long>
     </msg>
   </UITaxonomyForm>
     
   <EditTaxonomyTreePopup>
     <title>
-      <UITaxonomyTreeContainer>Edit Category Tree</UITaxonomyTreeContainer>
+      <UITaxonomyTreeContainer>Editar el árbol de categorías</UITaxonomyTreeContainer>
     </title>
   </EditTaxonomyTreePopup>
 
   <AddTaxonomyTreePopup>
     <title>
-      <UITaxonomyTreeContainer>Add Category Tree</UITaxonomyTreeContainer>
+      <UITaxonomyTreeContainer>Agregar árbol de categoría</UITaxonomyTreeContainer>
     </title>
   </AddTaxonomyTreePopup>
   
   <TaxonomyPopupCreateChild>
     <title>
-      <UITaxonomyTreeCreateChildForm>Edit Category Tree</UITaxonomyTreeCreateChildForm>
+      <UITaxonomyTreeCreateChildForm>Editar el árbol de categorías</UITaxonomyTreeCreateChildForm>
     </title>
   </TaxonomyPopupCreateChild>
 
@@ -1265,14 +1265,14 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <parentPath>Parent:</parentPath>
-      <taxonomyName>Category Name:</taxonomyName>
+      <parentPath>Emparentado:</parentPath>
+      <taxonomyName>Nombre de la Categoría:</taxonomyName>
     </label>
     <msg>
-      <name-null>The category name is empty.</name-null>
-      <name-invalid>The category name is invalid.</name-invalid>
-      <name-too-long>The category name must not have more than {0} characters.</name-too-long>
-      <exist>The category name already exists.</exist>
+      <name-null>El nombre de la categoría está vacío.</name-null>
+      <name-invalid>El nombre de la categoría no es válido.</name-invalid>
+      <name-too-long>El nombre de categoría no debe tener más de {0} caracteres.</name-too-long>
+      <exist>Ya existe el nombre de la categoría.</exist>
     </msg>
 </UITaxonomyTreeCreateChildForm>
 
@@ -1450,11 +1450,11 @@
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
+      <selectGroup>Seleccionar grupo</selectGroup>
       <selectUser>Seleccionar Usuario</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
+      <not-change-owner>'{0}' es el propietario de este nodo y tiene el permiso del control total .</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
@@ -1463,10 +1463,10 @@
       <permission>UIPermissionForm</permission>
       <userOrGroup>Usuario o Grupo</userOrGroup>
       <read>Leer</read>
-      <add_node>Modify</add_node>
-      <remove>Remove</remove>
+      <add_node>Modificar</add_node>
+      <remove>Quitar</remove>
     </label>
-    <title>Add permission to that node</title>
+    <title>Añadir permiso a ese nodo</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -1605,43 +1605,43 @@
     <action>
       <AddTemplate>Añadir plantilla</AddTemplate>
 <Edit>Editar</Edit>
-<Delete>Delete</Delete>
+<Delete>Eliminar</Delete>
     </action>
 </PageTemplateList>
 
 <EditCLVTemplatePopup_ContentTemplateContainer>
  <title>
-   <UICLVTemplateForm_ContentTemplateContainer>Edit List Template</UICLVTemplateForm_ContentTemplateContainer>   
+   <UICLVTemplateForm_ContentTemplateContainer>Editar plantilla de lista</UICLVTemplateForm_ContentTemplateContainer>   
  </title>
 </EditCLVTemplatePopup_ContentTemplateContainer>
 
 <EditCLVTemplatePopup_CateTemplateContainer>
  <title>
-   <UICLVTemplateForm_CateTemplateContainer>Edit List Template</UICLVTemplateForm_CateTemplateContainer>   
+   <UICLVTemplateForm_CateTemplateContainer>Editar plantilla de lista</UICLVTemplateForm_CateTemplateContainer>   
  </title>
 </EditCLVTemplatePopup_CateTemplateContainer>
 
 <EditCLVTemplatePopup_PageTemplateContainer>
  <title>
-   <UICLVTemplateForm_PageTemplateContainer>Edit List Template</UICLVTemplateForm_PageTemplateContainer>   
+   <UICLVTemplateForm_PageTemplateContainer>Editar plantilla de lista</UICLVTemplateForm_PageTemplateContainer>   
  </title>
 </EditCLVTemplatePopup_PageTemplateContainer>
 
 <CLVTemplatePopup_ContentTemplateContainer>
  <title>
-   <UICLVTemplateForm_ContentTemplateContainer>Add List Template</UICLVTemplateForm_ContentTemplateContainer>   
+   <UICLVTemplateForm_ContentTemplateContainer>Agregar plantilla de lista</UICLVTemplateForm_ContentTemplateContainer>   
  </title>
 </CLVTemplatePopup_ContentTemplateContainer>
 
 <CLVTemplatePopup_CateTemplateContainer>
  <title>
-   <UICLVTemplateForm_CateTemplateContainer>Add List Template</UICLVTemplateForm_CateTemplateContainer>   
+   <UICLVTemplateForm_CateTemplateContainer>Agregar plantilla de lista</UICLVTemplateForm_CateTemplateContainer>   
  </title>
 </CLVTemplatePopup_CateTemplateContainer>
 
 <CLVTemplatePopup_PageTemplateContainer>
  <title>
-   <UICLVTemplateForm_PageTemplateContainer>Add List Template</UICLVTemplateForm_PageTemplateContainer>   
+   <UICLVTemplateForm_PageTemplateContainer>Agregar plantilla de lista</UICLVTemplateForm_PageTemplateContainer>   
  </title>
 </CLVTemplatePopup_PageTemplateContainer>
 
@@ -1652,10 +1652,10 @@
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
- <title>Name</title>
+ <title>Nombre</title>
 <template>Nombre de la Plantilla</template>
 <content>Contenido</content>
-<type>Template Type</type>
+<type>Tipo de Plantilla</type>
 </label>
 </UICLVTemplateForm_ContentTemplateContainer>
 
@@ -1795,19 +1795,19 @@
   -->
   <UIDialogTab>
     <header>
-      <name>Name</name>
+      <name>Nombre</name>
       <roles>Roles</roles>
       <baseVersion>Versión</baseVersion>
-      <action>Actions</action>
+      <action>Acciones</action>
     </header>
     <msg>
-      <undeletable>You cannot delete '{0}' because it is the default one.</undeletable>
-      <confirm-delete>Are you sure you want to delete this dialog?</confirm-delete>
+      <undeletable>No puede eliminar '{0}' porque es el predeterminado.</undeletable>
+      <confirm-delete>¿Está seguro que desea eliminar este diálogo?</confirm-delete>
     </msg>
     <action>
       <title>
         <Edit>Editar</Edit>
-        <Delete>Delete</Delete>
+        <Delete>Borrar</Delete>
       </title>
     </action>
   </UIDialogTab>
@@ -1818,7 +1818,7 @@
   -->
   <UIViewTab>
     <header>
-      <name>Name</name>
+      <name>Nombre</name>
       <roles>Roles</roles>
       <baseVersion>Versión</baseVersion>
       <action>Acciones</action>
@@ -1963,28 +1963,28 @@
       <action>Acción</action>
     </header>
     <action>
-      <AddStyle>Add Style</AddStyle>
+      <AddStyle>Agregar un estilo</AddStyle>
     </action>
   </UITagStyleList>
   <UITagStyleForm>
     <label>
-      <styleName>Style Name:</styleName>
-      <documentRange>Number of Occurrences:</documentRange>
-      <styleHTML>HTML Style:</styleHTML>
+      <styleName>Nombre del estilo:</styleName>
+      <documentRange>Número de ocurrencias:</documentRange>
+      <styleHTML>Estilo HTML:</styleHTML>
     </label>
     <action>
       <UpdateStyle>Actualizar</UpdateStyle>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>The range is invalid. The format must be: a..b, among which a, b are positive integers. You can use * instead of b to indicate that the range is unlimited.</range-validator>
-      <error-update>Update failed. Your information is invalid.</error-update>
-      <item-not-existing>You cannot save changes to this tag since it no longer exists in the database.</item-not-existing>
+      <range-validator>El rango es inválido. El formato debe ser: a..b, entre los que a, b son números enteros positivos. Puede utilizar * en lugar de b para indicar que el alcance es ilimitado.</range-validator>
+      <error-update>Error al actualizar. Su información no es válida.</error-update>
+      <item-not-existing>No puede guardar cambios a esta etiqueta que ya no existe en la base de datos.</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
     <title>
-      <UITagStyleForm>Edit Tag Style Configuration</UITagStyleForm>
+      <UITagStyleForm>Editar configuración de estilo de etiqueta</UITagStyleForm>
     </title>
   </FolksonomyPopup>
   <!--
@@ -1994,13 +1994,13 @@
   -->
   <ECMNameValidator>
     <msg>
-      <Invalid-char>The field '{0}' has some invalid characters. Please type another value.</Invalid-char>
-      <empty-input>The value of the field '{0}' is empty.</empty-input>
+      <Invalid-char>El campo '{0}' tiene algunos caracteres no válidos. Por favor escriba otro valor.</Invalid-char>
+      <empty-input>El valor del campo '{0}' está vacío.</empty-input>
     </msg>
   </ECMNameValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>Please enter the value into the field '{0}'.</empty-input>
+      <empty-input>Por favor, introduzca el valor en el campo '{0}'.</empty-input>
     </msg>
   </EmptyFieldValidator>
   <!--
@@ -2010,7 +2010,7 @@
   -->
   <PermissionValidator>
   <msg>
-      <permission-path-invalid>The permission '{0}' is invalid.</permission-path-invalid>
+      <permission-path-invalid>El permiso '{0}' no es válido.</permission-path-invalid>
   </msg>
   </PermissionValidator>
   <!--
@@ -2032,7 +2032,7 @@
   -->
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Are you sure you want to delete?</confirm-delete>
+      <confirm-delete>¿Está seguro que desea eliminar?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
   <template>
@@ -2052,13 +2052,13 @@
   </PermissionButton>
   <nodeTypeDefinition>
     <title>
-      <AddSuperType>Add Super Type</AddSuperType>
+      <AddSuperType>Añadir supertipo</AddSuperType>
     </title>
   </nodeTypeDefinition>
   <childNodeDefinition>
     <title>
-      <AddRequiredType>Add Required Type</AddRequiredType>
-      <AddDefaultType>Add Default Type</AddDefaultType>
+      <AddRequiredType>Añadir tipo requerido</AddRequiredType>
+      <AddDefaultType>Agregar tipo por defecto</AddDefaultType>
     </title>
   </childNodeDefinition>
   <propertyDefinition>
@@ -2236,20 +2236,20 @@
   </UIPermissionTreeInfo>  
   <UITaxonomyTreeMainForm>
 <msg>
-      <no-right-target-path>Please select another home path.</no-right-target-path>
+      <no-right-target-path>Por favor, seleccione otra ruta de inicio.</no-right-target-path>
 </msg>
 </UITaxonomyTreeMainForm>
 
 <UIECMAdminControlPanel>
     <tab>
       <label>        
-        <ManageUnLock>Manage Locks</ManageUnLock>
+        <ManageUnLock>Gestionar bloqueos</ManageUnLock>
       </label>
     </tab>        
 </UIECMAdminControlPanel>
 <UIUnLockForm>
     <label>
-      <name>Path Node</name>      
+      <name>Nodo de la Ruta</name>      
       <permissions>Permisos</permissions>
       <PermissionButton>UI Unlock Form</PermissionButton>
     </label>
@@ -2258,12 +2258,12 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <permission-require>You must select permissions.</permission-require>      
+      <permission-require>Debe seleccionar los permisos.</permission-require>      
     </msg>
   </UIUnLockForm>
   <UILockHolderList>
   <header>
-  <name>Groups or Users</name>
+  <name>Grupos o Usuarios</name>
   <action>Acción</action>
   </header>
   <tooltip>
@@ -2396,7 +2396,7 @@
 </action>
   <msg>
     <xss-vulnerability-character>El campo '{0}' contiene caracteres de vulnerabilidad XSS</xss-vulnerability-character>
-<xss-vulnerability-character-wo-label>Your input may contain XSS vulnerability characters</xss-vulnerability-character-wo-label>
+<xss-vulnerability-character-wo-label>Su campo de entrada puede contenr carácteres de vulnerabilidad XSS</xss-vulnerability-character-wo-label>
   </msg>
 </UIActionForm>
 
@@ -2420,7 +2420,7 @@
     </header>
     <action>
       <title>
-        <Delete>Delete</Delete>
+        <Delete>Borrar</Delete>
       </title>
     </action>
     <msg>
@@ -2433,11 +2433,11 @@
       <Save>Guardar</Save>
     </action>
     <label>
-      <userOrGroup>Memberships:</userOrGroup>
+      <userOrGroup>Membresías:</userOrGroup>
       <permission/>
     </label>
     <msg>
-      <userOrGroup-alreadyExists>This membership already exists. Please select another one.</userOrGroup-alreadyExists>
+      <userOrGroup-alreadyExists>La membresía ya existe. Por favor, seleccione otra.</userOrGroup-alreadyExists>
     </msg>    
   </UITagPermissionForm>
   
@@ -2450,29 +2450,29 @@
   
   <UIFolksonomyManager>
   <msg>
-      <confirm-delete>Are you sure you want to delete this style?</confirm-delete>
+      <confirm-delete>¿Está seguro de querer eliminar este estilo?</confirm-delete>
   </msg>
     <action>
       <title>
-        <AddStyle>Add Style</AddStyle>
+        <AddStyle>Agregar un estilo</AddStyle>
       </title>
     </action>
   </UIFolksonomyManager>  
 <UIActionForm>
   <title>
-  <ShowComponent>Open Window</ShowComponent>
-  <removeReference>Remove</removeReference>
+  <ShowComponent>Ventana abierta</ShowComponent>
+  <removeReference>Quitar</removeReference>
   </title>
   </UIActionForm> 
   <NodeTypeNameValidator>
     <msg>
-      <Invalid-char>There are some invalid characters. Please enter another value.</Invalid-char>
-      <empty-input>The value of the field is empty.</empty-input>
+      <Invalid-char>Hay algunos caracteres no válidos. Por favor, introduzca otro valor.</Invalid-char>
+      <empty-input>El valor del campo está vacío.</empty-input>
     </msg>
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>The node '{0}' cannot be added to '{1}' in the workspace '{2}'.  There is a problem with the permissions or constraints condition.</constraint-violation-exception>
+      <constraint-violation-exception>El nodo '{0}' no se puede agregar a '{1}' en el espacio de trabajo '{2}'.  Hay un problema con los permisos o la condición de restricciones.</constraint-violation-exception>
     </msg>
   </UIActionForm>
   

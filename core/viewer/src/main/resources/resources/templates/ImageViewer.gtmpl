@@ -69,31 +69,31 @@
 	  dcTitle=sB.toString();
   }
 
-  String imageWidthStr = "610";
   def imageHeight = 0;
+  def imageWidth = 0;
   try {
   	ImageReader reader = ImageIO.getImageReadersByMIMEType(mimeType).next();
   	ImageInputStream iis = ImageIO.createImageInputStream(contentNode.getProperty("jcr:data").getStream());
   	reader.setInput(iis, true);
-  	def imageWidth = reader.getWidth(0);
+  	imageWidth = reader.getWidth(0);
     imageHeight = reader.getHeight(0);
   	iis.close();
   	reader.dispose();
   	
-  	if (imageWidth < 40)
-  	  imageWidthStr = "40";
-  	else if (imageWidth < 610)
-  	  imageWidthStr = imageWidth + "";
-    else {
-      imageHeight = Math.floor(610*imageHeight/imageWidth);
-    }
+  	if(imageHeight > imageWidth && imageHeight > 450) {
+  	  imageWidth = (450*imageWidth)/imageHeight;
+  	  imageHeight = 450;
+  	} else if(imageWidth > imageHeight && imageWidth > 610) {
+  	  imageHeight = (610*imageHeight)/imageWidth;
+  	  imageWidth = 610;
+  	} else if (imageWidth == imageHeight && imageHeight > 450) {
+  	  imageHeight = 450;
+  	  imageWidth = 450;
+  	}
     	
   } catch (Exception e) {}
 %>
-<% if (imageHeight <= 610) { %>
-  <div style="text-align:center">
-<% } else { %>
-  <div style="text-align:center; height:610px; overflow:auto;">
-<% } %>
-    <a rel="tooltip" data-placement="bottom" data-original-title="$dcTitle" onclick="javascript:window.open('$binarySrc');" style="cursor:pointer"><img src="$binarySrc" width="$imageWidthStr"/></a>
+
+  <div style="text-align:center; overflow:auto;">
+    <a rel="tooltip" data-placement="bottom" data-original-title="$dcTitle" onclick="javascript:window.open('$binarySrc');" style="cursor:pointer"><img src="$binarySrc" height="$imageHeight" width="$imageWidth"/></a>
   </div>
