@@ -18,7 +18,7 @@
 
 'use strict';
 
-var ThumbnailView = function thumbnailView(container, id, defaultViewport) {
+window.ThumbnailView = function thumbnailView(container, id, defaultViewport) {
   var anchor = document.createElement('a');
   anchor.href = PDFView.getAnchorUrl('#page=' + id);
   anchor.title = mozL10n.get('thumb_page_title', {page: id}, 'Page {{page}}');

@@ -20,12 +20,12 @@
 
 'use strict';
 
-var PatternType = {
+window.PatternType = {
   AXIAL: 2,
   RADIAL: 3
 };
 
-var Pattern = (function PatternClosure() {
+window.Pattern = (function PatternClosure() {
   // Constructor should define this.getPattern
   function Pattern() {
     error('should not call Pattern constructor');
@@ -62,7 +62,7 @@ var Pattern = (function PatternClosure() {
   return Pattern;
 })();
 
-var Shadings = {};
+window.Shadings = {};
 
 // A small number to offset the first/last color stops so we can insert ones to
 // support extend.  Number.MIN_VALUE appears to be too small and breaks the
@@ -263,7 +263,7 @@ Shadings.Dummy = (function DummyClosure() {
   return Dummy;
 })();
 
-var TilingPattern = (function TilingPatternClosure() {
+window.TilingPattern = (function TilingPatternClosure() {
   var PaintType = {
     COLORED: 1,
     UNCOLORED: 2

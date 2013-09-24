@@ -18,7 +18,7 @@
 
 'use strict';
 
-var PDFHistory = {
+window.PDFHistory = {
   initialized: false,
   initialDestination: null,
 

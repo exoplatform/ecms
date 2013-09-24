@@ -25,7 +25,7 @@
  * up the appropriate events for the controls. Actual
  * searching is done by PDFFindController
  */
-var PDFFindBar = {
+window.PDFFindBar = {
 
   opened: false,
   bar: null,
@@ -43,7 +43,7 @@ var PDFFindBar = {
         throw 'PDFFindBar cannot be initialized ' +
             'without a PDFFindController instance.';
     }
-
+    
     this.bar = options.bar;
     this.toggleButton = options.toggleButton;
     this.findField = options.findField;

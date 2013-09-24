@@ -18,16 +18,16 @@
 
 'use strict';
 
-var globalScope = (typeof window === 'undefined') ? this : window;
+window.globalScope = (typeof window === 'undefined') ? this : window;
 
-var isWorker = (typeof window == 'undefined');
+window.isWorker = (typeof window == 'undefined');
 
-var ERRORS = 0, WARNINGS = 1, INFOS = 5;
-var verbosity = WARNINGS;
+window.ERRORS = 0, window.WARNINGS = 1, window.INFOS = 5;
+window.verbosity = WARNINGS;
 
-var FONT_IDENTITY_MATRIX = [0.001, 0, 0, 0.001, 0, 0];
+window.FONT_IDENTITY_MATRIX = [0.001, 0, 0, 0.001, 0, 0];
 
-var TextRenderingMode = {
+window.TextRenderingMode = {
   FILL: 0,
   STROKE: 1,
   FILL_STROKE: 2,
@@ -64,7 +64,7 @@ var log = (function() {
 // A notice for devs that will not trigger the fallback UI.  These are good
 // for things that are helpful to devs, such as warning that Workers were
 // disabled, which is important to devs but not end users.
-function info(msg) {
+window.info = function(msg) {
   if (verbosity >= INFOS) {
     log('Info: ' + msg);
     PDFJS.LogManager.notify('info', msg);
@@ -72,7 +72,7 @@ function info(msg) {
 }
 
 // Non-fatal warnings that should trigger the fallback UI.
-function warn(msg) {
+window.warn = function(msg) {
   if (verbosity >= WARNINGS) {
     log('Warning: ' + msg);
     PDFJS.LogManager.notify('warn', msg);
@@ -81,7 +81,7 @@ function warn(msg) {
 
 // Fatal errors that should trigger the fallback UI and halt execution by
 // throwing an exception.
-function error(msg) {
+window.error = function(msg) {
   // If multiple arguments were passed, pass them all to the log function.
   if (arguments.length > 1) {
     var logArguments = ['Error:'];
@@ -98,11 +98,11 @@ function error(msg) {
 }
 
 // Missing features that should trigger the fallback UI.
-function TODO(what) {
+window.TODO = function(what) {
   warn('TODO: ' + what);
 }
 
-function backtrace() {
+window.backtrace = function() {
   try {
     throw new Error();
   } catch (e) {
@@ -110,14 +110,14 @@ function backtrace() {
   }
 }
 
-function assert(cond, msg) {
+window.assert = function(cond, msg) {
   if (!cond)
     error(msg);
 }
 
 // Combines two URLs. The baseUrl shall be absolute URL. If the url is an
 // absolute URL, it will be returned as is.
-function combineUrl(baseUrl, url) {
+window.combineUrl = function(baseUrl, url) {
   if (!url)
     return baseUrl;
   if (url.indexOf(':') >= 0)
@@ -184,7 +184,7 @@ var LogManager = PDFJS.LogManager = (function LogManagerClosure() {
   };
 })();
 
-function shadow(obj, prop, value) {
+window.shadow = function(obj, prop, value) {
   Object.defineProperty(obj, prop, { value: value,
                                      enumerable: true,
                                      configurable: true,
@@ -192,7 +192,7 @@ function shadow(obj, prop, value) {
   return value;
 }
 
-var PasswordResponses = PDFJS.PasswordResponses = {
+window.PasswordResponses = PDFJS.PasswordResponses = {
   NEED_PASSWORD: 1,
   INCORRECT_PASSWORD: 2
 };
@@ -210,7 +210,7 @@ var PasswordException = (function PasswordExceptionClosure() {
   return PasswordException;
 })();
 
-var UnknownErrorException = (function UnknownErrorExceptionClosure() {
+window.UnknownErrorException = (function UnknownErrorExceptionClosure() {
   function UnknownErrorException(msg, details) {
     this.name = 'UnknownErrorException';
     this.message = msg;
@@ -223,7 +223,7 @@ var UnknownErrorException = (function UnknownErrorExceptionClosure() {
   return UnknownErrorException;
 })();
 
-var InvalidPDFException = (function InvalidPDFExceptionClosure() {
+window.InvalidPDFException = (function InvalidPDFExceptionClosure() {
   function InvalidPDFException(msg) {
     this.name = 'InvalidPDFException';
     this.message = msg;
@@ -235,7 +235,7 @@ var InvalidPDFException = (function InvalidPDFExceptionClosure() {
   return InvalidPDFException;
 })();
 
-var MissingPDFException = (function MissingPDFExceptionClosure() {
+window.MissingPDFException = (function MissingPDFExceptionClosure() {
   function MissingPDFException(msg) {
     this.name = 'MissingPDFException';
     this.message = msg;
@@ -247,7 +247,7 @@ var MissingPDFException = (function MissingPDFExceptionClosure() {
   return MissingPDFException;
 })();
 
-var NotImplementedException = (function NotImplementedExceptionClosure() {
+window.NotImplementedException = (function NotImplementedExceptionClosure() {
   function NotImplementedException(msg) {
     this.message = msg;
   }
@@ -259,7 +259,7 @@ var NotImplementedException = (function NotImplementedExceptionClosure() {
   return NotImplementedException;
 })();
 
-var MissingDataException = (function MissingDataExceptionClosure() {
+window.MissingDataException = (function MissingDataExceptionClosure() {
   function MissingDataException(begin, end) {
     this.begin = begin;
     this.end = end;
@@ -273,7 +273,7 @@ var MissingDataException = (function MissingDataExceptionClosure() {
   return MissingDataException;
 })();
 
-var XRefParseException = (function XRefParseExceptionClosure() {
+window.XRefParseException = (function XRefParseExceptionClosure() {
   function XRefParseException(msg) {
     this.message = msg;
   }
@@ -286,7 +286,7 @@ var XRefParseException = (function XRefParseExceptionClosure() {
 })();
 
 
-function bytesToString(bytes) {
+window.bytesToString = function(bytes) {
   var str = '';
   var length = bytes.length;
   for (var n = 0; n < length; ++n)
@@ -294,7 +294,7 @@ function bytesToString(bytes) {
   return str;
 }
 
-function stringToBytes(str) {
+window.stringToBytes = function(str) {
   var length = str.length;
   var bytes = new Uint8Array(length);
   for (var n = 0; n < length; ++n)
@@ -302,9 +302,9 @@ function stringToBytes(str) {
   return bytes;
 }
 
-var IDENTITY_MATRIX = [1, 0, 0, 1, 0, 0];
+window.IDENTITY_MATRIX = [1, 0, 0, 1, 0, 0];
 
-var Util = PDFJS.Util = (function UtilClosure() {
+window.Util = PDFJS.Util = (function UtilClosure() {
   function Util() {}
 
   Util.makeCssRgb = function Util_makeCssRgb(rgb) {
@@ -603,7 +603,7 @@ var PageViewport = PDFJS.PageViewport = (function PageViewportClosure() {
   return PageViewport;
 })();
 
-var PDFStringTranslateTable = [
+window.PDFStringTranslateTable = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   0x2D8, 0x2C7, 0x2C6, 0x2D9, 0x2DD, 0x2DB, 0x2DA, 0x2DC, 0, 0, 0, 0, 0, 0, 0,
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -615,7 +615,7 @@ var PDFStringTranslateTable = [
   0x178, 0x17D, 0x131, 0x142, 0x153, 0x161, 0x17E, 0, 0x20AC
 ];
 
-function stringToPDFString(str) {
+window.stringToPDFString = function(str) {
   var i, n = str.length, str2 = '';
   if (str[0] === '\xFE' && str[1] === '\xFF') {
     // UTF16BE BOM
@@ -631,46 +631,46 @@ function stringToPDFString(str) {
   return str2;
 }
 
-function stringToUTF8String(str) {
+window.stringToUTF8String = function(str) {
   return decodeURIComponent(escape(str));
 }
 
-function isEmptyObj(obj) {
+window.isEmptyObj = function(obj) {
   for (var key in obj) {
     return false;
   }
   return true;
 }
 
-function isBool(v) {
+window.isBool = function(v) {
   return typeof v == 'boolean';
 }
 
-function isInt(v) {
+window.isInt = function(v) {
   return typeof v == 'number' && ((v | 0) == v);
 }
 
-function isNum(v) {
+window.isNum = function(v) {
   return typeof v == 'number';
 }
 
-function isString(v) {
+window.isString = function(v) {
   return typeof v == 'string';
 }
 
-function isNull(v) {
+window.isNull = function(v) {
   return v === null;
 }
 
-function isName(v) {
+window.isName = function(v) {
   return v instanceof Name;
 }
 
-function isCmd(v, cmd) {
+window.isCmd= function(v, cmd) {
   return v instanceof Cmd && (!cmd || v.cmd == cmd);
 }
 
-function isDict(v, type) {
+window.isDict = function(v, type) {
   if (!(v instanceof Dict)) {
     return false;
   }
@@ -681,25 +681,25 @@ function isDict(v, type) {
   return isName(dictType) && dictType.name == type;
 }
 
-function isArray(v) {
+window.isArray = function(v) {
   return v instanceof Array;
 }
 
-function isStream(v) {
+window.isStream = function(v) {
   return typeof v == 'object' && v !== null && v !== undefined &&
          ('getBytes' in v);
 }
 
-function isArrayBuffer(v) {
+window.isArrayBuffer = function(v) {
   return typeof v == 'object' && v !== null && v !== undefined &&
          ('byteLength' in v);
 }
 
-function isRef(v) {
+window.isRef = function(v) {
   return v instanceof Ref;
 }
 
-function isPDFFunction(v) {
+window.isPDFFunction = function(v) {
   var fnDict;
   if (typeof v != 'object')
     return false;
@@ -721,7 +721,7 @@ function isPDFFunction(v) {
  * Based off of the work in:
  * https://bugzilla.mozilla.org/show_bug.cgi?id=810490
  */
-var Promise = PDFJS.Promise = (function PromiseClosure() {
+window.Promise = PDFJS.Promise = (function PromiseClosure() {
   var STATUS_PENDING = 0;
   var STATUS_RESOLVED = 1;
   var STATUS_REJECTED = 2;
@@ -754,8 +754,8 @@ var Promise = PDFJS.Promise = (function PromiseClosure() {
     },
 
     runHandlers: function runHandlers() {
-		//alert("ttest2");
-      console.log("555555=============================================");
+      //console.log("555555=============================================");
+      //alert(this.handlers.length);
       while (this.handlers.length > 0) {
         var handler = this.handlers.shift();
 
@@ -935,7 +935,7 @@ var Promise = PDFJS.Promise = (function PromiseClosure() {
   return Promise;
 })();
 
-var StatTimer = (function StatTimerClosure() {
+window.StatTimer = (function StatTimerClosure() {
   function rpad(str, pad, length) {
     while (str.length < length)
       str += pad;
@@ -997,7 +997,7 @@ PDFJS.createBlob = function createBlob(data, contentType) {
   return bb.getBlob(contentType);
 };
 
-function MessageHandler(name, comObj) {
+window.MessageHandler = function(name, comObj) {
   this.name = name;
   this.comObj = comObj;
   this.callbackIndex = 1;
@@ -1082,7 +1082,7 @@ MessageHandler.prototype = {
   }
 };
 
-function loadJpegStream(id, imageData, objs) {
+window.loadJpegStream = function(id, imageData, objs) {
   var img = new Image();
   img.onload = (function loadJpegStream_onloadClosure() {
     objs.resolve(id, img);

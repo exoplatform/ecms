@@ -27,7 +27,7 @@
  * object also provides for a way to highlight
  * text that is being searched for.
  */
-var TextLayerBuilder = function textLayerBuilder(options) {
+window.TextLayerBuilder = function textLayerBuilder(options) {
   var textLayerFrag = document.createDocumentFragment();
 
   this.textLayerDiv = options.textLayerDiv;

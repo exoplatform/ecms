@@ -68,20 +68,19 @@ PDFJS.getDocument = function getDocument(source,
                                          pdfDataRangeTransport,
                                          passwordCallback,
                                          progressCallback) {
-  var workerInitializedPromise, workerReadyPromise, transport;
-
-  if (typeof source === 'string') {
+  var workerInitializedPromise, workerReadyPromise, transport;  
+  if (typeof source === 'string') {   
     source = { url: source };
-  } else if (isArrayBuffer(source)) {
+  } else if (isArrayBuffer(source)) {    
     source = { data: source };
   } else if (typeof source !== 'object') {
     error('Invalid parameter in getDocument, need either Uint8Array, ' +
           'string or a parameter object');
-  }
-
+  } 
+  
   if (!source.url && !source.data)
     error('Invalid parameter array, need either .data or .url');
-
+  
   // copy/use all keys as is except 'url' -- full path is required
   var params = {};
   for (var key in source) {
@@ -91,15 +90,15 @@ PDFJS.getDocument = function getDocument(source,
     }
     params[key] = source[key];
   }
-
-  workerInitializedPromise = new PDFJS.Promise();
+  
+  workerInitializedPromise = new PDFJS.Promise();  
   workerReadyPromise = new PDFJS.Promise();
   transport = new WorkerTransport(workerInitializedPromise,
       workerReadyPromise, pdfDataRangeTransport, progressCallback);
   workerInitializedPromise.then(function transportInitialized() {
     transport.passwordCallback = passwordCallback;
     transport.fetchDocument(params);
-  });
+  });  
   return workerReadyPromise;
 };
 
@@ -107,7 +106,7 @@ PDFJS.getDocument = function getDocument(source,
  * Proxy to a PDFDocument in the worker thread. Also, contains commonly used
  * properties that can be read synchronously.
  */
-var PDFDocumentProxy = (function PDFDocumentProxyClosure() {
+window.PDFDocumentProxy = (function PDFDocumentProxyClosure() {
   function PDFDocumentProxy(pdfInfo, transport) {
     this.pdfInfo = pdfInfo;
     this.transport = transport;
@@ -457,15 +456,14 @@ var PDFPageProxy = (function PDFPageProxyClosure() {
 /**
  * For internal use only.
  */
-var WorkerTransport = (function WorkerTransportClosure() {
+window.WorkerTransport = (function WorkerTransportClosure() {
   function WorkerTransport(workerInitializedPromise, workerReadyPromise,
       pdfDataRangeTransport, progressCallback) {
-    this.pdfDataRangeTransport = pdfDataRangeTransport;
-
+    this.pdfDataRangeTransport = pdfDataRangeTransport;    
     this.workerReadyPromise = workerReadyPromise;
     this.progressCallback = progressCallback;
     this.commonObjs = new PDFObjects();
-
+    
     this.pageCache = [];
     this.pagePromises = [];
     this.embeddedFontsUsed = false;
@@ -477,19 +475,19 @@ var WorkerTransport = (function WorkerTransportClosure() {
     // all requirements to run parts of pdf.js in a web worker.
     // Right now, the requirement is, that an Uint8Array is still an Uint8Array
     // as it arrives on the worker. Chrome added this with version 15.
-    if (!globalScope.PDFJS.disableWorker && typeof Worker !== 'undefined') {
-      var workerSrc = PDFJS.workerSrc;
+    if (!globalScope.PDFJS.disableWorker && typeof Worker !== 'undefined') {		
+      var workerSrc = PDFJS.workerSrc;      
       if (typeof workerSrc === 'undefined') {
         error('No PDFJS.workerSrc specified');
-      }
-
+      }      
       try {
         // Some versions of FF can't create a worker on localhost, see:
         // https://bugzilla.mozilla.org/show_bug.cgi?id=683280
+        
         var worker = new Worker(workerSrc);
+        
         var messageHandler = new MessageHandler('main', worker);
-        this.messageHandler = messageHandler;
-
+        this.messageHandler = messageHandler;        
         messageHandler.on('test', function transportTest(supportTypedArray) {
           if (supportTypedArray) {
             this.worker = worker;
@@ -500,11 +498,11 @@ var WorkerTransport = (function WorkerTransportClosure() {
           }
           workerInitializedPromise.resolve();
         }.bind(this));
-
+        
         var testObj = new Uint8Array(1);
         // Some versions of Opera throw a DATA_CLONE_ERR on
         // serializing the typed array.
-        messageHandler.send('test', testObj);
+        messageHandler.send('test', testObj);        
         return;
       } catch (e) {
         info('The worker has been disabled.');

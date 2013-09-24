@@ -23,7 +23,7 @@
  * This object actually performs the search for a given string.
  */
 
-var PDFFindController = {
+window.PDFFindController = {
   startedTextExtraction: false,
 
   extractTextPromises: [],

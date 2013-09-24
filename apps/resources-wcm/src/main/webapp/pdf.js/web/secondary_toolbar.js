@@ -17,8 +17,7 @@
 /* globals PDFView, SCROLLBAR_PADDING */
 
 'use strict';
-
-var SecondaryToolbar = {
+window.SecondaryToolbar = {
   opened: false,
   previousContainerHeight: null,
   newContainerHeight: null,
@@ -38,15 +37,14 @@ var SecondaryToolbar = {
     this.lastPage = options.lastPage;
     this.pageRotateCw = options.pageRotateCw;
     this.pageRotateCcw = options.pageRotateCcw;
-
     // Attach the event listeners.
     this.toggleButton.addEventListener('click', this.toggle.bind(this));
 
     this.presentationMode.addEventListener('click',
       this.presentationModeClick.bind(this));
-    this.openFile.addEventListener('click', this.openFileClick.bind(this));
+    //this.openFile.addEventListener('click', this.openFileClick.bind(this));
     this.print.addEventListener('click', this.printClick.bind(this));
-    this.download.addEventListener('click', this.downloadClick.bind(this));
+    //this.download.addEventListener('click', this.downloadClick.bind(this));
 
     this.firstPage.addEventListener('click', this.firstPageClick.bind(this));
     this.lastPage.addEventListener('click', this.lastPageClick.bind(this));

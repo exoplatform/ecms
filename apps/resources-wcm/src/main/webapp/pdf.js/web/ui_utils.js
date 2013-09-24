@@ -17,7 +17,7 @@
 'use strict';
 
 // optimised CSS custom property getter/setter
-var CustomStyle = (function CustomStyleClosure() {
+window.CustomStyle = (function CustomStyleClosure() {
 
   // As noted on: http://www.zachstronaut.com/posts/2009/02/17/
   //              animate-css-transforms-firefox-webkit.html
@@ -82,7 +82,7 @@ function getFileName(url) {
                     scales. The scaled property is set to false if scaling is
                     not required, true otherwise.
  */
-function getOutputScale() {
+window.getOutputScale = function() {
   var pixelRatio = 'devicePixelRatio' in window ? window.devicePixelRatio : 1;
   return {
     sx: pixelRatio,
@@ -96,7 +96,7 @@ function getOutputScale() {
  * element {Object} The element to be visible.
  * spot {Object} The object with the top property -- offset from the top edge.
  */
-function scrollIntoView(element, spot) {
+window.scrollIntoView = function(element, spot) {
   // Assuming offsetParent is available (it's not available when viewer is in
   // hidden iframe or object). We have to scroll: if the offsetParent is not set
   // producing the error. See also animationStartedClosure.
@@ -120,7 +120,7 @@ function scrollIntoView(element, spot) {
 /**
  * Event handler to suppress context menu.
  */
-function noContextMenuHandler(e) {
+window.noContextMenuHandler = function(e) {
   e.preventDefault();
 }
 
@@ -154,7 +154,7 @@ function getPDFFileNameFromURL(url) {
   return suggestedFilename || 'document.pdf';
 }
 
-var ProgressBar = (function ProgressBarClosure() {
+window.ProgressBar = (function ProgressBarClosure() {
 
   function clamp(v, min, max) {
     return Math.min(Math.max(v, min), max);
@@ -222,7 +222,7 @@ var ProgressBar = (function ProgressBarClosure() {
   return ProgressBar;
 })();
 
-var Cache = function cacheCache(size) {
+window.Cache = function cacheCache(size) {
   var data = [];
   this.push = function cachePush(view) {
     var i = data.indexOf(view);

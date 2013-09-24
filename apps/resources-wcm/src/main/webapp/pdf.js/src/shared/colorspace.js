@@ -19,7 +19,7 @@
 
 'use strict';
 
-var ColorSpace = (function ColorSpaceClosure() {
+window.ColorSpace = (function ColorSpaceClosure() {
   // Constructor should define this.numComps, this.defaultColor, this.name
   function ColorSpace() {
     error('should not call ColorSpace constructor');

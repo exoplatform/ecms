@@ -29,14 +29,14 @@ var MIN_FONT_SIZE = 16;
 
 var COMPILE_TYPE3_GLYPHS = true;
 
-function createScratchCanvas(width, height) {
+window.createScratchCanvas = function(width, height) {
   var canvas = document.createElement('canvas');
   canvas.width = width;
   canvas.height = height;
   return canvas;
 }
 
-function addContextCurrentTransform(ctx) {
+window.addContextCurrentTransform = function(ctx) {
   // If the context doesn't expose a `mozCurrentTransform`, add a JS based on.
   if (!ctx.mozCurrentTransform) {
     // Store the original context
@@ -155,7 +155,7 @@ function addContextCurrentTransform(ctx) {
   }
 }
 
-var CachedCanvases = (function CachedCanvasesClosure() {
+window.CachedCanvases = (function CachedCanvasesClosure() {
   var cache = {};
   return {
     getCanvas: function CachedCanvases_getCanvas(id, width, height,
@@ -381,7 +381,7 @@ var CanvasExtraState = (function CanvasExtraStateClosure() {
   return CanvasExtraState;
 })();
 
-var CanvasGraphics = (function CanvasGraphicsClosure() {
+window.CanvasGraphics = (function CanvasGraphicsClosure() {
   // Defines the time the executeOperatorList is going to be executing
   // before it stops and shedules a continue of execution.
   var EXECUTION_TIME = 15;

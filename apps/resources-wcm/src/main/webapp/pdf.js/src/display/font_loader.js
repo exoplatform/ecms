@@ -20,7 +20,7 @@
 
 PDFJS.disableFontFace = false;
 
-var FontLoader = {
+window.FontLoader = {
   insertRule: function fontLoaderInsertRule(rule) {
     var styleElement = document.getElementById('PDFJS_FONT_STYLE_TAG');
     if (!styleElement) {
@@ -264,7 +264,7 @@ var FontLoader = {
 //#endif
 };
 
-var FontFace = (function FontFaceClosure() {
+window.FontFace = (function FontFaceClosure() {
   function FontFace(name, file, properties) {
     this.compiledGlyphs = {};
     if (arguments.length === 1) {
