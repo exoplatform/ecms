@@ -1760,7 +1760,7 @@ var PDFView = {
                              pdfDataRangeTransport, args) {
     var parameters = {password: password};
     if (typeof url === 'string') { // URL
-      this.setTitleUsingUrl(url);
+      //this.setTitleUsingUrl(url);
       parameters.url = url;
     } else if (url && 'byteLength' in url) { // ArrayBuffer
       parameters.data = url;
@@ -2206,8 +2206,8 @@ var PDFView = {
       if (!pdfTitle && info && info['Title'])
         pdfTitle = info['Title'];
 
-      if (pdfTitle)
-        self.setTitle(pdfTitle + ' - ' + document.title);
+      //if (pdfTitle)
+      //  self.setTitle(pdfTitle + ' - ' + document.title);
 
       if (info.IsAcroFormPresent) {
         console.warn('Warning: AcroForm/XFA is not supported');
@@ -4115,7 +4115,7 @@ window.addEventListener('change', function webViewerChange(evt) {
 
   var file = files[0];
   fileReader.readAsArrayBuffer(file);
-  PDFView.setTitleUsingUrl(file.name);
+  //PDFView.setTitleUsingUrl(file.name);
 
   // URL does not reflect proper document location - hiding some icons.
   //document.getElementById('viewBookmark').setAttribute('hidden', 'true');

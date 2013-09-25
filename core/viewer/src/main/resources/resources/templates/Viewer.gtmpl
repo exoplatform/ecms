@@ -31,18 +31,9 @@
   def rqcontext = _ctx.getRequestContext();
   
 %>
-
-
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">    
     <link rel="stylesheet" href="/eXoWCMResources/pdf.js/build/generic/web/viewer.css"/>    
     <script type="text/javascript" src="/eXoWCMResources/pdf.js/build/generic/web/compatibility.js"></script>
-    <link rel="resource" type="application/l10n" href="/eXoWCMResources/pdf.js/build/generic/web/locale/locale.properties"/>
-    <!--[if IE]>
-    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    
-  </head>
+    <link rel="resource" type="application/l10n" href="/eXoWCMResources/pdf.js/build/generic/web/locale/locale.properties"/>    
 
     <div id="outerContainer" class="loadingInProgress">
 

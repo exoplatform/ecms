@@ -129,7 +129,7 @@ select {
 html[dir='ltr'] .outerCenter {
   float: right;
   position: relative;
-  right: 40%;
+  right: 24%;
 }
 html[dir='rtl'] .outerCenter {
   float: left;
@@ -139,12 +139,10 @@ html[dir='rtl'] .outerCenter {
 html[dir='ltr'] .innerCenter {
   float: right;
   position: relative;
-  right: -50%;
 }
 html[dir='rtl'] .innerCenter {
   float: left;
   position: relative;
-  left: -50%;
 }
 
 #outerContainer {
@@ -169,7 +167,7 @@ html[dir='rtl'] .innerCenter {
 html[dir='ltr'] #sidebarContainer {
   -webkit-transition-property: left;
   transition-property: left;
-  left: -200px;
+  left: -300px;
 }
 html[dir='rtl'] #sidebarContainer {
   -webkit-transition-property: right;
@@ -449,9 +447,11 @@ html[dir='ltr'] .doorHangerRight:before {
 
 html[dir='ltr'] #toolbarViewerLeft {
   margin-left: -1px;
+  min-width: 45%;
 }
-html[dir='rtl'] #toolbarViewerRight {
+html[dir='rtl'] #toolbarViewerLeft {
   margin-right: -1px;
+  min-width: 45%;
 }
 
 html[dir='ltr'] #toolbarViewerLeft,
@@ -460,12 +460,20 @@ html[dir='rtl'] #toolbarViewerRight {
   top: 0;
   left: 0;
 }
+html[dir='ltr'] #toolbarViewerRight{
+  min-width: 14%;
+}
+
 html[dir='ltr'] #toolbarViewerRight,
 html[dir='rtl'] #toolbarViewerLeft {
   position: absolute;
   top: 0;
   right: 0;
 }
+html[dir='rtl'] #toolbarViewerLeft {
+  min-width: 14%;
+}
+
 html[dir='ltr'] #toolbarViewerLeft > *,
 html[dir='ltr'] #toolbarViewerMiddle > *,
 html[dir='ltr'] #toolbarViewerRight > *,
@@ -484,6 +492,7 @@ html[dir='rtl'] .findbar > * {
 html[dir='ltr'] .splitToolbarButton {
   margin: 3px 2px 4px 0;
   display: inline-block;
+  width: 64px;
 }
 html[dir='rtl'] .splitToolbarButton {
   margin: 3px 0 4px 2px;
