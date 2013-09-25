@@ -155,7 +155,7 @@ public class UISelectPathPanel extends UIContainer {
     Node realNode = Utils.getNodeSymLink(NodeLocation.getNodeByLocation(parentNode));
     for (NodeIterator iterator = realNode.getNodes();iterator.hasNext();) {
       Node child = iterator.nextNode();
-      if(child.isNodeType("exo:hiddenable")) continue;
+      if(child.isNodeType("exo:hiddenable") || !child.isCheckedOut()) continue;
       if(Utils.isTrashHomeNode(child) && !_showTrashHomeNode) continue;
       if(matchMimeType(Utils.getNodeSymLink(child)) && matchNodeType(Utils.getNodeSymLink(child)) && !isExceptedNodeType(child)) {
         list.add(child);
