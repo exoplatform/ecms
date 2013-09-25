@@ -34,10 +34,10 @@
 
 
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-    <link rel="stylesheet" href="/eXoWCMResources/pdf.js/web/viewer.css"/>    
-    <link rel="resource" type="application/l10n" href="/eXoWCMResources/pdf.js/web/locale/locale.properties"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">    
+    <link rel="stylesheet" href="/eXoWCMResources/pdf.js/build/generic/web/viewer.css"/>    
+    <script type="text/javascript" src="/eXoWCMResources/pdf.js/build/generic/web/compatibility.js"></script>
+    <link rel="resource" type="application/l10n" href="/eXoWCMResources/pdf.js/build/generic/web/locale/locale.properties"/>
     <!--[if IE]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -93,13 +93,13 @@
 
             <!--<button id="secondaryOpenFile" class="secondaryToolbarButton openFile visibleLargeView" title="Open File" tabindex="19" data-l10n-id="open_file">
               <span data-l10n-id="open_file_label">Open</span>
-            </button>-->
+            </button>
 
             <button id="secondaryPrint" class="secondaryToolbarButton print visibleMediumView" title="Print" tabindex="20" data-l10n-id="print">
               <span data-l10n-id="print_label">Print</span>
             </button>
 
-            <!--<button id="secondaryDownload" class="secondaryToolbarButton download visibleMediumView" title="Download" tabindex="21" data-l10n-id="download">
+            <button id="secondaryDownload" class="secondaryToolbarButton download visibleMediumView" title="Download" tabindex="21" data-l10n-id="download">
               <span data-l10n-id="download_label">Download</span>
             </button>-->
 
@@ -155,15 +155,17 @@
 
                 <!--<button id="openFile" class="toolbarButton openFile hiddenLargeView" title="Open File" tabindex="13" data-l10n-id="open_file">
                   <span data-l10n-id="open_file_label">Open</span>
-                </button>-->
+                </button>
 
                 <button id="print" class="toolbarButton print hiddenMediumView" title="Print" tabindex="14" data-l10n-id="print">
                   <span data-l10n-id="print_label">Print</span>
                 </button>
 
-                <!--<button id="download" class="toolbarButton download hiddenMediumView" title="Download" tabindex="15" data-l10n-id="download">
+                <button id="download" class="toolbarButton download hiddenMediumView" title="Download" tabindex="15" data-l10n-id="download">
                   <span data-l10n-id="download_label">Download</span>
                 </button>-->
+                
+                
                 <!-- <div class="toolbarButtonSpacer"></div> -->
                 <!--<a href="#" id="viewBookmark" class="toolbarButton bookmark hiddenSmallView" title="Current view (copy or open in new window)" tabindex="16" data-l10n-id="bookmark"><span data-l10n-id="bookmark_label">Current View</span></a>-->
 
@@ -251,30 +253,10 @@
     <div id="printContainer"></div>
     
     
-    
-    <script type="text/javascript" src="/eXoWCMResources/pdf.js/web/compatibility.js"></script>
-    <script type="text/javascript" src="/eXoWCMResources/pdf.js/external/webL10n/l10n.js"></script>
-
-    <script type="text/javascript" src="/eXoWCMResources/pdf.js/src/shared/util.js"></script>
-    <script type="text/javascript" src="/eXoWCMResources/pdf.js/src/shared/colorspace.js"></script>
-    <script type="text/javascript" src="/eXoWCMResources/pdf.js/src/shared/pattern.js"></script>
-    <script type="text/javascript" src="/eXoWCMResources/pdf.js/src/shared/function.js"></script>
-    <script type="text/javascript" src="/eXoWCMResources/pdf.js/src/shared/annotation.js"></script>
-    <script type="text/javascript" src="/eXoWCMResources/pdf.js/src/display/api.js"></script>
-    <script type="text/javascript" src="/eXoWCMResources/pdf.js/src/display/metadata.js"></script>
-    <script type="text/javascript" src="/eXoWCMResources/pdf.js/src/display/canvas.js"></script>
-    <script type="text/javascript" src="/eXoWCMResources/pdf.js/src/display/font_loader.js"></script>
-    <script type="text/javascript">PDFJS.workerSrc = '/eXoWCMResources/pdf.js/src/worker_loader.js';</script>
-
-
-    <script type="text/javascript" src="/eXoWCMResources/pdf.js/web/ui_utils.js"></script>
-    <!--<script type="text/javascript" src="/eXoWCMResources/pdf.js/web/download_manager.js"></script>-->
-    <script type="text/javascript" src="/eXoWCMResources/pdf.js/web/thumbnail_view.js"></script>
-    <script type="text/javascript" src="/eXoWCMResources/pdf.js/web/text_layer_builder.js"></script>
-    <script type="text/javascript" src="/eXoWCMResources/pdf.js/web/pdf_find_bar.js"></script>
-    <script type="text/javascript" src="/eXoWCMResources/pdf.js/web/pdf_find_controller.js"></script>
-    <script type="text/javascript" src="/eXoWCMResources/pdf.js/web/pdf_history.js"></script>
-    <script type="text/javascript" src="/eXoWCMResources/pdf.js/web/secondary_toolbar.js"></script> 
+    <script type="text/javascript" src="/eXoWCMResources/pdf.js/build/generic/web/l10n.js"></script>
+    <script type="text/javascript" src="/eXoWCMResources/pdf.js/build/generic/build/pdf.js"></script> 
+    <script type="text/javascript" src="/eXoWCMResources/pdf.js/build/generic/web/debugger.js"></script>
+   
     
     <script type="text/javascript">PDFJS.pdfFile = '<%=downloadLink%>';</script>
-    <script type="text/javascript" src="/eXoWCMResources/pdf.js/web/viewer.js"></script>
+    <script type="text/javascript" src="/eXoWCMResources/pdf.js/build/generic/web/viewer.js"></script>

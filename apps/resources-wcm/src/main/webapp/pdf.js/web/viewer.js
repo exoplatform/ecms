@@ -1016,7 +1016,7 @@ window.PDFView = {
         console.warn('Warning: AcroForm/XFA is not supported');
         PDFView.fallback();
       }
-      console.log('sfsd11333444');
+
 //#if (FIREFOX || MOZCENTRAL)
 //    var versionId = String(info.PDFFormatVersion).slice(-1) | 0;
 //    var generatorId = 0;

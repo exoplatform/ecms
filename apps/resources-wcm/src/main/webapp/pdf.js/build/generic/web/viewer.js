@@ -48,7 +48,7 @@ var FindStates = {
 };
 
 PDFJS.imageResourcesPath = './images/';
-  PDFJS.workerSrc = '../build/pdf.worker.js';
+  PDFJS.workerSrc = '/eXoWCMResources/pdf.js/build/generic/build/pdf.worker.js';
 
 var mozL10n = document.mozL10n || document.webL10n;
 
@@ -133,7 +133,7 @@ function getOutputScale() {
  * element {Object} The element to be visible.
  * spot {Object} The object with the top property -- offset from the top edge.
  */
-function scrollIntoView(element, spot) {
+window.scrollIntoView = function(element, spot) {
   // Assuming offsetParent is available (it's not available when viewer is in
   // hidden iframe or object). We have to scroll: if the offsetParent is not set
   // producing the error. See also animationStartedClosure.
@@ -1291,9 +1291,9 @@ var SecondaryToolbar = {
 
     this.presentationMode.addEventListener('click',
       this.presentationModeClick.bind(this));
-    this.openFile.addEventListener('click', this.openFileClick.bind(this));
-    this.print.addEventListener('click', this.printClick.bind(this));
-    this.download.addEventListener('click', this.downloadClick.bind(this));
+    //this.openFile.addEventListener('click', this.openFileClick.bind(this));
+    //this.print.addEventListener('click', this.printClick.bind(this));
+    //this.download.addEventListener('click', this.downloadClick.bind(this));
 
     this.firstPage.addEventListener('click', this.firstPageClick.bind(this));
     this.lastPage.addEventListener('click', this.lastPageClick.bind(this));
@@ -1310,7 +1310,7 @@ var SecondaryToolbar = {
     this.close();
   },
 
-  openFileClick: function secondaryToolbarOpenFileClick(evt) {
+  /*openFileClick: function secondaryToolbarOpenFileClick(evt) {
     document.getElementById('fileInput').click();
     this.close(evt.target);
   },
@@ -1323,7 +1323,7 @@ var SecondaryToolbar = {
   downloadClick: function secondaryToolbarDownloadClick(evt) {
     PDFView.download();
     this.close(evt.target);
-  },
+  },*/
 
   firstPageClick: function secondaryToolbarFirstPageClick(evt) {
     PDFView.page = 1;
@@ -1426,9 +1426,9 @@ var PDFView = {
       toolbar: document.getElementById('secondaryToolbar'),
       toggleButton: document.getElementById('secondaryToolbarToggle'),
       presentationMode: document.getElementById('secondaryPresentationMode'),
-      openFile: document.getElementById('secondaryOpenFile'),
-      print: document.getElementById('secondaryPrint'),
-      download: document.getElementById('secondaryDownload'),
+      //openFile: document.getElementById('secondaryOpenFile'),
+      //print: document.getElementById('secondaryPrint'),
+      //download: document.getElementById('secondaryDownload'),
       firstPage: document.getElementById('firstPage'),
       lastPage: document.getElementById('lastPage'),
       pageRotateCw: document.getElementById('pageRotateCw'),
@@ -3819,11 +3819,11 @@ var DocumentOutlineView = function documentOutlineView(outline) {
   }
 };
 
-document.addEventListener('DOMContentLoaded', function webViewerLoad(evt) {
+//document.addEventListener('DOMContentLoaded', function webViewerLoad(evt) {
   PDFView.initialize();
 
   var params = PDFView.parseQueryString(document.location.search.substring(1));
-  var file = params.file || DEFAULT_URL;
+  var file = params.file || PDFJS.pdfFile;
 
 
   var fileInput = document.createElement('input');
@@ -3836,8 +3836,8 @@ document.addEventListener('DOMContentLoaded', function webViewerLoad(evt) {
   document.body.appendChild(fileInput);
 
   if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
-    document.getElementById('openFile').setAttribute('hidden', 'true');
-    document.getElementById('secondaryOpenFile').setAttribute('hidden', 'true');
+    //document.getElementById('openFile').setAttribute('hidden', 'true');
+    //document.getElementById('secondaryOpenFile').setAttribute('hidden', 'true');
   } else {
     document.getElementById('fileInput').value = null;
   }
@@ -3893,10 +3893,10 @@ document.addEventListener('DOMContentLoaded', function webViewerLoad(evt) {
     PDFBug.init();
   }
 
-  if (!PDFView.supportsPrinting) {
+  /*if (!PDFView.supportsPrinting) {
     document.getElementById('print').classList.add('hidden');
     document.getElementById('secondaryPrint').classList.add('hidden');
-  }
+  }*/
 
   if (!PDFView.supportsFullscreen) {
     document.getElementById('presentationMode').classList.add('hidden');
@@ -3992,14 +3992,14 @@ document.addEventListener('DOMContentLoaded', function webViewerLoad(evt) {
   document.getElementById('presentationMode').addEventListener('click',
     SecondaryToolbar.presentationModeClick.bind(SecondaryToolbar));
 
-  document.getElementById('openFile').addEventListener('click',
+  /*document.getElementById('openFile').addEventListener('click',
     SecondaryToolbar.openFileClick.bind(SecondaryToolbar));
 
   document.getElementById('print').addEventListener('click',
     SecondaryToolbar.printClick.bind(SecondaryToolbar));
 
   document.getElementById('download').addEventListener('click',
-    SecondaryToolbar.downloadClick.bind(SecondaryToolbar));
+    SecondaryToolbar.downloadClick.bind(SecondaryToolbar));*/
 
   document.getElementById('contextFirstPage').addEventListener('click',
     SecondaryToolbar.firstPageClick.bind(SecondaryToolbar));
@@ -4015,7 +4015,7 @@ document.addEventListener('DOMContentLoaded', function webViewerLoad(evt) {
 
 
   PDFView.open(file, 0);
-}, true);
+//}, true);
 
 function updateViewarea() {
 
@@ -4075,7 +4075,7 @@ function updateViewarea() {
     store.set('scrollTop', Math.round(topLeft[1]));
   });
   var href = PDFView.getAnchorUrl(pdfOpenParams);
-  document.getElementById('viewBookmark').href = href;
+  //document.getElementById('viewBookmark').href = href;
 
   // Update the current bookmark in the browsing history.
   PDFHistory.updateCurrentBookmark(pdfOpenParams, pageNumber);
@@ -4118,9 +4118,9 @@ window.addEventListener('change', function webViewerChange(evt) {
   PDFView.setTitleUsingUrl(file.name);
 
   // URL does not reflect proper document location - hiding some icons.
-  document.getElementById('viewBookmark').setAttribute('hidden', 'true');
-  document.getElementById('download').setAttribute('hidden', 'true');
-  document.getElementById('secondaryDownload').setAttribute('hidden', 'true');
+  //document.getElementById('viewBookmark').setAttribute('hidden', 'true');
+  //document.getElementById('download').setAttribute('hidden', 'true');
+  //document.getElementById('secondaryDownload').setAttribute('hidden', 'true');
 }, true);
 
 function selectScaleOption(value) {
@@ -4150,10 +4150,9 @@ window.addEventListener('localized', function localized(evt) {
       var select = document.getElementById('scaleSelect');
       select.setAttribute('style', 'min-width: inherit;');
       var width = select.clientWidth + SCALE_SELECT_CONTAINER_PADDING;
-      select.setAttribute('style', 'min-width: ' +
-                                   (width + SCALE_SELECT_PADDING) + 'px;');
-      container.setAttribute('style', 'min-width: ' + width + 'px; ' +
-                                      'max-width: ' + width + 'px;');
+      //select.setAttribute('style', 'min-width: ' +
+      //                             (width + SCALE_SELECT_PADDING) + 'px;');
+      container.setAttribute('max-width: ' + width + 'px;');
     }
 
     // Set the 'max-height' CSS property of the secondary toolbar.
