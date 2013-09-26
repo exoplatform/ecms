@@ -16,7 +16,42 @@
  */
 package org.exoplatform.services.cms.impl;
 
-import com.ibm.icu.text.Transliterator;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+
+import javax.jcr.ItemNotFoundException;
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.jcr.ValueFormatException;
+import javax.jcr.nodetype.NodeType;
+import javax.jcr.nodetype.PropertyDefinition;
+import javax.ws.rs.core.MediaType;
+
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.component.ComponentPlugin;
@@ -44,15 +79,7 @@ import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
-import javax.jcr.*;
-import javax.jcr.nodetype.NodeType;
-import javax.jcr.nodetype.PropertyDefinition;
-import javax.ws.rs.core.MediaType;
-import java.io.*;
-import java.net.URLEncoder;
-import java.util.*;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
+import com.ibm.icu.text.Transliterator;
 
 /**
  * @author benjaminmestrallet
@@ -444,11 +471,11 @@ public class Utils {
    * @return
    * @throws Exception
    */
-  public static Node getServiceLogContentNode(String serviceName, String logType) throws Exception {
+  private static Node getServiceLogContentNode(SessionProvider systemProvider, String serviceName, String logType) throws Exception {
     // Get workspace and session where store service log
     ManageableRepository repository = WCMCoreUtils.getRepository();
     Session session =
-        WCMCoreUtils.getSystemSessionProvider().getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
+        systemProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
     Node serviceLogContentNode = null;
 
     if (session.getRootNode().hasNode("exo:services")) {
@@ -488,14 +515,19 @@ public class Utils {
 	 * @throws Exception
 	 */
   public static Set<String> getAllEditedConfiguredData(String className, String id, boolean skipActivities) throws Exception {
-    DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, skipActivities);
-    HashSet<String> editedConfigTemplates = new HashSet<String>();
-    Node serviceLogContentNode= getServiceLogContentNode(className, id);
-    if (serviceLogContentNode != null) {
-      String logData = serviceLogContentNode.getProperty(NodetypeConstant.JCR_DATA).getString();
-      editedConfigTemplates.addAll(Arrays.asList(logData.split(";")));
+    SessionProvider systemProvider = SessionProvider.createSystemProvider();
+    try {
+      DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, skipActivities);
+      HashSet<String> editedConfigTemplates = new HashSet<String>();
+      Node serviceLogContentNode= getServiceLogContentNode(systemProvider, className, id);
+      if (serviceLogContentNode != null) {
+        String logData = serviceLogContentNode.getProperty(NodetypeConstant.JCR_DATA).getString();
+        editedConfigTemplates.addAll(Arrays.asList(logData.split(";")));
+      }
+      return editedConfigTemplates;
+    } finally {
+      systemProvider.close();
     }
-    return editedConfigTemplates;
   }
 
 	/**
@@ -507,16 +539,21 @@ public class Utils {
 	 * @throws Exception
 	 */
   public static void addEditedConfiguredData(String template, String className, String id, boolean skipActivities) throws Exception {
-    DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, skipActivities);
-    Node serviceLogContentNode = getServiceLogContentNode(className, id);
-    if (serviceLogContentNode != null) {
-      String logData = serviceLogContentNode.getProperty(NodetypeConstant.JCR_DATA).getString();
-      if (StringUtils.isEmpty(logData)) logData = template;
-      else if (logData.indexOf(template) == -1) logData = logData.concat(";").concat(template);
-      serviceLogContentNode.setProperty(NodetypeConstant.JCR_DATA, logData);
-      serviceLogContentNode.getSession().save();
+    SessionProvider systemProvider = SessionProvider.createSystemProvider();
+    try {
+      DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, skipActivities);
+      Node serviceLogContentNode = getServiceLogContentNode(systemProvider, className, id);
+      if (serviceLogContentNode != null) {
+        String logData = serviceLogContentNode.getProperty(NodetypeConstant.JCR_DATA).getString();
+        if (StringUtils.isEmpty(logData)) logData = template;
+        else if (logData.indexOf(template) == -1) logData = logData.concat(";").concat(template);
+        serviceLogContentNode.setProperty(NodetypeConstant.JCR_DATA, logData);
+        serviceLogContentNode.getSession().save();
+      }
+    } finally {
+      systemProvider.close();
     }
-  }   
+  }
 
   public static String getObjectId(String nodePath) throws UnsupportedEncodingException {
     return URLEncoder.encode(nodePath.replaceAll("'", "\\\\'"), "utf-8");
