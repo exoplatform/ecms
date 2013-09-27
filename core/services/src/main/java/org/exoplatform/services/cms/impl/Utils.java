@@ -605,9 +605,6 @@ public class Utils {
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
     List<String> userMemberships = new ArrayList<String>();
     userMemberships.add(userId);
-    // here we must retrieve memberships of the user using the
-    // IdentityRegistry Service instead of Organization Service to
-    // allow JAAS based authorization
     Collection<MembershipEntry> memberships = getUserMembershipsFromIdentityRegistry(userId);
     if (memberships != null) {
       for (MembershipEntry membership : memberships) {
