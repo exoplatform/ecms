@@ -130,11 +130,13 @@ html[dir='ltr'] .outerCenter {
   float: right;
   position: relative;
   right: 24%;
+  padding: 4px 0 0;
 }
 html[dir='rtl'] .outerCenter {
   float: left;
   position: relative;
   left: 50%;
+  padding: 4px 0 0;
 }
 html[dir='ltr'] .innerCenter {
   float: right;
@@ -156,7 +158,7 @@ html[dir='rtl'] .innerCenter {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 150px;
+  width: 144px;
   visibility: hidden;
   -webkit-transition-duration: 200ms;
   -webkit-transition-timing-function: ease;
@@ -167,12 +169,12 @@ html[dir='rtl'] .innerCenter {
 html[dir='ltr'] #sidebarContainer {
   -webkit-transition-property: left;
   transition-property: left;
-  left: -200px;
+  left: -150px;
 }
 html[dir='rtl'] #sidebarContainer {
   -webkit-transition-property: right;
   transition-property: right;
-  right: -200px;
+  right: -150px;
 }
 
 #outerContainer.sidebarMoving > #sidebarContainer,
@@ -201,23 +203,24 @@ html[dir='rtl'] #outerContainer.sidebarOpen > #sidebarContainer {
 html[dir='ltr'] #outerContainer.sidebarOpen > #mainContainer {
   -webkit-transition-property: left;
   transition-property: left;
-  left: 150px;
+  left: 144px;
 }
 html[dir='rtl'] #outerContainer.sidebarOpen > #mainContainer {
   -webkit-transition-property: right;
   transition-property: right;
-  right: 150px;
+  right: 144px;
 }
 
 #sidebarContent {
-  top: 32px;
+  top: 37px;
   bottom: 0;
   overflow: auto;
   position: absolute;
-  width: 150px;
-
-  background-color: hsla(0,0%,0%,.1);
-  box-shadow: inset -1px 0 0 hsla(0,0%,0%,.25);
+  width: 144px;
+  border: 1px solid #d1d1d1;
+  border-right: none;
+    border-top: none;
+	background: #f8f8f8;
 }
 html[dir='ltr'] #sidebarContent {
   left: 0;
@@ -228,13 +231,15 @@ html[dir='rtl'] #sidebarContent {
 
 #viewerContainer {
   overflow: auto;
-  box-shadow: inset 1px 0 0 hsla(0,0%,100%,.05);
+  border: 1px solid #d1d1d1;
+  border-top: none;
   position: absolute;
-  top: 32px;
+  top: 37px;
   right: 0;
   bottom: 0;
   left: 0;
   outline: none;
+  background: #f8f8f8;
 }
 
 .toolbar {
@@ -245,38 +250,24 @@ html[dir='rtl'] #sidebarContent {
   cursor: default;
 }
 
-#toolbarContainer {
-  width: 100%;
-}
-
 #toolbarSidebar {
-  width: 150px;
-  height: 32px;
-  background-color: #424242; /* fallback */
-  background-image: url(images/texture.png),
-                    linear-gradient(hsla(0,0%,30%,.99), hsla(0,0%,25%,.95));
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.25),
-
-              inset 0 -1px 0 hsla(0,0%,100%,.05),
-              0 1px 0 hsla(0,0%,0%,.15),
-              0 0 1px hsla(0,0%,0%,.1);
+  width: 144px;
+  height: 35px;
+  background-color: #f0f0f0;
+  border: 1px solid #c2c2c2;
+  border-right: none;
 }
 
 #toolbarContainer, .findbar, .secondaryToolbar {
   position: relative;
-  height: 32px;
-  background-color: #474747; /* fallback */
-  background-image: url(images/texture.png),
-                    linear-gradient(hsla(0,0%,32%,.99), hsla(0,0%,27%,.95));
-  box-shadow: inset 1px 0 0 hsla(0,0%,100%,.08),
-              inset 0 1px 1px hsla(0,0%,0%,.15),
-              inset 0 -1px 0 hsla(0,0%,100%,.05),
-              0 1px 0 hsla(0,0%,0%,.15),
-              0 1px 1px hsla(0,0%,0%,.1);
+  height: 35px;
+  background: #f0f0f0; 
+  border: 1px solid #c2c2c2;
+  
 }
 
 #toolbarViewer {
-  height: 32px;
+  height: 35px;
 }
 
 #loadingBar {
@@ -336,7 +327,7 @@ html[dir='rtl'] #sidebarContent {
   top: 32px;
   position: absolute;
   z-index: 10000;
-  height: 32px;
+  height: 35px;
 
   min-width: 16px;
   padding: 0px 6px 0px 6px;
@@ -459,19 +450,32 @@ html[dir='rtl'] #toolbarViewerRight {
   position: absolute;
   top: 0;
   left: 0;
+  padding: 4px;
 }
 html[dir='ltr'] #toolbarViewerRight{
-  min-width: 14%;
+  min-width: 8%;
+  padding: 4px;
 }
 
 html[dir='ltr'] #toolbarViewerRight,
 html[dir='rtl'] #toolbarViewerLeft {
   position: absolute;
   top: 0;
-  right: 0;
+  right: 0;\
+  padding: 4px;
 }
 html[dir='rtl'] #toolbarViewerLeft {
-  min-width: 14%;
+  min-width: 8%;
+  padding: 4px;
+}
+
+#toolbarViewerRight .uiIconEcmsExpand {
+    background-image: url("/eXoWCMResources/skin/images/Icons/uiIconsEcmsLightGray.png");
+}
+
+#toolbarViewerLeft input{
+	width: 36px;
+	text-align: right;
 }
 
 html[dir='ltr'] #toolbarViewerLeft > *,
@@ -494,6 +498,11 @@ html[dir='ltr'] .splitToolbarButton {
   display: inline-block;
   width: 64px;
 }
+
+#outerContainer .btn-group .btn {
+  padding: 4px 8px 3px 8px;
+}
+
 html[dir='rtl'] .splitToolbarButton {
   margin: 3px 0 4px 2px;
   display: inline-block;
@@ -748,12 +757,14 @@ html[dir='ltr'] .toolbarButton:first-child,
 html[dir='rtl'] .splitToolbarButton:last-child,
 html[dir='rtl'] .toolbarButton:last-child {
   margin-left: 4px;
+  margin-top: 4px;
 }
 html[dir='ltr'] .splitToolbarButton:last-child,
 html[dir='ltr'] .toolbarButton:last-child,
 html[dir='rtl'] .splitToolbarButton:first-child,
 html[dir='rtl'] .toolbarButton:first-child {
   margin-right: 4px;
+  margin-top: 4px;
 }
 
 .toolbarButtonSpacer {
@@ -910,6 +921,10 @@ html[dir="rtl"] #viewOutline.toolbarButton::before {
   content: url(images/toolbarButton-search.png);
 }
 
+#viewFind{
+  margin-left: 4px;
+}
+
 .secondaryToolbarButton {
   position: relative;
   margin: 0 0 4px 0;
@@ -1049,7 +1064,6 @@ html[dir='rtl'] .verticalToolbarSeparator {
   margin: 4px 2px 4px 0;
   border: 1px solid transparent;
   border-radius: 2px;
-  color: hsl(0,0%,85%);
   font-size: 12px;
   line-height: 14px;
   text-align: left;
@@ -1069,6 +1083,10 @@ html[dir='rtl'] .verticalToolbarSeparator {
 
 .thumbnail {
   float: left;
+  border: none;
+    border-radius: 0;
+    box-shadow: none;
+	pading: 0;
 }
 
 .thumbnail:not([data-loaded]) {
@@ -1076,18 +1094,8 @@ html[dir='rtl'] .verticalToolbarSeparator {
   margin-bottom: 10px;
 }
 
-.thumbnailImage {
-  transition-duration: 150ms;
-  border: 1px solid transparent;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
-  opacity: 0.8;
-  z-index: 99;
-}
-
 .thumbnailSelectionRing {
   border-radius: 2px;
-  padding: 7px;
-  transition-duration: 150ms;
 }
 
 a:focus > .thumbnail > .thumbnailSelectionRing > .thumbnailImage,
@@ -1097,28 +1105,17 @@ a:focus > .thumbnail > .thumbnailSelectionRing > .thumbnailImage,
 
 a:focus > .thumbnail > .thumbnailSelectionRing,
 .thumbnail:hover > .thumbnailSelectionRing {
-  background-color: hsla(0,0%,100%,.15);
-  background-image: linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,100%,0));
-  background-clip: padding-box;
-  box-shadow: 0 1px 0 hsla(0,0%,100%,.05) inset,
-              0 0 1px hsla(0,0%,100%,.2) inset,
-              0 0 1px hsla(0,0%,0%,.2);
-  color: hsla(0,0%,100%,.9);
+  border: 3px solid #999999;
+  margin: -3px;
 }
 
 .thumbnail.selected > .thumbnailSelectionRing > .thumbnailImage {
-  box-shadow: 0 0 0 1px hsla(0,0%,0%,.5);
   opacity: 1;
 }
 
 .thumbnail.selected > .thumbnailSelectionRing {
-  background-color: hsla(0,0%,100%,.3);
-  background-image: linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,100%,0));
-  background-clip: padding-box;
-  box-shadow: 0 1px 0 hsla(0,0%,100%,.05) inset,
-              0 0 1px hsla(0,0%,100%,.1) inset,
-              0 0 1px hsla(0,0%,0%,.2);
-  color: hsla(0,0%,100%,1);
+	border: 3px solid #2f5e92;
+	margin: -3px;
 }
 
 #outlineView {
@@ -1200,7 +1197,7 @@ html[dir='rtl'] .outlineItem > a {
 #sidebarControls {
   position:absolute;
   width: 180px;
-  height: 32px;
+  height: 35px;
   left: 15px;
   bottom: 35px;
 }
@@ -1223,8 +1220,7 @@ canvas {
   overflow: visible;
   border: 9px solid transparent;
   background-clip: content-box;
-  border-image: url(images/shadow.png) 9 9 repeat;
-  background-color: white;
+  background-color: #f8f8f8;
 }
 
 .page > a,
@@ -1495,6 +1491,11 @@ canvas {
   }
 }
 
+.outerCenter .innerCenter select{
+	width: 160px;
+	margin-left: 4px;
+}
+
 @media all and (max-width: 900px) {
   .sidebarOpen .hiddenLargeView {
     display: none;
@@ -1523,7 +1524,7 @@ canvas {
   }
   #sidebarContent {
     top: 32px;
-    background-color: hsla(0,0%,0%,.7);
+    background #f8f8f8;
   }
 
   html[dir='ltr'] #outerContainer.sidebarOpen > #mainContainer {
