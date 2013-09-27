@@ -1292,7 +1292,7 @@ var SecondaryToolbar = {
     this.presentationMode.addEventListener('click',
       this.presentationModeClick.bind(this));
     //this.openFile.addEventListener('click', this.openFileClick.bind(this));
-    //this.print.addEventListener('click', this.printClick.bind(this));
+    this.print.addEventListener('click', this.printClick.bind(this));
     //this.download.addEventListener('click', this.downloadClick.bind(this));
 
     this.firstPage.addEventListener('click', this.firstPageClick.bind(this));
@@ -1313,17 +1313,17 @@ var SecondaryToolbar = {
   /*openFileClick: function secondaryToolbarOpenFileClick(evt) {
     document.getElementById('fileInput').click();
     this.close(evt.target);
-  },
-
-  printClick: function secondaryToolbarPrintClick(evt) {
-    window.print();
-    this.close(evt.target);
-  },
+  },  
 
   downloadClick: function secondaryToolbarDownloadClick(evt) {
     PDFView.download();
     this.close(evt.target);
   },*/
+  
+  printClick: function secondaryToolbarPrintClick(evt) {
+    window.print();
+    this.close(evt.target);
+  },
 
   firstPageClick: function secondaryToolbarFirstPageClick(evt) {
     PDFView.page = 1;
@@ -1427,7 +1427,7 @@ var PDFView = {
       toggleButton: document.getElementById('secondaryToolbarToggle'),
       presentationMode: document.getElementById('secondaryPresentationMode'),
       //openFile: document.getElementById('secondaryOpenFile'),
-      //print: document.getElementById('secondaryPrint'),
+      print: document.getElementById('secondaryPrint'),
       //download: document.getElementById('secondaryDownload'),
       firstPage: document.getElementById('firstPage'),
       lastPage: document.getElementById('lastPage'),
@@ -3866,7 +3866,7 @@ var DocumentOutlineView = function documentOutlineView(outline) {
     PDFJS.disableHistory = (hashParams['disableHistory'] === 'true');
   }
 
-  var locale = navigator.language;
+  if(!locale) var locale = navigator.language;
   if ('locale' in hashParams)
     locale = hashParams['locale'];
   mozL10n.setLanguage(locale);
@@ -3893,10 +3893,10 @@ var DocumentOutlineView = function documentOutlineView(outline) {
     PDFBug.init();
   }
 
-  /*if (!PDFView.supportsPrinting) {
+  if (!PDFView.supportsPrinting) {
     document.getElementById('print').classList.add('hidden');
     document.getElementById('secondaryPrint').classList.add('hidden');
-  }*/
+  }
 
   if (!PDFView.supportsFullscreen) {
     document.getElementById('presentationMode').classList.add('hidden');
@@ -3993,13 +3993,13 @@ var DocumentOutlineView = function documentOutlineView(outline) {
     SecondaryToolbar.presentationModeClick.bind(SecondaryToolbar));
 
   /*document.getElementById('openFile').addEventListener('click',
-    SecondaryToolbar.openFileClick.bind(SecondaryToolbar));
-
-  document.getElementById('print').addEventListener('click',
-    SecondaryToolbar.printClick.bind(SecondaryToolbar));
+    SecondaryToolbar.openFileClick.bind(SecondaryToolbar));  
 
   document.getElementById('download').addEventListener('click',
     SecondaryToolbar.downloadClick.bind(SecondaryToolbar));*/
+    
+  document.getElementById('print').addEventListener('click',
+    SecondaryToolbar.printClick.bind(SecondaryToolbar));
 
   document.getElementById('contextFirstPage').addEventListener('click',
     SecondaryToolbar.firstPageClick.bind(SecondaryToolbar));

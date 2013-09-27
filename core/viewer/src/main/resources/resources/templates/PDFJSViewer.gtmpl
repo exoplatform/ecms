@@ -7,6 +7,8 @@
   import org.exoplatform.ecm.webui.utils.Utils;
   import org.exoplatform.services.jcr.RepositoryService;   
   import org.exoplatform.wcm.webui.reader.ContentReader;
+  import org.exoplatform.portal.webui.util.Util;
+  import org.exoplatform.portal.application.PortalRequestContext;
   
   
   UIComponent uiParent = uicomponent.getParent();
@@ -23,12 +25,11 @@
    public String formatNodeName(String text) {
     return text.replaceAll("'", "\\\\'") ;
   }
-  def currentPage = uicomponent.getPageNumber();
   def maximumPage = uicomponent.getMaximumOfPage();
-  def currentRotation = uicomponent.getCurrentRotation();
-  def currentScale = uicomponent.getCurrentScale();
-  def metadatas = uicomponent.getMetadataExtraction();
   def rqcontext = _ctx.getRequestContext();  
+  
+  PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
+  def lang = portalRequestContext.getLocale().getLanguage();
 
 if (maximumPage > 0) {
 %> 
@@ -82,18 +83,10 @@ if (maximumPage > 0) {
             <button id="secondaryPresentationMode" class="secondaryToolbarButton presentationMode visibleLargeView" title="Switch to Presentation Mode" tabindex="18" data-l10n-id="presentation_mode">
               <span data-l10n-id="presentation_mode_label">Presentation Mode</span>
             </button>
-
-            <!--<button id="secondaryOpenFile" class="secondaryToolbarButton openFile visibleLargeView" title="Open File" tabindex="19" data-l10n-id="open_file">
-              <span data-l10n-id="open_file_label">Open</span>
-            </button>
-
+                      
             <button id="secondaryPrint" class="secondaryToolbarButton print visibleMediumView" title="Print" tabindex="20" data-l10n-id="print">
               <span data-l10n-id="print_label">Print</span>
             </button>
-
-            <button id="secondaryDownload" class="secondaryToolbarButton download visibleMediumView" title="Download" tabindex="21" data-l10n-id="download">
-              <span data-l10n-id="download_label">Download</span>
-            </button>-->
 
             <div class="horizontalToolbarSeparator visibleLargeView"></div>
 
@@ -143,24 +136,12 @@ if (maximumPage > 0) {
               <div id="toolbarViewerRight">
                 <button id="presentationMode" class="toolbarButton presentationMode hiddenLargeView" title="Switch to Presentation Mode" tabindex="12" data-l10n-id="presentation_mode">
                   <span data-l10n-id="presentation_mode_label">Presentation Mode</span>
-                </button>
-
-                <!--<button id="openFile" class="toolbarButton openFile hiddenLargeView" title="Open File" tabindex="13" data-l10n-id="open_file">
-                  <span data-l10n-id="open_file_label">Open</span>
-                </button>
-
+                </button>                
+                
                 <button id="print" class="toolbarButton print hiddenMediumView" title="Print" tabindex="14" data-l10n-id="print">
                   <span data-l10n-id="print_label">Print</span>
-                </button>
-
-                <button id="download" class="toolbarButton download hiddenMediumView" title="Download" tabindex="15" data-l10n-id="download">
-                  <span data-l10n-id="download_label">Download</span>
-                </button>-->
+                </button>               
                 
-                
-                <!-- <div class="toolbarButtonSpacer"></div> -->
-                <!--<a href="#" id="viewBookmark" class="toolbarButton bookmark hiddenSmallView" title="Current view (copy or open in new window)" tabindex="16" data-l10n-id="bookmark"><span data-l10n-id="bookmark_label">Current View</span></a>-->
-
                 <div class="verticalToolbarSeparator hiddenSmallView"></div>
                 
                 <button id="secondaryToolbarToggle" class="toolbarButton" title="Tools" tabindex="17" data-l10n-id="tools">
@@ -246,11 +227,9 @@ if (maximumPage > 0) {
     
     
     <script type="text/javascript" src="/eXoWCMResources/pdf.js/l10n.js"></script>
-    <script type="text/javascript" src="/eXoWCMResources/pdf.js/pdf.js"></script> 
-    <script type="text/javascript" src="/eXoWCMResources/pdf.js/debugger.js"></script>
-   
-    
+    <script type="text/javascript" src="/eXoWCMResources/pdf.js/pdf.js"></script>    
     <script type="text/javascript">PDFJS.pdfFile = '<%=downloadLink%>';</script>
+    <script type="text/javascript">var locale = '<%=lang%>';</script>
     <script type="text/javascript" src="/eXoWCMResources/pdf.js/viewer.js"></script>
     
     <% }else {%>  
