@@ -136,8 +136,8 @@
 
   <UISelectedContentGrid>
     <label>
-      <name>Ad</name>
-      <add>Ekle</add>
+      <name>Name</name>
+      <add>Add</add>
       <delete>Sil</delete>
     </label>
     <msg>
@@ -155,7 +155,7 @@
 
   <UIContentBrowsePathSelector>
     <header>
-      <name>Ad</name>
+      <name>Name</name>
       <publicationstate>Yayın Durumu</publicationstate>
       <action>Eylem</action>
     </header>
@@ -166,7 +166,7 @@
 
   <UIContentBrowsePathSelectorFolder>
     <header>
-      <name>Ad</name>
+      <name>Name</name>
       <publicationstate>Yayın Durumu</publicationstate>
       <action>Eylem</action>
     </header>
@@ -197,7 +197,7 @@
       </option>
     </label>
     <action>
-      <SearchWebContent>Arama</SearchWebContent>
+      <SearchWebContent>Search</SearchWebContent>
     </action>
     <msg>
       <time-to-late>The searching time is too long.</time-to-late>
@@ -217,7 +217,7 @@
 
   <UIContentPropertySelector>
     <action>
-      <Add>Ekle</Add>
+      <Add>Add</Add>
       <Cancel>İptal</Cancel>
     </action>
     <label>
@@ -357,7 +357,7 @@
     <label>
       <SingleContentViewer>Tek içerik Görüntüleyicisi</SingleContentViewer>
       <ContentListViewer>İçerik Listesi Görüntüleyicisi</ContentListViewer>
-      <Search>Arama</Search>
+      <Search>Search</Search>
       <Sitemap>Site Map</Sitemap>
       <TwoColumnsLayout>Two-column Layout</TwoColumnsLayout>
       <ThreeColumnsLayout>Three-column Layout</ThreeColumnsLayout>

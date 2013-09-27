@@ -28,7 +28,7 @@
         <jsFile>default.js</jsFile>
         <Advanced>Advanced</Advanced>
         <Summary>Summary</Summary>
-        <name>Ad</name>
+        <name>Name</name>
         <title>Başlık</title>
         <ContentCSS>CSS Veri</ContentCSS>
         <hintCSS>You can specify the main style sheet for your web content. This style will override the style sheets defined at the site level and at the shared level.</hintCSS>
@@ -51,7 +51,7 @@
   <CSSFile>
     <dialog>
       <label>
-        <name>Ad</name>
+        <name>Name</name>
         <active>Etkin</active>
         <priority>Öncelik</priority>
         <content>CSS Veri</content>
@@ -62,7 +62,7 @@
   <JSFile>
     <dialog>
       <label>
-        <name>Ad</name>
+        <name>Name</name>
         <active>Etkin</active>
         <priority>Öncelik</priority>
         <content>JS Veri</content>
@@ -73,7 +73,7 @@
   <WebLink>
     <dialog>
       <label>
-        <name>Ad</name>
+        <name>Name</name>
         <url>URL</url>
         <description>Açıklama</description>
       </label>

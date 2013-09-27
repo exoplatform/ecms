@@ -53,7 +53,7 @@
       <confirm-delete>Are you sure you want to delete this category?</confirm-delete>
     </msg>
     <title>
-      <add>Ekle</add>
+      <add>Add</add>
       <paste>Paste</paste>
       <cut>Cut</cut>
       <copy>Copy</copy>
@@ -100,7 +100,7 @@
 
   <TaxonomyTreeMainForm>
     <label>
-      <TaxoTreeName>Ad</TaxoTreeName>
+      <TaxoTreeName>Name</TaxoTreeName>
       <TaxoTreeWorkspace>Workspace</TaxoTreeWorkspace>
       <TaxoTreeHomePath>Home Path</TaxoTreeHomePath>
     </label>
@@ -161,7 +161,7 @@
       <path-invalid>The path is invalid.</path-invalid>
       <taxonomy-existed>The category tree already exists.</taxonomy-existed>
       <taxonomy-node-existed>The category node already exists.</taxonomy-node-existed>
-      <no-permission-add>You do not have the right to add.</no-permission-add>
+      <no-permission-add>You do not have the right to add an action.</no-permission-add>
       <not-created-tree>The category tree has not yet been created.</not-created-tree>
     </msg>
   </UIActionForm>
@@ -343,7 +343,7 @@
   <UIDriveList>
     <header>
       <icon>Simge</icon>
-      <name>Ad</name>
+      <name>Name</name>
       <workspace>Workspace</workspace>
       <homePath>Home Path</homePath>
       <permissions>Permissions</permissions>
@@ -421,7 +421,7 @@
       <child-not-found>Child node not found.</child-not-found>
     </info>
     <header>
-      <name>Ad</name>
+      <name>Name</name>
       <action>Eylem</action>
     </header>
   </UITreeList>
@@ -467,7 +467,7 @@
     <action>
       <Export>Export</Export>
       <Import>Import</Import>
-      <Add>Ekle</Add>
+      <Add>Add</Add>
     </action>
     <tooltip>
       <View>View</View>
@@ -486,7 +486,7 @@
   <UINodeTypeOptionList>
     <action>
       <Save>#{word.save}</Save>
-      <Add>Ekle</Add>
+      <Add>Add</Add>
     </action>
     <header>
       <icon>Simge</icon>
@@ -550,7 +550,7 @@
       <AddConstraints>Add Constraints</AddConstraints>
       <Back>#{word.back}</Back>
       <AddType>Add Type</AddType>
-      <AddValue>Ekle</AddValue>
+      <AddValue>Add</AddValue>
       <CancelConstraints>#{word.cancel}</CancelConstraints>
       <CancelTab>#{word.cancel}</CancelTab>
       <UpdateChild>#{word.update}</UpdateChild>
@@ -725,7 +725,7 @@
   <UIActionTypeList>
     <header>
       <name>Script</name>
-      <label>Ad</label>
+      <label>Name</label>
 <action>Eylemler</action>
     </header>
     <action>
@@ -812,7 +812,7 @@
      <Delete>Sil</Delete>
    </title>
     <header>
-      <name>Ad</name>
+      <name>Name</name>
       <permissions>Permissions</permissions>
       <tabList>Action Tab</tabList>
       <baseVersion>Base Version</baseVersion>
@@ -851,7 +851,7 @@
 <action>Eylemler</action>
 </header>
 <action>
- <AddTab>Ekle</AddTab>
+ <AddTab>Add</AddTab>
 </action>
 <msg>
  <confirm-delete>Are you sure you want to delete this tab?</confirm-delete>
@@ -893,7 +893,7 @@
 
 <UIViewPermissionForm>
 <action>
- <Add>Ekle</Add>
+ <Add>Add</Add>
 </action>
 <label>
  <userOrGroup>User or Group</userOrGroup>
@@ -922,7 +922,7 @@
       <view-exist>The view name already exists.</view-exist>
     </msg>
     <label>
-      <viewName>Ad</viewName>
+      <viewName>Name</viewName>
       <template>Template</template>
 <version>Restore Version</version>
       <enableVersion>Enable Version</enableVersion>
@@ -937,7 +937,7 @@
     </msg>
     <label>
       <version>Restore Version</version>
-      <viewName>Ad</viewName>
+      <viewName>Name</viewName>
       <tabName>Tab Name</tabName>
       <permission>Permission</permission>
       <tabs>Tabs</tabs>
@@ -948,7 +948,7 @@
       <editDocument>Edit Document</editDocument>
       <upload>Upload</upload>
       <paste>Paste</paste>
-      <search>Arama</search>
+      <search>Search</search>
       <viewReferences>View References</viewReferences>
       <viewNodeType>View Node Type</viewNodeType>
       <viewPermissions>View Permissions</viewPermissions>
@@ -1035,13 +1035,13 @@
       <Delete>Sil</Delete>
     </title>
     <header>
-      <name>Ad</name>
+      <name>Name</name>
       <path>Değer</path>
       <baseVersion>Base Version</baseVersion>
       <action>Eylem</action>
     </header>
     <action>
-      <Add>Ekle</Add>
+      <Add>Add</Add>
     </action>
     <msg>
       <template-in-use>Cannot delete {0}. It is currently in use.</template-in-use>
@@ -1148,7 +1148,7 @@
       <confirm-delete>Are you sure you want to delete this script?</confirm-delete>
     </msg>
     <header>
-      <scriptName>Ad</scriptName>
+      <scriptName>Name</scriptName>
       <path>Script</path>
       <baseVersion>Base Version</baseVersion>
       <action>Eylemler</action>
@@ -1198,7 +1198,7 @@
     <label>
       <selectVersion>Versions</selectVersion>
       <scriptContent>İçerik</scriptContent>
-      <scriptLabel>Ad</scriptLabel>
+      <scriptLabel>Name</scriptLabel>
       <scriptName>Script</scriptName>
       <enableVersion>Enable Versioning</enableVersion>
     </label>
@@ -1213,7 +1213,7 @@
     <label>
       <selectVersion>Versions</selectVersion>
       <scriptContent>İçerik</scriptContent>
-      <scriptLabel>Ad</scriptLabel>
+      <scriptLabel>Name</scriptLabel>
       <scriptName>Script</scriptName>
       <enableVersion>Enable Versioning</enableVersion>
     </label>
@@ -1343,7 +1343,7 @@
   -->
   <UITaxonomyTreeForm>
     <label>
-      <name>Ad</name>
+      <name>Name</name>
       <workspace>Workspace</workspace>
       <homePath>Path</homePath>
       <permissions>Permissions</permissions>
@@ -1566,7 +1566,7 @@
 
   <UICLVTemplateList>
     <header>
-      <title>Ad</title>
+      <title>Name</title>
       <action>Eylem</action>
       <template>Template</template>
     </header>
@@ -1585,7 +1585,7 @@
 
 <CateTemplateList>
     <header>
-      <title>Ad</title>
+      <title>Name</title>
       <action>Eylem</action>
       <template>Template</template>
     </header>
@@ -1598,7 +1598,7 @@
 
 <PageTemplateList>
     <header>
-      <title>Ad</title>
+      <title>Name</title>
       <action>Eylem</action>
       <template>Template</template>
     </header>
@@ -1652,7 +1652,7 @@
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
- <title>Ad</title>
+ <title>Name</title>
 <template>Template Name</template>
 <content>İçerik</content>
 <type>Template Type</type>
@@ -1666,7 +1666,7 @@
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
- <title>Ad</title>
+ <title>Name</title>
 <template>Template Name</template>
 <content>İçerik</content>
 <type>Template Type</type>
@@ -1680,7 +1680,7 @@
 <Cancel>#{word.cancel}</Cancel>
  </action>
 <label>
- <title>Ad</title>
+ <title>Name</title>
 <template>Template Name</template>
 <content>İçerik</content>
 <type>Template Type</type>
@@ -1795,7 +1795,7 @@
   -->
   <UIDialogTab>
     <header>
-      <name>Ad</name>
+      <name>Name</name>
       <roles>Roles</roles>
       <baseVersion>Version</baseVersion>
       <action>Eylemler</action>
@@ -1818,7 +1818,7 @@
   -->
   <UIViewTab>
     <header>
-      <name>Ad</name>
+      <name>Name</name>
       <roles>Roles</roles>
       <baseVersion>Version</baseVersion>
       <action>Eylemler</action>
@@ -1889,7 +1889,7 @@
   -->
   <UIQueriesList>
     <header>
-      <name>Ad</name>
+      <name>Name</name>
       <type>Türü</type>
       <statement>Statement</statement>
       <permission>Permissions</permission>
@@ -2325,7 +2325,7 @@
   
   <UISkinTab>
     <header>
-      <name>Ad</name>
+      <name>Name</name>
       <roles>Roles</roles>
       <baseVersion>Version</baseVersion>
       <action>Eylemler</action>

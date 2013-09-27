@@ -57,8 +57,8 @@
   <Mail>
     <view>
       <label>
-        <from>Kimden:</from>
-        <to>Kime:</to>
+        <from>From:</from>
+        <to>To:</to>
         <cc>Cc:</cc>
         <date>Tarih:</date>
         <subject>Konu:</subject>

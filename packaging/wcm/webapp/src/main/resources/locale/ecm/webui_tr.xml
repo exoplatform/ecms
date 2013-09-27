@@ -7,8 +7,8 @@
   -->
   <UITreeList>
     <header>
-      <name>Ad</name>
-      <action>Ekle</action>
+      <name>Name</name>
+      <action>Add</action>
     </header>
     <action/>
     <info>
