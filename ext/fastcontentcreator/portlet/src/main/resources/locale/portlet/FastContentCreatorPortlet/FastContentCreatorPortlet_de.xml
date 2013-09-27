@@ -88,7 +88,7 @@
     <label>
       <workspaceName>Arbeitsbereich:</workspaceName>
       <rootNodePath>Quellpfad:</rootNodePath>
-      <rootNodeInfo>Root node</rootNodeInfo>
+      <rootNodeInfo>Wurzelknoten</rootNodeInfo>
     </label>
   </UIWorkspaceList>
 

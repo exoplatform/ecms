@@ -7,7 +7,7 @@
   -->
   <UICommentForm>
     <label>
-      <name>Ad</name>
+      <name>Name</name>
       <email>E-posta</email>
       <website>Website</website>
       <comment>Yorum</comment>
@@ -174,7 +174,7 @@
   <UIRenameForm>
     <title>Rename</title>
     <label>
-      <nameField>Ad</nameField>
+      <nameField>Name</nameField>
       <titleField>Başlık</titleField>
     </label>
     <action>
@@ -250,7 +250,7 @@
   <UIResourceForm>
     <title>Edit File Content</title>
     <label>
-      <name>Ad</name>
+      <name>Name</name>
       <textToModify>Text to modify</textToModify>
       <fileToUpload>Upload new content for that document (must be the same mime-type)</fileToUpload>
     </label>
@@ -267,7 +267,7 @@
       <EditDocument>Düzenle</EditDocument>
       <Upload>Upload</Upload>
       <Paste>Paste</Paste>
-      <Search>Arama</Search>
+      <Search>Search</Search>
       <WatchDocument>Watch/Unwatch</WatchDocument>
       <TaggingDocument>Tag</TaggingDocument>
       <Vote>Vote</Vote>
@@ -530,7 +530,7 @@
   <ListView>
     <view>
       <label>
-        <name>Ad</name>
+        <name>Name</name>
         <versionable>Versionable</versionable>
         <exo_owner>Owner</exo_owner>
         <auditing>Auditing</auditing>
@@ -651,7 +651,7 @@
     </confirm>
     <header>
       <icon/>
-      <name>Ad</name>
+      <name>Name</name>
       <multiValue>Multi Value</multiValue>
       <value>Değer</value>
       <action>Eylem</action>
@@ -791,13 +791,13 @@
   <UINodeTypeInfo>
     <label>
       <node-type>Node Type</node-type>
-      <name>Ad</name>
+      <name>Name</name>
       <item>Primary Item Name</item>
       <super-types>Parent Types</super-types>
       <mixin>Mixin Node Type</mixin>
       <orderable-children>Orderable Children</orderable-children>
       <property-def>Node Property Definition</property-def>
-      <prop-name>Ad</prop-name>
+      <prop-name>Name</prop-name>
       <prop-type>Türü</prop-type>
       <prop-multiple>Mul</prop-multiple>
       <prop-mandatory>Man</prop-mandatory>
@@ -806,7 +806,7 @@
       <prop-default-values><![CDATA[<span title="Default Values">DV</span>]]></prop-default-values>
       <prop-constraints><![CDATA[<span title="Constraints Values">CV</span>]]></prop-constraints>
       <node-def>Child Node Definition</node-def>
-      <node-def-name>Ad</node-def-name>
+      <node-def-name>Name</node-def-name>
       <node-def-opv>OPV</node-def-opv>
       <node-def-ac>AC</node-def-ac>
       <node-def-man>MAN</node-def-man>
@@ -838,7 +838,7 @@
       <location>Search in this location:</location>
     </label>
     <action>
-      <Search>Arama</Search>
+      <Search>Search</Search>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -848,7 +848,7 @@
   <UISimpleSearch>
     <action>
       <MoreConstraints>Show/Hide Constraint Form</MoreConstraints>
-      <Search>Arama</Search>
+      <Search>Search</Search>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
@@ -1042,7 +1042,7 @@
       <notcontains>Not Contain Value</notcontains>
     </label>
     <action>
-      <Add>Ekle</Add>
+      <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
@@ -1057,7 +1057,7 @@
       <toDate-invalid>Invalid type in the 'To' field. Please reselect or type correctly.</toDate-invalid>
     </msg>
     <button>
-      <label-Add>Ekle</label-Add>
+      <label-Add>Add</label-Add>
       <label-Cancel>İptal</label-Cancel>
     </button>
   </UIConstraintsForm>
@@ -1134,7 +1134,7 @@
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
-      <Search>Arama</Search>
+      <Search>Search</Search>
     </action>
     <msg>
       <!--DMS 2.4.x ECM-3566-->
@@ -1148,7 +1148,7 @@
   </UIJCRAdvancedSearch>
   <EditQueryForm>
     <label>
-      <name>Ad</name>
+      <name>Name</name>
       <selectBox>Select Query Style</selectBox>
       <query>Query</query>
     </label>
@@ -1168,7 +1168,7 @@
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Add>Ekle</Add>
+      <Add>Add</Add>
     </action>
   </UIMetadataSelectForm>
   <property1MetadataPopup>
@@ -1192,7 +1192,7 @@
     </label>
     <pLabel>Properties:</pLabel>
     <action>
-      <Add>Ekle</Add>
+      <Add>Add</Add>
       <Cancel>İptal</Cancel>
     </action>
   </UISelectPropertyForm>
@@ -1203,7 +1203,7 @@
   </ExactlyFormPopup>
   <UIECMSearch>
     <header>
-      <name>Ad</name>
+      <name>Name</name>
       <language>Language</language>
       <query>Query</query>
       <action>Eylemler</action>
@@ -1234,7 +1234,7 @@
   </UISaveQueryForm>
   <UISavedQuery>
     <header>
-      <name>Ad</name>
+      <name>Name</name>
       <type>Türü</type>
       <statement>Statement</statement>
       <permission>Permissions</permission>
@@ -1388,7 +1388,7 @@
   -->
   <UIActivePublication>
     <header>
-      <LifecycleName>Ad</LifecycleName>
+      <LifecycleName>Name</LifecycleName>
       <LifecycleDesc>Açıklama</LifecycleDesc>
       <action>Eylem</action>
     </header>
@@ -1558,7 +1558,7 @@
   </UICategoriesAddedList>
   <UITreeList>
     <header>
-      <name>Ad</name>
+      <name>Name</name>
       <action>Eylem</action>
     </header>
     <info>
@@ -1846,7 +1846,7 @@
       <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
-      <AddTag>Ekle</AddTag>
+      <AddTag>Add</AddTag>
       <Cancel>#{word.close}</Cancel>
     </action>
     <msg>
@@ -2468,7 +2468,7 @@
       <Info>Info</Info>
       <Actions>Eylemler</Actions>
       <Collaboration>Collaboration</Collaboration>
-      <Search>Arama</Search>
+      <Search>Search</Search>
     </obtion>
   </UIActionBar>
 
@@ -2726,7 +2726,7 @@
 
   <UIEditingTagsForm>
     <header>
-      <name>Ad</name>
+      <name>Name</name>
       <relatedDocuments>Related Documents</relatedDocuments>
       <action>Eylem</action>
     </header>
@@ -2857,7 +2857,7 @@
   </UISelectRestorePath>
   <PathNode>
     <title>
-      <Add>Ekle</Add>
+      <Add>Add</Add>
     </title>
   </PathNode>
   <UIPopupPathFoRestore>
@@ -3122,7 +3122,7 @@
   </UIDocumentNodeList>
   <FileView>
     <label>
-      <name>Ad</name>
+      <name>Name</name>
       <date>Date</date>
       <size>Size</size>
       <sortBy>Sort by:</sortBy>

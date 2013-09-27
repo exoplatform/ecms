@@ -69,14 +69,14 @@
   <UITaxonomyTreeContainer>
     <tab>
       <info>
-        <UITaxonomyTreeMainForm>Specify the category name, workspace and home path.</UITaxonomyTreeMainForm>
+        <UITaxonomyTreeMainForm>Escolha um nome para a categoria, um espaço de trabalho e caminho raiz para a categoria.</UITaxonomyTreeMainForm>
         <UIPermissionTreeManager>Escolha o tipo de permissão de acesso à árvore de categorias.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Add an action to the category tree to complete the creation or update.</UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Edit the taxonomy tree by adding, copying, cutting and selecting permissions.</UITaxonomyTreeCreateChild>
+        <UIActionTaxonomyManager>Adicione uma ação a árvore de categorias para finalizar.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Edite a árvore de categorias e defina permissões.</UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
-      <not-exist-tree>The category tree does not exist.</not-exist-tree>
+      <not-exist-tree>A árvore de categorias não foi criada ainda.</not-exist-tree>
     </msg>
   </UITaxonomyTreeContainer>
   
@@ -90,11 +90,11 @@
       <Reset>Redefinir</Reset>
     </action>
     <msg>
-      <name-not-allowed>Forbidden Name</name-not-allowed>
-      <name-emty>The tree name is required.</name-emty>
-      <homePath-emty>The home path is required.</homePath-emty>
-      <targetPath-emty>The target path is required.</targetPath-emty>
-      <taxonomytree-existed>The category tree name already exists.</taxonomytree-existed>
+      <name-not-allowed>Nome não permitido</name-not-allowed>
+      <name-emty>O nome da árvore é obrigatório.</name-emty>
+      <homePath-emty>O caminho raiz é obrigatório.</homePath-emty>
+      <targetPath-emty>O caminho destino é obrigatório.</targetPath-emty>
+      <taxonomytree-existed>Uma árvore de categorias com o mesmo nome já existe.</taxonomytree-existed>
     </msg>
   </UITaxonomyTreeMainForm>
 
@@ -102,7 +102,7 @@
     <label>
       <TaxoTreeName>Nome</TaxoTreeName>
       <TaxoTreeWorkspace>Espaço de Trabalho</TaxoTreeWorkspace>
-      <TaxoTreeHomePath>Home Path</TaxoTreeHomePath>
+      <TaxoTreeHomePath>Caminho Raiz</TaxoTreeHomePath>
     </label>
   </TaxonomyTreeMainForm>
 
@@ -120,7 +120,7 @@
 <UIPermissionTreeInfo>
 <action>
 <title>
-<Delete>Delete</Delete>
+<Delete>Excluir</Delete>
 <Edit>Editar</Edit>
 </title>
 </action>
@@ -128,7 +128,7 @@
 <usersOrGroups>Usuário ou Grupo</usersOrGroups>
 <read>Ler</read>
 <addNode>Adicionar nó</addNode>
-<setProperty>Set Property</setProperty>
+<setProperty>Atribuir Propriedade</setProperty>
 <remove>Remover</remove>
 <action>Ação</action>
 </header>
@@ -152,17 +152,17 @@
 -->
 
   <UIActionForm>
-    <title>Add an action to the category tree</title>
+    <title>Adicionar uma ação para a árvore de categoria.</title>
     <action>
       <Save>Salvar</Save>
     </action>
     <msg>
-      <name-not-allowed>Empty name or special characters are not allowed in the action name.</name-not-allowed>
-      <path-invalid>The path is invalid.</path-invalid>
-      <taxonomy-existed>The category tree already exists.</taxonomy-existed>
+      <name-not-allowed>Insira um nome sem caracteres especiais para o nome da ação.</name-not-allowed>
+      <path-invalid>Caminho inválido</path-invalid>
+      <taxonomy-existed>A árvore de categoria já existe.</taxonomy-existed>
       <taxonomy-node-existed>O nó da taxonomia já existe.</taxonomy-node-existed>
-      <no-permission-add>You do not have the right to add.</no-permission-add>
-      <not-created-tree>The category tree has not yet been created.</not-created-tree>
+      <no-permission-add>You do not have the right to add an action.</no-permission-add>
+      <not-created-tree>A árvore de categoria não foi criada ainda.</not-created-tree>
     </msg>
   </UIActionForm>
 
@@ -184,13 +184,13 @@
   -->
   <NameSpacePopup>
     <title>
-      <UINamespaceForm>Namespace Form</UINamespaceForm>
+      <UINamespaceForm>Espaço de nomes</UINamespaceForm>
     </title>
   </NameSpacePopup>
   <UINamespaceForm>
-    <title>Register New Namespace</title>
+    <title>Registrar novo espaço de nomes</title>
     <label>
-      <namespace>Namespace Prefix</namespace>
+      <namespace>Prefixo do Espaço de Nomes</namespace>
       <uri>URI</uri>
     </label>
     <action>
@@ -198,9 +198,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <register-unsuccessfull>Namespace or URI already exists.</register-unsuccessfull>
-      <prefix-null>Please specify the namespace's prefix.</prefix-null>
-      <uri-null>Please specify the namespace's URI.</uri-null>
+      <register-unsuccessfull>O espaço de nomes ou uri já existe.</register-unsuccessfull>
+      <prefix-null>Por favor inserir o prefixo do espaço de nomes.</prefix-null>
+      <uri-null>Por favor inserir URI do espaço de nomes.</uri-null>
     </msg>
   </UINamespaceForm>
   <!--
@@ -2185,8 +2185,8 @@
   
   <UITaxonomyTreeMainForm>
     <msg>
-      <homepath-emty>The home path is required.</homepath-emty>
-      <targetpath-emty>The target path is required.</targetpath-emty>
+      <homepath-emty>O caminho raiz é obrigatório.</homepath-emty>
+      <targetpath-emty>O caminho destino é obrigatório.</targetpath-emty>
     </msg>
   </UITaxonomyTreeMainForm>
   <UITaxonomyWorkingArea>

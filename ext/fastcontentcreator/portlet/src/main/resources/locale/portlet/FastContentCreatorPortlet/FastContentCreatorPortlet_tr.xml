@@ -60,13 +60,13 @@
 
   <UIFCCActionList>
     <header>
-      <name>Ad</name>
+      <name>Name</name>
       <description>Açıklama</description>
       <instanceOf>Instance of</instanceOf>
       <action>Eylem</action>
     </header>
     <action>
-      <Add>Ekle</Add>
+      <Add>Add</Add>
     </action>
     <msg>
       <empty>No actions</empty>
@@ -103,7 +103,7 @@
       <child-not-found>This node does not have any child ones.</child-not-found>
     </info>
     <header>
-      <name>Ad</name>
+      <name>Name</name>
       <action>Eylem</action>
     </header>
   </UITreeList>

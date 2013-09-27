@@ -252,7 +252,7 @@
   <ResouceContainer>
     <dialog>
       <label>
-        <name>Ad</name>
+        <name>Name</name>
         <autoload>Otomatik Yükleme</autoload>
         <minetype>MIME Türü</minetype>
         <content>İçerik</content>
@@ -286,7 +286,7 @@
     <dialog>
       <label>
         <id>Kimlik</id>
-        <name>Ad</name>
+        <name>Name</name>
         <lifecycle>Yaşam döngüsü</lifecycle>
         <homePath>Home Path</homePath>
         <targetWorkspace>Target Workspace</targetWorkspace>
