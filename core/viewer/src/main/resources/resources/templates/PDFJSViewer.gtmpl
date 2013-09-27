@@ -28,9 +28,10 @@
   def currentRotation = uicomponent.getCurrentRotation();
   def currentScale = uicomponent.getCurrentScale();
   def metadatas = uicomponent.getMetadataExtraction();
-  def rqcontext = _ctx.getRequestContext();
-  
-%>
+  def rqcontext = _ctx.getRequestContext();  
+
+if (maximumPage > 0) {
+%> 
     <link rel="stylesheet" href="/eXoWCMResources/pdf.js/viewer.css"/>    
     <script type="text/javascript" src="/eXoWCMResources/pdf.js/compatibility.js"></script>
     <link rel="resource" type="application/l10n" href="/eXoWCMResources/pdf.js/locale/locale.properties"/>    
@@ -251,3 +252,16 @@
     
     <script type="text/javascript">PDFJS.pdfFile = '<%=downloadLink%>';</script>
     <script type="text/javascript" src="/eXoWCMResources/pdf.js/viewer.js"></script>
+    
+    <% }else {%>  
+    <div class="uiUnEditable clearfix">
+      <div class="iconContainer">
+        <i class="<%=Utils.getNodeTypeIcon(currentNode, "uiIcon64x64")%>"></i>
+      </div>
+      <div class="detailContainer">
+        <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
+        <a class="btn btn-primary" href="$downloadLink"><%=_ctx.appRes("File.view.label.download")%></a>
+        <span><%=_ctx.appRes("File.view.label.using-webDAV")%></span>
+      </div>
+    </div>
+<% }%>
