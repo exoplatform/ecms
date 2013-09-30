@@ -728,6 +728,10 @@
       <label>Name</label>
 						<action>Actions</action>
     </header>
+    <title>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
+    </title>
     <action>
       <AddAction>Add Action Type</AddAction>
     </action>
@@ -1589,6 +1593,10 @@
       <action>Action</action>
       <template>Template</template>
     </header>
+    <title>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
+    </title>
     <action>
       <AddTemplate>Add Template</AddTemplate>
 						<Edit>Edit</Edit>
@@ -1962,6 +1970,10 @@
       <tagHTML>Tag Style</tagHTML>
       <action>Action</action>
     </header>
+    <title>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
+    </title>
     <action>
       <AddStyle>Add Style</AddStyle>
     </action>
