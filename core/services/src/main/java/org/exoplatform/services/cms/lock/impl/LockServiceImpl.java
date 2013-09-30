@@ -31,8 +31,6 @@ import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryResult;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.lock.LockService;
@@ -41,9 +39,10 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
 
@@ -258,8 +257,7 @@ public class LockServiceImpl implements LockService, Startable {
     String key = createLockKey(node);
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
     if(userId == null) userId = IdentityConstants.ANONIM;
-    LockService lockService = WCMCoreUtils.getService(LockService.class);
-    Map<String,String> lockedNodesInfo = lockService.getLockInformation(userId);
+    Map<String,String> lockedNodesInfo = getLockInformation(userId);
     if ((lockedNodesInfo != null) && (lockedNodesInfo.get(key) != null)) {
       return lockedNodesInfo.get(key);
     }
@@ -303,27 +301,24 @@ public class LockServiceImpl implements LockService, Startable {
    * {@inheritDoc}
    */
   @Override
-  @SuppressWarnings("unchecked")
   public String getLockToken(Node node) throws Exception {
     String key = createLockKey(node);
-    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+    Identity currentIdentity = ConversationState.getCurrent().getIdentity();
+    String userId = currentIdentity.getUserId();
     if(userId == null) userId = IdentityConstants.ANONIM;
-    LockService lockService = WCMCoreUtils.getService(LockService.class);
-    Map<String,String> lockedNodesInfo = lockService.getLockInformation(userId);
+    Map<String,String> lockedNodesInfo = getLockInformation(userId);
     if ((lockedNodesInfo != null) && (lockedNodesInfo.get(key) != null)) {
       return lockedNodesInfo.get(key);
     }
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    OrganizationService service = (OrganizationService) container.getComponentInstanceOfType(OrganizationService.class);
-    Collection<org.exoplatform.services.organization.Membership>
-                        collection = service.getMembershipHandler().findMembershipsByUser(userId);
+
+    Collection<MembershipEntry> collection = currentIdentity.getMemberships();
     String keyPermission;
-    for(org.exoplatform.services.organization.Membership membership : collection) {
+    for(MembershipEntry membership : collection) {
       StringBuffer permissionBuffer = new StringBuffer();
-      permissionBuffer.append(membership.getMembershipType()).append(":").append(membership.getGroupId());
+      permissionBuffer.append(membership.getMembershipType()).append(":").append(membership.getGroup());
       if ((permissionBuffer != null) && (permissionBuffer.toString().length() > 0)) {
         keyPermission = createLockKey(node, permissionBuffer.toString());
-        lockedNodesInfo = lockService.getLockInformation(permissionBuffer.toString());
+        lockedNodesInfo = getLockInformation(permissionBuffer.toString());
         if ((lockedNodesInfo != null) && (lockedNodesInfo.get(keyPermission) != null)) {
           return lockedNodesInfo.get(keyPermission);
         }
@@ -341,8 +336,7 @@ public class LockServiceImpl implements LockService, Startable {
     String oldKey = getOldLockKey(srcPath, newNode);
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
     if(userId == null) userId = IdentityConstants.ANONIM;
-    LockService lockService = WCMCoreUtils.getService(LockService.class);
-    Map<String,String> lockedNodesInfo = lockService.getLockInformation(userId);
+    Map<String,String> lockedNodesInfo = getLockInformation(userId);
     if(lockedNodesInfo == null) {
       lockedNodesInfo = new HashMap<String,String>();
     }
@@ -350,7 +344,7 @@ public class LockServiceImpl implements LockService, Startable {
       lockedNodesInfo.put(newKey, lockedNodesInfo.get(oldKey));
       lockedNodesInfo.remove(oldKey);
     }
-    lockService.putToLockHoding(userId, lockedNodesInfo);
+    putToLockHoding(userId, lockedNodesInfo);
   }
 
   /**
@@ -362,14 +356,13 @@ public class LockServiceImpl implements LockService, Startable {
     String oldKey = createLockKey(oldNode);
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
     if(userId == null) userId = IdentityConstants.ANONIM;
-    LockService lockService = WCMCoreUtils.getService(LockService.class);
-    Map<String,String> lockedNodesInfo = lockService.getLockInformation(userId);
+    Map<String,String> lockedNodesInfo = getLockInformation(userId);
     if(lockedNodesInfo == null) {
       lockedNodesInfo = new HashMap<String,String>();
     }
     lockedNodesInfo.remove(oldKey) ;
     lockedNodesInfo.put(newKey,newNode.getLock().getLockToken());
-    lockService.putToLockHoding(userId,lockedNodesInfo);
+    putToLockHoding(userId,lockedNodesInfo);
   }
 
   /**

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
@@ -34,14 +35,12 @@ import javax.jcr.version.VersionException;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.PageList;
-import org.exoplatform.container.PortalContainer;
-import org.exoplatform.container.component.ComponentRequestLifecycle;
 import org.exoplatform.ecm.jcr.model.Preference;
+import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.comparator.NodeOwnerComparator;
 import org.exoplatform.ecm.webui.comparator.NodeTitleComparator;
 import org.exoplatform.ecm.webui.core.UIPagingGridDecorator;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
-import org.exoplatform.ecm.utils.lock.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.services.cms.lock.LockService;
@@ -49,9 +48,8 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.config.WorkspaceEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.organization.Group;
-import org.exoplatform.services.organization.Membership;
-import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -199,29 +197,16 @@ public class UILockNodeList extends UIPagingGridDecorator {
   }
 
   static public class UnLockActionListener extends EventListener<UILockNodeList> {
-    private List<String> getMemberships(String userId) throws Exception {
-      PortalContainer  manager = PortalContainer.getInstance() ;
-      OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
-      ((ComponentRequestLifecycle) organizationService).startRequest(manager);
-      List<String> groupList = new ArrayList<String> ();
-      Collection<?> gMembership = organizationService.getMembershipHandler().findMembershipsByUser(userId);
-      Object[] objects = gMembership.toArray();
-      for(int i = 0; i < objects.length; i ++ ){
-        Membership member = (Membership)objects[i];
-        groupList.add(member.getMembershipType()+ ":" +member.getGroupId());
-      }
-      return groupList;
-    }
+    private List<String> getCurrentUserMemberships() throws Exception {
 
-    private List<String> getGroups(String userId) throws Exception {
-      PortalContainer  manager = PortalContainer.getInstance() ;
-      OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
-      ((ComponentRequestLifecycle) organizationService).startRequest(manager);
-      Collection<?> groups = organizationService.getGroupHandler().findGroupsOfUser(userId);
-      List<String> groupList = new ArrayList<String>();
-      for (Object group : groups) {
-        groupList.add(((Group)group).getId());
+      List<String> groupList = new ArrayList<String> ();
+      
+      Collection<MembershipEntry> memberships =
+          ConversationState.getCurrent().getIdentity().getMemberships();
+      for(MembershipEntry entry: memberships){
+        groupList.add(entry.getMembershipType() + ":" + entry.getGroup());
       }
+      
       return groupList;
     }
 
@@ -240,8 +225,8 @@ public class UILockNodeList extends UIPagingGridDecorator {
       if (!isAuthenticated) {
         LockService lockService = WCMCoreUtils.getService(LockService.class);
         List<String> authorizedMemberships = lockService.getAllGroupsOrUsersForLock();
-        List<String> loginedUserMemberShips = getMemberships(remoteUser);
-        List<String> loginedUserGroups = getGroups(remoteUser);
+        List<String> loginedUserMemberShips = getCurrentUserMemberships();
+        Set<String> loginedUserGroups = ConversationState.getCurrent().getIdentity().getGroups();
         for (String authorizedMembership: authorizedMemberships) {
           if ((authorizedMembership.startsWith("*") &&
               loginedUserGroups.contains(StringUtils.substringAfter(authorizedMembership, ":")))
