@@ -61,16 +61,13 @@ if (maximumPage > 0) {
       <div id="mainContainer">
         <div class="findbar hidden doorHanger hiddenSmallView" id="findbar">
           <label for="findInput" class="toolbarLabel" data-l10n-id="find_label">Find:</label>
-          <input id="findInput" class="toolbarField" tabindex="41">
-          <div class="splitToolbarButton">
-            <button class="toolbarButton findPrevious" title="" id="findPrevious" tabindex="42" data-l10n-id="find_previous">
-              <span data-l10n-id="find_previous_label">Previous</span>
-            </button>
-            <div class="splitToolbarButtonSeparator"></div>
-            <button class="toolbarButton findNext" title="" id="findNext" tabindex="43" data-l10n-id="find_next">
-              <span data-l10n-id="find_next_label">Next</span>
-            </button>
-          </div>
+          <input id="findInput" type="text" class="" tabindex="41">
+            <a class="actionIcon" title="" id="findPrevious" tabindex="42" data-l10n-id="find_previous">
+              <i class="uiIconArrowLeft uiIconLightGray"></i>
+            </a>
+            <a class="actionIcon" title="" id="findNext" tabindex="43" data-l10n-id="find_next">
+              <i class="uiIconArrowRight uiIconLightGray"></i>
+            </a>
           <input type="checkbox" id="findHighlightAll" class="toolbarField">
           <label for="findHighlightAll" class="toolbarLabel" tabindex="44" data-l10n-id="find_highlight">Highlight all</label>
           <input type="checkbox" id="findMatchCase" class="toolbarField">

@@ -129,7 +129,7 @@ select {
 html[dir='ltr'] .outerCenter {
   float: right;
   position: relative;
-  right: 24%;
+  right: 17%;
   padding: 4px 0 0;
 }
 html[dir='rtl'] .outerCenter {
@@ -169,12 +169,12 @@ html[dir='rtl'] .innerCenter {
 html[dir='ltr'] #sidebarContainer {
   -webkit-transition-property: left;
   transition-property: left;
-  left: -150px;
+  left: -190px;
 }
 html[dir='rtl'] #sidebarContainer {
   -webkit-transition-property: right;
   transition-property: right;
-  right: -150px;
+  right: -190px;
 }
 
 #outerContainer.sidebarMoving > #sidebarContainer,
@@ -332,7 +332,6 @@ html[dir='rtl'] #sidebarContent {
   min-width: 16px;
   padding: 0px 6px 0px 6px;
   margin: 4px 2px 4px 2px;
-  color: hsl(0,0%,85%);
   font-size: 12px;
   line-height: 14px;
   text-align: left;
@@ -340,11 +339,13 @@ html[dir='rtl'] #sidebarContent {
 }
 
 html[dir='ltr'] .findbar {
-  left: 68px;
+  left: 36px;
+  padding: 6px 4px 0 4px;
 }
 
 html[dir='rtl'] .findbar {
-  right: 68px;
+  right: 36px;
+  padding: 6px 4px 0 4px;
 }
 
 .findbar label {
