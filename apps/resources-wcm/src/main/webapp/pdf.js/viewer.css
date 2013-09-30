@@ -363,6 +363,11 @@ html[dir='rtl'] .findbar {
   height: auto;
   z-index: 30000;
 }
+.secondaryToolbar .dropdown-menu{
+	display: block ;
+	top: -10px !important;
+	left: -142px !important;
+}
 html[dir='ltr'] .secondaryToolbar {
   right: 4px;
 }
