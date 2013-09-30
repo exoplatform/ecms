@@ -488,7 +488,6 @@ html[dir='ltr'] #toolbarViewerLeft > *,
 html[dir='ltr'] #toolbarViewerMiddle > *,
 html[dir='ltr'] #toolbarViewerRight > *,
 html[dir='ltr'] .findbar > * {
-  position: relative;
   float: left;
 }
 html[dir='rtl'] #toolbarViewerLeft > *,
