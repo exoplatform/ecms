@@ -156,14 +156,14 @@ if (maximumPage > 0) {
                 </a> 
               </div>
               <div class="outerCenter">
-                <div class="innerCenter" id="toolbarViewerMiddle">
-                  
-                    <a id="zoomOut" class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Zoom Out"  tabindex="9" data-l10n-id="zoom_out">
-                      <i class="uiIconSimplePlusMini uiIconLightGray"></i>
+                <div class="innerCenter" id="toolbarViewerMiddle">                  
+
+                    <a id="zoomOut" class="actionIcon" title="Zoom Out" tabindex="9" data-l10n-id="zoom_out">
+                      <i class="uiIconMinimize uiIconLightGray"></i>
                     </a>
                     
-                    <a id="zoomIn" class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Zoom In"  tabindex="10" data-l10n-id="zoom_in">
-                      <i class="uiIconMinimize uiIconLightGray"></i>
+                    <a id="zoomIn" class="actionIcon" title="Zoom In" tabindex="10" data-l10n-id="zoom_in">
+                      <i class="uiIconSimplePlusMini uiIconLightGray"></i>
                      </a>
                   
                   <span id="scaleSelectContainer" class="">
