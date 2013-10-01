@@ -617,14 +617,11 @@ public class Utils {
   }
 
   public static List<String> getMemberships() throws Exception {
-    String userId = ConversationState.getCurrent().getIdentity().getUserId();
     List<String> userMemberships = new ArrayList<String>();
-   userMemberships.add(userId);
-    // here we must retrieve memberships of the user using the
-    // IdentityRegistry Service instead of Organization Service to
-    // allow JAAS based authorization
-    Collection<MembershipEntry> memberships = getUserMembershipsFromIdentityRegistry(userId);
-    if (memberships != null) {
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+    if (StringUtils.isNotEmpty(userId)) {
+      userMemberships.add(userId);
+      Collection<MembershipEntry> memberships = getUserMembershipsFromIdentityRegistry(userId);
       for (MembershipEntry membership : memberships) {
         String role = membership.getMembershipType() + ":" + membership.getGroup();
         userMemberships.add(role);
@@ -644,7 +641,11 @@ public class Utils {
   private static Collection<MembershipEntry> getUserMembershipsFromIdentityRegistry(String authenticatedUser) {
     IdentityRegistry identityRegistry = WCMCoreUtils.getService(IdentityRegistry.class);
     Identity currentUserIdentity = identityRegistry.getIdentity(authenticatedUser);
-    return currentUserIdentity.getMemberships();
+    if (currentUserIdentity == null) {
+      return Collections.<MembershipEntry>emptySet();
+    } else {
+      return currentUserIdentity.getMemberships();
+    }
   }
   
   public static String getNodeTypeIcon(Node node, String appended, String mode)
