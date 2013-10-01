@@ -933,26 +933,11 @@ public class TemplateServiceImpl implements TemplateService, Startable {
   }
 
   public Set<String> getAllEditedConfiguredNodeTypes() throws Exception {
-    DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, true);
-    HashSet<String> editedConfigNodetypes = new HashSet<String>();
-    Node serviceLogContentNode= Utils.getServiceLogContentNode(this.getClass().getSimpleName(), EDITED_CONFIGURED_NODE_TYPES);
-    if (serviceLogContentNode != null) {
-      String logData = serviceLogContentNode.getProperty(NodetypeConstant.JCR_DATA).getString();
-      editedConfigNodetypes.addAll(Arrays.asList(logData.split(";")));
-    }
-    return editedConfigNodetypes;
+    return Utils.getAllEditedConfiguredData(this.getClass().getSimpleName(), EDITED_CONFIGURED_NODE_TYPES, true);
   }
 
   private void addEditedConfiguredNodeType(String nodeType) throws Exception {
-    DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, true);
-    Node serviceLogContentNode = Utils.getServiceLogContentNode(this.getClass().getSimpleName(), EDITED_CONFIGURED_NODE_TYPES);
-    if (serviceLogContentNode != null) {
-      String logData = serviceLogContentNode.getProperty(NodetypeConstant.JCR_DATA).getString();
-      if (StringUtils.isEmpty(logData)) logData = nodeType;
-      else if (logData.indexOf(nodeType) == -1) logData = logData.concat(";").concat(nodeType);
-      serviceLogContentNode.setProperty(NodetypeConstant.JCR_DATA, logData);
-      serviceLogContentNode.getSession().save();
-    }
+    Utils.addEditedConfiguredData(nodeType, this.getClass().getSimpleName(), EDITED_CONFIGURED_NODE_TYPES, true);
   }
 
   /**
