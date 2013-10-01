@@ -471,11 +471,11 @@ public class Utils {
    * @return
    * @throws Exception
    */
-  public static Node getServiceLogContentNode(String serviceName, String logType) throws Exception {
+  private static Node getServiceLogContentNode(SessionProvider systemProvider, String serviceName, String logType) throws Exception {
     // Get workspace and session where store service log
     ManageableRepository repository = WCMCoreUtils.getRepository();
     Session session =
-        WCMCoreUtils.getSystemSessionProvider().getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
+        systemProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
     Node serviceLogContentNode = null;
 
     if (session.getRootNode().hasNode("exo:services")) {
@@ -505,29 +505,55 @@ public class Utils {
     session.save();
     return serviceLogContentNode;
   }
-  
-  public static Set<String> getAllEditedConfiguredDatas(String className, String id, boolean skipActivities) throws Exception {
-    DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, skipActivities);
-    HashSet<String> editedConfigTemplates = new HashSet<String>();
-    Node serviceLogContentNode= getServiceLogContentNode(className, id);
-    if (serviceLogContentNode != null) {
-      String logData = serviceLogContentNode.getProperty(NodetypeConstant.JCR_DATA).getString();
-      editedConfigTemplates.addAll(Arrays.asList(logData.split(";")));
+
+	/**
+	 * Get all the templates which have been added into the system
+	 * @param className Simple name of class.
+	 * @param id The unique value which used to build service log name.
+	 * @param skipActivities To skip raising activities on activity stream.
+	 * @return A Set of templates name which have been added.
+	 * @throws Exception
+	 */
+  public static Set<String> getAllEditedConfiguredData(String className, String id, boolean skipActivities) throws Exception {
+    SessionProvider systemProvider = SessionProvider.createSystemProvider();
+    try {
+      DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, skipActivities);
+      HashSet<String> editedConfigTemplates = new HashSet<String>();
+      Node serviceLogContentNode= getServiceLogContentNode(systemProvider, className, id);
+      if (serviceLogContentNode != null) {
+        String logData = serviceLogContentNode.getProperty(NodetypeConstant.JCR_DATA).getString();
+        editedConfigTemplates.addAll(Arrays.asList(logData.split(";")));
+      }
+      return editedConfigTemplates;
+    } finally {
+      systemProvider.close();
     }
-    return editedConfigTemplates;
-  }  
-  
-  public static void addEditedConfiguredDatas(String template, String className, String id, boolean skipActivities) throws Exception {
-    DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, skipActivities);
-    Node serviceLogContentNode = getServiceLogContentNode(className, id);
-    if (serviceLogContentNode != null) {
-      String logData = serviceLogContentNode.getProperty(NodetypeConstant.JCR_DATA).getString();
-      if (StringUtils.isEmpty(logData)) logData = template;
-      else if (logData.indexOf(template) == -1) logData = logData.concat(";").concat(template);
-      serviceLogContentNode.setProperty(NodetypeConstant.JCR_DATA, logData);
-      serviceLogContentNode.getSession().save();
+  }
+
+	/**
+	 * Keep the name of templates in jcr:data property at the first time loaded.
+	 * @param template Name of template which will be kept in jcr:data property
+	 * @param className A simple class name
+	 * @param id The unique value which used to build service log name.
+	 * @param skipActivities To skip raising activities on activity stream.
+	 * @throws Exception
+	 */
+  public static void addEditedConfiguredData(String template, String className, String id, boolean skipActivities) throws Exception {
+    SessionProvider systemProvider = SessionProvider.createSystemProvider();
+    try {
+      DocumentContext.getCurrent().getAttributes().put(DocumentContext.IS_SKIP_RAISE_ACT, skipActivities);
+      Node serviceLogContentNode = getServiceLogContentNode(systemProvider, className, id);
+      if (serviceLogContentNode != null) {
+        String logData = serviceLogContentNode.getProperty(NodetypeConstant.JCR_DATA).getString();
+        if (StringUtils.isEmpty(logData)) logData = template;
+        else if (logData.indexOf(template) == -1) logData = logData.concat(";").concat(template);
+        serviceLogContentNode.setProperty(NodetypeConstant.JCR_DATA, logData);
+        serviceLogContentNode.getSession().save();
+      }
+    } finally {
+      systemProvider.close();
     }
-  }   
+  }
 
   public static String getObjectId(String nodePath) throws UnsupportedEncodingException {
     return URLEncoder.encode(nodePath.replaceAll("'", "\\\\'"), "utf-8");
@@ -579,9 +605,6 @@ public class Utils {
     String userId = ConversationState.getCurrent().getIdentity().getUserId();
     List<String> userMemberships = new ArrayList<String>();
     userMemberships.add(userId);
-    // here we must retrieve memberships of the user using the
-    // IdentityRegistry Service instead of Organization Service to
-    // allow JAAS based authorization
     Collection<MembershipEntry> memberships = getUserMembershipsFromIdentityRegistry(userId);
     if (memberships != null) {
       for (MembershipEntry membership : memberships) {
