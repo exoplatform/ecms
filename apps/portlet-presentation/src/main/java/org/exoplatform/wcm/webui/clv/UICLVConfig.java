@@ -979,7 +979,7 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
         sb.append(item).append(";");
       }
       String itemPath = sb.toString();
-      clvConfig.getUIStringInput(UICLVConfig.ITEM_PATH_FORM_STRING_INPUT).setValue(clvConfig.getTitle(itemPath));
+      clvConfig.getUIStringInput(UICLVConfig.ITEM_PATH_FORM_STRING_INPUT).setValue(clvConfig.getTitles(itemPath));
       clvConfig.setSavedPath(itemPath);
 
     }
@@ -1013,7 +1013,7 @@ public class UICLVConfig extends UIFormTabPane  implements UISelectable {
         sb.append(item).append(";");
       }
       String itemPath = sb.toString();
-      clvConfig.getUIStringInput(UICLVConfig.ITEM_PATH_FORM_STRING_INPUT).setValue(clvConfig.getTitle(itemPath));
+      clvConfig.getUIStringInput(UICLVConfig.ITEM_PATH_FORM_STRING_INPUT).setValue(clvConfig.getTitles(itemPath));
       clvConfig.setSavedPath(itemPath);
     }
   }
