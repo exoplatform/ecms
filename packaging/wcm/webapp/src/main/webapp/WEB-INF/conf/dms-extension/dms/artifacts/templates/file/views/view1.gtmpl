@@ -55,7 +55,26 @@
   public String formatNodeName(String text) {
     return text.replaceAll("'", "\\\\'") ;
   }
+  
+  StringBuilder sb = new StringBuilder();
+  String ndPath = currentNode.getPath();
+  if (ndPath.startsWith("/")) {
+    ndPath = ndPath.substring(1);
+  }
+  
+  def encodedPath = URLEncoder.encode(ndPath, "utf-8");
+  encodedPath = encodedPath.replaceAll ("%2F", "/"); //we won't encode the slash characters in the path
+  
+  sb.append("/").append(restContextName).append("/contents/download/");
+  sb.append(currentNode.getSession().getWorkspace().getName()).append("/").append(encodedPath);
+  if (originNode.isNodeType("nt:frozenNode")) {
+    sb.append("?version=" + originNode.getParent().getName());
+  }
+  def downloadLink = sb.toString();
+  def fileComponent = uicomponent.getUIComponent(mimeType);
+  if( ((fileComponent instanceof PDFViewer && ((PDFViewer)fileComponent).getMaximumOfPage()) <=0) ) {
 %>
+
 <div $resizeBlock>
   <style>
     <% _ctx.include(uicomponent.getTemplateSkin("nt:file", "Stylesheet")); %>
@@ -63,23 +82,7 @@
   <div class="fileContent">
     <div class="navigationContainer uiBox"> 
       <h6 class="title clearfix">
-        <%
-          StringBuilder sb = new StringBuilder();
-          String ndPath = currentNode.getPath();
-          if (ndPath.startsWith("/")) {
-            ndPath = ndPath.substring(1);
-          }
-          
-          def encodedPath = URLEncoder.encode(ndPath, "utf-8");
-          encodedPath = encodedPath.replaceAll ("%2F", "/"); //we won't encode the slash characters in the path
-          
-          sb.append("/").append(restContextName).append("/contents/download/");
-          sb.append(currentNode.getSession().getWorkspace().getName()).append("/").append(encodedPath);
-          if (originNode.isNodeType("nt:frozenNode")) {
-            sb.append("?version=" + originNode.getParent().getName());
-          }
-          def downloadLink = sb.toString();
-          def fileComponent = uicomponent.getUIComponent(mimeType);
+        <%          
           if (!(fileComponent == null || (fileComponent instanceof PDFViewer && ((PDFViewer)fileComponent).getMaximumOfPage() <=0 ))) {
           %>
             <a class="pull-right" href="$downloadLink"><i class="uiIconDownload"></i> <%=_ctx.appRes("File.view.label.download")%></a>
@@ -110,3 +113,37 @@
     <div><% _ctx.include(uicomponent.getViewTemplate("exo:comments", "view1")); %></div>
   </div>
 </div>
+
+
+<%} else {%>
+
+<div $resizeBlock>
+<style>
+  <% _ctx.include(uicomponent.getTemplateSkin("nt:file", "Stylesheet")); %>
+</style>
+<div class="fileContent">
+    
+    <div class="content uiContentBox">
+        <%
+          if(fileComponent != null) {
+          uicomponent.renderUIComponent(fileComponent);
+          } else {
+        %>
+          <div class="uiUnEditable clearfix">
+            <div class="iconContainer">
+              <i class="<%=Utils.getNodeTypeIcon(currentNode, "uiIcon64x64")%>"></i>
+            </div>
+            <div class="detailContainer">
+              <h4><%=_ctx.appRes("File.view.label.not-viewable")%></h4>
+              <a class="btn btn-primary" href="$downloadLink"><%=_ctx.appRes("File.view.label.download")%></a>
+              <span><%=_ctx.appRes("File.view.label.using-webDAV")%></span>
+            </div>
+          </div>
+        <%}%>
+    </div>
+  <div><% _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); %></div>
+  <div><% _ctx.include(uicomponent.getViewTemplate("exo:comments", "view1")); %></div>
+</div>
+</div>
+
+<%}%>

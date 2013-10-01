@@ -1022,6 +1022,23 @@ public class Utils {
    }
     return sb.toString();
   }
+  
+  public static String getPDFViewerLink(Node node) throws Exception{
+    ExoContainer container = ExoContainerContext.getCurrentContainer() ;
+    PortalContainerInfo containerInfo = (PortalContainerInfo)container.
+        getComponentInstanceOfType(PortalContainerInfo.class) ;
+    String portalName = containerInfo.getContainerName() ;
+    PortalContainerConfig portalContainerConfig = (PortalContainerConfig) container.
+        getComponentInstance(PortalContainerConfig.class);
+    String restContextName = portalContainerConfig.getRestContextName(portalName);
+    StringBuilder sb = new StringBuilder();
+    Node currentNode = org.exoplatform.wcm.webui.Utils.getRealNode(node);    
+    String repository = ((ManageableRepository)currentNode.getSession().getRepository()).getConfiguration().getName();   
+    sb.append("/").append(restContextName).append("/pdfviewer/");
+    sb.append(repository).append("/");
+    sb.append(currentNode.getSession().getWorkspace().getName()).append("/").append(currentNode.getUUID());   
+    return sb.toString();
+  }
 
   /**
    * Get allowed folder types in current path.

@@ -22,7 +22,8 @@
   def originalNode = uiParent.getOriginalNode();  
   def currentNode = uicomponent.getFileLangNode(uiParent.getNode());
   def downloadLink = Utils.getDownloadRestServiceLink(originalNode);
-   public String formatNodeName(String text) {
+  def viewLink = Utils.getPDFViewerLink(originalNode);
+  public String formatNodeName(String text) {
     return text.replaceAll("'", "\\\\'") ;
   }
   def maximumPage = uicomponent.getMaximumOfPage();
@@ -235,7 +236,7 @@ if (maximumPage > 0) {
     
     <script type="text/javascript" src="/eXoWCMResources/pdf.js/l10n.js"></script>
     <script type="text/javascript" src="/eXoWCMResources/pdf.js/pdf.js"></script>    
-    <script type="text/javascript">PDFJS.pdfFile = '<%=downloadLink%>';</script>
+    <script type="text/javascript">PDFJS.pdfFile = '<%=viewLink%>';</script>
     <script type="text/javascript">var locale = '<%=lang%>';</script>
     <script type="text/javascript" src="/eXoWCMResources/pdf.js/viewer.js"></script>
     
