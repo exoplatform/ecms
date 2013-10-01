@@ -81,12 +81,12 @@ if (maximumPage > 0) {
 		
 		
         <div id="secondaryToolbar" class="secondaryToolbar hidden">
-		  <ul id="secondaryToolbarButtonContainer" class="dropdown-menu" style="display: block; top: -10px; left: -142px;">
+		  <ul id="secondaryToolbarButtonContainer" class="dropdown-menu" style="display: block; top: -10px; left: -142px;">			
 			<li>
-				<a id="secondaryPresentationMode" class=""  tabindex="18" >
-				  <i class="uiIconPlus uiIconLightGray"></i> Presentation Mode
-				</a>
-			</li>
+  			<a id="secondaryDownload" class="" tabindex="21" >
+           <i class="uiIconDownload uiIconLightGray"></i> Download
+        </a>
+     </li>
 			<li>			
 				<a id="secondaryPrint" class="" tabindex="20" >
 				  <i class="uiIconPrint uiIconLightGray"></i> Print
@@ -144,12 +144,7 @@ if (maximumPage > 0) {
 
                 <a id="presentationMode" class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Switch to Presentation Mode"  tabindex="12" data-l10n-id="presentation_mode">
                   <i class="uiIconEcmsExpand uiIconLightGray"></i>
-                </a>
-
-                               
-                <a id="print" class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Print" tabindex="20" data-l10n-id="print">
-                         <i class="uiIconPrint uiIconLightGray"></i>
-                </a>
+                </a>     
 
                 
                 <a id="secondaryToolbarToggle" class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Tools"  tabindex="17" data-l10n-id="tools">
@@ -194,7 +189,7 @@ if (maximumPage > 0) {
           </div>
         </div>
 
-        <menu type="context" id="viewerContextMenu">
+        <menu type="context" id="viewerContextMenu">       
           <menuitem id="contextFirstPage" label="First Page"
                     data-l10n-id="first_page"></menuitem>
           <menuitem id="contextLastPage" label="Last Page"

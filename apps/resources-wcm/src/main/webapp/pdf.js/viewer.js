@@ -1289,11 +1289,11 @@ var SecondaryToolbar = {
     // Attach the event listeners.
     this.toggleButton.addEventListener('click', this.toggle.bind(this));
 
-    this.presentationMode.addEventListener('click',
-      this.presentationModeClick.bind(this));
+    //this.presentationMode.addEventListener('click',
+    //  this.presentationModeClick.bind(this));
     //this.openFile.addEventListener('click', this.openFileClick.bind(this));
     this.print.addEventListener('click', this.printClick.bind(this));
-    //this.download.addEventListener('click', this.downloadClick.bind(this));
+    this.download.addEventListener('click', this.downloadClick.bind(this));
 
     this.firstPage.addEventListener('click', this.firstPageClick.bind(this));
     this.lastPage.addEventListener('click', this.lastPageClick.bind(this));
@@ -1313,12 +1313,12 @@ var SecondaryToolbar = {
   /*openFileClick: function secondaryToolbarOpenFileClick(evt) {
     document.getElementById('fileInput').click();
     this.close(evt.target);
-  },  
+  },  */
 
   downloadClick: function secondaryToolbarDownloadClick(evt) {
     PDFView.download();
     this.close(evt.target);
-  },*/
+  },
   
   printClick: function secondaryToolbarPrintClick(evt) {
     window.print();
@@ -1425,10 +1425,10 @@ var PDFView = {
     SecondaryToolbar.initialize({
       toolbar: document.getElementById('secondaryToolbar'),
       toggleButton: document.getElementById('secondaryToolbarToggle'),
-      presentationMode: document.getElementById('secondaryPresentationMode'),
+      //presentationMode: document.getElementById('secondaryPresentationMode'),
       //openFile: document.getElementById('secondaryOpenFile'),
       print: document.getElementById('secondaryPrint'),
-      //download: document.getElementById('secondaryDownload'),
+      download: document.getElementById('secondaryDownload'),
       firstPage: document.getElementById('firstPage'),
       lastPage: document.getElementById('lastPage'),
       pageRotateCw: document.getElementById('pageRotateCw'),
@@ -1828,8 +1828,7 @@ var PDFView = {
   download: function pdfViewDownload() {
     function noData() {
       downloadManager.downloadUrl(url, filename);
-    }
-
+    }    
     var url = this.url.split('#')[0];
     var filename = getPDFFileNameFromURL(url);
     var downloadManager = new DownloadManager();
@@ -3894,14 +3893,14 @@ var DocumentOutlineView = function documentOutlineView(outline) {
   }
 
   if (!PDFView.supportsPrinting) {
-    document.getElementById('print').classList.add('hidden');
+    //document.getElementById('print').classList.add('hidden');
     document.getElementById('secondaryPrint').classList.add('hidden');
   }
 
   if (!PDFView.supportsFullscreen) {
     document.getElementById('presentationMode').classList.add('hidden');
-    document.getElementById('secondaryPresentationMode').
-      classList.add('hidden');
+    //document.getElementById('secondaryPresentationMode').
+    //  classList.add('hidden');
   }
 
   if (PDFView.supportsIntegratedFind) {
@@ -3993,13 +3992,13 @@ var DocumentOutlineView = function documentOutlineView(outline) {
     SecondaryToolbar.presentationModeClick.bind(SecondaryToolbar));
 
   /*document.getElementById('openFile').addEventListener('click',
-    SecondaryToolbar.openFileClick.bind(SecondaryToolbar));  
+    SecondaryToolbar.openFileClick.bind(SecondaryToolbar));  */
 
-  document.getElementById('download').addEventListener('click',
-    SecondaryToolbar.downloadClick.bind(SecondaryToolbar));*/
+  //document.getElementById('download').addEventListener('click',
+  //  SecondaryToolbar.downloadClick.bind(SecondaryToolbar));
     
-  document.getElementById('print').addEventListener('click',
-    SecondaryToolbar.printClick.bind(SecondaryToolbar));
+  //document.getElementById('print').addEventListener('click',
+  //  SecondaryToolbar.printClick.bind(SecondaryToolbar));
 
   document.getElementById('contextFirstPage').addEventListener('click',
     SecondaryToolbar.firstPageClick.bind(SecondaryToolbar));
@@ -4120,7 +4119,7 @@ window.addEventListener('change', function webViewerChange(evt) {
   // URL does not reflect proper document location - hiding some icons.
   //document.getElementById('viewBookmark').setAttribute('hidden', 'true');
   //document.getElementById('download').setAttribute('hidden', 'true');
-  //document.getElementById('secondaryDownload').setAttribute('hidden', 'true');
+  document.getElementById('secondaryDownload').setAttribute('hidden', 'true');
 }, true);
 
 function selectScaleOption(value) {
