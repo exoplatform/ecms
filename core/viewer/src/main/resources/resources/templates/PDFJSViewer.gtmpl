@@ -82,32 +82,32 @@ if (maximumPage > 0) {
         <div id="secondaryToolbar" class="secondaryToolbar hidden">
 		  <ul id="secondaryToolbarButtonContainer" class="dropdown-menu" style="display: block; top: -10px; left: -142px;">
 			<li>
-				<a id="secondaryPresentationMode" class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Switch to Presentation Mode" tabindex="18" data-l10n-id="presentation_mode">
+				<a id="secondaryPresentationMode" class="actionIcon"  tabindex="18" >
 				  <i class="uiIconPlus uiIconLightGray"></i> Presentation Mode
 				</a>
 			</li>
 			<li>			
-				<a id="secondaryPrint" class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Print" tabindex="20" data-l10n-id="print">
+				<a id="secondaryPrint" class="actionIcon" tabindex="20" >
 				  <i class="uiIconPrint uiIconLightGray"></i> Print
 				</a>
 			</li>
 			<li>
-				<a id="firstPage" class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Go to First Page" tabindex="22" data-l10n-id="first_page">
+				<a id="firstPage" class="actionIcon" tabindex="22" >
 				  <i class="uiIconUpToFirst uiIconLightGray"></i> Go to First Page
 				</a>
 			</li>
 			<li>
-				<a id="lastPage" class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Go to Last Page" tabindex="23" data-l10n-id="last_page">
+				<a id="lastPage" class="actionIcon"  tabindex="23" >
 				  <i class="uiIconDownToBottom uiIconLightGray"></i> Go to Last Page
 				</a>
 			</li>
 			<li>
-				<a id="pageRotateCw" class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Rotate Clockwise"  tabindex="24" data-l10n-id="page_rotate_cw">
+				<a id="pageRotateCw" class="actionIcon"   tabindex="24" >
 				  <i class="uiIconRotateRight uiIconLightGray"></i> Rotate Clockwise
 				</a>
 			</li>
 			<li>
-				<a id="pageRotateCcw" class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Rotate Counterclockwise" tabindex="25" data-l10n-id="page_rotate_ccw">
+				<a id="pageRotateCcw" class="actionIcon"  tabindex="25" >
 				  <i class="uiIconRotateLeft uiIconLightGray"></i> Rotate Counterclockwise
 				</a>
 			</li>

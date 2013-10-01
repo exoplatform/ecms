@@ -129,7 +129,7 @@ select {
 html[dir='ltr'] .outerCenter {
   float: right;
   position: relative;
-  right: 17%;
+  right: 15%;
   padding: 4px 0 0;
 }
 html[dir='rtl'] .outerCenter {
@@ -1497,7 +1497,7 @@ canvas {
 }
 
 .outerCenter .innerCenter select{
-	width: 160px;
+	width: 150px;
 	margin-left: 4px;
 }
 
