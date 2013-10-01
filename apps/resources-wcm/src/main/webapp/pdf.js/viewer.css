@@ -152,6 +152,7 @@ html[dir='rtl'] .innerCenter {
   height: 100%;
   position: relative;
   height: 600px;
+  border: 1px solid #d1d1d1;
 }
 
 #sidebarContainer {
@@ -203,12 +204,12 @@ html[dir='rtl'] #outerContainer.sidebarOpen > #sidebarContainer {
 html[dir='ltr'] #outerContainer.sidebarOpen > #mainContainer {
   -webkit-transition-property: left;
   transition-property: left;
-  left: 144px;
+  left: 145px;
 }
 html[dir='rtl'] #outerContainer.sidebarOpen > #mainContainer {
   -webkit-transition-property: right;
   transition-property: right;
-  right: 144px;
+  right: 145px;
 }
 
 #sidebarContent {
@@ -217,10 +218,9 @@ html[dir='rtl'] #outerContainer.sidebarOpen > #mainContainer {
   overflow: auto;
   position: absolute;
   width: 144px;
-  border: 1px solid #d1d1d1;
-  border-right: none;
-    border-top: none;
-	background: #f8f8f8;
+  border: none;
+  border-right: 1px solid #d1d1d1;
+  background: #f8f8f8;
 }
 html[dir='ltr'] #sidebarContent {
   left: 0;
@@ -231,8 +231,7 @@ html[dir='rtl'] #sidebarContent {
 
 #viewerContainer {
   overflow: auto;
-  border: 1px solid #d1d1d1;
-  border-top: none;
+  border: none;
   position: absolute;
   top: 37px;
   right: 0;
@@ -251,18 +250,18 @@ html[dir='rtl'] #sidebarContent {
 }
 
 #toolbarSidebar {
-  width: 144px;
+  width: 145px;
   height: 35px;
   background-color: #f0f0f0;
-  border: 1px solid #c2c2c2;
-  border-right: none;
+  border-bottom: 1px solid #d1d1d1;
 }
 
 #toolbarContainer, .findbar, .secondaryToolbar {
   position: relative;
   height: 35px;
   background: #f0f0f0; 
-  border: 1px solid #c2c2c2;
+  border: none;
+  border-bottom: 1px solid #d1d1d1;
   
 }
 
