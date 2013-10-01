@@ -82,32 +82,32 @@ if (maximumPage > 0) {
         <div id="secondaryToolbar" class="secondaryToolbar hidden">
 		  <ul id="secondaryToolbarButtonContainer" class="dropdown-menu" style="display: block; top: -10px; left: -142px;">
 			<li>
-				<a id="secondaryPresentationMode" class="actionIcon"  tabindex="18" >
+				<a id="secondaryPresentationMode" class=""  tabindex="18" >
 				  <i class="uiIconPlus uiIconLightGray"></i> Presentation Mode
 				</a>
 			</li>
 			<li>			
-				<a id="secondaryPrint" class="actionIcon" tabindex="20" >
+				<a id="secondaryPrint" class="" tabindex="20" >
 				  <i class="uiIconPrint uiIconLightGray"></i> Print
 				</a>
 			</li>
 			<li>
-				<a id="firstPage" class="actionIcon" tabindex="22" >
+				<a id="firstPage" class="" tabindex="22" >
 				  <i class="uiIconUpToFirst uiIconLightGray"></i> Go to First Page
 				</a>
 			</li>
 			<li>
-				<a id="lastPage" class="actionIcon"  tabindex="23" >
+				<a id="lastPage" class=""  tabindex="23" >
 				  <i class="uiIconDownToBottom uiIconLightGray"></i> Go to Last Page
 				</a>
 			</li>
 			<li>
-				<a id="pageRotateCw" class="actionIcon"   tabindex="24" >
+				<a id="pageRotateCw" class=""   tabindex="24" >
 				  <i class="uiIconRotateRight uiIconLightGray"></i> Rotate Clockwise
 				</a>
 			</li>
 			<li>
-				<a id="pageRotateCcw" class="actionIcon"  tabindex="25" >
+				<a id="pageRotateCcw" class=""  tabindex="25" >
 				  <i class="uiIconRotateLeft uiIconLightGray"></i> Rotate Counterclockwise
 				</a>
 			</li>
@@ -156,14 +156,14 @@ if (maximumPage > 0) {
                 </a> 
               </div>
               <div class="outerCenter">
-                <div class="innerCenter" id="toolbarViewerMiddle">                  
-
-                    <a id="zoomOut" class="actionIcon" title="Zoom Out" tabindex="9" data-l10n-id="zoom_out">
-                      <i class="uiIconMinimize uiIconLightGray"></i>
+                <div class="innerCenter" id="toolbarViewerMiddle">
+                  
+                    <a id="zoomOut" class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Zoom Out"  tabindex="9" data-l10n-id="zoom_out">
+                      <i class="uiIconSimplePlusMini uiIconLightGray"></i>
                     </a>
                     
-                    <a id="zoomIn" class="actionIcon" title="Zoom In" tabindex="10" data-l10n-id="zoom_in">
-                      <i class="uiIconSimplePlusMini uiIconLightGray"></i>
+                    <a id="zoomIn" class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Zoom In"  tabindex="10" data-l10n-id="zoom_in">
+                      <i class="uiIconMinimize uiIconLightGray"></i>
                      </a>
                   
                   <span id="scaleSelectContainer" class="">
