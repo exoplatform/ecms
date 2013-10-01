@@ -362,10 +362,6 @@ public class Utils {
    *              vinh.nguyen@exoplatform.com
    */
   public static void removeDeadSymlinks(Node node, boolean keepInTrash) throws Exception {
-    if (isInTrash(node)) {
-      removeDeadSymlinksFromTrash(node);
-      return;
-    }
     LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
     TrashService trashService = WCMCoreUtils.getService(TrashService.class);
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
