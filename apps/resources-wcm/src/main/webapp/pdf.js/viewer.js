@@ -3900,7 +3900,7 @@ var DocumentOutlineView = function documentOutlineView(outline) {
   }
 
   if (!PDFView.supportsFullscreen) {
-    document.getElementById('presentationMode').classList.add('hidden');
+    //document.getElementById('presentationMode').classList.add('hidden');
     //document.getElementById('secondaryPresentationMode').
     //  classList.add('hidden');
   }
@@ -4149,11 +4149,7 @@ window.addEventListener('localized', function localized(evt) {
     var container = document.getElementById('scaleSelectContainer');
     if (container.clientWidth > 0) {
       var select = document.getElementById('scaleSelect');
-      select.setAttribute('style', 'min-width: inherit;');
-      var width = select.clientWidth + SCALE_SELECT_CONTAINER_PADDING;
-      //select.setAttribute('style', 'min-width: ' +
-      //                             (width + SCALE_SELECT_PADDING) + 'px;');
-      container.setAttribute('max-width: ' + width + 'px;');
+      select.setAttribute('style', 'min-width: inherit;');      
     }
 
     // Set the 'max-height' CSS property of the secondary toolbar.

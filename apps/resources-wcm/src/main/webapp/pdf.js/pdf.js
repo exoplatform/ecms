@@ -103,7 +103,7 @@ function info(msg) {
 // Non-fatal warnings that should trigger the fallback UI.
 function warn(msg) {
   if (verbosity >= WARNINGS) {
-    log('Warning: ' + msg);
+    //log('Warning: ' + msg);
     PDFJS.LogManager.notify('warn', msg);
   }
 }
