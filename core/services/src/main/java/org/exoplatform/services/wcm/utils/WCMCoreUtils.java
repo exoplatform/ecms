@@ -540,7 +540,7 @@ public class WCMCoreUtils {
           if (LOG.isDebugEnabled()) {
             LOG.debug("An error occurs when deploy link from " + sourcePath + " to " + targetPath, e);
           } else if (LOG.isWarnEnabled()) {
-            LOG.warn("Can not deploy link from " + sourcePath + " to " + targetPath, e.getMessage());
+            LOG.warn("Can not deploy link from " + sourcePath + " to " + targetPath + ": " + e.getMessage());
           }
         }
       }
