@@ -1743,11 +1743,11 @@ var PDFView = {
   setTitleUsingUrl: function pdfViewSetTitleUsingUrl(url) {
     this.url = url;
     try {
-      this.setTitle(decodeURIComponent(getFileName(url)) || url);
+      //this.setTitle(decodeURIComponent(getFileName(url)) || url);
     } catch (e) {
       // decodeURIComponent may throw URIError,
       // fall back to using the unprocessed url in that case
-      this.setTitle(url);
+      //this.setTitle(url);
     }
   },
 
@@ -1760,7 +1760,7 @@ var PDFView = {
                              pdfDataRangeTransport, args) {
     var parameters = {password: password};
     if (typeof url === 'string') { // URL
-      //this.setTitleUsingUrl(url);
+      this.setTitleUsingUrl(url);
       parameters.url = url;
     } else if (url && 'byteLength' in url) { // ArrayBuffer
       parameters.data = url;
@@ -1829,6 +1829,8 @@ var PDFView = {
     function noData() {
       downloadManager.downloadUrl(url, filename);
     }    
+    	  
+
     var url = this.url.split('#')[0];
     var filename = getPDFFileNameFromURL(url);
     var downloadManager = new DownloadManager();
@@ -3894,7 +3896,7 @@ var DocumentOutlineView = function documentOutlineView(outline) {
 
   if (!PDFView.supportsPrinting) {
     //document.getElementById('print').classList.add('hidden');
-    document.getElementById('secondaryPrint').classList.add('hidden');
+    //document.getElementById('secondaryPrint').classList.add('hidden');
   }
 
   if (!PDFView.supportsFullscreen) {
@@ -4114,12 +4116,12 @@ window.addEventListener('change', function webViewerChange(evt) {
 
   var file = files[0];
   fileReader.readAsArrayBuffer(file);
-  //PDFView.setTitleUsingUrl(file.name);
+  PDFView.setTitleUsingUrl(file.name);
 
   // URL does not reflect proper document location - hiding some icons.
   //document.getElementById('viewBookmark').setAttribute('hidden', 'true');
   //document.getElementById('download').setAttribute('hidden', 'true');
-  document.getElementById('secondaryDownload').setAttribute('hidden', 'true');
+  //document.getElementById('secondaryDownload').setAttribute('hidden', 'true');
 }, true);
 
 function selectScaleOption(value) {
