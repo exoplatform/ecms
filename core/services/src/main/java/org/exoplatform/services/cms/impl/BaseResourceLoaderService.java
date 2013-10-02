@@ -304,9 +304,14 @@ public abstract class BaseResourceLoaderService implements Startable{
    * @throws Exception
    */
   public InputStream getResourceAsStream(String resourceName) throws Exception {
-    Node resourceNode = getResourceByName(WCMCoreUtils.getSystemSessionProvider(), resourceName);
-    InputStream stream = resourceNode.getNode("jcr:content").getProperty("jcr:data").getStream();
-    return stream;
+    SessionProvider systemProvider = SessionProvider.createSystemProvider();
+    try {
+      Node resourceNode = getResourceByName(systemProvider, resourceName);
+      InputStream stream = resourceNode.getNode("jcr:content").getProperty("jcr:data").getStream();
+      return stream;
+    } finally {
+      systemProvider.close();
+    }
   }  
   
   /**

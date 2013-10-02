@@ -16,7 +16,42 @@
  */
 package org.exoplatform.services.cms.impl;
 
-import com.ibm.icu.text.Transliterator;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+
+import javax.jcr.ItemNotFoundException;
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.jcr.ValueFormatException;
+import javax.jcr.nodetype.NodeType;
+import javax.jcr.nodetype.PropertyDefinition;
+import javax.ws.rs.core.MediaType;
+
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.component.ComponentPlugin;
@@ -44,15 +79,7 @@ import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
-import javax.jcr.*;
-import javax.jcr.nodetype.NodeType;
-import javax.jcr.nodetype.PropertyDefinition;
-import javax.ws.rs.core.MediaType;
-import java.io.*;
-import java.net.URLEncoder;
-import java.util.*;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
+import com.ibm.icu.text.Transliterator;
 
 /**
  * @author benjaminmestrallet
@@ -494,14 +521,14 @@ public class Utils {
     return serviceLogContentNode;
   }
 
-	/**
-	 * Get all the templates which have been added into the system
-	 * @param className Simple name of class.
-	 * @param id The unique value which used to build service log name.
-	 * @param skipActivities To skip raising activities on activity stream.
-	 * @return A Set of templates name which have been added.
-	 * @throws Exception
-	 */
+  /**
+   * Get all the templates which have been added into the system
+   * @param className Simple name of class.
+   * @param id The unique value which used to build service log name.
+   * @param skipActivities To skip raising activities on activity stream.
+   * @return A Set of templates name which have been added.
+   * @throws Exception
+  */
   public static Set<String> getAllEditedConfiguredData(String className, String id, boolean skipActivities) throws Exception {
     SessionProvider systemProvider = SessionProvider.createSystemProvider();
     try {
@@ -518,14 +545,14 @@ public class Utils {
     }
   }
 
-	/**
-	 * Keep the name of templates in jcr:data property at the first time loaded.
-	 * @param template Name of template which will be kept in jcr:data property
-	 * @param className A simple class name
-	 * @param id The unique value which used to build service log name.
-	 * @param skipActivities To skip raising activities on activity stream.
-	 * @throws Exception
-	 */
+  /**
+   * Keep the name of templates in jcr:data property at the first time loaded.
+   * @param template Name of template which will be kept in jcr:data property
+   * @param className A simple class name
+   * @param id The unique value which used to build service log name.
+   * @param skipActivities To skip raising activities on activity stream.
+   * @throws Exception
+ */
   public static void addEditedConfiguredData(String template, String className, String id, boolean skipActivities) throws Exception {
     SessionProvider systemProvider = SessionProvider.createSystemProvider();
     try {
