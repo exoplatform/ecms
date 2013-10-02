@@ -382,14 +382,12 @@ public class Utils {
    * @param     : keepInTrash true if the link will be move to trash, otherwise set by false
    * @throws    : Exception
    * @Objective : Remove all the link of a deleted node
-   * @Author    : Nguyen The Vinh from ECM of eXoPlatform
-   *              vinh.nguyen@exoplatform.com
    */
   public static void removeDeadSymlinks(Node node, boolean keepInTrash) throws Exception {
     if (isInTrash(node)) {
       removeDeadSymlinksFromTrash(node);
       return;
-    }
+    }  
     LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
     TrashService trashService = WCMCoreUtils.getService(TrashService.class);
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
@@ -429,7 +427,7 @@ public class Utils {
               synchronized (symlink) {
                 if (keepInTrash) {
                   trashService.moveToTrash(symlink, sessionProvider, 1);
-                }else {
+                } else {
                   symlink.remove();
                 }
               }

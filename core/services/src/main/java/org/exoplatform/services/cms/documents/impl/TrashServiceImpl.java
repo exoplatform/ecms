@@ -22,6 +22,7 @@ import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
@@ -160,8 +161,15 @@ public class TrashServiceImpl implements TrashService {
           + fixRestorePath(nodeName);
       if (trashSession.getWorkspace().getName().equals(
           nodeSession.getWorkspace().getName())) {
-        trashSession.getWorkspace().move(node.getPath(),
-            actualTrashPath);
+        try {
+	        trashSession.getWorkspace().move(node.getPath(),
+		        actualTrashPath);
+        } catch(PathNotFoundException pne) {
+	        if (LOG.isWarnEnabled()) {
+		        LOG.warn("Cannot move node " + node.getPath() + " to Trash due to: " + pne.getMessage());
+	        }
+	        return;
+        }
       } else {
         //clone node in trash folder
         trashSession.getWorkspace().clone(nodeWorkspaceName,
@@ -217,7 +225,6 @@ public class TrashServiceImpl implements TrashService {
           }
         }
       }
-      
       trashSession.save();
     }
   }

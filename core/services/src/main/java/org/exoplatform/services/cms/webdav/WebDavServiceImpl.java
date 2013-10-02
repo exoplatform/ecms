@@ -47,6 +47,7 @@ import org.exoplatform.common.util.HierarchicalProperty;
 import org.exoplatform.commons.utils.MimeTypeResolver;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
 import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.link.NodeFinder;
@@ -408,7 +409,6 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                       @HeaderParam(ExtHttpHeaders.USER_AGENT) String userAgent,
                       InputStream inputStream,
                       @Context UriInfo uriInfo) {
-
     Session session = null;
     Item item = null;
     try {
@@ -743,10 +743,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       }
       return Response.serverError().build();
     }    
-    
+
+    //Broadcast the event when user move node to Trash
+    Node node = (Node)item;
     try {
-	    //Broadcast the event when user move node to Trash
-	    Node node = (Node)item;
 	    ListenerService listenerService =  WCMCoreUtils.getService(ListenerService.class);
 	    ActivityCommonService activityService = WCMCoreUtils.getService(ActivityCommonService.class);
 	    Node parent = node.getParent();
@@ -779,11 +779,14 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
 	        }
 	      }         
 	    }
+	    
+	    //Remove its symlinks before remove node permanently
+	    Utils.removeDeadSymlinks(node, false);
     } catch(Exception ex) {
     	if (LOG.isWarnEnabled()) {
         LOG.warn(ex.getMessage());
       }
-    }    
+    } 
     return super.delete(repoName, repoPath, lockTokenHeader, ifHeader);
   }
 
