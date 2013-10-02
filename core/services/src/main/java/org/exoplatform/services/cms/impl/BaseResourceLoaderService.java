@@ -225,9 +225,14 @@ public abstract class BaseResourceLoaderService implements Startable{
    * @throws Exception
    */
   public String getResourceAsText(String resourceName) throws Exception {
-    Node resourceNode = getResourceByName(resourceName);
-    String text = resourceNode.getNode("jcr:content").getProperty("jcr:data").getString();
-    return text;
+    SessionProvider systemProvider = SessionProvider.createSystemProvider();
+    try {
+      Node resourceNode = getResourceByName(systemProvider, resourceName);
+      String text = resourceNode.getNode("jcr:content").getProperty("jcr:data").getString();
+      return text;
+    } finally {
+      systemProvider.close();
+    }
   }
   
   /**
@@ -236,9 +241,8 @@ public abstract class BaseResourceLoaderService implements Startable{
    * @return                Node
    * @throws Exception
    */  
-  public Node getResourceByName(String resourceName) throws Exception {
-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    Node resourcesHome = getResourcesHome(sessionProvider);
+  public Node getResourceByName(SessionProvider systemProvider, String resourceName) throws Exception {
+    Node resourcesHome = getResourcesHome(systemProvider);
     return resourcesHome.getNode(resourceName);
   }
   
@@ -291,7 +295,7 @@ public abstract class BaseResourceLoaderService implements Startable{
    * @throws Exception
    */  
   public String getResourceDescription(String resourceName) throws Exception {
-    Node resource = getResourceByName(resourceName);
+    Node resource = getResourceByName(WCMCoreUtils.getSystemSessionProvider(), resourceName);
     return resource.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.DC_DESCRIPTION).getValues()[0].getString();
   }
   
@@ -303,9 +307,14 @@ public abstract class BaseResourceLoaderService implements Startable{
    * @throws Exception
    */
   public InputStream getResourceAsStream(String resourceName) throws Exception {
-    Node resourceNode = getResourceByName(resourceName);
-    InputStream stream = resourceNode.getNode("jcr:content").getProperty("jcr:data").getStream();
-    return stream;
+    SessionProvider systemProvider = SessionProvider.createSystemProvider();
+    try {
+      Node resourceNode = getResourceByName(systemProvider, resourceName);
+      InputStream stream = resourceNode.getNode("jcr:content").getProperty("jcr:data").getStream();
+      return stream;
+    } finally {
+      systemProvider.close();
+    }
   }  
   
   /**
