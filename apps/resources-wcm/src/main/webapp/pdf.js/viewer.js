@@ -140,7 +140,7 @@ window.scrollIntoView = function(element, spot) {
   var parent = element.offsetParent;
   var offsetY = element.offsetTop + element.clientTop;
   if (!parent) {
-    console.error('offsetParent is not set -- cannot scroll');
+    //console.error('offsetParent is not set -- cannot scroll');
     return;
   }
   while (parent.clientHeight == parent.scrollHeight) {
@@ -1316,7 +1316,7 @@ var SecondaryToolbar = {
   },  */
 
   downloadClick: function secondaryToolbarDownloadClick(evt) {
-    PDFView.download();
+    //PDFView.download();
     this.close(evt.target);
   },
   
@@ -1831,7 +1831,7 @@ var PDFView = {
     }    
     	  
 
-    var url = this.url.split('#')[0];
+    var url = PDFJS.downloadLink;
     var filename = getPDFFileNameFromURL(url);
     var downloadManager = new DownloadManager();
     downloadManager.onerror = function (err) {
