@@ -16,11 +16,26 @@
  */
 package org.exoplatform.services.cms.webdav;
 
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.LinkedList;
-import java.util.Queue;
+import org.exoplatform.common.http.HTTPStatus;
+import org.exoplatform.common.util.HierarchicalProperty;
+import org.exoplatform.commons.utils.MimeTypeResolver;
+import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
+import org.exoplatform.services.cms.link.LinkUtils;
+import org.exoplatform.services.cms.link.NodeFinder;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.ext.app.ThreadLocalSessionProviderService;
+import org.exoplatform.services.jcr.webdav.util.InitParamsDefaults;
+import org.exoplatform.services.jcr.webdav.util.TextUtil;
+import org.exoplatform.services.listener.ListenerService;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.rest.ExtHttpHeaders;
+import org.exoplatform.services.rest.ext.webdav.method.*;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 import javax.jcr.Item;
 import javax.jcr.NoSuchWorkspaceException;
@@ -41,41 +56,11 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-
-import org.exoplatform.common.http.HTTPStatus;
-import org.exoplatform.common.util.HierarchicalProperty;
-import org.exoplatform.commons.utils.MimeTypeResolver;
-import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.ecm.utils.text.Text;
-import org.exoplatform.services.cms.jcrext.activity.ActivityCommonService;
-import org.exoplatform.services.cms.link.LinkUtils;
-import org.exoplatform.services.cms.link.NodeFinder;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.ext.app.ThreadLocalSessionProviderService;
-import org.exoplatform.services.jcr.webdav.util.InitParamsDefaults;
-import org.exoplatform.services.jcr.webdav.util.TextUtil;
-import org.exoplatform.services.listener.ListenerService;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
-import org.exoplatform.services.rest.ExtHttpHeaders;
-import org.exoplatform.services.rest.ext.webdav.method.ACL;
-import org.exoplatform.services.rest.ext.webdav.method.CHECKIN;
-import org.exoplatform.services.rest.ext.webdav.method.CHECKOUT;
-import org.exoplatform.services.rest.ext.webdav.method.COPY;
-import org.exoplatform.services.rest.ext.webdav.method.LOCK;
-import org.exoplatform.services.rest.ext.webdav.method.MKCOL;
-import org.exoplatform.services.rest.ext.webdav.method.MOVE;
-import org.exoplatform.services.rest.ext.webdav.method.OPTIONS;
-import org.exoplatform.services.rest.ext.webdav.method.ORDERPATCH;
-import org.exoplatform.services.rest.ext.webdav.method.PROPFIND;
-import org.exoplatform.services.rest.ext.webdav.method.PROPPATCH;
-import org.exoplatform.services.rest.ext.webdav.method.REPORT;
-import org.exoplatform.services.rest.ext.webdav.method.SEARCH;
-import org.exoplatform.services.rest.ext.webdav.method.UNCHECKOUT;
-import org.exoplatform.services.rest.ext.webdav.method.UNLOCK;
-import org.exoplatform.services.rest.ext.webdav.method.VERSIONCONTROL;
-import org.exoplatform.services.wcm.core.NodetypeConstant;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * This class is used to override the default WebDavServiceImpl in order to support symlinks
@@ -721,17 +706,14 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
       repoPath = convertRepoPath(repoPath, false);
 
-      Session session = null;
       try {
         item = nodeFinder.getItem(workspaceName(repoPath),
                                   path(normalizePath(repoPath)),
                                   true);        
-        session = item.getSession();
       } catch (PathNotFoundException e) {
         item = nodeFinder.getItem(workspaceName(repoPath),
                                   path(Text.escapeIllegalJcrChars(repoPath)),
                                   true);        
-        session = item.getSession();
       }     
 
     } catch (PathNotFoundException exc) {
@@ -782,6 +764,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
           }
         }         
       }
+      //Remove the symlinks of deleted node. 
+      Utils.removeSymlinks(node);
     } catch(Exception ex) {
       if (LOG.isWarnEnabled()) {
         LOG.warn(ex.getMessage());

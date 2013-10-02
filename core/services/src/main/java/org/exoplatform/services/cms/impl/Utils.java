@@ -16,42 +16,7 @@
  */
 package org.exoplatform.services.cms.impl;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
-
-import javax.jcr.ItemNotFoundException;
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.RepositoryException;
-import javax.jcr.Session;
-import javax.jcr.ValueFormatException;
-import javax.jcr.nodetype.NodeType;
-import javax.jcr.nodetype.PropertyDefinition;
-import javax.ws.rs.core.MediaType;
-
+import com.ibm.icu.text.Transliterator;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.component.ComponentPlugin;
@@ -79,7 +44,15 @@ import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
-import com.ibm.icu.text.Transliterator;
+import javax.jcr.*;
+import javax.jcr.nodetype.NodeType;
+import javax.jcr.nodetype.PropertyDefinition;
+import javax.ws.rs.core.MediaType;
+import java.io.*;
+import java.net.URLEncoder;
+import java.util.*;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 /**
  * @author benjaminmestrallet
@@ -371,6 +344,19 @@ public class Utils {
     return ret;
   }
 
+	/**
+	 * Remove the symlink of a deleted node
+	 * @param node The deleted node
+	 * @throws Exception
+	 */
+	public static void removeSymlinks(Node node) throws Exception {
+		LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
+		List<Node> symlinks = linkManager.getAllLinks(node, EXO_SYMLINK);
+		for (Node symlink : symlinks) {
+			symlink.remove();
+		}
+	}
+
   /**
    * Remove all the link of a deleted node
    * @param     : node
@@ -379,6 +365,7 @@ public class Utils {
    */
   public static void removeDeadSymlinks(Node node, boolean keepInTrash) throws Exception {
     if (isInTrash(node)) {
+
       return;
     }
     LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
@@ -442,6 +429,7 @@ public class Utils {
       sessionProvider.close();
     }
   }
+
   public static void removeDeadSymlinks(Node node) throws Exception {
     removeDeadSymlinks(node, true);
   }
