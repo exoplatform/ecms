@@ -57,9 +57,9 @@ barNavigationStyle="UIToolbarContainer"+barNavigationStyle;
 					<div>
 						<%if(hasPermission) {%>
 						<div class="UITableColumnContainer" style="margin: 0px auto; $style">
-							<div class="TRContainer ClearFix" style="zoom: 100%;">
+							<div class="TRContainer clearfix" style="zoom: 100%;">
 								<% for(uiChild in uicomponent.getChildren()) {%>
-									<div class="${uiChild.id}TDContainer FL"><% uicomponent.renderUIComponent(uiChild) %></div>
+									<div class="${uiChild.id}TDContainer pull-left"><% uicomponent.renderUIComponent(uiChild) %></div>
 								<% } %>
 								
 						 </div>

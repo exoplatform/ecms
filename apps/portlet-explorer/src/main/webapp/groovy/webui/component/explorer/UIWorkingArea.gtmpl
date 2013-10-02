@@ -68,7 +68,7 @@
    }  
 %>
 <div id="wcm-notice" style="display: none;" class="alert alert-success wcmAlertSuccess"></div>
-<div class="uiWorkingArea ClearFix" id="UIWorkingArea" initWithoutLeftContainer="$initWithoutLeftContainer">
+<div class="uiWorkingArea clearfix" id="UIWorkingArea" initWithoutLeftContainer="$initWithoutLeftContainer">
   <%
 	  uicomponent.renderChild(UIRightClickPopupMenu.class) ;
 

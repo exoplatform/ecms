@@ -1352,7 +1352,7 @@
 		ECMUtils.prototype.getMinimumWidthOfUIListGrid = function (listGrid) {
 		  if (!listGrid) return 0;
 		  var titleTable = gj(listGrid).find("div.titleTable:first")[0];
-		  var uiClearFix = gj(listGrid).find("div.ClearFix")[0];
+		  var uiClearFix = gj(listGrid).find("div.clearfix")[0];
 		  var chidrenItems = gj(uiClearFix).children("div");
 
 		  var minimumWidth = 0;
