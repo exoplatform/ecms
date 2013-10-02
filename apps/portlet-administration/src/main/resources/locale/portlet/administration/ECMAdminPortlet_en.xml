@@ -726,7 +726,7 @@
     <header>
       <name>Script</name>
       <label>Name</label>
-						<action>Actions</action>
+      <action>Actions</action>
     </header>
     <title>
       <Edit>Edit</Edit>
@@ -849,10 +849,14 @@
   </EditPopup>
 		
 		<UITabList>
+                  <title>
+                    <Edit>Edit</Edit>
+                    <Delete>Delete</Delete>
+                  </title>       
 			 <header>
 			 	 <tabName>Tab</tabName>
 			 	 <localizeButtons>Description</localizeButtons>
-						<action>Actions</action>
+				<action>Actions</action>
 				</header>
 				<action>
 					 <AddTab>Add</AddTab>
@@ -879,6 +883,9 @@
 		</UIViewPermissionList>
 		
 		<UIViewPermissionList>
+                         <title>
+                           <Delete>Delete</Delete>
+                         </title>
 			 <header>
 						<friendlyPermission>Permissions</friendlyPermission>
 			 	    <action>Action</action>
@@ -1569,6 +1576,10 @@
 		</UITabPane>
 		
   <UICLVTemplateList>
+    <title>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
+    </title>
     <header>
       <title>Name</title>
       <action>Action</action>
@@ -1973,6 +1984,7 @@
     <title>
       <Edit>Edit</Edit>
       <Delete>Delete</Delete>
+      <Remove>Remove</Remove>
     </title>
     <action>
       <AddStyle>Add Style</AddStyle>
@@ -2443,6 +2455,7 @@
     <title>Add Permission</title>
     <action>
       <Save>Save</Save>
+      <Add>Add</Add>
     </action>
     <label>
       <userOrGroup>Memberships: </userOrGroup>
