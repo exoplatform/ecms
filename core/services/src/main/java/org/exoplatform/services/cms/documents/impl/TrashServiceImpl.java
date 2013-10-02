@@ -129,6 +129,7 @@ public class TrashServiceImpl implements TrashService {
   public void moveToTrash(Node node,
                           SessionProvider sessionProvider,
                           int deep) throws Exception {
+    ((SessionImpl)node.getSession()).getActionHandler().preRemoveItem((ItemImpl)node);
     String nodeName = node.getName();
     Session nodeSession = node.getSession();
     nodeSession.checkPermission(node.getPath(), PermissionType.REMOVE);  
@@ -225,7 +226,6 @@ public class TrashServiceImpl implements TrashService {
         }
       }
       trashSession.save();
-      ((SessionImpl)node.getSession()).getActionHandler().preRemoveItem((ItemImpl)nodeInTrash);
     }
   }
  

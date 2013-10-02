@@ -16,14 +16,12 @@
  */
 package org.exoplatform.services.cms.jcrext;
 
+import javax.jcr.Node;
+
 import org.apache.commons.chain.Context;
-import org.exoplatform.services.cms.documents.TrashService;
-import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.command.action.Action;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-
-import javax.jcr.Node;
 
 /**
  * Created by The eXo Platform SARL
@@ -34,11 +32,9 @@ import javax.jcr.Node;
 public class RemoveNodeAction implements Action {
   
   private ThumbnailService thumbnailService;
-	private TrashService trashService;
   
   public boolean execute(Context context) throws Exception {
     thumbnailService = WCMCoreUtils.getService(ThumbnailService.class);
-	  trashService = WCMCoreUtils.getService(TrashService.class);
     
     //remove thumbnail of node
     Node node = (Node)context.get("currentItem");
@@ -49,7 +45,6 @@ public class RemoveNodeAction implements Action {
         return false;
       }
     }
-   if(!trashService.isInTrash(node)) Utils.removeDeadSymlinks(node, false);
     return false;
   }
 
