@@ -349,10 +349,10 @@ if (maximumPage > 0) {
                    <i class="uiIconSearch uiIconLightGray"></i>
                 </a>
         <a class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Previous Page"  id="previous" tabindex="6" data-l10n-id="previous">
-          <i class="uiIconArrowDown uiIconLightGray"></i>
+          <i class="uiIconArrowUp  uiIconLightGray"></i>
         </a>
         <a class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Next Page" id="next" tabindex="7" data-l10n-id="next">
-          <i class="uiIconArrowUp uiIconLightGray"></i>
+          <i class="uiIconArrowDown uiIconLightGray"></i>
         </a>
                 <label id="pageNumberLabel" class="toolbarLabel" for="pageNumber" data-l10n-id="page_label">Page: </label>
                 <input type="text" id="pageNumber"  value="1" size="4" min="1" tabindex="8">
@@ -374,11 +374,11 @@ if (maximumPage > 0) {
                 <div class="innerCenter" id="toolbarViewerMiddle">
                   
                     <a id="zoomOut" class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Zoom Out"  tabindex="9" data-l10n-id="zoom_out">
-                      <i class="uiIconSimplePlusMini uiIconLightGray"></i>
+                      <i class="uiIconMinimize  uiIconLightGray"></i>
                     </a>
                     
                     <a id="zoomIn" class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Zoom In"  tabindex="10" data-l10n-id="zoom_in">
-                      <i class="uiIconMinimize uiIconLightGray"></i>
+                      <i class="uiIconSimplePlusMini uiIconLightGray"></i>
                      </a>
                   
                   <span id="scaleSelectContainer" >
