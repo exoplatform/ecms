@@ -435,7 +435,7 @@
 
 		ECMUtils.prototype.generateWebDAVUrl = function (serverInfo, restContextName, repository, workspace, nodePath, mimetype) {
 			my_window = window.open("");
-			var downloadLink = serverInfo + "/" + restContextName + "/jcr/" + repository + "/" + workspace + nodePath;
+			var downloadLink = serverInfo + "/" + restContextName + "/private/jcr/" + repository + "/" + workspace + nodePath;
 			my_window.document.write('<script> window.location.href = "' + downloadLink + '"; </script>');
 		};
 
