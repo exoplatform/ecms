@@ -9,6 +9,8 @@
   import org.exoplatform.wcm.webui.reader.ContentReader;
   import org.exoplatform.portal.webui.util.Util;
   import org.exoplatform.portal.application.PortalRequestContext;
+  import org.exoplatform.webui.application.portlet.PortletRequestContext;
+  import javax.portlet.PortletRequest;
   
   
   UIComponent uiParent = uicomponent.getParent();
@@ -30,15 +32,228 @@
   public String formatNodeName(String text) {
     return text.replaceAll("'", "\\\\'") ;
   }
+  
+  def rqcontext = _ctx.getRequestContext();
+  def currentPage = uicomponent.getPageNumber();
   def maximumPage = uicomponent.getMaximumOfPage();
-  def rqcontext = _ctx.getRequestContext();  
+  def currentRotation = uicomponent.getCurrentRotation();
+  def currentScale = uicomponent.getCurrentScale();
+  def metadatas = uicomponent.getMetadataExtraction();
   
   PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
   def lang = portalRequestContext.getLocale().getLanguage();
   
 
 if (maximumPage > 0) {
-%> 
+  PortletRequestContext requestContext = PortletRequestContext.getCurrentInstance();
+  PortletRequest portletRequest = requestContext.getRequest();
+  def userAgent = portletRequest.getProperty("user-agent");
+  if(userAgent.contains("MSIE 8.0")) {
+    rqcontext.getJavascriptManager().require("SHARED/ecm-utils", "ecmutil").
+    addScripts('ecmutil.ECMUtils.onKeyPDFViewerPress();') ;
+  %>
+    <head>
+      <style>
+  
+      .UIPDFViewerContainer {
+        border: 1px solid #d1d1d1;
+      } 
+      
+      .UIPDFViewerContainer .PDFViewerBar {
+        background: url('/eXoWCMResources/skin/images/file/PDFViewerBar.gif') repeat-x ;
+        height: 28px; 
+      }
+      
+      .UIPDFViewerContainer .PDFViewerBar .ControlButton {
+        float: left;
+        line-height: 28px;
+        margin-left: 8px;
+      }
+      
+      
+      .UIPDFViewerContainer .PDFViewerBar .ControlButton .ButtonBack{
+        background: url('/eXoWCMResources/skin/images/file/ButtonBack.gif') no-repeat left center ;
+        height: 28px;
+        width: 18px;
+        cursor: pointer;
+      }
+      
+      .UIPDFViewerContainer .PDFViewerBar .ControlButton .ButtonNext{
+        background: url('/eXoWCMResources/skin/images/file/ButtonNext.gif') no-repeat left center ;
+        height: 28px;
+        width: 18px;
+        cursor: pointer;
+      }
+      
+      .UIPDFViewerContainer .PDFViewerBar .ControlButton .ZoomIn{
+        background: url('/eXoWCMResources/skin/images/file/ZoomIn.gif') no-repeat left center ;
+        height: 28px;
+        width: 18px;
+        cursor: pointer;
+      }
+      
+      
+      .UIPDFViewerContainer .PDFViewerBar .ControlButton .ZoomOut{
+        background: url('/eXoWCMResources/skin/images/file/ZoomOut.gif') no-repeat left center ;
+        height: 28px;
+        width: 18px;
+        cursor: pointer;
+      }
+      
+      .UIPDFViewerContainer .PDFViewerBar .ControlButton .RotateLeft{
+        background: url('/eXoWCMResources/skin/images/file/HeightToWidth.gif') no-repeat left center ;
+        height: 28px;
+        width: 18px;
+        cursor: pointer;
+      }
+      
+      .UIPDFViewerContainer .PDFViewerBar .ControlButton .RotateRight{
+        background: url('/eXoWCMResources/skin/images/file/WidthToHeight.gif') no-repeat left center ;
+        height: 28px;
+        width: 18px;
+        cursor: pointer;
+      }
+      
+      .UIPDFViewerContainer .PDFViewerBar .ControlButton .InfoIcon{
+        background: url('/eXoWCMResources/skin/images/file/InfoIcon.gif') no-repeat left center ;
+        height: 28px;
+        width: 18px;
+        cursor: pointer;
+      }
+      
+      .UIPDFViewerContainer .PDFViewerBar .DownLoadIcon{
+        background: url('/eXoWCMResources/skin/images/file/DownLoadIcon.gif') no-repeat left center ;
+        Line-height: 28px;
+        width: 110px;
+        cursor: pointer;
+        float: right;
+        margin-right: 8px;
+        color: #4f4f4f;
+        padding-left: 22px;
+      }
+      
+      .UIPDFViewerContainer .PDFViewerContent {
+        padding-top: 12px;
+      }
+      
+      .UIPDFViewerContainer .PDFViewerContent .ImageView{
+        margin:auto;
+        height: 100%;
+        text-align: center;
+      }
+      
+      .UIPDFViewerContainer .PDFViewerBar .ControlButton .PageNumber{
+        height: 20px;
+        width: 28px;
+        margin: 4px 0px 0px 0px;
+        line-height: 20px;
+      }
+      
+      .UIPDFViewerContainer .PDFViewerBar .ControlButton .PageNumber input{
+        width: 28px;
+        border: 1px solid #c7c7c7;
+        text-align: center;
+      }
+      
+      .UIPDFViewerContainer .PDFViewerBar .ControlButton .SeparatorLine{
+        height: 28px;
+        border-left: 1px solid #c7c7c7;
+      }
+      
+      .UIPDFViewerContainer .InfoPopup{
+        padding: 5px;
+        background: #fafafa;
+        border: 1px solid #c7c7c7;
+      }
+      
+      .UIPDFViewerContainer .InfoPopup .metaKey{
+        font-weight: bold;
+      }
+      
+      .UIPDFViewerContainer .InfoPopup .metaValue{
+        margin-left: 5px;
+      }
+      
+      .UIPDFViewerContainer .InfoPopup .Metadata{
+        margin: 5px 5px 0px 0px;
+      }
+    </style>  
+  </head>
+  
+  
+  <%uiform.begin()%>
+      <div class="UIPDFViewerContainer">   
+      <div class="PDFViewerBar ClearFix">
+       <div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle("PDFViewer.label.previousPage")%>">
+         <a href="<%=uicomponent.event("PreviousPage")%>"><div class="ButtonBack"><span></span></div></a>
+       </div>
+       <div class="ControlButton">
+         <div class="Lable"><%=uicomponent.getResourceBundle("PDFViewer.label.page")%></div>
+       </div>
+       <div class="ControlButton" id="PageControl">
+         <a href="<%=uicomponent.event("GotoPage")%>" id="GotoPage"></a>
+         <div class="PageNumber"><%uiform.renderField(uicomponent.getChildById("pageNumber"))%></div>
+       </div>
+       <div class="ControlButton">
+         <div class="Lable"><%=uicomponent.getResourceBundle("PDFViewer.label.of")%> $maximumPage</div>
+       </div>
+       <div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle("PDFViewer.label.nextPage")%>">
+         <a href="<%=uicomponent.event("NextPage")%>">
+           <div class="ButtonNext"><span></span></div>
+         </a>
+       </div>
+       <div class="ControlButton">
+         <div class="SeparatorLine"><span></span></div>
+       </div>
+       <div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle("PDFViewer.label.zoomOutPage")%>">
+         <a href="<%=uicomponent.event("ZoomOutPage")%>">
+           <div class="ZoomOut"><span></span></div>
+         </a>
+       </div>
+       <div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle("PDFViewer.label.zoomInPage")%>">
+         <a href="<%=uicomponent.event("ZoomInPage")%>">
+           <div class="ZoomIn"><span></span></div>
+         </a>
+       </div>
+       <div class="ControlButton">
+          <div class="selectbox"><%uiform.renderField(uicomponent.getChildById("scalePage"))%></div>
+       </div>
+       <div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle("PDFViewer.label.rotateLeft")%>">
+         <a href="<%=uicomponent.event("RotateLeftPage")%>">
+           <div class="RotateLeft"><span></span></div>
+         </a>
+       </div>
+       <div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle("PDFViewer.label.rotateRight")%>">
+         <a href="<%=uicomponent.event("RotateRightPage")%>"><div class="RotateRight"><span></span></div></a>
+       </div>
+       <div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle("PDFViewer.label.viewInfor")%>">
+         <div class="InfoIcon" onclick="javascript:eXo.ecm.ECMUtils.showDocumentInformation(this, event);"><span></span></div>
+       </div>
+       <div class="DownLoadIcon"><a href="$downloadLink"><%=uicomponent.getResourceBundle("PDFViewer.label.downloadFile")%></a></div>
+     </div>
+     <div class="InfoPopup" id="metadatas" style="display: none;position: absolute;">
+       <div class="Metadata"><span class="metaKey"><%=uicomponent.getResourceBundle("PDFViewer.metadata.fileName")%></span>: <span class="metaValue"><%=ContentReader.getXSSCompatibilityContent(originalNode.getName())%></span></div>
+       <%for(key in metadatas.keySet()) {%>
+         <div class="Metadata"><span class="metaKey"><%=uicomponent.getResourceBundle("PDFViewer.metadata." + key)%>: </span><span class="metaValue"><%=metadatas.get(key)%></span></div>
+       <%}%>
+     </div>
+     <div class="PDFViewerContent">
+       <div class="ImageView" style="overflow-x:auto; overflow-y:hidden" id ="pdf_viewer_image" name="pdf_viewer_image">
+       <%
+           String pdfPageImage = "/" + uiParent.getPortalName() + "/" + Utils.getRestContextName(uiParent.getPortalName()) + 
+                                 "/pdfviewer/" + repository + "/" + uiParent.getWorkspaceName() + 
+                                 "/${currentPage}/${currentRotation}/${currentScale}/" + currentNode.getUUID() + "?" +
+                                 originalNode.getProperty("jcr:content/jcr:lastModified").getString();       
+       %>
+           <a href="$pdfPageImage" style="display:inline-block" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle("PDFViewer.label.viewFullPage")%>"><img src="$pdfPageImage" /></a>
+       </div>
+     </div>
+     </div>
+  <%uiform.end()%>  
+  
+  
+  <%
+  } else {  %> 
     <link rel="stylesheet" href="/eXoWCMResources/pdf.js/viewer.css"/>   
     <link rel="resource" type="application/l10n" href="/eXoWCMResources/pdf.js/locale/locale.properties"/>    
 
@@ -80,42 +295,42 @@ if (maximumPage > 0) {
           <span id="findMsg" class="toolbarLabel"></span>
         </div>  <!-- findbar -->
 
-		
+    
 
-		
-		
+    
+    
         <div id="secondaryToolbar" class="secondaryToolbar hidden">
-		  <ul id="secondaryToolbarButtonContainer" class="dropdown-menu" style="display: block; top: -10px; left: -142px;">			
-			<li>
-  			<a id="secondaryDownload" href="<%=downloadLink%>" tabindex="21" >
+      <ul id="secondaryToolbarButtonContainer" class="dropdown-menu" style="display: block; top: -10px; left: -142px;">     
+      <li>
+        <a id="secondaryDownload" href="<%=downloadLink%>" tabindex="21" >
            <i class="uiIconDownload uiIconLightGray"></i> Download
         </a>
      </li>
-			<li>			
-				<a id="secondaryPrint"  tabindex="20" >
-				  <i class="uiIconPrint uiIconLightGray"></i> Print
-				</a>
-			</li>
-			<li>
-				<a id="firstPage"  tabindex="22" >
-				  <i class="uiIconUpToFirst uiIconLightGray"></i> Go to First Page
-				</a>
-			</li>
-			<li>
-				<a id="lastPage"   tabindex="23" >
-				  <i class="uiIconDownToBottom uiIconLightGray"></i> Go to Last Page
-				</a>
-			</li>
-			<li>
-				<a id="pageRotateCw"    tabindex="24" >
-				  <i class="uiIconRotateRight uiIconLightGray"></i> Rotate Clockwise
-				</a>
-			</li>
-			<li>
-				<a id="pageRotateCcw"   tabindex="25" >
-				  <i class="uiIconRotateLeft uiIconLightGray"></i> Rotate Counterclockwise
-				</a>
-			</li>
+      <li>      
+        <a id="secondaryPrint"  tabindex="20" >
+          <i class="uiIconPrint uiIconLightGray"></i> Print
+        </a>
+      </li>
+      <li>
+        <a id="firstPage"  tabindex="22" >
+          <i class="uiIconUpToFirst uiIconLightGray"></i> Go to First Page
+        </a>
+      </li>
+      <li>
+        <a id="lastPage"   tabindex="23" >
+          <i class="uiIconDownToBottom uiIconLightGray"></i> Go to Last Page
+        </a>
+      </li>
+      <li>
+        <a id="pageRotateCw"    tabindex="24" >
+          <i class="uiIconRotateRight uiIconLightGray"></i> Rotate Clockwise
+        </a>
+      </li>
+      <li>
+        <a id="pageRotateCcw"   tabindex="25" >
+          <i class="uiIconRotateLeft uiIconLightGray"></i> Rotate Counterclockwise
+        </a>
+      </li>
           </ul>
 
         </div>  <!-- secondaryToolbar -->
@@ -125,20 +340,20 @@ if (maximumPage > 0) {
             <div id="toolbarViewer">
               <div id="toolbarViewerLeft">
                 <div class="btn-group">
-					<button id="sidebarToggle" class="btn" data-placement="bottom" rel="tooltip" data-original-title="Toggle Sidebar" tabindex="4" data-l10n-id="toggle_sidebar">
-					  <i class="uiIconShowSlidebar uiIconLightGray"></i>
-					</button>
+          <button id="sidebarToggle" class="btn" data-placement="bottom" rel="tooltip" data-original-title="Toggle Sidebar" tabindex="4" data-l10n-id="toggle_sidebar">
+            <i class="uiIconShowSlidebar uiIconLightGray"></i>
+          </button>
                 </div>
-				<div class="toolbarButtonSpacer"></div>
+        <div class="toolbarButtonSpacer"></div>
                 <a id="viewFind" class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Find in Document"  tabindex="5" data-l10n-id="findbar">
                    <i class="uiIconSearch uiIconLightGray"></i>
                 </a>
-				<a class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Previous Page"  id="previous" tabindex="6" data-l10n-id="previous">
-					<i class="uiIconArrowDown uiIconLightGray"></i>
-				</a>
-				<a class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Next Page" id="next" tabindex="7" data-l10n-id="next">
-					<i class="uiIconArrowUp uiIconLightGray"></i>
-				</a>
+        <a class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Previous Page"  id="previous" tabindex="6" data-l10n-id="previous">
+          <i class="uiIconArrowDown uiIconLightGray"></i>
+        </a>
+        <a class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Next Page" id="next" tabindex="7" data-l10n-id="next">
+          <i class="uiIconArrowUp uiIconLightGray"></i>
+        </a>
                 <label id="pageNumberLabel" class="toolbarLabel" for="pageNumber" data-l10n-id="page_label">Page: </label>
                 <input type="text" id="pageNumber"  value="1" size="4" min="1" tabindex="8">
                 </input>
@@ -239,7 +454,9 @@ if (maximumPage > 0) {
     <script type="text/javascript">var locale = '<%=lang%>';</script>
     <script type="text/javascript" src="/eXoWCMResources/pdf.js/viewer.js"></script>
     
-    <% }else {%>  
+  <%
+  }
+ }else {%>  
     <div class="uiUnEditable clearfix">
       <div class="iconContainer">
         <i class="<%=Utils.getNodeTypeIcon(currentNode, "uiIcon64x64")%>"></i>
