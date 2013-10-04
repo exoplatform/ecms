@@ -728,6 +728,10 @@
       <label>Name</label>
 <action>Actions</action>
     </header>
+    <title>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
+    </title>
     <action>
       <AddAction>Add Action Type</AddAction>
     </action>
@@ -845,6 +849,10 @@
   </EditPopup>
 
 <UITabList>
+                  <title>
+                    <Edit>Edit</Edit>
+                    <Delete>Delete</Delete>
+                  </title>       
  <header>
   <tabName>Tab</tabName>
   <localizeButtons>Description</localizeButtons>
@@ -875,6 +883,9 @@
 </UIViewPermissionList>
 
 <UIViewPermissionList>
+                         <title>
+                           <Delete>Delete</Delete>
+                         </title>
  <header>
 <friendlyPermission>Permissions</friendlyPermission>
      <action>Действие</action>
@@ -1565,6 +1576,10 @@
 </UITabPane>
 
   <UICLVTemplateList>
+    <title>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
+    </title>
     <header>
       <title>Name</title>
       <action>Действие</action>
@@ -1589,6 +1604,10 @@
       <action>Действие</action>
       <template>Template</template>
     </header>
+    <title>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
+    </title>
     <action>
       <AddTemplate>Add Template</AddTemplate>
 <Edit>Edit</Edit>
@@ -1962,6 +1981,11 @@
       <tagHTML>Tag Style</tagHTML>
       <action>Действие</action>
     </header>
+    <title>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
+      <Remove>Remove</Remove>
+    </title>
     <action>
       <AddStyle>Add Style</AddStyle>
     </action>
@@ -2431,6 +2455,7 @@
     <title>Add Permission</title>
     <action>
       <Save>Save</Save>
+      <Add>Add</Add>
     </action>
     <label>
       <userOrGroup>Memberships:</userOrGroup>

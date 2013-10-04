@@ -57,8 +57,8 @@
   <Mail>
     <view>
       <label>
-        <from>From:</from>
-        <to>To:</to>
+        <from>Kimden:</from>
+        <to>Kime:</to>
         <cc>Cc:</cc>
         <date>Tarih:</date>
         <subject>Konu:</subject>
@@ -84,7 +84,7 @@
     <view>
       <label>
         <name>Ad</name>
-        <versionable>Versionable</versionable>
+        <versionable>Sürümlü</versionable>
         <exo_owner>Sahibi</exo_owner>
         <exo_dateCreated>Oluşturma Tarihi</exo_dateCreated>
         <exo_dateModified>Değiştirme Tarihi</exo_dateModified>
@@ -100,7 +100,7 @@
     <view>
       <label>
         <action-name>Eylem Adı</action-name>
-        <lifecycle>Yaşam döngüsü</lifecycle>
+        <lifecycle>Ömrü</lifecycle>
         <metadata>Metadata</metadata>
         <description>Açıklama</description>
       </label>
@@ -144,12 +144,12 @@
         <source>Kaynak</source>
         <contributor>Katılımcı</contributor>
         <resource-type>Kaynak Türü</resource-type>
-        <date>Date</date>
+        <date>Tarih</date>
         <publisher>Yayımcı</publisher>
         <description>Açıklama</description>
         <rights>Haklar</rights>
-        <relation>Relation</relation>
-        <format>Format</format>
+        <relation>İlişki</relation>
+        <format>Biçim</format>
         <coverage>Kapsama alanı</coverage>
         <identifier>Tanımlayıcı</identifier>
         <languages>Dil</languages>

@@ -2,84 +2,84 @@
 <bundle>
   <UICLVContainer>
     <label>
-      <Preferences>Preferences</Preferences>
-      <AddContent>Add Content</AddContent>
-      <ManageContent>Manage Content</ManageContent>
+      <Preferences>Tercihler</Preferences>
+      <AddContent>İçerik Ekle</AddContent>
+      <ManageContent>İçeriği Yönet</ManageContent>
     </label>
     <msg>
-      <non-contents>Sorry, no articles are available.</non-contents>
-      <item-not-found>Item not found.</item-not-found>
-      <no-permission>You do not have permission to access this node.</no-permission>
-      <category-back>Go to previous</category-back>
+      <non-contents>Üzgünüz, hiçbir makale bulunmaktadır.</non-contents>
+      <item-not-found>Öğe bulunamadı.</item-not-found>
+      <no-permission>Bu düğüme erişmek için gerekli izniniz yok.</no-permission>
+      <category-back>Öncekine git</category-back>
     </msg>
   </UICLVContainer>
   <UIViewerManagementPopupWindow>
     <title>
-      <UICLVConfig>Content List Preferences</UICLVConfig>
+      <UICLVConfig>İçerik Listesi Tercihleri</UICLVConfig>
     </title>
   </UIViewerManagementPopupWindow>
   <UICLVConfig>
     <label>
-      <Title>Content List Preferences</Title>
-      <ContentSelectionBlock>Content Selection</ContentSelectionBlock>
-      <UICLVConfigDisplayModeFormRadioBoxInput>Mode</UICLVConfigDisplayModeFormRadioBoxInput>
-      <UICLVConfigItemPathFormInputSet>Folder Path</UICLVConfigItemPathFormInputSet>
-    <UICLVConfigItemPathFormStringInput>Folder Path</UICLVConfigItemPathFormStringInput>
-      <UICLVConfigOrderByFormSelectBox>Order by</UICLVConfigOrderByFormSelectBox>
+      <Title>İçerik Listesi Tercihleri</Title>
+      <ContentSelectionBlock>İçerik Seçimi</ContentSelectionBlock>
+      <UICLVConfigDisplayModeFormRadioBoxInput>Modu</UICLVConfigDisplayModeFormRadioBoxInput>
+      <UICLVConfigItemPathFormInputSet>Klasör Yolu</UICLVConfigItemPathFormInputSet>
+    <UICLVConfigItemPathFormStringInput>Klasör Yolu</UICLVConfigItemPathFormStringInput>
+      <UICLVConfigOrderByFormSelectBox>Sıralama</UICLVConfigOrderByFormSelectBox>
       <option>
-        <exo:title>Title</exo:title>
-        <exo:dateCreated>Created Date</exo:dateCreated>
-        <exo:lastModifiedDate>Modified Date</exo:lastModifiedDate>
-        <publication:liveDate>Published Date</publication:liveDate>
-        <exo:startEvent>Event Date</exo:startEvent>
-        <exo:index>Index</exo:index>
-        <DESC>Descendant</DESC>
-        <ASC>Ascendant</ASC>
+        <exo:title>Başlık</exo:title>
+        <exo:dateCreated>Oluşturma Tarihi</exo:dateCreated>
+        <exo:lastModifiedDate>Değiştirme Tarihi</exo:lastModifiedDate>
+        <publication:liveDate>Yayınlanma Tarihi</publication:liveDate>
+        <exo:startEvent>Etkinlik Tarihi</exo:startEvent>
+        <exo:index>Dizin</exo:index>
+        <DESC>Torun</DESC>
+        <ASC>Artan</ASC>
       </option>
-      <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
-      <UICLVConfigHeaderFormStringInput>Header</UICLVConfigHeaderFormStringInput>
-      <UICLVConfigDisplayTemplateFormSelectBox>Template</UICLVConfigDisplayTemplateFormSelectBox>
+      <DisplaySettingBlock>Görüntü Ayarları</DisplaySettingBlock>
+      <UICLVConfigHeaderFormStringInput>Başlık</UICLVConfigHeaderFormStringInput>
+      <UICLVConfigDisplayTemplateFormSelectBox>Şablon</UICLVConfigDisplayTemplateFormSelectBox>
       <UICLVConfigPaginatorTemplateFormSelectBox>Paginator</UICLVConfigPaginatorTemplateFormSelectBox>
       <UICLVConfigTargetPageFormStringInput/>
-      <UICLVConfigItemsPerPageFormStringInput>Items per Page</UICLVConfigItemsPerPageFormStringInput>
+      <UICLVConfigItemsPerPageFormStringInput>Sayfa Başına Öğe</UICLVConfigItemsPerPageFormStringInput>
       <UICLVConfigShowIllustrationFormCheckboxInput>Show Image</UICLVConfigShowIllustrationFormCheckboxInput>
       <UICLVConfigShowSummaryFormCheckboxInput>Show Summary</UICLVConfigShowSummaryFormCheckboxInput>
       <UICLVConfigShowHeaderFormCheckboxInput>Show Header</UICLVConfigShowHeaderFormCheckboxInput>
       <UICLVConfigShowRefreshFormCheckboxInput>Show Refresh</UICLVConfigShowRefreshFormCheckboxInput>
-      <UICLVConfigShowTitleFormCheckboxInput>Show Title</UICLVConfigShowTitleFormCheckboxInput>
-      <UICLVConfigShowDateCreatedFormCheckboxInput>Show Date</UICLVConfigShowDateCreatedFormCheckboxInput>
+      <UICLVConfigShowTitleFormCheckboxInput>Başlığı Göster</UICLVConfigShowTitleFormCheckboxInput>
+      <UICLVConfigShowDateCreatedFormCheckboxInput>Tarihi Göster</UICLVConfigShowDateCreatedFormCheckboxInput>
       <UICLVConfigShowLinkFormCheckboxInput>Show Link</UICLVConfigShowLinkFormCheckboxInput>
       <UICLVConfigShowReadmoreFormCheckboxInput>Show More Links</UICLVConfigShowReadmoreFormCheckboxInput>
       <UICLVConfigAllowDynamicUrlStringInput>Allow Dynamic URL</UICLVConfigAllowDynamicUrlStringInput>
       <UICLVConfigShowRssLinkFormCheckboxInput>Show RSS Link</UICLVConfigShowRssLinkFormCheckboxInput>
       <UICLVConfigShowAutomaticDetectionCheckboxInput>Automatic Detection</UICLVConfigShowAutomaticDetectionCheckboxInput>
-      <AdvancedBlock>Advanced</AdvancedBlock>
-      <UICLVConfigDynamicNavigationLabel>Dynamic Navigation</UICLVConfigDynamicNavigationLabel>
+      <AdvancedBlock>Gelişmiş</AdvancedBlock>
+      <UICLVConfigDynamicNavigationLabel>Dinamik Navigasyon</UICLVConfigDynamicNavigationLabel>
       <UICLVConfigContextualFolderRadioBoxInput>Contextual Folder</UICLVConfigContextualFolderRadioBoxInput>
-      <UICLVConfigShowCLVByStringInput>by</UICLVConfigShowCLVByStringInput>
-      <UICLVConfigshowSCVWithStringInput>with</UICLVConfigshowSCVWithStringInput>
-      <UICLVConfigTargetPageFormInputSet>Show in Page</UICLVConfigTargetPageFormInputSet>
+      <UICLVConfigShowCLVByStringInput>tarafından</UICLVConfigShowCLVByStringInput>
+      <UICLVConfigshowSCVWithStringInput>ile</UICLVConfigshowSCVWithStringInput>
+      <UICLVConfigTargetPageFormInputSet>Sayfada Göster</UICLVConfigTargetPageFormInputSet>
       <content-not-found>Content not found.</content-not-found>
-      <ContentPath>Content Path</ContentPath>
+      <ContentPath>İçerik Yolu</ContentPath>
       <Up>Up</Up>
       <Down>Down</Down>
-      <UICLVConfigCacheManagementLabel>Content Visibility</UICLVConfigCacheManagementLabel>
+      <UICLVConfigCacheManagementLabel>İçerik Görünürlüğü</UICLVConfigCacheManagementLabel>
       <UICLVContentByQueryLabel>Content by Query</UICLVContentByQueryLabel>
-      <UICLVConfigWorkspaceFormSelectBox>Workspace</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigWorkspaceFormSelectBox>Çalışma Alanı</UICLVConfigWorkspaceFormSelectBox>
       <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
       <UICLVConfigCacheEnableRadioBoxInput>Share content between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
-      <ModeSelectionHelp>Two modes are available to show content. "By Folder" will take all the content available in your selected folder/category. "By Content" lets you manually select the content you want to show.</ModeSelectionHelp>
-      <FolderPathHelp>Select the content you want to show. The default selection will be replaced dynamically if you activate the Dynamic Navigation option (see the Advanced mode below).</FolderPathHelp>
-      <HeaderOptionHelp>Show a header on top of the content list. If you activate the Automatic Detection option, it will try to find the header based on the current selection.</HeaderOptionHelp>
+      <ModeSelectionHelp>İçerik göstermek için iki mod kullanılabilir. "Klasör tarafından" seçilen klasör/kategori içinde kullanılabilen tüm içerik alacak. "Içerik" göstermek istediğiniz içeriği el ile seçmenizi sağlar.</ModeSelectionHelp>
+      <FolderPathHelp>Göstermek istediğiniz içeriği seçin. Dinamik navigasyon seçeneğini etkinleştirirseniz bu varsayılan içerik dinamik olarak değiştirilir (Gelişmiş mod için aşağıya bakınız).</FolderPathHelp>
+      <HeaderOptionHelp>Bir başlık üzerine içerik listesi göster. Otomatik algılama seçeneği ile etkinleştirirseniz, geçerli seçime göre başlık bulmak için çalışacağız.</HeaderOptionHelp>
       <GeneralOptionHelp>Select the graphical elements you want to show in your list. Note that, depending on your selected template, some elements may not be available.</GeneralOptionHelp>
-      <ContextualHelp>Activates the Dynamic Navigation option. Others can change the content dynamically based on a URL parameter.</ContextualHelp>
-      <ParameterHelp>This parameter will be used to access the content if Dynamic Navigation is activated.</ParameterHelp>
-      <ShowDetailInPageHelp>Clicking on content redirects the user to a Detail page. You must have a "Content by URL" portlet with Dynamic Navigation enabled on the target page to show the content.</ShowDetailInPageHelp>
-      <DetailParameterHelp>This parameter will contain the path to the content in the link to the Detail page. This parameter must match the parameter used in the "Content by URL" portlet of the page.</DetailParameterHelp>
+      <ContextualHelp>Dinamik navigasyon seçeneği etkinleştirir. Başkaları içeriği dinamik olarak bir URL parametresi temelinde değiştirebilir.</ContextualHelp>
+      <ParameterHelp>Bu parametre, Dinamik navigasyon etkinleştirilirse içeriğe erişmek için kullanılır.</ParameterHelp>
+      <ShowDetailInPageHelp>İçerik'i tıklatarak kullanıcı ayrıntı sayfasına yönlendirir. Dinamik içeriği göstermek için hedef sayfasında etkin gezinme ile "İçerik tarafından URL" portlet olması gerekir.</ShowDetailInPageHelp>
+      <DetailParameterHelp>Bu parametre bağlantı ayrıntı sayfasına içerik yolunu içerir. Bu parametre, sayfanın "İçerik URL'si tarafından" portlette kullanılan parametre eşleşmesi gerekir.</DetailParameterHelp>
       <ContentByQueryHelp><![CDATA[You can set a SQL Query to get content dynamically. The following parameters are allowed : ${user}, ${lang} or any get parameter (PARAM) surrounded by ${PARAM}.]]></ContentByQueryHelp>
-      <ContentsVisibilityHelp>"Restricted by Authentication" will filter the content based on the authentication. If you do not sign in, you see public content only. If you are logged in, you see all the content visible by intranet users (but shared by all). "Restricted by User Roles" means you will see content depending on your rights. In most cases, this option should not be used, as it reduces the overall performance.</ContentsVisibilityHelp>
+      <ContentsVisibilityHelp>"Kimlik doğrulama ile sınırlı" temel kimlik doğrulaması üzerinde içerik süzer. Eğer oturmum açmazsanız sadece genel içeriği görebilirsiniz.Oturum açtıysanız, intranet kullanıcılar tarafından görülebilir tüm içeriği görebilirsiniz.(ama herkez tarafından paylaşılan) "Kullanıcı rolleri ile sınırlı" içerik haklarınızı bağlı olarak göreceksiniz anlımana gelir.Çoğu durumda bu seçenek kullanılmamalıdır çünkü genel performansı düşürür.</ContentsVisibilityHelp>
     </help>
     <action>
       <Save>Kaydet</Save>
@@ -92,9 +92,9 @@
     </msg>
     <tab>
       <label>
-        <clvContentTab>Content Selection</clvContentTab>
-        <clvDisplayTab>Display Settings</clvDisplayTab>
-        <clvAdvancedTab>Advanced</clvAdvancedTab>
+        <clvContentTab>İçerik Seçimi</clvContentTab>
+        <clvDisplayTab>Ayarları Görüntüle</clvDisplayTab>
+        <clvAdvancedTab>Gelişmiş</clvAdvancedTab>
       </label>
     </tab>
   </UICLVConfig>
@@ -106,8 +106,8 @@
   </UICLVConfigDisplayModeFormRadioBoxInput>
   <UICLVConfigItemPathFormInputSet>
     <title>
-      <SelectFolderPath>Select Folder Path</SelectFolderPath>
-      <AddPath>Add Path</AddPath>
+      <SelectFolderPath>Klasör Yolunu Seçin</SelectFolderPath>
+      <AddPath>Yol Ekle</AddPath>
     </title>
   </UICLVConfigItemPathFormInputSet>
   <FolderPathSelectorPopupWindow>
@@ -118,26 +118,26 @@
   <UICLVConfigOrderTypeFormSelectBox>
     <label>
       <option>
-        <OrderDesc>Descendant</OrderDesc>
-        <OrderAsc>Ascendant</OrderAsc>
+        <OrderDesc>Torun</OrderDesc>
+        <OrderAsc>Artan</OrderAsc>
       </option>
     </label>
   </UICLVConfigOrderTypeFormSelectBox>
   <UICLVConfigTargetPageFormInputSet>
     <title>
-      <SelectBasePath>Select Base Path</SelectBasePath>
-      <SelectTargetPage>Select Base Path</SelectTargetPage>
+      <SelectBasePath>Ana Yolu Seçin</SelectBasePath>
+      <SelectTargetPage>Ana Yolu Seçin</SelectTargetPage>
     </title>
   </UICLVConfigTargetPageFormInputSet>
   <UICLVBasePathPopupWindow>
     <title>
-      <UIPageSelector>Page Selector</UIPageSelector>
+      <UIPageSelector>Sayfa Seçici</UIPageSelector>
     </title>
   </UICLVBasePathPopupWindow>
   <UICLVPresentation>
     <msg>
-      <confirm-delete>Are you sure you want to delete this content?</confirm-delete>
-      <delete-content-successfully>Content deleted successfully.</delete-content-successfully>
+      <confirm-delete>Bu içeriği silmek istediğinizden emin misiniz?</confirm-delete>
+      <delete-content-successfully>İçerik başarıyla silindi.</delete-content-successfully>
     </msg>
     <label>
       <readmore>Read more</readmore>
@@ -145,12 +145,12 @@
     </label>
     <action>
       <refresh>Yenile</refresh>
-      <edit>Edit in Content Explorer</edit>
+      <edit>İçerik Gezgini İçinde Düzenle</edit>
       <delete>Sil</delete>
-      <publish>Publish</publish>
+      <publish>Yayımlama</publish>
     </action>
     <label>
-      <draft>Draft</draft>
+      <draft>Taslak</draft>
     </label>
   </UICLVPresentation>
   <CorrectContentSelectorPopupWindow>
@@ -165,25 +165,25 @@
   </UIContentDialogFormPopupWindow>
   <UICLVConfigContextualFolderRadioBoxInput>
     <label>
-      <contextualEnable>Enabled</contextualEnable>
-      <contextualDisable>Disabled</contextualDisable>
+      <contextualEnable>Etkin</contextualEnable>
+      <contextualDisable>Devre Dışı</contextualDisable>
     </label>
   </UICLVConfigContextualFolderRadioBoxInput>
   <PublicationStates>
-    <archived>Archived</archived>
-    <obsolete>Obsolete</obsolete>
-    <unpublished>Unpublished</unpublished>
-    <enrolled>Enrolled</enrolled>
-    <draft>Draft</draft>
+    <archived>Arşivlenmiş</archived>
+    <obsolete>Eskimiş</obsolete>
+    <unpublished>Yayınlanmamış</unpublished>
+    <enrolled>Kayıtlı</enrolled>
+    <draft>Taslak</draft>
     <pending>Bekleyen</pending>
-    <approved>Approved</approved>
-    <inreview>In Review</inreview>
-    <staged>Staged</staged>
-    <published>Published</published>
+    <approved>Onaylı</approved>
+    <inreview>İnceleniyor</inreview>
+    <staged>Yayına Hazır</staged>
+    <published>Yayınlandı</published>
   </PublicationStates>
   <UICLVConfigCacheEnableRadioBoxInput>
     <label>
-      <ENABLE>Restricted by Authentication</ENABLE>
+      <ENABLE>Kimlik doğrulama ile sınırlı</ENABLE>
       <DISABLE>Restricted by User Roles</DISABLE>
     </label>
   </UICLVConfigCacheEnableRadioBoxInput>
