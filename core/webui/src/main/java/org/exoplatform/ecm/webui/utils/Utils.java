@@ -1061,7 +1061,7 @@ public class Utils {
       for (int j = 0; j < paths.length; j++) {
         //check if [i] is child of [j]
         if ((i != j) && paths[i].startsWith(paths[j]) && (paths[i].length() > paths[j].length()) &&
-            (paths[i].charAt(paths[j].length() + 1) != '[')) {//check same name sibling
+            (paths[i].charAt(paths[j].length()) == '/')) {
           ok = false;
           break;
         }
