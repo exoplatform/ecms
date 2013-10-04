@@ -13,11 +13,11 @@
 </ECMContextMenu>
 <UIViewInfoContainer>
 <label>
-      <name>Name</name>
+      <name>Ad</name>
       <title>Başlık</title>
       <type>Türü</type>
       <size>Boyut</size>
-      <owner>Owner</owner>
+      <owner>Sahibi</owner>
       <lastModifier>Son Değiştiricisi</lastModifier>
       <created>Oluşturma Tarihi</created>
       <lastModified>Son Değiştirme Tarihi</lastModified>

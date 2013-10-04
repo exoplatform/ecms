@@ -8,7 +8,7 @@
       <label>
         <end-time>Bitiş Saati</end-time>
         <start-time>Başlangıç Saati</start-time>
-        <lifecycle>Yaşam döngüsü</lifecycle>
+        <lifecycle>Ömrü</lifecycle>
         <mimeType>MIME türü</mimeType>
         <repeat-count>Tekrar Say</repeat-count>
         <time-interval>Zaman Aralığı</time-interval>
@@ -126,7 +126,7 @@
         <id>Kimlik</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <schedule-type>#{Ecm.dialog.label.schedule-türü}</schedule-type>
+        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
         <start-time>#{Ecm.dialog.label.start-time}</start-time>
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
@@ -182,7 +182,7 @@
         <destination-workpsace>Hedef Çalışma Alanı</destination-workpsace>
         <destination-path>Hedef Yolu</destination-path>
         <primary-type>Birincil Türü</primary-type>
-        <mixin-types>Mixin Türü</mixin-types>
+        <mixin-types>Mixin Türleri</mixin-types>
       </label>
     </dialog>
   </Move>
@@ -214,7 +214,7 @@
   <Relationable>
     <dialog>
       <label>
-        <relation>Relation</relation>
+        <relation>İlişki</relation>
       </label>
     </dialog>
   </Relationable>
@@ -252,7 +252,7 @@
   <ResouceContainer>
     <dialog>
       <label>
-        <name>Name</name>
+        <name>Ad</name>
         <autoload>Otomatik Yükleme</autoload>
         <minetype>MIME Türü</minetype>
         <content>İçerik</content>
@@ -264,17 +264,17 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>E-posta adresi geçersizdir.</Invalid-input>
+      <Invalid-input>E-posta adresi geçersiz.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>The field '{0}' is required. Please enter your value.</empty-input>
+      <empty-input>'{0}' Alanı gereklidir. Lütfen bir değer girin.</empty-input>
     </msg>
   </EmptyFieldValidator>
   <NumberFormatValidator>
     <msg>
-      <Invalid-number>The field '{0}' is invalid.</Invalid-number>
+      <Invalid-number>'{0}' Alanı geçersiz.</Invalid-number>
     </msg>
   </NumberFormatValidator>
   <!--
@@ -286,17 +286,17 @@
     <dialog>
       <label>
         <id>Kimlik</id>
-        <name>Name</name>
-        <lifecycle>Yaşam döngüsü</lifecycle>
-        <homePath>Home Path</homePath>
-        <targetWorkspace>Target Workspace</targetWorkspace>
-        <targetPath>Target Path</targetPath>
+        <name>Ad</name>
+        <lifecycle>Ömrü</lifecycle>
+        <homePath>Anasayfa Yolu</homePath>
+        <targetWorkspace>Hedef Çalışma Alanı</targetWorkspace>
+        <targetPath>Hedef Yolu</targetPath>
       </label>
     </dialog>
   </ScriptAction>
   <UIDialogForm>
    <form>
-   <DialogFormException>Cannot save this document. There may be a problem with the pre-save interceptor.</DialogFormException>
+   <DialogFormException>Bu belgeyi kaydedemiyor. Kaydetmeden önce bir sorun olabilir.</DialogFormException>
    </form>
   </UIDialogForm>
 
@@ -305,9 +305,9 @@
 
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
-<no>No</no>
-<yes>Yes</yes>
-<true>True</true>
+<no>Hayır</no>
+<yes>Evet</yes>
+<true>Doğru</true>
 <false>Yanlış</false>
 <Electronic>Elektronik</Electronic>
 <Paper>Kağıt</Paper>
@@ -378,9 +378,9 @@
 </label>
 </dialog>
 <help>
-<CaptionsHelp>Captions should provide text of dialog and important sounds</CaptionsHelp>
-<AudioDescriptionHelp>An audio description is a narrated track of the video</AudioDescriptionHelp>
-<AlternativeTextHelp>Provide an accessible, alternative way of presenting the information</AlternativeTextHelp>
+<CaptionsHelp>Başlıklar önemli bir ses ve metin açıklama içermelidir</CaptionsHelp>
+<AudioDescriptionHelp>Ses açıklaması videonun bir yorumudur</AudioDescriptionHelp>
+<AlternativeTextHelp>Erişilebilir bilgi sağlamak için alternatif bir araç veriniz</AlternativeTextHelp>
 </help>
 </AccessibleMedia>
   
