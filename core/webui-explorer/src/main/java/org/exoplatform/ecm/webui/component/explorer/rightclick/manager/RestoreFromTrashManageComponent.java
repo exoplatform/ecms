@@ -253,11 +253,11 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
       if(!srcPath.contains(";") && numberItemsRestored == 1) {
       	restoreNotice = "UIWorkingArea.msg.feedback-restore";
       	restoreNotice = res.getString(restoreNotice);
-      	restoreNotice = restoreNotice.replaceAll("\\{" + 0 + "\\}", itemName);
+      	restoreNotice = restoreNotice.replace("{" + 0 + "}", itemName);
       } else if(srcPath.indexOf(';') > -1 && numberItemsRestored >= 1) {
       	restoreNotice = "UIWorkingArea.msg.feedback-restore-multi";
       	restoreNotice = res.getString(restoreNotice);
-      	restoreNotice = restoreNotice.replaceAll("\\{" + 0 + "\\}", String.valueOf(numberItemsRestored));
+      	restoreNotice = restoreNotice.replace("{" + 0 + "}", String.valueOf(numberItemsRestored));
       }      
       if(restoreNotice.length() > 0) {
       	UIWorkingArea uiWorkingArea = event.getSource().getParent();
