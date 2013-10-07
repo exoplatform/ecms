@@ -510,7 +510,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       }
     }
     deleteNotice = res.getString(deleteNotice);
-    deleteNotice = deleteNotice.replaceAll("\\{" + 0 + "\\}", deleteNoticeParam);
+    deleteNotice = deleteNotice.replace("{" + 0 + "}", deleteNoticeParam);
     if(checkToMoveToTrash) {
       String undoLink = getUndoLink(nodePath);      
       uiWorkingArea.setDeleteNotice(deleteNotice);
