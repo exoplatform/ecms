@@ -513,7 +513,7 @@ UIFileView.prototype.showItemContextMenu = function (event, element) {
 	});
 	gj("#ActionMenuPlaceHolder").prepend(contextMenu);
     gj(".uiRightClickPopupMenu", contextMenu).addClass("uiFileViewActionBar");
-    gj(".uiRightPopupMenuContainer", contextMenu).addClass("ClearFix");
+    gj(".uiRightPopupMenuContainer", contextMenu).addClass("clearfix");
     //check lock, unlock action
 	var checkUnlock = false;
 	var checkRemoveFavourite = false;

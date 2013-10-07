@@ -2,9 +2,9 @@
 <bundle>
   <UIViewFormTabPane>
   <label>
-          <publicationRequestApproval>Publication &gt; Request Approval</publicationRequestApproval>
-          <publicationApproveContent>Publication &gt; Approve Content</publicationApproveContent>
-          <publicationPublish>Publication &gt; Publish</publicationPublish>
+          <publicationRequestApproval>Yayın &gt; Onay İste</publicationRequestApproval>
+          <publicationApproveContent>Yayın &gt; içeriği Onayla</publicationApproveContent>
+          <publicationPublish>Yayın &gt; Yayımla</publicationPublish>
   </label>
   </UIViewFormTabPane>
 </bundle>

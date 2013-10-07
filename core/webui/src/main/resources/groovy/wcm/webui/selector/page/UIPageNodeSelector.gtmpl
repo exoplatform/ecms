@@ -42,7 +42,7 @@
 			  <%/*Begin PageNodeSelectorContainer*/%>
 			  <div class="UIContainerConfigOptions ItemSelectorAncestor"> 
 				  <div class="ContainerConfigOptions">
-				  	<div class="ClearFix">
+				  	<div class="clearfix">
 							<%uicomponent.renderChild(UIDropDownControl.class);%>
 							<a class="AddNavigationIcon" href ="<%=uicomponent.event("CreateNavigation"); %>" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageNodeSelector.tooltip.newPageNavigation")%>"><span></span></a>
 		        </div>	

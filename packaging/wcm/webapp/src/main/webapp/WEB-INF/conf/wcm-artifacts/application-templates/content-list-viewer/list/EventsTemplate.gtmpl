@@ -39,7 +39,7 @@
     def isShowLink = uicomponent.isShowField(UIPCLVPortlet.SHOW_LINK);
     def isShowReadmore = uicomponent.isShowField(UIPCLVPortlet.SHOW_READMORE);
 			%>
-			<div class="TopBoxParameterized ClearFix">
+			<div class="TopBoxParameterized clearfix">
         <% if (isShowHeader) { %>
 				<div class="Title">
 					<div class="Header">$header</div>
@@ -91,7 +91,7 @@
               uuid = viewNode.getUUID();
               
 								%>
-									<div class="NormalNews ClearFix">
+									<div class="NormalNews clearfix">
 										<% 
 											if (isShowIllustrationImg) {
 												%><a class="ImageNormalNews" href="$itemLink"><img width="120" alt="$imgSrc" rel="tooltip" data-placement="bottom" title="$imgSrc" src="$imgSrc" /></a><%

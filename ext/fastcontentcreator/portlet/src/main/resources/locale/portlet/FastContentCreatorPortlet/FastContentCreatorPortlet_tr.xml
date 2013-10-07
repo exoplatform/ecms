@@ -16,8 +16,8 @@
       <new-jcr-template>An error occurred while creating a new template.</new-jcr-template>
     </msg>
     <action>
-      <Save>Save</Save>
-      <Cancel>Cancel</Cancel>
+      <Save>Kaydet</Save>
+      <Cancel>İptal</Cancel>
     </action>
   </UIFCCForm>
 
@@ -33,7 +33,7 @@
       <UIFCCMessageFormTextareaInput>Custom Save Message</UIFCCMessageFormTextareaInput>
       <UIFCCRedirectFormCheckboxInput>Redirect:</UIFCCRedirectFormCheckboxInput>
       <UIFCCRedirectPathFormStringInput>Redirect Path:</UIFCCRedirectPathFormStringInput>
-      <UIFCCActionField>Actions</UIFCCActionField>
+      <UIFCCActionField>Eylemler</UIFCCActionField>
       <UIFCCActionList/>
     </label>
     <msg>
@@ -48,7 +48,7 @@
       <do-select>An error occurred while selecting the location.</do-select>
       </msg>
     <action>
-      <Save>Save</Save>
+      <Save>Kaydet</Save>
     </action>
   </UIFCCConfig>
 
@@ -61,9 +61,9 @@
   <UIFCCActionList>
     <header>
       <name>Name</name>
-      <description>Description</description>
+      <description>Açıklama</description>
       <instanceOf>Instance of</instanceOf>
-      <action>Action</action>
+      <action>Eylem</action>
     </header>
     <action>
       <Add>Add</Add>
@@ -104,7 +104,7 @@
     </info>
     <header>
       <name>Name</name>
-      <action>Action</action>
+      <action>Eylem</action>
     </header>
   </UITreeList>
 
@@ -117,8 +117,8 @@
   <UIFCCActionForm>
     <title>Add/Edit Action</title>
     <action>
-      <Save>Save</Save>
-      <Close>Close</Close>
+      <Save>Kaydet</Save>
+      <Close>Kapat</Close>
     </action>
     <msg>
       <repository-exception>Cannot save this action. The name provided must not have an index as its final element.</repository-exception>
@@ -175,7 +175,7 @@
 
   <UICategoriesSelector>
     <action>
-      <close>Close</close>
+      <close>Kapat</close>
     </action>
   </UICategoriesSelector>
 

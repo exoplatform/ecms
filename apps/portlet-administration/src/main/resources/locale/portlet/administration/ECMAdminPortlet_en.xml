@@ -169,7 +169,7 @@
       <path-invalid>The path is invalid.</path-invalid>
       <taxonomy-existed>The category tree already exists.</taxonomy-existed>
       <taxonomy-node-existed>The category node already exists.</taxonomy-node-existed>
-      <no-permission-add>You do not have the right to add.</no-permission-add>
+      <no-permission-add>You do not have the right to add an action.</no-permission-add>
       <not-created-tree>The category tree has not yet been created.</not-created-tree>
     </msg>
   </UIActionForm>
@@ -740,8 +740,12 @@
     <header>
       <name>Script</name>
       <label>Name</label>
-						<action>Actions</action>
+      <action>Actions</action>
     </header>
+    <title>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
+    </title>
     <action>
       <AddAction>Add Action Type</AddAction>
     </action>
@@ -859,10 +863,14 @@
   </EditPopup>
 		
 		<UITabList>
+                  <title>
+                    <Edit>Edit</Edit>
+                    <Delete>Delete</Delete>
+                  </title>       
 			 <header>
 			 	 <tabName>Tab</tabName>
 			 	 <localizeButtons>Description</localizeButtons>
-						<action>Actions</action>
+				<action>Actions</action>
 				</header>
 				<action>
 					 <AddTab>Add</AddTab>
@@ -889,6 +897,9 @@
 		</UIViewPermissionList>
 		
 		<UIViewPermissionList>
+                         <title>
+                           <Delete>Delete</Delete>
+                         </title>
 			 <header>
 						<friendlyPermission>Permissions</friendlyPermission>
 			 	    <action>Action</action>
@@ -1579,6 +1590,10 @@
 		</UITabPane>
 		
   <UICLVTemplateList>
+    <title>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
+    </title>
     <header>
       <title>Name</title>
       <action>Action</action>
@@ -1603,6 +1618,10 @@
       <action>Action</action>
       <template>Template</template>
     </header>
+    <title>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
+    </title>
     <action>
       <AddTemplate>Add Template</AddTemplate>
 						<Edit>Edit</Edit>
@@ -1976,6 +1995,11 @@
       <tagHTML>Tag Style</tagHTML>
       <action>Action</action>
     </header>
+    <title>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
+      <Remove>Remove</Remove>
+    </title>
     <action>
       <AddStyle>Add Style</AddStyle>
     </action>
@@ -2445,6 +2469,7 @@
     <title>Add Permission</title>
     <action>
       <Save>Save</Save>
+      <Add>Add</Add>
     </action>
     <label>
       <userOrGroup>Memberships: </userOrGroup>
@@ -2538,7 +2563,7 @@
   </UIScriptForm>
  <UINodeTypeList>
    <msg>
-   		<no-list>There isn't any node type with condition search.</no-list>
+   <no-list>There is no node type matching your search.</no-list>
    </msg>
  </UINodeTypeList>
   <UIActionForm>

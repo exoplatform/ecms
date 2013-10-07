@@ -29,13 +29,13 @@
         <Advanced>Advanced</Advanced>
         <Summary>Summary</Summary>
         <name>Name</name>
-        <title>Title</title>
-        <ContentCSS>CSS Data</ContentCSS>
+        <title>Başlık</title>
+        <ContentCSS>CSS Veri</ContentCSS>
         <hintCSS>You can specify the main style sheet for your web content. This style will override the style sheets defined at the site level and at the shared level.</hintCSS>
-        <ContentJS>JS Data</ContentJS>
+        <ContentJS>JS Veri</ContentJS>
         <hintJS>You can specify some JavaScript codes that can be executed before your web content is rendered.</hintJS>
         <WebContentHtml>Main Content</WebContentHtml>
-        <Illustration>Illustration</Illustration>
+        <Illustration>İllüstrasyon</Illustration>
         <hintIllustration>You can specify an image that will be shown when your web content is displayed in the list. You can also specify some summary texts to go with this image.</hintIllustration>
         <confirm-delete>Are you sure you want to delete this illustration?</confirm-delete>
         <illustrationImage>Illustration Image</illustrationImage>
@@ -52,9 +52,9 @@
     <dialog>
       <label>
         <name>Name</name>
-        <active>Active</active>
-        <priority>Priority</priority>
-        <content>CSS Data</content>
+        <active>Etkin</active>
+        <priority>Öncelik</priority>
+        <content>CSS Veri</content>
       </label>
     </dialog>
   </CSSFile>
@@ -63,9 +63,9 @@
     <dialog>
       <label>
         <name>Name</name>
-        <active>Active</active>
-        <priority>Priority</priority>
-        <content>JS Data</content>
+        <active>Etkin</active>
+        <priority>Öncelik</priority>
+        <content>JS Veri</content>
       </label>
     </dialog>
   </JSFile>
@@ -75,7 +75,7 @@
       <label>
         <name>Name</name>
         <url>URL</url>
-        <description>Description</description>
+        <description>Açıklama</description>
       </label>
     </dialog>
   </WebLink>

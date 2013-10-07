@@ -2096,6 +2096,7 @@
       <access-denied>Accès refusé. Vous n'avez pas la permission d'ajouter une vignette pour ce noeud.</access-denied>
       <confirm-delete>Voulez-vous supprimer cette vignette?</confirm-delete>
       <is-checked-in>L'état de ce noeud est checked-in. Veuillez faire un check-out avant de faire toute action.</is-checked-in>
+      <fileName-error>Veuillez sélectionner un fichier à envoyer.</fileName-error>
     </msg>
     <title>
       <remove-thumbnail>Supprimer cette vignette</remove-thumbnail>

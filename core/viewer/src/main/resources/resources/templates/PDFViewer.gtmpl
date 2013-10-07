@@ -166,7 +166,7 @@
 	if (maximumPage > 0) {
 %>    
 	<div class="UIPDFViewerContainer">   
- 	 <div class="PDFViewerBar ClearFix">
+ 	 <div class="PDFViewerBar clearfix">
 		<div class="ControlButton" rel="tooltip" data-placement="bottom" title="<%=uicomponent.getResourceBundle("PDFViewer.label.previousPage")%>">
 			<a href="<%=uicomponent.event("PreviousPage")%>"><div class="ButtonBack"><span></span></div></a>
 		</div>

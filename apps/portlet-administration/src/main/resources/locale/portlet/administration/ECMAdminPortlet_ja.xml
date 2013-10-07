@@ -161,7 +161,7 @@
       <path-invalid>パスは無効です。</path-invalid>
       <taxonomy-existed>分類ツリーは既に存在します。</taxonomy-existed>
       <taxonomy-node-existed>分類ノードは既に存在します。</taxonomy-node-existed>
-      <no-permission-add>ユーザは権限を持っていません。</no-permission-add>
+      <no-permission-add>You do not have the right to add an action.</no-permission-add>
       <not-created-tree>分類ツリーはまだ作成されていません。</not-created-tree>
     </msg>
   </UIActionForm>
@@ -2524,7 +2524,7 @@
   </UIScriptForm>
  <UINodeTypeList>
    <msg>
-   <no-list>ノードタイプはありません。</no-list>
+   <no-list>There is no node type matching your search.</no-list>
    </msg>
  </UINodeTypeList>
   <UIActionForm>

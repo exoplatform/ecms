@@ -8,29 +8,29 @@
   <UIECMAdminControlPanel>
     <tab>
       <label>
-        <Templates>Templates</Templates>
-        <Explorer>Explorer</Explorer>
-        <Repository>Repository</Repository>
-        <Advanced>Advanced</Advanced>
+        <Templates>Modelos</Templates>
+        <Explorer>Navegador</Explorer>
+        <Repository>Repositório</Repository>
+        <Advanced>Avançado</Advanced>
       </label>
     </tab>    
     <label>     
-      <UITaxonomyManagerTrees>Categories</UITaxonomyManagerTrees>
+      <UITaxonomyManagerTrees>Categorias</UITaxonomyManagerTrees>
       <UIMetadataManager>Metadata</UIMetadataManager>
-      <UINamespaceManager>Namespaces</UINamespaceManager>
-      <UINodeTypeManager>Node Types</UINodeTypeManager>
+      <UINamespaceManager>Espaço para nomes</UINamespaceManager>
+      <UINodeTypeManager>Tipos de Nó</UINodeTypeManager>
       <UITemplatesManager>Documentos</UITemplatesManager>
    <UICLVTemplatesManager>Lista</UICLVTemplatesManager>
-      <UIViewManager>Views</UIViewManager>
-      <UIDriveManager>Drives</UIDriveManager>
-      <UIQueriesManager>Queries</UIQueriesManager>
-      <UIActionManager>Actions</UIActionManager>
+      <UIViewManager>Visualizações</UIViewManager>
+      <UIDriveManager>Unidades</UIDriveManager>
+      <UIQueriesManager>Consultas</UIQueriesManager>
+      <UIActionManager>Ações</UIActionManager>
       <UIScriptManager>Scripts</UIScriptManager>
-      <UIUnLockManager>Locks</UIUnLockManager>
+      <UIUnLockManager>Bloqueios</UIUnLockManager>
       <UIFolksonomyManager>Tags</UIFolksonomyManager>      
     </label>
     <msg>
-      <access-denied>Access denied. You do not have permission to perform this action.</access-denied>
+      <access-denied>Acesso negado! Você não possui permissão suficiente para executar essa ação.</access-denied>
     </msg>
   </UIECMAdminControlPanel>
   <!--
@@ -40,24 +40,24 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Cannot read from the source file, or the destination category is a sub-category.</referential-integrity>
-      <no-taxonomy-selected>You must copy or cut at least one category.</no-taxonomy-selected>
-      <node-is-cutting>You cannot paste here. The category node '{0}' might be cut.</node-is-cutting>
-      <can-not-paste>There is no data in the clipboard to paste.</can-not-paste>
-      <reference-exception>Cannot delete this category  because it is currently referenced by a content.</reference-exception>
-      <path-error>An error occurred while removing this category node.</path-error>
+      <referential-integrity>Não é possível ler a partir do arquivo fonte ou a categoria de destino é uma subcategoria.</referential-integrity>
+      <no-taxonomy-selected>Você deve copiar ou colar pelo menos uma categoria.</no-taxonomy-selected>
+      <node-is-cutting>Não é possível copiar aqui. A categoria selecionada '{0}' provavelmente foi movida ou excluída.</node-is-cutting>
+      <can-not-paste>Não há dado na área de transferência para ser colado.</can-not-paste>
+      <reference-exception>Não é possível excluir esta categoria porque está sendo referenciada por outro conteúdo.</reference-exception>
+      <path-error>Um erro ocorreu ao remover essa categoria.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
   <UITaxonomyManager>
     <msg>
-      <confirm-delete>Are you sure you want to delete this category?</confirm-delete>
+      <confirm-delete>Deseja mesmo excluir esta categoria?</confirm-delete>
     </msg>
     <title>
-      <add>Add</add>
-      <paste>Paste</paste>
-      <cut>Cut</cut>
-      <copy>Copy</copy>
-      <remove>Delete</remove>
+      <add>Adicionar</add>
+      <paste>Colar</paste>
+      <cut>Cortar</cut>
+      <copy>Copiar</copy>
+      <remove>Excluir</remove>
     </title>
   </UITaxonomyManager>
   
@@ -69,14 +69,14 @@
   <UITaxonomyTreeContainer>
     <tab>
       <info>
-        <UITaxonomyTreeMainForm>Specify the category name, workspace and home path.</UITaxonomyTreeMainForm>
-        <UIPermissionTreeManager>Set permission for the category tree.</UIPermissionTreeManager>
-        <UIActionTaxonomyManager>Add an action to the category tree to complete the creation or update.</UIActionTaxonomyManager>
-        <UITaxonomyTreeCreateChild>Edit the taxonomy tree by adding, copying, cutting and selecting permissions.</UITaxonomyTreeCreateChild>
+        <UITaxonomyTreeMainForm>Escolha um nome para a categoria, um espaço de trabalho e caminho raiz para a categoria.</UITaxonomyTreeMainForm>
+        <UIPermissionTreeManager>Escolha o tipo de permissão de acesso à árvore de categorias.</UIPermissionTreeManager>
+        <UIActionTaxonomyManager>Adicione uma ação a árvore de categorias para finalizar.</UIActionTaxonomyManager>
+        <UITaxonomyTreeCreateChild>Edite a árvore de categorias e defina permissões.</UITaxonomyTreeCreateChild>
       </info>
     </tab>
     <msg>
-      <not-exist-tree>The category tree does not exist.</not-exist-tree>
+      <not-exist-tree>A árvore de categorias não foi criada ainda.</not-exist-tree>
     </msg>
   </UITaxonomyTreeContainer>
   
@@ -87,28 +87,28 @@
 -->
   <UITaxonomyTreeMainForm>
     <action>
-      <Reset>Reset</Reset>
+      <Reset>Redefinir</Reset>
     </action>
     <msg>
-      <name-not-allowed>Forbidden Name</name-not-allowed>
-      <name-emty>The tree name is required.</name-emty>
-      <homePath-emty>The home path is required.</homePath-emty>
-      <targetPath-emty>The target path is required.</targetPath-emty>
-      <taxonomytree-existed>The category tree name already exists.</taxonomytree-existed>
+      <name-not-allowed>Nome não permitido</name-not-allowed>
+      <name-emty>O nome da árvore é obrigatório.</name-emty>
+      <homePath-emty>O caminho raiz é obrigatório.</homePath-emty>
+      <targetPath-emty>O caminho destino é obrigatório.</targetPath-emty>
+      <taxonomytree-existed>Uma árvore de categorias com o mesmo nome já existe.</taxonomytree-existed>
     </msg>
   </UITaxonomyTreeMainForm>
 
   <TaxonomyTreeMainForm>
     <label>
-      <TaxoTreeName>Name</TaxoTreeName>
-      <TaxoTreeWorkspace>Workspace</TaxoTreeWorkspace>
-      <TaxoTreeHomePath>Home Path</TaxoTreeHomePath>
+      <TaxoTreeName>Nome</TaxoTreeName>
+      <TaxoTreeWorkspace>Espaço de Trabalho</TaxoTreeWorkspace>
+      <TaxoTreeHomePath>Caminho Raiz</TaxoTreeHomePath>
     </label>
   </TaxonomyTreeMainForm>
 
   <TaxonomyTreeHomePath>
     <title>
-      <AddPath>Add Path</AddPath>
+      <AddPath>Adicionar Caminho</AddPath>
     </title>
   </TaxonomyTreeHomePath>
   
@@ -120,17 +120,17 @@
 <UIPermissionTreeInfo>
 <action>
 <title>
-<Delete>Delete</Delete>
-<Edit>Edit</Edit>
+<Delete>Excluir</Delete>
+<Edit>Editar</Edit>
 </title>
 </action>
 <header>
-<usersOrGroups>User or Group</usersOrGroups>
-<read>Read</read>
-<addNode>Add Node</addNode>
-<setProperty>Set Property</setProperty>
-<remove>Remove</remove>
-<action>Action</action>
+<usersOrGroups>Usuário ou Grupo</usersOrGroups>
+<read>Ler</read>
+<addNode>Adicionar nó</addNode>
+<setProperty>Atribuir Propriedade</setProperty>
+<remove>Remover</remove>
+<action>Ação</action>
 </header>
 </UIPermissionTreeInfo>
 
@@ -141,7 +141,7 @@
 -->
   <UIPermissionTreeForm>
     <msg>
-      <have-not-any-permission>Please specify at least one permission for this node.</have-not-any-permission>
+      <have-not-any-permission>Adicionar pelo menos um tipo de permissão para o nó.</have-not-any-permission>
     </msg>
   </UIPermissionTreeForm>
 
@@ -152,17 +152,17 @@
 -->
 
   <UIActionForm>
-    <title>Add an action to the category tree</title>
+    <title>Adicionar uma ação para a árvore de categoria.</title>
     <action>
-      <Save>Save</Save>
+      <Save>Salvar</Save>
     </action>
     <msg>
-      <name-not-allowed>Empty name or special characters are not allowed in the action name.</name-not-allowed>
-      <path-invalid>The path is invalid.</path-invalid>
-      <taxonomy-existed>The category tree already exists.</taxonomy-existed>
-      <taxonomy-node-existed>The category node already exists.</taxonomy-node-existed>
-      <no-permission-add>You do not have the right to add.</no-permission-add>
-      <not-created-tree>The category tree has not yet been created.</not-created-tree>
+      <name-not-allowed>Insira um nome sem caracteres especiais para o nome da ação.</name-not-allowed>
+      <path-invalid>Caminho inválido</path-invalid>
+      <taxonomy-existed>A árvore de categoria já existe.</taxonomy-existed>
+      <taxonomy-node-existed>O nó da taxonomia já existe.</taxonomy-node-existed>
+      <no-permission-add>You do not have the right to add an action.</no-permission-add>
+      <not-created-tree>A árvore de categoria não foi criada ainda.</not-created-tree>
     </msg>
   </UIActionForm>
 
@@ -173,8 +173,8 @@
   -->
   <UITemplatesList>
     <header>
-      <name>Template Name</name>
-      <action>Actions</action>
+      <name>Nome do Modelo</name>
+      <action>Ações</action>
     </header>
   </UITemplatesList>
   <!--
@@ -184,13 +184,13 @@
   -->
   <NameSpacePopup>
     <title>
-      <UINamespaceForm>Namespace Form</UINamespaceForm>
+      <UINamespaceForm>Espaço de nomes</UINamespaceForm>
     </title>
   </NameSpacePopup>
   <UINamespaceForm>
-    <title>Register New Namespace</title>
+    <title>Registrar novo espaço de nomes</title>
     <label>
-      <namespace>Namespace Prefix</namespace>
+      <namespace>Prefixo do Espaço de Nomes</namespace>
       <uri>URI</uri>
     </label>
     <action>
@@ -198,9 +198,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <register-unsuccessfull>Namespace or URI already exists.</register-unsuccessfull>
-      <prefix-null>Please specify the namespace's prefix.</prefix-null>
-      <uri-null>Please specify the namespace's URI.</uri-null>
+      <register-unsuccessfull>O espaço de nomes ou uri já existe.</register-unsuccessfull>
+      <prefix-null>Por favor inserir o prefixo do espaço de nomes.</prefix-null>
+      <uri-null>Por favor inserir URI do espaço de nomes.</uri-null>
     </msg>
   </UINamespaceForm>
   <!--
@@ -210,17 +210,17 @@
   -->
   <UINamespaceList>
     <header>
-      <prefix>Prefix</prefix>
+      <prefix>Prefixo</prefix>
       <uri>Namespace URI</uri>
-      <action>Action</action>
+      <action>Ação</action>
     </header>
     <action>
-      <AddNamespace>Register</AddNamespace>
+      <AddNamespace>Registrar</AddNamespace>
     </action>
   </UINamespaceList>
   <NamespacePopup>
     <title>
-      <UINamespaceForm>Register New Namespace</UINamespaceForm>
+      <UINamespaceForm>Registrar novo nome do espaço</UINamespaceForm>
     </title>
   </NamespacePopup>
   <!--
@@ -230,47 +230,47 @@
   -->
   <UIMetadataList>
     <label>
-      <false>false</false>
-      <true>true</true>
-      <True>true</True>
-      <False>false</False>
+      <false>falso</false>
+      <true>verdadeiro</true>
+      <True>verdadeiro</True>
+      <False>falso</False>
     </label>
     <title>
-      <view>View</view>
-      <edit>Edit</edit>
-      <delete>Delete</delete>
+      <view>Visualizar</view>
+      <edit>Editar</edit>
+      <delete>Excluir</delete>
     </title>
     <header>
-      <icon>Icon</icon>
+      <icon>Ícone</icon>
       <name>Metadata</name>
       <type>Tipo</type>
-      <internalUse>Internal Use</internalUse>
-      <action>Actions</action>
+      <internalUse>Uso Interno</internalUse>
+      <action>Excluir</action>
     </header>
     <msg>
-      <confirm-delete>Are you sure you want to delete this metadata?</confirm-delete>
-      <delete-successful>The templates of '{0}' were deleted successfully.</delete-successful>
-      <path-not-found-exception>This metadata was deleted or changed. Please click the Refresh button.</path-not-found-exception>
+      <confirm-delete>Você deseja realmente excluir este metadado ?</confirm-delete>
+      <delete-successful>Os modelos de '{0}' foram excluídos com sucesso.</delete-successful>
+      <path-not-found-exception>Esses metadados foram excluídos ou alterados. Por favor, clique no botão Atualizar.</path-not-found-exception>
     </msg>
     <action>
-      <Add>Add Metadata</Add>
+      <Add>Adicionar Metadado</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIMetadataList>
   <MetadataPopupAddNew>
     <title>
-      <UIMetadataForm>Add New Metadata's Template</UIMetadataForm>
+      <UIMetadataForm>Adicionar novo modelo de metadado</UIMetadataForm>
     </title>
   </MetadataPopupAddNew>
   <MetadataPopupEdit>
     <title>
-      <UIMetadataForm>Edit Metadata's Template</UIMetadataForm>
+      <UIMetadataForm>Editar modelo de metadados</UIMetadataForm>
     </title>
   </MetadataPopupEdit>
   <MetataPermissionPopup>
     <title>
-      <MetadataPermission>Set Permissions</MetadataPermission>
-      <QueriesPermissionBrowse>Add Permissions</QueriesPermissionBrowse>
+      <MetadataPermission>Definir permissões</MetadataPermission>
+      <QueriesPermissionBrowse>Adicionar permissões</QueriesPermissionBrowse>
     </title>
   </MetataPermissionPopup>
   <!--
@@ -279,29 +279,29 @@
   ################################################################################
   -->
   <UIMetadataForm>
-    <title>Mapping Metadata</title>
+    <title>Mapeando metadado</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Save>Apply</Save>
+      <Save>Aplicar</Save>
     </action>
     <header>
-      <icon>Icon</icon>
-      <label>Node name</label>
-      <input>Action</input>
+      <icon>Ícone</icon>
+      <label>Nome do nó</label>
+      <input>Ação</input>
     </header>
     <label>
-      <dialogTemplate>Dialog Template:</dialogTemplate>
-      <viewTemplate>View Template:</viewTemplate>
-      <metadataName>Metadata Name:</metadataName>
-      <viewPermission>Permission:</viewPermission>
+      <dialogTemplate>Modelo de diálogo</dialogTemplate>
+      <viewTemplate>Modelo de Visualização</viewTemplate>
+      <metadataName>Nome dos metadados</metadataName>
+      <viewPermission>Permissão</viewPermission>
       <permission>UIMetadataForm</permission>
-      <metadataLabel>Label:</metadataLabel>
+      <metadataLabel>Etiqueta:</metadataLabel>
     </label>
     <tab>
       <label>
         <metadataTypeTab>Metadata Type</metadataTypeTab>
-        <dialogTab>Dialog Template</dialogTab>
-        <viewTab>View Template</viewTab>
+        <dialogTab>Modelo de diálogo</dialogTab>
+        <viewTab>Tipo</viewTab>
       </label>
     </tab>
   </UIMetadataForm>
@@ -312,27 +312,27 @@
   -->
   <UIMetadataView>
     <header>
-      <name>Element Name</name>
+      <name>Nome do elemento</name>
       <type>Type</type>
-      <description>Description</description>
+      <description>Descrição</description>
       <isMixin>Is Mixin Type</isMixin>
       <orderable>Orderable children</orderable>
     </header>
     <info>
-      <description>Description</description>
+      <description>Descrição</description>
     </info>
     <tab>
-      <element>Elements</element>
-      <metadataView>Metadata Information</metadataView>
+      <element>Elementos</element>
+      <metadataView>Informação de metadado</metadataView>
     </tab>
     <action>
-      <Cancel>Close</Cancel>
+      <Cancel>Fechar</Cancel>
       <Back>#{word.back}</Back>
     </action>
   </UIMetadataView>
   <ViewMetadataPopup>
     <title>
-      <UIMetadataView>Metadata Information</UIMetadataView>
+      <UIMetadataView>Informação de metadado</UIMetadataView>
     </title>
   </ViewMetadataPopup>
   <!--
@@ -342,26 +342,26 @@
   -->
   <UIDriveList>
     <header>
-      <icon>Icon</icon>
-      <name>Name</name>
-      <workspace>Workspace</workspace>
+      <icon>Ícone</icon>
+      <name>Nome</name>
+      <workspace>Espaço de Trabalho</workspace>
       <homePath>Home Path</homePath>
-      <permissions>Permissions</permissions>
-      <views>View</views>
-      <action>Action</action>
+      <permissions>Permissão</permissions>
+      <views>Visualização</views>
+      <action>Ação</action>
     </header>
     <tooltip>
       <Delete>Delete</Delete>
-      <EditInfo>Edit</EditInfo>
+      <EditInfo>Editar</EditInfo>
     </tooltip>
     <msg>
       <confirm-delete>Are you sure you want to delete this drive?</confirm-delete>
     </msg>
     <action>
-      <AddDrive>Add Drive</AddDrive>
+      <AddDrive>Adicionar Unidade</AddDrive>
     </action>
     <label>
-      <permission>{0} in {1}</permission>
+      <permission>'{0}' in '{1}'</permission>
     </label>
   </UIDriveList>
   <UIDriveForm>
@@ -394,10 +394,10 @@
       <homePath>Home Path:</homePath>
       <icon>Workspace Icon:</icon>
       <viewPreferences>Show Referenced Documents:</viewPreferences>
-      <viewNonDocument>Show Non-document Nodes:</viewNonDocument>
+      <viewNonDocument>Mostrar todos os tipos de nós:</viewNonDocument>
       <viewSideBar>Show Sidebar:</viewSideBar>
       <permissions>Permissions:</permissions>
-      <showHiddenNode>Show Hidden Nodes:</showHiddenNode>
+      <showHiddenNode>Mostrar nós ocultos</showHiddenNode>
       <allowCreateFolders>Allow Folder Creation:</allowCreateFolders>
       <Admin>Admin:</Admin>
       <Categories>Categories:</Categories>
@@ -418,7 +418,7 @@
   </EditDriveManagerPopup>
   <UITreeList>
     <info>
-      <child-not-found>Child node not found.</child-not-found>
+      <child-not-found>Nó filho não encontrado.</child-not-found>
     </info>
     <header>
       <name>Name</name>
@@ -439,9 +439,9 @@
   -->
   <UINodeTypeManager>
     <header>
-      <icon>Icon</icon>
-      <label>Node Name</label>
-      <input>Action</input>
+      <icon>Ícone</icon>
+      <label>Nome do nó</label>
+      <input>Ação</input>
     </header>
     <action>
       <Save>#{word.save}</Save>
@@ -454,28 +454,28 @@
   -->
   <UINodeTypeList>
     <label>
-      <true>True</true>
-      <false>False</false>
+      <true>Verdadeiro</true>
+      <false>Falso</false>
     </label>
     <header>
-      <icon>Icon</icon>
-      <nodeType>Node Type</nodeType>
-      <mixinType>Mixin Type</mixinType>
-      <orderable>Orderable Child Nodes</orderable>
-      <action>Action</action>
+      <icon>Ícone</icon>
+      <nodeType>Tipo de nó</nodeType>
+      <mixinType>Tipo Mixin</mixinType>
+      <orderable>Nós filhos ordenáveis</orderable>
+      <action>Ação</action>
     </header>
     <action>
-      <Export>Export</Export>
+      <Export>Exportar Node</Export>
       <Import>Import</Import>
-      <Add>Add</Add>
+      <Add>Adicionar</Add>
     </action>
     <tooltip>
-      <View>View</View>
-      <Edit>Edit</Edit>
-      <Delete>Delete</Delete>
+      <View>Visualizar</View>
+      <Edit>Editar</Edit>
+      <Delete>Excluir</Delete>
     </tooltip>
     <msg>
-      <confirm-delete>Are you sure you want to delete this node type?</confirm-delete>
+      <confirm-delete>Deseja realmente este tipo de nó ?</confirm-delete>
     </msg>
   </UINodeTypeList>
   <!--
@@ -486,12 +486,12 @@
   <UINodeTypeOptionList>
     <action>
       <Save>#{word.save}</Save>
-      <Add>Add</Add>
+      <Add>Adicionar</Add>
     </action>
     <header>
-      <icon>Icon</icon>
-      <label>Node Name</label>
-      <input>Action</input>
+      <icon>Ícone</icon>
+      <label>Nome do nó</label>
+      <input>Ação</input>
     </header>
   </UINodeTypeOptionList>
   <!--
@@ -502,55 +502,55 @@
   <UINodeTypeForm>
     <tab>
       <label>
-        <nodeTypeDefinition>Node Type</nodeTypeDefinition>
-        <propertyDefinition>Property</propertyDefinition>
-        <childNodeDefinition>Child Node</childNodeDefinition>
-        <superTypeTab>Super Types</superTypeTab>
-        <DefaultTypeTab>Default Primary</DefaultTypeTab>
-        <RequiredTypeTab>Required Primary</RequiredTypeTab>
-        <Contraints>Constraints</Contraints>
+        <nodeTypeDefinition>Tipo de nó</nodeTypeDefinition>
+        <propertyDefinition>Propriedade</propertyDefinition>
+        <childNodeDefinition>Nó filho</childNodeDefinition>
+        <superTypeTab>Super tipos</superTypeTab>
+        <DefaultTypeTab>Tipo primário por padrão</DefaultTypeTab>
+        <RequiredTypeTab>Tipo primário obrigatório</RequiredTypeTab>
+        <Contraints>Restrições</Contraints>
       </label>
     </tab>
     <label>
-      <propertiesDefinitions>Property Definitions</propertiesDefinitions>
-      <childDefinitions>Child Node Definitions</childDefinitions>
-      <namespace>Name Space</namespace>
-      <propertyNamespace>Name Space</propertyNamespace>
-      <nodeTypeName>Node Type Name</nodeTypeName>
-      <mixinType>Is Mixin Type</mixinType>
-      <hasOrderableChildNodes>Orderable Child Nodes</hasOrderableChildNodes>
-      <primaryItemName>Primary Item Name</primaryItemName>
-      <superTypes>Super Types</superTypes>
-      <propertyname>Definition Name</propertyname>
-      <requiredType>Required Type</requiredType>
-      <multiple>Is Multiple</multiple>
-      <mandatory>Is Mandatory</mandatory>
-      <autoCreated>Is Auto-created</autoCreated>
-      <parentversion>On parent version</parentversion>
-      <protected>Is Protected</protected>
-      <constraints>Values</constraints>
+      <propertiesDefinitions>Definições de propriedade</propertiesDefinitions>
+      <childDefinitions>Definições de nós filhos</childDefinitions>
+      <namespace>Espaço de nomes</namespace>
+      <propertyNamespace>Espaço de nomes</propertyNamespace>
+      <nodeTypeName>Nome do tipo de nó</nodeTypeName>
+      <mixinType>É do tipo Mixin</mixinType>
+      <hasOrderableChildNodes>Nós filhos ordenáveis</hasOrderableChildNodes>
+      <primaryItemName>Nome do ítem primário</primaryItemName>
+      <superTypes>Super tipos</superTypes>
+      <propertyname>Nome de defição</propertyname>
+      <requiredType>Tipo requerido</requiredType>
+      <multiple>É Múltiplo</multiple>
+      <mandatory>É obrigatório</mandatory>
+      <autoCreated>Auto criável</autoCreated>
+      <parentversion>Herança de versão</parentversion>
+      <protected>É protegido</protected>
+      <constraints>Valores</constraints>
       <UIFormTableInputSet>UIFormTableInputSet</UIFormTableInputSet>
-      <sameNameSiblings>Is same name sibling</sameNameSiblings>
-      <childNamespace>Name Space</childNamespace>
-      <childMandatory>Is Mandatory</childMandatory>
-      <childAutocreated>Is Auto-created</childAutocreated>
-      <childParentversion>On parent version</childParentversion>
-      <childProtected>Is Protected</childProtected>
-      <childNodename>Definition Name</childNodename>
-      <requiredPrimaryType>Required Primary Type</requiredPrimaryType>
-      <defaultPrimaryType>Default Primary Type</defaultPrimaryType>
-      <valueconstraints>Value Constraints</valueconstraints>
+      <sameNameSiblings>Mesmo nome do irmão</sameNameSiblings>
+      <childNamespace>Espaço de nomes</childNamespace>
+      <childMandatory>É obrigatório</childMandatory>
+      <childAutocreated>Auto criável</childAutocreated>
+      <childParentversion>Herança de versão</childParentversion>
+      <childProtected>É protegido</childProtected>
+      <childNodename>Nome de definição</childNodename>
+      <requiredPrimaryType>Tipo primário requerido</requiredPrimaryType>
+      <defaultPrimaryType>Tipo primário padrão</defaultPrimaryType>
+      <valueconstraints>Restrições de valor</valueconstraints>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Save>#{word.save}</Save>
-      <SaveDraft>Save as Draft</SaveDraft>
-      <AddProperty>Add Property</AddProperty>
-      <AddChild>Add Child</AddChild>
-      <AddConstraints>Add Constraints</AddConstraints>
+      <SaveDraft>Salvar Rascunho</SaveDraft>
+      <AddProperty>Adicionar Propriedade</AddProperty>
+      <AddChild>Adicionar Filho</AddChild>
+      <AddConstraints>Adicionar Restrição</AddConstraints>
       <Back>#{word.back}</Back>
-      <AddType>Add Type</AddType>
-      <AddValue>Add</AddValue>
+      <AddType>Adicionar Tipo</AddType>
+      <AddValue>Adicionar</AddValue>
       <CancelConstraints>#{word.cancel}</CancelConstraints>
       <CancelTab>#{word.cancel}</CancelTab>
       <UpdateChild>#{word.update}</UpdateChild>
@@ -560,16 +560,16 @@
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <register-successfully>The '{0}' node type was registered successfully.</register-successfully>
-      <supertype-is-madatory>The super type is mandatory when you register a new node type. Please select at least one super type.</supertype-is-madatory>
-      <register-failed>The node type registration was unsuccessful. It either already exists or the super type is invalid.</register-failed>
-      <nodeType-name>The node type name is required.</nodeType-name>
-      <fileName-invalid>The file name has some invalid characters.</fileName-invalid>
-      <node-type-exists>The '{0}' node type already exists.</node-type-exists>
-      <node-type-name>The node type name is invalid.</node-type-name>
-      <values-error>Please select only one node type for the default primary type.</values-error>
-      <confirm-delete-child>Are you sure you want to delete this child node?</confirm-delete-child>
-      <confirm-delete-property>Are you sure you want to delete this property?</confirm-delete-property>
+      <register-successfully>O tipo de nó '{0}' foi registrado com êxito</register-successfully>
+      <supertype-is-madatory>Supertipo é obrigatório para registrar um novo tipo de nó. Pelo menos um supertipo deve ser escolhido.</supertype-is-madatory>
+      <register-failed>O registro do tipo de nó não funcionou. Ele já existe ou o super tipo é inválido</register-failed>
+      <nodeType-name>Nome do tipo de nó é obrigatório.</nodeType-name>
+      <fileName-invalid>Há alguns caracteres inválidos no nome.</fileName-invalid>
+      <node-type-exists>O tipo de nó '{0}' já existe!</node-type-exists>
+      <node-type-name>Nome do tipo de nó inválido!</node-type-name>
+      <values-error>Selecione apenas um tipo de nó para o tipo padrão primário.</values-error>
+      <confirm-delete-child>Deseja mesmo excluir esse nó filho?</confirm-delete-child>
+      <confirm-delete-property>Deseja mesmo excluir esta propriedade?</confirm-delete-property>
     </msg>
   </UINodeTypeForm>
   <UIPropertyDefinitionForm>
@@ -586,11 +586,11 @@
   </UIPropertyDefinitionForm>
   <UIChildNodeDefinitionForm>
     <msg>
-      <child-name>The child node name is required.</child-name>
-      <child-invalid>The child node name contains some invalid characters.</child-invalid>
-      <default-node-type-not-found>The default node type is not found.</default-node-type-not-found>
-      <requiredPrimaryType>The required primary type is required.</requiredPrimaryType>
-      <defaultPrimaryType>The default primary type is required.</defaultPrimaryType>
+      <child-name>O nome do nó filho é obrigatório.</child-name>
+      <child-invalid>O nome do nó filho contém alguns caracteres inválidos.</child-invalid>
+      <default-node-type-not-found>Tipo padrão de nó não encontrado.</default-node-type-not-found>
+      <requiredPrimaryType>O tipo primário requerido é obrigatório.</requiredPrimaryType>
+      <defaultPrimaryType>Tipo primário padrão é obrigatório.</defaultPrimaryType>
     </msg>
   </UIChildNodeDefinitionForm>
   <defaultPrimaryTypePopup>
@@ -605,17 +605,17 @@
   </requiredPrimaryTypePopup>
   <superTypesPopup>
     <title>
-      <FormsuperTypesPopup>Select Super Types</FormsuperTypesPopup>
+      <FormsuperTypesPopup>Selecione super tipos</FormsuperTypesPopup>
     </title>
   </superTypesPopup>
   <NodeTypePopup>
     <title>
-      <UINodeTypeForm>Add/Edit Node Type Definitions</UINodeTypeForm>
+      <UINodeTypeForm>Adicionar/Editar definições do tipo</UINodeTypeForm>
     </title>
   </NodeTypePopup>
   <ViewNodeTypePopup>
     <title>
-      <UINodeTypeForm>View Node Type Information</UINodeTypeForm>
+      <UINodeTypeForm>Ver informações do tipo do nó</UINodeTypeForm>
     </title>
   </ViewNodeTypePopup>
   <!--
@@ -625,24 +625,24 @@
   -->
   <UINodeTypeExport>
     <header>
-      <icon>Icon</icon>
-      <label>Node name</label>
-      <input>Action</input>
+      <icon>Ícone</icon>
+      <label>Nome do nó</label>
+      <input>Ação</input>
     </header>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Export>Export</Export>
-      <UncheckAll>Uncheck all</UncheckAll>
-      <CheckAll>Check all</CheckAll>
+      <Export>Exportar</Export>
+      <UncheckAll>Desmarcar todos</UncheckAll>
+      <CheckAll>Marcar todos</CheckAll>
     </action>
-    <title>Export Node Types</title>
+    <title>Exportar tipos de nó</title>
     <msg>
-      <item-null>Please select at least one node that you want to export.</item-null>
+      <item-null>Você deve selcionar pelo menos um nó para exportar.</item-null>
     </msg>
   </UINodeTypeExport>
   <NodeTypeExportPopup>
     <title>
-      <UINodeTypeExport>Export Node Types</UINodeTypeExport>
+      <UINodeTypeExport>Exportar tipos de nós</UINodeTypeExport>
     </title>
   </NodeTypeExportPopup>
   <!--
@@ -657,19 +657,19 @@
   -->
   <UINodeTypeUpload>
     <label>
-      <upload>File Name</upload>
+      <upload>Nome do Arquivo</upload>
     </label>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Upload>Enviar</Upload>
     </action>
-    <title>Import Node Type From XML File</title>
+    <title>Importar tipo de nó de um arquivo XML</title>
     <msg>
-      <filename-error>Browse a node type file to import.</filename-error>
-      <data-file-error>Only .xml or .zip files can be imported.</data-file-error>
-      <data-invalid>The data is invalid. Please check your file type and try again.</data-invalid>
-      <nodetype-exist>The '{0}' node type already exists.</nodetype-exist>
-      <namespace-invalid>The '{0}' namespace is invalid.</namespace-invalid>
+      <filename-error>Navegar pelos arquivos para importação.</filename-error>
+      <data-file-error>Apenas arquivos .xml ou .zip podem ser importados.</data-file-error>
+      <data-invalid>Dado inválido. Por favor, verifique o tipo de arquivo e tente novamente.</data-invalid>
+      <nodetype-exist>O tipo de nó '{0}' já existe.</nodetype-exist>
+      <namespace-invalid>Dado inválido: espaço de nomes '{0}' desconhecido.</namespace-invalid>
     </msg>
   </UINodeTypeUpload>
   <!--
@@ -680,23 +680,23 @@
   <UINodeTypeImport>
     <action>
       <Cancel>#{word.cancel}</Cancel>
-      <Import>Import</Import>
-      <Upload>Re-upload</Upload>
+      <Import>Importar</Import>
+      <Upload>Recarregar</Upload>
     </action>
     <header>
-      <icon>Icon</icon>
-      <label>Node Name</label>
-      <input>Action</input>
+      <icon>Ícone</icon>
+      <label>Nome do nó</label>
+      <input>Ação</input>
     </header>
-    <title>Select Import Node Type</title>
+    <title>Selecionar tipo de nó para importar</title>
     <msg>
-      <no-nodetype-registered>There are no node types registered.</no-nodetype-registered>
-      <nodetype-registered>Registration successful.</nodetype-registered>
+      <no-nodetype-registered>Não há tipo de nó registrado.</no-nodetype-registered>
+      <nodetype-registered>Registro bem sucedido.</nodetype-registered>
     </msg>
   </UINodeTypeImport>
   <NodeTypeImportPopup>
     <title>
-      <UINodeTypeImportPopup>Import Node Type From XML File</UINodeTypeImportPopup>
+      <UINodeTypeImportPopup>Importar tipo de nó de um arquivo XML</UINodeTypeImportPopup>
     </title>
   </NodeTypeImportPopup>
   <!--
@@ -793,11 +793,11 @@
 
 <nodeTypeDefinition>Node Type</nodeTypeDefinition>
       <propertyDefinition>Property</propertyDefinition>
-      <childNodeDefinition>Child Node</childNodeDefinition>
-      <SuperTypeTab>Super Types</SuperTypeTab>
-      <DefaultTypeTab>Default Primary</DefaultTypeTab>
-      <RequiredTypeTab>Required Primary</RequiredTypeTab>
-      <Contraints>Constraints</Contraints>
+      <childNodeDefinition>Nó filho</childNodeDefinition>
+      <SuperTypeTab>Super tipos</SuperTypeTab>
+      <DefaultTypeTab>Tipo primário por padrão</DefaultTypeTab>
+      <RequiredTypeTab>Tipo primário obrigatório</RequiredTypeTab>
+      <Contraints>Restrições</Contraints>
     </title>
   </UITabPane>
   <!--
@@ -807,7 +807,7 @@
   -->
   <UIViewList>
    <title>
-     <View>View</View>
+     <View>Visualizar</View>
      <EditInfo>Editar</EditInfo>
      <Delete>Delete</Delete>
    </title>
@@ -846,7 +846,7 @@
 
 <UITabList>
  <header>
-  <tabName>Tab</tabName>
+  <tabName>Aba</tabName>
   <localizeButtons>Description</localizeButtons>
 <action>Actions</action>
 </header>
@@ -866,7 +866,7 @@
 <UIViewPermissionList>
  <title>Select Owner with permissions on this view:</title>
 <label>
- <permission>{0} in {1}</permission>
+ <permission>'{0}' in '{1}'</permission>
 </label>
 <msg>
  <confirm-delete>Are you sure you want to delete this permission?</confirm-delete>
@@ -941,7 +941,7 @@
       <tabName>Tab Name</tabName>
       <permission>Permissão</permission>
       <tabs>Tabs</tabs>
-      <template>Templates</template>
+      <template>Modelos</template>
       <enableVersion>Enable Version</enableVersion>
       <addFolder>Add Folder</addFolder>
       <addDocument>Add Document</addDocument>
@@ -950,7 +950,7 @@
       <paste>Paste</paste>
       <search>Buscar</search>
       <viewReferences>View References</viewReferences>
-      <viewNodeType>View Node Type</viewNodeType>
+      <viewNodeType>Visualizar tipo de nó</viewNodeType>
       <viewPermissions>View Permissions</viewPermissions>
       <viewProperties>View Properties</viewProperties>
       <manageVersions>Manage Versions</manageVersions>
@@ -959,8 +959,8 @@
       <manageCategories>Manage Categories</manageCategories>
       <manageRelations>Manage Relations</manageRelations>
       <manageActions>Manage Actions</manageActions>
-      <exportNode>Export Node</exportNode>
-      <importNode>Import Node</importNode>
+      <exportNode>Exportar nó</exportNode>
+      <importNode>Importar nó</importNode>
       <viewRelations>View Relations</viewRelations>
       <showJCRStructure>Show JCR Structure</showJCRStructure>
       <watchDocument>Watch Document</watchDocument>
@@ -970,7 +970,7 @@
       <manageHidden>Hide/Show Content</manageHidden>
       <comment>Comment</comment>
       <vote>Vote</vote>  
-      <addCategory>Add Category</addCategory>
+      <addCategory>Adicionar Categoria</addCategory>
       <addLocalizationLink>Add Translation</addLocalizationLink>
       <publicationRequestApproval>Request Approval</publicationRequestApproval>
       <publicationApproveContent>Approve Content</publicationApproveContent>
@@ -1030,7 +1030,7 @@
   -->
   <UIECMTemplateList>
     <title>
-      <View>View</View>
+      <View>Visualizar</View>
       <EditInfo>Editar</EditInfo>
       <Delete>Delete</Delete>
     </title>
@@ -1278,7 +1278,7 @@
 
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Selecionar Caminho</UIOneNodePathSelector>
     </title>
   </PopupComponent>
   
@@ -1359,11 +1359,11 @@
       <permission>UIPermissionTreeForm</permission>
       <userOrGroup>User Or Group</userOrGroup>
       <read>Read Right</read>
-      <add_node>Add Node Right</add_node>
+      <add_node>Adicionar nó</add_node>
       <set_property>Set Property Right</set_property>
       <remove>Remove Right</remove>
     </label>
-    <title>Add a permission to that node</title>
+    <title>Adicionar uma permissão a este nó</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Save</Save>
@@ -1379,7 +1379,7 @@
   
   <PopupTaxonomyJCRBrowser>
   <title>
-      <UIOneNodePathSelector>Select Home Path</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Selecionar caminho raiz</UIOneNodePathSelector>
     </title>
   </PopupTaxonomyJCRBrowser>
   
@@ -1392,7 +1392,7 @@
    <PopupDrivePermission>
     <title>
       <AddDrivePermissionSelector>Add Permission</AddDrivePermissionSelector>
-      <UIPermissionSelector>Select Permission</UIPermissionSelector>
+      <UIPermissionSelector>Selecionar Permissão</UIPermissionSelector>
     </title>
   </PopupDrivePermission>
   
@@ -1418,7 +1418,7 @@
     <header>
       <usersOrGroups>User or Group</usersOrGroups>
       <read>Read</read>
-      <addNode>Modify Node</addNode>
+      <addNode>Modificar nó</addNode>
       <remove>Remove</remove>
       <action>Action</action>
     </header>
@@ -1454,7 +1454,7 @@
       <selectUser>Select User</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' is the owner of this node and has full control permission.</not-change-owner>
+      <not-change-owner>'{0}' é dono desse nó e possui todos os controle s de permissão.</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
@@ -1463,10 +1463,10 @@
       <permission>UIPermissionForm</permission>
       <userOrGroup>User or Group</userOrGroup>
       <read>Read</read>
-      <add_node>Modify</add_node>
+      <add_node>Modificar</add_node>
       <remove>Remove</remove>
     </label>
-    <title>Add permission to that node</title>
+    <title>Adicionar permissão ao nó</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -1501,7 +1501,7 @@
       <name>Type</name>
       <action>Action</action>
       <label>Modelo</label>
-      <icon>Icon</icon>
+      <icon>Ícone</icon>
     </header>
     <action>
       <AddNew>Add Template</AddNew>
@@ -1519,7 +1519,7 @@
       <name>Type</name>
       <action>Ação</action>
       <label>Modelo</label>
-      <icon>Icon</icon>
+      <icon>Ícone</icon>
     </header>
     <action>
       <AddNew>Adicionar modelo</AddNew>
@@ -1536,7 +1536,7 @@
     <header>
       <name>Type</name>
       <label>Modelo</label>
-      <icon>Icon</icon>
+      <icon>Ícone</icon>
       <action>Ação</action>
     </header>
     <action>
@@ -1653,7 +1653,7 @@
  </action>
 <label>
  <title>Nome</title>
-<template>Template Name</template>
+<template>Nome do Modelo</template>
 <content>Conteúdo</content>
 <type>Template Type</type>
 </label>
@@ -1667,7 +1667,7 @@
  </action>
 <label>
  <title>Nome</title>
-<template>Template Name</template>
+<template>Nome do Modelo</template>
 <content>Conteúdo</content>
 <type>Template Type</type>
 </label>
@@ -1681,7 +1681,7 @@
  </action>
 <label>
  <title>Nome</title>
-<template>Template Name</template>
+<template>Nome do Modelo</template>
 <content>Conteúdo</content>
 <type>Template Type</type>
 </label>
@@ -1874,12 +1874,12 @@
   -->
   <JCRBrowser>
     <title>
-      <UIOneNodePathSelector>Select Home Path</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Selecionar caminho raiz</UIOneNodePathSelector>
     </title>
   </JCRBrowser>
   <JCRBrowserAssets>
     <title>
-      <UIOneNodePathSelector>Select Icon</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Selecionar ícone</UIOneNodePathSelector>
     </title>
   </JCRBrowserAssets>
   <!--
@@ -1941,7 +1941,7 @@
   </EditQueryForm>
 <PermissionPopup>
   <title>
-    <UIGroupMemberSelector>Select Permission</UIGroupMemberSelector>
+    <UIGroupMemberSelector>Selecionar Permissão</UIGroupMemberSelector>
   </title>
 </PermissionPopup>
   <!--
@@ -2022,7 +2022,7 @@
     <label>
       <workspaceName>Workspace:</workspaceName>
       <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
-      <rootNodePath>Root Path:</rootNodePath>
+      <rootNodePath>Raiz da arborescência:</rootNodePath>
     </label>
   </UIWorkspaceList>
   <!--
@@ -2052,13 +2052,13 @@
   </PermissionButton>
   <nodeTypeDefinition>
     <title>
-      <AddSuperType>Add Super Type</AddSuperType>
+      <AddSuperType>Adicionar super tipo</AddSuperType>
     </title>
   </nodeTypeDefinition>
   <childNodeDefinition>
     <title>
-      <AddRequiredType>Add Required Type</AddRequiredType>
-      <AddDefaultType>Add Default Type</AddDefaultType>
+      <AddRequiredType>Adicionar o tipo requerido</AddRequiredType>
+      <AddDefaultType>Adicionar tipo padrão</AddDefaultType>
     </title>
   </childNodeDefinition>
   <propertyDefinition>
@@ -2081,7 +2081,7 @@
       <Delete>Delete</Delete>
     </title>
 <label>
-  <permission>{0} in {1}</permission>
+  <permission>'{0}' in '{1}'</permission>
 </label>
   </UIViewContainer>
   <ECMTemplate>
@@ -2185,13 +2185,13 @@
   
   <UITaxonomyTreeMainForm>
     <msg>
-      <homepath-emty>The home path is required.</homepath-emty>
-      <targetpath-emty>The target path is required.</targetpath-emty>
+      <homepath-emty>O caminho raiz é obrigatório.</homepath-emty>
+      <targetpath-emty>O caminho destino é obrigatório.</targetpath-emty>
     </msg>
   </UITaxonomyTreeMainForm>
   <UITaxonomyWorkingArea>
   <msg>
-  <exist>This tree node already exists.</exist>
+  <exist>Este nó já existe!</exist>
   </msg>
   </UITaxonomyWorkingArea>
 
@@ -2249,7 +2249,7 @@
 </UIECMAdminControlPanel>
 <UIUnLockForm>
     <label>
-      <name>Path Node</name>      
+      <name>Título</name>      
       <permissions>Permissions</permissions>
       <PermissionButton>UI Unlock Form</PermissionButton>
     </label>
@@ -2275,15 +2275,15 @@
   </UILockHolderList>
   <UILockNodeList>
   <header>
-  <name>Title</name>
-  <hoderLock>Lock Owner</hoderLock>
-  <action>Action</action>
+  <name>Título</name>
+  <hoderLock>Titular do bloqueio</hoderLock>
+  <action>Ação</action>
   </header>
   <tooltip>
-<UnLock>UnLock</UnLock>
+<UnLock>Desbloquear</UnLock>
   </tooltip>
   <msg>
-  <access-denied-exception>You do not have permission to access the node with the path {0}, or this node is deleted.</access-denied-exception>
+  <access-denied-exception>Você não possui permissão para acessar o nó com o caminho {0} ou este nó foi excluido.</access-denied-exception>
   </msg>
   </UILockNodeList>
   <EditUnLockForm>
@@ -2297,7 +2297,7 @@
     </action>
     <title>
     <UILockHolderContainer>Manage Lock</UILockHolderContainer>
-    <UILockNodeList>Locked Node</UILockNodeList>
+    <UILockNodeList>Nó bloqueado</UILockNodeList>
     </title>
   </UITabPane>
   
@@ -2466,13 +2466,13 @@
   </UIActionForm> 
   <NodeTypeNameValidator>
     <msg>
-      <Invalid-char>There are some invalid characters. Please enter another value.</Invalid-char>
-      <empty-input>The value of the field is empty.</empty-input>
+      <Invalid-char>Há alguns caracteres inválidos. Insira outro valor, por favor!</Invalid-char>
+      <empty-input>O valor do campo está vazio.</empty-input>
     </msg>
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>The node '{0}' cannot be added to '{1}' in the workspace '{2}'.  There is a problem with the permissions or constraints condition.</constraint-violation-exception>
+      <constraint-violation-exception>O nó '{0}' não pode ser adicionado a '{1}' no no espaço de trabalho '{2}'. Há um problema com permissões ou condições de restrição.</constraint-violation-exception>
     </msg>
   </UIActionForm>
   
@@ -2496,25 +2496,25 @@
 
 <UIDriveForm>
 <label>
-<allowNodeTypesOnTree>Allowance nodetype on left tree:</allowNodeTypesOnTree>
+<allowNodeTypesOnTree>Tipo de nó permitido na aborescência esquerda.</allowNodeTypesOnTree>
 </label>
 </UIDriveForm>
 <DriveInputSet>
 <title>
 <RemovePermission>Remove Permission</RemovePermission>
-<ChooseNodeType>Select Node Types</ChooseNodeType>
-<RemoveNodeType>Remove</RemoveNodeType>
+<ChooseNodeType>Escolher tipos de nó</ChooseNodeType>
+<RemoveNodeType>Remover</RemoveNodeType>
 </title>
 </DriveInputSet>
 <PopupNodeTypeSelector>
 <title>
-<UINodeTypeSelector>Select Node Types</UINodeTypeSelector>
-<PopupNodeTypeSelector>Select Node Types</PopupNodeTypeSelector>
+<UINodeTypeSelector>Selecionar tipos de nó</UINodeTypeSelector>
+<PopupNodeTypeSelector>Selecionar tipos de nó</PopupNodeTypeSelector>
 </title>
 </PopupNodeTypeSelector>
   <UINodeTypeSelector>
     <label>
-      <selectedAllNodeTypes>Select All Node Types</selectedAllNodeTypes>
+      <selectedAllNodeTypes>Selecionar todos os tipos de nó</selectedAllNodeTypes>
     </label>
   </UINodeTypeSelector>
   <UIScriptForm>
@@ -2524,7 +2524,7 @@
   </UIScriptForm>
  <UINodeTypeList>
    <msg>
-   <no-list>There isn't any node type with condition search.</no-list>
+   <no-list>There is no node type matching your search.</no-list>
    </msg>
  </UINodeTypeList>
   <UIActionForm>
@@ -2534,7 +2534,7 @@
   </UIActionForm>
   <PopupComponent>
     <title>
-      <UINodeTypeSelector>Node Type Selector</UINodeTypeSelector>
+      <UINodeTypeSelector>Seletor de tipo de nó</UINodeTypeSelector>
     </title>
   </PopupComponent>
   <UIPageIterator>
@@ -2544,7 +2544,7 @@
   </UIPageIterator>
   <UILockNodeList>
     <msg>
-      <can-not-unlock-node>You do not have permission to unlock this node. Please contact the administrator to get the correct right.</can-not-unlock-node>
+      <can-not-unlock-node>Você não tem permissão suficiente para desbloquear este nó.</can-not-unlock-node>
     </msg>
  </UILockNodeList>
 </bundle>
