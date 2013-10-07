@@ -21,7 +21,7 @@
 			def isShowRssLink = uicomponent.isShowRssLink();
 		  def isShowHeader = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_HEADER) && header != null && header.trim().length() != 0;
 			%>
-		  <div class="TopBoxHeader ClearFix">
+		  <div class="TopBoxHeader clearfix">
 				<%
 				if (isShowHeader || isShowRssLink) {
 					%>
@@ -124,7 +124,7 @@
 	    <%
 				}
 			%>
-			<div class="CaptionFunc ClearFix">
+			<div class="CaptionFunc clearfix">
 				<% String labelRefreshAction = _ctx.appRes("UICLVPresentation.action.refresh");
 				  def isShowRefresh = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_REFRESH_BUTTON);
 					if (isShowRefresh) { 

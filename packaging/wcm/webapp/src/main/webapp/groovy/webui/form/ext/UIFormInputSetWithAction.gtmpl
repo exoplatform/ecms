@@ -53,7 +53,7 @@
 										if(infor != null && actionInfo != null) {
 											def arrInfor = infor.split(",");
 											if(arrInfor.length > 0) {
-											println "<div class=\"FL\" >";
+											println "<div class=\"pull-left\" >";
 												for(i in 0..arrInfor.length -1) {
 													if(arrInfor[i].length() > 0) { 
 														if(!isView) { 
@@ -91,7 +91,7 @@
 										} else if(infor != null && uicomponent.isShowOnly()) {
 											def arrInfor = infor.split(",");
 											if(arrInfor.length > 0) {
-												println "<div class=\"FL\" >";
+												println "<div class=\"pull-left\" >";
 													for(i in 0..arrInfor.length -1) { 
 														if(arrInfor[i].length() > 0) { %>
 															<div class="ActionField">[ <%=arrInfor[i]%> ]</div>	

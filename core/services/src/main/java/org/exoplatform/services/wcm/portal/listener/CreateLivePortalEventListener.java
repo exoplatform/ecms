@@ -73,49 +73,53 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
     PortalConfig portalConfig = event.getData();
     if (!PortalConfig.PORTAL_TYPE.equals(portalConfig.getType())) return;
     LivePortalManagerService livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     try {
-      livePortalManagerService.getLivePortal(sessionProvider, portalConfig.getName());
-      return;//portal already exists
-    } catch (Exception e) {
-      //portal did not exists, process to create
-      if (LOG.isInfoEnabled()) {
-        LOG.info("Creating new resource storage for portal: " + portalConfig.getName());
-      }
-    }
-    // Create site content storage for the portal
-    try {
-      livePortalManagerService.addLivePortal(sessionProvider, portalConfig);
-      if (LOG.isInfoEnabled()) {
-        LOG.info("Created new resource storage for portal: " + portalConfig.getName());
-      }
-    } catch (Exception e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error("Error when create new resource storage: " + portalConfig.getName(), e);
-      }
-    }
-    // create drive for the site content storage
-    if(autoCreatedDrive || (!autoCreatedDrive && targetDrives != null && targetDrives.contains(portalConfig.getName()))) {
-      ManageDriveService manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
-      WCMConfigurationService configurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
       try {
-        Node portal = livePortalManagerService.getLivePortal(sessionProvider, portalConfig.getName());
-        createPortalDrive(portal,portalConfig,configurationService,manageDriveService);
+        livePortalManagerService.getLivePortal(sessionProvider, portalConfig.getName());
+        return;//portal already exists
+      } catch (Exception e) {
+        //portal did not exists, process to create
+        if (LOG.isInfoEnabled()) {
+          LOG.info("Creating new resource storage for portal: " + portalConfig.getName());
+        }
+      }
+      // Create site content storage for the portal
+      try {
+        livePortalManagerService.addLivePortal(sessionProvider, portalConfig);
+        if (LOG.isInfoEnabled()) {
+          LOG.info("Created new resource storage for portal: " + portalConfig.getName());
+        }
+      } catch (Exception e) {
+        if (LOG.isErrorEnabled()) {
+          LOG.error("Error when create new resource storage: " + portalConfig.getName(), e);
+        }
+      }
+      // create drive for the site content storage
+      if(autoCreatedDrive || (!autoCreatedDrive && targetDrives != null && targetDrives.contains(portalConfig.getName()))) {
+        ManageDriveService manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
+        WCMConfigurationService configurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
+        try {
+          Node portal = livePortalManagerService.getLivePortal(sessionProvider, portalConfig.getName());
+          createPortalDrive(portal,portalConfig,configurationService,manageDriveService);
+        } catch (Exception e) {
+          if (LOG.isErrorEnabled()) {
+            LOG.error("Error when create drive for portal: " + portalConfig.getName(), e);
+          }
+        }
+      }
+      //Deploy initial artifacts for this portal
+      CreatePortalArtifactsService artifactsInitializerService = WCMCoreUtils.getService(CreatePortalArtifactsService.class);
+      try {
+        artifactsInitializerService.deployArtifactsToPortal(sessionProvider, portalConfig.getName(),
+                                                            portalConfig.getPortalLayout().getId());
       } catch (Exception e) {
         if (LOG.isErrorEnabled()) {
           LOG.error("Error when create drive for portal: " + portalConfig.getName(), e);
         }
       }
-    }
-    //Deploy initial artifacts for this portal
-    CreatePortalArtifactsService artifactsInitializerService = WCMCoreUtils.getService(CreatePortalArtifactsService.class);
-    try {
-      artifactsInitializerService.deployArtifactsToPortal(sessionProvider, portalConfig.getName(),
-                                                          portalConfig.getPortalLayout().getId());
-    } catch (Exception e) {
-      if (LOG.isErrorEnabled()) {
-        LOG.error("Error when create drive for portal: " + portalConfig.getName(), e);
-      }
+    } finally {
+      sessionProvider.close();
     }
   }
 

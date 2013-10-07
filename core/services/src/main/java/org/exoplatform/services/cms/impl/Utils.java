@@ -371,6 +371,19 @@ public class Utils {
     return ret;
   }
 
+	/**
+	 * Remove the symlink of a deleted node
+	 * @param node The deleted node
+	 * @throws Exception
+	 */
+	public static void removeSymlinks(Node node) throws Exception {
+		LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
+		List<Node> symlinks = linkManager.getAllLinks(node, EXO_SYMLINK);
+		for (Node symlink : symlinks) {
+			symlink.remove();
+		}
+	}
+
   /**
    * Remove all the link of a deleted node
    * @param     : node
@@ -379,6 +392,7 @@ public class Utils {
    */
   public static void removeDeadSymlinks(Node node, boolean keepInTrash) throws Exception {
     if (isInTrash(node)) {
+
       return;
     }
     LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
@@ -442,6 +456,7 @@ public class Utils {
       sessionProvider.close();
     }
   }
+
   public static void removeDeadSymlinks(Node node) throws Exception {
     removeDeadSymlinks(node, true);
   }
@@ -506,14 +521,14 @@ public class Utils {
     return serviceLogContentNode;
   }
 
-	/**
-	 * Get all the templates which have been added into the system
-	 * @param className Simple name of class.
-	 * @param id The unique value which used to build service log name.
-	 * @param skipActivities To skip raising activities on activity stream.
-	 * @return A Set of templates name which have been added.
-	 * @throws Exception
-	 */
+  /**
+   * Get all the templates which have been added into the system
+   * @param className Simple name of class.
+   * @param id The unique value which used to build service log name.
+   * @param skipActivities To skip raising activities on activity stream.
+   * @return A Set of templates name which have been added.
+   * @throws Exception
+  */
   public static Set<String> getAllEditedConfiguredData(String className, String id, boolean skipActivities) throws Exception {
     SessionProvider systemProvider = SessionProvider.createSystemProvider();
     try {
@@ -530,14 +545,14 @@ public class Utils {
     }
   }
 
-	/**
-	 * Keep the name of templates in jcr:data property at the first time loaded.
-	 * @param template Name of template which will be kept in jcr:data property
-	 * @param className A simple class name
-	 * @param id The unique value which used to build service log name.
-	 * @param skipActivities To skip raising activities on activity stream.
-	 * @throws Exception
-	 */
+  /**
+   * Keep the name of templates in jcr:data property at the first time loaded.
+   * @param template Name of template which will be kept in jcr:data property
+   * @param className A simple class name
+   * @param id The unique value which used to build service log name.
+   * @param skipActivities To skip raising activities on activity stream.
+   * @throws Exception
+ */
   public static void addEditedConfiguredData(String template, String className, String id, boolean skipActivities) throws Exception {
     SessionProvider systemProvider = SessionProvider.createSystemProvider();
     try {
@@ -602,11 +617,11 @@ public class Utils {
   }
 
   public static List<String> getMemberships() throws Exception {
-    String userId = ConversationState.getCurrent().getIdentity().getUserId();
     List<String> userMemberships = new ArrayList<String>();
-    userMemberships.add(userId);
-    Collection<MembershipEntry> memberships = getUserMembershipsFromIdentityRegistry(userId);
-    if (memberships != null) {
+    String userId = ConversationState.getCurrent().getIdentity().getUserId();
+    if (StringUtils.isNotEmpty(userId)) {
+      userMemberships.add(userId);
+      Collection<MembershipEntry> memberships = getUserMembershipsFromIdentityRegistry(userId);
       for (MembershipEntry membership : memberships) {
         String role = membership.getMembershipType() + ":" + membership.getGroup();
         userMemberships.add(role);
@@ -626,7 +641,11 @@ public class Utils {
   private static Collection<MembershipEntry> getUserMembershipsFromIdentityRegistry(String authenticatedUser) {
     IdentityRegistry identityRegistry = WCMCoreUtils.getService(IdentityRegistry.class);
     Identity currentUserIdentity = identityRegistry.getIdentity(authenticatedUser);
-    return currentUserIdentity.getMemberships();
+    if (currentUserIdentity == null) {
+      return Collections.<MembershipEntry>emptySet();
+    } else {
+      return currentUserIdentity.getMemberships();
+    }
   }
 
   public static String getNodeTypeIcon(Node node, String appended, String mode)

@@ -44,7 +44,7 @@
       <no-taxonomy-selected>Sie müssen mindestens eine Kategorie kopieren oder ausschneiden.</no-taxonomy-selected>
       <node-is-cutting>Sie können hier nicht einfügen. Der Kategorieknoten "{0}" wurde vielleicht ausgeschnitten.</node-is-cutting>
       <can-not-paste>Es gibt keine Daten zum Einfügen in der Zwischenablage.</can-not-paste>
-      <reference-exception>Cannot delete this category  because it is currently referenced by a content.</reference-exception>
+      <reference-exception>Diese Kategorie kann nicht gelöscht werden, da sie derzeit von einem Inhalt referenziert wird.</reference-exception>
       <path-error>Fehler beim Entfernen dieses Kategorieknotens.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
@@ -161,7 +161,7 @@
       <path-invalid>Dieser Pfad ist ungültig.</path-invalid>
       <taxonomy-existed>Der Kategorienbaum ist bereits vorhanden.</taxonomy-existed>
       <taxonomy-node-existed>Der Kategorie-Knoten ist bereits vorhanden.</taxonomy-node-existed>
-      <no-permission-add>Ihnen fehlt die Berechtigung zum Hinzufügen.</no-permission-add>
+      <no-permission-add>Sie haben nicht das Recht eine Aktion hinzuzufügen.</no-permission-add>
       <not-created-tree>Der Kategorienbaum wurde noch nicht erstellt.</not-created-tree>
     </msg>
   </UIActionForm>
@@ -398,7 +398,7 @@
       <viewSideBar>Seitenleiste anzeigen:</viewSideBar>
       <permissions>Berechtigungen:</permissions>
       <showHiddenNode>Ausgeblendeten Knoten anzeigen:</showHiddenNode>
-      <allowCreateFolders>Allow Folder Creation:</allowCreateFolders>
+      <allowCreateFolders>Ordnererstellung erlauben:</allowCreateFolders>
       <Admin>Admin:</Admin>
       <Categories>Kategorien:</Categories>
       <Icons>Piktogramme:</Icons>
@@ -526,7 +526,7 @@
       <multiple>Ist mehrwertig</multiple>
       <mandatory>Ist erforderlich</mandatory>
       <autoCreated>Wird automatisch erstellt</autoCreated>
-      <parentversion>On parent version</parentversion>
+      <parentversion>Auf Vorgängerversion</parentversion>
       <protected>Ist geschützt</protected>
       <constraints>Werte</constraints>
       <UIFormTableInputSet>UIFormTableInputSet</UIFormTableInputSet>
@@ -534,7 +534,7 @@
       <childNamespace>Namensraum</childNamespace>
       <childMandatory>Ist erforderlich</childMandatory>
       <childAutocreated>Wird automatisch erstellt</childAutocreated>
-      <childParentversion>On parent version</childParentversion>
+      <childParentversion>Auf Vorgängerversion</childParentversion>
       <childProtected>Ist geschützt</childProtected>
       <childNodename>Definitionsname</childNodename>
       <requiredPrimaryType>Benötigter Primärtyp</requiredPrimaryType>
@@ -691,7 +691,7 @@
     <title>zu importierenden Knotentyp auswählen</title>
     <msg>
       <no-nodetype-registered>Es gibt keine registrierten Knotentypen.</no-nodetype-registered>
-      <nodetype-registered>Registration successful.</nodetype-registered>
+      <nodetype-registered>Registrierung erfolgreich.</nodetype-registered>
     </msg>
   </UINodeTypeImport>
   <NodeTypeImportPopup>
@@ -1200,7 +1200,7 @@
       <scriptContent>Inhalt</scriptContent>
       <scriptLabel>Name</scriptLabel>
       <scriptName>Skript</scriptName>
-      <enableVersion>Enable Versioning</enableVersion>
+      <enableVersion>Versionsverwaltung einschalten</enableVersion>
     </label>
   </UIScriptForm>
   <!--
@@ -1215,7 +1215,7 @@
       <scriptContent>Skriptinhalt</scriptContent>
       <scriptLabel>Name</scriptLabel>
       <scriptName>Skript</scriptName>
-      <enableVersion>Enable Versioning</enableVersion>
+      <enableVersion>Versionsverwaltung einschalten</enableVersion>
     </label>
   </ecmScriptForm>
   <!--
@@ -1266,7 +1266,7 @@
     </action>
     <label>
       <parentPath>Parent:</parentPath>
-      <taxonomyName>Category Name:</taxonomyName>
+      <taxonomyName>Kategoriename:</taxonomyName>
     </label>
     <msg>
       <name-null>Der Kategoriename ist leer.</name-null>
@@ -1726,7 +1726,7 @@
       <name>Name:</name>
       <isDocumentTemplate>ist Dokumentvorlage</isDocumentTemplate>
       <viewPermission>Berechtigung:</viewPermission>
-      <enableVersion>Versioning activated</enableVersion>
+      <enableVersion>Versionsverwaltung aktiviert</enableVersion>
     </label>
     <title>Ansicht hinzufügen/bearbeiten</title>
   </ViewForm>
@@ -1739,7 +1739,7 @@
       <name>Name</name>
       <isDocumentTemplate>ist Dokumentvorlage</isDocumentTemplate>
       <viewPermission>Berechtigung:</viewPermission>
-      <enableVersion>Enable Versioning</enableVersion>
+      <enableVersion>Versionsverwaltung einschalten</enableVersion>
     </label>
     <title>Dialogfeld hinzufügen/bearbeiten</title>
   </DialogForm>
@@ -1958,7 +1958,7 @@
   <UITagStyleList>
     <header>
       <name>Stilname</name>
-      <documentRange>Number of Occurrences</documentRange>
+      <documentRange>Anzahl der Vorkommen</documentRange>
       <tagHTML>Stil des Tags</tagHTML>
       <action>Aktion</action>
     </header>
@@ -1969,7 +1969,7 @@
   <UITagStyleForm>
     <label>
       <styleName>Style Name:</styleName>
-      <documentRange>Number of Occurrences:</documentRange>
+      <documentRange>Anzahl der Vorkommen:</documentRange>
       <styleHTML>HTML Style:</styleHTML>
     </label>
     <action>
@@ -2351,7 +2351,7 @@
       <name>Name:</name>
       <isDocumentTemplate>ist Dokumentvorlage</isDocumentTemplate>
       <viewPermission>Berechtigung:</viewPermission>
-      <enableVersion>Enable Versioning</enableVersion>
+      <enableVersion>Versionsverwaltung einschalten</enableVersion>
     </label>
     <title>Skin hinzufügen/bearbeiten</title>
   </SkinForm>
@@ -2396,7 +2396,7 @@
 </action>
   <msg>
     <xss-vulnerability-character>Feld "{0}" enthält Zeichen, die XSS-Sicherheitslücken öffnen</xss-vulnerability-character>
-<xss-vulnerability-character-wo-label>Your input may contain XSS vulnerability characters</xss-vulnerability-character-wo-label>
+<xss-vulnerability-character-wo-label>Ihre Eingabe kann Zeichen enthalten, die XSS-Attacken erlauben</xss-vulnerability-character-wo-label>
   </msg>
 </UIActionForm>
 
@@ -2524,7 +2524,7 @@
   </UIScriptForm>
  <UINodeTypeList>
    <msg>
-   <no-list>Kein übereinstimmender Knoten gefunden.</no-list>
+   <no-list>Es gibt keinen Knotentyp der Ihrer Suche entspricht.</no-list>
    </msg>
  </UINodeTypeList>
   <UIActionForm>

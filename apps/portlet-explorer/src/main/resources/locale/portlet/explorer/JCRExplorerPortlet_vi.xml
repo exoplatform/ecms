@@ -2096,6 +2096,7 @@
       <access-denied>Truy nhập bị từ chối. Bạn không có quyền để thêm ảnh thu nhỏ cho nút này.</access-denied>
       <confirm-delete>Bạn muốn xóa ảnh thu nhỏ này?</confirm-delete>
       <is-checked-in>Nút này hiện đang được checkin. Vui lòng checkout trước khi thực hiện bất kì thao tác nào.</is-checked-in>
+      <fileName-error>Vui lòng chọn tệp tin để tải lên.</fileName-error>
     </msg>
     <title>
       <remove-thumbnail>Xóa hình thu nhỏ này</remove-thumbnail>

@@ -6,12 +6,12 @@
       <languages>
         <en>Inglês</en>
         <fr>Francês</fr>
-        <ru>Russian</ru>
-        <vi>Vietnamese</vi>
-        <nl>Dutch</nl>
-        <de>German</de>
-        <uk>Ukrainian</uk>
-        <ar>Arabic</ar>
+        <ru>Russo</ru>
+        <vi>Vietnamita</vi>
+        <nl>Holandês</nl>
+        <de>Alemão</de>
+        <uk>Ucraniano</uk>
+        <ar>Árabe</ar>
       </languages>
     </label>
   </View>
@@ -22,13 +22,13 @@
   <Comment>
     <view>
       <label>
-        <postedBy>Last comment posted by</postedBy>
-        <at>at</at>
-        <comments>Comment(s)</comments>
-        <show-comments>Show comments</show-comments>
-        <hide-comments>Hide comments</hide-comments>
-        <comment-by>Commented by</comment-by>
-        <email>Email</email>
+        <postedBy>Último comentário postado por</postedBy>
+        <at>em</at>
+        <comments>Comentários</comments>
+        <show-comments>Mostrar comentários</show-comments>
+        <hide-comments>Ocultar comentários</hide-comments>
+        <comment-by>Comentado por</comment-by>
+        <email>E-mail</email>
         <site>Site</site>
       </label>
     </view>
@@ -40,13 +40,13 @@
   <File>
     <view>
       <label>
-        <not-viewable>This content is not viewable</not-viewable>
-        <using-webDAV>or use WebDAV to access the content</using-webDAV>
-        <file-size-too-big>The content of this file is too big. You should download and open in the client.</file-size-too-big>
-        <webDAV>WebDAV View</webDAV>
+        <not-viewable>Este comentário não está visível.</not-viewable>
+        <using-webDAV>ou utilize WebDAV para acessar o conteúdo</using-webDAV>
+        <file-size-too-big>O contéudo deste arquivo é muito grande. Você deve baixá-lo e abrí-lo no cliente.</file-size-too-big>
+        <webDAV>Ver WebDAV</webDAV>
         <download>Baixar</download>
-        <htmlview>View as HTML</htmlview>
-        <plaintextview>View as Plain text</plaintextview>
+        <htmlview>Ver como HTML</htmlview>
+        <plaintextview>Ver como Texto simples</plaintextview>
       </label>
     </view>
   </File>
@@ -58,11 +58,11 @@
     <view>
       <label>
         <from>De:</from>
-        <to>To:</to>
+        <to>Para:</to>
         <cc>Cc:</cc>
-        <date>Date:</date>
-        <subject>Subject:</subject>
-        <attachment>Attachments:</attachment>
+        <date>Data:</date>
+        <subject>Assunto:</subject>
+        <attachment>Anexos:</attachment>
       </label>
     </view>
   </Mail>
@@ -72,8 +72,8 @@
   <Vote>
     <view>
       <label>
-        <avg-rating>Avg. Rating</avg-rating>
-        <subscription>Votes</subscription>
+        <avg-rating>Avaliação Média</avg-rating>
+        <subscription>Votos</subscription>
       </label>
     </view>
   </Vote>
@@ -83,12 +83,12 @@
   <ListView>
     <view>
       <label>
-        <name>Name</name>
-        <versionable>Versionable</versionable>
-        <exo_owner>Owner</exo_owner>
-        <exo_dateCreated>Date Created</exo_dateCreated>
-        <exo_dateModified>Date Modified</exo_dateModified>
-        <auditing>Auditing</auditing>
+        <name>Nome</name>
+        <versionable>Versionável</versionable>
+        <exo_owner>Proprietário</exo_owner>
+        <exo_dateCreated>Data de Criação</exo_dateCreated>
+        <exo_dateModified>Data de Modificação</exo_dateModified>
+        <auditing>Auditar</auditing>
       </label>
     </view>
   </ListView>
@@ -99,10 +99,10 @@
   <AddMetadata>
     <view>
       <label>
-        <action-name>Action Name</action-name>
-        <lifecycle>Lifecycle</lifecycle>
-        <metadata>Metadata</metadata>
-        <description>Description</description>
+        <action-name>Nome da ação</action-name>
+        <lifecycle>Ciclo de Vida</lifecycle>
+        <metadata>Metadado</metadata>
+        <description>Descrição</description>
       </label>
     </view>
   </AddMetadata>
@@ -113,9 +113,9 @@
   <AutoVersioning>
     <view>
       <label>
-        <action-name>Action Name</action-name>
-        <lifecycle>Lifecycle</lifecycle>
-        <description>Description</description>
+        <action-name>Nome da ação</action-name>
+        <lifecycle>Ciclo de Vida</lifecycle>
+        <description>Descrição</description>
       </label>
     </view>
   </AutoVersioning>
@@ -125,9 +125,9 @@
   <EnableVersioning>
     <view>
       <label>
-        <action-name>Name</action-name>
-        <lifecycle>Lifecycle</lifecycle>
-        <description>Description</description>
+        <action-name>Nome</action-name>
+        <lifecycle>Ciclo de Vida</lifecycle>
+        <description>Descrição</description>
       </label>
     </view>
   </EnableVersioning>
@@ -137,30 +137,30 @@
   <ElementSet>
     <view>
       <label>
-        <not-avaliable>N/A</not-avaliable>
-        <title>Title</title>
-        <creator>Creator</creator>
-        <subject>Subject</subject>
-        <source>Source</source>
-        <contributor>Contributor</contributor>
+        <not-avaliable>N/D</not-avaliable>
+        <title>Título</title>
+        <creator>Criador</creator>
+        <subject>Assunto</subject>
+        <source>Fonte</source>
+        <contributor>Colaborador</contributor>
         <resource-type>Tipo de Recurso</resource-type>
-        <date>Date</date>
-        <publisher>Publisher</publisher>
-        <description>Description</description>
-        <rights>Rights</rights>
-        <relation>Relation</relation>
-        <format>Format</format>
-        <coverage>Coverage</coverage>
-        <identifier>Identifier</identifier>
-        <languages>Languages</languages>
+        <date>Data</date>
+        <publisher>Publicador</publisher>
+        <description>Descrição</description>
+        <rights>Direitos</rights>
+        <relation>Relação</relation>
+        <format>Formato</format>
+        <coverage>Cobertura</coverage>
+        <identifier>Identificador</identifier>
+        <languages>Idiomas</languages>
       </label>
       <action>
-        <add-edit>Add/Edit</add-edit>
-        <cancel>Cancel</cancel>
+        <add-edit>Adicionar/Editar</add-edit>
+        <cancel>Cancelar</cancel>
       </action>
       <tooltip>
-        <cancel>Cancel</cancel>
-        <add-edit>Add/Edit Properties</add-edit>
+        <cancel>Cancelar</cancel>
+        <add-edit>Adicionar/Editar propriedades</add-edit>
       </tooltip>
     </view>
   </ElementSet>
@@ -168,10 +168,10 @@
   <ScriptAction>
     <view>
       <label> 
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node types</nodetypes>
-        <affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
-        <nodeTypeName>Node type names</nodeTypeName>
+        <isDeep>Recursiva</isDeep>
+        <nodetypes>Tipos de Nó</nodetypes>
+        <affectedNodeTypeNames>Tipos de nós afetados</affectedNodeTypeNames>
+        <nodeTypeName>Tipos de nó</nodeTypeName>
       </label> 
     </view>
   </ScriptAction>
@@ -179,10 +179,10 @@
   <AddMetadata>
     <view>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
+        <isDeep>Recursiva</isDeep>
+        <nodetypes>Tipos de nó</nodetypes>
+        <affectedNodeTypeNames>Tipos de nós afetados</affectedNodeTypeNames>
+        <nodeTypeName>Tipos de nós</nodeTypeName>
       </label> 
     </view>
   </AddMetadata>
@@ -190,10 +190,10 @@
   <EnableVersioning>
     <view>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes> 
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
+        <isDeep>Recursiva</isDeep>
+        <nodetypes>Tipos de nó</nodetypes> 
+        <affectedNodeTypeNames>Tipos de nós afetados</affectedNodeTypeNames>
+        <nodeTypeName>Tipos de nós</nodeTypeName>
       </label> 
     </view>
   </EnableVersioning>
@@ -201,10 +201,10 @@
   <AutoVersioning>
     <view>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
-        <nodeTypeName>Node Type Names</nodeTypeName>
+        <isDeep>Recursiva</isDeep>
+        <nodetypes>Tipos de nó</nodetypes>
+        <affectedNodeTypeNames>Tipos de nós afetados</affectedNodeTypeNames>
+        <nodeTypeName>Tipos de nó</nodeTypeName>
       </label> 
     </view>
   </AutoVersioning>
@@ -212,13 +212,13 @@
    <AccessibleMedia>
     <view>
       <label>
-      <Play-audio-description-of-this-video>Audio description</Play-audio-description-of-this-video>
-      <Read-more>Read more</Read-more>
-      <Read-less>Read less</Read-less>
-      <Switch-back-to-original-video>Original video</Switch-back-to-original-video>
+      <Play-audio-description-of-this-video>Descrição do Áudio</Play-audio-description-of-this-video>
+      <Read-more>Ver mais</Read-more>
+      <Read-less>Menos</Read-less>
+      <Switch-back-to-original-video>Vídeo original</Switch-back-to-original-video>
       </label>
       <tooltip>
-      <A-second-media-file-is-available-as-audio-description>A second media file is available as an audio description</A-second-media-file-is-available-as-audio-description>
+      <A-second-media-file-is-available-as-audio-description>Um segundo arquivo de mídia está disponível como uma áudio-descrição</A-second-media-file-is-available-as-audio-description>
       </tooltip>
     </view>
   </AccessibleMedia>

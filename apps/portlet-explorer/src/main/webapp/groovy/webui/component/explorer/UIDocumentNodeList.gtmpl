@@ -86,7 +86,7 @@
     if (uicomponent.isShowMoreButton()) { 
   %>
       
-      <div class="FR MoreButton" onclick="<%=uicomponent.event("More")%>">
+      <div class="pull-right MoreButton" onclick="<%=uicomponent.event("More")%>">
         <%=_ctx.appRes("FileView.label.more")%>
       </div>
       <br/>

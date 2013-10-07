@@ -22,20 +22,20 @@
 <bundle>
   <UIExoStart>
     <tooltip>
-      <homepage>Homepage</homepage>
+      <homepage>Ana sayfa</homepage>
     </tooltip>
   </UIExoStart>
 
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Are you sure you want to delete this item?</confirm-delete>
+      <confirm-delete>Bu öğeyi silmek istediğinizden emin misiniz?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
 
   <Drives>
     <label>
-      <ManagedSites>Sites Management</ManagedSites>
-      <SharedSite>Shared Site</SharedSite>
+      <ManagedSites>Site Yönetimi</ManagedSites>
+      <SharedSite>Paylaşılan Site</SharedSite>
     </label>
   </Drives>
 
@@ -43,61 +43,61 @@
     <label>
       <wcm-view>Web</wcm-view>
       <admin-view>Admin</admin-view>
-      <icon-view>Icons</icon-view>
-      <thumbails-view>Thumbnails</thumbails-view>
-      <list-view>List</list-view>
-      <authoring-view>Authoring</authoring-view>
-      <wcm-category-view>Categories</wcm-category-view>
-      <file-view>File Management View</file-view>
+      <icon-view>Simgeler</icon-view>
+      <thumbails-view>Küçükresimler</thumbails-view>
+      <list-view>Liste</list-view>
+      <authoring-view>Yazma</authoring-view>
+      <wcm-category-view>Kategoriler</wcm-category-view>
+      <file-view>Dosya Yönetimi Görünümü</file-view>
     </label>
   </Views>
 
   <UIActionBar>
     <obtion>
-      <Publication>Publication</Publication>
-      <System>System</System>
+      <Publication>Yayın</Publication>
+      <System>Sistem</System>
     </obtion>
   </UIActionBar>
 
   <UIPageSelectorPanel>
     <header>
       <path>Path</path>
-      <action>Action</action>
+      <action>Eylem</action>
     </header>
     <msg>
-      <child-not-found>No Page Found.</child-not-found>
+      <child-not-found>Sayfa bulunamadı.</child-not-found>
     </msg>
     <title>
-      <select>Select</select>
+      <select>Seçin</select>
     </title>
   </UIPageSelectorPanel>
 
   <UIContentDialogFormPopupWindow>
     <title>
-      <UIContentDialogPreference>Web Content Preference</UIContentDialogPreference>
+      <UIContentDialogPreference>Web İçerik Tercihi</UIContentDialogPreference>
     </title>
   </UIContentDialogFormPopupWindow>
 
   <UITabPane>
     <title>
-      <UIContentBrowsePanelOne>Content Browser</UIContentBrowsePanelOne>
-      <UIContentBrowsePanelMulti>Content Browser</UIContentBrowsePanelMulti>
-      <UIContentBrowsePanelFolder>Folder Browser</UIContentBrowsePanelFolder>
-      <UIContentSearchForm>Content Search Form</UIContentSearchForm>
-      <UIContentSearchResult>Search Result</UIContentSearchResult>
-      <UIContentViewer>Preview Content</UIContentViewer>
-      <WebContentMetadataPopup>Property Selector</WebContentMetadataPopup>
-      <WebContentNodeTypePopup>Nodetype Selector</WebContentNodeTypePopup>
-      <UIPermissionManager>Permission Manager</UIPermissionManager>
+      <UIContentBrowsePanelOne>İçerik Tarayıcı</UIContentBrowsePanelOne>
+      <UIContentBrowsePanelMulti>İçerik Tarayıcı</UIContentBrowsePanelMulti>
+      <UIContentBrowsePanelFolder>Klasör Tarayıcı</UIContentBrowsePanelFolder>
+      <UIContentSearchForm>İçerik Arama Formu</UIContentSearchForm>
+      <UIContentSearchResult>Arama Sonucu</UIContentSearchResult>
+      <UIContentViewer>İçeriği Önizle</UIContentViewer>
+      <WebContentMetadataPopup>Özellik Seçici</WebContentMetadataPopup>
+      <WebContentNodeTypePopup>Düğüm Türü Seçici</WebContentNodeTypePopup>
+      <UIPermissionManager>İzni Yöneticisi</UIPermissionManager>
     </title>
   </UITabPane>
 
   <UIContentBrowsePanelOne>
     <selectBoxValues>
-      <FilterBy>Filter by</FilterBy>
-      <WebContent>Web Content</WebContent>
-      <DMSDocument>Document</DMSDocument>
-      <Media>Media</Media>
+      <FilterBy>Filtre ölçütü</FilterBy>
+      <WebContent>Web İçeriği</WebContent>
+      <DMSDocument>Belge</DMSDocument>
+      <Media>Medya</Media>
     </selectBoxValues>
     <msg>
       <node-checkout>The node is checked out. Please check the node before performing this function.</node-checkout>
@@ -106,31 +106,31 @@
 
   <UIContentBrowsePanelMulti>
     <selectBoxValues>
-      <FilterBy>Filter by</FilterBy>
-      <WebContent>Web Content</WebContent>
-      <DMSDocument>Document</DMSDocument>
-      <Media>Media</Media>
+      <FilterBy>Filtre ölçütü</FilterBy>
+      <WebContent>Web İçeriği</WebContent>
+      <DMSDocument>Belge</DMSDocument>
+      <Media>Medya</Media>
     </selectBoxValues>
   </UIContentBrowsePanelMulti>
 
   <UIContentBrowsePanelOne>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
-      <RightColumn>The content below can be selected.</RightColumn>
+      <LeftColumn>Alt içerik olarak görüntülemek için bir klasör seçin.</LeftColumn>
+      <RightColumn>Aşağıdaki içerik seçilebilir.</RightColumn>
     </label>
   </UIContentBrowsePanelOne>
 
   <UIContentBrowsePanelMulti>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
-      <RightColumn>The content below can be selected.</RightColumn>
+      <LeftColumn>Alt içerik olarak görüntülemek için bir klasör seçin.</LeftColumn>
+      <RightColumn>Aşağıdaki içerik seçilebilir.</RightColumn>
     </label>
   </UIContentBrowsePanelMulti>
 
   <UIContentBrowsePanelFolder>
     <label>
-      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
-      <RightColumn>The folder below can be selected.</RightColumn>
+      <LeftColumn>Alt içerik olarak görüntülemek için bir klasör seçin.</LeftColumn>
+      <RightColumn>Aşağıdaki klasör seçilebilir.</RightColumn>
     </label>
   </UIContentBrowsePanelFolder>
 
@@ -138,26 +138,26 @@
     <label>
       <name>Name</name>
       <add>Add</add>
-      <delete>Delete</delete>
+      <delete>Sil</delete>
     </label>
     <msg>
-      <no-content-found>No content found.</no-content-found>
-      <non-content>You have not selected any content.</non-content>
+      <no-content-found>İçerik bulunamadı.</no-content-found>
+      <non-content>Herhangi bir içerik seçmemiş olabilirsiniz.</non-content>
     </msg>
   </UISelectedContentGrid>
 
   <UICLVContentSelectedGrid>
     <action>
-      <SaveCategories>Save</SaveCategories>
-      <Cancel>Cancel</Cancel>
+      <SaveCategories>Kaydet</SaveCategories>
+      <Cancel>İptal</Cancel>
     </action>
   </UICLVContentSelectedGrid>
 
   <UIContentBrowsePathSelector>
     <header>
       <name>Name</name>
-      <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <publicationstate>Yayın Durumu</publicationstate>
+      <action>Eylem</action>
     </header>
     <msg>
       <child-not-found>No Content Found</child-not-found>
@@ -167,8 +167,8 @@
   <UIContentBrowsePathSelectorFolder>
     <header>
       <name>Name</name>
-      <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <publicationstate>Yayın Durumu</publicationstate>
+      <action>Eylem</action>
     </header>
     <msg>
       <child-not-found>No Folder Found</child-not-found>
@@ -178,7 +178,7 @@
   <UIContentSearchForm>
     <title>
       <Location>Site Name</Location>
-      <SearchByName>Search by Name</SearchByName>
+      <SearchByName>İsme göre arama</SearchByName>
       <Fulltext>A word or phrase in context</Fulltext>
       <Property>Property</Property>
       <Contain>Contain</Contain>
@@ -211,14 +211,14 @@
 
   <WebContentMetadataPopup>
     <title>
-      <UIContentPropertySelector>Property Selector</UIContentPropertySelector>
+      <UIContentPropertySelector>Özellik Seçici</UIContentPropertySelector>
     </title>
   </WebContentMetadataPopup>
 
   <UIContentPropertySelector>
     <action>
       <Add>Add</Add>
-      <Cancel>Cancel</Cancel>
+      <Cancel>İptal</Cancel>
     </action>
     <label>
       <metadataType>Metadata Type</metadataType>
@@ -234,129 +234,129 @@
 
   <UIContentNodeTypeSelector>
     <action>
-      <Save>Save</Save>
-      <Cancel>Cancel</Cancel>
+      <Save>Kaydet</Save>
+      <Cancel>İptal</Cancel>
     </action>
   </UIContentNodeTypeSelector>
 
   <UIContentSearchResult>
     <header>
-      <title>Title</title>
-      <score>Score</score>
-      <publicationstate>Publication State</publicationstate>
-      <action>Action</action>
+      <title>Başlık</title>
+      <score>Puan</score>
+      <publicationstate>Yayın Durumu</publicationstate>
+      <action>Eylem</action>
     </header>
     <title>
-      <Select>Select</Select>
-      <View>View</View>
+      <Select>Seçin</Select>
+      <View>Görünüm</View>
     </title>
     <msg>
-    <template-not-support>Cannot preview this content. The template is not supported</template-not-support>
+    <template-not-support>Bu içeriğin önizlemesini yapamazsınız. Şablon desteklenmiyor</template-not-support>
     </msg>
   </UIContentSearchResult>
 
   <UIContentDialogForm>
     <action>
-      <SaveDraft>Save Draft</SaveDraft>
-      <FastPublish>Fast Publish</FastPublish>
-      <Preferences>Preferences</Preferences>
-      <Close>Close</Close>
+      <SaveDraft>Taslaklara Kaydet</SaveDraft>
+      <FastPublish>Hızlı Yayın</FastPublish>
+      <Preferences>Tercihler</Preferences>
+      <Close>Kapat</Close>
     </action>
     <msg>
-      <access-denied>You do not have permission to add categories to this document.</access-denied>
-      <exception>An error occurred while adding categories to this document.</exception>
-      <non-categories>Categories are wrong. Please select appropriate categories.</non-categories>
+      <access-denied>Bu belgeye kategori eklemek için izniniz yok.</access-denied>
+      <exception>Kategoriler bu belgeye eklenirken bir hata oluştu.</exception>
+      <non-categories>Kategoriler yanlış. Lütfen uygun kategorileri seçin.</non-categories>
     </msg>
   </UIContentDialogForm>
 
   <UIPermissionManager>
     <label>
-      <UIPermissionInputSetWithAction>Permission</UIPermissionInputSetWithAction>
+      <UIPermissionInputSetWithAction>İzni</UIPermissionInputSetWithAction>
       <UIPermissionStringInput/>
-      <UIAccessibleCheckboxInput>Access Right</UIAccessibleCheckboxInput>
-      <UIEditableCheckboxInput>Edit Right</UIEditableCheckboxInput>
+      <UIAccessibleCheckboxInput>Erişim Hakları</UIAccessibleCheckboxInput>
+      <UIEditableCheckboxInput>Düzenleme Hakları</UIEditableCheckboxInput>
     </label>
     <action>
-      <Save>Save</Save>
-      <Clear>Clear</Clear>
+      <Save>Kaydet</Save>
+      <Clear>Temizle</Clear>
       <title>
-        <Edit>Edit</Edit>
-        <Delete>Delete</Delete>
+        <Edit>Düzenle</Edit>
+        <Delete>Sil</Delete>
       </title>
     </action>
   </UIPermissionManager>
 
   <UIPermissionManagerGrid>
     <header>
-      <owner>Permission</owner>
-      <accessible>Accessible</accessible>
-      <editable>Editable</editable>
-      <action>Action</action>
+      <owner>İzni</owner>
+      <accessible>Erişilebilir</accessible>
+      <editable>Düzenlenebilir</editable>
+      <action>Eylem</action>
     </header>
     <msg>
-      <confirm-delete-permission>Are you sure you want to delete this permission?</confirm-delete-permission>
-      <no-permission-remove>You do not have permission.</no-permission-remove>
-      <access-denied>Access denied.</access-denied>
+      <confirm-delete-permission>Bu izin silmek istediğinizden emin misiniz?</confirm-delete-permission>
+      <no-permission-remove>İzniniz yok.</no-permission-remove>
+      <access-denied>Erişim Engellendi.</access-denied>
       <node-locked>The path element {0} or one of its parents is locked.</node-locked>
-      <userOrGroup-required>You must select a user or group.</userOrGroup-required>
-      <checkbox-require>You must set rights.</checkbox-require>
+      <userOrGroup-required>Bir kullanıcı veya grup seçmeniz gerekir.</userOrGroup-required>
+      <checkbox-require>Hakları ayarlamanız gerekir.</checkbox-require>
       <node-checkedin>You must check out first.</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Select User</SelectUser>
-      <SelectMember>Select Member</SelectMember>
-      <AddAny>Add Any Permission</AddAny>
+      <SelectUser>Kullanıcı Seçin</SelectUser>
+      <SelectMember>Üye Seçin</SelectMember>
+      <AddAny>Herhangi bir izin Ekle</AddAny>
     </title>
   </UIPermissionInputSetWithAction>
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>User Selector</UIUserContainer>
+      <UIUserContainer>Kullanıcı Seçici</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
   <UIGroupSelectorPopupWindow>
     <title>
-      <UIGroupMemberSelector>Group Selector</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Grup Seçici</UIGroupMemberSelector>
     </title>
   </UIGroupSelectorPopupWindow>
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select Group</selectGroup>
-      <selectMembership>Select Membership</selectMembership>
+      <selectGroup>Grup Seçin</selectGroup>
+      <selectMembership>Üyelik Seçin</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
   <UIContentDialogPreference>
     <action>
-      <Back>Back</Back>
+      <Back>Geri</Back>
     </action>
   </UIContentDialogPreference>
 
   <ZeroValidator>
     <msg>
-      <Invalid-number>Zero is not accepted in the field '{0}'.</Invalid-number>
+      <Invalid-number>'{0}' alanında sıfır kabul edilmedi.</Invalid-number>
     </msg>
   </ZeroValidator>
 
   <UIDropDownPageTemp>
     <item>
-      <WCMPageConfigs>WCM Page Configurations</WCMPageConfigs>
-      <ColumnPageConfigs>Column Page Configurations</ColumnPageConfigs>
-      <RowPageConfigs>Row Page Configurations</RowPageConfigs>
-      <TabsPageConfigs>Tabs Page Configurations</TabsPageConfigs>
-      <MixPageConfigs>Mix Page Configurations</MixPageConfigs>
+      <WCMPageConfigs>WCM Sayfa Yapılandırmaları</WCMPageConfigs>
+      <ColumnPageConfigs>Sütun Sayfa Yapılandırmaları</ColumnPageConfigs>
+      <RowPageConfigs>Satır Sayfa Yapılandırmaları</RowPageConfigs>
+      <TabsPageConfigs>Sekme Sayfa Yapılandırmaları</TabsPageConfigs>
+      <MixPageConfigs>Mix Sayfa Yapılandırmaları</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
   <UIWizardPageSelectLayoutForm>
     <label>
-      <SingleContentViewer>Single Content Viewer</SingleContentViewer>
-      <ContentListViewer>Content List Viewer</ContentListViewer>
+      <SingleContentViewer>Tek içerik Görüntüleyicisi</SingleContentViewer>
+      <ContentListViewer>İçerik Listesi Görüntüleyicisi</ContentListViewer>
       <Search>Search</Search>
       <Sitemap>Site Map</Sitemap>
       <TwoColumnsLayout>Two-column Layout</TwoColumnsLayout>
@@ -372,11 +372,11 @@
   </UIWizardPageSelectLayoutForm>
 
   <Signin>
-    <welcome>Welcome</welcome>
+    <welcome>Hoş Geldiniz</welcome>
     <login>Login</login>
     <logout>Logout</logout>
-    <language>Change Language</language>
-    <register>Register</register>
+    <language>Dili Değiştir</language>
+    <register>Kayıt Ol</register>
   </Signin>
   <UIDriveForm>
 <label>
@@ -391,7 +391,7 @@
       <GeneralDrives>General Drives</GeneralDrives>
       <GroupDrives>Group Drives</GroupDrives>
       <Private>Private</Private>
-      <Public>Public</Public>
+      <Public>Genel</Public>
       <BackupCenter>Backup Center</BackupCenter>
       <CategorizedDocumentsCenter>Categorized Documents Center</CategorizedDocumentsCenter>
       <CollaborationCenter>Collaboration Center</CollaborationCenter>
@@ -404,8 +404,8 @@
       <SharedUsersSpace>Shared Users Space</SharedUsersSpace>
       <Systemfiles>System Files</Systemfiles>
       <ValidationRequestsDocumentsCenter>Validation Requests Documents Center</ValidationRequestsDocumentsCenter>
-      <ManagedSites>Sites Management</ManagedSites>
-      <SharedSite>Shared Site</SharedSite>
+      <ManagedSites>Site Yönetimi</ManagedSites>
+      <SharedSite>Paylaşılan Site</SharedSite>
     </title>
   </ContentSelector>
   
@@ -428,13 +428,13 @@
   
   <CategoryNavigationTemplate>
   <label>
-  <home>Home</home>
+  <home>Ana sayfa</home>
   </label>
   </CategoryNavigationTemplate>
   
   <Breadcrumb>
   <label>
-  <home>Home</home>
+  <home>Ana sayfa</home>
   </label>  
   </Breadcrumb>
 </bundle>

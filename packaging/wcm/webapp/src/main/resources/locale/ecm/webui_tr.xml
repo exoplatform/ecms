@@ -24,11 +24,11 @@
     <header>
       <categoryName>Category name</categoryName>
       <categoryPath>Category path</categoryPath>
-      <action>Action</action>
+      <action>Eylem</action>
     </header>
     <action>
-      <SaveCategories>Save</SaveCategories>
-      <Cancel>Cancel</Cancel>
+      <SaveCategories>Kaydet</SaveCategories>
+      <Cancel>İptal</Cancel>
     </action>
     <msg>
       <cannot-save>Categories were not saved.</cannot-save>
@@ -45,7 +45,7 @@
   <SelectUserOrGroup>
     <title>
       <UIPermissionUser>Select User</UIPermissionUser>
-      <UIPermissionMembership>Select Membership</UIPermissionMembership>
+      <UIPermissionMembership>Üye Seçin</UIPermissionMembership>
     </title>
   </SelectUserOrGroup>
   <UIPermissionUser>

@@ -435,7 +435,7 @@
 
 		ECMUtils.prototype.generateWebDAVUrl = function (serverInfo, restContextName, repository, workspace, nodePath, mimetype) {
 			my_window = window.open("");
-			var downloadLink = serverInfo + "/" + restContextName + "/jcr/" + repository + "/" + workspace + nodePath;
+			var downloadLink = serverInfo + "/" + restContextName + "/private/jcr/" + repository + "/" + workspace + nodePath;
 			my_window.document.write('<script> window.location.href = "' + downloadLink + '"; </script>');
 		};
 
@@ -1352,7 +1352,7 @@
 		ECMUtils.prototype.getMinimumWidthOfUIListGrid = function (listGrid) {
 		  if (!listGrid) return 0;
 		  var titleTable = gj(listGrid).find("div.titleTable:first")[0];
-		  var uiClearFix = gj(listGrid).find("div.ClearFix")[0];
+		  var uiClearFix = gj(listGrid).find("div.clearfix")[0];
 		  var chidrenItems = gj(uiClearFix).children("div");
 
 		  var minimumWidth = 0;

@@ -2096,6 +2096,7 @@
       <access-denied>Acceso denegado.  No tiene permiso para añadir una viñeta a este nodo.</access-denied>
       <confirm-delete>¿Está seguro que desea eliminar esta miniatura?</confirm-delete>
       <is-checked-in>Este nodo está conectado. Por favor consulte antes de realizar cualquier acción.</is-checked-in>
+      <fileName-error>Please select a file to upload.</fileName-error>
     </msg>
     <title>
       <remove-thumbnail>Remover esta viñeta</remove-thumbnail>

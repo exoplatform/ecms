@@ -16,13 +16,12 @@
  */
 package org.exoplatform.services.cms.jcrext;
 
-import javax.jcr.Node;
-
 import org.apache.commons.chain.Context;
-import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.command.action.Action;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+
+import javax.jcr.Node;
 
 /**
  * Created by The eXo Platform SARL
@@ -46,8 +45,6 @@ public class RemoveNodeAction implements Action {
         return false;
       }
     }
-    //remove dead symlinks
-    Utils.removeDeadSymlinks(node, false);
     return false;
   }
 

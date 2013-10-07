@@ -161,7 +161,7 @@
       <path-invalid>مسار غير صالح</path-invalid>
       <taxonomy-existed>شجرة الفئات موجودة مُسبقا</taxonomy-existed>
       <taxonomy-node-existed>فئة العقدة موجودة مُسبقا</taxonomy-node-existed>
-      <no-permission-add>ليس لك الحق في الإضافة</no-permission-add>
+      <no-permission-add>You do not have the right to add an action.</no-permission-add>
       <not-created-tree>لم يتمّ بعد انشاء شجرة الفئات</not-created-tree>
     </msg>
   </UIActionForm>
@@ -2524,7 +2524,7 @@
   </UIScriptForm>
  <UINodeTypeList>
    <msg>
-   <no-list>ليس هناك أي نوع عقدة تخضع إلى شرط البحث هذا.</no-list>
+   <no-list>There is no node type matching your search.</no-list>
    </msg>
  </UINodeTypeList>
   <UIActionForm>

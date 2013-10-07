@@ -2096,6 +2096,7 @@
       <access-denied>Åtkomst nekad. Du har inte behörighet att lägga till en miniatyrbild till den här noden.</access-denied>
       <confirm-delete>Är du säker på att du vill ta bort denna miniatyr?</confirm-delete>
       <is-checked-in>Den här noden är incheckad. Kolla gärna innan du utför en åtgärd.</is-checked-in>
+      <fileName-error>Please select a file to upload.</fileName-error>
     </msg>
     <title>
       <remove-thumbnail>Ta bort den här miniatyrbilden</remove-thumbnail>

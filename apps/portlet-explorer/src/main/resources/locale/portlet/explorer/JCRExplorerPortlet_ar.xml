@@ -2096,6 +2096,7 @@
       <access-denied>غير مسموح بالدخول. ليس لك الصلاحيّات الكافية لاضافة صورة مصغرة الى هذه العقدة.</access-denied>
       <confirm-delete>هل أنت متأكد من حذف الصورة المصغرة؟</confirm-delete>
       <is-checked-in>هذه العقدة في حالة مراجعة. يُرجى انهاء المراجعة قبل الشروع في أي اجراء آخر.</is-checked-in>
+      <fileName-error>Please select a file to upload.</fileName-error>
     </msg>
     <title>
       <remove-thumbnail>حذف الصورة المصغرة.</remove-thumbnail>

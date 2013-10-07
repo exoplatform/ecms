@@ -135,6 +135,10 @@
     </title>
   </UICLVBasePathPopupWindow>
   <UICLVPresentation>
+    <msg>
+      <confirm-delete>هل أنت متأكد من أنك تريد حذف هذا المحتوى؟</confirm-delete>
+      <delete-content-successfully>تم حذف المحتوى بنجاح.</delete-content-successfully>
+    </msg>
     <label>
       <readmore>قراءة المزيد</readmore>
       <rssFeed>تدفــّـق آر إس إس RSS</rssFeed>

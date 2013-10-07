@@ -161,7 +161,7 @@
       <path-invalid>Esta ruta no es válida.</path-invalid>
       <taxonomy-existed>El árbol de la categoría ya existe.</taxonomy-existed>
       <taxonomy-node-existed>La categoría para este nodo ya existe.</taxonomy-node-existed>
-      <no-permission-add>No tiene el derecho de agregar.</no-permission-add>
+      <no-permission-add>You do not have the right to add an action.</no-permission-add>
       <not-created-tree>El árbol de la categoría no ha sido creado todavía.</not-created-tree>
     </msg>
   </UIActionForm>
@@ -2524,7 +2524,7 @@
   </UIScriptForm>
  <UINodeTypeList>
    <msg>
-   <no-list>No hay ningún tipo de nodo con condición de búsqueda.</no-list>
+   <no-list>There is no node type matching your search.</no-list>
    </msg>
  </UINodeTypeList>
   <UIActionForm>
