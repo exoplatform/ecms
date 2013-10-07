@@ -79,8 +79,8 @@
                           <div class="DeleteIconInfo"><span></span></div>
                        </a>
                      <%} else { %>
-                       <div class="ClearFix">
-                                                <div class="ActionField FL" >
+                       <div class="clearfix">
+                                                <div class="ActionField pull-left" >
                               <a rel="tooltip" data-placement="bottom" title="<%=arrInfor[i].trim()%>" href="javascript:eXo.webui.UIForm.submitEvent('<%=formName%>', '<%=actionInfo[0]%>', '&objectId=<%=arrInfor[i]%>');">
                                 <%=arrInfor[i].trim()%>
                             </a>
@@ -110,7 +110,7 @@
                 if(arrInfor.length > 0) {
                    for(i in 0..arrInfor.length -1) {
                      if(arrInfor[i].length() > 0) { %>
-                      <div class="ClearFix">
+                      <div class="clearfix">
                                               <div class="ActionField" >[ <%=arrInfor[i]%> ]</div>
                                             </div>
                      <%

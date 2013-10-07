@@ -6,17 +6,17 @@
   <Ecm>
     <dialog>
       <label>
-        <end-time>End Time</end-time>
-        <start-time>Start Time</start-time>
-        <lifecycle>Lifecycle</lifecycle>
-        <mimeType>Mime Type</mimeType>
-        <repeat-count>Repeat Count</repeat-count>
-        <time-interval>Time Interval</time-interval>
-        <query-items>Query Items</query-items>
-        <schedule-type>Schedule Type</schedule-type>
-        <remove>Remove Item</remove>
-        <add>Add Item</add>
-        <expand>Expand This</expand>
+        <end-time>Bitiş Saati</end-time>
+        <start-time>Başlangıç Saati</start-time>
+        <lifecycle>Yaşam döngüsü</lifecycle>
+        <mimeType>MIME türü</mimeType>
+        <repeat-count>Tekrar Say</repeat-count>
+        <time-interval>Zaman Aralığı</time-interval>
+        <query-items>Sorgu Öğeleri</query-items>
+        <schedule-type>Zamanlama Türü</schedule-type>
+        <remove>Öğeyi Kaldır</remove>
+        <add>Öğe Ekle</add>
+        <expand>Öğeyi Genişlet</expand>
       </label>
     </dialog>
   </Ecm>
@@ -24,12 +24,12 @@
   <UIDocumentForm>
     <label>
       <title>#{word.title}</title>
-      <link>Link</link>
+      <link>Bağlantı</link>
       <contentHtml>#{word.content}</contentHtml>
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
-      <name>Name</name>
-    <categories>Categories</categories>
+      <name>Ad</name>
+    <categories>Kategoriler</categories>
     </label>
   </UIDocumentForm>
  
@@ -39,8 +39,8 @@
   <HtmlFile>
     <dialog>
       <label>
-        <name>Name</name>
-        <content>Content</content>
+        <name>Ad</name>
+        <content>İçerik</content>
       </label>
     </dialog>
   </HtmlFile>
@@ -52,10 +52,10 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <categories>Categories</categories>
+        <categories>Kategoriler</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
         <content>#{word.content}</content>
-        <re-upload>The file already exists. You can delete it and upload another file.</re-upload>
+        <re-upload>Dosya zaten var. Dosyayı silin ve başka bir dosya yükleyin.</re-upload>
       </label>
     </dialog>
   </File>
@@ -65,9 +65,9 @@
       <description>#{word.description}</description>
       <port>Port</port>
       <userName>#{word.userName}</userName>
-      <password>Password</password>
-      <link>Link</link>
-      <to>Send Mail To</to>
+      <password>Şifre</password>
+      <link>Bağlantı</link>
+      <to>E-Posta gönder</to>
       <actionName>#{word.name}</actionName>
     </label>
   </UIActionForm>
@@ -76,9 +76,9 @@
       <description>#{word.description}</description>
       <port>Port</port>
       <userName>#{word.userName}</userName>
-      <password>Password</password>
-      <link>Link</link>
-      <to>Send Mail To</to>
+      <password>Şifre</password>
+      <link>Bağlantı</link>
+      <to>E-Posta gönder</to>
       <actionName>#{word.name}</actionName>
     </label>
   </EditFormAction>
@@ -89,7 +89,7 @@
   <AddMetadata>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>Kimlik</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <metadata>Metadata</metadata>
@@ -104,7 +104,7 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>Kimlik</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
@@ -112,7 +112,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron expression</cron-expression>
+        <cron-expression>Cron ifade</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -123,10 +123,10 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>Kimlik</id>
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
-        <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
+        <schedule-type>#{Ecm.dialog.label.schedule-türü}</schedule-type>
         <start-time>#{Ecm.dialog.label.start-time}</start-time>
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
@@ -143,20 +143,20 @@
     <dialog>
       <label>
         <title>#{word.title}:</title>
-        <creator>Creator:</creator>
+        <creator>Hazırlayan:</creator>
         <subject>#{word.subject}:</subject>
-        <source>Source:</source>
-        <contributor>Contributor:</contributor>
-        <resource-type>Resource Type:</resource-type>
+        <source>Kaynak:</source>
+        <contributor>Katılımcı:</contributor>
+        <resource-type>Kaynak Türü:</resource-type>
         <date>#{word.date}:</date>
-        <publisher>Publisher:</publisher>
+        <publisher>Yayımcı:</publisher>
         <description>#{word.description}:</description>
-        <rights>Rights:</rights>
-        <relation>Relation:</relation>
+        <rights>Haklar:</rights>
+        <relation>İlişki:</relation>
         <format>#{word.format}:</format>
-        <coverage>Coverage:</coverage>
-        <identifier>Identifier:</identifier>
-        <language>Language:</language>
+        <coverage>Kapsam:</coverage>
+        <identifier>Tanımlayıcı:</identifier>
+        <language>Dil:</language>
       </label>
     </dialog>
   </ElementSet>
@@ -167,8 +167,8 @@
   <Actionable>
     <dialog>
       <label>
-        <primary-type>Primary Type</primary-type>
-        <mixin-types>Mixin Types</mixin-types>
+        <primary-type>Birincil Türü</primary-type>
+        <mixin-types>Mixin Türü</mixin-types>
       </label>
     </dialog>
   </Actionable>
@@ -179,10 +179,10 @@
   <Move>
     <dialog>
       <label>
-        <destination-workpsace>Destination Workspace</destination-workpsace>
-        <destination-path>Destination Path</destination-path>
-        <primary-type>Primary Type</primary-type>
-        <mixin-types>Mixin Types</mixin-types>
+        <destination-workpsace>Hedef Çalışma Alanı</destination-workpsace>
+        <destination-path>Hedef Yolu</destination-path>
+        <primary-type>Birincil Türü</primary-type>
+        <mixin-types>Mixin Türü</mixin-types>
       </label>
     </dialog>
   </Move>
@@ -192,8 +192,8 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>Start Publication</start-publication>
-        <end-publication>End Publication</end-publication>
+        <start-publication>Yayını Başlat</start-publication>
+        <end-publication>Yayını Bitir</end-publication>
       </label>
     </dialog>
   </Published>
@@ -224,7 +224,7 @@
   <RssEnable>
     <dialog>
       <label>
-        <title>Title</title>
+        <title>Başlık</title>
         <summary>#{word.summary}</summary>
       </label>
     </dialog>
@@ -236,11 +236,11 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>Version History</version-history>
-        <base-version>Base Version</base-version>
-        <is-checked-out>Is Checked out</is-checked-out>
-        <predecessors>Predecessors</predecessors>
-        <merge-failed>Merge Failed</merge-failed>
+        <version-history>Sürüm geçmişi</version-history>
+        <base-version>Temel sürüm</base-version>
+        <is-checked-out>Kullanıma alındı</is-checked-out>
+        <predecessors>Öncel</predecessors>
+        <merge-failed>Birleştirme başarısız oldu</merge-failed>
         <uuid>UUID</uuid>
       </label>
     </dialog>
@@ -253,9 +253,9 @@
     <dialog>
       <label>
         <name>Name</name>
-        <autoload>Auto Load</autoload>
-        <minetype>MIME Type</minetype>
-        <content>Content</content>
+        <autoload>Otomatik Yükleme</autoload>
+        <minetype>MIME Türü</minetype>
+        <content>İçerik</content>
       </label>
     </dialog>
   </ResouceContainer>
@@ -264,7 +264,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>The email address is invalid.</Invalid-input>
+      <Invalid-input>E-posta adresi geçersizdir.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
@@ -285,9 +285,9 @@
   <ScriptAction>
     <dialog>
       <label>
-        <id>Id</id>
+        <id>Kimlik</id>
         <name>Name</name>
-        <lifecycle>Lifecycle</lifecycle>
+        <lifecycle>Yaşam döngüsü</lifecycle>
         <homePath>Home Path</homePath>
         <targetWorkspace>Target Workspace</targetWorkspace>
         <targetPath>Target Path</targetPath>
@@ -308,33 +308,33 @@
 <no>No</no>
 <yes>Yes</yes>
 <true>True</true>
-<false>False</false>
-<Electronic>Electronic</Electronic>
-<Paper>Paper</Paper>
-<NONE>None</NONE>
-<CLASSIFIED>Classified</CLASSIFIED>
-<UNCLASSIFIED>Unclassified</UNCLASSIFIED>
-<NOCONTRACT>No Contract</NOCONTRACT>
-<one-minute>One Minute</one-minute>
-<hourly>Hourly</hourly>
-<daily>Daily</daily>
-<quarterly>Quarterly</quarterly>
-<yearly>Yearly</yearly>
-<ten-years>Ten Years</ten-years>
-<read>User Action</read>
-  <schedule>Scheduler</schedule>
-  <node_added>Content Addition</node_added>
-  <node_removed>Content Removal</node_removed>
-  <property_added>Property Addition</property_added>
-  <property_removed>Property Removal</property_removed>
-  <property_changed>Property Modification</property_changed>
+<false>Yanlış</false>
+<Electronic>Elektronik</Electronic>
+<Paper>Kağıt</Paper>
+<NONE>Hiçbiri</NONE>
+<CLASSIFIED>Gizli Bilgidir</CLASSIFIED>
+<UNCLASSIFIED>Gizli Bilgi Değildir</UNCLASSIFIED>
+<NOCONTRACT>Sözleşme yok</NOCONTRACT>
+<one-minute>Bir Dakika</one-minute>
+<hourly>Saatlik</hourly>
+<daily>Günlük</daily>
+<quarterly>Üç Aylik</quarterly>
+<yearly>Yıllık</yearly>
+<ten-years>On Yıllık</ten-years>
+<read>Kullanıcı Eylemi</read>
+  <schedule>Zamanlayıcı</schedule>
+  <node_added>İçerik Ekleme</node_added>
+  <node_removed>İçerik Kaldırma</node_removed>
+  <property_added>Özellik Ekleme</property_added>
+  <property_removed>Özellik Kaldırma</property_removed>
+  <property_changed>Özellik Değişikliği</property_changed>
 
   <ScriptAction>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Derin</isDeep>
+        <nodetypes>Düğüm Türüleri</nodetypes>
+        <affectedNodeTypeNames>Etkilenen Düğüm Türleri</affectedNodeTypeNames>
       </label>
     </dialog>
   </ScriptAction>
@@ -342,9 +342,9 @@
   <AddMetadata>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Derin</isDeep>
+        <nodetypes>Düğüm Türüleri</nodetypes>
+        <affectedNodeTypeNames>Etkilenen Düğüm Türleri</affectedNodeTypeNames>
       </label>
     </dialog>
   </AddMetadata>
@@ -352,9 +352,9 @@
   <EnableVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Derin</isDeep>
+        <nodetypes>Düğüm Türüleri</nodetypes>
+        <affectedNodeTypeNames>Etkilenen Düğüm Türleri</affectedNodeTypeNames>
       </label>
     </dialog>
   </EnableVersioning>
@@ -362,9 +362,9 @@
   <AutoVersioning>
     <dialog>
       <label>
-        <isDeep>Is Deep</isDeep>
-        <nodetypes>Node Types</nodetypes>
-        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+        <isDeep>Derin</isDeep>
+        <nodetypes>Düğüm Türüleri</nodetypes>
+        <affectedNodeTypeNames>Etkilenen Düğüm Türleri</affectedNodeTypeNames>
       </label>
     </dialog>
   </AutoVersioning>
@@ -372,9 +372,9 @@
   <AccessibleMedia>
   <dialog>
   <label>
-  <captions>Captions</captions>
-<audioDescription>Audio description</audioDescription>
-<alternativeText>Alternative text</alternativeText>
+  <captions>Resim Yazıları</captions>
+<audioDescription>Sesli açıklama</audioDescription>
+<alternativeText>Alternatif metin</alternativeText>
 </label>
 </dialog>
 <help>

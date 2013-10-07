@@ -5,7 +5,7 @@
 	currentTreeNode = currentTreeNode == null ? _ctx.appRes("UIPublishingPanel.currentNode.none") : currentTreeNode;
 %>
 <div class="WCMPublication">
-	<div class="PanelContainer ClearFix">
+	<div class="PanelContainer clearfix">
 		<div class="PanelLeft">
 			<dir class="Title"><%= _ctx.appRes("UIPublishingPanel.panelLeft.title"); %></dir>
 			<div class="SubTitle">
@@ -19,7 +19,7 @@
 		
 	</div>
 	
-	<div class="PanelContainer ClearFix">
+	<div class="PanelContainer clearfix">
 		<div class="PanelLeft">
 			<div class="PanelBox">
 				<div class="PanelContent">

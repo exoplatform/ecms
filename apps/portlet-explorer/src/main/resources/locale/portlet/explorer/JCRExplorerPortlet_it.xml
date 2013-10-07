@@ -2096,6 +2096,7 @@
       <access-denied>Accesso negato. Non hai permessi di aggiungere anteprime al nodo.</access-denied>
       <confirm-delete>Sei sicuro di voler rimuovere l'anteprima dal nodo?</confirm-delete>
       <is-checked-in>Questo nodo Ãš in checked in. Fare il check oput prima di eseguire qualsiasi azione.</is-checked-in>
+      <fileName-error>Please select a file to upload.</fileName-error>
     </msg>
     <title>
       <remove-thumbnail>Rimuovi questa anteprima</remove-thumbnail>

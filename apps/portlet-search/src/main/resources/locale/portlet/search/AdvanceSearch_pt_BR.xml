@@ -2,92 +2,92 @@
 <bundle>
   <UIDefaultSearchForm>
     <label>
-      <keyword>Keyword</keyword>
+      <keyword>Palavra chave</keyword>
       <portal>Portal</portal>
-      <Page>Page</Page>
-      <Document>Document</Document>
+      <Page>Página</Page>
+      <Document>Documento</Document>
     </label>
     <action>
-      <Search>Search</Search>
+      <Search>Buscar</Search>
     </action>
   </UIDefaultSearchForm>
 
   <UIDefaultSearchResult>
     <label>
-      <Page>Page</Page>
-      <Document>Document</Document>
-      <DocumentAndPage>Document and Page</DocumentAndPage>
-      <documentandpage>Document and Page</documentandpage>
-      <resutlsCaption>Results</resutlsCaption>
-      <ofAboutCaption>of about</ofAboutCaption>
-      <forCaption>for</forCaption>
-      <timeUnitCaption>seconds</timeUnitCaption>
-      <similar>Pages where the same content appears</similar>
+      <Page>Página</Page>
+      <Document>Documento</Document>
+      <DocumentAndPage>Documento e Página</DocumentAndPage>
+      <documentandpage>Documento e Página</documentandpage>
+      <resutlsCaption>Resultados</resutlsCaption>
+      <ofAboutCaption>de cerca de</ofAboutCaption>
+      <forCaption>para</forCaption>
+      <timeUnitCaption>segundos</timeUnitCaption>
+      <similar>Páginas onde o mesmo conteúdo aparece</similar>
       <editor>Editor</editor>
     </label>
     <action>
-      <edit>Edit</edit>
+      <edit>Editar</edit>
     </action>
     <msg>
-      <your-search>Your search</your-search>
-      <did-not-match>did not match any</did-not-match>
-      <new-suggestion>suggestion</new-suggestion>
+      <your-search>Sua busca</your-search>
+      <did-not-match>não corresponde a nenhum</did-not-match>
+      <new-suggestion>Sugestão</new-suggestion>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>
     <label>
-      <itemsPerPageSelector>Items per Page</itemsPerPageSelector>
-      <searchFormSelector>Search Form Template</searchFormSelector>
-      <searchResultSelector>Search Result Template</searchResultSelector>
-      <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
-      <searchPageLayoutSelector>Search Page Layout Template</searchPageLayoutSelector>
-      <searchResultBasePathInputSetAction>Base Path</searchResultBasePathInputSetAction>
-      <pageMode>Page Mode</pageMode>
+      <itemsPerPageSelector>Itens por página</itemsPerPageSelector>
+      <searchFormSelector>Modelo de formulário de busca</searchFormSelector>
+      <searchResultSelector>Modelo de resultado de busca</searchResultSelector>
+      <searchPaginatorSelector>Modelo de paginador de busca</searchPaginatorSelector>
+      <searchPageLayoutSelector>Modelo de página de busca</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Caminho de base</searchResultBasePathInputSetAction>
+      <pageMode>Modo página</pageMode>
       <option>
-        <none>None</none>
-        <more>More</more>
-        <pagination>Pagination</pagination>
+        <none>Nenhum</none>
+        <more>Mais</more>
+        <pagination>Paginação</pagination>
       </option>
     </label>
     <action>
-      <Save>Save</Save>
-      <Cancel>Cancel</Cancel>
+      <Save>Salvar</Save>
+      <Cancel>Cancelar</Cancel>
     </action>
   </UISearchPageLayoutManager>
   <searchResultBasePathInputSetAction>
     <title>
-      <SelectBasePath>Select Base Path</SelectBasePath>
+      <SelectBasePath>Selecione o caminho de Base</SelectBasePath>
     </title>
   </searchResultBasePathInputSetAction>  
   <UISearchForm>  
    <message>
-     <keyword-not-support>The keyword is invalid. Some characters are not recognized.</keyword-not-support>
-     <not-checked>Please select a search type.</not-checked>
-     <keyword-not-empty>Please enter a keyword.</keyword-not-empty>
+     <keyword-not-support>A palavra-chave está inválida. Alguns caracteres não foram reconhecidos.</keyword-not-support>
+     <not-checked>Por favor, selecione um tipo de busca.</not-checked>
+     <keyword-not-empty>Insira uma palavra chave.</keyword-not-empty>
    </message>
   </UISearchForm>
   <UIPaginatorDefault>
     <label>
       <next>Próximo</next>
       <previous>Anterior</previous>
-      <more>More</more>
+      <more>Mais</more>
     </label>
   </UIPaginatorDefault>
   <UISearchPageLayoutDefault>
     <label>
-      <quickEditTitle>Quick Edit</quickEditTitle>
+      <quickEditTitle>Edição rápida</quickEditTitle>
     </label>
   </UISearchPageLayoutDefault>
   <searchOption>
     <label>
-      <pageCheckBox>in Pages</pageCheckBox>
-      <documentCheckBox>in Content</documentCheckBox>
+      <pageCheckBox>nas páginas</pageCheckBox>
+      <documentCheckBox>nos conteúdos</documentCheckBox>
     </label>
   </searchOption>
   <ViewMode>
     <label>
       <option>
-        <all>search all sites</all>
+        <all>buscar todos os sites</all>
       </option>  
     </label>  
   </ViewMode>

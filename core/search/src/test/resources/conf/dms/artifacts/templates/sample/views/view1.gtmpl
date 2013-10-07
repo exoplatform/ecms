@@ -182,7 +182,7 @@
 		</div>
 		<!-- div for Content -->
 		<!-- div for  relation and attackments -->
-		<div style="overflow: hidden;" class=" ClearFix">
+		<div style="overflow: hidden;" class=" clearfix">
 			<div class="LableLeftDescription">
 				<div class="TitleBG" >
 					<label class="text" style="padding-left: 5px;"><%=_ctx.appRes("Sample.view.label.relation")%>: </label>
@@ -210,7 +210,7 @@
 					<div style="width: 100%; height: 20px;"> </div>
 			  <%}%>
 			</div>
-			<div class="LableRightDescription ClearFix">
+			<div class="LableRightDescription clearfix">
 				<div class="TitleBG" >
 					<label class="text" style="padding-left: 5px;"><%=_ctx.appRes("Sample.view.label.attachment")%>: </label>
 				</div>

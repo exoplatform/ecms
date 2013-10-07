@@ -3,7 +3,7 @@
 	def currentPage = uicomponent.getCurrentPage();
 %>
 
-<div class="UIPageIterator ClearFix">
+<div class="UIPageIterator clearfix">
 <% if(totalPage > 1) {%> 
 	<% if(currentPage + 10 <= totalPage) {%>        
 	<a href="<%=uicomponent.event("ShowPage","${currentPage + 10}")%>" class="Icon NextTopPageIcon" rel="tooltip" data-placement="bottom" title="<%=_ctx.appRes("UIPageIterator.label.nextTenPages")%>"></a>

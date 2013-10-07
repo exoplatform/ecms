@@ -161,7 +161,7 @@
       <path-invalid>Đường dẫn không hợp lệ.</path-invalid>
       <taxonomy-existed>Cây danh mục đã tồn tại.</taxonomy-existed>
       <taxonomy-node-existed>Node danh mục đã tồn tại.</taxonomy-node-existed>
-      <no-permission-add>Bạn không có quyền thêm mới.</no-permission-add>
+      <no-permission-add>You do not have the right to add an action.</no-permission-add>
       <not-created-tree>Cây phân loại chưa được khởi  tạo.</not-created-tree>
     </msg>
   </UIActionForm>
@@ -2524,7 +2524,7 @@
   </UIScriptForm>
  <UINodeTypeList>
    <msg>
-   <no-list>Không có bất kỳ kiểu nút nào thỏa mãn điều kiện.</no-list>
+   <no-list>Không có kiểu nút thỏa mãn điều kiện tìm kiếm.</no-list>
    </msg>
  </UINodeTypeList>
   <UIActionForm>

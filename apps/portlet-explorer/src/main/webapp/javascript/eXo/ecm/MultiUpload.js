@@ -431,7 +431,7 @@
 		var info = eXo.ecm.MultiUpload.document.createElement("div");
 		info.id = "file" + fileID;
 		info.innerHTML = decodeURIComponent(cleanName(file.name));
-		info.className = "fileName FL";
+		info.className = "fileName pull-left";
 		if (eXo.ecm.MultiUpload.pathMap[fileID] != undefined) {
 			info.title = eXo.ecm.MultiUpload.IN + " " + eXo.ecm.MultiUpload.driveTitle + (eXo.ecm.MultiUpload.pathMap[fileID].indexOf("/") == 0 ? "" : "/") + 
 						   eXo.ecm.MultiUpload.pathMap[fileID];

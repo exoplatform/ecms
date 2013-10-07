@@ -161,7 +161,7 @@
       <path-invalid>Percorso non valido.</path-invalid>
       <taxonomy-existed>L'albero delle categorie esiste già.</taxonomy-existed>
       <taxonomy-node-existed>Il nodo categoria esiste già.</taxonomy-node-existed>
-      <no-permission-add>Non hai il permesso di Aggiunta.</no-permission-add>
+      <no-permission-add>You do not have the right to add an action.</no-permission-add>
       <not-created-tree>L'albero delle categorie non è ancora stato creato.</not-created-tree>
     </msg>
   </UIActionForm>
@@ -2524,7 +2524,7 @@
   </UIScriptForm>
  <UINodeTypeList>
    <msg>
-   <no-list>Non c'è alcun tipo di nodo che corrisponde alle condizioni di ricerca.</no-list>
+   <no-list>There is no node type matching your search.</no-list>
    </msg>
  </UINodeTypeList>
   <UIActionForm>

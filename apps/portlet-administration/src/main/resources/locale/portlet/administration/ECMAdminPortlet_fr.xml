@@ -161,7 +161,7 @@
       <path-invalid>Le chemin est incorrect.</path-invalid>
       <taxonomy-existed>Un arbre de catégories du même nom existe déjà</taxonomy-existed>
       <taxonomy-node-existed>Ce noeud de taxonomie existe déjà.</taxonomy-node-existed>
-      <no-permission-add>Vous n'avez pas les droits d'ajout.</no-permission-add>
+      <no-permission-add>Vous n'avez pas le droit d'ajouter une action.</no-permission-add>
       <not-created-tree>L'arbre de catégories n'a pas encore été créé.</not-created-tree>
 		</msg>
 	</UIActionForm>
@@ -2524,7 +2524,7 @@
  </UIScriptForm>
  <UINodeTypeList>
    <msg>
-   <no-list>Aucun type de noeud correspondant à cette recherche.</no-list>
+   <no-list>Il n'y a aucun type de nœud correspondant à votre recherche.</no-list>
    </msg>
  </UINodeTypeList>
  <UIActionForm>

@@ -23,7 +23,7 @@
     <legend class="Legend" style="max-width: 600px;"><div rel="tooltip" data-placement="bottom" title="$verName" style="overflow: hidden;"><%=_ctx.appRes("UIPublicationPanel.status.version")%>: $verName </div></legend>
     <div class="StatusAction">
       <div class="StatusTitle"><%=_ctx.appRes("UIPublicationPanel.status.title")%>: </div>
-      <div class="StatusLink ClearFix">
+      <div class="StatusLink clearfix">
         <%
           if (isCurrentRevision("enrolled", currentRevision)) {
             %>

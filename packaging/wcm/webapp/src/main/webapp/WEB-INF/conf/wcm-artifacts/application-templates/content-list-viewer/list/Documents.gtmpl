@@ -24,7 +24,7 @@
 			def isShowRssLink = uicomponent.isShowRssLink();
 		  def isShowHeader = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_HEADER) && header != null && header.trim().length() != 0;
 			%>
-		  <div class="TopBoxHeader ClearFix">
+		  <div class="TopBoxHeader clearfix">
 				<%	
 			  if (isShowHeader || isShowRssLink) {
 					%>
@@ -85,17 +85,17 @@
 								def itemIcon = uicomponent.getContentIcon(viewNode);
 								
       					%>
-                <%=uicomponent.addQuickEditDiv("Column1 ClearFix", viewNode)%>
+                <%=uicomponent.addQuickEditDiv("Column1 clearfix", viewNode)%>
                 <%
       			    	if (isShowImage) {
                     %><a class="Image" title="$itemName"><img alt="$itemName" rel="tooltip" data-placement="bottom" title="$itemName" src="$imgSrc" /></a><%
 											}
 											%>
 												<div class="Content">
-													<div class="ClearFix">
+													<div class="clearfix">
 													<%
 													if (isShowTitle) {
-														%><div title="$itemName" class="$itemIcon FL"></div><%
+														%><div title="$itemName" class="$itemIcon pull-left"></div><%
 														if (isShowLink) {
 															%><div class="Title"><a onclick="javascript:window.open('$itemWebdavLink');" style="cursor:pointer" rel="tooltip" data-placement="bottom" title="$itemName">$itemName</a></div><%
 														} else {
@@ -135,7 +135,7 @@
 				    		<%
 				  		}
 				  	%>
-					<div class="CaptionFunc ClearFix">
+					<div class="CaptionFunc clearfix">
 					<%
 		  				String labelRefreshAction = _ctx.appRes("UICLVPresentation.action.refresh");
 		  				def isShowRefresh = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_REFRESH_BUTTON);

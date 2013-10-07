@@ -350,7 +350,7 @@
 						  <div class="TopLeftArticleFrame">
 						    <div class="TopRightArtictleFrame">
 						      <div class="TopCenterArticleFrame">
-						        <div class="ArticleField ClearFix">
+						        <div class="ArticleField clearfix">
 						              <div class="FieldIcon SummaryIcon"><span></span></div>
 						              <div class="FieldLabel"><%=_ctx.appRes("Article.view.label.summary")%> :</div>
 						              
@@ -383,7 +383,7 @@
 						  <div class="TopLeftArticleFrame">
 						    <div class="TopRightArtictleFrame">
 						      <div class="TopCenterArticleFrame">
-						        <div class="ArticleField ClearFix">
+						        <div class="ArticleField clearfix">
 					              <div class="FieldIcon ContentIcon"><span></span></div>
 					              <div class="FieldLabel"><%=_ctx.appRes("Article.view.label.content")%> :</div>
 					              
@@ -406,8 +406,8 @@
 					                <%}%>
 				                </div>
 											</div>			                
-			                <div class="ContainerLinks ClearFix">
-			                	<div class="ContentLinks ClearFix">
+			                <div class="ContainerLinks clearfix">
+			                	<div class="ContentLinks clearfix">
 				                  <div class="FieldIcon LinksIcon"><span></span></div>
 					              <div class="FieldLabel"><%=_ctx.appRes("Article.view.label.link")%> :</div>
 					              
@@ -447,7 +447,7 @@
 						  <div class="TopLeftArticleFrame">
 						    <div class="TopRightArtictleFrame">
 						      <div class="TopCenterArticleFrame">
-					          <div class="ArticleField ClearFix">
+					          <div class="ArticleField clearfix">
 					              <div class="FieldIcon AttachmentsIcon"><span></span></div>
 					              <div class="FieldLabel"><%=_ctx.appRes("Article.view.label.attachment")%> :</div>
 						          
@@ -466,7 +466,7 @@
 		  									String wsName = att.getSession().getWorkspace().getName() ;
 		  									String attPath = att.getPath() + "&workspaceName=" + wsName ;
 								%>
-										<div class="AttachmentsContainer ClearFix">	
+										<div class="AttachmentsContainer clearfix">	
 							              <div class="AttachmentsContentIcon">
 							                 <a href="<%=uicomponent.event("ChangeNode", attPath)%>" rel="tooltip" data-placement="bottom" title="<%=att.getName()%>"><%=att.getName()%></a>
 							              </div>

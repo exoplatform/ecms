@@ -55,6 +55,7 @@ import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
@@ -223,13 +224,16 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
    * {@inheritDoc}
    */
   public boolean hasTaxonomyTree(String taxonomyName) throws RepositoryException {
+    SessionProvider systemProvider = SessionProvider.createSystemProvider();
     try {
-      Node taxonomyTree = getRootTaxonomyDef().getNode(taxonomyName);
+      Node taxonomyTree = getRootTaxonomyDef(systemProvider).getNode(taxonomyName);
       return taxonomyTree.isNodeType(EXOSYMLINK_LINK);
     } catch (RepositoryConfigurationException e1) {
       throw new RepositoryException(e1);
     } catch (PathNotFoundException e2) {
       //ignore this exception
+    } finally {
+      systemProvider.close();
     }
     return false;
   }
@@ -242,11 +246,14 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
     if (hasTaxonomyTree(taxonomyTree.getName())) {
       throw new TaxonomyAlreadyExistsException();
     }
+    SessionProvider systemProvider = SessionProvider.createSystemProvider();
     try {
-      Node taxonomyDef = getRootTaxonomyDef();
+      Node taxonomyDef = getRootTaxonomyDef(systemProvider);
       linkManager_.createLink(taxonomyDef, EXOSYMLINK_LINK, taxonomyTree, taxonomyTree.getName());
     } catch (RepositoryConfigurationException e) {
       throw new RepositoryException(e);
+    } finally {
+      systemProvider.close();
     }
   }
 
@@ -633,6 +640,24 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
     return permissionsMap;
   }
 
+  /**
+   * Get node as root of all taxonomy in the repository that is in TAXONOMIES_TREE_DEFINITION_PATH
+   * @param systemProvider System Provider
+   * @return
+   * @throws RepositoryException
+   * @throws RepositoryConfigurationException
+   */
+  private Node getRootTaxonomyDef(SessionProvider systemProvider) throws RepositoryException,
+      RepositoryConfigurationException {
+    ManageableRepository manaRepository = repositoryService_.getCurrentRepository();
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
+    Session systemSession = systemProvider.getSession(dmsRepoConfig.getSystemWorkspace(), manaRepository);
+    String taxonomiesTreeDef = nodeHierarchyCreator_
+        .getJcrPath(BasePath.TAXONOMIES_TREE_DEFINITION_PATH);
+    Node taxonomyRootDef = (Node) systemSession.getItem(taxonomiesTreeDef);
+    return taxonomyRootDef;
+  }
+  
   /**
    * Get node as root of all taxonomy in the repository that is in TAXONOMIES_TREE_DEFINITION_PATH
    * @return

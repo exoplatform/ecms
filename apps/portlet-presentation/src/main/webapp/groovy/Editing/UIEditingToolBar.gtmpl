@@ -9,7 +9,7 @@ if (Utils.isShowQuickEdit()) { %>
 <% } %>
 <div class="UISiteAdminToolBar">
 	<% uiform.begin(); %>
-	<div class="ClearFix">
+	<div class="clearfix">
 		<div class="LeftSelect">
 	    	<div>
 		    	<%uiform.renderChild(uiform.EDITING_OPTIONS); %>

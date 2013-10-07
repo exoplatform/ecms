@@ -72,7 +72,7 @@
     <div><% renderDCValues("dc:title") %></div>
   </div>
 
-  <div class="ClearFix">
+  <div class="clearfix">
     <div style="float: left; width:44%;">
       <div class="ContentBlock">
         <div class="Title">
@@ -92,7 +92,7 @@
     
   </div>
 
-  <div class="ClearFix">
+  <div class="clearfix">
     <div style="float: left; width:44%">
       <div class="ContentBlock">
         <div class="Title">
@@ -112,7 +112,7 @@
                  
   </div>
 
-  <div class="ClearFix">
+  <div class="clearfix">
     <div style="float: left; width:44%">
       <div class="ContentBlock">
         <div class="Title">
@@ -132,7 +132,7 @@
                
   </div>
 
-  <div class="ClearFix">
+  <div class="clearfix">
     <div style="float: left; width:44%">
       <div class="ContentBlock">
         <div class="Title">
@@ -152,7 +152,7 @@
            
   </div>
 
-  <div class="ClearFix">
+  <div class="clearfix">
     <div style="float: left; width:44%">
       <div class="ContentBlock">
         <div class="Title">
@@ -172,7 +172,7 @@
           
   </div>
 
-  <div class="ClearFix">
+  <div class="clearfix">
     <div style="float: left; width:44%">
       <div class="ContentBlock">
         <div class="Title">
@@ -192,7 +192,7 @@
            
   </div>
 
-  <div class="ClearFix">
+  <div class="clearfix">
     <div style="float: left; width:44%">
       <div class="ContentBlock">
         <div class="Title">

@@ -67,7 +67,7 @@
 <!-- abort all popup-->
 <div id="uiMultiUploadAbortAllPopup" class="UIPopupWindow uiPopup UIDragObject NormalStyle" 
   exo:minwidth="200" exo:minheight="200" style="display: none; z-index: 9; visibility: visible; top: 538px; left: 408px;">
-  <div class="popupHeader ClearFix">
+  <div class="popupHeader clearfix">
     <a id="uiMultiUploadAbortAllPopupClosePopup" class="uiIconClose pull-right" title="Close Window"></a>
     <span class="PopupTitle popupTitle"><%=getMsg("AbortAll")%><br/></span>
   </div><!-- of popupHeader -->
