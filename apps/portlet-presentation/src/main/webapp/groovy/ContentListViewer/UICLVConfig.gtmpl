@@ -58,11 +58,11 @@
 													<div class="control-group">  
 													  <label class="control-label"><%=uicomponent.getLabel(uicomponent.DISPLAY_MODE_FORM_RADIO_BOX_INPUT) %>: </label>
 													  
-													  <div style="display:inline-block;" class="parentPosition actionIcon pull-right" 
+													  <div style="display:inline-block;" class="parentPosition pull-right" 
 													   onmouseover="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='block'})(this)"
 														 onmouseout="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='none'})(this)">
 														  <i class="uiIconQuestion uiIconLightGray"></i>
-														  <div class="gotPosition" style="position: absolute; top: 16px; left: 497px;">
+														  <div class="gotPosition" style="position: absolute; top: 13px; left: 497px;">
 														   <div class="popover left" style="display: none;">
 															<span class="arrow"></span>
 															<div class="popover-content"><%= _ctx.appRes("UICLVConfig.help.ModeSelectionHelp") %></div>
@@ -80,11 +80,11 @@
 													    <%=uicomponent.getLabel(uicomponent.ITEM_PATH_FORM_INPUT_SET) %>: 
 													  </label>
 													  
-													  <div style="display:inline-block;" class="parentPosition actionIcon pull-right" 
+													  <div style="display:inline-block;" class="parentPosition pull-right" 
 													   onmouseover="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='block'})(this)"
 														 onmouseout="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='none'})(this)">
 														  <i class="uiIconQuestion uiIconLightGray"></i>
-														  <div class="gotPosition" style="position: absolute; top: 61px; left: 497px;">
+														  <div class="gotPosition" style="position: absolute; top: 58px; left: 497px;">
 														   <div class="popover left" style="display: none;">
 															<span class="arrow"></span>
 															<div class="popover-content"><%= _ctx.appRes("UICLVConfig.help.FolderPathHelp") %></div>
@@ -152,11 +152,11 @@
 													<div class="control-group">  
 													  <label class="control-label" for="<%=uicomponent.HEADER_FORM_STRING_INPUT%>"><%=uicomponent.getLabel(uicomponent.HEADER_FORM_STRING_INPUT) %>: </label>
 													  
-													  	<div style="display:inline-block;" class="parentPosition actionIcon pull-right" 
+													  	<div style="display:inline-block;" class="parentPosition pull-right" 
 														   onmouseover="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='block'})(this)"
 															 onmouseout="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='none'})(this)">
 															  <i class="uiIconQuestion uiIconLightGray"></i>
-															  <div class="gotPosition" style="position: absolute; top: 26px; left: 480px;">
+															  <div class="gotPosition" style="position: absolute; top: 23px; left: 480px;">
 															   <div class="popover left" style="display: none;">
 																<span class="arrow"></span>
 																<div class="popover-content"><%= _ctx.appRes("UICLVConfig.help.HeaderOptionHelp") %></div>
@@ -246,21 +246,21 @@
 											  } else if(formInput.getName().equals(uicomponent.ADVANCED_TAB)) {
 											  %>
 												<div class="form-horizontal" >  
-													<h6 class="clearfix"> 
+													<div class="clearfix"> 
 													
-														<div style="display:inline-block;" class="parentPosition actionIcon pull-right" 
+														<div style="display:inline-block;" class="parentPosition pull-right" 
 														   onmouseover="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='block'})(this)"
 															 onmouseout="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='none'})(this)">
 															  <i class="uiIconQuestion uiIconLightGray"></i>
-															  <div class="gotPosition" style="position: absolute; top: 45px; left: 480px;">
+															  <div class="gotPosition" style="position: absolute; top: 32px; left: 480px;">
 															   <div class="popover left" style="display: none;">
 																<span class="arrow"></span>
 																<div class="popover-content"><%= _ctx.appRes("UICLVConfig.help.ContextualHelp") %></div>
 															   </div>
 															  </div>
 															 </div>
-														<%=uicomponent.getLabel(uicomponent.DYNAMIC_NAVIGATION_LABEL) %>
-													</h6>
+														<h6><%=uicomponent.getLabel(uicomponent.DYNAMIC_NAVIGATION_LABEL) %></h6>
+													</div>
 													<div class="control-group">  
 													  <label class="control-label"><%=uicomponent.getLabel(uicomponent.CONTEXTUAL_FOLDER_RADIOBOX_INPUT) %>: </label>
 													  <div class="controls">
@@ -304,9 +304,9 @@
 														<% uiform.renderField(uicomponent.SHOW_SCV_WITH_STRING_INPUT) %>
 													  </div>
 													</div>
-													<h6 class="clearfix"> 
+													<div class="clearfix"> 
 														
-														<div style="display:inline-block;" class="parentPosition actionIcon pull-right" 
+														<div style="display:inline-block;" class="parentPosition pull-right" 
 														   onmouseover="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='block'})(this)"
 															 onmouseout="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='none'})(this)">
 															  <i class="uiIconQuestion uiIconLightGray"></i>
@@ -319,8 +319,8 @@
 															 </div>
 														
 														
-														<%=uicomponent.getLabel(uicomponent.CACHE_MANAGEMENT_LABEL)%>
-													</h6>
+														<h6><%=uicomponent.getLabel(uicomponent.CACHE_MANAGEMENT_LABEL)%></h6>
+													</div>
 													<div class="control-group">                  
 													  <% uiform.renderField(uicomponent.CACHE_ENABLE_RADIOBOX_INPUT) %>
 													</div>
