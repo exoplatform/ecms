@@ -56,7 +56,7 @@ import org.exoplatform.webui.event.EventListener;
       )
 public class UIViewPermissionForm extends UIPermissionFormBase implements UISelectable{
   
-  public static final String TAB_PERMISSION   = "tab_permission";
+  public static final String TAB_PERMISSION   = "permission";
 
   public UIViewPermissionForm() throws Exception {
     removeChildById(UIPermissionFormBase.PERMISSION);
