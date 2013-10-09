@@ -37,6 +37,7 @@ import javax.imageio.ImageIO;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.nodetype.NodeDefinition;
 import javax.jcr.nodetype.NodeType;
@@ -857,19 +858,16 @@ public class Utils {
    */
   public static String getTitle(Node node) throws Exception {
     String title = null;
-    if (node.hasProperty("exo:title")) {
+    try {
       title = node.getProperty("exo:title").getValue().getString();
-    } else if (node.hasNode("jcr:content")) {
-      Node content = node.getNode("jcr:content");
-      if (content.hasProperty("dc:title")) {
-        try {
-          title = content.getProperty("dc:title").getValues()[0].getString();
-        } catch(Exception ex) {
-          // Do nothing
-        }
+    } catch (PathNotFoundException pnf1) {
+      try {
+        title = node.getNode("jcr:content").getProperty("dc:title").getValues()[0].getString();
+      } catch (PathNotFoundException pnf2) {
+        title = null;
       }
     }
-    if ((title==null) || ((title!=null) && (title.trim().length()==0))) {
+    if (StringUtils.isBlank(title)) {
       title = node.getName();
     }
     return ContentReader.getXSSCompatibilityContent(title);
