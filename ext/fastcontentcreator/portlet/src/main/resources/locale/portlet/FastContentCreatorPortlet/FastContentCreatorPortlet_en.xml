@@ -27,14 +27,12 @@
       <UIFCCWorkspaceFormSelectBox>Select Workspace</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>Template Options</UIFCCTemplateField>
       <UIFCCLocationFormInputAction>Location to Save</UIFCCLocationFormInputAction>
-      <UIFCCLocationFormStringInput/>
       <UIFCCTemplateFormSelectBox>Select Template</UIFCCTemplateFormSelectBox>
       <UIFCCSaveFormStringInput>Custom Save Button</UIFCCSaveFormStringInput>
       <UIFCCMessageFormTextareaInput>Custom Save Message</UIFCCMessageFormTextareaInput>
       <UIFCCRedirectFormCheckboxInput>Redirect:</UIFCCRedirectFormCheckboxInput>
       <UIFCCRedirectPathFormStringInput>Redirect Path:</UIFCCRedirectPathFormStringInput>
       <UIFCCActionField>Actions</UIFCCActionField>
-      <UIFCCActionList/>
     </label>
     <msg>
       <save-successfully>Saved to portlet preferences successfully.</save-successfully>
