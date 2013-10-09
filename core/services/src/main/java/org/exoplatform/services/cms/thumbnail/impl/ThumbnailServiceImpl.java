@@ -29,13 +29,16 @@ import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.impl.ImageUtils;
 import org.exoplatform.services.cms.thumbnail.ThumbnailPlugin;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
+import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SARL
@@ -224,6 +227,10 @@ public class ThumbnailServiceImpl implements ThumbnailService {
     if(parentNode.hasNode(EXO_THUMBNAILS_FOLDER)) {
       Node thumbnailFolder = parentNode.getNode(EXO_THUMBNAILS_FOLDER);
       try {
+        String workspace = parentNode.getSession().getWorkspace().getName();
+        RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
+        Session systemSession = WCMCoreUtils.getSystemSessionProvider().getSession(workspace, repositoryService.getCurrentRepository());
+        thumbnailFolder = (Node) systemSession.getItem(thumbnailFolder.getPath());
         thumbnailFolder.getNode(((NodeImpl) showingNode).getInternalIdentifier()).remove();
         thumbnailFolder.getSession().save();
       } catch(PathNotFoundException path) {
