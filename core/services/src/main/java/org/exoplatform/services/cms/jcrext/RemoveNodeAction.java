@@ -16,9 +16,12 @@
  */
 package org.exoplatform.services.cms.jcrext;
 
+import javax.jcr.Node;
+import javax.jcr.Session;
 import org.apache.commons.chain.Context;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.command.action.Action;
+import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 import javax.jcr.Node;
@@ -38,9 +41,18 @@ public class RemoveNodeAction implements Action {
     
     //remove thumbnail of node
     Node node = (Node)context.get("currentItem");
+    String workspace = node.getSession().getWorkspace().getName();
+    RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
+    Session session = WCMCoreUtils.getSystemSessionProvider().getSession(workspace, repositoryService.getCurrentRepository());
+    String path = node.getPath().substring(1);
+    Node systemSessionNode = node;
+    if (session.getRootNode().hasNode(path)) {
+    	systemSessionNode = session.getRootNode().getNode(path);
+    }
+
     if(thumbnailService.isEnableThumbnail()) {
       try {
-        thumbnailService.processRemoveThumbnail(node);
+        thumbnailService.processRemoveThumbnail(systemSessionNode);
       } catch(Exception e) {
         return false;
       }
