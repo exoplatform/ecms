@@ -228,7 +228,29 @@ public class NodetypeConstant {
   
   public static final String EXO_TARGET_DATA = "exo:targetData";
   
+  public static final String EXO_WORKSPACE = "exo:workspace";
+  
+  public static final String JCR_UUID = "jcr:uuid";
   // public static final String PUBLICATION_STATE_AND_VERSION_BASED_PUBLICATION
   // = "publication:stateAndVersionBasedPublication";
+  
+  public static final String FAVORITE    = "Favorites";
+  public static final String OWNED_BY_ME = "OwnedByMe";
+  public static final String HIDDEN      = "Hidden";
+  public static final String TRASH       = "Trash";
+  
+  public static final String SORT_BY_NODENAME = "Alphabetic" ;
+  public static final String SORT_BY_NODETYPE= "Type" ;
+  public static final String SORT_BY_NODESIZE= "Size" ;
+  public static final String SORT_BY_CREATED_DATE= "CreatedDate" ;
+  public static final String SORT_BY_DATE= "Date" ;
+  public static final String SORT_BY_MODIFIED_DATE= "ModifiedDate" ;
+  
+  public static final String PROPERTY_SORT = "Property" ;
+  public static final String SORT_BY_OWNER = "Owner";
+  public static final String SORT_BY_VERSIONABLE = "Versionable";
+  public static final String SORT_BY_AUDITING = "Auditing";
+  public static final String SHOW_OWNED_BY_USER_DOC = "OwnedByMe";
+  
 
 }

@@ -52,6 +52,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -553,7 +554,9 @@ public class UIJCRExplorer extends UIContainer {
     uiSideBar.setRendered(preferences_.isShowSideBar());
     if(preferences_.isShowSideBar()) {
       UITreeExplorer treeExplorer = findFirstComponentOfType(UITreeExplorer.class);
-      treeExplorer.buildTree();
+      if (treeExplorer.equals(uiSideBar.getChildById(uiSideBar.getCurrentComp()))) {
+        treeExplorer.buildTree();
+      }
       uiSideBar.updateSideBarView();
     }
     if (closePopup) {
@@ -680,7 +683,10 @@ public class UIJCRExplorer extends UIContainer {
         filterPath(currentPath_)) ;
     event.getRequestContext().addUIComponentToUpdateByAjax(getChild(UIControl.class)) ;
     if(preferences_.isShowSideBar()) {
-      findFirstComponentOfType(UITreeExplorer.class).buildTree();
+      UITreeExplorer treeExplorer = findFirstComponentOfType(UITreeExplorer.class);
+      if (treeExplorer.equals(uiSideBar.getChildById(uiSideBar.getCurrentComp()))) {
+        treeExplorer.buildTree();
+      }
     }
     UIDocumentWorkspace uiDocWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
     if(uiDocWorkspace.isRendered()) {
@@ -885,24 +891,6 @@ public class UIJCRExplorer extends UIContainer {
         templateService.isManagedNodeType(nodeType.getName()) && !isFolder) {
       return childrenList ;
     }
-    if(isReferenceableNode(getCurrentNode()) && isReferences) {
-      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-      SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-      for(String workspace:manageableRepository.getWorkspaceNames()) {
-        Session session = sessionProvider.getSession(workspace,manageableRepository) ;
-        try {
-          Node taxonomyNode = session.getNodeByUUID(getCurrentNode().getUUID()) ;
-          PropertyIterator categoriesIter = taxonomyNode.getReferences() ;
-          while(categoriesIter.hasNext()) {
-            Property exoCategoryProp = categoriesIter.nextProperty();
-            Node refNode = exoCategoryProp.getParent() ;
-            childrenList.add(refNode) ;
-          }
-        } catch(Exception e) {
-          continue;
-        }
-      }
-    }
     if(!preferences_.isShowNonDocumentType()) {
       List<String> documentTypes = templateService.getDocumentTemplates() ;
       while(childrenIterator.hasNext()){
@@ -947,21 +935,22 @@ public class UIJCRExplorer extends UIContainer {
   }
 
   private void sort(List<Node> childrenList) {
-    if (Preference.SORT_BY_NODENAME.equals(preferences_.getSortType())) {
+    if (NodetypeConstant.SORT_BY_NODENAME.equals(preferences_.getSortType())) {
       Collections.sort(childrenList, new NodeTitleComparator(preferences_.getOrder())) ;
-    } else if (Preference.SORT_BY_NODETYPE.equals(preferences_.getSortType())) {
+    } else if (NodetypeConstant.SORT_BY_NODETYPE.equals(preferences_.getSortType())) {
       Collections.sort(childrenList, new TypeNodeComparator(preferences_.getOrder())) ;
-    } else if (Preference.SORT_BY_NODESIZE.equals(preferences_.getSortType())) {
+    } else if (NodetypeConstant.SORT_BY_NODESIZE.equals(preferences_.getSortType())) {
       Collections.sort(childrenList, new NodeSizeComparator(preferences_.getOrder())) ;
-    } else if (Preference.SORT_BY_VERSIONABLE.equals(preferences_.getSortType())) {
-      Collections.sort(childrenList, new StringComparator(preferences_.getOrder(), Preference.SORT_BY_VERSIONABLE));
-    } else if (Preference.SORT_BY_AUDITING.equals(preferences_.getSortType())) {
-      Collections.sort(childrenList, new StringComparator(preferences_.getOrder(), Preference.SORT_BY_AUDITING));
-    } else if (Preference.SORT_BY_CREATED_DATE.equals(preferences_.getSortType())) {
+    } else if (NodetypeConstant.SORT_BY_VERSIONABLE.equals(preferences_.getSortType())) {
+      Collections.sort(childrenList, new StringComparator(preferences_.getOrder(), NodetypeConstant.SORT_BY_VERSIONABLE));
+    } else if (NodetypeConstant.SORT_BY_AUDITING.equals(preferences_.getSortType())) {
+      Collections.sort(childrenList, new StringComparator(preferences_.getOrder(), NodetypeConstant.SORT_BY_AUDITING));
+    } else if (NodetypeConstant.SORT_BY_CREATED_DATE.equals(preferences_.getSortType())) {
         Collections.sort(childrenList, new PropertyValueComparator(Utils.EXO_CREATED_DATE, preferences_.getOrder()));
-    } else if (Preference.SORT_BY_MODIFIED_DATE.equals(preferences_.getSortType())) {
-        Collections.sort(childrenList, new PropertyValueComparator(Utils.EXO_MODIFIED_DATE, preferences_.getOrder()));
-    } else if (Preference.SORT_BY_DATE.equals(preferences_.getSortType())) {
+    } else if (NodetypeConstant.SORT_BY_MODIFIED_DATE.equals(preferences_.getSortType())) {
+        Collections.sort(childrenList, 
+                         new PropertyValueComparator(NodetypeConstant.EXO_LAST_MODIFIED_DATE, preferences_.getOrder()));
+    } else if (NodetypeConstant.SORT_BY_DATE.equals(preferences_.getSortType())) {
       Collections.sort(childrenList, new DateComparator(preferences_.getOrder()));
     } else {
       Collections.sort(childrenList, new PropertyValueComparator(preferences_.getSortType(), preferences_.getOrder()));
