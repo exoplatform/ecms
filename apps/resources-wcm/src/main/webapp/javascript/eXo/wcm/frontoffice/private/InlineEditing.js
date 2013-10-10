@@ -9,7 +9,12 @@
 	    this.languageLoaded = false;
 	    this.InternalServerErrorMsg="";
 	    this.EmptyTitleErrorMsg = "";
+	    this.isModified = false;
+	    this.editorName = "";
+	    this.draft = "";
+	    this.publishLink = "";
 	  }
+	  
 	};
 	
 	InlineEditor.loadLanguage =function (msg) {
@@ -19,6 +24,47 @@
 	    if (msg[1]) EmptyTitleErrorMsg = decodeURI(msg[1]);
 	  }  
 	}
+
+	InlineEditor.removeHoverClass = function() {
+		gj('.containerHoverClass').removeClass('containerHoverClass');	
+		gj('.containerHoverClassInner').removeClass('containerHoverClassInner');		
+	}
+
+	InlineEditor.modifyInlineContent = function(e) {
+          InlineEditor.init();
+          InlineEditor.isModified = true;
+	}
+	InlineEditor.saveInlineContent = function(e) {
+		if(InlineEditor.isModified) {
+		  	var container = e.container;
+			InlineEditor.editorName = e.name;
+			var repo = container.getAttribute("repo");
+			var workspace = container.getAttribute("workspace");
+			var uuid = container.getAttribute("uuid");
+			var sitename = container.getAttribute("sitename");
+			var language = container.getAttribute("language");
+			var propertyname = container.getAttribute("propertyname");
+			InlineEditor.draft = container.getAttribute("draftmsg");
+			InlineEditor.publishLink = container.getAttribute("fastpublishlink");
+			var data = "";
+			if(propertyname.indexOf("exo:title") >= 0)
+			  data = e.editable().getText();
+			else
+			  data = e.getData();
+			var params =""; 
+	  		params = "newValue=" + encodeURIComponent(data);
+			gj(container.$).append("<i class='uiWaitting'></i>");			
+                        var parentContainer = gj(container.$).parent();
+                        var offset = parentContainer.offset();
+			gj(parentContainer).append("<div class='markLayerInline' style='width:"+gj(parentContainer).outerWidth()+"px; height:"+gj(parentContainer).outerHeight()+"px; top:"+offset.top+"px; left:"+offset.left+"px'></div>");
+    
+	  		InlineEditor.presentationRequestChangePropertyPOST("/property?", propertyname, repo, 
+			workspace, uuid, sitename, language, params);  
+			InlineEditor.isModified = false;      
+		} 
+  		return false;
+	}
+
 	InlineEditor.onEnterRequest =function () {
 	  if (window.event && window.event.keyCode == 13){
 	    return false;
@@ -139,12 +185,6 @@
 	    if (method) {
 	      InlineEditor.xmlHttpRequest.open(method, url, true);
 	      InlineEditor.xmlHttpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	      if (params) {
-	        InlineEditor.xmlHttpRequest.setRequestHeader("Content-length", params.length);
-	      }else {
-	        InlineEditor.xmlHttpRequest.setRequestHeader("Content-length", 0);
-	      }
-	      InlineEditor.xmlHttpRequest.setRequestHeader("Connection", "close");      
 	    }else {
 	      InlineEditor.xmlHttpRequest.open(InlineEditor.defaultMethod, url, true);
 	    }
@@ -157,22 +197,54 @@
 	};
 	
 	InlineEditor.presentationAjaxResponse = function (){
-		var xmlTreeNodes = InlineEditor.xmlHttpRequest.responseXML;		
-	    var nodeList = xmlTreeNodes.getElementsByTagName("bundle");   
-	    var locale_message = nodeList[0].getAttribute("message"); 
-	    if (InlineEditor.xmlHttpRequest.readyState == 4) {
-	      if (InlineEditor.xmlHttpRequest.status == 200) {
-	        if(locale_message == "OK") location.reload(true);
-	        else alert(locale_message);
-	      }
-	    }else {
-	      try{
-	        if (InlineEditor.xmlHttpRequest.status!=200) {
-	          alert(InlineEditor.InternalServerErrorMsg + "\n" + InlineEditor.xmlHttpRequest.statusText);
-	        }      
-	      }catch (e) {
-	      }
-	    }
+	    var xmlTreeNodes = InlineEditor.xmlHttpRequest.responseXML;
+	    if(xmlTreeNodes) {
+		    var nodeList = xmlTreeNodes.getElementsByTagName("bundle");   
+		    var locale_message = nodeList[0].getAttribute("message"); 
+		    if (InlineEditor.xmlHttpRequest.readyState == 4) {
+		      if (InlineEditor.xmlHttpRequest.status == 200) {
+			if(locale_message == "OK") {
+				gj('.uiWaitting').remove();
+				gj('.markLayerInline').remove();
+                                var inlineEditor = CKEDITOR.instances[InlineEditor.editorName];
+				inlineEditor.updateElement();
+				var container = inlineEditor.container.$;
+                                var tmpContainer = container;
+                                var parent = gj(tmpContainer).parent().get(0);
+				var edittingContainer = null;
+				while(!edittingContainer && parent ) {
+					edittingContainer = gj(parent).find(".edittingToolBarContainer, .edittingContent").get(0);
+					if(!edittingContainer) {
+					  tmpContainer = parent;
+					  parent = gj(tmpContainer).parent().get(0);
+					} 
+				}
+				if(edittingContainer) {
+					var currentState = gj(edittingContainer).find(".edittingCurrentState").get(0);
+                                        var spanElem = gj(currentState).find("span").get(0);
+                                        gj(spanElem).remove();
+ 				        gj(currentState).append('<span class="draftText">'+InlineEditor.draft+'</span>');
+					
+					var btrGroup = gj(edittingContainer).find(".btn-group").get(0);
+					if(gj(btrGroup).find("a").size() <3) {
+						var aElem = gj(btrGroup).find("a").get(0);
+                                        	gj(aElem).before("<a class=\"btn\" href=\""+InlineEditor.publishLink+"\" rel=\"tooltip\" data-placement=\"bottom\" data-original-title=\"Publish\">            <i class=\"uiIconEcmsPublish\"></i>          </a>");
+					}
+				}
+				gj(document).ready(function() { gj("*[rel='tooltip']").tooltip();});
+
+			}
+			else alert(locale_message);
+		      }
+		    }else {
+		      try{
+			if (InlineEditor.xmlHttpRequest.status!=200) {
+			  alert(InlineEditor.InternalServerErrorMsg + "\n" + InlineEditor.xmlHttpRequest.statusText);
+			}      
+		      }catch (e) {
+		      }
+		    }
+	     }
 	}
 	InlineEditor.init();
 	window.InlineEditor = InlineEditor;

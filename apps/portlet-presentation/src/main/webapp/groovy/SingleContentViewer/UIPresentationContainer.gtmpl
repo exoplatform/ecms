@@ -1,24 +1,42 @@
 <%
   	import org.exoplatform.wcm.webui.scv.UISingleContentViewerPortlet;
   	import org.exoplatform.wcm.webui.Utils;
+  	import java.util.Locale;
   	import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
   	import org.exoplatform.ecm.utils.lock.LockUtil;
   	import org.exoplatform.services.jcr.core.ManageableRepository;
   	import org.exoplatform.wcm.webui.administration.UIEditingForm;
   	import org.exoplatform.portal.application.PortalRequestContext;
   	import org.exoplatform.portal.webui.util.Util;
+  	import org.exoplatform.webui.application.WebuiRequestContext;
 
 		def rcontext = _ctx.getRequestContext();
     def jsManager = rcontext.getJavascriptManager();
     jsManager.loadScriptResource("quick-edit");
     jsManager.require("SHARED/jquery", "gj").addScripts("gj(document).ready(function() { gj(\"*[rel='tooltip']\").tooltip();});");
     
+    def draftMsg = _ctx.appRes("PublicationStates.draft");
+    def publishedMsg = _ctx.appRes("PublicationStates.published");
+    
     String portletId = Utils.getRealPortletId(rcontext);
 		def quickEditingBlockId = portletId + "-QuickEditingBlock";
 		def hoverClass = Utils.isShowQuickEdit() ? " containerHoverClass" : "";
 		def node = uicomponent.getNodeView();
 		def currentState = uicomponent.getCurrentState();
+		def repo = "";
+	  def workspace = "";
+	  def uuid = "";
+	  def propertyName = "exo:title";
+	  def siteName = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getPortalOwner();
+	  Locale locale = WebuiRequestContext.getCurrentInstance().getLocale();
+    def language = locale.getLanguage();
+	    
 		if (node != null) {
+			
+			repo = ((ManageableRepository)node.getSession().getRepository()).getConfiguration().getName();
+		  workspace = node.getSession().getWorkspace().getName();
+		  uuid = node.getUUID();
+		    
 			def isShowOptionBar = uicomponent.isShowOptionBar(); 
 			def isShowTitle = uicomponent.isShowTitle();
 			def isShowDate  = uicomponent.isShowDate();
@@ -32,13 +50,11 @@
 			def edittingStyle = "z-index: 5";
 			if (isShowInfoBar)
 				edittingStyle = "z-index: 5; top:20px";
-			%>
-			<div class="UIPresentationContainer" id="$uicomponent.id">
-			<%
-			  //jsManager.require("SHARED/wcm-utils", "wcmutil").
-        //addScripts("wcmutil.WCMUtils.addEvent('${uicomponent.id}','mouseover',function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','UIPresentationContainer $hoverClass')});").
-        //addScripts("wcmutil.WCMUtils.addEvent('${uicomponent.id}','mouseout',function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','UIPresentationContainer')});");
+			%>			
 			
+			<div class="UIPresentationContainer" id="$uicomponent.id">
+			
+			<%		
 			
 			  jsManager.require("SHARED/wcm-utils", "wcmutil");      
 		    jsManager.require("SHARED/jquery", "gj").addScripts("gj('#"+uicomponent.id+"').mouseenter( function() {eXo.ecm.WCMUtils.changeStyleClass('$uicomponent.id','UIPresentationContainer $hoverClass');});").
@@ -109,9 +125,7 @@
                 %><div class="Title"><%= uicomponent.getTitle(node) %></div><%
   					  }else {
   					   def orgNode =uicomponent.getOriginalNode();    					  
-    					  %>
-    					  <%= uicomponent.getInlineEditingField(orgNode, "exo:title") %>    						  
-                <%            
+  					   %><div class="Title WCMInlineEditable" contenteditable="true" propertyName="<%=propertyName%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" publishedmsg="<%=publishedMsg%>" draftmsg="<%=draftMsg%>" fastpublishlink="<%=uicomponent.event('FastPublish')%>" language="<%=language%>" ><%= uicomponent.getTitle(node) %></div><%             
               }
             } %>
 						<% if (isShowDate) { %>

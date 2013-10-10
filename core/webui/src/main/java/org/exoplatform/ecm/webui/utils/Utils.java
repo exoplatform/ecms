@@ -202,6 +202,9 @@ public class Utils {
   final static public String MIX_VOTABLE = "mix:votable";
   final static public String EXO_SYMLINK = "exo:symlink";
   final static public String EXO_PRIMARYTYPE = "exo:primaryType";
+  
+  final static public String INLINE_DRAFT = "Draft";
+  final static public String INLINE_PUBLISHED = "Published";
 
   final static public String EXO_SORTABLE = "exo:sortable";  
   final static public String EXO_RISIZEABLE = "exo:documentSize";
@@ -617,42 +620,25 @@ public class Utils {
     HashMap<String,String> parsedArguments = parseArguments(arguments) ;
     String height = parsedArguments.get(HEIGHT);
     String bDirection = parsedArguments.get(BUTTON_DIR);
-    if ( org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE)) {
-      if (orgNode.hasProperty(propertyName)) {
-        try {
-          if(propertyName.equals(EXO_TITLE))
-            return ContentReader.getXSSCompatibilityContent(orgNode.getProperty(propertyName).getString());
-          return orgNode.getProperty(propertyName).getString();
-        } catch (Exception e) {
-          return defaultValue;
-        }
-      }
-      return defaultValue;
-    }
-    String currentValue = defaultValue;
-    ResourceBundle resourceBundle;
-    if (orgNode.hasProperty(propertyName)) {
-      try {
-        if(propertyName.equals(EXO_TITLE))
-          currentValue =  ContentReader.getXSSCompatibilityContent(orgNode.getProperty(propertyName).getString());
-        else {
-          if (orgNode.getProperty(propertyName).getDefinition().isMultiple()) {
-            //The requested property is multiple-valued, inline editing enable users to edit the first value of property
-            currentValue = orgNode.getProperty(propertyName).getValues()[0].getString();
-          }else {
-            currentValue =  orgNode.getProperty(propertyName).getString() ;
-          }
-        }
-      }catch (Exception e) {
-        if (LOG.isWarnEnabled()) {
-          LOG.warn(e.getMessage());
-        }
-      }
-    }
+    String publishLink = parsedArguments.get(FAST_PUBLISH_LINK);
+
     Locale locale = WebuiRequestContext.getCurrentInstance().getLocale();
     String language = locale.getLanguage();
     ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
+    ResourceBundle resourceBundle;
     resourceBundle = resourceBundleService.getResourceBundle(LOCALE_WEBUI_DMS, locale);
+    
+    PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+    String draft = INLINE_DRAFT;
+    String published = INLINE_PUBLISHED;
+    try {
+      draft = portletRequestContext.getApplicationResourceBundle().getString("PublicationStates.draft");
+      published = portletRequestContext.getApplicationResourceBundle().getString("PublicationStates.published");
+    } catch(MissingResourceException ex) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(ex.getMessage());
+      }
+    }
 
     String portletRealID = org.exoplatform.wcm.webui.Utils.getRealPortletId((PortletRequestContext)
                                                                             WebuiRequestContext.getCurrentInstance());
@@ -697,13 +683,52 @@ public class Utils {
       actionsb.append("');");
     }
     String strAction = actionsb.toString();
+    
+    if (orgNode.hasProperty(propertyName)) {
+      try {
+        if(propertyName.equals(EXO_TITLE))
+          return ContentReader.getXSSCompatibilityContent(orgNode.getProperty(propertyName).getString());
+        if (org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE))
+          return orgNode.getProperty(propertyName).getString();
+        else 
+        	return "<div class=\"WCMInlineEditable\" contenteditable=\"true\" propertyName=\""+propertyName+"\" repo=\""+repo+"\" workspace=\""+workspace+"\"" +
+        			" uuid=\""+uuid+"\" siteName=\""+siteName+"\" publishedMsg=\""+published+"\" draftMsg=\""+draft+"\" fastpublishlink=\""+publishLink+"\" language=\""+language+"\" >" + orgNode.getProperty(propertyName).getString() + "</div>";
+      } catch (Exception e) {
+      	if (org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE))
+          return defaultValue;
+      	else
+        	return "<div class=\"WCMInlineEditable\" contenteditable=\"true\" propertyName=\""+propertyName+"\" repo=\""+repo+"\" workspace=\""+workspace+"\" " +
+        			"uuid=\""+uuid+"\" siteName=\""+siteName+"\" publishedMsg=\""+published+"\" draftMsg=\""+draft+"\" fastpublishlink=\""+publishLink+"\" language=\""+language+"\" >" + defaultValue + "</div>";
+      }
+    }
+      
+    String currentValue = defaultValue;    
+    if (orgNode.hasProperty(propertyName)) {
+      try {
+        if(propertyName.equals(EXO_TITLE))
+          currentValue =  ContentReader.getXSSCompatibilityContent(orgNode.getProperty(propertyName).getString());
+        else {
+          if (orgNode.getProperty(propertyName).getDefinition().isMultiple()) {
+          //The requested property is multiple-valued, inline editing enable users to edit the first value of property
+            currentValue = orgNode.getProperty(propertyName).getValues()[0].getString();
+          }else {
+            currentValue =  orgNode.getProperty(propertyName).getString() ;
+          }
+        }
+      }catch (Exception e) {
+        if (LOG.isWarnEnabled()) {
+          LOG.warn(e.getMessage());
+        }
+      }
+    }
+    
 
-    sb.append("<div class=\"InlineEditing\">\n");
-    sb.append("\n<div rel=\"tooltip\" data-placement=\"bottom\" id=\"")
-    .append(showBlockId).append("\" Class=\"").append(cssClass).append("\"");
+    sb.append("<div class=\"InlineEditing\" >\n");
+    sb.append("\n<div rel=\"tooltip\" data-placement=\"bottom\" id=\"").append(showBlockId).append("\" Class=\"").append(cssClass).append("\"");
     sb.append("title=\"").append(strSuggestion).append("\"");
-    sb.append(" onDblClick=\"InlineEditor.presentationSwitchBlock('").append(showBlockId).
-    append("', '").append(editBlockEditorID).append("');\"");
+    sb.append(" onClick=\"InlineEditor.presentationSwitchBlock('").append(showBlockId).
+       append("', '").append(editBlockEditorID).append("');\"");
+
     sb.append("onmouseout=\"this.className='").append(cssClass).
     append("';\" onblur=\"this.className='").append(cssClass).
     append("';\" onfocus=\"this.className='").append(cssClass).append("Hover").
@@ -741,80 +766,12 @@ public class Utils {
     }
     sb.append("\t\t<div class=\"Edit").append(cssClass).append("Input\">\n ");
 
-    if (inputType.equalsIgnoreCase(INPUT_WYSIWYG)) {
-      sb.append(createCKEditorField(newValueInputId, currentValue, parsedArguments));
-    }else if (inputType.equalsIgnoreCase(INPUT_TEXT_AREA)){
-      sb.append("\t\t<TEXTAREA ").append("\" name =\"");
-      sb.append(newValueInputId).append("\" id =\"").append(newValueInputId).append("\"");
-      if (height!=null && height.length()>0) {
-        sb.append(" style =\"height:").append(height);
-        if (!height.endsWith("px")) {
-          sb.append("px;");
-        }
-        sb.append("\"");
-      }
-      sb.append(">");
-      sb.append(currentValue).append("</TEXTAREA>");
-    }else if (inputType.equalsIgnoreCase(INPUT_TEXT)) {
-      sb.append("\t\t<input type=\"TEXT\" name =\"");
-      sb.append(newValueInputId).append("\" id =\"").append(newValueInputId).
-      append("\" value=\"").append(currentValue).append("\"/>");
-    }
+
 
     sb.append("\n\t\t</div>\n\t</form>\n</div>\n\n</div>");
     return sb.toString();
-  }
+  } 
 
-  /**
-   *
-   * @param name
-   * @param value_
-   * @param arguments
-   * @return
-   */
-  private static String createCKEditorField(String name, String value_, HashMap<String,String> arguments) {
-    String toolbar = arguments.get(TOOLBAR);
-    String passedCSS = arguments.get(CSS);
-
-    if (toolbar == null) toolbar = "BasicWCM";
-    StringBuffer contentsCss = new StringBuffer();
-    contentsCss.append("[");
-    SkinService skinService = WCMCoreUtils.getService(SkinService.class);
-    UserPortalConfig upc = Util.getPortalRequestContext().getUserPortalConfig();
-    String skin = upc.getPortalConfig().getSkin();
-    String portal = Util.getUIPortal().getName();
-    Collection<SkinConfig> portalSkins = skinService.getPortalSkins(skin);
-    SkinConfig customSkin = skinService.getSkin(portal, upc.getPortalConfig().getSkin());
-    if (customSkin != null) portalSkins.add(customSkin);
-    for (SkinConfig portalSkin : portalSkins) {
-      contentsCss.append("'").append(portalSkin.createURL(Util.getPortalRequestContext().getControllerContext())).append("',");
-    }
-    contentsCss.delete(contentsCss.length() - 1, contentsCss.length());
-    contentsCss.append("]");
-
-    StringBuffer buffer = new StringBuffer();
-    buffer.append("<div style=\"display:none\">" +
-        "<textarea id='cssContent" + name + "' name='cssContent" + name + "'>" + passedCSS + "</textarea></div>\n");
-
-    if (value_!=null) {
-      buffer.append("<textarea id='" + name + "' name='" + name + "'>" + value_ + "</textarea>\n");
-    }else {
-      buffer.append("<textarea id='" + name + "' name='" + name + "'></textarea>\n");
-    }
-    buffer.append("<script type='text/javascript'>\n");
-    buffer.append("  //<![CDATA[ \n");
-    buffer.append("    require(['/eXoWCMResources/ckeditor/ckeditor.js'], function() {");
-    buffer.append("    var instances = CKEDITOR.instances['" + name + "']; if (instances) instances.destroy(true);\n");
-    buffer.append("    CKEDITOR.replace('" + name + "', {toolbar:'" + toolbar + "', width:'98%', height: 200, contentsCss:" +
-        contentsCss + ", ignoreEmptyParagraph:true});\n");
-    buffer.append("    CKEDITOR.instances['" + name + "'].on(\"instanceReady\", function(){  ");
-    buffer.append("       eXo.ecm.CKEditor.insertCSS('" + name + "', 'cssContent" + name + "');\n");
-    buffer.append("       });");
-    buffer.append("       });");
-    buffer.append("  //]]> \n");
-    buffer.append("</script>\n");
-    return buffer.toString();
-  }
   protected static final String SEPARATOR  = "=";
   protected static final String TOOLBAR    = "toolbar";
   protected static final String CSS        = "CSSData";
@@ -822,6 +779,7 @@ public class Utils {
   protected static final String BUTTON_DIR = "button_direction";
   protected static final String PREV_HTML  = "prev_html";
   protected static final String POST_HTML  = "post_html";
+  protected static final String FAST_PUBLISH_LINK  = "fast_publish";
   private static HashMap<String,String> parseArguments(String... arguments) {
     HashMap<String,String> map = new HashMap<String,String>() ;
     int sIndex =-1;
@@ -847,6 +805,8 @@ public class Utils {
         map.put(PREV_HTML, value); continue;
       } else if (argument.startsWith(POST_HTML)) {
         map.put(POST_HTML, value); continue;
+      } else if(argument.startsWith(FAST_PUBLISH_LINK)) {
+        map.put(FAST_PUBLISH_LINK, value); continue;
       }
     }
     return map;

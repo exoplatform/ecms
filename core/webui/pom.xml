@@ -35,6 +35,10 @@
       <artifactId>commons-webui-ext</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.exoplatform.commons</groupId>
+      <artifactId>commons-webui-component</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.exoplatform.core</groupId>
       <artifactId>exo.core.component.organization.api</artifactId>
     </dependency>

@@ -9,7 +9,7 @@ CKEDITOR.plugins.add('insertGadget',
 				{
 					label : editor.lang.WCMInsertGadgetPlugins,
 					command : 'gadget.cmd',
-					icon : mypath + '/images/insertGadget.gif'
+					icon : mypath + '/images/insertGadget.png'
 				}
 			);
 			var cmd = editor.addCommand('gadget.cmd', {exec:showInsertGadget});
@@ -21,5 +21,5 @@ CKEDITOR.plugins.add('insertGadget',
 );
 
 function showInsertGadget(e){
-	window.open(CKEDITOR.eXoPath+'eXoPlugins/insertGadget/gadget.html?currentInstance='+e.name,'WCMGadgetSelector','width=1024,height=600');
+	window.open('/eXoWCMResources/eXoPlugins/insertGadget/gadget.html?currentInstance='+e.name,'WCMGadgetSelector','width=1024,height=600');
 }

@@ -450,9 +450,9 @@ public class UIPresentationContainer extends UIContainer{
       if (node.isLocked()) {
         node.getSession().addLockToken(LockUtil.getLockToken(node));
       }
-      HashMap<String, String> context = new HashMap<String, String>();
-
+      HashMap<String, String> context = new HashMap<String, String>();      
       publicationService.changeState(node, "published", context);
+      event.getRequestContext().getJavascriptManager().getRequireJS().addScripts("location.reload(true);");
     }
 
   }
