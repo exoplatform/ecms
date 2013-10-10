@@ -48,6 +48,9 @@ if (maximumPage > 0) {
   PortletRequestContext requestContext = PortletRequestContext.getCurrentInstance();
   PortletRequest portletRequest = requestContext.getRequest();
   def userAgent = portletRequest.getProperty("user-agent");
+  def jsManager = rqcontext.getJavascriptManager();
+  jsManager.require("SHARED/jquery", "gj").addScripts("gj(document).ready(function() { gj(\"*[rel='tooltip']\").tooltip();});");
+  
   if(userAgent.contains("MSIE 8.0")) {
     rqcontext.getJavascriptManager().require("SHARED/ecm-utils", "ecmutil").
     addScripts('ecmutil.ECMUtils.onKeyPDFViewerPress();') ;
@@ -262,12 +265,12 @@ if (maximumPage > 0) {
       <div id="sidebarContainer">
         <div id="toolbarSidebar">
           <div class="splitToolbarButton toggled btn-group">
-            <button id="viewThumbnail" class="btn active" data-placement="bottom" rel="tooltip" data-original-title="Show Thumbnails" tabindex="2" data-l10n-id="thumbs">
+            <button id="viewThumbnail" class="btn active" data-placement="right" rel="tooltip" data-original-title="Show Thumbnails" tabindex="2" data-l10n-id="thumbs">
                <i class="uiIconEcmsViewDefault uiIconEcmsViewIcons"></i>
             </button>
-            <button id="viewOutline" class="btn" data-placement="bottom" rel="tooltip" data-original-title="Show Document Outline"  tabindex="3" data-l10n-id="outline">
+            <!--<button id="viewOutline" class="btn" data-placement="bottom" rel="tooltip" data-original-title="Show Document Outline"  tabindex="3" data-l10n-id="outline">
                <i class="uiIconEcmsViewDefault uiIconEcmsViewList"></i>
-            </button>
+            </button>-->
           </div>
         </div>
         <div id="sidebarContent">
@@ -288,10 +291,8 @@ if (maximumPage > 0) {
             <a class="actionIcon" data-placement="bottom" rel="tooltip" data-original-title="Find the next occurrence of the phrase" id="findNext" tabindex="43" data-l10n-id="find_next">
               <i class="uiIconArrowRight uiIconLightGray"></i>
             </a>
-          <input type="checkbox" id="findHighlightAll" class="toolbarField">
-          <label for="findHighlightAll" class="toolbarLabel" tabindex="44" data-l10n-id="find_highlight">Highlight all</label>
-          <input type="checkbox" id="findMatchCase" class="toolbarField">
-          <label for="findMatchCase" class="toolbarLabel" tabindex="45" data-l10n-id="find_match_case_label">Match case</label>
+            <span class="uiCheckbox"><input id="findHighlightAll" type="checkbox" class="toolbarField" ><span>Highlight all</span></span>
+          <span class="uiCheckbox"><input id="findMatchCase" type="checkbox" class="toolbarField" ><span>Match case</span></span>
           <span id="findMsg" class="toolbarLabel"></span>
         </div>  <!-- findbar -->
 
@@ -340,7 +341,7 @@ if (maximumPage > 0) {
             <div id="toolbarViewer">
               <div id="toolbarViewerLeft">
                 <div class="btn-group">
-          <button id="sidebarToggle" class="btn" data-placement="bottom" rel="tooltip" data-original-title="Toggle Sidebar" tabindex="4" data-l10n-id="toggle_sidebar">
+          <button id="sidebarToggle" class="btn" data-placement="right" rel="tooltip" data-original-title="Toggle Sidebar" tabindex="4" data-l10n-id="toggle_sidebar">
             <i class="uiIconShowSlidebar uiIconLightGray"></i>
           </button>
                 </div>

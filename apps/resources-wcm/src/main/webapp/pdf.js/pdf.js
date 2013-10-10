@@ -3635,7 +3635,7 @@ var TextAnnotation = (function TextAnnotationClosure() {
     var content = dict.get('Contents');
     var title = dict.get('T');
     data.content = stringToPDFString(content || '');
-    data.title = stringToPDFString(title || '');
+    //data.title = stringToPDFString(title || '');
     data.name = !dict.has('Name') ? 'Note' : dict.get('Name').name;
   }
 

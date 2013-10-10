@@ -151,7 +151,7 @@ html[dir='rtl'] .innerCenter {
   width: 100%;
   height: 100%;
   position: relative;
-  height: 600px;
+  height: 520px;
   border: 1px solid #d1d1d1;
   min-width: 665px;
 }
@@ -202,6 +202,10 @@ html[dir='rtl'] #outerContainer.sidebarOpen > #sidebarContainer {
   transition-duration: 200ms;
   transition-timing-function: ease;
 }
+#mainContainer .uiCheckbox {
+  margin-top: 4px;
+}
+
 html[dir='ltr'] #outerContainer.sidebarOpen > #mainContainer {
   -webkit-transition-property: left;
   transition-property: left;
@@ -384,9 +388,9 @@ html[dir='rtl'] .secondaryToolbar {
 
 .doorHanger,
 .doorHangerRight {
-  border: 1px solid hsla(0,0%,0%,.5);
+  border: 1px solid #d1d1d1;
   border-radius: 2px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 .doorHanger:after, .doorHanger:before,
 .doorHangerRight:after, .doorHangerRight:before {
@@ -1450,7 +1454,7 @@ canvas {
     position: static;
     padding: 0;
     margin: 0;
-  }
+  }  
 
   .page {
     float: left;

@@ -2183,7 +2183,7 @@ var PDFView = {
     PDFJS.Promise.all(promises).then(function() {
       pdfDocument.getOutline().then(function(outline) {
         self.outline = new DocumentOutlineView(outline);
-        document.getElementById('viewOutline').disabled = !outline;
+        //document.getElementById('viewOutline').disabled = !outline;
       });
     });
 
@@ -2391,14 +2391,14 @@ var PDFView = {
     var outlineView = document.getElementById('outlineView');
 
     var thumbsButton = document.getElementById('viewThumbnail');
-    var outlineButton = document.getElementById('viewOutline');
+    //var outlineButton = document.getElementById('viewOutline');
 
     switch (view) {
       case 'thumbs':
         var wasOutlineViewVisible = thumbsView.classList.contains('hidden');
 
         thumbsButton.classList.add('toggled');
-        outlineButton.classList.remove('toggled');
+        //outlineButton.classList.remove('toggled');
         thumbsView.classList.remove('hidden');
         outlineView.classList.add('hidden');
 
@@ -2414,12 +2414,12 @@ var PDFView = {
 
       case 'outline':
         thumbsButton.classList.remove('toggled');
-        outlineButton.classList.add('toggled');
+        //outlineButton.classList.add('toggled');
         thumbsView.classList.add('hidden');
         outlineView.classList.remove('hidden');
 
-        if (outlineButton.getAttribute('disabled'))
-          return;
+        //if (outlineButton.getAttribute('disabled'))
+        //  return;
         break;
     }
   },
@@ -3775,7 +3775,7 @@ var TextLayerBuilder = function textLayerBuilder(options) {
 
 var DocumentOutlineView = function documentOutlineView(outline) {
   var outlineView = document.getElementById('outlineView');
-  var outlineButton = document.getElementById('viewOutline');
+  //var outlineButton = document.getElementById('viewOutline');
   while (outlineView.firstChild)
     outlineView.removeChild(outlineView.firstChild);
 
@@ -3945,10 +3945,10 @@ var DocumentOutlineView = function documentOutlineView(outline) {
       PDFView.switchSidebarView('thumbs');
     });
 
-  document.getElementById('viewOutline').addEventListener('click',
-    function() {
-      PDFView.switchSidebarView('outline');
-    });
+  //document.getElementById('viewOutline').addEventListener('click',
+  //  function() {
+  //    PDFView.switchSidebarView('outline');
+  //  });
 
   document.getElementById('previous').addEventListener('click',
     function() {
