@@ -2459,7 +2459,6 @@
     </action>
     <label>
       <userOrGroup>Rôles: </userOrGroup>
-      <permission/>
     </label>
     <msg>
       <userOrGroup-alreadyExists>Ce rôle existe déjà. Veuillez en choisir un autre.</userOrGroup-alreadyExists>

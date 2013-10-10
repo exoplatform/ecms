@@ -40,7 +40,6 @@
       <UICLVConfigHeaderFormStringInput>ヘッダ</UICLVConfigHeaderFormStringInput>
       <UICLVConfigDisplayTemplateFormSelectBox>テンプレート</UICLVConfigDisplayTemplateFormSelectBox>
       <UICLVConfigPaginatorTemplateFormSelectBox>改ページ</UICLVConfigPaginatorTemplateFormSelectBox>
-      <UICLVConfigTargetPageFormStringInput/>
       <UICLVConfigItemsPerPageFormStringInput>ページ毎アイテム数</UICLVConfigItemsPerPageFormStringInput>
       <UICLVConfigShowIllustrationFormCheckboxInput>画像の表示</UICLVConfigShowIllustrationFormCheckboxInput>
       <UICLVConfigShowSummaryFormCheckboxInput>サマリーの表示</UICLVConfigShowSummaryFormCheckboxInput>

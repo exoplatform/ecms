@@ -272,7 +272,6 @@
   <UIPermissionManager>
     <label>
       <UIPermissionInputSetWithAction>Permiso</UIPermissionInputSetWithAction>
-      <UIPermissionStringInput/>
       <UIAccessibleCheckboxInput>Derecho de Acceso</UIAccessibleCheckboxInput>
       <UIEditableCheckboxInput>Derecho de Edición</UIEditableCheckboxInput>
     </label>

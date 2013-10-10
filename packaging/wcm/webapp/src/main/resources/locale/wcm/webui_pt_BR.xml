@@ -273,7 +273,6 @@ Não é possível pré-visualizar este conteúdo. Este modelo não é suportado<
   <UIPermissionManager>
     <label>
       <UIPermissionInputSetWithAction>Permissão</UIPermissionInputSetWithAction>
-      <UIPermissionStringInput/>
       <UIAccessibleCheckboxInput>Direito de Acesso</UIAccessibleCheckboxInput>
       <UIEditableCheckboxInput>Direito de edição</UIEditableCheckboxInput>
     </label>

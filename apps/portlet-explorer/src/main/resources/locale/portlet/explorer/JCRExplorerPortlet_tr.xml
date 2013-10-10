@@ -668,7 +668,6 @@
       <remove-property>Bu özelliği kaldırmak istediğinizden emin misiniz?</remove-property>
     </confirm>
     <header>
-      <icon/>
       <name>Ad</name>
       <multiValue>Multi Value</multiValue>
       <value>Değer</value>

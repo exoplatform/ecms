@@ -668,7 +668,6 @@
       <remove-property>Bạn có chắc chắn muốn gỡ bỏ thuộc tính này không?</remove-property>
     </confirm>
     <header>
-      <icon/>
       <name>Tên</name>
       <multiValue>Đa giá trị</multiValue>
       <value>Giá trị</value>

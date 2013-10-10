@@ -127,7 +127,7 @@
 <header>
 <usersOrGroups>Người dùng hoặc nhóm người dùng</usersOrGroups>
 <read>Đọc</read>
-<addNode>Thêm Node</addNode>
+<addNode>Thêm Nút</addNode>
 <setProperty>Gỡ bỏ</setProperty>
 <remove>Gỡ bỏ</remove>
 <action>Hành động</action>
@@ -1370,11 +1370,11 @@
       <permission>UIPermissionTreeForm</permission>
       <userOrGroup>Người dùng hoặc Nhóm người dùng</userOrGroup>
       <read>Quyền Đọc</read>
-      <add_node>Quyền Thêm Node</add_node>
+      <add_node>Quyền Thêm Nút</add_node>
       <set_property>Quyền Thiết lập Thuộc tính</set_property>
       <remove>Quyền Gỡ bỏ</remove>
     </label>
-    <title>Thêm phân quyền cho Node</title>
+    <title>Thêm phân quyền cho Nút</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>Lưu</Save>
@@ -1477,7 +1477,7 @@
       <add_node>Sửa đổi</add_node>
       <remove>Quyền xóa</remove>
     </label>
-    <title>Thêm phân quyền cho node</title>
+    <title>Thêm quyền cho nút</title>
     <action>
       <Close>#{word.close}</Close>
       <Save>#{word.save}</Save>
@@ -2459,7 +2459,6 @@
     </action>
     <label>
       <userOrGroup>Kiểu thành viên:</userOrGroup>
-      <permission/>
     </label>
     <msg>
       <userOrGroup-alreadyExists>Kiểu thành viên đã tồn tại, xin chọn lại kiểu khác.</userOrGroup-alreadyExists>
@@ -2497,7 +2496,7 @@
   </NodeTypeNameValidator>
   <UIActionForm>
     <msg>
-      <constraint-violation-exception>Không thể thêm node '{0}' vào '{1}' trong không gian lưu trữ '{2}' vì có vấn đề với phân quyền và điều kiện ràng buộc.</constraint-violation-exception>
+      <constraint-violation-exception>Không thể thêm nút '{0}' vào '{1}' trong không gian lưu trữ '{2}' do phân quyền hoặc điều kiện ràng buộc.</constraint-violation-exception>
     </msg>
   </UIActionForm>
   

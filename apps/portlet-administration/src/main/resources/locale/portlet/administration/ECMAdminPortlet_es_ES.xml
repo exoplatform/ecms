@@ -2459,7 +2459,6 @@
     </action>
     <label>
       <userOrGroup>Membresías:</userOrGroup>
-      <permission/>
     </label>
     <msg>
       <userOrGroup-alreadyExists>La membresía ya existe. Por favor, seleccione otra.</userOrGroup-alreadyExists>

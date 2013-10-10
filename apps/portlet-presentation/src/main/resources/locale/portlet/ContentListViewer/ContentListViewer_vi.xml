@@ -40,7 +40,6 @@
       <UICLVConfigHeaderFormStringInput>Đầu mục</UICLVConfigHeaderFormStringInput>
       <UICLVConfigDisplayTemplateFormSelectBox>Mẫu thiết kế</UICLVConfigDisplayTemplateFormSelectBox>
       <UICLVConfigPaginatorTemplateFormSelectBox>Phân trang</UICLVConfigPaginatorTemplateFormSelectBox>
-      <UICLVConfigTargetPageFormStringInput/>
       <UICLVConfigItemsPerPageFormStringInput>Số lượng tài liệu/1 trang</UICLVConfigItemsPerPageFormStringInput>
       <UICLVConfigShowIllustrationFormCheckboxInput>Hiện Hình ảnh</UICLVConfigShowIllustrationFormCheckboxInput>
       <UICLVConfigShowSummaryFormCheckboxInput>Hiện Tóm tắt</UICLVConfigShowSummaryFormCheckboxInput>

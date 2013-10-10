@@ -10,7 +10,6 @@
       <name>Nome</name>
       <action>Aggiungi</action>
     </header>
-    <action/>
     <info>
       <child-not-found>Figlio non trovato!</child-not-found>
     </info>

@@ -27,14 +27,12 @@
       <UIFCCWorkspaceFormSelectBox>اختيار مساحة عمل</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>خيارات النموذج</UIFCCTemplateField>
       <UIFCCLocationFormInputAction>مكان الحفظ</UIFCCLocationFormInputAction>
-      <UIFCCLocationFormStringInput/>
       <UIFCCTemplateFormSelectBox>اختيار النموذج</UIFCCTemplateFormSelectBox>
       <UIFCCSaveFormStringInput>تخصيص زر الحفظ</UIFCCSaveFormStringInput>
       <UIFCCMessageFormTextareaInput>رسالة شكر</UIFCCMessageFormTextareaInput>
       <UIFCCRedirectFormCheckboxInput>إعادة توجيه:</UIFCCRedirectFormCheckboxInput>
       <UIFCCRedirectPathFormStringInput>إعادة توجيه المسار:</UIFCCRedirectPathFormStringInput>
       <UIFCCActionField>الإجراءات</UIFCCActionField>
-      <UIFCCActionList/>
     </label>
     <msg>
       <save-successfully>حفظ تفضيلات المدخل بنجاح.</save-successfully>

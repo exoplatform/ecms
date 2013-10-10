@@ -10,7 +10,6 @@
       <name>الفرع غير موجود!</name>
       <action>إضافة</action>
     </header>
-    <action/>
     <info>
       <child-not-found>الفرع غير موجود!</child-not-found>
     </info>

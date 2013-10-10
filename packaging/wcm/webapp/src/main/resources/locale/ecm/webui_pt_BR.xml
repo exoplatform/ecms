@@ -10,7 +10,6 @@
       <name>Nome</name>
       <action>Adicionar</action>
     </header>
-    <action/>
     <info>
       <child-not-found>Sub-nó não encontrado!</child-not-found>
     </info>

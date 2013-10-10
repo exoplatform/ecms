@@ -27,14 +27,12 @@
       <UIFCCWorkspaceFormSelectBox>Seleccione el espacio de trabajo</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>Opciones de Plantilla</UIFCCTemplateField>
       <UIFCCLocationFormInputAction>Localización a guardar</UIFCCLocationFormInputAction>
-      <UIFCCLocationFormStringInput/>
       <UIFCCTemplateFormSelectBox>Seleccionar Plantilla</UIFCCTemplateFormSelectBox>
       <UIFCCSaveFormStringInput>Personalizar el botón de guardar</UIFCCSaveFormStringInput>
       <UIFCCMessageFormTextareaInput>Personalizar Mensaje de Guardar</UIFCCMessageFormTextareaInput>
       <UIFCCRedirectFormCheckboxInput>Redirigir:</UIFCCRedirectFormCheckboxInput>
       <UIFCCRedirectPathFormStringInput>Redirigir la ruta:</UIFCCRedirectPathFormStringInput>
       <UIFCCActionField>Acciones</UIFCCActionField>
-      <UIFCCActionList/>
     </label>
     <msg>
       <save-successfully>Se guardó a las preferencias del portlet  exitosamente.</save-successfully>

@@ -27,14 +27,12 @@
       <UIFCCWorkspaceFormSelectBox>ワークスペースの選択</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>テンプレートオプション</UIFCCTemplateField>
       <UIFCCLocationFormInputAction>保存先</UIFCCLocationFormInputAction>
-      <UIFCCLocationFormStringInput/>
       <UIFCCTemplateFormSelectBox>テンプレートを選択</UIFCCTemplateFormSelectBox>
       <UIFCCSaveFormStringInput>カスタム保存ボタン</UIFCCSaveFormStringInput>
       <UIFCCMessageFormTextareaInput>カスタム保存メッセージ</UIFCCMessageFormTextareaInput>
       <UIFCCRedirectFormCheckboxInput>リダイレクト:</UIFCCRedirectFormCheckboxInput>
       <UIFCCRedirectPathFormStringInput>リダイレクト パス:</UIFCCRedirectPathFormStringInput>
       <UIFCCActionField>アクション</UIFCCActionField>
-      <UIFCCActionList/>
     </label>
     <msg>
       <save-successfully>ポートレット設定に保存しました</save-successfully>

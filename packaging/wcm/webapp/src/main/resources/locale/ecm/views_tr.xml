@@ -152,7 +152,7 @@
         <format>Biçim</format>
         <coverage>Kapsama alanı</coverage>
         <identifier>Tanımlayıcı</identifier>
-        <languages>Dil</languages>
+        <languages>Diller</languages>
       </label>
       <action>
         <add-edit>Ekle/Düzenle</add-edit>

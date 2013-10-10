@@ -2459,7 +2459,6 @@
     </action>
     <label>
       <userOrGroup>メンバーシップ:</userOrGroup>
-      <permission/>
     </label>
     <msg>
       <userOrGroup-alreadyExists>メンバーシップは既に存在します。別の物を選択してください!</userOrGroup-alreadyExists>

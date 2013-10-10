@@ -10,7 +10,6 @@
       <name>Tên</name>
       <action>Thêm</action>
     </header>
-    <action/>
     <info>
       <child-not-found>Không tìm thấy nút con.</child-not-found>
     </info>
