@@ -10,7 +10,6 @@
       <name>Nombre</name>
       <action>Añadir</action>
     </header>
-    <action/>
     <info>
       <child-not-found>¡El subnodo no fué encontrado!</child-not-found>
     </info>

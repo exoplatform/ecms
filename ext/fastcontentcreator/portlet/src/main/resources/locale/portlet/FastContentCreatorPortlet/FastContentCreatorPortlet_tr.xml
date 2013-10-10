@@ -27,14 +27,12 @@
       <UIFCCWorkspaceFormSelectBox>Çalışma Alanı Seçin</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>Şablon Seçenekleri</UIFCCTemplateField>
       <UIFCCLocationFormInputAction>Kaydetmek için konum</UIFCCLocationFormInputAction>
-      <UIFCCLocationFormStringInput/>
       <UIFCCTemplateFormSelectBox>Şablon Seçin</UIFCCTemplateFormSelectBox>
       <UIFCCSaveFormStringInput>Kaydet düğmesini özelleştirin</UIFCCSaveFormStringInput>
       <UIFCCMessageFormTextareaInput>Özel Mesaj Kaydet</UIFCCMessageFormTextareaInput>
       <UIFCCRedirectFormCheckboxInput>Yönlendirme:</UIFCCRedirectFormCheckboxInput>
       <UIFCCRedirectPathFormStringInput>Yönlendirme Yolu:</UIFCCRedirectPathFormStringInput>
       <UIFCCActionField>Eylemler</UIFCCActionField>
-      <UIFCCActionList/>
     </label>
     <msg>
       <save-successfully>Portlet tercihleri başarı ile ​​kaydedildi.</save-successfully>

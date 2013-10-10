@@ -27,14 +27,12 @@
       <UIFCCWorkspaceFormSelectBox>Selecionar Espaço de Trabalho</UIFCCWorkspaceFormSelectBox>
       <UIFCCTemplateField>Opções de modelo</UIFCCTemplateField>
       <UIFCCLocationFormInputAction>Local para salvar</UIFCCLocationFormInputAction>
-      <UIFCCLocationFormStringInput/>
       <UIFCCTemplateFormSelectBox>Selecionar Modelo</UIFCCTemplateFormSelectBox>
       <UIFCCSaveFormStringInput>Customizar o botão Salvar</UIFCCSaveFormStringInput>
       <UIFCCMessageFormTextareaInput>Mensagem de agradecimento</UIFCCMessageFormTextareaInput>
       <UIFCCRedirectFormCheckboxInput>Redirecionar:</UIFCCRedirectFormCheckboxInput>
       <UIFCCRedirectPathFormStringInput>Caminho de redirecionamento:</UIFCCRedirectPathFormStringInput>
       <UIFCCActionField>Ações</UIFCCActionField>
-      <UIFCCActionList/>
     </label>
     <msg>
       <save-successfully>Salvo nas preferências de portlets com sucesso</save-successfully>

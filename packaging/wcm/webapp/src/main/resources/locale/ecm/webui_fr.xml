@@ -10,7 +10,6 @@
       <name>Nom</name>
       <action>Ajouter</action>
     </header>
-    <action />
     <info>
       <child-not-found>Pas de sous-noeud.</child-not-found>
     </info>

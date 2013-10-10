@@ -10,7 +10,6 @@
       <name>Ad</name>
       <action>Ekle</action>
     </header>
-    <action/>
     <info>
       <child-not-found>Alt öğe bulunamadı!</child-not-found>
     </info>

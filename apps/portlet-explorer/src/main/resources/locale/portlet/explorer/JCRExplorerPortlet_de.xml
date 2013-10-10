@@ -668,7 +668,6 @@
       <remove-property>Möchten Sie diese Eigenschaft wirklich entfernen?</remove-property>
     </confirm>
     <header>
-      <icon/>
       <name>Name</name>
       <multiValue>Mehrwertig</multiValue>
       <value>Wert</value>
@@ -1475,7 +1474,7 @@
       <filetype-error>Kann die hochgeladene Datei nicht importieren. Die .xml Datei könnte ungültig sein.</filetype-error>
       <mimetype-invalid>Sie können nur .xml oder .zip Dateien importieren.</mimetype-invalid>
       <access-denied>Zugriff verweigert. Sie haben kein Recht Elemente hier zu Importieren.</access-denied>
-      <constraint-violation-exception>Impossible to import data. The type '{0}' is not allowed in this location.</constraint-violation-exception>
+      <constraint-violation-exception>Daten können nicht importiert werden. Der Knotentyp "{0}" ist nicht erlaubt.</constraint-violation-exception>
       <item-exists-exception>Der referenzierte Knoten hat dieselbe UUID wie ein im Arbeitsbereich bereits existierender Knoten.</item-exists-exception>
     </msg>
   </UIImportNode>

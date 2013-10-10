@@ -2459,7 +2459,6 @@
     </action>
     <label>
       <userOrGroup>العضويات:</userOrGroup>
-      <permission/>
     </label>
     <msg>
       <userOrGroup-alreadyExists>هذه العضوية موجودة مُسبقا. الرجاء اختيار واحدة أخرى.</userOrGroup-alreadyExists>

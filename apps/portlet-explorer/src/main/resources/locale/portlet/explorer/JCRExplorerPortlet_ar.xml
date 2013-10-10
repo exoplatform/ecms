@@ -668,7 +668,6 @@
       <remove-property>هل ترغب حقّــا بحذف هذه الخاصيّة؟</remove-property>
     </confirm>
     <header>
-      <icon/>
       <name>الاسم</name>
       <multiValue>متعدد المحتوى</multiValue>
       <value>قيمة</value>

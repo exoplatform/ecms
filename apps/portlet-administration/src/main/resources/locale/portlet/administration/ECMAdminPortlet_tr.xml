@@ -2459,7 +2459,6 @@
     </action>
     <label>
       <userOrGroup>Üyelikler:</userOrGroup>
-      <permission/>
     </label>
     <msg>
       <userOrGroup-alreadyExists>Bu üyelik zaten var. Lütfen başka bir tane seçin.</userOrGroup-alreadyExists>

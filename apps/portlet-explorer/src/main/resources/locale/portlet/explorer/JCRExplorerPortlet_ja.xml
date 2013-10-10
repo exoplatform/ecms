@@ -668,7 +668,6 @@
       <remove-property>このプロパティを削除しますか？</remove-property>
     </confirm>
     <header>
-      <icon/>
       <name>名前</name>
       <multiValue>複数の値</multiValue>
       <value>値</value>

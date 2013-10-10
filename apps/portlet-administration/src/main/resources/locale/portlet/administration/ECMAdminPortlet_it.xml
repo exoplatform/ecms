@@ -2459,7 +2459,6 @@
     </action>
     <label>
       <userOrGroup>Membership:</userOrGroup>
-      <permission/>
     </label>
     <msg>
       <userOrGroup-alreadyExists>La membership esiste già. Selezionane un'altra.</userOrGroup-alreadyExists>

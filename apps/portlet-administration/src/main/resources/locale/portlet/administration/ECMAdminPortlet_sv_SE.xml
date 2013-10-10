@@ -2459,7 +2459,6 @@
     </action>
     <label>
       <userOrGroup>Medlemskap:</userOrGroup>
-      <permission/>
     </label>
     <msg>
       <userOrGroup-alreadyExists>Detta medlemskap finns redan. Välj en annan.</userOrGroup-alreadyExists>

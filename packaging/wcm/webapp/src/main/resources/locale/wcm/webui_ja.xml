@@ -272,7 +272,6 @@
   <UIPermissionManager>
     <label>
       <UIPermissionInputSetWithAction>パーミッション</UIPermissionInputSetWithAction>
-      <UIPermissionStringInput/>
       <UIAccessibleCheckboxInput>アクセス権</UIAccessibleCheckboxInput>
       <UIEditableCheckboxInput>編集権</UIEditableCheckboxInput>
     </label>
