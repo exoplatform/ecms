@@ -9,6 +9,22 @@
 	import org.exoplatform.wcm.webui.paginator.UICustomizeablePaginator;
 	import org.exoplatform.wcm.webui.pclv.UIPCLVPortlet;
 	import org.exoplatform.wcm.webui.Utils;
+  import org.exoplatform.services.jcr.core.ManageableRepository;
+  import org.exoplatform.webui.application.WebuiRequestContext;
+
+	
+	
+	def propertyName = "exo:title";
+	def repo = "";
+  def workspace = "";
+  def uuid = "";
+  
+  def siteName = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getPortalOwner();
+  Locale locale = WebuiRequestContext.getCurrentInstance().getLocale();
+  def language = locale.getLanguage();
+  
+  def draftMsg = _ctx.appRes("PublicationStates.draft");
+  def publishedMsg = _ctx.appRes("PublicationStates.published");
 %>
 <div class="UIPCLVEvents">
  	<%
@@ -69,6 +85,11 @@
 							  imgSrc = "/eXoWCMResources/skin/DefaultSkin/background/IIlustrationImages.jpg";
 							if (itemTitle != null && itemTitle.trim().length() != 0)
 								itemName = itemTitle;
+							
+							repo = ((ManageableRepository)viewNode.getSession().getRepository()).getConfiguration().getName();
+              workspace = viewNode.getSession().getWorkspace().getName();
+              uuid = viewNode.getUUID();
+              
 								%>
 									<div class="NormalNews clearfix">
 										<% 
@@ -78,25 +99,40 @@
 										%>
 										<div class="ContentNormalNews">
 											<% 
-												if (isShowTitle) {
-													%>
-														<div>
-															<%
-																if (isShowLink) {
-																	%><a class="TitleContentNormalNews" href="$itemLink" rel="tooltip" data-placement="bottom" title="<%= itemName %>"><%= itemName %></a><%
-																} else {
-																		print uicomponent.getInlineEditingField(viewNode, "exo:title", itemTitle, "TEXT", "CLVTitle_"+String.valueOf(i), "GroovyCLVTitle", true, "button_direction=left-to-right");
-																} 
-															%>
-														</div>
-													<%
-												}
+												
+  											if (uicomponent.isViewMode()){
+                          if (isShowTitle) {
+                            if (isShowLink) {
+                              %><div class="Title"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="$itemName">$itemName</a></div><%
+                            } else {                          
+                            %>
+                              <div class="Title">                              
+                                <% print uicomponent.getInlineEditingField(viewNode, "exo:title", itemName, "TEXT", "CLVTitle_"+String.valueOf(i), "GroovyCLVTitle", true, "button_direction=left-to-right","fast_publish=" + uicomponent.getFastPublicLink(viewNode));%>
+                              </div>
+                            <%  
+                            }
+                          }
+                        }
+                        else {
+                          if (isShowTitle) {
+                            if (isShowLink) {
+                              %><div class="Title WCMInlineEditable" contenteditable="true" propertyName="<%=propertyName%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" publishedmsg="<%=publishedMsg%>" draftmsg="<%=draftMsg%>" fastpublishlink="<%=uicomponent.getFastPublicLink(viewNode)%>" language="<%=language%>"><a href="$itemLink" rel="tooltip" data-placement="bottom" title="$itemName">$itemName</a></div><%
+                            } else {
+                            %>
+                              <div class="Title WCMInlineEditable" contenteditable="true" propertyName="<%=propertyName%>" repo="<%=repo%>" workspace="<%=workspace%>" uuid="<%=uuid%>" siteName="<%=siteName%>" language="<%=language%>" publishedmsg="<%=publishedMsg%>" draftmsg="<%=draftMsg%>" fastpublishlink="<%=uicomponent.getFastPublicLink(viewNode)%>"> 
+                                <% print uicomponent.getInlineEditingField(viewNode, "exo:title", itemName, "TEXT", "CLVTitle_"+String.valueOf(i), "GroovyCLVTitle", true, "button_direction=left-to-right","fast_publish=" + uicomponent.getFastPublicLink(viewNode)); %>
+                              </div>
+                            <%  
+                            }
+                          }
+                        }
+											
 											
 												if (isShowSumary) {
 													%><div class="Summary">
 													<%
                             if (itemSummaryField!=null) {
-                              print uicomponent.getInlineEditingField(viewNode, itemSummaryField, itemSummary, "TEXTAREA", "Text_"+String.valueOf(i), "CLV1ColumnPresent", true);
+                              print uicomponent.getInlineEditingField(viewNode, itemSummaryField, itemSummary, "TEXTAREA", "Text_"+String.valueOf(i), "CLV1ColumnPresent", true,"fast_publish=" + uicomponent.getFastPublicLink(viewNode));
                             }
                           %>
                           </div><%

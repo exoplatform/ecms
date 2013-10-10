@@ -216,6 +216,13 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#isRssLink()
    */
   public boolean isRssLink() { return false ; }
+  
+  /**
+   * Checks if allow render fast publish link for the inline editting
+   *
+   * @return true, if need to render fast publish link
+   */
+  public boolean isFastPublishLink() { return false ; }
 
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getSupportedLocalise()

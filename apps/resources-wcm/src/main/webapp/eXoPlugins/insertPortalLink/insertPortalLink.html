@@ -28,7 +28,7 @@
 					window.uiPopup = uiPopup; require(["../../../eXoResources/javascript/eXo/core/UIMaskLayer.js"], function(uiMaskLayer) {
 						window.uiMaskLayer = uiMaskLayer; require(["../../../eXoWCMResources/javascript/eXo/wcm/backoffice/private/WCMUtils.js"], function(wcm_utils) {
 							window.wcm_utils = wcm_utils; require(["js/LinkSelector.js"], function(link_selector) {
-								window.link_selector = link_selector; require(["../../eXoPlugins.js"], function() {
+								window.link_selector = link_selector; require(["../../../CommonsResources/eXoPlugins.js"], function() {
 									
 
 									eXo.ecm.LinkSelector.init();	
@@ -48,54 +48,28 @@
 		
 	</head>
 	<body>
-		<div id="root" class="Root" style="position: relative; width: 100%; height: 100%; overflow: hidden;">
-			<div class="ListContainer">
-				<div class="LeftWorkspace" id="LeftWorkspace">
-<!--
-						<div class="Node">
-								<div class="Collapse">
-									<div name="/Gadgets/" class="IconNode nt_unstructured16x16Icon 16x16Icon">
-										<a href="javascript: void(0);">
-											acme
-										</a>
-									</div>
-								</div>
-						</div>
-						<div class="ChildrenContainer">
-							<div class="Node">
-								<div class="Collapse">
-									<div name="/Gadgets/" class="IconNode nt_unstructured16x16Icon 16x16Icon">
-										<a href="javascript: void(0);">
-											Site Management
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="Node">
-								<div class="Collapse">
-									<div name="/Gadgets/" class="IconNode nt_unstructured16x16Icon 16x16Icon">
-										<a href="javascript: void(0);">
-											classic
-										</a>
-									</div>
-								</div>
-						</div>
--->
+		<div id="root" class="Root" style="position: relative; height: 95%; overflow: auto;padding:15px">
+			<div class="row-fluid">
+				<div class="span4">
+					<div class="uiBox" >
+						<div class=" " id="LeftWorkspace"></div>
+					</div>
 				</div>
-				<div class="RightWorkspace">
-					<div class="DisplayArea" id="DisplayArea">
-						<div class="ListView">
-					  	<table cellspacing="0" id="ListRecords" style="table-layout: fixed; width: 100%; border-bottom:1px solid #F4F4F4;">
+				<div class="span8">
+					<div class="displayArea uiBox" id="DisplayArea">
+						<div class="listView uiContentBox">
+					  	<table cellspacing="0" cellpadding="0" border="0" class="uiGrid table table-hover table-striped" id="ListRecords" >
 					    	<thead>
 					    		<tr>
-					    		  <th class="THBar"> Name </th>
-					   	      <th style="width: 120px;" class="THBar"> Date </th>
+									<th > Name </th>
+									<th style="width: 120px;" > Date </th>
 					    	 	</tr>
-								</thead>
-						  	<tr class="EventItem">
-									<td class="Item TRNoContent" colspan="2">There is no content</td>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="empty" colspan="2">There is no content</td>
 								</tr>
+							</tbody>
 							</table>
 						</div>
 				</div>	

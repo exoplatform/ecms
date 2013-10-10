@@ -1,3 +1,11 @@
+<%
+  import org.exoplatform.wcm.webui.Utils;
+  import org.exoplatform.services.wcm.publication.WCMComposer;
+  
+  def rcontext = _ctx.getRequestContext();
+  
+%>  
+
 <div class="UICLVPortlet" id="$uicomponent.id">
   <% uicomponent.renderChildren(); %>
 </div>

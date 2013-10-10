@@ -224,7 +224,6 @@
 
 .containerHoverClassInner:hover {
   border:1px solid @blueLight !important;
-	
 	.edittingContent {
 		display: block;
 	}
@@ -397,14 +396,33 @@
 	margin-left: 250px;
 }
 
-.InlineEditing {
-	.EditContent {
-	    display: none;
-	    height: 100%;
-	    padding: 2px 7px 2px 2px;
-	    width: 98%;
-	 }
+.uiWaitting {
+  	width: 32px;
+  	height: 32px;
+  	display: block;
+  	position: absolute;
+  	background: url("/eXoWCMResources/skin/images/Icons/loading_24x24.gif") no-repeat center;
+  	top: 50%;
+  	left: 50%;
+  	z-index: 15;
+  	margin: -12px 0 0 -12px;
 }
+
+.markLayerInline {
+  	background: black;
+	opacity: 0.3;
+	position: absolute;
+	z-index: 10;
+	border-radius: 5px;
+}
+
+.cke_editable ul li {
+  list-style: disc;
+}
+.cke_editable ol li {
+  list-style: decimal;
+}
+
 
 .UIWCMSearchPortlet {
 	.UIAdvanceSearchResultDefault {
@@ -415,7 +433,7 @@
 		    line-height: 25px;
 		    overflow: hidden;
 		    padding: 0 5px;
-		}
+		  }
 		p {
 			padding: 0px 10px;
 		}

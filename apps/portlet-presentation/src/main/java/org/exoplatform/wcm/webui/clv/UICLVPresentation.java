@@ -59,6 +59,7 @@ import org.exoplatform.wcm.webui.administration.UIEditingForm;
 import org.exoplatform.wcm.webui.paginator.UICustomizeablePaginator;
 import org.exoplatform.wcm.webui.reader.ContentReader;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.web.application.JavascriptManager;
 import org.exoplatform.web.url.navigation.NavigationResource;
 import org.exoplatform.web.url.navigation.NodeURL;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -596,6 +597,10 @@ public class UICLVPresentation extends UIContainer {
     }
     return false;
   }
+  
+  public boolean isViewMode() {
+    return Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE);
+  }
 
   /**
    * Gets the illustrative image.
@@ -634,6 +639,18 @@ public class UICLVPresentation extends UIContainer {
     return isShowField(UICLVPortlet.PREFERENCE_SHOW_RSSLINK)
         && (this.getAncestorOfType(UICLVPortlet.class).getFolderPathParamValue() != null
             || UICLVPortlet.DISPLAY_MODE_AUTOMATIC.equals(Utils.getPortletPreference(UICLVPortlet.PREFERENCE_DISPLAY_MODE)));
+  }
+  
+  public String getFastPublicLink(Node viewNode) {
+    String fastPublishLink = null;
+    try {
+      fastPublishLink = event("FastPublish", NodeLocation.getExpressionByNode(viewNode));
+    } catch (Exception e) {
+      if (LOG.isWarnEnabled()) {
+        LOG.warn(e.getMessage());
+      }
+    }
+    return fastPublishLink;
   }
 
   /**
@@ -683,9 +700,9 @@ public class UICLVPresentation extends UIContainer {
     String contentEditLink = getEditLink(viewNode, true, false);
     String contentDeleteLink = event("DeleteContent", NodeLocation.getExpressionByNode(viewNode));
     String fastPublishLink = event("FastPublish", NodeLocation.getExpressionByNode(viewNode));
-    String hoverClass = Utils.isShowQuickEdit() ? " containerHoverClassInner" : "";
+    String id = this.getClass().getSimpleName() + System.currentTimeMillis();
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-    sb.append("<div class=\"" + cssClass + " " + hoverClass + " \">");
+    sb.append("<div id=\""+id+"\" class=\"" + cssClass + " \">");
     if (Utils.isShowQuickEdit()) {
       sb.append("  <div class=\"edittingContent\" style=\" z-index: 5\">");
       sb.append("    <div class=\"edittingToolBar clearfix\" >");
@@ -765,8 +782,13 @@ public class UICLVPresentation extends UIContainer {
 
       sb.append("      </div>");
       sb.append("    </div>");
+      
     }
-
+    String className = cssClass + " " + this.getAncestorOfType(UICLVPortlet.class).getName();
+    String hoverClass = Utils.isShowQuickEdit() ? " containerHoverClassInner" : "";
+    JavascriptManager jsManager = portletRequestContext.getJavascriptManager();
+    jsManager.getRequireJS().addScripts("gj('#"+id+"').mouseenter( function() {eXo.ecm.WCMUtils.changeStyleClass('"+id+"','"+className+" "+hoverClass+"');});");
+    jsManager.getRequireJS().addScripts("gj('#"+id+"').mouseleave( function() {eXo.ecm.WCMUtils.changeStyleClass('"+id+"','"+className+"');});");
     return sb.toString();
   }
 
@@ -831,7 +853,7 @@ public class UICLVPresentation extends UIContainer {
       Node parent = node.getParent();
       node.remove();
       parent.getSession().save();
-      event.getRequestContext().addUIComponentToUpdateByAjax(contentListPresentation);
+      event.getRequestContext().getJavascriptManager().getRequireJS().addScripts("location.reload(true);");
       Utils.createPopupMessage(contentListPresentation,
                                "UICLVPresentation.msg.delete-content-successfull",
                                null,
@@ -855,10 +877,10 @@ public class UICLVPresentation extends UIContainer {
       if (node.isLocked()) {
         node.getSession().addLockToken(LockUtil.getLockToken(node));
       }
-      HashMap<String, String> context = new HashMap<String, String>();
-
+      HashMap<String, String> context = new HashMap<String, String>();     
       publicationService.changeState(node, "published", context);
-      event.getRequestContext().addUIComponentToUpdateByAjax(contentListPresentation);
+      event.getRequestContext().getJavascriptManager().getRequireJS().addScripts("location.reload(true);");
+      
     }
   }
 }

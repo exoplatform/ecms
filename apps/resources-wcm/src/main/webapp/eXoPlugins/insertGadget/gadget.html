@@ -6,98 +6,57 @@
 		<meta http-equiv="cache-control" content="no-cache"/>
 		<meta http-equiv="pragma" content="no-cache"/>
 		<meta http-equiv="eXpires" content="0"/>
-		<link type="text/css" rel="stylesheet" href="../../../eXoWCMResources/skin/DefaultSkin/DMSStylesheet.css"/>
 		<link type="text/css" rel="stylesheet" href="../../../eXoWCMResources/skin/DefaultSkin/WCMStylesheet.css"/>
 		<link type="text/css" rel="stylesheet" href="css/gadget.css"/>
-		<link type="text/css" rel="stylesheet" href="../../../eXoWCMResources/skin/DefaultSkin/DMSStylesheet.css"/>
-		<script type="text/javascript" src="../../../eXoResources/javascript/exo-jquery-1.7.1.js"></script>		
-		<script type="text/javascript" src="../../../eXoResources/javascript/eXo.js"></script>
-		<script type="text/javascript" src="../../../eXoResources/javascript/exo-jquery-alias.js"></script>
-		<script type="text/javascript" src="../../../eXoWCMResources/javascript/eXo/wcm/ECM.js"></script>		
-		<script type="text/javascript" src="../../../eXoResources/javascript/eXo/core/Util.js"></script>		
-		<script type="text/javascript" src="../../../eXoResources/javascript/eXo/core/Browser.js"></script>
-		<script type="text/javascript" src="../../../eXoResources/javascript/eXo/core/UIMaskLayer.js"></script>
-		<script type="text/javascript" src="../../../eXoWCMResources/javascript/eXo/wcm/backoffice/private/WCMUtils.js"></script>	
-		<script type="text/javascript" src="../../eXoPlugins.js"></script>
-		<script type="text/javascript" src="js/GadgetSelector.js"></script>
+		
+		<link type="text/css" rel="stylesheet" href="../../../eXoResources/skin/bootstrap/css/bootstrap.css"/>
+		<link type="text/css" rel="stylesheet" href="../../../eXoResources/skin/css/Core.css"/>
+		<link type="text/css" rel="stylesheet" href="../../../eXoWCMResources/skin/css/ecms-resources-wcmskin.css"/>
+		<link type="text/css" rel="stylesheet" href="../../../ecmexplorer/skin/css/ecms-explorer.css"/>
+		
+		<script type="text/javascript" src="../../../eXoResources/javascript/jquery-1.7.1.js"></script>
+		<script type="text/javascript" src="../../../eXoResources/javascript/eXo/core/require.js"></script>
+		<script type="text/javascript" src="../../../eXoResources/javascript/eXo.js"></script>		
+		<script type="text/javascript" src="../../../eXoWCMResources/javascript/eXo/wcm/ECM.js"></script>			
+		
+				
 		<script type="text/javascript">
 			var CKEDITOR = window.opener.CKEDITOR || {};
-			//eXp.userLanguage = CKEDITOR.lang.detect() || "en";
-			//window.onload = eXp.loadScript(window, "lang/" + eXp.userLanguage + ".js"); 
+			require(["../../../eXoResources/javascript/eXo/core/Base.js"], function(base) {
+				window.base = base; require(["../../../eXoResources/javascript/eXo/webui/UIPopup.js"], function(uiPopup) {
+					window.uiPopup = uiPopup; require(["../../../eXoResources/javascript/eXo/core/UIMaskLayer.js"], function(uiMaskLayer) {
+						window.uiMaskLayer = uiMaskLayer; require(["../../../eXoWCMResources/javascript/eXo/wcm/backoffice/private/WCMUtils.js"], function(wcm_utils) {
+							window.wcm_utils = wcm_utils; require(["js/GadgetSelector.js"], function(gadget_selector) {
+								window.gadget_selector = gadget_selector; require(["../../../CommonsResources/eXoPlugins.js"], function() {
+									
+
+									GadgetSelector.init();
+									
+									
+									
+								});
+							});
+						});
+					});
+				});
+			});
+			var gj=$;
 		</script>
 	</head>
 	<body>
-		<div id="root" class="Root" style="position: relative; width: 100%; height: 100%; overflow: hidden;">
-			<div class="ListContainer">
-				<div class="LeftWorkspace" id="LeftWorkspace">
-<!--
-						<div class="NodeGroup">
-							<div class="Node">
-								<div class="Collapse">
-									<div name="/Gadgets/" class="IconNode nt_unstructured16x16Icon 16x16Icon">
-										<a href="javascript: void(0);">
-											Gadgets
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
--->
+		<div id="root" class="Root" style="position: relative; height: 95%; overflow: auto;padding:15px">
+			<div class="row-fluid">
+				<div class="span3 listContainer">
+					<div class="uiBox" >
+						<div class="leftWorkspace " id="LeftWorkspace"></div>
+					</div>
 				</div>
-				<div class="Separator" style="height:800px;"><span></span></div>
-				<div class="RightWorkspace">
-					<div class="DisplayArea" id="DisplayArea">
-<!--
-						<table style="float: left; margin-right: 20px;" class="ThumbnailTable">
-							<tbody>
-								<tr>
-									<td>
-										<img lang="" alt="Todo" src="http://localhost:8080/eXoGadgets/skin/DefaultSkin/portletIcons/Todo.png" onclick="insertLink(this);">
-										<div>Todo</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-						<table style="float: left; margin-right: 20px;" class="ThumbnailTable">
-							<tbody>
-								<tr>
-									<td>
-										<img lang="" alt="Calendar" src="http://localhost:8080/eXoGadgets/skin/DefaultSkin/portletIcons/Calendar.png" onclick="insertLink(this)">
-										<div>Calendar</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-						<table style="float: left; margin-right: 20px;" class="ThumbnailTable">
-							<tbody>
-								<tr>
-									<td>
-										<img lang="" alt="Calculator" src="http://localhost:8080/eXoGadgets/skin/DefaultSkin/portletIcons/Calculator.png" onclick="insertLink(this)">
-										<div>Calculator</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-						<table style="float: left; margin-right: 20px;" class="ThumbnailTable">
-							<tbody>
-								<tr>
-									<td>
-										<img lang="" alt="Aggregator" src="http://www.gatein.org/eXoGadgets/skin/DefaultSkin/portletIcons/rssAggregator.png" onclick="insertLink(this)">
-										<div>rssAggregator</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
--->
-				</div>	
+				<div class="span9 rightWorkspace">
+					<div class="displayArea uiBox" >
+						<div class="uiContentBox clearfix" id="DisplayArea"></div>
+					</div>	
 				</div>
 			</div>
 		</div>
-	</body>
-
-	<script type="text/javascript">
-		window.onload = function() {
-			GadgetSelector.init();
-		};
-	</script>
+	</body>	
 </html>

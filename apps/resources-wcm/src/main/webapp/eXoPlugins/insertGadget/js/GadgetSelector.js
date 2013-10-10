@@ -74,18 +74,20 @@ GadgetSelector.loadGadgets = function() {
 	GadgetSelector.resourceType = xmlFolderGadget.getElementsByTagName("Connector")[0].getAttribute("resourceType");
 	GadgetSelector.currentFolder = xmlFolderGadget.getElementsByTagName("CurrentFolder")[0].getAttribute("name");
 	var treeHTML = '';
+	treeHTML 		+= 		'<div class="uiTreeExplorer" >';
+	treeHTML 		+= 			'<ul class="nodeGroup" >';
 	for(var i = 0; i < nodeList.length; i++) {
 		var nameFolder = nodeList[i].getAttribute("name");
-		treeHTML 	  +=	'<div class="nodeGroup">';
-		treeHTML 		+= 		'<div class="Node">';
-		treeHTML		+=			'<div class="Expand">';
-		treeHTML 		+= 				'<div name="/'+GadgetSelector.currentFolder+'/" class="IconNode nt_unstructured16x16Icon 16x16Icon">'	;
-		treeHTML		+= 					'<a href="javascript: void(0);">'+nameFolder+'</a>';
+		treeHTML 	  +=	'<li class="node">';
+		treeHTML 		+= 		'<div class="expandIcon">';
+		treeHTML 		+= 				'<div name="/'+GadgetSelector.currentFolder+'/" >'	;
+		treeHTML		+= 					'<a href="javascript: void(0);"  data-original-title="'+nameFolder+'" data-placement="bottom" rel="tooltip"><i class="uiIcon16x16FolderDefault "></i>&nbsp;<span>'+nameFolder+'</span></a>';
 		treeHTML		+=				'</div>';
-		treeHTML		+=			'</div>';
 		treeHTML		+=		'</div>';
-		treeHTML		+=	'</div>';
+		treeHTML		+=	'</li>';
 	}
+	treeHTML		+=			'</ul>';
+	treeHTML		+=		'</div>';
 	var uiLeftWorkspace = document.getElementById('LeftWorkspace');	
 	if(uiLeftWorkspace) uiLeftWorkspace.innerHTML = treeHTML;
 
@@ -107,7 +109,7 @@ GadgetSelector.loadGadgets = function() {
 			"url":GadgetSelector.hostName+gadget.getAttribute("url")
 		});
 		GadgetSelector.listGadgetSource = listGadgetSource;
-		tblGadget 	+=	'<table class="ThumbnailTable">';
+		tblGadget 	+=	'<table class="thumbnailTable span2"  >';
 		tblGadget		+=		'<tr>';
 		tblGadget		+=			'<td>';
 		tblGadget		+=				'<img alt="'+nameGadget+'" name="'+nameGadget+'" height="80" src="'+srcImg+'" onclick="GadgetSelector.insertGadget(this);">';		

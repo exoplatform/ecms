@@ -25,98 +25,76 @@ CKEDITOR.dialog.add( 'insertPortalLink.dlg', function( editor )
 						type : 'html',
 						html :
 							'<style type="text/css">' +
-									'.ck_about_link .UIFormGrid {'+
+									'.ck_about_link .uIFormGrid {'+
 										'margin:auto;'+
 										'width:auto;'+
 									'}'+
 
-									'.ck_about_link .FieldLabel {'+
+									'.ck_about_link .fieldLabel,.ck_about_link .fieldComponent {'+
 										'padding:4px;'+
 									'}'+
-	
-									'.ck_about_link .FieldComponent {'+
-										'padding:4px;'+
-									'}'+
-
-									'.ck_about_link .FieldComponent input {'+
+									
+									'.ck_about_link .fieldComponent input {'+
 										'width:230px;'+
-										'background: white;'+
-										'border: 1px solid #c7c7c7;'+
-										'color: black;'+
+										'margin: 0px;'+
 									'}'+
 
-									'.ck_about_link .UIFormGrid .FieldComponent .UIAction {'+
-										'padding: 0px;'+
-									'}'+
-
-									'.ck_about_link .UIAction {'+
-										'padding: 8px 0px;'+
-									'}'+
-
-									'.ck_about_link .UIAction .ActionContainer {'+
+									'.ck_about_link .uiAction .actionContainer {'+
 										'margin:auto;'+
 										'width:auto;'+
-									'}'+
-
-									'.ck_about_link .UIFormGrid .FieldComponent .UIAction .ActionButton {'+
-										'display:block;'+
-										'float:none;'+
-										'margin:0 3px;'+
+									'}'+		
+									'.cke_reset_all .uiAction {'+
+										'padding: 15px 0 5px;'+
+										'text-align: center;'+
+									'}'+									
+									
+									'.cke_reset_all  .btn {' +		
+										'background-color: #F9F9F9;'+
+										'background-image: linear-gradient(to bottom, #FFFFFF, #F1F1F1);'+
+										'background-repeat: repeat-x;'+
+										'border: 1px solid #BBBBBB;'+
+										'border-radius: 4px 4px 4px 4px;'+
+										'box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);'+
+										'color: #333333;'+
+										'font-size: 13px;'+
+										'line-height: 18px;'+
+										'text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);'+
+										'padding: 4px 12px;'+
+										'text-align: center;'+
+										'vertical-align: middle;'+
 										'cursor: pointer;'+
-									'}'+
-		
-									'.ck_about_link .UIAction .ActionButton a:hover {'+
-										'color: #045ee8;'+
-									'}'+
-
-									'.ck_about_link .UIAction .ActionButton a{'+
-										'display: block;'+
-										'line-height: 22px;'+
-										'height: 22px;'+
-									'}'+
-
-									'.ck_about_link .UIAction .LightBlueStyle .ButtonMiddle {'+
-										'height: 22px;'+
+										'display: inline-block;'+
 									'}'+
 							'</style>' +
 							'<div class="cke_about_container">' +
 								'<div class="ck_about_link">'+
-								'<table class="UIFormGrid">' +
+								'<table class="uIFormGrid">' +
 									'<tbody>' +
 										'<tr>' +
-											'<td class="FieldLabel">'+
+											'<td class="fieldLabel">'+
 												'<label for="inputTitle">' + editor.lang.WCMInsertPortalLinkInputTitle + '</label>'+
 											'</td>'+
-											'<td colspan="2" class="FieldComponent">'+
+											'<td colspan="2" class="fieldComponent">'+
 												'<input type="text" id="inputTitle" value="'+ title +'" />'+
 											'</td>'+
 										'</tr>'+
 										'<tr>'+
-											'<td class="FieldLabel">'+
-												'<label style="float: left; margin-bottom: 3px; margin-top: 3px;">' + editor.lang.WCMInsertPortalLinkInputUrl + '</label>'+
+											'<td class="fieldLabel">'+
+												'<label >' + editor.lang.WCMInsertPortalLinkInputUrl + '</label>'+
 											'</td>'+
-											'<td class="FieldComponent">'+
-												'<input style="float: left; margin-bottom: 3px; margin-top: 3px;" type="text" id="txtUrl" />'+
+											'<td class="fieldComponent">'+
+												'<input  type="text" id="txtUrl" />'+
 											'</td>'+
-											'<td class="FieldComponent">'+
-												'<div style="float: left;" class="UIAction">'+
-													'<table align="center" class="ActionContainer">'+
+											'<td class="fieldComponent">'+
+												'<div  class="uiAction">'+
+													'<table align="center" class="actionContainer">'+
 														'<tbody>'+
 															'<tr>'+
 																'<td align="center">'+
-																	'<div class="ActionButton LightBlueStyle" onclick="getPortalLink();">'+
-																		'<div class="ButtonLeft">'+
-																			'<div class="ButtonRight">'+
-																				'<div class="ButtonMiddle">'+
-																					'<label>'+
-																						'<a src="http://www.w3.org/1999/xhtml">'+
-																							editor.lang.WCMInsertPortalLinkButtonGet +
-																						'</a>'+
-																					'</label>'+
-																				'</div>'+
-																			'</div>'+
-																		'</div>'+
-																	'</div>'+
+																	'<a class="btn" onclick="getPortalLink();"  src="http://www.w3.org/1999/xhtml">'+
+																		editor.lang.WCMInsertPortalLinkButtonGet +
+																	'</a>'+
+																					
 																'</td>'+
 															'</tr>'+
 														'</tbody>'+
@@ -127,41 +105,14 @@ CKEDITOR.dialog.add( 'insertPortalLink.dlg', function( editor )
 		  						'</tbody>'+
 								'</table>'+
 								
-								'<div class="UIAction">'+
-					  			'<table align="center" class="ActionContainer">'+
-					    			'<tbody>'+
-											'<tr>'+
-					      				'<td align="center">'+
-					        				'<div style="float: left; display: block;" class="ActionButton LightBlueStyle" onclick="previewLink();">'+
-					          					'<div class="ButtonLeft">'+
-					            					'<div class="ButtonRight">'+
-					              						'<div class="ButtonMiddle">'+
-					              							'<label >'+
-																				'<a src="http://www.w3.org/1999/xhtml">'+
-																					editor.lang.WCMInsertPortalLinkButtonPreview +
-																				'</a>'+
-																			'</label>'+
-					              						'</div>'+
-					            					'</div>'+
-					          					'</div>'+
-					        				'</div>'+
-					        				'<div style="float: left; display: block;" class="ActionButton LightBlueStyle" onclick="addURL();">'+
-					          					'<div class="ButtonLeft">'+
-					            					'<div class="ButtonRight">'+
-					              						'<div class="ButtonMiddle">'+
-					                						'<label fcklang="WCMInsertPortalLinkButtonSave">'+
-																				'<a src="http://www.w3.org/1999/xhtml">'+
-																					editor.lang.WCMInsertPortalLinkButtonSave +
-																				'</a>'+
-																			'</label>'+
-					              						'</div>'+
-					            					'</div>'+
-					          					'</div>'+
-					        				'</div>'+
-					      				'</td>'+
-					    				'</tr>'+
-					  				'</tbody>'+
-									'</table>'+
+								'<div class="uiAction ">'+
+									'<a fcklang="WCMInsertPortalLinkButtonSave" class="btn"  onclick="addURL();"  src="http://www.w3.org/1999/xhtml">'+
+										editor.lang.WCMInsertPortalLinkButtonSave +
+									'</a>'+	 								
+									'<a class="btn"  onclick="previewLink();" src="http://www.w3.org/1999/xhtml">'+
+										editor.lang.WCMInsertPortalLinkButtonPreview +
+									'</a>'+								             						
+					      				
 	    					'</div>'+
 							'</div>'+
 						'</div>'
@@ -182,7 +133,7 @@ CKEDITOR.dialog.add( 'insertPortalLink.dlg', function( editor )
 
 function getPortalLink() {
 	var sOptions = "toolbar=no,status=no,resizable=yes,dependent=yes,scrollbars=yes,width=800,height=600" ;
-	var newWindow = window.open(CKEDITOR.eXoPath+"eXoPlugins/insertPortalLink/insertPortalLink.html?type=PortalLink", "WCMInsertPortalLink", sOptions );
+	var newWindow = window.open("/eXoWCMResources/eXoPlugins/insertPortalLink/insertPortalLink.html?type=PortalLink", "WCMInsertPortalLink", sOptions );
 	newWindow.focus();
 }
 

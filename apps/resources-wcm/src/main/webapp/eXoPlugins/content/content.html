@@ -23,11 +23,11 @@
 					window.uiPopup = uiPopup; require(["../../../eXoResources/javascript/eXo/core/UIMaskLayer.js"], function(uiMaskLayer) {
 						window.uiMaskLayer = uiMaskLayer; require(["../../../eXoWCMResources/javascript/eXo/wcm/backoffice/private/WCMUtils.js"], function(wcm_utils) {
 							window.wcm_utils = wcm_utils; require(["../../../eXoWCMResources/javascript/eXo/wcm/frontoffice/private/ContentSelector.js"], function(content_selector) {
-								window.content_selector = content_selector; require(["../../eXoPlugins.js"], function() {
+								window.content_selector = content_selector; require(["../../../CommonsResources/eXoPlugins.js"], function() {
 									eXp.init();
 									eXp.userLanguage = eXo.ecm.ECS.userLanguage || "en";
 									if(eXo.ecm.ECS.insertContentType=="Image") {
-										strHTML = "<input type=\"hidden\" name=\"Filter\" id=\"Filter\" value=\"Image\">";
+										strHTML = "<a class=\"thumbnail-view-selected\" title=\"Thumbnail View\"><span></span></a><a onClick=\"eXo.ecm.ECS.changeViewType('list');\" class=\"list-view\" title=\"List View\"><span></span></a><input type=\"hidden\" id=\"viewTypeID\" value=\"thumbnail\"><input type=\"hidden\" name=\"Filter\" id=\"Filter\" value=\"Image\">";
 									} else {
 										strHTML = "<div class=\"finterTitle pull-left\" userLanguage=\"UserLanguage.Filter\"><label for=\"Filter\"> Filter: </label></div>";
 										strHTML += "<div class=\"uiSelectbox pull-left\"><select class=\"selectbox\" id=\"Filter\" onchange=\"eXo.ecm.ECS.changeFilter();\">";
@@ -48,7 +48,7 @@
 										strViewPresent += "<th class=\"span1\" userLanguage=\"UserLanguage.FileSize\"> Size </th></tr></thead>";
 										strViewPresent += "<tr><td class=\"center empty\" colspan=\"3\" userLanguage=\"UserLanguage.NoContent\">There is no content</td></tr></table></div>";
 									} else {
-										strView = "<div id=\"view\" class=\"viewType\"><a class=\"thumbnail-view-selected\" title=\"Thumbnail View\"><span></span></a><a onClick=\"eXo.ecm.ECS.changeViewType('list');\" class=\"list-view\" title=\"List View\"><span></span></a><input type=\"hidden\" id=\"viewTypeID\" value=\"thumbnail\"><div style=\"clear:both\"></div></div>";
+										strView = "<div id=\"view\" class=\"viewType\"><div style=\"clear:both\"></div></div>";
 										strViewPresent = "<div class=\"uiThumbnailsView\" ><div class=\"actionIconsContainer\" id=\"ActionIconsContainer\"><div class=\"noContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div></div></div>";
 									}
 									gj("#viewTypeAreaID").html(strView);

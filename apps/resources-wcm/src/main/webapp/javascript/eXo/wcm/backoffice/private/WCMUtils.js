@@ -254,11 +254,21 @@
 	      objElement.addEventListener(eventName, handler, false);
 	    }
 	};
-	
+
 	WCMUtils.prototype.changeStyleClass = function(element, newStyleClass) {
-	    var elementId = typeof element != 'object' ? element : element.id;
-	    var objElement = document.getElementById(elementId);
-	    objElement.className = newStyleClass;
+            var isFocusOnCKEditor = false;
+            if(CKEDITOR) {
+		    for(name in CKEDITOR.instances)
+		    {
+			var editor = CKEDITOR.instances[name];
+		        if(editor.focusManager.hasFocus) isFocusOnCKEditor = true;
+		    }
+	    }
+	    if(!isFocusOnCKEditor) {
+	      var elementId = typeof element != 'object' ? element : element.id;
+	      var objElement = document.getElementById(elementId);
+	      objElement.className = newStyleClass;
+	    }
 	};
 	
 	WCMUtils.prototype.replaceToIframe = function(txtAreaId) {

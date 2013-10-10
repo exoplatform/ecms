@@ -17,11 +17,7 @@
     def html = currentNode.getNode("default.html/jcr:content").getProperty("jcr:data").getString();
   	def css = currentNode.getNode("css/default.css/jcr:content").getProperty("jcr:data").getString();
   	def cssOption = "CSSData=" + css;
-  	def js = currentNode.getNode("js/default.js/jcr:content").getProperty("jcr:data").getString();  
-  	// NOTE : You can use services if you're adding external css or js thru WebDAV. If not, direct access to the node is more efficient.
-  	//def css = uicomponent.getApplicationComponent(XSkinService.class).getActiveStylesheet(currentNode);
-  	//def js =  uicomponent.getApplicationComponent(XJavascriptService.class).getActiveJavaScript(currentNode);
-  
+  	def js = currentNode.getNode("js/default.js/jcr:content").getProperty("jcr:data").getString();   
 	boolean isShowCategories = getPortletPreference("ShowCategories");
 	boolean isShowTags = getPortletPreference("ShowTags");
 
@@ -82,7 +78,9 @@
 					%>
 				</div>
 				<%
-          print uicomponent.getInlineEditingField(currentNode, "default.html/jcr:content/jcr:data", html, "WYSIWYG", "Text", "Content", true, cssOption, "toolbar=CompleteWCM");
+				  if(uicomponent.isFastPublishLink()) {
+				    print uicomponent.getInlineEditingField(currentNode, "default.html/jcr:content/jcr:data", html, "WYSIWYG", "Text", "Content", true, cssOption, "toolbar=CompleteWCM", "fast_publish=" + uicomponent.getFastPublishLink());
+				  } else print uicomponent.getInlineEditingField(currentNode, "default.html/jcr:content/jcr:data", html, "WYSIWYG", "Text", "Content", true, cssOption, "toolbar=CompleteWCM");
         %>          
 		    <% if (uicomponent.isEnableVote()) 
 	           _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1"));
@@ -94,7 +92,9 @@
   } else {
 	  %>
     <%
-      print uicomponent.getInlineEditingField(currentNode, "default.html/jcr:content/jcr:data", html, "WYSIWYG", "Text", "Content", true, cssOption, "toolbar=CompleteWCM");
+    if(uicomponent.isFastPublishLink()) {
+      print uicomponent.getInlineEditingField(currentNode, "default.html/jcr:content/jcr:data", html, "WYSIWYG", "Text", "Content", true, cssOption, "toolbar=CompleteWCM", "fast_publish=" + uicomponent.getFastPublishLink());
+    } else  print uicomponent.getInlineEditingField(currentNode, "default.html/jcr:content/jcr:data", html, "WYSIWYG", "Text", "Content", true, cssOption, "toolbar=CompleteWCM");
     %>
     <% if (uicomponent.isEnableVote()) 
         _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1"));

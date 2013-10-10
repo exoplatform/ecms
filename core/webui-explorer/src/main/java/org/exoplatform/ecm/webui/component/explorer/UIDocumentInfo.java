@@ -798,6 +798,13 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
   public boolean isRssLink() { return false ; }
   public String getRssLink() { return null ; }
+  
+  /**
+   * Checks if allow render fast publish link for the inline editting
+   *
+   * @return true, if need to render fast publish link
+   */
+  public boolean isFastPublishLink() { return false ; }
 
   public String getPortalName() {
     return WCMCoreUtils.getPortalName();
