@@ -136,13 +136,16 @@ public class FriendlyServiceImpl implements FriendlyService {
     if (!isEnabled) return friendlyUri;
 
     String friendly = "/"+getServletName()+"/";
-    int start = friendlyUri.indexOf(friendly) + friendly.length();
-    int end = friendlyUri.substring(start).indexOf("/");
-    String furi = friendlyUri.substring(start, start+end);
-    if (friendlies.containsKey(furi)) {
-      String unf = friendlies.get(furi);
-      String target = unf+friendlyUri.substring(start+end);
-      return target;
+    if (friendlyUri.contains(friendly)) {
+      int start = friendlyUri.indexOf(friendly) + friendly.length();
+      int end = friendlyUri.substring(start).indexOf("/");
+      if (end > -1) {
+      String furi = friendlyUri.substring(start, start+end);
+        if (friendlies.containsKey(furi)) {
+          String unf = friendlies.get(furi);
+          return friendlyUri.replace(friendly + furi, unf);
+        }
+      }
     }
 
     return friendlyUri;
