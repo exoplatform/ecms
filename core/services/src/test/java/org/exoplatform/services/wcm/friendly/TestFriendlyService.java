@@ -93,7 +93,7 @@ public class TestFriendlyService extends TestCase {
     fserv.addFriendly("files", "/rest-ecmdemo/jcr/repository/collaboration/sites content/live/acme/documents");
 
     // returns unfriendly
-    assertEquals("/public/acme/detail?path=/repository/collaboration/sites content/live/acme/web contents/News/News1", fserv.getUnfriendlyUri("/ecmdemo/content/acme/News/News1"));
+    assertEquals("/ecmdemo/public/acme/detail?path=/repository/collaboration/sites content/live/acme/web contents/News/News1", fserv.getUnfriendlyUri("/ecmdemo/content/acme/News/News1"));
     // no unfriendly
     assertEquals("/ecmdemo/content/xxxx/News/News1", fserv.getUnfriendlyUri("/ecmdemo/content/xxxx/News/News1"));
 
