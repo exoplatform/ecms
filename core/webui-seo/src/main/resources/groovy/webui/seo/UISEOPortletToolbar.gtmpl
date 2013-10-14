@@ -20,11 +20,11 @@
 <% uiform.begin() %>
 	<div class="SEOToolbar">	
 	  <%if(fullStatus.equals("Disabled")) {%>
-		  <div class="<%=style%>" rel="tooltip" data-placement="bottom" title="<%=seo_title%>"><span><%=seo_label%></span><img alt="<%=seo_title%>" src="/seo/skin/webui/seo/DefaultSkin/icons/${seo_icon}" /> </div>
+		  <div class="<%=style%>" rel="tooltip" data-placement="bottom" title="<%=seo_title%>"><span><%=seo_label%> </span><img alt="<%=seo_title%>" style="margin-top: -5px;" src="/seo/skin/webui/seo/DefaultSkin/icons/${seo_icon}" /> </div>
 	  <%} else {
 	  	def onclickURL = "openSEOForm(event, '" + uicomponent.event("AddSEO","str").replace("'","~") + "')";
 	  	%>	
-	    <div class="<%=style%>" rel="tooltip" data-placement="bottom" title="<%=seo_title%>" onclick="<%=onclickURL%>"><span><%=seo_label%></span><img alt="<%=seo_title%>" src="/seo/skin/webui/seo/DefaultSkin/icons/${seo_icon}" /></div>
+	    <div class="<%=style%>" rel="tooltip" data-placement="bottom" title="<%=seo_title%>" onclick="<%=onclickURL%>"><span><%=seo_label%> </span><img alt="<%=seo_title%>" style="margin-top: -5px;" src="/seo/skin/webui/seo/DefaultSkin/icons/${seo_icon}" /></div>
 	  <%}%>  
 	</div>
 <% uiform.end() %>
