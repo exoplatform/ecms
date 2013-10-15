@@ -49,11 +49,11 @@
 								  <div class="control-group">                  
 								    <label class="control-label" for="<%=uicomponent.ITEM_PATH_FORM_INPUT_SET%>"><%=uicomponent.getLabel(uicomponent.ITEM_PATH_FORM_INPUT_SET) %>: </label>
 
-								    <div style="display:inline-block;" class="parentPosition actionIcon pull-right" 
+								    <div style="display:inline-block;" class="parentPosition pull-right" 
 								       onmouseover="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='block'})(this)"
 								         onmouseout="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='none'})(this)">
 								      <i class="uiIconQuestion uiIconLightGray"></i>
-								      <div class="gotPosition" style="position: absolute; top: 25px; left: 497px;">
+								      <div class="gotPosition" style="position: absolute; top: 23px; left: 497px;">
 								       <div class="popover left" style="display: none;">
 								        <span class="arrow"></span>
 								        <div class="popover-content"><%= _ctx.appRes("UISCVPreferences.help.ContentPathBlock") %></div>
@@ -75,11 +75,11 @@
 	                  <li class="pull-left" ><% uiform.renderField(uicomponent.SHOW_DATE_CHECK_BOX) %> <%=uicomponent.getLabel(uicomponent.SHOW_DATE_CHECK_BOX) %></li>                
 	                  <li class="pull-left" ><% uiform.renderField(uicomponent.SHOW_OPION_BAR_CHECK_BOX) %> <%=uicomponent.getLabel(uicomponent.SHOW_OPION_BAR_CHECK_BOX) %></li>
 									  <li class="pull-right">
-									  	<div style="display:inline-block;" class="parentPosition actionIcon pull-right" 
+									  	<div style="display:inline-block;" class="parentPosition pull-right" 
 										   onmouseover="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='block'})(this)"
 											 onmouseout="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='none'})(this)">
 										  <i class="uiIconQuestion uiIconLightGray"></i>
-										  <div class="gotPosition" style="position: absolute; top: 45px; left: 497px;">
+										  <div class="gotPosition" style="position: absolute; top: 43px; left: 497px;">
 										   <div class="popover left" style="display: none;">
 											<span class="arrow"></span>
 											<div class="popover-content"><%= _ctx.appRes("UISCVPreferences.help.DisplaySettingBlock") %></div>
@@ -98,11 +98,11 @@
 						    <div class="control-group">                  
 						      <label class="control-label" for="<%=uicomponent.PRINT_PAGE_FORM_INPUT_SET%>"><%=uicomponent.getLabel(uicomponent.PRINT_PAGE_FORM_INPUT_SET) %>: </label>
 						      
-						      <div style="display:inline-block;" class="parentPosition actionIcon pull-right" 
+						      <div style="display:inline-block;" class="parentPosition pull-right" 
 								   onmouseover="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='block'})(this)"
 									 onmouseout="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='none'})(this)">
 								  <i class="uiIconQuestion uiIconLightGray"></i>
-								  <div class="gotPosition" style="position: absolute; top: 25px; left: 497px;">
+								  <div class="gotPosition" style="position: absolute; top: 23px; left: 497px;">
 								   <div class="popover left" style="display: none;">
 									<span class="arrow"></span>
 									<div class="popover-content"><%= _ctx.appRes("UISCVPreferences.help.ContentPathBlock") %></div>
@@ -123,21 +123,21 @@
 						  %>
 							  <div class="form-horizontal" >
 							    <!--Dynamic Navigation-->
-								  <h6 class="clearfix"> 
+								  <div class="clearfix"> 
 								  
-								  <div style="display:inline-block;" class="parentPosition actionIcon pull-right" 
+								  <div style="display:inline-block;" class="parentPosition pull-right" 
 									   onmouseover="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='block'})(this)"
 										 onmouseout="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='none'})(this)">
 									  <i class="uiIconQuestion uiIconLightGray"></i>
-									  <div class="gotPosition" style="position: absolute; top: 45px; left: 481px;">
+									  <div class="gotPosition" style="position: absolute; top: 32px; left: 481px;">
 									   <div class="popover left" style="display: none;">
 										<span class="arrow"></span>
 										<div class="popover-content"><%= _ctx.appRes("UISCVPreferences.help.ContextualHelp") %></div>
 									   </div>
 									  </div>
 									 </div>
-								  	<%=_ctx.appRes("UISCVPreferences.label.ContextCaption") %>: 
-								  </h6>
+								  	<h6><%=_ctx.appRes("UISCVPreferences.label.ContextCaption") %>: </h6>
+								  </div>
 								  <div class="control-group">                  
 								    <div class="controls-full">
 									    <%uiform.renderField(uicomponent.CONTEXTUAL_SELECT_RADIO_BOX) %> 
@@ -146,11 +146,11 @@
 								  
 								  <!--by-->
 	                <div class="control-group">                  
-	                    <div style="display:inline-block;" class="parentPosition actionIcon pull-right" 
+	                    <div style="display:inline-block;" class="parentPosition pull-right" 
 								   onmouseover="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='block'})(this)"
 									 onmouseout="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='none'})(this)">
 								  <i class="uiIconQuestion uiIconLightGray"></i>
-								  <div class="gotPosition" style="position: absolute; top: 131px; left: 480px;">
+								  <div class="gotPosition" style="position: absolute; top: 122px; left: 480px;">
 								   <div class="popover left" style="display: none;">
 									<span class="arrow"></span>
 									<div class="popover-content"><%= _ctx.appRes("UISCVPreferences.help.ParameterHelp") %></div>
@@ -164,20 +164,20 @@
                   </div>
                   
 								  <!--Content visibility-->
-								  <h6 class="clearfix">
-								  	<div style="display:inline-block;" class="parentPosition actionIcon pull-right" 
+								  <div class="clearfix">
+								  	<div style="display:inline-block;" class="parentPosition pull-right" 
 									   onmouseover="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='block'})(this)"
 										 onmouseout="(function(elm) {elm.getElementsByClassName('popover')[0].style.display='none'})(this)">
 										  <i class="uiIconQuestion uiIconLightGray"></i>
-										  <div class="gotPosition" style="position: absolute; top: 198px; left: 480px;">
+										  <div class="gotPosition" style="position: absolute; top: 190px; left: 480px;">
 										   <div class="popover left" style="display: none;">
 											<span class="arrow"></span>
 											<div class="popover-content"><%= _ctx.appRes("UISCVPreferences.label.CacheManagement") %></div>
 										   </div>
 										  </div>
 										 </div>
-								  		<%=_ctx.appRes("UISCVPreferences.label.CacheManagement") %>: 
-								  	</h6>
+								  		<h6><%=_ctx.appRes("UISCVPreferences.label.CacheManagement") %>: </h6>
+								  	</div>
 								  <div class="control-group">                  
 								    <div class="controls_full">
 									    <%uiform.renderField(uicomponent.CACHE_ENABLE_SELECT_RADIO_BOX) %>

@@ -668,7 +668,6 @@
       <remove-property>Are you sure you want to remove this property?</remove-property>
     </confirm>
     <header>
-      <icon />
       <name>Name</name>
       <multiValue>Multi Value</multiValue>
       <value>Value</value>

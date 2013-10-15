@@ -2473,7 +2473,6 @@
     </action>
     <label>
       <userOrGroup>Memberships: </userOrGroup>
-      <permission/>
     </label>
     <msg>
       <userOrGroup-alreadyExists>This membership already exists. Please select another one.</userOrGroup-alreadyExists>

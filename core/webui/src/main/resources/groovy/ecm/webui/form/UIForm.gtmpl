@@ -18,9 +18,9 @@
                   <label class="control-label" for="$field.id">
                     <%=uicomponent.getLabel(field.getName()) %>&nbsp;:
                   </label>
-                  <div class="controls"><% uiform.renderField(field) %></div>
-                <%} else {%>
                   <div class="controls-full"><% uiform.renderField(field) %></div>
+                <%} else {%>
+                  <div class="controls"><% uiform.renderField(field) %></div>
                 <%}%>
               </div>              
         <%
