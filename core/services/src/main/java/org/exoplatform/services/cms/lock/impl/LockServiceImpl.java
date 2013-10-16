@@ -44,6 +44,7 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
 
@@ -195,13 +196,13 @@ public class LockServiceImpl implements LockService, Startable {
             }
             continue;
           }
-          if (!node.isCheckedOut()) {
+          if (!node.isCheckedOut() && node.isNodeType(NodetypeConstant.MIX_VERSIONABLE)) {
             node.checkout();
           }
           if (node.isLocked()) {
             node.unlock();
           }
-          if (node.isNodeType("mix:lockable")) {
+          if (node.isNodeType("mix:lockable") && node.isCheckedOut()) {
             node.removeMixin("mix:lockable");
           }
           node.save();
@@ -236,13 +237,13 @@ public class LockServiceImpl implements LockService, Startable {
       while(nodeIter.hasNext()) {
         Node lockedNode = nodeIter.nextNode();
         //Check to avoid contains some corrupted data in the system which still contains mix:lockable but not locked.
-        if (!lockedNode.isCheckedOut()) {
+        if (!lockedNode.isCheckedOut() && lockedNode.isNodeType(NodetypeConstant.MIX_VERSIONABLE)) {
           lockedNode.checkout();
         }
         if(lockedNode.isLocked()) {
           lockedNode.unlock();
-        }  
-        if (lockedNode.isNodeType("mix:lockable")) {
+        }
+        if (lockedNode.isNodeType("mix:lockable") && lockedNode.isCheckedOut()) {
           lockedNode.removeMixin("mix:lockable");
         }
         lockedNode.save();
