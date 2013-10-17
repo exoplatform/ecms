@@ -1091,6 +1091,14 @@ public class Utils {
     }
     return sb.toString();
   }
+  /**
+   * 
+   * @return true if current user is administrative user; false if current user is normal user
+   */
+  public static boolean isAdministratorUser() {
+    UserACL userACL = WCMCoreUtils.getService(UserACL.class);
+    return userACL.isUserInGroup(userACL.getAdminGroups());
+  }
   
   public static String getProfileLink(String userId) {
     RequestContext ctx = RequestContext.getCurrentInstance();
