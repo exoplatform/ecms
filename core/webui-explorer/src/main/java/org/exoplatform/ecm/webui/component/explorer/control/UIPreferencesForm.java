@@ -29,6 +29,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UIAllItems;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -100,29 +101,29 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
     String SQLQuery;
     String XPathQuery;
     try {
-      sortByNodeName = res.getString("UIPreferencesForm.label." + Preference.SORT_BY_NODENAME);
-      sortByNodeType = res.getString("UIPreferencesForm.label." + Preference.SORT_BY_NODETYPE);
-      sortByCreatedDate = res.getString("UIPreferencesForm.label." + Preference.SORT_BY_CREATED_DATE);
-      sortByModifiedDate = res.getString("UIPreferencesForm.label." + Preference.SORT_BY_MODIFIED_DATE);
+      sortByNodeName = res.getString("UIPreferencesForm.label." + NodetypeConstant.SORT_BY_NODENAME);
+      sortByNodeType = res.getString("UIPreferencesForm.label." + NodetypeConstant.SORT_BY_NODETYPE);
+      sortByCreatedDate = res.getString("UIPreferencesForm.label." + NodetypeConstant.SORT_BY_CREATED_DATE);
+      sortByModifiedDate = res.getString("UIPreferencesForm.label." + NodetypeConstant.SORT_BY_MODIFIED_DATE);
       ascendingOrder = res.getString("UIPreferencesForm.label." + Preference.ASCENDING_ORDER);
       descendingOrder = res.getString("UIPreferencesForm.label." + Preference.DESCENDING_ORDER);
       SQLQuery = res.getString("UIPreferencesForm.label." + Preference.SQL_QUERY);
       XPathQuery = res.getString("UIPreferencesForm.label." + Preference.XPATH_QUERY);
     } catch (Exception e) {
-      sortByNodeName = Preference.SORT_BY_NODENAME;
-      sortByNodeType = Preference.SORT_BY_NODETYPE;
-      sortByCreatedDate = Preference.SORT_BY_CREATED_DATE;
-      sortByModifiedDate = Preference.SORT_BY_MODIFIED_DATE;
+      sortByNodeName = NodetypeConstant.SORT_BY_NODENAME;
+      sortByNodeType = NodetypeConstant.SORT_BY_NODETYPE;
+      sortByCreatedDate = NodetypeConstant.SORT_BY_CREATED_DATE;
+      sortByModifiedDate = NodetypeConstant.SORT_BY_MODIFIED_DATE;
       ascendingOrder = Preference.ASCENDING_ORDER;
       descendingOrder = Preference.DESCENDING_ORDER;
       SQLQuery = Preference.SQL_QUERY;
       XPathQuery = Preference.XPATH_QUERY;
     }
     List<SelectItemOption<String>> sortOptions = new ArrayList<SelectItemOption<String>>();
-    sortOptions.add(new SelectItemOption<String>(sortByNodeName, Preference.SORT_BY_NODENAME));
-    sortOptions.add(new SelectItemOption<String>(sortByNodeType, Preference.SORT_BY_NODETYPE));
-    sortOptions.add(new SelectItemOption<String>(sortByCreatedDate, Preference.SORT_BY_CREATED_DATE));
-    sortOptions.add(new SelectItemOption<String>(sortByModifiedDate, Preference.SORT_BY_MODIFIED_DATE));
+    sortOptions.add(new SelectItemOption<String>(sortByNodeName, NodetypeConstant.SORT_BY_NODENAME));
+    sortOptions.add(new SelectItemOption<String>(sortByNodeType, NodetypeConstant.SORT_BY_NODETYPE));
+    sortOptions.add(new SelectItemOption<String>(sortByCreatedDate, NodetypeConstant.SORT_BY_CREATED_DATE));
+    sortOptions.add(new SelectItemOption<String>(sortByModifiedDate, NodetypeConstant.SORT_BY_MODIFIED_DATE));
 
     List<SelectItemOption<String>> orderOption = new ArrayList<SelectItemOption<String>>();
     orderOption.add(new SelectItemOption<String>(ascendingOrder, Preference.ASCENDING_ORDER));
@@ -256,9 +257,9 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
       pref.setShowPreferenceDocuments(uiForm.getUICheckBoxInput(FIELD_SHOWREFDOCUMENTS).isChecked());
       pref.setShowHiddenNode(uiForm.getUICheckBoxInput(FIELD_SHOW_HIDDEN_NODE).isChecked());
       if (pref.isShowHiddenNode()) {
-        uiExplorer.getAllItemFilterMap().add(UIAllItems.HIDDEN);
+        uiExplorer.getAllItemFilterMap().add(NodetypeConstant.HIDDEN);
       } else {
-        uiExplorer.getAllItemFilterMap().remove(UIAllItems.HIDDEN);
+        uiExplorer.getAllItemFilterMap().remove(NodetypeConstant.HIDDEN);
       }
 
       pref.setEnableDragAndDrop(uiForm.getUICheckBoxInput(FIELD_ENABLE_DRAG_AND_DROP).isChecked());

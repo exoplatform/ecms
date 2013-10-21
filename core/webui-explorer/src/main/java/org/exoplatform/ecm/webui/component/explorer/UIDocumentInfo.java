@@ -61,6 +61,7 @@ import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
@@ -87,6 +88,7 @@ import org.exoplatform.services.cms.documents.FavoriteService;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
+import org.exoplatform.services.cms.link.ItemLinkAware;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.link.NodeFinder;
@@ -191,7 +193,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
 
   private static final Log      LOG                                = ExoLogger.getLogger(UIDocumentInfo.class.getName());
 
-  private String                typeSort_                          = Preference.SORT_BY_NODETYPE;
+  private String                typeSort_                          = NodetypeConstant.SORT_BY_NODENAME;
 
   private String                sortOrder_                         = Preference.BLUE_UP_ARROW;
 
@@ -897,7 +899,7 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
     String currentPath = uiExplorer.getCurrentPath();
 
-    LazyPageList<Object> pageList = getPageList(currentPath);
+    PageList<Object> pageList = getPageList(currentPath);
     pageIterator_.setPageList(pageList);
     if (documentNodeList_ != null) {
       documentNodeList_.removeChild(UIDocumentNodeList.class);
@@ -907,10 +909,22 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
   }
 
   @SuppressWarnings("unchecked")
-  public LazyPageList<Object> getPageList(String path) throws Exception {
+  public PageList<Object> getPageList(String path) throws Exception {
     UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
-
     Preference pref = uiExplorer.getPreference();
+    DocumentProviderUtils docProviderUtil = DocumentProviderUtils.getInstance();
+    if (!uiExplorer.isViewTag() && docProviderUtil.canSortType(pref.getSortType()) && 
+        uiExplorer.getAllItemByTypeFilterMap().isEmpty()) {
+      return docProviderUtil.getPageList(
+               uiExplorer.getWorkspaceName(), 
+               uiExplorer.getCurrentPath(), 
+               pref, 
+               uiExplorer.getAllItemFilterMap(), 
+               uiExplorer.getAllItemByTypeFilterMap(),
+               (NodeLinkAware) ItemLinkAware.newInstance(uiExplorer.getWorkspaceName(), path, 
+                                                uiExplorer.getNodeByPath(path, uiExplorer.getSession())));
+    }
+    
     int nodesPerPage = pref.getNodesPerPage();
     List<Node> nodeList = new ArrayList<Node>();
 
@@ -1096,11 +1110,11 @@ public class UIDocumentInfo extends UIBaseNodePresentation {
     String userId = WCMCoreUtils.getRemoteUser();
 
     //Owned by me
-    if (allItemsFilterSet.contains(UIAllItems.OWNED_BY_ME) &&
-        !userId.equals(node.getProperty(Utils.EXO_OWNER).getString()))
+    if (allItemsFilterSet.contains(NodetypeConstant.OWNED_BY_ME) &&
+        !userId.equals(node.getProperty(NodetypeConstant.EXO_OWNER).getString()))
           return false;
     //Favorite
-    if (allItemsFilterSet.contains(UIAllItems.FAVORITE) &&
+    if (allItemsFilterSet.contains(NodetypeConstant.FAVORITE) &&
         !favoriteService.isFavoriter(userId, node))
           return false;
     //Hidden

@@ -67,18 +67,8 @@ public class UIAllItemsByType extends UIComponent {
       } else {
         allItemByTypeFilterMap.add(supportedType);
       }
-//      uiExplorer.setSupportedType(supportType);
-//      uiExplorer.setViewDocument(true);
       uiExplorer.setIsViewTag(false);
-//      uiExplorer.setSelectRootNode();
 
-//      UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
-//      UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
-//      if(uiDocumentWorkspace.isRendered()) {
-//        UIDocumentContainer uiDocumentContainer = uiDocumentWorkspace.getChild(UIDocumentContainer.class) ;
-//        UIDocumentInfo uiDocumentInfo = uiDocumentContainer.getChildById("UIDocumentInfo") ;
-//        uiDocumentInfo.setDocumentSourceType(DocumentProviderUtils.CURRENT_NODE_ITEMS);
-//      }
       uiExplorer.updateAjax(event);
     }
   }
@@ -91,13 +81,6 @@ public class UIAllItemsByType extends UIComponent {
       UIDocumentFilterForm uiDocumentFilter = popupAction.activate(UIDocumentFilterForm.class, 350);
       uiDocumentFilter.invoke(uiSideBar.getAllSupportedType());
 
-//      UIWorkingArea uiWorkingArea = uiJCRExplorer.getChild(UIWorkingArea.class);
-//      UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
-//      if(uiDocumentWorkspace.isRendered()) {
-//        UIDocumentContainer uiDocumentContainer = uiDocumentWorkspace.getChild(UIDocumentContainer.class) ;
-//        UIDocumentInfo uiDocumentInfo = uiDocumentContainer.getChildById("UIDocumentInfo") ;
-//        uiDocumentInfo.setDocumentSourceType(DocumentProviderUtils.CURRENT_NODE_ITEMS);
-//      }
       event.getRequestContext().addUIComponentToUpdateByAjax(popupAction) ;
     }
   }
